@@ -1,0 +1,19 @@
+__pycache__/
+*.pyc
+.venv/
+.env
+*.tmp
+*.swp
+.DS_Store
+
+# Fetcher cache between CI runs
+scripts/.cache/
+
+# Defense-in-depth: strip these in fetch first, ignore here too
+docs/**/*.png
+docs/**/*.jpg
+docs/**/*.jpeg
+docs/**/*.gif
+docs/**/*.webp
+docs/**/*.ico
+docs/**/*.svg

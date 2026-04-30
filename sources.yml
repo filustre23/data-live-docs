@@ -1,0 +1,59 @@
+# sources.yml — source-of-truth for every doc mirror in this repo.
+#
+# Each entry is fetched by scripts/fetch.py and lands under docs/<slug>/.
+# Strategies:
+#   raw-md          : fetch sitemap.xml, then download <url>.md siblings (Anthropic-style)
+#   github-source   : sparse, shallow git clone of an upstream docs repo
+#   sitemap-scrape  : fetch sitemap.xml, GET each page, html→markdown via markdownify
+
+sources:
+  - slug: claude-code
+    strategy: raw-md
+    sitemap: https://code.claude.com/docs/sitemap.xml
+    md_suffix: .md
+    url_patterns:
+      - /docs/en/
+    skip_patterns: []
+    official_root: https://code.claude.com/docs/en/
+    schedule: 6h
+    size_budget_mb: 20
+
+  - slug: dbt-core
+    strategy: github-source
+    repo: dbt-labs/docs.getdbt.com
+    branch: current
+    sparse_paths:
+      - website/docs/
+    rewrite_root: website/docs/
+    official_root: https://docs.getdbt.com/docs/
+    schedule: 6h
+    size_budget_mb: 50
+
+  - slug: bigquery
+    strategy: sitemap-scrape
+    sitemap: https://cloud.google.com/sitemap.xml
+    url_filter: "^https://cloud\\.google\\.com/bigquery/docs/"
+    strip_selectors:
+      - nav
+      - footer
+      - .devsite-nav
+      - .devsite-footer
+      - .devsite-toc
+      - img
+      - svg
+      - picture
+      - script
+      - style
+    request_delay_s: 0.5
+    user_agent: "data-live-docs/1.0 (+https://github.com/filustre23/data-live-docs)"
+    official_root: https://cloud.google.com/bigquery/docs/
+    schedule: 12h
+    size_budget_mb: 50
+
+# ---------- Phase B (not yet wired) ----------
+# Tier 1 remaining: anthropic-sdk, dbt-bigquery, dbt-snowflake, airflow,
+#                   fastapi, uv, pydantic
+# Tier 2: nextjs, react, prisma, tailwind, alloydb, cloud-sql, cloud-run,
+#         vertex-ai, dagster, temporal, baml, pgvector, ruff, pytest,
+#         structlog, dbt-cosmos, clerk
+# Excluded (anti-scrape / licensed): snowflake, snomed-ct, loinc, icd-10
