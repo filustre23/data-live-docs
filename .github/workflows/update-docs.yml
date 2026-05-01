@@ -24,6 +24,7 @@ jobs:
         source:
           - claude-code
           - dbt-core
+          - openai-agents
           - bigquery
     steps:
       - uses: actions/checkout@v4

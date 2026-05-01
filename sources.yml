@@ -29,6 +29,17 @@ sources:
     schedule: 6h
     size_budget_mb: 50
 
+  - slug: openai-agents
+    strategy: github-source
+    repo: openai/openai-agents-python
+    branch: main
+    sparse_paths:
+      - docs/
+    rewrite_root: docs/
+    official_root: https://openai.github.io/openai-agents-python/
+    schedule: 12h
+    size_budget_mb: 30
+
   - slug: bigquery
     strategy: sitemap-scrape
     sitemap: https://cloud.google.com/sitemap.xml
