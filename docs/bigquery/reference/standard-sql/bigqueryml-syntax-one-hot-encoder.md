@@ -1,0 +1,124 @@
+* [Home](https://docs.cloud.google.com/)
+* [Documentation](https://docs.cloud.google.com/docs)
+* [Data analytics](https://docs.cloud.google.com/docs/data)
+* [BigQuery](https://docs.cloud.google.com/bigquery/docs)
+* [Reference](https://docs.cloud.google.com/bigquery/quotas)
+
+Send feedback
+
+
+
+Stay organized with collections
+
+Save and categorize content based on your preferences.
+
+# The ML.ONE\_HOT\_ENCODER function
+
+This document describes the `ML.ONE_HOT_ENCODER` function, which lets you
+encode a string expression using a
+[one-hot](/bigquery/docs/auto-preprocessing#one_hot_encoding)
+or [dummy](/bigquery/docs/auto-preprocessing#dummy_encoding)
+encoding scheme.
+
+The encoding vocabulary is sorted alphabetically. `NULL` values and categories
+that aren't in the vocabulary are encoded with an `index` value of `0`. If you
+use dummy encoding, the dropped category is encoded with a `value` of `0`.
+
+When used in the
+[`TRANSFORM` clause](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform),
+the vocabulary and dropped category values calculated during training, along
+with the top *k* and frequency threshold values that you specified, are
+automatically used in prediction.
+
+You can use this function with models that support
+[manual feature preprocessing](/bigquery/docs/manual-preprocessing). For more
+information, see the following documents:
+
+* [End-to-end user journeys for ML models](/bigquery/docs/e2e-journey)
+* [Contribution analysis user journey](/bigquery/docs/contribution-analysis#contribution_analysis_user_journey)
+
+## Syntax
+
+```
+ML.ONE_HOT_ENCODER(string_expression [, drop] [, top_k] [, frequency_threshold]) OVER()
+```
+
+### Arguments
+
+`ML.ONE_HOT_ENCODER` takes the following arguments:
+
+* `string_expression`: the `STRING` expression to encode.
+* `drop`: a `STRING` value that specifies whether the function drops
+  a category. Valid values are as follows:
+  + `none`: Retain all categories. This is the default value.
+  + `most_frequent`: Drop the most frequent category found in
+    the string expression. Selecting this value causes the function to use
+    dummy encoding.
+* `top_k`: an `INT64` value that specifies the number of categories
+  included in the encoding vocabulary. The function selects the `top_k`
+  most frequent categories in the data and uses those; categories below this
+  threshold are encoded to `0`. This value must be less than `1,000,000`
+  to avoid problems due to high dimensionality. The default value is `32,000`.
+* `frequency_threshold`: an `INT64` value that limits the categories
+  included in the encoding vocabulary based on category frequency. The
+  function uses categories whose frequency is greater than or equal to
+  `frequency_threshold`; categories below this threshold are encoded to `0`.
+  The default value is `5`.
+
+## Output
+
+`ML.ONE_HOT_ENCODER` returns an array of struct values, in the form
+`ARRAY<STRUCT<INT64, FLOAT64>>`. The first element in the struct provides the
+index of the encoded string expression, and the second element provides the
+value of the encoded string expression.
+
+## Example
+
+The following example performs dummy encoding on a set of string expressions.
+It limits the encoding vocabulary to the ten categories that occur the most
+frequently in the data and that also occur zero or more times.
+
+```
+SELECT f, ML.ONE_HOT_ENCODER(f, 'most_frequent', 10, 0) OVER () AS output
+FROM UNNEST([NULL, 'a', 'b', 'b', 'c', 'c', 'c', 'd', 'd']) AS f
+ORDER BY f;
+```
+
+The output looks similar to the following:
+
+```
++------+-----------------------------+
+|  f   | output.index | output.value |
++------+--------------+--------------+
+| NULL |  0           |  1.0         |
+| a    |  1           |  1.0         |
+| b    |  2           |  1.0         |
+| b    |  2           |  1.0         |
+| c    |  3           |  0.0         |
+| c    |  3           |  0.0         |
+| c    |  3           |  0.0         |
+| d    |  4           |  1.0         |
+| d    |  4           |  1.0         |
++------+-----------------------------+
+```
+
+## What's next
+
+* For information about feature preprocessing, see
+  [Feature preprocessing overview](/bigquery/docs/preprocess-overview).
+
+
+
+
+Send feedback
+
+Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
+
+Last updated 2026-04-29 UTC.
+
+
+
+
+Need to tell us more?
+
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-04-29 UTC."],[],[]]

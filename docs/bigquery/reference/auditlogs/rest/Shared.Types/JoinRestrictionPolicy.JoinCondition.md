@@ -1,0 +1,35 @@
+* [Home](https://docs.cloud.google.com/)
+* [Documentation](https://docs.cloud.google.com/docs)
+* [Data analytics](https://docs.cloud.google.com/docs/data)
+* [BigQuery](https://docs.cloud.google.com/bigquery/docs)
+* [Reference](https://docs.cloud.google.com/bigquery/quotas)
+
+Send feedback
+
+# JoinRestrictionPolicy.JoinCondition Stay organized with collections Save and categorize content based on your preferences.
+
+Enum for Join Restrictions policy.
+
+| Enums | |
+| --- | --- |
+| `JOIN_CONDITION_UNSPECIFIED` | A join is neither required nor restricted on any column. Default value. |
+| `JOIN_ANY` | A join is required on at least one of the specified columns. |
+| `JOIN_ALL` | A join is required on all specified columns. |
+| `JOIN_NOT_REQUIRED` | A join is not required, but if present it is only permitted on 'joinAllowedColumns' |
+| `JOIN_BLOCKED` | Joins are blocked for all queries. |
+
+
+
+
+Send feedback
+
+Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
+
+Last updated 2025-07-02 UTC.
+
+
+
+
+Need to tell us more?
+
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2025-07-02 UTC."],[],[]]

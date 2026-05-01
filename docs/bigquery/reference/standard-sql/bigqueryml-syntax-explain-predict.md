@@ -1,0 +1,299 @@
+* [Home](https://docs.cloud.google.com/)
+* [Documentation](https://docs.cloud.google.com/docs)
+* [Data analytics](https://docs.cloud.google.com/docs/data)
+* [BigQuery](https://docs.cloud.google.com/bigquery/docs)
+* [Reference](https://docs.cloud.google.com/bigquery/quotas)
+
+Send feedback
+
+
+
+Stay organized with collections
+
+Save and categorize content based on your preferences.
+
+# The ML.EXPLAIN\_PREDICT function
+
+This document describes the `ML.EXPLAIN_PREDICT` function, which lets you
+generate a predicted value and a set of feature attributions for each instance
+of the input data. Feature attributions indicate how much each feature in your
+model contributed to the final prediction for each given instance.
+`ML.EXPLAIN_PREDICT` is essentially an extended version of
+[`ML.PREDICT`](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict).
+
+## Syntax
+
+```
+ML.EXPLAIN_PREDICT(
+  MODEL `PROJECT_ID.DATASET.MODEL`,
+  { TABLE `PROJECT_ID.DATASET.TABLE` | (QUERY_STATEMENT) },
+  STRUCT(
+  [MAX_OUTPUT_TOKENS AS max_output_tokens]
+  [, TOP_K_FEATURES AS top_k_features]
+  [, THRESHOLD AS threshold]
+  [, INTEGRATED_GRADIENTS_NUM_STEPS AS integrated_gradients_num_steps]
+  [, APPROX_FEATURE_CONTRIB AS approx_feature_contrib])
+)
+```
+
+### Arguments
+
+`ML.EXPLAIN_PREDICT` takes the following arguments:
+
+* `PROJECT_ID`: the project that contains the
+  resource.
+* `DATASET`: the dataset that contains the
+  resource.
+* `MODEL`: the name of the model.
+* `TABLE`: the name of the input table that contains the
+  data to be evaluated.
+
+  If `TABLE` is specified, the input column names in the table must match the
+  column names in the model, and their types should be compatible according to
+  BigQuery [implicit coercion rules](/bigquery/docs/reference/standard-sql/conversion_rules#coercion).
+
+  If there are unused columns from the table, they are passed through to
+  the output columns.
+* `QUERY_STATEMENT`: the GoogleSQL query that is
+  used to generate the evaluation data. For the supported SQL syntax for the
+  `QUERY_STATEMENT` clause in GoogleSQL, see
+  [Query syntax](/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax).
+
+  If `QUERY_STATEMENT` is specified, the input column names from the query
+  must match the column names in the model, and their types should be
+  compatible according to BigQuery
+  [implicit coercion rules](/bigquery/docs/reference/standard-sql/conversion_rules#coercion).
+
+  If there are unused columns from the table, they are passed through to
+  the output columns.
+
+  If you used the
+  [`TRANSFORM` clause](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform)
+  in the `CREATE MODEL` statement that created the model, then only the input
+  columns present in the `TRANSFORM` clause can appear in `QUERY_STATEMENT`.
+* `TOP_K_FEATURES`: an `INT64` value that specifies how
+  many top feature attribution pairs are generated for each row of input data.
+  The features are ranked by the absolute values of their attributions.
+
+  By default, `TOP_K_FEATURES` is set to `5`. If its value is greater than
+  the number of features in the training data, the attributions of all
+  features are returned.
+* `THRESHOLD`: a `FLOAT64` value that specifies the cutoff
+  between the two labels for binary classification models. Predictions above the
+  threshold are positive predictions. Predictions below the threshold are
+  negative predictions. Feature attributions are returned only for the predicted
+  label.
+
+  The `THRESHOLD` value must be between `0.0` and `1.0`. The default value is
+  `0.5`.
+* `INTEGRATED_GRADIENTS_NUM_STEPS`: an `INT64` value that
+  specifies the number of steps to sample between the example being explained
+  and its baseline. This value is used to approximate the integral in
+  [integrated gradients](/vertex-ai/docs/explainable-ai/overview#integrated-gradients)
+  attribution methods. Increasing the value improves the precision of feature
+  attributions, but can be slower and more computationally expensive.
+
+  This option only applies to
+  [deep neural network (DNN) models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models),
+  which use integrated gradients attribution methods. The default value
+  is `15`.
+* `APPROX_FEATURE_CONTRIB`: a `BOOL` value that indicates
+  whether to use an approximate feature contribution method in the XGBoost model
+  explanation. This option applies only to
+  [boosted tree](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree)
+  and
+  [random forest](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-random-forest)
+  models.
+
+  This capability is provided by the XGBoost library;
+  BigQuery ML only passes this option through to it. For more
+  information, see
+  [Package 'xgboost'](https://cran.r-project.org/web/packages/xgboost/xgboost.pdf)
+  and search for `approxcontrib`.
+
+  The default value is `FALSE`.
+
+## Output
+
+`ML.EXPLAIN_PREDICT` returns the following columns in addition to any
+passthrough columns:
+
+* `predicted_<label_column_name>`: a `STRING` value that contains either the
+  predicted value of the label for regression models or the predicted label
+  class for classification models.
+* `probability`: a `FLOAT64` value that contains the probability of the
+  predicted label class. This column is only present for classification models.
+* `top_feature_attributions`: An `ARRAY<STRUCT>` value that contains the
+  attributions of the top *k* features to the final prediction:
+  + `top_feature_attributions.feature`: a `STRING` value that contains the
+    feature name.
+  + `top_feature_attributions.attribution`: a `FLOAT64` value that contains the
+    attribution of the feature to the final prediction.
+* `baseline_prediction_value`: a `FLOAT64` value that contains one of the
+  following:
+  + For linear models, the `baseline_prediction_value` value is the intercept
+    of the model.
+  + For DNN models, the `baseline_prediction_value` value is the
+    mean across all numerical features and `NULL` for other types of features.
+  + For boosted tree and random forest models, the `baseline_prediction_value`
+    value is equal to the bias
+    term, which is the expected output of the model over the training dataset. See
+    [Tree SHAP documentation](https://shap.readthedocs.io/en/latest/example_notebooks/tabular_examples/tree_based_models/Understanding%20Tree%20SHAP%20for%20Simple%20Models.html) for more
+    information.
+* `prediction_value`: The raw prediction value.
+  + For regression models, this is a `FLOAT64` value that contains the value of
+    the column identified by `predicted_<label_column_name>`.
+  + For classification models, this is an `INT` or `STRING` value that contains
+    the [logit](https://en.wikipedia.org/wiki/Logit) value (also
+    called log-odds) for the predicted class. The predicted class probabilities
+    are obtained by applying the
+    [softmax](https://en.wikipedia.org/wiki/Softmax_function)
+    transformation to the logit values.
+* `approximation_error`:
+
+  + Exact attribution methods like Tree SHAP are defined as follows:
+
+    $$\frac{|\texttt{prediction\_value} - \texttt{baseline\_prediction\_value} - \sum{\texttt{feature\_attributions}}|}{|\texttt{prediction\_value} -
+    \texttt{baseline\_prediction\_value}|}$$
+
+    Because of this explanation of the contributions to the predicted value,
+    there is no approximation error for these types of
+    methods, and this column value is `0`. Exact attribution methods are
+    used for the following types of models:
+
+    - [Linear & logistic regression](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm)
+    - [Boosted tree](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree)
+    - [Random forest](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-random-forest)
+  + Integrated gradients is an approximated attribution method that is defined
+    as follows:
+
+    $$\texttt{baseline\_prediction\_value} + \sum{\texttt{feature\_attributions}} = \texttt{prediction\_value}$$
+
+    For integrated gradients, this column value is greater than `0`.
+    The integrated gradients method is used with DNN models.
+
+## Examples
+
+The following examples assume that your model and input table are in your
+default project.
+
+### Explain a prediction generated by a linear regression model
+
+The following example explains a prediction for a
+linear regression model by generating the top three attributions.
+
+Assume a linear regression model stored in `mydataset.mymodel` was trained with
+the table `mydataset.table` with the following columns:
+
+* `label`
+* `column1`
+* `column2`
+* `column3`
+* `column4`
+* `column5`
+
+```
+SELECT
+  *
+FROM
+  ML.EXPLAIN_PREDICT(MODEL `mydataset.mymodel`,
+    (
+    SELECT
+      label,
+      column1,
+      column2,
+      column3,
+      column4,
+      column5
+    FROM
+      `mydataset.mytable`), STRUCT(3 AS top_k_features))
+```
+
+### Explain a prediction generated by a boosted tree or a random forest binary classification model
+
+The following example explains a prediction generated by a boosted tree or a
+random forest binary classification model. It generates the top three
+attributions with a custom threshold.
+
+Assume a boosted tree or a random forest binary classification model stored
+in `mydataset.mymodel` is trained with the table `mydataset.table` with the
+following columns:
+
+* `label`
+* `column1`
+* `column2`
+* `column3`
+* `column4`
+* `column5`
+
+```
+SELECT
+  *
+FROM
+  ML.EXPLAIN_PREDICT(MODEL `mydataset.mymodel`,
+    (
+    SELECT
+      label,
+      column1,
+      column2,
+      column3,
+      column4,
+      column5
+    FROM
+      `mydataset.mytable`), STRUCT(3 AS top_k_features, 0.7 AS threshold))
+```
+
+### Explain a prediction generated by a DNN classifier model
+
+The following example explains a prediction generated by a DNN classifier model.
+
+Assume a DNN classifier is stored in `mydataset.mymodel` and trained with the
+table `mydataset.table` with the following columns:
+
+* `label`
+* `column1`
+* `column2`
+* `column3`
+* `column4`
+* `column5`
+
+```
+SELECT
+  *
+FROM
+  ML.EXPLAIN_PREDICT(MODEL `mydataset.mymodel`,
+    (
+    SELECT
+      label,
+      column1,
+      column2,
+      column3,
+      column4,
+      column5
+    FROM
+      `mydataset.mytable`), STRUCT(3 AS top_k_features, 30 AS integrated_gradients_num_steps))
+```
+
+## What's next
+
+* For more information about Explainable AI, see
+  [BigQuery Explainable AI overview](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-xai-overview).
+* For more information about supported SQL statements and functions for ML
+  models, see
+  [End-to-end user journeys for ML models](/bigquery/docs/e2e-journey).
+
+
+
+
+Send feedback
+
+Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
+
+Last updated 2026-04-29 UTC.
+
+
+
+
+Need to tell us more?
+
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-04-29 UTC."],[],[]]

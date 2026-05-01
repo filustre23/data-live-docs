@@ -54,7 +54,7 @@ The Hex Service is data agnostic: customers are responsible for any GDPR, CCPA, 
 
 Hex is an active participant in the [Data Privacy Framework](https://www.dataprivacyframework.gov/s/participant-search/participant-detail?id=a2z3d000000MG5KAAW&status=Active) and is both GDPR and CCPA compliant. Hex may enter into Data Processing Agreements (DPAs) with customers that require additional privacy guarantees.
 
-Hex is compliant with the CAN-SPAM Act: Hex users may easily unsubscribe from Hex marketing and sales communications. Data subject access requests for Hex users may be sent to [[email protected]](/cdn-cgi/l/email-protection#91e1e3f8e7f0f2e8d1f9f4e9bfe5f4f2f9). Hex’s [Privacy Policy](/docs/trust/privacy-policy) contains additional information.
+Hex is compliant with the CAN-SPAM Act: Hex users may easily unsubscribe from Hex marketing and sales communications. Data subject access requests for Hex users may be sent to [[email protected]](/cdn-cgi/l/email-protection#fe8e8c97889f9d87be969b86d08a9b9d96). Hex’s [Privacy Policy](/docs/trust/privacy-policy) contains additional information.
 
 ## How does Hex interact with its LLM providers? What data is sent to the LLM providers?[​](#how-does-hex-interact-with-its-llm-providers-what-data-is-sent-to-the-llm-providers "Direct link to How does Hex interact with its LLM providers? What data is sent to the LLM providers?")
 
