@@ -15,6 +15,10 @@ permissions:
   contents: write
   issues: write
 
+concurrency:
+  group: update-docs
+  cancel-in-progress: true
+
 jobs:
   fetch:
     runs-on: ubuntu-latest
