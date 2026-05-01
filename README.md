@@ -27,7 +27,7 @@ After install, restart Claude Code and try:
 /livedocs whats-new                  # recent commits
 ```
 
-## Sources (Phase A)
+## Sources
 
 | Slug | Strategy | Upstream |
 |------|----------|----------|
@@ -35,7 +35,7 @@ After install, restart Claude Code and try:
 | `dbt-core` | github-source | https://github.com/dbt-labs/docs.getdbt.com |
 | `bigquery` | sitemap-scrape | https://cloud.google.com/bigquery/docs/ |
 
-More sources land in subsequent phases — see `sources.yml`.
+To add a source, append an entry to `sources.yml` and a slug to the matrix in `.github/workflows/update-docs.yml`.
 
 ## How it stays fresh
 

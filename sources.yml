@@ -50,10 +50,5 @@ sources:
     schedule: 12h
     size_budget_mb: 50
 
-# ---------- Phase B (not yet wired) ----------
-# Tier 1 remaining: anthropic-sdk, dbt-bigquery, dbt-snowflake, airflow,
-#                   fastapi, uv, pydantic
-# Tier 2: nextjs, react, prisma, tailwind, alloydb, cloud-sql, cloud-run,
-#         vertex-ai, dagster, temporal, baml, pgvector, ruff, pytest,
-#         structlog, dbt-cosmos, clerk
-# Excluded (anti-scrape / licensed): snowflake, snomed-ct, loinc, icd-10
+# Excluded by policy: snowflake docs (robots.txt blocks), SNOMED CT,
+# LOINC, ICD-10 official browsers (licensed).
