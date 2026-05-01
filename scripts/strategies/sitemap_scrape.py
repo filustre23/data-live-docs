@@ -5,8 +5,9 @@ import re
 import time
 import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
-from urllib import robotparser
 from urllib.parse import urlparse
+
+import requests
 
 from bs4 import BeautifulSoup
 from markdownify import markdownify as md
@@ -35,10 +36,10 @@ class SitemapScrapeFetcher(Fetcher):
         ua = cfg.get("user_agent", "data-live-docs/1.0")
 
         self.session.headers["User-Agent"] = ua
-        rp = self._load_robots(cfg.get("robots_url") or self._robots_url(sitemap), ua)
+        disallows = self._load_disallows(cfg.get("robots_url") or self._robots_url(sitemap))
 
         urls = [u for u in self._discover_urls(sitemap) if url_filter.search(u)]
-        urls = [u for u in urls if rp is None or rp.can_fetch(ua, u)]
+        urls = [u for u in urls if not self._is_disallowed(u, disallows)]
         urls = sorted(set(urls))
         logger.info("[%s] sitemap → %d candidate urls", self.source.slug, len(urls))
 
@@ -146,12 +147,44 @@ class SitemapScrapeFetcher(Fetcher):
         p = urlparse(sitemap_url)
         return f"{p.scheme}://{p.netloc}/robots.txt"
 
-    def _load_robots(self, robots_url: str, user_agent: str) -> robotparser.RobotFileParser | None:
+    @staticmethod
+    def _load_disallows(robots_url: str) -> list[str]:
+        """Parse robots.txt → list of Disallow paths under User-agent: *.
+
+        urllib.robotparser is buggy: it denies on empty `Disallow:` lines even
+        though the spec says empty Disallow means allow-all. Rolling our own
+        keeps the behaviour predictable and spec-correct.
+        """
         try:
-            rp = robotparser.RobotFileParser()
-            rp.set_url(robots_url)
-            rp.read()
-            return rp
+            r = requests.get(robots_url, timeout=15)
+            if r.status_code != 200:
+                return []
+            text = r.text
         except Exception as e:
-            logger.warning("could not load robots.txt %s: %s", robots_url, e)
-            return None
+            logger.warning("robots.txt fetch failed for %s: %s", robots_url, e)
+            return []
+
+        disallows: list[str] = []
+        active = False
+        for raw in text.splitlines():
+            line = raw.split("#", 1)[0].strip()
+            if not line:
+                active = False
+                continue
+            key, _, val = line.partition(":")
+            if not _:
+                continue
+            key = key.strip().lower()
+            val = val.strip()
+            if key == "user-agent":
+                active = val == "*"
+            elif key == "disallow" and active and val:
+                disallows.append(val)
+        return disallows
+
+    @staticmethod
+    def _is_disallowed(url: str, disallows: list[str]) -> bool:
+        if not disallows:
+            return False
+        path = urlparse(url).path
+        return any(path.startswith(d) for d in disallows)

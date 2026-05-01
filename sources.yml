@@ -40,6 +40,89 @@ sources:
     schedule: 12h
     size_budget_mb: 30
 
+  - slug: anthropic-sdk
+    strategy: raw-md
+    sitemap: https://platform.claude.com/sitemap.xml
+    md_suffix: .md
+    url_patterns:
+      - /docs/en/
+    skip_patterns: []
+    official_root: https://platform.claude.com/docs/en/
+    schedule: 6h
+    size_budget_mb: 75
+
+  - slug: fastapi
+    strategy: github-source
+    repo: tiangolo/fastapi
+    branch: master
+    sparse_paths:
+      - docs/en/docs/
+    rewrite_root: docs/en/docs/
+    official_root: https://fastapi.tiangolo.com/
+    schedule: 12h
+    size_budget_mb: 50
+
+  - slug: pydantic
+    strategy: github-source
+    repo: pydantic/pydantic
+    branch: main
+    sparse_paths:
+      - docs/
+    rewrite_root: docs/
+    official_root: https://docs.pydantic.dev/
+    schedule: 12h
+    size_budget_mb: 30
+
+  - slug: airflow
+    strategy: github-source
+    repo: apache/airflow
+    branch: main
+    sparse_paths:
+      - airflow-core/docs/
+    rewrite_root: airflow-core/docs/
+    official_root: https://airflow.apache.org/docs/
+    schedule: 12h
+    size_budget_mb: 100
+
+  - slug: looker
+    strategy: sitemap-scrape
+    sitemap: https://cloud.google.com/sitemap.xml
+    url_filter: "^https://cloud\\.google\\.com/looker/docs/"
+    strip_selectors:
+      - nav
+      - footer
+      - .devsite-nav
+      - .devsite-footer
+      - .devsite-toc
+      - img
+      - svg
+      - picture
+      - script
+      - style
+    request_delay_s: 0.5
+    user_agent: "data-live-docs/1.0 (+https://github.com/filustre23/data-live-docs)"
+    official_root: https://cloud.google.com/looker/docs/
+    schedule: 12h
+    size_budget_mb: 50
+
+  - slug: hex
+    strategy: sitemap-scrape
+    sitemap: https://learn.hex.tech/sitemap.xml
+    url_filter: "^https://learn\\.hex\\.tech/"
+    strip_selectors:
+      - nav
+      - footer
+      - img
+      - svg
+      - picture
+      - script
+      - style
+    request_delay_s: 0.4
+    user_agent: "data-live-docs/1.0 (+https://github.com/filustre23/data-live-docs)"
+    official_root: https://learn.hex.tech/
+    schedule: 12h
+    size_budget_mb: 30
+
   - slug: bigquery
     strategy: sitemap-scrape
     sitemap: https://cloud.google.com/sitemap.xml

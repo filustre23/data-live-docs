@@ -29,7 +29,13 @@ jobs:
           - claude-code
           - dbt-core
           - openai-agents
+          - anthropic-sdk
+          - fastapi
+          - pydantic
+          - airflow
           - bigquery
+          - looker
+          - hex
     steps:
       - uses: actions/checkout@v4
 
