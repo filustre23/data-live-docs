@@ -93,7 +93,7 @@ read_doc() {
         print_header
         echo "🔍 Not found: $source/$topic"
         echo ""
-        echo "Searching for matches…"
+        echo "Searching for matches..."
         local matches=$(find "$DOCS_DIR/$source" -name '*.md' 2>/dev/null \
             | sed "s|^$DOCS_DIR/$source/||;s|\.md$||" \
             | grep -i -- "$topic" | head -10 || true)

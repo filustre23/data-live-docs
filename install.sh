@@ -23,7 +23,7 @@ else
     exit 1
 fi
 
-echo "Checking dependencies…"
+echo "Checking dependencies..."
 for cmd in git jq curl python3; do
     if ! command -v "$cmd" >/dev/null 2>&1; then
         echo "❌ Missing required dependency: $cmd"
@@ -38,7 +38,7 @@ echo "✓ Dependencies ok"
 # Clone or update
 if [[ -d "$INSTALL_DIR/.git" ]]; then
     echo ""
-    echo "Updating existing installation at $INSTALL_DIR…"
+    echo "Updating existing installation at $INSTALL_DIR..."
     cd "$INSTALL_DIR"
     git fetch --quiet origin "$INSTALL_BRANCH"
     git checkout -B "$INSTALL_BRANCH" "origin/$INSTALL_BRANCH" >/dev/null 2>&1
@@ -47,7 +47,7 @@ if [[ -d "$INSTALL_DIR/.git" ]]; then
     echo "✓ Updated to latest $INSTALL_BRANCH"
 else
     echo ""
-    echo "Cloning $REPO_URL → $INSTALL_DIR…"
+    echo "Cloning $REPO_URL → $INSTALL_DIR..."
     if [[ -d "$INSTALL_DIR" ]]; then
         rm -rf "$INSTALL_DIR"
     fi
@@ -59,7 +59,7 @@ chmod +x "$INSTALL_DIR/data-docs-helper.sh" 2>/dev/null || true
 chmod +x "$INSTALL_DIR/scripts/"*.py 2>/dev/null || true
 
 echo ""
-echo "Registering /livedocs slash command…"
+echo "Registering /livedocs slash command..."
 mkdir -p "$(dirname "$COMMAND_FILE")"
 cat > "$COMMAND_FILE" << 'EOF'
 Execute the data-live-docs helper script at ~/.data-live-docs/data-docs-helper.sh
@@ -82,7 +82,7 @@ EOF
 echo "✓ Wrote $COMMAND_FILE"
 
 echo ""
-echo "Registering PreToolUse hook…"
+echo "Registering PreToolUse hook..."
 mkdir -p "$(dirname "$SETTINGS_FILE")"
 if [[ -f "$SETTINGS_FILE" ]]; then
     # Strip any prior data-live-docs hook entries, then append a fresh one.
