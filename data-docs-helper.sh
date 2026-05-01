@@ -48,7 +48,7 @@ list_sources() {
     echo ""
     ls "$DOCS_DIR" 2>/dev/null | while read -r src; do
         [[ -d "$DOCS_DIR/$src" ]] || continue
-        local count=$(find "$DOCS_DIR/$src" -name '*.md' -not -name 'README.md' 2>/dev/null | wc -l | tr -d ' ')
+        local count=$(find "$DOCS_DIR/$src" \( -name '*.md' -o -name '*.mdx' -o -name '*.rst' \) -not -name 'README.md' 2>/dev/null | wc -l | tr -d ' ')
         printf "  • %-20s (%s topics)\n" "$src" "$count"
     done
     echo ""
