@@ -112,8 +112,10 @@ Document AI in the `US` and `EU`
 
 ## Limitations
 
-The function can't process documents with more than 100 pages. Any row
-that contains such a file returns an error.
+* The function can't process documents with more than 130 pages. Any row
+  that contains such a file returns an error.
+* The function has a 120 second timeout limit per request.
+* Requests are processed in batches of 10.
 
 ## Example
 
@@ -124,12 +126,10 @@ to process the documents represented by the `documents` table.
 Create the model:
 
 ```
-# Create model
-CREATE OR REPLACE MODEL
-`myproject.mydataset.invoice_parser`
+CREATE OR REPLACE MODEL `myproject.mydataset.invoice_parser`
 REMOTE WITH CONNECTION `myproject.myregion.myconnection`
 OPTIONS (remote_service_type = 'cloud_ai_document_v1',
-document_processor='processor_id');
+         document_processor='processor_id');
 ```
 
 **Note:** For more information about how to specify a processor ID, see
@@ -172,11 +172,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-04-29 UTC.
+Last updated 2026-05-01 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-04-29 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-01 UTC."],[],[]]

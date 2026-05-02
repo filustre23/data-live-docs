@@ -613,7 +613,7 @@ print(f"Added {job.labels} to {job_id}.")
 
 ### 將工作階段中的工作與標籤建立關聯
 
-如果您在[工作階段](https://docs.cloud.google.com/bigquery/docs/sessions-intro?hl=zh-tw)中執行查詢，可以使用 BigQuery 多重陳述式查詢，為該工作階段中所有日後的查詢工作指派標籤。
+如果您在[工作階段](https://docs.cloud.google.com/bigquery/docs/sessions-intro?hl=zh-tw)中執行查詢，可以使用 BigQuery 多重陳述式查詢，為該工作階段中所有未來的查詢作業指派標籤。
 
 ### SQL
 
@@ -642,7 +642,7 @@ print(f"Added {job.labels} to {job_id}.")
 
 在預訂項目中加入標籤後，標籤就會納入您的帳單資料中。您可以使用標籤，在 Cloud Billing 資料中篩選分析插槽歸因 SKU。
 
-分析運算單元歸因 SKU 只會記錄運算單元用量。不會記錄 BigQuery Reservation API SKU 的費用。BigQuery Reservation API SKU 不支援預留項目標籤做為篩選條件。
+分析時段歸因 SKU 只會記錄時段用量。不會記錄 BigQuery Reservation API SKU 的費用。BigQuery Reservation API SKU 不支援預留項目標籤做為篩選條件。
 
 如要進一步瞭解如何在帳單資料中使用標籤，請參閱「[使用**篩選器**來精簡資料](https://docs.cloud.google.com/billing/docs/how-to/reports?hl=zh-tw#filter-by-labels)」。
 
@@ -774,6 +774,7 @@ bq update --set_label test_data: mydataset
 ## 後續步驟
 
 * 瞭解如何在 BigQuery 資源中[查看標籤](https://docs.cloud.google.com/bigquery/docs/viewing-labels?hl=zh-tw)。
+* 瞭解如何[使用標籤識別及分析代理程式產生的查詢](https://docs.cloud.google.com/bigquery/docs/conversational-analytics?hl=zh-tw#identify-agent-queries)。
 * 瞭解如何在 BigQuery 資源中[更新標籤](https://docs.cloud.google.com/bigquery/docs/updating-labels?hl=zh-tw)。
 * 瞭解如何[使用標籤篩選資源](https://docs.cloud.google.com/bigquery/docs/filtering-labels?hl=zh-tw)。
 * 瞭解如何在 BigQuery 資源中[刪除標籤](https://docs.cloud.google.com/bigquery/docs/deleting-labels?hl=zh-tw)。
@@ -786,11 +787,11 @@ bq update --set_label test_data: mydataset
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-04-30 (世界標準時間)。
+上次更新時間：2026-05-01 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-04-30 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-01 (世界標準時間)。"],[],[]]

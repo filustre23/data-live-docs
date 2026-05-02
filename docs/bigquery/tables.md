@@ -1304,5 +1304,5 @@ func printTableInfo(w io.Writer, projectID, datasetID, tableID string) error {
 	// datasetID := "mydataset"
 	// tableID := "mytable"
 	ctx := context.Background()
-	client, err := bigquery.NewClient(ctx, projectID
+	client, err := bigquery.NewClient(ctx, projectID)</
 ```

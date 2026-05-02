@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-05-02T07:23+00:00_
+_Generated 2026-05-02T18:49+00:00_
 
-**9 sources, 4709 topics total**
+**9 sources, 4662 topics total**
 
 ## airflow
 
@@ -16,22 +16,9 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_1083 topics_
+_1036 topics_
 
-- `anthropic-sdk/about-claude/glossary`
-- `anthropic-sdk/about-claude/model-deprecations`
-- `anthropic-sdk/about-claude/models/choosing-a-model`
-- `anthropic-sdk/about-claude/models/migration-guide`
-- `anthropic-sdk/about-claude/models/overview`
-- `anthropic-sdk/about-claude/models/whats-new-claude-4-7`
-- `anthropic-sdk/about-claude/pricing`
-- `anthropic-sdk/about-claude/use-case-guides/content-moderation`
-- `anthropic-sdk/about-claude/use-case-guides/customer-support-chat`
-- `anthropic-sdk/about-claude/use-case-guides/legal-summarization`
-- `anthropic-sdk/about-claude/use-case-guides/overview`
-- `anthropic-sdk/about-claude/use-case-guides/ticket-routing`
 - `anthropic-sdk/agents-and-tools/agent-skills/best-practices`
-- `anthropic-sdk/agents-and-tools/agent-skills/claude-api-skill`
 - `anthropic-sdk/agents-and-tools/agent-skills/enterprise`
 - `anthropic-sdk/agents-and-tools/agent-skills/overview`
 - `anthropic-sdk/agents-and-tools/agent-skills/quickstart`
@@ -101,7 +88,6 @@ _1083 topics_
 - `anthropic-sdk/api/admin/workspaces/retrieve`
 - `anthropic-sdk/api/admin/workspaces/update`
 - `anthropic-sdk/api/beta`
-- `anthropic-sdk/api/beta-headers`
 - `anthropic-sdk/api/beta/agents`
 - `anthropic-sdk/api/beta/agents/archive`
 - `anthropic-sdk/api/beta/agents/create`
@@ -200,7 +186,6 @@ _1083 topics_
 - `anthropic-sdk/api/beta/vaults/list`
 - `anthropic-sdk/api/beta/vaults/retrieve`
 - `anthropic-sdk/api/beta/vaults/update`
-- `anthropic-sdk/api/claude-code/routines-fire`
 - `anthropic-sdk/api/cli/beta`
 - `anthropic-sdk/api/cli/beta/agents`
 - `anthropic-sdk/api/cli/beta/agents/archive`
@@ -315,7 +300,6 @@ _1083 topics_
 - `anthropic-sdk/api/cli/models`
 - `anthropic-sdk/api/cli/models/list`
 - `anthropic-sdk/api/cli/models/retrieve`
-- `anthropic-sdk/api/client-sdks`
 - `anthropic-sdk/api/completions`
 - `anthropic-sdk/api/completions/create`
 - `anthropic-sdk/api/csharp/beta`
@@ -431,7 +415,6 @@ _1083 topics_
 - `anthropic-sdk/api/csharp/models`
 - `anthropic-sdk/api/csharp/models/list`
 - `anthropic-sdk/api/csharp/models/retrieve`
-- `anthropic-sdk/api/errors`
 - `anthropic-sdk/api/go/beta`
 - `anthropic-sdk/api/go/beta/agents`
 - `anthropic-sdk/api/go/beta/agents/archive`
@@ -546,7 +529,6 @@ _1083 topics_
 - `anthropic-sdk/api/go/models`
 - `anthropic-sdk/api/go/models/list`
 - `anthropic-sdk/api/go/models/retrieve`
-- `anthropic-sdk/api/ip-addresses`
 - `anthropic-sdk/api/java/beta`
 - `anthropic-sdk/api/java/beta/agents`
 - `anthropic-sdk/api/java/beta/agents/archive`
@@ -674,8 +656,6 @@ _1083 topics_
 - `anthropic-sdk/api/models`
 - `anthropic-sdk/api/models/list`
 - `anthropic-sdk/api/models/retrieve`
-- `anthropic-sdk/api/openai-sdk`
-- `anthropic-sdk/api/overview`
 - `anthropic-sdk/api/python/beta`
 - `anthropic-sdk/api/python/beta/agents`
 - `anthropic-sdk/api/python/beta/agents/archive`
@@ -790,7 +770,6 @@ _1083 topics_
 - `anthropic-sdk/api/python/models`
 - `anthropic-sdk/api/python/models/list`
 - `anthropic-sdk/api/python/models/retrieve`
-- `anthropic-sdk/api/rate-limits`
 - `anthropic-sdk/api/ruby/beta`
 - `anthropic-sdk/api/ruby/beta/agents`
 - `anthropic-sdk/api/ruby/beta/agents/archive`
@@ -905,16 +884,6 @@ _1083 topics_
 - `anthropic-sdk/api/ruby/models`
 - `anthropic-sdk/api/ruby/models/list`
 - `anthropic-sdk/api/ruby/models/retrieve`
-- `anthropic-sdk/api/sdks/cli`
-- `anthropic-sdk/api/sdks/csharp`
-- `anthropic-sdk/api/sdks/go`
-- `anthropic-sdk/api/sdks/java`
-- `anthropic-sdk/api/sdks/php`
-- `anthropic-sdk/api/sdks/python`
-- `anthropic-sdk/api/sdks/ruby`
-- `anthropic-sdk/api/sdks/typescript`
-- `anthropic-sdk/api/service-tiers`
-- `anthropic-sdk/api/supported-regions`
 - `anthropic-sdk/api/typescript/beta`
 - `anthropic-sdk/api/typescript/beta/agents`
 - `anthropic-sdk/api/typescript/beta/agents/archive`
@@ -1029,7 +998,6 @@ _1083 topics_
 - `anthropic-sdk/api/typescript/models`
 - `anthropic-sdk/api/typescript/models/list`
 - `anthropic-sdk/api/typescript/models/retrieve`
-- `anthropic-sdk/api/versioning`
 - `anthropic-sdk/build-with-claude/adaptive-thinking`
 - `anthropic-sdk/build-with-claude/administration-api`
 - `anthropic-sdk/build-with-claude/api-and-data-retention`
@@ -1054,9 +1022,6 @@ _1083 topics_
 - `anthropic-sdk/build-with-claude/overview`
 - `anthropic-sdk/build-with-claude/pdf-support`
 - `anthropic-sdk/build-with-claude/prompt-caching`
-- `anthropic-sdk/build-with-claude/prompt-engineering/claude-prompting-best-practices`
-- `anthropic-sdk/build-with-claude/prompt-engineering/overview`
-- `anthropic-sdk/build-with-claude/prompt-engineering/prompting-tools`
 - `anthropic-sdk/build-with-claude/rate-limits-api`
 - `anthropic-sdk/build-with-claude/search-results`
 - `anthropic-sdk/build-with-claude/skills-guide`
@@ -1079,9 +1044,7 @@ _1083 topics_
 - `anthropic-sdk/managed-agents/github`
 - `anthropic-sdk/managed-agents/mcp-connector`
 - `anthropic-sdk/managed-agents/memory`
-- `anthropic-sdk/managed-agents/migration`
 - `anthropic-sdk/managed-agents/multi-agent`
-- `anthropic-sdk/managed-agents/observability`
 - `anthropic-sdk/managed-agents/onboarding`
 - `anthropic-sdk/managed-agents/overview`
 - `anthropic-sdk/managed-agents/permission-policies`
@@ -1090,17 +1053,7 @@ _1083 topics_
 - `anthropic-sdk/managed-agents/skills`
 - `anthropic-sdk/managed-agents/tools`
 - `anthropic-sdk/managed-agents/vaults`
-- `anthropic-sdk/release-notes/overview`
-- `anthropic-sdk/release-notes/system-prompts`
-- `anthropic-sdk/resources/overview`
-- `anthropic-sdk/test-and-evaluate/develop-tests`
-- `anthropic-sdk/test-and-evaluate/eval-tool`
 - `anthropic-sdk/test-and-evaluate/strengthen-guardrails/handle-streaming-refusals`
-- `anthropic-sdk/test-and-evaluate/strengthen-guardrails/increase-consistency`
-- `anthropic-sdk/test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks`
-- `anthropic-sdk/test-and-evaluate/strengthen-guardrails/reduce-hallucinations`
-- `anthropic-sdk/test-and-evaluate/strengthen-guardrails/reduce-latency`
-- `anthropic-sdk/test-and-evaluate/strengthen-guardrails/reduce-prompt-leak`
 
 ## bigquery
 

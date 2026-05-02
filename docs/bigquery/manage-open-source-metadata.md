@@ -130,8 +130,8 @@ BigLake Metastore (傳統版) 有下列限制：
 ```
 CONFS="spark.sql.catalog.SPARK_CATALOG=org.apache.iceberg.spark.SparkCatalog,"
 CONFS+="spark.sql.catalog.SPARK_CATALOG.catalog-impl=org.apache.iceberg.gcp.biglake.BigLakeCatalog,"
-CONFS+="spark.sql.catalog.SPARK_CATALOG.gcp_project=PROJECT_ID,&quot;
-CONFS+=&quot;spark.sql.catalog.SPARK_CATALOG.gcp_location=LOCATION,"
+CONFS+="spark.sql.catalog.SPARK_CATALOG.gcp_project=PROJECT_ID,"
+CONFS+="spark.sql.catalog.SPARK_CATALOG.gcp_location=LOCATION,"
 CONFS+="spark.sql.catalog.SPARK_CATALOG.blms_catalog=BLMS_CATALOG,"
 CONFS+="spark.sql.catalog.SPARK_CATALOG.warehouse=GCS_DATA_WAREHOUSE_FOLDER,"
 CONFS+="spark.jars.packages=ICEBERG_SPARK_PACKAGE"
@@ -307,7 +307,7 @@ hive_options {
 ```
 CREATE TABLE SPARK_CATALOG.BLMS_DB.BLMS_TABLE
   (id bigint, data string) USING iceberg
-  TBLPROPERTIES(hms_table=&#39;HMS_DB.HMS_TABLE');
+  TBLPROPERTIES(hms_table='HMS_DB.HMS_TABLE');
 ```
 
 #### 將 BigLake 資料表連結至 BigLake metastore (傳統版) 資料表
@@ -321,7 +321,7 @@ CREATE TABLE SPARK_CATALOG.BLMS_DB.BLMS_TABLE
 ```
   CREATE TABLE SPARK_CATALOG.BLMS_DB.BLMS_TABLE
     (id bigint, data string) USING iceberg
-    TBLPROPERTIES(bq_table=&#39;BQ_TABLE_PATH',
+    TBLPROPERTIES(bq_table='BQ_TABLE_PATH',
     bq_connection='BQ_RESOURCE_CONNECTION');
 ```
 
@@ -343,7 +343,7 @@ CREATE EXTERNAL TABLE 'BQ_TABLE_PATH'
   WITH CONNECTION `BQ_RESOURCE_CONNECTION`
   OPTIONS (
           format = 'ICEBERG',
-          uris = [&#39;blms://projects/PROJECT_ID/locations/LOCATION/catalogs/BLMS_CATALOG/databases/BLMS_DB/tables/BLMS_TABLE']
+          uris = ['blms://projects/PROJECT_ID/locations/LOCATION/catalogs/BLMS_CATALOG/databases/BLMS_DB/tables/BLMS_TABLE']
           )
 ```
 
@@ -502,11 +502,11 @@ DROP TABLE SPARK_CATALOG.BLMS_DB.BLMS_TABLE PURGE;
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-04-30 (世界標準時間)。
+上次更新時間：2026-05-02 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-04-30 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-02 (世界標準時間)。"],[],[]]

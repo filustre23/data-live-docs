@@ -264,13 +264,61 @@ indicate that the shared pool capacity is momentarily constrained, but not that
 you have reached a specific quota limit on your project. To check on the
 capacity, retry the request after a short delay.
 
+## Identify and analyze agent-generated queries
+
+BigQuery jobs run by a data agent include specific labels. These
+labels let you identify, filter, and analyze the agent's jobs.
+
+You can use these labels for the following tasks:
+
+* [Filter your billing report by label](/billing/docs/how-to/reports#filter-by-labels)
+  to understand agent costs.
+* Audit agent activity.
+* Analyze query performance.
+
+### Identify the data agent labels in the Google Cloud console
+
+BigQuery applies labels to jobs that are run by a data agent. To
+get the label key for filtering and other analysis, view the label key in the
+Google Cloud console.
+
+To view a data agent's label key, follow these steps:
+
+1. In the Google Cloud console, [view the job details](/bigquery/docs/managing-jobs#view-job).
+2. In the **Query job details** pane, locate the **Labels** section and look
+   for labels prefixed with `ca`, such as `ca-bq-job: true`.
+
+### Analyze agent-generated jobs
+
+Use the label to analyze your agent-generated jobs. For example, to check how
+many jobs were run by a data agent, run the following query against the
+[`INFORMATION_SCHEMA.JOBS` view](/bigquery/docs/information-schema-jobs):
+
+```
+SELECT
+  COUNT(*) AS job_count
+FROM
+  `PROJECT_ID`.`region-REGION`.INFORMATION_SCHEMA.JOBS
+WHERE
+  EXISTS (
+    SELECT 1
+    FROM UNNEST(labels) AS label
+    WHERE label.key = 'ca-bq-job' AND label.value = 'true'
+  );
+```
+
+Replace the following:
+
+* `PROJECT_ID`: your Google Cloud project ID.
+* `REGION`: the region where your jobs run (for example, `us` or `eu`).
+
 ## What's next
 
-* Learn more about the [Conversational Analytics
-  API](/gemini/docs/conversational-analytics-api/overview).
+* Learn more about the [Conversational Analytics API](/gemini/docs/conversational-analytics-api/overview).
 * [Create data agents](/bigquery/docs/create-data-agents).
 * [Analyze data with conversations](/bigquery/docs/create-conversations).
 * [Use conversational Analytics with Lakehouse](/biglake/docs/conversational-analytics)
+* Learn how to [filter resources using labels](/bigquery/docs/filtering-labels).
 
 
 
@@ -279,11 +327,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-04-29 UTC.
+Last updated 2026-05-01 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-04-29 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-01 UTC."],[],[]]

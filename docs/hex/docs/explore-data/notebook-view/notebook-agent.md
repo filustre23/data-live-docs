@@ -9,7 +9,7 @@ info
 * Notebook agent is available in **Beta** on all [plans](https://hex.tech/pricing/). Paid plans include monthly per-seat [credit grants](/docs/administration/credits) that can be used towards Hex AI features. While Hex agents are in Beta, credit limits and optional add-on credits are being rolled out in phases and are not yet enforced for all customers. Admins will receive advance notice before limits go into effect for their workspace.
 * Users need the **Admin**, **Manager**, or **Editor** workspace role and **Can Edit** or higher project permissions to use the Notebook agent.
 * The Notebook agent is not compatible with **Published apps**.
-* To share suggestions for new features or improvements, reach out to [[email protected]](/cdn-cgi/l/email-protection#e5969095958a9791a58d809dcb9180868d).
+* To share suggestions for new features or improvements, reach out to [[email protected]](/cdn-cgi/l/email-protection#22515752524d5056624a475a0c5647414a).
 
 The Notebook agent offers a natural language experience to assist with code generation and exploratory analysis within Hex projects. The agent has full access to your project context and warehouse schema information, so you can ask questions about - and receive answers for - your data. The agent can also help with syntax, act as a sounding board for brainstorming solutions, or create entirely new lines of analysis.
 
@@ -136,7 +136,7 @@ Only projects you have [**Can Explore**](/docs/collaborate/sharing-and-permissio
 
 ## Providing feedback[​](#providing-feedback "Direct link to Providing feedback")
 
-Use the in product feedback buttons to report bugs or issues. Our team reviews these reports daily. If you want to share suggestions for new features or improvements, reach out to us directly at [[email protected]](/cdn-cgi/l/email-protection#2d5e585d5d425f596d4548550359484e45).
+Use the in product feedback buttons to report bugs or issues. Our team reviews these reports daily. If you want to share suggestions for new features or improvements, reach out to us directly at [[email protected]](/cdn-cgi/l/email-protection#4734323737283533072f223f693322242f).
 
 #### On this page
 

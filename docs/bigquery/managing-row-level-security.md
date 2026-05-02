@@ -19,7 +19,7 @@
 您可以使用資料列層級存取政策執行下列工作：
 
 * 在資料表上[建立或更新資料列層級存取政策](#create-policy)
-* 在資料表上[合併資料列層級存取政策](#combine_row-level_access_policies)
+* 在資料表上[合併資料列層級存取權政策](#combine_row-level_access_policies)
 * [列出資料表的資料列層級存取權政策](#list-policy)
 * 從資料表[刪除資料列層級存取權政策](#delete-policy)
 * [查詢具有資料列層級存取權政策的資料表](#query-policy)
@@ -55,7 +55,7 @@
 * `bigquery.tables.getData` (在目標資料表和已授權子查詢資料列層級存取政策中參照的任何資料表上)
 * `bigquery.jobs.create` (執行 DDL 查詢工作)
 
-下列預先定義的 IAM 角色都包含建立及更新資料列層級存取權政策所需的權限：
+下列每個預先定義的 IAM 角色都包含建立及更新資料列層級存取權政策所需的權限：
 
 * `roles/bigquery.admin`
 * `roles/bigquery.dataOwner`
@@ -67,6 +67,11 @@
 **注意：** 請勿透過 IAM 將 `bigquery.filteredDataViewer` 角色直接套用至資源。`bigquery.filteredDataViewer` 是系統管理的角色。只能使用資料列層級存取政策授予角色。詳情請參閱[資料列層級安全性的最佳做法](https://docs.cloud.google.com/bigquery/docs/best-practices-row-level-security?hl=zh-tw#filtered-data-viewer)。
 
 ### 建立或更新資料列層級存取政策
+
+在資料表上設定資料列層級存取權時，您至少需要兩項資料列存取權政策：
+
+* 可授予資料表完整存取權的政策。第一項資料列存取權政策應授予使用者和群組存取權，讓他們能完整存取資料表中的資料，以進行資料維護或支援。舉例來說，BigQuery 管理員和使用 DML 陳述式轉換資料表資料的服務帳戶。
+* 第二項政策，用於篩選存取權。這項政策會根據商業邏輯使用篩選器，授予特定群組存取權。
 
 如要建立或更新資料列層級存取政策，請使用下列其中一個 DDL 陳述式：
 
@@ -84,7 +89,7 @@
 
 ### 範例
 
-下列範例說明如何為不同類型的[主體 ID](https://docs.cloud.google.com/iam/docs/principal-identifiers?hl=zh-tw#allow) (包括 Google 帳戶和同盟身分) 建立及更新資料列存取政策。如要進一步瞭解聯合身分，請參閱「[Workload Identity 聯盟](https://docs.cloud.google.com/iam/docs/workload-identity-federation?hl=zh-tw)」。
+下列範例說明如何為不同類型的[主體 ID](https://docs.cloud.google.com/iam/docs/principal-identifiers?hl=zh-tw#allow) (包括 Google 帳戶和聯合身分) 建立及更新資料列存取政策。如要進一步瞭解聯合身分，請參閱「[Workload Identity 聯盟](https://docs.cloud.google.com/iam/docs/workload-identity-federation?hl=zh-tw)」。
 
 #### 建立新政策並授予 Google 帳戶存取權
 
@@ -97,7 +102,7 @@ GRANT TO ('user:abc@example.com')
 FILTER USING (region = 'APAC');
 ```
 
-#### 建立新政策，並授予工作團隊身分集區中單一身分的存取權
+#### 建立新政策，並授予員工身分集區中單一身分的存取權
 
 建立新的資料列存取政策。只有工作團隊身分集區中的單一身分可以存取資料表，格式如下：
 `principal://iam.googleapis.com/locations/global/workforcePools/POOL_ID/subject/IDENTITY`。
@@ -136,7 +141,7 @@ FILTER USING (region = 'US');
 
 #### 建立政策，並授予群組中員工身分的存取權
 
-建立資料列存取政策，使用以下格式授權群組中的所有員工身分存取權：`principal://iam.googleapis.com/locations/global/workforcePools/POOL_ID/subject/IDENTITY`
+建立資料列存取政策，使用以下格式授權群組中的所有員工身分存取資料：`principal://iam.googleapis.com/locations/global/workforcePools/POOL_ID/subject/IDENTITY`
 
 ```
 CREATE ROW ACCESS POLICY sales_us_filter
@@ -208,15 +213,15 @@ FILTER USING (region IN (
       email = SESSION_USER()));
 ```
 
-在 `lookup_table` 上使用子查詢，即可避免建立多個資料列存取政策。舉例來說，上述陳述式產生的結果與下列陳述式相同，但查詢次數較少：
+在 `lookup_table` 上使用子查詢，可避免建立多個資料列存取政策。舉例來說，上述陳述式產生的結果與下列陳述式相同，但查詢次數較少：
 
 ```
-CREATE OR REPLACE ROW ACCESS POLICY apac_filter
+CREATE OR REPLACE ROW ACCESS POLICY us_filter
 ON project.dataset.my_table
 GRANT TO ('user:abc@example.com')
 FILTER USING (region IN ('us-west1', 'us-west2'));
 
-CREATE OR REPLACE ROW ACCESS POLICY apac_filter
+CREATE OR REPLACE ROW ACCESS POLICY eu_filter
 ON project.dataset.my_table
 GRANT TO ('user:xyz@example.com')
 FILTER USING (region = 'europe-west1');
@@ -262,7 +267,7 @@ GRANT TO ('user:abc@example.com')
 FILTER USING (product_category = 'shoes' AND color = 'blue');
 ```
 
-根據上述資料列層級存取政策，`abc@example.com` 可以存取藍色鞋子的相關資訊，但無法存取紅色鞋子或藍色汽車的資訊。
+根據上述資料列層級存取政策，`abc@example.com` 可以存取藍色鞋子的資訊，但無法存取紅色鞋子或藍色汽車的資訊。
 
 ## 列出資料表資料列層級存取權政策
 
@@ -272,7 +277,7 @@ FILTER USING (product_category = 'shoes' AND color = 'blue');
 
 如要列出 BigQuery 資料表的資料列層級存取權政策，您需要 `bigquery.rowAccessPolicies.list` IAM 權限。
 
-如要查看 BigQuery 表格的資料列層級存取權政策成員，您需要 `bigquery.rowAccessPolicies.getIamPolicy` IAM 權限。
+如要查看 BigQuery 資料表資料列層級存取政策的成員，您需要 `bigquery.rowAccessPolicies.getIamPolicy` IAM 權限。
 
 下列預先定義的 IAM 角色都包含列出及查看資料列層級存取權政策所需的權限：
 
@@ -315,7 +320,7 @@ FILTER USING (product_category = 'shoes' AND color = 'blue');
 
 使用 REST API 參考資料章節中的 [`RowAccessPolicies.List` 方法](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/rowAccessPolicies/list?hl=zh-tw)。
 
-## 刪除資料列層級存取權政策
+## 刪除資料列層級存取政策
 
 如果您有權限，可以使用 DDL 陳述式刪除資料表上的一或多項資料列層級存取政策。
 
@@ -341,7 +346,7 @@ FILTER USING (product_category = 'shoes' AND color = 'blue');
 
 如要進一步瞭解 BigQuery 中的 IAM 角色和權限，請參閱[預先定義的角色和權限](https://docs.cloud.google.com/bigquery/access-control?hl=zh-tw)一文。
 
-### 刪除資料列層級存取權政策
+### 刪除資料列層級存取政策
 
 如要從資料表刪除資料列存取權政策，請使用下列 DDL 陳述式：
 
@@ -370,7 +375,7 @@ DROP ALL ROW ACCESS POLICIES ON project.dataset.my_table;
 
 ## 查詢設有資料列存取政策的資料表
 
-使用者必須先取得 BigQuery 資料表的存取權，才能查詢該資料表，即使他們是該資料表資料列存取政策的 `grantee_list` 也是如此。如果沒有這項權限，查詢就會失敗並顯示 `access
+使用者必須先取得 BigQuery 資料表的存取權，才能查詢該資料表，即使他們位於該資料表的資料列存取政策的 `grantee_list` 中也一樣。如果沒有這項權限，查詢就會失敗並顯示 `access
 denied` 錯誤。
 
 ### 所需權限
@@ -432,11 +437,11 @@ denied` 錯誤。
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-04-30 (世界標準時間)。
+上次更新時間：2026-05-02 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-04-30 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-02 (世界標準時間)。"],[],[]]
