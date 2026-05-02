@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-05-01T19:02+00:00_
+_Generated 2026-05-02T07:23+00:00_
 
-**9 sources, 4705 topics total**
+**9 sources, 4709 topics total**
 
 ## airflow
 
@@ -3944,7 +3944,7 @@ _153 topics_
 
 Upstream: <https://learn.hex.tech/>
 
-_348 topics_
+_352 topics_
 
 - `hex/changelog`
 - `hex/changelog/2020-12-17`
@@ -4203,13 +4203,18 @@ _348 topics_
 - `hex/docs/getting-started/develop-your-notebook`
 - `hex/docs/getting-started/share-your-work`
 - `hex/docs/legal`
+- `hex/docs/legal/aup`
+- `hex/docs/legal/dpa`
 - `hex/docs/legal/hex-service-agreement`
 - `hex/docs/legal/hex-service-agreement-2024-05-13`
-- `hex/docs/legal/hex-website-terms-of-use`
+- `hex/docs/legal/privacy`
 - `hex/docs/legal/security-addendum`
+- `hex/docs/legal/subprocessors`
 - `hex/docs/legal/supplier-security-addendum`
 - `hex/docs/legal/terms-and-conditions`
 - `hex/docs/legal/terms-and-conditions-2020-03-27`
+- `hex/docs/legal/tos`
+- `hex/docs/legal/website-terms-of-use`
 - `hex/docs/organize-content/archive`
 - `hex/docs/organize-content/collections`
 - `hex/docs/organize-content/organize-projects`
@@ -4242,7 +4247,6 @@ _348 topics_
 - `hex/docs/trust`
 - `hex/docs/trust/ai-data-privacy`
 - `hex/docs/trust/data-privacy-and-usage-faq`
-- `hex/docs/trust/privacy-policy`
 - `hex/index`
 - `hex/search`
 - `hex/tutorials`

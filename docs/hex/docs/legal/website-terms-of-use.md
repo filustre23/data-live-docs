@@ -4,9 +4,9 @@
 
 **Acceptance of the Terms of Use**
 
-These terms of use are entered into by and between You and Hex Technologies Inc. (" **Company** ," " **we** ," or " **us**"). The following terms and conditions (" **Terms of Use**") govern your access to and use of hex.tech, app.hex.tech, learn.hex.tech, hex.site including any content, functionality, and services offered (the " **Website**").
+These terms of use are entered into by and between You and Hex Technologies Inc. ("**Company**", "**we**", or "**us**"). The following terms and conditions ("**Terms of Use**") govern your access to and use of hex.tech, app.hex.tech, learn.hex.tech, hex.site including any content, functionality, and services offered (the "**Website**").
 
-Please read the Terms of Use carefully before You start to use the Website. **By using the Website, You accept and agree to be bound and abide by these Terms of Use and our [Privacy Policy](/docs/trust/privacy-policy), which is incorporated herein by reference.** If You do not want to agree to these Terms of Use or the Privacy Policy, You must not access or use the Website.
+Please read the Terms of Use carefully before You start to use the Website. **By using the Website, You accept and agree to be bound and abide by these Terms of Use and our [Privacy Policy](/docs/legal/privacy), which is incorporated herein by reference.** If You do not want to agree to these Terms of Use or the Privacy Policy, You must not access or use the Website.
 
 This Website is offered and available to users who are 13 years of age or older. By using this Website, You represent and warrant that You meet all of the foregoing eligibility requirements. If You do not meet all of these requirements, You must not access or use the Website.
 
@@ -25,7 +25,7 @@ You are responsible for both:
 * Making all arrangements necessary for You to have access to the Website.
 * Ensuring that all persons who access the Website through your internet connection are aware of these Terms of Use and comply with them.
 
-To access the Website or some of the resources it offers, You may be asked to provide certain registration details or other information. It is a condition of your use of the Website that all the information You provide on the Website is correct, current, and complete. You agree that all information You provide to register with this Website or otherwise, including, but not limited to, through the use of any interactive features on the Website, is governed by our [Privacy Policy](/docs/trust/privacy-policy), and You consent to all actions we take with respect to your information consistent with our Privacy Policy.
+To access the Website or some of the resources it offers, You may be asked to provide certain registration details or other information. It is a condition of your use of the Website that all the information You provide on the Website is correct, current, and complete. You agree that all information You provide to register with this Website or otherwise, including, but not limited to, through the use of any interactive features on the Website, is governed by our [Privacy Policy](/docs/legal/privacy), and You consent to all actions we take with respect to your information consistent with our Privacy Policy.
 
 If You choose, or are provided with, a user name, password, or any other piece of information as part of our security procedures, You must treat such information as confidential, and You must not disclose it to any other person or entity. You also acknowledge that your account is personal to You and agree not to provide any other person with access to this Website or portions of it using your user name, password, or other security information. You agree to notify us immediately of any unauthorized access to or use of your user name or password or any other breach of security. You also agree to ensure that You exit from your account at the end of each session. You should use particular caution when accessing your account from a public or shared computer so that others are not able to view or record your password or other personal information.
 
@@ -51,7 +51,7 @@ You must not:
 
 You must not access or use for any commercial purposes any part of the Website or any services or materials available through the Website.
 
-If You wish to make any use of material on the Website other than that set out in this section, please address your request to: [[email protected]](/cdn-cgi/l/email-protection#bfd3dad8ded3ffd7dac791cbdadcd7)
+If You wish to make any use of material on the Website other than that set out in this section, please address your request to: [[email protected]](/cdn-cgi/l/email-protection#a8c4cdcfc9c4e8c0cdd086dccdcbc0)
 
 If You print, copy, modify, download, or otherwise use or provide any other person with access to any part of the Website in breach of the Terms of Use, your right to use the Website will stop immediately and You must, at our option, return or destroy any copies of the materials You have made. No right, title, or interest in or to the Website or any content on the Website is transferred to You, and all rights not expressly granted are reserved by the Company. Any use of the Website not expressly permitted by these Terms of Use is a breach of these Terms of Use and may violate copyright, trademark, and other laws.
 
@@ -66,7 +66,7 @@ You may use the Website only for lawful purposes and in accordance with these Te
 * In any way that violates any applicable federal, state, local, or international law or regulation (including, without limitation, any laws regarding the export of data or software to and from the US or other countries).
 * For the purpose of exploiting, harming, or attempting to exploit or harm minors in any way by exposing them to inappropriate content, asking for personally identifiable information, or otherwise.
 * To send, knowingly receive, upload, download, use, or re-use any material that does not comply with the Content Standards set out in these Terms of Use.
-* To transmit, or procure the sending of, any advertising or promotional material without our prior written consent, including any "junk mail," "chain letter," "spam," or any other similar solicitation.
+* To transmit, or procure the sending of, any advertising or promotional material without our prior written consent, including any "junk mail", "chain letter", "spam", or any other similar solicitation.
 * To impersonate or attempt to impersonate the Company, a Company employee, another user, or any other person or entity (including, without limitation, by using email addresses or screen names associated with any of the foregoing).
 * To engage in any other conduct that restricts or inhibits anyone's use or enjoyment of the Website, or which, as determined by us, may harm the Company or users of the Website, or expose them to liability.
 
@@ -83,7 +83,7 @@ Additionally, You agree not to:
 
 **User Contributions**
 
-The Website may contain message boards, chat rooms, personal web pages or profiles, forums, bulletin boards, and other interactive features (collectively, " **Interactive Services**") that allow users to post, submit, publish, display, or transmit to other users or other persons (hereinafter, " **post**") content or materials (collectively, " **User Contributions**") on or through the Website.
+The Website may contain message boards, chat rooms, personal web pages or profiles, forums, bulletin boards, and other interactive features (collectively, "**Interactive Services**") that allow users to post, submit, publish, display, or transmit to other users or other persons (hereinafter, "**post**") content or materials (collectively, "**User Contributions**") on or through the Website.
 
 All User Contributions must comply with the Content Standards set out in these Terms of Use.
 
@@ -119,7 +119,7 @@ These content standards apply to any and all User Contributions and use of Inter
 * Contain any material that is defamatory, obscene, indecent, abusive, offensive, harassing, violent, hateful, inflammatory, or otherwise objectionable.
 * Promote sexually explicit or pornographic material, violence, or discrimination based on race, sex, religion, nationality, disability, sexual orientation, or age.
 * Infringe any patent, trademark, trade secret, copyright, or other intellectual property or other rights of any other person.
-* Violate the legal rights (including the rights of publicity and privacy) of others or contain any material that could give rise to any civil or criminal liability under applicable laws or regulations or that otherwise may be in conflict with these Terms of Use and our [Privacy Policy](/docs/trust/privacy-policy).
+* Violate the legal rights (including the rights of publicity and privacy) of others or contain any material that could give rise to any civil or criminal liability under applicable laws or regulations or that otherwise may be in conflict with these Terms of Use and our [Privacy Policy](/docs/legal/privacy).
 * Be likely to deceive any person.
 * Promote any illegal activity, or advocate, promote, or assist any unlawful act.
 * Cause annoyance, inconvenience, or needless anxiety or be likely to upset, embarrass, alarm, or annoy any other person.
@@ -143,7 +143,7 @@ Hex is committed to respecting and protecting the legal rights of copyright owne
 
 (f) A statement that, under penalty of perjury, the information in the notification is accurate and You are authorized to act on behalf of the owner of the exclusive right that is allegedly infringed.
 
-Hex's Copyright Agent to receive DMCA Takedown Notices is: [[email protected]](/cdn-cgi/l/email-protection#fe929b999f92be969b86d08a9b9d96)
+Hex's Copyright Agent to receive DMCA Takedown Notices is: [[email protected]](/cdn-cgi/l/email-protection#ed81888a8c81ad858895c399888e85)
 
 UNDER FEDERAL LAW, IF YOU KNOWINGLY MISREPRESENT THAT ONLINE MATERIAL IS INFRINGING, YOU MAY BE SUBJECT TO CRIMINAL PROSECUTION FOR PERJURY AND CIVIL PENALTIES, INCLUDING MONETARY DAMAGES, COURT COSTS, AND ATTORNEYS' FEES.
 
@@ -159,11 +159,11 @@ We may update the content on this Website from time to time, but its content is 
 
 **Information About You and Your Visits to the Website**
 
-All information we collect on this Website is subject to our [Privacy Policy](/docs/trust/privacy-policy). By using the Website, You consent to all actions taken by us with respect to your information in compliance with the Privacy Policy.
+All information we collect on this Website is subject to our [Privacy Policy](/docs/legal/privacy). By using the Website, You consent to all actions taken by us with respect to your information in compliance with the Privacy Policy.
 
 **Subscription Services to the Hex Platform**
 
-All purchases for subscriptions through our site or other transactions for the sale of services, are governed by our [Hex Service Agreement](/docs/legal/hex-service-agreement), or such agreement otherwise entered into between the parties to govern use of the Platform, which are hereby incorporated into these Terms of Use.
+All purchases for subscriptions through our site or other transactions for the sale of services, are governed by our [Hex Terms of Service](/docs/legal/terms-and-conditions), or such agreement otherwise entered into between the parties to govern use of the Platform, which are hereby incorporated into these Terms of Use.
 
 **Linking to the Website and Social Media Features**
 
@@ -194,7 +194,7 @@ If the Website contains links to other sites and resources provided by third par
 
 **Telephone Contact and Recording Policy**
 
-By providing us with a telephone number for a mobile device, including a number that You later convert to a mobile device number, You are expressly consenting to receiving communications—including but not limited to prerecorded or artificial voice message calls, text messages, and calls made by an automatic telephone dialing system—from us and our affiliates and agents at that number, about any product or services offered by Company. This express consent applies to each such telephone number that You provide to us now or in the future. Calls and messages may incur access fees from your mobile services provider. You understand that You need not provide this consent as a condition of obtaining goods or services from Company, and that You may decline to provide or revoke your consent at any time by emailing [[email protected]](/cdn-cgi/l/email-protection#82f1f7f2f2edf0f6c2eae7faacf6e7e1ea) or by any other method that reasonably ensures we receive your revocation. By providing us with a telephone number, You agree that Company may record any telephone conversation with You (or any another individual) during any telephone call to or from that number for training purposes, whether or not the call was initiated by You, and whether or Company disclosed the fact that the call was recorded during the call.
+By providing us with a telephone number for a mobile device, including a number that You later convert to a mobile device number, You are expressly consenting to receiving communications—including but not limited to prerecorded or artificial voice message calls, text messages, and calls made by an automatic telephone dialing system—from us and our affiliates and agents at that number, about any product or services offered by Company. This express consent applies to each such telephone number that You provide to us now or in the future. Calls and messages may incur access fees from your mobile services provider. You understand that You need not provide this consent as a condition of obtaining goods or services from Company, and that You may decline to provide or revoke your consent at any time by emailing [[email protected]](/cdn-cgi/l/email-protection#2655535656495452664e435e085243454e) or by any other method that reasonably ensures we receive your revocation. By providing us with a telephone number, You agree that Company may record any telephone conversation with You (or any another individual) during any telephone call to or from that number for training purposes, whether or not the call was initiated by You, and whether or Company disclosed the fact that the call was recorded during the call.
 
 **Geographic Restrictions**
 
@@ -248,8 +248,8 @@ The Terms of Use, our Privacy Policy, and Hex Terms of Service constitute the so
 
 This website is operated by Hex Technologies Inc.
 
-Send Hex your notice by email at [[email protected]](/cdn-cgi/l/email-protection#9bf7fefcfaf7dbf3fee3b5effef8f3) or certified mail, return receipt requested, to Hex at 2261 Market Street #4233, San Francisco, CA 94114 USA, Attn: Legal.
+Send Hex your notice by email at [[email protected]](/cdn-cgi/l/email-protection#670b0200060b270f021f491302040f) or certified mail, return receipt requested, to Hex at 2261 Market Street #4233, San Francisco, CA 94114 USA, Attn: Legal.
 
-All other feedback, comments, requests for technical support, and other communications relating to the Website should be directed to: at [[email protected]](/cdn-cgi/l/email-protection#a5c9c0c2c4c9e5cdc0dd8bd1c0c6cd).
+All other feedback, comments, requests for technical support, and other communications relating to the Website should be directed to: at [[email protected]](/cdn-cgi/l/email-protection#28444d4f494468404d50065c4d4b40).
 
 Unless specified otherwise, any notices or other communications to You permitted or required under this Agreement, will be in writing and given by Company via email, Site notification, or messaging service (including SMS).

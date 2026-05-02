@@ -10,9 +10,13 @@ Hex offers first-class support for data privacy through initiatives like Workspa
 
 Hex admins can opt-out their entire workspace from AI features from the **Settings > AI & agents** settings page. Opting out of AI features at the **AI & agents settings**-level will disable AI features for all users.
 
+### AI training opt-out[​](#ai-training-opt-out "Direct link to AI training opt-out")
+
+Depending on your plan, Hex may use data from your AI sessions to improve Hex's AI features. You can opt out of this at any time in **Settings** > **AI & agents** without disabling AI features. See your applicable [Terms of Service](/docs/legal/terms-and-conditions) for details.
+
 ## Third-party partner interactions[​](#third-party-partner-interactions "Direct link to Third-party partner interactions")
 
-* **Neither Hex nor our third-party model partners train models using data from Hex customers**, which eliminates the risk of intellectual property leakage through passed context. This means a model won’t spit out your code to someone else. **Our LLM providers have a zero retention policy**, so your data is never stored.
+* Hex's LLM providers do not train on customer data and have a zero retention policy. Hex's use of AI session data to improve its AI features is governed by your applicable [Terms of Service](/docs/legal/terms-and-conditions). Hex does not disclose customer data to other customers. **Our LLM providers have a zero retention policy**, so your data is never stored.
 * **Hex uses Customer Database Metadata like schemas and Customer Data project code and output content as model context**. This means that any sensitive information in your projects, table or column names, or in your code, could be passed to a model for inference.
 * **Hex's AI features are built on Hex’s secure data platform**. These features are protected by secure practices and policies, are included in our third-party audits and bug bounty program, and safeguarded by the principle of least-privilege. You can learn more on our [Data Privacy and Usage FAQ](/docs/trust/data-privacy-and-usage-faq), [Trust Center](https://trust.hex.tech/), and read our [AI Product Specific Terms](/docs/legal/hex-service-agreement#hex-magic-and-hex-magic-typeahead-collectively-hex-magic).
 
@@ -20,7 +24,7 @@ Hex admins can opt-out their entire workspace from AI features from the **Settin
 
 info
 
-* Available in **Beta** on the **Enterprise** [plan](https://hex.tech/pricing).
+* Available on the **Enterprise** [plan](https://hex.tech/pricing).
 * BYOK is supported for OpenAI and Anthropic.
 
 warning
@@ -36,10 +40,11 @@ Once a key has been added, you can add a new API key from the refresh button at 
 
 tip
 
-BYOK is currently available only for OpenAI and Anthropic. Please reach out to [[email protected]](/cdn-cgi/l/email-protection#40333530302f3234002825386e34252328) if you're interested in using another provider.
+BYOK is currently available only for OpenAI and Anthropic. Please reach out to [[email protected]](/cdn-cgi/l/email-protection#f0838580809f8284b0989588de84959398) if you're interested in using another provider.
 
 #### On this page
 
 * [Workspace AI features opt-out](#workspace-ai-features-opt-out)
+  + [AI training opt-out](#ai-training-opt-out)
 * [Third-party partner interactions](#third-party-partner-interactions)
 * [Bring Your Own Key (BYOK)](#bring-your-own-key-byok)

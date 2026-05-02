@@ -10,7 +10,7 @@ The following Data Privacy and Usage FAQ and answers may change at any time. The
 
 ## Does Hex sell or share customer data?[​](#does-hex-sell-or-share-customer-data "Direct link to Does Hex sell or share customer data?")
 
-**Hex does not and will never sell customer data.** Hex shares data with our subprocessors and other services that we require to provide the Hex Service and run the Hex business. Hex does not and will never share customer data for any other purpose other than providing the Hex Service and running the Hex business. Hex’s subprocessors, their purposes, and data residencies are available here: <https://trust.hex.tech/subprocessors>.
+**Hex does not and will never sell customer data.** Hex shares data with our subprocessors and other services that we require to provide the Hex Service and run the Hex business. Hex does not and will never share customer data for any other purpose other than providing the Hex Service and running the Hex business. Hex’s subprocessors, their purposes, and data residencies are available here: [https://learn.hex.tech/docs/legal/subprocessors](/docs/legal/subprocessors).
 
 ## How does Hex classify customer data?[​](#how-does-hex-classify-customer-data "Direct link to How does Hex classify customer data?")
 
@@ -30,7 +30,7 @@ Hex classifies customer data into two Data Classifications, each with their own 
 
 ## How does Hex use Customer Data?[​](#how-does-hex-use-customer-data "Direct link to How does Hex use Customer Data?")
 
-**Hex does not and will never use Customer Datasets or Customer Database row-level data to improve the performance and reliability of the Hex Service.**
+Hex's use of Customer Data to improve the Hex Service is governed by your applicable [Terms of Service](/docs/legal/terms-and-conditions).
 
 Hex requires Customer Account Data, Customer Input Data, Customer Output Data, and Hex Metadata to provide the Hex Service, and may also use these data to improve the performance and reliability of the Hex Service.
 
@@ -52,9 +52,9 @@ Full definitions of Customer Data and Hex Metadata and Hex’s usage of both are
 
 The Hex Service is data agnostic: customers are responsible for any GDPR, CCPA, or other regulatory requirements for Customer Datasets, Customer Input Data, and Customer Output Data provided to the Hex Service.
 
-Hex is an active participant in the [Data Privacy Framework](https://www.dataprivacyframework.gov/s/participant-search/participant-detail?id=a2z3d000000MG5KAAW&status=Active) and is both GDPR and CCPA compliant. Hex may enter into Data Processing Agreements (DPAs) with customers that require additional privacy guarantees.
+Hex is an active participant in the [Data Privacy Framework](https://www.dataprivacyframework.gov/participant/6049) and is both GDPR and CCPA compliant. Hex may enter into Data Processing Agreements (DPAs) with customers that require additional privacy guarantees.
 
-Hex is compliant with the CAN-SPAM Act: Hex users may easily unsubscribe from Hex marketing and sales communications. Data subject access requests for Hex users may be sent to [[email protected]](/cdn-cgi/l/email-protection#fe8e8c97889f9d87be969b86d08a9b9d96). Hex’s [Privacy Policy](/docs/trust/privacy-policy) contains additional information.
+Hex is compliant with the CAN-SPAM Act: Hex users may easily unsubscribe from Hex marketing and sales communications. Data subject access requests for Hex users may be sent to [[email protected]](/cdn-cgi/l/email-protection#2c5c5e455a4d4f556c4449540258494f44). Hex’s [Privacy Policy](/docs/legal/privacy) contains additional information.
 
 ## How does Hex interact with its LLM providers? What data is sent to the LLM providers?[​](#how-does-hex-interact-with-its-llm-providers-what-data-is-sent-to-the-llm-providers "Direct link to How does Hex interact with its LLM providers? What data is sent to the LLM providers?")
 
@@ -64,12 +64,12 @@ Hex sends Customer Input Data (project code), Customer Output Data (project/cell
 
 ## Who are Hex's LLM providers?[​](#who-are-hexs-llm-providers "Direct link to Who are Hex's LLM providers?")
 
-Hex uses OpenAI and Anthropic as its LLM providers with a zero retention, zero training policy.
+Hex uses OpenAI and Anthropic as its LLM providers with a zero retention policy. Hex's LLM providers do not train on customer data.
 
 For [Hex Typeahead](/docs/explore-data/cells/code-typeahead), Hex uses
 a hosted open source model on Baseten with a zero retention, zero training policy.
 
-For more information on Hex's AI providers, see [Hex's Subprocessors List](https://trust.hex.tech/subprocessors).
+For more information on Hex's AI providers, see [Hex's Subprocessors List](/docs/legal/subprocessors).
 
 ## Can we utilize PHI data within Hex's AI features?[​](#can-we-utilize-phi-data-within-hexs-ai-features "Direct link to Can we utilize PHI data within Hex's AI features?")
 
@@ -85,9 +85,7 @@ Customer's database schemas are stored in an embedding in a vector database (whi
 
 ## Does Hex utilize Customer Data, input data, or output data to train LLM provider models or any other models?[​](#does-hex-utilize-customer-data-input-data-or-output-data-to-train-llm-provider-models-or-any-other-models "Direct link to Does Hex utilize Customer Data, input data, or output data to train LLM provider models or any other models?")
 
-**Hex has not opted-in to data sharing with its LLM providers, and no Customer Data, input data, or output data is utilized to train any models.**
-
-**Neither Hex nor our third-party model partners train models using data from Hex customers**, eliminating the risk of intellectual property leakage through passed context.
+Hex has not opted-in to data sharing with its LLM providers. Hex's LLM providers do not train on customer data. Hex's use of AI session data to improve its AI features is governed by your applicable [Terms of Service](/docs/legal/terms-and-conditions).
 
 ## Does Hex utilize AI prompts and corrections of Hex's AI-generated queries to improve the performance and reliability of Hex's AI features?[​](#does-hex-utilize-ai-prompts-and-corrections-of-hexs-ai-generated-queries-to-improve-the-performance-and-reliability-of-hexs-ai-features "Direct link to Does Hex utilize AI prompts and corrections of Hex's AI-generated queries to improve the performance and reliability of Hex's AI features?")
 

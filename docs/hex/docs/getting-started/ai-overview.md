@@ -49,9 +49,8 @@ Use the Context Studio to monitor AI usage across your workspace and manage the 
 
 ## Security, privacy, and compliance[​](#security-privacy-and-compliance "Direct link to Security, privacy, and compliance")
 
-* **Our model providers have a zero training and zero retention policy.** For
-  more details, see [AI data privacy](/docs/trust/ai-data-privacy).
-* **BYOK**: In **Beta** on the **Enterprise** plan; option to route requests via your own API keys for supported AI providers. See [AI data privacy](/docs/trust/ai-data-privacy#bring-your-own-key-byok).
+* **Hex has zero data retention agreements in place with our AI providers. Hex's AI providers do not train on customer data.** For more details, see [AI data privacy](/docs/trust/ai-data-privacy).
+* **BYOK** (Enterprise plan only): Option to route requests via your own API keys for supported AI providers. See [AI data privacy](/docs/trust/ai-data-privacy#bring-your-own-key-byok).
 * **Terms**: See the [Hex Service Agreement: Hex Magic](/docs/legal/hex-service-agreement#hex-magic-and-hex-magic-typeahead-collectively-hex-magic).
 
 #### On this page

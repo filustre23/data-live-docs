@@ -181,7 +181,7 @@ The next time a user visits the app, they will see the results generated from th
 
 This behavior can be changed by changing the app's [run settings](/docs/share-insights/apps/app-run-settings).
 
-### Query caching[  ​](#query-caching "Direct link to Query caching")
+### Query caching[​](#query-caching "Direct link to Query caching")
 
 Hex stores a cache for query results specific to each access token. If credential sharing is **enabled**, [query caching](/docs/explore-data/cells/sql-cells/query-caching#adjusting-cache-settings) will function like any other data connection, where results are pulled from the cache instead of running in your warehouse within the timeout window.
 

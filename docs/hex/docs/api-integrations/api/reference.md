@@ -2537,4 +2537,5 @@ Copy
 `{
 
 * "sharing": {
-  + "workspace": {`
+  + "workspace": {
+    - "public": "NON`

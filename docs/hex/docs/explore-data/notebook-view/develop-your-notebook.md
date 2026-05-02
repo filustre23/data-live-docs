@@ -174,7 +174,7 @@ Hex maps the relationships between your cells into a graph that helps power its 
 
 We visualize these cell relationships into a **Graph view** that can be found in your project by clicking on the **Graph** button. Read more about the **Graph view** [here](/docs/explore-data/projects/project-execution/graph-view).
 
-#### Run modes[​](#run-modes "Direct link to Run modes")
+#### Run modes[  ​](#run-modes "Direct link to Run modes")
 
 The **Run mode** menu at the top lets you define how the cell executes in notebook view. Projects always run using Auto mode in the app run mode. Read more about run modes [here](/docs/explore-data/projects/project-execution/run-modes-and-cell-staleness).
 
