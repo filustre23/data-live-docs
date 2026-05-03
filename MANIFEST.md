@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-05-02T18:49+00:00_
+_Generated 2026-05-03T07:52+00:00_
 
-**9 sources, 4662 topics total**
+**9 sources, 4663 topics total**
 
 ## airflow
 
@@ -2598,7 +2598,7 @@ _1532 topics_
 
 Upstream: <https://code.claude.com/docs/en/>
 
-_123 topics_
+_124 topics_
 
 - `claude-code/admin-setup`
 - `claude-code/agent-sdk/agent-loop`
@@ -2654,6 +2654,7 @@ _123 topics_
 - `claude-code/costs`
 - `claude-code/data-usage`
 - `claude-code/debug-your-config`
+- `claude-code/deep-links`
 - `claude-code/desktop`
 - `claude-code/desktop-quickstart`
 - `claude-code/desktop-scheduled-tasks`

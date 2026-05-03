@@ -1036,4 +1036,7 @@ An `INT64` value between `1` and `5`, inclusive. The default value is `1`.
 
 **Note:** Although specifying larger `MAX_PARALLEL_TRIALS` values can accelerate the
 hyperparameter tuning process, acceleration can undermine the final model
-quality when you specify
+quality when you specify `VIZIER_DEFAULT` as the
+[`HPARAM_TUNING_ALGORITHM`](#hparam_tuning_algorithm)
+value. This is because the parallel trials can't benefit from concurrent
+training results.
