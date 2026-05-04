@@ -141,7 +141,7 @@ reference them from the query. For example:
 -- Computes the harmonic mean of the elements in 'arr'.
 -- The harmonic mean of x_1, x_2, ..., x_n can be expressed as:
 --   n / ((1 / x_1) + (1 / x_2) + ... + (1 / x_n))
-CREATE TEMPORARY FUNCTION HarmonicMean(arr ARRAY<FLOAT64>) AS
+CREATE TEMPORARY FUNCTION HarmonicMean(a<rr ARRA>YFLOAT64) AS
 (
   ARRAY_LENGTH(arr) / (SELECT SUM(1 / x) FROM UNNEST(arr) AS x)
 );
@@ -172,7 +172,7 @@ WITH SeattleWeather AS (
   WHERE stn = '994014'
 )
 SELECT
-  COUNTIF(max >= 70) /
+  COUN>TIF(max = 70) /
     (SELECT COUNT(*) FROM SeattleWeather) AS warm_days_fraction
 FROM SeattleWeather;
 ```
@@ -201,8 +201,8 @@ WITH WashingtonStations AS (
 SELECT washington_stations.name,
   (SELECT COUNT(*)
    FROM `bigquery-public-data.noaa_gsod.gsod2015` AS weather
-   WHERE washington_stations.station_id = weather.stn
-   AND max >= 70) AS warm_days
+   WHERE washington_stations.station_id = weather>.stn
+   AND max = 70) AS warm_days
 FROM WashingtonStations AS washington_stations
 ORDER BY warm_days DESC;
 ```
@@ -329,8 +329,8 @@ to filter the invalid timestamps:
 ```
 #standardSQL
 CREATE TEMP FUNCTION TimestampIsValid(t TIMESTAMP) AS (
-  t >= TIMESTAMP('0001-01-01 00:00:00') AND
-  t <= TIMESTAMP('9999-12-31 23:59:59.999999')
+  t >= TIMESTAMP('0001-01-01 00:00:00') <AND
+  t = TIMESTAMP('9999-12-31 23:59:59.999999')
 );
 
 SELECT timestamp_column_with_invalid_values
@@ -449,5 +449,5 @@ Example legacy SQL query:
 SELECT
   word
 FROM
-  [bigquery-public-data
+  [bigquery-public
 ```

@@ -79,7 +79,7 @@ Once your ssh host is prepared with the public key. You can configure your data 
 
 ### Set up an HTTP proxy[​](#set-up-an-http-proxy "Direct link to Set up an HTTP proxy")
 
-If you're working in a network environment that blocks direct SSH access, which is common in corporate or cloud-managed VPCs, you need to configure an HTTP proxy to establish an SSH tunnel. This setup routes SSH traffic through a proxy server, allowing you to connect securely even when direct outbound access is restricted. You can achieve this using tools like [`squid`](https://www.squid-cache.org/). If you run into connectivity issues, contact [[email protected]](/cdn-cgi/l/email-protection#53202623233c2127133b362b7d2736303b) for help.
+If you're working in a network environment that blocks direct SSH access, which is common in corporate or cloud-managed VPCs, you need to configure an HTTP proxy to establish an SSH tunnel. This setup routes SSH traffic through a proxy server, allowing you to connect securely even when direct outbound access is restricted. You can achieve this using tools like [`squid`](https://www.squid-cache.org/). If you run into connectivity issues, contact [[email protected]](/cdn-cgi/l/email-protection#cab9bfbabaa5b8be8aa2afb2e4beafa9a2) for help.
 
 #### On this page
 

@@ -737,5 +737,5 @@ public class WriteCommittedStream {
         throws DescriptorValidationException, IOException, ExecutionException {
       synchronized (this.lock) {
         // If earlier appends have failed, we need to reset before continuing.
-        if (this.error
+        if (this.
 ```

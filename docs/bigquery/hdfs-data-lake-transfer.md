@@ -41,7 +41,7 @@ BigQuery 資料移轉服務中的 Apache Hive Metastore 遷移連接器，可讓
 
 Hive Metastore 資料表轉移作業有下列限制：
 
-* Hive Metastore 轉移作業的排定執行時間之間，至少須間隔 24 小時。您仍可隨時觸發隨選執行作業。
+* Hive Metastore 轉移作業的排定執行時間間隔至少須為 30 分鐘。您仍可隨時觸發隨選執行作業。
 * 如要遷移 Hive 資料表，必須使用 Dataproc Metastore 做為目的地中繼存放區。
 * 檔案名稱必須符合 [Cloud Storage 物件命名規定](https://docs.cloud.google.com/storage/docs/objects?hl=zh-tw#naming)。
 * Cloud Storage 的單一物件大小上限為 5 TiB。如果 Hive Metastore 表格中的檔案大於 5 TiB，系統就無法轉移。
@@ -104,7 +104,7 @@ JSON 檔案中的 `condition` 欄位支援下列值，每個值都有 `partition
 * **單一表格限制：**
   + 同一個表格中不得包含多個篩選器。
   + 您無法在同一張表格中混用不同類型的條件 (例如：`GREATER_THAN` 和 `IN`)。
-* **目標分區資料欄：**篩選條件 (例如 `GREATER_THAN`、`LESS_THAN` 和 `RANGE`) 必須以主要分區資料欄為目標。
+* **目標分區資料欄：**`GREATER_THAN`、`LESS_THAN` 和 `RANGE` 等篩選條件必須以主要分區資料欄為目標。
 * **前置字串限制：**指定的篩選條件組合不得為每個資料表解析出超過 1000 個前置字串。舉例來說，如果資料表是依 `year/month/day` 分割，則 `year>2020` 等篩選條件必須產生少於 1000 個不重複的 `year=` 前置字元。
 
 ## 事前準備
@@ -448,5 +448,5 @@ JSON 檔案中的 `condition` 欄位支援下列值，每個值都有 `partition
    mkdir -p "${LOCAL_LOG_DIR}" # Ensures the base and logs directories exist
 
    # Define the unique log and zip file path for this run
-   LOG_FILE<
+   LOG_FILE
    ```
