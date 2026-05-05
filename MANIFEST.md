@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-05-04T13:29+00:00_
+_Generated 2026-05-05T01:25+00:00_
 
-**9 sources, 4663 topics total**
+**9 sources, 4673 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_1036 topics_
+_1045 topics_
 
 - `anthropic-sdk/agents-and-tools/agent-skills/best-practices`
 - `anthropic-sdk/agents-and-tools/agent-skills/enterprise`
@@ -87,6 +87,8 @@ _1036 topics_
 - `anthropic-sdk/api/admin/workspaces/rate_limits/list`
 - `anthropic-sdk/api/admin/workspaces/retrieve`
 - `anthropic-sdk/api/admin/workspaces/update`
+- `anthropic-sdk/api/authentication/overview`
+- `anthropic-sdk/api/authentication/wif-reference`
 - `anthropic-sdk/api/beta`
 - `anthropic-sdk/api/beta/agents`
 - `anthropic-sdk/api/beta/agents/archive`
@@ -1031,7 +1033,14 @@ _1036 topics_
 - `anthropic-sdk/build-with-claude/token-counting`
 - `anthropic-sdk/build-with-claude/usage-cost-api`
 - `anthropic-sdk/build-with-claude/vision`
+- `anthropic-sdk/build-with-claude/wif-providers/aws`
+- `anthropic-sdk/build-with-claude/wif-providers/azure`
+- `anthropic-sdk/build-with-claude/wif-providers/gcp`
+- `anthropic-sdk/build-with-claude/wif-providers/github-actions`
+- `anthropic-sdk/build-with-claude/wif-providers/kubernetes`
+- `anthropic-sdk/build-with-claude/wif-providers/okta`
 - `anthropic-sdk/build-with-claude/working-with-messages`
+- `anthropic-sdk/build-with-claude/workload-identity-federation`
 - `anthropic-sdk/build-with-claude/workspaces`
 - `anthropic-sdk/get-started`
 - `anthropic-sdk/intro`
@@ -2729,7 +2738,7 @@ _124 topics_
 
 Upstream: <https://docs.getdbt.com/docs/>
 
-_1002 topics_
+_1003 topics_
 
 - `dbt-core/best-practices/best-practice-workflows`
 - `dbt-core/best-practices/clone-incremental-models`
@@ -3087,6 +3096,7 @@ _1002 topics_
 - `dbt-core/docs/platform/about-platform/architecture`
 - `dbt-core/docs/platform/about-platform/browsers`
 - `dbt-core/docs/platform/about-platform/change-your-dbt-cloud-theme`
+- `dbt-core/docs/platform/about-platform/login`
 - `dbt-core/docs/platform/about-platform/tenancy`
 - `dbt-core/docs/platform/about-profiles`
 - `dbt-core/docs/platform/account-integrations`

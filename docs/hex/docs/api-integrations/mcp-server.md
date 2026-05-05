@@ -28,7 +28,7 @@ The Hex MCP Server can only answer text-based prompts, it is not currently possi
 
 Threads created through Hex MCP Server behave the same as [Threads in the Hex app](/docs/explore-data/threads#data-sources): the agent automatically selects among the data connections the user has access to in order to answer a question. If your workspace has a [default data connection](/tutorials/ai-best-practices/setup-for-ai-agents#setup-the-default-data-connection), the agent searches that connection first.
 
-Admins can restrict which data connections the Hex Agent may use when Threads are started from external integrations, including the Hex MCP Server and [Hex Agent in Slack](/docs/share-insights/hex-agent-in-slack), under **Settings** → **Integrations** → **External integration data connection access**, or on each connection's **Access** tab under **Settings** → **Data sources**. For more information, see [Hex Agent data connection access](/docs/api-integrations/hex-agent-data-connection-access).
+Admins can restrict which data connections the Hex Agent may use when Threads are started from external integrations, including the Hex MCP Server and [Hex Agent in Slack](/docs/share-insights/hex-agent-in-slack), under **Settings** → **Integrations** → **Agent integration data connection access**, or on each connection's **Access** tab under **Settings** → **Data sources**. For more information, see [Hex Agent data connection access](/docs/api-integrations/hex-agent-data-connection-access).
 
 For best practices on descriptions, exclusions, and permissions, see [Optimizing your data connections for the Hex Agent](/tutorials/ai-best-practices/optimizing-data-connections-for-agents).
 

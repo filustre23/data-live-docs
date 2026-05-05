@@ -31,7 +31,7 @@ Because the Hex Agent uses [Threads](/docs/explore-data/threads) as its underlyi
 
 To answer a user's question, the agent searches across all connections, databases, schemas, and tables that are [included for AI](/docs/explore-data/data-browser#exclusion-and-endorsement) and that the user has access to. If your workspace has a [default data connection](/tutorials/ai-best-practices/setup-for-ai-agents#setup-the-default-data-connection), the agent searches that connection first.
 
-Admins can restrict which data connections the Hex Agent may use when Threads are started from external integrations, including Slack and the [Hex MCP Server](/docs/api-integrations/mcp-server), under **Settings** → **Integrations** → **External integration data connection access**, or on each connection’s **Access** tab under **Settings** → **Data sources**. For more information, see [Hex Agent data connection access](/docs/api-integrations/hex-agent-data-connection-access).
+Admins can restrict which data connections the Hex Agent may use when Threads are started from external integrations, including Slack and the [Hex MCP Server](/docs/api-integrations/mcp-server), under **Settings** → **Integrations** → **Agent integration data connection access**, or on each connection’s **Access** tab under **Settings** → **Data sources**. For more information, see [Hex Agent data connection access](/docs/api-integrations/hex-agent-data-connection-access).
 
 For best practices on descriptions, exclusions, and permissions, see [Optimizing your data connections for the Hex Agent](/tutorials/ai-best-practices/optimizing-data-connections-for-agents).
 

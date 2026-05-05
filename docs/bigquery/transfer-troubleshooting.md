@@ -64,7 +64,7 @@ resource.labels.config_id="CONFIG_ID"
 
     如果您將 Cloud Billing 匯出資料載入至 BigQuery，可能會遇到 `Quota Exceeded` 錯誤。Cloud Billing 匯出資料表和 BigQuery 資料移轉服務建立的目的地 BigQuery 資料表都會經過分割。設定這類 BigQuery 資料移轉服務工作時，如果選擇「覆寫」選項，系統會根據匯出的資料量，顯示配額錯誤。如要瞭解如何排解配額問題，請參閱「[解決配額與限制錯誤](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas?hl=zh-tw)」。
 
-    如果錯誤是因 Cloud Billing 匯出作業的 BigQuery 資料移轉服務工作所致，請注意，由於個別的 Cloud Billing 匯出資料表已分割，BigQuery 資料移轉服務建立的目標資料表也會分割，因此設定這類資料移轉工作時選擇「覆寫」選項，會導致 (DML) 配額錯誤，具體情況取決於帳單帳戶的建立時間。如要瞭解如何排解配額問題，請參閱「[排解配額和限制錯誤](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas?hl=zh-tw)」。
+    如果錯誤是因 Cloud Billing 匯出作業的 BigQuery 資料移轉服務工作所致，請注意，由於個別 Cloud Billing 匯出資料表已分割，BigQuery 資料移轉服務建立的目標資料表也會分割，因此設定這類資料移轉工作時選擇「覆寫」選項，會導致 (DML) 配額錯誤，具體情況取決於帳單帳戶的建立時間。如要瞭解如何排解配額問題，請參閱「[排解配額和限制錯誤](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas?hl=zh-tw)」。
 
 發生錯誤：`The caller does not have permission.`
 :   **解決方法：**確認 Google Cloud 控制台中登入的帳戶，與您建立轉移作業時為 BigQuery 資料移轉服務 選取的帳戶相同。
@@ -88,7 +88,7 @@ resource.labels.config_id="CONFIG_ID"
 :   **解決方法：**如果資料來源中的 CSV 檔案設定與轉移設定中的 CSV 檔案設定不符，就可能發生這個錯誤。舉例來說，如果「要略過的標題列」設為 `0`，但來源 CSV 檔案包含 1 個以上的標題列，就可能發生這個錯誤。如要修正這項錯誤，請確認轉移設定中的 CSV 設定正確無誤，且與來源 CSV 檔案的設定相符。
 
 發生錯誤：`Error 400: DTS service agent needs iam.serviceAccounts.getAccessToken permission or [SERVICE_ACCOUNT] doesn't exist.`
-:   **根本原因：**這項錯誤表示 BigQuery 資料移轉服務 (DTS) 服務代理缺少必要權限，無法模擬用於移轉作業的服務帳戶。這通常發生在跨專案授權情境，或是使用 Terraform 等基礎架構即程式碼 (IaC) 工具設定轉移時。
+:   **根本原因：**這項錯誤表示 BigQuery 資料移轉服務 (DTS) 服務代理缺少必要權限，無法模擬用於移轉作業的服務帳戶。這通常發生在跨專案授權情境，或是使用 Terraform 等基礎架構即程式碼 (IaC) 工具設定移轉時。
 :   **解決方法：**將服務帳戶權杖建立者角色 (`roles/iam.serviceAccountTokenCreator`) 授予 DTS 服務代理，讓該代理模擬特定服務帳戶。
 
     ```
@@ -100,7 +100,7 @@ resource.labels.config_id="CONFIG_ID"
     其中：
 
 * service\_account 是用來授權轉移作業的帳戶電子郵件地址。
-* destination\_project\_number 是移轉設定所在的專案編號。如要瞭解如何找出專案編號，請參閱「[識別專案](https://docs.cloud.google.com/resource-manager/docs/creating-managing-projects?hl=zh-tw#identifying_projects)」。
+* destination\_project\_number 是移轉設定所在的專案編號。如要瞭解如何找出專案編號，請參閱「[找出專案名稱、編號和 ID](https://docs.cloud.google.com/resource-manager/docs/view-update-projects?hl=zh-tw#identifying_projects)」。
 
 發生錯誤：`For asset "ASSET", no eligible column found for splitting (Reason: Primary or Indexed Key columns found, but none are of supported types (INTEGER, TINYINT, SMALLINT, FLOAT, REAL, DOUBLE, NUMERIC, BIGINT, DECIMAL, DATE, BOOLEAN))`
 :   **解決方法：**嘗試將超過 2,000,000 筆記錄從來源資料表移轉至 BigQuery 資料表時，如果來源資料表沒有主鍵或支援資料類型的索引資料欄，就可能發生這個錯誤。如要解決這個問題，請在來源資料表中，將支援的資料類型設為其中一個資料欄的主鍵或索引資料欄。詳情請參閱移轉來源指南的限制一節。
@@ -114,7 +114,7 @@ resource.labels.config_id="CONFIG_ID"
 
     即使目的地資料表已存在，且服務帳戶具備標準資料編輯者角色，Cloud Storage 移轉作業仍會因資料表建立作業遭拒存取而失敗。
 :   **原因：**如果 Cloud Storage 轉移作業包含超過 10,000 個檔案，且未授予 `bigquery.tables.create` 權限，就會發生這個錯誤。如果移轉的檔案超過 10,000 個，服務會將資料分片到動態建立的暫時暫存資料表。即使專案已註冊大量移轉功能 (或配額增加要求已獲准)，仍須具備 bigquery.tables.create 權限。
-:   **解決方法：**如要成功移轉超過 10,000 個檔案，請確認你符合下列兩項條件：
+:   **解決方法：**如要順利轉移超過 10,000 個檔案，請確認你符合下列兩項條件：
 
 1. **確認配額和功能註冊：**確認專案已註冊大量 Cloud Storage 轉移 (超過 10,000 個檔案)。如要轉移超過 10,000 個檔案，請[與支援團隊聯絡](https://docs.cloud.google.com/bigquery/docs/getting-support?hl=zh-tw)，要求增加每次轉移作業的檔案數量上限。
 2. **授予必要 IAM 權限：**將目的地資料集上的 `bigquery.tables.create` 權限，授予執行轉移作業的服務帳戶或使用者身分。這項權限包含在 BigQuery 資料編輯者 (`roles/bigquery.dataEditor`) 和 BigQuery 管理員 (`roles/bigquery.admin`) 角色中。如果授予必要權限後仍持續發生失敗情況，請[與支援團隊聯絡](https://docs.cloud.google.com/bigquery/docs/getting-support?hl=zh-tw)，確認允許清單狀態。
@@ -170,7 +170,7 @@ resource.labels.config_id="CONFIG_ID"
     如果移轉擁有者沒有所有必要權限，請[更新憑證](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#update_credentials)，授予必要權限。您也可以將轉移擁有者變更為其他具備必要權限的使用者。
 
 發生錯誤：`Authentication failure: User Id not found. Error code: INVALID_USERID`
-:   **解決方法：**移轉擁有者具有無效的使用者 ID。如要將轉移作業擁有者變更為其他使用者，請[更新他們的憑證](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#update_credentials)。如果您使用服務帳戶，也請確認執行資料移轉作業的帳戶具備[使用服務帳戶的所有必要權限](https://docs.cloud.google.com/bigquery/docs/use-service-accounts?hl=zh-tw#required_permissions)。
+:   **解決方法：**轉移擁有者具有無效的使用者 ID。如要將轉移作業擁有者變更為其他使用者，請[更新他們的憑證](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#update_credentials)。如果您使用服務帳戶，也請確認執行資料移轉作業的帳戶具備[使用服務帳戶的所有必要權限](https://docs.cloud.google.com/bigquery/docs/use-service-accounts?hl=zh-tw#required_permissions)。
 
 發生錯誤：`The user does not have permission`
 :   **解決方法：**確認轉移擁有者是服務帳戶，且服務已設定所有必要權限。另一種可能性是，使用的服務帳戶是在其他專案下建立，而非用於建立這項轉移作業的專案。如要解決跨專案權限問題，請參閱下列資源：
@@ -300,7 +300,7 @@ resource.labels.config_id="CONFIG_ID"
 :   **解決方法：**將 Blob 儲存空間資料路徑中的[萬用字元](https://docs.cloud.google.com/bigquery/docs/blob-storage-transfer-intro?hl=zh-tw#wildcard-support)數量減少至 0 或 1，檔案上限就會增加至 10,000,000 個。您也可以將來源分割成多個轉移設定，每個設定轉移一部分來源。
 
 發生錯誤：`Size of files in transfer exceeds the limit of 15 TB.`
-:   **解決方法：**分成多個移轉設定，每個設定移轉一部分來源資料。
+:   **解決方法：**將來源資料分成多個部分，並分別建立移轉設定。
 
 發生錯誤：`Provided Azure SAS Token does not have required permissions.`
 :   **解決方法：**確認移轉設定中的 Azure SAS 權杖正確無誤。詳情請參閱「[共用存取簽章 (SAS)](https://docs.cloud.google.com/bigquery/docs/blob-storage-transfer-intro?hl=zh-tw#shared-access-signature)」。
@@ -333,7 +333,7 @@ resource.labels.config_id="CONFIG_ID"
 問題：轉移作業成功執行，但部分帳戶未顯示在目的地資料表中。
 :   **解決方法：**帳戶未顯示在報表中的原因有很多，常見原因包括：
 
-    * 如果要求當天沒有任何報表活動，系統就不會產生資料列，因此會發生這種情況。
+    * 如果指定日期沒有任何報表活動，系統就不會產生資料列，因此會發生這種情況。
     * 如果 Google Ads 帳戶處於閒置狀態，或`CANCELLED`，也可能發生這種情況。Google Ads API 不支援對停用帳戶的查詢，因此 Google Ads 連接器已從轉移作業中篩除停用帳戶。如要重新啟用 Google Ads 帳戶，請參閱「[重新啟用已取消的 Google Ads 帳戶](https://support.google.com/google-ads/answer/2375392?hl=zh-tw)」。
 
 發生錯誤：`AUTH_ERROR_TWO_STEP_VERIFICATION_NOT_ENROLLED`
@@ -355,7 +355,7 @@ resource.labels.config_id="CONFIG_ID"
 :   **解決方法：**設定 Google Ads 移轉作業的使用者必須擁有 Google Ads 帳戶/登入資訊。
 
 發生錯誤：`Request is missing required authentication credential`
-:   **解決方法：**使用者或服務帳戶沒有 Ads 帳戶的存取權。按照「[必要權限](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer?hl=zh-tw#required_permissions)」一節的說明，授予使用者或服務帳戶必要權限。
+:   **解決方法：**使用者或服務帳戶沒有 Ads 帳戶的存取權。按照「[必要權限](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer?hl=zh-tw#required_permissions)」一文的說明，授予使用者或服務帳戶必要權限。
 
 發生錯誤：`ERROR_GETTING_RESPONSE_FROM_BACKEND.`
 :   **解決方法：**如果 Google Ads 移轉作業執行失敗並傳回 `ERROR_GETTING_RESPONSE_FROM_BACKEND`，請在移轉設定中[**啟用「排除已移除/停用的項目」選項**](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer?hl=zh-tw#setup-data-transfer)，並[設定補充作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)，嘗試擷取在移轉作業執行失敗影響期間內的相關資料。
@@ -487,7 +487,7 @@ resource.labels.config_id="CONFIG_ID"
 :   **解決方法：**確認指定的資產名稱有效，且不含任何開頭或結尾空格。[建立 Mailchimp 轉移作業](https://docs.cloud.google.com/bigquery/docs/mailchimp-transfer?hl=zh-tw)時，建議按一下「瀏覽」，從可用物件清單中選取資產。
 
 發生錯誤：`PERMISSION_DENIED: Permission denied. Your credentials may lack required access.`
-:   **解決方法：**確認 Mailchimp 使用者具備所有必要權限。[`Admin` Mailchimp 的使用者層級](https://mailchimp.com/help/manage-user-levels-in-your-account/)必須具備最低存取權，才能轉移所有 Mailchimp 物件。
+:   **解決方法：**確認 Mailchimp 使用者具備所有必要權限。Mailchimp 中的[`Admin`使用者層級](https://mailchimp.com/help/manage-user-levels-in-your-account/)必須具備最低存取權，才能轉移所有 Mailchimp 物件。
 
 發生錯誤：`FAILED_PRECONDITION: Operation failed due to precondition violation (ex- Rate limit exceeded, Server Error). Please try again later.`
 :   **解決方法：**請稍待片刻，再重試資料移轉。你也可以查看 [Mailchimp 狀態](https://status.mailchimp.com/)，瞭解是否有服務中斷的情況。
@@ -514,13 +514,13 @@ resource.labels.config_id="CONFIG_ID"
 發生錯誤：`SERVICE_UNAVAILABLE. Timed out when starting to transfer asset asset-name. Ensure the datasource is reachable and the datasource configuration (Credentials, Network Attachment etc.) is correct.`
 
 發生錯誤：`DEADLINE_EXCEEDED. Timed out when starting to transfer asset asset-name. Ensure the datasource is reachable and the datasource configuration (Credentials, Network Attachment etc.) is correct.`
-:   **解決方法：**檢查提供的資料庫詳細資料是否正確，並確認移轉設定使用的網路連結設定正確無誤。轉移作業也可能未在期限內完成。
+:   **解決方法：**檢查提供的資料庫詳細資料是否正確，並確認移轉設定使用的網路連結設定正確無誤。也可能轉移作業未在期限內完成。
 
 發生錯誤：`INTERNAL`
 :   **解決方法：**轉移失敗的原因是其他問題。如要解決這個問題，請[與 Cloud Customer Care 團隊聯絡](https://docs.cloud.google.com/bigquery/docs/getting-support?hl=zh-tw)。
 
 發生錯誤：`INVALID_ARGUMENT. Connection to the host and port failed. Please check that the host, port, encryptionMode and network attachment are correct.`
-:   **解決方法：**請確認主機、通訊埠、加密模式和網路設定正確無誤。確認網路連線，以及資料庫伺服器是否可存取。如果 `EncryptionMode` 設為 `FULL`，請確認伺服器支援必要通訊協定、具有有效憑證，且允許安全連線。如果 `EncryptionMode` 設為 `DISABLE`，請確認伺服器允許非 SSL 連線。查看應用程式和資料庫記錄，瞭解連線或 SSL/TLS 相關錯誤。
+:   **解決方法：**請確認主機、通訊埠、加密模式和網路設定正確無誤。確認網路連線，以及資料庫伺服器是否可存取。如果 `EncryptionMode` 設為 `FULL`，請確認伺服器支援必要通訊協定、具有有效憑證，且允許安全連線。如果 `EncryptionMode` 設為 `DISABLE`，請確認伺服器允許非 SSL 連線。檢查應用程式和資料庫記錄，找出與連線或 SSL/TLS 相關的錯誤。
 
 ## Oracle 轉移問題
 
@@ -559,7 +559,7 @@ resource.labels.config_id="CONFIG_ID"
 :   **解決方法：**將預設表空間指派給使用者。詳情請參閱「[指派預設資料表空間](https://docs.oracle.com/cd/B19306_01/network.102/b14266/admusers.htm#i1006219)」一文。
 
 發生錯誤：`403 PERMISSION_DENIED. Required 'compute.subnetworks.use' permission for project`
-:   **解決方法：**如果網路連結所在的專案與傳輸設定所在的專案不同，就可能發生這個錯誤。如要修正這個問題，您必須在網路連結所在的專案中，授予服務帳戶 (例如 `service-customer_project_number@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com`) 下列權限：
+:   **解決方法：**如果網路附件所在的專案與轉移設定所在的專案不同，就可能發生這個錯誤。如要修正這個問題，您必須在網路連結所在的專案中，授予服務帳戶 (例如 `service-customer_project_number@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com`) 下列權限：
 
     * `compute.networkAttachments.get`
     * `compute.networkAttachments.update`
@@ -609,16 +609,16 @@ resource.labels.config_id="CONFIG_ID"
 發生錯誤：`SERVICE_UNAVAILABLE. Timed out when starting to transfer asset asset-name. Ensure the datasource is reachable and the datasource configuration (Credentials, Network Attachment etc.) is correct.`
 
 發生錯誤：`DEADLINE_EXCEEDED. Timed out when starting to transfer asset asset-name. Ensure the datasource is reachable and the datasource configuration (Credentials, Network Attachment etc.) is correct.`
-:   **解決方法：**檢查提供的資料庫詳細資料是否正確，並確認移轉設定使用的網路連結設定正確無誤。轉移作業也可能未在期限內完成。
+:   **解決方法：**檢查提供的資料庫詳細資料是否正確，並確認移轉設定使用的網路連結設定正確無誤。也可能轉移作業未在期限內完成。
 
 發生錯誤：`INTERNAL`
 :   **解決方法：**轉移失敗的原因是其他問題。如要解決這個問題，請[與 Cloud Customer Care 團隊聯絡](https://docs.cloud.google.com/bigquery/docs/getting-support?hl=zh-tw)。
 
 發生錯誤：`INVALID_ARGUMENT. Connection to the host and port failed. Please check that the host, port, encryptionMode and network attachment are correct.`
-:   **解決方法：**請確認主機、通訊埠、加密模式和網路設定正確無誤。確認網路連線，以及資料庫伺服器是否可存取。如果 `EncryptionMode` 設為 `FULL`，請確認伺服器支援必要通訊協定、具有有效憑證，且允許安全連線。如果 `EncryptionMode` 設為 `DISABLE`，請確認伺服器允許非 SSL 連線。查看應用程式和資料庫記錄，瞭解連線或 SSL/TLS 相關錯誤。
+:   **解決方法：**請確認主機、通訊埠、加密模式和網路設定正確無誤。確認網路連線，以及資料庫伺服器是否可存取。如果 `EncryptionMode` 設為 `FULL`，請確認伺服器支援必要通訊協定、具有有效憑證，且允許安全連線。如果 `EncryptionMode` 設為 `DISABLE`，請確認伺服器允許非 SSL 連線。檢查應用程式和資料庫記錄，找出與連線或 SSL/TLS 相關的錯誤。
 
 發生錯誤：`INVALID_ARGUMENT: For Asset "postgres"."auth"."sessions", row count exceeds the max supported unIndexed read size of 2000000 records.`
-:   **解決方法：**如果您嘗試將超過 2,000,000 筆記錄從 PostgreSQL 資料表轉移至 BigQuery 資料表，但 PostgreSQL 資料表中沒有主鍵或索引資料欄，就可能發生這項錯誤。如要解決這個問題，請在資料表中新增主鍵或索引資料欄。詳情請參閱「[限制](https://docs.cloud.google.com/bigquery/docs/postgresql-transfer?hl=zh-tw#limitations)」一節。
+:   **解決方法：**如果您嘗試將超過 2,000,000 筆記錄從 PostgreSQL 資料表轉移至 BigQuery 資料表，但 PostgreSQL 資料表中沒有主鍵或索引資料欄，就可能發生這個錯誤。如要解決這個問題，請在資料表中新增主鍵或索引資料欄。詳情請參閱「[限制](https://docs.cloud.google.com/bigquery/docs/postgresql-transfer?hl=zh-tw#limitations)」一節。
 
 ## Salesforce 轉移問題
 
@@ -640,10 +640,10 @@ resource.labels.config_id="CONFIG_ID"
 :   **解決方法：**這項服務暫時無法處理要求。請稍候片刻，然後再試一次。
 
 發生錯誤：`DEADLINE_EXCEEDED`
-:   **解決方法：**轉移作業未在六小時內完成。將大型轉移作業分割為多個小型作業，盡量縮短轉移作業的執行時間。
+:   **解決方法：**轉移作業未在六小時內完成。將大型轉移作業分割為多個較小的作業，盡量縮短轉移作業的執行時間。
 
 發生錯誤：`Failed to create recordReader to read partition : Batch failed. BatchId='batch_id', Reason='FeatureNotEnabled : Binary field not supported'`
-:   **解決方法：**連接器不支援含有二進位欄位的 sObject 資料結構。從移轉作業中移除含有二進位欄位的 sObject 資料結構。詳情請參閱 Salesforce 說明文件中的「[Error 'Batch failed: FeatureNotEnabled: Binary field not supported' when you export related object](https://help.salesforce.com/s/articleView?id=000382669&type=1)」一文。
+:   **解決方法：**連接器不支援含有二進位欄位的 sObject 資料結構。從移轉作業中移除含有二進位欄位的 sObject 資料結構。詳情請參閱 Salesforce 說明文件中的「[Error 'Batch failed: FeatureNotEnabled: Binary field not supported' when you export related object](https://help.salesforce.com/s/articleView?id=000382669&type=1)」。
 
 發生錯誤：`RESOURCE_EXHAUSTED: PrepareQuery failed : ExceededQuota : ApiBatchItems Limit exceeded`
 :   **解決方法：**如果工作執行次數超過每日 `ApiBatchItems` API 限制，就會顯示這則錯誤訊息。Salesforce 設有每日 API 限制，每 24 小時會重設一次。如要解決這項錯誤，建議您將轉移作業分批進行並排定時間，以免超過每日批次 API 限制。你也可以聯絡 Salesforce 支援團隊，要求提高每日限制。
@@ -658,7 +658,7 @@ resource.labels.config_id="CONFIG_ID"
 :   **解決方法：**確認使用者設定檔或權限集包含必要物件和欄位層級權限，才能擷取 sObject。請與管理員聯絡，要求對方更新這些權限，或是指派具備必要存取權的角色。
 
 發生錯誤：`FAILED_PRECONDITION: Cannot establish connection to Salesforce to describe SObject: 'SObject_Name' due to error: TotalRequests Limit exceeded., Cause:null Retry after some time post quota reset.`
-:   **解決方法：**如果[載入工作超過限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#load_jobs)，就可能發生這項錯誤。請等待配額重設後再試一次。
+:   **解決方法：**如果[載入工作超過限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#load_jobs)，就會發生這項錯誤。請等待配額重設後再試一次。
 
 發生錯誤：`FAILED_PRECONDITION: There was an issue connecting to Salesforce Bulk API.`
 :   **解決方法：**如果您在轉移作業中加入網路連結，但未設定 Public NAT 和 IP 允許清單，就可能發生這個錯誤。如要解決這項錯誤，請完成「[為 Salesforce 移轉作業設定 IP 許可清單](https://docs.cloud.google.com/bigquery/docs/salesforce-transfer?hl=zh-tw#salesforce-allowlist)」一文中的所有步驟。
@@ -672,9 +672,9 @@ resource.labels.config_id="CONFIG_ID"
 :   **解決方法：**如果自訂應用程式的設定方式有問題，就可能發生這項錯誤。建議按照下列步驟解除安裝並重新安裝自訂應用程式。
 
     1. [解除安裝 Shopify 應用程式](https://help.shopify.com/en/manual/apps/uninstalling-apps)。
-    2. [建立自訂應用程式](https://help.shopify.com/en/manual/apps/install-setup-apps#create-and-install-a-custom-app)，並設定下列項目：
+    2. [建立自訂應用程式](https://help.shopify.com/en/manual/apps/install-setup-apps#create-and-install-a-custom-app)，並使用下列設定。
        1. 建立應用程式時，請選取「自訂發布」。請提供商店網域或管理員網址。設定完成後，Shopify 會產生連結，供你完成應用程式安裝。詳情請參閱「[選取發布方式](https://shopify.dev/docs/apps/launch/distribution/select-distribution-method)」。
-       2. 建立應用程式時，按一下「API access request」，然後選取「Enable storefront」並啟用 `read_all_orders` 範圍。
+       2. 建立應用程式時，按一下「API access request」(API 存取要求)，然後選取「Enable storefront」(啟用店面) 並啟用 `read_all_orders` 範圍。
        3. 安裝自訂應用程式。
     3. 重新安裝自訂應用程式後，請再次執行資料移轉。
 
@@ -704,10 +704,10 @@ resource.labels.config_id="CONFIG_ID"
 :   **解決方法：**確認密鑰和帳戶 ID 正確無誤。如要瞭解如何擷取這項資訊，請參閱「[Stripe 必要條件](https://docs.cloud.google.com/bigquery/docs/stripe-transfer?hl=zh-tw#stripe-prerequisites)」一文。
 
 發生錯誤：`RESOURCE_EXHAUSTED: Rate limit exceeded.`
-:   **解決方法：**你可能超過 Stripe API 使用頻率限制。請稍候片刻，再重試資料移轉工作要求。為避免發生這個問題，建議減少資料移轉工作的頻率，並限制從相同帳戶進行的並行移轉作業。
+:   **解決方法：**你可能超過 Stripe API 使用頻率限制。請稍候片刻，再重試資料移轉工作要求。為避免發生這個問題，建議減少資料移轉作業的頻率，並限制從相同帳戶進行的並行傳輸作業。
 
 發生錯誤：`UNAVAILABLE: Stripe service is temporarily unavailable. Please try again shortly.`
-:   **解決方法：**請稍待片刻，再重試資料移轉。如要查看是否有服務中斷情形，請前往 [Stripe 狀態頁面](https://status.stripe.com/)。
+:   **解決方法：**請稍待片刻，再重試資料移轉。如要確認是否有服務中斷情形，請查看 [Stripe 狀態](https://status.stripe.com/)。
 
 發生錯誤：`UNKNOWN: An unknown error occurred while processing the request.`
 :   **解決方法：**確認私密金鑰和帳戶 ID 有效，且所選物件具備必要權限，然後重試移轉作業。如果問題仍未解決，請[與 Cloud Customer Care 團隊聯絡](https://docs.cloud.google.com/bigquery/docs/getting-support?hl=zh-tw)。
@@ -771,7 +771,7 @@ resource.labels.config_id="CONFIG_ID"
 發生錯誤：`No reports for reporting job with name name.`
 :   **解決方法：**這並不是錯誤。這是一則警告訊息，表示系統找不到指定報告的資料。您可以忽略這則警告。未來的移轉作業仍會繼續執行。
 
-**注意：** 對 YouTube 內容管理工具來說，某些檔案每月只能取得一次。其他時間這些每月報告會顯示為「遺漏」。這是預期的行為。您無須採取任何行動，如果報告不應該遺漏，請透過[說明論壇](https://productforums.google.com/forum/?hl=zh-tw#!forum/youtube)與 YouTube 支援團隊聯絡。
+**注意：** 對 YouTube 內容管理員來說，某些檔案每月只能取得一次。其他時間這些每月報告會顯示為「遺漏」。這是預期的行為。您無須採取任何行動，如果報告不應該遺漏，請透過[說明論壇](https://productforums.google.com/forum/?hl=zh-tw#!forum/youtube)與 YouTube 支援團隊聯絡。
 
 問題：移轉作業建立的結果資料表不完整，或結果不如預期。
 :   **解決方法：**如果您有多個帳戶，則必須在接收 YouTube 權限對話方塊中選擇正確的帳戶。
@@ -798,11 +798,11 @@ resource.labels.config_id="CONFIG_ID"
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-02 (世界標準時間)。
+上次更新時間：2026-05-04 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-04 (世界標準時間)。"],[],[]]

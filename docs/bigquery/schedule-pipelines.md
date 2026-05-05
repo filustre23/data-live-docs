@@ -16,13 +16,13 @@
 
 本文說明如何排定 [BigQuery 管道](https://docs.cloud.google.com/bigquery/docs/pipelines-introduction?hl=zh-tw)的執行時間，包括如何排定管道執行時間，以及檢查排定的管道執行作業。
 
-管道是由 [Dataform](https://docs.cloud.google.com/dataform/docs/overview?hl=zh-tw) 支援。
-每個管道排程都會使用您的 Google 帳戶使用者憑證或[自訂服務帳戶](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#about-service-accounts)執行，您可以在設定排程時選取。
+管道由 [Dataform](https://docs.cloud.google.com/dataform/docs/overview?hl=zh-tw) 提供支援。
+每個管道排程都會使用 Google 帳戶使用者憑證或[自訂服務帳戶](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#about-service-accounts)執行，您可以在設定排程時選取。
 
 您對管道所做的變更會自動儲存，但只有您和專案中獲派 Dataform 管理員角色的使用者可以存取。如要使用新版管道更新排程，請[部署管道](#deploy)。
 部署後，排程就會更新為使用目前版本的管道。排程一律會執行最新部署的版本。
 
-含有筆記本的管道排程會使用[預設執行階段規格](https://docs.cloud.google.com/colab/docs/runtimes?hl=zh-tw#default_runtime_specifications)。在排定執行的管道中，如果包含筆記本，BigQuery 會將筆記本輸出內容寫入排程建立期間選取的 [Cloud Storage 值區](https://docs.cloud.google.com/storage/docs/buckets?hl=zh-tw)。
+含有筆記本的管道排程會使用[預設執行階段規格](https://docs.cloud.google.com/colab/docs/runtimes?hl=zh-tw#default_runtime_specifications)。在排定時間執行含有筆記本的管道時，BigQuery 會將筆記本輸出內容寫入排程建立期間選取的 [Cloud Storage 值區](https://docs.cloud.google.com/storage/docs/buckets?hl=zh-tw)。
 
 ## 事前準備
 
@@ -52,15 +52,15 @@
 :   按照「[授予專案的單一角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw#grant-single-role)」一文的說明，在所選專案中，將 Notebook Executor User 角色授予服務帳戶。
 
 [儲存空間管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/storage?hl=zh-tw#storage.admin) (`roles/storage.admin`)
-:   按照「[將主體新增至 bucket 層級政策](https://docs.cloud.google.com/storage/docs/access-control/using-iam-permissions?hl=zh-tw#bucket-add)」一文的說明，將服務帳戶新增為 Cloud Storage bucket 的主體，並授予該主體「Storage Admin」角色。您打算使用這個 bucket 儲存在排定時間執行的管線中，筆記本的輸出內容。
+:   按照「[將主體新增至 bucket 層級政策](https://docs.cloud.google.com/storage/docs/access-control/using-iam-permissions?hl=zh-tw#bucket-add)」一文的說明，將服務帳戶新增為 Cloud Storage bucket 的主體，並授予該主體「Storage Admin」角色。您打算使用這個 bucket 儲存在排定時間執行的管道中，筆記本的輸出內容。
 
 此外，您必須將下列角色授予預設的 Dataform 服務代理：
 
-[服務帳戶憑證建立者](https://docs.cloud.google.com/iam/docs/service-account-permissions?hl=zh-tw#token-creator-role) (`roles/iam.serviceAccountTokenCreator`)
+[服務帳戶權杖建立者](https://docs.cloud.google.com/iam/docs/service-account-permissions?hl=zh-tw#token-creator-role) (`roles/iam.serviceAccountTokenCreator`)
 :   請按照「[授予服務帳戶憑證建立存取權](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#grant-token-creation-access)」一文的說明，將預設 Dataform 服務代理程式新增為服務帳戶的主體，並將「服務帳戶憑證建立者」角色授予這個主體。
 
 [服務帳戶使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/iam?hl=zh-tw#iam.serviceAccountUser) (`roles/iam.serviceAccountUser`)
-:   按照[使用 Google Cloud 控制台授予或撤銷多個 IAM 角色](https://docs.cloud.google.com/iam/docs/manage-access-service-accounts?hl=zh-tw#multiple-roles-console)的步驟，將服務帳戶使用者角色授予自訂服務帳戶的預設 Dataform 服務代理程式。
+:   按照[使用 Google Cloud 控制台授予或撤銷多個 IAM 角色](https://docs.cloud.google.com/iam/docs/manage-access-service-accounts?hl=zh-tw#multiple-roles-console)的步驟，在自訂服務帳戶中，將服務帳戶使用者角色授予預設的 Dataform 服務代理程式。
 
 如要進一步瞭解 Dataform 中的服務帳戶，請參閱「[關於 Dataform 中的服務帳戶](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#about-service-accounts)」。
 
@@ -103,18 +103,18 @@
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
 
-   如果沒有看到左側窗格，請按一下「展開左側窗格」圖示 last\_page 開啟窗格。
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Explorer」窗格中展開專案，按一下「Pipelines」，然後選取管道。
 4. 按一下「Schedule」(排程)。
 5. 在「排定管道」窗格的「排程名稱」欄位中，輸入排程名稱。
-6. 在「Authentication」(驗證) 區段中，使用 Google 帳戶使用者憑證或服務帳戶授權管道。
+6. 在「驗證」部分，使用 Google 帳戶使用者憑證或服務帳戶授權管道。
 
    * 如要使用 Google 帳戶使用者憑證 ([預覽](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))，請選取「以我的使用者憑證執行」。
    * 如要使用服務帳戶，請選取「以所選服務帳戶執行」，然後選取服務帳戶。
 7. 如果管道包含筆記本，請在「筆記本選項」部分的「執行階段範本」欄位中，選取 Colaboratory 筆記本執行階段範本或預設執行階段規格。如要進一步瞭解如何建立 Colab 筆記本執行階段範本，請參閱「[建立執行階段範本](https://docs.cloud.google.com/colab/docs/create-runtime-template?hl=zh-tw)」。
 
    **注意：**筆記本執行階段範本必須與管道位於相同區域。**注意：**如果您沒有使用 Colab 筆記本執行階段範本的[必要角色](#required_roles)，仍可使用預設執行階段規格執行及排定管道。
-8. 如果管道包含筆記本，請在「Notebook options」(筆記本選項) 部分的「Cloud Storage bucket」(Cloud Storage 值區) 欄位中，按一下「Browse」(瀏覽)，然後選取或建立 Cloud Storage 值區，用於儲存管道中筆記本的輸出內容。
+8. 如果管道包含 Notebook，請在「Notebook options」(Notebook 選項) 專區的「Cloud Storage bucket」(Cloud Storage bucket) 欄位中，按一下「Browse」(瀏覽)，然後選取或建立 Cloud Storage bucket，用於儲存管道中 Notebook 的輸出內容。
 
    您選取的服務帳戶必須獲得所選 bucket 的 Storage 管理員 IAM 角色。詳情請參閱「[啟用管道排程](#enable-scheduling)」。
 9. 在「排程頻率」部分，執行下列操作：
@@ -125,7 +125,7 @@
 10. 使用「以高優先順序執行互動式工作 (預設)」選項，設定 BigQuery 查詢工作優先順序。根據預設，BigQuery 會以[互動式查詢工作](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#interactive-batch)的形式執行查詢，這類工作會盡快開始執行。如果清除這個選項，查詢會以[批次查詢工作](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#interactive-batch)的形式執行，優先順序較低。
 11. 按一下「建立時間表」。如果選取「使用我的使用者憑證執行」做為驗證方法，您必須[授權 Google 帳戶](#authorize-google-account) ([預覽](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))。
 
-建立時間表時，系統會自動部署管道的目前版本。如要使用新版管道更新排程，請[部署管道](#deploy)。
+建立排程時，系統會自動部署管道的目前版本。如要使用新版管道更新排程，請[部署管道](#deploy)。
 
 管道的最新部署版本會在所選時間和頻率執行。
 
@@ -136,17 +136,17 @@
 1. 前往 Google Cloud 控制台的「Scheduling」頁面。
 
    [前往「排程」](https://console.cloud.google.com/bigquery/orchestration?hl=zh-tw)
-2. 按一下「建立」，然後從選單中選取「管線時間表」。
+2. 按一下「建立」，然後從選單中選取「管道時間表」。
 3. 在「Schedule pipeline」(排程管道) 窗格中，選取要排程的管道。
 4. 在「排程名稱」欄位中，輸入排程名稱。
-5. 在「Authentication」(驗證) 區段中，使用 Google 帳戶使用者憑證或服務帳戶授權管道。
+5. 在「驗證」部分，使用 Google 帳戶使用者憑證或服務帳戶授權管道。
 
    * 如要使用 Google 帳戶使用者憑證 ([預覽](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))，請選取「以我的使用者憑證執行」。
    * 如要使用服務帳戶，請選取「以所選服務帳戶執行」，然後選取服務帳戶。
 6. 如果管道包含筆記本，請在「筆記本選項」部分，選取「執行階段範本」欄位中的 Colab 筆記本執行階段範本或預設執行階段規格。如要進一步瞭解如何建立 Colab 筆記本執行階段範本，請參閱「[建立執行階段範本](https://docs.cloud.google.com/colab/docs/create-runtime-template?hl=zh-tw)」一文。
 
    **注意：**筆記本執行階段範本必須與管道位於相同區域。**注意：**如果您沒有使用 Colab 筆記本執行階段範本的[必要角色](#required_roles)，仍可使用預設執行階段規格執行及排定管道。
-7. 如果管道包含筆記本，請在「Cloud Storage bucket」(Cloud Storage bucket) 欄位中，按一下「Browse」(瀏覽)，然後選取或建立 Cloud Storage bucket，用來儲存管道中筆記本的輸出內容。
+7. 如果管道包含筆記本，請在「Cloud Storage bucket」(Cloud Storage bucket)  欄位中，按一下「Browse」(瀏覽)，然後選取或建立 Cloud Storage bucket，用來儲存管道中筆記本的輸出內容。
 
    您選取的服務帳戶必須獲得所選 bucket 的 Storage 管理員 IAM 角色。詳情請參閱「[啟用管道排程](#enable-scheduling)」。
 8. 在「排程頻率」部分，執行下列操作：
@@ -170,6 +170,8 @@
 
 如要使用[Google 帳戶](https://docs.cloud.google.com/iam/docs/principals-overview?hl=zh-tw#google-account)使用者憑證驗證資源，您必須手動授予 BigQuery 管道權限，讓管道取得 Google 帳戶的存取權杖，並代表您存取來源資料。您可以使用 OAuth 對話方塊介面手動授予核准。
 
+**注意：** 使用 Google 帳戶的使用者憑證執行或排定 BigQuery 管道時，系統不支援情境感知存取權 (CAA) 政策，包括以 IP 為準、以地理位置為準，以及裝置合規政策，因為權杖要求來自 Google 基礎架構。除非[豁免 Dataform OAuth 用戶端 ID 遵守政策](https://docs.cloud.google.com/dataform/docs/troubleshooting?hl=zh-tw#euc-permission-denied)，否則 CAA 政策會禁止執行這些作業。
+
 您只需要授予 BigQuery 管道一次權限。
 
 如要撤銷授予的權限，請按照下列步驟操作：
@@ -182,11 +184,11 @@
 
 如果新的 Google 帳戶擁有者從未建立過時間表，更新憑證以變更管道時間表擁有者時，也需要手動核准。
 
-如果管道包含筆記本，您也必須手動授予 Colab Enterprise 權限，才能取得 Google 帳戶的存取權權杖，並以您的名義存取來源資料。你只需要授予一次權限。您可以在 [Google 帳戶頁面](https://myaccount.google.com/?hl=zh-tw)撤銷這項權限。
+如果管道包含筆記本，您也必須手動授予 Colab Enterprise 權限，才能取得 Google 帳戶的存取權杖，並以您的名義存取來源資料。你只需要授予一次權限。你可以在 [Google 帳戶頁面](https://myaccount.google.com/?hl=zh-tw)撤銷這項權限。
 
 ## 部署管道
 
-部署管道時，系統會使用管道的目前版本更新排程。排程會執行最新部署的 pipeline 版本。
+部署管道時，系統會使用管道的目前版本更新排程。排程會執行最新部署的管道版本。
 
 如要部署管道，請按照下列步驟操作：
 
@@ -197,8 +199,7 @@
 3. 在「Explorer」窗格中展開專案，按一下「Pipelines」，然後選取管道。
 4. 點選「Deploy」(部署)。
 
-系統會使用管道的目前版本更新對應的排程。
-系統會在排定的時間執行最新部署的管道版本。
+系統會使用管道的目前版本更新對應的排程。管道的最新部署版本會在排定的時間執行。
 
 ## 停用時間表
 
@@ -244,7 +245,7 @@
 
    [前往「排程」](https://console.cloud.google.com/bigquery/orchestration?hl=zh-tw)
 2. 按一下所選管道的名稱。
-3. 在「時間表詳細資料」頁面上，按一下「啟用」。
+3. 在「時間表詳細資料」頁面中，按一下「啟用」。
 
 ## 手動執行已部署的管道
 
@@ -330,7 +331,7 @@
 
    [前往「排程」](https://console.cloud.google.com/bigquery/orchestration?hl=zh-tw)
 2. 按一下所選管道的名稱。
-3. 在「排程詳細資料」頁面上，按一下「編輯」。
+3. 在「排程詳細資料」頁面中，按一下「編輯」。
 4. 按一下「查看時間表」，然後按一下「編輯」。
 5. 在「排定管道」對話方塊中編輯排程，然後按一下「更新排程」。
 
@@ -359,11 +360,11 @@
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-02 (世界標準時間)。
+上次更新時間：2026-05-04 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-04 (世界標準時間)。"],[],[]]

@@ -125,6 +125,51 @@ the required permissions through [custom
 roles](/iam/docs/creating-custom-roles) or other [predefined
 roles](/iam/docs/roles-overview#predefined).
 
+## BigQuery supported resources
+
+The following table lists the BigQuery resources that you can reference
+in custom constraints.
+
+| Resource | Field |
+| --- | --- |
+| bigquerymigration.googleapis.com/MigrationWorkflow | `resource.displayName` |
+| `resource.tasks[*].assessmentTaskDetails.dataSource` |
+| `resource.tasks[*].assessmentTaskDetails.featureHandle.addShareableDataset` |
+| `resource.tasks[*].assessmentTaskDetails.inputPath` |
+| `resource.tasks[*].assessmentTaskDetails.outputDataset` |
+| `resource.tasks[*].assessmentTaskDetails.querylogsPath` |
+| `resource.tasks[*].translationConfigDetails.gcsSourcePath` |
+| `resource.tasks[*].translationConfigDetails.gcsTargetPath` |
+| `resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.source.attribute` |
+| `resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.source.database` |
+| `resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.source.relation` |
+| `resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.source.schema` |
+| `resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.source.type` |
+| `resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.target.attribute` |
+| `resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.target.database` |
+| `resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.target.relation` |
+| `resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.target.schema` |
+| `resource.tasks[*].translationConfigDetails.requestSource` |
+| `resource.tasks[*].translationConfigDetails.sourceDialect.teradataDialect.mode` |
+| `resource.tasks[*].translationConfigDetails.sourceEnv.defaultDatabase` |
+| `resource.tasks[*].translationConfigDetails.sourceEnv.metadataStoreDataset` |
+| `resource.tasks[*].translationConfigDetails.sourceEnv.schemaSearchPath` |
+| `resource.tasks[*].translationConfigDetails.targetDialect.teradataDialect.mode` |
+| `resource.tasks[*].translationConfigDetails.targetTypes` |
+| `resource.tasks[*].translationDetails.sourceEnvironment.defaultDatabase` |
+| `resource.tasks[*].translationDetails.sourceEnvironment.metadataStoreDataset` |
+| `resource.tasks[*].translationDetails.sourceEnvironment.schemaSearchPath` |
+| `resource.tasks[*].translationDetails.sourceTargetMapping.sourceSpec.baseUri` |
+| `resource.tasks[*].translationDetails.sourceTargetMapping.sourceSpec.encoding` |
+| `resource.tasks[*].translationDetails.sourceTargetMapping.sourceSpec.literal.relativePath` |
+| `resource.tasks[*].translationDetails.sourceTargetMapping.targetSpec.relativePath` |
+| `resource.tasks[*].translationDetails.suggestionConfig.skipSuggestionSteps.rewriteTarget` |
+| `resource.tasks[*].translationDetails.suggestionConfig.skipSuggestionSteps.suggestionType` |
+| `resource.tasks[*].translationDetails.targetBaseUri` |
+| `resource.tasks[*].translationDetails.targetReturnLiterals` |
+| `resource.tasks[*].translationDetails.targetTypes` |
+| `resource.tasks[*].type` |
+
 ## Set up a custom constraint
 
 A custom constraint is defined in a YAML file by the resources, methods,
@@ -490,51 +535,6 @@ Replace `PROJECT_ID` with your project ID.
 
 If you see a permission denied error, then your policy is successfully applied.
 
-## BigQuery supported resources
-
-The following table lists the BigQuery resources that you can reference
-in custom constraints.
-
-| Resource | Field |
-| --- | --- |
-| bigquerymigration.googleapis.com/MigrationWorkflow | `resource.displayName` |
-| `resource.tasks[*].assessmentTaskDetails.dataSource` |
-| `resource.tasks[*].assessmentTaskDetails.featureHandle.addShareableDataset` |
-| `resource.tasks[*].assessmentTaskDetails.inputPath` |
-| `resource.tasks[*].assessmentTaskDetails.outputDataset` |
-| `resource.tasks[*].assessmentTaskDetails.querylogsPath` |
-| `resource.tasks[*].translationConfigDetails.gcsSourcePath` |
-| `resource.tasks[*].translationConfigDetails.gcsTargetPath` |
-| `resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.source.attribute` |
-| `resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.source.database` |
-| `resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.source.relation` |
-| `resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.source.schema` |
-| `resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.source.type` |
-| `resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.target.attribute` |
-| `resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.target.database` |
-| `resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.target.relation` |
-| `resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.target.schema` |
-| `resource.tasks[*].translationConfigDetails.requestSource` |
-| `resource.tasks[*].translationConfigDetails.sourceDialect.teradataDialect.mode` |
-| `resource.tasks[*].translationConfigDetails.sourceEnv.defaultDatabase` |
-| `resource.tasks[*].translationConfigDetails.sourceEnv.metadataStoreDataset` |
-| `resource.tasks[*].translationConfigDetails.sourceEnv.schemaSearchPath` |
-| `resource.tasks[*].translationConfigDetails.targetDialect.teradataDialect.mode` |
-| `resource.tasks[*].translationConfigDetails.targetTypes` |
-| `resource.tasks[*].translationDetails.sourceEnvironment.defaultDatabase` |
-| `resource.tasks[*].translationDetails.sourceEnvironment.metadataStoreDataset` |
-| `resource.tasks[*].translationDetails.sourceEnvironment.schemaSearchPath` |
-| `resource.tasks[*].translationDetails.sourceTargetMapping.sourceSpec.baseUri` |
-| `resource.tasks[*].translationDetails.sourceTargetMapping.sourceSpec.encoding` |
-| `resource.tasks[*].translationDetails.sourceTargetMapping.sourceSpec.literal.relativePath` |
-| `resource.tasks[*].translationDetails.sourceTargetMapping.targetSpec.relativePath` |
-| `resource.tasks[*].translationDetails.suggestionConfig.skipSuggestionSteps.rewriteTarget` |
-| `resource.tasks[*].translationDetails.suggestionConfig.skipSuggestionSteps.suggestionType` |
-| `resource.tasks[*].translationDetails.targetBaseUri` |
-| `resource.tasks[*].translationDetails.targetReturnLiterals` |
-| `resource.tasks[*].translationDetails.targetTypes` |
-| `resource.tasks[*].type` |
-
 ## What's next
 
 * Learn more about
@@ -551,11 +551,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-05-01 UTC.
+Last updated 2026-05-04 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-01 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-04 UTC."],[],[]]

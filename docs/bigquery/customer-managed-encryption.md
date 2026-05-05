@@ -12,7 +12,7 @@
 
 你可以依據偏好儲存及分類內容。
 
-# 客戶管理的 Cloud KMS 金鑰
+# 客戶自行管理的 Cloud KMS 金鑰
 
 **注意：** 使用以特定 BigQuery 版本建立的預留項目時，這項功能可能無法使用。如要進一步瞭解各版本啟用的功能，請參閱「[BigQuery 版本簡介](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)」。
 
@@ -32,7 +32,7 @@
 
   + `PROJECT_ID`：執行 BigQuery 專案的專案 ID
   + `PROJECT_NUMBER`：執行 BigQuery 的專案專案編號
-  + `KMS_PROJECT_ID`：執行 Cloud KMS 的專案 ID (即使這個專案就是執行 BigQuery 的專案)如要瞭解 Google Cloud 專案 ID 和專案編號，請參閱「[識別專案](https://docs.cloud.google.com/resource-manager/docs/creating-managing-projects?hl=zh-tw#identifying_projects)」。
+  + `KMS_PROJECT_ID`：執行 Cloud KMS 的專案 ID (即使這個專案就是執行 BigQuery 的專案)如要瞭解 Google Cloud 專案 ID 和專案編號，請參閱「[找出專案名稱、編號和 ID](https://docs.cloud.google.com/resource-manager/docs/view-update-projects?hl=zh-tw#identifying_projects)」。
 * 新專案會自動啟用 BigQuery。如果您是使用現有專案來執行 BigQuery，請[啟用 BigQuery API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery&hl=zh-tw)。
 * 針對執行 Cloud KMS 的 Google Cloud 專案，[啟用 Cloud Key Management Service API](https://console.cloud.google.com/flows/enableapi?apiid=cloudkms.googleapis.com&hl=zh-tw)。
 
@@ -320,7 +320,7 @@ resource "google_project_iam_member" "service_account_access" {
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
 2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
 
-   每項專案只需要執行一次這個指令，且可以在任何目錄中執行。
+   您只需要為每項專案執行一次這個指令，且可以在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
@@ -358,7 +358,7 @@ resource "google_project_iam_member" "service_account_access" {
 
 ## 套用變更
 
-1. 檢查設定，確認 Terraform 即將建立或更新的資源符合您的預期：
+1. 查看設定，確認 Terraform 即將建立或更新的資源符合您的預期：
 
    ```
    terraform plan
@@ -1034,5 +1034,5 @@ public class CopyTableCMEK {
     EncryptionConfiguration encryption =
         EncryptionConfiguration.newBuilder().setKmsKeyName(kmsKeyName).build();
     copyTableCMEK(
-        sourceDatasetName, sourceTableId, destinationDatasetName,
+        sourceDatasetName, sourceTableId, destinationDatasetName
 ```
