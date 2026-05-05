@@ -35,7 +35,7 @@
 
 #### 使用互動式 SQL 翻譯器的權限
 
-如要取得使用互動式翻譯工具所需的權限，請要求系統管理員授予 `parent` 資源的[遷移工作流程編輯者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquerymigration?hl=zh-tw#bigquerymigration.editor)  (`roles/bigquerymigration.editor`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和機構的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得使用互動式翻譯工具所需的權限，請要求管理員授予 `parent` 資源的「[MigrationWorkflow 編輯者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquerymigration?hl=zh-tw#bigquerymigration.editor) 」(`roles/bigquerymigration.editor`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和機構的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
 這個預先定義的角色具備使用互動式翻譯工具所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
@@ -92,7 +92,7 @@ BigQuery 互動式 SQL 翻譯器可將下列 SQL 方言翻譯成 GoogleSQL：
 
 ### 使用輔助 UDF 處理不支援的 SQL 函式
 
-將來源方言的 SQL 轉換為 BigQuery 時，部分函式可能沒有直接對應的函式。為解決這個問題，BigQuery 遷移服務 (和更廣泛的 BigQuery 社群) 提供輔助使用者定義函式 (UDF)，可複製這些不支援的來源方言函式行為。
+將來源 SQL 語法翻譯為 BigQuery 時，部分函式可能沒有直接對應的函式。為解決這個問題，BigQuery 遷移服務 (和更廣泛的 BigQuery 社群) 提供輔助使用者定義函式 (UDF)，可複製這些不支援的來源方言函式行為。
 
 這些 UDF 通常位於 `bqutil` 公開資料集中，因此翻譯後的查詢一開始可以採用 `bqutil.<dataset>.<function>()` 格式參照這些 UDF。例如：`bqutil.fn.cw_count()`。
 
@@ -102,8 +102,8 @@ BigQuery 互動式 SQL 翻譯器可將下列 SQL 方言翻譯成 GoogleSQL：
 
 1. 版本管控：`bqutil` 專案會代管這些 UDF 的最新版本，因此定義可能會隨時間變更。如果 UDF 的邏輯更新，直接依賴 `bqutil` 可能會導致生產查詢發生非預期行為或重大變更。
 2. 依附元件隔離：將 UDF 部署至自己的專案，可避免外部變更影響正式環境。
-3. 自訂：您可能需要修改或最佳化這些 UDF，以更符合特定商業邏輯或效能需求。只有在這些資源位於您自己的專案中時，才能執行這項操作。
-4. 安全性和控管：貴機構的安全政策可能會限制直接存取公開資料集 (例如 `bqutil`)，以處理正式環境資料。將 UDF 複製到受控環境，符合這類政策規定。
+3. 自訂：您可能需要修改或最佳化這些 UDF，進一步符合特定商業邏輯或效能需求。只有在這些資源位於您的專案中時，才能執行這項操作。
+4. 安全性和治理：貴機構的安全政策可能會限制直接存取 `bqutil` 等公開資料集，以處理正式環境資料。將 UDF 複製到受控環境，符合這類政策規定。
 
 #### 將輔助 UDF 部署至專案：
 
@@ -192,7 +192,7 @@ BigQuery 互動式 SQL 翻譯器可將下列 SQL 方言翻譯成 GoogleSQL：
 
     「編輯器」窗格會恢復為單一窗格。
 
-## 搭配使用 Gemini 與互動式 SQL 翻譯器
+## 搭配互動式 SQL 翻譯器使用 Gemini
 
 您可以設定互動式 SQL 翻譯器，調整翻譯來源 SQL 的方式。方法是在 YAML 設定檔中提供要搭配 Gemini 使用的規則，或是提供含有 SQL 物件中繼資料或物件對應資訊的設定 YAML 檔案。
 
@@ -208,9 +208,9 @@ BigQuery 互動式 SQL 翻譯器可將下列 SQL 方言翻譯成 GoogleSQL：
 
 如要為輸入的 SQL 建立 Gemini 輔助的 SQL 翻譯規則，請在查詢編輯器中編寫輸入的 SQL 查詢，然後依序點選「ASSIST」(輔助) >「Customize」(自訂)。([預覽](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))
 
-同樣地，如要為輸出的 SQL 建立 Gemini 輔助的 SQL 翻譯規則，請執行互動式翻譯，然後依序點選「輔助」>「自訂這項翻譯」。
+同樣地，如要為輸出的 SQL 建立 Gemini 輔助 SQL 翻譯規則，請執行互動式翻譯，然後依序點選「輔助」>「自訂這項翻譯」。
 
-「自訂」選單隨即顯示，請繼續執行下列步驟。
+「自訂」選單出現後，請繼續執行下列步驟。
 
 1. 使用下列一或多個提示建立翻譯規則：
 
@@ -225,7 +225,7 @@ BigQuery 互動式 SQL 翻譯器可將下列 SQL 方言翻譯成 GoogleSQL：
 4. 選用：如要新增這項規則，以便用於日後的翻譯作業，請勾選「儲存這個提示...」核取方塊。
 
    規則會儲存在預設設定 YAML 檔案或 `__default.ai_config.yaml` 中。
-   這個設定 YAML 檔案會儲存到 Cloud Storage 資料夾，如[翻譯設定](#translate-with-additional-configs)中的「Translation Configuration Source Location」欄位所指定。如果尚未設定「Translation Configuration Source Location」(翻譯設定來源位置)，系統會顯示資料夾瀏覽器，供您選取位置。設定 YAML 檔案須遵守[設定檔大小限制](#config-limitations)。
+   這個 YAML 設定檔會儲存到 Cloud Storage 資料夾，如[翻譯設定](#translate-with-additional-configs)中的「Translation Configuration Source Location」欄位所指定。如果尚未設定「Translation Configuration Source Location」(翻譯設定來源位置)，系統會顯示資料夾瀏覽器，供您選取位置。設定 YAML 檔案須遵守[設定檔大小限制](#config-limitations)。
 5. 如要將建議的變更套用至 SQL 查詢，請按一下「套用」。
 
 ### YAML
@@ -247,7 +247,7 @@ BigQuery 互動式 SQL 翻譯器可將下列 SQL 方言翻譯成 GoogleSQL：
 
 如果 Gemini 根據規則提供輸出內容建議，程式碼編輯器中會顯示通知橫幅。如要查看及套用這些建議，請按照下列步驟操作：
 
-1. 在程式碼編輯器兩側，依序點選「輔助」>「查看建議」，即可查看對應查詢的建議變更。
+1. 在程式碼編輯器兩側，依序點選「輔助」>「查看建議」，即可重新查看對應查詢的建議變更。
 2. 在「Gemini 生成的建議」對話方塊中，查看 Gemini 根據轉譯規則對 SQL 查詢所做的變更。
 3. 如要將建議的變更套用至翻譯輸出內容，請按一下「套用」。
 
@@ -369,11 +369,11 @@ where table1.id = table2.id;
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-02 (世界標準時間)。
+上次更新時間：2026-05-05 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-05 (世界標準時間)。"],[],[]]

@@ -19,16 +19,16 @@
 這項產品或功能適用《[服務專屬條款](https://docs.cloud.google.com/terms/service-terms?hl=zh-tw#1)》中「一般服務條款」一節的《正式發布前產品條款》。正式發布前的產品和功能是按照「原樣」提供，支援範圍可能有限。
 詳情請參閱[推出階段說明](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
 
-**注意：** 如要尋求支援或針對這項功能提供意見回饋，請傳送電子郵件至 [bq-data-sharing-feedback@google.com](mailto:bq-data-sharing-feedback@google.com)。
+**附註：** 如要尋求支援或針對這項功能提供意見回饋，請傳送電子郵件至 [bq-data-sharing-feedback@google.com](mailto:bq-data-sharing-feedback@google.com)。
 
 BigQuery 資料無塵室查詢範本可加速取得洞察資料，並提供額外的安全防護和控管機制，盡量減少資料外洩疑慮。預先定義並限制可在資料無塵室執行的查詢，有助於：
 
 * **防範機密資料外洩**。資料無塵室訂閱者在無塵室中執行查詢時，探索資料的彈性越大，資料擁有者就越可能意外或有意洩漏機密資訊。
-* **簡化新手上路和採用流程，方便不熟悉技術的使用者**。許多資料供應商認為資料無塵室訂閱者的技術能力較弱，尤其是在編寫以隱私權為重的 SQL 查詢和分配隱私權預算方面。
+* **簡化新手上路流程，方便不熟悉技術的使用者採用**。許多資料供應商認為資料無塵室訂閱者的技術能力較弱，尤其是在編寫以隱私權為重的 SQL 查詢和分配隱私權預算方面。
 * **確保資料無塵室訂閱者獲得一致的分析結果**。
   如果無法控管在資料無塵室中執行的查詢，就更難強制執行特定資料分析規則，以及驗證是否符合隱私權法規。
 
-資料擁有者和貢獻者可使用查詢範本，建立符合資料無塵室用途的預先定義及核准查詢。他們也可以發布這些查詢，供訂閱者使用。預先定義的查詢會使用 BigQuery 中的[資料表值函式 (TVF)](https://docs.cloud.google.com/bigquery/docs/table-functions?hl=zh-tw)，將整個資料表或特定欄位做為輸入參數傳遞，並傳回資料表做為輸出內容。
+資料擁有者和貢獻者可使用查詢範本，建立預先定義且經過核准的查詢，以配合資料無塵室的用途。他們也可以發布這些查詢，供訂閱者使用。預先定義的查詢會使用 BigQuery 中的[資料表值函式 (TVF)](https://docs.cloud.google.com/bigquery/docs/table-functions?hl=zh-tw)，將整個資料表或特定欄位做為輸入參數傳遞，並傳回資料表做為輸出內容。
 
 ## 限制
 
@@ -149,10 +149,10 @@ gcloud services enable analyticshub.googleapis.com
 
 * **範本建立者**：定義要在資料無塵室中執行的查詢。這個角色等同於下列任一 IAM 角色：
   [Analytics Hub 管理員](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles?hl=zh-tw#ah-admin-role)、
-  [Analytics Hub 發布者](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles?hl=zh-tw#ah-publisher-role)，
+  [Analytics Hub 發布者](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles?hl=zh-tw#ah-publisher-role)
   或 [Analytics Hub 清單管理員](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles?hl=zh-tw#ah-publisher-role)。詳情請參閱「[範本建立者工作流程](#template-creator-workflows)」。
-* **範本核准者**：資料擁有者，必須先核准查詢範本的參照，範本才能供人使用。這個角色等同於下列任一 IAM 角色：[Analytics Hub 管理員](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles?hl=zh-tw#ah-admin-role)、[Analytics Hub 發布者](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles?hl=zh-tw#ah-publisher-role)或 [Analytics Hub 清單管理員](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles?hl=zh-tw#ah-publisher-role)。詳情請參閱「[範本核准者工作流程](#template-approver-workflows)」。
-* **範本訂閱者**：訂閱資料無塵室的使用者，只能執行範本中核准的查詢。這個角色類似於 [Analytics Hub 訂閱者](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles?hl=zh-tw#ah-subscriber-role) IAM 角色。詳情請參閱「[範本訂閱者工作流程](#template-subscriber-workflows)」。
+* **範本核准者**：資料擁有者，必須核准查詢範本的參照，範本才能供人使用。這個角色等同於下列任一 IAM 角色：[Analytics Hub 管理員](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles?hl=zh-tw#ah-admin-role)、[Analytics Hub 發布者](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles?hl=zh-tw#ah-publisher-role)或 [Analytics Hub 清單管理員](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles?hl=zh-tw#ah-publisher-role)。詳情請參閱「[範本核准者工作流程](#template-approver-workflows)」。
+* **範本訂閱者**：訂閱資料無塵室的使用者，只能執行範本中核准的查詢。這個角色等同於 [Analytics Hub 訂閱者](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles?hl=zh-tw#ah-subscriber-role) IAM 角色。詳情請參閱「[範本訂閱者工作流程](#template-subscriber-workflows)」。
 
 ## 範本建立者工作流程
 
@@ -175,7 +175,7 @@ gcloud services enable analyticshub.googleapis.com
 
    1. 如要新增其他方的資料，請與其他[信任的貢獻者](https://docs.cloud.google.com/bigquery/docs/data-clean-rooms?hl=zh-tw#data_contributor_workflows)共用資料無塵室。此外，資料貢獻者也必須將資料新增至資料無塵室，才能在查詢範本中使用。
 4. 為房源設定[資料外流](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction?hl=zh-tw#data_egress)控管機制。
-5. 設定房源的元資料控制選項。如果只想分享上一個步驟中新增資料的結構定義和說明 (而非共用資料本身)，請選取「排除連結資料集的商家資訊存取權」。
+5. 設定房源的元資料控制選項。如果只想分享上一個步驟中新增資料的結構定義和說明 (而非分享資料本身)，請選取「排除連結資料集的商家資訊存取權」。
 
    **注意：** 您必須在資料無塵室交換庫層級擁有 Analytics Hub 訂閱者 (`roles/analyticshub.subscriber`) 角色，才能建立查詢範本。Analytics Hub 訂閱者角色可讓您查看新增至資料無塵室的資料結構定義。**注意：** 您無法更新產品資訊來啟用中繼資料控制項，因此建議您在新產品資訊中建立查詢範本。這項設定可確保範本訂閱者無法存取共用資料，包括需要 Analytics Hub 訂閱者角色才能查看中繼資料的資料貢獻者。
 6. 查看房源詳細資料。
@@ -205,14 +205,14 @@ gcloud services enable analyticshub.googleapis.com
       ```
       query_template1(t1 TABLE<year INT64>) AS (SELECT * FROM `project_id.dataset_id.table_id` WHERE year = table_id.year)
       ```
-   3. 如果您已對資料套用隱私權分析規則，請務必確認這個 TVF 包含隱私權專用的 SQL 語法，例如 [`SELECT WITH AGGREGATION_THRESHOLD`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw#agg_threshold_clause)。**注意：** 日常安排定義一律會隱藏，絕不會與範本訂閱者共用。訂閱者只會看到 TVF 預期的資料表輸入參數。
+   3. 如果您已對資料套用隱私權分析規則，請務必確認這個 TVF 包含隱私權專用的 SQL 語法，例如 [`SELECT WITH AGGREGATION_THRESHOLD`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw#agg_threshold_clause)。**注意：** 日常安排定義一律會隱藏，絕不會與範本訂閱者共用。訂閱者只會看到 TVF 預期的表格輸入參數。
 8. 查看範本詳細資料。
 9. 如要儲存範本但不送審，請按一下「儲存」。
-   查詢範本現在的狀態為「草稿」。
+   查詢範本的狀態現在為「草稿」。
 
 您可以[更新查詢範本](#update-query-template)或[將查詢範本送交審查](#submit-query-template)。
 
-**注意：** 你必須[授權 TVF 或日常安排](https://docs.cloud.google.com/bigquery/docs/authorized-routines?hl=zh-tw#authorize_routines)，範本訂閱者才能查詢日常安排。如果您透過執行 `CREATE OR REPLACE` 陳述式 (例如 `CREATE OR REPLACE FUNCTION`、`CREATE OR REPLACE PROCEDURE` 或 `CREATE OR REPLACE TABLE FUNCTION`) 修改日常安排，就必須重新授權日常安排。
+**注意：** 你必須[授權 TVF 或常式](https://docs.cloud.google.com/bigquery/docs/authorized-routines?hl=zh-tw#authorize_routines)，範本訂閱者才能查詢常式。如果透過執行 `CREATE OR REPLACE` 陳述式 (例如 `CREATE OR REPLACE FUNCTION`、`CREATE OR REPLACE PROCEDURE` 或 `CREATE OR REPLACE TABLE FUNCTION`) 修改日常安排，則必須重新授權日常安排。
 
 ### API
 
@@ -274,9 +274,9 @@ curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Ty
 1. 點選「下一步」。
 2. 檢查查詢範本，然後按一下「儲存」，即可儲存變更，不必將範本送審。
 
-**注意：** 你必須[授權 TVF 或日常安排](https://docs.cloud.google.com/bigquery/docs/authorized-routines?hl=zh-tw#authorize_routines)，範本訂閱者才能查詢日常安排。如果您透過執行 `CREATE OR REPLACE` 陳述式 (例如 `CREATE OR REPLACE
+**注意：** 你必須[授權 TVF 或常式](https://docs.cloud.google.com/bigquery/docs/authorized-routines?hl=zh-tw#authorize_routines)，範本訂閱者才能查詢常式。如果您透過執行 `CREATE OR REPLACE` 陳述式 (例如 `CREATE OR REPLACE
 FUNCTION`、`CREATE OR REPLACE PROCEDURE` 或 `CREATE OR REPLACE TABLE
-FUNCTION`) 修改日常安排，就必須重新授權日常安排。
+FUNCTION`) 修改日常安排，則必須重新授權日常安排。
 
 ### API
 
@@ -434,7 +434,7 @@ FUNCTION`) 修改日常安排，則必須重新授權日常安排。
 
 ### 拒絕查詢範本
 
-在 Google Cloud 控制台中，您可以拒絕查詢範本，方法是不核准提交的審核中查詢範本。
+在 Google Cloud 控制台中，只要不核准提交的審核中查詢範本，即可拒絕查詢範本。
 
 ## 範本訂閱者工作流程
 
@@ -510,7 +510,7 @@ group by company_id, company
 
 由於使用者 A 具有適當的廣告活動資料表權限 (BigQuery 資料擁有者角色)，因此提交查詢範本以供審查後，使用者 A 就能立即自行核准。
 
-### 與多方協作者共用
+### 與多方協作共用
 
 資料無塵室擁有者邀請信任的參與者，提議要對彼此的資料執行哪些查詢。雙方只能查看中繼資料結構定義，無法存取基礎共用資料，因此可安全地提出查詢。如果查詢定義參照的資料不屬於範本提案者，只有該資料的擁有者可以核准範本。
 
@@ -547,7 +547,7 @@ group by t.company_id, t.company, t.campaign_id, t.sku, t.date, p.product_name, 
 );
 ```
 
-**注意：** 只有屬於同一擁有者的資料表，才能在 TVF 查詢語法中參照。詳情請參閱「[限制](#limitations)」一節。
+**注意：** 在 TVF 查詢語法中，只能參照同一方擁有的資料表。詳情請參閱「[限制](#limitations)」一節。
 
 由於使用者 A 未新增或不擁有 `transactions` 和 `products` 資料表，因此只有使用者 B 可以在查詢範本提交核准後核准該範本。如要使用查詢範本，使用者 A 必須訂閱資料無塵室並叫用 TVF。使用者 A 傳遞自己的資料表 (欄位名稱為 `user_ID`) 做為資料表參數，並執行查詢範本中定義的隱私權 SQL。使用者 A 不必將自己的資料新增至資料無塵室。
 
@@ -555,12 +555,12 @@ group by t.company_id, t.company, t.campaign_id, t.sku, t.date, p.product_name, 
 
 使用查詢範本的資料貢獻者只需支付[資料儲存](https://cloud.google.com/bigquery/pricing?hl=zh-tw#storage)費用。
 
-使用查詢範本的範本訂閱者只會在執行查詢時，支付[運算 (分析)](https://cloud.google.com/bigquery/pricing?hl=zh-tw#overview_of_pricing)費用。
+使用查詢範本的範本訂閱者只會在執行查詢時，支付[運算 (分析)](https://cloud.google.com/bigquery/pricing?hl=zh-tw#overview_of_pricing) 費用。
 
 ## 後續步驟
 
 * 如要進一步瞭解資料無塵室，請參閱「[使用資料無塵室分享機密資料](https://docs.cloud.google.com/bigquery/docs/data-clean-rooms?hl=zh-tw)」。
-* 如要進一步瞭解訂閱項目，請參閱「[訂閱資料無塵室](https://docs.cloud.google.com/bigquery/docs/data-clean-rooms?hl=zh-tw#subscribe_to_a_data_clean_room)」。
+* 如要進一步瞭解訂閱方案，請參閱「[訂閱資料無塵室](https://docs.cloud.google.com/bigquery/docs/data-clean-rooms?hl=zh-tw#subscribe_to_a_data_clean_room)」。
 * 如要進一步瞭解 TVF，請參閱[資料表函式](https://docs.cloud.google.com/bigquery/docs/table-functions?hl=zh-tw)。
 * 如要進一步瞭解資料輸出，請參閱「[資料輸出選項 (僅限 BigQuery 共用資料集)](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction?hl=zh-tw#data_egress)」。
 
@@ -571,11 +571,11 @@ group by t.company_id, t.company, t.campaign_id, t.sku, t.date, p.product_name, 
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-02 (世界標準時間)。
+上次更新時間：2026-05-05 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-05 (世界標準時間)。"],[],[]]

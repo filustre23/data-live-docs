@@ -33,14 +33,14 @@
 資料表探索工具會將所選欄位顯示為互動式資訊卡，並列出每個欄位最多 10 個最常見的值，依 `count` 欄排序。您可以選取要仔細檢查的欄位和相異值，與資訊卡互動。資料表探索工具會根據您的選取項目建立資料探索查詢。
 
 您可以將這項查詢複製到查詢編輯器的新查詢中，
-或在資料表瀏覽器中套用查詢。套用查詢後，資料表探索工具會執行查詢，並以查詢結果重新整理顯示的資訊卡。如要繼續探索表格資料，請從更新後的資訊卡中選取更多欄位或值。
+或在資料表瀏覽器中套用查詢。套用查詢後，資料表探索工具會執行查詢，並以查詢結果重新整理顯示的資訊卡。如要繼續探索表格資料，請從重新整理的資訊卡中選取更多欄位或值。
 
 ## 限制
 
 * 資料表探索器適用於 BigQuery 資料表、BigLake 資料表、外部資料表和檢視區塊。
 * 資料表探索工具一次只能探索一個資料表。這項功能不支援同時探索多個資料表，也不支援產生跨資料表作業，例如 `JOIN` 作業。
 * 資料表探索工具會建立 SQL 查詢，直接反映您選取的資料表欄位和不重複值。您可以執行表格探索工具建立的查詢，或在查詢編輯器中手動編輯查詢。資料表探索器不會提供 AI 輔助功能，生成、補全或說明 SQL 查詢。
-* 如要探索資料表資料，並為設有資料欄層級存取權控管 (ACL) 或使用者權限受限的資料表產生查詢，您必須擁有所有選取欄位的讀取權限。如要執行產生的查詢，您必須具備足夠的[權限](#roles)。
+* 如要探索資料表資料，並為設有欄層級存取控管清單 (ACL) 或使用者權限受限的資料表產生查詢，您必須擁有所有所選欄位的讀取權限。如要執行產生的查詢，您必須具備足夠的[權限](#roles)。
 
 ## 定價
 
@@ -127,7 +127,7 @@
 
 #### 所需權限
 
-如要查看資料表資料及使用資料表探索工具產生查詢，必須具備下列權限：
+如要查看資料表資料，並使用資料表瀏覽器產生查詢，必須具備下列權限：
 
 * `bigquery.jobs.create`
   無論資料儲存於何處，都會在執行查詢的專案中顯示。
@@ -180,7 +180,7 @@ permission in project [project_id].
 
 如果主體沒有在專案中建立查詢工作的權限，就會發生這個錯誤。
 
-**解決方法**：管理員必須授予您查詢專案的 `bigquery.jobs.create` 權限。除了存取所查詢資料所需的權限外，您還必須具備這項權限。
+**解決方法**：系統管理員必須授予您所查詢專案的 `bigquery.jobs.create` 權限。除了存取所查詢資料所需的權限外，您還必須具備這項權限。
 
 如要進一步瞭解 BigQuery 權限，請參閱「[使用 IAM 控管存取權](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)」。
 
@@ -197,11 +197,11 @@ permission in project [project_id].
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-02 (世界標準時間)。
+上次更新時間：2026-05-05 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-05 (世界標準時間)。"],[],[]]

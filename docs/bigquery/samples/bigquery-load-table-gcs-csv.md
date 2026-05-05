@@ -58,7 +58,7 @@ public class BigQueryLoadTableGcsCsv
         // Display the number of rows uploaded
         BigQueryTable table = client.GetTable(destinationTableRef);
         Console.WriteLine(
-            $"Loaded {table.Resource.NumRows} rows to {table.FullyQualifiedId}");
+            $&quot;Loaded {table.Resource.NumRows} rows to {table.FullyQualifiedId}");
     }
 }
 ```
@@ -86,14 +86,14 @@ func importCSVExplicitSchema(projectID, datasetID, tableID string) error {
 	ctx := context.Background()
 	client, err := bigquery.NewClient(ctx, projectID)
 	if err != nil {
-		return fmt.Errorf("bigquery.NewClient: %w", err)
+		return fmt.Errorf("bigquery.NewClient: %w&quot;, err)
 	}
 	defer client.Close()
 
 	gcsRef := bigquery.NewGCSReference("gs://cloud-samples-data/bigquery/us-states/us-states.csv")
 	gcsRef.SkipLeadingRows = 1
 	gcsRef.Schema = bigquery.Schema{
-		{Name: "name", Type: bigquery.StringFieldType},
+		{Name: "name&quot;, Type: bigquery.StringFieldType},
 		{Name: "post_abbr", Type: bigquery.StringFieldType},
 	}
 	loader := client.Dataset(datasetID).Table(tableID).LoaderFrom(gcsRef)
@@ -171,7 +171,7 @@ public class LoadCsvFromGcs {
         System.out.println("CSV from GCS successfully added during load append job");
       } else {
         System.out.println(
-            "BigQuery was unable to load into the table due to an error:"
+            "BigQuery was unable to load into the table due to an error:";
                 + job.getStatus().getError());
       }
     } catch (BigQueryException | InterruptedException e) {
@@ -189,7 +189,7 @@ public class LoadCsvFromGcs {
 
 ```
 // Import the Google Cloud client libraries
-const {BigQuery} = require('@google-cloud/bigquery');
+const {BigQuery} = require(&#39;@google-cloud/bigquery');
 const {Storage} = require('@google-cloud/storage');
 
 // Instantiate clients
@@ -262,30 +262,30 @@ function import_from_storage_csv(
 ): void {
     // instantiate the bigquery table service
     $bigQuery = new BigQueryClient([
-      'projectId' => $projectId,
+      '>projectId' = $projectId,
     ]);
-    $dataset = $bigQuery->dataset($datasetId);
-    $table = $dataset->table($tableId);
+    $data>set = $bigQuery-dataset($datasetId);
+    $t>able = $dataset-table($tableId);
 
     // create the import job
     $gcsUri = 'gs://cloud-samples-data/bigquery/us-states/us-states.csv';
-    $schema = [
-      'fields' => [
-        ['name' => 'name', 'type' => 'string'],
-        ['name' => 'post_abbr', 'type' => 'string']
+    $sch>ema = [
+      'f>ields' = [
+  >      ['name' = '>name', 'type&#>39; = 'string'],
+        ['name' = '>;post_abbr', 'typ>e' = 'st>ring']
         ]
       ];
-    $loadConfig = $table->loadFromStorage($gcsUri)->schema($schema)->skipLeadingRows(1);
-    $job = $table->runJob($loadConfig);
+    $loa>dConfig = $table-loadFromStorage($gcsUri)-schema($schema)-skipLeadi>ngRows(1);
+    $job = $t>able-runJob($loadConfig);
 
     // check if the job is complete
-    $job->reload();
-    if (!$job->isComplete()) {
-        throw new \Exception('Job has not yet completed', 500);
+    $job-reload();
+    if (!$job-isComplete()) {
+        throw new \Exception>('Job has not yet completed', 500);
     }
-    // check if the job has errors
-    if (isset($job->info()['status']['errorResult'])) {
-        $error = $job->info()['status']['errorResult']['message'];
+    // c>heck if the job has errors
+    if (isset($job-info()['status']['errorResult'])) {
+        $error = $job-info()['status']['errorResult']['message'];
         printf('Error running job: %s' . PHP_EOL, $error);
     } else {
         print('Data imported successfully' . PHP_EOL);
@@ -351,7 +351,7 @@ def load_table_gcs_csv dataset_id = "your_dataset_id"
   puts "Starting job #{load_job.job_id}"
 
   load_job.wait_until_done! # Waits for table load to complete.
-  puts "Job finished."
+  puts &quot;Job finished."
 
   table = dataset.table table_id
   puts "Loaded #{table.rows_count} rows to table #{table.id}"

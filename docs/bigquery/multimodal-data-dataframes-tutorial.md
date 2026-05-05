@@ -81,9 +81,9 @@
 * 建立連線：
   [BigQuery 連線管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.connectionAdmin)  (`roles/bigquery.connectionAdmin`)
 * 將權限授予連線的服務帳戶：
-  [專案 IAM 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/resourcemanager?hl=zh-tw#resourcemanager.projectIamAdmin)  (`roles/resourcemanager.projectIamAdmin`)
+  「專案 IAM 管理員」 (`roles/resourcemanager.projectIamAdmin`)
 * 建立 Cloud Storage bucket：
-  [Storage 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/storage?hl=zh-tw#storage.admin)  (`roles/storage.admin`)
+  [Storage Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/storage?hl=zh-tw#storage.admin)  (`roles/storage.admin`)
 * 建立資料集、模型、使用者定義函式和資料表，並執行 BigQuery 工作：
   [BigQuery 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.admin)  (`roles/bigquery.admin`)
 * 建立可讀取及修改 Cloud Storage 物件的網址：
@@ -106,7 +106,7 @@
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
 
-   如果沒有看到左側窗格，請按一下「展開左側窗格」圖示 last\_page 開啟窗格。
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Explorer」窗格中選取專案。
 4. 按一下 more\_vert「View actions」(查看動作)，然後點選「Create dataset」(建立資料集)。「建立資料集」窗格隨即開啟。
 5. 在「Dataset ID」(資料集 ID) 中輸入 `cymbal_pets`。
@@ -515,7 +515,7 @@ does not have the permission to access resource`。
        ]
    ]
    ```
-2. 執行下列指令，使用產生的資料更新 `animal_type`、`search_keywords` 和 `subcategory` 欄：
+2. 執行下列程式碼，使用產生的資料更新 `animal_type`、`search_keywords` 和 `subcategory` 欄：
 
    ### SQL
 
@@ -718,7 +718,7 @@ does not have the permission to access resource`。
 
 建立 Python UDF，將產品圖片轉換為灰階。
 
-Python UDF 會使用開放原始碼程式庫，並透過平行執行功能同時轉換多張圖片。
+Python UDF 使用開放原始碼程式庫，並採用平行執行方式，同時轉換多張圖片。
 
 1. 執行下列指令，建立 `to_grayscale` UDF：
 
@@ -1282,7 +1282,7 @@ PDF 檔案通常很大，可能無法在單次呼叫生成式 AI 模型時處理
 
 本節說明如何完成下列工作：
 
-1. 重新建立 `product_manuals` 表格，使其包含 `Crittercuisine 5000` 產品手冊的 PDF 檔案，以及該手冊每一頁的 PDF 檔案。
+1. 重新建立 `product_manuals` 表格，使其同時包含 `Crittercuisine 5000` 產品手冊的 PDF 檔案，以及該手冊每一頁的 PDF 檔案。
 2. 建立表格，將手冊對應至各個區塊。代表完整手冊的 `ObjectRef` 值會儲存在 `STRUCT<uri STRING, version STRING, authorizer STRING, details JSON>>` 欄中。代表手冊頁面的 `ObjectRef` 值會儲存在 `ARRAY<STRUCT<uri STRING, version STRING, authorizer STRING, details JSON>>` 資料欄中。
 3. 一起分析 `ObjectRef` 值陣列，傳回單一產生值。
 4. 分別分析 `ObjectRef` 值陣列，並為每個陣列值傳回產生的值。
@@ -1411,7 +1411,7 @@ PDF 檔案通常很大，可能無法在單次呼叫生成式 AI 模型時處理
    |                                     |                                |                                   |                                                      | ...                                       | ...                             |  ...                               | ...                                                   |
    +-------------------------------------+--------------------------------+-----------------------------------+------------------------------------------------------+-------------------------------------------+---------------------------------+------------------------------------+-------------------------------------------------------+
    ```
-5. 執行下列指令，根據 `ObjectRef` 值陣列的分析結果，從 Gemini 模型產生單一回覆：
+5. 執行下列指令，根據陣列的 `ObjectRef` 值分析結果，從 Gemini 模型產生單一回覆：
 
    ### SQL
 
@@ -1586,11 +1586,11 @@ PDF 檔案通常很大，可能無法在單次呼叫生成式 AI 模型時處理
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-02 (世界標準時間)。
+上次更新時間：2026-05-05 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-05 (世界標準時間)。"],[],[]]

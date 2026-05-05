@@ -19,7 +19,7 @@
 這項功能適用《[服務專屬條款](https://docs.cloud.google.com/terms/service-terms?hl=zh-tw#1)》中「一般服務條款」一節的《正式發布前產品條款》。正式發布前功能是依「原樣」提供，支援服務可能受限。
 詳情請參閱[推出階段說明](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
 
-**注意：** 如要取得支援或提供意見回饋，請傳送電子郵件至 [dts-preview-support@google.com](mailto:dts-preview-support@google.com)。
+**注意：** 如要取得支援或針對這項功能提供意見回饋，請傳送電子郵件至 [dts-preview-support@google.com](mailto:dts-preview-support@google.com)。
 
 您可以使用 [BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)搭配 Stripe 連接器，將資料從 Stripe 載入 BigQuery。使用 Stripe 連接器，即可排定週期性移轉工作，將 Stripe 的最新資料新增至 BigQuery。
 
@@ -54,13 +54,13 @@ Stripe 資料轉移作業有以下限制：
   2. 在「連結」下方，設定平台以支援「標準」和「快速」帳戶。
 * 如要建立 Stripe 資料移轉，請提供下列資訊：
   + 記下 Stripe 帳戶 ID。詳情請參閱「[建立帳戶](https://docs.stripe.com/get-started/account)」。
-  + 請記下密鑰或受限金鑰。詳情請參閱「[API 金鑰](https://docs.stripe.com/keys)」一文。
+  + 請記下私密金鑰或受限金鑰。詳情請參閱「[API 金鑰](https://docs.stripe.com/keys)」一文。
 * 如要從連結帳戶轉移資料，請確認平台已設定 Stripe Connect，並具備必要的帳戶功能存取權。如要進一步瞭解 Stripe Connect，請參閱「[Platforms and marketplaces with Stripe Connect](https://docs.stripe.com/connect)」。
   + 如要進一步瞭解連結的帳戶，請參閱「[連結帳戶類型](https://docs.stripe.com/connect/accounts)」。
 
 ### 必要的 BigQuery 角色
 
-如要取得建立移轉作業所需的權限，請要求管理員在專案中授予您 [BigQuery 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.admin)  (`roles/bigquery.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得建立移轉作業所需的權限，請要求管理員授予您專案的 [BigQuery 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.admin)  (`roles/bigquery.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
 這個預先定義的角色具備建立轉移作業所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
@@ -108,7 +108,7 @@ Stripe 連接器支援 Stripe 平台帳戶和 Stripe 已連結帳戶。詳情請
 如要從已連結的帳戶執行 Stripe 資料移轉，請在[設定移轉設定](#transfer-setup)時，按照下列步驟操作：
 
 * 在「帳戶 ID」欄位中，輸入已連結帳戶的平台帳戶 ID。
-* 在「Secret/API Key」(密鑰/API 金鑰) 欄位中，輸入連結帳戶所連線平台帳戶的密鑰或受限制金鑰。
+* 在「Secret/API Key」(密鑰/API 金鑰) 欄位中，輸入連結帳戶所連線平台帳戶的密鑰或受限金鑰。
 * 在「SyncAllConnectedAccounts」部分，選取「False」。
 
 ## 設定 Stripe 資料移轉
@@ -120,11 +120,11 @@ Stripe 連接器支援 Stripe 平台帳戶和 Stripe 已連結帳戶。詳情請
 1. 前往 Google Cloud 控制台的「資料移轉」頁面。
 
    [前往「資料轉移」頁面](https://console.cloud.google.com/bigquery/transfers?hl=zh-tw)
-2. 按一下 add「建立轉移作業」。
+2. 按一下「建立轉移作業」add。
 3. 在「Source type」(來源類型) 部分，「Source」(來源) 請選取「Stripe」。
 4. 在「Data source details」(資料來源詳細資料) 部分執行下列操作：
 
-   * 在「Platform/Connected Account ID」(平台/已連結帳戶 ID) 專區中輸入 Stripe 帳戶 ID。詳情請參閱「[Stripe 先決條件](https://docs.cloud.google.com/bigquery/docs/stripe-transfer?hl=zh-tw#stripe-prerequisites)」。
+   * 在「平台/連結的帳戶 ID」部分，輸入 Stripe 帳戶 ID。詳情請參閱「[Stripe 先決條件](https://docs.cloud.google.com/bigquery/docs/stripe-transfer?hl=zh-tw#stripe-prerequisites)」。
    * 在「Stripe Secret Key」(Stripe 私密金鑰) 部分，輸入 Stripe 帳戶的 API 金鑰。詳情請參閱「[Stripe 先決條件](https://docs.cloud.google.com/bigquery/docs/stripe-transfer?hl=zh-tw#stripe-prerequisites)」。
    * 在「開始日期」中，以 `YYYY-MM-DD` 格式輸入日期。資料轉移作業會從這個日期開始載入 Stripe 資料。
    * 選取「同步處理所有連結的帳戶」，即可同步處理所有連結的帳戶。
@@ -195,7 +195,7 @@ bq mk
 
 儲存移轉設定後，Stripe 連接器會根據排程選項自動觸發移轉作業。每次執行移轉作業時，Stripe 連接器都會將 Stripe 中的所有可用資料移轉至 BigQuery。
 
-如要在正常時間表以外手動執行資料移轉作業，可以啟動[回填作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)。
+如要在正常排程以外手動執行資料移轉作業，可以啟動[回填作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)。
 
 ## 資料類型對應
 
@@ -271,11 +271,11 @@ bq mk
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-02 (世界標準時間)。
+上次更新時間：2026-05-05 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-05 (世界標準時間)。"],[],[]]

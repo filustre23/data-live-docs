@@ -40,7 +40,7 @@
    **選取或建立專案所需的角色**
 
    * **選取專案**：選取專案時，不需要具備特定 IAM 角色，只要您已獲授角色，即可選取任何專案。
-   * **建立專案**：如要建立專案，您需要具備專案建立者角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   * **建立專案**：如要建立專案，您需要「專案建立者」角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
    **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，而不要選取現有專案。完成這些步驟後，您就可以刪除專案，並移除與該專案相關聯的所有資源。
 
    [前往專案選取器](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
@@ -83,15 +83,15 @@
 5. 從「Location」(位置) 下拉式選單中選取「us (multiple regions in United States)」(us (多個美國區域))。
 6. 從「Edition」(版本) 清單中選取「Standard」(標準)。詳情請參閱[瞭解 BigQuery 版本](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)的相關說明。
 7. 在「Max reservation size selector」(預留項目大小選取器)，選取「Small (100 Slots)」(小 (100 個運算單元))。
-8. 其他預設設定保留不變，然後點選「儲存」。
+8. 其他設定均保留預設值，然後點選「儲存」。
 
 如要瞭解如何使用 SQL 或 bq 工具建立預留項目，請參閱「[使用專屬時段建立預留項目](https://docs.cloud.google.com/bigquery/docs/reservations-tasks?hl=zh-tw#create_a_reservation_with_dedicated_slots)」。
 
 ## 將專案指派給預留項目
 
-將專案指派給 `test` 預留項目。從這個專案執行的任何查詢工作，都會使用 `test` 保留項目的運算單元集區。(在本教學課程中，您不會執行工作)。
+將專案指派給 `test` 預留項目。從這個專案執行的任何查詢工作，都會使用 `test` 預留項目的運算單元集區。(在本教學課程中，您不會執行工作)。
 
-您可以指派與建立預留項目的管理專案位於相同機構和區域的任何專案。
+您可以指派與建立預訂的管理專案位於相同機構和區域的任何專案。
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -161,11 +161,11 @@
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-02 (世界標準時間)。
+上次更新時間：2026-05-05 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-05 (世界標準時間)。"],[],[]]

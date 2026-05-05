@@ -20,11 +20,11 @@
 
 ## 查看轉移作業
 
-查看現有的移轉設定，包括查看每項移轉作業的相關資訊、列出所有現有的移轉作業，以及查看移轉作業執行記錄或記錄檔訊息。
+查看現有的移轉設定，方法是查看每項移轉作業的相關資訊、列出所有現有的移轉作業，以及查看移轉作業的執行記錄或記錄訊息。
 
 ### 必要的角色
 
-如要取得查看移轉詳細資料所需的權限，請要求系統管理員授予您專案的「[BigQuery 使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.user) 」(`roles/bigquery.user`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得查看移轉詳細資料所需的權限，請要求管理員授予您專案的「[BigQuery 使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.user) 」(`roles/bigquery.user`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
 您或許也能透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)，取得必要權限。
 
@@ -301,7 +301,7 @@ def list_transfer_configs(project_id: str, location: str) -> None:
         )
 ```
 
-### 查看轉移執行記錄
+### 查看移轉執行記錄
 
 在執行排定的移轉作業時，系統會為每個移轉設定都保留一個執行紀錄，當中包含成功的移轉執行和失敗的移轉執行。已超過 90 天的移轉執行作業會自動從執行記錄中刪除。
 

@@ -50,11 +50,11 @@
 如要建立資料表，您必須具備下列權限：
 
 * `bigquery.tables.create`
-  您要在當中建立資料表的資料集。
+  在要建立資料表的資料集上。
 * `bigquery.tables.getData`
   如果您要將查詢結果儲存為資料表，則必須擁有查詢參照的所有資料表和檢視區塊的存取權。
 * `bigquery.jobs.create`
-  專案，前提是您是透過載入資料或將查詢結果儲存至資料表來建立資料表。
+  專案，如果您是透過載入資料或將查詢結果儲存至資料表來建立資料表。
 * `bigquery.tables.updateData`
   資料表，如果您要使用查詢結果附加或覆寫資料表，就需要這個權限。
 
@@ -444,7 +444,7 @@ resource "google_project_iam_member" "service_account_access" {
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
 2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
 
-   每項專案只需要執行一次這個指令，且可以在任何目錄中執行。
+   您只需要為每項專案執行一次這個指令，且可以在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
@@ -482,7 +482,7 @@ resource "google_project_iam_member" "service_account_access" {
 
 ## 套用變更
 
-1. 檢查設定，確認 Terraform 即將建立或更新的資源符合您的預期：
+1. 查看設定，確認 Terraform 即將建立或更新的資源符合您的預期：
 
    ```
    terraform plan
@@ -1184,7 +1184,7 @@ print("Query results loaded to the table {}".format(table_id))
 * [資料欄資料遮蓋](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro?hl=zh-tw)
 * [資料列層級安全性](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro?hl=zh-tw)
 
-透過 IAM 保護的任何資源，存取權都是累加的。舉例來說，如果實體沒有專案等高層級的存取權，您可以在資料集層級授予實體存取權，這樣實體就能存取資料集中的資料表和檢視區塊。同樣地，如果實體沒有高層級或資料集層級的存取權，您可以在資料表或檢視表層級授予實體存取權。
+透過 IAM 保護的任何資源，存取權都是累加的。舉例來說，如果實體沒有專案等高層級的存取權，您可以授予實體資料集層級的存取權，這樣實體就能存取資料集中的資料表和檢視區塊。同樣地，如果實體沒有高層級或資料集層級的存取權，您可以在資料表或檢視表層級授予實體存取權。
 
 在[Google Cloud資源階層](https://docs.cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy?hl=zh-tw)中的較高層級 (例如專案、資料夾或機構層級) 授予 IAM 角色，可讓實體存取更多資源。舉例來說，在專案層級將特定角色授予實體，可讓該實體擁有適用於專案中所有資料集的權限。
 
@@ -1304,5 +1304,5 @@ func printTableInfo(w io.Writer, projectID, datasetID, tableID string) error {
 	// datasetID := "mydataset"
 	// tableID := "mytable"
 	ctx := context.Background()
-	client, err := bigquery.NewClient(ctx, projectID)</
+	client, err := bigquery.NewClient(ctx, projectID)
 ```

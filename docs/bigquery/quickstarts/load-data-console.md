@@ -88,7 +88,7 @@
 
 ### 必要的角色
 
-如要取得建立資料集、資料表、載入資料及查詢資料所需的權限，請要求管理員授予您專案的下列 IAM 角色：
+如要取得建立資料集、建立資料表、載入資料及查詢資料所需的權限，請要求管理員授予您專案的下列 IAM 角色：
 
 * 執行載入工作和查詢工作：
   [BigQuery 工作使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.jobUser)  (`roles/bigquery.jobUser`)
@@ -112,7 +112,7 @@
 6. 在「建立資料集」頁面中，執行下列操作：
 
 1. 在「Dataset ID」(資料集 ID) 中輸入 `babynames`。
-2. 針對「Location type」(位置類型) 選取「Multi-region」(多區域)，然後選擇「US (multiple regions in United States)」(us (多個美國區域))。公開資料集存放在 `us` 多地區位置。為簡單起見，請將資料集儲存在相同位置。
+2. 針對「Location type」(位置類型) 選取「Multi-region」(多區域)，然後選擇「US (multiple regions in United States)」(us (多個美國區域))。公開資料集存放在 `us` 多區域位置。為簡單起見，請將資料集儲存在相同位置。
 3. 其餘設定請保留預設狀態，然後按一下「Create dataset」(建立資料集)。
 
 ## 下載含有來源資料的檔案
@@ -168,7 +168,7 @@ name:string,assigned_sex_at_birth:string,count:integer
 3. 按一下「`babynames`」資料集，然後選取「`names_2024`」資料表。
 4. 點按「Preview」(預覽) 分頁標籤，BigQuery 會顯示資料表的前幾個資料列。
 
-並非所有表格類型都能使用「預覽」分頁。舉例來說，外部資料表或檢視表不會顯示「預覽」分頁。
+並非所有資料表類型都能使用「預覽」分頁。舉例來說，外部資料表或檢視畫面不會顯示「預覽」分頁。
 
 ## 查詢資料表資料
 
@@ -219,11 +219,11 @@ name:string,assigned_sex_at_birth:string,count:integer
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-02 (世界標準時間)。
+上次更新時間：2026-05-05 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-05 (世界標準時間)。"],[],[]]

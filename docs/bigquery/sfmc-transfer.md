@@ -20,7 +20,7 @@
 
 Salesforce Marketing Cloud 資料移轉作業會受到下列限制：
 
-* 單一移轉設定在特定時間只能支援一次資料移轉作業。如果排定在第一次資料移轉完成前執行第二次資料移轉，則只有第一次資料移轉會完成，任何與第一次移轉重疊的資料移轉都會略過。
+* 單一移轉設定在特定時間只能支援一次資料移轉作業。如果排定在第一次資料移轉完成前執行第二次資料移轉，則系統只會完成第一次資料移轉，並略過任何與第一次移轉重疊的資料移轉。
   + 為避免在單一轉移設定中略過轉移作業，建議您設定「重複頻率」，增加大型資料轉移作業之間的時間間隔。
 * 如要透過網路連結進行資料移轉，請務必先[定義靜態 IP 位址，再建立網路連結](https://docs.cloud.google.com/bigquery/docs/connections-with-network-attachment?hl=zh-tw)。
 * 如果設定的網路連結和虛擬機器 (VM) 執行個體位於不同區域，從 Salesforce Marketing Cloud 轉移資料時，可能會發生跨區域資料移動。
@@ -43,7 +43,7 @@ Salesforce Marketing Cloud 資料移轉作業會受到下列限制：
 
 #### 為 Salesforce Marketing Cloud 移轉作業設定 IP 許可清單
 
-您必須設定 Google Cloud 環境和 Salesforce Marketing Cloud 帳戶，將特定 IP 位址新增至資料傳輸許可清單。這樣一來，Salesforce Marketing Cloud 就只會接受來自可信任靜態 IP 位址的連線。
+您必須設定 Google Cloud 環境和 Salesforce Marketing Cloud 帳戶，將特定 IP 位址加入資料傳輸的許可清單。這樣一來，Salesforce Marketing Cloud 就只會接受來自可信任靜態 IP 位址的連線。
 
 如要這麼做，您必須先設定 Google Cloud 網路，使其使用靜態 IP 位址：
 
@@ -76,7 +76,7 @@ Salesforce Marketing Cloud 資料移轉作業會受到下列限制：
 * 網頁：`Read`
 * 文件和圖片：`Read`
 * 已儲存的內容：`Read`
-* 旅程：`Read`
+* 歷程：`Read`
 * 目標對象：`Read`
 * 名單和訂閱者：`Read`
 * 日期擴充功能：`Read`
@@ -100,7 +100,7 @@ Salesforce Marketing Cloud 資料移轉作業會受到下列限制：
 
 ### 必要的 BigQuery 角色
 
-如要取得建立 BigQuery 資料移轉服務資料移轉作業所需的權限，請要求系統管理員在專案中授予您 [BigQuery 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.admin)  (`roles/bigquery.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得建立 BigQuery 資料移轉服務資料移轉作業所需的權限，請要求管理員授予您專案的 [BigQuery 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.admin)  (`roles/bigquery.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
 這個預先定義的角色具備建立 BigQuery 資料移轉服務資料移轉作業所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
@@ -131,7 +131,7 @@ Salesforce Marketing Cloud 資料移轉作業會受到下列限制：
 1. 前往 Google Cloud 控制台的「資料移轉」頁面。
 
    [前往「資料轉移」頁面](https://console.cloud.google.com/bigquery/transfers?hl=zh-tw)
-2. 按一下 add「建立轉移作業」。
+2. 按一下「建立轉移作業」add。
 3. 在「Source type」(來源類型) 部分，「Source」(來源) 請選取「Salesforce Marketing Cloud」。
 4. 在「Data source details」(資料來源詳細資料) 部分執行下列操作：
 
@@ -178,7 +178,7 @@ bq mk
   + `connector.instance`：API 執行個體值。
   + `connector.authentication.oauth.clientId`：OAuth 用戶端的應用程式 ID 名稱。
   + `connector.authentication.oauth.clientSecret`：OAuth 用戶端的應用程式密鑰。
-  + `assets`：要從 Salesforce Marketing Cloud 移轉的 Salesforce Marketing Cloud 資料表名稱清單。
+  + `assets`：要從 Salesforce Marketing Cloud 轉移的 Salesforce Marketing Cloud 資料表名稱清單。
 
 舉例來說，下列指令會在預設專案中建立 Salesforce Marketing Cloud 資料移轉作業，並設定所有必要參數：
 
@@ -224,7 +224,7 @@ bq mk
 * `Subscriber`
 * `TriggeredSendDefinition`
 
-如要在正常時間表以外手動執行資料移轉作業，可以啟動[回填作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)。
+如要在正常排程以外手動執行資料移轉作業，可以啟動[回填作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)。
 
 ## 資料類型對應
 
@@ -255,14 +255,13 @@ bq mk
 :   **解決方法：**請嘗試下列任一步驟：
 
     * 為[資源啟用所有可用的 IP 位址 Google Cloud](https://www.gstatic.com/ipranges/goog.json) 。
-    * 設定 Google Cloud 環境和 Salesforce Marketing Cloud 帳戶
-      ，將靜態 IP 位址新增至許可清單。詳情請參閱「[為 Salesforce Marketing Cloud 移轉作業設定 IP 許可清單](#sfmc-allowlist)」一文。
+    * 設定 Google Cloud 環境和 Salesforce Marketing Cloud 帳戶，將靜態 IP 位址新增至許可清單。詳情請參閱「[為 Salesforce Marketing Cloud 移轉作業設定 IP 許可清單](#sfmc-allowlist)」一文。
 
 發生錯誤：`INVALID_ARGUMENT. Table tableName does not exist in asset TableName`
 :   **解決方法：**請確認您已在 Salesforce Marketing Cloud 應用程式中設定正確的範圍權限。詳情請參閱 [Salesforce Marketing Cloud 必要條件](#sfmc-prereqs)。
 
 發生錯誤：`FAILED_PRECONDITION: There was an issue connecting to API.`
-:   **解決方法：**如果您在轉移作業中加入網路附件，但未設定 Public NAT 並設定 IP 允許清單，就可能發生這個錯誤。如要解決這項錯誤，請按照「[建立網路連結](https://docs.cloud.google.com/bigquery/docs/connections-with-network-attachment?hl=zh-tw#create_a_network_attachment)」一文中的步驟操作，定義靜態 IP 位址來建立網路連結。
+:   **解決方法：**如果您在轉移作業中加入網路連結，但未設定 Public NAT 並設定 IP 許可清單，就可能發生這個錯誤。如要解決這項錯誤，請按照「[建立網路連結](https://docs.cloud.google.com/bigquery/docs/connections-with-network-attachment?hl=zh-tw#create_a_network_attachment)」一文中的步驟操作，定義靜態 IP 位址並建立網路連結。
 
 ## 定價
 
@@ -271,7 +270,7 @@ bq mk
 ## 後續步驟
 
 * 如需 BigQuery 資料移轉服務的總覽，請參閱「[BigQuery 資料移轉服務簡介](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)」。
-* 如要瞭解如何使用資料移轉作業，包括取得移轉設定、列出移轉設定以及查看移轉設定的執行記錄，請參閱「[管理移轉作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw)」一文。
+* 如要瞭解如何使用資料移轉作業，包括取得移轉設定、列出移轉設定以及查看移轉作業的執行記錄，請參閱「[管理移轉作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw)」一文。
 * 瞭解如何[透過跨雲端作業載入資料](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer?hl=zh-tw)。
 
 
@@ -281,11 +280,11 @@ bq mk
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-02 (世界標準時間)。
+上次更新時間：2026-05-05 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-05 (世界標準時間)。"],[],[]]

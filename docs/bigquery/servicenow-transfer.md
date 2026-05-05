@@ -40,10 +40,10 @@ ServiceNow 增量移轉作業有下列限制：
 * 增量轉移作業無法同步處理來源資料表中的刪除作業。
 * 單一轉移設定只能支援增量或完整擷取。
 * 第一次執行增量擷取後，就無法更新 `asset` 清單中的物件。
-* 首次執行增量擷取後，您就無法在轉移設定中變更寫入模式。
-* 第一次執行增量擷取後，您就無法變更浮水印欄或主鍵。
-* 目的地 BigQuery 資料表會使用提供的主鍵分群，並受[分群資料表限制](https://docs.cloud.google.com/bigquery/docs/clustered-tables?hl=zh-tw#limitations)約束。
-* 首次將現有轉移設定更新為增量擷取模式時，更新後的第一次資料轉移作業會轉移資料來源中的所有可用資料。後續的增量資料轉移作業只會轉移資料來源中的新資料列和更新資料列。
+* 首次執行增量擷取後，就無法在轉移設定中變更寫入模式。
+* 第一次執行遞增式擷取後，就無法變更時間戳記欄或主鍵。
+* 目的地 BigQuery 資料表會使用提供的主鍵叢集，並受[分群資料表限制](https://docs.cloud.google.com/bigquery/docs/clustered-tables?hl=zh-tw#limitations)約束。
+* 首次將現有轉移設定更新為增量擷取模式時，更新後的第一次資料移轉作業會移轉資料來源中的所有可用資料。後續的增量資料轉移作業只會轉移資料來源中的新資料列和更新資料列。
 
 ## 資料擷取選項
 
@@ -54,24 +54,24 @@ ServiceNow 增量移轉作業有下列限制：
 [設定 ServiceNow 轉移作業](#servicenow_transfer_setup)時，請在轉移設定中選取「完整」或「增量」寫入偏好設定，指定資料載入 BigQuery 的方式。
 [預先發布版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages)支援增量轉移。
 
-**注意：** 如要提供意見或取得增量轉移支援，請傳送電子郵件至 [dts-preview-support@google.com](mailto:dts-preview-support@google.com)。
-您可以設定*完整*資料轉移，在每次資料轉移時，轉移 ServiceNow 資料集的所有資料。
+**注意：** 如要提供意見或取得增量資料移轉支援，請傳送電子郵件至 [dts-preview-support@google.com](mailto:dts-preview-support@google.com)。
+您可以設定*完整*資料移轉，在每次資料移轉時，移轉 ServiceNow 資料集的所有資料。
 
 或者，您也可以設定*增量*資料移轉作業 ([搶先版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))，只移轉上次資料移轉後變更的資料，而不是在每次資料移轉時載入整個資料集。如果為資料移轉作業選取「增量」**Incremental**，則必須指定「附加」**Append**或「插入或更新」**Upsert**寫入模式，定義在增量資料移轉期間，資料如何寫入 BigQuery。以下各節說明可用的寫入模式。
 
 #### Upsert 寫入模式
 
-新增或更新寫入模式會檢查主鍵，以更新資料列或在目的地資料表中插入新資料列。您可以指定主鍵，讓 ServiceNow 連接器判斷需要哪些變更，才能讓目的地資料表與來源資料表保持同步。如果在資料移轉期間，指定的主鍵出現在目標 BigQuery 資料表中，ServiceNow 連接器就會使用來源資料表中的新資料更新該資料列。如果資料轉移期間沒有主鍵，ServiceNow 連接器就會插入新列。
+新增或更新寫入模式會檢查主鍵，以更新資料列或在目的地資料表中插入新的資料列。您可以指定主鍵，讓 ServiceNow 連接器判斷需要哪些變更，才能讓目的地資料表與來源資料表保持同步。如果在資料移轉期間，指定的主鍵出現在目標 BigQuery 資料表中，ServiceNow 連接器就會使用來源資料表中的新資料更新該資料列。如果資料移轉期間沒有主鍵，ServiceNow 連接器就會插入新列。
 
 選取「新增或更新」模式時，必須選取浮水印欄和主鍵：
 
-* ServiceNow 連接器必須使用浮水印資料欄，才能追蹤來源資料表的變更。
+* ServiceNow 連接器必須使用浮水印資料欄，才能追蹤來源資料表中的變更。
 
   選取每次修改資料列時都會更新的水印資料欄。建議使用與 `UPDATED_AT` 或 `LAST_MODIFIED` 資料欄類似的資料欄。
 
 * 主鍵可以是資料表上的一或多個資料欄，ServiceNow 連接器必須使用這些資料欄，判斷是否需要插入或更新資料列。
 
-  選取包含非空值的資料欄，這些值在資料表的所有資料列中都是不重複的。建議您使用包含系統產生的 ID、不重複的參照代碼 (例如自動遞增的 ID) 或不可變動的時間序列 ID 的資料欄。
+  選取包含非空值的資料欄，這些值在資料表的所有資料列中都是不重複的。建議您使用包含系統產生 ID、專屬參照代碼 (例如自動遞增 ID) 或不可變動的時間序列 ID 的資料欄。
 
   為避免資料遺失或損毀，您選取的主鍵資料欄必須具有不重複的值。如果您對所選主鍵欄位的唯一性有疑慮，建議改用完整擷取。
 
@@ -83,14 +83,14 @@ ServiceNow 增量移轉作業有下列限制：
 | --- | --- |
 | 新增資料欄 | 目的地 BigQuery 資料表會新增資料欄。 這個資料欄的所有先前記錄都會有空值。 |
 | 刪除資料欄 | 刪除的資料欄仍會保留在目的地 BigQuery 資料表中。系統會在新項目中填入空值。 |
-| 變更資料欄中的資料類型 | 連接器僅支援 [`ALTER COLUMN` DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#details_21)支援的資料類型轉換。如果轉換成其他資料類型，資料移轉作業就會失敗。 如果遇到任何問題，建議建立新的轉移設定。 |
+| 變更資料欄中的資料類型 | 連接器僅支援 `ALTER COLUMN` DDL 陳述式支援的資料類型轉換。如果轉換成其他資料類型，資料移轉作業就會失敗。 如果遇到任何問題，建議建立新的轉移設定。 |
 | 重新命名資料欄 | 原始資料欄會保留在目的地 BigQuery 資料表中，而目的地資料表會新增一個名稱更新的資料欄。 |
 
 ## 事前準備
 
 建立 ServiceNow 資料移轉作業前，請先為 ServiceNow 和 BigQuery 執行下列操作。
 
-### ServiceNow 必要條件
+### ServiceNow 必備條件
 
 * 如要存取 ServiceNow API，請建立 [OAuth 憑證](https://www.servicenow.com/docs/csh?topicname=t_CreateEndpointforExternalClients.html&version=latest)。
 * 您必須在 ServiceNow 執行個體中啟用下列所有 ServiceNow 應用程式：
@@ -111,7 +111,7 @@ ServiceNow 增量移轉作業有下列限制：
 
 ### 必要的 BigQuery 角色
 
-如要取得建立 BigQuery 資料移轉服務資料移轉作業所需的權限，請要求系統管理員在專案中授予您 [BigQuery 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.admin)  (`roles/bigquery.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得建立 BigQuery 資料移轉服務資料移轉作業所需的權限，請要求管理員授予您專案的 [BigQuery 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.admin)  (`roles/bigquery.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
 這個預先定義的角色具備建立 BigQuery 資料移轉服務資料移轉作業所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
@@ -142,7 +142,7 @@ ServiceNow 增量移轉作業有下列限制：
 1. 前往 Google Cloud 控制台的「資料移轉」頁面。
 
    [前往「資料轉移」頁面](https://console.cloud.google.com/bigquery/transfers?hl=zh-tw)
-2. 按一下 add「建立轉移作業」。
+2. 按一下「建立轉移作業」add。
 3. 在「Source type」(來源類型) 部分，「Source」(來源) 請選取「ServiceNow」。
 4. 在「Data source details」(資料來源詳細資料) 部分執行下列操作：
 
@@ -158,7 +158,7 @@ ServiceNow 增量移轉作業有下列限制：
    * 在「Password」(密碼) 輸入 ServiceNow 密碼。
    * 在「Client ID」(用戶端 ID) 輸入 OAuth 憑證中的用戶端 ID。如要產生憑證，請參閱[建立 OAuth 憑證](https://docs.oracle.com/cd/B13789_01/server.101/b10759/statements_9013.htm)的相關說明。
    * 在「Client secret」(用戶端密鑰) 輸入 OAuth 憑證中的用戶端密鑰。
-   * 如要**啟用舊版對應**，請選取「true」 (預設)，使用[舊版資料類型對應](https://docs.cloud.google.com/bigquery/docs/servicenow-transfer?hl=zh-tw#data_type_mapping)。選取「false」即可使用更新後的資料類型對應。如要進一步瞭解資料類型對應更新，請參閱「[2027 年 3 月 16 日](https://docs.cloud.google.com/bigquery/docs/transfer-changes?hl=zh-tw#Mar16-servicenow)」。
+   * 在「Enable legacy mapping」(啟用舊版對應) 部分，選取「true」(預設)，即可使用[舊版資料類型對應](https://docs.cloud.google.com/bigquery/docs/servicenow-transfer?hl=zh-tw#data_type_mapping)。選取「false」即可使用更新的資料類型對應。如要進一步瞭解資料類型對應更新，請參閱「[2027 年 3 月 16 日](https://docs.cloud.google.com/bigquery/docs/transfer-changes?hl=zh-tw#Mar16-servicenow)」。
    * 在「Ingestion type」(擷取類型) 部分，選取「Full」(完整) 或「Incremental」(增量)。
      + 如果選取「Incremental」(增量) ([預先發布版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))，請在「Write mode」(寫入模式) 中選取「Upsert」(新增或更新)。如要進一步瞭解寫入模式，請參閱「[完整或增量轉移](https://docs.cloud.google.com/bigquery/docs/servicenow-transfer?hl=zh-tw#full_or_incremental_transfers)」一節的說明。
    * 在「ServiceNow tables to transfer」(要移轉的 ServiceNow 資料表)，點選「Browse」(瀏覽)：
@@ -214,7 +214,7 @@ bq mk
   | `ingestionType` | 選用 | 定義從來源 ServiceNow 服務轉移資料至目的地的轉移方法，決定要重新載入完整資料集，還是執行有效率的增量更新。 |
   | `writeMode` | 選用 | 如果使用遞增式擷取，則決定遞增式擷取的同步策略。如要進行增量轉移，這個欄位為必填。支援的值為 `WRITE_MODE_UPSERT`。 |
   | `assets` | 必填 | 要從 ServiceNow 移轉的 ServiceNow 資料表名稱清單。 |
-  | `watermarkColumns` | 選用 | 如果使用遞增式擷取，則來源資料表欄位 (通常是日期時間) 會用於追蹤上次成功同步的點，讓連接器有效率地查詢及轉移自該特定時間以來建立或修改的記錄。如要進行增量轉移，這個欄位為必填。 |
+  | `watermarkColumns` | 選用 | 如果使用遞增擷取，則來源資料表欄位 (通常是日期時間) 會用於追蹤上次成功同步的點，讓連接器只查詢並轉移自該特定時間建立或修改的記錄。如要進行增量轉移，這個欄位為必填。 |
   | `primaryKeys` | 選用 | 如果使用增量擷取，則為用來明確識別來源資料表中每個資料列的專屬資料欄或資料欄組合。如要進行增量轉移，這個欄位為必填。 |
   | `valueType` | 選用 | 控制 ServiceNow 的特定資料類型如何對應至 BigQuery 資料類型。 |
   | `connector.legacyMapping` | 必填 | 設為 `true` (預設值) 即可使用[舊版資料類型對應](#data_type_mapping)。如要使用更新後的資料類型對應，請將這個值設為 `false`。如果您要進行增量轉移，這個值必須是 `false`。如要進一步瞭解資料類型對應更新，請參閱「[2027 年 3 月 16 日](https://docs.cloud.google.com/bigquery/docs/transfer-changes?hl=zh-tw#Mar16-servicenow)」。 |
@@ -237,7 +237,7 @@ bq mk
           "connector.networkAttachment": "projects/dev-project1/regions/us-central1/networkattachments/na1"}'
   ```
 
-  下列指令會在預設專案中建立增量 ServiceNow 資料移轉作業，並使用 `UPSERT` 寫入模式。
+  下列指令會在預設專案中建立 ServiceNow 增量資料移轉作業，並使用 `UPSERT` 寫入模式。
 
   ```
     bq mk
@@ -263,13 +263,13 @@ bq mk
 
 儲存移轉設定後，ServiceNow 連接器會根據排程選項自動觸發移轉作業。每次執行移轉作業時，ServiceNow 連接器都會將 ServiceNow 中的所有可用資料移轉至 BigQuery。
 
-如要在正常時間表以外手動執行資料轉移作業，可以啟動[回填作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)。
+如要在正常排程以外手動執行資料移轉作業，可以啟動[回填作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)。
 
 ## 資料類型對應
 
 **注意：** 2027 年 3 月 16 日，ServiceNow 連接器將更新部分資料類型對應。詳情請參閱「[2027 年 3 月 16 日](https://docs.cloud.google.com/bigquery/docs/transfer-changes?hl=zh-tw#Mar16-servicenow)」。
 
-下表說明 ServiceNow 資料轉移作業中的資料類型對應方式：
+下表說明 ServiceNow 資料移轉作業中的資料類型對應方式：
 
 | ServiceNow 資料類型 | BigQuery 資料類型 | [更新的 BigQuery 資料類型](https://docs.cloud.google.com/bigquery/docs/transfer-changes?hl=zh-tw#Mar16-servicenow) |
 | --- | --- | --- |
@@ -334,11 +334,11 @@ bq mk
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-02 (世界標準時間)。
+上次更新時間：2026-05-05 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-05 (世界標準時間)。"],[],[]]

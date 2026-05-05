@@ -389,8 +389,7 @@ FROM
 ### bq
 
 請發出 `bq show` 指令。`--format` 旗標可用來控制輸出內容。如要取得預設專案以外的資料集相關資訊，請使用下列格式將專案 ID 新增至資料集名稱：`project_id:dataset`。
-輸出內容會顯示資料集的資訊，例如存取權控管、標籤和位置。這項指令不會顯示資料集的
-繼承權限，但您可以在 Google Cloud 控制台中查看。
+輸出內容會顯示資料集的資訊，例如存取權控管、標籤和位置。這項指令不會顯示資料集的繼承權限，但您可以在 Google Cloud 控制台中查看。
 
 如要顯示[隱藏資料集](https://docs.cloud.google.com/bigquery/docs/datasets?hl=zh-tw#hidden_datasets)的相關資訊，請使用 [`bq ls --all`](https://docs.cloud.google.com/bigquery/docs/listing-datasets?hl=zh-tw) 指令列出所有資料集，然後在 `bq show` 指令中使用隱藏資料集的名稱。
 
@@ -691,11 +690,11 @@ except NotFound:
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-04 (世界標準時間)。
+上次更新時間：2026-05-05 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-04 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-05 (世界標準時間)。"],[],[]]
