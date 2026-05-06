@@ -107,7 +107,7 @@ DELETE https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/location/LOCAT
 
 BigQuery sharing 訂閱者刪除訂閱項目時，系統也會從訂閱者的專案中刪除連結的資料集。
 
-從多區域項目 ([預覽版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages)) 刪除訂閱項目時，系統也會從訂閱者的專案中刪除所有主要和次要連結的資料集副本。
+從多區域項目刪除訂閱項目時，系統也會從訂閱者的專案中刪除所有主要和次要連結的資料集副本。
 
 如要進一步瞭解如何使用 API 管理訂閱項目，請參閱[`projects.locations.subscriptions` 方法](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.subscriptions?hl=zh-tw#methods)。
 
@@ -147,7 +147,7 @@ GET https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/location/LOCATION
 
 BigQuery sharing 發布者撤銷訂閱項目後，訂閱者就無法再查詢連結的資料集。由於這項動作是由發布者在訂閱者擁有的資源上發起，因此連結的資料集仍會保留在訂閱者的專案中。訂閱者可以刪除資料集來移除。
 
-如果發布者從多區域項目 ([預覽版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages)) 撤銷訂閱，訂閱者就無法再查詢任何主要或次要連結的資料集副本。
+如果發布者從多區域項目撤銷訂閱，訂閱者就無法再查詢任何主要或次要連結的資料集副本。
 
 **注意：** 撤銷[與 Cloud Marketplace 整合的商業訂閱項目](https://docs.cloud.google.com/bigquery/docs/analytics-hub-cloud-marketplace?hl=zh-tw)，可能會影響客戶並違反《[Cloud Marketplace 服務條款](https://cloud.google.com/terms/marketplace/launcher?hl=zh-tw)》。
 
@@ -201,11 +201,11 @@ POST https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/location/LOCATIO
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-05 (世界標準時間)。
+上次更新時間：2026-05-06 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-05 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-06 (世界標準時間)。"],[],[]]

@@ -24,7 +24,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 * 確認您已完成[啟用 BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service?hl=zh-tw)的一切必要動作。
 * 請[建立 BigQuery 資料集](https://docs.cloud.google.com/bigquery/docs/datasets?hl=zh-tw)來儲存您的資料。
-* [建立資料移轉作業的目的地資料表](https://docs.cloud.google.com/bigquery/docs/tables?hl=zh-tw#create_an_empty_table_with_a_schema_definition)，並指定結構定義。目的地資料表必須遵循[資料表命名規則](https://docs.cloud.google.com/bigquery/docs/tables?hl=zh-tw#table_naming)。目的地資料表名稱也支援[參數](https://docs.cloud.google.com/bigquery/docs/s3-transfer-parameters?hl=zh-tw)。您可以建立 BigQuery 資料表，或[建立受管理 Iceberg 資料表](https://docs.cloud.google.com/bigquery/docs/iceberg-tables?hl=zh-tw#create-iceberg-tables)。
+* [建立資料移轉作業的目的地資料表](https://docs.cloud.google.com/bigquery/docs/tables?hl=zh-tw#create_an_empty_table_with_a_schema_definition)，並指定結構定義。目的地資料表必須遵循[資料表命名規則](https://docs.cloud.google.com/bigquery/docs/tables?hl=zh-tw#table_naming)。目的地資料表名稱也支援[參數](https://docs.cloud.google.com/bigquery/docs/s3-transfer-parameters?hl=zh-tw)。您可以建立 BigQuery 資料表或[建立 Iceberg 受管理資料表](https://docs.cloud.google.com/bigquery/docs/iceberg-tables?hl=zh-tw#create-iceberg-tables)。
 * 擷取您的 Amazon S3 URI、存取金鑰 ID，以及私密存取金鑰。如需存取金鑰管理方面的資訊，請參閱 [AWS 說明文件](https://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html)。
 * 如要為 Pub/Sub 設定移轉作業執行通知，您必須擁有 `pubsub.topics.setIamPolicy` 權限。如果您只想設定電子郵件通知，則不需要擁有 Pub/Sub 權限。詳情請參閱 [BigQuery 資料移轉服務執行通知](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications?hl=zh-tw)一文。
 
@@ -97,7 +97,7 @@ Amazon S3 資料移轉作業有下列限制：
 
      + 在「Dataset」(資料集) 部分，選取您為了儲存資料而建立的資料集。
      + 如要移轉至 BigQuery 資料表，請選取「Native table」(原生資料表)。
-     + 如要移轉至代管的 Iceberg 資料表，請選取「Apache Iceberg」。
+     + 如要移轉至 Iceberg 代管資料表，請選取「Apache Iceberg」。
    * 在「Data source details」(資料來源詳細資料) 區段：
 
      + 在「Destination table」(目的地資料表)，輸入您為了在 BigQuery 儲存資料而建立的資料表名稱。目的地資料表的名稱支援[參數](https://docs.cloud.google.com/bigquery/docs/s3-transfer-parameters?hl=zh-tw)。
@@ -164,7 +164,7 @@ bq mk \
 
     URI 也支援[參數](https://docs.cloud.google.com/bigquery/docs/s3-transfer-parameters?hl=zh-tw)。
   + access\_key\_id：必填，存取金鑰 ID。
-  + secret\_access\_key：必填，您的私密存取金鑰。
+  + secret\_access\_key：必填，您的存取金鑰。
   + file\_format：選用。指出要轉移的檔案類型：`CSV`、`JSON`、`AVRO`、`PARQUET` 或 `ORC`。預設值為 `CSV`。
   + write\_disposition：選用。`WRITE_APPEND` 只會轉移上次成功執行後修改的檔案。`WRITE_TRUNCATE` 會轉移所有相符的檔案，包括先前轉移的檔案。預設值為 `WRITE_APPEND`。
   + max\_bad\_records：選用。允許的損壞記錄數量。預設值為 `0`。

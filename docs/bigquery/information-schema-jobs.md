@@ -46,7 +46,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 | `dml_statistics` | `RECORD` | 如果工作是含有 DML 陳述式的查詢，則值為含有下列欄位的記錄：   * `inserted_row_count`：插入的資料列數。 * `deleted_row_count`：已刪除的資料列數。 * `updated_row_count`：更新的資料列數。  如果是其他工作，值為 `NULL`。  這個資料欄會顯示在「`INFORMATION_SCHEMA.JOBS_BY_USER`」和「`INFORMATION_SCHEMA.JOBS_BY_PROJECT`」檢視畫面中。 |
 | `end_time` | `TIMESTAMP` | 這項工作的結束時間，自訓練週期後的毫秒數。這個欄位代表工作進入 `DONE` 狀態的時間。 |
 | `error_result` | `RECORD` | 以 [ErrorProto](https://cloud.google.com/bigquery/docs/reference/rest/v2/ErrorProto?hl=zh-tw) 物件形式呈現的任何錯誤詳細資料。 |
-| `job_creation_reason.code` | `STRING` | 指定建立作業的高層次原因。  可能的值包括：  * `REQUESTED`：要求建立工作。 * `LONG_RUNNING`：查詢要求超出系統定義的逾時時間，該時間由 `QueryRequest` 中的 [timeoutMs 欄位指定。因此，系統會將其視為長期執行的作業，並為此建立工作。](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query?hl=zh-tw#queryrequest) * `LARGE_RESULTS`：查詢結果無法納入內嵌回應。 * `OTHER`：系統判斷查詢需要以工作形式執行。 |
+| `job_creation_reason.code` | `STRING` | 指定建立作業的高層次原因。  可能的值包括：  * `REQUESTED`：要求建立工作。 * `LONG_RUNNING`：查詢要求超出系統定義的逾時時間，該時間由 `QueryRequest` 中的 [timeoutMs 欄位指定。因此，系統會將其視為長時間執行的作業，並建立工作。](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query?hl=zh-tw#queryrequest) * `LARGE_RESULTS`：查詢結果無法納入內嵌回應。 * `OTHER`：系統判斷查詢需要以工作形式執行。 |
 | `job_id` | `STRING` | 如果已建立工作，則為工作 ID。否則，請使用「選擇性建立工作」模式查詢的查詢 ID。例如 `bquxjob_1234`。 |
 | `job_stages` | `RECORD` | 這項工作的[查詢階段](https://cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#ExplainQueryStage)。 **注意**：如果查詢是從設有資料列層級存取政策的資料表讀取資料，這個資料欄的值會是空白。詳情請參閱 [BigQuery 資料列層級安全防護最佳做法](https://docs.cloud.google.com/bigquery/docs/best-practices-row-level-security?hl=zh-tw)。 |
 | `job_type` | `STRING` | 工作類型。可以是 `QUERY`、`LOAD`、`EXTRACT`、`COPY` 或 `NULL`。`NULL` 值表示背景工作。 |
@@ -71,10 +71,10 @@ Google uses AI technology to translate content into your preferred language. AI 
 | `total_services_sku_slot_ms` | `INTEGER` | 在外部服務上執行的工作，以及以服務 SKU 計費的工作，其總計的毫秒數。這個欄位只會填入有外部服務費用的工作，且是帳單方式為 `"SERVICES_SKU"` 的費用用量總計。 |
 | `transaction_id` | `STRING` | 這項工作執行的[交易](https://cloud.google.com/bigquery/docs/transactions?hl=zh-tw) ID (如有)。 |
 | `user_email` | `STRING` | (*分群資料欄*) 執行作業的使用者電子郵件地址或服務帳戶。 |
-| `principal_subject` | `STRING` | 執行工作的主體身分字串表示法。 |
+| `principal_subject` | `STRING` | 執行作業的主體身分字串表示法。 |
 | `query_info.resource_warning` | `STRING` | 如果查詢處理期間的資源用量超過系統的內部門檻，就會顯示警告訊息。 如果查詢工作成功，`resource_warning` 欄位就會填入資料。使用 `resource_warning`，您可取得額外的資料點，藉此最佳化查詢，並使用 `query_hashes` 設定同等查詢集的成效趨勢監控。 |
 | `query_info.query_hashes.normalized_literals` | `STRING` | 包含查詢的雜湊值。`normalized_literals` 是十六進位 `STRING` 雜湊，會忽略註解、參數值、UDF 和常值。如果基礎檢視區塊變更，或查詢隱含參照資料欄 (例如 `SELECT *`)，且資料表結構定義變更，雜湊值就會不同。  這個欄位會顯示成功的 [GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw) 查詢，但不會顯示快取命中。 |
-| `query_info.performance_insights` | `RECORD` | 工作的[效能深入分析](https://cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#PerformanceInsights)。 |
+| `query_info.performance_insights` | `RECORD` | 工作的[效能洞察資料](https://cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#PerformanceInsights)。 |
 | `query_info.optimization_details` | `STRUCT` | 這項工作[以記錄為依據進行最佳化](https://docs.cloud.google.com/bigquery/docs/history-based-optimizations?hl=zh-tw)。只有 `JOBS_BY_PROJECT` 檢視畫面會顯示這個資料欄。 |
 | `transferred_bytes` | `INTEGER` | 跨雲端查詢 (例如 BigQuery Omni 跨雲端移轉工作) 的總移轉位元組數。 |
 | `materialized_view_statistics` | `RECORD` | 查詢作業中考量的[具體化檢視表統計資料](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#MaterializedViewStatistics)。([預覽](https://cloud.google.com/products?hl=zh-tw#product-launch-stages)) |
@@ -92,7 +92,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 多陳述式查詢工作
 
-多重陳述式查詢工作是指使用[程序語言](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language?hl=zh-tw)的查詢工作。多重陳述式查詢作業通常會使用 `DECLARE` 定義變數，或使用控制流程陳述式 (例如 `IF` 或 `WHILE`)。查詢 `INFORMATION_SCHEMA.JOBS` 時，您可能需要瞭解多重陳述式查詢工作和其他工作的差異。多重陳述式查詢工作具有下列特徵：
+多重陳述式查詢工作是指使用[程序語言](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language?hl=zh-tw)的查詢工作。多重陳述式查詢作業通常會使用 `DECLARE` 定義變數，或使用控制流程陳述式 (例如 `IF` 或 `WHILE`)。查詢 `INFORMATION_SCHEMA.JOBS` 時，您可能需要瞭解多重陳述式查詢工作和其他工作的差異。多重陳述式查詢作業具有下列特徵：
 
 * `statement_type` = `SCRIPT`
 * `reservation_id` = `NULL`

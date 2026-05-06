@@ -16,11 +16,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 查詢 Apache Iceberg 資料
 
-本文說明如何查詢[BigQuery 中受管理 Apache Iceberg 資料表](https://docs.cloud.google.com/bigquery/docs/iceberg-tables?hl=zh-tw)儲存的資料。
+本文說明如何查詢[Apache Iceberg 受管理資料表](https://docs.cloud.google.com/bigquery/docs/iceberg-tables?hl=zh-tw)中儲存的資料。
 
 ## 必要的角色
 
-如要在 BigQuery 中查詢代管 Apache Iceberg 資料表，請確保 BigQuery API 的呼叫端具有下列角色：
+如要查詢 Apache Iceberg 受管理資料表，請確保 BigQuery API 的呼叫端具有下列角色：
 
 * BigQuery 連線使用者 (`roles/bigquery.connectionUser`)
 * BigQuery 資料檢視者 (`roles/bigquery.dataViewer`)
@@ -40,9 +40,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 您或許還可透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)取得這些權限。
 
-## 查詢代管 Iceberg 資料表
+## 查詢 Iceberg 代管資料表
 
-建立受管理 Iceberg 資料表後，您可以使用 [GoogleSQL 語法查詢資料表](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw)，就像查詢標準 BigQuery 資料表一樣。例如：`SELECT field1, field2
+建立 Iceberg 受管理資料表後，您可以使用 [GoogleSQL 語法查詢資料表](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw)，就像查詢標準 BigQuery 資料表一樣。例如：`SELECT field1, field2
 FROM mydataset.my_iceberg_table;`。
 
 ## 後續步驟
@@ -58,11 +58,11 @@ FROM mydataset.my_iceberg_table;`。
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-02 (世界標準時間)。
+上次更新時間：2026-05-06 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-06 (世界標準時間)。"],[],[]]

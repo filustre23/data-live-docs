@@ -974,5 +974,5 @@ from google.cloud import bigquery
 
 client = bigquery.Client()
 
-# TODO(de
+# T
 ```

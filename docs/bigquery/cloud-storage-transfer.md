@@ -25,7 +25,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 * 確認您已完成[啟用 BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service?hl=zh-tw)中的一切必要動作。
 * 請擷取您的 [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer-overview?hl=zh-tw#google-cloud-storage-uri)。
 * 請[建立 BigQuery 資料集](https://docs.cloud.google.com/bigquery/docs/datasets?hl=zh-tw)來儲存您的資料。
-* [建立資料移轉作業的目的地資料表](https://docs.cloud.google.com/bigquery/docs/tables?hl=zh-tw#create_an_empty_table_with_a_schema_definition)，並指定結構定義。您可以建立 BigQuery 資料表，或[建立受管理 Iceberg 資料表](https://docs.cloud.google.com/bigquery/docs/iceberg-tables?hl=zh-tw#create-iceberg-tables)。
+* [建立資料移轉作業的目的地資料表](https://docs.cloud.google.com/bigquery/docs/tables?hl=zh-tw#create_an_empty_table_with_a_schema_definition)，並指定結構定義。您可以建立 BigQuery 資料表或[建立 Iceberg 受管理資料表](https://docs.cloud.google.com/bigquery/docs/iceberg-tables?hl=zh-tw#create-iceberg-tables)。
 * 如果您打算指定客戶自行管理的加密金鑰 (CMEK)，請確保[服務帳戶具有加密和解密權限](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw#grant_permission)，且您擁有使用 CMEK 時所需的 [Cloud KMS 金鑰資源 ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw#key_resource_id)。如要瞭解 CMEK 如何與 BigQuery 資料移轉服務搭配運作，請參閱[指定移轉作業加密金鑰](#CMEK)。
 
 ## 限制
@@ -111,7 +111,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    * 在「Dataset」(資料集) 部分，選取您為了儲存資料而建立的資料集。
    * 如要移轉至 BigQuery 資料表，請選取「Native table」(原生資料表)。
-   * 如要移轉至代管的 Iceberg 資料表，請選取「Apache Iceberg」。
+   * 如要移轉至 Iceberg 代管資料表，請選取「Apache Iceberg」。
 7. 在「Data source details」(資料來源詳細資料) 區段：
 
    1. 在「Destination table」(目標資料表) 中輸入目標資料表的名稱。

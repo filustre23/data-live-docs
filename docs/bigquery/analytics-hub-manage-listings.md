@@ -27,12 +27,12 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 清單是發布者在[資料交換庫](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction?hl=zh-tw#data_exchanges)中列出的共用資料集參照資訊。根據為房源設定的 Identity and Access Management (IAM) 政策，以及包含房源的資料交換庫類型，房源可分為下列兩種：
 
-* **公開產品資訊。**[Google Cloud 使用者 (`allAuthenticatedUsers`)](https://docs.cloud.google.com/iam/docs/principals-overview?hl=zh-tw#all-authenticated-users) 可以[探索](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings?hl=zh-tw#discover-listings)及[訂閱](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings?hl=zh-tw#subscribe-listings)公開清單。公開資料交換中的清單就是公開清單。這些清單可以是*免費公開資料集*或*商業資料集*的參照。如果產品資訊屬於商業資料集，BigQuery sharing 訂閱者可以直接向資料供應商要求存取產品資訊，也可以瀏覽及購買[整合 Google Cloud Marketplace 的商業產品資訊](https://docs.cloud.google.com/bigquery/docs/analytics-hub-cloud-marketplace?hl=zh-tw)。
-* **私人房源**。私人房源資訊會直接分享給個人或群組。舉例來說，私人房源資訊可以參照您與貴機構其他內部團隊共用的行銷指標資料集。即使您可以
+* **公開產品資訊。**[Google Cloud 使用者 (`allAuthenticatedUsers`)](https://docs.cloud.google.com/iam/docs/principals-overview?hl=zh-tw#all-authenticated-users) 可以[探索](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings?hl=zh-tw#discover-listings)及[訂閱](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings?hl=zh-tw#subscribe-listings)公開清單。公開資料交換中的清單就是公開清單。這些清單可以是*免費公開資料集*或*商業資料集*的參照。如果資訊是商業資料集，BigQuery sharing 訂閱者可以直接向資料供應商要求存取資訊，也可以瀏覽及購買[整合 Google Cloud Marketplace 的商業資訊](https://docs.cloud.google.com/bigquery/docs/analytics-hub-cloud-marketplace?hl=zh-tw)。
+* **私人房源**。私人房源資訊會直接分享給個人或群組。舉例來說，私人房源資訊可以參照您與機構內其他內部團隊共用的行銷指標資料集。即使您可以
   [允許 Google Cloud 使用者 (`allAuthenticatedUsers`)](#give_users_access_to_a_listing) 訂閱您的項目，該項目仍會維持私密狀態，且
   [不會顯示在 BigQuery sharing 頁面上的公開項目清單](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings?hl=zh-tw#discover-listings)。如要與使用者分享這類房源資訊，請將房源網址提供給他們。如要讓私人產品資訊可供搜尋，請[公開交易所](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges?hl=zh-tw#make-data-exchange-public)。
 
-**注意：** 單一 BigQuery sharing 項目同時支援要求存取權和 Cloud Marketplace 整合流程。也就是說，您可以從現有的 (離線) 商業產品資訊建立與 Cloud Marketplace 整合的產品資訊，現有訂閱項目不會受到任何影響。
+**注意：** 單一 BigQuery 共用項目同時支援要求存取權和 Cloud Marketplace 整合流程。也就是說，您可以從現有的 (離線) 商業產品資訊建立與 Cloud Marketplace 整合的產品資訊，現有訂閱項目不會受到任何影響。
 
 ## 事前準備
 
@@ -91,7 +91,7 @@ gcloud services enable analyticshub.googleapis.com
 
 清單是 BigQuery sharing 發布端在資料交換庫中列出的[共用資料集](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction?hl=zh-tw#shared_datasets)參照資訊。
 
-**注意：** 建議您不要在具有 VPC Service Controls 範圍的Google Cloud 專案中新增共用資料集。如果這麼做，您就必須新增適當的[輸入和輸出規則](https://docs.cloud.google.com/bigquery/docs/analytics-hub-vpc-sc-rules?hl=zh-tw#create_a_listing)。
+**注意：** 建議您不要在具有 VPC Service Controls perimeter 的Google Cloud 專案中新增共用資料集。如果這麼做，您就必須新增適當的[輸入和輸出規則](https://docs.cloud.google.com/bigquery/docs/analytics-hub-vpc-sc-rules?hl=zh-tw#create_a_listing)。
 
 如要建立房源資訊，請按照下列步驟操作：
 
@@ -110,7 +110,7 @@ gcloud services enable analyticshub.googleapis.com
 
      1. 在「共用資料集」選單中，選取現有資料集，或按一下「建立資料集」建立新資料集。選取要在資料交換中列出的資料集。資料集必須與資料交易所處的區域相同。建立產品資訊後，就無法更新這個欄位。當 BigQuery sharing 訂閱者[查看連結資料集的中繼資料](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings?hl=zh-tw#view-table-metadata)時，系統會傳回來源資料集名稱和包含該資料集的專案 ID。
      2. 選用：如要讓訂閱者[在資訊中分享 SQL 預存程序](#share-stored-procedure-in-listing)，請選取「允許共用預存程序」([預先發布版](https://docs.cloud.google.com/products?hl=zh-tw#product-launch-stages))。
-     3. 展開「區域資料可用性」選單 ([預覽](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))，即可在其他區域提供共用資料集。選單會顯示有資料集副本的區域，並標示「可供使用」。設定多個區域的房源資訊前，請先確認已在共用資料集上啟用[跨區域資料集複製](https://docs.cloud.google.com/bigquery/docs/data-replication?hl=zh-tw#use_dataset_replication)功能，因為您只能選取已啟用這項功能的區域。其他地區則標示為「不適用」。如未選取其他區域，項目會預設使用共用資料集的主要區域，標示為「供應商主要區域」。
+     3. 展開「區域資料可用性」選單，在其他區域提供共用資料集。選單會顯示有資料集副本的區域，並標示「可供使用」。設定多個區域的房源資訊前，請先確認已在共用資料集上啟用[跨區域資料集複製](https://docs.cloud.google.com/bigquery/docs/data-replication?hl=zh-tw#use_dataset_replication)功能，因為您只能選取已啟用這項功能的區域。其他地區則標示為「不適用」。如未選取其他區域，項目會預設使用共用資料集的主要區域，標示為「供應商主要區域」。
      4. 在「資料輸出控制項」中，選取適當的資料輸出選項。
 
         + 如要對共用資料集套用資料輸出限制，但不要對共用資料集的查詢結果套用限制，請選取「停用共用資料的複製和匯出功能」。
@@ -126,9 +126,9 @@ gcloud services enable analyticshub.googleapis.com
    * **資料親和性**：如果您使用 Pub/Sub 主題，BigQuery sharing 發布端會使用這些區域發布資料。BigQuery sharing 訂閱端可利用這項資訊，從相同區域讀取資料，盡量減少或避免 Pub/Sub 網路輸出費用。如要進一步瞭解輸出費用，請參閱「[資料移轉費用](https://cloud.google.com/pubsub/pricing?hl=zh-tw#egress_costs)」。
    * **圖示**：產品資訊的圖示。支援 PNG 和 JPEG 檔案格式。圖示的檔案大小不得超過 512 KiB，尺寸不得超過 512 x 512 像素。
    * **說明**：簡要說明房源。訂閱者可以根據說明[搜尋房源](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings?hl=zh-tw#discover-listings)。
-   * **公開探索**：在 BigQuery sharing 目錄中啟用公開探索功能，啟用這個選項後，請授予 `allUsers` 或 `allAuthenticatedUsers` [Analytics Hub 檢視者角色](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#analyticshub.viewer) (`roles/analyticshub.viewer`)。詳情請參閱「[授予房源角色](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles?hl=zh-tw#grant-role-listing)」。如果交易所已[公開](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges?hl=zh-tw#make-data-exchange-public)，則會自動沿用上架權限，不需採取進一步行動。
+   * **公開探索**：在 BigQuery sharing 目錄中啟用公開探索功能，啟用這個選項後，請授予 `allUsers` 或 `allAuthenticatedUsers` [Analytics Hub 檢視者角色](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#analyticshub.viewer) (`roles/analyticshub.viewer`)。詳情請參閱「[授予商家資訊角色](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles?hl=zh-tw#grant-role-listing)」。如果交易所已[公開](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges?hl=zh-tw#make-data-exchange-public)，則會自動沿用上架權限，因此不需要採取任何行動。
 
-     由於權限繼承的關係，可公開探索的交換庫無法提供私人清單項目，但私人交換庫可以提供公開清單項目。如要建立公開資料集，資料集所在的專案必須有相關聯的機構和帳單帳戶。如果您要建立[整合 Cloud Marketplace 的商業產品資訊](https://docs.cloud.google.com/bigquery/docs/analytics-hub-cloud-marketplace?hl=zh-tw)，建議將產品資訊設為公開，方便使用者搜尋。
+     由於權限繼承的關係，可公開探索的交易平台無法提供私人清單項目，但私人交易平台可以提供公開清單項目。如要建立公開資料集，資料集所在的專案必須有相關聯的機構和帳單帳戶。如果您要建立[整合 Cloud Marketplace 的商業產品資訊](https://docs.cloud.google.com/bigquery/docs/analytics-hub-cloud-marketplace?hl=zh-tw)，建議將產品資訊設為公開，方便使用者搜尋。
    * **訂閱端電子郵件記錄**：啟用記錄功能，以便掌握所有在連結資料集上執行工作和查詢的使用者[主體 ID](https://docs.cloud.google.com/iam/docs/principal-identifiers?hl=zh-tw)。啟用這項選項後，這項產品資訊日後的所有訂閱項目都會啟用訂閱者電子郵件記錄功能。記錄的資料會顯示在 [`INFORMATION_SCHEMA.SHARED_DATASET_USAGE` 檢視區塊的 `job_principal_subject` 欄位中。](https://docs.cloud.google.com/bigquery/docs/information-schema-shared-dataset-usage?hl=zh-tw)
 
      **注意：** 啟用並儲存電子郵件記錄功能後，就無法再編輯這項設定。如要停用電子郵件記錄功能，請刪除清單項目並重新建立，但不要點擊「訂閱者電子郵件記錄」切換按鈕。
@@ -162,12 +162,12 @@ POST https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/location/LOCATIO
 
 * `PROJECT_ID`：包含資料交換庫的專案 ID，您要在該交換庫中建立商家資訊。
 * `LOCATION`：資料交換庫的位置。如要進一步瞭解支援 BigQuery sharing 的位置，請參閱「[支援的區域](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction?hl=zh-tw#supported-regions)」。
-* `DATAEXCHANGE_ID`：廣告交易平台 ID。
+* `DATAEXCHANGE_ID`：資料交換 ID。
 * `LISTING_ID`：房源 ID。
 
 在要求主體中，提供[房源詳細資料](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings?hl=zh-tw#resource:-listing)。
 
-如要為多個區域建立房源資訊 ([預覽](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))，請在要求主體的 `bigqueryDataset.replicaLocations` 欄位中指定其他區域。為多個區域設定清單前，請先確認已在共用資料集上啟用[跨區域資料集複製](https://docs.cloud.google.com/bigquery/docs/data-replication?hl=zh-tw#use_dataset_replication)。您只能選取已啟用跨區域資料集複製功能的區域。如果未填寫這個選填欄位，系統會使用共用資料集的主要區域建立產品資訊。
+如要為多個區域建立房源資訊，請在要求主體的 `bigqueryDataset.replicaLocations` 欄位中指定其他區域。為多個區域設定項目之前，請先確認已在共用資料集上啟用[跨區域資料集複製](https://docs.cloud.google.com/bigquery/docs/data-replication?hl=zh-tw#use_dataset_replication)。您只能選取已啟用跨區域資料集複製功能的區域。如果未填寫這個選填欄位，系統會使用共用資料集的主要區域建立產品資訊。
 
 如果要求成功，回應主體會包含房源詳細資料。如果使用 `logLinkedDatasetQueryUserEmail` 欄位啟用訂閱者電子郵件記錄功能，清單回應會包含 `log_linked_dataset_query_user_email: true`。記錄的資料會顯示在 [`INFORMATION_SCHEMA.SHARED_DATASET_USAGE` 檢視區塊的 `job_principal_subject` 欄位中](https://docs.cloud.google.com/bigquery/docs/information-schema-shared-dataset-usage?hl=zh-tw)。
 
@@ -189,7 +189,7 @@ POST https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/location/LOCATIO
 
    當 BigQuery sharing 訂閱端[查看連結資料集的中繼資料](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings?hl=zh-tw#view-table-metadata)時，系統會傳回來源資料集名稱和包含該資料集的專案 ID。
 6. 選用：如要讓訂閱者[在資訊中分享 SQL 預存程序](#share-stored-procedure-in-listing)，請選取「允許共用預存程序」([預先發布版](https://docs.cloud.google.com/products?hl=zh-tw#product-launch-stages))。
-7. 展開「區域資料可用性」選單 ([預覽](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))，即可在其他區域提供共用資料集。選單會顯示有資料集副本的區域，並標示「可供使用」。為多個區域設定房源資訊前，請先確認已在共用資料集上啟用[跨區域資料集複製](https://docs.cloud.google.com/bigquery/docs/data-replication?hl=zh-tw#use_dataset_replication)，因為您只能選取已啟用跨區域資料集複製的區域。其他地區則標示為「不適用」。如未選取其他區域，預設會使用共用資料集區域，標示為「供應商主要區域」。
+7. 展開「區域資料可用性」選單，即可在其他區域提供共用資料集。選單會顯示有資料集副本的區域，並標示「可供使用」。為多個區域設定房源資訊前，請先確認已在共用資料集上啟用[跨區域資料集複製](https://docs.cloud.google.com/bigquery/docs/data-replication?hl=zh-tw#use_dataset_replication)，因為您只能選取已啟用跨區域資料集複製的區域。其他地區則標示為「不適用」。如未選取其他區域，預設會使用共用資料集區域，標示為「供應商主要區域」。
 8. 在「資料輸出控制項」中，選取適當的資料輸出選項。
 
    * 如要對共用資料集套用資料輸出限制，但不要對共用資料集的查詢結果套用限制，請選取「停用共用資料複製與匯出功能」。
@@ -201,12 +201,12 @@ POST https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/location/LOCATIO
 10. 輸入下列選填詳細資料：
 
     * **類別**：選取最多兩個最能代表商家檔案的類別。BigQuery sharing 訂閱者可以根據這些類別[篩選商家資訊](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings?hl=zh-tw#discover-listings)。
-    * **資料親和性**：BigQuery sharing 發布者用來發布資料的區域。BigQuery sharing 訂閱端可從相同區域讀取資料，藉此減少或避免 Pub/Sub 網路輸出費用。如要進一步瞭解輸出費用，請參閱「[資料移轉費用](https://cloud.google.com/pubsub/pricing?hl=zh-tw#egress_costs)」。
+    * **資料親和性**：BigQuery sharing 發布者用來發布資料的區域。BigQuery sharing 訂閱端可利用這項資訊，從相同區域讀取資料，盡量減少或避免 Pub/Sub 網路輸出費用。如要進一步瞭解輸出費用，請參閱「[資料移轉費用](https://cloud.google.com/pubsub/pricing?hl=zh-tw#egress_costs)」。
     * **圖示**：產品資訊的圖示。支援 PNG 和 JPEG 檔案格式。圖示的檔案大小不得超過 512 KiB，尺寸不得超過 512 x 512 像素。
     * **說明**：簡要說明商家資訊。BigQuery sharing 訂閱者可以根據說明[搜尋清單](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings?hl=zh-tw#discover-listings)。
-    * **公開探索**：在 BigQuery sharing 目錄中啟用公開探索功能，啟用這個選項後，請授予 `allUsers` 或 `allAuthenticatedUsers`「[Analytics Hub 檢視者](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#analyticshub.viewer)」角色 (`roles/analyticshub.viewer`)。詳情請參閱「[授予房源角色](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles?hl=zh-tw#grant-role-listing)」。如果交易所已[公開](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges?hl=zh-tw#make-data-exchange-public)，則會自動沿用刊登權限，不需採取任何行動。
+    * **公開可探索性**：在 BigQuery 共用目錄中啟用您的刊登資訊的公開可探索性。啟用這個選項後，請授予 `allUsers` 或 `allAuthenticatedUsers`「Analytics Hub 檢視者」角色 `roles/analyticshub.viewer`。詳情請參閱「[授予房源角色](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles?hl=zh-tw#grant-role-listing)」。如果交易所已[公開](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges?hl=zh-tw#make-data-exchange-public)，則會自動沿用刊登權限，因此不需要採取任何行動。
 
-      由於權限繼承的關係，公開可探索的交換庫無法提供私人刊登，但私人交換庫可以提供公開刊登。如要建立公開資料，資料目錄所在的專案必須有相關聯的機構和帳單帳戶。如果您要建立[整合 Cloud Marketplace 的商業產品資訊](https://docs.cloud.google.com/bigquery/docs/analytics-hub-cloud-marketplace?hl=zh-tw)，建議將產品資訊設為公開，方便使用者搜尋。
+      由於權限繼承的關係，公開可探索的交易平台無法提供私人刊登，但私人交易平台可以提供公開刊登。如要建立公開資料，資料目錄所在的專案必須有相關聯的機構和帳單帳戶。如果您要建立[整合 Cloud Marketplace 的商業產品資訊](https://docs.cloud.google.com/bigquery/docs/analytics-hub-cloud-marketplace?hl=zh-tw)，建議將產品資訊設為公開，方便使用者搜尋。
     * **記錄訂閱端電子郵件**：開啟這項功能後，系統會記錄訂閱者[主要 ID](https://docs.cloud.google.com/iam/docs/principal-identifiers?hl=zh-tw)，以便掌握日後所有訂閱者在清單項目連結資料集上執行的工作和查詢。啟用這個選項後，只有新建立的訂閱項目會記錄主體 ID。記錄的資料會顯示在 [`INFORMATION_SCHEMA.SHARED_DATASET_USAGE` 檢視區塊的 `job_principal_subject` 欄位中](https://docs.cloud.google.com/bigquery/docs/information-schema-shared-dataset-usage?hl=zh-tw)。
 
       **注意：** 啟用並儲存電子郵件記錄功能後，就無法再編輯這項設定。如要停用電子郵件記錄功能，請刪除清單項目並重新建立，但不要點擊「訂閱者電子郵件記錄」切換按鈕。
@@ -243,12 +243,12 @@ POST https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/location/LOCATIO
 
 訂閱項目後，系統可能不會直接執行連結的預存程序。為確保可存取連結的預存程序，訂閱者必須將連結的資料集名稱告知供應商，[供應商才能授權存取供應商資源中的連結預存程序](#provider-authorization)。此外，訂閱端必須[授權連結的共用預存程序，並將 IAM 角色連接至擁有的資源](https://docs.cloud.google.com/bigquery/docs/authorized-routines?hl=zh-tw#bq-attach-role)，才能讀取及寫入這些資源。
 
-#### 供應商授權
+#### 提供者授權
 
 供應商使用預存程序建立項目時，必須允許訂閱者透過連結的預存程序讀取及寫入資料表。如要確保這點，請按照下列步驟操作：
 
 * 對於非讀取作業，供應商必須授權連結的共用預存程序，並[將 IAM 角色附加](https://docs.cloud.google.com/bigquery/docs/authorized-routines?hl=zh-tw#bq-attach-role)至連結預存程序存取的任何供應商資源。
-* 如果是讀取作業，供應商可以授權連結的共用預存程序 (位於訂閱端的連結資料集中)，或授權原始共用預存程序 (位於供應商的資料集中)，並[將 IAM 角色附加](https://docs.cloud.google.com/bigquery/docs/authorized-routines?hl=zh-tw#bq-attach-role)至連結預存程序存取的任何供應商資源。
+* 如要執行讀取作業，供應商可以授權連結的共用預存程序 (位於訂閱端的連結資料集中)，或授權原始共用預存程序 (位於供應商的資料集中)，並[將 IAM 角色附加至](https://docs.cloud.google.com/bigquery/docs/authorized-routines?hl=zh-tw#bq-attach-role)連結預存程序存取的任何供應商資源。
 
 ## 授予使用者商家資訊存取權
 
@@ -273,10 +273,10 @@ POST https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/location/LOCATIO
    * 如果是私人房源，請輸入要授予存取權的身分識別電子郵件 ID。
    * 如果是公開產品資訊，請新增 `allAuthenticatedUsers`。
    * 如要讓所有人 (包括非Google Cloud使用者) 都能找到公開的產品資訊，請新增 `allUsers`。
-7. 將指標懸停在「選取角色」 的「Analytics Hub」 上，然後根據商家資訊類型選取下列其中一個角色：
+7. 將指標懸停在「Select a role」(選取角色) 的「Analytics Hub」(Analytics Hub) 上，然後根據商家資訊類型選取下列其中一個角色：
 
-   * 如果是商業產品資訊 (包括整合 Cloud Marketplace 的產品資訊)，請選取「Analytics Hub Viewer」角色。這個角色可讓使用者[查看商家檔案並要求存取權](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings?hl=zh-tw#discover-listings)。
-   * 如果是私人或非商業用途的公開資訊，請選取「Analytics Hub 訂閱者」角色。使用者可透過這個角色[訂閱你的商家資訊](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings?hl=zh-tw#subscribe-listings)。
+   * 如果是商業產品資訊 (包括整合 Cloud Marketplace 的產品資訊)，請選取「Analytics Hub Viewer」角色。這個角色可讓使用者[查看商家資訊並要求存取權](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings?hl=zh-tw#discover-listings)。
+   * 如果是私人或非商業用途的公開清單，請選取「Analytics Hub 訂閱者」角色。使用者可透過這個角色[訂閱你的商家資訊](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings?hl=zh-tw#subscribe-listings)。
    * 如果是整合 Cloud Marketplace 的產品資訊，系統會根據 Cloud Marketplace 訂單自動控管及管理訂閱項目，因此不需要授予 Analytics Hub 訂閱者角色 (`roles/analyticshub.subscriber`)。**注意：** 授予使用者存取非 Cloud Marketplace 整合式商業項目的授權後，您可以為這些使用者建立私人項目，或授予這些使用者商業項目的 Analytics Hub 訂閱者 (`roles/analyticshub.subscriber`) 角色。
 
    詳情請參閱「[Analytics Hub 訂閱者和檢視者角色](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles?hl=zh-tw#ah-subscriber-role)」。
@@ -294,7 +294,7 @@ POST https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/location/LOCATIO
 
    * `PROJECT_ID`：專案 ID，例如 `my-project-1`。
    * `LOCATION`：包含房源資訊的資料交換庫位置。
-   * `DATAEXCHANGE_ID`：廣告交易平台 ID。
+   * `DATAEXCHANGE_ID`：資料交換 ID。
    * `LISTING_ID`：房源 ID。
 
    分享會在回應中傳回目前的政策。
@@ -325,7 +325,7 @@ POST https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/location/LOCATIO
 
 如要進一步瞭解如何使用 API 對房源執行工作，請參閱 [`projects.locations.dataExchanges.listings` 方法](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings?hl=zh-tw#methods)。
 
-**注意：** 授權使用者存取商業資訊後，你可以為這些使用者[建立私人資訊](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-listings?hl=zh-tw#create_a_listing)，或是授予商業資訊的[Analytics Hub 訂閱者角色](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles?hl=zh-tw#ah-subscriber-role) (`roles/analyticshub.subscriber`)。
+**注意：** 授權使用者存取商業檔案後，你可以為這些使用者[建立私人檔案](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-listings?hl=zh-tw#create_a_listing)，或授予商業檔案的[Analytics Hub 訂閱者角色](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles?hl=zh-tw#ah-subscriber-role) (`roles/analyticshub.subscriber`)。
 
 ### 為公開房源建立未經驗證的網址
 
@@ -365,7 +365,7 @@ POST https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/location/LOCATIO
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
 
-   如果沒有看到左側窗格，請按一下「展開左側窗格」圖示 last\_page 開啟窗格。
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Explorer」窗格中展開專案名稱，點選「Datasets」(資料集)，然後點選共用資料集的名稱。
 4. 在「共用」person\_add清單中，選取「管理訂閱項目」。
 
@@ -389,7 +389,7 @@ SELECT * FROM `myproject`.`region-us`.INFORMATION_SCHEMA.SCHEMATA_LINKS;
 +----------------+-------------+----------------------------+------------------------------+--------------------+--------------------------------+
 ```
 
-如要查看多個區域的訂閱項目 ([預覽](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))，請將 `us` 區域替換為預期副本位置。舉例來說，如要查看 `myproject` 中與共用資料集連結，且位於 `eu` 區域的連結資料集，請使用下列查詢：
+如要查看多個區域的訂閱項目，請將 `us` 區域替換為預期副本位置。舉例來說，如要查看 `myproject` 中與共用資料集連結，且位於 `eu` 區域的連結資料集，請使用下列查詢：
 
 ```
 SELECT * FROM `myproject`.`region-eu`.INFORMATION_SCHEMA.SCHEMATA_LINKS;
@@ -405,20 +405,20 @@ GET https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/location/LOCATION
 
 更改下列內容：
 
-* `PROJECT_ID`：要訂閱的房源專案 ID。
+* `PROJECT_ID`：您要訂閱的房源專案 ID。
 * `LOCATION`：要訂閱的商家資訊位置。
 * `DATAEXCHANGE_ID`：包含您要訂閱的房源資訊的資料交易 ID。
 * `LISTING_ID`：要訂閱的房源 ID。
 
 ## 移除訂閱項目
 
-如果移除 2023 年 7 月 25 日前建立的產品訂閱方案，
+如果移除 2023 年 7 月 25 日前建立的產品資訊訂閱項目，
 [連結的資料集](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction?hl=zh-tw#listings)會與[共用資料集](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction?hl=zh-tw#shared_datasets)取消連結。
 訂閱者仍可在專案中查看資料集，但這些資料集已不再與共用資料集連結。
 
 **注意：** 撤銷[與 Cloud Marketplace 整合的商業訂閱項目](https://docs.cloud.google.com/bigquery/docs/analytics-hub-cloud-marketplace?hl=zh-tw)，可能會影響客戶並違反《[Cloud Marketplace 服務條款](https://cloud.google.com/terms/marketplace/launcher?hl=zh-tw)》。
 
-如要從房源資訊中移除 2023 年 7 月 25 日前建立的訂閱項目，請按照下列步驟操作：
+如要從商店資訊中移除 2023 年 7 月 25 日前建立的訂閱項目，請按照下列步驟操作：
 
 1. 如要列出所有產品資訊的訂閱者，請按照「[查看所有訂閱項目](#view_all_subscriptions)」一文中的 Google Cloud 控制台操作說明進行操作。
 2. 如要從清單中移除訂閱者，請按一下「刪除」delete。如要移除所有訂閱項目，請按一下「移除所有訂閱項目」。
@@ -467,8 +467,8 @@ POST https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/location/LOCATIO
    * 如要啟用公開探索功能，請將 Analytics Hub 檢視者角色 (`roles/analyticshub.viewer`) 授予 `allUsers` 或 `allAuthenticatedUsers`。詳情請參閱「[授予房源角色](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles?hl=zh-tw#grant-role-listing)」。
    * 如果停用公開探索功能，請從 `allUsers` 和 `allAuthenticatedUsers` 移除 Analytics Hub 檢視者角色 (`roles/analyticshub.viewer`)。公開交易平台無法提供私人房源，但私人交易平台可以提供公開房源。
    * 啟用並儲存訂閱端電子郵件記錄功能後，就無法編輯這項設定。如要停用電子郵件記錄功能，請刪除清單項目，然後重新建立，但不要點擊「訂閱者電子郵件記錄」切換按鈕。
-   * 在房源中新增或移除區域 ([預覽](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))。新增多個區域前，請先確認您已在共用資料集上啟用[跨區域資料集複製](https://docs.cloud.google.com/bigquery/docs/data-replication?hl=zh-tw#use_dataset_replication)。移除區域時，請先刪除該區域中的共用資料集副本。
-7. 預覽商家檔案。
+   * 在房源資訊中新增或移除區域。新增多個區域前，請先確認您已在共用資料集上啟用[跨區域資料集複製](https://docs.cloud.google.com/bigquery/docs/data-replication?hl=zh-tw#use_dataset_replication)。移除區域時，請先刪除該區域中的共用資料集副本。
+7. 預覽房源資訊。
 8. 如要儲存變更，請按一下「儲存」。為避免與整合 Cloud Marketplace 的產品資訊發生差異，系統會顯示通知，提示更新 Cloud Marketplace 資料產品資訊。
 
    **注意：** 更新 Cloud Marketplace 資料產品資訊時，必須經過 Marketplace 營運團隊審查並核准。
@@ -497,7 +497,7 @@ PATCH https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/location/LOCATI
 
 如要瞭解這些欄位的詳細資料，請參閱「[資源：房源](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings?hl=zh-tw#resource:-listing)」。
 
-更新商家資訊的副本區域時，請務必指定所有適用區域。更新商家資訊前，請確認已在共用資料集上啟用[跨區域資料集複製](https://docs.cloud.google.com/bigquery/docs/data-replication?hl=zh-tw#use_dataset_replication)。您只能新增共用資料集複製所在的區域 ([預覽版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))。如要移除區域，請先刪除該區域的共用資料集副本，再從商家資訊中移除。您也可以將現有房源資訊轉換為多個地區的房源資訊。
+更新商家資訊的副本區域時，請務必指定所有適用區域。更新商家資訊前，請確認已在共用資料集上啟用[跨區域資料集複製](https://docs.cloud.google.com/bigquery/docs/data-replication?hl=zh-tw#use_dataset_replication)。您只能新增共用資料集複製的區域。如要移除區域，請先刪除該區域的共用資料集副本，再從項目中移除。您也可以將現有房源資訊轉換為多個地區的房源資訊。
 
 如要進一步瞭解如何使用 API 對房源執行工作，請參閱 [`projects.locations.dataExchanges.listings` 方法](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings?hl=zh-tw#methods)。
 
@@ -505,13 +505,13 @@ PATCH https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/location/LOCATI
 
 刪除商品後，訂閱者就無法再[查看商品](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings?hl=zh-tw#discover-listings)。刪除房源資訊也會[刪除所有連結的資料集](#remove_a_subscription)，並從訂閱者專案中移除所有訂閱項目。如果資料集仍處於連結狀態，請依序點選 person\_add「共用」**>「管理訂閱」**，手動移除資料集。系統會開啟「訂閱項目」頁面，您可以在這裡移除特定訂閱者資料集，或一次移除所有訂閱者資料集。
 
-您無法刪除含有有效商業訂閱項目的[整合 Cloud Marketplace 的產品資訊](https://docs.cloud.google.com/bigquery/docs/analytics-hub-cloud-marketplace?hl=zh-tw)。刪除房源前，請先[撤銷所有商業訂閱](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-subscriptions?hl=zh-tw#revoke-subscription)。
+您無法刪除含有有效商業訂閱項目的[整合 Cloud Marketplace 的產品資訊](https://docs.cloud.google.com/bigquery/docs/analytics-hub-cloud-marketplace?hl=zh-tw)。刪除房源前，請[撤銷所有商業訂閱](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-subscriptions?hl=zh-tw#revoke-subscription)。
 
 **注意：** 請注意，撤銷與 Cloud Marketplace 整合的商業訂閱項目，可能會影響客戶並違反《[Cloud Marketplace 服務條款](https://cloud.google.com/terms/marketplace/launcher?hl=zh-tw)》。
 
-刪除多個區域的房源資訊 ([預覽](https://cloud.google.com/products?hl=zh-tw#product-launch-stages)) 不會刪除共用資料集副本。刪除多個區域的項目後，訂閱者就無法再查看項目或查詢連結的資料集。如果其他房源未參照共用資料集副本，您可以[選擇刪除副本](https://docs.cloud.google.com/bigquery/docs/data-replication?hl=zh-tw#remove_a_dataset_replica)。
+刪除多個區域的產品資訊不會一併刪除共用資料集副本。刪除多個區域的項目後，訂閱者就無法再查看項目或查詢連結的資料集。如果其他項目未參照共用資料集副本，您可以[選擇刪除副本](https://docs.cloud.google.com/bigquery/docs/data-replication?hl=zh-tw#remove_a_dataset_replica)。
 
-刪除多個區域的房源資訊 ([預覽](https://cloud.google.com/products?hl=zh-tw#product-launch-stages)) 前，請確認沒有與其相關聯的有效訂閱項目。如有有效訂閱項目，您必須先使用 [`projects.locations.subscriptions.revoke` 方法](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.subscriptions/revoke?hl=zh-tw)撤銷訂閱。移除所有有效訂閱後，即可繼續刪除多個區域的商家資訊。
+刪除多個區域的產品資訊前，請確認沒有與其相關聯的有效訂閱項目。如有有效訂閱項目，您必須先使用 [`projects.locations.subscriptions.revoke` 方法](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.subscriptions/revoke?hl=zh-tw)撤銷訂閱。移除所有有效訂閱後，即可繼續刪除多個區域的商家資訊。
 
 **注意：** 一旦刪除房源，就無法復原。
 
@@ -546,9 +546,9 @@ DELETE https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/location/LOCAT
 
 * 共用資料必須位於 BigQuery 中。
 * 他們必須註冊[Partner Advantage 計畫](https://partners.cloud.google.com/?hl=zh-tw)，並取得「建構」資格。
-* 清單必須已建立，且已啟用[公開曝光度](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-listings?hl=zh-tw#create_a_listing)功能。
+* 清單必須已建立，且已啟用[公開探索](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-listings?hl=zh-tw#create_a_listing)功能。
 
-如要申請將商家資訊加入「精選」部分，請填寫並提交[申請表](https://docs.google.com/forms/d/e/1FAIpQLSe9nLw7kmvU2AEUgaWn5vvPQMFs1Q7XwqKBy7TD5xR1DLX4bQ/viewform?resourcekey=0-zRsM2reDM3QjxegIUluHJA&%3Bpli=1&hl=zh-tw)。如要要求從該專區移除商家資訊，請提交相同的[申請表單](https://docs.google.com/forms/d/e/1FAIpQLSe9nLw7kmvU2AEUgaWn5vvPQMFs1Q7XwqKBy7TD5xR1DLX4bQ/viewform?resourcekey=0-zRsM2reDM3QjxegIUluHJA&%3Bpli=1&hl=zh-tw)。
+如要將商家資訊加入「精選」專區，請填寫並提交[申請表單](https://docs.google.com/forms/d/e/1FAIpQLSe9nLw7kmvU2AEUgaWn5vvPQMFs1Q7XwqKBy7TD5xR1DLX4bQ/viewform?resourcekey=0-zRsM2reDM3QjxegIUluHJA&%3Bpli=1&hl=zh-tw)。如要要求從該專區移除商家資訊，請提交相同的[申請表單](https://docs.google.com/forms/d/e/1FAIpQLSe9nLw7kmvU2AEUgaWn5vvPQMFs1Q7XwqKBy7TD5xR1DLX4bQ/viewform?resourcekey=0-zRsM2reDM3QjxegIUluHJA&%3Bpli=1&hl=zh-tw)。
 
 ## 後續步驟
 
@@ -566,11 +566,11 @@ DELETE https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/location/LOCAT
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-02 (世界標準時間)。
+上次更新時間：2026-05-06 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-06 (世界標準時間)。"],[],[]]

@@ -17,13 +17,13 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 **警告：** 我們不再建議使用 BigLake metastore (傳統版) 進行 Google Cloud。請改用[Lakehouse 執行階段目錄](https://docs.cloud.google.com/bigquery/docs/about-blms?hl=zh-tw)。
 
-BigLake metastore (傳統版) 是 Google Cloud上資料分析產品的統一實體中繼資料服務。BigLake 中繼存放區 (傳統版) 提供單一中繼資料來源，方便您管理及存取多個來源的資料。資料分析師和工程師可透過 BigQuery 和 Managed Service for Apache Spark 上的各種開放資料處理引擎存取 BigLake metastore (傳統版)，因此這項工具非常實用。
+BigLake metastore (傳統版) 是 Google Cloud上資料分析產品的統一實體中繼資料服務。BigLake 中繼存放區 (傳統版) 提供單一中繼資料來源，方便您管理及存取多個來源的資料。資料分析師和工程師可透過 BigQuery 和 Managed Service for Apache Spark 上的各種開放資料處理引擎存取 BigLake metastore (傳統版)，因此這項服務是實用的工具。
 
-如要管理商務中繼資料，請參閱「[Knowledge Catalog](https://docs.cloud.google.com/dataplex?hl=zh-tw)」。
+如要管理商務中繼資料，請參閱 [Knowledge Catalog](https://docs.cloud.google.com/dataplex?hl=zh-tw)。
 
 ## BigLake Metastore (傳統版) 的運作方式
 
-BigLake metastore (傳統版) 是無伺服器服務，使用前不必佈建資源。在 Managed Service for Apache Spark 叢集中，您可以將其做為 [Hive Metastore](https://cwiki.apache.org/confluence/display/Hive/Design#Design-Metastore) 的無伺服器替代方案。BigLake metastore (傳統版) 的運作方式與 Hive Metastore 相同，都是透過 Hive 相容的 API 運作，因此您可以在 BigQuery 中立即查詢開放格式資料表，不必執行任何其他步驟。BigLake metastore (傳統版) 僅支援 [Apache Iceberg 資料表](https://iceberg.apache.org/docs/latest/)。
+BigLake metastore (傳統版) 是無伺服器服務，使用前不必佈建資源。您可以在 Managed Service for Apache Spark 叢集中，將其做為 [Hive Metastore](https://cwiki.apache.org/confluence/display/Hive/Design#Design-Metastore) 的無伺服器替代方案。BigLake metastore (傳統版) 的運作方式與 Hive Metastore 相同，都是透過 Hive 相容的 API 運作，因此您可以在 BigQuery 中立即查詢開放格式資料表，不必執行任何其他步驟。BigLake metastore (傳統版) 僅支援 [Apache Iceberg 資料表](https://iceberg.apache.org/docs/latest/)。
 
 BigLake metastore (傳統版) 提供 [API](https://docs.cloud.google.com/bigquery/docs/reference/biglake/rest?hl=zh-tw)、用戶端程式庫和資料引擎整合 (例如 [Apache Spark](https://spark.apache.org/))，可管理目錄、資料庫和資料表。
 
@@ -58,8 +58,8 @@ BigLake Metastore (傳統版) 有下列限制：
 
 視用途而定，呼叫 BigLake Metastore (舊版) 的身分可以是使用者或服務帳戶：
 
-* **使用者：**直接呼叫 BigLake API，或在 BigQuery 資料表中查詢代管的 Apache Iceberg 資料表，但 BigQuery 沒有連線。在這種情況下，BigQuery 會使用使用者的憑證。
-* **[BigQuery Cloud 資源連結](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection?hl=zh-tw)：**從 BigQuery 透過連結查詢代管 Iceberg 資料表時，BigQuery 會使用連線服務帳戶憑證存取 BigLake 中繼存放區 (傳統版)。
+* **使用者：**直接呼叫 BigLake API 時，或從 BigQuery 查詢 Apache Iceberg 代管資料表，但沒有連線時。在這種情況下，BigQuery 會使用使用者的憑證。
+* **[BigQuery Cloud 資源連結](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection?hl=zh-tw)：**從 BigQuery 透過連線查詢 Iceberg 代管資料表時，BigQuery 會使用連線服務帳戶憑證存取 BigLake 中繼存放區 (傳統版)。
 * **[BigQuery Spark 連接器](https://docs.cloud.google.com/bigquery/docs/connect-to-spark?hl=zh-tw)：**在 BigQuery [Spark 預存程序](https://docs.cloud.google.com/bigquery/docs/spark-procedures?hl=zh-tw)中，搭配使用 Spark 和 BigLake 中繼存放區 (傳統版) 時。Spark 會使用 Spark Connector 的服務帳戶憑證，存取 BigLake 中繼存放區 (傳統版) 並建立 BigQuery 資料表。
 * **[Managed Service for Apache Spark 服務帳戶](https://docs.cloud.google.com/dataproc-serverless/docs/concepts/service-account?hl=zh-tw)：**
   在 Managed Service for Apache Spark 中使用 Spark 和 BigLake 時，Spark 會使用服務帳戶憑證。
@@ -72,10 +72,10 @@ BigLake Metastore (傳統版) 有下列限制：
 
 ### 所需權限
 
-* 專案層級的 `biglake.tables.get`，適用於所有唯讀存取權。查詢受管理 Iceberg 資料表
+* 專案層級的 `biglake.tables.get`，適用於所有唯讀存取權。查詢 Iceberg 代管資料表
   資料表是唯讀資料表。
 * 專案層級的 `biglake.{catalogs|databases|tables}.*`，適用於所有讀取和寫入權限。一般來說，Apache Spark 需要讀取及寫入資料，包括建立、管理及查看目錄、資料庫和資料表。
-* `bigquery.connections.delegate` 在 BigQuery Cloud 資源連結層級或更高等級，建立使用連結的代管 Iceberg 資料表。
+* 在 BigQuery 雲端資源連結層級或更高等級，建立使用連結的 Iceberg 代管資料表。`bigquery.connections.delegate`
 
 ## 連線至 BigLake metastore (傳統版)
 
@@ -83,7 +83,7 @@ BigLake Metastore (傳統版) 有下列限制：
 
 ### 連線至 Managed Service for Apache Spark VM
 
-如要透過 Managed Service for Apache Spark VM 連線至 BigLake metastore (傳統版)，請按照下列步驟操作：
+如要透過 Managed Service for Apache Spark VM 連線至 BigLake metastore (傳統版)，請完成下列步驟：
 
 1. [使用 SSH 連線至 Managed Service for Apache Spark。](https://docs.cloud.google.com/dataproc/docs/concepts/accessing/ssh?hl=zh-tw)
 2. 在 [Spark SQL CLI](https://spark.apache.org/docs/latest/sql-distributed-sql-engine-spark-sql-cli.html) 中，使用下列陳述式安裝及設定 Apache Iceberg 自訂目錄，以便搭配 BigLake 中繼資料存放區 (傳統版) 使用：
@@ -105,7 +105,7 @@ BigLake Metastore (傳統版) 有下列限制：
 
 更改下列內容：
 
-* `ICEBERG_SPARK_PACKAGE`：要搭配 Spark 使用的 Apache Iceberg 版本。建議您使用與 [Managed Service for Apache Spark](https://docs.cloud.google.com/dataproc/docs/concepts/versioning/dataproc-version-clusters?hl=zh-tw) 或 [Managed Service for Apache Spark](https://docs.cloud.google.com/dataproc-serverless/docs/concepts/versions/spark-runtime-versions?hl=zh-tw) 執行個體中 Spark 版本相符的 Spark 版本。如要查看可用的 Apache Iceberg 版本清單，請參閱「[Apache Iceberg 下載](https://iceberg.apache.org/releases/)」。舉例來說，Apache Spark 3.3 的標記為：  
+* `ICEBERG_SPARK_PACKAGE`：要搭配 Spark 使用的 Apache Iceberg 版本。建議使用與 [Managed Service for Apache Spark](https://docs.cloud.google.com/dataproc/docs/concepts/versioning/dataproc-version-clusters?hl=zh-tw) 或 [Managed Service for Apache Spark](https://docs.cloud.google.com/dataproc-serverless/docs/concepts/versions/spark-runtime-versions?hl=zh-tw) 執行個體中 Spark 版本相符的 Spark 版本。如要查看可用的 Apache Iceberg 版本清單，請參閱「[Apache Iceberg 下載](https://iceberg.apache.org/releases/)」。舉例來說，Apache Spark 3.3 的標記為：  
   `--packages org.apache.iceberg:iceberg-spark-runtime-3.3_2.13:1.2.1`
 * `BIGLAKE_ICEBERG_CATALOG_JAR`：要安裝的 Iceberg 自訂目錄外掛程式的 Cloud Storage URI。根據您的環境，選取下列其中一個選項：
   + `Iceberg 1.9.1`：gs://spark-lib/biglake/biglake-catalog-iceberg1.9.1-0.1.3-with-dependencies.jar
@@ -250,7 +250,7 @@ CREATE TABLE SPARK_CATALOG.BLMS_DB.BLMS_TABLE
 
 ### Terraform
 
-這會在「google\_biglake\_database.default.id」變數指定的資料庫中，註冊名稱為「my\_table」且類型為「Hive」的 BigLake Metastore (傳統版) 資料表。請注意，資料表必須先存在，才能在目錄中註冊，這可透過從 Apache Spark 等引擎初始化資料表來完成。詳情請參閱 Terraform 供應商說明文件：[BigLake 資料表](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/biglake_table)。
+這會在「google\_biglake\_database.default.id」變數指定的資料庫中，註冊名稱為「my\_table」且類型為「Hive」的 BigLake Metastore (傳統版) 資料表。請注意，資料表必須先存在，才能在目錄中註冊，您可以從 Apache Spark 等引擎初始化資料表，詳情請參閱 Terraform 供應商說明文件：[BigLake 資料表](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/biglake_table)。
 
 ```
 resource "google_biglake_table" "default" {
@@ -331,7 +331,7 @@ CREATE TABLE SPARK_CATALOG.BLMS_DB.BLMS_TABLE
 
 * `BQ_TABLE_PATH`：要建立的 Iceberg 外部資料表路徑。請採用 [BigQuery 資料表路徑語法](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#table_path)。
   如未指定專案，系統會使用與 BigLake metastore (傳統版) 目錄相同的專案。
-* `BQ_RESOURCE_CONNECTION` (選用)：格式為 `project.location.connection-id`。如果指定，BigQuery 查詢會使用 [Cloud 資源連結](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection?hl=zh-tw#create-cloud-resource-connection)憑證存取 BigLake metastore (傳統版)。如未指定，BigQuery 會建立一般外部資料表，而非 BigLake 資料表。
+* `BQ_RESOURCE_CONNECTION` (選用)：格式為 `project.location.connection-id`。如果指定，BigQuery 查詢會使用 [Cloud 資源連結](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection?hl=zh-tw#create-cloud-resource-connection)憑證存取 BigLake Metastore (傳統版)。如未指定，BigQuery 會建立一般外部資料表，而非 BigLake 資料表。
 
   **注意：** 您要建立資料表的 BigQuery 資料集必須已存在。這個陳述式不會建立資料集。
   BigQuery 資料集和資料表的位置必須與 BigLake 中繼存放區 (傳統版) 目錄相同。
@@ -504,11 +504,11 @@ DROP TABLE SPARK_CATALOG.BLMS_DB.BLMS_TABLE PURGE;
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-02 (世界標準時間)。
+上次更新時間：2026-05-06 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-06 (世界標準時間)。"],[],[]]

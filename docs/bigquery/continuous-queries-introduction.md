@@ -31,7 +31,7 @@ BigQuery 持續查詢是會不斷執行的 SQL 陳述式，持續查詢功能可
 * 從 [Dataflow 寫入 BigQuery](https://docs.cloud.google.com/dataflow/docs/guides/write-to-bigquery?hl=zh-tw)
 * 使用[僅限附加的寫入模式](https://docs.cloud.google.com/datastream/docs/destination-bigquery?hl=zh-tw#append-only_write_mode)，將資料從 Datastream 寫入 BigQuery
 
-您可以使用持續查詢執行具時效性的工作，例如建立深入分析並立即採取行動、套用即時機器學習 (ML) 推論，以及將資料複製到其他平台。這樣一來，您就能將 BigQuery 做為應用程式決策邏輯的事件驅動式資料處理引擎。
+您可以使用持續查詢執行具時效性的工作，例如建立洞察資料並立即採取行動、套用即時機器學習 (ML) 推論，以及將資料複製到其他平台。這樣一來，您就能將 BigQuery 做為應用程式決策邏輯的事件驅動式資料處理引擎。
 
 下圖顯示常見的持續查詢工作流程：
 
@@ -39,13 +39,13 @@ BigQuery 持續查詢是會不斷執行的 SQL 陳述式，持續查詢功能可
 
 以下是您可能想使用連續查詢的常見用途：
 
-* **個人化顧客互動服務**：使用生成式 AI 建立專為每次顧客互動量身打造的訊息。
+* **個人化顧客互動服務**：使用生成式 AI 建立專屬訊息，為每次顧客互動提供客製化服務。
 * **異常偵測**：建構解決方案，即時對複雜資料執行異常狀況和威脅偵測，以便更快應對問題。
 * **可自訂的事件導向管道**：整合 Pub/Sub 持續查詢，根據傳入的資料觸發下游應用程式。
 * **資料擴充和實體擷取**：使用持續查詢，透過 SQL 函式和 ML 模型執行即時資料擴充和轉換。
 * **反向擷取、轉換及載入 (ETL)**：執行即時反向 ETL，將資料載入至其他更適合低延遲應用程式服務的儲存系統。舉例來說，您可以分析或改善寫入 BigQuery 的事件資料，然後將資料串流至 Bigtable 或 Spanner，以用於應用程式服務。
 * **自主觸發代理程式**：根據即時資料串流中偵測到的複雜事件，即時觸發代理程式資料管道。如需範例，請參閱[使用 BigQuery 和 Agent Development Kit (ADK) 建構事件導向的資料代理程式碼實驗室](https://codelabs.developers.google.com/bigquery-adk-event-driven-agents?hl=zh-tw)。
-* **自主代理監控**：使用 [BigQuery 代理分析外掛程式](https://adk.dev/integrations/bigquery-agent-analytics/)，針對即時代理互動開發即時自動監控和警報功能，這個外掛程式會將所有代理追蹤記錄、工具用量和作業記錄直接串流到 BigQuery，深入觀察 AI 員工。
+* **自主式代理程式監控**：使用 [BigQuery 代理程式分析外掛程式](https://adk.dev/integrations/bigquery-agent-analytics/)，針對即時代理功能互動開發即時自動監控和警報功能，將所有代理程式追蹤記錄資料、工具用量和作業記錄直接串流到 BigQuery，深入觀察 AI 員工。
 
 ## 支援的功能
 
@@ -89,7 +89,7 @@ BigQuery 持續查詢是會不斷執行的 SQL 陳述式，持續查詢功能可
 
 有狀態作業可讓連續查詢執行複雜分析，這類分析需要保留多個資料列或時間間隔的資訊。無狀態函式會獨立處理每個資料列，有狀態作業則會維護擷取資料的狀態，以支援 [`JOIN`、匯總和視窗匯總](https://docs.cloud.google.com/bigquery/docs/continuous-queries?hl=zh-tw#join-agg-window-example)等函式。這項功能可讓您在查詢執行期間，將必要資料儲存在記憶體中，藉此關聯不同串流的事件，或計算一段時間內的指標 (例如 30 分鐘平均值)。
 
-連續查詢支援下列有狀態作業：
+持續查詢支援下列有狀態作業：
 
 * [JOIN](https://docs.cloud.google.com/bigquery/docs/continuous-query-joins?hl=zh-tw)
 * [匯總和視窗化](https://docs.cloud.google.com/bigquery/docs/window-aggregations?hl=zh-tw)
@@ -131,7 +131,7 @@ BigQuery 持續查詢是會不斷執行的 SQL 陳述式，持續查詢功能可
 
   + [外部資料表](https://docs.cloud.google.com/bigquery/docs/external-data-sources?hl=zh-tw)。
   + [資訊結構定義檢視畫面](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw)。
-  + [BigQuery 中的代管 Apache Iceberg 資料表](https://docs.cloud.google.com/bigquery/docs/iceberg-tables?hl=zh-tw)。
+  + [Apache Iceberg 代管資料表](https://docs.cloud.google.com/bigquery/docs/iceberg-tables?hl=zh-tw)。
   + [萬用字元資料表](https://docs.cloud.google.com/bigquery/docs/querying-wildcard-tables?hl=zh-tw)。
   + [變更資料擷取 (CDC) 新增或更新](https://docs.cloud.google.com/bigquery/docs/change-data-capture?hl=zh-tw)
     資料。
@@ -144,7 +144,7 @@ BigQuery 持續查詢是會不斷執行的 SQL 陳述式，持續查詢功能可
 * 持續查詢工作執行期間，您無法修改持續查詢中使用的 SQL。詳情請參閱「[修改持續查詢的 SQL](https://docs.cloud.google.com/bigquery/docs/continuous-queries?hl=zh-tw#modify_the_sql_of_a_continuous_query)」。
 * 如果持續查詢工作在處理傳入資料時落後，且[輸出時間戳記延遲](https://docs.cloud.google.com/bigquery/docs/monitoring-dashboard?hl=zh-tw#metrics)超過 48 小時，就會失敗。您可以再次執行查詢，並使用 [`APPENDS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions?hl=zh-tw#appends) 或 [`CHANGES`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions?hl=zh-tw#changes) 變更記錄函式，從您停止先前持續查詢工作時的時間點繼續處理。詳情請參閱「[從特定時間點開始持續查詢](https://docs.cloud.google.com/bigquery/docs/continuous-queries?hl=zh-tw#start_a_continuous_query_from_a_particular_point_in_time)」。
 * 以使用者帳戶設定的持續查詢最多可執行兩天。透過服務帳戶設定的持續查詢最多可執行 150 天。達到查詢執行時間上限時，查詢會失敗並停止處理傳入資料。
-* 雖然持續查詢是使用 [BigQuery 可靠性功能](https://docs.cloud.google.com/bigquery/docs/reliability-intro?hl=zh-tw)建構而成，但偶爾還是會發生暫時性問題。問題可能會導致系統自動重新處理部分持續查詢，進而造成持續查詢輸出中出現重複資料。請設計下游系統來處理這類情況。
+* 雖然持續查詢是使用 [BigQuery 可靠性功能](https://docs.cloud.google.com/bigquery/docs/reliability-intro?hl=zh-tw)建構而成，但偶爾還是會發生暫時性問題。問題可能會導致系統自動重新處理部分持續查詢，進而造成持續查詢輸出內容出現重複資料。請設計下游系統來處理這類情況。
 
 ### 預訂限制
 
@@ -153,27 +153,27 @@ BigQuery 持續查詢是會不斷執行的 SQL 陳述式，持續查詢功能可
   [預留項目指派](https://docs.cloud.google.com/bigquery/docs/reservations-assignments?hl=zh-tw)時，相關聯的預留項目最多只能有 500 個運算單元。如要提高這項限制，請傳送電子郵件至 [bq-continuous-queries-feedback@google.com](mailto:bq-continuous-queries-feedback@google.com)。
 * 您無法在與持續查詢預留項目指派相同的預留項目中，建立使用不同[工作類型](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#assignments)的預留項目指派。
 * 您無法設定持續查詢的並行作業。BigQuery 會根據使用 `CONTINUOUS` 工作類型的可用保留項目指派作業，自動決定可同時執行的連續查詢數量。
-* 使用相同預留項目執行多項連續查詢時，個別工作可能無法公平分配可用資源，如 [BigQuery 公平性](https://docs.cloud.google.com/bigquery/docs/slots?hl=zh-tw#fair_scheduling_in_bigquery)所定義。
+* 使用相同預留項目執行多項持續查詢時，個別工作可能無法公平分配可用資源，如 [BigQuery 公平性](https://docs.cloud.google.com/bigquery/docs/slots?hl=zh-tw#fair_scheduling_in_bigquery)所定義。
 
 ## 運算單元自動調度資源
 
 持續查詢可使用[運算單元自動調度資源](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro?hl=zh-tw)功能，動態調整分配的容量，以因應工作負載。隨著持續查詢工作負載的增減，BigQuery 會動態調整運算單元。
 
-持續查詢開始執行後，會主動*監聽*傳入資料，這會耗用 Slot 資源。如果保留項目有持續查詢正在執行，就不會縮減至零個時段。不過，如果持續查詢處於閒置狀態，主要只是監聽傳入資料，預期會消耗最少的時段，通常約 1 個時段。
+持續查詢開始執行後，會主動*監聽*傳入資料，這會耗用 Slot 資源。如果保留項目正在執行持續查詢，不會縮減至零個時段。不過，如果持續查詢處於閒置狀態，主要是在監聽傳入資料，預期會消耗最少的時段，通常約 1 個時段。
 
 ## 閒置運算單元共用
 
-持續查詢可使用[閒置運算單元共用](https://docs.cloud.google.com/bigquery/docs/slots?hl=zh-tw#idle_slots)功能，與其他預留項目和[工作類型](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#assignments)共用未使用的運算單元資源。
+持續查詢可使用[閒置運算單元共用](https://docs.cloud.google.com/bigquery/docs/slots?hl=zh-tw#idle_slots)功能，與其他預留項目和[作業類型](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#assignments)共用未使用的運算單元資源。
 
-* 如要執行持續查詢，仍須`CONTINUOUS`
-  [指派預留項目](https://docs.cloud.google.com/bigquery/docs/reservations-assignments?hl=zh-tw)，不能只依賴其他預留項目的閒置運算單元。因此，`CONTINUOUS` 預留項目指派作業需要非零的運算單元基準，或非零的運算單元自動調度資源設定。
+* 您仍須`CONTINUOUS`
+  [指派預留項目](https://docs.cloud.google.com/bigquery/docs/reservations-assignments?hl=zh-tw)，才能執行持續查詢，且不能只依賴其他預留項目的閒置運算單元。因此，`CONTINUOUS` 預留項目指派作業需要非零的運算單元基準，或非零的運算單元自動調度資源設定。
 * 只有閒置的基準運算單元，或來自 `CONTINUOUS` 預留項目指派的承諾使用運算單元可以共用。[自動調度的運算單元](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro?hl=zh-tw)無法做為其他預留項目的閒置運算單元共用。
 
 ## 定價
 
 持續查詢會採用 [BigQuery 容量運算定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#capacity_compute_analysis_pricing)，並以[運算單元](https://docs.cloud.google.com/bigquery/docs/slots?hl=zh-tw)為單位計算。如要執行連續查詢，您必須擁有使用 [Enterprise 或 Enterprise Plus 版本](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)的[預留位置](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw)，以及使用 `CONTINUOUS` 工作類型的[預留位置指派](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#assignments)。
 
-使用其他 BigQuery 資源 (例如資料擷取和儲存空間) 時，系統會按照[這份 BigQuery 定價表](https://cloud.google.com/bigquery/pricing?hl=zh-tw)中的費率計費。
+使用其他 BigQuery 資源 (例如資料擷取和儲存空間) 時，系統會按照[BigQuery 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw)頁面顯示的費率計費。
 
 如果使用其他服務接收持續查詢結果，或在持續查詢處理期間呼叫其他服務，系統會按照這些服務的公開費率收費。如要瞭解其他 Google Cloud 服務的定價，請參閱下列主題：
 
@@ -193,11 +193,11 @@ BigQuery 持續查詢是會不斷執行的 SQL 陳述式，持續查詢功能可
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-02 (世界標準時間)。
+上次更新時間：2026-05-06 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-06 (世界標準時間)。"],[],[]]

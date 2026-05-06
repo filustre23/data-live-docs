@@ -1169,5 +1169,5 @@ package mypackage;
 // Source protos located in github.com/googleapis/googleapis
 import "google/cloud/bigquery/storage/v1/annotations.proto";
 
-message FlexibleSchema
+message FlexibleSchem
 ```

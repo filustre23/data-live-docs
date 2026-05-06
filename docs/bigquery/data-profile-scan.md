@@ -1109,4 +1109,4 @@ gcloud dataplex datascans jobs list \
 
 ### C#
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/dataplex/docs/reference/libraries?hl=zh-tw)」中的 C
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/dataplex/docs/reference/libraries?hl=zh-tw)」中的

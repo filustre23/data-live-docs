@@ -91,12 +91,12 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    * **清單**：選取「資料無塵室」核取方塊，即可查看與您共用的資料無塵室。
    * **類別**：選取一或多個類別。
-   * **位置**：選取位置。您只能依資料交換位置搜尋。詳情請參閱「[支援的區域](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction?hl=zh-tw#supported-regions)」。
+   * **位置**：選取位置。你只能依資料交換位置搜尋。詳情請參閱「[支援的區域](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction?hl=zh-tw#supported-regions)」。
 5. 瀏覽篩選後的資料無塵室。
 
 ## 訂閱產品資訊
 
-訂閱[產品資訊](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction?hl=zh-tw#listings)後，您就能在專案中建立[連結的資料集](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction?hl=zh-tw#linked_datasets)，*以唯讀模式存取*產品資訊中的資料。
+訂閱[產品資訊](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction?hl=zh-tw#listings)後，您可以在專案中建立[連結的資料集](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction?hl=zh-tw#linked_datasets)，*唯讀存取權*產品資訊中的資料。
 
 **注意：** 建議您避免將資料放在 VPC Service Controls 範圍內的專案。如果這麼做，就必須新增適當的[輸入和輸出規則](https://docs.cloud.google.com/bigquery/docs/analytics-hub-vpc-sc-rules?hl=zh-tw#subscribe_to_a_listing)。
 
@@ -115,8 +115,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    * **主要區域**：選取要建立連結資料集的區域。
 
      **注意：** 選取的主要區域不必與供應商的主要區域相同。您可能會選擇將連結的資料集與供應商放在同一區域，以盡量減少資料複製延遲。
-   * 選用：**副本區域**
-     ([預覽版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))：
+   * 選用：**副本區域**：
      選取要建立其他連結資料集次要副本的區域。您可以選擇將連結的資料集與其他資料放在同一區域，以盡量減少輸出資料，並簡化跨資料集聯結。如要建立連結的資料集副本，您必須具備連結資料集的 `bigquery.datasets.update` 權限。**注意：** 系統會盡力建立連結資料集副本。如果缺少權限，系統就不會建立副本。
 6. 如要儲存變更，請按一下「儲存」。連結的資料集會列在專案中。
 
@@ -137,13 +136,13 @@ POST https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/location/LOCATIO
 
 在要求主體中，指定要建立[連結資料集](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction?hl=zh-tw#linked_datasets)的資料集。
 
-如要建立訂閱項目，並在多個區域提供連結資料集副本 ([預覽版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))，請使用要求主體中的 `location` 欄位，指定連結資料集的主要區域。如要在次要區域建立連結資料集副本，可以視需要使用要求主體中的 `destinationDataset.replica_locations` 欄位，列出所有選取的次要副本區域。確認 `location` 屬性和 `destinationDataset.replica_locations` 欄位中指定的區域，是相關聯產品資訊可用的區域。
+如要建立訂閱項目，並在多個區域提供連結的資料集副本，請使用要求主體中的 `location` 欄位，指定連結資料集的主要區域。如要在次要區域建立連結資料集副本，可以視需要使用要求主體中的 `destinationDataset.replica_locations` 欄位，列出所有選取的次要副本區域。確認 `location` 屬性和 `destinationDataset.replica_locations` 欄位中指定的區域，是相關聯產品資訊可用的區域。
 
-**附註：** 系統會盡可能建立連結資料集副本。如果連結的資料集缺少 `bigquery.datasets.update` 權限，系統就不會建立副本。
+**注意：** 系統會盡可能建立連結資料集副本，如果連結的資料集缺少 `bigquery.datasets.update` 權限，就不會建立副本。
 
 如果要求成功，回應主體會包含[訂閱物件](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe?hl=zh-tw#response-body)。
 
-如果您使用 `logLinkedDatasetQueryUserEmail` 欄位為資料交換庫或刊登啟用訂閱者電子郵件記錄功能，訂閱回應會包含 `log_linked_dataset_query_user_email: true`。記錄的資料會顯示在 [`INFORMATION_SCHEMA.SHARED_DATASET_USAGE` 檢視區塊](https://docs.cloud.google.com/bigquery/docs/information-schema-shared-dataset-usage?hl=zh-tw)的 `job_principal_subject` 欄位中。
+如果您使用 `logLinkedDatasetQueryUserEmail` 欄位為資料交換庫或刊登啟用訂閱者電子郵件記錄功能，訂閱回應會包含 `log_linked_dataset_query_user_email: true`。記錄的資料會顯示在 [`INFORMATION_SCHEMA.SHARED_DATASET_USAGE` 檢視畫面](https://docs.cloud.google.com/bigquery/docs/information-schema-shared-dataset-usage?hl=zh-tw)的 `job_principal_subject` 欄位中。
 
 如果啟用預存程序共用功能 ([預覽](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))，清單回應會包含 `stored_procedure_config: true`。
 
@@ -182,7 +181,7 @@ POST https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/location/LOCATIO
 
 在要求主體中，指定要建立[連結資料集](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction?hl=zh-tw#linked_datasets)的資料集。
 
-如果要求成功，回應主體會包含[訂閱物件](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges/subscribe?hl=zh-tw#response-body)。如果您已為資料交換庫啟用訂閱者電子郵件記錄功能 ([預覽版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))，訂閱回應會包含 `log_linked_dataset_query_user_email: true`。
+如果要求成功，回應主體會包含[訂閱物件](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges/subscribe?hl=zh-tw#response-body)。如果您已為資料交換庫啟用訂閱者電子郵件記錄功能，訂閱回應會包含 `log_linked_dataset_query_user_email: true`。
 
 ## 查看連結的資料集
 
@@ -197,10 +196,14 @@ POST https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/location/LOCATIO
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 在「傳統版 Explorer」窗格中，點選「category」：
 
-   **如果沒有看到「傳統版 Explorer」窗格，請按一下「展開左窗格」圖示 last\_page 開啟窗格。**
+   如果沒有看到「傳統檔案總管」窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「傳統版 Explorer」窗格中，按一下包含已連結資料集的專案名稱。
 
-或者，您也可以使用[Data Catalog (已淘汰)](https://docs.cloud.google.com/data-catalog/docs/how-to/search?hl=zh-tw#how_to_search_for_data_assets) 或 [Knowledge Catalog](https://docs.cloud.google.com/dataplex/docs/search-assets?hl=zh-tw) 搜尋及查看連結的資料集。如要比對所有 BigQuery sharing 連結資料集，請使用 `type=dataset.linked` 述詞。詳情請參閱 [Data Catalog 搜尋語法](https://docs.cloud.google.com/data-catalog/docs/how-to/search-reference?hl=zh-tw)或 [Knowledge Catalog 搜尋語法](https://docs.cloud.google.com/dataplex/docs/search-syntax?hl=zh-tw)。
+或者，您也可以使用
+[Data Catalog (已淘汰)](https://docs.cloud.google.com/data-catalog/docs/how-to/search?hl=zh-tw#how_to_search_for_data_assets)
+或
+[Knowledge Catalog](https://docs.cloud.google.com/dataplex/docs/search-assets?hl=zh-tw)
+搜尋及查看連結的資料集。如要比對所有 BigQuery sharing 連結資料集，請使用 `type=dataset.linked` 述詞。詳情請參閱「[Data Catalog 搜尋語法](https://docs.cloud.google.com/data-catalog/docs/how-to/search-reference?hl=zh-tw)」或「[Knowledge Catalog 搜尋語法](https://docs.cloud.google.com/dataplex/docs/search-syntax?hl=zh-tw)」。
 
 ### Cloud Shell
 
@@ -221,7 +224,7 @@ for dataset in $(bq ls --project_id $PROJECT | tail +3); do [ "$(bq show -d --pr
 
 ## 更新連結的資料集
 
-連結資料集中的資源為*唯讀*。您無法編輯連結資料集中資源的資料或中繼資料，也無法為個別資源指定權限。
+連結資料集中的資源為*唯讀*。您無法編輯連結資料集中的資源資料或中繼資料，也無法為個別資源指定權限。
 
 您只能更新連結資料集的說明和標籤。
 連結資料集的變更不會影響來源或共用資料集。
@@ -270,9 +273,9 @@ SELECT * FROM `LINKED-DATASET.INFORMATION_SCHEMA.TABLES`
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 在「Explorer」窗格中，按一下 explore「Explorer」：
 3. 在「Explorer」窗格中展開專案名稱，點選「Datasets」(資料集)，然後點選連結資料集的名稱開啟該資料集。
-4. 按一下「Delete」(刪除)。
+4. 點選「刪除」。
 5. 在「Delete linked dataset?」(要刪除已連結的資料集嗎？) 對話方塊中輸入「delete」(刪除)，確認要刪除。
-6. 按一下「Delete」(刪除)。
+6. 點選「刪除」。
 
 ## 後續步驟
 
@@ -288,11 +291,11 @@ SELECT * FROM `LINKED-DATASET.INFORMATION_SCHEMA.TABLES`
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-02 (世界標準時間)。
+上次更新時間：2026-05-06 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-06 (世界標準時間)。"],[],[]]

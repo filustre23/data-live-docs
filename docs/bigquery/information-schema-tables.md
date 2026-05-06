@@ -46,8 +46,8 @@ Google uses AI technology to translate content into your preferred language. AI 
 | `table_catalog` | `STRING` | 資料集所屬專案的專案 ID。 |
 | `table_schema` | `STRING` | 資料表或檢視表所屬資料集的名稱。也稱為「`datasetId`」。 |
 | `table_name` | `STRING` | 資料表或檢視表的名稱。也稱為「`tableId`」。 |
-| `table_type` | `STRING` | 資料表類型，可能是下列其中一個值：   * `BASE TABLE`：標準[資料表](https://docs.cloud.google.com/bigquery/docs/tables-intro?hl=zh-tw) * `CLONE`：[資料表副本](https://docs.cloud.google.com/bigquery/docs/table-clones-intro?hl=zh-tw) * `SNAPSHOT`：[資料表快照](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro?hl=zh-tw) * `VIEW`：A   [檢視](https://docs.cloud.google.com/bigquery/docs/views-intro?hl=zh-tw) * `MATERIALIZED VIEW`：[具體化檢視表](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro?hl=zh-tw)或[具體化檢視表副本](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer?hl=zh-tw#materialized_view_replicas) * `EXTERNAL`：參照[外部資料來源](https://docs.cloud.google.com/bigquery/external-data-sources?hl=zh-tw)的資料表 |
-| `managed_table_type` | `STRING` | 這一欄目前為預先發布版。受管理資料表類型，可以是下列其中一種：   * `NATIVE`：標準[資料表](https://docs.cloud.google.com/bigquery/docs/tables-intro?hl=zh-tw) * `BIGLAKE`：BigQuery 中的[受管理 Apache Iceberg 資料表](https://docs.cloud.google.com/bigquery/docs/iceberg-tables?hl=zh-tw) |
+| `table_type` | `STRING` | 資料表類型，可能是下列其中一個值：   * `BASE TABLE`：標準[資料表](https://docs.cloud.google.com/bigquery/docs/tables-intro?hl=zh-tw) * `CLONE`：[資料表副本](https://docs.cloud.google.com/bigquery/docs/table-clones-intro?hl=zh-tw) * `SNAPSHOT`：[資料表快照](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro?hl=zh-tw) * `VIEW`：A   [檢視表](https://docs.cloud.google.com/bigquery/docs/views-intro?hl=zh-tw) * `MATERIALIZED VIEW`：[具體化檢視表](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro?hl=zh-tw)或[具體化檢視表副本](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer?hl=zh-tw#materialized_view_replicas) * `EXTERNAL`：參照[外部資料來源](https://docs.cloud.google.com/bigquery/external-data-sources?hl=zh-tw)的資料表 |
+| `managed_table_type` | `STRING` | 這一欄目前為預先發布版。受管理資料表類型，可以是下列其中一種：   * `NATIVE`：標準[資料表](https://docs.cloud.google.com/bigquery/docs/tables-intro?hl=zh-tw) * `BIGLAKE`：[Apache Iceberg 代管資料表](https://docs.cloud.google.com/bigquery/docs/iceberg-tables?hl=zh-tw) |
 | `is_insertable_into` | `STRING` | `YES` 或 `NO`，視資料表是否支援 [DML INSERT](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax?hl=zh-tw#insert_statement) 陳述式而定 |
 | `is_fine_grained_mutations_enabled` | `STRING` | `YES` 或 `NO`，視資料表是否啟用[細微 DML 突變](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language?hl=zh-tw#enable_fine-grained_dml)而定 |
 | `is_typed` | `STRING` | 此值一律為 `NO` |
@@ -60,7 +60,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 | `replica_source_catalog` | `STRING` | 如果是 [materialized view 副本](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer?hl=zh-tw#materialized_view_replicas)，則為基礎 materialized view 的專案。 |
 | `replica_source_schema` | `STRING` | 如果是[具體化檢視表副本](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer?hl=zh-tw#materialized_view_replicas)，則為基礎具體化檢視表的資料集。 |
 | `replica_source_name` | `STRING` | 如果是[具體化檢視表副本](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer?hl=zh-tw#materialized_view_replicas)，則為基礎具體化檢視表的名稱。 |
-| `replication_status` | `STRING` | 如果是[具體化檢視表副本](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer?hl=zh-tw#materialized_view_replicas)，則為從基礎具體化檢視表複製到具體化檢視表副本的狀態，可能為下列其中一種：   * `REPLICATION_STATUS_UNSPECIFIED` * `ACTIVE`：複製作業正在進行，沒有發生任何錯誤 * `SOURCE_DELETED`：來源具體化檢視表已刪除 * `PERMISSION_DENIED`：來源具體化檢視表尚未在資料集上[獲得授權](https://docs.cloud.google.com/bigquery/docs/authorized-views?hl=zh-tw)，而該資料集包含來源 Amazon S3 BigLake 資料表，這些資料表用於建立具體化檢視表的查詢。 * `UNSUPPORTED_CONFIGURATION`：副本的[必要條件](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer?hl=zh-tw#create)有問題，但不是來源 materialized view 授權問題。 |
+| `replication_status` | `STRING` | 如果是[具體化檢視表副本](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer?hl=zh-tw#materialized_view_replicas)，則為從基礎具體化檢視表複製到具體化檢視表副本的狀態，可能為下列其中一種：   * `REPLICATION_STATUS_UNSPECIFIED` * `ACTIVE`：複製作業正在進行，沒有發生任何錯誤 * `SOURCE_DELETED`：來源具體化檢視表已刪除 * `PERMISSION_DENIED`：來源具體化檢視表尚未在資料集上[獲得授權](https://docs.cloud.google.com/bigquery/docs/authorized-views?hl=zh-tw)，而該資料集包含來源 Amazon S3 BigLake 資料表，這些資料表用於建立具體化檢視表的查詢。 * `UNSUPPORTED_CONFIGURATION`：副本的[必要條件](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer?hl=zh-tw#create)有問題，但來源 materialized view 授權除外。 |
 | `replication_error` | `STRING` | 如果 `replication_status` 表示[具體化檢視區塊副本](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer?hl=zh-tw#materialized_view_replicas)有複寫問題，`replication_error` 會提供問題的詳細資料。 |
 | `ddl` | `STRING` | 可用於重新建立資料表的 [DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw)，例如 `CREATE TABLE` 或 `CREATE VIEW` |
 | `default_collation_name` | `STRING` | 預設[排序規格](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts?hl=zh-tw)的名稱 (如有)，否則為 `NULL`。 |
@@ -203,11 +203,11 @@ WHERE
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-02 (世界標準時間)。
+上次更新時間：2026-05-06 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-06 (世界標準時間)。"],[],[]]
