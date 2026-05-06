@@ -27,6 +27,18 @@ To get the latest product updates delivered to you, add the URL of this page to 
 reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators), or add the
 [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## May 06, 2026
+
+Feature
+
+You can configure BigQuery sharing listings for multiple regions, which
+allows you to share datasets and linked replicas across global geographies
+simultaneously. For more information, see
+[Create a listing](/bigquery/docs/analytics-hub-manage-listings#create_a_listing).
+This feature is
+[generally available](https://cloud.google.com/products#product-launch-stages)
+(GA).
+
 ## April 30, 2026
 
 Breaking
@@ -4192,6 +4204,4 @@ This turned out to be incompatible with [pandas-gbq](https://github.com/googleap
 
 ##### Features
 
-* Add property for `allowNonIncrementalDefinition` for materialized view ([#2084](https://github.com/googleapis/python-bigquery/issues/2084)) ([3359ef3](https://github.com/googleapis/python-bigquery/commit/3359ef37b90243bea2d9e68bb996fe5d736f304c))
-* Add property for maxStaleness in table definitions ([#2087](https://github.com/googleapis/python-bigquery/issues/2087)) ([729322c](https://github.com/googleapis/python-bigquery/commit/729322c2288a30464f2f135ba18b9c4aa7d2f0da))
-* Add t
+* Add property for `allowNo`

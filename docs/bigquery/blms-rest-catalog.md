@@ -135,8 +135,8 @@ gcloud biglake iceberg catalogs create \
 
 * `CATALOG_NAME`：目录的名称。对于 [Apache Iceberg 的受管 Lakehouse REST 目录表](https://docs.cloud.google.com/lakehouse/docs/lakehouse-iceberg-tables?hl=zh-cn)，此名称通常与 REST 目录使用的 Cloud Storage 存储桶 ID 匹配，例如，如果您的存储桶为 `gs://bucket-id`，则目录名称可能为 `bucket-id`。从 [BigQuery 查询这些表](#query-tables)时，此名称也用作目录标识符。
 * `PROJECT_ID`：您的 Google Cloud 项目 ID。
-* `LOCATION`：（可选）目录的主要区域。
-  对于 Cloud Storage 美国或欧盟多区域存储分区，请指定 `US` 或 `EU`，以确保可以从相应的 BigQuery 区域访问目录。如需了解详情，请参阅[目录地区](https://docs.cloud.google.com/lakehouse/docs/understand-catalog-types?hl=zh-cn)。
+* `LOCATION`：（可选）目录的主区域，用于确保与 BigQuery 的互操作性。
+  对于美国区域（例如 `US` 或 `us-central1`）或欧盟区域（例如 `EU` 或 `europe-west4`）中的 Cloud Storage 存储分区，请分别指定 `US` 或 `EU`，以确保目录可供相应 BigQuery 多区域位置查询。如需了解详情，请参阅[存储分区和目录区域](https://docs.cloud.google.com/lakehouse/docs/understand-catalog-types?hl=zh-cn#bucket_and_catalog_regions)。
 
 ### 凭证分发模式
 
@@ -146,7 +146,7 @@ gcloud biglake iceberg catalogs create \
 
 1. 在 Google Cloud 控制台中，打开 **Lakehouse** 页面。
 
-   [前往 Google Cloud Lakehouse](https://console.cloud.google.com/biglake?hl=zh-cn)
+   [前往 Google Cloud 湖仓一体](https://console.cloud.google.com/biglake?hl=zh-cn)
 2. 点击 add\_box
    **创建目录**。系统会打开**创建目录**页面。
 3. 在**选择 Cloud Storage 存储桶**部分，输入要与目录搭配使用的 Cloud Storage 存储桶的名称。或者，点击**浏览**，从现有存储分区列表中选择一个存储分区或创建一个新存储分区。每个 Cloud Storage 存储桶只能有一个目录。
