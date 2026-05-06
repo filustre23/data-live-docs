@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -135,7 +137,7 @@ WHERE
   AND res.period_start
     BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 DAY)
         AND CURRENT_TIMESTAMP()
-  AND res.reservation_id = &#39;YOUR_RESERVATION_ID'
+  AND res.reservation_id = 'YOUR_RESERVATION_ID'
   AND (jobs.statement_type != "SCRIPT" OR jobs.statement_type IS NULL)  -- Avoid duplicate byte counting in parent and children jobs.
 GROUP BY
   period_start

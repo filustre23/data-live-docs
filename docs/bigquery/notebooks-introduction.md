@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -81,7 +83,7 @@ BigQuery Studio 可讓您儲存、共用及管理筆記本版本。下表列出 
 |  | 愛荷華州 | `us-central1` |  |
 |  | 洛杉磯 | `us-west2` |  |
 |  | 拉斯維加斯 | `us-west4` |  |
-|  | 蒙特婁 | `northamerica-northeast1` | [低二氧化碳排放](https://cloud.google.com/sustainability/region-carbon?hl=zh-tw#region-picker) |
+|  | 蒙特婁 | `northamerica-northeast1` |  |
 |  | 北維吉尼亞州 | `us-east4` |  |
 |  | 俄勒岡州 | `us-west1` | [低二氧化碳排放](https://cloud.google.com/sustainability/region-carbon?hl=zh-tw#region-picker) |
 |  | 聖保羅 | `southamerica-east1` | [低二氧化碳排放](https://cloud.google.com/sustainability/region-carbon?hl=zh-tw#region-picker) |

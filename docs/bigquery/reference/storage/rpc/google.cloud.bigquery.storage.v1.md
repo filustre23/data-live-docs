@@ -117,7 +117,7 @@ Request message for `AppendRows`.
 
 Because AppendRows is a bidirectional streaming RPC, certain parts of the AppendRowsRequest need only be specified for the first request before switching table destinations. You can also switch table destinations within the same connection for the default stream.
 
-The size of a single AppendRowsRequest must be less than 10 MB in size. Requests larger than this return an error, typically `INVALID_ARGUMENT`.
+The size of a single AppendRowsRequest must be less than 20 MB in size. Requests larger than this return an error, typically `INVALID_ARGUMENT`.
 
 | Fields | |
 | --- | --- |

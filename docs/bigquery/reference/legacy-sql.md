@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -479,16 +481,5 @@ WHERE
   AND year <= 2002
 GROUP BY
   ROLLUP(year, is_male)
-ORDER BY
-  year,
-  is_male;
-```
-
-這是新查詢傳回的結果。
-
-```
-+------+-------------+---------+---------------+----------+
-| year | rollup_year | is_male | rollup_gender |  count   |
-+------+-------------+---------+---------------+----------+
-| NULL |           1 |    N
+ORDER
 ```

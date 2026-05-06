@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -308,9 +310,4 @@ BigQuery 提供下列其他字串函式：
 | `STDDEV_SAMP` | `STDDEV_SAMP` |
 | `TAN` | `TAN` |
 | `TRUNC` | `TRUNC` |
-| `NVL` | `IFNULL(expr, 0), COALESCE(exp, 0)` |
-
-BigQuery 提供下列其他數學函式：
-
-* `DIV`
-* `IEEE_DIVIDE`
+| `NVL` | `IFNULL(expr, 0),` |

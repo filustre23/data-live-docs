@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -95,7 +97,8 @@
 
 如要取得使用存放區和工作區所需的權限，請要求管理員授予您存放區和工作區的下列 IAM 角色：
 
-* 建立及管理共用存放區：[程式碼擁有者](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform?hl=zh-tw#dataform.codeOwner)  (`roles/dataform.codeOwner`)
+* 建立及管理共用存放區：
+  [程式碼擁有者](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform?hl=zh-tw#dataform.codeOwner)  (`roles/dataform.codeOwner`)
 * 在共用存放區中建立及刪除工作區：
   [程式碼編輯器](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform?hl=zh-tw#dataform.codeEditor)  (`roles/dataform.codeEditor`)
 * 在共用存放區的工作區中建立、修改及版本控管檔案：
@@ -322,7 +325,7 @@ BigQuery 接著會使用存取權杖登入 Git 供應商，代表使用者提交
    1. 在 GitLab 中建立 [GitLab 個人存取權杖](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html)。
    2. 為權杖命名 `dataform`，這是必要步驟。
    3. 授予 BigQuery `api`、`read_repository` 和 `write_repository` 權限。
-   4. 根據需求設定適當的權杖到期時間。
+   4. 根據需求設定合適的權杖到期時間。
 2. 在 Secret Manager 中，[建立密鑰](https://docs.cloud.google.com/secret-manager/docs/creating-and-accessing-secrets?hl=zh-tw#create)，其中包含遠端存放區的個人存取權杖。
 3. [授予預設 Dataform 服務代理人密鑰存取權](https://docs.cloud.google.com/secret-manager/docs/manage-access-to-secrets?hl=zh-tw)。
 
@@ -405,11 +408,11 @@ BigQuery 接著會使用存取權杖登入 Git 供應商，代表使用者提交
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-02 (世界標準時間)。
+上次更新時間：2026-05-05 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-05 (世界標準時間)。"],[],[]]

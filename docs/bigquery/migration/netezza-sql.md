@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -336,7 +338,4 @@ IBM Netezza 資料倉儲技術專為與 Netezza 專屬的 SQL 語法搭配使用
 | `ATAN` | [`ATAN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions?hl=zh-tw#atan) |
 | `ATAN2` | [`ATAN2`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions?hl=zh-tw#atan2) |
 |  | [`ATANH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions?hl=zh-tw#atanh) |
-| `CEIL`  `DCEIL` | [`CEIL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions?hl=zh-tw#ceil) |
-|  | [`CEILING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions?hl=zh-tw#ceiling) |
-| `COS` | [`COS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions?hl=zh-tw#cos) |
-|  |  |
+| `CEIL`  `DCEIL` |  |

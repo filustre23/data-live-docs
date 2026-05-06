@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -21,7 +23,7 @@
 * [還原已刪除的資料集](https://docs.cloud.google.com/bigquery/docs/restore-deleted-datasets?hl=zh-tw)
 * [還原資料表快照](https://docs.cloud.google.com/bigquery/docs/table-snapshots-restore?hl=zh-tw)
 
-時間回溯期可介於 2 到 7 天。超過時空旅行時間範圍後，BigQuery 會提供[安全期](https://docs.cloud.google.com/bigquery/docs/time-travel?hl=zh-tw#fail-safe)，自動保留已刪除的資料七天。安全期過後，您就無法再使用任何方法還原表格，包括提交支援單。
+時間回溯期可介於 2 到 7 天。超過時空旅行時間範圍後，BigQuery 會提供[安全期](https://docs.cloud.google.com/bigquery/docs/time-travel?hl=zh-tw#fail-safe)，自動保留已刪除的資料七天。安全期過後，您就無法再以任何方式還原資料表，包括提交支援單。
 
 ## 事前準備
 
@@ -37,14 +39,14 @@
 
 如要從歷來資料還原資料表，請將歷來資料複製到新資料表。只要在時間回溯期內還原資料表，即使資料表已遭刪除或過期，您仍可複製歷來資料。
 
-從歷史資料還原資料表時，來源資料表的[標記](https://docs.cloud.google.com/bigquery/docs/tags?hl=zh-tw)不會複製到目的地資料表。資料表分區資訊也不會複製到目的地資料表。如要重新建立原始資料表的分區架構，請在 [Cloud Logging](https://docs.cloud.google.com/logging/docs/view/logs-explorer-interface?hl=zh-tw) 中查看初始資料表建立要求，並使用該資訊將還原的資料表分區。
+從歷來資料還原資料表時，來源資料表的[標記](https://docs.cloud.google.com/bigquery/docs/tags?hl=zh-tw)不會複製到目的地資料表。資料表分區資訊也不會複製到目的地資料表。如要重新建立原始資料表的分區架構，請在 [Cloud Logging](https://docs.cloud.google.com/logging/docs/view/logs-explorer-interface?hl=zh-tw) 中查看初始資料表建立要求，並使用該資訊將還原的資料表分區。
 
 如要還原已刪除但仍在時間旅行視窗內的資料表，請使用 `@<time>` 時間修飾符將資料表複製到新資料表。即使使用時間修飾符，您也無法查詢已刪除的資料表。你必須先還原。
 
 請搭配 `@<time>` 時間裝飾器使用下列語法：
 
 * `tableid@TIME`，其中 `TIME` 是自 Unix 紀元起經過的毫秒數。
-* `tableid@-TIME_OFFSET`，其中 `TIME_OFFSET` 是相對於目前時間的偏移量 (以毫秒為單位)。
+* `tableid@-TIME_OFFSET`，其中 `TIME_OFFSET` 是以毫秒為單位的相對偏移量，表示與目前時間的差距。
 * `tableid@0`：指定最舊的可用歷來資料。
 
 如要還原資料表，請選取下列其中一個選項：
@@ -354,7 +356,7 @@ protoPayload.resourceName="projects/PROJECT_ID/datasets/DATASET_ID"
 
 `INFORMATION_SCHEMA.TABLE_STORAGE` 檢視畫面會顯示目前資料表和時間回溯期內刪除的資料表相關資訊。如果資料表已刪除，`table_deletion_time` 欄會顯示刪除時間戳記，`table_deletion_reason` 欄則會顯示刪除方法。
 
-如要判斷資料表遭刪除的原因，請查詢 `INFORMATION_SCHEMA.TABLE_STORAGE` 檢視畫面：
+如要判斷資料表遭到刪除的原因，請查詢 `INFORMATION_SCHEMA.TABLE_STORAGE` 檢視畫面：
 
 ```
 SELECT
@@ -446,7 +448,7 @@ Cannot read before 1744843691075
 
 ### 具體化檢視表
 
-您無法直接還原已刪除的具體化檢視表，如果刪除具體化檢視區塊，就必須[重新建立](https://docs.cloud.google.com/bigquery/docs/materialized-views-create?hl=zh-tw)。
+您無法直接還原已刪除的具體化檢視表，如果刪除具體化檢視區塊，您必須[重新建立](https://docs.cloud.google.com/bigquery/docs/materialized-views-create?hl=zh-tw)。
 
 如果刪除具體化檢視表的基礎資料表，就無法再查詢或重新整理該檢視表。如果您按照「[還原資料表](https://docs.cloud.google.com/bigquery/docs/restore-deleted-tables?hl=zh-tw#restore_a_table)」一節的步驟還原基礎資料表，也必須[重新建立](https://docs.cloud.google.com/bigquery/docs/materialized-views-create?hl=zh-tw)使用該資料表的任何具體化檢視區塊。
 
@@ -458,7 +460,7 @@ Cannot read before 1744843691075
 * 指向外部資料的來源 URI
 * 外部資料的格式
 
-您可以從 [Cloud Logging](https://cloud.google.com/logging?hl=zh-tw) 取得這項資訊，方法是尋找資料表建立記錄項目。如果資料表剛刪除，您也可以嘗試查詢 [`INFORMATION_SCHEMA.TABLE_OPTIONS` 檢視區塊](https://docs.cloud.google.com/bigquery/docs/information-schema-table-options?hl=zh-tw)，取得 URI。
+您可以從 [Cloud Logging](https://cloud.google.com/logging?hl=zh-tw) 取得這項資訊，方法是尋找資料表建立記錄項目。如果資料表剛刪除，您也可以嘗試查詢[`INFORMATION_SCHEMA.TABLE_OPTIONS`檢視區塊](https://docs.cloud.google.com/bigquery/docs/information-schema-table-options?hl=zh-tw)來取得 URI。
 
 刪除外部資料表不會一併刪除基礎資料。
 
@@ -476,11 +478,11 @@ Cannot read before 1744843691075
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-02 (世界標準時間)。
+上次更新時間：2026-05-05 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-05 (世界標準時間)。"],[],[]]

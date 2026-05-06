@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -112,7 +114,7 @@
    ```
 
    使用 [`OPTIONS` 子句](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#table_option_list)設定資料表選項，例如[分區到期時間](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#partition-expiration)和[分區篩選器要求](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#require-filter)。
-3. 按一下 play\_circle **執行**。
+3. 按一下「執行」play\_circle。
 
 如要進一步瞭解如何執行查詢，請參閱「[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)」。
 
@@ -165,7 +167,7 @@ PARTITION BY
    * SCHEMA：格式為 `column:data_type,column:data_type` 的結構定義，或本機電腦上的 JSON 結構定義檔案路徑。詳情請參閱[指定結構定義](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw)。
    * COLUMN：分割資料欄的名稱。在資料表結構定義中，這個資料欄必須是 `TIMESTAMP`、`DATETIME` 或 `DATE` 類型。
    * UNIT\_TIME：分區類型。支援的值包括 `DAY`、`HOUR`、`MONTH` 或 `YEAR`。
-   * EXPIRATION\_TIME：資料表分區的到期時間 (以秒為單位)。`--time_partitioning_expiration` 是選用旗標。詳情請參閱「[設定分區期限](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#partition-expiration)」。
+   * EXPIRATION\_TIME：資料表分區的到期時間，以秒為單位。`--time_partitioning_expiration` 是選用旗標。詳情請參閱「[設定分區期限](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#partition-expiration)」。
    * BOOLEAN：如果 `true`，則對這個資料表執行的查詢必須包含分區篩選器。`--require_partition_filter` 是選用旗標。詳情請參閱「[設定分區篩選器規定](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#require-filter)」。
    * PROJECT\_ID：專案 ID。如果省略此參數，系統會使用預設專案。
    * DATASET：專案中的資料集名稱。
@@ -273,7 +275,7 @@ EOF
 
    將程式碼範例複製到新建立的 `main.tf`。
 
-   視需要從 GitHub 複製程式碼。如果 Terraform 程式碼片段是端對端解決方案的一部分，建議您使用這個方法。
+   視需要從 GitHub 複製程式碼。如果 Terraform 代码片段是端對端解決方案的一部分，建議您使用這個方法。
 3. 查看並修改範例參數，套用至您的環境。
 4. 儲存變更。
 5. 初始化 Terraform。每個目錄只需執行一次這項操作。
@@ -290,7 +292,7 @@ EOF
 
 ## 套用變更
 
-1. 檢查設定，確認 Terraform 即將建立或更新的資源符合您的預期：
+1. 查看設定，確認 Terraform 即將建立或更新的資源符合您的預期：
 
    ```
    terraform plan
@@ -518,7 +520,7 @@ print(
    * 確認「Table type」(資料表類型) 設為「Native table」(原生資料表)。
 7. 在「Schema」(結構定義) 部分輸入[結構定義](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw)。
 8. 在「Partition and cluster settings」(分區與叢集設定) 區段的「Partitioning」(分區) 中，按一下「Partition by ingestion time」(依擷取時間分區)。
-9. (選用) 如要規定所有查詢都必須使用分區篩選器，請選取「Require partition filter」(需要分區篩選器) 核取方塊。使用分區篩選器可以降低成本並提升效能。詳情請參閱「[設定分區篩選器規定](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#require-filter)」。
+9. (選用) 如要要求所有查詢都必須使用分區篩選器，請選取「Require partition filter」(需要分區篩選器) 核取方塊。使用分區篩選器可以降低成本並提升效能。詳情請參閱「[設定分區篩選器規定](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#require-filter)」。
 10. 點選「建立資料表」。
 
 **注意：** 您無法在 Google Cloud 控制台中設定分區到期時間。如要在建立資料表後設定分區，請參閱[更新分區到期時間](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#partition-expiration)。
@@ -545,7 +547,7 @@ print(
    ```
 
    使用 [`OPTIONS` 子句](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#table_option_list)設定資料表選項，例如[分區到期時間](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#partition-expiration)和[分區篩選器要求](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#require-filter)。
-3. 按一下 play\_circle **執行**。
+3. 按一下「執行」play\_circle。
 
 如要進一步瞭解如何執行查詢，請參閱「[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)」。
 
@@ -584,7 +586,7 @@ PARTITION BY
 
    * SCHEMA：格式為 `column:data_type,column:data_type` 的定義，或本機上 JSON 結構定義檔的路徑。詳情請參閱[指定結構定義](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw)。
    * UNIT\_TIME：分區類型。支援的值包括 `DAY`、`HOUR`、`MONTH` 或 `YEAR`。
-   * EXPIRATION\_TIME：資料表分區的到期時間 (以秒為單位)。`--time_partitioning_expiration` 是選用旗標。詳情請參閱「[設定分區期限](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#partition-expiration)」。
+   * EXPIRATION\_TIME：資料表分區的到期時間，以秒為單位。`--time_partitioning_expiration` 是選用旗標。詳情請參閱「[設定分區期限](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#partition-expiration)」。
    * BOOLEAN：如果 `true`，則對這個資料表執行的查詢必須包含分區篩選器。`--require_partition_filter` 是選用旗標。詳情請參閱「[設定分區篩選器規定](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#require-filter)」。
    * PROJECT\_ID：專案 ID。如果省略此參數，系統會使用預設專案。
    * DATASET：專案中的資料集名稱。
@@ -592,7 +594,7 @@ PARTITION BY
 
    如需其他指令列選項，請參閱 [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#mk-table)。
 
-   下列範例會建立名為 `mytable` 的擷取時間分區資料表。資料表每天都會分區，分區到期時間為 259,200 秒 (3 天)。
+   下列範例會建立名為 `mytable` 的擷取時間分區資料表。資料表採用每日分區，分區到期時間為 259,200 秒 (3 天)。
 
    ```
    bq mk \
@@ -685,7 +687,7 @@ EOF
 
    將程式碼範例複製到新建立的 `main.tf`。
 
-   視需要從 GitHub 複製程式碼。如果 Terraform 程式碼片段是端對端解決方案的一部分，建議您使用這個方法。
+   視需要從 GitHub 複製程式碼。如果 Terraform 代码片段是端對端解決方案的一部分，建議您使用這個方法。
 3. 查看並修改範例參數，套用至您的環境。
 4. 儲存變更。
 5. 初始化 Terraform。每個目錄只需執行一次這項操作。
@@ -702,7 +704,7 @@ EOF
 
 ## 套用變更
 
-1. 檢查設定，確認 Terraform 即將建立或更新的資源符合您的預期：
+1. 查看設定，確認 Terraform 即將建立或更新的資源符合您的預期：
 
    ```
    terraform plan
@@ -752,7 +754,7 @@ EOF
    * 「Interval」是每個分區範圍的寬度。
 
    超出這些範圍的值會放入特殊 `__UNPARTITIONED__` 分區。
-10. (選用) 如要規定所有查詢都必須使用分區篩選器，請選取「Require partition filter」(需要分區篩選器) 核取方塊。使用分區篩選器可以降低成本並提升效能。詳情請參閱「[設定分區篩選器規定](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#require-filter)」。
+10. (選用) 如要要求所有查詢都必須使用分區篩選器，請選取「Require partition filter」(需要分區篩選器) 核取方塊。使用分區篩選器可以降低成本並提升效能。詳情請參閱「[設定分區篩選器規定](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#require-filter)」。
 11. 點選「建立資料表」。
 
 **注意：** 您無法在 Google Cloud 控制台中設定分區到期時間。如要在建立資料表後設定分區，請參閱[更新分區到期時間](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#partition-expiration)。
@@ -777,7 +779,7 @@ EOF
    ```
 
    使用 [`OPTIONS` 子句](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#table_option_list)設定資料表選項，例如[分區篩選器需求](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#require-filter)。
-3. 按一下 play\_circle **執行**。
+3. 按一下「執行」play\_circle。
 
 如要進一步瞭解如何執行查詢，請參閱「[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)」。
 
@@ -909,7 +911,7 @@ EOF
 
    將程式碼範例複製到新建立的 `main.tf`。
 
-   視需要從 GitHub 複製程式碼。如果 Terraform 程式碼片段是端對端解決方案的一部分，建議您使用這個方法。
+   視需要從 GitHub 複製程式碼。如果 Terraform 代码片段是端對端解決方案的一部分，建議您使用這個方法。
 3. 查看並修改範例參數，套用至您的環境。
 4. 儲存變更。
 5. 初始化 Terraform。每個目錄只需執行一次這項操作。
@@ -926,7 +928,7 @@ EOF
 
 ## 套用變更
 
-1. 檢查設定，確認 Terraform 即將建立或更新的資源符合您的預期：
+1. 查看設定，確認 Terraform 即將建立或更新的資源符合您的預期：
 
    ```
    terraform plan
@@ -1114,7 +1116,7 @@ print(
 
 您可以透過下列方式，從查詢結果建立分區資料表：
 
-* 在 SQL 中，請使用 `CREATE TABLE ... AS SELECT` 陳述式。您可以使用這種方法建立依時間單位欄或整數範圍分區的資料表，但無法依擷取時間分區。
+* 在 SQL 中，請使用 `CREATE TABLE ... AS SELECT` 陳述式。您可以使用這種方法，建立以時間單位資料欄或整數範圍分區的資料表，但無法以擷取時間分區。
 * 使用 bq 指令列工具或 BigQuery API，為查詢設定目的地資料表。查詢執行時，BigQuery 會將結果寫入目的地資料表。這種做法適用於任何分割類型。
 * 呼叫 `jobs.insert` API 方法，並在 `timePartitioning` 屬性或 `rangePartitioning` 屬性中指定分區。
 
@@ -1143,7 +1145,7 @@ print(
    ```
 
    使用 [`OPTIONS` 子句](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#table_option_list)設定資料表選項，例如[分區篩選器需求](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#require-filter)。
-3. 按一下 play\_circle **執行**。
+3. 按一下「執行」play\_circle。
 
 如要進一步瞭解如何執行查詢，請參閱「[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)」。
 
@@ -1254,7 +1256,7 @@ bq --location=LOCATION partition \
 * PROJECT\_ID：專案 ID。
 * SOURCE\_DATASET：包含日期分片資料表的資料集。
 * SOURCE\_TABLE：日期資料分割資料表的前置字串。
-* DESTINATION\_DATASET：新分區資料集的資料集。
+* DESTINATION\_DATASET：新分區資料表的資料集。
 * DESTINATION\_TABLE：要建立的分區資料表名稱。
 
 `partition` 指令不支援 `--label`、`--expiration`、`--add_tags` 或 `--description` 旗標。您可以在建立資料表後，在其中加入標籤、資料表到期時間、[標記](https://docs.cloud.google.com/bigquery/docs/tags?hl=zh-tw)和說明。
@@ -1289,11 +1291,11 @@ bq partition \
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-02 (世界標準時間)。
+上次更新時間：2026-05-05 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-05 (世界標準時間)。"],[],[]]

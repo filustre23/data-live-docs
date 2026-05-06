@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -45,10 +47,10 @@
 | `linked_project_number` | `INTEGER` | 訂閱者專案的專案編號。 |
 | `linked_dataset_id` | `STRING` | 訂閱者資料集的連結資料集 ID。 |
 | `subscriber_org_number` | `INTEGER` | 執行工作的機構編號。這是訂閱者的機構號碼。如果專案沒有機構，這個欄位會空白。 |
-| `subscriber_org_display_name` | `STRING` | 使用者容易理解的字串，是指工作執行的機構。這是訂閱者的機構號碼。如果專案沒有機構，這個欄位會空白。 |
+| `subscriber_org_display_name` | `STRING` | 使用者可理解的字串，代表執行工作的機構。這是訂閱者的機構號碼。如果專案沒有機構，這個欄位會空白。 |
 | `job_principal_subject` | `STRING` | 對連結資料集執行作業和查詢的使用者主體 ID (使用者電子郵件 ID、服務帳戶、群組電子郵件 ID、網域)。 |
 | `num_rows_processed` | `INTEGER` | 查詢資源參照的基礎資料表所處理的總列數。 |
-| `total_bytes_processed` | `INTEGER` | 查詢的資源所參照的基礎資料表處理的位元組總數。 |
+| `total_bytes_processed` | `INTEGER` | 查詢的資源所參照的基礎資料表處理的總位元組數。 |
 | `shared_resource_id` | `STRING` | 所查詢資源 (資料表、檢視區塊或常式) 的 ID。 |
 | `shared_resource_type` | `STRING` | 查詢資源的類型。例如：`TABLE`、`EXTERNAL_TABLE`、`VIEW`、`MATERIALIZED_VIEW`、`TABLE_VALUED_FUNCTION` 或 `SCALAR_FUNCTION`。 |
 | `referenced_tables` | `RECORD REPEATED` | 包含基本資料表的 `project_id`、`dataset_id`、`table_id` 和 `processed_bytes` 欄位。 |
@@ -61,7 +63,7 @@
 
 ## 範圍和語法
 
-對這個檢視表執行的查詢必須包含[區域限定詞](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw#syntax)。如未指定區域限定符，系統會從美國地區擷取中繼資料。下表說明這個檢視畫面的區域範圍：
+對這個檢視表執行的查詢必須包含[區域限定詞](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw#syntax)。如未指定區域限定符，系統會從美國區域擷取中繼資料。下表說明這個檢視畫面的區域範圍：
 
 | 檢視表名稱 | 資源範圍 | 區域範圍 |
 | --- | --- | --- |
@@ -72,7 +74,7 @@
 
 * 選用：`PROJECT_ID`：專案 ID。 Google Cloud 如未指定，系統會使用預設專案。
 * `REGION`：任何[資料集區域名稱](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
-  例如：`` `region-us` ``。**注意：**您必須使用[區域限定詞](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw#region_qualifier)查詢 `INFORMATION_SCHEMA` 檢視畫面。查詢執行位置必須與`INFORMATION_SCHEMA`檢視區塊的區域相符。
+  例如：`` `region-us` ``。**注意：**您必須使用[區域限定詞](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw#region_qualifier)查詢 `INFORMATION_SCHEMA` 檢視畫面。查詢執行位置必須與 `INFORMATION_SCHEMA` 檢視區塊的區域相符。
 
 ## 範例
 
@@ -84,7 +86,7 @@
 
 ### 取得所有共用資料表上執行的工作總數
 
-以下範例會計算專案中[訂閱者](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings?hl=zh-tw)執行的工作總數：
+以下範例會計算專案的[訂閱者](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings?hl=zh-tw)執行的工作總數：
 
 ```
 SELECT
@@ -257,11 +259,11 @@ WHERE shared_resource_type = 'TABLE_VALUED_FUNCTION'
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-02 (世界標準時間)。
+上次更新時間：2026-05-05 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-05 (世界標準時間)。"],[],[]]

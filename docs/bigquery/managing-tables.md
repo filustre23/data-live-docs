@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -33,7 +35,7 @@
 
 ## 事前準備
 
-授予身分與存取權管理 (IAM) 角色，讓使用者取得執行本文各項工作所需的權限。如要執行工作，必須具備的權限 (如有) 會列在工作的「必要權限」部分。
+授予身分與存取權管理 (IAM) 角色，讓使用者取得執行本文各項工作所需的權限。執行工作所需的權限 (如有) 會列在工作的「必要權限」部分。
 
 ## 更新資料表屬性
 
@@ -267,9 +269,9 @@ assert table.description == "Updated description."
 4. 在詳細資料面板中，按一下「結構定義」分頁標籤。
 5. 點按「生成」。
 
-   **附註：** 如果沒有看到「產生」按鈕，請點選「描述資料」。你可能需要捲動畫面才能看到這個按鈕。
+   **注意：** 如果沒有看到「產生」按鈕，請點選「描述資料」。你可能需要捲動畫面才能看到這個按鈕。
 
-   Gemini 會生成資料表說明和資料表洞察結果。系統需要幾分鐘才能填入資訊。您可以在表格的「洞察」分頁中查看生成的洞察資訊。
+   Gemini 會生成資料表說明和資料表洞察結果。系統需要幾分鐘才能填入資訊。您可以在表格的「洞察」分頁中查看生成的洞察資料。
 6. 如要編輯及儲存系統產生的表格說明，請按照下列步驟操作：
 
    1. 按一下「查看資料欄說明」。
@@ -286,7 +288,8 @@ assert table.description == "Updated description."
 
 您可以設定資料集層級的預設資料表到期時間，也可以在建立資料表時設定資料表的到期時間。資料表的到期時間通常稱為「存留時間」或 TTL。
 
-資料表過期後，系統會一併刪除資料表及其包含的所有資料。如有需要，您可以在資料集指定的時間旅行視窗內取消刪除過期的資料表，詳情請參閱「[還原已刪除的資料表](https://docs.cloud.google.com/bigquery/docs/restore-deleted-tables?hl=zh-tw)」。
+資料表過期後，系統會一併刪除資料表和其中的所有資料。
+如有需要，您可以在資料集指定的時間旅行視窗內取消刪除過期的資料表，詳情請參閱「[還原已刪除的資料表](https://docs.cloud.google.com/bigquery/docs/restore-deleted-tables?hl=zh-tw)」。
 
 如果您在建立資料表時設定了到期時間，系統將會忽略資料集的資料表預設到期時間。如果您未在資料集層級設定資料表的預設到期時間，也未在建立資料表時設定到期時間，則資料表將永遠不會過期，您必須以手動方式才能[刪除](#deleting_a_table)。
 
@@ -647,7 +650,7 @@ SET OPTIONS (
   default_rounding_mode = "ROUND_HALF_EVEN");
 ```
 
-將 `NUMERIC` 或 `BIGNUMERIC` 欄位新增至資料表時，如果未指定[捨入模式](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#rounding_mode)，系統會自動將捨入模式設為資料表的預設捨入模式。變更資料表的預設捨入模式不會影響現有欄位的捨入模式。
+在表格中新增 `NUMERIC` 或 `BIGNUMERIC` 欄位時，如果沒有指定[捨入模式](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#rounding_mode)，系統會自動將捨入模式設為表格的預設捨入模式。變更資料表的預設捨入模式不會影響現有欄位的捨入模式。
 
 ### 更新資料表的結構定義
 
@@ -662,7 +665,7 @@ ALTER TABLE mydataset.mytable
 RENAME TO mynewtable;
 ```
 
-`ALTER TABLE RENAME TO` 陳述式會在目的地資料集中重新建立資料表，並沿用原始資料表的建立時間戳記。如果您已設定[資料集層級的資料表到期時間](https://docs.cloud.google.com/bigquery/docs/updating-datasets?hl=zh-tw#table-expiration)，如果重新命名的資料表原始建立時間戳記超出到期時間範圍，系統可能會立即刪除該資料表。
+`ALTER TABLE RENAME TO` 陳述式會在目的地資料集中重新建立資料表，並使用原始資料表的建立時間戳記。如果您已設定[資料集層級的資料表到期時間](https://docs.cloud.google.com/bigquery/docs/updating-datasets?hl=zh-tw#table-expiration)，如果重新命名的資料表原始建立時間戳記超出到期時間範圍，系統可能會立即刪除該資料表。
 
 #### 重新命名資料表的限制
 
@@ -670,7 +673,7 @@ RENAME TO mynewtable;
 * 通常在上次串流作業的 5 小時後，即可重新命名表格，但有時可能需要較長時間。
 * 系統會保留現有的資料表 ACL 和資料列存取政策，但不會保留在資料表重新命名期間所做的資料表 ACL 和資料列存取政策更新。
 * 您無法同時重新命名資料表，並對該資料表執行 DML 陳述式。
-* 重新命名資料表會移除資料表中的所有[Data Catalog 標記](https://docs.cloud.google.com/data-catalog/docs/tags-and-tag-templates?hl=zh-tw) (已淘汰) 和 [Knowledge Catalog 方面](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata?hl=zh-tw#aspects)。
+* 重新命名資料表會移除資料表中的所有[Data Catalog 標記](https://docs.cloud.google.com/data-catalog/docs/tags-and-tag-templates?hl=zh-tw) (已淘汰) 和[Knowledge Catalog 層面](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata?hl=zh-tw#aspects)。
 * 重新命名資料表時，系統會捨棄在該資料表上建立的任何搜尋索引或向量索引。
 * 您無法重新命名外部資料表。
 
@@ -690,7 +693,7 @@ RENAME TO mynewtable;
 
 資料表複製工作有下列限制：
 
-* 表格複製作業開始後就無法停止。資料表副本作業會非同步執行，即使取消工作也不會停止。跨區域複製資料表時，您也需要支付資料移轉費用，以及目標區域的儲存空間費用。
+* 表格複製作業開始後就無法停止。資料表複製作業會非同步執行，即使取消工作也不會停止。跨區域複製資料表時，您也需要支付資料移轉費用，以及目標區域的儲存空間費用。
 * 當您複製資料表時，目的地資料表的名稱必須遵循您[建立資料表](https://docs.cloud.google.com/bigquery/docs/tables?hl=zh-tw#create-table)時所使用的命名慣例。
 * 資料表複製必須遵循 BigQuery 有關複製工作的[限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#copy_jobs)。
 * Google Cloud 主控台一次只能複製一個資料表。您無法覆寫目的地資料集中的現有資料表。目的地資料集中的資料表名稱不得重複。
@@ -712,7 +715,7 @@ RENAME TO mynewtable;
 
 如要取得複製資料表和分區所需的權限，請要求管理員授予您來源和目的地資料集的[資料編輯者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataEditor)  (`roles/bigquery.dataEditor`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
-這個預先定義的角色具備複製資料表和分割區所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
+這個預先定義的角色具備複製資料表和資料分割所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
 #### 所需權限
 
@@ -1154,8 +1157,4 @@ print("A copy of the table created.")
 
    Google Cloud 主控台底部會開啟一個 [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works?hl=zh-tw) 工作階段，並顯示指令列提示。Cloud Shell 是已安裝 Google Cloud CLI 的殼層環境，並已針對您目前的專案設定好相關值。工作階段可能要幾秒鐘的時間才能初始化。
 2. 發出 `bq cp` 指令，並以逗號分隔清單的形式包含多個來源資料表。
-   選用標記可用來控管目的地資料表的寫入配置：
-
-   * `-a` 或 `--append_table`：把來源資料表的資料附加到目的地資料集中現有的資料表上。
-   * `-f` 或 `--force`：覆寫目的地資料集的現有目的地資料表，並且不會提示您確認。
-   * 如果目的地資料集裡已有資料表，`-n` 或 `--no_clobber` 會傳回下列錯誤訊息：`Table 'project_id:<`
+   選用標記可用來控管目的地資料表的寫入

@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -75,7 +77,7 @@ BigQuery 分區和分群建議工具會產生[分區](https://docs.cloud.google.
 |  | 法蘭克福 | `europe-west3` |  |
 |  | 倫敦 | `europe-west2` |  |
 |  | 荷蘭 | `europe-west4` |  |
-|  | 蘇黎世 | `europe-west6` | [低二氧化碳排放](https://cloud.google.com/sustainability/region-carbon?hl=zh-tw#region-picker) |
+|  | 蘇黎世 | `europe-west6` |  |
 | **美洲** | | | |
 |  | 愛荷華州 | `us-central1` | [低二氧化碳排放](https://cloud.google.com/sustainability/region-carbon?hl=zh-tw#region-picker) |
 |  | 拉斯維加斯 | `us-west4` |  |

@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -1085,5 +1087,5 @@ public class RelaxTableQuery {
 
       TableId tableId = TableId.of(datasetName, tableName);
 
-      String sourceTable = "`" + projectId + "." + datasetName + "."<
+      String sourceTable =
 ```

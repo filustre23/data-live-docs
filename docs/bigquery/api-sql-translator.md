@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -80,18 +82,18 @@
 
 ### 使用輔助 UDF 處理不支援的 SQL 函式
 
-將來源方言的 SQL 轉換為 BigQuery 時，部分函式可能沒有直接對應的函式。為解決這個問題，BigQuery 遷移服務 (和更廣泛的 BigQuery 社群) 提供輔助使用者定義函式 (UDF)，可複製這些不支援的來源方言函式行為。
+將來源 SQL 語法翻譯為 BigQuery 時，部分函式可能沒有直接對應的函式。為解決這個問題，BigQuery 遷移服務 (和更廣泛的 BigQuery 社群) 提供輔助使用者定義函式 (UDF)，可複製這些不支援的來源方言函式行為。
 
 這些 UDF 通常位於 `bqutil` 公開資料集中，因此翻譯後的查詢一開始可以採用 `bqutil.<dataset>.<function>()` 格式參照這些 UDF。例如：`bqutil.fn.cw_count()`。
 
 #### 正式環境的重要注意事項：
 
-雖然 `bqutil` 可方便存取這些輔助 UDF，進行初始轉換和測試，但基於下列原因，不建議直接依賴 `bqutil` 處理實際工作環境工作負載：
+雖然 `bqutil` 可方便存取這些輔助 UDF，進行初始轉譯和測試，但基於下列原因，不建議直接依賴 `bqutil` 處理正式版工作負載：
 
-1. 版本管控：`bqutil` 專案會代管這些 UDF 的最新版本，因此定義可能會隨時間變更。如果 UDF 的邏輯更新，直接依賴 `bqutil` 可能會導致正式版查詢發生非預期行為或破壞性變更。
+1. 版本管控：`bqutil` 專案會代管這些 UDF 的最新版本，因此定義可能會隨時間變更。如果 UDF 的邏輯更新，直接依賴 `bqutil` 可能會導致生產查詢發生非預期行為或重大變更。
 2. 依附元件隔離：將 UDF 部署至自己的專案，可避免外部變更影響正式環境。
-3. 自訂：您可能需要修改或最佳化這些 UDF，進一步滿足特定商業邏輯或效能需求。只有在這些資源位於您的專案中時，才能執行這項操作。
-4. 安全性和控管：貴機構的安全政策可能會限制直接存取公開資料集 (例如 `bqutil`)，以處理正式環境資料。將 UDF 複製到受控環境，符合這類政策規定。
+3. 自訂：您可能需要修改或最佳化這些 UDF，進一步符合特定商業邏輯或效能需求。只有在這些資源位於您的專案中時，才能執行這項操作。
+4. 安全性和治理：貴機構的安全政策可能會限制直接存取 `bqutil` 等公開資料集，以處理正式環境資料。將 UDF 複製到受控環境，符合這類政策規定。
 
 #### 將輔助 UDF 部署至專案：
 
@@ -124,7 +126,7 @@
 |  | 芬蘭 | `europe-north1` |  |
 |  | 法蘭克福 | `europe-west3` |  |
 |  | 倫敦 | `europe-west2` |  |
-|  | 馬德里 | `europe-southwest1` | [低二氧化碳排放](https://cloud.google.com/sustainability/region-carbon?hl=zh-tw#region-picker) |
+|  | 馬德里 | `europe-southwest1` |  |
 |  | 米蘭 | `europe-west8` |  |
 |  | 荷蘭 | `europe-west4` | [低二氧化碳排放](https://cloud.google.com/sustainability/region-carbon?hl=zh-tw#region-picker) |
 |  | 巴黎 | `europe-west9` | [低二氧化碳排放](https://cloud.google.com/sustainability/region-carbon?hl=zh-tw#region-picker) |
@@ -240,7 +242,7 @@ curl -d "{
 ```
 
 如要取得工作流程的最新狀態，請[執行 `GET` 查詢](#explore_the_translation_output)。
-工作會將輸出內容傳送至 Cloud Storage。所有要求的 `target_types` 生成後，工作會變更為 `state``COMPLETED`。如果工作成功，您可以在 `gs://my_data_bucket/teradata/output` 中找到翻譯後的 SQL 查詢。
+工作會將輸出內容傳送至 Cloud Storage。所有要求的 `target_types` 生成完畢後，工作 `state` 會變更為 `COMPLETED`。如果工作成功，您可以在 `gs://my_data_bucket/teradata/output` 中找到翻譯後的 SQL 查詢。
 
 #### 使用 AI 建議進行批次翻譯的範例
 
@@ -417,11 +419,11 @@ curl \
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-02 (世界標準時間)。
+上次更新時間：2026-05-05 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-05 (世界標準時間)。"],[],[]]

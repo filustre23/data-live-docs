@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -712,13 +714,4 @@ Search Ads 360 API 資源：[ad\_group\_criterion](https://developers.google.com
 | campaign\_name | 廣告活動名稱。建立新廣告活動時，這個欄位為必填，且不得為空白。不得包含任何空值 (代碼點 0x0)、NL 換行 (代碼點 0xA) 或回車字元 (代碼點 0xD)。 |
 | campaign\_status | 廣告活動的狀態。 |
 | customer\_account\_type | 引擎帳戶類型。例如：Google Ads、Microsoft Advertising、Yahoo Japan、百度、Facebook、Engine Track。 |
-| customer\_descriptive\_name | 選填，客戶的說明名稱 (可重複)。 |
-| customer\_id | 顧客 ID。 |
-
-Search Ads 360 表格名稱：AdGroupDeviceStats
-
-Search Ads 360 API 資源：[ad\_group](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/ad_group?hl=zh-tw)
-
-| Search Ads 360 欄位名稱 | 說明 |
-| --- | --- |
-| ad\_group\_engine\_id | 外部引擎帳戶中的廣告群組 ID。這個欄位僅適用於非 Google Ads 帳戶。例如：Yahoo Japan、Microsoft、百度。如果是 Google Ads 實體，請改用「ad\_group |
+| customer\_descriptive\_name | 選填，客戶的說 |

@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -14,7 +16,7 @@
 
 # 為行銷分析資料建構 ELT 管道
 
-本教學課程說明如何設定 ELT 工作流程，在 BigQuery 中擷取、載入及轉換行銷分析資料。
+本教學課程說明如何設定 ELT 工作流程，從 BigQuery 擷取、載入及轉換行銷分析資料。
 
 典型的 ELT 工作流程會定期從資料來源擷取新的客戶資料，並載入至 BigQuery。接著，系統會將非結構化資料處理為有意義的指標。在本教學課程中，您將使用 BigQuery 資料移轉服務設定行銷分析資料移轉作業，藉此建立 ELT 工作流程。接著，您會排定 Dataform 的執行時間，定期轉換資料。
 
@@ -84,12 +86,12 @@
 1. 前往 Google Cloud 控制台的「資料移轉」頁面。
 
    [前往「資料轉移」頁面](https://console.cloud.google.com/bigquery/transfers?hl=zh-tw)
-2. 按一下 add「建立轉移作業」。
+2. 按一下「建立轉移作業」add。
 3. 在「Source type」(來源類型) 區段中，針對「Source」(來源)，選擇 [Google Ads]。
 4. 在「Data source details」(資料來源詳細資料) 區段：
 
    1. 在「Customer ID」(客戶 ID) 中，輸入您的 Google Ads 客戶 ID。
-   2. 在「報表類型」選取「標準」。標準報表包含一組標準報表和欄位，詳情請參閱 [Google Ads 報表轉換](https://docs.cloud.google.com/bigquery/docs/google-ads-transformation?hl=zh-tw)。
+   2. 在「報表類型」選取「標準」。標準報表包含一組標準報表和欄位，詳情請參閱「[Google Ads 報表轉換](https://docs.cloud.google.com/bigquery/docs/google-ads-transformation?hl=zh-tw)」。
       * 在「Refresh window」(重新整理時間範圍) 中輸入 `5`。
 5. 在「Destination settings」(目的地設定) 部分，「Dataset」(資料集) 請選取您為了儲存資料而建立的資料集。
 6. 在「Transfer config name」(轉移設定名稱) 部分，針對「Display name」(顯示名稱) 輸入 `Marketing tutorial`。
@@ -99,7 +101,7 @@
    * 在「At」(在) 中輸入 `08:00`。
 8. 按一下 [儲存]。
 
-儲存設定後，BigQuery 資料移轉服務就會開始移轉資料。根據轉移設定中的設定，資料轉移作業每天會在世界標準時間上午 8 點執行一次，並從 Google Ads 擷取過去五天的資料。
+儲存設定後，BigQuery 資料移轉服務就會開始移轉資料。根據移轉設定中的設定，資料移轉作業每天會在世界標準時間上午 8 點執行一次，並從 Google Ads 擷取過去五天的資料。
 
 您可以[監控進行中的移轉作業](https://docs.cloud.google.com/bigquery/docs/dts-monitor?hl=zh-tw)，查看每項資料移轉的狀態。
 
@@ -298,7 +300,7 @@ ORDER BY
 
 編輯 `definitions/googleads-declaration.sqlx`，將已轉移的 Google Ads 資料表宣告為資料來源。這個範例會將 `ads_Campaign` 資料表宣告為資料來源：
 
-1. 在開發工作區的「Files」(檔案) 窗格中，按一下 SQLX 檔案，宣告資料來源。
+1. 在開發工作區的「Files」(檔案) 窗格中，按一下 SQLX 檔案，進行資料來源宣告。
 2. 在檔案中輸入下列程式碼片段：
 
    ```
@@ -452,11 +454,11 @@ ORDER BY
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-02 (世界標準時間)。
+上次更新時間：2026-05-05 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-05 (世界標準時間)。"],[],[]]

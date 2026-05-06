@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -335,6 +337,5 @@ public class CreateRedshiftTransfer {
     Map<String, Value> params = new HashMap<>();
     params.put("jdbc_url", Value.newBuilder().setStringValue(jdbcUrl).build());
     params.put("database_username", Value.newBuilder().setStringValue(dbUserName).build());
-    params.put("database_password", Value.newBuilder().setStringValue(dbPassword).build());
-    params.put("access_key_id",
+    params.put("database_password", Value.newBuilder
 ```

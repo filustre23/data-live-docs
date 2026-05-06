@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -105,7 +107,7 @@ BigQuery 管理員可以建立[連線](https://docs.cloud.google.com/bigquery/do
 
    或者，您也可以在「Search for data sources」(搜尋資料來源) 欄位中輸入 `Azure`。
 4. 在「精選資料來源」部分，按一下「Azure Blob 儲存體」。
-5. 按一下「Azure Blob 儲存體 Omni：BigQuery 聯盟」解決方案資訊卡。
+5. 按一下「Azure Blob Storage Omni：BigQuery Federation」解決方案資訊卡。
 6. 在「建立表格」對話方塊的「連線 ID」欄位中，選取「建立新的 ABS 連線」。
 7. 在「外部資料來源」窗格中，輸入下列資訊：
 
@@ -170,9 +172,7 @@ Identity: SUBJECT_ID
 這項輸出內容包含下列值：
 
 * `APP_ID`：您建立的應用程式 ID。
-* `SUBJECT_ID`：使用者授權存取應用程式的 Google Cloud
-  服務帳戶 ID。
-  在 Azure 中建立聯盟憑證時，這是必填的值。
+* `SUBJECT_ID`：使用者授權存取應用程式的 Google Cloud服務帳戶 ID。在 Azure 中建立聯盟憑證時，這是必填的值。
 
 記下 `APP_ID` 和 `SUBJECT_ID` 值，以供後續步驟使用。
 
@@ -356,7 +356,7 @@ Identity: SUBJECT_ID
 * `STORAGE_ACCOUNT_NAME`：儲存空間帳戶名稱。
 * `SUBSCRIPTION_ID`：訂閱 ID。
 
-現在可以使用連線了。不過，Azure 中的角色指派作業可能會有傳播延遲。如果因為權限問題而無法使用連線，請稍後再試。
+現在可以使用連線了。不過，Azure 中的角色指派可能會有傳播延遲。如果因為權限問題而無法使用連線，請稍後再試。
 
 **注意：** 刪除連結後，用於存取 Azure 應用程式的 Google 身分識別就會遭到刪除。Azure 租戶中的應用程式不會遭到刪除。
 
@@ -380,7 +380,7 @@ Identity: SUBJECT_ID
    連線會列在專案中，位於「Connections」(連線) 群組。
 2. 點選左側窗格中的 explore「Explorer」。
 
-   如果沒有看到左側窗格，請按一下「展開左側窗格」圖示 last\_page 開啟窗格。
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 按一下專案，然後依序點選「連線」和所需連線。
 4. 在「詳細資料」窗格中，按一下「共用」即可共用連線。
    接著，按照下列步驟操作：
@@ -395,7 +395,7 @@ Identity: SUBJECT_ID
 
 ### API
 
-請使用 BigQuery Connections REST API 參考資料中的 [`projects.locations.connections.setIAM` 方法](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections?hl=zh-tw#methods)，並提供 `policy` 資源的執行個體。
+請使用 BigQuery Connections REST API 參考資料部分中的 [`projects.locations.connections.setIAM` 方法](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections?hl=zh-tw#methods)，並提供 `policy` 資源的執行個體。
 
 ### Java
 
@@ -461,11 +461,11 @@ public class ShareConnection {
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-02 (世界標準時間)。
+上次更新時間：2026-05-05 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-05 (世界標準時間)。"],[],[]]

@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -44,7 +46,7 @@
 |  | 拉斯維加斯 | `us-west4` |  |
 |  | 蒙特婁 | `northamerica-northeast1` |  |
 |  | 北維吉尼亞州 | `us-east4` |  |
-|  | 奧勒岡州 | `us-west1` | [低 CO2](https://cloud.google.com/sustainability/region-carbon?hl=zh-tw#region-picker) 區域 |
+|  | 奧勒岡州 | `us-west1` |  |
 |  | 聖保羅 | `southamerica-east1` | [低 CO2](https://cloud.google.com/sustainability/region-carbon?hl=zh-tw#region-picker) 區域 |
 |  | 南卡羅來納州 | `us-east1` |  |
 | **亞太地區** | | | |

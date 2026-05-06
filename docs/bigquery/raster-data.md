@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -25,17 +27,17 @@
 地理空間光柵和向量資料通常會使用「區域統計」作業合併，這項作業會計算指定向量區域內所有光柵值的匯總。舉例來說，您可能想計算下列項目：
 
 * 一系列城市中的平均空氣品質。
-* 一組建築物多邊形的太陽能發電潛力。
+* 一組建築物多邊形的太陽能發電潛能。
 * 森林地區輸電線路走廊的火災風險摘要。
 
-BigQuery 擅長處理向量資料，Google Earth Engine 則擅長處理光柵資料。您可以使用[`ST_REGIONSTATS`地理函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions?hl=zh-tw#st_regionstats)，將 Earth Engine 的點陣資料與儲存在 BigQuery 中的向量資料合併。
+BigQuery 擅長處理向量資料，Google Earth Engine 則擅長處理光柵資料。您可以使用 [`ST_REGIONSTATS` 地理函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions?hl=zh-tw#st_regionstats)，將 Earth Engine 的點陣資料與儲存在 BigQuery 中的向量資料合併。
 
 ## 事前準備
 
 1. 如要在查詢中使用 `ST_REGIONSTATS` 函式，請啟用 Earth Engine API。
 
    [啟用 API](https://console.cloud.google.com/apis/library/earthengine.googleapis.com?hl=zh-tw)
-2. 選用：如要訂閱及使用發布至 BigQuery sharing (舊稱 Analytics Hub) 的資料，請使用 `ST_REGIONSTATS` 函式並啟用 Analytics Hub API。
+2. 選用：如要使用 `ST_REGIONSTATS` 函式訂閱及使用發布至 BigQuery sharing (舊稱 Analytics Hub) 的資料，請啟用 Analytics Hub API。
 
    [啟用 API](https://console.cloud.google.com/apis/library/analyticshub.googleapis.com?hl=zh-tw)
 
@@ -64,7 +66,7 @@ BigQuery 擅長處理向量資料，Google Earth Engine 則擅長處理光柵資
 
 ## 尋找光柵資料
 
-`ST_REGIONSTATS` 函式中的 `raster_id` 參數是字串，用於指定點陣資料來源。以下各節說明如何尋找及設定點陣 ID 格式。
+`ST_REGIONSTATS` 函式中的 `raster_id` 參數是字串，用於指定點陣資料的來源。以下各節說明如何尋找及設定點陣 ID 格式。
 
 ### BigQuery 圖片資料表
 
@@ -91,7 +93,7 @@ Google Earth Engine 會發布公開資料集，其中包含 `US` 和 `EU` 多區
 每個圖片資料表都包含對應的 `*_metadata` 資料表，提供圖片資料表的輔助資訊。
 
 舉例來說，ERA5-Land 資料集提供每日氣候變數統計資料，且開放大眾使用。`climate`
-表格含有多個點陣 ID。下列查詢會使用 `start_datetime` 欄篩選圖片資料表，取得 2025 年 1 月 1 日對應圖片的點陣 ID，並使用 `temperature_2m` 頻帶計算每個國家/地區的平均溫度：
+表格含有多個點陣 ID。下列查詢會使用 `start_datetime` 欄篩選圖片資料表，取得 2025 年 1 月 1 日對應圖片的光柵 ID，並使用 `temperature_2m` 頻帶計算每個國家/地區的平均溫度：
 
 ### SQL
 
@@ -124,9 +126,10 @@ ORDER BY
 ### BigQuery DataFrames
 
 在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定說明操作。
-詳情請參閱 [BigQuery DataFrames 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
+詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
 
 ```
 import datetime
@@ -196,7 +199,7 @@ GeoTIFF 是儲存地理空間點陣資料的常見檔案格式。`ST_REGIONSTATS
 
 ### Earth Engine 圖片資產
 
-`ST_REGIONSTATS` 函式支援傳遞 Earth Engine 圖片資產路徑做為 `raster_id` 引數。Earth Engine 點陣資料可做為個別圖片或圖片集合使用。這些資料位於 `US` 區域，且僅與在 `US` 區域執行的查詢相容。如要找出圖片的點陣 ID，請按照下列步驟操作：
+`ST_REGIONSTATS` 函式支援傳遞 Earth Engine 圖片素材資源路徑做為 `raster_id` 引數。Earth Engine 點陣資料可做為個別圖片或圖片集合使用。這些資料位於 `US` 區域，且僅與在 `US` 區域執行的查詢相容。如要找出圖片的點陣 ID，請按照下列步驟操作：
 
 1. 在 [Earth Engine 資料目錄](https://developers.google.com/earth-engine/datasets?hl=zh-tw)中搜尋您感興趣的資料集。
 2. 如要開啟該項目的說明頁面，請按一下資料集名稱。
@@ -204,17 +207,17 @@ GeoTIFF 是儲存地理空間點陣資料的常見檔案格式。`ST_REGIONSTATS
 
    如果 Earth Engine 片段的格式為 `ee.Image('IMAGE_PATH')`，則點陣 ID 為 `'ee://IMAGE_PATH'`。
 
-   如果 Earth Engine 片段採用 `ee.ImageCollection('IMAGE_COLLECTION_PATH')` 形式，您可以使用 [Earth Engine 程式碼編輯器](https://developers.google.com/earth-engine/guides/quickstart_javascript?hl=zh-tw)，將 [ImageCollection 篩選](https://developers.google.com/earth-engine/guides/ic_filtering?hl=zh-tw)為單一圖片。使用 `ee.Image.get('system:id')` 方法將該圖片的 `IMAGE_PATH` 值列印到控制台。點陣 ID 為 `'ee://IMAGE_PATH'`。
+   如果 Earth Engine 片段採用 `ee.ImageCollection('IMAGE_COLLECTION_PATH')` 形式，您可以使用 [Earth Engine 程式碼編輯器](https://developers.google.com/earth-engine/guides/quickstart_javascript?hl=zh-tw)，將 [ImageCollection 篩選為單一圖片](https://developers.google.com/earth-engine/guides/ic_filtering?hl=zh-tw)。使用 `ee.Image.get('system:id')` 方法將該圖片的 `IMAGE_PATH` 值列印到控制台。點陣 ID 為 `'ee://IMAGE_PATH'`。
 
 ## 像素權重
 
 您可以為 `ST_REGIONSTATS` 函式中的 `include` 參數指定*權重* (有時稱為*遮罩值*)，決定計算時每個像素的權重。權重值必須介於 0 到 1 之間。
-如果權重超出這個範圍，系統會將權重設為最接近的限制值，也就是 0 或 1。
+如果權重超出這個範圍，系統會將權重設為最接近的限制值 (0 或 1)。
 
 如果像素的權重大於 0，系統就會將其視為*有效*。權重為 0 表示像素*無效*。
-無效像素通常代表資料遺漏或不可靠，例如雲層遮蔽的區域、感應器異常、處理錯誤，或位於定義邊界外的地點。
+無效像素通常代表資料遺漏或不可靠，例如雲層遮蔽的區域、感應器異常、處理錯誤，或是位於定義邊界外的地點。
 
-如未指定權重，系統會根據像素落入幾何圖形內的比例，自動為每個像素加權，以便按比例納入區域統計資料。如果幾何體小於像素大小的 1/256，像素的權重為 0。在這些情況下，除了 `count` 和 `area` (為 0) 以外，所有統計資料都會傳回 `null`。
+如未指定權重，系統會根據像素落入幾何圖形內的比例，自動為每個像素加權，以便按比例納入區域統計資料。如果幾何體小於像素大小的 1/256，像素的權重為 0。在這些情況下，除了 `count` 和 `area` 以外，所有統計資料都會傳回 `null`，這兩項資料則會傳回 0。
 
 如果部分相交的像素具有 `include` 引數的權重 (適用於 `ST_REGIONSTATS`)，則 BigQuery 會使用該權重和與區域相交的像素分數中的最小值。
 
@@ -238,13 +241,13 @@ include => 'weight_factor_band_name'
 
 使用 `ST_REGIONSTATS` 函式計算區域統計資料時，請務必考量光柵資料的像素大小。舉例來說，在某個國家/地區的區域內匯總高解析度點陣資料，可能需要大量運算資源，而且過於精細。反之，如果匯總區域 (例如城市地塊) 的低解析度資料，可能無法提供足夠的詳細資料。
 
-如要從分析中取得有意義且有效率的結果，建議您選擇適合多邊形大小和分析目標的像素大小。您可以在 BigQuery 共用圖片資料表說明部分，找到每個點陣資料集的像素大小。
+如要從分析中取得有意義且有效率的結果，建議您選擇適合多邊形大小和分析目標的像素大小。您可以在 BigQuery sharing 圖片資料表說明部分，找到每個光柵資料集的像素大小。
 
 變更像素大小會改變與特定地理區域相交的像素數量，進而影響結果和解讀方式。我們不建議變更用於正式版分析的像素大小。不過，如果您要製作查詢原型，增加像素大小可以縮短查詢執行時間並降低費用，特別是高解析度資料。
 
 如要變更像素大小，請在 `ST_REGIONSTATS` 函式的 `options` 引數中設定 `scale`。舉例來說，如要計算 1,000 公尺像素的統計資料，請使用 `options => JSON '{"scale":1000}'`，這會指示 Earth Engine 以要求的比例重新取樣圖片。如要進一步瞭解 Earth Engine 如何處理重新調整比例，請參閱 Google Earth Engine 說明文件中的「[比例](https://developers.google.com/earth-engine/guides/scale?hl=zh-tw)」一節。
 
-如果多邊形遠小於點陣圖的像素，計算出的統計資料可能會不準確或為空值。在這種情況下，其中一個替代方案是使用 [`ST_CENTROID`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions?hl=zh-tw#st_centroid) 將多邊形替換為其質心點。
+如果多邊形遠小於點陣圖的像素，計算出的統計資料可能會不準確或為空值。在這種情況下，其中一種替代做法是使用 [`ST_CENTROID`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions?hl=zh-tw#st_centroid) 將多邊形替換為其質心點。
 
 ## 帳單
 
@@ -255,30 +258,30 @@ include => 'weight_factor_band_name'
 * [`slotMs` 欄位](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#externalservicecost)，顯示 `externalService` 欄位為 `EARTH_ENGINE` 且 `billingMethod` 欄位為 `SERVICES_SKU` 時，Earth Engine 消耗的運算單元時間 (毫秒)。
 * [`totalServicesSkuSlotMs` 欄位](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#jobstatistics2)，顯示所有 BigQuery 外部服務使用的運算單元毫秒總數，這些服務會透過 BigQuery 服務 SKU 收費。
 
-您也可以查詢[`INFORMATION_SCHEMA.JOBS` 檢視區塊](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw)中的 `total_services_sku_slot_ms` 欄位，找出以 BigQuery 服務 SKU 計費的外部服務所耗用的運算單元毫秒總數。
+您也可以查詢[`INFORMATION_SCHEMA.JOBS` 檢視中的 `total_services_sku_slot_ms` 欄位](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw)，找出以 BigQuery 服務 SKU 計費的外部服務所耗用的運算單元毫秒總數。
 
 ### 費用因素
 
 執行 `ST_REGIONSTATS` 函式時，下列因素會影響運算用量：
 
 * 輸入資料列數。
-* 您使用的點陣圖。部分點陣是從 Earth Engine 資料目錄中的來源圖像集合建立的複合資料，產生複合結果所需的運算資源各不相同。
+* 您使用的光柵圖像。部分點陣是從 Earth Engine 資料目錄中的來源圖像集合建立的複合資料，產生複合結果所需的運算資源各不相同。
 * 圖片解析度。
-* 輸入地理位置的大小和複雜程度、與地理位置相交的像素數，以及 Earth Engine 讀取的圖像圖塊和位元組數。
+* 輸入地理位置的大小和複雜度、與地理位置相交的像素數，以及 Earth Engine 讀取的圖像圖塊和位元組數。
 * 地球上輸入地理位置相對於來源圖片的位置，以及圖片的投影和解析度。
 
   + 影像投影可能會扭曲像素，尤其是在高緯度或遠離影像預期涵蓋範圍的像素。
-  + 如果是複合點陣圖，與輸入地理位置相交的來源圖片數量可能會因地區和時間而異。舉例來說，部分衛星會根據軌道和資料收集參數，在低緯度或高緯度產生更多圖像，也可能會根據不斷變化的天氣狀況省略圖像。
+  + 如果是複合點陣圖，與輸入地理位置相交的來源圖片數量可能會因地區和時間而異。舉例來說，部分衛星可能會根據軌道和資料收集參數，在低緯度或高緯度地區產生更多圖片，也可能會根據不斷變化的天氣狀況省略圖片。
 * `include` 或 `band_name` 引數中使用的公式，以及這些公式涉及的頻帶數量。
 * 快取先前的結果。
 
 ### 控管費用
 
-如要控管與 `ST_REGIONSTATS` 函式相關的費用，可以調整配額，控管函式可用的時段量。預設值為每天 350 個時段小時。
-[查看配額](https://docs.cloud.google.com/docs/quotas/view-manage?hl=zh-tw)時，請篩選「指標」清單`earthengine.googleapis.com/bigquery_slot_usage_time`，即可查看與 BigQuery 呼叫相關聯的 Earth Engine 配額。詳情請參閱 Google Earth Engine 說明文件中的
+如要控管與 `ST_REGIONSTATS` 函式相關的費用，可以調整配額，控管函式可消耗的時段時間量。預設值為每天 350 個時段小時。
+[查看配額](https://docs.cloud.google.com/docs/quotas/view-manage?hl=zh-tw)時，請篩選「指標」清單，`earthengine.googleapis.com/bigquery_slot_usage_time` 即可查看與 BigQuery 呼叫相關聯的 Earth Engine 配額。詳情請參閱 Google Earth Engine 說明文件中的
 [BigQuery 點陣函式配額](https://developers.google.com/earth-engine/guides/usage?hl=zh-tw#bigquery_slot-time_per_day)。
 
-**注意：** 與 BigQuery 中的自訂查詢配額類似，這項配額為約略值。這項功能可防止費用超額，但無法嚴格限制時段。因此在某些情況下，BigQuery 可能會執行超過配額限制的查詢作業，而您可能在配額用盡後，不會收到整筆用量的帳單。
+**注意：** 與 BigQuery 中的自訂查詢配額類似，這項配額為約略值。這項功能可預防費用超額，但無法嚴格限制時段。因此在某些情況下，BigQuery 可能會執行超過配額限制的查詢作業，而您可能在配額用盡後，不會收到整筆用量的帳單。
 
 ## 支援的地區
 
@@ -292,9 +295,9 @@ include => 'weight_factor_band_name'
 
 ## 後續步驟
 
-* 請參閱教學課程，瞭解如何[使用點陣資料分析溫度](https://docs.cloud.google.com/bigquery/docs/raster-tutorial-weather?hl=zh-tw)。
+* 請參閱[這個教學課程](https://docs.cloud.google.com/bigquery/docs/raster-tutorial-weather?hl=zh-tw)，瞭解如何使用點陣資料分析溫度。
 * 進一步瞭解 [BigQuery 中的地理函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions?hl=zh-tw)。
-* 進一步瞭解[如何使用地理空間資料](https://docs.cloud.google.com/bigquery/docs/geospatial-data?hl=zh-tw)。
+* 進一步瞭解[如何處理地理空間資料](https://docs.cloud.google.com/bigquery/docs/geospatial-data?hl=zh-tw)。
 
 
 
@@ -303,11 +306,11 @@ include => 'weight_factor_band_name'
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-02 (世界標準時間)。
+上次更新時間：2026-05-05 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-05 (世界標準時間)。"],[],[]]

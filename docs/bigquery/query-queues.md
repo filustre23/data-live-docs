@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -32,7 +34,7 @@ BigQuery 會強制執行[公平排程](https://docs.cloud.google.com/bigquery/do
 
 除了並行查詢總數外，BigQuery 還會動態決定每個隨選專案或預訂可執行的並行批次查詢數量上限。如果並行執行的批次查詢數量達到上限，系統會優先處理互動式查詢，即使這些查詢是稍後才提交也一樣。
 
-刪除預留項目後，所有已排入佇列的查詢都會逾時。如果指派給預留項目的專案重新指派給其他預留項目，所有已排入佇列或正在執行的要求都會繼續在舊預留項目中執行，而所有新要求都會前往新預留項目。從保留項目移除指派給保留項目的專案後，執行中的查詢會繼續使用保留項目，而新的要求和佇列要求則會使用隨選模式執行。您可以視需要[取消](https://docs.cloud.google.com/bigquery/docs/managing-jobs?hl=zh-tw#cancel_jobs)個別執行中或已加入佇列的查詢作業。
+刪除預留項目後，所有已排入佇列的查詢都會逾時。如果指派給預留項目的專案重新指派給其他預留項目，所有已排入佇列或正在執行的要求都會繼續在舊預留項目中執行，而所有新要求都會前往新預留項目。從保留項目移除指派給保留項目的專案後，執行中的查詢會繼續使用保留項目，而新的要求和佇列要求則會使用隨選模型執行。您可以視需要[取消](https://docs.cloud.google.com/bigquery/docs/managing-jobs?hl=zh-tw#cancel_jobs)個別執行中或已排入佇列的查詢作業。
 
 ## 控制佇列逾時
 
@@ -46,11 +48,11 @@ BigQuery 會強制執行[公平排程](https://docs.cloud.google.com/bigquery/do
 
 建立預訂時，您可以手動設定並行目標上限。根據預設，並行目標上限為零，也就是說，BigQuery 會根據可用資源動態決定並行數量。否則，如果您設定非零目標，並行目標上限會指定在預留項目中同時執行的查詢數量上限，確保每個執行的查詢都有最低的運算單元容量。
 
-即使提高並行上限目標，系統也不一定會同時執行更多查詢。實際的並行情況取決於可用的運算資源，您可以為預訂項目新增更多時段，藉此增加運算資源。
+即使提高並行上限目標，系統也不一定會同時執行更多查詢。實際的並行情況取決於可用的運算資源，您可以為預留項目新增更多運算單元，藉此增加運算資源。
 
 ### 必要的角色
 
-如要取得設定新預留容量並行數所需的權限，請要求管理員授予[管理專案](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#admin-project)的 [BigQuery 資源編輯者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.resourceEditor)  (`roles/bigquery.resourceEditor`) IAM 角色，該專案會維護承諾的擁有權。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和機構的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得設定新預留項目並行數所需的權限，請要求系統管理員在[管理專案](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#admin-project)中授予您 [BigQuery 資源編輯者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.resourceEditor)  (`roles/bigquery.resourceEditor`) IAM 角色。該專案會維護承諾使用項目的擁有權。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和機構的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
 這個預先定義的角色具備  `bigquery.reservations.create` 權限，可為新預訂設定並行數。
 
@@ -132,7 +134,7 @@ bq mk \
 
 ### 必要的角色
 
-如要取得更新預訂項目最大並行目標所需的權限，請要求管理員授予[管理專案](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#admin-project)的 [BigQuery 資源編輯者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.resourceEditor)  (`roles/bigquery.resourceEditor`) IAM 角色，該專案會維護承諾的擁有權。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和機構的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得更新預留項目最大並行目標所需的權限，請要求系統管理員授予[管理專案](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#admin-project)的 [BigQuery 資源編輯者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.resourceEditor)  (`roles/bigquery.resourceEditor`) IAM 角色，該專案擁有承諾使用項目的擁有權。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和機構的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
 這個預先定義的角色具備  `bigquery.reservations.update` 權限，可更新預訂的並行上限目標。
 
@@ -260,7 +262,7 @@ WHERE
 * `REGION_ID`：處理查詢的位置
 * `RESERVATION_ID`：查詢執行的預留項目名稱
 
-**注意：** 如要查看隨需專案的動態並行數，請移除預留項目篩選條件。
+**注意：** 如要查看隨選專案的動態並行數，請移除預留項目篩選條件。
 
 您可以使用 [BigQuery 管理資源圖表](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts?hl=zh-tw#view-resource-utilization)，選取「待處理」指標的「工作並行」圖表，監控預留項目的查詢佇列長度。
 
@@ -271,11 +273,11 @@ WHERE
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-02 (世界標準時間)。
+上次更新時間：2026-05-05 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-05 (世界標準時間)。"],[],[]]

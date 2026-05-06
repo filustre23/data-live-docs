@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -14,7 +16,7 @@
 
 # 掃描資料品質問題
 
-本文說明如何搭配使用 BigQuery 和 Knowledge Catalog，確保資料符合品質期望。並運用 Knowledge Catalog 自動資料品質功能，定義及衡量 BigQuery 資料表中的資料品質。您可以自動掃描資料、根據定義的規則驗證資料，以及在資料不符合品質規定時記錄快訊。
+本文說明如何搭配使用 BigQuery 和 Knowledge Catalog，確保資料符合品質期望。Knowledge Catalog 自動資料品質功能可協助您定義及衡量 BigQuery 資料表中的資料品質。您可以自動掃描資料、根據定義的規則驗證資料，並在資料不符合品質規定時記錄警告。
 
 如要進一步瞭解自動資料品質，請參閱「[自動資料品質總覽](https://docs.cloud.google.com/dataplex/docs/auto-data-quality-overview?hl=zh-tw)」。
 
@@ -29,11 +31,11 @@
    如要啟用 API，您需要服務使用情形管理員 IAM 角色 (`roles/serviceusage.serviceUsageAdmin`)，其中包含 `serviceusage.services.enable` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
    [啟用 API](https://console.cloud.google.com/flows/enableapi?apiid=dataplex.googleapis.com&hl=zh-tw)
-2. 選用：如要讓知識型錄根據資料剖析掃描結果，產生資料品質規則建議，請[建立並執行資料剖析掃描](https://docs.cloud.google.com/bigquery/docs/data-profile-scan?hl=zh-tw)。
+2. 選用：如要讓 Knowledge Catalog 根據資料剖析掃描結果，產生資料品質規則建議，請[建立並執行資料剖析掃描作業](https://docs.cloud.google.com/bigquery/docs/data-profile-scan?hl=zh-tw)。
 
 ## 必要的角色
 
-本節說明使用 Knowledge Catalog 資料品質掃描功能所需的 IAM 角色和權限。
+本節說明使用 Knowledge Catalog 資料品質掃描作業時所需的 IAM 角色和權限。
 
 ### 使用者角色和權限
 
@@ -44,15 +46,16 @@
     專案，可執行掃描工作
   + 要掃描的 BigQuery 資料表上的「BigQuery 資料檢視者」 (`roles/bigquery.dataViewer`)
 * 將資料品質掃描結果發布至 Knowledge Catalog：
-  + 掃描資料表的 [BigQuery 資料編輯者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataEditor)  (`roles/bigquery.dataEditor`)
+  + 掃描資料表的「BigQuery 資料編輯者」 (`roles/bigquery.dataEditor`)
   + [Dataplex Catalog 編輯者](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex?hl=zh-tw#dataplex.catalogEditor)  (`roles/dataplex.catalogEditor`)
-    在與表格相同位置的 `@bigquery` 項目群組上
+    在表格的相同位置，點選 `@bigquery` 項目群組
 * 對 `DataScan` 資源執行特定工作：
   + [Dataplex DataScan 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex?hl=zh-tw#dataplex.dataScanAdmin)  (`roles/dataplex.dataScanAdmin`)
     專案，可取得完整存取權
-  + 專案的 [Dataplex DataScan 建立者](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex?hl=zh-tw#dataplex.dataScanCreator)  (`roles/dataplex.dataScanCreator`)，可建立掃描作業
-  + 專案的「Dataplex DataScan 編輯者」 (`roles/dataplex.dataScanEditor`)
-    ，可取得寫入存取權
+  + [Dataplex DataScan 建立者](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex?hl=zh-tw#dataplex.dataScanCreator)  (`roles/dataplex.dataScanCreator`)
+    專案，建立掃描作業
+  + [Dataplex DataScan 編輯者](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex?hl=zh-tw#dataplex.dataScanEditor)  (`roles/dataplex.dataScanEditor`)
+    專案的寫入存取權
   + [Dataplex DataScan 檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex?hl=zh-tw#dataplex.dataScanViewer)  (`roles/dataplex.dataScanViewer`)
     專案，即可讀取掃描中繼資料
   + [Dataplex DataScan 資料檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex?hl=zh-tw#dataplex.dataScanDataViewer)  (`roles/dataplex.dataScanDataViewer`)
@@ -76,7 +79,7 @@
   + `bigquery.tables.update`
     掃描的資料表
   + `dataplex.entryGroups.useDataQualityScorecardAspect`
-    位於與資料表相同位置的項目群組上`@bigquery`
+    位於與資料表相同位置的 `@bigquery` 項目群組
 * 建立 `DataScan`：
    `dataplex.datascans.create`
   在專案中
@@ -104,25 +107,25 @@
 
 如要存取受 BigQuery 資料欄層級存取政策保護的資料欄，您也需要這些資料欄的權限。
 
-**注意：** Knowledge Catalog 不會在專案中建立 BigQuery 工作，以進行資料品質掃描。不過，您需要 `bigquery.jobs.create` 權限才能建立 `DryRun` 工作，以檢查資料表的權限。
+**注意：** Knowledge Catalog 不會在專案中建立 BigQuery 工作，進行資料品質掃描。不過，您需要 `bigquery.jobs.create` 權限才能建立 `DryRun` 工作，以檢查資料表的權限。
 
 ### Knowledge Catalog 服務帳戶角色和權限
 
-如果您尚未建立任何資料品質或資料剖析掃描，或這個專案中沒有 Knowledge Catalog 湖泊，請執行下列指令來建立服務 ID：
+如果您尚未建立任何資料品質或資料剖析掃描作業，或是在這個專案中沒有 Knowledge Catalog 湖泊，請執行下列指令建立服務 ID：
 `gcloud beta services identity create --service=dataplex.googleapis.com`。
 如果存在，這項指令會傳回 Knowledge Catalog 服務 ID。
 
-為確保包含資料品質掃描的專案的 Knowledge Catalog 服務帳戶，具備從各種來源讀取資料及匯出結果的必要權限，請要求管理員將下列 IAM 角色授予包含資料品質掃描的專案的 Knowledge Catalog 服務帳戶：
+為確保含有資料品質掃描作業的專案，其 Knowledge Catalog 服務帳戶具備從各種來源讀取資料及匯出結果的必要權限，請要求管理員將下列 IAM 角色授予含有資料品質掃描作業的專案，其 Knowledge Catalog 服務帳戶：
 
 **重要事項：**您必須將這些角色授予含有資料品質掃描的專案的 Knowledge Catalog 服務帳戶，*而非*使用者帳戶。如果未將角色授予正確的主體，可能會導致權限錯誤。
 
 * 讀取 BigQuery 資料表資料：
   待掃描的 BigQuery 資料表，以及規則中參照的任何其他資料表，都必須具備 [BigQuery 資料檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataViewer)  (`roles/bigquery.dataViewer`) 權限
 * 讀取 Iceberg REST 目錄資料表資料：
-  [BigLake Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake?hl=zh-tw#biglake.viewer)  (`roles/biglake.viewer`)
-  要掃描的 Iceberg REST 目錄資料表，以及規則中參照的任何其他資料表
+  [BigLake 檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake?hl=zh-tw#biglake.viewer)  (`roles/biglake.viewer`)
+  在要掃描的 Iceberg REST 目錄資料表，以及規則中參照的任何其他資料表上
 * 將掃描結果匯出至 BigQuery 資料表：
-  結果資料集和資料表的 [BigQuery 資料編輯器](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataEditor)  (`roles/bigquery.dataEditor`)
+  結果資料集和資料表的「BigQuery 資料編輯者」 (`roles/bigquery.dataEditor`)
 * 掃描 Knowledge Catalog lake 中整理的 BigQuery 資料：
   + [Dataplex 中繼資料讀取者](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex?hl=zh-tw#dataplex.metadataReader)  (`roles/dataplex.metadataReader`)
     Dataplex 資源
@@ -188,7 +191,7 @@
 
 ### 控制台
 
-1. 在 Google Cloud 控制台的 BigQuery「中繼資料管理」頁面，前往「資料剖析與品質」分頁。
+1. 在 Google Cloud 控制台的 BigQuery「Metadata curation」(中繼資料管理) 頁面，前往「Data profiling & quality」(資料剖析與品質) 分頁。
 
    [前往「Data profiling & quality」(資料剖析與品質) 頁面](https://console.cloud.google.com/bigquery/governance/metadata-curation/data-profiling-and-quality?hl=zh-tw)
 2. 按一下「建立資料品質掃描作業」。
@@ -201,15 +204,15 @@
 
       如為多區域資料集內的資料表，請選擇要建立資料掃描的區域。
 
-      如要瀏覽 Knowledge Catalog 湖泊中整理的資料表，請按一下「Browse within Knowledge Catalog Lakes」(在 Knowledge Catalog 湖泊中瀏覽)。
+      如要瀏覽 Knowledge Catalog 湖泊中的資料表，請按一下「Browse within Knowledge Catalog Lakes」(在 Knowledge Catalog 湖泊中瀏覽)。
    5. 在「範圍」欄位中，選擇「增量」或「完整資料」。
 
       * 如果選擇「增量」：在「時間戳記欄」欄位中，從 BigQuery 資料表選取 `DATE` 或 `TIMESTAMP` 類型的資料欄，這類資料欄的值只會增加，可用於識別新的記錄。另外，這類資料欄也可用來將資料表分區。
    6. 如要篩選資料，請選取「篩選列」核取方塊。提供由有效 SQL 運算式組成的資料列篩選器，該運算式可用於 GoogleSQL 語法的 [`WHERE` 子句](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw#where_clause)。例如：`col1 >= 0`。篩選器可由多個資料欄條件組合而成。例如：`col1 >= 0 AND col2 < 10`。
    7. 如要對資料取樣，請在「取樣大小」清單中選取取樣百分比。請選擇介於 0.0% 和 100.0% 之間的百分比值，最多可有 3 位小數。如果是較大的資料集，請選擇較低的取樣百分比。舉例來說，如果資料表大小為 1 PB，且您輸入的值介於 0.1% 到 1.0% 之間，資料品質掃描就會取樣 1 到 10 TB 的資料。如果是增量資料掃描，資料品質掃描會對最新增量套用取樣。
-   8. 如要將資料品質掃描結果發布為 Knowledge Catalog 中繼資料，請勾選「將結果發布至 Knowledge Catalog」核取方塊。
+   8. 如要將資料品質掃描結果發布為 Knowledge Catalog 中繼資料，請選取「將結果發布至 Knowledge Catalog」核取方塊。
 
-      您可以在來源資料表的 BigQuery 和 Knowledge Catalog 頁面中，查看「資料品質」分頁標籤的最新掃描結果。如要讓使用者存取已發布的掃描結果，請參閱本文的「[授予資料品質掃描結果的存取權](#share-results)」一節。
+      您可以在來源資料表的 BigQuery 和 Knowledge Catalog 頁面中，查看「資料品質」分頁標籤上的最新掃描結果。如要讓使用者存取已發布的掃描結果，請參閱本文的「[授予資料品質掃描結果的存取權](#share-results)」一節。
    9. 在「時間表」部分，選擇下列其中一個選項：
 
       * **重複**：按照排程執行資料品質掃描作業，排程可設為每小時、每天、每週、每月或自訂。指定掃描的執行頻率和時間。如果選擇自訂，請使用 [cron](https://en.wikipedia.org/wiki/Cron) 格式指定時間表。
@@ -225,7 +228,7 @@
       * **以資料概況為基礎的建議**：根據現有的資料剖析掃描結果，從建議中建立規則。
 
         1. **選擇資料欄**：選取要取得建議規則的資料欄。
-        2. **選擇掃描專案**：如果資料剖析掃描作業所在的專案，與您建立資料品質掃描作業的專案不同，請選取要從哪個專案提取剖析掃描作業。
+        2. **選擇掃描專案**：如果資料剖析掃描作業所在的專案，與您要建立資料品質掃描作業的專案不同，請選取要從哪個專案提取剖析掃描作業。
         3. **選擇資料概況結果**：選取一或多個資料概況結果，然後按一下「確定」。系統會根據這些資訊產生建議規則清單，供您做為起點。
         4. 找出要新增的規則，勾選對應的核取方塊，然後按一下「選取」。選取後，規則會新增至目前的規則清單。接著即可編輯規則。
       * **內建規則類型**：根據預先定義的規則建立規則。
@@ -262,11 +265,11 @@
 5. 選用步驟：將掃描結果匯出至 BigQuery 標準資料表。在「將掃描結果匯出至 BigQuery 資料表」部分，執行下列操作：
 
    1. 在「選取 BigQuery 資料集」欄位中，按一下「瀏覽」。選取用來儲存資料品質掃描結果的 BigQuery 資料集。
-   2. 在「BigQuery table」(BigQuery 資料表) 欄位中，指定要儲存資料品質掃描結果的資料表。如果使用現有資料表，請確認該資料表與[匯出資料表結構定義](https://docs.cloud.google.com/dataplex/docs/use-auto-data-quality?hl=zh-tw#table-schema)相容。如果指定的資料表不存在，知識目錄會為您建立。
+   2. 在「BigQuery table」(BigQuery 資料表) 欄位中，指定要儲存資料品質掃描結果的資料表。如果使用現有資料表，請確認該資料表與[匯出資料表結構定義](https://docs.cloud.google.com/dataplex/docs/use-auto-data-quality?hl=zh-tw#table-schema)相容。如果指定的資料表不存在，Knowledge Catalog 會為您建立。
 
-      **注意：** 您可以為多項資料品質掃描作業使用同一個結果資料表。
+      **附註：** 您可以為多項資料品質掃描作業使用同一個資料表。
 6. 選用：新增標籤。標籤是鍵/值組合，可用來將相關物件分組，或與其他 Google Cloud 資源組合。
-7. 選用：設定電子郵件通知報表，在資料品質掃描工作完成時通知使用者。在「通知報表」部分，按一下「新增電子郵件 ID」add，然後輸入最多五個電子郵件地址。然後選取要傳送報表的狀況：
+7. 選用：設定電子郵件通知報告，在資料品質掃描工作完成時通知使用者。在「通知報表」部分，按一下「新增電子郵件 ID」add，然後輸入最多五個電子郵件地址。然後選取要傳送報表的狀況：
 
    * **品質分數 (<=)**：如果作業成功，但資料品質分數低於指定目標分數，系統就會傳送報表。輸入介於 0 到 100 之間的目標品質分數。
    * **工作失敗**：無論資料品質結果如何，只要工作本身失敗，就會傳送報表。
@@ -288,7 +291,7 @@ gcloud dataplex datascans create data-quality DATASCAN \
     --data-source-entity=DATA_SOURCE_ENTITY
 ```
 
-如果來源資料並未整理到 Knowledge Catalog lake，請加入 `--data-source-resource` 旗標：
+如果來源資料並非在 Knowledge Catalog 湖泊中整理，請加入 `--data-source-resource` 旗標：
 
 ```
 gcloud dataplex datascans create data-quality DATASCAN \
@@ -301,8 +304,8 @@ gcloud dataplex datascans create data-quality DATASCAN \
 
 * `DATASCAN`：資料品質掃描的名稱。
 * `LOCATION`：要建立資料品質掃描的 Google Cloud 區域。
-* `DATA_QUALITY_SPEC_FILE`：含有資料品質掃描規格的 JSON 或 YAML 檔案路徑。檔案可以是本機檔案，也可以是前置字串為 `gs://` 的 Cloud Storage 路徑。使用這個檔案指定掃描的資料品質規則。您也可以在這個檔案中指定其他詳細資料，例如篩選器、取樣百分比，以及掃描後動作，像是匯出至 BigQuery 或傳送電子郵件通知報表。請參閱 [JSON 表示法的說明文件](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/DataQualitySpec?hl=zh-tw)和[YAML 表示法範例](https://docs.cloud.google.com/dataplex/docs/use-auto-data-quality?hl=zh-tw#create-scan-using-gcloud)。
-* `DATA_SOURCE_ENTITY`：包含資料品質掃描資料的知識目錄實體。例如：`projects/test-project/locations/test-location/lakes/test-lake/zones/test-zone/entities/test-entity`。
+* `DATA_QUALITY_SPEC_FILE`：含有資料品質掃描規格的 JSON 或 YAML 檔案路徑。檔案可以是本機檔案，也可以是前置字串為 `gs://` 的 Cloud Storage 路徑。使用這個檔案指定掃描的資料品質規則。您也可以在這個檔案中指定其他詳細資料，例如篩選器、取樣百分比，以及掃描後動作，像是匯出至 BigQuery 或傳送電子郵件通知報告。請參閱 [JSON 表示法的說明文件](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/DataQualitySpec?hl=zh-tw)和[YAML 表示法範例](https://docs.cloud.google.com/dataplex/docs/use-auto-data-quality?hl=zh-tw#create-scan-using-gcloud)。
+* `DATA_SOURCE_ENTITY`：包含資料品質掃描資料的 Knowledge Catalog 實體。例如：`projects/test-project/locations/test-location/lakes/test-lake/zones/test-zone/entities/test-entity`。
 * `DATA_SOURCE_RESOURCE`：包含資料品質掃描資料的資源名稱。例如：`//bigquery.googleapis.com/projects/test-project/datasets/test-dataset/tables/test-table`。
 
 ### C#
@@ -676,11 +679,11 @@ POST https://dataplex.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/d
 
 ### 控制台
 
-1. 在 Google Cloud 控制台的 BigQuery「中繼資料管理」頁面，前往「資料剖析與品質」分頁。
+1. 在 Google Cloud 控制台的 BigQuery「Metadata curation」(中繼資料管理) 頁面，前往「Data profiling & quality」(資料剖析與品質) 分頁。
 
    [前往「Data profiling & quality」(資料剖析與品質) 頁面](https://console.cloud.google.com/bigquery/governance/metadata-curation/data-profiling-and-quality?hl=zh-tw)
 2. 按一下要執行的資料品質掃描作業。
-3. 按一下「立即執行」。
+3. 點選「立即執行」。
 
 ### gcloud
 
@@ -886,7 +889,7 @@ end
 
 ### 控制台
 
-1. 在 Google Cloud 控制台的 BigQuery「中繼資料管理」頁面，前往「資料剖析與品質」分頁。
+1. 在 Google Cloud 控制台的 BigQuery「Metadata curation」(中繼資料管理) 頁面，前往「Data profiling & quality」(資料剖析與品質) 分頁。
 
    [前往「Data profiling & quality」(資料剖析與品質) 頁面](https://console.cloud.google.com/bigquery/governance/metadata-curation/data-profiling-and-quality?hl=zh-tw)
 2. 按一下資料品質掃描作業的名稱。
@@ -1114,9 +1117,9 @@ end
 4. 依序點按「總覽」**>「資料表」**，然後選取要查看資料品質掃描結果的資料表。
 5. 按一下「資料品質」分頁標籤。
 
-   系統會顯示最新發布的結果。
+   系統會顯示最近發布的結果。
 
-   **注意：** 如果這是第一次執行掃描，可能無法取得發布的結果。
+   **注意：** 如果這是首次執行掃描，可能無法查看已發布的結果。
 
 ### 查看歷來掃描結果
 
@@ -1124,7 +1127,7 @@ Knowledge Catalog 會儲存最近 300 項工作或過去一年的資料品質掃
 
 ### 控制台
 
-1. 在 Google Cloud 控制台的 BigQuery「中繼資料管理」頁面，前往「資料剖析與品質」分頁。
+1. 在 Google Cloud 控制台的 BigQuery「Metadata curation」(中繼資料管理) 頁面，前往「Data profiling & quality」(資料剖析與品質) 分頁。
 
    [前往「Data profiling & quality」(資料剖析與品質) 頁面](https://console.cloud.google.com/bigquery/governance/metadata-curation/data-profiling-and-quality?hl=zh-tw)
 2. 按一下資料品質掃描作業的名稱。
@@ -1169,7 +1172,5 @@ public sealed partial class GeneratedDataScanServiceClientSnippets
     /// - It may require specifying regional endpoints when creating the service client as shown in
     ///   https://cloud.google.com/dotnet/docs/reference/help/client-configuration#endpoint.
     /// </remarks>
-    public void ListDataScanJobsRequestObject()
-    {
-        // Create client
+    public
 ```

@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -230,5 +232,4 @@ BigQuery 提供下列其他匯總函式：
 | `HIER_UNIQUE_MEMBER_NAME` | BigQuery 不支援階層式查詢。 |
 | `LAST_VALUE` | `LAST_VALUE` |
 | `LAG` | `LAG` |
-| `LEAD` | `LEAD` |
-| `LISTAGG` | `ARRAY_AGG` |
+|  |

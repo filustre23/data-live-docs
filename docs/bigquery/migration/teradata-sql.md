@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -185,4 +187,4 @@ BigQuery 不支援 `PERIOD` 類型，因此 Teradata 中的任何 `PERIOD` 類�
 
 | Teradata | BigQuery |
 | --- | --- |
-| `SELECT NORMALIZE      client_id,      item_sid,      BEGIN(period) AS min_date,      END(period) AS max_date,    FROM      table;` | `SELECT    t.client_id,    t.item_sid,    t.min_date,    MAX(t.dwh_valid_to) AS max_date  FROM (    SELECT      d1.client_id,      d1.item_sid,      d1.dwh_valid_to AS dwh_valid_to,      MIN(d2.dwh_valid_from) AS min_date    FROM      table d1    LEFT JOIN      table d2    ON` |
+| `SELECT NORMALIZE      client_id,      item_sid,      BEGIN(period) AS min_date,      END(period) AS max_date,    FROM    n` |

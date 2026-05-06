@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -39,7 +41,7 @@
 使用 Apache Iceberg 資料表對儲存空間的影響如下：
 
 * BigQuery 會根據寫入要求和背景儲存空間最佳化作業 (例如 DML 陳述式和串流)，在值區中建立新的資料檔案。
-* 系統會自動壓縮及叢集處理 bucket 中的資料檔案。[時間旅行視窗](https://docs.cloud.google.com/bigquery/docs/time-travel?hl=zh-tw)過期後，系統會進行垃圾收集，不過，如果刪除資料表，相關聯的資料檔案就不會進行垃圾收集。詳情請參閱「[儲存空間最佳化](#storage_optimization)」。
+* 系統會自動壓縮及叢集處理 bucket 中的資料檔案。[時間旅行視窗](https://docs.cloud.google.com/bigquery/docs/time-travel?hl=zh-tw)過期後，資料檔案會遭到垃圾收集。不過，如果刪除資料表，相關聯的資料檔案就不會進行垃圾收集。詳情請參閱「[儲存空間最佳化](#storage_optimization)」。
 
 建立 Apache Iceberg 資料表的方式與[建立 BigQuery 資料表](https://docs.cloud.google.com/bigquery/docs/tables?hl=zh-tw)類似。由於資料湖泊會在 Cloud Storage 中以開放格式儲存資料，因此您必須執行下列操作：
 
@@ -58,23 +60,23 @@
 | --- | --- | --- |
 | 在 BigQuery 以外的位置，將新檔案新增至值區。 | **資料遺失：**BigQuery 不會追蹤在 BigQuery 外部新增的檔案或物件。背景垃圾回收程序會刪除未追蹤的檔案。 | 只能透過 BigQuery 新增資料。這樣 BigQuery 就能追蹤檔案，並防止檔案遭到垃圾收集。  為避免意外新增資料和資料遺失，我們也建議限制外部工具對含有代管 Iceberg 表格的 bucket 寫入資料。 |
 | 在非空白前置字元中建立新的 Apache Iceberg 資料表。 | **資料遺失：**BigQuery 不會追蹤現有資料，因此這些檔案會視為未追蹤，並由背景垃圾回收程序刪除。 | 請只在空白前置字元中建立新的受管理 Iceberg 資料表。 |
-| 修改或取代 Apache Iceberg 資料表資料檔案。 | **資料遺失：**如果外部修改或取代資料表，一致性檢查就會失敗，導致資料表無法讀取。針對資料表執行的查詢會失敗。  此時無法自行復原。如需資料復原協助，請與[支援團隊](https://docs.cloud.google.com/bigquery/docs/getting-support?hl=zh-tw)聯絡。 | 只能透過 BigQuery 修改資料。這樣 BigQuery 就能追蹤檔案，並防止檔案遭到垃圾收集。  為避免意外新增資料和資料遺失，我們也建議限制外部工具對含有代管 Iceberg 表格的 bucket 寫入資料。 |
+| 修改或取代 Apache Iceberg 資料表資料檔案。 | **資料遺失：**如果外部修改或取代資料表，一致性檢查就會失敗，導致資料表無法讀取。針對資料表執行的查詢會失敗。  此時無法自行復原。如要尋求資料復原協助，請與[支援團隊](https://docs.cloud.google.com/bigquery/docs/getting-support?hl=zh-tw)聯絡。 | 只能透過 BigQuery 修改資料。這樣 BigQuery 就能追蹤檔案，並防止檔案遭到垃圾收集。  為避免意外新增資料和資料遺失，我們也建議限制外部工具對含有代管 Iceberg 表格的 bucket 寫入資料。 |
 | 在相同或重疊的 URI 上建立兩個代管 Iceberg 資料表。 | **資料遺失：**BigQuery 不會橋接受管理 Iceberg 資料表的相同 URI 執行個體。每個資料表的背景垃圾回收程序都會將對向資料表的檔案視為未追蹤，並刪除這些檔案，導致資料遺失。 | 每個 Apache Iceberg 資料表都必須使用專屬 URI。 |
 
 ### Cloud Storage 值區設定最佳做法
 
 Cloud Storage 儲存空間儲存桶的設定及其與 BigQuery 的連線，會直接影響受管理 Iceberg 資料表的效能、費用、資料完整性、安全性及管理。以下是設定這項功能的最佳做法：
 
-* 選取名稱時，請清楚指出該 bucket 僅適用於受管理 Iceberg 資料表。
+* 選取名稱時，請務必清楚指出該值區僅適用於代管的 Iceberg 資料表。
 * 選擇與 BigQuery 資料集位於相同區域的[單一區域 Cloud Storage 值區](https://docs.cloud.google.com/storage/docs/locations?hl=zh-tw#available-locations)。這項協調作業可避免資料移轉費用，進而提升效能並降低成本。
 * 根據預設，Cloud Storage 會將資料儲存在 Standard Storage 儲存空間級別中，這類別可提供充足的效能。如要盡量降低資料儲存成本，可以啟用 [Autoclass](https://docs.cloud.google.com/storage/docs/autoclass?hl=zh-tw)，讓系統自動管理[儲存空間級別](https://docs.cloud.google.com/storage/docs/storage-classes?hl=zh-tw)轉換。自動調整級別功能會從 Standard Storage 開始，將未存取的物件移至存取頻率較低的級別，藉此降低儲存空間費用。再次讀取物件時，物件會移回 Standard 類別。
 * 啟用[統一值區層級存取權](https://docs.cloud.google.com/storage/docs/uniform-bucket-level-access?hl=zh-tw)和[禁止公開存取](https://docs.cloud.google.com/storage/docs/public-access-prevention?hl=zh-tw)。
 * 確認已將[必要角色](#required-roles)指派給正確的使用者和服務帳戶。
-* 為避免 Cloud Storage bucket 中的 Apache Iceberg 資料遭到意外刪除或毀損，請限制貴機構中大多數使用者的寫入和刪除權限。方法是設定[儲存空間權限政策](https://docs.cloud.google.com/storage/docs/access-control/using-iam-permissions?hl=zh-tw)，並加入條件，拒絕所有使用者 (您指定的除外) 的 `PUT` 和 `DELETE` 要求。
+* 為避免 Cloud Storage bucket 中的 Apache Iceberg 資料遭到意外刪除或毀損，請限制貴機構中大多數使用者的寫入和刪除權限。如要這麼做，請設定[值區權限政策](https://docs.cloud.google.com/storage/docs/access-control/using-iam-permissions?hl=zh-tw)，並加入條件，拒絕所有使用者 (您指定的除外) 的 `PUT` 和 `DELETE` 要求。
 * 套用[Google 代管](https://docs.cloud.google.com/storage/docs/encryption/default-keys?hl=zh-tw)或[客戶自行管理](https://docs.cloud.google.com/storage/docs/encryption/customer-managed-keys?hl=zh-tw)的加密金鑰，進一步保護私密資料。
 * 啟用[稽核記錄](https://docs.cloud.google.com/storage/docs/audit-logging?hl=zh-tw#settings)，確保作業透明度、進行疑難排解，以及監控資料存取權。
 * 保留預設的[虛刪除政策](https://docs.cloud.google.com/storage/docs/soft-delete?hl=zh-tw) (保留 7 天)，防止物件遭到意外刪除。不過，如果發現 Apache Iceberg 資料已遭刪除，請與[支援團隊](https://docs.cloud.google.com/bigquery/docs/getting-support?hl=zh-tw)聯絡，而非手動還原物件，因為 BigQuery 中繼資料不會追蹤在 BigQuery 外部新增或修改的物件。
-* 系統會自動啟用適應性檔案大小調整、自動叢集和垃圾回收功能，協助您最佳化檔案效能和成本。
+* 系統會自動啟用適應性檔案大小、自動叢集和垃圾回收功能，協助您盡可能提高檔案效能和成本效益。
 * 請避免使用下列 Cloud Storage 功能，因為這些功能不支援受管理 Iceberg 表格：
 
   + [階層式命名空間](https://docs.cloud.google.com/storage/docs/hns-overview?hl=zh-tw)
@@ -117,7 +119,7 @@ gcloud storage buckets create gs://BUCKET_NAME \
 * 如要建立代管 Iceberg 資料表，請按照下列步驟操作：
   + 專案的 [BigQuery 資料擁有者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataOwner)  (`roles/bigquery.dataOwner`)
   + 專案的 [BigQuery 連線管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.connectionAdmin)  (`roles/bigquery.connectionAdmin`)
-* 如要查詢代管 Iceberg 資料表，請按照下列步驟操作：
+* 如要查詢代管的 Iceberg 資料表：
   + [BigQuery 資料檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataViewer)  (`roles/bigquery.dataViewer`)
     專案
   + [BigQuery 使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.user)  (`roles/bigquery.user`)
@@ -386,7 +388,7 @@ SELECT * FROM CATALOG_NAME.FOLDER_NAME;
 
 **注意：** 如要提供意見回饋或提出與這項預先發布版功能相關的問題，請傳送電子郵件至 [biglake-help@google.com](mailto:biglake-help@google.com)。
 
-如要存取 Apache Iceberg 資料表的[分區](https://docs.cloud.google.com/bigquery/docs/partitioned-tables?hl=zh-tw)功能，請填寫[註冊表單](https://forms.gle/AJTG3idhjZ6RLLV98)。
+如要存取 Apache Iceberg 資料表的[分區](https://docs.cloud.google.com/bigquery/docs/partitioned-tables?hl=zh-tw)功能，請填寫[申請表單](https://forms.gle/AJTG3idhjZ6RLLV98)。
 
 您可以指定分區資料欄來區隔資料表，藉此將資料表分區。系統支援下列受管理 Iceberg 資料表的欄類型：
 
@@ -413,7 +415,7 @@ SELECT * FROM CATALOG_NAME.FOLDER_NAME;
 * [`--time_partitioning_field` 和 `--time_partitioning_type` 標記](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#mk-table)
 * [`timePartitioning` 屬性](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables?hl=zh-tw#timepartitioning)
 
-#### 修改及查詢分區管理型 Iceberg 資料表
+#### 修改及查詢分區代管 Iceberg 資料表
 
 分區代管 Iceberg 資料表的 BigQuery 資料操縱語言 (DML) 陳述式和查詢，與標準 Apache Iceberg 資料表相同。BigQuery 會自動將工作範圍限定在正確的分區，類似於 [Apache Iceberg 隱藏式分區](https://iceberg.apache.org/docs/latest/partitioning/#icebergs-hidden-partitioning)。此外，您新增至資料表的任何新資料都會自動進行分割。
 
@@ -476,11 +478,11 @@ BigQuery 定價也適用於 [BigQuery Storage Read API](https://cloud.google.com
 * 代管 Iceberg 資料表不支援[代管災難復原](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery?hl=zh-tw)
 * 代管 Iceberg 資料表不支援[資料列層級安全防護機制](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro?hl=zh-tw)。
 * 代管 Iceberg 資料表不支援[安全防護期](https://docs.cloud.google.com/bigquery/docs/time-travel?hl=zh-tw#fail-safe)。
-* 受管理 Iceberg 資料表不支援擷取工作。
+* 代管 Iceberg 資料表不支援擷取工作。
 * `INFORMATION_SCHEMA.TABLE_STORAGE` 檢視畫面不包含 Apache Iceberg 資料表。
-* 系統不支援將受管理 Iceberg 資料表做為查詢結果目的地。您可以改用 [`CREATE
+* 系統不支援將代管 Iceberg 資料表做為查詢結果目的地。您可以改用 [`CREATE
   TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#create_table_statement) 陳述式搭配 `AS query_statement` 引數，將資料表建立為查詢結果目的地。
-* `CREATE OR REPLACE` 不支援以 Apache Iceberg 資料表取代標準資料表，也不支援以標準資料表取代 Managed Iceberg 資料表。
+* `CREATE OR REPLACE` 不支援以 Apache Iceberg 資料表取代標準資料表，也不支援以標準資料表取代代管的 Iceberg 資料表。
 * [批次載入](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw)和 [`LOAD DATA` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements?hl=zh-tw)僅支援將資料附加至現有的代管 Iceberg 資料表。
 * [批次載入](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw)和 [`LOAD
   DATA` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements?hl=zh-tw)不支援結構定義更新。
@@ -500,11 +502,11 @@ BigQuery 定價也適用於 [BigQuery Storage Read API](https://cloud.google.com
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-02 (世界標準時間)。
+上次更新時間：2026-05-05 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-05 (世界標準時間)。"],[],[]]

@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -277,10 +279,4 @@ BigQuery 也提供下列條件運算式，這些運算式在 Amazon Redshift 中
 ### 日期和時間函式
 
 下表列出常見的 Amazon Redshift 日期和時間函式，以及對應的 BigQuery 函式。BigQuery 的日期和時間函式包括[日期函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions?hl=zh-tw)、[日期時間](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/datetime_functions?hl=zh-tw)
-[函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/datetime_functions?hl=zh-tw)、[時間函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time_functions?hl=zh-tw)和[時間戳記函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions?hl=zh-tw)。
-
-請注意，Amazon Redshift 和 BigQuery 中看似相同的函式可能會傳回不同的資料類型。
-
-| Amazon Redshift | BigQuery |
-| --- | --- |
-| `ADD_MONTHS( date,  integer )` |  |
+[函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/datetime_functions?hl=zh-tw)、

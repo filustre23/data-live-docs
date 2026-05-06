@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -515,6 +517,4 @@ Number of partition modifications to a column partitioned table
 
 這項配額無法提高。如要解決這項配額錯誤，請按照下列步驟操作：
 
-* 變更資料表的分區，讓每個分區包含更多資料，以減少分區總數。舉例來說，您可以[將分區依天改為依月](https://docs.cloud.google.com/bigquery/docs/partitioned-tables?hl=zh-tw#select_daily_hourly_monthly_or_yearly_partitioning)，或是[變更資料表的分區方式](https://docs.cloud.google.com/bigquery/docs/partitioned-tables?hl=zh-tw)。
-* 請改用[叢集](https://docs.cloud.google.com/bigquery/docs/clustered-tables?hl=zh-tw#when_to_use_clustering)，而非分區。
-* 如果您經常從儲存在 Cloud Storage 中的多個小型檔案載入資料，且每個檔案都使用一個工作，請將多個載入工作合併為單一工作。您可以透過以逗號分隔的清單 (例如 `gs://my_path/file_1,gs://my_path/file_2`)，
+* 變更資料表的分區，讓每個分區包含更多資料，以減少分區總數。舉例來說，您可以

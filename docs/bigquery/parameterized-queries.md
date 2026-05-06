@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -904,5 +906,5 @@ public class QueryWithArrayParameters {
       QueryJobConfiguration queryConfig =
           QueryJobConfiguration.newBuilder(query)
               .addNamedParameter("gender", QueryParameterValue.string(gender))
-              .addNamedParameter("states", QueryParameterValue.
+              .addNamedParameter("states",
 ```

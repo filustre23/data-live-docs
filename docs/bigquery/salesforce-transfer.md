@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -36,7 +38,7 @@ Salesforce 資料移轉作業會受到下列限制：
 * 由於 Salesforce 處理限制，一次排定過多資料轉移作業可能會導致延遲或失敗。建議您將 Salesforce 資料傳輸限制為下列項目：
   + 每個移轉設定最多只能有 10 項資產。
   + 在不同的轉移設定中，最多可同時執行 10 項轉移作業。
-* 單一移轉設定在特定時間只能支援一次資料移轉作業。如果排定在第一次資料移轉完成前執行第二次資料移轉，則只有第一次資料移轉會完成，任何與第一次移轉重疊的資料移轉都會略過。
+* 單一移轉設定在特定時間只能支援一次資料移轉作業。如果排定在第一次資料移轉完成前執行第二次資料移轉，則系統只會完成第一次資料移轉，並略過任何與第一次移轉重疊的資料移轉。
   + 為避免在單一轉移設定中略過轉移作業，建議您設定「重複頻率」，增加大型資料轉移作業之間的時間間隔。
 * 如果資料移轉作業使用網路連結，請務必[設定具有靜態 IP 位址的公用網路位址轉譯 (NAT)](https://docs.cloud.google.com/nat/docs/set-up-manage-network-address-translation?hl=zh-tw)。詳情請參閱「[為 Salesforce 移轉作業設定 IP 許可清單](#salesforce-allowlist)」一文。
 * 如果設定的網路連結和虛擬機器 (VM) 執行個體位於不同區域，從 Salesforce 轉移資料時，可能會發生跨區域資料移動。
@@ -51,10 +53,10 @@ Salesforce 資料移轉作業會受到下列限制：
 * 增量轉移作業無法同步處理來源資料表中的刪除作業。
 * 單一轉移設定只能支援增量或完整擷取。
 * 第一次執行增量擷取後，就無法更新 `asset` 清單中的物件。
-* 首次執行增量擷取後，您就無法在轉移設定中變更寫入模式。
-* 第一次執行增量擷取後，您就無法變更浮水印欄或主鍵。
+* 首次執行增量擷取後，就無法在轉移設定中變更寫入模式。
+* 第一次執行遞增式擷取後，就無法變更時間戳記欄或主鍵。
 * 目的地 BigQuery 資料表會使用提供的主鍵叢集，並受[分群資料表限制](https://docs.cloud.google.com/bigquery/docs/clustered-tables?hl=zh-tw#limitations)約束。
-* 首次將現有轉移設定更新為增量擷取模式時，更新後的首次資料移轉會從資料來源移轉所有可用資料。後續的增量資料轉移作業只會轉移資料來源中的新資料列和更新資料列。
+* 首次將現有轉移設定更新為增量擷取模式時，更新後的第一次資料移轉作業會移轉資料來源中的所有可用資料。後續的增量資料轉移作業只會轉移資料來源中的新資料列和更新資料列。
 
 ## 資料擷取選項
 
@@ -64,8 +66,8 @@ Salesforce 資料移轉作業會受到下列限制：
 
 [設定 Salesforce 移轉作業](#sf-transfer-setup)時，您可以在移轉設定中選取「完整」或「增量」寫入偏好設定，指定資料載入 BigQuery 的方式。[預先發布版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages)支援增量轉移。
 
-**注意：** 如要針對增量資料移轉要求意見回饋或支援，請傳送電子郵件至 [dts-preview-support@google.com](mailto:dts-preview-support@google.com)。
-您可以設定*完整*資料移轉，在每次資料移轉時，移轉 Salesforce 資料集中的所有資料。
+**注意：** 如要索取有關增量移轉的意見回饋或支援，請傳送電子郵件至 [dts-preview-support@google.com](mailto:dts-preview-support@google.com)。
+您可以設定*完整*資料移轉，在每次資料移轉時，移轉 Salesforce 資料集的所有資料。
 
 或者，您也可以設定*增量*資料移轉作業 ([搶先版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))，只移轉上次資料移轉後變更的資料，而不是在每次資料移轉時載入整個資料集。如果為資料移轉作業選取「增量」**Incremental**，則必須指定「附加」**Append**或「插入或更新」**Upsert**寫入模式，定義在增量資料移轉期間，資料如何寫入 BigQuery。以下各節說明可用的寫入模式。
 
@@ -79,7 +81,7 @@ Salesforce 資料移轉作業會受到下列限制：
 
 #### Upsert 寫入模式
 
-新增或更新寫入模式會檢查主鍵，以更新資料列或在目的地資料表中插入新資料列。您可以指定主鍵，讓 Salesforce 連接器判斷需要哪些變更，才能讓目的地資料表與來源資料表保持同步。如果在資料移轉期間，指定的主鍵出現在目標 BigQuery 資料表中，Salesforce 連接器就會使用來源資料表中的新資料更新該資料列。如果資料移轉期間沒有主鍵，Salesforce 連接器就會插入新列。
+新增或更新寫入模式會檢查主鍵，以更新資料列或在目的地資料表中插入新的資料列。您可以指定主鍵，讓 Salesforce 連接器判斷需要哪些變更，才能讓目的地資料表與來源資料表保持同步。如果在資料移轉期間，指定的主鍵出現在目標 BigQuery 資料表中，Salesforce 連接器就會使用來源資料表中的新資料更新該資料列。如果資料移轉期間沒有主鍵，Salesforce 連接器就會插入新列。
 
 選取「新增或更新」模式時，必須選取浮水印欄和主鍵：
 
@@ -144,7 +146,7 @@ Salesforce 資料移轉作業會受到下列限制：
 | `clientId` | Salesforce 連結應用程式的消費者金鑰。 |
 | `clientSecret` | Salesforce 連結應用程式的 OAuth 用戶端密鑰或消費者密鑰。 |
 
-如要取得 `myDomain`、`clientID` 和 `clientSecret` 值，請選取下列其中一個選項：
+如要取得 `myDomain`、`clientID` 和 `clientSecret` 值，請選取下列任一選項：
 
 ### Salesforce Classic
 
@@ -223,7 +225,7 @@ Salesforce 資料移轉作業會受到下列限制：
 
 ### 必要的 BigQuery 角色
 
-如要取得建立 BigQuery 資料移轉服務資料移轉作業所需的權限，請要求系統管理員在專案中授予您 [BigQuery 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.admin)  (`roles/bigquery.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得建立 BigQuery 資料移轉服務資料移轉作業所需的權限，請要求管理員授予您專案的 [BigQuery 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.admin)  (`roles/bigquery.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
 這個預先定義的角色具備建立 BigQuery 資料移轉服務資料移轉作業所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
@@ -254,7 +256,7 @@ Salesforce 資料移轉作業會受到下列限制：
 1. 前往 Google Cloud 控制台的「資料移轉」頁面。
 
    [前往「資料轉移」頁面](https://console.cloud.google.com/bigquery/transfers?hl=zh-tw)
-2. 按一下 add「建立轉移作業」。
+2. 按一下「建立轉移作業」add。
 3. 在「Source type」(來源類型) 部分，「Source」(來源) 請選取「Salesforce」。
 4. 在「Data source details」(資料來源詳細資料) 部分執行下列操作：
 
@@ -306,7 +308,7 @@ bq mk
 * PARAMETERS：已建立移轉設定的 JSON 格式參數。例如：`--params='{"param":"param_value"}'`。以下是 Salesforce 資料移轉的參數：
 
   + `connector.authentication.oauth.clientId`：Salesforce 連結應用程式的消費者金鑰。
-  + `connector.authentication.oauth.clientSecret`：Salesforce 連結應用程式的 OAuth 用戶端密鑰或消費者密鑰。
+  + `connector.authentication.oauth.clientSecret`：Salesforce 連線應用程式的 OAuth 用戶端密鑰或消費者密鑰。
   + `connector.authentication.oauth.myDomain`：[Salesforce 我的網域](https://help.salesforce.com/s/articleView?id=sf.domain_name_overview.htm)。
     舉例來說，如果網域網址為 `example.my.salesforce.com`，則值為 `example`。
   + `ingestionType`：指定 `full` 或 `incremental`。[預先發布版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages)支援增量轉移。詳情請參閱「[完整或增量轉移](https://docs.cloud.google.com/bigquery/docs/salesforce-transfer?hl=zh-tw#full_or_incremental_transfers)」。
@@ -405,11 +407,11 @@ bq mk
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-02 (世界標準時間)。
+上次更新時間：2026-05-05 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-05 (世界標準時間)。"],[],[]]

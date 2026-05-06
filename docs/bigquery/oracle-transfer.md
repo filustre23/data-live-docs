@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -29,7 +31,7 @@ Oracle 移轉作業有以下限制：
 * Oracle 轉移作業的間隔時間下限為 15 分鐘。預設的週期性轉移間隔為 24 小時。
 * 單一移轉設定在特定時間只能支援一次資料移轉作業。如果排定在第一次資料移轉完成前執行第二次資料移轉，則系統只會完成第一次資料移轉，並略過任何與第一次移轉重疊的資料移轉。
   + 為避免在單一轉移設定中略過轉移作業，建議您設定「重複頻率」，增加大型資料轉移作業之間的時間間隔。
-* 資料轉移期間，Oracle 連接器會識別已建立索引和已分區的鍵資料欄，以便平行轉移批次資料。因此，我們建議您在資料表中指定主鍵資料欄或使用索引資料欄，以提升資料轉移效能並降低錯誤率。
+* 在資料移轉期間，Oracle 連接器會識別已建立索引和已分割的鍵資料欄，以便平行轉移批次資料。因此，我們建議您在資料表中指定主鍵資料欄或使用索引資料欄，以提升資料轉移效能並降低錯誤率。
   + 如果您有索引或主鍵限制，建立平行批次時，系統僅支援下列資料欄類型：
     - `INTEGER`
     - `TINYINT`
@@ -41,7 +43,7 @@ Oracle 移轉作業有以下限制：
     - `BIGINT`
     - `DECIMAL`
     - `DATE`
-  + 如果 Oracle 資料轉移作業未使用主鍵或索引資料欄，則每個資料表最多只能支援 2,000,000 筆記錄。
+  + 如果 Oracle 資料轉移作業未使用主鍵或索引資料欄，每個資料表最多只能支援 2,000,000 筆記錄。
 * 如果設定的網路附件和虛擬機器 (VM) 執行個體位於不同區域，從 Oracle 轉移資料時，可能會發生跨區域資料移動。
 
 ### 增量移轉限制
@@ -54,10 +56,10 @@ Oracle 增量轉移作業有下列限制：
 * 增量轉移作業無法同步處理來源資料表中的刪除作業。
 * 單一轉移設定只能支援增量或完整擷取。
 * 第一次執行增量擷取後，就無法更新 `asset` 清單中的物件。
-* 首次執行增量擷取後，您就無法在轉移設定中變更寫入模式。
-* 第一次執行增量擷取後，您就無法變更浮水印欄或主鍵。
-* 目的地 BigQuery 資料表會使用提供的主鍵分群，並受[分群資料表限制](https://docs.cloud.google.com/bigquery/docs/clustered-tables?hl=zh-tw#limitations)約束。
-* 首次將現有轉移設定更新為增量擷取模式時，更新後的第一次資料轉移作業會轉移資料來源中的所有可用資料。後續的增量資料轉移作業只會轉移資料來源中的新資料列和更新資料列。
+* 首次執行增量擷取後，就無法在轉移設定中變更寫入模式。
+* 第一次執行遞增式擷取後，就無法變更時間戳記欄或主鍵。
+* 目的地 BigQuery 資料表會使用提供的主鍵叢集，並受[分群資料表限制](https://docs.cloud.google.com/bigquery/docs/clustered-tables?hl=zh-tw#limitations)約束。
+* 首次將現有轉移設定更新為增量擷取模式時，更新後的第一次資料移轉作業會移轉資料來源中的所有可用資料。後續的增量資料轉移作業只會轉移資料來源中的新資料列和更新資料列。
 
 ## 資料擷取選項
 
@@ -69,11 +71,11 @@ Oracle 連接器支援傳輸層安全 (TLS) 設定，可加密傳輸至 BigQuery
 
 * 「加密資料，並驗證 CA 和主機名稱」模式。這個模式會使用 TCPS 通訊協定透過 TLS 完整驗證伺服器。這項功能會加密所有傳輸中的資料，並驗證資料庫伺服器的憑證是否由信任的憑證授權單位 (CA) 簽署。這個模式也會檢查您連線的主機名稱，是否與伺服器憑證中的一般名稱 (CN) 或主體別名 (SAN) 完全相符。這個模式可防止攻擊者使用其他網域的有效憑證，冒充資料庫伺服器。
 
-  如果主機名稱與憑證 CN 或 SAN 不符，連線就會失敗。您必須設定 DNS 解析，使其與憑證相符，或使用其他安全模式。使用這個模式可獲得最安全的防護，避免中間人 (PITM) 攻擊。
+  如果主機名稱與憑證 CN 或 SAN 不符，連線就會失敗。您必須設定 DNS 解析，使其與憑證相符，或使用其他安全模式。如要採取最安全的做法，防止中間人 (PITM) 攻擊，請使用這個模式。
 * 「加密資料，但僅驗證 CA」模式。這個模式會透過 TCPS 通訊協定使用 TLS 加密所有資料，並驗證伺服器的憑證是否由用戶端信任的 CA 簽署。不過，這個模式不會驗證伺服器的主機名稱。只要憑證有效且由可信任的 CA 發行，這個模式就能成功連線，無論憑證中的主機名稱是否與您連線的主機名稱相符。
 
   如果您想確保連線至憑證由信任的 CA 簽署的伺服器，但主機名稱無法驗證，或您無法控管主機名稱設定，請使用這個模式。
-* *僅加密*模式。這個模式會透過標準 TCP 連接埠，使用 Oracle 的原生網路加密技術，加密用戶端與伺服器之間的所有資料。不會執行任何憑證或主機名稱驗證。
+* 「僅加密」模式。這個模式會透過標準 TCP 連接埠，使用 Oracle 的原生網路加密技術，加密用戶端與伺服器之間的所有資料。不會執行任何憑證或主機名稱驗證。
 
   這個模式會保護傳輸中的資料，提供一定程度的安全性，但可能容易受到中間人攻擊。
 
@@ -86,7 +88,7 @@ Oracle 連接器支援傳輸層安全 (TLS) 設定，可加密傳輸至 BigQuery
 
 如果您使用「加密資料，並驗證 CA 和主機名稱」模式或「加密資料，並驗證 CA」模式，也可以提供一或多個 PEM 編碼的憑證。在某些情況下，BigQuery 資料移轉服務需要驗證資料庫伺服器的身分，因此必須使用這些憑證：
 
-* 如果您使用貴機構內部私有 CA 簽署的憑證，或是自行簽署的憑證，則必須提供完整的憑證鏈結或單一自行簽署憑證。如果是透過代管雲端服務供應商 (例如 Amazon Relational Database Service (RDS)) 的內部 CA 簽發憑證，則必須執行這項操作。
+* 如果您使用貴機構內部私有 CA 簽署的憑證，或是自行簽署的憑證，則必須提供完整的憑證鏈結或單一自行簽署憑證。如果是透過代管雲端服務供應商 (例如 Amazon Relational Database Service (RDS)) 的內部 CA 發行的憑證，則必須執行這項操作。
 * 如果資料庫伺服器憑證是由公開 CA 簽署 (例如 Let's Encrypt、DigiCert 或 GlobalSign)，您就不需要提供憑證。BigQuery 資料移轉服務已預先安裝並信任這些公開 CA 的根憑證。
 
 您可以在轉移設定的「信任的 PEM 憑證」欄位中指定 PEM 編碼憑證，但須符合下列規定：
@@ -115,7 +117,7 @@ Oracle 連接器支援傳輸層安全 (TLS) 設定，可加密傳輸至 BigQuery
 
 #### Upsert 寫入模式
 
-新增或更新寫入模式會檢查主鍵，以更新資料列或在目的地資料表中插入新資料列。您可以指定主鍵，讓 Oracle 連接器判斷需要哪些變更，才能讓目的地資料表與來源資料表保持同步。如果在資料移轉期間，指定的主鍵出現在目標 BigQuery 資料表中，Oracle 連接器就會使用來源資料表中的新資料更新該資料列。如果資料轉移期間沒有主鍵，Oracle 連接器就會插入新資料列。
+新增或更新寫入模式會檢查主鍵，以更新資料列或在目的地資料表中插入新的資料列。您可以指定主鍵，讓 Oracle 連接器判斷需要哪些變更，才能讓目的地資料表與來源資料表保持同步。如果在資料移轉期間，指定的主鍵出現在目標 BigQuery 資料表中，Oracle 連接器就會使用來源資料表中的新資料更新該資料列。如果資料移轉期間沒有主鍵，Oracle 連接器就會插入新資料列。
 
 選取「新增或更新」模式時，必須選取浮水印欄和主鍵：
 
@@ -136,7 +138,7 @@ Oracle 連接器支援傳輸層安全 (TLS) 設定，可加密傳輸至 BigQuery
 | --- | --- |
 | 新增資料欄 | 目的地 BigQuery 資料表會新增資料欄。 這個資料欄的所有先前記錄都會有空值。 |
 | 刪除資料欄 | 刪除的資料欄仍會保留在目的地 BigQuery 資料表中。系統會在新項目中填入空值。 |
-| 變更資料欄中的資料類型 | 連接器僅支援 [`ALTER COLUMN` DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#details_21)支援的資料類型轉換。如果轉換成其他資料類型，資料移轉作業就會失敗。 如果遇到任何問題，建議建立新的轉移設定。 |
+| 變更資料欄中的資料類型 | 連接器僅支援 `ALTER COLUMN` DDL 陳述式支援的資料類型轉換。如果轉換成其他資料類型，資料移轉作業就會失敗。 如果遇到任何問題，建議建立新的轉移設定。 |
 | 重新命名資料欄 | 原始資料欄會保留在目的地 BigQuery 資料表中，而目的地資料表會新增一個名稱更新的資料欄。 |
 
 ## 事前準備
@@ -167,7 +169,7 @@ Oracle 連接器支援傳輸層安全 (TLS) 設定，可加密傳輸至 BigQuery
 
 ### 必要的 BigQuery 角色
 
-如要取得建立 BigQuery 資料移轉服務資料移轉作業所需的權限，請要求系統管理員在專案中授予您 [BigQuery 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.admin)  (`roles/bigquery.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得建立 BigQuery 資料移轉服務資料移轉作業所需的權限，請要求管理員授予您專案的 [BigQuery 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.admin)  (`roles/bigquery.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
 這個預先定義的角色具備建立 BigQuery 資料移轉服務資料移轉作業所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
@@ -198,7 +200,7 @@ Oracle 連接器支援傳輸層安全 (TLS) 設定，可加密傳輸至 BigQuery
 1. 前往 Google Cloud 控制台的「資料移轉」頁面。
 
    [前往「資料轉移」頁面](https://console.cloud.google.com/bigquery/transfers?hl=zh-tw)
-2. 按一下 add「建立轉移作業」。
+2. 按一下「建立轉移作業」add。
 3. 在「Source type」(來源類型) 部分，「Source」(來源) 請選取「Oracle」。
 4. 在「Data source details」(資料來源詳細資料) 部分執行下列操作：
 
@@ -313,7 +315,7 @@ bq mk
 
 儲存移轉設定後，Oracle 連接器會根據排程選項自動觸發移轉作業。每次執行移轉作業時，Oracle 連接器都會將 Oracle 中的所有可用資料移轉至 BigQuery。
 
-如要在正常時間表以外手動執行資料轉移作業，可以啟動[回填作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)。
+如要在正常排程以外手動執行資料移轉作業，可以啟動[回填作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)。
 
 ## 資料類型對應
 
@@ -370,11 +372,11 @@ bq mk
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-02 (世界標準時間)。
+上次更新時間：2026-05-05 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-05 (世界標準時間)。"],[],[]]

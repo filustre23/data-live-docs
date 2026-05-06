@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -14,9 +16,9 @@
 
 # 在 BigQuery 中設定及使用實體解析
 
-本文說明如何為使用者和身分識別提供者實作[實體解析](https://docs.cloud.google.com/bigquery/docs/entity-resolution-intro?hl=zh-tw)。
+本文說明如何為使用者和身分提供者實作[實體解析](https://docs.cloud.google.com/bigquery/docs/entity-resolution-intro?hl=zh-tw)。
 
-您可以使用這份文件連結身分識別提供者，並使用他們的服務比對記錄。身分識別提供者可以參考這份文件，在 Google Cloud Marketplace 設定要與您共用的服務。
+您可以使用這份文件與識別資訊提供者建立連結，並使用他們的服務比對記錄。身分識別提供者可以參考這份文件，在 Google Cloud Marketplace 設定要與您共用的服務。
 
 ## 使用者工作流程
 
@@ -24,8 +26,8 @@
 
 ### 事前準備
 
-1. 請與識別資訊提供者聯絡。BigQuery 支援使用 [LiveRamp](mailto:LiveRampIdentitySupport@liveramp.com) 和 [TransUnion](mailto:PDLtucloudappsupport@transunion.com) 進行實體解析。
-2. 向身分識別提供者索取下列項目：
+1. 與識別資訊提供者聯絡。BigQuery 支援使用 [LiveRamp](mailto:LiveRampIdentitySupport@liveramp.com) 和 [TransUnion](mailto:PDLtucloudappsupport@transunion.com) 進行實體解析。
+2. 向識別資訊提供者索取下列項目：
    * 服務帳戶憑證
    * 遠端函式簽章
 3. 在 Google Cloud 專案中建立兩個資料集：
@@ -38,7 +40,8 @@
 
 * 如要讓身分識別提供者的服務帳戶讀取輸入資料集並寫入輸出資料集，請按照下列步驟操作：
   + 輸入資料集的 [BigQuery 資料檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataViewer)  (`roles/bigquery.dataViewer`)
-  + 輸出資料集的 [BigQuery 資料編輯者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataEditor)  (`roles/bigquery.dataEditor`)
+  + [BigQuery 資料編輯者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataEditor)  (`roles/bigquery.dataEditor`)
+    輸出資料集
 
 如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
@@ -46,26 +49,26 @@
 
 ### 翻譯或解析實體
 
-如需特定身分識別提供者的操作說明，請參閱下列章節。
+如需特定身分識別提供者的操作說明，請參閱以下各節。
 
 ### LiveRamp
 
 #### 必要條件
 
-* 在 BigQuery 中設定 LiveRamp 嵌入式 ID。詳情請參閱[在 BigQuery 中啟用 LiveRamp 內嵌 ID](https://docs.liveramp.com/identity/en/liveramp-embedded-identity-in-bigquery.html#enabling-liveramp-embedded-identity-in-bigquery)。
-* 與 LiveRamp 協調，啟用 API 憑證以搭配 Embedded Identity 使用。詳情請參閱「[驗證](https://docs.liveramp.com/identity/en/liveramp-embedded-identity-in-bigquery.html#id74765)」。
+* 在 BigQuery 中設定 LiveRamp 嵌入式 ID。詳情請參閱[在 BigQuery 中啟用 LiveRamp 內嵌式 ID](https://docs.liveramp.com/identity/en/liveramp-embedded-identity-in-bigquery.html#enabling-liveramp-embedded-identity-in-bigquery)。
+* 與 LiveRamp 協調，啟用 API 憑證以搭配使用 Embedded Identity。詳情請參閱「[驗證](https://docs.liveramp.com/identity/en/liveramp-embedded-identity-in-bigquery.html#id74765)」。
 
 #### 設定
 
-首次使用 LiveRamp Embedded Identity 時，請務必完成下列步驟。設定完成後，您只需要在執行作業之間修改輸入表格和中繼資料表格。
+首次使用 LiveRamp Embedded Identity 時，請務必執行下列步驟。設定完成後，您只需要在執行作業之間修改輸入表格和中繼資料表格。
 
 ##### 建立輸入資料表
 
-在輸入資料集中建立資料表。在表格中填入 RampID、目標網域和目標類型。如需詳細資料和範例，請參閱「[輸入資料表資料欄和說明](https://docs.liveramp.com/identity/en/perform-rampid-transcoding-in-bigquery.html#input-table-columns-and-descriptions)」。
+在輸入資料集中建立資料表。在資料表中填入 RampID、目標網域和目標類型。如需詳細資料和範例，請參閱「[輸入資料表資料欄和說明](https://docs.liveramp.com/identity/en/perform-rampid-transcoding-in-bigquery.html#input-table-columns-and-descriptions)」。
 
 ##### 建立中繼資料表
 
-中繼資料表可控管 BigQuery 上的 LiveRamp 嵌入式 ID 執行作業。在輸入資料集中建立中繼資料表。在「中繼資料」表格中填入用戶端 ID、執行模式、目標網域和目標類型。如需詳細資料和範例，請參閱「[中繼資料表資料欄和說明](https://docs.liveramp.com/identity/en/perform-rampid-transcoding-in-bigquery.html#metadata-table-columns-and-descriptions)」。
+中繼資料表可控管在 BigQuery 上執行的 LiveRamp Embedded Identity。在輸入資料集中建立中繼資料表。在「中繼資料」表格中填入用戶端 ID、執行模式、目標網域和目標類型。如需詳細資料和範例，請參閱「[中繼資料表資料欄和說明](https://docs.liveramp.com/identity/en/perform-rampid-transcoding-in-bigquery.html#metadata-table-columns-and-descriptions)」。
 
 ##### 與 LiveRamp 分享資料表
 
@@ -77,7 +80,7 @@
 
 1. 確認網域中編碼的所有 RampID 都位於輸入表格中。
 2. 執行工作前，請確認中繼資料表是否仍正確無誤。
-3. 請傳送工作程序要求至 [LiveRampIdentitySupport@liveramp.com](mailto:LiveRampIdentitySupport@liveramp.com)。請一併提供輸入資料表、中繼資料表和輸出資料集的專案 ID、資料集 ID 和資料表 ID (如適用)。
+3. 請傳送電子郵件至 [LiveRampIdentitySupport@liveramp.com](mailto:LiveRampIdentitySupport@liveramp.com)，提出工作程序要求。請一併提供輸入資料表、中繼資料表和輸出資料集的專案 ID、資料集 ID 和資料表 ID (如適用)。
 
 結果通常會在三個工作天內傳送到輸出資料集。
 
@@ -87,15 +90,14 @@
 
 #### LiveRamp 帳單
 
-[LiveRamp](https://cloud.google.com/find-a-partner/partner/liveramp?hl=zh-tw)
-會處理實體解析的帳單。
+[LiveRamp](https://cloud.google.com/find-a-partner/partner/liveramp?hl=zh-tw) 會處理實體解析的帳單。
 
 ### TransUnion
 
 #### 必要條件
 
-* 請與 [TransUnion Cloud 支援團隊](mailto:PDLtucloudappsupport@transunion.com)聯絡，簽署存取服務的協議。提供 Google Cloud 專案 ID、輸入資料類型、用途和資料量。
-* TransUnion Cloud Support 會為您的 Google Cloud 專案啟用這項服務，並提供詳細的導入指南，包括可用的輸出資料。
+* 如要簽署協議以存取這項服務，請與 [TransUnion Cloud 支援團隊](mailto:PDLtucloudappsupport@transunion.com)聯絡。提供 Google Cloud 專案 ID、輸入資料類型、用途和資料量。
+* TransUnion Cloud Support 會為您的 Google Cloud 專案啟用這項服務，並提供詳細的導入指南，其中包含可用的輸出資料。
 
 #### 設定
 
@@ -103,27 +105,27 @@
 
 ##### 建立外部連線
 
-[建立外部資料來源的連線](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection?hl=zh-tw#create-cloud-resource-connection)，類型為「Vertex AI 遠端模型、遠端函式和 BigLake (Cloud 資源)」。您可以使用這個連線，從Google Cloud 帳戶觸發 TransUnion Google Cloud 帳戶中託管的身分解析服務。
+[建立外部資料來源的連線](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection?hl=zh-tw#create-cloud-resource-connection)，類型為「**Vertex AI 遠端模型、遠端函式和 BigLake (Cloud 資源)**」。您可以使用這個連線，從Google Cloud 帳戶觸發 TransUnion Google Cloud 帳戶中託管的身分解析服務。
 
-複製連線 ID 和服務帳戶 ID，然後將這些 ID 提供給 TransUnion 客戶交付團隊。
+複製連線 ID 和服務帳戶 ID，然後將這些 ID 提供給 TransUnion 客戶服務團隊。
 
 ##### 建立遠端函式
 
-[建立遠端函式](https://docs.cloud.google.com/bigquery/docs/remote-functions?hl=zh-tw#create_a_remote_function)，與 TransUnion Google Cloud 專案上代管的服務自動化調度管理端點互動，將必要的中繼資料 (包括結構定義對應) 傳遞至 TransUnion 服務。使用您建立的外部連線 ID，以及 TransUnion 客戶交付團隊分享的 TransUnion 代管雲端函式端點。
+[建立遠端函式](https://docs.cloud.google.com/bigquery/docs/remote-functions?hl=zh-tw#create_a_remote_function)，與 TransUnion Google Cloud 專案上代管的服務自動化調度管理端點互動，將必要的中繼資料 (包括結構定義對應) 傳遞至 TransUnion 服務。使用您建立的外部連線 ID，以及 TransUnion 客戶交付團隊提供的 TransUnion 代管 Cloud 函式端點。
 
 ##### 建立輸入資料表
 
-在輸入資料集中建立資料表。TransUnion 支援姓名、郵寄地址、電子郵件、電話、出生日期、IPv4 位址和裝置 ID 做為輸入內容。請按照 TransUnion 提供給您的導入指南，設定格式。
+在輸入資料集中建立資料表。TransUnion 支援姓名、郵寄地址、電子郵件、電話、出生日期、IPv4 位址和裝置 ID 做為輸入資料。請按照 TransUnion 提供給您的導入指南，設定格式。
 
 ##### 建立中繼資料表
 
-建立中繼資料表，儲存身分識別解析服務處理資料所需的設定，包括結構定義對應。如需詳細資料和範例，請參閱 TransUnion 提供給您的導入指南。
+建立中繼資料表，儲存身分識別解析服務處理資料所需的設定，包括結構定義對應。如需詳細資料和範例，請參閱 TransUnion 提供給您的實作指南。
 
 ##### 建立工作狀態表
 
-建立資料表，接收有關輸入批次處理作業的最新消息。您可以查詢這個資料表，觸發管道中的其他下游程序。可能的工作狀態包括 `RUNNING`、`COMPLETED` 或 `ERROR`。
+建立資料表，接收有關輸入批次處理作業的最新資訊。您可以查詢這個資料表，觸發管道中的其他下游程序。可能的工作狀態包括 `RUNNING`、`COMPLETED` 或 `ERROR`。
 
-##### 建立服務呼叫
+##### 建立服務叫用
 
 收集所有中繼資料、封裝資料，並傳遞至 TransUnion 代管的叫用 Cloud Functions 端點後，請按照下列程序呼叫 TransUnion 身分解析服務。
 
@@ -186,7 +188,7 @@ CREATE TABLE `<project_id>.<dataset_id>.TransUnion_identity_output`(
 
 #### 授予讀取和寫入權限
 
-向 TransUnion 客戶交付團隊取得 Apache Spark 連線的服務帳戶 ID，並授予該帳戶輸入和輸出資料表所在資料集的讀取和寫入權限。建議您在資料集上提供具有 [BigQuery 資料編輯者角色](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.dataEditor)的服務帳戶 ID。
+向 TransUnion 客戶交付團隊取得 Apache Spark 連線的服務帳戶 ID，並授予該帳戶輸入和輸出資料表所在資料集的讀取和寫入權限。建議您提供服務帳戶 ID，並在資料集上指派 [BigQuery 資料編輯者角色](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.dataEditor)。
 
 #### 叫用應用程式
 
@@ -201,11 +203,11 @@ call `<project_id>.<dataset_id>.TransUnion_get_identities`("<project_id>.<datase
 
 #### 支援
 
-如有技術問題，請與 [TransUnion Cloud 支援團隊](mailto:PDLtucloudappsupport@transunion.com)聯絡。
+如遇技術問題，請與 [TransUnion Cloud 支援團隊](mailto:PDLtucloudappsupport@transunion.com)聯絡。
 
 #### 帳單與用量
 
-TransUnion 會追蹤應用程式的使用情況，並用於結帳。如要瞭解詳情，現有客戶可以與 TransUnion 交付代表聯絡。
+TransUnion 會追蹤應用程式的使用情況，並用於結算。如要瞭解詳情，現有客戶可以與 TransUnion 交付代表聯絡。
 
 ## 識別資訊提供者工作流程
 
@@ -235,7 +237,7 @@ TransUnion 會追蹤應用程式的使用情況，並用於結帳。如要瞭解
   + [BigQuery 連線使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.connectionUser)  (`roles/bigquery.connectionUser`)
     連線
   + [BigQuery 資料檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataViewer)  (`roles/bigquery.dataViewer`)
-    在控制層資料集上使用遠端函式
+    在具有遠端函式的控制層資料集上
 
 如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
@@ -243,7 +245,7 @@ TransUnion 會追蹤應用程式的使用情況，並用於結帳。如要瞭解
 
 ### 共用實體解析遠端函式
 
-修改下列遠端介面程式碼，並分享給一般使用者。使用者需要這個代碼才能啟動實體解析工作。
+修改下列遠端介面程式碼，並分享給使用者。使用者需要這個代碼才能啟動實體解析工作。
 
 ```
 `PARTNER_PROJECT_ID.DATASET_ID`.match`(LIST_OF_PARAMETERS)
@@ -253,18 +255,18 @@ TransUnion 會追蹤應用程式的使用情況，並用於結帳。如要瞭解
 
 ### 選填：提供工作的中繼資料
 
-您可以視需要使用個別的遠端函式提供工作的中繼資料，或在使用者輸出資料集中撰寫新的狀態資料表。中繼資料的例子包括工作狀態和指標。
+您可以視需要使用個別的遠端函式提供工作的中繼資料，或在使用者輸出資料集中寫入新的狀態資料表。中繼資料的例子包括工作狀態和指標。
 
 ## 識別資訊提供者的計費方式
 
-如要簡化客戶計費和新手上路流程，請將實體解析服務與 [Google Cloud Marketplace](https://docs.cloud.google.com/marketplace?hl=zh-tw) 整合。您可以根據實體解析作業用量設定[定價模式](https://docs.cloud.google.com/marketplace/docs/partners/integrated-saas/select-pricing?hl=zh-tw)，並由 Google 處理帳單事宜。詳情請參閱「[提供軟體即服務 (SaaS) 產品](https://docs.cloud.google.com/marketplace/docs/partners/integrated-saas?hl=zh-tw)」。
+如要簡化客戶計費和新手上路流程，請將實體解析服務與 [Google Cloud Marketplace](https://docs.cloud.google.com/marketplace?hl=zh-tw) 整合。您可以根據實體解析作業用量設定[定價模式](https://docs.cloud.google.com/marketplace/docs/partners/integrated-saas/select-pricing?hl=zh-tw)，並由 Google 為您處理帳單事宜。詳情請參閱「[提供軟體即服務 (SaaS) 產品](https://docs.cloud.google.com/marketplace/docs/partners/integrated-saas?hl=zh-tw)」。
 
 ## 後續步驟
 
 * 瞭解 [BigQuery sharing 中的實體解析](https://docs.cloud.google.com/bigquery/docs/entity-resolution-intro?hl=zh-tw)。
 * 瞭解如何[建立遠端函式](https://docs.cloud.google.com/bigquery/docs/remote-functions?hl=zh-tw#create_a_remote_function)。
 * 瞭解如何[建立連至外部資料來源的連線](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection?hl=zh-tw#create-cloud-resource-connection)。
-* 身分識別供應商可以參閱[這篇文章](https://docs.cloud.google.com/marketplace/docs/partners/integrated-saas?hl=zh-tw)，瞭解如何在 Google Cloud Marketplace 上提供實體解析服務。
+* 身分識別供應商請參閱[這篇文章](https://docs.cloud.google.com/marketplace/docs/partners/integrated-saas?hl=zh-tw)，瞭解如何透過 Google Cloud Marketplace 提供實體解析服務。
 
 
 
@@ -273,11 +275,11 @@ TransUnion 會追蹤應用程式的使用情況，並用於結帳。如要瞭解
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-02 (世界標準時間)。
+上次更新時間：2026-05-05 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-05 (世界標準時間)。"],[],[]]

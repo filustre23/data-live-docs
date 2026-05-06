@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -19,7 +21,7 @@
 這項產品或功能適用《[服務專屬條款](https://docs.cloud.google.com/terms/service-terms?hl=zh-tw#1)》中「一般服務條款」一節的《正式發布前產品條款》。正式發布前的產品和功能是按照「原樣」提供，支援範圍可能有限。
 詳情請參閱[推出階段說明](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
 
-**注意：** 如要尋求支援或針對這項預先發布版功能提供意見回饋，請傳送電子郵件至 [bq-sap-federation-support@google.com](mailto:bq-sap-federation-support@google.com)。
+**注意：** 如要取得支援或針對這項預先發布版功能提供意見回饋，請傳送電子郵件至 [bq-sap-federation-support@google.com](mailto:bq-sap-federation-support@google.com)。
 
 BigQuery 管理員可以建立[連線](https://docs.cloud.google.com/bigquery/docs/connections-api-intro?hl=zh-tw)，存取 SAP Datasphere 資料。建立連線後，資料分析師就能[查詢 SAP Datasphere 中的資料](https://docs.cloud.google.com/bigquery/docs/sap-datasphere-federated-queries?hl=zh-tw)。
 
@@ -29,8 +31,8 @@ BigQuery 管理員可以建立[連線](https://docs.cloud.google.com/bigquery/do
 
    [啟用 API](https://console.cloud.google.com/apis/library/bigqueryconnection.googleapis.com?hl=zh-tw)
 2. [建立 SAP Datasphere 資料庫使用者](https://help.sap.com/docs/SAP_DATASPHERE/be5967d099974c69b77f4549425ca4c0/798e3fd6707940c3bd2219b2d1ebaac2.html?locale=en-US)。
-   請記下要連線的 BigQuery 使用者名稱、密碼、主機名稱和通訊埠。
-3. 請執行下列任一操作，將 SAP Datasphere 租戶設定為接受來自所選 IP 位址的流量：
+   請記下 BigQuery 的使用者名稱、密碼、主機名稱和連接埠。
+3. 設定 SAP Datasphere 租戶，接受來自所選 IP 位址的流量，方法如下：
 
    * 將所有 [Google IP 位址範圍](https://www.gstatic.com/ipranges/goog.json)新增至 SAP Datasphere 的「信任的 IP」許可清單。
    * 將 `0.0.0.0/0` 新增至允許清單，開放所有 IP 位址連線至 SAP Datasphere 租戶。
@@ -58,7 +60,7 @@ BigQuery 管理員可以建立[連線](https://docs.cloud.google.com/bigquery/do
 2. 在「Explorer」窗格中，點選「新增資料」add。
 
    「新增資料」對話方塊隨即開啟。
-3. 在「依條件篩選」窗格的「資料來源類型」部分，選取「資料庫」。
+3. 在「Filter By」(依據篩選) 窗格的「Data Source Type」(資料來源類型) 專區中，選取「Databases」(資料庫)。
 
    或者，您也可以在「Search for data sources」(搜尋資料來源) 欄位中輸入 `SAP HANA`。
 4. 在「精選資料來源」部分，按一下「SAP HANA」。
@@ -71,7 +73,7 @@ BigQuery 管理員可以建立[連線](https://docs.cloud.google.com/bigquery/do
    * 選用：在「Friendly name」(好記名稱) 中輸入使用者容易記得的連線名稱，例如 `My connection resource`。好記名稱可以是任何資料值，只要您日後需要修改時可以輕鬆識別連線資源即可。
    * 選用：在「Description」(說明) 中輸入這項連線資源的說明。
    * 在「Encryption」(加密) 部分，選取「**Google-managed encryption key**」或「Customer-managed encryption key (CMEK)」(客戶自行管理的加密金鑰 (CMEK))。您可以選擇是否使用 CMEK。
-   * 在 **Host:port** 部分，輸入 SAP 資料庫執行個體的主機和通訊埠，格式為 `HOST:PORT`，如 SAP Datasphere 網頁控制台的 **Database User Details** 所示。
+   * 在「Host:port」(主機: 通訊埠) 部分，輸入 SAP 資料庫執行個體的主機和通訊埠，格式為 `HOST:PORT`，如 SAP Datasphere 網頁控制台的「Database User Details」(資料庫使用者詳細資料) 所示。
    * 選用：在「網路連結」中，輸入[網路連結](https://docs.cloud.google.com/bigquery/docs/connections-with-network-attachment?hl=zh-tw)的路徑，該連結會定義用於建立與 SAP Datasphere 連線的網路設定。
    * 在「Username」(使用者名稱) 中，輸入 SAP Datasphere 網頁版控制台「Database User Details」(資料庫使用者詳細資料) 中的資料庫使用者名稱。例如：`MY_SPACE#BIGQUERY`。
    * 在「Password」(密碼) 中輸入資料庫使用者的密碼。
@@ -79,7 +81,7 @@ BigQuery 管理員可以建立[連線](https://docs.cloud.google.com/bigquery/do
 
 ### bq
 
-輸入 [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_mk) 指令，並加上下列旗標：
+使用加上以下旗標的 [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_mk) 指令：
 
 ```
   bq mk \
@@ -112,7 +114,7 @@ BigQuery 管理員可以建立[連線](https://docs.cloud.google.com/bigquery/do
 
 * `LOCATION`：指定要與 SAP Datasphere 資料合併的 BigQuery 資料集區域。使用這個連線的查詢必須從這個區域執行。
 * `PROJECT_ID`：輸入 Google Cloud 專案 ID。
-* `HOST_PORT`：輸入 SAP 資料庫執行個體的主機和通訊埠，格式為 `HOST:PORT`，如 SAP Datasphere 網頁控制台的「Database User Details」(資料庫使用者詳細資料) 所示。
+* `HOST_PORT`：輸入 SAP 資料庫執行個體的主機和連接埠，格式為 `HOST:PORT`，如 SAP Datasphere 網頁控制台的「Database User Details」(資料庫使用者詳細資料) 所示。
 * `NETWORK_ATTACHMENT` (選用)：以 `projects/{project}/regions/{region}/networkAttachments/{networkattachment}` 格式輸入[網路連結](https://docs.cloud.google.com/bigquery/docs/connections-with-network-attachment?hl=zh-tw)。您可以使用這個欄位設定 SAP Datasphere 連線，讓 BigQuery 從靜態 IP 位址開啟連線。
 * `USERNAME`：在 SAP Datasphere 網頁版控制台的「Database User Details」(資料庫使用者詳細資料) 中，輸入資料庫使用者名稱。例如：`MY_SPACE#BIGQUERY`。
 * `PASSWORD`：輸入資料庫使用者的密碼。
@@ -142,7 +144,7 @@ BigQuery 管理員可以建立[連線](https://docs.cloud.google.com/bigquery/do
    連線會列在專案中，位於「Connections」(連線) 群組。
 2. 點選左側窗格中的 explore「Explorer」。
 
-   如果沒有看到左側窗格，請按一下「展開左側窗格」圖示 last\_page 開啟窗格。
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 按一下專案，然後依序點選「連線」和所需連線。
 4. 在「詳細資料」窗格中，按一下「共用」即可共用連線。
    接著，按照下列步驟操作：
@@ -221,11 +223,11 @@ public class ShareConnection {
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-02 (世界標準時間)。
+上次更新時間：2026-05-05 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-05 (世界標準時間)。"],[],[]]

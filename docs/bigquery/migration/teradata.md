@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -407,5 +409,4 @@ public class CreateTeradataTransfer {
     params.put("database_name", Value.newBuilder().setStringValue(databaseName).build());
     params.put("table_name_patterns", Value.newBuilder().setStringValue(tableNamePatterns).build());
     params.put("agent_service_account", Value.newBuilder().setStringValue(serviceAccount).build());
-    params.put("schema_file_path",
 ```

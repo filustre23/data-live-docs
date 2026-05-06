@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -29,9 +31,9 @@ BigQuery 管理員可以建立[連線](https://docs.cloud.google.com/bigquery/do
 
    [啟用 API](https://console.cloud.google.com/apis/library/bigqueryconnection.googleapis.com?hl=zh-tw)
 3. 確認 Cloud SQL 執行個體具有[公開 IP 連線](https://docs.cloud.google.com/sql/docs/mysql/configure-ip?hl=zh-tw)或[私人連線](https://docs.cloud.google.com/sql/docs/mysql/configure-private-ip?hl=zh-tw)：  
-   * 如要保護 Cloud SQL 執行個體，您可以新增公開 IP 連線，不必使用授權位址。這樣一來，執行個體就無法從公用網際網路存取，但可供 BigQuery 查詢。
+   * 如要保護 Cloud SQL 執行個體，您可以新增公開 IP 連線，但不必提供授權位址。這樣一來，執行個體就無法從公用網際網路存取，但可供 BigQuery 查詢。
    * 如要讓 BigQuery 透過私人連線存取 Cloud SQL 資料，請為[新](https://docs.cloud.google.com/sql/docs/mysql/configure-private-ip?hl=zh-tw#new-private-instance)或[現有](https://docs.cloud.google.com/sql/docs/mysql/configure-private-ip?hl=zh-tw#existing-private-instance) Cloud SQL 執行個體設定私人 IP 連線，然後選取「啟用私人路徑」核取方塊。這項服務會使用內部直接路徑，而非虛擬私有雲內的私人 IP 位址。
-4. 如要取得建立 Cloud SQL 連線所需的權限，請要求管理員在專案中授予您「BigQuery Connection 管理員」(`roles/bigquery.connectionAdmin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+4. 如要取得建立 Cloud SQL 連線所需的權限，請要求系統管理員授予您專案的 [BigQuery Connection 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.connectionAdmin)  (`roles/bigquery.connectionAdmin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
    您或許也能透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)，取得必要權限。
 
@@ -49,7 +51,7 @@ BigQuery 管理員可以建立[連線](https://docs.cloud.google.com/bigquery/do
 2. 在「Explorer」窗格中，按一下 add「Add」。
 
    「新增資料」對話方塊隨即開啟。
-3. 在「依條件篩選」窗格的「資料來源類型」部分，選取「資料庫」。
+3. 在「Filter By」(依據篩選) 窗格的「Data Source Type」(資料來源類型) 專區中，選取「Databases」(資料庫)。
 
    或者，您也可以在「Search for data sources」(搜尋資料來源) 欄位中輸入 `mysql`。
 4. 在「精選資料來源」部分，按一下「MySQL」。
@@ -58,7 +60,7 @@ BigQuery 管理員可以建立[連線](https://docs.cloud.google.com/bigquery/do
 
    * 在「連線類型」中選取來源類型，例如「MySQL」或「PostgreSQL」。
    * 在「Connection ID」(連線 ID) 專區中輸入連線資源的 ID。可以使用英文字母、數字和底線。例如：`bq_sql_connection`。
-   * 在「資料位置」中，選取[與外部資料來源區域相容](https://docs.cloud.google.com/bigquery/docs/federated-queries-intro?hl=zh-tw#supported_regions)的 BigQuery 位置 (或區域)。
+   * 在「資料位置」部分，選取與[外部資料來源區域相容](https://docs.cloud.google.com/bigquery/docs/federated-queries-intro?hl=zh-tw#supported_regions)的 BigQuery 位置 (或區域)。
    * 選用：在「Friendly name」(好記名稱) 中輸入使用者容易記得的連線名稱，例如 `My connection resource`。好記名稱可以是任何資料值，只要您日後需要修改時可以輕鬆識別連線資源即可。
    * 選用：在「Description」(說明) 中輸入這項連線資源的說明。
    * 選用：**加密**。如要使用[客戶自行管理的加密金鑰 (CMEK)](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw) 加密憑證，請選取「客戶自行管理的加密金鑰 (CMEK)」，然後選取客戶自行管理的金鑰。否則，系統會以預設的 Google-owned and Google-managed encryption key保護您的憑證。
@@ -67,8 +69,8 @@ BigQuery 管理員可以建立[連線](https://docs.cloud.google.com/bigquery/do
    * 在「Database username」(資料庫使用者名稱) 中輸入資料庫的使用者名稱。
    * 在「Database password」(資料庫密碼) 中輸入資料庫的密碼。
 
-     + 選用：如要查看密碼，請按一下「顯示密碼」
-       visibility\_off 。**注意：** 如果同一組使用者憑證適用於外部資料來源中的其他資料庫，該使用者就能透過相同的連線資源查詢這些資料庫。
+     + 選用：如要查看密碼，請按一下 
+       visibility\_off  **顯示密碼**。**注意：** 如果同一組使用者憑證適用於外部資料來源中的其他資料庫，該使用者就能透過相同的連線資源查詢這些資料庫。
 7. 點選「建立連線」。
 8. 點選「前往連線」。
 9. 在「連線資訊」窗格中，複製服務帳戶 ID，以供後續步驟使用。
@@ -105,7 +107,7 @@ BigQuery 管理員可以建立[連線](https://docs.cloud.google.com/bigquery/do
 * `PROPERTIES`：已建立連線的 JSON 格式參數。例如：`--properties='{"param":"param_value"}'`。如要建立連線資源，您必須提供 `instanceID`、`database` 和 `type` 參數。
 * `CREDENTIALS`：參數 `username` 和 `password`。
 * `PROJECT_ID`：您的專案 ID。
-* `LOCATION`：Cloud SQL 執行個體所在地區，或對應的多重區域。
+* `LOCATION`：Cloud SQL 執行個體所在的區域，或對應的多區域。
 * `CONNECTION_ID`：連線 ID。
 
 舉例來說，下列指令會在 ID 為 `federation-test` 的專案中新建名為 my\_new\_connection (好記名稱：「My new connection」) 的連線資源。
@@ -241,7 +243,7 @@ gcloud projects add-iam-policy-binding PROJECT_ID --member=serviceAccount:SERVIC
    連線會列在專案中，位於「Connections」(連線) 群組。
 2. 點選左側窗格中的 explore「Explorer」。
 
-   如果沒有看到左側窗格，請按一下「展開左側窗格」圖示 last\_page 開啟窗格。
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 按一下專案，然後依序點選「連線」和所需連線。
 4. 在「詳細資料」窗格中，按一下「共用」即可共用連線。
    接著，按照下列步驟操作：
@@ -320,11 +322,11 @@ public class ShareConnection {
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-02 (世界標準時間)。
+上次更新時間：2026-05-05 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-05 (世界標準時間)。"],[],[]]

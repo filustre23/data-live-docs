@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -1032,7 +1034,5 @@ public class CopyTableCMEK {
     String sourceTableId = "MY_SOURCE_TABLE_NAME";
     String kmsKeyName = "MY_KMS_KEY_NAME";
     EncryptionConfiguration encryption =
-        EncryptionConfiguration.newBuilder().setKmsKeyName(kmsKeyName).build();
-    copyTableCMEK(
-        sourceDatasetName, sourceTableId, destinationDatasetName
+        EncryptionConfiguration.newBuilder().setKmsKeyName(
 ```

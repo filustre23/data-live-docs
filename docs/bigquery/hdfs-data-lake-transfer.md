@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -132,7 +134,7 @@ JSON 檔案中的 `condition` 欄位支援下列值，每個值都有 `partition
    **重要事項：**您必須將這些角色授予服務代理，*而非*使用者帳戶。如果未將角色授予正確的主體，可能會導致權限錯誤。
    * [Storage Transfer 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/storagetransfer?hl=zh-tw#storagetransfer.admin)  (`roles/storagetransfer.admin`)
    * [服務使用情形消費者](https://docs.cloud.google.com/iam/docs/roles-permissions/serviceusage?hl=zh-tw#serviceusage.serviceUsageConsumer)  (`roles/serviceusage.serviceUsageConsumer`)
-   * [儲存空間管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/storage?hl=zh-tw#storage.admin) (`roles/storage.admin`)
+   * [儲存空間管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/storage?hl=zh-tw#storage.admin)  (`roles/storage.admin`)
    * 如要將中繼資料遷移至 Lakehouse 執行階段目錄 Iceberg REST 目錄，請按照下列步驟操作：
      [BigLake 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake?hl=zh-tw#biglake.admin)  (`roles/biglake.admin`)
    * 如要將中繼資料遷移至 Dataproc Metastore，請按照下列步驟操作：
@@ -444,9 +446,5 @@ JSON 檔案中的 `condition` 欄位支援下列值，每個值都有 `partition
 
    # Create unique timestamp and directories for this run
    EPOCH=$(date +%s)
-   LOCAL_LOG_DIR="${LOCAL_BASE_DIR}/logs"
-   mkdir -p "${LOCAL_LOG_DIR}" # Ensures the base and logs directories exist
-
-   # Define the unique log and zip file path for this run
-   LOG_FILE
+   LOCAL_LOG_DIR="
    ```

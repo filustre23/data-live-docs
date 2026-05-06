@@ -40,8 +40,8 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 | `minCreationTime` | `string`  Min value for job creation time, in milliseconds since the POSIX epoch. If set, only jobs created after or at this timestamp are returned. |
 | `maxCreationTime` | `string (UInt64Value format)`  Max value for job creation time, in milliseconds since the POSIX epoch. If set, only jobs created before or at this timestamp are returned. |
 | `pageToken` | `string`  Page token, returned by a previous call, to request the next page of results. |
-| `projection` | `enum`  Restrict information returned to a set of selected fields  Valid values of this enum field are:  `MINIMAL`  ,  `FULL` |
-| `stateFilter[]` | `enum`  Filter for job state  Valid values of this enum field are:  `DONE`  ,  `PENDING`  ,  `RUNNING` |
+| `projection` | `enum`  Restrict information returned to a set of selected fields  Valid values of this enum field are:   * `MINIMAL` * `FULL` |
+| `stateFilter[]` | `enum`  Filter for job state  Valid values of this enum field are:   * `DONE` * `PENDING` * `RUNNING` |
 | `parentJobId` | `string`  If set, show only child jobs of the specified parent. Otherwise, show all top-level jobs. |
 
 ### Request body
@@ -94,11 +94,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2025-07-02 UTC.
+Last updated 2026-05-05 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2025-07-02 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-05 UTC."],[],[]]

@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -972,10 +974,5 @@ from google.cloud import bigquery
 
 client = bigquery.Client()
 
-# TODO(dev): Change table_id to the full name of the table you want to create.
-table_id = "your-project.your_dataset.your_table_name"
-# TODO(dev): Change schema_path variable to the path of your schema file.
-schema_path = "path/to/schema.json"
-# To load a schema file use the schema_from_json method.
-schema
+# TODO(de
 ```

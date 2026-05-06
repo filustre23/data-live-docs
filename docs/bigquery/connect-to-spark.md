@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -21,11 +23,11 @@ BigQuery 管理員可以建立[連線](https://docs.cloud.google.com/bigquery/do
 * 啟用 BigQuery Connection API。
 
   [啟用 API](https://console.cloud.google.com/apis/library/bigqueryconnection.googleapis.com?hl=zh-tw)
-* 如要取得建立 Spark 連線所需的權限，請要求管理員授予您專案的 [BigQuery Connection 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.connectionAdmin)  (`roles/bigquery.connectionAdmin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+* 如要取得建立 Spark 連線所需的權限，請要求管理員授予您專案的 [BigQuery 連線管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.connectionAdmin)  (`roles/bigquery.connectionAdmin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
   您或許也能透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)，取得必要權限。
 * 選用：如要使用 [Dataproc Metastore](https://docs.cloud.google.com/dataproc-metastore/docs/overview?hl=zh-tw) 管理中繼資料，請[建立 Dataproc Metastore 服務](https://docs.cloud.google.com/dataproc-metastore/docs/create-service?hl=zh-tw)。
-* 選用：如要[使用 Spark 記錄伺服器網頁介面查看工作記錄](https://docs.cloud.google.com/dataproc/docs/concepts/jobs/history-server?hl=zh-tw#spark_history_server_web_interface)，請務必[建立 Managed Service for Apache Spark 永久記錄伺服器 (PHS)](https://docs.cloud.google.com/dataproc/docs/concepts/jobs/history-server?hl=zh-tw#create_a_phs_cluster)。
+* 選用：如要[使用 Spark 記錄伺服器網頁介面查看工作記錄](https://docs.cloud.google.com/dataproc/docs/concepts/jobs/history-server?hl=zh-tw#spark_history_server_web_interface)，請務必[建立 Managed Service for Apache Spark 持續性記錄伺服器 (PHS)](https://docs.cloud.google.com/dataproc/docs/concepts/jobs/history-server?hl=zh-tw#create_a_phs_cluster)。
 
 ### 位置注意事項
 
@@ -68,7 +70,7 @@ BigQuery 管理員可以建立[連線](https://docs.cloud.google.com/bigquery/do
    您可以在[支援 BigQuery 的單一區域和多區域](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)中建立連線。詳情請參閱「[位置注意事項](#location-considerations)」。
 
    * 選用：從「Metastore service」清單中選取 [Dataproc Metastore](https://docs.cloud.google.com/dataproc-metastore/docs/overview?hl=zh-tw)。
-   * (選用) 在「記錄伺服器叢集」欄位中，輸入 [Managed Service for Apache Spark 永久記錄伺服器](https://docs.cloud.google.com/dataproc/docs/concepts/jobs/history-server?hl=zh-tw#create_a_phs_cluster)。
+   * (選用) 在「History server cluster」(記錄伺服器叢集) 欄位中，輸入 [Managed Service for Apache Spark 永久記錄伺服器](https://docs.cloud.google.com/dataproc/docs/concepts/jobs/history-server?hl=zh-tw#create_a_phs_cluster)。
 7. 點選「建立連線」。
 8. 點選「前往連線」。
 9. 在「連線資訊」窗格中，複製服務帳戶 ID，以供後續步驟使用。
@@ -140,7 +142,7 @@ BigQuery 管理員可以建立[連線](https://docs.cloud.google.com/bigquery/do
 
   `roles/bigquery.admin` IAM 角色包含服務帳戶從 BigQuery 讀取及寫入資料時所需的權限。
 
-  **注意：** 如果預存程序會將資料寫入暫時的 Cloud Storage 值區，然後[將 Cloud Storage 資料載入 BigQuery](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw)，您就必須授予服務帳戶專案的 `bigquery.jobs.create` 權限。如要進一步瞭解 BigQuery 中的 IAM 角色和權限，請參閱「[使用 IAM 控管存取權](https://docs.cloud.google.com/bigquery/access-control?hl=zh-tw)」。
+  **注意：** 如果預存程序會將資料寫入暫時的 Cloud Storage bucket，然後[將 Cloud Storage 資料載入 BigQuery](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw)，您就必須授予服務帳戶專案的 `bigquery.jobs.create` 權限。如要進一步瞭解 BigQuery 中的 IAM 角色和權限，請參閱「[使用 IAM 控管存取權](https://docs.cloud.google.com/bigquery/access-control?hl=zh-tw)」。
 * 如要從 Cloud Storage 讀取資料或將資料寫入 Cloud Storage，您必須授予服務帳戶 Cloud Storage 物件的 `storage.objects.*` 權限。
 
   `roles/storage.objectAdmin` IAM 角色包含服務帳戶從 Cloud Storage 讀取及寫入資料所需的權限。
@@ -151,8 +153,8 @@ BigQuery 管理員可以建立[連線](https://docs.cloud.google.com/bigquery/do
   您也需要在 Cloud Storage bucket 上授予服務帳戶 `roles/storage.objectAdmin` 角色，以便儲存的程序存取 Dataproc Metastore 的 Hive 倉庫目錄 (`hive.metastore.warehouse.dir`)。如果儲存的程序對 Metastore 執行作業，您可能需要授予額外權限。如要進一步瞭解 Dataproc Metastore 中的 IAM 角色和權限，請參閱「[Dataproc Metastore 預先定義的角色和權限](https://docs.cloud.google.com/dataproc-metastore/docs/iam-roles?hl=zh-tw)」。
 * 建立連線時，如果指定 Managed Service for Apache Spark 永久記錄伺服器，則必須授予服務帳戶下列角色：
 
-  + Managed Service for Apache Spark 永久記錄伺服器的 `roles/dataproc.viewer` 角色，其中包含 `dataproc.clusters.get` 權限。
-  + 在您建立 Managed Service for Apache Spark 持續性記錄伺服器時，為 `spark:spark.history.fs.logDirectory` 屬性指定的 Cloud Storage 值區的 `roles/storage.objectAdmin` 角色。
+  + Managed Service for Apache Spark 持續性記錄伺服器的 `roles/dataproc.viewer` 角色，其中包含 `dataproc.clusters.get` 權限。
+  + 在您建立 Managed Service for Apache Spark 持續性記錄伺服器時，為屬性 `spark:spark.history.fs.logDirectory` 指定的 Cloud Storage bucket `roles/storage.objectAdmin` 角色。
 
   詳情請參閱「[Managed Service for Apache Spark 持續性記錄伺服器](https://docs.cloud.google.com/dataproc/docs/concepts/jobs/history-server?hl=zh-tw#create_a_phs_cluster)」和「[Managed Service for Apache Spark 角色和權限](https://docs.cloud.google.com/dataproc/docs/concepts/iam/iam?hl=zh-tw)」。
 
@@ -176,7 +178,7 @@ BigQuery 管理員可以建立[連線](https://docs.cloud.google.com/bigquery/do
    連線會列在專案中，位於「Connections」(連線) 群組。
 2. 點選左側窗格中的 explore「Explorer」。
 
-   如果沒有看到左側窗格，請按一下「展開左側窗格」圖示 last\_page 開啟窗格。
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 按一下專案，然後依序點選「連線」和所需連線。
 4. 在「詳細資料」窗格中，按一下「共用」即可共用連線。
    接著，按照下列步驟操作：
@@ -255,11 +257,11 @@ public class ShareConnection {
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-02 (世界標準時間)。
+上次更新時間：2026-05-05 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-05 (世界標準時間)。"],[],[]]

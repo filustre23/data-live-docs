@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -20,8 +22,7 @@
 
 確認您已連線，可存取 AWS Glue 資料。
 
-* 如要建立或修改連線，請按照「[連結至 Amazon S3](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-connection?hl=zh-tw)」一文中的操作說明進行。
-  建立連線時，請在 [BigQuery 的 AWS Identity and Access Management 政策](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-connection?hl=zh-tw#creating-aws-iam-policy)中，加入 AWS Glue 的下列政策陳述式。除了 Amazon S3 bucket 中儲存 AWS Glue 資料表資料的其他權限外，也請加入這項陳述式。
+* 如要建立或修改連線，請按照「[連結至 Amazon S3](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-connection?hl=zh-tw)」一文中的操作說明進行。建立該連結時，請在 [BigQuery 的 AWS Identity and Access Management 政策](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-connection?hl=zh-tw#creating-aws-iam-policy)中，加入 AWS Glue 的下列政策陳述式。除了 Amazon S3 bucket 中儲存 AWS Glue 資料表資料的其他權限外，也請加入這項陳述式。
 
   ```
   {
@@ -48,13 +49,13 @@
 
 ### 所需權限
 
-如要取得建立聯邦資料集所需的權限，請要求管理員授予您「[BigQuery 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.admin) 」(`roles/bigquery.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得建立聯邦資料集所需的權限，請要求系統管理員授予您「[BigQuery 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.admin) 」(`roles/bigquery.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
 這個預先定義的角色具備建立聯邦資料集所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
 #### 所需權限
 
-如要建立聯邦資料集，您必須具備下列權限：
+如要建立聯邦資料集，必須具備下列權限：
 
 * `bigquery.datasets.create`
 * `bigquery.connections.use`
@@ -75,7 +76,7 @@
    [前往 BigQuery 頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
 
-   如果沒有看到左側窗格，請按一下「展開左側窗格」圖示 last\_page 開啟窗格。
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Explorer」窗格中，選取要建立資料集的專案。
 4. 按一下 more\_vert「View actions」(查看動作)，然後點選「Create dataset」(建立資料集)。
 5. 在「建立資料集」頁面中，執行下列操作：
@@ -85,7 +86,7 @@
    * 以「外部資料集」來說，請執行下列操作：
 
      + 勾選「外部資料集的連結」旁邊的方塊。
-     + 在「External dataset type」(外部資料集類型) 部分，選取 `AWS Glue`。
+     + 在「External dataset type」(外部資料集類型) 中，選取 `AWS Glue`。
      + 在「外部來源」中，輸入 `aws-glue://`，然後輸入 AWS Glue 資料庫的 [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/glue/latest/dg/glue-specifying-resource-arns.html)，例如 `aws-glue://arn:aws:glue:us-east-1:123456789:database/test_database`。
      + 在「連線 ID」部分，選取 AWS 連線。
    * 其他預設設定則保留不變。
@@ -133,8 +134,8 @@ bq --location=LOCATION mk --dataset \
 
 更改下列內容：
 
-* `LOCATION`：BigQuery 中新資料集的位置，例如 `aws-us-east-1`。建立資料集後，就無法變更位置。您可以使用 [`.bigqueryrc` 檔案](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool?hl=zh-tw#setting_default_values_for_command-line_flags)設定位置的預設值。
-* `AWS_GLUE_SOURCE`：AWS Glue 資料庫的[Amazon 資源名稱 (ARN)](https://docs.aws.amazon.com/glue/latest/dg/glue-specifying-resource-arns.html)，例如 `arn:aws:glue:us-east-1:123456789:database/test_database`。
+* `LOCATION`：BigQuery 中新資料集的位置，例如 `aws-us-east-1`。建立資料集後，就無法變更位置。您可以使用 [`.bigqueryrc` 檔案](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool?hl=zh-tw#setting_default_values_for_command-line_flags)設定預設位置值。
+* `AWS_GLUE_SOURCE`：AWS Glue 資料庫的 [Amazon 資源名稱 (ARN)](https://docs.aws.amazon.com/glue/latest/dg/glue-specifying-resource-arns.html)，例如 `arn:aws:glue:us-east-1:123456789:database/test_database`。
 * `PROJECT_ID`：BigQuery 專案 ID。
 * `CONNECTION_LOCATION`：AWS 連線的位置，例如 `aws-us-east-1`。
 * `CONNECTION_NAME`：AWS 連線的名稱。
@@ -172,7 +173,7 @@ external_dataset_reference {
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
 2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
 
-   每個專案只需要執行一次這個指令，而且可以在任何目錄中執行。
+   您只需要為每項專案執行一次這個指令，且可以在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
@@ -189,9 +190,9 @@ external_dataset_reference {
    ```
    mkdir DIRECTORY && cd DIRECTORY && touch main.tf
    ```
-2. 如果您正在學習教學課程，可以複製每個章節或步驟中的範例程式碼。
+2. 如果您正在學習教學課程，可以複製每個章節或步驟中的程式碼範例。
 
-   將範例程式碼複製到新建立的 `main.tf` 中。
+   將程式碼範例複製到新建立的 `main.tf`。
 
    視需要從 GitHub 複製程式碼。如果 Terraform 代码片段是端對端解決方案的一部分，建議您使用這個方法。
 3. 查看並修改範例參數，套用至您的環境。
@@ -210,7 +211,7 @@ external_dataset_reference {
 
 ## 套用變更
 
-1. 檢查設定，確認 Terraform 即將建立或更新的資源符合您的預期：
+1. 查看設定，確認 Terraform 即將建立或更新的資源符合您的預期：
 
    ```
    terraform plan
@@ -238,19 +239,19 @@ external_dataset_reference {
 
 ## 取得資料表資訊
 
-如要取得有關聯邦資料集中資料表的資訊 (例如結構定義詳細資料)，請參閱「[取得資料表資訊](https://docs.cloud.google.com/bigquery/docs/tables?hl=zh-tw#get_table_information)」。
+如要取得聯邦資料集中的資料表相關資訊 (例如結構定義詳細資料)，請參閱「[取得資料表資訊](https://docs.cloud.google.com/bigquery/docs/tables?hl=zh-tw#get_table_information)」。
 
 ## 控管資料表的存取權
 
 如要管理對同盟資料集中資料表的存取權，請參閱「[使用 IAM 控管資源存取權](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam?hl=zh-tw)」。
 
-此外，系統也支援對同盟資料集中的資料表進行[資料列層級安全防護](https://docs.cloud.google.com/bigquery/docs/managing-row-level-security?hl=zh-tw)、[資料欄層級安全防護](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro?hl=zh-tw)和[資料遮蓋](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro?hl=zh-tw)。
+此外，系統也支援對聯邦資料集中的資料表套用[資料列層級安全防護](https://docs.cloud.google.com/bigquery/docs/managing-row-level-security?hl=zh-tw)、[資料欄層級安全防護](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro?hl=zh-tw)和[資料遮蓋](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro?hl=zh-tw)。
 
 如果執行可能導致安全性政策失效的結構定義作業 (例如刪除 AWS Glue 中的資料欄)，工作就會失敗，直到政策更新為止。此外，如果您在 AWS Glue 中刪除資料表並重新建立，安全性政策就不會再套用至重新建立的資料表。
 
 ## 查詢 AWS Glue 資料
 
-[查詢聯合式資料集中的資料表](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw)，與查詢任何其他 BigQuery 資料表相同。
+[查詢聯合式資料集中的資料表](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw)，與查詢任何其他 BigQuery 資料集中的資料表相同。
 
 您可以查詢下列格式的 AWS Glue 資料表：
 
@@ -259,7 +260,7 @@ external_dataset_reference {
 * Parquet
 * ORC
 * Avro
-* 冰山
+* Iceberg
 * Delta Lake
 
 ## 資料表對應詳細資料
@@ -288,11 +289,11 @@ external_dataset_reference {
 
 * Iceberg 資料表：AWS Glue 資料表中的 `Table.Parameters["metadata_location"]` 欄位
 * 非 Iceberg 非分區資料表：AWS Glue 資料表中的 `Table.StorageDescriptor.Location` 欄位
-* 非 Iceberg 分割資料表：AWS Glue GetPartitions API
+* 非 Iceberg 分區資料表：AWS Glue GetPartitions API
 
 ### 其他屬性
 
-此外，部分 AWS Glue 資料表屬性會自動對應至 BigQuery 中的格式專屬選項：
+此外，系統會自動將部分 AWS Glue 資料表屬性對應至 BigQuery 中的格式專屬選項：
 
 | **格式** | **SerializationLib** | **AWS Glue 資料表值** | **BigQuery 選項** |
 | --- | --- | --- | --- |
@@ -305,7 +306,7 @@ external_dataset_reference {
 | CSV | OpenCsvSerDe | Table.StorageDescriptor.Parameters["skip.header.line.count"] | [CsvOptions](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables?hl=zh-tw#csvoptions).skipLeadingRows |
 | JSON | Hive [JsonSerDe](https://github.com/apache/hive/blob/master/hcatalog/core/src/main/java/org/apache/hive/hcatalog/data/JsonSerDe.java) | Table.StorageDescriptor.Parameters["serialization.encoding"] | [JsonOptions](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables?hl=zh-tw#jsonoptions).encoding |
 
-## 在聯邦資料集中建立檢視表
+## 在同盟資料集中建立檢視表
 
 您無法在同盟資料集中建立檢視區塊。不過，您可以在標準資料集中建立檢視表，並以聯邦資料集中的資料表為基礎。詳情請參閱「[建立檢視區塊](https://docs.cloud.google.com/bigquery/docs/views?hl=zh-tw)」。
 
@@ -315,14 +316,14 @@ external_dataset_reference {
 
 ## 定價
 
-如要瞭解價格資訊，請參閱「[BigQuery Omni 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#bqomni)」一文。
+如要瞭解定價資訊，請參閱「[BigQuery Omni 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#bqomni)」一文。
 
 ## 限制
 
 * 適用所有 [BigQuery Omni 限制](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw#limitations)。
 * 您無法在 AWS Glue 聯邦資料集的資料表中新增、刪除或更新資料或中繼資料。
 * 您無法在 AWS Glue 聯邦資料集中建立新資料表、檢視區塊或具體化檢視區塊。
-* 不支援 [`INFORMATION_SCHEMA` 檢視畫面](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw)。
+* 不支援[`INFORMATION_SCHEMA`檢視](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw)。
 * 不支援[中繼資料快取](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw#metadata_caching_for_performance)。
 * 與資料表建立預設值相關的資料集層級設定不會影響聯邦資料集，因為您無法手動建立資料表。
 * Avro 資料表不支援 Apache Hive 資料類型 `UNION`。
@@ -331,8 +332,7 @@ external_dataset_reference {
 ## 後續步驟
 
 * 進一步瞭解 [BigQuery Omni](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw)。
-* 試試
-  [搭配 AWS 使用 BigQuery Omni 的實驗室](https://www.cloudskillsboost.google/catalog_lab/5345?hl=zh-tw)。
+* 試試 [BigQuery Omni with AWS 實驗室](https://www.cloudskillsboost.google/catalog_lab/5345?hl=zh-tw)。
 
 
 
@@ -341,11 +341,11 @@ external_dataset_reference {
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-02 (世界標準時間)。
+上次更新時間：2026-05-05 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-05 (世界標準時間)。"],[],[]]

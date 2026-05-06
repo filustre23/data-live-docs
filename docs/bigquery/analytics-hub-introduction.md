@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -194,7 +196,7 @@ BigQuery sharing 功能支援下列區域和多重區域。
 | --- | --- | --- |
 | 俄亥俄州哥倫布 | `us-east5` |  |
 | 達拉斯 | `us-south1` |  |
-| 愛荷華州 | `us-central1` | [低二氧化碳排放](https://cloud.google.com/sustainability/region-carbon?hl=zh-tw#region-picker) |
+| 愛荷華州 | `us-central1` |  |
 | 拉斯維加斯 | `us-west4` |  |
 | 洛杉磯 | `us-west2` |  |
 | 墨西哥 | `northamerica-south1` |  |

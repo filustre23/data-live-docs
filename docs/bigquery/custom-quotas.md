@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -20,10 +22,10 @@
 
 自訂配額會主動發揮作用，因此如果配額為 10 TB，您就無法執行資料量為 11 TB 的查詢作業。為處理的資料量建立自訂配額之後，您就能掌控專案層級或使用者層級的費用。
 
-如要設定自訂成本控制項，請更新下列一或兩個查詢配額：
+如要設定自訂成本控制項，請更新下列一或兩項查詢配額：
 
 * `QueryUsagePerDay`：專案層級的自訂配額會限制同一專案中所有使用者的匯總用量。
-* `QueryUsagePerUserPerDay`：使用者層級的自訂配額會分別套用至單一專案中的所有使用者和[服務帳戶](https://docs.cloud.google.com/docs/authentication?hl=zh-tw#user_accounts_and_service_accounts)。無論每位使用者的限制為何，專案中所有使用者的總用量絕不會超過每日查詢用量限制。
+* `QueryUsagePerUserPerDay`：使用者層級的自訂配額會分別套用至專案中的所有使用者和[服務帳戶](https://docs.cloud.google.com/docs/authentication?hl=zh-tw#user_accounts_and_service_accounts)。無論每位使用者的限制為何，專案中所有使用者的總用量絕不會超過每日查詢用量限制。
 
 **注意：** 您無法為個別使用者或服務帳戶指派自訂配額。
 
@@ -43,7 +45,7 @@
 
 ## 設定或修改自訂配額
 
-您可以針對 Google Cloud 管理中心「配額與系統限制」頁面顯示的任何配額，設定自訂配額或修改現有的自訂配額。要求調降配額時，變更會在幾分鐘內生效。如果您要求提高配額，系統會進行核准程序，這可能需要較長時間。詳情請參閱「[要求調整配額](https://docs.cloud.google.com/docs/quotas/help/request_increase?hl=zh-tw)」。
+您可以為 Google Cloud 控制台「配額與系統限制」頁面顯示的任何配額，設定自訂配額或修改現有配額。要求調降配額時，變更會在幾分鐘內生效。如果您要求提高配額，系統會進行核准程序，這可能需要較長時間。詳情請參閱「[要求調整配額](https://docs.cloud.google.com/docs/quotas/help/request_increase?hl=zh-tw)」。
 
 **附註：**自訂配額為約略值。自訂配額功能提供額外的防護機制，可預防費用超額，但無法嚴格限制系統的資料處理量，因此在某些情況下，BigQuery 可能會執行超過配額的查詢作業。如要確保價格一致性，建議使用[預訂](https://docs.cloud.google.com/bigquery/docs/reservations-intro?hl=zh-tw)。
 
@@ -53,7 +55,7 @@
 
    [前往「配額與系統限制」](https://console.cloud.google.com/iam-admin/quotas?hl=zh-tw)
 2. 在「篩選器」搜尋框中使用「服務」篩選器，篩選出 BigQuery API。
-3. 選取要調整的配額。舉例來說，如要限制專案和使用者層級的每日查詢資料量，請選取「Query usage per day」(每日查詢次數) 和「Query usage per day per user」(每人每天查詢次數)。你可能需要捲動清單才能找到這些項目。選取配額後，工具列會隨即顯示。
+3. 選取要調整的配額。舉例來說，如要限制專案和使用者層級的每日查詢資料量，請選取「每日查詢次數」和「每人每天查詢次數」。你可能需要捲動清單才能找到這些項目。選取配額後，工具列會隨即顯示。
 4. 按一下工具列中的「編輯」edit。
    「Quota changes」(配額變更) 對話方塊隨即開啟。
 5. 如果選取「無限制」，請取消選取。
@@ -63,7 +65,7 @@
 
 如要進一步瞭解如何查看及管理配額，請參閱「[查看及管理配額](https://docs.cloud.google.com/docs/quotas/view-manage?hl=zh-tw)」。
 
-**注意：** 查詢用量是累計的計費位元組數。如果部分查詢的收費費率高於一般[以量計價方案](https://cloud.google.com/bigquery/pricing?hl=zh-tw#on_demand_pricing)，則「配額與系統限制」頁面上的查詢用量值，可能與從[`INFORMATION_SCHEMA.JOBS`檢視畫面](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw)取得的相同期間計費位元組數不符。舉例來說，一般查詢的以量計價價格可能為每 TiB X 美元，但建立邏輯迴歸模型等其他查詢作業的價格可能為每 TiB 50X 美元，是一般價格的 50 倍。在這個情況下，`INFORMATION_SCHEMA.JOBS` 檢視畫面可能會傳回 100 GiB 的計費位元組，但「配額和系統限制」頁面顯示的查詢用量會是 5 TiB，是前者的 50 倍，因為查詢用量值會根據一般隨選價格進行標準化。
+**注意：** 查詢用量是累計的計費位元組數。如果部分查詢的收費費率高於一般[以量計價方案](https://cloud.google.com/bigquery/pricing?hl=zh-tw#on_demand_pricing)，則「配額與系統限制」頁面上的查詢用量值，可能與從[`INFORMATION_SCHEMA.JOBS`檢視畫面](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw)取得的相同期間計費位元組數不符。舉例來說，一般查詢的以量計價價格可能為每 TiB X 美元，但建立邏輯迴歸模型等其他查詢作業的價格可能為每 TiB 50X 美元，是正常價格的 50 倍。在這個情況下，`INFORMATION_SCHEMA.JOBS` 檢視畫面可能會傳回 100 GiB 的計費位元組，但「配額和系統限制」頁面顯示的查詢用量會是 5 TiB，是前者的 50 倍，因為查詢用量值會根據一般隨選價格進行標準化。
 
 ## 傳回的錯誤訊息
 
@@ -123,11 +125,11 @@
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-02 (世界標準時間)。
+上次更新時間：2026-05-05 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-05 (世界標準時間)。"],[],[]]

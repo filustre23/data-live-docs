@@ -1,5 +1,7 @@
 As of April 20th, 2026, BigLake is now called Google Cloud Lakehouse. BigLake metastore is now called the Lakehouse runtime catalog. Lakehouse APIs, client libraries, CLI commands, and IAM names remain unchanged and still reference BigLake.
 
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-cn)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-cn)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-cn)

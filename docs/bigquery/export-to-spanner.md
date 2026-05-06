@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -14,7 +16,7 @@
 
 # 將資料匯出至 Spanner (反向 ETL)
 
-本文說明如何從 BigQuery 設定反向擷取、轉換及載入 (反向 ETL) 工作流程到 Spanner。您可以使用 [`EXPORT DATA` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements?hl=zh-tw)，從 BigQuery 資料來源 (包括 [Iceberg 資料表](https://docs.cloud.google.com/bigquery/docs/iceberg-tables?hl=zh-tw)) 匯出資料至 [Spanner](https://docs.cloud.google.com/spanner/docs/overview?hl=zh-tw) 資料表。
+本文說明如何設定從 BigQuery 到 Spanner 的反向擷取、轉換及載入 (反向 ETL) 工作流程。您可以使用 [`EXPORT DATA` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements?hl=zh-tw)，從 BigQuery 資料來源 (包括 [Iceberg 資料表](https://docs.cloud.google.com/bigquery/docs/iceberg-tables?hl=zh-tw)) 匯出資料至 [Spanner](https://docs.cloud.google.com/spanner/docs/overview?hl=zh-tw) 資料表。
 
 這項反向 ETL 工作流程結合了 BigQuery 的分析功能，以及 Spanner 的低延遲和高處理量。這個工作流程可讓您為應用程式使用者提供資料，同時避免耗盡 BigQuery 的配額和限制。
 
@@ -30,7 +32,7 @@
 
 * 從 BigQuery 資料表匯出資料：
   [BigQuery 資料檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataViewer)  (`roles/bigquery.dataViewer`)
-* 執行擷取作業：
+* 執行擷取工作：
   [BigQuery 使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.user)  (`roles/bigquery.user`)
 * 檢查 Spanner 執行個體的參數：
   [Cloud Spanner 檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/spanner?hl=zh-tw#spanner.viewer)  (`roles/spanner.viewer`)
@@ -52,7 +54,7 @@
 | GoogleSQL | * `BIGNUMERIC`：支援的 `NUMERIC` 類型不夠廣泛。請考慮在查詢中將明確轉換新增至 `NUMERIC` 型別。 |
 
 * 匯出資料列的大小上限為 1 MiB。
-* Spanner 會在匯出期間強制執行參照完整性。如果目標資料表是另一個資料表的子項 (INTERLEAVE IN PARENT)，或目標資料表有外鍵限制，系統會在匯出期間驗證外鍵和父項鍵。如果匯出的資料列寫入的資料表含有 INTERLEAVE IN PARENT，但父項資料列不存在，匯出作業就會失敗，並顯示「Parent row is missing. 無法寫入資料列」錯誤。如果匯出的資料列寫入的資料表具有外鍵限制，且參照的鍵不存在，匯出作業就會失敗，並顯示「違反外鍵限制」錯誤。匯出至多個資料表時，建議您依序匯出，確保匯出作業維持參照完整性。這通常表示要先匯出父項資料表和外鍵參照的資料表，再匯出參照這些資料表的資料表。
+* Spanner 會在匯出期間強制執行參照完整性。如果目標資料表是另一個資料表的子項 (INTERLEAVE IN PARENT)，或目標資料表有外鍵限制，系統會在匯出期間驗證外鍵和父項鍵。如果匯出的資料列寫入的資料表具有 INTERLEAVE IN PARENT，但父項資料列不存在，匯出作業就會失敗，並顯示「Parent row is missing. 無法寫入資料列」錯誤。如果匯出的資料列寫入的資料表具有外鍵限制，且參照的鍵不存在，匯出作業就會失敗，並顯示「違反外鍵限制」錯誤。匯出至多個資料表時，建議您依序匯出，確保匯出作業維持參照完整性。這通常表示要先匯出父項資料表和外鍵參照的資料表，再匯出參照這些資料表的資料表。
 
   如果匯出目標資料表有外鍵限制，或是另一個資料表的子項 (INTERLEAVE IN PARENT)，則必須先填入父項資料表，再匯出子項資料表，且父項資料表應包含所有對應的鍵。如果父項資料表沒有完整的相關鍵，嘗試匯出子項資料表就會失敗。
 * BigQuery 工作 (例如擷取至 Spanner 的工作) 的最長執行時間為 6 小時。如要瞭解如何最佳化大型擷取工作，請參閱「[匯出最佳化](#export_optimization)」。或者，您也可以考慮將輸入內容分割成個別資料區塊，然後以個別擷取工作匯出。
@@ -84,7 +86,7 @@ EXPORT DATA OPTIONS(
 * `INSTANCE_ID`：資料庫執行個體的名稱。
 * `DATABASE_ID`：資料庫名稱。
 * `TABLE_NAME`：現有目的地資料表的名稱。
-* `CHANGE_TIMESTAMP`：目的地 Spanner 資料表中 `TIMESTAMP` 型別資料欄的名稱。這個選項會在匯出期間使用，追蹤最新列更新的時間戳記。指定這個選項後，匯出作業會先讀取 Spanner 資料表中的資料列，確保只寫入最新的資料列更新。執行[持續匯出](#export_continuously)時，建議指定 `TIMESTAMP` 類型資料欄，因為相同主鍵的資料列變更順序非常重要。
+* `CHANGE_TIMESTAMP`：目的地 Spanner 資料表中 `TIMESTAMP` 型別資料欄的名稱。這個選項會在匯出期間使用，追蹤最新列更新的時間戳記。指定這個選項後，匯出作業會先讀取 Spanner 資料表中的資料列，確保只寫入最新的資料列更新。執行[持續匯出](#export_continuously)時，建議指定 `TIMESTAMP` 型別資料欄，因為具有相同主鍵的資料列變更順序非常重要。
 * `PRIORITY` (選用)：寫入要求的[優先順序](https://docs.cloud.google.com/spanner/docs/reference/rest/v1/RequestOptions?hl=zh-tw#priority)。允許的值：`LOW`、`MEDIUM`、`HIGH`。預設值：`MEDIUM`。
 * `TAG` (選用)：
   [要求標記](https://docs.cloud.google.com/spanner/docs/introspection/troubleshooting-with-tags?hl=zh-tw)
@@ -156,7 +158,7 @@ AS SELECT * FROM mydataset.table1;
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
 
-   如果沒有看到左側窗格，請按一下「展開左側窗格」圖示 last\_page 開啟窗格。
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Explorer」窗格中展開專案名稱，然後按一下「Connections」。
 4. 在「Connections」(連線) 頁面中，按一下「Create connection」(建立連線)。
 5. 在「連線類型」中，選擇「Vertex AI 遠端模型、遠端函式、BigLake 和 Spanner (Cloud 資源)」。
@@ -189,7 +191,7 @@ AS SELECT * FROM mydataset.table1;
    * `CONNECTION_NAME`：連線名稱，格式為 `PROJECT_ID.LOCATION.CONNECTION_ID`、`LOCATION.CONNECTION_ID` 或 `CONNECTION_ID`。如果省略專案或位置，系統會從執行陳述式的專案和位置推斷。
    * `FRIENDLY_NAME` (選用)：連線的描述性名稱。
    * `DESCRIPTION` (選用)：連線說明。
-3. 按一下 play\_circle **執行**。
+3. 按一下「執行」play\_circle。
 
 如要進一步瞭解如何執行查詢，請參閱「[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)」。
 
@@ -393,7 +395,7 @@ resource "google_bigquery_connection" "default" {
 
    將程式碼範例複製到新建立的 `main.tf`。
 
-   視需要從 GitHub 複製程式碼。如果 Terraform 程式碼片段是端對端解決方案的一部分，建議您使用這個方法。
+   視需要從 GitHub 複製程式碼。如果 Terraform 代码片段是端對端解決方案的一部分，建議您使用這個方法。
 3. 查看並修改範例參數，套用至您的環境。
 4. 儲存變更。
 5. 初始化 Terraform。每個目錄只需執行一次這項操作。
@@ -410,7 +412,7 @@ resource "google_bigquery_connection" "default" {
 
 ## 套用變更
 
-1. 檢查設定，確認 Terraform 即將建立或更新的資源符合您的預期：
+1. 查看設定，確認 Terraform 即將建立或更新的資源符合您的預期：
 
    ```
    terraform plan
@@ -545,7 +547,7 @@ AS SELECT * FROM my_bq_dataset.table1;
 
   這樣查詢就能在 6 小時的工作執行時間內完成。如要進一步瞭解這些限制，請參閱「[查詢工作限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#query_jobs)」。
 * 如要提升資料載入效能，請在匯入資料的 Spanner 表格中捨棄索引。然後在匯入完成後重新建立。
-* 建議您先從一個 Spanner 節點 (1000 個處理器單元) 和最少的 BigQuery 運算單元預留開始。例如 100 個運算單元，或 0 個基準運算單元 (搭配自動調度資源)。如果匯出資料量小於 100 GB，這項設定通常會在 6 小時的工作限制內完成。如要匯出超過 100 GB 的資料，請視需要擴充 Spanner 節點和 BigQuery 運算單元預留，以提高處理量。每個節點的處理量約為每秒 5 MiB。
+* 建議您先從一個 Spanner 節點 (1000 個處理器單元) 和最少的 BigQuery 運算單元預留開始。例如 100 個運算單元，或 0 個基準運算單元 (搭配自動調度資源)。如果匯出資料量小於 100 GB，這項設定通常會在 6 小時的工作限制內完成。如要匯出超過 100 GB 的資料，請視需要擴充 Spanner 節點和 BigQuery 運算單元預留，以提高處理量。每個節點的處理量約為 5 MiB/秒。
 
 ## 定價
 
@@ -564,11 +566,11 @@ AS SELECT * FROM my_bq_dataset.table1;
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-02 (世界標準時間)。
+上次更新時間：2026-05-05 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-05 (世界標準時間)。"],[],[]]

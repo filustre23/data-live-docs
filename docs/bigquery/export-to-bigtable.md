@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -28,7 +30,7 @@ DATA` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-
 * Bigtable 資料欄不需要預先定義，可用於在[資料表的大小限制內](https://docs.cloud.google.com/bigtable/quotas?hl=zh-tw#limits-data-size)，以名稱 (也稱為「限定詞」) 儲存資料。
 * Bigtable 資料欄可包含[資料大小限制內的任何二進位值](https://docs.cloud.google.com/bigtable/quotas?hl=zh-tw#limits-data-size)。
 * Bigtable 資料欄一律具有時間維度 (也稱為「版本」)。只要時間戳記不同，同一欄的任何資料列都可以儲存任意數量的資料。
-* Bigtable 時間戳記是以微秒為單位，自 [Unix 紀元時間](https://en.wikipedia.org/wiki/Unix_time)起算，例如 0 代表 1970-01-01T00:00:00 UTC。時間戳記必須為非負數的微秒數，且精確度為毫秒 (僅接受 1000 微秒的倍數)。預設的 Bigtable 時間戳記為 0。
+* Bigtable 時間戳記是以微秒為單位，自 [Unix Epoch 時間](https://en.wikipedia.org/wiki/Unix_time)起算，例如 0 代表 1970-01-01T00:00:00 UTC。時間戳記必須為非負數的微秒數，且精確度為毫秒 (僅接受 1000 微秒的倍數)。預設的 Bigtable 時間戳記為 0。
 * Bigtable 中的資料[可依資料列索引鍵、多個資料列索引鍵、資料列索引鍵範圍或篩選器讀取](https://docs.cloud.google.com/bigtable/docs/reads?hl=zh-tw)。除了完整資料表掃描之外，所有類型的讀取要求都至少須有一個資料列索引鍵或資料列索引鍵範圍。
 
 如要瞭解如何準備 BigQuery 結果以匯出至 Bigtable，請參閱「[準備匯出的查詢結果](#prepare_results)」。
@@ -45,7 +47,7 @@ DATA` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-
 
 * 從 BigQuery 資料表匯出資料：
   [BigQuery 資料檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataViewer)  (`roles/bigquery.dataViewer`)
-* 執行擷取作業：
+* 執行擷取工作：
   [BigQuery 使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.user)  (`roles/bigquery.user`)
 * 將資料寫入 Bigtable 資料表：
   [Bigtable 使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigtable?hl=zh-tw#bigtable.user)  (`roles/bigtable.user`)
@@ -60,15 +62,15 @@ DATA` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-
 
 * 編碼僅限 `BINARY` 和 `TEXT`。
 * 目的地 [Bigtable 應用程式設定檔](https://docs.cloud.google.com/bigtable/docs/app-profiles?hl=zh-tw)必須設定[單叢集轉送](https://docs.cloud.google.com/bigtable/docs/routing?hl=zh-tw#single-cluster)和[低要求優先等級](https://docs.cloud.google.com/bigtable/docs/request-priorities?hl=zh-tw)。
-* Bigtable 應用程式設定檔必須設定為將資料轉送至與 BigQuery 資料集位於同一位置的 Bigtable 叢集。詳情請參閱[位置注意事項](#data-locations)。
+* Bigtable 應用程式設定檔必須設定為將資料轉送至與 BigQuery 資料集位於同一位置的 Bigtable 集群。詳情請參閱[位置注意事項](#data-locations)。
 * 只有 [BigQuery Enterprise 或 Enterprise Plus 版本](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)支援匯出至 Bigtable。
   不支援 BigQuery Standard 版和[隨選運算](https://cloud.google.com/bigquery/pricing?hl=zh-tw#on_demand_pricing)。
 * 只有[`QUERY`指派](https://docs.cloud.google.com/bigquery/docs/reservations-assignments?hl=zh-tw)的預留項目支援匯出至 Bigtable。
 
 ## 位置注意事項
 
-* 如果 BigQuery 資料集位於多個地區，則必須設定 [Bigtable 應用程式設定檔](https://docs.cloud.google.com/bigtable/docs/app-profiles?hl=zh-tw)，將資料傳送至該多地區內的 Bigtable 叢集。舉例來說，如果您的 BigQuery 資料集位於 `US` 多區域，Bigtable 叢集可以位於美國境內的 `us-west1` (奧勒岡) 區域。
-* 如果 BigQuery 資料集位於單一地區，則必須設定 [Bigtable 應用程式設定檔](https://docs.cloud.google.com/bigtable/docs/app-profiles?hl=zh-tw)，將資料傳送至相同地區的 Bigtable 叢集。舉例來說，如果您的 BigQuery 資料集位於 `asia-northeast1` (東京) 地區，Bigtable 叢集也必須位於 `asia-northeast1` (東京) 地區。
+* 如果 BigQuery 資料集位於多個地區，則必須設定 [Bigtable 應用程式設定檔](https://docs.cloud.google.com/bigtable/docs/app-profiles?hl=zh-tw)，將資料傳送至該多地區內的 Bigtable 叢集。舉例來說，如果您的 BigQuery 資料集位於 `US` 多區域，Bigtable 集群可以位於美國境內的 `us-west1` (奧勒岡) 區域。
+* 如果 BigQuery 資料集位於單一區域，則必須設定 [Bigtable 應用程式設定檔](https://docs.cloud.google.com/bigtable/docs/app-profiles?hl=zh-tw)，將資料傳送至相同區域的 Bigtable 叢集。舉例來說，如果您的 BigQuery 資料集位於 `asia-northeast1` (東京) 區域，Bigtable 叢集也必須位於 `asia-northeast1` (東京) 區域。
 
 詳情請參閱「[Bigtable 位置](https://docs.cloud.google.com/bigtable/docs/locations?hl=zh-tw)」。
 
@@ -83,8 +85,8 @@ DATA` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-
 | `INTEGER` | 如果 `bigtable_options.column_families.encoding` 設為 `BINARY`，則值會以 8 位元組的大端序格式 (最重要的位元組在前) 寫入。如果 `bigtable_options.column_families.encoding` 設為 `TEXT`，則值會寫入為代表數字的易讀字串。 |
 | `FLOAT` | 以 IEEE 754 8 位元組輸出格式寫入值。 |
 | `BOOLEAN` | 如果 `bigtable_options.column_families.encoding` 設為 `BINARY`，則值會寫入為 1 位元組值 (`false` = 0x00 或 `true` = 0x01)。如果 `bigtable_options.column_families.encoding` 設為 `TEXT`，值會以文字形式寫入 (`"true"` 或 `"false"`)。 |
-| `JSON` | 系統會將匯出的 `JSON` 類型資料欄解讀為屬於特定 Bigtable 資料欄系列的資料欄群組。JSON 物件的成員會解讀為資料欄，其值會寫入 Bigtable。您可以使用 [`bigtable_options`](#bigtable_options) 設定調整要寫入的資料欄名稱。   例如：     ```     JSON '{"FIELD1": "VALUE1", "FIELD2": "VALUE2"}' as MY_COLUMN_FAMILY ```   其中，值 VALUE1 和 VALUE2 會以資料欄 FIELD1 和 FIELD2 的形式寫入 Bigtable，並屬於資料欄系列 MY\_COLUMN\_FAMILY。  **注意：**如果 JSON 文件巢狀內嵌於其他 `JSON` 或 `STRUCT` 類型，系統會以字串形式寫入 Bigtable。匯出巢狀結構中的 `STRUCT` 值時，會受到「[使用 `bigtable_options` 設定匯出項目](#bigtable_options)」一節所述的限制。 |
-| `STRUCT` | 系統會將匯出的 `STRUCT` 類型資料欄解讀為屬於特定 Bigtable 資料欄系列的資料欄群組。結構體的成員會解讀為資料欄，以及要寫入 Bigtable 的值。您可以使用 [`bigtable_options`](#bigtable_options) 設定調整要寫入的資料欄名稱。   例如：     ```     STRUCT<FIELD1  STRING, FIELD2 INTEGER> as MY_COLUMN_FAMILY ```   其中，值 FIELD1 和 FIELD2 會以資料欄 FIELD1 和 FIELD2 的形式寫入 Bigtable，並歸入資料欄系列 MY\_COLUMN\_FAMILY。 |
+| `JSON` | 系統會將 `JSON` 類型的匯出資料欄解讀為屬於特定 Bigtable 資料欄系列的資料欄群組。JSON 物件的成員會解讀為資料欄，其值會寫入 Bigtable。您可以使用 [`bigtable_options`](#bigtable_options) 設定調整要寫入的資料欄名稱。   例如：     ```     JSON '{"FIELD1": "VALUE1", "FIELD2": "VALUE2"}' as MY_COLUMN_FAMILY ```   其中，值 VALUE1 和 VALUE2 會以資料欄 FIELD1 和 FIELD2 的形式寫入 Bigtable，並屬於資料欄系列 MY\_COLUMN\_FAMILY。  **注意：**如果 JSON 文件巢狀內嵌於其他 `JSON` 或 `STRUCT` 類型，系統會以字串形式寫入 Bigtable。匯出巢狀結構中的 `STRUCT` 值時，會受到「[使用 `bigtable_options` 設定匯出項目](#bigtable_options)」一節所述的限制。 |
+| `STRUCT` | 系統會將 `STRUCT` 類型的匯出資料欄解讀為屬於特定 Bigtable 資料欄系列的資料欄群組。結構體的成員會解讀為資料欄，以及要寫入 Bigtable 的值。您可以使用 [`bigtable_options`](#bigtable_options) 設定調整要寫入的資料欄名稱。   例如：     ```     STRUCT<FIELD1  STRING, FIELD2 INTEGER> as MY_COLUMN_FAMILY ```   其中，值 FIELD1 和 FIELD2 會以資料欄 FIELD1 和 FIELD2 的形式寫入 Bigtable，並歸入資料欄系列 MY\_COLUMN\_FAMILY。 |
 
 這些支援的資料類型與從 BigQuery 的[外部 Bigtable 資料表](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables?hl=zh-tw#bigtablecolumnfamily)讀取資料類似。
 
@@ -135,7 +137,7 @@ EXPORT DATA OPTIONS(
 | `columnFamilies.familyId` | Bigtable 資料欄系列的 ID。 |
 | `columnFamilies.encoding` | 值可以設為 `BINARY` 或 `TEXT`。如要瞭解類型如何編碼，請參閱「[支援的 BigQuery 類型](#bigquery_types)」。 |
 | `columnFamilies.columns` | Bigtable 資料欄對應陣列。 |
-| `columnFamilies.columns.qualifierString` | 選填：Bigtable 資料欄限定詞。如果資料欄限定詞沒有非 UTF-8 編碼，請指定這個值。`qualifierString` 和 `qualifierEncoding` 欄位互斥，如果未指定 `qualifierString` 和 `qualifierEncoded`，則會使用 `fieldName` 做為資料欄限定詞。 |
+| `columnFamilies.columns.qualifierString` | 選用：Bigtable 資料欄限定詞。如果資料欄限定詞沒有非 UTF-8 編碼，請指定這個值。`qualifierString` 和 `qualifierEncoding` 欄位互斥，如果未指定 `qualifierString` 和 `qualifierEncoded`，則會使用 `fieldName` 做為資料欄限定詞。 |
 | `columnFamilies.columns.qualifierEncoded` | 選用：Base64 編碼的資料欄限定詞。與 `qualifierString` 類似，如果資料欄限定詞必須使用非 UTF-8 編碼。 |
 | `columnFamilies.columns.fieldName` | 必要：BigQuery 結果集欄位名稱。在某些情況下，可以是空字串。如要瞭解如何將空白 `fieldName` 值與簡單型別的欄位搭配使用，請參閱「[準備匯出查詢結果](#prepare_results)」。 |
 
@@ -150,11 +152,11 @@ EXPORT DATA OPTIONS(
 
 Bigtable 不要求資料欄限定符必須是有效的 BigQuery 資料欄名稱，且支援使用任何位元組。如要瞭解如何覆寫匯出作業的目標欄位限定符，請參閱「[使用 `bigtable_options` 設定匯出作業](#bigtable_options)」。
 
-如果您將匯出的值用於 Bigtable API (例如 [`ReadModifyWriteRow`](https://docs.cloud.google.com/bigtable/docs/reference/data/rpc/google.bigtable.v2?hl=zh-tw#google.bigtable.v2.Bigtable.ReadModifyWriteRow))，任何數值都必須使用正確的[二進位編碼](#bigtable_options)。
+如果您將匯出值與 Bigtable API (例如 [`ReadModifyWriteRow`](https://docs.cloud.google.com/bigtable/docs/reference/data/rpc/google.bigtable.v2?hl=zh-tw#google.bigtable.v2.Bigtable.ReadModifyWriteRow)) 搭配使用，任何數值都必須使用正確的[二進位編碼](#bigtable_options)。
 
 根據預設，系統會將 `STRUCT` 或 `JSON` 以外類型的獨立結果資料欄，解讀為目的地資料欄系列的值 (等於結果資料欄名稱)，以及等於空白字串的資料欄限定詞。
 
-如要示範如何編寫這些資料類型，請參考下列 SQL 範例，其中 `column` 和 `column2` 是獨立的結果欄：
+如要示範如何寫入這些資料類型，請參考下列 SQL 範例，其中 `column` 和 `column2` 是獨立的結果欄：
 
 ```
 SELECT
@@ -200,7 +202,7 @@ FROM T
 | 101 | 產品 | | amount | | order\_time |
 | 1970-01-01T00:00:00Z | 搖桿 | 1970-01-01T00:00:00Z | 2 | 1680000054000 |
 
-`1680000054000` 代表 `2023-03-28T10:40:54Z`，以世界標準時間時區的 Unix Epoch 紀元時間為準，單位為毫秒。
+`1680000054000` 代表 `2023-03-28T10:40:54Z`，以毫秒為單位，自世界標準時間時區的 Unix Epoch 紀元時間開始算起。
 
 ## 自動建立新的資料欄系列
 
@@ -272,7 +274,7 @@ FROM orders
 | Bob | 2023-01-01T10:10:54Z | 10.99 |
 | 2023-01-04T15:17:01Z | 11.1 |
 
-匯出至 Bigtable 時，系統會將新值併入資料表，而非取代整列。如果資料列索引鍵在 Bigtable 中已有值，則新值會部分或完全覆寫先前的資料，具體情況取決於要寫入的儲存格的資料欄系列、資料欄名稱和時間戳記。
+匯出至 Bigtable 時，系統會將新值併入資料表，而非取代整列。如果資料列索引鍵的值已存在於 Bigtable 中，則新值可能會部分或完全覆寫先前的資料，具體情況取決於要寫入的儲存格的資料欄系列、資料欄名稱和時間戳記。
 
 **注意：** 請避免匯出結果，因為這些結果有多個資料列，且相同資料列索引鍵、資料欄系列、資料欄限定詞和時間戳記的值不同。這類匯出作業的結果不具決定性，取決於 BigQuery 內的查詢計畫和排程。BigQuery 無法判斷匯出期間覆寫的值，是匯出前就存在於 Bigtable 中，還是先前由同一匯出程序插入。
 
@@ -282,7 +284,7 @@ FROM orders
 
 ## 匯出最佳化
 
-如要變更從 BigQuery 匯出記錄至 Bigtable 的處理量，請修改 [Bigtable 目的地叢集](https://docs.cloud.google.com/bigtable/docs/instances-clusters-nodes?hl=zh-tw)中的節點數量。處理量 (每秒寫入的列數) 會隨著目的地叢集中的節點數線性調整。
+如要變更從 BigQuery 匯出記錄至 Bigtable 的處理量，請修改 [Bigtable 目的地叢集](https://docs.cloud.google.com/bigtable/docs/instances-clusters-nodes?hl=zh-tw)中的節點數量。處理量 (每秒寫入的列數) 會隨著目的地叢集中的節點數量線性調整。
 舉例來說，如果將目的端叢集中的節點數量增加一倍，匯出輸送量大約也會增加一倍。
 
 ## 定價
@@ -299,11 +301,11 @@ FROM orders
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-02 (世界標準時間)。
+上次更新時間：2026-05-05 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-05 (世界標準時間)。"],[],[]]

@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -735,7 +737,5 @@ public class WriteCommittedStream {
 
     public void append(JSONArray data, long offset)
         throws DescriptorValidationException, IOException, ExecutionException {
-      synchronized (this.lock) {
-        // If earlier appends have failed, we need to reset before continuing.
-        if (this.error
+      synchronized (this
 ```

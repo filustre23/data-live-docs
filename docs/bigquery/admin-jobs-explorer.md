@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -28,7 +30,7 @@ BigQuery 提供下列`INFORMATION_SCHEMA`檢視畫面，顯示工作詳細資料
 
 ## 必要的角色
 
-如要取得使用管理工作探索工具所需的權限，請要求系統管理員授予您機構或專案的 [BigQuery 資源檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.resourceViewer)  (`roles/bigquery.resourceViewer`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得使用管理工作探索工具所需的權限，請要求管理員授予您機構或專案的 [BigQuery 資源檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.resourceViewer)  (`roles/bigquery.resourceViewer`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
 這個預先定義的角色具備使用管理工作探索工具所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
@@ -39,10 +41,10 @@ BigQuery 提供下列`INFORMATION_SCHEMA`檢視畫面，顯示工作詳細資料
 * 如要查看專案層級的資料：
    `bigquery.jobs.listAll`
   專案
-* 如要查看機構層級的資料，請按照下列步驟操作：
+* 如要查看機構層級的資料：
    `bigquery.jobs.listAll`
   在機構上
-* 如要依貴機構的預訂項目篩選：
+* 如要依貴機構的預訂記錄篩選：
    `bigquery.reservations.list`
   在機構上
 
@@ -69,9 +71,9 @@ BigQuery 提供下列`INFORMATION_SCHEMA`檢視畫面，顯示工作詳細資料
    * **專案 ID**。(僅適用於工作範圍為機構時)
    * **預訂 ID**。(僅適用於工作範圍為機構時)
    * **運算單元時間超過**。工作耗費的時間超過指定時段。
-   * **持續時間超過**。執行時間超過指定時長的工作。
+   * **持續時間超過**。工作時間超過指定時長。
    * **處理的位元組數超過**。處理的位元組數超過指定位元組數的工作。
-   * **查詢洞察**：查詢洞察類型，例如運算單元競爭、超過記憶體重組容量，以及資料輸入規模調整。
+   * **查詢洞察**。查詢洞察類型，例如時段競爭、超過記憶體重組容量，以及資料輸入規模調整。
    * **查詢雜湊**。查詢雜湊包含查詢的雜湊。這是十六進位 STRING 雜湊，會忽略註解、參數值、UDF 和常值。如果 [GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw) 查詢成功，但未命中快取，就會顯示這個欄位。
    * **標籤**。`key:value` 組合，可指派給工作。您可以透過鍵、值或 `key:value` 組合進行篩選。
    * **工作類別**。查詢類型，例如「標準」或「持續查詢」。
@@ -88,7 +90,7 @@ BigQuery 提供下列`INFORMATION_SCHEMA`檢視畫面，顯示工作詳細資料
 4. 按一下要查看查詢執行詳細資料的工作。
 5. 在「查詢結果」窗格中，按一下「執行圖表」分頁標籤，即可查看工作的執行詳細資料。
 
-如要瞭解如何解讀深入分析，請參閱「[解讀查詢效能深入分析](https://docs.cloud.google.com/bigquery/docs/query-insights?hl=zh-tw#interpret_query_performance_insights)」。
+如要瞭解如何解讀洞察資料，請參閱「[解讀查詢效能洞察資料](https://docs.cloud.google.com/bigquery/docs/query-insights?hl=zh-tw#interpret_query_performance_insights)」。
 
 ## 取得 BigQuery 工作詳細資料
 
@@ -108,7 +110,7 @@ BigQuery 提供下列`INFORMATION_SCHEMA`檢視畫面，顯示工作詳細資料
 如要取得處理 BigQuery 工作詳細資料和系統層級詳細資料所需的權限，請要求管理員在機構或專案中授予您下列 IAM 角色：
 
 * 查看工作詳細資料：
-  BigQuery 資源檢視者 (`roles/bigquery.resourceViewer`) - 執行查詢的專案
+  BigQuery 資源檢視器 (`roles/bigquery.resourceViewer`) - 執行查詢的專案
 * 查看系統層級詳細資料：
   BigQuery 資源檢視者 (`roles/bigquery.resourceViewer`) - 管理專案
 
@@ -123,10 +125,10 @@ BigQuery 提供下列`INFORMATION_SCHEMA`檢視畫面，顯示工作詳細資料
 * 如要查看專案層級的資料：
    `bigquery.jobs.listAll`
   專案
-* 如要查看機構層級的資料，請按照下列步驟操作：
+* 如要查看機構層級的資料：
    `bigquery.jobs.listAll`
   在機構上
-* 如要依貴機構的預訂項目篩選：
+* 如要依貴機構的預訂記錄篩選：
    `bigquery.reservations.list`
   在機構上
 
@@ -166,14 +168,14 @@ BigQuery 提供下列`INFORMATION_SCHEMA`檢視畫面，顯示工作詳細資料
 
 您可以透過工作成效比較功能，比較基準工作與目標工作，並透過查詢分析功能，找出兩項工作之間差異顯著的詳細資料。這有助於排解兩個查詢工作之間潛在的效能問題。
 
-比較兩個查詢時，請考量工作時間、時段時間和處理的位元組等重要詳細資料，以最佳化查詢。
+比較兩個查詢時，請考量工作時間、時段時間和處理的位元組等重要詳細資料，以便最佳化查詢。
 
 ### 事前準備
 
 如要取得處理 BigQuery 工作詳細資料和系統層級詳細資料所需的權限，請要求管理員在機構或專案中授予您下列 IAM 角色：
 
 * 查看工作詳細資料：
-  BigQuery 資源檢視者 (`roles/bigquery.resourceViewer`) - 執行查詢的專案
+  BigQuery 資源檢視器 (`roles/bigquery.resourceViewer`) - 執行查詢的專案
 * 查看系統層級詳細資料：
   BigQuery 資源檢視者 (`roles/bigquery.resourceViewer`) - 管理專案
 
@@ -188,10 +190,10 @@ BigQuery 提供下列`INFORMATION_SCHEMA`檢視畫面，顯示工作詳細資料
 * 如要查看專案層級的資料：
    `bigquery.jobs.listAll`
   專案
-* 如要查看機構層級的資料，請按照下列步驟操作：
+* 如要查看機構層級的資料：
    `bigquery.jobs.listAll`
   在機構上
-* 如要依貴機構的預訂項目篩選：
+* 如要依貴機構的預訂記錄篩選：
    `bigquery.reservations.list`
   在機構上
 
@@ -213,7 +215,7 @@ BigQuery 提供下列`INFORMATION_SCHEMA`檢視畫面，顯示工作詳細資料
 
 「查詢層級分析」窗格會說明兩個工作在查詢層級的差異。其中包含「指標」、「SQL 文字」和「執行圖表」三個分頁。
 
-* 「指標」分頁會說明這兩項工作的查詢指標。使用這個分頁，判斷工作時間、未使用的加速器和其他指標之間是否存在差異。
+* 「指標」分頁會說明這兩項工作的查詢指標。使用這個分頁判斷工作時間、未使用的加速器和其他指標之間是否有差異。
 * 「SQL text」(SQL 文字) 分頁會顯示建立作業的兩項 SQL 陳述式，並醒目顯示兩者之間的差異。使用這個分頁，判斷 SQL 陳述式變更是否影響工作效能。
 * 「執行圖」分頁會比較這兩項作業的[執行圖](https://docs.cloud.google.com/bigquery/docs/query-plan-explanation?hl=zh-tw)。使用這個分頁，判斷工作執行期間是否在任何階段發生差異。
 
@@ -221,9 +223,9 @@ BigQuery 提供下列`INFORMATION_SCHEMA`檢視畫面，顯示工作詳細資料
 
 「系統層級分析」窗格會說明可能影響系統層級這兩項工作的因素。其中包含三個部分：「專案」資料表、「預訂」資料表和「設定」資料表。
 
-「系統層級分析」窗格會根據兩項查詢之間的差異，建議可改善的項目。
+「系統層級分析」窗格會根據兩項查詢的差異，建議可改善的項目。
 
-舉例來說，如果某項工作收到的運算單元比先前的執行作業少，可能是因為系統的資源受限。如果出現這類訊息，請查看專案層級指標，確認專案整體是否分配到較少的時段。如果專案並未獲得較少的運算單元，則可能是專案層級發生爭用，例如工作並行數增加。如果專案收到的運算單元較少，請檢查預訂層級，找出任何限制。
+舉例來說，如果某項工作獲得的運算單元比先前的執行作業少，可能是因為系統的資源受限。如果出現這類訊息，請查看專案層級指標，確認專案整體是否分配到較少的時段。如果專案並未獲得較少的運算單元，則可能是專案層級發生爭用，例如工作並行數增加。如果專案收到的運算單元較少，請檢查預訂層級，找出任何限制。
 
 * 「專案」表格會比較專案層級的這兩項工作。使用這個表格判斷是否能在專案層級進行最佳化。
 * 「預留項目」表格會比較[預留項目](https://docs.cloud.google.com/bigquery/docs/reservations-intro?hl=zh-tw)層級的這兩項工作。使用這份表格找出兩項查詢之間預訂用量的差異，這些差異可能會影響工作效能。
@@ -242,14 +244,14 @@ BigQuery 提供下列`INFORMATION_SCHEMA`檢視畫面，顯示工作詳細資料
 5. 按一下「比較工作」。
 6. 在「Job one (baseline job)」(工作一 (基準工作)) 欄位中，按一下「Browse」(瀏覽)。系統隨即會顯示「類似的同類工作」面板。
 7. 找出要與基準工作比較的工作，然後按一下「比較」。系統會顯示工作效能比較。
-8. 如要只查看兩項作業之間的顯著差異，請開啟「僅顯示顯著差異」切換鈕。
+8. 如要只查看兩項工作之間的顯著差異，請開啟「僅顯示顯著差異」切換鈕。
 
 #### 變更要比較的工作
 
 如要變更比較的工作，請按照下列步驟操作：
 
 1. 前往「工作效能比較」頁面。
-2. 在「Job one (baseline job)」欄位中，按一下「Browse」(瀏覽)。
+2. 在「Job one (baseline job)」(工作一 (基準工作)) 欄位中，按一下「Browse」(瀏覽)。
 3. 在「類似的同類工作」窗格中，找出要比較的工作，然後按一下「比較」。
 
 ## 定價
@@ -270,11 +272,11 @@ BigQuery 提供下列`INFORMATION_SCHEMA`檢視畫面，顯示工作詳細資料
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-02 (世界標準時間)。
+上次更新時間：2026-05-05 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-05 (世界標準時間)。"],[],[]]

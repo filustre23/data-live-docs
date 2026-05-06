@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -1127,7 +1129,5 @@ for row in rows:
 
 // Import the Google Cloud client library
 const {BigQuery} = require('@google-cloud/bigquery');
-const bigquery = new BigQuery({
-  // default behavior is to create jobs when using the jobs.query API
-  defaultJobCreationMode:
+const bigquery = new
 ```

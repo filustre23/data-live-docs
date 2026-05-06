@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -30,7 +32,7 @@
 將資料從 Cloud Storage 值區載入 BigQuery 時有下列限制：
 
 * BigQuery 不保證外部資料來源的資料一致性。如果基礎資料在查詢執行期間遭到變更，可能會導致非預期的行為。
-* BigQuery 不支援 [Cloud Storage 物件版本控管](https://docs.cloud.google.com/storage/docs/object-versioning?hl=zh-tw)。如果 Cloud Storage URI 中包含產生編號，載入作業就會失敗。
+* BigQuery 不支援 [Cloud Storage 物件版本控管](https://docs.cloud.google.com/storage/docs/object-versioning?hl=zh-tw)。如果 Cloud Storage URI 中包含版本編號，載入作業就會失敗。
 
 ## 事前準備
 
@@ -123,8 +125,7 @@ BigQuery 支援下列 ORC 檔案內容的壓縮轉碼器：
 * `LZ4`
 * `ZSTD`
 
-上傳至 BigQuery 後，ORC 檔案中的資料不會保持壓縮狀態。系統會根據[資料集儲存空間計費模式](https://docs.cloud.google.com/bigquery/docs/datasets-intro?hl=zh-tw#dataset_storage_billing_models)，以邏輯位元組或實際位元組回報資料儲存空間。
-如要取得儲存空間用量資訊，請查詢 [`INFORMATION_SCHEMA.TABLE_STORAGE` 檢視區塊](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage?hl=zh-tw)。
+上傳至 BigQuery 後，ORC 檔案中的資料不會保持壓縮狀態。系統會根據[資料集儲存空間計費模式](https://docs.cloud.google.com/bigquery/docs/datasets-intro?hl=zh-tw#dataset_storage_billing_models)，以邏輯位元組或實際位元組回報資料儲存空間。如要取得儲存空間用量資訊，請查詢 [`INFORMATION_SCHEMA.TABLE_STORAGE` 檢視區塊](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage?hl=zh-tw)。
 
 ## 將 ORC 資料載入至新的資料表
 
@@ -161,10 +162,10 @@ BigQuery 支援下列 ORC 檔案內容的壓縮轉碼器：
 5. 按一下「進階選項」，然後執行下列操作：
    * 讓「Write preference」(寫入偏好設定) 的 [Write if empty] (空白時寫入) 選項維持在已選取狀態。這個選項能建立新的資料表，並將您的資料載入其中。
    * 如要忽略不在資料表結構定義中的資料列值，請選取「Unknown values」(不明的值)。
-   * 針對「Encryption」(加密)，請按一下「Customer-managed key」(客戶管理的金鑰)，以使用 [Cloud Key Management Service 金鑰](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw)。如果您保留 **Google-managed key** 設定，BigQuery 會[加密靜態資料](https://docs.cloud.google.com/docs/security/encryption/default-encryption?hl=zh-tw)。
+   * 針對 **Encryption**，請按一下 **Customer-managed key**，以使用 [Cloud Key Management Service key](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw)。如果您保留 **Google-managed key** 設定，BigQuery 會[加密靜態資料](https://docs.cloud.google.com/docs/security/encryption/default-encryption?hl=zh-tw)。
 6. 點選「建立資料表」。
 
-**注意：** 使用Google Cloud console 將資料載入空白資料表時，您無法新增標籤、說明、資料表到期時間或分區到期時間。  
+**注意：** 使用Google Cloud 控制台 將資料載入空白資料表時，您無法新增標籤、說明、資料表到期時間或分區到期時間。  
   
 資料表建立完成之後，您就能更新資料表的到期時間、說明和標籤，但您無法在使用 Google Cloud 控制台建立資料表之後，新增分區到期時間。詳情請參閱[管理資料表](https://docs.cloud.google.com/bigquery/docs/managing-tables?hl=zh-tw)。
 
@@ -200,7 +201,7 @@ BigQuery 支援下列 ORC 檔案內容的壓縮轉碼器：
 * `--time_partitioning_expiration`：這是一個整數，用來指定系統應在何時刪除時間分區 (以秒為單位)。到期時間為分區的世界標準時間日期加上整數值。
 * `--time_partitioning_field`：用於建立分區資料表的 `DATE` 或 `TIMESTAMP` 資料欄。如果啟用時間分區時沒有這個值，系統就會建立擷取時間分區資料表。
 * `--require_partition_filter`：這個選項啟用後，系統會要求使用者加入 `WHERE` 子句，以指定要查詢的分區。使用分區篩選器可以降低成本並提升效能。詳情請參閱[在查詢中要求使用分區篩選器](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables?hl=zh-tw)。
-* `--clustering_fields`：以半形逗號分隔的資料欄名稱清單 (最多四個名稱)，可用來建立[叢集資料表](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables?hl=zh-tw)。
+* `--clustering_fields`：以半形逗號分隔的資料欄名稱清單 (最多四個名稱)，可用來建立[分群資料表](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables?hl=zh-tw)。
 * `--destination_kms_key`：用來加密資料表資料的 Cloud KMS 金鑰。
 
   如要進一步瞭解分區資料表，請參閱：
@@ -614,7 +615,7 @@ end
 
 將額外資料載入資料表時，可以選擇下列選項：
 
-| 主控台選項 | bq 工具標記 | BigQuery API 屬性 | 說明 |
+| 主控台選項 | bq 工具旗標 | BigQuery API 屬性 | 說明 |
 | --- | --- | --- | --- |
 | 空白時寫入 | 不支援 | `WRITE_EMPTY` | 資料表空白時才會寫入資料。 |
 | 附加到資料表中 | `--noreplace` 或 `--replace=false`；如果未指定 `--[no]replace`，則預設動作為附加 | `WRITE_APPEND` | ([預設](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#JobConfigurationLoad.FIELDS.write_disposition)) 將資料附加至資料表尾端。 |
@@ -654,11 +655,11 @@ end
    2. 在「Table」(資料表) 欄位中，輸入要建立的資料表名稱。
    3. 確認「資料表類型」欄位已設為「原生資料表」。
 3. 在「Schema」(結構定義) 區段中，無需採取任何行動。結構定義自述於 ORC 檔案中。
-**注意：**您可以在附加或覆寫資料表時修改資料表的結構定義。如要進一步瞭解載入作業期間支援的結構定義變更，請參閱[修改資料表結構定義](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas?hl=zh-tw)。4. 選用：指定「分區與叢集設定」。詳情請參閱「[建立分區資料表](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables?hl=zh-tw)」和「[建立及使用叢集資料表](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables?hl=zh-tw)」。您無法藉由附加或覆寫的方式，將資料表轉換為分區資料表或叢集資料表。 Google Cloud 控制台不支援在載入工作中，對分區或叢集資料表執行附加或覆寫作業。
+**注意：**您可以在附加或覆寫資料表時修改資料表的結構定義。如要進一步瞭解載入作業期間支援的結構定義變更，請參閱[修改資料表結構定義](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas?hl=zh-tw)。4. 選用：指定「分區與叢集設定」。詳情請參閱「[建立分區資料表](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables?hl=zh-tw)」和「[建立及使用叢集資料表](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables?hl=zh-tw)」。您無法藉由附加或覆寫的方式，將資料表轉換為分區資料表或分群資料表。 Google Cloud 控制台不支援在載入工作中附加資料到分區或叢集資料表，也不支援覆寫分區或叢集資料表。
 5. 按一下「進階選項」，然後執行下列操作：
    * 針對「Write preference」(寫入偏好設定)，請選擇「Append to table」(附加到資料表中) 或「Overwrite table」(覆寫資料表)。
    * 如要忽略不在資料表結構定義中的資料列值，請選取「Unknown values」(不明的值)。
-   * 針對「Encryption」(加密)，請按一下「Customer-managed key」(客戶管理的金鑰)，以使用 [Cloud Key Management Service 金鑰](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw)。如果您保留 **Google-managed key** 設定，BigQuery 會[加密靜態資料](https://docs.cloud.google.com/docs/security/encryption/default-encryption?hl=zh-tw)。
+   * 針對 **Encryption**，請按一下 **Customer-managed key**，以使用 [Cloud Key Management Service key](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw)。如果您保留 **Google-managed key** 設定，BigQuery 會[加密靜態資料](https://docs.cloud.google.com/docs/security/encryption/default-encryption?hl=zh-tw)。
 6. 點選「建立資料表」。
 
 ### SQL
@@ -1009,8 +1010,5 @@ if (isset($job->info()['status']['errorResult'])) {
 ```
 import io
 
-from google.cloud import bigquery
-
-# Construct a BigQuery client object.
-client =
+from google.cloud import
 ```

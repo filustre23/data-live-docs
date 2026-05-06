@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -1304,5 +1306,4 @@ func printTableInfo(w io.Writer, projectID, datasetID, tableID string) error {
 	// datasetID := "mydataset"
 	// tableID := "mytable"
 	ctx := context.Background()
-	client, err := bigquery.NewClient(ctx, projectID)
 ```

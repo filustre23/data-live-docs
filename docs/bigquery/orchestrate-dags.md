@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -14,7 +16,7 @@
 
 # 排定 Airflow DAG
 
-本文說明如何透過 BigQuery 的「排程」頁面，從 [Managed Airflow 3](https://docs.cloud.google.com/composer/docs/composer-3/composer-overview?hl=zh-tw) 排程 [Airflow 有向無環圖 (DAG)](https://docs.cloud.google.com/composer/docs/composer-3/composer-overview?hl=zh-tw#about-airflow)，包括如何手動觸發 DAG，以及如何查看過去 DAG 執行的記錄和記錄檔。
+本文說明如何透過 BigQuery 的「Scheduling」(排程) 頁面，從 [Managed Airflow 3](https://docs.cloud.google.com/composer/docs/composer-3/composer-overview?hl=zh-tw) 排定 [Airflow 有向無環圖 (DAG)](https://docs.cloud.google.com/composer/docs/composer-3/composer-overview?hl=zh-tw#about-airflow) 的執行時間，包括如何手動觸發 DAG，以及如何查看過去 DAG 執行的記錄和記錄檔。
 
 ## 關於在 BigQuery 中管理 Airflow DAG
 
@@ -51,7 +53,7 @@ BigQuery 的「排程」頁面提供相關工具，可排定在 Managed Airflow 
 
 * 如要查看 Airflow DAG 及其詳細資料：
   [環境和 Storage 物件檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/composer?hl=zh-tw#composer.environmentAndStorageObjectViewer)  (`roles/composer.environmentAndStorageObjectViewer`)
-* 如要觸發及暫停 Airflow DAG，請執行下列操作：
+* 如要觸發及暫停 Airflow DAG：
   「環境與 Storage 物件使用者」 (`roles/composer.environmentAndStorageObjectUser`)
 
 如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
@@ -64,7 +66,7 @@ BigQuery 的「排程」頁面提供相關工具，可排定在 Managed Airflow 
 
 * 如要查看 Airflow DAG 及其詳細資料：
    `composers.dags.list, composer.environments.list`
-* 如要觸發及暫停 Airflow DAG：
+* 如要觸發及暫停 Airflow DAG，請按照下列步驟操作：
    `composers.dags.list, composer.environments.list, composer.dags.execute`
 
 您或許還可透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)取得這些權限。
@@ -142,11 +144,11 @@ BigQuery 的「排程」頁面提供相關工具，可排定在 Managed Airflow 
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-02 (世界標準時間)。
+上次更新時間：2026-05-05 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-05 (世界標準時間)。"],[],[]]

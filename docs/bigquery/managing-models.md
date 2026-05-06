@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -18,9 +20,9 @@
 
 ## 必要的角色
 
-如要取得讀取及建立 BigQuery 模型所需的權限，請要求管理員授予您專案的「BigQuery 資料編輯者」 (`roles/bigquery.dataEditor`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和機構的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得讀取及建立 BigQuery 模型所需的權限，請要求管理員授予您專案的「BigQuery 資料編輯者」 (`roles/bigquery.dataEditor`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
-這個預先定義的角色具備讀取及建立 BigQuery 模型所需的權限。如要查看確切的必要權限，請展開「必要權限」部分：
+這個預先定義的角色具備讀取及建立 BigQuery 模型所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
 #### 所需權限
 
@@ -51,9 +53,9 @@
 
 * 複製模型時，目的地模型的名稱必須遵循與您[建立模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create?hl=zh-tw#model_name)時相同的命名慣例。
 * 模型複製會取決於 BigQuery 針對複製工作的[限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#copy_jobs)。
-* Google Cloud 主控台不支援複製模型。
+* Google Cloud 控制台不支援複製模型。
 * 不支援使用單一指令複製多個來源模型。
-* 使用 CLI 複製模型時，不支援 `--destination_kms_key` 標記。
+* 使用 CLI 複製模型時，不支援 `--destination_kms_key` 旗標。
 
 ### 複製模型
 
@@ -78,7 +80,7 @@ Google Cloud 控制台不支援複製模型。
 
   如未指定 `-n`，預設行為就會是提示您選擇是否要取代目的地模型。
 
-**注意：** 複製模型時，系統不支援 `--destination_kms_key` 標記。
+**注意：** 複製模型時，系統不支援 `--destination_kms_key` 旗標。
 
 如果來源或目的地資料集位於非預設專案中，請採用下列格式將專案 ID 新增至該資料集名稱：`PROJECT_ID:DATASET`。
 
@@ -90,9 +92,8 @@ bq --location=LOCATION cp -f -n PROJECT_ID:DATASET.SOURCE_MODEL PROJECT_ID:DATAS
 
 更改下列內容：
 
-* LOCATION：
-  您位置的名稱。`--location` 是選用旗標。舉例來說，如果您在東京地區使用 BigQuery，就可以將旗標的值設為 `asia-northeast1`。您可以使用 [.bigqueryrc 檔案](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool?hl=zh-tw#setting_default_values_for_command-line_flags)，設定該位置的預設值。如需完整的位置清單，請參閱 [BigQuery 位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
-* PROJECT\_ID：您的專案 ID。
+* LOCATION：位置名稱。`--location` 是選用旗標。舉例來說，如果您在東京地區使用 BigQuery，就可以將旗標的值設為 `asia-northeast1`。您可以使用 [.bigqueryrc 檔案](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool?hl=zh-tw#setting_default_values_for_command-line_flags)，設定該位置的預設值。如需完整的位置清單，請參閱 [BigQuery 位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
+* PROJECT\_ID：專案 ID。
 * DATASET：來源或目的地資料集的名稱。
 * SOURCE\_MODEL：您要複製的模型。
 * DESTINATION\_MODEL：目的地資料集中的模型名稱。
@@ -106,13 +107,13 @@ bq --location=LOCATION cp -f -n PROJECT_ID:DATASET.SOURCE_MODEL PROJECT_ID:DATAS
 bq --location=US cp mydataset.mymodel mydataset2.mymodel
 ```
 
-輸入下列指令來複製 `mydataset.mymodel`，並覆寫有相同名稱的目的地模型。來源資料集位於預設專案中。目的地資料集位於 `myotherproject` 中。`-f` 快速鍵可用來在無提示的情況下覆寫目的地模型。`mydataset` 和 `myotherdataset` 是在 `US` 多地區位置建立的。
+輸入下列指令來複製 `mydataset.mymodel`，並覆寫有相同名稱的目的地模型。來源資料集位於預設專案中。目的地資料集位於 `myotherproject` 中。`-f` 快速鍵可用來在無提示的情況下覆寫目的地模型。`mydataset` 和 `myotherdataset` 是在 `US` 多區域位置建立的。
 
 ```
 bq --location=US cp -f mydataset.mymodel myotherproject:myotherdataset.mymodel
 ```
 
-輸入下列指令來複製 `mydataset.mymodel`，並在目的地資料集有相同名稱的模型時傳回錯誤。來源資料集位於預設專案中。目的地資料集位於 `myotherproject` 中。您可使用 `-n` 快速鍵來避免使用相同名稱覆寫模型。兩個資料集都建立於 `US` 多地區位置。
+輸入下列指令來複製 `mydataset.mymodel`，並在目的地資料集有相同名稱的模型時傳回錯誤。來源資料集位於預設專案中。目的地資料集位於 `myotherproject` 中。您可使用 `-n` 快速鍵來避免使用相同名稱覆寫模型。兩個資料集都建立於 `US` 多區域位置。
 
 ```
 bq --location=US cp -n mydataset.mymodel myotherproject:myotherdataset.mymodel
@@ -151,7 +152,8 @@ bq --location=asia-northeast1 cp mydataset.mymodel mydataset2.mymodel2
 
 * `sourceTable`：提供所要複製模型的相關資訊。
 * `destinationTable`：提供新模型的相關資訊。
-* `createDisposition`：指定當模型不存在時是否要建立模型。
+* `createDisposition`：
+  指定當模型不存在時是否要建立模型。
 * `writeDisposition`：
   指定是否要覆寫現有的模型。
 
@@ -177,11 +179,11 @@ bq --location=asia-northeast1 cp mydataset.mymodel mydataset2.mymodel2
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-02 (世界標準時間)。
+上次更新時間：2026-05-05 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-05 (世界標準時間)。"],[],[]]

@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -14,11 +16,11 @@
 
 # TABLE\_STORAGE 檢視畫面
 
-`INFORMATION_SCHEMA.TABLE_STORAGE` 檢視畫面會顯示資料表和具體化檢視畫面的目前儲存空間用量快照。查詢 `INFORMATION_SCHEMA.TABLE_STORAGE` 檢視表時，查詢結果會針對目前專案中的每個資料表或具體化檢視表，各列出一個相對應的資料列。
+`INFORMATION_SCHEMA.TABLE_STORAGE` 檢視畫面會顯示資料表和具體化檢視表的目前儲存空間用量快照。查詢 `INFORMATION_SCHEMA.TABLE_STORAGE` 檢視表時，查詢結果會針對目前專案的每個資料表或具體化檢視表，分別列出一個相對應的資料列。
 
 `INFORMATION_SCHEMA.TABLE_STORAGE` 檢視畫面中的資料不會即時更新，通常會延遲幾秒到幾分鐘。如果儲存空間變更僅是因為分區或資料表到期，
 或是因為修改資料集時間旅行視窗，則可能需要最多一天，才會反映在 `INFORMATION_SCHEMA.TABLE_STORAGE` 檢視畫面中。
-如果資料集包含超過 1,000 個資料表，且您刪除了該資料集，則只有在刪除資料集的[時空旅行視窗](https://docs.cloud.google.com/bigquery/docs/time-travel?hl=zh-tw#time_travel)結束後，這個檢視畫面才會反映變更。
+如果資料集包含超過 1,000 個資料表，且您刪除了該資料集，則只有在已刪除資料集的[時空旅行視窗](https://docs.cloud.google.com/bigquery/docs/time-travel?hl=zh-tw#time_travel)過期後，這個檢視畫面才會反映變更。
 
 透過表格儲存空間檢視畫面，您可以輕鬆觀察目前的儲存空間使用量，並詳細瞭解儲存空間是使用邏輯未壓縮位元組、實體壓縮位元組還是時空旅行位元組。這項資訊可協助您規劃未來的成長，並瞭解表格的更新模式。
 
@@ -32,7 +34,7 @@
 
 系統不會向您收取[查詢結果快取](https://docs.cloud.google.com/bigquery/docs/writing-results?hl=zh-tw#temporary_and_permanent_tables)中儲存的資料費用，因此不會將這類資料納入 `*_BYTES` 欄值。
 
-複製和快照會顯示 `*_BYTES` 資料欄值，就像是完整的資料表，而不是顯示與基本資料表所用儲存空間的差異，因此會高估。帳單會正確計算儲存空間用量差異。如要進一步瞭解複製和快照儲存及計費的差異位元組，請參閱[`TABLE_STORAGE_USAGE_TIMELINE`
+複製和快照會顯示 `*_BYTES` 資料欄值，就像是完整的資料表，而不是顯示與基本資料表所用儲存空間使用量的差異，因此會高估。帳單會正確計算儲存空間用量差異。如要進一步瞭解複製和快照儲存及計費的差異位元組，請參閱[`TABLE_STORAGE_USAGE_TIMELINE`
 檢視畫面](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage-usage?hl=zh-tw)。
 
 ## 預測儲存空間帳單
@@ -61,11 +63,11 @@
 
 ## 瞭解位元組值與計費單位的差異
 
-`*_BYTES` 檢視畫面中的 `INFORMATION_SCHEMA.TABLE_STORAGE` 資料欄會以位元組為單位，顯示目前的儲存空間用量快照。這項指標會顯示您當時儲存的資料量。
+`*_BYTES` 檢視畫面中的 `INFORMATION_SCHEMA.TABLE_STORAGE` 資料欄會以位元組為單位，顯示目前的儲存空間用量快照。這項指標會顯示您當下儲存的資料量。
 
 不過，如 Cloud Billing 報表所示，BigQuery 儲存空間的帳單費用並非僅以這個即時大小為準。而是根據一段時間內儲存的資料量計算。標準計費單位為 GiB 月或 TiB 月。
 
-舉例來說，無論當月有 28 到 31 天，只要儲存 1 GiB 滿一個月，用量就是 1 GiB-month。同樣地，如果只儲存部分月份的資料，費用也會按比例計算。在 31 天的月份中，儲存 31 GiB 一天約為 1 GiB-month；在 28 天的月份中，儲存 28 GiB 一天也約為 1 GiB-month。
+舉例來說，無論當月有 28 到 31 天，只要儲存 1 GiB 的資料滿一個完整的日曆月，用量就是 1 GiB-month。同樣地，如果資料只儲存部分月份，費用也會按比例計算。在 31 天的月份中，儲存 31 GiB 一天約為 1 GiB-month；在 28 天的月份中，儲存 28 GiB 一天也約為 1 GiB-month。
 
 雖然 `INFORMATION_SCHEMA.TABLE_STORAGE` 中的位元組值是估算潛在費用的重要輸入內容，但實際帳單會反映 `(bytes stored * duration stored)` 的持續計算結果。這個檢視畫面中的值不會直接與帳單報表中的委刊項相符，因為帳單報表中的值是帳單週期的匯總資料。
 
@@ -111,9 +113,9 @@
 | `storage_last_modified_time` | `TIMESTAMP` | 資料最近一次寫入資料表的時間。如果沒有任何資料，則傳回 `NULL`。 |
 | `deleted` | `BOOLEAN` | 指出資料表是否已刪除。 |
 | `table_type` | `STRING` | 資料表類型。例如 `BASE TABLE`。 |
-| `managed_table_type` | `STRING` | 這一欄目前為預先發布版。資料表的受管理類型。例如 `NATIVE` 或 `BIGLAKE`。 |
+| `managed_table_type` | `STRING` | 這一欄目前為預先發布版。資料表的代管類型。例如 `NATIVE` 或 `BIGLAKE`。 |
 | `fail_safe_physical_bytes` | `INT64` | 安全儲存空間 (已刪除或變更的資料) 使用的實體 (壓縮) 位元組數。 |
-| `last_metadata_index_refresh_time` | `TIMESTAMP` | 資料表上次重新整理中繼資料索引的時間。 |
+| `last_metadata_index_refresh_time` | `TIMESTAMP` | 資料表的上次中繼資料索引重新整理時間。 |
 | `table_deletion_reason` | `STRING` | 如果 `deleted` 欄位為 true，則為資料表刪除原因。可能的值如下：  * 資料表在設定的到期時間後遭到刪除`TABLE_EXPIRATION:` * 使用者已刪除資料集`DATASET_DELETION:` * 使用者已刪除 `USER_DELETED:` 個表格 |
 | `table_deletion_time` | `TIMESTAMP` | 資料表的刪除時間。 |
 
@@ -131,7 +133,7 @@
 
 * 選用：`PROJECT_ID`：專案 ID。 Google Cloud 如未指定，系統會使用預設專案。
 * `REGION`：任何[資料集區域名稱](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
-  例如：`` `region-us` ``。**注意：**您必須使用[區域限定詞](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw#region_qualifier)查詢 `INFORMATION_SCHEMA` 檢視畫面。查詢執行位置必須與`INFORMATION_SCHEMA`檢視區塊的區域相符。
+  例如：`` `region-us` ``。**注意：**您必須使用[區域限定詞](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw#region_qualifier)查詢 `INFORMATION_SCHEMA` 檢視畫面。查詢執行位置必須與 `INFORMATION_SCHEMA` 檢視區塊的區域相符。
 
 以下範例說明如何傳回指定專案和區域中資料表的儲存空間資訊：
 
@@ -304,11 +306,9 @@ become available.
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-02 (世界標準時間)。
+上次更新時間：2026-05-05 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
-
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-02 (世界標準時間)。"],[],[]]

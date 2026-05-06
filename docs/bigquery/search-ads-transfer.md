@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -480,5 +482,5 @@ ORDER BY
 下列查詢會使用 ID 對應表，在新 ID 空間中，彙整舊版和新版 Search Ads 360 資料轉移的各個廣告活動指標。
 
 ```
-SELECT CustomerID, CampaignID, Sum(Clicks), Sum(Cost)
+SELECT
 ```

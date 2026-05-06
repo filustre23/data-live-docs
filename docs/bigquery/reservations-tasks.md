@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -24,7 +26,7 @@
 
 如要建立預留項目，您必須具備下列身分與存取權管理 (IAM) 權限：
 
-* `bigquery.reservations.create` [管理專案](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#admin-project)，該專案會保留承諾使用合約的擁有權。
+* `bigquery.reservations.create`，[管理專案](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#admin-project)會維護承諾使用合約的擁有權。
 
 下列預先定義的 IAM 角色都具備這項權限：
 
@@ -86,7 +88,7 @@
      名稱只能包含小寫英數字元或連字號，開頭必須是字母，而且結尾不得為連字號，長度上限為 64 個字元。
    * `NUMBER_OF_BASELINE_SLOTS`：要分配給預訂的基準時段數量。您無法在同一個預訂中設定 `slot_capacity` 選項和 `standard` 版本選項。
    * `EDITION`：預訂的方案。將預留項目指派給版本時，功能和價格會有所變更。詳情請參閱 [BigQuery 版本簡介](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)。
-   * `NUMBER_OF_AUTOSCALING_SLOTS`：指派給預訂的自動調度資源運算單元數量。這等於預留項目大小上限減去基準運算單元數量。
+   * `NUMBER_OF_AUTOSCALING_SLOTS`：指派給預留項目的自動調度資源運算單元數量。這等於預留項目大小上限減去基準運算單元數量。
 3. 按一下「執行」play\_circle。
 
 如要進一步瞭解如何執行查詢，請參閱「[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)」。
@@ -116,11 +118,11 @@ bq mk \
 * `NUMBER_OF_BASELINE_SLOTS`：要分配給預留項目的基準運算單元數量
 * `RESERVATION_NAME`：預訂名稱。名稱只能包含小寫英數字元或連字號，開頭必須是字母，而且結尾不得為連字號，長度上限為 64 個字元。
 * `EDITION`：預訂的方案。將預留項目指派給版本時，功能和價格會有所變更。詳情請參閱 [BigQuery 版本簡介](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)。
-* `NUMBER_OF_AUTOSCALING_SLOTS`：指派給預訂的自動調度資源運算單元數量。這等於預留項目大小上限減去基準運算單元數量。無法使用 `--max_slots` 或 `--scaling_mode` 旗標設定這項功能。
+* `NUMBER_OF_AUTOSCALING_SLOTS`：指派給預留項目的自動調度資源運算單元數量。這等於預留項目大小上限減去基準運算單元數量。無法使用 `--max_slots` 或 `--scaling_mode` 旗標設定這項功能。
 * `MAXIMUM_NUMBER_OF_SLOTS`：預留項目可使用的運算單元數量上限。這個值必須使用 `--scaling_mode` 標記設定 ([預先發布版](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages))。
 * `SCALING_MODE`：預訂的資源調度模式。選項包括 `ALL_SLOTS`、`IDLE_SLOTS_ONLY` 或 `AUTOSCALE_ONLY`。這個值必須使用 `--scaling_mode` 標記設定 ([預先發布版](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages))。
 
-如要瞭解 `--ignore_idle_slots` 旗標，請參閱「[閒置運算單元](https://docs.cloud.google.com/bigquery/docs/slots?hl=zh-tw#idle_slots)」。預設值為 `false`。
+如要瞭解 `--ignore_idle_slots` 標記，請參閱「[閒置運算單元](https://docs.cloud.google.com/bigquery/docs/slots?hl=zh-tw#idle_slots)」。預設值為 `false`。
 
 ### Terraform
 
@@ -153,7 +155,7 @@ resource "google_bigquery_reservation" "default" {
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
 2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
 
-   每項專案只需要執行一次這個指令，且可以在任何目錄中執行。
+   您只需要為每項專案執行一次這個指令，且可以在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
@@ -191,7 +193,7 @@ resource "google_bigquery_reservation" "default" {
 
 ## 套用變更
 
-1. 檢查設定，確認 Terraform 即將建立或更新的資源符合您的預期：
+1. 查看設定，確認 Terraform 即將建立或更新的資源符合您的預期：
 
    ```
    terraform plan
@@ -336,7 +338,7 @@ bq mk \
 * `MAXIMUM_NUMBER_OF_SLOTS`：預留項目可使用的運算單元數量上限。這個值必須使用 `--scaling_mode` 標記設定。
 * `SCALING_MODE`：預訂的資源調度模式。選項包括 `ALL_SLOTS`、`IDLE_SLOTS_ONLY` 或 `AUTOSCALE_ONLY`。這個值必須使用 `max_slots` 標記設定。這個值必須與 `ignore_idle_slots` 旗標一致。詳情請參閱「[預留項目預測](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#predictable)」。
 
-如要瞭解 `--ignore_idle_slots` 旗標，請參閱「[閒置運算單元](https://docs.cloud.google.com/bigquery/docs/slots?hl=zh-tw#idle_slots)」。預設值為 `false`。
+如要瞭解 `--ignore_idle_slots` 標記，請參閱「[閒置運算單元](https://docs.cloud.google.com/bigquery/docs/slots?hl=zh-tw#idle_slots)」。預設值為 `false`。
 
 ### SQL
 
@@ -403,7 +405,7 @@ resource "google_bigquery_reservation" "default" {
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
 2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
 
-   每項專案只需要執行一次這個指令，且可以在任何目錄中執行。
+   您只需要為每項專案執行一次這個指令，且可以在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
@@ -441,7 +443,7 @@ resource "google_bigquery_reservation" "default" {
 
 ## 套用變更
 
-1. 檢查設定，確認 Terraform 即將建立或更新的資源符合您的預期：
+1. 查看設定，確認 Terraform 即將建立或更新的資源符合您的預期：
 
    ```
    terraform plan
@@ -476,7 +478,7 @@ resource "google_bigquery_reservation" "default" {
 
 如要更新預留項目，您需要下列 Identity and Access Management (IAM) 權限：
 
-* `bigquery.reservations.update` [管理專案](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#admin-project)，該專案會保留承諾使用合約的擁有權。
+* `bigquery.reservations.update`，[管理專案](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#admin-project)會維護承諾使用合約的擁有權。
 
 下列預先定義的 IAM 角色都具備這項權限：
 
@@ -529,7 +531,7 @@ resource "google_bigquery_reservation" "default" {
    * `LOCATION`：保留項目的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)，例如 `europe-west9`。
    * `RESERVATION_NAME`：預訂名稱。名稱只能包含小寫英數字元或連字號，開頭必須是字母，而且結尾不得為連字號，長度上限為 64 個字元。
    * `NUMBER_OF_BASELINE_SLOTS`：要分配給預訂的基準時段數量。
-   * `NUMBER_OF_AUTOSCALING_SLOTS`：指派給預訂的自動調度資源運算單元數量。這等於預留項目大小上限減去基準運算單元數量。
+   * `NUMBER_OF_AUTOSCALING_SLOTS`：指派給預留項目的自動調度資源運算單元數量。這等於預留項目大小上限減去基準運算單元數量。
 3. 按一下「執行」play\_circle。
 
 如要進一步瞭解如何執行查詢，請參閱「[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)」。
@@ -553,7 +555,7 @@ bq update \
 * `LOCATION`：預訂的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)
 * `NUMBER_OF_BASELINE_SLOTS`：要分配給預留項目的基準運算單元數量
 * `RESERVATION_NAME`：預訂名稱。名稱只能包含小寫英數字元或連字號，開頭必須是字母，而且結尾不得為連字號，長度上限為 64 個字元。
-* `NUMBER_OF_AUTOSCALING_SLOTS`：指派給預訂的自動調度資源運算單元數量。這等於預留項目大小上限減去基準運算單元數量。
+* `NUMBER_OF_AUTOSCALING_SLOTS`：指派給預留項目的自動調度資源運算單元數量。這等於預留項目大小上限減去基準運算單元數量。
 
 ### Python
 
@@ -682,7 +684,7 @@ bq ls --reservation \
 
 如要刪除預留項目，您需要下列 Identity and Access Management (IAM) 權限：
 
-* `bigquery.reservations.delete` [管理專案](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#admin-project)，該專案會保留承諾使用合約的擁有權。
+* `bigquery.reservations.delete`，[管理專案](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#admin-project)會維護承諾使用合約的擁有權。
 
 下列預先定義的 IAM 角色都具備這項權限：
 
@@ -791,7 +793,7 @@ print(f"Deleted reservation: {reservation_name}")
 
 ### 所需權限
 
-如要取得為工作指定特定預留項目所需的權限，請要求系統管理員授予預留項目資源的[資源編輯者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.resourceEditor)  (`roles/bigquery.resourceEditor`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得為工作指定特定預留項目所需的權限，請要求系統管理員授予預留資源的[資源編輯者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.resourceEditor)  (`roles/bigquery.resourceEditor`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
 這個預先定義的角色具備  `reservations.use` 權限，可為工作指定特定預留空間。
 
@@ -924,7 +926,7 @@ bq mk \
 更改下列內容：
 
 * `ADMIN_PROJECT_ID`：專案 ID
-* `LOCATION`：預訂的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
+* `LOCATION`：預訂的[地點](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
 * `RESERVATION_GROUP_NAME`：預訂群組的名稱。名稱只能包含小寫英數字元或連字號，開頭必須是字母，而且結尾不得為連字號，長度上限為 64 個字元。
 
 ### Terraform
@@ -951,7 +953,7 @@ resource "google_bigquery_reservation_group" "default" {
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
 2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
 
-   每項專案只需要執行一次這個指令，且可以在任何目錄中執行。
+   您只需要為每項專案執行一次這個指令，且可以在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
@@ -989,7 +991,7 @@ resource "google_bigquery_reservation_group" "default" {
 
 ## 套用變更
 
-1. 檢查設定，確認 Terraform 即將建立或更新的資源符合您的預期：
+1. 查看設定，確認 Terraform 即將建立或更新的資源符合您的預期：
 
    ```
    terraform plan
@@ -1122,7 +1124,7 @@ bq update \
 
 ### 移除空白預留項目群組
 
-只有在預留項目群組不含任何成員預留項目時，才能刪除。刪除最後一個成員預留項目時，系統不會自動刪除預留項目群組。移除所有成員預約後，您必須手動刪除預約群組。
+只有在預留項目群組不含任何成員預留項目時，才能刪除該群組。刪除最後一個成員預留項目時，系統不會自動刪除預留項目群組。移除所有成員預約後，您必須手動刪除預約群組。
 
 ### 控制台
 
@@ -1175,11 +1177,11 @@ bq rm \
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-02 (世界標準時間)。
+上次更新時間：2026-05-05 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-05 (世界標準時間)。"],[],[]]

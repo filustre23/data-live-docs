@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -14,7 +16,7 @@
 
 # 使用 Gemini CLI 分析資料
 
-本頁說明如何使用 [Gemini CLI](https://docs.cloud.google.com/gemini/docs/codeassist/gemini-cli?hl=zh-tw)，透過自然語言提示在終端機中與 BigQuery 資料互動。透過 Gemini CLI 使用專屬的 BigQuery [擴充功能](#about-bigquery-extensions)，即可直接在指令列中進行 AI 輔助的資料分析並取得洞察資訊。您可以分析 BigQuery 資料表中的資料，或是 BigQuery 公開資料集中的資料表。
+本頁說明如何使用 [Gemini CLI](https://docs.cloud.google.com/gemini/docs/codeassist/gemini-cli?hl=zh-tw)，透過自然語言提示在終端機中與 BigQuery 資料互動。透過 Gemini CLI 使用專屬的 BigQuery [擴充功能](#about-bigquery-extensions)，即可直接在指令列中進行 AI 輔助的資料分析並取得洞察資料。您可以分析 BigQuery 資料表中的資料，或是 BigQuery 公開資料集中的資料表。
 
 這些第一方擴充功能提供一些常見的資料分析和洞察工具。如要建構自己的工具，請參閱[搭配使用 BigQuery 與 MCP、Gemini CLI 和其他代理程式](https://docs.cloud.google.com/bigquery/docs/pre-built-tools-with-mcp-toolbox?hl=zh-tw)。
 
@@ -33,7 +35,7 @@ Gemini CLI 是 Google 的開放原始碼對話式 AI 代理，可加速開發工
 BigQuery 提供下列擴充功能，可透過 Gemini CLI 處理 BigQuery 資料：
 
 BigQuery 資料分析擴充功能
-:   使用這項擴充功能探索資料、進一步瞭解 BigQuery 資料表和資料集，以及以自然語言詢問有關資料集的問題。您也可以使用內建的進階工具產生預測或執行貢獻度分析。這項擴充功能的工具可協助 Gemini CLI 根據自然語言問題編寫 SQL 查詢，然後執行查詢來提供問題的答案。
+:   使用這項擴充功能探索資料、進一步瞭解 BigQuery 資料表和資料集，以及以自然語言詢問有關資料集的問題。您也可以使用內建的進階工具產生預測或執行貢獻度分析。這個擴充功能的工具可協助 Gemini CLI 根據自然語言問題編寫 SQL 查詢，然後執行查詢來提供問題的答案。
 
 BigQuery 對話式數據分析擴充功能
 :   使用這個擴充功能，透過預先代管的伺服器端分析代理程式，從 BigQuery 資料取得進階深入分析。這個擴充功能的工具可協助 Gemini CLI 將自然語言問題傳送至內建的代管代理，並根據資料提供更深入的洞察資訊。
@@ -50,8 +52,8 @@ BigQuery 對話式數據分析擴充功能
 | `list_table_ids` | 列出資料集 bigquery-public-data.pypi 中的所有資料表 |
 | 搜尋 | `search_catalog` | 尋找與 PyPi 下載相關的資料表 |
 | 執行 SQL | `execute_sql` | 使用 bigquery-public-data.pypi.file\_downloads，顯示這個月下載次數前 10 名的 pypi 套件 |
-| 時間序列預測 | `forecast` | 使用 bigquery-public-data.pypi.file\_downloads，預測 urllib3 套件在 2025 年最後四個月的下載次數 |
-| 貢獻分析 | `analyze_contribution` | 分析國家/地區對 bigquery-public-data.google\_analytics\_sample.ga\_sessions\_20170801 表格收益的貢獻 |
+| 時間序列預測 | `forecast` | 使用 bigquery-public-data.pypi.file\_downloads，預測套件 urllib3 在 2025 年最後四個月的下載次數 |
+| 貢獻分析 | `analyze_contribution` | 分析 bigquery-public-data.google\_analytics\_sample.ga\_sessions\_20170801 表格中，各國家/地區對收益的貢獻 |
 
 ### 對話式數據分析工具
 
@@ -70,7 +72,7 @@ BigQuery 對話式數據分析擴充功能
 * 如果是資料分析擴充功能，請啟用下列 API：
 
   + BigQuery
-  + 如何使用 `search_catalog` 工具：Knowledge Catalog
+  + 如要使用 `search_catalog` 工具：Knowledge Catalog
 * 如要使用對話式數據分析擴充功能，請啟用下列 API：
 
   + BigQuery
@@ -184,7 +186,7 @@ BigQuery 對話式數據分析擴充功能
 
 ### 使用 `ask_data_insights` 工具執行更深入的洞察分析
 
-`ask_data_insights` 工具會觸發 BigQuery 對話式數據分析 API 的代理程式，回答您的問題。伺服器端代理程式會收集更多資料背景資訊，並提供更多洞察資料。
+`ask_data_insights` 工具會觸發 BigQuery 對話式數據分析 API 的代理，回答您的問題。伺服器端代理程式會收集更多資料背景資訊，並提供更多洞察資料。
 
 * **提示詞範例**，可取得應著重的管道洞察資料：
 
@@ -253,11 +255,11 @@ BigQuery 對話式數據分析擴充功能
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-02 (世界標準時間)。
+上次更新時間：2026-05-05 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-05 (世界標準時間)。"],[],[]]

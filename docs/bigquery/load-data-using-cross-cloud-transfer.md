@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -20,9 +22,9 @@ BigQuery 管理員或分析師可以將 Amazon Simple Storage Service (Amazon S3
 
 * 使用 [`LOAD DATA` 陳述式](#load-data)，將 Amazon S3 和 Azure Blob 儲存體中檔案的資料移轉至 BigQuery 資料表。
 * 使用 [`CREATE TABLE AS SELECT` 陳述式](#filter-data)，先篩選 Amazon S3 或 Blob 儲存空間中的檔案資料，再將結果移轉至 BigQuery 資料表。如要將資料附加至目的地資料表，請使用 [`INSERT INTO SELECT` 陳述式](#filter-data)。資料操作會套用至參照 [Amazon S3](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-external-table?hl=zh-tw) 或 [Blob 儲存空間](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-external-table?hl=zh-tw)資料的外部資料表。
-* 在 BigQuery 資料集中建立外部 Amazon S3、Apache Iceberg 或 Salesforce Data Cloud 資料的[具體化檢視區塊副本](#materialized_view_replicas)，讓資料可在 BigQuery 本機使用。
+* 在 BigQuery 資料集中建立外部 Amazon S3、Apache Iceberg 或 Salesforce Data Cloud 資料的[具體化檢視](#materialized_view_replicas)副本，讓資料可在 BigQuery 本機使用。
 
-**注意：** 如要定期將大型檔案從 Amazon Simple Storage Service (Amazon S3) bucket 或 Azure Blob 儲存空間移轉至 BigQuery 資料表，請使用 [BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)。如要在將資料移轉至 BigQuery 資料表之前讀取及處理資料，請使用 [`CREATE TABLE AS SELECT` 陳述式](#filter-data)。
+**注意：** 如要定期將大型檔案從 Amazon Simple Storage Service (Amazon S3) 值區或 Azure Blob 儲存空間移轉至 BigQuery 資料表，請使用 [BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)。如要在將資料移轉至 BigQuery 資料表之前讀取及處理資料，請使用 [`CREATE TABLE AS SELECT` 陳述式](#filter-data)。
 
 ## 配額與限制
 
@@ -75,7 +77,7 @@ BigQuery 管理員或分析師可以將 Amazon Simple Storage Service (Amazon S3
 
 ### 限制
 
-* 連線和目的地資料集必須屬於相同專案。不支援載入跨專案的資料。
+* 連線和目的地資料集必須屬於相同專案。系統不支援載入跨專案的資料。
 * `LOAD DATA` 僅在將資料從 Amazon Simple Storage Service (Amazon S3) 或 Azure Blob 儲存體移轉至同區 BigQuery 時支援。詳情請參閱「[位置](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw#locations)」。
   + 您可以將資料從任何 `US` 區域轉移至 `US` 多區域。您也可以從任何`EU`區域轉移至`EU`多區域。
 
@@ -140,7 +142,7 @@ LOAD DATA OVERWRITE mydataset.testparquet
 
 #### 範例 1
 
-假設您有名為 `myawsdataset.orders` 的 BigLake 資料表，參照 [Amazon S3](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-external-table?hl=zh-tw) 中的資料。您想將該資料表中的資料移轉至美國多區域的 BigQuery 資料表 `myotherdataset.shipments`。
+假設您有名為 `myawsdataset.orders` 的 BigLake 資料表，參照 [Amazon S3](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-external-table?hl=zh-tw) 中的資料。您想將該資料表中的資料轉移至美國多區域的 BigQuery 資料表 `myotherdataset.shipments`。
 
 首先，顯示 `myawsdataset.orders` 資料表的相關資訊：
 
@@ -262,11 +264,11 @@ WHERE
  numeric_id > 4000000;
 ```
 
-## 具體化檢視表副本
+## materialized view 副本
 
 實體化檢視區塊副本是外部 Amazon Simple Storage Service (Amazon S3)、Apache Iceberg 或 Salesforce Data Cloud 資料的副本，位於 BigQuery 資料集中，因此資料可在 BigQuery 中本機使用。這有助於避免資料輸出費用，並提升查詢效能。BigQuery 可讓您[在啟用 BigLake 中繼資料快取的資料表上建立具體化檢視表](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw#cache-enabled_tables_with_materialized_views)，並透過 Amazon Simple Storage Service (Amazon S3)、Apache Iceberg 或 Salesforce Data Cloud 資料建立。
 
-實體化檢視區塊副本可讓您在查詢中使用 Amazon S3、Iceberg 或 Data Cloud 實體化檢視區塊資料，同時避免資料輸出成本並提升查詢效能。具體做法是將 Amazon S3、Iceberg 或 Data Cloud 資料複製到[支援的 BigQuery 區域](#supported_regions)的資料集，讓資料可在 BigQuery 本機使用。
+實體化檢視區塊副本可讓您在查詢中使用 Amazon S3、Iceberg 或 Data Cloud 實體化檢視區塊資料，同時避免資料輸出成本並提升查詢效能。具體化檢視副本會將 Amazon S3、Iceberg 或 Data Cloud 資料複製到[支援的 BigQuery 區域](#supported_regions)的資料集，讓資料可在 BigQuery 中本機使用。
 
 ### 事前準備
 
@@ -354,7 +356,7 @@ WHERE
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
 
-   如果沒有看到左側窗格，請按一下「展開左側窗格」圖示 last\_page 開啟窗格。
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Explorer」窗格中，前往要建立具體化檢視副本的專案和資料集，然後依序點選 more\_vert「動作」>「建立資料表」。
 4. 在「Create table」(建立資料表) 對話方塊的「Source」(來源) 區段中，執行下列操作：
 
@@ -366,19 +368,19 @@ WHERE
 6. 在「Create table」(建立資料表) 對話方塊的「Destination」(目的地) 區段中，執行下列操作：
 
    1. 在「Project」(專案) 部分，輸入要建立 materialized view 副本的專案。
-   2. 在 **Dataset** 部分，輸入要建立具體化檢視表副本的資料集。
-   3. 在「Replica materialized view name」(備用資源 materialized view 名稱) 部分，輸入備用資源的名稱。
-7. 選用：為具體化檢視副本指定**標記**和**進階選項**。如果沒有為「本機具體化檢視資料集」指定資料集，系統會在與來源資料相同的專案和區域中，自動建立名為 `bq_auto_generated_local_mv_dataset` 的資料集。如未指定**本機具體化檢視表名稱**，系統會自動在來源資料所在的專案和區域中建立具體化檢視表，並加上 `bq_auto_generated_local_mv_` 前置字串。
+   2. 在 **Dataset** (資料集) 部分，輸入要建立具體化檢視表副本的資料集。
+   3. 在「**副本 materialized view 名稱**」部分，輸入副本的名稱。
+7. 選用：為具體化檢視副本指定**標記**和**進階選項**。如果沒有為「本機具體化檢視資料集」指定資料集，系統會在與來源資料相同的專案和區域中，自動建立名為 `bq_auto_generated_local_mv_dataset` 的資料集。如未指定**本機具體化檢視表名稱**，系統會自動在與來源資料相同的專案和區域中建立名稱，並加上 `bq_auto_generated_local_mv_` 前置字串。
 8. 點選「建立資料表」。
 
 系統會建立新的本機具體化檢視區塊 (如果未指定)，並在來源資料集中授權。然後在目的地資料集中建立 materialized view 副本。
 
 ### SQL
 
-1. 在您建立的資料集中，對基礎資料表[建立具體化檢視區塊](https://docs.cloud.google.com/bigquery/docs/materialized-views-create?hl=zh-tw)。您也可以在 Amazon S3 區域中的不同資料集中建立具體化檢視區塊。
+1. 在您建立的資料集中，對基礎資料表[建立具體化檢視](https://docs.cloud.google.com/bigquery/docs/materialized-views-create?hl=zh-tw)。您也可以在 Amazon S3 區域中的不同資料集中建立具體化檢視區塊。
 2. [授權具體化檢視表](https://docs.cloud.google.com/bigquery/docs/authorized-views?hl=zh-tw)存取資料集，這些資料集包含用於建立具體化檢視表的查詢中的來源資料表。
-3. 如果您為來源資料表設定手動重新整理中繼資料快取，請執行 [`BQ.REFRESH_EXTERNAL_METADATA_CACHE` 系統程序](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures?hl=zh-tw#bqrefresh_external_metadata_cache)，重新整理中繼資料快取。
-4. 執行 [`BQ.REFRESH_MATERIALIZED_VIEW` 系統程序](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures?hl=zh-tw#bqrefresh_materialized_view)，重新整理具體化檢視。
+3. 如果已為來源資料表設定手動重新整理中繼資料快取，請執行 [`BQ.REFRESH_EXTERNAL_METADATA_CACHE` 系統程序](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures?hl=zh-tw#bqrefresh_external_metadata_cache)，重新整理中繼資料快取。
+4. 執行 [`BQ.REFRESH_MATERIALIZED_VIEW` 系統程序](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures?hl=zh-tw#bqrefresh_materialized_view)，重新整理 materialized view。
 5. 使用 [`CREATE MATERIALIZED VIEW AS REPLICA OF` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#create_materialized_view_as_replica_of_statement)建立 materialized view 副本：
 
    ```
@@ -389,11 +391,11 @@ WHERE
 
    請替換下列項目：
 
-   * `PROJECT_ID`：要在其中建立具體化檢視區塊副本的專案名稱，例如 `myproject`。
-   * `BQ_DATASET`：您要在其中建立具體化檢視表副本的 BigQuery 資料集名稱，例如 `bq_dataset`。資料集必須位於 BigQuery [地區](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw#locations)，該地區會對應至來源具體化檢視區的地區。
+   * `PROJECT_ID`：要在其中建立 materialized view 副本的專案名稱，例如 `myproject`。
+   * `BQ_DATASET`：您要在其中建立具體化檢視表副本的 BigQuery 資料集名稱，例如 `bq_dataset`。資料集必須位於 BigQuery [區域](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw#locations)，且該區域會對應至來源具體化檢視區的區域。
    * `REPLICA_NAME`：要建立的具體化檢視副本名稱，例如 `my_mv_replica`。
-   * `REPLICATION_INTERVAL`：指定將來源 materialized view 資料複製到備用資源的頻率 (以秒為單位)。值必須介於 60 到 3,600 之間 (含首尾)。預設值為 300 (5 分鐘)。
-   * `S3_DATASET`：包含來源具體化檢視區塊的資料集名稱，例如 `s3_dataset`。
+   * `REPLICATION_INTERVAL`：指定將來源 materialized view 資料複製到備用資源的頻率 (以秒為單位)。值必須介於 60 至 3,600 之間，預設值為 300 (5 分鐘)。
+   * `S3_DATASET`：包含來源具體化檢視的資料集名稱，例如 `s3_dataset`。
    * `MATERIALIZED_VIEW_NAME`：要複製的 materialized view 名稱，例如 `my_mv`。
 
    下列範例會在 `bq_dataset` 中建立名為 `mv_replica` 的具體化檢視表副本：
@@ -406,7 +408,7 @@ WHERE
    AS REPLICA OF `myproject.s3_dataset.my_s3_mv`
    ```
 
-建立 materialized view 副本後，複製程序會輪詢來源 materialized view 的變更，並將資料複製到 materialized view 副本，按照您在 `replication_interval_seconds` 或 `max_staleness` 選項中指定的間隔時間重新整理資料。如果在第一個補充作業完成前查詢副本，會收到 `backfill in progress` 錯誤。第一次複製完成後，您就可以查詢具體化檢視副本中的資料。
+建立 materialized view 副本後，複製程序會輪詢來源 materialized view 的變更，並將資料複製到 materialized view 副本，按照您在 `replication_interval_seconds` 或 `max_staleness` 選項中指定的間隔時間重新整理資料。如果在第一個補充作業完成前查詢副本，會收到 `backfill in progress` 錯誤。第一次複製完成後，您就可以查詢具體化檢視表副本中的資料。
 
 ### 資料更新間隔
 
@@ -414,9 +416,9 @@ WHERE
 
 除了複製間隔外，來源具體化檢視的重新整理頻率，以及具體化檢視使用的 Amazon S3、Iceberg 或 Data Cloud 資料表的中繼資料快取重新整理頻率，也會影響具體化檢視副本資料的新鮮度。
 
-您可以使用 Google Cloud 控制台，檢查 materialized view 副本和所依據資源的資料新鮮度：
+您可以使用 Google Cloud 控制台，檢查 materialized view 副本和所依據資源的資料更新間隔：
 
-* 如要查看具體化檢視區塊副本的新鮮度，請查看具體化檢視區塊副本「詳細資料」窗格中的「上次修改時間」欄位。
+* 如要查看具體化檢視表副本的新鮮度，請查看具體化檢視表副本「詳細資料」窗格中的「上次修改時間」欄位。
 * 如要查看具體化檢視區塊的來源時效，請查看具體化檢視區塊「詳細資料」窗格中的「上次修改時間」欄位。
 * 如要查看來源 Amazon S3、Iceberg 或 Data Cloud 資料表的中繼資料快取更新間隔，請查看具體化檢視表「詳細資料」窗格中的「最大陳舊度」欄位。
 
@@ -424,17 +426,17 @@ WHERE
 
 建立具體化檢視副本時，請使用下表中的位置對應：
 
-| **來源 materialized view 的位置** | **具體化檢視表副本的位置** |
+| **來源 materialized view 的位置** | **materialized view 副本的位置** |
 | --- | --- |
-| `aws-us-east-1` | `US` [多區域](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#multi-regions)， 或下列任一[區域](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#regions)：  * `northamerica-northeast1` * `northamerica-northeast2` * `us-central1` * `us-east1` * `us-east4` * `us-east5` * `us-south1` * `us-west1` * `us-west2` * `us-west3` * `us-west4` |
-| `aws-us-west-2` | `US` [多區域](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#multi-regions)， 或下列任一[區域](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#regions)：  * `northamerica-northeast1` * `northamerica-northeast2` * `us-central1` * `us-east1` * `us-east4` * `us-east5` * `us-south1` * `us-west1` * `us-west2` * `us-west3` * `us-west4` |
-| `aws-eu-west-1` | `EU` [多區域](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#multi-regions)， 或下列任一[區域](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#regions)：  * `europe-central2` * `europe-north1` * `europe-southwest1` * `europe-west1` * `europe-west2` * `europe-west3` * `europe-west4` * `europe-west6` * `europe-west8` * `europe-west9` * `europe-west10` |
+| `aws-us-east-1` | `US` [多區域](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#multi-regions)、 或下列任一[區域](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#regions)：  * `northamerica-northeast1` * `northamerica-northeast2` * `us-central1` * `us-east1` * `us-east4` * `us-east5` * `us-south1` * `us-west1` * `us-west2` * `us-west3` * `us-west4` |
+| `aws-us-west-2` | `US` [多區域](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#multi-regions)、 或下列任一[區域](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#regions)：  * `northamerica-northeast1` * `northamerica-northeast2` * `us-central1` * `us-east1` * `us-east4` * `us-east5` * `us-south1` * `us-west1` * `us-west2` * `us-west3` * `us-west4` |
+| `aws-eu-west-1` | `EU` [多區域](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#multi-regions)、 或下列任一[區域](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#regions)：  * `europe-central2` * `europe-north1` * `europe-southwest1` * `europe-west1` * `europe-west2` * `europe-west3` * `europe-west4` * `europe-west6` * `europe-west8` * `europe-west9` * `europe-west10` |
 | `aws-ap-northeast-2` | 下列任一[區域](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#regions)：  * `asia-east1` * `asia-east2` * `asia-northeast1` * `asia-northeast2` * `asia-northeast3` * `asia-south1` * `asia-south2` * `asia-southeast1` |
 | `aws-ap-southeast-2` | 下列任一[區域](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#regions)：  * `australia-southeast1` * `australia-southeast2` |
 
 ### materialized view 副本的限制
 
-* 如果 materialized view 是以採用[資料列層級安全防護機制](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro?hl=zh-tw)或[資料欄層級安全防護機制](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro?hl=zh-tw)的資料表為基礎，就無法建立 materialized view 副本。
+* 如果 materialized view 是以使用[資料列層級安全防護機制](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro?hl=zh-tw)或[資料欄層級安全防護機制](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro?hl=zh-tw)的資料表為基礎，就無法建立 materialized view 副本。
 * 您無法將[客戶自行管理的加密金鑰 (CMEK)](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw) 用於來源具體化檢視或具體化檢視副本。
 * 您只能為以使用[中繼資料快取](https://docs.cloud.google.com/bigquery/docs/metadata-caching?hl=zh-tw)的任何資料表為依據的具體化檢視表，建立具體化檢視表副本。
 * 您只能為特定來源具體化檢視建立一個副本。
@@ -459,11 +461,11 @@ WHERE
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-02 (世界標準時間)。
+上次更新時間：2026-05-05 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-05 (世界標準時間)。"],[],[]]

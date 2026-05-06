@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -33,7 +35,7 @@
 
 ### 必要的 BigQuery 角色
 
-如要取得建立 BigQuery 資料移轉服務資料移轉作業所需的權限，請要求系統管理員在專案中授予您 [BigQuery 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.admin)  (`roles/bigquery.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得建立 BigQuery 資料移轉服務資料移轉作業所需的權限，請要求管理員授予您專案的 [BigQuery 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.admin)  (`roles/bigquery.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
 這個預先定義的角色具備建立 BigQuery 資料移轉服務資料移轉作業所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
@@ -92,7 +94,7 @@ Blob 儲存空間資料移轉作業有下列限制：
 
      + 在「Dataset」(資料集) 部分，選取您為了儲存資料而建立的資料集。
      + 如要移轉至 BigQuery 資料表，請選取「Native table」(原生資料表)。
-     + 如要移轉至 Managed Iceberg 資料表，請選取「Apache Iceberg」。
+     + 如要移轉至代管的 Iceberg 資料表，請選取「Apache Iceberg」。
    * 在「Data source details」(資料來源詳細資料) 部分執行下列操作：
 
      + 在「Destination table」(目的地資料表)，輸入您為了在 BigQuery 儲存資料而建立的資料表名稱。目的地資料表名稱支援[參數](https://docs.cloud.google.com/bigquery/docs/blob-storage-transfer-parameters?hl=zh-tw)。
@@ -249,5 +251,5 @@ public class CreateAzureBlobStorageTransfer {
             .build();
     // Initialize client that will be used to send requests. This client only needs to be created
     // once, and can be reused for multiple requests.
-    try (DataTransferServiceClient client =
+    try (DataTransferService
 ```

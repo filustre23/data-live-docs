@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -848,8 +850,4 @@ public class LoadPartitionedTable {
         throw new Exception("Job not executed since it no longer exists.");
       } else if (completedJob.getStatus().getError() != null) {
         // You can also look at queryJob.getStatus().getExecutionErrors() for all
-        // errors, not just the latest one.
-        throw new Exception(
-            "BigQuery was unable to load into the table due to an error: \n"
-                + </
 ```

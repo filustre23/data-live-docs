@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -19,7 +21,7 @@
 這項功能適用《[服務專屬條款](https://docs.cloud.google.com/terms/service-terms?hl=zh-tw#1)》中「一般服務條款」一節的《正式發布前產品條款》。正式發布前功能是依「原樣」提供，支援服務可能受限。
 詳情請參閱[推出階段說明](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
 
-**注意：** 如要取得支援或提供意見回饋，請傳送電子郵件至 [dts-preview-support@google.com](mailto:dts-preview-support@google.com)。
+**注意：** 如要取得支援或針對這項功能提供意見回饋，請傳送電子郵件至 [dts-preview-support@google.com](mailto:dts-preview-support@google.com)。
 
 您可以使用 PayPal 連接器和 [BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)，將 PayPal 資料載入 BigQuery。透過 PayPal 連接器，您可以安排週期性移轉工作，將 PayPal 的最新資料新增至 BigQuery。
 
@@ -44,14 +46,14 @@ PayPal 連接器支援正式環境和沙箱 PayPal 帳戶。
 
 ## 限制
 
-PayPal 資料移轉作業有以下限制：
+PayPal 資料轉移作業有以下限制：
 
 * 透過 PayPal API 存取 PayPal 交易時，可能會延遲數小時。
   + 建議您排定後續資料轉移作業時，間隔時間拉長 (每小時最多一次)，以免遺失資料。
 * PayPal 連接器僅支援過去 3 年的[交易資料](#supported_objects)。
 * PayPal 連接器僅支援過去 6 個月的[爭議資料](#supported_objects)。
 * PayPal API 對每個資料物件都有不同的頁面大小限制。在資料移轉作業中，PayPal 連接器會使用 PayPal 允許的最大網頁大小。
-  + 不過，`Payments` 或 `Payment Transactions` 等部分物件會使用較小的網頁大小限制。這可能會導致資料移轉速度變慢，尤其是在處理大型資料集時。
+  + 不過，`Payments` 或 `Payment Transactions` 等部分物件會使用較小的網頁大小限制。這可能會導致資料傳輸速度變慢，尤其是在處理大型資料集時。
 
 ## 事前準備
 
@@ -100,7 +102,7 @@ PayPal 資料移轉作業有以下限制：
 1. 前往 Google Cloud 控制台的「資料移轉」頁面。
 
    [前往「資料轉移」頁面](https://console.cloud.google.com/bigquery/transfers?hl=zh-tw)
-2. 按一下 add「建立轉移作業」。
+2. 按一下「建立轉移作業」add。
 3. 在「Source type」(來源類型) 部分，「Source」(來源) 請選取「PayPal」。
 4. 在「Data source details」(資料來源詳細資料) 部分執行下列操作：
 
@@ -108,7 +110,7 @@ PayPal 資料移轉作業有以下限制：
    * 在「Client Secret」(用戶端密鑰) 部分，輸入 PayPal 用戶端密鑰。詳情請參閱「[PayPal 先決條件](https://docs.cloud.google.com/bigquery/docs/paypal-transfer?hl=zh-tw#paypal-prerequisites)」。
    * 如果您使用沙箱 PayPal 帳戶，請選取「Is Sandbox」。
    * 在「開始日期」中，以 `YYYY-MM-DD` 格式輸入日期。資料轉移作業會從這個日期開始載入 PayPal 資料。
-     + 如果將這個欄位留空，這項轉移作業預設會擷取過去 3 年的資料。
+     + 如果將這個欄位留空，系統預設會擷取過去 3 年的資料。
      + 如要瞭解哪些物件支援開始日期篩選器，請參閱「[支援的物件](https://docs.cloud.google.com/bigquery/docs/paypal-transfer?hl=zh-tw#supported_objects)」。
    * 在「PayPal objects to transfer」(要移轉的 PayPal 物件)，輸入要移轉的 PayPal 物件名稱，或是點選「Browse」(瀏覽) 並選取要移轉的物件。
 5. 在「Destination settings」(目的地設定) 部分，「Dataset」(資料集) 請選取您為了儲存資料而建立的資料集。
@@ -151,7 +153,7 @@ bq mk
   + `assets`：要納入這項轉移作業的 PayPal 物件清單。
   + `connector.authentication.clientId`：PayPal 應用程式的用戶端 ID。
   + `connector.authentication.clientSecret`：PayPal 應用程式的用戶端密鑰。
-  + `connector.isSandbox`：如果您使用 PayPal 沙箱帳戶，請將值設為 `true`；如果您使用 PayPal 正式版帳戶，請將值設為 `false`。
+  + `connector.isSandbox`：如果您使用沙箱 PayPal 帳戶，請將值設為 `true`；如果您使用正式版 PayPal 帳戶，請將值設為 `false`。
   + `connector.createdStartDate`：(選用) 輸入日期，格式為 `YYYY-MM-DD`。資料轉移作業會從這個日期開始載入 PayPal 資料。
 
 舉例來說，下列指令會在預設專案中建立 PayPal 資料移轉作業，並提供所有必要參數：
@@ -177,9 +179,9 @@ bq mk
 
 請使用 [`projects.locations.transferConfigs.create` 方法](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create?hl=zh-tw)，並提供 [`TransferConfig` 資源](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs?hl=zh-tw#TransferConfig)的執行個體。
 
-儲存移轉設定後，PayPal 連接器會根據排程選項自動觸發移轉作業。每次執行移轉時，PayPal 連接器都會將 PayPal 的所有可用資料移轉至 BigQuery。
+儲存移轉設定後，PayPal 連接器會根據排程選項自動觸發移轉作業。每次執行移轉作業時，PayPal 連接器都會將 PayPal 中的所有可用資料移轉至 BigQuery。
 
-如要在正常時間表以外手動執行資料移轉作業，可以啟動[回填作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)。
+如要在正常排程以外手動執行資料移轉作業，可以啟動[回填作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)。
 
 ## 資料類型對應
 
@@ -213,11 +215,11 @@ bq mk
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-02 (世界標準時間)。
+上次更新時間：2026-05-05 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-05 (世界標準時間)。"],[],[]]

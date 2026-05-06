@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -690,10 +692,4 @@ bq head --max_rows=10 --start_row=50 --selected_fields=field1,field3 \
 
 ### `bq insert`
 
-使用 `bq insert` 指令，透過串流資料即時插入作業，將檔案中以換行符號分隔的 JSON 格式資料列插入資料表。資料類型會轉換成符合目的地資料表的資料欄類型。這項指令僅供測試。如要將資料以串流方式傳入 BigQuery，請使用 [`insertAll`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/insertAll?hl=zh-tw) API 方法。
-
-#### 劇情概要
-
-```
-bq insert [FLAGS]
-```
+使用

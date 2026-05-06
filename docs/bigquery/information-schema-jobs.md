@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -42,12 +44,12 @@
 | `creation_time` | `TIMESTAMP` | (*分區資料欄*) 這項工作的建立時間。分區作業會根據這個時間戳記的世界標準時間進行。 |
 | `destination_table` | `RECORD` | 結果的目標[資料表](https://cloud.google.com/bigquery/docs/reference/rest/v2/TableReference?hl=zh-tw) (如有)。 |
 | `dml_statistics` | `RECORD` | 如果工作是含有 DML 陳述式的查詢，則值為含有下列欄位的記錄：   * `inserted_row_count`：插入的資料列數。 * `deleted_row_count`：已刪除的資料列數。 * `updated_row_count`：更新的資料列數。  如果是其他工作，值為 `NULL`。  這個資料欄會顯示在「`INFORMATION_SCHEMA.JOBS_BY_USER`」和「`INFORMATION_SCHEMA.JOBS_BY_PROJECT`」檢視畫面中。 |
-| `end_time` | `TIMESTAMP` | 這項工作的結束時間，以 Epoch 時間計算的毫秒為單位。這個欄位代表工作進入 `DONE` 狀態的時間。 |
+| `end_time` | `TIMESTAMP` | 這項工作的結束時間，自訓練週期後的毫秒數。這個欄位代表工作進入 `DONE` 狀態的時間。 |
 | `error_result` | `RECORD` | 以 [ErrorProto](https://cloud.google.com/bigquery/docs/reference/rest/v2/ErrorProto?hl=zh-tw) 物件形式呈現的任何錯誤詳細資料。 |
-| `job_creation_reason.code` | `STRING` | 指定建立作業的高層次原因。  可能的值包括：  * `REQUESTED`：要求建立工作。 * `LONG_RUNNING`：查詢要求超出系統定義的逾時時間，該時間由 `QueryRequest` 中的 [timeoutMs 欄位指定。因此，系統會將其視為長期執行的作業，並為此建立工作。](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query?hl=zh-tw#queryrequest) * `LARGE_RESULTS`：查詢結果無法納入內嵌回應。 * `OTHER`：系統判定查詢需要以工作形式執行。 |
+| `job_creation_reason.code` | `STRING` | 指定建立作業的高層次原因。  可能的值包括：  * `REQUESTED`：要求建立工作。 * `LONG_RUNNING`：查詢要求超出系統定義的逾時時間，該時間由 `QueryRequest` 中的 [timeoutMs 欄位指定。因此，系統會將其視為長期執行的作業，並為此建立工作。](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query?hl=zh-tw#queryrequest) * `LARGE_RESULTS`：查詢結果無法納入內嵌回應。 * `OTHER`：系統判斷查詢需要以工作形式執行。 |
 | `job_id` | `STRING` | 如果已建立工作，則為工作 ID。否則，請使用「選擇性建立工作」模式查詢的查詢 ID。例如 `bquxjob_1234`。 |
 | `job_stages` | `RECORD` | 這項工作的[查詢階段](https://cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#ExplainQueryStage)。 **注意**：如果查詢是從設有資料列層級存取政策的資料表讀取資料，這個資料欄的值會是空白。詳情請參閱 [BigQuery 資料列層級安全防護最佳做法](https://docs.cloud.google.com/bigquery/docs/best-practices-row-level-security?hl=zh-tw)。 |
-| `job_type` | `STRING` | 工作類型，可以是 `QUERY`、`LOAD`、`EXTRACT`、`COPY` 或 `NULL`。`NULL` 值表示背景工作。 |
+| `job_type` | `STRING` | 工作類型。可以是 `QUERY`、`LOAD`、`EXTRACT`、`COPY` 或 `NULL`。`NULL` 值表示背景工作。 |
 | `labels` | `RECORD` | 以鍵/值組合形式套用至工作的標籤陣列。 |
 | `parent_job_id` | `STRING` | 父項工作的 ID (如有)。 |
 | `priority` | `STRING` | 這項工作的優先順序。有效值包括 `INTERACTIVE` 和 `BATCH`。 |
@@ -57,7 +59,7 @@
 | `referenced_tables` | `RECORD` | `STRUCT` 值陣列，其中包含查詢參照的每個資料表下列 `STRING` 欄位：`project_id`、`dataset_id` 和 `table_id`。只有非快取命中查詢作業會填入這項資料。 |
 | `reservation_id` | `STRING` | 指派給這項工作的主要預留項目名稱，格式為 `RESERVATION_ADMIN_PROJECT:RESERVATION_LOCATION.RESERVATION_NAME`。  輸出內容：  * `RESERVATION_ADMIN_PROJECT`：管理預留項目的 Google Cloud 雲端專案名稱 * `RESERVATION_LOCATION`：預訂位置 * `RESERVATION_NAME`：預留項目名稱 |
 | `edition` | `STRING` | 與指派給這項工作的預留項目相關聯的版本。如要進一步瞭解版本，請參閱「[BigQuery 版本簡介](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)」。 |
-| `session_info` | `RECORD` | 如果有的話，這項工作執行的[工作階段](https://cloud.google.com/bigquery/docs/sessions-intro?hl=zh-tw)詳細資料。 |
+| `session_info` | `RECORD` | 這項工作執行的[工作階段](https://cloud.google.com/bigquery/docs/sessions-intro?hl=zh-tw)詳細資料 (如有)。 |
 | `start_time` | `TIMESTAMP` | 這項工作的開始時間，自記錄週期後的毫秒數。這個欄位代表工作從 `PENDING` 狀態轉換為 `RUNNING` 或 `DONE` 的時間。 |
 | `state` | `STRING` | 此工作的執行狀態。有效狀態包括 `PENDING`、`RUNNING` 和 `DONE`。 |
 | `statement_type` | `STRING` | 查詢陳述式類型。例如：`DELETE`、`INSERT`、`SCRIPT`、`SELECT` 或 `UPDATE`。如需有效值清單，請參閱 [QueryStatementType](https://cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata.QueryStatementType?hl=zh-tw)。 |
@@ -90,7 +92,7 @@
 
 ## 多陳述式查詢工作
 
-多陳述式查詢工作是指使用[程序語言](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language?hl=zh-tw)的查詢工作。多重陳述式查詢作業通常會使用 `DECLARE` 定義變數，或使用控制流程陳述式 (例如 `IF` 或 `WHILE`)。查詢 `INFORMATION_SCHEMA.JOBS` 時，您可能需要瞭解多重陳述式查詢工作和其他工作的差異。多重陳述式查詢工作具有下列特徵：
+多重陳述式查詢工作是指使用[程序語言](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language?hl=zh-tw)的查詢工作。多重陳述式查詢作業通常會使用 `DECLARE` 定義變數，或使用控制流程陳述式 (例如 `IF` 或 `WHILE`)。查詢 `INFORMATION_SCHEMA.JOBS` 時，您可能需要瞭解多重陳述式查詢工作和其他工作的差異。多重陳述式查詢工作具有下列特徵：
 
 * `statement_type` = `SCRIPT`
 * `reservation_id` = `NULL`
@@ -124,7 +126,7 @@
 
 如果您對參照 `INFORMATION_SCHEMA.JOBS` 檢視區塊的查詢執行模擬測試，估算的處理位元組數可能會遠高於查詢執行期間實際處理的位元組數。
 
-發生高估情況的原因是，模擬測試計算時只會考量基礎資料的 `creation_time` 分區資料欄篩選器。如果 `WHERE` 子句中指定了隱含 `project_id` 篩選器或 `user_email` 篩選器等[叢集資料欄](#schema)的篩選器，系統不會將這些篩選器納入考量。實際掃描的資料量可能遠低於模擬測試估計值，尤其是工作較少的專案或使用者。
+發生高估情況的原因是，模擬測試計算時只會考量基礎資料的 `creation_time` 分區資料欄篩選器。如果 `WHERE` 子句中指定了隱含 `project_id` 篩選器或 `user_email` 篩選器，則系統不會將這些篩選器納入[叢集資料欄](#schema)的考量。實際掃描的資料量可能遠低於模擬測試估計值，尤其是工作較少的專案或使用者。
 
 如果未在 `creation_time` 上指定篩選器，系統就不會進行分區修剪，而模擬測試預估值會反映基礎資料的所有分區掃描結果。不過，資料叢集仍可能減少實際處理的位元組數，低於這項估算值。
 
@@ -331,7 +333,4 @@ SELECT
     destination_table.table_id as table_id,
     COUNT(job_id) AS load_job_count
  FROM
-   `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS
- WHERE
-    creation_time BETWEEN TIMESTAMP_SUB(
 ```

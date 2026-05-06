@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -18,7 +20,7 @@
 
 ## 必要角色
 
-如要取得查詢 `INFORMATION_SCHEMA.SCHEMATA_REPLICAS` 檢視畫面所需的權限，請要求管理員授予您專案的「[BigQuery 資料檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataViewer) 」(`roles/bigquery.dataViewer`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和機構的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得查詢 `INFORMATION_SCHEMA.SCHEMATA_REPLICAS` 檢視畫面所需的權限，請要求系統管理員授予您專案的「[BigQuery 資料檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataViewer) 」(`roles/bigquery.dataViewer`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和機構的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
 您或許也能透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)，取得必要權限。
 
@@ -37,9 +39,9 @@
 | `creation_time` | `TIMESTAMP` | 副本的建立時間。首次建立副本時，副本不會與主要副本完全同步，直到 `creation_complete` 等於 `TRUE` 為止。`creation_time` 的值會在 `creation_complete` 等於 `TRUE` 之前設定。 |
 | `creation_complete` | `BOOL` | 如果值為 `TRUE`，表示主要副本已完成與次要副本的初始完整同步。 |
 | `replication_time` | `TIMESTAMP` | `replication_time` 的值表示資料集的舊度。  副本中的部分資料表可能早於這個時間戳記。這個值只會顯示在次要區域。  如果資料集包含含有串流資料的表格，`replication_time` 的值就不會準確。 |
-| `sync_status` | `JSON` | 主要和次要副本之間的同步狀態，適用於[跨區域複製](https://docs.cloud.google.com/bigquery/docs/data-replication?hl=zh-tw)和[災難復原](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery?hl=zh-tw)資料集。如果副本是主要副本，或資料集未使用複製功能，則傳回 `NULL`。 |
+| `sync_status` | `JSON` | [跨區域複製](https://docs.cloud.google.com/bigquery/docs/data-replication?hl=zh-tw)和[災難復原](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery?hl=zh-tw)資料集的主要和次要副本之間的同步狀態。如果副本是主要副本，或資料集未使用複製功能，則傳回 `NULL`。 |
 | `replica_primary_assignment_time` | `TIMESTAMP` | 觸發主要資料庫切換至副本的時間。 |
-| `replica_primary_assignment_completion_time` | `TIMESTAMP` | 主要執行個體切換至備用資源的時間。 |
+| `replica_primary_assignment_completion_time` | `TIMESTAMP` | 主要執行個體切換至副本的時間。 |
 
 為確保穩定性，建議您在資訊結構定義查詢中明確列出資料欄，而非使用萬用字元 (`SELECT *`)。明確列出資料欄可避免基礎結構定義變更時，查詢中斷。
 
@@ -53,7 +55,7 @@
 
 取代下列項目：
 
-* 選用：`PROJECT_ID`：您的 Google Cloud 專案 ID。如未指定，系統會使用預設專案。
+* 選用：`PROJECT_ID`：專案 ID。 Google Cloud 如未指定，系統會使用預設專案。
 * `REGION`：任何[資料集區域名稱](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
   例如：`` `region-us` ``。**注意：**您必須使用[區域限定詞](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw#region_qualifier)查詢 `INFORMATION_SCHEMA` 檢視畫面。查詢執行位置必須與 `INFORMATION_SCHEMA` 檢視區塊的區域相符。
 
@@ -82,7 +84,7 @@ SELECT * FROM `region-us`.INFORMATION_SCHEMA.SCHEMATA_REPLICAS;
 
 **範例：列出複製的資料集，以及每個資料集的主要副本**
 
-以下範例會列出 `US` 地區中的所有複製資料集及其主要副本：
+以下範例會列出 `US` 區域中的所有複製資料集及其主要副本：
 
 ```
 SELECT
@@ -112,7 +114,7 @@ WHERE
 
 **範例：列出複製的資料集及其副本狀態**
 
-以下範例列出所有已複製的資料集及其副本狀態：
+下列範例會列出所有已複製的資料集及其副本狀態：
 
 ```
 SELECT
@@ -214,11 +216,11 @@ FROM
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-02 (世界標準時間)。
+上次更新時間：2026-05-05 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-05 (世界標準時間)。"],[],[]]

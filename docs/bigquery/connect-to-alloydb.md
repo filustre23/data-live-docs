@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -32,7 +34,7 @@ BigQuery 管理員可以建立[連線](https://docs.cloud.google.com/bigquery/do
 
 ## 建立 AlloyDB 連線
 
-最佳做法是在連線至 AlloyDB 時，使用連線來處理資料庫憑證。連線會經過加密，並安全地儲存在 BigQuery 連線服務中。如果使用者憑證適用於來源中的其他資料，您可以重複使用該連線。舉例來說，您可以使用一個連線，多次查詢 AlloyDB 執行個體中的相同資料庫。
+最佳做法是在連線至 AlloyDB 時，使用連線來處理資料庫憑證。連線會經過加密，並安全地儲存在 BigQuery 連線服務中。如果使用者憑證適用於來源中的其他資料，您可以重複使用該連結。舉例來說，您可以使用一個連線，多次查詢 AlloyDB 執行個體中的相同資料庫。
 
 選取下列其中一個選項，建立 AlloyDB 連線：
 
@@ -44,7 +46,7 @@ BigQuery 管理員可以建立[連線](https://docs.cloud.google.com/bigquery/do
 2. 在「Explorer」窗格中，按一下 add「Add」。
 
    「新增資料」對話方塊隨即開啟。
-3. 在「依條件篩選」窗格的「資料來源類型」部分，選取「資料庫」。
+3. 在「Filter By」(依據篩選) 窗格的「Data Source Type」(資料來源類型) 專區中，選取「Databases」(資料庫)。
 
    或者，您也可以在「Search for data sources」(搜尋資料來源) 欄位中輸入 `alloydb`。
 4. 在「精選資料來源」部分，按一下「Google Cloud AlloyDB」。
@@ -53,16 +55,16 @@ BigQuery 管理員可以建立[連線](https://docs.cloud.google.com/bigquery/do
 
    * 在「連線類型」部分，選取「AlloyDB」。
    * 在「Connection ID」(連線 ID) 專區中輸入連線資源的 ID。可以使用英文字母、數字和底線。例如：`bq_alloydb_connection`。
-   * 在「資料位置」中，選取[與外部資料來源區域相容](https://docs.cloud.google.com/bigquery/docs/federated-queries-intro?hl=zh-tw#supported_regions)的 BigQuery 位置 (或區域)。
+   * 在「資料位置」部分，選取與[外部資料來源區域相容](https://docs.cloud.google.com/bigquery/docs/federated-queries-intro?hl=zh-tw#supported_regions)的 BigQuery 位置 (或區域)。
    * 選用：在「Friendly name」(好記名稱) 中輸入使用者容易記得的連線名稱，例如 `My connection resource`。好記名稱可以是任何資料值，只要您日後需要修改時可以輕鬆識別連線資源即可。
    * 選用：在「Description」(說明) 中輸入這項連線資源的說明。
    * 選用：**加密**。如要使用[客戶自行管理的加密金鑰 (CMEK)](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw) 加密憑證，請選取「客戶自行管理的加密金鑰 (CMEK)」，然後選取客戶自行管理的金鑰。否則，系統會以預設的 Google-owned and Google-managed encryption key保護您的憑證。
    * 在「Database name」(資料庫名稱) 中輸入資料庫名稱。
    * 在「Database username」(資料庫使用者名稱) 中輸入資料庫的使用者名稱。
    * 在「Database password」(資料庫密碼) 中輸入資料庫密碼。
-     + 選用：如要查看密碼，請按一下「顯示密碼」
-       visibility\_off 。
-   * 在「AlloyDB 執行個體」部分，輸入 AlloyDB 主要或讀取執行個體的連線 URI，並加上 **//alloydb.googleapis.com** 前置字串。
+     + 選用：如要查看密碼，請按一下 
+       visibility\_off  **顯示密碼**。
+   * 在 **AlloyDB 執行個體** 部分，輸入 AlloyDB 主要或讀取執行個體的連線 URI，並加上 **//alloydb.googleapis.com** 前置字串。
 
      + 範例 URI：`//alloydb.googleapis.com/projects/PROJECT_ID/locations/REGION_ID/clusters/CLUSTER_NAME/instances/INSTANCE_ID`**注意：** 如果同一組使用者憑證適用於外部資料來源中的其他資料庫，該使用者就能透過相同的連線資源查詢這些資料庫。
 7. 點選「建立連線」。
@@ -71,7 +73,7 @@ BigQuery 管理員可以建立[連線](https://docs.cloud.google.com/bigquery/do
 
 ### bq
 
-輸入 [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_mk) 指令，並加上下列旗標：
+使用加上以下旗標的 [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_mk) 指令：
 
 ```
   bq mk \
@@ -174,7 +176,7 @@ gcloud projects add-iam-policy-binding PROJECT_ID --member=serviceAccount:SERVIC
    連線會列在專案的「Connections」(連線) 群組中。
 2. 點選左側窗格中的 explore「Explorer」。
 
-   如果沒有看到左側窗格，請按一下「展開左側窗格」圖示 last\_page 開啟窗格。
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Explorer」窗格中，展開專案名稱。
 4. 按一下「連線」，然後點選所需連線。
 5. 在「詳細資料」窗格中，按一下「共用」即可共用連線。
@@ -216,11 +218,11 @@ gcloud projects add-iam-policy-binding PROJECT_ID --member=serviceAccount:SERVIC
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-02 (世界標準時間)。
+上次更新時間：2026-05-05 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-05 (世界標準時間)。"],[],[]]

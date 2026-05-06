@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -18,7 +20,7 @@
 
 如要進一步瞭解 Vertex AI 預測，請參閱「[Vertex AI 預測總覽](https://docs.cloud.google.com/vertex-ai/docs/predictions/overview?hl=zh-tw)」。
 
-**注意：** 雖然可以註冊所有模型類型，但某些模型類型的部署作業會受到限制。詳情請參閱[模型部署](https://docs.cloud.google.com/bigquery/docs/exporting-models?hl=zh-tw#model-deployment)。
+**注意：** 雖然可以註冊所有模型類型，但某些模型類型在部署時會受到限制。詳情請參閱[模型部署](https://docs.cloud.google.com/bigquery/docs/exporting-models?hl=zh-tw#model-deployment)。
 
 如要瞭解如何透過 Vertex AI Model Registry 管理 BigQuery ML 模型，請參閱「[Vertex AI Model Registry 簡介](https://docs.cloud.google.com/vertex-ai/docs/model-registry/introduction?hl=zh-tw)」。
 
@@ -49,7 +51,7 @@
   + `VERTEX_AI_MODEL_ID`：指定要在 Model Registry 中使用的模型 ID。模型 ID 與 BigQuery ML 模型相關聯，且會顯示在 Model Registry 中。每個 BigQuery ML 模型只能在 Model Registry 中註冊一個模型 ID。
   + `VERTEX_AI_MODEL_VERSION_ALIASES`：指定一或多個模型版本別名，以便簡化部署作業、管理模型，並為模型啟用 [Vertex Explainable AI](https://docs.cloud.google.com/vertex-ai/docs/explainable-ai/overview?hl=zh-tw)。
 
-  如果您在建立模型時設定 `MODEL_REGISTRY` 選項，模型就會註冊至 Model Registry，並在 BigQuery ML 中完成訓練後，自動顯示在該處。您可以在Google Cloud 控制台的「模型登錄」頁面中，使用「來源」欄查看模型的來源。
+  如果您在建立模型時設定 `MODEL_REGISTRY` 選項，模型就會註冊至 Model Registry，並在 BigQuery ML 中完成訓練後，自動顯示在該處。您可以在Google Cloud 控制台的「Model Registry」頁面中，使用「來源」欄查看模型的來源。
 
 註冊 BigQuery ML 模型後，您可以使用下列 Model Registry 功能：
 
@@ -84,12 +86,12 @@ CREATE OR REPLACE MODEL `mydataset.my_kmeans_model`
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
 
-   如果沒有看到左側窗格，請按一下「展開左側窗格」圖示 last\_page 開啟窗格。
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Explorer」窗格中，依序點選「Datasets」和含有模型的資料集。
 4. 按一下「模型」分頁標籤，然後點選要註冊的模型。
 5. 在模型詳細資料窗格中，選取「登錄」分頁標籤。
 6. 按一下「註冊」。
-7. 在「向 Vertex Model Registry 註冊模型」窗格中，執行下列其中一項操作：
+7. 在「Register model to Vertex model registry」(向 Vertex Model Registry 註冊模型) 窗格中，執行下列其中一項操作：
 
    * 選取「註冊為新的模型」。在「Model name」(模型名稱) 中，輸入模型名稱。
    * 選取「註冊為現有模型的新版本」。
@@ -132,9 +134,9 @@ ALTER MODEL IF EXISTS mymodel SET OPTIONS (vertex_ai_model_id='my_vertex_ai_mode
 在特定模型 ID 下註冊的第一個 BigQuery ML 模型，會以該模型的版本 1 顯示在 Model Registry 中。建立或變更其他 BigQuery ML 模型時，只要指定相同的 Vertex AI 模型 ID，即可將這些模型註冊為已註冊模型的不同版本。
 
 舉例來說，您可以在 BigQuery ML 中建立 `model1`，並在 Model Registry 中將其註冊為 `regression_model`。`model1`
-在 Model Registry 中會顯示為 `regression_model` 的版本 1。如果您接著在 BigQuery ML 中建立 `model2`，並在 Model Registry 中將其註冊為 `regression_model`，則 `model2` 會在 Model Registry 中顯示為 `regression_model` 的第 2 版。
+在 Model Registry 中會顯示為「`regression_model`」的第 1 版。如果您接著在 BigQuery ML 中建立 `model2`，並在 Model Registry 中將其註冊為 `regression_model`，則 `model2` 會在 Model Registry 中顯示為 `regression_model` 的第 2 版。
 
-如果您建立或取代 BigQuery ML 模型，並使用已與 Model Registry 中的模型建立關聯的 BigQuery ML 模型名稱，系統會刪除現有的 Model Registry 模型版本，並以新模型取代。以上述範例為基礎，如果您使用 `CREATE OR REPLACE MODEL` 陳述式和 `MODEL_REGISTRY` 和 `VERTEX_AI_MODEL_ID` 選項，在 BigQuery ML 中建立或取代 `model2`，則模型登錄中的 `regression_model` 第 2 版會遭到取代，且模型登錄會顯示 `regression_model` 模型第 1 版和第 3 版。
+如果您建立或取代 BigQuery ML 模型，並使用已與 Model Registry 中的模型建立關聯的 BigQuery ML 模型名稱，系統會刪除現有的 Model Registry 模型版本，並以新模型取代。以上述範例為基礎，如果您使用 `CREATE OR REPLACE MODEL` 陳述式和 `MODEL_REGISTRY` 和 `VERTEX_AI_MODEL_ID` 選項，在 BigQuery ML 中建立或取代 `model2`，則 Model Registry 中的 `regression_model` 第 2 版會遭到取代，且 Model Registry 會顯示 `regression_model` 模型第 1 版和第 3 版。
 
 ### 變更已註冊 BigQuery ML 模型的模型 ID
 
@@ -155,11 +157,11 @@ BigQuery ML 模型註冊至 Model Registry 後，就無法變更 `VERTEX_AI_MODE
 
 ## 從 Model Registry 刪除 BigQuery ML 模型
 
-如要從 Model Registry 刪除 BigQuery ML 模型，請在 BigQuery ML 中刪除該模型。模型會自動從 Model Registry 中移除。
+如要從 Model Registry 刪除 BigQuery ML 模型，請在 BigQuery ML 中刪除該模型。模型會自動從 Model Registry 移除。
 
 您可以透過多種方式刪除 BigQuery ML 模型。詳情請參閱「[刪除模型](https://docs.cloud.google.com/bigquery/docs/deleting-models?hl=zh-tw)」一文。
 
-如要刪除已在模型登錄服務中註冊，並部署至端點的 BigQuery ML 模型，請先使用模型登錄服務取消部署模型。接著返回 BigQuery ML，刪除模型。如要進一步瞭解如何取消部署模型，請參閱「[刪除端點](https://docs.cloud.google.com/vertex-ai/docs/samples/aiplatform-delete-endpoint-sample?hl=zh-tw)」。
+如要刪除已在 Model Registry 中註冊，並部署至端點的 BigQuery ML 模型，請先使用 Model Registry 取消部署模型。接著返回 BigQuery ML，刪除模型。如要進一步瞭解如何取消部署模型，請參閱「[刪除端點](https://docs.cloud.google.com/vertex-ai/docs/samples/aiplatform-delete-endpoint-sample?hl=zh-tw)」。
 
 ## 限制
 
@@ -177,11 +179,11 @@ BigQuery ML 模型註冊至 Model Registry 後，就無法變更 `VERTEX_AI_MODE
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-02 (世界標準時間)。
+上次更新時間：2026-05-05 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-05 (世界標準時間)。"],[],[]]

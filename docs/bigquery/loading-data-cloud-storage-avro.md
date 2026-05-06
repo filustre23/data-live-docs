@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -19,7 +21,7 @@
 從 Cloud Storage 載入 Avro 資料時，可將資料載入至新的資料表或分區，或將資料附加到現有資料表或分區，或覆寫現有資料表或分區。將資料載入至 BigQuery 時，資料會轉換為 [Capacitor 列表型格式](https://cloud.google.com/blog/products/bigquery/inside-capacitor-bigquerys-next-generation-columnar-storage-format?hl=zh-tw)
 (BigQuery 的儲存格式)。
 
-將資料從 Cloud Storage 載入 BigQuery 資料表時，該資料表所屬的資料集必須位於和 Cloud Storage 值區相同的地區或多地區位置。
+將資料從 Cloud Storage 載入 BigQuery 資料表時，該資料表所屬的資料集必須位於和 Cloud Storage bucket 相同的地區或多地區位置。
 
 如需從本機檔案載入 Avro 資料的相關資訊，請參閱[將資料從本機資料來源載入至 BigQuery](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#loading_data_from_local_files)。
 
@@ -136,7 +138,7 @@ dataset.table \
 
 例如 `--reference_file_schema_uri="gs://mybucket/schema.avro"`。
 
-您也可以[指定 JSON 結構定義檔案](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#specifying_a_json_schema_file)，將結構定義匯入 BigQuery。
+您也可以[指定 JSON 結構定義檔](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#specifying_a_json_schema_file)，將結構定義匯入 BigQuery。
 
 ## Avro 壓縮
 
@@ -164,7 +166,7 @@ BigQuery 支援下列 Avro 檔案內容的壓縮轉碼器：
 5. 在「Create table」(建立資料表) 頁面的「Source」(來源) 區段中：
 
    * 在「Create table from」(使用下列資料建立資料表) 部分，選取「Google Cloud Storage」。
-   * 在來源欄位中，瀏覽至或輸入 [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#gcs-uri)。請注意，Google Cloud 控制台 中不可加入多個 URI，但支援使用[萬用字元](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#load-wildcards)。Cloud Storage 值區的位置必須與待建立資料表所在的資料集位置相同。
+   * 在來源欄位中，瀏覽至或輸入 [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#gcs-uri)。請注意，Google Cloud console 中不可加入多個 URI，但支援使用[萬用字元](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#load-wildcards)。Cloud Storage 值區的位置必須與待建立資料表所在的資料集位置相同。
    * 在「File format」(檔案格式) 中，選取 [Avro]。
 6. 在「Create table」(建立資料表) 頁面的「Destination」(目的地) 區段中：
 
@@ -525,7 +527,7 @@ print("Loaded {} rows.".format(destination_table.num_rows))
 
 將額外資料載入資料表時，可以選擇下列選項：
 
-| 主控台選項 | bq 工具標記 | BigQuery API 屬性 | 說明 |
+| 主控台選項 | bq 工具旗標 | BigQuery API 屬性 | 說明 |
 | --- | --- | --- | --- |
 | 空白時寫入 | 不支援 | `WRITE_EMPTY` | 資料表空白時才會寫入資料。 |
 | 附加到資料表中 | `--noreplace` 或 `--replace=false`；如果未指定 `--[no]replace`，則預設動作為附加 | `WRITE_APPEND` | ([預設](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#JobConfigurationLoad.FIELDS.write_disposition)) 將資料附加至資料表尾端。 |
@@ -928,7 +930,7 @@ BigQuery 會將 Avro 資料類型轉換為下列 BigQuery 資料類型：
 * 如果是[使用 DDL 建立的永久外部資料表](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw)：
   請使用 [`decimal_target_types`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#external_table_option_list) 選項。
 
-為確保回溯相容性，如果未指定十進位目標類型，您可以將含有 `bytes` 資料欄 (具有 `decimal` 邏輯類型) 的 Avro 檔案載入現有資料表的 `BYTES` 資料欄。在這種情況下，系統會忽略 Avro 檔案中資料欄的 `decimal` 邏輯類型。這項轉換模式已淘汰，日後可能會移除。
+為確保向後相容性，如果未指定十進位目標類型，您可以將含有 `bytes` 資料欄 (具有 `decimal` 邏輯類型) 的 Avro 檔案載入現有資料表的 `BYTES` 資料欄。在這種情況下，系統會忽略 Avro 檔案中資料欄的 `decimal` 邏輯類型。這項轉換模式已淘汰，日後可能會移除。
 
 如要進一步瞭解 Avro `decimal`邏輯類型，請參閱 [Apache Avro™ 1.8.2 規格](https://avro.apache.org/docs/1.8.2/spec.html#Decimal)。
 
@@ -945,7 +947,7 @@ BigQuery 會將 Avro 資料類型轉換為下列 BigQuery 資料類型：
 }
 ```
 
-如要達到微秒精確度：
+微秒精確度：
 
 ```
 {
@@ -967,7 +969,7 @@ BigQuery 會將 Avro 資料類型轉換為下列 BigQuery 資料類型：
 }
 ```
 
-如要達到微秒精確度：
+微秒精確度：
 
 ```
 {
@@ -989,7 +991,7 @@ BigQuery 會將 Avro 資料類型轉換為下列 BigQuery 資料類型：
 }
 ```
 
-如要達到微秒精確度：
+微秒精確度：
 
 ```
 {
@@ -1016,11 +1018,11 @@ BigQuery 會將 Avro 資料類型轉換為下列 BigQuery 資料類型：
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-02 (世界標準時間)。
+上次更新時間：2026-05-05 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-05 (世界標準時間)。"],[],[]]

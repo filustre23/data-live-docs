@@ -1,3 +1,5 @@
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
@@ -472,8 +474,4 @@ Cloud Storage 是高可用性且耐用的物件儲存服務，檔案數量沒有
 
 #### 以記錄為基礎的 CDC
 
-Oracle 建議使用 Oracle GoldenGate 擷取重做記錄，並使用 [GoldenGate for Big Data](https://docs.oracle.com/en/middleware/goldengate/big-data/12.3.2.1/gadbd/using-bigquery-handler.html#GUID-4568CD10-5495-4DB0-8E75-10F40451A8A7) 將記錄串流到 BigQuery。GoldenGate 需採用 CPU 授權。如要瞭解價格，請參閱 [Oracle Technology Global Price List](https://www.oracle.com/assets/technology-price-list-070617.pdf)。如果可以使用 Oracle GoldenGate for Big Data (前提是已取得授權)，則可考慮使用 GoldenGate 建立資料管道來移轉資料 (初始載入)，然後同步所有資料修改。
-
-#### Oracle XStream
-
-Oracle 會將每次提交的內容儲存在重做日誌檔中，這些重做日誌檔可用於 CDC。[Oracle XStream Out](https://docs.oracle.com/cd/E11882_01/server.112/e16545/xstrm_intro.htm#XSTRM72650) 是以 LogMiner 為基礎建構，並由第三方工具提供，例如 [Debezium](https://debezium.io/docs/connectors/oracle/) (0.8 版起) 或 [Striim](https://www.striim.com/) 等商業工具。
+Oracle 建議使用 Oracle GoldenGate 擷取重做記錄，並使用 [GoldenGate for Big Data](https://docs.oracle.com/en/middleware/goldengate/big-data/12.3.2.1/gadbd/using-bigquery-handler.html#GUID-4568CD10-5495-4DB0-8E75-10F40451A8A7) 將記錄串流到 BigQuery。GoldenGate 需採用 CPU 授權。如要瞭解價格，請參閱 [Oracle Technology Global Price List](https://www.oracle.com/assets/technology-price-list-070617.pdf)。如果可以使用 Oracle GoldenGate for Big Data (前
