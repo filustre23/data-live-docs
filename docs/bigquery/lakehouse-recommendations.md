@@ -48,7 +48,7 @@ Google Cloud Lakehouse 將儲存空間與運算資源區隔開來，確保分析
 * **Google Cloud 控制台**：使用控制台建立目錄、查看目錄屬性、查看稽核記錄，以及設定權限。
 * **BigQuery SQL：**使用標準 SQL DDL (資料定義語言) 建立及管理與 Lakehouse 執行階段目錄整合的 Apache Iceberg 資料表和外部資料表。
 * **開放原始碼引擎：**搭配 Lakehouse 執行階段目錄使用 Apache Spark、Apache Flink 和 Apache Hive 等引擎，讀取及寫入資料。
-* **Lakehouse 執行階段目錄 API：**使用 Apache Iceberg REST 目錄端點，透過與開放式 Apache Iceberg REST 規格相容的工具與服務互動。
+* **Lakehouse 執行階段目錄 API：**使用 Apache Iceberg REST 目錄端點，透過與開放式 Apache Iceberg REST 規格相容的工具，與服務互動。
 
 ## 後續步驟
 

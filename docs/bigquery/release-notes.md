@@ -39,6 +39,19 @@ This feature is
 [generally available](https://cloud.google.com/products#product-launch-stages)
 (GA).
 
+Breaking
+
+Starting June 1, 2026, due to changes in Google Ads data retention policies,
+the BigQuery Data Transfer Service connectors for [Google
+Ads](/bigquery/docs/transfer-changes#June01-google-ads), [Search Ads
+360](/bigquery/docs/transfer-changes#June01-search-ads), and [Google Analytics
+4](/bigquery/docs/transfer-changes#June01-ga4) will stop populating
+data for backfill runs with dates earlier than 37 months from the current date.
+
+For more information about the changes to the Google Ads data retention
+policies, see [New Data Retention Policy for Google Ads starting June 1,
+2026](https://ads-developers.googleblog.com/2026/05/new-data-retention-policy-for-google.html).
+
 ## April 30, 2026
 
 Breaking
@@ -4193,15 +4206,3 @@ Data preparation in BigQuery lets you test data preparations you're developing b
 ## January 20, 2025
 
 Libraries
-
-### Python
-
-#### [3.28.0](https://github.com/googleapis/python-bigquery/compare/v3.27.0...v3.28.0) (2025-01-15) - YANKED
-
-#### Reason this release was yanked:
-
-This turned out to be incompatible with [pandas-gbq](https://github.com/googleapis/python-bigquery-pandas). For more details, see [issue](https://github.com/googleapis/python-bigquery-pandas/issues/854).
-
-##### Features
-
-* Add property for `allowNo`

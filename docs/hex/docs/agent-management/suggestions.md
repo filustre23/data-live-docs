@@ -20,16 +20,11 @@ You'll find them in the **Suggestions** tab within the [Context Studio](/docs/ag
 
 ## How suggestions are created[​](#how-suggestions-are-created "Direct link to How suggestions are created")
 
-Suggestions are built from two types of signals:
-
-* **Automated warnings**: Hex analyzes each agent conversation and flags moments where the agent may have lacked context. See [Warnings](/docs/agent-management/observability#warnings) for the types of warnings Hex detects and how to interpret them. Warnings are typically grouped together across multiple conversations before surfacing as a suggestion.
-* **User feedback**: When a user flags an agent response using the feedback controls in a Thread, that flag becomes a suggestion signal. Users select a reason (such as incorrect answer, missing context, or bad table selection) and can add a free-text comment. Because user feedback is an explicit signal from someone who experienced the issue firsthand, a single clear, actionable user report can generate a suggestion on its own.
-
-When signals point to the same underlying knowledge gap, Hex groups them into a single suggestion and proposes concrete changes such as updating a guide, improving a table description, or endorsing a resource.
+When multiple [warnings](/docs/agent-management/observability#warnings) from recent conversations point to the same underlying knowledge gap, Hex groups them into a single suggestion and proposes concrete changes — such as updating a guide, improving a table description, or endorsing a resource — that an Admin can act on.
 
 tip
 
-Not every warning becomes a suggestion. Hex filters for durable, reusable knowledge gaps — things an admin can fix once to prevent similar issues in future conversations. One-off mistakes and product limitations are filtered out.
+Not every warning becomes a suggestion. Hex filters for durable, reusable knowledge gaps — things an Admin can fix once to prevent similar issues in future conversations. One-off mistakes and product limitations are filtered out.
 
 ## Reviewing a suggestion[​](#reviewing-a-suggestion "Direct link to Reviewing a suggestion")
 
