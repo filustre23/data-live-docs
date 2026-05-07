@@ -2,7 +2,7 @@ On this page
 
 # List of Subprocessors
 
-**Last Modified**: *May 1, 2026*
+**Last Modified**: *May 6, 2026*
 
 Hex utilizes the following subprocessors in the delivery of the Hex Service.
 
@@ -23,15 +23,16 @@ Any Subprocessor with a Data Residency listed as "Deployment Region" means the g
 |  | [Baseten](https://www.baseten.co/) | [Baseten Trust](https://trust.baseten.co/) | USA | Deployment Region |
 |  | [Google](https://cloud.google.com/) \* | [Google Cloud Security](https://cloud.google.com/security) | USA | Deployment Region |
 |  | [OpenAI](https://openai.com/) \* | [OpenAI Security](https://openai.com/security-and-privacy/) | USA | Deployment Region |
+|  | [Parallel](https://parallel.ai/) \* | [Parallel Trust Center](https://trust.parallel.ai/) | USA | USA |
 | **Analytics** | [RudderStack](https://www.rudderstack.com/) | [RudderStack Security](https://www.rudderstack.com/security/) | USA | USA |
 | **Feature gating** | [LaunchDarkly](https://launchdarkly.com/) | [LaunchDarkly Security](https://launchdarkly.com/security/) | USA | USA |
 | **User management and audit logs** | [WorkOS](https://workos.com/) | [WorkOS Security](https://workos.com/security) | USA | USA |
 | **Billing** | [Stripe](https://stripe.com/) | [Stripe Security](https://stripe.com/docs/security) | USA | Global |
-| **Customer engagement** | [Salesforce](https://www.salesforce.com/) (including [Slack](https://www.slack.com/) | [Salesforce Trust](https://www.salesforce.com/company/legal/security/) | USA | USA |
+| **Customer engagement** | [Salesforce](https://www.salesforce.com/) (including [Slack](https://www.slack.com/)) | [Salesforce Trust](https://www.salesforce.com/company/legal/security/) | USA | USA |
 |  | [HubSpot](https://www.hubspot.com/) | [HubSpot Security](https://www.hubspot.com/security) | USA | USA |
 | **Customer support** | [Pylon](https://usepylon.com/) | [Pylon Security](https://usepylon.com/security) | USA | USA |
 
-\* This subprocessor is only used for AI features and may be disabled by your administrator.
+\* This subprocessor is only used for AI features and may be optionally disabled by your administrator.
 
 ### Updates[​](#updates "Direct link to Updates")
 
