@@ -62,7 +62,7 @@ If you're experiencing errors, check the error message by hovering over the warn
 | --- | --- |
 | No jobs found for this project | The dbt Cloud integration pulls information from jobs invoked via the dbt Cloud Scheduler. Check that at least one job in dbt Cloud has the "generate docs" checkbox enabled ([more info](https://docs.getdbt.com/docs/dbt-cloud/using-dbt-cloud/cloud-generating-documentation)), and that it has been run successfully. |
 | 401 Unauthorized | This error message often means the token provided on the connection is invalid, or does not have the correct permissions. To fix this, follow the steps in the above section on [Configuring the dbt integration](#configuring-the-dbt-integration) to create a new token. |
-| All other errors | For all other errors, first check the [dbt Cloud status page](https://status.getdbt.com/) to see if there is an active issue. Then [contact dbt support](/cdn-cgi/l/email-protection#b4c7c1c4c4dbc6c0f4d3d1c0d0d6c09ad7dbd9) for more assistance. |
+| All other errors | For all other errors, first check the [dbt Cloud status page](https://status.getdbt.com/) to see if there is an active issue. Then [contact dbt support](/cdn-cgi/l/email-protection#780b0d0808170a0c381f1d0c1c1a0c561b1715) for more assistance. |
 
 If you receive no errors on the dbt integration but don't see any dbt data coming through to the Data browser, check that:
 

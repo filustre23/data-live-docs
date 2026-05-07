@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-05-07T08:18+00:00_
+_Generated 2026-05-07T13:51+00:00_
 
-**9 sources, 4740 topics total**
+**9 sources, 4748 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_1112 topics_
+_1120 topics_
 
 - `anthropic-sdk/agents-and-tools/agent-skills/best-practices`
 - `anthropic-sdk/agents-and-tools/agent-skills/enterprise`
@@ -194,6 +194,7 @@ _1112 topics_
 - `anthropic-sdk/api/beta/vaults/list`
 - `anthropic-sdk/api/beta/vaults/retrieve`
 - `anthropic-sdk/api/beta/vaults/update`
+- `anthropic-sdk/api/beta/webhooks`
 - `anthropic-sdk/api/cli/beta`
 - `anthropic-sdk/api/cli/beta/agents`
 - `anthropic-sdk/api/cli/beta/agents/archive`
@@ -301,6 +302,7 @@ _1112 topics_
 - `anthropic-sdk/api/cli/beta/vaults/list`
 - `anthropic-sdk/api/cli/beta/vaults/retrieve`
 - `anthropic-sdk/api/cli/beta/vaults/update`
+- `anthropic-sdk/api/cli/beta/webhooks`
 - `anthropic-sdk/api/cli/completions`
 - `anthropic-sdk/api/cli/completions/create`
 - `anthropic-sdk/api/cli/messages`
@@ -425,6 +427,7 @@ _1112 topics_
 - `anthropic-sdk/api/csharp/beta/vaults/list`
 - `anthropic-sdk/api/csharp/beta/vaults/retrieve`
 - `anthropic-sdk/api/csharp/beta/vaults/update`
+- `anthropic-sdk/api/csharp/beta/webhooks`
 - `anthropic-sdk/api/csharp/completions/create`
 - `anthropic-sdk/api/csharp/messages`
 - `anthropic-sdk/api/csharp/messages/batches`
@@ -546,6 +549,7 @@ _1112 topics_
 - `anthropic-sdk/api/go/beta/vaults/list`
 - `anthropic-sdk/api/go/beta/vaults/retrieve`
 - `anthropic-sdk/api/go/beta/vaults/update`
+- `anthropic-sdk/api/go/beta/webhooks`
 - `anthropic-sdk/api/go/completions`
 - `anthropic-sdk/api/go/completions/create`
 - `anthropic-sdk/api/go/messages`
@@ -668,6 +672,7 @@ _1112 topics_
 - `anthropic-sdk/api/java/beta/vaults/list`
 - `anthropic-sdk/api/java/beta/vaults/retrieve`
 - `anthropic-sdk/api/java/beta/vaults/update`
+- `anthropic-sdk/api/java/beta/webhooks`
 - `anthropic-sdk/api/java/completions`
 - `anthropic-sdk/api/java/completions/create`
 - `anthropic-sdk/api/java/messages`
@@ -803,6 +808,7 @@ _1112 topics_
 - `anthropic-sdk/api/python/beta/vaults/list`
 - `anthropic-sdk/api/python/beta/vaults/retrieve`
 - `anthropic-sdk/api/python/beta/vaults/update`
+- `anthropic-sdk/api/python/beta/webhooks`
 - `anthropic-sdk/api/python/completions`
 - `anthropic-sdk/api/python/completions/create`
 - `anthropic-sdk/api/python/messages`
@@ -925,6 +931,7 @@ _1112 topics_
 - `anthropic-sdk/api/ruby/beta/vaults/list`
 - `anthropic-sdk/api/ruby/beta/vaults/retrieve`
 - `anthropic-sdk/api/ruby/beta/vaults/update`
+- `anthropic-sdk/api/ruby/beta/webhooks`
 - `anthropic-sdk/api/ruby/completions`
 - `anthropic-sdk/api/ruby/completions/create`
 - `anthropic-sdk/api/ruby/messages`
@@ -1047,6 +1054,7 @@ _1112 topics_
 - `anthropic-sdk/api/typescript/beta/vaults/list`
 - `anthropic-sdk/api/typescript/beta/vaults/retrieve`
 - `anthropic-sdk/api/typescript/beta/vaults/update`
+- `anthropic-sdk/api/typescript/beta/webhooks`
 - `anthropic-sdk/api/typescript/completions`
 - `anthropic-sdk/api/typescript/completions/create`
 - `anthropic-sdk/api/typescript/messages`
