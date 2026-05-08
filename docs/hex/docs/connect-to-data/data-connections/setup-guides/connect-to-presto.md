@@ -4,7 +4,7 @@ Securely connect your Hex workspace to your Presto database.
 
 info
 
-* **More detailed setup instructions for connecting to [Presto](https://prestodb.io/) are coming soon! In the meantime, please reach out to [[email protected]](/cdn-cgi/l/email-protection#98ebede8e8f7eaecd8f0fde0b6ecfdfbf0) with any questions.**
+* **More detailed setup instructions for connecting to [Presto](https://prestodb.io/) are coming soon! In the meantime, please reach out to [[email protected]](/cdn-cgi/l/email-protection#b4c7c1c4c4dbc6c0f4dcd1cc9ac0d1d7dc) with any questions.**
 
 To connect Hex to **Presto**, you'll need:
 
