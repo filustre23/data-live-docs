@@ -565,4 +565,4 @@ SELECT (SELECT STRING_AGG(a.struct_field1) FROM t1.array_of_structs a) FROM T1 t
 ```
 
 Field paths in the `FROM` clause must end in an
-array field. In
+a

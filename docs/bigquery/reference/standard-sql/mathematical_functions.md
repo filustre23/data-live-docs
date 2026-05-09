@@ -551,5 +551,4 @@ COT(X)
 **Description**
 
 Computes the cotangent for the angle of `X`, where `X` is specified in radians.
-`X` can be any data type
-that
+`X` can be any data t

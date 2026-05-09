@@ -729,4 +729,4 @@ Gets the lower bound of a range.
 
 **Details**
 
-Returns `NULL` if the lower bound of `range_value` is `U`
+Returns `NULL` if the lower bound of `range_value` is

@@ -514,5 +514,5 @@ With Employees AS
     'Jackson' AS last_name)
 
 SELECT
-  CONCAT(first_name, ' ',
+  CONCAT(first_name, ' '
 ```

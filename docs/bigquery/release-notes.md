@@ -27,6 +27,21 @@ To get the latest product updates delivered to you, add the URL of this page to 
 reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators), or add the
 [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## May 08, 2026
+
+Announcement
+
+Starting August 11, 2026, the billing label for the BigQuery Data Transfer
+Service SKU will be updated from `goog-bq-feature-type: DATA_TRANSFER_SERVICE`
+(uppercase) to `goog-bq-feature-type: data_transfer_service` (lowercase) to
+provide a more unified and complete view of your costs. This update expands the
+scope of the label to cover all costs associated with the BigQuery Data Transfer
+Service, including data transfer orchestration, data load operations, and data
+merge operations.
+
+To ensure uninterrupted cost visibility, update your billing exports,
+dashboards, and reporting queries to include both these labels.
+
 ## May 06, 2026
 
 Feature
@@ -4192,17 +4207,4 @@ Feature
 
 In BigQuery ML, you can now evaluate Anthropic Claude models by using the
 [`ML.EVALUATE` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate).
-[The quotas](/bigquery/quotas#cloud_ai_service_functions)
-for use of Anthropic Claude models in BigQuery ML have also been brought into
-parity with Vertex AI quotas.
-
-This feature is in
-[preview](https://cloud.google.com/products/#product-launch-stages).
-
-Feature
-
-Data preparation in BigQuery lets you test data preparations you're developing before you deploy and schedule runs in production. For more information, see [Develop a data preparation](/bigquery/docs/orchestrate-data-preparations#develop).
-
-## January 20, 2025
-
-Libraries
+[The](/bigquery/quotas#cloud_ai_service_functions)

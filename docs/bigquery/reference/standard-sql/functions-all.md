@@ -262,4 +262,3 @@ This topic contains all functions supported by GoogleSQL for BigQuery.
 | [`RANGE`](/bigquery/docs/reference/standard-sql/range-functions#range) | Constructs a range of `DATE`, `DATETIME`, or `TIMESTAMP` values. |
 | [`RANGE_BUCKET`](/bigquery/docs/reference/standard-sql/mathematical_functions#range_bucket) | Scans through a sorted array and returns the 0-based position of a point's upper bound. |
 | [`RANGE_CONTAINS`](/bigquery/docs/reference/standard-sql/range-functions#range_contains) | Signature 1: Checks if one range is in another range.    Signature 2: Checks if a value is in a range. |
-|  |

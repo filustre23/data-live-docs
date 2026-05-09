@@ -31,10 +31,8 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 如要取得建立資料表所需的權限，請要求管理員授予您下列 IAM 角色：
 
-* [BigQuery 作業使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.jobUser)  (`roles/bigquery.jobUser`)
-  如果您要透過載入資料或將查詢結果儲存至資料表的方式建立資料表，請在專案中啟用這項權限。
-* [BigQuery 資料編輯者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataEditor)  (`roles/bigquery.dataEditor`)
-  您要在其中建立資料表的資料集。
+* 如果您要透過載入資料或將查詢結果儲存至資料表來建立資料表，請在專案中指派 [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.jobUser)  (`roles/bigquery.jobUser`)。
+* 資料集的「BigQuery 資料編輯者」 (`roles/bigquery.dataEditor`)，您要在該資料集建立資料表。
 
 如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
@@ -99,7 +97,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 透過結構定義建立空白分群資料表
 
-如何使用結構定義建立空白叢集資料表：
+如何使用結構定義建立空白分群資料表：
 
 ### 控制台
 
@@ -167,7 +165,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 本文不示範 `--destination_kms_key`。如要進一步瞭解如何使用 `--destination_kms_key`，請參閱[客戶管理的加密金鑰](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw)說明。
 
-輸入下列指令，建立含有結構定義的空白叢集資料表：
+輸入下列指令，建立含有結構定義的空白分群資料表：
 
 ```
 bq mk \
@@ -195,7 +193,7 @@ bq mk \
 
 範例：
 
-輸入下列指令，在預設專案中的 `mydataset` 內建立名為 `myclusteredtable` 的叢集資料表，資料表到期時間設為 2,592,000 秒 (1 個月 30 天)、說明設為 `This is my clustered table`，而標籤則設為 `organization:development`。此指令使用 `-t` 捷徑，而非 `--table`。
+輸入下列指令，在預設專案中的 `mydataset` 內建立名為 `myclusteredtable` 的分群資料表。資料表到期時間設為 2,592,000 秒 (1 個月 30 天)、說明設為 `This is my clustered table`，而標籤則設為 `organization:development`。此指令使用 `-t` 捷徑，而非 `--table`。
 
 結構定義以內嵌方式指定為：`timestamp:timestamp,customer_id:string,transaction_amount:float`。所指定的叢集欄位 `customer_id` 用於叢集資料表。
 
@@ -210,7 +208,7 @@ bq mk \
     mydataset.myclusteredtable
 ```
 
-輸入下列指令，在 `myotherproject` (而非預設專案) 中建立名為 `myclusteredtable` 的叢集資料表，說明設為 `This is my clustered table`，標籤則設為 `organization:development`。此指令使用 `-t` 捷徑，而非 `--table`。這個指令不會指定資料表到期時間。如果資料集有預設資料表到期時間，系統會直接套用這個時間。如果資料集沒有預設資料表到期時間，資料表將永不過期。
+輸入下列指令，在 `myotherproject` (而非預設專案) 中建立名為 `myclusteredtable` 的分群資料表，說明設為 `This is my clustered table`，標籤則設為 `organization:development`。此指令使用 `-t` 捷徑，而非 `--table`。這個指令不會指定資料表到期時間。如果資料集有預設資料表到期時間，系統會直接套用這個時間。如果資料集沒有預設資料表到期時間，資料表將永不過期。
 
 結構定義在本機 JSON 檔案 `/tmp/myschema.json` 中指定。`customer_id` 欄位用於叢集資料表。
 
@@ -497,12 +495,12 @@ public class CreateClusteredTable {
 
 ## 從查詢結果建立分群資料表
 
-從查詢結果建立叢集資料表的作法有兩種：
+從查詢結果建立分群資料表的作法有兩種：
 
 * 將結果寫入新的目的地資料表並指定叢集資料欄，
 * 使用 DDL `CREATE TABLE AS SELECT` 陳述式。如要進一步瞭解此做法，請參閱「使用資料定義語言陳述式」頁面中的[從查詢結果建立分群資料表](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#creating_a_clustered_table_from_the_result_of_a_query)一節。
 
-您可以藉由查詢分區資料表或非分區資料表的方式建立叢集資料表，但不能利用查詢結果將現有的資料表變更為叢集資料表。
+您可以藉由查詢分區資料表或非分區資料表的方式建立分群資料表。但不能利用查詢結果將現有的資料表變更為叢集資料表。
 
 從查詢結果建立分群資料表時，必須使用標準 SQL。系統不支援使用舊版 SQL 查詢叢集資料表，或將查詢結果寫入叢集資料表。
 
@@ -543,7 +541,8 @@ bq --location=LOCATION query \
 更改下列內容：
 
 * `LOCATION`：位置名稱。`--location` 是選用旗標。舉例來說，如果您在東京地區使用 BigQuery，就可以將旗標的值設為 `asia-northeast1`。您可以使用 [.bigqueryrc 檔案](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool?hl=zh-tw#setting_default_values_for_command-line_flags)設定位置的預設值。
-* `QUERY`：採用 GoogleSQL 語法的查詢。您無法使用舊版 SQL 查詢叢集資料表，或將查詢結果寫入叢集資料表。該查詢可包含 `CREATE TABLE` [DDL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw) 陳述式，以指定建立叢集資料表的選項。您可以使用 DDL 取代指定個別指令列旗標的做法。
+* `QUERY`：採用 GoogleSQL 語法的查詢。您無法使用舊版 SQL 查詢叢集資料表，或將查詢結果寫入叢集資料表。該查詢可包含 `CREATE TABLE`
+  [DDL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw) 陳述式，以指定建立分群資料表的選項。您可以使用 DDL 取代指定個別指令列旗標的做法。
 
 範例：
 
@@ -573,7 +572,7 @@ bq query --use_legacy_sql=false \
 
 ## 在載入資料時建立叢集資料表
 
-您載入資料到一個新的資料表時，可透過指定叢集欄的方式來建立叢集資料表。您不必在資料載入資料表之前，事先建立空白的資料表，因為您可以同時建立叢集資料表並載入資料。
+載入資料到新資料表時，您可以指定分群資料欄來建立分群資料表。您不必在資料載入資料表之前，事先建立空白的資料表，因為您可以同時建立分群資料表並載入資料。
 
 有關如何載入資料的詳情，請參閱[將資料載入 BigQuery 的簡介](https://docs.cloud.google.com/bigquery/docs/loading-data?hl=zh-tw)。
 
@@ -809,11 +808,11 @@ print(
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-06 (世界標準時間)。
+上次更新時間：2026-05-09 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-06 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]

@@ -1,4 +1,4 @@
-As of April 20th, 2026, BigLake is now called Google Cloud Lakehouse. BigLake metastore is now called the Lakehouse runtime catalog. Lakehouse APIs, client libraries, CLI commands, and IAM names remain unchanged and still reference BigLake.
+自 2026 年 4 月 20 日起，BigLake 现在称为 Lakehouse for Apache Iceberg。BigLake metastore 现已更名为 Lakehouse 运行时目录。Lakehouse API、客户端库、CLI 命令和 IAM 名称保持不变，仍引用 BigLake。
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
@@ -38,17 +38,17 @@ Google uses AI technology to translate content into your preferred language. AI 
 如需获得在 Lakehouse 运行时目录中使用 Apache Iceberg REST 目录端点所需的权限，请让管理员为您授予以下 IAM 角色：
 
 * 执行管理任务，例如管理目录用户访问权限、存储访问权限和目录的凭证自动售卖模式：
-  + 针对项目的 [BigLake Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake?hl=zh-cn#biglake.admin) (`roles/biglake.admin`) 角色
+  + 针对项目的 [BigLake Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake?hl=zh-cn#biglake.admin)  (`roles/biglake.admin`) 角色
   + 针对 Cloud Storage 存储桶的 [Storage Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/storage?hl=zh-cn#storage.admin)  (`roles/storage.admin`)　角色
 * 在凭据自动售卖模式下读取表数据：
-  针对项目的 [BigLake Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake?hl=zh-cn#biglake.viewer)  (`roles/biglake.viewer`)　角色
+  项目的 [BigLake Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake?hl=zh-cn#biglake.viewer)  (`roles/biglake.viewer`) 角色
 * 以凭据自动售卖模式写入表数据：项目的 [BigLake Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake?hl=zh-cn#biglake.editor)  (`roles/biglake.editor`) 角色
 * 在非凭证自动售卖模式下读取目录资源和表数据：
-  + 项目的 [BigLake Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake?hl=zh-cn#biglake.viewer) (`roles/biglake.viewer`)　角色
-  + 针对 Cloud Storage 存储桶的 [Storage Object Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/storage?hl=zh-cn#storage.objectViewer) (`roles/storage.objectViewer`)　角色
+  + 项目的 [BigLake Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake?hl=zh-cn#biglake.viewer)  (`roles/biglake.viewer`) 角色
+  + 针对 Cloud Storage 存储桶的 [Storage Object Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/storage?hl=zh-cn#storage.objectViewer)  (`roles/storage.objectViewer`) 角色
 * 在非凭证自动售卖模式下管理目录资源和写入表数据：
-  + 项目的 [BigLake Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake?hl=zh-cn#biglake.editor) (`roles/biglake.editor`) 角色
-  + 针对 Cloud Storage 存储桶的 [Storage Object User](https://docs.cloud.google.com/iam/docs/roles-permissions/storage?hl=zh-cn#storage.objectUser) (`roles/storage.objectUser`) 角色
+  + 项目的 [BigLake Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake?hl=zh-cn#biglake.editor)  (`roles/biglake.editor`) 角色
+  + 针对 Cloud Storage 存储桶的 [Storage Object User](https://docs.cloud.google.com/iam/docs/roles-permissions/storage?hl=zh-cn#storage.objectUser)  (`roles/storage.objectUser`) 角色
 * 使用 BigQuery 目录联合执行数据操纵语言 (DML) 操作：
   + 项目的 [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-cn#bigquery.dataEditor)  (`roles/bigquery.dataEditor`) 角色
   + 针对 Cloud Storage 存储桶的 [Storage Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/storage?hl=zh-cn#storage.admin)  (`roles/storage.admin`) 角色。如果您使用 Managed Service for Apache Spark 等查询引擎执行 DML 操作，请向您用于在该引擎中运行作业的服务账号授予这些角色。
@@ -97,7 +97,7 @@ Apache Iceberg REST 目录端点受以下限制：
 您可以创建使用最终用户凭据或凭据贩售模式的目录。
 
 * 借助最终用户凭据，目录会将访问它的最终用户的身份传递给 Cloud Storage 以进行授权检查。
-* 凭据贩卖是一种存储访问权限委托机制，可让 Lakehouse 运行时目录管理员直接控制 Lakehouse 运行时目录资源的权限，从而无需目录用户直接访问 Cloud Storage 存储分区。借助此功能，Google Cloud Lakehouse 管理员可以向用户授予对特定数据文件的权限。
+* 凭据贩卖是一种存储访问权限委托机制，可让 Lakehouse 运行时目录管理员直接控制 Lakehouse 运行时目录资源的权限，从而无需目录用户直接访问 Cloud Storage 存储分区。借助此功能，Google Cloud 的 *Lakehouse* 管理员可以向用户授予对特定数据文件的权限。
 
 **注意事项**
 
@@ -112,7 +112,7 @@ Apache Iceberg REST 目录端点受以下限制：
 
 1. 在 Google Cloud 控制台中打开 **Lakehouse** 页面。
 
-   [前往 Google Cloud 湖仓一体](https://console.cloud.google.com/biglake?hl=zh-cn)
+   [前往 Lakehouse](https://console.cloud.google.com/biglake?hl=zh-cn)
 2. 点击**创建目录**。
 3. 在**选择 Cloud Storage 存储桶**字段中，输入要与目录搭配使用的 Cloud Storage 存储桶的名称。或者，点击**浏览**以选择现有存储桶或创建新存储桶。每个 Cloud Storage 存储桶只能有一个目录。
 4. 对于**身份验证方法**，选择**最终用户凭据**。
@@ -140,13 +140,13 @@ gcloud biglake iceberg catalogs create \
 
 ### 凭证分发模式
 
-目录管理员可以在创建或更新目录时启用凭据自动发放功能。作为目录用户，您可以在[配置 Apache Iceberg REST 目录端点](#configure-catalog)时指定访问权限委托，从而指示 Apache Iceberg REST 目录端点返回降级后的存储凭据。
+目录管理员可以在创建或更新目录时启用凭据自动发放功能。作为目录用户，您可以在[配置 Apache Iceberg REST 目录端点](#configure-catalog)时指定访问权限委托，从而指示 Apache Iceberg REST 目录端点返回降级后的存储 Apache Iceberg REST 目录端点返回降级后的存储凭据。
 
 ### 控制台
 
 1. 在 Google Cloud 控制台中，打开 **Lakehouse** 页面。
 
-   [前往 Google Cloud 湖仓一体](https://console.cloud.google.com/biglake?hl=zh-cn)
+   [前往 Lakehouse](https://console.cloud.google.com/biglake?hl=zh-cn)
 2. 点击 add\_box
    **创建目录**。系统会打开**创建目录**页面。
 3. 在**选择 Cloud Storage 存储桶**部分，输入要与目录搭配使用的 Cloud Storage 存储桶的名称。或者，点击**浏览**，从现有存储分区列表中选择一个存储分区或创建一个新存储分区。每个 Cloud Storage 存储桶只能有一个目录。
@@ -286,7 +286,7 @@ gcloud dataproc batches submit pyspark PYSPARK_FILE \
 
 ### 通过凭证分发进行配置
 
-如需使用凭据自动售卖，您必须使用[处于凭据自动售卖模式的目录](#create_a_catalog)，并将 `X-Iceberg-Access-Delegation` 标头添加到 Apache Iceberg REST Catalog 端点请求中，其值为 `vended-credentials`，方法是在 Managed Service for Apache Spark 配置中添加以下行：
+如需使用凭据自动售卖，您必须使用[处于凭据自动售卖模式的目录](#create_a_catalog)，并向 Apache Iceberg REST Catalog 端点请求添加 `X-Iceberg-Access-Delegation` 标头，其值为 `vended-credentials`，方法是在 Managed Service for Apache Spark 配置中添加以下行：`X-Iceberg-Access-Delegation``vended-credentials`
 
 ```
 .config(f'spark.sql.catalog.{catalog_name}.header.X-Iceberg-Access-Delegation','vended-credentials')
@@ -403,7 +403,7 @@ spark = SparkSession.builder.appName("APP_NAME") \
 
 ### 通过凭证分发进行配置
 
-上述示例未使用凭据自动售卖功能。如需使用凭据自动售卖，您必须使用[处于凭据自动售卖模式的目录](#create_a_catalog)，并将 `X-Iceberg-Access-Delegation` 标头添加到 Apache Iceberg REST 目录端点请求，其值为 `vended-credentials`，方法是将以下行添加到 `SparkSession` 构建器：
+上述示例未使用凭据自动售卖功能。如需使用凭据分发，您必须使用[处于凭据分发模式的目录](#create_a_catalog)，并将 `X-Iceberg-Access-Delegation` 标头添加到 Apache Iceberg REST Catalog 端点请求，其值为 `vended-credentials`，方法是在 `SparkSession` 构建器中添加以下行：`X-Iceberg-Access-Delegation``vended-credentials`
 
 ```
 .config(f'spark.sql.catalog.{catalog_name}.header.X-Iceberg-Access-Delegation','vended-credentials')
@@ -472,7 +472,7 @@ spark = SparkSession.builder.appName("APP_NAME") \
 
 ### 通过凭证分发进行配置
 
-上述示例未使用凭据自动售卖功能。如需使用凭据自动售卖，您必须使用[处于凭据自动售卖模式的目录](#create_a_catalog)，并将 `X-Iceberg-Access-Delegation` 标头添加到 Apache Iceberg REST 目录端点请求，其值为 `vended-credentials`，方法是将以下行添加到 `SparkSession` 构建器：
+上述示例未使用凭据自动售卖功能。如需使用凭据分发，您必须使用[处于凭据分发模式的目录](#create_a_catalog)，并将 `X-Iceberg-Access-Delegation` 标头添加到 Apache Iceberg REST Catalog 端点请求，其值为 `vended-credentials`，方法是在 `SparkSession` 构建器中添加以下行：`X-Iceberg-Access-Delegation``vended-credentials`
 
 ```
 .config(f'spark.sql.catalog.{catalog_name}.header.X-Iceberg-Access-Delegation','vended-credentials')
@@ -595,6 +595,7 @@ USE CATALOG_NAME.SCHEMA_NAME;
 
 ## 后续步骤
 
+* 了解如何[查询表以及如何将目录联合与 BigQuery 结合使用](https://docs.cloud.google.com/lakehouse/docs/use-catalog-federation?hl=zh-cn)。
 * 了解如何[在 Google Cloud 控制台中管理目录](https://docs.cloud.google.com/lakehouse/docs/lakehouse-console?hl=zh-cn)。
 * 了解 [Lakehouse REST 目录表（适用于 Apache Iceberg）](https://docs.cloud.google.com/lakehouse/docs/lakehouse-iceberg-tables?hl=zh-cn)。
 
@@ -605,11 +606,11 @@ USE CATALOG_NAME.SCHEMA_NAME;
 
 如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-最后更新时间 (UTC)：2026-05-06。
+最后更新时间 (UTC)：2026-05-08。
 
 
 
 
 需要向我们提供更多信息？
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["很难理解","hardToUnderstand","thumb-down"],["信息或示例代码不正确","incorrectInformationOrSampleCode","thumb-down"],["没有我需要的信息/示例","missingTheInformationSamplesINeed","thumb-down"],["翻译问题","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-05-06。"],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["很难理解","hardToUnderstand","thumb-down"],["信息或示例代码不正确","incorrectInformationOrSampleCode","thumb-down"],["没有我需要的信息/示例","missingTheInformationSamplesINeed","thumb-down"],["翻译问题","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-05-08。"],[],[]]

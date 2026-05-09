@@ -69,7 +69,7 @@ DATA` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-
 
 ## 位置注意事項
 
-* 如果 BigQuery 資料集位於多個地區，則必須設定 [Bigtable 應用程式設定檔](https://docs.cloud.google.com/bigtable/docs/app-profiles?hl=zh-tw)，將資料傳送至該多地區內的 Bigtable 叢集。舉例來說，如果您的 BigQuery 資料集位於 `US` 多區域，Bigtable 集群可以位於美國境內的 `us-west1` (奧勒岡) 區域。
+* 如果 BigQuery 資料集位於多區域，則必須設定 [Bigtable 應用程式設定檔](https://docs.cloud.google.com/bigtable/docs/app-profiles?hl=zh-tw)，將資料傳送至該多區域內的 Bigtable 叢集。舉例來說，如果您的 BigQuery 資料集位於 `US` 多區域，Bigtable 集群可以位於美國境內的 `us-west1` (奧勒岡) 區域。
 * 如果 BigQuery 資料集位於單一區域，則必須設定 [Bigtable 應用程式設定檔](https://docs.cloud.google.com/bigtable/docs/app-profiles?hl=zh-tw)，將資料傳送至相同區域的 Bigtable 叢集。舉例來說，如果您的 BigQuery 資料集位於 `asia-northeast1` (東京) 區域，Bigtable 叢集也必須位於 `asia-northeast1` (東京) 區域。
 
 詳情請參閱「[Bigtable 位置](https://docs.cloud.google.com/bigtable/docs/locations?hl=zh-tw)」。
@@ -301,11 +301,11 @@ FROM orders
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-06 (世界標準時間)。
+上次更新時間：2026-05-08 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-06 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-08 (世界標準時間)。"],[],[]]

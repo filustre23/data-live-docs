@@ -22,7 +22,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 從 Cloud Storage 載入 Parquet 資料時，可將資料載入新的資料表或分區、或對現有資料表或分區進行附加或覆寫作業。將資料載入 BigQuery 時，資料會轉換為 [Capacitor](https://cloud.google.com/blog/products/gcp/inside-capacitor-bigquerys-next-generation-columnar-storage-format?hl=zh-tw) 資料欄格式 (BigQuery 的儲存格式)。
 
-將資料從 Cloud Storage 載入至 BigQuery 資料表時，包含該資料表的資料集必須位於與 Cloud Storage 值區相同的地區或多地區位置。
+將資料從 Cloud Storage 載入 BigQuery 資料表時，該資料表所屬的資料集必須位於和 Cloud Storage 值區相同的地區或多地區位置。
 
 如要瞭解如何從本機檔案載入 Parquet 資料，請參閱[從本機檔案載入資料](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw)。
 
@@ -305,7 +305,7 @@ PATH_TO_SOURCE
 **API 附註：**
 
 * 載入工作不可部分完成，且資料狀態具一致性。如果載入工作失敗，所有資料都無法使用；如果載入工作成功，則所有資料都可以使用。
-* 最佳做法就是產生唯一識別碼，並在呼叫 `jobs.insert` 建立載入工作時，將該唯一識別碼當做 `jobReference.jobId` 傳送。這個方法較不受網路故障問題的影響，因為用戶端可使用已知的工作 ID 進行輪詢或重試。
+* 最佳做法是產生唯一 ID，並在呼叫 `jobs.insert` 建立載入工作時，將該 ID 當做 `jobReference.jobId` 傳送。這個方法較不受網路故障問題的影響，因為用戶端可使用已知的工作 ID 進行輪詢或重試。
 * 對指定的工作 ID 呼叫 `jobs.insert` 是一種冪等作業。也就是說，您可以對同一個工作 ID 重試無數次，最多會有一個作業成功。
 
 ### Go
@@ -1134,14 +1134,14 @@ repeated <element-type> <name>
 * 星號 (`*`)，以 Unicode 規則運算式 `\u002A` 表示。
 * 以 Unicode 規則運算式 `\u002C` 表示的逗號 (`,`)。
 * 句號 (`.`)，以 Unicode 規則運算式 `\u002E` 表示。使用資料欄名稱字元對應時，Parquet 檔案資料欄名稱中的句號*不會*替換為底線。詳情請參閱[彈性資料欄限制](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet?hl=zh-tw#limitations_2)。
-* 以 Unicode 規則運算式 `\u002F` 表示的斜線 (`/`)。
+* 斜線 (`/`)，以 Unicode 規則運算式 `\u002F` 表示。
 * 以 Unicode 規則運算式 `\u003B` 表示的分號 (`;`)。
 * 問號 (`?`)，以 Unicode 規則運算式 `\u003F` 表示。
 * 以 Unicode 規則運算式 `\u0040` 表示的 at 符號 (`@`)。
 * 左方括號 (`[`)，以 Unicode 規則運算式 `\u005B` 表示。
 * 反斜線 (`\`)，以 Unicode 規則運算式 `\u005C` 表示。
 * 右方括號 (`]`)，以 Unicode 正則運算式 `\u005D` 表示。
-* 揚抑符號 (`^`)，以 Unicode 規則運算式 `\u005E` 表示。
+* Unicode 規則運算式 `\u005E` 代表的揚抑符號 (`^`)。
 * Unicode 規則運算式 `\u0060` 代表的重音符 (`` ` ``)。
 * 左大括號 {`{`)，以 Unicode 規則運算式 `\u007B` 表示。
 * 右大括號 (`}`)，以 Unicode 正則運算式 `\u007D` 表示。
@@ -1169,5 +1169,5 @@ package mypackage;
 // Source protos located in github.com/googleapis/googleapis
 import "google/cloud/bigquery/storage/v1/annotations.proto";
 
-message FlexibleSchem
+message
 ```

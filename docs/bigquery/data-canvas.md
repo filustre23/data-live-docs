@@ -58,10 +58,10 @@ BigQuery 資料畫布可讓您執行下列操作：
 
 ## 提示最佳做法
 
-只要使用適當的提示技巧，就能生成複雜的 SQL 查詢。以下建議有助於 BigQuery 資料畫布修正自然語言提示詞，提高查詢準確率：
+只要使用適當的提示技巧，就能生成複雜的 SQL 查詢。下列建議有助於 BigQuery 資料畫布修正自然語言提示詞，提高查詢準確率：
 
 * **清楚撰寫。**清楚說明要求，避免含糊不清。
-* **直接提問。**如要獲得最精確的答案，請一次只問一個問題，並簡潔明瞭地提供提示。如果一開始的提示包含多個問題，請將問題的各個部分列出來，讓 Gemini 清楚瞭解。
+* **直接提問。**如要獲得最精確的答案，請一次只問一個問題，並簡潔明瞭地輸入提示。如果一開始的提示包含多個問題，請將問題的各個部分列出來，讓 Gemini 清楚瞭解。
 * **提供明確的指示。**在提示中強調關鍵字詞。
 * **指定作業順序。**以清楚且有條理的方式提供操作說明。將任務分成專注的小步驟。
 * **反覆修正測試。**嘗試使用不同詞組和方法，找出最佳結果。
@@ -79,7 +79,7 @@ BigQuery 資料畫布可讓您執行下列操作：
 如要取得使用 BigQuery 資料畫布所需的權限，請要求系統管理員在專案中授予您下列 IAM 角色：
 
 * [BigQuery Studio 使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.studioUser)  (`roles/bigquery.studioUser`)
-* [Gemini 版 Google Cloud 使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/cloudaicompanion?hl=zh-tw#cloudaicompanion.user)  (`roles/cloudaicompanion.user`)
+* [Gemini for Google Cloud 使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/cloudaicompanion?hl=zh-tw#cloudaicompanion.user)  (`roles/cloudaicompanion.user`)
 
 如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
@@ -115,11 +115,11 @@ BigQuery 資料畫布可讓您執行下列操作：
 
 ### 搜尋節點
 
-在 BigQuery 資料畫布中，搜尋節點可讓您尋找資料資產並納入畫布。這項功能就像橋樑，可連結自然語言查詢或關鍵字搜尋，以及您想使用的實際資料。
+在 BigQuery 資料畫布中，搜尋節點可讓您尋找資料資產並納入畫布。這項功能可做為橋樑，連結自然語言查詢或關鍵字搜尋與您要使用的實際資料。
 
 您可以使用自然語言或關鍵字提供搜尋查詢。搜尋節點會搜尋資料資產。這項功能會運用 Knowledge Catalog 中繼資料，強化內容認知能力。BigQuery 資料畫布也會建議最近使用的資料表、查詢和已儲存的查詢。
 
-搜尋節點會傳回符合查詢條件的相關資料資產清單。並考量資料欄名稱和資料表說明。接著，您可以選取要新增至資料畫布的資產做為表格節點，進一步分析及視覺化呈現資料。
+搜尋節點會傳回符合查詢條件的相關資料資產清單。系統會考量資料欄名稱和資料表說明。接著，您可以選取要新增至資料畫布的資產做為表格節點，進一步分析及視覺化呈現資料。
 
 您可以在搜尋節點中執行下列操作：
 
@@ -359,7 +359,7 @@ Gemini for Google Cloud產品仍處於早期技術階段，因此可能會生成
 
 ### 工作流程範例：聯結資料表
 
-在本範例中，您要在 BigQuery 資料畫布中使用自然語言提示尋找資料並聯結資料表。然後將查詢匯出為筆記本。
+在本範例中，您會在 BigQuery 資料畫布中使用自然語言提示尋找資料並彙整資料表。然後將查詢匯出為筆記本。
 
 #### 提示 1：尋找資料
 
@@ -376,7 +376,7 @@ Gemini for Google Cloud產品仍處於早期技術階段，因此可能會生成
 
 #### 提示 2：根據地址聯結表格
 
-1. 在資料畫布上，按一下「聯結」。
+1. 在資料畫布上，按一下「加入」。
 
    BigQuery 資料畫布會建議要聯結的資料表。
 2. 如要開啟新的**自然語言**提示欄位，請按一下「搜尋表格」。
@@ -388,7 +388,7 @@ Gemini for Google Cloud產品仍處於早期技術階段，因此可能會生成
 4. 選取 `bigquery-public-data.new_york_trees.tree_census_2005` 表格，然後按一下「新增至畫布」。
 
    畫布上會顯示表格。
-5. 在資料畫布上，按一下「聯結」。
+5. 在資料畫布上，按一下「加入」。
 6. 在「On this canvas」(在這個畫布上) 區段中，選取「Table cell」(表格儲存格) 核取方塊，然後按一下「OK」(確定)。
 7. 在「自然語言」提示欄位中，輸入下列提示：
 
@@ -509,14 +509,14 @@ BigQuery 資料畫布能將查詢匯出為筆記本。
 
    系統會顯示「編輯視覺化」窗格。你可以編輯詳細資料，例如圖表標題、X 軸名稱和 Y 軸名稱。此外，如果您按一下「JSON 編輯器」分頁，可以直接根據 JSON 值編輯圖表。
 
-## 與 Gemini 助理合作
+## 與 Gemini 助理互動
 
 **預覽**
 
 這項產品或功能適用《[服務專屬條款](https://docs.cloud.google.com/terms/service-terms?hl=zh-tw#1)》中「一般服務條款」一節的《正式發布前產品條款》。正式發布前的產品和功能是按照「原樣」提供，支援範圍可能有限。
 詳情請參閱[推出階段說明](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
 
-**注意：** 如要提供意見回饋或尋求這項功能支援，請傳送電子郵件至 [datacanvas-feedback@google.com](mailto:datacanvas-feedback@google.com)。
+**附註：** 如要提供意見回饋或尋求這項功能支援，請傳送電子郵件至 [datacanvas-feedback@google.com](mailto:datacanvas-feedback@google.com)。
 
 您可以使用 Gemini 支援的對話體驗，處理 BigQuery 資料畫布。對話式助理可根據您的要求建立節點、執行查詢及建立視覺化內容。您可以選擇要讓助理處理的表格，並新增指示來引導助理的行為。助理可處理新的或現有的資料畫布。
 
@@ -529,7 +529,7 @@ BigQuery 資料畫布能將查詢匯出為筆記本。
    * `Make a chart based on my data, sorted high to low.`
    * `I want to see sample data from my table.`
 
-   回覆會根據要求包含一或多個節點。舉例來說，如果您要求助理建立資料圖表，助理會在資料畫布上建立視覺化節點。
+   回覆內容會根據要求包含一或多個節點。舉例來說，如果您要求助理建立資料圖表，助理會在資料畫布上建立視覺化節點。
 
    按一下「詢問資料問題」欄位時，您也可以執行下列操作：
 
@@ -577,8 +577,8 @@ BigQuery 資料畫布能將查詢匯出為筆記本。
 
 使用 BigQuery 資料畫布助理時，請遵循下列最佳做法，以獲得最佳結果：
 
-* **具體明確。**清楚說明要計算、分析或以視覺化方式呈現的內容。例如，說出 `Calculate the average trip duration for trips starting in council district
-  eight`，而不是 `Analyze trip data`。
+* **具體明確。**清楚說明要計算、分析或以視覺化方式呈現的內容。舉例來說，與其說「`Analyze trip data`」，不如說「`Calculate the average trip duration for trips starting in council district
+  eight`」。
 * **確保資料脈絡正確無誤。**助理只能使用您提供的資料。確認所有相關資料表和資料欄都已新增至畫布。
 * **先從簡單的提示開始，然後逐步調整。**請先提出簡單的問題，確保助理瞭解基本結構和資料。舉例來說，先說「Ok Google」`Show total trips by subscriber_type`，再說「播放 YouTube TV」`Show total trips by subscriber_type and break down the result by
   council_district`。
@@ -626,7 +626,7 @@ BigQuery 資料畫布能將查詢匯出為筆記本。
      - Make sure to cover each part via a separate line of reasoning
    ```
 10. 關閉「畫布助理設定」窗格。
-11. 在「詢問資料問題」欄位中，輸入下列自然語言提示：
+11. 在「Ask a data question」(詢問資料問題) 欄位中，輸入下列自然語言提示：
 
     ```
     Show the number of trips by council district and subscriber type
@@ -657,7 +657,7 @@ BigQuery 資料畫布能將查詢匯出為筆記本。
 3. 在「Explorer」窗格中，點選「資料畫布」旁邊的「查看動作」圖示 more\_vert，然後執行下列其中一項操作：
 
 * 如要在目前的分頁中開啟清單，請按一下「顯示全部」。
-* 如要在新分頁中開啟清單，請依序點選 **「顯示全部」>「新分頁」**。
+* 如要在新分頁中開啟清單，請依序點選「顯示全部」**>「新分頁」**。
 * 如要在分割分頁中開啟清單，請按一下「在『<』分割分頁中顯示全部」**>**。
 
 ## 查看資料畫布中繼資料
@@ -731,7 +731,7 @@ Knowledge Catalog 會自動從資料畫布擷取下列中繼資料：
 Knowledge Catalog 會將資料畫布記錄為[項目](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources?hl=zh-tw#entries)，並提供下列項目值：
 
 系統項目群組
-:   資料畫布的[系統項目群組](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources?hl=zh-tw#entry-groups)為 `@dataform`。如要在 Knowledge Catalog 中查看資料畫布項目的詳細資料，請查看 `dataform` 系統項目群組。如需查看項目群組中所有項目的清單，請參閱 Knowledge Catalog 說明文件中的「[查看項目群組的詳細資料](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources?hl=zh-tw#entry-group-details)」。�
+:   資料畫布的[系統項目群組](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources?hl=zh-tw#entry-groups)為 `@dataform`。如要在 Knowledge Catalog 中查看資料畫布項目的詳細資料，您必須查看 `dataform` 系統項目群組。如需查看項目群組中所有項目的清單，請參閱 Knowledge Catalog 說明文件中的「[查看項目群組的詳細資料](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources?hl=zh-tw#entry-group-details)」。�
 
 系統項目類型
 :   資料畫布的[系統項目類型](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources?hl=zh-tw#entry-types)為 `dataform-code-asset`。[如要查看資料畫布的詳細資料，請查看 `dataform-code-asset` 系統項目類型、使用切面篩選器篩選結果，並將 `dataform-code-asset` 切面內的 `type` 欄位設為 `DATA_CANVAS`](https://docs.cloud.google.com/dataplex/docs/search-syntax?hl=zh-tw#aspect-search)。然後選取所選資料畫布的項目。
@@ -784,11 +784,11 @@ Knowledge Catalog 會將資料畫布記錄為[項目](https://docs.cloud.google.
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-06 (世界標準時間)。
+上次更新時間：2026-05-09 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-06 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]

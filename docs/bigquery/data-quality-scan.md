@@ -35,31 +35,25 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 必要的角色
 
-本節說明使用 Knowledge Catalog 資料品質掃描作業時所需的 IAM 角色和權限。
+本節說明使用 Knowledge Catalog 資料品質掃描作業所需的 IAM 角色和權限。
 
 ### 使用者角色和權限
 
 如要取得執行及管理資料品質掃描作業所需的權限，請要求管理員授予下列 IAM 角色：
 
 * 對 BigQuery 資料表執行資料品質掃描：
-  + [BigQuery 工作使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.jobUser)  (`roles/bigquery.jobUser`)
-    專案，可執行掃描工作
-  + 要掃描的 BigQuery 資料表上的「BigQuery 資料檢視者」 (`roles/bigquery.dataViewer`)
+  + 專案的 [BigQuery 工作使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.jobUser)  (`roles/bigquery.jobUser`)
+    ，可執行掃描工作
+  + 在要掃描的 BigQuery 資料表上，按一下 [BigQuery 資料檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataViewer)  (`roles/bigquery.dataViewer`)
 * 將資料品質掃描結果發布至 Knowledge Catalog：
   + 掃描資料表的「BigQuery 資料編輯者」 (`roles/bigquery.dataEditor`)
-  + [Dataplex Catalog 編輯者](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex?hl=zh-tw#dataplex.catalogEditor)  (`roles/dataplex.catalogEditor`)
-    在表格的相同位置，點選 `@bigquery` 項目群組
+  + [Dataplex Catalog 編輯者](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex?hl=zh-tw#dataplex.catalogEditor)  (`roles/dataplex.catalogEditor`)：在與表格相同位置的`@bigquery`項目群組上
 * 對 `DataScan` 資源執行特定工作：
-  + [Dataplex DataScan 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex?hl=zh-tw#dataplex.dataScanAdmin)  (`roles/dataplex.dataScanAdmin`)
-    專案，可取得完整存取權
-  + [Dataplex DataScan 建立者](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex?hl=zh-tw#dataplex.dataScanCreator)  (`roles/dataplex.dataScanCreator`)
-    專案，建立掃描作業
-  + [Dataplex DataScan 編輯者](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex?hl=zh-tw#dataplex.dataScanEditor)  (`roles/dataplex.dataScanEditor`)
-    專案的寫入存取權
-  + [Dataplex DataScan 檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex?hl=zh-tw#dataplex.dataScanViewer)  (`roles/dataplex.dataScanViewer`)
-    專案，即可讀取掃描中繼資料
-  + [Dataplex DataScan 資料檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex?hl=zh-tw#dataplex.dataScanDataViewer)  (`roles/dataplex.dataScanDataViewer`)
-    專案，可讀取掃描資料，包括規則和結果
+  + 專案的 [Dataplex DataScan 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex?hl=zh-tw#dataplex.dataScanAdmin)  (`roles/dataplex.dataScanAdmin`)，可取得完整存取權
+  + 專案的 [Dataplex DataScan 建立者](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex?hl=zh-tw#dataplex.dataScanCreator)  (`roles/dataplex.dataScanCreator`)，可建立掃描作業
+  + 專案的「Dataplex DataScan 編輯者」 (`roles/dataplex.dataScanEditor`) 寫入存取權
+  + 專案的 [Dataplex DataScan 檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex?hl=zh-tw#dataplex.dataScanViewer)  (`roles/dataplex.dataScanViewer`)，可讀取掃描中繼資料
+  + 專案的 [Dataplex DataScan 資料檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex?hl=zh-tw#dataplex.dataScanDataViewer)  (`roles/dataplex.dataScanDataViewer`)，可讀取掃描資料，包括規則和結果
 
 如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
@@ -70,7 +64,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 如要執行及管理資料品質掃描作業，必須具備下列權限：
 
 * 對 BigQuery 資料表執行資料品質掃描：
-  + 專案的  `bigquery.jobs.create` 權限，以便執行掃描工作
+  + 專案的 `bigquery.jobs.create` 權限，以便執行掃描工作
   + `bigquery.tables.get`
     要掃描的 BigQuery 資料表
   + `bigquery.tables.getData`
@@ -81,27 +75,27 @@ Google uses AI technology to translate content into your preferred language. AI 
   + `dataplex.entryGroups.useDataQualityScorecardAspect`
     位於與資料表相同位置的 `@bigquery` 項目群組
 * 建立 `DataScan`：
-   `dataplex.datascans.create`
+  `dataplex.datascans.create`
   在專案中
 * 刪除 `DataScan`：
-   `dataplex.datascans.delete`
+  `dataplex.datascans.delete`
   專案
 * 查看 `DataScan` 中繼資料：
-   `dataplex.datascans.get`
+  `dataplex.datascans.get`
   在專案上
 * 查看 `DataScan` 詳細資料，包括規則和結果：
-   `dataplex.datascans.getData`
+  `dataplex.datascans.getData`
   在專案上
 * 列出專案的 `DataScan`：
-   `dataplex.datascans.list`
+  `dataplex.datascans.list`
 * 執行 `DataScan`：
-   `dataplex.datascans.run`
+  `dataplex.datascans.run`
   專案
 * 更新專案中的 `DataScan`：
-   `dataplex.datascans.update`
+  `dataplex.datascans.update`
 * 取得或設定 `DataScan` 的 IAM 政策：
-  + 專案的  `dataplex.datascans.getIamPolicy`
-  + 專案的  `dataplex.datascans.setIamPolicy`
+  + 專案的 `dataplex.datascans.getIamPolicy`
+  + 專案的 `dataplex.datascans.setIamPolicy`
 
 您或許還可透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)取得這些權限。
 
@@ -120,10 +114,10 @@ Google uses AI technology to translate content into your preferred language. AI 
 **重要事項：**您必須將這些角色授予含有資料品質掃描的專案的 Knowledge Catalog 服務帳戶，*而非*使用者帳戶。如果未將角色授予正確的主體，可能會導致權限錯誤。
 
 * 讀取 BigQuery 資料表資料：
-  待掃描的 BigQuery 資料表，以及規則中參照的任何其他資料表，都必須具備 [BigQuery 資料檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataViewer)  (`roles/bigquery.dataViewer`) 權限
+  掃描的 BigQuery 資料表和規則中參照的任何其他資料表，都必須具備 [BigQuery 資料檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataViewer)  (`roles/bigquery.dataViewer`) 權限。
 * 讀取 Iceberg REST 目錄資料表資料：
   [BigLake 檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake?hl=zh-tw#biglake.viewer)  (`roles/biglake.viewer`)
-  在要掃描的 Iceberg REST 目錄資料表，以及規則中參照的任何其他資料表上
+  掃描 Iceberg REST 目錄資料表，以及規則中參照的任何其他資料表
 * 將掃描結果匯出至 BigQuery 資料表：
   結果資料集和資料表的「BigQuery 資料編輯者」 (`roles/bigquery.dataEditor`)
 * 掃描 Knowledge Catalog lake 中整理的 BigQuery 資料：
@@ -140,7 +134,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 #### 所需權限
 
-如要從各種來源讀取資料及匯出結果，您必須具備下列權限：
+如要從各種來源讀取資料及匯出結果，必須具備下列權限：
 
 * 讀取 BigQuery 資料表資料：
   + `bigquery.tables.get`
@@ -267,7 +261,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    1. 在「選取 BigQuery 資料集」欄位中，按一下「瀏覽」。選取用來儲存資料品質掃描結果的 BigQuery 資料集。
    2. 在「BigQuery table」(BigQuery 資料表) 欄位中，指定要儲存資料品質掃描結果的資料表。如果使用現有資料表，請確認該資料表與[匯出資料表結構定義](https://docs.cloud.google.com/dataplex/docs/use-auto-data-quality?hl=zh-tw#table-schema)相容。如果指定的資料表不存在，Knowledge Catalog 會為您建立。
 
-      **附註：** 您可以為多項資料品質掃描作業使用同一個資料表。
+      **注意：** 您可以為多項資料品質掃描作業使用同一個結果資料表。
 6. 選用：新增標籤。標籤是鍵/值組合，可用來將相關物件分組，或與其他 Google Cloud 資源組合。
 7. 選用：設定電子郵件通知報告，在資料品質掃描工作完成時通知使用者。在「通知報表」部分，按一下「新增電子郵件 ID」add，然後輸入最多五個電子郵件地址。然後選取要傳送報表的狀況：
 
@@ -683,7 +677,7 @@ POST https://dataplex.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/d
 
    [前往「Data profiling & quality」(資料剖析與品質) 頁面](https://console.cloud.google.com/bigquery/governance/metadata-curation/data-profiling-and-quality?hl=zh-tw)
 2. 按一下要執行的資料品質掃描作業。
-3. 點選「立即執行」。
+3. 按一下「立即執行」。
 
 ### gcloud
 
@@ -1169,8 +1163,5 @@ public sealed partial class GeneratedDataScanServiceClientSnippets
     /// This snippet has been automatically generated and should be regarded as a code template only.
     /// It will require modifications to work:
     /// - It may require correct/in-range values for request initialization.
-    /// - It may require specifying regional endpoints when creating the service client as shown in
-    ///   https://cloud.google.com/dotnet/docs/reference/help/client-configuration#endpoint.
-    /// </remarks>
-    public
+    /// - It may require specifying regional endpoints when creating the service client
 ```

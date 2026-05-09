@@ -178,4 +178,4 @@ A capacity commitment is a way to purchase compute capacity for BigQuery jobs (i
 
 | UpdateCapacityCommitment |
 | --- |
-| `rpc UpdateCapacityCommitment(UpdateCapacityCommitmentRequest) returns (CapacityCommitment)`  Updates an existing capacity commitment.  Only `plan` and `renewal_plan` fields can be updated.  Plan can only be changed to a plan of a longer commitment period. Attempting to change to a plan with shorter commitment period will fail with the error code `google.rpc.Code.FAILED_PRECONDIT` |
+| `rpc UpdateCapacityCommitment(UpdateCapacityCommitmentRequest) returns (CapacityCommitment)`  Updates an existing capacity commitment.  Only `plan` and `renewal_plan` fields can be updated.  Plan can only be changed to a plan of a longer commitment period. Attempting to change to a plan with shorter commitment period will fail with the error code `google.rpc.Code.F` |

@@ -85,11 +85,11 @@ BigQuery 資料集有下列限制：
    ```
    CREATE SCHEMA PROJECT_ID.DATASET_ID
      OPTIONS (
-       default_kms_key_name = &#39;KMS_KEY_NAME',
+       default_kms_key_name = 'KMS_KEY_NAME',
        default_partition_expiration_days = PARTITION_EXPIRATION,
        default_table_expiration_days = TABLE_EXPIRATION,
-       description = ';DESCRIPTION',
-       labels = [('KEY_19;,';VALUE_1'),('KEY_29;,'VALUE_2')],
+       description = 'DESCRIPTION',
+       labels = [('KEY_1','VALUE_1'),('KEY_2','VALUE_2')],
        location = 'LOCATION',
        max_time_travel_hours = HOURS,
        storage_billing_model = BILLING_MODEL);
@@ -128,7 +128,7 @@ bq --location=LOCATION mk \
     --default_kms_key=KMS_KEY_NAME \
     --default_partition_expiration=PARTITION_EXPIRATION \
     --default_table_expiration=TABLE_EXPIRATION \
-    --description=&quot;DESCRIPTION" \
+    --description="DESCRIPTION" \
     --label=KEY_1:VALUE_1 \
     --label=KEY_2:VALUE_2 \
     --add_tags=KEY_3:VALUE_3[,...] \
@@ -423,11 +423,11 @@ func createDataset(projectID, datasetID string) error {
 
 	client, err := bigquery.NewClient(ctx, projectID)
 	if err != nil {
-		return fmt.Errorf("bigquery.N&ewClient: %v", err)
+		return fmt.Errorf("bigquery.NewClient: %v", err)
 	}
 	defer client.Close()
 
-	meta := bigquery.DatasetMetadata{
+	meta := &bigquery.DatasetMetadata{
 		Location: "US", // See https://cloud.google.com/bigquery/docs/locations
 	}
 	if err := client.Dataset(datasetID).Create(ctx, meta); err != nil {
@@ -468,9 +468,9 @@ public class CreateDataset {
 
       Dataset newDataset = bigquery.create(datasetInfo);
       String newDatasetName = newDataset.getDatasetId().getDataset();
-      System.out.println(newDatasetName + " created successfully&quot;);
+      System.out.println(newDatasetName + " created successfully");
     } catch (BigQueryException e) {
-      System.out.println("Dataset was not created. \n"; + e.toString());
+      System.out.println("Dataset was not created. \n" + e.toString());
     }
   }
 }
@@ -484,7 +484,7 @@ public class CreateDataset {
 
 ```
 // Import the Google Cloud client library and create a client
-const {BigQuery} = require(&#39;@google-cloud/bigquery');
+const {BigQuery} = require('@google-cloud/bigquery');
 const bigquery = new BigQuery();
 
 async function createDataset() {
@@ -521,9 +521,9 @@ use Google\Cloud\BigQuery\BigQueryClient;
 // $datasetId = 'The BigQuery dataset ID';
 
 $bigQuery = new BigQueryClient([
- >   'projectId' = $projectId,
-]>);
-$dataset = $bigQuery-createDataset($datasetId);
+    'projectId' => $projectId,
+]);
+$dataset = $bigQuery->createDataset($datasetId);
 printf('Created dataset %s' . PHP_EOL, $datasetId);
 ```
 
@@ -564,7 +564,7 @@ print("Created dataset {}.{}".format(client.project, dataset.dataset_id))
 ```
 require "google/cloud/bigquery"
 
-def create_dataset dataset_id = "my_dataset", location = "US";
+def create_dataset dataset_id = "my_dataset", location = "US"
   bigquery = Google::Cloud::Bigquery.new
 
   # Create the dataset in a specified geographic location
@@ -623,11 +623,11 @@ end
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-06 (世界標準時間)。
+上次更新時間：2026-05-09 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-06 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]

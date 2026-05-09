@@ -418,5 +418,3 @@ LOAD DATA INTO mydataset.table1
     uris = ['gs://bucket/path/file1.csv', 'gs://bucket/path/file2.csv']
   )
 ```
-
-#### Load da

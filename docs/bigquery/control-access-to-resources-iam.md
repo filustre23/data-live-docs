@@ -51,23 +51,23 @@ Google uses AI technology to translate content into your preferred language. AI 
 如要修改資源的 IAM 政策，必須具備下列權限：
 
 * 如要取得資料集的存取權政策：
-   `bigquery.datasets.get`
+  `bigquery.datasets.get`
 * 如要設定資料集的存取權政策，請按照下列步驟操作：
-   `bigquery.datasets.update`
+  `bigquery.datasets.update`
 * 如要取得資料集的存取權政策 (僅限Google Cloud 控制台)：
-   `bigquery.datasets.getIamPolicy`
+  `bigquery.datasets.getIamPolicy`
 * 如何設定資料集的存取權政策 (僅限控制台)：
-   `bigquery.datasets.setIamPolicy`
+  `bigquery.datasets.setIamPolicy`
 * 如要取得資料表或檢視表的政策：
-   `bigquery.tables.getIamPolicy`
+  `bigquery.tables.getIamPolicy`
 * 如要設定資料表或檢視的政策：
-   `bigquery.tables.setIamPolicy`
+  `bigquery.tables.setIamPolicy`
 * 如要取得日常安排的存取權政策：
-   `bigquery.routines.getIamPolicy`
+  `bigquery.routines.getIamPolicy`
 * 如要設定日常安排的存取權政策：
-   `bigquery.routines.setIamPolicy`
+  `bigquery.routines.setIamPolicy`
 * 如要建立 bq 工具或 [SQL BigQuery 作業](https://docs.cloud.google.com/bigquery/docs/managing-jobs?hl=zh-tw) (選用)：
-   `bigquery.jobs.create`
+  `bigquery.jobs.create`
 
 您或許還可透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)取得這些權限。
 
@@ -1238,5 +1238,4 @@ public class RevokeDatasetAccess {
       BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
 
       // Create datasetId with the projectId and the datasetName.
-      DatasetId
 ```

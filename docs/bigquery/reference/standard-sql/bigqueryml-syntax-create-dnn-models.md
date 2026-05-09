@@ -953,4 +953,4 @@ A `STRING` value containing the fully-qualified name of the CMEK. For example,
 
 ### Internal parameter defaults
 
-BigQuery ML uses the following default
+BigQuery ML uses the fo

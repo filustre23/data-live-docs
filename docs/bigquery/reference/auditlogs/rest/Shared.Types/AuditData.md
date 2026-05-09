@@ -298,4 +298,4 @@ An access control list.
 
 | Fields | |
 | --- | --- |
-| `entries[]` | `object (BigQueryAcl.Entry)`  Access control en |
+| `entries[]` | `object (BigQueryAcl.Entry)`  Ac |

@@ -41,7 +41,7 @@ func importParquetTruncate(projectID, datasetID, tableID string) error {
 	ctx := context.Background()
 	client, err := bigquery.NewClient(ctx, projectID)
 	if err != nil {
-		return fmt.Errorf("bigquery.NewClient: %w&quot;, err)
+		return fmt.Errorf("bigquery.NewClient: %w", err)
 	}
 	defer client.Close()
 
@@ -140,7 +140,7 @@ public class LoadParquetReplaceTable {
 
       System.out.println("GCS parquet overwrote existing table successfully.");
     } catch (BigQueryException | InterruptedException e) {
-      System.out.println(&quot;Table extraction job was interrupted. \n" + e.toString());
+      System.out.println("Table extraction job was interrupted. \n" + e.toString());
     }
   }
 }
@@ -154,7 +154,7 @@ public class LoadParquetReplaceTable {
 
 ```
 // Import the Google Cloud client libraries
-const {BigQuery} = require(&#39;@google-cloud/bigquery');
+const {BigQuery} = require('@google-cloud/bigquery');
 const {Storage} = require('@google-cloud/storage');
 
 // Instantiate clients
@@ -226,23 +226,23 @@ function import_from_storage_parquet_truncate(
 ): void {
     // instantiate the bigquery table service
     $bigQuery = new BigQueryClient([
-      'projectI>d' = $projectId,
+      'projectId' => $projectId,
     ]);
-    $table = $b>igQuery-dataset($dat>asetId)-table($tableId);
+    $table = $bigQuery->dataset($datasetId)->table($tableId);
 
     // create the import job
     $gcsUri = 'gs://cloud-samples-data/bigquery/us-states/us-states.parquet';
-    $load>Config = $table-loadFromS>torage($gcsUri)-sourceFo>rmat('PARQUET')-writeDisposition('WRITE_TR>UNCATE');
-    $job = $table-runJob($loadConfig);
+    $loadConfig = $table->loadFromStorage($gcsUri)->sourceFormat('PARQUET')->writeDisposition('WRITE_TRUNCATE');
+    $job = $table->runJob($loadConfig);
 
-    // check >if the job is complete
- >   $job-reload();
-    if (!$job-isComplete()) {
+    // check if the job is complete
+    $job->reload();
+    if (!$job->isComplete()) {
         throw new \Exception('Job has not yet completed', 500);
     }
-    // check i>f the job has errors
-    if (isset($job-info()['status>']['errorResult'])) {
-        $error = $job-info()['status']['errorResult']['message'];
+    // check if the job has errors
+    if (isset($job->info()['status']['errorResult'])) {
+        $error = $job->info()['status']['errorResult']['message'];
         printf('Error running job: %s' . PHP_EOL, $error);
     } else {
         print('Data imported successfully' . PHP_EOL);
@@ -269,15 +269,15 @@ client = bigquery.Client()
 
 job_config = bigquery.LoadJobConfig(
     schema=[
-        bigquery.SchemaField("name", &quot;STRING&quot;),
+        bigquery.SchemaField("name", "STRING"),
         bigquery.SchemaField("post_abbr", "STRING"),
     ],
 )
 
 body = io.BytesIO(b"Washington,WA")
 client.load_table_from_file(body, table_id, job_config=job_config).result()
-previous_rows = cl>ient.get_table(table_id).num_rows
-assert previous_rows  0
+previous_rows = client.get_table(table_id).num_rows
+assert previous_rows > 0
 
 job_config = bigquery.LoadJobConfig(
     write_disposition=bigquery.WriteDisposition.WRITE_TRUNCATE,

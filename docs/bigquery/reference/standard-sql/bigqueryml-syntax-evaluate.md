@@ -942,4 +942,4 @@ The following types of models are regression models:
 
 `ML.EVALUATE` returns the following columns for k-means models:
 
-* `trial_id`: an `INT64` value that identifies the hyperparameter tuning trial
+* `trial_id`: an `INT64` value that identifies the hyperparamet

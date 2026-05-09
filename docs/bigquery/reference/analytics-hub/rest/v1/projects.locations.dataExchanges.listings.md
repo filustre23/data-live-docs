@@ -304,4 +304,4 @@ Indicates whether this commercial access is currently active.
 | `getIamPolicy` | Gets the IAM policy. |
 | `list` | Lists all listings in a given project and location. |
 | `listSubscriptions` | Lists all subscriptions on a given Data Exchange or Listing. |
-| `patch` |
+| `patc` |

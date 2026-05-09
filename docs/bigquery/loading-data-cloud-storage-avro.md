@@ -166,7 +166,7 @@ BigQuery 支援下列 Avro 檔案內容的壓縮轉碼器：
 5. 在「Create table」(建立資料表) 頁面的「Source」(來源) 區段中：
 
    * 在「Create table from」(使用下列資料建立資料表) 部分，選取「Google Cloud Storage」。
-   * 在來源欄位中，瀏覽至或輸入 [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#gcs-uri)。請注意，Google Cloud console 中不可加入多個 URI，但支援使用[萬用字元](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#load-wildcards)。Cloud Storage 值區的位置必須與待建立資料表所在的資料集位置相同。
+   * 在來源欄位中，瀏覽至或輸入 [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#gcs-uri)。請注意，Google Cloud console 中不可加入多個 URI，但支援使用[萬用字元](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#load-wildcards)。Cloud Storage 值區的位置必須與要建立之資料表所屬的資料集位置相同。
    * 在「File format」(檔案格式) 中，選取 [Avro]。
 6. 在「Create table」(建立資料表) 頁面的「Destination」(目的地) 區段中：
 
@@ -245,7 +245,7 @@ path_to_source
 
 更改下列內容：
 
-* location 是您的位置。`--location` 是選用旗標。舉例來說，如果您在東京地區使用 BigQuery，就可以將該旗標的值設定為 `asia-northeast1`。您可以使用 [.bigqueryrc 檔案](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool?hl=zh-tw#setting_default_values_for_command-line_flags)來設定位置的預設值。
+* location 是您的位置。`--location` 是選用旗標。舉例來說，如果您在東京區域使用 BigQuery，就可以將該旗標的值設定為 `asia-northeast1`。您可以使用 [.bigqueryrc 檔案](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool?hl=zh-tw#setting_default_values_for_command-line_flags)來設定位置的預設值。
 * format為 `AVRO`。
 * dataset 是現有資料集。
 * table 是您正在載入資料的資料表名稱。
@@ -310,12 +310,12 @@ path_to_source
 
    * 如果是 `status.state = DONE`，代表工作已順利完成。
    * 如果出現 `status.errorResult` 屬性，代表要求執行失敗，且該物件會包含描述問題的相關資訊。如果要求執行失敗，系統就不會建立任何資料表，也不會載入任何資料。
-   * 如果未出現 `status.errorResult`，代表工作順利完成，但可能有一些不嚴重的錯誤，例如少數資料列在匯入時發生問題。不嚴重的錯誤都會列在已傳回工作物件的 `status.errors` 屬性中。
+   * 如果未出現 `status.errorResult`，代表工作順利完成，但可能有一些非致命錯誤，例如少數資料列在匯入時發生問題。不嚴重的錯誤都會列在已傳回工作物件的 `status.errors` 屬性中。
 
 **API 附註：**
 
 * 載入工作不可部分完成，且資料狀態具一致性。如果載入工作失敗，所有資料都無法使用；如果載入工作成功，則所有資料都可以使用。
-* 最佳做法就是產生唯一識別碼，並在呼叫 `jobs.insert` 建立載入工作時，將該唯一識別碼當做 `jobReference.jobId` 傳送。這個方法較不受網路故障問題的影響，因為用戶端可使用已知的工作 ID 進行輪詢或重試。
+* 最佳做法是產生唯一 ID，並在呼叫 `jobs.insert` 建立載入工作時，將該 ID 當做 `jobReference.jobId` 傳送。這個方法較不受網路故障問題的影響，因為用戶端可使用已知的工作 ID 進行輪詢或重試。
 * 對指定的工作 ID 呼叫 `jobs.insert` 是一種冪等作業。也就是說，您可以對同一個工作 ID 重試無數次，最多會有一個作業成功。
 
 ### Go
@@ -551,7 +551,7 @@ print("Loaded {} rows.".format(destination_table.num_rows))
 5. 在「Create table」(建立資料表) 頁面的「Source」(來源) 區段中：
 
    * 針對「Create table from」(使用下列資料建立資料表)，選取 [Cloud Storage]。
-   * 在來源欄位中，瀏覽至或輸入 [Cloud Storage URI](#gcs-uri)。請注意， Google Cloud 控制台中無法加入多個 URI，但支援使用[萬用字元](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#load-wildcards)。Cloud Storage 值區的位置必須與您要附加或覆寫的資料表所在的資料集位置相同。
+   * 在來源欄位中，瀏覽至或輸入 [Cloud Storage URI](#gcs-uri)。請注意， Google Cloud 控制台中無法加入多個 URI，但支援使用[萬用字元](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#load-wildcards)。Cloud Storage 值區的位置必須與要附加或覆寫之資料表所屬的資料集位置相同。
    * 在「File format」(檔案格式) 中，選取 [Avro]。
 6. 在「Create table」(建立資料表) 頁面的「Destination」(目的地) 區段中：
 
@@ -1018,11 +1018,11 @@ BigQuery 會將 Avro 資料類型轉換為下列 BigQuery 資料類型：
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-06 (世界標準時間)。
+上次更新時間：2026-05-08 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-06 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-08 (世界標準時間)。"],[],[]]

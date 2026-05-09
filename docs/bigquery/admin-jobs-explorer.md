@@ -30,7 +30,7 @@ BigQuery 提供下列`INFORMATION_SCHEMA`檢視畫面，顯示工作詳細資料
 
 ## 必要的角色
 
-如要取得使用管理工作探索工具所需的權限，請要求管理員授予您機構或專案的 [BigQuery 資源檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.resourceViewer)  (`roles/bigquery.resourceViewer`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得使用管理工作探索器所需的權限，請要求系統管理員授予您機構或專案的 [BigQuery 資源檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.resourceViewer)  (`roles/bigquery.resourceViewer`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
 這個預先定義的角色具備使用管理工作探索工具所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
@@ -39,13 +39,13 @@ BigQuery 提供下列`INFORMATION_SCHEMA`檢視畫面，顯示工作詳細資料
 如要使用管理工作探索器，必須具備下列權限：
 
 * 如要查看專案層級的資料：
-   `bigquery.jobs.listAll`
+  `bigquery.jobs.listAll`
   專案
 * 如要查看機構層級的資料：
-   `bigquery.jobs.listAll`
+  `bigquery.jobs.listAll`
   在機構上
 * 如要依貴機構的預訂記錄篩選：
-   `bigquery.reservations.list`
+  `bigquery.reservations.list`
   在機構上
 
 您或許還可透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)取得這些權限。
@@ -110,7 +110,7 @@ BigQuery 提供下列`INFORMATION_SCHEMA`檢視畫面，顯示工作詳細資料
 如要取得處理 BigQuery 工作詳細資料和系統層級詳細資料所需的權限，請要求管理員在機構或專案中授予您下列 IAM 角色：
 
 * 查看工作詳細資料：
-  BigQuery 資源檢視器 (`roles/bigquery.resourceViewer`) - 執行查詢的專案
+  BigQuery 資源檢視者 (`roles/bigquery.resourceViewer`) - 執行查詢的專案
 * 查看系統層級詳細資料：
   BigQuery 資源檢視者 (`roles/bigquery.resourceViewer`) - 管理專案
 
@@ -123,13 +123,13 @@ BigQuery 提供下列`INFORMATION_SCHEMA`檢視畫面，顯示工作詳細資料
 如要使用 BigQuery 工作詳細資料和系統層級詳細資料，您必須具備下列權限：
 
 * 如要查看專案層級的資料：
-   `bigquery.jobs.listAll`
+  `bigquery.jobs.listAll`
   專案
 * 如要查看機構層級的資料：
-   `bigquery.jobs.listAll`
+  `bigquery.jobs.listAll`
   在機構上
 * 如要依貴機構的預訂記錄篩選：
-   `bigquery.reservations.list`
+  `bigquery.reservations.list`
   在機構上
 
 您或許還可透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)取得這些權限。
@@ -175,7 +175,7 @@ BigQuery 提供下列`INFORMATION_SCHEMA`檢視畫面，顯示工作詳細資料
 如要取得處理 BigQuery 工作詳細資料和系統層級詳細資料所需的權限，請要求管理員在機構或專案中授予您下列 IAM 角色：
 
 * 查看工作詳細資料：
-  BigQuery 資源檢視器 (`roles/bigquery.resourceViewer`) - 執行查詢的專案
+  BigQuery 資源檢視者 (`roles/bigquery.resourceViewer`) - 執行查詢的專案
 * 查看系統層級詳細資料：
   BigQuery 資源檢視者 (`roles/bigquery.resourceViewer`) - 管理專案
 
@@ -188,13 +188,13 @@ BigQuery 提供下列`INFORMATION_SCHEMA`檢視畫面，顯示工作詳細資料
 如要使用 BigQuery 工作詳細資料和系統層級詳細資料，您必須具備下列權限：
 
 * 如要查看專案層級的資料：
-   `bigquery.jobs.listAll`
+  `bigquery.jobs.listAll`
   專案
 * 如要查看機構層級的資料：
-   `bigquery.jobs.listAll`
+  `bigquery.jobs.listAll`
   在機構上
 * 如要依貴機構的預訂記錄篩選：
-   `bigquery.reservations.list`
+  `bigquery.reservations.list`
   在機構上
 
 您或許還可透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)取得這些權限。
@@ -272,11 +272,11 @@ BigQuery 提供下列`INFORMATION_SCHEMA`檢視畫面，顯示工作詳細資料
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-06 (世界標準時間)。
+上次更新時間：2026-05-09 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-06 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]

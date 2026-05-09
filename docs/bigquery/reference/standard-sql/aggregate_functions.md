@@ -379,5 +379,5 @@ FROM UNNEST([2, 1, -2, 3, -2, 1, 2]) AS x;
 
 ```
 SELECT ARRAY_AGG(x IGNORE NULLS) AS array_agg
-FROM UNNEST([NULL, 1, -2, 3, -2,
+FROM UNNEST([NULL, 1, -2, 3, -2
 ```

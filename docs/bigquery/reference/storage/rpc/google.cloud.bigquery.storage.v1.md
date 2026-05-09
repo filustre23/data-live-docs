@@ -260,4 +260,4 @@ Request message for `BatchCommitWriteStreams`.
 
 | Fields | |
 | --- | --- |
-| `parent` | `string`  Required. Parent table that all the streams should belong to, in the form of `projects/{project}/datasets/{dataset}/tables/{table}`.  Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `parent` |
+| `parent` | `string`  Required. Parent table that all the streams should belong to, in the form of `projects/{project}/datasets/{dataset}/tables/{table}`.  Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource |

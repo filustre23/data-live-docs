@@ -66,33 +66,28 @@ gcloud services enable analyticshub.googleapis.com
 * 在資料無塵室中建立或刪除 TVF：
   + [Analytics Hub 發布者](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub?hl=zh-tw#analyticshub.publisher)  (`roles/analyticshub.publisher`)
     專案
-  + [Analytics Hub 訂閱者](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub?hl=zh-tw#analyticshub.subscriber)  (`roles/analyticshub.subscriber`)
-    專案
+  + 專案的 [Analytics Hub 訂閱者](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub?hl=zh-tw#analyticshub.subscriber)  (`roles/analyticshub.subscriber`)
 * 授權 TVF：
   專案的 [BigQuery 資料擁有者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataOwner)  (`roles/bigquery.dataOwner`)
 * 在資料無塵室中新增、更新或刪除 TVF 刊登項目：
   + [Analytics Hub 發布者](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub?hl=zh-tw#analyticshub.publisher)  (`roles/analyticshub.publisher`)
     專案
-  + [Analytics Hub 訂閱者](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub?hl=zh-tw#analyticshub.subscriber)  (`roles/analyticshub.subscriber`)
-    專案
+  + 專案的 [Analytics Hub 訂閱者](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub?hl=zh-tw#analyticshub.subscriber)  (`roles/analyticshub.subscriber`)
 * 建立查詢範本：
   + [Analytics Hub 發布者](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub?hl=zh-tw#analyticshub.publisher)  (`roles/analyticshub.publisher`)
     專案
-  + [Analytics Hub 訂閱者](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub?hl=zh-tw#analyticshub.subscriber)  (`roles/analyticshub.subscriber`)
-    專案
+  + 專案的 [Analytics Hub 訂閱者](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub?hl=zh-tw#analyticshub.subscriber)  (`roles/analyticshub.subscriber`)
 * 核准查詢範本：
   + [Analytics Hub 發布者](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub?hl=zh-tw#analyticshub.publisher)  (`roles/analyticshub.publisher`)
     專案
   + 專案的 [BigQuery 資料擁有者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataOwner)  (`roles/bigquery.dataOwner`)
 * 訂閱含有查詢範本的資料無塵室：
-  + [Analytics Hub 訂閱者](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub?hl=zh-tw#analyticshub.subscriber)  (`roles/analyticshub.subscriber`)
-    專案
+  + 專案的 [Analytics Hub 訂閱者](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub?hl=zh-tw#analyticshub.subscriber)  (`roles/analyticshub.subscriber`)
   + [Analytics Hub 訂閱項目擁有者](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub?hl=zh-tw#analyticshub.subscriptionOwner)  (`roles/analyticshub.subscriptionOwner`)
     在要訂閱資料無塵室的專案中
 * 執行查詢範本中定義的查詢：
-  + 專案的「BigQuery 資料檢視者」 (`roles/bigquery.dataViewer`)
-  + 專案的「BigQuery 使用者」 (`roles/bigquery.user`)
-    角色
+  + 專案的 [BigQuery 資料檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataViewer)  (`roles/bigquery.dataViewer`)
+  + 專案的 [BigQuery 使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.user)  (`roles/bigquery.user`)
 
 如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
@@ -103,21 +98,21 @@ gcloud services enable analyticshub.googleapis.com
 如要執行本文中的工作，必須具備下列權限：
 
 * 在資料無塵室中建立或刪除 TVF：
-  + 專案的  `bigquery.routines.create`
-  + 專案的  `bigquery.routines.update`
-  + 專案的  `bigquery.routines.delete`
+  + 專案的 `bigquery.routines.create`
+  + 專案的 `bigquery.routines.update`
+  + 專案的 `bigquery.routines.delete`
 * 授權 TVF：
-   `bigquery.datasets.update`
+  `bigquery.datasets.update`
   處理常式存取的資料集
 * 建立查詢範本：
-  + 專案的  `analyticshub.listings.subscribe`
-  + 專案的  `analyticshub.queryTemplates.create`
+  + 專案的 `analyticshub.listings.subscribe`
+  + 專案的 `analyticshub.queryTemplates.create`
 * 核准查詢範本：
-  + 專案的  `bigquery.routines.create`
+  + 專案的 `bigquery.routines.create`
   + `bigquery.datasets.update`
     處理常式存取的資料集
-  + 專案的  `analyticshub.listings.create`
-  + 專案的  `analyticshub.queryTemplates.approve`
+  + 專案的 `analyticshub.listings.create`
+  + 專案的 `analyticshub.queryTemplates.approve`
 
 您或許還可透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)取得這些權限。
 
@@ -573,11 +568,11 @@ group by t.company_id, t.company, t.campaign_id, t.sku, t.date, p.product_name, 
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-06 (世界標準時間)。
+上次更新時間：2026-05-08 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-06 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-08 (世界標準時間)。"],[],[]]

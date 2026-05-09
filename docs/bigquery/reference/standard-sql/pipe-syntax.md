@@ -500,4 +500,4 @@ to disambiguate columns after the `JOIN` operator.
 Filters the results of the input table. The `WHERE` operator behaves the same
 as the [`WHERE` clause](/bigquery/docs/reference/standard-sql/query-syntax#where_clause) in standard syntax.
 
-In pipe syntax, t
+In

@@ -449,5 +449,5 @@ Example legacy SQL query:
 SELECT
   word
 FROM
-  [bigquery-public-data
+  [bigquery-public-data</
 ```

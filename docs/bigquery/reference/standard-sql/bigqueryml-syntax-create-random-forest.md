@@ -990,4 +990,4 @@ option is set to `VERTEX_AI`.
 
 The `VERTEX_AI_MODEL_VERSION_ALIASES` option specifies a
 Vertex AI model alias to use when registering a model. Model
-aliases are helpful for fetching or deploying a particular model version
+aliases are helpful for fetching or deploying a particula

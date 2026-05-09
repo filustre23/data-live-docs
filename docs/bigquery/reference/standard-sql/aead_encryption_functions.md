@@ -463,5 +463,4 @@ created using `KEYS.NEW_KEYSET('AEAD_AES_GCM_256')`, and the raw key added using
 `AEAD.ENCRYPT`, GoogleSQL uses the primary cryptographic key created
 using `KEYS.NEW_KEYSET('AEAD_AES_GCM_256')` to encrypt the input plaintext. If
 the keyset is used with `AEAD.DECRYPT_STRING` or `AEAD.DECRYPT_BYTES`,
-GoogleSQL returns the resulting plaintext if either key succeeds in
-decrypting
+GoogleSQL returns the resulting plaintext if either key succeeds

@@ -1003,5 +1003,4 @@ year 2022-2023.
 
 * `region` specifies the geographic region to which the holiday applies. The
   supported regions are listed in [`HOLIDAY_REGION`](#holiday_region).
-* `holiday_name` contains the name of the holiday.
-<
+* `holiday_name` contains the name of the

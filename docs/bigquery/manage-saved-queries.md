@@ -50,13 +50,13 @@ Google uses AI technology to translate content into your preferred language. AI 
 如要管理已儲存的查詢，必須具備下列權限：
 
 * 如要在 Google Cloud 控制台中管理 BigQuery Studio 已儲存的查詢：
-   `bigquery.config.get, bigquery.jobs.create, dataform.locations., resourcemanager.projects.get, resourcemanager.projects.list, bigquery.readsessions., dataform.repositories., dataform.workspaces.`
+  `bigquery.config.get, bigquery.jobs.create, dataform.locations., resourcemanager.projects.get, resourcemanager.projects.list, bigquery.readsessions., dataform.repositories., dataform.workspaces.`
 * 如要使用 BigQuery API 管理 BigQuery Studio 已儲存的查詢，請按照下列步驟操作：
-   `dataform.locations., dataform.repositories., dataform.workspaces.*, resourcemanager.projects.get, resourcemanager.projects.list`
+  `dataform.locations., dataform.repositories., dataform.workspaces.*, resourcemanager.projects.get, resourcemanager.projects.list`
 * 如要將專案的傳統版已儲存查詢遷移至 BigQuery Studio 已儲存查詢，請按照下列步驟操作：
-   `bigquery.savedqueries.get, bigquery.savedqueries.list, bigquery.savedqueries.update, bigquery.savedqueries.delete, bigquery.savedqueries.create`
+  `bigquery.savedqueries.get, bigquery.savedqueries.list, bigquery.savedqueries.update, bigquery.savedqueries.delete, bigquery.savedqueries.create`
 * 如要允許[已驗證的使用者](https://docs.cloud.google.com/iam/docs/principals-overview?hl=zh-tw#all-authenticated-users)查看[公開存取查詢](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries?hl=zh-tw#grant-public-access)：
-   `dataform.locations.*, dataform.repositories.computeAccessTokenStatus, dataform.repositories.fetchHistory, dataform.repositories.fetchRemoteBranches, dataform.repositories.get, dataform.repositories.getIamPolicy, dataform.repositories.list, dataform.repositories.queryDirectoryContents, dataform.repositories.readFile, dataform.workspaces.fetchFileDiff, dataform.workspaces.fetchFileGitStatuses, dataform.workspaces.fetchGitAheadBehind. dataform.workspaces.get, dataform.workspaces.getIamPolicy, dataform.workspaces.list, dataform.workspaces.queryDirectoryContents, dataform.workspaces.readFile, dataform.workspaces.searchFiles, resourcemanager.projects.get, resourcemanager.projects.list`
+  `dataform.locations.*, dataform.repositories.computeAccessTokenStatus, dataform.repositories.fetchHistory, dataform.repositories.fetchRemoteBranches, dataform.repositories.get, dataform.repositories.getIamPolicy, dataform.repositories.list, dataform.repositories.queryDirectoryContents, dataform.repositories.readFile, dataform.workspaces.fetchFileDiff, dataform.workspaces.fetchFileGitStatuses, dataform.workspaces.fetchGitAheadBehind. dataform.workspaces.get, dataform.workspaces.getIamPolicy, dataform.workspaces.list, dataform.workspaces.queryDirectoryContents, dataform.workspaces.readFile, dataform.workspaces.searchFiles, resourcemanager.projects.get, resourcemanager.projects.list`
 
 您或許還可透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)取得這些權限。
 
@@ -441,11 +441,11 @@ Knowledge Catalog 會將儲存的查詢記錄為[項目](https://docs.cloud.goog
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-06 (世界標準時間)。
+上次更新時間：2026-05-08 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-06 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-08 (世界標準時間)。"],[],[]]

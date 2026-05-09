@@ -41,7 +41,7 @@ func importJSONWithCMEK(projectID, datasetID, tableID string) error {
 	ctx := context.Background()
 	client, err := bigquery.NewClient(ctx, projectID)
 	if err != nil {
-		return fmt.Errorf("bigquery.NewClient: %w&quot;, err)
+		return fmt.Errorf("bigquery.NewClient: %w", err)
 	}
 	defer client.Close()
 
@@ -49,8 +49,8 @@ func importJSONWithCMEK(projectID, datasetID, tableID string) error {
 	gcsRef.SourceFormat = bigquery.JSON
 	gcsRef.AutoDetect = true
 	loader := client.Dataset(datasetID).Table(tableID).LoaderFrom(gcsRef)
-	load&er.WriteDisposition = bigquery.WriteEmpty
-	loader.DestinationEncryptionConfig = bigquery.EncryptionConfig{
+	loader.WriteDisposition = bigquery.WriteEmpty
+	loader.DestinationEncryptionConfig = &bigquery.EncryptionConfig{
 		// TODO: Replace this key with a key you have created in KMS.
 		KMSKeyName: "projects/cloud-samples-tests/locations/us-central1/keyRings/test/cryptoKeys/test",
 	}
@@ -156,7 +156,7 @@ client = bigquery.Client()
 # Set the encryption key to use for the destination.
 # TODO: Replace this key with a key you have created in KMS.
 # kms_key_name = "projects/{}/locations/{}/keyRings/{}/cryptoKeys/{}".format(
-#     "cloud-samples-tests", "us", "test", &quot;test"
+#     "cloud-samples-tests", "us", "test", "test"
 # )
 
 job_config = bigquery.LoadJobConfig(
@@ -180,7 +180,7 @@ assert load_job.job_type == "load"
 
 load_job.result()  # Waits for the job to complete.
 
-assert load_job.state == &quot;DONE"
+assert load_job.state == "DONE"
 table = client.get_table(table_id)
 
 if table.encryption_configuration.kms_key_name == kms_key_name:

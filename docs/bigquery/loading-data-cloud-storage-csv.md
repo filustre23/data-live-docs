@@ -18,7 +18,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 從 Cloud Storage 載入 CSV 資料時，可將資料載入至新的資料表或分區、將資料附加到現有資料表或分區或覆寫現有資料表或分區。將資料載入至 BigQuery 時，資料會轉換為 [Capacitor](https://cloud.google.com/blog/products/bigquery/inside-capacitor-bigquerys-next-generation-columnar-storage-format?hl=zh-tw) 資料欄格式 (BigQuery 的儲存格式)。
 
-將資料從 Cloud Storage 載入至 BigQuery 資料表時，包含該資料表的資料集必須位於與 Cloud Storage 值區相同的地區或多地區位置。
+將資料從 Cloud Storage 載入 BigQuery 資料表時，該資料表所屬的資料集必須位於和 Cloud Storage 值區相同的地區或多地區位置。
 
 如需從本機檔案載入 CSV 資料的相關資訊，請參閱[將資料從本機資料來源載入至 BigQuery](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#loading_data_from_local_files)。
 
@@ -99,7 +99,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## CSV 壓縮
 
-您可以使用 `gzip` 公用程式壓縮 CSV 檔案。請注意，`gzip` 會執行完整檔案壓縮，這與其他檔案格式 (例如 Avro) 的壓縮轉碼器執行的檔案內容壓縮不同。使用 `gzip` 壓縮 CSV 檔案可能會影響效能；如要進一步瞭解相關取捨，請參閱「[載入壓縮與未壓縮資料](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#loading_compressed_and_uncompressed_data)」。
+您可以使用 `gzip` 公用程式壓縮 CSV 檔案。請注意，`gzip` 會執行完整檔案壓縮，這與其他檔案格式 (例如 Avro) 的壓縮編解碼器執行的檔案內容壓縮不同。使用 `gzip` 壓縮 CSV 檔案可能會影響效能；如要進一步瞭解相關取捨，請參閱「[載入壓縮與未壓縮資料](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#loading_compressed_and_uncompressed_data)」。
 
 ## 將 CSV 資料載入資料表
 
@@ -254,7 +254,7 @@ schema
 
 其中：
 
-* location 是您的位置。`--location` 是選用旗標。舉例來說，如果您在東京地區使用 BigQuery，就可以將該旗標的值設定為 `asia-northeast1`。您可以使用 [.bigqueryrc 檔案](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool?hl=zh-tw#setting_default_values_for_command-line_flags)來設定位置的預設值。
+* location 是您的位置。`--location` 是選用旗標。舉例來說，如果您在東京區域使用 BigQuery，就可以將該旗標的值設定為 `asia-northeast1`。您可以使用 [.bigqueryrc 檔案](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool?hl=zh-tw#setting_default_values_for_command-line_flags)來設定位置的預設值。
 * format為 `CSV`。
 * dataset 是現有資料集。
 * table 是您正在載入資料的資料表名稱。
@@ -363,7 +363,7 @@ schema
 **API 附註：**
 
 * 載入工作不可部分完成，且資料狀態具一致性。如果載入工作失敗，所有資料都無法使用；如果載入工作成功，則所有資料都可以使用。
-* 最佳做法就是產生唯一識別碼，並在呼叫 `jobs.insert` 建立載入工作時，將該唯一識別碼當做 `jobReference.jobId` 傳送。這個方法較不受網路故障問題的影響，因為用戶端可使用已知的工作 ID 進行輪詢或重試。
+* 最佳做法是產生唯一 ID，並在呼叫 `jobs.insert` 建立載入工作時，將該 ID 當做 `jobReference.jobId` 傳送。這個方法較不受網路故障問題的影響，因為用戶端可使用已知的工作 ID 進行輪詢或重試。
 * 對指定的工作 ID 呼叫 `jobs.insert` 是一種冪等作業。也就是說，您可以對同一個工作 ID 重試無數次，最多會有一個作業成功。
 
 ### C#
@@ -849,5 +849,5 @@ public class LoadPartitionedTable {
       if (completedJob == null) {
         throw new Exception("Job not executed since it no longer exists.");
       } else if (completedJob.getStatus().getError() != null) {
-        // You can also look at queryJob.getStatus().getExecutionErrors() for all
+        // You can also look at queryJ
 ```

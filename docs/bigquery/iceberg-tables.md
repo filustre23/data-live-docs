@@ -117,13 +117,12 @@ gcloud storage buckets create gs://BUCKET_NAME \
   + 專案的 [BigQuery 資料擁有者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataOwner)  (`roles/bigquery.dataOwner`)
   + 專案的 [BigQuery 連線管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.connectionAdmin)  (`roles/bigquery.connectionAdmin`)
 * 如要查詢 Iceberg 代管資料表：
-  + [BigQuery 資料檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataViewer)  (`roles/bigquery.dataViewer`)
-    專案
+  + 專案的 [BigQuery 資料檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataViewer)  (`roles/bigquery.dataViewer`)
   + [BigQuery 使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.user)  (`roles/bigquery.user`)
     專案
 * 將下列角色授予連線服務帳戶，以便讀取及寫入 Cloud Storage 中的資料：
   + [Storage 物件使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/storage?hl=zh-tw#storage.objectUser)  (`roles/storage.objectUser`)
-    (值區)
+    (針對值區)
   + 值區的「Storage 舊版值區讀取者」 (`roles/storage.legacyBucketReader`)
 
 如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
@@ -135,12 +134,12 @@ gcloud storage buckets create gs://BUCKET_NAME \
 如要讓 BigQuery 管理專案中的資料表，您必須具備下列權限：
 
 * 全部：
-  + 專案的  `bigquery.connections.delegate`
+  + 專案的 `bigquery.connections.delegate`
   + 專案的 `bigquery.jobs.create`
   + 專案的 `bigquery.readsessions.create`
   + 專案的 `bigquery.tables.create`
   + 專案的 `bigquery.tables.get`
-  + 專案的  `bigquery.tables.getData`
+  + 專案的 `bigquery.tables.getData`
   + `storage.buckets.get`
     在 bucket 上
   + `storage.objects.create`
@@ -311,7 +310,7 @@ bq load \
    METADATA`](https://docs.cloud.google.com/bigquery/docs/exporting-data?hl=zh-tw#export_table_metadata) SQL 陳述式，將中繼資料匯出為 Iceberg V2 格式。
 2. 選用：排定 Iceberg 中繼資料快照重新整理時間。
    如要根據設定的時間間隔重新整理 Iceberg 中繼資料快照，請使用[排定查詢](https://docs.cloud.google.com/bigquery/docs/scheduling-queries?hl=zh-tw)。
-3. 選用：為專案啟用中繼資料自動重新整理功能，在每次資料表變動時，自動更新 Iceberg 資料表的中繼資料快照。如要啟用中繼資料自動重新整理功能，請來信至 [bigquery-tables-for-apache-iceberg-help@google.com](mailto:bigquery-tables-for-apache-iceberg-help@google.com)。每次重新整理作業都會產生[`EXPORT METADATA`費用](#queries_and_jobs)。
+3. 選用：為專案啟用中繼資料自動重新整理功能，即可在每次資料表變動時，自動更新 Iceberg 資料表中繼資料快照。如要啟用中繼資料自動重新整理功能，請來信至 [bigquery-tables-for-apache-iceberg-help@google.com](mailto:bigquery-tables-for-apache-iceberg-help@google.com)。每次重新整理作業都會產生[`EXPORT METADATA`費用](#queries_and_jobs)。
 
 下列範例使用 DDL 陳述式 `EXPORT TABLE METADATA FROM
 mydataset.test`，建立名為 `My Scheduled Snapshot
@@ -496,11 +495,11 @@ Iceberg 受管理資料表有下列限制：
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-06 (世界標準時間)。
+上次更新時間：2026-05-08 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-06 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-08 (世界標準時間)。"],[],[]]

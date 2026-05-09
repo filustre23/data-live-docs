@@ -232,4 +232,3 @@ BigQuery 提供下列其他匯總函式：
 | `HIER_UNIQUE_MEMBER_NAME` | BigQuery 不支援階層式查詢。 |
 | `LAST_VALUE` | `LAST_VALUE` |
 | `LAG` | `LAG` |
-|  |

@@ -14,11 +14,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 你可以依據偏好儲存及分類內容。
 
-# 將 Apache Hive Metastore 資料表遷移至Google Cloud
+# 將 Apache Hive Metastore 資料表遷移至 Google Cloud
 
 本文說明如何使用 [BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)，將 Apache Hive Metastore 管理的 Iceberg 和 Hive 資料表遷移至Google Cloud 。
 
-BigQuery 資料移轉服務中的 Apache Hive Metastore 遷移連接器，可讓您 Google Cloud 大規模無縫遷移 Hive Metastore 資料表。這個連結器支援地端部署和雲端環境 (包括 Cloudera 設定) 的 Hive 和 Iceberg 資料表。Hive Metastore 遷移連接器支援儲存在下列資料來源中的檔案：
+BigQuery 資料移轉服務中的 Apache Hive Metastore 遷移連接器，可讓您大規模地將 Hive Metastore 資料表順暢遷移至 Google Cloud 。這個連接器支援地端部署和雲端環境 (包括 Cloudera 設定) 的 Hive 和 Iceberg 資料表。Hive Metastore 遷移連接器支援儲存在下列資料來源中的檔案：
 
 * Apache Hadoop 分散式檔案系統 (HDFS)
 * Amazon Simple Storage Service (Amazon S3)
@@ -61,7 +61,7 @@ Hive Metastore 資料表轉移作業有下列限制：
 
 ### 篩選分區
 
-**注意：** 分區篩選器只能套用至 Hive 資料表。
+**注意：** 分割區篩選器只能套用至 Hive 資料表。
 
 您可以提供儲存在 Cloud Storage 中的自訂篩選器 JSON 檔案，從 Hive 表格移轉部分分割區。排定轉移作業時，請使用 `partition_filter_gcs_path` 參數，提供這個 JSON 檔案的完整 Cloud Storage 路徑。
 
@@ -111,7 +111,7 @@ JSON 檔案中的 `condition` 欄位支援下列值，每個值都有 `partition
 
 ## 事前準備
 
-排定 Hive Metastore 轉移作業前，請先執行本節中的步驟。
+排定 Hive Metastore 轉移作業之前，請先執行本節中的步驟。
 
 ### 啟用 API
 
@@ -135,9 +135,9 @@ JSON 檔案中的 `condition` 欄位支援下列值，每個值都有 `partition
    * [Storage Transfer 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/storagetransfer?hl=zh-tw#storagetransfer.admin)  (`roles/storagetransfer.admin`)
    * [服務使用情形消費者](https://docs.cloud.google.com/iam/docs/roles-permissions/serviceusage?hl=zh-tw#serviceusage.serviceUsageConsumer)  (`roles/serviceusage.serviceUsageConsumer`)
    * [儲存空間管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/storage?hl=zh-tw#storage.admin)  (`roles/storage.admin`)
-   * 如要將中繼資料遷移至 Lakehouse 執行階段目錄 Iceberg REST 目錄，請按照下列步驟操作：
+   * 如要將中繼資料遷移至 Lakehouse 執行階段目錄 Iceberg REST 目錄，請執行下列步驟：
      [BigLake 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake?hl=zh-tw#biglake.admin)  (`roles/biglake.admin`)
-   * 如要將中繼資料遷移至 Dataproc Metastore，請按照下列步驟操作：
+   * 如要將中繼資料遷移至 Dataproc Metastore，請執行下列步驟：
      [Dataproc Metastore 資料擁有者](https://docs.cloud.google.com/iam/docs/roles-permissions/metastore?hl=zh-tw#metastore.metadataOwner)  (`roles/metastore.metadataOwner`)
 
    如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
@@ -183,7 +183,7 @@ JSON 檔案中的 `condition` 欄位支援下列值，每個值都有 `partition
 
 ### Amazon S3
 
-從 Amazon S3 移轉資料時，不需要代理程式。
+從 Amazon S3 移轉資料時，不需要使用代理程式。
 
 如要設定 Storage 移轉服務以進行 Amazon S3 移轉作業，請按照下列步驟操作：
 
@@ -210,7 +210,7 @@ JSON 檔案中的 `condition` 欄位支援下列值，每個值都有 `partition
 1. 前往 Google Cloud 控制台的「資料移轉」頁面。
 
    [前往「資料轉移」頁面](https://console.cloud.google.com/bigquery/transfers?hl=zh-tw)
-2. 按一下「建立轉移作業」add。
+2. 按一下 add「建立轉移作業」。
 3. 在「來源類型」部分，從「來源」清單中選取「Hive Metastore」。
 4. 在「位置」下方選取位置類型，然後選取區域。
 5. 在「Transfer config name」(轉移設定名稱) 部分，「Display name」(顯示名稱) 請輸入資料移轉作業名稱。
@@ -234,7 +234,7 @@ JSON 檔案中的 `condition` 欄位支援下列值，每個值都有 `partition
    4. 選用：在「Partition Filter gcs path」(分區篩選器 GCS 路徑) 欄位中，輸入自訂篩選器 JSON 檔案的完整 Cloud Storage 路徑，以[篩選來源資料表中的分區](#filter-partitions)。
    5. 在**「Destination gcs path」(目的地 GCS 路徑)** 中，輸入 Cloud Storage bucket 的路徑，以儲存遷移的資料。
    6. 從下拉式清單中選擇目的地 Metastore 類型：
-      * `DATAPROC_METASTORE`(舊版)：選取這個選項，將中繼資料儲存在 [Dataproc Metastore](https://docs.cloud.google.com/dataproc-metastore/docs/overview?hl=zh-tw) 中。您必須在「Dataproc metastore url」(Dataproc Metastore 網址) 中提供 Dataproc Metastore 的網址。
+      * `DATAPROC_METASTORE`(舊版)：選取這個選項，將中繼資料儲存在 [Dataproc Metastore](https://docs.cloud.google.com/dataproc-metastore/docs/overview?hl=zh-tw) 中。您必須在「Dataproc metastore url」中提供 Dataproc Metastore 的網址。
       * `BIGLAKE_REST_CATALOG`：選取這個選項，將中繼資料儲存在 Lakehouse 執行階段目錄 Iceberg REST 目錄中。系統會根據目標 Cloud Storage 值區建立目錄。
    7. 選用：針對「服務帳戶」，輸入要用於這項資料移轉作業的服務帳戶。服務帳戶應屬於建立移轉設定和目的地資料集的相同Google Cloud 專案。
 
@@ -298,7 +298,7 @@ JSON 檔案中的 `condition` 欄位支援下列值，每個值都有 `partition
 
 ## 使用 `cron` 工作自動執行傾印工具
 
-您可以透過[`cron`](https://man7.org/linux/man-pages/man8/cron.8.html)工作執行 `dwh-migration-dumper` 工具，自動執行增量轉移作業。自動擷取中繼資料，確保資料來源的最新傾印檔可用於後續的增量轉移作業。
+您可以透過 [`cron`](https://man7.org/linux/man-pages/man8/cron.8.html) 工作自動執行 `dwh-migration-dumper` 工具，以進行增量轉移。自動擷取中繼資料，確保資料來源的最新傾印檔可用於後續的增量轉移作業。
 
 ### 事前準備
 
@@ -446,5 +446,5 @@ JSON 檔案中的 `condition` 欄位支援下列值，每個值都有 `partition
 
    # Create unique timestamp and directories for this run
    EPOCH=$(date +%s)
-   LOCAL_LOG_DIR="
+   LOCAL_LOG_DIR="${LOCAL_BASE_DIR}/logs"<
    ```

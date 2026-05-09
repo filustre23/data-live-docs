@@ -44,8 +44,7 @@ BigQuery 會將查詢結果儲存至[臨時資料表 (預設) 或永久資料表
 如要取得執行查詢作業所需的權限，請要求管理員授予您下列 IAM 角色：
 
 * 專案的 [BigQuery 工作使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.jobUser)  (`roles/bigquery.jobUser`)。
-* [BigQuery 資料檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataViewer)  (`roles/bigquery.dataViewer`)
-  查詢參照的所有資料表和檢視區塊。如要查詢檢視區塊，您也必須具備所有基礎資料表和檢視區塊的這項角色。如果您使用[授權檢視畫面](https://docs.cloud.google.com/bigquery/docs/authorized-views?hl=zh-tw)或[授權資料集](https://docs.cloud.google.com/bigquery/docs/authorized-datasets?hl=zh-tw)，就不需要存取基礎來源資料。
+* 查詢參照的所有資料表和檢視區塊的 [BigQuery 資料檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataViewer)  (`roles/bigquery.dataViewer`)。如要查詢檢視區塊，您也必須具備所有基礎資料表和檢視區塊的這項角色。如果您使用[授權檢視畫面](https://docs.cloud.google.com/bigquery/docs/authorized-views?hl=zh-tw)或[授權資料集](https://docs.cloud.google.com/bigquery/docs/authorized-datasets?hl=zh-tw)，就不需要存取基礎來源資料。
 
 如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 

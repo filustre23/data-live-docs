@@ -25,7 +25,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 如要取得查詢 `INFORMATION_SCHEMA.JOBS` 檢視畫面所需的權限，請要求系統管理員授予您專案的「[BigQuery 資源檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.resourceViewer) 」(`roles/bigquery.resourceViewer`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和機構的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
-這個預先定義的角色具備  `bigquery.jobs.listAll` 權限，可查詢 `INFORMATION_SCHEMA.JOBS` 檢視畫面。
+這個預先定義的角色具備 `bigquery.jobs.listAll` 權限，可查詢 `INFORMATION_SCHEMA.JOBS` 檢視畫面。
 
 您或許還可透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)取得這項權限。
 
@@ -41,7 +41,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 | --- | --- | --- |
 | `bi_engine_statistics` | `RECORD` | 如果專案已設定為使用 [BI Engine](https://cloud.google.com/bigquery/docs/bi-engine-intro?hl=zh-tw)，這個欄位會包含 [BiEngineStatistics](https://cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#bienginestatistics)。否則為 `NULL`。 |
 | `cache_hit` | `BOOLEAN` | 這項工作的查詢結果是否來自快取。 如果您有[多重查詢陳述式工作](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries?hl=zh-tw)，則父項查詢的 `cache_hit` 為 `NULL`。 |
-| `creation_time` | `TIMESTAMP` | (*分區資料欄*) 這項工作的建立時間。分區作業會根據這個時間戳記的世界標準時間進行。 |
+| `creation_time` | `TIMESTAMP` | (*分區資料欄*) 這項工作的建立時間。分區依據是這個時間戳記的世界標準時間。 |
 | `destination_table` | `RECORD` | 結果的目標[資料表](https://cloud.google.com/bigquery/docs/reference/rest/v2/TableReference?hl=zh-tw) (如有)。 |
 | `dml_statistics` | `RECORD` | 如果工作是含有 DML 陳述式的查詢，則值為含有下列欄位的記錄：   * `inserted_row_count`：插入的資料列數。 * `deleted_row_count`：已刪除的資料列數。 * `updated_row_count`：更新的資料列數。  如果是其他工作，值為 `NULL`。  這個資料欄會顯示在「`INFORMATION_SCHEMA.JOBS_BY_USER`」和「`INFORMATION_SCHEMA.JOBS_BY_PROJECT`」檢視畫面中。 |
 | `end_time` | `TIMESTAMP` | 這項工作的結束時間，自訓練週期後的毫秒數。這個欄位代表工作進入 `DONE` 狀態的時間。 |
@@ -68,7 +68,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 | `total_bytes_processed` | `INTEGER` | 工作處理的位元組總數。  **注意**：如果查詢是從設有資料列層級存取政策的資料表讀取資料，這個資料欄的值會是空白。詳情請參閱 [BigQuery 資料列層級安全防護最佳做法](https://docs.cloud.google.com/bigquery/docs/best-practices-row-level-security?hl=zh-tw)。 |
 | `total_modified_partitions` | `INTEGER` | 工作修改的分區總數。這個欄位會填入 `LOAD` 和 `QUERY` 工作。 |
 | `total_slot_ms` | `INTEGER` | 工作在 `RUNNING` 狀態的整個期間內，包括重試，所用的運算單元毫秒數。 |
-| `total_services_sku_slot_ms` | `INTEGER` | 在外部服務上執行的工作，以及以服務 SKU 計費的工作，其總計的毫秒數。這個欄位只會填入有外部服務費用的工作，且是帳單方式為 `"SERVICES_SKU"` 的費用用量總計。 |
+| `total_services_sku_slot_ms` | `INTEGER` | 在外部服務上執行的工作，以及以服務 SKU 計費的工作，其總計的時段毫秒數。這個欄位只會填入有外部服務費用的工作，且是帳單方式為 `"SERVICES_SKU"` 的費用用量總計。 |
 | `transaction_id` | `STRING` | 這項工作執行的[交易](https://cloud.google.com/bigquery/docs/transactions?hl=zh-tw) ID (如有)。 |
 | `user_email` | `STRING` | (*分群資料欄*) 執行作業的使用者電子郵件地址或服務帳戶。 |
 | `principal_subject` | `STRING` | 執行作業的主體身分字串表示法。 |
@@ -126,7 +126,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 如果您對參照 `INFORMATION_SCHEMA.JOBS` 檢視區塊的查詢執行模擬測試，估算的處理位元組數可能會遠高於查詢執行期間實際處理的位元組數。
 
-發生高估情況的原因是，模擬測試計算時只會考量基礎資料的 `creation_time` 分區資料欄篩選器。如果 `WHERE` 子句中指定了隱含 `project_id` 篩選器或 `user_email` 篩選器，則系統不會將這些篩選器納入[叢集資料欄](#schema)的考量。實際掃描的資料量可能遠低於模擬測試估計值，尤其是工作較少的專案或使用者。
+發生高估情況的原因是，試算表計算時只會考量基礎資料的 `creation_time` 分區資料欄篩選器。如果 `WHERE` 子句中指定了隱含 `project_id` 篩選器或 `user_email` 篩選器，則系統不會將這些篩選器納入[叢集資料欄](#schema)的考量。實際掃描的資料量可能遠低於模擬測試估計值，尤其是工作較少的專案或使用者。
 
 如果未在 `creation_time` 上指定篩選器，系統就不會進行分區修剪，而模擬測試預估值會反映基礎資料的所有分區掃描結果。不過，資料叢集仍可能減少實際處理的位元組數，低於這項估算值。
 
@@ -228,7 +228,7 @@ ORDER BY billing_date;
 
 ### 計算平均運算單元用量
 
-以下範例會計算特定專案在過去 7 天內，所有查詢的平均運算單元用量。請注意，如果專案整週的運算單元用量一致，這項計算結果就會最準確。如果專案的運算單元用量不穩定，這個數字可能會低於預期。
+以下範例會計算特定專案在過去 7 天內，所有查詢的平均運算單元用量。請注意，如果專案在一週內使用的時段一致，這項計算結果就會最準確。如果專案的運算單元用量不穩定，這個數字可能會低於預期。
 
 執行查詢：
 
@@ -333,4 +333,5 @@ SELECT
     destination_table.table_id as table_id,
     COUNT(job_id) AS load_job_count
  FROM
+   <
 ```

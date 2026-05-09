@@ -263,4 +263,4 @@ The possible dialect options for translation.
 | `snowflakeDialect` | `object (SnowflakeDialect)`  The Snowflake dialect |
 | `netezzaDialect` | `object (NetezzaDialect)`  The Netezza dialect |
 | `azureSynapseDialect` | `object (AzureSynapseDialect)`  The Azure Synapse dialect |
-| `verticaDialect` |  |
+| `verticaDialect` |

@@ -225,3 +225,5 @@ Represents the type of a field element.
 | `expirationMs` | `string (Int64Value format)`  Optional. Number of milliseconds for which to keep the storage for a partition. A wrapper is used here because 0 is an invalid value. |
 | `field` | `string`  Optional. If not set, the table is partitioned by pseudo column '\_PARTITIONTIME'; if set, the table is partitioned by this field. The field must be a top-level TIMESTAMP or DATE field. Its mode must be NULLABLE or REQUIRED. A wrapper is used here because an empty string is an invalid value. |
 | `requirePartitionFilter (deprecated)` | `boolean`  This item is deprecated!  If set to true, queries over this table require a partition filter that can be used for partition elimination to be specified. This field is deprecated; please set the field with the same name on the table itself instead. This field needs a wrapper because we want to output the default value, false, if the user explicitly set it. |
+
+<

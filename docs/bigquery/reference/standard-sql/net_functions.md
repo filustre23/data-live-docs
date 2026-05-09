@@ -470,5 +470,5 @@ FROM (
   UNION ALL SELECT "//user:password@a.b:80/path?query",
                    "standard URL with relative scheme, port, path and query, but no public suffix"
   UNION ALL SELECT "https://[::1]:80", "standard URL with IPv6 host"
-  UNION ALL SELECT "http://例子.卷筒纸.中国", "s
+  UNION ALL SELECT "http://例子.卷筒纸.中国",
 ```

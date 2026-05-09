@@ -986,5 +986,5 @@ The following example models all built-in holidays for the `US` holiday region,
 and additionally models the custom holiday `members_day`:
 
 ```
-CREATE OR REPLACE
+CREATE OR
 ```

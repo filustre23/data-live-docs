@@ -362,5 +362,5 @@ func main() {
 		if !ts.IsValid() {
 			log.Fatalf("Invalid snapshot millis (%d): %v", *snapshotMillis, err)
 		}
-		createReadSessionRequest.ReadSession.TableModifiers =
+		createReadSessionRequest.ReadSession.TableModifiers
 ```

@@ -38,10 +38,8 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 如要取得建立資料表所需的權限，請要求管理員授予您下列 IAM 角色：
 
-* [BigQuery 作業使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.jobUser)  (`roles/bigquery.jobUser`)
-  如果您要透過載入資料或將查詢結果儲存至資料表的方式建立資料表，請在專案中啟用這項權限。
-* [BigQuery 資料編輯者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataEditor)  (`roles/bigquery.dataEditor`)
-  您要在其中建立資料表的資料集。
+* 如果您要透過載入資料或將查詢結果儲存至資料表來建立資料表，請在專案中指派 [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.jobUser)  (`roles/bigquery.jobUser`)。
+* 資料集的「BigQuery 資料編輯者」 (`roles/bigquery.dataEditor`)，您要在該資料集建立資料表。
 
 如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
@@ -1305,5 +1303,5 @@ func printTableInfo(w io.Writer, projectID, datasetID, tableID string) error {
 	// projectID := "my-project-id"
 	// datasetID := "mydataset"
 	// tableID := "mytable"
-	ctx := context.Background()
+	ctx := context.Background
 ```

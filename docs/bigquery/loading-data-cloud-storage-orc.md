@@ -22,7 +22,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 從 Cloud Storage 載入 ORC 資料時，可將資料載入至新的資料表或分區，或將資料附加到現有資料表或分區，或覆寫現有資料表或分區。將資料載入 BigQuery 時，資料會轉換為 [Capacitor](https://cloud.google.com/blog/products/bigquery/inside-capacitor-bigquerys-next-generation-columnar-storage-format?hl=zh-tw) 資料欄格式 (BigQuery 的儲存格式)。
 
-將資料從 Cloud Storage 載入至 BigQuery 資料表時，包含該資料表的資料集必須位於與 Cloud Storage 值區相同的地區或多地區位置。
+將資料從 Cloud Storage 載入 BigQuery 資料表時，該資料表所屬的資料集必須位於和 Cloud Storage 值區相同的地區或多地區位置。
 
 如需從本機檔案載入 ORC 資料的相關資訊，請參閱
 [將資料從本機資料來源載入至 BigQuery](https://docs.cloud.google.com/bigquery/docs/loading-data-local?hl=zh-tw)。
@@ -227,7 +227,7 @@ path_to_source
 
 其中：
 
-* location 是您的位置。`--location` 是選用旗標。舉例來說，如果您在東京地區使用 BigQuery，就可以將該旗標的值設定為 `asia-northeast1`。您可以使用 [.bigqueryrc 檔案](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool?hl=zh-tw#setting_default_values_for_command-line_flags)設定位置的預設值。
+* location 是您的位置。`--location` 是選用旗標。舉例來說，如果您在東京區域使用 BigQuery，就可以將該旗標的值設定為 `asia-northeast1`。您可以使用 [.bigqueryrc 檔案](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool?hl=zh-tw#setting_default_values_for_command-line_flags)設定位置的預設值。
 * format為 `ORC`。
 * dataset 是現有資料集。
 * table 是您正在載入資料的資料表名稱。
@@ -292,12 +292,12 @@ path_to_source
 
    * 如果是 `status.state = DONE`，代表工作已順利完成。
    * 如果出現 `status.errorResult` 屬性，代表要求執行失敗，且該物件會包含描述問題的相關資訊。如果要求執行失敗，系統就不會建立任何資料表，也不會載入任何資料。
-   * 如果未出現 `status.errorResult`，代表工作順利完成，但可能有一些不嚴重的錯誤，例如少數資料列在匯入時發生問題。不嚴重的錯誤都會列在已傳回工作物件的 `status.errors` 屬性中。
+   * 如果未出現 `status.errorResult`，代表工作順利完成，但可能有一些非致命錯誤，例如少數資料列在匯入時發生問題。不嚴重的錯誤都會列在已傳回工作物件的 `status.errors` 屬性中。
 
 **API 附註：**
 
 * 載入工作不可部分完成，且資料狀態具一致性。如果載入工作失敗，所有資料都無法使用；如果載入工作成功，則所有資料都可以使用。
-* 最佳做法就是產生唯一識別碼，並在呼叫 `jobs.insert` 建立載入工作時，將該唯一識別碼當做 `jobReference.jobId` 傳送。這個方法較不受網路故障問題的影響，因為用戶端可使用已知的工作 ID 進行輪詢或重試。
+* 最佳做法是產生唯一 ID，並在呼叫 `jobs.insert` 建立載入工作時，將該 ID 當做 `jobReference.jobId` 傳送。這個方法較不受網路故障問題的影響，因為用戶端可使用已知的工作 ID 進行輪詢或重試。
 * 對指定的工作 ID 呼叫 `jobs.insert` 是一種冪等作業。也就是說，您可以對同一個工作 ID 重試無數次，最多會有一個作業成功。
 
 ### C#

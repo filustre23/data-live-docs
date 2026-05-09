@@ -481,5 +481,5 @@ WHERE
   AND year <= 2002
 GROUP BY
   ROLLUP(year, is_male)
-ORDER
+OR
 ```

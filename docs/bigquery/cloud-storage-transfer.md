@@ -62,7 +62,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### 必要的 BigQuery 角色
 
-如要取得建立 BigQuery 資料移轉服務資料移轉作業所需的權限，請要求管理員授予您專案的 [BigQuery 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.admin)  (`roles/bigquery.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得建立 BigQuery 資料移轉服務資料移轉作業所需的權限，請要求系統管理員在專案中授予您 [BigQuery 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.admin)  (`roles/bigquery.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
 這個預先定義的角色具備建立 BigQuery 資料移轉服務資料移轉作業所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
@@ -97,7 +97,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 1. 前往 Google Cloud 控制台的「資料移轉」頁面。
 
    [前往「資料轉移」頁面](https://console.cloud.google.com/bigquery/transfers?hl=zh-tw)
-2. 按一下「建立轉移作業」add。
+2. 按一下 add「建立轉移作業」。
 3. 在「Source type」(來源類型) 區段中，針對「Source」(來源)，選擇「Google Cloud Storage」。
 4. 在「Transfer config name」(轉移設定名稱) 部分，「Display name」(顯示名稱) 請輸入資料移轉作業的名稱，例如 `My Transfer`。移轉作業名稱可以是任意值，日後需要修改移轉作業時能夠據此識別。
 5. 在「Schedule options」(排程選項) 部分選取「Repeat frequency」(重複執行頻率)：
@@ -106,7 +106,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    * 如果選取「On-demand」，這項資料移轉作業會在您[手動觸發](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)後執行。
    * 如果選取「Event-driven」(以事件為依據)，則須一併指定**Pub/Sub 訂閱項目**。請選取[訂閱項目](https://docs.cloud.google.com/pubsub/docs/overview?hl=zh-tw#types)名稱，或是點選「Create a subscription」(建立訂閱項目)。這個選項會啟用[以事件為依據的移轉作業](https://docs.cloud.google.com/bigquery/docs/event-driven-transfer?hl=zh-tw)，事件傳送至 Pub/Sub 訂閱項目時，就會觸發移轉作業。
 
-     **注意：** 您必須完成所有[必要設定](https://docs.cloud.google.com/bigquery/docs/event-driven-transfer?hl=zh-tw#gcs-event-driven-transfers)，才能進行以事件為依據的移轉作業。
+     **注意事項：**您必須完成所有[必要設定](https://docs.cloud.google.com/bigquery/docs/event-driven-transfer?hl=zh-tw#gcs-event-driven-transfers)，才能進行以事件為依據的移轉作業。
 6. 在「Destination settings」(目的地設定) 部分：
 
    * 在「Dataset」(資料集) 部分，選取您為了儲存資料而建立的資料集。
@@ -144,7 +144,7 @@ Google uses AI technology to translate content into your preferred language. AI 
          2. 在「Quote character」(引用字元) 輸入 CSV 檔案中用來引用資料區段的字元，預設值為英文雙引號 (`"`)。
          3. 如果您不想匯入來源檔案中的標題列，請在「Header rows to skip」(要略過的標題列) 輸入不要匯入的標題列數。預設值為 `0`。
          4. 如果要允許在引用欄位中使用換行符號，請勾選 [Allow quoted newlines] (允許引用換行符號) 的方塊。
-         5. 如要允許移轉缺少 `NULLABLE` 欄位的資料列，請勾選「Allow jagged rows」 方塊。
+         5. 如要允許移轉缺少 `NULLABLE` 欄位的資料列，請勾選「Allow jagged rows (CSV)」(允許空值資料列 (CSV)) 方塊。
 
          請參閱[此處](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv?hl=zh-tw#csv-options)，進一步瞭解 CSV 適用選項。
 8. 在「Service Account」(服務帳戶) 選單，選取與貴機構 Google Cloud 專案相關聯的[服務帳戶](https://docs.cloud.google.com/iam/docs/service-account-overview?hl=zh-tw)。您可以將服務帳戶與資料移轉作業建立關聯，這樣就不需要使用者憑證。如要進一步瞭解如何搭配使用服務帳戶與資料移轉作業，請參閱[使用服務帳戶](https://docs.cloud.google.com/bigquery/docs/use-service-accounts?hl=zh-tw)。
@@ -169,7 +169,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 選用標記：
 
-* `--destination_kms_key`：如果您使用客戶自行管理的加密金鑰 (CMEK) 進行這項資料移轉，請指定 Cloud KMS 金鑰的[金鑰資源 ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw#key_resource_id)。如要瞭解 CMEK 如何與 BigQuery 資料移轉服務搭配運作，請參閱[指定移轉作業加密金鑰](#CMEK)。
+* `--destination_kms_key`：如果您使用客戶自行管理的加密金鑰 (CMEK) 進行這項資料轉移，請指定 Cloud KMS 金鑰的[金鑰資源 ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw#key_resource_id)。如要瞭解 CMEK 如何與 BigQuery 資料移轉服務搭配運作，請參閱[指定移轉作業加密金鑰](#CMEK)。
 * `--service_account_name`：指定要用於 Cloud Storage 移轉驗證的服務帳戶，而非使用者帳戶。
 
 使用 bq 指令列工具設定 Cloud Storage 資料移轉時，須遵守下列限制：
@@ -215,7 +215,7 @@ bq mk \
   + `quote`：適用於 `CSV` `file_format` 值，CSV 檔案中用來引用資料區段的字元。預設值為英文雙引號 (`"`)。
   + `skip_leading_rows`：針對 `CSV` `file_format` 值，指出不想匯入的開頭標題列數。預設值為 0。
   + `allow_quoted_newlines`：如為 `CSV` `file_format` 值，請設為 `TRUE`，允許在加上引號的欄位中換行。
-  + `allow_jagged_rows`：如為 `CSV` `file_format` 值，請設為 `TRUE`，接受缺少結尾自選欄的資料列。遺漏的值會填入 `NULL`。
+  + `allow_jagged_rows`：如為 `CSV` `file_format` 值，請設為 `TRUE`，接受缺少結尾自選欄的資料列。缺少的值會填入 `NULL`。
   + `preserve_ascii_control_characters`：針對 `CSV` `file_format` 值，請設為 `TRUE`，保留任何內嵌的 ASCII 控制字元。
   + `encoding`：指定 `CSV` 編碼類型。支援的值為 `UTF8`、`ISO_8859_1`、`UTF16BE`、`UTF16LE`、`UTF32BE` 和 `UTF32LE`。
   + `delete_source_files`：設為 `TRUE`，即可在每次成功移轉後刪除來源檔案。如果首次刪除來源檔案失敗，系統並不會重試刪除工作。預設值為 `FALSE`。
@@ -296,5 +296,5 @@ public class CreateCloudStorageTransfer {
     params.put("write_disposition", Value.newBuilder().setStringValue("APPEND").build());
     params.put("file_format", Value.newBuilder().setStringValue(fileFormat).build());
     params.put("field_delimiter", Value.newBuilder().setStringValue(fieldDelimiter).build());
-    params.put("skip_leading_rows", Value.newBuilder().setStringValue
+    params.put("skip_leading_rows",
 ```

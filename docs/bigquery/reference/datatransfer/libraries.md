@@ -295,5 +295,5 @@ public class QuickstartSample {
 ### Node.js
 
 ```
-const bigqueryDataTransfer = require('@google-cloud/bigquery-data-transfer'
+const bigqueryDataTransfer = require('@google-cloud/bigquery-data-transfer'<
 ```

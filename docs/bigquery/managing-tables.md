@@ -120,7 +120,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    ```
    bq update \
-   --description &quot;description" \
+   --description "description" \
    project_id:dataset.table
    ```
 
@@ -469,7 +469,7 @@ public class UpdateTableExpiration {
 
 ```
 // Import the Google Cloud client library
-const {BigQuery} = require(&#39;@google-cloud/bigquery');
+const {BigQuery} = require('@google-cloud/bigquery');
 const bigquery = new BigQuery();
 
 async function updateTableExpiration() {
@@ -585,7 +585,7 @@ public class UpdateDatasetPartitionExpiration {
       System.out.println(
           "Dataset default partition expiration updated successfully to " + newExpiration);
     } catch (BigQueryException e) {
-      System.out.println("Dataset partition expiration was not updated \n"; + e.toString());
+      System.out.println("Dataset partition expiration was not updated \n" + e.toString());
     }
   }
 }
@@ -613,7 +613,7 @@ public class UpdateDatasetPartitionExpiration {
 # limitations under the License.
 
 
-def update_dataset_default_partition_expiratio>n(dataset_id: str) - None:
+def update_dataset_default_partition_expiration(dataset_id: str) -> None:
 
     from google.cloud import bigquery
 
@@ -734,9 +734,9 @@ RENAME TO mynewtable;
 
 #### 執行複製作業的權限
 
-如要取得執行複製工作所需的權限，請要求管理員授予來源和目的地資料集的「[工作使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.jobUser) 」(`roles/bigquery.jobUser`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得執行複製工作所需的權限，請要求管理員授予您來源和目的地資料集的「[工作使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.jobUser) 」(`roles/bigquery.jobUser`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
-這個預先定義的角色具備  `bigquery.jobs.create` 權限，可執行複製工作。
+這個預先定義的角色具備 `bigquery.jobs.create` 權限，可執行複製工作。
 
 您或許還可透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)取得這項權限。
 
@@ -900,7 +900,7 @@ public class BigQueryCopyTable
             ProjectId = "bigquery-public-data"
         };
         TableReference destinationTableRef = client.GetTableReference(
-            destinationDatasetId, ";destination_table");
+            destinationDatasetId, "destination_table");
         BigQueryJob job = client.CreateCopyJob(
             sourceTableRef, destinationTableRef)
             .PollUntilCompleted() // Wait for the job to complete.
@@ -910,7 +910,7 @@ public class BigQueryCopyTable
         BigQueryTable destinationTable = client.GetTable(destinationTableRef);
         Console.WriteLine(
             $"Copied {destinationTable.Resource.NumRows} rows from table "
-            + $"{sourceTableRef.DatasetId}.{sourceTableRef.TableId} &quot;
+            + $"{sourceTableRef.DatasetId}.{sourceTableRef.TableId} "
             + $"to {destinationTable.FullyQualifiedId}."
         );
     }
@@ -1022,7 +1022,7 @@ public class CopyTable {
             "BigQuery was unable to copy table due to an error: \n" + job.getStatus().getError());
         return;
       }
-      System.out.println(&quot;Table copied successfully.");
+      System.out.println("Table copied successfully.");
     } catch (BigQueryException | InterruptedException e) {
       System.out.println("Table copying job was interrupted. \n" + e.toString());
     }
@@ -1038,7 +1038,7 @@ public class CopyTable {
 
 ```
 // Import the Google Cloud client library and create a client
-const {BigQuery} = require(&#39;@google-cloud/bigquery');
+const {BigQuery} = require('@google-cloud/bigquery');
 const bigquery = new BigQuery();
 
 async function copyTable() {
@@ -1060,9 +1060,9 @@ async function copyTable() {
 
   console.log(`Job ${job.id} completed.`);
 
-  // Check the job's status for erro&&rs
-  const erro>rs = job.status.errors;
-  if (errors  errors.length  0) {
+  // Check the job's status for errors
+  const errors = job.status.errors;
+  if (errors && errors.length > 0) {
     throw errors;
   }
 }
@@ -1084,27 +1084,27 @@ use Google\Cloud\Core\ExponentialBackoff;
 // $sourceTableId   = 'The BigQuery table ID to copy from';
 // $destinationTableId = 'The BigQuery table ID to copy to';
 
-$bigQuery = new Bi>gQueryClient([
-    'projectId'> = $projectId,
+$bigQuery = new BigQueryClient([
+    'projectId' => $projectId,
 ]);
-$dataset = $bigQuery-datas>et($datasetId);
-$sourceTable = $dataset-table($sourc>eTableId);
-$destinationTable = $dataset-table($destinat>ionTableId);
-$copyConfig = $sourceTable-copy(>$destinationTable);
-$job = $sourceTable-runJob($copyConfig);
+$dataset = $bigQuery->dataset($datasetId);
+$sourceTable = $dataset->table($sourceTableId);
+$destinationTable = $dataset->table($destinationTableId);
+$copyConfig = $sourceTable->copy($destinationTable);
+$job = $sourceTable->runJob($copyConfig);
 
 // poll the job until it is complete
-$backoff> = new ExponentialBackoff(10);
-$backoff-execute(function () use ($job) {
-    print('Waitin>g for job to complete>9; . PHP_EOL);
-    $job-reload();
-    if (!$job-isComplete()) {
+$backoff = new ExponentialBackoff(10);
+$backoff->execute(function () use ($job) {
+    print('Waiting for job to complete' . PHP_EOL);
+    $job->reload();
+    if (!$job->isComplete()) {
         throw new Exception('Job has not yet completed', 500);
->    }
+    }
 });
 // check if the job has errors
-if (isset($jo>b-info()['status']['errorResult'])) {
-    $error = $job-info()['status']['errorResult']['message'];
+if (isset($job->info()['status']['errorResult'])) {
+    $error = $job->info()['status']['errorResult']['message'];
     printf('Error running job: %s' . PHP_EOL, $error);
 } else {
     print('Table copied successfully' . PHP_EOL);
@@ -1127,7 +1127,7 @@ client = bigquery.Client()
 # source_table_id = "your-project.source_dataset.source_table"
 
 # TODO(developer): Set destination_table_id to the ID of the destination table.
-# destination_table_id = "your-project.destination_dataset.destination_table&quot;
+# destination_table_id = "your-project.destination_dataset.destination_table"
 
 job = client.copy_table(source_table_id, destination_table_id)
 job.result()  # Wait for the job to complete.
@@ -1150,3 +1150,11 @@ print("A copy of the table created.")
 如要複製多個來源資料表，請選取下列其中一個選項：
 
 ### bq
+
+1. 在 Google Cloud 控制台中啟用 Cloud Shell。
+
+   [啟用 Cloud Shell](https://console.cloud.google.com/?cloudshell=true&hl=zh-tw)
+
+   Google Cloud 主控台底部會開啟一個 [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works?hl=zh-tw) 工作階段，並顯示指令列提示。Cloud Shell 是已安裝 Google Cloud CLI 的殼層環境，並已針對您目前的專案設定好相關值。工作階段可能要幾秒鐘的時間才能初始化。
+2. 發出 `bq cp` 指令，並以逗號分隔清單的形式包含多個來源資料表。
+   選用標記可用來控管目的地資料表的寫入配置：

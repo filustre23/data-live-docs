@@ -28,7 +28,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 如要取得建立外部資料集所需的權限，請要求系統管理員授予您「[BigQuery 使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.user) 」(`roles/bigquery.user`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
-這個預先定義的角色具備  `bigquery.datasets.create` 權限，可建立外部資料集。
+這個預先定義的角色具備 `bigquery.datasets.create` 權限，可建立外部資料集。
 
 您或許還可透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)取得這項權限。
 
@@ -42,7 +42,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### 建立連線
 
-您可以建立或使用現有的[`CLOUD_RESOURCE`連線](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection?hl=zh-tw)連線至 Spanner。請務必在您打算建立 Spanner 外部資料集的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)建立連線。
+您可以建立或使用現有的[`CLOUD_RESOURCE`連線](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection?hl=zh-tw)連線至 Spanner。請務必在您打算建立 Spanner 外部資料集的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)，建立連線。
 
 選取下列選項之一：
 
@@ -583,7 +583,7 @@ AS
 * 在 BigQuery 中，您看不到 Spanner 資料庫中定義的主鍵和外鍵。
 * 如果 Spanner 資料庫中的資料表含有 BigQuery 不支援的類型資料欄，則無法在 BigQuery 端存取該資料欄。
 * 您無法在 Spanner 外部資料集中的資料表新增、刪除或更新資料或中繼資料。
-* 您無法在 Spanner 外部資料集中建立新的資料表、檢視區塊或具體化檢視區塊。
+* 您無法在 Spanner 外部資料集中建立新資料表、檢視區塊或具體化檢視區塊。
 * 不支援[`INFORMATION_SCHEMA`檢視](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw)。
 * 不支援[中繼資料快取](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw#metadata_caching_for_performance)。
 * 與資料表建立預設值相關的資料集層級設定不會影響外部資料集，因為您無法手動建立資料表。
@@ -610,11 +610,11 @@ AS
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-06 (世界標準時間)。
+上次更新時間：2026-05-09 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-06 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]

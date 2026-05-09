@@ -95,6 +95,8 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 [啟用 API](https://console.cloud.google.com/flows/enableapi?apiid=dataplex.googleapis.com&hl=zh-tw)
 
+**注意：** 下一節列出的角色適用於標準探索掃描。如要使用非結構化資料語意推論功能，從檔案中擷取 AI 輔助洞察資料，您也必須套用「[使用非結構化資料的資料洞察](https://docs.cloud.google.com/dataplex/docs/use-data-insights-unstructured-data?hl=zh-tw#roles-permissions)」一文列出的其他角色。
+
 ### Knowledge Catalog 服務帳戶的必要角色
 
 開始前，請先在專案中將 IAM 權限指派給 Knowledge Catalog 服務帳戶。
@@ -111,8 +113,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 * [Dataplex Discovery 服務代理](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex?hl=zh-tw#dataplex.discoveryServiceAgent)  (`roles/dataplex.discoveryServiceAgent`)
   儲存空間 bucket
-* [Dataplex Discovery 發布服務代理](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex?hl=zh-tw#dataplex.discoveryPublishingServiceAgent)  (`roles/dataplex.discoveryPublishingServiceAgent`)
-  使用者專案
+* 使用者專案的 [Dataplex Discovery 發布服務代理](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex?hl=zh-tw#dataplex.discoveryPublishingServiceAgent)  (`roles/dataplex.discoveryPublishingServiceAgent`)
 * 建立 BigLake 資料表：
   BigQuery 連線上的 [Dataplex Discovery BigLake 發布服務代理](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex?hl=zh-tw#dataplex.discoveryBigLakePublishingServiceAgent)  (`roles/dataplex.discoveryBigLakePublishingServiceAgent`)
 
@@ -144,7 +145,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### BigQuery 連線服務帳戶的必要角色
 
-為確保 BigQuery Connection 服務帳戶具備建立探索掃描的必要權限，請管理員在 Cloud Storage bucket 上，將 [Dataplex Discovery 服務代理](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex?hl=zh-tw#dataplex.discoveryServiceAgent)  (`roles/dataplex.discoveryServiceAgent`) IAM 角色授予 BigQuery Connection 服務帳戶。
+為確保 BigQuery Connection 服務帳戶具備建立探索掃描的必要權限，請要求系統管理員在 Cloud Storage bucket 上，將 [Dataplex Discovery 服務代理](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex?hl=zh-tw#dataplex.discoveryServiceAgent)  (`roles/dataplex.discoveryServiceAgent`) IAM 角色授予 BigQuery Connection 服務帳戶。
 
 **重要事項：**您必須將這個角色授予 BigQuery 連線服務帳戶，*而非*使用者帳戶。如果未將角色授予正確的主體，可能會導致權限錯誤。
 如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和機構的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
@@ -195,31 +196,31 @@ Google uses AI technology to translate content into your preferred language. AI 
 如要建立及管理資料探索掃描作業，您必須具備下列權限：
 
 * 建立 DataScan：
-   `dataplex.datascans.create`
+  `dataplex.datascans.create`
   在專案中
 * 刪除 DataScan：
-   `dataplex.datascans.delete`
+  `dataplex.datascans.delete`
   在專案或 DataScan 資源上
 * 查看 DataScan 詳細資料 (不含結果)：
-   `dataplex.datascans.get`
+  `dataplex.datascans.get`
   投影機上的 DataScan 資源
 * 查看 DataScan 詳細資料，包括結果：
-   `dataplex.datascans.getData`
+  `dataplex.datascans.getData`
   在專案或 DataScan 資源中
 * 列出 DataScan：
-   `dataplex.datascans.list`
+  `dataplex.datascans.list`
   專案或 DataScan 資源
 * 執行 DataScan：
-   `dataplex.datascans.run`
+  `dataplex.datascans.run`
   在專案或 DataScan 資源上
 * 更新 DataScan 的說明：
-   `dataplex.datascans.update`
+  `dataplex.datascans.update`
   在投影機上投影 DataScan 資源
 * 查看 DataScan 的 IAM 權限：
-   `dataplex.datascans.getIamPolicy`
+  `dataplex.datascans.getIamPolicy`
   在專案或 DataScan 資源上
 * 在 DataScan 上設定 IAM 權限：
-   `dataplex.datascans.setIamPolicy`
+  `dataplex.datascans.setIamPolicy`
   在專案或 DataScan 資源上
 
 您或許還可透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)取得這些權限。
@@ -407,7 +408,7 @@ gcloud dataplex datascans create data-discovery --location=LOCATION
    [前往「BigQuery」頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 在導覽選單中，依序點選「治理」**>**「中繼資料管理」。
 3. 在「Cloud Storage discovery」窗格中，按一下要執行的探索掃描。
-4. 點選「立即執行」。
+4. 按一下「立即執行」。
 
 ### gcloud
 
@@ -589,11 +590,11 @@ gcloud dataplex datascans delete SCAN_ID --location=LOCATION --async
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-06 (世界標準時間)。
+上次更新時間：2026-05-08 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-06 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-08 (世界標準時間)。"],[],[]]
