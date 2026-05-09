@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-05-08T19:08+00:00_
+_Generated 2026-05-09T07:47+00:00_
 
-**9 sources, 4748 topics total**
+**9 sources, 4796 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_1120 topics_
+_1166 topics_
 
 - `anthropic-sdk/agents-and-tools/agent-skills/best-practices`
 - `anthropic-sdk/agents-and-tools/agent-skills/enterprise`
@@ -320,6 +320,44 @@ _1120 topics_
 - `anthropic-sdk/api/cli/models/retrieve`
 - `anthropic-sdk/api/completions`
 - `anthropic-sdk/api/completions/create`
+- `anthropic-sdk/api/compliance`
+- `anthropic-sdk/api/compliance/activities`
+- `anthropic-sdk/api/compliance/activities/list`
+- `anthropic-sdk/api/compliance/apps`
+- `anthropic-sdk/api/compliance/apps/artifacts`
+- `anthropic-sdk/api/compliance/apps/artifacts/content`
+- `anthropic-sdk/api/compliance/apps/chats`
+- `anthropic-sdk/api/compliance/apps/chats/delete`
+- `anthropic-sdk/api/compliance/apps/chats/files`
+- `anthropic-sdk/api/compliance/apps/chats/files/content`
+- `anthropic-sdk/api/compliance/apps/chats/files/delete`
+- `anthropic-sdk/api/compliance/apps/chats/files/retrieve`
+- `anthropic-sdk/api/compliance/apps/chats/generated_files`
+- `anthropic-sdk/api/compliance/apps/chats/generated_files/content`
+- `anthropic-sdk/api/compliance/apps/chats/list`
+- `anthropic-sdk/api/compliance/apps/chats/messages`
+- `anthropic-sdk/api/compliance/apps/projects`
+- `anthropic-sdk/api/compliance/apps/projects/attachments`
+- `anthropic-sdk/api/compliance/apps/projects/delete`
+- `anthropic-sdk/api/compliance/apps/projects/documents`
+- `anthropic-sdk/api/compliance/apps/projects/documents/delete`
+- `anthropic-sdk/api/compliance/apps/projects/documents/retrieve`
+- `anthropic-sdk/api/compliance/apps/projects/list`
+- `anthropic-sdk/api/compliance/apps/projects/retrieve`
+- `anthropic-sdk/api/compliance/groups`
+- `anthropic-sdk/api/compliance/groups/list`
+- `anthropic-sdk/api/compliance/groups/members`
+- `anthropic-sdk/api/compliance/groups/members/list`
+- `anthropic-sdk/api/compliance/groups/retrieve`
+- `anthropic-sdk/api/compliance/organizations`
+- `anthropic-sdk/api/compliance/organizations/list`
+- `anthropic-sdk/api/compliance/organizations/roles`
+- `anthropic-sdk/api/compliance/organizations/roles/list`
+- `anthropic-sdk/api/compliance/organizations/roles/permissions`
+- `anthropic-sdk/api/compliance/organizations/roles/permissions/list`
+- `anthropic-sdk/api/compliance/organizations/roles/retrieve`
+- `anthropic-sdk/api/compliance/organizations/users`
+- `anthropic-sdk/api/compliance/organizations/users/list`
 - `anthropic-sdk/api/csharp/beta`
 - `anthropic-sdk/api/csharp/beta/agents`
 - `anthropic-sdk/api/csharp/beta/agents/archive`
@@ -1100,11 +1138,19 @@ _1120 topics_
 - `anthropic-sdk/build-with-claude/working-with-messages`
 - `anthropic-sdk/get-started`
 - `anthropic-sdk/intro`
+- `anthropic-sdk/manage-claude/admin-api`
 - `anthropic-sdk/manage-claude/api-and-data-retention`
 - `anthropic-sdk/manage-claude/authentication`
 - `anthropic-sdk/manage-claude/claude-code-analytics-api`
+- `anthropic-sdk/manage-claude/compliance-activity-feed`
+- `anthropic-sdk/manage-claude/compliance-api`
+- `anthropic-sdk/manage-claude/compliance-api-access`
+- `anthropic-sdk/manage-claude/compliance-content-data`
+- `anthropic-sdk/manage-claude/compliance-errors`
+- `anthropic-sdk/manage-claude/compliance-faq`
+- `anthropic-sdk/manage-claude/compliance-integration-patterns`
+- `anthropic-sdk/manage-claude/compliance-org-data`
 - `anthropic-sdk/manage-claude/data-residency`
-- `anthropic-sdk/manage-claude/overview`
 - `anthropic-sdk/manage-claude/rate-limits-api`
 - `anthropic-sdk/manage-claude/usage-cost-api`
 - `anthropic-sdk/manage-claude/wif-providers/aws`
@@ -2813,7 +2859,7 @@ _124 topics_
 
 Upstream: <https://docs.getdbt.com/docs/>
 
-_1003 topics_
+_1005 topics_
 
 - `dbt-core/best-practices/best-practice-workflows`
 - `dbt-core/best-practices/clone-incremental-models`
@@ -3251,12 +3297,14 @@ _1003 topics_
 - `dbt-core/docs/platform/secure/private-connectivity/aws/redshift`
 - `dbt-core/docs/platform/secure/private-connectivity/aws/self-hosted`
 - `dbt-core/docs/platform/secure/private-connectivity/aws/snowflake`
+- `dbt-core/docs/platform/secure/private-connectivity/aws/teradata`
 - `dbt-core/docs/platform/secure/private-connectivity/azure/databricks`
 - `dbt-core/docs/platform/secure/private-connectivity/azure/overview`
 - `dbt-core/docs/platform/secure/private-connectivity/azure/postgres`
 - `dbt-core/docs/platform/secure/private-connectivity/azure/self-hosted`
 - `dbt-core/docs/platform/secure/private-connectivity/azure/snowflake`
 - `dbt-core/docs/platform/secure/private-connectivity/azure/synapse`
+- `dbt-core/docs/platform/secure/private-connectivity/azure/teradata`
 - `dbt-core/docs/platform/secure/private-connectivity/gcp/bigquery`
 - `dbt-core/docs/platform/secure/private-connectivity/gcp/overview`
 - `dbt-core/docs/platform/secure/private-connectivity/gcp/self-hosted`
@@ -4120,10 +4168,10 @@ _352 topics_
 - `hex/docs/agent-management`
 - `hex/docs/agent-management/agent-personalization`
 - `hex/docs/agent-management/context-management`
-- `hex/docs/agent-management/context-management/connections`
 - `hex/docs/agent-management/context-management/endorsements-in-context-studio`
 - `hex/docs/agent-management/context-management/guides`
 - `hex/docs/agent-management/context-management/models`
+- `hex/docs/agent-management/context-management/reference-repositories`
 - `hex/docs/agent-management/context-studio`
 - `hex/docs/agent-management/observability`
 - `hex/docs/agent-management/suggestions`

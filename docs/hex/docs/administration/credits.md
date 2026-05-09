@@ -37,7 +37,14 @@ Not all AI features consume credits. For example, Project Title Generation is in
 
 ### What are per-seat credit grants?[​](#what-are-per-seat-credit-grants "Direct link to What are per-seat credit grants?")
 
-To ensure everyone can try and use Hex's AI features, users on paid seats are awarded a monthly credit grant. Per-seat credit grants are assigned to the individual user, reset each billing cycle, and can’t be transferred, shared, or rolled over. Once you've used your monthly credit grant, you can draw additional credits from the [workspace credit pool](#what-is-the-shared-workspace-credit-pool), if available.
+To ensure everyone can try and use Hex’s AI features, users on paid seats are awarded a monthly credit grant. Per-seat credit grants are assigned to the individual user, reset each billing cycle, and can’t be transferred, shared, or rolled over. Once you’ve used your monthly credit grant, you can draw additional credits from the [workspace credit pool](#what-is-the-shared-workspace-credit-pool), if available.
+
+| Plan | Seat Type | Per-Seat Credit Grant |
+| --- | --- | --- |
+| Professional | Author | 30 credits/mo |
+| Team | Author | 40 credits/mo |
+| Enterprise | Author | 60 credits/mo |
+| Enterprise | Explorer | 10 credits/mo |
 
 Per-seat credit grants are currently enforced for most customers on monthly subscriptions, and will be enforced for all customers later this year. Admins will receive advance notice before per-seat credit grants are enforced for their workspace.
 
@@ -48,33 +55,22 @@ Admins can optionally purchase add-on credits to allow users to consume past the
 There are a few ways to purchase or earn add-on credits:
 
 * Admins can enable [auto top-ups](#what-are-auto-top-ups) to automatically purchase shared workspace credits as-needed (whenever a user’s seat grant runs out and the workspace credit pool balance is 0).
+* Customers with annual contracts can purchase committed add-on credits at contract start or renewal.
 * Hex may occasionally award bonus credits, which are added to the shared workspace credit pool.
-
-info
-
-Later this year, we plan to offer customers on annual contracts the option to purchase committed add-on credits. Committed credits can be used in addition to, or instead of, auto top-ups.
 
 ### What is the shared workspace credit pool?[​](#what-is-the-shared-workspace-credit-pool "Direct link to What is the shared workspace credit pool?")
 
 By default, any user who depletes their per-seat credit grant can draw from the shared workspace credit pool.
 
-info
-
-Later in this year, we plan to offer Admins on [**Team or Enterprise plans**](https://hex.tech/pricing/) the option to restrict which users or groups have permission to draw from the shared workspace pool.
-
 ### What are auto top-ups?[​](#what-are-auto-top-ups "Direct link to What are auto top-ups?")
 
 Auto top-ups allow Admins to automatically purchase add-on credits when they are needed.
 
-* Enabling auto top-ups will automatically purchase a credit pack for the workspace pool when a user depletes their per-seat credit grant and the workspace credit pool is empty.
+* Enabling auto top-ups will automatically purchase a 50-credit pack ($25) for the workspace pool when a user depletes their per-seat credit grant and the workspace credit pool is empty.
   + Customers paying by credit card will be charged immediately for auto top-ups.
   + Customers with alternate payment methods will be charged at the end of their true-up period.
 * Credits purchased via auto top-up rollover for 1 monthly billing cycle.
 * Admins can set a monthly limit on auto top-up purchases to help stay within budget.
-
-info
-
-Later this year, we plan to give Admins on [**Team & Enterprise plans**](https://hex.tech/pricing/) an option to restrict which users or groups can draw from the shared workspace credit pool.
 
 ### Do credits rollover?[​](#do-credits-rollover "Direct link to Do credits rollover?")
 

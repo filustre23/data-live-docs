@@ -49,7 +49,7 @@ info
 
 Teams on the Enterprise or Team [plan](https://hex.tech/pricing) can export to Google Sheets and disable this setting.
 
-By default, Hex provides a convenient way for users to send tabular data that they can see (and have access to) directly to Google Sheets from published apps, notebooks, and during scheduled runs. Users with Viewer roles can send tabular data they can see in published apps to Google Sheets. Users with Explorer roles or higher can send tabular data from published apps, notebooks, and scheduled runs to Google sheets.
+By default, Hex provides a convenient way for users to send tabular data that they can see (and have access to) directly to Google Sheets from published apps, notebooks, and during scheduled runs. Users with Explorer roles or higher can send tabular data from published apps, notebooks, and scheduled runs to Google sheets.
 
 By disabling this feature, users will no longer see the option to send data to Google sheets when viewing a published app, a project's notebook, or creating scheduled notifications.
 
@@ -91,7 +91,7 @@ By default, users with the Editor role can create [project data connections](/do
 
 Admins may choose to disable this feature so that data connections can only be created in workspace settings by Admins.
 
-If disabled, any existing project data connections will continue to work. Reach out to [support](/cdn-cgi/l/email-protection#acdfd9dcdcc3ded8ecc4c9d482d8c9cfc4) to get a list of projects that are currently using a project data connection.
+If disabled, any existing project data connections will continue to work. Reach out to [support](/cdn-cgi/l/email-protection#e695939696899492a68e839ec89283858e) to get a list of projects that are currently using a project data connection.
 
 ## SSO configuration[​](#sso-configuration "Direct link to SSO configuration")
 

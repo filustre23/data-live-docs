@@ -14,6 +14,6 @@ Mark trusted data assets in Context Studio so agents and users prioritize review
 
 Connect and manage Semantic Models in the Context Studio.](/docs/agent-management/context-management/models)
 
-[## 📄️ Connections
+[## 📄️ Reference repositories
 
-Connect different data sources to Hex for use in analysis and tasks by the Hex Agent.](/docs/agent-management/context-management/connections)
+Connect to git repositories to provide the Hex Agent with richer context](/docs/agent-management/context-management/reference-repositories)
