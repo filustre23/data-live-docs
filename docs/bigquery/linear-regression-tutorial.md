@@ -22,7 +22,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 * 評估模型。
 * 使用模型進行預測。
 
-**注意：** 本教學課程涵蓋純 SQL 中的線性迴歸。如要查看使用 Python 和 BigQuery DataFrames 對相同資料集進行線性迴歸的教學課程，請參閱「[使用 BigQuery DataFrames 建立迴歸模型](https://docs.cloud.google.com/bigquery/docs/samples/bigquery-dataframes-regression-model?hl=zh-tw)」。
+**注意：** 本教學課程會介紹純 SQL 中的線性迴歸。如要瞭解如何使用 Python 和 BigQuery DataFrames，對相同資料集執行線性迴歸，請參閱「[使用 BigQuery DataFrames 建立迴歸模型](https://docs.cloud.google.com/bigquery/docs/samples/bigquery-dataframes-regression-model?hl=zh-tw)」。
 
 ## 費用
 
@@ -138,11 +138,11 @@ bqclient.create_dataset("bqml_tutorial", exists_ok=True)
 
 ### SQL
 
-您可以使用 [`CREATE MODEL` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm?hl=zh-tw)建立線性迴歸模型，並為模型類型指定 `LINEAR_REG`。建立模型包括訓練模型。
+您可以使用 [`CREATE MODEL` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm?hl=zh-tw)建立線性迴歸模型，並指定模型類型為 `LINEAR_REG`。建立模型包括訓練模型。
 
 以下是 `CREATE MODEL` 陳述式的重要資訊：
 
-* [`input_label_cols`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm?hl=zh-tw#input_label_cols) 選項會指定 `SELECT` 陳述式中的哪個資料欄要當做標籤資料欄。這裡的標籤資料欄是 `body_mass_g`。對線性迴歸模型而言，標籤欄必須為實值，也就是資料欄值必須為實數。
+* [`input_label_cols`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm?hl=zh-tw#input_label_cols) 選項會指定 `SELECT` 陳述式中的哪個資料欄要當做標籤資料欄。這裡的標籤資料欄是 `body_mass_g`。對線性迴歸模型而言，標籤欄必須為實際的值，也就是資料欄值必須為實數。
 * 這個查詢的 `SELECT` 陳述式會使用 `bigquery-public-data.ml_datasets.penguins` 資料表中的下列資料欄，預測企鵝的體重：
 
   + `species`：企鵝的物種。
@@ -179,7 +179,7 @@ bqclient.create_dataset("bqml_tutorial", exists_ok=True)
 
    1. 點選左側窗格中的 explore「Explorer」。
 
-      如果沒有看到左側窗格，請按一下「展開左側窗格」圖示 last\_page 開啟窗格。
+      如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
    2. 在「Explorer」窗格中展開專案，然後按一下「Datasets」(資料集)。
    3. 按一下「`bqml_tutorial`」資料集。
    4. 按一下「模型」分頁標籤。
@@ -228,7 +228,7 @@ model.to_gbq(
 
 機器學習演算法建構模型時，會檢視大量的例子，藉此找出能將損失降到最低的模型。這個過程稱為經驗風險最小化。
 
-所謂「損失」指的是不良預測造成的負面影響。此數值可顯示模型在單一例子中的預測表現多差。如果這個模型的預測是完美的，則損失為 0，否則損失會大於 0。訓練模型的目的是從所有例子中找到平均損失分數低的一組權重和偏誤。
+損失是指不良預測造成的負面影響。此數值可顯示模型在單一例子中的預測表現多差。如果這個模型的預測是完美的，則損失為 0，否則損失會大於 0。訓練模型的目的是從所有例子中找到平均損失分數低的一組權重和偏誤。
 
 查看執行 `CREATE MODEL` 查詢時所產生的模型訓練統計資料：
 
@@ -239,7 +239,7 @@ model.to_gbq(
 5. 如要開啟模型資訊窗格，請按一下「penguins\_model」**penguins\_model**。
 6. 點選「Training」(訓練) 分頁標籤，然後點選「Table」(資料表)。結果應如下所示：
 
-   「Training Data Loss」資料欄代表在訓練資料集上訓練模型後計算出來的損失指標。由於您執行了線性迴歸，因此該資料欄會顯示[均方誤差](https://developers.google.com/machine-learning/glossary/?hl=zh-tw#MSE)值。這項訓練會自動使用[normal\_equation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm?hl=zh-tw#optimize_strategy)最佳化策略，因此只需一次疊代即可收斂至最終模型。如要進一步瞭解如何設定模型最佳化策略，請參閱 [`optimize_strategy`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm?hl=zh-tw#optimize_strategy)。
+   「Training Data Loss」資料欄代表在訓練資料集上訓練模型後計算出來的損失指標。由於您執行了線性迴歸，因此該資料欄會顯示[均方誤差](https://developers.google.com/machine-learning/glossary/?hl=zh-tw#MSE)值。這項訓練會自動使用 [normal\_equation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm?hl=zh-tw#optimize_strategy) 最佳化策略，因此只需一次疊代即可收斂至最終模型。如要進一步瞭解如何設定模型最佳化策略，請參閱 [`optimize_strategy`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm?hl=zh-tw#optimize_strategy)。
 
 ## 評估模型
 
@@ -247,7 +247,7 @@ model.to_gbq(
 
 ### SQL
 
-`ML.EVALUATE` 函式會將訓練好的模型和資料集做為輸入，而資料集必須符合您用來訓練模型的資料結構定義。在正式環境中，您應使用與訓練模型時不同的資料評估模型。如果您執行 `ML.EVALUATE` 時未提供輸入資料，函式會擷取訓練期間計算的評估指標。系統會使用自動保留的評估資料集計算這些指標：
+`ML.EVALUATE` 函式會使用已訓練的模型和資料集做為輸入，該資料集符合您用來訓練模型的資料結構定義。在正式環境中，您應使用與訓練模型時不同的資料評估模型。如果您執行 `ML.EVALUATE` 時未提供輸入資料，函式會擷取訓練期間計算的評估指標。系統會使用自動保留的評估資料集計算這些指標：
 
 ```
     SELECT
@@ -440,7 +440,7 @@ explained = model.predict_explain(biscoe_data, top_k_features=3)
 # 4	 4637.165037	        [{'feature': 'island', 'attribution': 7348.877...	-5320.222128	          4637.165037	            0.0	         Gentoo penguin (Pygoscelis papua)	Biscoe	    46.1	              13.2	        211.0	           4500.0	   FEMALE
 ```
 
-對於線性迴歸模型，系統會使用夏普利值，為模型中的每個特徵產生特徵歸因值。輸出內容會包含 `penguins` 表格中每列的前三大特徵歸因，因為 `top_k_features` 已設為 `3`。這些歸因會依歸因的絕對值遞減排序。在所有範例中，特徵 `sex` 對整體預測的影響最大。
+對於線性迴歸模型，系統會使用夏普利值，為模型中的每個特徵產生特徵歸因值。由於 `top_k_features` 已設為 `3`，因此輸出內容會包含 `penguins` 表格中每列的前三大特徵歸因。這些歸因會依歸因的絕對值遞減排序。在所有範例中，特徵 `sex` 對整體預測的影響最大。
 
 ## 從全域角度說明模型
 
@@ -562,11 +562,11 @@ explain_model = model.global_explain()
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

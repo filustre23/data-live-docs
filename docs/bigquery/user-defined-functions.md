@@ -20,7 +20,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 您可以將 UDF 定義為永久或暫時函式。您可以在多項查詢中重複使用永久 UDF，而單項查詢的範圍內只能有一個暫時性 UDF。
 
-**注意：** 在擁有者之間共用時，可以安全地呼叫持續性 UDF。UDF 無法變更資料、與外部系統通訊，或將記錄傳送至 Google Cloud Observability 或類似應用程式。
+**注意：** 如果擁有者之間共用持續性 UDF，可以安全地呼叫這些 UDF。UDF 無法變更資料、與外部系統通訊，或將記錄傳送至 Google Cloud Observability 或類似應用程式。
 
 如要建立 UDF，請使用 [`CREATE FUNCTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#create_function_statement) 陳述式。如要刪除永久使用者定義函式，請使用 [`DROP FUNCTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#drop_function_statement) 陳述式。暫時性 UDF 會在查詢完成時立即失效。`DROP
 FUNCTION` 陳述式僅適用於[多重陳述式查詢](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries?hl=zh-tw)和[程序](https://docs.cloud.google.com/bigquery/docs/procedures?hl=zh-tw)中的暫時性 UDF。
@@ -194,7 +194,7 @@ AS (
 );
 ```
 
-您也可以參照其他專案或資料集中的實體，不必與建立函式的專案或資料集相同：
+您也可以參照與建立函式時不同的專案或資料集中的實體：
 
 ```
 CREATE FUNCTION project1.mydataset.myfunction()
@@ -206,7 +206,7 @@ AS (
 ### 搭配 SQL UDF 使用系統變數
 
 SQL UDF 支援 `@@session_id` 和 `@@location`
-[系統變數](https://docs.cloud.google.com/bigquery/docs/reference/system-variables?hl=zh-tw)。您可以在函式建立陳述式中的任何位置加入這些系統變數，傳回目前查詢的工作階段 ID 或位置。系統不支援其他系統變數。
+[系統變數](https://docs.cloud.google.com/bigquery/docs/reference/system-variables?hl=zh-tw)。您可以在函式建立陳述式中的任何位置加入這些系統變數，傳回目前查詢的會期 ID 或位置。系統不支援其他系統變數。
 
 ## JavaScript UDF
 
@@ -449,9 +449,7 @@ JavaScript 處理環境限制了每個查詢可用的記憶體。
 3. 在「Explorer」窗格中展開專案，然後按一下「Datasets」(資料集)。
 4. 按一下資料集。您也可以使用搜尋功能或篩選器尋找資料集。
 5. 按一下「常式」分頁標籤，然後選取所需功能。
-6. 在詳細資料窗格中，按一下
-   mode\_edit **編輯日常安排詳細資料**
-   ，編輯說明文字。
+6. 在詳細資料窗格中，按一下「編輯日常安排詳細資料」mode\_edit，編輯說明文字。
 7. 在對話方塊中輸入說明，或編輯現有的說明。按一下「儲存」即可儲存新的說明文字。
 
 ### SQL
@@ -633,7 +631,7 @@ AS (
 
 如要在多個區域的查詢中使用 UDF，含有 UDF 的查詢必須在每個區域中執行。因此，您應在可能使用 UDF 查詢的任何區域中，建立及維護 UDF。即使資料表相同，您也必須維護兩個版本的函式。舉例來說，如果您將銷售資料儲存在 `EU` 和 `US` 多區域，則應在每個區域維護函式版本。例如：
 
-`EU` 多地區的查詢：
+`EU` 多區域的查詢：
 
 ```
   SELECT
@@ -643,7 +641,7 @@ AS (
     sales;
 ```
 
-`US` 多地區的查詢：
+`US` 多區域的查詢：
 
 ```
   SELECT
@@ -683,14 +681,14 @@ AS (
 
 以下限制適用於永久性使用者定義函式：
 
-* 每個資料集只能含有一個使用相同名稱的永久性 UDF。不過，您可以在同一資料集中建立與資料表同名的 UDF。
+* 每個資料集只能含有一個使用相同名稱的 persistent UDF。不過，您可以在同一資料集中建立與資料表同名的 UDF。
 * 從其他永久 UDF 或邏輯檢視表參照永久 UDF 時，您必須使用資料集來限定名稱。例如：  
   `CREATE FUNCTION mydataset.referringFunction()
   AS (mydataset.referencedFunction());`
 
 以下限制適用於暫時性使用者定義函式。
 
-* 當您建立暫時性 UDF 時，`function_name` 不得包含句號。
+* 建立 temporary UDF 時，`function_name` 不得包含句號。
 * 檢視區塊和永久性 UDF 不得參照暫時性 UDF。
 
 
@@ -700,11 +698,11 @@ AS (
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

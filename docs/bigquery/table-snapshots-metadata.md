@@ -42,25 +42,25 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 資料表快照的中繼資料與標準資料表的中繼資料類似，但有以下差異：
 
-* 額外的 `baseTableReference` 欄位會識別快照的來源基本資料表。
+* 額外的 `baseTableReference` 欄位會指出快照的來源資料表。
 * `type` 欄位的值為 `SNAPSHOT`。
 
 您可以透過下列任一方式查看資料表快照的中繼資料：
 
-### 主控台
+### 控制台
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在左側窗格中，按一下「Explorer」explore：
+2. 點選左側窗格中的 explore「Explorer」。
 
-   如果沒有看到左側窗格，請按一下「展開左側窗格」圖示 last\_page 開啟窗格。
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Explorer」窗格中展開專案，按一下「Datasets」，然後按一下含有資料表快照的資料集。
 4. 依序點選「總覽」**>「資料表」**，然後按一下資料表快照的名稱。
 5. 在隨即顯示的快照窗格中，您可以執行下列操作：
 
    * 按一下「結構定義」分頁標籤，查看資料表快照的結構定義和政策標記。
-   * 按一下「詳細資料」表格，查看表格快照的大小、到期時間、基本表格、快照時間和其他資訊。
+   * 按一下「詳細資料」資料表，即可查看資料表快照的大小、到期時間、基本資料表、快照時間和其他資訊。
 
 ### SQL
 
@@ -84,7 +84,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    * `PROJECT_ID`：包含快照的專案 ID。
    * `DATASET_NAME`：包含快照的資料集名稱。
-   * `SNAPSHOT_NAME`：快照的名稱。
+   * `SNAPSHOT_NAME`：快照名稱。
 3. 按一下「執行」play\_circle。
 
 如要進一步瞭解如何執行查詢，請參閱「[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)」。
@@ -105,7 +105,7 @@ PROJECT_ID:DATASET_NAME.SNAPSHOT_NAME
 
 * `PROJECT_ID`：包含快照的專案 ID。
 * `DATASET_NAME`：包含快照的資料集名稱。
-* `SNAPSHOT_NAME`：快照的名稱。
+* `SNAPSHOT_NAME`：快照名稱。
 
 輸出結果會與下列內容相似：
 
@@ -136,7 +136,7 @@ PROJECT_ID:DATASET_NAME.SNAPSHOT_NAME
 
 | **參數** | **值** |
 | --- | --- |
-| `projectId` | 包含快照的專案 ID。 |
+| `projectId` | 含有快照的專案 ID。 |
 | `datasetId` | 包含快照的資料集名稱。 |
 | `tableId` | 快照名稱。 |
 
@@ -189,11 +189,11 @@ PROJECT_ID:DATASET_NAME.SNAPSHOT_NAME
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

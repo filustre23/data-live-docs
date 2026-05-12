@@ -46,7 +46,7 @@ Pub/Sub 通知會將移轉執行的相關資訊傳送至 [Pub/Sub](https://docs.
 
    * 如果您擁有要接收通知的專案，表示您非常有可能已經具備必要權限。
    * 如果您要建立用於接收通知的主題，則必須擁有 [`pubsub.topics.create`](https://docs.cloud.google.com/pubsub/docs/access_control?hl=zh-tw#tbl_roles) 權限。
-   * 無論您要使用新的主題或現有的主題，都必須擁有 [`pubsub.topics.getIamPolicy`](https://docs.cloud.google.com/pubsub/docs/access_control?hl=zh-tw#tbl_roles) 和 [`pubsub.topics.setIamPolicy`](https://docs.cloud.google.com/pubsub/docs/access_control?hl=zh-tw#tbl_roles) 權限。建立主題後，您通常會具備該主題的權限。以下預先定義的 IAM 角色同時具有 `pubsub.topics.getIamPolicy` 和 `pubsub.topics.setIamPolicy` 權限：`pubsub.admin`。詳情請參閱 [Pub/Sub 存取權控管](https://docs.cloud.google.com/pubsub/docs/access_control?hl=zh-tw#console)。
+   * 無論您要使用新的主題或現有的主題，都必須擁有 [`pubsub.topics.getIamPolicy`](https://docs.cloud.google.com/pubsub/docs/access_control?hl=zh-tw#tbl_roles) 和 [`pubsub.topics.setIamPolicy`](https://docs.cloud.google.com/pubsub/docs/access_control?hl=zh-tw#tbl_roles) 權限。建立主題後，您通常會具備該主題的權限。以下預先定義的 IAM 角色同時具有 `pubsub.topics.getIamPolicy` 和 `pubsub.topics.setIamPolicy` 權限：`pubsub.admin`。詳情請參閱「[Pub/Sub 存取控管](https://docs.cloud.google.com/pubsub/docs/access_control?hl=zh-tw#console)」。
 3. [擁有現有的 Pub/Sub 主題](https://docs.cloud.google.com/pubsub/docs/create-topic?hl=zh-tw)，可接收您所傳送的通知。
 
 **注意：** 請勿從 `pubsub.publisher` 預先定義的 IAM 角色中移除 [BigQuery 資料移轉服務代理程式](https://docs.cloud.google.com/iam/docs/service-agents?hl=zh-tw#bigquerydatatransfer.serviceAgent)。移除後，系統可能會無法將發布通知傳送至 Pub/Sub 主題。**注意：** 建立 Pub/Sub 主題時，請勿指定任何自訂結構定義。指定自訂結構定義可能會導致通知發布失敗。
@@ -62,7 +62,7 @@ Pub/Sub 通知會將移轉執行的相關資訊傳送至 [Pub/Sub](https://docs.
 
 屬性是 BigQuery 資料移轉服務傳送至 Pub/Sub 主題的所有通知中包含的鍵/值組合。無論通知酬載為何，通知都會包含以下鍵值組合：
 
-| **屬性名稱** | **示例** | **說明** |
+| **屬性名稱** | **範例** | **說明** |
 | --- | --- | --- |
 | **eventType** | `TRANSFER_RUN_FINISHED` | 最新發生事件的類型，值一定是 `TRANSFER_RUN_FINISHED`。 |
 | **payloadFormat** | `JSON_API_V1` | 物件酬載的格式，值一定是 `JSON_API_V1`。 |
@@ -77,9 +77,9 @@ Pub/Sub 通知會將移轉執行的相關資訊傳送至 [Pub/Sub](https://docs.
 
 ## 電子郵件通知
 
-電子郵件通知會在移轉執行失敗時傳送使用者可理解的電子郵件。這些訊息會傳送至*轉移管理員*的電子郵件地址，也就是設定轉移作業的帳戶。您無法設定訊息內容，也無法設定訊息收件者。
+如果移轉作業執行失敗，系統會傳送使用者可理解的電子郵件通知。這些訊息會傳送至*轉移管理員*的電子郵件地址，也就是設定轉移作業的帳戶。您無法設定訊息內容，也無法設定訊息收件者。
 
-如果您使用服務帳戶驗證移轉設定，可能無法存取電子郵件，因此無法收到移轉作業通知電子郵件。在這種情況下，建議您設定 [Pub/Sub 通知](#notifications)，接收移轉作業執行通知。
+如果您使用服務帳戶驗證移轉設定，可能無法存取電子郵件，因此無法接收移轉作業通知電子郵件。在這種情況下，建議您設定 [Pub/Sub 通知](#notifications)，接收移轉作業執行通知。
 
 如要將轉移作業電子郵件通知傳送給更多使用者，請設定電子郵件轉寄規則來發送郵件。如果您使用 Gmail，則可[自動將 Gmail 郵件轉寄到其他帳戶](https://support.google.com/mail/answer/10957?hl=zh-tw)。
 
@@ -122,16 +122,16 @@ un-check the "Send E-mail Notifications" option.
    [前往 BigQuery 頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 在導覽選單中，按一下「資料移轉」。
 3. 如要開啟新轉移作業的通知，請按一下「建立轉移作業」add。如要調整現有轉移作業的通知，請按一下轉移作業的名稱，然後按一下「編輯」。
-4. 在「Notification options」(通知選項) 部分，按一下要啟用的通知類型旁邊的切換按鈕。
+4. 在「Notification options」(通知選項) 部分，按一下通知類型旁邊的切換按鈕即可啟用。
 
    * **電子郵件通知**：啟用這個選項之後，若移轉失敗，移轉作業管理員就會收到電子郵件通知。
    * **Pub/Sub 通知**：啟用這個選項後，請選擇[主題](https://docs.cloud.google.com/pubsub/docs/overview?hl=zh-tw#types)名稱，或是點選「建立主題」。這個選項會針對移轉作業設定 Pub/Sub 執行[通知](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications?hl=zh-tw)。
 
 ### Java
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定操作說明進行操作。詳情請參閱 [BigQuery Java API 參考說明文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定說明操作。詳情請參閱 [BigQuery Java API 參考說明文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 import com.google.api.gax.rpc.ApiException;
@@ -196,9 +196,9 @@ public class RunNotification {
 
 ### Python
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定操作說明進行操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 transfer_config_name = "projects/1234/locations/us/transferConfigs/abcd"
@@ -237,11 +237,11 @@ print(f"Notification Pub/Sub topic: '{transfer_config.notification_pubsub_topic}
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-05-12T01:46+00:00_
+_Generated 2026-05-12T08:32+00:00_
 
-**9 sources, 4850 topics total**
+**9 sources, 4811 topics total**
 
 ## airflow
 
@@ -16,23 +16,9 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_1215 topics_
+_1167 topics_
 
-- `anthropic-sdk/about-claude/glossary`
-- `anthropic-sdk/about-claude/model-deprecations`
-- `anthropic-sdk/about-claude/models/choosing-a-model`
-- `anthropic-sdk/about-claude/models/migration-guide`
-- `anthropic-sdk/about-claude/models/model-ids-and-versions`
-- `anthropic-sdk/about-claude/models/overview`
-- `anthropic-sdk/about-claude/models/whats-new-claude-4-7`
-- `anthropic-sdk/about-claude/pricing`
-- `anthropic-sdk/about-claude/use-case-guides/content-moderation`
-- `anthropic-sdk/about-claude/use-case-guides/customer-support-chat`
-- `anthropic-sdk/about-claude/use-case-guides/legal-summarization`
-- `anthropic-sdk/about-claude/use-case-guides/overview`
-- `anthropic-sdk/about-claude/use-case-guides/ticket-routing`
 - `anthropic-sdk/agents-and-tools/agent-skills/best-practices`
-- `anthropic-sdk/agents-and-tools/agent-skills/claude-api-skill`
 - `anthropic-sdk/agents-and-tools/agent-skills/enterprise`
 - `anthropic-sdk/agents-and-tools/agent-skills/overview`
 - `anthropic-sdk/agents-and-tools/agent-skills/quickstart`
@@ -102,7 +88,6 @@ _1215 topics_
 - `anthropic-sdk/api/admin/workspaces/retrieve`
 - `anthropic-sdk/api/admin/workspaces/update`
 - `anthropic-sdk/api/beta`
-- `anthropic-sdk/api/beta-headers`
 - `anthropic-sdk/api/beta/agents`
 - `anthropic-sdk/api/beta/agents/archive`
 - `anthropic-sdk/api/beta/agents/create`
@@ -210,8 +195,6 @@ _1215 topics_
 - `anthropic-sdk/api/beta/vaults/retrieve`
 - `anthropic-sdk/api/beta/vaults/update`
 - `anthropic-sdk/api/beta/webhooks`
-- `anthropic-sdk/api/claude-code/routines-fire`
-- `anthropic-sdk/api/claude-platform-on-aws-iam-actions`
 - `anthropic-sdk/api/cli/beta`
 - `anthropic-sdk/api/cli/beta/agents`
 - `anthropic-sdk/api/cli/beta/agents/archive`
@@ -335,7 +318,6 @@ _1215 topics_
 - `anthropic-sdk/api/cli/models`
 - `anthropic-sdk/api/cli/models/list`
 - `anthropic-sdk/api/cli/models/retrieve`
-- `anthropic-sdk/api/client-sdks`
 - `anthropic-sdk/api/completions`
 - `anthropic-sdk/api/completions/create`
 - `anthropic-sdk/api/compliance`
@@ -498,7 +480,6 @@ _1215 topics_
 - `anthropic-sdk/api/csharp/models`
 - `anthropic-sdk/api/csharp/models/list`
 - `anthropic-sdk/api/csharp/models/retrieve`
-- `anthropic-sdk/api/errors`
 - `anthropic-sdk/api/go/beta`
 - `anthropic-sdk/api/go/beta/agents`
 - `anthropic-sdk/api/go/beta/agents/archive`
@@ -622,7 +603,6 @@ _1215 topics_
 - `anthropic-sdk/api/go/models`
 - `anthropic-sdk/api/go/models/list`
 - `anthropic-sdk/api/go/models/retrieve`
-- `anthropic-sdk/api/ip-addresses`
 - `anthropic-sdk/api/java/beta`
 - `anthropic-sdk/api/java/beta/agents`
 - `anthropic-sdk/api/java/beta/agents/archive`
@@ -759,8 +739,6 @@ _1215 topics_
 - `anthropic-sdk/api/models`
 - `anthropic-sdk/api/models/list`
 - `anthropic-sdk/api/models/retrieve`
-- `anthropic-sdk/api/openai-sdk`
-- `anthropic-sdk/api/overview`
 - `anthropic-sdk/api/python/beta`
 - `anthropic-sdk/api/python/beta/agents`
 - `anthropic-sdk/api/python/beta/agents/archive`
@@ -884,7 +862,6 @@ _1215 topics_
 - `anthropic-sdk/api/python/models`
 - `anthropic-sdk/api/python/models/list`
 - `anthropic-sdk/api/python/models/retrieve`
-- `anthropic-sdk/api/rate-limits`
 - `anthropic-sdk/api/ruby/beta`
 - `anthropic-sdk/api/ruby/beta/agents`
 - `anthropic-sdk/api/ruby/beta/agents/archive`
@@ -1008,16 +985,6 @@ _1215 topics_
 - `anthropic-sdk/api/ruby/models`
 - `anthropic-sdk/api/ruby/models/list`
 - `anthropic-sdk/api/ruby/models/retrieve`
-- `anthropic-sdk/api/sdks/cli`
-- `anthropic-sdk/api/sdks/csharp`
-- `anthropic-sdk/api/sdks/go`
-- `anthropic-sdk/api/sdks/java`
-- `anthropic-sdk/api/sdks/php`
-- `anthropic-sdk/api/sdks/python`
-- `anthropic-sdk/api/sdks/ruby`
-- `anthropic-sdk/api/sdks/typescript`
-- `anthropic-sdk/api/service-tiers`
-- `anthropic-sdk/api/supported-regions`
 - `anthropic-sdk/api/typescript/beta`
 - `anthropic-sdk/api/typescript/beta/agents`
 - `anthropic-sdk/api/typescript/beta/agents/archive`
@@ -1141,7 +1108,6 @@ _1215 topics_
 - `anthropic-sdk/api/typescript/models`
 - `anthropic-sdk/api/typescript/models/list`
 - `anthropic-sdk/api/typescript/models/retrieve`
-- `anthropic-sdk/api/versioning`
 - `anthropic-sdk/build-with-claude/adaptive-thinking`
 - `anthropic-sdk/build-with-claude/batch-processing`
 - `anthropic-sdk/build-with-claude/citations`
@@ -1163,9 +1129,6 @@ _1215 topics_
 - `anthropic-sdk/build-with-claude/overview`
 - `anthropic-sdk/build-with-claude/pdf-support`
 - `anthropic-sdk/build-with-claude/prompt-caching`
-- `anthropic-sdk/build-with-claude/prompt-engineering/claude-prompting-best-practices`
-- `anthropic-sdk/build-with-claude/prompt-engineering/overview`
-- `anthropic-sdk/build-with-claude/prompt-engineering/prompting-tools`
 - `anthropic-sdk/build-with-claude/search-results`
 - `anthropic-sdk/build-with-claude/skills-guide`
 - `anthropic-sdk/build-with-claude/streaming`
@@ -1211,7 +1174,6 @@ _1215 topics_
 - `anthropic-sdk/managed-agents/github`
 - `anthropic-sdk/managed-agents/mcp-connector`
 - `anthropic-sdk/managed-agents/memory`
-- `anthropic-sdk/managed-agents/migration`
 - `anthropic-sdk/managed-agents/multi-agent`
 - `anthropic-sdk/managed-agents/onboarding`
 - `anthropic-sdk/managed-agents/overview`
@@ -1222,17 +1184,7 @@ _1215 topics_
 - `anthropic-sdk/managed-agents/tools`
 - `anthropic-sdk/managed-agents/vaults`
 - `anthropic-sdk/managed-agents/webhooks`
-- `anthropic-sdk/release-notes/overview`
-- `anthropic-sdk/release-notes/system-prompts`
-- `anthropic-sdk/resources/overview`
-- `anthropic-sdk/test-and-evaluate/develop-tests`
-- `anthropic-sdk/test-and-evaluate/eval-tool`
 - `anthropic-sdk/test-and-evaluate/strengthen-guardrails/handle-streaming-refusals`
-- `anthropic-sdk/test-and-evaluate/strengthen-guardrails/increase-consistency`
-- `anthropic-sdk/test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks`
-- `anthropic-sdk/test-and-evaluate/strengthen-guardrails/reduce-hallucinations`
-- `anthropic-sdk/test-and-evaluate/strengthen-guardrails/reduce-latency`
-- `anthropic-sdk/test-and-evaluate/strengthen-guardrails/reduce-prompt-leak`
 
 ## bigquery
 
@@ -2777,7 +2729,7 @@ _1532 topics_
 
 Upstream: <https://code.claude.com/docs/en/>
 
-_129 topics_
+_131 topics_
 
 - `claude-code/admin-setup`
 - `claude-code/agent-sdk/agent-loop`
@@ -2811,6 +2763,7 @@ _129 topics_
 - `claude-code/agent-sdk/user-input`
 - `claude-code/agent-teams`
 - `claude-code/agent-view`
+- `claude-code/agents`
 - `claude-code/amazon-bedrock`
 - `claude-code/analytics`
 - `claude-code/authentication`
@@ -2907,6 +2860,7 @@ _129 topics_
 - `claude-code/whats-new/2026-w17`
 - `claude-code/whats-new/2026-w18`
 - `claude-code/whats-new/2026-w19`
+- `claude-code/worktrees`
 - `claude-code/zero-data-retention`
 
 ## dbt-core
@@ -4085,7 +4039,7 @@ _153 topics_
 
 Upstream: <https://learn.hex.tech/>
 
-_352 topics_
+_353 topics_
 
 - `hex/changelog`
 - `hex/changelog/2020-12-17`
@@ -4372,6 +4326,7 @@ _352 topics_
 - `hex/docs/share-insights/apps/apps-introduction`
 - `hex/docs/share-insights/apps/debug-apps`
 - `hex/docs/share-insights/apps/export-as-pdf`
+- `hex/docs/share-insights/apps/generative-apps`
 - `hex/docs/share-insights/apps/package-specific-rendering-details`
 - `hex/docs/share-insights/apps/project-filters`
 - `hex/docs/share-insights/apps/publish-and-share-apps`
@@ -4444,7 +4399,7 @@ _352 topics_
 
 Upstream: <https://openai.github.io/openai-agents-python/>
 
-_375 topics_
+_381 topics_
 
 - `openai-agents/agents`
 - `openai-agents/config`
@@ -4678,6 +4633,7 @@ _375 topics_
 - `openai-agents/ref/sandbox/entries/mounts/patterns`
 - `openai-agents/ref/sandbox/entries/mounts/providers/azure_blob`
 - `openai-agents/ref/sandbox/entries/mounts/providers/base`
+- `openai-agents/ref/sandbox/entries/mounts/providers/box`
 - `openai-agents/ref/sandbox/entries/mounts/providers/gcs`
 - `openai-agents/ref/sandbox/entries/mounts/providers/r2`
 - `openai-agents/ref/sandbox/entries/mounts/providers/s3`
@@ -4703,17 +4659,22 @@ _375 topics_
 - `openai-agents/ref/sandbox/sandboxes/docker`
 - `openai-agents/ref/sandbox/sandboxes/unix_local`
 - `openai-agents/ref/sandbox/session/archive_extraction`
+- `openai-agents/ref/sandbox/session/archive_ops`
 - `openai-agents/ref/sandbox/session/base_sandbox_session`
 - `openai-agents/ref/sandbox/session/dependencies`
 - `openai-agents/ref/sandbox/session/events`
 - `openai-agents/ref/sandbox/session/manager`
 - `openai-agents/ref/sandbox/session/manifest_application`
+- `openai-agents/ref/sandbox/session/manifest_ops`
+- `openai-agents/ref/sandbox/session/mount_lifecycle`
 - `openai-agents/ref/sandbox/session/pty_types`
 - `openai-agents/ref/sandbox/session/runtime_helpers`
 - `openai-agents/ref/sandbox/session/sandbox_client`
 - `openai-agents/ref/sandbox/session/sandbox_session`
 - `openai-agents/ref/sandbox/session/sandbox_session_state`
 - `openai-agents/ref/sandbox/session/sinks`
+- `openai-agents/ref/sandbox/session/snapshot_lifecycle`
+- `openai-agents/ref/sandbox/session/tar_workspace`
 - `openai-agents/ref/sandbox/session/utils`
 - `openai-agents/ref/sandbox/session/workspace_payloads`
 - `openai-agents/ref/sandbox/snapshot`

@@ -24,7 +24,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 如要使用購買的運算單元，請建立「指派作業」，將專案、資料夾或機構指派給運算單元保留項目。您無法在指派層級指派或分配特定數量的運算單元，運算單元是在預訂層級管理及指派。
 
-專案會使用資源階層中指派給專案的最具體單一預留項目。資料夾指派作業會覆寫機構指派作業，專案指派作業則會覆寫資料夾指派作業。[標準版](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)保留項目無法指派資料夾和機構。
+專案會使用資源階層中指派給專案的最具體單一預留項目。資料夾指派作業會覆寫機構指派作業，而專案指派作業則會覆寫資料夾指派作業。[標準版](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)保留項目無法指派資料夾和機構。
 
 如要在預訂項目中建立指派項目，預訂項目必須符合下列至少一項條件：
 
@@ -126,14 +126,14 @@ bq mk \
 更改下列內容：
 
 * `ADMIN_PROJECT_ID`：擁有預訂資源的[管理專案](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#admin-project)專案 ID
-* `LOCATION`：預訂的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)
+* `LOCATION`：預訂的[地點](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)
 * `RESERVATION_NAME`：預訂名稱
 * `ORGANIZATION_ID`：[機構 ID](https://docs.cloud.google.com/resource-manager/docs/creating-managing-organization?hl=zh-tw#retrieving_your_organization_id)
 * `JOB_TYPE`：要指派給這項預留的[工作類型](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#assignments)，例如 `QUERY`、`CONTINUOUS`、`PIPELINE`、`BACKGROUND` 或 `ML_EXTERNAL`
 
 建立預訂指派項目後，請等待至少 5 分鐘再執行查詢。否則系統可能會按照以量計價的定價模式計費。
 
-### 將專案或資料夾指派給預留項目
+### 將專案或資料夾指派給保留項目
 
 ### 控制台
 
@@ -209,7 +209,7 @@ bq mk \
 更改下列內容：
 
 * `ADMIN_PROJECT_ID`：擁有預訂資源的[管理專案](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#admin-project)專案 ID
-* `LOCATION`：預訂的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)
+* `LOCATION`：預訂的[地點](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)
 * `RESERVATION_NAME`：預訂名稱
 * `PROJECT_ID`：要指派給這項預留量的專案 ID
 * `JOB_TYPE`：要指派給這項預訂的[工作類型](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#assignments)，例如 `QUERY`、`CONTINUOUS`、`PIPELINE`、`BACKGROUND_CHANGE_DATA_CAPTURE`、`BACKGROUND_COLUMN_METADATA_INDEX`、`BACKGROUND_SEARCH_INDEX_REFRESH`、`BACKGROUND` 或 `ML_EXTERNAL`
@@ -253,7 +253,7 @@ resource "google_bigquery_reservation_assignment" "default" {
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
 2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
 
-   每項專案只需要執行一次這個指令，且可以在任何目錄中執行。
+   您只需要為每項專案執行一次這個指令，且可以在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
@@ -291,7 +291,7 @@ resource "google_bigquery_reservation_assignment" "default" {
 
 ## 套用變更
 
-1. 檢查設定，確認 Terraform 即將建立或更新的資源符合您的預期：
+1. 查看設定，確認 Terraform 即將建立或更新的資源符合您的預期：
 
    ```
    terraform plan
@@ -397,7 +397,7 @@ resource "google_bigquery_reservation_assignment" "default" {
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
 2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
 
-   每項專案只需要執行一次這個指令，且可以在任何目錄中執行。
+   您只需要為每項專案執行一次這個指令，且可以在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
@@ -435,7 +435,7 @@ resource "google_bigquery_reservation_assignment" "default" {
 
 ## 套用變更
 
-1. 檢查設定，確認 Terraform 即將建立或更新的資源符合您的預期：
+1. 查看設定，確認 Terraform 即將建立或更新的資源符合您的預期：
 
    ```
    terraform plan
@@ -512,7 +512,7 @@ SELECT 42;
    [啟用 Cloud Shell](https://console.cloud.google.com/?cloudshell=true&hl=zh-tw)
 
    Google Cloud 主控台底部會開啟一個 [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works?hl=zh-tw) 工作階段，並顯示指令列提示。Cloud Shell 是已安裝 Google Cloud CLI 的殼層環境，並已針對您目前的專案設定好相關值。工作階段可能要幾秒鐘的時間才能初始化。
-2. 在 Cloud Shell 中，使用 [`bq query` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_query)和 `--reservation_id` 旗標執行查詢：
+2. 在 Cloud Shell 中，使用 [`bq query` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_query)搭配 `--reservation_id` 旗標執行查詢：
 
    ```
    bq query --use_legacy_sql=false --reservation_id=RESERVATION_ID
@@ -524,7 +524,7 @@ SELECT 42;
    * `RESERVATION_ID`：要執行查詢的預留位置。
    * `QUERY`：查詢的 SQL 陳述式。
 
-   舉例來說，下列查詢會在 `US` 多地區的 `test-reservation` 預留項目中執行：
+   舉例來說，下列查詢會在 `US` 多區域的 `test-reservation` 預留項目中執行：
 
    ```
    bq query --reservation_id=project1.US:test-reservation 'SELECT 42;'
@@ -546,7 +546,7 @@ SELECT 42;
 
 * [自動編碼器](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder?hl=zh-tw)
 * [AutoML](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-automl?hl=zh-tw)
-* [強化型樹狀結構](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree?hl=zh-tw)
+* [提升樹](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree?hl=zh-tw)
 * [深層類神經網路 (DNN)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models?hl=zh-tw)
 * [隨機森林](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-random-forest?hl=zh-tw)
 * [廣度和深度網路](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-wnd-models?hl=zh-tw)
@@ -563,7 +563,7 @@ SELECT 42;
 
 如果是外部模型或矩陣因式分解模型以外的 BigQuery ML 模型，您可以建立使用 `QUERY` 工作類型的保留項目指派作業，將保留的運算單元指派給使用這些服務的查詢。如果系統找不到指派的保留項目，且工作類型為 `QUERY`，查詢工作就會採用[依用量計價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#on_demand_pricing)。
 
-## 查看保留項目指派作業
+## 尋找保留項目指派作業
 
 ### 所需權限
 
@@ -641,7 +641,7 @@ bq show \
 更改下列內容：
 
 * `ADMIN_PROJECT_ID`：擁有預訂資源的專案 ID
-* `LOCATION`：要查看預約記錄的[地點](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)
+* `LOCATION`：要查看預訂的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)
 * `JOB_TYPE`：要指派給這項預留的[工作類型](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#assignments)，例如 `QUERY`、`CONTINUOUS`、`PIPELINE`、`BACKGROUND` 或 `ML_EXTERNAL`
 * `PROJECT_ID`：專案 ID
 
@@ -685,9 +685,9 @@ bq update \
 
   如要取得指派 ID，請參閱「[列出專案的預訂指派作業](#list-assignment)」。
 
-**注意：** 更新後的預留項目指派只會套用至新工作。現有工作會繼續使用原始預留項目指派。
+**注意：** 更新後的預訂指派只會套用至新工作。現有工作會繼續使用原始預留項目指派。
 
-## 可刪除保留項目指派作業
+## 刪除保留項目指派作業
 
 如要將專案從保留項目中移除，請刪除保留項目指派作業。如果未將專案指派給任何保留項目，該專案會繼承上層資料夾或機構中的任何指派作業，否則會採用以量計價模式 (如果沒有上層指派作業)。
 
@@ -741,7 +741,7 @@ bq update \
    * `RESERVATION_NAME`：預留項目名稱
    * `ASSIGNMENT_ID`：指派作業的 ID
 
-     如要尋找指派 ID，請參閱「[列出專案的預訂指派作業](#list-assignment)」。
+     如要找出指派 ID，請參閱「[列出專案的預訂指派作業](#list-assignment)」。
 3. 按一下「執行」play\_circle。
 
 如要進一步瞭解如何執行查詢，請參閱「[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)」。
@@ -773,11 +773,11 @@ bq rm \
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

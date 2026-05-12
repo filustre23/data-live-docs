@@ -23,7 +23,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 * 如果應用程式只需要「至少一次」語意，請使用**預設串流**。
 * 如需僅一次語意，請在**已提交類型**中建立一或多個串流，並使用串流偏移保證僅寫入一次。
 
-在已提交類型中，伺服器確認寫入要求後，即可查詢寫入串流的資料。預設串流也會使用已提交的類型，但無法提供「只傳送一次」的保證。
+在已提交類型中，伺服器確認寫入要求後，即可查詢寫入串流的資料。預設串流也會使用已提交類型，但無法保證只傳送一次。
 
 ## 針對至少一次語意使用預設串流
 
@@ -581,7 +581,7 @@ JsonStreamWriter.newBuilder(tableName, bigqueryClient)
 
 ## 使用已提交的型別，確保「僅限一次」語意
 
-如需「僅限一次」寫入語意，請建立已提交類型的寫入串流。在已提交類型中，用戶端收到後端的確認後，即可查詢記錄。
+如需「僅限一次」寫入語意，請建立已提交類型的寫入串流。在已提交類型中，用戶端收到後端確認後，即可查詢記錄。
 
 「已提交」類型會使用記錄偏移，在串流中提供「僅傳送一次」的傳遞機制。應用程式會使用記錄偏移值，在每次呼叫 [`AppendRows`](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1?hl=zh-tw#google.cloud.bigquery.storage.v1.BigQueryWrite.AppendRows) 時指定下一個附加偏移值。只有在偏移值與下一個附加偏移值相符時，系統才會執行寫入作業。詳情請參閱「[管理串流偏移，實現精確一次語意](https://docs.cloud.google.com/bigquery/docs/write-api-best-practices?hl=zh-tw#manage_stream_offsets_to_achieve_exactly-once_semantics)」。
 
@@ -593,17 +593,17 @@ JsonStreamWriter.newBuilder(tableName, bigqueryClient)
 
 1. 呼叫 `CreateWriteStream`，在已提交的類型中建立一或多個串流。
 2. 針對每個串流，在迴圈中呼叫 `AppendRows`，即可寫入批次記錄。
-3. 針對每個串流呼叫 `FinalizeWriteStream`，釋放串流。呼叫這個方法後，您就無法再將任何資料列寫入串流。如果是已承諾方案，這個步驟為選用步驟，但有助於避免超出有效串流的限制。詳情請參閱「[限制串流建立速率](https://docs.cloud.google.com/bigquery/docs/write-api-best-practices?hl=zh-tw#limit_the_rate_of_stream_creation)」。
+3. 針對每個串流呼叫 `FinalizeWriteStream`，即可釋放串流。呼叫這個方法後，您就無法再將任何資料列寫入串流。如果是已承諾方案，這個步驟為選用步驟，但有助於避免超出有效串流的限制。詳情請參閱「[限制串流建立速率](https://docs.cloud.google.com/bigquery/docs/write-api-best-practices?hl=zh-tw#limit_the_rate_of_stream_creation)」。
 
 ### Node.js
 
 1. 呼叫 `createWriteStreamFullResponse`，在已提交的類型中建立一或多個串流。
 2. 針對每個串流，在迴圈中呼叫 `appendRows`，即可寫入批次記錄。
-3. 針對每個串流呼叫 `finalize`，釋放串流。呼叫這個方法後，您就無法再將任何資料列寫入串流。如果是已承諾方案，這個步驟為選用步驟，但有助於避免超出有效串流的限制。詳情請參閱「[限制串流建立速率](https://docs.cloud.google.com/bigquery/docs/write-api-best-practices?hl=zh-tw#limit_the_rate_of_stream_creation)」。
+3. 針對每個串流呼叫 `finalize`，即可釋放串流。呼叫這個方法後，您就無法再將任何資料列寫入串流。如果是已承諾方案，這個步驟為選用步驟，但有助於避免超出有效串流的限制。詳情請參閱「[限制串流建立速率](https://docs.cloud.google.com/bigquery/docs/write-api-best-practices?hl=zh-tw#limit_the_rate_of_stream_creation)」。
 
 您無法明確刪除串流。串流會遵循系統定義的存留時間 (TTL)：
 
-* 如果串流沒有任何流量，已提交的串流 TTL 為三天。
+* 如果串流沒有任何流量，承諾串流的 TTL 為三天。
 * 如果緩衝串流沒有任何流量，預設存留時間為七天。
 
 以下程式碼顯示如何使用已提交的型別：
@@ -737,5 +737,5 @@ public class WriteCommittedStream {
 
     public void append(JSONArray data, long offset)
         throws DescriptorValidationException, IOException, ExecutionException {
-      synchronized (this
+      synchronized (</
 ```

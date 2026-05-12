@@ -18,7 +18,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 部分資料來源支援使用[服務帳戶](https://docs.cloud.google.com/iam/docs/service-account-overview?hl=zh-tw)透過 Google Cloud 控制台、API 或 `bq` 指令列進行資料移轉驗證。服務帳戶是與 Google Cloud 專案相關聯的 Google 帳戶。服務帳戶可透過服務帳戶憑證 (而非使用者憑證) 進行驗證，並執行工作，例如排程查詢或批次處理管道。
 
-您可以使用服務帳戶的憑證更新現有資料移轉作業。詳情請參閱「[更新資料移轉憑證](#update_data_transfer_credentials)」。
+您可以使用服務帳戶的憑證更新現有資料轉移作業。詳情請參閱「[更新資料移轉憑證](#update_data_transfer_credentials)」。
 
 在下列情況下，您需要更新憑證：
 
@@ -185,11 +185,11 @@ print("Updated config: '{}'".format(transfer_config.name))
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

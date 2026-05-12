@@ -20,7 +20,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 在批次載入情境中，應用程式會寫入資料，並以單一不可分割的交易提交資料。使用 Storage Write API 批次載入資料時，請在*待處理類型*中建立一或多個串流。待處理類型支援串流層級交易。記錄會緩衝處理，直到您提交串流為止。
 
-對於批次工作負載，也請考慮透過 [Apache Spark SQL 連接器 (適用於 BigQuery)](https://github.com/GoogleCloudDataproc/spark-bigquery-connector#writing-data-to-bigquery) 使用 Storage Write API，並透過 Managed Service for Apache Spark 執行，而非編寫自訂的 Storage Write API 程式碼。
+對於批次工作負載，也請考慮透過 [Apache Spark SQL 連接器 for BigQuery](https://github.com/GoogleCloudDataproc/spark-bigquery-connector#writing-data-to-bigquery)，使用 Managed Service for Apache Spark 搭配 Storage Write API，而非編寫自訂的 Storage Write API 程式碼。
 
 Storage Write API 非常適合*資料管道*架構。主程序會建立多個串流。針對每個串流，系統會指派背景工作執行緒或個別程序，寫入部分批次資料。每個工作站都會建立與串流的連線、寫入資料，並在完成時終止串流。所有工作站向主要程序發出信號，表示成功完成作業後，主要程序就會提交資料。如果工作站發生故障，最終結果就不會顯示該工作站負責的資料部分，且可以安全地重試整個工作站。在更複雜的管道中，工作站會回報寫入主要程序的最後一個偏移量，藉此檢查進度。這種做法可建立強大的管道，即使發生故障也能正常運作。
 
@@ -31,7 +31,7 @@ Storage Write API 非常適合*資料管道*架構。主程序會建立多個串
 1. 呼叫 `CreateWriteStream`，在待處理型別中建立一或多個串流。
 2. 針對每個串流，在迴圈中呼叫 `AppendRows`，即可寫入批次記錄。
 3. 針對每個串流呼叫 `FinalizeWriteStream`。呼叫這個方法後，您就無法再將任何資料列寫入串流。如果您在呼叫 `FinalizeWriteStream` 後呼叫 `AppendRows`，系統會傳回 [`StorageError`](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1?hl=zh-tw#google.cloud.bigquery.storage.v1.StorageError)，且 `google.rpc.Status` 錯誤中會包含 `StorageErrorCode.STREAM_FINALIZED`。如要進一步瞭解 `google.rpc.Status` 錯誤模型，請參閱「[錯誤](https://docs.cloud.google.com/apis/design/errors?hl=zh-tw)」。
-4. 呼叫 `BatchCommitWriteStreams` 來提交串流。呼叫這個方法後，資料即可供讀取。如果提交任何串流時發生錯誤，系統會在 [`BatchCommitWriteStreamsResponse`](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1?hl=zh-tw#batchcommitwritestreamsresponse) 的 `stream_errors` 欄位中傳回錯誤。
+4. 呼叫 `BatchCommitWriteStreams` 提交串流。呼叫這個方法後，資料即可供讀取。如果提交任何串流時發生錯誤，系統會在 [`BatchCommitWriteStreamsResponse`](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1?hl=zh-tw#batchcommitwritestreamsresponse) 的 `stream_errors` 欄位中傳回錯誤。
 
 提交是不可分割的作業，您可以一次提交多個串流。
 串流只能提交一次，因此如果提交作業失敗，可以安全地重試。在您提交串流前，資料會處於待處理狀態，且無法讀取。

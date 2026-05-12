@@ -103,7 +103,7 @@ By default, users with the Editor role can create [project data connections](/do
 
 Admins may choose to disable this feature so that data connections can only be created in workspace settings by Admins.
 
-If disabled, any existing project data connections will continue to work. Reach out to [support](/cdn-cgi/l/email-protection#fe8d8b8e8e918c8abe969b86d08a9b9d96) to get a list of projects that are currently using a project data connection.
+If disabled, any existing project data connections will continue to work. Reach out to [support](/cdn-cgi/l/email-protection#bbc8cecbcbd4c9cffbd3dec395cfded8d3) to get a list of projects that are currently using a project data connection.
 
 ## SSO configuration[​](#sso-configuration "Direct link to SSO configuration")
 

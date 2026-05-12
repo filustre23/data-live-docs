@@ -10,7 +10,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 使用 ONNX 格式的 PyTorch 模型進行預測 透過集合功能整理內容 你可以依據偏好儲存及分類內容。
 
-[開放式神經網路交換格式](https://onnx.ai/) (ONNX) 提供統一格式，可表示任何機器學習架構。BigQuery ML 支援 ONNX，因此您可以：
+[開放式類神經網路交換格式](https://onnx.ai/) (ONNX) 提供統一格式，可表示任何機器學習框架。BigQuery ML 支援 ONNX，因此您可以：
 
 * 使用您喜愛的架構訓練模型。
 * 將模型轉換為 ONNX 模型格式。
@@ -132,7 +132,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 下列程式碼範例說明如何將預先訓練的分類模型匯入 PyTorch，以及如何將產生的模型轉換為 ONNX 格式。本教學課程使用儲存在 `gs://cloud-samples-data/bigquery/ml/onnx/resnet18.onnx` 的預先建構範例模型。如果您使用範例模型，則不必完成這些步驟。
 
-### 建立圖片分類的 PyTorch 視覺模型
+### 建立用於圖片分類的 PyTorch 視覺模型
 
 請使用下列程式碼範例匯入 PyTorch 預先訓練的 [resnet18](https://pytorch.org/vision/main/models/generated/torchvision.models.resnet18.html) 模型，該模型會接受 BigQuery ML [`ML.DECODE_IMAGE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-decode-image?hl=zh-tw) 和 [`ML.RESIZE_IMAGE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-resize-image?hl=zh-tw) 函式傳回的已解碼圖片資料。
 
@@ -315,7 +315,7 @@ torch.onnx.export(final_model,            # model being run
 1. 前往 Google Cloud 控制台的「Cloud Storage bucket」頁面。  
 
    [前往「Buckets」(值區) 頁面](https://console.cloud.google.com/storage/browser?hl=zh-tw)
-2. 點選 add\_box「建立」。
+2. 點選 add\_box「Create」(建立)。
 3. 在「建立 bucket」頁面中，輸入 bucket 資訊。
 
    1. 在「開始使用」部分，執行下列操作：
@@ -325,7 +325,8 @@ torch.onnx.export(final_model,            # model being run
    2. 在「Choose where to store your data」(選擇資料的儲存位置) 部分，執行下列操作：
 
       1. 「位置類型」請選取「多區域」。
-      2. 從位置類型選單中，選取「US (多個美國區域)」。
+      2. 從位置類型選單中，選取「US (multiple
+         regions in United States)」(美國 (多個美國區域))。
       3. 按一下「繼續」。
    3. 在「為資料選擇儲存空間級別」專區中：
 
@@ -385,13 +386,13 @@ gcloud storage cp OBJECT_LOCATION gs://bqml_images/IMAGE_NAME
 Completed files 1/1 | 164.3kiB/164.3kiB
 ```
 
-### 建立 BigQuery Cloud 資源連線
+### 建立 BigQuery Cloud 資源連結
 
 您必須擁有 Cloud 資源連結，才能連線至本教學課程稍後建立的[物件資料表](https://docs.cloud.google.com/bigquery/docs/object-table-introduction?hl=zh-tw)。
 
 您可以透過雲端資源連線，查詢儲存在 BigQuery 外部的資料，例如 Cloud Storage 或 Spanner 等 Google Cloud 服務，或是 AWS 或 Azure 等第三方來源。這些外部連結會使用 BigQuery Connection API。
 
-請按照下列步驟建立 Cloud 資源連線。
+請按照下列步驟建立 Cloud 資源連結。
 
 ### 控制台
 
@@ -400,11 +401,11 @@ Completed files 1/1 | 164.3kiB/164.3kiB
    [前往 BigQuery Studio](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
 
-   如果沒有看到左側窗格，請按一下「展開左側窗格」圖示 last\_page 開啟窗格。
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Explorer」窗格中，點選「新增資料」add。
 
    「新增資料」對話方塊隨即開啟。
-4. 在「依條件篩選」窗格的「資料來源類型」部分，選取「資料庫」。
+4. 在「Filter By」(依據篩選) 窗格的「Data Source Type」(資料來源類型) 專區中，選取「Databases」(資料庫)。
 
    或者，您也可以在「Search for data sources」(搜尋資料來源) 欄位中輸入 `Vertex AI`。
 5. 在「精選資料來源」部分，點選「Vertex AI」。
@@ -449,9 +450,9 @@ Completed files 1/1 | 164.3kiB/164.3kiB
 
 ### 設定連線存取權
 
-將 Storage 物件管理員角色授予 Cloud 資源連線的服務帳戶。您必須在上傳圖片檔案的專案中授予這個角色。
+將 Storage 物件管理員角色授予 Cloud 資源連結的服務帳戶。您必須在上傳圖片檔案的專案中授予這個角色。
 
-**注意：** 如果連線位於不同專案，系統會傳回以下錯誤：
+**注意：** 如果連線位於不同專案中，系統會傳回以下錯誤：
 `bqcx-1234567890-xxxx@gcp-sa-bigquery-condel.iam.gserviceaccount.com does not have the permission to access
 resource`。
 
@@ -624,8 +625,8 @@ gcloud projects delete PROJECT_ID
 
 1. [刪除匯入的模型](https://docs.cloud.google.com/bigquery/docs/deleting-models?hl=zh-tw)。
 2. (選用) [刪除資料集](https://docs.cloud.google.com/bigquery/docs/managing-datasets?hl=zh-tw#delete-datasets)。
-3. [刪除 Cloud 資源連線](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw#delete-connections)。
-4. [刪除 Cloud Storage 值區](https://cloud.google.com/storage/docs/deleting-buckets?hl=zh-tw#delete-bucket)。
+3. [刪除 Cloud 資源連結](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw#delete-connections)。
+4. [刪除 Cloud Storage bucket](https://cloud.google.com/storage/docs/deleting-buckets?hl=zh-tw#delete-bucket)。
 
 ## 後續步驟
 
@@ -641,11 +642,11 @@ gcloud projects delete PROJECT_ID
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

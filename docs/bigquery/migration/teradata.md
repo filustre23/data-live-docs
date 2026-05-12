@@ -184,13 +184,13 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 [建立 BigQuery 資料集](https://docs.cloud.google.com/bigquery/docs/datasets?hl=zh-tw)來儲存您的資料。您無須建立任何資料表。
 
-### 建立 Cloud Storage 值區
+### 建立 Cloud Storage bucket
 
 [建立 Cloud Storage bucket](https://docs.cloud.google.com/storage/docs/creating-buckets?hl=zh-tw)，在移轉工作期間暫存資料。
 
 ### 準備本機環境
 
-請完成本節中的工作，為轉移工作準備本機環境。
+完成本節中的工作，為轉移作業準備本機環境。
 
 #### 本機需求條件
 
@@ -264,7 +264,7 @@ gcs_secret_access_key = ACCESS_KEY
 
 您無法使用 bq 指令列工具建立隨選移轉作業，必須改用 Google Cloud 控制台或 BigQuery 資料移轉服務 API。
 
-如果您要建立週期性移轉作業，強烈建議您指定結構定義檔案，這樣後續移轉作業的資料載入 BigQuery 時，才能正確進行資料分割。如果沒有結構定義檔案，BigQuery 資料移轉服務會從要移轉的來源資料推斷資料表結構定義，但所有有關分割、叢集、主鍵和變更追蹤的資訊都會遺失。此外，後續轉移作業會略過初始轉移作業中已轉移的表格。如要進一步瞭解如何建立結構定義檔案，請參閱「[自訂結構定義檔案](https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview?hl=zh-tw#custom_schema_file)」。
+如果您要建立週期性移轉作業，強烈建議您指定結構定義檔案，這樣後續移轉作業的資料載入 BigQuery 時，才能正確進行資料分割。如果沒有結構定義檔案，BigQuery 資料移轉服務會從要移轉的來源資料推斷資料表結構定義，但所有有關分割、叢集、主鍵和變更追蹤的資訊都會遺失。此外，後續轉移作業會略過初始轉移作業中已轉移的資料表。如要進一步瞭解如何建立結構定義檔案，請參閱「[自訂結構定義檔案](https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview?hl=zh-tw#custom_schema_file)」。
 
 ### 控制台
 
@@ -298,8 +298,8 @@ gcs_secret_access_key = ACCESS_KEY
    * 服務帳戶必須具備[必要權限](#set_required_permissions)。
 7. 選用：在「Notification options」(通知選項) 專區，執行下列操作：
 
-   * 如果希望移轉作業管理員在移轉作業失敗時收到電子郵件通知，請點選「電子郵件通知」切換按鈕。
-   * 點選「Pub/Sub notifications」(Pub/Sub 通知) 切換按鈕，即可設定移轉作業的 Pub/Sub 執行[通知](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications?hl=zh-tw)。在「Select a Pub/Sub topic」(選取 Pub/Sub 主題)，選擇[主題](https://docs.cloud.google.com/pubsub/docs/overview?hl=zh-tw#types)名稱，或點選「Create a topic」(建立主題)。
+   * 如要在移轉作業失敗時，讓移轉管理員收到電子郵件通知，請點選「電子郵件通知」切換按鈕。
+   * 點選「Pub/Sub notifications」(Pub/Sub 通知) 切換按鈕，即可設定移轉作業的 Pub/Sub 執行[通知](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications?hl=zh-tw)。在「Select a Pub/Sub topic」(選取 Pub/Sub 主題)，選擇您的[主題](https://docs.cloud.google.com/pubsub/docs/overview?hl=zh-tw#types)名稱，或點選「Create a topic」(建立主題)。
 8. 按一下 [儲存]。
 9. 在「Transfer details」(移轉作業詳細資料) 頁面中，按一下「Configuration」(設定) 分頁標籤。
 10. 請記下這項轉移作業的資源名稱，因為您需要這個名稱才能執行遷移代理程式。
@@ -333,7 +333,7 @@ bq mk \
 * project ID 是您的專案 ID。如未提供 `--project_id` 指定特定專案，系統會使用預設專案。
 * dataset 是您要指定給移轉設定的資料集 (`--target_dataset`)。
 * name 是移轉設定的顯示名稱 (`--display_name`)。移轉作業的顯示名稱可以是任意值，日後需要修改移轉作業時，能夠據此識別即可。
-* service\_account 是用於驗證移轉作業的服務帳戶名稱。服務帳戶應由用於建立轉移作業的 `project_id` 所擁有，且應具備所有列出的[必要權限](#set_required_permissions)。
+* service\_account 是用於驗證移轉作業的服務帳戶名稱。服務帳戶應由用於建立轉移作業的 `project_id` 擁有，且應具備所有列出的[必要權限](#set_required_permissions)。
 * parameters 含有已建立移轉設定的 JSON 格式參數 (`--params`)。例如 `--params='{"param":"param_value"}'`。
   + 如要遷移 Teradata，請使用下列參數：
     - `bucket` 是 Cloud Storage bucket，在遷移期間會做為暫存區。
@@ -408,5 +408,5 @@ public class CreateTeradataTransfer {
     params.put("bucket", Value.newBuilder().setStringValue(bucket).build());
     params.put("database_name", Value.newBuilder().setStringValue(databaseName).build());
     params.put("table_name_patterns", Value.newBuilder().setStringValue(tableNamePatterns).build());
-    params.put("agent_service_account", Value.newBuilder().setStringValue(serviceAccount).build
+    params.put("agent_service_account", Value.newBuilder().setStringValue(serviceAccount).build());
 ```

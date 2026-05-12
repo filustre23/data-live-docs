@@ -12,7 +12,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 在本教學課程中，您會在 BigQuery 中建立授權檢視表，供資料分析師使用。[授權檢視表](https://docs.cloud.google.com/bigquery/docs/authorized-views?hl=zh-tw)可讓您與特定使用者和群組分享查詢結果，無須授予他們基礎來源資料的存取權。檢視畫面會取得來源資料的存取權，而非使用者或群組。您也可以使用檢視表的 SQL 查詢，從查詢結果中排除資料欄和欄位。
 
-除了使用已授權檢視表，您也可以在來源資料中設定資料欄層級的存取權控管，然後讓使用者存取查詢受控資料的檢視表。如要進一步瞭解資料欄層級存取權控管，請參閱「[資料欄層級存取控管機制簡介](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro?hl=zh-tw)」。
+除了使用已授權檢視表，您也可以在來源資料中設定資料欄層級的存取控管，然後讓使用者存取查詢受控資料的檢視表。如要進一步瞭解資料欄層級存取權控管，請參閱「[資料欄層級存取控管機制簡介](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro?hl=zh-tw)」。
 
 如果您有多個授權檢視表存取同一個來源資料集，可以[授權包含檢視表的資料集](https://docs.cloud.google.com/bigquery/docs/authorized-datasets?hl=zh-tw)，不必授權個別檢視表。
 
@@ -20,11 +20,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 * 建立資料集，以便加入來源資料。
 * 執行查詢，將資料載入來源資料集中的目的地資料表。
-* 建立資料集，以便加入授權檢視表。
-* 從 SQL 查詢建立授權檢視表，限制資料分析師可在查詢結果中查看的資料欄。
+* 建立資料集，以便加入授權 view。
+* 從 SQL 查詢建立授權 view，限制資料分析師可在查詢結果中查看的資料欄。
 * 授予資料分析師執行查詢工作的權限。
 * 授予資料分析師對內含已授權檢視表的資料集存取權。
-* 將來源資料集的存取權授予已授權的檢視表。
+* 將來源資料集的檢視權限授予已授權的檢視表。
 
 ## 費用
 
@@ -102,7 +102,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
 
-   如果沒有看到左側窗格，請按一下「展開左側窗格」圖示 last\_page 開啟窗格。
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Explorer」窗格中，找到要建立資料集的專案，然後依序點選旁邊的 more\_vert「View actions」(查看動作)>「Create dataset」(建立資料集)。
 4. 在「建立資料集」頁面中，執行下列操作：
 
@@ -161,7 +161,7 @@ source_dataset = client.create_dataset(source_dataset)  # API request
 
 ## 建立資料表並載入來源資料
 
-建立來源資料集後，請將 SQL 查詢結果儲存至目的地資料表，藉此填入資料表。查詢會從 [GitHub 公開資料集](https://console.cloud.google.com/bigquery?p=bigquery-public-data&%3Bd=github_repos&%3Bpage=dataset&hl=zh-tw)擷取資料。
+建立來源資料集後，請將 SQL 查詢結果儲存至目的地資料表，藉此填入資料表。這項查詢會從 [GitHub 公開資料集](https://console.cloud.google.com/bigquery?p=bigquery-public-data&%3Bd=github_repos&%3Bpage=dataset&hl=zh-tw)擷取資料。
 
 ### 控制台
 
@@ -236,9 +236,9 @@ client.query_and_wait(
 )  # API request - starts the query and waits for query to finish
 ```
 
-## 建立資料集來儲存授權檢視表
+## 建立資料集來儲存授權 view
 
-建立來源資料集之後，您會建立新的獨立資料集，儲存將與資料分析師分享的已授權檢視表。在後續步驟中，您會授權檢視表存取來源資料集中的資料。資料分析師可以存取授權 view，但無法直接存取來源資料。
+建立來源資料集之後，您會建立新的獨立資料集，儲存將與資料分析師分享的授權 view。在後續步驟中，您會授權檢視表存取來源資料集中的資料。資料分析師接著就能存取授權 view，但無法直接存取來源資料。
 
 授權檢視區塊應在與來源資料不同的資料集中建立。
 這樣一來，資料擁有者就能授權使用者存取授權 view，不必同時授予基礎資料的存取權。來源資料集和授權 view 資料集必須位於同一個區域[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
@@ -329,7 +329,7 @@ shared_dataset = client.create_dataset(shared_dataset)  # API request
    ```
 
    將 `PROJECT_ID` 替換為專案 ID。
-3. 依序點選「儲存」>「儲存檢視畫面」。
+3. 依序點按「儲存」>「儲存檢視畫面」。
 4. 在「Save view」(儲存檢視表) 對話方塊中，執行下列操作：
 
    1. 在「Project」(專案) 部分，確認已選取專案。
@@ -407,14 +407,16 @@ view = client.create_table(view)  # API request
 
 ## 授予資料分析師執行查詢工作的權限
 
-資料分析師需要 `bigquery.jobs.create` 權限才能執行查詢工作，且必須獲得檢視表的存取權，才能查詢檢視表。在本節中，您會將 `bigquery.user` 角色授予資料分析師。`bigquery.user` 角色包含 `bigquery.jobs.create` 權限。在後續步驟中，您會授予資料分析師存取檢視表的權限。
+資料分析師需要 `bigquery.jobs.create` 權限，才能執行查詢工作並查詢檢視表。這項權限僅適用於執行查詢工作的專案 (計費或執行專案)，這類專案可能與含有檢視區塊的專案不同。
 
-如要將資料分析師群組指派給專案層級的 `bigquery.user` 角色，請按照下列步驟操作：
+在本節中，您會為資料分析師授予 `bigquery.user` 角色，讓他們在執行工作的專案中使用。`bigquery.user` 角色包含 `bigquery.jobs.create` 權限。在後續步驟中，您會授予資料分析師存取檢視區塊的權限。
+
+如要將資料分析師群組指派給專案的 `bigquery.user` 角色，讓他們能執行工作，請按照下列步驟操作：
 
 1. 前往 Google Cloud 控制台的「IAM」(身分與存取權管理) 頁面。
 
    [前往「IAM」(身分與存取權管理) 頁面](https://console.cloud.google.com/iam-admin/iam?hl=zh-tw)
-2. 確認已在專案選取器中選取專案。
+2. 確認分析師用來執行工作的專案已在專案選取器中選取。
 3. 按一下person\_add「授予存取權」。
 4. 在「授予存取權」對話方塊中，執行下列操作：
 
@@ -422,11 +424,11 @@ view = client.create_table(view)  # API request
    2. 在「請選擇角色」欄位中，搜尋並選取「BigQuery 使用者」角色。
    3. 按一下 [儲存]。
 
-## 授予資料分析師查詢已授權檢視表的權限
+## 授予資料分析師查詢已授權 view 的權限
 
 如要讓資料分析師查詢檢視表，您必須在資料集層級或檢視表層級授予 `bigquery.dataViewer` 角色。在資料集層級授予這個角色，分析師就能存取資料集中的所有資料表和檢視表。由於本教學課程中建立的資料集只包含一個已授權檢視表，因此您會在資料集層級授予存取權。如果您需要授予存取權給一系列授權檢視表，建議改用[授權資料集](https://docs.cloud.google.com/bigquery/docs/authorized-datasets?hl=zh-tw)。
 
-您先前授予資料分析師的 `bigquery.user` 角色，可提供建立查詢工作所需的權限。不過，他們必須同時具備已授權檢視表或內有該檢視表資料集的 `bigquery.dataViewer` 存取權，才能成功查詢檢視表。
+您先前授予資料分析師的 `bigquery.user` 角色，可讓他們在執行查詢工作的專案中建立查詢工作。但他們至少需具備已授權檢視表或內含該檢視表資料集的 `bigquery.dataViewer` 存取權，才能成功查詢檢視表。
 
 如要授予資料分析師對內含授權檢視表的資料集 `bigquery.dataViewer` 存取權，請按照下列步驟操作：
 
@@ -489,7 +491,7 @@ shared_dataset = client.update_dataset(
 2. 點選左側窗格中的 explore「Explorer」。
 3. 在「Explorer」窗格中，按一下「Datasets」(資料集)，然後選取「`github_source_data`」資料集，開啟「Details」(詳細資料) 分頁。
 4. 依序點選「共用」>「授權檢視」。
-5. 在「Authorized views」(授權檢視表) 窗格中，輸入「Authorized view」(授權檢視表) `PROJECT_ID.shared_views.github_analyst_view`。
+5. 在「Authorized views」(授權 view) 窗格中，輸入「Authorized view」(授權 view) `PROJECT_ID.shared_views.github_analyst_view`。
 
    將 PROJECT\_ID 替換為專案 ID。
 6. 按一下「新增授權」。
@@ -526,7 +528,7 @@ source_dataset = client.update_dataset(
 
 ## 驗證設定
 
-設定完成時，資料分析師群組 (例如 `data_analysts`) 的成員可以透過查詢檢視表來驗證設定。
+設定完成時，資料分析師群組的成員 (例如 `data_analysts`) 可以透過查詢檢視表來驗證設定。
 
 如要驗證設定，資料分析師應執行下列查詢：
 
@@ -724,7 +726,7 @@ gcloud projects delete PROJECT_ID
 或者，如要移除本教學課程中使用的個別資源，請執行下列操作：
 
 1. [刪除授權 view](https://docs.cloud.google.com/bigquery/docs/managing-views?hl=zh-tw#delete_views)。
-2. [刪除包含已授權檢視區塊的資料集](https://docs.cloud.google.com/bigquery/docs/managing-datasets?hl=zh-tw#delete-datasets)。
+2. [刪除包含授權 view 的資料集](https://docs.cloud.google.com/bigquery/docs/managing-datasets?hl=zh-tw#delete-datasets)。
 3. [刪除來源資料集中的資料表](https://docs.cloud.google.com/bigquery/docs/managing-tables?hl=zh-tw#deleting_a_table)。
 4. [刪除來源資料集](https://docs.cloud.google.com/bigquery/docs/managing-datasets?hl=zh-tw#delete-datasets)。
 
@@ -735,8 +737,8 @@ gcloud projects delete PROJECT_ID
 * 如要瞭解 BigQuery 中的存取權控管，請參閱 [BigQuery 身分與存取權管理角色和權限](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)。
 * 如要瞭解 BigQuery 檢視表，請參閱「[邏輯檢視表簡介](https://docs.cloud.google.com/bigquery/docs/views-intro?hl=zh-tw)」。
 * 如要進一步瞭解授權檢視表，請參閱[授權檢視表](https://docs.cloud.google.com/bigquery/docs/authorized-views?hl=zh-tw)。
-* 如要瞭解存取權控管的基本概念，請參閱 [IAM 總覽](https://docs.cloud.google.com/iam/docs/overview?hl=zh-tw)。
-* 如要瞭解如何管理存取權控管，請參閱「[管理政策](https://docs.cloud.google.com/iam/docs/managing-policies?hl=zh-tw)」。
+* 如要瞭解存取控管的基本概念，請參閱 [IAM 總覽](https://docs.cloud.google.com/iam/docs/overview?hl=zh-tw)。
+* 如要瞭解如何管理存取控管，請參閱「[管理政策](https://docs.cloud.google.com/iam/docs/managing-policies?hl=zh-tw)」。
 
 
 
@@ -745,11 +747,11 @@ gcloud projects delete PROJECT_ID
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-11 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-11 (世界標準時間)。"],[],[]]

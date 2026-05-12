@@ -2,7 +2,7 @@
 
 [## 🗃️ Apps
 
-13 items](/docs/share-insights/apps/apps-introduction)
+14 items](/docs/share-insights/apps/apps-introduction)
 
 [## 📄️ Scheduled runs
 

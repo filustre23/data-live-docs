@@ -18,15 +18,15 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 結構定義自動偵測
 
-BigQuery 結構定義自動偵測功能可推斷 CSV、JSON 或 Google 試算表資料的結構定義。無論是要將資料[載入](https://docs.cloud.google.com/bigquery/docs/loading-data?hl=zh-tw) BigQuery 或是查詢[外部資料來源](https://docs.cloud.google.com/bigquery/external-data-sources?hl=zh-tw)，您都可以使用結構定義自動偵測功能。
+BigQuery 可透過結構定義自動偵測功能，推斷 CSV、JSON 或 Google 試算表資料的結構定義。無論是要將資料[載入](https://docs.cloud.google.com/bigquery/docs/loading-data?hl=zh-tw) BigQuery 或是查詢[外部資料來源](https://docs.cloud.google.com/bigquery/external-data-sources?hl=zh-tw)，您都可以使用結構定義自動偵測功能。
 
-啟用自動偵測功能後，BigQuery 會推斷每一欄的資料類型。BigQuery 會隨機選擇資料來源中的檔案，並掃描最多前 500 個資料列來當做代表性樣本。BigQuery 接著會檢查每個欄位，並嘗試根據樣本中的值為各欄位指派資料類型。如果資料欄中的所有資料列都是空白，自動偵測功能會將該資料欄的資料類型預設為 `STRING`。
+啟用自動偵測功能後，BigQuery 會推斷每一欄的資料類型。BigQuery 會隨機選擇資料來源中的檔案，並掃描最多前 500 個資料列來當做代表性樣本。BigQuery 接著會檢查每個欄位，並嘗試根據樣本中的值為各欄位指派資料類型。如果資料欄中的所有資料列都是空白，自動偵測功能會將該資料欄的資料類型設為 `STRING`。
 
 如果未針對 CSV、JSON 或 Google 試算表資料啟用結構定義自動偵測功能，建立資料表時就必須手動提供結構定義。
 
-Avro、Parquet、ORC、Firestore 匯出檔或 Datastore 匯出檔案都屬於自述式檔案，這些檔案格式是自述式，因此 BigQuery 會自動根據來源資料推論出資料表結構定義。如果是 Parquet、Avro 和 Orc 檔案，您可以選擇提供明確的結構定義，覆寫推斷的結構定義。
+Avro、Parquet、ORC、Firestore 匯出檔或 Datastore 匯出檔都屬於自述式檔案，這些檔案格式是自述式，因此 BigQuery 會自動根據來源資料推論出資料表結構定義。如果是 Parquet、Avro 和 Orc 檔案，您可以選擇提供明確的結構定義，覆寫推斷的結構定義。
 
-您可以透過下列方式查看資料表的結構定義偵測結果：
+如要查看資料表的結構定義偵測結果，請採取下列任一做法：
 
 * 使用 Google Cloud 控制台。
 * 使用 bq 指令列工具的 [`bq show`](https://docs.cloud.google.com/bigquery/bq-command-line-tool?hl=zh-tw#tables) 指令。
@@ -48,7 +48,7 @@ Avro、Parquet、ORC、Firestore 匯出檔或 Datastore 匯出檔案都屬於自
 * 在 Google Cloud 控制台的「Schema」(結構定義) 區段中，針對「Auto detect」(自動偵測) 勾選「Schema and input parameters」(結構定義和輸入參數) 選項。
 * 在 bq 指令列工具中，使用 `bq load` 指令搭配 `--autodetect` 參數。
 
-啟用結構定義自動偵測功能後，BigQuery 會盡可能嘗試自動推導 CSV 和 JSON 檔案的結構定義。自動偵測邏輯會讀取最多前 500 個資料列，推斷結構定義欄位類型。如果存在 `--skip_leading_rows` 標記，系統會略過前導行。欄位類型會根據欄位最多的資料列而定。
+啟用結構定義自動偵測功能後，BigQuery 會盡可能嘗試自動推導 CSV 和 JSON 檔案的結構定義。自動偵測邏輯會讀取前 500 列資料，推斷結構定義欄位類型。如果存在 `--skip_leading_rows` 標記，系統會略過前導行。欄位類型會根據欄位最多的資料列而定。
 因此，只要至少有一列資料包含所有欄位的值，自動偵測功能就會正常運作。
 
 結構定義自動偵測功能不適用於 Avro 檔案、Parquet 檔案、ORC 檔案、Firestore 匯出檔案或 Datastore 匯出檔案。您將這些檔案載入至 BigQuery 時，系統會透過自述式來源資料自動擷取資料表結構定義。
@@ -62,13 +62,13 @@ Avro、Parquet、ORC、Firestore 匯出檔或 Datastore 匯出檔案都屬於自
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
 
-   如果沒有看到左側窗格，請按一下「展開左側窗格」圖示 last\_page 開啟窗格。
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Explorer」窗格中展開專案，按一下「Datasets」(資料集)，然後按一下資料集。
 4. 在詳細資料窗格中，按一下 add\_box「建立資料表」。
 5. 在「Create table」(建立資料表) 頁面的「Source」(來源) 區段中：
 
    * 在「Create table from」(使用下列資料建立資料表) 部分，選取來源類型。
-   * 在「Source」(來源) 欄位中，瀏覽檔案/Cloud Storage 值區，或輸入 [Cloud Storage URI](#gcs-uri)。請注意， Google Cloud 控制台中無法加入多個 URI，但支援使用[萬用字元](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#load-wildcards)。Cloud Storage 值區的位置必須與待建立資料表所在的資料集位置相同。
+   * 在「Source」(來源) 欄位中，瀏覽檔案/Cloud Storage 值區，或輸入 [Cloud Storage URI](#gcs-uri)。請注意， Google Cloud 控制台中無法加入多個 URI，但支援使用[萬用字元](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#load-wildcards)。Cloud Storage 值區的位置必須與要建立之資料表所屬的資料集位置相同。
    * 在「File format」(檔案格式) 部分，選取 [CSV]  或 [JSON]。
 6. 在「Create table」(建立資料表) 頁面的「Destination」(目的地) 區段中：
 
@@ -95,7 +95,7 @@ PATH_TO_SOURCE
 
 更改下列內容：
 
-* `LOCATION`：位置名稱。`--location` 是選用旗標。舉例來說，如果您在東京地區使用 BigQuery，請將該旗標的值設定為 `asia-northeast1`。您可以使用 [.bigqueryrc 檔案](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool?hl=zh-tw#setting_default_values_for_command-line_flags)設定位置的預設值。
+* `LOCATION`：位置名稱。`--location` 是選用旗標。舉例來說，如果您在東京區域使用 BigQuery，請將該旗標的值設定為 `asia-northeast1`。您可以使用 [.bigqueryrc 檔案](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool?hl=zh-tw#setting_default_values_for_command-line_flags)設定位置的預設值。
 * `FORMAT`：`NEWLINE_DELIMITED_JSON` 或 `CSV`。
 * `DATASET`：特定資料集，該資料集包含您要在當中載入資料的資料表。
 * `TABLE`：您要載入資料的資料表名稱。
@@ -461,11 +461,11 @@ end
 
 結構定義自動偵測功能適用於 CSV、JSON 和 Google 試算表外部資料來源。啟用結構定義自動偵測功能後，BigQuery 會盡可能嘗試從來源資料自動推斷結構定義。如果未為這些來源啟用結構定義自動偵測功能，就必須提供明確的結構定義。
 
-查詢外部 Avro、Parquet、ORC、Firestore 匯出或 Datastore 匯出檔案時，不需要啟用結構定義自動偵測功能。這些檔案格式為自述式，因此 BigQuery 會自動根據來源資料推論出資料表結構定義。如果是 Parquet、Avro 和 ORC 檔案，您可以選擇提供明確的結構定義，覆寫推斷的結構定義。
+查詢外部 Avro、Parquet、ORC、Firestore 匯出或 Datastore 匯出檔案時，不需要啟用結構定義自動偵測功能。這些檔案格式為自述式，因此 BigQuery 會自動根據來源資料推論出資料表結構定義。對於 Parquet、Avro 和 ORC 檔案，您可以選擇提供明確的結構定義，覆寫推斷的結構定義。
 
-使用 Google Cloud 控制台時，您可以勾選「Auto detect」(自動偵測) 的「Schema and input parameters」(結構定義和輸入參數) 選項，啟用結構定義自動偵測功能。
+使用 Google Cloud 控制台時，只要勾選「Auto detect」(自動偵測) 的「Schema and input parameters」(結構定義和輸入參數) 選項，即可啟用結構定義自動偵測功能。
 
-使用 bq 指令列工具時，您可以在為 CSV、JSON 或 Google 試算表資料建立[資料表定義檔](https://docs.cloud.google.com/bigquery/external-table-definition?hl=zh-tw)時，啟用結構定義自動偵測功能。使用 bq 工具建立資料表定義檔時，請將 `--autodetect` 標記傳送至 `mkdef` 指令，以啟用結構定義自動偵測功能，或傳送 `--noautodetect` 標記來停用自動偵測。
+使用 bq 指令列工具時，您可以在為 CSV、JSON 或 Google 試算表資料建立[資料表定義檔](https://docs.cloud.google.com/bigquery/external-table-definition?hl=zh-tw)時，啟用結構定義自動偵測功能。使用 bq 工具建立資料表定義檔時，請將 `--autodetect` 標記傳送至 `mkdef` 指令，啟用結構定義自動偵測功能，或傳送 `--noautodetect` 標記來停用自動偵測。
 
 當您使用 `--autodetect` 旗標時，資料表定義檔中的 `autodetect` 設定會設為 `true`。當您使用 `--noautodetect` 旗標時，資料表定義檔中的 `autodetect` 設定會設為 `false`。如果您在建立資料表定義時，沒有提供外部資料來源的結構定義，而且未使用 `--noautodetect` 或 `--autodetect` 旗標，則 `autodetect` 設定會預設為 `true`。
 
@@ -485,7 +485,7 @@ BigQuery 會根據來源資料的格式偵測日期和時間值。
 
 `DATE` 欄中的值必須採用 `YYYY-MM-DD` 格式。
 
-`TIME` 欄中的值必須採用以下格式：`HH:MM:SS[.SSSSSS]` (秒數的小數部分為選填)。
+`TIME` 欄中的值必須採用下列格式：`HH:MM:SS[.SSSSSS]` (小數秒部分為選填)。
 
 對於 `TIMESTAMP` 欄，BigQuery 可偵測多種時間戳記格式，包括但不限於以下格式：
 
@@ -503,9 +503,9 @@ BigQuery 會根據來源資料的格式偵測日期和時間值。
 * 2018/08/19 12:11
 * 2018-08-19 07:11:35.220 -05:00
 
-如果未啟用自動偵測功能，且值採用上述範例未列出的格式，則 BigQuery 只能將資料欄載入為 `STRING` 資料類型。您可以啟用自動偵測功能，讓 BigQuery 將這些資料欄辨識為時間戳記。舉例來說，如果啟用自動偵測功能，BigQuery 只會將 `2025-06-16T16:55:22Z` 載入為時間戳記。
+如果未啟用自動偵測功能，且值採用上述範例中未列出的格式，則 BigQuery 只能將資料欄載入為 `STRING` 資料類型。您可以啟用自動偵測功能，讓 BigQuery 將這些資料欄辨識為時間戳記。舉例來說，如果啟用自動偵測功能，BigQuery 只會將 `2025-06-16T16:55:22Z` 載入為時間戳記。
 
-或者，您也可以先預先處理來源資料，再載入資料。舉例來說，如果您要從試算表匯出 CSV 資料，請將日期格式設為與這裡顯示的其中一個範例相符。您也可以在將資料載入 BigQuery 後進行轉換。
+或者，您也可以先預先處理來源資料，再載入資料。舉例來說，如果您要從試算表匯出 CSV 資料，請將日期格式設為與這裡顯示的其中一個範例相符。您也可以在將資料載入 BigQuery 後再進行轉換。
 
 ### 自動偵測 CSV 資料的結構定義
 
@@ -521,7 +521,7 @@ BigQuery 可偵測以下分隔符號：
 
 BigQuery 會將檔案的第一個資料列與檔案中的其他資料列做比較，藉此推測出標題。如果第一行只包含字串，但其他行包含其他資料類型，BigQuery 會假設第一個資料列是標題資料列。BigQuery 會根據標題列中的欄位名稱指派資料欄名稱。系統可能會修改名稱，以符合 BigQuery 資料欄的[命名規則](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#column_names)。例如，空格會替換為底線。
 
-否則，BigQuery 會將第一列視為資料列，並指派一般資料欄名稱，例如 `string_field_1`。請注意，資料表建立完成後，您無法在結構定義中更新資料欄名稱，但可以[手動變更名稱](https://docs.cloud.google.com/bigquery/docs/manually-changing-schemas?hl=zh-tw#changing_a_columns_name)。您也可以提供明確的結構定義，而非使用自動偵測功能。
+否則 BigQuery 會將第一列視為資料列，並指派一般資料欄名稱，例如 `string_field_1`。請注意，資料表建立完成後，您無法在結構定義中更新資料欄名稱，但可以[手動變更名稱](https://docs.cloud.google.com/bigquery/docs/manually-changing-schemas?hl=zh-tw#changing_a_columns_name)。您也可以提供明確的結構定義，而非使用自動偵測功能。
 
 您可能會有包含標題列的 CSV 檔案，其中所有資料欄位都是字串。在這種情況下，BigQuery 不會自動偵測到第一列是標題。使用 `--skip_leading_rows` 選項可略過標題列。否則系統會將標頭匯入為資料。此外，也請考慮在此情況下提供明確的結構定義，以便指派資料欄名稱。
 
@@ -549,9 +549,9 @@ BigQuery 會推斷 JSON 檔案中的巢狀和重複欄位。如果欄位值是 J
 
 ### 自動偵測 Google 試算表的結構定義
 
-如果是試算表，BigQuery 會自動偵測第一列是否為標題列，與 CSV 檔案的自動偵測方式類似。如果第一行是標題，BigQuery 會根據標題列中的欄位名稱指派資料欄名稱，並略過該列。系統可能會修改名稱，以符合 BigQuery 中資料欄的[命名規則](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#column_names)。例如，空格會替換為底線。
+如果是試算表，BigQuery 會自動偵測第一列是否為標題列，與 CSV 檔案的自動偵測功能類似。如果第一行是標題，BigQuery 會根據標題列中的欄位名稱指派資料欄名稱，並略過該列。系統可能會修改名稱，以符合 BigQuery 中資料欄的[命名規則](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#column_names)。例如，空格會替換為底線。
 
-## 表格安全性
+## 資料表安全性
 
 如要控管 BigQuery 資料表的存取權，請參閱「[使用 IAM 控管資源存取權](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam?hl=zh-tw)」。
 
@@ -562,11 +562,11 @@ BigQuery 會推斷 JSON 檔案中的巢狀和重複欄位。如果欄位值是 J
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-11 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-11 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

@@ -61,7 +61,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    **選取或建立專案所需的角色**
 
    * **選取專案**：選取專案時，不需要具備特定 IAM 角色，只要您已獲授角色，即可選取任何專案。
-   * **建立專案**：如要建立專案，您需要具備專案建立者角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   * **建立專案**：如要建立專案，您需要「專案建立者」角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
    **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，而不要選取現有專案。完成這些步驟後，您就可以刪除專案，並移除與該專案相關聯的所有資源。
 
    [前往專案選取器](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
@@ -180,11 +180,11 @@ Google uses AI technology to translate content into your preferred language. AI 
    OPTIONS (ENDPOINT ='gemini-2.0-flash-001');
    ```
 
-   查詢作業會在幾秒內完成，完成後，`gemini_baseline` 模型會顯示在「Explorer」窗格的 `bqml_tutorial` 資料集中。由於查詢是使用 `CREATE MODEL` 陳述式建立模型，因此不會有查詢結果。
+   查詢作業會在幾秒內完成，完成後，`gemini_baseline` 模型會顯示在「Explorer」窗格的 `bqml_tutorial` 資料集中。由於查詢使用 `CREATE MODEL` 陳述式建立模型，因此不會有查詢結果。
 
 ## 查看基準模型成效
 
-使用遠端模型執行 [`AI.GENERATE_TEXT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text?hl=zh-tw)，查看模型在評估資料上的成效，無需進行任何調整。
+使用遠端模型執行 [`AI.GENERATE_TEXT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text?hl=zh-tw)，查看模型在評估資料上的表現，無需進行任何調整。
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -204,11 +204,11 @@ Google uses AI technology to translate content into your preferred language. AI 
        ));
    ```
 
-   如果您檢查輸出資料並比較 `result` 和 `ground_truth` 值，會發現基準模型產生的文字雖然準確反映了基準真相內容中提供的資訊，但風格卻大相逕庭。
+   如果您檢查輸出資料並比較 `result` 和 `ground_truth` 值，會發現基準模型產生的文字雖然準確反映了真實內容中提供的資訊，但風格相當不同。
 
 ## 評估基準模型
 
-如要更詳細地評估模型效能，請使用 [`ML.EVALUATE` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate?hl=zh-tw)。這項函式會計算模型指標，用來評估生成文字的準確率和品質，藉此比較模型回覆與理想回覆的差異。
+如要更詳細地評估模型效能，請使用 [`ML.EVALUATE` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate?hl=zh-tw)。這項函式會計算模型指標，用來評估生成文字的準確度和品質，藉此比較模型回覆與理想回覆的差異。
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -292,7 +292,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    如果檢查輸出資料，會發現微調模型產生的文字風格與基準真相內容更為相似。
 
-## 評估微調模型
+## 評估微調後的模型
 
 使用 `ML.EVALUATE` 函式，比較微調模型的回覆與理想回覆。
 
@@ -351,11 +351,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

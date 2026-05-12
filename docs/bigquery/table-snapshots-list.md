@@ -20,11 +20,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 權限與角色
 
-本節說明在資料集中列出資料表快照所需的[身分與存取權管理 (IAM) 權限](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bq-permissions)，以及授予這些權限的[預先定義 IAM 角色](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery)。列出資料表快照所需的權限和角色，與[列出其他類型資料表](https://docs.cloud.google.com/bigquery/docs/tables?hl=zh-tw#list_tables_in_a_dataset)所需的權限和角色相同。
+本節說明列出資料集中的資料表快照時，需要哪些[身分與存取權管理 (IAM) 權限](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bq-permissions)，以及授予這些權限的[預先定義 IAM 角色](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery)。列出資料表快照所需的權限和角色，與[列出其他類型資料表](https://docs.cloud.google.com/bigquery/docs/tables?hl=zh-tw#list_tables_in_a_dataset)所需的權限和角色相同。
 
 ### 權限
 
-如要列出資料集中的資料表快照，您需要下列權限：
+如要列出資料集中的資料表快照，您必須具備下列權限：
 
 | **權限** | **資源** |
 | --- | --- |
@@ -44,15 +44,15 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 您可以使用下列任一選項列出資料表快照：
 
-### 主控台
+### 控制台
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在左側窗格中，按一下「Explorer」explore：
+2. 點選左側窗格中的 explore「Explorer」。
 
-   如果沒有看到左側窗格，請按一下「展開左側窗格」圖示 last\_page 開啟窗格。
-3. 在「Explorer」窗格中展開專案，按一下「Datasets」(資料集)，然後選取包含要列出資料表快照的資料集。
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
+3. 在「Explorer」窗格中展開專案，按一下「Datasets」，然後選取包含要列出資料表快照的資料集。
 4. 依序點選「總覽」**>「表格」**。如要從清單中找出快照，請查看「類型」欄中的 **`SNAPSHOT`** 值。
 
 ### SQL
@@ -75,7 +75,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    請替換下列項目：
 
    * `PROJECT_ID`：專案 ID，用於存放您要列出的快照。
-   * `DATASET_NAME`：包含您要列出快照的資料集名稱。
+   * `DATASET_NAME`：資料集名稱，其中包含要列出的快照。
 3. 按一下「執行」play\_circle。
 
 如要進一步瞭解如何執行查詢，請參閱「[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)」。
@@ -104,7 +104,7 @@ PROJECT_ID:DATASET_NAME
 請替換下列項目：
 
 * `PROJECT_ID`：專案 ID，用於存放您要列出的快照。
-* `DATASET_NAME`：包含您要列出快照的資料集名稱。
+* `DATASET_NAME`：資料集名稱，其中包含要列出的快照。
 
 輸出結果看起來與下列內容相似：
 
@@ -125,7 +125,7 @@ PROJECT_ID:DATASET_NAME
 | `projectId` | 包含您要列出快照的專案 ID。 |
 | `datasetId` | 包含您要列出快照的資料集名稱。 |
 
-## 列出指定基本資料表的資料表快照
+## 列出指定基礎資料表的資料表快照
 
 您可以查詢 `INFORMATION_SCHEMA.TABLE_SNAPSHOTS` 檢視區塊，列出指定基礎資料表的資料表快照：
 
@@ -141,7 +141,7 @@ WHERE
 請替換下列項目：
 
 * `PROJECT_ID`：專案 ID，用於存放您要列出的快照。
-* `DATASET_NAME`：包含您要列出快照的資料集名稱。
+* `DATASET_NAME`：資料集名稱，其中包含要列出的快照。
 
 ## 後續步驟
 
@@ -156,11 +156,11 @@ WHERE
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

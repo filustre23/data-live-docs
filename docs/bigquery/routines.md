@@ -28,7 +28,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 如要在 SQL 查詢中參照常式，您必須具備 `bigquery.routines.get` 權限。如要授予常式存取權，請在資料集或個別常式中，授予具有 `bigquery.routines.get` 權限的 IAM 角色。在資料集層級授予存取權，可讓主體存取資料集中的所有常式。詳情請參閱「[使用 IAM 控管資源存取權](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam?hl=zh-tw)」。
 
-根據預設，您也需要有權存取常式參照的任何資源，例如資料表或檢視區塊。如果是 UDF 和資料表函式，您可以*授權*函式代表呼叫端存取這些資源。詳情請參閱「[授權函式](https://docs.cloud.google.com/bigquery/docs/authorized-functions?hl=zh-tw)」。
+根據預設，您也必須具備存取常式參照的任何資源 (例如資料表或檢視區塊) 的權限。如果是 UDF 和資料表函式，您可以*授權*函式代表呼叫端存取這些資源。詳情請參閱「[授權函式](https://docs.cloud.google.com/bigquery/docs/authorized-functions?hl=zh-tw)」。
 
 ## 建立處理常式
 
@@ -58,7 +58,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
 
-   如果沒有看到左側窗格，請按一下「展開左側窗格」圖示 last\_page 開啟窗格。
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Explorer」窗格中展開專案，按一下「Datasets」(資料集)，然後選取資料集。
 4. 按一下「日常安排」分頁標籤。
 
@@ -83,9 +83,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 更改下列內容：
 
-* COLUMN\_LIST：以半形逗號分隔的清單，列出[`INFORMATION_SCHEMA.ROUTINES` 檢視區塊](https://docs.cloud.google.com/bigquery/docs/information-schema-routines?hl=zh-tw)中的資料欄。
+* COLUMN\_LIST：以半形逗號分隔的[`INFORMATION_SCHEMA.ROUTINES` 檢視區塊](https://docs.cloud.google.com/bigquery/docs/information-schema-routines?hl=zh-tw)資料欄清單。
 * DATASET：專案中的資料集名稱。
-* REGION：[區域限定詞](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw#region_qualifier)。
+* REGION：[區域限定符](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw#region_qualifier)。
 
 範例：
 
@@ -134,7 +134,7 @@ bq ls --routines mydataset
 
 ### API
 
-呼叫 [`routines.list` 方法](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines/list?hl=zh-tw)，並傳遞資料集 ID。
+使用資料集 ID 呼叫 [`routines.list` 方法](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines/list?hl=zh-tw)。
 
 ## 查看日常安排的內容
 
@@ -152,7 +152,7 @@ bq ls --routines mydataset
 
 ### SQL
 
-選取「[`INFORMATION_SCHEMA.ROUTINES`」檢視畫面」的 `routine_definition` 欄：](https://docs.cloud.google.com/bigquery/docs/information-schema-routines?hl=zh-tw)
+選取「[`INFORMATION_SCHEMA.ROUTINES`」檢視畫面的 `routine_definition` 欄](https://docs.cloud.google.com/bigquery/docs/information-schema-routines?hl=zh-tw)：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -223,11 +223,11 @@ bq show --routine mydataset.AddFourAndDivide
 
 ### API
 
-呼叫 [`routines.get` 方法](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines/get?hl=zh-tw)，並傳遞資料集 ID 和常式名稱。常式主體會以 [`Routine` 物件](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines?hl=zh-tw#Routine)的形式傳回。
+呼叫 [`routines.get` 方法](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines/get?hl=zh-tw)，並提供資料集 ID 和常式名稱。常式主體會以 [`Routine` 物件](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines?hl=zh-tw#Routine)的形式傳回。
 
 ## 刪除處理常式
 
-如要刪除日常安排，必須具備 `bigquery.routines.delete` 權限。
+如要刪除常式，必須具備 `bigquery.routines.delete` 權限。
 
 ### 控制台
 
@@ -276,7 +276,7 @@ bq rm --routine mydataset.AddFourAndDivide
 
 ### API
 
-呼叫 [`routines.delete` 方法](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines/delete?hl=zh-tw)，並傳遞資料集 ID 和常式名稱。
+呼叫 [`routines.delete` 方法](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines/delete?hl=zh-tw)，並提供資料集 ID 和常式名稱。
 
 
 
@@ -285,11 +285,11 @@ bq rm --routine mydataset.AddFourAndDivide
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

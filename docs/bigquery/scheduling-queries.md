@@ -30,7 +30,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 限制
 
-* 如果排程查詢在整點執行 (例如 09:00)，可能會多次觸發，導致資料重複等非預期結果。`INSERT`為避免發生這類非預期的結果，請使用非整點的排程 (例如 08:58 或 09:03)。
+* 如果排定查詢在整點執行 (例如 09:00)，可能會多次觸發，導致非預期的結果，例如 `INSERT` 作業造成資料重複。為避免發生這類非預期結果，請使用非整點的排程 (例如 08:58 或 09:03)。
 
 ### 所需權限
 
@@ -155,7 +155,7 @@ LIMIT
 | **參數** | **Purpose** |
 | --- | --- |
 | `run_date` | 這個參數會由格式為 `YYYYMMDD` 的日期取代。 |
-| `run_time` | 這個參數支援下列屬性： `offset` 時區設定，依小時 (h)、分鐘 (m)、秒鐘 (s) 的順序表示。 不支援天 (d)。 可使用小數，例如：`1.5h`。  `time_format` 格式設定字串。最常見的格式參數是年 (%Y)、月 (%m)、日 (%d)。 就分區資料表而言，YYYYMMDD 是必要的後置字串，相當於「%Y%m%d」。  進一步瞭解 [datetime 元素的格式設定](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/functions-and-operators?hl=zh-tw#supported-format-elements-for-datetime)。 |
+| `run_time` | 這個參數支援下列屬性： `offset`  時間偏移，依小時 (h)、分鐘 (m)、秒鐘 (s) 的順序表示。  不支援天 (d)。 可使用小數，例如：`1.5h`。  `time_format` 格式設定字串。最常見的格式參數是年 (%Y)、月 (%m)、日 (%d)。 就分區資料表而言，YYYYMMDD 是必要的後置字串，相當於「%Y%m%d」。  進一步瞭解 [datetime 元素的格式設定](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/functions-and-operators?hl=zh-tw#supported-format-elements-for-datetime)。 |
 
 **使用須知：**
 
@@ -455,7 +455,7 @@ def list_transfer_configs(project_id: str, location: str) -> None:
 
 1. 在導覽選單中，按一下「排程查詢」或「排程」。
 2. 在排定查詢清單中，按一下要變更的查詢名稱。
-3. 在開啟的「已排定查詢詳細資料」頁面中，按一下「編輯」。
+3. 在開啟的「已排定的查詢詳細資料」頁面中，按一下「編輯」。
 4. 選用：在查詢編輯窗格中變更查詢文字。
 5. 按一下「排程查詢」，然後選取「更新排程查詢」。
 6. 選用：變更查詢的其他排程選項。
@@ -819,7 +819,7 @@ resource_name
 更改下列內容：
 
 * `start_time`和`end_time`。
-  以 Z 結尾或包含有效時區偏移的時間戳記。範例：
+  以 Z 結尾或包含有效時區位移的時間戳記。範例：
   + 2017-08-19T12:11:35.00Z
   + 2017-05-25T00:00:00+00:00
 * `resource_name`。排程查詢 (或移轉作業) 的資源名稱。資源名稱也稱為移轉設定。
@@ -970,4 +970,4 @@ for run in response.runs:
 
 ### Java
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定說明操作。詳情請參閱 [BigQuery Java API 參考說明](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定說明操作。詳情請參閱

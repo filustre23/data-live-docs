@@ -22,7 +22,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 BigQuery 會將所有查詢結果儲存至永久或臨時資料表：
 
-* BigQuery 會使用臨時資料表[快取查詢結果](https://docs.cloud.google.com/bigquery/docs/cached-results?hl=zh-tw)，這些結果不會寫入永久資料表。這些資料表會建立在特殊資料集中，並隨機命名。您也可以在[多重陳述式查詢](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries?hl=zh-tw#temporary_tables)和[工作階段](https://docs.cloud.google.com/bigquery/docs/sessions-write-queries?hl=zh-tw#use_temporary_tables_in_sessions)中建立臨時表，供自己使用。[臨時快取查詢結果資料表](https://docs.cloud.google.com/bigquery/docs/cached-results?hl=zh-tw)不會計費。
+* BigQuery 會使用臨時資料表[快取查詢結果](https://docs.cloud.google.com/bigquery/docs/cached-results?hl=zh-tw)，這些結果不會寫入永久資料表。這些資料表會建立在特殊資料集中，並隨機命名。您也可以在[多重陳述式查詢](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries?hl=zh-tw#temporary_tables)和[工作階段](https://docs.cloud.google.com/bigquery/docs/sessions-write-queries?hl=zh-tw#use_temporary_tables_in_sessions)中建立臨時表，供自己使用。[暫時性快取查詢結果資料表](https://docs.cloud.google.com/bigquery/docs/cached-results?hl=zh-tw)不會計費。
   如果臨時資料表不是快取查詢結果，您就需要付費。
 * 查詢完成後，暫時性資料表最多會存在 24 小時。如要查看資料表結構和資料，請按照下列步驟操作：
 
@@ -41,7 +41,7 @@ BigQuery 會將所有查詢結果儲存至永久或臨時資料表：
 * 永久資料表可以是您有權存取的任何資料集中之新資料表或現有資料表。如果您將查詢結果寫入新資料表，就必須支付資料的[儲存](https://cloud.google.com/bigquery/pricing?hl=zh-tw#storage)費用。當您將查詢結果寫入永久資料表時，所查詢的資料表必須與包含目標資料表的資料集位於相同位置。
 * 啟用[網域限制機構政策](https://docs.cloud.google.com/resource-manager/docs/organization-policy/restricting-domains?hl=zh-tw)後，您就無法將查詢結果儲存至暫存資料表。暫時停用網域限制機構政策，執行查詢，然後再次啟用政策，即可解決這個問題。或者，您也可以將查詢結果儲存到目的地資料表。
 
-**注意：** 如果您從某個專案查詢儲存在其他專案中的資料，查詢專案會支付查詢工作的費用，而儲存資料的專案則會支付 BigQuery 中儲存的資料量費用。
+**注意：** 如果您從某個專案查詢儲存在其他專案中的資料，系統會向查詢專案收取查詢工作費用，並向儲存資料的專案收取 BigQuery 資料儲存量費用。
 
 ## 所需權限
 
@@ -496,7 +496,7 @@ bq --location=location query \
 
 範例：
 
-**附註：**些範例查詢的是公開資料集。由於該資料集儲存在 `US` 多地區位置，因此您的目標資料表也必須位於美國境內。您無法將公開資料查詢結果寫入不同地區的資料表。
+**附註：**些範例查詢的是公開資料集。由於該資料集儲存在 `US` 多區域位置，因此您的目標資料表也必須位於美國境內。您無法將公開資料查詢結果寫入不同地區的資料表。
 
 輸入下列指令，將大型查詢結果寫入 `mydataset` 中名為 `mytable` 的目標資料表。該資料集位於預設專案中。由於您未在指令中指定任何寫入配置旗標，因此資料表必須為新資料表或空白資料表。否則，系統會傳回 `Already exists` 錯誤。查詢會從[美國人名資料公開資料集](https://console.cloud.google.com/bigquery?p=bigquery-public-data&%3Bd=usa_names&%3Bpage=dataset&hl=zh-tw)擷取資料。此查詢僅做示範之用。傳回的結果集不會超出回應大小上限。
 
@@ -791,11 +791,11 @@ print("Query results loaded to the table {}".format(table_id))
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

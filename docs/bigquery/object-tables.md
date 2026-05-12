@@ -140,7 +140,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
 
-   如果沒有看到左側窗格，請按一下「展開左側窗格」圖示 last\_page 開啟窗格。
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Explorer」窗格中，按一下專案名稱。
 4. 依序點按 more\_vert「View actions」(查看動作) >「Create dataset」(建立資料集)。
 5. 在「建立資料集」頁面中，執行下列操作：
@@ -154,9 +154,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 建立連線
 
-如果您已設定預設連線，或具備 BigQuery 管理員角色，可以略過這個步驟。
+如果已設定預設連線，或您具備 BigQuery 管理員角色，可以略過這個步驟。
 
-為物件資料表建立要使用的[Cloud 資源連線](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection?hl=zh-tw)，並取得連線的服務帳戶。
+為物件資料表建立要使用的[Cloud 資源連結](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection?hl=zh-tw)，並取得連線的服務帳戶。
 
 1. 前往「BigQuery」頁面
 
@@ -206,7 +206,7 @@ gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount
 
 請替換下列項目：
 
-* `PROJECT_NUMBER`：要授予角色的專案專案編號。
+* `PROJECT_NUMBER`：要授予角色的專案編號。
 * `MEMBER`：您先前複製的服務帳戶 ID。
 
 ## 建立物件資料表
@@ -238,7 +238,7 @@ gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount
    * `DATASET_ID`：要包含物件表格的資料集 ID。
    * `TABLE_NAME`：物件資料表的名稱。
    * `REGION`：包含連線的[區域或多區域](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#supported_locations)。
-   * `CONNECTION_ID`：要用於這個物件表格的[雲端資源連線](https://docs.cloud.google.com/bigquery/docs/connections-api-intro?hl=zh-tw) ID。連線會決定用來從 Cloud Storage 讀取資料的服務帳戶。
+   * `CONNECTION_ID`：要用於這個物件資料表的[Cloud 資源連結](https://docs.cloud.google.com/bigquery/docs/connections-api-intro?hl=zh-tw) ID。連線會決定用來從 Cloud Storage 讀取資料的服務帳戶。
 
      在 Google Cloud 控制台中[查看連線詳細資料](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw#view-connections)時，連線 ID 是「連線 ID」中顯示的完整連線 ID 最後一個區段的值，例如 `projects/myproject/locations/connection_location/connections/myconnection`。
 
@@ -322,7 +322,7 @@ PROJECT_ID:DATASET_ID.TABLE_NAME
 * `DATASET_ID`：要包含物件表格的資料集 ID。
 * `TABLE_NAME`：物件資料表的名稱。
 * `REGION`：包含連線的[區域或多區域](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#supported_locations)。
-* `CONNECTION_ID`：要用於這個外部資料表的[Cloud 資源連線](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw) ID。連線會決定用來從 Cloud Storage 讀取資料的服務帳戶。
+* `CONNECTION_ID`：要用於這個外部資料表的[Cloud 資源連結](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw) ID。連線會決定用來從 Cloud Storage 讀取資料的服務帳戶。
 
   在 Google Cloud 控制台中[查看連線詳細資料](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw#view-connections)時，連線 ID 是「連線 ID」中顯示的完整連線 ID 最後一個部分的值，例如 `projects/myproject/locations/connection_location/connections/myconnection`。
 * `BUCKET_PATH`：Cloud Storage bucket 的路徑，其中包含物件表格代表的物件，格式為 `gs://bucket_name/[folder_name/]*`。
@@ -488,7 +488,7 @@ resource "google_bigquery_table" "default" {
 
    將程式碼範例複製到新建立的 `main.tf`。
 
-   視需要從 GitHub 複製程式碼。如果 Terraform 程式碼片段是端對端解決方案的一部分，建議您使用這個方法。
+   視需要從 GitHub 複製程式碼。如果 Terraform 代码片段是端對端解決方案的一部分，建議您使用這個方法。
 3. 查看並修改範例參數，套用至您的環境。
 4. 儲存變更。
 5. 初始化 Terraform。每個目錄只需執行一次這項操作。
@@ -505,7 +505,7 @@ resource "google_bigquery_table" "default" {
 
 ## 套用變更
 
-1. 檢查設定，確認 Terraform 即將建立或更新的資源符合您的預期：
+1. 查看設定，確認 Terraform 即將建立或更新的資源符合您的預期：
 
    ```
    terraform plan
@@ -525,7 +525,7 @@ resource "google_bigquery_table" "default" {
 
 ## 查詢物件資料表
 
-您可以像查詢任何其他 BigQuery 資料表一樣查詢物件資料表，例如：
+您可以像查詢其他 BigQuery 資料表一樣查詢物件資料表，例如：
 
 ```
 SELECT *
@@ -546,11 +546,11 @@ FROM mydataset.myobjecttable;
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

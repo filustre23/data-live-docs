@@ -667,4 +667,4 @@ ML.GENERATE_EMBEDDING(
 
 * `ml_generate_embedding_result`: this is an `ARRAY<FLOAT>` value that
   contains the principal components for the input data. The number of array
-  dimensions is equal to the PCA mo
+  dimensions is equal to the P

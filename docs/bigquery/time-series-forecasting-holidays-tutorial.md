@@ -30,7 +30,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 ## 所需權限
 
 * 如要建立資料集，您需要 `bigquery.datasets.create` IAM 權限。
-* 如要建立模型，您需要下列權限：
+* 如要建立模型，您必須具備下列權限：
 
   + `bigquery.jobs.create`
   + `bigquery.models.create`
@@ -168,7 +168,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 準備時間序列資料
 
-將「Google I/O」頁面的維基百科網頁瀏覽資料匯總到單一表格中，並依日期分組：
+將「Google I/O」網頁的維基百科網頁瀏覽資料匯總到單一表格中，並依日期分組：
 
 1. 前往「BigQuery」頁面
 
@@ -193,7 +193,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 建立使用內建節慶的預測模型
 
-根據 2022 年前的網頁瀏覽資料，並考量內建的節慶假日，建立模型來預測 Wikipedia「Google I/O」網頁的每日網頁瀏覽量：
+根據 2022 年前的網頁瀏覽資料，並考量內建的節慶假日，建立模型來預測 Wikipedia「Google I/O」網頁的每日瀏覽量：
 
 1. 前往「BigQuery」頁面
 
@@ -250,21 +250,21 @@ Google uses AI technology to translate content into your preferred language. AI 
    ORDER BY
      original.date;
    ```
-3. 在「查詢結果」窗格中，依序點選「開啟方式」>「數據分析」。系統會在新的分頁中開啟 Data Studio。
-4. 在數據分析分頁中，按一下「新增圖表」，然後點選時序圖：
+3. 在「查詢結果」窗格中，依序點選「開啟方式」>「數據分析」。系統會在新的分頁中開啟 數據分析。
+4. 在數據分析分頁中，按一下 **新增圖表**，然後點選時間序列圖表：
 
    將圖表放到報表上。
-5. 在「圖表」窗格的「設定」分頁中，依序點按「新增指標」和「adjusted\_views\_without\_custom\_holiday」：
+5. ****在「圖表」窗格的「設定」分頁中，按一下「新增指標」並選取「adjusted\_views\_without\_custom\_holiday」：****
 
    圖表看起來類似如下：
 
-   您可以看到預測模型相當準確地掌握了整體趨勢。不過，這項工具無法擷取與先前 Google I/O 活動相關的流量增加情形，也無法準確預測
+   您可以看到預測模型相當準確地掌握了整體趨勢。不過，這項工具無法擷取與先前 Google I/O 活動相關的流量增加情形，也無法為
 
    1. 接下來的章節將說明如何因應部分限制。
 
 ## 建立使用內建和自訂節慶假日的時間序列預測模型
 
-如[Google I/O 歷史記錄](https://en.wikipedia.org/wiki/Google_I/O#History)所示，2017 年至 2022 年的 Google I/O 大會舉辦日期不盡相同。如要將這項差異納入考量，請根據 2022 年前的網頁瀏覽資料建立模型，預測 2022 年的 Wikipedia「Google\_I/O」網頁瀏覽量，並使用自訂節慶代表每年的 Google I/O 活動。在這個模型中，您也會調整節慶效應時間範圍，涵蓋活動日期前後三天，以便更完整地擷取活動前後的潛在網頁流量。
+如[Google I/O 歷史記錄](https://en.wikipedia.org/wiki/Google_I/O#History)所示，2017 年至 2022 年的 Google I/O 大會舉辦日期不盡相同。如要將這項變異納入考量，請根據 2022 年前的網頁瀏覽資料建立模型，預測 Wikipedia「Google\_I/O」網頁在 2022 年的網頁瀏覽次數，並使用自訂節慶代表每年的 Google I/O 活動。在這個模型中，您也會調整節慶效應時間範圍，涵蓋活動日期前後三天，以便更完整地擷取活動前後的潛在網頁流量。
 
 1. 前往「BigQuery」頁面
 
@@ -343,9 +343,9 @@ Google uses AI technology to translate content into your preferred language. AI 
    ORDER BY
      original.date;
    ```
-3. 在「查詢結果」窗格中，依序點按「探索資料」和「透過數據分析探索」。系統會在新的分頁中開啟 Data Studio。
-4. 在數據分析分頁中，按一下「新增圖表」，點選時序圖，然後將圖表放在報表上。
-5. 在「圖表」窗格的「設定」分頁中，按一下「新增指標」並選取「adjusted\_views\_with\_custom\_holiday」。
+3. 在「查詢結果」窗格中，依序點按「探索資料」和「透過數據分析探索」。系統會在新的分頁中開啟 數據分析。
+4. 在數據分析分頁中，依序點選「新增圖表」和時間序列圖表，然後將圖表放在報表上。
+5. 在「圖表」窗格的「設定」分頁中，按一下「新增指標」，然後選取「adjusted\_views\_with\_custom\_holiday」。
 
    圖表看起來類似如下：
 
@@ -367,7 +367,7 @@ Google uses AI technology to translate content into your preferred language. AI 
        MODEL `bqml_tutorial.forecast_googleio_with_custom_holiday`);
    ```
 
-   結果會顯示 Google I/O 和節慶清單中的內建節慶：
+   結果會顯示 Google I/O 和內建節慶：
 
 ## 評估自訂節日的影響
 
@@ -469,11 +469,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

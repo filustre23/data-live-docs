@@ -109,7 +109,7 @@ BigQuery 會建立電子郵件地址為 `snapshot-bot@PROJECT.iam.gserviceaccoun
 
 本節說明如何授予 `snapshot-bot` 服務帳戶所需權限，以便在 `BACKUP` 資料集建立 `DATASET.TABLE` 資料表的快照。
 
-### 可建立基本資料表快照的權限
+### 建立基本資料表快照的權限
 
 如要授予 `snapshot-bot` 服務帳戶權限，讓該帳戶可以建立 `DATASET.TABLE` 資料表的快照，請按照下列步驟操作：
 
@@ -209,7 +209,7 @@ EXECUTE IMMEDIATE query;
 
 ## 排定每月查詢
 
-[排定](https://docs.cloud.google.com/bigquery/docs/scheduling-queries?hl=zh-tw)查詢在每個月的第一天凌晨 5 點執行，步驟如下：
+[排定](https://docs.cloud.google.com/bigquery/docs/scheduling-queries?hl=zh-tw)查詢在每個月的第一天凌晨 5 點執行，方法如下：
 
 ### bq
 
@@ -239,7 +239,7 @@ EXECUTE IMMEDIATE query;
 bq 指令列工具指令中的多重陳述式查詢與您在 Google Cloud 控制台中執行的查詢不同，差異如下：
 
 * bq 指令列工具查詢會使用 `@run_date`，而不是 `current_date()`。在排程查詢中，`@run_date` 參數包含目前日期。但在互動式查詢中，系統不支援 `@run_date` 參數。您可以使用 `current_date()` 測試互動式查詢，再排定查詢時間，不必使用 `@run_date`。
-* 基於類似原因，bq 指令列工具查詢會使用 `@run_time`，而非 `current_timestamp()`。`@run_time` 參數不支援互動式查詢，但 `current_timestamp()` 可用於測試互動式查詢。`@run_time`
+* bq 指令列工具查詢使用 `@run_time` 而非 `current_timestamp()`，原因類似：互動式查詢不支援 `@run_time` 參數，但 `current_timestamp()` 可用於測試互動式查詢。`@run_time`
 * bq 指令列工具查詢會使用斜線和雙引號 `\"`，而不是單引號 `'`，因為單引號用於括住查詢。
 
 ## 設定服務帳戶來執行排程查詢
@@ -266,7 +266,7 @@ bq 指令列工具指令中的多重陳述式查詢與您在 Google Cloud 控制
    projects/12345/locations/us/transferConfigs/12345
    ```
 
-Cloud Shell 會確認排定的查詢已成功更新。
+Cloud Shell 會確認排定的查詢已順利更新。
 
 ## 檢查作業
 
@@ -330,11 +330,11 @@ Cloud Shell 會確認排定的查詢已成功更新。
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

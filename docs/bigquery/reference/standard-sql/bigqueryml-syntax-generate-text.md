@@ -945,4 +945,4 @@ The model and input table must be in the same region.
   This is the JSON response from the
   [`projects.locations.endpoints.rawPredict`](/vertex-ai/docs/reference/rest/v1/projects.locations.endpoints/rawPredict)
   call to the model. The generated text is in the `content` element. This
-  column is retu
+  column is
