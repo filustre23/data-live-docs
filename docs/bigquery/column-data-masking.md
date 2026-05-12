@@ -30,7 +30,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 完成上述步驟後，使用者對資料欄執行查詢時，會根據所屬群組和獲授的角色，取得未遮蓋的資料、遮蓋的資料或存取遭拒錯誤。詳情請參閱「[遮蓋讀者和精細讀者角色如何互動](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro?hl=zh-tw#role-interaction)」。
 
-或者，您也可以直接在資料欄上套用資料政策 ([預覽](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))。詳情請參閱「[直接在資料欄上使用資料政策遮蓋資料](#data-policies-on-column)」。
+或者，您也可以直接在資料欄上套用資料政策。詳情請參閱「[直接在資料欄上使用資料政策遮蓋資料](#data-policies-on-column)」。
 
 ## 使用政策標記遮蓋資料
 
@@ -1043,8 +1043,6 @@ def delete_data_policy(project_id: str, location: str, data_policy_id: str) -> N
 
 ## 對資料欄套用資料政策，遮蓋資料
 
-**附註：** 如要提供意見回饋或尋求這項功能支援，請傳送電子郵件至 [bigquery-security-feedback@google.com](mailto:bigquery-security-feedback@google.com)。
-
 除了建立政策標記，您也可以建立資料政策，並直接套用至資料欄。
 
 ### 使用資料政策
@@ -1237,3 +1235,7 @@ ALTER COLUMN column_name SET OPTIONS (
 ```
 
 下列範例使用 `ALTER COLUMN SET OPTIONS`，替換資料表中現有資料欄的資料政策：
+
+```
+ALTER TABLE
+```

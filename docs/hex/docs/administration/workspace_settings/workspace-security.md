@@ -9,7 +9,19 @@ info
 * Available on Team and Enterprise [plans](https://hex.tech/pricing).
 * Only workspace Admins can configure these settings.
 
-## Project sharing settings[​](#project-sharing-settings "Direct link to Project sharing settings")
+## Sharing settings[​](#project-sharing-settings "Direct link to Sharing settings")
+
+### Share new projects with workspace by default[​](#share-new-projects-with-workspace-by-default "Direct link to Share new projects with workspace by default")
+
+When on, new projects are automatically shared with the workspace with **[Can explore](/docs/collaborate/sharing-and-permissions/project-sharing#can-explore)** permissions. Project owners can still change sharing on a per-project basis.
+
+When off, new projects are private to their creator until they are shared with specific users, groups, or the workspace. Changing this setting does not update sharing for existing projects.
+
+### Share new Threads with workspace by default[​](#share-new-threads-with-workspace-by-default "Direct link to Share new Threads with workspace by default")
+
+When on, new [Threads](/docs/explore-data/threads) are automatically shared with all non-Guest workspace users with Can View Thread permissions. Workspace users can view a shared Thread if they have the required data connection permissions, but only the Thread owner can send additional prompts to the Threads agent.
+
+When off, new Threads are private to their creator until they are shared with specific users, groups, or the workspace. Changing this setting does not update sharing for existing Threads.
 
 ### Share projects to web[​](#share-projects-to-web "Direct link to Share projects to web")
 
@@ -91,7 +103,7 @@ By default, users with the Editor role can create [project data connections](/do
 
 Admins may choose to disable this feature so that data connections can only be created in workspace settings by Admins.
 
-If disabled, any existing project data connections will continue to work. Reach out to [support](/cdn-cgi/l/email-protection#8bf8fefbfbe4f9ffcbe3eef3a5ffeee8e3) to get a list of projects that are currently using a project data connection.
+If disabled, any existing project data connections will continue to work. Reach out to [support](/cdn-cgi/l/email-protection#fe8d8b8e8e918c8abe969b86d08a9b9d96) to get a list of projects that are currently using a project data connection.
 
 ## SSO configuration[​](#sso-configuration "Direct link to SSO configuration")
 
@@ -115,7 +127,9 @@ This key is used when configuring Data Connections to [connect via SSH](/docs/co
 
 #### On this page
 
-* [Project sharing settings](#project-sharing-settings)
+* [Sharing settings](#project-sharing-settings)
+  + [Share new projects with workspace by default](#share-new-projects-with-workspace-by-default)
+  + [Share new Threads with workspace by default](#share-new-threads-with-workspace-by-default)
   + [Share projects to web](#share-projects-to-web)
   + [Export apps as PDFs](#export-apps-as-pdfs)
   + [Allow Notion link preview](#allow-notion-link-preview)

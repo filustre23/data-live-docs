@@ -16,6 +16,8 @@ Send feedback
   + [JSON representation](#TableFieldSchema.SCHEMA_REPRESENTATION)
 * [DataPolicyOption](#DataPolicyOption)
   + [JSON representation](#DataPolicyOption.SCHEMA_REPRESENTATION)
+* [DataPolicyList](#DataPolicyList)
+  + [JSON representation](#DataPolicyList.SCHEMA_REPRESENTATION)
 * [FieldElementType](#FieldElementType)
   + [JSON representation](#FieldElementType.SCHEMA_REPRESENTATION)
 * [TimePartitioning](#TimePartitioning)
@@ -169,7 +171,7 @@ A field in TableSchema
 
 | JSON representation |
 | --- |
-| ``` {   "name": string,   "type": string,   "mode": string,   "fields": [     {       object (TableFieldSchema)     }   ],   "description": string,   "policyTags": {     "names": [       string     ]   },   "dataPolicies": [     {       object (DataPolicyOption)     }   ],   "maxLength": string,   "precision": string,   "scale": string,   "roundingMode": enum (RoundingMode),   "collation": string,   "defaultValueExpression": string,   "rangeElementType": {     object (FieldElementType)   } } ``` |
+| ``` {   "name": string,   "type": string,   "mode": string,   "fields": [     {       object (TableFieldSchema)     }   ],   "description": string,   "policyTags": {     "names": [       string     ]   },   "dataPolicies": [     {       object (DataPolicyOption)     }   ],   "dataPolicyList": {     object (DataPolicyList)   },   "maxLength": string,   "precision": string,   "scale": string,   "roundingMode": enum (RoundingMode),   "collation": string,   "defaultValueExpression": string,   "rangeElementType": {     object (FieldElementType)   } } ``` |
 
 | Fields | |
 | --- | --- |
@@ -181,6 +183,7 @@ A field in TableSchema
 | `policyTags` | `object`  Optional. The policy tags attached to this field, used for field-level access control. If not set, defaults to empty policyTags. |
 | `policyTags.names[]` | `string`  A list of policy tag resource names. For example, "projects/1/locations/eu/taxonomies/2/policyTags/3". At most 1 policy tag is currently allowed. |
 | `dataPolicies[]` | `object (DataPolicyOption)`  Optional. Data policies attached to this field, used for field-level access control. |
+| `dataPolicyList` | `object (DataPolicyList)`  Optional. Specifies data policies attached to this field, used for field-level access control. When set, this will be the source of truth for data policy information. |
 | `maxLength` | `string (int64 format)`  Optional. Maximum length of values of this field for STRINGS or BYTES.  If maxLength is not specified, no maximum length constraint is imposed on this field.  If type = "STRING", then maxLength represents the maximum UTF-8 length of strings in this field.  If type = "BYTES", then maxLength represents the maximum number of bytes in this field.  It is invalid to set this field if type ≠ "STRING" and ≠ "BYTES". |
 | `precision` | `string (int64 format)`  Optional. Precision (maximum number of total digits in base 10) and scale (maximum number of digits in the fractional part in base 10) constraints for values of this field for NUMERIC or BIGNUMERIC.  It is invalid to set precision or scale if type ≠ "NUMERIC" and ≠ "BIGNUMERIC".  If precision and scale are not specified, no value range constraint is imposed on this field insofar as values are permitted by the type.  Values of this NUMERIC or BIGNUMERIC field must be in this range when:   * Precision (P) and scale (S) are specified: [-10P-S + 10-S, 10P-S - 10-S] * Precision (P) is specified but not scale (and thus scale is interpreted to be equal to zero): [-10P + 1, 10P - 1].   Acceptable values for precision and scale if both are specified:   * If type = "NUMERIC": 1 ≤ precision - scale ≤ 29 and 0 ≤ scale ≤ 9. * If type = "BIGNUMERIC": 1 ≤ precision - scale ≤ 38 and 0 ≤ scale ≤ 38.   Acceptable values for precision if only precision is specified but not scale (and thus scale is interpreted to be equal to zero):   * If type = "NUMERIC": 1 ≤ precision ≤ 29. * If type = "BIGNUMERIC": 1 ≤ precision ≤ 38.   If scale is specified but not precision, then it is invalid. |
 | `scale` | `string (int64 format)`  Optional. See documentation for precision. |
@@ -201,6 +204,18 @@ Data policy option. For more information, see [Mask data by applying data polici
 | --- | --- |
 | `name` | `string`  Data policy resource name in the form of projects/projectId/locations/locationId/dataPolicies/data\_policy\_id. |
 
+## DataPolicyList
+
+A list of data policy options. For more information, see [Mask data by applying data policies to a column](https://docs.cloud.google.com/bigquery/docs/column-data-masking#data-policies-on-column).
+
+| JSON representation |
+| --- |
+| ``` {   "dataPolicies": [     {       object (DataPolicyOption)     }   ] } ``` |
+
+| Fields | |
+| --- | --- |
+| `dataPolicies[]` | `object (DataPolicyOption)`  Contains a list of data policy options. At most 9 data policies are allowed per field. |
+
 ## FieldElementType
 
 Represents the type of a field element.
@@ -217,13 +232,4 @@ Represents the type of a field element.
 
 | JSON representation |
 | --- |
-| ``` {   "type": string,   "expirationMs": string,   "field": string,   "requirePartitionFilter": boolean } ``` |
-
-| Fields | |
-| --- | --- |
-| `type` | `string`  Required. The supported types are DAY, HOUR, MONTH, and YEAR, which will generate one partition per day, hour, month, and year, respectively. |
-| `expirationMs` | `string (Int64Value format)`  Optional. Number of milliseconds for which to keep the storage for a partition. A wrapper is used here because 0 is an invalid value. |
-| `field` | `string`  Optional. If not set, the table is partitioned by pseudo column '\_PARTITIONTIME'; if set, the table is partitioned by this field. The field must be a top-level TIMESTAMP or DATE field. Its mode must be NULLABLE or REQUIRED. A wrapper is used here because an empty string is an invalid value. |
-| `requirePartitionFilter (deprecated)` | `boolean`  This item is deprecated!  If set to true, queries over this table require a partition filter that can be used for partition elimination to be specified. This field is deprecated; please set the field with the same name on the table itself instead. This field needs a wrapper because we want to output the default value, false, if the user explicitly set it. |
-
-<
+|  |

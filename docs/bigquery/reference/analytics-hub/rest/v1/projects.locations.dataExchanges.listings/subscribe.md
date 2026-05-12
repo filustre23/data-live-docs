@@ -252,8 +252,3 @@ A policy that specifies the conditions for resource expiration (i.e., automatic 
 | JSON representation |
 | --- |
 | ``` {   "ttl": string } ``` |
-
-| Fields | |
-| --- | --- |
-|<
-|  |
