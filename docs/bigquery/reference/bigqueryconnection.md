@@ -299,7 +299,5 @@ def main(
 ) -> None:
     """Prints details and summary information about connections for a given admin project and location"""
     client = bq_connection.ConnectionServiceClient(transport=transport)
-    print(f"List of connections in project {project_id} in location {location}")
-    req = bq_connection.ListConnectionsRequest(
-        parent=
+    print(f"List of connection
 ```

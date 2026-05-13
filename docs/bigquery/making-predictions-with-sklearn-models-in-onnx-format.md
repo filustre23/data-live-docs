@@ -131,7 +131,7 @@ ONNX 提供統一格式，可用於表示任何機器學習 (ML) 架構。BigQue
 
 ### 使用 scikit-learn 訓練分類模型
 
-使用下列範例程式碼，在 [Iris](https://scikit-learn.org/stable/auto_examples/datasets/plot_iris_dataset.html) 資料集上建立並訓練 scikit-learn [管道](https://scikit-learn.org/stable/modules/compose.html#pipeline)。如需安裝及使用 scikit-learn 的操作說明，請參閱 [scikit-learn 安裝指南](https://scikit-learn.org/stable/install.html)。
+使用下列程式碼範例，在 [Iris](https://scikit-learn.org/stable/auto_examples/datasets/plot_iris_dataset.html) 資料集上建立並訓練 scikit-learn [管道](https://scikit-learn.org/stable/modules/compose.html#pipeline)。如需安裝及使用 scikit-learn 的操作說明，請參閱 [scikit-learn 安裝指南](https://scikit-learn.org/stable/install.html)。
 
 ```
 import numpy
@@ -154,7 +154,7 @@ pipe = Pipeline([('scaler', StandardScaler()),
 pipe.fit(X, y)
 ```
 
-**注意：** scikit-learn 管線可讓您納入其他程式庫 (例如 [LightGBM](https://lightgbm.readthedocs.io/en/latest/) 和 [XGBoost](https://xgboost.readthedocs.io/en/latest/)) 的模型，這些模型可透過 sklearn-onnx 轉換為 ONNX。詳情請參閱「[轉換管道](https://onnx.ai/sklearn-onnx/pipeline.html#convert-a-pipeline)」和「[使用其他程式庫的轉換器](https://onnx.ai/sklearn-onnx/tutorial_1-5_external.html#using-converters-from-other-libraries)」。
+**注意：** scikit-learn 管線可讓您納入其他程式庫 (例如 [LightGBM](https://lightgbm.readthedocs.io/en/latest/) 和 [XGBoost](https://xgboost.readthedocs.io/en/latest/)) 的模型，這些模型可由 sklearn-onnx 轉換為 ONNX。詳情請參閱「[轉換管道](https://onnx.ai/sklearn-onnx/pipeline.html#convert-a-pipeline)」和「[使用其他程式庫的轉換器](https://onnx.ai/sklearn-onnx/tutorial_1-5_external.html#using-converters-from-other-libraries)」。
 
 ### 將管道轉換為 ONNX 模型
 
@@ -244,7 +244,7 @@ with open('pipeline_rf.onnx', 'wb') as f:
 ### BigQuery DataFrames
 
 在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定說明操作。
-詳情請參閱 [BigQuery DataFrames 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -314,7 +314,7 @@ bqclient.create_dataset("bqml_tutorial", exists_ok=True)
 ### BigQuery DataFrames
 
 在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定說明操作。
-詳情請參閱 [BigQuery DataFrames 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -349,8 +349,7 @@ imported_onnx_model = ONNXModel(
 
 這些輸入內容與`initial_types`您[將模型轉換為 ONNX 格式](https://github.com/onnx/tutorials#converting-to-onnx-format)時定義的內容相符。
 
-輸出內容包括 `label` 和 `probabilities` 資料欄，以及輸入資料表中的資料欄。`label` 代表預測的類別標籤。
-`probabilities` 是機率陣列，代表每個類別的機率。
+輸出內容包括 `label` 和 `probabilities` 資料欄，以及輸入資料表中的資料欄。`label` 代表預測的類別標籤。`probabilities` 是機率陣列，代表每個類別的機率。
 
 如要使用匯入的 ONNX 模型進行預測，請選擇下列其中一種做法：
 
@@ -387,7 +386,7 @@ MODEL `example_dataset.imported_onnx_model`,
 ### BigQuery DataFrames
 
 在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定說明操作。
-詳情請參閱 [BigQuery DataFrames 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -461,11 +460,11 @@ gcloud projects delete PROJECT_ID
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

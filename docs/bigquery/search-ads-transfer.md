@@ -464,19 +464,4 @@ ORDER BY
 對於 AD、CAMPAIGN\_CRITERION 和 CRITERION 實體，系統也會提供 `new_secondary_id`，因為這些實體[在新版 Search Ads 360 中沒有全域專屬 ID](https://developers.google.com/search-ads/v2/how-tos/reporting/id-mapping?hl=zh-tw#object-id-uniqueness)。
 以下是 ID 對應表清單。
 
-* IdMapping\_AD
-* IdMapping\_AD\_GROUP
-* IdMapping\_CAMPAIGN
-* IdMapping\_CAMPAIGN\_CRITERION
-* IdMapping\_CAMPAIGN\_GROUP
-* IdMapping\_CAMPAIGN\_GROUP\_PERFORMANCE\_TARGET
-* IdMapping\_CRITERION
-* IdMapping\_CUSTOMER
-* IdMapping\_FEED\_ITEM
-* IdMapping\_FEED\_TABLE
-
-**注意：** 與對照表類似，系統每天會擷取一次 ID 對應資料表的快照，並儲存在最新執行日期的分區中。如果使用回填或重新整理視窗載入資料，系統不會更新 ID 對應表快照。
-
-### 查詢範例
-
-下列查詢會使用 ID 對應表，在新 ID 空間中，彙整舊
+<

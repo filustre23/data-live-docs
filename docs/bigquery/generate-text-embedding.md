@@ -31,11 +31,12 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 如要建立遠端模型並使用 `AI.GENERATE_EMBEDDING` 函式，您需要下列 Identity and Access Management (IAM) 角色：
 
-* 建立及使用 BigQuery 資料集、資料表和模型：專案的 BigQuery 資料編輯器 (`roles/bigquery.dataEditor`)。
+* 建立及使用 BigQuery 資料集、資料表和模型：
+  專案的 BigQuery 資料編輯器 (`roles/bigquery.dataEditor`)。
 * 建立、委派及使用 BigQuery 連線：專案的 BigQuery 連線管理員 (`roles/bigquery.connectionsAdmin`)。
 
   如果沒有設定[預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw)，您可以在執行 `CREATE MODEL` 陳述式時建立並設定連線。如要這麼做，您必須具備專案的 BigQuery 管理員角色 (`roles/bigquery.admin`)。詳情請參閱「[設定預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw#configure_the_default_connection)」。
-* 將權限授予連線的服務帳戶：在包含 Vertex AI 端點的專案中，授予「專案 IAM 管理員」(`roles/resourcemanager.projectIamAdmin`) 角色。這是您透過將模型名稱指定為端點所建立遠端模型的目前專案。這是您透過指定網址做為端點所建立遠端模型時，網址中識別的專案。
+* 將權限授予連線的服務帳戶：在包含 Vertex AI 端點的專案中，授予「專案 IAM 管理員」(`roles/resourcemanager.projectIamAdmin`) 角色。這是您透過將模型名稱指定為端點所建立遠端模型的目前專案。這是您透過指定網址做為端點所建立遠端模型的網址中識別的專案。
 * 建立 BigQuery 工作：專案中的 BigQuery 工作使用者 (`roles/bigquery.jobUser`)。
 
 這些預先定義的角色具備執行本文所述工作所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
@@ -350,7 +351,7 @@ resource "google_bigquery_connection" "default" {
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
 2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
 
-   每項專案只需要執行一次這個指令，且可以在任何目錄中執行。
+   您只需要為每項專案執行一次這個指令，且可以在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
@@ -388,7 +389,7 @@ resource "google_bigquery_connection" "default" {
 
 ## 套用變更
 
-1. 檢查設定，確認 Terraform 即將建立或更新的資源符合您的預期：
+1. 查看設定，確認 Terraform 即將建立或更新的資源符合您的預期：
 
    ```
    terraform plan
@@ -412,7 +413,7 @@ resource "google_bigquery_connection" "default" {
 
 如果您打算在建立遠端模型時將端點指定為網址 (例如 `endpoint = 'https://us-central1-aiplatform.googleapis.com/v1/projects/myproject/locations/us-central1/publishers/google/models/text-embedding-005'`)，請在網址指定的專案中授予這個角色。
 
-如果您打算在建立遠端模型時，使用模型名稱 (例如 `endpoint = 'text-embedding-005'`) 指定端點，請在您要建立遠端模型的專案中授予這個角色。
+如果您打算在建立遠端模型時使用模型名稱指定端點 (例如 `endpoint = 'text-embedding-005'`)，請在您要建立遠端模型的專案中授予這個角色。
 
 在其他專案中授予角色會導致錯誤 `bqcx-1234567890-wxyz@gcp-sa-bigquery-condel.iam.gserviceaccount.com does not have the permission to access resource`。
 
@@ -527,19 +528,20 @@ gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount
    * `MACHINE_TYPE`：`STRING` 值，用於指定將模型部署至 Vertex AI 時要使用的機型。如要瞭解支援的機器類型，請參閱「[機器類型](https://docs.cloud.google.com/vertex-ai/docs/predictions/configure-compute?hl=zh-tw#machine-types)」。如果未指定 `MACHINE_TYPE` 選項的值，系統會使用模型的 Vertex AI Model Garden 預設機型。
    * `MIN_REPLICA_COUNT`：`INT64` 值，用於指定在 Vertex AI 端點上部署模型時使用的最少機器副本數。服務會視端點的推論負載，增加或減少副本數量。使用的副本數量絕不會低於 `MIN_REPLICA_COUNT` 值，也不會高於 `MAX_REPLICA_COUNT` 值。`MIN_REPLICA_COUNT` 值必須介於 `[1, 4096]` 之間。預設值為 `1`。
    * `MAX_REPLICA_COUNT`：`INT64` 值，指定在 Vertex AI 端點上部署模型時使用的機器副本數量上限。服務會視端點的推論負載，增加或減少副本數量。使用的副本數量絕不會低於 `MIN_REPLICA_COUNT` 值，也不會高於 `MAX_REPLICA_COUNT` 值。`MAX_REPLICA_COUNT` 值必須介於 `[1, 4096]` 之間。預設值為 `MIN_REPLICA_COUNT` 值。
-   * `RESERVATION_AFFINITY_TYPE`：判斷部署的模型是否使用 [Compute Engine 預留項目](https://docs.cloud.google.com/compute/docs/instances/reservations-overview?hl=zh-tw)，確保在提供預測時虛擬機器 (VM) 可用性，並指定模型是否使用所有可用預留項目的 VM，或僅使用特定預留項目的 VM。詳情請參閱「[Compute Engine 預留資源親和性](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open?hl=zh-tw#reservation-affinity)」。
+   * `RESERVATION_AFFINITY_TYPE`：判斷已部署的模型是否使用 [Compute Engine 預留項目](https://docs.cloud.google.com/compute/docs/instances/reservations-overview?hl=zh-tw)，確保在提供預測時虛擬機器 (VM) 可用性，並指定模型是否使用所有可用預留項目的 VM，或僅使用特定預留項目的 VM。詳情請參閱「[Compute Engine 預留資源親和性](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open?hl=zh-tw#reservation-affinity)」。
 
      您只能使用與 Vertex AI 共用的 Compute Engine 預留項目。詳情請參閱「[允許使用預留項目](https://docs.cloud.google.com/vertex-ai/docs/predictions/use-reservations?hl=zh-tw#allow-consumption)」。
 
      支援的值如下：
 
      + `NO_RESERVATION`：將模型部署至 Vertex AI 端點時，不會消耗任何預留項目。指定 `NO_RESERVATION` 的效果與未指定預留項目親和性相同。
-     + `ANY_RESERVATION`：Vertex AI 模型部署作業會從目前專案中，或[與專案共用](https://docs.cloud.google.com/compute/docs/instances/reservations-overview?hl=zh-tw#how-shared-reservations-work)的 Compute Engine 預留項目，取用虛擬機器 (VM)，且這些預留項目[已設定為自動取用](https://docs.cloud.google.com/compute/docs/instances/reservations-consume?hl=zh-tw#consuming_instances_from_any_matching_reservation)。只有符合下列資格的 VM 才會使用：
+     + `ANY_RESERVATION`：Vertex AI 模型部署作業會從目前專案中，或[與專案共用](https://docs.cloud.google.com/compute/docs/instances/reservations-overview?hl=zh-tw#how-shared-reservations-work)的 Compute Engine 預留項目，取用虛擬機器 (VM)，且這些預留項目[已設定為自動取用](https://docs.cloud.google.com/compute/docs/instances/reservations-consume?hl=zh-tw#consuming_instances_from_any_matching_reservation)。系統只會使用符合下列資格的 VM：
        - 並使用 `MACHINE_TYPE` 值指定的機型。
        - 如果您要在單一區域的 BigQuery 資料集中建立遠端模型，預留項目必須位於相同區域。如果資料集位於`US`多區域，預留位置就必須位於`us-central1`區域。如果資料集位於`EU`多區域，預留位置必須位於`europe-west4`區域。
 
        如果可用預留容量不足，或找不到合適的預留項目，系統會佈建隨選 Compute Engine VM，以滿足資源需求。
-     + `SPECIFIC_RESERVATION`：Vertex AI 模型部署只會耗用您在 `RESERVATION_AFFINITY_VALUES` 值中指定的預留項目 VM。這項預留項目必須[設為明確指定的用量](https://docs.cloud.google.com/compute/docs/instances/reservations-consume?hl=zh-tw#consuming_instances_from_a_specific_reservation)。如果指定的預留項目容量不足，部署作業就會失敗。
+     + `SPECIFIC_RESERVATION`：Vertex AI 模型部署只會耗用您在 `RESERVATION_AFFINITY_VALUES` 值中指定的預留項目 VM。這項預留項目必須[設定為明確指定的用量](https://docs.cloud.google.com/compute/docs/instances/reservations-consume?hl=zh-tw#consuming_instances_from_a_specific_reservation)。
+       如果指定的預留項目容量不足，部署作業就會失敗。
    * `RESERVATION_AFFINITY_KEY`：字串
      `compute.googleapis.com/reservation-name`。當 `RESERVATION_AFFINITY_TYPE` 值為 `SPECIFIC_RESERVATION` 時，您必須指定這個選項。
    * `RESERVATION_AFFINITY_VALUES`：`ARRAY<STRING>` 值，指定 Compute Engine 預留項目的完整資源名稱，格式如下：  
@@ -598,7 +600,7 @@ gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount
 
 使用資料表欄或查詢中的文字資料，透過 [`AI.GENERATE_EMBEDDING` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding?hl=zh-tw)生成文字嵌入。
 
-一般來說，您會針對僅限文字的應用情境使用文字嵌入模型，並針對跨模式搜尋應用情境使用多模態嵌入模型，在相同的語意空間中產生文字和視覺內容的嵌入。
+一般來說，您會針對僅限文字的應用情境使用文字嵌入模型，並針對跨模式搜尋應用情境使用多模態嵌入模型，在相同的語意空間中生成文字和視覺內容的嵌入項目。
 
 ### Vertex AI Text
 
@@ -785,11 +787,11 @@ ORDER BY distance_to_average_review;
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

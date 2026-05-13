@@ -16,11 +16,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 使用舊版運算單元保留功能
 
-**注意：** 只有許可清單中的客戶可以使用舊版預訂，包括存取固定費率帳單或特定承諾期。如要確認您是否能使用這些舊版功能，請與管理員聯絡。固定費率計費模式會定義運算資源的計費方式，但固定費率預訂和承諾方案的功能與 Enterprise 版的配額相同。
+**注意：** 只有許可清單中的客戶可以使用舊版預留項目，包括存取固定費率帳單或特定約期。如要確認您是否能使用這些舊版功能，請與管理員聯絡。固定費率計費模式會定義運算資源的計費方式，但固定費率預訂和承諾方案的功能與 Enterprise 版的配額相同。
 
 透過 BigQuery Reservation API，您可以購買專屬運算單元 (稱為「[*承諾*](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#slot_commitments)」)、建立運算單元集區 (稱為「[*預留項目*](https://docs.cloud.google.com/bigquery/docs/reservations-intro?hl=zh-tw#reservations)」)，以及將專案、資料夾和機構指派給這些預留項目。
 
-保留項目可讓您為工作負載指派專屬的運算單元數量。舉例來說，您可能不希望實際工作環境工作負載與測試工作負載爭奪運算單元。您可以建立名為 `prod` 的預留項目，並將生產環境工作負載指派給這個預留項目。詳情請參閱「[預留項目](https://docs.cloud.google.com/bigquery/docs/reservations-intro?hl=zh-tw#reservations)」一文。
+保留項目可讓您為工作負載指派專屬的運算單元數量。舉例來說，您可能不希望實際工作環境工作負載與測試工作負載爭奪運算單元。您可以建立名為 `prod` 的預留項目，並將正式版工作負載指派給這個預留項目。詳情請參閱「[預留項目](https://docs.cloud.google.com/bigquery/docs/reservations-intro?hl=zh-tw#reservations)」一文。
 
 ## 建立預留項目
 
@@ -28,7 +28,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 如要建立預留項目，您必須具備下列身分與存取權管理 (IAM) 權限：
 
-* `bigquery.reservations.create` [管理專案](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#admin-project)，該專案會維護承諾使用合約的擁有權。
+* `bigquery.reservations.create`，[管理專案](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#admin-project)會維護承諾使用合約的擁有權。
 
 下列預先定義的 IAM 角色都具備這項權限：
 
@@ -55,15 +55,14 @@ Google uses AI technology to translate content into your preferred language. AI 
 7. 如果選取「固定費率」選項，請在「基準運算單元」下方，輸入預留項目的運算單元數量。
 
    1. 在「預留項目大小選取器」清單中，選取預留項目大小上限。
-   2. 選用：在「基準運算單元」欄位中，輸入保留項目的基準運算單元數量。如要只使用指定的運算單元容量，請按一下「忽略閒置運算單元」切換鈕。
+   2. 選用：在「Baseline slots」(基準運算單元) 欄位中，輸入保留項目的基準運算單元數量。如要只使用指定的運算單元容量，請點選「忽略閒置運算單元」切換鈕。
 
-      可用的自動調度資源運算單元數量，取決於從預留項目大小上限值減去基準運算單元值。舉例來說，如果您建立的預留項目有 100 個基準運算單元，且預留項目大小上限為 400，則預留項目有 300 個自動調度運算單元。如要進一步瞭解基準運算單元，請參閱「[使用預留項目搭配基準和自動調度運算單元](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro?hl=zh-tw#using_reservations_with_baseline_and_autoscaling_slots)」一文。
+      可用的自動調度資源運算單元數量，取決於預留項目大小上限值減去基準運算單元值。舉例來說，如果您建立的預留項目有 100 個基準運算單元，且預留項目大小上限為 400，則預留項目會有 300 個自動調度運算單元。如要進一步瞭解基準運算單元，請參閱「[使用預留項目搭配基準和自動調度資源運算單元](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro?hl=zh-tw#using_reservations_with_baseline_and_autoscaling_slots)」一文。
 8. 如要停用[閒置運算單元共用功能](https://docs.cloud.google.com/bigquery/docs/slots?hl=zh-tw#idle_slots)，請按一下「忽略閒置運算單元」切換鈕。
-9. **預估費用**表格會顯示時段明細。
-   「運算能力摘要」表格會顯示預留項目的摘要。
+9. **預估費用**表格會顯示時段明細。「運算能力摘要」表格會顯示預留項目摘要。
 10. 按一下 [儲存]。
 
-新的預訂項目會顯示在「預訂」分頁中。
+新預訂項目會顯示在「預訂」分頁中。
 
 ### SQL
 
@@ -82,16 +81,16 @@ Google uses AI technology to translate content into your preferred language. AI 
    );
    ```
 
-   取代下列項目：
+   請替換下列項目：
 
-   * `ADMIN_PROJECT_ID`：擁有預留資源的[管理專案](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#admin-project)專案 ID
-   * `LOCATION`：預訂的[地點](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。如果選取 [BigQuery Omni 位置](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw#locations)，版本選項會限制為 Enterprise 版。
-   * `RESERVATION_NAME`：預留項目的名稱
+   * `ADMIN_PROJECT_ID`：[管理專案](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#admin-project)的專案 ID，該專案擁有預訂資源
+   * `LOCATION`：預訂的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。如果選取 [BigQuery Omni 位置](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw#locations)，版本選項會限制為 Enterprise 版。
+   * `RESERVATION_NAME`：預留項目名稱
 
-     開頭和結尾必須為小寫英文字母或數字，且只能包含小寫英文字母、數字和連字號。
-   * `NUMBER_OF_BASELINE_SLOTS`：要分配給預留項目的基準運算單元數量。您無法在同一個預訂中設定 `slot_capacity` 選項和 `edition` 選項。
+     開頭和結尾必須是小寫英文字母或數字，且只能包含小寫英文字母、數字和破折號。
+   * `NUMBER_OF_BASELINE_SLOTS`：要分配給預訂的基準時段數量。您無法在同一個預訂中設定 `slot_capacity` 選項和 `edition` 選項。
    * `EDITION`：預訂的方案。將預留項目指派給版本時，功能和價格會有所變更。詳情請參閱 [BigQuery 版本簡介](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)。
-   * `NUMBER_OF_AUTOSCALING_SLOTS`：指派給預訂的自動調度資源運算單元數量。這等於預留項目大小上限減去基準運算單元數量。
+   * `NUMBER_OF_AUTOSCALING_SLOTS`：指派給預留項目的自動調度資源運算單元數量。這等於預留項目大小上限減去基準運算單元數量。
 3. 按一下「執行」play\_circle。
 
 如要進一步瞭解如何執行查詢，請參閱「[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)」。
@@ -117,14 +116,14 @@ bq mk \
 * `NUMBER_OF_BASELINE_SLOTS`：要分配給預留項目的基準運算單元數量
 * `RESERVATION_NAME`：預留項目名稱
 * `EDITION`：預訂的方案。將預留項目指派給版本時，功能和價格會有所變更。詳情請參閱 [BigQuery 版本簡介](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)。
-* `NUMBER_OF_AUTOSCALING_SLOTS`：指派給預訂的自動調度資源運算單元數量。這等於預留項目大小上限減去基準運算單元數量。
+* `NUMBER_OF_AUTOSCALING_SLOTS`：指派給預留項目的自動調度資源運算單元數量。這等於預留項目大小上限減去基準運算單元數量。
 
-如要瞭解 `--ignore_idle_slots` 旗標，請參閱「[閒置運算單元](https://docs.cloud.google.com/bigquery/docs/slots?hl=zh-tw#idle_slots)」。預設值為 `false`。
+如要瞭解 `--ignore_idle_slots` 標記，請參閱「[閒置運算單元](https://docs.cloud.google.com/bigquery/docs/slots?hl=zh-tw#idle_slots)」。預設值為 `false`。
 
 ### Python
 
 使用這個程式碼範例前，請先安裝 [google-cloud-bigquery-reservation 套件](https://docs.cloud.google.com/python/docs/reference/bigqueryreservation/latest?hl=zh-tw)。
-建構 [ReservationServiceClient](https://docs.cloud.google.com/python/docs/reference/bigqueryreservation/latest/google.cloud.bigquery_reservation_v1.services.reservation_service.ReservationServiceClient?hl=zh-tw#google_cloud_bigquery_reservation_v1_services_reservation_service_ReservationServiceClient)。使用 [Reservation](https://docs.cloud.google.com/python/docs/reference/bigqueryreservation/latest/google.cloud.bigquery_reservation_v1.types.Reservation?hl=zh-tw) 說明要建立的預訂項目。使用 [create\_reservation](https://docs.cloud.google.com/python/docs/reference/bigqueryreservation/latest/google.cloud.bigquery_reservation_v1.services.reservation_service.ReservationServiceClient?hl=zh-tw#google_cloud_bigquery_reservation_v1_services_reservation_service_ReservationServiceClient_create_reservation) 方法建立預留項目。
+建構 [ReservationServiceClient](https://docs.cloud.google.com/python/docs/reference/bigqueryreservation/latest/google.cloud.bigquery_reservation_v1.services.reservation_service.ReservationServiceClient?hl=zh-tw#google_cloud_bigquery_reservation_v1_services_reservation_service_ReservationServiceClient)。使用 [Reservation](https://docs.cloud.google.com/python/docs/reference/bigqueryreservation/latest/google.cloud.bigquery_reservation_v1.types.Reservation?hl=zh-tw) 說明要建立的預訂。使用 [create\_reservation](https://docs.cloud.google.com/python/docs/reference/bigqueryreservation/latest/google.cloud.bigquery_reservation_v1.services.reservation_service.ReservationServiceClient?hl=zh-tw#google_cloud_bigquery_reservation_v1_services_reservation_service_ReservationServiceClient_create_reservation) 方法建立預留項目。
 
 ```
 # TODO(developer): Set project_id to the project ID containing the
@@ -174,16 +173,16 @@ print(f"Created reservation: {reservation.name}")
 您可以對預訂項目進行下列更新：
 
 * 新增或移除運算單元，即可變更保留項目大小。
-* 設定此預留項目中的查詢是否要使用閒置的運算單元。
-* 變更分配給預留項目的基準或自動調度運算單元數量。
+* 設定此預留項目中的查詢是否要使用閒置運算單元。
+* 變更分配給預留項目的基準或自動調度資源運算單元數量。
 
 ### 所需權限
 
-如要更新預留項目，您必須具備下列身分與存取權管理 (IAM) 權限：
+如要更新預留項目，您需要下列 Identity and Access Management (IAM) 權限：
 
-* `bigquery.reservations.update`，[管理專案](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#admin-project)會維護承諾使用合約的所有權。
+* `bigquery.reservations.update`，[管理專案](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#admin-project)會維護承諾使用合約的擁有權。
 
-下列預先定義的 IAM 角色都包含這項權限：
+下列預先定義的 IAM 角色都具備這項權限：
 
 * `BigQuery Admin`
 * `BigQuery Resource Admin`
@@ -211,7 +210,7 @@ print(f"Created reservation: {reservation.name}")
 
 ### SQL
 
-如要變更預留空間大小，請使用[`ALTER RESERVATION SET OPTIONS`資料定義語言 (DDL) 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_reservation_set_options_statement)。
+如要變更預訂大小，請使用[`ALTER RESERVATION SET OPTIONS`資料定義語言 (DDL) 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_reservation_set_options_statement)。
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -226,12 +225,12 @@ print(f"Created reservation: {reservation.name}")
    );
    ```
 
-   取代下列項目：
+   請替換下列項目：
 
-   * `ADMIN_PROJECT_ID`：擁有預留資源的[管理專案](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#admin-project)專案 ID
-   * `LOCATION`：預訂的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)，例如 `europe-west9`。
-   * `RESERVATION_NAME`：預訂的名稱。開頭和結尾必須為小寫英文字母或數字，且只能包含小寫英文字母、數字和連字號。
-   * `NUMBER_OF_BASELINE_SLOTS`：要分配給預留項目的基準運算單元數量。
+   * `ADMIN_PROJECT_ID`：[管理專案](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#admin-project)的專案 ID，該專案擁有預訂資源
+   * `LOCATION`：保留項目的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)，例如 `europe-west9`。
+   * `RESERVATION_NAME`：預訂名稱。開頭和結尾必須是小寫英文字母或數字，且只能包含小寫英文字母、數字和破折號。
+   * `NUMBER_OF_BASELINE_SLOTS`：要分配給預訂的基準時段數量。
 3. 按一下「執行」play\_circle。
 
 如要進一步瞭解如何執行查詢，請參閱「[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)」。
@@ -258,7 +257,7 @@ bq update \
 ### Python
 
 使用這個程式碼範例前，請先安裝 [google-cloud-bigquery-reservation 套件](https://docs.cloud.google.com/python/docs/reference/bigqueryreservation/latest?hl=zh-tw)。
-建構 [ReservationServiceClient](https://docs.cloud.google.com/python/docs/reference/bigqueryreservation/latest/google.cloud.bigquery_reservation_v1.services.reservation_service.ReservationServiceClient?hl=zh-tw#google_cloud_bigquery_reservation_v1_services_reservation_service_ReservationServiceClient)。使用 [Reservation](https://docs.cloud.google.com/python/docs/reference/bigqueryreservation/latest/google.cloud.bigquery_reservation_v1.types.Reservation?hl=zh-tw) 和 [FieldMask.paths](https://googleapis.dev/python/protobuf/latest/google/protobuf/field_mask_pb2.html#google.protobuf.field_mask_pb2.FieldMask.paths) 屬性描述更新的屬性。使用 [update\_reservation](https://docs.cloud.google.com/python/docs/reference/bigqueryreservation/latest/google.cloud.bigquery_reservation_v1.services.reservation_service.ReservationServiceClient?hl=zh-tw#google_cloud_bigquery_reservation_v1_services_reservation_service_ReservationServiceClient_update_reservation) 方法更新預訂。
+建構 [ReservationServiceClient](https://docs.cloud.google.com/python/docs/reference/bigqueryreservation/latest/google.cloud.bigquery_reservation_v1.services.reservation_service.ReservationServiceClient?hl=zh-tw#google_cloud_bigquery_reservation_v1_services_reservation_service_ReservationServiceClient)。使用 [Reservation](https://docs.cloud.google.com/python/docs/reference/bigqueryreservation/latest/google.cloud.bigquery_reservation_v1.types.Reservation?hl=zh-tw) 和 [FieldMask.paths](https://googleapis.dev/python/protobuf/latest/google/protobuf/field_mask_pb2.html#google.protobuf.field_mask_pb2.FieldMask.paths) 屬性描述更新的屬性。使用 [update\_reservation](https://docs.cloud.google.com/python/docs/reference/bigqueryreservation/latest/google.cloud.bigquery_reservation_v1.services.reservation_service.ReservationServiceClient?hl=zh-tw#google_cloud_bigquery_reservation_v1_services_reservation_service_ReservationServiceClient_update_reservation) 方法更新預留項目。
 
 ```
 # TODO(developer): Set project_id to the project ID containing the
@@ -310,9 +309,9 @@ print(f"\tslot_capacity: {reservation.slot_capacity}")
 
 ### 設定查詢是否要使用閒置運算單元
 
-`--ignore_idle_slots` 標記可控制在預留項目中執行的查詢是否能使用其他預留項目的閒置運算單元。詳情請參閱「[閒置運算單元](https://docs.cloud.google.com/bigquery/docs/slots?hl=zh-tw#idle_slots)」。你可以更新現有預訂的這項設定。
+`--ignore_idle_slots` 旗標可控制在預留項目中執行的查詢是否能使用其他預留項目的閒置運算單元。詳情請參閱「[閒置運算單元](https://docs.cloud.google.com/bigquery/docs/slots?hl=zh-tw#idle_slots)」。您可以在現有預訂中更新這項設定。
 
-如要更新預訂，請使用 `bq update` 指令並加上 `--reservation` 旗標。以下範例將 `--ignore_idle_slots` 設為 `true`，也就是說，預留項目只會使用分配給預留項目的時段。
+如要更新預訂項目，請使用 `bq update` 指令並加上 `--reservation` 旗標。以下範例將 `--ignore_idle_slots` 設為 `true`，也就是說，預留項目只會使用分配給預留項目的時段。
 
 ```
 bq update \
@@ -325,7 +324,7 @@ bq update \
 更改下列內容：
 
 * `ADMIN_PROJECT_ID`：專案 ID
-* `LOCATION`：預訂的[地點](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)
+* `LOCATION`：預訂的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)
 * `RESERVATION_NAME`：預留項目名稱
 
 ### 列出閒置時段設定
@@ -334,7 +333,7 @@ bq update \
 
 ### SQL
 
-查詢[`INFORMATION_SCHEMA.RESERVATIONS_BY_PROJECT` 檢視區塊](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations?hl=zh-tw#schema)的 `ignore_idle_slots` 欄。
+查詢 [`INFORMATION_SCHEMA.RESERVATIONS_BY_PROJECT` 檢視區塊的 `ignore_idle_slots` 資料欄](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations?hl=zh-tw#schema)。
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -349,9 +348,9 @@ bq update \
      `ADMIN_PROJECT_ID.region-LOCATION`.INFORMATION_SCHEMA.RESERVATIONS_BY_PROJECT;
    ```
 
-   取代下列項目：
+   請替換下列項目：
 
-   * `ADMIN_PROJECT_ID`：擁有預留資源的[管理專案](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#admin-project)專案 ID
+   * `ADMIN_PROJECT_ID`：擁有預訂資源的[管理專案](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#admin-project)專案 ID
    * `LOCATION`：預訂的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)
 3. 按一下「執行」play\_circle。
 
@@ -369,7 +368,7 @@ bq ls --reservation \
 
 更改下列內容：
 
-* `ADMIN_PROJECT_ID`：擁有預留資源的[管理專案](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#admin-project)專案 ID
+* `ADMIN_PROJECT_ID`：擁有預訂資源的[管理專案](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#admin-project)專案 ID
 * `LOCATION`：預訂的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)
 
 `ignoreIdleSlots` 欄位包含設定。
@@ -380,7 +379,7 @@ bq ls --reservation \
 
 ### 所需權限
 
-如要刪除預留項目，您必須具備下列 Identity and Access Management (IAM) 權限：
+如要刪除預留項目，您需要下列 Identity and Access Management (IAM) 權限：
 
 * `bigquery.reservations.delete`，[管理專案](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#admin-project)會維護承諾使用合約的擁有權。
 
@@ -403,7 +402,7 @@ bq ls --reservation \
 3. 按一下「預訂」分頁標籤。
 4. 找出要刪除的預訂。
 5. 展開「動作」more\_vert選項。
-6. 按一下「Delete」(刪除)。
+6. 點選「刪除」。
 7. 點選「Delete reservation」(刪除預留項目) 對話方塊中的「Delete」(刪除)。
 
 ### SQL
@@ -420,10 +419,10 @@ bq ls --reservation \
      `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME`;
    ```
 
-   取代下列項目：
+   請替換下列項目：
 
-   * `ADMIN_PROJECT_ID`：擁有預留資源的[管理專案](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#admin-project)專案 ID
-   * `LOCATION`：預訂的[地點](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)
+   * `ADMIN_PROJECT_ID`：[管理專案](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#admin-project)的專案 ID，該專案擁有預訂資源
+   * `LOCATION`：預訂的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)
    * `RESERVATION_NAME`：預訂 ID
 3. 按一下「執行」play\_circle。
 
@@ -442,7 +441,7 @@ bq rm \
 
 更改下列內容：
 
-* `ADMIN_PROJECT_ID`：擁有預留資源的[管理專案](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#admin-project)專案 ID
+* `ADMIN_PROJECT_ID`：擁有預訂資源的[管理專案](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#admin-project)專案 ID
 * `LOCATION`：預訂的[地點](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)
 * `RESERVATION_NAME`：預留項目名稱
 
@@ -485,12 +484,11 @@ print(f"Deleted reservation: {reservation_name}")
 
 ## 將 BigQuery Reservation API 新增至 VPC Service Controls
 
-**注意：** 使用以特定 BigQuery 版本建立的預留項目時，可能無法使用這項功能。如要進一步瞭解各版本啟用的功能，請參閱「[BigQuery 版本簡介](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)」。
+**注意：** 使用以特定 BigQuery 版本建立的預留項目時，這項功能可能無法使用。如要進一步瞭解各版本啟用的功能，請參閱「[BigQuery 版本簡介](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)」。
 
-BigQuery Reservation API 支援 [VPC Service Controls](https://docs.cloud.google.com/vpc-service-controls?hl=zh-tw)。
-如要將 BigQuery Reservation API 與 VPC Service Controls 整合，請按照「[建立服務範圍](https://docs.cloud.google.com/vpc-service-controls/docs/create-service-perimeters?hl=zh-tw)」中的操作說明，將 BigQuery Reservation API 新增至受保護的服務。
+BigQuery Reservation API 支援 [VPC Service Controls](https://docs.cloud.google.com/vpc-service-controls?hl=zh-tw)。如要將 BigQuery Reservation API 與 VPC Service Controls 整合，請按照「[建立服務周圍區域](https://docs.cloud.google.com/vpc-service-controls/docs/create-service-perimeters?hl=zh-tw)」一文中的操作說明，將 BigQuery Reservation API 新增至受保護的服務。
 
-服務範圍可保護範圍內管理專案的預留項目、約期和指派項目存取權。建立指派項目時，VPC Service Controls 會保護管理專案、指派對象專案、資料夾和機構。
+服務範圍可保護範圍內管理專案的預留項目、約定和指派項目存取權。建立指派項目時，VPC Service Controls 會保護管理專案和受指派者專案、資料夾和機構。
 
 
 
@@ -499,11 +497,11 @@ BigQuery Reservation API 支援 [VPC Service Controls](https://docs.cloud.google
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

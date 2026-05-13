@@ -1032,8 +1032,4 @@ for this option, you must also specify a value for
 
 **Arguments**
 
-An `INT64` value between `1` and `5`, inclusive. The default value is `1`.
-
-**Note:** Although specifying larger `MAX_PARALLEL_TRIALS` values can accelerate the
-hyperparameter tuning process, acceleration can undermine the final model
-quality when
+An

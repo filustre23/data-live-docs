@@ -84,7 +84,7 @@ bq --location=LOCATION query \
 
 更改下列內容：
 
-* `LOCATION`：您[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)的名稱。`--location` 是選用旗標。舉例來說，如果您在東京地區使用 BigQuery，就可以將該旗標的值設定為 `asia-northeast1`。您可以使用 [.bigqueryrc 檔案](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool?hl=zh-tw#setting_default_values_for_command-line_flags)設定位置的預設值。
+* `LOCATION`：您[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)的名稱。`--location` 是選用旗標。舉例來說，如果您在東京區域使用 BigQuery，就可以將該旗標的值設定為 `asia-northeast1`。您可以使用 [.bigqueryrc 檔案](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool?hl=zh-tw#setting_default_values_for_command-line_flags)設定位置的預設值。
 * `TABLE`：要建立的臨時資料表名稱。
 * `DEFINITION_FILE`：本機電腦上[資料表定義檔](https://docs.cloud.google.com/bigquery/docs/external-table-definition?hl=zh-tw)的路徑。
 * `QUERY`：要提交至臨時資料表的查詢。
@@ -111,7 +111,7 @@ bq --location=LOCATION query \
 
 更改下列內容：
 
-* `LOCATION`：您[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)的名稱。`--location` 是選用旗標。舉例來說，如果您在東京地區使用 BigQuery，就可以將該旗標的值設定為 `asia-northeast1`。您可以使用 [.bigqueryrc 檔案](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool?hl=zh-tw#setting_default_values_for_command-line_flags)設定位置的預設值。
+* `LOCATION`：您[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)的名稱。`--location` 是選用旗標。舉例來說，如果您在東京區域使用 BigQuery，就可以將該旗標的值設定為 `asia-northeast1`。您可以使用 [.bigqueryrc 檔案](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool?hl=zh-tw#setting_default_values_for_command-line_flags)設定位置的預設值。
 * `TABLE`：要建立的臨時資料表名稱。
 * `SCHEMA`：內嵌結構定義，格式為 `field:data_type,field:data_type`。
 * `SOURCE_FORMAT`：外部資料來源的格式，例如 `CSV`。
@@ -154,7 +154,7 @@ bq --location=LOCATION query \
 
 更改下列內容：
 
-* `LOCATION`：您[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)的名稱。`--location` 是選用旗標。舉例來說，如果您在東京地區使用 BigQuery，就可以將該旗標的值設定為 `asia-northeast1`。您可以使用 [.bigqueryrc 檔案](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool?hl=zh-tw#setting_default_values_for_command-line_flags)設定位置的預設值。
+* `LOCATION`：您[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)的名稱。`--location` 是選用旗標。舉例來說，如果您在東京區域使用 BigQuery，就可以將該旗標的值設定為 `asia-northeast1`。您可以使用 [.bigqueryrc 檔案](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool?hl=zh-tw#setting_default_values_for_command-line_flags)設定位置的預設值。
 * `SCHEMA_FILE`：您本機上的 JSON 結構定義檔路徑。
 * `SOURCE_FORMAT`：外部資料來源的格式，例如 `CSV`。
 * `BUCKET_PATH`：包含資料表的資料的 Cloud Storage bucket 路徑，格式為 `gs://bucket_name/[folder_name/]file_pattern`。
@@ -374,7 +374,7 @@ print("There are {} states with names starting with W.".format(len(w_states)))
 
 ## 最佳化外部資料表查詢
 
-使用外部資料表查詢 Cloud Storage 資料時，請考慮啟用快速快取。Rapid Cache 為 Cloud Storage 值區提供以 SSD 為基礎的可用區讀取快取，查詢外部資料表時，可望提升查詢效能並降低查詢費用。詳情請參閱「[最佳化 Cloud Storage 外部資料表查詢](https://docs.cloud.google.com/bigquery/docs/external-tables?hl=zh-tw#cloud-storage-query-optimization)」。
+使用外部資料表查詢 Cloud Storage 資料時，請考慮啟用 Rapid Cache。Rapid Cache 可為 Cloud Storage bucket 提供以 SSD 為基礎的區域讀取快取，在查詢外部資料表時，可望提升查詢效能並降低查詢費用。詳情請參閱「[最佳化 Cloud Storage 外部資料表查詢](https://docs.cloud.google.com/bigquery/docs/external-tables?hl=zh-tw#cloud-storage-query-optimization)」。
 
 ## 後續步驟
 
@@ -389,11 +389,11 @@ print("There are {} states with names starting with W.".format(len(w_states)))
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

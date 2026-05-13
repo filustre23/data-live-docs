@@ -27,7 +27,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 ## 所需權限
 
 * 如要建立資料集，您需要 `bigquery.datasets.create` Identity and Access Management (IAM) 權限。
-* 如要建立模型，您需要下列權限：
+* 如要建立模型，您必須具備下列權限：
 
   + `bigquery.jobs.create`
   + `bigquery.models.create`
@@ -58,7 +58,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    **選取或建立專案所需的角色**
 
    * **選取專案**：選取專案時，不需要具備特定 IAM 角色，只要您已獲授角色，即可選取任何專案。
-   * **建立專案**：如要建立專案，您需要具備專案建立者角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   * **建立專案**：如要建立專案，您需要「專案建立者」角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
    **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，而不要選取現有專案。完成這些步驟後，您就可以刪除專案，並移除與該專案相關聯的所有資源。
 
    [前往專案選取器](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
@@ -217,7 +217,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 在輸出內容中，您可以看到資料區隔 `city=DES MOINES`
 對銷售比率變化貢獻最大
-。您也可以在 `metric_test` 和 `metric_control` 欄中查看這項差異，這兩欄顯示測試資料的比例低於對照組資料。其他指標 (例如 `metric_test_over_metric_control`、`metric_test_over_complement` 和 `metric_control_over_complement`) 會計算額外的統計資料，說明控制組和測試組比率之間的關係，以及這些比率與整體母體的關聯。詳情請參閱「[可加總比率指標貢獻度分析模型輸出內容](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-get-insights?hl=zh-tw#output_for_summable_ratio_metric_contribution_analysis_models)」。
+。您也可以在 `metric_test` 和 `metric_control` 欄中查看這項差異，這兩欄顯示測試資料的比例低於對照組資料。其他指標 (例如 `metric_test_over_metric_control`、`metric_test_over_complement` 和 `metric_control_over_complement`) 會計算額外的統計資料，說明控制組和測試組比率之間的關係，以及這些比率與整體母體的關係。詳情請參閱「[可加總比率指標貢獻度分析模型輸出內容](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-get-insights?hl=zh-tw#output_for_summable_ratio_metric_contribution_analysis_models)」。
 
 ## 清除所用資源
 
@@ -241,11 +241,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

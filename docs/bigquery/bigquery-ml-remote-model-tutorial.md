@@ -20,7 +20,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 * 將預先訓練的 TensorFlow 模型匯入 Vertex AI Model Registry。
 * 將模型部署至 Vertex AI 端點。
-* 建立 Cloud 資源連線。
+* 建立 Cloud 資源連結。
 * 使用 `CREATE MODEL` 陳述式在 BigQuery 中建立遠端模型。
 * 使用 `ML.PREDICT` 函式，透過遠端模型進行預測。
 
@@ -137,7 +137,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 1. 前往 Google Cloud 控制台的 Vertex AI「Model Registry」頁面。
 
-   [前往 Model Registry](https://console.cloud.google.com/vertex-ai/models?hl=zh-tw)
+   [前往「Model Registry」](https://console.cloud.google.com/vertex-ai/models?hl=zh-tw)
 2. 按一下「匯入」。
 3. 在「步驟一：名稱和區域」中，執行下列操作：
 
@@ -154,10 +154,10 @@ Google uses AI technology to translate content into your preferred language. AI 
       1. 在**「Model framework」(模型架構)** 中選擇「TensorFlow」。
       2. 在「Model framework version」(模型架構版本) 中選擇「2.15」。
       3. 在「Accelerator type」(加速器類型) 部分，選擇「GPU」。
-      4. 在「Model artifact location」(模型構件位置) 中輸入 `gs://cloud-samples-data/bigquery/ml/remote_model_tutorial/`。
-      5. 其餘選項均保留預設值，然後點選「匯入」。
+      4. 在「Model artifact location」(模型構件位置) 中，輸入 `gs://cloud-samples-data/bigquery/ml/remote_model_tutorial/`。
+      5. 其餘選項均保留預設值，然後按一下「匯入」。
 
-匯入完成後，模型會顯示在「模型登錄」頁面。
+匯入完成後，模型會顯示在「Model Registry」(模型登錄) 頁面。
 
 ## 將模型部署至 Vertex AI 端點
 
@@ -165,7 +165,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 1. 在 Google Cloud 控制台中，前往 Vertex AI 的「Model Registry」頁面。
 
-   [前往 Model Registry](https://console.cloud.google.com/vertex-ai/models?hl=zh-tw)
+   [前往「Model Registry」](https://console.cloud.google.com/vertex-ai/models?hl=zh-tw)
 2. 在「Name」(名稱) 欄中，按一下 **`bert_sentiment`**。
 3. 按一下「Deploy & Test」(部署及測試) 分頁標籤。
 4. 按一下「Deploy to endpoint」(部署至端點)。
@@ -178,9 +178,8 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    1. 在「Compute settings」(運算設定) 部分，為「Minimum number of compute nodes」(運算節點數量下限) 輸入 `1`。這是模型隨時可用的節點數量。
 
-      **注意：** 在正式版中，您應設定運算節點數量上限。
-      這個選項會開啟 Vertex AI 的自動調度資源功能，讓端點在 BigQuery 資料表含有大量資料列時，處理更多要求。
-   2. 在「Advanced scaling options」(進階縮放選項) 區段中，針對「Machine type」(機型)，選擇「Standard (n1-standard-2)」(標準 (n1-standard-2))。由於您在匯入模型時選擇 GPU 做為加速器類型，因此選擇機型後，系統會自動設定加速器類型和加速器數量。
+      **注意：** 在正式版中，您應設定運算節點數量上限。這個選項會開啟 Vertex AI 的自動調度資源功能，讓端點在 BigQuery 資料表含有大量資料列時，處理更多要求。
+   2. 在「進階縮放選項」部分，針對「機型」選擇「標準 (n1-standard-2)」。由於您在匯入模型時選擇 GPU 做為加速器類型，因此選擇機型後，系統會自動設定加速器類型和加速器數量。
    3. 保留其餘預設值，然後按一下「部署」。
 
       模型部署到端點後，狀態會變更為 `Active`。
@@ -233,9 +232,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 }
 ```
 
-## 建立 BigQuery Cloud 資源連線
+## 建立 BigQuery Cloud 資源連結
 
-您必須建立 Cloud 資源連線，才能連至 Vertex AI 端點。
+您必須建立 Cloud 資源連結，才能連至 Vertex AI 端點。
 
 ### 控制台
 
@@ -244,11 +243,11 @@ Google uses AI technology to translate content into your preferred language. AI 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
 
-   如果沒有看到左側窗格，請按一下「展開左側窗格」圖示 last\_page 開啟窗格。
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Explorer」窗格中，點選「新增資料」add。
 
    「新增資料」對話方塊隨即開啟。
-4. 在「依條件篩選」窗格的「資料來源類型」部分，選取「資料庫」。
+4. 在「Filter By」(依據篩選) 窗格的「Data Source Type」(資料來源類型) 專區中，選取「Databases」(資料庫)。
 
    或者，您也可以在「Search for data sources」(搜尋資料來源) 欄位中輸入 `Vertex AI`。
 5. 在「精選資料來源」部分，點選「Vertex AI」。
@@ -295,7 +294,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 為 Cloud 資源連線的服務帳戶授予 Vertex AI 使用者角色。您必須在建立遠端模型端點的專案中授予這個角色。
 
-**注意：** 如果連線位於不同專案，系統會傳回以下錯誤：
+**注意：** 如果連線位於不同專案中，系統會傳回以下錯誤：
 `bqcx-1234567890-xxxx@gcp-sa-bigquery-condel.iam.gserviceaccount.com does not have the permission to access
 resource`。
 
@@ -313,9 +312,9 @@ resource`。
 
 您可以使用 `REMOTE WITH CONNECTION` 子句搭配 `CREATE MODEL` 陳述式，建立 BigQuery ML 遠端模型。如要進一步瞭解 `CREATE MODEL` 陳述式，請參閱「[透過自訂模型建立遠端模型的 CREATE MODEL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https?hl=zh-tw)」。
 
-在 `US` 多地區位置建立模型。在 BigQuery 多區域 (`US`、`EU`) 資料集中，您只能建立連線至端點的遠端模型，該端點部署在相同多區域位置 (`US`、`EU`) 內的區域。
+在 `US` 多區域位置建立模型。在 BigQuery 多區域 (`US`、`EU`) 資料集中，您只能建立連線至端點的遠端模型，該端點部署在相同多區域位置 (`US`、`EU`) 內的區域。
 
-建立遠端模型時，需要[將模型部署至 Vertex AI](#deploy-model) 時產生的端點 ID。此外，輸入和輸出欄位名稱與類型必須與 Vertex AI 模型的輸入和輸出完全相同。在這個範例中，輸入內容是文字 `STRING`，輸出內容則是 `FLOAT64` 類型的 `ARRAY`。
+建立遠端模型時，您需要[將模型部署至 Vertex AI](#deploy-model) 時產生的端點 ID。此外，輸入和輸出欄位名稱與類型必須與 Vertex AI 模型的輸入和輸出完全相同。在這個範例中，輸入內容是文字 `STRING`，輸出內容則是 `FLOAT64` 類型的 `ARRAY`。
 
 ### 控制台
 
@@ -379,7 +378,7 @@ resource`。
 
 您可以使用 `ML.PREDICT` 函式，從遠端模型取得情緒預測結果。輸入內容是文字資料欄 (`review`)，內含 `bigquery-public-data.imdb.reviews` 資料表的電影評論。
 
-在本例中，我們選取了 10,000 筆記錄，並傳送進行預測。遠端模型預設要求批次大小為 128 個執行個體。
+在本例中，我們選取了 10,000 筆記錄，並傳送進行預測。遠端模型預設要求批量大小為 128 個執行個體。
 
 ### 控制台
 
@@ -464,7 +463,7 @@ gcloud projects delete PROJECT_ID
 2. 選用：[刪除資料集](https://docs.cloud.google.com/bigquery/docs/managing-datasets?hl=zh-tw#delete-datasets)。
 3. [取消部署模型並刪除端點](https://docs.cloud.google.com/vertex-ai/docs/general/deployment?hl=zh-tw#undeploy_a_model_and_delete_the_endpoint)。
 4. [從 Model Registry 刪除模型](https://docs.cloud.google.com/vertex-ai/docs/model-registry/delete-model?hl=zh-tw)。
-5. [刪除 Cloud 資源連線](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw#delete-connections)。
+5. [刪除 Cloud 資源連結](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw#delete-connections)。
 
 ## 後續步驟
 
@@ -473,7 +472,7 @@ gcloud projects delete PROJECT_ID
 * 如要進一步瞭解如何使用 BigQuery 筆記本，請參閱[筆記本簡介](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction?hl=zh-tw)。
 * 如要進一步瞭解 BigQuery 單一地區與多地區，請參閱「[支援的地區](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#supported_locations)」頁面。
 * 如要進一步瞭解如何在 Vertex AI Model Registry 中匯入模型，請參閱「[將模型匯入 Vertex AI](https://docs.cloud.google.com/vertex-ai/docs/model-registry/import-model?hl=zh-tw)」。
-* 如要進一步瞭解 Vertex AI Model Registry 中的模型版本控管，請參閱「[使用 Model Registry 進行模型版本控管](https://docs.cloud.google.com/vertex-ai/docs/model-registry/versioning?hl=zh-tw)」。
+* 如要進一步瞭解 Vertex AI Model Registry 中的模型版本管理，請參閱「[使用 Model Registry 進行模型版本管理](https://docs.cloud.google.com/vertex-ai/docs/model-registry/versioning?hl=zh-tw)」。
 * 如要瞭解如何使用 Vertex AI VPC Service Controls，請參閱「[搭配使用 VPC Service Controls 與 Vertex AI](https://docs.cloud.google.com/vertex-ai/docs/general/vpc-service-controls?hl=zh-tw)」。
 
 
@@ -483,11 +482,11 @@ gcloud projects delete PROJECT_ID
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

@@ -510,9 +510,5 @@ With Employees AS
     'Smith' AS last_name
   UNION ALL
   SELECT
-    'Joe' AS first_name,
-    'Jackson' AS last_name)
-
-SELECT
-  CONCAT(first_name, ' '
+    'Joe' AS
 ```

@@ -658,13 +658,4 @@ ML.GENERATE_EMBEDDING(
       This column isn't returned for text content.
     - `ml_generate_embedding_end_sec`: for video content, an `INT64` value
       that contains the ending second of the portion of the video that the
-      embedding represents. For image content, the value is `NULL`.
-      This column isn't returned for text content.
-
-### PCA
-
-`ML.GENERATE_EMBEDDING` returns the input table and the following column:
-
-* `ml_generate_embedding_result`: this is an `ARRAY<FLOAT>` value that
-  contains the principal components for the input data. The number of array
-  dimensions is equal to the P
+      embedding represents. For image

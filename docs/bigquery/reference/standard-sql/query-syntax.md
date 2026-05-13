@@ -561,8 +561,5 @@ SELECT (SELECT ARRAY_AGG(c) FROM t1.array_column c) FROM T1 t1;
 
 SELECT a.struct_field1 FROM T1 t1, t1.array_of_structs a;
 
-SELECT (SELECT STRING_AGG(a.struct_field1) FROM t1.array_of_structs a) FROM T1 t1;
+SELECT (SELECT STRING_AGG(a.struct_field1)
 ```
-
-Field paths in the `FROM` clause must end in an
-a

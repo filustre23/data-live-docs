@@ -64,7 +64,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 如要進一步瞭解 BigQuery 定價，請參閱 BigQuery 說明文件中的「[BigQuery 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw)」一文。
 
-部署至 Vertex AI 的開放式模型會以每機器小時為單位計費。也就是說，端點完全設定完成後，系統就會開始計費，直到您取消部署為止。如要進一步瞭解 Vertex AI 定價，請參閱 [Vertex AI 定價](https://cloud.google.com/vertex-ai/pricing?hl=zh-tw#prediction-prices)頁面。
+部署至 Vertex AI 的開放式模型會依機器時數收費。也就是說，端點完全設定完成後，系統就會開始計費，直到您取消部署為止。如要進一步瞭解 Vertex AI 定價，請參閱 [Vertex AI 定價](https://cloud.google.com/vertex-ai/pricing?hl=zh-tw#prediction-prices)頁面。
 
 ## 事前準備
 
@@ -73,7 +73,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    **選取或建立專案所需的角色**
 
    * **選取專案**：選取專案時，不需要具備特定 IAM 角色，只要您已獲授角色，即可選取任何專案。
-   * **建立專案**：如要建立專案，您需要具備專案建立者角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   * **建立專案**：如要建立專案，您需要「專案建立者」角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
    **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，而不要選取現有專案。完成這些步驟後，您就可以刪除專案，並移除與該專案相關聯的所有資源。
 
    [前往專案選取器](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
@@ -183,11 +183,11 @@ CREATE OR REPLACE MODEL `bqml_tutorial.qwen3_embedding_model`
    * `embedding`：代表所產生嵌入內容的雙精度浮點數陣列。
    * `status`：對應資料列的 API 回應狀態。如果作業成功，這個值會留空。
    * `content`：要從中擷取嵌入的輸入文字。
-   * `bigquery-public-data.imdb.reviews` 資料表中的所有欄。
+   * `bigquery-public-data.imdb.reviews` 資料表中的所有資料欄。
 
 ## 取消部署模型
 
-如果選擇不[刪除專案 (建議做法)](#clean_up)，請務必在 Vertex AI 中取消部署 Qwen3 嵌入模型，以免持續產生相關費用。在指定閒置時間 (預設為 6.5 小時) 過後，BigQuery 會自動取消部署模型。或者，您也可以使用 [`ALTER MODEL` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-alter-model?hl=zh-tw)立即取消部署模型，如下列範例所示：
+如果您選擇不[刪除專案 (建議做法)](#clean_up)，請務必在 Vertex AI 中取消部署 Qwen3 嵌入模型，以免持續產生相關費用。BigQuery 會在指定閒置時間 (預設為 6.5 小時) 過後，自動取消部署模型。或者，您也可以使用 [`ALTER MODEL` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-alter-model?hl=zh-tw)立即取消部署模型，如下列範例所示：
 
 ```
 ALTER MODEL `bqml_tutorial.qwen3_embedding_model`
@@ -222,11 +222,11 @@ SET OPTIONS (deploy_model = false);
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

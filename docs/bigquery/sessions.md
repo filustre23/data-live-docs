@@ -20,7 +20,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 完成這些步驟前，請確認您具備必要[權限](https://docs.cloud.google.com/bigquery/docs/sessions-intro?hl=zh-tw#roles_and_permissions)。
 
-## 建立工作階段
+## 建立課程
 
 如要擷取一組 SQL 活動，請建立 BigQuery 工作階段。建立工作階段後，您可以在工作階段中執行互動式查詢，直到工作階段[終止](#terminate-session)為止。工作階段中的所有查詢都會在建立工作階段的位置執行 (處理)。
 
@@ -37,7 +37,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 5. 在「其他設定」**> 資料位置**中，選取位置。工作階段建立後，工作階段中的所有查詢都會限制在這個位置，且無法變更位置。
 6. 按一下 [儲存]。
 7. [在編輯器分頁中編寫查詢](https://docs.cloud.google.com/bigquery/docs/sessions-write-queries?hl=zh-tw)
-   並執行。執行第一次查詢後，系統就會建立新工作階段。
+   並運作執行。執行第一次查詢後，系統就會建立新工作階段。
 
 ### bq
 
@@ -121,7 +121,7 @@ bq query \
 
 查詢結果後方會顯示工作階段 ID。
 
-如果打算使用 Cloud Shell 執行大量查詢，可以在 [`.bigqueryrc`](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool?hl=zh-tw#adding_flags_to_bigqueryrc) 的 `[query]` 中新增工作階段 ID，這樣就不必將工作階段 ID 複製並貼到每個指令中。
+如果您要使用 Cloud Shell 執行大量查詢，可以在 [`.bigqueryrc`](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool?hl=zh-tw#adding_flags_to_bigqueryrc) 中將工作階段 ID 新增至 `[query]`，這樣就不必將工作階段 ID 複製並貼到每個指令中。
 
 `.bigqueryrc` 中的工作階段 ID 如下所示：
 
@@ -205,7 +205,7 @@ CALL BQ.ABORT_SESSION(SESSION_ID);
 
 ### 控制台
 
-在 Google Cloud 控制台中，您不需要提供工作階段 ID，即可在工作階段內執行新查詢。您只要在含有工作階段的編輯器分頁中繼續工作即可。不過，如要在 Cloud Shell 或 API 呼叫中參照工作階段，您必須知道在控制台中建立的工作階段 ID。
+在 Google Cloud 控制台中，您不需要提供工作階段 ID，即可在工作階段內執行新查詢。您只要在含有工作階段的編輯器分頁中繼續作業即可。不過，如要在 Cloud Shell 或 API 呼叫中參照工作階段，您必須知道在控制台中建立的工作階段 ID。
 
 完成這些步驟之前，請確保您已在有效的工作階段中執行至少一項查詢。
 
@@ -251,11 +251,11 @@ sessionId: CgwKCmZhbGl1LXRlc3QQARokMDAzYjI0OWQtZ
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
 
-   如果沒有看到左側窗格，請按一下「展開左側窗格」圖示 last\_page 開啟窗格。
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Explorer」窗格中，按一下「Job history」。
 4. 選取工作經歷類型：
 
-   * 如要顯示近期工作資訊，請按一下「Personal history」(個人記錄)。
+   * 如要顯示近期工作資訊，請按一下「個人記錄」。
    * 如要顯示專案中近期工作資訊，請按一下「專案記錄」。
 5. 您可以在「工作階段 ID」欄中查看工作的階段 ID。
 
@@ -283,8 +283,7 @@ sessionId: CgwKCmZhbGl1LXRlc3QQARokMDAzYjI0OWQtZ
    請替換下列項目：
 
    * `VIEW`：`INFORMATION_SCHEMA` 檢視畫面：
-     + [`JOBS_BY_USER`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-by-user?hl=zh-tw#schema)：
-       只會傳回目前專案中，由目前使用者建立的工作
+     + [`JOBS_BY_USER`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-by-user?hl=zh-tw#schema)：只會傳回目前專案中，由目前使用者建立的作業
      + [`SESSIONS_BY_USER`](https://docs.cloud.google.com/bigquery/docs/information-schema-sessions-by-user?hl=zh-tw#schema)：
        只會傳回目前專案中，由目前使用者建立的工作階段
      + [`SESSIONS_BY_PROJECT`](https://docs.cloud.google.com/bigquery/docs/information-schema-sessions-by-project?hl=zh-tw#schema)：
@@ -307,7 +306,7 @@ sessionId: CgwKCmZhbGl1LXRlc3QQARokMDAzYjI0OWQtZ
 
 ## 查看工作階段記錄
 
-工作階段會擷取您在一段時間內的 SQL 活動。這項資訊會儲存在工作階段記錄中。您可以透過工作階段記錄追蹤工作階段期間所做的變更。無論工作失敗或成功，都會記錄在工作階段記錄中，方便您日後回顧所執行的操作。
+工作階段會擷取您在一段時間內的 SQL 活動。這項資訊會儲存在工作階段記錄中。工作階段記錄可讓您追蹤工作階段期間所做的變更。無論工作失敗或成功，都會記錄在工作階段記錄中，方便您日後查看。
 
 ### 控制台
 
@@ -351,10 +350,9 @@ sessionId: CgwKCmZhbGl1LXRlc3QQARokMDAzYjI0OWQtZ
 
    * VIEW：要使用的 `INFORMATION_SCHEMA` 檢視畫面
 
-     選取下列其中一個檢視畫面：
+     選取下列任一檢視畫面：
 
-     + [`JOBS_BY_USER`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw#schema)：
-       只會傳回目前專案中，由目前使用者建立的工作
+     + [`JOBS_BY_USER`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw#schema)：只會傳回目前專案中，由目前使用者建立的工作
      + [`SESSIONS_BY_USER`](https://docs.cloud.google.com/bigquery/docs/information-schema-sessions-by-user?hl=zh-tw#schema)：
        只會傳回目前專案中，由目前使用者建立的工作階段
      + [`SESSIONS_BY_PROJECT`](https://docs.cloud.google.com/bigquery/docs/information-schema-sessions-by-project?hl=zh-tw#schema)：
@@ -401,11 +399,11 @@ WHERE
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

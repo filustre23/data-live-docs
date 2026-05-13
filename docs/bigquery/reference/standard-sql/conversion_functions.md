@@ -581,11 +581,5 @@ SELECT CAST(
 SELECT CAST(
   TIMESTAMP '2008-12-25 00:00:00+00:00'
   AS STRING FORMAT 'YYYY-MM-DD HH24:MI:SS TZH:TZM'
-  AT TIME ZONE 'Asia/Kolkata') AS date_time_to_string
-
--- Because the time zone is specified, the result is always the same.
-/*------------------------------+
- | date_time_to_string          |
- +------------------------------+
- |
+  AT
 ```

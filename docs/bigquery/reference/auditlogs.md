@@ -827,10 +827,3 @@ To resolve this issue, consider the following strategies:
   BigQuery API [jobs.get](/bigquery/docs/reference/rest/v2/jobs/get) method.
 * Reduce the size of the metadata in the log message; for example, by using
   wildcards on common path prefixes to reduce the size of the `sourceUri` list.
-
-
-
-
-Send feedback
-
-Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the

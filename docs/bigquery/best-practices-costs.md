@@ -18,7 +18,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 這個頁面說明在 BigQuery 中估算及控管費用的最佳做法。
 
-BigQuery 的主要費用是運算 (用於查詢處理) 和儲存空間 (用於儲存在 BigQuery 中的資料)。BigQuery 提供兩種查詢處理計費模式：[以量計價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#on_demand_pricing)和[以容量為準](https://cloud.google.com/bigquery/pricing?hl=zh-tw#capacity_compute_analysis_pricing)的計費模式。每種模式都有不同的費用控管最佳做法。[儲存在 BigQuery 的資料](https://cloud.google.com/bigquery/pricing?hl=zh-tw#storage)費用取決於為每個資料集設定的[儲存空間帳單模型](https://docs.cloud.google.com/bigquery/docs/datasets-intro?hl=zh-tw#dataset_storage_billing_models)。
+BigQuery 的主要費用是運算 (用於查詢處理) 和儲存空間 (用於儲存在 BigQuery 中的資料)。BigQuery 提供兩種查詢處理計費模式：[以量計價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#on_demand_pricing)和[以容量為準](https://cloud.google.com/bigquery/pricing?hl=zh-tw#capacity_compute_analysis_pricing)的計費模式。每種模式都有不同的費用控管最佳做法。如為[儲存在 BigQuery 的資料](https://cloud.google.com/bigquery/pricing?hl=zh-tw#storage)，費用取決於為每個資料集設定的[儲存空間帳單模型](https://docs.cloud.google.com/bigquery/docs/datasets-intro?hl=zh-tw#dataset_storage_billing_models)。
 
 ## 瞭解 BigQuery 的運算定價
 
@@ -35,8 +35,7 @@ BigQuery 的運算價格略有不同，會影響容量規劃和成本控管。
 * 運算單元會分配到運算單元集區，方便您管理容量，並以適合貴機構的方式隔離工作負載。
 * 這些資源必須位於一個管理專案中，且受[配額和限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#reservations)規範。
 
-容量定價模式提供多種[*版本*](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)，
-所有版本都提供即付即用選項，以運算單元時數為單位收費。Enterprise 和 Enterprise Plus 版本也提供可選用的一年或三年期運算單元承諾，與即付即用費率相比，可節省費用。
+容量定價模式提供多種[*版本*](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)，所有版本都提供即付即用選項，以時段小時計費。Enterprise 和 Enterprise Plus 版本也提供可選用的一年或三年期運算單元承諾，與即付即用費率相比，可節省費用。
 
 您也可以使用即付即用選項設定[自動調度預留項目](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro?hl=zh-tw)。詳情請參閱下列文章：
 
@@ -55,7 +54,7 @@ BigQuery 的運算價格略有不同，會影響容量規劃和成本控管。
 
 如要控管個別查詢的費用，建議您先遵循[查詢運算最佳化](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-compute?hl=zh-tw)和[儲存空間最佳化](https://docs.cloud.google.com/bigquery/docs/best-practices-storage?hl=zh-tw)的最佳做法。
 
-以下各節將說明其他最佳做法，協助您進一步控管查詢費用。
+以下各節將說明其他最佳做法，可進一步控管查詢費用。
 
 ### 建立自訂查詢配額
 
@@ -70,9 +69,9 @@ BigQuery 的運算價格略有不同，會影響容量規劃和成本控管。
 
 ### 執行查詢前先查看預估費用
 
-**最佳做法：**在執行查詢之前，請先檢查並估算需要支付多少費用。
+**最佳做法：**執行查詢前，請先預覽查詢，估算費用。
 
-如果採用隨選定價模式，系統會根據查詢讀取的位元組數計費。如要在執行查詢之前估算費用，請使用：
+如果採用以量計價模式，系統會根據查詢讀取的位元組數計費。如要在執行查詢之前估算費用，請使用：
 
 * 在 Google Cloud 控制台[使用查詢驗證工具](#use-query-validator)。
 * [對查詢執行模擬測試](#perform-dry-run)。
@@ -334,7 +333,7 @@ print("This query will process {} bytes.".format(query_job.total_bytes_processed
 
 ### 估算查詢費用
 
-使用[隨選定價模式](https://cloud.google.com/bigquery/pricing?hl=zh-tw#on_demand_pricing)時，您可以計算處理的位元組數，估算執行查詢的費用。
+使用[以量計價模式](https://cloud.google.com/bigquery/pricing?hl=zh-tw#on_demand_pricing)時，您可以計算處理的位元組數，估算執行查詢的費用。
 
 #### 以量計價查詢大小計算
 
@@ -365,7 +364,7 @@ BigQuery 支援下列資料預覽選項：
 
 您可以使用計費位元組上限設定，限制針對查詢計費的位元組數。設定資料量計費上限後，系統會在查詢執行前預估查詢讀取的位元組數。如果預估的位元組數超過限制，查詢就會失敗，不會產生費用。
 
-如果是叢集資料表，查詢的計費位元組數預估值是上限，可能高於查詢執行後實際計費的位元組數。因此在某些情況下，即使實際計費位元組不會超過計費位元組上限設定，您在分群資料表上執行的查詢仍可能失敗。
+如果是叢集資料表，系統預估的查詢計費位元組數是上限，可能高於查詢執行後實際計費的位元組數。因此在某些情況下，即使實際計費位元組不會超過計費位元組上限設定，對分群資料表執行的查詢仍可能失敗。
 
 如果查詢因計費位元組上限設定而失敗，會傳回類似以下的錯誤：
 
@@ -401,7 +400,7 @@ required.`
 
 **最佳做法：**對於非叢集資料表，請勿使用 `LIMIT` 子句做為費用控管的方法。
 
-對於非叢集資料表，將 `LIMIT` 子句套用至查詢不會影響讀取的資料量。即使查詢只傳回子集，系統仍會收取您如查詢所指示，在完整資料表中讀取所有位元組的費用。使用分群資料表時，`LIMIT` 子句可以減少掃描的位元組數，因為掃描作業會在掃描足夠的區塊以取得結果後停止。系統只會根據掃描的位元組數計費。
+對於非叢集資料表，將 `LIMIT` 子句套用至查詢不會影響讀取的資料量。即使查詢只傳回子集，系統仍會收取您如查詢所指示，在完整資料表中讀取所有位元組的費用。使用分群資料表時，`LIMIT` 子句可以減少掃描的位元組數，因為掃描作業會在掃描足夠的區塊以取得結果後停止。系統只會根據掃描的位元組向您收費。
 
 ### 分階段具體化查詢結果
 
@@ -415,7 +414,7 @@ required.`
 
 **最佳做法：**使用外部資料表查詢 Cloud Storage 資料時，請考慮啟用 Rapid Cache。
 
-Rapid Cache 為 Cloud Storage 值區提供以 SSD 為基礎的可用區讀取快取，查詢外部資料表時，可望提升查詢效能並降低查詢費用。詳情請參閱「[最佳化 Cloud Storage 外部資料表查詢](https://docs.cloud.google.com/bigquery/docs/external-tables?hl=zh-tw#cloud-storage-query-optimization)」。
+Rapid Cache 可為 Cloud Storage bucket 提供以 SSD 為基礎的區域讀取快取，在查詢外部資料表時，可望提升查詢效能並降低查詢費用。詳情請參閱「[最佳化 Cloud Storage 外部資料表查詢](https://docs.cloud.google.com/bigquery/docs/external-tables?hl=zh-tw#cloud-storage-query-optimization)」。
 
 ## 控管工作負載費用
 
@@ -423,7 +422,7 @@ Rapid Cache 為 Cloud Storage 值區提供以 SSD 為基礎的可用區讀取快
 
 ### 使用 Google Cloud 價格計算工具
 
-**最佳做法：**使用 [Google Cloud Pricing Calculator](https://cloud.google.com/products/calculator?hl=zh-tw)，根據預測用量估算 BigQuery 的每月總費用。然後將這項預估值與實際費用進行比較，找出可最佳化的部分。
+**最佳做法：**使用 [Google Cloud Pricing Calculator](https://cloud.google.com/products/calculator?hl=zh-tw)，根據預測用量估算 BigQuery 的每月總費用。然後將這項預估值與實際費用進行比較，找出可進行最佳化的部分。
 
 ### 隨選
 
@@ -443,7 +442,7 @@ Rapid Cache 為 Cloud Storage 值區提供以 SSD 為基礎的可用區讀取快
 
 ### 版本
 
-如要使用[Google Cloud Pricing Calculator](https://cloud.google.com/products/calculator?hl=zh-tw)，估算搭配[BigQuery 版本](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)使用容量計費模式的費用，請按照下列步驟操作：
+如要使用[Google Cloud 定價計算機](https://cloud.google.com/products/calculator?hl=zh-tw)，估算搭配[BigQuery 版本](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)使用容量計費模式的費用，請按照下列步驟操作：
 
 1. 開啟[Google Cloud Pricing Calculator](https://cloud.google.com/products/calculator?hl=zh-tw)。
 2. 按一下「新增至估算值」。
@@ -471,7 +470,7 @@ Rapid Cache 為 Cloud Storage 值區提供以 SSD 為基礎的可用區讀取快
 
 [BigQuery 運算單元估算工具](https://docs.cloud.google.com/bigquery/docs/slot-estimator?hl=zh-tw)可根據歷來成效指標管理運算單元容量。
 
-此外，如果客戶使用隨選計費模式，在改用以容量為準的計費模式時，可以查看承諾使用和自動調度資源預留項目的規模建議，確保效能與先前相近。
+此外，如果客戶採用隨選計價模式，在改用以容量為準的計價模式時，系統會提供承諾使用和自動調度資源預留項目的建議大小，確保效能與先前相近。
 
 ### 取消不必要的長時間執行工作
 
@@ -481,13 +480,13 @@ Rapid Cache 為 Cloud Storage 值區提供以 SSD 為基礎的可用區讀取快
 
 **最佳做法：**建立資訊主頁來分析 Cloud Billing 資料，以便監控及調整 BigQuery 用量。
 
-您可以將[帳單資料匯出](https://docs.cloud.google.com/billing/docs/how-to/export-data-bigquery?hl=zh-tw)至 BigQuery，並在 Data Studio 等工具中以視覺化方式呈現。 如需有關建立計費資訊主頁的教學課程，請參閱「[使用 BigQuery 與數據分析視覺化計費](https://medium.com/google-cloud/visualize-gcp-billing-using-bigquery-and-data-studio-d3e695f90c08)」一文。 Google Cloud
+您可以將[帳單資料匯出](https://docs.cloud.google.com/billing/docs/how-to/export-data-bigquery?hl=zh-tw)至 BigQuery，並在數據分析等工具中以視覺化方式呈現。 如需有關建立計費資訊主頁的教學課程，請參閱「[使用 BigQuery 與數據分析視覺化計費](https://medium.com/google-cloud/visualize-gcp-billing-using-bigquery-and-data-studio-d3e695f90c08)」一文。 Google Cloud
 
 ### 使用帳單預算和快訊
 
 **最佳做法：**使用 [Cloud Billing 預算](https://docs.cloud.google.com/billing/docs/how-to/budgets?hl=zh-tw)集中監控 BigQuery 費用。
 
-Cloud Billing 預算可讓您追蹤實際費用與預估費用的差異。設定預算金額後，您可以設定預算快訊門檻規則，用來觸發電子郵件通知。預算快訊電子郵件可協助您根據預算，掌握 BigQuery 支出追蹤情形。
+Cloud Billing 預算可讓您追蹤實際費用與預估費用的差異。設定預算金額後，您可以設定預算快訊門檻規則，用來觸發電子郵件通知。預算快訊電子郵件可協助您掌握 BigQuery 支出與預算的比較情形。
 
 ## 控管儲存空間費用
 
@@ -495,7 +494,7 @@ Cloud Billing 預算可讓您追蹤實際費用與預估費用的差異。設定
 
 ### 使用長期儲存空間
 
-**最佳做法：**使用[長期儲存空間定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#storage)，降低舊資料的費用。
+**最佳做法：**使用[長期儲存價格](https://cloud.google.com/bigquery/pricing?hl=zh-tw#storage)，降低舊資料的費用。
 
 將資料載入 BigQuery 儲存空間後，將適用 BigQuery 的[儲存空間定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#storage)。對於較舊的資料，您可以自動享有 BigQuery 長期儲存空間定價。
 
@@ -521,9 +520,9 @@ BigQuery 支援使用邏輯 (未壓縮) 或實體 (已壓縮) 位元組，或兩
 
 **最佳做法：**使用實體儲存空間計費模式時，請避免重複覆寫資料表。
 
-覆寫資料表時 (例如在[批次載入工作](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#appending_to_or_overwriting_a_table)中使用 `--replace` 參數，或使用 [`TRUNCATE TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax?hl=zh-tw#truncate_table_statement) SQL 陳述式)，系統會在時空旅行和安全防護時間範圍內保留取代的資料。如果經常覆寫資料表，就會產生額外的儲存費用。
+覆寫資料表時 (例如在[批次載入工作](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#appending_to_or_overwriting_a_table)中使用 `--replace` 參數，或使用 [`TRUNCATE TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax?hl=zh-tw#truncate_table_statement) SQL 陳述式)，系統會保留取代的資料，保留時間為時空旅行和安全防護時間範圍。如果經常覆寫資料表，就會產生額外的儲存費用。
 
-您可以改為在載入工作中，使用 `WRITE_APPEND` 參數、`MERGE` SQL 陳述式或 [Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api?hl=zh-tw)，將資料逐步載入資料表。
+您可以使用載入工作中的 `WRITE_APPEND` 參數、`MERGE` SQL 陳述式，或 [Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api?hl=zh-tw)，將資料逐步載入資料表。
 
 ### 縮短時間回溯期
 
@@ -554,7 +553,7 @@ BigQuery 支援使用邏輯 (未壓縮) 或實體 (已壓縮) 位元組，或兩
 3. 找出對應的 SKU 後，請使用 `INFORMATION_SCHEMA` 檢視畫面找出與這些費用相關的特定資源，例如：
 
    * 如果系統向您收取隨選分析費用，請查看[`INFORMATION_SCHEMA.JOBS`檢視範例](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw#examples)，找出導致費用的工作和啟動這些工作的使用者。
-   * 如果系統向您收取預留項目或承諾使用合約 SKU 的費用，請查看對應的 [`INFORMATION_SCHEMA.RESERVATIONS`](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations?hl=zh-tw) 和 [`INFORMATION_SCHEMA.CAPACITY_COMMITMENTS`](https://docs.cloud.google.com/bigquery/docs/information-schema-capacity-commitments?hl=zh-tw#example) 檢視畫面，找出需要付費的預留項目和承諾使用合約。
+   * 如果系統向您收取預訂或承諾 SKU 的費用，請查看對應的 [`INFORMATION_SCHEMA.RESERVATIONS`](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations?hl=zh-tw) 和 [`INFORMATION_SCHEMA.CAPACITY_COMMITMENTS`](https://docs.cloud.google.com/bigquery/docs/information-schema-capacity-commitments?hl=zh-tw#example) 檢視畫面，找出收費的預訂和承諾。
    * 如果費用來自儲存空間 SKU，請查看[`INFORMATION_SCHEMA.TABLE_STORAGE`檢視範例](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage?hl=zh-tw#example_2)，瞭解哪些資料集和資料表會產生較多費用。
 
 排解問題時的重要注意事項：
@@ -580,16 +579,16 @@ Your project exceeded quota for free query bytes scanned
 
 ### 與查詢、預訂和承諾相關的預期外費用
 
-如要排解與工作執行相關的意外費用，請根據這些費用的來源採取行動：
+如要排解工作執行相關的意外費用問題，請根據這些費用的來源採取行動：
 
 * 如果隨選分析費用增加，可能是因為啟動的工作數量增加，或是工作需要處理的資料量有所變更。使用 [`INFORMATION_SCHEMA.JOBS`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw) 檢視畫面調查這個問題。
-* 如果承諾運算單元的費用增加，請查詢 [`INFORMATION_SCHEMA.CAPACITY_COMMITMENT_CHANGES`](https://docs.cloud.google.com/bigquery/docs/information-schema-capacity-commitment-changes?hl=zh-tw)，確認是否購買或修改了新的承諾。
+* 如果承諾運算單元的費用增加，請查詢 [`INFORMATION_SCHEMA.CAPACITY_COMMITMENT_CHANGES`](https://docs.cloud.google.com/bigquery/docs/information-schema-capacity-commitment-changes?hl=zh-tw)，確認是否購買或修改了新的承諾方案。
 * 如要瞭解因預留項目用量而增加的費用，請查看 [`INFORMATION_SCHEMA.RESERVATION_CHANGES`](https://docs.cloud.google.com/bigquery/docs/information-schema-reservation-changes?hl=zh-tw) 中記錄的預留項目異動。如要比對自動調度資源保留項目用量與帳單資料，請參閱[自動調度資源範例](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro?hl=zh-tw#monitor_autoscaling_with_information_schema)。
 
 #### 帳單上的運算單元小時數大於 INFORMATION\_SCHEMA.JOBS 檢視畫面計算出的運算單元小時數
 
 使用自動調度資源預留項目時，系統會根據調度的運算單元數量計算費用，而非根據使用的運算單元數量。BigQuery 會以 50 個運算單元為倍數自動調整規模，因此即使實際用量少於自動調整的數量，系統仍會以最接近的倍數計費。
-自動調度器縮減資源前，最短等待時間為 1 分鐘，因此即使查詢使用配額的時間少於 1 分鐘 (例如 1 分鐘內只用了 10 秒)，系統仍會收取至少 1 分鐘的費用。如要正確估算自動調度資源預留的費用，請參閱「[自動調度資源預留配額](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro?hl=zh-tw#monitor_autoscaling_with_information_schema)」頁面。如要進一步瞭解如何有效使用自動調度資源功能，請參閱[自動調度資源最佳做法](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro?hl=zh-tw#autoscaling_best_practices)。
+自動調度器縮減資源前，最短等待時間為 1 分鐘，因此即使查詢使用配額的時間少於 1 分鐘 (例如只用了 10 秒)，系統仍會收取至少 1 分鐘的費用。如要正確估算自動調度資源預留的費用，請參閱「[自動調度資源預留配額](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro?hl=zh-tw#monitor_autoscaling_with_information_schema)」頁面。如要進一步瞭解如何有效使用自動調度資源功能，請參閱[自動調度資源最佳做法](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro?hl=zh-tw#autoscaling_best_practices)。
 
 非自動調度預留項目也會出現類似情況，系統會根據佈建的運算單元數量計算費用，而非使用的運算單元數量。如要估算非自動調整規模預訂的費用，可以直接查詢 [`RESERVATIONS_TIMELINE` 檢視畫面](https://docs.cloud.google.com/bigquery/docs/information-schema-reservation-timeline?hl=zh-tw#examples)。
 
@@ -610,7 +609,7 @@ Your project exceeded quota for free query bytes scanned
   + 查詢採用資料列層級安全防護機制的資料表時，`INFORMATION_SCHEMA.JOBS` 檢視畫面不會產生 `total_bytes_billed` 的值，因此使用 `INFORMATION_SCHEMA.JOBS` 檢視畫面中的 `total_bytes_billed` 計算的帳單金額會低於實際帳單金額。如要進一步瞭解為何無法查看這項資訊，請參閱「[資料列層級安全防護最佳做法](https://docs.cloud.google.com/bigquery/docs/best-practices-row-level-security?hl=zh-tw#limit-side-channel-attacks)」頁面。
 * 在 BigQuery 中執行 ML 作業
 
-  + BigQuery ML 以量計價的查詢會根據建立的模型類型計費。部分模型作業的收費費率高於非機器學習查詢。因此，如果只是將專案的所有 `total_billed_bytes` 加總，並使用每 TB 的標準隨選價格費率，這不會是正確的價格匯總結果，您需要考量每 TB 的價格差異。
+  + BigQuery ML 以量計價的查詢會根據建立的模型類型計費。部分模型作業的收費費率高於非機器學習查詢。因此，如果只是將專案的所有 `total_billed_bytes` 加總，並使用每 TB 的標準隨選價格費率，這不會是正確的價格匯總，您需要考量每 TB 的價格差異。
 * 價格金額有誤
 
   + 確認計算時使用的每 TB 價格值正確無誤，並務必選擇正確的區域，因為價格會因地點而異。請參閱[定價說明文件](https://cloud.google.com/bigquery/pricing?e=48754805&hl=zh-tw#bigquery-pricing)。
@@ -619,7 +618,7 @@ Your project exceeded quota for free query bytes scanned
 
 #### 即使 API 已停用，且未使用預留容量或約定，仍需支付 BigQuery Reservations API 使用費
 
-檢查 SKU，進一步瞭解哪些服務會產生費用。如果帳單上的 SKU 為 `BigQuery Governance SKU`，表示這筆費用來自 Knowledge Catalog。
+檢查 SKU，進一步瞭解哪些服務會產生費用。如果帳單上的 SKU 為 `BigQuery Governance SKU`，則費用來自 Knowledge Catalog。
 部分 Knowledge Catalog 功能會使用 BigQuery 觸發工作執行作業。這些費用現在會透過對應的 BigQuery Reservations API SKU 處理。 詳情請參閱 [Knowledge Catalog 定價](https://cloud.google.com/dataplex/pricing?e=48754805&hl=zh-tw#dataplex-universal-catalog-pricing)說明文件。
 
 #### 專案已指派給預留項目，但仍看到 BigQuery 分析以量計價費用
@@ -632,7 +631,7 @@ Your project exceeded quota for free query bytes scanned
 
 #### BigQuery Enterprise 版的隨用隨付運算單元產生預期外的費用
 
-在 Cloud Billing 報表中，套用標籤為 `goog-bq-feature-type` 且值為 `SPARK_PROCEDURE` 的篩選器。您看到的用量會以「BigQuery Enterprise 版」的隨用隨付運算單元計費。這是使用 [BigQuery Apache Spark 程序](https://docs.cloud.google.com/bigquery/docs/spark-procedures?hl=zh-tw#pricing)的費用，無論專案使用的運算模型為何，都會以這種方式計費。
+在 Cloud Billing 報表中，套用標籤為 `goog-bq-feature-type` 且值為 `SPARK_PROCEDURE` 的篩選器。您看到的用量會以「BigQuery Enterprise 版」的隨用隨付運算單元計費。這些費用是使用 [BigQuery Apache Spark 程序](https://docs.cloud.google.com/bigquery/docs/spark-procedures?hl=zh-tw#pricing)所產生的費用，無論專案使用的運算模型為何，都會以這種方式計費。
 
 #### 停用 Reservation API 後，仍產生 BigQuery Reservations API 費用
 
@@ -640,7 +639,7 @@ Your project exceeded quota for free query bytes scanned
 
 #### 查詢非常小的資料表時，隨選查詢的費用會不成比例地偏高
 
-無論資料表實際大小為何，BigQuery 查詢的「每個參照資料表處理的資料量」最低計費額度為 10 MiB。同樣地，每項查詢「處理的資料量」最低收費額度為 10 MiB。查詢小型資料表時，即使資料表大小只有 KB，每項查詢也會產生至少 10 MiB 的費用。這可能會導致費用遠高於隨選計費預估值，且隨選運算價格特別昂貴。
+無論資料表實際大小為何，BigQuery 查詢的「每個參照資料表處理的資料量」最低計費額度為 10 MiB。同樣地，每項查詢「處理的資料量」最低收費額度為 10 MiB。查詢小型資料表時 (即使資料表大小只有 KB)，每項查詢至少會產生 10 MiB 的費用。這可能會導致費用遠高於隨選計費預估值，而且隨選運算價格特別昂貴。
 
 ### 非預期的儲存空間費用
 
@@ -667,7 +666,7 @@ Your project exceeded quota for free query bytes scanned
 
 * 請使用 [`INFORMATION_SCHEMA.TABLE_STORAGE_USAGE_TIMELINE` 檢視畫面](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage-usage?hl=zh-tw)，而非 `INFORMATION_SCHEMA.TABLE_STORAGE` - `TABLE_STORAGE_USAGE_TIMELINE`，因為前者提供的資料更準確且更精細，可正確計算儲存空間費用
 * 在 `INFORMATION_SCHEMA` 檢視畫面中執行的查詢不會納入稅金、調整項和捨入錯誤，因此比較資料時請將這些因素納入考量。如要進一步瞭解 Cloud Billing 報表，請參閱[這個頁面](https://docs.cloud.google.com/billing/docs/how-to/reports?hl=zh-tw)。
-* `INFORMATION_SCHEMA` 檢視畫面中顯示的資料以世界標準時間為準，而帳單報表資料則以美國和加拿大太平洋時間 (UTC-8) 為準。
+* `INFORMATION_SCHEMA` 檢視畫面中顯示的資料採用世界標準時間，而帳單報表資料則採用美國和加拿大太平洋時間 (UTC-8)。
 
 ## 後續步驟
 
@@ -678,7 +677,7 @@ Your project exceeded quota for free query bytes scanned
 
   + [建立、編輯或刪除預算和預算快訊](https://docs.cloud.google.com/billing/docs/how-to/budgets?hl=zh-tw)
   + [將 Cloud Billing 資料匯出至 BigQuery](https://docs.cloud.google.com/billing/docs/how-to/export-data-bigquery?hl=zh-tw)
-  + [透過數據分析以圖表呈現費用](https://docs.cloud.google.com/billing/docs/how-to/visualize-data?hl=zh-tw)
+  + [透過數據分析以圖表呈現您的費用](https://docs.cloud.google.com/billing/docs/how-to/visualize-data?hl=zh-tw)
 
 
 
@@ -687,11 +686,11 @@ Your project exceeded quota for free query bytes scanned
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

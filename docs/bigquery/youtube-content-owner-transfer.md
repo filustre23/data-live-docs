@@ -242,11 +242,4 @@ public class CreateYoutubeContentOwnerTransfer {
           "Youtube content owner channel transfer created successfully :" + config.getName());
     } catch (ApiException ex) {
       System.out.print("Youtube content owner channel transfer was not created." + ex.toString());
-    }
-  }
-}
 ```
-
-**附註：**如果您是第一次設定 YouTube 報表工作，在首批報表備妥前，最多必須等候 48 小時。詳情請參閱 YouTube Reporting API 說明文件中的[建立報表工作](https://developers.google.com/youtube/reporting/v1/reports/?hl=zh-tw#step-3-create-a-reporting-job)一節。
-
-## 查

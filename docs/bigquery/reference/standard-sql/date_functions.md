@@ -683,11 +683,5 @@ SELECT FORMAT_DATE('%b-%d-%Y', DATE '2008-12-25') AS formatted;
 ```
 
 ```
-SELECT FORMAT_DATE('%b %Y', DATE '2008-12-25') AS formatted;
-
-/*-------------+
- | formatted   |
- +-------------+
- | Dec 2008    |
- +-------------*/
+SELECT FORMAT_DATE(
 ```

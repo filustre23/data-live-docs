@@ -63,13 +63,14 @@ Google uses AI technology to translate content into your preferred language. AI 
 | MATRIX\_FACTORIZATION |
 | PCA |
 | TRANSFORM\_ONLY |
-| BOOSTED\_TREE\_CLASSIFIER | 追加劑 (XGBoost 0.82) | `gcs_bucket/    assets/      0.txt      1.txt      model_metadata.json    main.py    model.bst    xgboost_predictor-0.1.tar.gz      ....       predictor.py      ....`    `main.py` 適用於在本機執行。詳情請參閱「[模型部署](#model-deployment)」。 |
+| BOOSTED\_TREE\_CLASSIFIER | Booster (XGBoost 0.82) | `gcs_bucket/    assets/      0.txt      1.txt      model_metadata.json    main.py    model.bst    xgboost_predictor-0.1.tar.gz      ....       predictor.py      ....`    `main.py` 適用於在本機執行。詳情請參閱「[模型部署](#model-deployment)」。 |
 | BOOSTED\_TREE\_REGRESSOR |
 | RANDOM\_FOREST\_REGRESSOR |
 | RANDOM\_FOREST\_REGRESSOR |
 | TENSORFLOW (已匯入) | [TensorFlow SavedModel](https://www.tensorflow.org/guide/saved_model?hl=zh-tw) | 與匯入模型時完全相同的檔案 |
 
-**注意：** 模型建立期間執行的[自動資料前處理](https://docs.cloud.google.com/bigquery/docs/auto-preprocessing?hl=zh-tw) (例如標準化和標籤編碼)，會儲存在匯出檔案中，做為 TensorFlow SavedModel 圖的一部分，並儲存在 Booster 的外部檔案中。將資料傳遞給模型進行預測前，不需要進行明確的預先處理。輸入內容通常應與 BigQuery ML [`ML.PREDICT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict?hl=zh-tw) 使用的內容相符。匯出模型簽章中的所有數值都會轉換為 `FLOAT64` 資料型別。此外，所有 `STRUCT` 欄位都必須展開為個別欄位。舉例來說，`STRUCT f2` 中的 `f1` 欄位應重新命名為 `f2_f1`，並以獨立資料欄的形式傳遞。
+**注意：** 模型建立期間執行的[自動資料前處理](https://docs.cloud.google.com/bigquery/docs/auto-preprocessing?hl=zh-tw) (例如標準化和標籤編碼)，會儲存在匯出檔案中，做為 TensorFlow SavedModel 圖的一部分，並儲存在 Booster 的外部檔案中。將資料傳遞給模型進行預測前，不需要進行明確的預先處理。輸入內容通常應與 BigQuery ML [`ML.PREDICT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict?hl=zh-tw) 使用的內容相符。匯出模型簽章中的所有數值都會轉換為 `FLOAT64` 資料型別。
+此外，所有 `STRUCT` 欄位都必須展開為個別欄位。舉例來說，`STRUCT f2` 中的 `f1` 欄位應重新命名為 `f2_f1`，並以獨立資料欄的形式傳遞。
 
 ## 匯出使用「`TRANSFORM`」訓練的模型
 
@@ -149,8 +150,8 @@ Google uses AI technology to translate content into your preferred language. AI 
 
   + 輸入資料中含有 `ARRAY`、`TIMESTAMP` 或 `GEOGRAPHY` 特徵類型。
 * 匯出的 `AUTOML_REGRESSOR` 和 `AUTOML_CLASSIFIER` 類型模型不支援 Vertex AI 部署，無法用於線上預測。
-* 匯出矩陣分解模型時，模型大小上限為 1 GB。
-  模型大小與 `num_factors` 大致成正比，因此如果達到上限，可以在訓練期間減少 `num_factors`，縮減模型大小。
+* 矩陣分解模型匯出大小上限為 1 GB。
+  模型大小與 `num_factors` 大致成正比，因此如果達到上限，您可以在訓練期間減少 `num_factors`，縮減模型大小。
 * 如要瞭解使用 [BigQuery ML `TRANSFORM` 子句](https://docs.cloud.google.com/bigquery/docs/bigqueryml-transform?hl=zh-tw)訓練的模型 (用於[手動前處理特徵](https://docs.cloud.google.com/bigquery/docs/manual-preprocessing?hl=zh-tw))，請參閱支援匯出的[資料類型](https://docs.cloud.google.com/bigquery/docs/exporting-models?hl=zh-tw#export-transform-types)和[函式](https://docs.cloud.google.com/bigquery/docs/exporting-models?hl=zh-tw#export-transform-functions)。
 * 使用 [BigQuery ML `TRANSFORM` 子句](https://docs.cloud.google.com/bigquery/docs/bigqueryml-transform?hl=zh-tw)在 2023 年 9 月 18 日前訓練的模型，必須重新訓練，才能[透過 Model Registry 部署](https://docs.cloud.google.com/bigquery/docs/managing-models-vertex?hl=zh-tw)，以進行線上預測。
 * 匯出模型時，系統支援 `ARRAY<STRUCT<INT64, FLOAT64>>`、`ARRAY` 和 `TIMESTAMP` 做為預先轉換的資料，但不支援做為轉換後的資料。
@@ -166,7 +167,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    [前往 BigQuery 頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
 
-   如果沒有看到左側窗格，請按一下「展開左側窗格」圖示 last\_page 開啟窗格。
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Explorer」窗格中展開專案，按一下「Datasets」(資料集)，然後按一下資料集。
 4. 依序點選「總覽」**>「模型」**，然後點選要匯出的模型名稱。
 5. 依序按一下「更多」**>「匯出」**：
@@ -199,7 +200,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### bq
 
-**注意：** 如要使用 bq 指令列工具匯出模型，您必須具備 bq 指令列工具 2.0.56 以上版本，該工具隨附於 gcloud CLI [287.0.0 以上版本](https://docs.cloud.google.com/sdk/docs/release-notes?hl=zh-tw#28700_2020-04-01)。如要查看已安裝的 bq 工具版本，請使用 [`bq version`](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool?hl=zh-tw#getting_help)，並視需要使用 [`gcloud components update`](https://docs.cloud.google.com/sdk/gcloud/reference/components/update?hl=zh-tw) 更新 gcloud CLI。
+**注意：** 如要使用 bq 指令列工具匯出模型，您必須具備 bq 工具 2.0.56 以上版本，該工具隨附於 gcloud CLI [287.0.0 以上版本](https://docs.cloud.google.com/sdk/docs/release-notes?hl=zh-tw#28700_2020-04-01)。如要查看已安裝的 bq 工具版本，請使用 [`bq version`](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool?hl=zh-tw#getting_help)，並視需要使用 [`gcloud components update`](https://docs.cloud.google.com/sdk/gcloud/reference/components/update?hl=zh-tw) 更新 gcloud CLI。
 
 請使用 `bq extract` 指令，並加上 `--model` 旗標。
 
@@ -257,11 +258,11 @@ gs://example-bucket/mymodel_folder
 
    * 如果是 `status.state = DONE`，代表工作已順利完成。
    * 如果出現 `status.errorResult` 屬性，代表要求執行失敗，且該物件將包含所發生錯誤的相關訊息。
-   * 如果沒有出現 `status.errorResult`，代表工作已順利完成，但過程中可能發生了幾個不嚴重的錯誤。非致命錯誤都會列在已傳回工作物件的 `status.errors` 屬性中。
+   * 如果沒有出現 `status.errorResult`，代表工作已順利完成，但過程中可能發生了幾個非致命錯誤。非致命錯誤都會列在已傳回工作物件的 `status.errors` 屬性中。
 
 **API 附註：**
 
-* 最佳做法就是產生唯一識別碼，並在呼叫 `jobs.insert` 來建立工作時，將該唯一識別碼當做 `jobReference.jobId` 傳送。這個方法較不受網路故障問題的影響，因為用戶端可使用已知的工作 ID 進行輪詢或重試。
+* 最佳做法是產生唯一 ID，並在呼叫 `jobs.insert` 建立工作時，將該 ID 當做 `jobReference.jobId` 傳送。這個方法較不受網路故障問題的影響，因為用戶端可使用已知的工作 ID 進行輪詢或重試。
 * 針對指定的工作 ID 呼叫 `jobs.insert` 算是種冪等運算；換句話說，您可以針對同一個工作 ID 重試作業無數次，但在這些作業中最多只會有一個成功。
 
 ### Java
@@ -329,17 +330,17 @@ public class ExtractModel {
 
 您可以將匯出的模型部署至 Vertex AI 和本機。如果模型的 [`TRANSFORM` 子句](https://docs.cloud.google.com/bigquery/docs/bigqueryml-transform?hl=zh-tw)包含日期函式、日期時間函式、時間函式或時間戳記函式，您必須在容器中使用 [bigquery-ml-utils 程式庫](https://pypi.org/project/bigquery-ml-utils/)。但如果您是[透過 Model Registry 部署](https://docs.cloud.google.com/bigquery/docs/managing-models-vertex?hl=zh-tw)，則不需要匯出模型或提供模型的容器。
 
-### Vertex AI 部署作業
+### Vertex AI 部署
 
-| 匯出模型格式 | 部署 |
+| 匯出模型格式 | 部署作業 |
 | --- | --- |
 | TensorFlow SavedModel (非 AutoML 模型) | [部署 TensorFlow SavedModel](https://docs.cloud.google.com/vertex-ai/docs/general/deployment?hl=zh-tw)。 您必須使用 [支援的 TensorFlow 版本](https://docs.cloud.google.com/vertex-ai/docs/supported-frameworks-list?hl=zh-tw#tensorflow)建立 SavedModel 檔案。 |
 | TensorFlow SavedModel (AutoML 模型) | 不支援。 |
-| XGBoost Booster | 使用[自訂預測處理常式](https://docs.cloud.google.com/vertex-ai/docs/predictions/custom-prediction-routines?hl=zh-tw)。如果是 XGBoost Booster 模型，預先處理和事後處理資訊會儲存在匯出的檔案中，而自訂預測處理常式可讓您部署模型和額外匯出的檔案。   您必須使用[支援的 XGBoost 版本](https://docs.cloud.google.com/vertex-ai/docs/supported-frameworks-list?hl=zh-tw#xgboost_2)建立模型檔案。 |
+| XGBoost Booster | 使用[自訂預測處理常式](https://docs.cloud.google.com/vertex-ai/docs/predictions/custom-prediction-routines?hl=zh-tw)。如果是 XGBoost Booster 模型，預先處理和後續處理資訊會儲存在匯出的檔案中，而自訂預測處理常式可讓您部署模型和額外匯出的檔案。   您必須使用[支援的 XGBoost 版本](https://docs.cloud.google.com/vertex-ai/docs/supported-frameworks-list?hl=zh-tw#xgboost_2)建立模型檔案。 |
 
 ### 地端部署作業
 
-| 匯出模型格式 | 部署 |
+| 匯出模型格式 | 部署作業 |
 | --- | --- |
 | TensorFlow SavedModel (非 AutoML 模型) | SavedModel 是標準格式，您可以在 [TensorFlow Serving Docker 容器](https://www.tensorflow.org/tfx/serving/serving_basic?hl=zh-tw)中部署模型。  您也可以運用 Vertex AI Online Prediction 的[本機執行](https://docs.cloud.google.com/vertex-ai/docs/training/containerize-run-code-local?hl=zh-tw)功能。 |
 | TensorFlow SavedModel (AutoML 模型) | [將模型容器化並執行](https://docs.cloud.google.com/vertex-ai/docs/training/containerize-run-code-local?hl=zh-tw)。 |
@@ -527,11 +528,11 @@ public class ExtractModel {
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

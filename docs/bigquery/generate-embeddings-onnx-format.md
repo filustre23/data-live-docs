@@ -135,7 +135,8 @@ ONNX 提供統一格式，可用於表示任何機器學習 (ML) 架構。BigQue
 
 ## 將 Transformer 模型檔案轉換為 ONNX
 
-您也可以選擇按照本節的步驟，手動將 `sentence-transformers/all-MiniLM-L6-v2` 模型和權杖化工具轉換為 ONNX。否則，您可以使用公開 `gs://cloud-samples-data`Cloud Storage bucket 中已轉換的範例檔案。
+您也可以選擇按照本節的步驟，手動將 `sentence-transformers/all-MiniLM-L6-v2` 模型和權杖化工具轉換為 ONNX。否則，您可以使用公開 `gs://cloud-samples-data`
+Cloud Storage bucket 中已轉換的範例檔案。
 
 如要手動轉換檔案，您必須擁有已安裝 Python 的本機指令列環境。如要進一步瞭解如何安裝 Python，請參閱 [Python 下載頁面](https://www.python.org/downloads/)。
 
@@ -150,8 +151,7 @@ ONNX 提供統一格式，可用於表示任何機器學習 (ML) 架構。BigQue
    ```
    pip install optimum[onnx]
    ```
-2. 匯出模型。`--model` 引數會指定 Hugging Face 模型 ID。
-   `--opset` 引數會指定 ONNXRuntime 程式庫版本，並設為 `17`，以維持與 BigQuery 支援的 ONNXRuntime 程式庫相容性。
+2. 匯出模型。`--model` 引數會指定 Hugging Face 模型 ID。`--opset` 引數會指定 ONNXRuntime 程式庫版本，並設為 `17`，以維持與 BigQuery 支援的 ONNXRuntime 程式庫相容性。
 
    ```
    optimum-cli export onnx \
@@ -164,7 +164,7 @@ ONNX 提供統一格式，可用於表示任何機器學習 (ML) 架構。BigQue
 
 ### 對 Transformer 模型套用量化
 
-使用 Optimum CLI 將量子化套用至匯出的 Transformer 模型，以縮減模型大小並加快推論速度。詳情請參閱「[量化](https://huggingface.co/docs/optimum-onnx/onnxruntime/usage_guides/quantization)」一節。
+使用 Optimum CLI 將量化套用至匯出的 Transformer 模型，以縮減模型大小並加快推論速度。詳情請參閱「[量化](https://huggingface.co/docs/optimum-onnx/onnxruntime/usage_guides/quantization)」一節。
 
 如要將量化套用至模型，請在指令列執行下列指令：
 
@@ -176,7 +176,7 @@ optimum-cli onnxruntime quantize \
 
 量化模型檔案會匯出至 `all-MiniLM-L6-v2_quantized` 目錄，並命名為 `model_quantized.onnx`。
 
-### 將權杖化工具轉換為 ONNX
+### 將代碼化工具轉換為 ONNX
 
 如要使用 ONNX 格式的 Transformer 模型產生嵌入，通常會使用[權杖化工具](https://huggingface.co/docs/transformers/en/main_classes/tokenizer)產生模型的兩個輸入內容：[`input_ids`](https://huggingface.co/docs/transformers/glossary#input-ids) 和 [`attention_mask`](https://huggingface.co/docs/transformers/glossary#attention-mask)。
 
@@ -283,7 +283,7 @@ optimum-cli onnxruntime quantize \
 ### BigQuery DataFrames
 
 在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定說明操作。
-詳情請參閱 [BigQuery DataFrames 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -412,7 +412,7 @@ bqclient.create_dataset("bqml_tutorial", exists_ok=True)
 ### BigQuery DataFrames
 
 在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定說明操作。
-詳情請參閱 [BigQuery DataFrames 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -544,7 +544,7 @@ ML.PREDICT (MODEL `bqml_tutorial.all-MiniLM-L6-v2`,
 ### BigQuery DataFrames
 
 在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定說明操作。
-詳情請參閱 [BigQuery DataFrames 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -622,11 +622,11 @@ gcloud projects delete PROJECT_ID
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

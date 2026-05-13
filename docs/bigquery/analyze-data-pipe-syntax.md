@@ -27,7 +27,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 目標
 
-* 使用 [`FROM` 子句](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax?hl=zh-tw#from_queries)啟動查詢，即可查看資料表資料。
+* 如要查看資料表資料，請使用 [`FROM` 子句](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax?hl=zh-tw#from_queries)啟動查詢。
 * 使用 [`EXTEND` 管道運算子](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax?hl=zh-tw#extend_pipe_operator)新增資料欄。
 * 使用 [`AGGREGATE` 管道運算子](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax?hl=zh-tw#extend_pipe_operator)，按日和週匯總資料。
 * 使用 [`CROSS JOIN` 管道運算子](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax?hl=zh-tw#join_pipe_operator)，匯總滑動時間區間的資料。
@@ -156,7 +156,7 @@ FROM `bigquery-public-data.austin_bikeshare.bikeshare_trips`;
 
 ## 匯總每日資料
 
-您可以依日期分組，找出每天的行程總數和使用單車數。
+您可以依日期分組，找出每天的行程總數和使用的單車數。
 
 * 使用[`AGGREGATE` 管道運算子](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax?hl=zh-tw#aggregate_pipe_operator)搭配 `COUNT` 函式，找出行程總數和使用的自行車數量。
 * 使用 `GROUP BY` 子句，依日期將結果分組。
@@ -196,7 +196,7 @@ GROUP BY date;
 +------------+-------+----------------+
 ```
 
-## 訂單結果
+## 排序結果
 
 如要依 `date` 欄遞減排序結果，請在 `GROUP BY` 子句中加入
 [`DESC`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax?hl=zh-tw#shorthand_order_pipe_syntax)
@@ -238,7 +238,7 @@ ORDER BY date DESC;
 +------------+-------+----------------+
 ```
 
-在管道語法中，您可以直接將排序後置字元新增至 `GROUP BY` 子句，而不必使用 [`ORDER BY` 管道運算子](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax?hl=zh-tw#order_by_pipe_operator)。在 `GROUP BY` 子句中加入後置字串，是 `AGGREGATE` 管道語法支援的其中一項選用[簡短排序功能。在標準語法中，這是不可能的，您必須使用 `ORDER BY` 子句進行排序。](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax?hl=zh-tw#shorthand_order_pipe_syntax)
+在管道語法中，您可以直接將排序後置字元新增至 `GROUP BY` 子句，而不必使用 [`ORDER BY` 管道運算子](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax?hl=zh-tw#order_by_pipe_operator)。在 `GROUP BY` 子句中加入後置字元，是 `AGGREGATE` 管道語法支援的其中一項選用[簡寫排序功能。在標準語法中，這是不可能的，您必須使用 `ORDER BY` 子句進行排序。](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax?hl=zh-tw#shorthand_order_pipe_syntax)
 
 ## 匯總每週資料
 
@@ -286,9 +286,9 @@ ORDER BY date DESC;
 
 前一節的結果顯示開始和結束日期之間的*固定時間範圍*內的行程，例如 `2024-06-23` 到 `2024-06-29`。您可能想查看*滑動時間範圍*內的行程，也就是七天內每天都會更新的行程。換句話說，您可能想知道特定日期後一週的行程次數和單車使用次數。
 
-如要將滑動視窗套用至資料，請先將每趟行程從開始日期起，往前複製六個額外的*有效*天。接著，使用 `DATE_ADD` 函式計算有效天數的日期。最後，匯總每個有效日期的行程和單車 ID。
+如要將滑動視窗套用至資料，請先從每個行程的開始日期起，往前複製六個額外的*有效*天。接著，使用 `DATE_ADD` 函式計算有效天數的日期。最後，匯總每個有效日期的行程和單車 ID。
 
-1. 如要將資料向前複製，請使用 `GENERATE_ARRAY` 函式和交叉聯結：
+1. 如要將資料向前複製，請使用 `GENERATE_ARRAY` 函式和 cross join：
 
    ### 管道語法
 
@@ -375,7 +375,7 @@ ORDER BY date DESC;
 
 在上述查詢中，日期會延伸到未來，最多可超出資料中的最後一個日期六天。如要篩除超出資料結束日期的日期，請在查詢中設定最晚日期：
 
-1. 新增另一個 `EXTEND` 管道運算子，使用含 `OVER` 子句的 window 函式，計算資料表中的最大日期。
+1. 新增另一個 `EXTEND` 管道運算子，使用含 `OVER` 子句的視窗函式，計算資料表中的最大日期。
 2. 使用 `WHERE` 管道運算子，篩除超過最晚日期的產生資料列。
 
 ### 管道語法
@@ -430,7 +430,7 @@ ORDER BY active_date DESC;
 ## 後續步驟
 
 * 如要進一步瞭解管道語法的運作方式，請參閱「[使用管道查詢語法](https://docs.cloud.google.com/bigquery/docs/pipe-syntax-guide?hl=zh-tw)」。
-* 如需更多技術資訊，請參閱 [Pipe 查詢語法](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax?hl=zh-tw)參考說明文件。
+* 如需更多技術資訊，請參閱 [Pipe 查詢語法](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax?hl=zh-tw)參考文件。
 
 
 
@@ -439,11 +439,11 @@ ORDER BY active_date DESC;
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

@@ -22,7 +22,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 限制
 
-如要查看適用於以 Amazon S3 和 Blob 儲存體為基礎的 BigLake 表格限制完整清單，請參閱「[限制](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw#limitations)」。
+如要查看適用於 Amazon S3 和 Blob 儲存體的 BigLake 資料表限制完整清單，請參閱「[限制](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw#limitations)」。
 
 ## 事前準備
 
@@ -64,11 +64,11 @@ GoogleSQL 是 Google Cloud 控制台的預設語法。
    更改下列內容：
 
    * `CONNECTION_REGION`：建立連線的區域。
-   * `CONNECTION_NAME`：您建立的連線名稱，必須具備寫入 Amazon S3 值區的必要權限。
+   * `CONNECTION_NAME`：您建立的連線名稱，必須具備寫入 Amazon S3 儲存貯體的必要權限。
    * `BUCKET_NAME`：要寫入資料的 Amazon S3 儲存桶。
    * `PATH`：要寫入匯出檔案的路徑。路徑字串的葉節點目錄中必須剛好包含一個萬用字元 `*`，例如 `../aa/*`、`../aa/b*c`、`../aa/*bc` 和 `../aa/bc*`。BigQuery 會根據匯出的檔案數量，將 `*` 替換為 `0000..N`。BigQuery 會判斷檔案數量和大小。如果 BigQuery 決定匯出兩個檔案，則第一個檔案名稱中的 `*` 會替換為 `000000000000`，第二個檔案名稱中的 `*` 會替換為 `000000000001`。
    * `FORMAT`：支援的格式為 `JSON`、`AVRO`、`CSV` 和 `PARQUET`。
-   * `QUERY`：用於分析儲存在 BigLake 資料表中的資料。包含查詢所用 BigLake 資料表的資料集，必須與目標 Amazon S3 值區位於相同的 [Amazon S3 區域](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw#locations)。
+   * `QUERY`：用於分析 BigLake 資料表中儲存資料的查詢。包含查詢所用 BigLake 資料表的資料集，必須與目標 Amazon S3 值區位於相同的 [Amazon S3 區域](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw#locations)。
    * 按一下「執行」play\_circle。
 
 如要進一步瞭解如何執行查詢，請參閱「[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)」。
@@ -150,11 +150,11 @@ public class ExportQueryResultsToS3 {
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

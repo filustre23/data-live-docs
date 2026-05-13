@@ -32,7 +32,7 @@ New users can also be added to your workspace by way of a [project invite](/docs
 
 To invite users to your workspace, navigate to **Settings > Users**, and click **+ User**.
 
-Type or paste the email (or a comma-separated list of emails) you wish to add to your workspace. Then select a workspace role from the drop-down menu and click **Add users**. The invited user(s) will receive an invite email from **[[email protected]](/cdn-cgi/l/email-protection#c5abaab1aca3bc85ada0bdebb1a0a6ad)** prompting them to join your workspace. You will see the invited user(s) appear in the **Users** list.
+Type or paste the email (or a comma-separated list of emails) you wish to add to your workspace. Then select a workspace role from the drop-down menu and click **Add users**. The invited user(s) will receive an invite email from **[[email protected]](/cdn-cgi/l/email-protection#076968736e617e476f627f297362646f)** prompting them to join your workspace. You will see the invited user(s) appear in the **Users** list.
 
 ### Allowed domains[​](#allowed-domains "Direct link to Allowed domains")
 
@@ -94,7 +94,7 @@ Selecting `Latest` will ensure that projects automatically default to the latest
 
 tip
 
-Hex currently provides Python versions 3.9, 3.10, 3.11, and 3.12. If your organization has Custom Images enabled, these will also be available to select as default.
+Hex currently provides Python versions 3.10, 3.11, and 3.12. If your organization has Custom Images enabled, these will also be available to select as default.
 
 Only Python 3.11 and 3.12 will be fully patched with the latest fixes for security vulnerabilities in third-party packages.
 

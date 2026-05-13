@@ -16,9 +16,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 使用資訊清單查詢開放式資料表格式
 
-本文說明如何使用資訊清單檔案，查詢以開放式資料表格式 (例如 [Apache Hudi](https://github.com/apache/hudi) 和 [Delta Lake](https://github.com/delta-io)) 儲存的資料。
+本文說明如何使用資訊清單檔案，查詢以開放資料表格式 (例如 [Apache Hudi](https://github.com/apache/hudi) 和 [Delta Lake](https://github.com/delta-io)) 儲存的資料。
 
-部分開放資料表格式 (例如 Hudi 和 Delta Lake) 會將目前狀態匯出為一或多個資訊清單檔案。資訊清單檔案包含構成資料表的資料檔案清單。BigQuery 支援資訊清單，因此您可以查詢及載入以開放資料表格式儲存的資料。
+部分開放資料表格式 (例如 Hudi 和 Delta Lake) 會將目前狀態匯出為一或多個資訊清單檔案。資訊清單檔案包含組成資料表的資料檔案清單。BigQuery 支援資訊清單，因此您可以查詢及載入以開放資料表格式儲存的資料。
 
 ## 事前準備
 
@@ -31,7 +31,8 @@ Google uses AI technology to translate content into your preferred language. AI 
   [啟用 API](https://console.cloud.google.com/flows/enableapi?apiid=bigqueryconnection.googleapis.com%2Cbiglake.googleapis.com%2C%5Cnbigqueryreservation.googleapis.com&%3Bredirect=https%3A%2F%2Fconsole.cloud.google.com&hl=zh-tw)
 * 如要建立 BigLake 資料表，可以使用下列其中一種方法執行 Spark 指令：
 
-  + [建立 Managed Service for Apache Spark 叢集](https://docs.cloud.google.com/dataproc/docs/guides/create-cluster?hl=zh-tw)。如要查詢 Hudi 資料表，請將 `--optional-components` 欄位設為 `HUDI`。如要查詢 Delta 資料表，請將 `--optional-components` 設為 `Presto`。
+  + [建立 Managed Service for Apache Spark 叢集](https://docs.cloud.google.com/dataproc/docs/guides/create-cluster?hl=zh-tw)。
+    如要查詢 Hudi 資料表，請將 `--optional-components` 欄位設為 `HUDI`。如要查詢 Delta 資料表，請將 `--optional-components` 設為 `Presto`。
   + 在 BigQuery 中使用 Spark 預存程序。請按照以下步驟操作：
 
     1. [建立 Spark 連線](https://docs.cloud.google.com/bigquery/docs/connect-to-spark?hl=zh-tw#create-spark-connection)。
@@ -108,14 +109,14 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    * `JAR`：如果您使用 Hudi-BigQuery 連接器，請指定 `hudi-gcp-bundle-0.14.0.jar`。如果您在 Managed Service for Apache Spark 2.1 中使用 Hudi 元件，請指定 `/usr/lib/hudi/tools/bq-sync-tool/hudi-gcp-bundle-0.12.3.1.jar`
    * `PROJECT_ID`：您要在當中建立 Hudi BigLake 資料表的專案 ID
-   * `DATASET`：您要在其中建立 Hudi BigLake 資料集的資料集
+   * `DATASET`：您要在其中建立 Hudi BigLake 資料表的資料集
    * `LOCATION`：要建立 Hudi BigLake 資料表的位置
    * `TABLE`：要建立的資料表名稱
 
      如果您要從舊版 Hudi-BigQuery 連接器 (0.13.0 以下版本) 遷移，該連接器會在資訊清單檔案上建立檢視區塊，請務必使用相同的資料表名稱，這樣才能保留現有的下游管道程式碼。
    * `URI`：您建立的 Cloud Storage URI，用於儲存 Hudi 資訊清單檔案
 
-     這個 URI 會指向第一層分區，請務必加入分區索引鍵。例如 `gs://mybucket/hudi/mydataset/EventDate=*`。
+     這個 URI 會指向第一層分割區，請務必加入分割區索引鍵。例如 `gs://mybucket/hudi/mydataset/EventDate=*`。
    * `URI_PREFIX`：Cloud Storage URI 路徑的前置字元，通常是 Hudi 資料表的路徑
    * `BASE_PATH`：Hudi 表格的基礎路徑
 
@@ -214,10 +215,10 @@ deltaTable.generate("symlink_format_manifest")
 
      如要停用中繼資料快取功能，請指定 0。這是目前的預設做法。
 
-     如要啟用中繼資料快取功能，請指定介於 30 分鐘至 7 天之間的[間隔常值](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#interval_literals)。舉例來說，如要指定 4 小時的過時間隔，請輸入 `INTERVAL 4 HOUR`。如果資料表在過去 4 小時內重新整理過，針對該資料表執行的作業就會使用快取中繼資料。如果快取中繼資料的舊於該時間，作業會改為從 Delta Lake 擷取中繼資料。
+     如要啟用中繼資料快取功能，請指定介於 30 分鐘至 7 天之間的[間隔常值](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#interval_literals)。舉例來說，如要指定 4 小時的過時間隔，請輸入 `INTERVAL 4 HOUR`。如果資料表在過去 4 小時內重新整理過，針對該資料表執行的作業就會使用快取中繼資料。如果快取中繼資料較舊，作業會改為從 Delta Lake 擷取中繼資料。
    * `CACHE_MODE`：指定中繼資料快取是否自動或手動重新整理。如要進一步瞭解中繼資料快取注意事項，請參閱「[中繼資料快取，提升效能](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw#metadata_caching_for_performance)」。
 
-     設為 `AUTOMATIC`，中繼資料快取就會以系統定義的時間間隔 (通常介於 30 到 60 分鐘之間) 重新整理。
+     設為 `AUTOMATIC`，中繼資料快取就會以系統定義的時間間隔 (通常為 30 到 60 分鐘) 重新整理。
 
      如要依您決定的時間表重新整理中繼資料快取，請設為 `MANUAL`。在這種情況下，您可以呼叫 [`BQ.REFRESH_EXTERNAL_METADATA_CACHE` 系統程序](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures?hl=zh-tw#bqrefresh_external_metadata_cache)來重新整理快取。
 
@@ -240,7 +241,7 @@ deltaTable.generate("symlink_format_manifest")
 
 ## 升級 BigLake 資料表
 
-您也可以運用[中繼資料快取](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw#metadata_caching_for_performance)和[具體化檢視表](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro?hl=zh-tw#biglake)，[提升工作負載的效能](https://cloud.google.com/blog/products/data-analytics/deep-dive-on-how-biglake-accelerates-query-performance?hl=zh-tw)。如要使用中繼資料快取，可以同時指定相關設定。如要取得資料表詳細資料 (例如來源格式和來源 URI)，請參閱「[取得資料表資訊](https://docs.cloud.google.com/bigquery/docs/tables?hl=zh-tw#get_table_information)」。
+您也可以利用[中繼資料快取](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw#metadata_caching_for_performance)和[具體化檢視表](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro?hl=zh-tw#biglake)，[提升工作負載的效能](https://cloud.google.com/blog/products/data-analytics/deep-dive-on-how-biglake-accelerates-query-performance?hl=zh-tw)。如要使用中繼資料快取，可以同時指定相關設定。如要取得資料表詳細資料 (例如來源格式和來源 URI)，請參閱「[取得資料表資訊](https://docs.cloud.google.com/bigquery/docs/tables?hl=zh-tw#get_table_information)」。
 
 如要將外部資料表更新為 BigLake 資料表，或更新現有的 BigLake，請選取下列其中一個選項：
 
@@ -298,7 +299,7 @@ deltaTable.generate("symlink_format_manifest")
 
      如要停用中繼資料快取功能，請指定 0。這是目前的預設做法。
 
-     如要啟用中繼資料快取功能，請指定介於 30 分鐘至 7 天之間的[間隔常值](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#interval_literals)。舉例來說，如要指定 4 小時的過時間隔，請輸入 `INTERVAL 4 HOUR`。如果資料表在過去 4 小時內重新整理過，針對該資料表執行的作業就會使用快取中繼資料。如果快取中繼資料的建立時間較早，作業就會改為從 Cloud Storage 擷取中繼資料。
+     如要啟用中繼資料快取功能，請指定介於 30 分鐘至 7 天之間的[間隔常值](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#interval_literals)。舉例來說，如要指定 4 小時的過時間隔，請輸入 `INTERVAL 4 HOUR`。如果資料表在過去 4 小時內重新整理過，針對該資料表執行的作業就會使用快取中繼資料。如果快取中繼資料的建立時間早於該時間，作業會改為從 Cloud Storage 擷取中繼資料。
    * `CACHE_MODE`：指定中繼資料快取是否自動或手動重新整理
 
      如要進一步瞭解中繼資料快取注意事項，請參閱「[中繼資料快取，提升效能](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw#metadata_caching_for_performance)」。
@@ -340,7 +341,7 @@ deltaTable.generate("symlink_format_manifest")
      如果 `STALENESS_INTERVAL` 設為大於 0 的值，就必須設定 `CACHE_MODE`。
    * `BUCKET_PATH`：Cloud Storage bucket 的路徑，其中包含外部資料表的資料，格式為 `gs://bucket_name/[folder_name/]file_name`。
 
-     如要在路徑中指定一個星號 (`*`) 萬用字元，可以限制從值區選取的檔案。例如，`gs://mybucket/file_name*`。詳情請參閱「[Cloud Storage URI 的萬用字元支援](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage?hl=zh-tw#wildcard-support)」。
+     如要在路徑中指定一個星號 (`*`) 萬用字元，即可限制從值區選取的檔案。例如，`gs://mybucket/file_name*`。詳情請參閱「[Cloud Storage URI 的萬用字元支援](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage?hl=zh-tw#wildcard-support)」。
 
      如要為 `uris` 選項指定多個值區，請提供多個路徑。
 
@@ -376,7 +377,7 @@ deltaTable.generate("symlink_format_manifest")
 
 ## 查詢 BigLake 和外部資料表
 
-建立 BigLake 資料表後，您就可以[使用 GoogleSQL 語法查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw)，就像查詢標準 BigQuery 資料表一樣。例如：`SELECT field1, field2 FROM mydataset.my_cloud_storage_table;`。
+建立 BigLake 資料表後，您就可以[使用 GoogleSQL 語法查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw)，方法與標準 BigQuery 資料表相同。例如：`SELECT field1, field2 FROM mydataset.my_cloud_storage_table;`。
 
 ## 限制
 
@@ -396,11 +397,11 @@ deltaTable.generate("symlink_format_manifest")
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

@@ -241,4 +241,4 @@ Options used in model training.
 | `inputLabelColumns[]` | `string`  Name of input label columns in training data. |
 | `dataSplitMethod` | `enum (DataSplitMethod)`  The data split type for training and evaluation, e.g. RANDOM. |
 | `dataSplitEvalFraction` | `number`  The fraction of evaluation data over the whole input data. The rest of data will be used as training data. The format should be double. Accurate to two decimal places. Default value is 0.2. |
-| `dataSplitColumn` | `string`  The column to split data with. This column won't be used as a feature. 1. When dataSplitMethod is CUSTOM, the corresponding column should be boolean. The rows with true value tag are eval data, and the false are training data. 2. When dataSplitMethod is SEQ, the first DATA\_SPLIT\_EVAL\_FRACTION rows (from smallest to largest) in the corresponding column are used as training data, and the rest are eval data. It respects the order in Orderable data types: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types#data_type_properties> |
+| `dataSplitColumn` |  |

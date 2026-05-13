@@ -18,7 +18,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 本文說明如何使用公開 IP 位址，將資料從 Amazon Redshift 遷移至 BigQuery。
 
-您可以使用 BigQuery 資料移轉服務，將 Amazon Redshift 資料倉儲中的資料複製到 BigQuery。這項服務會與 GKE 中的遷移代理程式相互通訊，並觸發從 Amazon Redshift 傳輸至 Amazon S3 值區暫存區的卸載作業。接著，BigQuery 資料移轉服務就會將資料從 Amazon S3 值區移轉到 BigQuery。
+您可以使用 BigQuery 資料移轉服務，將 Amazon Redshift 資料倉儲中的資料複製到 BigQuery。這項服務會運用 GKE 中的遷移代理程式，並觸發從 Amazon Redshift 到 Amazon S3 值區中暫存區的上傳作業。接著，BigQuery 資料移轉服務就會將資料從 Amazon S3 值區移轉到 BigQuery。
 
 下圖顯示遷移期間 Amazon Redshift 資料倉儲與 BigQuery 之間的整體資料流動情況。
 
@@ -105,13 +105,13 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### 授予 Amazon Redshift 叢集的存取權
 
-[設定安全群組規則](https://docs.aws.amazon.com/vpc/latest/userguide/working-with-security-group-rules.html)，將私有 Amazon Redshift 叢集的下列 IP 範圍新增至許可清單。您可以將與資料集位置相對應的 IP 位址加入許可清單，也可以將下表中的所有 IP 位址加入許可清單。這些 Google 擁有的 IP 位址會保留給 Amazon Redshift 資料遷移作業使用。
+[設定安全性群組規則](https://docs.aws.amazon.com/vpc/latest/userguide/working-with-security-group-rules.html)，將私人 Amazon Redshift 叢集的下列 IP 範圍新增至許可清單。您可以將與資料集位置相對應的 IP 位址加入許可清單，也可以將下表中的所有 IP 位址加入許可清單。這些 Google 擁有的 IP 位址會保留給 Amazon Redshift 資料遷移作業使用。
 
 **注意：** BigQuery 與 Amazon Redshift 之間的通訊會透過下列 Google 擁有的 IP 位址進行。不過，從 Amazon S3 移轉至 BigQuery 的資料會透過公用網際網路傳輸。
 
 #### 地區位置
 
-|  | 地區說明 | 區域名稱 | IP 位址 |
+|  | 區域說明 | 區域名稱 | IP 位址 |
 | --- | --- | --- | --- |
 | **美洲** | | | |
 |  | 俄亥俄州哥倫布 | `us-east5` | 34.162.72.184  34.162.173.185  34.162.205.205  34.162.81.45  34.162.182.149  34.162.59.92  34.162.157.190  34.162.191.145 |
@@ -122,7 +122,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 |  | 墨西哥 | `northamerica-south1` | 34.51.6.35  34.51.7.113  34.51.12.83  34.51.10.94  34.51.11.219  34.51.11.52  34.51.2.114  34.51.15.251 |
 |  | 蒙特婁 | `northamerica-northeast1` | 34.95.20.253  35.203.31.219  34.95.22.233  34.95.27.99  35.203.12.23  35.203.39.46  35.203.116.49  35.203.104.223 |
 |  | 北維吉尼亞州 | `us-east4` | 35.245.95.250  35.245.126.228  35.236.225.172  35.245.86.140  35.199.31.35  35.199.19.115  35.230.167.48  35.245.128.132  35.245.111.126  35.236.209.21 |
-|  | 奧勒岡州 | `us-west1` | 35.197.117.207  35.199.178.12  35.197.86.233  34.82.155.140  35.247.28.48  35.247.31.246  35.247.106.13  34.105.85.54 |
+|  | 俄勒岡州 | `us-west1` | 35.197.117.207  35.199.178.12  35.197.86.233  34.82.155.140  35.247.28.48  35.247.31.246  35.247.106.13  34.105.85.54 |
 |  | 鹽湖城 | `us-west3` | 34.106.37.58  34.106.85.113  34.106.28.153  34.106.64.121  34.106.246.131  34.106.56.150  34.106.41.31  34.106.182.92 |
 |  | 聖保羅 | `southamerica-east1` | 35.199.88.228  34.95.169.140  35.198.53.30  34.95.144.215  35.247.250.120  35.247.255.158  34.95.231.121  35.198.8.157 |
 |  | 聖地亞哥 | `southamerica-west1` | 34.176.188.48  34.176.38.192  34.176.205.134  34.176.102.161  34.176.197.198  34.176.223.236  34.176.47.188  34.176.14.80 |
@@ -169,7 +169,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 | 歐盟1[成員國](https://europa.eu/european-union/about-eu/countries_en)境內的資料中心 | `EU` | 34.76.156.158  34.76.156.172  34.76.136.146  34.76.1.29  34.76.156.232  34.76.156.81  34.76.156.246  34.76.102.206  34.76.129.246  34.76.121.168 |
 | 美國資料中心 | `US` | 35.185.196.212  35.197.102.120   35.185.224.10  35.185.228.170  35.197.5.235  35.185.206.139  35.197.67.234  35.197.38.65  35.185.202.229  35.185.200.120 |
 
-1 位於 `EU` 多地區的資料，不會存放在 `europe-west2` (倫敦) 或 `europe-west6` (蘇黎世) 資料中心。
+1 位於 `EU` 多區域的資料，不會存放在 `europe-west2` (倫敦) 或 `europe-west6` (蘇黎世) 資料中心。
 
 ### 授予 Amazon S3 值區的存取權
 
@@ -194,9 +194,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### 評估資料
 
-在資料移轉過程中，BigQuery 資料移轉服務會將 Amazon Redshift 的資料寫入 Cloud Storage，做為 CSV 檔案。如果這些檔案含有 ASCII 0 字元，就無法載入至 BigQuery。建議您評估資料，判斷這是否會造成問題。如果是，您可以將資料匯出至 Amazon S3 做為 Parquet 檔案，然後使用 BigQuery 資料移轉服務匯入這些檔案，藉此解決問題。詳情請參閱「[Amazon S3 移轉作業總覽](https://docs.cloud.google.com/bigquery/docs/s3-transfer-intro?hl=zh-tw)」。
+在資料移轉過程中，BigQuery 資料移轉服務會將 Amazon Redshift 的資料以 CSV 檔案的形式寫入 Cloud Storage。如果這些檔案含有 ASCII 0 字元，就無法載入至 BigQuery。建議您評估資料，判斷這是否會造成問題。如果是，您可以將資料匯出至 Amazon S3 做為 Parquet 檔案，然後使用 BigQuery 資料移轉服務匯入這些檔案，藉此解決問題。詳情請參閱「[Amazon S3 移轉作業總覽](https://docs.cloud.google.com/bigquery/docs/s3-transfer-intro?hl=zh-tw)」。
 
-## 設定 Amazon Redshift 轉移作業
+## 設定 Amazon Redshift 移轉作業
 
 選取下列選項之一：
 
@@ -218,7 +218,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
       **注意：** 提供 Amazon 憑證，即表示您瞭解 BigQuery 資料移轉服務是您的代理程式，僅用於存取移轉資料。
    4. 在「Access key ID」(存取金鑰 ID) 和「Secret access key」(存取密鑰) 部分，輸入您在[授予 S3 值區的存取權](#grant_access_to_your_S3_bucket)步驟所取得的存取金鑰組。
-   5. 在 **Amazon S3 URI** 部分，輸入將做為暫存區使用的 [S3 值區的 URI](#s3_uri)。
+   5. 在「Amazon S3 URI」部分，輸入將做為暫存區使用的 [S3 值區的 URI](#s3_uri)。
    6. 在「Amazon Redshift Schema」(Amazon Redshift 結構定義) 部分，輸入您正在遷移的 Amazon Redshift 結構定義。
    7. 在「Table name patterns」(資料表名稱格式) 部分，指定符合結構定義中資料表名稱的名稱或格式。您可以使用規則運算式，在下列表單中指定格式：`<table1Regex>;<table2Regex>`。此格式必須遵循 Java 規則運算式語法。例如：
 
@@ -228,7 +228,7 @@ Google uses AI technology to translate content into your preferred language. AI 
       將這個欄位留白，用以遷移所有來自指定結構定義的資料表。
 
       **注意：** 針對非常大型的資料表，我們建議一次移轉一個資料表。[每個載入工作的 BigQuery 載入配額為 15 TB](#quotas_and_limits)。
-   8. 將「VPC and the reserved IP range」(虛擬私有雲和保留的 IP 範圍) 欄位留空。
+   8. 將「虛擬私有雲和保留的 IP 範圍」欄位留空。
 8. 在「Service Account」(服務帳戶) 選單，選取與貴機構Google Cloud 專案相關聯的[服務帳戶](https://docs.cloud.google.com/iam/docs/service-account-overview?hl=zh-tw)。您可以將服務帳戶與移轉作業建立關聯，這樣就不需要使用者憑證。如要進一步瞭解如何搭配使用服務帳戶與資料移轉作業，請參閱[使用服務帳戶](https://docs.cloud.google.com/bigquery/docs/use-service-accounts?hl=zh-tw)的相關說明。
 
    * 如果使用[聯合身分](https://docs.cloud.google.com/iam/docs/workforce-identity-federation?hl=zh-tw)登入，您必須擁有服務帳戶才能建立移轉作業。如果是以 [Google 帳戶](https://docs.cloud.google.com/iam/docs/principals-overview?hl=zh-tw#google-account)登入，則不一定要透過服務帳戶建立移轉作業。
@@ -337,5 +337,5 @@ public class CreateRedshiftTransfer {
     Map<String, Value> params = new HashMap<>();
     params.put("jdbc_url", Value.newBuilder().setStringValue(jdbcUrl).build());
     params.put("database_username", Value.newBuilder().setStringValue(dbUserName).build());
-    params.put("database_password", Value.newBuilder
+    params.put("database_password",
 ```

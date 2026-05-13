@@ -38,9 +38,9 @@ GoogleSQL 是符合 ANSI 標準的[結構化查詢語言 (SQL)](https://en.wikip
   可讓您管理資料修改的交易。
 * 使用[載入陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements?hl=zh-tw)和[匯出陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements?hl=zh-tw)，管理 BigQuery 的資料輸入和輸出。
 
-## BigQuery SQL 語言
+## BigQuery SQL 語法
 
-BigQuery 支援 GoogleSQL 語法，建議所有新專案都使用這種語法。您也可以使用舊版 SQL 方言，但[設有限制](https://docs.cloud.google.com/bigquery/docs/legacy-sql-feature-availability?hl=zh-tw)。建議您[從舊版 SQL 遷移至 GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql?hl=zh-tw)。
+BigQuery 支援 GoogleSQL 語法，建議所有新專案都使用這種語法。您也可以使用舊版 SQL 方言，但[設有一些限制](https://docs.cloud.google.com/bigquery/docs/legacy-sql-feature-availability?hl=zh-tw)。建議您[從舊版 SQL 遷移至 GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql?hl=zh-tw)。
 
 ### 變更為使用非預設方言
 
@@ -100,7 +100,7 @@ Google Cloud 控制台的預設方言是 GoogleSQL。如要將方言變更為舊
 
 **將 GoogleSQL 設為預設方言**
 
-如要將指令列工具和互動殼層的預設方言設為 GoogleSQL，您可以編輯指令列工具的設定檔：`.bigqueryrc`。
+如要將指令列工具和互動殼層的預設方言設為 GoogleSQL，您可以編輯指令列工具的設定檔 `.bigqueryrc`。
 
 如要進一步瞭解 `.bigqueryrc`，請參閱[設定指令專屬旗標預設值](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool?hl=zh-tw#setting_default_values_for_command-line_flags)的相關說明。
 
@@ -126,7 +126,7 @@ Google Cloud 控制台的預設方言是 GoogleSQL。如要將方言變更為舊
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
-根據預設，C# 程式庫會使用 GoogleSQL。
+C# 程式庫預設使用 GoogleSQL。
 
 **切換至舊版 SQL 方言**
 
@@ -438,11 +438,11 @@ end
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-11 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-11 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

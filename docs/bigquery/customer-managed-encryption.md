@@ -88,7 +88,7 @@ bq-PROJECT_NUMBER@bigquery-encryption.iam.gserviceaccount.com
 1. 前往 Google Cloud 控制台的「資訊主頁」[頁面](https://console.cloud.google.com/home?hl=zh-tw)。
 
    [前往「資訊主頁」頁面](https://console.cloud.google.com/首頁?hl=zh-tw)
-2. 按一下頁面頂端的 [Select from] (可用的選項) 下拉式清單。在顯示的「Select from」(可用的選項) 視窗中，選取您的專案。
+2. 按一下頁面頂端的「Select from」下拉式清單。在顯示的「Select from」(可用的選項) 視窗中，選取您的專案。
 3. 專案資訊主頁的「Project info」(專案資訊) 卡片會顯示專案 ID 和專案編號。
 4. 在下列字串中，將 PROJECT\_NUMBER 替換為您的專案編號。這個新字串會識別您的 BigQuery 服務帳戶 ID。
 
@@ -1034,5 +1034,5 @@ public class CopyTableCMEK {
     String sourceTableId = "MY_SOURCE_TABLE_NAME";
     String kmsKeyName = "MY_KMS_KEY_NAME";
     EncryptionConfiguration encryption =
-        EncryptionConfiguration.newBuilder().setKmsKeyName(
+        EncryptionConfiguration.newBuilder().setKmsKeyName
 ```

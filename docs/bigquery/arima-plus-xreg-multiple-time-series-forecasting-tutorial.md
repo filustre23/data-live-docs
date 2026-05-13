@@ -12,7 +12,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 本教學課程說明如何使用[多元時間序列模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series?hl=zh-tw)，根據多個輸入特徵的歷史值，預測特定資料欄的未來值。
 
-本教學課程會預測多個時間序列。系統會針對一或多個指定資料欄中的每個值，計算每個時間點的預測值。舉例來說，如果您想預測天氣，並指定包含州別資料的資料欄，預測資料會包含州別 A 所有時間點的預測值，接著是州別 B 所有時間點的預測值，依此類推。如果您想預測天氣，並指定包含州和城市資料的資料欄，預測資料會包含州 A 和城市 A 所有時間點的預測值，然後是州 A 和城市 B 所有時間點的預測值，依此類推。
+本教學課程會預測多個時間序列。系統會針對一或多個指定資料欄中的每個值，計算每個時間點的預測值。舉例來說，如果您想預測天氣，並指定包含州別資料的資料欄，預測資料會包含州別 A 所有時間點的預測值，接著是州別 B 所有時間點的預測值，依此類推。假設您想預測天氣，並指定包含州和城市資料的資料欄，預測資料就會包含州 A 和城市 A 所有時間點的預測值，然後是州 A 和城市 B 所有時間點的預測值，依此類推。
 
 本教學課程會使用公開的
 [`bigquery-public-data.iowa_liquor_sales.sales`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&%3Bd=iowa_liquor_sales&%3Bpage=dataset&%3Bt=sales&%3Bpage=table&hl=zh-tw)
@@ -151,8 +151,8 @@ Google uses AI technology to translate content into your preferred language. AI 
 * `store_number`：下單商店的專屬編號
 * `item_number`：訂購商品的專屬編號
 * `bottles_sold`：訂購的相關商品瓶數
-* `temperature`：訂購當天商店所在位置的平均溫度
-* `humidity`：訂單日期當天，商店所在位置的平均濕度
+* `temperature`：訂單日期當天，商店所在位置的平均溫度
+* `humidity`：訂單日期當天，商店位置的平均濕度
 
 請按照下列步驟建立輸入資料表：
 
@@ -218,7 +218,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 建立時間序列模型
 
-建立時間序列模型，預測 2022 年 9 月 1 日前，`bqml_tutorial.iowa_liquor_sales_with_weather` 表格中每個日期的商店 ID 和項目 ID 組合所售出的瓶裝水數量。在預測期間，使用商店位置在各日期的平均溫度和濕度做為評估特徵。`bqml_tutorial.iowa_liquor_sales_with_weather` 資料表中約有 100 萬種不同的商品編號和商店編號組合，這表示有 100 萬個不同的時間序列需要預測。
+建立時間序列模型，預測 2022 年 9 月 1 日前，`bqml_tutorial.iowa_liquor_sales_with_weather` 資料表中每個日期的商店 ID 和項目 ID 組合所售出的瓶裝水數量。在預測期間，使用商店位置在各日期的平均溫度和濕度做為評估特徵。`bqml_tutorial.iowa_liquor_sales_with_weather` 資料表中約有 100 萬種不同的商品編號和商店編號組合，也就是說，有 100 萬個不同的時間序列需要預測。
 
 請按照下列步驟建立模型：
 
@@ -326,7 +326,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 評估預測準確率
 
-在模型未接受訓練的資料上執行模型，評估模型的預測準確度。您可以使用 `ML.EVALUATE` 函式執行這項操作。`ML.EVALUATE` 函式會獨立評估每個時間序列。
+在模型未接受訓練的資料上執行模型，評估模型的預測準確度。您可以使用 `ML.EVALUATE` 函式執行這項操作。`ML.EVALUATE` 函式會分別評估每個時間序列。
 
 在下列 GoogleSQL 查詢中，第二個 `SELECT` 陳述式提供含有未來特徵的資料，用於預測未來值，以便與實際資料比較。
 
@@ -383,7 +383,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    結果應如下所示：
 
-   結果中的 `anomaly_probability` 欄會指出特定 `bottles_sold` 欄值異常的可能性。
+   結果中的 `anomaly_probability` 欄會指出特定 `bottles_sold` 欄值是否異常。
 
    如要進一步瞭解輸出資料欄，請參閱[`ML.DETECT_ANOMALIES`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-anomalies?hl=zh-tw)。
 
@@ -469,11 +469,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

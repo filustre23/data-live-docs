@@ -6,7 +6,7 @@ info
 
 This tutorial is intended for users with an **Editor**, **Manager**, or **Admin** role.
 
-This tutorial covers more advanced functionality for new Editors in Hex. If you’re brand new to Hex, check out [**Hex Basics**](/tutorials/quickstart/hex-basics) first to get started.
+This tutorial covers more advanced functionality for new Editors in Hex. If you are brand new to Hex, start with [**Hex 101**](/tutorials/quickstart/hex-basics).
 
 ## 1. ❔ SQL Deep Dive ❔[​](#1--sql-deep-dive- "Direct link to 1. ❔ SQL Deep Dive ❔")
 

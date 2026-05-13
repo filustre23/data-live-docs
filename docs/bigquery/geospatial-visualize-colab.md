@@ -22,7 +22,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 您可以使用公開資料集建立下列圖表：
 
-* Ford GoBike Share 資料集的所有共享單車站點**散佈圖**
+* Ford GoBike Share 資料集的所有共享單車站點**散布圖**
 * 舊金山鄰里資料集中的**多邊形**
 * 按社區劃分的共享單車租借站數量**等值線地圖**
 * 舊金山警察局報告資料集的事件**熱度圖**
@@ -148,7 +148,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 建立 Colab 筆記本
 
-本教學課程會建立 Colab 筆記本，以視覺化方式呈現地理空間分析資料。如要在 Colab、Colab Enterprise 或 BigQuery Studio 中開啟筆記本的預先建構版本，請按一下教學課程 GitHub 版本頂端的連結：[在 Colab 中進行 BigQuery 地理空間資料視覺化](https://github.com/GoogleCloudPlatform/bigquery-utils/blob/master/notebooks/bigquery_geospatial_visualization.ipynb)。
+本教學課程會建立 Colab 筆記本，以視覺化方式呈現地理空間分析資料。如要在 Colab、Colab Enterprise 或 BigQuery Studio 中開啟筆記本的預先建構版本，請按一下教學課程 GitHub 版本頂端的連結「BigQuery Geospatial Visualization in Colab」(在 Colab 中進行 BigQuery 地理空間資料視覺化)。
 
 1. 開啟 Colab。
 
@@ -190,14 +190,14 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    完成授權流程後，Colab 筆記本不會產生任何輸出內容。儲存格旁的勾號表示程式碼已順利執行。
 
-### 選用：透過 Google 地圖驗證
+### 選用：使用 Google 地圖驗證
 
-如果您使用 Google 地圖平台做為基本地圖的地圖供應商，請務必提供 Google 地圖平台 API 金鑰。筆記本會從 Colab 密鑰擷取金鑰。
+如果您使用 Google Maps Platform 做為基本地圖的地圖供應商，請務必提供 Google Maps Platform API 金鑰。筆記本會從 Colab Secrets 擷取金鑰。
 
 只有在使用 Maps API 時才需要執行這個步驟。如果沒有透過 Google 地圖平台進行驗證，`pydeck` 會改用 `carto` 地圖。
 
 1. 按照 Google 地圖說明文件「[使用 API 金鑰](https://developers.google.com/maps/documentation/javascript/get-api-key?hl=zh-tw#create-api-keys)」頁面的操作說明，取得 Google Maps API 金鑰。
-2. 切換至 Colab 筆記本，然後按一下「密碼」vpn\_key。
+2. 切換至 Colab 筆記本，然後按一下「祕密」vpn\_key。
 3. 按一下「新增密碼」。
 4. 在「Name」(名稱) 中輸入 **`GMP_API_KEY`**。
 5. 在「Value」部分輸入先前產生的 Maps API 金鑰值。
@@ -214,7 +214,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    else:
      GMP_API_KEY = None
    ```
-9. 如果同意，請在系統提示時按一下「授予存取權」，讓筆記本存取您的金鑰。
+9. 如果同意，請在系統提示時按一下「授予存取權」，讓筆記本存取金鑰。
 10. 按一下「執行儲存格」play\_circle\_filled。
 
     完成授權流程後，Colab 筆記本不會產生任何輸出內容。儲存格旁的勾號表示程式碼已順利執行。
@@ -229,7 +229,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 接著匯入 `h3` 和 `pydeck` 程式庫，以及下列 Python 地理空間程式庫：
 
-* [`geopandas`](https://geopandas.org/en/stable/index.html) 擴充 [`pandas`](https://pandas.pydata.org/) 使用的資料類型，允許對幾何類型執行空間作業。
+* [`geopandas`](https://geopandas.org/en/stable/index.html) 擴充 [`pandas`](https://pandas.pydata.org/) 使用的資料類型，允許對幾何類型執行空間運算。
 * [`shapely`](https://shapely.readthedocs.io/en/stable/index.html)，用於操控和分析個別平面幾何物件。
 * [`branca`](https://python-visualization.github.io/branca/)，即可生成 HTML 和 JavaScript 色碼表。
 * [`geemap.deck`](https://geemap.org/deck/)
@@ -282,7 +282,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    執行程式碼後，Colab 筆記本不會產生任何輸出內容。儲存格旁的勾號表示程式碼已順利執行。
 
-## 建立共用處理常式
+## 建立共用日常安排
 
 在本節中，您會建立共用常式，在基本地圖上算繪圖層。
 
@@ -317,7 +317,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 建立散布圖
 
-在本節中，您將從 `bigquery-public-data.san_francisco_bikeshare.bikeshare_station_info` 資料表擷取資料，建立舊金山 Ford GoBike Share 公開資料集中所有共享單車租借站的散佈圖。散布圖是使用 `deck.gl` 架構中的[圖層](https://deckgl.readthedocs.io/en/latest/layer.html#pydeck.bindings.layer.Layer)和[散布圖層](https://deck.gl/docs/api-reference/layers/scatterplot-layer)建立。
+在本節中，您將從 `bigquery-public-data.san_francisco_bikeshare.bikeshare_station_info` 資料表擷取資料，建立舊金山 Ford GoBike Share 公開資料集中所有共享單車租借站的散布圖。散布圖是使用 `deck.gl` 架構中的[圖層](https://deckgl.readthedocs.io/en/latest/layer.html#pydeck.bindings.layer.Layer)和[散布圖層](https://deck.gl/docs/api-reference/layers/scatterplot-layer)建立。
 
 當您需要查看個別點的子集 (也稱為*抽查*) 時，散佈圖就派得上用場。
 
@@ -381,9 +381,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    輸出結果會與下列內容相似：
 
-如要算繪點，您必須從單車共乘資料集的 `station_geom` 欄位中，將經緯度擷取為 x 和 y 座標。
+如要算繪點，您必須從共享單車資料集的 `station_geom` 欄位中，將經度和緯度擷取為 x 和 y 座標。
 
-由於 `gdf_sf_bikestations` 是 `geopandas.GeoDataFrame`，因此座標會直接從其 `station_geom` 幾何資料欄存取。您可以使用資料欄的 `.x` 屬性擷取經度，並使用 `.y` 屬性擷取緯度。然後儲存在新的經緯度欄中。
+由於 `gdf_sf_bikestations` 是 `geopandas.GeoDataFrame`，因此可直接從其 `station_geom` 幾何圖形資料欄存取座標。您可以使用資料欄的 `.x` 屬性擷取經度，並使用 `.y` 屬性擷取緯度。然後儲存在新的經緯度欄中。
 
 1. 如要插入程式碼儲存格，請按一下 add「程式碼」。
 2. 如要從「`station_geom`」欄擷取經緯度值，請輸入下列程式碼：
@@ -397,7 +397,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    執行程式碼後，Colab 筆記本不會產生任何輸出內容。儲存格旁的勾號表示程式碼已順利執行。
 4. 如要插入程式碼儲存格，請按一下 add「程式碼」。
-5. 如要根據先前擷取的經緯度值，繪製自行車共享車站的散佈圖，請輸入下列程式碼：
+5. 如要根據先前擷取的經緯度值，繪製共享單車站的散佈圖，請輸入下列程式碼：
 
    ```
    # Render a scatter plot using pydeck with the extracted longitude and
@@ -432,9 +432,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 如需所有支援物件的清單，請參閱 [`GEOGRAPHY` 類型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#geography_type)說明文件。
 
-如果您取得地理空間資料，但不知道預期形狀，可以將資料視覺化，找出形狀。您可以將地理資料轉換為 [`GeoJSON`](https://geojson.org/) 格式，以視覺化呈現形狀。接著，您可以使用 `deck.gl` 架構中的 [`GeoJSON` 圖層](https://deck.gl/docs/api-reference/layers/geojson-layer)，將 `GeoJSON` 資料視覺化。
+如果您取得地理空間資料，但不知道預期形狀，可以將資料視覺化，找出形狀。您可以將地理資料轉換為 [`GeoJSON`](https://geojson.org/) 格式，以視覺化呈現形狀。接著，您可以使用 `deck.gl` 框架中的 [`GeoJSON` 層](https://deck.gl/docs/api-reference/layers/geojson-layer)，將 `GeoJSON` 資料視覺化。
 
-在本節中，您將查詢舊金山鄰近地區資料集中的地理資料，然後以多邊形呈現這些資料。
+在本節中，您將查詢舊金山鄰近地區資料集中的地理資料，然後以視覺化方式呈現多邊形。
 
 1. 如要插入程式碼儲存格，請按一下 add「程式碼」。
 2. 如要查詢「舊金山鄰近地區」資料集 `bigquery-public-data.san_francisco_neighborhoods.boundaries` 資料表中的地理資料，請輸入下列程式碼。這段程式碼會使用 [`%%bigquery` magic 函式](https://googleapis.dev/python/bigquery-magics/latest/)執行查詢，並以 DataFrame 形式傳回結果：
@@ -513,12 +513,12 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 製作 choropleth 地圖
 
-如果您要探索的資料包含難以轉換為 `GeoJSON` 格式的多邊形，可以改用 `deck.gl` 架構的[多邊形圖層](https://deck.gl/docs/api-reference/layers/polygon-layer)。多邊形圖層可以處理特定類型的輸入資料，例如點陣列。
+如果您要探索的資料包含難以轉換為 `GeoJSON` 格式的多邊形，可以改用 `deck.gl` 框架的[多邊形圖層](https://deck.gl/docs/api-reference/layers/polygon-layer)。多邊形圖層可以處理特定類型的輸入資料，例如點陣列。
 
-在本節中，您將使用多邊形圖層算繪點陣列，並使用結果算繪 choropleth 地圖。等值線地圖會結合「舊金山鄰近地區」資料集和「舊金山 Ford GoBike 共享單車」資料集中的資料，顯示各鄰近地區的共享單車站密度。
+在本節中，您將使用多邊形圖層算繪點陣列，並使用結果算繪 choropleth 地圖。等值區域地圖會結合「舊金山鄰近地區」資料集和「舊金山 Ford GoBike 共享單車」資料集中的資料，顯示各鄰近地區的共享單車站密度。
 
 1. 如要插入程式碼儲存格，請按一下 add「程式碼」。
-2. 如要匯總及計算每個鄰近地區的電台數量，並建立包含點陣列的 `polygon` 欄，請輸入下列程式碼：
+2. 如要匯總及計算每個社區的電台數量，並建立包含點陣列的 `polygon` 欄，請輸入下列程式碼：
 
    ```
    # Aggregate and count the number of stations per neighborhood.
@@ -612,7 +612,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    `Job ID 12345-1234-5678-1234-123456789 successfully executed: 100%`
 4. 如要插入程式碼儲存格，請按一下 add「程式碼」。
-5. 如要計算每個事件的經緯度儲存格，請匯總每個儲存格的事件、建構 `geopandas` DataFrame，並為熱度圖層新增每個六邊形的中心，然後輸入下列程式碼：
+5. 如要計算每個事件的經緯度儲存格，請匯總每個儲存格的事件、建構 `geopandas` DataFrame，並為熱視圖層新增每個六邊形的中心，然後輸入下列程式碼：
 
    ```
    # Compute the cell for each incident's latitude and longitude.
@@ -755,11 +755,11 @@ gcloud projects delete PROJECT_ID
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

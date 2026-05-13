@@ -442,9 +442,5 @@ JSON 檔案中的 `condition` 欄位支援下列值，每個值都有 `partition
    fi
 
    # Remove trailing slashes from GCS_BASE_PATH, if any.
-   GCS_BASE_PATH=$(echo "${GCS_BASE_PATH}" | sed 's:/*$::')
-
-   # Create unique timestamp and directories for this run
-   EPOCH=$(date +%s)
-   LOCAL_LOG_DIR="${LOCAL_BASE_DIR}/logs"<
+   GCS_BASE_PATH=$(echo "${GCS_BASE_PATH}"
    ```

@@ -229,6 +229,4 @@ BigQuery 提供下列其他匯總函式：
 | `HIER_LEVEL` | BigQuery 不支援階層式查詢。 |
 | `HIER_MEMBER_NAME` | BigQuery 不支援階層式查詢。 |
 | `HIER_ORDER` | BigQuery 不支援階層式查詢。 |
-| `HIER_UNIQUE_MEMBER_NAME` | BigQuery 不支援階層式查詢。 |
-| `LAST_VALUE` | `LAST_VALUE` |
-| `LAG` | `LAG` |
+| `HIER_UNIQUE_MEMBER_NAME` |

@@ -12,7 +12,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 本教學課程說明如何使用 BigQuery ML 中的[超參數調整](https://docs.cloud.google.com/bigquery/docs/hp-tuning-overview?hl=zh-tw)功能，調整機器學習模型並提升效能。
 
-如要執行超參數調整，請指定 `CREATE MODEL` 陳述式的 [`NUM_TRIALS` 選項](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create?hl=zh-tw#num_trials)，並搭配其他模型專屬選項。設定這些選項後，BigQuery ML 會訓練多個版本的模型 (或稱「試驗」)，每個版本都使用略有不同的參數，並傳回成效最佳的試驗。
+如要執行超參數調整，請指定 `CREATE MODEL` 陳述式的 [`NUM_TRIALS` 選項](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create?hl=zh-tw#num_trials)，並搭配其他模型專屬選項。設定這些選項後，BigQuery ML 會訓練多個版本的模型 (或*試驗*)，每個版本都有稍微不同的參數，並傳回成效最佳的試驗。
 
 本教學課程使用公開的[`tlc_yellow_trips_2018`範例資料表](https://console.cloud.google.com/bigquery?p=bigquery-public-data&%3Bd=new_york_taxi_trips&%3Bt=tlc_yellow_trips_2018&%3Bpage=table&hl=zh-tw)，其中包含 2018 年紐約市的計程車車程資訊。
 
@@ -92,7 +92,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 ## 所需權限
 
 * 如要建立資料集，您需要 `bigquery.datasets.create` IAM 權限。
-* 如要建立模型，您需要下列權限：
+* 如要建立模型，您必須具備下列權限：
 
   + `bigquery.jobs.create`
   + `bigquery.models.create`
@@ -227,7 +227,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    +---------------------+--------------------+------------------------+-----------------------+---------------------+---------------------+
    ```
 
-基準模型的 `r2_score` 值為負數，表示資料不適合使用該模型；[R2 分數](https://en.wikipedia.org/wiki/Coefficient_of_determination)越接近 1，表示模型越適合使用。
+基準模型的 `r2_score` 值為負數，表示資料適配度不佳；[R2 分數](https://en.wikipedia.org/wiki/Coefficient_of_determination)越接近 1，表示模型適配度越好。
 
 ## 建立線性迴歸模型並調整超參數
 
@@ -235,8 +235,8 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 您可以在 `CREATE MODEL` 陳述式中使用下列超參數調整選項：
 
-* 將測試次數設為 20 次。[`NUM_TRIALS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm?hl=zh-tw#num_trials)
-* [`MAX_PARALLEL_TRIALS`選項](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm?hl=zh-tw#max_parallel_trials)：在每個訓練工作中執行兩項試驗，總共執行十項工作和二十項試驗。這可縮短訓練所需時間。不過，這兩項並行試驗不會互相參考訓練結果。
+* [`NUM_TRIALS` 選項](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm?hl=zh-tw#num_trials)，將試驗次數設為 20 次。
+* [`MAX_PARALLEL_TRIALS`選項](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm?hl=zh-tw#max_parallel_trials)：在每個訓練工作中執行兩項試驗，總共執行十項工作和二十項試驗。這可縮短訓練所需時間。不過，這兩項並行試驗無法互相參考訓練結果。
 * [`L1_REG`選項](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm?hl=zh-tw#l1_reg)，可在不同試驗中嘗試不同的 L1 正規化值。L1 正則化會從模型中移除不相關的特徵，有助於避免[過度配適](https://developers.google.com/machine-learning/glossary/?hl=zh-tw#overfitting)。
 
 模型支援的其他超參數調整選項會使用預設值，如下所示：
@@ -266,9 +266,9 @@ Google uses AI technology to translate content into your preferred language. AI 
      `bqml_tutorial.taxi_tip_input`;
    ```
 
-   查詢約需 20 分鐘才能完成。
+   查詢大約需要 20 分鐘才能完成。
 
-## 取得訓練試驗的相關資訊
+## 取得訓練試用版資訊
 
 使用 `ML.TRIAL_INFO` 函式，取得所有試驗的相關資訊，包括超參數值、目標和狀態。這個函式也會根據這項資訊，傳回效能最佳的試驗。
 
@@ -427,11 +427,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

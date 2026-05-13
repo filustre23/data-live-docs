@@ -539,16 +539,5 @@ produced:
 ```
 -- ERROR
 SELECT COSINE_DISTANCE(
-  [(1, 9.0), (2, 7.0), (2, 8.0)], [(1, 8.0), (2, 4.0), (3, 5.0)]) AS results;
+  [(1, 9.0), (2, 7.0), (2, 8.0)], [(1, 8.0), (2, 4.0), (3, 5.0)]) AS
 ```
-
-## `COT`
-
-```
-COT(X)
-```
-
-**Description**
-
-Computes the cotangent for the angle of `X`, where `X` is specified in radians.
-`X` can be any data t

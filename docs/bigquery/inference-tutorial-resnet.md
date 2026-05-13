@@ -22,7 +22,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ResNet 50 模型會分析圖片檔案，並輸出代表圖片屬於相應類別可能性的向量批次 (logits)。詳情請參閱[模型 TensorFlow Hub 頁面](https://tfhub.dev/tensorflow/resnet_50/classification/1)的「用法」一節。
 
-ResNet 50 模型輸入會採用 [`DType`](https://www.tensorflow.org/api_docs/python/tf/dtypes/DType?hl=zh-tw) = `float32` 形狀的張量 `float32`。`[-1, 224, 224, 3]`輸出內容是形狀為 `[-1, 1024]` 的張量陣列。`tf.float32`
+ResNet 50 模型輸入會採用 [`DType`](https://www.tensorflow.org/api_docs/python/tf/dtypes/DType?hl=zh-tw) = `float32` 形狀的張量 `float32`。`[-1, 224, 224, 3]`輸出內容是形狀為 `[-1, 1024]` 的 `tf.float32` 張量陣列。
 
 ## 所需權限
 
@@ -137,7 +137,7 @@ ResNet 50 模型輸入會採用 [`DType`](https://www.tensorflow.org/api_docs/py
 
   [Enable the APIs](https://console.cloud.google.com/flows/enableapi?apiid=bigquery.googleapis.com%2Cbigqueryconnection.googleapis.com&hl=zh-tw)
 
-### 建立保留項目
+### 建立預留項目
 
 如要搭配物件資料表使用[匯入的模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/inference-overview?hl=zh-tw#inference_using_imported_models)，您必須[建立保留項目](https://docs.cloud.google.com/bigquery/docs/reservations-tasks?hl=zh-tw#create_reservations)，並使用 BigQuery [Enterprise 或 Enterprise Plus 版](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)，然後[建立保留項目指派作業](https://docs.cloud.google.com/bigquery/docs/reservations-assignments?hl=zh-tw#create_reservation_assignments)，並使用 `QUERY` 工作類型。
 
@@ -182,7 +182,7 @@ ResNet 50 模型輸入會採用 [`DType`](https://www.tensorflow.org/api_docs/py
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
 
-   如果沒有看到左側窗格，請按一下「展開左側窗格」圖示 last\_page 開啟窗格。
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Explorer」窗格中，點選「新增資料」add。
 
    「新增資料」對話方塊隨即開啟。
@@ -198,7 +198,9 @@ ResNet 50 模型輸入會採用 [`DType`](https://www.tensorflow.org/api_docs/py
 
 ### bq
 
-1. 在 Cloud Shell 中執行 [`bq mk` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#mk-connection)，建立連線：
+1. 在 Cloud Shell 中執行
+   [`bq mk` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#mk-connection)
+   ，建立連線：
 
    ```
    bq mk --connection --location=us --connection_type=CLOUD_RESOURCE \
@@ -211,7 +213,7 @@ ResNet 50 模型輸入會採用 [`DType`](https://www.tensorflow.org/api_docs/py
    ```
 3. 從 `properties` 欄複製 `serviceAccountId` 屬性的值，並儲存在某處。您需要這項資訊，才能將權限[授予](#grant-permissions)連線的服務帳戶。
 
-## 建立 Cloud Storage 值區
+## 建立 Cloud Storage bucket
 
 [建立 Cloud Storage bucket](https://docs.cloud.google.com/storage/docs/creating-buckets?hl=zh-tw)，存放模型檔案。
 
@@ -267,7 +269,9 @@ gcloud storage buckets add-iam-policy-binding gs://BUCKET_NAME \
 
 ### bq
 
-在 Cloud Shell 中執行 [`bq mk` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#mk-table)，建立連線：
+在 Cloud Shell 中執行
+[`bq mk` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#mk-table)
+，建立連線：
 
 ```
 bq mk --table \
@@ -313,7 +317,7 @@ resnet_inference_test.vision_images
 5. 按一下 `resnet` 模型。
 6. 在隨即開啟的模型窗格中，按一下「結構定義」分頁標籤。
 7. 查看「標籤」部分。這會識別模型輸出的欄位。在本例中，欄位名稱值為 `activation_49`。
-8. 查看「功能」部分。這會指出必須輸入模型中的欄位。您可以在 `SELECT` 陳述式中參照這些函式，以供 `ML.DECODE_IMAGE` 函式使用。在本例中，欄位名稱值為 `input_1`。
+8. 查看「功能」部分。這會識別必須輸入模型中的欄位。您可以在 `SELECT` 陳述式中參照這些函式，以供 `ML.DECODE_IMAGE` 函式使用。在本例中，欄位名稱值為 `input_1`。
 
 ## 執行推論
 
@@ -371,11 +375,11 @@ resnet_inference_test.vision_images
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

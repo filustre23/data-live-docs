@@ -414,7 +414,5 @@ autodetection.
 ```
 LOAD DATA INTO mydataset.table1
   FROM FILES(
-    format='CSV',
-    uris = ['gs://bucket/path/file1.csv', 'gs://bucket/path/file2.csv']
-  )
+    format
 ```

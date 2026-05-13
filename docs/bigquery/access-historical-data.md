@@ -30,10 +30,9 @@ FROM `mydataset.mytable`
   FOR SYSTEM_TIME AS OF TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 HOUR);
 ```
 
-**注意：** GoogleSQL 支援 `FOR SYSTEM_TIME AS OF` 子句。
-在舊版 SQL 中，[時間修飾符](https://docs.cloud.google.com/bigquery/docs/table-decorators?hl=zh-tw#time_decorators)提供對等功能。
+**注意：** GoogleSQL 支援 `FOR SYSTEM_TIME AS OF` 子句。在舊版 SQL 中，[時間修飾符](https://docs.cloud.google.com/bigquery/docs/table-decorators?hl=zh-tw#time_decorators)提供對等功能。
 
-如果時間戳記指定的時間早於時間回溯期，或早於資料表建立時間，查詢就會失敗並傳回類似下列的錯誤：
+如果時間戳記指定的時間早於時間旅行視窗，或是在資料表建立之前，查詢就會失敗並傳回類似下列的錯誤：
 
 ```
 Invalid snapshot time 1601168925462 for table
@@ -52,15 +51,15 @@ Not found: Table myproject:mydataset.table was not found in location LOCATION
 
 如要從歷來資料還原資料表，請將歷來資料複製到新資料表。只要在時間回溯期內還原資料表，即使資料表已遭刪除或過期，您仍可複製歷來資料。
 
-從歷史資料還原資料表時，來源資料表的[標記](https://docs.cloud.google.com/bigquery/docs/tags?hl=zh-tw)不會複製到目的地資料表。資料表分區資訊也不會複製到目的地資料表。如要重新建立原始資料表的分區架構，請在 [Cloud Logging](https://docs.cloud.google.com/logging/docs/view/logs-explorer-interface?hl=zh-tw) 中查看初始資料表建立要求，並使用該資訊將還原的資料表分區。
+從歷來資料還原資料表時，來源資料表的[標記](https://docs.cloud.google.com/bigquery/docs/tags?hl=zh-tw)不會複製到目的地資料表。資料表分區資訊也不會複製到目的地資料表。如要重新建立原始資料表的分區架構，請在 [Cloud Logging](https://docs.cloud.google.com/logging/docs/view/logs-explorer-interface?hl=zh-tw) 中查看初始資料表建立要求，並使用該資訊將還原的資料表分區。
 
-如果資料表已刪除，但仍在時間旅行視窗內，您可以將資料表複製到新資料表，並使用 `@<time>` 時間修飾符，藉此還原資料表。即使使用時間修飾符，您也無法查詢已刪除的資料表。你必須先還原。
+如要還原已刪除但仍在時間旅行視窗內的資料表，請使用 `@<time>` 時間修飾符將資料表複製到新資料表。即使使用時間修飾符，您也無法查詢已刪除的資料表。你必須先還原。
 
 請搭配 `@<time>` 時間裝飾器使用下列語法：
 
 * `tableid@TIME`，其中 `TIME` 是自 Unix 紀元起經過的毫秒數。
-* `tableid@-TIME_OFFSET`，其中 `TIME_OFFSET` 是相對於目前時間的偏移量 (以毫秒為單位)。
-* `tableid@0`：指定可用的最舊歷來資料。
+* `tableid@-TIME_OFFSET`，其中 `TIME_OFFSET` 是以毫秒為單位的相對偏移量，表示與目前時間的差距。
+* `tableid@0`：指定最舊的可用歷來資料。
 
 如要還原資料表，請選取下列其中一個選項：
 
@@ -347,11 +346,11 @@ print(
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

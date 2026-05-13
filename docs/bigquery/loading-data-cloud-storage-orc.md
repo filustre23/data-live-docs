@@ -151,7 +151,7 @@ BigQuery 支援下列 ORC 檔案內容的壓縮轉碼器：
 1. 在「來源」部分中，從「建立資料表來源」清單中選取「Google Cloud Storage」。
    接著，按照下列步驟操作：
    1. 從 Cloud Storage bucket 選取檔案，或輸入 [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#gcs-uri)。
-      您無法在 Google Cloud 控制台中加入多個 URI，但支援使用[萬用字元](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#load-wildcards)。Cloud Storage 值區的位置必須與要建立、附加或覆寫的表格所在的資料集位置相同。
+      您無法在 Google Cloud 控制台中加入多個 URI，但支援使用[萬用字元](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#load-wildcards)。Cloud Storage 值區的位置必須與要建立、附加或覆寫的資料表所在的資料集位置相同。
    2. 在「File format」(檔案格式) 部分選取「ORC」。
 2. 在「目的地」部分，指定下列詳細資料：
    1. 在「Dataset」(資料集) 部分，選取要建立資料表的資料集。
@@ -647,7 +647,7 @@ end
 1. 在「來源」部分中，從「建立資料表來源」清單中選取「Google Cloud Storage」。
    接著，按照下列步驟操作：
    1. 從 Cloud Storage bucket 選取檔案，或輸入 [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#gcs-uri)。
-      您無法在 Google Cloud 控制台中加入多個 URI，但支援使用[萬用字元](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#load-wildcards)。Cloud Storage 值區的位置必須與要建立、附加或覆寫的表格所在的資料集位置相同。
+      您無法在 Google Cloud 控制台中加入多個 URI，但支援使用[萬用字元](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#load-wildcards)。Cloud Storage 值區的位置必須與要建立、附加或覆寫的資料表所在的資料集位置相同。
    2. 在「File format」(檔案格式) 部分選取「ORC」。
 **注意：**您可以在附加或覆寫資料表時修改資料表的結構定義。如要進一步瞭解載入作業期間支援的結構定義變更，請參閱「[修改資料表結構定義](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas?hl=zh-tw)」一文。
 2. 在「目的地」部分，指定下列詳細資料：

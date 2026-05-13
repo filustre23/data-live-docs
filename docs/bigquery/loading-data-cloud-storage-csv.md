@@ -126,7 +126,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 1. 在「來源」部分中，從「建立資料表來源」清單中選取「Google Cloud Storage」。
    接著，按照下列步驟操作：
    1. 從 Cloud Storage bucket 選取檔案，或輸入 [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#gcs-uri)。
-      您無法在 Google Cloud 控制台中加入多個 URI，但支援使用[萬用字元](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#load-wildcards)。Cloud Storage 值區的位置必須與要建立、附加或覆寫的表格所在的資料集位置相同。
+      您無法在 Google Cloud 控制台中加入多個 URI，但支援使用[萬用字元](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#load-wildcards)。Cloud Storage 值區的位置必須與要建立、附加或覆寫的資料表所在的資料集位置相同。
    2. 在「File format」(檔案格式) 部分，選取「CSV」。
 2. 在「目的地」部分，指定下列詳細資料：
    1. 在「Dataset」(資料集) 部分，選取要建立資料表的資料集。
@@ -849,5 +849,5 @@ public class LoadPartitionedTable {
       if (completedJob == null) {
         throw new Exception("Job not executed since it no longer exists.");
       } else if (completedJob.getStatus().getError() != null) {
-        // You can also look at queryJ
+        // You can also look at query
 ```

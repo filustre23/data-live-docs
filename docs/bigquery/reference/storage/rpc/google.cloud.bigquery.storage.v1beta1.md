@@ -260,7 +260,3 @@ All fields in this message optional.
 ## TableReadOptions
 
 Options dictating how we read a table.
-
-| Fields | |
-| --- | --- |
-| `selected_fields[]` |  |

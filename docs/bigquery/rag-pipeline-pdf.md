@@ -18,7 +18,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 本教學課程會逐步引導您建立檢索增強生成 (RAG) 管道，並以剖析的 PDF 內容為基礎。
 
-由於 PDF 檔案結構複雜，且包含文字、圖表和表格，因此在 RAG 管道中使用這類檔案 (例如財務文件) 可能會遇到困難。本教學課程說明如何搭配使用 BigQuery ML 功能和 Document AI 的版面配置剖析器，根據從 PDF 檔案擷取的關鍵資訊，建構 RAG 管道。
+由於 PDF 檔案 (例如財務文件) 結構複雜，且包含文字、圖表和表格，因此難以在 RAG 管道中使用。本教學課程說明如何搭配使用 BigQuery ML 功能和 Document AI 的版面配置剖析器，根據從 PDF 檔案擷取的關鍵資訊，建構 RAG 管道。
 
 您也可以使用 [Colab Enterprise 筆記本](https://github.com/GoogleCloudPlatform/generative-ai/blob/main/gemini/use-cases/retrieval-augmented-generation/rag_with_bigquery.ipynb)執行本教學課程。
 
@@ -37,7 +37,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 * 使用遠端模型和 [`AI.GENERATE_EMBEDDING` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding?hl=zh-tw)，從剖析的 PDF 內容生成嵌入，然後將這些嵌入寫入 BigQuery 資料表。嵌入是 PDF 內容的數值表示法，可讓您對 PDF 內容執行語意搜尋和擷取。
 * 使用嵌入的 [`VECTOR_SEARCH` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions?hl=zh-tw#vector_search)，找出語意相似的 PDF 內容。
 * 建立[遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw)，以便從 BigQuery 使用 Gemini 文字生成模型。
-* 使用遠端模型和 [`AI.GENERATE_TEXT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text?hl=zh-tw)生成文字，並運用向量搜尋結果來增強提示輸入內容，進而提升結果品質，執行檢索增強生成 (RAG) 作業。
+* 使用 [`AI.GENERATE_TEXT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text?hl=zh-tw)，透過遠端模型執行檢索增強生成 (RAG)，生成文字、使用向量搜尋結果來增強提示輸入內容，並提升結果品質。
 
 ## 費用
 
@@ -70,7 +70,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    **選取或建立專案所需的角色**
 
    * **選取專案**：選取專案時，不需要具備特定 IAM 角色，只要您已獲授角色，即可選取任何專案。
-   * **建立專案**：如要建立專案，您需要具備專案建立者角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   * **建立專案**：如要建立專案，您需要「專案建立者」角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
    **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，而不要選取現有專案。完成這些步驟後，您就可以刪除專案，並移除與該專案相關聯的所有資源。
 
    [前往專案選取器](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
@@ -89,7 +89,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 * 建立 Cloud Storage bucket 和物件：Storage 管理員 (`roles/storage.storageAdmin`)
 * 建立文件處理器：Document AI 編輯者 (`roles/documentai.editor`)
-* 建立及使用 BigQuery 資料集、連結和模型：
+* 建立及使用 BigQuery 資料集、連線和模型：
   BigQuery 管理員 (`roles/bigquery.admin`)
 * 將權限授予連線的服務帳戶：專案 IAM 管理員 (`roles/resourcemanager.projectIamAdmin`)
 
@@ -185,7 +185,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
 
-   如果沒有看到左側窗格，請按一下「展開左側窗格」圖示 last\_page 開啟窗格。
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Explorer」窗格中展開專案名稱，然後按一下「Connections」。
 4. 在「Connections」(連線) 頁面中，按一下「Create connection」(建立連線)。
 5. 在「連線類型」中，選擇「Vertex AI 遠端模型、遠端函式、BigLake 和 Spanner (Cloud 資源)」。
@@ -401,7 +401,7 @@ resource "google_bigquery_connection" "default" {
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
 2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
 
-   每項專案只需要執行一次這個指令，且可以在任何目錄中執行。
+   您只需要為每項專案執行一次這個指令，且可以在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
@@ -439,7 +439,7 @@ resource "google_bigquery_connection" "default" {
 
 ## 套用變更
 
-1. 檢查設定，確認 Terraform 即將建立或更新的資源符合您的預期：
+1. 查看設定，確認 Terraform 即將建立或更新的資源符合您的預期：
 
    ```
    terraform plan
@@ -496,8 +496,8 @@ gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount
 
 如要將範例 PDF 上傳至 Cloud Storage，請按照下列步驟操作：
 
-1. 前往 <https://www.federalreserve.gov/publications/files/scf23.pdf>，然後點選下載圖示 download，即可下載 `scf23.pdf` 範例 PDF。
-2. [建立 Cloud Storage 值區](https://docs.cloud.google.com/storage/docs/creating-buckets?hl=zh-tw)。
+1. 前往 <https://www.federalreserve.gov/publications/files/scf23.pdf>，然後按一下下載圖示 download，即可下載 `scf23.pdf` 範例 PDF。
+2. [建立 Cloud Storage bucket](https://docs.cloud.google.com/storage/docs/creating-buckets?hl=zh-tw)。
 3. [上傳](https://docs.cloud.google.com/storage/docs/uploading-objects?hl=zh-tw) `scf23.pdf` 檔案至 bucket。
 
 ## 建立物件資料表
@@ -804,11 +804,11 @@ gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

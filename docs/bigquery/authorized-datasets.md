@@ -24,9 +24,9 @@ BigQuery 中的[檢視區塊](https://docs.cloud.google.com/bigquery/docs/views-
 
 ### 授權檢視表
 
-如要讓使用者查詢檢視區塊，但不想授予他們檢視區塊所參照資源的直接存取權，可以使用[*已授權檢視區塊*](https://docs.cloud.google.com/bigquery/docs/authorized-views?hl=zh-tw)。建立授權檢視區時，您可以共用邏輯檢視區或具體化檢視區。授權具體化檢視表後，該檢視表即為「授權具體化檢視表」。
+如要讓使用者查詢檢視區塊，但不想授予他們檢視區塊所參照資源的直接存取權，可以使用[*授權 view*](https://docs.cloud.google.com/bigquery/docs/authorized-views?hl=zh-tw)。建立授權 view 時，您可以共用邏輯檢視區或具體化檢視區。授權具體化檢視表後，該檢視表即為*授權具體化檢視表*。
 
-舉例來說，授權檢視表可讓您與特定群組或使用者 (主體) 分享檢視表中的部分資料，而不必授予主體所有基礎資料的存取權。主體可以查看您分享的資料並對其執行查詢，但無法直接存取來源資料集。而是授權檢視表存取來源資料。
+舉例來說，授權檢視表可讓您與特定群組或使用者 (主體) 分享檢視表中的有限資料，而不必授予主體所有基礎資料的存取權。主體可以查看您分享的資料並對其執行查詢，但無法直接存取來源資料集。而是授權 view 可存取來源資料。
 
 ### 已獲授權的資料集
 
@@ -73,7 +73,7 @@ BigQuery 中的[檢視區塊](https://docs.cloud.google.com/bigquery/docs/views-
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
 
-   如果沒有看到左側窗格，請按一下「展開左側窗格」圖示 last\_page 開啟窗格。
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Explorer」窗格中展開專案，按一下「Datasets」(資料集)，然後按一下資料集。
 4. 在隨即顯示的詳細資料窗格中，按一下「共用」，然後選取「授權資料集」選項。
 5. 在隨即顯示的「Authorized dataset」(授權資料集) 窗格中，以以下格式輸入要授權的資料集「Dataset ID」(資料集 ID)：
@@ -160,7 +160,7 @@ BigQuery 中的[檢視區塊](https://docs.cloud.google.com/bigquery/docs/views-
 
 ## 撤銷資料集的授權
 
-刪除有權存取其他來源資料集的資料集後，來源資料集的[存取控制清單 (ACL)](https://docs.cloud.google.com/storage/docs/access-control/lists?hl=zh-tw) 最多可能需要 24 小時，才能完全反映這項變更。在這段期間：
+刪除有權存取其他來源資料集的資料集後，來源資料集的[存取控制清單 (ACL)](https://docs.cloud.google.com/storage/docs/access-control/lists?hl=zh-tw) 最多可能需要 24 小時，才會完全反映這項變更。在這段期間：
 
 * 您將無法透過已刪除的資料集存取來源資料。
 * 刪除的資料集可能仍會顯示在來源資料集的 ACL 中，並計入任何授權資料集限制。在 ACL 更新前，您可能無法建立新的授權資料集。
@@ -254,11 +254,11 @@ BigQuery 中的[檢視區塊](https://docs.cloud.google.com/bigquery/docs/views-
 | **權限** | **資源** |
 | --- | --- |
 | `bigquery.datasets.get` | 您要分享的資料集。 |
-| `bigquery.tables.getData` | 您要建立或更新的新檢視表所參照的共用資料集中的任何資料表或檢視表。 |
+| `bigquery.tables.getData` | 您要建立或更新的新檢視畫面所參照的共用資料集中的任何資料表或檢視表。 |
 | `bigquery.tables.create` | 您要在其中建立檢視區塊的授權資料集。 |
 | `bigquery.tables.update` | 您要更新檢視表的授權資料集。 |
 
-如要從授權資料集中[刪除檢視區塊](https://docs.cloud.google.com/bigquery/docs/managing-views?hl=zh-tw#delete_views)，您不需要任何額外權限。
+如要從授權資料集[刪除檢視區塊](https://docs.cloud.google.com/bigquery/docs/managing-views?hl=zh-tw#delete_views)，不需要任何額外權限。
 
 **注意：** 如要在授權資料集中建立或更新檢視區塊，您不需要具備共用資料集 (或任何其他參照資料集) 的 `bigquery.datasets.update` 權限。這項權限僅供管理資料集的授權清單，包括：
 
@@ -280,7 +280,7 @@ BigQuery 中的[檢視區塊](https://docs.cloud.google.com/bigquery/docs/views-
 以下範例說明如何建立及使用授權資料集。
 
 假設您有兩個資料集，分別命名為 `private_dataset` 和 `public_dataset`。
-`private_dataset` 資料集包含名為 `private_table` 的資料表。`public_dataset` 資料集包含名為 `private_table_filtered` 的檢視區塊。`private_table_filtered` 檢視區塊是以查詢為基礎，該查詢會傳回 `private_table` 資料表中的部分欄位，但不是全部。
+`private_dataset` 資料集包含名為 `private_table` 的資料表。`public_dataset` 資料集包含名為 `private_table_filtered` 的檢視區塊。`private_table_filtered` 檢視表是以查詢為基礎，該查詢會傳回 `private_table` 資料表中的部分欄位，但不是全部。
 
 您可以授予使用者權限，存取 `private_table_filtered` 檢視表傳回的資料，但無法存取 `private_table` 資料表中的所有資料，如下所示：
 
@@ -291,7 +291,7 @@ BigQuery 中的[檢視區塊](https://docs.cloud.google.com/bigquery/docs/views-
    `Access Denied: Table PROJECT:private_dataset.private_table:
    User does not have permission to query table
    PROJECT:private_dataset.private_table.`
-2. 在 Google Cloud 控制台的「BigQuery」頁面中，開啟 `private_dataset` 資料集，按一下「共用」，然後選取「授權資料集」。
+2. 在 Google Cloud 控制台的「BigQuery」頁面中，開啟 `private_dataset` 資料集，依序點選「共用」和「授權資料集」。
 3. 在隨即顯示的「Authorized dataset」(已授權資料集) 窗格中，於「Dataset ID」(資料集 ID) 欄位輸入 `PROJECT.public_dataset`，然後按一下「Add Authorization」(新增授權)。
 
    `public_dataset` 資料集會新增至 `private_dataset` 資料集的存取控制清單，授權 `public_dataset` 資料集中的檢視表查詢 `private_dataset` 資料集中的資料。
@@ -305,7 +305,7 @@ BigQuery 中的[檢視區塊](https://docs.cloud.google.com/bigquery/docs/views-
 ## 後續步驟
 
 * 如要瞭解如何授權個別檢視表存取資料集中的資料，請參閱「[已授權的檢視表](https://docs.cloud.google.com/bigquery/docs/authorized-views?hl=zh-tw)」。
-* 如要瞭解如何授權表格函式或使用者定義函式存取資料集中的資料，請參閱「[已授權函式](https://docs.cloud.google.com/bigquery/docs/authorized-functions?hl=zh-tw)」。
+* 如要瞭解如何授權資料表函式或使用者定義函式存取資料集中的資料，請參閱「[已授權函式](https://docs.cloud.google.com/bigquery/docs/authorized-functions?hl=zh-tw)」。
 
 
 
@@ -314,11 +314,11 @@ BigQuery 中的[檢視區塊](https://docs.cloud.google.com/bigquery/docs/views-
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

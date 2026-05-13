@@ -83,6 +83,6 @@ Covered the basics of Admin 101? Looking to configure integrations, manage users
 
 * [1. 🤓 User management and permissions 🤓](#1--user-management-and-permissions-)
 * [2. ☁️ Data management and access ☁️](#2-️data-management-and-access-️)
-* [4.    🤖 Agentic capabilities 🤖](#4--agentic-capabilities-)
+* [4. 🤖 Agentic capabilities 🤖](#4--agentic-capabilities-)
 * [5. 🎯 Data governance and workspace management 🎯](#5--data-governance-and-workspace-management-)
   + [💪🏼 Level up your workspace 💪🏼](#-level-up-your-workspace-)

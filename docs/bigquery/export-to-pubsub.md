@@ -24,7 +24,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 必要條件
 
-您必須[建立服務帳戶](https://docs.cloud.google.com/iam/docs/service-accounts-create?hl=zh-tw)。如要執行持續查詢，將結果匯出至 Pub/Sub 主題，必須使用[服務帳戶](https://docs.cloud.google.com/iam/docs/service-account-overview?hl=zh-tw)。
+您必須[建立服務帳戶](https://docs.cloud.google.com/iam/docs/service-accounts-create?hl=zh-tw)。如要執行持續查詢，並將結果匯出至 Pub/Sub 主題，必須使用[服務帳戶](https://docs.cloud.google.com/iam/docs/service-account-overview?hl=zh-tw)。
 
 您必須建立 [Pub/Sub 主題](https://docs.cloud.google.com/pubsub/docs/publish-message-overview?hl=zh-tw#about_topics)，才能以訊息形式接收持續查詢結果，並建立 [Pub/Sub 訂閱項目](https://docs.cloud.google.com/pubsub/docs/subscription-overview?hl=zh-tw)，供目標應用程式接收這些訊息。
 
@@ -34,7 +34,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### 使用者帳戶權限
 
-如要在 BigQuery 中建立工作，使用者帳戶必須具備 `bigquery.jobs.create` IAM 權限。下列 IAM 角色都授予 `bigquery.jobs.create` 權限：
+如要在 BigQuery 中建立工作，使用者帳戶必須具備 `bigquery.jobs.create` IAM 權限。下列 IAM 角色都會授予 `bigquery.jobs.create` 權限：
 
 * [BigQuery 使用者 (`roles/bigquery.user`)](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.user)
 * [BigQuery 作業使用者 (`roles/bigquery.jobUser`)](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.jobUser)
@@ -100,7 +100,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    * `PROJECT_ID`：您的專案 ID。
    * `TOPIC_ID`：Pub/Sub 主題 ID。您可以前往 Google Cloud 控制台的「主題」[頁面](https://console.cloud.google.com/cloudpubsub/topic/list?hl=zh-tw)取得主題 ID。
-   * `QUERY`：用於選取要匯出資料的 SQL 陳述式。SQL 陳述式只能包含[支援的作業](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction?hl=zh-tw#supported_functionality)。您必須在連續查詢的 `FROM` 子句中使用 [`APPENDS` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions?hl=zh-tw#appends)，指定開始處理資料的時間點。
+   * `QUERY`：用於選取要匯出資料的 SQL 陳述式。SQL 陳述式只能包含[支援的作業](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction?hl=zh-tw#supported_functionality)。您必須在持續查詢的 `FROM` 子句中使用 [`APPENDS` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions?hl=zh-tw#appends)，指定開始處理資料的時間點。
 7. 按一下「執行」。
 
 ### bq
@@ -125,7 +125,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    * `PROJECT_ID`：您的專案 ID。
    * `SERVICE_ACCOUNT_EMAIL`：服務帳戶電子郵件地址。您可以在 Google Cloud 控制台的「服務帳戶」[頁面](https://console.cloud.google.com/iam-admin/serviceaccounts?hl=zh-tw)取得服務帳戶電子郵件地址。
-   * `QUERY`：用於選取要匯出資料的 SQL 陳述式。SQL 陳述式只能包含[支援的作業](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction?hl=zh-tw#supported_functionality)。您必須在連續查詢的 `FROM` 子句中使用 [`APPENDS` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions?hl=zh-tw#appends)，指定開始處理資料的時間點。
+   * `QUERY`：用於選取要匯出資料的 SQL 陳述式。SQL 陳述式只能包含[支援的作業](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction?hl=zh-tw#supported_functionality)。您必須在持續查詢的 `FROM` 子句中使用 [`APPENDS` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions?hl=zh-tw#appends)，指定開始處理資料的時間點。
 
 ### API
 
@@ -147,7 +147,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    更改下列內容：
 
    * `PROJECT_ID`：您的專案 ID。
-   * `QUERY`：用於選取要匯出資料的 SQL 陳述式。SQL 陳述式只能包含[支援的作業](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction?hl=zh-tw#supported_functionality)。您必須在連續查詢的 `FROM` 子句中使用 [`APPENDS` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions?hl=zh-tw#appends)，指定開始處理資料的時間點。
+   * `QUERY`：用於選取要匯出資料的 SQL 陳述式。SQL 陳述式只能包含[支援的作業](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction?hl=zh-tw#supported_functionality)。您必須在持續查詢的 `FROM` 子句中使用 [`APPENDS` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions?hl=zh-tw#appends)，指定開始處理資料的時間點。
    * `SERVICE_ACCOUNT_EMAIL`：服務帳戶電子郵件地址。您可以在 Google Cloud 控制台的「服務帳戶」[頁面](https://console.cloud.google.com/iam-admin/serviceaccounts?hl=zh-tw)取得服務帳戶電子郵件地址。
 
 ## 將多個資料欄匯出至 Pub/Sub
@@ -180,7 +180,7 @@ AS (
 
 ## 匯出最佳化
 
-如果連續查詢工作效能似乎受到[可用運算資源](https://docs.cloud.google.com/bigquery/docs/continuous-queries-monitor?hl=zh-tw#view_slot_consumption_information)限制，請嘗試增加 BigQuery [`CONTINUOUS` 運算單元預留指派作業](https://docs.cloud.google.com/bigquery/docs/reservations-assignments?hl=zh-tw)的大小。
+如果持續查詢工作效能似乎受到[可用運算資源](https://docs.cloud.google.com/bigquery/docs/continuous-queries-monitor?hl=zh-tw#view_slot_consumption_information)限制，請嘗試增加 BigQuery [`CONTINUOUS` 運算單元預留指派作業](https://docs.cloud.google.com/bigquery/docs/reservations-assignments?hl=zh-tw)的大小。
 
 ## 限制
 
@@ -189,7 +189,7 @@ AS (
   [`BYTES`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#bytes_type) 欄。
   資料欄名稱可自行選擇。
 * 您必須使用[持續查詢](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction?hl=zh-tw)，才能匯出至 Pub/Sub。
-* 您無法在連續查詢中將結構定義傳遞至 Pub/Sub 主題。
+* 您無法在持續查詢中將結構定義傳遞至 Pub/Sub 主題。
 * 您無法將資料匯出至使用結構定義的 Pub/Sub 主題。
 * 匯出至 Pub/Sub 時，您可以匯出 JSON 格式的記錄，其中部分值為 `NULL`，但無法匯出僅包含 `NULL` 值的記錄。在持續查詢中加入 `WHERE message IS NOT NULL` 篩選器，即可從查詢結果中排除 `NULL` 記錄。
 * 將資料匯出至已設定[位置端點的 Pub/Sub 主題時，端點必須與包含所查詢資料表的 BigQuery 資料集位於相同的 Google Cloud 區域](https://docs.cloud.google.com/pubsub/docs/reference/service_apis_overview?hl=zh-tw#pubsub_endpoints)界線內。
@@ -209,11 +209,11 @@ AS (
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

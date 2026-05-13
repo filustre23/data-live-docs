@@ -714,19 +714,3 @@ GROUP BY emp_id, normalized;
 ```
 
 ## `RANGE_START`
-
-```
-RANGE_START(range_to_check)
-```
-
-**Description**
-
-Gets the lower bound of a range.
-
-**Definitions**
-
-* `range_to_check`: The `RANGE<T>` value.
-
-**Details**
-
-Returns `NULL` if the lower bound of `range_value` is

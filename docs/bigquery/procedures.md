@@ -16,9 +16,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 使用 SQL 預存程序
 
-*預存程序*是一組陳述式，可從其他查詢或其他預存程序呼叫。程序可以接受輸入引數，並傳回輸出值。您可以在 BigQuery 資料集中命名及儲存程序。多位使用者可透過預存程序存取或修改多個資料集的資料。也可以包含[多重陳述式查詢](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries?hl=zh-tw)。
+*預存程序*是一組陳述式，可從其他查詢或其他預存程序呼叫。程序可以接受輸入引數，並傳回輸出值。您可以在 BigQuery 資料集中命名及儲存程序。多位使用者可以透過預存程序存取或修改多個資料集的資料。也可以包含[多重陳述式查詢](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries?hl=zh-tw)。
 
-部分預存程序已內建於 BigQuery，不需要建立。這些稱為「系統程序」，如要進一步瞭解，請參閱「[系統程序參考資料](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures?hl=zh-tw)」。
+部分預存程序已內建於 BigQuery，不需建立。這些稱為「系統程序」，如要進一步瞭解，請參閱「[系統程序參考資料](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures?hl=zh-tw)」。
 
 預存程序支援*程序語言陳述式*，可讓您執行定義變數和實作控制流程等動作。如要進一步瞭解程序語言陳述式，請參閱「[程序語言參考資料](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language?hl=zh-tw)」。
 
@@ -95,7 +95,7 @@ resource "google_bigquery_routine" "my_stored_procedure" {
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
 2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
 
-   每項專案只需要執行一次這個指令，且可以在任何目錄中執行。
+   您只需要為每項專案執行一次這個指令，且可以在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
@@ -112,9 +112,9 @@ resource "google_bigquery_routine" "my_stored_procedure" {
    ```
    mkdir DIRECTORY && cd DIRECTORY && touch main.tf
    ```
-2. 如果您正在學習教學課程，可以複製每個章節或步驟中的範例程式碼。
+2. 如果您正在學習教學課程，可以複製每個章節或步驟中的程式碼範例。
 
-   將範例程式碼複製到新建立的 `main.tf`。
+   將程式碼範例複製到新建立的 `main.tf`。
 
    視需要從 GitHub 複製程式碼。如果 Terraform 代码片段是端對端解決方案的一部分，建議您使用這個方法。
 3. 查看並修改範例參數，套用至您的環境。
@@ -133,7 +133,7 @@ resource "google_bigquery_routine" "my_stored_procedure" {
 
 ## 套用變更
 
-1. 檢查設定，確認 Terraform 即將建立或更新的資源符合您的預期：
+1. 查看設定，確認 Terraform 即將建立或更新的資源符合您的預期：
 
    ```
    terraform plan
@@ -196,7 +196,7 @@ WHERE customer_id = id;
 
 ### 使用輸入/輸出參數傳遞值
 
-程序也可以有輸入/輸出參數。輸入/輸出參數會從程序傳回值，也會接受程序的輸入內容。如要建立輸入/輸出參數，請在參數名稱前使用 `INOUT` 關鍵字。詳情請參閱「[引數模式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#argument_mode)」。
+程序也可以有輸入/輸出參數。輸入/輸出參數會從程序傳回值，也會接受程序的輸入內容。如要建立輸入/輸出參數，請在參數名稱前使用 `INOUT` 關鍵字。詳情請參閱「[Argument mode](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#argument_mode)」。
 
 ## 授權處理常式
 
@@ -215,7 +215,7 @@ WHERE customer_id = id;
 CALL mydataset.create_customer();
 ```
 
-**注意：** 直接在查詢中加入程序的 SQL 陳述式，而不是呼叫預存程序，會造成少許效能負擔。
+**注意：** 呼叫預存程序，而不是直接在查詢中加入程序的 SQL 陳述式，會造成少許效能負擔。
 
 ## 呼叫系統程序
 
@@ -233,11 +233,11 @@ CALL BQ.REFRESH_MATERIALIZED_VIEW;
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

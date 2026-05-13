@@ -262,5 +262,4 @@ public class SimpleApp {
 
   public static void simpleApp(String projectId) {
     try {
-      BigQuery bigquery =
 ```

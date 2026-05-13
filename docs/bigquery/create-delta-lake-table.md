@@ -15,7 +15,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 為 Delta Lake 建立 BigLake 外部資料表
 
-BigLake 可讓您存取 Delta Lake 資料表，並提供更精細的存取控管機制。[Delta Lake](https://docs.databricks.com/en/delta/index.html) 是由 Databricks 開發的開放原始碼表格資料儲存格式，支援 PB 級資料表。
+BigLake 可讓您存取 Delta Lake 資料表，並提供更精細的存取控管機制。[Delta Lake](https://docs.databricks.com/en/delta/index.html) 是 Databricks 開發的開放原始碼表格資料儲存格式，支援 PB 級資料表。
 
 BigQuery 支援 Delta Lake 資料表的下列功能：
 
@@ -32,7 +32,7 @@ BigQuery 支援 Delta Lake 資料表的下列功能：
    **選取或建立專案所需的角色**
 
    * **選取專案**：選取專案時，不需要具備特定 IAM 角色，只要您已獲授角色，即可選取任何專案。
-   * **建立專案**：如要建立專案，您需要具備專案建立者角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   * **建立專案**：如要建立專案，您需要「專案建立者」角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
    **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，而不要選取現有專案。完成這些步驟後，您就可以刪除專案，並移除與該專案相關聯的所有資源。
 
    [前往專案選取器](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
@@ -207,7 +207,7 @@ echo $REQUEST |curl -X PATCH -d @- -H "Content-Type: application/json" -H "Autho
 
 ## 查詢 Delta Lake 資料表
 
-建立 Delta Lake BigLake 資料表後，您就可以[使用 GoogleSQL 語法查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw)，與標準 BigQuery 資料表相同。例如：
+建立 Delta Lake BigLake 資料表後，即可[使用 GoogleSQL 語法查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw)，方法與標準 BigQuery 資料表相同。例如：
 
 ```
 SELECT field1, field2 FROM mydataset.my_cloud_storage_table;
@@ -266,11 +266,11 @@ Delta Lake 資料表有 [BigLake 資料表限制](https://docs.cloud.google.com/
   spark.sql("ALTER TABLE delta.`gs://bucket/mydeltatabledir` SET TBLPROPERTIES ('delta.checkpointInterval' = '1')");
 ```
 
-使用者接著可以使用相同指令，將檢查點間隔重設為預設值 10，或設為可避免檢查點之間 JSON 檔案超過 50 MB 的值。
+使用者接著可以透過相同指令，將檢查點間隔重設為預設值 10，或設為可避免檢查點之間 JSON 檔案超過 50 MB 的值。
 
 ### 欄名稱無效
 
-確認 Delta Lake 資料表已啟用欄位對應。[Reader 2 以上版本](https://github.com/delta-io/delta/blob/master/PROTOCOL.md#reader-version-requirements)支援欄位對應。如果是 Reader 第 1 版，請使用下列指令，將「delta.columnMapping.mode」設為「name」：
+確認已為 Delta Lake 資料表啟用欄對應。[Reader 2 以上版本](https://github.com/delta-io/delta/blob/master/PROTOCOL.md#reader-version-requirements)支援欄位對應。如果是 Reader 第 1 版，請使用下列指令，將「delta.columnMapping.mode」設為「name」：
 
 ```
 spark.sql("ALTER TABLE delta.`gs://bucket/mydeltatabledir` SET TBLPROPERTIES ('delta.columnMapping.mode' = 'name', 'delta.minReaderVersion' = '3', 'delta.minWriterVersion' = '7')");
@@ -302,11 +302,11 @@ spark.sql("ALTER TABLE delta.`gs://bucket/mydeltatabledir` SET TBLPROPERTIES ('d
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

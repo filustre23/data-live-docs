@@ -20,7 +20,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 BigQuery 透過政策標記，為敏感資料表欄提供[精細的存取控管](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro?hl=zh-tw)和[動態資料遮蓋](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro?hl=zh-tw)功能，並支援依據類型分類資料。
 
-建立資料分類分類法並將政策標記套用至資料後，您可以在各個位置進一步管理政策標記。
+建立資料分類分類架構並將政策標記套用至資料後，您就能進一步管理各位置的政策標記。
 
 ## 位置注意事項
 
@@ -28,11 +28,11 @@ BigQuery 透過政策標記，為敏感資料表欄提供[精細的存取控管]
 
 您可以在[所有提供 BigQuery 的區域](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#supported_locations)中，建立分類並將政策標記套用至資料表。不過，如要將分類中的政策標記套用至資料表欄，分類和資料表必須位於同一個區域位置。
 
-雖然您無法將政策標記套用至位於不同位置的資料表欄，但可以明確複製分類架構，將其複製到其他位置。
+雖然您無法將政策標記套用至其他位置的資料表欄，但可以明確複製分類架構，將其複製到其他位置。
 
 ## 在不同地點使用分類
 
-您可以明確複製 (或複製) 分類和政策標記定義到其他位置，不必在每個位置手動建立新的分類。複製分類時，您可以在多個位置使用相同的資料欄層級安全性政策標記，簡化管理作業。
+您可以明確複製 (或複製) 分類架構及其政策標記定義到其他位置，不必在每個位置手動建立新的分類架構。複製分類時，您可以在多個位置使用相同的資料欄層級安全性政策標記，簡化管理作業。
 
 複製後，分類和政策標記在每個位置都會保留相同的 ID。
 
@@ -40,7 +40,7 @@ BigQuery 透過政策標記，為敏感資料表欄提供[精細的存取控管]
 
 您可以再次同步分類和政策標記，確保多個位置的分類和政策標記一致。如要明確複製分類法，請呼叫 [Data Catalog](https://docs.cloud.google.com/data-catalog/docs?hl=zh-tw) API。日後同步處理複製的分類時，會使用相同的 API 指令，覆寫先前的分類。
 
-為方便同步分類，您可以使用 [Cloud Scheduler](https://docs.cloud.google.com/scheduler/docs?hl=zh-tw)，定期在各區域同步分類，您可以設定排程，也可以手動按下按鈕。如要使用 Cloud Scheduler，請設定服務帳戶。
+為方便同步分類，您可以使用 [Cloud Scheduler](https://docs.cloud.google.com/scheduler/docs?hl=zh-tw)，定期在各區域同步分類，無論是設定排程或手動按下按鈕都可以。如要使用 Cloud Scheduler，請設定服務帳戶。
 
 ## 在新位置複製分類
 
@@ -63,7 +63,7 @@ BigQuery 透過政策標記，為敏感資料表欄提供[精細的存取控管]
 `parent` 路徑參數是您要將分類複製到的目標專案和位置。示例：
 `projects/MyProject/locations/eu`
 
-**重點：** 如要在日後同步處理各個地點的複製分類，請重複上述步驟。
+**重點：** 如要在日後同步複製的分類架構，請重複上述步驟。
 
 ## 同步處理複製的分類
 
@@ -155,11 +155,11 @@ BigQuery 透過政策標記，為敏感資料表欄提供[精細的存取控管]
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

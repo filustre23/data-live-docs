@@ -456,11 +456,3 @@ SELECT
   ) AS keyset
 FROM CustomerIds AS ci;
 ```
-
-The output keysets each contain two things: the primary cryptographic key
-created using `KEYS.NEW_KEYSET('AEAD_AES_GCM_256')`, and the raw key added using
-`KEYS.ADD_KEY_FROM_RAW_BYTES`. If a keyset in the output is used with
-`AEAD.ENCRYPT`, GoogleSQL uses the primary cryptographic key created
-using `KEYS.NEW_KEYSET('AEAD_AES_GCM_256')` to encrypt the input plaintext. If
-the keyset is used with `AEAD.DECRYPT_STRING` or `AEAD.DECRYPT_BYTES`,
-GoogleSQL returns the resulting plaintext if either key succeeds

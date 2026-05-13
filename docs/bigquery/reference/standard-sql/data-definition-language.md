@@ -403,13 +403,4 @@ This statement requires the following
 
 ### Examples
 
-#### Creating a new dataset
-
-The following example creates a dataset with a default table expiration and a
-set of labels.
-
-```
-CREATE SCHEMA mydataset
-OPTIONS(
-  location="us",
-```
+#### Creating a new datas

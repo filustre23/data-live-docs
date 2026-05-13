@@ -54,7 +54,7 @@ BigQuery 資料集有下列限制：
 
 如要進一步瞭解 BigQuery 中的 IAM 角色，請參閱[預先定義的角色與權限](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)一文。
 
-**注意：** 系統會自動為資料集建立者指派該資料集的 [BigQuery 資料擁有者 (`roles/bigquery.dataOwner`) 角色](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.dataOwner)。因此，即使未明確授予權限，使用者或服務帳戶只要有權建立資料集，也能刪除資料集。
+**注意：** 系統會自動為資料集建立者指派該資料集的「BigQuery 資料擁有者」[(`roles/bigquery.dataOwner`) 角色](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.dataOwner)。因此，即使未明確授予權限，使用者或服務帳戶只要有權建立資料集，也能刪除資料集。
 
 ## 建立資料集
 
@@ -140,7 +140,7 @@ bq --location=LOCATION mk \
 更改下列內容：
 
 * `LOCATION`：資料集的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。資料集在建立之後，該位置就無法改變。您可以使用 [`.bigqueryrc` 檔案](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool?hl=zh-tw#setting_default_values_for_command-line_flags)，設定該位置的預設值。
-* `KMS_KEY_NAME`：預設 Cloud Key Management Service 金鑰的名稱，用於保護這個資料集中新建立的資料表，除非在建立時提供其他金鑰。您無法使用這組參數在資料集中建立 Google 加密資料表。
+* `KMS_KEY_NAME`：預設 Cloud Key Management Service 金鑰的名稱，用於保護這個資料集中新建立的資料表，除非在建立時提供其他金鑰。您無法使用這組參數在資料集中建立 Google 加密表格。
 * `PARTITION_EXPIRATION`：新建分區資料表中分區的預設生命週期 (以秒為單位)。預設的分區到期時間沒有最小值。到期時間為分區日期加上整數值。在資料集的分區資料表中所建立的任何分區，都會以分區建立日期為起始點，在 `PARTITION_EXPIRATION` 秒後刪除。如果您在建立或更新分區資料表時使用 `--time_partitioning_expiration` 旗標，系統會優先採用資料表層級的分區到期時間，而不是資料集層級的預設分區到期時間。
 * `TABLE_EXPIRATION`：新建立資料表的預設生命週期 (以秒為單位)。最小值是 3600 秒 (1 小時)。到期時間為目前時間加整數值。在資料集中建立的任何資料表都會在建立時間後 `TABLE_EXPIRATION` 秒刪除。如果您在[建立資料表](https://docs.cloud.google.com/bigquery/docs/tables?hl=zh-tw#create-table)時未設定資料表到期時間，系統就會套用這個值。
 * `DESCRIPTION`：資料集說明
@@ -202,7 +202,7 @@ resource "google_bigquery_dataset" "default" {
 
 以下範例會建立名為 `mydataset` 的資料集，然後使用 [`google_bigquery_dataset_iam_policy`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset_iam#google_bigquery_dataset_iam_policy) 資源授予存取權。
 
-**注意：** 如要搭配這個資料集使用授權物件 (例如[授權檢視區塊](https://docs.cloud.google.com/bigquery/docs/authorized-views?hl=zh-tw))，請勿採用這種做法。在這種情況下，請使用 `google_bigquery_dataset_access` 資源。如需範例，請參閱 [`google_bigquery_dataset_access`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset_access)。
+**注意：** 如要搭配這個資料集使用授權物件 (例如[授權 view](https://docs.cloud.google.com/bigquery/docs/authorized-views?hl=zh-tw))，請勿採用這種做法。在這種情況下，請使用 `google_bigquery_dataset_access` 資源。如需範例，請參閱 [`google_bigquery_dataset_access`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset_access)。
 
 ```
 resource "google_bigquery_dataset" "default" {
@@ -332,7 +332,7 @@ resource "google_project_iam_member" "service_account_access" {
 
    將程式碼範例複製到新建立的 `main.tf`。
 
-   視需要從 GitHub 複製程式碼。如果 Terraform 程式碼片段是端對端解決方案的一部分，建議您使用這個方法。
+   視需要從 GitHub 複製程式碼。如果 Terraform 代码片段是端對端解決方案的一部分，建議您使用這個方法。
 3. 查看並修改範例參數，套用至您的環境。
 4. 儲存變更。
 5. 初始化 Terraform。每個目錄只需執行一次這項操作。
@@ -349,7 +349,7 @@ resource "google_project_iam_member" "service_account_access" {
 
 ## 套用變更
 
-1. 檢查設定，確認 Terraform 即將建立或更新的資源符合您的預期：
+1. 查看設定，確認 Terraform 即將建立或更新的資源符合您的預期：
 
    ```
    terraform plan
@@ -590,7 +590,7 @@ end
 隱藏資料集是指名稱以底線開頭的資料集。您可以查詢隱藏資料集中的資料表和檢視表，方式與查詢其他資料集相同。隱藏資料集有下列限制：
 
 * 這些檔案會隱藏在 Google Cloud 控制台的「Explorer」面板中。
-* 不會顯示在任何 `INFORMATION_SCHEMA` 檢視畫面中。
+* 不會顯示在任何`INFORMATION_SCHEMA`檢視畫面中。
 * 無法與[連結的資料集](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction?hl=zh-tw#linked_datasets)搭配使用。
 * 這些資料集無法做為下列授權資源的來源資料集：
   + [已授權的資料集](https://docs.cloud.google.com/bigquery/docs/authorized-datasets?hl=zh-tw)
@@ -623,11 +623,11 @@ end
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-11 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-11 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

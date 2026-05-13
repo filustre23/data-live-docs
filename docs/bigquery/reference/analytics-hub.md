@@ -310,7 +310,5 @@ func createListing(ctx context.Context, client *analyticshub.Client, projectID, 
 	req := &analyticshubpb.CreateListingRequest{
 		Parent:    fmt.Sprintf("projects/%s/locations/%s/dataExchanges/%s", projectID, location, exchangeID),
 		ListingId: listingID,
-		Listing: &analyticshubpb.Listing{
-			DisplayName: "Example Exchange Listing",
-			Description: "Example listing created as part of an API quickstart",
+		Listing:
 ```

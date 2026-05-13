@@ -300,7 +300,3 @@ Username and Password authentication.
 ## Secret
 
 Secret value parameter.
-
-| JSON representation |
-| --- |
-| ``` {   "secretType": enum (SecretType),    // Union field secret can be only one of the following:   "plaintext" ``` |

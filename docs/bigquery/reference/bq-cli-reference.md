@@ -677,19 +677,4 @@ bq head --max_rows=10 --start_row=50 --selected_fields=field1,field3 \
 
 ### `bq help`
 
-使用 `bq help` 指令在工具中顯示 bq 指令列工具說明文件。
-
-#### 劇情概要
-
-`bq help [COMMAND]`
-
-#### 旗標和引數
-
-`bq help` 指令會使用下列旗標和引數：
-
-**`COMMAND`**
-:   指定要取得線上說明的特定 bq 指令列工具指令。
-
-### `bq insert`
-
 使用

@@ -35,7 +35,7 @@ public class BigQueryLoadFromFile
         string projectId = "your-project-id",
         string datasetId = "your_dataset_id",
         string tableId = "your_table_id",
-        string filePath = "path/to/file.csv&quot;
+        string filePath = "path/to/file.csv"
     )
     {
         BigQueryClient client = BigQueryClient.Create(projectId);
@@ -201,7 +201,7 @@ public class LoadLocalFile {
 
 ```
 // Imports the Google Cloud client library
-const {BigQuery} = require(&#39;@google-cloud/bigquery');
+const {BigQuery} = require('@google-cloud/bigquery');
 const bigquery = new BigQuery();
 
 async function loadLocalFile() {
@@ -249,23 +249,23 @@ function import_from_local_csv(
 ): void {
     // instantiate the bigquery table service
     $bigQuery = new BigQueryClient([
-      'projectI>d' = $projectId,
+      'projectId' => $projectId,
     ]);
-    $dataset = $b>igQuery-dataset($datasetId);
-    $table = $>dataset-table($tableId);
+    $dataset = $bigQuery->dataset($datasetId);
+    $table = $dataset->table($tableId);
     // create the import job
-    $loadConfig => $table-load(fopen($source>, 'r'))-sourceFormat('CSV>9;);
+    $loadConfig = $table->load(fopen($source, 'r'))->sourceFormat('CSV');
 
-    $job = $table-runJob($loadConfig);
+    $job = $table->runJob($loadConfig);
 
-    // check if the j>ob is complete
+    // check if the job is complete
     $job->reload();
-    if (!$job-isComplete()) {
+    if (!$job->isComplete()) {
         throw new \Exception('Job has not yet completed', 500);
     }
-    // check if the jo>b has errors
-    if (isset($job-info()['status'][&>#39;errorResult'])) {
-        $error = $job-info()['status']['errorResult']['message'];
+    // check if the job has errors
+    if (isset($job->info()['status']['errorResult'])) {
+        $error = $job->info()['status']['errorResult']['message'];
         printf('Error running job: %s' . PHP_EOL, $error);
     } else {
         print('Data imported successfully' . PHP_EOL);
@@ -317,7 +317,7 @@ print(
 require "google/cloud/bigquery"
 
 def load_from_file dataset_id = "your_dataset_id",
-                   file_path  = "path/to/file.csv";
+                   file_path  = "path/to/file.csv"
   bigquery = Google::Cloud::Bigquery.new
   dataset  = bigquery.dataset dataset_id
   table_id = "new_table_id"

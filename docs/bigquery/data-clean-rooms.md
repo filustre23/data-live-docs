@@ -51,11 +51,11 @@ BigQuery 資料無塵室採用 BigQuery 資料的發布及訂閱模型。BigQuer
 
 #### 共用資源
 
-共用資源是資料無塵室中的資料共用單位。資源必須是 BigQuery 資料表、檢視區塊或常式 (資料表值函式)。資料提供者可以在專案中建立或使用現有的 BigQuery 資源，並與資料無塵室訂閱者共用。
+共用資源是資料無塵室中的資料共用單位。資源必須是 BigQuery 資料表、檢視表或常式 (資料表值函式)。資料提供者可以在專案中建立或使用現有的 BigQuery 資源，並與資料無塵室訂閱者共用。
 
 #### 清單
 
-資料提供者將資料新增至資料無塵室時，系統會建立資料集。當中包含資料提供者共用資源的參照，以及有助於訂閱者使用資料的說明資訊。資料貢獻者可以建立產品資訊，並加入說明、範例查詢和文件連結等資訊，供訂閱者參考。
+資料提供者將資料新增至資料無塵室時，系統會建立資料集。當中包含資料提供者共用資源的參照，以及有助於訂閱者使用資料的說明資訊。資料貢獻者可以建立資料集，並加入說明、範例查詢和文件連結等資訊，供訂閱者參考。
 
 #### 連結的資料集
 
@@ -73,7 +73,7 @@ BigQuery 資料無塵室採用 BigQuery 資料的發布及訂閱模型。BigQuer
 #### 查詢範本
 
 [查詢範本](https://docs.cloud.google.com/bigquery/docs/query-templates?hl=zh-tw)
-[(預覽)](https://cloud.google.com/products?hl=zh-tw#product-launch-stages) 可讓資料無塵室擁有者和 BigQuery sharing 發布者共用預先定義的查詢，而不必共用資料表和檢視畫面的基礎資源。
+[(預覽)](https://cloud.google.com/products?hl=zh-tw#product-launch-stages) 可讓資料無塵室擁有者和 BigQuery sharing 發布者共用預先定義的查詢，不必共用資料表和檢視區塊的基礎資源。
 
 預先定義的查詢會使用 BigQuery 中的[資料表值函式 (TVF)](https://docs.cloud.google.com/bigquery/docs/table-functions?hl=zh-tw)，允許將整個資料表或特定欄位做為輸入參數傳遞，並傳回資料表做為輸出。
 
@@ -195,7 +195,7 @@ gcloud services enable analyticshub.googleapis.com
 
 如果要求成功，回應主體會包含資料無塵室的詳細資料。
 
-如果您使用 `logLinkedDatasetQueryUserEmail` 欄位啟用訂閱者電子郵件記錄功能，資料交換回應會包含 `log_linked_dataset_query_user_email: true`。記錄的資料會顯示在 [`INFORMATION_SCHEMA.SHARED_DATASET_USAGE` 檢視畫面](https://docs.cloud.google.com/bigquery/docs/information-schema-shared-dataset-usage?hl=zh-tw)的 `job_principal_subject` 欄位中。
+如果您使用 `logLinkedDatasetQueryUserEmail` 欄位啟用訂閱者電子郵件記錄功能，資料交換庫回應會包含 `log_linked_dataset_query_user_email: true`。記錄的資料會顯示在 [`INFORMATION_SCHEMA.SHARED_DATASET_USAGE` 檢視畫面](https://docs.cloud.google.com/bigquery/docs/information-schema-shared-dataset-usage?hl=zh-tw)的 `job_principal_subject` 欄位中。
 
 ### 更新資料無塵室
 
@@ -451,7 +451,7 @@ curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Ty
 * `LISTING_NAME`：商家檔案名稱。
 * `VIEW_ID`：您的檢視區塊 ID。新增至資料無塵室的檢視區塊必須是已設定[分析規則](https://docs.cloud.google.com/bigquery/docs/analysis-rules?hl=zh-tw)的[授權檢視區塊](https://docs.cloud.google.com/bigquery/docs/authorized-views?hl=zh-tw)。
 
-在資料無塵室中列出資源，即表示您授予所有現有和日後的資料無塵室訂閱者，存取共用資源中資料的權限。
+在資料無塵室中列出資源，即表示您授予所有現有和未來的資料無塵室訂閱者，存取共用資源中資料的權限。
 
 如果您嘗試使用沒有分析規則的共用資源建立項目，系統會顯示警告，提醒訂閱者可以存取該資源的原始資料。如果您確認要發布這類資源，且不使用分析規則，仍可建立商家資訊。
 
@@ -610,7 +610,7 @@ curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Ty
 
 如要查詢連結資料集中的資料，請使用 [`SELECT WITH AGGREGATION_THRESHOLD` 語法](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw#agg_threshold_clause)，以便對強制執行分析規則的檢視區塊執行查詢。如需這類語法的範例，請參閱「[查詢匯總門檻分析規則 - 強制執行的檢視畫面](https://docs.cloud.google.com/bigquery/docs/analysis-rules?hl=zh-tw#view_in_privacy_query)」。
 
-## 範例情境：廣告主和發布商歸因分析
+## 情境範例：廣告主和發布商歸因分析
 
 某廣告主想追蹤行銷廣告活動的成效，廣告主擁有顧客的第一方資料，包括購買記錄、受眾特徵和興趣。發布商擁有網站資料，包括向訪客顯示的廣告和轉換。
 
@@ -629,7 +629,7 @@ curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Ty
 
 ### 將資料新增至資料無塵室 (發布商)
 
-1. 使用者 B 在資料無塵室中建立名為 `Publisher Conversion Data` 的新刊登。建立商家資訊時，系統會建立含有分析規則的新檢視畫面。
+1. 使用者 B 在名為 `Publisher Conversion Data` 的資料無塵室中建立新項目。建立商家資訊時，系統會建立含有分析規則的新檢視畫面。
 
 ### 訂閱資料無塵室 (廣告主)
 
@@ -697,11 +697,11 @@ do [ "$(bq show -d --project_id $PROJECT $dataset | egrep LINKED)" ] \
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

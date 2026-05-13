@@ -23,7 +23,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 * 在 Cloud Storage bucket 中的圖片資料上建立 [BigQuery 物件資料表](https://docs.cloud.google.com/bigquery/docs/object-table-introduction?hl=zh-tw)。
 * 使用 [BigQuery 中的 Colab Enterprise 筆記本](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction?hl=zh-tw)探索圖片資料。
 * 建立以 [Vertex AI `multimodalembedding` 基礎模型](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models?hl=zh-tw#foundation_model_apis)為目標的 BigQuery ML [遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw)。
-* 使用 [`AI.GENERATE_EMBEDDING` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding?hl=zh-tw)搭配遠端模型，從物件資料表中的圖片生成嵌入。
+* 使用遠端模型和 [`AI.GENERATE_EMBEDDING` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding?hl=zh-tw)，從物件資料表中的圖片生成嵌入。
 * 修正任何嵌入生成錯誤。
 * 選擇性步驟：建立[向量索引](https://docs.cloud.google.com/bigquery/docs/vector-index?hl=zh-tw)，為圖片嵌入項目建立索引。
 * 為指定搜尋字串建立文字嵌入。
@@ -112,7 +112,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    **選取或建立專案所需的角色**
 
    * **選取專案**：選取專案時，不需要具備特定 IAM 角色，只要您已獲授角色，即可選取任何專案。
-   * **建立專案**：如要建立專案，您需要具備專案建立者角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   * **建立專案**：如要建立專案，您需要「專案建立者」角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
    **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，而不要選取現有專案。完成這些步驟後，您就可以刪除專案，並移除與該專案相關聯的所有資源。
 
    [前往專案選取器](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
@@ -203,7 +203,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 4. 設定筆記本：
 
    1. 在筆記本中新增程式碼儲存格。
-   2. 複製下列程式碼，並貼到程式碼儲存格中：
+   2. 複製下列程式碼，並貼到程式碼儲存格：
 
       ```
       #@title Set up credentials
@@ -222,7 +222,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 5. 啟用表格顯示功能：
 
    1. 在筆記本中新增程式碼儲存格。
-   2. 複製下列程式碼，並貼到程式碼儲存格中：
+   2. 複製下列程式碼，並貼到程式碼儲存格：
 
       ```
       #@title Enable data table display
@@ -232,7 +232,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 6. 建立函式來顯示圖片：
 
    1. 在筆記本中新增程式碼儲存格。
-   2. 複製下列程式碼，並貼到程式碼儲存格中：
+   2. 複製下列程式碼，並貼到程式碼儲存格：
 
       ```
       #@title Util function to display images
@@ -264,7 +264,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 7. 顯示圖片：
 
    1. 在筆記本中新增程式碼儲存格。
-   2. 複製下列程式碼，並貼到程式碼儲存格中：
+   2. 複製下列程式碼，並貼到程式碼儲存格：
 
       ```
       #@title Display Met images
@@ -372,7 +372,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 為搜尋文字生成嵌入
 
-如要搜尋與指定文字搜尋字串相應的圖片，您必須先為該字串建立文字嵌入。使用與建立圖像嵌入相同的遠端模型建立文字嵌入，然後將文字嵌入寫入表格，以供後續步驟使用。搜尋字串為 `pictures of white or cream colored dress from victorian era`。
+如要搜尋與指定文字搜尋字串相應的圖片，您必須先為該字串建立文字嵌入。使用與建立圖像嵌入相同的遠端模型建立文字嵌入，然後將文字嵌入寫入資料表，以供後續步驟使用。搜尋字串為 `pictures of white or cream colored dress from victorian era`。
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -390,7 +390,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    );
    ```
 
-## 執行文字轉圖片語意搜尋
+## 執行文字轉圖像語意搜尋
 
 使用 [`VECTOR_SEARCH` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions?hl=zh-tw#vector_search)，根據文字嵌入所代表的搜尋字串，執行語意搜尋，找出最相符的圖片。
 
@@ -422,7 +422,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 3. 以視覺化方式呈現向量搜尋結果：
 
    1. 在筆記本中新增程式碼儲存格。
-   2. 複製下列程式碼，並貼到程式碼儲存格中：
+   2. 複製下列程式碼，並貼到程式碼儲存格：
 
       ```
       query = """
@@ -458,11 +458,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

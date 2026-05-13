@@ -37,7 +37,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 | **角色** | **資源** | **注意事項** |
 | --- | --- | --- |
-| 至少下列其中一項：   `bigquery.dataViewer`  `bigquery.dataEditor`  `bigquery.dataOwner`   至少下列其中一項：   `bigquery.jobUser`  `bigquery.studioUser`  `bigquery.user`  `bigquery.studioAdmin`  `bigquery.admin` | 要建立快照的表格。 | 只有 `bigquery.dataOwner`、`bigquery.admin` 和 `bigquery.studioAdmin` 可用於建立設有到期時間的快照。 |
+| 至少下列其中一項：   `bigquery.dataViewer`  `bigquery.dataEditor`  `bigquery.dataOwner`   至少下列其中一項：   `bigquery.jobUser`  `bigquery.studioUser`  `bigquery.user`  `bigquery.studioAdmin`  `bigquery.admin` | 要建立快照的表格。 | 只有 `bigquery.dataOwner`、`bigquery.admin` 和 `bigquery.studioAdmin` 可用於建立設有有效期限的快照。 |
 | 至少以下其中一項：   `bigquery.dataEditor`  `bigquery.dataOwner`  `bigquery.studioAdmin`  `bigquery.admin` | 包含新資料表快照的資料集。 |  |
 
 ## 限制
@@ -54,7 +54,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 建立資料表快照
 
-最佳做法是在與基本資料表不同的資料集內建立資料表快照。採用這種做法後，即使意外刪除基礎資料表的資料集，仍可從資料表快照還原基礎資料表。
+最佳做法是在與基本資料表不同的資料集內建立資料表快照。採用這種做法後，即使意外刪除基本資料表的資料集，仍可從資料表快照還原基本資料表。
 
 建立資料表快照時，請指定要建立快照的資料表，以及資料表快照的專屬名稱。您可以視需要指定快照的[時間](https://docs.cloud.google.com/bigquery/docs/time-travel?hl=zh-tw)和資料表快照的[到期時間](https://docs.cloud.google.com/bigquery/docs/managing-tables?hl=zh-tw#updating_a_tables_expiration_time)。
 
@@ -71,7 +71,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Explorer」窗格中展開專案，按一下「Datasets」(資料集)，然後按一下資料集。
-4. 依序點選「總覽」**>「表格」**，然後點選要建立快照的表格名稱。
+4. 依序點選「總覽」**>「資料表」**，然後點選要建立快照的資料表名稱。
 5. 在隨即顯示的詳細資料窗格中，按一下「快照」。
 6. 在隨即顯示的「建立資料表快照」窗格中，輸入新資料表快照的「專案」、「資料集」和「資料表」資訊。
 7. 在「Expiration time」(到期時間) 欄位中，輸入從現在起 24 小時後的日期和時間。
@@ -170,7 +170,7 @@ SNAPSHOT_PROJECT_ID:SNAPSHOT_DATASET_NAME.SNAPSHOT_NAME
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
 3. 在「Explorer」窗格中展開專案，按一下「Datasets」(資料集)，然後按一下資料集。
-4. 依序點選「總覽」**>「表格」**，然後點選要建立快照的表格名稱。
+4. 依序點選「總覽」**>「資料表」**，然後點選要建立快照的資料表名稱。
 5. 在隨即顯示的詳細資料窗格中，按一下「快照」。
 6. 在隨即顯示的「建立資料表快照」窗格中，輸入新資料表快照的「專案」、「資料集」和「資料表」資訊。
 7. 在「Snapshot time」(快照時間) 欄位中，輸入 1 小時前的日期和時間。
@@ -247,7 +247,7 @@ SNAPSHOT_PROJECT_ID:SNAPSHOT_DATASET_NAME.SNAPSHOT_NAME
 * `SNAPSHOT_DATASET_NAME`：要在其中建立快照的資料集名稱。
 * `SNAPSHOT_NAME`：您要建立的快照名稱。
 
-如要進一步瞭解如何指定資料表的舊版本，請參閱「[使用時空旅行功能存取歷來資料](https://docs.cloud.google.com/bigquery/docs/time-travel?hl=zh-tw)」。
+如要進一步瞭解如何指定資料表的舊版本，請參閱「[使用時空旅行功能存取歷史資料](https://docs.cloud.google.com/bigquery/docs/time-travel?hl=zh-tw)」。
 
 ## 資料表存取控管
 
@@ -271,11 +271,11 @@ SNAPSHOT_PROJECT_ID:SNAPSHOT_DATASET_NAME.SNAPSHOT_NAME
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

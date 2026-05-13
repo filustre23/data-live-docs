@@ -16,20 +16,20 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 使用 ARIMA\_PLUS 單變數模型預測階層式時間序列
 
-本教學課程說明如何使用[`ARIMA_PLUS`單變數時間序列模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series?hl=zh-tw)預測階層式時間序列。這項功能會根據指定資料欄的歷史值，預測該資料欄的未來值，並計算該資料欄中一或多個感興趣維度的綜覽值。
+本教學課程說明如何使用[`ARIMA_PLUS`單變數時間序列模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series?hl=zh-tw)預測階層式時間序列。這項功能會根據指定資料欄的歷史值，預測該資料欄的未來值，並計算該資料欄中一或多個感興趣維度的匯總值。
 
-系統會針對每個時間點，以及一或多個指定感興趣維度的資料欄中的每個值，計算預測值。舉例來說，如果您想預測每日交通事件，並指定包含州別資料的維度資料欄，預測資料會包含州別 A 每天的值，然後是州別 B 每天的值，依此類推。如果您想預測每日交通事件，並指定包含州和城市資料的維度資料欄，預測資料會包含 A 州和 A 市每天的值，然後是 A 州和 B 市每天的值，依此類推。在階層式時間序列模型中，[階層式對帳](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series?hl=zh-tw#hierarchical_reconciliation)用於匯總每個子項時間序列，並與其父項對帳。舉例來說，A 州所有城市的預測值總和，必須等於 A 州的預測值。
+系統會針對每個時間點，以及一或多個指定感興趣維度的資料欄中的每個值，計算預測值。舉例來說，如果您想預測每日交通事件，並指定包含州別資料的維度資料欄，預測資料會包含州別 A 每天的值，然後是州別 B 每天的值，依此類推。如果您想預測每日交通事件，並指定包含州和城市資料的維度資料欄，預測資料會包含 A 州和 A 市每天的值，然後是 A 州和 B 市每天的值，依此類推。在階層式時間序列模型中，[階層式對帳](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series?hl=zh-tw#hierarchical_reconciliation)用於匯總每個子項時間序列，並與其父項對帳。舉例來說，A 州所有城市的預估值總和，必須等於 A 州的預估值。
 
-在本教學課程中，您將使用相同資料建立兩個時間序列模型，一個使用階層式預測，另一個則否。這項功能可讓您比較模型傳回的結果。
+在本教學課程中，您將使用相同資料建立兩個時間序列模型，一個使用階層式預測，另一個則否。方便您比較模型傳回的結果。
 
-[本教學課程使用公開資料表中的資料。](https://console.cloud.google.com/bigquery?p=bigquery-public-data&%3Bd=iowa_liquor_sales&%3Bt=sales&%3Bpage=table&hl=zh-tw)`bigquery-public-data.iowa_liquor.sales.sales`這份表格包含愛荷華州公開酒類銷售資料，內有不同商店超過 100 萬種酒類產品的資訊。
+[本教學課程使用公開資料表中的資料。](https://console.cloud.google.com/bigquery?p=bigquery-public-data&%3Bd=iowa_liquor_sales&%3Bt=sales&%3Bpage=table&hl=zh-tw)`bigquery-public-data.iowa_liquor.sales.sales`這個資料表使用愛荷華州公開的酒類銷售資料，包含不同商店中超過 100 萬種酒類產品的資訊。
 
 閱讀本教學課程前，強烈建議您先參閱「[使用單變數模型預測多個時間序列](https://docs.cloud.google.com/bigquery/docs/arima-single-time-series-forecasting-tutorial?hl=zh-tw)」。
 
 ## 所需權限
 
 * 如要建立資料集，您需要 `bigquery.datasets.create` IAM 權限。
-* 如要建立模型，您需要下列權限：
+* 如要建立模型，您必須具備下列權限：
 
   + `bigquery.jobs.create`
   + `bigquery.models.create`
@@ -40,14 +40,14 @@ Google uses AI technology to translate content into your preferred language. AI 
   + `bigquery.models.getData`
   + `bigquery.jobs.create`
 
-如要進一步瞭解 BigQuery 中的 IAM 角色和權限，請參閱 [IAM 簡介](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)。
+如要進一步瞭解 BigQuery 中的 IAM 角色和權限，請參閱「[IAM 簡介](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)」。
 
 ## 目標
 
 在本教學課程中，您會使用下列項目：
 
 * 使用 [`CREATE MODEL` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series?hl=zh-tw)，建立多個時間序列模型和多個階層式時間序列模型，預測瓶裝飲料的銷售值。
-* 使用 [`ML.FORECAST` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-forecast?hl=zh-tw)，從模型中擷取預測的瓶裝水銷售值。
+* 使用 [`ML.FORECAST` 函式從模型擷取預測的瓶裝水銷售值](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-forecast?hl=zh-tw)。
 
 ## 費用
 
@@ -231,7 +231,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 使用愛荷華州酒類銷售資料，建立階層式時間序列預測。
 
-下列 GoogleSQL 查詢會建立模型，針對 Polk、Linn 和 Scott 郡 2015 年的每日總瓶裝水銷量，生成階層式預測。
+下列 GoogleSQL 查詢會建立模型，針對 2015 年在 Polk、Linn 和 Scott 郡售出的瓶裝水每日總數，生成階層式預測。
 
 在下列查詢中，`CREATE MODEL` 陳述式中的 `HIERARCHICAL_TIME_SERIES_COLS` 選項表示您要根據指定的一組資料欄建立階層式預測。這些資料欄都會經過彙整和匯總。舉例來說，在先前的查詢中，這表示 `store_number` 資料欄值會匯總，以顯示每個 `county`、`city` 和 `zip_code` 值的預測結果。此外，`zip_code` 和 `store_number` 值也會分別匯總，顯示每個 `county` 和 `city` 值的預測結果。欄的順序很重要，因為這會定義階層的結構。
 
@@ -267,7 +267,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    GROUP BY store_number, date, city, zip_code, county;
    ```
 
-   查詢作業約需 45 秒才能完成，完成後即可在「Explorer」窗格中存取 `bqml_tutorial.liquor_forecast_hierarchical` 模型。由於查詢是使用 `CREATE MODEL` 陳述式建立模型，因此不會有查詢結果。
+   查詢作業約需 45 秒才能完成，完成後即可在「Explorer」窗格中存取 `bqml_tutorial.liquor_forecast_hierarchical` 模型。由於查詢使用 `CREATE MODEL` 陳述式建立模型，因此不會有查詢結果。
 
 ## 使用階層式模型預測資料
 
@@ -346,11 +346,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

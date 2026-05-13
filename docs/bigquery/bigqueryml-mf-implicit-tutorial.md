@@ -12,7 +12,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 本教學課程說明如何建立[矩陣分解模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization?hl=zh-tw)，並在公開的 [`GA360_test.ga_sessions_sample` 資料表](https://console.cloud.google.com/bigquery?p=cloud-training-demos&%3Bd=GA360_test&%3Bt=ga_sessions_sample&%3Bpage=table&hl=zh-tw)中，使用 Google Analytics 360 使用者工作階段資料訓練模型。接著，您可以使用矩陣分解模型，為網站使用者生成內容建議。
 
-使用使用者工作階段時間等間接顧客偏好資訊訓練模型，稱為使用「隱性意見回饋」訓練模型。使用隱性意見回饋做為訓練資料時，系統會使用[加權交替最小平方演算法](http://yifanhu.net/PUB/cf.pdf)訓練矩陣分解模型。
+使用使用者工作階段持續時間等間接顧客偏好資訊訓練模型，稱為使用*隱性意見回饋*訓練。使用隱性意見回饋做為訓練資料時，系統會使用[加權交替最小平方演算法](http://yifanhu.net/PUB/cf.pdf)訓練矩陣分解模型。
 
 **重要事項：** 您必須預訂才能使用矩陣因式分解模型。詳情請參閱[定價](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization?hl=zh-tw#pricing)。
 
@@ -91,7 +91,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 ## 所需權限
 
 * 如要建立資料集，您需要 `bigquery.datasets.create` IAM 權限。
-* 如要建立模型，您需要下列權限：
+* 如要建立模型，您必須具備下列權限：
 
   + `bigquery.jobs.create`
   + `bigquery.models.create`
@@ -102,7 +102,7 @@ Google uses AI technology to translate content into your preferred language. AI 
   + `bigquery.models.getData`
   + `bigquery.jobs.create`
 
-如要進一步瞭解 BigQuery 中的 IAM 角色和權限，請參閱 [IAM 簡介](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)。
+如要進一步瞭解 BigQuery 中的 IAM 角色和權限，請參閱「[IAM 簡介](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)」。
 
 ## 建立資料集
 
@@ -153,7 +153,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 準備範例資料
 
-將 `GA360_test.ga_sessions_sample` 表格中的資料轉換為更適合模型訓練的結構，然後將資料寫入 BigQuery 表格。下列查詢會計算每位使用者在每項內容的停留時間，您之後可將這項資料做為隱性意見回饋，推斷使用者對該內容的偏好。
+將 `GA360_test.ga_sessions_sample` 資料表中的資料轉換為更適合模型訓練的結構，然後將資料寫入 BigQuery 資料表。下列查詢會計算每位使用者在每項內容的停留時間，您之後可將這項資料做為隱性意見回饋，推斷使用者對該內容的偏好。
 
 請按照下列步驟建立訓練資料表：
 
@@ -235,7 +235,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 建立模型
 
-建立矩陣分解模型，並根據 `analytics_session_data` 資料表中的資料訓練模型。模型經過訓練後，可預測每個 `visitorId`-`contentId` 配對的信心評分。系統會根據工作階段持續時間中位數，以置中和縮放方式建立信賴度評分。如果記錄中的工作階段時間長度是中位數的 3.33 倍以上，系統會將其篩除為離群值。
+建立矩陣分解模型，並根據 `analytics_session_data` 資料表中的資料訓練模型。模型經過訓練後，可預測每個 `visitorId`-`contentId` 配對的信心評分。系統會根據工作階段持續時間中位數，以置中和縮放方式建立信賴度評分。如果記錄中的工作階段持續時間是中位數的 3.33 倍以上，系統會將其篩除為離群值。
 
 下列 `CREATE MODEL` 陳述式會使用這些資料欄產生建議：
 
@@ -273,7 +273,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 您也可以在Google Cloud 控制台中查看模型的訓練統計資料。
 
-機器學習演算法會使用不同參數建立多個模型疊代版本，然後選取可將[損失](https://en.wikipedia.org/wiki/Loss_function)降到最低的模型版本。這項程序稱為經驗風險最小化。模型訓練統計資料會顯示模型每次疊代的相關損失。
+機器學習演算法會使用不同參數建立多個模型疊代版本，然後選取能將[損失](https://en.wikipedia.org/wiki/Loss_function)降到最低的模型版本。這項程序稱為經驗風險最小化。模型訓練統計資料會顯示模型每次疊代的相關損失。
 
 如要查看模型的訓練統計資料，請按照下列步驟操作：
 
@@ -282,7 +282,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
 
-   如果沒有看到左側窗格，請按一下「展開左側窗格」圖示 last\_page 開啟窗格。
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Explorer」窗格中展開專案，然後按一下「Datasets」(資料集)。
 4. 點選「`bqml_tutorial`」資料集。您也可以使用搜尋功能或篩選器來尋找資料集。
 5. 按一下「模型」分頁標籤。
@@ -483,11 +483,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

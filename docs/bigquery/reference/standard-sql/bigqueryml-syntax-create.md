@@ -483,7 +483,4 @@ while the "boosted tree classifier" only applies to the classifier.
 | INSTANCE\_WEIGHT\_COL | Identifies the column used to specify the weights for each data point in the training dataset. | [Boosted trees](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree#instance_weight_col),  [Random forest](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-random-forest#instance_weight_col) |
 | NUM\_CLUSTERS | The number of clusters to identify in the input data. | [Kmeans](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans#num_clusters) |
 | KMEANS\_INIT\_METHOD | The method of initializing the clusters. | [Kmeans](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans#kmeans_init_method) |
-| KMEANS\_INIT\_COL | Identifies the column used to initialize the centroids. | [Kmeans](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans#kmeans_init_col) |
-| DISTANCE\_TYPE | The type of metric to compute the distance between two points. | [K-means](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans#distance_type) |
-| STANDARDIZE\_FEATURES | Whether to [standardize numerical features](https://en.wikipedia.org/wiki/Feature_scaling). | [Kmeans](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans#standardize_features) |
-|  |
+| KMEANS\_INIT\_COL | Identifies the column used to initial |

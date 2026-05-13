@@ -12,7 +12,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 本教學課程說明如何使用[`ARIMA_PLUS`單變數時間序列模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series?hl=zh-tw)，根據特定資料欄的歷史值，預測該資料欄的未來值。
 
-本教學課程會預測多個時間序列。系統會針對一或多個指定資料欄中的每個值，計算每個時間點的預測值。舉例來說，如果您想預測天氣，並指定包含城市資料的資料欄，預測資料會包含 A 城市所有時間點的預測值，接著是 B 城市所有時間點的預測值，依此類推。
+本教學課程會預測多個時間序列。系統會針對一或多個指定資料欄中的每個值，計算每個時間點的預測值。舉例來說，如果您想預測天氣，並指定包含城市資料的資料欄，預測資料就會包含 A 城市所有時間點的預測值，然後是 B 城市所有時間點的預測值，依此類推。
 
 [本教學課程使用公開資料表中的資料。](https://console.cloud.google.com/bigquery?p=bigquery-public-data&%3Bd=new_york&%3Bt=citibike_trips&%3Bpage=table&hl=zh-tw)`bigquery-public-data.new_york.citibike_trips`這個資料表包含紐約市 Citi Bike 行程的相關資訊。
 
@@ -95,7 +95,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 ## 所需權限
 
 * 如要建立資料集，您需要 `bigquery.datasets.create` IAM 權限。
-* 如要建立模型，您需要下列權限：
+* 如要建立模型，您必須具備下列權限：
 
   + `bigquery.jobs.create`
   + `bigquery.models.create`
@@ -176,7 +176,7 @@ bqclient.create_dataset("bqml_tutorial", exists_ok=True)
 
 ### SQL
 
-下列查詢的 `SELECT` 陳述式使用 [`EXTRACT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions?hl=zh-tw#extract)從 `starttime` 資料欄中擷取日期資訊。這項查詢會使用 `COUNT(*)` 子句，取得每日的 Citi Bike 行程總數。
+下列查詢的 `SELECT` 陳述式使用 [`EXTRACT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions?hl=zh-tw#extract)從 `starttime` 資料欄中擷取日期資訊。這項查詢會使用 `COUNT(*)` 子句，取得每日的 Citi Bike 總行程數。
 
 請按照下列步驟，以視覺化方式呈現時間序列資料：
 
@@ -193,7 +193,7 @@ bqclient.create_dataset("bqml_tutorial", exists_ok=True)
    `bigquery-public-data.new_york.citibike_trips`
    GROUP BY date;
    ```
-3. 查詢完成後，依序點選「開啟方式」>「數據分析」。系統會在新的分頁中開啟數據分析。在新分頁中完成下列步驟。
+3. 查詢完成後，依序點選「開啟方式」>「數據分析」。數據分析會在新的分頁中開啟。在新分頁中完成下列步驟。
 4. 在數據分析中，依序點選「插入」>「時間序列圖」。
 5. 在「圖表」窗格中，選擇「設定」分頁。
 6. 在「指標」專區中新增「num\_trips」欄位，並移除預設的「記錄計數」指標。產生的圖表如下所示：
@@ -259,11 +259,11 @@ num_trips.plot.line(
 
 ## 建立時間序列模型
 
-您想預測每個 Citi Bike 車站的單車行程數量，這需要許多時間序列模型，也就是輸入資料中每個 Citi Bike 車站各需要一個模型。您可以建立多個模型來完成這項作業，但這可能相當繁瑣且耗時，尤其是當您有大量時間序列時。您可以改用單一查詢建立及調整一組時間序列模型，一次預測多個時間序列。
+您想預測每個 Citi Bike 車站的單車行程數量，這需要許多時間序列模型，也就是輸入資料中每個 Citi Bike 車站各需要一個模型。您可以建立多個模型來完成這項作業，但這可能相當繁瑣且耗時，尤其是在有大量時間序列的情況下。您可以改用單一查詢建立及調整一組時間序列模型，一次預測多個時間序列。
 
 ### SQL
 
-在下列查詢中，`OPTIONS(model_type='ARIMA_PLUS', time_series_timestamp_col='date', ...)` 子句表示您要建立以 [ARIMA](https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average) 為基礎的時間序列模型。您可以使用 `CREATE MODEL` 陳述式的 [`time_series_id_col` 選項，指定要取得預測結果的輸入資料欄 (在本例中為 Citi Bike 車站，以 `start_station_name` 資料欄表示)。](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series?hl=zh-tw#time_series_id_col)您可以使用 `WHERE` 子句，將起點站限制為名稱中含有 `Central Park` 的車站。`CREATE MODEL` 陳述式的 [`auto_arima_max_order` 選項](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series?hl=zh-tw#auto_arima_max_order)會控管 `auto.ARIMA` 演算法中超參數調整的搜尋空間。`CREATE MODEL` 陳述式的 [`decompose_time_series` 選項](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series?hl=zh-tw#decompose_time_series)預設為 `TRUE`，因此在下一個步驟中評估模型時，系統會傳回時間序列資料的相關資訊。
+在下列查詢中，`OPTIONS(model_type='ARIMA_PLUS', time_series_timestamp_col='date', ...)` 子句表示您要建立以 [ARIMA](https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average) 為基礎的時間序列模型。您可以使用 `CREATE MODEL` 陳述式的 [`time_series_id_col` 選項](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series?hl=zh-tw#time_series_id_col)，指定要取得預測結果的輸入資料欄 (在本例中為 Citi Bike 車站，以 `start_station_name` 資料欄表示)。您可以使用 `WHERE` 子句，將起點站限制為名稱中含有 `Central Park` 的車站。`CREATE MODEL` 陳述式的 [`auto_arima_max_order` 選項](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series?hl=zh-tw#auto_arima_max_order)會控管 `auto.ARIMA` 演算法中超參數調整的搜尋空間。`CREATE MODEL` 陳述式的 [`decompose_time_series` 選項](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series?hl=zh-tw#decompose_time_series)預設為 `TRUE`，因此在下一個步驟中評估模型時，系統會傳回時間序列資料的相關資訊。
 
 請按照下列步驟建立模型：
 
@@ -291,9 +291,9 @@ num_trips.plot.line(
    GROUP BY start_station_name, date;
    ```
 
-   查詢作業約需 24 秒才能完成，完成後您就能存取 `nyc_citibike_arima_model_group` 模型。由於查詢使用 `CREATE MODEL` 陳述式，因此您不會看到查詢結果。
+   查詢約需 24 秒才能完成，完成後您就能存取 `nyc_citibike_arima_model_group` 模型。由於查詢使用 `CREATE MODEL` 陳述式，因此您不會看到查詢結果。
 
-這項查詢會建立十二個時間序列模型，輸入資料中十二個 Citi Bike 起始車站各有一個模型。由於平行處理，時間成本約為 24 秒，只比建立單一時間序列模型多 1.4 倍。不過，如果您移除 `WHERE ... LIKE ...` 子句，則會有 600 多個時間序列需要預測，而且由於運算單元容量限制，這些時間序列不會完全平行預測。在這種情況下，查詢大約需要 15 分鐘才能完成。如要縮短查詢執行時間，但可能稍微降低模型品質，可以減少 `auto_arima_max_order` 的值。這會縮小演算法中超參數調整的搜尋空間。`auto.ARIMA`詳情請參閱「[`Large-scale time series forecasting best practices`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series?hl=zh-tw#large-scale-time-series-forecasting-best-practices)」。
+這項查詢會建立十二個時間序列模型，輸入資料中十二個 Citi Bike 起始車站各有一個模型。由於平行處理，時間成本約為 24 秒，只比建立單一時間序列模型多 1.4 倍。不過，如果您移除 `WHERE ... LIKE ...` 子句，則會有 600 多個時間序列要預測，而且由於運算單元容量限制，這些時間序列不會完全平行預測。在這種情況下，查詢大約需要 15 分鐘才能完成。如要縮短查詢執行時間，但可能稍微降低模型品質，可以減少 `auto_arima_max_order` 的值。這會縮小演算法中超參數調整的搜尋空間。`auto.ARIMA`詳情請參閱「[`Large-scale time series forecasting best practices`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series?hl=zh-tw#large-scale-time-series-forecasting-best-practices)」。
 
 ### BigQuery DataFrames
 
@@ -436,7 +436,7 @@ print(summary.peek())
    ML.ARIMA_COEFFICIENTS(MODEL `bqml_tutorial.nyc_citibike_arima_model_group`);
    ```
 
-   查詢會在不到一秒的時間內完成。結果應如下所示：
+   查詢會在不到一秒內完成。結果應如下所示：
 
    如要進一步瞭解輸出資料欄，請參閱 [`ML.ARIMA_COEFFICIENTS` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-arima-coefficients?hl=zh-tw)。
 
@@ -491,7 +491,7 @@ print(coef.peek())
    ```
 3. 按一下「執行」。
 
-   查詢會在不到一秒的時間內完成。結果應如下所示：
+   查詢會在不到一秒內完成。結果應如下所示：
 
 如要進一步瞭解輸出資料欄，請參閱 [`ML.FORECAST` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-forecast?hl=zh-tw)。
 
@@ -545,7 +545,7 @@ print(prediction.peek())
     STRUCT(3 AS horizon, 0.9 AS confidence_level));
    ```
 
-   查詢會在不到一秒的時間內完成。結果應如下所示：
+   查詢會在不到一秒內完成。結果應如下所示：
 
    傳回的前一千列都是歷史資料。您必須捲動瀏覽結果，才能查看預測資料。
 
@@ -630,11 +630,11 @@ print(explain.peek(5))
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

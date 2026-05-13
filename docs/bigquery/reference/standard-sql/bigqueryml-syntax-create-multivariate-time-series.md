@@ -978,13 +978,4 @@ custom holiday scenarios, as described in the following sections.
 
 ### Supplement built-in holidays with additional custom holidays
 
-To model one or more custom holidays in addition to a region's built-in
-holidays, specify the target holiday region with the `HOLIDAY_REGION` option,
-and then provide the new holiday metadata in the `holiday_statement` argument.
-
-The following example models all built-in holidays for the `US` holiday region,
-and additionally models the custom holiday `members_day`:
-
-```
-CREATE OR
-```
+To model one or more custom holidays in addition to a region&#

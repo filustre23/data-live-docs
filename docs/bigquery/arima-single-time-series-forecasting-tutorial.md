@@ -93,7 +93,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 ## 所需權限
 
 * 如要建立資料集，您需要 `bigquery.datasets.create` IAM 權限。
-* 如要建立模型，您需要下列權限：
+* 如要建立模型，您必須具備下列權限：
 
   + `bigquery.jobs.create`
   + `bigquery.models.create`
@@ -192,7 +192,7 @@ bqclient.create_dataset("bqml_tutorial", exists_ok=True)
    GROUP BY date;
    ```
 
-   1. 查詢完成後，依序點選「開啟方式」>「數據分析」。系統會在新的分頁中開啟數據分析。在新分頁中完成下列步驟。
+   1. 查詢完成後，依序點選「開啟方式」>「數據分析」。數據分析會在新的分頁中開啟。在新分頁中完成下列步驟。
    2. 在數據分析中，依序點選「插入」>「時間序列圖」。
    3. 在「圖表」窗格中，選擇「設定」分頁。
    4. 在「指標」專區中新增「total\_visits」欄位，並移除預設的「記錄計數」指標。產生的圖表如下所示：
@@ -271,7 +271,7 @@ total_visits.plot.line()
 
    查詢約需 4 秒即可完成，之後您就能存取 `ga_arima_model` 模型。由於查詢是使用 `CREATE MODEL` 陳述式建立模型，因此您看不到查詢結果。
 
-**注意：** 您可能會想知道美國節慶是否會影響時間序列。您可以嘗試將 `CREATE MODEL` 陳述式的 [`holiday_region` 選項](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series?hl=zh-tw#holiday_region)設為 `US`。如果時間序列中有任何節慶模式，設定這個選項可更準確地模擬節慶時間點。
+**附註：** 您可能會想知道美國節慶是否會影響時間序列。您可以嘗試將 `CREATE MODEL` 陳述式的 [`holiday_region` 選項](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series?hl=zh-tw#holiday_region)設為 `US`。如果時間序列中有任何節慶模式，設定這個選項可讓模型更準確地模擬節慶時間點。
 
 ### BigQuery DataFrames
 
@@ -469,7 +469,7 @@ print(prediction.peek())
 
 您可以使用 `ML.EXPLAIN_FORECAST` 函式，除了取得預測資料，還能取得可解釋性指標。`ML.EXPLAIN_FORECAST` 函式會預測未來時間序列值，並傳回時間序列的所有個別元件。
 
-與 `ML.FORECAST` 函式類似，`ML.EXPLAIN_FORECAST` 函式中使用的 `STRUCT(30 AS horizon, 0.8 AS confidence_level)` 子句表示查詢會預測未來 30 個時間點，並產生信賴度為 80% 的預測區間。
+與 `ML.FORECAST` 函式類似，`ML.EXPLAIN_FORECAST` 函式中使用的 `STRUCT(30 AS horizon, 0.8 AS confidence_level)` 子句表示查詢會預測未來 30 個時間點，並產生信賴度為 80% 的預測間隔。
 
 請按照下列步驟說明模型的結果：
 
@@ -578,11 +578,11 @@ print(ex_pred.head(4))
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

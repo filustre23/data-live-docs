@@ -709,9 +709,4 @@ Search Ads 360 API 資源：[ad\_group\_criterion](https://developers.google.com
 | ad\_group\_criterion\_webpage\_coverage\_percentage | 網站條件涵蓋率百分比。這是根據廣告群組和廣告活動中的網站目標、排除網站目標和排除關鍵字，計算出的網站涵蓋率百分比。舉例來說，如果涵蓋範圍傳回 1，表示涵蓋範圍為 100%。 |
 | ad\_group\_id | 廣告群組 ID。 |
 | ad\_group\_name | 廣告群組的名稱。建立新廣告群組時，這個欄位為必填，且不得為空白。長度不得超過 255 個 UTF-8 全形字元。不得包含任何空值 (代碼點 0x0)、NL 換行 (代碼點 0xA) 或回車字元 (代碼點 0xD)。 |
-| ad\_group\_status | 廣告群組的狀態。 |
-| campaign\_id | 廣告活動的 ID。 |
-| campaign\_name | 廣告活動名稱。建立新廣告活動時，這個欄位為必填，且不得為空白。不得包含任何空值 (代碼點 0x0)、NL 換行 (代碼點 0xA) 或回車字元 (代碼點 0xD)。 |
-| campaign\_status | 廣告活動的狀態。 |
-| customer\_account\_type | 引擎帳戶類型。例如：Google Ads、Microsoft Advertising、Yahoo Japan、百度、Facebook、Engine Track。 |
-| customer\_descriptive\_name | 選填 |
+| ad\_group\_status | 廣 |

@@ -25,7 +25,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 事前準備
 
-授予身分與存取權管理 (IAM) 角色，讓使用者擁有執行本文件各項工作所需的權限。執行工作所需的權限 (如有) 會列在工作「必要權限」部分。
+授予身分與存取權管理 (IAM) 角色，讓使用者擁有執行本文件各項工作所需的權限。如要執行工作，必須具備的權限 (如有) 會列在工作的「必要權限」部分。
 
 ## 更新檢視畫面
 
@@ -63,7 +63,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 必須具備下列權限：
 
-* *專案 A*：`bigquery.tables.update` 您要更新的特定檢視畫面資源。
+* *專案 A*：`bigquery.tables.update` 針對您更新的特定檢視畫面資源。
 * *專案 B*：對參照的共用資源具備 `bigquery.datasets.get` 和 `bigquery.tables.getData` 權限。
 * *專案 C*：您呼叫的特定 UDF 上的 `bigquery.routines.get`。
 
@@ -349,7 +349,7 @@ print(f"Updated {view.table_type}: {str(view.reference)}")
 4. 按一下「詳細資料」分頁標籤，然後點選「編輯詳細資料」。
 5. 在「編輯詳細資料」對話方塊的「到期時間」選單中，選取「指定日期」。
 6. 在「到期時間」欄位中，使用日期挑選器工具選取日期和時間。
-7. 按一下 [儲存]。已更新的到期時間會顯示在「View info」(檢視資訊) 區段的「View expiration」(查看到期時間) 列。
+7. 按一下 [儲存]。已更新的到期時間會顯示在「View info」(檢視表資訊) 區段的「View expiration」(查看到期時間) 列。
 
 ### SQL
 
@@ -737,7 +737,7 @@ assert table.description == "Updated description."
 
 ## 複製檢視畫面
 
-您可以使用 Google Cloud 控制台複製檢視表。
+您可以使用 Google Cloud 控制台複製檢視區塊。
 
 您無法使用 bq 指令列工具、REST API 或用戶端程式庫複製檢視表，但可以[在目標資料集中複製檢視表](https://docs.cloud.google.com/bigquery/docs/views?hl=zh-tw)。
 
@@ -783,7 +783,7 @@ assert table.description == "Updated description."
       * 在「Table」(資料表) 部分，輸入檢視表的名稱。您可以在方塊中輸入新的檢視表名稱，以重新命名檢視表。您輸入的新名稱必須遵循[檢視表命名](https://docs.cloud.google.com/bigquery/docs/views?hl=zh-tw#view_naming)規則。
    3. 按一下「複製」：
 
-複製工作有相關限制。詳情請參閱「[配額與限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#copy_jobs)」。
+複製作業有相關限制。詳情請參閱「[配額與限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#copy_jobs)」。
 
 ## 重新命名檢視表
 
@@ -805,9 +805,9 @@ assert table.description == "Updated description."
 
 刪除[授權 view](https://docs.cloud.google.com/bigquery/docs/share-access-views?hl=zh-tw)後，系統最多可能需要 24 小時，才會從來源資料集的*授權 view*清單中移除已刪除的 view。
 
-**注意：** 檢視區塊一經刪除即無法復原。如果重新建立的授權 view 與已刪除的檢視區同名，則必須將新的檢視畫面新增至來源資料集的「授權 view」清單。
+**注意：** 檢視區塊一經刪除即無法復原。如果重新建立授權檢視區，並使用與已刪除檢視區相同的名稱，則必須將新的檢視畫面新增至來源資料集的*授權 view*清單。
 
-刪除檢視畫面也會一併刪除與該檢視畫面相關聯的權限。重新建立已刪除的資料檢視時，您也必須手動[重新設定先前與該資料檢視相關聯的存取權](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam?hl=zh-tw)。
+刪除檢視區也會一併刪除與該檢視區相關聯的權限。重新建立已刪除的資料檢視時，您也必須手動[重新設定先前與該資料檢視相關聯的存取權](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam?hl=zh-tw)。
 
 **注意：**您無法直接復原檢視區塊，但可以搜尋對應的[稽核記錄活動](https://docs.cloud.google.com/bigquery/docs/introduction-audit-workloads?hl=zh-tw)，復原檢視區塊建立陳述式。
 
@@ -912,7 +912,7 @@ bq rm -t myotherproject:mydataset.myview
 bq rm -f -t mydataset.myview
 ```
 
-**注意：** 您可以輸入 [`bq ls dataset`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_ls) 指令，確認是否已從資料集移除檢視表。
+**附註：** 您可以輸入 [`bq ls dataset`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_ls) 指令，確認是否已從資料集移除檢視表。
 
 ### API
 
@@ -1089,7 +1089,7 @@ end
 
 ## 還原檢視畫面
 
-您無法直接還原已刪除的檢視畫面，但可以透過下列方法解決特定情況：
+您無法直接還原已刪除的檢視畫面，但可以透過下列方式解決特定情況：
 
 * 如果檢視區塊因父項資料集遭刪除而一併刪除，您可以[取消刪除資料集](https://docs.cloud.google.com/bigquery/docs/restore-deleted-datasets?hl=zh-tw)，以復原檢視區塊。
 * 如果檢視區塊是明確刪除，您可以使用上次建立或更新檢視區塊時使用的查詢，[重新建立檢視區塊](https://docs.cloud.google.com/bigquery/docs/views?hl=zh-tw)。您可以在[記錄](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata?hl=zh-tw#BigQueryAuditMetadata.TableViewDefinition)中找到檢視區塊建立或更新作業的查詢定義。
@@ -1111,11 +1111,11 @@ end
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-11 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-11 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

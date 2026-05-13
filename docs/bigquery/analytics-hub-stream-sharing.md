@@ -16,7 +16,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 透過 Pub/Sub 串流分享
 
-您可以透過 BigQuery sharing (舊稱 Analytics Hub) 共用 Pub/Sub 主題，在多個內部和外部機構界線之間，收錄及發布串流資料庫。即時串流資料會透過 BigQuery 共用交換庫和產品資訊共用，方便您以邏輯方式分類及分組大量 Pub/Sub 主題，並大規模佈建存取權。
+您可以透過 BigQuery sharing (舊稱 Analytics Hub) 共用 Pub/Sub 主題，在多個內部和外部機構界線之間，管理及發布串流資料庫。即時串流資料會透過 BigQuery 共用交換庫和產品資訊共用，方便您以邏輯方式分類及分組大量 Pub/Sub 主題，並大規模佈建存取權。
 
 分享串流資料可執行下列操作：
 
@@ -33,7 +33,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 * **醫療保健**：
   + 運用預測演算法監控病患，並即時分析風險。
   + 使用穿戴式醫療器材監測健康指標。
-  + 自動取得、建構、儲存及處理病患、醫療專業人員和機構管理人員的資料。
+  + 自動取得、建構、儲存及處理病患、專業醫護人員和機構管理人員的資料。
 * **電信**：
   + 監控網路健康狀態並預測故障。
   + 找出使用者行為模式，以便更準確地定位裝置和天線。
@@ -68,8 +68,8 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 透過 Pub/Sub 分享串流有下列限制：
 
-* 共用主題最多可支援 10,000 個 Pub/Sub 訂閱項目。這項限制包括連結的 Pub/Sub 訂閱項目，以及在「共用」以外建立的 Pub/Sub 訂閱項目 (例如直接從 Pub/Sub 建立的項目)。
-* 系統會在 Data Catalog (已淘汰) 和 Knowledge Catalog 中為共用主題建立索引，但您無法依資源類型進行篩選。
+* 共用主題最多可支援 10,000 個 Pub/Sub 訂閱項目。這項限制包括連結的 Pub/Sub 訂閱項目，以及在共用功能外建立的 Pub/Sub 訂閱項目 (例如直接從 Pub/Sub 建立的項目)。
+* Data Catalog (已淘汰) 和 Knowledge Catalog 會為共用主題建立索引，但您無法依資源類型進行篩選。
 * 系統會擷取共用 Pub/Sub 主題和訂閱項目的用量指標，並顯示在指標資訊主頁中，但 `INFORMATION_SCHEMA.SHARED_DATASET_USAGE` 不會顯示這些指標。
 
   如要監控指標，請參閱「[在 Cloud Monitoring 中監控 Pub/Sub](https://docs.cloud.google.com/pubsub/docs/monitoring?hl=zh-tw)」。
@@ -143,21 +143,21 @@ gcloud services enable analyticshub.googleapis.com
 7. 輸入下列選填詳細資料：
 
    * **類別**：選取最多兩個最能代表商家檔案的類別。共用主題訂閱者可以根據這些類別[篩選房源](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings?hl=zh-tw#discover-listings)。
-   * **資料相依性**：共用主題發布者用來發布資料的區域。這項資訊可協助共用主題的訂閱者從相同區域讀取資料，盡量減少或避免 Pub/Sub 網路輸出費用。如要進一步瞭解輸出費用，請參閱「[資料移轉費用](https://cloud.google.com/pubsub/pricing?hl=zh-tw#egress_costs)」。
+   * **資料相依性**：共用主題發布者用來發布資料的區域。共用主題的訂閱者可透過這項資訊，從相同區域讀取資料，盡量減少或避免 Pub/Sub 網路輸出費用。如要進一步瞭解輸出費用，請參閱「[資料移轉費用](https://cloud.google.com/pubsub/pricing?hl=zh-tw#egress_costs)」。
    * **圖示**：產品資訊的圖示。支援 PNG 和 JPEG 檔案格式。圖示大小不得超過 512 KiB，尺寸不得超過 512 x 512 像素。
-   * **說明**：簡要說明房源。共用主題的訂閱者可以根據說明[搜尋房源](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings?hl=zh-tw#discover-listings)。
-   * **公開探索**：在 BigQuery sharing 目錄中，為您的項目啟用公開探索功能。此外，您也必須設定房源的權限。按一下交易所的「動作」，然後點選「設定權限」。授予 `allUsers` 或 `allAuthenticatedusers` [Analytics Hub 檢視者角色](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles?hl=zh-tw#ah-subscriber-role) (`roles/analyticshub.viewer`)。按一下「允許公開存取」。
+   * **說明**：簡要說明房源。共用主題訂閱者可以根據說明[搜尋房源](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings?hl=zh-tw#discover-listings)。
+   * **公開探索**：在 BigQuery sharing 目錄中，為您的項目啟用公開探索功能。您也必須設定商家資訊的權限。按一下交易所的「動作」，然後點選「設定權限」。授予 `allUsers` 或 `allAuthenticatedusers` [Analytics Hub 檢視者角色](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles?hl=zh-tw#ah-subscriber-role) (`roles/analyticshub.viewer`)。按一下「允許公開存取」。
    * **說明文件 > Markdown**：其他資訊，例如相關說明文件的連結，以及有助於共用主題訂閱者使用主題的其他詳細資料。
 8. 在「商家資訊聯絡資料」頁面中，輸入下列選填詳細資料：
 
    * **主要聯絡人**：輸入商家資訊主要聯絡人的電子郵件地址或網址。
-   * **要求存取聯絡人**：輸入電子郵件地址或接收表單的網址，分享主題的訂閱者可透過這些資訊與您聯絡。
+   * **要求存取聯絡人**：輸入電子郵件地址或接收表單網址，分享主題訂閱者可透過這些資訊與您聯絡。
    * **供應商**：展開「供應商」部分，並在下列欄位中指定詳細資料：
 
      + **供應商名稱**：主題供應商的名稱。
      + **供應商主要聯絡人**：主題供應商主要聯絡人的電子郵件地址或網址。
 
-     共用主題的訂閱者可以根據資料供應商篩選房源資訊。
+     共用主題訂閱者可以根據資料供應商篩選房源資訊。
    * **發布商**：展開「發布商」部分，並在下列欄位中指定詳細資料：
 
      + **發布商名稱**：建立商家資訊的共用主題發布商名稱。
@@ -221,7 +221,7 @@ PATCH https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/location/LOCATI
 
 ### 刪除產品資訊
 
-如果共用的 Pub/Sub 主題有有效訂閱項目，就無法刪除房源資訊。嘗試刪除共用主題資訊前，請先[撤銷所有有效訂閱](https://docs.cloud.google.com/bigquery/docs/analytics-hub-stream-sharing?hl=zh-tw#revoke_a_subscription)。刪除商家資訊後無法復原。
+如果共用的 Pub/Sub 主題有有效訂閱項目，就無法刪除房源資訊。嘗試刪除共用主題資訊前，請[撤銷所有有效訂閱](https://docs.cloud.google.com/bigquery/docs/analytics-hub-stream-sharing?hl=zh-tw#revoke_a_subscription)。刪除商家資訊後無法復原。
 
 如要刪除房源，請選擇下列任一做法：
 
@@ -234,7 +234,7 @@ PATCH https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/location/LOCATI
 3. 按一下要刪除的商家資訊。
 4. 按一下「刪除」圖示 delete。
 5. 在「要刪除房源嗎？」對話方塊中輸入 `delete`，確認刪除房源。
-6. 按一下「Delete」(刪除)。
+6. 點選「刪除」。
 
 ### API
 
@@ -255,7 +255,7 @@ DELETE https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/location/LOCAT
 
 ### 分享房源資訊
 
-如要授權使用者存取私人應用程式，請為該應用程式的個人或群組設定 IAM 政策。如果是商業用途的商家資訊，[資料交換必須公開](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges?hl=zh-tw#make-data-exchange-public)。公開資料交換庫中的清單會顯示在「分享」頁面，供[Google Cloud 所有使用者 (allAuthenticatedUsers)](https://docs.cloud.google.com/iam/docs/principals-overview?hl=zh-tw#all-authenticated-users) 查看。如要允許使用者要求存取商業產品資訊，請授予他們 [Analytics Hub 檢視者角色](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles?hl=zh-tw#ah-subscriber-role) (`roles/analyticshub.viewer`)。
+如要授權使用者存取私人應用程式，請為該應用程式的個人或群組設定 IAM 政策。如果是商業用途的商家資訊，[資料交換必須公開](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges?hl=zh-tw#make-data-exchange-public)。公開資料交換庫中的清單會顯示在「分享」頁面，供[所有使用者 (allAuthenticatedUsers)](https://docs.cloud.google.com/iam/docs/principals-overview?hl=zh-tw#all-authenticated-users) 存取。Google Cloud 如要允許使用者要求存取商業產品資訊，請授予他們 [Analytics Hub 檢視者角色](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles?hl=zh-tw#ah-subscriber-role) (`roles/analyticshub.viewer`)。
 
 如要授予使用者檢視或訂閱清單的權限，請按照下列步驟操作：
 
@@ -273,14 +273,14 @@ DELETE https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/location/LOCAT
 7. 從「Select a role」選單選取「Analytics Hub」，然後根據房源類型選取下列其中一個角色：
 
    * 如果是商業產品資訊，請選取「Analytics Hub 檢視者」角色。這個角色可讓使用者[查看商家資訊並要求存取權](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings?hl=zh-tw#discover-listings)。
-   * 如果是私人或非商業用途的公開資訊，請選取「Analytics Hub 訂閱者」角色。使用者可透過這個角色[訂閱你的商家資訊](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings?hl=zh-tw#subscribe-listings)。
+   * 如果是私人或非商業用途的公開清單，請選取「Analytics Hub 訂閱者」角色。使用者可透過這個角色[訂閱你的商家資訊](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings?hl=zh-tw#subscribe-listings)。
 8. 按一下 [儲存]。
 
 詳情請參閱「[Analytics Hub 訂閱者和檢視者角色](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles?hl=zh-tw#ah-subscriber-role)」。
 
 ### 管理訂閱項目
 
-如要允許使用者訂閱含有共用主題的項目，請在特定項目中授予「Analytics Hub 訂閱者」(`roles/analyticshub.subscriber`) 和「Analytics Hub 訂閱項目擁有者」(`roles/analyticshub.subscriptionOwner`) 角色：
+如要讓使用者訂閱含有共用主題的項目，請在特定項目中授予「Analytics Hub 訂閱者」(`roles/analyticshub.subscriber`) 和「Analytics Hub 訂閱項目擁有者」(`roles/analyticshub.subscriptionOwner`) 角色：
 
 1. 前往「Sharing (Analytics Hub)」頁面。
 
@@ -303,7 +303,7 @@ DELETE https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/location/LOCAT
 
 ### 控制台
 
-1. 如要列出房源的共用主題訂閱者，請按照「查看所有訂閱項目」中的Google Cloud 控制台操作說明進行操作。
+1. 如要列出房源的共用主題訂閱端，請按照「[查看所有訂閱項目](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-listings?hl=zh-tw#view_all_subscriptions)」中的Google Cloud 控制台操作說明操作。
 2. 按一下「Subscriptions」(訂閱項目) 分頁標籤，查看資料交易所的所有訂閱項目。
 3. 找出要移除的訂閱項目，然後勾選旁邊的核取方塊，或選取所有訂閱項目。
 4. 在「要撤銷訂閱嗎？」對話方塊中輸入 `revoke` 以確認。
@@ -353,7 +353,7 @@ BigQuery sharing 訂閱者可以查看及訂閱清單。訂閱共用主題的清
    * **訂閱項目篩選器**：設定郵件的篩選器語法。
    * **僅傳送一次**：啟用「僅傳送一次」選項。
    * **訊息排序**：使用排序鍵啟用訊息排序功能。
-   * **無效信件**：啟用無效信件。
+   * **無效信件**：啟用無效信件功能。
    * **重試政策**：設定重試政策。
 
    如要進一步瞭解 Pub/Sub 訂閱項目屬性，請參閱[訂閱項目屬性](https://docs.cloud.google.com/pubsub/docs/subscription-properties?hl=zh-tw)。
@@ -374,7 +374,7 @@ POST https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/location/LOCATIO
 * `DATAEXCHANGE_ID`：要訂閱的房源資料廣告交易平台 ID。
 * `LISTING_ID`：要訂閱的房源 ID。
 
-在要求主體中，指定要建立[連結 Pub/Sub 訂閱](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction?hl=zh-tw#linked_pubsub_subscriptions)的 Pub/Sub 訂閱。如果成功，回應主體會留白。
+在要求主體中，指定要建立[連結 Pub/Sub 訂閱項目](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction?hl=zh-tw#linked_pubsub_subscriptions)的 Pub/Sub 訂閱項目。如果成功，回應主體會留白。
 
 如要進一步瞭解 Pub/Sub 訂閱項目，請參閱[訂閱項目總覽](https://docs.cloud.google.com/pubsub/docs/subscription-overview?hl=zh-tw)。
 
@@ -384,7 +384,7 @@ Pub/Sub 主題發布者透過 BigQuery sharing 列出及共用主題時，不會
 
 ## VPC Service Controls
 
-如要從設有 VPC Service Controls 服務邊界的專案共用主題，請設定適當的輸入和輸出規則，授予共用主題發布端和訂閱端存取權。
+如要存取設有 VPC Service Controls 範圍的專案中分享的主題，請設定適當的輸入和輸出規則，授予共用主題發布端和訂閱端存取權。
 
 ## 後續步驟
 
@@ -400,11 +400,11 @@ Pub/Sub 主題發布者透過 BigQuery sharing 列出及共用主題時，不會
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

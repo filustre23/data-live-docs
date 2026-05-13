@@ -303,8 +303,4 @@ public class QuickstartSample {
       // list capacity commitments in the project
       client
           .listCapacityCommitments(parent)
-          .iterateAll()
-          .forEach(
-              commitment ->
-                  System.out.println(
 ```

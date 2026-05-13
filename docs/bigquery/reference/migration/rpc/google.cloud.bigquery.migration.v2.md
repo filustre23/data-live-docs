@@ -260,5 +260,4 @@ A request to list previously created migration subtasks.
 | Fields | |
 | --- | --- |
 | `parent` | `string`  Required. The migration task of the subtasks to list. Example: `projects/123/locations/us/workflows/1234` |
-| `read_mask` | `FieldMask`  Optional. The list of fields to be retrieved. |
-| `page_size` | `int32`  Optional. The maximum number of migration tasks to return. The service may return fewer than this number. |
+| `read_mask` |  |

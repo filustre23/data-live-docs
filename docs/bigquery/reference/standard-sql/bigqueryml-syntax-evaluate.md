@@ -933,13 +933,4 @@ The following types of models are regression models:
 * `median_absolute_error`: a `FLOAT64` value that contains the
   [median absolute error](https://en.wikipedia.org/wiki/Mean_absolute_error)
   for the model.
-* `r2_score`: a `FLOAT64` value that contains the [R2 score](https://en.wikipedia.org/wiki/Coefficient_of_determination#Interpretation) for the model.
-* `explained_variance`: a `FLOAT64` value that contains the
-  [explained variance](https://en.wikipedia.org/wiki/Explained_variation)
-  for the model.
-
-### K-means
-
-`ML.EVALUATE` returns the following columns for k-means models:
-
-* `trial_id`: an `INT64` value that identifies the hyperpa
+* `r2_score`: a `FLOAT64` value that contains the

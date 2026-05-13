@@ -20,7 +20,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 關於根據記錄進行最佳化
 
-以記錄為準的最佳化功能會使用類似查詢已完成執行的資訊，套用額外的最佳化設定，進一步提升查詢效能，例如消耗的時段時間和查詢延遲。舉例來說，套用以記錄為準的最佳化時，第一次執行查詢可能需要 60 秒，但如果系統識別出以記錄為準的最佳化，第二次執行查詢可能只需要 30 秒。這個程序會持續進行，直到沒有其他最佳化項目可新增為止。
+以記錄為準的最佳化功能會使用類似查詢已完成執行的資訊，套用額外的最佳化設定，進一步提升查詢效能，例如消耗的時段時間和查詢延遲。舉例來說，套用以記錄為準的最佳化功能時，第一次執行查詢可能需要 60 秒，但如果系統識別出以記錄為準的最佳化功能，第二次執行查詢可能只需要 30 秒。這個程序會持續進行，直到沒有其他最佳化項目可新增為止。
 
 以下舉例說明如何透過 BigQuery 進行歷史記錄最佳化：
 
@@ -28,7 +28,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 | --- | --- | --- |
 | 1 | 60 | 原始執行作業。 |
 | 2 | 30 | 首次套用以記錄為依據的最佳化設定。 |
-| 3 | 20 | 已套用第二項以記錄為依據的最佳化設定。 |
+| 3 | 20 | 套用第二個以記錄為依據的最佳化設定。 |
 | 4 | 21 | 沒有其他可套用的記錄最佳化設定。 |
 | 5 | 19 | 沒有其他可套用的記錄最佳化設定。 |
 | 6 | 20 | 沒有其他可套用的記錄最佳化設定。 |
@@ -56,7 +56,7 @@ SET OPTIONS (
 * `PROJECT_NAME`：專案名稱
 * `LOCATION`：作業應嘗試使用以記錄為準的最佳化功能的位置
 
-**注意：** 啟用以記錄為準的最佳化功能後，如果任何 `ALTER PROJECT` 或 `ALTER ORGANIZATION` 陳述式成功執行，您可能會看到下列警示訊息，請放心忽略：
+**注意：** 啟用以記錄為準的最佳化功能後，如果看到以下警示訊息，請放心忽略。只要有任何 `ALTER PROJECT` 或 `ALTER ORGANIZATION` 陳述式成功執行，就會顯示這則訊息：
 `ALTER PROJECT succeeded. Please make sure no existing queries depend on the
 old defaults (such as the default time zone) or else these queries will be
 broken.`
@@ -77,7 +77,7 @@ SET OPTIONS (
 * `PROJECT_NAME`：專案名稱
 * `LOCATION`：工作不應嘗試使用以記錄為依據的最佳化功能的位置
 
-**注意：** 停用以記錄為準的最佳化功能後，如果看到以下警示訊息，請放心忽略。只要 `ALTER PROJECT` 或 `ALTER ORGANIZATION` 陳述式成功執行，就會顯示這則訊息：
+**注意：** 停用以記錄為準的最佳化功能後，如果看到以下警示訊息，請放心忽略。只要有任何 `ALTER PROJECT` 或 `ALTER ORGANIZATION` 陳述式成功執行，就會顯示這則訊息：
 `ALTER PROJECT succeeded. Please make sure no existing queries depend on the
 old defaults (such as the default time zone) or else these queries will be
 broken.`
@@ -225,7 +225,7 @@ LIMIT 1;
   LIMIT 10;
 ```
 
-如果套用以記錄為準的最佳化功能，上述查詢的結果會類似於下列內容：
+如果套用以記錄為準的最佳化，上述查詢的結果會類似於下列內容：
 
 ```
   /*--------------+------------------------------+------------------+-----------------------*
@@ -257,11 +257,11 @@ LIMIT 1;
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

@@ -554,12 +554,5 @@ SELECT JSON_ARRAY_APPEND(JSON '{"a": 1}', '$.a', 2) AS json_data
  | json_data |
  +-----------+
  | {"a":1}   |
- +-----------*/
-```
-
-In the following example, path `$.b` doesn't exist, so the operation is
-ignored.
-
-```
-SELECT JSON_ARRAY_APPEND(JSON '{"a": 1}', '$.b'
+ +--------
 ```

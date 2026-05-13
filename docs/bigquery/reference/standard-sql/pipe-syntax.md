@@ -488,16 +488,3 @@ to disambiguate columns after the `JOIN` operator.
  | 456 | 5           | yellow |
  +-----+-------------+--------*/
 ```
-
-### `WHERE` pipe operator
-
-```
-|> WHERE boolean_expression
-```
-
-**Description**
-
-Filters the results of the input table. The `WHERE` operator behaves the same
-as the [`WHERE` clause](/bigquery/docs/reference/standard-sql/query-syntax#where_clause) in standard syntax.
-
-In

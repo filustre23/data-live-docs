@@ -10,9 +10,9 @@ Learn the basics of configuring your Hex workspace for success.
 
 10-15 min
 
-### Hex Basics
+### Hex 101
 
-Learn the basics of getting started as an Editor in Hex.
+Learn core workflows for getting started as an Editor in Hex.
 
 12-15 min
 
@@ -96,4 +96,4 @@ An example runbook to share the details of how your company should be using Hex.
 
 ### Tutorial suggestions?[​](#tutorial-suggestions "Direct link to Tutorial suggestions?")
 
-Email us at [[email protected]](/cdn-cgi/l/email-protection#650d0009090a250d001d4b1100060d) if you want to see a tutorial on a topic that we haven’t covered yet!
+Email us at [[email protected]](/cdn-cgi/l/email-protection#1078757c7c7f507875683e64757378) if you want to see a tutorial on a topic that we haven’t covered yet!

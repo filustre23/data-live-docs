@@ -407,7 +407,7 @@ FROM
 +---------+-------------+
 ```
 
-`JSON` 資料類型未定義等號和比較運算子。
+等號和比較運算子未在 `JSON` 資料類型中定義。
 因此，您無法直接在 `GROUP BY` 或 `ORDER BY` 等子句中使用 `JSON` 值。請改用 `JSON_VALUE` 函式，以 SQL 字串形式擷取欄位值，如下一節所述。
 
 ### 以字串形式擷取值
@@ -427,7 +427,7 @@ FROM mydataset.table1;
 +-------+
 ```
 
-您可以在需要等式或比較的環境中使用 `JSON_VALUE` 函式，例如 `WHERE` 子句和 `GROUP BY` 子句。以下範例顯示根據 `JSON` 值篩選的 `WHERE` 子句：
+您可以在需要相等或比較的環境中使用 `JSON_VALUE` 函式，例如 `WHERE` 子句和 `GROUP BY` 子句。以下範例顯示根據 `JSON` 值篩選的 `WHERE` 子句：
 
 ```
 SELECT
@@ -611,11 +611,11 @@ FROM (SELECT JSON '{"a": null}' AS json);
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

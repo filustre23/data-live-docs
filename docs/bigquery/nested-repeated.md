@@ -22,7 +22,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 如要建立含有巢狀資料的資料欄，請在結構定義中將資料欄的資料類型設為 `RECORD`。在 GoogleSQL 中，`RECORD` 可以做為 [`STRUCT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#struct_type) 型別存取。`STRUCT` 是已排序欄位的容器。
 
-如要建立含有重複資料的資料欄，請在結構定義中將資料欄的[模式](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#modes)設為 `REPEATED`。在 GoogleSQL 中，重複欄位可以做為 [`ARRAY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#array_type) 類型存取。
+如要建立含有重複資料的資料欄，請在結構定義中將資料欄的 [mode](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#modes) 設為 `REPEATED`。在 GoogleSQL 中，重複欄位可做為 [`ARRAY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#array_type) 類型存取。
 
 `RECORD` 資料欄可以有 `REPEATED` 模式，以 `STRUCT` 型別的陣列表示。此外，記錄中的欄位可以重複，這會以包含 `ARRAY` 的 `STRUCT` 表示。陣列無法直接包含另一個陣列。詳情請參閱「[宣告 `ARRAY` 型別](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#declaring_an_array_type)」。
 
@@ -133,10 +133,10 @@ JSON 資料檔案會與以下內容類似。請注意，地址資料欄含有值
 1. 在 Google Cloud 控制台開啟「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 點選左側窗格中的 explore「Explorer」：
+2. 點選左側窗格中的 explore「Explorer」。
 
-   如果沒有看到左側窗格，請按一下「展開左側窗格」圖示 last\_page 開啟窗格。
-3. 在「Explorer」窗格中展開專案，點選「Datasets」(資料集)，然後選取資料集。
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
+3. 在「Explorer」窗格中展開專案，按一下「Datasets」(資料集)，然後選取資料集。
 4. 在詳細資料窗格中，按一下 add\_box「建立資料表」。
 5. 在「建立資料表」頁面中，指定下列詳細資料：
 
@@ -145,9 +145,9 @@ JSON 資料檔案會與以下內容類似。請注意，地址資料欄含有值
 
      + 在「Dataset」(資料集) 部分，選取要建立資料表的資料集。
      + 在「Table」(資料表) 中，輸入要建立的資料表名稱。
-   * 在「Schema」(結構定義) 部分，按一下
+   * 在「結構定義」部分，按一下
      add\_box
-     「Add field」(新增欄位)，然後輸入下列資料表結構定義：
+     「新增欄位」，然後輸入下列資料表結構定義：
 
      + 在「欄位名稱」部分，輸入 `addresses`。
      + 在「Type」(類型) 部分選取「RECORD」(記錄)。
@@ -155,9 +155,9 @@ JSON 資料檔案會與以下內容類似。請注意，地址資料欄含有值
      + 為巢狀欄位指定下列欄位：
 
        - 在「Field name」(欄位名稱) 欄位中輸入 `status`。
-       - 在「Type」(類型) 部分，選擇「STRING」。
+       - 在「Type」(類型) 部分，選擇「STRING」(字串)。
        - 在「Mode」部分，將值保持為「NULLABLE」。
-       - 按一下「新增欄位」add\_box，新增下列欄位：
+       - 按一下「新增欄位」add\_box，然後新增下列欄位：
 
          | 欄位名稱 | 類型 | 模式 |
          | --- | --- | --- |
@@ -202,15 +202,15 @@ JSON 資料檔案會與以下內容類似。請注意，地址資料欄含有值
 
 ### bq
 
-如要在 JSON 結構定義檔中指定巢狀且重複的 `addresses` 資料欄，請使用文字編輯器建立新檔案。貼上上方顯示的範例結構定義。
+如要在 JSON 結構定義檔中指定巢狀且重複的 `addresses` 資料欄，請使用文字編輯器建立新檔案。貼上如上所示的結構定義範例。
 
 建立 JSON 結構定義檔後，您可以透過 bq 指令列工具提供檔案。詳情請參閱「[使用 JSON 結構定義檔](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#using_a_json_schema_file)」。
 
 ### Go
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Go 設定操作說明進行操作。詳情請參閱 [BigQuery Go API 參考說明文件](https://godoc.org/cloud.google.com/go/bigquery)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Go 設定說明操作。詳情請參閱 [BigQuery Go API 參考說明文件](https://godoc.org/cloud.google.com/go/bigquery)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 import (
@@ -267,9 +267,9 @@ func createTableComplexSchema(w io.Writer, projectID, datasetID, tableID string)
 
 ### Java
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定操作說明進行操作。詳情請參閱 [BigQuery Java API 參考說明文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定說明操作。詳情請參閱 [BigQuery Java API 參考說明文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 import com.google.cloud.bigquery.BigQuery;
@@ -334,9 +334,9 @@ public class NestedRepeatedSchema {
 
 ### Node.js
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定操作說明進行操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 // Import the Google Cloud client library and create a client
@@ -384,9 +384,9 @@ async function nestedRepeatedSchema() {
 
 ### Python
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定操作說明進行操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 from google.cloud import bigquery
@@ -423,7 +423,7 @@ print(f"Created table {table.project}.{table.dataset_id}.{table.table_id}.")
 
 ## 在範例中插入巢狀資料欄中的資料
 
-使用下列查詢，將巢狀資料記錄插入含有 `RECORD` 資料型別資料欄的資料表。
+請使用下列查詢，將巢狀資料記錄插入含有 `RECORD` 資料類型資料欄的資料表。
 
 **範例 1**
 
@@ -454,7 +454,7 @@ dob,
 addresses) values ("1","Johnny","Dawn","1969-01-22",[("current","123 First Avenue","Seattle","WA","11111","1")])
 ```
 
-### 查詢巢狀與重複的資料欄
+### 查詢巢狀和重複的資料欄
 
 如要選取特定位置的 `ARRAY` 值，請使用[陣列下標運算子](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators?hl=zh-tw#array_subscript_operator)。如要存取 `STRUCT` 中的元素，請使用[點運算子](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators?hl=zh-tw#field_access_operator)。以下範例會選取 `addresses` 欄位中列出的名字、姓氏和第一個地址：
 
@@ -478,7 +478,7 @@ FROM
 +------------+-----------+------------------+
 ```
 
-如要擷取 `ARRAY` 的所有元素，請使用 [`UNNEST` 運算子](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw#unnest_operator)搭配 [`CROSS JOIN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw#cross_join)。以下範例會選取所有不在紐約的地址，並顯示名字、姓氏、地址和州別：
+如要擷取 `ARRAY` 的所有元素，請使用 [`UNNEST` 運算子](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw#unnest_operator)搭配 [`CROSS JOIN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw#cross_join)。以下範例會選取不在紐約的所有地址的名字、姓氏、地址和州別：
 
 ```
 SELECT
@@ -512,7 +512,7 @@ WHERE
 
 BigQuery 在資料去標準化時執行效能最佳。其中不保留星狀或雪花狀結構定義等關聯結構定義，改為將資料去標準化並善用巢狀與重複的資料欄。巢狀與重複的資料欄可保留關係，但不會因保留關係 (標準化) 結構定義而影響效能。
 
-舉例來說，用來追蹤圖書館書籍的關聯資料庫會以不同的資料表儲存所有作者資訊。並使用 `author_id` 之類的金鑰來將書籍與作者連結。
+舉例來說，用來追蹤圖書館書籍的關聯式資料庫應該會以不同的資料表儲存所有作者資訊，並使用 `author_id` 之類的金鑰來將書籍與作者連結。
 
 在 BigQuery 中，您可以保留書籍與作者之間的關係，而不需要建立個別的作者資料表。但您需建立一個作者資料欄，在其中建立巢狀欄位，如作者名字、姓氏、生日等等。如果一本書有多位作者，您可以重複建立巢狀作者資料欄。
 
@@ -578,7 +578,7 @@ AS (
 
 BigQuery 支援從支援物件型結構定義的來源格式載入巢狀與重複的資料，如 JSON 檔案、Avro 檔案、Firestore 匯出檔案和 Datastore 匯出檔案。
 
-## 在表格中移除重複記錄
+## 在表格中刪除重複記錄
 
 下列查詢使用 `row_number()` 函式，找出範例中 `last_name` 和 `first_name` 值相同的重複記錄，並依 `dob` 排序：
 
@@ -593,7 +593,7 @@ CREATE OR REPLACE TABLE mydataset.mytable AS (
 )
 ```
 
-## 表格安全性
+## 資料表安全性
 
 如要控管 BigQuery 資料表的存取權，請參閱「[使用 IAM 控管資源存取權](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam?hl=zh-tw)」。
 
@@ -608,11 +608,11 @@ CREATE OR REPLACE TABLE mydataset.mytable AS (
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

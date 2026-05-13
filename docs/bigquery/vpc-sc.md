@@ -16,7 +16,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # BigQuery 適用的 VPC Service Controls
 
-本頁面說明如何使用 VPC Service Controls 建立服務範圍，進一步保護 BigQuery 資源。這些安全防護範圍會限制 BigQuery 的存取權，且與 Identity and Access Management (IAM) 控制項無關。這項功能在下列用途中相當實用：
+本頁說明如何使用 VPC Service Controls 建立服務範圍，進一步保護 BigQuery 資源。這些安全防護範圍會限制 BigQuery 的存取權，且與 Identity and Access Management (IAM) 控制項無關。這類功能在下列用途中相當實用：
 
 * 限制資源存取權，防止資料外洩，但輸入和輸出規則中明確允許的資源除外。
 * 從第三方來源或 Google Cloud 服務 (例如 Cloud Storage) 安全地將資料載入 BigQuery。
@@ -56,7 +56,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    ### 建立範圍
 
-   如要建立新的安全防護範圍來保護 BigQuery 專案，請使用 [`gcloud access-context-manager perimeters create`](https://docs.cloud.google.com/sdk/gcloud/reference/access-context-manager/perimeters/create?hl=zh-tw) 指令：
+   如要建立新安全防護範圍來保護 BigQuery 專案，請使用 [`gcloud access-context-manager perimeters create`](https://docs.cloud.google.com/sdk/gcloud/reference/access-context-manager/perimeters/create?hl=zh-tw) 指令：
 
    ```
    echo """
@@ -106,7 +106,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 用途
 
-下列範例用途說明如何使用 VPC Service Controls，保護進出 BigQuery 的資料。
+下列用途範例說明如何使用 VPC Service Controls，保護進出 BigQuery 的資料。
 
 ### 查詢其他專案中 Cloud Storage 值區的外部資料表資料
 
@@ -188,7 +188,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### 從 BigQuery Omni 匯入及匯出資料
 
-您可以透過 VPC Service Controls 邊界限制 BigQuery Omni 與外部雲端服務之間的存取權，進一步防禦。如需更多資訊和範例，請參閱建立 Azure Blob Storage BigLake 資料表時的 [VPC Service Controls](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-external-table?hl=zh-tw#vpc-service) 設定。
+您可以透過 VPC Service Controls perimeter 限制 BigQuery Omni 與外部雲端服務之間的存取權，進一步防禦。如需更多資訊和範例，請參閱建立 Azure Blob Storage BigLake 資料表時的 [VPC Service Controls](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-external-table?hl=zh-tw#vpc-service) 設定。
 
 ## 後續步驟
 
@@ -205,11 +205,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

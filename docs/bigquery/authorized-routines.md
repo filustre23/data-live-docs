@@ -38,12 +38,12 @@ Google uses AI technology to translate content into your preferred language. AI 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 點選左側窗格中的 explore「Explorer」：
+2. 點選左側窗格中的 explore「Explorer」。
 
-   如果沒有看到左側窗格，請按一下「展開左側窗格」圖示 last\_page 開啟窗格。
-3. 在「Explorer」窗格中展開專案，按一下「Datasets」，然後選取資料集。
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
+3. 在「Explorer」窗格中展開專案，按一下「Datasets」(資料集)，然後選取資料集。
 4. 在詳細資料窗格中，依序點選「共用」**>「授權常式」**。
-5. 在「Authorized routines」(授權的處理常式) 頁面的「Authorize routine」(授權處理常式) 部分，選取要授權的處理常式所屬的「Project」(專案)、「Dataset」(資料集) 和「Routine」(處理常式)。
+5. 在「Authorized routines」(已授權的處理常式) 頁面的「Authorize routine」(授權處理常式) 部分，選取要授權的處理常式所屬的「Project」(專案)、「Dataset」(資料集) 和「Routine」(處理常式)。
 6. 按一下「新增授權」。
 
 ### bq
@@ -70,7 +70,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    更改下列內容：
 
    * `DATASET_NAME`：包含常式的資料集名稱。
-   * `PROJECT_ID`：包含常式的專案的專案 ID。
+   * `PROJECT_ID`：包含常式的專案 ID。
    * `ROUTINE_NAME`：日常安排的名稱。
 3. 選用：如要授權預存程序，請附加 IAM 角色。這個角色會根據權限，限制對授權程序的存取權。如要這麼做，請在 JSON 物件中加入 `"role"`：
 
@@ -99,7 +99,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### API
 
-1. 呼叫 [`datasets.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/get?hl=zh-tw) 方法，擷取要讓處理常式存取的資料集。回應內容包含 [`Dataset`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets?hl=zh-tw#Dataset) 資源的表示法。
+1. 呼叫 [`datasets.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/get?hl=zh-tw) 方法，擷取要讓常式存取的資料集。回應內容包含 [`Dataset`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets?hl=zh-tw#Dataset) 資源的表示法。
 2. 在 `Dataset` 資源的 `access` 陣列中新增下列 JSON 物件：
 
    ```
@@ -117,7 +117,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    * `DATASET_NAME`：含有 UDF 的資料集名稱。
    * `PROJECT_ID`：含有 UDF 的專案 ID。
    * `ROUTINE_NAME`：日常安排的名稱。
-3. 選用：如要授權已儲存程序，請附加 IAM 角色。這個角色會根據權限限制對授權程序的存取權。如要這麼做，請將 `"role"` 新增至 JSON 物件：
+3. 選用：如要授權已儲存程序，請附加 IAM 角色。這個角色會根據權限，限制對授權程序的存取權。如要這麼做，請將 `"role"` 新增至 JSON 物件：
 
    ```
    {
@@ -142,7 +142,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 配額與限制
 
-獲得授權的處理常式會受到資料集限制。詳情請參閱「[資料集限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#dataset_limits)」。
+授權處理常式會受到資料集限制。詳情請參閱「[資料集限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#dataset_limits)」。
 
 更新處理常式後，現有授權處理常式的授權就會過期。BigQuery 會在 24 小時內自動移除過時的授權常式授權項目。如要立即更新項目，請先從「目前已授權的常式」清單中手動刪除項目，然後重新授權。
 
@@ -167,7 +167,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    ```
 4. 在`public_dataset`資料集上，將 `bigquery.dataViewer` 角色授予使用者。這個角色包含 `bigquery.routines.get` 權限，可讓使用者呼叫常式。如要瞭解如何指派資料集的存取權控管，請參閱[控管資料集存取權](https://docs.cloud.google.com/bigquery/docs/dataset-access-controls?hl=zh-tw)。
 
-   **注意：** 建議您建立具有最低權限的自訂角色，而非使用內建角色。詳情請參閱[建立及管理自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)。
+   **附註：** 建議您建立具有最低權限的自訂角色，而非使用內建角色。詳情請參閱[建立及管理自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)。
 5. 此時，使用者有權呼叫 `count_key` 常式，但無法存取 `private_dataset` 中的資料表。如果使用者嘗試呼叫常式，會收到類似以下的錯誤訊息：
 
    ```
@@ -180,7 +180,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    bq show --format=prettyjson private_dataset > dataset.json
    ```
 
-   輸出內容會儲存至名為 `dataset.json` 的本機檔案。
+   輸出內容會儲存到名為 `dataset.json` 的本機檔案。
 7. 編輯 `dataset.json`，將下列 JSON 物件新增至 `access` 陣列：
 
    ```
@@ -212,11 +212,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

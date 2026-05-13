@@ -249,6 +249,4 @@ Configuration for writing message data in Avro format. Message payloads and meta
 
 A policy that specifies the conditions for resource expiration (i.e., automatic resource deletion).
 
-| JSON representation |
-| --- |
-| ``` {   "ttl": string } ``` |
+<

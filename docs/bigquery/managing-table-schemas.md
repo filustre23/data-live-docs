@@ -51,7 +51,7 @@ BigQuery 中的結構定義更新不會導致資料遺失。
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
 
-   如果沒有看到左側窗格，請按一下「展開左側窗格」圖示 last\_page 開啟窗格。
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Explorer」窗格中展開專案，按一下「Datasets」(資料集)，然後選取資料集。
 4. 依序點選「總覽」**>「表格」**，然後選取所需表格。
 5. 在詳細資料窗格中，按一下「結構定義」分頁標籤。
@@ -86,7 +86,7 @@ BigQuery 中的結構定義更新不會導致資料遺失。
 
 ### bq
 
-發出 `bq update` 指令並提供 JSON 結構定義檔。如果您要更新的資料表位於非預設專案中，請依照下列格式將該專案的 ID 加到資料集名稱中：`PROJECT_ID:DATASET`。
+發出 `bq update` 指令並提供 JSON 結構定義檔。如果您要更新的資料表位於非預設專案中，請依照下列格式將該專案的專案 ID 加到資料集名稱中：`PROJECT_ID:DATASET`。
 
 ```
 bq update PROJECT_ID:DATASET.TABLE SCHEMA
@@ -187,7 +187,7 @@ from REPEATED to NULLABLE.`
    ```
 
    如要進一步瞭解如何使用 JSON 結構定義檔，請參閱[指定 JSON 結構定義檔](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#specifying_a_json_schema_file)一節。
-4. 更新結構定義檔後，請發出下列指令來更新資料表的結構定義。如果您要更新的資料表位於預設專案以外的專案中，請依照下列格式將該專案的 ID 加到資料集名稱中：`PROJECT_ID:DATASET`。
+4. 更新結構定義檔後，請發出下列指令來更新資料表的結構定義。如果您要更新的資料表位於預設專案以外的專案中，請依照下列格式將該專案的專案 ID 加到資料集名稱中：`PROJECT_ID:DATASET`。
 
    ```
    bq update PROJECT_ID:DATASET.TABLE SCHEMA
@@ -397,7 +397,7 @@ Google Cloud 主控台不支援在現有的 `RECORD` 資料欄新增巢狀欄位
 
 ### bq
 
-發出 `bq update` 指令並提供 JSON 結構定義檔，該檔案會將巢狀欄位新增至現有 `RECORD` 資料欄的結構定義。如果您要更新的資料表位於非預設專案中，請依照下列格式將該專案的 ID 加到資料集名稱中：`PROJECT_ID:DATASET`。
+發出 `bq update` 指令並提供 JSON 結構定義檔，該檔案會將巢狀欄位新增至現有 `RECORD` 資料欄的結構定義。如果您要更新的資料表位於非預設專案中，請依照下列格式將該專案的專案 ID 加到資料集名稱中：`PROJECT_ID:DATASET`。
 
 ```
 bq update PROJECT_ID:DATASET.TABLE SCHEMA
@@ -511,7 +511,7 @@ bq update PROJECT_ID:DATASET.TABLE SCHEMA
    ```
 
    如要進一步瞭解如何使用 JSON 結構定義檔，請參閱[指定 JSON 結構定義檔](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#specifying_a_json_schema_file)一節。
-4. 更新結構定義檔後，請發出下列指令來更新資料表的結構定義。如果您要更新的資料表位於預設專案以外的專案中，請依照下列格式將該專案的 ID 加到資料集名稱中：`PROJECT_ID:DATASET`。
+4. 更新結構定義檔後，請發出下列指令來更新資料表的結構定義。如果您要更新的資料表位於預設專案以外的專案中，請依照下列格式將該專案的專案 ID 加到資料集名稱中：`PROJECT_ID:DATASET`。
 
    ```
    bq update PROJECT_ID:DATASET.TABLE SCHEMA
@@ -546,7 +546,7 @@ bq update PROJECT_ID:DATASET.TABLE SCHEMA
 
 #### 在載入附加工作中新增資料欄
 
-您可以在載入工作期間將資料附加至資料表時一併新增資料欄。新結構定義的決定方式如下：
+您可以在載入工作期間將資料附加至資料表時一併新增資料欄。新結構定義取決於下列其中一項：
 
 * 自動偵測 (適用於 CSV 和 JSON 檔案)
 * 可在 JSON 結構定義檔中指定 (適用於 CSV 和 JSON 檔)
@@ -585,12 +585,12 @@ SCHEMA
 
 更改下列內容：
 
-* `LOCATION`：位置名稱。`--location` 是選用旗標。舉例來說，如果您在東京地區使用 BigQuery，就可將該旗標的值設為 `asia-northeast1`。您可以使用 [.bigqueryrc 檔](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool?hl=zh-tw#setting_default_values_for_command-line_flags)來設定位置的預設值。
+* `LOCATION`：位置名稱。`--location` 是選用旗標。舉例來說，如果您在東京區域使用 BigQuery，就可將該旗標的值設為 `asia-northeast1`。您可以使用 [.bigqueryrc 檔](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool?hl=zh-tw#setting_default_values_for_command-line_flags)來設定位置的預設值。
 * `FORMAT`：結構定義的格式。`NEWLINE_DELIMITED_JSON`、`CSV`、`AVRO`、`PARQUET`、`ORC` 或 `DATASTORE_BACKUP`。
 * `PROJECT_ID`：您的專案 ID。
 * `DATASET`：含有您要更新之資料表的資料集名稱。
 * `TABLE`：要附加的資料表名稱。
-* `PATH_TO_SOURCE`：完整的 [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#gcs-uri)、以逗號分隔的 URI 清單，或您本機上的資料檔案路徑。
+* `PATH_TO_SOURCE`：完整的 [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#gcs-uri)、以逗號分隔的清單 URI，或您本機上的資料檔案路徑。
 * `SCHEMA`：本機 JSON 結構定義檔的路徑。不指定 `--autodetect` 時，只有 CSV 和 JSON 檔案需要結構定義檔。系統會從來源資料推斷 Avro 和 Datastore 的結構定義。
 
 範例：
@@ -945,7 +945,7 @@ bq --location=LOCATION query \
 
 更改下列內容：
 
-* `LOCATION`：位置名稱。`--location` 是選用旗標。舉例來說，如果您在東京地區使用 BigQuery，就可將該旗標的值設為 `asia-northeast1`。您可以使用 [.bigqueryrc 檔](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool?hl=zh-tw#setting_default_values_for_command-line_flags)來設定位置的預設值。請注意，您無法將查詢結果附加至不同位置的資料表。
+* `LOCATION`：位置名稱。`--location` 是選用旗標。舉例來說，如果您在東京區域使用 BigQuery，就可將該旗標的值設為 `asia-northeast1`。您可以使用 [.bigqueryrc 檔](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool?hl=zh-tw#setting_default_values_for_command-line_flags)來設定位置的預設值。請注意，您無法將查詢結果附加至不同位置的資料表。
 * `PROJECT_ID`：您的專案 ID。
 * `dataset`：含有您要附加之資料表的資料集名稱。
 * `TABLE`：要附加的資料表名稱。
@@ -1087,5 +1087,5 @@ public class RelaxTableQuery {
 
       TableId tableId = TableId.of(datasetName, tableName);
 
-      String sourceTable =
+      String sourceTable
 ```

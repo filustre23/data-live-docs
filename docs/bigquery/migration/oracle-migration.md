@@ -470,8 +470,4 @@ Cloud Storage 是高可用性且耐用的物件儲存服務，檔案數量沒有
 
 ### 透過 CDC 和串流擷取功能，將資料從 Oracle 移至 BigQuery
 
-您可以透過多種方式擷取 Oracle 中的變更資料，每個選項都有取捨之處，主要在於對來源系統的效能影響、開發和設定需求，以及定價和授權。
-
-#### 以記錄為基礎的 CDC
-
-Oracle 建議使用 Oracle GoldenGate 擷取重做記錄，並使用 [GoldenGate for Big Data](https://docs.oracle.com/en/middleware/goldengate/big-data/12.3.2.1/gadbd/using-bigquery-handler.html#GUID-4568CD10-5495-4DB0-8E75-10F40451A8A7) 將記錄串流到 BigQuery。GoldenGate 需採用 CPU 授權。如要瞭解價格，請參閱 [Oracle Technology Global Price List](https://www.oracle.com/assets/technology-price-list-070617.pdf)。如果可以使用 Oracle GoldenGate for B
+您可以透過多種方式擷取 Oracle

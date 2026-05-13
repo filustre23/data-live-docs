@@ -72,7 +72,7 @@ BigQuery 包含多個 API。下列 API 可搭配區域端點使用：
 
 ## 支援的作業
 
-地區端點只能用於執行作業，存取或變更端點指定位置中儲存的資源。您無法使用區域端點執行作業，存取或變更端點指定位置以外的資源。
+您只能使用區域端點，對儲存在端點指定位置的資源執行存取或變動作業。區域端點無法用於執行作業，存取或變更端點指定位置以外的資源。
 
 舉例來說，使用區域端點 `https://bigquery.us-central1.rep.googleapis.com` 時，您可以讀取位於 `US-CENTRAL1` 的資料集中的資料表，但只有在來源和目的地資料集都位於 `US-CENTRAL1` 時，才能將資料表從來源資料集複製到目的地資料集。如果您嘗試從 `US-CENTRAL1` 外部讀取或複製表格，系統會顯示錯誤訊息。
 
@@ -94,7 +94,7 @@ BigQuery 包含多個 API。下列 API 可搭配區域端點使用：
 
 ### 控制台
 
-如要存取 BigQuery 資源，並遵守資料落地或主權規定，請使用管轄區的Google Cloud 控制台網址：
+如要存取 BigQuery 資源，並遵守資料落地或主權規定，請使用管轄區Google Cloud 控制台網址：
 
 | 資源 | 網址 |
 | --- | --- |
@@ -142,11 +142,11 @@ BigQuery 包含多個 API。下列 API 可搭配區域端點使用：
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

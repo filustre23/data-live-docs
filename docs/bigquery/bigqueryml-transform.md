@@ -143,7 +143,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 * `body_mass_g`：用於訓練，不進行任何變更。
 * `culmen_depth_mm`：用於訓練，不進行任何變更。
 * `flipper_length_mm`：用於訓練，不進行任何變更。
-* `bucketized_culmen_length`：透過 `ML.QUANTILE_BUCKETIZE()` 分析函式，根據分位數將 `culmen_length_mm` 區化，即可從 `culmen_length_mm` 產生 `bucketized_culmen_length`。
+* `bucketized_culmen_length`：透過使用 `ML.QUANTILE_BUCKETIZE()` 分析函式，根據分位數將 `culmen_length_mm` 區化，從 `culmen_length_mm` 產生。
 * `culmen_length_mm`：原始 `culmen_length_mm` 值，轉換為 `STRING` 值並用於訓練。
 * `species_sex`：使用 `ML.FEATURE_CROSS` 函式，從 `species` 和 `sex` 的交集產生。
 
@@ -226,7 +226,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    如要進一步瞭解 `ML.EVALUATE` 函式輸出內容，請參閱「[輸出內容](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate?hl=zh-tw#output)」。
 
-   您也可以呼叫 `ML.EVALUATE`，不必提供輸入資料。並使用訓練期間計算的評估指標。
+   您也可以呼叫 `ML.EVALUATE`，而不提供輸入資料。並使用訓練期間計算的評估指標。
 
 ## 使用模型預測企鵝體重
 
@@ -234,7 +234,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 `ML.PREDICT` 函式會在 `predicted_label_column_name` 資料欄中輸出預測值，在本例中為 `predicted_body_mass_g`。
 
-使用 `ML.PREDICT` 函式時，不必傳遞模型訓練中使用的所有資料欄。您只需要在 `TRANSFORM` 子句中使用過的資料欄。與 `ML.EVALUATE` 類似，`ML.PREDICT` 函式會自動從模型中擷取 `TRANSFORM` 欄和轉換。
+使用 `ML.PREDICT` 函式時，不必傳遞模型訓練中使用的所有資料欄。您只需要在 `TRANSFORM` 子句中使用過的資料欄。與 `ML.EVALUATE` 類似，`ML.PREDICT` 函式會自動從模型擷取 `TRANSFORM` 欄和轉換。
 
 請按照下列步驟，從模型取得預測結果：
 
@@ -327,11 +327,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

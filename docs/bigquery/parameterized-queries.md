@@ -31,7 +31,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 如要指定具名參數，請使用 `@` 字元，後面加上 [ID](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#identifiers)，例如 `@param_name`。或者，您可以使用預留位置值 `?` 來指定位置參數。查詢可以使用位置或已命名參數，但不得同時使用這兩者。
 
-**注意：** 為保護可能含有私密資訊的資料，當您使用參數執行查詢時，BigQuery [記錄](https://docs.cloud.google.com/bigquery/docs/monitoring?hl=zh-tw#logs)不會記錄參數值。
+**注意：** 為保護可能含有機密資訊的資料，當您使用參數執行查詢時，BigQuery [記錄](https://docs.cloud.google.com/bigquery/docs/monitoring?hl=zh-tw#logs)不會記錄參數值。
 
 您可以在 BigQuery 中透過下列方式執行參數化查詢：
 
@@ -46,7 +46,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 如要在 Google Cloud 控制台中執行參數化查詢，請在「查詢設定」中設定參數，然後在 SQL 查詢中參照這些參數，方法是在每個參數名稱前面加上 `@` 字元。
 
-**支援的資料類型**： Google Cloud 控制台僅支援原始資料類型的參數化查詢，例如 `BIGNUMERIC`、`BOOL`、`BYTES`、`DATE`、`DATETIME`、`FLOAT64`、`GEOGRAPHY`、`INT64`、`INTERVAL`、`NUMERIC`、`STRING`、`TIME` 或 `TIMESTAMP`。 Google Cloud 控制台不支援複雜的資料類型，例如 `ARRAY` 和 `STRUCT`。
+**支援的資料類型**： Google Cloud 控制台僅支援原始資料類型的參數化查詢，例如 `BIGNUMERIC`、`BOOL`、`BYTES`、`DATE`、`DATETIME`、`FLOAT64`、`GEOGRAPHY`、`INT64`、`INTERVAL`、`NUMERIC`、`STRING`、`TIME` 或 `TIMESTAMP`。控制台不支援複雜資料類型，例如 `ARRAY` 和 `STRUCT`。 Google Cloud
 
 ## 在 Google Cloud 控制台中新增參數
 

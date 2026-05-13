@@ -4,9 +4,9 @@
 
 Set up your Hex workspace for success.](/tutorials/quickstart/admin-101)
 
-[## 📄️ Hex Basics
+[## 📄️ Hex 101
 
-A quickstart guide for working with data in Hex.](/tutorials/quickstart/hex-basics)
+A quickstart guide for getting started in Hex.](/tutorials/quickstart/hex-basics)
 
 [## 📄️ Hex Advanced
 

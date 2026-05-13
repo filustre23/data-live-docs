@@ -234,7 +234,4 @@ Google Ads API Resource:
 | ad\_group\_ad\_ad\_legacy\_responsive\_display\_ad\_logo\_image | The MediaFile resource name of the logo image used in the ad. | EnhancedDisplayCreativeLandscapeLogoImageMediaId |
 | ad\_group\_ad\_ad\_legacy\_responsive\_display\_ad\_long\_headline | The long version of the ad's headline. | LongHeadline |
 | ad\_group\_ad\_ad\_legacy\_responsive\_display\_ad\_main\_color | The main color of the ad in hexadecimal. For example, #ffffff for white. If one of main\_color and accent\_color is set, the other is required as well. | MainColor |
-| ad\_group\_ad\_ad\_legacy\_responsive\_display\_ad\_marketing\_image | The MediaFile resource name of the marketing image used in the ad. | EnhancedDisplayCreativeMarketingImageMediaId |
-| ad\_group\_ad\_ad\_legacy\_responsive\_display\_ad\_price\_prefix | Prefix before price. For example, 'as low as'. | PricePrefix |
-| ad\_group\_ad\_ad\_legacy\_responsive\_display\_ad\_promo\_text | Promotion text used for dynamic formats of responsive ads. For example 'Free two-day shipping'. | PromoText |
-| ad\_group\_ad\_ad\_legac |
+| ad\_group\_ad\_ad\_legacy\_responsive\_display\_ad\_mark |

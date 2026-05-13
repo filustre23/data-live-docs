@@ -61,7 +61,7 @@ BigQuery 持續查詢是會不斷執行的 SQL 陳述式，您可以透過持續
 
 #### 使用者帳戶權限
 
-如要在 BigQuery 中建立工作，使用者帳戶必須具備 `bigquery.jobs.create` IAM 權限。下列 IAM 角色都授予 `bigquery.jobs.create` 權限：
+如要在 BigQuery 中建立工作，使用者帳戶必須具備 `bigquery.jobs.create` IAM 權限。下列 IAM 角色都會授予 `bigquery.jobs.create` 權限：
 
 * [BigQuery 使用者 (`roles/bigquery.user`)](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.user)
 * [BigQuery 作業使用者 (`roles/bigquery.jobUser`)](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.jobUser)
@@ -93,7 +93,7 @@ BigQuery 持續查詢是會不斷執行的 SQL 陳述式，您可以透過持續
    **選取或建立專案所需的角色**
 
    * **選取專案**：選取專案時，不需要具備特定 IAM 角色，只要您已獲授角色，即可選取任何專案。
-   * **建立專案**：如要建立專案，您需要具備專案建立者角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   * **建立專案**：如要建立專案，您需要「專案建立者」角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
    **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，而不要選取現有專案。完成這些步驟後，您就可以刪除專案，並移除與該專案相關聯的所有資源。
 
    [前往專案選取器](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
@@ -106,7 +106,7 @@ BigQuery 持續查詢是會不斷執行的 SQL 陳述式，您可以透過持續
 
    [啟用 API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery.googleapis.com&hl=zh-tw)
 
-### 建立保留項目
+### 建立預留項目
 
 [建立 Enterprise 或 Enterprise Plus 版本預訂](https://docs.cloud.google.com/bigquery/docs/reservations-tasks?hl=zh-tw#create_reservations)，然後[建立預訂指派](https://docs.cloud.google.com/bigquery/docs/reservations-assignments?hl=zh-tw#create_reservation_assignments)，並使用 `CONTINUOUS` 工作類型。這個預留項目可使用[自動調度資源](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction?hl=zh-tw#slots_autoscaling)和[閒置運算單元共用](https://docs.cloud.google.com/bigquery/docs/slots?hl=zh-tw#idle_slots)功能。連續查詢的預留項目指派作業有[預留項目限制](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction?hl=zh-tw#reservation_limitations)。
 
@@ -127,7 +127,7 @@ BigQuery 持續查詢是會不斷執行的 SQL 陳述式，您可以透過持續
 
 您可以使用 [Pub/Sub 屬性](https://docs.cloud.google.com/pubsub/docs/publisher?hl=zh-tw#using-attributes)提供訊息的額外資訊，例如優先順序、來源、目的地或其他中繼資料。您也可以使用屬性[篩選訂閱項目中的訊息](https://docs.cloud.google.com/pubsub/docs/subscription-message-filter?hl=zh-tw)。
 
-在持續查詢結果中，如果資料欄名為 `_ATTRIBUTES`，系統會將其值複製到 Pub/Sub 訊息屬性。`_ATTRIBUTES` 內提供的欄位會做為屬性鍵。
+在持續查詢結果中，如果資料欄名為 `_ATTRIBUTES`，系統會將其值複製到 Pub/Sub 訊息屬性。`_ATTRIBUTES` 中提供的欄位會做為屬性鍵。
 
 `_ATTRIBUTES` 欄必須為 `JSON` 類型，格式為 `ARRAY<STRUCT<STRING, STRING>>` 或 `STRUCT<STRING>`。
 
@@ -168,7 +168,7 @@ BigQuery 持續查詢是會不斷執行的 SQL 陳述式，您可以透過持續
 
 在持續查詢中使用 `APPENDS` 函式時，請勿提供 `end_timestamp` 引數。
 
-**附註：** 在持續查詢中使用 `APPENDS` 函式時，該函式會被視為處於[正式發布](https://cloud.google.com/products?hl=zh-tw#product-launch-stages) (GA) 階段。
+**注意：** 在持續查詢中使用 `APPENDS` 函式時，該函式會被視為處於[正式發布](https://cloud.google.com/products?hl=zh-tw#product-launch-stages) (GA) 階段。
 
 以下範例說明如何使用 `APPENDS` 函式，從特定時間點開始持續查詢 BigQuery 資料表，該資料表會接收串流計程車行程資訊：
 
@@ -242,7 +242,7 @@ EXPORT DATA
 
 ## 使用使用者帳戶執行持續查詢
 
-本節說明如何使用使用者帳戶執行持續查詢。持續查詢執行後，您可以關閉 Google Cloud 控制台、終端機視窗或應用程式，不會中斷查詢執行作業。使用者帳戶執行的持續查詢最多可執行兩天，然後自動停止。如要繼續處理新的傳入資料，請啟動新的持續查詢並[指定起點](#start_a_continuous_query_from_a_particular_point_in_time)。如要自動執行這項程序，請參閱[重新嘗試失敗的查詢](https://docs.cloud.google.com/bigquery/docs/continuous-queries-monitor?hl=zh-tw#retry)。
+本節說明如何使用使用者帳戶執行持續查詢。持續查詢執行後，您可以關閉 Google Cloud 控制台、終端機視窗或應用程式，不會中斷查詢執行。使用者帳戶執行的持續查詢最多可執行兩天，然後自動停止。如要繼續處理新的傳入資料，請啟動新的持續查詢並[指定起點](#start_a_continuous_query_from_a_particular_point_in_time)。如要自動執行這項程序，請參閱[重新嘗試失敗的查詢](https://docs.cloud.google.com/bigquery/docs/continuous-queries-monitor?hl=zh-tw#retry)。
 
 如要執行持續查詢，請按照下列步驟操作：
 
@@ -267,14 +267,14 @@ EXPORT DATA
    [啟用 Cloud Shell](https://console.cloud.google.com/?cloudshell=true&hl=zh-tw)
 
    Google Cloud 主控台底部會開啟一個 [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works?hl=zh-tw) 工作階段，並顯示指令列提示。Cloud Shell 是已安裝 Google Cloud CLI 的殼層環境，並已針對您目前的專案設定好相關值。工作階段可能要幾秒鐘的時間才能初始化。
-2. 在 Cloud Shell 中，使用 [`bq query` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_query)搭配 `--continuous` 旗標，執行持續查詢：
+2. 在 Cloud Shell 中，使用 [`bq query` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_query)搭配 `--continuous` 旗標執行持續查詢：
 
    ```
    bq query --use_legacy_sql=false --continuous=true
    'QUERY'
    ```
 
-   將 `QUERY` 替換為持續查詢的 SQL 陳述式。SQL 陳述式只能包含[支援的作業](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction?hl=zh-tw#supported_functionality)。您可以使用 `--job_timeout_ms` 旗標控制查詢的執行時間。
+   將 `QUERY` 替換為持續查詢的 SQL 陳述式。SQL 陳述式只能包含[支援的作業](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction?hl=zh-tw#supported_functionality)。您可以使用 `--job_timeout_ms` 旗標控制查詢的執行時間長度。
 
 ### API
 
@@ -296,7 +296,7 @@ curl --request POST \
 
 ## 使用服務帳戶執行持續查詢
 
-本節說明如何使用服務帳戶執行持續查詢。持續查詢執行後，您可以關閉 Google Cloud 控制台、終端機視窗或應用程式，不會中斷查詢執行作業。使用服務帳戶執行的持續查詢最多可執行 150 天，之後會自動停止。如要繼續處理新的傳入資料，請啟動新的持續查詢並[指定起點](#start_a_continuous_query_from_a_particular_point_in_time)。如要自動執行這項程序，請參閱[重新嘗試失敗的查詢](https://docs.cloud.google.com/bigquery/docs/continuous-queries-monitor?hl=zh-tw#retry)。
+本節說明如何使用服務帳戶執行持續查詢。持續查詢執行後，您可以關閉 Google Cloud 控制台、終端機視窗或應用程式，不會中斷查詢執行。使用服務帳戶執行的持續查詢最多可執行 150 天，之後會自動停止。如要繼續處理新的傳入資料，請啟動新的持續查詢並[指定起點](#start_a_continuous_query_from_a_particular_point_in_time)。如要自動執行這項程序，請參閱[重新嘗試失敗的查詢](https://docs.cloud.google.com/bigquery/docs/continuous-queries-monitor?hl=zh-tw#retry)。
 
 如要使用服務帳戶執行持續查詢，請按照下列步驟操作：
 
@@ -396,7 +396,7 @@ curl --request POST \
 
 ## 範例
 
-下列 SQL 範例顯示持續查詢的常見用途。
+下列 SQL 範例顯示連續查詢的常見用途。
 
 ### 將資料匯出至 Pub/Sub 主題
 
@@ -632,7 +632,7 @@ GROUP BY
 如要修改持續查詢中使用的 SQL，請按照下列步驟操作：
 
 1. [查看要更新的持續查詢工作詳細資料](https://docs.cloud.google.com/bigquery/docs/managing-jobs?hl=zh-tw#view-job)，並記下工作 ID。
-2. 盡可能暫停收集上游資料。如果無法執行這項操作，持續查詢重新啟動時，可能會出現部分重複資料。
+2. 盡可能暫停收集上游資料。如果無法執行這項操作，當持續查詢重新啟動時，可能會出現部分重複資料。
 3. [取消要修改的持續查詢](https://docs.cloud.google.com/bigquery/docs/continuous-queries?hl=zh-tw#cancel_a_continuous_query)。
 4. 使用 `INFORMATION_SCHEMA` [`JOBS` 檢視區塊](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw)，取得原始持續查詢工作的 `end_time` 值：
 
@@ -679,11 +679,11 @@ GROUP BY
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

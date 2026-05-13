@@ -32,11 +32,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 如要建立及評估微調模型，您需要下列 Identity and Access Management (IAM) 角色：
 
 * 建立及使用 BigQuery 資料集、資料表和模型：
-  專案中的 BigQuery 資料編輯者 (`roles/bigquery.dataEditor`)。
+  專案的 BigQuery 資料編輯器 (`roles/bigquery.dataEditor`)。
 * 建立、委派及使用 BigQuery 連線：專案的 BigQuery 連線管理員 (`roles/bigquery.connectionsAdmin`)。
 
   如果沒有設定[預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw)，您可以在執行 `CREATE MODEL` 陳述式時建立並設定連線。如要這麼做，您必須具備專案的 BigQuery 管理員角色 (`roles/bigquery.admin`)。詳情請參閱「[設定預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw#configure_the_default_connection)」。
-* 將權限授予連線的服務帳戶：在包含 Vertex AI 端點的專案中，授予「專案 IAM 管理員」(`roles/resourcemanager.projectIamAdmin`) 角色。這是您透過將模型名稱指定為端點所建立遠端模型的目前專案。這是您透過指定網址做為端點所建立遠端模型網址中識別的專案。
+* 將權限授予連線的服務帳戶：在包含 Vertex AI 端點的專案中，授予「專案 IAM 管理員」(`roles/resourcemanager.projectIamAdmin`) 角色。這是您透過將模型名稱指定為端點所建立遠端模型的目前專案。這是您透過指定網址做為端點所建立遠端模型的網址中識別的專案。
 * 建立 BigQuery 工作：專案中的 BigQuery 工作使用者 (`roles/bigquery.jobUser`)。
 
 這些預先定義的角色具備執行本文所述工作所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
@@ -89,7 +89,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
 
-   如果沒有看到左側窗格，請按一下「展開左側窗格」圖示 last\_page 開啟窗格。
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Explorer」窗格中，按一下專案名稱。
 4. 依序點按 more\_vert「View actions」(查看動作) >「Create dataset」(建立資料集)。
 5. 在「建立資料集」頁面中，執行下列操作：
@@ -123,7 +123,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 建立[Cloud 資源連線](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection?hl=zh-tw)，並取得連線的服務帳戶。在與上一步建立的資料集相同的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)中建立連線。
 
-如果您已設定預設連線，或具備 BigQuery 管理員角色，可以略過這個步驟。
+如果已設定預設連線，或您具備 BigQuery 管理員角色，可以略過這個步驟。
 
 選取下列選項之一：
 
@@ -134,7 +134,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
 
-   如果沒有看到左側窗格，請按一下「展開左側窗格」圖示 last\_page 開啟窗格。
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Explorer」窗格中展開專案名稱，然後按一下「Connections」。
 4. 在「Connections」(連線) 頁面中，按一下「Create connection」(建立連線)。
 5. 在「連線類型」中，選擇「Vertex AI 遠端模型、遠端函式、BigLake 和 Spanner (Cloud 資源)」。
@@ -167,7 +167,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    * `CONNECTION_NAME`：連線名稱，格式為 `PROJECT_ID.LOCATION.CONNECTION_ID`、`LOCATION.CONNECTION_ID` 或 `CONNECTION_ID`。如果省略專案或位置，系統會從執行陳述式的專案和位置推斷。
    * `FRIENDLY_NAME` (選用)：連線的描述性名稱。
    * `DESCRIPTION` (選用)：連線說明。
-3. 按一下 play\_circle **執行**。
+3. 按一下「執行」play\_circle。
 
 如要進一步瞭解如何執行查詢，請參閱「[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)」。
 
@@ -371,7 +371,7 @@ resource "google_bigquery_connection" "default" {
 
    將程式碼範例複製到新建立的 `main.tf`。
 
-   視需要從 GitHub 複製程式碼。如果 Terraform 程式碼片段是端對端解決方案的一部分，建議您使用這個方法。
+   視需要從 GitHub 複製程式碼。如果 Terraform 代码片段是端對端解決方案的一部分，建議您使用這個方法。
 3. 查看並修改範例參數，套用至您的環境。
 4. 儲存變更。
 5. 初始化 Terraform。每個目錄只需執行一次這項操作。
@@ -388,7 +388,7 @@ resource "google_bigquery_connection" "default" {
 
 ## 套用變更
 
-1. 檢查設定，確認 Terraform 即將建立或更新的資源符合您的預期：
+1. 查看設定，確認 Terraform 即將建立或更新的資源符合您的預期：
 
    ```
    terraform plan
@@ -520,7 +520,7 @@ gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount
    * `TABLE_DATASET`：包含訓練資料表的資料集名稱。
    * `TABLE_NAME`：包含用於訓練模型資料的資料表名稱。
 
-## 評估微調模型
+## 評估微調後的模型
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -561,8 +561,8 @@ gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount
      如要取得較短的回覆，請指定較低的值；如要取得較長的回覆，請調高此值。預設值為 `128`。
    * `TEMPERATURE`：介於 `[0.0,1.0]` 範圍內的 `FLOAT64` 值，可控制選取詞元時的隨機程度。預設值為 `0`。
 
-     如果希望提示生成更具確定性、較不具開放性和創意性的回覆，建議調低 `temperature` 值。另一方面，如果 `temperature` 值較高，則可能產生較多元或有創意的結果。如果 `0` 為 `temperature`，代表具有確定性，即模型一律會選取可能性最高的回覆。
-   * `TOP_K`：介於 `[1,40]` 範圍內的 `INT64` 值，可決定模型選取時考量的初始詞元集區。如要取得較不隨機的回覆，請指定較低的值；如要取得較隨機的回覆，請調高此值。預設值為 `40`。
+     如果希望提示生成更具確定性、較不具開放性和創意性的回覆，建議調低 `temperature` 值。另一方面，如果 `temperature` 值較高，則可能產生較多元或有創意的結果。如果 `0` 為 `temperature`，則模型一律會選取可能性最高的回覆。
+   * `TOP_K`：`INT64` 值，範圍為 `[1,40]`，可決定模型選取時考量的初始詞元集區。如要取得較不隨機的回覆，請指定較低的值；如要取得較隨機的回覆，請調高此值。預設值為 `40`。
    * `TOP_P`：`FLOAT64` 範圍 `[0.0,1.0]` 中的 `FLOAT64` 值，有助於判斷要從 `TOP_K` 決定的集區中選取哪些權杖。如要取得較不隨機的回覆，請指定較低的值；如要取得較隨機的回覆，請調高此值。預設值為 `0.95`。
 
 ## 生成文字
@@ -598,7 +598,7 @@ FROM AI.GENERATE_TEXT(
   可控制選取詞元時的隨機程度。
   預設值為 `0`。
 
-  如果希望提示生成更具確定性、較不具開放性和創意性的回覆，建議調低 `temperature` 值。另一方面，如果 `temperature` 值較高，則可能產生較多元或有創意的結果。如果 `0` 為 `temperature`，代表具有確定性，即模型一律會選取可能性最高的回覆。
+  如果希望提示生成更具確定性、較不具開放性和創意性的回覆，建議調低 `temperature` 值。另一方面，如果 `temperature` 值較高，則可能產生較多元或有創意的結果。如果 `0` 為 `temperature`，則模型一律會選取可能性最高的回覆。
 * `TOP_P`：`[0.0,1.0]` 範圍內的 `FLOAT64` 值有助於判斷所選符記的機率。如要取得較不隨機的回覆，請指定較低的值；如要取得較隨機的回覆，請調高此值。預設值為 `0.95`。
 * `STOP_SEQUENCES`：`ARRAY<STRING>` 值，可移除模型回應中包含的指定字串。字串必須完全相符，包括大小寫。預設值為空陣列。
 * `GROUND_WITH_GOOGLE_SEARCH`：決定 Vertex AI 模型在生成回覆時是否要使用[以 Google 搜尋強化事實基礎](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/grounding/overview?hl=zh-tw#ground-public)的 `BOOL` 值。建立基準後，模型就能在生成回覆時使用網路上其他資訊，讓回覆內容更具體且符合事實。如果將這個欄位設為 `True`，結果中會包含額外的 `grounding_result` 欄，提供模型用來收集額外資訊的來源。預設值為 `FALSE`。
@@ -649,7 +649,7 @@ FROM
       0.4 AS temperature, 100 AS max_output_tokens, 0.5 AS top_p));
 ```
 
-### 提示查詢
+### 提示詞查詢
 
 使用查詢提供提示，生成文字。
 
@@ -678,7 +678,7 @@ FROM AI.GENERATE_TEXT(
   可控制選取詞元時的隨機程度。
   預設值為 `0`。
 
-  如果希望提示生成更具確定性、較不具開放性和創意性的回覆，建議調低 `temperature` 值。另一方面，如果 `temperature` 值較高，則可能產生較多元或有創意的結果。如果 `0` 為 `temperature`，代表具有確定性，即模型一律會選取可能性最高的回覆。
+  如果希望提示生成更具確定性、較不具開放性和創意性的回覆，建議調低 `temperature` 值。另一方面，如果 `temperature` 值較高，則可能產生較多元或有創意的結果。如果 `0` 為 `temperature`，則模型一律會選取可能性最高的回覆。
 * `TOP_P`：`[0.0,1.0]` 範圍內的 `FLOAT64` 值有助於判斷所選符記的機率。如要取得較不隨機的回覆，請指定較低的值；如要取得較隨機的回覆，請調高此值。預設值為 `0.95`。
 * `STOP_SEQUENCES`：`ARRAY<STRING>` 值，可移除模型回應中包含的指定字串。字串必須完全相符，包括大小寫。預設值為空陣列。
 * `GROUND_WITH_GOOGLE_SEARCH`：決定 Vertex AI 模型在生成回覆時是否要使用[以 Google 搜尋強化事實基礎](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/grounding/overview?hl=zh-tw#ground-public)的 `BOOL` 值。建立基準後，模型就能在生成回覆時使用網路上其他資訊，讓回覆內容更具體且符合事實。如果將這個欄位設為 `True`，結果中會包含額外的 `grounding_result` 欄，提供模型用來收集額外資訊的來源。預設值為 `FALSE`。
@@ -740,7 +740,7 @@ FROM
 
 * 使用查詢串連字串，提供含有資料表欄的提示[前置字元](https://docs.cloud.google.com/vertex-ai/docs/generative-ai/text/text-prompts?hl=zh-tw#prompt_structure)，藉此建立提示資料。
 * 傳回簡短且中等可能性的回覆。
-* 不會在個別資料欄中傳回生成的文字和安全性屬性。
+* 不會在個別資料欄中傳回生成的文字和安全屬性。
 
 ```
 SELECT *
@@ -762,11 +762,11 @@ FROM
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

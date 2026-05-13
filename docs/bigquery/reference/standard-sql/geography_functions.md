@@ -358,19 +358,5 @@ See [`ST_GEOGFROMGEOJSON`](#st_geogfromgeojson) to construct a
 ## `ST_ASTEXT`
 
 ```
-ST_ASTEXT(geography_expression)
+ST_ASTEXT</
 ```
-
-**Description**
-
-Returns the [WKT](https://en.wikipedia.org/wiki/Well-known_text) representation of an input
-`GEOGRAPHY`.
-
-See [`ST_GEOGFROMTEXT`](#st_geogfromtext) to construct a
-`GEOGRAPHY` from WKT.
-
-**Return type**
-
-`STRING`
-
-## `ST_AZIMUTH`

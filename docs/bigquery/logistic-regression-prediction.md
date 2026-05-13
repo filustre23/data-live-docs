@@ -10,7 +10,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 在人口普查資料上建立及使用分類模型 透過集合功能整理內容 你可以依據偏好儲存及分類內容。
 
-在本教學課程中，您將在 BigQuery ML 中使用二元[邏輯迴歸模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm?hl=zh-tw)，根據個人的受眾特徵資料預測收入範圍。二元邏輯迴歸模型會預測值是否屬於兩個類別之一，在本例中，即個人年收入是否高於或低於 $50,000 美元。
+在本教學課程中，您將在 BigQuery ML 中使用二元[邏輯迴歸模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm?hl=zh-tw)，根據個人的受眾特徵資料預測收入範圍。二元邏輯迴歸模型會預測某值是否屬於兩個類別之一，在本例中，就是預測個人年收入是否超過或低於 $50,000 美元。
 
 本教學課程使用 [`bigquery-public-data.ml_datasets.census_adult_income`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&%3Bd=ml_datasets&%3Bt=census_adult_income&%3Bpage=table&hl=zh-tw) 資料集。這個資料集包含從 2000 年到 2010 年美國居民的人口和收入資訊。
 
@@ -41,7 +41,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    **選取或建立專案所需的角色**
 
    * **選取專案**：選取專案時，不需要具備特定 IAM 角色，只要您已獲授角色，即可選取任何專案。
-   * **建立專案**：如要建立專案，您需要具備專案建立者角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   * **建立專案**：如要建立專案，您需要「專案建立者」角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
    **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，而不要選取現有專案。完成這些步驟後，您就可以刪除專案，並移除與該專案相關聯的所有資源。
 
    [前往專案選取器](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
@@ -92,7 +92,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    * 在「Dataset ID」(資料集 ID) 中輸入 `census`。
    * 針對「Location type」(位置類型) 選取「Multi-region」(多區域)，然後選取「US (multiple regions in United States)」(us (多個美國區域))。
 
-     公開資料集儲存在 `US` [多地區](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#multi-regions)。為簡單起見，建議您將資料集放在同一個區域。
+     公開資料集儲存在 `US` [多區域](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#multi-regions)。為簡單起見，建議您將資料集放在同一個區域。
    * 其餘設定請保留預設狀態，然後按一下「建立資料集」。
 
 ## 檢查資料
@@ -407,7 +407,7 @@ score.peek()
 
 ### SQL
 
-使用 [`ML.PREDICT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict?hl=zh-tw)預測可能的收入水平。做為輸入內容，`ML.PREDICT` 函式會採用訓練好的模型，以及 `dataframe` 資料欄值為 `prediction` 的 `input_data` 檢視畫面中的資料列。
+使用 [`ML.PREDICT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict?hl=zh-tw)預測可能的收入水平。輸入時，`ML.PREDICT` 函式會採用已訓練的模型，以及 `dataframe` 資料欄值為 `prediction` 的 `input_data` 檢視畫面中的資料列。
 
 執行 `ML.PREDICT` 查詢：
 
@@ -565,11 +565,11 @@ predictions.peek()
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

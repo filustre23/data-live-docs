@@ -359,8 +359,5 @@ WITH Numbers AS
   UNION ALL SELECT 10
 )
 SELECT x,
-  RANK() OVER (ORDER BY x ASC) AS rank
-FROM Numbers
-
-/*-------------------------+
+  RANK() OVER
 ```

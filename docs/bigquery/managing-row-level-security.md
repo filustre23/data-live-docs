@@ -35,7 +35,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 事前準備
 
-授予身分與存取權管理 (IAM) 角色，讓使用者取得執行本文各項工作所需的權限。如要執行工作，必須具備的權限 (如有) 會列在工作的「必要權限」部分。
+授予身分與存取權管理 (IAM) 角色，讓使用者取得執行本文各項工作所需的權限。執行工作所需的權限 (如有) 會列在工作的「必要權限」部分。
 
 ## 建立或更新資料列層級存取政策
 
@@ -47,14 +47,14 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 * `bigquery.rowAccessPolicies.create`
 * `bigquery.rowAccessPolicies.setIamPolicy`
-* `bigquery.tables.getData` (在目標資料表和已授權子查詢資料列層級存取政策中參照的任何資料表上)
+* `bigquery.tables.getData` (在目標資料表和已授權的子查詢資料列層級存取政策中參照的任何資料表上)
 * `bigquery.jobs.create` (執行 DDL 查詢工作)
 
 如要更新 BigQuery 資料表的資料列層級存取權政策，您需要下列 IAM 權限：
 
 * `bigquery.rowAccessPolicies.update`
 * `bigquery.rowAccessPolicies.setIamPolicy`
-* `bigquery.tables.getData` (在目標資料表和已授權子查詢資料列層級存取政策中參照的任何資料表上)
+* `bigquery.tables.getData` (在目標資料表和已授權的子查詢資料列層級存取政策中參照的任何資料表上)
 * `bigquery.jobs.create` (執行 DDL 查詢工作)
 
 下列每個預先定義的 IAM 角色都包含建立及更新資料列層級存取權政策所需的權限：
@@ -66,7 +66,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 建立資料列層級存取權政策時，BigQuery 會自動將 `bigquery.filteredDataViewer` 角色授予受授予者清單的成員。在 Google Cloud 控制台中[列出資料表的資料列層級存取權政策](#list-policy)時，這個角色會與政策受授予者清單的成員相關聯。
 
-**注意：** 請勿透過 IAM 將 `bigquery.filteredDataViewer` 角色直接套用至資源。`bigquery.filteredDataViewer` 是系統管理的角色。只能使用資料列層級存取政策授予角色。詳情請參閱[資料列層級安全性的最佳做法](https://docs.cloud.google.com/bigquery/docs/best-practices-row-level-security?hl=zh-tw#filtered-data-viewer)。
+**注意：** 請勿透過 IAM 將 `bigquery.filteredDataViewer` 角色直接套用至資源。`bigquery.filteredDataViewer` 是系統管理的角色。只能使用資料列層級存取權政策授予角色。詳情請參閱[資料列層級安全性的最佳做法](https://docs.cloud.google.com/bigquery/docs/best-practices-row-level-security?hl=zh-tw#filtered-data-viewer)。
 
 ### 建立或更新資料列層級存取政策
 
@@ -91,7 +91,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### 範例
 
-下列範例說明如何為不同類型的[主體 ID](https://docs.cloud.google.com/iam/docs/principal-identifiers?hl=zh-tw#allow) (包括 Google 帳戶和聯合身分) 建立及更新資料列存取政策。如要進一步瞭解聯合身分，請參閱「[Workload Identity 聯盟](https://docs.cloud.google.com/iam/docs/workload-identity-federation?hl=zh-tw)」。
+下列範例說明如何為不同類型的[主體 ID](https://docs.cloud.google.com/iam/docs/principal-identifiers?hl=zh-tw#allow) (包括 Google 帳戶和同盟身分) 建立及更新資料列存取政策。如要進一步瞭解聯合身分，請參閱「[Workload Identity 聯盟](https://docs.cloud.google.com/iam/docs/workload-identity-federation?hl=zh-tw)」。
 
 #### 建立新政策並授予 Google 帳戶存取權
 
@@ -260,7 +260,7 @@ GRANT TO ('user:abc@example.com')
 FILTER USING (product_category = 'shoes' OR color = 'blue');
 ```
 
-另一方面，如要指定存取權，但必須符合多個條件，請使用含有 `AND` 運算子的篩選器。舉例來說，下列資料列層級存取權政策只會授予 `abc@example.com` 存取權給 `product_category` 欄位設為 `shoes` 且 `color` 欄位設為 `blue` 的資料列：
+另一方面，如要指定存取權，且存取權取決於多個條件是否成立，請使用含有 `AND` 運算子的篩選器。舉例來說，下列資料列層級存取權政策只會授予 `abc@example.com` 存取權給 `product_category` 欄位設為 `shoes`，且 `color` 欄位設為 `blue` 的資料列：
 
 ```
 CREATE ROW ACCESS POLICY blue_shoes
@@ -269,7 +269,7 @@ GRANT TO ('user:abc@example.com')
 FILTER USING (product_category = 'shoes' AND color = 'blue');
 ```
 
-根據上述資料列層級存取政策，`abc@example.com` 可以存取藍色鞋子的資訊，但無法存取紅色鞋子或藍色汽車的資訊。
+根據上述資料列層級存取政策，`abc@example.com` 可以存取藍色鞋子的相關資訊，但無法存取紅色鞋子或藍色汽車的資訊。
 
 ## 列出資料表資料列層級存取權政策
 
@@ -386,7 +386,7 @@ denied` 錯誤。
 
 如要透過預先定義的角色取得這些權限，您必須使用 IAM 取得資料表的 [`roles/bigquery.dataViewer`](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.dataViewer) 角色，並透過資料列層級存取權政策取得資料表的 [`roles/bigquery.filteredDataViewer`](#filtered-data-viewer-role) IAM 角色。
 
-**注意：** 請勿透過 IAM 將 `bigquery.filteredDataViewer` 角色直接套用至資源。`bigquery.filteredDataViewer` 是系統管理的角色。只能使用資料列層級存取政策授予角色。詳情請參閱[資料列層級安全性的最佳做法](https://docs.cloud.google.com/bigquery/docs/best-practices-row-level-security?hl=zh-tw#filtered-data-viewer)。
+**注意：** 請勿透過 IAM 將 `bigquery.filteredDataViewer` 角色直接套用至資源。`bigquery.filteredDataViewer` 是系統管理的角色。只能使用資料列層級存取權政策授予角色。詳情請參閱[資料列層級安全性的最佳做法](https://docs.cloud.google.com/bigquery/docs/best-practices-row-level-security?hl=zh-tw#filtered-data-viewer)。
 
 您必須具備所有相關資料欄的 `datacatalog.categories.fineGrainedGet` 權限，才能使用[資料欄層級安全防護機制](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro?hl=zh-tw)。如要透過預先定義的角色取得這項權限，您需要 `datacatalog.categoryFineGrainedReader` 角色。
 
@@ -439,11 +439,11 @@ denied` 錯誤。
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

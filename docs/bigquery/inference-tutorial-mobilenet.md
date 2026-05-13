@@ -23,7 +23,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 MobileNet V3 模型會分析圖片檔案，並傳回特徵向量陣列。特徵向量陣列是描述所分析圖片特徵的數字元素清單。每個特徵向量都會說明多維度特徵空間，並提供圖片在這個空間中的座標。您可以運用圖片的向量資訊進一步分類圖片，例如使用餘弦相似度將類似圖片分組。
 
 MobileNet V3 模型輸入內容會採用 [`DType`](https://www.tensorflow.org/api_docs/python/tf/dtypes/DType?hl=zh-tw)
-`tf.float32` 形狀的 `[-1, 224, 224, 3]` 張量。輸出內容是形狀為 `[-1, 1024]` 的張量陣列。`tf.float32`
+`tf.float32` 形狀的 `[-1, 224, 224, 3]` 張量。輸出內容是形狀為 `[-1, 1024]` 的 `tf.float32` 張量陣列。
 
 ## 所需權限
 
@@ -138,7 +138,7 @@ MobileNet V3 模型輸入內容會採用 [`DType`](https://www.tensorflow.org/ap
 
   [Enable the APIs](https://console.cloud.google.com/flows/enableapi?apiid=bigquery.googleapis.com%2Cbigqueryconnection.googleapis.com&hl=zh-tw)
 
-### 建立保留項目
+### 建立預留項目
 
 如要搭配物件資料表使用[匯入的模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/inference-overview?hl=zh-tw#inference_using_imported_models)，您必須[建立保留項目](https://docs.cloud.google.com/bigquery/docs/reservations-tasks?hl=zh-tw#create_reservations)，並使用 BigQuery [Enterprise 或 Enterprise Plus 版](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)，然後[建立保留項目指派作業](https://docs.cloud.google.com/bigquery/docs/reservations-assignments?hl=zh-tw#create_reservation_assignments)，並使用 `QUERY` 工作類型。
 
@@ -183,7 +183,7 @@ MobileNet V3 模型輸入內容會採用 [`DType`](https://www.tensorflow.org/ap
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
 
-   如果沒有看到左側窗格，請按一下「展開左側窗格」圖示 last\_page 開啟窗格。
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Explorer」窗格中，點選「新增資料」add。
 
    「新增資料」對話方塊隨即開啟。
@@ -200,7 +200,9 @@ MobileNet V3 模型輸入內容會採用 [`DType`](https://www.tensorflow.org/ap
 
 ### bq
 
-1. 在 Cloud Shell 中執行 [`bq mk` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#mk-connection)，建立連線：
+1. 在 Cloud Shell 中執行
+   [`bq mk` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#mk-connection)
+   ，建立連線：
 
    ```
    bq mk --connection --location=us --connection_type=CLOUD_RESOURCE \
@@ -213,9 +215,9 @@ MobileNet V3 模型輸入內容會採用 [`DType`](https://www.tensorflow.org/ap
    ```
 3. 從 `properties` 欄複製 `serviceAccountId` 屬性的值，並儲存在某處。您需要這項資訊，才能將權限[授予](#grant-permissions)連線的服務帳戶。
 
-## 建立 Cloud Storage 值區
+## 建立 Cloud Storage bucket
 
-1. [建立 Cloud Storage 值區](https://docs.cloud.google.com/storage/docs/creating-buckets?hl=zh-tw)。
+1. [建立 Cloud Storage bucket](https://docs.cloud.google.com/storage/docs/creating-buckets?hl=zh-tw)。
 2. 在儲存區中[建立兩個資料夾](https://cloud.google.com/storage/docs/folders?hl=zh-tw#tools)，一個命名為 `mobilenet` (用於存放模型檔案)，另一個命名為 `flowers` (用於存放資料集)。
 
 ## 將權限授予連線的服務帳戶
@@ -280,7 +282,9 @@ gcloud storage buckets add-iam-policy-binding gs://BUCKET_NAME \
 
 ### bq
 
-在 Cloud Shell 中執行 [`bq mk` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#mk-table)，建立連線：
+在 Cloud Shell 中執行
+[`bq mk` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#mk-table)
+，建立連線：
 
 ```
 bq mk --table \
@@ -386,11 +390,11 @@ mobilenet_inference_test.sample_images
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

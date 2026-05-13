@@ -10,7 +10,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 匯出 BigQuery ML 模型以進行線上預測 透過集合功能整理內容 你可以依據偏好儲存及分類內容。
 
-**注意：**如果使用 Vertex AI Model Registry，則不需要匯出模型，即可在 Vertex AI 上部署。 如要進一步瞭解登錄檔，請參閱「[在 Model Registry 中管理 BigQuery ML 模型](https://docs.cloud.google.com/bigquery/docs/managing-models-vertex?hl=zh-tw)」。
+**注意：** 如果您使用 Vertex AI Model Registry，則不需要匯出模型，即可在 Vertex AI 上部署。如要進一步瞭解登錄檔，請參閱「[在 Model Registry 中管理 BigQuery ML 模型](https://docs.cloud.google.com/bigquery/docs/managing-models-vertex?hl=zh-tw)」。
 
 本教學課程說明如何[匯出 BigQuery ML 模型](https://docs.cloud.google.com/bigquery/docs/exporting-models?hl=zh-tw)，然後在 Vertex AI 或本機電腦上部署模型。您將使用 BigQuery 公開資料集中的 [`iris` 資料表](https://console.cloud.google.com/bigquery?p=bigquery-public-data&%3Bd=ml_datasets&%3Bt=iris&%3Bpage=table&hl=zh-tw)，完成下列三個端對端情境：
 
@@ -261,8 +261,7 @@ state: READY
 
 如要進一步瞭解如何針對已部署的模型執行線上預測，請參閱「[透過自訂訓練模型取得線上推論結果](https://docs.cloud.google.com/vertex-ai/docs/predictions/get-online-predictions?hl=zh-tw)」。
 
-1) 建立以換行符號分隔的 JSON 輸入檔案，例如：`instances.json`
-含有下列內容的檔案：
+1) 建立以換行符號分隔的 JSON 輸入檔案，例如包含下列內容的檔案：`instances.json`
 
 ```
 {"sepal_length":5.0, "sepal_width":2.0, "petal_length":3.5, "petal_width":1.0}
@@ -532,7 +531,7 @@ gcloud ai-platform models delete $MODEL_NAME
    這個動作將會刪除資料集、資料表，以及所有資料。
 4. 在「Delete dataset」(刪除資料集) 對話方塊中，輸入資料集的名稱 (`bqml_tutorial`)，然後按一下「Delete」(刪除) 來確認刪除指令。
 
-### 刪除 Cloud Storage 值區
+### 刪除 Cloud Storage bucket
 
 刪除專案會移除專案中的所有 Cloud Storage 值區。若您希望重新使用專案，可以刪除本教學課程中所建立的 bucket
 
@@ -573,11 +572,11 @@ gcloud ai-platform models delete $MODEL_NAME
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

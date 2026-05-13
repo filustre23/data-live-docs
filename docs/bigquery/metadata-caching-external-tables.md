@@ -23,7 +23,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 * Amazon S3 BigLake 資料表
 * Cloud Storage BigLake 資料表
 
-中繼資料包括檔案名稱、分區資訊，以及檔案的中繼資料，例如列數。您可以選擇是否要在資料表上啟用中繼資料快取。如果查詢包含大量檔案，且使用 Hive 分區篩選器，中繼資料快取功能可發揮最大效益。
+中繼資料包括檔案名稱、分割資訊，以及檔案的中繼資料，例如列數。您可以選擇是否要在資料表上啟用中繼資料快取。如果查詢包含大量檔案，且使用 Hive 分區篩選器，中繼資料快取功能可發揮最大效益。
 
 如果未啟用中繼資料快取，查詢資料表時必須讀取外部資料來源，才能取得物件中繼資料。讀取這項資料會增加查詢延遲時間；從外部資料來源列出數百萬個檔案可能需要幾分鐘。啟用中繼資料快取功能後，查詢作業就能避免列出外部資料來源中的檔案，並更快地分割及修剪檔案。
 
@@ -39,7 +39,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 * **最大過時程度**：指定查詢何時使用快取中繼資料。
 * 「中繼資料快取模式」會指定中繼資料的收集方式。
 
-啟用中繼資料快取功能後，您可以指定可接受的資料表作業中繼資料過時間隔上限。舉例來說，如果指定間隔為 1 小時，只要資料表的中繼資料在過去 1 小時內重新整理過，針對該資料表執行的作業就會使用快取中繼資料。如果快取中繼資料的建立時間早於該時間，作業會改為從資料存放區 (Amazon S3 或 Cloud Storage) 擷取中繼資料。您可以指定介於 30 分鐘至 7 天之間的過時間隔。
+啟用中繼資料快取時，您可以指定可接受的資料表作業中繼資料過時間隔上限。舉例來說，如果指定間隔為 1 小時，則對資料表執行的作業會使用快取中繼資料 (如果該資料在過去 1 小時內已重新整理)。如果快取中繼資料的建立時間早於該時間，作業就會改為從資料存放區 (Amazon S3 或 Cloud Storage) 擷取中繼資料。您可以指定介於 30 分鐘至 7 天之間的過時間隔。
 
 你可以選擇自動或手動重新整理快取：
 
@@ -55,7 +55,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 * 如果資料表的中繼資料快取設定為需要手動重新整理，且過時間隔設為 2 天，您就必須每 2 天或更短的時間執行 `BQ.REFRESH_EXTERNAL_METADATA_CACHE` 系統程序，才能讓針對資料表執行的作業使用快取中繼資料。
 * 如果資料表的 metadata 快取設定為自動重新整理，且過時間隔設為 30 分鐘，當 metadata 快取重新整理時間較長 (通常為 30 到 60 分鐘) 時，對資料表執行的部分作業可能會從資料存放區讀取資料。
 
-如要進一步瞭解如何為 BigLake 資料表設定中繼資料快取選項，請參閱「[建立 Amazon S3 BigLake 外部資料表](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-external-table?hl=zh-tw)」或「[建立 Cloud Storage 的 BigLake 外部資料表](https://docs.cloud.google.com/bigquery/docs/create-cloud-storage-table-biglake?hl=zh-tw)」。
+如要進一步瞭解如何設定 BigLake 資料表的後設資料快取選項，請參閱「[建立 Amazon S3 BigLake 外部資料表](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-external-table?hl=zh-tw)」或「[建立 Cloud Storage 的 BigLake 外部資料表](https://docs.cloud.google.com/bigquery/docs/create-cloud-storage-table-biglake?hl=zh-tw)」。
 
 如要進一步瞭解如何設定物件資料表的中繼資料快取選項，請參閱「[建立物件資料表](https://docs.cloud.google.com/bigquery/docs/object-tables?hl=zh-tw#create-object-table)」一文。
 
@@ -128,11 +128,11 @@ LIMIT 10;
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

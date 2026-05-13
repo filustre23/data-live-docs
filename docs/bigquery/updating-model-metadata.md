@@ -36,7 +36,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 * `bigquery.dataOwner`
 * `bigquery.admin`
 
-如要進一步瞭解 BigQuery ML 中的身分與存取權管理角色和權限，請參閱[存取權控管](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)。
+如要進一步瞭解 BigQuery ML 中的 IAM 角色和權限，請參閱[存取權控管](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)。
 
 ## 更新模型的說明
 
@@ -49,12 +49,12 @@ Google uses AI technology to translate content into your preferred language. AI 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往 BigQuery 頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 點選左側窗格中的 explore「Explorer」：
+2. 點選左側窗格中的 explore「Explorer」。
 
-   如果沒有看到左側窗格，請按一下「展開左側窗格」圖示 last\_page 開啟窗格。
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Explorer」窗格中展開專案，按一下「Datasets」(資料集)，然後按一下資料集。
 4. 按一下「模型」分頁標籤，然後按一下模型名稱選取模型。
-5. 按一下 [Details] (詳細資料) 分頁標籤。
+5. 點按「Details」(詳細資料) 分頁標籤。
 6. 如要更新模型的說明，請按一下「編輯」edit。
 7. 在「編輯詳細資料」對話方塊中更新說明，然後按一下「儲存」。
 
@@ -81,7 +81,7 @@ bq update --model --description "[STRING]" PROJECT_ID:DATASET.MODEL
 Model 'myproject.mydataset.mymodel' successfully updated.
 ```
 
-您可以發出 `bq show` 指令來確認變更。詳情請參閱「[取得模型中繼資料](https://docs.cloud.google.com/bigquery/docs/getting-model-metadata?hl=zh-tw)」。
+您可發出 `bq show` 指令來確認變更。詳情請參閱「[取得模型中繼資料](https://docs.cloud.google.com/bigquery/docs/getting-model-metadata?hl=zh-tw)」。
 
 範例：
 
@@ -105,9 +105,9 @@ myotherproject:mydataset.mymodel
 
 ### Go
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Go 設定操作說明進行操作。詳情請參閱 [BigQuery Go API 參考說明文件](https://godoc.org/cloud.google.com/go/bigquery)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Go 設定說明操作。詳情請參閱 [BigQuery Go API 參考說明文件](https://godoc.org/cloud.google.com/go/bigquery)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 import (
@@ -147,9 +147,9 @@ func updateModelDescription(projectID, datasetID, modelID string) error {
 
 ### Java
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定操作說明進行操作。詳情請參閱 [BigQuery Java API 參考說明文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定說明操作。詳情請參閱 [BigQuery Java API 參考說明文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 import com.google.cloud.bigquery.BigQuery;
@@ -188,9 +188,9 @@ public class UpdateModelDescription {
 
 ### Node.js
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定操作說明進行操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 // Import the Google Cloud client library
@@ -220,9 +220,9 @@ async function updateModel() {
 
 ### Python
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定操作說明進行操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 from google.cloud import bigquery
@@ -253,10 +253,10 @@ print(
 
 ### 控制台
 
-1. 點選左側窗格中的 explore「Explorer」：
+1. 點選左側窗格中的 explore「Explorer」。
 2. 在「Explorer」窗格中展開專案，按一下「Datasets」(資料集)，然後按一下資料集。
 3. 按一下「模型」分頁標籤，然後按一下模型名稱選取模型。
-4. 按一下 [Details] (詳細資料) 分頁標籤。
+4. 點按「Details」(詳細資料) 分頁標籤。
 5. 如要更新模型的標籤，請按一下「編輯」edit。
 6. 在「編輯詳細資料」對話方塊中，新增、刪除或修改標籤，然後按一下「儲存」。
 
@@ -284,7 +284,7 @@ PROJECT_ID:DATASET.MODEL
 Model 'myproject.mydataset.mymodel' successfully updated.
 ```
 
-您可發出 `bq show` 指令來確認變更。詳情請參閱「[取得模型中繼資料](https://docs.cloud.google.com/bigquery/docs/getting-model-metadata?hl=zh-tw)」。
+您可以發出 `bq show` 指令來確認變更。詳情請參閱「[取得模型中繼資料](https://docs.cloud.google.com/bigquery/docs/getting-model-metadata?hl=zh-tw)」。
 
 範例：
 
@@ -316,7 +316,7 @@ myotherproject:mydataset.mymodel
 
 ### 控制台
 
-Google Cloud 主控台不支援設定或更新模型的到期時間。
+Google Cloud 控制台不支援設定或更新模型的到期時間。
 
 ### bq
 
@@ -360,8 +360,7 @@ bq update --model --expiration 432000 myotherproject:mydataset.mymodel
 
 ### API
 
-如要使用 API 更新模型的到期時間，請呼叫 [`models.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models/patch?hl=zh-tw) 方法，並提供 `projectId`、`datasetId` 和 `modelId`。如要修改到期時間，請針對[模型資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models?hl=zh-tw#Model)新增或更新「expirationTime」屬性。
-「expirationTime」會從訓練週期開始計算，並以毫秒為單位。
+如要使用 API 更新模型的到期時間，請呼叫 [`models.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models/patch?hl=zh-tw) 方法，並提供 `projectId`、`datasetId` 和 `modelId`。如要修改到期時間，請針對[模型資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models?hl=zh-tw#Model)新增或更新「expirationTime」屬性。「expirationTime」會從訓練週期開始計算，並以毫秒為單位。
 
 ## 後續步驟
 
@@ -380,11 +379,11 @@ bq update --model --expiration 432000 myotherproject:mydataset.mymodel
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

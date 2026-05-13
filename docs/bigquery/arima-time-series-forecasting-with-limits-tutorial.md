@@ -20,12 +20,12 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 您會使用 [`new_york.citibike_trips`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&%3Bd=new_york&%3Bt=citibike_trips&%3Bpage=table&hl=zh-tw) 資料訓練本教學課程中的模型。這個資料集包含紐約市 Citi Bike 行程的相關資訊。
 
-按照本教學課程操作之前，請先熟悉單一時間序列預測。如要瞭解這個主題，請完成「[Google Analytics 資料的單一時間序列預測](https://docs.cloud.google.com/bigquery/docs/arima-single-time-series-forecasting-tutorial?hl=zh-tw)」教學課程。
+按照本教學課程操作前，您應熟悉單一時間序列預測。如要瞭解這個主題，請完成「[Google Analytics 資料的單一時間序列預測](https://docs.cloud.google.com/bigquery/docs/arima-single-time-series-forecasting-tutorial?hl=zh-tw)」教學課程。
 
 ## 所需權限
 
 * 如要建立資料集，您需要 `bigquery.datasets.create` IAM 權限。
-* 如要建立模型，您需要下列權限：
+* 如要建立模型，您必須具備下列權限：
 
   + `bigquery.jobs.create`
   + `bigquery.models.create`
@@ -36,15 +36,14 @@ Google uses AI technology to translate content into your preferred language. AI 
   + `bigquery.models.getData`
   + `bigquery.jobs.create`
 
-如要進一步瞭解 BigQuery 中的 IAM 角色和權限，請參閱 [IAM 簡介](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)。
+如要進一步瞭解 BigQuery 中的 IAM 角色和權限，請參閱「[IAM 簡介](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)」。
 
 ## 目標
 
 在本教學課程中，您會使用下列項目：
 
 * [`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series?hl=zh-tw) 陳述式：用於建立時間序列模型。
-* [`ML.FORECAST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-forecast?hl=zh-tw)
-  函式：預測每日總造訪次數。
+* [`ML.FORECAST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-forecast?hl=zh-tw) 函式：預測每日總造訪次數。
 
 ## 費用
 
@@ -170,7 +169,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 ### BigQuery DataFrames
 
 在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定說明操作。
-詳情請參閱 [BigQuery DataFrames 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -190,7 +189,7 @@ bqclient.create_dataset("bqml_tutorial", exists_ok=True)
 
 在下列查詢中，`FROM bigquery-public-data.new_york.citibike_trips` 子句表示您要查詢 `new_york` 資料集中的 `citibike_trips` 資料表。
 
-在 `SELECT` 陳述式中，查詢會使用 [`EXTRACT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions?hl=zh-tw#extract)從 `starttime` 資料欄擷取日期資訊。這項查詢會使用 `COUNT(*)` 子句，取得每日的 Citi Bike 行程總數。
+在 `SELECT` 陳述式中，查詢會使用 [`EXTRACT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions?hl=zh-tw#extract)從 `starttime` 資料欄擷取日期資訊。這項查詢會使用 `COUNT(*)` 子句，取得每日的 Citi Bike 總行程數。
 
 ```
 #standardSQL
@@ -222,7 +221,7 @@ GROUP BY date
 ### BigQuery DataFrames
 
 在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定說明操作。
-詳情請參閱 [BigQuery DataFrames 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -301,7 +300,7 @@ GROUP BY date, start_station_id;
 
    查詢作業約需 80 秒才能完成，完成後您就能存取 (`nyc_citibike_arima_model`) 模型。由於查詢是使用 `CREATE MODEL` 建立模型，因此不會有查詢結果。
 
-**注意：** 您可能會想知道美國節慶是否會影響時間序列。您可以嘗試在查詢的 `OPTIONS` 清單中加入 [holiday\_region='US'](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series?hl=zh-tw#holiday_region)。如果時間序列中確實有美國節慶模式，這項功能就能更準確地模擬這些美國節慶時間點。
+**附註：** 您可能會想知道美國節慶是否會影響時間序列。您可以嘗試在查詢的 `OPTIONS` 清單中加入 [holiday\_region='US'](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series?hl=zh-tw#holiday_region)。如果時間序列中確實有美國節慶模式，這項功能就能更準確地模擬這些美國節慶時間點。
 
 ## 預測時間序列並以視覺化方式呈現結果
 
@@ -420,7 +419,7 @@ CREATE OR REPLACE MODEL bqml_tutorial.nyc_citibike_arima_model
 
    查詢作業約需 100 秒才能完成，完成後您就能存取 (`nyc_citibike_arima_model_with_limits`) 模型。由於查詢是使用 `CREATE MODEL` 陳述式建立模型，因此不會有查詢結果。
 
-**注意：** 您可能會想知道美國節慶是否會影響時間序列。您可以嘗試在查詢的 `OPTIONS` 清單中加入 [holiday\_region='US'](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series?hl=zh-tw#holiday_region)。如果時間序列中確實有美國節慶模式，這項功能就能更準確地模擬這些美國節慶時間點。
+**附註：** 您可能會想知道美國節慶是否會影響時間序列。您可以嘗試在查詢的 `OPTIONS` 清單中加入 [holiday\_region='US'](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series?hl=zh-tw#holiday_region)。如果時間序列中確實有美國節慶模式，這項功能就能更準確地模擬這些美國節慶時間點。
 
 ## 使用設有上限的模型預測時間序列
 
@@ -526,11 +525,11 @@ ARIMA PLUS 模型偵測到 Citi Bike 的每日總行程數正在減少。`start_
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

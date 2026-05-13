@@ -10,9 +10,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 將 ARIMA\_PLUS 單變數時間序列模型擴展至數百萬個時間序列 透過集合功能整理內容 你可以依據偏好儲存及分類內容。
 
-在本教學課程中，您將瞭解如何大幅加快一組[`ARIMA_PLUS`單變數時間序列模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series?hl=zh-tw)的訓練速度，以便使用單一查詢執行多個時間序列預測。您也會瞭解如何評估預測準確率。
+在本教學課程中，您將瞭解如何大幅加快[`ARIMA_PLUS`單變數時間序列模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series?hl=zh-tw)的訓練速度，以便透過單一查詢執行多個時間序列預測。您也會瞭解如何評估預測準確率。
 
-本教學課程會預測多個時間序列。系統會針對一或多個指定資料欄中的每個值，計算每個時間點的預測值。舉例來說，如果您想預測天氣，並指定包含城市資料的資料欄，預測資料會包含 A 城市所有時間點的預測值，接著是 B 城市所有時間點的預測值，依此類推。
+本教學課程會預測多個時間序列。系統會針對一或多個指定資料欄中的每個值，計算每個時間點的預測值。舉例來說，如果您想預測天氣，並指定包含城市資料的資料欄，預測資料就會包含 A 城市所有時間點的預測值，然後是 B 城市所有時間點的預測值，依此類推。
 
 本教學課程會使用公開的
 [`bigquery-public-data.new_york.citibike_trips`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&%3Bd=new_york&%3Bt=citibike_trips&%3Bpage=table&hl=zh-tw)
@@ -97,7 +97,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 ## 所需權限
 
 * 如要建立資料集，您需要 `bigquery.datasets.create` IAM 權限。
-* 如要建立模型，您需要下列權限：
+* 如要建立模型，您必須具備下列權限：
 
   + `bigquery.jobs.create`
   + `bigquery.models.create`
@@ -108,7 +108,7 @@ Google uses AI technology to translate content into your preferred language. AI 
   + `bigquery.models.getData`
   + `bigquery.jobs.create`
 
-如要進一步瞭解 BigQuery 中的 IAM 角色和權限，請參閱 [IAM 簡介](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)。
+如要進一步瞭解 BigQuery 中的 IAM 角色和權限，請參閱「[IAM 簡介](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)」。
 
 ## 建立資料集
 
@@ -159,7 +159,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 建立輸入資料表
 
-下列查詢的 `SELECT` 陳述式使用 [`EXTRACT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions?hl=zh-tw#extract)從 `starttime` 資料欄中擷取日期資訊。這項查詢會使用 `COUNT(*)` 子句，取得每日的 Citi Bike 行程總數。
+下列查詢的 `SELECT` 陳述式使用 [`EXTRACT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions?hl=zh-tw#extract)從 `starttime` 資料欄中擷取日期資訊。這項查詢會使用 `COUNT(*)` 子句，取得每日的 Citi Bike 總行程數。
 
 「`table_1`」有 679 個時間序列。這項查詢會使用額外的 `INNER JOIN` 邏輯，選取超過 400 個時間點的所有時間序列，因此總共有 383 個時間序列。
 
@@ -249,9 +249,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    結果應如下所示：
 
-   `ML.EVALUATE` 函式中的 `TABLE` 子句會識別包含實際資料的資料表。系統會將預測結果與基準真相資料進行比較，藉此計算準確率指標。在本例中，`nyc_citibike_time_series` 包含 2016 年 6 月 1 日前後的時間序列點。2016 年 6 月 1 日之後的點是實際地面資料。2016 年 6 月 1 日之前的資料點會用於訓練模型，以產生該日期之後的預測結果。計算指標時，只需要 2016 年 6 月 1 日之後的資料點。系統會忽略 2016 年 6 月 1 日前的點數，不會納入指標計算。
+   `ML.EVALUATE` 函式中的 `TABLE` 子句會識別包含實際資料的資料表。系統會將預測結果與基準真相資料進行比較，藉此計算準確率指標。在本例中，`nyc_citibike_time_series` 包含 2016 年 6 月 1 日前後的時間序列點。2016 年 6 月 1 日之後的點是實際地面資料。2016 年 6 月 1 日之前的資料點會用於訓練模型，以產生該日期之後的預測結果。計算指標時，只需要 2016 年 6 月 1 日之後的點數。系統會忽略 2016 年 6 月 1 日前的點數，不會納入指標計算。
 
-   `ML.EVALUATE` 函式中的 `STRUCT` 子句指定了函式的參數。`horizon` 值為 `7`，表示查詢會根據七點預測計算預測準確度。請注意，如果真值資料的比較點少於七個，系統只會根據可用點計算準確度指標。`perform_aggregation` 值為 `TRUE`，表示預測準確度指標是根據時間點的指標匯總而來。如果指定 `perform_aggregation` 值為 `FALSE`，系統會針對每個預測時間點傳回預測準確度。
+   `ML.EVALUATE` 函式中的 `STRUCT` 子句指定了函式的參數。`horizon` 值為 `7`，表示查詢會根據七點預測計算預測準確度。請注意，如果基準真相資料的比較點少於七個，系統只會根據可用點計算準確率指標。`perform_aggregation` 值為 `TRUE`，表示預測準確度指標是根據時間點的指標匯總而來。如果指定 `perform_aggregation` 值為 `FALSE`，系統會針對每個預測時間點傳回預測準確度。
 
    如要進一步瞭解輸出資料欄，請參閱 [`ML.EVALUATE` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate?hl=zh-tw)。
 
@@ -307,7 +307,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    WHERE date < '2016-06-01';
    ```
 
-   查詢大約需要 2 分鐘才能完成。回想一下，先前的模型在 `auto_arima_max_order` 值為 `5` 時，大約需要 15 分鐘才能完成，因此這項變更可將模型訓練速度提升約 7 倍。如果您想知道為何速度增幅不是 `5/2=2.5x`，這是因為 `auto_arima_max_order` 值增加時，候選模型數量和複雜度都會增加。這會導致模型訓練時間增加。
+   查詢大約需要 2 分鐘才能完成。回想一下，先前的模型在 `auto_arima_max_order` 值為 `5` 時，大約需要 15 分鐘才能完成，因此這項變更可將模型訓練速度提升約 7 倍。如果想知道為何速度增幅不是 `5/2=2.5x`，這是因為 `auto_arima_max_order` 值增加時，候選模型數量和複雜度都會增加。這會導致模型訓練時間增加。
 
 ## 評估超參數搜尋空間較小的模型預測準確度
 
@@ -330,13 +330,13 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 這項查詢會傳回 `MAPE` 值 `0.3337`，以及 `sMAPE` 值 `0.2337`。
 
-在「評估整體預測準確度」部分，您評估的模型具有較大的超參數搜尋空間，其中 `auto_arima_max_order` 選項值為 `5`。這會產生 `MAPE` 值 `0.3471`，以及 `sMAPE` 值 `0.2563`。在本例中，您會發現較小的超參數搜尋空間實際上可提供更高的預測準確度。其中一個原因是 `auto.ARIMA` 演算法只會針對整個模型化管道的趨勢模組執行超參數調整。`auto.ARIMA`演算法選取的最佳 ARIMA 模型可能無法為整個管道產生最佳預測結果。
+在「評估整體預測準確度」部分，您評估的模型具有較大的超參數搜尋空間，其中 `auto_arima_max_order` 選項值為 `5`。這會產生 `MAPE` 值 `0.3471`，以及 `sMAPE` 值 `0.2563`。在本例中，您可以看到較小的超參數搜尋空間實際上可提供更高的預測準確度。其中一個原因是 `auto.ARIMA` 演算法只會針對整個模型化管道的趨勢模組執行超參數調整。`auto.ARIMA`演算法選取的最佳 ARIMA 模型可能無法為整個管道產生最佳預測結果。
 
 ## 建立模型，運用較小的超參數搜尋空間和智慧快速訓練策略，預測多個時間序列
 
 在這個步驟中，您可以使用一或多個 `max_time_series_length`、`max_time_series_length` 或 `time_series_length_fraction` 訓練選項，縮小超參數搜尋空間，並採用智慧快速訓練策略。
 
-週期性建模 (例如季節性) 需要一定數量的時間點，但趨勢建模所需的時間點較少。此外，趨勢模型化的運算成本遠高於其他時間序列元件，例如季節性。使用上述快速訓練選項，您可以運用部分時間序列有效模擬趨勢元件，其他時間序列元件則使用整個時間序列。
+雖然季節性等週期性模型需要一定數量的時間點，但趨勢模型所需的時間點較少。此外，趨勢模型化的運算成本遠高於其他時間序列元件，例如季節性。使用上述快速訓練選項，您可以運用部分時間序列有效模擬趨勢元件，其他時間序列元件則使用整個時間序列。
 
 以下範例使用 `max_time_series_length` 選項，加快訓練速度。將 `max_time_series_length` 選項值設為 `30`，即可只使用最近 30 個時間點來模擬趨勢元件。所有 383 個時間序列仍用於模擬非趨勢成分。
 
@@ -362,7 +362,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    WHERE date < '2016-06-01';
    ```
 
-   查詢大約需要 35 秒才能完成。與「[建立模型，以較小的超參數搜尋空間預測多個時間序列](#small-search-space)」一節中使用的查詢相比，速度快了 3 倍。由於查詢的非訓練部分 (例如資料前處理) 會持續產生時間負擔，因此當時間序列數量遠大於這個範例時，速度增益會高出許多。如果有一百萬個時間序列，速度增幅會接近時間序列長度與 `max_time_series_length` 選項值的比率。在這種情況下，速度增幅會超過 10 倍。
+   查詢大約需要 35 秒才能完成。與「[建立模型，使用較小的超參數搜尋空間預測多個時間序列](#small-search-space)」一節中使用的查詢相比，速度快了 3 倍。由於查詢的非訓練部分 (例如資料前處理) 會持續產生時間負擔，因此當時間序列數量遠大於本範例時，速度提升幅度會更高。如果有一百萬個時間序列，速度增幅會接近時間序列長度與 `max_time_series_length` 選項值的比率。在這種情況下，速度增幅會超過 10 倍。
 
 ## 使用較小的超參數搜尋空間和智慧快速訓練策略，評估模型的預測準確度
 
@@ -475,11 +475,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-11 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-11 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]

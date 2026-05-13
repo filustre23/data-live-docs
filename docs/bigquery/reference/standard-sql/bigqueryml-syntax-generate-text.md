@@ -937,12 +937,4 @@ The model and input table must be in the same region.
 * `ml_generate_text_status`: a `STRING` value that contains the API response
   status for the corresponding row. This value is empty if the operation was
   successful.
-* `ml_generate_text_grounding_result`: a `STRING` value that contains a list of the grounding sources that the model used to gather additional information. This column is returned when both `flatten_json_output` and `ground_with_google_search` are `TRUE`.
-
-### Claude models
-
-* `ml_generate_text_result`:
-  This is the JSON response from the
-  [`projects.locations.endpoints.rawPredict`](/vertex-ai/docs/reference/rest/v1/projects.locations.endpoints/rawPredict)
-  call to the model. The generated text is in the `content` element. This
-  column is
+* `ml_generate_text_grounding_result`: a `STRING` value that contains a list of the grounding sources tha

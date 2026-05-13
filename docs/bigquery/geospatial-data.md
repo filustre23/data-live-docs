@@ -24,19 +24,18 @@ Google uses AI technology to translate content into your preferred language. AI 
 * *空間特徵*代表邏輯空間物件，結合幾何圖形與應用程式專用屬性。
 * *空間特徵集合*是一組空間特徵。
 
-在 BigQuery 中，[`GEOGRAPHY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#geography_type)
-資料類型代表幾何值或幾何集合。如要表示空間特徵，請建立資料表，其中包含幾何體的 `GEOGRAPHY` 資料欄，以及屬性的額外資料欄。表格中的每一列都是空間特徵，整個表格則代表空間特徵集合。
+在 BigQuery 中，[`GEOGRAPHY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#geography_type) 資料類型代表幾何值或幾何集合。如要表示空間特徵，請建立資料表，其中包含幾何圖形的 `GEOGRAPHY` 欄，以及屬性的額外欄。表格中的每一列都是空間特徵，整個表格則代表空間特徵集合。
 
 `GEOGRAPHY` 資料類型描述地球表面上的*點集合*。地理資訊點集合是指 [WGS84](https://earth-info.nga.mil/GandG/update/index.php?action=home#tab_wgs84-data) 參考橢球體上的點、線與多邊形集合，含測地線。您可以透過呼叫其中一個 GoogleSQL [地理位置函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions?hl=zh-tw)來使用 `GEOGRAPHY` 資料類型。
 
 ## 正在載入地理空間資料
 
-地球上的單一點可以只用經緯度配對來描述。
+地球上的單一點可以只用一組經緯度表示。
 舉例來說，您可以載入含有經緯度值的 CSV 檔案，然後使用 [`ST_GEOGPOINT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions?hl=zh-tw#st_geogpoint) 函式將這些值轉換為 `GEOGRAPHY` 值。
 
 如要載入更複雜的地理區域，請將下列地理空間資料格式載入 `GEOGRAPHY` 欄：
 
-* Well-known text (WKT)
+* 熟知的文字 (WKT)
 * 熟知的二進位 (WKB)
 * GeoJSON
 * GeoParquet
@@ -134,8 +133,8 @@ else:
 
 GeoJSON 資料可包含下列任一物件類型：
 
-* *幾何圖形物件*：這種空間形狀是由一組點、線及含有自選孔洞的多邊形所組成。
-* *地圖項目物件*：包含幾何圖形，以及額外的名稱/值組 (依個別應用程式而不同)。
+* *幾何圖形物件*：幾何圖形物件是一種空間形狀，描述為點、線及含有自選孔洞的多邊形聯集。
+* *地圖項目物件*：特徵物件包含幾何圖形，以及額外的名稱/值組 (依個別應用程式而不同)。
 * *地圖項目集合*：特徵集合是一組特徵物件。
 
 將 GeoJSON 資料載入 BigQuery 的方法有兩種：
@@ -145,7 +144,7 @@ GeoJSON 資料可包含下列任一物件類型：
 
 #### 載入以換行符號分隔的 GeoJSON 檔案
 
-以換行符號分隔的 GeoJSON 檔案包含 GeoJSON 地圖項目物件清單，檔案中的每一行代表一個物件。GeoJSON 地圖項目物件是具有下列成員的 JSON 物件：
+以換行符號分隔的 GeoJSON 檔案包含 GeoJSON 地圖項目物件清單，檔案中的每一行代表一個物件。GeoJSON 特徵物件是具有下列成員的 JSON 物件：
 
 * `type`。如果是地圖項目物件，值必須為 `Feature`。BigQuery 會驗證值，但不會將其納入資料表結構定義。
 * `geometry`。值為 GeoJSON `Geometry` 物件或 `null`。
@@ -171,7 +170,7 @@ bq load \
 更改下列內容：
 
 * `DATASET` 是您的資料集名稱。
-* `TABLE` 是目標資料表的名稱。
+* `TABLE` 是目的地資料表的名稱。
 * `FILE_PATH_OR_URI` 是本機檔案的路徑或 [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#gcs-uri)。
 
 上一個範例會啟用[結構定義自動偵測](https://docs.cloud.google.com/bigquery/docs/schema-detect?hl=zh-tw)功能。如要進一步控管 BigQuery 如何轉換 `properties` 物件內的值，可以改為提供明確的結構定義。詳情請參閱「[指定結構定義](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#specify_schemas)」。如果您提供明確的結構定義，請勿在結構定義中加入頂層 `type` 資料欄。針對 `properties` 成員的每個成員，定義個別資料欄，而非單一巢狀資料欄。
@@ -253,7 +252,7 @@ else:
 
 ### 載入 GeoParquet 檔案
 
-[GeoParquet](https://geoparquet.org) 規格會在 [Parquet](https://parquet.apache.org/) 檔案格式中新增地理空間類型。GeoParquet 包含中繼資料，可為所含的地理空間資料提供明確語意，避免其他地理空間資料格式發生[解讀問題](#coordinate_systems_and_edges)。
+[GeoParquet](https://geoparquet.org) 規格會在 [Parquet](https://parquet.apache.org/) 檔案格式中加入地理空間類型。GeoParquet 包含中繼資料，可為所含的地理空間資料提供明確語意，避免其他地理空間資料格式發生[解讀問題](#coordinate_systems_and_edges)。
 
 載入 Parquet 檔案時，BigQuery 會檢查 GeoParquet 中繼資料。如果存在 GeoParquet 中繼資料，BigQuery 預設會將中繼資料描述的所有資料欄載入對應的 `GEOGRAPHY` 資料欄。如要進一步瞭解如何載入 Parquet 檔案，請參閱「[載入 Parquet 資料](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet?hl=zh-tw)」。
 
@@ -285,7 +284,7 @@ GeoParquet 檔案包含用於建立資料的座標系統和邊緣相關中繼資
 
 在球體上，每個多邊形都有一個互補的多邊形。舉例來說，描述地球各大洲的多邊形會有一個描述地球海洋的多邊形。由於兩個多邊形都使用相同的界線環形描述，因此需要規則來解決在兩個多邊形中的模糊性 (兩個多邊形中，哪一個由指定的 WKT 字串描述)。
 
-從檔案載入 WKT 和 WKB 字串，或使用串流擷取功能時，地理空間分析會假設輸入中的多邊形方向如下：如果按照輸入頂點的順序沿著多邊形界線前進，多邊形的內部會在左側。地理空間分析功能在將地理位置物件匯出至 WKT 和 WKB 字串時，會使用相同的規則。
+從檔案載入 WKT 和 WKB 字串，或使用串流擷取功能時，地理空間分析會假設輸入中的多邊形方向如下：如果按照輸入頂點的順序沿著多邊形界線前進，多邊形的內部會在左側。將地理位置物件匯出至 WKT 和 WKB 字串時，地理空間分析功能會使用相同的規則。
 
 如果您使用 [`ST_GEOGFROMTEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions?hl=zh-tw#st_geogfromtext) 函式將 WKT 字串轉換為 `GEOGRAPHY` 值，`oriented` 參數會指定函式判斷多邊形的方式：
 
@@ -316,7 +315,7 @@ WHERE
 
 地理空間分析不支援地理空間格式的下列功能：
 
-* 3D 幾何圖形。包括 WKT 格式的「Z」字尾，以及 GeoJSON 格式的高度座標。
+* 三維幾何圖形。包括 WKT 格式的「Z」字尾，以及 GeoJSON 格式的高度座標。
 * 線性參考系統。包括 WKT 格式的「M」字尾。
 * 幾何圖元或多部分幾何圖形以外的 WKT 幾何圖形物件。
   具體來說，地理空間分析僅支援 Point、MultiPoint、LineString、MultiLineString、Polygon、MultiPolygon 和 GeometryCollection。
@@ -325,7 +324,7 @@ WHERE
 
 ## 整合地理空間光柵資料與 Google Earth Engine
 
-地理空間洞察資料通常會以格線或*點陣*資料的形式呈現。點陣資料會將區域連續資料 (例如衛星圖像、天氣預報和土地覆蓋物) 整理成像素格線。雖然 BigQuery 主要專門處理表格向量資料，代表具有界線和點的特徵，但您可以使用 [`ST_REGIONSTATS` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions?hl=zh-tw#st_regionstats)，將點陣資料整合到 BigQuery 分析中。這項函式會使用 Google 的光柵分析平台 Earth Engine，對光柵資料執行運算和彙整作業，以強化地理空間分析。詳情請參閱「[處理點陣資料](https://docs.cloud.google.com/bigquery/docs/raster-data?hl=zh-tw)」。
+地理空間洞察通常以格線或*點陣*資料呈現。點陣資料會將區域連續資料 (例如衛星圖像、天氣預報和土地覆蓋物) 整理成像素格線。雖然 BigQuery 主要專門處理表格向量資料，代表具有界線和點的特徵，但您可以使用 [`ST_REGIONSTATS` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions?hl=zh-tw#st_regionstats)，將點陣資料整合到 BigQuery 分析中。這項函式會使用 Google 的光柵分析平台 Earth Engine，對光柵資料執行運算和彙整作業，以提升地理空間分析效果。詳情請參閱「[處理點陣資料](https://docs.cloud.google.com/bigquery/docs/raster-data?hl=zh-tw)」。
 
 如要瞭解如何將 Earth Engine 資料匯出至 BigQuery，請參閱「[匯出至 BigQuery](https://developers.google.com/earth-engine/guides/exporting_to_bigquery?hl=zh-tw)」。如要進一步瞭解 Earth Engine 和 BigQuery 的整合功能，請參閱 Earth Engine 說明文件中的「[BigQuery 整合](https://developers.google.com/earth-engine/guides/bigquery_integrations?hl=zh-tw)」。
 
@@ -439,11 +438,11 @@ GeoJSON 線條擁有兩個額外的資料點。地理空間分析會新增這些
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-09 (世界標準時間)。
+上次更新時間：2026-05-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]
