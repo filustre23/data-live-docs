@@ -658,4 +658,4 @@ ML.GENERATE_EMBEDDING(
       This column isn't returned for text content.
     - `ml_generate_embedding_end_sec`: for video content, an `INT64` value
       that contains the ending second of the portion of the video that the
-      embedding represents. For image
+      embedding represents. For image co

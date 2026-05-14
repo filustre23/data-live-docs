@@ -358,5 +358,5 @@ See [`ST_GEOGFROMGEOJSON`](#st_geogfromgeojson) to construct a
 ## `ST_ASTEXT`
 
 ```
-ST_ASTEXT</
+ST_ASTEXT
 ```

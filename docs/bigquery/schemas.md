@@ -974,5 +974,5 @@ from google.cloud import bigquery
 
 client = bigquery.Client()
 
-# TODO(dev): Change table_id to the
+# TODO(dev): Change table_id to the f
 ```

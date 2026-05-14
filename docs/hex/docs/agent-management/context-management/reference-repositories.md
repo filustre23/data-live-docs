@@ -14,15 +14,16 @@ Reference repositories are a way to connect your git repositories and provide th
 
 ## How to configure reference repositories[​](#how-to-configure-reference-repositories "Direct link to How to configure reference repositories")
 
-Only Admins and Managers can configure reference repositories. If your workspace is not already connected to a Git provider, you’ll be prompted to set one up. Access must also be approved by a repository admin on the Git provider side.
+Only Admins and Managers can configure reference repositories. Access must also be approved by a repository admin on the Git provider side.
 
 To add a reference repository:
 
 1. Navigate to **Context Studio**
-2. Go to **Connections → Reference Repositories**
-3. Select **+ Repository**
-4. Choose a repository and branch to sync
-5. Add a description
+2. Open the **Repositories** tab
+3. Select **+ Git provider** to set up a connection
+4. Once connected to a Git provider, you can add a repository by clicking **+ Repository**
+5. Choose a repository and branch to sync
+6. Add a description
 
 Providing a detailed description helps the agent determine when a repository is relevant and how to use it effectively.
 

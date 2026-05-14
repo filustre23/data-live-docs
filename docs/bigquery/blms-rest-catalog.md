@@ -41,8 +41,9 @@ Google uses AI technology to translate content into your preferred language. AI 
   + 针对项目的 [BigLake Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake?hl=zh-cn#biglake.admin)  (`roles/biglake.admin`) 角色
   + 针对 Cloud Storage 存储桶的 [Storage Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/storage?hl=zh-cn#storage.admin)  (`roles/storage.admin`)　角色
 * 在凭据自动售卖模式下读取表数据：
-  项目的 [BigLake Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake?hl=zh-cn#biglake.viewer)  (`roles/biglake.viewer`) 角色
-* 以凭据自动售卖模式写入表数据：项目的 [BigLake Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake?hl=zh-cn#biglake.editor)  (`roles/biglake.editor`) 角色
+  项目的 [BigLake Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake?hl=zh-cn#biglake.viewer)  (`roles/biglake.viewer`) 角色。如果您使用 Managed Service for Apache Spark、Managed Service for Apache Spark 或 Dataflow 等查询引擎读取表数据，请向您用于在该引擎中运行作业的服务账号授予此角色。
+* 以凭据自动售卖模式写入表数据：项目的 [BigLake Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake?hl=zh-cn#biglake.editor)  (`roles/biglake.editor`) 角色。如果您使用 Managed Service for Apache Spark、Managed Service for Apache Spark 或 Dataflow 等查询引擎来写入表数据，请向您用于在该引擎中运行作业的服务账号授予此角色。
+* 在凭据贩卖模式下使用自动预配的 Lakehouse 运行时目录服务账号：目标 Cloud Storage 存储桶上的 [Storage Object User](https://docs.cloud.google.com/iam/docs/roles-permissions/storage?hl=zh-cn#storage.objectUser)  (`roles/storage.objectUser`)。创建目录后，请向目录的自动预配 Lakehouse 运行时目录服务账号明确授予存储桶的 Storage Object User 角色 (`roles/storage.objectUser`)。
 * 在非凭证自动售卖模式下读取目录资源和表数据：
   + 项目的 [BigLake Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake?hl=zh-cn#biglake.viewer)  (`roles/biglake.viewer`) 角色
   + 针对 Cloud Storage 存储桶的 [Storage Object Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/storage?hl=zh-cn#storage.objectViewer)  (`roles/storage.objectViewer`) 角色
@@ -142,6 +143,9 @@ gcloud biglake iceberg catalogs create \
 
 目录管理员可以在创建或更新目录时启用凭据自动发放功能。作为目录用户，您可以在[配置 Apache Iceberg REST 目录端点](#configure-catalog)时指定访问权限委托，从而指示 Apache Iceberg REST 目录端点返回降级后的存储凭据。
 
+自动预配的 Lakehouse 运行时目录服务账号需要对目标 Cloud Storage 存储桶具有明确的 Storage Object User 角色 (`roles/storage.objectUser`)。默认情况下，该角色仅具有查看者访问权限。
+如果没有此角色，出售的凭据将没有足够的范围来执行存储写入操作。如果您使用 `gcloud` 或 Terraform 等工具，则必须手动授予此角色。
+
 ### 控制台
 
 1. 在 Google Cloud 控制台中，打开 **Lakehouse** 页面。
@@ -157,7 +161,28 @@ gcloud biglake iceberg catalogs create \
 6. 在**身份验证方法**下，点击**设置存储桶权限**。
 7. 在对话框中，点击**确认**。
 
-   这会验证目录的服务账号是否具有存储桶的 Storage Object User 角色。
+   这会验证您的目录的服务账号是否对您的存储桶具有 Storage Object Admin 角色。
+
+### gcloud
+
+使用 [`gcloud biglake iceberg catalogs create` 命令](https://docs.cloud.google.com/sdk/gcloud/reference/biglake/iceberg/catalogs/create?hl=zh-cn)。
+
+```
+gcloud biglake iceberg catalogs create \
+    CATALOG_NAME \
+    --project PROJECT_ID \
+    --catalog-type gcs-bucket \
+    --credential-mode vended-credentials \
+    [--primary-location LOCATION]
+```
+
+替换以下内容：
+
+* `CATALOG_NAME`：目录的名称。此名称通常与 Lakehouse Iceberg REST 目录使用的 Cloud Storage 存储桶 ID 相匹配，例如，如果您的存储桶为 `gs://bucket-id`，则目录名称可能为 `bucket-id`。从 BigQuery [查询这些表](#query-tables)时，此名称还用作目录标识符。
+* `PROJECT_ID`：您的 Google Cloud 项目 ID。
+* `LOCATION`：（可选）目录的主区域，用于确保与 BigQuery 的互操作性。对于美国区域（例如 `US` 或 `us-central1`）或欧盟区域（例如 `EU` 或 `europe-west4`）中的 Cloud Storage 存储分区，请分别指定 `US` 或 `EU`，以确保可以从相应的 BigQuery 多区域访问和查询目录。如需了解详情，请参阅[存储分区和目录区域](https://docs.cloud.google.com/lakehouse/docs/understand-catalog-types?hl=zh-cn#bucket_and_catalog_regions)。
+
+  创建目录后，请向目录自动预配的 Lakehouse 运行时目录服务账号明确授予存储桶的 **Storage Object User** 角色 (`roles/storage.objectUser`)。
 
 ### 配置客户端应用
 
@@ -606,11 +631,11 @@ USE CATALOG_NAME.SCHEMA_NAME;
 
 如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-最后更新时间 (UTC)：2026-05-12。
+最后更新时间 (UTC)：2026-05-13。
 
 
 
 
 需要向我们提供更多信息？
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["很难理解","hardToUnderstand","thumb-down"],["信息或示例代码不正确","incorrectInformationOrSampleCode","thumb-down"],["没有我需要的信息/示例","missingTheInformationSamplesINeed","thumb-down"],["翻译问题","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-05-12。"],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["很难理解","hardToUnderstand","thumb-down"],["信息或示例代码不正确","incorrectInformationOrSampleCode","thumb-down"],["没有我需要的信息/示例","missingTheInformationSamplesINeed","thumb-down"],["翻译问题","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-05-13。"],[],[]]

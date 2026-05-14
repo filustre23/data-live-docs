@@ -937,4 +937,4 @@ The model and input table must be in the same region.
 * `ml_generate_text_status`: a `STRING` value that contains the API response
   status for the corresponding row. This value is empty if the operation was
   successful.
-* `ml_generate_text_grounding_result`: a `STRING` value that contains a list of the grounding sources tha
+* `ml_generate_text_grounding_result`: a `STRING` value that contains a list of the grounding sources that

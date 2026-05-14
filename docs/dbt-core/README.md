@@ -150,7 +150,7 @@ Mirrored from <https://docs.getdbt.com/docs/>. Do not edit by hand — regenerat
 - docs/dbt-ai/mcp-troubleshooting
 - docs/dbt-ai/setup-local-mcp
 - docs/dbt-ai/setup-remote-mcp
-- docs/dbt-apis/admin-cloud-api
+- docs/dbt-apis/admin-api
 - docs/dbt-apis/apis-overview
 - docs/dbt-apis/authentication
 - docs/dbt-apis/discovery-api
@@ -164,15 +164,14 @@ Mirrored from <https://docs.getdbt.com/docs/>. Do not edit by hand — regenerat
 - docs/dbt-apis/sl-jdbc
 - docs/dbt-apis/sl-python-sdk
 - docs/dbt-apis/user-tokens
-- docs/dbt-cloud-environments
 - docs/dbt-extension-features
+- docs/dbt-platform-environments
 - docs/dbt-support
 - docs/dbt-versions/2022-release-notes
 - docs/dbt-versions/2023-release-notes
 - docs/dbt-versions/2024-release-notes
 - docs/dbt-versions/2025-release-notes
 - docs/dbt-versions/about-versions
-- docs/dbt-versions/cloud-release-tracks
 - docs/dbt-versions/compatible-track-changelog
 - docs/dbt-versions/core-upgrade/02-upgrading-to-fusion
 - docs/dbt-versions/core-upgrade/03-upgrading-to-v1.12
@@ -189,14 +188,15 @@ Mirrored from <https://docs.getdbt.com/docs/>. Do not edit by hand — regenerat
 - docs/dbt-versions/core-upgrade/11-Older versions/15-upgrading-to-v1.1
 - docs/dbt-versions/core-upgrade/11-Older versions/16-upgrading-to-v1.0
 - docs/dbt-versions/core-upgrade/11-Older versions/upgrading-to-dbt-utils-v1.0
-- docs/dbt-versions/dbt-cloud-release-notes-gen
+- docs/dbt-versions/dbt-platform-release-notes-gen
 - docs/dbt-versions/dbt-versions
 - docs/dbt-versions/experimental-features
 - docs/dbt-versions/product-lifecycles
 - docs/dbt-versions/release-notes
 - docs/dbt-versions/release-notes/98-dbt-cloud-changelog-2021
 - docs/dbt-versions/release-notes/99-dbt-cloud-changelog-2019-2020
-- docs/dbt-versions/upgrade-dbt-version-in-cloud
+- docs/dbt-versions/release-tracks
+- docs/dbt-versions/upgrade-dbt-platform-version
 - docs/deploy/about-ci
 - docs/deploy/advanced-ci
 - docs/deploy/artifacts
@@ -226,7 +226,7 @@ Mirrored from <https://docs.getdbt.com/docs/>. Do not edit by hand — regenerat
 - docs/deploy/webhooks
 - docs/environments-in-dbt
 - docs/explore/access-dbt-insights
-- docs/explore/access-from-dbt-cloud
+- docs/explore/access-from-dbt-platform
 - docs/explore/build-and-view-your-docs
 - docs/explore/column-level-lineage
 - docs/explore/cost-insights
@@ -350,16 +350,16 @@ Mirrored from <https://docs.getdbt.com/docs/>. Do not edit by hand — regenerat
 - docs/platform-integrations/semantic-layer/power-bi
 - docs/platform-integrations/semantic-layer/tableau
 - docs/platform-integrations/set-up-snowflake-native-app
-- docs/platform/about-cloud-develop-defer
-- docs/platform/about-cloud-setup
+- docs/platform/about-defer
 - docs/platform/about-develop-dbt
-- docs/platform/about-platform/about-cloud-ide
-- docs/platform/about-platform/about-dbt-cloud
+- docs/platform/about-platform-setup
+- docs/platform/about-platform/about-studio-ide
 - docs/platform/about-platform/access-regions-ip-addresses
 - docs/platform/about-platform/account-url-migration
 - docs/platform/about-platform/architecture
 - docs/platform/about-platform/browsers
-- docs/platform/about-platform/change-your-dbt-cloud-theme
+- docs/platform/about-platform/change-your-dbt-theme
+- docs/platform/about-platform/dbt-platform-features
 - docs/platform/about-platform/login
 - docs/platform/about-platform/tenancy
 - docs/platform/about-profiles
@@ -370,7 +370,7 @@ Mirrored from <https://docs.getdbt.com/docs/>. Do not edit by hand — regenerat
 - docs/platform/canvas
 - docs/platform/canvas-interface
 - docs/platform/cloud-cli-installation
-- docs/platform/configure-cloud-cli
+- docs/platform/configure-dbt-cli
 - docs/platform/connect-data-platform/about-connections
 - docs/platform/connect-data-platform/connect-amazon-athena
 - docs/platform/connect-data-platform/connect-apache-spark
@@ -394,7 +394,7 @@ Mirrored from <https://docs.getdbt.com/docs/>. Do not edit by hand — regenerat
 - docs/platform/git/connect-azure-devops
 - docs/platform/git/connect-github
 - docs/platform/git/connect-gitlab
-- docs/platform/git/git-configuration-in-dbt-cloud
+- docs/platform/git/git-configuration
 - docs/platform/git/git-version-control
 - docs/platform/git/import-a-project-by-git-url
 - docs/platform/git/managed-repository
@@ -406,7 +406,6 @@ Mirrored from <https://docs.getdbt.com/docs/>. Do not edit by hand — regenerat
 - docs/platform/manage-access/about-access
 - docs/platform/manage-access/audit-log
 - docs/platform/manage-access/auth0-migration
-- docs/platform/manage-access/cloud-seats-and-users
 - docs/platform/manage-access/enterprise-permissions
 - docs/platform/manage-access/environment-permissions
 - docs/platform/manage-access/environment-permissions-setup
@@ -419,6 +418,7 @@ Mirrored from <https://docs.getdbt.com/docs/>. Do not edit by hand — regenerat
 - docs/platform/manage-access/scim-faq
 - docs/platform/manage-access/scim-manage-user-licenses
 - docs/platform/manage-access/scim-okta
+- docs/platform/manage-access/seats-and-users
 - docs/platform/manage-access/self-service-permissions
 - docs/platform/manage-access/set-up-bigquery-oauth
 - docs/platform/manage-access/set-up-databricks-oauth
@@ -455,7 +455,7 @@ Mirrored from <https://docs.getdbt.com/docs/>. Do not edit by hand — regenerat
 - docs/platform/secure/private-connectivity/overview
 - docs/platform/studio-ide/autofix-deprecations
 - docs/platform/studio-ide/develop-copilot
-- docs/platform/studio-ide/develop-in-the-cloud
+- docs/platform/studio-ide/develop-in-studio
 - docs/platform/studio-ide/git-commit-signing
 - docs/platform/studio-ide/ide-user-interface
 - docs/platform/studio-ide/keyboard-shortcuts
@@ -477,13 +477,13 @@ Mirrored from <https://docs.getdbt.com/docs/>. Do not edit by hand — regenerat
 - faqs/Accounts/_account-specific-features
 - faqs/Accounts/change-billing
 - faqs/Accounts/change-users-license
-- faqs/Accounts/cloud-upgrade-instructions
 - faqs/Accounts/configurable-snapshot-path
 - faqs/Accounts/dbt-specific-jinja
 - faqs/Accounts/delete-users
 - faqs/Accounts/find-user-id
 - faqs/Accounts/git-account-in-use
 - faqs/Accounts/payment-accepted
+- faqs/Accounts/platform-upgrade-instructions
 - faqs/Accounts/scim-faq
 - faqs/Accounts/sso-faq
 - faqs/Accounts/transfer-account
@@ -603,7 +603,7 @@ Mirrored from <https://docs.getdbt.com/docs/>. Do not edit by hand — regenerat
 - faqs/Troubleshooting/ide-session-unknown-error
 - faqs/Troubleshooting/ip-restrictions
 - faqs/Troubleshooting/job-memory-limits
-- faqs/Troubleshooting/long-sessions-cloud-cli
+- faqs/Troubleshooting/long-sessions-dbt-cli
 - faqs/Troubleshooting/nonetype-ide-error
 - faqs/Troubleshooting/partial-parsing-error
 - faqs/Troubleshooting/refresh-snowflake-oauth-credentials
@@ -636,6 +636,7 @@ Mirrored from <https://docs.getdbt.com/docs/>. Do not edit by hand — regenerat
 - guides/custom-cicd-pipelines
 - guides/customize-schema-alias
 - guides/databricks-qs
+- guides/databricks-workflows
 - guides/dbt-models-on-databricks
 - guides/dbt-python-bigframes
 - guides/dbt-python-snowpark
@@ -649,7 +650,6 @@ Mirrored from <https://docs.getdbt.com/docs/>. Do not edit by hand — regenerat
 - guides/fusion-qs
 - guides/fusion-upgrade
 - guides/fusion-upgrade-prepare
-- guides/how-to-use-databricks-workflows-to-run-dbt-cloud-jobs
 - guides/manual-install-qs
 - guides/mesh-qs
 - guides/mf-time-spine

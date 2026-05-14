@@ -234,4 +234,4 @@ Google Ads API Resource:
 | ad\_group\_ad\_ad\_legacy\_responsive\_display\_ad\_logo\_image | The MediaFile resource name of the logo image used in the ad. | EnhancedDisplayCreativeLandscapeLogoImageMediaId |
 | ad\_group\_ad\_ad\_legacy\_responsive\_display\_ad\_long\_headline | The long version of the ad's headline. | LongHeadline |
 | ad\_group\_ad\_ad\_legacy\_responsive\_display\_ad\_main\_color | The main color of the ad in hexadecimal. For example, #ffffff for white. If one of main\_color and accent\_color is set, the other is required as well. | MainColor |
-| ad\_group\_ad\_ad\_legacy\_responsive\_display\_ad\_mark |
+| ad\_group\_ad\_ad\_legacy\_responsive\_display\_ad\_market |

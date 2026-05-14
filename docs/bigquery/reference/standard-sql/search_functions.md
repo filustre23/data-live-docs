@@ -543,5 +543,5 @@ SELECT
   SEARCH('foobar', 'foobar', analyzer=>'NO_OP_ANALYZER') AS a,
 
   -- FALSE: Backticks aren't special characters for `NO_OP_ANALYZER`.
-  SEARCH('foo
+  SEARCH('fooba
 ```

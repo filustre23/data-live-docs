@@ -558,5 +558,5 @@ IF EXISTS(SELECT 1 FROM schema.products
   ELSEIF EXISTS(SELECT 1 FROM schema.more_products
            WHERE product_id = target_product_id) THEN
   SELECT CONCAT('found product from more_products table',
-  CAST(target_product_id AS STRING<
+  CAST(target_product_id AS STRING
 ```

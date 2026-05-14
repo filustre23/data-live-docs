@@ -554,5 +554,5 @@ SELECT JSON_ARRAY_APPEND(JSON '{"a": 1}', '$.a', 2) AS json_data
  | json_data |
  +-----------+
  | {"a":1}   |
- +--------
+ +----------
 ```

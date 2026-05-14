@@ -933,4 +933,4 @@ The following types of models are regression models:
 * `median_absolute_error`: a `FLOAT64` value that contains the
   [median absolute error](https://en.wikipedia.org/wiki/Mean_absolute_error)
   for the model.
-* `r2_score`: a `FLOAT64` value that contains the
+* `r2_score`: a `FLOAT64` value that contains the [R](https://en.wikipedia.org/wiki/Coefficient_of_determination#Interpretation)

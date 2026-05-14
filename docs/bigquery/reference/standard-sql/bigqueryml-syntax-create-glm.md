@@ -986,5 +986,4 @@ CREATE MODEL
   `mydataset.mymodel`
 OPTIONS
   ( MODEL_TYPE='LINEAR_REG',
-    LS_INIT_LEARN_RATE=0.15,
 ```

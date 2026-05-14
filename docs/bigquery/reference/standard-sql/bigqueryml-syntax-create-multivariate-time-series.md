@@ -978,4 +978,4 @@ custom holiday scenarios, as described in the following sections.
 
 ### Supplement built-in holidays with additional custom holidays
 
-To model one or more custom holidays in addition to a region&#
+To model one or more custom holidays in addition to a region&#39

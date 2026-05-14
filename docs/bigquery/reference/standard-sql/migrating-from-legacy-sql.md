@@ -440,4 +440,4 @@ For a more comprehensive list of reserved keywords and what constitutes valid id
 ### Project-qualified table names
 
 In legacy SQL, to query a table with a project-qualified name, you can use either a colon `:` or a period `.`.
-In GoogleSQL
+In GoogleSQL h

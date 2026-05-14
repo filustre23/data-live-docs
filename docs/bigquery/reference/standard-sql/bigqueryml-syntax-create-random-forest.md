@@ -979,4 +979,4 @@ Vertex AI model ID, the BigQuery ML
 model name is used.
 
 The `VERTEX_AI_MODEL_ID` value can have up to 63 characters, and valid
-characters are `[a-z0-9_-]`.
+characters are `[a-z0-9_-]`. Th

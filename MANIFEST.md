@@ -1,6 +1,6 @@
 # data-live-docs — index
 
-_Generated 2026-05-13T19:46+00:00_
+_Generated 2026-05-14T08:30+00:00_
 
 **9 sources, 4813 topics total**
 
@@ -3015,7 +3015,7 @@ _1006 topics_
 - `dbt-core/docs/dbt-ai/mcp-troubleshooting`
 - `dbt-core/docs/dbt-ai/setup-local-mcp`
 - `dbt-core/docs/dbt-ai/setup-remote-mcp`
-- `dbt-core/docs/dbt-apis/admin-cloud-api`
+- `dbt-core/docs/dbt-apis/admin-api`
 - `dbt-core/docs/dbt-apis/apis-overview`
 - `dbt-core/docs/dbt-apis/authentication`
 - `dbt-core/docs/dbt-apis/discovery-api`
@@ -3029,15 +3029,14 @@ _1006 topics_
 - `dbt-core/docs/dbt-apis/sl-jdbc`
 - `dbt-core/docs/dbt-apis/sl-python-sdk`
 - `dbt-core/docs/dbt-apis/user-tokens`
-- `dbt-core/docs/dbt-cloud-environments`
 - `dbt-core/docs/dbt-extension-features`
+- `dbt-core/docs/dbt-platform-environments`
 - `dbt-core/docs/dbt-support`
 - `dbt-core/docs/dbt-versions/2022-release-notes`
 - `dbt-core/docs/dbt-versions/2023-release-notes`
 - `dbt-core/docs/dbt-versions/2024-release-notes`
 - `dbt-core/docs/dbt-versions/2025-release-notes`
 - `dbt-core/docs/dbt-versions/about-versions`
-- `dbt-core/docs/dbt-versions/cloud-release-tracks`
 - `dbt-core/docs/dbt-versions/compatible-track-changelog`
 - `dbt-core/docs/dbt-versions/core-upgrade/02-upgrading-to-fusion`
 - `dbt-core/docs/dbt-versions/core-upgrade/03-upgrading-to-v1.12`
@@ -3054,14 +3053,15 @@ _1006 topics_
 - `dbt-core/docs/dbt-versions/core-upgrade/11-Older versions/15-upgrading-to-v1.1`
 - `dbt-core/docs/dbt-versions/core-upgrade/11-Older versions/16-upgrading-to-v1.0`
 - `dbt-core/docs/dbt-versions/core-upgrade/11-Older versions/upgrading-to-dbt-utils-v1.0`
-- `dbt-core/docs/dbt-versions/dbt-cloud-release-notes-gen`
+- `dbt-core/docs/dbt-versions/dbt-platform-release-notes-gen`
 - `dbt-core/docs/dbt-versions/dbt-versions`
 - `dbt-core/docs/dbt-versions/experimental-features`
 - `dbt-core/docs/dbt-versions/product-lifecycles`
 - `dbt-core/docs/dbt-versions/release-notes`
 - `dbt-core/docs/dbt-versions/release-notes/98-dbt-cloud-changelog-2021`
 - `dbt-core/docs/dbt-versions/release-notes/99-dbt-cloud-changelog-2019-2020`
-- `dbt-core/docs/dbt-versions/upgrade-dbt-version-in-cloud`
+- `dbt-core/docs/dbt-versions/release-tracks`
+- `dbt-core/docs/dbt-versions/upgrade-dbt-platform-version`
 - `dbt-core/docs/deploy/about-ci`
 - `dbt-core/docs/deploy/advanced-ci`
 - `dbt-core/docs/deploy/artifacts`
@@ -3091,7 +3091,7 @@ _1006 topics_
 - `dbt-core/docs/deploy/webhooks`
 - `dbt-core/docs/environments-in-dbt`
 - `dbt-core/docs/explore/access-dbt-insights`
-- `dbt-core/docs/explore/access-from-dbt-cloud`
+- `dbt-core/docs/explore/access-from-dbt-platform`
 - `dbt-core/docs/explore/build-and-view-your-docs`
 - `dbt-core/docs/explore/column-level-lineage`
 - `dbt-core/docs/explore/cost-insights`
@@ -3215,16 +3215,16 @@ _1006 topics_
 - `dbt-core/docs/platform-integrations/semantic-layer/power-bi`
 - `dbt-core/docs/platform-integrations/semantic-layer/tableau`
 - `dbt-core/docs/platform-integrations/set-up-snowflake-native-app`
-- `dbt-core/docs/platform/about-cloud-develop-defer`
-- `dbt-core/docs/platform/about-cloud-setup`
+- `dbt-core/docs/platform/about-defer`
 - `dbt-core/docs/platform/about-develop-dbt`
-- `dbt-core/docs/platform/about-platform/about-cloud-ide`
-- `dbt-core/docs/platform/about-platform/about-dbt-cloud`
+- `dbt-core/docs/platform/about-platform-setup`
+- `dbt-core/docs/platform/about-platform/about-studio-ide`
 - `dbt-core/docs/platform/about-platform/access-regions-ip-addresses`
 - `dbt-core/docs/platform/about-platform/account-url-migration`
 - `dbt-core/docs/platform/about-platform/architecture`
 - `dbt-core/docs/platform/about-platform/browsers`
-- `dbt-core/docs/platform/about-platform/change-your-dbt-cloud-theme`
+- `dbt-core/docs/platform/about-platform/change-your-dbt-theme`
+- `dbt-core/docs/platform/about-platform/dbt-platform-features`
 - `dbt-core/docs/platform/about-platform/login`
 - `dbt-core/docs/platform/about-platform/tenancy`
 - `dbt-core/docs/platform/about-profiles`
@@ -3235,7 +3235,7 @@ _1006 topics_
 - `dbt-core/docs/platform/canvas`
 - `dbt-core/docs/platform/canvas-interface`
 - `dbt-core/docs/platform/cloud-cli-installation`
-- `dbt-core/docs/platform/configure-cloud-cli`
+- `dbt-core/docs/platform/configure-dbt-cli`
 - `dbt-core/docs/platform/connect-data-platform/about-connections`
 - `dbt-core/docs/platform/connect-data-platform/connect-amazon-athena`
 - `dbt-core/docs/platform/connect-data-platform/connect-apache-spark`
@@ -3259,7 +3259,7 @@ _1006 topics_
 - `dbt-core/docs/platform/git/connect-azure-devops`
 - `dbt-core/docs/platform/git/connect-github`
 - `dbt-core/docs/platform/git/connect-gitlab`
-- `dbt-core/docs/platform/git/git-configuration-in-dbt-cloud`
+- `dbt-core/docs/platform/git/git-configuration`
 - `dbt-core/docs/platform/git/git-version-control`
 - `dbt-core/docs/platform/git/import-a-project-by-git-url`
 - `dbt-core/docs/platform/git/managed-repository`
@@ -3271,7 +3271,6 @@ _1006 topics_
 - `dbt-core/docs/platform/manage-access/about-access`
 - `dbt-core/docs/platform/manage-access/audit-log`
 - `dbt-core/docs/platform/manage-access/auth0-migration`
-- `dbt-core/docs/platform/manage-access/cloud-seats-and-users`
 - `dbt-core/docs/platform/manage-access/enterprise-permissions`
 - `dbt-core/docs/platform/manage-access/environment-permissions`
 - `dbt-core/docs/platform/manage-access/environment-permissions-setup`
@@ -3284,6 +3283,7 @@ _1006 topics_
 - `dbt-core/docs/platform/manage-access/scim-faq`
 - `dbt-core/docs/platform/manage-access/scim-manage-user-licenses`
 - `dbt-core/docs/platform/manage-access/scim-okta`
+- `dbt-core/docs/platform/manage-access/seats-and-users`
 - `dbt-core/docs/platform/manage-access/self-service-permissions`
 - `dbt-core/docs/platform/manage-access/set-up-bigquery-oauth`
 - `dbt-core/docs/platform/manage-access/set-up-databricks-oauth`
@@ -3320,7 +3320,7 @@ _1006 topics_
 - `dbt-core/docs/platform/secure/private-connectivity/overview`
 - `dbt-core/docs/platform/studio-ide/autofix-deprecations`
 - `dbt-core/docs/platform/studio-ide/develop-copilot`
-- `dbt-core/docs/platform/studio-ide/develop-in-the-cloud`
+- `dbt-core/docs/platform/studio-ide/develop-in-studio`
 - `dbt-core/docs/platform/studio-ide/git-commit-signing`
 - `dbt-core/docs/platform/studio-ide/ide-user-interface`
 - `dbt-core/docs/platform/studio-ide/keyboard-shortcuts`
@@ -3342,13 +3342,13 @@ _1006 topics_
 - `dbt-core/faqs/Accounts/_account-specific-features`
 - `dbt-core/faqs/Accounts/change-billing`
 - `dbt-core/faqs/Accounts/change-users-license`
-- `dbt-core/faqs/Accounts/cloud-upgrade-instructions`
 - `dbt-core/faqs/Accounts/configurable-snapshot-path`
 - `dbt-core/faqs/Accounts/dbt-specific-jinja`
 - `dbt-core/faqs/Accounts/delete-users`
 - `dbt-core/faqs/Accounts/find-user-id`
 - `dbt-core/faqs/Accounts/git-account-in-use`
 - `dbt-core/faqs/Accounts/payment-accepted`
+- `dbt-core/faqs/Accounts/platform-upgrade-instructions`
 - `dbt-core/faqs/Accounts/scim-faq`
 - `dbt-core/faqs/Accounts/sso-faq`
 - `dbt-core/faqs/Accounts/transfer-account`
@@ -3468,7 +3468,7 @@ _1006 topics_
 - `dbt-core/faqs/Troubleshooting/ide-session-unknown-error`
 - `dbt-core/faqs/Troubleshooting/ip-restrictions`
 - `dbt-core/faqs/Troubleshooting/job-memory-limits`
-- `dbt-core/faqs/Troubleshooting/long-sessions-cloud-cli`
+- `dbt-core/faqs/Troubleshooting/long-sessions-dbt-cli`
 - `dbt-core/faqs/Troubleshooting/nonetype-ide-error`
 - `dbt-core/faqs/Troubleshooting/partial-parsing-error`
 - `dbt-core/faqs/Troubleshooting/refresh-snowflake-oauth-credentials`
@@ -3501,6 +3501,7 @@ _1006 topics_
 - `dbt-core/guides/custom-cicd-pipelines`
 - `dbt-core/guides/customize-schema-alias`
 - `dbt-core/guides/databricks-qs`
+- `dbt-core/guides/databricks-workflows`
 - `dbt-core/guides/dbt-models-on-databricks`
 - `dbt-core/guides/dbt-python-bigframes`
 - `dbt-core/guides/dbt-python-snowpark`
@@ -3514,7 +3515,6 @@ _1006 topics_
 - `dbt-core/guides/fusion-qs`
 - `dbt-core/guides/fusion-upgrade`
 - `dbt-core/guides/fusion-upgrade-prepare`
-- `dbt-core/guides/how-to-use-databricks-workflows-to-run-dbt-cloud-jobs`
 - `dbt-core/guides/manual-install-qs`
 - `dbt-core/guides/mesh-qs`
 - `dbt-core/guides/mf-time-spine`

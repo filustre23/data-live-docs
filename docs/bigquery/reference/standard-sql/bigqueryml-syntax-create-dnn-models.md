@@ -940,4 +940,4 @@ You can only set the `VERTEX_AI_MODEL_VERSION_ALIASES` option when the
 
 **Description**
 
-The Cloud Key Management Service [customer-](/kms/docs/cmek)
+The Cloud Key Management Service [customer-ma](/kms/docs/cmek)

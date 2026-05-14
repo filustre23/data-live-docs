@@ -558,5 +558,5 @@ SELECT GENERATE_ARRAY(0, 10, 3) AS example_array;
 
 /*---------------+
  | example_array |
- +---------------+
+ +---------------+</
 ```
