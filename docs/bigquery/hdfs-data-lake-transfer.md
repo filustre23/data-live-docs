@@ -442,5 +442,5 @@ JSON 檔案中的 `condition` 欄位支援下列值，每個值都有 `partition
    fi
 
    # Remove trailing slashes from GCS_BASE_PATH, if any.
-   GCS_BASE_PATH=$(echo "${GCS_BASE_PATH}"
+   GCS_BASE_PATH=$(echo "${GCS_BASE_PATH}" |<
    ```

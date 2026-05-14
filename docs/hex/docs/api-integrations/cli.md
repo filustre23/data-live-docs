@@ -74,6 +74,16 @@ hex auth login euworkspace -H https://eu.hex.tech
 
 Switch the currently active account using `hex auth switch <profile_name>`. The currently active account is global and shared across shell sessions.
 
+### Authenticating in CI[​](#authenticating-in-ci "Direct link to Authenticating in CI")
+
+In CI, you can run `hex auth login` with the `--token-from-env <env_var>` flag and pass in a [workspace access token](/docs/api-integrations/api/overview#workspace-tokens) as environment variable.
+
+```
+HEX_API_TOKEN="my-token" hex auth login --token-from-env HEX_API_TOKEN  
+  
+HEX_API_TOKEN="my-token" hex auth login --token-from-env HEX_API_TOKEN -H https://eu.hex.tech
+```
+
 ## Usage[​](#usage "Direct link to Usage")
 
 The CLI documents itself with the `--help` flag:
@@ -119,13 +129,14 @@ AI agents that can interact with your command line, such as Claude Code, can be 
 
 ## Bugs & issues[​](#bugs--issues "Direct link to Bugs & issues")
 
-Please contact [[email protected]](/cdn-cgi/l/email-protection#2655535656495452664e435e085243454e) if you encounter any bugs, or other issues.
+Please contact [[email protected]](/cdn-cgi/l/email-protection#bccfc9ccccd3cec8fcd4d9c492c8d9dfd4) if you encounter any bugs, or other issues.
 
 #### On this page
 
 * [Installation](#installation)
 * [Authentication](#authentication)
   + [Using the CLI with multiple accounts or workspaces](#using-the-cli-with-multiple-accounts-or-workspaces)
+  + [Authenticating in CI](#authenticating-in-ci)
 * [Usage](#usage)
   + [Configuration for AI agents](#configuration-for-ai-agents)
 * [Bugs & issues](#bugs--issues)

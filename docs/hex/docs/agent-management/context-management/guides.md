@@ -100,7 +100,7 @@ Alternatively, if you manage your guides in GitHub, you can use our [GitHub Acti
 
 info
 
-You can also use our API directly to [upload guides](/docs/api-integrations/api/reference#operation/UpsertGuideDrafts) and [publish guides](/docs/api-integrations/api/reference#operation/PublishGuideDrafts) if you use GitLab or Bitbucket.
+You can also use the CLI directly to upload and publish guides using the `hex guide preview` and `hex guide publish` locally, and in other CI providers
 
 ### Create a workspace token[​](#create-a-workspace-token "Direct link to Create a workspace token")
 
@@ -135,7 +135,9 @@ In your GitHub repo where your guides live, create a `hex_context.config.json` a
 }
 ```
 
-### Add GitHub action[​](#add-github-action "Direct link to Add GitHub action")
+### Add to CI[​](#add-to-ci "Direct link to Add to CI")
+
+#### Using Github[​](#using-github "Direct link to Using Github")
 
 Next, add a GitHub action by creating a file named `hex_context_toolkit.yml` inside of a directory of `.github/workflows`.
 
@@ -174,6 +176,41 @@ jobs:
 
 After this, changes to guide files detected by your hex\_context.config.json will automatically be kept in sync. You can review and debug actions by looking at the actions tab in the GitHub repository UI and clicking on the `hex_context_toolkit` workflow. When a guide change is detected on your PRs, the GitHub action will add a comment summarizing the changes and a link to test your changes using our Thread preview.
 
+#### Other CI Providers[​](#other-ci-providers "Direct link to Other CI Providers")
+
+Next, configure a CI job using your CI provider of choice. First, you will need to authenticate by passing in [environment variables](/docs/api-integrations/cli#authenticating-in-ci).
+
+On pull requests / branches you can run the `hex guide preview` command which will stage your guide changes and returns a link under `previewLink`
+
+```
+export HEX_API_TOKEN='token' # set this in your secret manager  
+  
+hex auth login --token-from-env HEX_API_TOKEN  
+  
+hex guide preview --json
+```
+
+On push events to the default branch, run the `hex guide preview` command, and extract the previewId and pass it to the `hex guide publish` command
+
+```
+export HEX_API_TOKEN='token' # set this in your secret manager  
+  
+hex auth login --token-from-env HEX_API_TOKEN  
+  
+PREVIEW=$(hex guide preview --json)  
+echo "$PREVIEW"  
+  
+PREVIEW_ID=$(echo -E "$PREVIEW" | jq -r '.previewId')  
+  
+UPSERT_COUNT=$(echo -E "$PREVIEW" | jq -r '.upsertedGuides | length')  
+REMOVED_COUNT=$(echo -E "$PREVIEW" | jq -r '.removedGuides | length')  
+HAS_UPSERTS_OR_REMOVALS=$(( UPSERT_COUNT > 0 || REMOVED_COUNT > 0 ))  
+  
+if (( HAS_UPSERTS_OR_REMOVALS )); then  
+  hex guide publish "$PREVIEW_ID"  
+fi
+```
+
 #### On this page
 
 * [Workspace context](#workspace-context)
@@ -187,4 +224,4 @@ After this, changes to guide files detected by your hex\_context.config.json wil
 * [Programmatically upload guides in CI](#programmatically-upload-guides-in-ci)
   + [Create a workspace token](#create-a-workspace-token)
   + [Create a `hex_context.config.json` file](#create-a-hex_contextconfigjson-file)
-  + [Add GitHub action](#add-github-action)
+  + [Add to CI](#add-to-ci)

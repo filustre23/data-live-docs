@@ -737,5 +737,5 @@ public class WriteCommittedStream {
 
     public void append(JSONArray data, long offset)
         throws DescriptorValidationException, IOException, ExecutionException {
-      synchronized (</
+      synchronized (
 ```

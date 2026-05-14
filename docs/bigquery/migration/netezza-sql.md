@@ -335,4 +335,4 @@ IBM Netezza 資料倉儲技術專為與 Netezza 專屬的 SQL 語法搭配使用
 |  | [`ACOSH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions?hl=zh-tw#acosh) |
 | `ASIN` | [`ASIN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions?hl=zh-tw#asin) |
 |  | [`ASINH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions?hl=zh-tw#asinh) |
-| `ATAN`< |
+| `ATAN` |
