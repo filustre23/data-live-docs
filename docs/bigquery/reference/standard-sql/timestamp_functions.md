@@ -552,3 +552,7 @@ SELECT TIMESTAMP(DATETIME "2008-12-25 15:30:00") AS timestamp_datetime;
  | 2008-12-25 15:30:00 UTC |
  +-------------------------*/
 ```
+
+```
+SELECT TIMESTAMP(DATE "2008-12-25")
+```

@@ -263,5 +263,5 @@ public class CreateAdsTransfer {
               .build();
       TransferConfig config = client.createTransferConfig(request);
       System.out.println("Ads transfer created successfully :" + config.getName());
-    } catch (
+    } catch (ApiException
 ```

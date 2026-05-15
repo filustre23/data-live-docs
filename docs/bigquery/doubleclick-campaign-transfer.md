@@ -279,4 +279,6 @@ public class CreateCampaignmanagerTransfer {
 
 如果您要直接查詢資料表，而不要使用自動產生的檢視表，您必須在查詢中使用 `_PARTITIONTIME` 虛擬資料欄。詳情請參閱[查詢分區資料表](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables?hl=zh-tw)一文。
 
-##
+## Campaign Manager 範例查詢
+
+您可以使用下列 Campaign Manager 查詢範例來分析已移轉的資料。您還可以在 [數據分析](https://www.google.com/analytics/data-studio/?hl=zh-tw) 等視覺化工具中使用查詢。這些查詢可協助您開始透過 BigQuery 查詢 Campaign Manager 資料。如果您對於這些報表的功能有其他問題，

@@ -330,5 +330,6 @@ SELECT
     DATE(creation_time) as day,
     destination_table.project_id as project_id,
     destination_table.dataset_id as dataset_id,
-    destination_table
+    destination_table.table_id as table_id,
+    COUNT(<
 ```

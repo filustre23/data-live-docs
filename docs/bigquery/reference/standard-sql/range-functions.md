@@ -714,3 +714,11 @@ GROUP BY emp_id, normalized;
 ```
 
 ## `RANGE_START`
+
+```
+RANGE_START(range_to_check)
+```
+
+**Description**
+
+Gets the lower

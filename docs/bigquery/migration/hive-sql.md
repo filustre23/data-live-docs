@@ -308,4 +308,5 @@ BigQuery 提供下列其他字串函式：
 | `HASH` | `FARM_FINGERPRINT, MD5, SHA1, SHA256, SHA512` |
 | `STDDEV_POP` | `STDDEV_POP` |
 | `STDDEV_SAMP` | `STDDEV_SAMP` |
-| `TAN` |
+| `TAN` | `TAN` |
+| `TRUNC` |  |

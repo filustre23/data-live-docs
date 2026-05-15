@@ -565,4 +565,8 @@ This computes a subtotal for each category in the
 [`Produce`](#produce_table) table.
 
 * fruit
-  + (**banana**
+  + (**banana**, **apple**) = 10 total purchases
+  + (**banana**, **apple**) = 10 total purchases
+* vegetable
+  + (**leek**, **cabbage**, **lettuce**, **kale**) = 44 total purchases
+  + (**leek**, **cabbage**, <

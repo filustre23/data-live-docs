@@ -618,5 +618,8 @@ WITH some_datetimes AS (
 SELECT DATETIME_BUCKET(
   my_datetime,
   INTERVAL 7 DAY,
-  DATETIME '2000-12-22 12:00:00')
+  DATETIME '2000-12-22 12:00:00') AS bucket_lower_bound
+FROM some_datetimes;
+
+/*--------------
 ```

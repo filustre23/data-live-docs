@@ -558,5 +558,9 @@ SELECT GENERATE_ARRAY(0, 10, 3) AS example_array;
 
 /*---------------+
  | example_array |
- +---------------+</
+ +---------------+
+ | [0, 3, 6, 9]  |
+ +---------------*/
 ```
+
+The following returns an array using a negative value, `-3` for its step size.

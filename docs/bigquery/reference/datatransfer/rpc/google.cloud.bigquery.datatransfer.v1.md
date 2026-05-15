@@ -200,4 +200,4 @@ Defines the properties and custom parameters for a data source.
 | `authorization_type` | `AuthorizationType`  Indicates the type of authorization. |
 | `data_refresh_type` | `DataRefreshType`  Specifies whether the data source supports automatic data refresh for the past few days, and how it's supported. For some data sources, data might not be complete until a few days later, so it's useful to refresh data automatically. |
 | `default_data_refresh_window_days` | `int32`  Default data refresh window on days. Only meaningful when `data_refresh_type` = `SLIDING_WINDOW`. |
-|  |
+| `manual_runs_disabled` | `bool`  Disables backfilling and manual run scheduling for the data source. |

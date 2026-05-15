@@ -542,5 +542,5 @@ contain a value specified by a format element.
 **Example**
 
 ```
-SELECT
+SELECT CAST(TIME '21:30:00' AS STRING
 ```

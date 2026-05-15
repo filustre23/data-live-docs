@@ -310,5 +310,6 @@ func createListing(ctx context.Context, client *analyticshub.Client, projectID, 
 	req := &analyticshubpb.CreateListingRequest{
 		Parent:    fmt.Sprintf("projects/%s/locations/%s/dataExchanges/%s", projectID, location, exchangeID),
 		ListingId: listingID,
-		Listing:
+		Listing: &analyticshubpb.Listing{
+			DisplayName:
 ```

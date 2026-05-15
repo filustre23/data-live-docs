@@ -261,4 +261,5 @@ The possible dialect options for translation.
 | `oracleDialect` | `object (OracleDialect)`  The Oracle dialect |
 | `sparksqlDialect` | `object (SparkSQLDialect)`  The SparkSQL dialect |
 | `snowflakeDialect` | `object (SnowflakeDialect)`  The Snowflake dialect |
-| `netezzaDialect` | `object (NetezzaDial` |
+| `netezzaDialect` | `object (NetezzaDialect)`  The Netezza dialect |
+| `azureSynapseDialect` | `object (` |

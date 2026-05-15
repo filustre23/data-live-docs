@@ -27,6 +27,15 @@ To get the latest product updates delivered to you, add the URL of this page to 
 reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators), or add the
 [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## May 14, 2026
+
+Issue
+
+Support for the `AI.KEY_DRIVERS` function
+[preview](https://cloud.google.com/products/#product-launch-stages)
+has been temporarily disabled. We are working to restore this feature as soon as
+possible.
+
 ## May 12, 2026
 
 Feature
@@ -4201,4 +4210,4 @@ These features are
 
 Announcement
 
-We previously communicated that after January 27, 2025, a purchase would be required to use [Gemini in BigQuery features](https://cloud.google.com/gemini/docs/bigquery/overview). We are temporarily delaying enforcement of these procurement methods, and no purchase is required at this time. For more information, see [Gemini for Google Cloud pricing](https://cloud.google.com/products/gemini/pricing).
+We previous

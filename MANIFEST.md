@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-05-14T19:39+00:00_
+_Generated 2026-05-15T08:40+00:00_
 
-**9 sources, 4813 topics total**
+**9 sources, 4817 topics total**
 
 ## airflow
 
@@ -2729,7 +2729,7 @@ _1532 topics_
 
 Upstream: <https://code.claude.com/docs/en/>
 
-_131 topics_
+_132 topics_
 
 - `claude-code/admin-setup`
 - `claude-code/agent-sdk/agent-loop`
@@ -2790,6 +2790,7 @@ _131 topics_
 - `claude-code/debug-your-config`
 - `claude-code/deep-links`
 - `claude-code/desktop`
+- `claude-code/desktop-changelog`
 - `claude-code/desktop-quickstart`
 - `claude-code/desktop-scheduled-tasks`
 - `claude-code/devcontainer`
@@ -2867,7 +2868,7 @@ _131 topics_
 
 Upstream: <https://docs.getdbt.com/docs/>
 
-_1006 topics_
+_1008 topics_
 
 - `dbt-core/best-practices/best-practice-workflows`
 - `dbt-core/best-practices/clone-incremental-models`
@@ -3271,6 +3272,7 @@ _1006 topics_
 - `dbt-core/docs/platform/manage-access/about-access`
 - `dbt-core/docs/platform/manage-access/audit-log`
 - `dbt-core/docs/platform/manage-access/auth0-migration`
+- `dbt-core/docs/platform/manage-access/connect-apps-oauth`
 - `dbt-core/docs/platform/manage-access/enterprise-permissions`
 - `dbt-core/docs/platform/manage-access/environment-permissions`
 - `dbt-core/docs/platform/manage-access/environment-permissions-setup`
@@ -3629,6 +3631,7 @@ _1006 topics_
 - `dbt-core/reference/dbt-jinja-functions/toyaml`
 - `dbt-core/reference/dbt-jinja-functions/var`
 - `dbt-core/reference/dbt-jinja-functions/zip`
+- `dbt-core/reference/dbt_cloud.yml`
 - `dbt-core/reference/dbt_project.yml`
 - `dbt-core/reference/dbtignore`
 - `dbt-core/reference/define-configs`
@@ -4040,7 +4043,7 @@ _153 topics_
 
 Upstream: <https://learn.hex.tech/>
 
-_354 topics_
+_355 topics_
 
 - `hex/changelog`
 - `hex/changelog/2020-12-17`
@@ -4141,6 +4144,7 @@ _354 topics_
 - `hex/changelog/2026-04-23`
 - `hex/changelog/2026-04-30`
 - `hex/changelog/2026-05-12`
+- `hex/changelog/2026-05-14`
 - `hex/changelog/archive`
 - `hex/changelog/page/10`
 - `hex/changelog/page/11`

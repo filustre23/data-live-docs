@@ -478,4 +478,6 @@ FROM
   [bigquery-public-data:samples.natality]
 WHERE
   year >= 2000
+  AND year <= 2002
+GROUP
 ```

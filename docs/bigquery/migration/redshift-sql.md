@@ -274,3 +274,8 @@ BigQuery 也提供下列[位元匯總](https://docs.cloud.google.com/bigquery/do
 BigQuery 也提供下列條件運算式，這些運算式在 Amazon Redshift 中沒有直接對應的項目：
 
 * [`IF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conditional_expressions?hl=zh-tw#if)
+* [`IFNULL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conditional_expressions?hl=zh-tw#ifnull)
+
+### 日期和時間函式
+
+下表列出常見的 Amazon Redshift 日期和時間函式，以及對應的 BigQuery 函式。BigQuery 的日期和時間函式包括

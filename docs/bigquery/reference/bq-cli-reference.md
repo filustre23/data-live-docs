@@ -677,4 +677,10 @@ bq head --max_rows=10 --start_row=50 --selected_fields=field1,field3 \
 
 ### `bq help`
 
-使用
+使用 `bq help` 指令在工具中顯示 bq 指令列工具說明文件。
+
+#### 劇情概要
+
+`bq help [COMMAND]`
+
+#### 旗標和引數

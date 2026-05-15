@@ -181,4 +181,6 @@ Teradata 中的 `QUALIFY` 子句可讓您[篩選窗型函式的結果](https://d
 
 ### `NORMALIZE` 關鍵字
 
-Teradata 為 `SELECT` 子句提供 [`NORMALIZE`](https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/SQL-Data-Definition-Language-Syntax-and-Examples/Table-Statements/ALTER-TABLE/ALTER-TABLE-Syntax-Elements/ALTER-TABLE-Syntax-Elements-Basic/ALTER-TABLE-Basic-Options/NORMALIZE) 關鍵字，可將重疊的期間或間隔合併為單一期間或間隔，涵蓋
+Teradata 為 `SELECT` 子句提供 [`NORMALIZE`](https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/SQL-Data-Definition-Language-Syntax-and-Examples/Table-Statements/ALTER-TABLE/ALTER-TABLE-Syntax-Elements/ALTER-TABLE-Syntax-Elements-Basic/ALTER-TABLE-Basic-Options/NORMALIZE) 關鍵字，可將重疊的期間或間隔合併為單一期間或間隔，涵蓋所有個別期間值。
+
+BigQuery 不支援 `PERIOD` 類型，因此 Teradata 中的任何 `PERIOD` 類型欄必須以兩個個別的 `DATE` 或 `DATETIME` 欄位插入 BigQuery，這些欄位對應於期間的開始和結束時間。

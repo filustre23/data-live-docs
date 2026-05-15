@@ -47,13 +47,13 @@ Google uses AI technology to translate content into your preferred language. AI 
 | `slot_capacity` | `INTEGER` | 預留項目的基準。 |
 | `user_email` | `STRING` | 進行變更的使用者電子郵件地址或[員工身分聯盟](https://docs.cloud.google.com/iam/docs/workforce-identity-federation?hl=zh-tw)主體。`google`，瞭解 Google 進行的變更。`NULL`：如果電子郵件地址不明。 |
 | `target_job_concurrency` | `INTEGER` | 可同時執行的查詢目標數量，這會受到可用資源的限制。如果為零，系統會根據可用資源自動計算這個值。 |
-| `autoscale` | `STRUCT` | 保留項目的自動調度容量相關資訊。欄位包括：   * `current_slots`：自動調度資源功能為預訂項目新增的時段數量。   **注意：**使用者減少 `max_slots` 後，可能需要一段時間才能傳播，因此 `current_slots` 可能會維持原始值，且在短時間內 (不到一分鐘) 大於 `max_slots`。 * `max_slots`：自動調度資源可為預留項目新增的運算單元數量上限。 |
+| `autoscale` | `STRUCT` | 保留項目的自動調度容量相關資訊。欄位包括：   * `current_slots`：自動調度資源功能為預留項目新增的時段數量。   **注意：**使用者減少 `max_slots` 後，可能需要一段時間才能傳播，因此 `current_slots` 可能會維持原始值，且在短時間內 (不到一分鐘) 大於 `max_slots`。 * `max_slots`：自動調度資源可為預留項目新增的運算單元數量上限。 |
 | `edition` | `STRING` | 與這項預訂相關聯的版本。如要進一步瞭解版本，請參閱「[BigQuery 版本簡介](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)」。 |
-| `primary_location` | `STRING` | 預訂項目主要副本的目前位置。這個欄位僅適用於使用[代管災難復原功能](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery?hl=zh-tw)的預訂。 |
-| `secondary_location` | `STRING` | 預留項目次要副本的目前位置。這個欄位只會為使用[代管災難復原功能](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery?hl=zh-tw)的預訂設定。 |
+| `primary_location` | `STRING` | 預留項目主要副本的目前位置。這個欄位僅適用於使用[代管災難復原功能](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery?hl=zh-tw)的預訂。 |
+| `secondary_location` | `STRING` | 預留項目次要副本的目前位置。這個欄位僅適用於使用[代管災難復原功能](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery?hl=zh-tw)的預訂。 |
 | `original_primary_location` | `STRING` | 最初建立預訂的位置。 |
 | `labels` | `RECORD` | 與預訂項目相關聯的標籤陣列。 |
-| `reservation_group_path` | `STRING` | 預訂連結的階層式群組結構。 舉例來說，如果群組結構包含上層群組和子項群組，則 `reservation_group_path` 欄位會包含類似 `[parent group, child group]` 的清單。這個欄位目前為[預先發布版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages)。 |
+| `reservation_group_path` | `ARRAY<STRING>` | 預訂項目所連結的階層式群組結構。 舉例來說，如果群組結構包含上層群組和子項群組，則 `reservation_group_path` 欄位會包含類似 `[parent group, child group]` 的清單。這個欄位為[預先發布版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages)。 |
 | `max_slots` | `INTEGER` | 這個預留項目可使用的運算單元數量上限，包括基準運算單元 (`slot_capacity`)、閒置運算單元 (如果 `ignore_idle_slots` 為 false) 和自動調度運算單元。使用者會指定這個欄位，以使用[預訂預測功能](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#predictable)。 |
 | `scaling_mode` | `STRING` | 預留項目的縮放模式，決定預留項目如何從基準縮放至 `max_slots`。使用者會指定這個欄位，以使用[預訂預測功能](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#predictable)。 |
 
@@ -73,7 +73,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 取代下列項目：
 
-* 選用：`PROJECT_ID`：您的 Google Cloud 專案 ID。如未指定，系統會使用預設專案。
+* 選用：`PROJECT_ID`：專案 ID。 Google Cloud 如未指定，系統會使用預設專案。
 * `REGION`：任何[資料集區域名稱](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
   例如：`` `region-us` ``。**注意：**您必須使用[區域限定詞](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw#region_qualifier)查詢 `INFORMATION_SCHEMA` 檢視畫面。查詢執行位置必須與 `INFORMATION_SCHEMA` 檢視區塊的區域相符。
 

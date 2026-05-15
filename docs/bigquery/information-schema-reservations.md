@@ -16,7 +16,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 「預訂」檢視畫面
 
-`INFORMATION_SCHEMA.RESERVATIONS` 檢視畫面會列出管理專案中所有目前的預留項目，且清單會近乎即時更新。每一列代表一個目前的預訂。目前的預訂是指尚未刪除的預訂。如要進一步瞭解預留項目，請參閱「[預留項目簡介](https://docs.cloud.google.com/bigquery/docs/reservations-intro?hl=zh-tw)」。
+`INFORMATION_SCHEMA.RESERVATIONS` 檢視畫面會列出管理專案中所有目前的預留項目，且清單會近乎即時更新。每一列代表一個目前的預訂。目前預訂是指尚未刪除的預訂。如要進一步瞭解預留項目，請參閱「[預留項目簡介](https://docs.cloud.google.com/bigquery/docs/reservations-intro?hl=zh-tw)」。
 
 **注意：** 檢視區塊名稱 `INFORMATION_SCHEMA.RESERVATIONS` 和 `INFORMATION_SCHEMA.RESERVATIONS_BY_PROJECT` 是同義詞，可以互換使用。
 
@@ -45,13 +45,13 @@ Google uses AI technology to translate content into your preferred language. AI 
 | `ignore_idle_slots` | `BOOL` | 如為 false，使用這個預留項目的任何查詢都可以使用其他容量承諾的閒置運算單元。 |
 | `slot_capacity` | `INTEGER` | 預留項目的基準。 |
 | `target_job_concurrency` | `INTEGER` | 可同時執行的查詢目標數量，這會受到可用資源的限制。如果為零，系統會根據可用資源自動計算這個值。 |
-| `autoscale` | `STRUCT` | 保留項目的自動調度容量相關資訊。欄位包括：   * `current_slots`：自動調度資源功能為預訂項目新增的時段數量。   **注意：**使用者減少 `max_slots` 後，可能需要一段時間才能傳播，因此 `current_slots` 可能會維持原始值，且在短時間內 (不到一分鐘) 大於 `max_slots`。 * `max_slots`：自動調度資源可為預留項目新增的運算單元數量上限。 |
+| `autoscale` | `STRUCT` | 保留項目的自動調度容量相關資訊。欄位包括：   * `current_slots`：自動調度資源功能為預留項目新增的時段數量。   **注意：**使用者減少 `max_slots` 後，可能需要一段時間才能傳播，因此 `current_slots` 可能會維持原始值，且在短時間內 (不到一分鐘) 大於 `max_slots`。 * `max_slots`：自動調度資源可為預留項目新增的運算單元數量上限。 |
 | `edition` | `STRING` | 與這項預訂相關聯的版本。如要進一步瞭解版本，請參閱「[BigQuery 版本簡介](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)」。 |
-| `primary_location` | `STRING` | 預訂項目主要副本的目前位置。這個欄位僅適用於使用[代管災難復原功能](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery?hl=zh-tw)的預訂。 |
-| `secondary_location` | `STRING` | 預留項目次要副本的目前位置。這個欄位只會為使用[代管災難復原功能](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery?hl=zh-tw)的預訂設定。 |
+| `primary_location` | `STRING` | 預留項目主要副本的目前位置。這個欄位僅適用於使用[代管災難復原功能](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery?hl=zh-tw)的預訂。 |
+| `secondary_location` | `STRING` | 預留項目次要副本的目前位置。這個欄位僅適用於使用[代管災難復原功能](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery?hl=zh-tw)的預訂。 |
 | `original_primary_location` | `STRING` | 最初建立預訂的位置。 |
 | `labels` | `RECORD` | 與預訂項目相關聯的標籤陣列。 |
-| `reservation_group_path` | `STRING` | 預訂連結的階層式群組結構。 舉例來說，如果群組結構包含上層群組和子項群組，則 `reservation_group_path` 欄位會包含類似 `[parent group, child group]` 的清單。這個欄位目前為[預先發布版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages)。 |
+| `reservation_group_path` | `ARRAY<STRING>` | 預訂項目所連結的階層式群組結構。 舉例來說，如果群組結構包含上層群組和子項群組，則 `reservation_group_path` 欄位會包含類似 `[parent group, child group]` 的清單。這個欄位為[預先發布版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages)。 |
 | `max_slots` | `INTEGER` | 這個預留項目可使用的運算單元數量上限，包括基準運算單元 (`slot_capacity`)、閒置運算單元 (如果 `ignore_idle_slots` 為 false) 和自動調度運算單元。使用者會指定這個欄位，以使用[預訂預測功能](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#predictable)。 |
 | `scaling_mode` | `STRING` | 預留項目的縮放模式，決定預留項目如何從基準縮放至 `max_slots`。使用者會指定這個欄位，以使用[預訂預測功能](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#predictable)。 |
 
@@ -67,15 +67,15 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 取代下列項目：
 
-* 選用：`PROJECT_ID`：您的 Google Cloud 專案 ID。如未指定，系統會使用預設專案。
+* 選用：`PROJECT_ID`：專案 ID。 Google Cloud 如未指定，系統會使用預設專案。
 * `REGION`：任何[資料集區域名稱](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
   例如：`` `region-us` ``。**注意：**您必須使用[區域限定詞](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw#region_qualifier)查詢 `INFORMATION_SCHEMA` 檢視畫面。查詢執行位置必須與 `INFORMATION_SCHEMA` 檢視區塊的區域相符。
 
-## 在預訂檢視畫面和工作檢視畫面之間進行聯結
+## 在預訂檢視畫面和工作檢視畫面之間加入
 
 [工作檢視畫面](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-by-user?hl=zh-tw)包含 `reservation_id` 欄。如果作業是在已指派保留項目的專案中執行，`reservation_id` 會採用下列格式：`reservation-admin-project:reservation-location.reservation-name`。
 
-如要在預訂檢視畫面和工作檢視畫面之間加入，可以在工作檢視畫面資料欄 `reservation_id` 和預訂檢視畫面資料欄 `project_id` 和 `reservation_name` 之間加入。以下範例顯示預訂和工作檢視區塊之間的 `JOIN` 子句範例。
+如要在預訂檢視畫面和工作檢視畫面之間加入，可以在工作檢視畫面資料欄 `reservation_id` 和預訂檢視畫面資料欄 `project_id` 和 `reservation_name` 之間加入。以下範例顯示在預訂和工作檢視畫面之間使用 `JOIN` 子句的範例。
 
 ## 範例
 
@@ -123,7 +123,7 @@ ON
 
 這項查詢使用 `RESERVATIONS` 檢視取得預訂資訊。如果預訂在過去一小時內有變更，「`reservation_slot_capacity`」欄可能不準確。
 
-查詢會加入 `RESERVATIONS`，並使用 [`JOBS_TIMELINE`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline?hl=zh-tw) 將工作時間片段與預訂資訊建立關聯。
+查詢會將 `RESERVATIONS` 與 [`JOBS_TIMELINE`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline?hl=zh-tw) 聯結，將工作時間片段與預訂資訊建立關聯。
 
 
 

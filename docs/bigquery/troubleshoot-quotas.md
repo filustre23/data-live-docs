@@ -504,4 +504,11 @@ that can be queued per project.
 
 當資料欄分區資料表達到每日允許的分區修改次數配額時，BigQuery 就會傳回這項錯誤。分區修改次數包括所有[載入工作](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#load_jobs)、[複製工作](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#copy_jobs)和[查詢工作](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#query_jobs)，這些工作會將資料附加至目的地分區或覆寫目的地分區。
 
-如要查看「每個資料欄分區資料表每日可修改分區的次數上
+如要查看「每個資料欄分區資料表每日可修改分區的次數上限」值，請參閱「[分區資料表](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#partitioned_tables)」一文。
+
+**錯誤訊息**
+
+```
+Quota exceeded: Your table exceeded quota for
+Number of partition modifications to a column partitioned table
+```

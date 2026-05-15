@@ -940,4 +940,9 @@ You can only set the `VERTEX_AI_MODEL_VERSION_ALIASES` option when the
 
 **Description**
 
-The Cloud Key Management Service [customer-ma](/kms/docs/cmek)
+The Cloud Key Management Service [customer-managed encryption key (CMEK)](/kms/docs/cmek) to
+use to encrypt the model.
+
+**Arguments**
+
+A `STRING` value containing the fully-qualified name of the CMEK. For example,

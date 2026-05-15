@@ -621,5 +621,6 @@ Formats a `DATETIME` value according to a specified format string.
 
 ```
 SELECT
-  FORMAT_DATETIME(
+  FORMAT_DATETIME("%c", DATETIME "2008-12-25 15:30:00")
+  AS
 ```

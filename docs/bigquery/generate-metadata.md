@@ -16,11 +16,6 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 產生翻譯和評估的中繼資料
 
-**預覽**
-
-這項產品適用《[服務專屬條款](https://docs.cloud.google.com/terms/service-terms?hl=zh-tw#1)》中「一般服務條款」一節的《正式發布前產品條款》。正式發布前的產品是按照「原樣」提供，支援範圍可能有限。
-詳情請參閱[推出階段說明](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
-
 本文說明如何使用 `dwh-migration-dumper` 指令列擷取工具建立中繼資料和查詢記錄檔。中繼資料檔案會說明來源系統中的 SQL 物件。
 
 BigQuery 遷移服務會使用這項資訊，將來源系統方言的 SQL 指令碼翻譯成 GoogleSQL，並提升翻譯品質。
@@ -232,7 +227,7 @@ dwh-migration-dumper \
 | `--database` | 如未指定，Amazon Redshift 會使用 `--user` 值做為預設資料庫名稱。 | 要連線的資料庫名稱。 | 否 |
 | `--driver` | 如未指定，Amazon Redshift 會使用預設的 PostgreSQL JDBC 驅動程式。 | 要用於這個連線的驅動程式 JAR 檔案絕對或相對路徑。您可以指定多個驅動程式 JAR 檔案，並以半形逗號分隔。 | 否 |
 | `--host` | localhost | 資料庫伺服器的主機名稱或 IP 位址。 | 否 |
-| `--iam-accesskeyid` |  | 用於驗證的 AWS IAM 存取金鑰 ID。存取金鑰是由字元組成的字串，如下所示：`AKIAIOSFODNN7EXAMPLE`。  與 `--iam-secretaccesskey` 旗標搭配使用。指定 `--iam-profile` 或 `--password` 旗標時，請勿使用這個旗標。 | 您不必明確提供驗證資訊，但必須透過下列任一方法提供：   * 搭配 `--iam-secretaccesskey` 旗標使用這個旗標。 * 使用 `--iam-profile` 旗標。 * 同時使用 `--password` 和 `--user` 旗標。 |
+| `--iam-accesskeyid` |  | 用於驗證的 AWS IAM 存取金鑰 ID。存取金鑰是由字元組成的字串，如下所示：`AKIAIOSFODNN7EXAMPLE`。  與 `--iam-secretaccesskey` 旗標搭配使用。指定 `--iam-profile` 或 `--password` 旗標時，請勿使用這個旗標。 | 您不必明確提供驗證資訊，但必須透過下列其中一種方法提供：   * 搭配 `--iam-secretaccesskey` 旗標使用這個旗標。 * 使用 `--iam-profile` 旗標。 * 同時使用 `--password` 和 `--user` 旗標。 |
 | `--iam-profile` |  | 用於驗證的 AWS IAM 設定檔。您可以檢查 `$HOME/.aws/credentials` 檔案或執行 `aws configure list-profiles`，擷取要使用的設定檔值。  請勿將此標記與 `--iam-accesskeyid`、`--iam-secretaccesskey` 或 `--password` 標記搭配使用。 | 您不必明確提供驗證資訊，但必須透過下列其中一種方法提供：   * 使用這個旗標。 * 一併使用 `--iam-accesskeyid` 和 `--iam-secretaccesskey` 旗標。 * 同時使用 `--password` 和 `--user` 旗標。 |
 | `--iam-secretaccesskey` |  | 用於驗證的 AWS IAM 私密存取金鑰。存取金鑰是由字元組成的字串，如下所示：`wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY`。  與 `--iam-accesskeyid` 旗標搭配使用。請勿將此旗標與 `--iam-profile` 或 `--password` 旗標搭配使用。 | 您不必明確提供驗證資訊，但必須透過下列其中一種方法提供：   * 搭配 `--iam-accesskeyid` 旗標使用這個旗標。 * 使用 `--iam-profile` 旗標。 * 同時使用 `--password` 和 `--user` 旗標。 |
 | `--password` |  | 資料庫連線要使用的密碼。 請勿將此標記與 `--iam-accesskeyid`、`--iam-secretaccesskey` 或 `--iam-profile` 標記搭配使用。 | 您不必明確提供驗證資訊，但必須透過下列其中一種方法提供：   * 搭配 `--user` 旗標使用這個旗標。 * 一併使用 `--iam-accesskeyid` 和 `--iam-secretaccesskey` 旗標。 * 使用 `--password` 旗標。 |

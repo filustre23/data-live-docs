@@ -11,6 +11,7 @@
 * [April 23, 2026 - Introducing Context Suggestions](/changelog/2026-04-23)
 * [April 30, 2026 - Prompt to create published apps, better agentic visualizations, and more!](/changelog/2026-04-30)
 * [May 12, 2026 - Introducing Generative Data Apps](/changelog/2026-05-12)
+* [May 14, 2026 - Connect repos as agent context](/changelog/2026-05-14)
 
 ### 2025[​](#2025 "Direct link to 2025")
 

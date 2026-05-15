@@ -242,4 +242,9 @@ public class CreateYoutubeContentOwnerTransfer {
           "Youtube content owner channel transfer created successfully :" + config.getName());
     } catch (ApiException ex) {
       System.out.print("Youtube content owner channel transfer was not created." + ex.toString());
+    }
+  }
+}
 ```
+
+**附註：**如果您

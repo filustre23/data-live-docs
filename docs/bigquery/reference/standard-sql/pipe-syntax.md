@@ -488,3 +488,9 @@ to disambiguate columns after the `JOIN` operator.
  | 456 | 5           | yellow |
  +-----+-------------+--------*/
 ```
+
+### `WHERE` pipe operator
+
+```
+|> WHERE
+```

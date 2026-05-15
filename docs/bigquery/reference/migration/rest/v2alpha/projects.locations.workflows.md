@@ -305,5 +305,7 @@ The SQL identifier rewrite mode.
 
 The special token data type.
 
-|  | |
+| Enums | |
 | --- | --- |
+| `TOKEN_TYPE_UNSPECIFIED` | Token type is not specified. |
+|

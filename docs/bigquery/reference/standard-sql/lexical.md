@@ -842,3 +842,12 @@ JSON 'json_formatted_data'
 A JSON literal represents [JSON](https://en.wikipedia.org/wiki/JSON)-formatted data.
 
 Example:
+
+```
+JSON '
+{
+  "id": 10,
+  "type": "fruit",
+  "name": "apple",
+  "on_menu": true,
+```

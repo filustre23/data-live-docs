@@ -278,3 +278,10 @@ public class CreatePlayTransfer {
 * 如需 BigQuery 資料移轉服務的總覽，請參閱
   [BigQuery 資料移轉服務簡介](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)。
 * 如要瞭解如何使用移轉作業，包括取得移轉設定、列出移轉設定以及查看移轉設定的執行記錄，請參閱[使用移轉功能](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw)一文。
+
+
+
+
+提供意見
+
+除非另有註明，否則本頁面中的內容是採用

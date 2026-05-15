@@ -302,4 +302,5 @@ Indicates whether this commercial access is currently active.
 | `delete` | Deletes a listing. |
 | `get` | Gets the details of a listing. |
 | `getIamPolicy` | Gets the IAM policy. |
-| `list` |
+| `list` | Lists all listings in a given project and location. |
+| `listSubscription` |

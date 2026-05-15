@@ -295,3 +295,6 @@ An access control list.
 | JSON representation |
 | --- |
 | ``` {   "entries": [     {       object (BigQueryAcl.Entry)     }   ] } ``` |
+
+| Fields | |
+| --- | --- |

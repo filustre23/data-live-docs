@@ -178,4 +178,4 @@ A capacity commitment is a way to purchase compute capacity for BigQuery jobs (i
 
 | UpdateCapacityCommitment |
 | --- |
-| `rpc UpdateCapacityCommitment(` |
+| `rpc UpdateCapacityCommitment(UpdateCapacityCommitmentRequest) returns (CapacityCommitment)`  Upda |

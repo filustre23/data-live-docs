@@ -632,5 +632,6 @@ WHERE product IN (SELECT product FROM dataset.NewArrivals)
 Alternately, you can join the tables:
 
 ```
-UPDATE dataset
+UPDATE dataset.Inventory i
+SET quantity = </
 ```

@@ -551,5 +551,5 @@ Multiplies or divides an interval value by an integer.
 
 ```
 SELECT
-  INTERVAL '1:2:3' HOUR TO SECOND
+  INTERVAL '1:2:3' HOUR TO SECOND * 10 AS mul1,
 ```
