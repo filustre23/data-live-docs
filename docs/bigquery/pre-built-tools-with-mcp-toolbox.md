@@ -34,7 +34,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 1. 在 Google Cloud 控制台的[專案選擇器頁面](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)中，選取或建立 Google Cloud 專案。
 2. [請確認您已為 Google Cloud 專案啟用計費功能](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project)。
-3. [在 Google Cloud 專案中啟用 BigQuery API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery.googleapis.com&%3Bredirect=https%3A%2F%2Fconsole.cloud.google.com%2F&hl=zh-tw)。
+3. [在 Google Cloud 專案中啟用 BigQuery API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery.googleapis.com&%3Bredirect=https%3A%2F%2Fconsole.cloud.google.com%2F&hl=zh-tw)。
 4. 設定完成這項工作所需的角色和權限。如要連結至專案，您需要 [BigQuery 使用者](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)角色 (`roles/bigquery.user`)、BigQuery 資料檢視者角色 (`roles/bigquery.dataViewer`) 或對等的身分與存取權管理 (IAM) 權限。
 5. 為環境設定[應用程式預設憑證 (ADC)](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)。
 
@@ -290,11 +290,11 @@ LLM 可使用下列工具：
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-14 (世界標準時間)。
+上次更新時間：2026-05-16 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-14 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-16 (世界標準時間)。"],[],[]]

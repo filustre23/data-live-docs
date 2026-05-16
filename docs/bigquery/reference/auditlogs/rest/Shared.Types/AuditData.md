@@ -298,4 +298,3 @@ An access control list.
 
 | Fields | |
 | --- | --- |
-| `entries[]` | `object (` |

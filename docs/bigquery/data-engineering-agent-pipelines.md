@@ -108,11 +108,11 @@ current project.
 Enable the following APIs in the Google Cloud console for the Google Cloud
 project you use with the Conversational Analytics API.
 
-[Enable the Gemini Data Analytics API](https://console.cloud.google.com/flows/enableapi?apiid=geminidataanalytics.googleapis.com)
+[Enable the Gemini Data Analytics API](https://console.cloud.google.com/apis/enableflow?apiid=geminidataanalytics.googleapis.com)
 
-[Enable the Gemini for Google Cloud API](https://console.cloud.google.com/flows/enableapi?apiid=cloudaicompanion.googleapis.com)
+[Enable the Gemini for Google Cloud API](https://console.cloud.google.com/apis/enableflow?apiid=cloudaicompanion.googleapis.com)
 
-[Enable the BigQuery API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery.googleapis.com)
+[Enable the BigQuery API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery.googleapis.com)
 
 **Tip:** After you enable an API, refresh the Google Cloud console page to confirm that it's enabled.
 
@@ -174,7 +174,7 @@ this permission
 with [custom roles](/iam/docs/creating-custom-roles) or
 other [predefined roles](/iam/docs/roles-overview#predefined).
 
-You must also enable the [Knowledge Catalog API](https://console.cloud.google.com/flows/enableapi?apiid=dataplex.googleapis.com).
+You must also enable the [Knowledge Catalog API](https://console.cloud.google.com/apis/enableflow?apiid=dataplex.googleapis.com).
 
 ### Encrypt data with Cloud Key Management Service keys
 
@@ -715,11 +715,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-05-13 UTC.
+Last updated 2026-05-16 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-13 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-16 UTC."],[],[]]

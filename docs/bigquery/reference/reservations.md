@@ -49,7 +49,7 @@ BOMs, see [The Google Cloud Platform Libraries BOM](https://cloud.google.com/jav
     <dependency>
       <groupId>com.google.cloud</groupId>
       <artifactId>libraries-bom</artifactId>
-      <version>26.80.0</version>
+      <version>26.82.0</version>
       <type>pom</type>
       <scope>import</scope>
     </dependency>
@@ -68,14 +68,14 @@ If you are using [Gradle](https://gradle.org/),
 add the following to your dependencies:
 
 ```
-implementation 'com.google.cloud:google-cloud-bigqueryreservation:2.92.0'
+implementation 'com.google.cloud:google-cloud-bigqueryreservation:2.93.0'
 ```
 
 If you are using [sbt](https://www.scala-sbt.org/), add
 the following to your dependencies:
 
 ```
-libraryDependencies += "com.google.cloud" % "google-cloud-bigqueryreservation" % "2.92.0"
+libraryDependencies += "com.google.cloud" % "google-cloud-bigqueryreservation" % "2.93.0"
 ```
 
 If you're using Visual Studio Code or IntelliJ, you can add client libraries to your

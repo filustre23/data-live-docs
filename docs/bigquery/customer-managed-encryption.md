@@ -35,8 +35,8 @@ Google uses AI technology to translate content into your preferred language. AI 
   + `PROJECT_ID`：執行 BigQuery 專案的專案 ID
   + `PROJECT_NUMBER`：執行 BigQuery 的專案專案編號
   + `KMS_PROJECT_ID`：執行 Cloud KMS 的專案 ID (即使這個專案就是執行 BigQuery 的專案)如要瞭解 Google Cloud 專案 ID 和專案編號，請參閱「[找出專案名稱、編號和 ID](https://docs.cloud.google.com/resource-manager/docs/view-update-projects?hl=zh-tw#identifying_projects)」。
-* 新專案會自動啟用 BigQuery。如果您是使用現有專案來執行 BigQuery，請[啟用 BigQuery API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery&hl=zh-tw)。
-* 針對執行 Cloud KMS 的 Google Cloud 專案，[啟用 Cloud Key Management Service API](https://console.cloud.google.com/flows/enableapi?apiid=cloudkms.googleapis.com&hl=zh-tw)。
+* 新專案會自動啟用 BigQuery。如果您是使用現有專案來執行 BigQuery，請[啟用 BigQuery API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery&hl=zh-tw)。
+* 針對執行 Cloud KMS 的 Google Cloud 專案，[啟用 Cloud Key Management Service API](https://console.cloud.google.com/apis/enableflow?apiid=cloudkms.googleapis.com&hl=zh-tw)。
 
 每次查詢 CMEK 加密資料表時，系統都會使用 Cloud KMS 執行一次解密呼叫。詳情請參閱 [Cloud KMS 定價](https://cloud.google.com/kms/pricing?hl=zh-tw)。
 
@@ -246,7 +246,7 @@ bq query --destination_table=DATASET_ID.TABLE_ID \
 
 下列範例會建立名為 `mytable` 的資料表，並使用 [`google_kms_crypto_key`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/kms_crypto_key) 和 [`google_kms_key_ring`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/kms_key_ring) 資源，為資料表指定 [Cloud Key Management Service 金鑰](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw)。
 
-如要執行這個範例，您必須啟用 [Cloud Resource Manager API](https://console.cloud.google.com/flows/enableapi?apiid=cloudresourcemanager.googleapis.com&hl=zh-tw) 和 [Cloud Key Management Service API](https://console.cloud.google.com/flows/enableapi?apiid=cloudkms.googleapis.com&hl=zh-tw)。
+如要執行這個範例，您必須啟用 [Cloud Resource Manager API](https://console.cloud.google.com/apis/enableflow?apiid=cloudresourcemanager.googleapis.com&hl=zh-tw) 和 [Cloud Key Management Service API](https://console.cloud.google.com/apis/enableflow?apiid=cloudkms.googleapis.com&hl=zh-tw)。
 
 ```
 resource "google_bigquery_dataset" "default" {
