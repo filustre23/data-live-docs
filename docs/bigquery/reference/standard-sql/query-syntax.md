@@ -196,7 +196,9 @@ FROM orders;
  +-----------+----------*/
 ```
 
-**Note:** `SELECT * EXCEPT` doesn't exclude columns that don't have names.
+**Note:** `SELECT * EXCEPT` doesn't exclude columns that don't have names. Also,
+`SELECT * EXCEPT` and the [`EXCEPT`](/bigquery/docs/reference/standard-sql/query-syntax#except) set operator have different use
+cases and rules.
 
 ### `SELECT * REPLACE`
 
@@ -561,5 +563,5 @@ SELECT (SELECT ARRAY_AGG(c) FROM t1.array_column c) FROM T1 t1;
 
 SELECT a.struct_field1 FROM T1 t1, t1.array_of_structs a;
 
-SELECT (SELECT STRING_AGG(a.struct_field1) FROM t1.array_of_structs a)
+SELECT (SELECT STRING_AGG(a.struct_field1) FROM t1
 ```

@@ -303,4 +303,4 @@ Secret value parameter.
 
 | JSON representation |
 | --- |
-| ``` {   "secretType": enum (SecretType),    // Union field secret can be only one of the follo ``` |
+| ``` {   "secretType": ``` |

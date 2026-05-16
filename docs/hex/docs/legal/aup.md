@@ -2,7 +2,7 @@ On this page
 
 # Acceptable Use Policy
 
-**Last Modified**: *May 1, 2026*
+**Last Modified**: *May 15, 2026*
 
 Use of any product or service provided by Hex including the Service (collectively, the "Hex Offerings") is subject to this acceptable use policy (the "Acceptable Use Policy").
 
@@ -56,6 +56,8 @@ F. Create or maintain any account that is not associated with at least one Autho
 
 G. Use any automated tool, script, or third-party agent to scrape, extract, or systematically collect data from the Service or any content accessible through the Service, except where such automated access is authorized by an Authorized User and conducted through the Service's APIs, Agent functionality, or Customer's authorized integrations.
 
+H. Engage in abusive, threatening, harassing, or intimidating conduct directed at Hex personnel, whether through support channels, social media, email, or any other medium.
+
 ## II. USE OF HEX AI FEATURES[​](#iiuse-of-hex-ai-features "Direct link to II. USE OF HEX AI FEATURES")
 
 If Customer elects to use AI Services, as described in the Documentation (collectively, the "Hex AI Features"), Customer's use is subject to the following:
@@ -96,7 +98,7 @@ Subject to the use restrictions herein, Customer may conduct benchmark tests of 
 
 ## IV. VIOLATIONS[​](#ivviolations "Direct link to IV. VIOLATIONS")
 
-Customer will report any violations of this Acceptable Use Policy, or any issues with any of the Hex Offerings, including the Service and the Hex AI Features, to Hex at [[email protected]](/cdn-cgi/l/email-protection#c4a8a1a3a5a884aca1bceab0a1a7ac).
+Customer will report any violations of this Acceptable Use Policy, or any issues with any of the Hex Offerings, including the Service and the Hex AI Features, to Hex at [[email protected]](/cdn-cgi/l/email-protection#ec80898b8d80ac848994c298898f84).
 
 ## V. GENERAL TERMS[​](#vgeneral-terms "Direct link to V. GENERAL TERMS")
 

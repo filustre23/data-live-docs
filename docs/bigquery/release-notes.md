@@ -27,6 +27,17 @@ To get the latest product updates delivered to you, add the URL of this page to 
 reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators), or add the
 [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## May 15, 2026
+
+Feature
+
+The
+[`AI.DETECT_ANOMALIES` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-detect-anomalies)
+supports calling the function with a single input table that holds both the
+historical and target data. This feature is
+[generally available](https://cloud.google.com/products#product-launch-stages)
+(GA).
+
 ## May 14, 2026
 
 Issue
@@ -4199,15 +4210,3 @@ The following BigQuery ML generative AI features are now available:
   to evaluate the remote model.
 
 Try these features with the
-[Generate text by using the `ML.GENERATE_TEXT` function](/bigquery/docs/generate-text)
-how-to topic and the  
-[Generate text by using a Gemma open model and the `ML.GENERATE_TEXT` function](/bigquery/docs/generate-text-tutorial-gemma)
-tutorial.
-
-These features are
-[generally available](https://cloud.google.com/products/#product-launch-stages)
-(GA).
-
-Announcement
-
-We previous
