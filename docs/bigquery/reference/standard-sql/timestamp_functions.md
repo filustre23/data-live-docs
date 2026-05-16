@@ -554,5 +554,7 @@ SELECT TIMESTAMP(DATETIME "2008-12-25 15:30:00") AS timestamp_datetime;
 ```
 
 ```
-SELECT TIMESTAMP(DATE "2008-12-25")
+SELECT TIMESTAMP(DATE "2008-12-25") AS timestamp_date;
+
+-- Display of results may differ, depending upon the environment and t
 ```
