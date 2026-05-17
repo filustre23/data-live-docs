@@ -4,4 +4,4 @@ Securely connect your Hex workspace to your MariaDB database.
 
 info
 
-* **More detailed setup instructions for connecting to [MariaDB](https://mariadb.org/) are coming soon! In the meantime, please reach out to [[email protected]](/cdn-cgi/l/email-protection#8ffcfaffffe0fdfbcfe7eaf7a1fbeaece7) with any questions.**
+* **More detailed setup instructions for connecting to [MariaDB](https://mariadb.org/) are coming soon! In the meantime, please reach out to [[email protected]](/cdn-cgi/l/email-protection#0675737676697472466e637e287263656e) with any questions.**

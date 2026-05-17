@@ -30,7 +30,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    如要啟用 API，您需要服務使用情形管理員 IAM 角色 (`roles/serviceusage.serviceUsageAdmin`)，其中包含 `serviceusage.services.enable` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
-   [啟用 API](https://console.cloud.google.com/flows/enableapi?apiid=dataplex.googleapis.com&hl=zh-tw)
+   [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=dataplex.googleapis.com&hl=zh-tw)
 2. 選用：如要讓 Knowledge Catalog 根據資料剖析掃描結果，產生資料品質規則建議，請[建立並執行資料剖析掃描作業](https://docs.cloud.google.com/bigquery/docs/data-profile-scan?hl=zh-tw)。
 
 ## 必要的角色

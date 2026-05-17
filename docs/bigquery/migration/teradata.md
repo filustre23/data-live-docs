@@ -49,7 +49,7 @@ Google uses AI technology to translate content into your preferred language. AI 
   contains the `serviceusage.services.enable` permission. [Learn how to grant
   roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw).
 
-  [Enable the APIs](https://console.cloud.google.com/flows/enableapi?apiid=bigquery.googleapis.com%2Cbigquerydatatransfer.googleapis.com%2Cstorage-component.googleapis.com%2Cpubsub.googleapis.com&hl=zh-tw)
+  [Enable the APIs](https://console.cloud.google.com/apis/enableflow?apiid=bigquery.googleapis.com%2Cbigquerydatatransfer.googleapis.com%2Cstorage-component.googleapis.com%2Cpubsub.googleapis.com&hl=zh-tw)
 - Create a service account:
 
   1. Ensure that you have the Create Service Accounts IAM role
@@ -117,7 +117,7 @@ Google uses AI technology to translate content into your preferred language. AI 
   contains the `serviceusage.services.enable` permission. [Learn how to grant
   roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw).
 
-  [Enable the APIs](https://console.cloud.google.com/flows/enableapi?apiid=bigquery.googleapis.com%2Cbigquerydatatransfer.googleapis.com%2Cstorage-component.googleapis.com%2Cpubsub.googleapis.com&hl=zh-tw)
+  [Enable the APIs](https://console.cloud.google.com/apis/enableflow?apiid=bigquery.googleapis.com%2Cbigquerydatatransfer.googleapis.com%2Cstorage-component.googleapis.com%2Cpubsub.googleapis.com&hl=zh-tw)
 - Create a service account:
 
   1. Ensure that you have the Create Service Accounts IAM role

@@ -121,6 +121,9 @@ BigQuery 資料集複製作業有下列限制：
 
 | 區域 1 主要副本 | 區域 2 次要副本 | 附註 |
 | --- | --- | --- |
+| 已授權的資料集 | 已授權的資料集 | 您無法在次要副本中建立授權資料集。必須在主要副本中建立，然後可從次要區域查詢。 |
+| 獲得授權的處理常式 | 獲得授權的處理常式 | 您無法在次要副本中建立授權常式。必須在主要副本中建立，然後可從次要區域查詢。 |
+| 授權 view | 授權 view | 您無法在次要副本中建立授權 view。必須在主要副本中建立，然後可從次要區域查詢。 |
 | BigLake 資料表 | BigLake 資料表 | 不支援。 |
 | BigLake Apache Iceberg 資料表 | BigLake Apache Iceberg 資料表 | 請參閱「[Lakehouse 執行階段目錄跨區域複製和災難復原](https://docs.cloud.google.com/biglake/docs/about-managed-disaster-recovery?hl=zh-tw)」。 |
 | 外部資料表 | 外部資料表 | 系統只會複製外部資料表定義。如果 Cloud Storage bucket 與副本不在同一個位置，查詢就會失敗。 |
@@ -433,11 +436,11 @@ OPTIONS(location='us-west1',
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-14 (世界標準時間)。
+上次更新時間：2026-05-16 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-14 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-16 (世界標準時間)。"],[],[]]

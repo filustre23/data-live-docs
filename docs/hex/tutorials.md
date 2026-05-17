@@ -96,4 +96,4 @@ An example runbook to share the details of how your company should be using Hex.
 
 ### Tutorial suggestions?[​](#tutorial-suggestions "Direct link to Tutorial suggestions?")
 
-Email us at [[email protected]](/cdn-cgi/l/email-protection#d7bfb2bbbbb897bfb2aff9a3b2b4bf) if you want to see a tutorial on a topic that we haven’t covered yet!
+Email us at [[email protected]](/cdn-cgi/l/email-protection#a5cdc0c9c9cae5cdc0dd8bd1c0c6cd) if you want to see a tutorial on a topic that we haven’t covered yet!

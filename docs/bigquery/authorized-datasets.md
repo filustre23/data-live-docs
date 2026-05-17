@@ -301,6 +301,8 @@ BigQuery 中的[檢視區塊](https://docs.cloud.google.com/bigquery/docs/views-
 ## 限制
 
 * 您可以在不同區域建立授權資料集，但 BigQuery 不支援跨區域查詢。因此，建議您在相同區域中建立資料集。
+* 您無法在次要副本中建立授權資料集。
+  詳情請參閱「[資料集複製作業中的資源行為](https://docs.cloud.google.com/bigquery/docs/data-replication?hl=zh-tw#resource-behavior)」。
 
 ## 後續步驟
 
@@ -314,11 +316,11 @@ BigQuery 中的[檢視區塊](https://docs.cloud.google.com/bigquery/docs/views-
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-14 (世界標準時間)。
+上次更新時間：2026-05-16 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-14 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-16 (世界標準時間)。"],[],[]]
