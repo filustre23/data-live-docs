@@ -103,11 +103,11 @@ If you need a copy of your order form, please reach out to your Hex account exec
 
 ### Do you offer nonprofit discounts?[​](#do-you-offer-nonprofit-discounts "Direct link to Do you offer nonprofit discounts?")
 
-Yes. Please contact [[email protected]](/cdn-cgi/l/email-protection#6f0d0603030601081c1a1f1f001d1b2f070a17411b0a0c07) with your workspace URL and nonprofit documentation.
+Yes. Please contact [[email protected]](/cdn-cgi/l/email-protection#90f2f9fcfcf9fef7e3e5e0e0ffe2e4d0f8f5e8bee4f5f3f8) with your workspace URL and nonprofit documentation.
 
 ### Do you offer student or educational plans?[​](#do-you-offer-student-or-educational-plans "Direct link to Do you offer student or educational plans?")
 
-Yes. Please contact [[email protected]](/cdn-cgi/l/email-protection#9efcf7f2f2f7f0f9edebeeeef1eceadef6fbe6b0eafbfdf6) using your educational email address and include your workspace URL.
+Yes. Please contact [[email protected]](/cdn-cgi/l/email-protection#d9bbb0b5b5b0b7beaaaca9a9b6abad99b1bca1f7adbcbab1) using your educational email address and include your workspace URL.
 
 ---
 
@@ -145,14 +145,14 @@ Hex does **not** support ACH or wire transfer payments for self-serve plans.
 Order form customers can pay via:
 
 * **Invoice billing** (e.g., Net 30 terms) — Payment terms are defined in your executed order form and reflected on your invoice.
-* **ACH / wire transfer** — Bank details (Stripe-managed Wells Fargo virtual accounts) are listed directly on the invoice. Bank details may also be provided by the Hex team if you are paying one of our other bank accounts. Please reach out to [[email protected]](/cdn-cgi/l/email-protection#d1b0a391b9b4a9ffa5b4b2b9) if you require validation.
+* **ACH / wire transfer** — Bank details (Stripe-managed Wells Fargo virtual accounts) are listed directly on the invoice. Bank details may also be provided by the Hex team if you are paying one of our other bank accounts. Please reach out to [[email protected]](/cdn-cgi/l/email-protection#d6b7a496beb3aef8a2b3b5be) if you require validation.
 * **Credit card** (via Stripe) — Order form customers may also pay by credit card.
 
 ### How can I update my payment information?[​](#how-can-i-update-my-payment-information "Direct link to How can I update my payment information?")
 
 To update your payment information, log in to your Hex account with your account email via the [Stripe billing portal](https://billing.stripe.com/p/login/aFa28s3Tz1V0abs3ZQdQQ00).
 
-If you need assistance confirming or updating your account email, please reach out to [[email protected]](/cdn-cgi/l/email-protection#741506341c110c5a0011171c).
+If you need assistance confirming or updating your account email, please reach out to [[email protected]](/cdn-cgi/l/email-protection#442536042c213c6a3021272c).
 
 ### What happens if my credit card payment fails?[​](#what-happens-if-my-credit-card-payment-fails "Direct link to What happens if my credit card payment fails?")
 
@@ -173,7 +173,7 @@ Hex uses Stripe as our billing platform. Stripe generates a unique Wells Fargo v
 
 Please update your records and remit payment to the Wells Fargo account listed on the invoice. This is our preferred account for payment.
 
-If your finance team needs confirmation or additional documentation, please reach out to [[email protected]](/cdn-cgi/l/email-protection#5b3a291b333e23752f3e3833).
+If your finance team needs confirmation or additional documentation, please reach out to [[email protected]](/cdn-cgi/l/email-protection#325340725a574a1c4657515a).
 
 ### I paid an invoice, but we are receiving emails stating it's outstanding?[​](#i-paid-an-invoice-but-we-are-receiving-emails-stating-its-outstanding "Direct link to I paid an invoice, but we are receiving emails stating it's outstanding?")
 
@@ -181,7 +181,7 @@ If you've already paid an invoice but are still receiving outstanding payment re
 
 Occasionally, payments can be applied to the wrong invoice by Stripe, which can trigger automated reminder emails even though payment was received.
 
-Please forward the past due email to [[email protected]](/cdn-cgi/l/email-protection#94f5e6d4fcf1ecbae0f1f7fc) and include:
+Please forward the past due email to [[email protected]](/cdn-cgi/l/email-protection#7e1f0c3e161b06500a1b1d16) and include:
 
 * The invoice number
 * Payment date
@@ -212,7 +212,7 @@ Order form customers are billed annually and upfront for committed seats. These 
 
 You can update your billing information by logging into your Hex account with your account email via the [Stripe billing portal](https://billing.stripe.com/p/login/aFa28s3Tz1V0abs3ZQdQQ00).
 
-If you are having issues, please reach out to [[email protected]](/cdn-cgi/l/email-protection#016073416964792f75646269) and include:
+If you are having issues, please reach out to [[email protected]](/cdn-cgi/l/email-protection#96f7e4d6fef3eeb8e2f3f5fe) and include:
 
 * Your Hex workspace URL
 * The information you would like updated

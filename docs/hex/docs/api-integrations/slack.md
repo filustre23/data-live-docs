@@ -35,7 +35,7 @@ The integration will also allow you to enable the **Hex Agent in Slack**, which 
 
 **How can I get additional support for this integration?**
 
-Please contact us at **[[email protected]](/cdn-cgi/l/email-protection#790a0c0909160b0d39111c01570d1c1a11)** for any feedback or issues around using the Hex integration for Slack.
+Please contact us at **[[email protected]](/cdn-cgi/l/email-protection#d0a3a5a0a0bfa2a490b8b5a8fea4b5b3b8)** for any feedback or issues around using the Hex integration for Slack.
 
 #### On this page
 

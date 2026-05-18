@@ -106,7 +106,7 @@ BigQuery 管理員 (`roles/bigquery.admin`) 預先定義的身分與存取權管
    4. 在「Table type」(資料表類型) 中，選取「External table」(外部資料表)。
    5. 選取「使用 Cloud 資源連結建立 BigLake 資料表」。
    6. 在「Connection ID」(連線 ID) 部分，選取您先前建立的連線。
-7. 在「Schema」(結構定義) 區段中，您可以啟用[結構定義自動偵測](https://docs.cloud.google.com/bigquery/docs/schema-detect?hl=zh-tw)功能，也可以在有來源檔案時手動指定結構定義。如果沒有來源檔案，就必須手動指定結構定義。
+7. 在「Schema」(結構定義) 區段中，您可以啟用[結構定義自動偵測](https://docs.cloud.google.com/bigquery/docs/schema-detect?hl=zh-tw)功能，也可以手動指定結構定義 (如有來源檔案)。如果沒有來源檔案，就必須手動指定結構定義。
 
    * 如要啟用結構定義自動偵測功能，請選取「自動偵測」選項。
    * 如要手動指定結構定義，請取消勾選「自動偵測」選項。啟用「以文字形式編輯」，然後以 [JSON 陣列](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#specifying_a_json_schema_file)的形式輸入資料表結構定義。
@@ -422,9 +422,10 @@ resource "google_bigquery_table" "default" {
 ## 準備 Cloud Shell
 
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
-2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
+2. 設定要套用 Terraform 設定的預設 Google Cloud 專案
+   。
 
-   您只需要為每項專案執行一次這個指令，且可以在任何目錄中執行。
+   每項專案只需要執行一次這個指令，而且可以在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
@@ -485,6 +486,8 @@ BigLake 支援自動偵測結構定義。不過，如果您未提供結構定義
 ## 在 Apache Hive 分區資料上建立 BigLake 資料表
 
 您可以在 Cloud Storage 中，為 Hive 分區資料建立 BigLake 資料表。建立外部分區資料表後，您就無法變更分區鍵。如要變更分割區鍵，您必須重新建立資料表。
+
+建立 BigLake 資料表前，您需要[資料集](https://docs.cloud.google.com/bigquery/docs/datasets?hl=zh-tw)和[可存取 Cloud Storage 的 Cloud 資源連線](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection?hl=zh-tw#create-cloud-resource-connection)。
 
 如要根據 Cloud Storage 中的 Hive 分區資料建立 BigLake 資料表，請選取下列任一選項：
 
@@ -865,9 +868,10 @@ resource "google_bigquery_table" "default" {
 ## 準備 Cloud Shell
 
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
-2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
+2. 設定要套用 Terraform 設定的預設 Google Cloud 專案
+   。
 
-   您只需要為每項專案執行一次這個指令，且可以在任何目錄中執行。
+   每項專案只需要執行一次這個指令，而且可以在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
@@ -1143,11 +1147,11 @@ bq update --project_id=myproject --max_staleness='0-0 0 4:30:0' \
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-16 (世界標準時間)。
+上次更新時間：2026-05-17 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-16 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-17 (世界標準時間)。"],[],[]]

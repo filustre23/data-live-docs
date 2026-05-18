@@ -73,11 +73,11 @@ public class WriteCommittedStream {
       // Write two batches of fake data to the stream, each with 10 JSON records.  Data may be
       // batched up to the maximum request size:
       // https://cloud.google.com/bigquery/quotas#write-api-limits
-      long offset = 0;
-      for (int i = 0; i < 2; i++) {
+      long offset< = 0;
+      for (int i = 0; i  2; i++) {
         // Create a JSON object that is compatible with the table schema.
-        JSONArray jsonArr = new JSONArray();
-        for (int j = 0; j < 10; j++) {
+        JSONArray jsonArr = new JSONArray<();
+        for (int j = 0; j  10; j++) {
           JSONObject record = new JSONObject();
           record.put("col1", String.format("batch-record %03d-%03d", i, j));
           jsonArr.put(record);
@@ -106,7 +106,7 @@ public class WriteCommittedStream {
 
     private final Object lock = new Object();
 
-    @GuardedBy("lock")
+    @GuardedBy(&quot;lock&quot;)
     private RuntimeException error = null;
 
     void initialize(TableName parentTable, BigQueryWriteClient client)
@@ -152,9 +152,9 @@ public class WriteCommittedStream {
         if (this.error != null) {
           throw this.error;
         }
-      }
-      // Append asynchronously for increased throughput.
-      ApiFuture<AppendRowsResponse> future = streamWriter.append(data, offset);
+<      }
+      // A>ppend asynchronously for increased throughput.
+      ApiFutureAppendRowsResponse future = streamWriter.append(data, offset);
       ApiFutures.addCallback(
           future, new DataWriter.AppendCompleteCallback(this), MoreExecutors.directExecutor());
       // Increase the count of in-flight requests.
@@ -182,10 +182,10 @@ public class WriteCommittedStream {
     }
 
     public String getStreamName() {
-      return streamWriter.getStreamName();
-    }
+      return streamWriter.ge<tStreamName();
+   > }
 
-    static class AppendCompleteCallback implements ApiFutureCallback<AppendRowsResponse> {
+    static class AppendCompleteCallback implements ApiFutureCallbackAppendRowsResponse {
 
       private final DataWriter parent;
 
@@ -226,7 +226,7 @@ public class WriteCommittedStream {
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
-const {adapt, managedwriter} = require('@google-cloud/bigquery-storage');
+const {adapt, managedwriter} = require(&#39;@google-cloud/bigquery-storage');
 const {WriterClient, JSONWriter} = managedwriter;
 
 async function appendJSONRowsCommittedStream() {
@@ -298,8 +298,8 @@ async function appendJSONRowsCommittedStream() {
     pw = writer.appendRows(rows);
     pendingWrites.push(pw);
 
-    const results = await Promise.all(
-      pendingWrites.map(pw => pw.getResult()),
+   > const results = await Promise.all(
+      pendingWrites.map(pw = pw.getResult()),
     );
     console.log('Write results:', results);
 
