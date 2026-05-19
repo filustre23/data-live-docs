@@ -1,6 +1,6 @@
 # data-live-docs — index
 
-_Generated 2026-05-18T15:01+00:00_
+_Generated 2026-05-19T01:30+00:00_
 
 **9 sources, 4817 topics total**
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_1167 topics_
+_1168 topics_
 
 - `anthropic-sdk/agents-and-tools/agent-skills/best-practices`
 - `anthropic-sdk/agents-and-tools/agent-skills/enterprise`
@@ -1110,6 +1110,7 @@ _1167 topics_
 - `anthropic-sdk/api/typescript/models/retrieve`
 - `anthropic-sdk/build-with-claude/adaptive-thinking`
 - `anthropic-sdk/build-with-claude/batch-processing`
+- `anthropic-sdk/build-with-claude/cache-diagnostics`
 - `anthropic-sdk/build-with-claude/citations`
 - `anthropic-sdk/build-with-claude/claude-in-amazon-bedrock`
 - `anthropic-sdk/build-with-claude/claude-in-microsoft-foundry`
@@ -2868,7 +2869,7 @@ _132 topics_
 
 Upstream: <https://docs.getdbt.com/docs/>
 
-_1008 topics_
+_1007 topics_
 
 - `dbt-core/best-practices/best-practice-workflows`
 - `dbt-core/best-practices/clone-incremental-models`
@@ -3511,7 +3512,6 @@ _1008 topics_
 - `dbt-core/guides/debug-schema-names`
 - `dbt-core/guides/dremio-lakehouse`
 - `dbt-core/guides/duckdb-qs`
-- `dbt-core/guides/explorer-qs`
 - `dbt-core/guides/fusion-package-compat`
 - `dbt-core/guides/fusion-platform-local-workflow`
 - `dbt-core/guides/fusion-qs`
