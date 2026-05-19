@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-05-19T08:40+00:00_
+_Generated 2026-05-19T14:46+00:00_
 
-**9 sources, 4817 topics total**
+**9 sources, 4918 topics total**
 
 ## airflow
 
@@ -16,13 +16,21 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_1168 topics_
+_1269 topics_
 
 - `anthropic-sdk/agents-and-tools/agent-skills/best-practices`
 - `anthropic-sdk/agents-and-tools/agent-skills/enterprise`
 - `anthropic-sdk/agents-and-tools/agent-skills/overview`
 - `anthropic-sdk/agents-and-tools/agent-skills/quickstart`
 - `anthropic-sdk/agents-and-tools/mcp-connector`
+- `anthropic-sdk/agents-and-tools/mcp-tunnels/console`
+- `anthropic-sdk/agents-and-tools/mcp-tunnels/deploy-compose`
+- `anthropic-sdk/agents-and-tools/mcp-tunnels/deploy-helm`
+- `anthropic-sdk/agents-and-tools/mcp-tunnels/overview`
+- `anthropic-sdk/agents-and-tools/mcp-tunnels/quickstart`
+- `anthropic-sdk/agents-and-tools/mcp-tunnels/reference`
+- `anthropic-sdk/agents-and-tools/mcp-tunnels/security`
+- `anthropic-sdk/agents-and-tools/mcp-tunnels/troubleshooting`
 - `anthropic-sdk/agents-and-tools/remote-mcp-servers`
 - `anthropic-sdk/agents-and-tools/tool-use/advisor-tool`
 - `anthropic-sdk/agents-and-tools/tool-use/bash-tool`
@@ -61,6 +69,17 @@ _1168 topics_
 - `anthropic-sdk/api/admin/invites/delete`
 - `anthropic-sdk/api/admin/invites/list`
 - `anthropic-sdk/api/admin/invites/retrieve`
+- `anthropic-sdk/api/admin/mcp_tunnels`
+- `anthropic-sdk/api/admin/mcp_tunnels/archive`
+- `anthropic-sdk/api/admin/mcp_tunnels/list`
+- `anthropic-sdk/api/admin/mcp_tunnels/retrieve`
+- `anthropic-sdk/api/admin/mcp_tunnels/reveal_token`
+- `anthropic-sdk/api/admin/mcp_tunnels/rotate_token`
+- `anthropic-sdk/api/admin/mcp_tunnels/tunnel_certificates`
+- `anthropic-sdk/api/admin/mcp_tunnels/tunnel_certificates/archive`
+- `anthropic-sdk/api/admin/mcp_tunnels/tunnel_certificates/create`
+- `anthropic-sdk/api/admin/mcp_tunnels/tunnel_certificates/list`
+- `anthropic-sdk/api/admin/mcp_tunnels/tunnel_certificates/retrieve`
 - `anthropic-sdk/api/admin/organizations`
 - `anthropic-sdk/api/admin/organizations/me`
 - `anthropic-sdk/api/admin/rate_limits`
@@ -103,6 +122,15 @@ _1168 topics_
 - `anthropic-sdk/api/beta/environments/list`
 - `anthropic-sdk/api/beta/environments/retrieve`
 - `anthropic-sdk/api/beta/environments/update`
+- `anthropic-sdk/api/beta/environments/work`
+- `anthropic-sdk/api/beta/environments/work/ack`
+- `anthropic-sdk/api/beta/environments/work/heartbeat`
+- `anthropic-sdk/api/beta/environments/work/list`
+- `anthropic-sdk/api/beta/environments/work/poll`
+- `anthropic-sdk/api/beta/environments/work/retrieve`
+- `anthropic-sdk/api/beta/environments/work/stats`
+- `anthropic-sdk/api/beta/environments/work/stop`
+- `anthropic-sdk/api/beta/environments/work/update`
 - `anthropic-sdk/api/beta/files`
 - `anthropic-sdk/api/beta/files/delete`
 - `anthropic-sdk/api/beta/files/download`
@@ -171,6 +199,7 @@ _1168 topics_
 - `anthropic-sdk/api/beta/skills/versions`
 - `anthropic-sdk/api/beta/skills/versions/create`
 - `anthropic-sdk/api/beta/skills/versions/delete`
+- `anthropic-sdk/api/beta/skills/versions/download`
 - `anthropic-sdk/api/beta/skills/versions/list`
 - `anthropic-sdk/api/beta/skills/versions/retrieve`
 - `anthropic-sdk/api/beta/user_profiles`
@@ -211,6 +240,15 @@ _1168 topics_
 - `anthropic-sdk/api/cli/beta/environments/list`
 - `anthropic-sdk/api/cli/beta/environments/retrieve`
 - `anthropic-sdk/api/cli/beta/environments/update`
+- `anthropic-sdk/api/cli/beta/environments/work`
+- `anthropic-sdk/api/cli/beta/environments/work/ack`
+- `anthropic-sdk/api/cli/beta/environments/work/heartbeat`
+- `anthropic-sdk/api/cli/beta/environments/work/list`
+- `anthropic-sdk/api/cli/beta/environments/work/poll`
+- `anthropic-sdk/api/cli/beta/environments/work/retrieve`
+- `anthropic-sdk/api/cli/beta/environments/work/stats`
+- `anthropic-sdk/api/cli/beta/environments/work/stop`
+- `anthropic-sdk/api/cli/beta/environments/work/update`
 - `anthropic-sdk/api/cli/beta/files`
 - `anthropic-sdk/api/cli/beta/files/delete`
 - `anthropic-sdk/api/cli/beta/files/download`
@@ -279,6 +317,7 @@ _1168 topics_
 - `anthropic-sdk/api/cli/beta/skills/versions`
 - `anthropic-sdk/api/cli/beta/skills/versions/create`
 - `anthropic-sdk/api/cli/beta/skills/versions/delete`
+- `anthropic-sdk/api/cli/beta/skills/versions/download`
 - `anthropic-sdk/api/cli/beta/skills/versions/list`
 - `anthropic-sdk/api/cli/beta/skills/versions/retrieve`
 - `anthropic-sdk/api/cli/beta/user_profiles`
@@ -374,6 +413,15 @@ _1168 topics_
 - `anthropic-sdk/api/csharp/beta/environments/list`
 - `anthropic-sdk/api/csharp/beta/environments/retrieve`
 - `anthropic-sdk/api/csharp/beta/environments/update`
+- `anthropic-sdk/api/csharp/beta/environments/work`
+- `anthropic-sdk/api/csharp/beta/environments/work/ack`
+- `anthropic-sdk/api/csharp/beta/environments/work/heartbeat`
+- `anthropic-sdk/api/csharp/beta/environments/work/list`
+- `anthropic-sdk/api/csharp/beta/environments/work/poll`
+- `anthropic-sdk/api/csharp/beta/environments/work/retrieve`
+- `anthropic-sdk/api/csharp/beta/environments/work/stats`
+- `anthropic-sdk/api/csharp/beta/environments/work/stop`
+- `anthropic-sdk/api/csharp/beta/environments/work/update`
 - `anthropic-sdk/api/csharp/beta/files`
 - `anthropic-sdk/api/csharp/beta/files/delete`
 - `anthropic-sdk/api/csharp/beta/files/download`
@@ -442,6 +490,7 @@ _1168 topics_
 - `anthropic-sdk/api/csharp/beta/skills/versions`
 - `anthropic-sdk/api/csharp/beta/skills/versions/create`
 - `anthropic-sdk/api/csharp/beta/skills/versions/delete`
+- `anthropic-sdk/api/csharp/beta/skills/versions/download`
 - `anthropic-sdk/api/csharp/beta/skills/versions/list`
 - `anthropic-sdk/api/csharp/beta/skills/versions/retrieve`
 - `anthropic-sdk/api/csharp/beta/user_profiles`
@@ -496,6 +545,15 @@ _1168 topics_
 - `anthropic-sdk/api/go/beta/environments/list`
 - `anthropic-sdk/api/go/beta/environments/retrieve`
 - `anthropic-sdk/api/go/beta/environments/update`
+- `anthropic-sdk/api/go/beta/environments/work`
+- `anthropic-sdk/api/go/beta/environments/work/ack`
+- `anthropic-sdk/api/go/beta/environments/work/heartbeat`
+- `anthropic-sdk/api/go/beta/environments/work/list`
+- `anthropic-sdk/api/go/beta/environments/work/poll`
+- `anthropic-sdk/api/go/beta/environments/work/retrieve`
+- `anthropic-sdk/api/go/beta/environments/work/stats`
+- `anthropic-sdk/api/go/beta/environments/work/stop`
+- `anthropic-sdk/api/go/beta/environments/work/update`
 - `anthropic-sdk/api/go/beta/files`
 - `anthropic-sdk/api/go/beta/files/delete`
 - `anthropic-sdk/api/go/beta/files/download`
@@ -564,6 +622,7 @@ _1168 topics_
 - `anthropic-sdk/api/go/beta/skills/versions`
 - `anthropic-sdk/api/go/beta/skills/versions/create`
 - `anthropic-sdk/api/go/beta/skills/versions/delete`
+- `anthropic-sdk/api/go/beta/skills/versions/download`
 - `anthropic-sdk/api/go/beta/skills/versions/list`
 - `anthropic-sdk/api/go/beta/skills/versions/retrieve`
 - `anthropic-sdk/api/go/beta/user_profiles`
@@ -619,6 +678,15 @@ _1168 topics_
 - `anthropic-sdk/api/java/beta/environments/list`
 - `anthropic-sdk/api/java/beta/environments/retrieve`
 - `anthropic-sdk/api/java/beta/environments/update`
+- `anthropic-sdk/api/java/beta/environments/work`
+- `anthropic-sdk/api/java/beta/environments/work/ack`
+- `anthropic-sdk/api/java/beta/environments/work/heartbeat`
+- `anthropic-sdk/api/java/beta/environments/work/list`
+- `anthropic-sdk/api/java/beta/environments/work/poll`
+- `anthropic-sdk/api/java/beta/environments/work/retrieve`
+- `anthropic-sdk/api/java/beta/environments/work/stats`
+- `anthropic-sdk/api/java/beta/environments/work/stop`
+- `anthropic-sdk/api/java/beta/environments/work/update`
 - `anthropic-sdk/api/java/beta/files`
 - `anthropic-sdk/api/java/beta/files/delete`
 - `anthropic-sdk/api/java/beta/files/download`
@@ -687,6 +755,7 @@ _1168 topics_
 - `anthropic-sdk/api/java/beta/skills/versions`
 - `anthropic-sdk/api/java/beta/skills/versions/create`
 - `anthropic-sdk/api/java/beta/skills/versions/delete`
+- `anthropic-sdk/api/java/beta/skills/versions/download`
 - `anthropic-sdk/api/java/beta/skills/versions/list`
 - `anthropic-sdk/api/java/beta/skills/versions/retrieve`
 - `anthropic-sdk/api/java/beta/user_profiles`
@@ -755,6 +824,15 @@ _1168 topics_
 - `anthropic-sdk/api/python/beta/environments/list`
 - `anthropic-sdk/api/python/beta/environments/retrieve`
 - `anthropic-sdk/api/python/beta/environments/update`
+- `anthropic-sdk/api/python/beta/environments/work`
+- `anthropic-sdk/api/python/beta/environments/work/ack`
+- `anthropic-sdk/api/python/beta/environments/work/heartbeat`
+- `anthropic-sdk/api/python/beta/environments/work/list`
+- `anthropic-sdk/api/python/beta/environments/work/poll`
+- `anthropic-sdk/api/python/beta/environments/work/retrieve`
+- `anthropic-sdk/api/python/beta/environments/work/stats`
+- `anthropic-sdk/api/python/beta/environments/work/stop`
+- `anthropic-sdk/api/python/beta/environments/work/update`
 - `anthropic-sdk/api/python/beta/files`
 - `anthropic-sdk/api/python/beta/files/delete`
 - `anthropic-sdk/api/python/beta/files/download`
@@ -823,6 +901,7 @@ _1168 topics_
 - `anthropic-sdk/api/python/beta/skills/versions`
 - `anthropic-sdk/api/python/beta/skills/versions/create`
 - `anthropic-sdk/api/python/beta/skills/versions/delete`
+- `anthropic-sdk/api/python/beta/skills/versions/download`
 - `anthropic-sdk/api/python/beta/skills/versions/list`
 - `anthropic-sdk/api/python/beta/skills/versions/retrieve`
 - `anthropic-sdk/api/python/beta/user_profiles`
@@ -878,6 +957,15 @@ _1168 topics_
 - `anthropic-sdk/api/ruby/beta/environments/list`
 - `anthropic-sdk/api/ruby/beta/environments/retrieve`
 - `anthropic-sdk/api/ruby/beta/environments/update`
+- `anthropic-sdk/api/ruby/beta/environments/work`
+- `anthropic-sdk/api/ruby/beta/environments/work/ack`
+- `anthropic-sdk/api/ruby/beta/environments/work/heartbeat`
+- `anthropic-sdk/api/ruby/beta/environments/work/list`
+- `anthropic-sdk/api/ruby/beta/environments/work/poll`
+- `anthropic-sdk/api/ruby/beta/environments/work/retrieve`
+- `anthropic-sdk/api/ruby/beta/environments/work/stats`
+- `anthropic-sdk/api/ruby/beta/environments/work/stop`
+- `anthropic-sdk/api/ruby/beta/environments/work/update`
 - `anthropic-sdk/api/ruby/beta/files`
 - `anthropic-sdk/api/ruby/beta/files/delete`
 - `anthropic-sdk/api/ruby/beta/files/download`
@@ -946,6 +1034,7 @@ _1168 topics_
 - `anthropic-sdk/api/ruby/beta/skills/versions`
 - `anthropic-sdk/api/ruby/beta/skills/versions/create`
 - `anthropic-sdk/api/ruby/beta/skills/versions/delete`
+- `anthropic-sdk/api/ruby/beta/skills/versions/download`
 - `anthropic-sdk/api/ruby/beta/skills/versions/list`
 - `anthropic-sdk/api/ruby/beta/skills/versions/retrieve`
 - `anthropic-sdk/api/ruby/beta/user_profiles`
@@ -1001,6 +1090,15 @@ _1168 topics_
 - `anthropic-sdk/api/typescript/beta/environments/list`
 - `anthropic-sdk/api/typescript/beta/environments/retrieve`
 - `anthropic-sdk/api/typescript/beta/environments/update`
+- `anthropic-sdk/api/typescript/beta/environments/work`
+- `anthropic-sdk/api/typescript/beta/environments/work/ack`
+- `anthropic-sdk/api/typescript/beta/environments/work/heartbeat`
+- `anthropic-sdk/api/typescript/beta/environments/work/list`
+- `anthropic-sdk/api/typescript/beta/environments/work/poll`
+- `anthropic-sdk/api/typescript/beta/environments/work/retrieve`
+- `anthropic-sdk/api/typescript/beta/environments/work/stats`
+- `anthropic-sdk/api/typescript/beta/environments/work/stop`
+- `anthropic-sdk/api/typescript/beta/environments/work/update`
 - `anthropic-sdk/api/typescript/beta/files`
 - `anthropic-sdk/api/typescript/beta/files/delete`
 - `anthropic-sdk/api/typescript/beta/files/download`
@@ -1069,6 +1167,7 @@ _1168 topics_
 - `anthropic-sdk/api/typescript/beta/skills/versions`
 - `anthropic-sdk/api/typescript/beta/skills/versions/create`
 - `anthropic-sdk/api/typescript/beta/skills/versions/delete`
+- `anthropic-sdk/api/typescript/beta/skills/versions/download`
 - `anthropic-sdk/api/typescript/beta/skills/versions/list`
 - `anthropic-sdk/api/typescript/beta/skills/versions/retrieve`
 - `anthropic-sdk/api/typescript/beta/user_profiles`
@@ -1180,6 +1279,8 @@ _1168 topics_
 - `anthropic-sdk/managed-agents/overview`
 - `anthropic-sdk/managed-agents/permission-policies`
 - `anthropic-sdk/managed-agents/quickstart`
+- `anthropic-sdk/managed-agents/self-hosted-sandboxes`
+- `anthropic-sdk/managed-agents/self-hosted-sandboxes-security`
 - `anthropic-sdk/managed-agents/sessions`
 - `anthropic-sdk/managed-agents/skills`
 - `anthropic-sdk/managed-agents/tools`
