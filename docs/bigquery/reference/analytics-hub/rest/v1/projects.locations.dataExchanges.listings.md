@@ -301,6 +301,4 @@ Indicates whether this commercial access is currently active.
 | `create` | Creates a new listing. |
 | `delete` | Deletes a listing. |
 | `get` | Gets the details of a listing. |
-| `getIamPolicy` | Gets the IAM policy. |
-| `list` | Lists all listings in a given project and location. |
-| `listSubscription` |
+| `ge` |

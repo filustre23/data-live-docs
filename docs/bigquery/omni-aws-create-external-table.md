@@ -32,7 +32,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 #### 所需權限
 
-如要建立外部資料表，必須具備下列權限：
+如要建立外部資料表，您必須具備下列權限：
 
 * `bigquery.tables.create`
 * `bigquery.connections.delegate`
@@ -159,7 +159,7 @@ public class CreateDatasetAws {
 4. 在「資料集資訊」部分，按一下 add\_box「建立資料表」。
 5. 在「Create table」(建立資料表) 頁面的「Source」(來源) 區段中，執行下列操作：
 
-   1. 在「使用下列資料建立資料表」下方，選取「Amazon S3」。
+   1. 在「使用下列資料建立資料表」中，選取「Amazon S3」。
    2. 在「Select S3 path」(選取 S3 路徑) 中，以 `s3://BUCKET_NAME/PATH` 格式輸入指向 Amazon S3 資料的 URI。將 `BUCKET_NAME` 替換為 Amazon S3 值區的名稱；值區的區域應與資料集的區域相同。請將 `PATH` 改成您要寫入匯出檔案的路徑，當中可加入一個萬用字元 `*`。
    3. 在「File format」(檔案格式) 部分選取 Amazon S3 中的資料格式。支援的格式包括 **AVRO**、**CSV**、**DELTA\_LAKE**、**ICEBERG**、**JSONL**、**ORC** 和 **PARQUET**。
 6. 在「目的地」部分，指定下列詳細資料：
@@ -168,7 +168,7 @@ public class CreateDatasetAws {
    2. 在「Table」(資料表) 欄位中，輸入資料表名稱。
    3. 確認「Table type」(資料表類型) 已設為 [External table] (外部資料表)。
    4. 在「Connection ID」(連線 ID) 專區中，從下拉式選單選擇適當的連線 ID。如需連線相關資訊，請參閱「[連結至 Amazon S3](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-connection?hl=zh-tw)」一文。
-7. 在「Schema」(結構定義) 區段中，您可以啟用[結構定義自動偵測](https://docs.cloud.google.com/bigquery/docs/schema-detect?hl=zh-tw)功能，也可以在有來源檔案時手動指定結構定義。如果沒有來源檔案，就必須手動指定結構定義。
+7. 在「Schema」(結構定義) 區段中，您可以啟用[結構定義自動偵測](https://docs.cloud.google.com/bigquery/docs/schema-detect?hl=zh-tw)功能，也可以手動指定結構定義 (如有來源檔案)。如果沒有來源檔案，就必須手動指定結構定義。
 
    * 如要啟用結構定義自動偵測功能，請選取「自動偵測」選項。
    * 如要手動指定結構定義，請取消勾選「自動偵測」選項。啟用「以文字形式編輯」，然後以 [JSON 陣列](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#specifying_a_json_schema_file)的形式輸入資料表結構定義。
@@ -376,7 +376,7 @@ public class CreateExternalTableAws {
 4. 按一下 [Create table] (建立資料表)。系統會開啟「建立資料表」窗格。
 5. 在「來源」部分，指定下列詳細資料：
 
-   1. 在「使用下列資料建立資料表」下方，選取「Amazon S3」。
+   1. 在「使用下列資料建立資料表」中，選取「Amazon S3」。
    2. 使用[萬用字元](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#load-wildcards)提供資料夾路徑。例如：`s3://mybucket/*`。
 
       資料夾的位置必須與要建立、附加或覆寫的資料表所在的資料集位置相同。
@@ -398,7 +398,7 @@ public class CreateExternalTableAws {
    3. 在「Table」(資料表) 中，輸入要建立的資料表名稱。
    4. 確認「Table type」(資料表類型) 已選取「External table」(外部資料表)。
    5. 在「連線 ID」部分，選取您先前建立的連線。
-7. 在「Schema」(結構定義) 區段中，您可以啟用[結構定義自動偵測](https://docs.cloud.google.com/bigquery/docs/schema-detect?hl=zh-tw)功能，也可以在有來源檔案時手動指定結構定義。如果沒有來源檔案，就必須手動指定結構定義。
+7. 在「Schema」(結構定義) 區段中，您可以啟用[結構定義自動偵測](https://docs.cloud.google.com/bigquery/docs/schema-detect?hl=zh-tw)功能，也可以手動指定結構定義 (如有來源檔案)。如果沒有來源檔案，就必須手動指定結構定義。
 
    * 如要啟用結構定義自動偵測功能，請選取「自動偵測」選項。
    * 如要手動指定結構定義，請取消勾選「自動偵測」選項。啟用「以文字形式編輯」，然後以 [JSON 陣列](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#specifying_a_json_schema_file)的形式輸入資料表結構定義。
@@ -651,10 +651,10 @@ OPTIONS (
 更改下列內容：
 
 * table\_name：資料表名稱。
-* connection\_name：連線名稱。連線必須識別 [Amazon S3](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-connection?hl=zh-tw) 或 [Blob 儲存體](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-connection?hl=zh-tw)來源。
+* connection\_name：連線名稱，連線必須識別 [Amazon S3](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-connection?hl=zh-tw) 或 [Blob 儲存體](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-connection?hl=zh-tw)來源。
 * parent\_directory：父項目錄的 URI。
 
-### 使用 Delta Lake 進行跨雲端轉移
+### 使用 Delta Lake 進行 BigQuery Omni 轉移
 
 以下範例使用 [`LOAD DATA`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/other-statements?hl=zh-tw#load_data_statement) 陳述式，將資料載入適當的資料表：
 
@@ -667,7 +667,7 @@ FROM FILES (
 WITH CONNECTION connection_name;
 ```
 
-如需跨雲端資料移轉的更多範例，請參閱[使用跨雲端作業載入資料](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer?hl=zh-tw#load-data)。
+如需更多 BigQuery Omni 資料移轉範例，請參閱「[使用 BigQuery Omni 作業載入資料](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer?hl=zh-tw#load-data)」。
 
 ## 查詢 BigLake 資料表
 
@@ -680,7 +680,7 @@ WITH CONNECTION connection_name;
 這項功能適用《[服務專屬條款](https://docs.cloud.google.com/terms/service-terms?hl=zh-tw#1)》中「一般服務條款」一節的《正式發布前產品條款》。正式發布前功能是依「原樣」提供，支援服務可能受限。
 詳情請參閱[推出階段說明](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
 
-您可以使用 [`INFORMATION_SCHEMA`](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw) 檢視表查看資源中繼資料。查詢 [`JOBS_BY_*`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw)、[`JOBS_TIMELINE_BY_*`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline?hl=zh-tw) 和 [`RESERVATION*`](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations?hl=zh-tw) 檢視區塊時，必須[指定與資料表所在區域位於同一位置的查詢處理位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#specify_locations)。如要瞭解 BigQuery Omni 位置，請參閱「[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#omni-loc)」。對於所有其他系統資料表，指定查詢工作位置是*選用*項目。
+您可以使用 [`INFORMATION_SCHEMA`](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw) 檢視表查看資源中繼資料。查詢 [`JOBS_BY_*`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw)、[`JOBS_TIMELINE_BY_*`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline?hl=zh-tw) 和 [`RESERVATION*`](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations?hl=zh-tw) 檢視區塊時，必須[指定與資料表所在區域位於同一位置的查詢處理位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#specify_locations)。如要瞭解 BigQuery Omni 位置，請參閱「[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#omni-loc)」。對於所有其他系統資料表，指定查詢工作位置是*選用*做法。
 
 如要瞭解 BigQuery Omni 支援的系統資料表，請參閱[限制](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw#limitations)。
 
@@ -740,7 +740,7 @@ LIMIT 10;
 
 ### 必要權限
 
-確認您具備設定服務範圍的必要權限。如要查看設定 VPC Service Controls 時須具備的 IAM 角色清單，請參閱 VPC Service Controls 說明文件中的「[使用 IAM 控管存取權](https://docs.cloud.google.com/vpc-service-controls/docs/access-control?hl=zh-tw)」。
+確認您具備設定服務安全防護範圍的必要權限。如要查看設定 VPC Service Controls 時須具備的 IAM 角色清單，請參閱 VPC Service Controls 說明文件中的「[使用 IAM 控管存取權](https://docs.cloud.google.com/vpc-service-controls/docs/access-control?hl=zh-tw)」。
 
 ### 使用 Google Cloud 控制台設定 VPC Service Controls
 
@@ -807,7 +807,7 @@ LIMIT 10;
 * `egressTo`：列出 perimeter 外指定專案中 Google Cloud 資源允許的服務作業。
 * `operations`：列出可存取的服務和動作/方法，滿足 `from` 區塊條件的用戶端可供存取。
 * `serviceName`：設定 BigQuery Omni 的 `bigquery.googleapis.com`。
-* `methodSelectors`：列出滿足 `from` 條件的用戶端可存取的方法。如要瞭解可限制的服務方法和權限，請參閱「[支援的服務方法限制](https://docs.cloud.google.com/vpc-service-controls/docs/supported-method-restrictions?hl=zh-tw)」。
+* `methodSelectors`：列出滿足 `from` 條件的用戶端可存取的方法。如需可限制的服務方法和權限，請參閱「[支援的服務方法限制](https://docs.cloud.google.com/vpc-service-controls/docs/supported-method-restrictions?hl=zh-tw)」。
 * `method`：有效的服務方法，或 `\"*\"`，允許所有 `serviceName` 方法。
 * `permission`：有效的服務權限，例如 `\"*\"`、`externalResource.read` 或 `externalResource.write`。對於需要這項權限的作業，系統允許存取 perimeter 外部的資源。
 * `externalResources`：列出 perimeter 內部的用戶端可存取的外部資源。請將 EXTERNAL\_RESOURCE\_PATH 替換為有效的 Amazon S3 值區 (例如 `s3://bucket_name`)，或 Blob 儲存體容器路徑 (例如 `azure://myaccount.blob.core.windows.net/container_name`)。
@@ -822,7 +822,7 @@ LIMIT 10;
 
 #### 範例
 
-以下範例政策允許從 perimeter 內部向 AWS 中的 `s3://mybucket` Amazon S3 位置執行輸出作業。
+以下範例政策允許從 perimeter 內部到 AWS 的 `s3://mybucket` Amazon S3 位置執行輸出作業。
 
 ```
 - egressTo:
@@ -984,7 +984,7 @@ BigQuery 管理員可以建立 S3 bucket 政策，授予 BigQuery Omni 存取 Am
 
 ## 限制
 
-如要查看適用於 Amazon S3 和 Blob 儲存體的 BigLake 資料表限制完整清單，請參閱「[限制](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw#limitations)」。
+如要查看適用於以 Amazon S3 和 Blob 儲存體為基礎的 BigLake 表格限制完整清單，請參閱「[限制](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw#limitations)」。
 
 ## 後續步驟
 
@@ -1002,11 +1002,11 @@ BigQuery 管理員可以建立 S3 bucket 政策，授予 BigQuery Omni 存取 Am
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-16 (世界標準時間)。
+上次更新時間：2026-05-19 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-16 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-19 (世界標準時間)。"],[],[]]

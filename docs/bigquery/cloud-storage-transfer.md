@@ -295,6 +295,5 @@ public class CreateCloudStorageTransfer {
     params.put("data_path_template", Value.newBuilder().setStringValue(sourceUri).build());
     params.put("write_disposition", Value.newBuilder().setStringValue("APPEND").build());
     params.put("file_format", Value.newBuilder().setStringValue(fileFormat).build());
-    params.put("field_delimiter", Value.newBuilder().setStringValue(fieldDelimiter).build());
-    params.put("skip_leading_rows",
+    params.put("field_delimiter", Value.newBuilder().se
 ```

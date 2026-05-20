@@ -671,16 +671,4 @@ bq head --max_rows=10 --start_row=50 --selected_fields=field1,field3 \
 :   如果指令引數不是表格或檢視區塊，請設為 `true` 以傳回錯誤。預設值為 `false`。為確保與其他指令一致，這個標記會受到支援。
 
 **`TABLE`**
-:   要擷取資料的資料表。
-
-如要進一步瞭解如何使用 `bq head` 指令，請參閱[管理資料表資料](https://docs.cloud.google.com/bigquery/docs/managing-table-data?hl=zh-tw)一文。
-
-### `bq help`
-
-使用 `bq help` 指令在工具中顯示 bq 指令列工具說明文件。
-
-#### 劇情概要
-
-`bq help [COMMAND]`
-
-#### 旗標和引數
+:   要擷取資料的

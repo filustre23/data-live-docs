@@ -76,7 +76,7 @@ Some of the GoogleSQL examples on this page make use of a
 which enables extraction or reuse of named subqueries. For example:
 
 ```
-#standardSQL
+#GoogleSQL
 WITH T AS (
   SELECT x FROM UNNEST([1, 2, 3, 4]) AS x
 )
@@ -90,7 +90,7 @@ values in `T`. This query is equivalent to a query where the contents of `T`
 are inline:
 
 ```
-#standardSQL
+#GoogleSQL
 SELECT
   x / (SELECT SUM(x)
        FROM (SELECT x FROM UNNEST([1, 2, 3, 4]) AS x)) AS weighted_x
@@ -100,7 +100,7 @@ FROM (SELECT x FROM UNNEST([1, 2, 3, 4]) AS x);
 As another example, consider this query, which uses multiple named subqueries:
 
 ```
-#standardSQL
+#GoogleSQL
 WITH T AS (
   SELECT x FROM UNNEST([1, 2, 3, 4]) AS x
 ),
@@ -121,7 +121,7 @@ by a `SELECT` statement over `TPlusOneTimesTwo`. This query is equivalent to the
 following query, which inlines the computations:
 
 ```
-#standardSQL
+#GoogleSQL
 SELECT (x + 1) * 2 AS z
 FROM (SELECT x FROM UNNEST([1, 2, 3, 4]) AS x);
 ```
@@ -137,7 +137,7 @@ You can use user-defined SQL functions to define common expressions and then
 reference them from the query. For example:
 
 ```
-#standardSQL
+#GoogleSQL
 -- Computes the harmonic mean of the elements in 'arr'.
 -- The harmonic mean of x_1, x_2, ..., x_n can be expressed as:
 --   n / ((1 / x_1) + (1 / x_2) + ... + (1 / x_n))
@@ -165,7 +165,7 @@ following GoogleSQL query that computes the fraction of warm days in Seattle
 in 2015:
 
 ```
-#standardSQL
+#GoogleSQL
 WITH SeattleWeather AS (
   SELECT *
   FROM `bigquery-public-data.noaa_gsod.gsod2015`
@@ -189,7 +189,7 @@ that originate from the outer query. For example, consider the following
 GoogleSQL query:
 
 ```
-#standardSQL
+#GoogleSQL
 WITH WashingtonStations AS (
   SELECT weather.stn AS station_id, ANY_VALUE(station.name) AS name
   FROM `bigquery-public-data.noaa_gsod.stations` AS station
@@ -220,7 +220,7 @@ uses both, consider the following query, which computes the top two articles
 for each day in the HackerNews dataset:
 
 ```
-#standardSQL
+#GoogleSQL
 WITH TitlesAndScores AS (
   SELECT
     ARRAY_AGG(STRUCT(title, score)) AS titles,
@@ -289,7 +289,7 @@ example, you can select the minimum and maximum `TIMESTAMP` values using
 GoogleSQL:
 
 ```
-#standardSQL
+#GoogleSQL
 SELECT
   min_timestamp,
   max_timestamp,
@@ -309,7 +309,7 @@ If you select a column that contains timestamp values outside of this
 range, you receive an error:
 
 ```
-#standardSQL
+#GoogleSQL
 SELECT timestamp_column_with_invalid_values
 FROM MyTableWithInvalidTimestamps;
 ```
@@ -327,7 +327,7 @@ To correct the error, one option is to define and use a
 to filter the invalid timestamps:
 
 ```
-#standardSQL
+#GoogleSQL
 CREATE TEMP FUNCTION TimestampIsValid(t TIMESTAMP) AS (
   t >= TIMESTAMP('0001-01-01 00:00:00') AND
   t <= TIMESTAMP('9999-12-31 23:59:59.999999')
@@ -343,7 +343,7 @@ Another option to correct the error is to use the
 function with the timestamp column. For example:
 
 ```
-#standardSQL
+#GoogleSQL
 SELECT SAFE_CAST(timestamp_column_with_invalid_values AS STRING) AS timestamp_string
 FROM MyTableWithInvalidTimestamps;
 ```
@@ -379,7 +379,7 @@ SELECT
 In GoogleSQL, this query is invalid. To achieve the same result, you must use explicit casting:
 
 ```
-#standardSQL
+#GoogleSQL
 SELECT
   1 + SAFE_CAST(true AS INT64) as boolean_coercion,
   TIMESTAMP_MICROS(1234567890) as integer_timestamp_coercion;
@@ -397,7 +397,7 @@ In GoogleSQL, you escape such keywords and identifiers using backticks
 `` ` ``. For example:
 
 ```
-#standardSQL
+#GoogleSQL
 SELECT
   word,
   SUM(word_count) AS word_count
@@ -412,7 +412,7 @@ For example, the following query fails due to a `Syntax error` using standard
 SQL:
 
 ```
-#standardSQL
+#GoogleSQL
 SELECT
   COUNT(*) AS rows
 FROM
@@ -422,7 +422,7 @@ FROM
 To fix the error, escape the alias `rows` using backticks:
 
 ```
-#standardSQL
+#GoogleSQL
 SELECT
   COUNT(*) AS `rows`
 FROM
@@ -435,16 +435,4 @@ The following is a list of keywords allowed in legacy SQL, but not in GoogleSQL:
 | --- | --- | --- | --- |
 | * `ALL` * `AND` * `ANY` * `ARRAY` * `ASSERT_ROWS_MODIFIED` * `AT` * `COLLATE` * `CURRENT` * `DEFAULT` * `DESC` * `END` * `ENUM` | * `ESCAPE` * `EXCEPT` * `EXCLUDE` * `EXTRACT` * `FETCH` * `FOR` * `GROUP` * `GROUPING` * `GROUPS` * `IF` * `INTERVAL` * `IS` | * `LATERAL` * `NATURAL` * `NEW` * `NO` * `NULLS` * `OF` * `ORDER` * `PROTO` * `QUALIFY` * `RANGE` * `RECURSIVE` | * `RESPECT` * `ROLLUP` * `ROWS` * `SOME` * `STRUCT` * `TABLESAMPLE` * `TO` * `TREAT` * `UNNEST` * `WHEN` * `WINDOW` |
 
-For a more comprehensive list of reserved keywords and what constitutes valid identifiers, see the [Reserved keywords](/bigquery/docs/reference/standard-sql/lexical#reserved_keywords) section in [Lexical structure](/bigquery/docs/reference/standard-sql/lexical).
-
-### Project-qualified table names
-
-In legacy SQL, to query a table with a project-qualified name, you can use either a colon `:` or a period `.`.
-In GoogleSQL however, you must use only periods `.`.
-
-Example legacy SQL query:
-
-```
-#legacySQL
-SELECT
-```
+For a more comprehensive list of reserved keywords and what constitutes valid identifiers, see the [Reserved keywords](/bigquery/docs/reference/standard-sql/lexical#reserved_keywords) section in [Lexical struc](/bigquery/docs/reference/standard-sql/lexical)

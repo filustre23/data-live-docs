@@ -412,8 +412,5 @@ The following example loads two CSV files into a table, using schema
 autodetection.
 
 ```
-LOAD DATA INTO mydataset.table1
-  FROM FILES(
-    format='CSV',
-    uris = ['gs://bucket/path/fi
+LOAD DATA INTO mydataset.
 ```

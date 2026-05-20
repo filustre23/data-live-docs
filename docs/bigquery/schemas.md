@@ -972,7 +972,5 @@ bq mk --table mydataset.mytable ./myschema.json
 ```
 from google.cloud import bigquery
 
-client = bigquery.Client()
-
-# TODO(dev): Change table_id to the f
+client = bigquery.
 ```

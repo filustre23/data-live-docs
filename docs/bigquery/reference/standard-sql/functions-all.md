@@ -258,6 +258,4 @@ This topic contains all functions supported by GoogleSQL for BigQuery.
 | [`PERCENTILE_DISC`](/bigquery/docs/reference/standard-sql/navigation_functions#percentile_disc) | Computes the specified percentile for a discrete value. |
 | [`POW`](/bigquery/docs/reference/standard-sql/mathematical_functions#pow) | Produces the value of `X` raised to the power of `Y`. |
 | [`POWER`](/bigquery/docs/reference/standard-sql/mathematical_functions#power) | Synonym of `POW`. |
-| [`RAND`](/bigquery/docs/reference/standard-sql/mathematical_functions#rand) | Generates a pseudo-random value of type `FLOAT64` in the range of `[0, 1)`. |
-| [`RANGE`](/bigquery/docs/reference/standard-sql/range-functions#range) | Constructs a range of `DATE`, `DATETIME`, or `TIMESTAMP` values. |
-| [`RANGE_BUCKET`](/bigquery/docs/reference/standard-sql/mathematical_functions#range_bucket) | Scans through a sorted array |
+|  |

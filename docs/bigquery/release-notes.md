@@ -27,6 +27,34 @@ To get the latest product updates delivered to you, add the URL of this page to 
 reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators), or add the
 [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## May 18, 2026
+
+Feature
+
+You can
+[group reservations](/bigquery/docs/reservations-tasks#prioritize_idle_slots_with_reservation_groups)
+together to prioritize idle slot sharing within the group. Reservations within a
+reservation group share idle slots with each other before making them available
+to other reservations in the project, giving you more control over slot
+allocation for high-priority workloads. This feature is
+[generally available](https://cloud.google.com/products#product-launch-stages)
+(GA).
+
+Feature
+
+You can now use a [custom organization policy](/bigquery/docs/custom-constraints)
+to allow or deny specific operations on workload management resources including
+reservations, assignments, capacity commitments, and BI reservations. This
+feature is in [Preview](https://cloud.google.com/products/#product-launch-stages).
+
+Feature
+
+You can manage and version control SQL scripts and notebooks with
+[BigQuery Studio Git repositories](/bigquery/docs/git-repositories),
+which provide a streamlined, folder-based integration with remote Git
+repositories. This feature is in
+[preview](https://cloud.google.com/products/#product-launch-stages).
+
 ## May 15, 2026
 
 Feature
@@ -4187,26 +4215,4 @@ Libraries
 
 ##### Bug Fixes
 
-* Add default value in SchemaField.from\_api\_repr() ([#2115](https://github.com/googleapis/python-bigquery/issues/2115)) ([7de6822](https://github.com/googleapis/python-bigquery/commit/7de6822e1c556a68cb8d50e90664c094697cca1d))
-
-Feature
-
-You can now set [conditional IAM access on BigQuery datasets](/bigquery/docs/conditions) with access control lists (ACLs). This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
-
-Feature
-
-The following BigQuery ML generative AI features are now available:
-
-* Creating a
-  [remote model](//bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open)
-  based on an
-  [open model from Vertex Model Garden or Hugging Face that is deployed to Vertex AI](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open).
-  Options include Llama, Gemma, and other leading open text generation models.
-* Using the
-  [`ML.GENERATE_TEXT` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-text)
-  with this remote model to perform a broad range of generative AI tasks.
-* Using the
-  [`ML.EVALUATE` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate)
-  to evaluate the remote model.
-
-Try these features with the
+* Add default value in SchemaField.from\_api\_repr() ([#2115](https://github.com/googleapis/python-bigquery/issues/2115)

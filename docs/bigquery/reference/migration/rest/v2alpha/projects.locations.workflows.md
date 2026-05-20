@@ -302,10 +302,3 @@ The SQL identifier rewrite mode.
 | `REWRITE_ALL` | All SQL identifiers will be rewrite. |
 
 ## TokenType
-
-The special token data type.
-
-| Enums | |
-| --- | --- |
-| `TOKEN_TYPE_UNSPECIFIED` | Token type is not specified. |
-|

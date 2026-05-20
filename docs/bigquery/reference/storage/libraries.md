@@ -360,7 +360,5 @@ func main() {
 	if *snapshotMillis > 0 {
 		ts := timestamppb.New(time.Unix(0, *snapshotMillis*1000))
 		if !ts.IsValid() {
-			log.Fatalf("Invalid snapshot millis (%d): %v", *snapshotMillis, err)
-		}
-		createReadSessionRequest.ReadSession.
+			log.Fatalf("Invalid snapshot millis (%d): %v", *snapshotMillis,
 ```

@@ -33,7 +33,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 Amazon S3 資料移轉作業有下列限制：
 
 * Amazon S3 URI 的值區部分無法參數化。
-* 如果從 Amazon S3 移轉資料時，將「寫入處置」參數設為 `WRITE_TRUNCATE`，系統會在每次執行作業時，將所有相符的檔案移轉至 Google Cloud 。這可能會導致額外的 Amazon S3 輸出資料移轉費用。如要進一步瞭解執行期間會轉移哪些檔案，請參閱「[前置字元比對與萬用字元比對的影響](#matching)」。
+* 如果從 Amazon S3 移轉資料時，將「寫入處置」參數設為 `WRITE_TRUNCATE`，系統會在每次執行作業時，將所有相符的檔案移轉至 Google Cloud 。這可能會導致額外的 Amazon S3 輸出資料傳輸費用。如要進一步瞭解執行期間會轉移哪些檔案，請參閱「[前置字元比對與萬用字元比對的影響](#matching)」。
 * 不支援從 AWS GovCloud (`us-gov`) 區域移轉資料。
 * 不支援將資料移轉至 [BigQuery Omni 位置](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw#locations)。
 * 視 Amazon S3 來源資料的格式而定，可能還有其他的限制。詳情請參閱：
@@ -168,7 +168,7 @@ bq mk \
   + file\_format：選用。指出要轉移的檔案類型：`CSV`、`JSON`、`AVRO`、`PARQUET` 或 `ORC`。預設值為 `CSV`。
   + write\_disposition：選用。`WRITE_APPEND` 只會轉移上次成功執行後修改的檔案。`WRITE_TRUNCATE` 會轉移所有相符的檔案，包括先前轉移的檔案。預設值為 `WRITE_APPEND`。
   + max\_bad\_records：選用。允許的損壞記錄數量。預設值為 `0`。
-  + decimal\_target\_types：選用。以半形逗號分隔的清單，內含來源小數值可能轉換成的 SQL 資料類型。如果未提供這個欄位，ORC 的預設資料類型為「NUMERIC,STRING」(NUMERIC、STRING)，其他檔案格式則為「NUMERIC」。
+  + decimal\_target\_types：選用。以半形逗號分隔的清單，內含來源小數值可能轉換成的 SQL 資料類型。如果未提供這個欄位，ORC 的預設資料類型為「NUMERIC, STRING」(NUMERIC、STRING)，其他檔案格式則為「NUMERIC」。
   + ignore\_unknown\_values：選用屬性，如果 file\_format 不是 `JSON` 或 `CSV`，系統會忽略這個屬性。是否要忽略資料中的不明值。
   + field\_delimiter：選用，僅適用於 `file_format` 為 `CSV` 的情況。分隔欄位的字元。預設值為逗號。
   + skip\_leading\_rows：選用，僅適用於 file\_format 為 `CSV` 的情況。指出您不想匯入的標題列數。預設值為 `0`。
@@ -268,5 +268,4 @@ public class CreateAmazonS3Transfer {
   public static void createAmazonS3Transfer(String projectId, TransferConfig transferConfig)
       throws IOException {
     try (DataTransferServiceClient client = DataTransferServiceClient.create()) {
-      ProjectName parent =
 ```

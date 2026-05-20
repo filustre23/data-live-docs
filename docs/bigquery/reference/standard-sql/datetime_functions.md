@@ -616,11 +616,3 @@ Formats a `DATETIME` value according to a specified format string.
 **Return Data Type**
 
 `STRING`
-
-**Examples**
-
-```
-SELECT
-  FORMAT_DATETIME("%c", DATETIME "2008-12-25 15:30:00")
-  AS
-```

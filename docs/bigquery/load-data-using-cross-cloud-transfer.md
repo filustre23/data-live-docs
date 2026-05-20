@@ -14,7 +14,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 你可以依據偏好儲存及分類內容。
 
-# 透過跨雲端作業載入資料
+# 透過 BigQuery Omni 作業載入資料
 
 BigQuery 管理員或分析師可以將 Amazon Simple Storage Service (Amazon S3) 值區或 Azure Blob 儲存空間中的資料載入 [BigQuery 資料表](https://docs.cloud.google.com/bigquery/docs/tables-intro?hl=zh-tw#standard-tables)。您可以將移轉的資料與Google Cloud 區域中的資料合併，也可以運用 [BigQuery ML](https://docs.cloud.google.com/bigquery/docs/bqml-introduction?hl=zh-tw) 等 BigQuery 功能。您也可以建立特定外部來源的具體化檢視表副本，讓該資料可在 BigQuery 中使用。
 
@@ -36,13 +36,13 @@ BigQuery 管理員或分析師可以將 Amazon Simple Storage Service (Amazon S3
 
 ### 必要角色
 
-如要取得使用跨雲端移轉功能載入資料所需的權限，請要求系統管理員授予您資料集的「[BigQuery 資料編輯者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataEditor) 」(`roles/bigquery.dataEditor`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得使用 BigQuery Omni 移轉載入資料所需的權限，請要求系統管理員授予您資料集的「BigQuery 資料編輯者」 (`roles/bigquery.dataEditor`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
-這個預先定義的角色具備使用跨雲端轉移功能載入資料所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
+這個預先定義的角色具備使用 BigQuery Omni 移轉功能載入資料所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
 #### 所需權限
 
-如要使用跨雲端轉移功能載入資料，必須具備下列權限：
+如要使用 BigQuery Omni 移轉功能載入資料，必須具備下列權限：
 
 * `bigquery.tables.create`
 * `bigquery.tables.get`
@@ -57,9 +57,9 @@ BigQuery 管理員或分析師可以將 Amazon Simple Storage Service (Amazon S3
 
 ## 定價
 
-系統會根據[`LOAD`陳述式](#load-data)，向您收取跨雲端傳輸的位元組費用。如要瞭解定價資訊，請參閱 [BigQuery Omni 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#bqomni)中的「Omni Cross Cloud 資料移轉」一節。
+系統會根據[`LOAD`陳述式](#load-data)，向您收取跨雲端傳輸的位元組費用。如需定價資訊，請參閱 [BigQuery Omni 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#bqomni)中的「Omni 資料移轉」一節。
 
-系統會根據 [`CREATE TABLE AS SELECT` 陳述式](#filter-data)或 [`INSERT INTO SELECT` 陳述式](#filter-data)，針對跨雲端傳輸的位元組和[運算容量](https://cloud.google.com/bigquery/pricing?hl=zh-tw#capacity_compute_analysis_pricing)向您收費。
+系統會根據 [`CREATE TABLE AS SELECT` 陳述式](#filter-data)或 [`INSERT INTO SELECT` 陳述式](#filter-data)，針對跨雲端傳輸的位元組收費，並收取[運算容量](https://cloud.google.com/bigquery/pricing?hl=zh-tw#capacity_compute_analysis_pricing)費用。
 
 `LOAD` 和 `CREATE TABLE AS SELECT` 陳述式都需要 BigQuery Omni 區域中的時段，才能掃描 Amazon S3 和 Blob 儲存體檔案並載入。詳情請參閱 [BigQuery Omni 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#bqomni)。
 
@@ -68,7 +68,7 @@ BigQuery 管理員或分析師可以將 Amazon Simple Storage Service (Amazon S3
 ## 載入和篩選選項的最佳做法
 
 * 避免載入多個小於 5 MB 的檔案。
-  請改為為檔案建立外部資料表，然後將查詢結果匯出至 [Amazon S3](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-external-table?hl=zh-tw) 或 [Blob 儲存體](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-external-table?hl=zh-tw)，即可建立較大的檔案。這個方法有助於縮短資料轉移時間。
+  請改為為檔案建立外部資料表，然後將查詢結果匯出至 [Amazon S3](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-external-table?hl=zh-tw) 或 [Blob 儲存空間](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-external-table?hl=zh-tw)，建立較大的檔案。這個方法有助於縮短資料轉移時間。
 如要瞭解查詢結果大小上限，請參閱「[BigQuery Omni 查詢結果大小上限](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#max_result_size_query_omni)」。* 如果來源資料位於 gzip 壓縮檔中，請在建立外部資料表時，將 [`external_table_options.compression`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#external_table_option_list) 選項設為 `GZIP`。
 
 ## 載入資料
@@ -370,7 +370,7 @@ WHERE
    1. 在「Project」(專案) 部分，輸入要建立 materialized view 副本的專案。
    2. 在 **Dataset** (資料集) 部分，輸入要建立具體化檢視表副本的資料集。
    3. 在「**副本 materialized view 名稱**」部分，輸入副本的名稱。
-7. 選用：為具體化檢視副本指定**標記**和**進階選項**。如果沒有為「本機具體化檢視資料集」指定資料集，系統會在與來源資料相同的專案和區域中，自動建立名為 `bq_auto_generated_local_mv_dataset` 的資料集。如未指定**本機具體化檢視表名稱**，系統會自動在與來源資料相同的專案和區域中建立名稱，並加上 `bq_auto_generated_local_mv_` 前置字串。
+7. 選用：為具體化檢視副本指定**標記**和**進階選項**。如果沒有為「本機具體化檢視資料集」指定資料集，系統會在與來源資料相同的專案和區域中，自動建立名為 `bq_auto_generated_local_mv_dataset` 的資料集。如未指定「本機具體化檢視表名稱」，系統會自動在來源資料所在的專案和區域中建立具體化檢視表，並加上 `bq_auto_generated_local_mv_` 前置字串。
 8. 點選「建立資料表」。
 
 系統會建立新的本機具體化檢視區塊 (如果未指定)，並在來源資料集中授權。然後在目的地資料集中建立 materialized view 副本。
@@ -379,7 +379,7 @@ WHERE
 
 1. 在您建立的資料集中，對基礎資料表[建立具體化檢視](https://docs.cloud.google.com/bigquery/docs/materialized-views-create?hl=zh-tw)。您也可以在 Amazon S3 區域中的不同資料集中建立具體化檢視區塊。
 2. [授權具體化檢視表](https://docs.cloud.google.com/bigquery/docs/authorized-views?hl=zh-tw)存取資料集，這些資料集包含用於建立具體化檢視表的查詢中的來源資料表。
-3. 如果已為來源資料表設定手動重新整理中繼資料快取，請執行 [`BQ.REFRESH_EXTERNAL_METADATA_CACHE` 系統程序](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures?hl=zh-tw#bqrefresh_external_metadata_cache)，重新整理中繼資料快取。
+3. 如果您為來源資料表設定手動重新整理中繼資料快取，請執行 [`BQ.REFRESH_EXTERNAL_METADATA_CACHE` 系統程序](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures?hl=zh-tw#bqrefresh_external_metadata_cache)，重新整理中繼資料快取。
 4. 執行 [`BQ.REFRESH_MATERIALIZED_VIEW` 系統程序](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures?hl=zh-tw#bqrefresh_materialized_view)，重新整理 materialized view。
 5. 使用 [`CREATE MATERIALIZED VIEW AS REPLICA OF` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#create_materialized_view_as_replica_of_statement)建立 materialized view 副本：
 
@@ -394,7 +394,7 @@ WHERE
    * `PROJECT_ID`：要在其中建立 materialized view 副本的專案名稱，例如 `myproject`。
    * `BQ_DATASET`：您要在其中建立具體化檢視表副本的 BigQuery 資料集名稱，例如 `bq_dataset`。資料集必須位於 BigQuery [區域](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw#locations)，且該區域會對應至來源具體化檢視區的區域。
    * `REPLICA_NAME`：要建立的具體化檢視副本名稱，例如 `my_mv_replica`。
-   * `REPLICATION_INTERVAL`：指定將來源 materialized view 資料複製到備用資源的頻率 (以秒為單位)。值必須介於 60 至 3,600 之間，預設值為 300 (5 分鐘)。
+   * `REPLICATION_INTERVAL`：指定將來源具體化檢視資料複製到副本的頻率 (以秒為單位)。值必須介於 60 至 3,600 之間，預設值為 300 (5 分鐘)。
    * `S3_DATASET`：包含來源具體化檢視的資料集名稱，例如 `s3_dataset`。
    * `MATERIALIZED_VIEW_NAME`：要複製的 materialized view 名稱，例如 `my_mv`。
 
@@ -418,7 +418,7 @@ WHERE
 
 您可以使用 Google Cloud 控制台，檢查 materialized view 副本和所依據資源的資料更新間隔：
 
-* 如要查看具體化檢視表副本的新鮮度，請查看具體化檢視表副本「詳細資料」窗格中的「上次修改時間」欄位。
+* 如要瞭解具體化檢視表副本的新鮮度，請查看具體化檢視表副本「詳細資料」窗格中的「上次修改時間」欄位。
 * 如要查看具體化檢視區塊的來源時效，請查看具體化檢視區塊「詳細資料」窗格中的「上次修改時間」欄位。
 * 如要查看來源 Amazon S3、Iceberg 或 Data Cloud 資料表的中繼資料快取更新間隔，請查看具體化檢視表「詳細資料」窗格中的「最大陳舊度」欄位。
 
@@ -436,7 +436,7 @@ WHERE
 
 ### materialized view 副本的限制
 
-* 如果 materialized view 是以使用[資料列層級安全防護機制](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro?hl=zh-tw)或[資料欄層級安全防護機制](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro?hl=zh-tw)的資料表為基礎，就無法建立 materialized view 副本。
+* 如果 materialized view 是以採用[資料列層級安全防護機制](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro?hl=zh-tw)或[資料欄層級安全防護機制](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro?hl=zh-tw)的資料表為基礎，就無法建立 materialized view 副本。
 * 您無法將[客戶自行管理的加密金鑰 (CMEK)](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw) 用於來源具體化檢視或具體化檢視副本。
 * 您只能為以使用[中繼資料快取](https://docs.cloud.google.com/bigquery/docs/metadata-caching?hl=zh-tw)的任何資料表為依據的具體化檢視表，建立具體化檢視表副本。
 * 您只能為特定來源具體化檢視建立一個副本。
@@ -444,7 +444,7 @@ WHERE
 
 ### 具體化檢視表副本定價
 
-使用具體化檢視表副本會產生運算、傳出資料移轉和儲存空間費用。
+使用具體化檢視副本會產生運算、傳出資料移轉和儲存空間費用。
 
 ## 後續步驟
 
@@ -461,11 +461,11 @@ WHERE
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-16 (世界標準時間)。
+上次更新時間：2026-05-19 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-16 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-19 (世界標準時間)。"],[],[]]

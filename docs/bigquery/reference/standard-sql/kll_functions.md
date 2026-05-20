@@ -524,7 +524,5 @@ Then it merges these two sketches and returns the value of the ninth decile or
 90th percentile of the merged sketch.
 
 ```
-SELECT KLL_QUANTILES.MERGE_POINT_INT64(kll_sketch, .9) AS quantile
-FROM (SELECT KLL_QUANTILES.INIT_INT64(x, 1000) AS kll_sketch
-      FROM</
+SELECT KLL_QUANTILES.MERGE_POINT_INT64(kll_sketch, .9) AS qu
 ```

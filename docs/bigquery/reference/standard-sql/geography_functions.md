@@ -351,19 +351,4 @@ remains within 10 meters of the original edge.
 See [`ST_GEOGFROMGEOJSON`](#st_geogfromgeojson) to construct a
 `GEOGRAPHY` from GeoJSON.
 
-**Return type**
-
-`STRING`
-
-## `ST_ASTEXT`
-
-```
-ST_ASTEXT(geography_expression)
-```
-
-**Description**
-
-Returns the [WKT](https://en.wikipedia.org/wiki/Well-known_text) representation of an input
-`GEOGRAPHY`.
-
-See
+**R**

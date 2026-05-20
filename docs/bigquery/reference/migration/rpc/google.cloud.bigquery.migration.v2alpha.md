@@ -242,4 +242,3 @@ Provides details for errors, e.g. issues that where encountered when processing 
 | Fields | |
 | --- | --- |
 | `location` | `ErrorLocation`  Optional. The exact location within the resource (if applicable). |
-| `error_info` | `ErrorInfo`  Required. Describes the cause of the error with structured detail. |

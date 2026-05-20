@@ -988,14 +988,5 @@ CREATE OR REPLACE MODEL `mydataset.arima_model`
                   DATE('2020-10-31'),
                   DATE('2021-10-31'),
                   DATE('2022-10-31'),
-                  DATE('2023-10-31')])
-                AS primary_date
-          )
-      )
+                  DATE('2023-10-31')]
 ```
-
-## Holiday data
-
-When you perform holiday modeling by specifying the `HOLIDAY_REGION` option,
-the model uses holiday data from the region or regions you specify. For example,
-the following table describes the holiday data used in the

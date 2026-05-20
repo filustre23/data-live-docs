@@ -1166,8 +1166,4 @@ requested_session.read_options.avro_serialization_options = options
 ```
 syntax = "proto2";
 package mypackage;
-// Source protos located in github.com/googleapis/googleapis
-import "google/cloud/bigquery/storage/v1/annotations.proto";
-
-message
 ```

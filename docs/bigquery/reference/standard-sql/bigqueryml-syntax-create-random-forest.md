@@ -972,16 +972,4 @@ The `MODEL_REGISTRY` option specifies the model registry destination.
 ### `VERTEX_AI_MODEL_ID`
 
 The `VERTEX_AI_MODEL_ID` option specifies a Vertex AI model ID
-to register the model with. The model ID is associated with your
-BigQuery ML model, and is visible from the
-Model Registry. If you don't specify a
-Vertex AI model ID, the BigQuery ML
-model name is used.
-
-The `VERTEX_AI_MODEL_ID` value can have up to 63 characters, and valid
-characters are `[a-z0-9_-]`. The first character cannot be a number or hyphen.
-If you don't specify a Vertex AI model ID, the
-BigQuery ML model name must meet these requirements.
-
-You can only set the `VERTEX_AI_MODEL_ID` option when the `MODEL_REGISTRY`
-option is set to `VERTEX_AI`.
+to register

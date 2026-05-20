@@ -453,11 +453,5 @@ SELECT
     'AES_CBC_PKCS',
     (SELECT raw_key_bytes FROM CustomerRawKeys AS crk
      WHERE crk.customer_id = ci.customer_id)
-  ) AS keyset
-FROM CustomerIds AS ci;
+  ) AS
 ```
-
-The output keysets each contain two things: the primary cryptographic key
-created using `KEYS.NEW_KEYSET('AEAD_AES_GCM_256')`, and the raw key added using
-`KEYS.ADD_KEY_FROM_RAW_BYTES`. If a keyset in the output is used with
-`AEAD.ENCRYPT`, Goog

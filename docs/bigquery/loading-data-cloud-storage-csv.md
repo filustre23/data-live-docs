@@ -848,6 +848,5 @@ public class LoadPartitionedTable {
       // Check for errors
       if (completedJob == null) {
         throw new Exception("Job not executed since it no longer exists.");
-      } else if (completedJob.getStatus().getError() != null) {
-        // You can also look at queryJo
+      } else if (completedJob.getStatus().getError()
 ```

@@ -909,21 +909,4 @@ and you don't specify an objective, then the default objective
 is used. For `DNN_LINEAR_COMBINED_CLASSIFIER` models, the default is `ROC_AUC`.
 For `DNN_LINEAR_COMBINED_REGRESSOR` models, the default is `R2_SCORE`.
 
-### `KMS_KEY_NAME`
-
-**Syntax**
-
-`KMS_KEY_NAME = string_value`
-
-**Description**
-
-The Cloud Key Management Service [customer-managed encryption key (CMEK)](/kms/docs/cmek) to
-use to encrypt the model.
-
-**Arguments**
-
-A `STRING` value containing the fully-qualified name of the CMEK. For example,
-
-```
-'projects/my_project/locations/my_location/
-```
+###

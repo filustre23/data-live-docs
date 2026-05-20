@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-05-19T14:46+00:00_
+_Generated 2026-05-20T01:47+00:00_
 
-**9 sources, 4918 topics total**
+**9 sources, 4926 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_1269 topics_
+_1274 topics_
 
 - `anthropic-sdk/agents-and-tools/agent-skills/best-practices`
 - `anthropic-sdk/agents-and-tools/agent-skills/enterprise`
@@ -364,22 +364,27 @@ _1269 topics_
 - `anthropic-sdk/api/compliance/activities/list`
 - `anthropic-sdk/api/compliance/apps`
 - `anthropic-sdk/api/compliance/apps/artifacts`
-- `anthropic-sdk/api/compliance/apps/artifacts/content`
+- `anthropic-sdk/api/compliance/apps/artifacts/download`
+- `anthropic-sdk/api/compliance/apps/artifacts/retrieve`
 - `anthropic-sdk/api/compliance/apps/chats`
 - `anthropic-sdk/api/compliance/apps/chats/delete`
 - `anthropic-sdk/api/compliance/apps/chats/files`
-- `anthropic-sdk/api/compliance/apps/chats/files/content`
 - `anthropic-sdk/api/compliance/apps/chats/files/delete`
+- `anthropic-sdk/api/compliance/apps/chats/files/download`
 - `anthropic-sdk/api/compliance/apps/chats/files/retrieve`
 - `anthropic-sdk/api/compliance/apps/chats/generated_files`
-- `anthropic-sdk/api/compliance/apps/chats/generated_files/content`
+- `anthropic-sdk/api/compliance/apps/chats/generated_files/download`
+- `anthropic-sdk/api/compliance/apps/chats/generated_files/retrieve`
 - `anthropic-sdk/api/compliance/apps/chats/list`
 - `anthropic-sdk/api/compliance/apps/chats/messages`
+- `anthropic-sdk/api/compliance/apps/chats/messages/list`
 - `anthropic-sdk/api/compliance/apps/projects`
 - `anthropic-sdk/api/compliance/apps/projects/attachments`
+- `anthropic-sdk/api/compliance/apps/projects/attachments/list`
 - `anthropic-sdk/api/compliance/apps/projects/delete`
 - `anthropic-sdk/api/compliance/apps/projects/documents`
 - `anthropic-sdk/api/compliance/apps/projects/documents/delete`
+- `anthropic-sdk/api/compliance/apps/projects/documents/metadata`
 - `anthropic-sdk/api/compliance/apps/projects/documents/retrieve`
 - `anthropic-sdk/api/compliance/apps/projects/list`
 - `anthropic-sdk/api/compliance/apps/projects/retrieve`
@@ -2831,7 +2836,7 @@ _1532 topics_
 
 Upstream: <https://code.claude.com/docs/en/>
 
-_132 topics_
+_134 topics_
 
 - `claude-code/admin-setup`
 - `claude-code/agent-sdk/agent-loop`
@@ -2932,6 +2937,7 @@ _132 topics_
 - `claude-code/plugin-marketplaces`
 - `claude-code/plugins`
 - `claude-code/plugins-reference`
+- `claude-code/prompt-caching`
 - `claude-code/quickstart`
 - `claude-code/remote-control`
 - `claude-code/routines`
@@ -2963,6 +2969,7 @@ _132 topics_
 - `claude-code/whats-new/2026-w17`
 - `claude-code/whats-new/2026-w18`
 - `claude-code/whats-new/2026-w19`
+- `claude-code/whats-new/2026-w20`
 - `claude-code/worktrees`
 - `claude-code/zero-data-retention`
 
@@ -2970,7 +2977,7 @@ _132 topics_
 
 Upstream: <https://docs.getdbt.com/docs/>
 
-_1007 topics_
+_1008 topics_
 
 - `dbt-core/best-practices/best-practice-workflows`
 - `dbt-core/best-practices/clone-incremental-models`
@@ -3917,6 +3924,7 @@ _1007 topics_
 - `dbt-core/reference/resource-properties/loader`
 - `dbt-core/reference/resource-properties/model_name`
 - `dbt-core/reference/resource-properties/name`
+- `dbt-core/reference/resource-properties/overloads`
 - `dbt-core/reference/resource-properties/overrides`
 - `dbt-core/reference/resource-properties/quoting`
 - `dbt-core/reference/resource-properties/returns`

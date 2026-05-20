@@ -55,11 +55,11 @@ a set of knowledge sources, such as tables, views, or user-defined functions
 
 ### Required roles
 
-To work with data agents, you must have Identity and Access Management permissions that match
+To work with data agents, you must have Identity and Access Management (IAM) permissions that match
 your use case. The following sections list required roles based on whether you
 are creating and publishing agents, provisioning agents in
 Gemini Enterprise, or discovering and using agents. For more
-information, see [Conversational Analytics API Identity and Access Management
+information, see [Conversational Analytics API IAM
 roles](/gemini/docs/conversational-analytics-api/access-control).
 
 * **Create, edit, publish, share, and delete agents:**
@@ -659,6 +659,75 @@ You can also copy a direct link to the agent, which opens [Data Studio directly 
 * From the agent details view: Select content\_copy **Copy agent link**, and then select **Data Studio**.
 * From the **Share** overflow menu: Select **Copy link to agent in Data Studio**.
 
+To allow users to interact with a BigQuery data agent on the
+**Chat with your data** page in Data Studio, you must
+ensure that the correct BigQuery agent sharing settings are
+configured and that specific Google Cloud project permissions are granted
+and APIs are enabled for end-users.
+
+##### Share the agent in BigQuery
+
+Follow the steps to [share the data agent](#share-a-data-agent). Grant
+end-users at least the [Gemini Data Analytics Data Agent User
+(`roles/geminidataanalytics.dataAgentUser`)](/gemini/docs/conversational-analytics-api/access-control#predefined-roles)
+role on the agent resource. This role lets them chat with the agent.
+
+##### Ensure prerequisites for Data Studio users
+
+End-users accessing the agent through Data Studio need the
+following configured in the Google Cloud project:
+
+**Required APIs enabled**
+
+* [BigQuery API](https://console.cloud.google.com/apis/library/bigquery.googleapis.com)
+* [Cloud AI Companion API](https://console.cloud.google.com/apis/library/cloudaicompanion.googleapis.com)
+* [Gemini Data Analytics API](https://console.cloud.google.com/apis/library/geminidataanalytics.googleapis.com)
+
+**Required IAM roles for end-users**
+
+Grant these roles at the project level:
+
+* [BigQuery Data Viewer (`roles/bigquery.dataViewer`)](/bigquery/docs/access-control#bigquery.dataViewer):
+  To view the underlying BigQuery datasets and tables.
+* [BigQuery Job User (`roles/bigquery.jobUser`)](/bigquery/docs/access-control#bigquery.jobUser):
+  To run queries against BigQuery data.
+* [Gemini for Google Cloud User (`roles/cloudaicompanion.user`)](/vertex-ai/docs/cloudaicompanion/access-control#cloudaicompanion.user)
+  or [BigQuery Studio User (`roles/bigquery.studioUser`)](/bigquery/docs/access-control#bigquery.studioUser):
+  Required for interacting with the Gemini-powered chat interface
+  in Data Studio. These roles provide the
+  `cloudaicompanion.topics.create` permission.
+
+**Data Studio Pro**
+
+Accessing BigQuery data agents in Data Studio's
+**Chat with your data** page typically requires a Data Studio
+Pro subscription, with Gemini features enabled for the project.
+
+##### Troubleshoot common issues
+
+The following are common issues when sharing data agents with
+Data Studio users:
+
+* **Error: User does not have permission `cloudaicompanion.topics.create`**
+
+  **Cause**: The user is missing the necessary IAM
+  permissions to initiate chat sessions with the
+  Cloud AI Companion API, or the API is not enabled.
+
+  **Solution**: Ensure that the `cloudaicompanion.googleapis.com` API is
+  enabled in the project, and grant the user either the
+  `roles/cloudaicompanion.user` or `roles/bigquery.studioUser`
+  IAM role.
+* **Agent not visible on "Manage Agent" page in Data Studio**
+
+  **Cause**: Users with only the *Gemini Data Analytics Data Agent User* role
+  on the agent (and not edit or owner permissions) might not see the
+  agent listed in the default "Manage Agent" view in
+  Data Studio.
+
+  **Workaround**: [Copy a direct link to the agent](#share-agent-data-studio)
+  and share it with users.
+
 ### Delete a data agent
 
 1. Go to the BigQuery **Agents** page.
@@ -807,11 +876,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-05-15 UTC.
+Last updated 2026-05-18 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-15 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-18 UTC."],[],[]]

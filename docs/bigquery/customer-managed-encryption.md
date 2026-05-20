@@ -181,9 +181,9 @@ projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY
 
 ### 控制台
 
-1. 在 Google Cloud 控制台中開啟 BigQuery 頁面。
+1. 在 Google Cloud 控制台開啟「BigQuery」**BigQuery**頁面。
 
-   [前往 BigQuery 頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
+   [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
@@ -320,9 +320,10 @@ resource "google_project_iam_member" "service_account_access" {
 ## 準備 Cloud Shell
 
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
-2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
+2. 設定要套用 Terraform 設定的預設 Google Cloud 專案
+   。
 
-   您只需要為每項專案執行一次這個指令，且可以在任何目錄中執行。
+   每項專案只需要執行一次這個指令，而且可以在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
@@ -521,9 +522,9 @@ print(f"Key: {table.encryption_configuration.kms_key_name}.")
 
 ### 控制台
 
-1. 在 Google Cloud 控制台中開啟 BigQuery 頁面。
+1. 在 Google Cloud 控制台開啟「BigQuery」**BigQuery**頁面。
 
-   [前往 BigQuery 頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
+   [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 按一下 [Compose new query] (撰寫新查詢)。
 3. 在查詢文字區域中輸入有效的 GoogleSQL 查詢。
 4. 依序點按「更多」、「查詢設定」和「進階選項」。
@@ -721,9 +722,9 @@ if table.encryption_configuration.kms_key_name == kms_key_name:
 
 指定載入資料表時要使用的金鑰，以透過客戶代管的加密金鑰來保護載入工作目的地資料表。
 
-1. 在 Google Cloud 控制台中開啟 BigQuery 頁面。
+1. 在 Google Cloud 控制台開啟「BigQuery」**BigQuery**頁面。
 
-   [前往 BigQuery 頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
+   [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
 3. 在「Explorer」窗格中展開專案，按一下「Datasets」，然後按一下資料集。資料集會在分頁中開啟。
 4. 在詳細資料窗格中，按一下「建立資料表」。
@@ -1034,5 +1035,4 @@ public class CopyTableCMEK {
     String sourceTableId = "MY_SOURCE_TABLE_NAME";
     String kmsKeyName = "MY_KMS_KEY_NAME";
     EncryptionConfiguration encryption =
-        EncryptionConfiguration.newBuilder().setKmsKeyName
 ```

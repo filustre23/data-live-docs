@@ -475,9 +475,5 @@ SELECT
   GROUPING(is_male) as rollup_gender,
   COUNT(1) as count
 FROM
-  [bigquery-public-data:samples.natality]
-WHERE
-  year >= 2000
-  AND year <= 2002
-GROUP
+  [bigquery-public-data:samples.natality
 ```

@@ -1085,7 +1085,5 @@ public class RelaxTableQuery {
       // once, and can be reused for multiple requests.
       BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
 
-      TableId tableId = TableId.of(datasetName, tableName);
-
-      String sourceTable
+      TableId tableId = TableId.of(datasetName
 ```

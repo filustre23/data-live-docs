@@ -296,11 +296,3 @@ Username and Password authentication.
 | --- | --- |
 | `username` | `string`  Required. Username. |
 | `password` | `object (Secret)`  Required. Password. |
-
-## Secret
-
-Secret value parameter.
-
-| JSON representation |
-| --- |
-| ``` {   "secretType": ``` |

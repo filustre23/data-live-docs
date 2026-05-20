@@ -16,7 +16,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 在 BigQuery 中使用 Salesforce Data Cloud 資料
 
-本文說明如何使用 BigQuery Omni，在 BigQuery 中存取及分析 Salesforce Data Cloud 資料。本文說明如何連結 BigQuery 中的 Data Cloud 資料集，以便執行查詢、將資料與 Google Cloud中的資料表聯結，以及使用跨雲端具體化檢視表複製資料。
+本文說明如何使用 BigQuery Omni，在 BigQuery 中存取及分析 Salesforce Data Cloud 資料。本文說明如何連結 BigQuery 中的 Data Cloud 資料集，以便執行查詢、將資料與 Google Cloud中的資料表聯結，以及使用 BigQuery Omni 具體化檢視表複製資料。
 
 本文適用於想要使用 BigQuery 深入分析 Data Cloud 資料，或將資料與 Google Cloud 中的資料合併，以進行跨雲端分析的 Data Cloud 使用者，而且不必建構及維護「擷取、轉換及載入」(ETL) 管道。
 
@@ -33,7 +33,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 從 Data Cloud 共用資料
 
-本文件說明如何將 Data Cloud 中的資料共用至 BigQuery - [自備授權資料共用 - 無須 ETL 即可與 BigQuery 整合](https://help.salesforce.com/s/articleView?id=sf.c360_a_access_data_from_google_bigquery.htm&type=5)。
+本文件說明如何將 Data Cloud 的資料共用至 BigQuery - [自備授權資料共用 - 無須 ETL 即可與 BigQuery 整合](https://help.salesforce.com/s/articleView?id=sf.c360_a_access_data_from_google_bigquery.htm&type=5)。
 
 ## 將 Data Cloud 資料集連結至 BigQuery
 
@@ -57,14 +57,14 @@ Google uses AI technology to translate content into your preferred language. AI 
 4. 按一下「將資料集新增至專案」。
 5. 指定連結的資料集名稱。
 
-建立連結的資料集後，即可探索資料集和其中的資料表。系統會動態從 Data Cloud 擷取所有資料表的中繼資料。資料集內的所有物件都是對應至 Data Cloud 物件的檢視區塊。BigQuery 支援三種 Data Cloud 物件：
+建立連結的資料集後，即可探索資料集和其中的資料表。所有資料表的中繼資料都會從 Data Cloud 動態擷取。資料集內的所有物件都是對應至 Data Cloud 物件的檢視區塊。BigQuery 支援三種 Data Cloud 物件：
 
 * 資料湖泊物件 (DLO)
 * 資料模型物件 (DMO)
 * 計算洞察物件 (CIO)
 
 所有這些物件都會以 BigQuery 中的檢視表表示。
-這些檢視區塊指向儲存在 Amazon S3 中的隱藏資料表。
+這些檢視畫面會指向儲存在 Amazon S3 中的隱藏資料表。
 
 **注意：** 如果您使用 VPC Service Controls，且 Analytics Hub API 受到限制，則需要在 VPC Service Controls perimeter 中建立[輸出規則](https://docs.cloud.google.com/bigquery/docs/analytics-hub-vpc-sc-rules?hl=zh-tw)，納入 Data Cloud Sharing 生產者專案。
 
@@ -98,9 +98,10 @@ SELECT name__c, age__c
   LIMIT 1000;
 ```
 
-### 執行跨雲端查詢
+### 執行 BigQuery Omni 查詢
 
-透過跨雲端查詢，您可以彙整 BigQuery Omni 區域中的任何資料表，以及 BigQuery 區域中的資料表。如要進一步瞭解跨雲端查詢，請參閱這篇[網誌文章](https://cloud.google.com/blog/products/data-analytics/announcing-bigquery-omni-cross-cloud-joins?hl=zh-tw)。在本例中，我們擷取名為 `john` 的顧客的總銷售額。
+您可以使用 BigQuery Omni 查詢，聯結 BigQuery Omni 區域中的任何資料表，以及 BigQuery 區域中的資料表。如要進一步瞭解 BigQuery Omni 查詢，請參閱這篇[網誌文章](https://cloud.google.com/blog/products/data-analytics/announcing-bigquery-omni-cross-cloud-joins?hl=zh-tw)。
+在本例中，我們擷取名為 `john` 的顧客的總銷售額。
 
 ```
 -- Get combined sales for a customer from both offline and online sales
@@ -113,7 +114,7 @@ USING (
 ) a SELECT SUM(total_price);
 ```
 
-### 透過 CTAS 進行跨雲端資料移轉
+### 透過 CTAS 進行 BigQuery Omni 資料移轉
 
 您可以使用「Create Table As Select (CTAS)」將資料從 BigQuery Omni 區域的 Data Cloud 資料表移至 `US` 區域。
 
@@ -124,14 +125,13 @@ CREATE OR REPLACE TABLE us_data.online_orders_march
     WHERE EXTRACT(MONTH FROM order_time) = 3
 ```
 
-目的地資料表是 `US`
-區域中的 BigQuery 代管資料表。這個資料表可以與其他資料表彙整。這項作業會產生 AWS 輸出費用，費用金額取決於傳輸的資料量。
+目的地資料表是 `US` 地區的 BigQuery 代管資料表。這個資料表可以與其他資料表彙整。這項作業會產生 AWS 輸出費用，費用金額取決於傳輸的資料量。
 
 資料轉移後，在 `online_orders_march` 資料表中執行的任何查詢都不會產生輸出費用。
 
-### 跨雲端具體化檢視表
+### BigQuery Omni 具體化檢視表
 
-跨雲端具體化檢視區塊 ([CCMV](https://cloud.google.com/blog/products/data-analytics/introducing-bigquery-omni-cross-cloud-materialized-views?hl=zh-tw)) 可將資料從 BigQuery Omni 區域，以遞增方式移轉至非 BigQuery Omni 的 BigQuery 區域。設定新的 CCMV，從線上交易移轉總銷售額摘要，並將該資料複製到 `US` 區域。
+BigQuery Omni 具體化檢視區塊 ([CCMV](https://cloud.google.com/blog/products/data-analytics/introducing-bigquery-omni-cross-cloud-materialized-views?hl=zh-tw)) 可將資料從 BigQuery Omni 區域，以遞增方式移轉至非 BigQuery Omni 的 BigQuery 區域。設定新的 CCMV，從線上交易轉移總銷售額摘要，並將該資料複製到 `US` 區域。
 
 您可以從廣告資料中心存取 CCMV，並與其他廣告資料中心資料合併。在大多數情況下，CCMV 的運作方式與一般 BigQuery 代管資料表相同。
 
@@ -170,7 +170,7 @@ CREATE MATERIALIZED VIEW `us_data.total_sales_replica`
   AS REPLICA OF `aws_data.total_sales`;
 ```
 
-#### 在副本具體化檢視表中執行查詢
+#### 對副本 materialized view 執行查詢
 
 以下範例會在備用資源 materialized view 上執行查詢：
 
@@ -187,14 +187,14 @@ SELECT EXTRACT(MONTH FROM CURRENT_DATE()) as month, SUM(sales)
 
 Data Cloud 資料集支援 BigQuery `INFORMATION_SCHEMA` 檢視區塊。`INFORMATION_SCHEMA` 檢視畫面中的資料會定期從 Data Cloud 同步處理，因此可能過時。[`TABLES`](https://docs.cloud.google.com/bigquery/docs/information-schema-tables?hl=zh-tw) 和 [`SCHEMATA`](https://docs.cloud.google.com/bigquery/docs/information-schema-datasets-schemata?hl=zh-tw) 檢視畫面中的「`SYNC_STATUS`」欄會顯示上次完成同步處理的時間、導致 BigQuery 無法提供最新資料的錯誤，以及修正錯誤所需的步驟。
 
-`INFORMATION_SCHEMA` 查詢不會反映在初始同步前建立的資料集。
+`INFORMATION_SCHEMA` 查詢不會反映初始同步前最近建立的資料集。
 
 Data Cloud 資料集與其他連結資料集一樣，受到[限制](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction?hl=zh-tw#limitations)，例如只能在資料集範圍查詢中以 `INFORMATION_SCHEMA` 存取。
 
 ## 後續步驟
 
 * 瞭解 [BigQuery Omni](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw)。
-* 瞭解[跨雲端聯結](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw#cross-cloud_joins)。
+* 瞭解 [BigQuery Omni 聯結](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw#cross-cloud_joins)。
 * 瞭解[具體化檢視](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro?hl=zh-tw)。
 
 
@@ -204,11 +204,11 @@ Data Cloud 資料集與其他連結資料集一樣，受到[限制](https://docs
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-16 (世界標準時間)。
+上次更新時間：2026-05-19 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-16 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-19 (世界標準時間)。"],[],[]]

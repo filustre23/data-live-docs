@@ -301,9 +301,4 @@ public class QuickstartSample {
           .forEach(res -> System.out.println("Reservation resource name: " + res.getName()));
 
       // list capacity commitments in the project
-      client
-          .listCapacityCommitments(parent)
-          .iterateAll()
-          .forEach(
-              commitment
 ```

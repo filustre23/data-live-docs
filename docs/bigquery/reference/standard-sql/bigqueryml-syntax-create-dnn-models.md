@@ -930,19 +930,4 @@ how Model Registry aliases work, see
 [How to use model version aliases](/vertex-ai/docs/model-registry/model-alias).
 
 You can only set the `VERTEX_AI_MODEL_VERSION_ALIASES` option when the
-`MODEL_REGISTRY` option is set to `VERTEX_AI`.
-
-### `KMS_KEY_NAME`
-
-**Syntax**
-
-`KMS_KEY_NAME = string_value`
-
-**Description**
-
-The Cloud Key Management Service [customer-managed encryption key (CMEK)](/kms/docs/cmek) to
-use to encrypt the model.
-
-**Arguments**
-
-A `STRING` value containing the fully-qualified name of the CMEK. For example,
+`MODEL_REGISTRY` option is set to `VERTEX_`

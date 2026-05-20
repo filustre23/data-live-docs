@@ -46,7 +46,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 | `dml_statistics` | `RECORD` | 如果工作是含有 DML 陳述式的查詢，則值為含有下列欄位的記錄：   * `inserted_row_count`：插入的資料列數。 * `deleted_row_count`：已刪除的資料列數。 * `updated_row_count`：更新的資料列數。  如果是其他工作，值為 `NULL`。  這個資料欄會顯示在「`INFORMATION_SCHEMA.JOBS_BY_USER`」和「`INFORMATION_SCHEMA.JOBS_BY_PROJECT`」檢視畫面中。 |
 | `end_time` | `TIMESTAMP` | 這項工作的結束時間，自訓練週期後的毫秒數。這個欄位代表工作進入 `DONE` 狀態的時間。 |
 | `error_result` | `RECORD` | 以 [ErrorProto](https://cloud.google.com/bigquery/docs/reference/rest/v2/ErrorProto?hl=zh-tw) 物件形式呈現的任何錯誤詳細資料。 |
-| `job_creation_reason.code` | `STRING` | 指定建立作業的高層次原因。  可能的值包括：  * `REQUESTED`：要求建立工作。 * `LONG_RUNNING`：查詢要求超出系統定義的逾時時間，該時間由 `QueryRequest` 中的 [timeoutMs 欄位指定。因此，系統會將其視為長時間執行的作業，並建立工作。](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query?hl=zh-tw#queryrequest) * `LARGE_RESULTS`：查詢結果無法納入內嵌回應。 * `OTHER`：系統判斷查詢需要以工作形式執行。 |
+| `job_creation_reason.code` | `STRING` | 指定建立作業的高層次原因。  可能的值包括：  * `REQUESTED`：要求建立工作。 * `LONG_RUNNING`：查詢要求超出系統定義的逾時時間，該時間由 `QueryRequest` 中的 [timeoutMs 欄位指定。因此，系統會將其視為長時間執行的作業，並為此建立工作。](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query?hl=zh-tw#queryrequest) * `LARGE_RESULTS`：查詢結果無法納入內嵌回應。 * `OTHER`：系統判斷查詢需要以工作形式執行。 |
 | `job_id` | `STRING` | 如果已建立工作，則為工作 ID。否則，請使用「選擇性建立工作」模式查詢的查詢 ID。例如 `bquxjob_1234`。 |
 | `job_stages` | `RECORD` | 這項工作的[查詢階段](https://cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#ExplainQueryStage)。 **注意**：如果查詢是從設有資料列層級存取政策的資料表讀取資料，這個資料欄的值會是空白。詳情請參閱 [BigQuery 資料列層級安全防護最佳做法](https://docs.cloud.google.com/bigquery/docs/best-practices-row-level-security?hl=zh-tw)。 |
 | `job_type` | `STRING` | 工作類型。可以是 `QUERY`、`LOAD`、`EXTRACT`、`COPY` 或 `NULL`。`NULL` 值表示背景工作。 |
@@ -68,19 +68,19 @@ Google uses AI technology to translate content into your preferred language. AI 
 | `total_bytes_processed` | `INTEGER` | 工作處理的位元組總數。  **注意**：如果查詢是從設有資料列層級存取政策的資料表讀取資料，這個資料欄的值會是空白。詳情請參閱 [BigQuery 資料列層級安全防護最佳做法](https://docs.cloud.google.com/bigquery/docs/best-practices-row-level-security?hl=zh-tw)。 |
 | `total_modified_partitions` | `INTEGER` | 工作修改的分區總數。這個欄位會填入 `LOAD` 和 `QUERY` 工作。 |
 | `total_slot_ms` | `INTEGER` | 工作在 `RUNNING` 狀態的整個期間內，包括重試，所用的運算單元毫秒數。 |
-| `total_services_sku_slot_ms` | `INTEGER` | 在外部服務上執行的工作，以及以服務 SKU 計費的工作，其總計的時段毫秒數。這個欄位只會填入有外部服務費用的工作，且是帳單方式為 `"SERVICES_SKU"` 的費用用量總計。 |
+| `total_services_sku_slot_ms` | `INTEGER` | 在外部服務上執行的工作，以及以服務 SKU 計費的工作，其總計的毫秒數。這個欄位只會填入有外部服務費用的工作，且是帳單方式為 `"SERVICES_SKU"` 的費用用量總計。 |
 | `transaction_id` | `STRING` | 這項工作執行的[交易](https://cloud.google.com/bigquery/docs/transactions?hl=zh-tw) ID (如有)。 |
 | `user_email` | `STRING` | (*分群資料欄*) 執行作業的使用者電子郵件地址或服務帳戶。 |
 | `principal_subject` | `STRING` | 執行作業的主體身分字串表示法。 |
-| `query_info.resource_warning` | `STRING` | 如果查詢處理期間的資源用量超過系統的內部門檻，就會顯示警告訊息。 如果查詢工作成功，`resource_warning` 欄位就會填入資料。使用 `resource_warning`，您可取得額外的資料點，藉此最佳化查詢，並使用 `query_hashes` 設定同等查詢集的成效趨勢監控。 |
+| `query_info.resource_warning` | `STRING` | 如果查詢處理期間的資源用量超過系統的內部門檻，就會顯示警告訊息。 如果查詢工作成功，`resource_warning` 欄位就會填入資料。使用 `resource_warning`，您可取得額外資料點，藉此最佳化查詢，並使用 `query_hashes` 設定同等查詢集的效能趨勢監控。 |
 | `query_info.query_hashes.normalized_literals` | `STRING` | 包含查詢的雜湊值。`normalized_literals` 是十六進位 `STRING` 雜湊，會忽略註解、參數值、UDF 和常值。如果基礎檢視區塊變更，或查詢隱含參照資料欄 (例如 `SELECT *`)，且資料表結構定義變更，雜湊值就會不同。  這個欄位會顯示成功的 [GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw) 查詢，但不會顯示快取命中。 |
-| `query_info.performance_insights` | `RECORD` | 工作的[效能洞察資料](https://cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#PerformanceInsights)。 |
+| `query_info.performance_insights` | `RECORD` | 工作的[效能深入分析](https://cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#PerformanceInsights)。 |
 | `query_info.optimization_details` | `STRUCT` | 這項工作[以記錄為依據進行最佳化](https://docs.cloud.google.com/bigquery/docs/history-based-optimizations?hl=zh-tw)。只有 `JOBS_BY_PROJECT` 檢視畫面會顯示這個資料欄。 |
-| `transferred_bytes` | `INTEGER` | 跨雲端查詢 (例如 BigQuery Omni 跨雲端移轉工作) 的總移轉位元組數。 |
+| `transferred_bytes` | `INTEGER` | BigQuery Omni 查詢 (例如 BigQuery Omni 移轉工作) 的總移轉位元組數。 |
 | `materialized_view_statistics` | `RECORD` | 查詢作業中考量的[具體化檢視表統計資料](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#MaterializedViewStatistics)。([預覽](https://cloud.google.com/products?hl=zh-tw#product-launch-stages)) |
 | `metadata_cache_statistics` | `RECORD` | 查詢工作所參照[資料表的中繼資料欄索引使用統計資料](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#metadatacachestatistics)。 |
 | `search_statistics` | `RECORD` | [搜尋查詢的統計資料。](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#SearchStatistics) |
-| `query_dialect` | `STRING` | 這個欄位將於 2025 年 5 月推出。 用於工作的查詢方言。有效值包括：   * `GOOGLE_SQL`：這項作業要求使用 GoogleSQL。 * `LEGACY_SQL`：要求工作使用舊版 SQL。 * `DEFAULT_LEGACY_SQL`：工作要求中未指定查詢方言。   BigQuery 使用 LegacySQL 的預設值。 * `DEFAULT_GOOGLE_SQL`：工作要求中未指定查詢方言。   BigQuery 使用 GoogleSQL 的預設值。   如果是使用者提交的工作，這個欄位只會填入查詢工作。 您可以透過[設定](https://docs.cloud.google.com/bigquery/docs/default-configuration?hl=zh-tw#configuration-settings)控制預設選取的查詢方言。  如果是背景作業，這個欄位的值不會受到預設查詢方言設定的控制，也不會影響使用者提交的作業。部分背景工作會省略這個值。 |
+| `query_dialect` | `STRING` | 這個欄位將於 2025 年 5 月推出。 用於工作的查詢方言。有效值包括：   * `GOOGLE_SQL`：這項作業要求使用 GoogleSQL。 * `LEGACY_SQL`：要求工作使用舊版 SQL。 * `DEFAULT_LEGACY_SQL`：工作要求中未指定查詢方言。   BigQuery 使用 LegacySQL 的預設值。 * `DEFAULT_GOOGLE_SQL`：工作要求中未指定查詢方言。   BigQuery 使用 GoogleSQL 的預設值。   如果是使用者提交的工作，這個欄位只會填入查詢工作。您可以透過[設定](https://docs.cloud.google.com/bigquery/docs/default-configuration?hl=zh-tw#configuration-settings)控制預設選取的查詢方言。  如果是背景作業，這個欄位的值不會受到預設查詢方言設定的控制，也不會影響使用者提交的作業。部分背景工作會省略這個值。 |
 | `continuous` | `BOOLEAN` | 工作是否為[持續查詢](https://cloud.google.com/bigquery/docs/continuous-queries-introduction?hl=zh-tw)。 |
 | `continuous_query_info.output_watermark` | `TIMESTAMP` | 代表持續查詢成功處理資料的點。 |
 | `vector_search_statistics` | `RECORD` | [向量搜尋查詢的統計資料。](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#VectorSearchStatistics) |
@@ -92,7 +92,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 多陳述式查詢工作
 
-多重陳述式查詢工作是指使用[程序語言](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language?hl=zh-tw)的查詢工作。多重陳述式查詢作業通常會使用 `DECLARE` 定義變數，或使用控制流程陳述式 (例如 `IF` 或 `WHILE`)。查詢 `INFORMATION_SCHEMA.JOBS` 時，您可能需要瞭解多重陳述式查詢工作和其他工作的差異。多重陳述式查詢作業具有下列特徵：
+多陳述式查詢工作是指使用[程序語言](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language?hl=zh-tw)的查詢工作。多重陳述式查詢作業通常會使用 `DECLARE` 定義變數，或使用控制流程陳述式 (例如 `IF` 或 `WHILE`)。查詢 `INFORMATION_SCHEMA.JOBS` 時，您可能需要瞭解多重陳述式查詢工作和其他工作的差異。多重陳述式查詢工作具有下列特徵：
 
 * `statement_type` = `SCRIPT`
 * `reservation_id` = `NULL`
@@ -126,7 +126,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 如果您對參照 `INFORMATION_SCHEMA.JOBS` 檢視區塊的查詢執行模擬測試，估算的處理位元組數可能會遠高於查詢執行期間實際處理的位元組數。
 
-發生高估情況的原因是，試算表計算時只會考量基礎資料的 `creation_time` 分區資料欄篩選器。如果 `WHERE` 子句中指定了隱含 `project_id` 篩選器或 `user_email` 篩選器，則系統不會將這些篩選器納入[叢集資料欄](#schema)的考量。實際掃描的資料量可能遠低於模擬測試估計值，尤其是工作較少的專案或使用者。
+發生高估情況的原因是，試算表計算時只會考量基礎資料的 `creation_time` 分區資料欄篩選器。如果 `WHERE` 子句中指定了隱含 `project_id` 篩選器或 `user_email` 篩選器，則系統不會將這些篩選器納入[叢集資料欄](#schema)的考量。實際掃描的資料量可能遠低於試算估計值，尤其是工作較少的專案或使用者。
 
 如果未在 `creation_time` 上指定篩選器，系統就不會進行分區修剪，而模擬測試預估值會反映基礎資料的所有分區掃描結果。不過，資料叢集仍可能減少實際處理的位元組數，低於這項估算值。
 
@@ -147,7 +147,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 **注意：** 為盡可能提高查詢效率，請盡量依 `creation_time` 欄位篩選。這樣 BigQuery 就能縮減分區，進而提升查詢效能並降低成本。
 
-### 比較以量計價的工作用量與帳單資料
+### 比較以量計價的作業用量與帳單資料
 
 如果專案採用[以量計價方案](https://cloud.google.com/bigquery/pricing?hl=zh-tw#on_demand_pricing)，您可以使用 `INFORMATION_SCHEMA.JOBS` 檢視畫面，查看特定期間的運算費用。
 
@@ -159,7 +159,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 * `START_DATE`：最早的匯總日期 (含)。
 * `END_DATE`：要匯總的最新日期 (含)。
-* `PRICE_PER_TIB`：用於帳單預估的[每 TiB 以量計價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#on_demand_pricing)。
+* `PRICE_PER_TIB`：用於帳單估算的[每 TiB 以量計價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#on_demand_pricing)。
 
 ```
 CREATE TEMP FUNCTION isBillable(error_result ANY TYPE)
@@ -228,7 +228,7 @@ ORDER BY billing_date;
 
 ### 計算平均運算單元用量
 
-以下範例會計算特定專案在過去 7 天內，所有查詢的平均運算單元用量。請注意，如果專案在一週內使用的時段一致，這項計算結果就會最準確。如果專案的運算單元用量不穩定，這個數字可能會低於預期。
+以下範例會計算特定專案在過去 7 天內，所有查詢的平均運算單元用量。請注意，如果專案整週的運算單元用量一致，這項計算結果就會最準確。如果專案的運算單元用量不穩定，這個數字可能會低於預期。
 
 執行查詢：
 
@@ -329,7 +329,5 @@ GROUP BY
 SELECT
     DATE(creation_time) as day,
     destination_table.project_id as project_id,
-    destination_table.dataset_id as dataset_id,
-    destination_table.table_id as table_id,
-    COUNT(<
+    destination_table.
 ```

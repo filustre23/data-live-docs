@@ -460,19 +460,4 @@ ORDER BY
 新版 Search Ads 360 中的實體 (例如客戶、廣告活動和廣告群組) 具有與舊版 Search Ads 360 不同的 [ID 空間](https://developers.google.com/search-ads/v2/how-tos/reporting/id-mapping?hl=zh-tw)。如果現有的 Search Ads 360 移轉使用者想將舊版 Search Ads 360 的資料與新版 Search Ads 360 API 的資料合併，只要在移轉設定中提供有效的代理商 ID 和廣告主 ID，即可使用 BigQuery 資料移轉服務移轉 ID 對應表。
 
 [支援的實體](https://developers.google.com/search-ads/v2/how-tos/reporting/id-mapping?hl=zh-tw)
-包含 `legacy_id` 和 `new_id` 兩欄，分別指定舊版和新版 Search Ads 360 中實體的 ID 對應。
-對於 AD、CAMPAIGN\_CRITERION 和 CRITERION 實體，系統也會提供 `new_secondary_id`，因為這些實體[在新版 Search Ads 360 中沒有全域專屬 ID](https://developers.google.com/search-ads/v2/how-tos/reporting/id-mapping?hl=zh-tw#object-id-uniqueness)。
-以下是 ID 對應表清單。
-
-* IdMapping\_AD
-* IdMapping\_AD\_GROUP
-* IdMapping\_CAMPAIGN
-* IdMapping\_CAMPAIGN\_CRITERION
-* IdMapping\_CAMPAIGN\_GROUP
-* IdMapping\_CAMPAIGN\_GROUP\_PERFORMANCE\_TARGET
-* IdMapping\_CRITERION
-* IdMapping\_CUSTOMER
-* IdMapping\_FEED\_ITEM
-* IdMapping\_FEED\_TABLE
-
-**注意：** 與對照表
+包含 `legacy_id` 和 `new_id` 兩欄，分別指定舊版和新版 Search Ads 360 中實體的

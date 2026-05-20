@@ -930,10 +930,4 @@ The following types of models are regression models:
 * `mean_squared_log_error`: a `FLOAT64` value that contains the mean squared
   logarithmic error for the model. The mean squared logarithmic error
   measures the distance between the actual and predicted values.
-* `median_absolute_error`: a `FLOAT64` value that contains the
-  [median absolute error](https://en.wikipedia.org/wiki/Mean_absolute_error)
-  for the model.
-* `r2_score`: a `FLOAT64` value that contains the [R2 score](https://en.wikipedia.org/wiki/Coefficient_of_determination#Interpretation) for the model.
-* `explained_variance`: a `FLOAT64` value that contains the
-  [explained variance](https://en.wikipedia.org/wiki/Explained_variation)
-  for the model.
+* `median_absolute_error`: a

@@ -31,30 +31,30 @@ Stripe 資料轉移作業有以下限制：
 
 * Stripe 資料移轉會根據 Stripe 的最小單位載入幣別。詳情請參閱「[API 金額中的最小單位](https://docs.stripe.com/currencies#minor-units)」。
 * Stripe 連接器只會轉移每個 Stripe 帳戶預先產生的報表。Stripe 連接器不會根據新的 Stripe 資料產生新報表。
-  + 如要移轉最新報表，請先在 Stripe 資訊主頁中手動產生報表，再開始移轉 Stripe 資料。
+  + 如要轉移最新報表，請先在 Stripe 資訊主頁中手動產生報表，再開始轉移 Stripe 資料。
   + 詳情請參閱「[Stripe 報表](https://docs.stripe.com/stripe-reports)」。
 * Stripe 連接器不支援以 Webhook 為基礎的事件、即時更新或 Stripe Sigma。
-* 從[預覽版 Stripe 區域](https://stripe.com/global)轉移 Stripe 資料時，可能會遇到資料移轉問題：
-  + 在 Stripe 預覽區域，篩選選項會受到限制或無法使用。
+* 從[預先發布的 Stripe 地區](https://stripe.com/global)移轉 Stripe 資料時，可能會遇到資料移轉問題：
+  + 在 Stripe 預先發布區域，篩選選項會受到限制或無法使用。
   + Stripe 預先發布區域不支援有條件的資料轉移和查詢。
-  + 從 Stripe 預覽地區移轉資料時，資料移轉作業可能需要較長的執行時間。
+  + 從 Stripe 預覽地區轉移資料時，資料轉移作業可能需要較長時間。
 * Stripe 連接器支援使用 `StartDate` 篩選器篩選部分物件。
   + `StartDate` 篩選器的必要格式為 `YYYY-MM-DD`。如未提供開始日期，連接器會預設為目前日期的三年前。如果提供的日期早於 2011 年 1 月 1 日，連接器會自動使用 2011 年 1 月 1 日。
   + 如需支援的物件清單，請參閱「[支援 `StartDate` 篩選器的物件](#objects_with_startdate_filter_support)」。
-* 單一移轉設定在特定時間只能支援一次資料移轉作業。如果排定在第一次資料移轉完成前執行第二次資料移轉，則系統只會完成第一次資料移轉，並略過任何與第一次移轉重疊的資料移轉。
+* 單一移轉設定在特定時間只能支援一次資料移轉作業。如果排定在第一次資料轉移完成前執行第二次資料轉移，則系統只會完成第一次資料轉移，並略過任何與第一次轉移重疊的資料轉移。
   + 為避免在單一轉移設定中略過轉移作業，建議您設定「重複頻率」，增加大型資料轉移作業之間的時間間隔。
 
 ## 事前準備
 
-下列各節說明建立 Stripe 資料移轉作業前必須採取的步驟。
+下列各節說明建立 Stripe 資料轉移作業前必須採取的步驟。
 
 ### Stripe 必備條件
 
-* 您必須擁有 Stripe 開發人員帳戶，才能授權 Stripe 資料移轉。如要註冊 Stripe 帳戶，請參閱「[Stripe 註冊](https://dashboard.stripe.com/register)」。
+* 您必須擁有 Stripe 開發人員帳戶，才能授權轉移 Stripe 資料。如要註冊 Stripe 帳戶，請參閱「[Stripe 註冊](https://dashboard.stripe.com/register)」。
 * 請按照下列步驟設定 Stripe 平台應用程式：
   1. 前往 Stripe 資訊主頁的「開發人員」部分。
   2. 在「連結」下方，設定平台以支援「標準」和「快速」帳戶。
-* 如要建立 Stripe 資料移轉，請提供下列資訊：
+* 如要建立 Stripe 資料轉移作業，請提供下列資訊：
   + 記下 Stripe 帳戶 ID。詳情請參閱「[建立帳戶](https://docs.stripe.com/get-started/account)」。
   + 請記下私密金鑰或受限金鑰。詳情請參閱「[API 金鑰](https://docs.stripe.com/keys)」一文。
 * 如要從連結帳戶轉移資料，請確認平台已設定 Stripe Connect，並具備必要的帳戶功能存取權。如要進一步瞭解 Stripe Connect，請參閱「[Platforms and marketplaces with Stripe Connect](https://docs.stripe.com/connect)」。
@@ -68,7 +68,7 @@ Stripe 資料轉移作業有以下限制：
 
 #### 所需權限
 
-如要建立移轉作業，必須具備下列權限：
+如要建立轉移作業，必須具備下列權限：
 
 * `bigquery.transfers.update`
   使用者
@@ -91,7 +91,7 @@ Stripe 連接器支援 Stripe 平台帳戶和 Stripe 已連結帳戶。詳情請
 
 ### 連結平台帳戶
 
-如要只從一個平台帳戶執行 Stripe 資料移轉作業，請在[設定轉移設定](#transfer-setup)時，按照下列步驟操作：
+如要只從一個平台帳戶執行 Stripe 資料轉移作業，請在[設定轉移設定](#transfer-setup)時，按照下列步驟操作：
 
 * 在「帳戶 ID」欄位中，輸入平台帳戶的平台帳戶 ID。
 * 在「Secret/API Key」(密鑰/API 金鑰) 欄位中，輸入平台帳戶的密鑰或受限金鑰。
@@ -110,7 +110,7 @@ Stripe 連接器支援 Stripe 平台帳戶和 Stripe 已連結帳戶。詳情請
 如要從已連結的帳戶執行 Stripe 資料移轉，請在[設定移轉設定](#transfer-setup)時，按照下列步驟操作：
 
 * 在「帳戶 ID」欄位中，輸入已連結帳戶的平台帳戶 ID。
-* 在「Secret/API Key」(密鑰/API 金鑰) 欄位中，輸入連結帳戶所連線平台帳戶的密鑰或受限金鑰。
+* 在「Secret/API Key」(密鑰/API 金鑰) 欄位中，輸入連結帳戶所連平台帳戶的密鑰或受限金鑰。
 * 在「SyncAllConnectedAccounts」部分，選取「False」。
 
 ## 設定 Stripe 資料移轉
@@ -197,7 +197,7 @@ bq mk
 
 儲存移轉設定後，Stripe 連接器會根據排程選項自動觸發移轉作業。每次執行移轉作業時，Stripe 連接器都會將 Stripe 中的所有可用資料移轉至 BigQuery。
 
-如要在正常排程以外手動執行資料移轉作業，可以啟動[回填作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)。
+如要在正常時間表以外手動執行資料轉移作業，可以啟動[回填作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)。
 
 ## 資料類型對應
 
@@ -264,7 +264,7 @@ bq mk
 
 * 如需 BigQuery 資料移轉服務的總覽，請參閱「[BigQuery 資料移轉服務簡介](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)」。
 * 如要瞭解如何使用移轉作業，包括取得移轉設定、列出移轉設定以及查看移轉設定的執行記錄，請參閱[使用移轉功能](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw)一文。
-* 瞭解如何[透過跨雲端作業載入資料](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer?hl=zh-tw)。
+* 瞭解如何[使用 BigQuery Omni 作業載入資料](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer?hl=zh-tw)。
 
 
 
@@ -273,11 +273,11 @@ bq mk
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-16 (世界標準時間)。
+上次更新時間：2026-05-19 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-16 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-19 (世界標準時間)。"],[],[]]

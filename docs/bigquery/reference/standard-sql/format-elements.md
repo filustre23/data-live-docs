@@ -534,13 +534,3 @@ contain a value specified by a format element.
 | Format element | Returns | Example |
 | --- | --- | --- |
 | MI | Minute, 2 digits. | Input: TIME '01:02:03'  Output: 02 |
-
-**Return type**
-
-`STRING`
-
-**Example**
-
-```
-SELECT CAST(TIME '21:30:00' AS STRING
-```

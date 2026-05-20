@@ -309,7 +309,4 @@ func createOrGetDataExchange(ctx context.Context, client *analyticshub.Client, p
 func createListing(ctx context.Context, client *analyticshub.Client, projectID, location, exchangeID, listingID, sourceDataset string) (*analyticshubpb.Listing, error) {
 	req := &analyticshubpb.CreateListingRequest{
 		Parent:    fmt.Sprintf("projects/%s/locations/%s/dataExchanges/%s", projectID, location, exchangeID),
-		ListingId: listingID,
-		Listing: &analyticshubpb.Listing{
-			DisplayName:
 ```

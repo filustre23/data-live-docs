@@ -259,5 +259,5 @@ public class CreateAdManagerTransfer {
               .setTransferConfig(transferConfig)
               .build();
       TransferConfig config = client.createTransferConfig(request);
-      System.out.println("Ad manager transfer created successfully :" + config.getName());
+      System.out.println("Ad manager transfer created successfully :" + config.
 ```

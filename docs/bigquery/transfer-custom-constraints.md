@@ -203,14 +203,13 @@ description: DESCRIPTION
 請替換下列項目：
 
 * `ORGANIZATION_ID`：您的機構 ID，例如 `123456789`。
-* `CONSTRAINT_NAME`：新自訂限制的名稱。自訂限制只能包含字母 (包括大寫和小寫) 或數字，例如 `custom.dtsEnableEmailNotification`。這個欄位最多可包含 70 個字元，不含前置字元 (`custom.`)，例如 `organizations/123456789/customConstraints/custom`。請勿在限制 ID 中輸入 PII 或機密資料，因為錯誤訊息可能會顯示上述資訊。
+* `CONSTRAINT_NAME`：新自訂限制的名稱。自訂限制只能包含字母 (包括大寫和小寫) 或數字，例如 `custom.dtsEnableEmailNotification`。這個欄位最多可包含 70 個字元，不含前置字元 (`custom.`)，例如 `organizations/123456789/customConstraints/custom`。請勿在限制 ID 中輸入 PII 或私密資料，因為錯誤訊息可能會顯示上述資訊。
 * `RESOURCE_NAME`：內含要限制的物件和欄位的 Google Cloud資源完整名稱，例如：`bigquerydatatransfer.googleapis.com/TransferConfig`。大多數資源類型最多支援 20 項自訂限制。如果您嘗試建立更多自訂限制，作業會失敗。
 * `methodTypes`：強制執行限制的 REST 方法。可以是 `CREATE`，也可以是 `CREATE` 和 `UPDATE`。如果您在違反限制的資源上使用 `UPDATE` 方法強制執行限制，除非變更可解決違規問題，否則組織政策會封鎖對該資源的變更。
 
 如要查看各項服務支援的方法，請在「[支援自訂限制的服務](https://docs.cloud.google.com/organization-policy/reference/custom-constraint-supported-services?hl=zh-tw)」中找出該服務。
 
-* `CONDITION`：針對支援服務資源表示法所撰寫的 [CEL 條件](https://docs.cloud.google.com/resource-manager/docs/organization-policy/creating-managing-custom-constraints?hl=zh-tw#common_expression_language)。這個欄位最多可輸入 1000 個字元。例如：
-  `resource.emailPreferences.enableFailureEmail == true`。
+* `CONDITION`：針對支援服務資源表示法所撰寫的 [CEL 條件](https://docs.cloud.google.com/resource-manager/docs/organization-policy/creating-managing-custom-constraints?hl=zh-tw#common_expression_language)。這個欄位最多可輸入 1000 個字元。例如：`resource.emailPreferences.enableFailureEmail == true`。
 
 如要進一步瞭解可編寫條件的資源，請參閱「[支援的資源](#supported_resources)」。
 
@@ -220,7 +219,7 @@ description: DESCRIPTION
 
 拒絕動作表示如果條件評估結果為 true，系統會封鎖建立或更新資源的作業。
 
-* `DISPLAY_NAME`：人類可讀的限制條件名稱。這個名稱會顯示在錯誤訊息中，可用於識別和偵錯。請勿在顯示名稱中使用 PII 或機密資料，因為錯誤訊息可能會顯示這類名稱。這個欄位最多可輸入 200 個半形字元。
+* `DISPLAY_NAME`：人類可讀的限制條件名稱。這個名稱會顯示在錯誤訊息中，可用於識別和偵錯。請勿在顯示名稱中使用 PII 或機密資料，因為錯誤訊息可能會顯示這類名稱。這個欄位最多可包含 200 個半形字元。
 * `DESCRIPTION`：違反政策時，會以錯誤訊息形式顯示且易於理解的限制說明。這個欄位最多可輸入 2000 個字元。
 
 2. 為新的自訂限制建立 YAML 檔案後，您必須加以設定，才能用於組織的組織政策。如要設定自訂限制條件，請使用 [`gcloud org-policies set-custom-constraint`](https://docs.cloud.google.com/sdk/gcloud/reference/org-policies/set-custom-constraint?hl=zh-tw) 指令：
@@ -411,11 +410,11 @@ Operation denied by custom org policy: ["customConstraints/custom.dtsEnableEmail
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-15 (世界標準時間)。
+上次更新時間：2026-05-19 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-15 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-19 (世界標準時間)。"],[],[]]

@@ -52,16 +52,16 @@ PayPal 資料轉移作業有以下限制：
   + 建議您排定後續資料轉移作業時，間隔時間拉長 (每小時最多一次)，以免遺失資料。
 * PayPal 連接器僅支援過去 3 年的[交易資料](#supported_objects)。
 * PayPal 連接器僅支援過去 6 個月的[爭議資料](#supported_objects)。
-* PayPal API 對每個資料物件都有不同的頁面大小限制。在資料移轉作業中，PayPal 連接器會使用 PayPal 允許的最大網頁大小。
-  + 不過，`Payments` 或 `Payment Transactions` 等部分物件會使用較小的網頁大小限制。這可能會導致資料傳輸速度變慢，尤其是在處理大型資料集時。
+* PayPal API 對每個資料物件都有不同的頁面大小限制。在資料轉移作業中，PayPal 連接器會使用 PayPal 允許的最大網頁大小。
+  + 不過，部分物件 (例如 `Payments` 或 `Payment Transactions`) 的網頁大小限制較小。這可能會導致資料傳輸速度變慢，尤其是在處理大型資料集時。
 
 ## 事前準備
 
-下列各節說明建立 PayPal 資料移轉作業前必須執行的步驟。
+下列各節說明建立 PayPal 資料轉移作業前必須執行的步驟。
 
 ### PayPal 先決條件
 
-如要啟用 PayPal 資料移轉功能，您必須具備下列條件：
+如要啟用從 PayPal 轉移資料的功能，您必須具備下列條件：
 
 * 你必須擁有 PayPal 開發人員帳戶。詳情請參閱 [PayPal 開發人員計畫](https://developer.paypal.com/developer-program/)。
 * 建立 PayPal REST API 應用程式。詳情請參閱「[開始使用 PayPal REST API](https://developer.paypal.com/api/rest/)」。
@@ -76,7 +76,7 @@ PayPal 資料轉移作業有以下限制：
 
 #### 所需權限
 
-如要建立移轉作業，必須具備下列權限：
+如要建立轉移作業，必須具備下列權限：
 
 * `bigquery.transfers.update`
   使用者
@@ -153,7 +153,7 @@ bq mk
   + `assets`：要納入這項轉移作業的 PayPal 物件清單。
   + `connector.authentication.clientId`：PayPal 應用程式的用戶端 ID。
   + `connector.authentication.clientSecret`：PayPal 應用程式的用戶端密鑰。
-  + `connector.isSandbox`：如果您使用沙箱 PayPal 帳戶，請將值設為 `true`；如果您使用正式版 PayPal 帳戶，請將值設為 `false`。
+  + `connector.isSandbox`：如果您使用 PayPal 沙箱帳戶，請將值設為 `true`；如果您使用 PayPal 正式版帳戶，請將值設為 `false`。
   + `connector.createdStartDate`：(選用) 輸入日期，格式為 `YYYY-MM-DD`。資料轉移作業會從這個日期開始載入 PayPal 資料。
 
 舉例來說，下列指令會在預設專案中建立 PayPal 資料移轉作業，並提供所有必要參數：
@@ -181,7 +181,7 @@ bq mk
 
 儲存移轉設定後，PayPal 連接器會根據排程選項自動觸發移轉作業。每次執行移轉作業時，PayPal 連接器都會將 PayPal 中的所有可用資料移轉至 BigQuery。
 
-如要在正常排程以外手動執行資料移轉作業，可以啟動[回填作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)。
+如要在正常時間表以外手動執行資料轉移作業，可以啟動[回填作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)。
 
 ## 資料類型對應
 
@@ -206,7 +206,7 @@ bq mk
 
 * 如需 BigQuery 資料移轉服務的總覽，請參閱 [BigQuery 資料移轉服務簡介](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)一文。
 * 如要瞭解如何管理移轉設定，包括取得資訊、列出設定及查看執行記錄，請參閱「[管理移轉作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw)」。
-* 瞭解如何[透過跨雲端作業載入資料](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer?hl=zh-tw)。
+* 瞭解如何[使用 BigQuery Omni 作業載入資料](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer?hl=zh-tw)。
 
 
 
@@ -215,11 +215,11 @@ bq mk
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-16 (世界標準時間)。
+上次更新時間：2026-05-19 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-16 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-19 (世界標準時間)。"],[],[]]

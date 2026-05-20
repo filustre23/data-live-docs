@@ -482,15 +482,5 @@ to disambiguate columns after the `JOIN` operator.
    ON CAST(t1.id AS INT64) = t2.id
 |> SELECT t2.id, total_sales, color;
 
-/*-----+-------------+--------+
- | id  | total_sales | color  |
- +-----+-------------+--------+
- | 456 | 5           | yellow |
- +-----+-------------+--------*/
-```
-
-### `WHERE` pipe operator
-
-```
-|> WHERE
+/*-----+-------------+---
 ```

@@ -22,7 +22,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 Salesforce Marketing Cloud 資料移轉作業會受到下列限制：
 
-* 單一移轉設定在特定時間只能支援一次資料移轉作業。如果排定在第一次資料移轉完成前執行第二次資料移轉，則系統只會完成第一次資料移轉，並略過任何與第一次移轉重疊的資料移轉。
+* 單一移轉設定在特定時間只能支援一次資料移轉作業。如果排定在第一次資料轉移完成前執行第二次資料轉移，則只有第一次資料轉移會完成，任何與第一次轉移重疊的資料轉移都會略過。
   + 為避免在單一轉移設定中略過轉移作業，建議您設定「重複頻率」，增加大型資料轉移作業之間的時間間隔。
 * 如要透過網路連結進行資料移轉，請務必先[定義靜態 IP 位址，再建立網路連結](https://docs.cloud.google.com/bigquery/docs/connections-with-network-attachment?hl=zh-tw)。
 * 如果設定的網路連結和虛擬機器 (VM) 執行個體位於不同區域，從 Salesforce Marketing Cloud 轉移資料時，可能會發生跨區域資料移動。
@@ -38,7 +38,7 @@ Salesforce Marketing Cloud 資料移轉作業會受到下列限制：
 | 參數名稱 | 說明 |
 | --- | --- |
 | `subdomain` | API 子網域 (位於基本 URI 中)。舉例來說，在驗證基本 URI `https://SUBDOMAIN.auth.marketingcloudapis.com/` 中，SUBDOMAIN 是您的子網域值。 |
-| `instance` | API 伺服器執行個體，登入 Salesforce Marketing Cloud 應用程式後，即可在網址中找到。執行個體值包含 `s`，後面接著數值。舉例來說，在網址 `https://mc.s4.exacttarget.com/` 中，執行個體值為 `s4`。詳情請參閱「[尋找 Marketing Cloud 帳戶的堆疊位置](https://help.salesforce.com/s/articleView?id=000383566&type=1)」。 |
+| `instance` | API 伺服器執行個體，登入 Salesforce Marketing Cloud 應用程式後，即可在網址中找到。執行個體值包含 `s`，後面接著數值。舉例來說，在網址 `https://mc.s4.exacttarget.com/` 中，執行個體值為 `s4`。詳情請參閱「[Find the stack location for a Marketing Cloud account](https://help.salesforce.com/s/articleView?id=000383566&type=1)」(找出 Marketing Cloud 帳戶的堆疊位置)。 |
 | `clientId` | API 整合中的用戶端 ID。依序前往「設定」>「應用程式」>「已安裝的套件」，然後點選套件名稱。用戶端 ID 會列在「元件」下方。 |
 | `clientSecret` | 應用程式整合項目的用戶端密鑰。依序前往「設定」>「應用程式」>「已安裝的套件」，然後點選套件名稱。用戶端密鑰會列在「元件」下方。 |
 | `Salesforce Marketing Cloud objects to transfer` | 編譯要納入這項轉移作業的 Salesforce Marketing Cloud 物件清單。[設定轉移設定](#sfmc-transfer-setup)時，您可以選取物件。 如需支援的物件清單，請參閱「[支援的表格](#supported-tables)」。 |
@@ -180,7 +180,7 @@ bq mk
   + `connector.instance`：API 執行個體值。
   + `connector.authentication.oauth.clientId`：OAuth 用戶端的應用程式 ID 名稱。
   + `connector.authentication.oauth.clientSecret`：OAuth 用戶端的應用程式密鑰。
-  + `assets`：要從 Salesforce Marketing Cloud 轉移的 Salesforce Marketing Cloud 資料表名稱清單。
+  + `assets`：要從 Salesforce Marketing Cloud 移轉的 Salesforce Marketing Cloud 資料表名稱清單。
 
 舉例來說，下列指令會在預設專案中建立 Salesforce Marketing Cloud 資料移轉作業，並設定所有必要參數：
 
@@ -226,7 +226,7 @@ bq mk
 * `Subscriber`
 * `TriggeredSendDefinition`
 
-如要在正常排程以外手動執行資料移轉作業，可以啟動[回填作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)。
+如要在正常時間表以外手動執行資料轉移作業，可以啟動[回填作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)。
 
 ## 資料類型對應
 
@@ -263,7 +263,7 @@ bq mk
 :   **解決方法：**請確認您已在 Salesforce Marketing Cloud 應用程式中設定正確的範圍權限。詳情請參閱 [Salesforce Marketing Cloud 必要條件](#sfmc-prereqs)。
 
 發生錯誤：`FAILED_PRECONDITION: There was an issue connecting to API.`
-:   **解決方法：**如果您在轉移作業中加入網路連結，但未設定 Public NAT 並設定 IP 許可清單，就可能發生這個錯誤。如要解決這項錯誤，請按照「[建立網路連結](https://docs.cloud.google.com/bigquery/docs/connections-with-network-attachment?hl=zh-tw#create_a_network_attachment)」一文中的步驟操作，定義靜態 IP 位址並建立網路連結。
+:   **解決方法：**如果您在轉移作業中加入網路附件，但未設定 Public NAT 並設定 IP 允許清單，就可能發生這個錯誤。如要解決這項錯誤，請按照「[建立網路連結](https://docs.cloud.google.com/bigquery/docs/connections-with-network-attachment?hl=zh-tw#create_a_network_attachment)」一文中的步驟操作，定義靜態 IP 位址來建立網路連結。
 
 ## 定價
 
@@ -273,7 +273,7 @@ bq mk
 
 * 如需 BigQuery 資料移轉服務的總覽，請參閱「[BigQuery 資料移轉服務簡介](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)」。
 * 如要瞭解如何使用資料移轉作業，包括取得移轉設定、列出移轉設定以及查看移轉作業的執行記錄，請參閱「[管理移轉作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw)」一文。
-* 瞭解如何[透過跨雲端作業載入資料](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer?hl=zh-tw)。
+* 瞭解如何[使用 BigQuery Omni 作業載入資料](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer?hl=zh-tw)。
 
 
 
@@ -282,11 +282,11 @@ bq mk
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-16 (世界標準時間)。
+上次更新時間：2026-05-19 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-16 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-19 (世界標準時間)。"],[],[]]

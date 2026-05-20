@@ -397,17 +397,5 @@ The following options are supported:
 This statement requires the following
 [IAM permissions](/bigquery/docs/access-control#bq-permissions):
 
-| Permission | Resource |
+| Permission | Resou |
 | --- | --- |
-| `bigquery.datasets.create` | The project where you create the dataset. |
-
-### Examples
-
-#### Creating a new dataset
-
-The following example creates a dataset with a default table expiration and a
-set of labels.
-
-```
-CREATE SCHEMA <
-```
