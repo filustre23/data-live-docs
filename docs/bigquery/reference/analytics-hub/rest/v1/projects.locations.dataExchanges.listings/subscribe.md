@@ -244,7 +244,4 @@ Configuration for writing message data in Avro format. Message payloads and meta
 | --- | --- |
 | `writeMetadata` | `boolean`  Optional. When true, write the subscription name, message\_id, publish\_time, attributes, and ordering\_key as additional fields in the output. The subscription name, message\_id, and publish\_time fields are put in their own fields while all other message properties other than data (for example, an ordering\_key, if present) are added as entries in the attributes map. |
 | `useTopicSchema` | `boolean`  Optional. When true, the output Cloud Storage file will be serialized using the topic schema, if it exists. |
-
-## ExpirationPolicy
-
-A policy that specifies the conditions for resource expiration (i.e., automatic resource deletion)
+</
