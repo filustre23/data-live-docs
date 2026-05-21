@@ -1193,7 +1193,7 @@ A 429 status code indicates that you have hit the request rate limit. See the se
 
 ### 500 Internal server error[​](#500-internal-server-error "Direct link to 500 Internal server error")
 
-A 500 status code indicates an error with the Hex application. Please contact [Hex support](/cdn-cgi/l/email-protection#cdbeb8bdbda2bfb98da5a8b5e3b9a8aea5) for help troubleshooting.
+A 500 status code indicates an error with the Hex application. Please contact [Hex support](/cdn-cgi/l/email-protection#7b080e0b0b14090f3b131e03550f1e1813) for help troubleshooting.
 
 ### 503 Service Unavailable[​](#503-service-unavailable "Direct link to 503 Service Unavailable")
 

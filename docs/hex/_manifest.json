@@ -1,2137 +1,2137 @@
 {
-  "duration_s": 172.97,
+  "duration_s": 169.54,
   "failed_count": 0,
   "failed_pages": [],
-  "fetched_at": "2026-05-21T02:45:36.408823+00:00",
+  "fetched_at": "2026-05-21T09:29:40.620230+00:00",
   "file_count": 355,
   "files": {
     "changelog.md": {
       "bytes": 135,
-      "fetched_at": "2026-05-21T02:42:44.324356+00:00",
+      "fetched_at": "2026-05-21T09:26:51.824081+00:00",
       "sha256": "91f604b6926d82da826d14243d1ddd9e29d2b30da4f72a82ced42af29b4abc6f",
       "source_url": "https://learn.hex.tech/changelog"
     },
     "changelog/2020-12-17.md": {
       "bytes": 266,
-      "fetched_at": "2026-05-21T02:42:44.787933+00:00",
+      "fetched_at": "2026-05-21T09:26:52.320573+00:00",
       "sha256": "abb27a73b4bd10b811798e51ec05870bd7b121ffdc73de62e5fa6264a941bd85",
       "source_url": "https://learn.hex.tech/changelog/2020-12-17"
     },
     "changelog/2021-01-08.md": {
       "bytes": 263,
-      "fetched_at": "2026-05-21T02:42:45.253126+00:00",
+      "fetched_at": "2026-05-21T09:26:52.800679+00:00",
       "sha256": "723ae50477984c7e4e76000269ea9b65e67ad01a7403b2868cb73f7c7fed35c3",
       "source_url": "https://learn.hex.tech/changelog/2021-01-08"
     },
     "changelog/2021-02-05.md": {
       "bytes": 226,
-      "fetched_at": "2026-05-21T02:42:45.719669+00:00",
+      "fetched_at": "2026-05-21T09:26:53.284740+00:00",
       "sha256": "545e86f8c3f5447c0285236f1a2083bc34c30b19a73e4cb3588fdf62739b5add",
       "source_url": "https://learn.hex.tech/changelog/2021-02-05"
     },
     "changelog/2021-02-17.md": {
       "bytes": 186,
-      "fetched_at": "2026-05-21T02:42:46.184439+00:00",
+      "fetched_at": "2026-05-21T09:26:53.761107+00:00",
       "sha256": "5ef2f7a0c9655583c57005123a82c309c4b544f33570ab4fc6fd67142ef43312",
       "source_url": "https://learn.hex.tech/changelog/2021-02-17"
     },
     "changelog/2021-03-08.md": {
       "bytes": 181,
-      "fetched_at": "2026-05-21T02:42:46.651620+00:00",
+      "fetched_at": "2026-05-21T09:26:54.251327+00:00",
       "sha256": "dd069a0428a276ce75cf3d9a5b85fb04050ea2f89aff360082d3c0cddc8007c4",
       "source_url": "https://learn.hex.tech/changelog/2021-03-08"
     },
     "changelog/2021-03-29.md": {
       "bytes": 185,
-      "fetched_at": "2026-05-21T02:42:47.117681+00:00",
+      "fetched_at": "2026-05-21T09:26:54.740309+00:00",
       "sha256": "4a7b42b3c95eac8caf2fdc9a915cae28ae8643734b3d2a02083f0e1664d70654",
       "source_url": "https://learn.hex.tech/changelog/2021-03-29"
     },
     "changelog/2021-04-12.md": {
       "bytes": 179,
-      "fetched_at": "2026-05-21T02:42:47.574690+00:00",
+      "fetched_at": "2026-05-21T09:26:55.215965+00:00",
       "sha256": "efe895bd4d9f3c837f605d95b58b0ac77ba2b29f9bfe3ecaf493ba396c142f51",
       "source_url": "https://learn.hex.tech/changelog/2021-04-12"
     },
     "changelog/2021-04-26.md": {
       "bytes": 208,
-      "fetched_at": "2026-05-21T02:42:48.035928+00:00",
+      "fetched_at": "2026-05-21T09:26:55.697501+00:00",
       "sha256": "4c15678e249ed88cf67e9031182c95cd016f648b2e8d7f7784c7320b3e555a3c",
       "source_url": "https://learn.hex.tech/changelog/2021-04-26"
     },
     "changelog/2021-05-06.md": {
       "bytes": 218,
-      "fetched_at": "2026-05-21T02:42:48.501031+00:00",
+      "fetched_at": "2026-05-21T09:26:56.186402+00:00",
       "sha256": "4710ded77ce6373f823dba24596be9522676fc4967e03f3c58b281bba2965cf9",
       "source_url": "https://learn.hex.tech/changelog/2021-05-06"
     },
     "changelog/2021-05-18.md": {
       "bytes": 234,
-      "fetched_at": "2026-05-21T02:42:48.967567+00:00",
+      "fetched_at": "2026-05-21T09:26:56.665251+00:00",
       "sha256": "bae7d05cdf005a1d3e52aa3ff7456bdaa51ab102b65a70cdbe00c327c2b56153",
       "source_url": "https://learn.hex.tech/changelog/2021-05-18"
     },
     "changelog/2021-06-15.md": {
       "bytes": 381,
-      "fetched_at": "2026-05-21T02:42:49.431800+00:00",
+      "fetched_at": "2026-05-21T09:26:57.145330+00:00",
       "sha256": "348cf9b48307daf2053711948dc7e03d7e62f7a92e872c7ed3649c54430f989f",
       "source_url": "https://learn.hex.tech/changelog/2021-06-15"
     },
     "changelog/2021-07-12.md": {
       "bytes": 369,
-      "fetched_at": "2026-05-21T02:42:49.900111+00:00",
+      "fetched_at": "2026-05-21T09:26:57.635654+00:00",
       "sha256": "08c93a9d212c9a4c8d1b5dea1b4349e00ba8ecb9c5803bedfd62a5a822decd60",
       "source_url": "https://learn.hex.tech/changelog/2021-07-12"
     },
     "changelog/2021-08-05.md": {
       "bytes": 290,
-      "fetched_at": "2026-05-21T02:42:50.370023+00:00",
+      "fetched_at": "2026-05-21T09:26:58.079099+00:00",
       "sha256": "82cdf818f762f54c2ec66ff5d7c81604d24a8fc07f2ab6664969c316b8ead334",
       "source_url": "https://learn.hex.tech/changelog/2021-08-05"
     },
     "changelog/2021-08-18.md": {
       "bytes": 169,
-      "fetched_at": "2026-05-21T02:42:50.830427+00:00",
+      "fetched_at": "2026-05-21T09:26:58.634915+00:00",
       "sha256": "19e79edd0c448d38334b361a80430397acc19dbc15a9f534d40062513880d221",
       "source_url": "https://learn.hex.tech/changelog/2021-08-18"
     },
     "changelog/2021-08-31.md": {
       "bytes": 182,
-      "fetched_at": "2026-05-21T02:42:51.302093+00:00",
+      "fetched_at": "2026-05-21T09:26:59.111128+00:00",
       "sha256": "d4bf408822ced1caca6b96c3336253863753a4917e8834b919acd54c1b59563d",
       "source_url": "https://learn.hex.tech/changelog/2021-08-31"
     },
     "changelog/2021-09-02.md": {
       "bytes": 277,
-      "fetched_at": "2026-05-21T02:42:51.770431+00:00",
+      "fetched_at": "2026-05-21T09:26:59.597547+00:00",
       "sha256": "8fe64f8361a7d2496f342bee1ad195998a8a579854521c8ae72706444273fab8",
       "source_url": "https://learn.hex.tech/changelog/2021-09-02"
     },
     "changelog/2021-10-06.md": {
       "bytes": 245,
-      "fetched_at": "2026-05-21T02:42:52.230701+00:00",
+      "fetched_at": "2026-05-21T09:27:00.087673+00:00",
       "sha256": "72257e8e007c037e100e278d66e32a251df3c4884ea7cfa95af903a493b74c2d",
       "source_url": "https://learn.hex.tech/changelog/2021-10-06"
     },
     "changelog/2021-10-20.md": {
       "bytes": 373,
-      "fetched_at": "2026-05-21T02:42:52.702266+00:00",
+      "fetched_at": "2026-05-21T09:27:00.569359+00:00",
       "sha256": "833bc1a8b6f66b9309699cf5a68c36466b0ded72044321406b35fc9660761b5a",
       "source_url": "https://learn.hex.tech/changelog/2021-10-20"
     },
     "changelog/2021-11-09.md": {
       "bytes": 401,
-      "fetched_at": "2026-05-21T02:42:53.185870+00:00",
+      "fetched_at": "2026-05-21T09:27:01.058087+00:00",
       "sha256": "ca2d4d7a899da5f667a6c62364689f1cf20282569dac49f812dda5b52ffaa573",
       "source_url": "https://learn.hex.tech/changelog/2021-11-09"
     },
     "changelog/2021-11-23.md": {
       "bytes": 295,
-      "fetched_at": "2026-05-21T02:42:53.646082+00:00",
+      "fetched_at": "2026-05-21T09:27:01.539272+00:00",
       "sha256": "5954ed2fdf6287f79c1b9a22d6999449903ba0f506990a52a04d0b6c9ac3082e",
       "source_url": "https://learn.hex.tech/changelog/2021-11-23"
     },
     "changelog/2021-12-16.md": {
       "bytes": 336,
-      "fetched_at": "2026-05-21T02:42:54.124008+00:00",
+      "fetched_at": "2026-05-21T09:27:02.033750+00:00",
       "sha256": "a16873a9591476bcc17c1e285684446c5d2294f5d7857d96fe9bdbe278162c3e",
       "source_url": "https://learn.hex.tech/changelog/2021-12-16"
     },
     "changelog/2022-01-18.md": {
       "bytes": 322,
-      "fetched_at": "2026-05-21T02:42:54.595893+00:00",
+      "fetched_at": "2026-05-21T09:27:02.513924+00:00",
       "sha256": "f4ab0ef8e73b7039440f366b88f3e522c904b96032581f725ce01b747c4df1f5",
       "source_url": "https://learn.hex.tech/changelog/2022-01-18"
     },
     "changelog/2022-02-10.md": {
       "bytes": 303,
-      "fetched_at": "2026-05-21T02:42:55.074782+00:00",
+      "fetched_at": "2026-05-21T09:27:02.994482+00:00",
       "sha256": "fccf2da49c143d6151cfa9d0a4317da9b27c0a350d0fb3e90886aff9035f0011",
       "source_url": "https://learn.hex.tech/changelog/2022-02-10"
     },
     "changelog/2022-03-01.md": {
       "bytes": 424,
-      "fetched_at": "2026-05-21T02:42:55.539137+00:00",
+      "fetched_at": "2026-05-21T09:27:03.482743+00:00",
       "sha256": "b68b9640b3d818d7b22aeeab6d3a04d982bc999e0bc12e1ffc6857210c68fea3",
       "source_url": "https://learn.hex.tech/changelog/2022-03-01"
     },
     "changelog/2022-03-16.md": {
       "bytes": 370,
-      "fetched_at": "2026-05-21T02:42:56.007688+00:00",
+      "fetched_at": "2026-05-21T09:27:03.968193+00:00",
       "sha256": "2cf6e0189b194a0b01f3baa435801865198f8849b08e9139609b765ca773433c",
       "source_url": "https://learn.hex.tech/changelog/2022-03-16"
     },
     "changelog/2022-04-07.md": {
       "bytes": 290,
-      "fetched_at": "2026-05-21T02:42:56.475457+00:00",
+      "fetched_at": "2026-05-21T09:27:04.457662+00:00",
       "sha256": "ee026f13f0ee32cdfc886302e938678334e058e1910ebc89263e2113d00d710a",
       "source_url": "https://learn.hex.tech/changelog/2022-04-07"
     },
     "changelog/2022-04-21.md": {
       "bytes": 448,
-      "fetched_at": "2026-05-21T02:42:56.938928+00:00",
+      "fetched_at": "2026-05-21T09:27:04.939294+00:00",
       "sha256": "e40c6e94a25649b516e48092c5734a58c85d1818802907e1f418307ac88c7130",
       "source_url": "https://learn.hex.tech/changelog/2022-04-21"
     },
     "changelog/2022-05-05.md": {
       "bytes": 256,
-      "fetched_at": "2026-05-21T02:42:57.404543+00:00",
+      "fetched_at": "2026-05-21T09:27:05.431548+00:00",
       "sha256": "678ec20feadf9600681d7bc93650b455f5bdd9f23d3ea3d30f61c00090e56aa4",
       "source_url": "https://learn.hex.tech/changelog/2022-05-05"
     },
     "changelog/2022-05-19.md": {
       "bytes": 371,
-      "fetched_at": "2026-05-21T02:42:57.866178+00:00",
+      "fetched_at": "2026-05-21T09:27:05.912564+00:00",
       "sha256": "06bf153bca660440fa62b4f1fa63a69e7e564eca8fd5769a37a718fef662a1b7",
       "source_url": "https://learn.hex.tech/changelog/2022-05-19"
     },
     "changelog/2022-06-09.md": {
       "bytes": 247,
-      "fetched_at": "2026-05-21T02:42:58.326860+00:00",
+      "fetched_at": "2026-05-21T09:27:06.402889+00:00",
       "sha256": "8a063629c394b7ccebfb653820311e77bc0d40a680eeb898a2e7b21a2f5a0a2f",
       "source_url": "https://learn.hex.tech/changelog/2022-06-09"
     },
     "changelog/2022-06-23.md": {
       "bytes": 215,
-      "fetched_at": "2026-05-21T02:42:58.788984+00:00",
+      "fetched_at": "2026-05-21T09:27:06.894499+00:00",
       "sha256": "0c390351d7b41859e9be61e5932a2ad7a23960c93a37dc63103c701609da6347",
       "source_url": "https://learn.hex.tech/changelog/2022-06-23"
     },
     "changelog/2022-07-14.md": {
       "bytes": 262,
-      "fetched_at": "2026-05-21T02:42:59.250937+00:00",
+      "fetched_at": "2026-05-21T09:27:07.384810+00:00",
       "sha256": "8a32dfbebfe89d2e070d26c1e4e89d8c3098caf3b2a669948bf5e03f7fa28321",
       "source_url": "https://learn.hex.tech/changelog/2022-07-14"
     },
     "changelog/2022-07-28.md": {
       "bytes": 223,
-      "fetched_at": "2026-05-21T02:42:59.711915+00:00",
+      "fetched_at": "2026-05-21T09:27:07.862365+00:00",
       "sha256": "655672c26e6d5cf3ad4368c27afc1e1eaf8108d8d7dce75c53f00f4ff7be9f49",
       "source_url": "https://learn.hex.tech/changelog/2022-07-28"
     },
     "changelog/2022-08-11.md": {
       "bytes": 423,
-      "fetched_at": "2026-05-21T02:43:00.176925+00:00",
+      "fetched_at": "2026-05-21T09:27:08.353499+00:00",
       "sha256": "bc27bf6cd67a1f76511b50032be4a8aca63be0e2ef2ec6d4256d7580e8a8eb0e",
       "source_url": "https://learn.hex.tech/changelog/2022-08-11"
     },
     "changelog/2022-09-01.md": {
       "bytes": 289,
-      "fetched_at": "2026-05-21T02:43:00.644292+00:00",
+      "fetched_at": "2026-05-21T09:27:08.840129+00:00",
       "sha256": "6d0004ee30d3fc6f56075de11e7bb296b789f579dd2d226fdd121a49924679b0",
       "source_url": "https://learn.hex.tech/changelog/2022-09-01"
     },
     "changelog/2022-09-22.md": {
       "bytes": 385,
-      "fetched_at": "2026-05-21T02:43:01.113521+00:00",
+      "fetched_at": "2026-05-21T09:27:09.331646+00:00",
       "sha256": "cd95c8733321c78e27b38bb1d58fff796209fc53718dc767c0d5ab7bca7da154",
       "source_url": "https://learn.hex.tech/changelog/2022-09-22"
     },
     "changelog/2022-10-19.md": {
       "bytes": 174,
-      "fetched_at": "2026-05-21T02:43:01.591549+00:00",
+      "fetched_at": "2026-05-21T09:27:09.828080+00:00",
       "sha256": "20b79e41f57e37142a8aebb105015a92a205a324b4b28d835f33ba6c85e31945",
       "source_url": "https://learn.hex.tech/changelog/2022-10-19"
     },
     "changelog/2022-11-08.md": {
       "bytes": 268,
-      "fetched_at": "2026-05-21T02:43:02.063328+00:00",
+      "fetched_at": "2026-05-21T09:27:10.312289+00:00",
       "sha256": "d604358362b204ab5fbb33d1274243129d8928420e3f3a4fc6a4341d628c4581",
       "source_url": "https://learn.hex.tech/changelog/2022-11-08"
     },
     "changelog/2022-12-15.md": {
       "bytes": 217,
-      "fetched_at": "2026-05-21T02:43:02.528328+00:00",
+      "fetched_at": "2026-05-21T09:27:10.869529+00:00",
       "sha256": "10350afd4c9d74c3381687130e11e0ca5f772ace54bcd57d53b251afe463aa4a",
       "source_url": "https://learn.hex.tech/changelog/2022-12-15"
     },
     "changelog/2023-01-04.md": {
       "bytes": 279,
-      "fetched_at": "2026-05-21T02:43:02.997074+00:00",
+      "fetched_at": "2026-05-21T09:27:11.349358+00:00",
       "sha256": "4f2d75e4515964aa7bc83ee0aac405607ee026b06068486e75a169bc3c75e8d1",
       "source_url": "https://learn.hex.tech/changelog/2023-01-04"
     },
     "changelog/2023-02-02.md": {
       "bytes": 203,
-      "fetched_at": "2026-05-21T02:43:03.458244+00:00",
+      "fetched_at": "2026-05-21T09:27:11.840953+00:00",
       "sha256": "36fd3d19fc4c601d29ebe73cdebaafc97aed2e7778ad9bfc6829fa9204d133fe",
       "source_url": "https://learn.hex.tech/changelog/2023-02-02"
     },
     "changelog/2023-02-16.md": {
       "bytes": 607,
-      "fetched_at": "2026-05-21T02:43:03.923739+00:00",
+      "fetched_at": "2026-05-21T09:27:12.283060+00:00",
       "sha256": "baccf5274af135a9d0d7e6ddb7fbd45a0f60aa82ffd74266196f2700e599a41e",
       "source_url": "https://learn.hex.tech/changelog/2023-02-16"
     },
     "changelog/2023-02-24.md": {
       "bytes": 148,
-      "fetched_at": "2026-05-21T02:43:04.400371+00:00",
+      "fetched_at": "2026-05-21T09:27:12.769378+00:00",
       "sha256": "24eb126b2077da47bd611d517eb27d9dfd1e919eda1431bc673dc1fb8e28c29b",
       "source_url": "https://learn.hex.tech/changelog/2023-02-24"
     },
     "changelog/2023-03-09.md": {
       "bytes": 339,
-      "fetched_at": "2026-05-21T02:43:04.866116+00:00",
+      "fetched_at": "2026-05-21T09:27:13.260275+00:00",
       "sha256": "1dd06b27d40ea0bb8aac1e52c61b6c9e518f698a6ad4a43ecbb09b3e1e8f5e93",
       "source_url": "https://learn.hex.tech/changelog/2023-03-09"
     },
     "changelog/2023-03-30.md": {
       "bytes": 198,
-      "fetched_at": "2026-05-21T02:43:05.332570+00:00",
+      "fetched_at": "2026-05-21T09:27:13.737984+00:00",
       "sha256": "24a97e27ee14cf9754d44f7854bc01cc365bb2e597a13a208159f3a3daaca434",
       "source_url": "https://learn.hex.tech/changelog/2023-03-30"
     },
     "changelog/2023-05-04.md": {
       "bytes": 307,
-      "fetched_at": "2026-05-21T02:43:05.795420+00:00",
+      "fetched_at": "2026-05-21T09:27:14.231173+00:00",
       "sha256": "602d93ee45a9b1e7e24a78743c1a1d4b7211236e8fa3096a25916f26670b4097",
       "source_url": "https://learn.hex.tech/changelog/2023-05-04"
     },
     "changelog/2023-05-25.md": {
       "bytes": 404,
-      "fetched_at": "2026-05-21T02:43:06.261825+00:00",
+      "fetched_at": "2026-05-21T09:27:14.716483+00:00",
       "sha256": "04e0688b2df560a0e743bafa5ab0cd992814634ea629dea5acf08df4aa5fa650",
       "source_url": "https://learn.hex.tech/changelog/2023-05-25"
     },
     "changelog/2023-06-08.md": {
       "bytes": 506,
-      "fetched_at": "2026-05-21T02:43:06.721429+00:00",
+      "fetched_at": "2026-05-21T09:27:15.197340+00:00",
       "sha256": "83c129ebb1d58f15841c64979243a1275fd24e2a50da97091f3ee01568cd4bba",
       "source_url": "https://learn.hex.tech/changelog/2023-06-08"
     },
     "changelog/2023-06-22.md": {
       "bytes": 332,
-      "fetched_at": "2026-05-21T02:43:07.185984+00:00",
+      "fetched_at": "2026-05-21T09:27:15.679374+00:00",
       "sha256": "3ba3cada416de8d57285371933726b13a5a5fb498210bba0a164949bf1e8e856",
       "source_url": "https://learn.hex.tech/changelog/2023-06-22"
     },
     "changelog/2023-07-28.md": {
       "bytes": 373,
-      "fetched_at": "2026-05-21T02:43:07.653581+00:00",
+      "fetched_at": "2026-05-21T09:27:16.169862+00:00",
       "sha256": "dd87436ea2d730499e2bcffa37ef9905fc6da71031f20525759f1df735a75e2c",
       "source_url": "https://learn.hex.tech/changelog/2023-07-28"
     },
     "changelog/2023-08-17.md": {
       "bytes": 298,
-      "fetched_at": "2026-05-21T02:43:08.130763+00:00",
+      "fetched_at": "2026-05-21T09:27:16.648146+00:00",
       "sha256": "f34fb7835d78d73486dbc46c8883d9e8646273b38f13a2d5364ca514276dae25",
       "source_url": "https://learn.hex.tech/changelog/2023-08-17"
     },
     "changelog/2023-09-07.md": {
       "bytes": 419,
-      "fetched_at": "2026-05-21T02:43:08.598895+00:00",
+      "fetched_at": "2026-05-21T09:27:17.129336+00:00",
       "sha256": "fb7fecc11ff3643ded7750c2c87c5efe572c62201de7fab2e8cdc4b10924d785",
       "source_url": "https://learn.hex.tech/changelog/2023-09-07"
     },
     "changelog/2023-10-05.md": {
       "bytes": 649,
-      "fetched_at": "2026-05-21T02:43:09.065433+00:00",
+      "fetched_at": "2026-05-21T09:27:17.622188+00:00",
       "sha256": "2027d363e8a78c2cca2c57fd6c1f52acf256cd470ff36b6e1f9639af43744098",
       "source_url": "https://learn.hex.tech/changelog/2023-10-05"
     },
     "changelog/2023-10-26.md": {
       "bytes": 252,
-      "fetched_at": "2026-05-21T02:43:09.530969+00:00",
+      "fetched_at": "2026-05-21T09:27:18.109784+00:00",
       "sha256": "20f853a9e81972b34a08ac61014c6ae3afd4aa6f27a9384f5841676d8cc38822",
       "source_url": "https://learn.hex.tech/changelog/2023-10-26"
     },
     "changelog/2023-11-09.md": {
       "bytes": 400,
-      "fetched_at": "2026-05-21T02:43:09.994397+00:00",
+      "fetched_at": "2026-05-21T09:27:18.594664+00:00",
       "sha256": "bd6ecd008a6d69e9a03199bf59a94f24aae51120e5ca19125399f29ba56c2ecf",
       "source_url": "https://learn.hex.tech/changelog/2023-11-09"
     },
     "changelog/2023-11-30.md": {
       "bytes": 320,
-      "fetched_at": "2026-05-21T02:43:10.457907+00:00",
+      "fetched_at": "2026-05-21T09:27:19.085343+00:00",
       "sha256": "34d9110e67f100eda378173fc4fbc9fc942ee0343022e386e1852e1abddd2c48",
       "source_url": "https://learn.hex.tech/changelog/2023-11-30"
     },
     "changelog/2024-02-01.md": {
       "bytes": 229,
-      "fetched_at": "2026-05-21T02:43:10.929475+00:00",
+      "fetched_at": "2026-05-21T09:27:19.574910+00:00",
       "sha256": "932febdb0eee6a283a792d717c5b57019a18fe90a0526e749eb0ca95a3b6b403",
       "source_url": "https://learn.hex.tech/changelog/2024-02-01"
     },
     "changelog/2024-02-20.md": {
       "bytes": 234,
-      "fetched_at": "2026-05-21T02:43:11.391046+00:00",
+      "fetched_at": "2026-05-21T09:27:20.053056+00:00",
       "sha256": "b2131ae725d07960f90786512666107c663934aed26ee180606a6a8eb1bde3ac",
       "source_url": "https://learn.hex.tech/changelog/2024-02-20"
     },
     "changelog/2024-03-21.md": {
       "bytes": 271,
-      "fetched_at": "2026-05-21T02:43:11.860537+00:00",
+      "fetched_at": "2026-05-21T09:27:20.531561+00:00",
       "sha256": "a9de23f56f7acc0db36344740b0aca8499acdeaa5c23ea5cebdfad2a256b4e02",
       "source_url": "https://learn.hex.tech/changelog/2024-03-21"
     },
     "changelog/2024-04-03.md": {
       "bytes": 204,
-      "fetched_at": "2026-05-21T02:43:12.327617+00:00",
+      "fetched_at": "2026-05-21T09:27:21.023903+00:00",
       "sha256": "0b010656f653a96b8c82f22d42018cc1f4130099f0e70c90f6bc9bfda7ab6ef5",
       "source_url": "https://learn.hex.tech/changelog/2024-04-03"
     },
     "changelog/2024-04-30.md": {
       "bytes": 268,
-      "fetched_at": "2026-05-21T02:43:12.792922+00:00",
+      "fetched_at": "2026-05-21T09:27:21.515005+00:00",
       "sha256": "1e3db7deeb6425d0863cf40a1ee31bb3ffa8b98891397bd0d10b092bc2b74798",
       "source_url": "https://learn.hex.tech/changelog/2024-04-30"
     },
     "changelog/2024-05-29.md": {
       "bytes": 290,
-      "fetched_at": "2026-05-21T02:43:13.261104+00:00",
+      "fetched_at": "2026-05-21T09:27:22.002480+00:00",
       "sha256": "3a5400d0e8c959224f3a74c0cf4aa675014f135e512ff3f2b5360980a9f98822",
       "source_url": "https://learn.hex.tech/changelog/2024-05-29"
     },
     "changelog/2024-06-26.md": {
       "bytes": 332,
-      "fetched_at": "2026-05-21T02:43:13.732507+00:00",
+      "fetched_at": "2026-05-21T09:27:22.498928+00:00",
       "sha256": "f74a5001e547f08aa324e4854fd866b85dab7e463b60e2acb6494e076ab4fdcc",
       "source_url": "https://learn.hex.tech/changelog/2024-06-26"
     },
     "changelog/2024-07-31.md": {
       "bytes": 414,
-      "fetched_at": "2026-05-21T02:43:14.202252+00:00",
+      "fetched_at": "2026-05-21T09:27:22.982487+00:00",
       "sha256": "b314f2449ff8050ee4c88f978766d900a5f4a9b129add5b052067bef91f31190",
       "source_url": "https://learn.hex.tech/changelog/2024-07-31"
     },
     "changelog/2024-09-26.md": {
       "bytes": 378,
-      "fetched_at": "2026-05-21T02:43:14.666585+00:00",
+      "fetched_at": "2026-05-21T09:27:23.472433+00:00",
       "sha256": "4d89e6f5e8b9c07c76581f6308dd888616ec896e1eb1397f3aba20d2e5b62302",
       "source_url": "https://learn.hex.tech/changelog/2024-09-26"
     },
     "changelog/2024-10-18.md": {
       "bytes": 424,
-      "fetched_at": "2026-05-21T02:43:15.131361+00:00",
+      "fetched_at": "2026-05-21T09:27:23.958482+00:00",
       "sha256": "93608dec3bda45a46c6b6a26a9765b0cf16916c61e5c1931d26e8a6b2e6fb7ed",
       "source_url": "https://learn.hex.tech/changelog/2024-10-18"
     },
     "changelog/2024-10-30.md": {
       "bytes": 411,
-      "fetched_at": "2026-05-21T02:43:15.593545+00:00",
+      "fetched_at": "2026-05-21T09:27:24.463955+00:00",
       "sha256": "45018159c8174c2521cb65857354c52fab28d4802a827d6f6a14e4d3ffd6d3d6",
       "source_url": "https://learn.hex.tech/changelog/2024-10-30"
     },
     "changelog/2024-11-20.md": {
       "bytes": 302,
-      "fetched_at": "2026-05-21T02:43:16.057141+00:00",
+      "fetched_at": "2026-05-21T09:27:24.945660+00:00",
       "sha256": "701663eb67ac73a44499a1bb1f5b6b9a97ed924cfdd3abf162879d032851d207",
       "source_url": "https://learn.hex.tech/changelog/2024-11-20"
     },
     "changelog/2024-12-12.md": {
       "bytes": 491,
-      "fetched_at": "2026-05-21T02:43:16.520082+00:00",
+      "fetched_at": "2026-05-21T09:27:25.429441+00:00",
       "sha256": "4c4f97ffa2c9193aa0fdd7c54adc2dbbf94b398cd11ebc95a193f3e4360a5a78",
       "source_url": "https://learn.hex.tech/changelog/2024-12-12"
     },
     "changelog/2025-01-23.md": {
       "bytes": 250,
-      "fetched_at": "2026-05-21T02:43:16.979493+00:00",
+      "fetched_at": "2026-05-21T09:27:25.916911+00:00",
       "sha256": "9fd6aa0c2ff7763a38513cf641e4f3c112e58e64a41802d87c808da9d729b452",
       "source_url": "https://learn.hex.tech/changelog/2025-01-23"
     },
     "changelog/2025-03-05.md": {
       "bytes": 204,
-      "fetched_at": "2026-05-21T02:43:17.439492+00:00",
+      "fetched_at": "2026-05-21T09:27:26.392681+00:00",
       "sha256": "22a3754b3de5a3574510a4c5aff3fe3b43d26503e4f071dd7d45bc03be998288",
       "source_url": "https://learn.hex.tech/changelog/2025-03-05"
     },
     "changelog/2025-03-19.md": {
       "bytes": 413,
-      "fetched_at": "2026-05-21T02:43:17.902938+00:00",
+      "fetched_at": "2026-05-21T09:27:26.884065+00:00",
       "sha256": "a8b2f194294239f349e7b818a1705e53afdf407fb71832b024b007addc5beae6",
       "source_url": "https://learn.hex.tech/changelog/2025-03-19"
     },
     "changelog/2025-04-09.md": {
       "bytes": 202,
-      "fetched_at": "2026-05-21T02:43:18.367313+00:00",
+      "fetched_at": "2026-05-21T09:27:27.364081+00:00",
       "sha256": "cebfeafdb4e97f7ef60ed47d495be0b2c385682e3ee3774041712013c84677aa",
       "source_url": "https://learn.hex.tech/changelog/2025-04-09"
     },
     "changelog/2025-04-23.md": {
       "bytes": 419,
-      "fetched_at": "2026-05-21T02:43:18.832051+00:00",
+      "fetched_at": "2026-05-21T09:27:27.801545+00:00",
       "sha256": "6851aaf1fc9679891b65886618fc03a0313844bd1926a04d56c1b7d5568600df",
       "source_url": "https://learn.hex.tech/changelog/2025-04-23"
     },
     "changelog/2025-05-07.md": {
       "bytes": 382,
-      "fetched_at": "2026-05-21T02:43:19.296710+00:00",
+      "fetched_at": "2026-05-21T09:27:28.295960+00:00",
       "sha256": "8fc232937c89dfb07d9797ffbd2fd0e01dfe334cbe307830cccfa9c32d83d528",
       "source_url": "https://learn.hex.tech/changelog/2025-05-07"
     },
     "changelog/2025-05-29.md": {
       "bytes": 352,
-      "fetched_at": "2026-05-21T02:43:19.760308+00:00",
+      "fetched_at": "2026-05-21T09:27:28.784801+00:00",
       "sha256": "c2c7fbb0db10b8cf2711e561112203d3e9762786b880eb078b07f955fb931d26",
       "source_url": "https://learn.hex.tech/changelog/2025-05-29"
     },
     "changelog/2025-06-03.md": {
       "bytes": 194,
-      "fetched_at": "2026-05-21T02:43:20.223631+00:00",
+      "fetched_at": "2026-05-21T09:27:29.261514+00:00",
       "sha256": "f6b7d000697956f59dcbe51d0683482d6fb22c3291961452157308ce50f33c2c",
       "source_url": "https://learn.hex.tech/changelog/2025-06-03"
     },
     "changelog/2025-06-25.md": {
       "bytes": 403,
-      "fetched_at": "2026-05-21T02:43:20.697995+00:00",
+      "fetched_at": "2026-05-21T09:27:29.745144+00:00",
       "sha256": "fe65d8ca856b9b19824fd9658a7da0beedf138d6e3cf0b8907a81754bda7b613",
       "source_url": "https://learn.hex.tech/changelog/2025-06-25"
     },
     "changelog/2025-07-23.md": {
       "bytes": 307,
-      "fetched_at": "2026-05-21T02:43:21.164117+00:00",
+      "fetched_at": "2026-05-21T09:27:30.240073+00:00",
       "sha256": "675d9d9fcfb87a2b218de05ae5e7e77dbca437cb74512deb413e89156bde7216",
       "source_url": "https://learn.hex.tech/changelog/2025-07-23"
     },
     "changelog/2025-08-20.md": {
       "bytes": 259,
-      "fetched_at": "2026-05-21T02:43:21.645069+00:00",
+      "fetched_at": "2026-05-21T09:27:30.721557+00:00",
       "sha256": "51b04758bdea96b87f619939eacbd5cbce5899394375e47abbd19541add0b808",
       "source_url": "https://learn.hex.tech/changelog/2025-08-20"
     },
     "changelog/2025-08-27.md": {
       "bytes": 142,
-      "fetched_at": "2026-05-21T02:43:22.104210+00:00",
+      "fetched_at": "2026-05-21T09:27:31.200273+00:00",
       "sha256": "1505aa9b91cebf58da3ea365d76ea9783090a2ab803e559b6dde6698f154d7f0",
       "source_url": "https://learn.hex.tech/changelog/2025-08-27"
     },
     "changelog/2025-10-01.md": {
       "bytes": 180,
-      "fetched_at": "2026-05-21T02:43:22.566030+00:00",
+      "fetched_at": "2026-05-21T09:27:31.685843+00:00",
       "sha256": "967923d44c2fbaf0a69c8dccee5c96c19c281fd14ddfb17117baf7f193b9cdad",
       "source_url": "https://learn.hex.tech/changelog/2025-10-01"
     },
     "changelog/2025-10-15.md": {
       "bytes": 382,
-      "fetched_at": "2026-05-21T02:43:23.042343+00:00",
+      "fetched_at": "2026-05-21T09:27:32.169995+00:00",
       "sha256": "5ea0b076556922728db0802cb1bf5253e6ace6f4cfa1259ca3547ded80246c1e",
       "source_url": "https://learn.hex.tech/changelog/2025-10-15"
     },
     "changelog/2025-10-29.md": {
       "bytes": 154,
-      "fetched_at": "2026-05-21T02:43:23.505235+00:00",
+      "fetched_at": "2026-05-21T09:27:32.655070+00:00",
       "sha256": "36d316389d3a47bb7dab42315d821f3fef470ed6a172ab487b80c3b11fe0093a",
       "source_url": "https://learn.hex.tech/changelog/2025-10-29"
     },
     "changelog/2025-11-12.md": {
       "bytes": 237,
-      "fetched_at": "2026-05-21T02:43:23.974211+00:00",
+      "fetched_at": "2026-05-21T09:27:33.137762+00:00",
       "sha256": "7ac41ee351875d6a499a393421b4929dd69ca42f0a1fecb8699f2e402e32d868",
       "source_url": "https://learn.hex.tech/changelog/2025-11-12"
     },
     "changelog/2025-11-19.md": {
       "bytes": 332,
-      "fetched_at": "2026-05-21T02:43:24.452136+00:00",
+      "fetched_at": "2026-05-21T09:27:33.578746+00:00",
       "sha256": "ff367ba3e8facba873442e03855d8017c15a21bb3b715e6ae2071185d0bb54fb",
       "source_url": "https://learn.hex.tech/changelog/2025-11-19"
     },
     "changelog/2025-12-16.md": {
       "bytes": 139,
-      "fetched_at": "2026-05-21T02:43:24.914298+00:00",
+      "fetched_at": "2026-05-21T09:27:34.065106+00:00",
       "sha256": "01a9f7f7564f59bcdea10658b4f7034a3550a6fbefc9028ff87ac278fa039850",
       "source_url": "https://learn.hex.tech/changelog/2025-12-16"
     },
     "changelog/2026-01-21.md": {
       "bytes": 305,
-      "fetched_at": "2026-05-21T02:43:25.380881+00:00",
+      "fetched_at": "2026-05-21T09:27:34.501703+00:00",
       "sha256": "9fa3a03132ae2c6325abc6245db81dc252453b21f6ea22184193fbf6a588a3fd",
       "source_url": "https://learn.hex.tech/changelog/2026-01-21"
     },
     "changelog/2026-01-28.md": {
       "bytes": 243,
-      "fetched_at": "2026-05-21T02:43:25.855498+00:00",
+      "fetched_at": "2026-05-21T09:27:34.987978+00:00",
       "sha256": "bb3c998aa08d76016066bd5773c3e8a638729e6e645109702abbbf51dbfbf078",
       "source_url": "https://learn.hex.tech/changelog/2026-01-28"
     },
     "changelog/2026-03-03.md": {
       "bytes": 404,
-      "fetched_at": "2026-05-21T02:43:26.318459+00:00",
+      "fetched_at": "2026-05-21T09:27:35.475571+00:00",
       "sha256": "176fe92bc3f516f9c61cfdc316085e5f81cf21a79d2face4f73cc0542aba3e53",
       "source_url": "https://learn.hex.tech/changelog/2026-03-03"
     },
     "changelog/2026-03-11.md": {
       "bytes": 238,
-      "fetched_at": "2026-05-21T02:43:26.784717+00:00",
+      "fetched_at": "2026-05-21T09:27:35.966239+00:00",
       "sha256": "8303810665f3c11e3082562c0600e5d3d61de63341a6c5b0638c5610b8e2ed8f",
       "source_url": "https://learn.hex.tech/changelog/2026-03-11"
     },
     "changelog/2026-03-12.md": {
       "bytes": 320,
-      "fetched_at": "2026-05-21T02:43:27.266582+00:00",
+      "fetched_at": "2026-05-21T09:27:36.460071+00:00",
       "sha256": "3faca4d8c33fd6635324166be73e2ea78fb713e88e4bc455f7e1d991a04e817e",
       "source_url": "https://learn.hex.tech/changelog/2026-03-12"
     },
     "changelog/2026-03-24.md": {
       "bytes": 397,
-      "fetched_at": "2026-05-21T02:43:27.741765+00:00",
+      "fetched_at": "2026-05-21T09:27:36.955999+00:00",
       "sha256": "3c98ed0692bebc05db6be79705bb372839599fb7881aed020fba05d76f02a07c",
       "source_url": "https://learn.hex.tech/changelog/2026-03-24"
     },
     "changelog/2026-04-07.md": {
       "bytes": 169,
-      "fetched_at": "2026-05-21T02:43:28.197606+00:00",
+      "fetched_at": "2026-05-21T09:27:37.440218+00:00",
       "sha256": "414267d479e31879619e87ce43c69b7fafdd3a06c45efc3098efbd2dcbb531f8",
       "source_url": "https://learn.hex.tech/changelog/2026-04-07"
     },
     "changelog/2026-04-14.md": {
       "bytes": 398,
-      "fetched_at": "2026-05-21T02:43:28.664817+00:00",
+      "fetched_at": "2026-05-21T09:27:37.928589+00:00",
       "sha256": "79d442237505eacd198cfd3d84a3a2254529358c738f536fd9fae175c5a2290c",
       "source_url": "https://learn.hex.tech/changelog/2026-04-14"
     },
     "changelog/2026-04-23.md": {
       "bytes": 343,
-      "fetched_at": "2026-05-21T02:43:29.126034+00:00",
+      "fetched_at": "2026-05-21T09:27:38.412226+00:00",
       "sha256": "6dfb9da5db2b18d767edb215c81b4d437db33030ada82fda09cdf4e8c1d3ccba",
       "source_url": "https://learn.hex.tech/changelog/2026-04-23"
     },
     "changelog/2026-04-30.md": {
       "bytes": 229,
-      "fetched_at": "2026-05-21T02:43:29.589778+00:00",
+      "fetched_at": "2026-05-21T09:27:38.901532+00:00",
       "sha256": "4efa85a57564a34cdcf7613eaec7176e65ec0bde7729c7fb660c57b5abe6d607",
       "source_url": "https://learn.hex.tech/changelog/2026-04-30"
     },
     "changelog/2026-05-12.md": {
       "bytes": 255,
-      "fetched_at": "2026-05-21T02:43:30.054036+00:00",
+      "fetched_at": "2026-05-21T09:27:39.338407+00:00",
       "sha256": "7c121185d2bc77dbfd1404d3214b959a48ae7e5367925e3d45d36a70bf42ae42",
       "source_url": "https://learn.hex.tech/changelog/2026-05-12"
     },
     "changelog/2026-05-14.md": {
       "bytes": 135,
-      "fetched_at": "2026-05-21T02:43:30.508945+00:00",
+      "fetched_at": "2026-05-21T09:27:39.812542+00:00",
       "sha256": "91f604b6926d82da826d14243d1ddd9e29d2b30da4f72a82ced42af29b4abc6f",
       "source_url": "https://learn.hex.tech/changelog/2026-05-14"
     },
     "changelog/archive.md": {
       "bytes": 8978,
-      "fetched_at": "2026-05-21T02:43:30.999701+00:00",
+      "fetched_at": "2026-05-21T09:27:40.330046+00:00",
       "sha256": "7924b03f69a539916c11d7723f64ad6aaa8625d56d6247a2c2b916acdce576d7",
       "source_url": "https://learn.hex.tech/changelog/archive"
     },
     "changelog/page/10.md": {
       "bytes": 198,
-      "fetched_at": "2026-05-21T02:43:31.497237+00:00",
+      "fetched_at": "2026-05-21T09:27:40.852764+00:00",
       "sha256": "24a97e27ee14cf9754d44f7854bc01cc365bb2e597a13a208159f3a3daaca434",
       "source_url": "https://learn.hex.tech/changelog/page/10"
     },
     "changelog/page/11.md": {
       "bytes": 217,
-      "fetched_at": "2026-05-21T02:43:31.998993+00:00",
+      "fetched_at": "2026-05-21T09:27:41.372450+00:00",
       "sha256": "10350afd4c9d74c3381687130e11e0ca5f772ace54bcd57d53b251afe463aa4a",
       "source_url": "https://learn.hex.tech/changelog/page/11"
     },
     "changelog/page/12.md": {
       "bytes": 223,
-      "fetched_at": "2026-05-21T02:43:32.496690+00:00",
+      "fetched_at": "2026-05-21T09:27:41.901809+00:00",
       "sha256": "655672c26e6d5cf3ad4368c27afc1e1eaf8108d8d7dce75c53f00f4ff7be9f49",
       "source_url": "https://learn.hex.tech/changelog/page/12"
     },
     "changelog/page/13.md": {
       "bytes": 448,
-      "fetched_at": "2026-05-21T02:43:33.005967+00:00",
+      "fetched_at": "2026-05-21T09:27:42.427673+00:00",
       "sha256": "e40c6e94a25649b516e48092c5734a58c85d1818802907e1f418307ac88c7130",
       "source_url": "https://learn.hex.tech/changelog/page/13"
     },
     "changelog/page/14.md": {
       "bytes": 336,
-      "fetched_at": "2026-05-21T02:43:33.502557+00:00",
+      "fetched_at": "2026-05-21T09:27:42.956615+00:00",
       "sha256": "a16873a9591476bcc17c1e285684446c5d2294f5d7857d96fe9bdbe278162c3e",
       "source_url": "https://learn.hex.tech/changelog/page/14"
     },
     "changelog/page/15.md": {
       "bytes": 182,
-      "fetched_at": "2026-05-21T02:43:33.987447+00:00",
+      "fetched_at": "2026-05-21T09:27:43.462306+00:00",
       "sha256": "d4bf408822ced1caca6b96c3336253863753a4917e8834b919acd54c1b59563d",
       "source_url": "https://learn.hex.tech/changelog/page/15"
     },
     "changelog/page/16.md": {
       "bytes": 218,
-      "fetched_at": "2026-05-21T02:43:34.472135+00:00",
+      "fetched_at": "2026-05-21T09:27:43.976529+00:00",
       "sha256": "4710ded77ce6373f823dba24596be9522676fc4967e03f3c58b281bba2965cf9",
       "source_url": "https://learn.hex.tech/changelog/page/16"
     },
     "changelog/page/17.md": {
       "bytes": 226,
-      "fetched_at": "2026-05-21T02:43:34.957956+00:00",
+      "fetched_at": "2026-05-21T09:27:44.482208+00:00",
       "sha256": "545e86f8c3f5447c0285236f1a2083bc34c30b19a73e4cb3588fdf62739b5add",
       "source_url": "https://learn.hex.tech/changelog/page/17"
     },
     "changelog/page/2.md": {
       "bytes": 397,
-      "fetched_at": "2026-05-21T02:43:35.450127+00:00",
+      "fetched_at": "2026-05-21T09:27:44.960774+00:00",
       "sha256": "3c98ed0692bebc05db6be79705bb372839599fb7881aed020fba05d76f02a07c",
       "source_url": "https://learn.hex.tech/changelog/page/2"
     },
     "changelog/page/3.md": {
       "bytes": 139,
-      "fetched_at": "2026-05-21T02:43:35.954790+00:00",
+      "fetched_at": "2026-05-21T09:27:45.485062+00:00",
       "sha256": "01a9f7f7564f59bcdea10658b4f7034a3550a6fbefc9028ff87ac278fa039850",
       "source_url": "https://learn.hex.tech/changelog/page/3"
     },
     "changelog/page/4.md": {
       "bytes": 142,
-      "fetched_at": "2026-05-21T02:43:36.456702+00:00",
+      "fetched_at": "2026-05-21T09:27:46.008829+00:00",
       "sha256": "1505aa9b91cebf58da3ea365d76ea9783090a2ab803e559b6dde6698f154d7f0",
       "source_url": "https://learn.hex.tech/changelog/page/4"
     },
     "changelog/page/5.md": {
       "bytes": 382,
-      "fetched_at": "2026-05-21T02:43:36.950733+00:00",
+      "fetched_at": "2026-05-21T09:27:46.524353+00:00",
       "sha256": "8fc232937c89dfb07d9797ffbd2fd0e01dfe334cbe307830cccfa9c32d83d528",
       "source_url": "https://learn.hex.tech/changelog/page/5"
     },
     "changelog/page/6.md": {
       "bytes": 491,
-      "fetched_at": "2026-05-21T02:43:37.454334+00:00",
+      "fetched_at": "2026-05-21T09:27:47.054675+00:00",
       "sha256": "4c4f97ffa2c9193aa0fdd7c54adc2dbbf94b398cd11ebc95a193f3e4360a5a78",
       "source_url": "https://learn.hex.tech/changelog/page/6"
     },
     "changelog/page/7.md": {
       "bytes": 332,
-      "fetched_at": "2026-05-21T02:43:37.954894+00:00",
+      "fetched_at": "2026-05-21T09:27:47.577005+00:00",
       "sha256": "f74a5001e547f08aa324e4854fd866b85dab7e463b60e2acb6494e076ab4fdcc",
       "source_url": "https://learn.hex.tech/changelog/page/7"
     },
     "changelog/page/8.md": {
       "bytes": 229,
-      "fetched_at": "2026-05-21T02:43:38.457407+00:00",
+      "fetched_at": "2026-05-21T09:27:48.102498+00:00",
       "sha256": "932febdb0eee6a283a792d717c5b57019a18fe90a0526e749eb0ca95a3b6b403",
       "source_url": "https://learn.hex.tech/changelog/page/8"
     },
     "changelog/page/9.md": {
       "bytes": 298,
-      "fetched_at": "2026-05-21T02:43:38.983302+00:00",
+      "fetched_at": "2026-05-21T09:27:48.651611+00:00",
       "sha256": "f34fb7835d78d73486dbc46c8883d9e8646273b38f13a2d5364ca514276dae25",
       "source_url": "https://learn.hex.tech/changelog/page/9"
     },
     "docs.md": {
       "bytes": 6466,
-      "fetched_at": "2026-05-21T02:43:39.454448+00:00",
-      "sha256": "188dad6c04483dcf7cfc13a65d9e87e75d13dae4c3a71aaa3ff55f6d70333140",
+      "fetched_at": "2026-05-21T09:27:49.104555+00:00",
+      "sha256": "1539078585b48fa9886a7a9131e438fdecf80e8d74eece51c124cda864c7c311",
       "source_url": "https://learn.hex.tech/docs"
     },
     "docs/administration/billing-faq.md": {
       "bytes": 15517,
-      "fetched_at": "2026-05-21T02:43:39.964948+00:00",
-      "sha256": "a9c2f281519c1d2bd1e65dc93056f226694720d78e548e85acdfd4fb7baaa1c1",
+      "fetched_at": "2026-05-21T09:27:49.584163+00:00",
+      "sha256": "6f5ea2019504d378134709b8eefcfff6236c413499d0f090a1b03ceb7c390ab3",
       "source_url": "https://learn.hex.tech/docs/administration/billing-faq"
     },
     "docs/administration/credits.md": {
       "bytes": 6827,
-      "fetched_at": "2026-05-21T02:43:40.450719+00:00",
-      "sha256": "6c60834ca384ec8fe1325ea541dd083d2e16413d2d67045f4cc44daa674ad84d",
+      "fetched_at": "2026-05-21T09:27:50.044337+00:00",
+      "sha256": "f9e707de7d3ba054c14a806112a74969684d10c58ac03c80eb865b221004ca12",
       "source_url": "https://learn.hex.tech/docs/administration/credits"
     },
     "docs/administration/sso.md": {
       "bytes": 7494,
-      "fetched_at": "2026-05-21T02:43:40.931324+00:00",
+      "fetched_at": "2026-05-21T09:27:50.505323+00:00",
       "sha256": "5e44a0794ce3f6a62cf746331adc6169502a4311f39b09cdfb52668c096658f0",
       "source_url": "https://learn.hex.tech/docs/administration/sso"
     },
     "docs/administration/user-settings.md": {
       "bytes": 2185,
-      "fetched_at": "2026-05-21T02:43:41.404585+00:00",
+      "fetched_at": "2026-05-21T09:27:50.953370+00:00",
       "sha256": "15e430d5d6fb1de0b25d437a744a6fa9a4242b6910690eb2a3634400effc9bd9",
       "source_url": "https://learn.hex.tech/docs/administration/user-settings"
     },
     "docs/administration/workspace_settings/audit-logs/audit-logs-overview.md": {
       "bytes": 2410,
-      "fetched_at": "2026-05-21T02:43:41.882862+00:00",
+      "fetched_at": "2026-05-21T09:27:51.415679+00:00",
       "sha256": "fef5ab3f977906075d8faf32dd0399404810ddb3d26ffb8f86031531a79c3448",
       "source_url": "https://learn.hex.tech/docs/administration/workspace_settings/audit-logs/audit-logs-overview"
     },
     "docs/administration/workspace_settings/audit-logs/audit-logs-reference.md": {
       "bytes": 16503,
-      "fetched_at": "2026-05-21T02:43:42.446553+00:00",
+      "fetched_at": "2026-05-21T09:27:51.974926+00:00",
       "sha256": "a42ad218df22ad3f806b6fac8cd233a483c1e14850d21a69add8f71898951cac",
       "source_url": "https://learn.hex.tech/docs/administration/workspace_settings/audit-logs/audit-logs-reference"
     },
     "docs/administration/workspace_settings/compute.md": {
       "bytes": 4316,
-      "fetched_at": "2026-05-21T02:43:42.916322+00:00",
+      "fetched_at": "2026-05-21T09:27:52.424370+00:00",
       "sha256": "810a63b3d4a7554740201c2db7979e31b00f1d43e85945b885bd7bd14a6478cc",
       "source_url": "https://learn.hex.tech/docs/administration/workspace_settings/compute"
     },
     "docs/administration/workspace_settings/custom-images.md": {
       "bytes": 18466,
-      "fetched_at": "2026-05-21T02:43:43.460384+00:00",
-      "sha256": "aca3e5819c513099f7b2b8963f35c0f1db6317b2dee51e2e16776997693f6dfc",
+      "fetched_at": "2026-05-21T09:27:52.957333+00:00",
+      "sha256": "27002c41da0e130cc8bd494a2bd57c7c4a6f5e1a0abad0fa4ac94ff4c15c8dcb",
       "source_url": "https://learn.hex.tech/docs/administration/workspace_settings/custom-images"
     },
     "docs/administration/workspace_settings/data-retention.md": {
       "bytes": 3212,
-      "fetched_at": "2026-05-21T02:43:43.932412+00:00",
-      "sha256": "23ad2bc0b025c4d4cc21792383063b3b43a2919bd55e458dbd01d16318989d2e",
+      "fetched_at": "2026-05-21T09:27:53.407935+00:00",
+      "sha256": "d5aa3c6b1d34d23fdb38b01d1a129e9a2d2c882d8698cd706adc3c9b85b5e4f5",
       "source_url": "https://learn.hex.tech/docs/administration/workspace_settings/data-retention"
     },
     "docs/administration/workspace_settings/directory-sync.md": {
       "bytes": 6295,
-      "fetched_at": "2026-05-21T02:43:44.419274+00:00",
-      "sha256": "7b54f08b71b8ec4f5dd8d1b2f6438f46a203656d66a8afbbade3325b2292a5f8",
+      "fetched_at": "2026-05-21T09:27:53.864526+00:00",
+      "sha256": "26aa6bc51b5e820c928b26b1443aecff9253dfa0e47483cbf710917d42dd0f36",
       "source_url": "https://learn.hex.tech/docs/administration/workspace_settings/directory-sync"
     },
     "docs/administration/workspace_settings/enable-ai-and-agents.md": {
       "bytes": 1179,
-      "fetched_at": "2026-05-21T02:43:44.892237+00:00",
+      "fetched_at": "2026-05-21T09:27:54.309273+00:00",
       "sha256": "c5b212175ee9d3987ac4ebc4b69732cbe99f37b44aa80e1ea66a0f70f2c9ec48",
       "source_url": "https://learn.hex.tech/docs/administration/workspace_settings/enable-ai-and-agents"
     },
     "docs/administration/workspace_settings/overview.md": {
       "bytes": 8347,
-      "fetched_at": "2026-05-21T02:43:45.387851+00:00",
-      "sha256": "8fc317b7e6aa7046a8fbd8bb2b830e01743e206149b6e1db14501d472c309026",
+      "fetched_at": "2026-05-21T09:27:54.778177+00:00",
+      "sha256": "18518414d92ae385da6cf2fb223483776f6c218296f8f9d0f46e0cf29459184f",
       "source_url": "https://learn.hex.tech/docs/administration/workspace_settings/overview"
     },
     "docs/administration/workspace_settings/workspace-assets.md": {
       "bytes": 16613,
-      "fetched_at": "2026-05-21T02:43:45.901405+00:00",
-      "sha256": "383a54f9a7096dc40eaebca6dfbcacd2792aedb5fda08e203802e42c60fe1974",
+      "fetched_at": "2026-05-21T09:27:55.268351+00:00",
+      "sha256": "e9819a84fe92f0588655e5736afaf6d2580c41a14195da7dde7014b11b40527b",
       "source_url": "https://learn.hex.tech/docs/administration/workspace_settings/workspace-assets"
     },
     "docs/administration/workspace_settings/workspace-custom-styling.md": {
       "bytes": 8010,
-      "fetched_at": "2026-05-21T02:43:46.398065+00:00",
+      "fetched_at": "2026-05-21T09:27:55.741681+00:00",
       "sha256": "2903c4c6d3fa9310c288e53c2ad7ce58d658f85dc737cd104057d44b8e8250d3",
       "source_url": "https://learn.hex.tech/docs/administration/workspace_settings/workspace-custom-styling"
     },
     "docs/administration/workspace_settings/workspace-scheduled-runs.md": {
       "bytes": 1951,
-      "fetched_at": "2026-05-21T02:43:46.877028+00:00",
+      "fetched_at": "2026-05-21T09:27:56.191074+00:00",
       "sha256": "0e64dec6e02ba571bdfb069af0720b6fad2a0a47496297605ab4f67e0f24561f",
       "source_url": "https://learn.hex.tech/docs/administration/workspace_settings/workspace-scheduled-runs"
     },
     "docs/administration/workspace_settings/workspace-security.md": {
       "bytes": 10120,
-      "fetched_at": "2026-05-21T02:43:47.362036+00:00",
-      "sha256": "eff0a030bc33cb5da8b9f756b3c74906caa03fd1e85541aaa923868c6a3fc762",
+      "fetched_at": "2026-05-21T09:27:56.655483+00:00",
+      "sha256": "e2ca575535df5ceddd1abfc44ff949552ab8e350418da87d214ab130edf418a4",
       "source_url": "https://learn.hex.tech/docs/administration/workspace_settings/workspace-security"
     },
     "docs/agent-management.md": {
       "bytes": 694,
-      "fetched_at": "2026-05-21T02:43:47.844366+00:00",
+      "fetched_at": "2026-05-21T09:27:57.099606+00:00",
       "sha256": "577988fed2559808889a4ee7e366d2aa2876a4cb1b7b476f0f1abf00b4e39902",
       "source_url": "https://learn.hex.tech/docs/agent-management"
     },
     "docs/agent-management/agent-personalization.md": {
       "bytes": 1998,
-      "fetched_at": "2026-05-21T02:43:48.339668+00:00",
+      "fetched_at": "2026-05-21T09:27:57.566087+00:00",
       "sha256": "db2ac545253f55eef1641393ad959d58a396572b6994b70b517f0649658281e1",
       "source_url": "https://learn.hex.tech/docs/agent-management/agent-personalization"
     },
     "docs/agent-management/context-management.md": {
       "bytes": 813,
-      "fetched_at": "2026-05-21T02:43:48.812465+00:00",
+      "fetched_at": "2026-05-21T09:27:58.008743+00:00",
       "sha256": "fdaf9d85d2f27a138e8e748fd2c4baf246fac350f3d18431bd13153d19e349ba",
       "source_url": "https://learn.hex.tech/docs/agent-management/context-management"
     },
     "docs/agent-management/context-management/endorsements-in-context-studio.md": {
       "bytes": 1847,
-      "fetched_at": "2026-05-21T02:43:49.284034+00:00",
+      "fetched_at": "2026-05-21T09:27:58.455214+00:00",
       "sha256": "6f6101a53b9ddf91fa7a41dc2c401478c804654db228b950020b05cc3ca74dee",
       "source_url": "https://learn.hex.tech/docs/agent-management/context-management/endorsements-in-context-studio"
     },
     "docs/agent-management/context-management/guides.md": {
       "bytes": 10805,
-      "fetched_at": "2026-05-21T02:43:49.805967+00:00",
+      "fetched_at": "2026-05-21T09:27:58.962215+00:00",
       "sha256": "5cee067665217c27d484fe3421680ac1498e283378296059f3be7ca2c421881a",
       "source_url": "https://learn.hex.tech/docs/agent-management/context-management/guides"
     },
     "docs/agent-management/context-management/models.md": {
       "bytes": 1030,
-      "fetched_at": "2026-05-21T02:43:50.281715+00:00",
+      "fetched_at": "2026-05-21T09:27:59.410468+00:00",
       "sha256": "a41956f55a300b3aad9c295604deef36257610a19eaedc41018e84b80b1aff7b",
       "source_url": "https://learn.hex.tech/docs/agent-management/context-management/models"
     },
     "docs/agent-management/context-management/reference-repositories.md": {
       "bytes": 2639,
-      "fetched_at": "2026-05-21T02:43:50.775432+00:00",
+      "fetched_at": "2026-05-21T09:27:59.868359+00:00",
       "sha256": "ff0e22fc99d46dcb0129676b1877f5368590759b2a5df70655a2acaa6c07aa8c",
       "source_url": "https://learn.hex.tech/docs/agent-management/context-management/reference-repositories"
     },
     "docs/agent-management/context-studio.md": {
       "bytes": 3139,
-      "fetched_at": "2026-05-21T02:43:51.258160+00:00",
+      "fetched_at": "2026-05-21T09:28:00.317223+00:00",
       "sha256": "09d7fcea848c745dc5ab6a8999384d2b5cfbcad4ee7cf944f135f45df0daf9d0",
       "source_url": "https://learn.hex.tech/docs/agent-management/context-studio"
     },
     "docs/agent-management/observability.md": {
       "bytes": 5143,
-      "fetched_at": "2026-05-21T02:43:51.741909+00:00",
+      "fetched_at": "2026-05-21T09:28:00.771645+00:00",
       "sha256": "344a24286336cc9e2d2669c2df5d2360131b6beb4bd4b53ae95d74ac377bb9de",
       "source_url": "https://learn.hex.tech/docs/agent-management/observability"
     },
     "docs/agent-management/suggestions.md": {
       "bytes": 6640,
-      "fetched_at": "2026-05-21T02:43:52.231516+00:00",
+      "fetched_at": "2026-05-21T09:28:01.239358+00:00",
       "sha256": "288abef9ca13f277efb995f18bf71913f744270120dd49f0b7c64c562a3f6413",
       "source_url": "https://learn.hex.tech/docs/agent-management/suggestions"
     },
     "docs/api-integrations.md": {
       "bytes": 725,
-      "fetched_at": "2026-05-21T02:43:52.704710+00:00",
+      "fetched_at": "2026-05-21T09:28:01.682741+00:00",
       "sha256": "5a16fe36a250493fc069376ae1036cdaab0e6dd413765b23f83ca9baf42ff8ab",
       "source_url": "https://learn.hex.tech/docs/api-integrations"
     },
     "docs/api-integrations/api/overview.md": {
       "bytes": 30925,
-      "fetched_at": "2026-05-21T02:43:53.419207+00:00",
-      "sha256": "72766f61d2f78995262af058531df784c44936a579cea8fc3c44fa53c489f0e7",
+      "fetched_at": "2026-05-21T09:28:02.420496+00:00",
+      "sha256": "a95b31e2b54a31d451550966153a3709ef1c3164b9c7d6fd4921d06aa0c01c48",
       "source_url": "https://learn.hex.tech/docs/api-integrations/api/overview"
     },
     "docs/api-integrations/api/reference.md": {
       "bytes": 52025,
-      "fetched_at": "2026-05-21T02:43:54.973900+00:00",
+      "fetched_at": "2026-05-21T09:28:04.138269+00:00",
       "sha256": "1fe05d404df6ebdbff7d781b914719ec7ddd96d1c961edfb6d1b45f160647ce0",
       "source_url": "https://learn.hex.tech/docs/api-integrations/api/reference"
     },
     "docs/api-integrations/cli.md": {
       "bytes": 5513,
-      "fetched_at": "2026-05-21T02:43:55.461905+00:00",
-      "sha256": "7cd7a5a2f5930b676fa5bb88ea0abeba33c00603eb21c0b93d31729d87f5520c",
+      "fetched_at": "2026-05-21T09:28:04.606125+00:00",
+      "sha256": "12b2d2ff3c64ae94707fae29521dac95bf26bc2a7081fdfa056cdcebe293bc4d",
       "source_url": "https://learn.hex.tech/docs/api-integrations/cli"
     },
     "docs/api-integrations/hex-agent-data-connection-access.md": {
       "bytes": 2209,
-      "fetched_at": "2026-05-21T02:43:55.936228+00:00",
+      "fetched_at": "2026-05-21T09:28:05.052074+00:00",
       "sha256": "71f6ac517993ecd1f6e221492f43afdb34b8fa5807f0e5c714c792ef8fe66878",
       "source_url": "https://learn.hex.tech/docs/api-integrations/hex-agent-data-connection-access"
     },
     "docs/api-integrations/mcp-server.md": {
       "bytes": 13434,
-      "fetched_at": "2026-05-21T02:43:56.449976+00:00",
+      "fetched_at": "2026-05-21T09:28:05.546885+00:00",
       "sha256": "1dfd3b6fbb37b3e704ff0106543b8c8b01571dfba7c89c9c83bca877277d04a2",
       "source_url": "https://learn.hex.tech/docs/api-integrations/mcp-server"
     },
     "docs/api-integrations/slack.md": {
       "bytes": 2532,
-      "fetched_at": "2026-05-21T02:43:56.918281+00:00",
-      "sha256": "ff7038bd4042df313af19e506cf18a5450c877353940bcca62b594e105335752",
+      "fetched_at": "2026-05-21T09:28:05.994090+00:00",
+      "sha256": "1546c5aa314a11f83a92a31d78d761192d2327bc68886532831999cbfd963304",
       "source_url": "https://learn.hex.tech/docs/api-integrations/slack"
     },
     "docs/category/audit-logs.md": {
       "bytes": 320,
-      "fetched_at": "2026-05-21T02:43:57.390119+00:00",
+      "fetched_at": "2026-05-21T09:28:06.436887+00:00",
       "sha256": "fca21e506a84e924cd8beae8e6534ed4c044ae3b713dbb049fb2a55076343e52",
       "source_url": "https://learn.hex.tech/docs/category/audit-logs"
     },
     "docs/category/data-cells.md": {
       "bytes": 310,
-      "fetched_at": "2026-05-21T02:43:57.857308+00:00",
+      "fetched_at": "2026-05-21T09:28:06.880646+00:00",
       "sha256": "4916c40cca1363f8247127d896f64cbc52e9a11e42ed5f288dcb58fb26ae764e",
       "source_url": "https://learn.hex.tech/docs/category/data-cells"
     },
     "docs/category/data-connections.md": {
       "bytes": 1866,
-      "fetched_at": "2026-05-21T02:43:58.404938+00:00",
+      "fetched_at": "2026-05-21T09:28:07.331243+00:00",
       "sha256": "2f320634f536d0ed27c3cb026e6e6dfe5e216c0f7881defa59d0c28a0f22a21c",
       "source_url": "https://learn.hex.tech/docs/category/data-connections"
     },
     "docs/category/environment-configuration.md": {
       "bytes": 862,
-      "fetched_at": "2026-05-21T02:43:58.877297+00:00",
+      "fetched_at": "2026-05-21T09:28:07.773162+00:00",
       "sha256": "f6daf6f591f5d4eca6b056de7e11c5cdfc7597bd711e6e0d4f8cc1b603f24997",
       "source_url": "https://learn.hex.tech/docs/category/environment-configuration"
     },
     "docs/category/input-cells.md": {
       "bytes": 1590,
-      "fetched_at": "2026-05-21T02:43:59.347387+00:00",
+      "fetched_at": "2026-05-21T09:28:08.218689+00:00",
       "sha256": "83b852c6cb3ba5c5ffd31460e4181aff651195ece3a4c707b4d594949a43b35f",
       "source_url": "https://learn.hex.tech/docs/category/input-cells"
     },
     "docs/category/project-execution.md": {
       "bytes": 780,
-      "fetched_at": "2026-05-21T02:43:59.822862+00:00",
+      "fetched_at": "2026-05-21T09:28:08.662051+00:00",
       "sha256": "a352a9ebd26fd059c50827f9cfc730944557182d550ef5e08e6eacf454aaf452",
       "source_url": "https://learn.hex.tech/docs/category/project-execution"
     },
     "docs/category/setup-guides.md": {
       "bytes": 3444,
-      "fetched_at": "2026-05-21T02:44:00.300235+00:00",
+      "fetched_at": "2026-05-21T09:28:09.114955+00:00",
       "sha256": "853b8c18a64fa30c0d86725e7df72aa8b91f932df3ed0241056f7ea8ded3a6e0",
       "source_url": "https://learn.hex.tech/docs/category/setup-guides"
     },
     "docs/category/sql-cells.md": {
       "bytes": 546,
-      "fetched_at": "2026-05-21T02:44:00.772742+00:00",
+      "fetched_at": "2026-05-21T09:28:09.558598+00:00",
       "sha256": "21faab2290444641b0797f6e14fa8bb99380d9690a34a35af0b55118dd5d66a9",
       "source_url": "https://learn.hex.tech/docs/category/sql-cells"
     },
     "docs/category/transform-cells.md": {
       "bytes": 410,
-      "fetched_at": "2026-05-21T02:44:01.255916+00:00",
+      "fetched_at": "2026-05-21T09:28:10.003709+00:00",
       "sha256": "174a113242c025b1ee97dff0b89e62441d8f9638376e20aaab48a260ea7e5bfe",
       "source_url": "https://learn.hex.tech/docs/category/transform-cells"
     },
     "docs/category/visualization-cells.md": {
       "bytes": 748,
-      "fetched_at": "2026-05-21T02:44:01.731494+00:00",
+      "fetched_at": "2026-05-21T09:28:10.447615+00:00",
       "sha256": "c726d01fab6e43e9baf2c7dacc630e135c741bfeeef5a838d9708a9a3feb582e",
       "source_url": "https://learn.hex.tech/docs/category/visualization-cells"
     },
     "docs/category/workspace-settings.md": {
       "bytes": 1926,
-      "fetched_at": "2026-05-21T02:44:02.213765+00:00",
+      "fetched_at": "2026-05-21T09:28:10.896035+00:00",
       "sha256": "b5a12479092bc113aa8d446e5569cfd022182b23c77519366b245283cc13f95c",
       "source_url": "https://learn.hex.tech/docs/category/workspace-settings"
     },
     "docs/collaborate/comments.md": {
       "bytes": 3160,
-      "fetched_at": "2026-05-21T02:44:02.690014+00:00",
+      "fetched_at": "2026-05-21T09:28:11.350043+00:00",
       "sha256": "98202b034e87c54f0ce2f353ddba781b250a4a1775eaf7d25e80629f9255c5e9",
       "source_url": "https://learn.hex.tech/docs/collaborate/comments"
     },
     "docs/collaborate/real-time-collaboration.md": {
       "bytes": 1002,
-      "fetched_at": "2026-05-21T02:44:03.168933+00:00",
+      "fetched_at": "2026-05-21T09:28:11.795252+00:00",
       "sha256": "d93f862f7bc258cbf9bf698e21216831ccda64795bb5bb968acb1e17076d8802",
       "source_url": "https://learn.hex.tech/docs/collaborate/real-time-collaboration"
     },
     "docs/collaborate/reviews.md": {
       "bytes": 7873,
-      "fetched_at": "2026-05-21T02:44:03.659708+00:00",
+      "fetched_at": "2026-05-21T09:28:12.253912+00:00",
       "sha256": "b5d183e07a5818737befe083c69a600dfd850b8b40ccb484ee0fa11bf44c5a71",
       "source_url": "https://learn.hex.tech/docs/collaborate/reviews"
     },
     "docs/collaborate/sharing-and-permissions/project-sharing.md": {
       "bytes": 14495,
-      "fetched_at": "2026-05-21T02:44:04.165953+00:00",
+      "fetched_at": "2026-05-21T09:28:12.736710+00:00",
       "sha256": "842cbfc200e413b0f3a6d3443295fef1c88023f2ac0d2f43f54f079363739d32",
       "source_url": "https://learn.hex.tech/docs/collaborate/sharing-and-permissions/project-sharing"
     },
     "docs/collaborate/sharing-and-permissions/roles.md": {
       "bytes": 7276,
-      "fetched_at": "2026-05-21T02:44:04.660592+00:00",
+      "fetched_at": "2026-05-21T09:28:13.209887+00:00",
       "sha256": "3f8a1cc337868fe5f3f8232699e448a7c9c3ec6e019a03867ec7fec7fa03152a",
       "source_url": "https://learn.hex.tech/docs/collaborate/sharing-and-permissions/roles"
     },
     "docs/collaborate/sharing-and-permissions/sharing-permissions.md": {
       "bytes": 7231,
-      "fetched_at": "2026-05-21T02:44:05.144680+00:00",
+      "fetched_at": "2026-05-21T09:28:13.668973+00:00",
       "sha256": "db02b7e3b434318e16eadaec589c963128641172087d2061e52080a777829911",
       "source_url": "https://learn.hex.tech/docs/collaborate/sharing-and-permissions/sharing-permissions"
     },
     "docs/connect-to-data.md": {
       "bytes": 617,
-      "fetched_at": "2026-05-21T02:44:05.644465+00:00",
+      "fetched_at": "2026-05-21T09:28:14.113208+00:00",
       "sha256": "df0b177626e725c7c9b5b20580bb251422919c5384325f07227f5a13865962f1",
       "source_url": "https://learn.hex.tech/docs/connect-to-data"
     },
     "docs/connect-to-data/cloud-storage-integrations.md": {
       "bytes": 7706,
-      "fetched_at": "2026-05-21T02:44:06.129948+00:00",
+      "fetched_at": "2026-05-21T09:28:14.576824+00:00",
       "sha256": "88f8323348ff2a0225a01e5e58e6623e23c77a8c194c0f7682dbd8aa78ed8f36",
       "source_url": "https://learn.hex.tech/docs/connect-to-data/cloud-storage-integrations"
     },
     "docs/connect-to-data/data-connections/allow-connections-from-hex-ip-addresses.md": {
       "bytes": 1274,
-      "fetched_at": "2026-05-21T02:44:06.611315+00:00",
+      "fetched_at": "2026-05-21T09:28:15.027496+00:00",
       "sha256": "b13200be85ebf105c92243a6b26f39428beff6f2c07a51655df935274a4d2708",
       "source_url": "https://learn.hex.tech/docs/connect-to-data/data-connections/allow-connections-from-hex-ip-addresses"
     },
     "docs/connect-to-data/data-connections/bigquery-dataframes.md": {
       "bytes": 3455,
-      "fetched_at": "2026-05-21T02:44:07.092097+00:00",
+      "fetched_at": "2026-05-21T09:28:15.480331+00:00",
       "sha256": "85c092300e25b4e2af1050d42128f818ca5ecf6ff09ac4a0a1282d7b2b84d434",
       "source_url": "https://learn.hex.tech/docs/connect-to-data/data-connections/bigquery-dataframes"
     },
     "docs/connect-to-data/data-connections/clickhouse-chdb.md": {
       "bytes": 2933,
-      "fetched_at": "2026-05-21T02:44:07.578750+00:00",
+      "fetched_at": "2026-05-21T09:28:15.937970+00:00",
       "sha256": "33609b8f1a4b963d350a3dfb115ae3a3760f584b0317111d2e1cfe25783bf57b",
       "source_url": "https://learn.hex.tech/docs/connect-to-data/data-connections/clickhouse-chdb"
     },
     "docs/connect-to-data/data-connections/connect-via-ssh.md": {
       "bytes": 4623,
-      "fetched_at": "2026-05-21T02:44:08.057119+00:00",
-      "sha256": "400d6e66a50d614dc4dc9f895e9efff0ad6c827a349a2bed8b691b6696c9ca02",
+      "fetched_at": "2026-05-21T09:28:16.393314+00:00",
+      "sha256": "fefef993ed658967766a753cfa44a06e2dc404615739834b064685d5f4aa7e27",
       "source_url": "https://learn.hex.tech/docs/connect-to-data/data-connections/connect-via-ssh"
     },
     "docs/connect-to-data/data-connections/data-connections-introduction.md": {
       "bytes": 19155,
-      "fetched_at": "2026-05-21T02:44:08.571484+00:00",
+      "fetched_at": "2026-05-21T09:28:16.894052+00:00",
       "sha256": "a5aace47868fce6d5d857c52ef2dd0415410f317abaea70fbc5b14d0dee7f19c",
       "source_url": "https://learn.hex.tech/docs/connect-to-data/data-connections/data-connections-introduction"
     },
     "docs/connect-to-data/data-connections/dbt-integration.md": {
       "bytes": 10811,
-      "fetched_at": "2026-05-21T02:44:09.124667+00:00",
-      "sha256": "d00bd5086c85cb6e5e72bdd63ef2fbac7ee3d495ffb93692150c18dd090108f4",
+      "fetched_at": "2026-05-21T09:28:17.441789+00:00",
+      "sha256": "6e386a58e60fcfb39af21470e801174615fe13bfca985751330e7e129fdfb106",
       "source_url": "https://learn.hex.tech/docs/connect-to-data/data-connections/dbt-integration"
     },
     "docs/connect-to-data/data-connections/oauth-data-connections.md": {
       "bytes": 24931,
-      "fetched_at": "2026-05-21T02:44:09.637364+00:00",
+      "fetched_at": "2026-05-21T09:28:17.941752+00:00",
       "sha256": "ad4c919ea904e83b32c0be5d5004ee24f7ec6aee10d1a4db0769f260bc2cb2ef",
       "source_url": "https://learn.hex.tech/docs/connect-to-data/data-connections/oauth-data-connections"
     },
     "docs/connect-to-data/data-connections/setup-guides/connect-to-alloydb.md": {
       "bytes": 3723,
-      "fetched_at": "2026-05-21T02:44:10.116889+00:00",
+      "fetched_at": "2026-05-21T09:28:18.395653+00:00",
       "sha256": "697b5375b22e052f3656c4df51fd56f74323b3365538b3acb3d0561514094073",
       "source_url": "https://learn.hex.tech/docs/connect-to-data/data-connections/setup-guides/connect-to-alloydb"
     },
     "docs/connect-to-data/data-connections/setup-guides/connect-to-amazon-athena.md": {
       "bytes": 5157,
-      "fetched_at": "2026-05-21T02:44:10.599657+00:00",
+      "fetched_at": "2026-05-21T09:28:18.853165+00:00",
       "sha256": "89bc4327294f40cfd766592b3fc4089da3814ad3f2205c70a9963ece12ff2cc9",
       "source_url": "https://learn.hex.tech/docs/connect-to-data/data-connections/setup-guides/connect-to-amazon-athena"
     },
     "docs/connect-to-data/data-connections/setup-guides/connect-to-amazon-redshift.md": {
       "bytes": 3417,
-      "fetched_at": "2026-05-21T02:44:11.083284+00:00",
+      "fetched_at": "2026-05-21T09:28:19.309650+00:00",
       "sha256": "1fa4b64b602ca0f40c1683a22a3d68db1f02d2ff6c1327551c4cc017ab79c250",
       "source_url": "https://learn.hex.tech/docs/connect-to-data/data-connections/setup-guides/connect-to-amazon-redshift"
     },
     "docs/connect-to-data/data-connections/setup-guides/connect-to-bigquery.md": {
       "bytes": 4908,
-      "fetched_at": "2026-05-21T02:44:11.563475+00:00",
+      "fetched_at": "2026-05-21T09:28:19.762866+00:00",
       "sha256": "891f7d9b6e9198fc16af59fc62c576789b9a6d851e915c1b663929b8c8dd26eb",
       "source_url": "https://learn.hex.tech/docs/connect-to-data/data-connections/setup-guides/connect-to-bigquery"
     },
     "docs/connect-to-data/data-connections/setup-guides/connect-to-clickhouse.md": {
       "bytes": 3460,
-      "fetched_at": "2026-05-21T02:44:12.066997+00:00",
+      "fetched_at": "2026-05-21T09:28:20.218077+00:00",
       "sha256": "0ba6ed8e5468ab18d2e4061ff56506702511a95d03babfe84527d06c0f9899d4",
       "source_url": "https://learn.hex.tech/docs/connect-to-data/data-connections/setup-guides/connect-to-clickhouse"
     },
     "docs/connect-to-data/data-connections/setup-guides/connect-to-cloudsql.md": {
       "bytes": 3606,
-      "fetched_at": "2026-05-21T02:44:12.592311+00:00",
+      "fetched_at": "2026-05-21T09:28:20.673432+00:00",
       "sha256": "6783e06c2821a5cdf6e81a0fbd987d72a530d1fd38358345e04ab07db227d0dd",
       "source_url": "https://learn.hex.tech/docs/connect-to-data/data-connections/setup-guides/connect-to-cloudsql"
     },
     "docs/connect-to-data/data-connections/setup-guides/connect-to-databricks.md": {
       "bytes": 3720,
-      "fetched_at": "2026-05-21T02:44:13.070002+00:00",
+      "fetched_at": "2026-05-21T09:28:21.134193+00:00",
       "sha256": "f7eed70ceaf8b1f786d5aec58ab03beab2d2d6c30e03b0b1d8b5ec5feb602cd6",
       "source_url": "https://learn.hex.tech/docs/connect-to-data/data-connections/setup-guides/connect-to-databricks"
     },
     "docs/connect-to-data/data-connections/setup-guides/connect-to-mariadb.md": {
       "bytes": 338,
-      "fetched_at": "2026-05-21T02:44:13.541594+00:00",
-      "sha256": "f2a51dc43689844c59fb4378458f0c7121efc2986387e00e02cc7254a330473a",
+      "fetched_at": "2026-05-21T09:28:21.580584+00:00",
+      "sha256": "f80020f48e95c64ed0a6bec597691e1d9e0f4dd2e3bf6da23c8741be7d3fc4af",
       "source_url": "https://learn.hex.tech/docs/connect-to-data/data-connections/setup-guides/connect-to-mariadb"
     },
     "docs/connect-to-data/data-connections/setup-guides/connect-to-microsoft-sql-server.md": {
       "bytes": 3842,
-      "fetched_at": "2026-05-21T02:44:14.017928+00:00",
+      "fetched_at": "2026-05-21T09:28:22.034866+00:00",
       "sha256": "f106447d2752df60cf015e13ca22b90079d3a475d310016f6f84835e3cd30106",
       "source_url": "https://learn.hex.tech/docs/connect-to-data/data-connections/setup-guides/connect-to-microsoft-sql-server"
     },
     "docs/connect-to-data/data-connections/setup-guides/connect-to-motherduck.md": {
       "bytes": 3428,
-      "fetched_at": "2026-05-21T02:44:14.498801+00:00",
+      "fetched_at": "2026-05-21T09:28:22.490050+00:00",
       "sha256": "1cae8f19d8222e341189db9c9a0f0647602080b468e36fa2121162b3054569f9",
       "source_url": "https://learn.hex.tech/docs/connect-to-data/data-connections/setup-guides/connect-to-motherduck"
     },
     "docs/connect-to-data/data-connections/setup-guides/connect-to-mysql.md": {
       "bytes": 3059,
-      "fetched_at": "2026-05-21T02:44:14.974824+00:00",
+      "fetched_at": "2026-05-21T09:28:22.945594+00:00",
       "sha256": "dfee82ba5275459b32f4d74f9c5d99fd9c270e486eb1ec20bcc2438693abad38",
       "source_url": "https://learn.hex.tech/docs/connect-to-data/data-connections/setup-guides/connect-to-mysql"
     },
     "docs/connect-to-data/data-connections/setup-guides/connect-to-postgres.md": {
       "bytes": 3396,
-      "fetched_at": "2026-05-21T02:44:15.459223+00:00",
+      "fetched_at": "2026-05-21T09:28:23.398920+00:00",
       "sha256": "7bc69ac4f86b6a87bea600300b5dd7b835cec44c4efc86f945ed8410988abd4f",
       "source_url": "https://learn.hex.tech/docs/connect-to-data/data-connections/setup-guides/connect-to-postgres"
     },
     "docs/connect-to-data/data-connections/setup-guides/connect-to-presto.md": {
       "bytes": 453,
-      "fetched_at": "2026-05-21T02:44:15.931340+00:00",
-      "sha256": "0561c66c912da366a0f8941ccb4ea46b619e653e6236a9a045be3a34dc5e3326",
+      "fetched_at": "2026-05-21T09:28:23.845967+00:00",
+      "sha256": "897f4e5bad648989e1cf6835080d9d8d6e8b581da33099497e2389eecc9e1aec",
       "source_url": "https://learn.hex.tech/docs/connect-to-data/data-connections/setup-guides/connect-to-presto"
     },
     "docs/connect-to-data/data-connections/setup-guides/connect-to-snowflake.md": {
       "bytes": 4975,
-      "fetched_at": "2026-05-21T02:44:16.422680+00:00",
+      "fetched_at": "2026-05-21T09:28:24.301891+00:00",
       "sha256": "7db6420b1bf5fd359a79f49eefed119ed8785c82f93413a3dc154c190a7552a7",
       "source_url": "https://learn.hex.tech/docs/connect-to-data/data-connections/setup-guides/connect-to-snowflake"
     },
     "docs/connect-to-data/data-connections/setup-guides/connect-to-starburst.md": {
       "bytes": 455,
-      "fetched_at": "2026-05-21T02:44:16.893311+00:00",
-      "sha256": "6a629b698a27b5134adc3aad44632206eafed0782344a42386a8fcc9e71e5850",
+      "fetched_at": "2026-05-21T09:28:24.749498+00:00",
+      "sha256": "a6ea33c99b3af6009b819ec3b48b29fa642f42706d0ef245d603fad80742869f",
       "source_url": "https://learn.hex.tech/docs/connect-to-data/data-connections/setup-guides/connect-to-starburst"
     },
     "docs/connect-to-data/data-connections/setup-guides/connect-to-trino.md": {
       "bytes": 3653,
-      "fetched_at": "2026-05-21T02:44:17.376346+00:00",
+      "fetched_at": "2026-05-21T09:28:25.206523+00:00",
       "sha256": "ce7fbe53728b3daa1b5b0d7172599b0c65d13bf7f7e05726f4740dbe58cc40e9",
       "source_url": "https://learn.hex.tech/docs/connect-to-data/data-connections/setup-guides/connect-to-trino"
     },
     "docs/connect-to-data/data-connections/snowpark.md": {
       "bytes": 4824,
-      "fetched_at": "2026-05-21T02:44:17.865040+00:00",
+      "fetched_at": "2026-05-21T09:28:25.661878+00:00",
       "sha256": "3f6a41fd54911aba1022ef75cc73034741583bd978aa46c35740faaca96b4eb2",
       "source_url": "https://learn.hex.tech/docs/connect-to-data/data-connections/snowpark"
     },
     "docs/connect-to-data/import-data-via-api.md": {
       "bytes": 1790,
-      "fetched_at": "2026-05-21T02:44:18.331946+00:00",
+      "fetched_at": "2026-05-21T09:28:26.108003+00:00",
       "sha256": "9d6de54cfa4e19e31c7dcd2fd816e892e95e474e783f826a2ebef03dfd5e85e4",
       "source_url": "https://learn.hex.tech/docs/connect-to-data/import-data-via-api"
     },
     "docs/connect-to-data/semantic-models/intro-to-semantic-models.md": {
       "bytes": 1869,
-      "fetched_at": "2026-05-21T02:44:18.801595+00:00",
+      "fetched_at": "2026-05-21T09:28:26.561664+00:00",
       "sha256": "7fe8513c7037d7902a27ace6fbf1fa5fdf9592d8cec39848c2c45a8cac91fc21",
       "source_url": "https://learn.hex.tech/docs/connect-to-data/semantic-models/intro-to-semantic-models"
     },
     "docs/connect-to-data/semantic-models/semantic-authoring/modeling-specification.md": {
       "bytes": 24278,
-      "fetched_at": "2026-05-21T02:44:19.529682+00:00",
+      "fetched_at": "2026-05-21T09:28:27.320682+00:00",
       "sha256": "6616f7c9888dcd3a872b5f191b6c163e1711d4d3013399fdd5c97d63a13cafbe",
       "source_url": "https://learn.hex.tech/docs/connect-to-data/semantic-models/semantic-authoring/modeling-specification"
     },
     "docs/connect-to-data/semantic-models/semantic-authoring/semantic-authoring-overview.md": {
       "bytes": 7010,
-      "fetched_at": "2026-05-21T02:44:20.019572+00:00",
+      "fetched_at": "2026-05-21T09:28:27.783127+00:00",
       "sha256": "eb8dd6475cba6d39ee7b4d4f4ead224f40e3ca23b75ff9f5838db2d9057ec712",
       "source_url": "https://learn.hex.tech/docs/connect-to-data/semantic-models/semantic-authoring/semantic-authoring-overview"
     },
     "docs/connect-to-data/semantic-models/semantic-model-sync/cube.md": {
       "bytes": 1655,
-      "fetched_at": "2026-05-21T02:44:20.497352+00:00",
+      "fetched_at": "2026-05-21T09:28:28.236070+00:00",
       "sha256": "fc9243d41254c32db9d1d70da7fd89188e09d4a109763da6e4f0eda5cc13883d",
       "source_url": "https://learn.hex.tech/docs/connect-to-data/semantic-models/semantic-model-sync/cube"
     },
     "docs/connect-to-data/semantic-models/semantic-model-sync/dbt-metricflow.md": {
       "bytes": 3934,
-      "fetched_at": "2026-05-21T02:44:20.986731+00:00",
+      "fetched_at": "2026-05-21T09:28:28.702098+00:00",
       "sha256": "acb3123a9a0192e9e891fde1da7cd6d8e30fd984431e7bbaf55ee0ddd5644e32",
       "source_url": "https://learn.hex.tech/docs/connect-to-data/semantic-models/semantic-model-sync/dbt-metricflow"
     },
     "docs/connect-to-data/semantic-models/semantic-model-sync/intro.md": {
       "bytes": 10799,
-      "fetched_at": "2026-05-21T02:44:21.483861+00:00",
+      "fetched_at": "2026-05-21T09:28:29.180565+00:00",
       "sha256": "4f606782e7438275bb98ab21ff267b4f79805ebda6ede9909f7a2b31e840fd5c",
       "source_url": "https://learn.hex.tech/docs/connect-to-data/semantic-models/semantic-model-sync/intro"
     },
     "docs/connect-to-data/semantic-models/semantic-model-sync/snowflake-semantic-views.md": {
       "bytes": 3876,
-      "fetched_at": "2026-05-21T02:44:21.959644+00:00",
-      "sha256": "11e27566ff77e962285a5b1379a085b9ddde42e166213a184bca93c33f30f6aa",
+      "fetched_at": "2026-05-21T09:28:29.640565+00:00",
+      "sha256": "2db78f8e644eb116c8fc59e9922956f66972d660a991560c706ddda851a6c733",
       "source_url": "https://learn.hex.tech/docs/connect-to-data/semantic-models/semantic-model-sync/snowflake-semantic-views"
     },
     "docs/connect-to-data/semantic-models/semantic-model-sync/unity-catalog-metric-views.md": {
       "bytes": 3377,
-      "fetched_at": "2026-05-21T02:44:22.435705+00:00",
-      "sha256": "50a87c0187b16fd6d566744b51df851e89e416d73810acc37d8983df41450094",
+      "fetched_at": "2026-05-21T09:28:30.099186+00:00",
+      "sha256": "22132c307eb98832030cbba8535ef01fad95eacdf5bf94b7daf2b6cbbdf36bf4",
       "source_url": "https://learn.hex.tech/docs/connect-to-data/semantic-models/semantic-model-sync/unity-catalog-metric-views"
     },
     "docs/connect-to-data/semantic-models/viewing-and-using-semantic-models.md": {
       "bytes": 1826,
-      "fetched_at": "2026-05-21T02:44:22.907830+00:00",
+      "fetched_at": "2026-05-21T09:28:30.545472+00:00",
       "sha256": "64c43a148679994464cea0a6fa3c3c5e49410c02ec82b8969ddd0d5c2d74305e",
       "source_url": "https://learn.hex.tech/docs/connect-to-data/semantic-models/viewing-and-using-semantic-models"
     },
     "docs/connect-to-data/upload-files.md": {
       "bytes": 3891,
-      "fetched_at": "2026-05-21T02:44:23.390002+00:00",
+      "fetched_at": "2026-05-21T09:28:30.998484+00:00",
       "sha256": "3d5608268300dca1a2f49f762e140f7243678ab5283a00155c0af5e25dd9b844",
       "source_url": "https://learn.hex.tech/docs/connect-to-data/upload-files"
     },
     "docs/explore-data.md": {
       "bytes": 823,
-      "fetched_at": "2026-05-21T02:44:23.863491+00:00",
+      "fetched_at": "2026-05-21T09:28:31.444799+00:00",
       "sha256": "9758a2dcb16a65bce2f3d6567760b8982185a50c4db6961e31ccbc65f5f46d89",
       "source_url": "https://learn.hex.tech/docs/explore-data"
     },
     "docs/explore-data/cells/calculations.md": {
       "bytes": 24230,
-      "fetched_at": "2026-05-21T02:44:24.450697+00:00",
+      "fetched_at": "2026-05-21T09:28:32.015984+00:00",
       "sha256": "8bceb2be704b7458da9cdd8c4042107a9855dee1c766bd3559e3b80a5414130e",
       "source_url": "https://learn.hex.tech/docs/explore-data/cells/calculations"
     },
     "docs/explore-data/cells/code-typeahead.md": {
       "bytes": 2225,
-      "fetched_at": "2026-05-21T02:44:24.925798+00:00",
+      "fetched_at": "2026-05-21T09:28:32.464916+00:00",
       "sha256": "00efa7bd4ef5e4107edbcbd16cc0685c4b979be2827f030d4aebe34397e3cff8",
       "source_url": "https://learn.hex.tech/docs/explore-data/cells/code-typeahead"
     },
     "docs/explore-data/cells/data-cells/dbt-metrics-cells.md": {
       "bytes": 2876,
-      "fetched_at": "2026-05-21T02:44:25.422308+00:00",
+      "fetched_at": "2026-05-21T09:28:32.916143+00:00",
       "sha256": "1f61f8b3df8cff960596fad569e577355f571058ea2f42bc1c87cacbf81eb4ee",
       "source_url": "https://learn.hex.tech/docs/explore-data/cells/data-cells/dbt-metrics-cells"
     },
     "docs/explore-data/cells/data-cells/writeback-cells.md": {
       "bytes": 4847,
-      "fetched_at": "2026-05-21T02:44:25.914304+00:00",
+      "fetched_at": "2026-05-21T09:28:33.375115+00:00",
       "sha256": "9d9b204ed9de47aaa23eccd04029ed28c678953df865c0935cd9f5b1b797cffc",
       "source_url": "https://learn.hex.tech/docs/explore-data/cells/data-cells/writeback-cells"
     },
     "docs/explore-data/cells/input-cells/dropdown-inputs.md": {
       "bytes": 1850,
-      "fetched_at": "2026-05-21T02:44:26.390508+00:00",
+      "fetched_at": "2026-05-21T09:28:33.827286+00:00",
       "sha256": "c689c5ca641275cdebfe072745b8eb1148ed6182f3bdfa55383aef755234e966",
       "source_url": "https://learn.hex.tech/docs/explore-data/cells/input-cells/dropdown-inputs"
     },
     "docs/explore-data/cells/input-cells/file-upload-inputs.md": {
       "bytes": 3200,
-      "fetched_at": "2026-05-21T02:44:26.864621+00:00",
+      "fetched_at": "2026-05-21T09:28:34.278016+00:00",
       "sha256": "9d93ebffd3b2f94fcd77b27aaad3b4e408cdfe9a5cfe5594a117adf11d8138fd",
       "source_url": "https://learn.hex.tech/docs/explore-data/cells/input-cells/file-upload-inputs"
     },
     "docs/explore-data/cells/input-cells/input-cells-introduction.md": {
       "bytes": 4281,
-      "fetched_at": "2026-05-21T02:44:27.350171+00:00",
+      "fetched_at": "2026-05-21T09:28:34.732980+00:00",
       "sha256": "1e76990bfbebf0fe929b261585d06d8d043fd2fa9eda4f9067ee11b602ac09f6",
       "source_url": "https://learn.hex.tech/docs/explore-data/cells/input-cells/input-cells-introduction"
     },
     "docs/explore-data/cells/input-cells/multiselect-inputs.md": {
       "bytes": 1920,
-      "fetched_at": "2026-05-21T02:44:27.829891+00:00",
+      "fetched_at": "2026-05-21T09:28:35.182904+00:00",
       "sha256": "0722ce833e18cc886befbe564769cd8cc9cb6283a29c551f3190f343f74fa95f",
       "source_url": "https://learn.hex.tech/docs/explore-data/cells/input-cells/multiselect-inputs"
     },
     "docs/explore-data/cells/input-cells/run-button.md": {
       "bytes": 3423,
-      "fetched_at": "2026-05-21T02:44:28.305436+00:00",
+      "fetched_at": "2026-05-21T09:28:35.633369+00:00",
       "sha256": "f12adf48a34a4e51ec70243eea53570e853ced8c7ccb661f746a264617980461",
       "source_url": "https://learn.hex.tech/docs/explore-data/cells/input-cells/run-button"
     },
     "docs/explore-data/cells/input-cells/table-inputs.md": {
       "bytes": 1794,
-      "fetched_at": "2026-05-21T02:44:28.808938+00:00",
+      "fetched_at": "2026-05-21T09:28:36.110777+00:00",
       "sha256": "d11d5da11fec185616695af2f621fd7dc05921fe7757fb6235aac1852b122b70",
       "source_url": "https://learn.hex.tech/docs/explore-data/cells/input-cells/table-inputs"
     },
     "docs/explore-data/cells/input-cells/text-number-slider-and-date-inputs.md": {
       "bytes": 2020,
-      "fetched_at": "2026-05-21T02:44:29.288905+00:00",
+      "fetched_at": "2026-05-21T09:28:36.564319+00:00",
       "sha256": "d8473aa23629cc81a8d89e738548ec190d352f255d55f4541cc66686a8cddcf7",
       "source_url": "https://learn.hex.tech/docs/explore-data/cells/input-cells/text-number-slider-and-date-inputs"
     },
     "docs/explore-data/cells/python-cells.md": {
       "bytes": 3070,
-      "fetched_at": "2026-05-21T02:44:29.773253+00:00",
+      "fetched_at": "2026-05-21T09:28:37.015915+00:00",
       "sha256": "34fa1ab00211c7f858d8348fe8a1e4edb62a953f17271aecf5b45d1b071f9732",
       "source_url": "https://learn.hex.tech/docs/explore-data/cells/python-cells"
     },
     "docs/explore-data/cells/sql-cells/query-caching.md": {
       "bytes": 7380,
-      "fetched_at": "2026-05-21T02:44:30.266972+00:00",
-      "sha256": "d398ae1e9309a460b1bbb640bff0bdb40b722c6b53f39e98c0505efcf9a0b41f",
+      "fetched_at": "2026-05-21T09:28:37.474211+00:00",
+      "sha256": "803e139ddd4259083401d7a6a4a52f9e52817a02f38e6e2ec340cf791401c900",
       "source_url": "https://learn.hex.tech/docs/explore-data/cells/sql-cells/query-caching"
     },
     "docs/explore-data/cells/sql-cells/sql-cells-introduction.md": {
       "bytes": 28338,
-      "fetched_at": "2026-05-21T02:44:30.821560+00:00",
+      "fetched_at": "2026-05-21T09:28:38.001032+00:00",
       "sha256": "7f7d9c78890a66f262ef30eee0ddf9c0d352c5b9055b08574befb2178278e0fd",
       "source_url": "https://learn.hex.tech/docs/explore-data/cells/sql-cells/sql-cells-introduction"
     },
     "docs/explore-data/cells/sql-cells/sql-formatting.md": {
       "bytes": 2157,
-      "fetched_at": "2026-05-21T02:44:31.294302+00:00",
+      "fetched_at": "2026-05-21T09:28:38.450996+00:00",
       "sha256": "98a0c53573a94a8104153d60275fb504d06620a1564242895363c0bd718b88f8",
       "source_url": "https://learn.hex.tech/docs/explore-data/cells/sql-cells/sql-formatting"
     },
     "docs/explore-data/cells/text-cells.md": {
       "bytes": 7141,
-      "fetched_at": "2026-05-21T02:44:31.797053+00:00",
+      "fetched_at": "2026-05-21T09:28:38.931086+00:00",
       "sha256": "c33fd84aafa6de4b597225393c0f072c36549d63d7c308b2bd679f416c5cc3bf",
       "source_url": "https://learn.hex.tech/docs/explore-data/cells/text-cells"
     },
     "docs/explore-data/cells/transform-cells/filter-cells.md": {
       "bytes": 3857,
-      "fetched_at": "2026-05-21T02:44:32.275024+00:00",
+      "fetched_at": "2026-05-21T09:28:39.384803+00:00",
       "sha256": "e836230a730f48651a6948d62a23f223ceccaabaa778462ca2625da4282d09da",
       "source_url": "https://learn.hex.tech/docs/explore-data/cells/transform-cells/filter-cells"
     },
     "docs/explore-data/cells/transform-cells/pivot-cells.md": {
       "bytes": 6359,
-      "fetched_at": "2026-05-21T02:44:32.760175+00:00",
+      "fetched_at": "2026-05-21T09:28:39.848121+00:00",
       "sha256": "e27fd6c3386f90b82bc327e4ea668991febf65570f677cd6a504ce3ed17065bf",
       "source_url": "https://learn.hex.tech/docs/explore-data/cells/transform-cells/pivot-cells"
     },
     "docs/explore-data/cells/using-jinja.md": {
       "bytes": 4541,
-      "fetched_at": "2026-05-21T02:44:33.240374+00:00",
+      "fetched_at": "2026-05-21T09:28:40.301039+00:00",
       "sha256": "f9ac55f999ac5f7f1035781bb1cc950275e174057e189484b3d0b44a3a6b7111",
       "source_url": "https://learn.hex.tech/docs/explore-data/cells/using-jinja"
     },
     "docs/explore-data/cells/visualization-cells/chart-cells.md": {
       "bytes": 28595,
-      "fetched_at": "2026-05-21T02:44:33.779753+00:00",
+      "fetched_at": "2026-05-21T09:28:40.827616+00:00",
       "sha256": "629d1c5b08f45c1dcb16078e5e71c673bbe7192abd150933e85e477b1b7ed834",
       "source_url": "https://learn.hex.tech/docs/explore-data/cells/visualization-cells/chart-cells"
     },
     "docs/explore-data/cells/visualization-cells/map-cells.md": {
       "bytes": 15993,
-      "fetched_at": "2026-05-21T02:44:34.280307+00:00",
-      "sha256": "7569737270217e6f2bf704ad69b384cd7443e6ffaad4fa1da8546c6d3a8d5753",
+      "fetched_at": "2026-05-21T09:28:41.307408+00:00",
+      "sha256": "d15804810d09a6f196a19cdc1ef7af641217d93ee27e395de3049d63bad78f04",
       "source_url": "https://learn.hex.tech/docs/explore-data/cells/visualization-cells/map-cells"
     },
     "docs/explore-data/cells/visualization-cells/single-value-cells.md": {
       "bytes": 2724,
-      "fetched_at": "2026-05-21T02:44:34.759244+00:00",
+      "fetched_at": "2026-05-21T09:28:41.759302+00:00",
       "sha256": "2640d2d627f42f3bae256f1a0aec783459dbaf32630af8c4c32e5309053da1bb",
       "source_url": "https://learn.hex.tech/docs/explore-data/cells/visualization-cells/single-value-cells"
     },
     "docs/explore-data/cells/visualization-cells/table-display-cells.md": {
       "bytes": 10969,
-      "fetched_at": "2026-05-21T02:44:35.258832+00:00",
+      "fetched_at": "2026-05-21T09:28:42.239577+00:00",
       "sha256": "a9f0393ef8190f3f6ca63b73ece79cdae6bb70a2c79d530518d66514a3f1b59a",
       "source_url": "https://learn.hex.tech/docs/explore-data/cells/visualization-cells/table-display-cells"
     },
     "docs/explore-data/chat-with-app.md": {
       "bytes": 4795,
-      "fetched_at": "2026-05-21T02:44:35.737289+00:00",
+      "fetched_at": "2026-05-21T09:28:42.695214+00:00",
       "sha256": "7c98249d012044e6c9f3c149233ceed1243c6882273d1242be9e4249309da551",
       "source_url": "https://learn.hex.tech/docs/explore-data/chat-with-app"
     },
     "docs/explore-data/components.md": {
       "bytes": 10104,
-      "fetched_at": "2026-05-21T02:44:36.219742+00:00",
+      "fetched_at": "2026-05-21T09:28:43.163124+00:00",
       "sha256": "d8022a14120f8c330e0a62eba977136604c8b41b9cc9d12e8c746494c54142cc",
       "source_url": "https://learn.hex.tech/docs/explore-data/components"
     },
     "docs/explore-data/data-browser.md": {
       "bytes": 9378,
-      "fetched_at": "2026-05-21T02:44:36.704899+00:00",
+      "fetched_at": "2026-05-21T09:28:43.628194+00:00",
       "sha256": "84119c074fdef73ee013bd1fc4d5b022ec2d7945e8245df66dcb0d2b405400e4",
       "source_url": "https://learn.hex.tech/docs/explore-data/data-browser"
     },
     "docs/explore-data/notebook-view/develop-your-notebook.md": {
       "bytes": 10636,
-      "fetched_at": "2026-05-21T02:44:37.216549+00:00",
+      "fetched_at": "2026-05-21T09:28:44.122520+00:00",
       "sha256": "3a72880418432bc3ae853f5e98077e1b5d37f8699125cfdc20cc6eae09d3813f",
       "source_url": "https://learn.hex.tech/docs/explore-data/notebook-view/develop-your-notebook"
     },
     "docs/explore-data/notebook-view/keyboard-shortcuts.md": {
       "bytes": 4688,
-      "fetched_at": "2026-05-21T02:44:37.705089+00:00",
+      "fetched_at": "2026-05-21T09:28:44.589212+00:00",
       "sha256": "95122f02186bb37211496558ff6763149f8793ba5bb7fb6ddd1ed9daaa6ce7f1",
       "source_url": "https://learn.hex.tech/docs/explore-data/notebook-view/keyboard-shortcuts"
     },
     "docs/explore-data/notebook-view/notebook-agent.md": {
       "bytes": 12456,
-      "fetched_at": "2026-05-21T02:44:38.217758+00:00",
-      "sha256": "f8a3905749025fa20fb3ee4376c891d176f077a05ae37622a9806c422d97be4d",
+      "fetched_at": "2026-05-21T09:28:45.079703+00:00",
+      "sha256": "fac0f13b026ddfafd1ef33cfa8148fbae0ad5d95abf6d9f723ac79b3275878fd",
       "source_url": "https://learn.hex.tech/docs/explore-data/notebook-view/notebook-agent"
     },
     "docs/explore-data/notebook-view/sections.md": {
       "bytes": 2269,
-      "fetched_at": "2026-05-21T02:44:38.691456+00:00",
+      "fetched_at": "2026-05-21T09:28:45.525913+00:00",
       "sha256": "4464dcb3a884f8d83446e32e9e8ad11210a41b67656ef7111d737af59cd3227f",
       "source_url": "https://learn.hex.tech/docs/explore-data/notebook-view/sections"
     },
     "docs/explore-data/projects/create-and-manage-projects.md": {
       "bytes": 8227,
-      "fetched_at": "2026-05-21T02:44:39.191532+00:00",
+      "fetched_at": "2026-05-21T09:28:45.994326+00:00",
       "sha256": "6c9d8349493ca3542ee0c31883c48a9d92702286e667ffd2ea826435a1da4c01",
       "source_url": "https://learn.hex.tech/docs/explore-data/projects/create-and-manage-projects"
     },
     "docs/explore-data/projects/environment-configuration/environment-views.md": {
       "bytes": 12580,
-      "fetched_at": "2026-05-21T02:44:39.701758+00:00",
+      "fetched_at": "2026-05-21T09:28:46.478729+00:00",
       "sha256": "15b7e82a20003dc6c70f60200de7c4d61148f861833c91600f8305d3262c4cef",
       "source_url": "https://learn.hex.tech/docs/explore-data/projects/environment-configuration/environment-views"
     },
     "docs/explore-data/projects/environment-configuration/files.md": {
       "bytes": 7444,
-      "fetched_at": "2026-05-21T02:44:40.196273+00:00",
+      "fetched_at": "2026-05-21T09:28:46.950416+00:00",
       "sha256": "6002f174b63e41e8620f61df6cfa058afe490d70b227c5a90dacdf1c381958c9",
       "source_url": "https://learn.hex.tech/docs/explore-data/projects/environment-configuration/files"
     },
     "docs/explore-data/projects/environment-configuration/project-kernels.md": {
       "bytes": 5775,
-      "fetched_at": "2026-05-21T02:44:40.675365+00:00",
+      "fetched_at": "2026-05-21T09:28:47.410158+00:00",
       "sha256": "9aa8eb8ab08dbb12063f5277aa9cca10beee06b98c1694284bdf460e715d864d",
       "source_url": "https://learn.hex.tech/docs/explore-data/projects/environment-configuration/project-kernels"
     },
     "docs/explore-data/projects/environment-configuration/sending-emails.md": {
       "bytes": 1563,
-      "fetched_at": "2026-05-21T02:44:41.147706+00:00",
-      "sha256": "4ea43a35ae8570ec5095e717db3c53bc409c8d1cc1d5fdb9d335bf20ebcd4ee2",
+      "fetched_at": "2026-05-21T09:28:47.854661+00:00",
+      "sha256": "05198282e5acb4090001e21ffc18563cc54a5ca94ac43af305d1be63fef836c6",
       "source_url": "https://learn.hex.tech/docs/explore-data/projects/environment-configuration/sending-emails"
     },
     "docs/explore-data/projects/environment-configuration/using-packages.md": {
       "bytes": 7076,
-      "fetched_at": "2026-05-21T02:44:41.640626+00:00",
+      "fetched_at": "2026-05-21T09:28:48.327054+00:00",
       "sha256": "0519e0809350b770b9c501d86eac651e4a0023e8d13a59ba49ec4f53dafb870c",
       "source_url": "https://learn.hex.tech/docs/explore-data/projects/environment-configuration/using-packages"
     },
     "docs/explore-data/projects/git-export.md": {
       "bytes": 8289,
-      "fetched_at": "2026-05-21T02:44:42.133708+00:00",
-      "sha256": "048faa4ace8b380e89953c9b74141c500d1eb3d72e99eb4bb6054ee8df8aa694",
+      "fetched_at": "2026-05-21T09:28:48.796355+00:00",
+      "sha256": "9744aa1471283a604b22943b00dcc321c21e6520d24f4709e37c051e2f684f8e",
       "source_url": "https://learn.hex.tech/docs/explore-data/projects/git-export"
     },
     "docs/explore-data/projects/history-and-versions.md": {
       "bytes": 1930,
-      "fetched_at": "2026-05-21T02:44:42.602290+00:00",
+      "fetched_at": "2026-05-21T09:28:49.242679+00:00",
       "sha256": "91422110b2d423d3979601972dffe746e633babd8e946c35273b9f046e0890f3",
       "source_url": "https://learn.hex.tech/docs/explore-data/projects/history-and-versions"
     },
     "docs/explore-data/projects/import-export.md": {
       "bytes": 2908,
-      "fetched_at": "2026-05-21T02:44:43.081917+00:00",
+      "fetched_at": "2026-05-21T09:28:49.696398+00:00",
       "sha256": "2e53859a66922e04ec1ce40d0af63d71de9e91051433054e4e0d8992567e777f",
       "source_url": "https://learn.hex.tech/docs/explore-data/projects/import-export"
     },
     "docs/explore-data/projects/project-execution/execution-model.md": {
       "bytes": 4270,
-      "fetched_at": "2026-05-21T02:44:43.558108+00:00",
+      "fetched_at": "2026-05-21T09:28:50.147806+00:00",
       "sha256": "731495b1b187ebdc16b163a30580d79d5d7018605219bd4affc200681d3e90d5",
       "source_url": "https://learn.hex.tech/docs/explore-data/projects/project-execution/execution-model"
     },
     "docs/explore-data/projects/project-execution/graph-view.md": {
       "bytes": 1565,
-      "fetched_at": "2026-05-21T02:44:44.024614+00:00",
+      "fetched_at": "2026-05-21T09:28:50.590562+00:00",
       "sha256": "9774a2ca5af622c0ed7ec296b7d420261809a8a017db17ea906ff963fa7716c8",
       "source_url": "https://learn.hex.tech/docs/explore-data/projects/project-execution/graph-view"
     },
     "docs/explore-data/projects/project-execution/run-modes-and-cell-staleness.md": {
       "bytes": 1296,
-      "fetched_at": "2026-05-21T02:44:44.499156+00:00",
+      "fetched_at": "2026-05-21T09:28:51.037999+00:00",
       "sha256": "50179606c1926fdf6b72847e813132f45aa9c578860a79626ccf988d979975ba",
       "source_url": "https://learn.hex.tech/docs/explore-data/projects/project-execution/run-modes-and-cell-staleness"
     },
     "docs/explore-data/projects/project-execution/run-stats.md": {
       "bytes": 3403,
-      "fetched_at": "2026-05-21T02:44:44.978402+00:00",
+      "fetched_at": "2026-05-21T09:28:51.486880+00:00",
       "sha256": "7ea49bc9eab16e325be2aa277abdddd9571c6e8468b75adb89e089abc597d7c2",
       "source_url": "https://learn.hex.tech/docs/explore-data/projects/project-execution/run-stats"
     },
     "docs/explore-data/projects/projects-introduction.md": {
       "bytes": 11142,
-      "fetched_at": "2026-05-21T02:44:45.465956+00:00",
+      "fetched_at": "2026-05-21T09:28:51.956598+00:00",
       "sha256": "9558f08ef7f4791a8b4ada8348954b33a52782480e1780476166edd49620d9fd",
       "source_url": "https://learn.hex.tech/docs/explore-data/projects/projects-introduction"
     },
     "docs/explore-data/threads.md": {
       "bytes": 16210,
-      "fetched_at": "2026-05-21T02:44:45.954828+00:00",
+      "fetched_at": "2026-05-21T09:28:52.425868+00:00",
       "sha256": "80ea3c647624e245a328d98b1f698d83ebaf7a3b89ddac49de1aa26d5a39f0b5",
       "source_url": "https://learn.hex.tech/docs/explore-data/threads"
     },
     "docs/find-and-organize-content.md": {
       "bytes": 931,
-      "fetched_at": "2026-05-21T02:44:46.434062+00:00",
+      "fetched_at": "2026-05-21T09:28:52.871600+00:00",
       "sha256": "dec0a0d048bb5c10cb9a28092d9b52a509ad377e70de5b2549b1633d7d7a390c",
       "source_url": "https://learn.hex.tech/docs/find-and-organize-content"
     },
     "docs/getting-started.md": {
       "bytes": 973,
-      "fetched_at": "2026-05-21T02:44:46.903661+00:00",
+      "fetched_at": "2026-05-21T09:28:53.314840+00:00",
       "sha256": "75104c250f32c55facb222b08af681768e5e7d26922f668a11927f713cd82283",
       "source_url": "https://learn.hex.tech/docs/getting-started"
     },
     "docs/getting-started/ai-overview.md": {
       "bytes": 5650,
-      "fetched_at": "2026-05-21T02:44:47.380125+00:00",
+      "fetched_at": "2026-05-21T09:28:53.767810+00:00",
       "sha256": "df24626b4f8c5ca7f95d8b0f545cbf894f1753034a9e4e4bd2908db5c374d75a",
       "source_url": "https://learn.hex.tech/docs/getting-started/ai-overview"
     },
     "docs/getting-started/connect-your-data.md": {
       "bytes": 1089,
-      "fetched_at": "2026-05-21T02:44:47.849563+00:00",
+      "fetched_at": "2026-05-21T09:28:54.213405+00:00",
       "sha256": "247da6e71bec6b801699f964642ef7c3218c417b34a14dc44a6c3856c06a1d61",
       "source_url": "https://learn.hex.tech/docs/getting-started/connect-your-data"
     },
     "docs/getting-started/create-your-first-project.md": {
       "bytes": 1730,
-      "fetched_at": "2026-05-21T02:44:48.318164+00:00",
+      "fetched_at": "2026-05-21T09:28:54.658877+00:00",
       "sha256": "5978acb381ab162913a5b07ff6008f9eb81604a5c18bbe1d3019c03ef8bd1a49",
       "source_url": "https://learn.hex.tech/docs/getting-started/create-your-first-project"
     },
     "docs/getting-started/develop-your-notebook.md": {
       "bytes": 3886,
-      "fetched_at": "2026-05-21T02:44:48.788983+00:00",
+      "fetched_at": "2026-05-21T09:28:55.107572+00:00",
       "sha256": "38140ac8517cc5a25d4ba70a0ad529972dfc1cca8f078c591d5fa80866501b80",
       "source_url": "https://learn.hex.tech/docs/getting-started/develop-your-notebook"
     },
     "docs/getting-started/share-your-work.md": {
       "bytes": 2741,
-      "fetched_at": "2026-05-21T02:44:49.262949+00:00",
+      "fetched_at": "2026-05-21T09:28:55.553292+00:00",
       "sha256": "7c838b63e6497a3be734199dd77a90a0739e2f366e0bc659466c54c436c6a900",
       "source_url": "https://learn.hex.tech/docs/getting-started/share-your-work"
     },
     "docs/legal.md": {
       "bytes": 163,
-      "fetched_at": "2026-05-21T02:44:49.725843+00:00",
+      "fetched_at": "2026-05-21T09:28:55.993275+00:00",
       "sha256": "6c172db2658efef0f46e8ec1a6468346187119d17ac1d09f49429dd278045e53",
       "source_url": "https://learn.hex.tech/docs/legal"
     },
     "docs/legal/aup.md": {
       "bytes": 13406,
-      "fetched_at": "2026-05-21T02:44:50.200458+00:00",
-      "sha256": "abe2e4e6aba7250788c0f1694cdce2010af05f6e50b8f119b471cd75fafd9c63",
+      "fetched_at": "2026-05-21T09:28:56.437813+00:00",
+      "sha256": "181b8411ea85d463d2756e60e7882c812843e86404f4e489aa21115141a2a3a8",
       "source_url": "https://learn.hex.tech/docs/legal/aup"
     },
     "docs/legal/dpa.md": {
       "bytes": 58043,
-      "fetched_at": "2026-05-21T02:44:50.728554+00:00",
-      "sha256": "92be82a3f9323f4089c100399f184f305e84de3aac7c6b2616f4a04e1654593a",
+      "fetched_at": "2026-05-21T09:28:56.928184+00:00",
+      "sha256": "a1d5ba86c7e7dfbdd3f157d672a5701d850aa5dde0710b951bf5e71ceb2e2ad8",
       "source_url": "https://learn.hex.tech/docs/legal/dpa"
     },
     "docs/legal/hex-service-agreement-2024-05-13.md": {
       "bytes": 48252,
-      "fetched_at": "2026-05-21T02:44:51.751668+00:00",
-      "sha256": "fd690caa0a96b8e8faedf1f54c69d6afd749035e812e72df72756f0c096cebb5",
+      "fetched_at": "2026-05-21T09:28:57.898046+00:00",
+      "sha256": "26a39a2f997c050328336aca6e76af3a7ae38deaeb2c27b1dd2dd27b297c3d29",
       "source_url": "https://learn.hex.tech/docs/legal/hex-service-agreement-2024-05-13"
     },
     "docs/legal/hex-service-agreement.md": {
       "bytes": 54553,
-      "fetched_at": "2026-05-21T02:44:51.246572+00:00",
-      "sha256": "8b5aac20672cfc74f5b2726eb2054f9f1a6e1f453d9403d9a7f5f5e569a55bdf",
+      "fetched_at": "2026-05-21T09:28:57.423302+00:00",
+      "sha256": "335e68545f97f178e789f1b74f3d5e6d3e7d91b98078497f60185224400d3dad",
       "source_url": "https://learn.hex.tech/docs/legal/hex-service-agreement"
     },
     "docs/legal/privacy.md": {
       "bytes": 25085,
-      "fetched_at": "2026-05-21T02:44:52.230948+00:00",
-      "sha256": "43c52710631a8dab1f12b4f9df306b9b65e3fb4d5fd791543e9f85fc43ab7657",
+      "fetched_at": "2026-05-21T09:28:58.358879+00:00",
+      "sha256": "4e733292d9acd49de313e6dda27dbb341a19606f39cafd560c7eb3f1b8aaaa34",
       "source_url": "https://learn.hex.tech/docs/legal/privacy"
     },
     "docs/legal/security-addendum.md": {
       "bytes": 20123,
-      "fetched_at": "2026-05-21T02:44:52.717641+00:00",
+      "fetched_at": "2026-05-21T09:28:58.816711+00:00",
       "sha256": "b9f11856f7c2e3f18fbc87a7a92fdff60714a1f55eb085acbd2b2f95dbff1534",
       "source_url": "https://learn.hex.tech/docs/legal/security-addendum"
     },
     "docs/legal/subprocessors.md": {
       "bytes": 3999,
-      "fetched_at": "2026-05-21T02:44:53.195268+00:00",
+      "fetched_at": "2026-05-21T09:28:59.265992+00:00",
       "sha256": "f27110da27ef43230dcd81207303e7b22e0b8b0a183d6f87845e2d21979baa02",
       "source_url": "https://learn.hex.tech/docs/legal/subprocessors"
     },
     "docs/legal/supplier-security-addendum.md": {
       "bytes": 16897,
-      "fetched_at": "2026-05-21T02:44:53.673598+00:00",
+      "fetched_at": "2026-05-21T09:28:59.721163+00:00",
       "sha256": "b650870850d0db466f32299c9546c1a3c8aeea4fa607b76d596cd142b93f443a",
       "source_url": "https://learn.hex.tech/docs/legal/supplier-security-addendum"
     },
     "docs/legal/terms-and-conditions-2020-03-27.md": {
       "bytes": 41150,
-      "fetched_at": "2026-05-21T02:44:54.634657+00:00",
-      "sha256": "f57c3671436a88574dadfabf1a52c0b522c94b7d867b8a6efcdd07946af60675",
+      "fetched_at": "2026-05-21T09:29:00.686893+00:00",
+      "sha256": "8f78e5355a2600de9c31fbf87bc334be381a58b2c1cb189a24783e21d5193c6d",
       "source_url": "https://learn.hex.tech/docs/legal/terms-and-conditions-2020-03-27"
     },
     "docs/legal/terms-and-conditions.md": {
       "bytes": 935,
-      "fetched_at": "2026-05-21T02:44:54.145361+00:00",
+      "fetched_at": "2026-05-21T09:29:00.164010+00:00",
       "sha256": "6a2951b43e4949f15f8555bc72981a464d48e907b109a4c33d65eae40a298e98",
       "source_url": "https://learn.hex.tech/docs/legal/terms-and-conditions"
     },
     "docs/legal/tos.md": {
       "bytes": 52836,
-      "fetched_at": "2026-05-21T02:44:55.138954+00:00",
-      "sha256": "762e2bc94fc945a682a70a4e50357915cc3f56b6f6decc55db5dc8c9792cf3f5",
+      "fetched_at": "2026-05-21T09:29:01.168151+00:00",
+      "sha256": "220a0969f7e58a05bcd2145875855b2a84ea1b34a692b7ebea96d1a7bcfead0c",
       "source_url": "https://learn.hex.tech/docs/legal/tos"
     },
     "docs/legal/website-terms-of-use.md": {
       "bytes": 31153,
-      "fetched_at": "2026-05-21T02:44:55.629802+00:00",
-      "sha256": "81d5deece575b0655beae83f3fc9fb095eb879950e78046735f5fc781723e289",
+      "fetched_at": "2026-05-21T09:29:01.630870+00:00",
+      "sha256": "b09d9f7dc58ef19881181ef013caf773599f17f2b465eef8cccca791ce76b726",
       "source_url": "https://learn.hex.tech/docs/legal/website-terms-of-use"
     },
     "docs/organize-content/archive.md": {
       "bytes": 4748,
-      "fetched_at": "2026-05-21T02:44:56.129929+00:00",
+      "fetched_at": "2026-05-21T09:29:02.090160+00:00",
       "sha256": "d353eceafb9db9898a1546cfc64dc42ea8dfc96a3c8d5ee363eb43f11da9113b",
       "source_url": "https://learn.hex.tech/docs/organize-content/archive"
     },
     "docs/organize-content/collections.md": {
       "bytes": 6834,
-      "fetched_at": "2026-05-21T02:44:56.613137+00:00",
+      "fetched_at": "2026-05-21T09:29:02.546023+00:00",
       "sha256": "b5389dc45be7139c7e2d1927e0ab010f4809cc3d80c53341a4dbe997582705b9",
       "source_url": "https://learn.hex.tech/docs/organize-content/collections"
     },
     "docs/organize-content/organize-projects.md": {
       "bytes": 3288,
-      "fetched_at": "2026-05-21T02:44:57.093832+00:00",
+      "fetched_at": "2026-05-21T09:29:03.000166+00:00",
       "sha256": "45c561cfafec98c9caf29ac404530cb14c1235c72b9b0de9512ec761d3c7c554",
       "source_url": "https://learn.hex.tech/docs/organize-content/organize-projects"
     },
     "docs/organize-content/project-owners.md": {
       "bytes": 1737,
-      "fetched_at": "2026-05-21T02:44:57.572366+00:00",
+      "fetched_at": "2026-05-21T09:29:03.444550+00:00",
       "sha256": "afc190284b34cbc4b2328e679d8f8c5a423fffeeefb0ec5124204fef5fba078b",
       "source_url": "https://learn.hex.tech/docs/organize-content/project-owners"
     },
     "docs/organize-content/statuses-categories.md": {
       "bytes": 8200,
-      "fetched_at": "2026-05-21T02:44:58.052457+00:00",
+      "fetched_at": "2026-05-21T09:29:03.907253+00:00",
       "sha256": "0daf289bd5e6e05b33b4c4676b9f2a60589b999ab3a665fa828bbca6b228e289",
       "source_url": "https://learn.hex.tech/docs/organize-content/statuses-categories"
     },
     "docs/organize-content/workspace-search.md": {
       "bytes": 2470,
-      "fetched_at": "2026-05-21T02:44:58.522629+00:00",
+      "fetched_at": "2026-05-21T09:29:04.353753+00:00",
       "sha256": "d752976a96b47c13620b9d7a04194b80cb2d8dd53d7ae3f93c2a4a4a12ccc44e",
       "source_url": "https://learn.hex.tech/docs/organize-content/workspace-search"
     },
     "docs/settings-and-administration.md": {
       "bytes": 674,
-      "fetched_at": "2026-05-21T02:44:58.992306+00:00",
+      "fetched_at": "2026-05-21T09:29:04.797603+00:00",
       "sha256": "a81d9a2f4b11a1540e6692e042d0ab8739d9f2b5795d4c08744aa17d760cb59e",
       "source_url": "https://learn.hex.tech/docs/settings-and-administration"
     },
     "docs/share-and-collaborate.md": {
       "bytes": 687,
-      "fetched_at": "2026-05-21T02:44:59.459447+00:00",
+      "fetched_at": "2026-05-21T09:29:05.238711+00:00",
       "sha256": "ebcae3e29163b0e2218fa4faf18b1cdcc42588a0279ae64aadd65a01c116ed73",
       "source_url": "https://learn.hex.tech/docs/share-and-collaborate"
     },
     "docs/share-insights.md": {
       "bytes": 643,
-      "fetched_at": "2026-05-21T02:44:59.944592+00:00",
+      "fetched_at": "2026-05-21T09:29:05.682776+00:00",
       "sha256": "827c5431f2740828c983de508995b38599528b045dbda3b2de8ba57d2f95a4b6",
       "source_url": "https://learn.hex.tech/docs/share-insights"
     },
     "docs/share-insights/app-notifications.md": {
       "bytes": 8409,
-      "fetched_at": "2026-05-21T02:45:00.431494+00:00",
+      "fetched_at": "2026-05-21T09:29:06.146052+00:00",
       "sha256": "2e17b0572a3a87bf757f9bf7c2eacda507d0a3b242a53b91938cfd279d84e1b5",
       "source_url": "https://learn.hex.tech/docs/share-insights/app-notifications"
     },
     "docs/share-insights/apps/app-builder.md": {
       "bytes": 9300,
-      "fetched_at": "2026-05-21T02:45:00.932290+00:00",
+      "fetched_at": "2026-05-21T09:29:06.616169+00:00",
       "sha256": "99cc3e3f4ead03782b478324e2b259bfe6ecbd80cce9a4ea54b7ccfe402b9a40",
       "source_url": "https://learn.hex.tech/docs/share-insights/apps/app-builder"
     },
     "docs/share-insights/apps/app-run-settings.md": {
       "bytes": 7618,
-      "fetched_at": "2026-05-21T02:45:01.435140+00:00",
+      "fetched_at": "2026-05-21T09:29:07.079332+00:00",
       "sha256": "a00d7b6d835cef618506e4ab61daf43aa63540da73af6904d89707bcf50617f4",
       "source_url": "https://learn.hex.tech/docs/share-insights/apps/app-run-settings"
     },
     "docs/share-insights/apps/app-view-stats.md": {
       "bytes": 1185,
-      "fetched_at": "2026-05-21T02:45:01.909558+00:00",
+      "fetched_at": "2026-05-21T09:29:07.522695+00:00",
       "sha256": "5873b8c1034403ad1fcdb4832938abcb6e90957174fce78ac0e34ff4d8d3cc0f",
       "source_url": "https://learn.hex.tech/docs/share-insights/apps/app-view-stats"
     },
     "docs/share-insights/apps/apps-introduction.md": {
       "bytes": 2966,
-      "fetched_at": "2026-05-21T02:45:02.389247+00:00",
+      "fetched_at": "2026-05-21T09:29:07.974547+00:00",
       "sha256": "2b6af1955e1cc511d404f7530e4416188a90525324200abb723d850039e2da4f",
       "source_url": "https://learn.hex.tech/docs/share-insights/apps/apps-introduction"
     },
     "docs/share-insights/apps/debug-apps.md": {
       "bytes": 1441,
-      "fetched_at": "2026-05-21T02:45:02.864307+00:00",
+      "fetched_at": "2026-05-21T09:29:08.423014+00:00",
       "sha256": "d83e313ff19a58d07cd07334940aca30231372be88fd787db7476671112ed7f9",
       "source_url": "https://learn.hex.tech/docs/share-insights/apps/debug-apps"
     },
     "docs/share-insights/apps/export-as-pdf.md": {
       "bytes": 1552,
-      "fetched_at": "2026-05-21T02:45:03.335226+00:00",
+      "fetched_at": "2026-05-21T09:29:08.868690+00:00",
       "sha256": "e42241470792e384e0e853f183c0cc2f4dd25818506b646dcc7a4ef47a4fa500",
       "source_url": "https://learn.hex.tech/docs/share-insights/apps/export-as-pdf"
     },
     "docs/share-insights/apps/generative-apps.md": {
       "bytes": 8191,
-      "fetched_at": "2026-05-21T02:45:03.819041+00:00",
-      "sha256": "b9e8a9320ca270db829e5908dbab98f5d2aa17c585663e39f69234e14c8634d0",
+      "fetched_at": "2026-05-21T09:29:09.331776+00:00",
+      "sha256": "9eeccb79d95046f6981980a2fc511d3dff9e6825529121151c5ae35f8a1fd0d1",
       "source_url": "https://learn.hex.tech/docs/share-insights/apps/generative-apps"
     },
     "docs/share-insights/apps/package-specific-rendering-details.md": {
       "bytes": 1427,
-      "fetched_at": "2026-05-21T02:45:04.296672+00:00",
+      "fetched_at": "2026-05-21T09:29:09.787333+00:00",
       "sha256": "7ac4cfefe1ec013bc1a0df9be7f568b4a4b10076a7ff450a08807f0bae1c8a0d",
       "source_url": "https://learn.hex.tech/docs/share-insights/apps/package-specific-rendering-details"
     },
     "docs/share-insights/apps/project-filters.md": {
       "bytes": 3331,
-      "fetched_at": "2026-05-21T02:45:04.771918+00:00",
+      "fetched_at": "2026-05-21T09:29:10.236206+00:00",
       "sha256": "9c4e08e5bdd1a77d6cd359d54790624f4d99544834da5f81c77391a67b278356",
       "source_url": "https://learn.hex.tech/docs/share-insights/apps/project-filters"
     },
     "docs/share-insights/apps/publish-and-share-apps.md": {
       "bytes": 10569,
-      "fetched_at": "2026-05-21T02:45:05.287423+00:00",
+      "fetched_at": "2026-05-21T09:29:10.749037+00:00",
       "sha256": "988fead2557ab6fd8c089d6dfb1bcd20e66e769d62dc96f65854d4839612a7d5",
       "source_url": "https://learn.hex.tech/docs/share-insights/apps/publish-and-share-apps"
     },
     "docs/share-insights/apps/running-apps.md": {
       "bytes": 8373,
-      "fetched_at": "2026-05-21T02:45:05.777256+00:00",
+      "fetched_at": "2026-05-21T09:29:11.207663+00:00",
       "sha256": "6525e0ebb651f0136c98448ecbadea608e35d6199f539716f606b1b398c8e50a",
       "source_url": "https://learn.hex.tech/docs/share-insights/apps/running-apps"
     },
     "docs/share-insights/apps/saved-views.md": {
       "bytes": 4448,
-      "fetched_at": "2026-05-21T02:45:06.264608+00:00",
+      "fetched_at": "2026-05-21T09:29:11.659529+00:00",
       "sha256": "05b48ed31b552eb4d7caa8bda3ca5b0984839621b798ffb692816f9b87b3e428",
       "source_url": "https://learn.hex.tech/docs/share-insights/apps/saved-views"
     },
     "docs/share-insights/apps/snapshots.md": {
       "bytes": 1960,
-      "fetched_at": "2026-05-21T02:45:06.738058+00:00",
+      "fetched_at": "2026-05-21T09:29:12.107349+00:00",
       "sha256": "55e9d4b17066815d1825c1cf1df5c5e6b053ad5e886abb883ef14eaa25779c8e",
       "source_url": "https://learn.hex.tech/docs/share-insights/apps/snapshots"
     },
     "docs/share-insights/apps/tv-mode.md": {
       "bytes": 1712,
-      "fetched_at": "2026-05-21T02:45:07.212099+00:00",
+      "fetched_at": "2026-05-21T09:29:12.551892+00:00",
       "sha256": "d46a09131f16ce4ac5e04f044370abe0bcba8bf6f6f77dafd2a60686b8ddd642",
       "source_url": "https://learn.hex.tech/docs/share-insights/apps/tv-mode"
     },
     "docs/share-insights/embedding/embedding-introduction.md": {
       "bytes": 2371,
-      "fetched_at": "2026-05-21T02:45:07.683843+00:00",
+      "fetched_at": "2026-05-21T09:29:12.998653+00:00",
       "sha256": "cfefa5b0cf22380bc3e14592453c353b11bb2cf40e738473b1f80e2a54b491ea",
       "source_url": "https://learn.hex.tech/docs/share-insights/embedding/embedding-introduction"
     },
     "docs/share-insights/embedding/public-and-private-embedding.md": {
       "bytes": 5882,
-      "fetched_at": "2026-05-21T02:45:08.163005+00:00",
+      "fetched_at": "2026-05-21T09:29:13.452902+00:00",
       "sha256": "3fab5b73c38127abc42b94d2c1ffd9e11e17cb57c37834b7cfb9fb56f8b3e688",
       "source_url": "https://learn.hex.tech/docs/share-insights/embedding/public-and-private-embedding"
     },
     "docs/share-insights/embedding/signed-embedding.md": {
       "bytes": 22822,
-      "fetched_at": "2026-05-21T02:45:08.730648+00:00",
-      "sha256": "21986597f761c3855b0adc99e15750c6d00eb4d974af23edfc99e509605de47b",
+      "fetched_at": "2026-05-21T09:29:14.006383+00:00",
+      "sha256": "4444734e633927ad7583c6483500d37ead9af4c3badf4d9cb059a5c1faffb7ea",
       "source_url": "https://learn.hex.tech/docs/share-insights/embedding/signed-embedding"
     },
     "docs/share-insights/explore.md": {
       "bytes": 20919,
-      "fetched_at": "2026-05-21T02:45:09.229841+00:00",
+      "fetched_at": "2026-05-21T09:29:14.484931+00:00",
       "sha256": "a5add255bfd2ebfcd015aef3bda35b10884eea2dd8ea74b13542722124e7e895",
       "source_url": "https://learn.hex.tech/docs/share-insights/explore"
     },
     "docs/share-insights/hex-agent-in-slack.md": {
       "bytes": 6868,
-      "fetched_at": "2026-05-21T02:45:09.713626+00:00",
+      "fetched_at": "2026-05-21T09:29:14.941243+00:00",
       "sha256": "aa303e25b5804506273397d0fe05a813f49c8502de0f0d861672146424e78eee",
       "source_url": "https://learn.hex.tech/docs/share-insights/hex-agent-in-slack"
     },
     "docs/share-insights/scheduled-runs.md": {
       "bytes": 9721,
-      "fetched_at": "2026-05-21T02:45:10.211843+00:00",
+      "fetched_at": "2026-05-21T09:29:15.411176+00:00",
       "sha256": "925d379c88b2eb5d3c0b4e004d5db34fd27d73569f1e0478497b06059a9ac61c",
       "source_url": "https://learn.hex.tech/docs/share-insights/scheduled-runs"
     },
     "docs/trust.md": {
       "bytes": 215,
-      "fetched_at": "2026-05-21T02:45:10.677134+00:00",
+      "fetched_at": "2026-05-21T09:29:15.852264+00:00",
       "sha256": "4c2b1ec25940cfc636ad32d5cf080ff98815368e1172caefec8b699390889d09",
       "source_url": "https://learn.hex.tech/docs/trust"
     },
     "docs/trust/ai-data-privacy.md": {
       "bytes": 3630,
-      "fetched_at": "2026-05-21T02:45:11.154738+00:00",
-      "sha256": "a20a0f627aa20096d90934284edccd72e3942e83a9da8905b35bf2132150a31c",
+      "fetched_at": "2026-05-21T09:29:16.309882+00:00",
+      "sha256": "b67908c93abf7d0a4e06fb0796379533178cf239c62c035d0889d60e502aae78",
       "source_url": "https://learn.hex.tech/docs/trust/ai-data-privacy"
     },
     "docs/trust/data-privacy-and-usage-faq.md": {
       "bytes": 12638,
-      "fetched_at": "2026-05-21T02:45:11.653034+00:00",
-      "sha256": "85a2034b03bc4629c42fd152064d1275b2e53fc8d17da928d3903ec937d45504",
+      "fetched_at": "2026-05-21T09:29:16.768870+00:00",
+      "sha256": "5822cc295e86bf00ea9fec36379e857d36486ceca08f25b9262bb032638fb91f",
       "source_url": "https://learn.hex.tech/docs/trust/data-privacy-and-usage-faq"
     },
     "index.md": {
       "bytes": 6466,
-      "fetched_at": "2026-05-21T02:42:43.824863+00:00",
-      "sha256": "b35df0151299a705717a62d5f5039fbf33f9846cc3a969cae66aa45dd19a4860",
+      "fetched_at": "2026-05-21T09:26:51.356819+00:00",
+      "sha256": "00beea8b9cd88da3581479abdb131186fa457462ebfd5c297a9af7fc9733449b",
       "source_url": "https://learn.hex.tech/"
     },
     "search.md": {
       "bytes": 100,
-      "fetched_at": "2026-05-21T02:45:12.116801+00:00",
+      "fetched_at": "2026-05-21T09:29:17.360192+00:00",
       "sha256": "3876d26623ce468092833c54d97e5391473ab4713961fb6d3f607105dd2874b6",
       "source_url": "https://learn.hex.tech/search"
     },
     "tutorials.md": {
       "bytes": 2198,
-      "fetched_at": "2026-05-21T02:45:12.602073+00:00",
-      "sha256": "453328eadc48ec0679b232f7550a8d34f267bfc52655f3c812bf962aca3eea29",
+      "fetched_at": "2026-05-21T09:29:17.815713+00:00",
+      "sha256": "db2b4ffa077fb5713740f09ea2593a6f05638cd58de6c6493418b8cdbaa78607",
       "source_url": "https://learn.hex.tech/tutorials"
     },
     "tutorials/admin-portal/admin-api-user-groups.md": {
       "bytes": 10800,
-      "fetched_at": "2026-05-21T02:45:13.195546+00:00",
+      "fetched_at": "2026-05-21T09:29:18.400032+00:00",
       "sha256": "5e85adca6d1eb5dc39c13b3e7e97a645cd279c427b7ee67f51fe706599d9eab9",
       "source_url": "https://learn.hex.tech/tutorials/admin-portal/admin-api-user-groups"
     },
     "tutorials/admin-portal/hex-at-org.md": {
       "bytes": 819,
-      "fetched_at": "2026-05-21T02:45:13.655057+00:00",
+      "fetched_at": "2026-05-21T09:29:18.839073+00:00",
       "sha256": "8a93cb2d5059287bb41b1ba35c567977b6eaa02129d013d2ca570ce1326e9785",
       "source_url": "https://learn.hex.tech/tutorials/admin-portal/hex-at-org"
     },
     "tutorials/admin-portal/workspace-setup.md": {
       "bytes": 12338,
-      "fetched_at": "2026-05-21T02:45:14.140284+00:00",
+      "fetched_at": "2026-05-21T09:29:19.307178+00:00",
       "sha256": "fb338351ef137d3e80ec5d8e135177eb5c622341f02000a74c15c68692069310",
       "source_url": "https://learn.hex.tech/tutorials/admin-portal/workspace-setup"
     },
     "tutorials/admin-resource-portal.md": {
       "bytes": 436,
-      "fetched_at": "2026-05-21T02:45:14.605070+00:00",
+      "fetched_at": "2026-05-21T09:29:19.746797+00:00",
       "sha256": "29c64ec9a805143fe759c4bc3d4221a572bfbdc8ee74f2f3d1b4219f2cdad907",
       "source_url": "https://learn.hex.tech/tutorials/admin-resource-portal"
     },
     "tutorials/ai-best-practices.md": {
       "bytes": 1062,
-      "fetched_at": "2026-05-21T02:45:15.074651+00:00",
+      "fetched_at": "2026-05-21T09:29:20.236216+00:00",
       "sha256": "094c8424834cf24183e9c38d4175b397f885ed3944ec46f2dfd453abacbbea6d",
       "source_url": "https://learn.hex.tech/tutorials/ai-best-practices"
     },
     "tutorials/ai-best-practices/notebook-agent-best-practices.md": {
       "bytes": 15645,
-      "fetched_at": "2026-05-21T02:45:15.596283+00:00",
+      "fetched_at": "2026-05-21T09:29:20.740604+00:00",
       "sha256": "e414acb856ebda194b3a3fe304fb01f1f8f92d55f8cd85312380ccab5f87f1b6",
       "source_url": "https://learn.hex.tech/tutorials/ai-best-practices/notebook-agent-best-practices"
     },
     "tutorials/ai-best-practices/optimizing-data-connections-for-agents.md": {
       "bytes": 10423,
-      "fetched_at": "2026-05-21T02:45:16.077652+00:00",
+      "fetched_at": "2026-05-21T09:29:21.193089+00:00",
       "sha256": "76a05fdee82eeb13bce8c5e2b0028c638f72b1f87adfb23d1e6818614b8098e6",
       "source_url": "https://learn.hex.tech/tutorials/ai-best-practices/optimizing-data-connections-for-agents"
     },
     "tutorials/ai-best-practices/setup-for-ai-agents.md": {
       "bytes": 8015,
-      "fetched_at": "2026-05-21T02:45:16.554135+00:00",
+      "fetched_at": "2026-05-21T09:29:21.646446+00:00",
       "sha256": "b3121df13b7e4ab073d570dcd112f14c40f5d06ea9e9321a06a26fb6151a9b60",
       "source_url": "https://learn.hex.tech/tutorials/ai-best-practices/setup-for-ai-agents"
     },
     "tutorials/ai-best-practices/threads-best-practices.md": {
       "bytes": 13766,
-      "fetched_at": "2026-05-21T02:45:17.042082+00:00",
+      "fetched_at": "2026-05-21T09:29:22.109742+00:00",
       "sha256": "be35602378bd6baf281be9eaa6cb5fa12a8d10c788a75636aa13b06707c4f949",
       "source_url": "https://learn.hex.tech/tutorials/ai-best-practices/threads-best-practices"
     },
     "tutorials/ai-best-practices/workspace-context-best-practices.md": {
       "bytes": 37919,
-      "fetched_at": "2026-05-21T02:45:17.706847+00:00",
+      "fetched_at": "2026-05-21T09:29:22.786507+00:00",
       "sha256": "0f9be249a70018f0c4dcdfb4b4d3c163ded85a613f5e56ba7c68e3a5e1328d82",
       "source_url": "https://learn.hex.tech/tutorials/ai-best-practices/workspace-context-best-practices"
     },
     "tutorials/category/hex-foundations.md": {
       "bytes": 6811,
-      "fetched_at": "2026-05-21T02:45:18.184833+00:00",
+      "fetched_at": "2026-05-21T09:29:23.240917+00:00",
       "sha256": "670e0085b19d39e9f190a1b821765489e1ad5df903c33474b0c9b1ed495f7378",
       "source_url": "https://learn.hex.tech/tutorials/category/hex-foundations"
     },
     "tutorials/connect-to-data.md": {
       "bytes": 1397,
-      "fetched_at": "2026-05-21T02:45:18.645796+00:00",
+      "fetched_at": "2026-05-21T09:29:23.685257+00:00",
       "sha256": "8b0f19647298c280666707b8b64e6dcc6658fe38937811f7b4e832e45db60113",
       "source_url": "https://learn.hex.tech/tutorials/connect-to-data"
     },
     "tutorials/connect-to-data/connect-to-gcs.md": {
       "bytes": 4599,
-      "fetched_at": "2026-05-21T02:45:19.135389+00:00",
+      "fetched_at": "2026-05-21T09:29:24.155320+00:00",
       "sha256": "48c1d425b1d99cd0c3d91628c90c28b0b0014d5ec07a9b0ae13705980286b9b0",
       "source_url": "https://learn.hex.tech/tutorials/connect-to-data/connect-to-gcs"
     },
     "tutorials/connect-to-data/connect-to-google-sheets.md": {
       "bytes": 6906,
-      "fetched_at": "2026-05-21T02:45:19.630491+00:00",
+      "fetched_at": "2026-05-21T09:29:24.637600+00:00",
       "sha256": "7f3af7289efbd2051df459968b955cdeedc81cfc571a1b3f59bc559ceea2025f",
       "source_url": "https://learn.hex.tech/tutorials/connect-to-data/connect-to-google-sheets"
     },
     "tutorials/connect-to-data/connect-to-s3.md": {
       "bytes": 5673,
-      "fetched_at": "2026-05-21T02:45:20.142118+00:00",
+      "fetched_at": "2026-05-21T09:29:25.133764+00:00",
       "sha256": "533c8efe65562b62d92f7cbb7944c5890557d780c4267901b399dce8cd512e62",
       "source_url": "https://learn.hex.tech/tutorials/connect-to-data/connect-to-s3"
     },
     "tutorials/connect-to-data/get-your-data.md": {
       "bytes": 3804,
-      "fetched_at": "2026-05-21T02:45:20.609511+00:00",
+      "fetched_at": "2026-05-21T09:29:25.582363+00:00",
       "sha256": "eb28bfb8498965c1cf807962bc766a6d2452183d343ca52bd8e0cfb6b887a07a",
       "source_url": "https://learn.hex.tech/tutorials/connect-to-data/get-your-data"
     },
     "tutorials/connect-to-data/merging-data-sources.md": {
       "bytes": 3608,
-      "fetched_at": "2026-05-21T02:45:21.081820+00:00",
+      "fetched_at": "2026-05-21T09:29:26.029159+00:00",
       "sha256": "a8e72c6d350738697b2ab33d1525979075050cb3fc435a6b0982da0f83bfeab8",
       "source_url": "https://learn.hex.tech/tutorials/connect-to-data/merging-data-sources"
     },
     "tutorials/connect-to-data/parameterize-sql.md": {
       "bytes": 6619,
-      "fetched_at": "2026-05-21T02:45:21.576393+00:00",
+      "fetched_at": "2026-05-21T09:29:26.498262+00:00",
       "sha256": "ebdb40dc25ea2df0135320fbcc627736045fa56c4871a57a0f4718635d8c7816",
       "source_url": "https://learn.hex.tech/tutorials/connect-to-data/parameterize-sql"
     },
     "tutorials/connect-to-data/read-and-write-to-your-database.md": {
       "bytes": 7481,
-      "fetched_at": "2026-05-21T02:45:22.082902+00:00",
+      "fetched_at": "2026-05-21T09:29:26.984875+00:00",
       "sha256": "ad4d8a65ea6ca21a6bbc4822a7f139912aa425a9fed961addcc7f785c25a4b5a",
       "source_url": "https://learn.hex.tech/tutorials/connect-to-data/read-and-write-to-your-database"
     },
     "tutorials/connect-to-data/use-writeback-cells.md": {
       "bytes": 6927,
-      "fetched_at": "2026-05-21T02:45:22.573692+00:00",
+      "fetched_at": "2026-05-21T09:29:27.460763+00:00",
       "sha256": "893d8630f4cf90910afaed152636d8efbdcef9807ff6cae30e617caaea765587",
       "source_url": "https://learn.hex.tech/tutorials/connect-to-data/use-writeback-cells"
     },
     "tutorials/connect-to-data/using-the-hextoolkit.md": {
       "bytes": 8425,
-      "fetched_at": "2026-05-21T02:45:23.078440+00:00",
+      "fetched_at": "2026-05-21T09:29:27.931322+00:00",
       "sha256": "a801eb48d48af27b8868cef91798d375e9415195450939d25b1dc894fb7d5540",
       "source_url": "https://learn.hex.tech/tutorials/connect-to-data/using-the-hextoolkit"
     },
     "tutorials/develop-notebooks.md": {
       "bytes": 1216,
-      "fetched_at": "2026-05-21T02:45:23.542755+00:00",
+      "fetched_at": "2026-05-21T09:29:28.376912+00:00",
       "sha256": "80e5ac8d9eb402cafc38852b0e54f9b20244c4dd0824b46e57188446d0432404",
       "source_url": "https://learn.hex.tech/tutorials/develop-notebooks"
     },
     "tutorials/develop-notebooks/create-basic-matplotlib-plots.md": {
       "bytes": 13934,
-      "fetched_at": "2026-05-21T02:45:24.152964+00:00",
+      "fetched_at": "2026-05-21T09:29:28.976312+00:00",
       "sha256": "a3a81db22ba11800723168761976f5f82613aa11fedbf2d99b7fbb14892ada5b",
       "source_url": "https://learn.hex.tech/tutorials/develop-notebooks/create-basic-matplotlib-plots"
     },
     "tutorials/develop-notebooks/dynamic-apps-using-hex-user-email.md": {
       "bytes": 4351,
-      "fetched_at": "2026-05-21T02:45:24.648512+00:00",
+      "fetched_at": "2026-05-21T09:29:29.433353+00:00",
       "sha256": "0a3b13635c728e37c1154993a1058c7950c2ce8c780486f0e156d57854dc3f4a",
       "source_url": "https://learn.hex.tech/tutorials/develop-notebooks/dynamic-apps-using-hex-user-email"
     },
     "tutorials/develop-notebooks/flowing-between-python-and-sql.md": {
       "bytes": 4104,
-      "fetched_at": "2026-05-21T02:45:25.148989+00:00",
+      "fetched_at": "2026-05-21T09:29:29.910316+00:00",
       "sha256": "ce3466514806121fd3c0ac940874628d82b767ebe880714387ed6469fc779e9d",
       "source_url": "https://learn.hex.tech/tutorials/develop-notebooks/flowing-between-python-and-sql"
     },
     "tutorials/develop-notebooks/heavy-python-compute-quick-apps.md": {
       "bytes": 6842,
-      "fetched_at": "2026-05-21T02:45:25.646713+00:00",
+      "fetched_at": "2026-05-21T09:29:30.386511+00:00",
       "sha256": "ccd408be457aa8db60a63ff3ed013c7991dc60a98b481d54b4d31c523836010e",
       "source_url": "https://learn.hex.tech/tutorials/develop-notebooks/heavy-python-compute-quick-apps"
     },
     "tutorials/develop-notebooks/memory-management-in-hex.md": {
       "bytes": 7139,
-      "fetched_at": "2026-05-21T02:45:26.127758+00:00",
+      "fetched_at": "2026-05-21T09:29:30.843109+00:00",
       "sha256": "09815c542ab413e42536e2d15d6ab3827ff9c31547bab53a5ff3f7b6260d7fb9",
       "source_url": "https://learn.hex.tech/tutorials/develop-notebooks/memory-management-in-hex"
     },
     "tutorials/develop-notebooks/project-execution-guide.md": {
       "bytes": 11937,
-      "fetched_at": "2026-05-21T02:45:26.617481+00:00",
+      "fetched_at": "2026-05-21T09:29:31.302129+00:00",
       "sha256": "f4bd3507dae2ee58bba60c27f6786ef2a1cff8a3ae3e389d40fdb9d9f03d1df2",
       "source_url": "https://learn.hex.tech/tutorials/develop-notebooks/project-execution-guide"
     },
     "tutorials/develop-notebooks/sql-query-caching.md": {
       "bytes": 6715,
-      "fetched_at": "2026-05-21T02:45:27.102995+00:00",
+      "fetched_at": "2026-05-21T09:29:31.770454+00:00",
       "sha256": "6467cc8f50ac08441ec85c61bc6ebd6d735fa4efe5d8c5bf62d787a24b5b275d",
       "source_url": "https://learn.hex.tech/tutorials/develop-notebooks/sql-query-caching"
     },
     "tutorials/quickstart.md": {
       "bytes": 334,
-      "fetched_at": "2026-05-21T02:45:27.570198+00:00",
+      "fetched_at": "2026-05-21T09:29:32.209709+00:00",
       "sha256": "b03f68af02340491c454b96d78b5289ac2d51a04d61d3eeec867baa95bf9afe0",
       "source_url": "https://learn.hex.tech/tutorials/quickstart"
     },
     "tutorials/quickstart/admin-101.md": {
       "bytes": 10377,
-      "fetched_at": "2026-05-21T02:45:28.053768+00:00",
+      "fetched_at": "2026-05-21T09:29:32.666238+00:00",
       "sha256": "94ad51eae6f77a7e2bd8f8ae8080585a905cb37a21e35b0ac63a71d9216b7d0c",
       "source_url": "https://learn.hex.tech/tutorials/quickstart/admin-101"
     },
     "tutorials/quickstart/hex-advanced.md": {
       "bytes": 9709,
-      "fetched_at": "2026-05-21T02:45:28.534628+00:00",
+      "fetched_at": "2026-05-21T09:29:33.159512+00:00",
       "sha256": "3928802316219b4dbfa8f86ab9171146f977e17d67171a355161b2d5f6e444eb",
       "source_url": "https://learn.hex.tech/tutorials/quickstart/hex-advanced"
     },
     "tutorials/quickstart/hex-basics.md": {
       "bytes": 10300,
-      "fetched_at": "2026-05-21T02:45:29.016705+00:00",
+      "fetched_at": "2026-05-21T09:29:33.622247+00:00",
       "sha256": "f5c335f38ed4f6edf956427fba3ae11b0b99b255d83ce247629aa7443ca03f8d",
       "source_url": "https://learn.hex.tech/tutorials/quickstart/hex-basics"
     },
     "tutorials/video-library.md": {
       "bytes": 88,
-      "fetched_at": "2026-05-21T02:45:29.477941+00:00",
+      "fetched_at": "2026-05-21T09:29:34.055602+00:00",
       "sha256": "e4eed10227867dc63d19833ba4531967bb1253c267210d170503abd4d01c6732",
       "source_url": "https://learn.hex.tech/tutorials/video-library"
     },
     "tutorials/video-library/hex-foundations/adding-context.md": {
       "bytes": 757,
-      "fetched_at": "2026-05-21T02:45:29.944798+00:00",
+      "fetched_at": "2026-05-21T09:29:34.497645+00:00",
       "sha256": "e852262de124e4130eeb7bf2ca0aa4db73c48697d183fd7cdb62a87ecf6df27a",
       "source_url": "https://learn.hex.tech/tutorials/video-library/hex-foundations/adding-context"
     },
     "tutorials/video-library/hex-foundations/apps-publishing.md": {
       "bytes": 999,
-      "fetched_at": "2026-05-21T02:45:30.409248+00:00",
+      "fetched_at": "2026-05-21T09:29:34.934478+00:00",
       "sha256": "d9079748b707a0d3ab7e88250cb493af2abf6bba866eae66a924b2e18930f578",
       "source_url": "https://learn.hex.tech/tutorials/video-library/hex-foundations/apps-publishing"
     },
     "tutorials/video-library/hex-foundations/course-overview.md": {
       "bytes": 487,
-      "fetched_at": "2026-05-21T02:45:30.871227+00:00",
+      "fetched_at": "2026-05-21T09:29:35.376249+00:00",
       "sha256": "cdfe7b02e87deaa12b8a273398f79b796be8f09ab97e2b146011e54c59d540c5",
       "source_url": "https://learn.hex.tech/tutorials/video-library/hex-foundations/course-overview"
     },
     "tutorials/video-library/hex-foundations/geospatial-data.md": {
       "bytes": 962,
-      "fetched_at": "2026-05-21T02:45:31.337931+00:00",
+      "fetched_at": "2026-05-21T09:29:35.817381+00:00",
       "sha256": "39681c51366d5ff01f48f924c67f6237876abed452bb0dc4a4625daee4444700",
       "source_url": "https://learn.hex.tech/tutorials/video-library/hex-foundations/geospatial-data"
     },
     "tutorials/video-library/hex-foundations/getting-data-into-hex.md": {
       "bytes": 1058,
-      "fetched_at": "2026-05-21T02:45:31.802995+00:00",
+      "fetched_at": "2026-05-21T09:29:36.256927+00:00",
       "sha256": "2bd235ba5792c5372d0e96d64afade1337b5ae4dfac47fcc968ce1d6442c82d5",
       "source_url": "https://learn.hex.tech/tutorials/video-library/hex-foundations/getting-data-into-hex"
     },
     "tutorials/video-library/hex-foundations/how-projects-get-executed.md": {
       "bytes": 1003,
-      "fetched_at": "2026-05-21T02:45:32.268348+00:00",
+      "fetched_at": "2026-05-21T09:29:36.698483+00:00",
       "sha256": "c23d7f0648d345fb9eb586489d4497e4555fdf5686204553d03cdf337e26d4cc",
       "source_url": "https://learn.hex.tech/tutorials/video-library/hex-foundations/how-projects-get-executed"
     },
     "tutorials/video-library/hex-foundations/input-parameters.md": {
       "bytes": 934,
-      "fetched_at": "2026-05-21T02:45:32.737166+00:00",
+      "fetched_at": "2026-05-21T09:29:37.138773+00:00",
       "sha256": "f662c537e0da4b8d987dfbae0e9702e0aff051ccdf2bf1b2c208fe7ad0c4bdb7",
       "source_url": "https://learn.hex.tech/tutorials/video-library/hex-foundations/input-parameters"
     },
     "tutorials/video-library/hex-foundations/jinja.md": {
       "bytes": 773,
-      "fetched_at": "2026-05-21T02:45:33.202543+00:00",
+      "fetched_at": "2026-05-21T09:29:37.576991+00:00",
       "sha256": "9a8346a6e8b0cc39451ec5cd1d9caa7bb8246b3f39bb26ca8db8245e4d3cc9d8",
       "source_url": "https://learn.hex.tech/tutorials/video-library/hex-foundations/jinja"
     },
     "tutorials/video-library/hex-foundations/navigating-the-ui.md": {
       "bytes": 956,
-      "fetched_at": "2026-05-21T02:45:33.676770+00:00",
+      "fetched_at": "2026-05-21T09:29:38.019885+00:00",
       "sha256": "f5ecef2bfd9a7793cf9868dec42ddc397c0df195332da5b0b48c6ca5bf7629b9",
       "source_url": "https://learn.hex.tech/tutorials/video-library/hex-foundations/navigating-the-ui"
     },
     "tutorials/video-library/hex-foundations/no-code.md": {
       "bytes": 922,
-      "fetched_at": "2026-05-21T02:45:34.146887+00:00",
+      "fetched_at": "2026-05-21T09:29:38.458617+00:00",
       "sha256": "d4365dbb8f787a3255c903ac3e63f6af6db469e7d2485c6b134e6f9e63eed1e5",
       "source_url": "https://learn.hex.tech/tutorials/video-library/hex-foundations/no-code"
     },
     "tutorials/video-library/hex-foundations/polyglot-workflows.md": {
       "bytes": 634,
-      "fetched_at": "2026-05-21T02:45:34.620263+00:00",
+      "fetched_at": "2026-05-21T09:29:38.899454+00:00",
       "sha256": "571e3a64c76d97f5b9202f6a2ad315ad9dc6c36370f9f95149ad285f6d7b062c",
       "source_url": "https://learn.hex.tech/tutorials/video-library/hex-foundations/polyglot-workflows"
     },
     "tutorials/video-library/hex-foundations/visualizing-data.md": {
       "bytes": 942,
-      "fetched_at": "2026-05-21T02:45:35.081818+00:00",
+      "fetched_at": "2026-05-21T09:29:39.339749+00:00",
       "sha256": "db2e5ea6038361677aaada9bf133105d121f9da8d077027c1de401dc4d8fdfef",
       "source_url": "https://learn.hex.tech/tutorials/video-library/hex-foundations/visualizing-data"
     },
     "tutorials/video-library/hex-foundations/writing-python-code-in-hex.md": {
       "bytes": 707,
-      "fetched_at": "2026-05-21T02:45:35.544349+00:00",
+      "fetched_at": "2026-05-21T09:29:39.780253+00:00",
       "sha256": "40a34b0874446afb223d4f294fe1062a049a5957f619a784b91160f061eb1915",
       "source_url": "https://learn.hex.tech/tutorials/video-library/hex-foundations/writing-python-code-in-hex"
     },
     "tutorials/video-library/hex-foundations/writing-sql-in-hex.md": {
       "bytes": 944,
-      "fetched_at": "2026-05-21T02:45:36.008526+00:00",
+      "fetched_at": "2026-05-21T09:29:40.219934+00:00",
       "sha256": "772bfafdbd5d39bfcc9c59a8c46d2b75f112e7456c42eb394c4ca5c4eb837f38",
       "source_url": "https://learn.hex.tech/tutorials/video-library/hex-foundations/writing-sql-in-hex"
     }
