@@ -327,6 +327,5 @@ GROUP BY
 
 ```
 SELECT
-    DATE(creation_time) as day,
-    destination_table.project_id as project_id
+    DATE(creation_time) as day
 ```

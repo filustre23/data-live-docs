@@ -246,6 +246,5 @@ public class CreateAzureBlobStorageTransfer {
             .setDestinationDatasetId(datasetId)
             .setDisplayName(displayName)
             .setDataSourceId("azure_blob_storage")
-            .setParams(Struct.newBuilder().putAllFields(params).build())
-            .setSchedule</
+            .setParams(Struct.newBuilder().
 ```

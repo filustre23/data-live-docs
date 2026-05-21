@@ -271,8 +271,4 @@ public class CreateCampaignmanagerTransfer {
 
 ## 排解 Campaign Manager 移轉設定問題
 
-如果無法順利設定資料移轉，請參閱[排解移轉設定問題](https://docs.cloud.google.com/bigquery/docs/transfer-troubleshooting?hl=zh-tw)中的「[Campaign Manager 移轉問題](https://docs.cloud.google.com/bigquery/docs/transfer-troubleshooting?hl=zh-tw#campaign_manager_transfer_issues)」一節。
-
-## 查詢資料
-
-資料移轉至 BigQuery 時，系統會將資料寫入擷取時間分區資料
+如果無法順利設定資料移轉，請參閱[排](https://docs.cloud.google.com/bigquery/docs/transfer-troubleshooting?hl=zh-tw)
