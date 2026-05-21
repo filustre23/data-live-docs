@@ -71,7 +71,10 @@ You can use a Markdown or Text cell to [display images](/docs/explore-data/cells
 You can also render imported image files through the use of `IPython.display`, using code like the following in a Python cell:
 
 ```
-from IPython.display import Image  
+from IPython.display import Image
+
+
+
 Image(filename='file.png')
 ```
 
@@ -84,11 +87,23 @@ When you duplicate a project, local files in the main `/hex` directory and all e
 To see what files exist in your current project, check out the [Files tab](/docs/explore-data/projects/environment-configuration/environment-views#files) of the left sidebar or use this code in a Python cell:
 
 ```
-from os import walk  
-from pathlib import PurePath  
-for path, subdirs, files in walk('.'):  
-    for name in files:  
-        print(PurePath(path, name))
+from os import walk
+
+
+
+from pathlib import PurePath
+
+
+
+for path, subdirs, files in walk('.'):
+
+
+
+for name in files:
+
+
+
+print(PurePath(path, name))
 ```
 
 #### Delete all local files in project[​](#delete-all-local-files-in-project "Direct link to Delete all local files in project")
@@ -96,10 +111,19 @@ for path, subdirs, files in walk('.'):
 To programmatically delete all local files in your project's directory, you can loop through the contents of your directory:
 
 ```
-import os  
-for file in os.listdir():  
-    if os.path.isfile(file):  
-        os.remove(file)
+import os
+
+
+
+for file in os.listdir():
+
+
+
+if os.path.isfile(file):
+
+
+
+os.remove(file)
 ```
 
 warning

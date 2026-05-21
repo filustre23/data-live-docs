@@ -25,8 +25,14 @@ To use Snowpark in a project, first import the connection that has Snowpark enab
 To access this Snowpark session from a Python cell, create a cell with the following code replacing the argument of the `get_data_connection` method with the name of your connection.
 
 ```
-import hextoolkit  
-hex_snowflake_conn = hextoolkit.get_data_connection('My data connection')  
+import hextoolkit
+
+
+
+hex_snowflake_conn = hextoolkit.get_data_connection('My data connection')
+
+
+
 hex_snowpark_session = hex_snowflake_conn.get_snowpark_session()
 ```
 

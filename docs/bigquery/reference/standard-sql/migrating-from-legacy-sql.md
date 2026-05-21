@@ -433,6 +433,4 @@ The following is a list of keywords allowed in legacy SQL, but not in GoogleSQL:
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| * `ALL` * `AND` * `ANY` * `ARRAY` * `ASSERT_ROWS_MODIFIED` * `AT` * `COLLATE` * `CURRENT` * `DEFAULT` * `DESC` * `END` * `ENUM` | * `ESCAPE` * `EXCEPT` * `EXCLUDE` * `EXTRACT` * `FETCH` * `FOR` * `GROUP` * `GROUPING` * `GROUPS` * `IF` * `INTERVAL` * `IS` | * `LATERAL` * `NATURAL` * `NEW` * `NO` * `NULLS` * `OF` * `ORDER` * `PROTO` * `QUALIFY` * `RANGE` * `RECURSIVE` | * `RESPECT` * `ROLLUP` * `ROWS` * `SOME` * `STRUCT` * `TABLESAMPLE` * `TO` * `TREAT` * `UNNEST` * `WHEN` * `WINDOW` |
-
-For a more comprehensive list of reserved keywords and what constitutes valid identifiers, see the [Reserved keywords](/bigquery/docs/reference/standard-sql/lexical#reserved_keywords) section in [Lexical struc](/bigquery/docs/reference/standard-sql/lexical)
+| * `ALL` * `AND` * `ANY` * `ARRAY` * `ASSERT_ROWS_MODIFIED` * `AT` * `COLLATE` * `CURRENT` * `DEFAULT` * `DESC` * `END` * `ENUM` | * `ESCAPE` * `EXCEPT` * `EXCLUDE` * `EXTRACT` * `FETCH` * `FOR` * `GROUP` * `GROUPING` * `GROUPS` * `IF` * `INTERVAL` * `IS` | * `LATERAL` * `NATURAL` * `NEW` * `NO` * `NULLS` * `OF` * `ORDER` * `PROTO` * `QUALIFY` * `RANGE` * `RECURSIVE` | * `RESPECT` * `ROLLUP` * `ROWS` * `SOME` * `STRUCT` * `TABLESAMPLE` * `TO` |

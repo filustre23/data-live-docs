@@ -125,9 +125,18 @@ At times, you may need to override a column's type to ensure your chart renders 
 Alternatively, consider changing the datatype upstream, for example by casting the column to a timestamp type with [dataframe SQL](/docs/explore-data/cells/sql-cells/sql-cells-introduction#dataframe-sql) (see [the DuckDB docs](https://duckdb.org/docs/sql/functions/dateformat) on timestamp functions for more information).
 
 ```
-select  
-  strptime(release_date, '%b %d %Y') < '2010-01-01' as release_date,  
-  * exclude (release_date)  
+select
+
+
+
+strptime(release_date, '%b %d %Y') < '2010-01-01' as release_date,
+
+
+
+* exclude (release_date)
+
+
+
 from movies
 ```
 

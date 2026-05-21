@@ -440,7 +440,4 @@ JSON 檔案中的 `condition` 欄位支援下列值，每個值都有 `partition
          exit 1
      fi
    fi
-
-   # Remove trailing slashes from GCS_BASE_PATH, if any.
-   GCS_BASE_PATH=
    ```

@@ -38,15 +38,35 @@ It is worth noting that the `hextoolkit` does **not** allow access to database c
 You can display the type and \_\_dict\_\_ attribute of one of the objects to see all of its attributes:
 
 ```
-display(type(my_snowflake_connection))  
-display(my_snowflake_connection.__dict__)  
-  
-hextoolkit.hex_data_connection.HexSnowflakeConnection  
-{'name': 'Demo Snowflake',  
- 'id': '42c8668e-d750-4b7b-9adf-d6697c78a125',  
- 'connection_type': 'snowflake',  
- 'enable_snowpark': True,  
- 'allow_writeback': False}
+display(type(my_snowflake_connection))
+
+
+
+display(my_snowflake_connection.__dict__)
+
+
+
+hextoolkit.hex_data_connection.HexSnowflakeConnection
+
+
+
+{'name': 'Demo Snowflake',
+
+
+
+'id': '42c8668e-d750-4b7b-9adf-d6697c78a125',
+
+
+
+'connection_type': 'snowflake',
+
+
+
+'enable_snowpark': True,
+
+
+
+'allow_writeback': False}
 ```
 
 ### Run queries[​](#run-queries "Direct link to Run queries")
@@ -54,16 +74,46 @@ hextoolkit.hex_data_connection.HexSnowflakeConnection
 Once a `HexDataConnection` object has been created, you can invoke the `query` method to execute an input string as a SQL query against a database. The results of the query will be returned as a dataframe, just like our SQL Cells - Jinja syntax is also supported! Here, the `usertypes_input` variable is would be defined upstream in an Input cell or another Python cell.
 
 ```
-query_string = '''select tripduration,  
-start_station_id,  
-start_station_name,  
-end_station_id,  
-end_station_name,  
-usertype  
-from demo_data.demos.citibike_trips  
-where usertype = {{ usertypes_input }}  
-limit 10  
-'''  
+query_string = '''select tripduration,
+
+
+
+start_station_id,
+
+
+
+start_station_name,
+
+
+
+end_station_id,
+
+
+
+end_station_name,
+
+
+
+usertype
+
+
+
+from demo_data.demos.citibike_trips
+
+
+
+where usertype = {{ usertypes_input }}
+
+
+
+limit 10
+
+
+
+'''
+
+
+
 query_results = my_snowflake_connection.query(query_string)
 ```
 
@@ -76,16 +126,38 @@ Because the `query` method accepts a string directly, these queries are vulnerab
 Because `hextoolkit` executes SQL queries in Python, workflows such as running a query in a for loop are now possible in Hex! This means we can run the same query multiple times or iterate through an array of values passing them into queries separately. For simplicity, we'll run the same query repeatedly and concatenate all of the results into a single dataframe. In this example, we'll be taking several samples of a larger dataset using Snowflake's [sample](https://docs.snowflake.com/en/sql-reference/constructs/sample.html) functionality. Normally, this would require writing out and unioning multiple queries, but it's relatively easy with a simple loop!
 
 ```
-samples = 7  
-sample_probability = 1  
-# Create a dataframe to append results too  
-data = pd.DataFrame()  
-  
-for samp in range(samples):  
-    subset = my_snowflake_connection.query("SELECT * FROM demo_data.demos.electronics_retail SAMPLE ({{sample_probability}})")  
-    # Append the subset to the existing dataframe  
-    data = pd.concat([data, subset], ignore_index=True)  
-  
+samples = 7
+
+
+
+sample_probability = 1
+
+
+
+# Create a dataframe to append results too
+
+
+
+data = pd.DataFrame()
+
+
+
+for samp in range(samples):
+
+
+
+subset = my_snowflake_connection.query("SELECT * FROM demo_data.demos.electronics_retail SAMPLE ({{sample_probability}})")
+
+
+
+# Append the subset to the existing dataframe
+
+
+
+data = pd.concat([data, subset], ignore_index=True)
+
+
+
 data
 ```
 
@@ -96,8 +168,11 @@ This will create seven distinct sample sets (from seven query runs!) that now ex
 For connections with writeback enabled, the `write_dataframe` method allows you to write a dataframe back to your database, from the `HexDataConnection` object. This replicates the functionality of [Writeback cells](/docs/explore-data/cells/data-cells/writeback-cells). To keep things very explicit when writing back, all arguments are required (meaning you must explicitly specify `database=None` when using a connection that does not support multiple databases).
 
 ```
-my_snowflake_connection.write_dataframe(  
-     df=my_dataframe, database="TEST_DB", schema="PUBLIC", table="WRITEBACK_EXAMPLE", overwrite=True)
+my_snowflake_connection.write_dataframe(
+
+
+
+df=my_dataframe, database="TEST_DB", schema="PUBLIC", table="WRITEBACK_EXAMPLE", overwrite=True)
 ```
 
 ### Snowpark sessions and DataFrames[​](#snowpark-sessions-and-dataframes "Direct link to Snowpark sessions and DataFrames")
@@ -121,7 +196,10 @@ For more information on using Snowpark with Hex, see our documentation on using 
 For BigQuery connections, you can also use the connection object to fetch a fully functional, authenticated BigQuery `Session` object.
 
 ```
-hex_bigquery_conn = hextoolkit.get_data_connection('My data connection')  
+hex_bigquery_conn = hextoolkit.get_data_connection('My data connection')
+
+
+
 session = hex_bigquery_conn.get_bigquery_session()
 ```
 
@@ -132,9 +210,14 @@ For more information on using BigQuery DataFrames with Hex, see our documentatio
 The `query_dataframes` function allows you to mimic querying a dataframe from a SQL cell using pure Python.
 
 ```
-import seaborn as sns  
-  
-penguins = sns.load_dataset("penguins")  
+import seaborn as sns
+
+
+
+penguins = sns.load_dataset("penguins")
+
+
+
 htk.query_dataframes("select * from penguins limit 100")
 ```
 
@@ -143,10 +226,14 @@ htk.query_dataframes("select * from penguins limit 100")
 `hextoolkit` also provides an API to get kernel information, including CPU count and memory limit in bytes.
 
 ```
-import hextoolkit as htk  
-  
-htk.kernel.cpu_count()  
-  
+import hextoolkit as htk
+
+
+
+htk.kernel.cpu_count()
+
+
+
 htk.kernel.memory_limit()
 ```
 

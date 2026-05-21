@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-05-20T14:46+00:00_
+_Generated 2026-05-21T02:07+00:00_
 
-**9 sources, 4925 topics total**
+**9 sources, 4929 topics total**
 
 ## airflow
 
@@ -2836,7 +2836,7 @@ _1532 topics_
 
 Upstream: <https://code.claude.com/docs/en/>
 
-_134 topics_
+_138 topics_
 
 - `claude-code/admin-setup`
 - `claude-code/agent-sdk/agent-loop`
@@ -2856,6 +2856,7 @@ _134 topics_
 - `claude-code/agent-sdk/python`
 - `claude-code/agent-sdk/quickstart`
 - `claude-code/agent-sdk/secure-deployment`
+- `claude-code/agent-sdk/session-storage`
 - `claude-code/agent-sdk/sessions`
 - `claude-code/agent-sdk/skills`
 - `claude-code/agent-sdk/slash-commands`
@@ -2934,10 +2935,12 @@ _134 topics_
 - `claude-code/permissions`
 - `claude-code/platforms`
 - `claude-code/plugin-dependencies`
+- `claude-code/plugin-hints`
 - `claude-code/plugin-marketplaces`
 - `claude-code/plugins`
 - `claude-code/plugins-reference`
 - `claude-code/prompt-caching`
+- `claude-code/prompt-library`
 - `claude-code/quickstart`
 - `claude-code/remote-control`
 - `claude-code/routines`
@@ -2945,6 +2948,7 @@ _134 topics_
 - `claude-code/scheduled-tasks`
 - `claude-code/security`
 - `claude-code/server-managed-settings`
+- `claude-code/sessions`
 - `claude-code/settings`
 - `claude-code/setup`
 - `claude-code/skills`

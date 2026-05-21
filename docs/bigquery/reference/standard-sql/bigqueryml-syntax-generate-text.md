@@ -929,9 +929,4 @@ The model and input table must be in the same region.
   `flatten_json_output` is `FALSE`.
 * `ml_generate_text_llm_result`: a `STRING` value that contains
   the generated text. This column is returned when `flatten_json_output`
-  is `TRUE`.
-* `ml_generate_text_rai_result`: a `STRING` value that contains
-  the generated safety ratings. This column is returned when
-  `flatten_json_output` is `TRUE` and you have specified the
-  `safety_settings` argument in the `ML.GENERATE_TEXT` function.
-* `ml_generate_`
+  is

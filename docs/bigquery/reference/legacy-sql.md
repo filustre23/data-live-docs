@@ -473,7 +473,5 @@ SELECT
   GROUPING(year) as rollup_year,
   is_male,
   GROUPING(is_male) as rollup_gender,
-  COUNT(1) as count
-FROM
-  [bigquery-public-data:samples.natality
+  COUNT(1) as
 ```

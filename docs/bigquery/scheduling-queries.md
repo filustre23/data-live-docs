@@ -20,7 +20,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 您可以為查詢進行排程，讓查詢週期性執行。排定的查詢必須以 [GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw) 編寫，其中可包含 [資料定義語言 (DDL)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw) 和 [資料操作語言 (DML)](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language?hl=zh-tw) 陳述式。您可以將查詢字串和目的地資料表參數化，依日期和時間整理查詢結果。
 
-建立或更新查詢的排程時，查詢的排定時間會從當地時間轉換為世界標準時間。世界標準時間不受日光節約時間影響。
+建立或更新查詢的排程時，系統會將查詢的排程時間從當地時間轉換為世界標準時間。世界標準時間不受日光節約時間影響。
 
 ## 事前準備
 
@@ -155,7 +155,7 @@ LIMIT
 | **參數** | **Purpose** |
 | --- | --- |
 | `run_date` | 這個參數會由格式為 `YYYYMMDD` 的日期取代。 |
-| `run_time` | 這個參數支援下列屬性： `offset`  時間偏移，依小時 (h)、分鐘 (m)、秒鐘 (s) 的順序表示。  不支援天 (d)。 可使用小數，例如：`1.5h`。  `time_format` 格式設定字串。最常見的格式參數是年 (%Y)、月 (%m)、日 (%d)。 就分區資料表而言，YYYYMMDD 是必要的後置字串，相當於「%Y%m%d」。  進一步瞭解 [datetime 元素的格式設定](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/functions-and-operators?hl=zh-tw#supported-format-elements-for-datetime)。 |
+| `run_time` | 這個參數支援下列屬性： `offset`  時間偏移，依小時 (h)、分鐘 (m)、秒鐘 (s) 的順序表示。 不支援天 (d)。 可使用小數，例如：`1.5h`。  `time_format` 格式設定字串。最常見的格式參數是年 (%Y)、月 (%m)、日 (%d)。 就分區資料表而言，YYYYMMDD 是必要的後置字串，相當於「%Y%m%d」。  進一步瞭解 [datetime 元素的格式設定](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/functions-and-operators?hl=zh-tw#supported-format-elements-for-datetime)。 |
 
 **使用須知：**
 
@@ -197,7 +197,7 @@ LIMIT
 
 如果移轉設定最初是使用 CMEK 加密功能建立，您可以更新移轉的 CMEK。更新移轉作業設定的 CMEK 時，BigQuery 資料移轉服務會在下次執行移轉作業時，將 CMEK 傳播至目的地資料表。屆時，BigQuery 資料移轉服務會在移轉作業執行期間，以新的 CMEK 取代任何過時的 CMEK。詳情請參閱「[更新轉移作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#update_a_transfer)」。
 
-您也可以使用[專案預設金鑰](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw#project_default_key)。
+您也可以使用[專案預設鍵](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw#project_default_key)。
 使用移轉作業指定專案預設金鑰時，BigQuery 資料移轉服務會將專案預設金鑰做為任何新移轉作業設定的預設金鑰。
 
 ## 透過服務帳戶設定排程查詢

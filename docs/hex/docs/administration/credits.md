@@ -8,12 +8,12 @@ AI features in Hex use a credit system.
 
 Hex accelerates data workflows to help teams move faster with trusted insights. Hex's AI features use a credit system.
 
-To ensure everyone can use AI, Hex awards monthly credit grants to [Editors and Explorers](/docs/collaborate/sharing-and-permissions/roles). Admins can optionally purchase pooled add-on credits for additional usage.
+To ensure everyone can use AI, Hex awards monthly credit grants to Editor and Explorer seats. Admins can optionally purchase pooled add-on credits for additional usage.
 
 info
 
 * Credits will go into effect for legacy customers with advance notice to Admins.
-* Customers with annual contracts who wish to purchase add-on credits can contact [[email protected]](/cdn-cgi/l/email-protection#5122303d3422113934297f25343239) to update their contract.
+* Customers with annual contracts who wish to purchase add-on credits can contact [[email protected]](/cdn-cgi/l/email-protection#c8bba9a4adbb88a0adb0e6bcadaba0) to update their contract.
 
 ## Credit Consumption[​](#credit-consumption "Direct link to Credit Consumption")
 
@@ -33,19 +33,21 @@ Below are some illustrative examples:
 
 *\* Actual credit consumption will vary based on your particular data, context, and prompt history.*
 
-Not all AI features consume credits. For example, title generation is included in paid plans and Context Studio topic generation is included in Team+. Other AI features may be exempt from credit consumption temporarily during their Preview or Beta period. The list of features that consume credits is subject to change as we evolve our product offering, and currently includes all [Hex agents](/docs/getting-started/ai-overview), including agent runs triggered from Slack or MCP.
+Not all AI features consume credits. For example, title generation is included in paid plans and Context Studio topic generation is included in Team+ plans. Other AI features may be exempt from credit consumption temporarily during their Preview or Beta period. The list of features that consume credits is subject to change as we evolve our product offering, and currently includes all [Hex agents](/docs/getting-started/ai-overview), including agent runs triggered from external integrations such as Slack, MCP, or CLI.
 
 ### What are monthly credit grants?[​](#what-are-monthly-credit-grants "Direct link to What are monthly credit grants?")
 
 To ensure everyone can try and use Hex’s AI features, users on paid seats are awarded a monthly credit grant. Monthly per-seat credit grants are assigned to the individual user, reset each billing cycle, and can’t be transferred, shared, or rolled over.
 
+You can view the current balance of your monthly credit grant by clicking into the workspace dropdown, located in top left corner your Hex workspace's homepage.
+
 Credit grants vary by plan and seat type:
 
 | Plan | Seat Type | Credit Grant |
 | --- | --- | --- |
-| Professional | Author | 30 credits/mo |
-| Team | Author | 40 credits/mo |
-| Enterprise | Author | 60 credits/mo |
+| Professional | Editor | 30 credits/mo |
+| Team | Editor | 40 credits/mo |
+| Enterprise | Editor | 60 credits/mo |
 | Enterprise | Explorer | 10 credits/mo |
 
 Once you’ve used your monthly credit grant, you can draw additional credits from the [workspace credit pool](#what-is-the-shared-workspace-credit-pool), if available.
@@ -55,12 +57,14 @@ info
 * Monthly per-seat credit grants are currently enforced for most customers. Legacy customers will receive advance notice before enforcement.
 * Monthly per-seat credit grants apply to standard seat-based subscriptions, and do not necessarily apply to custom Enterprise contract structures.
 
+Admins can manage credits and view usage in **Settings > Billing & Credits**.
+
 ### What are add-on credits?[​](#what-are-add-on-credits "Direct link to What are add-on credits?")
 
 Admins can opt to purchase pooled add-on credits for additional usage. There are a few ways to purchase or earn add-on credits:
 
 * Admins can enable [auto top-ups](#what-are-auto-top-ups) to automatically refill their workspace credit pool when needed.
-* Customers with annual contracts can purchase committed add-on credits at contract start or renewal.
+* Customers with annual contracts can purchase committed add-on credits upfront at contract start or renewal.
 * Hex may occasionally award bonus add-on credits.
 
 Add-on credits go to the shared workspace credit pool, which Admins can view in **Settings > Billing & credits**.

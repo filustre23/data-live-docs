@@ -609,10 +609,4 @@ Formats a `DATETIME` value according to a specified format string.
 
 * `format_string`: A `STRING` value that contains the
   [format elements](/bigquery/docs/reference/standard-sql/format-elements#format_elements_date_time) to use with
-  `datetime_expr`.
-* `datetime_expr`: A `DATETIME` value that represents the date and time to
-  format.
-
-**Return Data Type**
-
-`STRING`
+  `datetime_ex`

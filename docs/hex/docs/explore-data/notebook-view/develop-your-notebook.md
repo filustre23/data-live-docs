@@ -44,16 +44,23 @@ You can also add a SQL cell using the green **Add Cell** button and write a quer
 Although many projects start with querying data in SQL and then working with the resulting dataframe in Python, it is possible to skip straight to Python. Add a new Python cell by clicking on the green **Add Cell** button and write a script to open and read the contents of your CSV file.
 
 ```
-import pandas as pd  
-  
-my_df = pd.read_csv("my_csv_file.csv")  
-  
+import pandas as pd
+
+
+
+my_df = pd.read_csv("my_csv_file.csv")
+
+
+
 my_df.head()
 ```
 
 ```
-with open("my_csv_file.csv", "r") as file:  
-    contents = file.read()
+with open("my_csv_file.csv", "r") as file:
+
+
+
+contents = file.read()
 ```
 
 ## Everything in Hex is a cell[​](#everything-in-hex-is-a-cell "Direct link to Everything in Hex is a cell")
@@ -104,13 +111,26 @@ Once defined, variables can be referenced in other **Code**, **Input Parameter,*
 For example, if you add a Python cell with the function…
 
 ```
-def add_five(a_number):  
-	return 5 + a_number  
-  
-my_variable = add_five(3)  
-  
-print(my_variable)  
---  
+def add_five(a_number):
+
+
+
+return 5 + a_number
+
+
+
+my_variable = add_five(3)
+
+
+
+print(my_variable)
+
+
+
+--
+
+
+
 8
 ```
 
@@ -123,8 +143,14 @@ You can then reference `my_variable` in a Text or Markdown cell by wrapping it i
 …or in another **Code cell**.
 
 ```
-select *  
-from my_table  
+select *
+
+
+
+from my_table
+
+
+
 where my_numerical_column > my_variable
 ```
 
@@ -139,30 +165,66 @@ Let’s say we have have a SQL query containing two CTEs— `CTE A` and `CTE B`�
 As the first SQL cell containing `CTE A` runs, it returns its result in a dataframe we name `df_1`.
 
 ```
-WITH  
-    df_1 (cte_col_1, cte_col_2) AS (  
-        SELECT col_1, col_2  
-            FROM ...  
-    )  
+WITH
+
+
+
+df_1 (cte_col_1, cte_col_2) AS (
+
+
+
+SELECT col_1, col_2
+
+
+
+FROM ...
+
+
+
+)
+
+
+
 SELECT ... FROM my_cte;
 ```
 
 The second SQL cell containing `CTE B` runs and returns its result in a dataframe we name `df_2`.
 
 ```
-WITH  
-    df_2 (cte_col_1, cte_col_2) AS (  
-        SELECT col_1, col_2  
-            FROM ...  
-    )  
+WITH
+
+
+
+df_2 (cte_col_1, cte_col_2) AS (
+
+
+
+SELECT col_1, col_2
+
+
+
+FROM ...
+
+
+
+)
+
+
+
 SELECT ... FROM my_cte;
 ```
 
 The third and final SQL cell then runs and references both `df_1` and `df_2` in its join.
 
 ```
-SELECT *  
-FROM df_1  
+SELECT *
+
+
+
+FROM df_1
+
+
+
 INNER JOIN df_2 on df_1.col_1 = df2.col_1
 ```
 
@@ -174,7 +236,7 @@ Hex maps the relationships between your cells into a graph that helps power its 
 
 We visualize these cell relationships into a **Graph view** that can be found in your project by clicking on the **Graph** button. Read more about the **Graph view** [here](/docs/explore-data/projects/project-execution/graph-view).
 
-#### Run modes[  ​](#run-modes "Direct link to Run modes")
+#### Run modes[​](#run-modes "Direct link to Run modes")
 
 The **Run mode** menu at the top lets you define how the cell executes in notebook view. Projects always run using Auto mode in the app run mode. Read more about run modes [here](/docs/explore-data/projects/project-execution/run-modes-and-cell-staleness).
 

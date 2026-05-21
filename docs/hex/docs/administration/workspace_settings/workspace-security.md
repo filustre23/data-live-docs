@@ -29,7 +29,7 @@ When on, users with **Full Access** and **Can Edit** project permissions will ha
 
 ### Export apps as PDFs[​](#export-apps-as-pdfs "Direct link to Export apps as PDFs")
 
-When on, users can include a screenshot of published apps (including data and visualizations) in [app notifications](/docs/administration/workspace_settings/docs/share-insights/app-notifications) notifications. Any user with "App User" access or higher can be designated as a recipient of the email. This setting also enables any authenticated user with "App User" access to [export PDFs](/docs/share-insights/apps/export-as-pdf) from published apps.
+When on, users can include a screenshot of published apps (including data and visualizations) in [app notifications](/docs/share-insights/app-notifications) notifications. Any user with "App User" access or higher can be designated as a recipient of the email. This setting also enables any authenticated user with "App User" access to [export PDFs](/docs/share-insights/apps/export-as-pdf) from published apps.
 
 ### Allow Notion link preview[​](#allow-notion-link-preview "Direct link to Allow Notion link preview")
 
@@ -103,7 +103,7 @@ By default, users with the Editor role can create [project data connections](/do
 
 Admins may choose to disable this feature so that data connections can only be created in workspace settings by Admins.
 
-If disabled, any existing project data connections will continue to work. Reach out to [support](/cdn-cgi/l/email-protection#abd8dedbdbc4d9dfebc3ced385dfcec8c3) to get a list of projects that are currently using a project data connection.
+If disabled, any existing project data connections will continue to work. Reach out to [support](/cdn-cgi/l/email-protection#85f6f0f5f5eaf7f1c5ede0fdabf1e0e6ed) to get a list of projects that are currently using a project data connection.
 
 ## SSO configuration[​](#sso-configuration "Direct link to SSO configuration")
 

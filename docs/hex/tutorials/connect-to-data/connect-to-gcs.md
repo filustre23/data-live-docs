@@ -32,18 +32,32 @@ Navigate to the Variables tab, and use the **+ Add** button to [create a Secret]
 Start by importing the packages required to establish a connection to your GCS bucket.
 
 ```
-from google.cloud import storage  
-import pandas as pd  
+from google.cloud import storage
+
+
+
+import pandas as pd
+
+
+
 import json
 ```
 
 Use the credentials from the Secret you created (in this case, `sa_json`) to create your connection. Use `json.loads` to process the JSON and store it in the variable, `service_account_info`. Next, Use the name of your GCS bucket in place of our bucket, `hex-demo-test`. If a bucket by this name doesn't exist, it will be created.
 
 ```
-bucket_name = 'hex-demo-test'  
-  
-service_account_info = json.loads(sa_json)  
-client2 = storage.Client.from_service_account_info(service_account_info)  
+bucket_name = 'hex-demo-test'
+
+
+
+service_account_info = json.loads(sa_json)
+
+
+
+client2 = storage.Client.from_service_account_info(service_account_info)
+
+
+
 bucket = client2.get_bucket(bucket_name)
 ```
 
@@ -60,14 +74,20 @@ orders_2021.to_csv('orders_to_upload.csv')
 Create a variable, `source_file_name`, to hold the name of the csv we just created, `orders_to_upload.csv`. Next, create a variable, `destination_blob_name`, to hold the name of the blob you are creating in the GCS bucket defined above (`hex-demo-test`).
 
 ```
-source_file_name = 'orders_to_upload.csv'  
+source_file_name = 'orders_to_upload.csv'
+
+
+
 destination_blob_name = 'uploaded_orders.csv'
 ```
 
 Upload the `orders_to_upload.csv` file to a blob named `uploaded_orders.csv` in the `hex-demo-test` bucket.
 
 ```
-blob = bucket.blob(destination_blob_name)  
+blob = bucket.blob(destination_blob_name)
+
+
+
 blob.upload_from_filename(source_file_name)
 ```
 
@@ -76,21 +96,30 @@ blob.upload_from_filename(source_file_name)
 Now let's download the data that was just uploaded. Start by defining a variable, `source_blob_name`, to hold the the name of the blob we'll be accessing, `uploaded_orders.csv`. Then, define a variable for the name of the downloaded file, `orders_downloaded.csv`.
 
 ```
-source_blob_name = 'uploaded_orders.csv'  
+source_blob_name = 'uploaded_orders.csv'
+
+
+
 destination_file_name = 'orders_downloaded.csv'
 ```
 
 Pull the data we uploaded in `uploaded_orders.csv` back into our project.
 
 ```
-blob = bucket.blob(source_blob_name)  
+blob = bucket.blob(source_blob_name)
+
+
+
 blob.download_to_filename(destination_file_name)
 ```
 
 And lastly, let's look at the downloaded data!
 
 ```
-df = pd.read_csv('orders_downloaded.csv')  
+df = pd.read_csv('orders_downloaded.csv')
+
+
+
 df.head()
 ```
 

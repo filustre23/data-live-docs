@@ -2,7 +2,7 @@ On this page
 
 # Comments
 
-Users can comment on any cell in both the [Notebook view](/docs/collaborate/docs/explore-data/notebook-view/develop-your-notebook) and [published App](/docs/collaborate/docs/share-insights/apps/app-builder).
+Users can comment on any cell in both the [Notebook view](/docs/explore-data/notebook-view/develop-your-notebook) and [published App](/docs/share-insights/apps/app-builder).
 
 info
 

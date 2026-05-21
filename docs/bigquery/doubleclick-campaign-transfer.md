@@ -275,6 +275,4 @@ public class CreateCampaignmanagerTransfer {
 
 ## 查詢資料
 
-資料移轉至 BigQuery 時，系統會將資料寫入擷取時間分區資料表。詳情請參閱[分區資料表簡介](https://docs.cloud.google.com/bigquery/docs/partitioned-tables?hl=zh-tw)一文。
-
-如果您要直接查詢資料表，而不
+資料移轉至 BigQuery 時，系統會將資料寫入擷取時間分區資料

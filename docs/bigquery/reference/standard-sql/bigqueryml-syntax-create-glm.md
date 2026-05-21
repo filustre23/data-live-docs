@@ -978,10 +978,4 @@ default project.
 ### Train a linear regression model
 
 The following example creates and trains a linear regression model. The learn
-rate is set to `0.15`, the L1 regularization is set to `1`, and the maximum
-number of training iterations is set to `5`.
-
-```
-CREATE MODEL
-  `mydataset.mymodel
-```
+rate is set to `0.15`, the L1 regularization is set to `1`

@@ -330,7 +330,4 @@ IBM Netezza 資料倉儲技術專為與 Netezza 專屬的 SQL 語法搭配使用
 
 | **Netezza** | **BigQuery** |
 | --- | --- |
-| `ABS` | [`ABS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions?hl=zh-tw#abs) |
-| `ACOS` | [`ACOS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions?hl=zh-tw#acos) |
-|  | [`ACOSH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions?hl=zh-tw#acosh) |
-| `ASIN` |  |
+| `ABS` |  |

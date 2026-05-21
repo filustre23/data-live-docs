@@ -1,5 +1,5 @@
 # Video library
 
-[## 🗃️ Hex Foundations
+[## 🗃Hex Foundations
 
 14 items](/tutorials/category/hex-foundations)

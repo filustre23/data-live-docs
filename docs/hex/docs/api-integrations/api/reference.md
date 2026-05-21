@@ -36,6 +36,8 @@
 * putUpsertGuideDraft
 * postPublishGuideDrafts
 * delDeleteGuideDraft
+* getListThreads
+* getGetThread
 * getListCells
 * postCreateCell
 * getGetCell
@@ -2498,44 +2500,3 @@ Copy
 | schemaRefreshSchedule | object or null |
 | schemaFilters | object |
 | allowWritebackCells | boolean |
-| includeMagic | boolean |
-| connectViaSsh | boolean |
-| description | string |
-| connectionDetails | object or object or object or object or object or object or object (EditConnectionDetails) |
-| name | string |
-
-### Responses
-
-**201**
-
-**400**
-
-**403**
-
-**404**
-
-**422**
-
-**500**
-
-patch/v1/data-connections/{dataConnectionId}
-
-https://app.hex.tech/api/v1/data-connections/{dataConnectionId}
-
-### Request samples
-
-* Payload
-
-Content type
-
-application/json
-
-Copy
-
- Expand all  Collapse all
-
-`{
-
-* "sharing": {
-  + "workspace": {
-    - "public": "NON`

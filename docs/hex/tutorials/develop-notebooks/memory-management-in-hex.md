@@ -55,7 +55,10 @@ df.to_csv('saved_df.csv')
 You can use read\_csv() from Pandas to read the saved csv back into memory later in your project.
 
 ```
-import pandas as pd  
+import pandas as pd
+
+
+
 df = pd.read_csv('saved_df.csv', header=0, index_col=0)
 ```
 

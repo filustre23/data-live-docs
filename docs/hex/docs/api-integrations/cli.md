@@ -58,7 +58,10 @@ hex auth login -H https://myorganization.hex.tech
 You can verify authentication with:
 
 ```
-hex auth status  
+hex auth status
+
+
+
 hex projects list
 ```
 
@@ -67,8 +70,14 @@ hex projects list
 If you are part of multiple workspaces, you log into each of them separately using the Hex CLI. When logging in, specify a profile name which will be used for each account:
 
 ```
-hex auth login workspace1  
-hex auth login workspace2  
+hex auth login workspace1
+
+
+
+hex auth login workspace2
+
+
+
 hex auth login euworkspace -H https://eu.hex.tech
 ```
 
@@ -79,8 +88,10 @@ Switch the currently active account using `hex auth switch <profile_name>`. The 
 In CI, you can run `hex auth login` with the `--token-from-env <env_var>` flag and pass in a [workspace access token](/docs/api-integrations/api/overview#workspace-tokens) as environment variable.
 
 ```
-HEX_API_TOKEN="my-token" hex auth login --token-from-env HEX_API_TOKEN  
-  
+HEX_API_TOKEN="my-token" hex auth login --token-from-env HEX_API_TOKEN
+
+
+
 HEX_API_TOKEN="my-token" hex auth login --token-from-env HEX_API_TOKEN -H https://eu.hex.tech
 ```
 
@@ -89,38 +100,107 @@ HEX_API_TOKEN="my-token" hex auth login --token-from-env HEX_API_TOKEN -H https:
 The CLI documents itself with the `--help` flag:
 
 ```
-hex --help  
-  
-# subcommands are also documented using the `--help` flag  
+hex --help
+
+
+
+# subcommands are also documented using the `--help` flag
+
+
+
 hex auth --help
 ```
 
 ```
-Usage: hex [OPTIONS] [COMMAND]  
-  
-Commands:  
-  app          Manage and run Hex apps  
-  project      Manage and run Hex projects  
-  cell         Manage project cells  
-  run          Manage running Hex projects and apps  
-  connection   Manage data connections  
-  collection   Manage project collections  
-  group        Manage workspace groups  
-  user         Manage workspace users  
-  auth         Manage authentication with Hex  
-  install      Manage additional tools provided by the Hex CLI, such as Claude skills  
-  config       Manage CLI configuration  
-  completions  Generate shell completion scripts  
-  help         Print this message or the help of the given subcommand(s)  
-  
-Options:  
-      --profile <PROFILE>  Profile to use (from ~/.config/hex/config.toml) [env: HEX_PROFILE=]  
-      --json               Output as JSON (for scripting)  
-  -q, --quiet              Suppress non-essential output  
-  -v, --verbose            Show verbose output for debugging  
-      --no-color           Disable colored output  
-  -h, --help               Print help  
-  -V, --version            Print version
+Usage: hex [OPTIONS] [COMMAND]
+
+
+
+Commands:
+
+
+
+app          Manage and run Hex apps
+
+
+
+project      Manage and run Hex projects
+
+
+
+cell         Manage project cells
+
+
+
+run          Manage running Hex projects and apps
+
+
+
+connection   Manage data connections
+
+
+
+collection   Manage project collections
+
+
+
+group        Manage workspace groups
+
+
+
+user         Manage workspace users
+
+
+
+auth         Manage authentication with Hex
+
+
+
+install      Manage additional tools provided by the Hex CLI, such as Claude skills
+
+
+
+config       Manage CLI configuration
+
+
+
+completions  Generate shell completion scripts
+
+
+
+help         Print this message or the help of the given subcommand(s)
+
+
+
+Options:
+
+
+
+--profile <PROFILE>  Profile to use (from ~/.config/hex/config.toml) [env: HEX_PROFILE=]
+
+
+
+--json               Output as JSON (for scripting)
+
+
+
+-q, --quiet              Suppress non-essential output
+
+
+
+-v, --verbose            Show verbose output for debugging
+
+
+
+--no-color           Disable colored output
+
+
+
+-h, --help               Print help
+
+
+
+-V, --version            Print version
 ```
 
 ### Configuration for AI agents[​](#configuration-for-ai-agents "Direct link to Configuration for AI agents")
@@ -129,7 +209,7 @@ AI agents that can interact with your command line, such as Claude Code, can be 
 
 ## Bugs & issues[​](#bugs--issues "Direct link to Bugs & issues")
 
-Please contact [[email protected]](/cdn-cgi/l/email-protection#b6c5c3c6c6d9c4c2f6ded3ce98c2d3d5de) if you encounter any bugs, or other issues.
+Please contact [[email protected]](/cdn-cgi/l/email-protection#fd8e888d8d928f89bd959885d389989e95) if you encounter any bugs, or other issues.
 
 #### On this page
 

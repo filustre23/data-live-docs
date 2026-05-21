@@ -369,13 +369,13 @@ When returning a result in [query mode](#query-mode), Hex fetches a preview of t
 
 | User query | Hex preview query |
 | --- | --- |
-| ``` select * from stripe_subscriptions order by stripe_customer_id ``` | ``` select * from stripe_subscriptions order by stripe_customer_id limit 1001 ``` |
+| ```  select *  from stripe_subscriptions  order by stripe_customer_id ``` | ```  select *  from stripe_subscriptions  order by stripe_customer_id  limit 1001 ``` |
 
 If your SQL cell contains a union statement, Hex instead writes the preview query using a CTE to ensure the correct number of records are fetched.
 
 | User query | Hex preview query |
 | --- | --- |
-| ``` select * from retail_customers union all select * from trade_customers ``` | ``` with query as (   select * from retail_customers   union all   select * from trade_customers ) select * from query limit 1001 ``` |
+| ```  select * from retail_customers  union all  select * from trade_customers ``` | ```  with query as (  select * from retail_customers  union all  select * from trade_customers  )  select * from query  limit 1001 ``` |
 
 When the `limit 1001` is applied via a CTE rather than inline, the preview may not respect the ordering defined in the user query — this is a limitation of data warehouses (for example, see [Snowflake's documentation](https://community.snowflake.com/s/article/SELECT-query-with-LIMIT-clause-returns-non-deterministic-result-if-ORDER-BY-clause-exists-in-different-level) on this issue).
 

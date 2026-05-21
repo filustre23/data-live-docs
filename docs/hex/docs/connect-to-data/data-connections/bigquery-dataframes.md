@@ -15,8 +15,14 @@ To learn more about BigQuery DataFrames, visit the [BigQuery DataFrames docs](ht
 To create a BigQuery DataFrame session from a Python cell, create a cell with the following code, replacing the argument of the get\_data\_connection method with the name of your connection.
 
 ```
-import hextoolkit  
-hex_bigquery_conn = hextoolkit.get_data_connection('Demo Bigquery')  
+import hextoolkit
+
+
+
+hex_bigquery_conn = hextoolkit.get_data_connection('Demo Bigquery')
+
+
+
 session = hex_bigquery_conn.get_bigquery_session()
 ```
 

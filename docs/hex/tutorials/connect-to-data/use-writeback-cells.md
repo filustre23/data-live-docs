@@ -31,15 +31,42 @@ select max(date)::DATE as max_date from hex_app_data.hex_production.county_covid
 With our max date in hand, we can use it in our request and add the returned data into a dataframe.
 
 ```
-# Grab the max date value from the dataframe  
-max_date = max_date_dataframe.iloc[0,0]  
-# Format the date to be YYYY-MM-DD  
-max_date = date(max_date.year, max_date.month, max_date.day)  
-# Make the request to get the new data  
-# The CDC's API leverages SoQL syntax: https://dev.socrata.com/docs/functions/#,  
-data = get("https://data.cdc.gov/resource/8xkx-amqh.json?$where=date > '" + str(max_date) + "'&$order=recip_county, date DESC&$limit=5000000")  
-# Iterate through the response json and turn it into a dataframe  
-new_data = pd.DataFrame([entry for entry in data.json()])  
+# Grab the max date value from the dataframe
+
+
+
+max_date = max_date_dataframe.iloc[0,0]
+
+
+
+# Format the date to be YYYY-MM-DD
+
+
+
+max_date = date(max_date.year, max_date.month, max_date.day)
+
+
+
+# Make the request to get the new data
+
+
+
+# The CDC's API leverages SoQL syntax: https://dev.socrata.com/docs/functions/#,
+
+
+
+data = get("https://data.cdc.gov/resource/8xkx-amqh.json?$where=date > '" + str(max_date) + "'&$order=recip_county, date DESC&$limit=5000000")
+
+
+
+# Iterate through the response json and turn it into a dataframe
+
+
+
+new_data = pd.DataFrame([entry for entry in data.json()])
+
+
+
 new_data.head()
 ```
 
@@ -76,10 +103,22 @@ With a list of table names coming from one or more queries, we can create a drop
 The first step here will be to create a [Dropdown input](/docs/explore-data/cells/input-cells/dropdown-inputs#dynamic-values) that connects to our table names query. In order to avoid accidentally dropping tables, we are also going to connect our drop statement to a [Run button](/docs/explore-data/cells/input-cells/run-button). Once these are created, we can reference them both in a drop query that runs when our run button is selected
 
 ```
-{% if table_dropper %}  
-DROP TABLE HEX_APP_DATA.HEX_DEVELOPMENT.{{ droppable_tables | sqlsafe }}  
-{% else %}  
-select 'Click the "Drop it!" button to drop the table.'  
+{% if table_dropper %}
+
+
+
+DROP TABLE HEX_APP_DATA.HEX_DEVELOPMENT.{{ droppable_tables | sqlsafe }}
+
+
+
+{% else %}
+
+
+
+select 'Click the "Drop it!" button to drop the table.'
+
+
+
 {% endif %}
 ```
 

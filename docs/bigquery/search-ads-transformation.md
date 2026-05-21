@@ -705,7 +705,4 @@ Search Ads 360 API 資源：[ad\_group\_criterion](https://developers.google.com
 | ad\_group\_criterion\_status | 條件的狀態。這是由用戶端設定的廣告群組條件實體狀態。注意：使用者介面報表可能會納入其他資訊，影響條件是否符合放送資格。在某些情況下，即使透過 API 移除條件，該條件在使用者介面中仍可能顯示為已啟用。舉例來說，除非排除，否則廣告活動預設會向所有年齡層的使用者顯示。由於這些年齡層符合廣告放送資格，使用者介面會將每個年齡範圍顯示為「已啟用」，但 AdGroupCriterion.status 會顯示「已移除」，因為沒有新增任何正向條件。 |
 | ad\_group\_criterion\_type | 條件類型。 |
 | ad\_group\_criterion\_user\_list\_user\_list | 使用者名單資源名稱。 |
-| ad\_group\_criterion\_webpage\_conditions | 指定網頁的條件或邏輯運算式。評估網頁指定目標時，系統會將網頁指定目標條件清單以 AND 運算子連結。如果條件清單為空白，表示廣告活動網站的所有網頁都是指定目標。建立作業必須填寫這個欄位，更新作業則不得填寫。 |
-| ad\_group\_criterion\_webpage\_coverage\_percentage | 網站條件涵蓋率百分比。這是根據廣告群組和廣告活動中的網站目標、排除網站目標和排除關鍵字，計算出的網站涵蓋率百分比。舉例來說，如果涵蓋範圍傳回 1，表示涵蓋範圍為 100%。 |
-| ad\_group\_id | 廣告群組 ID。 |
-|  |
+| ad\_group\_criterion\_webpage\_conditions | 指定網頁的條件或邏輯運算式。評估網頁指定目標時，系統會將網頁指定目標條件清單以 AND 運算子連結。如果條件清單為空白，表示廣告活動網站的 |

@@ -247,6 +247,5 @@ public class CreateAzureBlobStorageTransfer {
             .setDisplayName(displayName)
             .setDataSourceId("azure_blob_storage")
             .setParams(Struct.newBuilder().putAllFields(params).build())
-            .setSchedule("every 24 hours")
-            <
+            .setSchedule</
 ```

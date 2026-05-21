@@ -70,8 +70,14 @@ In addition to the manual method, there are three different automated write mode
 Hex also provides a Python package (`hextoolkit`) that makes it easier to write to your database. This can be useful if you need to wrap the writeback code in more fine-grained, pythonic, logic.
 
 ```
-import hextoolkit  
-hex_data_connection = hextoolkit.get_data_connection(<"Data Connection Name">)  
+import hextoolkit
+
+
+
+hex_data_connection = hextoolkit.get_data_connection(<"Data Connection Name">)
+
+
+
 writeback_metadata = hex_data_connection.write_dataframe(df=<dataframe_name>, database="<database_name>", schema="<schema_name>", table="<table_name>", overwrite=<True/False>)
 ```
 

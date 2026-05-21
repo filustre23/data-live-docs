@@ -27,16 +27,46 @@ The first step to setting up an OAuth data connection in Hex requires creating t
    A Snowflake Account Admin must run the following SQL snippet in Snowflake and retrieve the `CLIENT_ID` and `CLIENT_SECRET`.
 
    ```
-   USE ROLE ACCOUNTADMIN;  
-   CREATE SECURITY INTEGRATION OAUTH_HEX  
-   TYPE=OAUTH  
-   ENABLED=TRUE  
-   OAUTH_CLIENT = CUSTOM  
-   OAUTH_CLIENT_TYPE='CONFIDENTIAL'  
-   OAUTH_REDIRECT_URI='https://app.hex.tech/snowflake-oauth-success'  
-   OAUTH_ISSUE_REFRESH_TOKENS = TRUE  
-   OAUTH_REFRESH_TOKEN_VALIDITY = 7776000  
-   OAUTH_ENFORCE_PKCE = TRUE;  
+   USE ROLE ACCOUNTADMIN;
+
+
+
+   CREATE SECURITY INTEGRATION OAUTH_HEX
+
+
+
+   TYPE=OAUTH
+
+
+
+   ENABLED=TRUE
+
+
+
+   OAUTH_CLIENT = CUSTOM
+
+
+
+   OAUTH_CLIENT_TYPE='CONFIDENTIAL'
+
+
+
+   OAUTH_REDIRECT_URI='https://app.hex.tech/snowflake-oauth-success'
+
+
+
+   OAUTH_ISSUE_REFRESH_TOKENS = TRUE
+
+
+
+   OAUTH_REFRESH_TOKEN_VALIDITY = 7776000
+
+
+
+   OAUTH_ENFORCE_PKCE = TRUE;
+
+
+
    select system$show_oauth_client_secrets('OAUTH_HEX');
    ```
 

@@ -5,24 +5,42 @@ Many data sources are behind firewalls that require Hex's IP addresses to be all
 The centrally-hosted Hex Cloud application (e.g. `app.hex.tech`) is served from the following addresses:
 
 ```
-3.129.36.245  
-3.13.16.99  
+3.129.36.245
+
+
+
+3.13.16.99
+
+
+
 3.18.79.139
 ```
 
 For Hex workspaces hosted at `eu.hex.tech`, the following addresses should be added to your allow-list:
 
 ```
-34.240.244.7  
-52.17.12.97  
+34.240.244.7
+
+
+
+52.17.12.97
+
+
+
 54.76.153.135
 ```
 
 For Hex workspaces hosted at `hc.hex.tech`, the following addresses should be added to your allow-list:
 
 ```
-18.224.164.96  
-3.136.150.231  
+18.224.164.96
+
+
+
+3.136.150.231
+
+
+
 52.14.118.144
 ```
 

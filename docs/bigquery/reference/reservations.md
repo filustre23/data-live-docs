@@ -298,7 +298,5 @@ public class QuickstartSample {
       client
           .listReservations(parent)
           .iterateAll()
-          .forEach(res -> System.out.println("Reservation resource name: " + res.getName()));
-
-      // list capacity commitments in the project
+          .forEach(res -> System.out.println
 ```

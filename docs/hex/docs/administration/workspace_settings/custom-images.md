@@ -4,7 +4,7 @@ On this page
 
 info
 
-* Available on select Enterprise [plans](https://hex.tech/pricing). Contact [[email protected]](/cdn-cgi/l/email-protection#6d1e0c01081e2d0508154319080e05) to request access.
+* Available on select Enterprise [plans](https://hex.tech/pricing). Contact [[email protected]](/cdn-cgi/l/email-protection#6a190b060f192a020f12441e0f0902) to request access.
 
 By default, Hex is set up with images for multiple versions of Python, each of which contain many pre-installed packages. These images are often sufficient for most projects, and are designed to get users off the ground quickly.
 
@@ -63,29 +63,98 @@ The IAM role must have permissions to perform the following actions on your ECR 
 **Example IAM policy**
 
 ```
-{  
-  # Attach this policy to your IAM role:  
-  "Version": "2012-10-17",  
-  "Statement": [  
-    {  
-      "Sid": "AllowReadAccessForHex",  
-      "Effect": "Allow",  
-      "Action": [  
-        "ecr:DescribeImages",  
-        "ecr:BatchGetImage",  
-        "ecr:GetDownloadUrlForLayer",  
-        "ecr:ListTagsForResource",  
-        "ecr:ListImages"  
-      ],  
-      "Resource": "arn:aws:ecr:{aws_region}:{aws_account_id}:repository/{ecr_name}"  
-    },  
-    {  
-      "Sid": "AllowAuthorizationForHex",  
-      "Effect": "Allow",  
-      "Action": "ecr:GetAuthorizationToken",  
-      "Resource": "*"  
-    }  
-  ]  
+{
+
+
+
+# Attach this policy to your IAM role:
+
+
+
+"Version": "2012-10-17",
+
+
+
+"Statement": [
+
+
+
+{
+
+
+
+"Sid": "AllowReadAccessForHex",
+
+
+
+"Effect": "Allow",
+
+
+
+"Action": [
+
+
+
+"ecr:DescribeImages",
+
+
+
+"ecr:BatchGetImage",
+
+
+
+"ecr:GetDownloadUrlForLayer",
+
+
+
+"ecr:ListTagsForResource",
+
+
+
+"ecr:ListImages"
+
+
+
+],
+
+
+
+"Resource": "arn:aws:ecr:{aws_region}:{aws_account_id}:repository/{ecr_name}"
+
+
+
+},
+
+
+
+{
+
+
+
+"Sid": "AllowAuthorizationForHex",
+
+
+
+"Effect": "Allow",
+
+
+
+"Action": "ecr:GetAuthorizationToken",
+
+
+
+"Resource": "*"
+
+
+
+}
+
+
+
+]
+
+
+
 }
 ```
 
@@ -105,23 +174,74 @@ In the AWS IAM console, add an Identity Provider configured with the OIDC provid
 **Step 4: Configure IAM Role Trust Policy**
 
 ```
-{  
-  # Configure your ECR IAM role with the following trust policy:  
-  "Version": "2012-10-17",  
-  "Statement": [  
-    {  
-      "Action": "sts:AssumeRoleWithWebIdentity",  
-      "Effect": "Allow",  
-      "Principal": {  
-        "Federated": "arn:aws:iam::[Your AWS account ID]:oidc-provider/[Hex OIDC provider URL]"  
-      },  
-      "Condition": {  
-        "StringEquals": {  
-          "[Hex OIDC provider url]:sub": "[Hex OIDC subscriber]"  
-        }  
-      }  
-    }  
-  ]  
+{
+
+
+
+# Configure your ECR IAM role with the following trust policy:
+
+
+
+"Version": "2012-10-17",
+
+
+
+"Statement": [
+
+
+
+{
+
+
+
+"Action": "sts:AssumeRoleWithWebIdentity",
+
+
+
+"Effect": "Allow",
+
+
+
+"Principal": {
+
+
+
+"Federated": "arn:aws:iam::[Your AWS account ID]:oidc-provider/[Hex OIDC provider URL]"
+
+
+
+},
+
+
+
+"Condition": {
+
+
+
+"StringEquals": {
+
+
+
+"[Hex OIDC provider url]:sub": "[Hex OIDC subscriber]"
+
+
+
+}
+
+
+
+}
+
+
+
+}
+
+
+
+]
+
+
+
 }
 ```
 
@@ -144,30 +264,102 @@ The IAM user or service account must have permissions to perform the following a
 **Example of AWS IAM policy:**
 
 ```
-{  
-  "Version": "2024-02-16",  
-  "Statement":  
-    [  
-      {  
-        "Sid": "AllowReadAccessForHex",  
-        "Effect": "Allow",  
-        "Action":  
-          [  
-            "ecr:DescribeImages",  
-            "ecr:BatchGetImage",  
-            "ecr:GetDownloadUrlForLayer",  
-            "ecr:ListTagsForResource",  
-            "ecr:ListImages"  
-          ],  
-        "Resource": "arn:aws:ecr:{aws_region}:{aws_account_id}:repository/{erc_name}"  
-      },  
-      {  
-        "Sid": "AllowAuthorizationForHex",  
-        "Effect": "Allow",  
-        "Action": "ecr:GetAuthorizationToken",  
-        "Resource": "*"  
-      }  
-    ]  
+{
+
+
+
+"Version": "2024-02-16",
+
+
+
+"Statement":
+
+
+
+[
+
+
+
+{
+
+
+
+"Sid": "AllowReadAccessForHex",
+
+
+
+"Effect": "Allow",
+
+
+
+"Action":
+
+
+
+[
+
+
+
+"ecr:DescribeImages",
+
+
+
+"ecr:BatchGetImage",
+
+
+
+"ecr:GetDownloadUrlForLayer",
+
+
+
+"ecr:ListTagsForResource",
+
+
+
+"ecr:ListImages"
+
+
+
+],
+
+
+
+"Resource": "arn:aws:ecr:{aws_region}:{aws_account_id}:repository/{erc_name}"
+
+
+
+},
+
+
+
+{
+
+
+
+"Sid": "AllowAuthorizationForHex",
+
+
+
+"Effect": "Allow",
+
+
+
+"Action": "ecr:GetAuthorizationToken",
+
+
+
+"Resource": "*"
+
+
+
+}
+
+
+
+]
+
+
+
 }
 ```
 
@@ -227,7 +419,10 @@ This value will be used to [set the Poetry environment](https://python-poetry.or
 Hex also supports the use of Conda environments by setting the `HEX_USE_CONDA` environment variable, which will default to using a Conda environment named "base". If you have a different Conda environment, you can set it using the `HEX_CONDA_ENV_NAME` variable:
 
 ```
-ENV HEX_USE_CONDA=true  
+ENV HEX_USE_CONDA=true
+
+
+
 ENV HEX_CONDA_ENV_NAME=<conda_env_to_use>
 ```
 
@@ -285,7 +480,7 @@ Deleting an image will immediately break any published apps that utilize the ima
 
 ### Enable fast launch[​](#enable-fast-launch "Direct link to Enable fast launch")
 
-Fast launch can be enabled on an image from the **Edit image** modal, accessed via the three-dot menu to the right of the image. The number of images that can have fast launch enabled is limited by workspace. Once you have reached the maximum number of fast launch images, the toggle will be disabled and show a message indicating that you need to fast launch needs to be disabled on another image in order to enable it on the new image. To alter the number of images you can enable fast Launch for, please contact [[email protected]](/cdn-cgi/l/email-protection#d8abb9b4bdab98b0bda0f6acbdbbb0).
+Fast launch can be enabled on an image from the **Edit image** modal, accessed via the three-dot menu to the right of the image. The number of images that can have fast launch enabled is limited by workspace. Once you have reached the maximum number of fast launch images, the toggle will be disabled and show a message indicating that you need to fast launch needs to be disabled on another image in order to enable it on the new image. To alter the number of images you can enable fast Launch for, please contact [[email protected]](/cdn-cgi/l/email-protection#c3b0a2afa6b083aba6bbedb7a6a0ab).
 
 ### How fast launch works[​](#how-fast-launch-works "Direct link to How fast launch works")
 

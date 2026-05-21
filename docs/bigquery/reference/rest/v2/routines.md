@@ -30,6 +30,9 @@ Send feedback
   + [JSON representation](#PythonOptions.SCHEMA_REPRESENTATION)
 * [ExternalRuntimeOptions](#ExternalRuntimeOptions)
   + [JSON representation](#ExternalRuntimeOptions.SCHEMA_REPRESENTATION)
+* [RoutineBuildStatus](#RoutineBuildStatus)
+  + [JSON representation](#RoutineBuildStatus.SCHEMA_REPRESENTATION)
+* [BuildState](#BuildState)
 * [Methods](#METHODS_SUMMARY)
 
 ## Resource: Routine
@@ -38,7 +41,7 @@ A user-defined function or a stored procedure.
 
 | JSON representation |
 | --- |
-| ``` {   "etag": string,   "routineReference": {     object (RoutineReference)   },   "routineType": enum (RoutineType),   "creationTime": string,   "lastModifiedTime": string,   "language": enum (Language),   "arguments": [     {       object (Argument)     }   ],   "returnType": {     object (StandardSqlDataType)   },   "returnTableType": {     object (StandardSqlTableType)   },   "importedLibraries": [     string   ],   "definitionBody": string,   "description": string,   "determinismLevel": enum (DeterminismLevel),   "strictMode": boolean,   "remoteFunctionOptions": {     object (RemoteFunctionOptions)   },   "sparkOptions": {     object (SparkOptions)   },   "dataGovernanceType": enum (DataGovernanceType),   "pythonOptions": {     object (PythonOptions)   },   "externalRuntimeOptions": {     object (ExternalRuntimeOptions)   } } ``` |
+| ``` {   "etag": string,   "routineReference": {     object (RoutineReference)   },   "routineType": enum (RoutineType),   "creationTime": string,   "lastModifiedTime": string,   "language": enum (Language),   "arguments": [     {       object (Argument)     }   ],   "returnType": {     object (StandardSqlDataType)   },   "returnTableType": {     object (StandardSqlTableType)   },   "importedLibraries": [     string   ],   "definitionBody": string,   "description": string,   "determinismLevel": enum (DeterminismLevel),   "strictMode": boolean,   "remoteFunctionOptions": {     object (RemoteFunctionOptions)   },   "sparkOptions": {     object (SparkOptions)   },   "dataGovernanceType": enum (DataGovernanceType),   "pythonOptions": {     object (PythonOptions)   },   "externalRuntimeOptions": {     object (ExternalRuntimeOptions)   },   "buildStatus": {     object (RoutineBuildStatus)   } } ``` |
 
 | Fields | |
 | --- | --- |
@@ -61,6 +64,7 @@ A user-defined function or a stored procedure.
 | `dataGovernanceType` | `enum (DataGovernanceType)`  Optional. If set to `DATA_MASKING`, the function is validated and made available as a masking function. For more information, see [Create custom masking routines](https://cloud.google.com/bigquery/docs/user-defined-functions#custom-mask). |
 | `pythonOptions` | `object (PythonOptions)`  Optional. Options for the Python UDF. [Preview](https://cloud.google.com/products/#product-launch-stages) |
 | `externalRuntimeOptions` | `object (ExternalRuntimeOptions)`  Optional. Options for the runtime of the external system executing the routine. This field is only applicable for Python UDFs. [Preview](https://cloud.google.com/products/#product-launch-stages) |
+| `buildStatus` | `object (RoutineBuildStatus)`  Output only. The build status of the routine. This field is only applicable to Python UDFs. [Preview](https://cloud.google.com/products/#product-launch-stages) |
 
 ## RoutineReference
 
@@ -238,29 +242,33 @@ Options for the runtime of the external system.
 | `maxBatchingRows` | `string (int64 format)`  Optional. Maximum number of rows in each batch sent to the external runtime. If absent or if 0, BigQuery dynamically decides the number of rows in a batch. |
 | `runtimeVersion` | `string`  Optional. Language runtime version. Example: `python-3.11`. |
 
+## RoutineBuildStatus
+
+The status of a routine build.
+
+| JSON representation |
+| --- |
+| ``` {   "buildState": enum (BuildState),   "errorResult": {     object (ErrorProto)   },   "buildStateUpdateTime": string,   "buildDuration": string,   "imageSizeBytes": string } ``` |
+
+| Fields | |
+| --- | --- |
+| `buildState` | `enum (BuildState)`  Output only. The current build state of the routine. |
+| `errorResult` | `object (ErrorProto)`  Output only. A result object that will be present only if the build has failed. |
+| `buildStateUpdateTime` | `string (Timestamp format)`  Output only. The time when the build state was updated last. |
+| `buildDuration` | `string (Duration format)`  Output only. The time taken for the image build. Populated only after the build succeeds or fails.  A duration in seconds with up to nine fractional digits, ending with '`s`'. Example: `"3.5s"`. |
+| `imageSizeBytes` | `string (int64 format)`  Output only. The size of the image in bytes. Populated only after the build succeeds. |
+
+## BuildState
+
+The build state of a routine.
+
+| Enums | |
+| --- | --- |
+| `BUILD_STATE_UNSPECIFIED` | Default value. |
+| `IN_PROGRESS` | The build is in progress. |
+| `SUCCEEDED` | The build has succeeded. |
+| `FAILED` | The build has failed. |
+
 | Methods | |
 | --- | --- |
-| `delete` | Deletes the routine specified by routineId from the dataset. |
-| `get` | Gets the specified routine resource by routine ID. |
-| `getIamPolicy` | Gets the access control policy for a resource. |
-| `insert` | Creates a new routine in the dataset. |
-| `list` | Lists all routines in the specified dataset. |
-| `setIamPolicy` | Sets the access control policy on the specified resource. |
-| `testIamPermissions` | Returns permissions that a caller has on the specified resource. |
-| `update` | Updates information in an existing routine. |
-
-
-
-
-Send feedback
-
-Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
-
-Last updated 2025-07-17 UTC.
-
-
-
-
-Need to tell us more?
-
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2025-07-17 UTC."],[],[]]
+<

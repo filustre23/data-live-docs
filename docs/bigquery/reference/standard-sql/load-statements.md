@@ -408,9 +408,4 @@ LOAD DATA INTO mydataset.table1
   )
 ```
 
-The following example loads two CSV files into a table, using schema
-autodetection.
-
-```
-LOAD DATA INTO mydataset.
-```
+<

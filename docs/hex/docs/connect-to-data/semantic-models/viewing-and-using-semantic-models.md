@@ -4,8 +4,6 @@ On this page
 
 How to view and use your semantic projects.
 
-
-
 First, add a semantic project to Hex. Build it directly in Hex with [Semantic authoring](/docs/connect-to-data/semantic-models/semantic-authoring/semantic-authoring-overview) or import via [Semantic Model Sync](/docs/connect-to-data/semantic-models/semantic-model-sync/intro) from tools like [Cube](https://cube.dev/docs/product/introduction), [dbt MetricFlow](https://docs.getdbt.com/docs/build/about-metricflow), or [Snowflake Semantic Views](https://docs.snowflake.com/en/user-guide/views-semantic/overview).
 
 ## Viewing your models and views[​](#viewing-your-models-and-views "Direct link to Viewing your models and views")

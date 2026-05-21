@@ -466,6 +466,5 @@ SELECT
   FORMAT("%T", NET.REG_DOMAIN(input)) AS domain
 FROM (
   SELECT "" AS input, "invalid input" AS description
-  UNION ALL SELECT "http://abc.xyz", "standard URL"
-  UNION ALL SELECT "//user:password@a.b:80/path?query"
+  UNION ALL SELECT
 ```

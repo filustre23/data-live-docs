@@ -108,7 +108,7 @@ Hex performs penetration tests and engages independent third-party entities to c
 
 Hex maintains security incident management policies and procedures in accordance with NIST SP 800-61. Hex's Incident Response Team assesses all relevant security threats and vulnerabilities and establishes appropriate remediation and mitigation actions. Hex retains security logs for a minimum of one (1) year. Access to these security logs is limited to authorized personnel. Security logs are secured in a manner to prevent unauthorized access, modification, and accidental or deliberate destruction. Hex utilizes third-party tools to detect, mitigate, and prevent Distributed Denial of Service (DDoS) attacks.
 
-## 18. Discovery, Investigation, and Notification of a Security Incident[​](#18-discovery-investigation-and-notification-of-a-security-incident "Direct link to 18. Discovery, Investigation, and Notification of a Security Incident")
+## 18. Discovery, Investigation, and Notification of a Security Incident[  ​](#18-discovery-investigation-and-notification-of-a-security-incident "Direct link to 18. Discovery, Investigation, and Notification of a Security Incident")
 
 Hex will promptly investigate a Security Incident upon discovery. To the extent permitted by applicable law, Hex will notify Customer of a Security Incident in accordance with the Data Protection Addendum. Security Incident notifications will be provided to Customer via email to the email address(es) designated by Customer in its account. Such notifications will include a brief summary of the available facts and the status of Hex's investigation.
 

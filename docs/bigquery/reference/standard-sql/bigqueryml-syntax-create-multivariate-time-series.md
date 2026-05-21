@@ -965,12 +965,3 @@ table only contains holidays and events from the following regions:
 * `NA`: North America
 * `NL`: Netherlands
 * `NZ`: New Zealand
-* `PT`: Portugal
-* `SK`: Slovakia
-* `US`: United States
-* `ZA`: South Africa
-
-## Custom holidays
-
-You can combine use of the [`holiday_statement` argument](#holiday_statement)
-and the [`HOLIDAY_REGION` option](#holiday_region) to enable se

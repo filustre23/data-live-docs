@@ -296,7 +296,5 @@ from google.cloud import bigquery_connection_v1 as bq_connection
 
 def main(
     project_id: str = "your-project-id", location: str = "US", transport: str = "grpc"
-) -> None:
-    """Prints details and summary information about connections for a given admin project and location"""
-    client = bq_connection.ConnectionServiceClient
+)
 ```

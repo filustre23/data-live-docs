@@ -8,8 +8,6 @@ info
 
 * Available on the Team and Enterprise [plans](https://hex.tech/pricing/).
 
-
-
 Context Studio enables Admins and Managers to observe, evaluate, and improve how Hex agents behave across your workspace. It combines observability and context management in one place, providing visibility into where agents perform well, where they struggle, and the context sources that shape their responses. This gives data teams the visibility and control they need to confidently enable agents in Hex and monitor agent performance as usage grows.
 
 Admins and Managers can directly update Guides, Endorsements, and Models to improve agent performance, while Editors and Explorers have read-only access to these context settings for transparency into information agents are using. For guidance on configuring these context sources, see [setting up your workspace for AI agents](/tutorials/ai-best-practices/setup-for-ai-agents).

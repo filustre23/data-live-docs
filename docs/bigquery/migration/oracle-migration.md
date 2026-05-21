@@ -463,7 +463,4 @@ BigQuery 支援[column-](https://docs.cloud.google.com/bigquery/docs/column-leve
 
 使用批次方法進行資料移轉表示資料會以單一程序匯出 (例如將 Oracle DWH 結構定義資料匯出至 CSV、Avro 或 Parquet 檔案，或匯入 Cloud Storage 以在 BigQuery 上建立資料集)。您可以使用 [ETL/ELT 遷移作業](#etl-elt-migration)中說明的所有 ETL 工具和概念，進行初始載入。
 
-如果不想使用 ETL/ELT 工具進行初始載入，可以編寫自訂指令碼，將資料匯出至檔案 (CSV、Avro 或 Parquet)，然後使用 `gcloud storage`、BigQuery 資料移轉服務或 Transfer Appliance，將資料上傳至 Cloud Storage。如要進一步瞭解如何調整大型資料移轉作業和移轉選項的效能，請參閱[轉移大型資料集](https://docs.cloud.google.com/solutions/transferring-big-data-sets-to-gcp?hl=zh-tw)。然後將資料從 Cloud Storage 載入 [BigQuery](https://docs.cloud.google.com/bigquery/docs/introduction?hl=zh-tw)。
-
-Cloud Storage 非常適合處理資料的初始登陸。
-Cloud Storage 是高可用性且耐用的物件儲存服務，檔案數量沒有限制，而且只會收取您使用的儲存空
+如果不想使用 ETL/ELT 工具進行初始載入，可以編寫自訂指令碼，將資料匯出至檔案 (CSV、Avro 或 Parquet)，然後使用 `gcloud storage`、BigQuery 資料移轉服務或 Transfer Appliance，將資料上傳

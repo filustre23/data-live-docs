@@ -42,8 +42,6 @@ Send feedback
   + [JSON representation](#MaterializedViewDefinition.SCHEMA_REPRESENTATION)
 * [MaterializedViewStatus](#MaterializedViewStatus)
   + [JSON representation](#MaterializedViewStatus.SCHEMA_REPRESENTATION)
-* [ErrorProto](#ErrorProto)
-  + [JSON representation](#ErrorProto.SCHEMA_REPRESENTATION)
 * [ExternalDataConfiguration](#ExternalDataConfiguration)
   + [JSON representation](#ExternalDataConfiguration.SCHEMA_REPRESENTATION)
 * [FileSetSpecType](#FileSetSpecType)
@@ -223,7 +221,3 @@ Represents the type of a field element.
 | JSON representation |
 | --- |
 | ``` {   "type": string } ``` |
-
-| Fields | |
-| --- | --- |
-|  |

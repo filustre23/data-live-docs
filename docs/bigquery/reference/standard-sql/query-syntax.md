@@ -561,5 +561,5 @@ SELECT * FROM T1 t1, t1.struct_column.array_field;
 
 SELECT (SELECT ARRAY_AGG(c) FROM t1.array_column c) FROM T1 t1;
 
-SELECT a.struct_field1 FROM T1 t1, t1.
+SELECT
 ```

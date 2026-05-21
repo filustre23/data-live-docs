@@ -33,18 +33,36 @@ tip
 If the bastion host already has a user for tunneling, this section may be skipped in favor of using that user.
 
 ```
-$ sudo groupadd hex  
-$ sudo useradd -m -g hex hex  
+$ sudo groupadd hex
+
+
+
+$ sudo useradd -m -g hex hex
+
+
+
 $ sudo su - hex
 ```
 
 Create a .ssh directory and authorized\_keys files with appropriate permissions for the hex user.
 
 ```
-$ mkdir ~/.ssh  
-$ chmod 700 ~/.ssh  
-$ cd ~/.ssh  
-$ touch authorized_keys  
+$ mkdir ~/.ssh
+
+
+
+$ chmod 700 ~/.ssh
+
+
+
+$ cd ~/.ssh
+
+
+
+$ touch authorized_keys
+
+
+
 $ chmod 600 authorized_keys
 ```
 
@@ -79,7 +97,7 @@ Once your ssh host is prepared with the public key. You can configure your data 
 
 ### Set up an HTTP proxy[​](#set-up-an-http-proxy "Direct link to Set up an HTTP proxy")
 
-If you're working in a network environment that blocks direct SSH access, which is common in corporate or cloud-managed VPCs, you need to configure an HTTP proxy to establish an SSH tunnel. This setup routes SSH traffic through a proxy server, allowing you to connect securely even when direct outbound access is restricted. You can achieve this using tools like [`squid`](https://www.squid-cache.org/). If you run into connectivity issues, contact [[email protected]](/cdn-cgi/l/email-protection#ff8c8a8f8f908d8bbf979a87d18b9a9c97) for help.
+If you're working in a network environment that blocks direct SSH access, which is common in corporate or cloud-managed VPCs, you need to configure an HTTP proxy to establish an SSH tunnel. This setup routes SSH traffic through a proxy server, allowing you to connect securely even when direct outbound access is restricted. You can achieve this using tools like [`squid`](https://www.squid-cache.org/). If you run into connectivity issues, contact [[email protected]](/cdn-cgi/l/email-protection#8efdfbfefee1fcfacee6ebf6a0faebede6) for help.
 
 #### On this page
 

@@ -25,11 +25,26 @@ You can check out this tutorial’s companion project [here](https://app.hex.tec
 As a first step, create a Python cell and import the following into your project:
 
 ```
-import pandas as pd  
-import matplotlib as mpl  
-import matplotlib.pyplot as plt  
-import matplotlib.colors as mcolors  
-from IPython import display  
+import pandas as pd
+
+
+
+import matplotlib as mpl
+
+
+
+import matplotlib.pyplot as plt
+
+
+
+import matplotlib.colors as mcolors
+
+
+
+from IPython import display
+
+
+
 mpl.rcParams['figure.dpi']= 150
 ```
 
@@ -49,8 +64,14 @@ In this example, we’ll be using the tried and true iris dataset (available [he
 Create a Python cell and define a dataframe, naming each of the columns:
 
 ```
-df_iris = pd.read_csv('iris.csv',  
-names=['sepal_length', 'sepal_width', 'petal_length', 'petal_width', 'class']  
+df_iris = pd.read_csv('iris.csv',
+
+
+
+names=['sepal_length', 'sepal_width', 'petal_length', 'petal_width', 'class']
+
+
+
 )
 ```
 
@@ -73,15 +94,34 @@ In this example, we’re using the [`scatter()`](https://matplotlib.org/stable/a
 The following code defines a scatter plot:
 
 ```
-# create a figure and axis  
-fig, ax = plt.subplots()  
-  
-# choose the x and y axes variables from the dropdown variables above  
-ax.scatter(df_iris[x_axis], df_iris[y_axis])  
-  
-# set a title and labels  
-ax.set_title('Iris Dataset', fontsize=18)  
-ax.set_xlabel(x_axis.replace('_', ' '), fontsize=14)  
+# create a figure and axis
+
+
+
+fig, ax = plt.subplots()
+
+
+
+# choose the x and y axes variables from the dropdown variables above
+
+
+
+ax.scatter(df_iris[x_axis], df_iris[y_axis])
+
+
+
+# set a title and labels
+
+
+
+ax.set_title('Iris Dataset', fontsize=18)
+
+
+
+ax.set_xlabel(x_axis.replace('_', ' '), fontsize=14)
+
+
+
 ax.set_ylabel(y_axis.replace('_', ' '), fontsize=14);
 ```
 
@@ -94,25 +134,70 @@ Lastly, we set the plot's title, as well as the axes labels, inferred from the i
 Now let's take this a step further and color-code the data points according to the class of iris. We'll subselect each class from the main dataframe and set a color for each class. In this dataset, there are 3 classes of iris: Iris-setosa, Iris-versicolor, and Iris-virginica.
 
 ```
-# create color dictionary  
-# you can use any of the great named colors listed here (https://matplotlib.org/3.1.0/gallery/color/named_colors.html)  
-  
-colors = {'Iris-setosa':'rebeccapurple', 'Iris-versicolor':'darkcyan', 'Iris-virginica':'firebrick'}  
-markers = {'Iris-setosa':'x', 'Iris-versicolor':'.', 'Iris-virginica':'^'}  
-  
-# plot each class a different color  
-for c in df_iris['class'].unique():  
-    plt.plot(df_iris[lambda df: df['class'] == c][x_axis], df_iris[lambda df: df['class'] == c][y_axis],  
-    marker = markers[c],  
-    ls='None',  
-    color=colors[c],  
-    label = c  
-    )  
-  
-# set a title and labels  
-plt.title('Iris Dataset', fontsize=18)  
-plt.xlabel(x_axis.replace('_', ' '), fontsize=14)  
-plt.ylabel(y_axis.replace('_', ' '), fontsize=14)  
+# create color dictionary
+
+
+
+# you can use any of the great named colors listed here (https://matplotlib.org/3.1.0/gallery/color/named_colors.html)
+
+
+
+colors = {'Iris-setosa':'rebeccapurple', 'Iris-versicolor':'darkcyan', 'Iris-virginica':'firebrick'}
+
+
+
+markers = {'Iris-setosa':'x', 'Iris-versicolor':'.', 'Iris-virginica':'^'}
+
+
+
+# plot each class a different color
+
+
+
+for c in df_iris['class'].unique():
+
+
+
+plt.plot(df_iris[lambda df: df['class'] == c][x_axis], df_iris[lambda df: df['class'] == c][y_axis],
+
+
+
+marker = markers[c],
+
+
+
+ls='None',
+
+
+
+color=colors[c],
+
+
+
+label = c
+
+
+
+)
+
+
+
+# set a title and labels
+
+
+
+plt.title('Iris Dataset', fontsize=18)
+
+
+
+plt.xlabel(x_axis.replace('_', ' '), fontsize=14)
+
+
+
+plt.ylabel(y_axis.replace('_', ' '), fontsize=14)
+
+
+
 plt.legend();
 ```
 
@@ -133,25 +218,62 @@ Let’s plot the correlation between different iris features with a line chart. 
 A common way to create a line chart is via `plot()`.
 
 ```
-# get columns to plot -- do not include "class" column  
-columns = iris_columns[:-1]  
-  
-# create a range of the data points to plot  
-x_data = range(0, df_iris.shape[0])  
-  
-# create figure and axis  
-fig, ax = plt.subplots()  
-  
-# plot each column  
-for column in columns:  
-    ax.plot(x_data, df_iris[column], label=column)  
-  
-# set title and axis labels  
-ax.set_title('Iris Dataset', fontsize=18)  
-ax.set_xlabel('Sample Number', fontsize=14)  
-ax.set_ylabel('Feature Value', fontsize=14);  
-  
-# move legend outside of plot  
+# get columns to plot -- do not include "class" column
+
+
+
+columns = iris_columns[:-1]
+
+
+
+# create a range of the data points to plot
+
+
+
+x_data = range(0, df_iris.shape[0])
+
+
+
+# create figure and axis
+
+
+
+fig, ax = plt.subplots()
+
+
+
+# plot each column
+
+
+
+for column in columns:
+
+
+
+ax.plot(x_data, df_iris[column], label=column)
+
+
+
+# set title and axis labels
+
+
+
+ax.set_title('Iris Dataset', fontsize=18)
+
+
+
+ax.set_xlabel('Sample Number', fontsize=14)
+
+
+
+ax.set_ylabel('Feature Value', fontsize=14);
+
+
+
+# move legend outside of plot
+
+
+
 ax.legend(loc='center left', bbox_to_anchor=(1, .5));
 ```
 
@@ -180,11 +302,26 @@ Checkboxes are boolean variables, so if the input cell is checked, the returned 
 The following will create a histogram based on our `df_iris` dataframe:
 
 ```
-# plot histogram  
-plt.hist(df_iris[x_axis], density = normalize_histogram, cumulative = cumulative, alpha=0.6, color = "mediumorchid")  
-# set title and labels  
-plt.title(f'Iris {x_axis.replace("_", " ")} distribution')  
-plt.xlabel(x_axis.replace("_", " "))  
+# plot histogram
+
+
+
+plt.hist(df_iris[x_axis], density = normalize_histogram, cumulative = cumulative, alpha=0.6, color = "mediumorchid")
+
+
+
+# set title and labels
+
+
+
+plt.title(f'Iris {x_axis.replace("_", " ")} distribution')
+
+
+
+plt.xlabel(x_axis.replace("_", " "))
+
+
+
 plt.ylabel('frequency');
 ```
 
@@ -195,16 +332,46 @@ The first line plots the histogram based on input from our `x_axis` dropdown cel
 As mentioned above, if you don't need to calculate the frequency of each value with `hist()`, you can feed those parameters to `bar()` to create a bar chart.
 
 ```
-# count the occurrence of each value  
-feature_dist = df_iris[x_axis].value_counts()  
-# get x and y values  
-points = feature_dist.index  
-frequency = feature_dist.values  
-# create bar chart  
-plt.bar(points, frequency, color='indigo')  
-# set title and labels  
-plt.title(f"Iris {x_axis.replace('_', ' ')} distribution")  
-plt.xlabel(f"{x_axis.replace('_', ' ')} values")  
+# count the occurrence of each value
+
+
+
+feature_dist = df_iris[x_axis].value_counts()
+
+
+
+# get x and y values
+
+
+
+points = feature_dist.index
+
+
+
+frequency = feature_dist.values
+
+
+
+# create bar chart
+
+
+
+plt.bar(points, frequency, color='indigo')
+
+
+
+# set title and labels
+
+
+
+plt.title(f"Iris {x_axis.replace('_', ' ')} distribution")
+
+
+
+plt.xlabel(f"{x_axis.replace('_', ' ')} values")
+
+
+
 plt.ylabel('frequency')
 ```
 
@@ -227,10 +394,22 @@ Let's create a slider input cell to allow an end user to select the number of bi
 Here’s what we’ll use to create the histogram:
 
 ```
-plt.hist2d(df_iris[x_axis], df_iris[y_axis], bins=n_bins);  
-plt.title('Linear normalization')  
-plt.xlabel(x_axis.replace("_", " "))  
-plt.ylabel(y_axis.replace("_", " "))  
+plt.hist2d(df_iris[x_axis], df_iris[y_axis], bins=n_bins);
+
+
+
+plt.title('Linear normalization')
+
+
+
+plt.xlabel(x_axis.replace("_", " "))
+
+
+
+plt.ylabel(y_axis.replace("_", " "))
+
+
+
 plt.colorbar();
 ```
 
@@ -251,13 +430,23 @@ For this example, we’re plotting the same 2d histogram as above, but using a d
 This is the code we’ll use:
 
 ```
-gammas = [0.9, 0.5, 0.2]  
-  
-fig, axes = plt.subplots(nrows=1, ncols=3, figsize=(12, 5))  
-  
-for ax, gamma in zip(axes.flat, gammas):  
-    ax.set_title(r'Power-law $(\gamma=%1.1f)$' % gamma)  
-    ax.hist2d(df_iris[x_axis], df_iris[y_axis],bins=n_bins, norm=mcolors.PowerNorm(gamma))
+gammas = [0.9, 0.5, 0.2]
+
+
+
+fig, axes = plt.subplots(nrows=1, ncols=3, figsize=(12, 5))
+
+
+
+for ax, gamma in zip(axes.flat, gammas):
+
+
+
+ax.set_title(r'Power-law $(\gamma=%1.1f)$' % gamma)
+
+
+
+ax.hist2d(df_iris[x_axis], df_iris[y_axis],bins=n_bins, norm=mcolors.PowerNorm(gamma))
 ```
 
 First, we set the values for the power-law variable, which will determine the colorbar normalization in the subplots.

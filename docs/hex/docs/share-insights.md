@@ -1,25 +1,25 @@
 # Share insights
 
-[## 🗃️ Apps
+[## 🗃Apps
 
 14 items](/docs/share-insights/apps/apps-introduction)
 
-[## 📄️ Scheduled runs
+[## 📄️Scheduled runs
 
 Set up your Hex apps to run on a schedule. Scheduled runs can be used to update results and trigger app notifications.](/docs/share-insights/scheduled-runs)
 
-[## 📄️ App notifications
+[## 📄️App notifications
 
 Set up subscriptions and conditional notifications, triggered by a scheduled run.](/docs/share-insights/app-notifications)
 
-[## 📄️ Explore
+[## 📄️Explore
 
 ...](/docs/share-insights/explore)
 
-[## 🗃️ Embedding
+[## 🗃Embedding
 
 3 items](/docs/share-insights/embedding/embedding-introduction)
 
-[## 📄️ Hex Agent in Slack
+[## 📄️Hex Agent in Slack
 
 ...](/docs/share-insights/hex-agent-in-slack)

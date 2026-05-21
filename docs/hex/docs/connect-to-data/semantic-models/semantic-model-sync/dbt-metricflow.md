@@ -31,11 +31,23 @@ In order to successfully import dbt MetricFlow files into Hex, the following con
    In order to import the dbt MetricFlow YAML files correctly, each semantic project needs to specify the underlying data warehouse table. This is specified as `table: <value>` in a `config.meta.hex` section for the model:
 
    ```
-   model: ref('customers')  
-   config:  
-     meta:  
-       hex:  
-         table: analytics.prod_core.customers
+   model: ref('customers')
+
+
+
+   config:
+
+
+
+   meta:
+
+
+
+   hex:
+
+
+
+   table: analytics.prod_core.customers
    ```
 
    The value should be in the format `database.schema.table` or `schema.table`. This is currently case-insensitive (with no quotation (””) characters).
@@ -50,9 +62,15 @@ In order to successfully import dbt MetricFlow files into Hex, the following con
      + If you’d prefer to avoid refreshing your data connection schema within Hex, you can specify the types directly in your dimension definitions like so:
 
        ```
-       - name: "Customer Name"  
-         expr: "customer_name"  
-         type:  "categorical"  # @dtype: string
+       - name: "Customer Name"
+
+
+
+       expr: "customer_name"
+
+
+
+       type:  "categorical"  # @dtype: string
        ```
 
        - dtype is one of: numeric, string, boolean, date, timestamp, timestamptz

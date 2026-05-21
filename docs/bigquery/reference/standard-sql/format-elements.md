@@ -527,10 +527,4 @@ These data types include a minute part:
 
 If `expression` or `format_string_expression` is `NULL` the return value is
 `NULL`. If `format_string_expression` is an empty string, the output is an
-empty string. An error is generated if a value that isn't a supported
-format element appears in `format_string_expression` or `expression` doesn't
-contain a value specified by a format element.
-
-| Format element | Returns | Example |
-| --- | --- | --- |
-| MI | Minute, 2 digits. | Input: TIME '01:02:03'  Output: 02 |
+empty string. An error is generated if a

@@ -14,51 +14,186 @@ Hex audit logs are emitted in JSON format. Some notable fields in the schema are
 The following is an example event object:
 
 ```
-{  
-  "actor": {  
-    "id": "b44446e6-8264-4af5-a856-fdc2fa8fe132",  
-    "type": "USER",  
-    "metadata": {  
-      "email": "[email protected]",  
-      "workspace": "Hex",  
-      "workspaceId": "57c59cf9-c943-4386-afb5-75df1af3b2f7"  
-    }  
-  },  
-  "action": "RUN_CELL",  
-  "context": {  
-    "location": "1.1.1.1",  
-    "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36"  
-  },  
-  "targets": [  
-    {  
-      "id": "f426633a-0993-4bbc-be6a-740e28da2596",  
-      "type": "project",  
-      "metadata": {  
-        "representation": "{\"id\":\"f426633a-0993-4bbc-be6a-740e28da2596\",\"createdDate\":\"2024-04-08T20:15:06.337Z\",\"updatedDate\":\"2024-04-12T15:38:25.265Z\",\"archivedDate\":null,\"creatorId\":\"b44446e6-8264-4af5-a856-fdc2fa8fe132\",\"canEditorsShare\":true,\"projectLanguage\":\"PYTHON\",\"hexType\":\"PROJECT\",\"organizationRole\":null,\"publicRole\":null}"  
-      }  
-    },  
-    {  
-      "id": "60d9ac4d-7eb2-4638-9423-61bdf8a331ef",  
-      "type": "project_version",  
-      "metadata": {  
-        "representation": "{\"id\":\"60d9ac4d-7eb2-4638-9423-61bdf8a331ef\",\"createdDate\":\"2024-04-08T20:15:06.337Z\",\"updatedDate\":\"2024-04-12T15:38:25.127Z\",\"title\":\"Sample Project\",\"description\":\"\",\"hexId\":\"f426633a-0993-4bbc-be6a-740e28da2596\",\"creatorId\":\"b44446e6-8264-4af5-a856-fdc2fa8fe132\",\"timezone\":null,\"version\":\"draft\",\"published\":false,\"import\":false,\"kernelSize\":\"medium\",\"autoRerun\":true,\"cacheAppState\":true}"  
-      }  
-    },  
-    {  
-      "id": "340ba95d-465a-44d2-8b04-8a83c6c5b1e5",  
-      "type": "cell",  
-      "metadata": {  
-        "representation": "{\"id\":\"2e56c683-8151-4071-918f-0050ce854637\",\"createdDate\":\"2024-04-08T20:15:17.810Z\",\"updatedDate\":\"2024-04-08T20:15:17.810Z\",\"cellType\":\"SQL\"}"  
-      }  
-    }  
-  ],  
-  "version": 1,  
-  "metadata": {  
-    "result": "SUCCESS",  
-    "requestArgs": "{\"hexId\":\"f426633a-0993-4bbc-be6a-740e28da2596\",\"hexVersionId\":\"60d9ac4d-7eb2-4638-9423-61bdf8a331ef\",\"cellId\":\"2e56c683-8151-4071-918f-0050ce854637\"}",  
-    "failureReason": ""  
-  },  
-  "occurred_at": "2024-04-12T15:38:27.073Z"  
+{
+
+
+
+"actor": {
+
+
+
+"id": "b44446e6-8264-4af5-a856-fdc2fa8fe132",
+
+
+
+"type": "USER",
+
+
+
+"metadata": {
+
+
+
+"email": "[email protected]",
+
+
+
+"workspace": "Hex",
+
+
+
+"workspaceId": "57c59cf9-c943-4386-afb5-75df1af3b2f7"
+
+
+
+}
+
+
+
+},
+
+
+
+"action": "RUN_CELL",
+
+
+
+"context": {
+
+
+
+"location": "1.1.1.1",
+
+
+
+"user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36"
+
+
+
+},
+
+
+
+"targets": [
+
+
+
+{
+
+
+
+"id": "f426633a-0993-4bbc-be6a-740e28da2596",
+
+
+
+"type": "project",
+
+
+
+"metadata": {
+
+
+
+"representation": "{\"id\":\"f426633a-0993-4bbc-be6a-740e28da2596\",\"createdDate\":\"2024-04-08T20:15:06.337Z\",\"updatedDate\":\"2024-04-12T15:38:25.265Z\",\"archivedDate\":null,\"creatorId\":\"b44446e6-8264-4af5-a856-fdc2fa8fe132\",\"canEditorsShare\":true,\"projectLanguage\":\"PYTHON\",\"hexType\":\"PROJECT\",\"organizationRole\":null,\"publicRole\":null}"
+
+
+
+}
+
+
+
+},
+
+
+
+{
+
+
+
+"id": "60d9ac4d-7eb2-4638-9423-61bdf8a331ef",
+
+
+
+"type": "project_version",
+
+
+
+"metadata": {
+
+
+
+"representation": "{\"id\":\"60d9ac4d-7eb2-4638-9423-61bdf8a331ef\",\"createdDate\":\"2024-04-08T20:15:06.337Z\",\"updatedDate\":\"2024-04-12T15:38:25.127Z\",\"title\":\"Sample Project\",\"description\":\"\",\"hexId\":\"f426633a-0993-4bbc-be6a-740e28da2596\",\"creatorId\":\"b44446e6-8264-4af5-a856-fdc2fa8fe132\",\"timezone\":null,\"version\":\"draft\",\"published\":false,\"import\":false,\"kernelSize\":\"medium\",\"autoRerun\":true,\"cacheAppState\":true}"
+
+
+
+}
+
+
+
+},
+
+
+
+{
+
+
+
+"id": "340ba95d-465a-44d2-8b04-8a83c6c5b1e5",
+
+
+
+"type": "cell",
+
+
+
+"metadata": {
+
+
+
+"representation": "{\"id\":\"2e56c683-8151-4071-918f-0050ce854637\",\"createdDate\":\"2024-04-08T20:15:17.810Z\",\"updatedDate\":\"2024-04-08T20:15:17.810Z\",\"cellType\":\"SQL\"}"
+
+
+
+}
+
+
+
+}
+
+
+
+],
+
+
+
+"version": 1,
+
+
+
+"metadata": {
+
+
+
+"result": "SUCCESS",
+
+
+
+"requestArgs": "{\"hexId\":\"f426633a-0993-4bbc-be6a-740e28da2596\",\"hexVersionId\":\"60d9ac4d-7eb2-4638-9423-61bdf8a331ef\",\"cellId\":\"2e56c683-8151-4071-918f-0050ce854637\"}",
+
+
+
+"failureReason": ""
+
+
+
+},
+
+
+
+"occurred_at": "2024-04-12T15:38:27.073Z"
+
+
+
 }
 ```
 
@@ -165,13 +300,20 @@ For instance, the UPDATE\_PROJECT\_ACCESS event type includes a principal resour
 | UPDATE\_SSO\_CONFIGURATION | [Configure SSO](/docs/administration/workspace_settings/workspace-security#sso-configuration) auth for the workspace | * Workspace |
 | UPDATE\_PUBLIC\_SHARING\_SETTING | Update whether or not projects in the workspace can be shared publicly | * Workspace |
 | UPDATE\_API\_TOKEN\_EXPIRATION\_POLICY | Configure [expiration policy](/docs/api-integrations/api/overview#token-expiration) for API tokens | * Workspace |
+| EDIT\_WORKSPACE | Edit workspace metadata such as display name or billing/plan details. Performed by a Hex platform administrator, typically as part of support or account management. | * Workspace |
+| ENABLE\_WORKSPACE | Re-enable a previously disabled workspace. Performed by a Hex platform administrator, typically as part of support or account management. | * Workspace |
+| DISABLE\_WORKSPACE | Disable a workspace, blocking user access. Performed by a Hex platform administrator, typically as part of support or account management. | * Workspace |
 | UPDATE\_ALLOW\_NOTION\_PREVIEW |  | * Workspace |
 | UPDATE\_ALLOW\_CSV\_DOWNLOADS |  | * Workspace |
 | UPDATE\_ALLOW\_FILE\_UPLOADS |  | * Workspace |
+| UPDATE\_WORKSPACE\_MAGIC\_SETTINGS | Update workspace Magic (AI) settings | * Workspace |
 | SET\_DIRECTORY\_SYNC\_ADMIN\_GROUP | Set a group of users from Directory Sync to be workspace admins | * Workspace |
 | SET\_DIRECTORY\_SYNC\_AUTHOR\_GROUP | Set a group of users from Directory Sync to be workspace editors | * Workspace |
 | SET\_DATA\_RETENTION\_CELL\_OUTPUTS | Set the data retention period for cell outputs | * Workspace |
 | SET\_DATA\_RETENTION\_QUERY\_CACHE | Set the data retention period for query cache entries | * Workspace |
+| TOGGLE\_WORKSPACE\_QUERY\_CACHE | Enable or disable workspace-level query caching | * Workspace |
+| UPDATE\_WORKSPACE\_LOGIC\_QUERY\_CACHE\_TIMEOUT | Update the default query cache timeout for notebook (logic view) | * Workspace |
+| UPDATE\_WORKSPACE\_PUBLISHED\_QUERY\_CACHE\_TIMEOUT | Update the default query cache timeout for published apps | * Workspace |
 | CREATE\_WORKSPACE\_SECRET | Create a shared workspace secret | * Secret |
 | EDIT\_WORKSPACE\_SECRET | Modify properties of a shared workspace secret | * Secret |
 | DELETE\_WORKSPACE\_SECRET |  | * Secret |
@@ -186,6 +328,7 @@ For instance, the UPDATE\_PROJECT\_ACCESS event type includes a principal resour
 | CREATE\_MAGIC\_API\_KEY |  | * Magic API Key |
 | DELETE\_MAGIC\_API\_KEY |  | * Magic API Key |
 | EXPORT\_AS\_PDF | Export a published app as PDF | * Project * Project version |
+| EXPORT\_TO\_GOOGLE\_SHEETS | Export a cell's output to Google Sheets | * Project * Project version * Cell |
 | DOWNLOAD\_AS\_CSV | Download outputs from a cell to CSV | * Cell * Project * Project version |
 | UPDATE\_NOTEBOOK\_CHAT\_ALPHA\_FEATURE\_SETTING | Show whether the [Notebook Agent](/docs/explore-data/notebook-view/notebook-agent)'s Alpha features are toggled on or off | * User |
 | CREATE\_LOGIC\_VIEW\_AGENT\_CHAT\_MESSAGE | Show when a message gets sent to the Notebook agent | * Agent Chat Message |
@@ -198,6 +341,11 @@ For instance, the UPDATE\_PROJECT\_ACCESS event type includes a principal resour
 | CREATE\_PROJECT\_FROM\_THREAD | A user creates a project initiated from a Thread | * Project |
 | DUPLICATE\_THREAD | A user duplicates a Thread that was shared with them | * Project |
 | CREATE\_CHAT\_WITH\_APP\_AGENT\_CHAT\_MESSAGE | A user creates a new Chat with App thread | * Project |
+| CREATE\_ORG\_MCP\_SERVER | An admin enabled an MCP server to be used in their workspace | * MCP Server Configuration |
+| DELETE\_ORG\_MCP\_SERVER | An admin disabled an MCP server in their workspace | * MCP Server Configuration |
+| CREATE\_USER\_MCP\_CONNECTION | A user connected to an MCP server | * User MCP Server Connection |
+| DELETE\_USER\_MCP\_CONNECTION | A user deleted their connection to an MCP server | * User MCP Server Connection |
+| CALL\_MCP\_SERVER\_TOOL | An MCP tool was called as part of an agent chat | * User MCP Server Connection |
 
 #### On this page
 

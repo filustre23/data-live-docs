@@ -198,5 +198,4 @@ Defines the properties and custom parameters for a data source.
 | `parameters[]` | `DataSourceParameter`  Data source parameters. |
 | `help_url` | `string`  Url for the help document for this data source. |
 | `authorization_type` | `AuthorizationType`  Indicates the type of authorization. |
-| `data_refresh_type` | `DataRefreshType`  Specifies whether the data source supports automatic data refresh for the past few days, and how it's supported. For some data sources, data might not be complete until a few days later, so it's useful to refresh data automatically. |
-| `default_data_refresh_window_days` | `int32`  Default data ref |
+| `data_refresh_type` | `DataRefreshType`  Specifies whether the data source supports automatic data refresh for the past few days, and how it's supported. For some dat |

@@ -7,7 +7,7 @@ Use the Hex Embed API to securely embed Hex apps in your own web application wit
 info
 
 * Available with the Embedded Analytics add-on for customers on the **Enterprise** [plan](https://hex.tech/pricing).
-* Contact [[email protected]](/cdn-cgi/l/email-protection#98ebf9f4fdebd8f0fde0b6ecfdfbf0) to request a trial.
+* Contact [[email protected]](/cdn-cgi/l/email-protection#691a08050c1a29010c11471d0c0a01) to request a trial.
 
 ## What is signed embedding?[​](#what-is-signed-embedding "Direct link to What is signed embedding?")
 
@@ -19,7 +19,7 @@ Signed embedding is the best choice for secure, seamless embedded analytics. In 
 
 ## Configure a project for signed embedding[​](#configure-a-project-for-signed-embedding "Direct link to Configure a project for signed embedding")
 
-To use signed embedding, the feature must be enabled on your Hex workspace. For assistance, contact your account team or [[email protected]](/cdn-cgi/l/email-protection#1c6f696c6c736e685c7479643268797f74).
+To use signed embedding, the feature must be enabled on your Hex workspace. For assistance, contact your account team or [[email protected]](/cdn-cgi/l/email-protection#10636560607f6264507875683e64757378).
 
 ### Enable signed embedding on a project[​](#enable-signed-embedding-on-a-project "Direct link to Enable signed embedding on a project")
 
@@ -105,72 +105,243 @@ In the request body:
 * Javascript
 
 ```
-import requests  
-  
-BASE_HEX_API_URL = 'https://app.hex.tech/api/v1'  
-# this token is invalid  
-TOKEN = '812d64548435bb81f6e974a25bf841fa13af1c68b89b2f453d734d7d272daa3c70e43bf1a0460687a7ac76ba085300b5'  
-PROJECT_ID = 'd148ce6e-fc3b-40cb-9bdc-52b02d470061'  
-body = {  
-  "hexUserAttributes": {  
-    "userId": "12345",  
-    "userRole": "admin",  
-    "userCountry": "MEX"  
-  },  
-  "scope": ["EXPORT_PDF", "EXPORT_CSV"],  
-  "expiresIn": 30000,  
-  "displayOptions": {  
-    "noEmbedFooter": true,  
-    "noEmbedOutline": true,  
-    "noEmbedBasePadding": true  
-  }  
-}  
-response = requests.post(  
-url=f"{BASE_HEX_API_URL}/embedding/createPresignedUrl/{PROJECT_ID}",  
-json=body, headers={"Authorization" : f"Bearer {TOKEN}"}  
-)  
+import requests
+
+
+
+BASE_HEX_API_URL = 'https://app.hex.tech/api/v1'
+
+
+
+# this token is invalid
+
+
+
+TOKEN = '812d64548435bb81f6e974a25bf841fa13af1c68b89b2f453d734d7d272daa3c70e43bf1a0460687a7ac76ba085300b5'
+
+
+
+PROJECT_ID = 'd148ce6e-fc3b-40cb-9bdc-52b02d470061'
+
+
+
+body = {
+
+
+
+"hexUserAttributes": {
+
+
+
+"userId": "12345",
+
+
+
+"userRole": "admin",
+
+
+
+"userCountry": "MEX"
+
+
+
+},
+
+
+
+"scope": ["EXPORT_PDF", "EXPORT_CSV"],
+
+
+
+"expiresIn": 30000,
+
+
+
+"displayOptions": {
+
+
+
+"noEmbedFooter": true,
+
+
+
+"noEmbedOutline": true,
+
+
+
+"noEmbedBasePadding": true
+
+
+
+}
+
+
+
+}
+
+
+
+response = requests.post(
+
+
+
+url=f"{BASE_HEX_API_URL}/embedding/createPresignedUrl/{PROJECT_ID}",
+
+
+
+json=body, headers={"Authorization" : f"Bearer {TOKEN}"}
+
+
+
+)
+
+
+
 print(response.json().get("url"))
 ```
 
 ```
-const BASE_HEX_API_URL = "https://app.hex.tech/api/v1";  
-// This token is invalid  
-const TOKEN =  
-  "812d64548435bb81f6e974a25bf841fa13af1c68b89b2f453d734d7d272daa3c70e43bf1a0460687a7ac76ba085300b5";  
-const PROJECT_ID = "d148ce6e-fc3b-40cb-9bdc-52b02d470061";  
-  
-const body = {  
-  hexUserAttributes: {  
-    userId: "12345",  
-    userRole: "admin",  
-    userCountry: "MEX",  
-  },  
-  scope: ["EXPORT_PDF", "EXPORT_CSV"],  
-  expiresIn: 30000,  
-  displayOptions: {  
-    noEmbedFooter: true,  
-    noEmbedOutline: true,  
-    noEmbedBasePadding: true,  
-  },  
-};  
-  
-// You may need to import a node-fetch package if you are on a node version < 22  
-// `npm i node-fetch` in the same directory and include `const fetch = require('node-fetch')`at the top of this script  
-fetch(`${BASE_HEX_API_URL}/embedding/createPresignedUrl/${PROJECT_ID}`, {  
-  method: "POST",  
-  headers: {  
-    Authorization: `Bearer ${TOKEN}`,  
-    "Content-Type": "application/json",  
-  },  
-  body: JSON.stringify(body),  
-})  
-  .then((response) => response.json())  
-  .then((data) => {  
-    console.log(data.url);  
-  })  
-  .catch((error) => {  
-    console.error("Error:", error);  
-  });
+const BASE_HEX_API_URL = "https://app.hex.tech/api/v1";
+
+
+
+// This token is invalid
+
+
+
+const TOKEN =
+
+
+
+"812d64548435bb81f6e974a25bf841fa13af1c68b89b2f453d734d7d272daa3c70e43bf1a0460687a7ac76ba085300b5";
+
+
+
+const PROJECT_ID = "d148ce6e-fc3b-40cb-9bdc-52b02d470061";
+
+
+
+const body = {
+
+
+
+hexUserAttributes: {
+
+
+
+userId: "12345",
+
+
+
+userRole: "admin",
+
+
+
+userCountry: "MEX",
+
+
+
+},
+
+
+
+scope: ["EXPORT_PDF", "EXPORT_CSV"],
+
+
+
+expiresIn: 30000,
+
+
+
+displayOptions: {
+
+
+
+noEmbedFooter: true,
+
+
+
+noEmbedOutline: true,
+
+
+
+noEmbedBasePadding: true,
+
+
+
+},
+
+
+
+};
+
+
+
+// You may need to import a node-fetch package if you are on a node version < 22
+
+
+
+// `npm i node-fetch` in the same directory and include `const fetch = require('node-fetch')`at the top of this script
+
+
+
+fetch(`${BASE_HEX_API_URL}/embedding/createPresignedUrl/${PROJECT_ID}`, {
+
+
+
+method: "POST",
+
+
+
+headers: {
+
+
+
+Authorization: `Bearer ${TOKEN}`,
+
+
+
+"Content-Type": "application/json",
+
+
+
+},
+
+
+
+body: JSON.stringify(body),
+
+
+
+})
+
+
+
+.then((response) => response.json())
+
+
+
+.then((data) => {
+
+
+
+console.log(data.url);
+
+
+
+})
+
+
+
+.catch((error) => {
+
+
+
+console.error("Error:", error);
+
+
+
+});
 ```
 
 #### Embed API test mode[​](#embed-api-test-mode "Direct link to Embed API test mode")
@@ -197,7 +368,7 @@ To test your Embed API implementation without contributing to your usage limit, 
 
 For multi-tenant customers, the Embed API rate limit is 20 requests per minute. Exceeding this rate limit will result in an `Error: Failed to load` message in the embedded app. After the minute has refreshed, app loading will resume as normal.
 
-If you require a higher rate limit, or would like to upgrade to a "soft" limit that will still allow app loads, please contact [[email protected]](/cdn-cgi/l/email-protection#5a293b363f291a323f22742e3f3932).
+If you require a higher rate limit, or would like to upgrade to a "soft" limit that will still allow app loads, please contact [[email protected]](/cdn-cgi/l/email-protection#5625373a3325163e332e782233353e).
 
 ## Implement iframe configuration for signed embedding[​](#implement-iframe-configuration-for-signed-embedding "Direct link to Implement iframe configuration for signed embedding")
 
@@ -206,12 +377,30 @@ If you require a higher rate limit, or would like to upgrade to a "soft" limit t
 After implementing the `createPresignedUrl` API in your web application, you'll need to properly configure an iframe to display your embedded Hex app. The iframe requires specific attributes to embed properly.
 
 ```
-<iframe  
-  width="1000"  
-  height="1000"  
-  style="border: none;"  
-  src="${urlFromApiResponse}"  
-  allow="clipboard-write"  
+<iframe
+
+
+
+width="1000"
+
+
+
+height="1000"
+
+
+
+style="border: none;"
+
+
+
+src="${urlFromApiResponse}"
+
+
+
+allow="clipboard-write"
+
+
+
 ></iframe>
 ```
 

@@ -4,7 +4,7 @@ On this page
 
 info
 
-* Chat with App is available in public **Beta** on the [Team and Enterprise plans](https://hex.tech/pricing/), which include monthly per-seat [credit grants](/docs/administration/credits) that can be used towards Hex AI features. While Hex agents are in Beta, credit limits and optional add-on credits are being rolled out in phases and are not yet enforced for all customers. Admins will receive advance notice before limits go into effect for their workspace.
+* Chat with App is available on the [Team and Enterprise plans](https://hex.tech/pricing/), which include monthly per-seat [credit grants](/docs/administration/credits) that can be used towards Hex AI features.
 * Users require an **[Explorer role](/docs/collaborate/sharing-and-permissions/roles)** or higher to use Chat with App.
 * Users must have **[Can explore](/docs/collaborate/sharing-and-permissions/project-sharing)** access or higher on a published app in order to chat with it.
 * Users must have **[Can view results](/docs/connect-to-data/data-connections/data-connections-introduction#workspace-data-connection-permissions)** access or higher on all data connections used in the app.

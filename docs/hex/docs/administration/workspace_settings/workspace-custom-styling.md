@@ -51,35 +51,71 @@ Updating the active color palette will update any existing [Chart cells](/docs/e
 
 #### When will my charts be updated when I set a new active color palette?[​](#when-will-my-charts-be-updated-when-i-set-a-new-active-color-palette "Direct link to When will my charts be updated when I set a new active color palette?")
 
-Saved changes will be reflected in charts the next time the chart cell is run. Any apps with a [cached default state](/docs/administration/workspace_settings/docs/share-insights/apps/app-run-settings#cache-default-state) will need to have their [cache refreshed](/docs/administration/workspace_settings/docs/share-insights/apps/app-run-settings#cache-default-state) for these changes to take effect.
+Saved changes will be reflected in charts the next time the chart cell is run. Any apps with a [cached default state](/docs/share-insights/apps/app-run-settings#cache-default-state) will need to have their [cache refreshed](/docs/share-insights/apps/app-run-settings#cache-default-state) for these changes to take effect.
 
 ### Use the active workspace color palette in code[​](#use-the-active-workspace-color-palette-in-code "Direct link to Use the active workspace color palette in code")
 
 The `hex_color_palette` [built-in variable](/docs/explore-data/projects/environment-configuration/environment-views#built-in-variables) represents the currently active color palette as an array of CSS color names, for example:
 
 ```
->>> print(hex_color_palette)  
-  
+>>> print(hex_color_palette)
+
+
+
 ['#4C78A8', '#F58518', '#E45756', '#72B7B2', '#54A24B', '#EECA3B', '#B279A2', '#FF9DA6', '#9D755D', '#BAB0AC']
 ```
 
 Using this variable can help create consistently themed visualizations when using both the native [Chart cell](/docs/explore-data/cells/visualization-cells/chart-cells) and visualizations created via Python packages. For example, this Plotly chart will use the same color palette as your workspace:
 
 ```
-import plotly.express as px  
-  
-df = px.data.gapminder()  
-fig = px.line(  
-    df,  
-    y="lifeExp",  
-    x="year",  
-    color="continent",  
-    line_group="country",  
-    line_shape="spline",  
-    render_mode="svg",  
-    color_discrete_sequence=hex_color_palette,  
-)  
-  
+import plotly.express as px
+
+
+
+df = px.data.gapminder()
+
+
+
+fig = px.line(
+
+
+
+df,
+
+
+
+y="lifeExp",
+
+
+
+x="year",
+
+
+
+color="continent",
+
+
+
+line_group="country",
+
+
+
+line_shape="spline",
+
+
+
+render_mode="svg",
+
+
+
+color_discrete_sequence=hex_color_palette,
+
+
+
+)
+
+
+
 fig.show()
 ```
 

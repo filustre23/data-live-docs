@@ -109,7 +109,7 @@ Filtering your connection does not affect the underlying permissions set in your
 
 ## Use data connections to query your database[​](#use-data-connections-to-query-your-database "Direct link to Use data connections to query your database")
 
-Once your data connection is configured, you can query it using a [SQL cell](/docs/explore-data/cells/sql-cells/sql-cells-introduction#querying-data-with-sql-cells), explore your data with AI [threads](/docs/explore-data/threads), or analyze it with AI using the [notebook agent](/docs/connect-to-data/data-connections/docs/explore-data/notebook-view/notebook-agent). Note that new data connections will automatically kick off a schema refresh, which must complete before Hex agents can analyze it.
+Once your data connection is configured, you can query it using a [SQL cell](/docs/explore-data/cells/sql-cells/sql-cells-introduction#querying-data-with-sql-cells), explore your data with AI [threads](/docs/explore-data/threads), or analyze it with AI using the [notebook agent](/docs/explore-data/notebook-view/notebook-agent). Note that new data connections will automatically kick off a schema refresh, which must complete before Hex agents can analyze it.
 
 tip
 

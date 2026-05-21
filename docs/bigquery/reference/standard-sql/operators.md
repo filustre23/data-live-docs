@@ -540,15 +540,5 @@ SELECT
 
 ```
 interval_expression * integer_expression = INTERVAL
-interval_expression / integer_expression = INTERVAL
-```
-
-**Description**
-
-Multiplies or divides an interval value by an integer.
-
-**Example**
-
-```
-SELECT
+interval_expression / integer_expression
 ```

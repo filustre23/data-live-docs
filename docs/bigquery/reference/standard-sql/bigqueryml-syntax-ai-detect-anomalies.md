@@ -18,17 +18,17 @@ This document describes the `AI.DETECT_ANOMALIES` function, which lets you
 detect anomalies in time series data by using
 BigQuery ML's built-in [TimesFM model](/bigquery/docs/timesfm-model).
 
-For example, imagine you have historical and current data about sales of a
+For example, imagine you have a table containing sales data for a
 product. You could run a query similar to the following to detect anomalous
-spikes or drops in sales:
+spikes or drops in sales in the last 10 data points:
 
 ```
 SELECT *
 FROM AI.DETECT_ANOMALIES(
-  TABLE `mydataset.history_table`,
-  TABLE `mydataset.target_table`,
+  TABLE `mydataset.input_table`,
   data_col => 'units_sold',
-  timestamp_col => 'sales_date');
+  timestamp_col => 'sales_date',
+  target_last_n_points => 10);
 ```
 
 ## Syntax
@@ -223,44 +223,7 @@ in the
 [New York Citibike trips table](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=new_york&t=citibike_trips&page=table)
 for two months following July 1, 2016.
 
-This query shows how to detect anomalies in the number of trips that
-happened each day:
-
-```
-WITH bike_trips AS (
-    SELECT EXTRACT(DATE FROM starttime) AS date, COUNT(*) AS num_trips
-    FROM `bigquery-public-data.new_york.citibike_trips`
-    GROUP BY date
-  )
-SELECT *
-FROM
-  AI.DETECT_ANOMALIES(
-    # Historical data from a query
-    (SELECT * FROM bike_trips WHERE date <= DATE('2016-06-30')),
-    # Target data from a query
-    (SELECT * FROM bike_trips WHERE date BETWEEN '2016-07-01' AND '2016-09-01'),
-    data_col => 'num_trips',
-    timestamp_col => 'date');
-```
-
-The first few rows of output look similar to the following:
-
-```
-+-------------------------+------------------+------------+--------------------+--------------------+---------------------+----------------------------+
-| time_series_timestamp   | time_series_data | is_anomaly | lower_bound        | upper_bound        | anomaly_probability | ai_detect_anomalies_status |
-+-------------------------+------------------+------------+--------------------+--------------------+---------------------+----------------------------+
-| 2016-07-02 00:00:00 UTC | 35837.0          | false      | 31180.300309540704 | 53286.037518730387 | 0.77394848118403459 | null                       |
-| 2016-07-03 00:00:00 UTC | 35348.0          | false      | 29203.3735854947   | 52593.933445778675 | 0.69142246991005529 | null                       |
-| 2016-07-04 00:00:00 UTC | 34860.0          | true       | 37186.313388224225 | 58915.902423241641 | 0.97986699682799683 | null                       |
-+-------------------------+------------------+------------+--------------------+--------------------+---------------------+----------------------------+
-```
-
-Anomalies occur when the `time_series_data` is below the `lower_bound`
-or above the `upper_bound`. To visualize the results, in the **Query results**
-pane click **Visualization**.
-
-**Note:** The time displayed in the visualization is shown in the
-`America/Los_Angeles` time zone.
+### Detect anomalies after a specific time
 
 This query shows how to perform the same anomaly detection by providing a single
 input table and using the `target_start_timestamp` argument to separate the
@@ -282,6 +245,8 @@ FROM
     target_start_timestamp => '2016-07-01');
 ```
 
+### Detect anomalies among a fixed number of data points
+
 This query shows how to perform the anomaly detection by providing a single
 input table and using the `target_last_n_points` argument to only detect
 anomalies on the last 10 data points of the input table:
@@ -302,27 +267,7 @@ FROM
     target_last_n_points => 10);
 ```
 
-You can specify `usertype` in the `id_cols` argument to detect anomalies
-broken down by the type of user, which can be `Subscriber` or `Customer`:
-
-```
-WITH
-  bike_trips AS (
-    SELECT EXTRACT(DATE FROM starttime) AS date, usertype, COUNT(*) AS num_trips
-    FROM `bigquery-public-data.new_york.citibike_trips`
-    GROUP BY date, usertype
-  )
-SELECT *
-FROM
-  AI.DETECT_ANOMALIES(
-    # Historical data from a query
-    (SELECT * FROM bike_trips WHERE date <= DATE('2016-06-30')),
-    # Target data from a query
-    (SELECT * FROM bike_trips WHERE date BETWEEN '2016-07-01' AND '2016-09-01'),
-    data_col => 'num_trips',
-    timestamp_col => 'date',
-    id_cols => ['usertype'])
-```
+### Detect anomalies across multiples time series
 
 This query breaks down the anomalies by the dimensions `usertype` and `gender`,
 specifies that BigQuery should use the `TimesFM 2.5` model, and
@@ -378,11 +323,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-05-18 UTC.
+Last updated 2026-05-20 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-18 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-20 UTC."],[],[]]

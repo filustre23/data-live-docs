@@ -65,11 +65,22 @@ Unlike workspace context (which is always included), guide library files are sel
 To make the most of guides, we recommend adding frontmatter to your guide files, which is used by the Hex Agent to determine when a guide is relevant to the conversation or task. Frontmatter is defined at the start of a guide file by `---` delimiters, and can include a name and description.
 
 ```
----  
-name: Customers  
-description: Understanding Hex's types of customers  
----  
-  
+---
+
+
+
+name: Customers
+
+
+
+description: Understanding Hex's types of customers
+
+
+
+---
+
+
+
 ...
 ```
 
@@ -113,25 +124,82 @@ In the GitHub UI for your repository, go to `Settings` > `Secrets and Variables`
 In your GitHub repo where your guides live, create a `hex_context.config.json` at the root of your repository that points to where your guides are. There are 2 different ways to point to guides, paths (i.e. `guides/arr.md`) or patterns (i.e. `guides/*.md` - this will match all `.md` files in the `guides` folder). Below is a couple of examples of how you can specify which guides you want to upload.
 
 ```
-{  
-  "guides": [  
-    {  
-      "path": "path/to/my/guide.md"  
-    },  
-    {  
-      "path": "path_i_want_to_change.md",  
-      "hexFilePath": "path/that/will/show/up/in/hex.md"  
-    },  
-    {  
-      "pattern": "guides/*.md",  
-      "transform": {  
-        "stripFolders": true  
-      }  
-    },  
-    {  
-      "pattern": "guides/**/*.md"  
-    }  
-  ]  
+{
+
+
+
+"guides": [
+
+
+
+{
+
+
+
+"path": "path/to/my/guide.md"
+
+
+
+},
+
+
+
+{
+
+
+
+"path": "path_i_want_to_change.md",
+
+
+
+"hexFilePath": "path/that/will/show/up/in/hex.md"
+
+
+
+},
+
+
+
+{
+
+
+
+"pattern": "guides/*.md",
+
+
+
+"transform": {
+
+
+
+"stripFolders": true
+
+
+
+}
+
+
+
+},
+
+
+
+{
+
+
+
+"pattern": "guides/**/*.md"
+
+
+
+}
+
+
+
+]
+
+
+
 }
 ```
 
@@ -142,36 +210,111 @@ In your GitHub repo where your guides live, create a `hex_context.config.json` a
 Next, add a GitHub action by creating a file named `hex_context_toolkit.yml` inside of a directory of `.github/workflows`.
 
 ```
-# .github/workflows/hex_context_toolkit.yml  
-name: Publish Hex context  
-  
-on:  
-  push:  
-    branches: [ 'main', 'master' ]  
-  pull_request:  
-  
-permissions:  
-  contents: read  
-  pull-requests: write # Used to comment on pull_requests  
-  
-jobs:  
-  publish_hex_context:  
-    runs-on: ubuntu-latest  
-    steps:  
-    - name: Checkout  
-      uses: actions/checkout@v6  
-    - name: Upload guide files  
-      uses: hex-inc/action-context-toolkit@v1  
-      env:  
-        GITHUB_TOKEN: ${{ github.token }} # Used to comment on pull_requests  
-      with:  
-        config_file: hex_context.config.json  
-        token: ${{ secrets.HEX_API_TOKEN }} # Create a workspace token with the Guides write scope and set this in your repository settings  
-        # optional configuration  
-        publish_guides: true # publish guides automatically (default true)  
-        delete_untracked_guides: true # removes guides from hex that were also deleted in your repository (default true)  
-        hex_url: https://app.hex.tech # For most Hex users, this will be https://app.hex.tech. For single tenant, EU multi tenant, and HIPAA multi tenant customers, replace app.hex.tech with your custom URL (e.g. atreides.hex.tech, eu.hex.tech).  
-        comment_on_pr: true # To configure this, you must include a `GITHUB_TOKEN` in the env and ensure it has the pull-requests: write permission (see above)
+# .github/workflows/hex_context_toolkit.yml
+
+
+
+name: Publish Hex context
+
+
+
+on:
+
+
+
+push:
+
+
+
+branches: [ 'main', 'master' ]
+
+
+
+pull_request:
+
+
+
+permissions:
+
+
+
+contents: read
+
+
+
+pull-requests: write # Used to comment on pull_requests
+
+
+
+jobs:
+
+
+
+publish_hex_context:
+
+
+
+runs-on: ubuntu-latest
+
+
+
+steps:
+
+
+
+- name: Checkout
+
+
+
+uses: actions/checkout@v6
+
+
+
+- name: Upload guide files
+
+
+
+uses: hex-inc/action-context-toolkit@v1
+
+
+
+env:
+
+
+
+GITHUB_TOKEN: ${{ github.token }} # Used to comment on pull_requests
+
+
+
+with:
+
+
+
+config_file: hex_context.config.json
+
+
+
+token: ${{ secrets.HEX_API_TOKEN }} # Create a workspace token with the Guides write scope and set this in your repository settings
+
+
+
+# optional configuration
+
+
+
+publish_guides: true # publish guides automatically (default true)
+
+
+
+delete_untracked_guides: true # removes guides from hex that were also deleted in your repository (default true)
+
+
+
+hex_url: https://app.hex.tech # For most Hex users, this will be https://app.hex.tech. For single tenant, EU multi tenant, and HIPAA multi tenant customers, replace app.hex.tech with your custom URL (e.g. atreides.hex.tech, eu.hex.tech).
+
+
+
+comment_on_pr: true # To configure this, you must include a `GITHUB_TOKEN` in the env and ensure it has the pull-requests: write permission (see above)
 ```
 
 After this, changes to guide files detected by your hex\_context.config.json will automatically be kept in sync. You can review and debug actions by looking at the actions tab in the GitHub repository UI and clicking on the `hex_context_toolkit` workflow. When a guide change is detected on your PRs, the GitHub action will add a comment summarizing the changes and a link to test your changes using our Thread preview.
@@ -183,31 +326,60 @@ Next, configure a CI job using your CI provider of choice. First, you will need 
 On pull requests / branches you can run the `hex guide preview` command which will stage your guide changes and returns a link under `previewLink`
 
 ```
-export HEX_API_TOKEN='token' # set this in your secret manager  
-  
-hex auth login --token-from-env HEX_API_TOKEN  
-  
+export HEX_API_TOKEN='token' # set this in your secret manager
+
+
+
+hex auth login --token-from-env HEX_API_TOKEN
+
+
+
 hex guide preview --json
 ```
 
 On push events to the default branch, run the `hex guide preview` command, and extract the previewId and pass it to the `hex guide publish` command
 
 ```
-export HEX_API_TOKEN='token' # set this in your secret manager  
-  
-hex auth login --token-from-env HEX_API_TOKEN  
-  
-PREVIEW=$(hex guide preview --json)  
-echo "$PREVIEW"  
-  
-PREVIEW_ID=$(echo -E "$PREVIEW" | jq -r '.previewId')  
-  
-UPSERT_COUNT=$(echo -E "$PREVIEW" | jq -r '.upsertedGuides | length')  
-REMOVED_COUNT=$(echo -E "$PREVIEW" | jq -r '.removedGuides | length')  
-HAS_UPSERTS_OR_REMOVALS=$(( UPSERT_COUNT > 0 || REMOVED_COUNT > 0 ))  
-  
-if (( HAS_UPSERTS_OR_REMOVALS )); then  
-  hex guide publish "$PREVIEW_ID"  
+export HEX_API_TOKEN='token' # set this in your secret manager
+
+
+
+hex auth login --token-from-env HEX_API_TOKEN
+
+
+
+PREVIEW=$(hex guide preview --json)
+
+
+
+echo "$PREVIEW"
+
+
+
+PREVIEW_ID=$(echo -E "$PREVIEW" | jq -r '.previewId')
+
+
+
+UPSERT_COUNT=$(echo -E "$PREVIEW" | jq -r '.upsertedGuides | length')
+
+
+
+REMOVED_COUNT=$(echo -E "$PREVIEW" | jq -r '.removedGuides | length')
+
+
+
+HAS_UPSERTS_OR_REMOVALS=$(( UPSERT_COUNT > 0 || REMOVED_COUNT > 0 ))
+
+
+
+if (( HAS_UPSERTS_OR_REMOVALS )); then
+
+
+
+hex guide publish "$PREVIEW_ID"
+
+
+
 fi
 ```
 

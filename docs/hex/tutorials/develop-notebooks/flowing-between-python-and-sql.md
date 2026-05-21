@@ -15,15 +15,42 @@ We'll query a demo e-commerce dataset and return a whole bunch of information ab
 Check out the Notebook view for the real SQL cell - this is just a code snippet in markdown.
 
 ```
-SELECT  
-order_id,  
-order_date,  
-customer_name,  
-category,  
-sales,  
-profit,  
-COALESCE(city,' ') || ', ' || COALESCE(state, ' ') || ', ' || COALESCE(postal_code, ' ') || ', ' ||COALESCE(country,' ') AS address  
-FROM public.superstore_dataset  
+SELECT
+
+
+
+order_id,
+
+
+
+order_date,
+
+
+
+customer_name,
+
+
+
+category,
+
+
+
+sales,
+
+
+
+profit,
+
+
+
+COALESCE(city,' ') || ', ' || COALESCE(state, ' ') || ', ' || COALESCE(postal_code, ' ') || ', ' ||COALESCE(country,' ') AS address
+
+
+
+FROM public.superstore_dataset
+
+
+
 LIMIT 100
 ```
 
@@ -34,26 +61,38 @@ Looks good! But the address data isn't really enough to do any kind of analytics
 This is one of those things that Python's ecosystem is perfectly set up to help with. Let's drop out to Python and use the geopy library. We instantiate a new geopy geocoder and give it a user agent, then apply the geocoder to the entire dataframe. The query is just 100 rows for demo purposes, so as not to overload the free geocoding service (thank you!)
 
 ```
-# Instantiate a geocoder and give it a user agent.  
-locator = Nominatim(user_agent="hex-geocoder")  
-  
-# Apply the geocoder to the entire dataframe (just 100 rows for demo purposes, thank you free Geocoding service!)  
+# Instantiate a geocoder and give it a user agent.
+
+
+
+locator = Nominatim(user_agent="hex-geocoder")
+
+
+
+# Apply the geocoder to the entire dataframe (just 100 rows for demo purposes, thank you free Geocoding service!)
+
+
+
 orderdata['location'] = orderdata['address'].apply(locator.geocode)
 ```
 
 The geocoding returns a `point` object, which needs to be split up into lat/long, so we do a tiny bit more transformation in python and then return the latitude and longitude as individual columns.
 
 ```
-orderdata['point'] = orderdata['location'].apply(lambda loc: tuple(loc.point) if loc else None)  
-  
+orderdata['point'] = orderdata['location'].apply(lambda loc: tuple(loc.point) if loc else None)
+
+
+
 orderdata[['latitude', 'longitude', 'altitude']] = pd.DataFrame(orderdata['point'].tolist(), index=orderdata.index)
 ```
 
 Then we're ready to calculate the distance! We'll use the `great_circle` distance, and apply that function to the entire dataframe. The `np.isfinite()` call is just checking for null values, since there's a couple rows we couldn't geocode.
 
 ```
-hq_loc = (36.97307082021759, -122.01929189549323)  
-  
+hq_loc = (36.97307082021759, -122.01929189549323)
+
+
+
 orderdata['distance_from_hq'] = orderdata.apply(lambda row: great_circle((row['latitude'],row['longitude']), hq_loc).miles if np.isfinite(row['latitude']) else None , axis=1)
 ```
 
@@ -62,13 +101,34 @@ orderdata['distance_from_hq'] = orderdata.apply(lambda row: great_circle((row['l
 Let's jump back into SQL where it's a bit easier to grab subsections of the data. We'll write one more simple query and then chart the result:
 
 ```
-SELECT  
-order_id,  
-category,  
-profit,  
-MAX(distance_from_hq) AS distance  
-FROM orderdata  
-GROUP BY 1,2,3  
+SELECT
+
+
+
+order_id,
+
+
+
+category,
+
+
+
+profit,
+
+
+
+MAX(distance_from_hq) AS distance
+
+
+
+FROM orderdata
+
+
+
+GROUP BY 1,2,3
+
+
+
 ORDER BY 2 DESC
 ```
 

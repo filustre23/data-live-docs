@@ -28,18 +28,36 @@ You don't need to be overly explicit in your prompts, but the more specific you 
 Template:
 
 ```
-Context: You are analyzing [dataset description] to help [business objective].  
-Task: Perform [specific analysis type] to determine [specific question].  
-Guidelines: Use [techniques/methods/packages], focus on [key metrics/variables].  
+Context: You are analyzing [dataset description] to help [business objective].
+
+
+
+Task: Perform [specific analysis type] to determine [specific question].
+
+
+
+Guidelines: Use [techniques/methods/packages], focus on [key metrics/variables].
+
+
+
 Constraints: The analysis must [limitations/requirements], avoid [pitfalls/assumptions].
 ```
 
 Example:
 
 ```
-Context: You are analyzing customer transaction data to help improve marketing targeting.  
-Task: Perform k-means clustering to segment customers based on purchasing behavior.  
-Guidelines: Use Python's scikit-learn, evaluate different numbers of clusters (2-10), and visualize the results with dimensionality reduction.  
+Context: You are analyzing customer transaction data to help improve marketing targeting.
+
+
+
+Task: Perform k-means clustering to segment customers based on purchasing behavior.
+
+
+
+Guidelines: Use Python's scikit-learn, evaluate different numbers of clusters (2-10), and visualize the results with dimensionality reduction.
+
+
+
 Constraints: Handle missing values appropriately, normalize features before clustering, and provide business interpretations for each identified segment.
 ```
 
@@ -64,29 +82,68 @@ I need to analyze customer churn for our subscription service. What data variabl
 Response from the agent:
 
 ```
-1. Exploratory Data Analysis  
-Churn rate trends over time, by segment, and by cohort  
-Feature correlation analysis and usage pattern identification  
-  
-2. Feature Engineering  
-Create recency/frequency metrics, usage velocity changes  
-Rolling averages for engagement, days-to-churn calculations  
-  
-3. Predictive Modeling  
-Logistic regression for interpretability, random forest for feature importance  
-Time-to-churn survival analysis for more nuanced insights  
-  
-4. Actionable Segmentation  
-Risk scoring (high/medium/low churn probability)  
+1. Exploratory Data Analysis
+
+
+
+Churn rate trends over time, by segment, and by cohort
+
+
+
+Feature correlation analysis and usage pattern identification
+
+
+
+2. Feature Engineering
+
+
+
+Create recency/frequency metrics, usage velocity changes
+
+
+
+Rolling averages for engagement, days-to-churn calculations
+
+
+
+3. Predictive Modeling
+
+
+
+Logistic regression for interpretability, random forest for feature importance
+
+
+
+Time-to-churn survival analysis for more nuanced insights
+
+
+
+4. Actionable Segmentation
+
+
+
+Risk scoring (high/medium/low churn probability)
+
+
+
 Intervention timing recommendations
 ```
 
 Executing the plan:
 
 ```
-Great, let's proceed with the first step:  
-Exploratory Data Analysis  
-Churn rate trends over time, by segment, and by cohort  
+Great, let's proceed with the first step:
+
+
+
+Exploratory Data Analysis
+
+
+
+Churn rate trends over time, by segment, and by cohort
+
+
+
 Feature correlation analysis and usage pattern identification
 ```
 
@@ -103,7 +160,10 @@ In a vacuum, the prompt is important, but we intentionally built the Notebook Ag
 @ tagging cells:
 
 ```
-[@Prophet Model Components Analysis] Edit this cell where we define the parameters of the Prophet model so it prioritizes the recent explosive growth we saw in the past 6 months  
+[@Prophet Model Components Analysis] Edit this cell where we define the parameters of the Prophet model so it prioritizes the recent explosive growth we saw in the past 6 months
+
+
+
 ## Mindset
 ```
 

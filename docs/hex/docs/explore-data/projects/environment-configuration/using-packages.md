@@ -69,13 +69,22 @@ To check the default version of any package, check the "Pre-installed packages" 
 Occasionally after upgrading a package, importing the package will result in a `ContextualVersionConflict` exception that indicates the package is still on the version originally installed in Hex. This can happen if the package relies on the `pkg_resources` module to check for version conflicts during its setup. You can resolve this issue by reloading `pkg_resources` after the package installation, but before the package is imported:
 
 ```
-import pkg_resources  
-from importlib import reload  
-  
-!uv pip install {my_package}  
-  
-reload(pkg_resources)  
-  
+import pkg_resources
+
+
+
+from importlib import reload
+
+
+
+!uv pip install {my_package}
+
+
+
+reload(pkg_resources)
+
+
+
 import {my_package}
 ```
 
@@ -92,7 +101,10 @@ To use a package that's been added in your workspace, follow these steps:
 **2.** To import functions from `.py` files included in your package, you will first need to add the path to those files to your Python path. Packages are automatically saved to a directory with a naming convention of `{{GitHub origin of repository}}-{{GitHub package name}}`. For example, the `draw_hexagon` package is associated with the `jackjackins` GitHub user, so the following code would be used to set the path to import functions from the package.
 
 ```
-import sys, os  
+import sys, os
+
+
+
 sys.path.append(os.path.abspath('jackjackins-draw_hexagon/'))
 ```
 
@@ -109,7 +121,10 @@ Git packages are re-imported from Git with every kernel restart of your project.
 Some packages attempt to autodetect the number of available cores, so they can generate a certain number of threads accordingly. In some cases, a package may incorrectly scope the kernel being used in the project. To optimize performance for packages that behave in this way, users can use [`hextoolkit`](/tutorials/connect-to-data/using-the-hextoolkit) to correctly assign the number of available cores using code like the following:
 
 ```
-import hextoolkit.kernel  
+import hextoolkit.kernel
+
+
+
 num_cpus = hextoolkit.kernel.cpu_count()
 ```
 

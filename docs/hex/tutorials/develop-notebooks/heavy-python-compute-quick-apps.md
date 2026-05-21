@@ -23,10 +23,22 @@ For more detailed instructions on how to connect Hex to an Amazon S3 bucket, ch
 Begin by importing the required packages! In this project, `sys`, `os`, & `pandas` are used to write to and read from S3, `seaborn` is used to generate sample data, and `tqdm` & `time` are extra packages used to make this project a little more interesting.
 
 ```
-import sys,os  
-import pandas as pd  
-import seaborn as sns  
-from tqdm import tqdm  
+import sys,os
+
+
+
+import pandas as pd
+
+
+
+import seaborn as sns
+
+
+
+from tqdm import tqdm
+
+
+
 import time
 ```
 
@@ -37,7 +49,10 @@ To read & write to your S3 bucket, you'll need to enter `AWS_ACCESS_KEY_ID` and 
 Next, define environment variables using the Secret values.
 
 ```
-os.environ['AWS_ACCESS_KEY_ID']= aws_access_key_id  
+os.environ['AWS_ACCESS_KEY_ID']= aws_access_key_id
+
+
+
 os.environ['AWS_SECRET_ACCESS_KEY'] = aws_secret_access_key
 ```
 
@@ -58,30 +73,95 @@ You'll notice we're using an `if` statement in the Python cell below, which chec
 Here's what the code looks like:
 
 ```
-# If this cell is running in Notebook mode, run the "expensive" logic (time.sleep())  
-# and write the result (new_df) to S3  
-if hex_run_context == "logic":  
-    print(  
-        """This cell is running in a Logic session, so the expensive Python  
-code runs and the results are loaded into S3:\n"""  
-    )  
-    for i in tqdm(range(0, sleep_time), desc="Simulating heavy-compute logic"):  
-        time.sleep(1)  
-    new_df = sns.load_dataset("planets")  
-    new_df.to_csv(f"s3://{s3_bucket_name}/planets/planet_data.csv")  
-    print("\n\nData has been loaded and written to S3!")  
-    df_planets = new_df.copy()  
-  
-# If this cell runs outside of Logic mode (i.e. if hex_run_context is equal to 'app'  
-# or 'scheduled'), read in the results from S3 as a dataframe  
-else:  
-    print(  
-        """This cell is running in an App or Schedule session, so we'll skip the  
-sleep() function and quickly retrieve the results from S3. \n"""  
-    )  
-    df_planets = pd.read_csv(f"s3://{s3_bucket_name}/planets/planet_data.csv")  
-    df_planets = df_planets.drop(columns=["Unnamed: 0"])  
-    print("Data has been read from S3!")
+# If this cell is running in Notebook mode, run the "expensive" logic (time.sleep())
+
+
+
+# and write the result (new_df) to S3
+
+
+
+if hex_run_context == "logic":
+
+
+
+print(
+
+
+
+"""This cell is running in a Logic session, so the expensive Python
+
+
+
+code runs and the results are loaded into S3:\n"""
+
+
+
+)
+
+
+
+for i in tqdm(range(0, sleep_time), desc="Simulating heavy-compute logic"):
+
+
+
+time.sleep(1)
+
+
+
+new_df = sns.load_dataset("planets")
+
+
+
+new_df.to_csv(f"s3://{s3_bucket_name}/planets/planet_data.csv")
+
+
+
+print("\n\nData has been loaded and written to S3!")
+
+
+
+df_planets = new_df.copy()
+
+
+
+# If this cell runs outside of Logic mode (i.e. if hex_run_context is equal to 'app'
+
+
+
+# or 'scheduled'), read in the results from S3 as a dataframe
+
+
+
+else:
+
+
+
+print(
+
+
+
+"""This cell is running in an App or Schedule session, so we'll skip the
+
+
+
+sleep() function and quickly retrieve the results from S3. \n"""
+
+
+
+)
+
+
+
+df_planets = pd.read_csv(f"s3://{s3_bucket_name}/planets/planet_data.csv")
+
+
+
+df_planets = df_planets.drop(columns=["Unnamed: 0"])
+
+
+
+print("Data has been read from S3!")
 ```
 
 Since our expensive code is tucked in the `if` logic, we will not run `sleep()` if the project is being run outside of Logic mode. Instead, if `hex_run_context` is equal to 'app' or 'scheduled', we'll simply read the data in from S3 and define it as a dataframe in our project, sidestepping the heavy compute!

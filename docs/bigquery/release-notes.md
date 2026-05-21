@@ -27,6 +27,45 @@ To get the latest product updates delivered to you, add the URL of this page to 
 reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators), or add the
 [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## May 20, 2026
+
+Announcement
+
+BigQuery can re-execute instructions (queries) to try to proactively detect performance, correctness, or functional regressions.
+These re-executions will have no side effects and will happen with no additional cost or resource consumption.
+Data access logs may show `bigquery-adminbot@system.gserviceaccount.com` when BigQuery re-executes an instruction.
+
+Feature
+
+[Python UDFs](/bigquery/docs/user-defined-functions-python) are now
+[Generally Available](https://cloud.google.com/products/#product-launch-stages)
+(GA).
+
+You can use Python UDFs to implement a scalar function in Python and use it in a
+SQL query. Python UDFs let you install third-party libraries from the
+[Python Package Index (PyPI)](https://pypi.org/) and let you access external
+services using a [Cloud resource connection](/bigquery/docs/create-cloud-resource-connection).
+
+Feature
+
+You can now use the
+[`AI.AGG` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-agg)
+to semantically aggregate unstructured input data based on natural language
+instructions. This feature is in
+[Preview](https://cloud.google.com/products#product-launch-stages).
+
+## May 19, 2026
+
+Feature
+
+You can use the
+[`AI.PARSE_DOCUMENT` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-parse-document)
+to parse documents such as PDFs. This function uses the Document AI
+[layout parser](/document-ai/docs/layout-parse-chunk) to extract structured
+information, including text chunks and page boundaries. This
+feature is in
+[Preview](https://cloud.google.com/products/#product-launch-stages).
+
 ## May 18, 2026
 
 Feature
@@ -4185,34 +4224,4 @@ The BigQuery ML [`ML.BUCKETIZE`](/bigquery/docs/reference/standard-sql/bigquerym
 
 Feature
 
-You can now view [stored column usage](/bigquery/docs/reference/rest/v2/Job#StoredColumnsUsage) information for a query job that performs vector search using stored columns. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
-
-## January 27, 2025
-
-Libraries
-
-### Go
-
-#### [1.66.0](https://github.com/googleapis/google-cloud-go/compare/bigquery/v1.65.0...bigquery/v1.66.0) (2025-01-20)
-
-##### Features
-
-* **bigquery/storage/managedwriter:** Graceful connection drains ([#11463](https://github.com/googleapis/google-cloud-go/issues/11463)) ([b29912f](https://github.com/googleapis/google-cloud-go/commit/b29912faab73a2e708127eeb2f729ae581e7a24e))
-
-##### Bug Fixes
-
-* **bigquery:** Update golang.org/x/net to v0.33.0 ([e9b0b69](https://github.com/googleapis/google-cloud-go/commit/e9b0b69644ea5b276cacff0a707e8a5e87efafc9))
-
-Libraries
-
-### Python
-
-#### [3.29.0](https://github.com/googleapis/python-bigquery/compare/v3.28.0...v3.29.0) (2025-01-21)
-
-##### Features
-
-* Add ExternalCatalogTableOptions class and tests ([#2116](https://github.com/googleapis/python-bigquery/issues/2116)) ([cdc1a6e](https://github.com/googleapis/python-bigquery/commit/cdc1a6e1623b8305c6a6a1a481b3365e866a073d))
-
-##### Bug Fixes
-
-* Add default value in SchemaField.from\_api\_repr() ([#2115](https://github.com/googleapis/python-bigquery/issues/2115)
+You can now view [stored column usage](/bigquery/docs/reference/rest/v2/Job#StoredColumnsUsage) information for a query job that performs vector search using stored columns. This feature is

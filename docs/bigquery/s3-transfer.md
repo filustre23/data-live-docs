@@ -267,5 +267,5 @@ public class CreateAmazonS3Transfer {
 
   public static void createAmazonS3Transfer(String projectId, TransferConfig transferConfig)
       throws IOException {
-    try (DataTransferServiceClient client = DataTransferServiceClient.create()) {
+    try (DataTransferServiceClient client =
 ```

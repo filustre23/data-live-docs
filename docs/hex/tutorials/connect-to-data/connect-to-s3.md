@@ -22,9 +22,18 @@ To [create the Secrets](/docs/explore-data/projects/environment-configuration/e
 First, import the packages required to read + write to S3:
 
 ```
-import boto3  
-import json  
-import sys,os  
+import boto3
+
+
+
+import json
+
+
+
+import sys,os
+
+
+
 import s3fs
 ```
 
@@ -33,7 +42,10 @@ The most notable packages here are [boto3](https://aws.amazon.com/sdk-for-python
 Next, set environmental variables using the Secret values we defined in the initial step:
 
 ```
-os.environ['AWS_ACCESS_KEY_ID']= aws_access_key_id  
+os.environ['AWS_ACCESS_KEY_ID']= aws_access_key_id
+
+
+
 os.environ['AWS_SECRET_ACCESS_KEY'] = aws_secret_access_key
 ```
 
@@ -46,23 +58,59 @@ We're using the [ProPublica's Congress API](https://www.propublica.org/datastor
 Here's an example function - remember, `s3_bucket_name` and `propublica_api_key` are Secrets saved in the Hex project:
 
 ```
-def years_data (year = 2020, s3_bucket_name = '', propublica_api_key = ''):  
-    months = np.arange(12) + 1  
-    base_url = 'https://api.propublica.org/congress/v1/both/votes/'  
-    headers = {'X-API-Key': propublica_api_key}  
-    for month in months:  
-        url = base_url + str(year) + f'/{str(month)}.json'  
-        r = requests.get(url, headers=headers).json()  
-        votes = r['results']['votes']  
-  
-        df = pd.DataFrame.from_dict(votes)  
-  
-        #write file to s3  
-        output_filename = f"votes_{year}-{month}.csv"  
-        df.to_csv(f's3://{s3_bucket_name}/propublica/{output_filename}')  
-        print(f'Successfully wrote {output_filename} to s3 bucket')  
-  
-    return
+def years_data (year = 2020, s3_bucket_name = '', propublica_api_key = ''):
+
+
+
+months = np.arange(12) + 1
+
+
+
+base_url = 'https://api.propublica.org/congress/v1/both/votes/'
+
+
+
+headers = {'X-API-Key': propublica_api_key}
+
+
+
+for month in months:
+
+
+
+url = base_url + str(year) + f'/{str(month)}.json'
+
+
+
+r = requests.get(url, headers=headers).json()
+
+
+
+votes = r['results']['votes']
+
+
+
+df = pd.DataFrame.from_dict(votes)
+
+
+
+#write file to s3
+
+
+
+output_filename = f"votes_{year}-{month}.csv"
+
+
+
+df.to_csv(f's3://{s3_bucket_name}/propublica/{output_filename}')
+
+
+
+print(f'Successfully wrote {output_filename} to s3 bucket')
+
+
+
+return
 ```
 
 The line that actually writes the dataframe (`df`) back to the S3 is:
@@ -86,41 +134,102 @@ First, let's see what files we have available by printing a list of files that e
 The following code sets a `boto3` session using the project’s Secret values, adds each file to a list (`s3_files`), and prints the filenames. The last line strips the path of the returned files, so that we’re only printing the filenames themselves.
 
 ```
-session = boto3.Session(aws_access_key_id, aws_secret_access_key)  
-  
-prefix = "propublica/"  
-s3 = boto3.resource('s3')  
-bucket = s3.Bucket(name=s3_bucket_name)  
-s3_files = []  
-  
-print(f'Files in {prefix}:')  
-for obj in bucket.objects.filter(Prefix=prefix):  
-     s3_files.append(obj.key)  
-     print(obj.key.split('/')[1])
+session = boto3.Session(aws_access_key_id, aws_secret_access_key)
+
+
+
+prefix = "propublica/"
+
+
+
+s3 = boto3.resource('s3')
+
+
+
+bucket = s3.Bucket(name=s3_bucket_name)
+
+
+
+s3_files = []
+
+
+
+print(f'Files in {prefix}:')
+
+
+
+for obj in bucket.objects.filter(Prefix=prefix):
+
+
+
+s3_files.append(obj.key)
+
+
+
+print(obj.key.split('/')[1])
 ```
 
 Here's the output from the above code snippet:
 
 ```
-Files in propublica/:  
-votes_2020-1.csv  
-votes_2020-10.csv  
-votes_2020-11.csv  
-votes_2020-12.csv  
-votes_2020-2.csv  
-votes_2020-3.csv  
-votes_2020-4.csv  
-votes_2020-5.csv  
-votes_2020-6.csv  
-votes_2020-7.csv  
-votes_2020-8.csv  
+Files in propublica/:
+
+
+
+votes_2020-1.csv
+
+
+
+votes_2020-10.csv
+
+
+
+votes_2020-11.csv
+
+
+
+votes_2020-12.csv
+
+
+
+votes_2020-2.csv
+
+
+
+votes_2020-3.csv
+
+
+
+votes_2020-4.csv
+
+
+
+votes_2020-5.csv
+
+
+
+votes_2020-6.csv
+
+
+
+votes_2020-7.csv
+
+
+
+votes_2020-8.csv
+
+
+
 votes_2020-9.csv
 ```
 
 From the options in this list, let’s read in a specific file. Here, we’re reading in the first file from the `s3_files` list:
 
 ```
-filename = s3_files[0]  
+filename = s3_files[0]
+
+
+
 df_froms3 = pd.read_csv(f's3://{s3_bucket_name}/{filename}')
 ```
 

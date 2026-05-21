@@ -35,23 +35,38 @@ Navigate to the Variables tab, and use the **+ Add** button to [create a Secret]
 Begin by importing `gspread` and the other packages required to establish a connection to your Google API account.
 
 ```
-import pandas as pd  
-import gspread  
-from google.oauth2 import service_account  
+import pandas as pd
+
+
+
+import gspread
+
+
+
+from google.oauth2 import service_account
+
+
+
 import json
 ```
 
 Use the credentials from the Secret you created (in this case, `google_json`) to create your connection.
 
 ```
-service_account_info = json.loads(google_json)  
+service_account_info = json.loads(google_json)
+
+
+
 credentials = service_account.Credentials.from_service_account_info(service_account_info)
 ```
 
 Define an API scope including Sheets and Drive and assign this scope to the credentials.
 
 ```
-scope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']  
+scope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
+
+
+
 creds = credentials.with_scopes(scope)
 ```
 
@@ -120,7 +135,10 @@ runs_batsman = records_df.groupby(['Batsman_Name'])['Runs'].count().reset_index(
 Create a new empty worksheet, specifying the number of rows, number of columns, and title.
 
 ```
-worksheet_title='runs_batsman'  
+worksheet_title='runs_batsman'
+
+
+
 sheet.add_worksheet(rows=20,cols=2,title='runs_batsman')
 ```
 

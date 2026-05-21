@@ -480,7 +480,5 @@ to disambiguate columns after the `JOIN` operator.
 |> AS t1
 |> JOIN (SELECT 456 AS id, "yellow" AS color) AS t2
    ON CAST(t1.id AS INT64) = t2.id
-|> SELECT t2.id, total_sales, color;
-
-/*-----+-------------+---
+|>
 ```

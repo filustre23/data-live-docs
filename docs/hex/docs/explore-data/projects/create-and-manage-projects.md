@@ -53,11 +53,11 @@ Users with **Full Access** [project permission](/docs/collaborate/sharing-and-pe
 
 ### Duplicate[​](#duplicate "Direct link to Duplicate")
 
-Users with Editor or Admin [roles](/docs/administration/workspace_settings/overview#workspace-roles) that have **[Can Explore](/docs/explore-data/projects/docs/collaborate/sharing-and-permissions/project-sharing#can-explore)** or higher project access can duplicate the project. The new, duplicated project does not inherit any project sharing permissions from the original.
+Users with Editor or Admin [roles](/docs/administration/workspace_settings/overview#workspace-roles) that have **[Can Explore](/docs/collaborate/sharing-and-permissions/project-sharing#can-explore)** or higher project access can duplicate the project. The new, duplicated project does not inherit any project sharing permissions from the original.
 
 ### Export[​](#export "Direct link to Export")
 
-There are two options for file export: `.yaml` or `.ipynb`. Projects can be exported by users with **[Can Explore](/docs/explore-data/projects/docs/collaborate/sharing-and-permissions/project-sharing#can-explore)** project permission or higher. Learn more on how to use the file format options [here](/docs/explore-data/projects/import-export).
+There are two options for file export: `.yaml` or `.ipynb`. Projects can be exported by users with **[Can Explore](/docs/collaborate/sharing-and-permissions/project-sharing#can-explore)** project permission or higher. Learn more on how to use the file format options [here](/docs/explore-data/projects/import-export).
 
 ### Extract project UUID[​](#extract-project-uuid "Direct link to Extract project UUID")
 
@@ -71,7 +71,10 @@ If you need to retrieve your project's ID (for example, if you're using the [API
 4. Use `hextoolkit` to programmatically extract the full project ID from the compressed ID included in the url. See an example code snippet below.
 
 ```
-import hextoolkit as htk  
+import hextoolkit as htk
+
+
+
 full_project_id = htk.decompress_project_id(compressed_uuid)
 ```
 

@@ -522,7 +522,3 @@ Returns an error if the input isn't a valid KLL quantiles sketch.
 The following query initializes two KLL sketches from five rows of data each.
 Then it merges these two sketches and returns the value of the ninth decile or
 90th percentile of the merged sketch.
-
-```
-SELECT KLL_QUANTILES.MERGE_POINT_INT64(kll_sketch, .9) AS qu
-```

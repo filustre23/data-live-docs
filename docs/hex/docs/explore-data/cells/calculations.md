@@ -653,7 +653,7 @@ The below table details which data connections are supported when using Calculat
 | Motherduck | ✅ |
 | MySQL | ✅ |
 | PostgreSQL | ✅ |
-| Presto | ❌ |
+| Presto |   ❌ |
 | Redshift | ✅ |
 | Snowflake | ✅ |
 | Starburst | ❌ |

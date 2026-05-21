@@ -115,18 +115,32 @@ We also have some variables which are automatically included in your project. Th
 If there are cells in your project that you only want to execute in specific contexts (e.g. on project runs in Notebook view, only during scheduled runs, etc.), you can do so using the built-in `hex_run_context` and `hex_scheduled` variables. With these variables, you can check the context for when each cell is run and execute the desired logic accordingly. See the below code snippets for some examples code!
 
 ```
-if hex_run_context == 'logic':  
-    ## Something that only needs to happen during a Notebook run  
-else:  
-    ## otherwise this cell will be muted
+if hex_run_context == 'logic':
+
+
+
+## Something that only needs to happen during a Notebook run
+
+
+
+else:
+
+
+
+## otherwise this cell will be muted
 ```
 
 Similarly, you can do the same in an SQL cell via Jinja.
 
 ```
-{% if hex_run_context == 'logic' %}  
-    -- Something that only needs to happen during a Notebook run  
-  
+{% if hex_run_context == 'logic' %}
+
+
+
+-- Something that only needs to happen during a Notebook run
+
+
+
 {% endif %}
 ```
 

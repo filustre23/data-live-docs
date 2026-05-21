@@ -51,10 +51,19 @@ caution
 Deleted files are not recoverable. Be certain you want to delete all files from your project before using this code.
 
 ```
-import os  
-for file in os.listdir():  
-    if os.path.isfile(file):  
-        os.remove(file)
+import os
+
+
+
+for file in os.listdir():
+
+
+
+if os.path.isfile(file):
+
+
+
+os.remove(file)
 ```
 
 ### Files in different run contexts[​](#files-in-different-run-contexts "Direct link to Files in different run contexts")

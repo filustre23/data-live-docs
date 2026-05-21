@@ -25,8 +25,14 @@ info
 Hex’s ClickHouse data connection already stores the network and auth details allowing Hex to read those settings and instantiate a [ClickHouse DataStore](https://github.com/ClickHouse/clickhouse-docs/blob/main/docs/chdb/datastore/quickstart.md). Hex's built-in [hextoolkit package](https://learn.hex.tech/tutorials/connect-to-data/using-the-hextoolkit) securely handles this allowing you quickly and securely create your chDB connection to ClickHouse. The following code is generated:
 
 ```
-import hextoolkit  
-hex_clickhouse_conn = hextoolkit.get_data_connection('My ClickHouse Connection')  
+import hextoolkit
+
+
+
+hex_clickhouse_conn = hextoolkit.get_data_connection('My ClickHouse Connection')
+
+
+
 session = hex_clickhouse_conn.get_chdb_session()
 ```
 
@@ -39,14 +45,20 @@ warning
 Once your connection is created, you can write SQL and perform Pythonic operations, all executed directly in ClickHouse:
 
 ```
-ds = session.sql("SELECT * FROM transactions_table")   
+ds = session.sql("SELECT * FROM transactions_table")
+
+
+
 filtered = ds[ds["event_type"] == "purchase"]
 ```
 
 To use the DataStore object as the input to a chart, pivot or other cell, you'll need to convert it to a Pandas dataframe using the `.to_pandas()` method
 
 ```
-# Materialize only when needed  
+# Materialize only when needed
+
+
+
 df = filtered.to_pandas()
 ```
 

@@ -626,5 +626,5 @@ SET quantity = quantity +
   (SELECT quantity FROM dataset.NewArrivals
    WHERE Inventory.product = NewArrivals.product),
     supply_constrained = false
-WHERE product IN (SELECT product FROM dataset.NewArrivals
+WHERE product
 ```

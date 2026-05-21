@@ -95,16 +95,39 @@ Hex provides two [built-in variables](/docs/explore-data/projects/environment-co
 Detecting when code is being executed as part of a scheduled run can be useful when certain operations should happen during scheduled runs **only**. For example, this could be used so that a write to an external service is only triggered on a scheduled run, and not as part of an ad hoc usage of an app.
 
 ```
-if hex_scheduled:  
-    ## expensive query step  
-    ## write results out to a file or database  
-else:  
-    ## read from written file or database  
-  
-if hex_run_context == "scheduled":  
-    ## something that only needs to happen during a scheduled run  
-else:  
-    ## something else
+if hex_scheduled:
+
+
+
+## expensive query step
+
+
+
+## write results out to a file or database
+
+
+
+else:
+
+
+
+## read from written file or database
+
+
+
+if hex_run_context == "scheduled":
+
+
+
+## something that only needs to happen during a scheduled run
+
+
+
+else:
+
+
+
+## something else
 ```
 
 ## Accessing past scheduled runs[​](#accessing-past-scheduled-runs "Direct link to Accessing past scheduled runs")

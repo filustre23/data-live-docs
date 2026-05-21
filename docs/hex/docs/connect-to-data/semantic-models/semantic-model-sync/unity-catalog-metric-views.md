@@ -6,7 +6,7 @@ info
 
 * Unity Catalog Metric Views is currently in **beta**.
 * Unity Catalog Metric Views are refreshed with Data connection schema refreshes, but syncing of UC Metric Views is not yet supported.
-* Reach out to [[email protected]](/cdn-cgi/l/email-protection#25565055554a5751654d405d0b5140464d) to learn more or [request a demo](https://hex.tech/request-a-demo/).
+* Reach out to [[email protected]](/cdn-cgi/l/email-protection#99eaece9e9f6ebedd9f1fce1b7edfcfaf1) to learn more or [request a demo](https://hex.tech/request-a-demo/).
 
 ## Overview[​](#overview "Direct link to Overview")
 
@@ -35,8 +35,14 @@ When adding a metric view to a project, Hex will generate a SQL cell that refere
 You can then edit the query to include only the measures or dimensions relevant to your analysis. For example:
 
 ```
-select `STAGE_1_DATE`, `FIRST_TOUCH_SOURCE`, MEASURE(`OPPORTUNITY_ARR`) as `OPP_ARR`  
-from `main`.`sales_and_marketing`.`sales_marketing_metric_view`  
+select `STAGE_1_DATE`, `FIRST_TOUCH_SOURCE`, MEASURE(`OPPORTUNITY_ARR`) as `OPP_ARR`
+
+
+
+from `main`.`sales_and_marketing`.`sales_marketing_metric_view`
+
+
+
 group by 1,2
 ```
 

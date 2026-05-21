@@ -702,10 +702,5 @@ SELECT emp_id, session_range AS normalized FROM (
     ['emp_id'],
     'MEETS')
 )
-GROUP BY emp_id, normalized;
-
-/*--------+--------------------------+
- | emp_id | normalized               |
- +--------+--------------------------+
- | 20     | [2010-03-10, 2010-07-20) |
+GROUP BY
 ```

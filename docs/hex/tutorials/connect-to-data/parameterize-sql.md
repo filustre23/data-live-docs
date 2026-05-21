@@ -25,8 +25,14 @@ Let's add a filter so that a user can select which genre of video game they're i
 With the Input parameter defined, we can reference the `genre_selector` variable **in the SQL query** to dynamically insert that value into the query. We use [Jinja](https://jinja.palletsprojects.com/en/3.0.x/) syntax to add parameters to queries.
 
 ```
-SELECT *  
-FROM public.vg_sales  
+SELECT *
+
+
+
+FROM public.vg_sales
+
+
+
 WHERE genre = {{genre_selector}}
 ```
 
@@ -43,10 +49,19 @@ The video game dataset we’re using here includes a **lot** of different game p
 Let’s define a new variable, `publishers_subset`, with a list of desired publishers (you could even use a [multi-select Input parameter](/docs/explore-data/cells/input-cells/multiselect-inputs) to make this interactive!). Instead of hard-coding that list into your where clause, you can feed it to your query as a parameter. When you pass a variable with more than one value (e.g. a list or array) to a SQL query you use the same `{{ }}` syntax with an additional flag, `| array`, so that the query knows to expect to pass through more than one value.
 
 ```
-SELECT *  
-FROM public.vg_sales  
-WHERE genre = {{ genre_selector }}  
-    AND publisher IN ({{publishers_subset | array }})
+SELECT *
+
+
+
+FROM public.vg_sales
+
+
+
+WHERE genre = {{ genre_selector }}
+
+
+
+AND publisher IN ({{publishers_subset | array }})
 ```
 
 ## The sky is the limit with Jinja[​](#the-sky-is-the-limit-with-jinja "Direct link to The sky is the limit with Jinja")
@@ -56,27 +71,72 @@ You can write some extremely flexible queries using more of the advanced options
 Let’s say you want to rename the publisher ‘Sony Computer Entertainment’ to just ‘Sony’, but you can’t guarantee that Sony will always be in the subset of desired publishers. You can use a Jinja if block to test if ‘Sony Computer Entertainment’ is included in the `publishers_subset` and a CASE WHEN statement to replace that when needed!
 
 ```
-SELECT  
-    {% if 'Sony Computer Entertainment' in publishers_subset %}  
-    CASE WHEN publisher = 'Sony Computer Entertainment' THEN 'Sony' ELSE publisher END as publisher  
-		,  
-    {% endif %}  
-    name  
-    , year  
-    , genre  
-FROM public.vg_sales  
-WHERE genre = {{ genre_selector }}  
-    AND publisher IN ({{publishers_subset | array }})
+SELECT
+
+
+
+{% if 'Sony Computer Entertainment' in publishers_subset %}
+
+
+
+CASE WHEN publisher = 'Sony Computer Entertainment' THEN 'Sony' ELSE publisher END as publisher
+
+
+
+,
+
+
+
+{% endif %}
+
+
+
+name
+
+
+
+, year
+
+
+
+, genre
+
+
+
+FROM public.vg_sales
+
+
+
+WHERE genre = {{ genre_selector }}
+
+
+
+AND publisher IN ({{publishers_subset | array }})
 ```
 
 In another scenario, you might want a query to be filtered based on user-selected input, but want to account for the case where no input is selected. You can achieve this with a Jinja if block and a dummy `1=1` statement, where the filter is only applied if the variable holding the input parameter selection is not empty.
 
 ```
-SELECT *  
-FROM public.vg_sales  
-WHERE 1=1  
-{% if publishers_subset %}  
-AND publisher in ({{publishers_subset | array}})  
+SELECT *
+
+
+
+FROM public.vg_sales
+
+
+
+WHERE 1=1
+
+
+
+{% if publishers_subset %}
+
+
+
+AND publisher in ({{publishers_subset | array}})
+
+
+
 {% endif %}
 ```
 

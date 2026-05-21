@@ -58,7 +58,7 @@ update operations for this table`。
 
 如要診斷問題，請按照下列步驟操作：
 
-* 使用 [`INFORMATION_SCHEMA` 檢視表](https://docs.cloud.google.com/bigquery/docs/information-schema-tables?hl=zh-tw)和[區域限定符](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw#region_qualifier)，分析基本問題。這些檢視表含有 BigQuery 資源的中繼資料，包括工作、預留項目和串流資料插入。
+* 使用 [`INFORMATION_SCHEMA` 檢視畫面](https://docs.cloud.google.com/bigquery/docs/information-schema-tables?hl=zh-tw)和[區域限定符](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw#region_qualifier)，分析基本問題。這些檢視表含有 BigQuery 資源的中繼資料，包括工作、預留項目和串流資料插入。
 
   舉例來說，以下查詢會使用 [`INFORMATION_SCHEMA.JOBS`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw) 檢視表列出過去一天內所有配額相關錯誤：
 
@@ -105,7 +105,7 @@ Your project exceeded quota for free query bytes scanned
 
 如要繼續使用 BigQuery，請[將帳戶升級為 Cloud Billing 付費帳戶](https://docs.cloud.google.com/free/docs/gcp-free-tier?hl=zh-tw#how-to-upgrade)。
 
-### 串流資料插入配額錯誤
+### 串流資料即時插入配額錯誤
 
 本節提供相關提示，協助您排解以串流方式將資料傳入 BigQuery 時發生的配額錯誤。
 
@@ -124,8 +124,8 @@ Your project exceeded quota for free query bytes scanned
 | 配額限制 | 錯誤訊息 |
 | --- | --- |
 | 每項專案每秒資料列數量 | 您在 REGION 的專案 PROJECT\_ID 超過每秒串流資料插入資料列的配額。 |
-| 每個資料表每秒資料列數量 | 您的資料表 TABLE\_ID 超過每秒串流資料插入資料列的配額。 |
-| 每個資料表每秒位元組數 | 您的資料表 TABLE\_ID 超出每秒串流資料插入位元組數的配額。 |
+| 每個資料表每秒資料列數量 | 您的資料表 TABLE\_ID 超出每秒串流資料即時插入資料列的配額。 |
+| 每個資料表每秒位元組數 | 您的資料表 TABLE\_ID 超出每秒串流資料即時插入位元組數的配額。 |
 
 `insertId` 欄位的用途是簡化插入的資料列。如果同一個 `insertId` 的多個插入項目均於幾分鐘之內抵達，則 BigQuery 會寫入單一版本的記錄。但是，我們無法保證系統會自動刪除重複的內容。為了達到最大的串流總處理量，建議您不要加入 `insertId`，改成[手動刪除重複內容](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery?hl=zh-tw#manually_removing_duplicates)。詳情請參閱[確保資料一致性](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery?hl=zh-tw#dataconsistency)一文。
 
@@ -166,7 +166,7 @@ ORDER BY 1 DESC
   + 如果您看到的大多是 `RATE_LIMIT_EXCEEDED` 錯誤而不是 `QUOTA_EXCEEDED` 錯誤，而您的整體流量低於配額的 80%，則這些錯誤可能表示流量暫時暴增。您可以在每次重試之間使用指數輪詢重試作業，以處理這些錯誤。
   + 如果您使用 Dataflow 工作插入資料，請考慮使用載入工作，而非串流插入。詳情請參閱「[設定插入方法](https://beam.apache.org/documentation/io/built-in/google-bigquery/#setting-the-insertion-method)」。如果您使用 Dataflow 和自訂 I/O 連接器，請考慮改用內建 I/O 連接器。詳情請參閱「[自訂 I/O 模式](https://beam.apache.org/documentation/patterns/custom-io/)」。
   + 如果您看到 `QUOTA_EXCEEDED` 錯誤，或整體流量持續超過配額的 80%，請提交增加配額的要求。詳情請參閱「[要求調整配額](https://docs.cloud.google.com/docs/quotas/help/request_increase?hl=zh-tw)」。
-  + 您也可以考慮使用較新的 [Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api?hl=zh-tw) 取代串流插入，因為這項 API 的輸送量較高、價格較低，而且提供許多實用功能。
+  + 您也可以考慮使用較新的 [Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api?hl=zh-tw) 取代串流插入作業，因為這項 API 的輸送量較高、價格較低，而且提供許多實用功能。
 
 如要進一步瞭解串流資料插入，請參閱[以串流方式將資料傳入 BigQuery](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery?hl=zh-tw) 一文。
 
@@ -223,7 +223,7 @@ Your project exceeded quota for copies per project
 
 如要收集更多有關複製作業來源的資料，可以嘗試下列做法：
 
-* 如果複製作業位於單一或少數幾個區域，您可以嘗試查詢特定區域的 [`INFORMATION_SCHEMA.JOBS`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw) 資料表。例如：
+* 如果複製作業位於單一或少數幾個區域，您可以嘗試查詢特定區域的 [`INFORMATION_SCHEMA.JOBS`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw) 表格。例如：
 
   ```
   SELECT
@@ -261,7 +261,7 @@ Your usage exceeded quota for ExtractBytesPerDay
 
 #### 診斷
 
-如果匯出的資料表超過 50 TiB，匯出作業會失敗，因為[超過擷取限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#export_jobs)。如要[匯出特定資料表分區的資料表資料](https://docs.cloud.google.com/bigquery/docs/partitioned-tables?hl=zh-tw#export_table_data)，可以使用[分區修飾符](https://docs.cloud.google.com/bigquery/docs/partitioned-tables?hl=zh-tw#partition_decorators)來識別要匯出的分區。
+如果匯出的資料表大於 50 TiB，匯出作業會失敗，因為[超過擷取限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#export_jobs)。如要[匯出特定資料表分區的資料表資料](https://docs.cloud.google.com/bigquery/docs/partitioned-tables?hl=zh-tw#export_table_data)，可以使用[分區修飾符](https://docs.cloud.google.com/bigquery/docs/partitioned-tables?hl=zh-tw#partition_decorators)來識別要匯出的分區。
 
 如要收集最近幾天的匯出資料用量，可以嘗試下列做法：
 
@@ -298,11 +298,11 @@ Your usage exceeded quota for ExtractBytesPerDay
   LIMIT 100
   ```
 
-您也可以使用[工作探索器](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer?hl=zh-tw)，並搭配 `Bytes processed more than` 等篩選器，篩選出特定時間範圍內的高處理量工作。
+或者，您也可以使用[工作探索器](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer?hl=zh-tw)，並套用 `Bytes processed more than` 等篩選條件，篩選出指定時間範圍內的高處理量工作。
 
 #### 解析度
 
-如要解決這項配額錯誤，其中一種方法是建立運算單元[預留項目](https://docs.cloud.google.com/bigquery/docs/reservations-intro?hl=zh-tw#reservations)，然後將專案[指派](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#assignments)給具有 `PIPELINE` 工作類型的預留項目。由於這個方法使用專屬預訂，而非免費的共用運算單元集區，因此可以略過限制檢查。如有需要，您可以刪除預留項目，以便日後使用共用運算單元集區。
+如要解決這項配額錯誤，其中一種方法是建立運算單元[預留項目](https://docs.cloud.google.com/bigquery/docs/reservations-intro?hl=zh-tw#reservations)，然後將專案[指派](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#assignments)給具有 `PIPELINE` 工作類型的預留項目。由於這個方法使用專屬預留項目，而非免費的共用運算單元集區，因此可以略過限制檢查。如有需要，您可以刪除預留項目，以便日後使用共用運算單元集區。
 
 如要瞭解如何匯出超過 50 TiB 的資料，請參閱「[擷取工作](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#export_jobs)」的附註部分。
 
@@ -332,16 +332,16 @@ Your project:[project number] exceeded quota for tabledata.list bytes per second
 
 ### API 要求數量上限錯誤
 
-當您達到每個使用者每種方法對 BigQuery API 的 API 要求數量速率限制時，BigQuery 會傳回這項錯誤。舉例來說，服務帳戶的 [`tables.get` 方法](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get?hl=zh-tw)呼叫，或不同使用者電子郵件的 [`jobs.insert` 方法](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert?hl=zh-tw)呼叫，都可能達到速率限制。
+當您達到每個方法每個使用者對 BigQuery API 的 API 要求數量速率限制時，BigQuery 會傳回這項錯誤。舉例來說，服務帳戶的 [`tables.get` 方法](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get?hl=zh-tw)呼叫，或不同使用者電子郵件的 [`jobs.insert` 方法](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert?hl=zh-tw)呼叫。
 
 大多數 BigQuery API 核心方法每位使用者每個方法最多可提出 100 項 API 要求，但部分核心方法的速率限制可能不同，例如：
 
 * [`jobs.get` 方法](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/get?hl=zh-tw)每位使用者每秒最多可發出 1000 個 API 要求。
-* [`projects.list` 方法](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/projects/list?hl=zh-tw)和 [`tables.insert` 方法](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/insert?hl=zh-tw)每位使用者每秒最多只能提出 10 個要求。
+* [`projects.list` 方法](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/projects/list?hl=zh-tw)和 [`tables.insert` 方法](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/insert?hl=zh-tw)每位使用者每秒的要求次數上限皆為 10 次。
 
 此外，BigQuery API 速率限制[不適用](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#streaming_inserts)於串流插入作業。
 
-如要進一步瞭解個別使用頻率限制，請參閱「[**每位使用者每種方法每秒的 API 要求數上限**」使用頻率限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#api_request_quotas)。
+如要進一步瞭解個別使用頻率限制，請參閱「[**每位使用者每種方法每秒最多可提出的 API 要求數**」使用頻率限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#api_request_quotas)。
 
 **錯誤訊息**
 
@@ -415,7 +415,24 @@ region per project.`
 
 1. 要求提高上限：前往「[配額與系統限制」頁面](https://docs.cloud.google.com/docs/quotas/view-manage?hl=zh-tw#viewing_your_quota_console)，搜尋 `Python UDF image storage bytes per project per region` 限制，然後要求提高上限。
 2. 最佳化儲存空間：使用 `DROP FUNCTION`
-   陳述式刪除未使用的 Python UDF，釋出空間。刪除 UDF 後，其圖片大小就不會再計入配額。您可以使用 `Routine.GetBuildStatus` API 找出圖片大小。
+   陳述式刪除未使用的 Python UDF，釋出空間。刪除 UDF 後，其圖片大小就不會再計入配額。您可以使用 API 的 [`RoutineBuildStatus`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines?hl=zh-tw#routinebuildstatus) 找出圖片大小。如要進一步瞭解如何查看建構狀態，請參閱「[容器建構狀態](https://docs.cloud.google.com/bigquery/docs/user-defined-functions-python?hl=zh-tw#container_build_status)」。
+
+### 並行 Python UDF 數量上限
+
+每個專案最多只能有 10 個並行 Python UDF。如果執行超過 10 次，系統會顯示下列錯誤。
+
+**錯誤訊息**
+
+`Exceeded rate limits: too many concurrent queries with Python UDFs in this
+project. Your project:
+PROJECT_ID exceeded quota for maximum concurrent Python UDFs per
+project.`
+
+如要查看所有 Python UDF 配額，請參閱「配額與限制」參考資料中的「[常式](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#udf_limits)」。
+
+#### 解析度
+
+如要解決這項錯誤，請與[支援團隊](https://docs.cloud.google.com/bigquery/docs/getting-support?hl=zh-tw)或[銷售團隊](https://cloud.google.com/contact?hl=zh-tw)聯絡，要求提高配額。審查及處理要求可能需要幾天時間。建議在要求中說明優先順序、用途和專案 ID。
 
 ## 解決無法提高的配額或限制
 
@@ -436,12 +453,12 @@ that can be queued per project.
 
 這項上限[無法提高](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#jobs)。如要解決這項錯誤，請參閱下列一般指引。如要瞭解如何避免大量互動式查詢受到限制，請參閱[這篇文章](#interactive-query-queue-resolution)。
 
-* **暫停工作。**如果發現某個程序或管道導致查詢次數增加，請暫停該程序或管道。
+* **暫停工作**。如果發現某個程序或管道導致查詢次數增加，請暫停該程序或管道。
 * **分配執行時間。**在較長的時間範圍內分配負載。
   如果報表解決方案需要執行許多查詢，請嘗試在查詢開始時導入一些隨機性。舉例來說，請勿同時開始所有報表。
 * **最佳化查詢和資料模型。**通常可以重寫查詢，提高執行效率。
 
-  舉例來說，如果查詢包含*一般資料表運算式 (CTE)* (即 `WITH` 子句)，且查詢中有多個位置參照該運算式，則這項計算會執行多次。最好將 CTE 執行的計算結果保留在臨時資料表中，然後在查詢中參照該資料表。
+  舉例來說，如果查詢包含*通用資料表運算式 (CTE)* (即 `WITH` 子句)，且查詢中有多個位置參照該運算式，則這項計算會執行多次。最好將 CTE 執行的計算結果保留在臨時資料表中，然後在查詢中參照該資料表。
 
   多次聯結也可能導致效率不彰。在這種情況下，您可能需要考慮使用[巢狀和重複的資料欄](https://docs.cloud.google.com/bigquery/docs/nested-repeated?hl=zh-tw)。使用這項功能通常可改善資料的區域性、免除部分聯結需求，並整體減少資源耗用量和查詢執行時間。
 
@@ -458,8 +475,8 @@ that can be queued per project.
     執行快取查詢仍會計入並行查詢限制，但使用快取結果的查詢作業因為 BigQuery 不需計算結果集，執行速度會比未使用快取結果的查詢作業快上許多。
   + **使用 BigQuery BI Engine。**如果您在使用商業智慧 (BI) 工具建立資訊主頁時遇到這個錯誤，且該資訊主頁會查詢 BigQuery 中的資料，建議您使用 [BigQuery BI Engine](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro?hl=zh-tw)。使用 BigQuery BI Engine 是這個用途的最佳選擇。
 * **使用批次優先順序的工作。**您可以將比互動式查詢更多的[批次查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#batch)加入佇列。
-* **分發查詢。**根據查詢性質和業務需求，在不同專案之間分配及散布負載。
-* **增加預訂的運算單元。**[增加運算單元](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#estimate-slots)，或在工作負載需求量高時，從隨選 (依查詢付費模式) [改用](https://docs.cloud.google.com/bigquery/docs/reservations-intro?hl=zh-tw#choosing_a_model)預留 (以容量為準的模式)。
+* **發布查詢。**根據查詢性質和業務需求，在不同專案之間分配及散布負載。
+* **增加預訂的運算單元。**[增加運算單元](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#estimate-slots)，或在工作負載需求量高時，從以量計價 (依查詢付費模式) [改用](https://docs.cloud.google.com/bigquery/docs/reservations-intro?hl=zh-tw#choosing_a_model)預留 (以容量為準的模式)。
 
 ##### 避免大量互動式查詢受到限制
 
@@ -469,37 +486,10 @@ that can be queued per project.
 
 * [增加預訂的運算單元](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#estimate-slots)。如果工作負載需求量高，請從隨選 (依查詢付費模式)[切換](https://docs.cloud.google.com/bigquery/docs/reservations-intro?hl=zh-tw#choosing_a_model)至預留 (以容量為準的模式)。
 * 在互動式查詢之間分散工作負載。
-* 因為批次查詢的佇列長度比互動式查詢長，請使用[批次優先順序工作](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#batch)，而非互動式查詢。
+* 因為批次查詢的佇列長度比互動式查詢長，請改用[批次優先順序工作](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#batch)，而非互動式查詢。
 
 ### 隨機播放大小限制錯誤
 
-如果專案超出可供重組作業使用的磁碟和記憶體大小上限，BigQuery 就會傳回這項錯誤。
+如果專案超出可供隨機排序作業使用的磁碟和記憶體大小上限，BigQuery 就會傳回這項錯誤。
 
-這項配額是以預訂為單位計算，並根據預訂項目在專案間分配。Cloud Customer Care 無法修改配額。如要進一步瞭解用量，請查詢 [`INFORMATION_SCHEMA.JOBS_TIMELINE` 檢視畫面](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline?hl=zh-tw#schema)。
-
-**錯誤訊息**
-
-您收到下列其中一則錯誤訊息：
-
-* ```
-  Quota exceeded: Your project exceeded quota for total shuffle size limit.
-  ```
-* ```
-  Resources exceeded: Your project or organization exceeded the maximum
-  disk and memory limit available for shuffle operations. Consider provisioning
-  more slots, reducing query concurrency, or using more efficient logic in this
-  job.
-  ```
-
-#### 解析度
-
-如要解決這項錯誤，請按照下列步驟操作：
-
-* [增加預訂量](https://docs.cloud.google.com/bigquery/docs/reservations-tasks?hl=zh-tw#update_reservations)。
-* [最佳化查詢](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-overview?hl=zh-tw)。
-* 減少查詢並行數或具體化中間結果，以減少對資源的依賴。詳情請參閱「[查詢佇列](https://docs.cloud.google.com/bigquery/docs/query-queues?hl=zh-tw)」和「[建立具體化檢視區塊](https://docs.cloud.google.com/bigquery/docs/materialized-views-create?hl=zh-tw)」。
-* [查看詳細步驟](https://docs.cloud.google.com/bigquery/docs/query-insights?hl=zh-tw#insufficient_shuffle_quota)，瞭解如何緩解隨機播放配額不足的問題。
-
-### 依資料欄分區的資料表分區修改次數配額錯誤
-
-當資料欄分區資料表達到每日允許的分區修改次數配額時，BigQuery 就會傳回這項錯誤。分區修改次數包括所有
+這項配額是以預訂為單位計算，並根據預訂項目在專案間分配。Cloud Customer Care 無法修改配額。如要進一步瞭解用量，請查詢

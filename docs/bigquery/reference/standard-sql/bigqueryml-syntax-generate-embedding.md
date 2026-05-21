@@ -647,11 +647,4 @@ ML.GENERATE_EMBEDDING(
   + The `gemini-embedding-2-preview` model also outputs the following
     field:
 
-    - `ml_generate_embedding_statistics`: a `JSON` value that contains
-      information about the token count for each modality of input that
-      you provide.
-  + The `multimodalembedding@001` model also outputs the following fields:
-
-    - `ml_generate_embedding_start_sec`: for video content, an `INT64` value
-      that contains the starting second of the portion of the video that the
-      embedding represents. For ima
+    - `ml_generate_em`

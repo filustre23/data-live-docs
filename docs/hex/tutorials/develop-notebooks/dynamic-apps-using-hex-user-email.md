@@ -21,29 +21,62 @@ In published apps, the logged in user's email address will be stored as the `hex
 * Make a SQL query dynamic depending on the user's email, using [Jinja to parameterize the query](/tutorials/connect-to-data/parameterize-sql#finally-parameterize-the-sql-query-with-the-input-value):
 
 ```
-SELECT account, sum(revenue)  
-FROM sales_table  
+SELECT account, sum(revenue)
+
+
+
+FROM sales_table
+
+
+
 WHERE account_owner_email == {{hex_user_email}}
 ```
 
 * Execute dynamic Python code:
 
 ```
-if hex_user_email in ('[email protected]', '[email protected]', '[email protected]'):  
-    department = 'engineering'  
-else:  
-    department = 'other'
+if hex_user_email in ('[email protected]', '[email protected]', '[email protected]'):
+
+
+
+department = 'engineering'
+
+
+
+else:
+
+
+
+department = 'other'
 ```
 
 * Display customized Markdown text, using a [Jinja if statement](https://jinja.palletsprojects.com/en/3.1.x/templates/#if):
 
 ```
-{% if hex_user_email == '[email protected]' %}  
-Hi Jaylin!  
-{% elif hex_user_email == '[email protected]' %}  
-Hi Imani!  
-{% else %}  
-Hi there!  
+{% if hex_user_email == '[email protected]' %}
+
+
+
+Hi Jaylin!
+
+
+
+{% elif hex_user_email == '[email protected]' %}
+
+
+
+Hi Imani!
+
+
+
+{% else %}
+
+
+
+Hi there!
+
+
+
 {% endif %}
 ```
 
