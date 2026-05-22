@@ -550,5 +550,15 @@ FROM Produce
 /*-------------------------------------------------------+
  | item      | purchases  | category   | total_purchases |
  +-------------------------------------------------------+
- | banana    | 2          | fruit      |
+ | banana    | 2          | fruit      | 54              |
+ | leek      | 2          | vegetable  | 54              |
+ | apple     | 8          | fruit      | 54              |
+ | cabbage   | 9          | vegetable  | 54              |
+ | lettuce   | 10         | vegetable  | 54              |
+ | kale      | 23         | vegetable  | 54              |
+ +-------------------------------------------------------*/
 ```
+
+### Compute a subtotal
+
+This computes a subtot

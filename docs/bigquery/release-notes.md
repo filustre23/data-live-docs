@@ -54,18 +54,6 @@ to semantically aggregate unstructured input data based on natural language
 instructions. This feature is in
 [Preview](https://cloud.google.com/products#product-launch-stages).
 
-## May 19, 2026
-
-Feature
-
-You can use the
-[`AI.PARSE_DOCUMENT` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-parse-document)
-to parse documents such as PDFs. This function uses the Document AI
-[layout parser](/document-ai/docs/layout-parse-chunk) to extract structured
-information, including text chunks and page boundaries. This
-feature is in
-[Preview](https://cloud.google.com/products/#product-launch-stages).
-
 ## May 18, 2026
 
 Feature
@@ -4224,4 +4212,16 @@ The BigQuery ML [`ML.BUCKETIZE`](/bigquery/docs/reference/standard-sql/bigquerym
 
 Feature
 
-You can now view [stored column usage](/bigquery/docs/reference/rest/v2/Job#StoredColumnsUsage) information for a query job that performs vector search using stored columns. This feature is
+You can now view [stored column usage](/bigquery/docs/reference/rest/v2/Job#StoredColumnsUsage) information for a query job that performs vector search using stored columns. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
+## January 27, 2025
+
+Libraries
+
+### Go
+
+#### [1.66.0](https://github.com/googleapis/google-cloud-go/compare/bigquery/v1.65.0...bigquery/v1.66.0) (2025-01-20)
+
+##### Features
+
+<

@@ -673,5 +673,11 @@ SELECT FORMAT_DATE('%x', DATE '2008-12-25') AS US_format;
 ```
 
 ```
-SELECT FORMAT_DATE('%b-%d-%Y', DATE <
+SELECT FORMAT_DATE('%b-%d-%Y', DATE '2008-12-25') AS formatted;
+
+/*-------------+
+ | formatted   |
+ +-------------+
+ | Dec-25-2008 |
+ +-------------*/
 ```

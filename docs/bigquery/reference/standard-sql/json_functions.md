@@ -548,5 +548,7 @@ In the following example, path `$.a` isn't an array, so the operation is
 ignored.
 
 ```
-SELECT
+SELECT JSON_ARRAY_APPEND(JSON '{"a": 1}', '$.a', 2) AS json_data
+
+/*-----------+
 ```

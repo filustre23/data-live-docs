@@ -965,4 +965,17 @@ For `RANDOM_FOREST_REGRESSOR` models, the default is `R2_SCORE`.
 
 ### `MODEL_REGISTRY`
 
-The
+The `MODEL_REGISTRY` option specifies the model registry destination.
+`VERTEX_AI` is the only supported model registry destination. To learn more, see
+[Register a BigQuery ML model](/bigquery/docs/create_vertex#register-model).
+
+### `VERTEX_AI_MODEL_ID`
+
+The `VERTEX_AI_MODEL_ID` option specifies a Vertex AI model ID
+to register the model with. The model ID is associated with your
+BigQuery ML model, and is visible from the
+Model Registry. If you don't specify a
+Vertex AI model ID, the BigQuery ML
+model name is used.
+
+T

@@ -259,3 +259,5 @@ A request to list previously created migration subtasks.
 
 | Fields | |
 | --- | --- |
+| `parent` | `string`  Required. The migration task of the subtasks to list. Example: `projects/123/locations/us/workflows/1234` |
+|

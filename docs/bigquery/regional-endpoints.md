@@ -22,11 +22,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 區域端點是要求端點，可協助限制要求，只有在受影響的資源位於端點指定的位置時，要求才會繼續進行。舉例來說，如果您在刪除資料集要求中使用 `https://bigquery.us-central1.rep.googleapis.com` 端點，則只有在資料集位於 `US-CENTRAL1` 時，要求才會繼續執行。
 
-與全域端點不同，區域端點可將要求限制在資源所在的端點指定位置，全域端點則可將要求轉送至資源所在位置以外的其他位置。區域端點會終止 TLS 工作階段，位置由端點指定，適用於從網際網路、其他Google Cloud 資源 (例如 Compute Engine 虛擬機器)、使用 VPN 或 Interconnect 的地端服務，以及虛擬私有雲 (VPC) 收到的要求。
+與全域端點不同，區域端點可將要求限制在資源所在的端點指定位置，全域端點則可透過資源所在位置以外的其他位置轉送要求。區域端點會終止 TLS 工作階段，位置由端點指定，適用於從網際網路、其他Google Cloud 資源 (例如 Compute Engine 虛擬機器)、使用 VPN 或 Interconnect 的地端服務，以及虛擬私有雲 (VPC) 收到的要求。
 
-區域端點可確保資料落地，將靜態和傳輸中的表格資料保留在端點指定的區域。這不包括資源中繼資料，例如資料集名稱和 IAM 政策。詳情請參閱「[服務資料注意事項](https://docs.cloud.google.com/assured-workloads/docs/data-residency?hl=zh-tw#service-data)」。
+區域端點可確保資料落地，將靜態和傳輸中的表格資料保留在端點指定的位置。這不包括資源中繼資料，例如資料集名稱和 IAM 政策。詳情請參閱「[服務資料注意事項](https://docs.cloud.google.com/assured-workloads/docs/data-residency?hl=zh-tw#service-data)」。
 
-BigQuery 包含多個 API。下列 API 可搭配區域端點使用：
+BigQuery 包含多個 API。下列 API 可搭配地區端點使用：
 
 | API | 網址 | 參考資料 |
 | --- | --- | --- |
@@ -88,7 +88,7 @@ BigQuery 包含多個 API。下列 API 可搭配區域端點使用：
 * 區域端點不支援[相互傳輸層安全標準 (mTLS)](https://docs.cloud.google.com/chrome-enterprise-premium/docs/understand-mtls?hl=zh-tw)。
 * 使用地區端點不會限制在端點區域外建立資源。如要限制資源建立作業，請使用[機構政策服務資源位置限制](https://docs.cloud.google.com/resource-manager/docs/organization-policy/defining-locations?hl=zh-tw)。
 * [跨區域資料集複製](https://docs.cloud.google.com/bigquery/docs/data-replication?hl=zh-tw)和[跨區域資料表複製](https://docs.cloud.google.com/bigquery/docs/managing-tables?hl=zh-tw#copy_tables_across_regions)不受端點保護限制。
-* 執行[全域查詢](https://docs.cloud.google.com/bigquery/docs/global-queries?hl=zh-tw)
+* 區域端點不支援執行[全域查詢](https://docs.cloud.google.com/bigquery/docs/global-queries?hl=zh-tw)。
 
 ## 使用地區端點的工具
 
@@ -142,11 +142,11 @@ BigQuery 包含多個 API。下列 API 可搭配區域端點使用：
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-19 (世界標準時間)。
+上次更新時間：2026-05-21 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-19 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-21 (世界標準時間)。"],[],[]]

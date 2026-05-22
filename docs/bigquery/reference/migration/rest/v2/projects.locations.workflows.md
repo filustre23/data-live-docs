@@ -259,4 +259,6 @@ The possible dialect options for translation.
 | `redshiftDialect` | `object (RedshiftDialect)`  The Redshift dialect |
 | `teradataDialect` | `object (TeradataDialect)`  The Teradata dialect |
 | `oracleDialect` | `object (OracleDialect)`  The Oracle dialect |
-| `sparksqlDialect` | `object (SparkSQLDialect)` |
+| `sparksqlDialect` | `object (SparkSQLDialect)`  The SparkSQL dialect |
+| `snowflakeDialect` | `object (SnowflakeDialect)`  The Snowflake dialect |
+| `netezzaDialect` |  |

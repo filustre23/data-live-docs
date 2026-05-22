@@ -12,6 +12,7 @@
 * [April 30 - Prompt to create published apps, better agentic visualizations, and more!](/changelog/2026-04-30)
 * [May 12 - Introducing Generative Data Apps](/changelog/2026-05-12)
 * [May 14 - Connect repos as agent context](/changelog/2026-05-14)
+* [May 21 - Securely embed your generative Hex apps](/changelog/2026-05-21)
 
 ### 2025[​](#2025 "Direct link to 2025")
 

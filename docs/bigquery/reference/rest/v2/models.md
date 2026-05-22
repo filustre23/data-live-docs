@@ -239,4 +239,5 @@ Options used in model training.
 | `warmStart` | `boolean`  Whether to train a model from the last checkpoint. |
 | `earlyStop` | `boolean`  Whether to stop early when the loss doesn't improve significantly any more (compared to minRelativeProgress). Used only for iterative training algorithms. |
 | `inputLabelColumns[]` | `string`  Name of input label columns in training data. |
-| `dataSplitMethod` | `enum (` |
+| `dataSplitMethod` | `enum (DataSplitMethod)`  The data split type for training and evaluation, e.g. RANDOM. |
+| `dataSplitEvalFraction` | `number`  The fraction of evaluation data over the whole input data. The rest of data will be used as training data. The format should be double. Accurate to two decimal places. Default value is 0.2. |

@@ -390,4 +390,13 @@ The following options are supported:
 | `max_time_travel_hours` | `SMALLINT` | Specifies the duration in hours of the [time travel window](/bigquery/docs/time-travel#time_travel) for the dataset. The `max_time_travel_hours` value must be an integer expressed in multiples of 24 (48, 72, 96, 120, 144, 168) between 48 (2 days) and 168 (7 days). 168 hours is the default if this option isn't specified. |
 | `primary_replica` | `STRING` | The replica name to set as the [primary replica](/bigquery/docs/data-replication). |
 | `storage_billing_model` | `STRING` | Alters the [storage billing model](/bigquery/docs/datasets-intro#dataset_storage_billing_models) for the dataset. Set the `storage_billing_model` value to `PHYSICAL` to use physical bytes when calculating storage charges, or to `LOGICAL` to use logical bytes. `LOGICAL` is the default.  The `storage_billing_model` option is only available for datasets that have been updated after December 1, 2022. For datasets that were last updated before that date, the storage billing model is `LOGICAL`.  When you change a dataset's billing model, it takes 24 hours for the change to take effect.  Once you change a dataset's storage billing model, you must wait 14 days before you can change the storage billing model again. |
-| `tags` | `<ARRAY<STRUCT<STRING, STRING>>>` | An array of IAM tags for the dataset, e |
+| `tags` | `<ARRAY<STRUCT<STRING, STRING>>>` | An array of IAM tags for the dataset, expressed as key-value pairs. The key should be the [namespaced key name](/iam/docs/tags-access-control#definitions), and the value should be the [short name](/iam/docs/tags-access-control#definitions). |
+
+### Required permissions
+
+This statement requires the following
+[IAM permissions](/bigquery/docs/access-control#bq-permissions):
+
+| Permission | Resource |
+| --- | --- |
+| `bigquery.datasets.create` | The project where you create the dataset. |

@@ -255,3 +255,4 @@ All fields in this message optional.
 
 | Fields | |
 | --- | --- |
+| `snapshot_time` | `Timestamp`  The snapshot time of the table. If not set, interpreted as now. |

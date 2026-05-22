@@ -184,8 +184,8 @@ DETERMINISTIC_DECRYPT_BYTES(
 
   ```
   b'\x0a$\x00\xa6\xee\x12Y\x8d|l"\xf7\xfa\xc6\xeafM\xdeefy\xe9\x7f\xf2z\xb3M\
-  xf6"\xd0\xe0Le\xa8\x8e\x0fR\xed\x12\xb7\x01\x00\xf0\xa80\xbd\xc<1\x07Z\\
-  \xd0L\x80A0\x9ae\xfd(9\x1e\xfa\xc8\x93\xc7\xe8\...'
+  xf6"\xd0\xe0Le\xa8\x8e\x0fR\xed\x12\xb7\x01\x00\xf0\xa80\xbd\xc1\x07Z\\
+  \xd0L<\x80A0\x9ae\xfd(9\x1e\xfa\xc8\x93\xc7\xe8\...'
   ```
 
   雖然包裝鍵集函式會以位元組形式傳回包裝鍵集，但使用者輸出內容會顯示為編碼字串。如要將編碼的包裝金鑰集轉換為解碼的包裝金鑰集，請參閱「[解碼 Cloud KMS 金鑰集](#decode-wrapped-keyset)」一文。
@@ -408,7 +408,7 @@ SELECT KEYS.ROTATE_WRAPPED_KEYSET(
 SELECT DETERMINISTIC_DECRYPT_STRING(
   KEYS.KEYSET_CHAIN(KMS_KEY, WRAPPED_KEYSET_DECODED),
   encrypted_content,
-  '';)
+  '')
 FROM DATASET_NAME.TABLE_NAME
 ```
 
@@ -436,11 +436,11 @@ FROM DATASET_NAME.TABLE_NAME
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-19 (世界標準時間)。
+上次更新時間：2026-05-21 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-19 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-21 (世界標準時間)。"],[],[]]

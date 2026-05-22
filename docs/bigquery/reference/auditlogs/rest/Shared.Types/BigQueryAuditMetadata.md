@@ -251,4 +251,4 @@ Query job configuration.
 
 | JSON representation |
 | --- |
-| ``` {   "query": string,   "queryTruncated": boolean,   "destinationTable": string ``` |
+| ``` {   "query": string,   "queryTruncated": boolean,   "destinationTable": string,   "createDisposition": enum (BigQueryAuditMetadata.CreateDisposition),   "writeDisposition": enum (BigQueryAuditMetadata.WriteDisposition),   "defaultDataset": string ``` |

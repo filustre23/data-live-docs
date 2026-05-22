@@ -291,3 +291,7 @@ User-provided metadata for a dataset.
 ## BigQueryAcl
 
 An access control list.
+
+| JSON representation |
+| --- |
+| ``` {   "entries": [     {       object (BigQueryAcl.Entry)     } ``` |

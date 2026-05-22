@@ -8,7 +8,7 @@ info
 
 * Generative apps are available in **Beta** on all [plans](https://hex.tech/pricing/). Paid plans include monthly per-seat [credit grants](/docs/administration/credits) that can be used towards Hex AI features.
 * Users need [Can Edit](/docs/collaborate/sharing-and-permissions/project-sharing#project-permissions) or higher permissions on a project to create a Generative app.
-* To share suggestions for new features or improvements, reach out to [[email protected]](/cdn-cgi/l/email-protection#1f6c6a6f6f706d6b5f777a67316b7a7c77).
+* To share suggestions for new features or improvements, reach out to [[email protected]](/cdn-cgi/l/email-protection#added8ddddc2dfd9edc5c8d583d9c8cec5).
 
 Generative apps give you a fully customized, code-generated app experience where the Hex agent builds your UI, visuals, and theming from a plain-language description. Unlike [Classic apps](/docs/share-insights/apps/apps-introduction), which use a fixed grid of standard components, Generative apps produce flexible, web-style interfaces with custom layout, styling, and components tailored to what you're trying to build. This gives you more expressive power when a standard dashboard layout isn't enough.
 

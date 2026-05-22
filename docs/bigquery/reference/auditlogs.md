@@ -824,4 +824,6 @@ Cloud Logging `LogEntry` message is truncated.
 To resolve this issue, consider the following strategies:
 
 * Retrieve the full log message by using the
-  BigQuery API
+  BigQuery API [jobs.get](/bigquery/docs/reference/rest/v2/jobs/get) method.
+* Reduce the size of the metadata in the log message; for example, by using
+  wildcards on common path prefixes to reduce the size of the `sourceUri` list.

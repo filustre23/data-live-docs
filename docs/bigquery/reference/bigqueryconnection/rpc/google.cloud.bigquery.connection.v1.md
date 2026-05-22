@@ -234,5 +234,6 @@ Network related configuration.
 
 Private Service Connect configuration.
 
-|
-|  |
+| Fields | |
+| --- | --- |
+| `network_attachment` | `string`  Required. Network Attachment name in the format of `projects/{project}/regions/{region}/networkAttachments/{networkattachment}`. |

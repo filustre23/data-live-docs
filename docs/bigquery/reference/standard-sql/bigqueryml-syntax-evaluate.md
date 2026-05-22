@@ -924,4 +924,13 @@ The following types of models are regression models:
 * `mean_absolute_error`: a `FLOAT64` value that contains the
   [mean absolute error](https://en.wikipedia.org/wiki/Mean_absolute_error) for
   the model.
-* `m`
+* `mean_squared_error`: a `FLOAT64` value that contains the
+  [mean squared error](https://en.wikipedia.org/wiki/Mean_squared_error) for
+  the model.
+* `mean_squared_log_error`: a `FLOAT64` value that contains the mean squared
+  logarithmic error for the model. The mean squared logarithmic error
+  measures the distance between the actual and predicted values.
+* `median_absolute_error`: a `FLOAT64` value that contains the
+  [median absolute error](https://en.wikipedia.org/wiki/Mean_absolute_error)
+  for the model.
+* `r`

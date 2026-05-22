@@ -221,3 +221,7 @@ Represents the type of a field element.
 | JSON representation |
 | --- |
 | ``` {   "type": string } ``` |
+
+| Fields | |
+| --- | --- |
+| `type` | `string`  Required. The type of a field element. For more information, see `TableFieldSchema.type`. |
