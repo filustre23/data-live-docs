@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-05-22T01:47+00:00_
+_Generated 2026-05-22T08:44+00:00_
 
-**9 sources, 4930 topics total**
+**9 sources, 4933 topics total**
 
 ## airflow
 
@@ -2836,7 +2836,7 @@ _1532 topics_
 
 Upstream: <https://code.claude.com/docs/en/>
 
-_138 topics_
+_140 topics_
 
 - `claude-code/admin-setup`
 - `claude-code/agent-sdk/agent-loop`
@@ -2923,6 +2923,7 @@ _138 topics_
 - `claude-code/keybindings`
 - `claude-code/legal-and-compliance`
 - `claude-code/llm-gateway`
+- `claude-code/managed-mcp`
 - `claude-code/mcp`
 - `claude-code/memory`
 - `claude-code/microsoft-foundry`
@@ -2944,6 +2945,7 @@ _138 topics_
 - `claude-code/quickstart`
 - `claude-code/remote-control`
 - `claude-code/routines`
+- `claude-code/sandbox-environments`
 - `claude-code/sandboxing`
 - `claude-code/scheduled-tasks`
 - `claude-code/security`
@@ -3995,7 +3997,7 @@ _1007 topics_
 
 Upstream: <https://fastapi.tiangolo.com/>
 
-_153 topics_
+_154 topics_
 
 - `fastapi/_llm-test`
 - `fastapi/about/index`
@@ -4099,6 +4101,7 @@ _153 topics_
 - `fastapi/release-notes`
 - `fastapi/resources/index`
 - `fastapi/translation-banner`
+- `fastapi/translations`
 - `fastapi/tutorial/background-tasks`
 - `fastapi/tutorial/bigger-applications`
 - `fastapi/tutorial/body`

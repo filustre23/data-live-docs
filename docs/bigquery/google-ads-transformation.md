@@ -231,3 +231,6 @@ Google Ads API Resource:
 | ad\_group\_ad\_ad\_legacy\_responsive\_display\_ad\_call\_to\_action\_text | The call-to-action text for the ad. | CallToActionText |
 | ad\_group\_ad\_ad\_legacy\_responsive\_display\_ad\_description | The description of the ad. | Description |
 | ad\_group\_ad\_ad\_legacy\_responsive\_display\_ad\_format\_setting | Specifies which format the ad is served in. Default is ALL\_FORMATS. | FormatSetting |
+| ad\_group\_ad\_ad\_legacy\_responsive\_display\_ad\_logo\_image | The MediaFile resource name of the logo image used in the ad. | EnhancedDisplayCreativeLandscapeLogoImageMediaId |
+| ad\_group\_ad\_ad\_legacy\_responsive\_display\_ad\_long\_headline | The long version of the ad's headline. | LongHeadline |
+| ad\_group\_ad\_ad\_legacy\_responsive\_display\_ad\_main\_color | The main color of the ad in hexadecimal. For example, #ffffff for white. If one of main\_color and accent\_color is set, t |

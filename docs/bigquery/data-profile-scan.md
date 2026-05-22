@@ -1106,3 +1106,7 @@ gcloud dataplex datascans jobs list \
 * `DATASCAN`：要查看作業的資料剖析掃描名稱。
 
 ### C#
+
+### C#
+
+在試用這個

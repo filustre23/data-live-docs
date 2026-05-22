@@ -51,7 +51,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 | `secondary_location` | `STRING` | 預留項目次要副本的目前位置。這個欄位僅適用於使用[代管災難復原功能](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery?hl=zh-tw)的預訂。 |
 | `original_primary_location` | `STRING` | 最初建立預訂的位置。 |
 | `labels` | `RECORD` | 與預訂項目相關聯的標籤陣列。 |
-| `reservation_group_path` | `ARRAY<STRING>` | 預訂項目所連結的階層式群組結構。 舉例來說，如果群組結構包含上層群組和子項群組，則 `reservation_group_path` 欄位會包含類似 `[parent group, child group]` 的清單。這個欄位為[預先發布版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages)。 |
+| `reservation_group_path` | `ARRAY<STRING>` | 預留項目連結的預留項目群組。 舉例來說，如果預訂項目連結至群組 `my-group`，`reservation_group_path` 欄位會包含類似 `[my-group]` 的清單。 |
 | `max_slots` | `INTEGER` | 這個預留項目可使用的運算單元數量上限，包括基準運算單元 (`slot_capacity`)、閒置運算單元 (如果 `ignore_idle_slots` 為 false) 和自動調度運算單元。使用者會指定這個欄位，以使用[預訂預測功能](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#predictable)。 |
 | `scaling_mode` | `STRING` | 預留項目的縮放模式，決定預留項目如何從基準縮放至 `max_slots`。使用者會指定這個欄位，以使用[預訂預測功能](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#predictable)。 |
 
@@ -132,11 +132,11 @@ ON
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-21 (世界標準時間)。
+上次更新時間：2026-05-22 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-21 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-22 (世界標準時間)。"],[],[]]

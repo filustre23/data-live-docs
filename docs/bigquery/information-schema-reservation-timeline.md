@@ -44,7 +44,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 | `edition` | `STRING` | 與這項預訂相關聯的版本。如要進一步瞭解版本，請參閱「[BigQuery 版本簡介](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)」。 |
 | `ignore_idle_slots` | `BOOL` | 如果已啟用運算單元共用功能，則為 False，否則為 True。 |
 | `labels` | `RECORD` | 與預訂項目相關聯的標籤陣列。 |
-| `reservation_group_path` | `ARRAY<STRING>` | 預訂項目所連結的階層式群組結構。 舉例來說，如果群組結構包含上層群組和子項群組，則 `reservation_group_path` 欄位會包含類似 `[parent group, child group]` 的清單。這個欄位為[預先發布版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages)。 |
+| `reservation_group_path` | `ARRAY<STRING>` | 預留項目連結的預留項目群組。 舉例來說，如果預訂項目連結至群組 `my-group`，`reservation_group_path` 欄位會包含類似 `[my-group]` 的清單。 |
 | `period_start` | `TIMESTAMP` | 這個一分鐘期間的開始時間。 |
 | `per_second_details` | `STRUCT` | 包含每秒的預訂容量和使用量資訊。欄位包括：   * `start_time`：秒的確切時間戳記。 * `autoscale_current_slots`：此秒預留項目可用的自動調度資源運算單元數量。這個數字不含基準運算單元。   **注意：**減少 `max_slots` 時，變更可能不會立即生效。在這段短暫期間 (不到一分鐘)，`current_slots` 可能會維持原始值，高於 `max_slots` 的值。 * `autoscale_max_slots`：自動調度資源功能在這個時間點可為預留項目新增的運算單元數量上限。   這個數字不含基準運算單元。 * `slots_assigned`：這個保留項目在該秒分配到的運算單元數量。這等於預留項目的基準運算單元數量。 * `slots_max_assigned`：這個預留項目的運算單元容量上限，包括目前運算單元共用量。如果 `ignore_idle_slots` 為 true，這個欄位與 `slots_assigned` 相同。否則，`slots_max_assigned` 欄位會顯示管理專案中所有容量使用承諾的總配額數。 * `borrowed_slots`：從閒置時段分享功能使用的時段數量。只有在 `ignore_idle_slots` 為 false，且這段時間內使用了閒置運算單元時，才會填入這個欄位。 * `lent_slots`：其他預留項目從這個預留項目的基準運算單元集區使用的運算單元數量。只有在 `ignore_idle_slots` 為 false，且其他預留項目在這段時間內使用了閒置運算單元時，才會填入這個欄位。   如果在這 1 分鐘內有任何自動調度資源或預訂異動，陣列會填入 60 列。不過，如果非自動調整規模的預訂項目在這分鐘內維持不變，陣列就會是空白，否則系統會重複相同數字 60 次。 |
 | `project_id` | `STRING` | 預訂管理專案的 ID。 |
@@ -210,11 +210,11 @@ ORDER BY
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-21 (世界標準時間)。
+上次更新時間：2026-05-22 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-21 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-22 (世界標準時間)。"],[],[]]

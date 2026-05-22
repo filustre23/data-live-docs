@@ -407,5 +407,6 @@ public class CreateTeradataTransfer {
     params.put("database_type", Value.newBuilder().setStringValue(databaseType).build());
     params.put("bucket", Value.newBuilder().setStringValue(bucket).build());
     params.put("database_name", Value.newBuilder().setStringValue(databaseName).build());
-    params.put("table_name_patterns", Value.newBuilder
+    params.put("table_name_patterns", Value.newBuilder().setStringValue(tableNamePatterns).build());
+    params.put("agent_service_account",
 ```

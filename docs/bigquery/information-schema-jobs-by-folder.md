@@ -55,6 +55,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 | `project_number` | `INTEGER` | 專案編號。 |
 | `referenced_tables` | `RECORD` | `STRUCT` 值陣列，其中包含查詢參照的每個資料表下列 `STRING` 欄位：`project_id`、`dataset_id` 和 `table_id`。只有非快取命中查詢作業會填入這項資料。 |
 | `reservation_id` | `STRING` | 指派給這項工作的主要預留項目名稱，格式為 `RESERVATION_ADMIN_PROJECT:RESERVATION_LOCATION.RESERVATION_NAME`。  輸出內容：  * `RESERVATION_ADMIN_PROJECT`：管理預留項目的 Google Cloud 雲端專案名稱 * `RESERVATION_LOCATION`：預訂位置 * `RESERVATION_NAME`：預留項目名稱 |
+| `reservation_group_path` | `ARRAY<STRING>` | 預留項目連結的預留項目群組。 舉例來說，如果預訂項目連結至群組 `my-group`，`reservation_group_path` 欄位會包含類似 `[my-group]` 的清單。 |
 | `edition` | `STRING` | 與指派給這項工作的預留項目相關聯的版本。如要進一步瞭解版本，請參閱「[BigQuery 版本簡介](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)」。 |
 | `session_info` | `RECORD` | 這項工作執行的[工作階段](https://cloud.google.com/bigquery/docs/sessions-intro?hl=zh-tw)詳細資料 (如有)。 |
 | `start_time` | `TIMESTAMP` | 這項工作的開始時間，自記錄週期後的毫秒數。這個欄位代表工作從 `PENDING` 狀態轉換為 `RUNNING` 或 `DONE` 的時間。 |
@@ -157,11 +158,11 @@ WHERE
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-21 (世界標準時間)。
+上次更新時間：2026-05-22 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-21 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-22 (世界標準時間)。"],[],[]]

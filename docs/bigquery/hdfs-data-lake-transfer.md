@@ -436,5 +436,11 @@ JSON 檔案中的 `condition` 欄位支援下列值，每個值都有 `partition
    if [[ "$KERBEROS_AUTHENTICATION" == "true" ]]; then
      if [[ -z "$DUMPER_HOST" || -z "$DUMPER_PORT" || -z "$HIVE_KERBEROS_URL" || -z "$HIVEQL_RPC_PROTECTION" ]]; then
          echo "ERROR: If --kerberos-authentication is enabled, --host, --port, --hive-kerberos-url and --hiveql-rpc-protection must be provided." >&2
-         echo "Run with --help for more information." >
+         echo "Run with --help for more information." >&2
+         exit 1
+     fi
+   fi
+
+   # Remove trailing slashes from GCS_BASE_PATH, if any.
+   GCS_BASE_PATH=$(echo "${
    ```

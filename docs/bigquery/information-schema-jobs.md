@@ -58,6 +58,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 | `query` | `STRING` | SQL 查詢文字。 |
 | `referenced_tables` | `RECORD` | `STRUCT` 值陣列，其中包含查詢參照的每個資料表下列 `STRING` 欄位：`project_id`、`dataset_id` 和 `table_id`。只有非快取命中查詢作業會填入這項資料。 |
 | `reservation_id` | `STRING` | 指派給這項工作的主要預留項目名稱，格式為 `RESERVATION_ADMIN_PROJECT:RESERVATION_LOCATION.RESERVATION_NAME`。  輸出內容：  * `RESERVATION_ADMIN_PROJECT`：管理預留項目的 Google Cloud 雲端專案名稱 * `RESERVATION_LOCATION`：預訂位置 * `RESERVATION_NAME`：預留項目名稱 |
+| `reservation_group_path` | `ARRAY<STRING>` | 預留項目連結的預留項目群組。 舉例來說，如果預訂項目連結至群組 `my-group`，`reservation_group_path` 欄位會包含類似 `[my-group]` 的清單。 |
 | `edition` | `STRING` | 與指派給這項工作的預留項目相關聯的版本。如要進一步瞭解版本，請參閱「[BigQuery 版本簡介](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)」。 |
 | `session_info` | `RECORD` | 這項工作執行的[工作階段](https://cloud.google.com/bigquery/docs/sessions-intro?hl=zh-tw)詳細資料 (如有)。 |
 | `start_time` | `TIMESTAMP` | 這項工作的開始時間，自記錄週期後的毫秒數。這個欄位代表工作從 `PENDING` 狀態轉換為 `RUNNING` 或 `DONE` 的時間。 |
@@ -327,5 +328,6 @@ GROUP BY
 
 ```
 SELECT
-    DATE(creation_time) as day
+    DATE(creation_time) as day,
+    destination_table.project_id as
 ```

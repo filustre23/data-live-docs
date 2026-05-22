@@ -1166,4 +1166,6 @@ requested_session.read_options.avro_serialization_options = options
 ```
 syntax = "proto2";
 package mypackage;
+// Source protos located in github.com/googleapis/googleapis
+import
 ```

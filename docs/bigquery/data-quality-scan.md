@@ -1161,4 +1161,6 @@ public sealed partial class GeneratedDataScanServiceClientSnippets
     /// <summary>Snippet for ListDataScanJobs</summary>
     /// <remarks>
     /// This snippet has been automatically generated and should be regarded as a code template only.
+    /// It will require modifications to work:
+    /// - It
 ```

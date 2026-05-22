@@ -268,4 +268,7 @@ BigQuery 也提供下列[位元匯總](https://docs.cloud.google.com/bigquery/do
 | `GREATEST(value [, ...])` | `GREATEST(value [, ...])` |
 | `LEAST(value [, ...])` | `LEAST(value [, ...])` |
 | `NVL(expression1[, ...])` | `COALESCE(expression1[, ...])` |
-| `NVL2(  expression,  not_null_return_value,  null_return_value  )` |  |
+| `NVL2(  expression,  not_null_return_value,  null_return_value  )` | `IF(  expression IS NULL,  null_return_value,  not_null_return_value  )` |
+| `NULLIF(expression1, expression2)` | `NULLIF(expression1, expression2)` |
+
+BigQuery 也提供下列條件運算式，這些運算式在 Amazon Redshift 中沒有直接對應的項目：

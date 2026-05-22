@@ -492,4 +492,18 @@ that can be queued per project.
 
 如果專案超出可供隨機排序作業使用的磁碟和記憶體大小上限，BigQuery 就會傳回這項錯誤。
 
-這項配額是以預訂為單位計算，並根據預訂項目在專案間分配。Cloud Customer Care 無法修改配額。如要進一步瞭解用量，請查詢
+這項配額是以預訂為單位計算，並根據預訂項目在專案間分配。Cloud Customer Care 無法修改配額。如要進一步瞭解用量，請查詢 [`INFORMATION_SCHEMA.JOBS_TIMELINE` 檢視畫面](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline?hl=zh-tw#schema)。
+
+**錯誤訊息**
+
+您收到下列其中一則錯誤訊息：
+
+* ```
+  Quota exceeded: Your project exceeded quota for total shuffle size limit.
+  ```
+* ```
+  Resources exceeded: Your project or organization exceeded the maximum
+  disk and memory limit available for shuffle operations. Consider provisioning
+  more slots, reducing query concurrency, or using more efficient logic in this
+  job.
+  ```

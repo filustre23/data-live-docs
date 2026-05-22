@@ -1128,5 +1128,5 @@ for row in rows:
 
 // Import the Google Cloud client library
 const {BigQuery} = require('@google-cloud/bigquery');
-const bigquery
+const bigquery = new
 ```

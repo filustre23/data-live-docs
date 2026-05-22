@@ -260,5 +260,6 @@ public class SimpleApp {
     simpleApp(projectId);
   }
 
-  public
+  public static void simpleApp(String projectId) {
+    try {
 ```

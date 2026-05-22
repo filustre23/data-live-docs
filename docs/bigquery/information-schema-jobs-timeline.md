@@ -55,9 +55,10 @@ Google uses AI technology to translate content into your preferred language. AI 
 | `job_start_time` | `TIMESTAMP` | 這項工作的開始時間。 |
 | `job_end_time` | `TIMESTAMP` | 這項工作的結束時間。 |
 | `state` | `STRING` | 這段期間結束時的工作執行狀態。有效狀態包括 `PENDING`、`RUNNING` 和 `DONE`。 |
-| `reservation_id` | `STRING` | 如果適用，這個期間結束時指派給這項作業的主要預留項目名稱。 |
+| `reservation_id` | `STRING` | 如果適用，則為指派給這項工作的主要預留項目名稱 (位於這段時間的結尾)。 |
+| `reservation_group_path` | `ARRAY<STRING>` | 預留項目連結的預留項目群組。 舉例來說，如果預訂項目連結至群組 `my-group`，`reservation_group_path` 欄位會包含類似 `[my-group]` 的清單。 |
 | `edition` | `STRING` | 與指派給這項工作的預留項目相關聯的版本。如要進一步瞭解版本，請參閱「[BigQuery 版本簡介](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)」。 |
-| `total_bytes_billed` | `INTEGER` | 如果專案設定為使用[依用量計價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#analysis_pricing_models)，這個欄位會顯示作業的總計費位元組數。如果專案已設為使用[固定費率計價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#analysis_pricing_models)，系統就不會針對位元組收費，這個欄位僅供參考。這個欄位只會填入已完成的工作，並包含整個工作期間的總計費位元組數。 |
+| `total_bytes_billed` | `INTEGER` | 如果專案設定為使用[依用量計價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#analysis_pricing_models)，這個欄位會顯示作業的總計費位元組數。如果專案已設為使用[固定費率價格](https://cloud.google.com/bigquery/pricing?hl=zh-tw#analysis_pricing_models)，系統就不會針對位元組收費，這個欄位僅供參考。這個欄位只會填入已完成的工作，並包含整個工作期間的總計費位元組數。 |
 | `total_bytes_processed` | `INTEGER` | 工作處理的位元組總數。這個欄位只會填入已完成的工作，並包含工作整個期間處理的位元組總數。 |
 | `error_result` | `RECORD` | 錯誤詳細資料 (如有)，以 `ErrorProto.` 形式呈現 |
 | `cache_hit` | `BOOLEAN` | 這項工作的查詢結果是否來自快取。 |
@@ -84,7 +85,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 * 選用：`PROJECT_ID`：專案 ID。 Google Cloud 如未指定，系統會使用預設專案。
 * `REGION`：任何[資料集區域名稱](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
-  例如：`` `region-us` ``。**注意：**您必須使用[區域限定詞](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw#region_qualifier)查詢 `INFORMATION_SCHEMA` 檢視畫面。查詢執行位置必須與`INFORMATION_SCHEMA`檢視區塊的區域相符。
+  例如：`` `region-us` ``。**注意：**您必須使用[區域限定詞](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw#region_qualifier)查詢 `INFORMATION_SCHEMA` 檢視畫面。查詢執行位置必須與 `INFORMATION_SCHEMA` 檢視區塊的區域相符。
 
 ## 範例
 
@@ -127,7 +128,7 @@ ORDER BY
 +---------------------+---------------+
 ```
 
-您可以使用 `WHERE reservation_id = "…"` 檢查特定預留項目的用量。如果是指令碼工作，父項工作也會回報子項工作的總計使用量。為避免重複計算，請使用 `WHERE statement_type != "SCRIPT"` 排除父項工作。
+您可以使用 `WHERE reservation_id = "…"` 檢查特定預留項目的用量。如果是指令碼工作，父項工作也會回報子項工作使用的總配額。為避免重複計算，請使用 `WHERE statement_type != "SCRIPT"` 排除父項工作。
 
 ### `RUNNING`和`PENDING`工作數量的變化趨勢
 
@@ -322,11 +323,11 @@ GROUP BY job_id
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-21 (世界標準時間)。
+上次更新時間：2026-05-22 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-21 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-22 (世界標準時間)。"],[],[]]

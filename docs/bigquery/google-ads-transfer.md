@@ -262,5 +262,6 @@ public class CreateAdsTransfer {
               .setTransferConfig(transferConfig)
               .build();
       TransferConfig config = client.createTransferConfig(request);
-      System.out.println("Ads transfer created successfully :" + config.
+      System.out.println("Ads transfer created successfully :" + config.getName());
+    } catch (
 ```

@@ -18,11 +18,22 @@ To create a cloud storage integration, go to **Settings > Integrations > Extern
 
 ### Amazon S3[​](#amazon-s3 "Direct link to Amazon S3")
 
-You will need to enter the bucket name, AWS region, and access keys for an IAM user. The IAM user must be allowed to perform the `ListBucket` and `GetObject` actions on the bucket, and on files and folders in the bucket.
+To create an Amazon S3 integration, enter the bucket name and AWS region, then choose an authentication method. Hex supports two authentication methods for Amazon S3: **access key** and **IAM role**.
 
-The **Enable writeback** toggle will control whether or not the integration can [export files from Hex to S3](#export-files-to-your-cloud-storage-integration). If this is enabled, the IAM user will also need to have `PutObject` permissions in order to update files or create new files in the bucket.
+The IAM user or role Hex uses must be allowed to perform the `s3:HeadBucket`, `s3:ListBucket`, and `s3:GetObject` actions on the bucket, and on files and folders in the bucket. If writeback is enabled, `s3:PutObject` is also required.
 
-Users with access to this integration will have the ability to read in files from the integration, and writeback abilities (if enabled).
+The **Enable writeback** toggle controls whether the integration can [export files from Hex to S3](#export-files-to-your-cloud-storage-integration). Users with access to this integration will have the ability to read in files from the integration, and writeback abilities (if enabled).
+
+#### IAM role authentication[​](#iam-role-authentication "Direct link to IAM role authentication")
+
+1. **Create an IAM role in AWS**  
+   In the AWS IAM console, create a new role with the permissions listed above and a placeholder trust policy. Copy the role's ARN.
+2. **Save a draft integration in Hex**  
+   In the Amazon S3 integration form, select **IAM role** authentication, enter the bucket name, AWS region, and role ARN, and save the integration as a draft.
+3. **Update the trust policy in AWS**  
+   Hex generates an external ID and IAM trust policy when you save the draft. Copy them into your role's trust policy in AWS.
+4. **Finalize the integration in Hex**  
+   Return to the draft in Hex and complete the setup.
 
 ### Google Cloud Storage (GCS)[​](#google-cloud-storage-gcs "Direct link to Google Cloud Storage (GCS)")
 

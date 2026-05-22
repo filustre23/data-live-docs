@@ -1302,5 +1302,6 @@ import (
 func printTableInfo(w io.Writer, projectID, datasetID, tableID string) error {
 	// projectID := "my-project-id"
 	// datasetID := "mydataset"
-	// ta
+	// tableID := "mytable"
+	ctx
 ```
