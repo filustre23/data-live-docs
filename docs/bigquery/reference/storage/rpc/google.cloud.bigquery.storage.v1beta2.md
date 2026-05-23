@@ -272,5 +272,4 @@ Request message for `FlushRows`.
 
 | Fields | |
 | --- | --- |
-| `write_stream` | `string`  Required. The stream that is the target of the flush operation.  Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `writeStream`:   * `bigquery.tables.updateData` |
-|  |
+| `write_stream` | `string`  Required. The stream that is the target of the flush operation.  Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `writeStream`: |

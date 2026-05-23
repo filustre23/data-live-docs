@@ -295,6 +295,4 @@ Username and Password authentication.
 | Fields | |
 | --- | --- |
 | `username` | `string`  Required. Username. |
-| `password` | `object (Secret)`  Required. Password. |
-
-## Secret
+| `password` | `object (` |

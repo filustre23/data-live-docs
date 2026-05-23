@@ -293,7 +293,3 @@ public class QuickstartSample {
 ```
 
 ### Node.js
-
-```
-const
-```

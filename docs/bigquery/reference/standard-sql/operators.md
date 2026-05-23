@@ -551,5 +551,4 @@ Multiplies or divides an interval value by an integer.
 
 ```
 SELECT
-  INTERVAL '1:2:3' HOUR
 ```

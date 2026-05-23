@@ -261,20 +261,5 @@ public class CreateCampaignmanagerTransfer {
       TransferConfig config = client.createTransferConfig(request);
       System.out.println("Campaignmanager transfer created successfully :" + config.getName());
     } catch (ApiException ex) {
-      System.out.print("Campaignmanager transfer was not created." + ex.toString());
-    }
-  }
-}
+      System.out.
 ```
-
-**警告：** 如果您變更報表的結構定義，則當天所有檔案的結構定義都必須相同，否則當天所有的資料移轉作業都會失敗。
-
-## 排解 Campaign Manager 移轉設定問題
-
-如果無法順利設定資料移轉，請參閱[排解移轉設定問題](https://docs.cloud.google.com/bigquery/docs/transfer-troubleshooting?hl=zh-tw)中的「[Campaign Manager 移轉問題](https://docs.cloud.google.com/bigquery/docs/transfer-troubleshooting?hl=zh-tw#campaign_manager_transfer_issues)」一節。
-
-## 查詢資料
-
-資料移轉至 BigQuery 時，系統會將資料寫入擷取時間分區資料表。詳情請參閱[分區資料表簡介](https://docs.cloud.google.com/bigquery/docs/partitioned-tables?hl=zh-tw)一文。
-
-如果您要直接查詢資料表，而不要使用自動產生的檢視表，您必須在查詢中使用 `_PARTITIONTIME` 虛擬資料欄。詳情請參閱

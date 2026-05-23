@@ -395,8 +395,3 @@ The following options are supported:
 ### Required permissions
 
 This statement requires the following
-[IAM permissions](/bigquery/docs/access-control#bq-permissions):
-
-| Permission | Resource |
-| --- | --- |
-| `bigquery.datasets.create` | The project where you create the dataset. |

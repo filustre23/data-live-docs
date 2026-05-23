@@ -834,11 +834,3 @@ see
 ### JSON literals
 
 Syntax:
-
-```
-JSON 'json_formatted_data'
-```
-
-A JSON literal represents [JSON](https://en.wikipedia.org/wiki/JSON)-formatted data.
-
-Example

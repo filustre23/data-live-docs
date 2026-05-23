@@ -272,5 +272,4 @@ The build state of a routine.
 | Methods | |
 | --- | --- |
 | `delete` | Deletes the routine specified by routineId from the dataset. |
-| `get` | Gets the specified routine resource by routine ID. |
 |  |

@@ -256,4 +256,4 @@ The precision of the timestamp value in the Avro message. This precision will **
 
 ## BatchCommitWriteStreamsRequest
 
-Request message for `BatchCommitWriteStreams`.
+Request message for

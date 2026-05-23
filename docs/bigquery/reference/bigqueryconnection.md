@@ -298,5 +298,5 @@ def main(
     project_id: str = "your-project-id", location: str = "US", transport: str = "grpc"
 ) -> None:
     """Prints details and summary information about connections for a given admin project and location"""
-    client = bq_connection.ConnectionServiceClient(transport=transport)
+    client = bq_connection.
 ```

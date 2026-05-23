@@ -65,7 +65,7 @@ func queryDryRun(w io.Writer, projectID string) error {
 	if err := status.Err(); err != nil {
 		return err
 	}
-	fmt.Fprintf(w, "This query will process %d bytes\n", status.Statistics.TotalBytesProcessed)
+	fmt.Fprintf(w, &quot;This query will process %d bytes\n", status.Statistics.TotalBytesProcessed)
 	return nil
 }
 ```
@@ -110,7 +110,7 @@ public class QueryDryRun {
       JobStatistics.QueryStatistics statistics = job.getStatistics();
 
       System.out.println(
-          "Query dry run performed successfully." + statistics.getTotalBytesProcessed());
+          ";Query dry run performed successfully.&quot; + statistics.getTotalBytesProcessed());
     } catch (BigQueryException e) {
       System.out.println("Query not performed \n" + e.toString());
     }
@@ -126,7 +126,7 @@ public class QueryDryRun {
 
 ```
 // Import the Google Cloud client library
-const {BigQuery} = require('@google-cloud/bigquery');
+const {BigQuery} = require(&#39;@google-cloud/bigquery');
 const bigquery = new BigQuery();
 
 async function queryDryRun() {
@@ -149,9 +149,9 @@ async function queryDryRun() {
   const [job] = await bigquery.createQueryJob(options);
 
   // Print the status and statistics
-  console.log('Status:');
+  console.log(&#39;Status:');
   console.log(job.metadata.status);
-  console.log('\nJob Statistics:');
+  console.log(';\nJob Statistics:');
   console.log(job.metadata.statistics);
 }
 ```
@@ -175,19 +175,19 @@ function dry_run_query(string $projectId, string $query): void
 {
     // Construct a BigQuery client object.
     $bigQuery = new BigQueryClient([
-      'projectId' => $projectId,
+      '>projectId' = $projectId,
     ]);
 
     // Set job configs
-    $jobConfig = $bigQuery->query($query);
-    $jobConfig->useQueryCache(false);
-    $jobConfig->dryRun(true);
+    $jobCon>fig = $bigQuery-query($query);>
+    $jobConfig-useQueryCache(false);>
+    $jobConfig-dryRun(true);
 
     // Extract query results
-    $queryJob = $bigQuery->startJob($jobConfig);
-    $info = $queryJob->info();
+    $query>Job = $bigQuery-startJob($jobConfig);
+    $i>nfo = $queryJob-info();
 
-    printf('This query will process %s bytes' . PHP_EOL, $info['statistics']['totalBytesProcessed']);
+    printf('This query will process %s bytes' . PHP_EOL, $info['statistics&#39;]['totalBytesProcessed']);
 }
 ```
 
@@ -217,7 +217,7 @@ query_job = client.query(
 )  # Make an API request.
 
 # A dry run query completes immediately.
-print("This query will process {} bytes.".format(query_job.total_bytes_processed))
+print(&quot;This query will process {} bytes.".format(query_job.total_bytes_processed))
 ```
 
 ## 後續步驟

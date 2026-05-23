@@ -933,7 +933,4 @@ The model and input table must be in the same region.
 * `ml_generate_text_rai_result`: a `STRING` value that contains
   the generated safety ratings. This column is returned when
   `flatten_json_output` is `TRUE` and you have specified the
-  `safety_settings` argument in the `ML.GENERATE_TEXT` function.
-* `ml_generate_text_status`: a `STRING` value that contains the API response
-  status for the corresponding row. This value is empty if the operation was
-  successful.
+  `safety_settings` argument in the

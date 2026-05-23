@@ -71,7 +71,7 @@ public class CreateTableExternalHivePartitioned {
       bigquery.create(TableInfo.of(tableId, customTable));
       System.out.println("External table created using hivepartitioningoptions");
     } catch (BigQueryException e) {
-      System.out.println("External table was not created" + e.toString());
+      System.out.println(&quot;External table was not created" + e.toString());
     }
   }
 }

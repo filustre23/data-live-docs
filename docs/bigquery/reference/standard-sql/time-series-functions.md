@@ -617,5 +617,4 @@ WITH some_datetimes AS (
 )
 SELECT DATETIME_BUCKET(
   my_datetime,
-  INTERVAL 7 DAY,
 ```

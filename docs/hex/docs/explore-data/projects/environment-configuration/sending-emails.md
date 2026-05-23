@@ -24,7 +24,7 @@ HIPAA-compliant workspaces will not have the ability to send emails to maintain 
 
 info
 
-Reach out to [[email protected]](/cdn-cgi/l/email-protection#8efdfbfefee1fcfacee6ebf6a0faebede6) to request your organization be considered for an exception.
+Reach out to [[email protected]](/cdn-cgi/l/email-protection#bdcec8cdcdd2cfc9fdd5d8c593c9d8ded5) to request your organization be considered for an exception.
 
 #### On this page
 

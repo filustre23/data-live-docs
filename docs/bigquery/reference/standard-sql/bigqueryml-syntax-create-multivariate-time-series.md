@@ -972,6 +972,4 @@ table only contains holidays and events from the following regions:
 
 ## Custom holidays
 
-You can combine use of the [`holiday_statement` argument](#holiday_statement)
-and the [`HOLIDAY_REGION` option](#holiday_region) to enable several different
-custom holiday scenarios, as described in the following sections.
+You can combine use of the [`holiday_sta`](#holiday_statement)

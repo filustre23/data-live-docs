@@ -540,7 +540,5 @@ The following query shows examples of calls to the `SEARCH` function using the
 ```
 SELECT
   -- TRUE: exact match
-  SEARCH('foobar', 'foobar', analyzer=>'NO_OP_ANALYZER') AS a,
-
-  -- FALSE: Backticks aren't special characters for `NO_OP_ANALYZ
+  SEARCH('foobar', 'foobar', analyzer=>'NO_OP_ANALYZER')
 ```

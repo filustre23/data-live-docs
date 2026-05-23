@@ -8,7 +8,7 @@ info
 
 Snowflake Semantic Views is in **beta** on [Team and Enterprise plans](https://hex.tech/pricing/).
 
-Reach out to [[email protected]](/cdn-cgi/l/email-protection#53202623233c2127133b362b7d2736303b) to learn more or [request a demo](https://hex.tech/request-a-demo/).
+Reach out to [[email protected]](/cdn-cgi/l/email-protection#3b484e4b4b54494f7b535e43154f5e5853) to learn more or [request a demo](https://hex.tech/request-a-demo/).
 
 With Snowflake Semantic Views, you can explore and analyze trusted measures, dimensions, and joins defined in Snowflake — all from Hex’s no-code [Explore](/docs/share-insights/explore) experience. This means less time rewriting calculations and reconciling discrepancies, and more time digging deeper into analyses and delivering consistent insights to the business.
 

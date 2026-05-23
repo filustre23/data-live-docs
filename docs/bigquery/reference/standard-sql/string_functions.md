@@ -507,7 +507,5 @@ With Employees AS
   UNION ALL
   SELECT
     'Jane' AS first_name,
-    'Smith' AS last_name
-  UNION ALL
-  SELECT
+    'Smith' AS
 ```

@@ -246,3 +246,8 @@ Configuration for writing message data in Avro format. Message payloads and meta
 | `useTopicSchema` | `boolean`  Optional. When true, the output Cloud Storage file will be serialized using the topic schema, if it exists. |
 
 ## ExpirationPolicy
+
+A policy that specifies the conditions for resource expiration (i.e., automatic resource deletion).
+
+| JSON |
+| --- |

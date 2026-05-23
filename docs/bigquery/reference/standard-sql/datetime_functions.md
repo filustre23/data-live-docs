@@ -613,8 +613,4 @@ Formats a `DATETIME` value according to a specified format string.
 * `datetime_expr`: A `DATETIME` value that represents the date and time to
   format.
 
-**Return Data Type**
-
-`STRING`
-
-**Examples**
+**Return Data**

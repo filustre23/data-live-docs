@@ -349,10 +349,3 @@ points to the line where necessary so that the resulting sequence of edges
 remains within 10 meters of the original edge.
 
 See [`ST_GEOGFROMGEOJSON`](#st_geogfromgeojson) to construct a
-`GEOGRAPHY` from GeoJSON.
-
-**Return type**
-
-`STRING`
-
-## `ST_ASTEXT`

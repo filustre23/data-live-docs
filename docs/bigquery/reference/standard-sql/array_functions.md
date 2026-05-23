@@ -554,5 +554,5 @@ SELECT GENERATE_ARRAY(1, 5) AS example_array;
 The following returns an array using a user-specified step size.
 
 ```
-SELECT GENERATE_ARRAY(0, 10, 3) AS example_array;
+SELECT GENERATE_ARRAY(0, 10,
 ```
