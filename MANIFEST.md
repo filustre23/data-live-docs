@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-05-22T14:25+00:00_
+_Generated 2026-05-23T01:27+00:00_
 
-**9 sources, 4933 topics total**
+**9 sources, 5064 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_1274 topics_
+_1406 topics_
 
 - `anthropic-sdk/agents-and-tools/agent-skills/best-practices`
 - `anthropic-sdk/agents-and-tools/agent-skills/enterprise`
@@ -813,6 +813,138 @@ _1274 topics_
 - `anthropic-sdk/api/models`
 - `anthropic-sdk/api/models/list`
 - `anthropic-sdk/api/models/retrieve`
+- `anthropic-sdk/api/php/beta`
+- `anthropic-sdk/api/php/beta/agents`
+- `anthropic-sdk/api/php/beta/agents/archive`
+- `anthropic-sdk/api/php/beta/agents/create`
+- `anthropic-sdk/api/php/beta/agents/list`
+- `anthropic-sdk/api/php/beta/agents/retrieve`
+- `anthropic-sdk/api/php/beta/agents/update`
+- `anthropic-sdk/api/php/beta/agents/versions`
+- `anthropic-sdk/api/php/beta/agents/versions/list`
+- `anthropic-sdk/api/php/beta/environments`
+- `anthropic-sdk/api/php/beta/environments/archive`
+- `anthropic-sdk/api/php/beta/environments/create`
+- `anthropic-sdk/api/php/beta/environments/delete`
+- `anthropic-sdk/api/php/beta/environments/list`
+- `anthropic-sdk/api/php/beta/environments/retrieve`
+- `anthropic-sdk/api/php/beta/environments/update`
+- `anthropic-sdk/api/php/beta/environments/work`
+- `anthropic-sdk/api/php/beta/environments/work/ack`
+- `anthropic-sdk/api/php/beta/environments/work/heartbeat`
+- `anthropic-sdk/api/php/beta/environments/work/list`
+- `anthropic-sdk/api/php/beta/environments/work/poll`
+- `anthropic-sdk/api/php/beta/environments/work/retrieve`
+- `anthropic-sdk/api/php/beta/environments/work/stats`
+- `anthropic-sdk/api/php/beta/environments/work/stop`
+- `anthropic-sdk/api/php/beta/environments/work/update`
+- `anthropic-sdk/api/php/beta/files`
+- `anthropic-sdk/api/php/beta/files/delete`
+- `anthropic-sdk/api/php/beta/files/download`
+- `anthropic-sdk/api/php/beta/files/list`
+- `anthropic-sdk/api/php/beta/files/retrieve_metadata`
+- `anthropic-sdk/api/php/beta/files/upload`
+- `anthropic-sdk/api/php/beta/memory_stores`
+- `anthropic-sdk/api/php/beta/memory_stores/archive`
+- `anthropic-sdk/api/php/beta/memory_stores/create`
+- `anthropic-sdk/api/php/beta/memory_stores/delete`
+- `anthropic-sdk/api/php/beta/memory_stores/list`
+- `anthropic-sdk/api/php/beta/memory_stores/memories`
+- `anthropic-sdk/api/php/beta/memory_stores/memories/create`
+- `anthropic-sdk/api/php/beta/memory_stores/memories/delete`
+- `anthropic-sdk/api/php/beta/memory_stores/memories/list`
+- `anthropic-sdk/api/php/beta/memory_stores/memories/retrieve`
+- `anthropic-sdk/api/php/beta/memory_stores/memories/update`
+- `anthropic-sdk/api/php/beta/memory_stores/memory_versions`
+- `anthropic-sdk/api/php/beta/memory_stores/memory_versions/list`
+- `anthropic-sdk/api/php/beta/memory_stores/memory_versions/redact`
+- `anthropic-sdk/api/php/beta/memory_stores/memory_versions/retrieve`
+- `anthropic-sdk/api/php/beta/memory_stores/retrieve`
+- `anthropic-sdk/api/php/beta/memory_stores/update`
+- `anthropic-sdk/api/php/beta/messages`
+- `anthropic-sdk/api/php/beta/messages/batches`
+- `anthropic-sdk/api/php/beta/messages/batches/cancel`
+- `anthropic-sdk/api/php/beta/messages/batches/create`
+- `anthropic-sdk/api/php/beta/messages/batches/delete`
+- `anthropic-sdk/api/php/beta/messages/batches/list`
+- `anthropic-sdk/api/php/beta/messages/batches/results`
+- `anthropic-sdk/api/php/beta/messages/batches/retrieve`
+- `anthropic-sdk/api/php/beta/messages/count_tokens`
+- `anthropic-sdk/api/php/beta/messages/create`
+- `anthropic-sdk/api/php/beta/models`
+- `anthropic-sdk/api/php/beta/models/list`
+- `anthropic-sdk/api/php/beta/models/retrieve`
+- `anthropic-sdk/api/php/beta/sessions`
+- `anthropic-sdk/api/php/beta/sessions/archive`
+- `anthropic-sdk/api/php/beta/sessions/create`
+- `anthropic-sdk/api/php/beta/sessions/delete`
+- `anthropic-sdk/api/php/beta/sessions/events`
+- `anthropic-sdk/api/php/beta/sessions/events/list`
+- `anthropic-sdk/api/php/beta/sessions/events/send`
+- `anthropic-sdk/api/php/beta/sessions/events/stream`
+- `anthropic-sdk/api/php/beta/sessions/list`
+- `anthropic-sdk/api/php/beta/sessions/resources`
+- `anthropic-sdk/api/php/beta/sessions/resources/add`
+- `anthropic-sdk/api/php/beta/sessions/resources/delete`
+- `anthropic-sdk/api/php/beta/sessions/resources/list`
+- `anthropic-sdk/api/php/beta/sessions/resources/retrieve`
+- `anthropic-sdk/api/php/beta/sessions/resources/update`
+- `anthropic-sdk/api/php/beta/sessions/retrieve`
+- `anthropic-sdk/api/php/beta/sessions/threads`
+- `anthropic-sdk/api/php/beta/sessions/threads/archive`
+- `anthropic-sdk/api/php/beta/sessions/threads/events`
+- `anthropic-sdk/api/php/beta/sessions/threads/events/list`
+- `anthropic-sdk/api/php/beta/sessions/threads/events/stream`
+- `anthropic-sdk/api/php/beta/sessions/threads/list`
+- `anthropic-sdk/api/php/beta/sessions/threads/retrieve`
+- `anthropic-sdk/api/php/beta/sessions/update`
+- `anthropic-sdk/api/php/beta/skills`
+- `anthropic-sdk/api/php/beta/skills/create`
+- `anthropic-sdk/api/php/beta/skills/delete`
+- `anthropic-sdk/api/php/beta/skills/list`
+- `anthropic-sdk/api/php/beta/skills/retrieve`
+- `anthropic-sdk/api/php/beta/skills/versions`
+- `anthropic-sdk/api/php/beta/skills/versions/create`
+- `anthropic-sdk/api/php/beta/skills/versions/delete`
+- `anthropic-sdk/api/php/beta/skills/versions/download`
+- `anthropic-sdk/api/php/beta/skills/versions/list`
+- `anthropic-sdk/api/php/beta/skills/versions/retrieve`
+- `anthropic-sdk/api/php/beta/user_profiles`
+- `anthropic-sdk/api/php/beta/user_profiles/create`
+- `anthropic-sdk/api/php/beta/user_profiles/create_enrollment_url`
+- `anthropic-sdk/api/php/beta/user_profiles/list`
+- `anthropic-sdk/api/php/beta/user_profiles/retrieve`
+- `anthropic-sdk/api/php/beta/user_profiles/update`
+- `anthropic-sdk/api/php/beta/vaults`
+- `anthropic-sdk/api/php/beta/vaults/archive`
+- `anthropic-sdk/api/php/beta/vaults/create`
+- `anthropic-sdk/api/php/beta/vaults/credentials`
+- `anthropic-sdk/api/php/beta/vaults/credentials/archive`
+- `anthropic-sdk/api/php/beta/vaults/credentials/create`
+- `anthropic-sdk/api/php/beta/vaults/credentials/delete`
+- `anthropic-sdk/api/php/beta/vaults/credentials/list`
+- `anthropic-sdk/api/php/beta/vaults/credentials/mcp_oauth_validate`
+- `anthropic-sdk/api/php/beta/vaults/credentials/retrieve`
+- `anthropic-sdk/api/php/beta/vaults/credentials/update`
+- `anthropic-sdk/api/php/beta/vaults/delete`
+- `anthropic-sdk/api/php/beta/vaults/list`
+- `anthropic-sdk/api/php/beta/vaults/retrieve`
+- `anthropic-sdk/api/php/beta/vaults/update`
+- `anthropic-sdk/api/php/beta/webhooks`
+- `anthropic-sdk/api/php/completions/create`
+- `anthropic-sdk/api/php/messages`
+- `anthropic-sdk/api/php/messages/batches`
+- `anthropic-sdk/api/php/messages/batches/cancel`
+- `anthropic-sdk/api/php/messages/batches/create`
+- `anthropic-sdk/api/php/messages/batches/delete`
+- `anthropic-sdk/api/php/messages/batches/list`
+- `anthropic-sdk/api/php/messages/batches/results`
+- `anthropic-sdk/api/php/messages/batches/retrieve`
+- `anthropic-sdk/api/php/messages/count_tokens`
+- `anthropic-sdk/api/php/messages/create`
+- `anthropic-sdk/api/php/models`
+- `anthropic-sdk/api/php/models/list`
+- `anthropic-sdk/api/php/models/retrieve`
 - `anthropic-sdk/api/python/beta`
 - `anthropic-sdk/api/python/beta/agents`
 - `anthropic-sdk/api/python/beta/agents/archive`
@@ -3997,7 +4129,7 @@ _1007 topics_
 
 Upstream: <https://fastapi.tiangolo.com/>
 
-_154 topics_
+_153 topics_
 
 - `fastapi/_llm-test`
 - `fastapi/about/index`
@@ -4071,7 +4203,6 @@ _154 topics_
 - `fastapi/index`
 - `fastapi/learn/index`
 - `fastapi/management`
-- `fastapi/management-tasks`
 - `fastapi/newsletter`
 - `fastapi/project-generation`
 - `fastapi/python-types`

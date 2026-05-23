@@ -40,7 +40,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
   [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
 - [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project).
-- Enable the BigQuery, Dataform APIs.
+- Enable the BigQuery, Dataform, and Compute Engine APIs.
 
   **Roles required to enable APIs**
 
@@ -49,7 +49,7 @@ Google uses AI technology to translate content into your preferred language. AI 
   contains the `serviceusage.services.enable` permission. [Learn how to grant
   roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw).
 
-  [Enable the APIs](https://console.cloud.google.com/apis/enableflow?apiid=bigquery.googleapis.com%2Cdataform.googleapis.com&hl=zh-tw)
+  [Enable the APIs](https://console.cloud.google.com/apis/enableflow?apiid=bigquery.googleapis.com%2Cdataform.googleapis.com%2Ccompute.googleapis.com&hl=zh-tw)
 
 - In the Google Cloud console, on the project selector page,
   select or create a Google Cloud project.
@@ -70,7 +70,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
   [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
 - [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project).
-- Enable the BigQuery, Dataform APIs.
+- Enable the BigQuery, Dataform, and Compute Engine APIs.
 
   **Roles required to enable APIs**
 
@@ -79,7 +79,7 @@ Google uses AI technology to translate content into your preferred language. AI 
   contains the `serviceusage.services.enable` permission. [Learn how to grant
   roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw).
 
-  [Enable the APIs](https://console.cloud.google.com/apis/enableflow?apiid=bigquery.googleapis.com%2Cdataform.googleapis.com&hl=zh-tw)
+  [Enable the APIs](https://console.cloud.google.com/apis/enableflow?apiid=bigquery.googleapis.com%2Cdataform.googleapis.com%2Ccompute.googleapis.com&hl=zh-tw)
 
 ### 所需權限
 
