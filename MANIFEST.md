@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-05-23T01:27+00:00_
+_Generated 2026-05-23T08:09+00:00_
 
-**9 sources, 5064 topics total**
+**9 sources, 5062 topics total**
 
 ## airflow
 
@@ -3115,7 +3115,7 @@ _140 topics_
 
 Upstream: <https://docs.getdbt.com/docs/>
 
-_1007 topics_
+_1005 topics_
 
 - `dbt-core/best-practices/best-practice-workflows`
 - `dbt-core/best-practices/clone-incremental-models`
@@ -3452,7 +3452,6 @@ _1007 topics_
 - `dbt-core/docs/mesh/iceberg/bigquery-iceberg-support`
 - `dbt-core/docs/mesh/iceberg/databricks-iceberg-support`
 - `dbt-core/docs/mesh/iceberg/snowflake-iceberg-support`
-- `dbt-core/docs/platform-integrations/about-snowflake-native-app`
 - `dbt-core/docs/platform-integrations/avail-sl-integrations`
 - `dbt-core/docs/platform-integrations/downstream-exposures`
 - `dbt-core/docs/platform-integrations/downstream-exposures-tableau`
@@ -3462,7 +3461,6 @@ _1007 topics_
 - `dbt-core/docs/platform-integrations/semantic-layer/gsheets`
 - `dbt-core/docs/platform-integrations/semantic-layer/power-bi`
 - `dbt-core/docs/platform-integrations/semantic-layer/tableau`
-- `dbt-core/docs/platform-integrations/set-up-snowflake-native-app`
 - `dbt-core/docs/platform/about-defer`
 - `dbt-core/docs/platform/about-develop-dbt`
 - `dbt-core/docs/platform/about-platform-setup`
