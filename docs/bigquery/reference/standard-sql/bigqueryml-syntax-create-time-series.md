@@ -988,5 +988,12 @@ CREATE OR REPLACE MODEL `mydataset.arima_model`
                   DATE('2020-10-31'),
                   DATE('2021-10-31'),
                   DATE('2022-10-31'),
-                  DATE(
+                  DATE('2023-10-31')])
+                AS primary_date
+          )
+      )
 ```
+
+## Holiday data
+
+When you perform holiday m
