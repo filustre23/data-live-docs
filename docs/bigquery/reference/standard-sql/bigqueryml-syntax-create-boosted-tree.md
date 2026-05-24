@@ -1013,18 +1013,4 @@ You must specify this option in order to use hyperparameter tuning.
 
 **Arguments**
 
-An `INT64` value between `1` and `100`, inclusive.
-
-**Note:** We recommend using at least
-`(number_of_hyperparameters * 10)` trials to tune a model.
-
-### `MAX_PARALLEL_TRIALS`
-
-**Syntax**
-
-`MAX_PARALLEL_TRIALS = int64_value`
-
-**Description**
-
-The maximum number of trials to run at the same time. If you specify a value
-for this option,
+An `INT64` value between `1` and `100`, inc

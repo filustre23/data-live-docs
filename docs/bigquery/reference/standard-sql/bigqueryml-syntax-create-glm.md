@@ -983,8 +983,5 @@ number of training iterations is set to `5`.
 
 ```
 CREATE MODEL
-  `mydataset.mymodel`
-OPTIONS
-  ( MODEL_TYPE='LINEAR_REG',
-    LS_INIT_LEARN_RATE=<
+  `mydataset
 ```
