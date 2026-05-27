@@ -43,7 +43,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 * **Cloud Storage**: you incur costs for the objects stored
   in Cloud Storage.
 * **Vertex AI**: you incur costs for calls to
-  Vertex AI models.
+  Agent Platform models.
 
 如要根據預測用量估算費用，請使用 [Pricing Calculator](https://docs.cloud.google.com/products/calculator?hl=zh-tw)。
 
@@ -54,7 +54,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 * [BigQuery 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw)
 * [BigQuery Python UDF 定價](https://docs.cloud.google.com/bigquery/docs/user-defined-functions-python?hl=zh-tw#pricing)
 * [Cloud Storage 定價](https://cloud.google.com/storage/pricing?hl=zh-tw)
-* [Vertex AI 定價](https://docs.cloud.google.com/vertex-ai/generative-ai/pricing?hl=zh-tw)
+* [Agent Platform 定價](https://docs.cloud.google.com/vertex-ai/generative-ai/pricing?hl=zh-tw)
 
 ## 事前準備
 
@@ -166,9 +166,9 @@ does not have the permission to access resource`。
 6. 在「Select a role」(請選擇角色) 欄位中，依序選取「Cloud Storage」和「Storage Object User」(Storage 物件使用者)。
 7. 按一下 [儲存]。
 
-#### 授予使用 Vertex AI 模型的權限
+#### 授予使用 Agent Platform 模型的權限
 
-授予服務帳戶使用 Vertex AI 模型的權限：
+授予服務帳戶使用 Agent Platform 模型的權限：
 
 1. 前往「IAM & Admin」(IAM 與管理) 頁面。
 
@@ -306,7 +306,7 @@ does not have the permission to access resource`。
 
 ### 建立文字生成模型
 
-建立代表 Vertex AI Gemini 模型的 BigQuery ML [遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw)：
+建立代表 Agent Platform Gemini 模型的 BigQuery ML [遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw)：
 
 * 執行下列指令來建立遠端模型：
 
@@ -337,7 +337,7 @@ does not have the permission to access resource`。
 
 ### 建立嵌入生成模型
 
-建立代表 Vertex AI 多模態嵌入模型的 BigQuery ML 遠端模型：
+建立代表 Agent Platform 多模態嵌入模型的 BigQuery ML 遠端模型：
 
 * 執行下列指令來建立遠端模型：
 
@@ -517,7 +517,7 @@ does not have the permission to access resource`。
        ]
    ]
    ```
-2. 執行下列程式碼，使用產生的資料更新 `animal_type`、`search_keywords` 和 `subcategory` 欄：
+2. 執行下列指令，使用產生的資料更新 `animal_type`、`search_keywords` 和 `subcategory` 欄：
 
    ### SQL
 
@@ -720,7 +720,7 @@ does not have the permission to access resource`。
 
 建立 Python UDF，將產品圖片轉換為灰階。
 
-Python UDF 使用開放原始碼程式庫，並採用平行執行方式，同時轉換多張圖片。
+Python UDF 會使用開放原始碼程式庫，並透過平行執行功能同時轉換多張圖片。
 
 1. 執行下列指令，建立 `to_grayscale` UDF：
 
@@ -945,7 +945,7 @@ Python UDF 使用開放原始碼程式庫，並採用平行執行方式，同時
 
 建立 Python UDF，將含有 Cymbal 寵物產品手冊的 PDF 物件分成多個部分。
 
-PDF 檔案通常很大，可能無法在單次呼叫生成式 AI 模型時處理。將 PDF 分塊後，您就能以模型可用的格式儲存 PDF 資料，方便進行分析。
+PDF 檔案通常很大，可能無法在單一呼叫中傳送至生成式 AI 模型。將 PDF 分塊後，您就能以模型可用的格式儲存 PDF 資料，方便進行分析。
 
 1. 執行下列指令，建立 `chunk_pdf` UDF：
 
@@ -1284,7 +1284,7 @@ PDF 檔案通常很大，可能無法在單次呼叫生成式 AI 模型時處理
 
 本節說明如何完成下列工作：
 
-1. 重新建立 `product_manuals` 表格，使其同時包含 `Crittercuisine 5000` 產品手冊的 PDF 檔案，以及該手冊每一頁的 PDF 檔案。
+1. 重新建立 `product_manuals` 表格，使其包含 `Crittercuisine 5000` 產品手冊的 PDF 檔案，以及該手冊每一頁的 PDF 檔案。
 2. 建立表格，將手冊對應至各個區塊。代表完整手冊的 `ObjectRef` 值會儲存在 `STRUCT<uri STRING, version STRING, authorizer STRING, details JSON>>` 欄中。代表手冊頁面的 `ObjectRef` 值會儲存在 `ARRAY<STRUCT<uri STRING, version STRING, authorizer STRING, details JSON>>` 資料欄中。
 3. 一起分析 `ObjectRef` 值陣列，傳回單一產生值。
 4. 分別分析 `ObjectRef` 值陣列，並為每個陣列值傳回產生的值。
@@ -1413,7 +1413,7 @@ PDF 檔案通常很大，可能無法在單次呼叫生成式 AI 模型時處理
    |                                     |                                |                                   |                                                      | ...                                       | ...                             |  ...                               | ...                                                   |
    +-------------------------------------+--------------------------------+-----------------------------------+------------------------------------------------------+-------------------------------------------+---------------------------------+------------------------------------+-------------------------------------------------------+
    ```
-5. 執行下列指令，根據陣列的 `ObjectRef` 值分析結果，從 Gemini 模型產生單一回覆：
+5. 執行下列指令，根據 `ObjectRef` 值陣列的分析結果，從 Gemini 模型產生單一回覆：
 
    ### SQL
 
@@ -1588,11 +1588,11 @@ PDF 檔案通常很大，可能無法在單次呼叫生成式 AI 模型時處理
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-21 (世界標準時間)。
+上次更新時間：2026-05-26 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-21 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-26 (世界標準時間)。"],[],[]]

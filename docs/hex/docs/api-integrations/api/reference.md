@@ -2499,4 +2499,4 @@ Copy
 | schemaRefreshAccess | string (DataConnectionSchemaRefreshAccess)  Enum: "ADMINS" "USERS\_WITH\_QUERY\_ACCESS" |
 | schemaRefreshSchedule | object or null |
 | schemaFilters | object |
-| allowWritebackCells | boolean |
+|  |

@@ -1035,4 +1035,5 @@ public class CopyTableCMEK {
     String sourceTableId = "MY_SOURCE_TABLE_NAME";
     String kmsKeyName = "MY_KMS_KEY_NAME";
     EncryptionConfiguration encryption =
+        EncryptionConfiguration.newBuilder
 ```

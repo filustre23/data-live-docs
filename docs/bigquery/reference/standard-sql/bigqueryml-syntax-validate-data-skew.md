@@ -22,7 +22,7 @@ created, and identifies where there are anomalous differences between the two
 data sets.
 
 You can optionally visualize the function output by using
-[Vertex AI model monitoring](/vertex-ai/docs/model-monitoring/overview).
+[Agent Platform model monitoring](/gemini-enterprise-agent-platform/machine-learning/model-monitoring/overview).
 For more information, see
 [Monitoring visualization](/bigquery/docs/model-monitoring-overview#monitoring_visualization).
 
@@ -95,12 +95,12 @@ ML.VALIDATE_DATA_SKEW(
   specify `TRUE` for this argument, the `ML.VALIDATE_DATA_DRIFT` output includes
   the `visualization_link` column. The `visualization_link` column provides URLs
   that link to visualizations of the function results in
-  Vertex AI monitoring.
+  Agent Platform monitoring.
 
   When you specify `TRUE` for this argument, the `model` argument value must
   refer to a BigQuery ML model that is
   [registered](/bigquery/docs/managing-models-vertex#register_models) with
-  Vertex AI. If the model isn't registered, an invalid query
+  Agent Platform. If the model isn't registered, an invalid query
   error is returned.
 
 ## Output
@@ -121,7 +121,7 @@ ML.VALIDATE_DATA_SKEW(
 * `is_anomaly`: a `BOOL` column that indicates whether the `value` value is
   higher than the `threshold` value.
 * `visualization_link`: a URL that
-  links to a Vertex AI visualization of the results for the given
+  links to an Agent Platform visualization of the results for the given
   feature. The URL is formatted as follows:
 
   ```
@@ -285,7 +285,7 @@ END IF;
     [LLMs](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model),
     [Cloud AI services](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service),
     or
-    [Vertex AI endpoints](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https)
+    [Gemini Enterprise Agent Platform endpoints](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https)
   + Imported
     [Open Neural Network Exchange (ONNX)](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-onnx),
     [TensorFlow](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow),
@@ -335,11 +335,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-05-20 UTC.
+Last updated 2026-05-26 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-20 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-26 UTC."],[],[]]

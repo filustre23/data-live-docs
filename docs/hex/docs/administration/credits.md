@@ -13,7 +13,7 @@ To ensure everyone can use AI, Hex awards monthly credit grants to Editor and Ex
 info
 
 * Credits will go into effect for legacy customers with advance notice to Admins.
-* Customers with annual contracts who wish to purchase add-on credits can contact [[email protected]](/cdn-cgi/l/email-protection#d1a2b0bdb4a291b9b4a9ffa5b4b2b9) to update their contract.
+* Customers with annual contracts who wish to purchase add-on credits can contact [[email protected]](/cdn-cgi/l/email-protection#5625373a3325163e332e782233353e) to update their contract.
 
 ## Credit Consumption[​](#credit-consumption "Direct link to Credit Consumption")
 
@@ -102,6 +102,7 @@ Legacy customers can safely enable auto top-ups before credits go into effect fo
 
 * [Per-seat credit grants](#what-are-per-seat-credit-grants) do not rollover.
 * Add-on credits purchased via [auto top-up](#what-are-auto-top-ups) rollover to the next monthly billing cycle.
+* Committed add-on credits purchased for annual contracts expire at the end of the contract cycle.
 
 #### On this page
 

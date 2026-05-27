@@ -1162,5 +1162,6 @@ public sealed partial class GeneratedDataScanServiceClientSnippets
     /// <remarks>
     /// This snippet has been automatically generated and should be regarded as a code template only.
     /// It will require modifications to work:
-    /// - It
+    /// - It may require correct/in-range values for request initialization.
+    /// - It may require
 ```

@@ -8,6 +8,10 @@ Overview of the Hex CLI](/docs/api-integrations/cli)
 
 Connect AI assistants to Hex through the Model Context Protocol (MCP).](/docs/api-integrations/mcp-server)
 
+[## 📄️External Apps
+
+Connect Hex's agent to external apps like Notion, Linear, and your own custom MCP-compatible tools.](/docs/api-integrations/external-apps)
+
 [## 📄️Hex Agent in Slack
 
 Receive Hex notifications directly in Slack and deliver scheduled run notifications from your Hex projects to Slack channels.](/docs/api-integrations/slack)

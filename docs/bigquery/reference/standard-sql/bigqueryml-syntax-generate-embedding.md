@@ -79,12 +79,12 @@ following ways:
   `ML.GENERATE_EMBEDDING` sends the request to a BigQuery ML
   [remote model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model)
   that represents a
-  [Vertex AI embedding model](/vertex-ai/generative-ai/docs/models#embeddings-models)
+  [Gemini Enterprise Agent Platform embedding model](/vertex-ai/generative-ai/docs/models#embeddings-models)
   or a
   [supported open model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#supported_open_models),
   and then returns the model's response.
 
-  The `ML.GENERATE_EMBEDDING` function works with the Vertex AI
+  The `ML.GENERATE_EMBEDDING` function works with the Agent Platform
   model to perform embedding tasks supported by that model. For more information
   on the types of tasks these models can perform, see the following documentation:
 
@@ -116,7 +116,7 @@ following ways:
 
 `ML.GENERATE_EMBEDDING` syntax differs depending on the
 BigQuery ML model you choose. If you use a remote model, it also
-differs depending on the Vertex AI model that your remote models
+differs depending on the Agent Platform model that your remote models
 targets. Choose the option appropriate for your use case.
 
 ### `gemini-embedding-001`
@@ -228,7 +228,7 @@ ML.GENERATE_EMBEDDING(
 * `DATASET`: the BigQuery dataset that
   contains the resource.
 * `MODEL_NAME`: the name of
-  a remote model over a Vertex AI
+  a remote model over an Agent Platform
   text embedding model.
 
   You can confirm what LLM is used by the remote model by opening the
@@ -379,7 +379,7 @@ ML.GENERATE_EMBEDDING(
 * `DATASET`: the BigQuery dataset that
   contains the resource.
 * `MODEL_NAME`: the name of
-  a remote model over a Vertex AI model.
+  a remote model over an Gemini Enterprise Agent Platform model.
   Supported models include `multimodalembedding@001` and
   `gemini-embedding-2-preview`
   ([Preview](https://cloud.google.com/products#product-launch-stages)).
@@ -652,4 +652,4 @@ ML.GENERATE_EMBEDDING(
       you provide.
   + The `multimodalembedding@001` model also outputs the following fields:
 
-    - `ml_generate_embedding_start_sec`: for video content, an `INT64`
+    - `ml_generate_embedding_start_sec`

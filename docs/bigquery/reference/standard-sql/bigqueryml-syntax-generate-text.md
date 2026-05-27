@@ -28,31 +28,31 @@ new queries, we recommend that you use `AI.GENERATE_TEXT` instead.
 
 The `ML.GENERATE_TEXT` function works by sending requests to a
 BigQuery ML remote model
-that represents a Vertex AI model, and then returning that model's
+that represents a Gemini Enterprise Agent Platform model, and then returning that model's
 response. The following types of remote models are supported:
 
 * [Remote models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned)
   over fine-tuned Gemini models.
 * [Remote models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model)
-  over LLMs in Vertex AI as models as a service.
+  over LLMs in Agent Platform as models as a service.
 * [Remote models over supported open models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open).
 
 Several of the `ML.GENERATE_TEXT` function's arguments provide the
-parameters that shape the Vertex AI model's response.
+parameters that shape the Agent Platform model's response.
 
 You can use the `ML.GENERATE_TEXT` function to perform tasks such as
 classification, sentiment analysis, image captioning, and transcription.
 
 Prompt design can strongly affect the responses returned by the
-Vertex AI model. For more information, see
+Agent Platform model. For more information, see
 [Introduction to prompting](/vertex-ai/generative-ai/docs/learn/prompts/introduction-prompt-design)
 or
-[Design multimodal prompts](/vertex-ai/docs/generative-ai/multimodal/design-multimodal-prompts).
+[Design multimodal prompts](/gemini-enterprise-agent-platform/models/capabilities/design-multimodal-prompts).
 
 ## Input
 
 The input you can provide to `ML.GENERATE_TEXT` varies depending on the
-Vertex AI model that you reference from your remote model.
+Agent Platform model that you reference from your remote model.
 
 ### Input for Gemini models
 
@@ -84,7 +84,7 @@ For all other types of models, you can analyze text data from a standard table.
 
 ## Syntax for standard tables
 
-`ML.GENERATE_TEXT` syntax differs depending on the Vertex AI
+`ML.GENERATE_TEXT` syntax differs depending on the Agent Platform
 model that your remote model references. Choose the option appropriate for your
 use case.
 
@@ -121,7 +121,7 @@ STRUCT(
 * `DATASET`: the dataset that contains the
   resource.
 * `MODEL`: the name of the remote model over the
-  Vertex AI model. For more information about how to create
+  Gemini Enterprise Agent Platform model. For more information about how to create
   this type of remote model, see
   [The `CREATE MODEL` statement for remote models over LLMs](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model).
 
@@ -169,7 +169,7 @@ charges for the
 **Note:** We recommend against using the
 [`LIMIT and OFFSET` clause](/bigquery/docs/reference/standard-sql/query-syntax#limit_and_offset_clause)
 in the prompt query. Using this clause causes the query to process all
-of the input data first and then apply `LIMIT` and `OFFSET`.**Note:** To minimize Vertex AI charges, write query results
+of the input data first and then apply `LIMIT` and `OFFSET`.**Note:** To minimize Agent Platform charges, write query results
 to a table and then reference that table in the `ML.GENERATE_TEXT`
 function. This can help you ensure that you are sending as few rows as
 possible to the model.
@@ -214,7 +214,7 @@ possible to the model.
   is an empty array.
 
 * `GROUND_WITH_GOOGLE_SEARCH`: a `BOOL` value that
-  determines whether the Vertex AI model uses
+  determines whether the Agent Platform model uses
   [Grounding with Google Search](/vertex-ai/generative-ai/docs/grounding/overview#ground-public)
   when generating responses. Grounding
   lets the model use additional information from the internet when
@@ -296,7 +296,7 @@ The model and input table must be in the same region.
 
 ### Claude
 
-You must enable Claude models in Vertex AI before you can
+You must enable Claude models in Gemini Enterprise Agent Platform before you can
 use them. For more information, see
 [Enable a partner model](/bigquery/docs/generate-text#enable-model).
 
@@ -327,7 +327,7 @@ STRUCT(
 * `DATASET`: the dataset that contains the
   resource.
 * `MODEL`: the name of the remote model over the
-  Vertex AI model. For more information about how to create
+  Gemini Enterprise Agent Platform model. For more information about how to create
   this type of remote model, see
   [The `CREATE MODEL` statement for remote models over LLMs](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model).
 
@@ -348,7 +348,7 @@ STRUCT(
 **Note:** We recommend against using the
 [`LIMIT and OFFSET` clause](/bigquery/docs/reference/standard-sql/query-syntax#limit_and_offset_clause)
 in the prompt query. Using this clause causes the query to process all
-of the input data first and then apply `LIMIT` and `OFFSET`.**Note:** To minimize Vertex AI charges, write query results
+of the input data first and then apply `LIMIT` and `OFFSET`.**Note:** To minimize Agent Platform charges, write query results
 to a table and then reference that table in the `ML.GENERATE_TEXT`
 function. This can help you ensure that you are sending as few rows as
 possible to the model.
@@ -410,7 +410,7 @@ The model and input table must be in the same region.
 
 ### Llama
 
-You must enable Llama models in Vertex AI before you can
+You must enable Llama models in Gemini Enterprise Agent Platform before you can
 use them. For more information, see
 [Enable a partner model](/bigquery/docs/generate-text#enable-model).
 
@@ -442,7 +442,7 @@ STRUCT(
 * `DATASET`: the dataset that contains the
   resource.
 * `MODEL`: the name of the remote model over the
-  Vertex AI model. For more information about how to create
+  Gemini Enterprise Agent Platform model. For more information about how to create
   this type of remote model, see
   [The `CREATE MODEL` statement for remote models over LLMs](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model).
 
@@ -463,7 +463,7 @@ STRUCT(
 **Note:** We recommend against using the
 [`LIMIT and OFFSET` clause](/bigquery/docs/reference/standard-sql/query-syntax#limit_and_offset_clause)
 in the prompt query. Using this clause causes the query to process all
-of the input data first and then apply `LIMIT` and `OFFSET`.**Note:** To minimize Vertex AI charges, write query results
+of the input data first and then apply `LIMIT` and `OFFSET`.**Note:** To minimize Agent Platform charges, write query results
 to a table and then reference that table in the `ML.GENERATE_TEXT`
 function. This can help you ensure that you are sending as few rows as
 possible to the model.
@@ -525,7 +525,7 @@ The model and input table must be in the same region.
 
 ### Mistral AI
 
-You must enable Mistral AI models in Vertex AI before you can
+You must enable Mistral AI models in Gemini Enterprise Agent Platform before you can
 use them. For more information, see
 [Enable a partner model](/bigquery/docs/generate-text#enable-model).
 
@@ -557,7 +557,7 @@ STRUCT(
 * `DATASET`: the dataset that contains the
   resource.
 * `MODEL`: the name of the remote model over the
-  Vertex AI model. For more information about how to create
+  Gemini Enterprise Agent Platform model. For more information about how to create
   this type of remote model, see
   [The `CREATE MODEL` statement for remote models over LLMs](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model).
 
@@ -578,7 +578,7 @@ STRUCT(
 **Note:** We recommend against using the
 [`LIMIT and OFFSET` clause](/bigquery/docs/reference/standard-sql/query-syntax#limit_and_offset_clause)
 in the prompt query. Using this clause causes the query to process all
-of the input data first and then apply `LIMIT` and `OFFSET`.**Note:** To minimize Vertex AI charges, write query results
+of the input data first and then apply `LIMIT` and `OFFSET`.**Note:** To minimize Agent Platform charges, write query results
 to a table and then reference that table in the `ML.GENERATE_TEXT`
 function. This can help you ensure that you are sending as few rows as
 possible to the model.
@@ -669,7 +669,7 @@ STRUCT(
 * `DATASET`: the dataset that contains the
   resource.
 * `MODEL`: the name of the remote model over the
-  Vertex AI model. For more information about how to create
+  Gemini Enterprise Agent Platform model. For more information about how to create
   this type of remote model, see
   [The `CREATE MODEL` statement for remote models over LLMs](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model).
 
@@ -690,7 +690,7 @@ STRUCT(
 **Note:** We recommend against using the
 [`LIMIT and OFFSET` clause](/bigquery/docs/reference/standard-sql/query-syntax#limit_and_offset_clause)
 in the prompt query. Using this clause causes the query to process all
-of the input data first and then apply `LIMIT` and `OFFSET`.**Note:** To minimize Vertex AI charges, write query results
+of the input data first and then apply `LIMIT` and `OFFSET`.**Note:** To minimize Agent Platform charges, write query results
 to a table and then reference that table in the `ML.GENERATE_TEXT`
 function. This can help you ensure that you are sending as few rows as
 possible to the model.
@@ -808,7 +808,7 @@ STRUCT(
   resource.
 * `DATASET`: the dataset that contains the
   resource.
-* `MODEL`: the name of the remote model over the Vertex AI
+* `MODEL`: the name of the remote model over the Gemini Enterprise Agent Platform
   model. For more information about how to create this type of remote
   model, see
   [The `CREATE MODEL` statement for remote models over LLMs](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model).
@@ -930,7 +930,4 @@ The model and input table must be in the same region.
 * `ml_generate_text_llm_result`: a `STRING` value that contains
   the generated text. This column is returned when `flatten_json_output`
   is `TRUE`.
-* `ml_generate_text_rai_result`: a `STRING` value that contains
-  the generated safety ratings. This column is returned when
-  `flatten_json_output` is `TRUE` and you have specified the
-  `safety_settings` argument in the
+* `ml_generate_text_rai_result`:

@@ -14,7 +14,7 @@ AI-recommended improvements to your workspace context, based on patterns in agen
 
 [## 🗃Context Management
 
-4 items](/docs/agent-management/context-management)
+5 items](/docs/agent-management/context-management)
 
 [## 📄️Agent personalization
 

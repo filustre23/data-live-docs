@@ -27,6 +27,14 @@ To get the latest product updates delivered to you, add the URL of this page to 
 reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators), or add the
 [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## May 26, 2026
+
+Feature
+
+The [Data Science Agent](/bigquery/docs/colab-data-science-agent) (DSA) for
+Colab Enterprise and BigQuery is now [generally
+available](https://cloud.google.com/products/#product-launch-stages) (GA).
+
 ## May 20, 2026
 
 Announcement
@@ -4216,12 +4224,4 @@ You can now view [stored column usage](/bigquery/docs/reference/rest/v2/Job#Stor
 
 ## January 27, 2025
 
-Libraries
-
-### Go
-
-#### [1.66.0](https://github.com/googleapis/google-cloud-go/compare/bigquery/v1.65.0...bigquery/v1.66.0) (2025-01-20)
-
-##### Features
-
-<
+L

@@ -21,7 +21,7 @@ unstructured data from BigQuery
 specify a schema to format the response from the model.
 
 The function works by sending requests to a BigQuery ML remote model
-that represents a Vertex AI Gemini model, and then returning
+that represents a Gemini Enterprise Agent Platform Gemini model, and then returning
 that model's response. The function supports remote models over any of the
 [generally available](/vertex-ai/generative-ai/docs/models#generally_available_models)
 or
@@ -29,13 +29,13 @@ or
 Gemini models.
 
 Several of the `AI.GENERATE_TABLE` function's arguments provide the
-parameters that shape the Vertex AI model's response.
+parameters that shape the Agent Platform model's response.
 
 You can use the `AI.GENERATE_TABLE` function to perform tasks such as
 classification, sentiment analysis, image captioning, and transcription.
 
 Prompt design can strongly affect the responses returned by the
-Vertex AI model. For more information, see
+Agent Platform model. For more information, see
 [Introduction to prompting](/vertex-ai/generative-ai/docs/learn/prompts/introduction-prompt-design).
 
 ## Input
@@ -122,7 +122,7 @@ STRUCT(
     | Struct field types | Struct value | Semantic equivalent |
     | --- | --- | --- |
     | `STRUCT<STRING, STRING, STRING>` | `('Describe the city ', my_city_column, ' in 15 words')` | 'Describe the city my\_city\_column\_value in 15 words' |
-    | `STRUCT<STRING, ObjectRefRuntime>` | `('Describe this city', OBJ.GET_ACCESS_URL(image_objectref_column, 'r'))` | 'Describe this city' image |**Note:** To minimize Vertex AI charges, write query results
+    | `STRUCT<STRING, ObjectRefRuntime>` | `('Describe this city', OBJ.GET_ACCESS_URL(image_objectref_column, 'r'))` | 'Describe this city' image |**Note:** To minimize Agent Platform charges, write query results
   to a table and then reference that table in the `AI.GENERATE_TABLE`
   function. This can help you ensure that you are sending as few rows as
   possible to the model.
@@ -339,7 +339,7 @@ for the given Gemini model, and also in the `US` and `EU` multi-regions.
 
 ## Quotas
 
-See [Vertex AI and Cloud AI service functions quotas and limits](/bigquery/quotas#cloud_ai_service_functions).
+See [Agent Platform and Cloud AI service functions quotas and limits](/bigquery/quotas#cloud_ai_service_functions).
 
 ## Known issues
 
@@ -371,7 +371,7 @@ or the
 
 * Get step-by-step instructions on how to
   [generate structured data](/bigquery/docs/generate-table) using your own data.
-* For more information about using Vertex AI models to
+* For more information about using Agent Platform models to
   generate text and embeddings, see
   [Generative AI overview](/bigquery/docs/generative-ai-overview).
 * For more information about using Cloud AI APIs to perform AI tasks, see
@@ -387,11 +387,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-05-20 UTC.
+Last updated 2026-05-26 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-20 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-26 UTC."],[],[]]

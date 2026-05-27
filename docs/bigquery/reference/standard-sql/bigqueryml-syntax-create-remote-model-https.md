@@ -16,7 +16,7 @@ Save and categorize content based on your preferences.
 
 This document describes the `CREATE MODEL` statement for creating remote models
 in BigQuery over custom models deployed to
-[Vertex AI](/vertex-ai/docs) by using SQL.
+[Gemini Enterprise Agent Platform](/gemini-enterprise-agent-platform/overview) by using SQL.
 Alternatively, you can use the Google Cloud console user interface to
 [create a model by using a UI](/bigquery/docs/create-machine-learning-model-console)
 ([Preview](https://cloud.google.com/products#product-launch-stages)) instead of constructing the SQL
@@ -24,7 +24,7 @@ statement yourself.
 
 After you create a remote model, you can use it with the
 [`ML.PREDICT` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict)
-to get predictions from the custom model deployed to Vertex AI.
+to get predictions from the custom model deployed to Agent Platform.
 
 ## `CREATE MODEL` syntax
 
@@ -75,9 +75,9 @@ For example, `myproject.mydataset.mymodel`.
 
 You must specify the `INPUT` and `OUTPUT` clauses when you create a remote
 model with an HTTPS endpoint over a custom model deployed to
-Vertex AI. The `INPUT` clause must contain the fields needed
-for the Vertex AI endpoint request, and the `OUTPUT` clause must
-contain the fields needed for the Vertex AI endpoint response.
+Agent Platform. The `INPUT` clause must contain the fields needed
+for the Gemini Enterprise Agent Platform endpoint request, and the `OUTPUT` clause must
+contain the fields needed for the Gemini Enterprise Agent Platform endpoint response.
 
 #### Supported data types
 
@@ -96,13 +96,13 @@ You can use the following BigQuery data types in the `INPUT` and
 #### Field name format
 
 The `INPUT` and `OUTPUT` field names must be identical as the field names of
-the Vertex AI endpoint request and response. For a Vertex AI
+the Gemini Enterprise Agent Platform endpoint request and response. For a Gemini Enterprise Agent Platform
 endpoint with a single `OUTPUT`, there is no field name in the response, and
 therefore you can specify any field name in the `OUTPUT` statement.
 
 **Example**
 
-If the Vertex AI request looks like the following example:
+If the Gemini Enterprise Agent Platform request looks like the following example:
 
 ```
 {
@@ -119,7 +119,7 @@ The `INPUT` statement must be:
 INPUT(f1 INT64, f2 FLOAT64, f3 STRING, f4 ARRAY<INT64>)
 ```
 
-If the Vertex AI response looks like the following example:
+If the Gemini Enterprise Agent Platform response looks like the following example:
 
 ```
 {
@@ -153,7 +153,7 @@ OUTPUT(out1 INT64, out2 INT64)
 BigQuery uses a
 [Cloud resource connection](/bigquery/docs/create-cloud-resource-connection)
 to interact with
-the Vertex AI endpoint.
+the Gemini Enterprise Agent Platform endpoint.
 
 The connection elements are as follows:
 
@@ -176,7 +176,7 @@ The connection elements are as follows:
   connection](/bigquery/docs/default-connections), specify `DEFAULT` instead of the connection string
   containing PROJECT\_ID.LOCATION.CONNECTION\_ID.
 
-If you are creating a remote model over a Vertex AI model that
+If you are creating a remote model over an Agent Platform model that
 uses supervised tuning, you need to grant the
 [Vertex AI Service Agent role](/vertex-ai/docs/general/access-control#aiplatform.serviceAgent)
 to the connection's service account in the project where you create the model.
@@ -215,7 +215,7 @@ Dedicated public endpoints, Private Service Connect endpoints, and
 private endpoints aren't supported.
 
 To learn more about deploying a model to a shared public endpoint, see
-[Create a shared public endpoint](/vertex-ai/docs/predictions/create-public-endpoint#create_a_shared_public_endpoint).
+[Create a shared public endpoint](/gemini-enterprise-agent-platform/machine-learning/predictions/create-public-endpoint#create_a_shared_public_endpoint).
 
 The following example shows how to create a remote model that uses a shared
 public endpoint:
@@ -232,7 +232,7 @@ For information about supported locations, see
 ## Example
 
 The following example creates a BigQuery ML remote model
-over a model deployed to a Vertex AI endpoint:
+over a model deployed to an Agent Platform endpoint:
 
 ```
 CREATE MODEL `project_id.mydataset.mymodel`
@@ -245,7 +245,7 @@ CREATE MODEL `project_id.mydataset.mymodel`
 ## What's next
 
 * Learn how to
-  [make predictions with remote models on Vertex AI](/bigquery/docs/bigquery-ml-remote-model-tutorial#create-remote-model).
+  [make predictions with remote models on Agent Platform](/bigquery/docs/bigquery-ml-remote-model-tutorial#create-remote-model).
 * For more information about the supported SQL statements and functions for
   remote models that use HTTPS endpoints, see
   [End-to-end user journey for each model](/bigquery/docs/e2e-journey).
@@ -257,11 +257,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-05-20 UTC.
+Last updated 2026-05-26 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-20 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-26 UTC."],[],[]]

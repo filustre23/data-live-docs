@@ -972,5 +972,5 @@ bq mk --table mydataset.mytable ./myschema.json
 ```
 from google.cloud import bigquery
 
-client = bigquery.
+client = bigquery.Client()
 ```

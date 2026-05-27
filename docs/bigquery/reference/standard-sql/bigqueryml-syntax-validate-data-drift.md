@@ -27,7 +27,7 @@ served at a particular point in time, which you can get by using the
 [`ML.FEATURES_AT_TIME` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature-time).
 
 You can optionally visualize the function output by using
-[Vertex AI model monitoring](/vertex-ai/docs/model-monitoring/overview).
+[Gemini Enterprise Agent Platform model monitoring](/gemini-enterprise-agent-platform/machine-learning/model-monitoring/overview).
 For more information, see
 [Monitoring visualization](/bigquery/docs/model-monitoring-overview#monitoring_visualization).
 
@@ -121,11 +121,11 @@ ML.VALIDATE_DATA_DRIFT(
 * `MODEL`:
   The name of a BigQuery ML model that is
   [registered](/bigquery/docs/managing-models-vertex#register_models) with
-  Vertex AI. When you specify this argument, the
+  Agent Platform. When you specify this argument, the
   `ML.VALIDATE_DATA_DRIFT` output includes the `visualization_link` column.
   The `visualization_link` column provides URLs
   that link to visualizations of the function results in
-  Vertex AI model monitoring.
+  Agent Platform model monitoring.
 
 ## Output
 
@@ -144,7 +144,7 @@ ML.VALIDATE_DATA_DRIFT(
   `input` column value between the two data sets.
 * `is_anomaly`: a `BOOL` column that indicates whether the `value` value is
   higher than the `threshold` value.
-* `visualization_link`: a URL that links to a Vertex AI
+* `visualization_link`: a URL that links to an Agent Platform
   visualization of the results for the given feature. The URL is formatted
   as follows:
 
@@ -276,11 +276,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-05-20 UTC.
+Last updated 2026-05-26 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-20 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-26 UTC."],[],[]]

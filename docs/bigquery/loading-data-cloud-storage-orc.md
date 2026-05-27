@@ -1010,5 +1010,5 @@ if (isset($job->info()['status']['errorResult'])) {
 ```
 import io
 
-from google.cloud
+from google.cloud import
 ```

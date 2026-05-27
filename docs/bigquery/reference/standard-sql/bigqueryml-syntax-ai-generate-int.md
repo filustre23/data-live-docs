@@ -31,7 +31,7 @@ This document describes the `AI.GENERATE_INT` function, which lets you
 analyze any combination of text and unstructured data. The function generates a
 `STRUCT` that contains an `INT64` value.
 
-The function works by sending requests to a Vertex AI Gemini
+The function works by sending requests to a Gemini Enterprise Agent Platform Gemini
 model, and then returning that model's response.
 
 You can use the `AI.GENERATE_INT` function to perform tasks such as
@@ -119,7 +119,7 @@ AI.GENERATE_INT(
     | `STRUCT<STRING, STRING, STRING>` | `('Describe the city of ', my_city_column, ' in 15 words')` | 'Describe the city of my\_city\_column\_value in 15 words' |
     | `STRUCT<STRING, ObjectRefRuntime>` | `('Describe the following city', OBJ.GET_ACCESS_URL(image_objectref_column, 'r'))` | 'Describe the following city image' |
 
-* `ENDPOINT`: a `STRING` value that specifies the Vertex AI
+* `ENDPOINT`: a `STRING` value that specifies the Agent Platform
   endpoint to use for the model. You can specify any
   [generally available](/vertex-ai/generative-ai/docs/models#generally_available_models)
   or
@@ -178,7 +178,7 @@ AI.GENERATE_INT(
   + `SHARED`: The function only uses [dynamic shared quota (DSQ)](/vertex-ai/generative-ai/docs/dynamic-shared-quota).
   + `DEDICATED`: The function only uses [Provisioned Throughput](/vertex-ai/generative-ai/docs/provisioned-throughput/overview) quota. The function returns an invalid
     query error if Provisioned Throughput quota isn't available. For more information,
-    see [Use Vertex AI Provisioned Throughput](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate#provisioned-throughput).
+    see [Use Agent Platform Provisioned Throughput](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate#provisioned-throughput).
   + `UNSPECIFIED`: The function uses quota as follows:
 
     - If you haven't purchased Provisioned Throughput quota,
@@ -269,15 +269,15 @@ processed by your complex queries, we
 recommended that you write the results of your query
 to a separate table beforehand, and then
 perform the Gemini inference directly on that materialized table.
-For information about how to view inference charges that you incur in Vertex AI, see
+For information about how to view inference charges that you incur in Agent Platform, see
 [Track costs](/bigquery/docs/generative-ai-overview#track_costs). To estimate
 the token count of text input, use the
 [`AI.COUNT_TOKENS` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-count-tokens).
 
-## Use Vertex AI Provisioned Throughput
+## Use Agent Platform Provisioned Throughput
 
 You can use
-[Vertex AI Provisioned Throughput](/vertex-ai/generative-ai/docs/provisioned-throughput/overview)
+[Agent Platform Provisioned Throughput](/vertex-ai/generative-ai/docs/provisioned-throughput/overview)
 with the `AI.GENERATE_INT` function to provide consistent high throughput for
 requests. The remote model that you reference in the `AI.GENERATE_INT` function
 must use a
@@ -318,11 +318,11 @@ multi-regions.
 
 ## Quotas
 
-See [Vertex AI and Cloud AI service functions quotas and limits](/bigquery/quotas#cloud_ai_service_functions).
+See [Agent Platform and Cloud AI service functions quotas and limits](/bigquery/quotas#cloud_ai_service_functions).
 
 ## What's next
 
-* For more information about using Vertex AI models to
+* For more information about using Agent Platform models to
   generate text and embeddings, see
   [Generative AI overview](/bigquery/docs/generative-ai-overview).
 * For more information about using Cloud AI APIs to perform AI tasks, see
@@ -338,11 +338,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-05-20 UTC.
+Last updated 2026-05-26 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-20 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-26 UTC."],[],[]]

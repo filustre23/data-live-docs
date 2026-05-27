@@ -1235,3 +1235,7 @@ ALTER COLUMN column_name SET OPTIONS (
 ```
 
 下列範例使用 `ALTER COLUMN SET OPTIONS`，替換資料表中現有資料欄的資料政策：
+
+```
+ALTER
+```

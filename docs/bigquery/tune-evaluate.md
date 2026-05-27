@@ -16,15 +16,15 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 使用微調和評估功能提升模型效能
 
-本文說明如何建立參照 [Vertex AI `gemini-2.0-flash-001` 模型的 BigQuery ML [遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw)。](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models?hl=zh-tw#gemini-models)接著，您可以使用[監督式微調](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned?hl=zh-tw#supervised_tuning)，以新訓練資料微調模型，然後使用 [`ML.EVALUATE` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate?hl=zh-tw)評估模型。
+本文說明如何建立參照 [Gemini Enterprise Agent Platform `gemini-2.0-flash-001` 模型的 BigQuery ML [遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw)](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models?hl=zh-tw#gemini-models)。接著，您可以使用[監督式微調](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned?hl=zh-tw#supervised_tuning)，以新訓練資料微調模型，然後使用 [`ML.EVALUATE` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate?hl=zh-tw)評估模型。
 
-如果您需要自訂代管的 Vertex AI 模型，例如難以在提示中簡潔定義模型的預期行為，或是提示無法持續產生預期結果，即可使用調整功能。監督式微調也會透過下列方式影響模型：
+如果需要自訂代管的 Agent Platform 模型，例如模型預期行為難以在提示中簡潔定義，或提示無法持續產生預期結果，即可使用調整功能。監督式微調也會透過下列方式影響模型：
 
-* 引導模型以特定風格回覆，例如更簡潔或更詳細。
+* 引導模型回覆特定風格的內容，例如更簡潔或更詳細。
 * 教導模型新的行為，例如以特定角色回應提示。
 * 讓模型使用新資訊更新自己。
 
-在本教學課程中，目標是讓模型生成的文字風格和內容，盡可能符合提供的基準真相內容。
+在本教學課程中，目標是讓模型生成的文字風格和內容，盡可能符合提供的真值內容。
 
 ## 必要的角色
 
@@ -61,12 +61,12 @@ Google uses AI technology to translate content into your preferred language. AI 
    **選取或建立專案所需的角色**
 
    * **選取專案**：選取專案時，不需要具備特定 IAM 角色，只要您已獲授角色，即可選取任何專案。
-   * **建立專案**：如要建立專案，您需要「專案建立者」角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   * **建立專案**：如要建立專案，您需要具備專案建立者角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
    **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，而不要選取現有專案。完成這些步驟後，您就可以刪除專案，並移除與該專案相關聯的所有資源。
 
    [前往專案選取器](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
 2. [確認專案已啟用計費功能 Google Cloud](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project) 。
-3. 啟用 BigQuery、BigQuery Connection、Vertex AI 和 Compute Engine API。
+3. 啟用 BigQuery、BigQuery Connection、Agent Platform API 和 Compute Engine API。
 
    **啟用 API 時所需的角色**
 
@@ -82,7 +82,7 @@ Google uses AI technology to translate content into your preferred language. AI 
   BigQuery.
 * **BigQuery ML:** You incur costs for the model that you
   create and the processing that you perform in BigQuery ML.
-* **Vertex AI:** You incur costs for calls to and
+* **Gemini Enterprise Agent Platform:** You incur costs for calls to and
   supervised tuning of the `gemini-2.0-flash-001` model.
 
 如要根據預測用量估算費用，請使用 [Pricing Calculator](https://docs.cloud.google.com/products/calculator?hl=zh-tw)。
@@ -93,7 +93,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 * [BigQuery 儲存空間定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#storage)
 * [BigQuery ML 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#bqml)
-* [Vertex AI 定價](https://cloud.google.com/vertex-ai/pricing?hl=zh-tw)
+* [Agent Platform 定價](https://cloud.google.com/vertex-ai/pricing?hl=zh-tw)
 
 # 建立資料集
 
@@ -109,7 +109,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 4. 在「建立資料集」頁面中，執行下列操作：
 
    * 在「Dataset ID」(資料集 ID) 中輸入 `bqml_tutorial`。
-   * 針對「位置類型」選取「多區域」，然後選取「美國」。
+   * 針對「Location type」(位置類型) 選取「Multi-region」(多區域)，然後選取「US」(美國)。
    * 其餘設定請保留預設狀態，然後按一下「建立資料集」。
 
 ### bq
@@ -167,7 +167,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 建立基準模型
 
-透過 Vertex AI `gemini-2.0-flash-001` 模型建立[遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw)。
+透過 Gemini Enterprise Agent Platform `gemini-2.0-flash-001` 模型建立[遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw)。
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -180,7 +180,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    OPTIONS (ENDPOINT ='gemini-2.0-flash-001');
    ```
 
-   查詢作業會在幾秒內完成，完成後，`gemini_baseline` 模型會顯示在「Explorer」窗格的 `bqml_tutorial` 資料集中。由於查詢使用 `CREATE MODEL` 陳述式建立模型，因此不會有查詢結果。
+   查詢作業會在幾秒內完成，完成後，`gemini_baseline` 模型會顯示在「Explorer」窗格的 `bqml_tutorial` 資料集中。由於查詢是使用 `CREATE MODEL` 陳述式建立模型，因此不會有查詢結果。
 
 ## 查看基準模型成效
 
@@ -351,11 +351,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-21 (世界標準時間)。
+上次更新時間：2026-05-27 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-21 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-27 (世界標準時間)。"],[],[]]

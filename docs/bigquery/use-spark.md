@@ -92,7 +92,7 @@ Google uses AI technology to translate content into your preferred language. AI 
        - [工作階段服務帳戶的服務帳戶使用者 (roles/iam.serviceAccountUser) 角色](https://docs.cloud.google.com/iam/docs/service-account-permissions?hl=zh-tw#user-role)。這個角色包含模擬服務帳戶所需的 `iam.serviceAccounts.actAs` 權限。
      + 服務帳戶憑證：如要為筆記本工作階段指定服務帳戶憑證，而非使用者憑證，[工作階段服務帳戶](https://docs.cloud.google.com/dataproc-serverless/docs/concepts/service-account?hl=zh-tw)必須具備下列角色：
        - [Dataproc Worker (`roles/dataproc.worker` 角色)](https://docs.cloud.google.com/iam/docs/roles-permissions/dataproc?hl=zh-tw#dataproc.worker)
-   * 筆記本執行階段：除非您選取其他執行階段，否則筆記本會使用預設的 Vertex AI 執行階段。如要定義自己的執行階段，請在 Google Cloud 控制台的「執行階段」[頁面](https://console.cloud.google.com/vertex-ai/colab/runtimes?hl=zh-tw)建立執行階段。**注意**，使用 [NumPy 程式庫](https://numpy.org/)時，請在筆記本執行階段使用 Spark 3.5 支援的 NumPy 1.26 版。
+   * Notebook 執行階段：除非您選取其他執行階段，否則 Notebook 會使用預設的 Gemini Enterprise Agent Platform 執行階段。如要定義自己的執行階段，請在 Google Cloud 控制台的「執行階段」[頁面](https://console.cloud.google.com/vertex-ai/colab/runtimes?hl=zh-tw)建立執行階段。**注意**，使用 [NumPy 程式庫](https://numpy.org/)時，請在筆記本執行階段使用 Spark 3.5 支援的 NumPy 1.26 版。
 
 ## 定價
 
@@ -162,7 +162,7 @@ spark = (
 
 1. 在編輯器窗格的分頁列中，按一下「+」符號旁的arrow\_drop\_down下拉式箭頭，然後點選「筆記本」。
 2. 在「從範本開始」下方，按一下「使用 Spark 查詢」，然後點選「使用範本」，將程式碼插入筆記本。
-3. 請按照「[附註](#notes)」一節的說明指定變數。
+3. 如「[附註](#notes)」所述，指定變數。
 4. 您可以刪除插入筆記本中的任何其他程式碼範例儲存格。
 
 ```
@@ -200,13 +200,13 @@ spark = (
 
 在筆記本中建立 Spark 工作階段後，即可使用該工作階段在筆記本中執行 Spark 筆記本程式碼。
 
-**支援 Spark Connect PySpark API：**Spark Connect 筆記本工作階段支援大部分的 [PySpark API](https://spark.apache.org/docs/latest/api/python/reference/index.html)，包括 [DataFrame](https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/dataframe.html)、[Functions](https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/functions.html) 和 [Column](https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/column.html)，但不支援 [SparkContext](https://spark.apache.org/docs/latest/api/python/reference/api/pyspark.SparkContext.html) 和 [RDD](https://spark.apache.org/docs/latest/api/python/reference/api/pyspark.RDD.html) 等其他 PySpark API。詳情請參閱「[Spark 3.5 支援的項目](https://spark.apache.org/docs/latest/spark-connect-overview.html#what-is-supported)」。
+**支援 Spark Connect PySpark API：**Spark Connect 筆記本工作階段支援大多數 [PySpark API](https://spark.apache.org/docs/latest/api/python/reference/index.html)，包括 [DataFrame](https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/dataframe.html)、[Functions](https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/functions.html) 和 [Column](https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/column.html)，但不支援 [SparkContext](https://spark.apache.org/docs/latest/api/python/reference/api/pyspark.SparkContext.html) 和 [RDD](https://spark.apache.org/docs/latest/api/python/reference/api/pyspark.RDD.html) 等其他 PySpark API。詳情請參閱「[Spark 3.5 支援的項目](https://spark.apache.org/docs/latest/spark-connect-overview.html#what-is-supported)」。
 
 **提示：** 您可以查看 [Spark SQL API 參考資料](https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/index.html)，瞭解 Spark Connect 是否支援某個 API。支援的 API 說明文件會顯示「支援 Spark Connect」訊息：
 
 **Spark Connect 筆記本直接寫入**：BigQuery Studio 筆記本中的 Spark 工作階段會預先設定 [Spark BigQuery 連接器](https://docs.cloud.google.com/dataproc/docs/tutorials/bigquery-connector-spark-example?hl=zh-tw)，以便直接寫入資料。DIRECT 寫入方法會使用 [BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api?hl=zh-tw)，將資料直接寫入 BigQuery；INDIRECT 寫入方法 (Managed Service for Apache Spark 批次作業的預設方法) 會將資料寫入中繼 Cloud Storage 值區，然後將資料寫入 BigQuery (如要進一步瞭解 INDIRECT 寫入，請參閱「[在 BigQuery 間讀寫資料](https://docs.cloud.google.com/dataproc/docs/tutorials/bigquery-connector-spark-example?hl=zh-tw#read-and-write-data-from-and-to-bigquery)」)。
 
-**Managed Service for Apache Spark 專屬 API：**Managed Service for Apache Spark 擴充了 `addArtifacts` 方法，可簡化動態將 `PyPI` 套件新增至 Spark 工作階段的程序。您可以採用 [`version-scheme`](https://packaging.python.org/en/latest/specifications/version-specifiers/#examples-of-compliant-version-schemes) 格式指定清單 (類似於 `pip install`)。這會指示 Spark Connect 伺服器在所有叢集節點上安裝套件及其依附元件，讓工作站可將這些套件用於 UDF。
+**Managed Service for Apache Spark 專屬 API：**Managed Service for Apache Spark 擴充了 `addArtifacts` 方法，可簡化將 `PyPI` 套件動態新增至 Spark 工作階段的程序。您可以採用 [`version-scheme`](https://packaging.python.org/en/latest/specifications/version-specifiers/#examples-of-compliant-version-schemes) 格式指定清單 (類似於 `pip install`)。這會指示 Spark Connect 伺服器在所有叢集節點上安裝套件及其依附元件，讓工作站可將這些套件用於 UDF。
 
 以下範例會在叢集上安裝指定的 `textdistance` 版本和最新相容的 `random2` 程式庫，讓使用 `textdistance` 和 `random2` 的 UDF 在工作節點上執行。
 
@@ -345,7 +345,7 @@ df.printSchema()
 注意：
 
 * PROJECT\_ID：專案 ID，列於[Google Cloud 控制台資訊主頁](https://console.cloud.google.com/home/dashboard?hl=zh-tw)的「專案資訊」部分。
-* REGION 和 SUBNET\_NAME：指定 [Compute Engine 區域](https://docs.cloud.google.com/compute/docs/regions-zones?hl=zh-tw#available)，以及工作階段區域中的子網路名稱。Managed Service for Apache Spark 會在指定的子網路上啟用[Private Google Access (PGA)](https://docs.cloud.google.com/vpc/docs/private-google-access?hl=zh-tw)。
+* REGION 和 SUBNET\_NAME：指定 [Compute Engine 區域](https://docs.cloud.google.com/compute/docs/regions-zones?hl=zh-tw#available)，以及工作階段區域中的子網路名稱。Managed Service for Apache Spark 會在指定子網路上啟用[Private Google Access (PGA)](https://docs.cloud.google.com/vpc/docs/private-google-access?hl=zh-tw)。
 * LOCATION：預設值為 `BigQuery_metastore_config.location` 和 `spark.sql.catalog.{catalog}.gcp_location`，但您可以選擇任何`US`[支援的 BigQuery 位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#supported_locations)。
 * BUCKET 和 WAREHOUSE\_DIRECTORY：用於 Iceberg 倉儲目錄的 Cloud Storage 值區和資料夾。
 * CATALOG 和 NAMESPACE：Iceberg 目錄名稱和命名空間會合併，用於識別 Iceberg 資料表 (`catalog.namespace.table_name`)。
@@ -417,7 +417,7 @@ sdf = spark.read.format('bigquery') \
 這項產品或功能適用《[服務專屬條款](https://docs.cloud.google.com/terms/service-terms?hl=zh-tw#1)》中「一般服務條款」一節的《正式發布前產品條款》。正式發布前的產品和功能是按照「原樣」提供，支援範圍可能有限。
 詳情請參閱[推出階段說明](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
 
-您可以問問 Gemini Code Assist，請它在筆記本中生成 PySpark 程式碼。Gemini Code Assist 會擷取並使用相關的 BigQuery 和 Dataproc Metastore 資料表及其結構定義，生成程式碼回覆。
+您可以要求 Gemini Code Assist 在筆記本中生成 PySpark 程式碼。Gemini Code Assist 會擷取並使用相關的 BigQuery 和 Dataproc Metastore 資料表及其結構定義，生成程式碼回覆。
 
 如要在筆記本中生成 Gemini Code Assist 程式碼，請按照下列步驟操作：
 
@@ -426,7 +426,7 @@ sdf = spark.read.format('bigquery') \
    點選「生成」。
 2. 在「生成」編輯器中輸入自然語言提示，然後按一下 `enter`。**請務必在提示中加入 `spark` 或 `pyspark` 關鍵字。**
 
-   提示範例：
+   提示詞範例：
 
    ```
    create a spark dataframe from order_items and filter to orders created in 2024
@@ -566,19 +566,19 @@ sdf = spark.read.format('bigquery') \
 
 ## 排解筆記本錯誤
 
-如果含有 Spark 程式碼的儲存格發生失敗，您可以按一下儲存格輸出內容中的「互動式工作階段詳細資料檢視畫面」連結，排解錯誤 (請參閱「[字數統計和 Iceberg 表格範例](#dataproc_serverless_bq_notebook-Wordcount)」)。
+如果含有 Spark 程式碼的儲存格發生失敗情形，您可以按一下儲存格輸出內容中的「Interactive Session Detail View」(互動式工作階段詳細資料檢視畫面) 連結，排解錯誤 (請參閱「[Wordcount and Iceberg table examples](#dataproc_serverless_bq_notebook-Wordcount)」)。
 
 如果遇到 Notebook 程式碼錯誤，通常只要前往 **Spark UI** 中的最後一個 Spark 工作，就能取得額外資訊，協助您偵錯失敗的工作。
 
 ### 已知問題和解決方案
 
-**錯誤**：使用 Python 版本 `3.10` 建立的 [Notebook 執行階段](https://console.cloud.google.com/vertex-ai/colab/runtimes?hl=zh-tw)，嘗試連線至 Spark 工作階段時可能會導致 `PYTHON_VERSION_MISMATCH` 錯誤。
+**錯誤**：使用 Python 版本 `3.10` 建立的[筆記本執行階段](https://console.cloud.google.com/vertex-ai/colab/runtimes?hl=zh-tw)，嘗試連線至 Spark 工作階段時可能會導致 `PYTHON_VERSION_MISMATCH` 錯誤。
 
 **解決方案**：使用 Python 版本 `3.11` 重新建立執行階段。
 
 ## 後續步驟
 
-* YouTube 影片示範：[善用與 BigQuery 整合的 Apache Spark 強大功能](https://www.youtube.com/watch?v=DIZn6Nuur7k&hl=zh-tw)。
+* YouTube 影片示範：[Unleashing the power of Apache Spark integrated with BigQuery](https://www.youtube.com/watch?v=DIZn6Nuur7k&hl=zh-tw)。
 * [將 Lakehouse 執行階段目錄與 Managed Service for Apache Spark 搭配使用](https://docs.cloud.google.com/bigquery/docs/bqms-use-dataproc?hl=zh-tw)
 * [將 Lakehouse 執行階段目錄與 Managed Service for Apache Spark 搭配使用](https://docs.cloud.google.com/bigquery/docs/bqms-use-dataproc-serverless?hl=zh-tw)
 
@@ -589,11 +589,11 @@ sdf = spark.read.format('bigquery') \
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-21 (世界標準時間)。
+上次更新時間：2026-05-26 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-21 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-26 (世界標準時間)。"],[],[]]

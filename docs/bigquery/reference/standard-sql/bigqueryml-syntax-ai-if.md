@@ -15,7 +15,7 @@ Save and categorize content based on your preferences.
 # The AI.IF function
 
 This document describes the `AI.IF` function, which uses a
-Vertex AI Gemini model to
+Gemini Enterprise Agent Platform Gemini model to
 evaluate a condition described in natural language and returns a `BOOL`.
 
 You can use the `AI.IF` function to filter and join data based on conditions
@@ -52,7 +52,7 @@ requirements:
   for Gemini.
 
 This function passes your input to a Gemini model and
-incurs charges in Vertex AI each time it's called.
+incurs charges in Gemini Enterprise Agent Platform each time it's called.
 For information about how to view these charges, see
 [Track costs](/bigquery/docs/generative-ai-overview#track_costs).
 
@@ -117,7 +117,7 @@ AI.IF(
 
   For information about configuring permissions, see [Set
   permissions for BigQuery ML generative AI functions that call Vertex AI models](/bigquery/docs/permissions-for-ai-functions).
-* `ENDPOINT`: a `STRING` value that specifies the Vertex AI
+* `ENDPOINT`: a `STRING` value that specifies the Agent Platform
   endpoint to use for the model. You can specify any
   [generally available](/vertex-ai/generative-ai/docs/models#generally_available_models)
   or
@@ -176,7 +176,7 @@ AI.IF(
 `AI.IF` returns a `BOOL` based on evaluation of the condition in the
 input prompt.
 
-If the call to Vertex AI is unsuccessful for any reason,
+If the call to Gemini Enterprise Agent Platform is unsuccessful for any reason,
 such as exceeding quota or model unavailability, then the function returns
 `NULL`.
 
@@ -419,7 +419,7 @@ See [Generative AI functions quotas and limits](/bigquery/quotas#generative_ai_f
 
 ## What's next
 
-* For more information about using Vertex AI models to
+* For more information about using Agent Platform models to
   generate text and embeddings, see
   [Generative AI overview](/bigquery/docs/generative-ai-overview).
 * For more information about using Cloud AI APIs to perform AI tasks, see
@@ -437,11 +437,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-05-20 UTC.
+Last updated 2026-05-26 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-20 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-26 UTC."],[],[]]

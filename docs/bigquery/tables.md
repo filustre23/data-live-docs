@@ -1303,5 +1303,5 @@ func printTableInfo(w io.Writer, projectID, datasetID, tableID string) error {
 	// projectID := "my-project-id"
 	// datasetID := "mydataset"
 	// tableID := "mytable"
-	ctx
+	ctx := context.
 ```

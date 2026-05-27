@@ -71,19 +71,19 @@ Hive Metastore 資料表轉移作業有下列限制：
 {
   "filters": [
     {
-      "table": "db1.table1", "condition": "IN", "partition":
+      "table": "db1.table1", "condition": "IN", "partitions":
       ["partition1=value1/partition2=value2"]
     },
     {
-      "table": "db1.table2", "condition": "LESS_THAN", "partition":
+      "table": "db1.table2", "condition": "LESS_THAN", "partitions":
       ["partition1;value1"]
     },
     {
-      "table": "db1.table3", "condition": "GREATER_THAN", "partition":
+      "table": "db1.table3", "condition": "GREATER_THAN", "partitions":
       ["partition1;value1"]
     },
     {
-      "table": "db1.table4", "condition": "RANGE", "partition":
+      "table": "db1.table4", "condition": "RANGE", "partitions":
       ["partition1;value1;value2"]
     }
   ]
@@ -92,16 +92,16 @@ Hive Metastore 資料表轉移作業有下列限制：
 
 #### 篩選條件
 
-JSON 檔案中的 `condition` 欄位支援下列值，每個值都有 `partition` 陣列的特定格式：
+JSON 檔案中的 `condition` 欄位支援下列值，每個值都有 `partitions` 陣列的特定格式：
 
-* **`IN`**：指定要納入的確切分割區路徑。`partition` 陣列包含字串，代表相對於資料表基本路徑的分割區確切目錄結構 (例如 `["partition_key1=value1/partition_key2=value2"]`)。您可以在陣列中指定多個路徑。
-* **`LESS_THAN`**：包含主要分區鍵值小於或等於指定值的分區。`partition` 陣列必須包含格式為 `["<partition_key>;<value>"]` 的單一字串。
-* **`GREATER_THAN`**：包含主要分區鍵值大於或等於指定值的分區。`partition` 陣列必須包含格式為 `["<partition_key>;<value>"]` 的單一字串。
-* **`RANGE`**：包含主要分區鍵值落在指定範圍內 (含) 的分區。`partition` 陣列必須包含格式為 `["<partition_key>;<start_value>;<end_value>"]` 的單一字串。
+* **`IN`**：指定要納入的確切分割區路徑。`partitions` 陣列包含代表分割區確切目錄結構的字串，這些結構與資料表基本路徑相關 (例如 `["partition_key1=value1/partition_key2=value2"]`)。您可以在陣列中指定多個路徑。
+* **`LESS_THAN`**：包含主要分區鍵值小於或等於指定值的分區。`partitions` 陣列必須包含格式為 `["<partition_key>;<value>"]` 的單一字串。
+* **`GREATER_THAN`**：包含主要分區鍵值大於或等於指定值的分區。`partitions` 陣列必須包含格式為 `["<partition_key>;<value>"]` 的單一字串。
+* **`RANGE`**：包含主要分區鍵值落在指定範圍內 (含) 的分區。`partitions` 陣列必須包含格式為 `["<partition_key>;<start_value>;<end_value>"]` 的單一字串。
 
 篩選條件須遵守下列規則和限制：
 
-* **包含的值：**`GREATER_THAN`、`LESS_THAN` 和 `RANGE` 的篩選條件包含提供的值。舉例來說，值為 `2023` 的 `LESS_THAN` 篩選器會納入 `2023` 之前 (含 `2023`) 的所有分區。
+* **包含的值：**`GREATER_THAN`、`LESS_THAN` 和 `RANGE` 的篩選條件包含提供的值。舉例來說，如果篩選器值為 `2023`，則會納入 `2023` 之前 (含 `2023`) 的所有分區。`LESS_THAN`
 * **刪除分區：**如果現有的目的地分區符合分區篩選器，但來源中已不再存在，系統就會從目的地中繼存放區捨棄該分區。不過，該資料分割的基礎資料檔案不會從 Cloud Storage 目的地值區刪除。
 * **單一表格限制：**
   + 同一個表格中不得包含多個篩選器。
@@ -111,7 +111,7 @@ JSON 檔案中的 `condition` 欄位支援下列值，每個值都有 `partition
 
 ## 事前準備
 
-排定 Hive Metastore 轉移作業之前，請先執行本節中的步驟。
+排定 Hive Metastore 轉移作業前，請先執行本節中的步驟。
 
 ### 啟用 API
 
@@ -163,7 +163,9 @@ JSON 檔案中的 `condition` 欄位支援下列值，每個值都有 `partition
 
 ### 產生 Apache Hive 的中繼資料檔案
 
-執行 `dwh-migration-dumper` 工具，[擷取](https://docs.cloud.google.com/bigquery/docs/hadoop-metadata?hl=zh-tw#apache-hive) Apache Hive 的中繼資料。這項工具會產生名為 `hive-dumper-output.zip` 的檔案，可上傳至 Cloud Storage bucket。本文將這個 Cloud Storage bucket 稱為 `DUMPER_BUCKET`。
+執行 `dwh-migration-dumper` 工具，[擷取
+Apache Hive 的中繼資料](https://docs.cloud.google.com/bigquery/docs/hadoop-metadata?hl=zh-tw#apache-hive)。
+這項工具會產生名為 `hive-dumper-output.zip` 的檔案，可上傳至 Cloud Storage bucket。本文將這個 Cloud Storage bucket 稱為 `DUMPER_BUCKET`。
 
 您也可以使用指令碼，排定定期上傳時間。詳情請參閱[使用 `cron` 工作自動執行傾印工具](#automate-dumper)。
 
@@ -183,7 +185,7 @@ JSON 檔案中的 `condition` 欄位支援下列值，每個值都有 `partition
 
 ### Amazon S3
 
-從 Amazon S3 移轉資料時，不需要使用代理程式。
+從 Amazon S3 轉移資料時，不需要使用代理程式。
 
 如要設定 Storage 移轉服務以進行 Amazon S3 移轉作業，請按照下列步驟操作：
 
@@ -212,7 +214,7 @@ JSON 檔案中的 `condition` 欄位支援下列值，每個值都有 `partition
    [前往「資料轉移」頁面](https://console.cloud.google.com/bigquery/transfers?hl=zh-tw)
 2. 按一下 add「建立轉移作業」。
 3. 在「來源類型」部分，從「來源」清單中選取「Hive Metastore」。
-4. 在「位置」下方選取位置類型，然後選取區域。
+4. 在「位置」部分，選取位置類型，然後選取區域。
 5. 在「Transfer config name」(轉移設定名稱) 部分，「Display name」(顯示名稱) 請輸入資料移轉作業名稱。
 6. 在「Schedule options」(排程選項) 部分執行下列操作：
 
@@ -228,7 +230,7 @@ JSON 檔案中的 `condition` 欄位支援下列值，每個值都有 `partition
       * `db1.table1;db2.table2` 會比對 db1 中的 table1 和 db2 中的 table2。
    3. 在「BQMS discovery dump gcs path」(BQMS 探索傾印 GCS 路徑) 中，輸入您在[為 Apache Hive 建立中繼資料檔案](#generate-metadata-dump-for-apache-hive)時產生的 `hive-dumper-output.zip` 檔案路徑。如果您使用 [dumper 輸出自動化功能搭配 `cron`](#automate-dumper)，請提供 `--gcs-base-path` 中設定的 Cloud Storage 資料夾路徑，其中包含 dumper 輸出 ZIP 檔案。
       1. 在「儲存空間類型」中，選取下列其中一個選項。只有在「轉移策略」設為 `FULL_TRANSFER` 時，才能使用這個欄位：
-      2. `HDFS`：如果檔案儲存空間是 `HDFS`，請選取這個選項。在「STS agent pool name」(STS 代理程式集區名稱) 欄位中，您必須提供[設定 Storage Transfer Agent](#configure-sts) 時建立的代理程式集區名稱。
+      2. `HDFS`：如果檔案儲存空間是 `HDFS`，請選取這個選項。在「STS 代理程式集區名稱」欄位中，您必須提供[設定 Storage Transfer Service 代理程式](#configure-sts)時建立的代理程式集區名稱。
       3. `S3`：如果檔案儲存空間是 `Amazon S3`，請選取這個選項。在「Access key ID」(存取金鑰 ID) 和「Secret access key」(存取密鑰) 欄位中，您必須提供[設定存取憑證](#configure-sts)時建立的存取金鑰 ID 和存取密鑰。
       4. `AZURE`：如果檔案儲存空間是 `Azure Blob Storage`，請選取這個選項。在「SAS token」(SAS 權杖) 欄位中，您必須提供[設定存取憑證](#configure-sts)時建立的 SAS 權杖。
    4. 選用：在「Partition Filter gcs path」(分區篩選器 GCS 路徑) 欄位中，輸入自訂篩選器 JSON 檔案的完整 Cloud Storage 路徑，以[篩選來源資料表中的分區](#filter-partitions)。
@@ -315,7 +317,7 @@ JSON 檔案中的 `condition` 欄位支援下列值，每個值都有 `partition
 
 ### 安排自動化動作
 
-1. 將下列指令碼儲存到本機檔案。這個指令碼的設計宗旨，是透過 `cron` Daemon 進行設定及執行，自動擷取及上傳傾印器輸出內容。
+1. 將下列指令碼儲存至本機檔案。這項指令碼的設計宗旨，是透過 `cron` Daemon 設定及執行，自動擷取及上傳傾印器輸出內容。
 
    ```
    #!/bin/bash

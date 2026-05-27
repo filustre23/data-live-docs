@@ -15,7 +15,7 @@ Save and categorize content based on your preferences.
 # The CREATE MODEL statement for AutoML models
 
 This document describes the `CREATE MODEL` statement for creating
-[AutoML classification and regression models](/vertex-ai/docs/tabular-data/classification-regression/overview)
+[AutoML classification and regression models](/gemini-enterprise-agent-platform/machine-learning/tabular-data/classification-regression/overview)
 in BigQuery by using SQL. Alternatively, you can use the
 Google Cloud console user interface to
 [create a model by using a UI](/bigquery/docs/create-machine-learning-model-console)
@@ -33,9 +33,9 @@ both types of AutoML models with the
 to perform [anomaly detection](/bigquery/docs/anomaly-detection-overview).
 
 BigQuery ML uses the default values for
-[AutoML training options](/vertex-ai/docs/tabular-data/classification-regression/train-model),
-including [data splitting](/vertex-ai/docs/tabular-data/data-splits) and
-[optimization functions](/vertex-ai/docs/tabular-data/classification-regression/train-model#optimization-objectives).
+[AutoML training options](/gemini-enterprise-agent-platform/machine-learning/tabular-data/classification-regression/train-model),
+including [data splitting](/gemini-enterprise-agent-platform/machine-learning/tabular-data/data-splits) and
+[optimization functions](/gemini-enterprise-agent-platform/machine-learning/tabular-data/classification-regression/train-model#optimization-objectives).
 
 For more information about supported SQL statements and functions for this
 model, see
@@ -144,7 +144,7 @@ Sets the optimization objective function to use for AutoML
 training.
 
 For more details on the optimization objective functions, see the
-[AutoML documentation](/vertex-ai/docs/tabular-data/classification-regression/train-model#optimization-objectives).
+[AutoML documentation](/gemini-enterprise-agent-platform/machine-learning/tabular-data/classification-regression/train-model#optimization-objectives).
 
 **Arguments**
 
@@ -222,7 +222,7 @@ Supported data types for `input_label_cols` include the following:
 
 The name of the column to use to sort input data into the training, validation,
 or test set. Defaults to
-[random splitting](/vertex-ai/docs/tabular-data/data-splits#default_data_split).
+[random splitting](/gemini-enterprise-agent-platform/machine-learning/tabular-data/data-splits#default-data-split).
 
 **Arguments**
 
@@ -239,10 +239,10 @@ on the column's value, which must be one of the following options:
 * `UNASSIGNED`
 
 For more information about how to use these values, see
-[Manual split](/vertex-ai/docs/tabular-data/data-splits#classification-manual).
+[Manual split](/gemini-enterprise-agent-platform/machine-learning/tabular-data/data-splits#classification-manual).
 
 Timestamp columns are used to perform a
-[chronological split](/vertex-ai/docs/tabular-data/data-splits#classification-time).
+[chronological split](/gemini-enterprise-agent-platform/machine-learning/tabular-data/data-splits#classification-time).
 
 ### `KMS_KEY_NAME`
 
@@ -272,10 +272,10 @@ determine the feature column type in AutoML.
 
 | `BigQuery type` | `AutoML type` |
 | --- | --- |
-| [`INT64`](/bigquery/docs/reference/standard-sql/data-types#integer_types)  [`NUMERIC`](/bigquery/docs/reference/standard-sql/data-types#numeric_type)  [`BIGNUMERIC`](/bigquery/docs/reference/standard-sql/data-types#bignumeric_type)  [`FLOAT64`](/bigquery/docs/reference/standard-sql/data-types#floating_point_types) | [`NUMERIC`](/vertex-ai/docs/datasets/data-types-tabular#numeric-transf) or [`TIMESTAMP`](/vertex-ai/docs/datasets/data-types-tabular#timestamp) if AutoML determines that it is a UNIX timestamp |
-| [`BOOL`](/bigquery/docs/reference/standard-sql/data-types#boolean_type) | [`CATEGORICAL`](/vertex-ai/docs/datasets/data-types-tabular#categorical-transf) |
-| [`STRING`](/bigquery/docs/reference/standard-sql/data-types#string_type)  [`BYTES`](/bigquery/docs/reference/standard-sql/data-types#bytes_type) | Either [`CATEGORICAL`](/vertex-ai/docs/datasets/data-types-tabular#categorical-transf) or [`TEXT`](/vertex-ai/docs/datasets/data-types-tabular#text-transf), auto-selected by AutoML. |
-| [`TIMESTAMP`](/bigquery/docs/reference/standard-sql/data-types#timestamp_type)  [`DATETIME`](/bigquery/docs/reference/standard-sql/data-types#datetime_type)  [`TIME`](/bigquery/docs/reference/standard-sql/data-types#time_type)  [`DATE`](/bigquery/docs/reference/standard-sql/data-types#date_type) | Either [`TIMESTAMP`](/vertex-ai/docs/datasets/data-types-tabular#timestamp), [`CATEGORICAL`](/vertex-ai/docs/datasets/data-types-tabular#categorical-transf), or [`TEXT`](/vertex-ai/docs/datasets/data-types-tabular#text-transf), auto-selected by AutoML. |
+| [`INT64`](/bigquery/docs/reference/standard-sql/data-types#integer_types)  [`NUMERIC`](/bigquery/docs/reference/standard-sql/data-types#numeric_type)  [`BIGNUMERIC`](/bigquery/docs/reference/standard-sql/data-types#bignumeric_type)  [`FLOAT64`](/bigquery/docs/reference/standard-sql/data-types#floating_point_types) | [`NUMERIC`](/gemini-enterprise-agent-platform/machine-learning/datasets/data-types-tabular#numeric-transf) or [`TIMESTAMP`](/gemini-enterprise-agent-platform/machine-learning/datasets/data-types-tabular#timestamp) if AutoML determines that it is a UNIX timestamp |
+| [`BOOL`](/bigquery/docs/reference/standard-sql/data-types#boolean_type) | [`CATEGORICAL`](/gemini-enterprise-agent-platform/machine-learning/datasets/data-types-tabular#categorical-transf) |
+| [`STRING`](/bigquery/docs/reference/standard-sql/data-types#string_type)  [`BYTES`](/bigquery/docs/reference/standard-sql/data-types#bytes_type) | Either [`CATEGORICAL`](/gemini-enterprise-agent-platform/machine-learning/datasets/data-types-tabular#categorical-transf) or [`TEXT`](/gemini-enterprise-agent-platform/machine-learning/datasets/data-types-tabular#text-transf), auto-selected by AutoML. |
+| [`TIMESTAMP`](/bigquery/docs/reference/standard-sql/data-types#timestamp_type)  [`DATETIME`](/bigquery/docs/reference/standard-sql/data-types#datetime_type)  [`TIME`](/bigquery/docs/reference/standard-sql/data-types#time_type)  [`DATE`](/bigquery/docs/reference/standard-sql/data-types#date_type) | Either [`TIMESTAMP`](/gemini-enterprise-agent-platform/machine-learning/datasets/data-types-tabular#timestamp), [`CATEGORICAL`](/gemini-enterprise-agent-platform/machine-learning/datasets/data-types-tabular#categorical-transf), or [`TEXT`](/gemini-enterprise-agent-platform/machine-learning/datasets/data-types-tabular#text-transf), auto-selected by AutoML. |
 
 To force a numeric column to be treated as categorical, use the
 [`CAST` function](/bigquery/docs/reference/standard-sql/conversion_functions#cast)
@@ -298,8 +298,8 @@ AutoML models have the following limitations:
 * BigQuery ML AutoML models aren't visible
   in the AutoML user interface, and aren't available for
   batch or online predictions in AutoML.
-* The [default maximum number of concurrent training jobs](/vertex-ai/docs/quotas)
-  is 5. Raising the Vertex AI quota does not modify this quota. If you
+* The [default maximum number of concurrent training jobs](/gemini-enterprise-agent-platform/models/quotas)
+  is 5. Raising the Gemini Enterprise Agent Platform quota does not modify this quota. If you
   receive the error `Too many AutoML training queries have been issued within
   a short period of time`, you can submit a request to raise the maximum number
   of concurrent training jobs. To request an increase, email
@@ -359,11 +359,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-05-20 UTC.
+Last updated 2026-05-26 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-20 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-26 UTC."],[],[]]

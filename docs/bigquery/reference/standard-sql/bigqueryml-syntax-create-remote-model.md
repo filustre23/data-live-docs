@@ -12,15 +12,15 @@ Stay organized with collections
 
 Save and categorize content based on your preferences.
 
-# The CREATE MODEL statement for Vertex AI LLMs as MaaS
+# The CREATE MODEL statement for Gemini Enterprise Agent Platform LLMs as MaaS
 
 This document describes the `CREATE MODEL` statement for creating remote models
-in BigQuery over LLMs in Vertex AI as a model as a service
-(MaaS) by using SQL. When you use MaaS on Vertex AI, you don't
+in BigQuery over LLMs in Gemini Enterprise Agent Platform as a model as a service
+(MaaS) by using SQL. When you use MaaS on Agent Platform, you don't
 have to provision or manage serving infrastructure for your models. Choose
 MaaS for rapid development and prototyping, when you want to minimize
 operational overhead.
-Vertex AI offers access to
+Agent Platform offers access to
 [Google models](/vertex-ai/generative-ai/docs/models),
 [partner models](/vertex-ai/generative-ai/docs/partner-models/use-partner-models)
 and [open models](/vertex-ai/generative-ai/docs/open-models/use-maas)
@@ -92,7 +92,7 @@ For example, `myproject.mydataset.mymodel`.
 BigQuery uses a
 [Cloud resource connection](/bigquery/docs/create-cloud-resource-connection)
 to interact with
-the Vertex AI endpoint.
+the Gemini Enterprise Agent Platform endpoint.
 
 The connection elements are as follows:
 
@@ -115,7 +115,7 @@ The connection elements are as follows:
   connection](/bigquery/docs/default-connections), specify `DEFAULT` instead of the connection string
   containing PROJECT\_ID.LOCATION.CONNECTION\_ID.
 
-If you are creating a remote model over a Vertex AI model that
+If you are creating a remote model over an Agent Platform model that
 uses supervised tuning, you need to grant the
 [Vertex AI Service Agent role](/vertex-ai/docs/general/access-control#aiplatform.serviceAgent)
 to the connection's service account in the project where you create the model.
@@ -146,19 +146,19 @@ ENDPOINT = 'vertex_ai_llm_endpoint'
 
 **Description**
 
-The Vertex AI endpoint for the remote model to use. You can
-specify the name of the Vertex AI model, for example
-`gemini-2.5-flash`, or you can specify the Vertex AI model's
+The Agent Platform endpoint for the remote model to use. You can
+specify the name of the Agent Platform model, for example
+`gemini-2.5-flash`, or you can specify the Agent Platform model's
 endpoint URL, for example
 `https://europe-west6-aiplatform.googleapis.com/v1/projects/myproject/locations/europe-west6/publishers/google/models/gemini-2.5-flash`. If you specify the model name, BigQuery ML
 automatically identifies and uses the full endpoint of the
-Vertex AI model based on the location of the dataset in which
+Agent Platform model based on the location of the dataset in which
 you create the model.
 
 **Arguments**
 
 A `STRING` value that contains the model name of the target
-Vertex AI LLM. The following LLMs are supported:
+Agent Platform LLM. The following LLMs are supported:
 
 ### Pretrained Gemini models
 
@@ -213,7 +213,7 @@ are supported:
 * `claude-3-5-haiku`
 * `claude-3-haiku`
 
-You must enable Claude models in Vertex AI before you can use
+You must enable Claude models in Gemini Enterprise Agent Platform before you can use
 them. For more information, see
 [Enable a partner model](/bigquery/docs/generate-text#enable-model).
 
@@ -238,7 +238,7 @@ are supported:
 
 Don't use a version suffix with any Mistral AI model.
 
-You must enable Mistral AI models in Vertex AI before you can use
+You must enable Mistral AI models in Gemini Enterprise Agent Platform before you can use
 them. For more information, see
 [Enable a partner model](/bigquery/docs/generate-text#enable-model).
 
@@ -270,7 +270,7 @@ are supported:
 connection for the remote model in the same region as the Llama model
 endpoint.
 
-You must enable Llama models in Vertex AI before you can use
+You must enable Llama models in Gemini Enterprise Agent Platform before you can use
 them. For more information, see
 [Enable a partner model](/bigquery/docs/generate-text#enable-model).
 
@@ -281,7 +281,7 @@ to generate text based on a prompt you provide in a query or from a column in a
 [standard table](/bigquery/docs/tables-intro#standard-tables).
 
 For information that can help you choose between the supported models, see
-[Model information](/vertex-ai/docs/generative-ai/learn/models).
+[Model information](/gemini-enterprise-agent-platform/models/google-models).
 
 ## Locations
 
@@ -316,7 +316,7 @@ OPTIONS(ENDPOINT = 'mistral-large-2411');
 
 ## What's next
 
-* For more information about using Vertex AI models
+* For more information about using Agent Platform models
   with BigQuery ML, see
   [Generative AI overview](/bigquery/docs/generative-ai-overview).
 * Try [generating text from BigQuery data](/bigquery/docs/generate-text).
@@ -329,11 +329,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-05-20 UTC.
+Last updated 2026-05-26 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-20 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-26 UTC."],[],[]]

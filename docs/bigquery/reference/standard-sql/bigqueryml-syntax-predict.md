@@ -30,7 +30,7 @@ predict outcomes by using a model. `ML.PREDICT` works with the following models:
   + [TensorFlow models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow)
   + [TensorFlow Lite models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tflite)
   + [XGBoost models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-xgboost)
-* [Vertex AI hosted models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https)
+* [Agent Platform hosted models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https)
 
 For PCA and autoencoder models, you can use the
 [`AI.GENERATE_EMBEDDING` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) as an alternative to the `ML.PREDICT`
@@ -79,7 +79,7 @@ ML.PREDICT(
   [convertible](/bigquery/docs/reference/standard-sql/conversion_rules) to
   the type expected by the model.
 
-  For remote models, the input columns must contain all Vertex AI
+  For remote models, the input columns must contain all Gemini Enterprise Agent Platform
   endpoint input fields.
 
   If there are unused columns from the table, they are passed through as
@@ -98,7 +98,7 @@ ML.PREDICT(
   [convertible](/bigquery/docs/reference/standard-sql/conversion_rules) to
   the type expected by the model.
 
-  For remote models, the input columns must contain all Vertex AI
+  For remote models, the input columns must contain all Gemini Enterprise Agent Platform
   endpoint input fields.
 
   If there are unused columns from the query, they are passed through as
@@ -239,9 +239,9 @@ method.
 
 ### Remote models
 
-For remote models, the output columns contain all Vertex AI endpoint
+For remote models, the output columns contain all Gemini Enterprise Agent Platform endpoint
 output fields, and also a `remote_model_status` field that contains status
-messages from Vertex AI endpoint.
+messages from Gemini Enterprise Agent Platform endpoint.
 
 ## Missing data imputation
 
@@ -561,11 +561,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-05-20 UTC.
+Last updated 2026-05-26 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-20 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-26 UTC."],[],[]]

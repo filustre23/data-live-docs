@@ -1,6 +1,6 @@
 # data-live-docs — index
 
-_Generated 2026-05-26T14:53+00:00_
+_Generated 2026-05-27T02:02+00:00_
 
 **9 sources, 5062 topics total**
 
@@ -2968,7 +2968,7 @@ _1532 topics_
 
 Upstream: <https://code.claude.com/docs/en/>
 
-_140 topics_
+_139 topics_
 
 - `claude-code/admin-setup`
 - `claude-code/agent-sdk/agent-loop`
@@ -3030,7 +3030,6 @@ _140 topics_
 - `claude-code/debug-your-config`
 - `claude-code/deep-links`
 - `claude-code/desktop`
-- `claude-code/desktop-changelog`
 - `claude-code/desktop-quickstart`
 - `claude-code/desktop-scheduled-tasks`
 - `claude-code/devcontainer`
@@ -4287,7 +4286,7 @@ _153 topics_
 
 Upstream: <https://learn.hex.tech/>
 
-_356 topics_
+_357 topics_
 
 - `hex/changelog`
 - `hex/changelog/2020-12-17`
@@ -4438,6 +4437,7 @@ _356 topics_
 - `hex/docs/api-integrations/api/overview`
 - `hex/docs/api-integrations/api/reference`
 - `hex/docs/api-integrations/cli`
+- `hex/docs/api-integrations/external-apps`
 - `hex/docs/api-integrations/hex-agent-data-connection-access`
 - `hex/docs/api-integrations/mcp-server`
 - `hex/docs/api-integrations/slack`

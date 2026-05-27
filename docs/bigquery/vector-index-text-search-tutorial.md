@@ -20,11 +20,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 本教學課程涵蓋下列工作：
 
-* 透過 Vertex AI 嵌入模型建立 BigQuery ML [遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw)。
+* 透過 Gemini Enterprise Agent Platform 嵌入模型建立 BigQuery ML [遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw)。
 * 使用 [`AI.GENERATE_EMBEDDING` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding?hl=zh-tw)搭配遠端模型，從 BigQuery 資料表中的文字生成嵌入。
 * 建立[向量索引](https://docs.cloud.google.com/bigquery/docs/vector-index?hl=zh-tw)，為嵌入建立索引，以提升搜尋效能。
 * 使用 [`VECTOR_SEARCH` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions?hl=zh-tw#vector_search)搭配嵌入項目，搜尋相似文字。
-* 使用 [`AI.GENERATE_TEXT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text?hl=zh-tw)生成文字，並運用向量搜尋結果擴增提示輸入內容，藉此執行 RAG，提升結果品質。
+* 使用 [`AI.GENERATE_TEXT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text?hl=zh-tw)生成文字，並運用向量搜尋結果增強提示輸入內容，藉此執行 RAG，提升結果品質。
 
 本教學課程使用 BigQuery 公開資料表 `patents-public-data.google_patents_research.publications`。
 
@@ -61,8 +61,8 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 * **BigQuery ML**: You incur costs for the data that you
   process in BigQuery.
-* **Vertex AI**: You incur costs for calls to the
-  Vertex AI service that's represented by the remote model.
+* **Gemini Enterprise Agent Platform**: You incur costs for calls to the
+  Agent Platform service that's represented by the remote model.
 
 如要根據預測用量估算費用，請使用 [Pricing Calculator](https://docs.cloud.google.com/products/calculator?hl=zh-tw)。
 
@@ -70,7 +70,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 如要進一步瞭解 BigQuery 定價，請參閱 BigQuery 說明文件中的「[BigQuery 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw)」一文。
 
-如要進一步瞭解 Vertex AI 定價，請參閱 [Vertex AI 定價](https://cloud.google.com/vertex-ai/pricing?hl=zh-tw#generative_ai_models)頁面。
+如要進一步瞭解 Agent Platform 計價方式，請參閱[這個頁面](https://cloud.google.com/vertex-ai/pricing?hl=zh-tw#generative_ai_models)。
 
 ## 事前準備
 
@@ -84,7 +84,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    [前往專案選取器](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
 2. [確認專案已啟用計費功能 Google Cloud](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project) 。
-3. 啟用 BigQuery、BigQuery Connection 和 Vertex AI API。
+3. 啟用 BigQuery、BigQuery Connection 和 Agent Platform API。
 
    **啟用 API 時所需的角色**
 
@@ -106,7 +106,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 4. 在「建立資料集」頁面中，執行下列操作：
 
    * 在「Dataset ID」(資料集 ID) 中輸入 `bqml_tutorial`。
-   * 針對「位置類型」選取「多區域」，然後選取「美國」。
+   * 針對「Location type」(位置類型) 選取「Multi-region」(多區域)，然後選取「US」(美國)。
    * 其餘設定請保留預設狀態，然後按一下「建立資料集」。
 
 ### bq
@@ -141,7 +141,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 建立用於生成文字嵌入的遠端模型
 
-建立遠端模型，代表代管的 Vertex AI 文字嵌入生成模型：
+建立遠端模型，代表代管的 Agent Platform 文字嵌入生成模型：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -181,7 +181,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 這項查詢大約需要 5 分鐘才能完成。
 
-使用 [`AI.GENERATE_EMBEDDING` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding?hl=zh-tw)產生嵌入可能會失敗，原因在於 Vertex AI LLM [配額](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#cloud_ai_service_functions)或服務無法使用。錯誤詳細資料會傳回至 `status` 欄。如果資料欄為空白，表示已成功產生嵌入內容。`status`
+使用 [`AI.GENERATE_EMBEDDING` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding?hl=zh-tw)產生嵌入內容時，可能會因為 Agent Platform LLM [配額](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#cloud_ai_service_functions)或服務無法使用而失敗。錯誤詳細資料會顯示在 `status` 欄中。如果資料欄為空白，表示已成功產生嵌入內容。`status`
 
 如要瞭解 BigQuery 中其他產生文字嵌入的方法，請參閱[使用預先訓練的 TensorFlow 模型嵌入文字教學課程](https://docs.cloud.google.com/bigquery/docs/generate-embedding-with-tensorflow-models?hl=zh-tw)。
 
@@ -230,7 +230,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 `top_k` 引數會決定要傳回的相符項目數量，在本例中為五個。`fraction_lists_to_search` 選項會決定要搜尋的向量索引清單百分比。[您建立的向量索引](#create_a_vector_index)有 500 個清單，因此 `.01` 的 `fraction_lists_to_search` 值表示這項向量搜尋會掃描其中五個清單。如這裡所示，`fraction_lists_to_search` 值越低，[召回率](https://developers.google.com/machine-learning/crash-course/classification/accuracy-precision-recall?hl=zh-tw#recall)就越低，但效能會越快。如要進一步瞭解向量索引清單，請參閱`num_lists`
 [向量索引選項](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#vector_index_option_list)。
 
-您必須使用與要比較資料表相同的模型，才能產生這項查詢中的嵌入，否則搜尋結果不會準確。
+您必須使用與要比較資料表相同的模型，才能在這項查詢中產生嵌入，否則搜尋結果將不準確。
 
 1. 前往「BigQuery」頁面
 
@@ -266,7 +266,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 建立文字生成遠端模型
 
-建立遠端模型，代表代管的 Vertex AI 文字生成模型：
+建立遠端模型，代表託管的 Agent Platform 文字生成模型：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -360,11 +360,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-21 (世界標準時間)。
+上次更新時間：2026-05-26 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-21 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-26 (世界標準時間)。"],[],[]]

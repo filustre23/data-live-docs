@@ -16,7 +16,7 @@ Save and categorize content based on your preferences.
 
 This document describes the `CREATE MODEL` statement for creating remote models
 in BigQuery over open text embedding and text
-generation models deployed to [Vertex AI](/vertex-ai/docs). When you
+generation models deployed to [Gemini Enterprise Agent Platform](/gemini-enterprise-agent-platform/overview). When you
 self-deploy a model, the model runs within your project and VPC network, giving
 you full control over the deployment environment. We
 recommend using self-deployed models when your application requires custom
@@ -38,8 +38,8 @@ function, depending on the model type.
 You can automatically deploy the open model at the same time that
 you create the remote model, or you can manually deploy the open model first,
 and then use the deployed open model with the remote model. BigQuery
-manages the Vertex AI resources for automatically deployed open
-models. You must manage the Vertex AI resources for manually
+manages the Agent Platform resources for automatically deployed open
+models. You must manage the Agent Platform resources for manually
 deployed open models. For more information, see
 [Deploy open models](#deploy_open_models).
 
@@ -110,7 +110,7 @@ For example, `myproject.mydataset.mymodel`.
 
 BigQuery uses a
 [Cloud resource connection](/bigquery/docs/create-cloud-resource-connection)
-to interact with the Vertex AI endpoint.
+to interact with the Gemini Enterprise Agent Platform endpoint.
 
 The connection elements are as follows:
 
@@ -175,11 +175,11 @@ MODEL_GARDEN_MODEL_NAME = 'model_garden_model_name'
 **Description**
 
 The model ID and model version of a
-[supported Vertex AI Model Garden model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#model-garden-models),
+[supported Agent Platform Model Garden model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#model-garden-models),
 in the format `publishers/publisher`/models/`model_name`@`model_version`.
 For example, `publishers/openai/models/gpt-oss@gpt-oss-120b`.
 You can get the model ID by
-clicking the model card in the Vertex AI Model Garden and then copying the
+clicking the model card in the Agent Platform Model Garden and then copying the
 model ID from the **Model ID** field. You can get the default model
 version by copying it from the **Version** field on the model card. To
 see other model versions that you can use, click **Deploy model** and then click
@@ -230,13 +230,13 @@ MACHINE_TYPE = 'machine_type'
 **Description**
 
 The machine type to use when deploying the model to
-Vertex AI. For information about supported machine
+Agent Platform. For information about supported machine
 types, see [Machine types](/vertex-ai/docs/predictions/configure-compute#machine-types).
 
 **Arguments**
 
 A `STRING` value that specifies the machine type. If you don't specify a value
-for the `MACHINE_TYPE` option, the Vertex AI
+for the `MACHINE_TYPE` option, the Agent Platform
 Model Garden default machine type for the model is used.
 
 ### `MIN_REPLICA_COUNT`
@@ -248,7 +248,7 @@ MIN_REPLICA_COUNT = min_replica_count
 **Description**
 
 The minimum number of machine replicas used when deploying
-the model on a Vertex AI endpoint. The service
+the model on an Agent Platform endpoint. The service
 increases or decreases the replica count as required by the inference
 load on the endpoint. The number of replicas used is never
 lower than the `MIN_REPLICA_COUNT` value and never higher than
@@ -269,7 +269,7 @@ MAX_REPLICA_COUNT = max_replica_count
 **Description**
 
 The maximum number of machine replicas used when deploying
-the model on a Vertex AI endpoint. The service
+the model on an Agent Platform endpoint. The service
 increases or decreases the replica count as required by the inference
 load on the endpoint. The number of replicas used is never
 lower than the `MIN_REPLICA_COUNT` value and never higher than
@@ -298,7 +298,7 @@ information, see
 [Compute Engine reservation affinity](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#reservation-affinity).
 
 You can only use Compute Engine reservations that are shared
-with Vertex AI. For more information, see
+with Agent Platform. For more information, see
 [Allow a reservation to be consumed](/vertex-ai/docs/predictions/use-reservations#allow-consumption).
 
 **Arguments**
@@ -306,10 +306,10 @@ with Vertex AI. For more information, see
 This option accepts the following values:
 
 * `NO_RESERVATION`: no reservation is consumed when your
-  model is deployed to a Vertex AI endpoint.
+  model is deployed to an Agent Platform endpoint.
   Specifying `NO_RESERVATION` has the same effect as
   not specifying a reservation affinity.
-* `ANY_RESERVATION`: the Vertex AI model
+* `ANY_RESERVATION`: the Agent Platform model
   deployment consumes virtual machines (VMs) from
   Compute Engine reservations that are in the current project
   or that are
@@ -328,7 +328,7 @@ This option accepts the following values:
   If there isn't enough capacity in the available reservations, or if no
   suitable reservations are found, the system provisions on-demand
   Compute Engine VMs to meet the resource requirements.
-* `SPECIFIC_RESERVATION`: the Vertex AI
+* `SPECIFIC_RESERVATION`: the Agent Platform
   model deployment consumes VMs only from the reservation that you specify in
   the `RESERVATION_AFFINITY_VALUES` value. This reservation must be
   [configured for specifically targeted consumption](/compute/docs/instances/reservations-consume#consuming_instances_from_a_specific_reservation).
@@ -383,7 +383,7 @@ ENDPOINT_IDLE_TTL = endpoint_idle_ttl
 **Description**
 
 The duration of inactivity after which the open model is
-automatically undeployed from the Vertex AI endpoint.
+automatically undeployed from the Agent Platform endpoint.
 
 Model inactivity is defined as the amount of time that has passed
 since the any of the following operations were performed on the model:
@@ -476,7 +476,7 @@ For example, `myproject.mydataset.mymodel`.
 
 BigQuery uses a
 [Cloud resource connection](/bigquery/docs/create-cloud-resource-connection)
-to interact with the Vertex AI endpoint.
+to interact with the Gemini Enterprise Agent Platform endpoint.
 
 The connection elements are as follows:
 
@@ -521,7 +521,7 @@ ENDPOINT = 'vertex_ai_endpoint'
 
 **Description**
 
-The Vertex AI endpoint of the deployed open model. The
+The Agent Platform endpoint of the deployed open model. The
 endpoint must be a
 [shared public endpoint](/vertex-ai/docs/predictions/choose-endpoint-type).
 Dedicated public endpoints, Private Service Connect endpoints, and
@@ -531,7 +531,7 @@ private endpoints aren't supported.
 
 A `STRING` value that specifies the
 [shared public endpoint](/vertex-ai/docs/predictions/choose-endpoint-type)
-of a model deployed to Vertex AI, in the format
+of a model deployed to Agent Platform, in the format
 `https://location-aiplatform.googleapis.com/v1/projects/project/locations/location/endpoints/endpoint_id`.
 
 The following code shows an example endpoint:
@@ -543,13 +543,13 @@ ENDPOINT = 'https://us-central1-aiplatform.googleapis.com/v1/projects/myproject/
 ## Supported open models
 
 You can create a remote model over a deployed open model from either the
-[Vertex AI Model Garden](/vertex-ai/generative-ai/docs/model-garden/explore-models)
+[Agent Platform Model Garden](/vertex-ai/generative-ai/docs/model-garden/explore-models)
 or
 [Hugging Face](https://huggingface.co/).
 
-### Supported Vertex AI Model Garden models
+### Supported Agent Platform Model Garden models
 
-The following open text generation models in the Vertex AI
+The following open text generation models in the Agent Platform
 Model Garden are supported:
 
 * [Gemma 3n](https://console.cloud.google.com/vertex-ai/publishers/google/model-garden/gemma3n)
@@ -583,7 +583,7 @@ Model Garden are supported:
 * [Qwen2](https://console.cloud.google.com/vertex-ai/publishers/qwen/model-garden/qwen2)
 * [Vicuna](https://console.cloud.google.com/vertex-ai/publishers/lmsys/model-garden/lmsys-vicuna-7b)
 
-The following open embedding generation models in the Vertex AI
+The following open embedding generation models in the Agent Platform
 Model Garden are supported:
 
 * [E5 Text Embedding](https://console.cloud.google.com/vertex-ai/publishers/intfloat/model-garden/e5)
@@ -596,12 +596,12 @@ BigQuery ML supports Hugging Face models that use the
 [Text Embeddings Inference API](https://huggingface.github.io/text-embeddings-inference/)
 or the
 [Text Generation Inference API](https://huggingface.github.io/text-generation-inference/)
-and can be deployed to Vertex AI.
+and can be deployed to Agent Platform.
 
 If you use the Vertex AI API to
 [deploy the open model](/vertex-ai/generative-ai/docs/model-garden/use-models#deploy_an_open_model)
-as a Vertex AI endpoint, you don't have to check whether the
-model has been verified by Vertex AI. Otherwise, you must
+as an Agent Platform endpoint, you don't have to check whether the
+model has been verified by Agent Platform. Otherwise, you must
 verify that the model is supported before deploying it.
 
 To find supported Hugging Face models, do the following:
@@ -612,21 +612,21 @@ To find supported Hugging Face models, do the following:
    [Text Generation Inference](https://huggingface.co/models?other=text-generation-inference)
    models, depending on the type of model that you want to create.
 2. Locate a model that you are interested in and copy the model ID.
-3. Open the [Vertex AI Model Garden](https://console.cloud.google.com/vertex-ai/model-garden).
+3. Open the [Agent Platform Model Garden](https://console.cloud.google.com/vertex-ai/model-garden).
 4. Click **Deploy from Hugging Face**.
 5. On the **Deploy from Hugging Face** pane, paste the model ID into the
    **Hugging Face URL** field.
 6. Press `Enter`.
 
    A green check circle is shown if the model can be deployed in
-   Vertex AI Model Garden:
+   Agent Platform Model Garden:
 
 ## Deploy open models
 
 If you are creating a remote model over a
 [supported open model](#supported_open_models),
 you can automatically deploy the open model at the same time that
-you create the remote model by specifying the Vertex AI
+you create the remote model by specifying the Agent Platform
 Model Garden or Hugging Face model ID in the `CREATE MODEL` statement.
 Alternatively, you can manually deploy the open model first, and then use that
 open model with the remote model by specifying the model
@@ -653,26 +653,26 @@ for the BigQuery-managed model and endpoint begin with
 
 Automatically deployed models offer the following benefits:
 
-* [Automatic Vertex AI resource management](#managed-resources)
+* [Automatic Agent Platform resource management](#managed-resources)
 * Reserve open model resources by [using Compute Engine reservations](#reservation-affinity)
 * [Automatic or immediate open model undeployment](#managed-model-undeployment) to save costs
 
-#### Automatic Vertex AI resource management
+#### Automatic Agent Platform resource management
 
 When you automatically deploy an open model, BigQuery
-manages the open model's Vertex AI resources for you. If
+manages the open model's Agent Platform resources for you. If
 you alter or delete the remote model in BigQuery, the
-related open model in Vertex AI is altered or deleted as well.
+related open model in Agent Platform is altered or deleted as well.
 
 #### Compute Engine reservation affinity
 
 You can use
 [Compute Engine reservations](/compute/docs/instances/reservations-overview)
-with open models that you automatically deploy to Vertex AI.
+with open models that you automatically deploy to Agent Platform.
 Compute Engine reservations provide assured virtual machine (VM)
 availability for the open model when serving predictions. For more information,
 see
-[Use reservations with inference](/vertex-ai/docs/predictions/use-reservations).
+[Use reservations with inference](/gemini-enterprise-agent-platform/machine-learning/predictions/use-reservations).
 
 Use the [`RESERVATION_AFFINITY_TYPE`](#reservation-affinity-type),
 [`RESERVATION_AFFINITY_KEY`](#reservation-affinity-key), and
@@ -690,7 +690,7 @@ the [`ENDPOINT_IDLE_TTL` option](#endpoint-idle-ttl) in the `CREATE MODEL` or
 This helps you save costs by undeploying the model it isn't being used.
 
 Alternatively, you can use the `ALTER MODEL` statement to manually undeploy an
-open model from a Vertex AI endpoint in order to immediately stop
+open model from an Agent Platform endpoint in order to immediately stop
 billing. To manually undeploy an open model, set the `DEPLOY_MODEL` argument of
 the `ALTER MODEL` statement to `FALSE`.
 
@@ -700,7 +700,7 @@ including model metadata. To use the model for inference again, you must
 redeploy it by running the `ALTER MODEL` statement on the model and
 setting the `DEPLOY_MODEL` option to `TRUE`.
 
-### Manually deploy Vertex AI Model Garden models
+### Manually deploy Agent Platform Model Garden models
 
 To deploy an open model from the Model Garden, do the following:
 
@@ -732,7 +732,7 @@ do the following:
    [Text Generation Inference](https://huggingface.co/models?other=text-generation-inference)
    models, depending on the type of model that you want to create.
 2. Locate a model that you are interested in and copy the model ID.
-3. Open the [Vertex AI Model Garden](https://console.cloud.google.com/vertex-ai/model-garden).
+3. Open the [Agent Platform Model Garden](https://console.cloud.google.com/vertex-ai/model-garden).
 4. Click **Deploy from Hugging Face**.
 5. On the **Deploy from Hugging Face** pane, paste the model ID into the
    **Hugging Face URL** field.
@@ -749,7 +749,7 @@ do the following:
    [Text Generation Inference](https://huggingface.co/models?other=text-generation-inference)
    models, depending on the type of model that you want to create.
 2. Locate a model that you are interested in and copy the model ID.
-3. Open the [Vertex AI Model Garden](https://console.cloud.google.com/vertex-ai/model-garden).
+3. Open the [Agent Platform Model Garden](https://console.cloud.google.com/vertex-ai/model-garden).
 4. Click **Deploy from Hugging Face**.
 5. On the **Deploy from Hugging Face** pane, paste the model ID into the
    **Hugging Face URL** field.
@@ -759,12 +759,12 @@ do the following:
 1. Click the name of the notebook that you want to use.
 
 To stop billing for a model,
-[undeploy the model](/vertex-ai/docs/predictions/undeploy-model).
+[undeploy the model](/gemini-enterprise-agent-platform/machine-learning/predictions/undeploy-model).
 
 As an alternative to using the UI or a notebook, you can also use the
 Vertex AI API to
 [deploy the open model](/vertex-ai/generative-ai/docs/model-garden/use-models#deploy_an_open_model)
-as a Vertex AI endpoint.
+as an Agent Platform endpoint.
 
 ## Locations
 
@@ -776,25 +776,25 @@ For information about supported locations, see
 * You can only use open models to process text data. Multimodal data isn't
   supported.
 * Canceling a model creation or update job that includes open model deployment
-  doesn't cause the allocated Vertex AI resources to be cleaned
-  up, because Vertex AI doesn't support canceling in-progress model
+  doesn't cause the allocated Agent Platform resources to be cleaned
+  up, because Agent Platform doesn't support canceling in-progress model
   deployments. Instead of canceling the job, wait for it to complete, and then
   replace, alter, or delete the BigQuery ML model to release
-  Vertex AI resources.
-* Don't directly modify the Vertex AI resources for an open
-  model that BigQuery manages in Vertex AI.
+  Agent Platform resources.
+* Don't directly modify the Agent Platform resources for an open
+  model that BigQuery manages in Agent Platform.
   Doing so can lead to unexpected behavior. For example, manually
   undeploying a model while it is processing an inference job can lead to the
   whole inference query failing.
 * [Time travel](/bigquery/docs/time-travel) isn't supported for
-  automatically deployed open models. The Vertex AI resources
+  automatically deployed open models. The Agent Platform resources
   associated with the model aren't recovered.
 * If you want to delete a BigQuery dataset that contains a
   BigQuery ML model with BigQuery-managed
-  resources in Vertex AI, you must delete the
+  resources in Agent Platform, you must delete the
   BigQuery ML model from the dataset first. Otherwise,
-  the Vertex AI resources remain active, and you must go to
-  Vertex AI to manually delete them.
+  the Agent Platform resources remain active, and you must go to
+  Agent Platform to manually delete them.
 
 ## Examples
 
@@ -803,7 +803,7 @@ The following examples show how to create a remote model over an open model.
 ### Create a remote model over a deployed open model
 
 The following example creates a BigQuery ML remote model
-over a model deployed to a Vertex AI endpoint:
+over a model deployed to an Agent Platform endpoint:
 
 ```
 CREATE MODEL `project_id.mydataset.mymodel`
@@ -811,11 +811,11 @@ CREATE MODEL `project_id.mydataset.mymodel`
  OPTIONS(ENDPOINT = 'https://us-central1-aiplatform.googleapis.com/v1/projects/myproject/locations/us-central1/endpoints/1234')
 ```
 
-### Create a Vertex AI Model Garden model and run text generation
+### Create an Agent Platform Model Garden model and run text generation
 
 The following example creates a BigQuery-managed
-Vertex AI model over the `gpt-oss@gpt-oss-20b` model from
-Vertex AI Model Garden:
+Agent Platform model over the `gpt-oss@gpt-oss-20b` model from
+Agent Platform Model Garden:
 
 ```
 CREATE MODEL `project_id.mydataset.my_model_garden_model`
@@ -834,7 +834,7 @@ FROM
 ### Create a Hugging Face model and run embedding generation
 
 The following example creates a BigQuery-managed
-Vertex AI model over the `intfloat/multilingual-e5-small` model
+Agent Platform model over the `intfloat/multilingual-e5-small` model
 from Hugging Face with ten machine replicas, and uses it for large-scale
 embedding generation:
 
@@ -853,11 +853,11 @@ FROM
 );
 ```
 
-### Vertex AI resource management
+### Agent Platform resource management
 
 The following example creates a BigQuery-managed
-Vertex AI model over the `gemma3@gemma-3-1b-it` model
-from Vertex AI Model Garden, and configures it to
+Agent Platform model over the `gemma3@gemma-3-1b-it` model
+from Agent Platform Model Garden, and configures it to
 automatically undeploy after being idle for 8 hours:
 
 ```
@@ -909,11 +909,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-05-20 UTC.
+Last updated 2026-05-26 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-20 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-26 UTC."],[],[]]

@@ -28,9 +28,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## Vertex AI Pipelines
 
-在 [Vertex AI Pipelines](https://docs.cloud.google.com/vertex-ai/docs/pipelines/introduction?hl=zh-tw) 中，機器學習管道的結構是使用輸入/輸出依附元件相互連結的容器化管道工作，以有向無環圖 (DAG) 的形式呈現。每個[管道工作](https://docs.cloud.google.com/vertex-ai/docs/pipelines/introduction?hl=zh-tw#pipeline-task)都是[管道元件](https://docs.cloud.google.com/vertex-ai/docs/pipelines/introduction?hl=zh-tw#pipeline-component)的例項化，並具有特定輸入內容。定義機器學習管道時，您可以將一個管道工作的輸出內容，路由至機器學習工作流程中下一個管道工作的輸入內容，藉此連結多個管道工作，形成 DAG。您也可以將 ML 管道的原始輸入內容，用做特定管道工作的輸入內容。
+在 [Vertex AI Pipelines](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/pipelines/introduction?hl=zh-tw) 中，機器學習管道的結構是使用輸入/輸出依附元件相互連結的容器化管道工作，以有向無環圖 (DAG) 的形式呈現。每個[管道工作](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/pipelines/introduction?hl=zh-tw#pipeline-task)都是[管道元件](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/pipelines/introduction?hl=zh-tw#pipeline-component)的例項化，並具有特定輸入內容。定義機器學習管道時，您可以將一個管道工作的輸出內容，路由至機器學習工作流程中下一個管道工作的輸入內容，藉此連結多個管道工作，形成 DAG。您也可以將 ML 管道的原始輸入內容，用做特定管道工作的輸入內容。
 
-使用 Google Cloud Pipeline Components SDK 的 [BigQuery ML 元件](https://docs.cloud.google.com/vertex-ai/docs/pipelines/bigqueryml-component?hl=zh-tw)，在 Vertex AI Pipelines 中組合機器學習管道。如要開始使用 BigQuery ML 元件，請參閱下列 Notebook：
+使用 Google Cloud Pipeline Components SDK 的 [BigQuery ML 元件](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/pipelines/bigqueryml-component?hl=zh-tw)，在 Vertex AI Pipelines 中組合機器學習管道。如要開始使用 BigQuery ML 元件，請參閱下列 Notebook：
 
 * [開始使用 BigQuery ML 管道元件](https://github.com/GoogleCloudPlatform/vertex-ai-samples/blob/main/notebooks/community/ml_ops/stage3/get_started_with_bqml_pipeline_components.ipynb)
 * [訓練及評估需求預測模型](https://github.com/GoogleCloudPlatform/vertex-ai-samples/blob/main/notebooks/community/pipelines/google_cloud_pipeline_components_bqml_pipeline_demand_forecasting.ipynb)
@@ -60,11 +60,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-21 (世界標準時間)。
+上次更新時間：2026-05-26 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-21 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-26 (世界標準時間)。"],[],[]]

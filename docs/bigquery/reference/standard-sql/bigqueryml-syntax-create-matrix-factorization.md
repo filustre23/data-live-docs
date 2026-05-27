@@ -665,16 +665,16 @@ The `MODEL_REGISTRY` option specifies the model registry destination.
 
 ### `VERTEX_AI_MODEL_ID`
 
-The `VERTEX_AI_MODEL_ID` option specifies a Vertex AI model ID
+The `VERTEX_AI_MODEL_ID` option specifies an Gemini Enterprise Agent Platform model ID
 to register the model with. The model ID is associated with your
 BigQuery ML model, and is visible from the
-Model Registry. If you don't specify a
-Vertex AI model ID, the BigQuery ML
+Model Registry. If you don't specify an
+Agent Platform model ID, the BigQuery ML
 model name is used.
 
 The `VERTEX_AI_MODEL_ID` value can have up to 63 characters, and valid
 characters are `[a-z0-9_-]`. The first character cannot be a number or hyphen.
-If you don't specify a Vertex AI model ID, the
+If you don't specify an Agent Platform model ID, the
 BigQuery ML model name must meet these requirements.
 
 You can only set the `VERTEX_AI_MODEL_ID` option when the `MODEL_REGISTRY`
@@ -682,8 +682,7 @@ option is set to `VERTEX_AI`.
 
 ### `VERTEX_AI_MODEL_VERSION_ALIASES`
 
-The `VERTEX_AI_MODEL_VERSION_ALIASES` option specifies a
-Vertex AI model alias to use when registering a model. Model
+The `VERTEX_AI_MODEL_VERSION_ALIASES` option specifies an Agent Platform model alias to use when registering a model. Model
 aliases are helpful for fetching or deploying a particular model version by
 reference without needing to know the specific version ID. To learn more about
 how Model Registry aliases work, see
@@ -889,11 +888,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-05-20 UTC.
+Last updated 2026-05-26 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-20 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-26 UTC."],[],[]]

@@ -15,7 +15,7 @@ Save and categorize content based on your preferences.
 # The AI.CLASSIFY function
 
 This document describes the `AI.CLASSIFY` function, which uses a
-Vertex AI Gemini model to classify
+Gemini Enterprise Agent Platform Gemini model to classify
 inputs into categories that you provide. BigQuery automatically
 [structures](/vertex-ai/generative-ai/docs/learn/prompts/structure-prompts)
 your input to improve the quality of the classification.
@@ -39,7 +39,7 @@ The following are common use cases:
   values from standard tables as input to the `OBJ.GET_ACCESS_URL` function.
 
 This function passes your input to a Gemini model and
-incurs charges in Vertex AI each time it's called.
+incurs charges in Gemini Enterprise Agent Platform each time it's called.
 For information about how to view these charges, see
 [Track costs](/bigquery/docs/generative-ai-overview#track_costs).
 
@@ -140,7 +140,7 @@ AI.CLASSIFY(
 
   For information about configuring permissions, see [Set
   permissions for BigQuery ML generative AI functions that call Vertex AI models](/bigquery/docs/permissions-for-ai-functions).
-* `ENDPOINT`: a `STRING` value that specifies the Vertex AI
+* `ENDPOINT`: a `STRING` value that specifies the Agent Platform
   endpoint to use for the model. You can specify any
   [generally available](/vertex-ai/generative-ai/docs/models#generally_available_models)
   or
@@ -218,7 +218,7 @@ into. If `OUTPUT_MODE` is `single` then the array always has length 1. If
 `OUTPUT_MODE` is `multi` then the array length is between 0 and the number
 of categories.
 
-If the call to Vertex AI is unsuccessful for any reason, such
+If the call to Gemini Enterprise Agent Platform is unsuccessful for any reason, such
 as exceeding quota or model unavailability, then the function returns `NULL` for
 that row. However, if the ratio of unsuccessful rows exceeds the value of
 `max_error_ratio`, then the entire query fails.
@@ -432,7 +432,7 @@ See [Generative AI functions quotas and limits](/bigquery/quotas#generative_ai_f
 
 ## What's next
 
-* For more information about using Vertex AI models to
+* For more information about using Agent Platform models to
   generate text and embeddings, see
   [Generative AI overview](/bigquery/docs/generative-ai-overview).
 * For more information about using Cloud AI APIs to perform AI tasks, see
@@ -450,11 +450,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-05-20 UTC.
+Last updated 2026-05-26 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-20 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-26 UTC."],[],[]]

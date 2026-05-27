@@ -12,11 +12,11 @@ Stay organized with collections
 
 Save and categorize content based on your preferences.
 
-# Set permissions for generative AI functions that call Vertex AI LLMs
+# Set permissions for generative AI functions that call Gemini Enterprise Agent Platform LLMs
 
 This document shows you how to set up permissions for running generative AI
 queries. Generative AI queries contain `AI.*` functions that call foundation
-models in Vertex AI; for example, `AI.GENERATE`.
+models in Gemini Enterprise Agent Platform; for example, `AI.GENERATE`.
 
 There are two ways to set up permissions to run queries that use `AI.*`
 functions:
@@ -44,7 +44,7 @@ following IAM roles on the project:
 
 * Run query jobs:
   [BigQuery Job User](/iam/docs/roles-permissions/bigquery#bigquery.jobUser)  (`roles/bigquery.jobUser`)
-* Access a foundation model in Vertex AI:
+* Access a foundation model in Gemini Enterprise Agent Platform:
   [Vertex AI User](/iam/docs/roles-permissions/aiplatform#aiplatform.user)  (`roles/aiplatform.user`)
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access).
@@ -58,7 +58,7 @@ roles](/iam/docs/roles-overview#predefined).
 
 You can use the Google Cloud console or SQL to grant the required roles for a
 principal. The principal is the user or group that runs the query that uses
-`AI.*` functions to call a Vertex AI foundation model.
+`AI.*` functions to call a Gemini Enterprise Agent Platform foundation model.
 
 ### Console
 
@@ -467,10 +467,10 @@ For more information, see [Create and set up a Cloud resource connection](/bigqu
 
 ### Grant access to the service account
 
-To run queries that use generative `AI.*` functions that call Vertex AI
+To run queries that use generative `AI.*` functions that call Gemini Enterprise Agent Platform
 models, you must grant appropriate permissions to the service account that was
 created when you created your connection. To run functions that call a
-Vertex AI foundation model, the [Vertex AI User role](/iam/docs/roles-permissions/aiplatform#aiplatform.user)
+Gemini Enterprise Agent Platform foundation model, the [Vertex AI User role](/iam/docs/roles-permissions/aiplatform#aiplatform.user)
 (`roles/aiplatform.user`) is required.
 
 Select one of the following options:
@@ -507,7 +507,7 @@ Use the [`GRANT` statement](/bigquery/docs/reference/standard-sql/data-control-l
 
    Replace the following:
    * `PROJECT_ID`: the project where you plan to use
-     Vertex AI.
+     Agent Platform.
    * `CONNECTION_NAME`: the name of the connection in
      either the
      `PROJECT_ID.LOCATION.CONNECTION_ID`
@@ -645,11 +645,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-05-20 UTC.
+Last updated 2026-05-26 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-20 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-26 UTC."],[],[]]

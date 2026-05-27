@@ -40,7 +40,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 #### 快取命中
 
-查看 [`cacheHit`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#jobstatistics2) 值，確認工作快速執行是否為快取命中。如果值為 `true`，表示查詢是快速執行，且查詢使用[快取結果](https://docs.cloud.google.com/bigquery/docs/cached-results?hl=zh-tw)，而非執行查詢。
+查看 [`cacheHit`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#jobstatistics2) 值，確認工作是否因快取命中而快速執行。如果值為 `true`，表示查詢是快速執行，且查詢使用[快取結果](https://docs.cloud.google.com/bigquery/docs/cached-results?hl=zh-tw)，而非執行查詢。
 
 如果預期緩慢的作業會使用快取結果，請調查查詢[不再使用快取結果](https://docs.cloud.google.com/bigquery/docs/cached-results?hl=zh-tw#cache-exceptions)的原因。如果您不希望查詢作業從快取擷取資料，請尋找未命中快取的快速查詢執行範例，以利進行調查。
 
@@ -70,7 +70,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 * SQL 查詢已修改為讀取不同資料表。比較查詢文字以確認。
 * 查詢執行期間，檢視定義有所變更。檢查這項查詢中參照的檢視區塊定義，並視需要[更新](https://docs.cloud.google.com/bigquery/docs/managing-views?hl=zh-tw)。
 
-參考表格的差異可能說明 [`totalBytesProcessed`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#jobstatistics) 的變化。
+參照資料表中的差異可能說明[`totalBytesProcessed`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#jobstatistics)的變化。
 
 #### Materialized view 用量
 
@@ -118,16 +118,16 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 您也可以查詢 `INFORMATION_SCHEMA.JOBS` 檢視畫面，計算[作業每毫秒使用的平均運算單元數](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw#average_number_of_slots_per_millisecond_used_by_a_job)
 
-如果工作執行的工作量相似，但每秒的平均時段數較多，完成速度就會更快。每秒平均運算單元用量偏低的原因可能如下：
+如果工作執行類似的工作量，但每秒的平均時段數較多，完成速度就會更快。每秒平均運算單元用量偏低的原因可能如下：
 
 * 由於不同工作之間發生資源爭用，因此沒有額外資源可用，預訂量已達上限。
 * 在執行作業的大部分時間，這項工作並未要求更多時段。舉例來說，如果資料偏斜，就可能發生這種情況。
 
 #### 工作負載管理模型和預訂大小
 
-如果您使用隨選計費模式，每個專案可用的運算單元數量有限。此外，如果在特定位置對隨選容量有大量爭用，則專案可用運算單元數量有時可能會較少。
+如果您使用以量計價模式，每個專案可用的運算單元數量有限。此外，如果在特定位置對隨選容量有大量爭用，則專案可用運算單元數量有時可能會較少。
 
-容量型模式更具可預測性，可讓您指定已確認的基準運算單元數量。
+以容量為準的模式更具可預測性，可讓您指定已確認的基準運算單元數量。
 
 比較使用隨選與預留項目執行的查詢時，請將這些差異納入考量。
 
@@ -135,7 +135,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 #### 並行工作數量
 
-工作並行數代表查詢執行期間，工作之間對運算單元資源的競爭。工作並行程度越高，工作執行速度通常會越慢，因為工作可用的運算單元較少。
+工作並行數代表查詢執行期間，工作之間對運算單元資源的競爭。工作並行數越高，工作執行速度通常會越慢，因為工作可用的時段較少。
 
 您可以查詢 `INFORMATION_SCHEMA.JOBS` 檢視畫面，[找出專案中與特定查詢同時執行的平均並行工作數](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw#view_average_concurrent_jobs_running_alongside_a_particular_job_in_the_same_project)。
 
@@ -143,19 +143,20 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 如果工作執行緩慢時的平均並行數高於工作執行快速時的平均並行數，就會導致整體速度變慢。
 
-請考慮在專案或預訂中減少並行作業，方法是在預訂或專案中分散資源密集型查詢，或分散到不同的預訂或專案。
+請考慮在專案或預留項目中減少並行作業，方法是在預留項目或專案中，或在不同預留項目或專案中，分散資源密集型查詢。
 
 另一個解決方案是購買預留容量，或增加現有預留容量的大小。建議允許預留項目[使用閒置運算單元](https://docs.cloud.google.com/bigquery/docs/reservations-tasks?hl=zh-tw#configure_whether_queries_use_idle_slots)。
 
 如要瞭解要新增多少運算單元，請參閱[估算運算單元容量需求](https://docs.cloud.google.com/bigquery/docs/slot-estimator?hl=zh-tw)。
 
-如果預留項目指派給多個專案，則在平均工作並行數相同的情況下，工作可能會因執行專案而獲得不同的運算單元指派結果。詳情請參閱[公平排程](https://docs.cloud.google.com/bigquery/docs/slots?hl=zh-tw#fair_scheduling_in_bigquery)的說明。
+如果保留項目指派給多個專案，則在平均工作並行數相同的情況下，工作可能會因執行專案而獲得不同的運算單元指派結果。詳情請參閱[公平排程](https://docs.cloud.google.com/bigquery/docs/slots?hl=zh-tw#fair_scheduling_in_bigquery)的說明。
 
 #### 預留項目使用率
 
 [管理員資源圖表](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts?hl=zh-tw)和 [BigQuery Cloud Monitoring](https://docs.cloud.google.com/bigquery/docs/monitoring-dashboard?hl=zh-tw) 可用於監控預留項目使用率。詳情請參閱「[監控 BigQuery 預留項目](https://docs.cloud.google.com/bigquery/docs/reservations-monitoring?hl=zh-tw)」。
 
-如要瞭解工作是否要求任何額外時段，請查看「預估可執行的單位」指標，該指標位於 Job API 回應中，或 `period_estimated_runnable_units` 位於 [`INFORMATION_SCHEMA.JOBS_TIMELINE` 檢視畫面](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline?hl=zh-tw)。[`estimatedRunnableUnits`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#querytimelinesample)如果這項指標的值大於 0，表示該工作當時可能需要更多時段。如要估算工作執行時間的百分比，瞭解工作是否能從額外時段獲益，請對 [`INFORMATION_SCHEMA.JOBS_TIMELINE` 檢視區塊](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline?hl=zh-tw)執行下列查詢：
+如要瞭解工作是否要求任何額外時段，請查看「預估可執行的單位」指標，該指標位於 Job API 回應中，或 `period_estimated_runnable_units` 位於 [`INFORMATION_SCHEMA.JOBS_TIMELINE` 檢視畫面](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline?hl=zh-tw)。[`estimatedRunnableUnits`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#querytimelinesample)如果這項指標的值大於 0，表示該工作當時可能需要更多時段。
+如要估算工作執行時間的百分比，瞭解工作在哪些時間點可受益於額外時段，請對 [`INFORMATION_SCHEMA.JOBS_TIMELINE` 檢視區塊](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline?hl=zh-tw)執行下列查詢：
 
 ```
 SELECT
@@ -175,7 +176,7 @@ GROUP BY job_id;
 +---------------------------------+
 ```
 
-百分比較低表示在這個情境中，查詢速度緩慢的主要原因並非是可用的時段資源不足。
+百分比較低表示在這個情境中，查詢速度緩慢的主要原因並非是可用的預留運算單元資源不足。
 
 如果百分比偏高，且預訂在此期間未充分運用，請[與 Cloud Customer Care 聯絡](https://docs.cloud.google.com/support?hl=zh-tw)以進行調查。
 
@@ -272,13 +273,13 @@ gcpdiag runbook bigquery/failed-query \
 
 如果工作階段中同時執行多項查詢 (不支援此做法)，就可能發生這項錯誤。請參閱工作階段[限制](https://docs.cloud.google.com/bigquery/docs/sessions-intro?hl=zh-tw#limitations)。
 
-## DML 陳述式衝突
+## 衝突的 DML 陳述式
 
 錯誤字串：`Could not serialize access to table due to concurrent update`
 
 如果對同一資料表執行的資料操縱語言 (DML) 陳述式發生衝突，或是資料表在 DML 陳述式變異期間遭到截斷，就可能發生這項錯誤。詳情請參閱「[DML 陳述式衝突](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language?hl=zh-tw#dml_statement_conflicts)」。
 
-如要解決這個錯誤，請執行影響單一資料表的 DML 作業，確保作業不會重疊。
+如要解決這項錯誤，請執行影響單一資料表的 DML 作業，確保作業不會重疊。
 
 ## 相互關聯的子查詢
 
@@ -307,11 +308,11 @@ supported unless they can be de-correlated`
 
 如要解決這個問題，請修改查詢，排除含有政策標記的資料欄，或授予使用者「精細讀取者」角色。設定政策標記時，系統會將這個角色指派給主體。詳情請參閱「[更新政策標記的權限](https://docs.cloud.google.com/bigquery/docs/column-level-security?hl=zh-tw#update_permission_policy_tags)」。
 
-## 排解已排定查詢的問題
+## 排解排定的查詢問題
 
 設定或執行排定查詢時，可能會發生下列問題。
 
-### 排程查詢觸發重複的執行作業
+### 排定的查詢會觸發重複的執行作業
 
 系統可能會在排定時間多次觸發排定查詢。
 如果查詢排程的時間正好是整點 (例如 09:00)，就比較有可能發生這種情況。
@@ -400,11 +401,11 @@ AND query = "my query string";
 
 如要解決這個錯誤，請參閱[錯誤表格](https://docs.cloud.google.com/bigquery/docs/error-messages?hl=zh-tw#errortable)中 `responseTooLarge` 錯誤訊息的指引。
 
-## 找不到預訂項目或缺少運算單元
+## 找不到預訂資訊或缺少預約時段
 
 錯誤字串：`Cannot run query: project does not have the reservation in the data region or no slots are configured`
 
-如果指派給查詢區域中專案的預留項目沒有任何指派的時段，就會發生這個錯誤。您可以將配額新增至預留項目、允許預留項目使用閒置配額、使用其他預留項目，或是移除指派項目並視需要執行查詢。
+如果指派給查詢區域中專案的預留項目沒有任何指派的時段，就會發生這個錯誤。您可以將運算單元新增至預留項目、允許預留項目使用閒置運算單元、使用其他預留項目，或是移除指派項目並視需要執行查詢。
 
 ## 找不到資料表
 
@@ -414,13 +415,13 @@ AND query = "my query string";
 
 * 確認查詢包含正確的專案、資料集和資料表名稱。
 * 確認資料表位於您執行查詢的區域。
-* 請確認在執行作業期間，資料表未遭捨棄並重新建立。否則，不完整的中繼資料傳播可能會導致這個錯誤。
+* 確認在執行作業期間，資料表未遭捨棄並重新建立。否則，中繼資料傳播不完整可能會導致這個錯誤。
 
 ## DML 陳述式過多
 
 錯誤字串：`Too many DML statements outstanding against <table-name>, limit is 20`
 
-如果單一資料表佇列中處於 `PENDING` 狀態的 DML 陳述式超過 [20 個](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#data-manipulation-language-statements)，就會發生這項錯誤。如果您提交 DML 工作至單一資料表的速度，比 BigQuery 的處理速度快，通常就會發生這個錯誤。
+如果單一資料表的佇列中，有超過 [20 個 DML 陳述式](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#data-manipulation-language-statements)處於 `PENDING` 狀態，就會發生這項錯誤。如果您提交 DML 工作至單一資料表的速度，比 BigQuery 的處理速度快，通常就會發生這個錯誤。
 
 其中一個可能的解決方法是將多個較小的 DML 作業分組，變成較大但數量較少的工作，例如批次更新和插入。將較小的工作分組為較大的工作時，執行較大工作的成本會攤銷，執行速度也會更快。合併影響相同資料的 DML 陳述式通常可提高 DML 工作效率，且較不可能超出佇列大小配額限制。如要進一步瞭解如何最佳化 DML 作業，請參閱「[避免使用更新或插入單列的 DML 陳述式](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-compute?hl=zh-tw#avoid-dml-update-single-rows)」。
 
@@ -504,7 +505,7 @@ do not belong to a permitted customer.`
 
 **注意：** 如果使用者帳戶或服務帳戶受到拒絕政策影響，即使帳戶具有正確權限，您仍可能會收到 `Access denied` 錯誤。詳情請參閱「[拒絕政策](https://docs.cloud.google.com/iam/docs/deny-overview?hl=zh-tw)」。
 
-### 預訂的權限 `bigquery.reservations.use` 遭拒
+### 保留項目遭拒授予 `bigquery.reservations.use` 權限
 
 錯誤字串：
 
@@ -590,7 +591,7 @@ of memory`。
 
 如要解決這項錯誤，請按照下列步驟操作：
 
-1. *使用 Vertex AI 遠端模型*：如要使用超出記憶體限制的模型，請按照 [部署模型](https://docs.cloud.google.com/vertex-ai/docs/predictions/deploy-model-api?hl=zh-tw)的步驟，使用 Vertex AI SDK for Python 將模型部署至 Vertex AI，然後使用[遠端模型](https://docs.cloud.google.com/bigquery/docs/bigquery-ml-remote-model-tutorial?hl=zh-tw)存取模型。這會將記憶體需求卸載至專屬的 Vertex AI 基礎架構。
+1. *使用 Vertex AI 遠端模型*：如要使用超出記憶體限制的模型，請按照 [部署模型](https://docs.cloud.google.com/vertex-ai/docs/predictions/deploy-model-api?hl=zh-tw)的步驟，使用 Vertex AI SDK for Python 將模型部署至 Agent Platform，然後使用[遠端模型](https://docs.cloud.google.com/bigquery/docs/bigquery-ml-remote-model-tutorial?hl=zh-tw)存取。這會將記憶體需求卸載至專屬的 Agent Platform 基礎架構。
 2. *最佳化模型*：使用架構簡化、量化或剪枝，減少模型的 RAM 占用空間。
 3. *使用較不密集的函式*：如果錯誤發生在 `ML.EXPLAIN_PREDICT` 呼叫期間，請嘗試使用 `ML.PREDICT` 執行工作，判斷模型是否能在沒有可解釋性功能額外負荷的情況下執行。
 4. *分析輸入資料大小*：個別資料列過大可能會導致記憶體耗盡。使用下列指令檢查最大資料列的大小：
@@ -673,7 +674,7 @@ LIMIT
 
 **載入工作**：
 
-如果您載入 Avro 或 Parquet 檔案，請縮減檔案中的列大小。請檢查要載入的檔案格式是否有特定大小限制：
+如果您載入 Avro 或 Parquet 檔案，請縮減檔案中的列大小。檢查要載入的檔案格式是否有特定大小限制：
 
 * [Avro 輸入檔案規定](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-avro?hl=zh-tw#input_file_requirements)
 * [Parquet 輸入檔案規定](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet?hl=zh-tw#input_file_requirements)
@@ -684,7 +685,7 @@ LIMIT
 
 錯誤字串：`Stream memory usage exceeded`
 
-在 Storage Read API `ReadRows` 呼叫期間，部分記憶體用量高的串流可能會收到 `RESOURCE_EXHAUSTED` 錯誤，並顯示這則訊息。如果讀取寬資料表或結構定義複雜的資料表，就可能發生這種情況。為解決這個問題，請選取較少的資料欄來讀取 (使用 [`selected_fields` 參數](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1?hl=zh-tw#tablereadoptions))，或是簡化資料表結構定義，藉此縮減結果列大小。
+在 Storage Read API `ReadRows` 呼叫期間，部分記憶體用量高的串流可能會收到 `RESOURCE_EXHAUSTED` 錯誤，並顯示這則訊息。如果讀取的表格很寬，或是結構定義複雜，就可能發生這種情況。為解決這個問題，請選取較少的資料欄來讀取 (使用 [`selected_fields` 參數](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1?hl=zh-tw#tablereadoptions))，或是簡化資料表結構定義，藉此縮減結果列大小。
 
 ## 排解連線問題
 
@@ -724,7 +725,7 @@ traceroute -T -p 443 142.250.178.138
 
 ### 產生 PCAP 檔案並分析防火牆或 Proxy
 
-產生封包擷取檔案 (PCAP)，並分析該檔案，確保防火牆或 Proxy 不會濾除傳送至 Google IP 的封包，且允許封包傳送至 GFE。
+產生封包擷取檔案 (PCAP)，並分析該檔案，確保防火牆或 Proxy 不會篩除傳送至 Google IP 的封包，且允許封包傳送至 GFE。
 
 以下是可使用 [`tcpdump`](https://www.tcpdump.org/) 工具執行的指令範例：
 
@@ -734,7 +735,7 @@ tcpdump -s 0 -w debug.pcap -K -n host bigquery.googleapis.com
 
 ### 針對間歇性連線問題設定重試機制
 
-在某些情況下，GFE 負載平衡器可能會捨棄來自用戶端 IP 的連線，例如偵測到 DDoS 流量模式，或是負載平衡器執行個體縮減規模，導致端點 IP 遭到回收。如果 GFE 負載平衡器中斷連線，用戶端必須擷取逾時要求，並對 DNS 端點重試要求。請務必不要使用相同的 IP 位址，直到要求最終成功為止，因為 IP 位址可能已變更。
+在某些情況下，GFE 負載平衡器可能會捨棄來自用戶端 IP 的連線，例如偵測到 DDoS 流量模式，或是負載平衡器執行個體縮減規模，導致端點 IP 遭到回收。如果 GFE 負載平衡器中斷連線，用戶端必須擷取逾時要求，然後對 DNS 端點重試要求。請務必不要使用相同的 IP 位址，直到要求最終成功為止，因為 IP 位址可能已變更。
 
 如果您發現 Google 端持續發生逾時問題，且重試無效，請[與 Cloud Customer Care 團隊聯絡](https://docs.cloud.google.com/support?hl=zh-tw)，並附上透過執行 [tcpdump](https://www.tcpdump.org/) 等封包擷取工具產生的最新 PCAP 檔案。
 
@@ -752,11 +753,11 @@ tcpdump -s 0 -w debug.pcap -K -n host bigquery.googleapis.com
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-21 (世界標準時間)。
+上次更新時間：2026-05-27 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-21 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-27 (世界標準時間)。"],[],[]]

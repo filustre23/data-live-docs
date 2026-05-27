@@ -1109,4 +1109,4 @@ gcloud dataplex datascans jobs list \
 
 ### C#
 
-在試用這個
+在試用這個範例之前，請先按照「
