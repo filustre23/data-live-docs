@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-05-27T02:02+00:00_
+_Generated 2026-05-27T08:47+00:00_
 
-**9 sources, 5062 topics total**
+**9 sources, 5064 topics total**
 
 ## airflow
 
@@ -2968,7 +2968,7 @@ _1532 topics_
 
 Upstream: <https://code.claude.com/docs/en/>
 
-_139 topics_
+_141 topics_
 
 - `claude-code/admin-setup`
 - `claude-code/agent-sdk/agent-loop`
@@ -3052,6 +3052,7 @@ _139 topics_
 - `claude-code/interactive-mode`
 - `claude-code/jetbrains`
 - `claude-code/keybindings`
+- `claude-code/large-codebases`
 - `claude-code/legal-and-compliance`
 - `claude-code/llm-gateway`
 - `claude-code/managed-mcp`
@@ -3080,6 +3081,7 @@ _139 topics_
 - `claude-code/sandboxing`
 - `claude-code/scheduled-tasks`
 - `claude-code/security`
+- `claude-code/security-guidance`
 - `claude-code/server-managed-settings`
 - `claude-code/sessions`
 - `claude-code/settings`
