@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-05-28T08:34+00:00_
+_Generated 2026-05-28T15:35+00:00_
 
-**9 sources, 5064 topics total**
+**9 sources, 5063 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_1406 topics_
+_1405 topics_
 
 - `anthropic-sdk/agents-and-tools/agent-skills/best-practices`
 - `anthropic-sdk/agents-and-tools/agent-skills/enterprise`
@@ -887,7 +887,6 @@ _1406 topics_
 - `anthropic-sdk/api/php/beta/sessions/resources/add`
 - `anthropic-sdk/api/php/beta/sessions/resources/delete`
 - `anthropic-sdk/api/php/beta/sessions/resources/list`
-- `anthropic-sdk/api/php/beta/sessions/resources/retrieve`
 - `anthropic-sdk/api/php/beta/sessions/resources/update`
 - `anthropic-sdk/api/php/beta/sessions/retrieve`
 - `anthropic-sdk/api/php/beta/sessions/threads`
