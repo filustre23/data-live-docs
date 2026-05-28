@@ -16,7 +16,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 在 dbt 中使用 BigQuery DataFrames
 
-[dbt](https://www.getdbt.com/) (資料建構工具) 是開放原始碼的指令列架構，專為現代資料倉儲中的資料轉換作業而設計。dbt 可建立可重複使用的 SQL 和 Python 型模型，簡化模組化資料轉換作業。這項工具會自動調度管理目標資料倉儲中的轉換作業，著重於 ELT 管道的轉換步驟。詳情請參閱 [dbt 說明文件](https://docs.getdbt.com/)。
+[dbt](https://www.getdbt.com/) (資料建構工具) 是開放原始碼的指令列框架，專為現代資料倉儲中的資料轉換作業而設計。dbt 可建立可重複使用的 SQL 和 Python 型模型，簡化模組化資料轉換作業。這項工具會自動調度管理目標資料倉儲中的轉換作業，著重於 ELT 管道的轉換步驟。詳情請參閱 [dbt 說明文件](https://docs.getdbt.com/)。
 
 在 dbt 中，Python 模型是一種資料轉換，可在 dbt 專案中，使用 Python 程式碼定義及執行。您不必為轉換邏輯編寫 SQL，而是編寫 Python 指令碼，然後由 dbt 協調在資料倉儲環境中執行。Python 模型可讓您執行資料轉換，這些轉換可能很複雜，或難以用 SQL 表示。這項功能可充分運用 Python 的功能，同時享有 dbt 的專案結構、自動化調度管理、依附元件管理、測試和文件功能。詳情請參閱 [Python 模型](https://docs.getdbt.com/docs/build/python-models)。
 
@@ -45,12 +45,12 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 #### OAuth
 
-如果您打算使用 OAuth 驗證 `dbt-bigquery` 介面卡，請要求管理員授予您下列角色：
+如果您打算使用 OAuth 驗證 `dbt-bigquery` 介面卡，請要求系統管理員授予您下列角色：
 
 * 專案的 [BigQuery 使用者角色](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.user) (`roles/bigquery.user`)
-* 專案或資料集的 [BigQuery 資料編輯者角色](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataEditor) (`roles/bigquery.dataEditor`)，資料表會儲存於該專案或資料集
+* 專案或資料集的「BigQuery 資料編輯者」角色 (`roles/bigquery.dataEditor`)，用於儲存資料表
 * 專案的 [Colab Enterprise 使用者角色](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform?hl=zh-tw#aiplatform.colabEnterpriseUser) (`roles/colabEnterprise.user`)
-* 暫存 Cloud Storage bucket 的[儲存空間管理員角色](https://docs.cloud.google.com/iam/docs/roles-permissions/storage?hl=zh-tw#storage.admin) (`roles/storage.admin`)，用於暫存程式碼和記錄
+* 暫存 Cloud Storage bucket 的[儲存空間管理員角色](https://docs.cloud.google.com/iam/docs/roles-permissions/storage?hl=zh-tw#storage.admin) (`roles/storage.admin`)，用於暫存程式碼和記錄檔
 
 #### 服務帳戶
 
@@ -95,15 +95,15 @@ Google uses AI technology to translate content into your preferred language. AI 
 * 請按照先前所述的步驟，為其他專案中的服務帳戶建立[跨專案服務帳戶](#cross-project_service_accounts)。
 * 授予您和服務帳戶[服務帳戶模擬所需的角色](#service_account_impersonation)
 
-#### 共用虛擬私有雲
+#### Shared VPC
 
 如果您在 Shared VPC 環境中使用 Colab Enterprise，請要求管理員授予下列角色和權限：
 
 * [`compute.subnetworks.use` 權限](https://docs.cloud.google.com/iam/docs/roles-permissions/compute?hl=zh-tw#compute.subnetworks.use)：將這項權限授予主機專案或特定子網路中，Colab Enterprise 執行階段使用的服務帳戶。「Compute 網路使用者」角色 (`roles/compute.networkUser`) 已具備此權限。
 * [`compute.subnetworks.get` 權限](https://docs.cloud.google.com/iam/docs/roles-permissions/compute?hl=zh-tw#compute.subnetworks.get)：將這項權限授予主專案或特定子網路中，Colab Enterprise 執行階段使用的服務帳戶。[Compute 網路檢視者角色](https://docs.cloud.google.com/iam/docs/roles-permissions/compute?hl=zh-tw#compute.networkViewer) (`roles/compute.networkViewer`) 已具備此權限。
 * [Compute Network User 角色](https://docs.cloud.google.com/iam/docs/roles-permissions/compute?hl=zh-tw#compute.networkUser)
-  (`roles/compute.networkUser`)：在共用 VPC 主專案中，將這個角色授予 Vertex AI 服務代理程式 `service-PROJECT_NUMBER@gcp-sa-aiplatform.iam.gserviceaccount.com`。
-* [Compute Network User 角色](https://docs.cloud.google.com/iam/docs/roles-permissions/compute?hl=zh-tw#compute.networkUser) (`roles/compute.networkUser`)：如果使用筆記本執行作業功能，請在共用 VPC 主專案中，將這個角色授予 Colab Enterprise 服務代理程式 `service-PROJECT_NUMBER@gcp-sa-vertex-nb.iam.gserviceaccount.com`。
+  (`roles/compute.networkUser`)：在 Shared VPC 主專案中，將這個角色授予 Gemini Enterprise Agent Platform 服務代理程式 `service-PROJECT_NUMBER@gcp-sa-aiplatform.iam.gserviceaccount.com`。
+* [Compute Network User 角色](https://docs.cloud.google.com/iam/docs/roles-permissions/compute?hl=zh-tw#compute.networkUser) (`roles/compute.networkUser`)：如果使用筆記本執行作業功能，請在 Shared VPC 主專案中，將這個角色授予 Colab Enterprise 服務代理程式 `service-PROJECT_NUMBER@gcp-sa-vertex-nb.iam.gserviceaccount.com`。
 
 **注意：** 請將 PROJECT\_NUMBER 替換為專案編號 Google Cloud 。
 
@@ -113,7 +113,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## Python 執行環境
 
-`dbt-bigquery` 轉接程式會使用 [Colab Enterprise 筆記本執行器服務](https://docs.cloud.google.com/vertex-ai/docs/colab/connect-to-runtime?hl=zh-tw)，執行 BigQuery DataFrames Python 程式碼。`dbt-bigquery` 適配器會自動為每個 Python 模型建立並執行 Colab Enterprise 筆記本。您可以選擇要執行筆記本的Google Cloud 專案。筆記本會執行模型中的 Python 程式碼，並由 BigQuery DataFrames 程式庫轉換為 BigQuery SQL。然後在設定的專案中執行 BigQuery SQL。下圖顯示控制流程：
+`dbt-bigquery` 介面卡會使用 [Colab Enterprise 筆記本執行器服務](https://docs.cloud.google.com/gemini-enterprise-agent-platform/notebooks/colab/connect-to-runtime?hl=zh-tw)，執行 BigQuery DataFrames Python 程式碼。`dbt-bigquery` 介面卡會自動為每個 Python 模型建立並執行 Colab Enterprise 筆記本。您可以選擇要執行筆記本的Google Cloud 專案。筆記本會執行模型中的 Python 程式碼，並由 BigQuery DataFrames 程式庫轉換為 BigQuery SQL。然後在設定的專案中執行 BigQuery SQL。下圖顯示控制流程：
 
 如果專案中沒有可用的筆記本範本，且執行程式碼的使用者有權建立範本，`dbt-bigquery`介面卡會自動建立並使用預設筆記本範本。您也可以使用 [dbt 設定](#configurations)指定其他筆記本範本。
 
@@ -190,7 +190,7 @@ models:
 
 ## 設定
 
-您可以在 Python 模型中使用 `dbt.config` 方法設定下列項目。這些設定會覆寫專案層級設定。
+您可以在 Python 模型中使用 `dbt.config` 方法設定下列項目。這些設定會覆寫專案層級的設定。
 
 | 設定 | 必填 | 用量 |
 | --- | --- | --- |
@@ -314,7 +314,7 @@ def model(dbt, session):
     return bpd.DataFrame(data=data)
 ```
 
-透過合併策略進行增量具體化，可讓 dbt 只更新資料表中的新資料列或修改過的資料列。這項功能適用於大型資料集，因為每次都完全重建資料表可能效率不彰。合併策略是處理這些更新的常見方式。
+透過合併策略進行增量具體化，dbt 就能只更新資料表中的新資料列或修改過的資料列。這項功能適用於大型資料集，因為每次都完全重建資料表可能效率不彰。合併策略是處理這些更新的常見方式。
 
 這個方法會透過下列方式智慧整合變更：
 
@@ -366,7 +366,7 @@ def model(dbt, session):
 
 * 如要進一步瞭解 dbt 和 BigQuery DataFrames，請參閱「[使用 BigQuery DataFrames 搭配 dbt Python 模型](https://docs.getdbt.com/guides/dbt-python-bigframes)」。
 * 如要進一步瞭解 dbt Python 模型，請參閱「[Python 模型](https://docs.getdbt.com/docs/build/python-models)」和「[Python 模型設定](https://docs.getdbt.com/reference/resource-configs/bigquery-configs#python-model-configuration)」。
-* 如要進一步瞭解 Colab Enterprise 筆記本，請參閱「[使用 Google Cloud 控制台建立 Colab Enterprise 筆記本](https://docs.cloud.google.com/vertex-ai/docs/colab/create-console-quickstart?hl=zh-tw)」。
+* 如要進一步瞭解 Colab Enterprise 筆記本，請參閱「[使用 Google Cloud 控制台建立 Colab Enterprise 筆記本](https://docs.cloud.google.com/gemini-enterprise-agent-platform/notebooks/colab/create-console-quickstart?hl=zh-tw)」。
 * 如要進一步瞭解合作夥伴，請參閱 Google Cloud [Google Cloud Ready - BigQuery 合作夥伴](https://docs.cloud.google.com/bigquery/docs/bigquery-ready-partners?hl=zh-tw)。
 
 
@@ -376,11 +376,11 @@ def model(dbt, session):
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-21 (世界標準時間)。
+上次更新時間：2026-05-27 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-21 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-27 (世界標準時間)。"],[],[]]

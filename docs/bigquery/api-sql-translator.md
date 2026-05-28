@@ -29,7 +29,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### 所需權限
 
-如要取得使用 Translation API 建立翻譯工作所需的權限，請要求系統管理員授予 `parent` 資源的[MigrationWorkflow 編輯者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquerymigration?hl=zh-tw#bigquerymigration.editor)  (`roles/bigquerymigration.editor`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和機構的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得使用 Translation API 建立翻譯工作所需的權限，請要求系統管理員授予 `parent` 資源的[遷移工作流程編輯者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquerymigration?hl=zh-tw#bigquerymigration.editor)  (`roles/bigquerymigration.editor`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和機構的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
 這個預先定義的角色具備使用 Translation API 建立翻譯作業所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
@@ -91,13 +91,13 @@ Google uses AI technology to translate content into your preferred language. AI 
 雖然 `bqutil` 可方便存取這些輔助 UDF，進行初始轉譯和測試，但基於下列原因，不建議直接依賴 `bqutil` 處理正式版工作負載：
 
 1. 版本管控：`bqutil` 專案會代管這些 UDF 的最新版本，因此定義可能會隨時間變更。如果 UDF 的邏輯更新，直接依賴 `bqutil` 可能會導致生產查詢發生非預期行為或重大變更。
-2. 依附元件隔離：將 UDF 部署至自己的專案，可避免外部變更影響正式環境。
+2. 依附元件隔離：將 UDF 部署至自己的專案，可將正式環境與外部變更隔離。
 3. 自訂：您可能需要修改或最佳化這些 UDF，進一步符合特定商業邏輯或效能需求。只有在這些資源位於您的專案中時，才能執行這項操作。
-4. 安全性和治理：貴機構的安全政策可能會限制直接存取 `bqutil` 等公開資料集，以處理正式環境資料。將 UDF 複製到受控環境，符合這類政策規定。
+4. 安全性和治理：貴機構的安全政策可能會限制直接存取公開資料集 (例如 `bqutil`)，以處理正式環境資料。將 UDF 複製到受控環境，符合這類政策規定。
 
 #### 將輔助 UDF 部署至專案：
 
-如要穩定可靠地在實際工作環境中使用，請將這些輔助 UDF 部署到自己的專案和資料集。您可以全面掌控這些應用程式的版本、自訂項目和存取權。
+如要穩定可靠地在正式環境中使用，請將這些輔助 UDF 部署到自己的專案和資料集。您可以全面掌控這些應用程式的版本、自訂項目和存取權。
 如需部署這些 UDF 的詳細操作說明，請參閱 [GitHub 上的 UDF 部署指南](https://github.com/GoogleCloudPlatform/bigquery-utils/tree/master/udfs#deploying-the-udfs)。本指南提供必要的指令碼和步驟，協助您將 UDF 複製到環境中。
 
 ## 位置
@@ -159,7 +159,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 提交翻譯工作
 
-如要使用 Translation API 提交翻譯工作，請使用 [`projects.locations.workflows.create`](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows/create?hl=zh-tw) 方法，並提供 [`MigrationWorkflow`](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows?hl=zh-tw#resource:-migrationworkflow) 資源的執行個體，以及[支援的工作類型](#supported_task_types)。
+如要使用 Translation API 提交翻譯工作，請使用 [`projects.locations.workflows.create`](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows/create?hl=zh-tw) 方法，並提供 [`MigrationWorkflow`](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows?hl=zh-tw#resource:-migrationworkflow) 資源的執行個體和[支援的工作類型](#supported_task_types)。
 
 提交工作後，即可[發出查詢來取得結果](#explore_the_translation_output)。
 
@@ -251,7 +251,7 @@ curl -d "{
 這項產品或功能適用《[服務專屬條款](https://docs.cloud.google.com/terms/service-terms?hl=zh-tw#1)》中「一般服務條款」一節的《正式發布前產品條款》。正式發布前的產品和功能是按照「原樣」提供，支援範圍可能有限。
 詳情請參閱[推出階段說明](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
 
-**注意：** 翻譯 API 可以透過 BigQuery Vertex AI 整合功能呼叫 Gemini，根據 AI 設定 YAML 檔案，為翻譯後的 SQL 查詢產生建議。
+**注意：** 翻譯 API 可以透過 BigQuery Agent Platform 整合功能呼叫 Gemini，根據 AI 設定 YAML 檔案，為翻譯後的 SQL 查詢產生建議。
 
 以下範例會翻譯 `gs://my_data_bucket/teradata/input/` Cloud Storage 目錄中的 Teradata SQL 指令碼，並將結果儲存在 `gs://my_data_bucket/teradata/output/` Cloud Storage 目錄中，同時提供額外的 AI 建議：
 
@@ -274,7 +274,7 @@ curl -d "{
 }
 ```
 
-**注意：** 如要產生 AI 建議，Cloud Storage 來源目錄必須包含至少一個後置字元為 `.ai_config.yaml` 的設定 YAML 檔案。如要瞭解如何編寫 AI 建議的設定 YAML 檔案，請參閱[建立以 Gemini 為基礎的設定 YAML 檔案](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation?hl=zh-tw#ai_yaml_guidelines)。
+**注意：** 如要產生 AI 建議，Cloud Storage 來源目錄必須包含至少一個設定 YAML 檔案，且檔案尾碼為 `.ai_config.yaml`。如要瞭解如何編寫 AI 建議的設定 YAML 檔案，請參閱[建立以 Gemini 為基礎的設定 YAML 檔案](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation?hl=zh-tw#ai_yaml_guidelines)。
 
 工作順利執行後，您可以在 `gs://my_data_bucket/teradata/output/suggestion` Cloud Storage 目錄中找到 AI 建議。
 
@@ -419,11 +419,11 @@ curl \
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-21 (世界標準時間)。
+上次更新時間：2026-05-27 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-21 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-27 (世界標準時間)。"],[],[]]

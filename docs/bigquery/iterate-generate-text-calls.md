@@ -58,8 +58,8 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 * **BigQuery ML**: You incur costs for the data that you
   process in BigQuery.
-* **Vertex AI**: You incur costs for calls to the
-  Vertex AI model.
+* **Gemini Enterprise Agent Platform**: You incur costs for calls to the
+  Agent Platform model.
 
 如要根據預測用量估算費用，請使用 [Pricing Calculator](https://docs.cloud.google.com/products/calculator?hl=zh-tw)。
 
@@ -67,7 +67,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 如要進一步瞭解 BigQuery 定價，請參閱 [BigQuery 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw)。
 
-如要進一步瞭解 Vertex AI 定價，請參閱 [Vertex AI 定價](https://docs.cloud.google.com/vertex-ai/generative-ai/pricing?hl=zh-tw)。
+如要進一步瞭解 Agent Platform 計價方式，請參閱[這篇文章](https://docs.cloud.google.com/vertex-ai/generative-ai/pricing?hl=zh-tw)。
 
 ## 事前準備
 
@@ -76,12 +76,12 @@ Google uses AI technology to translate content into your preferred language. AI 
    **選取或建立專案所需的角色**
 
    * **選取專案**：選取專案時，不需要具備特定 IAM 角色，只要您已獲授角色，即可選取任何專案。
-   * **建立專案**：如要建立專案，您需要具備專案建立者角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   * **建立專案**：如要建立專案，您需要「專案建立者」角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
    **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，而不要選取現有專案。完成這些步驟後，您就可以刪除專案，並移除與該專案相關聯的所有資源。
 
    [前往專案選取器](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
 2. [確認專案已啟用計費功能 Google Cloud](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project) 。
-3. 啟用 BigQuery、BigQuery Connection 和 Vertex AI API。
+3. 啟用 BigQuery、BigQuery Connection 和 Agent Platform API。
 
    **啟用 API 時所需的角色**
 
@@ -106,7 +106,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 建立文字生成模型
 
-建立代表代管 Vertex AI `gemini-2.5-flash` 模型的遠端模型：
+建立遠端模型，代表託管的 Agent Platform 模型：`gemini-2.5-flash`
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -176,11 +176,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-21 (世界標準時間)。
+上次更新時間：2026-05-27 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-21 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-27 (世界標準時間)。"],[],[]]

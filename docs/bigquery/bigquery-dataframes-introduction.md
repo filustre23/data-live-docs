@@ -54,11 +54,11 @@ BigQuery DataFrames 的功能如下：
 * 透過透明的 SQL 轉換，實作超過 750 個 pandas 和 scikit-learn API，並轉換為 BigQuery 和 BigQuery ML API。
 * 延後執行查詢，以提升效能。
 * 使用使用者定義的 Python 函式擴充資料轉換作業，以便在 Google Cloud中處理資料。這些函式會自動部署為 BigQuery [遠端函式](https://docs.cloud.google.com/bigquery/docs/remote-functions?hl=zh-tw)。
-* 整合 Vertex AI，可使用 Gemini 模型生成文字。
+* 與 Gemini Enterprise Agent Platform 整合，可使用 Gemini 模型生成文字。
 
 ## 授權
 
-BigQuery DataFrames 採用 [Apache-2.0 授權](https://github.com/googleapis/python-bigquery-dataframes/blob/main/LICENSE)發布。
+BigQuery DataFrames 採用 [Apache 2.0 授權](https://github.com/googleapis/python-bigquery-dataframes/blob/main/LICENSE)發布。
 
 BigQuery DataFrames 也包含衍生自下列第三方套件的程式碼：
 
@@ -74,17 +74,17 @@ BigQuery DataFrames 也包含衍生自下列第三方套件的程式碼：
 
 * [BigQuery 配額](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw)適用於 BigQuery DataFrames，包括硬體、軟體和網路元件。
 * 支援部分 pandas 和 scikit-learn API。詳情請參閱「[支援的 pandas API](https://dataframes.bigquery.dev/supported_pandas_apis.html)」。
-* 您必須明確清除自動建立的 Cloud Run 函式，這是工作階段清理作業的一部分。詳情請參閱「[支援的 pandas API](https://dataframes.bigquery.dev/supported_pandas_apis.html)」。
+* 您必須明確清理任何自動建立的 Cloud Run 函式，這是工作階段清理作業的一部分。詳情請參閱「[支援的 pandas API](https://dataframes.bigquery.dev/supported_pandas_apis.html)」。
 
 ## 定價
 
 * BigQuery DataFrames 是一組開放原始碼 Python 程式庫，可免費下載。
-* BigQuery DataFrames 會使用 BigQuery、Cloud Run functions、Vertex AI 和其他Google Cloud 服務，這些服務會產生各自的費用。
+* BigQuery DataFrames 會使用 BigQuery、Cloud Run 函式、Agent Platform 和其他Google Cloud 服務，這些服務會產生各自的費用。
 * 在一般使用期間，BigQuery DataFrames 會將中繼結果等臨時資料儲存在 BigQuery 資料表中。根據預設，這些資料表會保留七天，且系統會向您收取儲存在其中的資料費用。資料表會在您於 [`bf.options.bigquery.project` 選項](https://dataframes.bigquery.dev/reference/api/bigframes._config.BigQueryOptions.html)中指定的 Google Cloud 專案中，於 `_anonymous_` 資料集內建立。
 
 ## 後續步驟
 
-* 試用 [BigQuery DataFrames 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)。
+* 試用 [BigQuery DataFrames 快速入門指南](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)。
 * [安裝 BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/install-dataframes?hl=zh-tw)。
 * 瞭解如何[使用 BigQuery DataFrame 繪製圖表](https://docs.cloud.google.com/bigquery/docs/dataframes-visualizations?hl=zh-tw)。
 * 瞭解如何[使用 `dbt-bigquery` 轉接頭](https://docs.cloud.google.com/bigquery/docs/dataframes-dbt?hl=zh-tw)。
@@ -96,11 +96,11 @@ BigQuery DataFrames 也包含衍生自下列第三方套件的程式碼：
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-21 (世界標準時間)。
+上次更新時間：2026-05-27 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-21 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-27 (世界標準時間)。"],[],[]]

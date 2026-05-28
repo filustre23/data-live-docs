@@ -43,9 +43,9 @@ BigQuery 持續查詢是會不斷執行的 SQL 陳述式，持續查詢功能可
 * **異常偵測**：建構解決方案，即時對複雜資料執行異常狀況和威脅偵測，以便更快應對問題。
 * **可自訂的事件導向管道**：整合 Pub/Sub 持續查詢，根據傳入的資料觸發下游應用程式。
 * **資料擴充和實體擷取**：使用持續查詢，透過 SQL 函式和 ML 模型執行即時資料擴充和轉換。
-* **反向擷取、轉換及載入 (ETL)**：執行即時反向 ETL，將資料載入至其他更適合低延遲應用程式服務的儲存系統。舉例來說，您可以分析或改善寫入 BigQuery 的事件資料，然後將資料串流至 Bigtable 或 Spanner，以用於應用程式服務。
-* **自主觸發代理程式**：根據即時資料串流中偵測到的複雜事件，即時觸發代理程式資料管道。如需範例，請參閱[使用 BigQuery 和 Agent Development Kit (ADK) 建構事件導向的資料代理程式碼實驗室](https://codelabs.developers.google.com/bigquery-adk-event-driven-agents?hl=zh-tw)。
-* **自主式代理程式監控**：使用 [BigQuery 代理程式分析外掛程式](https://adk.dev/integrations/bigquery-agent-analytics/)，針對即時代理功能互動開發即時自動監控和警報功能，將所有代理程式追蹤記錄資料、工具用量和作業記錄直接串流到 BigQuery，深入觀察 AI 員工。
+* **反向擷取、轉換及載入 (ETL)**：執行即時反向 ETL，將資料載入至其他更適合低延遲應用程式服務的儲存系統。舉例來說，您可以分析或強化寫入 BigQuery 的事件資料，然後將資料串流至 Bigtable 或 Spanner，供應用程式提供服務。
+* **自主觸發代理**：根據即時資料串流中偵測到的複雜事件，即時觸發代理資料管道。如需範例，請參閱[使用 BigQuery 和 Agent Development Kit (ADK) 建構事件導向的資料代理程式碼實驗室](https://codelabs.developers.google.com/bigquery-adk-event-driven-agents?hl=zh-tw)。
+* **自主式代理程式監控**：使用 [BigQuery 代理程式分析外掛程式](https://adk.dev/integrations/bigquery-agent-analytics/)，針對即時代理功能互動開發即時自動監控和警報功能，將所有代理程式追蹤記錄、工具用量和作業記錄直接串流到 BigQuery，深入觀察 AI 員工。
 
 ## 支援的功能
 
@@ -62,7 +62,7 @@ BigQuery 持續查詢是會不斷執行的 SQL 陳述式，持續查詢功能可
   + [`AI.GENERATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate?hl=zh-tw)
   + [`AI.GENERATE_TEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text?hl=zh-tw)
 
-    - 如要使用這項函式，您必須透過 [Vertex AI 模型](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models?hl=zh-tw)建立 [BigQuery ML 遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw)。
+    - 如要使用這項函式，您必須擁有[BigQuery ML 遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw)，並以 [Gemini Enterprise Agent Platform 模型](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models?hl=zh-tw)為基礎。
 * 呼叫下列 AI 函式：
 
   + [`ML.UNDERSTAND_TEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-understand-text?hl=zh-tw)
@@ -89,14 +89,14 @@ BigQuery 持續查詢是會不斷執行的 SQL 陳述式，持續查詢功能可
 
 有狀態作業可讓連續查詢執行複雜分析，這類分析需要保留多個資料列或時間間隔的資訊。無狀態函式會獨立處理每個資料列，有狀態作業則會維護擷取資料的狀態，以支援 [`JOIN`、匯總和視窗匯總](https://docs.cloud.google.com/bigquery/docs/continuous-queries?hl=zh-tw#join-agg-window-example)等函式。這項功能可讓您在查詢執行期間，將必要資料儲存在記憶體中，藉此關聯不同串流的事件，或計算一段時間內的指標 (例如 30 分鐘平均值)。
 
-持續查詢支援下列有狀態作業：
+連續查詢支援下列有狀態作業：
 
 * [JOIN](https://docs.cloud.google.com/bigquery/docs/continuous-query-joins?hl=zh-tw)
 * [匯總和視窗化](https://docs.cloud.google.com/bigquery/docs/window-aggregations?hl=zh-tw)
 
 ## 授權
 
-執行持續查詢作業時使用的[Google Cloud 存取權杖](https://docs.cloud.google.com/docs/authentication/token-types?hl=zh-tw#access-tokens)，如果是由使用者帳戶產生，存留時間 (TTL) 為兩天。因此，這類工作會在兩天後停止執行。服務帳戶產生的存取權杖可執行較長時間，但仍須遵守查詢執行時間上限。詳情請參閱「[使用服務帳戶執行持續查詢](https://docs.cloud.google.com/bigquery/docs/continuous-queries?hl=zh-tw#run_a_continuous_query_by_using_a_service_account)」。
+執行持續查詢作業時使用的[Google Cloud 存取權杖](https://docs.cloud.google.com/docs/authentication/token-types?hl=zh-tw#access-tokens)，如果是由使用者帳戶產生，存留時間 (TTL) 為兩天。因此這類工作會在兩天後停止執行。服務帳戶產生的存取權杖可執行較長時間，但仍須遵守查詢執行時間上限。詳情請參閱「[使用服務帳戶執行持續查詢](https://docs.cloud.google.com/bigquery/docs/continuous-queries?hl=zh-tw#run_a_continuous_query_by_using_a_service_account)」。
 
 ## 位置
 
@@ -106,7 +106,7 @@ BigQuery 持續查詢是會不斷執行的 SQL 陳述式，持續查詢功能可
 
 持續查詢必須遵循以下限制：
 
-* 只有[預先發布版中的特定有狀態作業](#supported_stateful_operations)，才會維護擷取資料的狀態。雖然連續查詢現在支援某些類型的 `JOIN`、匯總和視窗匯總，但這些僅限於特定有狀態作業。系統僅支援特定類型的有狀態作業。
+* 只有[預先發布版中的特定有狀態作業](#supported_stateful_operations)，才會維護擷取資料的狀態。雖然連續查詢現在支援某些類型的 `JOIN`、匯總和視窗匯總，但僅限於特定有狀態作業。並非所有有狀態作業類型都支援這項功能。
 * 除非下列 SQL 功能列為[支援的具狀態作業](#supported_stateful_operations)，否則無法在持續查詢中使用：
 
   + 下列[查詢](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw)運算子：
@@ -159,15 +159,15 @@ BigQuery 持續查詢是會不斷執行的 SQL 陳述式，持續查詢功能可
 
 持續查詢可使用[運算單元自動調度資源](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro?hl=zh-tw)功能，動態調整分配的容量，以因應工作負載。隨著持續查詢工作負載的增減，BigQuery 會動態調整運算單元。
 
-持續查詢開始執行後，會主動*監聽*傳入資料，這會耗用 Slot 資源。如果保留項目正在執行持續查詢，不會縮減至零個時段。不過，如果持續查詢處於閒置狀態，主要是在監聽傳入資料，預期會消耗最少的時段，通常約 1 個時段。
+連續查詢開始執行後，會主動*監聽*傳入的資料，這會耗用運算單元資源。如果保留項目有持續查詢正在執行，就不會縮減至零個時段。不過，如果持續查詢處於閒置狀態，主要只是監聽傳入資料，預期會消耗最少的時段，通常約 1 個時段。
 
 ## 閒置運算單元共用
 
-持續查詢可使用[閒置運算單元共用](https://docs.cloud.google.com/bigquery/docs/slots?hl=zh-tw#idle_slots)功能，與其他預留項目和[作業類型](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#assignments)共用未使用的運算單元資源。
+持續查詢可使用[閒置運算單元共用](https://docs.cloud.google.com/bigquery/docs/slots?hl=zh-tw#idle_slots)功能，與其他預留項目和[工作類型](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#assignments)共用未使用的運算單元資源。
 
-* 您仍須`CONTINUOUS`
-  [指派預留項目](https://docs.cloud.google.com/bigquery/docs/reservations-assignments?hl=zh-tw)，才能執行持續查詢，且不能只依賴其他預留項目的閒置運算單元。因此，`CONTINUOUS` 預留項目指派作業需要非零的運算單元基準，或非零的運算單元自動調度資源設定。
-* 只有閒置的基準運算單元，或來自 `CONTINUOUS` 預留項目指派的承諾使用運算單元可以共用。[自動調度的運算單元](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro?hl=zh-tw)無法做為其他預留項目的閒置運算單元共用。
+* 如要執行持續查詢，仍須`CONTINUOUS`
+  [指派預留項目](https://docs.cloud.google.com/bigquery/docs/reservations-assignments?hl=zh-tw)，不能只依賴其他預留項目的閒置運算單元。因此，`CONTINUOUS` 預留項目指派作業需要非零的運算單元基準，或非零的運算單元自動調度資源設定。
+* 只有閒置的基準運算單元，或來自`CONTINUOUS`預留項目指派的承諾使用運算單元可以共用。[自動調度的運算單元](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro?hl=zh-tw)無法做為其他預留項目的閒置運算單元共用。
 
 ## 定價
 
@@ -180,7 +180,7 @@ BigQuery 持續查詢是會不斷執行的 SQL 陳述式，持續查詢功能可
 * [Bigtable 定價](https://cloud.google.com/bigtable/pricing?hl=zh-tw)
 * [Pub/Sub 定價](https://cloud.google.com/pubsub/pricing?hl=zh-tw)
 * [Spanner 定價](https://cloud.google.com/spanner/pricing?hl=zh-tw)
-* [Vertex AI 定價](https://cloud.google.com/vertex-ai/pricing?hl=zh-tw)
+* [Agent Platform 定價](https://cloud.google.com/vertex-ai/pricing?hl=zh-tw)
 
 ## 後續步驟
 
@@ -193,11 +193,11 @@ BigQuery 持續查詢是會不斷執行的 SQL 陳述式，持續查詢功能可
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-21 (世界標準時間)。
+上次更新時間：2026-05-27 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-21 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-27 (世界標準時間)。"],[],[]]

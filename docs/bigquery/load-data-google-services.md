@@ -26,7 +26,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### 碳足跡
 
-「碳足跡」匯出內容會擷取所選帳單帳戶使用涵蓋 Google Cloud 服務時，預估產生的溫室氣體排放總量。
+「碳足跡」匯出資料會擷取所選帳單帳戶使用涵蓋 Google Cloud 服務時，預估產生的溫室氣體排放總量。
 
 您可以將碳足跡資料匯出至 BigQuery，以便執行資料分析，或建立自訂資訊主頁和報表。
 
@@ -54,7 +54,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### Cloud Logging
 
-您可以將 [Cloud Logging](https://docs.cloud.google.com/logging?hl=zh-tw) 中的記錄檔傳送至 BigQuery 表格，進行額外的分析和聯結。對於 Google Cloud 服務，記錄資料會在產生後約 1 分鐘內可供查詢。
+您可以將 [Cloud Logging](https://docs.cloud.google.com/logging?hl=zh-tw) 中的記錄檔傳送至 BigQuery 資料表，進行額外分析和聯結。對於 Google Cloud 服務，記錄資料會在產生後約 1 分鐘內可供查詢。
 
 如要將 BigQuery 用於可觀測性分析，請參閱「[可觀測性分析](https://docs.cloud.google.com/logging/docs/analyze/query-and-view?hl=zh-tw)」。
 
@@ -114,21 +114,21 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### 推薦功能
 
-您可以使用 BigQuery 資料移轉服務，排定每日的[建議](https://docs.cloud.google.com/recommender/docs/whatis-activeassist?hl=zh-tw)快照。建議會提供最佳化 Google Cloud 產品和資源使用方式的建議，並深入分析資源使用模式。
+您可以使用 BigQuery 資料移轉服務，排定每日的[建議](https://docs.cloud.google.com/recommender/docs/whatis-activeassist?hl=zh-tw)快照。建議會提供有關如何最佳化 Google Cloud 產品和資源使用情況的建議，並深入分析資源使用模式。
 
 如要使用 BigQuery 資料移轉服務設定資料快照，請參閱「[將建議匯出至 BigQuery](https://docs.cloud.google.com/recommender/docs/bq-export/export-recommendations-to-bq?hl=zh-tw)」。
 
-### Vertex AI Batch Prediction
+### Gemini Enterprise Agent Platform 批次預測
 
-[Vertex AI](https://docs.cloud.google.com/vertex-ai?hl=zh-tw) 批次預測功能會根據模型的輸入內容，建立一組預測結果。您可以將這些結果儲存在 BigQuery 中，以便進行其他數據分析和彙整。
+[Gemini Enterprise Agent Platform](https://docs.cloud.google.com/vertex-ai?hl=zh-tw) 批次預測會根據模型輸入內容建立一組預測結果。您可以將這些結果儲存在 BigQuery 中，以便進行其他數據分析和彙整。
 
-如要設定批次預測結果的匯出作業，請參閱「[取得批次預測和說明](https://docs.cloud.google.com/vertex-ai/docs/tabular-data/classification-regression/get-batch-predictions?hl=zh-tw#make-batch-request)」。
+如要設定批次預測結果的匯出作業，請參閱「[取得批次預測和說明](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/tabular-data/classification-regression/get-batch-predictions?hl=zh-tw#make-batch-inference-request)」。
 
-### Vertex AI Prediction
+### Gemini Enterprise Agent Platform 預測
 
-您可以使用 Vertex AI Predictions，將線上端點的預測結果儲存在 BigQuery 中，以利進行其他分析。
+您可以使用 Gemini Enterprise Agent Platform Predictions，將線上端點的預測結果儲存在 BigQuery 中，以進行額外分析。
 
-如要設定模型預測與 BigQuery 的整合，請參閱「[線上預測記錄](https://docs.cloud.google.com/vertex-ai/docs/predictions/online-prediction-logging?hl=zh-tw#enabling-and-disabling)」。
+如要設定模型預測與 BigQuery 的整合，請參閱「[線上預測記錄](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/predictions/online-prediction-logging?hl=zh-tw#enabling-and-disabling)」。
 
 ## 後續步驟
 
@@ -142,11 +142,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-21 (世界標準時間)。
+上次更新時間：2026-05-27 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-21 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-27 (世界標準時間)。"],[],[]]

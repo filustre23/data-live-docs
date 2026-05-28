@@ -108,7 +108,10 @@ BigQuery 持續查詢是會不斷執行的 SQL 陳述式，您可以透過持續
 
 ### 建立預留項目
 
-[建立 Enterprise 或 Enterprise Plus 版本預訂](https://docs.cloud.google.com/bigquery/docs/reservations-tasks?hl=zh-tw#create_reservations)，然後[建立預訂指派](https://docs.cloud.google.com/bigquery/docs/reservations-assignments?hl=zh-tw#create_reservation_assignments)，並使用 `CONTINUOUS` 工作類型。這個預留項目可使用[自動調度資源](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction?hl=zh-tw#slots_autoscaling)和[閒置運算單元共用](https://docs.cloud.google.com/bigquery/docs/slots?hl=zh-tw#idle_slots)功能。連續查詢的預留項目指派作業有[預留項目限制](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction?hl=zh-tw#reservation_limitations)。
+[建立 Enterprise 或 Enterprise Plus 版本預訂](https://docs.cloud.google.com/bigquery/docs/reservations-tasks?hl=zh-tw#create_reservations)，
+然後
+[建立預訂指派項目](https://docs.cloud.google.com/bigquery/docs/reservations-assignments?hl=zh-tw#create_reservation_assignments)，
+並使用 `CONTINUOUS` 工作類型。這個預留項目可使用[自動調度資源](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction?hl=zh-tw#slots_autoscaling)和[閒置運算單元共用](https://docs.cloud.google.com/bigquery/docs/slots?hl=zh-tw#idle_slots)功能。連續查詢的預留項目指派作業有[預留項目限制](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction?hl=zh-tw#reservation_limitations)。
 
 ## 匯出至 Pub/Sub
 
@@ -164,7 +167,7 @@ BigQuery 持續查詢是會不斷執行的 SQL 陳述式，您可以透過持續
 
 `start_timestamp` 引數會定義持續查詢開始處理資料的時間點。舉例來說，`APPENDS(TABLE my_table, CURRENT_TIMESTAMP() - INTERVAL 10 MINUTE)` 會指示 BigQuery 處理在持續查詢開始前最多 10 分鐘內新增至資料表 `my_table` 的資料。後續新增至 `my_table` 的資料會即時處理。資料處理不會受到延遲。
 
-指定 `start_timestamp` 引數時，值必須落在資料表的[時間回溯](https://docs.cloud.google.com/bigquery/docs/time-travel?hl=zh-tw)期內，標準資料表的預設時間回溯期為七天。將 `start_timestamp` 設為 `NULL` 時，系統會預設為資料表的建立時間。不建議使用 `NULL` 值，因為如果資料表是在時空旅行視窗之前建立，系統就會傳回錯誤。使用 `NULL` 的查詢可能可以成功查詢新建立的資料表，但如果資料表的建立時間戳記超過七天，查詢就會失敗。
+指定 `start_timestamp` 引數時，值必須落在資料表的[時間回溯](https://docs.cloud.google.com/bigquery/docs/time-travel?hl=zh-tw)期內，標準資料表的預設時間回溯期為七天。將 `start_timestamp` 設為 `NULL` 時，系統會預設為資料表的建立時間。不建議使用 `NULL` 值，因為如果資料表是在時空旅行視窗之前建立，系統就會傳回錯誤。使用 `NULL` 的查詢可能會成功建立新資料表，但如果資料表的建立時間戳記超過七天，查詢就會失敗。
 
 在持續查詢中使用 `APPENDS` 函式時，請勿提供 `end_timestamp` 引數。
 
@@ -195,7 +198,7 @@ EXPORT DATA
 
 如要納入七天時間旅行視窗以外的資料，請使用標準查詢回填特定時間點的資料，然後從該時間點開始持續查詢。「交接」時間戳記必須在七天內，這樣持續查詢才能從標準查詢停止的地方繼續。
 
-以下範例說明如何從接收計程車行程資訊串流的 BigQuery 資料表回填舊資料，然後轉換為持續查詢。
+以下範例說明如何從接收串流計程車乘車資訊的 BigQuery 資料表回填舊資料，然後轉換為持續查詢。
 
 1. 執行標準查詢，將資料回填至特定時間點：
 
@@ -242,7 +245,7 @@ EXPORT DATA
 
 ## 使用使用者帳戶執行持續查詢
 
-本節說明如何使用使用者帳戶執行持續查詢。持續查詢執行後，您可以關閉 Google Cloud 控制台、終端機視窗或應用程式，不會中斷查詢執行。使用者帳戶執行的持續查詢最多可執行兩天，然後自動停止。如要繼續處理新的傳入資料，請啟動新的持續查詢並[指定起點](#start_a_continuous_query_from_a_particular_point_in_time)。如要自動執行這項程序，請參閱[重新嘗試失敗的查詢](https://docs.cloud.google.com/bigquery/docs/continuous-queries-monitor?hl=zh-tw#retry)。
+本節說明如何使用使用者帳戶執行持續查詢。持續查詢執行後，您可以關閉 Google Cloud 控制台、終端機視窗或應用程式，不會中斷查詢執行作業。使用者帳戶執行的持續查詢最多可執行兩天，然後自動停止。如要繼續處理新的傳入資料，請啟動新的持續查詢並[指定起點](#start_a_continuous_query_from_a_particular_point_in_time)。如要自動執行這項程序，請參閱[重新嘗試失敗的查詢](https://docs.cloud.google.com/bigquery/docs/continuous-queries-monitor?hl=zh-tw#retry)。
 
 如要執行持續查詢，請按照下列步驟操作：
 
@@ -251,7 +254,7 @@ EXPORT DATA
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在查詢編輯器中，按一下 settings「更多」。
+2. 在查詢編輯器中，點選 settings「更多」。
 
    1. 在「選擇查詢模式」部分，選擇「持續查詢」。
    2. 按一下「確認」。
@@ -274,7 +277,7 @@ EXPORT DATA
    'QUERY'
    ```
 
-   將 `QUERY` 替換為持續查詢的 SQL 陳述式。SQL 陳述式只能包含[支援的作業](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction?hl=zh-tw#supported_functionality)。您可以使用 `--job_timeout_ms` 旗標控制查詢的執行時間長度。
+   將 `QUERY` 替換為持續查詢的 SQL 陳述式。SQL 陳述式只能包含[支援的作業](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction?hl=zh-tw#supported_functionality)。您可以使用 `--job_timeout_ms` 旗標控制查詢的執行時間。
 
 ### API
 
@@ -296,7 +299,7 @@ curl --request POST \
 
 ## 使用服務帳戶執行持續查詢
 
-本節說明如何使用服務帳戶執行持續查詢。持續查詢執行後，您可以關閉 Google Cloud 控制台、終端機視窗或應用程式，不會中斷查詢執行。使用服務帳戶執行的持續查詢最多可執行 150 天，之後會自動停止。如要繼續處理新的傳入資料，請啟動新的持續查詢並[指定起點](#start_a_continuous_query_from_a_particular_point_in_time)。如要自動執行這項程序，請參閱[重新嘗試失敗的查詢](https://docs.cloud.google.com/bigquery/docs/continuous-queries-monitor?hl=zh-tw#retry)。
+本節說明如何使用服務帳戶執行持續查詢。持續查詢執行後，您可以關閉 Google Cloud 控制台、終端機視窗或應用程式，不會中斷查詢執行作業。使用服務帳戶執行的持續查詢最多可執行 150 天，之後會自動停止。如要繼續處理新的傳入資料，請啟動新的持續查詢並[指定起點](#start_a_continuous_query_from_a_particular_point_in_time)。如要自動執行這項程序，請參閱[重新嘗試失敗的查詢](https://docs.cloud.google.com/bigquery/docs/continuous-queries-monitor?hl=zh-tw#retry)。
 
 如要使用服務帳戶執行持續查詢，請按照下列步驟操作：
 
@@ -307,7 +310,7 @@ curl --request POST \
 3. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-4. 在查詢編輯器中，按一下「更多」。
+4. 在查詢編輯器中，點選「更多」。
 5. 在「選擇查詢模式」部分，選擇「持續查詢」。
 6. 按一下「確認」。
 7. 在查詢編輯器中，依序點選「更多」>「查詢設定」。
@@ -378,16 +381,16 @@ curl --request POST \
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在查詢編輯器中，按一下「更多」。
+2. 在查詢編輯器中，點選「更多」。
 3. 在「選擇查詢模式」部分，選擇「持續查詢」。
 4. 按一下「確認」。
 5. 在查詢編輯器中，依序點選「更多」**>「查詢設定」**。
 6. 在「Custom job ID prefix」(自訂工作 ID 前置字串) 區段中，輸入自訂名稱前置字串。
 7. 按一下 [儲存]。
 
-## 使用 `JOIN` 和時間區間匯總進行有狀態處理
+## 使用 `JOIN` 和視窗化匯總進行有狀態處理
 
-有狀態作業可讓持續查詢保留多個資料列或時間間隔的資訊，進而執行複雜分析。這些作業包括 `JOIN` 和視窗化匯總。
+有狀態作業可讓連續查詢保留多個資料列或時間間隔的資訊，進而執行複雜分析。這些作業包括 `JOIN` 和視窗化匯總。
 
 如要進一步瞭解如何使用這些有狀態的作業，請參閱下列主題：
 
@@ -500,7 +503,7 @@ EXPORT DATA
 
 ### 將資料寫入 BigQuery 資料表
 
-以下範例顯示持續查詢，該查詢會篩選及轉換來自 BigQuery 資料表的資料，而該資料表會接收計程車行程資訊串流，然後即時將資料寫入另一個 BigQuery 資料表。這樣一來，資料就能用於後續的下游分析。
+以下範例顯示持續查詢，該查詢會篩選及轉換來自 BigQuery 資料表的資料，而該資料表會接收計程車行程資訊串流，然後即時將資料寫入另一個 BigQuery 資料表。方便您進一步分析資料。
 
 ```
 INSERT INTO `myproject.real_time_taxi_streaming.transformed_taxirides`
@@ -523,9 +526,9 @@ WHERE
   ride_status = 'dropoff';
 ```
 
-### 使用 Vertex AI 模型處理資料
+### 使用 Gemini Enterprise Agent Platform 模型處理資料
 
-以下範例顯示持續查詢，該查詢會使用 Vertex AI 模型，根據計程車乘客目前的經緯度產生廣告，然後即時將結果匯出至 Pub/Sub 主題：
+以下範例顯示持續查詢，該查詢會使用 Agent Platform 模型，根據計程車乘客目前的經緯度產生廣告，然後即時將結果匯出至 Pub/Sub 主題：
 
 ```
 EXPORT DATA
@@ -662,7 +665,7 @@ GROUP BY
 
 ## 監控查詢及處理錯誤
 
-如果發生資料不一致、結構定義變更、服務暫時中斷或維護等情況，持續查詢可能會中斷。雖然 BigQuery 會處理部分暫時性錯誤，但改善工作復原能力的最佳做法包括：
+持續查詢可能會因資料不一致、結構定義變更、服務暫時中斷或維護等因素而中斷。雖然 BigQuery 會處理部分暫時性錯誤，但改善工作復原能力的最佳做法包括：
 
 * [監控持續查詢](https://docs.cloud.google.com/bigquery/docs/continuous-queries-monitor?hl=zh-tw)。
 * [在查詢失敗時發出快訊](https://docs.cloud.google.com/bigquery/docs/continuous-queries-monitor?hl=zh-tw#alert)。
@@ -679,11 +682,11 @@ GROUP BY
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-21 (世界標準時間)。
+上次更新時間：2026-05-27 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-21 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-27 (世界標準時間)。"],[],[]]

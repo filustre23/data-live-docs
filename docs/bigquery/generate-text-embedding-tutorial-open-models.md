@@ -16,7 +16,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 使用開放模型和 AI.GENERATE\_EMBEDDING 函式生成文字嵌入
 
-本教學課程說明如何建立以開放原始碼文字嵌入模型 [Qwen3-Embedding-0.6B](https://huggingface.co/Qwen/Qwen3-Embedding-0.6B) 為基礎的[遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open?hl=zh-tw)，然後如何使用 [`AI.GENERATE_EMBEDDING` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding?hl=zh-tw)嵌入 `bigquery-public-data.imdb.reviews` 公開資料表中的電影評論。
+本教學課程說明如何建立以開放原始碼文字嵌入模型 [Qwen3-Embedding-0.6B](https://huggingface.co/Qwen/Qwen3-Embedding-0.6B) 為基礎的[遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open?hl=zh-tw)，然後如何使用 [`AI.GENERATE_EMBEDDING` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding?hl=zh-tw)，從 `bigquery-public-data.imdb.reviews` 公開資料表嵌入電影評論。
 
 ## 所需權限
 
@@ -24,7 +24,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 * 建立及使用 BigQuery 資料集、連線和模型：BigQuery 管理員 (`roles/bigquery.admin`)。
 * 將權限授予連線的服務帳戶：專案 IAM 管理員 (`roles/resourcemanager.projectIamAdmin`)。
-* 在 Vertex AI 中部署及取消部署模型：Vertex AI 管理員 (`roles/aiplatform.admin`)。
+* 在 Gemini Enterprise Agent Platform 中部署及取消部署模型：Vertex AI 管理員 (`roles/aiplatform.admin`)。
 
 這些預先定義的角色具備執行本文所述工作所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
@@ -37,7 +37,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 * 設定服務帳戶權限：
   `resourcemanager.projects.getIamPolicy` 和
   `resourcemanager.projects.setIamPolicy`
-* 部署及取消部署 Vertex AI 模型：
+* 部署及取消部署 Agent Platform 模型：
   + `aiplatform.endpoints.deploy`
   + `aiplatform.endpoints.undeploy`
 * 建立模型並執行推論：
@@ -55,8 +55,8 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 * **BigQuery ML**: You incur costs for the data that you
   process in BigQuery.
-* **Vertex AI**: You incur costs for calls to the
-  Vertex AI model that's represented by the remote model.
+* **Gemini Enterprise Agent Platform**: You incur costs for calls to the
+  Agent Platform model that's represented by the remote model.
 
 如要根據預測用量估算費用，請使用 [Pricing Calculator](https://docs.cloud.google.com/products/calculator?hl=zh-tw)。
 
@@ -64,7 +64,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 如要進一步瞭解 BigQuery 定價，請參閱 BigQuery 說明文件中的「[BigQuery 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw)」一文。
 
-部署至 Vertex AI 的開放式模型會依機器時數收費。也就是說，端點完全設定完成後，系統就會開始計費，直到您取消部署為止。如要進一步瞭解 Vertex AI 定價，請參閱 [Vertex AI 定價](https://cloud.google.com/vertex-ai/pricing?hl=zh-tw#prediction-prices)頁面。
+部署至 Agent Platform 的開放模型會依機器時數計費。也就是說，端點完全設定完成後，系統就會開始計費，直到您取消部署為止。如要進一步瞭解 Agent Platform 計價方式，請參閱[這個頁面](https://cloud.google.com/vertex-ai/pricing?hl=zh-tw#prediction-prices)。
 
 ## 事前準備
 
@@ -78,7 +78,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    [前往專案選取器](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
 2. [確認專案已啟用計費功能 Google Cloud](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project) 。
-3. 啟用 BigQuery、BigQuery Connection 和 Vertex AI API。
+3. 啟用 BigQuery、BigQuery Connection 和 Agent Platform API。
 
    **啟用 API 時所需的角色**
 
@@ -100,7 +100,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 4. 在「建立資料集」頁面中，執行下列操作：
 
    * 在「Dataset ID」(資料集 ID) 中輸入 `bqml_tutorial`。
-   * 針對「位置類型」選取「多區域」，然後選取「美國」。
+   * 針對「Location type」(位置類型) 選取「Multi-region」(多區域)，然後選取「US」(美國)。
    * 其餘設定請保留預設狀態，然後按一下「建立資料集」。
 
 ### bq
@@ -135,7 +135,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 建立遠端模型
 
-建立代表代管 Vertex AI 模型的遠端模型：
+建立遠端模型，代表託管的 Agent Platform 模型：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -183,11 +183,11 @@ CREATE OR REPLACE MODEL `bqml_tutorial.qwen3_embedding_model`
    * `embedding`：代表所產生嵌入內容的雙精度浮點數陣列。
    * `status`：對應資料列的 API 回應狀態。如果作業成功，這個值會留空。
    * `content`：要從中擷取嵌入的輸入文字。
-   * `bigquery-public-data.imdb.reviews` 資料表中的所有資料欄。
+   * `bigquery-public-data.imdb.reviews` 資料表中的所有欄。
 
 ## 取消部署模型
 
-如果您選擇不[刪除專案 (建議做法)](#clean_up)，請務必在 Vertex AI 中取消部署 Qwen3 嵌入模型，以免持續產生相關費用。BigQuery 會在指定閒置時間 (預設為 6.5 小時) 過後，自動取消部署模型。或者，您也可以使用 [`ALTER MODEL` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-alter-model?hl=zh-tw)立即取消部署模型，如下列範例所示：
+如果選擇不[刪除專案 (建議做法)](#clean_up)，請務必在 Agent Platform 中取消部署 Qwen3 嵌入模型，以免持續計費。BigQuery 會在指定閒置時間 (預設為 6.5 小時) 過後，自動取消部署模型。或者，您也可以使用 [`ALTER MODEL` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-alter-model?hl=zh-tw)立即取消部署模型，如下列範例所示：
 
 ```
 ALTER MODEL `bqml_tutorial.qwen3_embedding_model`
@@ -222,11 +222,11 @@ SET OPTIONS (deploy_model = false);
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-21 (世界標準時間)。
+上次更新時間：2026-05-27 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-21 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-27 (世界標準時間)。"],[],[]]

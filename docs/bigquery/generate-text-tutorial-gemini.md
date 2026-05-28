@@ -19,8 +19,8 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 * [BigQuery ML](https://cloud.google.com/bigquery/pricing?hl=zh-tw#bigquery-ml-pricing). You incur costs for the data that you
   process in BigQuery.
-* [Vertex AI](https://cloud.google.com/vertex-ai/pricing?hl=zh-tw#generative_ai_models). You incur costs for calls to the
-  Vertex AI service that's represented by the remote model.
+* [Gemini Enterprise Agent Platform](https://cloud.google.com/vertex-ai/pricing?hl=zh-tw#generative_ai_models). You incur costs for calls to the
+  Agent Platform service that's represented by the remote model.
 
 如要根據預測用量估算費用，請使用 [Pricing Calculator](https://docs.cloud.google.com/products/calculator?hl=zh-tw)。
 
@@ -52,7 +52,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
   [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
 - [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project).
-- Enable the BigQuery, BigQuery Connection, and Vertex AI APIs.
+- Enable the BigQuery, BigQuery Connection, and Agent Platform API APIs.
 
   **Roles required to enable APIs**
 
@@ -82,7 +82,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
   [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
 - [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project).
-- Enable the BigQuery, BigQuery Connection, and Vertex AI APIs.
+- Enable the BigQuery, BigQuery Connection, and Agent Platform API APIs.
 
   **Roles required to enable APIs**
 
@@ -151,7 +151,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
     將 `PROJECT_ID` 替換為 Google Cloud 專案名稱。
 - [確認專案已啟用計費功能 Google Cloud](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project) 。
-- 啟用 BigQuery、BigQuery Connection 和 Vertex AI API：
+- 啟用 BigQuery、BigQuery Connection 和 Agent Platform API：
 
   **啟用 API 時所需的角色**
 
@@ -190,7 +190,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
     將 `PROJECT_ID` 替換為 Google Cloud 專案名稱。
 - [確認專案已啟用計費功能 Google Cloud](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project) 。
-- 啟用 BigQuery、BigQuery Connection 和 Vertex AI API：
+- 啟用 BigQuery、BigQuery Connection 和 Agent Platform API：
 
   **啟用 API 時所需的角色**
 
@@ -228,7 +228,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 4. 在「建立資料集」頁面中，執行下列操作：
 
    * 在「Dataset ID」(資料集 ID) 中輸入 `bqml_tutorial`。
-   * 針對「位置類型」選取「多區域」，然後選取「美國」。
+   * 針對「Location type」(位置類型) 選取「Multi-region」(多區域)，然後選取「US」(美國)。
    * 其餘設定請保留預設狀態，然後按一下「建立資料集」。
 
 ### bq
@@ -463,7 +463,7 @@ async function createConnection(projectId, location, connectionId) {
 
 請使用 [`google_bigquery_connection`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_connection) 資源。
 
-**注意：** 如要使用 Terraform 建立 BigQuery 物件，必須啟用 [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest?hl=zh-tw)。
+**注意：** 如要使用 Terraform 建立 BigQuery 物件，請務必啟用 [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -488,9 +488,10 @@ resource "google_bigquery_connection" "default" {
 ## 準備 Cloud Shell
 
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
-2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
+2. 設定要套用 Terraform 設定的預設 Google Cloud 專案
+   。
 
-   您只需要為每項專案執行一次這個指令，且可以在任何目錄中執行。
+   每項專案只需要執行一次這個指令，而且可以在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
@@ -511,7 +512,7 @@ resource "google_bigquery_connection" "default" {
 
    將程式碼範例複製到新建立的 `main.tf`。
 
-   視需要從 GitHub 複製程式碼。如果 Terraform 代码片段是端對端解決方案的一部分，建議您使用這個方法。
+   視需要從 GitHub 複製程式碼。如果 Terraform 程式碼片段是端對端解決方案的一部分，建議您使用這個方法。
 3. 查看並修改範例參數，套用至您的環境。
 4. 儲存變更。
 5. 初始化 Terraform。每個目錄只需執行一次這項操作。
@@ -562,9 +563,7 @@ resource "google_bigquery_connection" "default" {
 
 ## 建立遠端模型
 
-使用
-[`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw)
-陳述式建立遠端模型，代表代管的 Vertex AI 模型：
+使用 [`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw) 陳述式建立遠端模型，代表代管的 Agent Platform 模型：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -584,7 +583,7 @@ CREATE OR REPLACE MODEL `bqml_tutorial.gemini_model`
 
   在 Google Cloud 控制台中[查看連線詳細資料](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw#view-connections)時，這是「連線 ID」中顯示的完整連線 ID 最後一個部分的值，例如 `projects/myproject/locations/connection_location/connections/myconnection`
 
-查詢作業會在幾秒內完成，完成後，模型 `gemini_model` 會顯示在 `bqml_tutorial` 資料集中。沒有查詢結果。
+查詢作業會在幾秒內完成，模型 `gemini_model` 隨即會顯示在 `bqml_tutorial` 資料集中。沒有查詢結果。
 
 ## 執行關鍵字擷取
 
@@ -750,11 +749,11 @@ gcloud projects delete PROJECT_ID
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-21 (世界標準時間)。
+上次更新時間：2026-05-27 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-21 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-27 (世界標準時間)。"],[],[]]

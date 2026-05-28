@@ -192,7 +192,7 @@ BigQuery Omni 會在與包含所查詢資料表的資料集相同位置處理查
 * 如要瞭解 Gemini 模型和嵌入模型支援的區域，請參閱「[Google 模型端點位置](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations?hl=zh-tw#google_model_endpoint_locations)」。
 * 如要瞭解 Claude、Llama 和 Mistral AI 模型支援的地區，請參閱「[Google Cloud 合作夥伴模型端點位置](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations?hl=zh-tw#genai-partner-models)」。
 
-下表列出透過 Cloud AI 服務支援遠端模型的區域，以及部署至 Vertex AI 的自訂模型。資料欄名稱會指出遠端模型的類型。
+下表列出透過 Cloud AI 服務支援遠端模型的區域，以及部署至 Agent Platform 的自訂模型。資料欄名稱會指出遠端模型的類型。
 
 |  | 區域說明 | 區域名稱 | Vertex AI 部署的模型 | Cloud Natural Language API | Cloud Translation API | Cloud Vision API | Document AI API | Speech-to-Text API |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -242,18 +242,18 @@ BigQuery Omni 會在與包含所查詢資料表的資料集相同位置處理查
 |  | 杜哈 | `me-central1` |  |  |  |  |  |  |
 |  | 特拉維夫市 | `me-west1` | ● |  |  |  |  |  |
 
-如果您要建立遠端模型的資料集位於單一地區，Vertex AI 模型端點就必須位於相同地區。如果您指定模型端點網址，請使用與資料集相同區域的端點。舉例來說，如果資料集位於 `us-central1` 地區，請指定端點 `https://us-central1-aiplatform.googleapis.com/v1/projects/myproject/locations/us-central1/publishers/google/models/<target_model>`。如果您指定模型名稱，BigQuery ML 會自動選擇正確區域中的端點。
+如果您要在單一地區的資料集中建立遠端模型，Agent Platform 模型端點就必須位於相同地區。如果您指定模型端點網址，請使用與資料集相同區域的端點。舉例來說，如果資料集位於 `us-central1` 地區，請指定端點 `https://us-central1-aiplatform.googleapis.com/v1/projects/myproject/locations/us-central1/publishers/google/models/<target_model>`。如果您指定模型名稱，BigQuery ML 會自動選擇正確區域中的端點。
 
 #### 多地區位置
 
 遠端模型的多區域支援如下：
 
 * Gemini 模型支援 `US` 和 `EU` 多區域。
-* `US` 多區域中的 Claude、Llama 和 Mistral AI 模型，可使用 `US` 多區域內任一區域的 Vertex AI 端點。`EU` 多區域中的 Claude、Llama 和 Mistral AI 模型可使用 Vertex AI 端點，適用於 `EU` 多區域內的任何單一區域，但 `eu-west2` 和 `eu-west6` 除外。
+* `US` 多區域中的 Claude、Llama 和 Mistral AI 模型，可以使用 `US` 多區域內任何單一區域的 Agent Platform 端點。`EU` 多區域中的 Claude、Llama 和 Mistral AI 模型可使用 Agent Platform 端點，適用於 `EU` 多區域內的任何單一區域，但 `eu-west2` 和 `eu-west6` 除外。
 * 這兩個多區域都不支援 Vertex AI 部署的模型。
 * [Cloud AI 服務](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service?hl=zh-tw)支援 `US` 和 `EU` 多區域。
 
-如果建立遠端模型的資料集位於多區域，則 Vertex AI 模型端點必須位於該多區域內的區域。舉例來說，如果資料集位於 `eu` 多區域，則可以指定 `europe-west1` 區域端點的網址 `https://europe-west1-aiplatform.googleapis.com/v1/projects/myproject/locations/europe-west1/publishers/google/models/<target_model>`。如果您指定模型名稱而非端點網址，BigQuery ML 預設會對 `eu` 多區域中的資料集使用 `europe-west4` 端點，並對 `us` 多區域中的資料集使用 `us-central1` 端點。
+如果您要在多區域的資料集中建立遠端模型，則 Agent Platform 模型端點必須位於該多區域內的某個區域。舉例來說，如果資料集位於 `eu` 多區域，則可以指定 `europe-west1` 區域端點的網址 `https://europe-west1-aiplatform.googleapis.com/v1/projects/myproject/locations/europe-west1/publishers/google/models/<target_model>`。如果您指定模型名稱而非端點網址，BigQuery ML 預設會對 `eu` 多區域中的資料集使用 `europe-west4` 端點，並對 `us` 多區域中的資料集使用 `us-central1` 端點。
 
 #### 全域端點
 
@@ -265,9 +265,9 @@ BigQuery Omni 會在與包含所查詢資料表的資料集相同位置處理查
 
 #### Google 模型和合作夥伴模型的處理位置
 
-如要瞭解 Vertex AI 中託管的 Google 模型所用的處理位置，請參閱「[模型適用的機器學習處理 Google Cloud](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/data-residency?hl=zh-tw#ml-processing-google-models) 」一文。這項資訊涵蓋部署至單一或多個區域的模型。使用全域端點的模型無法保證任何特定處理位置。
+如要瞭解 Agent Platform 中 Google 模型使用的處理位置，請參閱[模型 Google Cloud 的 ML 處理](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/data-residency?hl=zh-tw#ml-processing-google-models)。這項資訊涵蓋部署至單一或多個區域的模型。使用全域端點的模型無法保證任何特定處理位置。
 
-如要瞭解 Vertex AI 代管合作夥伴模型時使用的處理位置，請參閱「[合作夥伴模型的機器學習處理 Google Cloud](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/data-residency?hl=zh-tw#ml-processing-partner-models) 」。
+如要瞭解 Agent Platform 中代管的合作夥伴模型所用的處理位置，請參閱[合作夥伴模型的 ML 處理 Google Cloud](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/data-residency?hl=zh-tw#ml-processing-partner-models) 。
 
 ### 非遠端模型的位置
 
@@ -334,8 +334,7 @@ BigQuery Omni 會在與包含所查詢資料表的資料集相同位置處理查
 
 位於 `EU` 多區域的資料不會儲存在 `europe-west2` (倫敦) 或 `europe-west6` (蘇黎世) 資料中心。
 
-只有單一區域整合支援 Vertex AI Model Registry 整合。如果您將多區域 BigQuery ML 模型傳送至 Model Registry，該模型會在 Vertex AI 中轉換為區域模型。BigQuery ML 美國多區域模型會同步至 Vertex AI
-`us-central1`，BigQuery ML 歐盟多區域模型則會同步至 Vertex AI `europe-west4`。單一區域模型不會有任何變更。
+只有單一區域整合支援 Vertex AI Model Registry 整合。如果您將多區域 BigQuery ML 模型傳送至 Model Registry，該模型會在 Vertex AI 中轉換為區域模型。BigQuery ML 美國多區域模型會同步至 Agent Platform `us-central1`，而 BigQuery ML 歐盟多區域模型會同步至 Agent Platform `europe-west4`。單一區域模型不會有任何變更。
 
 #### 處理位置
 
@@ -756,11 +755,11 @@ BigQuery sharing (舊稱 Analytics Hub) 適用於下列區域和多重區域。
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-21 (世界標準時間)。
+上次更新時間：2026-05-27 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-21 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-27 (世界標準時間)。"],[],[]]

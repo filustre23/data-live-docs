@@ -28,7 +28,7 @@ NNLM、SWIVEL 和 BERT 模型的大小、準確率、擴充性和成本各不相
 | [SWIVEL](https://tfhub.dev/google/tf2-preview/gnews-swivel-20dim/1) | <150MB | 20 | 短句、新聞、推文、評論 | Submatrix-wise Vector Embedding Learner |
 | [BERT](https://tfhub.dev/tensorflow/bert_en_cased_L-12_H-768_A-12/4) | ~200MB | 768 | 短句、新聞、推文、評論、短段落 | 基於變換器的雙向編碼器表示技術 |
 
-在本教學課程中，NNLM 和 SWIVEL 模型是[匯入的 TensorFlow 模型](https://docs.cloud.google.com/bigquery/docs/making-predictions-with-imported-tensorflow-models?hl=zh-tw)，而 BERT 模型則是 [Vertex AI 上的遠端模型](https://docs.cloud.google.com/bigquery/docs/bigquery-ml-remote-model-tutorial?hl=zh-tw)。
+在本教學課程中，NNLM 和 SWIVEL 模型是[匯入的 TensorFlow 模型](https://docs.cloud.google.com/bigquery/docs/making-predictions-with-imported-tensorflow-models?hl=zh-tw)，而 BERT 模型是 [Gemini Enterprise Agent Platform 上的遠端模型](https://docs.cloud.google.com/bigquery/docs/bigquery-ml-remote-model-tutorial?hl=zh-tw)。
 
 ## 所需權限
 
@@ -61,7 +61,7 @@ NNLM、SWIVEL 和 BERT 模型的大小、準確率、擴充性和成本各不相
   create and the inference that you perform in BigQuery ML.
 * **Cloud Storage:** You incur costs for the objects that you
   store in Cloud Storage.
-* **Vertex AI:** If you follow the instructions for
+* **Gemini Enterprise Agent Platform:** If you follow the instructions for
   generating the BERT model, then you incur costs for deploying the model to
   an endpoint.
 
@@ -74,7 +74,7 @@ NNLM、SWIVEL 和 BERT 模型的大小、準確率、擴充性和成本各不相
 * [儲存空間定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#storage)
 * [BigQuery ML 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#bqml)
 * [Cloud Storage 定價](https://cloud.google.com/storage/pricing?hl=zh-tw)
-* [Vertex AI 定價](https://cloud.google.com/vertex-ai/pricing?hl=zh-tw)
+* [Agent Platform 定價](https://cloud.google.com/vertex-ai/pricing?hl=zh-tw)
 
 ## 事前準備
 
@@ -98,7 +98,7 @@ NNLM、SWIVEL 和 BERT 模型的大小、準確率、擴充性和成本各不相
 
   [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
 - [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project).
-- Enable the BigQuery, BigQuery Connection, and Vertex AI APIs.
+- Enable the BigQuery, BigQuery Connection, and Agent Platform API APIs.
 
   **Roles required to enable APIs**
 
@@ -128,7 +128,7 @@ NNLM、SWIVEL 和 BERT 模型的大小、準確率、擴充性和成本各不相
 
   [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
 - [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project).
-- Enable the BigQuery, BigQuery Connection, and Vertex AI APIs.
+- Enable the BigQuery, BigQuery Connection, and Agent Platform API APIs.
 
   **Roles required to enable APIs**
 
@@ -340,11 +340,11 @@ NNLM、SWIVEL 和 BERT 模型的大小、準確率、擴充性和成本各不相
 
 ### BERT
 
-如要將 BERT 模型載入 BigQuery，請將 BERT 模型匯入 Vertex AI、將模型部署至 Vertex AI 端點、建立連線，然後在 BigQuery 中建立遠端模型。
+如要將 BERT 模型載入 BigQuery，請將 BERT 模型匯入 Agent Platform、將模型部署至 Agent Platform 端點、建立連線，然後在 BigQuery 中建立遠端模型。
 
-如要將 BERT 模型匯入 Vertex AI，請按照下列步驟操作：
+如要將 BERT 模型匯入 Agent Platform，請按照下列步驟操作：
 
-1. 前往 Google Cloud 控制台的 Vertex AI「模型登錄」頁面。
+1. 前往 Google Cloud 控制台的 Agent Platform「Model registry」頁面。
 
    [前往 Model Registry](https://console.cloud.google.com/vertex-ai/models?hl=zh-tw)
 2. 按一下「匯入」，然後執行下列操作：
@@ -357,9 +357,9 @@ NNLM、SWIVEL 和 BERT 模型的大小、準確率、擴充性和成本各不相
    * 在「模型構件位置」中，輸入儲存模型檔案的 Cloud Storage 值區路徑。例如：`gs://BUCKET_PATH/bert_model`。
 4. 按一下 [匯入]。匯入完成後，模型會顯示在「模型登錄」頁面。
 
-如要將 BERT 模型部署至 Vertex AI 端點，並連結至 BigQuery，請按照下列步驟操作：
+如要將 BERT 模型部署至 Gemini Enterprise Agent Platform 端點，並連結至 BigQuery，請按照下列步驟操作：
 
-1. 前往 Google Cloud 控制台的 Vertex AI「模型登錄」頁面。
+1. 前往 Google Cloud 控制台的 Agent Platform「Model registry」頁面。
 
    [前往 Model Registry](https://console.cloud.google.com/vertex-ai/models?hl=zh-tw)
 2. 按一下模型名稱。
@@ -371,7 +371,7 @@ NNLM、SWIVEL 和 BERT 模型的大小、準確率、擴充性和成本各不相
 8. 點選「Deploy」(部署)。
 9. [建立 BigQuery Cloud 資源連結](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection?hl=zh-tw#create-cloud-resource-connection)，並[授予連線服務帳戶存取權](https://docs.cloud.google.com/bigquery/docs/bigquery-ml-remote-model-tutorial?hl=zh-tw#set_up_connection_access)。
 
-如要根據 Vertex AI 端點建立遠端模型，請使用 [`CREATE MODEL` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create?hl=zh-tw)：
+如要根據 Agent Platform 端點建立遠端模型，請使用 [`CREATE MODEL` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create?hl=zh-tw)：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -394,7 +394,7 @@ NNLM、SWIVEL 和 BERT 模型的大小、準確率、擴充性和成本各不相
    * `CONNECTION_ID`：BigQuery 連線的 ID
 
      在 Google Cloud 控制台中[查看連線詳細資料](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw#view-connections)時，這是「連線 ID」中顯示的完整連線 ID 最後一個部分的值，例如 `projects/myproject/locations/connection_location/connections/myconnection`
-   * `ENDPOINT_LOCATION`：Vertex AI 端點的位置。例如「us-central1」。
+   * `ENDPOINT_LOCATION`：Agent Platform 端點的位置。例如「us-central1」。
    * `ENDPOINT_ID`：模型端點的 ID
 3. 按一下「執行」play\_circle。
 
@@ -522,11 +522,11 @@ FROM
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-21 (世界標準時間)。
+上次更新時間：2026-05-27 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-21 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-27 (世界標準時間)。"],[],[]]

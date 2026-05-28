@@ -16,14 +16,14 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 生成及搜尋多模態嵌入項目
 
-本教學課程說明如何使用 BigQuery 和 Vertex AI，為圖片和文字生成多模態嵌入項目，然後使用這些嵌入項目執行文字轉圖像的語意搜尋。
+本教學課程說明如何使用 BigQuery 和 Gemini Enterprise Agent Platform，為圖片和文字生成多模態嵌入，然後使用這些嵌入執行文字轉圖像語意搜尋。
 
 本教學課程涵蓋下列工作：
 
 * 在 Cloud Storage bucket 中的圖片資料上建立 [BigQuery 物件資料表](https://docs.cloud.google.com/bigquery/docs/object-table-introduction?hl=zh-tw)。
 * 使用 [BigQuery 中的 Colab Enterprise 筆記本](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction?hl=zh-tw)探索圖片資料。
-* 建立以 [Vertex AI `multimodalembedding` 基礎模型](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models?hl=zh-tw#foundation_model_apis)為目標的 BigQuery ML [遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw)。
-* 使用遠端模型和 [`AI.GENERATE_EMBEDDING` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding?hl=zh-tw)，從物件資料表中的圖片生成嵌入。
+* 建立以 [Gemini Enterprise Agent Platform `multimodalembedding` 基礎模型](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models?hl=zh-tw#foundation_model_apis)為目標的 BigQuery ML [遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw)。
+* 使用遠端模型和 [`AI.GENERATE_EMBEDDING` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding?hl=zh-tw)，從物件資料表中的圖片產生嵌入。
 * 修正任何嵌入生成錯誤。
 * 選擇性步驟：建立[向量索引](https://docs.cloud.google.com/bigquery/docs/vector-index?hl=zh-tw)，為圖片嵌入項目建立索引。
 * 為指定搜尋字串建立文字嵌入。
@@ -94,8 +94,8 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 * **BigQuery ML**: You incur costs for the data that you
   process in BigQuery.
-* **Vertex AI**: You incur costs for calls to the
-  Vertex AI service that's represented by the remote model.
+* **Gemini Enterprise Agent Platform**: You incur costs for calls to the
+  Agent Platform service that's represented by the remote model.
 
 如要根據預測用量估算費用，請使用 [Pricing Calculator](https://docs.cloud.google.com/products/calculator?hl=zh-tw)。
 
@@ -103,7 +103,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 如要進一步瞭解 BigQuery 定價，請參閱 BigQuery 說明文件中的「[BigQuery 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw)」一文。
 
-如要進一步瞭解 Vertex AI 定價，請參閱 [Vertex AI 定價](https://cloud.google.com/vertex-ai/pricing?hl=zh-tw#generative_ai_models)頁面。
+如要進一步瞭解 Agent Platform 計價方式，請參閱[這個頁面](https://cloud.google.com/vertex-ai/pricing?hl=zh-tw#generative_ai_models)。
 
 ## 事前準備
 
@@ -117,7 +117,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    [前往專案選取器](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
 2. [確認專案已啟用計費功能 Google Cloud](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project) 。
-3. 啟用 BigQuery、BigQuery Connection 和 Vertex AI API。
+3. 啟用 BigQuery、BigQuery Connection 和 Agent Platform API。
 
    **啟用 API 時所需的角色**
 
@@ -139,7 +139,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 4. 在「建立資料集」頁面中，執行下列操作：
 
    * 在「Dataset ID」(資料集 ID) 中輸入 `bqml_tutorial`。
-   * 針對「位置類型」選取「多區域」，然後選取「美國」。
+   * 針對「Location type」(位置類型) 選取「Multi-region」(多區域)，然後選取「US」(美國)。
    * 其餘設定請保留預設狀態，然後按一下「建立資料集」。
 
 ### bq
@@ -285,7 +285,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 建立遠端模型
 
-建立遠端模型，代表代管的 Vertex AI 多模態嵌入模型：
+建立遠端模型，代表託管的 Agent Platform 多模態嵌入模型：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -302,7 +302,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 生成圖片嵌入
 
-使用 [`AI.GENERATE_EMBEDDING` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding?hl=zh-tw)，從物件資料表中的圖片產生嵌入內容，然後將這些內容寫入資料表，以供後續步驟使用。產生嵌入內容的作業成本高昂，因此查詢會使用包含 `LIMIT` 子句的子查詢，將嵌入內容的產生作業限制為 10,000 張圖片，而不是嵌入 601,294 張圖片的完整資料集。這也有助於將圖片數量控制在 `AI.GENERATE_EMBEDDING` 函式的 25,000 張上限內。這項查詢大約需要 40 分鐘才能執行完畢。
+使用 [`AI.GENERATE_EMBEDDING` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding?hl=zh-tw)從物件資料表中的圖片產生嵌入內容，然後將這些內容寫入資料表，以供後續步驟使用。產生嵌入內容的作業成本高昂，因此查詢會使用包含 `LIMIT` 子句的子查詢，將嵌入內容的產生作業限制為 10,000 張圖片，而不是嵌入 601,294 張圖片的完整資料集。這也有助於將圖片數量控制在 `AI.GENERATE_EMBEDDING` 函式的 25,000 張上限內。這項查詢大約需要 40 分鐘才能執行完畢。
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -321,7 +321,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 修正任何嵌入生成錯誤
 
-檢查並修正任何嵌入生成錯誤。由於 [Vertex AI 的生成式 AI 配額](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/quotas?hl=zh-tw)或服務無法使用，導致無法產生嵌入。
+檢查並修正任何嵌入生成錯誤。由於 [Agent Platform 上的生成式 AI 配額](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/quotas?hl=zh-tw)或服務無法使用，因此可能無法生成嵌入內容。
 
 `AI.GENERATE_EMBEDDING` 函式會在 `status` 欄中傳回錯誤詳細資料。如果成功產生嵌入內容，這個資料欄會是空白；如果產生失敗，則會顯示錯誤訊息。
 
@@ -458,11 +458,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-21 (世界標準時間)。
+上次更新時間：2026-05-27 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-21 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-27 (世界標準時間)。"],[],[]]

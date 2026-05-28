@@ -16,12 +16,12 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 分析圖片
 
-本教學課程說明如何整合 BigQuery ML 與 Gemini，從非結構化圖片資料取得洞察資訊。在本教學課程中，您會根據 [gemini-2.5-flash](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models?hl=zh-tw#gemini-models) 建立[遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw)，並使用 [`AI.GENERATE_TEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text?hl=zh-tw) 函式從一系列電影海報中自動擷取中繼資料，例如片名和上映年份。
+本教學課程說明如何整合 BigQuery ML 與 Gemini，從非結構化圖片資料取得洞察資訊。在本教學課程中，您會根據 [gemini-2.5-flash](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models?hl=zh-tw#gemini-models) 建立[遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw)，並使用 [`AI.GENERATE_TEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text?hl=zh-tw) 函式，從一系列電影海報中自動擷取中繼資料，例如片名和上映年份。
 
 ## 目標
 
 * 在 Cloud Storage bucket 中的圖片資料上建立 [BigQuery 物件資料表](https://docs.cloud.google.com/bigquery/docs/object-table-introduction?hl=zh-tw)。
-* 建立以 Vertex AI `gemini-2.5-flash` 模型為目標的 BigQuery ML 遠端模型。
+* 建立以 Gemini Enterprise Agent Platform `gemini-2.5-flash` 模型為目標的 BigQuery ML 遠端模型。
 * 使用 `AI.GENERATE_TEXT` 函式搭配遠端模型，找出與一組電影海報相關聯的電影。
 
 ## 費用
@@ -29,7 +29,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 本教學課程使用下列 Google Cloud計費元件：
 
 * [BigQuery ML](https://cloud.google.com/bigquery/pricing?hl=zh-tw)
-* [Vertex AI](https://docs.cloud.google.com/vertex-ai/generative-ai/pricing?hl=zh-tw)
+* [Gemini Enterprise Agent Platform](https://docs.cloud.google.com/vertex-ai/generative-ai/pricing?hl=zh-tw)
 
 您可以使用 [Pricing Calculator](https://cloud.google.com/products/calculator?hl=zh-tw) 根據預測用量估算費用。
 
@@ -42,12 +42,12 @@ Google uses AI technology to translate content into your preferred language. AI 
    **選取或建立專案所需的角色**
 
    * **選取專案**：選取專案時，不需要具備特定 IAM 角色，只要您已獲授角色，即可選取任何專案。
-   * **建立專案**：如要建立專案，您需要「專案建立者」角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   * **建立專案**：如要建立專案，您需要具備專案建立者角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
    **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，而不要選取現有專案。完成這些步驟後，您就可以刪除專案，並移除與該專案相關聯的所有資源。
 
    [前往專案選取器](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
 2. [確認專案已啟用計費功能 Google Cloud](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project) 。
-3. 啟用 BigQuery、BigQuery Connection 和 Vertex AI API。
+3. 啟用 BigQuery、BigQuery Connection 和 Agent Platform API。
 
    **啟用 API 時所需的角色**
 
@@ -128,7 +128,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 4. 在「建立資料集」頁面中，執行下列操作：
 
    * 在「Dataset ID」(資料集 ID) 中輸入 `bqml_tutorial`。
-   * 針對「位置類型」選取「多區域」，然後選取「美國」。
+   * 針對「Location type」(位置類型) 選取「Multi-region」(多區域)，然後選取「US」(美國)。
    * 其餘設定請保留預設狀態，然後按一下「建立資料集」。
 
 ### bq
@@ -182,7 +182,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 建立遠端模型
 
-建立代表 Vertex AI `gemini-2.5-flash` 模型的遠端模型：
+建立代表 Agent Platform 模型的遠端模型：`gemini-2.5-flash`
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -356,7 +356,7 @@ bq rm -r bqml_tutorial
 bq rm --reservation --location=us bqml-tutorial-reservation
 ```
 
-#### 刪除連線
+#### 刪除連結
 
 ### 控制台
 
@@ -369,7 +369,7 @@ bq rm --reservation --location=us bqml-tutorial-reservation
 
 ### bq
 
-刪除連線：
+刪除連結：
 
 ```
 bq rm --connection --location=us CONNECTION_ID
@@ -381,7 +381,8 @@ bq rm --connection --location=us CONNECTION_ID
 
 * 進一步瞭解 [BigQuery 中的生成式 AI 函式](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview?hl=zh-tw)。
 * 瞭解如何[使用資料調整模型](https://docs.cloud.google.com/bigquery/docs/generate-text-tuning?hl=zh-tw)。
-* 查看 Google Cloud 的參考架構、圖表和最佳做法。歡迎瀏覽我們的 [Cloud Architecture Center](https://docs.cloud.google.com/architecture?hl=zh-tw)。
+* 查看 Google Cloud 的參考架構、圖表和最佳做法。
+  歡迎瀏覽我們的 [Cloud Architecture Center](https://docs.cloud.google.com/architecture?hl=zh-tw)。
 
 
 
@@ -390,11 +391,11 @@ bq rm --connection --location=us CONNECTION_ID
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-21 (世界標準時間)。
+上次更新時間：2026-05-27 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-21 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-27 (世界標準時間)。"],[],[]]

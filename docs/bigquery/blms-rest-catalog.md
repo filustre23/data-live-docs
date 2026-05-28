@@ -577,7 +577,7 @@ spark = SparkSession.builder.appName("APP_NAME") \
 
 1. 在 Google Cloud 控制台中，前往 **Lakehouse**。
 
-   [前往 Lakehouse](https://docs.cloud.google.com/lakehouse/docs/configure-lakehouse-catalog-iceberg-1-10?hl=zh-cn)
+   [前往 Lakehouse](https://console.cloud.google.com/biglake?hl=zh-cn)
 2. 选择现有目录，如果没有，则创建一个。
 3. 在菜单栏中，点击 **+ 创建命名空间**。
 4. 对于**命名空间名称**，为命名空间输入一个唯一的名称。

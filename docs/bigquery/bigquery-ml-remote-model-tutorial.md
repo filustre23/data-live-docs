@@ -8,9 +8,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 提供意見
 
-# 使用 Vertex AI 上的遠端模型進行預測 透過集合功能整理內容 你可以依據偏好儲存及分類內容。
+# 透過 Gemini Enterprise Agent Platform 上的遠端模型進行預測 透過集合功能整理內容 你可以依據偏好儲存及分類內容。
 
-在本教學課程中，您將 Vertex AI 端點註冊為 BigQuery 中的遠端模型。接著，您可以使用 [`ML.PREDICT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict?hl=zh-tw)，透過遠端模型進行預測。
+在本教學課程中，您會在 BigQuery 中將 Gemini Enterprise Agent Platform 端點註冊為遠端模型。接著，您可以使用 [`ML.PREDICT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict?hl=zh-tw)，透過遠端模型進行預測。
 
 當模型過大而無法匯入 BigQuery 時，您可以使用遠端模型。如要針對線上、批次和微批次用途使用單一推論點，這項功能也十分實用。
 
@@ -18,8 +18,8 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 目標
 
-* 將預先訓練的 TensorFlow 模型匯入 Vertex AI Model Registry。
-* 將模型部署至 Vertex AI 端點。
+* 將預先訓練的 TensorFlow 模型匯入 Gemini Enterprise Agent Platform Model Registry。
+* 將模型部署至 Gemini Enterprise Agent Platform 端點。
 * 建立 Cloud 資源連結。
 * 使用 `CREATE MODEL` 陳述式在 BigQuery 中建立遠端模型。
 * 使用 `ML.PREDICT` 函式，透過遠端模型進行預測。
@@ -30,7 +30,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 * [BigQuery](https://cloud.google.com/bigquery/pricing?hl=zh-tw)
 * [BigQuery ML](https://cloud.google.com/bigquery/pricing?hl=zh-tw#bqml)
-* [Vertex AI](https://docs.cloud.google.com/vertex-ai/pricing?hl=zh-tw)
+* [Gemini Enterprise Agent Platform](https://docs.cloud.google.com/vertex-ai/pricing?hl=zh-tw)
 
 如要根據預測用量估算費用，請使用 [Pricing Calculator](https://docs.cloud.google.com/products/calculator?hl=zh-tw)。
 
@@ -125,9 +125,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 如要進一步瞭解 BigQuery 中的 IAM 權限，請參閱「[BigQuery 權限](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bq-permissions)」。
 
-## 將模型匯入 Vertex AI Model Registry
+## 將模型匯入 Gemini Enterprise Agent Platform Model Registry
 
-在本教學課程中，您會使用 Cloud Storage 中 `gs://cloud-samples-data/bigquery/ml/remote_model_tutorial/` 提供的預先訓練 TensorFlow 模型。Cloud Storage bucket 位於 `US` 多區域位置。
+在本教學課程中，您會使用 Cloud Storage 中 `gs://cloud-samples-data/bigquery/ml/remote_model_tutorial/` 提供的預先訓練 TensorFlow 模型。Cloud Storage 值區位於 `US` 多區域位置。
 
 模型是名為 `saved_model.pb` 的 TensorFlow 模型。這是自訂情緒分析模型，以純文字 IMDB 電影評論資料微調 BERT 模型而建立。模型會使用電影評論的文字輸入內容，並傳回介於 0 到 1 之間的情緒分數。將模型匯入 Model Registry 時，您會使用預先建構的 TensorFlow 容器。
 
@@ -135,7 +135,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 請按照下列步驟匯入模型。
 
-1. 前往 Google Cloud 控制台的 Vertex AI「Model Registry」頁面。
+1. 前往 Google Cloud 控制台的 Gemini Enterprise Agent Platform「Model Registry」(模型登錄) 頁面。
 
    [前往「Model Registry」](https://console.cloud.google.com/vertex-ai/models?hl=zh-tw)
 2. 按一下「匯入」。
@@ -143,8 +143,8 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    1. 選取「匯入為新模型」。
    2. 在「Name」(名稱) 中輸入 `bert_sentiment`。
-   3. 在「說明」中輸入 `BQML tutorial model`。
-   4. 在「區域」中選取 `us-central1`。您必須選擇美國境內的區域，因為 Cloud Storage bucket 位於`US`多區域位置。
+   3. 在「Description」(說明) 中輸入 `BQML tutorial model`。
+   4. 在「區域」部分，選取 `us-central1`。您必須選擇美國境內的區域，因為 Cloud Storage bucket 位於`US`多區域位置。
    5. 按一下「繼續」。
 4. 如要完成**步驟二：模型設定**，請執行下列操作：
 
@@ -154,16 +154,16 @@ Google uses AI technology to translate content into your preferred language. AI 
       1. 在**「Model framework」(模型架構)** 中選擇「TensorFlow」。
       2. 在「Model framework version」(模型架構版本) 中選擇「2.15」。
       3. 在「Accelerator type」(加速器類型) 部分，選擇「GPU」。
-      4. 在「Model artifact location」(模型構件位置) 中，輸入 `gs://cloud-samples-data/bigquery/ml/remote_model_tutorial/`。
+      4. 在「Model artifact location」(模型構件位置) 中輸入 `gs://cloud-samples-data/bigquery/ml/remote_model_tutorial/`。
       5. 其餘選項均保留預設值，然後按一下「匯入」。
 
 匯入完成後，模型會顯示在「Model Registry」(模型登錄) 頁面。
 
-## 將模型部署至 Vertex AI 端點
+## 將模型部署至 Gemini Enterprise Agent Platform 端點
 
 請按照下列步驟將模型部署至端點。
 
-1. 在 Google Cloud 控制台中，前往 Vertex AI 的「Model Registry」頁面。
+1. 前往 Google Cloud 控制台的 Gemini Enterprise Agent Platform「Model Registry」(模型登錄) 頁面。
 
    [前往「Model Registry」](https://console.cloud.google.com/vertex-ai/models?hl=zh-tw)
 2. 在「Name」(名稱) 欄中，按一下 **`bert_sentiment`**。
@@ -178,7 +178,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    1. 在「Compute settings」(運算設定) 部分，為「Minimum number of compute nodes」(運算節點數量下限) 輸入 `1`。這是模型隨時可用的節點數量。
 
-      **注意：** 在正式版中，您應設定運算節點數量上限。這個選項會開啟 Vertex AI 的自動調度資源功能，讓端點在 BigQuery 資料表含有大量資料列時，處理更多要求。
+      **注意：** 在正式版中，您應設定運算節點數量上限。這個選項會啟用 Gemini Enterprise Agent Platform 的自動調整規模功能，讓端點在 BigQuery 資料表含有大量資料列時，處理更多要求。
    2. 在「進階縮放選項」部分，針對「機型」選擇「標準 (n1-standard-2)」。由於您在匯入模型時選擇 GPU 做為加速器類型，因此選擇機型後，系統會自動設定加速器類型和加速器數量。
    3. 保留其餘預設值，然後按一下「部署」。
 
@@ -199,7 +199,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 4. 在「建立資料集」頁面中，執行下列操作：
 
    * 在「Dataset ID」(資料集 ID) 中輸入 `bqml_tutorial`。
-   * 針對「位置類型」選取「多區域」，然後選取「美國」。
+   * 針對「Location type」(位置類型) 選取「Multi-region」(多區域)，然後選取「US」(美國)。
    * 其餘設定請保留預設狀態，然後按一下「建立資料集」。
 
 ### bq
@@ -234,7 +234,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 建立 BigQuery Cloud 資源連結
 
-您必須建立 Cloud 資源連結，才能連至 Vertex AI 端點。
+您必須擁有 Cloud 資源連結，才能連線至 Gemini Enterprise Agent Platform 端點。
 
 ### 控制台
 
@@ -314,7 +314,7 @@ resource`。
 
 在 `US` 多區域位置建立模型。在 BigQuery 多區域 (`US`、`EU`) 資料集中，您只能建立連線至端點的遠端模型，該端點部署在相同多區域位置 (`US`、`EU`) 內的區域。
 
-建立遠端模型時，您需要[將模型部署至 Vertex AI](#deploy-model) 時產生的端點 ID。此外，輸入和輸出欄位名稱與類型必須與 Vertex AI 模型的輸入和輸出完全相同。在這個範例中，輸入內容是文字 `STRING`，輸出內容則是 `FLOAT64` 類型的 `ARRAY`。
+建立遠端模型時，您需要[將模型部署](#deploy-model)至 Gemini Enterprise Agent Platform 時產生的端點 ID。此外，輸入和輸出欄位名稱與型別必須與 Gemini Enterprise Agent Platform 模型完全相同。在這個範例中，輸入內容是文字 `STRING`，輸出內容則是 `FLOAT64` 類型的 `ARRAY`。
 
 ### 控制台
 
@@ -461,8 +461,8 @@ gcloud projects delete PROJECT_ID
 
 1. [刪除模型](https://docs.cloud.google.com/bigquery/docs/deleting-models?hl=zh-tw)。
 2. 選用：[刪除資料集](https://docs.cloud.google.com/bigquery/docs/managing-datasets?hl=zh-tw#delete-datasets)。
-3. [取消部署模型並刪除端點](https://docs.cloud.google.com/vertex-ai/docs/general/deployment?hl=zh-tw#undeploy_a_model_and_delete_the_endpoint)。
-4. [從 Model Registry 刪除模型](https://docs.cloud.google.com/vertex-ai/docs/model-registry/delete-model?hl=zh-tw)。
+3. [取消部署模型並刪除端點](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/general/deployment?hl=zh-tw#undeploy_a_model_and_delete_the_endpoint)。
+4. [從 Model Registry 刪除模型](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/model-registry/delete-model?hl=zh-tw)。
 5. [刪除 Cloud 資源連結](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw#delete-connections)。
 
 ## 後續步驟
@@ -471,9 +471,9 @@ gcloud projects delete PROJECT_ID
 * 如要進一步瞭解如何使用 `CREATE MODEL` 陳述式建立遠端模型，請參閱[透過自訂模型建立遠端模型的 CREATE MODEL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https?hl=zh-tw)。
 * 如要進一步瞭解如何使用 BigQuery 筆記本，請參閱[筆記本簡介](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction?hl=zh-tw)。
 * 如要進一步瞭解 BigQuery 單一地區與多地區，請參閱「[支援的地區](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#supported_locations)」頁面。
-* 如要進一步瞭解如何在 Vertex AI Model Registry 中匯入模型，請參閱「[將模型匯入 Vertex AI](https://docs.cloud.google.com/vertex-ai/docs/model-registry/import-model?hl=zh-tw)」。
-* 如要進一步瞭解 Vertex AI Model Registry 中的模型版本管理，請參閱「[使用 Model Registry 進行模型版本管理](https://docs.cloud.google.com/vertex-ai/docs/model-registry/versioning?hl=zh-tw)」。
-* 如要瞭解如何使用 Vertex AI VPC Service Controls，請參閱「[搭配使用 VPC Service Controls 與 Vertex AI](https://docs.cloud.google.com/vertex-ai/docs/general/vpc-service-controls?hl=zh-tw)」。
+* 如要進一步瞭解如何在 Gemini Enterprise Agent Platform Model Registry 中匯入模型，請參閱「[將模型匯入 Gemini Enterprise Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/model-registry/import-model?hl=zh-tw)」。
+* 如要進一步瞭解 Gemini Enterprise Agent Platform Model Registry 中的模型版本管理，請參閱「[透過 Model Registry 進行模型版本管理](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/model-registry/versioning?hl=zh-tw)」。
+* 如要瞭解如何使用 Gemini Enterprise Agent Platform VPC Service Controls，請參閱「[搭配使用 VPC Service Controls 與 Gemini Enterprise Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/general/vpc-service-controls?hl=zh-tw)」。
 
 
 
@@ -482,11 +482,11 @@ gcloud projects delete PROJECT_ID
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-21 (世界標準時間)。
+上次更新時間：2026-05-27 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-21 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-27 (世界標準時間)。"],[],[]]

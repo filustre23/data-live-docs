@@ -344,7 +344,7 @@ resource "google_project_iam_member" "service_account_access" {
 
    將程式碼範例複製到新建立的 `main.tf`。
 
-   視需要從 GitHub 複製程式碼。如果 Terraform 代码片段是端對端解決方案的一部分，建議您使用這個方法。
+   視需要從 GitHub 複製程式碼。如果 Terraform 程式碼片段是端對端解決方案的一部分，建議您使用這個方法。
 3. 查看並修改範例參數，套用至您的環境。
 4. 儲存變更。
 5. 初始化 Terraform。每個目錄只需執行一次這項操作。
@@ -1035,5 +1035,5 @@ public class CopyTableCMEK {
     String sourceTableId = "MY_SOURCE_TABLE_NAME";
     String kmsKeyName = "MY_KMS_KEY_NAME";
     EncryptionConfiguration encryption =
-        EncryptionConfiguration.newBuilder
+        EncryptionConfiguration.newBuil
 ```

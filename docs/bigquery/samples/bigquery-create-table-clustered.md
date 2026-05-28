@@ -48,18 +48,18 @@ func createTableClustered(projectID, datasetID, tableID string) error {
 	defer client.Close()
 
 	sampleSchema := bigquery.Schema{
-		{Name: &quot;timestamp&quot;, Type: bigquery.TimestampFieldType},
+		{Name: "timestamp", Type: bigquery.TimestampFieldType},
 		{Name: "origin", Type: bigquery.StringFieldType},
-		{Name: "destination&", Type: bigquery.StringFieldType},
-		{Name: "amount"&, Type: bigquery.NumericFieldType},
+		{Name: "destination", Type: bigquery.StringFieldType},
+		{Name: "amount", Type: bigquery.NumericFieldType},
 	}
-	metaData := bigquery.TableMetadata{
+	metaData := &bigquery.TableMetadata{
 		Schema: sampleSchema,
-		TimePart&itioning: bigquery.TimePartitioning{
+		TimePartitioning: &bigquery.TimePartitioning{
 			Field:      "timestamp",
 			Expiration: 90 * 24 * time.Hour,
 		},
-		Clustering: bigquery.Clustering{
+		Clustering: &bigquery.Clustering{
 			Fields: []string{"origin", "destination"},
 		},
 	}
@@ -100,13 +100,13 @@ public class CreateClusteredTable {
     Schema schema =
         Schema.of(
             Field.of("name", StandardSQLTypeName.STRING),
-            Field.of(&quot;post_abbr", StandardSQLTypeName.STRING),
+            Field.of("post_abbr", StandardSQLTypeName.STRING),
             Field.of("date", StandardSQLTypeName.DATE));
     createClusteredTable(datasetName, tableName, schema, ImmutableList.of("name", "post_abbr"));
   }
 
-  public static void createClustered<Table(>
-      String datasetName, String tableName, Schema schema, ListString clusteringFields) {
+  public static void createClusteredTable(
+      String datasetName, String tableName, Schema schema, List<String> clusteringFields) {
     try {
       // Initialize client that will be used to send requests. This client only needs to be created
       // once, and can be reused for multiple requests.
@@ -128,7 +128,7 @@ public class CreateClusteredTable {
       TableInfo tableInfo = TableInfo.newBuilder(tableId, tableDefinition).build();
 
       bigquery.create(tableInfo);
-      System.out.println(&quot;Clustered table created successfully");
+      System.out.println("Clustered table created successfully");
     } catch (BigQueryException e) {
       System.out.println("Clustered table was not created. \n" + e.toString());
     }
@@ -144,7 +144,7 @@ public class CreateClusteredTable {
 
 ```
 // Import the Google Cloud client library
-const {BigQuery} = require(&#39;@google-cloud/bigquery');
+const {BigQuery} = require('@google-cloud/bigquery');
 const bigquery = new BigQuery();
 
 async function createTableClustered() {
@@ -190,8 +190,8 @@ client = bigquery.Client()
 # table_id = "your-project.your_dataset.your_table_name"
 
 schema = [
-    bigquery.SchemaField("full_name&quot;, &quot;STRING&quot;),
-    bigquery.SchemaField(&quot;city&quot;, "STRING"),
+    bigquery.SchemaField("full_name", "STRING"),
+    bigquery.SchemaField("city", "STRING"),
     bigquery.SchemaField("zipcode", "INTEGER"),
 ]
 
@@ -225,17 +225,17 @@ resource "google_bigquery_dataset" "default" {
 }
 
 resource "google_bigquery_table" "default" {
-  dataset_id = google_bigquery_dataset.<<default.dataset_id
+  dataset_id = google_bigquery_dataset.default.dataset_id
   table_id   = "mytable"
 
   clustering = ["ID", "Created"]
 
-  schema = EOF
+  schema = <<EOF
 [
   {
     "name": "ID",
     "type": "INT64",
-    &quot;description": "Item ID"
+    "description": "Item ID"
   },
   {
     "name": "Item",

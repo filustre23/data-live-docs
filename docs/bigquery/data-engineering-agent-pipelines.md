@@ -14,28 +14,21 @@ Save and categorize content based on your preferences.
 
 # Use the Data Engineering Agent to build and modify data pipelines
 
-The Data Engineering Agent lets you to build, modify, and troubleshoot data
-pipelines in BigQuery using natural language prompts. The Data
-Engineering Agent offers the following capabilities to streamline your data
-engineering workflows to ingest data into BigQuery:
+This document shows you how to use the [Data Engineering
+Agent](/gemini/data-agents/data-engineering-agent/agent-overview) in
+BigQuery and Dataform to create and modify data
+pipelines.
 
-* **Dataform Integration**: The agent generates and organizes data pipeline
-  code directly within Dataform repositories and workspaces
-* **Plan Generation**: The agent can summarize its thinking and generate a
-  plan that lets you review and verify the agent's plan before proceeding
-* **Code Validation**: The agent automatically validates and fixes compilation
-  errors of any generated code to ensure that the data pipeline is functional
-* **Automatic Data Wrangling**: The agent performs data wrangling and
-  transforms raw data into structured tables without manual intervention.
-* **Custom Instructions**: The agent supports custom agent instructions that
-  lets you define specific rules and reusable guidelines in natural language
-* **External Context**: The agent is integrated with
-  Knowledge Catalog for additional context
-* **Pipeline Control**: You can review and customize generated agent plans
-  before any actions are executed.
-* **Optimization**: The agent can optimize performance in your data pipeline
-* **Troubleshoot and Repair**: The agent can troubleshoot pipeline failures
-  and fix its code.
+The Data Engineering Agent lets you build, modify, and manage data pipelines to
+load and process data in
+BigQuery. With the Data Engineering Agent, you can use natural
+language prompts to generate data pipelines from various data sources or adapt
+existing data pipelines to suit your data engineering needs.
+
+The agent generates and organizes data pipeline code directly within
+Dataform repositories. The agent operates in the
+Dataform workspace, so
+Dataform pipelines are automatically available to the agent.
 
 For more examples of prompts you can use with the Data Engineering Agent, see
 [Sample prompts](#sample_prompts).
@@ -52,36 +45,17 @@ The Data Engineering Agent has the following limitations:
   following file types:
   + Notebooks
   + Data preparation
-  + Javascript within any SQLX
 * The Data Engineering Agent cannot execute pipelines. You must review
   and run or schedule pipelines.
-* The Data Engineering Agent cannot validate SQL that depends on
-  nonexistent intermediary resources without full pipeline invocation
-  (user-triggered).
 * The Data Engineering Agent cannot search any web links or URLs provided
   through instructions or direct prompts.
 * When importing files in an [agent instruction
-  file](#create_agent_instructions), the `@`
+  file](/gemini/data-agents/data-engineering-agent/data-engineering-agent-overview#agent_instructions), the `@`
   import syntax supports only paths that begin with `./`, `/`, or a letter.
-* The [data preview](#review_a_data_pipeline) feature is supported only for
+* The [data preview](/bigquery/docs/data-engineering-agent-pipelines#review_a_data_pipeline) feature is supported only for
   tables, declarations, or queries with the `hasOutput` flag set to `true`.
 * The Data Engineering Agent is subject to the [general limitations of AI
   technology](/gemini/docs/discover/responsible-ai).
-
-## How the Data Engineering Agent uses your data
-
-To produce higher-quality agent responses, the Data Engineering Agent can
-retrieve additional data and metadata from BigQuery and
-Knowledge Catalog, including sample rows from
-BigQuery tables and data scan profiles generated in
-Knowledge Catalog. The agent does not use this data for training; it uses the data only as additional
-context during agent conversations to inform its responses.
-
-## Where the Data Engineering Agent processes your data
-
-For more information about the locations where the Data Engineering Agent
-processes your data, see [Where Gemini in BigQuery
-processes your data](/bigquery/docs/gemini-locations).
 
 ## Before you begin
 
@@ -333,14 +307,12 @@ to apply the fix for you by doing the following steps:
    Agent to make the fixes directly to your data pipeline.
 4. Click **Send**.
 
-## Additional agent features and customizations
+## Create agent instructions
 
-The following sections describe additional agent capabilities and other methods to customize the Data Engineering Agent.
-
-### Create agent instructions
-
-Agent instructions are natural-language instructions for the Data Engineering Agent that let you store persistent instructions so the agent follows a set
-of custom, predefined rules. Use agent instructions if you want the agent's results to be consistent across your organization—for example, with naming
+Agent instructions are natural-language instructions for the Data Engineering
+Agent that let you store persistent instructions so the agent follows a set of
+custom, predefined rules. Use agent instructions if you want the agent's results
+to be consistent across your organization—for example, with naming
 conventions or to enforce a style guide.
 
 You can create a [`GEMINI.MD` context
@@ -366,9 +338,9 @@ To create agent instructions, do the following:
 4. Click **Save**.
 
 For information on how best to structure your agent instruction files, see [Best
-practices with agent instruction files](#best_practices_with_agent_instruction_files).
+practices with agent instruction files](/gemini/data-agents/data-engineering-agent/agent-overview#best_practices_with_agent_instruction_files).
 
-#### Load agent instructions from an external repository
+### Load agent instructions from an external repository
 
 To reuse a set of agent instructions across multiple
 data pipelines, link an external repository:
@@ -379,123 +351,6 @@ data pipelines, link an external repository:
 3. In the fields provided, specify a repository that contains agent instructions
    you want to use with your data pipeline.
 4. Click **Save**.
-
-#### Import additional local files as agent instructions
-
-You can also import other instruction files for the Data Engineering Agent into
-the `GEMINI.md` file with `@file.md` syntax. For more information, see [Memory Import Processor](https://geminicli.com/docs/reference/memport/).
-
-### Automatic data wrangling
-
-You can use the Data Engineering Agent to transform raw, unprocessed data into
-structured tables suitable for data analysis. When requested, the agent first samples up to 1,000,000 records
-from each standard or external table. The agent then performs deep data
-analysis by running profiling queries on this sample. After generating data
-transformations, the agent repeats this sampling and profiling process to
-assess the quality of the transformations. These data wrangling transformations might include fixing data inconsistencies, outliers, or type mismatches.
-The Data Engineering Agent then creates a plan that outlines the proposed
-wrangling steps for you to review and refine before any action occurs.
-
-The Data Engineering Agent also initiates the data wrangling analysis whenever
-you add a raw table, such as a CSV-based external table. You can review the data
-wrangling plan and adjust it with conversational commands.
-
-Data sampling and profiling uses
-BigQuery resources and are subject to [BigQuery
-pricing](https://cloud.google.com/bigquery/pricing).
-
-The Data Engineering Agent supports the following data wrangling
-transformations:
-
-* Data cleaning. The agent can analyze raw data and suggest cleanup
-  opportunities, such as removing outliers, filling missing or inconsistent values
-  (data imputation), fixing duplicate data, or standardizing data formats—for example, phone numbers or addresses
-* Structural transformations. When a target schema is provided, the agent
-  can unnest or extract values from `JSON`, `ARRAY`, or `STRUCT` types; merge multiple
-  columns into one; or split one column into multiple columns
-* Data type detection and conversion. The agent can analyze the data to
-  determine the appropriate field types. The agent can then perform secure type
-  casting to resolve any formatting inconsistencies within the date, time,
-  datetime, or timestamp fields.
-* Unit conversions. The agent can automatically convert various units within
-  a field into one consistent unit to standardize your data.
-
-To ensure accuracy, the agent uses representative samples of your data to detect
-issues and validate its transformation logic.
-
-### Generate and review agent plans
-
-The Data Engineering Agent can generate agent plans that provide a summary and
-overview of the objectives and steps that it takes to complete a request. When
-you prompt the agent with complex requests that require many changes, we
-recommend asking the agent to provide you an agent plan so you can review the
-agent's intentions before it takes any actions. A Data Engineering Agent plan
-generally consists of the following:
-
-* The agent's objective for a particular request
-* A high-level overview of the steps the agent plans to take
-* Any assumptions the agent makes
-* Files the agent plans to modify
-* Any optimization or cleaning steps it plans to perform
-* A phased execution plan
-
-In your prompt, you can include the need to review and approve the plan
-so that the agent doesn't take any action without your explicit approval. For
-example:
-
-```
-Create a plan for a pipeline that finds the
-top N pick up and drop off locations in NYC. I want to review the plan and
-approve it before you create the pipeline.
-```
-
-The agent might also generate an agent plan automatically and request your
-approval. This result can occur when a prompt is too ambiguous, or if the agent
-needs more clarity to fulfill your request.
-
-For best practices about using agent plans, see [Best practices](#best_practices).
-
-### Add context from Knowledge Catalog
-
-The Data Engineering Agent uses Knowledge Catalog by attaching
-glossary terms to BigQuery tables and columns and generating data
-profile scans. Glossary terms can tag columns that require additional context,
-such as columns containing personally identifiable information (PII) that
-require special-handling instructions, or to identify matching columns with
-different naming across tables.
-
-Knowledge Catalog also utilizes [data
-profiling](/dataplex/docs/data-profiling-overview), which provides the agent
-with a better understanding of data distribution within table columns and helps
-the agent create more specified data quality assertions
-
-### Add data quality checks to an existing table
-
-When you prompt the agent to add quality checks, the agent infers reasonable checks for the table based
-on the schema and samples. You can also add opinionated assertions as
-part of the prompt. For example:
-
-```
-  Add data quality checks for bigquery-public-data.thelook_ecommerce.users.
-```
-
-### Optimize data pipelines
-
-You can prompt the agent to optimize your data pipelines. When generating
-DDL for new tables, the Data Engineering Agent recommends partitioning and
-clustering based on the analyzed data usage patterns. Additionally, the
-agent can automatically apply other pipeline optimizations. Examples of
-possible optimizations include the following:
-
-* Column pruning to reduce data read from storage to act as a primary cost
-  and performance driver.
-* Predicate pushdowns to filter data early in the execution plan to
-  significantly reduce the volume processed by subsequent operations.
-* Elimination of common subexpressions to improve efficiency by identifying and
-  computing shared transformation logic only once, preventing inefficient
-  practices like scanning and joining large tables multiple times.
-* Incremental models to process only new or changed data since the last
-  run instead of rebuilding entire tables with each run.
 
 ## Sample prompts
 
@@ -640,74 +495,6 @@ guide the agent with examples or public documentation.
   example: TIMESTAMP_TRUNC(event_timestamp, HOUR).
 ```
 
-### Best practices with agent instruction files
-
-[Create agent instruction files](#create_agent_instructions) to customize the Data Engineering Agent
-to suit your needs. When you use agent instructions, we recommend the following:
-
-* All file paths in Dataform are relative to the root of the
-  repository. Use relative paths for any `@file.md` syntax to properly import
-  instructions to `GEMINI.md`.
-* Files imported in `GEMINI.md` can themselves contain imports, which can create
-  a nested structure. To prevent infinite recursion, `GEMINI.md` has a maximum import
-  depth of five levels.
-* To share instructions across data pipelines, store instructions in a central
-  Dataform repository and link them to the working
-  Dataform repository. You can use local instructions to override
-  central rules for pipeline-specific behavior.
-* To ensure consistency in your project, you can link to naming convention files
-  or style guides and instruct the agent to follow these guidelines when working
-  with your data pipelines.
-* You can suggest data layers in the instruction file to group different types of data together.
-* Using headings and lists in the agent instruction file can help organize and
-  clarify instructions for the Data Engineering Agent.
-* Provide meaningful filenames and group similar instructions together in a file.
-  Organize rules logically by category, feature, or functionality with Markdown
-  headings.
-* To avoid conflicting instructions, clearly define the specific conditions
-  under which each instruction applies.
-* Iterate and refine your prompts and workflow. Agent behavior changes over time
-  with agent rollouts and model upgrades, so we recommend iterating on your
-  rules with different prompts to identify areas that might need improvement.
-  Keep your rules file in sync with any changes to your data pipeline.
-
-The following example shows an agent instruction file named `GEMINI.md` that
-utilizes our best practices for effective use of the Data Engineering Agent:
-
-```
-  ### Naming Conventions
-
-  * Datasets: [business_domain]_[use_case] (e.g., ecommerce_sales)
-
-  * Tables:
-      - Raw/External: raw_[source_name]
-      - Staging: stg_[business_entity]
-      - Dimension: dim_[dimension_name]
-      - Fact: fct_[fact_name]
-
-  * Dataform Folders:
-      - sources
-      - staging
-      - marts
-      - dataProducts
-
-  * Views: vw_[view_name]
-
-  * Columns: snake_case (e.g., order_id, customer_name)
-
-  ## Cloud Storage data load
-  * When ingesting data from Cloud Storage, create external tables.
-
-  ## Null handling
-  * Filter out null id values
-
-  ## String normalization
-  * Standardize string columns by converting to lower case
-
-  ## Data Cleaning Guidelines
-  @./generic_cleaning.md
-```
-
 
 
 
@@ -715,11 +502,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-05-26 UTC.
+Last updated 2026-05-27 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-26 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-27 UTC."],[],[]]

@@ -27,7 +27,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 [ODBC 和 JDBC 驅動程式](https://docs.cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers?hl=zh-tw)可讓您結合 BigQuery 的強大功能，以及使用熱門 ODBC 或 JDBC 連線的現有工具和基礎架構。
 
-[程式輔助分析工具](https://docs.cloud.google.com/bigquery/docs/programmatic-analysis?hl=zh-tw)可執行程式碼，分析 BigQuery 中管理的資料。雖然 SQL 是功能強大的查詢語言，但 Python、Java 或 R 通常提供更簡化的資料分析方式。這類工具包括開放原始碼的網頁型應用程式，例如 [Jupyter Notebooks](https://docs.cloud.google.com/bigquery/docs/programmatic-analysis?hl=zh-tw#jupyter_notebooks) 和 [Apache Zeppelin](https://docs.cloud.google.com/bigquery/docs/programmatic-analysis?hl=zh-tw#apache_zeppelin)。[Vertex AI Workbench](https://docs.cloud.google.com/vertex-ai/docs/workbench/introduction?hl=zh-tw) 是 Google 工具，提供 JupyterLab 筆記本環境，可進行程式輔助分析。
+[程式輔助分析工具](https://docs.cloud.google.com/bigquery/docs/programmatic-analysis?hl=zh-tw)可執行程式碼，分析 BigQuery 中管理的資料。雖然 SQL 是功能強大的查詢語言，但 Python、Java 或 R 通常提供更簡化的資料分析方式。這類工具包括開放原始碼的網頁型應用程式，例如 [Jupyter Notebooks](https://docs.cloud.google.com/bigquery/docs/programmatic-analysis?hl=zh-tw#jupyter_notebooks) 和 [Apache Zeppelin](https://docs.cloud.google.com/bigquery/docs/programmatic-analysis?hl=zh-tw#apache_zeppelin)。[Vertex AI Workbench](https://docs.cloud.google.com/gemini-enterprise-agent-platform/notebooks/workbench/introduction?hl=zh-tw) 是 Google 工具，提供 JupyterLab 筆記本環境，可進行程式輔助分析。
 
 您也可以使用多種常見的第三方工具 (例如 [Tableau](https://help.tableau.com/current/pro/desktop/en-us/examples_googlebigquery.htm) 和 [Microsoft Power BI](https://docs.microsoft.com/en-us/power-bi/connect-data/desktop-connect-bigquery)) 連線至 BigQuery。
 BigQuery Ready 計畫提供[經過驗證的合作夥伴解決方案完整清單](https://docs.cloud.google.com/bigquery/docs/bigquery-ready-partners?hl=zh-tw)。
@@ -48,11 +48,11 @@ BigQuery Ready 計畫提供[經過驗證的合作夥伴解決方案完整清單]
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-21 (世界標準時間)。
+上次更新時間：2026-05-27 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-21 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-27 (世界標準時間)。"],[],[]]

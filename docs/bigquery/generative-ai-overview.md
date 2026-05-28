@@ -16,7 +16,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 生成式 AI 資訊摘要
 
-本文說明 BigQuery 支援的生成式人工智慧 (AI) 函式。這些函式會接受自然語言輸入內容，並使用預先訓練的 [Vertex AI 模型](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models?hl=zh-tw)和內建 BigQuery 模型。
+本文說明 BigQuery 支援的生成式人工智慧 (AI) 函式。這些函式會接受自然語言輸入內容，並使用預先訓練的 [Gemini Enterprise Agent Platform 模型](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models?hl=zh-tw)和內建 BigQuery 模型。
 
 BigQuery 提供多種 AI 函式，可協助您執行下列工作：
 
@@ -35,7 +35,7 @@ AI 函式會歸入下列類別，協助您完成這些工作：
   + [執行大型語言模型推論](#inference)，例如回答資料相關問題
 
     - `AI.GENERATE` 是最彈性的推論函式，可讓您分析任何結構化或非結構化資料。
-    - `AI.GENERATE_TEXT` 是 `AI.GENERATE` 的資料表值版本，也支援合作夥伴模型和開放式模型。
+    - `AI.GENERATE_TEXT` 是 `AI.GENERATE` 的值為資料表版本，也支援合作夥伴模型和開放式模型。
   + [生成結構化輸出內容](#generate_structured_data)，例如從文字、文件或圖片中擷取名稱、地址或物件說明。
 
     - `AI.GENERATE`，指定輸出內容結構定義時。
@@ -60,9 +60,9 @@ AI 函式會歸入下列類別，協助您完成這些工作：
 
 ### 執行 LLM 推論
 
-[`AI.GENERATE` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate?hl=zh-tw)是彈性的推論函式，可將要求傳送至 Vertex AI Gemini 模型，並傳回該模型的回覆。你可以使用這項功能分析文字、圖片、音訊、影片或 PDF 資料。舉例來說，您可以分析家具圖像，為 `design_type` 欄生成文字，讓家具 SKU 具有相關聯的說明，例如 `mid-century modern` 或 `farmhouse`。
+[`AI.GENERATE` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate?hl=zh-tw)是彈性的推論函式，可將要求傳送至 Gemini Enterprise Agent Platform Gemini 模型，並傳回該模型的回覆。你可以使用這項功能分析文字、圖片、音訊、影片或 PDF 資料。舉例來說，您可以分析家具圖像，為 `design_type` 欄生成文字，讓家具 SKU 具有相關聯的說明，例如 `mid-century modern` 或 `farmhouse`。
 
-您可以在 BigQuery ML 中使用遠端模型，透過 [`AI.GENERATE_TEXT` 表格值函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text?hl=zh-tw)參照部署至或託管於 Vertex AI 的模型，執行生成式 AI 工作。您可以使用下列類型的[遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw)：
+您可以在 BigQuery 機器學習 中使用遠端模型，透過 [`AI.GENERATE_TEXT` 表格值函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text?hl=zh-tw)參照部署至或代管於 Agent Platform 的模型，執行生成式 AI 工作。您可以使用下列類型的[遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw)：
 
 * 透過任何[正式發布](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models?hl=zh-tw#generally_available_models)或[預先發布版](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models?hl=zh-tw#preview_models) Gemini 模型，分析標準資料表或物件資料表中的文字、圖片、音訊、影片或 PDF 內容，並以您提供的提示詞做為函式引數。
 * 透過 [Anthropic Claude](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/partner-models/use-claude?hl=zh-tw)、[Mistral AI](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/partner-models/mistral?hl=zh-tw)  或 [Llama](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/partner-models/llama?hl=zh-tw) 合作夥伴模型，或[支援的開放式模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open?hl=zh-tw#supported_open_models)，分析您在查詢中提供的提示詞，或[標準資料表](https://docs.cloud.google.com/bigquery/docs/tables-intro?hl=zh-tw#standard-tables)中資料欄的提示詞。
@@ -75,7 +75,7 @@ AI 函式會歸入下列類別，協助您完成這些工作：
 * [使用 `AI.GENERATE_TEXT` 函式和資料生成文字](https://docs.cloud.google.com/bigquery/docs/generate-text?hl=zh-tw)。
 * [使用資料調整模型](https://docs.cloud.google.com/bigquery/docs/generate-text-tuning?hl=zh-tw)。
 
-部分模型可選擇設定[監督式調整](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned?hl=zh-tw#supervised_tuning)，讓您使用自己的資料訓練模型，使其更符合您的用途。所有推論作業都會在 Vertex AI 中進行。
+部分模型可選擇設定[監督式調整](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned?hl=zh-tw#supervised_tuning)，讓您使用自己的資料訓練模型，使其更符合您的用途。所有推論作業都會在 Agent Platform 中進行。
 結果會儲存在 BigQuery 中。
 
 ### 生成結構化資料
@@ -84,10 +84,10 @@ AI 函式會歸入下列類別，協助您完成這些工作：
 
 您可以透過下列方式產生結構化資料：
 
-* [`AI.GENERATE` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate?hl=zh-tw)會呼叫 Vertex AI 端點，並使用自訂結構定義產生 `STRUCT` 值。
+* [`AI.GENERATE` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate?hl=zh-tw)會呼叫 Agent Platform 端點，並可使用自訂結構定義產生 `STRUCT` 值。
 
   如要試用，請參閱[這篇文章](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate?hl=zh-tw#use_structured_output)，瞭解如何呼叫 `AI.GENERATE` 函式時使用結構化輸出。
-* [`AI.GENERATE_TABLE` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-table?hl=zh-tw)會呼叫遠端模型，並產生具有自訂結構定義的資料表，屬於資料表值函式。
+* [`AI.GENERATE_TABLE` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-table?hl=zh-tw)會呼叫遠端模型，並以資料表值函式產生具有自訂結構定義的資料表。
 
   如要試著建立結構化資料，請參閱「[使用 `AI.GENERATE_TABLE` 函式產生結構化資料](https://docs.cloud.google.com/bigquery/docs/generate-table?hl=zh-tw)」。
 * 針對單一輸出欄位，您可以使用下列其中一個專用推論函式：
@@ -98,7 +98,7 @@ AI 函式會歸入下列類別，協助您完成這些工作：
 
 ### 生成嵌入項目
 
-嵌入是指高維度數值向量，代表特定實體，例如一段文字或音訊檔案。生成嵌入內容可擷取資料的語意，方便您推論及比較資料。
+嵌入是指高維度數值向量，代表特定實體，例如一段文字或音訊檔案。產生嵌入內容後，您就能以更容易推論及比較資料的方式，擷取資料的語意。
 
 以下是生成嵌入內容的常見用途：
 
@@ -107,11 +107,11 @@ AI 函式會歸入下列類別，協助您完成這些工作：
 * 執行語意搜尋，找出類似項目，用於推薦、替代和記錄重複資料刪除。
 * 建立嵌入，以便搭配 k-means 模型進行分群。
 
-如要進一步瞭解如何產生嵌入項目，並使用這些項目執行上述工作，請參閱「[嵌入項目和向量搜尋簡介](https://docs.cloud.google.com/bigquery/docs/vector-search-intro?hl=zh-tw)」。
+如要進一步瞭解如何生成嵌入項目，並使用這些項目執行上述工作，請參閱「[嵌入項目和向量搜尋簡介](https://docs.cloud.google.com/bigquery/docs/vector-search-intro?hl=zh-tw)」。
 
 ## 代管 AI 函式
 
-代管 AI 函式可簡化篩選、分類或匯總等例行工作。這些函式可以分析文字、圖片、音訊、影片或 PDF 資料。這些函式會使用 Gemini，不需要自訂。BigQuery 會使用提示工程，並選取適合特定工作的模型和參數，以提升結果的品質和一致性。每個函式都會傳回純量值，例如 `BOOL`、`FLOAT64` 或 `STRING`，且不包含模型的其他狀態資訊。下列代管 AI 函式可供使用：
+代管 AI 函式可簡化篩選、分類或彙整等例行工作。這些函式可以分析文字、圖片、音訊、影片或 PDF 資料。這些函式會使用 Gemini，不需要自訂。BigQuery 會使用提示工程，並選取適合特定工作的模型和參數，以提升結果的品質和一致性。每個函式都會傳回純量值，例如 `BOOL`、`FLOAT64` 或 `STRING`，且不包含模型的其他狀態資訊。下列代管 AI 函式可供使用：
 
 * [`AI.IF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-if?hl=zh-tw)：
   根據提示篩選文字或多模態資料，例如 `WHERE` 或 `JOIN` 子句。舉例來說，你可以篩選產品說明，找出適合當禮物的商品。
@@ -144,7 +144,7 @@ AI 函式會歸入下列類別，協助您完成這些工作：
 
 ## 定價
 
-您需要為用來對模型執行查詢的運算資源付費。遠端模型會呼叫 Vertex AI 模型，因此對遠端模型發出的查詢也會產生 Vertex AI 費用。
+您需要為用來對模型執行查詢的運算資源付費。遠端模型會呼叫 Agent Platform 模型，因此對遠端模型發出的查詢也會產生 Agent Platform 費用。
 
 詳情請參閱「[BigQuery ML 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#bigquery-ml-pricing)」一文。
 
@@ -159,7 +159,7 @@ AI 函式會歸入下列類別，協助您完成這些工作：
 
 ## 追蹤費用
 
-BigQuery 中的生成式 AI 函式會將要求傳送至 Vertex AI，這可能會產生費用。如要在執行查詢前估算輸入權杖數量，請使用 [`AI.COUNT_TOKENS` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-count-tokens?hl=zh-tw)。如要追蹤在 BigQuery 中執行的工作所產生的 Vertex AI 費用，請按照下列步驟操作：
+BigQuery 中的生成式 AI 函式會將要求傳送至 Gemini Enterprise Agent Platform，因此可能會產生費用。如要在執行查詢前估算輸入權杖數量，請使用 [`AI.COUNT_TOKENS` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-count-tokens?hl=zh-tw)。如要追蹤在 BigQuery 中執行的工作所產生的 Agent Platform 費用，請按照下列步驟操作：
 
 1. 在 Cloud Billing 中[查看帳單報表](https://docs.cloud.google.com/billing/docs/how-to/reports?hl=zh-tw)。
 2. [使用篩選器](https://docs.cloud.google.com/billing/docs/how-to/reports?hl=zh-tw#filters)縮小結果範圍。
@@ -173,12 +173,12 @@ BigQuery 中的生成式 AI 函式會將要求傳送至 Vertex AI，這可能會
 
 ## 監控
 
-如要進一步瞭解您在 BigQuery 中呼叫的 AI 函式行為，可以啟用要求和回應記錄。如要記錄傳送至 Vertex AI 和從 Vertex AI 接收的整個要求和回應，請按照下列步驟操作：
+如要進一步瞭解您在 BigQuery 中呼叫的 AI 函式行為，可以啟用要求和回應記錄。如要記錄傳送至 Agent Platform 和從該平台接收的完整要求和回應，請按照下列步驟操作：
 
-1. 在 Vertex AI 中[啟用要求/回應記錄](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/multimodal/request-response-logging?hl=zh-tw)。記錄檔會儲存在 BigQuery 中。
+1. 在 Gemini Enterprise Agent Platform 中[啟用要求/回應記錄](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/multimodal/request-response-logging?hl=zh-tw)。記錄檔會儲存在 BigQuery 中。
    您必須分別為每個基礎模型和區域啟用記錄功能。如要記錄在 `us` 區域執行的查詢，請在要求中指定 `us-central1` 區域。如要記錄在 `eu` 區域執行的查詢，請在要求中指定 `europe-west4` 區域。
-2. 使用 AI 函式執行查詢，透過您在上一個步驟中啟用記錄的模型，呼叫 Vertex AI。
-3. 如要查看完整的 Vertex AI 要求和回應，請查詢記錄資料表，找出 `full_request` 欄的 `labels.bigquery_job_id_prefix` 欄位與[工作 ID](https://docs.cloud.google.com/bigquery/docs/managing-jobs?hl=zh-tw#view-job) 前 63 個字元相符的資料列。您也可以選擇[使用自訂查詢標籤](https://docs.cloud.google.com/bigquery/docs/adding-labels?hl=zh-tw#adding-label-to-session)，方便在記錄中查詢。
+2. 使用 AI 函式執行查詢，透過您在上一步中啟用記錄的模型呼叫 Agent Platform。
+3. 如要查看完整的 Agent Platform 要求和回應，請查詢記錄資料表，找出 `full_request` 欄的 `labels.bigquery_job_id_prefix` 欄位與[工作 ID](https://docs.cloud.google.com/bigquery/docs/managing-jobs?hl=zh-tw#view-job) 前 63 個字元相符的資料列。您也可以選擇[使用自訂查詢標籤](https://docs.cloud.google.com/bigquery/docs/adding-labels?hl=zh-tw#adding-label-to-session)，方便在記錄中查詢。
 
    舉例來說，您可以使用類似下列的查詢：
 
@@ -217,11 +217,11 @@ BigQuery 中的生成式 AI 函式會將要求傳送至 Vertex AI，這可能會
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-21 (世界標準時間)。
+上次更新時間：2026-05-27 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-21 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-27 (世界標準時間)。"],[],[]]

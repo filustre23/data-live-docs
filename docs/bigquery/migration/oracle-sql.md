@@ -35,7 +35,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 | `INTEGER` | `INT64` |  |
 | `SHORTINTEGER` | `INT64` |  |
 | `LONGINTEGER` | `INT64` |  |
-| `NUMBER` | `NUMERIC` | BigQuery 不允許使用者指定精確度或比例的自訂值。因此，Oracle 中的資料欄定義可能超出 BigQuery 支援的範圍。 此外，在儲存小數時，如果小數點後的位數超過對應資料欄的指定位數，Oracle 會將該數字無條件進位。在 BigQuery 中，這項功能可使用 `ROUND()` 函式實作。 |
+| `NUMBER` | `NUMERIC` | BigQuery 不允許使用者指定精確度或比例的自訂值。因此，Oracle 中的資料欄定義可能超出 BigQuery 支援的範圍。 此外，如果小數點後的位數超過對應資料欄的指定位數，Oracle 會先將小數向上進位，再儲存該小數。在 BigQuery 中，這項功能可使用 `ROUND()` 函式實作。 |
 | `NUMBER(*, x)` | `NUMERIC` | BigQuery 不允許使用者指定精確度或比例的自訂值。因此，Oracle 中的資料欄定義可能超出 BigQuery 支援的範圍。 此外，如果小數點後的位數超過對應資料欄的指定位數，Oracle 會先將小數向上進位，再儲存該小數。在 BigQuery 中，這項功能可使用 `ROUND()` 函式實作。 |
 | `NUMBER(x, -y)` | `INT64` | 如果使用者嘗試儲存小數，Oracle 會將其四捨五入為整數。如果嘗試將十進位數字儲存在定義為 `INT64` 的資料欄中，BigQuery 會傳回錯誤。在這種情況下，應套用 `ROUND()` 函式。 BigQuery `INT64` 資料類型最多支援 18 位精確度。如果數字欄位超過 18 位數，請在 BigQuery 中使用 `FLOAT64` 資料型別。 |
 | `NUMBER(x)` | `INT64` | 如果使用者嘗試儲存小數，Oracle 會將其四捨五入為整數。如果嘗試將十進位數字儲存在定義為 `INT64` 的資料欄中，BigQuery 會傳回錯誤。在這種情況下，應套用 `ROUND()` 函式。 BigQuery `INT64` 資料類型最多支援 18 位精確度。如果數字欄位超過 18 位數，請在 BigQuery 中使用 `FLOAT64` 資料型別。 |
@@ -75,8 +75,8 @@ BigQuery 沒有初始化參數。
 
 | Oracle | BigQuery | 附註 |
 | --- | --- | --- |
-| `CURRENT_TIMESTAMP` | Oracle 中的 `TIMESTAMP` 資訊可能含有不同的時區資訊，這些資訊是使用資料欄定義或設定 `WITH TIME ZONE`  `TIME_ZONE` 變數定義。 | 如有可能，請使用 `CURRENT_TIMESTAMP()` 函式，該函式會採用 ISO 格式。不過，輸出格式一律會顯示世界標準時間時區。(在內部，BigQuery 沒有時區)。 請注意 ISO 格式的差異：  `DATETIME` 的格式會依據輸出管道慣例而定。在 BigQuery 指令列工具和 BigQuery 控制台中，`DATETIME` 會根據 RFC 3339 使用 `T` 分隔符號格式化。不過在 Python 和 Java JDBC 中，空格會做為分隔符號。  如要使用明確格式，請使用 `FORMAT_DATETIME`() 函式，將明確轉換為字串。舉例來說，下列運算式一律會傳回空格分隔符： `CAST(CURRENT_DATETIME() AS STRING)` | |
-| `CURRENT_DATE   SYSDATE` | Oracle 使用 2 種日期類型：  * 類型 12 * type 13  Oracle 儲存日期時會使用類型 12。在內部，這些是固定長度的數字。當 `SYSDATE or CURRENT_DATE` 傳回時，Oracle 會使用類型 13 | BigQuery 有專用的 `DATE` 格式，一律會以 [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) 格式傳回日期。 「`DATE_FROM_UNIX_DATE`」無法使用，因為是以 1970 年為準。 | |
+| `CURRENT_TIMESTAMP` | Oracle 中的 `TIMESTAMP` 資訊可能含有不同的時區資訊，這些資訊是使用資料欄定義或設定 `WITH TIME ZONE`  `TIME_ZONE` 變數定義。 | 如有可能，請使用 `CURRENT_TIMESTAMP()` 函式，該函式會採用 ISO 格式。不過，輸出格式一律會顯示世界標準時間時區。(在內部，BigQuery 沒有時區)。 請注意 ISO 格式的差異：  `DATETIME` 的格式會依據輸出管道慣例而定。在 BigQuery 指令列工具和 BigQuery 控制台中，`DATETIME` 會根據 RFC 3339 使用 `T` 分隔符號格式化。不過，在 Python 和 Java JDBC 中，空格會做為分隔符。  如要使用明確格式，請使用 `FORMAT_DATETIME`() 函式，將明確轉換為字串。舉例來說，下列運算式一律會傳回空格分隔符： `CAST(CURRENT_DATETIME() AS STRING)` | |
+| `CURRENT_DATE   SYSDATE` | Oracle 使用 2 種日期類型：  * 類型 12 * 第 13 類  Oracle 儲存日期時會使用類型 12。在內部，這些是固定長度的數字。當 `SYSDATE or CURRENT_DATE` 傳回時，Oracle 會使用類型 13 | BigQuery 有專用的 `DATE` 格式，一律會以 [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) 格式傳回日期。 「`DATE_FROM_UNIX_DATE`」無法使用，因為是以 1970 年為準。 | |
 | `CURRENT_DATE-3` | 日期值會以整數表示。Oracle 支援日期類型的算術運算子。 | 如果是日期類型，請使用 `DATE_ADD`() 或 `DATE_SUB`()。 BigQuery 會對資料類型使用算術運算子：`INT64`、`NUMERIC` 和 `FLOAT64`。 | |
 | `NLS_DATE_FORMAT` | 設定工作階段或系統日期格式。 | BigQuery 一律使用 [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)，因此請務必轉換 Oracle 日期和時間。 | |
 

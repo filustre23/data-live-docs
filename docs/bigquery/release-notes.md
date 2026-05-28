@@ -27,6 +27,14 @@ To get the latest product updates delivered to you, add the URL of this page to 
 reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators), or add the
 [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## May 27, 2026
+
+Change
+
+An updated version of the
+[Simba ODBC driver for BigQuery](/bigquery/docs/reference/odbc-jdbc-drivers#current_odbc_driver)
+is now available.
+
 ## May 26, 2026
 
 Feature
@@ -4220,8 +4228,4 @@ The BigQuery ML [`ML.BUCKETIZE`](/bigquery/docs/reference/standard-sql/bigquerym
 
 Feature
 
-You can now view [stored column usage](/bigquery/docs/reference/rest/v2/Job#StoredColumnsUsage) information for a query job that performs vector search using stored columns. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
-
-## January 27, 2025
-
-L
+You can now view [stored column usage](/bigquery/docs/reference/rest/v2/Job#StoredColumnsUsage) information for a query job t

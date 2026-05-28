@@ -10,9 +10,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 匯出 BigQuery ML 模型以進行線上預測 透過集合功能整理內容 你可以依據偏好儲存及分類內容。
 
-**注意：** 如果您使用 Vertex AI Model Registry，則不需要匯出模型，即可在 Vertex AI 上部署。如要進一步瞭解登錄檔，請參閱「[在 Model Registry 中管理 BigQuery ML 模型](https://docs.cloud.google.com/bigquery/docs/managing-models-vertex?hl=zh-tw)」。
+**注意：**如果使用 Vertex AI Model Registry，則不需要匯出模型，即可在 Gemini Enterprise Agent Platform 部署模型。 如要進一步瞭解登錄檔，請參閱「[在 Model Registry 中管理 BigQuery ML 模型](https://docs.cloud.google.com/bigquery/docs/managing-models-vertex?hl=zh-tw)」。
 
-本教學課程說明如何[匯出 BigQuery ML 模型](https://docs.cloud.google.com/bigquery/docs/exporting-models?hl=zh-tw)，然後在 Vertex AI 或本機電腦上部署模型。您將使用 BigQuery 公開資料集中的 [`iris` 資料表](https://console.cloud.google.com/bigquery?p=bigquery-public-data&%3Bd=ml_datasets&%3Bt=iris&%3Bpage=table&hl=zh-tw)，完成下列三個端對端情境：
+本教學課程說明如何[匯出 BigQuery ML 模型](https://docs.cloud.google.com/bigquery/docs/exporting-models?hl=zh-tw)，然後在 Agent Platform 或本機電腦上部署模型。您將使用 BigQuery 公開資料集中的 [`iris` 資料表](https://console.cloud.google.com/bigquery?p=bigquery-public-data&%3Bd=ml_datasets&%3Bt=iris&%3Bpage=table&hl=zh-tw)，完成下列三個端對端情境：
 
 * 訓練及部署邏輯迴歸模型 - 也適用於 DNN 分類器、DNN 迴歸器、k-means、線性迴歸和矩陣分解模型。
 * 訓練及部署提升決策樹分類器模型 - 也適用於提升決策樹迴歸模型。
@@ -24,13 +24,13 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 * BigQuery ML
 * Cloud Storage
-* Vertex AI (選用，用於線上預測)
+* Agent Platform (選用，用於線上預測)
 
 如要進一步瞭解 BigQuery ML 費用，請參閱 [BigQuery ML 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#bqml)。
 
 如要進一步瞭解 Cloud Storage 費用，請參閱 [Cloud Storage 定價](https://cloud.google.com/storage/pricing?hl=zh-tw)頁面。
 
-如要進一步瞭解 Vertex AI 費用，請參閱「[自訂訓練模型](https://cloud.google.com/vertex-ai/pricing?hl=zh-tw#custom-trained_models)」。
+如要進一步瞭解 Agent Platform 費用，請參閱「[自訂訓練模型](https://cloud.google.com/vertex-ai/pricing?hl=zh-tw#custom-trained_models)」。
 
 ## 事前準備
 
@@ -107,7 +107,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 4. 在「建立資料集」頁面中，執行下列操作：
 
    * 在「Dataset ID」(資料集 ID) 中輸入 `bqml_tutorial`。
-   * 針對「位置類型」選取「多區域」，然後選取「美國」。
+   * 針對「Location type」(位置類型) 選取「Multi-region」(多區域)，然後選取「US」(美國)。
    * 其餘設定請保留預設狀態，然後按一下「建立資料集」。
 
 ### bq
@@ -167,7 +167,7 @@ bq query --use_legacy_sql=false \
 bq extract -m bqml_tutorial.iris_model gs://some/gcs/path/iris_model
 ```
 
-### 在本機部署及放送
+### 在本機部署及提供服務
 
 您可以使用 TensorFlow Serving Docker 容器，部署匯出的 TensorFlow 模型。下列步驟需要安裝 [Docker](https://hub.docker.com/search/?type=edition&offering=community)。
 
@@ -210,7 +210,7 @@ curl -d '{"instances": [{"sepal_length":5.0, "sepal_width":2.0, "petal_length":3
 
 本節將使用 [Google Cloud CLI](https://docs.cloud.google.com/sdk/gcloud?hl=zh-tw) 部署匯出的模型，並根據該模型執行預測。
 
-如要進一步瞭解如何將模型部署至 Vertex AI，以進行線上或批次預測，請參閱「[將模型部署至端點](https://docs.cloud.google.com/vertex-ai/docs/general/deployment?hl=zh-tw)」一文。
+如要進一步瞭解如何將模型部署至 Agent Platform，以進行線上或批次預測，請參閱「[將模型部署至端點](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/general/deployment?hl=zh-tw)」。
 
 #### 建立模型資源
 
@@ -259,7 +259,7 @@ state: READY
 
 #### 線上預測
 
-如要進一步瞭解如何針對已部署的模型執行線上預測，請參閱「[透過自訂訓練模型取得線上推論結果](https://docs.cloud.google.com/vertex-ai/docs/predictions/get-online-predictions?hl=zh-tw)」。
+如要進一步瞭解如何針對已部署的模型執行線上預測，請參閱「[透過自訂訓練模型取得線上推論結果](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/predictions/get-online-predictions?hl=zh-tw)」。
 
 1) 建立以換行符號分隔的 JSON 輸入檔案，例如包含下列內容的檔案：`instances.json`
 
@@ -307,7 +307,7 @@ bq query --use_legacy_sql=false \
 bq extract --destination_format ML_XGBOOST_BOOSTER -m bqml_tutorial.boosted_tree_iris_model gs://some/gcs/path/boosted_tree_iris_model
 ```
 
-### 在本機部署及放送
+### 在本機部署及提供服務
 
 匯出的檔案中會有 `main.py` 檔案，可供在本機執行。
 
@@ -337,14 +337,14 @@ python main.py '[{"sepal_length":5.0, "sepal_width":2.0, "petal_length":3.5, "pe
 
 ### 線上部署和供應
 
-本節將使用 [Google Cloud CLI](https://docs.cloud.google.com/sdk/gcloud?hl=zh-tw) 部署匯出的模型，並根據該模型執行預測。詳情請參閱「[透過自訂訓練模型取得線上推論結果](https://docs.cloud.google.com/vertex-ai/docs/predictions/get-online-predictions?hl=zh-tw)」。
+本節將使用 [Google Cloud CLI](https://docs.cloud.google.com/sdk/gcloud?hl=zh-tw) 部署匯出的模型，並根據該模型執行預測。詳情請參閱「[透過自訂訓練模型取得線上推論結果](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/predictions/get-online-predictions?hl=zh-tw)」。
 
-**注意：** 如要在 [Vertex AI](https://docs.cloud.google.com/vertex-ai/docs?hl=zh-tw) Prediction 上提供服務，請按照「[要求預測](https://docs.cloud.google.com/vertex-ai/docs/predictions/getting-predictions?hl=zh-tw)」一文的說明操作，並根據所在區域使用下列容器：
+**注意：** 如要在 [Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/overview?hl=zh-tw) Prediction 上提供服務，請按照「[要求預測](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/predictions/get-predictions?hl=zh-tw)」一文的說明操作，並根據所在區域使用下列容器：
 1) us-docker.pkg.dev/vertex-ai/bigquery-ml/xgboost-cpu.1-0:latest
 2) europe-docker.pkg.dev/vertex-ai/bigquery-ml/xgboost-cpu.1-0:latest
 3) asia-docker.pkg.dev/vertex-ai/bigquery-ml/xgboost-cpu.1-0:latest
 
-如要進一步瞭解如何將模型部署至 Vertex AI，以便使用自訂常式進行線上或批次預測，請參閱「[將模型部署至端點](https://docs.cloud.google.com/vertex-ai/docs/general/deployment?hl=zh-tw)」。
+如要進一步瞭解如何將模型部署至 Agent Platform，以便使用自訂常式進行線上或批次預測，請參閱「[將模型部署至端點](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/general/deployment?hl=zh-tw)」。
 
 #### 建立模型資源
 
@@ -394,7 +394,7 @@ state: READY
 
 #### 線上預測
 
-如要進一步瞭解如何針對已部署的模型執行線上預測，請參閱「[透過自訂訓練模型取得線上推論結果](https://docs.cloud.google.com/vertex-ai/docs/predictions/get-online-predictions?hl=zh-tw)」。
+如要進一步瞭解如何針對已部署的模型執行線上預測，請參閱「[透過自訂訓練模型取得線上推論結果](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/predictions/get-online-predictions?hl=zh-tw)」。
 
 1) 建立以換行符號分隔的輸入內容 JSON 檔案。例如，`instances.json` 檔案包含下列內容：
 
@@ -442,9 +442,9 @@ bq query --use_legacy_sql=false \
 bq extract -m bqml_tutorial.automl_iris_model gs://some/gcs/path/automl_iris_model
 ```
 
-### 在本機部署及放送
+### 在本機部署及提供服務
 
-如要瞭解如何建構 AutoML 容器，請參閱「[匯出 AutoML 表格型模型](https://docs.cloud.google.com/vertex-ai/docs/export/export-model-tabular?hl=zh-tw)」。下列步驟需要安裝 [Docker](https://hub.docker.com/search/?type=edition&offering=community)。
+如要瞭解如何建構 AutoML 容器，請參閱「[匯出 AutoML 表格型模型](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/export/export-model-tabular?hl=zh-tw)」。下列步驟需要安裝 [Docker](https://hub.docker.com/search/?type=edition&offering=community)。
 
 #### 將匯出的模型檔案複製到本機目錄
 
@@ -482,7 +482,7 @@ curl -X POST --data @input.json http://localhost:8080/predict
 
 ### 線上部署和供應
 
-Vertex AI 不支援 AutoML 迴歸模型和 AutoML 分類器模型的線上預測。
+Agent Platform 不支援 AutoML 迴歸模型和 AutoML 分類模型線上預測。
 
 ## 清除所用資源
 
@@ -505,7 +505,7 @@ docker ps
 docker stop container_id
 ```
 
-### 刪除 Vertex AI 資源
+### 刪除 Agent Platform 資源
 
 1) 刪除模型版本。
 
@@ -572,11 +572,11 @@ gcloud ai-platform models delete $MODEL_NAME
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-21 (世界標準時間)。
+上次更新時間：2026-05-27 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-21 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-27 (世界標準時間)。"],[],[]]

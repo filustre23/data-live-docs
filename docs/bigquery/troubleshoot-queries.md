@@ -591,7 +591,7 @@ of memory`。
 
 如要解決這項錯誤，請按照下列步驟操作：
 
-1. *使用 Vertex AI 遠端模型*：如要使用超出記憶體限制的模型，請按照 [部署模型](https://docs.cloud.google.com/vertex-ai/docs/predictions/deploy-model-api?hl=zh-tw)的步驟，使用 Vertex AI SDK for Python 將模型部署至 Agent Platform，然後使用[遠端模型](https://docs.cloud.google.com/bigquery/docs/bigquery-ml-remote-model-tutorial?hl=zh-tw)存取。這會將記憶體需求卸載至專屬的 Agent Platform 基礎架構。
+1. *使用 Gemini Enterprise Agent Platform 遠端模型*：如要使用超出記憶體限制的模型，請按照 [部署模型](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/predictions/deploy-model-api?hl=zh-tw)一文的步驟，使用 Vertex AI SDK for Python 將模型部署至 Agent Platform，然後使用[遠端模型](https://docs.cloud.google.com/bigquery/docs/bigquery-ml-remote-model-tutorial?hl=zh-tw)存取模型。這會將記憶體需求卸載至專屬的 Agent Platform 基礎架構。
 2. *最佳化模型*：使用架構簡化、量化或剪枝，減少模型的 RAM 占用空間。
 3. *使用較不密集的函式*：如果錯誤發生在 `ML.EXPLAIN_PREDICT` 呼叫期間，請嘗試使用 `ML.PREDICT` 執行工作，判斷模型是否能在沒有可解釋性功能額外負荷的情況下執行。
 4. *分析輸入資料大小*：個別資料列過大可能會導致記憶體耗盡。使用下列指令檢查最大資料列的大小：

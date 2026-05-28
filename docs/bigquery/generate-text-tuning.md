@@ -16,7 +16,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 使用資料調整模型
 
-本文說明如何建立參照 Vertex AI 模型的 BigQuery ML [遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned?hl=zh-tw)，然後設定模型以執行監督式微調。Vertex AI 模型必須是下列其中一項：
+本文說明如何建立參照 Gemini Enterprise Agent Platform 模型的 BigQuery ML [遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned?hl=zh-tw)，然後設定模型執行監督式微調。Agent Platform 模型必須是下列其中一項：
 
 * `gemini-2.5-pro`
 * `gemini-2.5-flash-lite`
@@ -36,7 +36,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 * 建立、委派及使用 BigQuery 連線：專案的 BigQuery 連線管理員 (`roles/bigquery.connectionsAdmin`)。
 
   如果沒有設定[預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw)，您可以在執行 `CREATE MODEL` 陳述式時建立並設定連線。如要這麼做，您必須具備專案的 BigQuery 管理員角色 (`roles/bigquery.admin`)。詳情請參閱「[設定預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw#configure_the_default_connection)」。
-* 將權限授予連線的服務帳戶：在包含 Vertex AI 端點的專案中，授予「專案 IAM 管理員」(`roles/resourcemanager.projectIamAdmin`) 角色。這是您透過將模型名稱指定為端點所建立遠端模型的目前專案。這是您透過指定網址做為端點所建立遠端模型的網址中識別的專案。
+* 將權限授予連線的服務帳戶：在含有 Gemini Enterprise Agent Platform 端點的專案中，授予專案 IAM 管理員 (`roles/resourcemanager.projectIamAdmin`) 權限。這是您透過將模型名稱指定為端點所建立遠端模型的目前專案。這是您透過指定網址做為端點所建立遠端模型時，網址中識別的專案。
 * 建立 BigQuery 工作：專案中的 BigQuery 工作使用者 (`roles/bigquery.jobUser`)。
 
 這些預先定義的角色具備執行本文所述工作所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
@@ -70,7 +70,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    [前往專案選取器](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
 2. [確認專案已啟用計費功能 Google Cloud](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project) 。
-3. 啟用 BigQuery、BigQuery Connection、Vertex AI 和 Compute Engine API。
+3. 啟用 BigQuery、BigQuery Connection、Agent Platform API 和 Compute Engine API。
 
    **啟用 API 時所需的角色**
 
@@ -323,7 +323,7 @@ async function createConnection(projectId, location, connectionId) {
 
 請使用 [`google_bigquery_connection`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_connection) 資源。
 
-**注意：** 如要使用 Terraform 建立 BigQuery 物件，必須啟用 [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest?hl=zh-tw)。
+**注意：** 如要使用 Terraform 建立 BigQuery 物件，請務必啟用 [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -348,9 +348,10 @@ resource "google_bigquery_connection" "default" {
 ## 準備 Cloud Shell
 
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
-2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
+2. 設定要套用 Terraform 設定的預設 Google Cloud 專案
+   。
 
-   您只需要為每項專案執行一次這個指令，且可以在任何目錄中執行。
+   每項專案只需要執行一次這個指令，而且可以在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
@@ -371,7 +372,7 @@ resource "google_bigquery_connection" "default" {
 
    將程式碼範例複製到新建立的 `main.tf`。
 
-   視需要從 GitHub 複製程式碼。如果 Terraform 代码片段是端對端解決方案的一部分，建議您使用這個方法。
+   視需要從 GitHub 複製程式碼。如果 Terraform 程式碼片段是端對端解決方案的一部分，建議您使用這個方法。
 3. 查看並修改範例參數，套用至您的環境。
 4. 儲存變更。
 5. 初始化 Terraform。每個目錄只需執行一次這項操作。
@@ -472,7 +473,7 @@ gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount
    請替換下列項目：
 
    * `PROJECT_ID`：要在其中建立模型的專案 ID。
-   * `DATASET_ID`：要包含模型的資料集 ID。這個資料集必須位於[支援的 Vertex AI 區域](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations?hl=zh-tw)。
+   * `DATASET_ID`：要包含模型的資料集 ID。這個資料集必須位於[支援的 Gemini Enterprise Agent Platform 地區](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations?hl=zh-tw)。
    * `MODEL_NAME`：模型名稱。
    * `REGION`：連線使用的區域。
    * `CONNECTION_ID`：BigQuery 連線的 ID。這個連線必須與您使用的資料集位於相同的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
@@ -562,7 +563,7 @@ gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount
    * `TEMPERATURE`：介於 `[0.0,1.0]` 範圍內的 `FLOAT64` 值，可控制選取詞元時的隨機程度。預設值為 `0`。
 
      如果希望提示生成更具確定性、較不具開放性和創意性的回覆，建議調低 `temperature` 值。另一方面，如果 `temperature` 值較高，則可能產生較多元或有創意的結果。如果 `0` 為 `temperature`，則模型一律會選取可能性最高的回覆。
-   * `TOP_K`：`INT64` 值，範圍為 `[1,40]`，可決定模型選取時考量的初始詞元集區。如要取得較不隨機的回覆，請指定較低的值；如要取得較隨機的回覆，請調高此值。預設值為 `40`。
+   * `TOP_K`：介於 `[1,40]` 之間的 `INT64` 值，用於決定模型選取時考量的初始詞元集區。如要取得較不隨機的回覆，請指定較低的值；如要取得較隨機的回覆，請調高此值。預設值為 `40`。
    * `TOP_P`：`FLOAT64` 範圍 `[0.0,1.0]` 中的 `FLOAT64` 值，有助於判斷要從 `TOP_K` 決定的集區中選取哪些權杖。如要取得較不隨機的回覆，請指定較低的值；如要取得較隨機的回覆，請調高此值。預設值為 `0.95`。
 
 ## 生成文字
@@ -601,7 +602,7 @@ FROM AI.GENERATE_TEXT(
   如果希望提示生成更具確定性、較不具開放性和創意性的回覆，建議調低 `temperature` 值。另一方面，如果 `temperature` 值較高，則可能產生較多元或有創意的結果。如果 `0` 為 `temperature`，則模型一律會選取可能性最高的回覆。
 * `TOP_P`：`[0.0,1.0]` 範圍內的 `FLOAT64` 值有助於判斷所選符記的機率。如要取得較不隨機的回覆，請指定較低的值；如要取得較隨機的回覆，請調高此值。預設值為 `0.95`。
 * `STOP_SEQUENCES`：`ARRAY<STRING>` 值，可移除模型回應中包含的指定字串。字串必須完全相符，包括大小寫。預設值為空陣列。
-* `GROUND_WITH_GOOGLE_SEARCH`：決定 Vertex AI 模型在生成回覆時是否要使用[以 Google 搜尋強化事實基礎](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/grounding/overview?hl=zh-tw#ground-public)的 `BOOL` 值。建立基準後，模型就能在生成回覆時使用網路上其他資訊，讓回覆內容更具體且符合事實。如果將這個欄位設為 `True`，結果中會包含額外的 `grounding_result` 欄，提供模型用來收集額外資訊的來源。預設值為 `FALSE`。
+* `GROUND_WITH_GOOGLE_SEARCH`：`BOOL` 值，用於判斷 Gemini Enterprise Agent Platform 模型在生成回覆時是否使用[以 Google 搜尋強化事實基礎](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/grounding/overview?hl=zh-tw#ground-public)。建立基準後，模型就能在生成回覆時使用網路上其他資訊，讓回覆內容更具體且符合事實。如果將這個欄位設為 `True`，結果中會包含額外的 `grounding_result` 欄，提供模型用來收集額外資訊的來源。預設值為 `FALSE`。
 * `SAFETY_SETTINGS`：`ARRAY<STRUCT<STRING AS category, STRING AS threshold>>` 值，可設定內容安全門檻來篩選回應。結構體中的第一個元素會指定有害類別，第二個元素則會指定對應的封鎖門檻。模型會篩除違反這些設定的內容。每個類別只能指定一次。舉例來說，您無法同時指定 `STRUCT('HARM_CATEGORY_DANGEROUS_CONTENT' AS category, 'BLOCK_MEDIUM_AND_ABOVE' AS threshold)` 和 `STRUCT('HARM_CATEGORY_DANGEROUS_CONTENT' AS category, 'BLOCK_ONLY_HIGH' AS threshold)`。如果特定類別沒有安全設定，系統會使用 `BLOCK_MEDIUM_AND_ABOVE` 安全設定。
 
   支援的類別如下：
@@ -630,7 +631,7 @@ FROM AI.GENERATE_TEXT(
 
   預設值為 `UNSPECIFIED`。
 
-  詳情請參閱「[使用 Vertex AI 佈建輸送量](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-text?hl=zh-tw#provisioned-throughput)」。
+  詳情請參閱「[使用透過 Agent Platform 佈建的輸送量](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-text?hl=zh-tw#provisioned-throughput)」。
 * `MODEL_PARAMS`：JSON 格式的字串常值，可為模型提供參數。這個值必須符合[`generateContent` 要求內容](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/reference/rest/v1/projects.locations.endpoints/generateContent?hl=zh-tw)格式。您可以為要求主體中的任何欄位提供值，但 `contents[]` 欄位除外。如果您設定這個欄位，就無法在 `AI.GENERATE_TEXT` 函式的頂層結構體引數中指定任何模型參數。您必須在 `MODEL_PARAMS` 欄位中指定每個模型參數，或是省略這個欄位並分別指定每個參數。
 
 以下範例顯示具有這些特徵的要求：
@@ -681,7 +682,7 @@ FROM AI.GENERATE_TEXT(
   如果希望提示生成更具確定性、較不具開放性和創意性的回覆，建議調低 `temperature` 值。另一方面，如果 `temperature` 值較高，則可能產生較多元或有創意的結果。如果 `0` 為 `temperature`，則模型一律會選取可能性最高的回覆。
 * `TOP_P`：`[0.0,1.0]` 範圍內的 `FLOAT64` 值有助於判斷所選符記的機率。如要取得較不隨機的回覆，請指定較低的值；如要取得較隨機的回覆，請調高此值。預設值為 `0.95`。
 * `STOP_SEQUENCES`：`ARRAY<STRING>` 值，可移除模型回應中包含的指定字串。字串必須完全相符，包括大小寫。預設值為空陣列。
-* `GROUND_WITH_GOOGLE_SEARCH`：決定 Vertex AI 模型在生成回覆時是否要使用[以 Google 搜尋強化事實基礎](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/grounding/overview?hl=zh-tw#ground-public)的 `BOOL` 值。建立基準後，模型就能在生成回覆時使用網路上其他資訊，讓回覆內容更具體且符合事實。如果將這個欄位設為 `True`，結果中會包含額外的 `grounding_result` 欄，提供模型用來收集額外資訊的來源。預設值為 `FALSE`。
+* `GROUND_WITH_GOOGLE_SEARCH`：`BOOL` 值，用於判斷 Gemini Enterprise Agent Platform 模型在生成回覆時是否使用[以 Google 搜尋強化事實基礎](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/grounding/overview?hl=zh-tw#ground-public)。建立基準後，模型就能在生成回覆時使用網路上其他資訊，讓回覆內容更具體且符合事實。如果將這個欄位設為 `True`，結果中會包含額外的 `grounding_result` 欄，提供模型用來收集額外資訊的來源。預設值為 `FALSE`。
 * `SAFETY_SETTINGS`：`ARRAY<STRUCT<STRING AS category, STRING AS threshold>>` 值，可設定內容安全門檻來篩選回應。結構體中的第一個元素會指定有害類別，第二個元素則會指定對應的封鎖門檻。模型會篩除違反這些設定的內容。每個類別只能指定一次。舉例來說，您無法同時指定 `STRUCT('HARM_CATEGORY_DANGEROUS_CONTENT' AS category, 'BLOCK_MEDIUM_AND_ABOVE' AS threshold)` 和 `STRUCT('HARM_CATEGORY_DANGEROUS_CONTENT' AS category, 'BLOCK_ONLY_HIGH' AS threshold)`。如果特定類別沒有安全設定，系統會使用 `BLOCK_MEDIUM_AND_ABOVE` 安全設定。
 
   支援的類別如下：
@@ -710,7 +711,7 @@ FROM AI.GENERATE_TEXT(
 
   預設值為 `UNSPECIFIED`。
 
-  詳情請參閱「[使用 Vertex AI 佈建輸送量](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-text?hl=zh-tw#provisioned-throughput)」。
+  詳情請參閱「[使用透過 Agent Platform 佈建的輸送量](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-text?hl=zh-tw#provisioned-throughput)」。
 * `MODEL_PARAMS`：JSON 格式的字串常值，可為模型提供參數。這個值必須符合[`generateContent` 要求內容](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/reference/rest/v1/projects.locations.endpoints/generateContent?hl=zh-tw)格式。您可以為要求主體中的任何欄位提供值，但 `contents[]` 欄位除外。如果您設定這個欄位，就無法在 `AI.GENERATE_TEXT` 函式的頂層結構體引數中指定任何模型參數。您必須在 `MODEL_PARAMS` 欄位中指定每個模型參數，或是省略這個欄位並分別指定每個參數。
 
 **範例 1**
@@ -738,7 +739,7 @@ FROM
 
 以下範例顯示具有這些特徵的要求：
 
-* 使用查詢串連字串，提供含有資料表欄的提示[前置字元](https://docs.cloud.google.com/vertex-ai/docs/generative-ai/text/text-prompts?hl=zh-tw#prompt_structure)，藉此建立提示資料。
+* 使用查詢串連字串，提供含有資料表欄的提示[前置字元](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/prompts/structure-prompts?hl=zh-tw)，藉此建立提示資料。
 * 傳回簡短且中等可能性的回覆。
 * 不會在個別資料欄中傳回生成的文字和安全屬性。
 
@@ -762,11 +763,11 @@ FROM
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-21 (世界標準時間)。
+上次更新時間：2026-05-27 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-21 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-27 (世界標準時間)。"],[],[]]

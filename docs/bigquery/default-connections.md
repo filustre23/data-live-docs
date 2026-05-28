@@ -49,14 +49,14 @@ BigQuery 支援下列資源中的預設連線：
 * 如有必要，請將權限授予預設連線的服務帳戶：
 
   + 如果使用預設連線建立外部資料表：外部資料表使用的任何 Cloud Storage bucket 上的 Storage Admin (`roles/storage.admin`)。
-  + 如果使用預設連線建立遠端模型：在包含 Vertex AI 端點的專案中，擔任專案 IAM 管理員 (`roles/resourcemanager.projectIamAdmin`)。對於下列類型的遠端模型，這是目前的專案：
+  + 如果使用預設連線建立遠端模型：專案 IAM 管理員 (`roles/resourcemanager.projectIamAdmin`) 位於含有 Gemini Enterprise Agent Platform 端點的專案中。對於下列類型的遠端模型，這是目前的專案：
 
     - 透過 Cloud AI 服務使用的遠端模型。
     - 透過指定模型名稱做為端點建立的 Google 或合作夥伴模型。
 
-    如果是所有其他遠端模型，這個專案會包含目標模型部署到的 Vertex AI 端點。
+    如果是所有其他遠端模型，這個專案會包含目標模型部署的 Agent Platform 端點。
 
-    如果您使用遠端模型分析物件資料表中的非結構化資料，且物件資料表使用的 Cloud Storage bucket 與 Vertex AI 端點位於不同專案，您也必須在物件資料表使用的 Cloud Storage bucket 中擁有 Storage 管理員 (`roles/storage.admin`) 角色。
+    如果您使用遠端模型分析物件資料表中的非結構化資料，且物件資料表使用的 Cloud Storage bucket 與 Agent Platform 端點位於不同專案，您也必須在物件資料表使用的 Cloud Storage bucket 上擁有 Storage 管理員 (`roles/storage.admin`) 角色。
 
   如果您是管理員，要設定連線做為預設連線，或是使用者要使用尚未授予適當服務帳戶角色的預設連線，才需要這些角色。詳情請參閱「[設定預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw#configure_the_default_connection)」。
 
@@ -118,7 +118,7 @@ BigQuery 支援下列資源中的預設連線：
 
 ## 預設連線的權限佈建
 
-使用預設連線建立外部資料表或遠端模型時，如果預設連線的服務帳戶尚未具備適當角色，Google Cloud 會將這些角色授予該服務帳戶。如果沒有外部資料表或遠端模型所用 Cloud Storage 或 Vertex AI 資源的管理權限，這項動作就會失敗。
+使用預設連線建立外部資料表或遠端模型時，如果預設連線的服務帳戶尚未具備適當角色，Google Cloud 會將這些角色授予該服務帳戶。如果沒有外部資料表或遠端模型所用 Cloud Storage 或 Agent Platform 資源的管理權限，這項動作就會失敗。
 
 預設連線的服務帳戶會取得下列角色：
 
@@ -127,12 +127,12 @@ BigQuery 支援下列資源中的預設連線：
 | [Cloud Storage BigLake 資料表](https://docs.cloud.google.com/bigquery/docs/create-cloud-storage-table-biglake?hl=zh-tw) | Cloud Storage | `roles/storage.legacyBucketReader`  `roles/storage.legacyObjectReader` |
 | [物件資料表](https://docs.cloud.google.com/bigquery/docs/object-tables?hl=zh-tw) | Cloud Storage | `roles/storage.legacyBucketReader`  `roles/storage.legacyObjectReader` |
 | [Iceberg 代管資料表](https://docs.cloud.google.com/bigquery/docs/iceberg-tables?hl=zh-tw#create-iceberg-tables) | Cloud Storage | `roles/storage.legacyBucketWriter`  `roles/storage.legacyObjectOwner` |
-| [BigQuery ML 遠端模型與 Vertex AI 模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https?hl=zh-tw) | Google 自有模型 | `roles/aiplatform.user` |
+| [透過 Gemini Enterprise Agent Platform 模型使用 BigQuery ML 遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https?hl=zh-tw) | Google 自有模型 | `roles/aiplatform.user` |
 | 可從 Model Garden 部署至端點 |
 | 使用者模型 |
 | 經過微調的模型 | `roles/aiplatform.serviceAgent` |
 | [透過 Cloud AI 服務使用 BigQuery ML 遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service?hl=zh-tw) | 文件處理器 | `roles/documentai.apiUser` |
-| 語音辨識器 | `roles/speech.serviceAgent` |
+| 語音辨識工具 | `roles/speech.serviceAgent` |
 | Cloud NLP | `roles/serviceusage.serviceUsageConsumer` |
 | Cloud Vision | `roles/serviceusage.serviceUsageConsumer` |
 | Cloud Translation | `roles/cloudtranslate.user` |
@@ -187,7 +187,7 @@ OPTIONS (
 
 以下範例說明如何在 BigQuery 中指定 `REMOTE WITH CONNECTION DEFAULT`，藉此建立遠端模型。
 
-### 範例：透過 Vertex AI 模型建立遠端模型
+### 範例：透過 Agent Platform 模型建立遠端模型
 
 下列 SQL 運算式會建立具有預設連線的[遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw)：
 
@@ -230,11 +230,11 @@ CREATE MODEL `project_id.mydataset.mymodel`
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-21 (世界標準時間)。
+上次更新時間：2026-05-27 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-21 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-27 (世界標準時間)。"],[],[]]

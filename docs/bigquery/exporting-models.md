@@ -63,7 +63,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 | MATRIX\_FACTORIZATION |
 | PCA |
 | TRANSFORM\_ONLY |
-| BOOSTED\_TREE\_CLASSIFIER | Booster (XGBoost 0.82) | `gcs_bucket/    assets/      0.txt      1.txt      model_metadata.json    main.py    model.bst    xgboost_predictor-0.1.tar.gz      ....       predictor.py      ....`    `main.py` 適用於在本機執行。詳情請參閱「[模型部署](#model-deployment)」。 |
+| BOOSTED\_TREE\_CLASSIFIER | 追加劑 (XGBoost 0.82) | `gcs_bucket/    assets/      0.txt      1.txt      model_metadata.json    main.py    model.bst    xgboost_predictor-0.1.tar.gz      ....       predictor.py      ....`    `main.py` 適用於在本機執行。詳情請參閱「[模型部署](#model-deployment)」。 |
 | BOOSTED\_TREE\_REGRESSOR |
 | RANDOM\_FOREST\_REGRESSOR |
 | RANDOM\_FOREST\_REGRESSOR |
@@ -74,13 +74,13 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 匯出使用「`TRANSFORM`」訓練的模型
 
-如果模型是使用 [`TRANSFORM` 子句](https://docs.cloud.google.com/bigquery/docs/bigqueryml-transform?hl=zh-tw)訓練，則額外的預先處理模型會執行 [`TRANSFORM` 子句](https://docs.cloud.google.com/bigquery/docs/bigqueryml-transform?hl=zh-tw)中的相同邏輯，並以 TensorFlow SavedModel 格式儲存於 `transform` 子目錄下。您也可以將使用 [`TRANSFORM` 子句](https://docs.cloud.google.com/bigquery/docs/bigqueryml-transform?hl=zh-tw)訓練的模型部署至 Vertex AI 和本機。詳情請參閱[模型部署](https://docs.cloud.google.com/bigquery/docs/exporting-models?hl=zh-tw#model-deployment)。
+如果模型是使用 [`TRANSFORM` 子句](https://docs.cloud.google.com/bigquery/docs/bigqueryml-transform?hl=zh-tw)訓練，則額外的預先處理模型會執行 [`TRANSFORM` 子句](https://docs.cloud.google.com/bigquery/docs/bigqueryml-transform?hl=zh-tw)中的相同邏輯，並以 TensorFlow SavedModel 格式儲存於 `transform` 子目錄下。您也可以將使用 [`TRANSFORM` 子句](https://docs.cloud.google.com/bigquery/docs/bigqueryml-transform?hl=zh-tw)訓練的模型部署到 Gemini Enterprise Agent Platform 和本機。詳情請參閱[模型部署](https://docs.cloud.google.com/bigquery/docs/exporting-models?hl=zh-tw#model-deployment)。
 
 | 匯出模型格式 | 匯出檔案範例 |
 | --- | --- |
 | 預測模型：[TensorFlow SavedModel](https://www.tensorflow.org/guide/saved_model?hl=zh-tw) 或 Booster (XGBoost 0.82)。  TRANSFORM 子句的預先處理模型：[TensorFlow SavedModel](https://www.tensorflow.org/guide/saved_model?hl=zh-tw) (TF 2.5 以上版本) | `gcs_bucket/    ....(model files)    transform/      assets/          f1.txt/          f2.txt/      saved_model.pb      variables/          variables.data-00-of-01          variables.index` |
 
-模型不包含在訓練期間於 [`TRANSFORM` 子句](https://docs.cloud.google.com/bigquery/docs/bigqueryml-transform?hl=zh-tw)外執行的特徵工程相關資訊。例如 `SELECT` 陳述式中的任何內容。因此，您需要先手動轉換輸入資料，再提供給預先處理模型。
+模型不會包含在訓練期間於 [`TRANSFORM` 子句](https://docs.cloud.google.com/bigquery/docs/bigqueryml-transform?hl=zh-tw)外執行的特徵工程相關資訊。例如 `SELECT` 陳述式中的任何內容。因此，您需要先手動轉換輸入資料，再提供給預先處理模型。
 
 ### 支援的資料類型
 
@@ -149,9 +149,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 * 如果訓練期間使用下列任何功能，系統就不支援匯出模型：
 
   + 輸入資料中含有 `ARRAY`、`TIMESTAMP` 或 `GEOGRAPHY` 特徵類型。
-* 匯出的 `AUTOML_REGRESSOR` 和 `AUTOML_CLASSIFIER` 類型模型不支援 Vertex AI 部署，無法用於線上預測。
+* 模型類型 `AUTOML_REGRESSOR` 和 `AUTOML_CLASSIFIER` 的匯出模型不支援部署至 Agent Platform，以進行線上預測。
 * 矩陣分解模型匯出大小上限為 1 GB。
-  模型大小與 `num_factors` 大致成正比，因此如果達到上限，您可以在訓練期間減少 `num_factors`，縮減模型大小。
+  模型大小與 `num_factors` 大致成正比，因此如果達到上限，可以在訓練期間減少 `num_factors`，縮減模型大小。
 * 如要瞭解使用 [BigQuery ML `TRANSFORM` 子句](https://docs.cloud.google.com/bigquery/docs/bigqueryml-transform?hl=zh-tw)訓練的模型 (用於[手動前處理特徵](https://docs.cloud.google.com/bigquery/docs/manual-preprocessing?hl=zh-tw))，請參閱支援匯出的[資料類型](https://docs.cloud.google.com/bigquery/docs/exporting-models?hl=zh-tw#export-transform-types)和[函式](https://docs.cloud.google.com/bigquery/docs/exporting-models?hl=zh-tw#export-transform-functions)。
 * 使用 [BigQuery ML `TRANSFORM` 子句](https://docs.cloud.google.com/bigquery/docs/bigqueryml-transform?hl=zh-tw)在 2023 年 9 月 18 日前訓練的模型，必須重新訓練，才能[透過 Model Registry 部署](https://docs.cloud.google.com/bigquery/docs/managing-models-vertex?hl=zh-tw)，以進行線上預測。
 * 匯出模型時，系統支援 `ARRAY<STRUCT<INT64, FLOAT64>>`、`ARRAY` 和 `TIMESTAMP` 做為預先轉換的資料，但不支援做為轉換後的資料。
@@ -328,27 +328,27 @@ public class ExtractModel {
 
 ## 模型部署
 
-您可以將匯出的模型部署至 Vertex AI 和本機。如果模型的 [`TRANSFORM` 子句](https://docs.cloud.google.com/bigquery/docs/bigqueryml-transform?hl=zh-tw)包含日期函式、日期時間函式、時間函式或時間戳記函式，您必須在容器中使用 [bigquery-ml-utils 程式庫](https://pypi.org/project/bigquery-ml-utils/)。但如果您是[透過 Model Registry 部署](https://docs.cloud.google.com/bigquery/docs/managing-models-vertex?hl=zh-tw)，則不需要匯出模型或提供模型的容器。
+匯出的模型可以部署至 Agent Platform，也可以在本機部署。如果模型的 [`TRANSFORM` 子句](https://docs.cloud.google.com/bigquery/docs/bigqueryml-transform?hl=zh-tw)包含日期函式、日期時間函式、時間函式或時間戳記函式，您必須在容器中使用 [bigquery-ml-utils 程式庫](https://pypi.org/project/bigquery-ml-utils/)。但如果您是[透過 Model Registry 部署](https://docs.cloud.google.com/bigquery/docs/managing-models-vertex?hl=zh-tw)，則不需要匯出模型或提供模型的容器。
 
-### Vertex AI 部署
+### Agent Platform 部署
 
 | 匯出模型格式 | 部署作業 |
 | --- | --- |
-| TensorFlow SavedModel (非 AutoML 模型) | [部署 TensorFlow SavedModel](https://docs.cloud.google.com/vertex-ai/docs/general/deployment?hl=zh-tw)。 您必須使用 [支援的 TensorFlow 版本](https://docs.cloud.google.com/vertex-ai/docs/supported-frameworks-list?hl=zh-tw#tensorflow)建立 SavedModel 檔案。 |
+| TensorFlow SavedModel (非 AutoML 模型) | [部署 TensorFlow SavedModel](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/general/deployment?hl=zh-tw)。 您必須使用 [支援的 TensorFlow 版本](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/supported-frameworks-list?hl=zh-tw#tensorflow)建立 SavedModel 檔案。 |
 | TensorFlow SavedModel (AutoML 模型) | 不支援。 |
-| XGBoost Booster | 使用[自訂預測處理常式](https://docs.cloud.google.com/vertex-ai/docs/predictions/custom-prediction-routines?hl=zh-tw)。如果是 XGBoost Booster 模型，預先處理和後續處理資訊會儲存在匯出的檔案中，而自訂預測處理常式可讓您部署模型和額外匯出的檔案。   您必須使用[支援的 XGBoost 版本](https://docs.cloud.google.com/vertex-ai/docs/supported-frameworks-list?hl=zh-tw#xgboost_2)建立模型檔案。 |
+| XGBoost Booster | 使用[自訂預測處理常式](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/predictions/custom-prediction-routines?hl=zh-tw)。如果是 XGBoost Booster 模型，前處理和後處理資訊會儲存在匯出的檔案中，而自訂預測處理常式可讓您部署模型和額外匯出的檔案。   您必須使用[支援的 XGBoost 版本](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/supported-frameworks-list?hl=zh-tw#xgboost_2)建立模型檔案。 |
 
 ### 地端部署作業
 
 | 匯出模型格式 | 部署作業 |
 | --- | --- |
-| TensorFlow SavedModel (非 AutoML 模型) | SavedModel 是標準格式，您可以在 [TensorFlow Serving Docker 容器](https://www.tensorflow.org/tfx/serving/serving_basic?hl=zh-tw)中部署模型。  您也可以運用 Vertex AI Online Prediction 的[本機執行](https://docs.cloud.google.com/vertex-ai/docs/training/containerize-run-code-local?hl=zh-tw)功能。 |
-| TensorFlow SavedModel (AutoML 模型) | [將模型容器化並執行](https://docs.cloud.google.com/vertex-ai/docs/training/containerize-run-code-local?hl=zh-tw)。 |
+| TensorFlow SavedModel (非 AutoML 模型) | SavedModel 是標準格式，您可以在 [TensorFlow Serving Docker 容器](https://www.tensorflow.org/tfx/serving/serving_basic?hl=zh-tw)中部署這些模型。  您也可以運用 Agent Platform 線上預測的[本機執行](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/training/containerize-run-code-local?hl=zh-tw)功能。 |
+| TensorFlow SavedModel (AutoML 模型) | [將模型容器化並執行](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/training/containerize-run-code-local?hl=zh-tw)。 |
 | XGBoost Booster | 如要在本機執行 XGBoost Booster 模型，可以使用匯出的 `main.py` 檔案：  1. 將 Cloud Storage 中的所有檔案下載至本機目錄。 2. 將 `xgboost_predictor-0.1.tar.gz` 中的 `predictor.py` 檔案解壓縮至本機目錄。 3. 執行 `main.py` (請參閱 `main.py` 中的操作說明)。 |
 
 ## 預測輸出格式
 
-本節提供各模型類型的預測輸出格式。所有匯出的模型都支援批次預測，可一次處理多個輸入資料列。舉例來說，在下列輸出格式範例中，每個範例都有兩個輸入列。
+本節提供匯出模型的預測輸出格式，適用於各模型類型。所有匯出的模型都支援批次預測，可一次處理多個輸入資料列。舉例來說，在下列輸出格式範例中，每個範例都有兩個輸入列。
 
 ### 自動編碼器
 
@@ -425,7 +425,7 @@ public class ExtractModel {
 
 ### MATRIX\_FACTORIZATION
 
-**注意：**我們僅支援輸入使用者，並輸出前 50 個 (predicted\_rating、predicted\_item) 配對，並依 predicted\_rating 降序排序。
+**注意：**我們只支援輸入使用者，並輸出前 50 個 (predicted\_rating、predicted\_item) 配對，並依 predicted\_rating 降序排序。
 
 | 預測輸出格式 | 輸出範例 |
 | --- | --- |
@@ -528,11 +528,11 @@ public class ExtractModel {
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-21 (世界標準時間)。
+上次更新時間：2026-05-27 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-21 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-27 (世界標準時間)。"],[],[]]

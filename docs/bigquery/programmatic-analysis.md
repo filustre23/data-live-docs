@@ -30,7 +30,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 * 查看筆記本版本記錄。
 * 還原或從筆記本的先前版本建立分支。
 
-筆記本是 [BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/query-overview?hl=zh-tw#bigquery-studio) 程式碼資產，由 [Dataform](https://docs.cloud.google.com/dataform/docs/overview?hl=zh-tw) 提供支援，但筆記本不會顯示在 Dataform 中。[儲存的查詢](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction?hl=zh-tw)也是程式碼資產。
+筆記本是 [BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/query-overview?hl=zh-tw#bigquery-studio) 的程式碼資產，由 [Dataform](https://docs.cloud.google.com/dataform/docs/overview?hl=zh-tw) 提供支援，但筆記本不會顯示在 Dataform 中。[儲存的查詢](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction?hl=zh-tw)也是程式碼資產。
 所有程式碼資產都會儲存在預設[區域](#supported_regions)。更新預設區域後，之後建立的所有程式碼資產都會使用新的區域。
 
 記事本功能僅適用於 Google Cloud 控制台。
@@ -41,8 +41,7 @@ BigQuery 中的 Notebook 具有下列優點：
 * 採用 [Gemini 生成式 AI](https://docs.cloud.google.com/bigquery/docs/write-sql-gemini?hl=zh-tw) 技術輔助開發程式碼。
 * 自動完成 SQL 陳述式，與 BigQuery 編輯器相同。
 * 可儲存、共用及管理筆記本版本。
-* 您可以在工作流程的任何時間點，使用 [matplotlib](https://matplotlib.org/)、
-  [seaborn](https://seaborn.pydata.org/) 和其他熱門程式庫將資料視覺化。
+* 您可以在工作流程的任何時間點，使用 [matplotlib](https://matplotlib.org/)、[seaborn](https://seaborn.pydata.org/) 和其他熱門程式庫將資料視覺化。
 * 您可以在儲存格中編寫及[執行 SQL](https://docs.cloud.google.com/bigquery/docs/create-notebooks?hl=zh-tw#cells)，並參照筆記本中的 Python 變數。
 * 支援匯總和自訂功能的互動式 [DataFrame 視覺化](https://docs.cloud.google.com/bigquery/docs/create-notebooks?hl=zh-tw#cells)。
 
@@ -57,7 +56,7 @@ BigQuery DataFrames 的優點如下：
 * 透過透明的 SQL 轉換至 BigQuery 和 BigQuery ML API，實作超過 750 個 pandas 和 scikit-learn API。
 * 延後執行查詢，提升效能。
 * 使用 Python 使用者定義函式擴充資料轉換作業，以便在雲端處理資料。這些函式會自動部署為 BigQuery [遠端函式](https://docs.cloud.google.com/bigquery/docs/remote-functions?hl=zh-tw)。
-* 與 Vertex AI 整合，讓您使用 Gemini 模型生成文字。
+* 與 Gemini Enterprise Agent Platform 整合，讓您使用 Gemini 模型生成文字。
 
 ## 其他程式輔助分析解決方案
 
@@ -74,29 +73,29 @@ Jupyter Notebooks 以 [IPython](https://ipython.org/) 核心 (一種功能強大
 
 您可以使用下列其中一項產品，在Google Cloud 上部署 Jupyter 筆記本和 JupyterLab 環境：
 
-* [Vertex AI Workbench 執行個體](https://docs.cloud.google.com/vertex-ai/docs/workbench/instances/introduction?hl=zh-tw)：提供整合 JupyterLab 環境的服務，可讓機器學習開發人員和資料科學家使用部分最新的資料科學和機器學習架構。Vertex AI Workbench 已與 BigQuery 等其他 Google Cloud 資料產品整合，使用者可以輕鬆執行多項工作，包括資料擷取、預先處理和探索資料，以及最終的模型訓練和部署作業等。詳情請參閱 [Vertex AI Workbench 執行個體簡介](https://docs.cloud.google.com/vertex-ai/docs/workbench/instances/introduction?hl=zh-tw)。
+* [Vertex AI Workbench 執行個體](https://docs.cloud.google.com/gemini-enterprise-agent-platform/notebooks/workbench/introduction?hl=zh-tw)：提供整合 JupyterLab 環境的服務，可讓機器學習開發人員和資料科學家使用部分最新的資料科學和機器學習架構。Vertex AI Workbench 已與 BigQuery 等其他 Google Cloud 資料產品整合，使用者可以輕鬆執行多項工作，包括資料擷取、預先處理和探索資料，以及最終的模型訓練和部署作業等。詳情請參閱 [Vertex AI Workbench 執行個體簡介](https://docs.cloud.google.com/gemini-enterprise-agent-platform/notebooks/workbench/introduction?hl=zh-tw)。
 * [Managed Service for Apache Spark](https://docs.cloud.google.com/dataproc?hl=zh-tw) 是一項運作快速又簡單易用的全代管服務，可讓您以更輕鬆且更具成本效益的方式執行 [Apache Spark](https://spark.apache.org/) 和 [Apache Hadoop](https://hadoop.apache.org/) 叢集。您可以使用 [Jupyter 選用元件](https://docs.cloud.google.com/dataproc/docs/concepts/components/jupyter?hl=zh-tw)，在 Managed Service for Apache Spark 叢集上安裝 Jupyter 筆記本和 JupyterLab。
   元件提供 Python 核心，用來執行 [PySpark](https://pypi.org/project/pyspark/) 程式碼。根據預設，Managed Service for Apache Spark 會自動設定將筆記本[儲存在 Cloud Storage 中](https://github.com/src-d/jgscm)，讓其他叢集可以存取相同的筆記本檔案。將現有筆記本遷移至 Managed Service for Apache Spark 時，請檢查系統支援的 [Managed Service for Apache Spark 版本](https://docs.cloud.google.com/dataproc/docs/concepts/versioning/dataproc-versions?hl=zh-tw)是否包含筆記本的依附元件。如要安裝自訂軟體，您可以考慮[自行建立 Managed Service for Apache Spark 映像檔](https://docs.cloud.google.com/dataproc/docs/guides/dataproc-images?hl=zh-tw)、編寫自己的[初始化動作](https://docs.cloud.google.com/dataproc/docs/concepts/configuring-clusters/init-actions?hl=zh-tw)或[指定自訂 Python 套件需求](https://docs.cloud.google.com/dataproc/docs/tutorials/python-configuration?hl=zh-tw)。如要開始使用，請參閱[在 Managed Service for Apache Spark 叢集上安裝及執行 Jupyter 筆記本](https://docs.cloud.google.com/dataproc/docs/tutorials/jupyter-notebook?hl=zh-tw)的教學課程。
 
 ### Apache Zeppelin
 
-[Apache Zeppelin](https://zeppelin.apache.org/)是一種開放原始碼的專案，提供網頁型的筆記本進行數據分析。您可以藉由安裝 [Zeppelin 選用元件](https://docs.cloud.google.com/dataproc/docs/concepts/components/zeppelin?hl=zh-tw)，在 [Managed Service for Apache Spark](https://docs.cloud.google.com/dataproc?hl=zh-tw) 上部署 Apache Zeppelin 執行個體。根據預設，筆記本會儲存在 Cloud Storage 中，即在叢集建立期間由使用者指定或系統自動建立的 Apache Spark 受管理服務暫存值區。建立叢集時，您可以新增 `zeppelin:zeppelin.notebook.gcs.dir` 屬性來變更筆記本位置。如要進一步瞭解如何安裝及設定 Apache Zeppelin，請參閱 [Zeppelin 元件指南](https://docs.cloud.google.com/dataproc/docs/concepts/components/zeppelin?hl=zh-tw)。如需範例，請參閱[使用適用於 Apache Zeppelin 的 BigQuery Interpreter 分析 BigQuery 資料集](https://cloud.google.com/blog/products/gcp/analyzing-bigquery-datasets-using-bigquery-interpreter-for-apache-zeppelin?hl=zh-tw)。
+[Apache Zeppelin](https://zeppelin.apache.org/)是一種開放原始碼的專案，提供網頁型的筆記本進行數據分析。您可以藉由安裝 [Zeppelin 選用元件](https://docs.cloud.google.com/dataproc/docs/concepts/components/zeppelin?hl=zh-tw)，在 [Managed Service for Apache Spark](https://docs.cloud.google.com/dataproc?hl=zh-tw) 上部署 Apache Zeppelin 執行個體。根據預設，筆記本會儲存在 Cloud Storage 中，即在叢集建立期間由使用者指定或系統自動建立的 Managed Service for Apache Spark 暫存值區。建立叢集時，您可以新增 `zeppelin:zeppelin.notebook.gcs.dir` 屬性來變更筆記本位置。如要進一步瞭解如何安裝及設定 Apache Zeppelin，請參閱 [Zeppelin 元件指南](https://docs.cloud.google.com/dataproc/docs/concepts/components/zeppelin?hl=zh-tw)。如需範例，請參閱[使用適用於 Apache Zeppelin 的 BigQuery Interpreter 分析 BigQuery 資料集](https://cloud.google.com/blog/products/gcp/analyzing-bigquery-datasets-using-bigquery-interpreter-for-apache-zeppelin?hl=zh-tw)。
 
 ### Apache Hadoop、Apache Spark 和 Apache Hive
 
 在遷移資料分析管道時，您可能需要遷移部分舊版的 [Apache Hadoop](https://hadoop.apache.org/)、[Apache Spark](https://spark.apache.org/) 或 [Apache Hive](https://hive.apache.org/) 工作，這些工作需要直接處理資料倉儲中的資料。例如，您可以擷取用於機器學習工作負載的功能。
 
-有了 Apache Spark 代管服務，您就能以符合成本效益的方式，有效部署全代管 Hadoop 和 Spark 叢集。Managed Service for Apache Spark 整合了開放原始碼 [BigQuery 連接器](https://docs.cloud.google.com/dataproc/docs/concepts/connectors/bigquery?hl=zh-tw)。這些連接器使用 [BigQuery Storage API](https://docs.cloud.google.com/bigquery/docs/reference/storage?hl=zh-tw)，直接從 BigQuery 透過 gRPC 串流資料。
+有了 Managed Service for Apache Spark，您就能以符合成本效益的方式，有效部署全代管 Hadoop 和 Spark 叢集。Managed Service for Apache Spark 會整合開放原始碼 [BigQuery 連接器](https://docs.cloud.google.com/dataproc/docs/concepts/connectors/bigquery?hl=zh-tw)。這些連接器使用 [BigQuery Storage API](https://docs.cloud.google.com/bigquery/docs/reference/storage?hl=zh-tw)，直接從 BigQuery 透過 gRPC 串流資料。
 
 將現有的 Hadoop 和 Spark 工作負載遷移至 Managed Service for Apache Spark 時，您可以確認系統支援的 [Managed Service for Apache Spark 版本](https://docs.cloud.google.com/dataproc/docs/concepts/versioning/dataproc-versions?hl=zh-tw)中是否包含工作負載依附元件。如要安裝自訂軟體，您可以考慮[自行建立 Managed Service for Apache Spark 映像檔](https://docs.cloud.google.com/dataproc/docs/guides/dataproc-images?hl=zh-tw)、寫入自己的[初始化動作](https://docs.cloud.google.com/dataproc/docs/concepts/configuring-clusters/init-actions?hl=zh-tw)或[指定自訂 Python 套件需求](https://docs.cloud.google.com/dataproc/docs/tutorials/python-configuration?hl=zh-tw)。
 
-如要開始使用，請參閱「[Managed Service for Apache Spark 快速入門導覽課程指南](https://docs.cloud.google.com/dataproc/docs/quickstarts?hl=zh-tw)」和「[BigQuery 連接器程式碼範例](https://docs.cloud.google.com/dataproc/docs/examples/bigquery-example?hl=zh-tw)」。
+如要開始使用，請參閱 [Managed Service for Apache Spark 快速入門導覽課程指南](https://docs.cloud.google.com/dataproc/docs/quickstarts?hl=zh-tw)和 [BigQuery 連接器程式碼範例](https://docs.cloud.google.com/dataproc/docs/examples/bigquery-example?hl=zh-tw)。
 
 ### Apache Beam
 
-[Apache Beam](https://beam.apache.org/) 是一個開放原始碼架構，提供豐富的時間區間設定和工作階段分析基元，以及各式來源與接收器連接器的生態系統，包括 [BigQuery 適用的連接器](https://beam.apache.org/documentation/io/built-in/google-bigquery/)。Apache Beam 可讓您在串流 (即時) 與批次 (舊有) 模式下轉換並擴充資料，而且可靠性和明確性完全相同。
+[Apache Beam](https://beam.apache.org/) 是一個開放原始碼框架，提供豐富的視窗化和工作階段分析基元，以及各式來源與接收器連接器的生態系統，包括 [BigQuery 適用的連接器](https://beam.apache.org/documentation/io/built-in/google-bigquery/)。Apache Beam 可讓您在串流 (即時) 與批次 (舊有) 模式下轉換並擴充資料，而且可靠性和明確性完全相同。
 
-[Dataflow](https://docs.cloud.google.com/dataflow?hl=zh-tw) 是一項全代管服務，可大規模執行 Apache Beam 工作。Dataflow 的無伺服器方法能夠自動處理效能、資源調度、可用性、安全性和法規遵循相關作業，因此可以減輕您的營運工作負擔，讓您能專心設計程式，無須費心管理伺服器叢集。
+[Dataflow](https://docs.cloud.google.com/dataflow?hl=zh-tw) 是一項用於大規模執行 Apache Beam 工作的全代管服務。Dataflow 的無伺服器方法能夠自動處理效能、資源調度、可用性、安全性和法規遵循相關作業，因此可以減輕您的營運工作負擔，讓您能專心設計程式，無須費心管理伺服器叢集。
 
 您可以利用不同的方式提交 Dataflow 工作，例如透過[指令列介面](https://docs.cloud.google.com/dataflow/docs/guides/using-command-line-intf?hl=zh-tw)、[Java SDK](https://beam.apache.org/documentation/sdks/java/) 或 [Python SDK](https://beam.apache.org/documentation/sdks/python/)。
 
@@ -115,11 +114,11 @@ BigQuery 提供大量的[用戶端程式庫](https://docs.cloud.google.com/bigqu
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-21 (世界標準時間)。
+上次更新時間：2026-05-27 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-21 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-27 (世界標準時間)。"],[],[]]
