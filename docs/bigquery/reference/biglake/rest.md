@@ -7,10 +7,6 @@ As of April 20th, 2026, BigLake is now called Lakehouse for Apache Iceberg. BigL
 
 The BigLake API provides access to BigLake Metastore, a serverless, fully managed, and highly available metastore for open-source data that can be used for querying Apache Iceberg tables in BigQuery.
 
-* [REST Resource: v1alpha1.projects.locations.catalogs](#v1alpha1.projects.locations.catalogs)
-* [REST Resource: v1alpha1.projects.locations.catalogs.databases](#v1alpha1.projects.locations.catalogs.databases)
-* [REST Resource: v1alpha1.projects.locations.catalogs.databases.locks](#v1alpha1.projects.locations.catalogs.databases.locks)
-* [REST Resource: v1alpha1.projects.locations.catalogs.databases.tables](#v1alpha1.projects.locations.catalogs.databases.tables)
 * [REST Resource: [] []](#)
 * [REST Resource: deltasharing.v1.projects.catalogs](#deltasharing.v1.projects.catalogs)
 * [REST Resource: deltasharing.v1.projects.catalogs.shares](#deltasharing.v1.projects.catalogs.shares)
@@ -55,55 +51,15 @@ To call this service, we recommend that you use the Google-provided [client libr
 
 ### Discovery document
 
-A [Discovery Document](https://developers.google.com/discovery/v1/reference/apis) is a machine-readable specification for describing and consuming REST APIs. It is used to build client libraries, IDE plugins, and other tools that interact with Google APIs. One service may provide multiple discovery documents. This service provides the following discovery documents:
+A [Discovery Document](https://developers.google.com/discovery/v1/reference/apis) is a machine-readable specification for describing and consuming REST APIs. It is used to build client libraries, IDE plugins, and other tools that interact with Google APIs. One service may provide multiple discovery documents. This service provides the following discovery document:
 
 * <https://biglake.googleapis.com/$discovery/rest?version=v1>
-* <https://biglake.googleapis.com/$discovery/rest?version=v1alpha1>
 
 ### Service endpoint
 
 A [service endpoint](https://cloud.google.com/apis/design/glossary#api_service_endpoint) is a base URL that specifies the network address of an API service. One service might have multiple service endpoints. This service has the following service endpoint and all URIs below are relative to this service endpoint:
 
 * `https://biglake.googleapis.com`
-
-## REST Resource: [v1alpha1.projects.locations.catalogs](/lakehouse/docs/reference/rest/v1alpha1/projects.locations.catalogs)
-
-| Methods | |
-| --- | --- |
-| `create` | `POST /v1alpha1/{parent=projects/*/locations/*}/catalogs`   Creates a new catalog. |
-| `delete` | `DELETE /v1alpha1/{name=projects/*/locations/*/catalogs/*}`   Deletes an existing catalog specified by the catalog ID. |
-| `get` | `GET /v1alpha1/{name=projects/*/locations/*/catalogs/*}`   Gets the catalog specified by the resource name. |
-| `list` | `GET /v1alpha1/{parent=projects/*/locations/*}/catalogs`   List all catalogs in a specified project. |
-
-## REST Resource: [v1alpha1.projects.locations.catalogs.databases](/lakehouse/docs/reference/rest/v1alpha1/projects.locations.catalogs.databases)
-
-| Methods | |
-| --- | --- |
-| `create` | `POST /v1alpha1/{parent=projects/*/locations/*/catalogs/*}/databases`   Creates a new database. |
-| `delete` | `DELETE /v1alpha1/{name=projects/*/locations/*/catalogs/*/databases/*}`   Deletes an existing database specified by the database ID. |
-| `get` | `GET /v1alpha1/{name=projects/*/locations/*/catalogs/*/databases/*}`   Gets the database specified by the resource name. |
-| `list` | `GET /v1alpha1/{parent=projects/*/locations/*/catalogs/*}/databases`   List all databases in a specified catalog. |
-| `patch` | `PATCH /v1alpha1/{database.name=projects/*/locations/*/catalogs/*/databases/*}`   Updates an existing database specified by the database ID. |
-
-## REST Resource: [v1alpha1.projects.locations.catalogs.databases.locks](/lakehouse/docs/reference/rest/v1alpha1/projects.locations.catalogs.databases.locks)
-
-| Methods | |
-| --- | --- |
-| `check` | `POST /v1alpha1/{name=projects/*/locations/*/catalogs/*/databases/*/locks/*}:check`   Checks the state of a lock specified by the lock ID. |
-| `create` | `POST /v1alpha1/{parent=projects/*/locations/*/catalogs/*/databases/*}/locks`   Creates a new lock. |
-| `delete` | `DELETE /v1alpha1/{name=projects/*/locations/*/catalogs/*/databases/*/locks/*}`   Deletes an existing lock specified by the lock ID. |
-| `list` | `GET /v1alpha1/{parent=projects/*/locations/*/catalogs/*/databases/*}/locks`   List all locks in a specified database. |
-
-## REST Resource: [v1alpha1.projects.locations.catalogs.databases.tables](/lakehouse/docs/reference/rest/v1alpha1/projects.locations.catalogs.databases.tables)
-
-| Methods | |
-| --- | --- |
-| `create` | `POST /v1alpha1/{parent=projects/*/locations/*/catalogs/*/databases/*}/tables`   Creates a new table. |
-| `delete` | `DELETE /v1alpha1/{name=projects/*/locations/*/catalogs/*/databases/*/tables/*}`   Deletes an existing table specified by the table ID. |
-| `get` | `GET /v1alpha1/{name=projects/*/locations/*/catalogs/*/databases/*/tables/*}`   Gets the table specified by the resource name. |
-| `list` | `GET /v1alpha1/{parent=projects/*/locations/*/catalogs/*/databases/*}/tables`   List all tables in a specified database. |
-| `patch` | `PATCH /v1alpha1/{table.name=projects/*/locations/*/catalogs/*/databases/*/tables/*}`   Updates an existing table specified by the table ID. |
-| `rename` | `POST /v1alpha1/{name=projects/*/locations/*/catalogs/*/databases/*/tables/*}:rename`   Renames an existing table specified by the table ID. |
 
 ## REST Resource: [] []
 
@@ -429,9 +385,9 @@ A [service endpoint](https://cloud.google.com/apis/design/glossary#api_service_e
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-04-21 UTC.
+Last updated 2026-05-28 UTC.
 
 
 
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-04-21 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-28 UTC."],[],[]]

@@ -2,6 +2,8 @@ As of April 20th, 2026, BigLake is now called Lakehouse for Apache Iceberg. BigL
 
 * [Home](https://docs.cloud.google.com/)
 * [BigLake API](https://docs.cloud.google.com/lakehouse/docs)
+* [Technology areas](https://docs.cloud.google.com/docs)
+* [Reference](https://docs.cloud.google.com/lakehouse/docs/quotas)
 
 # REST Resource: projects.locations.catalogs.databases Stay organized with collections Save and categorize content based on your preferences.
 

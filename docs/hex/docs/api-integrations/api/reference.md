@@ -25,8 +25,6 @@
 * getListDataConnections
 * postCreateDataConnection
 * patchUpdateDataConnectionSchema
-* getMe
-* getListUsers
 * postDeactivateUser
 * getGetCollection
 * patchEditCollection
@@ -44,6 +42,8 @@
 * patchUpdateCell
 * delDeleteCell
 * getGetChartImageFromLogic
+* getReturns information about the current logged in user. User metadata will be omitted when authenticating with a workspace token.
+* getList all users in the workspace
 
 [API docs by Redocly](https://redocly.com/redoc/)
 
@@ -1994,6 +1994,9 @@ as rendered at the time of the specified run, along with project/run/cell IDs an
 The cell must have been executed and must not be in an error state.
 Only chart-type cells are supported.
 
+The optional `width` and `height` query params set the output image size in pixels.
+Both must be provided to apply, and must be between 100 and 2000.
+
 Rate limit: 20 requests per minute.
 
 ##### Authorizations:
@@ -2007,6 +2010,13 @@ Rate limit: 20 requests per minute.
 | projectId required | string <uuid>  (ProjectId) ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}...Show pattern  Unique ID for a Hex project. This can be found in the Variables side bar of the Logic View of a project, or by visiting the Project, and copying the UUID after `hex` in the URL. |
 | runId required | string <uuid>  (InputRunId) ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}...Show pattern  Unique ID for a run of a Hex project. This ID is part of the response returned by the RunProject endpoint. The GetProjectRuns endpoint can also be used to find the specific runs for a project. |
 | staticId required | string <uuid>  (StaticCellId) ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}...Show pattern  Unique static ID for a cell. This can be found by going into the menu of a cell in the notebook. |
+
+##### query Parameters
+
+|  |  |
+| --- | --- |
+| width | integer <int32>  (ChartImageDimension)   [ 100 .. 2000 ]  Chart image total dimension (width or height) in pixels. |
+| height | integer <int32>  (ChartImageDimension)   [ 100 .. 2000 ]  Chart image total dimension (width or height) in pixels. |
 
 ### Responses
 
@@ -2496,7 +2506,4 @@ Copy
 |  |  |
 | --- | --- |
 | sharing | object |
-| schemaRefreshAccess | string (DataConnectionSchemaRefreshAccess)  Enum: "ADMINS" "USERS\_WITH\_QUERY\_ACCESS" |
-| schemaRefreshSchedule | object or null |
-| schemaFilters | object |
-|  |
+| schemaRefreshAccess | string |

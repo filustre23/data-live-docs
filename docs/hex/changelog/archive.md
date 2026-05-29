@@ -13,6 +13,7 @@
 * [May 12 - Introducing Generative Data Apps](/changelog/2026-05-12)
 * [May 14 - Connect repos as agent context](/changelog/2026-05-14)
 * [May 21 - Securely embed your generative Hex apps](/changelog/2026-05-21)
+* [May 28 - Hex now connects to your apps as an MCP client](/changelog/2026-05-28)
 
 ### 2025[​](#2025 "Direct link to 2025")
 

@@ -166,7 +166,7 @@ The output is similar to the following:
 ```
 ml_understand_text_result  | ml_understand_text_status | text_content |
 ------- | -------- | --------
-{"categories":[{"confidence":0.519&99998,"name&q&uot;:"/Arts&  Entertainment/TV  Video/TV Shows  Programs"}]} | | That actor on TV makes movies in Hollywood and also stars in a variety of popular new TV shows.
+{"categories":[{"confidence":0.51999998,"name":"/Arts & Entertainment/TV & Video/TV Shows & Programs"}]} | | That actor on TV makes movies in Hollywood and also stars in a variety of popular new TV shows.
 ```
 
 **Example 2**

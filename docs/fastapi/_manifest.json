@@ -1,925 +1,925 @@
 {
-  "duration_s": 0.61,
+  "duration_s": 0.6,
   "failed_count": 0,
   "failed_pages": [],
-  "fetched_at": "2026-05-28T09:52:10.082302+00:00",
+  "fetched_at": "2026-05-28T20:11:25.108274+00:00",
   "file_count": 153,
   "files": {
     "_llm-test.md": {
       "bytes": 11241,
-      "fetched_at": "2026-05-28T09:52:10.063305+00:00",
+      "fetched_at": "2026-05-28T20:11:25.088964+00:00",
       "sha256": "45b2ff79c9e458f22b14eca1b8a62a49ed72a4b1ce18b3bf0fb0e27b2d1b9b81",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/_llm-test.md"
     },
     "about/index.md": {
       "bytes": 74,
-      "fetched_at": "2026-05-28T09:52:10.068400+00:00",
+      "fetched_at": "2026-05-28T20:11:25.091314+00:00",
       "sha256": "b47a19143ea8845206cffb90103e3d1aaf5fc081891acc6c78d6310893b5d3a9",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/about/index.md"
     },
     "advanced/additional-responses.md": {
       "bytes": 9055,
-      "fetched_at": "2026-05-28T09:52:10.079404+00:00",
+      "fetched_at": "2026-05-28T20:11:25.099538+00:00",
       "sha256": "231d459e8bd5c25d3a78523b1af5ed11a8027b63b93074ca20eea1bab1b76729",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/advanced/additional-responses.md"
     },
     "advanced/additional-status-codes.md": {
       "bytes": 2003,
-      "fetched_at": "2026-05-28T09:52:10.078233+00:00",
+      "fetched_at": "2026-05-28T20:11:25.101560+00:00",
       "sha256": "2064d9e8922d65cf9ab2501b5d0a93e5a2ee96224ff40c617902b819f136523d",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/advanced/additional-status-codes.md"
     },
     "advanced/advanced-dependencies.md": {
       "bytes": 9254,
-      "fetched_at": "2026-05-28T09:52:10.076755+00:00",
+      "fetched_at": "2026-05-28T20:11:25.100098+00:00",
       "sha256": "f1fa7a5a34320c306d8d50726ecf6bdefd1c885819ff743e9ccf3312606aacf8",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/advanced/advanced-dependencies.md"
     },
     "advanced/advanced-python-types.md": {
       "bytes": 2091,
-      "fetched_at": "2026-05-28T09:52:10.078137+00:00",
+      "fetched_at": "2026-05-28T20:11:25.100805+00:00",
       "sha256": "87f99f6076dace0f486f9788448ea74335b5eba93d785ef94e815d57e5dc319a",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/advanced/advanced-python-types.md"
     },
     "advanced/async-tests.md": {
       "bytes": 3866,
-      "fetched_at": "2026-05-28T09:52:10.077122+00:00",
+      "fetched_at": "2026-05-28T20:11:25.102110+00:00",
       "sha256": "4c3a5cb90ab34df246edd63b7cf142b676e93efbc451c20a4854272066d2e6c1",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/advanced/async-tests.md"
     },
     "advanced/behind-a-proxy.md": {
       "bytes": 16177,
-      "fetched_at": "2026-05-28T09:52:10.076654+00:00",
+      "fetched_at": "2026-05-28T20:11:25.099420+00:00",
       "sha256": "785f82331a349376e8cb2aa49b003fdf841caaa7819e469bedb7c7e5552bc10f",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/advanced/behind-a-proxy.md"
     },
     "advanced/custom-response.md": {
       "bytes": 11291,
-      "fetched_at": "2026-05-28T09:52:10.076536+00:00",
+      "fetched_at": "2026-05-28T20:11:25.100291+00:00",
       "sha256": "590d22726236c1954e8dde69e2d842fd69ade6952fe46f43e3c3309799368f9d",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/advanced/custom-response.md"
     },
     "advanced/dataclasses.md": {
       "bytes": 4081,
-      "fetched_at": "2026-05-28T09:52:10.079192+00:00",
+      "fetched_at": "2026-05-28T20:11:25.100717+00:00",
       "sha256": "e1f98adfb1ce7211652188e2c66c514ef6ea5612e6da9e8b8f30ddee6bb8fd9d",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/advanced/dataclasses.md"
     },
     "advanced/events.md": {
       "bytes": 7990,
-      "fetched_at": "2026-05-28T09:52:10.077215+00:00",
+      "fetched_at": "2026-05-28T20:11:25.100625+00:00",
       "sha256": "e345c237b0d74e7b2c34d7285ef466e3b70db29e2f225ae54f72df0e7a0d5a8c",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/advanced/events.md"
     },
     "advanced/generate-clients.md": {
       "bytes": 9822,
-      "fetched_at": "2026-05-28T09:52:10.079101+00:00",
+      "fetched_at": "2026-05-28T20:11:25.101448+00:00",
       "sha256": "d03c16891adf5daba79bcae121633900a398a26b7e882701b1642d55b2171b9f",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/advanced/generate-clients.md"
     },
     "advanced/index.md": {
       "bytes": 757,
-      "fetched_at": "2026-05-28T09:52:10.077864+00:00",
+      "fetched_at": "2026-05-28T20:11:25.099716+00:00",
       "sha256": "b1f89adea85d3293e397ac6dccc774b4aa04cbc94b5d63604d272bf5c9df7f6c",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/advanced/index.md"
     },
     "advanced/json-base64-bytes.md": {
       "bytes": 2489,
-      "fetched_at": "2026-05-28T09:52:10.078809+00:00",
+      "fetched_at": "2026-05-28T20:11:25.099631+00:00",
       "sha256": "0ef58467287054a4263cb302002d1c525eff3f60ba2778da3cffa9372a111db4",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/advanced/json-base64-bytes.md"
     },
     "advanced/middleware.md": {
       "bytes": 4206,
-      "fetched_at": "2026-05-28T09:52:10.077511+00:00",
+      "fetched_at": "2026-05-28T20:11:25.099999+00:00",
       "sha256": "1da7e63c680a9726c6760dc6144cff003dec52d00955535d4db2459eb4d723e0",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/advanced/middleware.md"
     },
     "advanced/openapi-callbacks.md": {
       "bytes": 7862,
-      "fetched_at": "2026-05-28T09:52:10.076854+00:00",
+      "fetched_at": "2026-05-28T20:11:25.099902+00:00",
       "sha256": "1b8b7dac4984e37a0d1782ca8e6962213190788bdd7999046cdd84a7ff7b19d5",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/advanced/openapi-callbacks.md"
     },
     "advanced/openapi-webhooks.md": {
       "bytes": 2948,
-      "fetched_at": "2026-05-28T09:52:10.077416+00:00",
+      "fetched_at": "2026-05-28T20:11:25.100192+00:00",
       "sha256": "5ac99c21eaad3bc474811457e6f1f03d553f7da217a22f20d4b743f6d637d23e",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/advanced/openapi-webhooks.md"
     },
     "advanced/path-operation-advanced-configuration.md": {
       "bytes": 7234,
-      "fetched_at": "2026-05-28T09:52:10.079000+00:00",
+      "fetched_at": "2026-05-28T20:11:25.100506+00:00",
       "sha256": "130661f8cda385017acd88269a0b34d8b85c8b394fa5c521e9c9c63f246a15b8",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/advanced/path-operation-advanced-configuration.md"
     },
     "advanced/response-change-status-code.md": {
       "bytes": 1556,
-      "fetched_at": "2026-05-28T09:52:10.077035+00:00",
+      "fetched_at": "2026-05-28T20:11:25.101074+00:00",
       "sha256": "8ab1ceee4201167677be1e4daa740645499695c6aa91c948053541c50b8642ba",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/advanced/response-change-status-code.md"
     },
     "advanced/response-cookies.md": {
       "bytes": 2230,
-      "fetched_at": "2026-05-28T09:52:10.079280+00:00",
+      "fetched_at": "2026-05-28T20:11:25.101163+00:00",
       "sha256": "256135fdbe891375db61c9dead6bcd799f07a1f8dfa4c44468acba1d8601dd4f",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/advanced/response-cookies.md"
     },
     "advanced/response-directly.md": {
       "bytes": 4137,
-      "fetched_at": "2026-05-28T09:52:10.077954+00:00",
+      "fetched_at": "2026-05-28T20:11:25.100383+00:00",
       "sha256": "ed930c2b190cecb99a336152e072e7430efa2b99afb5d47c741805965b361003",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/advanced/response-directly.md"
     },
     "advanced/response-headers.md": {
       "bytes": 2202,
-      "fetched_at": "2026-05-28T09:52:10.078901+00:00",
+      "fetched_at": "2026-05-28T20:11:25.101743+00:00",
       "sha256": "7a74293134998f3b999c820960b08c7aa8b5de2121d87c684c9029fb5b0d49fd",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/advanced/response-headers.md"
     },
     "advanced/security/http-basic-auth.md": {
       "bytes": 5118,
-      "fetched_at": "2026-05-28T09:52:10.079672+00:00",
+      "fetched_at": "2026-05-28T20:11:25.102493+00:00",
       "sha256": "76feaf284219c786bbf96684d0b09f40ff4ea49a978631e13a6d89502998761e",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/advanced/security/http-basic-auth.md"
     },
     "advanced/security/index.md": {
       "bytes": 648,
-      "fetched_at": "2026-05-28T09:52:10.079573+00:00",
+      "fetched_at": "2026-05-28T20:11:25.102367+00:00",
       "sha256": "533f365dfe52ab453074e3ccf4e551a5dad6620028aa7ab1787cc24f5dc5e415",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/advanced/security/index.md"
     },
     "advanced/security/oauth2-scopes.md": {
       "bytes": 13771,
-      "fetched_at": "2026-05-28T09:52:10.079779+00:00",
+      "fetched_at": "2026-05-28T20:11:25.102624+00:00",
       "sha256": "9e7a759f8efdbe95d658de2193de6f4b8df8f071c2fcde2390403099e3e7ac40",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/advanced/security/oauth2-scopes.md"
     },
     "advanced/settings.md": {
       "bytes": 11136,
-      "fetched_at": "2026-05-28T09:52:10.078632+00:00",
+      "fetched_at": "2026-05-28T20:11:25.101850+00:00",
       "sha256": "407bd5ea5fd782b70d91d58918343867bf11ace5f4ae5e80fca367a895581106",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/advanced/settings.md"
     },
     "advanced/stream-data.md": {
       "bytes": 5498,
-      "fetched_at": "2026-05-28T09:52:10.077604+00:00",
+      "fetched_at": "2026-05-28T20:11:25.101656+00:00",
       "sha256": "bacbc3e998c2eb898684aa8c30a7a210ddcc906c0c5e6da4308118b2a12cc443",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/advanced/stream-data.md"
     },
     "advanced/strict-content-type.md": {
       "bytes": 3292,
-      "fetched_at": "2026-05-28T09:52:10.077693+00:00",
+      "fetched_at": "2026-05-28T20:11:25.101251+00:00",
       "sha256": "c46698c00f096129b39817750c56134cac627bf74b9e9e0e2c748ae26fd98ac3",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/advanced/strict-content-type.md"
     },
     "advanced/sub-applications.md": {
       "bytes": 2949,
-      "fetched_at": "2026-05-28T09:52:10.078722+00:00",
+      "fetched_at": "2026-05-28T20:11:25.099308+00:00",
       "sha256": "7c8c130239977c5501c1f94711fbdfe62cd805f8c642c981b2c2e748359f0bf0",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/advanced/sub-applications.md"
     },
     "advanced/templates.md": {
       "bytes": 3503,
-      "fetched_at": "2026-05-28T09:52:10.078523+00:00",
+      "fetched_at": "2026-05-28T20:11:25.100892+00:00",
       "sha256": "c8b40585224573fb5d4ba3a6454333b0f2c0d766ad0b460a3424cf58da591e6a",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/advanced/templates.md"
     },
     "advanced/testing-dependencies.md": {
       "bytes": 2413,
-      "fetched_at": "2026-05-28T09:52:10.078048+00:00",
+      "fetched_at": "2026-05-28T20:11:25.101340+00:00",
       "sha256": "6d26e7728428a508c2a51ac8e53920d003cbc9ed83f63df2e20590b199f12c2a",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/advanced/testing-dependencies.md"
     },
     "advanced/testing-events.md": {
       "bytes": 628,
-      "fetched_at": "2026-05-28T09:52:10.077779+00:00",
+      "fetched_at": "2026-05-28T20:11:25.102022+00:00",
       "sha256": "2738c9bab9f01f8d93ec9b6abd3441aee34aab2ee341c65991bafc643bb7be48",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/advanced/testing-events.md"
     },
     "advanced/testing-websockets.md": {
       "bytes": 411,
-      "fetched_at": "2026-05-28T09:52:10.077318+00:00",
+      "fetched_at": "2026-05-28T20:11:25.102198+00:00",
       "sha256": "eea2d074abd3ee02a50ed4d7e27f0a457039e44f6ba9041403ffef77e7229ab5",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/advanced/testing-websockets.md"
     },
     "advanced/using-request-directly.md": {
       "bytes": 2344,
-      "fetched_at": "2026-05-28T09:52:10.078336+00:00",
+      "fetched_at": "2026-05-28T20:11:25.101937+00:00",
       "sha256": "3247de00895ad56499afe95506f8ffded597643bc8d97f1f50469caad202ca8e",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/advanced/using-request-directly.md"
     },
     "advanced/websockets.md": {
       "bytes": 5472,
-      "fetched_at": "2026-05-28T09:52:10.078434+00:00",
+      "fetched_at": "2026-05-28T20:11:25.099807+00:00",
       "sha256": "66b665b7cf08ae15e2efbba3b077392834bb3c25b1324e7388898fc66bb22f09",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/advanced/websockets.md"
     },
     "advanced/wsgi.md": {
       "bytes": 1472,
-      "fetched_at": "2026-05-28T09:52:10.076944+00:00",
+      "fetched_at": "2026-05-28T20:11:25.100985+00:00",
       "sha256": "47865942f050d424d8d027bd4a631c02d8e2224f2c477511177b1a3c4e5473fd",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/advanced/wsgi.md"
     },
     "alternatives.md": {
       "bytes": 22682,
-      "fetched_at": "2026-05-28T09:52:10.063187+00:00",
+      "fetched_at": "2026-05-28T20:11:25.089524+00:00",
       "sha256": "e1f8f71996656efc0f6f1bc4e2c296f07eb4d12fd82869ea2083205f76a0dcc5",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/alternatives.md"
     },
     "async.md": {
       "bytes": 23982,
-      "fetched_at": "2026-05-28T09:52:10.062512+00:00",
+      "fetched_at": "2026-05-28T20:11:25.086698+00:00",
       "sha256": "0619b77efb63937b011543ce74a0992a803774ae127b6f77b816a1ce58aaec1a",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/async.md"
     },
     "benchmarks.md": {
       "bytes": 3503,
-      "fetched_at": "2026-05-28T09:52:10.063691+00:00",
+      "fetched_at": "2026-05-28T20:11:25.087109+00:00",
       "sha256": "8834332af09b28fdee2c2490a8f9422b8f6d4952d4fd0517edf7a09f213608c6",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/benchmarks.md"
     },
     "contributing.md": {
       "bytes": 271,
-      "fetched_at": "2026-05-28T09:52:10.062962+00:00",
+      "fetched_at": "2026-05-28T20:11:25.086551+00:00",
       "sha256": "6dc18b05e194e864a9fd0353ae68bf89d66a531517306a38687f7b2d1b577126",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/contributing.md"
     },
     "deployment/cloud.md": {
       "bytes": 1204,
-      "fetched_at": "2026-05-28T09:52:10.081882+00:00",
+      "fetched_at": "2026-05-28T20:11:25.107646+00:00",
       "sha256": "b2b1445d6f039ed00fe6427a8a1f3d4fd961316e27e0c71773c20eb8c2dcbcc3",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/deployment/cloud.md"
     },
     "deployment/concepts.md": {
       "bytes": 18938,
-      "fetched_at": "2026-05-28T09:52:10.081604+00:00",
+      "fetched_at": "2026-05-28T20:11:25.107141+00:00",
       "sha256": "5a110073f695ae2dfc26092843ce375322eeca5531956ee13d206d2ca7b45767",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/deployment/concepts.md"
     },
     "deployment/docker.md": {
       "bytes": 29003,
-      "fetched_at": "2026-05-28T09:52:10.082006+00:00",
+      "fetched_at": "2026-05-28T20:11:25.107768+00:00",
       "sha256": "3b1d64193fb11c1b81fe74cac0147776c5f23f9c5324d5b44ae6c63df4069b44",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/deployment/docker.md"
     },
     "deployment/fastapicloud.md": {
       "bytes": 1918,
-      "fetched_at": "2026-05-28T09:52:10.081176+00:00",
+      "fetched_at": "2026-05-28T20:11:25.107555+00:00",
       "sha256": "f68f975f33da2167f1e3b2b6e950604aef356b1e4977d8a96e548ff0b1617839",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/deployment/fastapicloud.md"
     },
     "deployment/https.md": {
       "bytes": 14310,
-      "fetched_at": "2026-05-28T09:52:10.081307+00:00",
+      "fetched_at": "2026-05-28T20:11:25.107016+00:00",
       "sha256": "593cedf2954e89e7046c9e97788e66cdef94bf2d4869d2e34f5af6e997007f02",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/deployment/https.md"
     },
     "deployment/index.md": {
       "bytes": 1520,
-      "fetched_at": "2026-05-28T09:52:10.081499+00:00",
+      "fetched_at": "2026-05-28T20:11:25.107233+00:00",
       "sha256": "db01bbd0f4bc3cb78acaeec8a4a7ba94f11b4ca08acbd78d5f56f466cab0f1c0",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/deployment/index.md"
     },
     "deployment/manually.md": {
       "bytes": 6708,
-      "fetched_at": "2026-05-28T09:52:10.081697+00:00",
+      "fetched_at": "2026-05-28T20:11:25.107439+00:00",
       "sha256": "28eaf36dd81ec93157c6f3f9f5b8e35a63fc75096684835b0a2afba89896db36",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/deployment/manually.md"
     },
     "deployment/server-workers.md": {
       "bytes": 8372,
-      "fetched_at": "2026-05-28T09:52:10.081794+00:00",
+      "fetched_at": "2026-05-28T20:11:25.107340+00:00",
       "sha256": "ebda6367c4dff1039ac438472f5f2d23de1bc6b0b48e88e2217542a65c55bf1b",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/deployment/server-workers.md"
     },
     "deployment/versions.md": {
       "bytes": 3510,
-      "fetched_at": "2026-05-28T09:52:10.081413+00:00",
+      "fetched_at": "2026-05-28T20:11:25.107858+00:00",
       "sha256": "be142679260fcd584d5b67d82099ef853ff095b0ba9b436d464794c08ab20432",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/deployment/versions.md"
     },
     "editor-support.md": {
       "bytes": 2515,
-      "fetched_at": "2026-05-28T09:52:10.062255+00:00",
+      "fetched_at": "2026-05-28T20:11:25.086806+00:00",
       "sha256": "e3aed22959b2c1c4cce13430a538e4555565fa472519c7c39dc9337ffaf086f3",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/editor-support.md"
     },
     "environment-variables.md": {
       "bytes": 8104,
-      "fetched_at": "2026-05-28T09:52:10.063060+00:00",
+      "fetched_at": "2026-05-28T20:11:25.088383+00:00",
       "sha256": "ba24f94e01b24269d8bf039da3d7db686b6f4572299ef35f8964b16473b5cf17",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/environment-variables.md"
     },
     "external-links.md": {
       "bytes": 927,
-      "fetched_at": "2026-05-28T09:52:10.061938+00:00",
+      "fetched_at": "2026-05-28T20:11:25.088642+00:00",
       "sha256": "41392e6a2737c2bbc325b0bf3a7dabb6cd1358b6fe1efc714aefbc9f14f8dcfc",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/external-links.md"
     },
     "fastapi-cli.md": {
       "bytes": 6185,
-      "fetched_at": "2026-05-28T09:52:10.063898+00:00",
+      "fetched_at": "2026-05-28T20:11:25.089161+00:00",
       "sha256": "814fc2fddc035b48ab6040b3f436e9ae1434c14c36b4e7f0b4098d0b974aeecd",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/fastapi-cli.md"
     },
     "fastapi-people.md": {
       "bytes": 9480,
-      "fetched_at": "2026-05-28T09:52:10.061681+00:00",
+      "fetched_at": "2026-05-28T20:11:25.088859+00:00",
       "sha256": "bccfaf399047fa9f99880730f23cae879d232970266cfbb6bc4c2a3972ca2da9",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/fastapi-people.md"
     },
     "features.md": {
       "bytes": 9127,
-      "fetched_at": "2026-05-28T09:52:10.063789+00:00",
+      "fetched_at": "2026-05-28T20:11:25.089638+00:00",
       "sha256": "ee9dcff43137e1c5b2ac3ee956aa2d2b39576bcdc40cde8072d0f568d57c07a0",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/features.md"
     },
     "help-fastapi.md": {
       "bytes": 3818,
-      "fetched_at": "2026-05-28T09:52:10.063407+00:00",
+      "fetched_at": "2026-05-28T20:11:25.088750+00:00",
       "sha256": "71ed870a4e075199f2c33e394b2aef237f2bae2b58dadaadefd4e505f4ea89e1",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/help-fastapi.md"
     },
     "history-design-future.md": {
       "bytes": 4090,
-      "fetched_at": "2026-05-28T09:52:10.063498+00:00",
+      "fetched_at": "2026-05-28T20:11:25.089815+00:00",
       "sha256": "87b412b232b20923a998130692cac2b8065430a4b7f5367b233c61a52cc3db55",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/history-design-future.md"
     },
     "how-to/authentication-error-status-code.md": {
       "bytes": 1190,
-      "fetched_at": "2026-05-28T09:52:10.080208+00:00",
+      "fetched_at": "2026-05-28T20:11:25.090383+00:00",
       "sha256": "af265f1e25f10028ba5593e8e5c430e4c3aae4be5f101d762bd3377eda70ee56",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/how-to/authentication-error-status-code.md"
     },
     "how-to/conditional-openapi.md": {
       "bytes": 2436,
-      "fetched_at": "2026-05-28T09:52:10.080444+00:00",
+      "fetched_at": "2026-05-28T20:11:25.090500+00:00",
       "sha256": "9e9ddd39df41b0a8afa138773e05343614ab0596705ffe77a01b932a218ca4ff",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/how-to/conditional-openapi.md"
     },
     "how-to/configure-swagger-ui.md": {
       "bytes": 2889,
-      "fetched_at": "2026-05-28T09:52:10.080965+00:00",
+      "fetched_at": "2026-05-28T20:11:25.091038+00:00",
       "sha256": "8a814679a22e552ef142eb38462f29567b0d3f0c75fb6be2d606c0c617bfd029",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/how-to/configure-swagger-ui.md"
     },
     "how-to/custom-docs-ui-assets.md": {
       "bytes": 7693,
-      "fetched_at": "2026-05-28T09:52:10.080332+00:00",
+      "fetched_at": "2026-05-28T20:11:25.090297+00:00",
       "sha256": "313417d3319baae4d9e13592c3c48f12cecd2df6473feeaea11eabb71c40a02e",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/how-to/custom-docs-ui-assets.md"
     },
     "how-to/custom-request-and-route.md": {
       "bytes": 4555,
-      "fetched_at": "2026-05-28T09:52:10.079940+00:00",
+      "fetched_at": "2026-05-28T20:11:25.090614+00:00",
       "sha256": "1376f04d6b74074c69748fbfd30b2bc1f9e2adbbed8663df015bf3739830b7a0",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/how-to/custom-request-and-route.md"
     },
     "how-to/extending-openapi.md": {
       "bytes": 3358,
-      "fetched_at": "2026-05-28T09:52:10.080032+00:00",
+      "fetched_at": "2026-05-28T20:11:25.090013+00:00",
       "sha256": "8f5a6db3de693738b8f72a78307f4cbf1b8cfdb307c4db446129ebcf1a92a6ca",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/how-to/extending-openapi.md"
     },
     "how-to/general.md": {
       "bytes": 2834,
-      "fetched_at": "2026-05-28T09:52:10.080705+00:00",
+      "fetched_at": "2026-05-28T20:11:25.090707+00:00",
       "sha256": "e500a3aabb5ea2498feea2dd4eb8bab22546a1f7c29b5ca3fd7dfd485eb0351e",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/how-to/general.md"
     },
     "how-to/graphql.md": {
       "bytes": 2767,
-      "fetched_at": "2026-05-28T09:52:10.080535+00:00",
+      "fetched_at": "2026-05-28T20:11:25.091151+00:00",
       "sha256": "0ed41a0eac977494bc9e17de7b7c3b6e30e4764aa07aea405ff0d595c8682a51",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/how-to/graphql.md"
     },
     "how-to/index.md": {
       "bytes": 582,
-      "fetched_at": "2026-05-28T09:52:10.080620+00:00",
+      "fetched_at": "2026-05-28T20:11:25.090107+00:00",
       "sha256": "def013c4e40ea6573fa8a87beaa0fc7867b84b8ce8138936fca25f25c8d06e95",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/how-to/index.md"
     },
     "how-to/migrate-from-pydantic-v1-to-pydantic-v2.md": {
       "bytes": 5515,
-      "fetched_at": "2026-05-28T09:52:10.080879+00:00",
+      "fetched_at": "2026-05-28T20:11:25.090802+00:00",
       "sha256": "cdf9476beccd4e743ee0b2a348a2bf328118a6df75387d297eb5f3adf7fc3081",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/how-to/migrate-from-pydantic-v1-to-pydantic-v2.md"
     },
     "how-to/separate-openapi-schemas.md": {
       "bytes": 4657,
-      "fetched_at": "2026-05-28T09:52:10.080123+00:00",
+      "fetched_at": "2026-05-28T20:11:25.090201+00:00",
       "sha256": "5c155efb7d8e9d6245520cd0328100a436dfbaa8ab0f0f54befa18f6d8544e4b",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/how-to/separate-openapi-schemas.md"
     },
     "how-to/testing-database.md": {
       "bytes": 393,
-      "fetched_at": "2026-05-28T09:52:10.080788+00:00",
+      "fetched_at": "2026-05-28T20:11:25.090894+00:00",
       "sha256": "9e6f3d9e2344cc927bd48e4ac8b7cb30b7acec46887a25778c602fef132b159d",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/how-to/testing-database.md"
     },
     "index.md": {
       "bytes": 25380,
-      "fetched_at": "2026-05-28T09:52:10.062758+00:00",
+      "fetched_at": "2026-05-28T20:11:25.086345+00:00",
       "sha256": "9d7c3f536e2117754aee982aa682bcdc93c1f9e8094111a3ec019005d2acdded",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/index.md"
     },
     "learn/index.md": {
       "bytes": 206,
-      "fetched_at": "2026-05-28T09:52:10.071074+00:00",
+      "fetched_at": "2026-05-28T20:11:25.108013+00:00",
       "sha256": "accb670db6bc727d40aca998f2cef1a6c510c0f76cf5d9b84bf5c39e45dbfb72",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/learn/index.md"
     },
     "management.md": {
       "bytes": 968,
-      "fetched_at": "2026-05-28T09:52:10.061815+00:00",
+      "fetched_at": "2026-05-28T20:11:25.089726+00:00",
       "sha256": "8272bfe67c08afb78f1d4befbac32543d44058860b27ef4453d22d90b1472a6e",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/management.md"
     },
     "newsletter.md": {
       "bytes": 326,
-      "fetched_at": "2026-05-28T09:52:10.062161+00:00",
+      "fetched_at": "2026-05-28T20:11:25.088526+00:00",
       "sha256": "a63c536fed765de5d257486a510189e16fe2ba57f969a02622b450deae7115b4",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/newsletter.md"
     },
     "project-generation.md": {
       "bytes": 1994,
-      "fetched_at": "2026-05-28T09:52:10.063595+00:00",
+      "fetched_at": "2026-05-28T20:11:25.089063+00:00",
       "sha256": "32eb76038a16adc6ca34e277fe546b088514120836f171ece4d142b8cd3aac15",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/project-generation.md"
     },
     "python-types.md": {
       "bytes": 11227,
-      "fetched_at": "2026-05-28T09:52:10.062061+00:00",
+      "fetched_at": "2026-05-28T20:11:25.089390+00:00",
       "sha256": "981bc9db8bcfeb1bbc152a69d0e6dbca4b664232187e3cb41851a85b28436d95",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/python-types.md"
     },
     "reference/apirouter.md": {
       "bytes": 524,
-      "fetched_at": "2026-05-28T09:52:10.069979+00:00",
+      "fetched_at": "2026-05-28T20:11:25.093196+00:00",
       "sha256": "be850df25f7de82db56e4e7168f8bf66bc8ae3d1d1744e22fd3d7baaea1d3848",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/reference/apirouter.md"
     },
     "reference/background.md": {
       "bytes": 377,
-      "fetched_at": "2026-05-28T09:52:10.068887+00:00",
+      "fetched_at": "2026-05-28T20:11:25.093112+00:00",
       "sha256": "895ad7f9418b148b66ecd9a50b66e02bc1bf55a0f4abb0b6db87090ec60122d1",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/reference/background.md"
     },
     "reference/dependencies.md": {
       "bytes": 671,
-      "fetched_at": "2026-05-28T09:52:10.070237+00:00",
+      "fetched_at": "2026-05-28T20:11:25.093372+00:00",
       "sha256": "7c4376a61fa086d3d8cfbfe59e80e401ba50aaf6149a0fec4c1d457008841444",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/reference/dependencies.md"
     },
     "reference/encoders.md": {
       "bytes": 71,
-      "fetched_at": "2026-05-28T09:52:10.070151+00:00",
+      "fetched_at": "2026-05-28T20:11:25.092496+00:00",
       "sha256": "1da15322f32044f832a48395b252c975d4fdf227f15c44be05d2f0de6d57341a",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/reference/encoders.md"
     },
     "reference/exceptions.md": {
       "bytes": 597,
-      "fetched_at": "2026-05-28T09:52:10.069454+00:00",
+      "fetched_at": "2026-05-28T20:11:25.092105+00:00",
       "sha256": "409cadc3d831c4487ed7b67277cac93f91a8494a7827009cc3150aff264a0f50",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/reference/exceptions.md"
     },
     "reference/fastapi.md": {
       "bytes": 701,
-      "fetched_at": "2026-05-28T09:52:10.069240+00:00",
+      "fetched_at": "2026-05-28T20:11:25.091846+00:00",
       "sha256": "14d72e89cc95a5a99c3a5a3a0e6939e10ff7f6ebcd47d7696584b8852d1273ab",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/reference/fastapi.md"
     },
     "reference/httpconnection.md": {
       "bytes": 359,
-      "fetched_at": "2026-05-28T09:52:10.069154+00:00",
+      "fetched_at": "2026-05-28T20:11:25.092945+00:00",
       "sha256": "fa08fcde919ccc974cab1fc4228e3f32da33172d006a31306f019ad95bb74cbb",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/reference/httpconnection.md"
     },
     "reference/index.md": {
       "bytes": 285,
-      "fetched_at": "2026-05-28T09:52:10.069539+00:00",
+      "fetched_at": "2026-05-28T20:11:25.092019+00:00",
       "sha256": "153c1466906b1b0b31ac74273b1da7a1887b9384e2ec386b56051dd51d650afa",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/reference/index.md"
     },
     "reference/middleware.md": {
       "bytes": 845,
-      "fetched_at": "2026-05-28T09:52:10.069358+00:00",
+      "fetched_at": "2026-05-28T20:11:25.092296+00:00",
       "sha256": "cd65f3b4089c7dc3471549c08cbce75c279875400bc5febbd9bc37030b9e1131",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/reference/middleware.md"
     },
     "reference/openapi/docs.md": {
       "bytes": 360,
-      "fetched_at": "2026-05-28T09:52:10.070606+00:00",
+      "fetched_at": "2026-05-28T20:11:25.093897+00:00",
       "sha256": "b33fe420bac7a66e3ed06f242d5001c47f0d35be5fcd8bea9e43e2a7f829865d",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/reference/openapi/docs.md"
     },
     "reference/openapi/index.md": {
       "bytes": 158,
-      "fetched_at": "2026-05-28T09:52:10.070697+00:00",
+      "fetched_at": "2026-05-28T20:11:25.093719+00:00",
       "sha256": "3c0b3bcf377c4701e62dcde0c58194c90885d66f11f1f7fd577e63aada0f9d71",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/reference/openapi/index.md"
     },
     "reference/openapi/models.md": {
       "bytes": 125,
-      "fetched_at": "2026-05-28T09:52:10.070783+00:00",
+      "fetched_at": "2026-05-28T20:11:25.093811+00:00",
       "sha256": "edcc6862b45c3c393494c66db826080da6125afb4cbe13f9d05c182db49a45ab",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/reference/openapi/models.md"
     },
     "reference/parameters.md": {
       "bytes": 603,
-      "fetched_at": "2026-05-28T09:52:10.069716+00:00",
+      "fetched_at": "2026-05-28T20:11:25.092861+00:00",
       "sha256": "205cda636e7a52445ae377baddff4f81a1c5337b9bfa7ed8e61379cefc98d4e8",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/reference/parameters.md"
     },
     "reference/request.md": {
       "bytes": 652,
-      "fetched_at": "2026-05-28T09:52:10.069069+00:00",
+      "fetched_at": "2026-05-28T20:11:25.092694+00:00",
       "sha256": "0ce7d18cde49f128ebf837f9cd601736aab9ba6f6b0effec70188e2fe66ab75e",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/reference/request.md"
     },
     "reference/response.md": {
       "bytes": 559,
-      "fetched_at": "2026-05-28T09:52:10.068783+00:00",
+      "fetched_at": "2026-05-28T20:11:25.092778+00:00",
       "sha256": "fffc4a258731280cb16ff0af65a9865d9755ecdf26340bcc36b45508cbef1560",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/reference/response.md"
     },
     "reference/responses.md": {
       "bytes": 4546,
-      "fetched_at": "2026-05-28T09:52:10.068981+00:00",
+      "fetched_at": "2026-05-28T20:11:25.091753+00:00",
       "sha256": "6ef59328b4a2ecc399c5e366f8ac098311792e12f428f2c43de0be55f2f86282",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/reference/responses.md"
     },
     "reference/security/index.md": {
       "bytes": 1778,
-      "fetched_at": "2026-05-28T09:52:10.070929+00:00",
+      "fetched_at": "2026-05-28T20:11:25.093558+00:00",
       "sha256": "7ada99ce8cc1150a0ec6723958bcc377a51ed7afddd1cf9f00593c15a2a96dc1",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/reference/security/index.md"
     },
     "reference/staticfiles.md": {
       "bytes": 391,
-      "fetched_at": "2026-05-28T09:52:10.070350+00:00",
+      "fetched_at": "2026-05-28T20:11:25.091934+00:00",
       "sha256": "1a70b7a256609449b572980901b2afefc157cb4361ed436dd96d1c43da8787f8",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/reference/staticfiles.md"
     },
     "reference/status.md": {
       "bytes": 871,
-      "fetched_at": "2026-05-28T09:52:10.069626+00:00",
+      "fetched_at": "2026-05-28T20:11:25.093279+00:00",
       "sha256": "e3c76a507c9991917097a72cc0258407e8f76575d274659409e5cb94485dbd42",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/reference/status.md"
     },
     "reference/templating.md": {
       "bytes": 365,
-      "fetched_at": "2026-05-28T09:52:10.069886+00:00",
+      "fetched_at": "2026-05-28T20:11:25.093029+00:00",
       "sha256": "fed7923444090e924caa677c451b93920a5d84a6c5b1b71e0c8c5c2bb927ffeb",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/reference/templating.md"
     },
     "reference/testclient.md": {
       "bytes": 450,
-      "fetched_at": "2026-05-28T09:52:10.069803+00:00",
+      "fetched_at": "2026-05-28T20:11:25.092606+00:00",
       "sha256": "5c2c07456342432f90fd3596262011d9f318d6de98ea9027c6ecb12f9b6aee71",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/reference/testclient.md"
     },
     "reference/uploadfile.md": {
       "bytes": 472,
-      "fetched_at": "2026-05-28T09:52:10.070444+00:00",
+      "fetched_at": "2026-05-28T20:11:25.092383+00:00",
       "sha256": "977f6f171246d09756fc71a52e3129e312f3480b8043b9e6930f55afe61eb40b",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/reference/uploadfile.md"
     },
     "reference/websockets.md": {
       "bytes": 2005,
-      "fetched_at": "2026-05-28T09:52:10.070065+00:00",
+      "fetched_at": "2026-05-28T20:11:25.092192+00:00",
       "sha256": "194bbcf448e5d93383e7bb057b572756d10e2ee94b327157ee8716ea4e2af49b",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/reference/websockets.md"
     },
     "release-notes.md": {
-      "bytes": 661309,
-      "fetched_at": "2026-05-28T09:52:10.061433+00:00",
-      "sha256": "40720e0b6112b96d72b6b26d8ea3176815a12ed07ad6607bb4c5f32059b45a20",
+      "bytes": 661980,
+      "fetched_at": "2026-05-28T20:11:25.088193+00:00",
+      "sha256": "c387e9a3159e0a43a3db066409e57f08bce750514d5f46dd25d5ced9ffe1be41",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/release-notes.md"
     },
     "resources/index.md": {
       "bytes": 83,
-      "fetched_at": "2026-05-28T09:52:10.068566+00:00",
+      "fetched_at": "2026-05-28T20:11:25.091477+00:00",
       "sha256": "620b83b00fa7bd7c3a6ffa4c1675232f08c7662806847b2bb6769b3ef45e4303",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/resources/index.md"
     },
     "translation-banner.md": {
       "bytes": 379,
-      "fetched_at": "2026-05-28T09:52:10.062386+00:00",
+      "fetched_at": "2026-05-28T20:11:25.087014+00:00",
       "sha256": "55f3f738430273583b97595d37ca427e42f55eb0d546fdee2ce4a8840e4b1a46",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/translation-banner.md"
     },
     "translations.md": {
       "bytes": 1968,
-      "fetched_at": "2026-05-28T09:52:10.062873+00:00",
+      "fetched_at": "2026-05-28T20:11:25.086922+00:00",
       "sha256": "34e98012ea308af703946cb36dfe0cc3193530c85ec6c22691f6238cc456a041",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/translations.md"
     },
     "tutorial/background-tasks.md": {
       "bytes": 4794,
-      "fetched_at": "2026-05-28T09:52:10.074217+00:00",
+      "fetched_at": "2026-05-28T20:11:25.096030+00:00",
       "sha256": "6a65c54a151156a019cd1626d3a9b7ab26f68d7f2f2a80d8dea2626f97031a19",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/tutorial/background-tasks.md"
     },
     "tutorial/bigger-applications.md": {
       "bytes": 19652,
-      "fetched_at": "2026-05-28T09:52:10.074832+00:00",
+      "fetched_at": "2026-05-28T20:11:25.094367+00:00",
       "sha256": "89fde709a5790a93386c06b11a303a07782677912ed0df88124eb79141d9473c",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/tutorial/bigger-applications.md"
     },
     "tutorial/body-fields.md": {
       "bytes": 2388,
-      "fetched_at": "2026-05-28T09:52:10.072848+00:00",
+      "fetched_at": "2026-05-28T20:11:25.094456+00:00",
       "sha256": "2c64664174be94b4a2f6de5e6713fa7c8725e683f1598efe45aab41ef2676a7f",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/tutorial/body-fields.md"
     },
     "tutorial/body-multiple-params.md": {
       "bytes": 4932,
-      "fetched_at": "2026-05-28T09:52:10.071384+00:00",
+      "fetched_at": "2026-05-28T20:11:25.095751+00:00",
       "sha256": "be8df903354461511052ae4bb75665268747039ab64d3fe872124870f7f09280",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/tutorial/body-multiple-params.md"
     },
     "tutorial/body-nested-models.md": {
       "bytes": 6806,
-      "fetched_at": "2026-05-28T09:52:10.071873+00:00",
+      "fetched_at": "2026-05-28T20:11:25.096768+00:00",
       "sha256": "c447dde2c685c209f255c0ebb8162a2c08d9592ecca64f9b80cdc20bc63bce8d",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/tutorial/body-nested-models.md"
     },
     "tutorial/body-updates.md": {
       "bytes": 4091,
-      "fetched_at": "2026-05-28T09:52:10.071576+00:00",
+      "fetched_at": "2026-05-28T20:11:25.094071+00:00",
       "sha256": "a798bdb62c27ac9a3f5d2b3853eb4168a31aeb08ff36595e0231747ccaad78a8",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/tutorial/body-updates.md"
     },
     "tutorial/body.md": {
       "bytes": 6611,
-      "fetched_at": "2026-05-28T09:52:10.073527+00:00",
+      "fetched_at": "2026-05-28T20:11:25.095939+00:00",
       "sha256": "7b769d92d66bebc632b6b3c0ef81e58561491a0eb53548b62f1659fd666c60db",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/tutorial/body.md"
     },
     "tutorial/cookie-param-models.md": {
       "bytes": 3141,
-      "fetched_at": "2026-05-28T09:52:10.072761+00:00",
+      "fetched_at": "2026-05-28T20:11:25.096238+00:00",
       "sha256": "e808d80d6e95cc4874b51a2ea79937c8457b41e71617d7b39ee12f7617077086",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/tutorial/cookie-param-models.md"
     },
     "tutorial/cookie-params.md": {
       "bytes": 1602,
-      "fetched_at": "2026-05-28T09:52:10.073215+00:00",
+      "fetched_at": "2026-05-28T20:11:25.097347+00:00",
       "sha256": "790d67721fc8000801a48d0e8b4892a152388e12c4b7a2a58780dd73d0c68c28",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/tutorial/cookie-params.md"
     },
     "tutorial/cors.md": {
       "bytes": 5370,
-      "fetched_at": "2026-05-28T09:52:10.071778+00:00",
+      "fetched_at": "2026-05-28T20:11:25.094169+00:00",
       "sha256": "da167c442cc3a73a776782a3e45936165c713e63cc40a9f0117d490a51a60b17",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/tutorial/cors.md"
     },
     "tutorial/debugging.md": {
       "bytes": 2456,
-      "fetched_at": "2026-05-28T09:52:10.074108+00:00",
+      "fetched_at": "2026-05-28T20:11:25.094590+00:00",
       "sha256": "69dc270477818c819c2beb49292270144d44d11a601ac59ac749e01f758b8090",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/tutorial/debugging.md"
     },
     "tutorial/dependencies/classes-as-dependencies.md": {
       "bytes": 6915,
-      "fetched_at": "2026-05-28T09:52:10.075214+00:00",
+      "fetched_at": "2026-05-28T20:11:25.098563+00:00",
       "sha256": "ddfad2447ac9a678dc7a41d4985f6b958edb75812465accab0c3c46161029aa5",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/tutorial/dependencies/classes-as-dependencies.md"
     },
     "tutorial/dependencies/dependencies-in-path-operation-decorators.md": {
       "bytes": 2954,
-      "fetched_at": "2026-05-28T09:52:10.075537+00:00",
+      "fetched_at": "2026-05-28T20:11:25.098137+00:00",
       "sha256": "69f61187f2a466880ee6471070d6516965c25f4d749b1a202b84a790a8ec8b8c",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/tutorial/dependencies/dependencies-in-path-operation-decorators.md"
     },
     "tutorial/dependencies/dependencies-with-yield.md": {
       "bytes": 12856,
-      "fetched_at": "2026-05-28T09:52:10.075643+00:00",
+      "fetched_at": "2026-05-28T20:11:25.098426+00:00",
       "sha256": "1c773f7ac18e35939f516557d1aff1c0487efb13550954a6dcd6acbc108dff3e",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/tutorial/dependencies/dependencies-with-yield.md"
     },
     "tutorial/dependencies/global-dependencies.md": {
       "bytes": 1060,
-      "fetched_at": "2026-05-28T09:52:10.075332+00:00",
+      "fetched_at": "2026-05-28T20:11:25.098226+00:00",
       "sha256": "26fada3b3b65da1b47419a6d2c289630afabfccfd9ec80d4f8291702639d9e5f",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/tutorial/dependencies/global-dependencies.md"
     },
     "tutorial/dependencies/index.md": {
       "bytes": 9771,
-      "fetched_at": "2026-05-28T09:52:10.075445+00:00",
+      "fetched_at": "2026-05-28T20:11:25.098041+00:00",
       "sha256": "83319cc87297bb0959c5721a112133e6a3cd19900163c348a8ee6cf4818cd21f",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/tutorial/dependencies/index.md"
     },
     "tutorial/dependencies/sub-dependencies.md": {
       "bytes": 3820,
-      "fetched_at": "2026-05-28T09:52:10.075733+00:00",
+      "fetched_at": "2026-05-28T20:11:25.098318+00:00",
       "sha256": "fea74611e9d88f9d96a75f56925ffa5d8af0c90e0a2834f095736bbca066cdb1",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/tutorial/dependencies/sub-dependencies.md"
     },
     "tutorial/encoder.md": {
       "bytes": 1608,
-      "fetched_at": "2026-05-28T09:52:10.072052+00:00",
+      "fetched_at": "2026-05-28T20:11:25.097755+00:00",
       "sha256": "a7116cae1b44f5ac5841475b533b2df621875c41047d70cb02841ada13e3a486",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/tutorial/encoder.md"
     },
     "tutorial/extra-data-types.md": {
       "bytes": 2673,
-      "fetched_at": "2026-05-28T09:52:10.072663+00:00",
+      "fetched_at": "2026-05-28T20:11:25.096970+00:00",
       "sha256": "861be5cc540ac0f0b54ead58319eafa9f36fd3fa42f3d9572780373ca51a1faa",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/tutorial/extra-data-types.md"
     },
     "tutorial/extra-models.md": {
       "bytes": 6877,
-      "fetched_at": "2026-05-28T09:52:10.074725+00:00",
+      "fetched_at": "2026-05-28T20:11:25.094872+00:00",
       "sha256": "a82aa58e6fcb0fa2c09f90f95f7f1fa5ab5ecab244a5d5288bedf4f4c948a0a8",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/tutorial/extra-models.md"
     },
     "tutorial/first-steps.md": {
       "bytes": 13919,
-      "fetched_at": "2026-05-28T09:52:10.075027+00:00",
+      "fetched_at": "2026-05-28T20:11:25.096149+00:00",
       "sha256": "995e1d8ed62dcaf554bed58135b8b5af94477e1a33d4ecce3c9a495e47ffabf9",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/tutorial/first-steps.md"
     },
     "tutorial/handling-errors.md": {
       "bytes": 9163,
-      "fetched_at": "2026-05-28T09:52:10.074538+00:00",
+      "fetched_at": "2026-05-28T20:11:25.095148+00:00",
       "sha256": "f9236946816285bfa8cf948b4175de81d0a14a47d9a2a3a7ed3d48340ddf8a3d",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/tutorial/handling-errors.md"
     },
     "tutorial/header-param-models.md": {
       "bytes": 2679,
-      "fetched_at": "2026-05-28T09:52:10.074921+00:00",
+      "fetched_at": "2026-05-28T20:11:25.097261+00:00",
       "sha256": "75ef8dbca7fb9f6bf47dca078d7d7b764dbad54181e5e8420b36d8420327afe0",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/tutorial/header-param-models.md"
     },
     "tutorial/header-params.md": {
       "bytes": 3032,
-      "fetched_at": "2026-05-28T09:52:10.073619+00:00",
+      "fetched_at": "2026-05-28T20:11:25.094257+00:00",
       "sha256": "353c4df2c4e729fea065892556ce92b71c406d3147fd4fa8d8158ac0cda23e0f",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/tutorial/header-params.md"
     },
     "tutorial/index.md": {
       "bytes": 5414,
-      "fetched_at": "2026-05-28T09:52:10.073128+00:00",
+      "fetched_at": "2026-05-28T20:11:25.094686+00:00",
       "sha256": "c0d74054f9baea1e7ccb93ec2f685ace374554d6f146c418643f65a7c0a38cd6",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/tutorial/index.md"
     },
     "tutorial/metadata.md": {
       "bytes": 5977,
-      "fetched_at": "2026-05-28T09:52:10.071966+00:00",
+      "fetched_at": "2026-05-28T20:11:25.095845+00:00",
       "sha256": "9ca75e677871120dd246b4a680f8cbe27a398cbecb2bd45b6363f9a5ba46eb03",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/tutorial/metadata.md"
     },
     "tutorial/middleware.md": {
       "bytes": 3955,
-      "fetched_at": "2026-05-28T09:52:10.072570+00:00",
+      "fetched_at": "2026-05-28T20:11:25.094963+00:00",
       "sha256": "4006bc7940ee51f4b25a16a6f1f7386c2979b4013f4ed0dd56a6b9c65b1f2d4e",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/tutorial/middleware.md"
     },
     "tutorial/path-operation-configuration.md": {
       "bytes": 4126,
-      "fetched_at": "2026-05-28T09:52:10.072142+00:00",
+      "fetched_at": "2026-05-28T20:11:25.095657+00:00",
       "sha256": "95e4e1321c4ef3af1e155fb8dfd1baa727f8f5b75f0f618f3d3f12630c582588",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/tutorial/path-operation-configuration.md"
     },
     "tutorial/path-params-numeric-validations.md": {
       "bytes": 6208,
-      "fetched_at": "2026-05-28T09:52:10.072941+00:00",
+      "fetched_at": "2026-05-28T20:11:25.097173+00:00",
       "sha256": "56c3e95531b6dea480130b30c525cfa1388cfdde159e7429845fedd392fc6fe5",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/tutorial/path-params-numeric-validations.md"
     },
     "tutorial/path-params.md": {
       "bytes": 9043,
-      "fetched_at": "2026-05-28T09:52:10.072239+00:00",
+      "fetched_at": "2026-05-28T20:11:25.095342+00:00",
       "sha256": "2c930e70d53316c81dcab6c8a3c98ea0452b2ea093e85f6a211da139f26c1e80",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/tutorial/path-params.md"
     },
     "tutorial/query-param-models.md": {
       "bytes": 2224,
-      "fetched_at": "2026-05-28T09:52:10.074435+00:00",
+      "fetched_at": "2026-05-28T20:11:25.096673+00:00",
       "sha256": "31dbf1ca437d4d3d520bc8aa0b3a6ac5639d101a8f060e2063244d3b4c368349",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/tutorial/query-param-models.md"
     },
     "tutorial/query-params-str-validations.md": {
       "bytes": 16640,
-      "fetched_at": "2026-05-28T09:52:10.073741+00:00",
+      "fetched_at": "2026-05-28T20:11:25.096881+00:00",
       "sha256": "b3e8e61342a3f897c13e32dce8afb5df0737139061796f56b316616c176411a1",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/tutorial/query-params-str-validations.md"
     },
     "tutorial/query-params.md": {
       "bytes": 4600,
-      "fetched_at": "2026-05-28T09:52:10.073431+00:00",
+      "fetched_at": "2026-05-28T20:11:25.094779+00:00",
       "sha256": "b876e5e77c3d7645d5bd327e38d94a825788b8d15adef5ddef74e809d70be479",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/tutorial/query-params.md"
     },
     "tutorial/request-files.md": {
       "bytes": 7183,
-      "fetched_at": "2026-05-28T09:52:10.073839+00:00",
+      "fetched_at": "2026-05-28T20:11:25.095441+00:00",
       "sha256": "cf37251a16841ae222e66e5969927bf096dc7a13823a14d69b3866269077c645",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/tutorial/request-files.md"
     },
     "tutorial/request-form-models.md": {
       "bytes": 2157,
-      "fetched_at": "2026-05-28T09:52:10.072362+00:00",
+      "fetched_at": "2026-05-28T20:11:25.095554+00:00",
       "sha256": "6f462b8fd8a638d7a72f7341480da6ad982cebc03fd34acdf4c996a2410d9d05",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/tutorial/request-form-models.md"
     },
     "tutorial/request-forms-and-files.md": {
       "bytes": 1454,
-      "fetched_at": "2026-05-28T09:52:10.073325+00:00",
+      "fetched_at": "2026-05-28T20:11:25.096581+00:00",
       "sha256": "6ddeb1b5cf8598ebf03d979f2f50a456b06418fc4c5e18efa3c0beabf0fbd593",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/tutorial/request-forms-and-files.md"
     },
     "tutorial/request-forms.md": {
       "bytes": 2627,
-      "fetched_at": "2026-05-28T09:52:10.073033+00:00",
+      "fetched_at": "2026-05-28T20:11:25.095243+00:00",
       "sha256": "aef69c843eb49d226af75a76a7f19e5fd3840c193da561b13ee29896dd7d2ae4",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/tutorial/request-forms.md"
     },
     "tutorial/response-model.md": {
       "bytes": 15876,
-      "fetched_at": "2026-05-28T09:52:10.071684+00:00",
+      "fetched_at": "2026-05-28T20:11:25.097454+00:00",
       "sha256": "e061837af9e6a79154891342a6407a620adbfe04f71b1df4bbf21b0a7ab82af0",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/tutorial/response-model.md"
     },
     "tutorial/response-status-code.md": {
       "bytes": 3988,
-      "fetched_at": "2026-05-28T09:52:10.074332+00:00",
+      "fetched_at": "2026-05-28T20:11:25.097572+00:00",
       "sha256": "a0a29955b323820a464257a28f26d467bdf91306ab875f5bb23acf581546a933",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/tutorial/response-status-code.md"
     },
     "tutorial/schema-extra-example.md": {
       "bytes": 8949,
-      "fetched_at": "2026-05-28T09:52:10.071253+00:00",
+      "fetched_at": "2026-05-28T20:11:25.097069+00:00",
       "sha256": "3e5e16adc9a8df03f77ff428485fad550494890c9de52655dc7c7713dc908628",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/tutorial/schema-extra-example.md"
     },
     "tutorial/security/first-steps.md": {
       "bytes": 8452,
-      "fetched_at": "2026-05-28T09:52:10.076326+00:00",
+      "fetched_at": "2026-05-28T20:11:25.098834+00:00",
       "sha256": "469b90d4c6285f66c60f320d2a07b85a0da4664d7bd0a145de291335174c898c",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/tutorial/security/first-steps.md"
     },
     "tutorial/security/get-current-user.md": {
       "bytes": 4116,
-      "fetched_at": "2026-05-28T09:52:10.075896+00:00",
+      "fetched_at": "2026-05-28T20:11:25.098931+00:00",
       "sha256": "514926b2a8473053615809751e09eeb28dccc428970150f835a08fcc365f9e14",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/tutorial/security/get-current-user.md"
     },
     "tutorial/security/index.md": {
       "bytes": 4548,
-      "fetched_at": "2026-05-28T09:52:10.075994+00:00",
+      "fetched_at": "2026-05-28T20:11:25.098729+00:00",
       "sha256": "6c316110d145e16cc08e6e3caff00ebe7247470e85af3ce212d1ba3391092da8",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/tutorial/security/index.md"
     },
     "tutorial/security/oauth2-jwt.md": {
       "bytes": 10943,
-      "fetched_at": "2026-05-28T09:52:10.076096+00:00",
+      "fetched_at": "2026-05-28T20:11:25.099135+00:00",
       "sha256": "e616c4cef96c4a7b1b415617820de92563b897c6c44d8a04d72a1fe69bdfd28e",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/tutorial/security/oauth2-jwt.md"
     },
     "tutorial/security/simple-oauth2.md": {
       "bytes": 9588,
-      "fetched_at": "2026-05-28T09:52:10.076197+00:00",
+      "fetched_at": "2026-05-28T20:11:25.099033+00:00",
       "sha256": "60bee1d486fbbf3b2f1b4a1ee6b4a226beac5eff20a20c3a8bd44db4779ae19e",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/tutorial/security/simple-oauth2.md"
     },
     "tutorial/server-sent-events.md": {
       "bytes": 4704,
-      "fetched_at": "2026-05-28T09:52:10.071485+00:00",
+      "fetched_at": "2026-05-28T20:11:25.097666+00:00",
       "sha256": "1c2c53c7e20c55ce5e9d147347b65a8cd2b9dc982fd33a5b5187b07cbd79554b",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/tutorial/server-sent-events.md"
     },
     "tutorial/sql-databases.md": {
       "bytes": 15705,
-      "fetched_at": "2026-05-28T09:52:10.072479+00:00",
+      "fetched_at": "2026-05-28T20:11:25.096450+00:00",
       "sha256": "251352b81884ecfa150431b78cc0833131026aaf28ff811a8b32c9a407b3695c",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/tutorial/sql-databases.md"
     },
     "tutorial/static-files.md": {
       "bytes": 1674,
-      "fetched_at": "2026-05-28T09:52:10.073928+00:00",
+      "fetched_at": "2026-05-28T20:11:25.095048+00:00",
       "sha256": "930443d710fea7601a6fb221e638db0242ef8cbb5f693e0168c6009fb14822ae",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/tutorial/static-files.md"
     },
     "tutorial/stream-json-lines.md": {
       "bytes": 4452,
-      "fetched_at": "2026-05-28T09:52:10.074631+00:00",
+      "fetched_at": "2026-05-28T20:11:25.097847+00:00",
       "sha256": "48c8b930042ac448af3f36a09b13cbf5fb5ad087f30204ae55b61efcea858b44",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/tutorial/stream-json-lines.md"
     },
     "tutorial/testing.md": {
       "bytes": 5824,
-      "fetched_at": "2026-05-28T09:52:10.074021+00:00",
+      "fetched_at": "2026-05-28T20:11:25.096344+00:00",
       "sha256": "3d231b26f2adac6900b59cf8e5f57faeed6d731eb432c200758018ecccd0aefc",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/tutorial/testing.md"
     },
     "virtual-environments.md": {
       "bytes": 22666,
-      "fetched_at": "2026-05-28T09:52:10.062634+00:00",
+      "fetched_at": "2026-05-28T20:11:25.089285+00:00",
       "sha256": "e0f081dba5be59916f29a5a5caa7804ebd0af653789795170f7224cf0870133b",
       "source_url": "https://github.com/tiangolo/fastapi/blob/master/docs/en/docs/virtual-environments.md"
     }

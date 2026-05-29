@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-05-28T15:35+00:00_
+_Generated 2026-05-29T02:11+00:00_
 
-**9 sources, 5063 topics total**
+**9 sources, 5062 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_1405 topics_
+_1407 topics_
 
 - `anthropic-sdk/agents-and-tools/agent-skills/best-practices`
 - `anthropic-sdk/agents-and-tools/agent-skills/enterprise`
@@ -887,6 +887,7 @@ _1405 topics_
 - `anthropic-sdk/api/php/beta/sessions/resources/add`
 - `anthropic-sdk/api/php/beta/sessions/resources/delete`
 - `anthropic-sdk/api/php/beta/sessions/resources/list`
+- `anthropic-sdk/api/php/beta/sessions/resources/retrieve`
 - `anthropic-sdk/api/php/beta/sessions/resources/update`
 - `anthropic-sdk/api/php/beta/sessions/retrieve`
 - `anthropic-sdk/api/php/beta/sessions/threads`
@@ -1361,6 +1362,7 @@ _1405 topics_
 - `anthropic-sdk/build-with-claude/fast-mode`
 - `anthropic-sdk/build-with-claude/files`
 - `anthropic-sdk/build-with-claude/handling-stop-reasons`
+- `anthropic-sdk/build-with-claude/mid-conversation-system-messages`
 - `anthropic-sdk/build-with-claude/multilingual-support`
 - `anthropic-sdk/build-with-claude/overview`
 - `anthropic-sdk/build-with-claude/pdf-support`
@@ -1428,7 +1430,7 @@ _1405 topics_
 
 Upstream: <https://cloud.google.com/bigquery/docs/>
 
-_1532 topics_
+_1527 topics_
 
 - `bigquery/access-control`
 - `bigquery/access-control-basic-roles`
@@ -2123,11 +2125,6 @@ _1532 topics_
 - `bigquery/reference/biglake/rest/v1/projects.locations.catalogs/list`
 - `bigquery/reference/biglake/rest/v1alpha1/projects.locations.catalogs`
 - `bigquery/reference/biglake/rest/v1alpha1/projects.locations.catalogs.databases`
-- `bigquery/reference/biglake/rest/v1alpha1/projects.locations.catalogs.databases.locks`
-- `bigquery/reference/biglake/rest/v1alpha1/projects.locations.catalogs.databases.locks/check`
-- `bigquery/reference/biglake/rest/v1alpha1/projects.locations.catalogs.databases.locks/create`
-- `bigquery/reference/biglake/rest/v1alpha1/projects.locations.catalogs.databases.locks/delete`
-- `bigquery/reference/biglake/rest/v1alpha1/projects.locations.catalogs.databases.locks/list`
 - `bigquery/reference/biglake/rest/v1alpha1/projects.locations.catalogs.databases.tables`
 - `bigquery/reference/biglake/rest/v1alpha1/projects.locations.catalogs.databases.tables/create`
 - `bigquery/reference/biglake/rest/v1alpha1/projects.locations.catalogs.databases.tables/delete`
@@ -2967,7 +2964,7 @@ _1532 topics_
 
 Upstream: <https://code.claude.com/docs/en/>
 
-_141 topics_
+_142 topics_
 
 - `claude-code/admin-setup`
 - `claude-code/agent-sdk/agent-loop`
@@ -3108,6 +3105,7 @@ _141 topics_
 - `claude-code/whats-new/2026-w18`
 - `claude-code/whats-new/2026-w19`
 - `claude-code/whats-new/2026-w20`
+- `claude-code/workflows`
 - `claude-code/worktrees`
 - `claude-code/zero-data-retention`
 
@@ -4287,7 +4285,7 @@ _153 topics_
 
 Upstream: <https://learn.hex.tech/>
 
-_357 topics_
+_358 topics_
 
 - `hex/changelog`
 - `hex/changelog/2020-12-17`
@@ -4390,6 +4388,7 @@ _357 topics_
 - `hex/changelog/2026-05-12`
 - `hex/changelog/2026-05-14`
 - `hex/changelog/2026-05-21`
+- `hex/changelog/2026-05-28`
 - `hex/changelog/archive`
 - `hex/changelog/page/10`
 - `hex/changelog/page/11`
