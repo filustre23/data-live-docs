@@ -80,11 +80,11 @@ Once the semantic models are configured, agents will prefer to use the definitio
 
 ## Workspace context[​](#workspace-context "Direct link to Workspace context")
 
-The [workspace context file](/tutorials/ai-best-practices/workspace-context-best-practices) allows Admins to provide additional context to Hex's agents through a markdown file. This context is used by all AI agents in Hex when generating responses, helping them better understand your business context, data conventions, and preferred practices.
+The [workspace context file](/tutorials/ai-best-practices/workspace-context-best-practices) allows Admins and Managers to provide additional context to Hex's agents through a markdown file. This context is used by all AI agents in Hex when generating responses, helping them better understand your business context, data conventions, and preferred practices.
 
-This feature is similar to Claude Projects or Cursor rules - by providing consistent, high-level context to Hex agents, you can ensure consistency across threads.
+This feature is similar to Claude Projects or Cursor rules — by providing consistent, high-level context to Hex agents, you can ensure consistency across threads.
 
-Since these rules apply to the entire workspace, only workspace Admins can modify the rules.
+Since workspace context applies to the entire workspace, only workspace Admins and Managers can modify the contents.
 
 tip
 

@@ -1269,15 +1269,19 @@ Once the domain guide is returned and the user confirms it, instruct them:
 
 
 
-1. Go to Context Studio in Hex
+1. Go to Context Studio in Hex and open the Guides tab
 
 
 
-2. For Workspace context: Click on 'Workspace context' and paste your workspace context markdown
+2. For Workspace context: Click on "Create a hex.md file" and paste your workspace context markdown.
 
 
 
-3. For Guides: Click on 'Guides', create a new guide, and paste the guide markdown
+3. For Guides: Click on "Create a new guide" and paste your guide markdown.
+
+
+
+4. Click Test and Publish to preview and go live.
 
 
 

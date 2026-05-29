@@ -21,6 +21,12 @@ Use workspace context for broad rules and behavior. Use guides for detailed, tas
 
 ## Workspace context[​](#workspace-context "Direct link to Workspace context")
 
+info
+
+**Recently migrated:** The workspace context file is now part of the same versioning and editing system as your guide library. Existing content has been preserved as a Hex-managed file with the reserved path `hex.md`.
+
+To manage this file outside of Hex, you can delete the Hex-managed guide in the Workbench, and follow the directions below to sync it with your guide library.
+
 Workspace context is a single text file that the Hex Agent reads in every conversation.
 
 Use it to define:
@@ -35,15 +41,19 @@ Keep workspace context concise and focused on information that is relevant to mo
 
 Only Admins and Managers can configure workspace context.
 
-To configure workspace context:
+The workspace context file uses the reserved path `hex.md` and is edited directly in the Context Workbench alongside your other guides. To configure workspace context:
 
 1. Navigate to **Context Studio**
 2. Find the **Guides** tab
-3. Click **Edit** to open the markdown editor
-4. Add your business context, guidelines, and preferences
-5. Click **Save** to apply the changes
+3. Locate the file with path `hex.md`
+4. Edit the file in the Workbench
+5. Click **Test and Publish** to preview your changes and publish them live
 
-You can also upload a markdown file directly.
+tip
+
+You can also sync the workspace context file externally using the same CI workflow as the guide library. Ensure that the final path of the file is `hex.md`. If the file lives in a subdirectory in your external source, transform the path with a custom mapping in your [Hex context configuration file](#create-a-hex_contextconfigjson-file).
+
+In the Workbench, the context file is decorated with a special icon and description to indicate it's special nature. The context file also does not need frontmatter since the agent will always read it.
 
 ## Workspace guide library[​](#workspace-guide-library "Direct link to Workspace guide library")
 
@@ -203,6 +213,10 @@ In your GitHub repo where your guides live, create a `hex_context.config.json` a
 }
 ```
 
+tip
+
+The reserved path `hex.md` (with no preceding directories) is how Hex identifies the workspace context file. Use `hexFilePath: "hex.md"` to map any file in your repository to the workspace context slot.
+
 ### Add to CI[​](#add-to-ci "Direct link to Add to CI")
 
 #### Using Github[​](#using-github "Direct link to Using Github")
@@ -226,7 +240,7 @@ push:
 
 
 
-branches: [ 'main', 'master' ]
+branches: ["main", "master"]
 
 
 

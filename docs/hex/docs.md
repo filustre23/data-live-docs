@@ -49,7 +49,7 @@ Here are a few resources to help you get started:
 * Check out our [video library](https://www.youtube.com/@_hex_tech) for how-tos and tutorials.
 * Browse templates in the **?** menu in the bottom left of your project.
 
-Don't hesitate to reach out to [[email protected]](/cdn-cgi/l/email-protection#1b686e6b6b74696f5b737e63356f7e7873) or chat with us live from the **?** menu in the bottom left of your project.
+Don't hesitate to reach out to [[email protected]](/cdn-cgi/l/email-protection#93e0e6e3e3fce1e7d3fbf6ebbde7f6f0fb) or chat with us live from the **?** menu in the bottom left of your project.
 
 #### On this page
 
