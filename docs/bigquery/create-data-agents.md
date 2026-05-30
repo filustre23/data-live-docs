@@ -804,15 +804,34 @@ agent available to users in the Google Cloud console.
 6. Click **Preview agent details > Next**.
 7. To enable the agent to access Google Cloud resources on your behalf,
    complete the following steps:
-8. Enter the **Client ID**,
-   **Client secret**, **Authorization URI**, and **Token URI** that you
-   generated in the [Configure authorization
-   details](/gemini/enterprise/docs/register-and-manage-an-a2a-agent#authorize-your-agent)
-   section.
-9. Enter the **Scopes**.
-10. Click **Finish**.
-11. [Share the agent](/gemini/enterprise/docs/share-custom-agents#share_an_agent)
-    with the users or groups that the data analyst provides.
+
+   1. Enter the **Client ID** and **Client secret** that you generated in the
+      [Configure authorization
+      details](/gemini/enterprise/docs/register-and-manage-an-a2a-agent#authorize-your-agent)
+      section.
+   2. In the **Authorization URI** field, enter the following:
+
+      ```
+      https://accounts.google.com/o/oauth2/v2/auth?client_id=client_id&redirect_uri=https%3A%2F%2Fvertexaisearch.cloud.google.com%2Fstatic%2Foauth%2Foauth.html&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform&include_granted_scopes=true&response_type=code&access_type=offline&prompt=consent
+      ```
+
+      Replace client\_id with the client ID that you
+      generated in the [Configure authorization
+      details](/gemini/enterprise/docs/register-and-manage-an-a2a-agent#authorize-your-agent)
+      section.
+   3. In the **Token URI** field, enter the following:
+
+      ```
+      https://oauth2.googleapis.com/token
+      ```
+   4. In the **Scopes** field, enter the following:
+
+      ```
+      https://www.googleapis.com/auth/cloud-platform
+      ```
+8. Click **Finish**.
+9. [Share the agent](/gemini/enterprise/docs/share-custom-agents#share_an_agent)
+   with the users or groups that the data analyst provides.
 
 For more information about working with A2A agents in
 Gemini Enterprise, see [Register and manage A2A
@@ -872,11 +891,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-05-27 UTC.
+Last updated 2026-05-30 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-27 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-30 UTC."],[],[]]

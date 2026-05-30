@@ -19,6 +19,18 @@ Send feedback
 
 RPC to get the results of a query job.
 
+### IAM Permissions
+
+Requires the following IAM permission(s) to use this method:
+
+* `bigquery.jobs.get` on the job.
+* `bigquery.tables.getData` on the destination table.
+
+If the user matches the creator of the job, the following IAM permission(s) are required instead:
+
+* `bigquery.jobs.create` on the project.
+* `bigquery.tables.getData` on the destination table.
+
 ### HTTP request
 
 `GET https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/queries/{jobId}`
@@ -90,11 +102,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-05-20 UTC.
+Last updated 2026-05-30 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-20 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-30 UTC."],[],[]]

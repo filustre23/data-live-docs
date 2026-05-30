@@ -1152,20 +1152,5 @@ repeated <element-type> <name>
 BigQuery Storage Read API 和 BigQuery Storage Write API 都支援擴充的欄字元。如要透過 BigQuery Storage Read API 使用擴充的 Unicode 字元清單，必須設定旗標。您可以使用 `displayName` 屬性擷取資料欄名稱。以下範例說明如何使用 Python 用戶端設定旗標：
 
 ```
-from google.cloud.bigquery_storage import types
-requested_session = types.ReadSession()
-
-#set avro serialization options for flexible column.
-options = types.AvroSerializationOptions()
-options.enable_display_name_attribute = True
-requested_session.read_options.avro_serialization_options = options
-```
-
-如要透過 BigQuery Storage Write API 使用擴充的 Unicode 字元清單，您必須提供含有 `column_name` 標記的結構定義，除非您使用 `JsonStreamWriter` 寫入器物件。以下範例說明如何提供結構定義：
-
-```
-syntax = "proto2";
-package mypackage;
-// Source protos located in github.com/googleapis/googleapis
-import "google/cloud/bigquery/storage/v1/annotations.proto";
+from google.cloud.bigquery_storage import
 ```

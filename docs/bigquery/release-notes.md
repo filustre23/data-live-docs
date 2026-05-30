@@ -433,15 +433,15 @@ including binary deletion vectors. For more information, see
 This feature is in
 [Preview](https://cloud.google.com/products/#product-launch-stages).
 
+Announcement
+
+A known issue has been resolved where a materialized view refresh could expose masked or filtered data from fine grained access control policies in error messages. No further action is needed.
+
 Feature
 
 BigQuery agent analytics is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA) in the Google Agent Developer Kit. [BigQuery agent analytics](/bigquery/docs/bigquery-agent-analytics)
 is an open source solution that lets you capture, analyze, and visualize
 multimodal agent interaction data at scale.
-
-Announcement
-
-A known issue has been resolved where a materialized view refresh could expose could expose masked or filtered data from fine grained access control policies in error messages. No further action is needed.
 
 Feature
 
@@ -4228,4 +4228,4 @@ The BigQuery ML [`ML.BUCKETIZE`](/bigquery/docs/reference/standard-sql/bigquerym
 
 Feature
 
-You can now view [stored column usage](/bigquery/docs/reference/rest/v2/Job#StoredColumnsUsage) information for a query job t
+You can now view [stored column usage](/bigquery/docs/reference/rest/v2/Job#StoredColumnsUsage) information for a query job that performs

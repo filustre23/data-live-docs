@@ -905,6 +905,5 @@ public class QueryWithArrayParameters {
       // Note: Standard SQL is required to use query parameters.
       QueryJobConfiguration queryConfig =
           QueryJobConfiguration.newBuilder(query)
-              .addNamedParameter("gender", QueryParameterValue.string(gender))
-              .addNamedParameter("states",
+              .addNamedParameter("gender",
 ```

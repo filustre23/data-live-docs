@@ -730,12 +730,5 @@ public class WriteCommittedStream {
       // For more information about JsonStreamWriter, see:
       // https://googleapis.dev/java/google-cloud-bigquerystorage/latest/com/google/cloud/bigquery/storage/v1/JsonStreamWriter.html
       streamWriter =
-          JsonStreamWriter.newBuilder(writeStream.getName(), writeStream.getTableSchema(), client)
-              .setRetrySettings(retrySettings)
-              .build();
-    }
-
-    public void append(JSONArray data, long offset)
-        throws DescriptorValidationException, IOException, ExecutionException {
-      synchronized </
+          JsonStreamWriter.newBuilder(writeStream.getName(), writeStream.
 ```

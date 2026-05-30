@@ -14,13 +14,13 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 你可以依據偏好儲存及分類內容。
 
-# 查詢 BigLake 資料表中的 Cloud Storage 資料
+# 查詢 Cloud Storage BigLake 資料表
 
 本文說明如何查詢儲存在 [Cloud Storage BigLake 資料表](https://docs.cloud.google.com/bigquery/docs/create-cloud-storage-table-biglake?hl=zh-tw)中的資料。
 
 ## 事前準備
 
-確認您有 [Cloud Storage BigLake 資料表](https://docs.cloud.google.com/bigquery/docs/create-cloud-storage-table-biglake?hl=zh-tw)。
+確認您擁有 [Cloud Storage BigLake 資料表](https://docs.cloud.google.com/bigquery/docs/create-cloud-storage-table-biglake?hl=zh-tw)。
 
 ### 必要的角色
 
@@ -29,7 +29,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 * BigQuery 資料檢視者 (`roles/bigquery.dataViewer`)
 * BigQuery 使用者 (`roles/bigquery.user`)
 
-視權限而定，您可以將這些角色授予自己，或請系統管理員授予您這些角色。如要進一步瞭解如何授予角色，請參閱「[查看可針對資源授予的角色](https://docs.cloud.google.com/iam/docs/viewing-grantable-roles?hl=zh-tw)」。
+視權限而定，您可以將這些角色授予自己，或請管理員授予您這些角色。如要進一步瞭解如何授予角色，請參閱「[查看可針對資源授予的角色](https://docs.cloud.google.com/iam/docs/viewing-grantable-roles?hl=zh-tw)」。
 
 如要查看查詢 Cloud Storage BigLake 資料表所需的確切權限，請展開「Required permissions」(必要權限) 部分：
 
@@ -44,7 +44,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 查詢 BigLake 資料表
 
-建立 Cloud Storage BigLake 資料表後，您可以使用 GoogleSQL 語法查詢該資料表，方法與標準 BigQuery 資料表相同。例如：`SELECT field1, field2 FROM mydataset.my_cloud_storage_table;`。
+建立 Cloud Storage BigLake 資料表後，您可以使用 GoogleSQL 語法查詢，與標準 BigQuery 資料表相同。例如：`SELECT field1, field2 FROM mydataset.my_cloud_storage_table;`。
 
 ## 使用外部資料處理工具查詢 BigLake 資料表
 
@@ -159,11 +159,11 @@ bq --location=LOCATION query \
 * `TABLE`：要建立的臨時資料表名稱。
 * `SCHEMA`：內嵌結構定義，格式為 `field:data_type,field:data_type`。
 * `SOURCE_FORMAT`：外部資料來源的格式，例如 `CSV`。
-* `BUCKET_PATH`：包含資料表的資料的 Cloud Storage bucket 路徑，格式為 `gs://bucket_name/[folder_name/]file_pattern`。
+* `BUCKET_PATH`：包含資料表的 Cloud Storage bucket 路徑，格式為 `gs://bucket_name/[folder_name/]file_pattern`。
 
-  如要在 `file_pattern` 中選取 bucket 中的多個檔案，請在 `file_pattern` 中指定一個星號 (`*`) 萬用字元。例如：`gs://mybucket/file00*.parquet`。詳情請參閱「[Cloud Storage URI 的萬用字元支援](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage?hl=zh-tw#wildcard-support)」。
+  如要在 `file_pattern` 中指定一個星號 (`*`) 萬用字元，即可從值區選取多個檔案。例如：`gs://mybucket/file00*.parquet`。詳情請參閱「[Cloud Storage URI 的萬用字元支援](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage?hl=zh-tw#wildcard-support)」。
 
-  如要為 `uris` 選項指定多個值區，請提供多個路徑。
+  您可以提供多個路徑，為 `uris` 選項指定多個值區。
 
   以下範例顯示有效的 `uris` 值：
 
@@ -171,7 +171,7 @@ bq --location=LOCATION query \
   + `gs://bucket/path1/*.parquet`
   + `gs://bucket/path1/file1*`、`gs://bucket1/path1/*`
 
-  指定以多個檔案為目標的 `uris` 值時，所有檔案都必須共用相容的結構定義。
+  指定以多個檔案為目標的 `uris` 值時，所有這些檔案都必須共用相容的結構定義。
 
   如要進一步瞭解如何在 BigQuery 中使用 Cloud Storage URI，請參閱「[Cloud Storage 資源路徑](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage?hl=zh-tw#google-cloud-storage-uri)」。
 * `PROJECT_ID`：包含連線的專案。
@@ -204,11 +204,11 @@ bq --location=LOCATION query \
 * `LOCATION`：您[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)的名稱。`--location` 是選用旗標。舉例來說，如果您在東京區域使用 BigQuery，就可以將該旗標的值設定為 `asia-northeast1`。您可以使用 [.bigqueryrc 檔案](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool?hl=zh-tw#setting_default_values_for_command-line_flags)設定位置的預設值。
 * `SCHEMA_FILE`：您本機上的 JSON 結構定義檔路徑。
 * `SOURCE_FORMAT`：外部資料來源的格式，例如 `CSV`。
-* `BUCKET_PATH`：包含資料表的資料的 Cloud Storage bucket 路徑，格式為 `gs://bucket_name/[folder_name/]file_pattern`。
+* `BUCKET_PATH`：包含資料表的 Cloud Storage bucket 路徑，格式為 `gs://bucket_name/[folder_name/]file_pattern`。
 
-  如要在 `file_pattern` 中選取 bucket 中的多個檔案，請在 `file_pattern` 中指定一個星號 (`*`) 萬用字元。例如：`gs://mybucket/file00*.parquet`。詳情請參閱「[Cloud Storage URI 的萬用字元支援](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage?hl=zh-tw#wildcard-support)」。
+  如要在 `file_pattern` 中指定一個星號 (`*`) 萬用字元，即可從值區選取多個檔案。例如：`gs://mybucket/file00*.parquet`。詳情請參閱「[Cloud Storage URI 的萬用字元支援](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage?hl=zh-tw#wildcard-support)」。
 
-  如要為 `uris` 選項指定多個值區，請提供多個路徑。
+  您可以提供多個路徑，為 `uris` 選項指定多個值區。
 
   以下範例顯示有效的 `uris` 值：
 
@@ -216,7 +216,7 @@ bq --location=LOCATION query \
   + `gs://bucket/path1/*.parquet`
   + `gs://bucket/path1/file1*`、`gs://bucket1/path1/*`
 
-  指定以多個檔案為目標的 `uris` 值時，所有檔案都必須共用相容的結構定義。
+  指定以多個檔案為目標的 `uris` 值時，所有這些檔案都必須共用相容的結構定義。
 
   如要進一步瞭解如何在 BigQuery 中使用 Cloud Storage URI，請參閱「[Cloud Storage 資源路徑](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage?hl=zh-tw#google-cloud-storage-uri)」。
 * `PROJECT_ID`：包含連線的專案。
@@ -260,11 +260,11 @@ bq --location=LOCATION query \
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-27 (世界標準時間)。
+上次更新時間：2026-05-29 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-27 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-29 (世界標準時間)。"],[],[]]

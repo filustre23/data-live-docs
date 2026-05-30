@@ -1130,31 +1130,5 @@ client = bigquery.Client()
 # destination_table_id = "your-project.destination_dataset.destination_table"
 
 job = client.copy_table(source_table_id, destination_table_id)
-job.result()  # Wait for the job to complete.
-
-print("A copy of the table created.")
+job.result()
 ```
-
-### 複製多個來源資料表
-
-您可以透過下列方式，將多個來源資料表複製到目的地資料表：
-
-* 使用 bq 指令列工具的 `bq cp` 指令。
-* 呼叫 [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert?hl=zh-tw) 方法、設定 `copy` 工作，然後指定 `sourceTables` 屬性。
-* 使用用戶端程式庫。
-
-所有來源資料表都必須擁有相同的結構定義和[標記](https://docs.cloud.google.com/bigquery/docs/tags?hl=zh-tw)，且只能有一個目的地資料表。
-
-來源資料表必須指定為逗號分隔的清單。複製多個來源資料表時，無法使用萬用字元。
-
-如要複製多個來源資料表，請選取下列其中一個選項：
-
-### bq
-
-1. 在 Google Cloud 控制台中啟用 Cloud Shell。
-
-   [啟用 Cloud Shell](https://console.cloud.google.com/?cloudshell=true&hl=zh-tw)
-
-   Google Cloud 主控台底部會開啟一個 [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works?hl=zh-tw) 工作階段，並顯示指令列提示。Cloud Shell 是已安裝 Google Cloud CLI 的殼層環境，並已針對您目前的專案設定好相關值。工作階段可能要幾秒鐘的時間才能初始化。
-2. 發出 `bq cp` 指令，並以逗號分隔清單的形式包含多個來源資料表。
-   選

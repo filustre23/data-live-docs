@@ -14,9 +14,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 你可以依據偏好儲存及分類內容。
 
-# Cloud Storage 的外部資料表
+# 建立 Cloud Storage BigLake 資料表
 
-本文說明如何建立 Cloud Storage BigLake 資料表。[BigLake 資料表](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw)可讓您使用存取權委派功能，查詢 Cloud Storage 中的結構化資料。存取權委派功能可將 BigLake 資料表的存取權，與基礎資料儲存空間的存取權分開。
+本文說明如何建立 Cloud Storage BigLake 資料表。[BigLake 資料表](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw)可讓您使用存取權委派功能，查詢 Cloud Storage 中的結構化資料。存取權委派功能可將 BigLake 資料表的存取權，與基礎資料存放區的存取權分開。
 
 ## 事前準備
 
@@ -25,7 +25,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    **選取或建立專案所需的角色**
 
    * **選取專案**：選取專案時，不需要具備特定 IAM 角色，只要您已獲授角色，即可選取任何專案。
-   * **建立專案**：如要建立專案，您需要「專案建立者」角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   * **建立專案**：如要建立專案，您需要具備專案建立者角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
    **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，而不要選取現有專案。完成這些步驟後，您就可以刪除專案，並移除與該專案相關聯的所有資源。
 
    [前往專案選取器](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
@@ -51,7 +51,8 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    視需要[更新 Google Cloud SDK](https://docs.cloud.google.com/sdk/docs/quickstart?hl=zh-tw)。
 
-   1. 選用：如果是 Terraform，則必須使用 `terraform-provider-google` 4.25.0 以上版本。`terraform-provider-google` 版本列於 [GitHub](https://github.com/hashicorp/terraform-provider-google/releases)。您可以從 [HashiCorp Terraform 下載頁面](https://www.terraform.io/downloads)下載最新版本。
+   1. 選用：如果是 Terraform，則必須使用 `terraform-provider-google` 4.25.0 以上版本。`terraform-provider-google` 版本列於 [GitHub](https://github.com/hashicorp/terraform-provider-google/releases)。
+      您可以從 [HashiCorp Terraform 下載頁面](https://www.terraform.io/downloads)下載最新版本。
 7. 建立 Cloud 資源連結，或設定與外部資料來源的預設連線。連線需要額外的角色和權限。詳情請參閱「[建立 Cloud 資源連線](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection?hl=zh-tw)」和「[預設連線總覽](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw)」。
 
 ### 必要的角色
@@ -69,11 +70,11 @@ BigQuery 管理員 (`roles/bigquery.admin`) 預先定義的身分與存取權管
 
 ### 位置注意事項
 
-使用 Cloud Storage 儲存資料檔案時，建議使用 Cloud Storage [單一區域](https://docs.cloud.google.com/storage/docs/locations?hl=zh-tw#available-locations)或[雙區域](https://docs.cloud.google.com/storage/docs/locations?hl=zh-tw#location-dr) bucket，而非多區域 bucket，以提升效能。
+使用 Cloud Storage 儲存資料檔案時，建議使用 Cloud Storage [單一區域](https://docs.cloud.google.com/storage/docs/locations?hl=zh-tw#available-locations)或[雙區域](https://docs.cloud.google.com/storage/docs/locations?hl=zh-tw#location-dr) bucket，不要使用多區域 bucket，這樣可以提升效能。
 
 ## 在未分區資料上建立外部資料表
 
-如果您熟悉如何在 BigQuery 建立資料表，建立外部資料表的程序也大同小異。資料表可使用外部資料表支援的任何檔案格式。詳情請參閱「[限制](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw#limitations)」一文。
+如果您熟悉如何在 BigQuery 中建立資料表，建立外部資料表的程序也大同小異。資料表可使用外部資料表支援的任何檔案格式。詳情請參閱「[限制](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw#limitations)」一文。
 
 建立 BigLake 資料表前，您需要[資料集](https://docs.cloud.google.com/bigquery/docs/datasets?hl=zh-tw)和[可存取 Cloud Storage 的 Cloud 資源連線](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection?hl=zh-tw#create-cloud-resource-connection)。
 
@@ -96,7 +97,7 @@ BigQuery 管理員 (`roles/bigquery.admin`) 預先定義的身分與存取權管
 
       您無法在 Google Cloud 控制台中指定多個 URI，但可以指定一個星號 (`*`) 萬用字元，選取多個檔案。例如：`gs://mybucket/file_name*`。詳情請參閱「[Cloud Storage URI 的萬用字元支援](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage?hl=zh-tw#wildcard-support)」。
 
-      Cloud Storage 值區的位置必須與要建立的資料表所在的資料集位置相同。
+      Cloud Storage 值區的位置必須與要建立的表格所在的資料集位置相同。
    3. 在「File format」(檔案格式) 部分，選取與檔案相符的格式。
 6. 在「目的地」部分，指定下列詳細資料：
 
@@ -105,8 +106,8 @@ BigQuery 管理員 (`roles/bigquery.admin`) 預先定義的身分與存取權管
    3. 在「Table」(資料表) 中，輸入要建立的資料表名稱。
    4. 在「Table type」(資料表類型) 中，選取「External table」(外部資料表)。
    5. 選取「使用 Cloud 資源連結建立 BigLake 資料表」。
-   6. 在「Connection ID」(連線 ID) 部分，選取您先前建立的連線。
-7. 在「Schema」(結構定義) 區段中，您可以啟用[結構定義自動偵測](https://docs.cloud.google.com/bigquery/docs/schema-detect?hl=zh-tw)功能，也可以手動指定結構定義 (如有來源檔案)。如果沒有來源檔案，就必須手動指定結構定義。
+   6. 在「連線 ID」部分，選取您先前建立的連線。
+7. 在「結構定義」部分，您可以啟用[結構定義自動偵測](https://docs.cloud.google.com/bigquery/docs/schema-detect?hl=zh-tw)功能，也可以在有來源檔案時手動指定結構定義。如果沒有來源檔案，就必須手動指定結構定義。
 
    * 如要啟用結構定義自動偵測功能，請選取「自動偵測」選項。
    * 如要手動指定結構定義，請取消勾選「自動偵測」選項。啟用「以文字形式編輯」，然後以 [JSON 陣列](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#specifying_a_json_schema_file)的形式輸入資料表結構定義。
@@ -143,15 +144,15 @@ BigQuery 管理員 (`roles/bigquery.admin`) 預先定義的身分與存取權管
    * `REGION`：包含連線的區域，例如 `us`
    * `CONNECTION_ID`：連線 ID，例如 `myconnection`
 
-     在 Google Cloud 控制台中[查看連線詳細資料](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw#view-connections)時，連線 ID 是「連線 ID」中顯示的完整連線 ID 最後一部分的值，例如 `projects/myproject/locations/connection_location/connections/myconnection`。
+     在 Google Cloud 控制台中[查看連線詳細資料](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw#view-connections)時，連線 ID 是「連線 ID」中顯示的完整連線 ID 最後一個部分的值，例如 `projects/myproject/locations/connection_location/connections/myconnection`。
 
-     如要使用[預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw)，請指定 `DEFAULT`，而不是包含 PROJECT\_ID.REGION.CONNECTION\_ID 的連線字串。
+     如要使用[預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw)，請指定 `DEFAULT`，而非包含 PROJECT\_ID.REGION.CONNECTION\_ID 的連線字串。
    * `TABLE_FORMAT`：要建立的資料表格式，例如 `PARQUET`
 
      如要進一步瞭解支援的格式，請參閱「[限制](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw#limitations)」一節。
    * `BUCKET_PATH`：包含外部資料表資料的 Cloud Storage 值區路徑，格式為 `['gs://bucket_name/[folder_name/]file_name']`。
 
-     如要在路徑中指定一個星號 (`*`) 萬用字元，即可從 bucket 選取多個檔案。例如，`['gs://mybucket/file_name*']`。詳情請參閱「[Cloud Storage URI 的萬用字元支援](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage?hl=zh-tw#wildcard-support)」。
+     如要在路徑中指定一個星號 (`*`) 萬用字元，即可從值區選取多個檔案。例如，`['gs://mybucket/file_name*']`。詳情請參閱「[Cloud Storage URI 的萬用字元支援](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage?hl=zh-tw#wildcard-support)」。
 
      如要為 `uris` 選項指定多個值區，請提供多個路徑。
 
@@ -163,15 +164,15 @@ BigQuery 管理員 (`roles/bigquery.admin`) 預先定義的身分與存取權管
 
      指定以多個檔案為目標的 `uris` 值時，所有這些檔案都必須共用相容的結構定義。
 
-     如要進一步瞭解如何在 BigQuery 中使用 Cloud Storage URI，請參閱[Cloud Storage 資源路徑](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage?hl=zh-tw#google-cloud-storage-uri)。
-   * `STALENESS_INTERVAL`：指定針對 BigLake 資料表執行的作業是否使用快取中繼資料，以及快取中繼資料必須有多新，作業才能使用。如要進一步瞭解中繼資料快取注意事項，請參閱「[中繼資料快取，提升效能](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw#metadata_caching_for_performance)」。
+     如要進一步瞭解如何在 BigQuery 中使用 Cloud Storage URI，請參閱「[Cloud Storage 資源路徑](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage?hl=zh-tw#google-cloud-storage-uri)」。
+   * `STALENESS_INTERVAL`：指定對 BigLake 資料表執行的作業是否使用快取中繼資料，以及快取中繼資料必須有多新，作業才能使用。如要進一步瞭解中繼資料快取注意事項，請參閱「[中繼資料快取提升效能](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw#metadata_caching_for_performance)」。
 
      如要停用中繼資料快取功能，請指定 0。這是目前的預設做法。
 
-     如要啟用中繼資料快取功能，請指定介於 30 分鐘至 7 天之間的[間隔常值](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#interval_literals)。舉例來說，如要指定 4 小時的過時間隔，請輸入 `INTERVAL 4 HOUR`。如果資料表在過去 4 小時內重新整理過，針對該資料表執行的作業就會使用快取中繼資料。如果快取中繼資料的建立時間早於該時間，作業會改為從 Cloud Storage 擷取中繼資料。
+     如要啟用中繼資料快取功能，請指定介於 30 分鐘至 7 天之間的[間隔常值](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#interval_literals)。舉例來說，如要指定 4 小時的過時間隔，請輸入 `INTERVAL 4 HOUR`。如果資料表在過去 4 小時內重新整理過，針對資料表執行的作業就會使用快取中繼資料。如果快取中繼資料的建立時間早於該時間，作業會改為從 Cloud Storage 擷取中繼資料。
    * `CACHE_MODE`：指定中繼資料快取是否自動或手動重新整理。如要進一步瞭解中繼資料快取注意事項，請參閱「[中繼資料快取，提升效能](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw#metadata_caching_for_performance)」。
 
-     設為 `AUTOMATIC`，中繼資料快取就會以系統定義的時間間隔 (通常為 30 到 60 分鐘) 重新整理。
+     設為 `AUTOMATIC`，中繼資料快取就會以系統定義的時間間隔重新整理，通常介於 30 到 60 分鐘之間。
 
      如要依您決定的時間表重新整理中繼資料快取，請設為 `MANUAL`。在這種情況下，您可以呼叫 [`BQ.REFRESH_EXTERNAL_METADATA_CACHE` 系統程序](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures?hl=zh-tw#bqrefresh_external_metadata_cache)來重新整理快取。
 
@@ -208,11 +209,11 @@ bq mk --table \
   如要使用[預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw)，請指定 `DEFAULT`，而非包含 PROJECT\_ID.REGION.CONNECTION\_ID 的連線字串。
 * `SOURCE_FORMAT`：外部資料來源的格式。
   例如：`PARQUET`。
-* `BUCKET_PATH`：包含資料表的資料的 Cloud Storage bucket 路徑，格式為 `gs://bucket_name/[folder_name/]file_pattern`。
+* `BUCKET_PATH`：包含資料表的 Cloud Storage bucket 路徑，格式為 `gs://bucket_name/[folder_name/]file_pattern`。
 
-  如要在 `file_pattern` 中選取 bucket 中的多個檔案，請在 `file_pattern` 中指定一個星號 (`*`) 萬用字元。例如：`gs://mybucket/file00*.parquet`。詳情請參閱「[Cloud Storage URI 的萬用字元支援](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage?hl=zh-tw#wildcard-support)」。
+  如要在 `file_pattern` 中指定一個星號 (`*`) 萬用字元，即可從值區選取多個檔案。例如：`gs://mybucket/file00*.parquet`。詳情請參閱「[Cloud Storage URI 的萬用字元支援](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage?hl=zh-tw#wildcard-support)」。
 
-  如要為 `uris` 選項指定多個值區，請提供多個路徑。
+  您可以提供多個路徑，為 `uris` 選項指定多個值區。
 
   以下範例顯示有效的 `uris` 值：
 
@@ -220,15 +221,15 @@ bq mk --table \
   + `gs://bucket/path1/*.parquet`
   + `gs://bucket/path1/file1*`、`gs://bucket1/path1/*`
 
-  指定以多個檔案為目標的 `uris` 值時，所有檔案都必須共用相容的結構定義。
+  指定以多個檔案為目標的 `uris` 值時，所有這些檔案都必須共用相容的結構定義。
 
   如要進一步瞭解如何在 BigQuery 中使用 Cloud Storage URI，請參閱「[Cloud Storage 資源路徑](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage?hl=zh-tw#google-cloud-storage-uri)」。
-* `DEFINITION_FILE`：本機上[資料表定義檔](https://docs.cloud.google.com/bigquery/docs/external-table-definition?hl=zh-tw)的路徑。
-* `STALENESS_INTERVAL`：指定對 BigLake 資料表執行的作業是否使用快取中繼資料，以及快取中繼資料必須有多新，作業才能使用。如要進一步瞭解中繼資料快取注意事項，請參閱「[中繼資料快取，提升效能](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw#metadata_caching_for_performance)」。
+* `DEFINITION_FILE`：本機電腦上[資料表定義檔](https://docs.cloud.google.com/bigquery/docs/external-table-definition?hl=zh-tw)的路徑。
+* `STALENESS_INTERVAL`：指定對 BigLake 資料表執行的作業是否使用快取中繼資料，以及快取中繼資料必須有多新，作業才能使用。如要進一步瞭解中繼資料快取注意事項，請參閱「[中繼資料快取提升效能](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw#metadata_caching_for_performance)」一文。
 
   如要停用中繼資料快取功能，請指定 0。這是目前的預設做法。
 
-  如要啟用中繼資料快取，請使用[`INTERVAL` 資料類型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#interval_type)文件所述的 `Y-M D H:M:S` 格式，指定 30 分鐘到 7 天之間的間隔值。舉例來說，如要指定 4 小時的過時間隔，請輸入 `0-0 0 4:0:0`。如果資料表在過去 4 小時內重新整理過，針對該資料表執行的作業就會使用快取中繼資料。如果快取中繼資料較舊，作業會改為從 Cloud Storage 擷取中繼資料。
+  如要啟用中繼資料快取，請使用[`INTERVAL`資料類型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#interval_type)文件所述的 `Y-M D H:M:S` 格式，指定 30 分鐘到 7 天之間的時間間隔值。舉例來說，如要指定 4 小時的過時間隔，請輸入 `0-0 0 4:0:0`。如果資料表在過去 4 小時內重新整理過，針對該資料表執行的作業就會使用快取中繼資料。如果快取中繼資料較舊，作業會改為從 Cloud Storage 擷取中繼資料。
 * `DATASET`：您要在其中建立資料表的 BigQuery 資料集名稱，例如 `mydataset`
 * `EXTERNAL_TABLE_NAME`：要建立的資料表名稱，例如 `mytable`
 * `SCHEMA`：BigLake 資料表的結構定義
@@ -281,11 +282,11 @@ bq mk --table \
 * `SOURCE_FORMAT`：外部資料來源的格式
 
   例如 `CSV`。
-* `BUCKET_PATH`：包含資料表的資料的 Cloud Storage bucket 路徑，格式為 `gs://bucket_name/[folder_name/]file_pattern`。
+* `BUCKET_PATH`：包含資料表的 Cloud Storage bucket 路徑，格式為 `gs://bucket_name/[folder_name/]file_pattern`。
 
-  如要在 `file_pattern` 中選取 bucket 中的多個檔案，請在 `file_pattern` 中指定一個星號 (`*`) 萬用字元。例如：`gs://mybucket/file00*.parquet`。詳情請參閱「[Cloud Storage URI 的萬用字元支援](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage?hl=zh-tw#wildcard-support)」。
+  如要在 `file_pattern` 中指定一個星號 (`*`) 萬用字元，即可從值區選取多個檔案。例如：`gs://mybucket/file00*.parquet`。詳情請參閱「[Cloud Storage URI 的萬用字元支援](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage?hl=zh-tw#wildcard-support)」。
 
-  如要為 `uris` 選項指定多個值區，請提供多個路徑。
+  您可以提供多個路徑，為 `uris` 選項指定多個值區。
 
   以下範例顯示有效的 `uris` 值：
 
@@ -293,7 +294,7 @@ bq mk --table \
   + `gs://bucket/path1/*.parquet`
   + `gs://bucket/path1/file1*`、`gs://bucket1/path1/*`
 
-  指定以多個檔案為目標的 `uris` 值時，所有檔案都必須共用相容的結構定義。
+  指定以多個檔案為目標的 `uris` 值時，所有這些檔案都必須共用相容的結構定義。
 
   如要進一步瞭解如何在 BigQuery 中使用 Cloud Storage URI，請參閱「[Cloud Storage 資源路徑](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage?hl=zh-tw#google-cloud-storage-uri)」。
 * `PROJECT_ID`：要在其中建立資料表的專案名稱，例如 `myproject`
@@ -446,7 +447,7 @@ resource "google_bigquery_table" "default" {
 
    將程式碼範例複製到新建立的 `main.tf`。
 
-   視需要從 GitHub 複製程式碼。如果 Terraform 代码片段是端對端解決方案的一部分，建議您使用這個方法。
+   視需要從 GitHub 複製程式碼。如果 Terraform 程式碼片段是端對端解決方案的一部分，建議您使用這個方法。
 3. 查看並修改範例參數，套用至您的環境。
 4. 儲存變更。
 5. 初始化 Terraform。每個目錄只需執行一次這項操作。
@@ -479,13 +480,13 @@ resource "google_bigquery_table" "default" {
    等待 Terraform 顯示「Apply complete!」訊息。
 3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)即可查看結果。在 Google Cloud 控制台中，前往 UI 中的資源，確認 Terraform 已建立或更新這些資源。
 
-**注意：**Terraform 範例通常會假設 Google Cloud 專案已啟用必要的 API。
+**注意：**Terraform 範例通常會假設專案已啟用必要的 API。 Google Cloud
 
 BigLake 支援自動偵測結構定義。不過，如果您未提供結構定義，且上個步驟中未將存取權授予服務帳戶，當您嘗試自動偵測結構定義時，這些步驟會失敗，並顯示存取遭拒的訊息。
 
 ## 在 Apache Hive 分區資料上建立 BigLake 資料表
 
-您可以在 Cloud Storage 中，為 Hive 分區資料建立 BigLake 資料表。建立外部分區資料表後，您就無法變更分區鍵。如要變更分割區鍵，您必須重新建立資料表。
+您可以為 Cloud Storage 中的 Hive 分區資料建立 BigLake 資料表。建立外部分區資料表後，您就無法變更分區鍵。如要變更分割區鍵，您必須重新建立資料表。
 
 建立 BigLake 資料表前，您需要[資料集](https://docs.cloud.google.com/bigquery/docs/datasets?hl=zh-tw)和[可存取 Cloud Storage 的 Cloud 資源連線](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection?hl=zh-tw#create-cloud-resource-connection)。
 
@@ -565,17 +566,17 @@ BigLake 支援自動偵測結構定義。不過，如果您未提供結構定義
 
      在 Google Cloud 控制台中[查看連線詳細資料](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw#view-connections)時，連線 ID 是「連線 ID」中顯示的完整連線 ID 最後一個部分的值，例如 `projects/myproject/locations/connection_location/connections/myconnection`。
 
-     如要使用[預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw)，請指定 `DEFAULT`，而不是包含 PROJECT\_ID.REGION.CONNECTION\_ID 的連線字串。
-   * `HIVE_PARTITION_URI_PREFIX`：Hive 分割 URI 前置字串，例如 `gs://mybucket/`
+     如要使用[預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw)，請指定 `DEFAULT`，而非包含 PROJECT\_ID.REGION.CONNECTION\_ID 的連線字串。
+   * `HIVE_PARTITION_URI_PREFIX`：Hive 分區 URI 前置字串，例如 `gs://mybucket/`
    * `FILE_PATH`：要建立的外部資料表資料來源路徑，例如 `gs://mybucket/*.parquet`
-   * `STALENESS_INTERVAL`：指定針對 BigLake 資料表執行的作業是否使用快取中繼資料，以及快取中繼資料必須有多新，作業才能使用。如要進一步瞭解中繼資料快取注意事項，請參閱「[中繼資料快取，提升效能](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw#metadata_caching_for_performance)」。
+   * `STALENESS_INTERVAL`：指定對 BigLake 資料表執行的作業是否使用快取中繼資料，以及快取中繼資料必須有多新，作業才能使用。如要進一步瞭解中繼資料快取注意事項，請參閱「[中繼資料快取提升效能](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw#metadata_caching_for_performance)」。
 
      如要停用中繼資料快取功能，請指定 0。這是目前的預設做法。
 
-     如要啟用中繼資料快取功能，請指定介於 30 分鐘至 7 天之間的[間隔常值](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#interval_literals)。舉例來說，如要指定 4 小時的過時間隔，請輸入 `INTERVAL 4 HOUR`。如果資料表在過去 4 小時內重新整理過，針對該資料表執行的作業就會使用快取中繼資料。如果快取中繼資料的建立時間早於該時間，作業會改為從 Cloud Storage 擷取中繼資料。
+     如要啟用中繼資料快取功能，請指定介於 30 分鐘至 7 天之間的[間隔常值](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#interval_literals)。舉例來說，如要指定 4 小時的過時間隔，請輸入 `INTERVAL 4 HOUR`。如果資料表在過去 4 小時內重新整理過，針對資料表執行的作業就會使用快取中繼資料。如果快取中繼資料的建立時間早於該時間，作業會改為從 Cloud Storage 擷取中繼資料。
    * `CACHE_MODE`：指定中繼資料快取是否自動或手動重新整理。如要進一步瞭解中繼資料快取注意事項，請參閱「[中繼資料快取，提升效能](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw#metadata_caching_for_performance)」。
 
-     設為 `AUTOMATIC`，中繼資料快取就會以系統定義的時間間隔 (通常為 30 到 60 分鐘) 重新整理。
+     設為 `AUTOMATIC`，中繼資料快取就會以系統定義的時間間隔重新整理，通常介於 30 到 60 分鐘之間。
 
      如要依您決定的時間表重新整理中繼資料快取，請設為 `MANUAL`。在這種情況下，您可以呼叫 [`BQ.REFRESH_EXTERNAL_METADATA_CACHE` 系統程序](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures?hl=zh-tw#bqrefresh_external_metadata_cache)來重新整理快取。
 
@@ -667,9 +668,9 @@ bq mkdef \
 * `BOOLEAN`：指定是否要在查詢時要求述詞篩選器。這個標記是選用的，預設值為 `false`。
 * `CACHE_MODE`：指定中繼資料快取是否自動或手動重新整理。如果您也打算在後續的 `bq mk` 指令中使用 `--max_staleness` 標記來啟用中繼資料快取，才需要加入這個標記。如要進一步瞭解中繼資料快取注意事項，請參閱「[中繼資料快取，提升效能](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw#metadata_caching_for_performance)」。
 
-  設為 `AUTOMATIC`，即可在系統定義的時間間隔 (通常介於 30 到 60 分鐘之間) 重新整理中繼資料快取。
+  設為 `AUTOMATIC`，中繼資料快取就會以系統定義的時間間隔重新整理，通常介於 30 到 60 分鐘之間。
 
-  如要依您決定的時間表重新整理中繼資料快取，請設為 `MANUAL`。在這種情況下，您可以呼叫[`BQ.REFRESH_EXTERNAL_METADATA_CACHE`系統程序](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures?hl=zh-tw#bqrefresh_external_metadata_cache)來重新整理快取。
+  如要依您決定的時間表重新整理中繼資料快取，請設為 `MANUAL`。在這種情況下，您可以呼叫 [`BQ.REFRESH_EXTERNAL_METADATA_CACHE` 系統程序](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures?hl=zh-tw#bqrefresh_external_metadata_cache)來重新整理快取。
 
   如果 `STALENESS_INTERVAL` 設為大於 0 的值，就必須設定 `CACHE_MODE`。
 * `GCS_URIS`：Cloud Storage 資料夾的路徑，使用萬用字元格式。
@@ -693,11 +694,11 @@ SCHEMA
 更改下列內容：
 
 * `DEFINITION_FILE`：資料表定義檔的路徑。
-* `STALENESS_INTERVAL`：指定對 BigLake 資料表執行的作業是否使用快取中繼資料，以及快取中繼資料必須有多新，作業才能使用。如要使用此旗標，您必須在先前的 `bq mkdef` 指令中，為 `--metadata_cache_mode` 旗標指定值。如要進一步瞭解中繼資料快取注意事項，請參閱「[中繼資料快取，提升效能](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw#metadata_caching_for_performance)」。
+* `STALENESS_INTERVAL`：指定對 BigLake 資料表執行的作業是否使用快取中繼資料，以及快取中繼資料必須有多新，作業才能使用。如要使用此旗標，您必須先在先前的 `bq mkdef` 指令中，為 `--metadata_cache_mode` 旗標指定值。如要進一步瞭解中繼資料快取注意事項，請參閱「[中繼資料快取，提升效能](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw#metadata_caching_for_performance)」。
 
   如要停用中繼資料快取功能，請指定 0。這是目前的預設做法。
 
-  如要啟用中繼資料快取，請使用[`INTERVAL` 資料類型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#interval_type)文件所述的 `Y-M D H:M:S` 格式，指定 30 分鐘到 7 天之間的時間間隔值。舉例來說，如要指定 4 小時的過時間隔，請輸入 `0-0 0 4:0:0`。如果資料表在過去 4 小時內重新整理過，針對該資料表執行的作業就會使用快取中繼資料。如果快取中繼資料的建立時間早於該時間，作業會改為從 Cloud Storage 擷取中繼資料。
+  如要啟用中繼資料快取，請使用[`INTERVAL`資料類型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#interval_type)文件所述的 `Y-M D H:M:S` 格式，指定 30 分鐘到 7 天之間的時間間隔值。舉例來說，如要指定 4 小時的過時間隔，請輸入 `0-0 0 4:0:0`。如果資料表在過去 4 小時內重新整理過，針對資料表執行的作業就會使用快取中繼資料。如果快取中繼資料的建立時間早於該時間，作業會改為從 Cloud Storage 擷取中繼資料。
 * `DATASET_NAME`：包含資料表的資料集名稱。
 * `TABLE_NAME`：您要建立的資料表名稱。
 * `SCHEMA`：指定 [JSON 結構定義檔](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#specifying_a_json_schema_file)的路徑，或以 `field:data_type,field:data_type,...` 形式指定結構定義。如要使用結構定義自動偵測功能，請省略這個引數。
@@ -750,9 +751,10 @@ bq mk --external_table_definition=mytable_def \
 
 ### API
 
-如要使用 BigQuery API 設定 Hive 分區，請在建立[資料表定義檔](https://docs.cloud.google.com/bigquery/external-table-definition?hl=zh-tw)時，將 [`hivePartitioningOptions`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables?hl=zh-tw#hivepartitioningoptions) 物件納入 [`ExternalDataConfiguration`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables?hl=zh-tw#externaldataconfiguration) 物件。如要建立 BigLake 資料表，您也必須為 `connectionId` 欄位指定值。
+如要使用 BigQuery API 設定 Hive 分割，請在建立[資料表定義檔](https://docs.cloud.google.com/bigquery/external-table-definition?hl=zh-tw)時，將 [`hivePartitioningOptions`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables?hl=zh-tw#hivepartitioningoptions) 物件納入 [`ExternalDataConfiguration`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables?hl=zh-tw#externaldataconfiguration) 物件。如要建立 BigLake 資料表，您也必須指定 `connectionId` 欄位的值。
 
-如果將 `hivePartitioningOptions.mode` 欄位設為 `CUSTOM`，則必須在 `hivePartitioningOptions.sourceUriPrefix` 欄位中編碼分區索引鍵結構定義，如下所示：`gs://BUCKET/PATH_TO_TABLE/{KEY1:TYPE1}/{KEY2:TYPE2}/...`
+如果將 `hivePartitioningOptions.mode` 欄位設為 `CUSTOM`，則必須在 `hivePartitioningOptions.sourceUriPrefix` 欄位中編碼分區索引鍵結構定義，如下所示：
+`gs://BUCKET/PATH_TO_TABLE/{KEY1:TYPE1}/{KEY2:TYPE2}/...`
 
 如要在查詢時強制使用述詞篩選器，請將 `hivePartitioningOptions.requirePartitionFilter` 欄位設為 `true`。
 
@@ -892,7 +894,7 @@ resource "google_bigquery_table" "default" {
 
    將程式碼範例複製到新建立的 `main.tf`。
 
-   視需要從 GitHub 複製程式碼。如果 Terraform 代码片段是端對端解決方案的一部分，建議您使用這個方法。
+   視需要從 GitHub 複製程式碼。如果 Terraform 程式碼片段是端對端解決方案的一部分，建議您使用這個方法。
 3. 查看並修改範例參數，套用至您的環境。
 4. 儲存變更。
 5. 初始化 Terraform。每個目錄只需執行一次這項操作。
@@ -925,7 +927,7 @@ resource "google_bigquery_table" "default" {
    等待 Terraform 顯示「Apply complete!」訊息。
 3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)即可查看結果。在 Google Cloud 控制台中，前往 UI 中的資源，確認 Terraform 已建立或更新這些資源。
 
-**注意：**Terraform 範例通常會假設 Google Cloud 專案已啟用必要的 API。
+**注意：**Terraform 範例通常會假設專案已啟用必要的 API。 Google Cloud
 
 ## 設定存取控管政策
 
@@ -974,13 +976,13 @@ SELECT * FROM projectid.mydataset.mytable;
 
 ## 查詢 BigLake 資料表
 
-詳情請參閱[查詢 BigLake 資料表中的 Cloud Storage 資料](https://docs.cloud.google.com/bigquery/docs/query-cloud-storage-using-biglake?hl=zh-tw)。
+詳情請參閱「[查詢 BigLake 資料表中的 Cloud Storage 資料](https://docs.cloud.google.com/bigquery/docs/query-cloud-storage-using-biglake?hl=zh-tw)」。
 
 ## 更新 BigLake 資料表
 
 您可以視需要更新 BigLake 資料表，例如變更[中繼資料快取](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw#metadata_caching_for_performance)。如要取得資料表詳細資料 (例如來源格式和來源 URI)，請參閱「[取得資料表資訊](https://docs.cloud.google.com/bigquery/docs/tables?hl=zh-tw#get_table_information)」。
 
-您也可以使用相同程序，將以 Cloud Storage 為基礎的外部資料表連結至連線，藉此升級為 BigLake 資料表。詳情請參閱[將外部資料表升級為 BigLake 資料表](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage?hl=zh-tw#upgrade-external-tables-to-biglake-tables)。
+您也可以使用相同程序，將以 Cloud Storage 為基礎的外部資料表連結至連線，藉此升級為 BigLake 資料表。詳情請參閱「[將外部資料表升級為 BigLake 資料表](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage?hl=zh-tw#upgrade-external-tables-to-biglake-tables)」。
 
 如要更新 BigLake 資料表，請選取下列其中一個選項：
 
@@ -1019,7 +1021,7 @@ SELECT * FROM projectid.mydataset.mytable;
      更新資料表時無法變更這項設定。
    * `BUCKET_PATH`：包含外部資料表資料的 Cloud Storage 值區路徑，格式為 `['gs://bucket_name/[folder_name/]file_name']`。
 
-     如要在路徑中指定一個星號 (`*`) 萬用字元，即可從 bucket 選取多個檔案。例如，`['gs://mybucket/file_name*']`。詳情請參閱「[Cloud Storage URI 的萬用字元支援](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage?hl=zh-tw#wildcard-support)」。
+     如要在路徑中指定一個星號 (`*`) 萬用字元，即可從值區選取多個檔案。例如，`['gs://mybucket/file_name*']`。詳情請參閱「[Cloud Storage URI 的萬用字元支援](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage?hl=zh-tw#wildcard-support)」。
 
      如要為 `uris` 選項指定多個值區，請提供多個路徑。
 
@@ -1031,19 +1033,19 @@ SELECT * FROM projectid.mydataset.mytable;
 
      指定以多個檔案為目標的 `uris` 值時，所有這些檔案都必須共用相容的結構定義。
 
-     如要進一步瞭解如何在 BigQuery 中使用 Cloud Storage URI，請參閱[Cloud Storage 資源路徑](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage?hl=zh-tw#google-cloud-storage-uri)。
-   * `STALENESS_INTERVAL`：指定對資料表執行的作業是否使用快取中繼資料，以及快取中繼資料必須有多新，作業才能使用
+     如要進一步瞭解如何在 BigQuery 中使用 Cloud Storage URI，請參閱「[Cloud Storage 資源路徑](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage?hl=zh-tw#google-cloud-storage-uri)」。
+   * `STALENESS_INTERVAL`：指定對資料表執行的作業是否使用快取中繼資料，以及作業必須使用多新的快取中繼資料
 
-     如要進一步瞭解中繼資料快取注意事項，請參閱「[中繼資料快取，提升效能](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw#metadata_caching_for_performance)」。
+     如要進一步瞭解中繼資料快取注意事項，請參閱「[中繼資料快取提升效能](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw#metadata_caching_for_performance)」。
 
      如要停用中繼資料快取功能，請指定 0。這是目前的預設做法。
 
-     如要啟用中繼資料快取功能，請指定介於 30 分鐘至 7 天之間的[間隔常值](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#interval_literals)。舉例來說，如要指定 4 小時的過時間隔，請輸入 `INTERVAL 4 HOUR`。如果資料表在過去 4 小時內重新整理過，針對該資料表執行的作業就會使用快取中繼資料。如果快取中繼資料的建立時間早於該時間，作業會改為從 Cloud Storage 擷取中繼資料。
+     如要啟用中繼資料快取功能，請指定介於 30 分鐘至 7 天之間的[間隔常值](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#interval_literals)。舉例來說，如要指定 4 小時的過時間隔，請輸入 `INTERVAL 4 HOUR`。如果資料表在過去 4 小時內重新整理過，針對資料表執行的作業就會使用快取中繼資料。如果快取中繼資料的建立時間早於該時間，作業會改為從 Cloud Storage 擷取中繼資料。
    * `CACHE_MODE`：指定中繼資料快取是否自動或手動重新整理
 
      如要進一步瞭解中繼資料快取注意事項，請參閱「[中繼資料快取，提升效能](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw#metadata_caching_for_performance)」。
 
-     設為 `AUTOMATIC`，中繼資料快取就會以系統定義的時間間隔 (通常為 30 到 60 分鐘) 重新整理。
+     設為 `AUTOMATIC`，中繼資料快取就會以系統定義的時間間隔重新整理，通常介於 30 到 60 分鐘之間。
 
      如要依您決定的時間表重新整理中繼資料快取，請設為 `MANUAL`。在這種情況下，您可以呼叫 [`BQ.REFRESH_EXTERNAL_METADATA_CACHE` 系統程序](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures?hl=zh-tw#bqrefresh_external_metadata_cache)來重新整理快取。
 
@@ -1071,9 +1073,9 @@ SELECT * FROM projectid.mydataset.mytable;
    * `REGION`：包含連線的區域
    * `CONNECTION_ID`：要使用的連線名稱
    * `TABLE_FORMAT`：資料表使用的格式。更新資料表時無法變更這項設定。
-   * `CACHE_MODE`：指定中繼資料快取是否自動或手動重新整理。如要進一步瞭解中繼資料快取考量事項，請參閱「[中繼資料快取提升效能](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw#metadata_caching_for_performance)」一文。
+   * `CACHE_MODE`：指定中繼資料快取是否自動或手動重新整理。如要進一步瞭解中繼資料快取考量事項，請參閱「[中繼資料快取提升效能](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw#metadata_caching_for_performance)」。
 
-     設為 `AUTOMATIC`，中繼資料快取就會以系統定義的時間間隔重新整理，通常介於 30 到 60 分鐘之間。
+     如要以系統定義的時間間隔 (通常為 30 到 60 分鐘) 重新整理中繼資料快取，請設為 `AUTOMATIC`。
 
      如要依您決定的時間表重新整理中繼資料快取，請設為 `MANUAL`。在這種情況下，您可以呼叫 [`BQ.REFRESH_EXTERNAL_METADATA_CACHE` 系統程序](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures?hl=zh-tw#bqrefresh_external_metadata_cache)來重新整理快取。
 
@@ -1082,7 +1084,7 @@ SELECT * FROM projectid.mydataset.mytable;
 
      如要在路徑中指定一個星號 (`*`) 萬用字元，即可限制從值區選取的檔案。例如，`gs://mybucket/file_name*`。詳情請參閱「[Cloud Storage URI 的萬用字元支援](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage?hl=zh-tw#wildcard-support)」。
 
-     如要為 `uris` 選項指定多個值區，請提供多個路徑。
+     您可以提供多個路徑，為 `uris` 選項指定多個值區。
 
      以下範例顯示有效的 `uris` 值：
 
@@ -1090,7 +1092,7 @@ SELECT * FROM projectid.mydataset.mytable;
      + `gs://bucket/path1/*.csv`
      + `gs://bucket/path1/*,gs://bucket/path2/file00*`
 
-     指定以多個檔案為目標的 `uris` 值時，所有檔案都必須共用相容的結構定義。
+     指定以多個檔案為目標的 `uris` 值時，所有這些檔案都必須共用相容的結構定義。
 
      如要進一步瞭解如何在 BigQuery 中使用 Cloud Storage URI，請參閱「[Cloud Storage 資源路徑](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage?hl=zh-tw#google-cloud-storage-uri)」。
    * `DEFINITION_FILE`：您要建立的資料表定義檔名稱。
@@ -1108,7 +1110,7 @@ SELECT * FROM projectid.mydataset.mytable;
 
      如要停用中繼資料快取功能，請指定 0。這是目前的預設做法。
 
-     如要啟用中繼資料快取，請使用[`INTERVAL` 資料類型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#interval_type)文件所述的 `Y-M D H:M:S` 格式，指定 30 分鐘到 7 天之間的間隔值。舉例來說，如要指定 4 小時的過時間隔，請輸入 `0-0 0 4:0:0`。如果資料表在過去 4 小時內重新整理過，針對該資料表執行的作業就會使用快取中繼資料。如果快取中繼資料較舊，作業會改為從 Cloud Storage 擷取中繼資料。
+     如要啟用中繼資料快取，請使用[`INTERVAL`資料類型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#interval_type)文件所述的 `Y-M D H:M:S` 格式，指定 30 分鐘到 7 天之間的時間間隔值。舉例來說，如要指定 4 小時的過時間隔，請輸入 `0-0 0 4:0:0`。如果資料表在過去 4 小時內重新整理過，針對該資料表執行的作業就會使用快取中繼資料。如果快取中繼資料較舊，作業會改為從 Cloud Storage 擷取中繼資料。
    * `DEFINITION_FILE`：您建立或更新的資料表定義檔案名稱。
    * `PROJECT_ID`：包含資料表的專案名稱
    * `DATASET`：含有資料表的資料集名稱
@@ -1131,7 +1133,7 @@ bq update --project_id=myproject --max_staleness='0-0 0 4:30:0' \
 
 ## 稽核記錄
 
-如要瞭解 BigQuery 中的記錄，請參閱「[BigQuery 監控簡介](https://docs.cloud.google.com/bigquery/docs/monitoring?hl=zh-tw)」。如要進一步瞭解 Google Cloud中的記錄，請參閱 [Cloud Logging](https://docs.cloud.google.com/logging/docs?hl=zh-tw)。
+如要瞭解 BigQuery 中的記錄功能，請參閱「[BigQuery 監控簡介](https://docs.cloud.google.com/bigquery/docs/monitoring?hl=zh-tw)」。如要進一步瞭解 Google Cloud中的記錄，請參閱 [Cloud Logging](https://docs.cloud.google.com/logging/docs?hl=zh-tw)。
 
 ## 後續步驟
 
@@ -1147,11 +1149,11 @@ bq update --project_id=myproject --max_staleness='0-0 0 4:30:0' \
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-27 (世界標準時間)。
+上次更新時間：2026-05-29 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-27 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-29 (世界標準時間)。"],[],[]]

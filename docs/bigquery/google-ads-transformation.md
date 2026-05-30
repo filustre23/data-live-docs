@@ -80,10 +80,10 @@ Google Ads API Resource:
 | metrics\_cost\_micros | The sum of your cost-per-click (CPC) and cost-per-thousand impressions (CPM) costs during this period. | Cost |
 | metrics\_impressions | Count of how often your ad has appeared on a search results page or website on the Google Network. | Impressions |
 | metrics\_interaction\_event\_types | The types of payable and free interactions. | InteractionTypes |
-| metrics\_interactions | The number of interactions. An interaction is the main user action associated with an ad format, such as clicks for text and shopping ads or views for video ads. | Interactions |
-| metrics\_view\_through\_conversions | The total number of view-through conversions. These happen when a customer sees an image or rich media ad, then later completes a conversion on your site without interacting with (for example, clicking on) another ad. | ViewThroughConversions |
+| metrics\_interactions | The number of interactions. An interaction is the main user action associated with an ad format-clicks for text and shopping ads, views for video ads, and so on. | Interactions |
+| metrics\_view\_through\_conversions | The total number of view-through conversions. These happen when a customer sees an image or rich media ad, then later completes a conversion on your site without interacting with (For example, clicking on) another ad. | ViewThroughConversions |
 | segments\_ad\_network\_type | Ad network type. | AdNetworkType2 |
-| segments\_date | Date to which metrics apply. yyyy-MM-dd format. For example, 2018-04-17. | Date |
+| segments\_date | Date to which metrics apply. yyyy-MM-dd format, For example, 2018-04-17. | Date |
 | segments\_device | Device to which metrics apply. | Device |
 | segments\_slot | Position of the ad. | Slot |
 
@@ -103,11 +103,11 @@ Google Ads API Resource:
 | segments\_conversion\_action | Resource name of the conversion action. | ConversionTrackerId |
 | segments\_conversion\_action\_category | Conversion action category. | ConversionCategoryName |
 | segments\_conversion\_action\_name | Conversion action name. | ConversionTypeName |
-| segments\_date | Date to which metrics apply. yyyy-MM-dd format. For example, 2018-04-17. | Date |
-| segments\_day\_of\_week | Day of the week. For example, MONDAY. | DayOfWeek |
+| segments\_date | Date to which metrics apply. yyyy-MM-dd format, For example, 2018-04-17. | Date |
+| segments\_day\_of\_week | Day of the week, For example, MONDAY. | DayOfWeek |
 | segments\_device | Device to which metrics apply. | Device |
 | segments\_month | Month as represented by the date of the first day of a month. Formatted as yyyy-MM-dd. | Month |
-| segments\_quarter | Quarter as represented by the date of the first day of a quarter. Uses the calendar year for quarters. For example, the second quarter of 2018 starts on 2018-04-01. Formatted as yyyy-MM-dd. | Quarter |
+| segments\_quarter | Quarter as represented by the date of the first day of a quarter. Uses the calendar year for quarters, For example, the second quarter of 2018 starts on 2018-04-01. Formatted as yyyy-MM-dd. | Quarter |
 | segments\_slot | Position of the ad. | Slot |
 | segments\_week | Week as defined as Monday through Sunday, and represented by the date of Monday. Formatted as yyyy-MM-dd. | Week |
 | segments\_year | Year, formatted as yyyy. | Year |
@@ -124,7 +124,7 @@ Google Ads API Resource:
 | metrics\_all\_conversions\_from\_interactions\_rate | All conversions from interactions (as oppose to view through conversions) divided by the number of ad interactions. | AllConversionRate |
 | metrics\_all\_conversions\_value | The total value of all conversions. | AllConversionValue |
 | metrics\_average\_cpe | The average amount that you've been charged for an ad engagement. This amount is the total cost of all ad engagements divided by the total number of ad engagements. | AverageCpe |
-| metrics\_trueview\_average\_cpv | The average amount you pay each time someone views your ad. The average CPV is defined by the total cost of all ad views divided by the number of views. | AverageCpv |
+| metrics\_trueview\_average\_cpv | The average amount you pay each time someone views your ad. The average CPV is defined by the total cost of all ad views divided by the number of TrueView views. | AverageCpv |
 | metrics\_content\_budget\_lost\_impression\_share | The estimated percent of times that your ad was eligible to show on the Display Network but didn't because your budget was too low. Note: Content budget lost impression share is reported in the range of 0 to 0.9. Any value above 0.9 is reported as 0.9001. | ContentBudgetLostImpressionShare |
 | metrics\_content\_impression\_share | The impressions you've received on the Display Network divided by the estimated number of impressions you were eligible to receive. Note: Content impression share is reported in the range of 0.1 to 1. Any value below 0.1 is reported as 0.0999. | ContentImpressionShare |
 | metrics\_content\_rank\_lost\_impression\_share | The estimated percentage of impressions on the Display Network that your ads didn't receive due to poor Ad Rank. Note: Content rank lost impression share is reported in the range of 0 to 0.9. Any value above 0.9 is reported as 0.9001. | ContentRankLostImpressionShare |
@@ -139,13 +139,13 @@ Google Ads API Resource:
 | metrics\_search\_impression\_share | The impressions you've received on the Search Network divided by the estimated number of impressions you were eligible to receive. Note: Search impression share is reported in the range of 0.1 to 1. Any value below 0.1 is reported as 0.0999. | SearchImpressionShare |
 | metrics\_search\_rank\_lost\_impression\_share | The estimated percentage of impressions on the Search Network that your ads didn't receive due to poor Ad Rank. Note: Search rank lost impression share is reported in the range of 0 to 0.9. Any value above 0.9 is reported as 0.9001. | SearchRankLostImpressionShare |
 | metrics\_value\_per\_all\_conversions | The value of all conversions divided by the number of all conversions. | ValuePerAllConversion |
-| metrics\_video\_trueview\_view\_rate | The number of views your TrueView video ad receives divided by its number of impressions, including thumbnail impressions for TrueView in-display ads. | VideoViewRate |
-| metrics\_video\_trueview\_views | The number of times your video ads were viewed. | VideoViews |
+| metrics\_video\_trueview\_view\_rate | The number of TrueView views your video ad receives divided by its number of impressions, including thumbnail impressions for TrueView in-display ads. | VideoViewRate |
+| metrics\_video\_trueview\_views | The number of TrueView views your video ads received. | VideoViews |
 | segments\_ad\_network\_type | Ad network type. | AdNetworkType2 |
-| segments\_date | Date to which metrics apply. yyyy-MM-dd format. For example, 2018-04-17. | Date |
-| segments\_day\_of\_week | Day of the week. For example, MONDAY. | DayOfWeek |
+| segments\_date | Date to which metrics apply. yyyy-MM-dd format, For example, 2018-04-17. | Date |
+| segments\_day\_of\_week | Day of the week, For example, MONDAY. | DayOfWeek |
 | segments\_month | Month as represented by the date of the first day of a month. Formatted as yyyy-MM-dd. | Month |
-| segments\_quarter | Quarter as represented by the date of the first day of a quarter. Uses the calendar year for quarters. For example, the second quarter of 2018 starts on 2018-04-01. Formatted as yyyy-MM-dd. | Quarter |
+| segments\_quarter | Quarter as represented by the date of the first day of a quarter. Uses the calendar year for quarters, For example, the second quarter of 2018 starts on 2018-04-01. Formatted as yyyy-MM-dd. | Quarter |
 | segments\_week | Week as defined as Monday through Sunday, and represented by the date of Monday. Formatted as yyyy-MM-dd. | Week |
 | segments\_year | Year, formatted as yyyy. | Year |
 
@@ -157,7 +157,7 @@ Google Ads API Resource:
 | Google Ads Field Name | Description | Adwords Mapped Field Name |
 | --- | --- | --- |
 | customer\_id | The ID of the customer. | ExternalCustomerId |
-| metrics\_active\_view\_cpm | Average cost of viewable impressions (`active\_view\_impressions`). | ActiveViewCpm |
+| metrics\_active\_view\_cpm | Average cost of viewable impressions (`active_view_impressions`). | ActiveViewCpm |
 | metrics\_active\_view\_ctr | Active view measurable clicks divided by active view viewable impressions. This metric is reported only for display network. | ActiveViewCtr |
 | metrics\_active\_view\_impressions | A measurement of how often your ad has become viewable on a Display Network site. | ActiveViewImpressions |
 | metrics\_active\_view\_measurability | The ratio of impressions that could be measured by Active View over the number of served impressions. | ActiveViewMeasurability |
@@ -177,15 +177,15 @@ Google Ads API Resource:
 | metrics\_impressions | Count of how often your ad has appeared on a search results page or website on the Google Network. | Impressions |
 | metrics\_interaction\_event\_types | The types of payable and free interactions. | InteractionTypes |
 | metrics\_interaction\_rate | How often people interact with your ad after it is shown to them. This is the number of interactions divided by the number of times your ad is shown. | InteractionRate |
-| metrics\_interactions | The number of interactions. An interaction is the main user action associated with an ad format, such as clicks for text and shopping ads or views for video ads. | Interactions |
+| metrics\_interactions | The number of interactions. An interaction is the main user action associated with an ad format-clicks for text and shopping ads, views for video ads, and so on. | Interactions |
 | metrics\_value\_per\_conversion | The value of conversions divided by the number of conversions. This only includes conversion actions which include\_in\_conversions\_metric attribute is set to true. | ValuePerConversion |
 | segments\_ad\_network\_type | Ad network type. | AdNetworkType2 |
 | segments\_click\_type | Click type. | ClickType |
-| segments\_date | Date to which metrics apply. yyyy-MM-dd format. For example, 2018-04-17. | Date |
-| segments\_day\_of\_week | Day of the week. For example, MONDAY. | DayOfWeek |
+| segments\_date | Date to which metrics apply. yyyy-MM-dd format, For example, 2018-04-17. | Date |
+| segments\_day\_of\_week | Day of the week, For example, MONDAY. | DayOfWeek |
 | segments\_device | Device to which metrics apply. | Device |
 | segments\_month | Month as represented by the date of the first day of a month. Formatted as yyyy-MM-dd. | Month |
-| segments\_quarter | Quarter as represented by the date of the first day of a quarter. Uses the calendar year for quarters. For example, the second quarter of 2018 starts on 2018-04-01. Formatted as yyyy-MM-dd. | Quarter |
+| segments\_quarter | Quarter as represented by the date of the first day of a quarter. Uses the calendar year for quarters, For example, the second quarter of 2018 starts on 2018-04-01. Formatted as yyyy-MM-dd. | Quarter |
 | segments\_week | Week as defined as Monday through Sunday, and represented by the date of Monday. Formatted as yyyy-MM-dd. | Week |
 | segments\_year | Year, formatted as yyyy. | Year |
 
@@ -197,14 +197,16 @@ Google Ads API Resource:
 | Google Ads Field Name | Description | Adwords Mapped Field Name |
 | --- | --- | --- |
 | ad\_group\_ad\_ad\_added\_by\_google\_ads | Indicates if this ad was automatically added by Google Ads and not by a user. For example, this could happen when ads are automatically created as suggestions for new ads based on knowledge of how existing ads are performing. | Automated |
-| ad\_group\_ad\_ad\_app\_ad\_descriptions | List of text assets for descriptions. When the ad serves the descriptions, they are selected from this list. | UniversalAppAdDescriptions |
-| ad\_group\_ad\_ad\_app\_ad\_headlines | List of text assets for headlines. When the ad serves the headlines is selected from this list. | UniversalAppAdHeadlines |
+| ad\_group\_ad\_policy\_summary\_approval\_status | Output only. The overall approval status of this ad, calculated based on the status of its individual policy topic entries. | CombinedApprovalStatus |
+| ad\_group\_id | Output only. The ID of the ad group. | AdGroupId |
+| ad\_group\_ad\_ad\_app\_ad\_descriptions | List of text assets for descriptions. When the ad serves the descriptions will be selected from this list. | UniversalAppAdDescriptions |
+| ad\_group\_ad\_ad\_app\_ad\_headlines | List of text assets for headlines. When the ad serves the headlines will be selected from this list. | UniversalAppAdHeadlines |
 | ad\_group\_ad\_ad\_app\_ad\_html5\_media\_bundles | List of media bundle assets that may be used with the ad. | UniversalAppAdHtml5MediaBundles |
 | ad\_group\_ad\_ad\_app\_ad\_images | List of image assets that may be displayed with the ad. | UniversalAppAdImages |
 | ad\_group\_ad\_ad\_app\_ad\_mandatory\_ad\_text | An optional text asset that, if specified, must always be displayed when the ad is served. | UniversalAppAdMandatoryAdText |
 | ad\_group\_ad\_ad\_app\_ad\_youtube\_videos | List of YouTube video assets that may be displayed with the ad. | UniversalAppAdYouTubeVideos |
 | ad\_group\_ad\_ad\_call\_ad\_phone\_number | The phone number in the ad. | CallOnlyPhoneNumber |
-| ad\_group\_ad\_ad\_device\_preference | The device preference for the ad. You can only specify a preference for mobile devices. When this preference is set, the ad is preferred over other ads when being displayed on a mobile device. The ad can still be displayed on other device types. For example, if no other ads are available. If unspecified (no device preference), all devices are targeted. This is only supported by some ad types. |  |
+| ad\_group\_ad\_ad\_device\_preference | The device preference for the ad. You can only specify a preference for mobile devices. When this preference is set the ad will be preferred over other ads when being displayed on a mobile device. The ad can still be displayed on other device types, For example if no other ads are available. If unspecified (no device preference), all devices are targeted. This is only supported by some ad types. |  |
 | ad\_group\_ad\_ad\_display\_url | The URL that appears in the ad description for some ad formats. | DisplayUrl |
 | ad\_group\_ad\_ad\_expanded\_dynamic\_search\_ad\_description | The description of the ad. |  |
 | ad\_group\_ad\_ad\_expanded\_dynamic\_search\_ad\_description2 | The second description of the ad. | ExpandedDynamicSearchCreativeDescription2 |
@@ -215,7 +217,7 @@ Google Ads API Resource:
 | ad\_group\_ad\_ad\_expanded\_text\_ad\_headline\_part3 | The third part of the ad's headline. | ExpandedTextAdHeadlinePart3 |
 | ad\_group\_ad\_ad\_expanded\_text\_ad\_path1 | The text that can appear alongside the ad's displayed URL. | Path1 |
 | ad\_group\_ad\_ad\_expanded\_text\_ad\_path2 | Additional text that can appear alongside the ad's displayed URL. | Path2 |
-| ad\_group\_ad\_ad\_final\_app\_urls | A list of final app URLs that are used on mobile if the user has the specific app installed. | CreativeFinalAppUrls |
+| ad\_group\_ad\_ad\_final\_app\_urls | A list of final app URLs that will be used on mobile if the user has the specific app installed. | CreativeFinalAppUrls |
 | ad\_group\_ad\_ad\_final\_mobile\_urls | The list of possible final mobile URLs after all cross-domain redirects for the ad. | CreativeFinalMobileUrls |
 | ad\_group\_ad\_ad\_final\_urls | The list of possible final URLs after all cross-domain redirects for the ad. | CreativeFinalUrls |
 | ad\_group\_ad\_ad\_group | The ad group to which the ad belongs. |  |
@@ -225,12 +227,18 @@ Google Ads API Resource:
 | ad\_group\_ad\_ad\_image\_ad\_name | The name of the image. If the image was created from a MediaFile, this is the MediaFile's name. If the image was created from bytes, this is empty. | ImageCreativeName |
 | ad\_group\_ad\_ad\_image\_ad\_pixel\_height | Height in pixels of the full size image. | ImageCreativeImageHeight |
 | ad\_group\_ad\_ad\_image\_ad\_pixel\_width | Width in pixels of the full size image. | ImageCreativeImageWidth |
-| ad\_group\_ad\_ad\_legacy\_responsive\_display\_ad\_accent\_color | The accent color of the ad in hexadecimal. For example, #ffffff for white. If one of main\_color and accent\_color is set, the other is required as well. | AccentColor |
-| ad\_group\_ad\_ad\_legacy\_responsive\_display\_ad\_allow\_flexible\_color | Advertiser's consent to allow flexible color. When true, the ad may be served with different colors if necessary. When false, the ad is served with the specified colors or a neutral color. The default value is true. Must be true if main\_color and accent\_color are not set. | AllowFlexibleColor |
+| ad\_group\_ad\_ad\_legacy\_responsive\_display\_ad\_accent\_color | The accent color of the ad in hexadecimal, For example #ffffff for white. If one of main\_color and accent\_color is set, the other is required as well. | AccentColor |
+| ad\_group\_ad\_ad\_legacy\_responsive\_display\_ad\_allow\_flexible\_color | Advertiser's consent to allow flexible color. When true, the ad may be served with different color if necessary. When false, the ad will be served with the specified colors or a neutral color. The default value is true. Must be true if main\_color and accent\_color are not set. | AllowFlexibleColor |
 | ad\_group\_ad\_ad\_legacy\_responsive\_display\_ad\_business\_name | The business name in the ad. | BusinessName |
 | ad\_group\_ad\_ad\_legacy\_responsive\_display\_ad\_call\_to\_action\_text | The call-to-action text for the ad. | CallToActionText |
 | ad\_group\_ad\_ad\_legacy\_responsive\_display\_ad\_description | The description of the ad. | Description |
-| ad\_group\_ad\_ad\_legacy\_responsive\_display\_ad\_format\_setting | Specifies which format the ad is served in. Default is ALL\_FORMATS. | FormatSetting |
+| ad\_group\_ad\_ad\_legacy\_responsive\_display\_ad\_format\_setting | Specifies which format the ad will be served in. Default is ALL\_FORMATS. | FormatSetting |
 | ad\_group\_ad\_ad\_legacy\_responsive\_display\_ad\_logo\_image | The MediaFile resource name of the logo image used in the ad. | EnhancedDisplayCreativeLandscapeLogoImageMediaId |
 | ad\_group\_ad\_ad\_legacy\_responsive\_display\_ad\_long\_headline | The long version of the ad's headline. | LongHeadline |
-| ad\_group\_ad\_ad\_legacy\_responsive\_display\_ad\_main\_color | The main color of the ad in hexadecimal. For example, #ffffff for white. If one of main\_color and accent\_color is set, t |
+| ad\_group\_ad\_ad\_legacy\_responsive\_display\_ad\_main\_color | The main color of the ad in hexadecimal, For example #ffffff for white. If one of main\_color and accent\_color is set, the other is required as well. | MainColor |
+| ad\_group\_ad\_ad\_legacy\_responsive\_display\_ad\_marketing\_image | The MediaFile resource name of the marketing image used in the ad. | EnhancedDisplayCreativeMarketingImageMediaId |
+| ad\_group\_ad\_ad\_legacy\_responsive\_display\_ad\_price\_prefix | Prefix before price. For example 'as low as'. | PricePrefix |
+| ad\_group\_ad\_ad\_legacy\_responsive\_display\_ad\_promo\_text | Promotion text used for dynamic formats of responsive ads. For example 'Free two-day shipping'. | PromoText |
+| ad\_group\_ad\_ad\_legacy\_responsive\_display\_ad\_short\_headline | The short version of the ad's headline. | ShortHeadline |
+| ad\_group\_ad\_ad\_legacy\_responsive\_display\_ad\_square\_logo\_image | The MediaFile resource name of the square logo image used in the ad. | EnhancedDisplayCreativeLogoImageMediaId |
+| ad\_group\_ad\_ad\_legacy\_responsive\_display\_ad\_square\_marketing\_image | The MediaFile resource name of the square marketing image used in the ad. | EnhancedDisplayCreativeMarketingIm |

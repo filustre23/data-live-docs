@@ -41,7 +41,7 @@ BOMs, see [The Google Cloud Platform Libraries BOM](https://cloud.google.com/jav
     <dependency>
       <groupId>com.google.cloud</groupId>
       <artifactId>libraries-bom</artifactId>
-      <version>26.82.0</version>
+      <version>26.83.0</version>
       <type>pom</type>
       <scope>import</scope>
     </dependency>

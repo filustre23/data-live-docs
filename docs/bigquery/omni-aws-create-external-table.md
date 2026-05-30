@@ -14,15 +14,15 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 你可以依據偏好儲存及分類內容。
 
-# S3 的外部資料表
+# 建立 Amazon S3 BigLake 資料表
 
-本文說明如何建立 Amazon Simple Storage Service (Amazon S3) BigLake 資料表。[BigLake 資料表](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw)可讓您使用存取權委派，查詢 Amazon S3 中的資料。存取權委派功能可將 BigLake 資料表的存取權，與基礎資料儲存空間的存取權分開。
+本文說明如何建立 Amazon Simple Storage Service (Amazon S3) BigLake 資料表。[BigLake 資料表](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw)可讓您使用存取權委派，查詢 Amazon S3 中的資料。存取權委派功能可將 BigLake 資料表的存取權，與基礎資料儲存區的存取權分開。
 
 如要瞭解 BigQuery 和 Amazon S3 之間的資料流程，請參閱[查詢資料時的資料流程](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw#query-data)。
 
 ## 事前準備
 
-確認你已[連線來存取 Amazon S3 資料](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-connection?hl=zh-tw)。
+確認你已[連線存取 Amazon S3 資料](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-connection?hl=zh-tw)。
 
 ### 必要的角色
 
@@ -54,14 +54,15 @@ Google uses AI technology to translate content into your preferred language. AI 
 5. 在「建立資料集」頁面中，指定下列詳細資料：
 
 1. 針對「Dataset ID」(資料集 ID)，輸入唯一的資料集[名稱](https://docs.cloud.google.com/bigquery/docs/datasets?hl=zh-tw#dataset-naming)。
-2. 針對「Data location」(資料位置)，選擇[支援的地區](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw#locations)。
+2. 針對「Data location」(資料位置)，選擇[支援的區域](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw#locations)。
 3. 選用：如要自動刪除資料表，請勾選「Enable table expiration」(啟用資料表到期時間) 核取方塊，並以天為單位設定「Default maximum table age」(預設資料表存在時間上限)。資料表到期時，系統不會刪除 Amazon S3 中的資料。
 4. 如要使用[預設定序](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts?hl=zh-tw)，請展開「進階選項」部分，然後選取「啟用預設定序」選項。
 5. 點選「建立資料集」。
 
 ### SQL
 
-使用 [`CREATE SCHEMA` DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#create_schema_statement)。以下範例會在 `aws-us-east-1` 區域中建立資料集：
+使用 [`CREATE SCHEMA` DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#create_schema_statement)。
+以下範例會在 `aws-us-east-1` 區域中建立資料集：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -79,7 +80,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### bq
 
-在指令列環境中，使用 [`bq mk` 指令建立資料集：](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#mk-dataset)
+在指令列環境中，使用 [`bq mk` 指令建立資料集](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#mk-dataset)：
 
 ```
 bq --location=LOCATION mk \
@@ -164,11 +165,11 @@ public class CreateDatasetAws {
    3. 在「File format」(檔案格式) 部分選取 Amazon S3 中的資料格式。支援的格式包括 **AVRO**、**CSV**、**DELTA\_LAKE**、**ICEBERG**、**JSONL**、**ORC** 和 **PARQUET**。
 6. 在「目的地」部分，指定下列詳細資料：
 
-   1. 在「Dataset」(資料集) 中選擇適當的資料集。
+   1. 在「Dataset」(資料集) 部分，選擇適當的資料集。
    2. 在「Table」(資料表) 欄位中，輸入資料表名稱。
    3. 確認「Table type」(資料表類型) 已設為 [External table] (外部資料表)。
    4. 在「Connection ID」(連線 ID) 專區中，從下拉式選單選擇適當的連線 ID。如需連線相關資訊，請參閱「[連結至 Amazon S3](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-connection?hl=zh-tw)」一文。
-7. 在「Schema」(結構定義) 區段中，您可以啟用[結構定義自動偵測](https://docs.cloud.google.com/bigquery/docs/schema-detect?hl=zh-tw)功能，也可以手動指定結構定義 (如有來源檔案)。如果沒有來源檔案，就必須手動指定結構定義。
+7. 在「結構定義」部分，您可以啟用[結構定義自動偵測](https://docs.cloud.google.com/bigquery/docs/schema-detect?hl=zh-tw)功能，也可以在有來源檔案時手動指定結構定義。如果沒有來源檔案，就必須手動指定結構定義。
 
    * 如要啟用結構定義自動偵測功能，請選取「自動偵測」選項。
    * 如要手動指定結構定義，請取消勾選「自動偵測」選項。啟用「以文字形式編輯」，然後以 [JSON 陣列](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#specifying_a_json_schema_file)的形式輸入資料表結構定義。
@@ -199,7 +200,7 @@ public class CreateDatasetAws {
    * `TABLE_NAME`：您要為這個資料表指定的名稱
    * `AWS_LOCATION`：AWS 位置(例如 `aws-us-east-1`) Google Cloud
    * `CONNECTION_NAME`：您建立的連線名稱
-   * `DATA_FORMAT`：任何支援的 [BigQuery 聯合格式](https://docs.cloud.google.com/bigquery/external-data-sources?hl=zh-tw) (例如 `AVRO`、`CSV`、`DELTA_LAKE`、`ICEBERG` 或 `PARQUET` ([預覽版](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)))
+   * `DATA_FORMAT`：任何支援的 [BigQuery 聯合格式](https://docs.cloud.google.com/bigquery/external-data-sources?hl=zh-tw) (例如 `AVRO`、`CSV`、`DELTA_LAKE`、`ICEBERG` 或 `PARQUET` ([搶先版](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)))
    * `S3_URI`：指向 Amazon S3 資料的 URI (例如 `s3://bucket/path`)
    * `STALENESS_INTERVAL`：指定對 BigLake 資料表執行的作業是否使用快取中繼資料，以及快取中繼資料必須有多新，作業才能使用。如要進一步瞭解中繼資料快取注意事項，請參閱「[中繼資料快取，提升效能](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw#metadata_caching_for_performance)」。
 
@@ -208,7 +209,7 @@ public class CreateDatasetAws {
      如要啟用中繼資料快取功能，請指定介於 30 分鐘至 7 天之間的[間隔常值](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#interval_literals)。舉例來說，如要指定 4 小時的過時間隔，請輸入 `INTERVAL 4 HOUR`。如果資料表在過去 4 小時內重新整理過，針對資料表執行的作業就會使用快取中繼資料。如果快取中繼資料較舊，作業會改為從 Amazon S3 擷取中繼資料。
    * `CACHE_MODE`：指定中繼資料快取是否自動或手動重新整理。如要進一步瞭解中繼資料快取注意事項，請參閱「[中繼資料快取，提升效能](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw#metadata_caching_for_performance)」。
 
-     設為 `AUTOMATIC`，中繼資料快取就會以系統定義的時間間隔 (通常為 30 到 60 分鐘) 重新整理。
+     設為 `AUTOMATIC`，中繼資料快取就會以系統定義的時間間隔重新整理，通常介於 30 到 60 分鐘之間。
 
      如要依您決定的時間表重新整理中繼資料快取，請設為 `MANUAL`。在這種情況下，您可以呼叫 [`BQ.REFRESH_EXTERNAL_METADATA_CACHE` 系統程序](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures?hl=zh-tw#bqrefresh_external_metadata_cache)來重新整理快取。
 
@@ -246,11 +247,11 @@ S3_URI > table_def
 
 * `DATA_FORMAT`：任何支援的 [BigQuery 聯合格式](https://docs.cloud.google.com/bigquery/external-data-sources?hl=zh-tw) (例如 `AVRO`、`CSV`、`DELTA_LAKE`、`ICEBERG` 或 `PARQUET`)。
 * `S3_URI`：指向 Amazon S3 資料的 URI (例如 `s3://bucket/path`)。
-* `AWS_LOCATION`：AWS 位置(例如 `aws-us-east-1`)。 Google Cloud
+* `AWS_LOCATION`：AWS 位置(例如 Google Cloud )。`aws-us-east-1`
 * `CONNECTION_NAME`：您建立的連線名稱。
-* `CACHE_MODE`：指定中繼資料快取是否自動或手動重新整理。只有當您也打算在後續的 `bq mk` 指令中使用 `--max_staleness` 標記來啟用中繼資料快取時，才需要加入這個標記。如要進一步瞭解中繼資料快取注意事項，請參閱「[中繼資料快取，提升效能](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw#metadata_caching_for_performance)」。
+* `CACHE_MODE`：指定中繼資料快取是否自動或手動重新整理。如果您也打算在後續的 `bq mk` 指令中使用 `--max_staleness` 標記來啟用中繼資料快取，才需要加入這個標記。如要進一步瞭解中繼資料快取注意事項，請參閱「[中繼資料快取提升效能](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw#metadata_caching_for_performance)」一文。
 
-  設為 `AUTOMATIC`，即可在系統定義的時間間隔 (通常介於 30 到 60 分鐘之間) 重新整理中繼資料快取。
+  設為 `AUTOMATIC`，中繼資料快取就會以系統定義的時間間隔重新整理，通常介於 30 到 60 分鐘之間。
 
   如要依您決定的時間表重新整理中繼資料快取，請設為 `MANUAL`。在這種情況下，您可以呼叫 [`BQ.REFRESH_EXTERNAL_METADATA_CACHE` 系統程序](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures?hl=zh-tw#bqrefresh_external_metadata_cache)來重新整理快取。如果 `STALENESS_INTERVAL` 設為大於 0 的值，就必須設定 `CACHE_MODE`。
 
@@ -268,11 +269,11 @@ bq mk --max_staleness=STALENESS_INTERVAL --external_table_definition=table_def D
 
   如要停用中繼資料快取功能，請指定 0。這是目前的預設做法。
 
-  如要啟用中繼資料快取功能，請指定介於 30 分鐘至 7 天之間的[間隔常值](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#interval_literals)。舉例來說，如要指定 4 小時的過時間隔，請輸入 `INTERVAL 4 HOUR`。如果資料表在過去 4 小時內重新整理過，針對該資料表執行的作業就會使用快取中繼資料。如果快取中繼資料的舊於該時間，作業會改為從 Amazon S3 擷取中繼資料。
+  如要啟用中繼資料快取功能，請指定介於 30 分鐘至 7 天之間的[間隔常值](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#interval_literals)。舉例來說，如要指定 4 小時的過時間隔，請輸入 `INTERVAL 4 HOUR`。如果資料表在過去 4 小時內重新整理過，針對該資料表執行的作業就會使用快取中繼資料。如果快取中繼資料的建立時間早於該時間，作業會改為從 Amazon S3 擷取中繼資料。
 * `DATASET_NAME`：您建立的資料集名稱。
 * `TABLE_NAME`：您要為這個資料表指定的名稱。
 
-舉例來說，下列指令會建立新的 BigLake 資料表 `awsdataset.awstable`，該資料表可查詢儲存在路徑 `s3://s3-bucket/path/file.csv` 的 Amazon S3 資料，並在位置 `aws-us-east-1` 中建立讀取連線：
+舉例來說，下列指令會建立新的 BigLake 資料表 `awsdataset.awstable`，可查詢儲存在路徑 `s3://s3-bucket/path/file.csv` 的 Amazon S3 資料，並在位置 `aws-us-east-1` 中建立讀取連線：
 
 ```
 bq mkdef  \
@@ -398,7 +399,7 @@ public class CreateExternalTableAws {
    3. 在「Table」(資料表) 中，輸入要建立的資料表名稱。
    4. 確認「Table type」(資料表類型) 已選取「External table」(外部資料表)。
    5. 在「連線 ID」部分，選取您先前建立的連線。
-7. 在「Schema」(結構定義) 區段中，您可以啟用[結構定義自動偵測](https://docs.cloud.google.com/bigquery/docs/schema-detect?hl=zh-tw)功能，也可以手動指定結構定義 (如有來源檔案)。如果沒有來源檔案，就必須手動指定結構定義。
+7. 在「結構定義」部分，您可以啟用[結構定義自動偵測](https://docs.cloud.google.com/bigquery/docs/schema-detect?hl=zh-tw)功能，也可以在有來源檔案時手動指定結構定義。如果沒有來源檔案，就必須手動指定結構定義。
 
    * 如要啟用結構定義自動偵測功能，請選取「自動偵測」選項。
    * 如要手動指定結構定義，請取消勾選「自動偵測」選項。啟用「以文字形式編輯」，然後以 [JSON 陣列](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#specifying_a_json_schema_file)的形式輸入資料表結構定義。
@@ -450,7 +451,7 @@ public class CreateExternalTableAws {
      如要啟用中繼資料快取功能，請指定介於 30 分鐘至 7 天之間的[間隔常值](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#interval_literals)。舉例來說，如要指定 4 小時的過時間隔，請輸入 `INTERVAL 4 HOUR`。如果資料表在過去 4 小時內重新整理過，針對資料表執行的作業就會使用快取中繼資料。如果快取中繼資料較舊，作業會改為從 Amazon S3 擷取中繼資料。
    * `CACHE_MODE`：指定中繼資料快取是否自動或手動重新整理。如要進一步瞭解中繼資料快取注意事項，請參閱「[中繼資料快取，提升效能](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw#metadata_caching_for_performance)」。
 
-     設為 `AUTOMATIC`，中繼資料快取就會以系統定義的時間間隔 (通常為 30 到 60 分鐘) 重新整理。
+     設為 `AUTOMATIC`，中繼資料快取就會以系統定義的時間間隔重新整理，通常介於 30 到 60 分鐘之間。
 
      如要依您決定的時間表重新整理中繼資料快取，請設為 `MANUAL`。在這種情況下，您可以呼叫 [`BQ.REFRESH_EXTERNAL_METADATA_CACHE` 系統程序](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures?hl=zh-tw#bqrefresh_external_metadata_cache)來重新整理快取。
 
@@ -504,9 +505,9 @@ bq mkdef \
   + `CUSTOM`：在來源 URI 前置字串中編碼索引鍵結構定義。
 * `URI_SHARED_PREFIX`：來源 URI 前置字串。
 * `BOOLEAN`：指定是否要在查詢時要求述詞篩選器。這個標記是選用的，預設值為 `false`。
-* `CACHE_MODE`：指定中繼資料快取是否自動或手動重新整理。只有當您也打算在後續的 `bq mk` 指令中使用 `--max_staleness` 標記來啟用中繼資料快取時，才需要加入這個標記。如要進一步瞭解中繼資料快取注意事項，請參閱「[中繼資料快取，提升效能](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw#metadata_caching_for_performance)」。
+* `CACHE_MODE`：指定中繼資料快取是否自動或手動重新整理。如果您也打算在後續的 `bq mk` 指令中使用 `--max_staleness` 標記來啟用中繼資料快取，才需要加入這個標記。如要進一步瞭解中繼資料快取注意事項，請參閱「[中繼資料快取提升效能](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw#metadata_caching_for_performance)」一文。
 
-  設為 `AUTOMATIC`，即可在系統定義的時間間隔 (通常介於 30 到 60 分鐘之間) 重新整理中繼資料快取。
+  設為 `AUTOMATIC`，中繼資料快取就會以系統定義的時間間隔重新整理，通常介於 30 到 60 分鐘之間。
 
   如要依您決定的時間表重新整理中繼資料快取，請設為 `MANUAL`。在這種情況下，您可以呼叫 [`BQ.REFRESH_EXTERNAL_METADATA_CACHE` 系統程序](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures?hl=zh-tw#bqrefresh_external_metadata_cache)來重新整理快取。如果 `STALENESS_INTERVAL` 設為大於 0 的值，就必須設定 `CACHE_MODE`。
 * `URIS`：Amazon S3 資料夾的路徑，使用萬用字元格式。
@@ -533,7 +534,7 @@ SCHEMA
 
   如要停用中繼資料快取功能，請指定 0。這是目前的預設做法。
 
-  如要啟用中繼資料快取功能，請指定介於 30 分鐘至 7 天之間的[間隔常值](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#interval_literals)。舉例來說，如要指定 4 小時的過時間隔，請輸入 `INTERVAL 4 HOUR`。如果資料表在過去 4 小時內重新整理過，針對該資料表執行的作業就會使用快取中繼資料。如果快取中繼資料的舊於該時間，作業會改為從 Amazon S3 擷取中繼資料。
+  如要啟用中繼資料快取功能，請指定介於 30 分鐘至 7 天之間的[間隔常值](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#interval_literals)。舉例來說，如要指定 4 小時的過時間隔，請輸入 `INTERVAL 4 HOUR`。如果資料表在過去 4 小時內重新整理過，針對該資料表執行的作業就會使用快取中繼資料。如果快取中繼資料的建立時間早於該時間，作業會改為從 Amazon S3 擷取中繼資料。
 * `DEFINITION_FILE`：資料表定義檔的路徑。
 * `DATASET_NAME`：包含資料表的資料集名稱。
 * `TABLE_NAME`：您要建立的資料表名稱。
@@ -575,19 +576,20 @@ bq mk --max_staleness=INTERVAL "1" HOUR \
 
 ### API
 
-如要使用 BigQuery API 設定 Hive 分區，請在建立[資料表定義檔](https://docs.cloud.google.com/bigquery/external-table-definition?hl=zh-tw)時，將 [`hivePartitioningOptions`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables?hl=zh-tw#hivepartitioningoptions) 物件納入 [`ExternalDataConfiguration`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables?hl=zh-tw#externaldataconfiguration) 物件。如要建立 BigLake 資料表，您也必須為 `connectionId` 欄位指定值。
+如要使用 BigQuery API 設定 Hive 分割，請在建立[資料表定義檔](https://docs.cloud.google.com/bigquery/external-table-definition?hl=zh-tw)時，將 [`hivePartitioningOptions`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables?hl=zh-tw#hivepartitioningoptions) 物件納入 [`ExternalDataConfiguration`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables?hl=zh-tw#externaldataconfiguration) 物件。如要建立 BigLake 資料表，您也必須指定 `connectionId` 欄位的值。
 
-如果將 `hivePartitioningOptions.mode` 欄位設為 `CUSTOM`，則必須在 `hivePartitioningOptions.sourceUriPrefix` 欄位中編碼分區索引鍵結構定義，如下所示：`s3://BUCKET/PATH_TO_TABLE/{KEY1:TYPE1}/{KEY2:TYPE2}/...`
+如果將 `hivePartitioningOptions.mode` 欄位設為 `CUSTOM`，則必須在 `hivePartitioningOptions.sourceUriPrefix` 欄位中編碼分區索引鍵結構定義，如下所示：
+`s3://BUCKET/PATH_TO_TABLE/{KEY1:TYPE1}/{KEY2:TYPE2}/...`
 
 如要在查詢時強制使用述詞篩選器，請將 `hivePartitioningOptions.requirePartitionFilter` 欄位設為 `true`。
 
 ## Delta Lake 資料表
 
-Delta Lake 是開放原始碼資料表格式，支援 PB 級資料表。Delta Lake 資料表可做為臨時和永久資料表查詢，並支援做為 [BigLake 資料表](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw)。
+Delta Lake 是開放原始碼資料表格式，支援 PB 級資料表。Delta Lake 資料表可做為臨時和永久資料表查詢，並支援做為 [BigLake](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw) 資料表。
 
 ### 結構定義同步
 
-Delta Lake 會將標準結構定義做為中繼資料的一部分。您無法使用 JSON 中繼資料檔案更新結構定義。如要更新結構定義，請按照下列步驟操作：
+Delta Lake 會維護標準結構定義，做為中繼資料的一部分。您無法使用 JSON 中繼資料檔案更新結構定義。如要更新結構定義，請按照下列步驟操作：
 
 1. 使用 [`bq update` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_update)並加上 `--autodetect_schema` 旗標：
 
@@ -631,13 +633,13 @@ Delta Lake 資料表有以下限制：
 
 * [外部資料表限制](https://docs.cloud.google.com/bigquery/docs/external-tables?hl=zh-tw#limitations)適用於 Delta Lake 資料表。
 * Delta Lake 資料表僅支援 BigQuery Omni，且有相關[限制](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw#limitations)。
-* 您無法使用新的 JSON 中繼資料檔案更新資料表。您必須使用自動偵測結構定義資料表更新作業。詳情請參閱「[結構定義同步](#schema_synchronization)」。
-* BigLake 安全性功能僅在透過 BigQuery 服務存取時，保護 Delta Lake 資料表。
+* 您無法使用新的 JSON 中繼資料檔案更新資料表。您必須使用自動偵測結構定義資料表更新作業。詳情請參閱[結構定義同步](#schema_synchronization)。
+* BigLake 安全性功能只會在透過 BigQuery 服務存取 Delta Lake 資料表時提供保護。
 
 ### 建立 Delta Lake 資料表
 
 下列範例使用 [`CREATE EXTERNAL
-TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#create_external_table_statement) 陳述式和 Delta Lake 格式，建立外部資料表：
+TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#create_external_table_statement) 陳述式和 Delta Lake 格式建立外部資料表：
 
 ```
 CREATE [OR REPLACE] EXTERNAL TABLE table_name
@@ -654,7 +656,7 @@ OPTIONS (
 * connection\_name：連線名稱，連線必須識別 [Amazon S3](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-connection?hl=zh-tw) 或 [Blob 儲存體](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-connection?hl=zh-tw)來源。
 * parent\_directory：父項目錄的 URI。
 
-### 使用 Delta Lake 進行 BigQuery Omni 轉移
+### 透過 Delta Lake 進行 BigQuery Omni 轉移
 
 以下範例使用 [`LOAD DATA`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/other-statements?hl=zh-tw#load_data_statement) 陳述式，將資料載入適當的資料表：
 
@@ -680,9 +682,9 @@ WITH CONNECTION connection_name;
 這項功能適用《[服務專屬條款](https://docs.cloud.google.com/terms/service-terms?hl=zh-tw#1)》中「一般服務條款」一節的《正式發布前產品條款》。正式發布前功能是依「原樣」提供，支援服務可能受限。
 詳情請參閱[推出階段說明](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
 
-您可以使用 [`INFORMATION_SCHEMA`](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw) 檢視表查看資源中繼資料。查詢 [`JOBS_BY_*`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw)、[`JOBS_TIMELINE_BY_*`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline?hl=zh-tw) 和 [`RESERVATION*`](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations?hl=zh-tw) 檢視區塊時，必須[指定與資料表所在區域位於同一位置的查詢處理位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#specify_locations)。如要瞭解 BigQuery Omni 位置，請參閱「[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#omni-loc)」。對於所有其他系統資料表，指定查詢工作位置是*選用*做法。
+您可以使用 [`INFORMATION_SCHEMA`](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw) 檢視表查看資源中繼資料。查詢 [`JOBS_BY_*`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw)、[`JOBS_TIMELINE_BY_*`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline?hl=zh-tw) 和 [`RESERVATION*`](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations?hl=zh-tw) 檢視區塊時，必須[指定與資料表所在區域位於同一位置的查詢處理位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#specify_locations)。如要瞭解 BigQuery Omni 位置，請參閱「[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#omni-loc)」。對於所有其他系統資料表，指定查詢工作位置是*選用*項目。
 
-如要瞭解 BigQuery Omni 支援的系統資料表，請參閱[限制](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw#limitations)。
+如要瞭解 BigQuery Omni 支援的系統資料表，請參閱「[限制](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw#limitations)」。
 
 如要查詢 `JOBS_*` 和 `RESERVATION*` 系統資料表，請選取下列其中一種方法來指定處理位置：
 
@@ -740,7 +742,7 @@ LIMIT 10;
 
 ### 必要權限
 
-確認您具備設定服務安全防護範圍的必要權限。如要查看設定 VPC Service Controls 時須具備的 IAM 角色清單，請參閱 VPC Service Controls 說明文件中的「[使用 IAM 控管存取權](https://docs.cloud.google.com/vpc-service-controls/docs/access-control?hl=zh-tw)」。
+確認您具備設定服務範圍的必要權限。如要查看設定 VPC Service Controls 時須具備的 IAM 角色清單，請參閱 VPC Service Controls 說明文件中的「[使用 IAM 控管存取權](https://docs.cloud.google.com/vpc-service-controls/docs/access-control?hl=zh-tw)」。
 
 ### 使用 Google Cloud 控制台設定 VPC Service Controls
 
@@ -783,7 +785,7 @@ LIMIT 10;
 
 #### 建立輸出政策輸入檔案
 
-輸出規則區塊會定義允許從 perimeter 內部存取該 perimeter 外部資源的權限。如果是外部資源，`externalResources` 屬性會定義允許從 VPC Service Controls perimeter 內存取的外部資源路徑。
+輸出規則區塊會定義允許從 perimeter 內部存取該 perimeter 外部資源的權限。如果是外部資源，`externalResources` 屬性會定義可從 VPC Service Controls perimeter 內存取的外部資源路徑。
 
 可以使用 JSON 檔案或 YAML 檔案設定輸出規則。下列範例使用 `.yaml` 格式：
 
@@ -855,7 +857,8 @@ LIMIT 10;
 
 #### 新增輸出政策
 
-如要在建立新服務範圍時新增輸出政策，請使用 [`gcloud access-context-manager perimeters create` 指令](https://docs.cloud.google.com/sdk/gcloud/reference/access-context-manager/perimeters/create?hl=zh-tw)。舉例來說，下列指令會建立名為 `omniPerimeter` 的新 perimeter，其中包含專案編號為 `12345` 的專案、限制 BigQuery API，並新增 `egress.yaml` 檔案中定義的輸出政策：
+如要在建立新服務範圍時新增輸出政策，請使用 [`gcloud access-context-manager perimeters create` 指令](https://docs.cloud.google.com/sdk/gcloud/reference/access-context-manager/perimeters/create?hl=zh-tw)。
+舉例來說，下列指令會建立名為 `omniPerimeter` 的新 perimeter，其中包含專案編號為 `12345` 的專案、限制 BigQuery API，並新增 `egress.yaml` 檔案中定義的輸出政策：
 
 ```
 gcloud access-context-manager perimeters create omniPerimeter \
@@ -865,7 +868,8 @@ gcloud access-context-manager perimeters create omniPerimeter \
     --egress-policies=egress.yaml
 ```
 
-如要將輸出政策新增至現有服務範圍，請使用 [`gcloud access-context-manager perimeters update` 指令](https://docs.cloud.google.com/sdk/gcloud/reference/access-context-manager/perimeters/update?hl=zh-tw)。舉例來說，下列指令會將 `egress.yaml` 檔案中定義的輸出政策，新增至名為 `omniPerimeter` 的現有 service perimeter：
+如要為現有服務範圍新增輸出政策，請使用 [`gcloud access-context-manager perimeters update` 指令](https://docs.cloud.google.com/sdk/gcloud/reference/access-context-manager/perimeters/update?hl=zh-tw)。
+舉例來說，下列指令會將 `egress.yaml` 檔案中定義的輸出政策，新增至名為 `omniPerimeter` 的現有 service perimeter：
 
 ```
 gcloud access-context-manager perimeters update omniPerimeter
@@ -928,8 +932,8 @@ BigQuery 管理員可以建立 S3 bucket 政策，授予 BigQuery Omni 存取 Am
 
 更改下列內容：
 
-* `BUCKET_NAME`：您希望 BigQuery 存取的 Amazon S3 值區。
-* `VPC_ID`：與 Amazon S3 儲存空間並存的 BigQuery Omni 區域，其 BigQuery Omni VPC ID。您可以在本頁的表格中找到這項資訊。
+* `BUCKET_NAME`：您希望 BigQuery 存取的 Amazon S3 儲存空間。
+* `VPC_ID`：與 Amazon S3 儲存空間並存的 BigQuery Omni 區域，其 BigQuery Omni VPC ID。如要瞭解這些資訊，請參閱本頁面中的表格。
 
 ### Terraform
 
@@ -968,8 +972,8 @@ BigQuery 管理員可以建立 S3 bucket 政策，授予 BigQuery Omni 存取 Am
 
 更改下列內容：
 
-* `BUCKET_NAME`：您希望 BigQuery 存取的 Amazon S3 值區。
-* `VPC_ID`：與 Amazon S3 儲存空間值區共置的 BigQuery Omni 區域 BigQuery Omni VPC ID。
+* `BUCKET_NAME`：您希望 BigQuery 存取的 Amazon S3 儲存空間。
+* `VPC_ID`：與 Amazon S3 儲存空間並存的 BigQuery Omni 區域的 BigQuery Omni VPC ID。
 
 ### BigQuery Omni VPC 資源 ID
 
@@ -984,7 +988,7 @@ BigQuery 管理員可以建立 S3 bucket 政策，授予 BigQuery Omni 存取 Am
 
 ## 限制
 
-如要查看適用於以 Amazon S3 和 Blob 儲存體為基礎的 BigLake 表格限制完整清單，請參閱「[限制](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw#limitations)」。
+如要查看適用於 Amazon S3 和 Blob 儲存體的 BigLake 資料表限制完整清單，請參閱「[限制](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw#limitations)」。
 
 ## 後續步驟
 
@@ -1002,11 +1006,11 @@ BigQuery 管理員可以建立 S3 bucket 政策，授予 BigQuery Omni 存取 Am
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-27 (世界標準時間)。
+上次更新時間：2026-05-29 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-27 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-29 (世界標準時間)。"],[],[]]

@@ -471,7 +471,7 @@ public class SyncCreateDataScan {
 
 'use strict';
 
-function main(parent, dataScan, dataScanId) {
+function main(parent, dataScan) {
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -490,7 +490,8 @@ function main(parent, dataScan, dataScanId) {
    */
   // const dataScan = {}
   /**
-   *  Required. DataScan identifier.
+   *  Optional. DataScan identifier. If not provided, a unique ID will be
+   *  generated with the prefix "data-scan-".
    *  * Must contain only lowercase letters, numbers and hyphens.
    *  * Must start with a letter.
    *  * Must end with a number or a letter.
@@ -515,7 +516,6 @@ function main(parent, dataScan, dataScanId) {
     const request = {
       parent,
       dataScan,
-      dataScanId,
     };
 
     // Run request
@@ -562,7 +562,6 @@ def sample_create_data_scan():
     request = dataplex_v1.CreateDataScanRequest(
         parent="parent_value",
         data_scan=data_scan,
-        data_scan_id="data_scan_id_value",
     )
 
     # Make the request
@@ -1153,15 +1152,5 @@ gcloud dataplex datascans jobs list \
 
 ```
 using Google.Api.Gax;
-using Google.Cloud.Dataplex.V1;
-using System;
-
-public sealed partial class GeneratedDataScanServiceClientSnippets
-{
-    /// <summary>Snippet for ListDataScanJobs</summary>
-    /// <remarks>
-    /// This snippet has been automatically generated and should be regarded as a code template only.
-    /// It will require modifications to work:
-    /// - It may require correct/in-range values for request initialization.
-    /// - It may require
+using
 ```

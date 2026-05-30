@@ -968,9 +968,3 @@ bq mk --table mydataset.mytable ./myschema.json
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 如要使用 Python 用戶端程式庫從 JSON 檔案載入資料表結構定義，請呼叫 [schema\_from\_json](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.client.Client?hl=zh-tw#google_cloud_bigquery_client_Client_schema_from_json) 方法。
-
-```
-from google.cloud import bigquery
-
-client = bigquery.Client()
-```

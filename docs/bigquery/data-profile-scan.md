@@ -459,7 +459,6 @@ def sample_create_data_scan():
     request = dataplex_v1.CreateDataScanRequest(
         parent="parent_value",
         data_scan=data_scan,
-        data_scan_id="data_scan_id_value",
     )
 
     # Make the request
@@ -1083,30 +1082,4 @@ Knowledge Catalog 會儲存最近 300 項工作或過去一年的資料剖析掃
 
 1. 在 Google Cloud 控制台的 BigQuery「Metadata curation」(中繼資料管理) 頁面，前往「Data profiling & quality」(資料剖析與品質) 分頁。
 
-   [前往「Data profiling & quality」(資料剖析與品質) 頁面](https://console.cloud.google.com/bigquery/governance/metadata-curation/data-profiling-and-quality?hl=zh-tw)
-2. 按一下資料剖析掃描的名稱。
-3. 按一下「工作記錄」分頁標籤。
-
-   「工作記錄」分頁會提供過去工作相關資訊，例如每項工作掃描的記錄數量、工作狀態，以及工作執行時間。
-4. 如要查看工作的詳細資訊，請按一下「工作 ID」欄中的任何工作。
-
-### gcloud
-
-如要查看歷史資料剖析掃描工作，請使用 [`gcloud dataplex datascans jobs list` 指令](https://docs.cloud.google.com/sdk/gcloud/reference/dataplex/datascans/jobs/list?hl=zh-tw)：
-
-```
-gcloud dataplex datascans jobs list \
---location=LOCATION \
---datascan=DATASCAN
-```
-
-請替換下列變數：
-
-* `LOCATION`：建立資料剖析掃描的 Google Cloud 區域。
-* `DATASCAN`：要查看作業的資料剖析掃描名稱。
-
-### C#
-
-### C#
-
-在試用這個範例之前，請先按照「
+   [前往「Data profiling & quality」(資料剖析與品質)](https://console.cloud.google.com/bigquery/governance/metadata-curation/data-profiling-and-quality?hl=zh-tw)

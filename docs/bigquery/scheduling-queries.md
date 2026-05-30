@@ -958,16 +958,4 @@ for run in response.runs:
 
 如要透過 Google Cloud 控制台的「Scheduled queries」(已排定的查詢) 頁面刪除排程查詢，請按照下列步驟操作：
 
-1. 在導覽選單中，按一下「已排程的查詢」。
-2. 在排定查詢清單中，按一下要刪除的排定查詢名稱。
-3. 在「Scheduled query details」(已排定查詢詳細資料) 頁面，按一下「Delete」(刪除)。
-
-或者，您也可以在 Google Cloud 控制台的「Scheduling」(排程) 頁面中刪除排程查詢：
-
-1. 在導覽選單中，按一下「排程」。
-2. 在排程查詢清單中，點選要刪除的排程查詢的「動作」選單 more\_vert。
-3. 選取 [刪除]。
-
-### Java
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定說明操作。詳情請參閱
+1. 在導覽選單中，按一

@@ -72,6 +72,7 @@ following limitations apply:
 * You cannot export nested and repeated data in CSV format.
 * If you export data in JSON format, `INT64` data types are encoded as JSON
   strings to preserve 64-bit precision.
+* If your `query_statement` includes an `ORDER BY` clause and you export to multiple files using a wildcard, the globally sorted result set is distributed sequentially across the generated files.
 
 You are not billed for the export operation, but you are billed for running the
 query and for storing data in Cloud Storage, Amazon S3, or
@@ -92,7 +93,7 @@ Amazon S3, or Blob Storage.
 | `format` | `STRING`  Required. The format of the exported data. Supported values include: `AVRO`, `CSV`, `JSON`, `PARQUET`. |
 | `header` | `BOOL`  If `true`, generates column headers for the first row of each data file. Default: `false`.  Applies to: CSV. |
 | `overwrite` | `BOOL`  If `true`, overwrites any existing files with the same URI. Otherwise, if the destination storage bucket is not empty, the statement returns an error. Default: `false`.  Note: When `overwrite` is `true`, files are only overwritten, no files are ever deleted, even if they match the wildcard specified in the URI. |
-| `uri` | `STRING`  Required. The destination URI for the export. The `uri` option must be a single-wildcard URI as described in [Exporting data into one or more files](/bigquery/docs/exporting-data#exporting_data_into_one_or_more_files).  Examples: `"gs://bucket/path/file_*.csv"` or `"s3://bucket/path/file_*.csv"` |
+| `uri` | `STRING`  Required. The destination URI for the export. The `uri` option must be a single-wildcard URI as described in [Exporting data into one or more files](/bigquery/docs/exporting-data#exporting_data_into_one_or_more_files). If your query includes an `ORDER BY` clause, the globally sorted rows are distributed sequentially across the generated files.  Examples: `"gs://bucket/path/file_*.csv"` or `"s3://bucket/path/file_*.csv"` |
 | `use_avro_logical_types` | `BOOL`  Whether to use appropriate AVRO logical types when exporting `TIMESTAMP`, `DATETIME`, `TIME` and `DATE` types.  Applies to: AVRO. For more information, see [Avro export details](/bigquery/docs/exporting-data#avro_export_details). |
 
 ### Examples
@@ -358,11 +359,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-05-27 UTC.
+Last updated 2026-05-29 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-27 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-29 UTC."],[],[]]
