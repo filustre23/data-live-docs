@@ -1390,7 +1390,7 @@ Mirrored from <https://platform.claude.com/docs/en/>. Do not edit by hand — re
 - manage-claude/workload-identity-federation
 - manage-claude/workspaces
 - managed-agents/agent-setup
-- managed-agents/cloud-containers
+- managed-agents/cloud-sandboxes-reference
 - managed-agents/define-outcomes
 - managed-agents/dreams
 - managed-agents/environments

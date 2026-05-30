@@ -1,6 +1,6 @@
 # data-live-docs — index
 
-_Generated 2026-05-29T14:48+00:00_
+_Generated 2026-05-30T02:12+00:00_
 
 **9 sources, 5063 topics total**
 
@@ -1404,7 +1404,7 @@ _1408 topics_
 - `anthropic-sdk/manage-claude/workload-identity-federation`
 - `anthropic-sdk/manage-claude/workspaces`
 - `anthropic-sdk/managed-agents/agent-setup`
-- `anthropic-sdk/managed-agents/cloud-containers`
+- `anthropic-sdk/managed-agents/cloud-sandboxes-reference`
 - `anthropic-sdk/managed-agents/define-outcomes`
 - `anthropic-sdk/managed-agents/dreams`
 - `anthropic-sdk/managed-agents/environments`
