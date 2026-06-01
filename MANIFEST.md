@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-06-01T17:16+00:00_
+_Generated 2026-06-01T21:24+00:00_
 
-**9 sources, 5066 topics total**
+**9 sources, 5117 topics total**
 
 ## airflow
 
@@ -3116,7 +3116,7 @@ _144 topics_
 
 Upstream: <https://docs.getdbt.com/docs/>
 
-_1006 topics_
+_1057 topics_
 
 - `dbt-core/best-practices/best-practice-workflows`
 - `dbt-core/best-practices/clone-incremental-models`
@@ -3223,6 +3223,7 @@ _1006 topics_
 - `dbt-core/docs/build/metrics-overview`
 - `dbt-core/docs/build/models`
 - `dbt-core/docs/build/organize-your-outputs`
+- `dbt-core/docs/build/osi-semantic-models`
 - `dbt-core/docs/build/packages`
 - `dbt-core/docs/build/parallel-batch-execution`
 - `dbt-core/docs/build/project-variables`
@@ -3247,11 +3248,17 @@ _1006 topics_
 - `dbt-core/docs/configure-dbt-extension`
 - `dbt-core/docs/connect-adapters`
 - `dbt-core/docs/contribute-core-adapters`
+- `dbt-core/docs/contribute-core-adapters-v2`
+- `dbt-core/docs/dbt-ai/_wizard-cli-full-generated`
+- `dbt-core/docs/dbt-ai/_wizard-cli-generated-v1`
+- `dbt-core/docs/dbt-ai/_wizard-cli-generated-v2`
+- `dbt-core/docs/dbt-ai/_wizard-slash-commands-generated`
 - `dbt-core/docs/dbt-ai/about-dbt-ai`
+- `dbt-core/docs/dbt-ai/about-dbt-wizard-cli`
 - `dbt-core/docs/dbt-ai/about-mcp`
 - `dbt-core/docs/dbt-ai/analyst-agent`
-- `dbt-core/docs/dbt-ai/dbt-agents`
-- `dbt-core/docs/dbt-ai/developer-agent`
+- `dbt-core/docs/dbt-ai/copilot-overview`
+- `dbt-core/docs/dbt-ai/dbt-ai-faqs`
 - `dbt-core/docs/dbt-ai/integrate-mcp-claude`
 - `dbt-core/docs/dbt-ai/integrate-mcp-cursor`
 - `dbt-core/docs/dbt-ai/integrate-mcp-vscode`
@@ -3264,6 +3271,19 @@ _1006 topics_
 - `dbt-core/docs/dbt-ai/mcp-troubleshooting`
 - `dbt-core/docs/dbt-ai/setup-local-mcp`
 - `dbt-core/docs/dbt-ai/setup-remote-mcp`
+- `dbt-core/docs/dbt-ai/wizard-byok`
+- `dbt-core/docs/dbt-ai/wizard-cli`
+- `dbt-core/docs/dbt-ai/wizard-cli-reference`
+- `dbt-core/docs/dbt-ai/wizard-config`
+- `dbt-core/docs/dbt-ai/wizard-configure`
+- `dbt-core/docs/dbt-ai/wizard-headless`
+- `dbt-core/docs/dbt-ai/wizard-how-it-works`
+- `dbt-core/docs/dbt-ai/wizard-ide`
+- `dbt-core/docs/dbt-ai/wizard-migrate`
+- `dbt-core/docs/dbt-ai/wizard-quickstart`
+- `dbt-core/docs/dbt-ai/wizard-skills`
+- `dbt-core/docs/dbt-ai/wizard-slash-commands`
+- `dbt-core/docs/dbt-ai/wizard-use-cases`
 - `dbt-core/docs/dbt-apis/admin-api`
 - `dbt-core/docs/dbt-apis/apis-overview`
 - `dbt-core/docs/dbt-apis/authentication`
@@ -3287,6 +3307,7 @@ _1006 topics_
 - `dbt-core/docs/dbt-versions/2025-release-notes`
 - `dbt-core/docs/dbt-versions/about-versions`
 - `dbt-core/docs/dbt-versions/compatible-track-changelog`
+- `dbt-core/docs/dbt-versions/core-upgrade/01-upgrading-to-v2`
 - `dbt-core/docs/dbt-versions/core-upgrade/02-upgrading-to-fusion`
 - `dbt-core/docs/dbt-versions/core-upgrade/03-upgrading-to-v1.12`
 - `dbt-core/docs/dbt-versions/core-upgrade/04-upgrading-to-v1.11`
@@ -3317,6 +3338,13 @@ _1006 topics_
 - `dbt-core/docs/deploy/ci-jobs`
 - `dbt-core/docs/deploy/continuous-deployment`
 - `dbt-core/docs/deploy/continuous-integration`
+- `dbt-core/docs/deploy/dbt-state-about`
+- `dbt-core/docs/deploy/dbt-state-cicd`
+- `dbt-core/docs/deploy/dbt-state-deferral`
+- `dbt-core/docs/deploy/dbt-state-examples`
+- `dbt-core/docs/deploy/dbt-state-interface`
+- `dbt-core/docs/deploy/dbt-state-migration`
+- `dbt-core/docs/deploy/dbt-state-setup`
 - `dbt-core/docs/deploy/deploy-environments`
 - `dbt-core/docs/deploy/deploy-jobs`
 - `dbt-core/docs/deploy/deployment-overview`
@@ -3478,6 +3506,7 @@ _1006 topics_
 - `dbt-core/docs/platform/account-integrations`
 - `dbt-core/docs/platform/account-settings`
 - `dbt-core/docs/platform/billing`
+- `dbt-core/docs/platform/billing-faqs`
 - `dbt-core/docs/platform/build-canvas-copilot`
 - `dbt-core/docs/platform/canvas`
 - `dbt-core/docs/platform/canvas-interface`
@@ -3496,11 +3525,7 @@ _1006 topics_
 - `dbt-core/docs/platform/connect-data-platform/connect-snowflake`
 - `dbt-core/docs/platform/connect-data-platform/connect-starburst-trino`
 - `dbt-core/docs/platform/connect-data-platform/connect-teradata`
-- `dbt-core/docs/platform/copilot-chat-in-studio`
-- `dbt-core/docs/platform/dbt-copilot`
-- `dbt-core/docs/platform/dbt-copilot-faqs`
-- `dbt-core/docs/platform/dbt-copilot-overview`
-- `dbt-core/docs/platform/enable-dbt-copilot`
+- `dbt-core/docs/platform/enable-dbt-ai`
 - `dbt-core/docs/platform/git/authenticate-azure`
 - `dbt-core/docs/platform/git/connect-azure-devops`
 - `dbt-core/docs/platform/git/connect-github`
@@ -3566,18 +3591,22 @@ _1006 topics_
 - `dbt-core/docs/platform/secure/private-connectivity/gcp/snowflake`
 - `dbt-core/docs/platform/secure/private-connectivity/overview`
 - `dbt-core/docs/platform/studio-ide/autofix-deprecations`
-- `dbt-core/docs/platform/studio-ide/develop-copilot`
 - `dbt-core/docs/platform/studio-ide/develop-in-studio`
+- `dbt-core/docs/platform/studio-ide/develop-studio-ai`
 - `dbt-core/docs/platform/studio-ide/git-commit-signing`
 - `dbt-core/docs/platform/studio-ide/ide-user-interface`
 - `dbt-core/docs/platform/studio-ide/keyboard-shortcuts`
 - `dbt-core/docs/platform/studio-ide/lint-format`
 - `dbt-core/docs/platform/use-canvas`
-- `dbt-core/docs/platform/use-dbt-copilot`
+- `dbt-core/docs/platform/wizard-home`
+- `dbt-core/docs/platform/wizard-overview`
+- `dbt-core/docs/platform/wizard-platform`
 - `dbt-core/docs/running-a-dbt-project/run-your-dbt-projects`
 - `dbt-core/docs/running-a-dbt-project/using-threads`
+- `dbt-core/docs/sign-in-dbt-extension`
 - `dbt-core/docs/supported-data-platforms`
 - `dbt-core/docs/trusted-adapters`
+- `dbt-core/docs/upgrade-to-fusion-extension`
 - `dbt-core/docs/use-dbt-semantic-layer/consume-metrics`
 - `dbt-core/docs/use-dbt-semantic-layer/dbt-sl`
 - `dbt-core/docs/use-dbt-semantic-layer/deploy-sl`
@@ -3680,6 +3709,7 @@ _1006 topics_
 - `dbt-core/faqs/Runs/running-models-downstream-of-source`
 - `dbt-core/faqs/Runs/sao-difference-core`
 - `dbt-core/faqs/Runs/snapshot-frequency`
+- `dbt-core/faqs/Runs/what-happened-to-sao`
 - `dbt-core/faqs/Seeds/build-one-seed`
 - `dbt-core/faqs/Seeds/configurable-data-path`
 - `dbt-core/faqs/Seeds/full-refresh-seed`
@@ -3692,6 +3722,14 @@ _1006 topics_
 - `dbt-core/faqs/Snapshots/snapshot-schema-changes`
 - `dbt-core/faqs/Snapshots/snapshot-target-is-not-a-snapshot-table`
 - `dbt-core/faqs/Snapshots/snapshotting-freshness-for-one-source`
+- `dbt-core/faqs/State/data-storage`
+- `dbt-core/faqs/State/incremental-models`
+- `dbt-core/faqs/State/last-updated-timestamp`
+- `dbt-core/faqs/State/model-change-calculation`
+- `dbt-core/faqs/State/multiple-projects`
+- `dbt-core/faqs/State/non-prod-environment`
+- `dbt-core/faqs/State/server-failure`
+- `dbt-core/faqs/State/state-modified-difference`
 - `dbt-core/faqs/Tests/available-tests`
 - `dbt-core/faqs/Tests/configurable-data-test-path`
 - `dbt-core/faqs/Tests/custom-test-thresholds`
@@ -3734,6 +3772,7 @@ _1006 topics_
 - `dbt-core/faqs/Warehouse/sample-profiles`
 - `dbt-core/guides/_config`
 - `dbt-core/guides/adapter-creation`
+- `dbt-core/guides/adapter-creation-v2`
 - `dbt-core/guides/airflow-and-dbt-cloud`
 - `dbt-core/guides/analyze-data-qs`
 - `dbt-core/guides/athena-qs`
@@ -3782,6 +3821,7 @@ _1006 topics_
 - `dbt-core/guides/snowflake-qs`
 - `dbt-core/guides/starburst-galaxy-qs`
 - `dbt-core/guides/teradata-qs`
+- `dbt-core/guides/terminal-guide`
 - `dbt-core/guides/using-jinja`
 - `dbt-core/guides/zapier-ms-teams`
 - `dbt-core/guides/zapier-refresh-mode-report`
@@ -3807,7 +3847,9 @@ _1006 topics_
 - `dbt-core/reference/commands/deps`
 - `dbt-core/reference/commands/init`
 - `dbt-core/reference/commands/invocation`
+- `dbt-core/reference/commands/lint`
 - `dbt-core/reference/commands/list`
+- `dbt-core/reference/commands/login`
 - `dbt-core/reference/commands/parse`
 - `dbt-core/reference/commands/retry`
 - `dbt-core/reference/commands/rpc`
@@ -3909,6 +3951,7 @@ _1006 topics_
 - `dbt-core/reference/global-configs/sqlparse`
 - `dbt-core/reference/global-configs/static-analysis-flag`
 - `dbt-core/reference/global-configs/usage-stats`
+- `dbt-core/reference/global-configs/user-settings`
 - `dbt-core/reference/global-configs/version-compatibility`
 - `dbt-core/reference/global-configs/warnings`
 - `dbt-core/reference/macro-properties`
@@ -3963,7 +4006,9 @@ _1006 topics_
 - `dbt-core/reference/resource-configs/contract`
 - `dbt-core/reference/resource-configs/database`
 - `dbt-core/reference/resource-configs/databricks-configs`
+- `dbt-core/reference/resource-configs/dbt-state-configs`
 - `dbt-core/reference/resource-configs/dbt_valid_to_current`
+- `dbt-core/reference/resource-configs/defer-to-target`
 - `dbt-core/reference/resource-configs/delimiter`
 - `dbt-core/reference/resource-configs/deltastream-configs`
 - `dbt-core/reference/resource-configs/docs`
@@ -3971,8 +4016,10 @@ _1006 topics_
 - `dbt-core/reference/resource-configs/duckdb-configs`
 - `dbt-core/reference/resource-configs/enabled`
 - `dbt-core/reference/resource-configs/entry-point`
+- `dbt-core/reference/resource-configs/evaluate-volatile-sql`
 - `dbt-core/reference/resource-configs/event-time`
 - `dbt-core/reference/resource-configs/exasol-configs`
+- `dbt-core/reference/resource-configs/execute-hooks-on-any-reuse`
 - `dbt-core/reference/resource-configs/fabric-configs`
 - `dbt-core/reference/resource-configs/fabricspark-configs`
 - `dbt-core/reference/resource-configs/fail_calc`
@@ -3989,11 +4036,13 @@ _1006 topics_
 - `dbt-core/reference/resource-configs/impala-configs`
 - `dbt-core/reference/resource-configs/infer-configs`
 - `dbt-core/reference/resource-configs/invalidate_hard_deletes`
+- `dbt-core/reference/resource-configs/lag-tolerance`
 - `dbt-core/reference/resource-configs/limit`
 - `dbt-core/reference/resource-configs/lookback`
 - `dbt-core/reference/resource-configs/materialize-configs`
 - `dbt-core/reference/resource-configs/materialized`
 - `dbt-core/reference/resource-configs/meta`
+- `dbt-core/reference/resource-configs/metadata-warehouse`
 - `dbt-core/reference/resource-configs/mindsdb-configs`
 - `dbt-core/reference/resource-configs/mssql-configs`
 - `dbt-core/reference/resource-configs/no-configs`
@@ -4004,10 +4053,12 @@ _1006 topics_
 - `dbt-core/reference/resource-configs/persist_docs`
 - `dbt-core/reference/resource-configs/plus-prefix`
 - `dbt-core/reference/resource-configs/postgres-configs`
+- `dbt-core/reference/resource-configs/pre-clone`
 - `dbt-core/reference/resource-configs/pre-hook-post-hook`
 - `dbt-core/reference/resource-configs/quote_args`
 - `dbt-core/reference/resource-configs/quote_columns`
 - `dbt-core/reference/resource-configs/redshift-configs`
+- `dbt-core/reference/resource-configs/require-fresh-data-from`
 - `dbt-core/reference/resource-configs/resource-path`
 - `dbt-core/reference/resource-configs/runtime-version`
 - `dbt-core/reference/resource-configs/salesforce-data-cloud-configs`

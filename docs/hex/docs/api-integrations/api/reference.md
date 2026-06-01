@@ -1996,6 +1996,7 @@ Only chart-type cells are supported.
 
 The optional `width` and `height` query params set the output image size in pixels.
 Both must be provided to apply, and must be between 100 and 2000.
+The optional `includeTitle` query param includes the chart title in the image when true.
 
 Rate limit: 20 requests per minute.
 
@@ -2017,6 +2018,7 @@ Rate limit: 20 requests per minute.
 | --- | --- |
 | width | integer <int32>  (ChartImageDimension)   [ 100 .. 2000 ]  Chart image total dimension (width or height) in pixels. |
 | height | integer <int32>  (ChartImageDimension)   [ 100 .. 2000 ]  Chart image total dimension (width or height) in pixels. |
+| includeTitle | boolean |
 
 ### Responses
 
@@ -2505,5 +2507,4 @@ Copy
 
 |  |  |
 | --- | --- |
-| sharing | object |
-| schemaRefreshAccess | string |
+| sharing |  |

@@ -2,7 +2,7 @@ On this page
 
 # Hex Data Processing Addendum
 
-**Last Modified**: *May 1, 2026*
+**Last Modified**: *June 1, 2026*
 
 This Data Processing Addendum (this "**DPA**"), forms part of the agreement(s) between Customer and Hex Technologies Inc. ("**Hex**"), covering Customer's use of the Services to which this Addendum is incorporated (the "**Agreement**") and is effective upon its incorporation into the Agreement, as specified in the Agreement itself or in any Order ("**Effective Date**"). Hex and Customer may be referred to herein collectively as the "**Parties**" or individually as a "**Party**."
 
@@ -176,7 +176,7 @@ c) Any other published materials made available by Hex, which further describe H
 
 ​​​​14.3 Choice of Law. Except with respect to the Standard Contractual Clauses, this DPA is governed by the laws that govern the Agreement, and any dispute between the Parties will be handled as set forth in the Agreement.
 
-​​​​​​​​14.4 Entire Agreement; Amendments and Modifications. This DPA, together with all exhibits, schedules, addenda, and appendices attached to this DPA and any other documents incorporated into this DPA by reference, constitutes the sole and entire agreement of the Parties with respect to the subject matter of this DPA and supersedes all prior and contemporaneous understandings, agreements, and representations and warranties, both written and oral, with respect to such subject matter. Except as expressly provided in this DPA, the terms of the Agreement are and will remain in full force and effect. This DPA may only be amended by a written amendment that specifically references this DPA and the intent of the Parties to modify this DPA.
+​​​​​​​​14.4 Entire Agreement; Amendments and Modifications. This DPA, together with all exhibits, schedules, addenda, and appendices attached to this DPA and any other documents incorporated into this DPA by reference, constitutes the sole and entire agreement of the Parties with respect to the subject matter of this DPA and supersedes all prior and contemporaneous understandings, agreements, and representations and warranties, both written and oral, with respect to such subject matter. Except as expressly provided in this DPA, the terms of the Agreement are and will remain in full force and effect. Hex may update this DPA from time to time by posting a revised version at the URL where this DPA is made available.
 
 # Annex 1: Data Processing Details
 
@@ -186,7 +186,7 @@ c) Any other published materials made available by Hex, which further describe H
 
 **Address:** 2261 Market St #4233, San Francisco, CA 94114
 
-**Contact Details for Data Protection**: [[email protected]](/cdn-cgi/l/email-protection#bfcfcdd6c9dedcc6ffd7dac791cbdadcd7)
+**Contact Details for Data Protection**: [[email protected]](/cdn-cgi/l/email-protection#3e4e4c57485f5d477e565b46104a5b5d56)
 
 **Hex Activities:** Processing to carry out the Services pursuant to the Agreement entered into between Customer and Hex.
 
