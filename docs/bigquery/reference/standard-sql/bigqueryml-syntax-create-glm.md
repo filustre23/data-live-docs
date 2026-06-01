@@ -982,5 +982,4 @@ number of training iterations is set to `5`.
 
 ```
 CREATE MODEL
-  `
 ```

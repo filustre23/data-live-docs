@@ -348,4 +348,4 @@ To convert between these two types of edges, GoogleSQL adds additional
 points to the line where necessary so that the resulting sequence of edges
 remains within 10 meters of the original edge.
 
-See [`ST_GEOGFROMGEOJSON`](#st_geogfromgeojson) to construct a
+See [`ST_GEOGFROMGEOJSON`](#st_geogfromgeojson) to

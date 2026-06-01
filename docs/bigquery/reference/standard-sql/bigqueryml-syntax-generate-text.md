@@ -930,4 +930,4 @@ The model and input table must be in the same region.
 * `ml_generate_text_llm_result`: a `STRING` value that contains
   the generated text. This column is returned when `flatten_json_output`
   is `TRUE`.
-* `ml_generate_text_rai_result`:
+* `ml_generate_text_rai`

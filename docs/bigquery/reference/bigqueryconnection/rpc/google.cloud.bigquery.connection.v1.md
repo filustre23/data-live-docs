@@ -236,4 +236,4 @@ Private Service Connect configuration.
 
 | Fields | |
 | --- | --- |
-| `network_attachment` |  |
+| `network_attachment` |

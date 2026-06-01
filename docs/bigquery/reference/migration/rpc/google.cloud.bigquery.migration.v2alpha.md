@@ -241,4 +241,4 @@ Provides details for errors, e.g. issues that where encountered when processing 
 
 | Fields | |
 | --- | --- |
-| `location` | `ErrorLocation`</ |
+| `location` | `ErrorLocati` |

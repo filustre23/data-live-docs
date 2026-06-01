@@ -78,7 +78,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ```
 BOOSTER_TYPE = HPARAM_CANDIDATES(['DART', 'GBTREE'])
-DART_NORMALIZE_TYPE = HPARAM_CANDIDATES([9;TREE', 'FOREST'])
+DART_NORMALIZE_TYPE = HPARAM_CANDIDATES(['TREE', 'FOREST'])
 ```
 
 另一個例子是升級樹狀結構模型中 `BOOSTER_TYPE` 和 `DROPOUT` 與 之間的互動。只有在 `BOOSTER_TYPE` 包含 `'DART'` 做為候選項目時，才能調整 `DROPOUT` 參數。如果您為 `DROPOUT` 定義搜尋空間，但將 `BOOSTER_TYPE` 限制為僅 `HPARAM_CANDIDATES(['GBTREE'])`，微調工作就會失敗。

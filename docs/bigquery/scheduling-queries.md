@@ -958,4 +958,4 @@ for run in response.runs:
 
 如要透過 Google Cloud 控制台的「Scheduled queries」(已排定的查詢) 頁面刪除排程查詢，請按照下列步驟操作：
 
-1. 在導覽選單中，按一
+1. 在導覽選單中，

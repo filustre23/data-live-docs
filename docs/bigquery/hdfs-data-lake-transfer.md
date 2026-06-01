@@ -31,6 +31,11 @@ BigQuery 資料移轉服務中的 Apache Hive Metastore 遷移連接器，可讓
   建議您使用 Lakehouse 執行階段目錄 Iceberg REST 目錄，處理所有 Iceberg 資料。
 
   Lakehouse 執行階段目錄 Iceberg REST 目錄可為所有 Iceberg 資料提供單一事實來源，在查詢引擎之間建立互通性。除了 Apache Spark 和其他 OSS 引擎，您也可以使用 BigQuery 查詢資料。Lakehouse 執行階段目錄 Iceberg REST 目錄僅支援 Iceberg 資料表格式。
+* [Lakehouse 執行階段目錄 Hive 目錄](https://docs.cloud.google.com/lakehouse/docs/about-spark-hive-metastore?hl=zh-tw)
+
+  建議您為所有 Hive 資料表使用 Lakehouse 執行階段目錄 Hive 目錄。
+
+  您可以使用 Hive 目錄，透過 Lakehouse 執行階段目錄 Hive 目錄，將遷移的 Hive 資料表註冊至 [Lakehouse 執行階段目錄](https://docs.cloud.google.com/lakehouse/docs/about-spark-hive-metastore?hl=zh-tw)。這項服務提供 Apache Hive 資料表的無伺服器 Metastore。除了 Apache Spark 和其他 OSS 引擎，您也可以使用 BigQuery 查詢資料 (須遵守格式限制)。
 * [Dataproc Metastore](https://docs.cloud.google.com/dataproc-metastore/docs/overview?hl=zh-tw)
 
   Dataproc Metastore 支援 Hive 和 Iceberg 資料表格式。您只能使用 Apache Spark 和其他 OSS 引擎，從 Dataproc Metastore 讀取及寫入資料。
@@ -44,10 +49,19 @@ BigQuery 資料移轉服務中的 Apache Hive Metastore 遷移連接器，可讓
 Hive Metastore 資料表轉移作業有下列限制：
 
 * Hive Metastore 轉移作業的排定執行時間間隔至少須為 30 分鐘。您仍可隨時觸發隨選執行作業。
-* 如要遷移 Hive 資料表，必須使用 Dataproc Metastore 做為目的地中繼存放區。
 * 檔案名稱必須符合 [Cloud Storage 物件命名規定](https://docs.cloud.google.com/storage/docs/objects?hl=zh-tw#naming)。
 * Cloud Storage 的單一物件大小上限為 5 TiB。如果 Hive Metastore 表格中的檔案大於 5 TiB，系統就無法轉移。
 * 如果資料在移轉作業進行期間於來源端變更，Storage 移轉服務會有特定行為。我們不建議在資料表主動遷移期間寫入資料表。如需其他 Storage 移轉服務限制的清單，請參閱「[已知限制](https://docs.cloud.google.com/storage-transfer/docs/known-limitations-transfer?hl=zh-tw)」。
+
+### Lakehouse 執行階段目錄 Hive 目錄限制
+
+使用 Lakehouse 執行階段目錄 Hive 目錄 (`BIGLAKE_HIVE_CATALOG`) 做為目的地 Metastore 時，請注意下列限制和事項：
+
+* Lakehouse 執行階段目錄 Hive 目錄 ID 只能包含小寫英文字母、數字和底線 (`_`)，不得包含破折號 (`-`) 或大寫英文字母。
+* 您無法在 Google Cloud 控制台中查看或管理 Lakehouse 執行階段目錄 Hive 目錄。不過，您可以在目標 BigQuery 資料集下查看及查詢已遷移的資料表。
+* 所有開放原始碼中繼資料格式和資料類型的 Lakehouse 執行階段目錄 Hive 目錄限制都適用。
+  + 如要瞭解與 CSV 和 JSON 等格式的相容性，請參閱「[支援的儲存格式](https://docs.cloud.google.com/lakehouse/docs/spark-hive-formats-types?hl=zh-tw)」。
+  + 如要瞭解不支援的資料類型 (例如 `UNION` 或巢狀陣列) 和資料欄統計資料，請參閱[中繼資料存放區限制](https://docs.cloud.google.com/lakehouse/docs/spark-hive-limitations?hl=zh-tw#bigquery-limitations)和[分區限制](https://docs.cloud.google.com/lakehouse/docs/spark-hive-limitations?hl=zh-tw#partition-limitations)。
 
 ## 資料擷取選項
 
@@ -119,6 +133,9 @@ JSON 檔案中的 `condition` 欄位支援下列值，每個值都有 `partition
 
 * Data Transfer API
 * Storage Transfer API
+* BigLake API
+
+**注意：** 您必須啟用 BigLake API，才能使用 Lakehouse 執行階段目錄 Iceberg REST 目錄，或 Lakehouse 執行階段目錄 Hive 目錄做為目的地中繼存放區。
 
 啟用 Data Transfer API 時，系統會建立[服務代理程式](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service?hl=zh-tw#service_agent)。
 
@@ -133,9 +150,9 @@ JSON 檔案中的 `condition` 欄位支援下列值，每個值都有 `partition
 
    **重要事項：**您必須將這些角色授予服務代理，*而非*使用者帳戶。如果未將角色授予正確的主體，可能會導致權限錯誤。
    * [Storage Transfer 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/storagetransfer?hl=zh-tw#storagetransfer.admin)  (`roles/storagetransfer.admin`)
-   * [服務使用情形消費者](https://docs.cloud.google.com/iam/docs/roles-permissions/serviceusage?hl=zh-tw#serviceusage.serviceUsageConsumer)  (`roles/serviceusage.serviceUsageConsumer`)
+   * [服務使用情形用戶](https://docs.cloud.google.com/iam/docs/roles-permissions/serviceusage?hl=zh-tw#serviceusage.serviceUsageConsumer)  (`roles/serviceusage.serviceUsageConsumer`)
    * [儲存空間管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/storage?hl=zh-tw#storage.admin)  (`roles/storage.admin`)
-   * 如要將中繼資料遷移至 Lakehouse 執行階段目錄 Iceberg REST 目錄，請執行下列步驟：
+   * 如要將中繼資料遷移至 Lakehouse 執行階段目錄 (Iceberg REST 目錄或 Hive 目錄)：
      [BigLake 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake?hl=zh-tw#biglake.admin)  (`roles/biglake.admin`)
    * 如要將中繼資料遷移至 Dataproc Metastore，請執行下列步驟：
      [Dataproc Metastore 資料擁有者](https://docs.cloud.google.com/iam/docs/roles-permissions/metastore?hl=zh-tw#metastore.metadataOwner)  (`roles/metastore.metadataOwner`)
@@ -212,7 +229,7 @@ Apache Hive 的中繼資料](https://docs.cloud.google.com/bigquery/docs/hadoop-
 1. 前往 Google Cloud 控制台的「資料移轉」頁面。
 
    [前往「資料轉移」頁面](https://console.cloud.google.com/bigquery/transfers?hl=zh-tw)
-2. 按一下 add「建立轉移作業」。
+2. 按一下「建立轉移作業」add。
 3. 在「來源類型」部分，從「來源」清單中選取「Hive Metastore」。
 4. 在「位置」部分，選取位置類型，然後選取區域。
 5. 在「Transfer config name」(轉移設定名稱) 部分，「Display name」(顯示名稱) 請輸入資料移轉作業名稱。
@@ -238,6 +255,7 @@ Apache Hive 的中繼資料](https://docs.cloud.google.com/bigquery/docs/hadoop-
    6. 從下拉式清單中選擇目的地 Metastore 類型：
       * `DATAPROC_METASTORE`(舊版)：選取這個選項，將中繼資料儲存在 [Dataproc Metastore](https://docs.cloud.google.com/dataproc-metastore/docs/overview?hl=zh-tw) 中。您必須在「Dataproc metastore url」中提供 Dataproc Metastore 的網址。
       * `BIGLAKE_REST_CATALOG`：選取這個選項，將中繼資料儲存在 Lakehouse 執行階段目錄 Iceberg REST 目錄中。系統會根據目標 Cloud Storage 值區建立目錄。
+      * `BIGLAKE_HIVE_CATALOG`：選取這個選項，將中繼資料儲存在 Lakehouse 執行階段目錄 Hive 目錄中。您必須在 **BigLake Metastore Hive Catalog ID** 中提供目錄名稱。如果目錄不存在，系統會自動建立。
    7. 選用：針對「服務帳戶」，輸入要用於這項資料移轉作業的服務帳戶。服務帳戶應屬於建立移轉設定和目的地資料集的相同Google Cloud 專案。
 
 ### bq
@@ -257,6 +275,7 @@ Apache Hive 的中繼資料](https://docs.cloud.google.com/bigquery/docs/hadoop-
     "metastore":"METASTORE",
     "destination_dataproc_metastore":"DATAPROC_METASTORE_URL",
     "destination_bigquery_dataset":"BIGLAKE_METASTORE_DATASET",
+    "blms_hive_catalog_id":"HIVE_CATALOG_ID",
     "translation_output_gcs_path":"gs://TRANSLATION_OUTPUT_BUCKET/metadata/config/default_database/",
     "storage_type":"STORAGE_TYPE",
     "agent_pool_name":"AGENT_POOL_NAME",
@@ -284,9 +303,12 @@ Apache Hive 的中繼資料](https://docs.cloud.google.com/bigquery/docs/hadoop-
 * `MIGRATION_BUCKET`：所有基礎檔案的載入目的地 GCS 路徑。只有在 `transfer_strategy` 為 `FULL_TRANSFER` 時，才能使用這項功能。
 * `METASTORE`：要遷移的 Metastore 類型。請將此值設為下列其中一個值：
   + `DATAPROC_METASTORE`：將中繼資料轉移至 Dataproc Metastore。
-  + `BIGLAKE_REST_CATALOG`：將中繼資料轉移至 Lakehouse 執行階段目錄 Iceberg REST 目錄。
+  + `BIGLAKE_REST_CATALOG`：將中繼資料轉移至 Lakehouse 執行階段目錄
+    Iceberg REST 目錄 (建議用於 Iceberg 資料表)。
+  + `BIGLAKE_HIVE_CATALOG`：將中繼資料轉移至 Lakehouse 執行階段目錄
+    Hive 目錄 (建議用於 Apache Hive 資料表)。
 * `DATAPROC_METASTORE_URL`：Dataproc Metastore 的網址。如果 `metastore` 為 `DATAPROC_METASTORE`，則為必要欄位。
-* `BIGLAKE_METASTORE_DATASET`：Lakehouse 執行階段目錄的 BigQuery 資料集。如果 `metastore` 為 `BIGLAKE_METASTORE`，且 `transfer_strategy` 為 `FULL_TRANSFER`，則為必要欄位。
+* `HIVE_CATALOG_ID`：Lakehouse 執行階段目錄 Hive 目錄的 ID。如果 `metastore` 為 `BIGLAKE_HIVE_CATALOG`，則為必要欄位。如果目錄不存在，系統會自動建立。
 * `STORAGE_TYPE`：指定資料表的基礎檔案儲存空間。支援的類型為 `HDFS`、`S3` 和 `AZURE`。如果 `transfer_strategy` 為 `FULL_TRANSFER`，則為必填。
 * `AGENT_POOL_NAME`：用於建立代理程式的代理程式集區名稱。如果 `storage_type` 為 `HDFS`，則為必要欄位。
 * `AWS_ACCESS_KEY_ID`：[存取憑證](#configure-sts)中的存取金鑰 ID。如果 `storage_type` 為 `S3`，則為必要欄位。
@@ -435,14 +457,5 @@ Apache Hive 的中繼資料](https://docs.cloud.google.com/bigquery/docs/hadoop-
    fi
 
    # If Kerberos authentication is enabled, check for required fields.
-   if [[ "$KERBEROS_AUTHENTICATION" == "true" ]]; then
-     if [[ -z "$DUMPER_HOST" || -z "$DUMPER_PORT" || -z "$HIVE_KERBEROS_URL" || -z "$HIVEQL_RPC_PROTECTION" ]]; then
-         echo "ERROR: If --kerberos-authentication is enabled, --host, --port, --hive-kerberos-url and --hiveql-rpc-protection must be provided." >&2
-         echo "Run with --help for more information." >&2
-         exit 1
-     fi
-   fi
-
-   # Remove trailing slashes from GCS_BASE_PATH, if any.
-   GCS_BASE_PATH=$(echo "${
+   if [[ "$KERBEROS_AUTHENTICATION" == "true" ]]; then<
    ```

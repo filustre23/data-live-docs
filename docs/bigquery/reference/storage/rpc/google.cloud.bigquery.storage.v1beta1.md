@@ -255,4 +255,4 @@ All fields in this message optional.
 
 | Fields | |
 | --- | --- |
-| `snapshot_time` | `Timestamp`  The snapshot time |
+| `snapshot_time` | `Timestamp`  Th |

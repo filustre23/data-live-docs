@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-06-01T08:57+00:00_
+_Generated 2026-06-01T17:16+00:00_
 
-**9 sources, 5065 topics total**
+**9 sources, 5066 topics total**
 
 ## airflow
 
@@ -3116,7 +3116,7 @@ _144 topics_
 
 Upstream: <https://docs.getdbt.com/docs/>
 
-_1005 topics_
+_1006 topics_
 
 - `dbt-core/best-practices/best-practice-workflows`
 - `dbt-core/best-practices/clone-incremental-models`
@@ -4005,6 +4005,7 @@ _1005 topics_
 - `dbt-core/reference/resource-configs/plus-prefix`
 - `dbt-core/reference/resource-configs/postgres-configs`
 - `dbt-core/reference/resource-configs/pre-hook-post-hook`
+- `dbt-core/reference/resource-configs/quote_args`
 - `dbt-core/reference/resource-configs/quote_columns`
 - `dbt-core/reference/resource-configs/redshift-configs`
 - `dbt-core/reference/resource-configs/resource-path`

@@ -652,4 +652,4 @@ ML.GENERATE_EMBEDDING(
       you provide.
   + The `multimodalembedding@001` model also outputs the following fields:
 
-    - `ml_generate_embedding_start_sec`
+    - `ml_generate_embedding_s`

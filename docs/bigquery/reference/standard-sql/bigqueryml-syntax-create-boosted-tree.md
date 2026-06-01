@@ -1013,4 +1013,4 @@ You must specify this option in order to use hyperparameter tuning.
 
 **Arguments**
 
-An `INT64` value between `1` and `100`, inc
+An `INT64` value between `1` and
