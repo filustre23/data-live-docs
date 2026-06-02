@@ -1082,4 +1082,4 @@ Knowledge Catalog 會儲存最近 300 項工作或過去一年的資料剖析掃
 
 1. 在 Google Cloud 控制台的 BigQuery「Metadata curation」(中繼資料管理) 頁面，前往「Data profiling & quality」(資料剖析與品質) 分頁。
 
-   [前往「Data profiling & quality」(資料剖析與品質)](https://console.cloud.google.com/bigquery/governance/metadata-curation/data-profiling-and-quality?hl=zh-tw)
+   [前往「Data profiling & quality」(資料剖析與](https://console.cloud.google.com/bigquery/governance/metadata-curation/data-profiling-and-quality?hl=zh-tw)

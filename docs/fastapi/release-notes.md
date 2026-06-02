@@ -15,6 +15,9 @@ hide:
 
 ### Translations
 
+* 🌐 Update translations for zh-hant (update-outdated). PR [#15671](https://github.com/fastapi/fastapi/pull/15671) by [@tiangolo](https://github.com/tiangolo).
+* 🌐 Update translations for es (update-outdated). PR [#15670](https://github.com/fastapi/fastapi/pull/15670) by [@tiangolo](https://github.com/tiangolo).
+* 🌐 Update translations for fr (update-outdated). PR [#15669](https://github.com/fastapi/fastapi/pull/15669) by [@tiangolo](https://github.com/tiangolo).
 * 🌐 Update translations for ja (update-outdated). PR [#15668](https://github.com/fastapi/fastapi/pull/15668) by [@tiangolo](https://github.com/tiangolo).
 * 🌐 Update translations for pt (update-outdated). PR [#15667](https://github.com/fastapi/fastapi/pull/15667) by [@tiangolo](https://github.com/tiangolo).
 * 🌐 Update translations for tr (update-outdated). PR [#15666](https://github.com/fastapi/fastapi/pull/15666) by [@tiangolo](https://github.com/tiangolo).
@@ -26,6 +29,7 @@ hide:
 
 ### Internal
 
+* 👥 Update FastAPI People - Experts. PR [#15677](https://github.com/fastapi/fastapi/pull/15677) by [@tiangolo](https://github.com/tiangolo).
 * 👥 Update FastAPI GitHub topic repositories. PR [#15675](https://github.com/fastapi/fastapi/pull/15675) by [@tiangolo](https://github.com/tiangolo).
 * 👥 Update FastAPI People - Contributors and Translators. PR [#15662](https://github.com/fastapi/fastapi/pull/15662) by [@tiangolo](https://github.com/tiangolo).
 * 👷 Automate release preparation. PR [#15661](https://github.com/fastapi/fastapi/pull/15661) by [@tiangolo](https://github.com/tiangolo).

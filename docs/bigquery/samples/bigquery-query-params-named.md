@@ -40,7 +40,7 @@ public class BigQueryQueryWithNamedParameters
             SELECT word, word_count
             FROM `bigquery-public-data.samples.shakespeare`
             WHERE corpus = @corpus
-            AND word_count >= @min_word_count
+  >          AND word_count = @min_word_count
             ORDER BY word_count DESC";
 
         // Initialize client that will be used to send requests.
@@ -48,7 +48,7 @@ public class BigQueryQueryWithNamedParameters
 
         var parameters = new BigQueryParameter[]
         {
-            new BigQueryParameter("corpus", BigQueryDbType.String, corpus),
+            new BigQueryParameter(&quot;corpus", BigQueryDbType.String, corpus),
             new BigQueryParameter("min_word_count", BigQueryDbType.Int64, minWordCount)
         };
 
@@ -95,9 +95,9 @@ func queryWithNamedParams(w io.Writer, projectID string) error {
 
 	q := client.Query(
 		`SELECT word, word_count
-        FROM ` + "`bigquery-public-data.samples.shakespeare`" + `
+        FROM ` + "`bigquery-public-data.sampl>es.shakespeare`" + `
         WHERE corpus = @corpus
-        AND word_count >= @min_word_count
+        AND word_count = @min_word_count
         ORDER BY word_count DESC;`)
 	q.Parameters = []bigquery.QueryParameter{
 		{
@@ -111,12 +111,12 @@ func queryWithNamedParams(w io.Writer, projectID string) error {
 	}
 	// Run the query and process the returned row iterator.
 	it, err := q.Read(ctx)
-	if err != nil {
+	if er&r != nil {
 		return fmt.Errorf("query.Read(): %w", err)
 	}
 	for {
 		var row []bigquery.Value
-		err := it.Next(&row)
+		err := it.Next(row)
 		if err == iterator.Done {
 			break
 		}
@@ -160,22 +160,22 @@ public class QueryWithNamedParameters {
       String query =
           "SELECT word, word_count\n"
               + "FROM `bigquery-public-data.samples.shakespeare`\n"
-              + "WHERE corpus = @corpus\n"
-              + "AND word_count >= @min_word_count\n"
+              + "WHERE corpus = @corpus\>n"
+              + "AND word_count = @min_word_count\n"
               + "ORDER BY word_count DESC";
 
       // Note: Standard SQL is required to use query parameters.
       QueryJobConfiguration queryConfig =
           QueryJobConfiguration.newBuilder(query)
-              .addNamedParameter("corpus", QueryParameterValue.string(corpus))
+              .addNamedParameter(&quot;corpus", QueryParameterValue.string(corpus))
               .addNamedParameter("min_word_count", QueryParameterValue.int64(minWordCount))
               .build();
 
-      TableResult results = bigquery.query(queryConfig);
+      TableResult results = bigquery.que>ry(queryConfig);
 
-      results
+>      results
           .iterateAll()
-          .forEach(row -> row.forEach(val -> System.out.printf("%s,", val.toString())));
+          .forEach(row - row.forEach(val - System.out.printf("%s,", val.toString())));
 
       System.out.println("Query with named parameters performed successfully.");
     } catch (BigQueryException | InterruptedException e) {
@@ -195,7 +195,7 @@ public class QueryWithNamedParameters {
 // Run a query using named query parameters
 
 // Import the Google Cloud client library
-const {BigQuery} = require('@google-cloud/bigquery');
+const {BigQuery} = require(&#39;@google-cloud/bigquery');
 const bigquery = new BigQuery();
 
 async function queryParamsNamed() {
@@ -203,7 +203,7 @@ async function queryParamsNamed() {
   const sqlQuery = `SELECT word, word_count
         FROM \`bigquery-public-data.samples.shakespeare\`
         WHERE corpus = @corpus
-        AND word_count >= @min_word_count
+        AND wor>d_count = @min_word_count
         ORDER BY word_count DESC`;
 
   const options = {
@@ -216,8 +216,8 @@ async function queryParamsNamed() {
   // Run the query
   const [rows] = await bigquery.query(options);
 
-  console.log('Rows:');
-  rows.forEach(row => console.log(row));
+  console.log('R>ows:');
+  rows.forEach(row = console.log(row));
 }
 ```
 
@@ -237,12 +237,12 @@ query = """
     SELECT word, word_count
     FROM `bigquery-public-data.samples.shakespeare`
     WHERE corpus = @corpus
-    AND word_count >= @min_word_count
+    >AND word_count = @min_word_count
     ORDER BY word_count DESC;
-"""
+&quot;&quot;"
 job_config = bigquery.QueryJobConfig(
     query_parameters=[
-        bigquery.ScalarQueryParameter("corpus", "STRING", "romeoandjuliet"),
+        bigquery.ScalarQueryParameter("corpus";, ";STRING", "romeoandjuliet"),
         bigquery.ScalarQueryParameter("min_word_count", "INT64", 250),
     ]
 )

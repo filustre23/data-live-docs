@@ -97,7 +97,7 @@ Materialized view 是預先運算的檢視區塊，會定期儲存 SQL 查詢的
 * 您無法使用 `COPY`、`EXPORT`、`LOAD`、`WRITE` 或 data manipulation language (DML) 陳述式等作業，直接更新或操縱 materialized view 資料。
 * 實體化檢視表建立後，您就無法更新查詢。
 * 具體化檢視區塊必須與其基本資料表位於同一個機構，如果專案不屬於任何機構，則必須位於同一個專案。
-* 具體化檢視表使用受限的 SQL 語法和一組有限的匯總函式。詳情請參閱「[具體化檢視區塊查詢支援](https://docs.cloud.google.com/bigquery/docs/materialized-views-create?hl=zh-tw#query_patterns_and_definitions)」。
+* 具體化檢視表使用受限的 SQL 語法和一組有限的匯總函式。詳情請參閱「[具體化檢視區塊查詢支援](https://docs.cloud.google.com/bigquery/docs/materialized-views-create?hl=zh-tw#supported-mvs)」。
 * 您無法在其他具體化檢視表上巢狀建立具體化檢視表。
 * 具體化檢視區塊無法查詢外部或萬用字元資料表、邏輯檢視區塊1或快照。
 * 具體化檢視區塊不支援[系統變數](https://docs.cloud.google.com/bigquery/docs/reference/system-variables?hl=zh-tw)，例如 `@@session_id` 系統變數。
@@ -175,11 +175,11 @@ GROUP BY date
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-30 (世界標準時間)。
+上次更新時間：2026-06-01 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-30 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-01 (世界標準時間)。"],[],[]]

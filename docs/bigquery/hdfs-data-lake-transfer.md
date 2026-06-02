@@ -457,5 +457,5 @@ Apache Hive 的中繼資料](https://docs.cloud.google.com/bigquery/docs/hadoop-
    fi
 
    # If Kerberos authentication is enabled, check for required fields.
-   if [[ "$KERBEROS_AUTHENTICATION" == "true" ]]; then<
+   if [[ "$KERBEROS_AUTHENTICATION" == "true" ]];
    ```

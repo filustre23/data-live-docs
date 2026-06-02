@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-06-01T21:24+00:00_
+_Generated 2026-06-02T08:55+00:00_
 
-**9 sources, 5117 topics total**
+**9 sources, 5132 topics total**
 
 ## airflow
 
@@ -16,13 +16,14 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_1408 topics_
+_1422 topics_
 
 - `anthropic-sdk/agents-and-tools/agent-skills/best-practices`
 - `anthropic-sdk/agents-and-tools/agent-skills/enterprise`
 - `anthropic-sdk/agents-and-tools/agent-skills/overview`
 - `anthropic-sdk/agents-and-tools/agent-skills/quickstart`
 - `anthropic-sdk/agents-and-tools/mcp-connector`
+- `anthropic-sdk/agents-and-tools/mcp-tunnels/concepts`
 - `anthropic-sdk/agents-and-tools/mcp-tunnels/console`
 - `anthropic-sdk/agents-and-tools/mcp-tunnels/deploy-compose`
 - `anthropic-sdk/agents-and-tools/mcp-tunnels/deploy-helm`
@@ -64,6 +65,13 @@ _1408 topics_
 - `anthropic-sdk/api/admin/api_keys/update`
 - `anthropic-sdk/api/admin/cost_report`
 - `anthropic-sdk/api/admin/cost_report/retrieve`
+- `anthropic-sdk/api/admin/external_keys`
+- `anthropic-sdk/api/admin/external_keys/create`
+- `anthropic-sdk/api/admin/external_keys/delete`
+- `anthropic-sdk/api/admin/external_keys/list`
+- `anthropic-sdk/api/admin/external_keys/retrieve`
+- `anthropic-sdk/api/admin/external_keys/update`
+- `anthropic-sdk/api/admin/external_keys/validate`
 - `anthropic-sdk/api/admin/invites`
 - `anthropic-sdk/api/admin/invites/create`
 - `anthropic-sdk/api/admin/invites/delete`
@@ -1382,6 +1390,10 @@ _1408 topics_
 - `anthropic-sdk/manage-claude/api-and-data-retention`
 - `anthropic-sdk/manage-claude/authentication`
 - `anthropic-sdk/manage-claude/claude-code-analytics-api`
+- `anthropic-sdk/manage-claude/cmek`
+- `anthropic-sdk/manage-claude/cmek-aws-kms`
+- `anthropic-sdk/manage-claude/cmek-azure-key-vault`
+- `anthropic-sdk/manage-claude/cmek-google-cloud-kms`
 - `anthropic-sdk/manage-claude/compliance-activity-feed`
 - `anthropic-sdk/manage-claude/compliance-api`
 - `anthropic-sdk/manage-claude/compliance-api-access`
@@ -1418,8 +1430,10 @@ _1408 topics_
 - `anthropic-sdk/managed-agents/overview`
 - `anthropic-sdk/managed-agents/permission-policies`
 - `anthropic-sdk/managed-agents/quickstart`
+- `anthropic-sdk/managed-agents/reference`
 - `anthropic-sdk/managed-agents/self-hosted-sandboxes`
 - `anthropic-sdk/managed-agents/self-hosted-sandboxes-security`
+- `anthropic-sdk/managed-agents/session-operations`
 - `anthropic-sdk/managed-agents/sessions`
 - `anthropic-sdk/managed-agents/skills`
 - `anthropic-sdk/managed-agents/tools`
@@ -2965,7 +2979,7 @@ _1527 topics_
 
 Upstream: <https://code.claude.com/docs/en/>
 
-_144 topics_
+_145 topics_
 
 - `claude-code/admin-setup`
 - `claude-code/agent-sdk/agent-loop`
@@ -3054,6 +3068,7 @@ _144 topics_
 - `claude-code/llm-gateway`
 - `claude-code/managed-mcp`
 - `claude-code/mcp`
+- `claude-code/mcp-quickstart`
 - `claude-code/memory`
 - `claude-code/microsoft-foundry`
 - `claude-code/model-config`

@@ -49,9 +49,10 @@ The Data Engineering Agent has the following limitations:
   and run or schedule pipelines.
 * The Data Engineering Agent cannot search any web links or URLs provided
   through instructions or direct prompts.
-* When importing files in an [agent instruction
-  file](/gemini/data-agents/data-engineering-agent/data-engineering-agent-overview#agent_instructions), the `@`
-  import syntax supports only paths that begin with `./`, `/`, or a letter.
+* When importing files in an
+  [agent instruction file](/gemini/data-agents/data-engineering-agent/agent-overview#agent_instructions),
+  the `@` import syntax supports only paths that begin with `./`, `/`, or a
+  letter.
 * The [data preview](/bigquery/docs/data-engineering-agent-pipelines#review_a_data_pipeline) feature is supported only for
   tables, declarations, or queries with the `hasOutput` flag set to `true`.
 * The Data Engineering Agent is subject to the [general limitations of AI
@@ -502,11 +503,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-05-29 UTC.
+Last updated 2026-06-01 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-29 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-06-01 UTC."],[],[]]

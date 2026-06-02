@@ -27,6 +27,23 @@ To get the latest product updates delivered to you, add the URL of this page to 
 reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators), or add the
 [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## June 01, 2026
+
+Change
+
+The Facebook Ads connector for the BigQuery Data Transfer Service now supports
+data transfers from the following Facebook Ads reports:
+
+* `AdInsightsMMM`
+* `Ads`
+* `AdCreatives`
+* `AdSets`
+* `Campaigns`
+* `AdImages`
+* `AdLabels`
+* `Businesses`
+* `CustomAudiences`
+
 ## May 27, 2026
 
 Change
@@ -4218,14 +4235,4 @@ You can now use the [`BY NAME` and `CORRESPONDING` modifiers](/bigquery/docs/ref
 
 Change
 
-The BigQuery ML [`ML.BUCKETIZE`](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-bucketize) and [`ML.QUANTILE_BUCKETIZE`](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-quantile-bucketize) functions now support formatting of the function output. You can use the `output_format` argument to format the function output as one of the following:
-
-* A string in the format `bin_<bucket_index>`
-* A string in [interval notation](https://en.wikipedia.org/wiki/Interval_(mathematics))
-* A JSON-formatted string
-
-## January 28, 2025
-
-Feature
-
-You can now view [stored column usage](/bigquery/docs/reference/rest/v2/Job#StoredColumnsUsage) information for a query job that performs
+The BigQuery ML [`ML.BUCKETIZE`](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-bucketize) and

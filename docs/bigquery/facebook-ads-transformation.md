@@ -30,7 +30,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 |  | 目標 | *字串* | 用來取得廣告帳戶的目標。這個值為 `null`，可取得所有廣告帳戶。 |
 | `account_id` | AccountId | *字串* | 直接在 Facebook 中查看廣告帳戶時的 ID。 |
 | `account_status` | AccountStatus | *整數* | 帳戶狀態。1 = 有效、2 = 已停用、3 = 未結算、7 = 待審核、9 = 寬限期內、101 = 暫時無法使用、100 = 待關閉。 |
-| `age` | 年齡 | *Double* | 廣告帳戶的開立天數。 |
+| `age` | 年齡 | *Double* | 廣告帳戶的開立時間 (以天為單位)。 |
 | `amount_spent` | AmountSpent | *整數* | 帳戶目前的支出總金額。這項設定可以重設。 |
 | `balance` | 餘額 | *整數* | 應付帳單金額。 |
 | `business_city` | BusinessCity | *字串* | 商家地址所在的城市。 |
@@ -44,7 +44,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 | `created_time` | CreatedTime | *日期時間* | 帳戶建立時間。 |
 | `currency` | 幣別 | *字串* | 帳戶使用的幣別，以帳戶設定中的相應值為準。 |
 | `min_campaign_group_spend_cap` | MinCampaignGroupSpendCap | *字串* | 廣告活動群組的最低支出上限。 |
-| `name` | 名稱 | *字串* | 帳戶名稱；請注意，許多帳戶沒有名稱，因此這個欄位可能會空白。 |
+| `name` | 名稱 | *字串* | 帳戶名稱。請注意，許多帳戶沒有名稱，因此這個欄位可能會空白。 |
 | `offsite_pixels_tos_accepted` | OffsitePixelsTosAccepted | *字串* | 指出是否已簽署站外像素服務條款合約。 |
 | `owner` | OwnerId | *字串* | 廣告帳戶擁有者的 Facebook ID。 |
 | `spend_cap` | SpendCap | *整數* | 這個帳戶可支出的最高金額，超過這個金額後，廣告活動就會暫停。如果值為 0，表示沒有支出上限。 |
@@ -72,9 +72,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 | `ad_id` | AdId | *字串* | 與報表列相關聯的廣告 ID。 |
 | `ad_name` | AdName | *字串* | 與報表列相關聯的廣告名稱。 |
 | `buying_type` | BuyingType | *字串* | 廣告活動中目標廣告的付費方式。 |
-| `clicks` | 點擊次數 | *長* | 廣告獲得的總點擊次數。視宣傳內容而定，這類互動可能包括按讚、活動回應或應用程式安裝次數。在 Facebook 使用者介面中，這是「點擊次數 (全部)」欄位。 |
+| `clicks` | 點擊次數 | *長* | 廣告獲得的總點擊次數。視宣傳內容而定，這類互動可能包括粉絲專頁按讚、活動回應或應用程式安裝。在 Facebook 使用者介面中，這是「點擊次數 (全部)」欄位。 |
 | `conversion_rate_ranking` | ConversionRateRanking | *字串* | 轉換率排名。 |
-| `cost_per_estimated_ad_recallers` | CostPerEstimatedAdRecallers | *十進位* | 我們預估，如果詢問使用者是否在 2 天內看過您的廣告，平均每增加一位記得看過廣告的使用者，您需要支付的費用。 |
+| `cost_per_estimated_ad_recallers` | CostPerEstimatedAdRecallers | *十進位* | 我們預估在 2 天內，每多一位使用者回憶起看過您的廣告，您需要支付的平均費用。 |
 | `cost_per_inline_link_click` | CostPerInlineLinkClick | *十進位* | 廣告中連結的平均單次點擊出價。 |
 | `cost_per_inline_post_engagement` | CostPerInlinePostEngagement | *十進位* | 貼文的平均單次參與出價。 |
 | `cost_per_unique_click` | CostPerUniqueClick | *十進位* | 這些廣告的單次不重複點擊平均費用，計算方式為支出金額除以獲得的不重複點擊次數。 |
@@ -82,28 +82,28 @@ Google uses AI technology to translate content into your preferred language. AI 
 | `cpc` | 單次點擊出價 | *十進位* | 這些廣告的平均單次點擊出價，計算方式為支出金額除以獲得的點擊次數。 |
 | `cpm` | 千次曝光出價 | *十進位* | 您為廣告每獲得 1,000 次曝光所支付的平均費用。 |
 | `cpp` | 單次通話成本 | *十進位* | 您為廣告向 1,000 位不重複使用者放送所支付的平均費用。 |
-| `ctr` | 點閱率 | *Double* | 獲得的點擊次數除以曝光次數。在 Facebook 使用者介面中，這是「點閱率 (全部)」% 欄位。 |
+| `ctr` | 點閱率 | *Double* | 獲得的點擊次數除以曝光次數。在 Facebook 使用者介面中，這是「點閱率 (全部)」欄位。 |
 | `estimated_ad_recall_rate` | EstimatedAdRecallRate | *Double* | 預估記得廣告的人數除以廣告觸及人數。 |
-| `estimated_ad_recallers` | EstimatedAdRecallers | *Double* | 我們預估在 2 天內詢問時，會記得看過您廣告的人數。 |
-| `frequency` | 頻率 | *Double* | 每位使用者看到廣告的平均次數。 |
-| `impressions` | 曝光次數 | *長* | 廣告放送次數。在行動應用程式中，廣告首次顯示時，系統就會將其計為已放送。在所有其他 Facebook 介面中，廣告會在首次出現在使用者的動態消息時放送，或每次出現在右欄時放送。 |
+| `estimated_ad_recallers` | EstimatedAdRecallers | *Double* | 我們預估在 2 天內，會記得看過您廣告的人數。 |
+| `frequency` | 頻率 | *Double* | 廣告向每位使用者放送的平均次數。 |
+| `impressions` | 曝光次數 | *長* | 廣告放送次數。在行動應用程式中，廣告首次顯示時，系統就會計算為一次放送。在所有其他 Facebook 介面中，廣告會在首次顯示於使用者的動態消息時放送，或每次顯示於右欄時放送。 |
 | `inline_link_clicks` | InlineLinkClicks | *長* | 廣告中連結的總點擊次數。 |
 | `inline_link_click_ctr` | InlineLinkClicksCounter | *Double* | 連結的內嵌點擊點閱率。 |
 | `inline_post_engagement` | InlinePostEngagement | *長* | 貼文的參與總次數。 |
-| `instant_experience_clicks_to_open` | InstantExperienceClicksToOpen | *長* | 對應至 META API 中的 instant\_experience\_clicks\_to\_open 欄位。 |
+| `instant_experience_clicks_to_open` | InstantExperienceClicksToOpen | *長* | 對應至 META API 的 instant\_experience\_clicks\_to\_open 欄位。 |
 | `instant_experience_clicks_to_start` | InstantExperienceClicksToStart | *長* | 對應至 META API 中的 instant\_experience\_clicks\_to\_start 欄位。 |
-| `instant_experience_outbound_clicks` | InstantExperienceOutboundClicks | *長* | 對應至 META API 中的 instant\_experience\_outbound\_clicks 欄位。 |
+| `instant_experience_outbound_clicks` | InstantExperienceOutboundClicks | *長* | 對應於 META API 中的 instant\_experience\_outbound\_clicks 欄位。 |
 | `objective` | 目標 | *字串* | 您為廣告活動選取的目標。目標反映您希望透過廣告達成的目標。 |
 | `quality_ranking` | QualityRanking | *字串* | 品質排名。 |
 | `reach` | 觸及率 | *長* | 廣告的放送對象人數。 |
-| `spend` | 支出 | *十進位* | 到目前為止的支出總額。 |
-|  | UniqueClicks | *長* | 點擊廣告的不重複使用者總數。舉例來說，如果 3 位使用者點按同一則廣告 5 次，系統會計為 3 次不重複點擊。 |
-|  | UniqueCTR | *Double* | 點按廣告的人數除以觸及人數。舉例來說，如果您獲得 20 次不重複點擊，且廣告向 1,000 位不重複使用者放送，則不重複點閱率為 2%。 |
+| `spend` | 支出 | *十進位* | 到目前為止的總支出金額。 |
+|  | UniqueClicks | *長* | 點擊廣告的不重複使用者總數。舉例來說，如果 3 位使用者點擊同一則廣告 5 次，系統會計為 3 次不重複點擊。 |
+|  | UniqueCTR | *Double* | 點按廣告的人數除以觸及人數。舉例來說，如果您獲得 20 次不重複點擊，且廣告放送對象為 1,000 位不重複使用者，則不重複點閱率為 2%。 |
 | `inline_link_clicks` | UniqueInlineLinkClicks | *長* | 廣告獲得的不重複內嵌連結點擊次數。在 Facebook 使用者介面中，這是「不重複連結點擊次數」欄位。 |
 |  | UniqueInlineLinkClickCounter | *Double* | 不重複內嵌連結點擊的點閱率。 |
-|  | UniqueLinkClicksCounter | *Double* | 連結點擊的不重複點閱率。將點擊廣告中導向 Facebook 以外連結的人數，除以您觸及的人數。舉例來說，如果連結獲得 20 次不重複點擊，且廣告向 1,000 位不重複使用者顯示，則不重複點閱率為 2%。 |
+|  | UniqueLinkClicksCounter | *Double* | 連結點擊的不重複點閱率。點擊廣告中導向 Facebook 以外連結的人數，除以觸及人數。舉例來說，如果連結獲得 20 次不重複點擊，且廣告向 1,000 位不重複使用者顯示，則不重複點閱率為 2%。 |
 |  | 入住 | *Int* | 歸因於廣告的入住次數。 |
-|  | EventResponses | *Int* | 歸因於廣告的事件回應數量。 |
+|  | EventResponses | *Int* | 歸因於廣告的事件回應次數。 |
 | `inline_link_clicks` | LinkClicks | *Int* | 歸因於廣告的連結點擊次數。 |
 |  | OfferSaves | *Int* | 歸因於廣告的收到優惠數量。 |
 | `outbound_clicks` | OutboundClicks | *Int* | 歸因於廣告的出站點擊次數。 |
@@ -124,11 +124,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 |  | 國家/地區 | *字串* | 這個資料列中指標的國家/地區。 |
 |  | 區域 | *字串* | 使用者觀看廣告的區域。 |
 |  | FrequencyValue | *字串* | 觸及和頻率廣告活動中的廣告向每位使用者放送的次數。 |
-|  | HStatsByAdvertiserTZ | *字串* | 廣告主統計資料的計算時間範圍。 |
-|  | HStatsByAudienceTZ | *字串* | 目標對象的統計資料所涵蓋的時間範圍。 |
+|  | HStatsByAdvertiserTZ | *字串* | 廣告主取得統計資料的時間範圍。 |
+|  | HStatsByAudienceTZ | *字串* | 目標對象的統計資料時間範圍。 |
 |  | ImpressionDevice | *字串* | 用來觀看廣告的裝置。 |
 |  | PlatformPosition | *字串* | 平台上的位置。 |
-|  | PublisherPlatform | *字串* | 廣告發布平台。 |
+|  | PublisherPlatform | *字串* | 廣告發布的平台。 |
 |  | ProductId | *字串* | 廣告中宣傳的產品 ID。 |
 
 ### 「`AdInsightsActions`」報表
@@ -155,25 +155,25 @@ Google uses AI technology to translate content into your preferred language. AI 
 | `ACTION_COLLECTION.value` | ActionValue | *整數* | 預設歸屬期的指標值。  Facebook 廣告計畫更新這個資料類型對應。詳情請參閱 [2026 年 7 月 25 日](https://docs.cloud.google.com/bigquery/docs/transfer-changes?hl=zh-tw#Jul25-fb-ads)。 |
 | `ACTION_COLLECTION.1d_click` | Action1dClick | *字串* | 廣告獲得點擊後 1 天的歸屬期指標值。 |
 | `ACTION_COLLECTION.1d_view` | Action1dView | *字串* | 廣告觀看後 1 天的歸屬期指標值。 |
-| `ACTION_COLLECTION.7d_click` | Action7dClick | *字串* | 廣告獲得點擊後 7 天的歸屬期指標值。 |
+| `ACTION_COLLECTION.7d_click` | Action7dClick | *字串* | 點擊廣告後 7 天的歸屬期指標值。 |
 | `ACTION_COLLECTION.7d_view` | Action7dView | *字串* | 廣告觀看後 7 天的歸屬期指標值。 |
 | `ACTION_COLLECTION.28d_click` | Action28dClick | *字串* | 廣告獲得點擊後 28 天的歸屬期指標值。 |
 | `ACTION_COLLECTION.28d_view` | Action28dView | *字串* | 觀看廣告後 28 天的歸屬期指標值。 |
-| `ACTION_COLLECTION.dda` | ActionDDA | *字串* | 歸屬期的指標值，由以數據為準模式提供。 |
+| `ACTION_COLLECTION.dda` | ActionDDA | *字串* | 歸屬期的指標值，由以數據為準歸因模式提供。 |
 | **一般細目** | | | |
 |  | 年齡 | *字串* | 這列指標的年齡範圍。 |
 |  | 性別 | *字串* | 這列指標的性別。 |
 |  | 國家/地區 | *字串* | 這個資料列中指標的國家/地區。 |
 |  | 區域 | *字串* | 使用者觀看廣告的區域。 |
 |  | FrequencyValue | *字串* | 觸及和頻率廣告活動中的廣告向每位使用者放送的次數。 |
-|  | HStatsByAdvertiserTZ | *字串* | 廣告主統計資料的計算時間範圍。 |
-|  | HStatsByAudienceTZ | *字串* | 目標對象的統計資料所涵蓋的時間範圍。 |
+|  | HStatsByAdvertiserTZ | *字串* | 廣告主取得統計資料的時間範圍。 |
+|  | HStatsByAudienceTZ | *字串* | 目標對象的統計資料時間範圍。 |
 |  | ImpressionDevice | *字串* | 用來觀看廣告的裝置。 |
 |  | PlatformPosition | *字串* | 平台上的位置。 |
-|  | PublisherPlatform | *字串* | 廣告發布平台。 |
+|  | PublisherPlatform | *字串* | 廣告發布的平台。 |
 |  | ProductId | *字串* | 廣告中宣傳的產品 ID。 |
 | **動作細目** | | | |
-|  | ActionType | *字串* | 使用者看到廣告後採取的動作，即使他們沒有點擊廣告也算在內。 |
+|  | ActionType | *字串* | 使用者看到廣告後，即使沒有點擊，也會對廣告採取動作。 |
 |  | ActionCanvasComponentName | *字串* | 畫布廣告中的元件名稱。 |
 |  | ActionCarouselCardId | *字串* | 使用者看到廣告時互動的特定輪播資訊卡 ID。 |
 |  | ActionCarouselCardName | *字串* | 使用者看到廣告時與之互動的特定輪播資訊卡。系統會根據廣告標題識別資訊卡。 |
@@ -185,18 +185,207 @@ Google uses AI technology to translate content into your preferred language. AI 
 |  | ActionVideoType | *字串* | 影片指標細目。 |
 |  | ActionConvertedProductId | *字串* | 已轉換的產品 ID - 適用於協作廣告。 |
 
+### 「`AdInsightsMMM`」報表
 
+| **Meta API 欄位名稱** | **對應的 BigQuery 欄位名稱** | **類型** | **說明** |
+| --- | --- | --- | --- |
+|  | 目標 | *字串* | 要取得洞察資料的帳戶 ID。 |
+|  | TimeIncrement | *字串* | 資料匯總的天數。 |
+| `account_id` | AccountId | *字串* | 與資料列相關聯的廣告帳戶 ID。 |
+| `campaign_id` | CampaignId | *字串* | 與資料列相關聯的廣告活動 ID。 |
+| `adset_id` | AdSetId | *字串* | 與資料列相關聯的廣告組合 ID。 |
+| `date_start` | DateStart | *日期* | 擷取洞察資料的開始日期。 |
+| `date_stop` | DateEnd | *日期* | 擷取洞察資料的結束日期。 |
+| `impressions` | 曝光次數 | *長* | 廣告放送次數。 |
+| `spend` | 支出 | *十進位* | 支出總金額。 |
+| `country` | 國家/地區 | *字串* | 指標的國家/地區。 |
+| `region` | 區域 | *字串* | 廣告的觀看區域。 |
+| `dma` | DMA | *字串* | 指標的指定行銷區域。 |
+| `device_platform` | DevicePlatform | *字串* | 使用的裝置平台。 |
+| `platform_position` | PlatformPosition | *字串* | 平台上的位置。 |
+| `publisher_platform` | PublisherPlatform | *字串* | 發布商平台。 |
+| `creative_media_type` | CreativeMediaType | *字串* | 廣告素材中使用的媒體類型。 |
 
+### 「`Ads`」報表
 
-提供意見
+| **Meta API 欄位名稱** | **對應的 BigQuery 欄位名稱** | **類型** | **說明** |
+| --- | --- | --- | --- |
+| `id` | ID | *字串* | 廣告的 ID。 |
+|  | 目標 | *字串* | 用於擷取廣告的目標欄位。 |
+| `name` | 名稱 | *字串* | 廣告的名稱。 |
+| `status` | AdStatus | *字串* | 廣告的狀態。 |
+| `bid_info` | BidInfo | *字串* | 與廣告相關聯的出價資訊。 |
+| `bid_type` | BidType | *字串* | 與廣告相關聯的出價方式。 |
+| `campaign_id` | CampaignId | *字串* | 廣告活動的 ID。 |
+| `adset_id` | AdSetId | *字串* | 廣告組合的 ID。 |
+| `creative` | AdCreativeId | *字串* | 廣告素材的 ID。 |
+| `configured_status` | ConfiguredStatus | *字串* | 廣告的設定狀態。 |
+| `created_time` | CreatedTime | *日期時間* | 廣告的建立時間。 |
+| `updated_time` | UpdatedTime | *日期時間* | 廣告的上次更新時間。 |
+| `conversion_specs` | ConversionSpecs | *字串* | 轉換規格。 |
+| `failed_delivery_checks` | FailedDeliveryChecks | *字串* | 有關遞送檢查失敗的資訊。 |
+| `recommendations` | 建議 | *字串* | 廣告建議。 |
+| `tracking_specs` | TrackingSpecs | *JSON* | 追蹤規格。 |
+| `ad_active_time` | AdActiveTime | *字串* | 有效時間參數。 |
+| `ad_schedule_end_time` | AdScheduleEndTime | *日期時間* | 排定的結束時間。 |
+| `ad_schedule_start_time` | AdScheduleStartTime | *日期時間* | 排定的開始時間。 |
+| `bid_amount` | BidAmount | *整數* | 出價金額。 |
+| `last_updated_by_app_id` | LastUpdatedByAppId | *字串* | 最後更新廣告的應用程式 ID。 |
+| `preview_shareable_link` | PreviewShareableLink | *字串* | 可共用的預覽連結。 |
+| `source_ad_id` | SourceAdId | *字串* | 來源廣告 ID。 |
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+### 「`AdCreatives`」報表
 
-上次更新時間：2026-05-30 (世界標準時間)。
+| **Meta API 欄位名稱** | **對應的 BigQuery 欄位名稱** | **類型** | **說明** |
+| --- | --- | --- | --- |
+| `id` | ID | *字串* | 廣告素材的 ID。 |
+|  | 目標 | *字串* | 目標欄位。 |
+| `name` | 名稱 | *字串* | 廣告素材名稱。 |
+| `applink_treatment` | ApplinkTreatment | *字串* | 廣告素材的深層連結處理方式。 |
+| `body` | 內文 | *字串* | 廣告區塊的內文。 |
+| `call_to_action_type` | CallToActionType | *字串* | 行動號召類型。 |
+| `effective_instagram_media_id` | EffectiveInstagramMediaId | *字串* | Instagram 媒體的有效 ID。 |
+| `image_hash` | ImageHash | *字串* | 相關聯圖片的雜湊值。 |
+| `image_url` | ImageUrl | *字串* | 廣告素材圖片的網址。 |
+| `instagram_permalink_url` | InstagramPermalinkUrl | *字串* | Instagram 永久連結。 |
+| `instagram_user_id` | InstagramUserId | *字串* | Instagram 使用者 ID。 |
+| `link_og_id` | LinkOgId | *字串* | 連結的 Open Graph ID。 |
+| `link_url` | LinkUrl | *字串* | 到達網頁網址。 |
+| `object_id` | ObjectId | *字串* | 相關聯的物件 ID。 |
+| `object_story_id` | ObjectStoryId | *字串* | 物件故事 ID。 |
+| `object_type` | ObjectType | *字串* | 物件的類型。 |
+| `object_url` | ObjectUrl | *字串* | 物件的網址。 |
+| `page_id` | PageId | *字串* | 相關聯的 Facebook 粉絲專頁 ID。 |
+| `product_set_id` | ProductSetId | *字串* | 產品組合 ID。 |
+| `run_status` | RunStatus | *字串* | 廣告素材的執行狀態。 |
+| `source_instagram_media_id` | SourceInstagramMediaId | *字串* | 來源 Instagram 媒體 ID。 |
+| `template_url` | TemplateUrl | *字串* | 範本網址。 |
+| `thumbnail_url` | ThumbnailUrl | *字串* | 縮圖網址。 |
+| `title` | 標題 | *字串* | 廣告素材的標題文字。 |
+| `url_tags` | UrlTags | *字串* | 網址代碼參數。 |
+| `adlabels` | AdLabels | *字串* | 與廣告素材相關聯的標籤。 |
+| `object_story_spec.link_data` | ObjectStorySpecLinkData | *JSON* | 連結資料規格。 |
+| `object_story_spec.photo_data` | ObjectStorySpecPhotoData | *JSON* | 相片資料規格。 |
+| `object_story_spec.video_data` | ObjectStorySpecVideoData | *JSON* | 影片資料規格。 |
+| `object_story_spec.text_data` | ObjectStorySpecTextData | *JSON* | 文字資料規格。 |
+| `object_story_spec.template_data` | ObjectStorySpecTemplateData | *JSON* | 範本資料規格。 |
 
+### 「`AdSets`」報表
 
+| **Meta API 欄位名稱** | **對應的 BigQuery 欄位名稱** | **類型** | **說明** |
+| --- | --- | --- | --- |
+| `id` | ID | *字串* | 廣告組合的 ID。 |
+|  | 目標 | *字串* | 目標欄位。 |
+| `name` | 名稱 | *字串* | 廣告組合的名稱。 |
+| `budget_remaining` | BudgetRemaining | *整數* | 剩餘預算。 |
+| `campaign_id` | CampaignId | *字串* | 相關聯的廣告活動 ID。 |
+| `status` | AdSetStatus | *字串* | 廣告組合狀態。 |
+| `billing_event` | BillingEvent | *字串* | 帳單事件條件。 |
+| `created_time` | CreatedTime | *日期時間* | 廣告組合建立時間。 |
+| `daily_budget` | DailyBudget | *整數* | 每日預算上限。 |
+| `lifetime_budget` | LifetimeBudget | *整數* | 整個生命週期的預算上限。 |
+| `end_time` | EndTime | *日期時間* | 排定的結束時間。 |
+| `start_time` | StartTime | *日期時間* | 排定的開始時間。 |
+| `updated_time` | UpdatedTime | *日期時間* | 上次更新廣告組合的時間。 |
+| `recommendations` | 建議 | *字串* | 廣告組合的建議。 |
+| `targeting.genders` | TargetingGenders | *字串* | 指定性別。 |
+| `targeting.age_max` | TargetingAgeMax | *整數* | 目標年齡上限。 |
+| `targeting.age_min` | TargetingAgeMin | *整數* | 目標最低年齡。 |
+| `targeting.countries` | TargetingCountries | *字串* | 指定國家/地區。 |
+| `targeting.location_types` | TargetingLocationTypes | *字串* | 指定地區類型。 |
+| `targeting.regions` | TargetingRegions | *字串* | 目標區域或州。 |
+| `targeting.cities` | TargetingCities | *字串* | 指定城市。 |
+| `targeting.zips` | TargetingZips | *字串* | 指定目標郵遞區號。 |
+| `targeting.custom_locations` | TargetingCustomLocations | *字串* | 指定自訂地區。 |
+| `targeting.geo_markets` | TargetingGeoMarkets | *字串* | 目標地理市場。 |
+| `targeting.interests` | TargetingInterests | *字串* | 指定個人興趣。 |
+| `targeting.behaviors` | TargetingBehaviors | *字串* | 指定使用者行為。 |
+| `targeting.device_platforms` | TargetingDevicePlatforms | *字串* | 指定平台。 |
+| `targeting.publisher_platforms` | TargetingPublisherPlatforms | *字串* | 指定發布商平台。 |
+| `targeting.instagram_positions` | TargetingInstagramPositions | *字串* | 指定 Instagram 刊登位置。 |
+| `targeting.page_types` | TargetingPageTypes | *字串* | 目標網頁類型。 |
+| `learning_stage_info.status` | LearningStageInfoStatus | *字串* | 學習階段的狀態。 |
+| `learning_stage_info.conversions` | LearningStageInfoConversions | *整數* | 學習階段的轉換次數。 |
+| `learning_stage_info.attribution_windows` | LearningStageInfoAttributionWindows | *字串* | 學習階段的歸屬期。 |
+| `learning_stage_info.last_sig_edit_time` | LearningStageInfoLastSigEditTime | *日期時間* | 學習階段的上次重大編輯時間。 |
 
+### 「`Campaigns`」報表
 
-想進一步說明嗎？
+| **Meta API 欄位名稱** | **對應的 BigQuery 欄位名稱** | **類型** | **說明** |
+| --- | --- | --- | --- |
+| `id` | ID | *字串* | 廣告活動的 ID。 |
+|  | 目標 | *字串* | 目標欄位。 |
+| `name` | 名稱 | *字串* | 廣告活動名稱。 |
+| `buying_type` | BuyingType | *字串* | 購買類型。 |
+| `configured_status` | ConfiguredStatus | *字串* | 設定的狀態。 |
+| `effective_status` | EffectiveStatus | *字串* | 有效狀態。 |
+| `status` | 狀態 | *字串* | 廣告活動的目前狀態。 |
+| `created_time` | CreatedTime | *日期時間* | 建立時間。 |
+| `objective` | 目標 | *字串* | 選取的廣告活動目標。 |
+| `spend_cap` | SpendCap | *整數* | 整個生命週期的支出上限。 |
+| `daily_budget` | DailyBudget | *整數* | 每日預算。 |
+| `budget_remaining` | BudgetRemaining | *整數* | 廣告活動的剩餘預算。 |
+| `lifetime_budget` | LifetimeBudget | *整數* | 整個生命週期的預算總額。 |
+| `bid_strategy` | BidStrategy | *字串* | 用於出價的策略。 |
+| `start_time` | StartTime | *日期時間* | 排定的開始時間。 |
+| `stop_time` | StopTime | *日期時間* | 排定的停止/結束時間。 |
+| `updated_time` | UpdatedTime | *日期時間* | 上次更新時間。 |
+| `boosted_object_id` | BoostedObjectId | *字串* | 任何加成物件的 ID。 |
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-30 (世界標準時間)。"],[],[]]
+### 「`AdImages`」報表
+
+| **Meta API 欄位名稱** | **對應的 BigQuery 欄位名稱** | **類型** | **說明** |
+| --- | --- | --- | --- |
+| `id` | ID | *字串* | 圖片的 ID。 |
+|  | 目標 | *字串* | 目標欄位。 |
+| `account_id` | AccountId | *字串* | 擁有圖片的廣告帳戶 ID。 |
+| `created_time` | CreatedTime | *日期時間* | 圖片的建立時間。 |
+| `hash` | hash | *字串* | 圖片內容的專屬雜湊值。 |
+| `height` | 高度 | *整數* | 圖片高度 (以像素為單位)。 |
+| `width` | 寬度 | *整數* | 圖片寬度 (以像素為單位)。 |
+| `creatives` | AssociatedWithCreatives | *字串* | 關聯廣告素材資訊。 |
+| `name` | 名稱 | *字串* | 圖片的名稱 ID。 |
+| `original_height` | OriginalHeight | *整數* | 上傳時的原始高度。 |
+| `original_width` | OriginalWidth | *整數* | 上傳時的原始寬度。 |
+| `status` | 狀態 | *字串* | 圖片的驗證狀態。 |
+| `permalink_url` | PermalinkUrl | *字串* | 指向圖片永久連結的網址。 |
+
+### 「`AdLabels`」報表
+
+| **Meta API 欄位名稱** | **對應的 BigQuery 欄位名稱** | **類型** | **說明** |
+| --- | --- | --- | --- |
+| `id` | ID | *字串* | 廣告標籤的 ID。 |
+|  | 目標 | *字串* | 目標欄位。 |
+| `name` | 名稱 | *字串* | 標籤的顯示名稱。 |
+| `created_time` | CreatedTime | *日期時間* | 標籤建立時間。 |
+| `updated_time` | UpdatedTime | *日期時間* | 標籤上次更新時間。 |
+
+### 「`Businesses`」報表
+
+| **Meta API 欄位名稱** | **對應的 BigQuery 欄位名稱** | **類型** | **說明** |
+| --- | --- | --- | --- |
+| `id` | ID | *字串* | 商家 ID。 |
+| `name` | 名稱 | *字串* | 商家名稱。 |
+| `primary_page` | PrimaryPage | *字串* | 與商家相關的主要頁面。 |
+| `timezone_id` | TimezoneId | *字串* | 商家的時區 ID。 |
+| `link` | 連結 | *字串* | 商家檔案的連結。 |
+| `created_time` | CreatedTime | *日期時間* | 商家建立時間。 |
+| `updated_time` | UpdatedTime | *日期時間* | 上次更新時間。 |
+
+### 「`CustomAudiences`」報表
+
+| **Meta API 欄位名稱** | **對應的 BigQuery 欄位名稱** | **類型** | **說明** |
+| --- | --- | --- | --- |
+| `id` | ID | *字串* | 自訂目標對象的 ID。 |
+|  | 目標 | *字串* | 目標欄位。 |
+| `account_id` | AccountID | *字串* | 從 Account\_ID 對應的廣告帳戶 ID。 |
+| `name` | 名稱 | *字串* | 自訂目標對象的名稱。 |
+| `description` | 說明 | *字串* | 目標對象說明。 |
+| `subtype` | 子類型 | *字串* | 目標對象的子類型類別。 |
+| `time_created` | TimeCreated | *日期時間* | 目標對象建立時間。 |
+| `time_updated` | TimeUpdated | *日期時間* | 目標對象上次更新時間。 |
+| `time_content_updated` | TimeContentUpdated | *日期時間* | 上次修改目標對象內容的時間。 |
+| `rule` | 規則 | *字串* | 用來控管目標對象成員資格的規則。 |
+| `rule_aggregation` | RuleAggregation | *字串* | 目標對象規則的匯總設定。 |
+| `approximate_count_lower_bound` | ApproximateCountLowerBound | *整數* | 目標對象規模的下限近似值。 |
+| `approximate_count_upper_bound` |

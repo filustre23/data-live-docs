@@ -2,7 +2,7 @@ On this page
 
 # List of Subprocessors
 
-**Last Modified**: *May 6, 2026*
+**Last Modified**: *June 1, 2026*
 
 Hex utilizes the following subprocessors in the delivery of the Hex Service.
 
@@ -24,6 +24,7 @@ Any Subprocessor with a Data Residency listed as "Deployment Region" means the g
 |  | [Google](https://cloud.google.com/) \* | [Google Cloud Security](https://cloud.google.com/security) | USA | Deployment Region |
 |  | [OpenAI](https://openai.com/) \* | [OpenAI Security](https://openai.com/security-and-privacy/) | USA | Deployment Region |
 |  | [Parallel](https://parallel.ai/) \* | [Parallel Trust Center](https://trust.parallel.ai/) | USA | USA |
+| **Browser automation** | [Browserbase](https://www.browserbase.com/) | [Browserbase Security](https://docs.browserbase.com/account/enterprise/security) | USA | USA |
 | **Analytics** | [RudderStack](https://www.rudderstack.com/) | [RudderStack Security](https://www.rudderstack.com/security/) | USA | USA |
 | **Feature gating** | [LaunchDarkly](https://launchdarkly.com/) | [LaunchDarkly Security](https://launchdarkly.com/security/) | USA | USA |
 | **User management and audit logs** | [WorkOS](https://workos.com/) | [WorkOS Security](https://workos.com/security) | USA | USA |
