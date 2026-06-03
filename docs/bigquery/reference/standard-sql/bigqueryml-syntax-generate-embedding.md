@@ -652,4 +652,10 @@ ML.GENERATE_EMBEDDING(
       you provide.
   + The `multimodalembedding@001` model also outputs the following fields:
 
-    - `m`
+    - `ml_generate_embedding_start_sec`: for video content, an `INT64` value
+      that contains the starting second of the portion of the video that the
+      embedding represents. For image content, the value is `NULL`.
+      This column isn't returned for text content.
+    - `ml_generate_embedding_end_sec`: for video content, an `INT64` value
+      that contains the ending second of the portion of the video that the
+      embedding represents. For image content, the value is

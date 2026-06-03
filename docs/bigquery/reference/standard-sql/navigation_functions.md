@@ -325,7 +325,5 @@ The following example computes the slowest time for each division.
 ```
 WITH finishers AS
  (SELECT 'Sophia Liu' as name,
-  TIMESTAMP '2016-10-18 2:51:45' as finish_time,
-  'F30-34' as division
-  UNION ALL SELECT<
+  TIMESTAMP '2016-10-18 2:51:45' as
 ```
