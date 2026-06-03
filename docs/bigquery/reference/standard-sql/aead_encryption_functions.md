@@ -453,5 +453,4 @@ SELECT
     'AES_CBC_PKCS',
     (SELECT raw_key_bytes FROM CustomerRawKeys AS crk
      WHERE crk.customer_id = ci.customer_id)
-  )
 ```

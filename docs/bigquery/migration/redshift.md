@@ -337,5 +337,5 @@ public class CreateRedshiftTransfer {
     Map<String, Value> params = new HashMap<>();
     params.put("jdbc_url", Value.newBuilder().setStringValue(jdbcUrl).build());
     params.put("database_username", Value.newBuilder().setStringValue(dbUserName).build());
-    params.put
+    params.
 ```

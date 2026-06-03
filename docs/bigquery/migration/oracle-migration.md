@@ -466,4 +466,4 @@ BigQuery 支援[column-](https://docs.cloud.google.com/bigquery/docs/column-leve
 如果不想使用 ETL/ELT 工具進行初始載入，可以編寫自訂指令碼，將資料匯出至檔案 (CSV、Avro 或 Parquet)，然後使用 `gcloud storage`、BigQuery 資料移轉服務或 Transfer Appliance，將資料上傳至 Cloud Storage。如要進一步瞭解如何調整大型資料移轉作業和移轉選項的效能，請參閱[轉移大型資料集](https://docs.cloud.google.com/solutions/transferring-big-data-sets-to-gcp?hl=zh-tw)。然後將資料從 Cloud Storage 載入 [BigQuery](https://docs.cloud.google.com/bigquery/docs/introduction?hl=zh-tw)。
 
 Cloud Storage 非常適合處理資料的初始登陸。
-Cloud Storage 是高可用性且耐用的物件儲存服務，檔案數量沒有限制，而且只會收取您使用的儲存空間費用。這項服務經過最佳化，可與 BigQuery 和 Dataflow 等其他 Google Cloud 服務搭配使用。
+Cloud Storage 是高可用性且耐用的物件儲存服務，檔案數量沒有限制，而且只會收取您使用的儲存空間費用。這項服務經過最佳化，可與 BigQuery 和 Dataflow 等其他 Google Cloud 服務搭配使用

@@ -388,4 +388,4 @@ Google uses AI technology to translate content into your preferred language. AI 
 | `rule` | 規則 | *字串* | 用來控管目標對象成員資格的規則。 |
 | `rule_aggregation` | RuleAggregation | *字串* | 目標對象規則的匯總設定。 |
 | `approximate_count_lower_bound` | ApproximateCountLowerBound | *整數* | 目標對象規模的下限近似值。 |
-| `approximate_count_upper_bound` |
+| `approximate_co` |

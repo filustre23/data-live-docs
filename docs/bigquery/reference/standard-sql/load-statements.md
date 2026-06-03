@@ -412,5 +412,7 @@ The following example loads two CSV files into a table, using schema
 autodetection.
 
 ```
-LOAD DATA INTO
+LOAD DATA INTO mydataset.table1
+  FROM FILES(
+    format='CSV'
 ```

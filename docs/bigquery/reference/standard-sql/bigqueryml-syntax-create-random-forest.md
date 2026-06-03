@@ -969,4 +969,4 @@ The `MODEL_REGISTRY` option specifies the model registry destination.
 `VERTEX_AI` is the only supported model registry destination. To learn more, see
 [Register a BigQuery ML model](/bigquery/docs/create_vertex#register-model).
 
-### `VERTEX_AI_MODEL`
+###

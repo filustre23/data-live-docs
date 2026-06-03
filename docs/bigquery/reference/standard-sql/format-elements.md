@@ -533,4 +533,4 @@ contain a value specified by a format element.
 
 | Format element | Returns | Example |
 | --- | --- | --- |
-| MI | Minute, 2 digits. |  |
+| MI | Minute, 2 digits. |

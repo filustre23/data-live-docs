@@ -259,4 +259,4 @@ A request to list previously created migration subtasks.
 
 | Fields | |
 | --- | --- |
-| `parent` | `string`  Required. The migration task of the subtasks to list. Example: |
+| `parent` | `string`  Required. The migration task of the subtasks to |

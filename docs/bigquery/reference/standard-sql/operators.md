@@ -548,7 +548,3 @@ interval_expression / integer_expression = INTERVAL
 Multiplies or divides an interval value by an integer.
 
 **Example**
-
-```
-SELECT
-```

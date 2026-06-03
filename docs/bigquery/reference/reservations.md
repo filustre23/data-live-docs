@@ -302,5 +302,5 @@ public class QuickstartSample {
 
       // list capacity commitments in the project
       client
-          .listCapacityCommitments
+          .listCapacity
 ```

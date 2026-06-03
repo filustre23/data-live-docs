@@ -988,5 +988,5 @@ CREATE OR REPLACE MODEL `mydataset.arima_model`
                   DATE('2020-10-31'),
                   DATE('2021-10-31'),
                   DATE('2022-10-31'),
-                  DATE(
+                  DATE
 ```

@@ -27,6 +27,16 @@ To get the latest product updates delivered to you, add the URL of this page to 
 reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators), or add the
 [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## June 02, 2026
+
+Feature
+
+[Remote functions](/bigquery/docs/remote-functions#create_a_remote_function) now
+support a custom path in the endpoint URL. You can reuse a single Cloud Run
+service for multiple BigQuery remote functions by specifying different path
+suffixes on the same endpoint. This feature is [generally
+available](https://cloud.google.com/products/#product-launch-stages) (GA).
+
 ## June 01, 2026
 
 Change
@@ -4231,8 +4241,4 @@ Libraries
 
 Feature
 
-You can now use the [`BY NAME` and `CORRESPONDING` modifiers](/bigquery/docs/reference/standard-sql/query-syntax#by_name_or_corresponding) with set operations to match columns by name instead of by position. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
-
-Change
-
-The BigQuery ML [`ML.BUCKETIZE`](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-bucketize) and
+You can now use the [`BY NAME`](/bigquery/docs/reference/standard-sql/query-syntax#by_name_or_corresponding)

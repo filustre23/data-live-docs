@@ -224,4 +224,4 @@ Represents the type of a field element.
 
 | Fields | |
 | --- | --- |
-| `type` | `s` |
+| `type` |  |

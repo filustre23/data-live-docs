@@ -300,3 +300,5 @@ The SQL identifier rewrite mode.
 | `IDENTIFIER_REWRITE_MODE_UNSPECIFIED` | SQL Identifier rewrite mode is unspecified. |
 | `NONE` | SQL identifiers won't be rewrite. |
 | `REWRITE_ALL` | All SQL identifiers will be rewrite. |
+
+</

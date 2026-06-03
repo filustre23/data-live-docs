@@ -378,5 +378,5 @@ FROM UNNEST([2, 1, -2, 3, -2, 1, 2]) AS x;
 ```
 
 ```
-SELECT ARRAY_AGG(
+SELECT ARRAY_AGG
 ```
