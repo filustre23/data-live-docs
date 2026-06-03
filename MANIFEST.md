@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-06-03T02:39+00:00_
+_Generated 2026-06-03T09:30+00:00_
 
-**9 sources, 5133 topics total**
+**9 sources, 5134 topics total**
 
 ## airflow
 
@@ -4356,7 +4356,7 @@ _153 topics_
 
 Upstream: <https://learn.hex.tech/>
 
-_358 topics_
+_359 topics_
 
 - `hex/changelog`
 - `hex/changelog/2020-12-17`
@@ -4460,6 +4460,7 @@ _358 topics_
 - `hex/changelog/2026-05-14`
 - `hex/changelog/2026-05-21`
 - `hex/changelog/2026-05-28`
+- `hex/changelog/2026-06-02`
 - `hex/changelog/archive`
 - `hex/changelog/page/10`
 - `hex/changelog/page/11`

@@ -2,7 +2,7 @@ On this page
 
 # List of Subprocessors
 
-**Last Modified**: *June 1, 2026*
+**Last Modified**: *June 2, 2026*
 
 Hex utilizes the following subprocessors in the delivery of the Hex Service.
 
@@ -14,9 +14,9 @@ Any Subprocessor with a Data Residency listed as "Deployment Region" means the g
 | --- | --- | --- | --- | --- |
 | **Cloud hosted infrastructure and data hosting** | [Amazon Web Services](https://aws.amazon.com/) | [AWS Cloud Security](https://aws.amazon.com/security/) | USA | Deployment Region |
 | **Content delivery network provider** | [Cloudflare](https://www.cloudflare.com/) | [Cloudflare Trust Hub](https://www.cloudflare.com/trust-hub/) | USA | Global |
-| **Monitoring** | [Datadog](https://www.datadoghq.com/) | [Datadog Security](https://www.datadoghq.com/security/) | USA | Deployment Region |
+| **Monitoring** | [Datadog](https://www.datadoghq.com/) | [Datadog Trust Hub](https://www.datadoghq.com/trust/) | USA | Deployment Region |
 | **Security monitoring** | [Wiz](https://www.wiz.io/) | [Wiz Trust Center](https://www.wiz.io/trust-center) | USA | USA |
-| **Data warehouse** | [Snowflake](https://www.snowflake.com/) | [Snowflake Trust Center](https://www.snowflake.com/product/security-and-trust-center/) | USA | USA |
+| **Data warehouse** | [Snowflake](https://www.snowflake.com/) | [Snowflake Security Hub](https://www.snowflake.com/en/why-snowflake/snowflake-security-hub/) | USA | USA |
 | **Data connector** | [Fivetran](https://www.fivetran.com/) | [Fivetran Security](https://fivetran.com/docs/security) | USA | USA |
 |  | [Hightouch](https://hightouch.com/) | [Hightouch Security](https://hightouch.com/platform/security) | USA | USA |
 | **AI services** | [Anthropic](https://www.anthropic.com/) \* | [Anthropic Trust](https://trust.anthropic.com/) | USA | USA |
@@ -28,10 +28,10 @@ Any Subprocessor with a Data Residency listed as "Deployment Region" means the g
 | **Analytics** | [RudderStack](https://www.rudderstack.com/) | [RudderStack Security](https://www.rudderstack.com/security/) | USA | USA |
 | **Feature gating** | [LaunchDarkly](https://launchdarkly.com/) | [LaunchDarkly Security](https://launchdarkly.com/security/) | USA | USA |
 | **User management and audit logs** | [WorkOS](https://workos.com/) | [WorkOS Security](https://workos.com/security) | USA | USA |
-| **Billing** | [Stripe](https://stripe.com/) | [Stripe Security](https://stripe.com/docs/security) | USA | Global |
-| **Customer engagement** | [Salesforce](https://www.salesforce.com/) (including [Slack](https://www.slack.com/)) | [Salesforce Trust](https://www.salesforce.com/company/legal/security/) | USA | USA |
-|  | [HubSpot](https://www.hubspot.com/) | [HubSpot Security](https://www.hubspot.com/security) | USA | USA |
-| **Customer support** | [Pylon](https://usepylon.com/) | [Pylon Security](https://usepylon.com/security) | USA | USA |
+| **Billing** | [Stripe](https://stripe.com/) | [Stripe Security](https://docs.stripe.com/security) | USA | Global |
+| **Customer engagement** | [Salesforce](https://www.salesforce.com/) (including [Slack](https://www.slack.com/)) | [Salesforce Security](https://security.salesforce.com/) | USA | USA |
+|  | [HubSpot](https://www.hubspot.com/) | [HubSpot Security](https://legal.hubspot.com/security) | USA | USA |
+| **Customer support** | [Pylon](https://www.usepylon.com/) | [Pylon Trust & Security](https://www.usepylon.com/security) | USA | USA |
 
 \* This subprocessor is only used for AI features and may be optionally disabled by your administrator.
 

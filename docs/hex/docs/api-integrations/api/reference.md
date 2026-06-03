@@ -42,8 +42,8 @@
 * patchUpdateCell
 * delDeleteCell
 * getGetChartImageFromLogic
-* getReturns information about the current logged in user. User metadata will be omitted when authenticating with a workspace token.
-* getList all users in the workspace
+* getMe
+* getListUsers
 
 [API docs by Redocly](https://redocly.com/redoc/)
 
@@ -2507,4 +2507,4 @@ Copy
 
 |  |  |
 | --- | --- |
-| sharing |  |
+| sharing | object |

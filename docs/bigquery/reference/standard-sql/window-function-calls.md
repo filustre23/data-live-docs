@@ -555,4 +555,15 @@ FROM Produce
  | apple     | 8          | fruit      | 54              |
  | cabbage   | 9          | vegetable  | 54              |
  | lettuce   | 10         | vegetable  | 54              |
+ | kale      | 23         | vegetable  | 54              |
+ +-------------------------------------------------------*/
 ```
+
+### Compute a subtotal
+
+This computes a subtotal for each category in the
+[`Produce`](#produce_table) table.
+
+* fruit
+  + (**banana**, **apple**) = 10 total purchases
+  + (**banana<**
