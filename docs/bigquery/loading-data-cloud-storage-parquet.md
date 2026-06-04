@@ -1152,5 +1152,5 @@ repeated <element-type> <name>
 BigQuery Storage Read API 和 BigQuery Storage Write API 都支援擴充的欄字元。如要透過 BigQuery Storage Read API 使用擴充的 Unicode 字元清單，必須設定旗標。您可以使用 `displayName` 屬性擷取資料欄名稱。以下範例說明如何使用 Python 用戶端設定旗標：
 
 ```
-from google.cloud.bigquery_storage
+from
 ```

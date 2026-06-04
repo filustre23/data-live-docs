@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-06-03T16:24+00:00_
+_Generated 2026-06-04T02:50+00:00_
 
-**9 sources, 5134 topics total**
+**9 sources, 5133 topics total**
 
 ## airflow
 
@@ -3131,7 +3131,7 @@ _145 topics_
 
 Upstream: <https://docs.getdbt.com/docs/>
 
-_1058 topics_
+_1057 topics_
 
 - `dbt-core/best-practices/best-practice-workflows`
 - `dbt-core/best-practices/clone-incremental-models`
@@ -3323,7 +3323,6 @@ _1058 topics_
 - `dbt-core/docs/dbt-versions/about-versions`
 - `dbt-core/docs/dbt-versions/compatible-track-changelog`
 - `dbt-core/docs/dbt-versions/core-upgrade/01-upgrading-to-v2`
-- `dbt-core/docs/dbt-versions/core-upgrade/02-upgrading-to-fusion`
 - `dbt-core/docs/dbt-versions/core-upgrade/03-upgrading-to-v1.12`
 - `dbt-core/docs/dbt-versions/core-upgrade/04-upgrading-to-v1.11`
 - `dbt-core/docs/dbt-versions/core-upgrade/05-upgrading-to-v1.10`

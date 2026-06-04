@@ -86,19 +86,19 @@ A [service endpoint](https://cloud.google.com/apis/design/glossary#api_service_e
 
 | Methods | |
 | --- | --- |
-| `list` | `GET /deltasharing/v1/{parent=projects/*/catalogs/*}/shares`   Gets a list of Delta Sharing shares available in the upstream Delta Sharing source (e.g., SAP BDC). |
+| `list` | `GET /deltasharing/v1/{parent=projects/*/catalogs/*}/shares`   Gets a list of Delta Sharing shares available in the upstream Delta Sharing source. |
 
 ## REST Resource: [deltasharing.v1.projects.catalogs.shares.schemas](/lakehouse/docs/reference/rest/v1/deltasharing.v1.projects.catalogs.shares.schemas)
 
 | Methods | |
 | --- | --- |
-| `list` | `GET /deltasharing/v1/{parent=projects/*/catalogs/*/shares/*}/schemas`   Gets a list of Delta Sharing schemas available in the upstream SAP BDC source. |
+| `list` | `GET /deltasharing/v1/{parent=projects/*/catalogs/*/shares/*}/schemas`   Gets a list of Delta Sharing schemas available in the upstream Delta Sharing source. |
 
 ## REST Resource: [deltasharing.v1.projects.catalogs.shares.schemas.tables](/lakehouse/docs/reference/rest/v1/deltasharing.v1.projects.catalogs.shares.schemas.tables)
 
 | Methods | |
 | --- | --- |
-| `list` | `GET /deltasharing/v1/{parent=projects/*/catalogs/*/shares/*/schemas/*}/tables`   Gets a list of Delta Sharing tables available in the upstream SAP BDC source. |
+| `list` | `GET /deltasharing/v1/{parent=projects/*/catalogs/*/shares/*/schemas/*}/tables`   Gets a list of Delta Sharing tables available in the upstream Delta Sharing source. |
 
 ## REST Resource: [deltasharing.v1alpha.projects.catalogs](/lakehouse/docs/reference/rest/v1/deltasharing.v1alpha.projects.catalogs)
 
@@ -114,19 +114,19 @@ A [service endpoint](https://cloud.google.com/apis/design/glossary#api_service_e
 
 | Methods | |
 | --- | --- |
-| `list` | `GET /deltasharing/v1alpha/{parent=projects/*/catalogs/*}/shares`   Gets a list of Delta Sharing shares available in the upstream Delta Sharing source (e.g., SAP BDC). |
+| `list` | `GET /deltasharing/v1alpha/{parent=projects/*/catalogs/*}/shares`   Gets a list of Delta Sharing shares available in the upstream Delta Sharing source. |
 
 ## REST Resource: [deltasharing.v1alpha.projects.catalogs.shares.schemas](/lakehouse/docs/reference/rest/v1/deltasharing.v1alpha.projects.catalogs.shares.schemas)
 
 | Methods | |
 | --- | --- |
-| `list` | `GET /deltasharing/v1alpha/{parent=projects/*/catalogs/*/shares/*}/schemas`   Gets a list of Delta Sharing schemas available in the upstream SAP BDC source. |
+| `list` | `GET /deltasharing/v1alpha/{parent=projects/*/catalogs/*/shares/*}/schemas`   Gets a list of Delta Sharing schemas available in the upstream Delta Sharing source. |
 
 ## REST Resource: [deltasharing.v1alpha.projects.catalogs.shares.schemas.tables](/lakehouse/docs/reference/rest/v1/deltasharing.v1alpha.projects.catalogs.shares.schemas.tables)
 
 | Methods | |
 | --- | --- |
-| `list` | `GET /deltasharing/v1alpha/{parent=projects/*/catalogs/*/shares/*/schemas/*}/tables`   Gets a list of Delta Sharing tables available in the upstream SAP BDC source. |
+| `list` | `GET /deltasharing/v1alpha/{parent=projects/*/catalogs/*/shares/*/schemas/*}/tables`   Gets a list of Delta Sharing tables available in the upstream Delta Sharing source. |
 
 ## REST Resource: [hive.v1alpha.projects.catalogs](/lakehouse/docs/reference/rest/v1/hive.v1alpha.projects.catalogs)
 
@@ -385,9 +385,9 @@ A [service endpoint](https://cloud.google.com/apis/design/glossary#api_service_e
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-05-28 UTC.
+Last updated 2026-06-03 UTC.
 
 
 
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-28 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-06-03 UTC."],[],[]]

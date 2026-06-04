@@ -14,7 +14,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 你可以依據偏好儲存及分類內容。
 
-# PROJECT\_OPTIONS 檢視畫面
+# 「PROJECT\_OPTIONS」檢視畫面
 
 您可以查詢 `INFORMATION_SCHEMA.PROJECT_OPTIONS` 檢視區塊，擷取 BigQuery 專案選項的即時中繼資料。這個檢視畫面包含專案層級的設定選項。如要查看設定選項的預設值，請參閱[設定設定](https://docs.cloud.google.com/bigquery/docs/default-configuration?hl=zh-tw#configuration-settings)。
 
@@ -32,7 +32,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 結構定義
 
-查詢 `INFORMATION_SCHEMA.PROJECT_OPTIONS` 檢視表時，專案中每個與預設值不同的設定選項，在查詢結果中都會有一列相對應的資料列。
+查詢 `INFORMATION_SCHEMA.PROJECT_OPTIONS` 檢視表時，專案中每個與預設值不同的設定選項，都會有一列相對應的查詢結果。
 
 `INFORMATION_SCHEMA.PROJECT_OPTIONS` 檢視表具有下列結構定義：
 
@@ -43,7 +43,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 | `project_number` | `INTEGER` | 專案編號。 |
 | `option_description` | `STRING` | 選項說明。 |
 | `option_type` | `STRING` | `OPTION_VALUE` 的資料類型。 |
-| `option_value` | `STRING` | 期權的現值。 |
+| `option_value` | `STRING` | 選項的目前值。 |
 
 ##### 選項表格
 
@@ -52,8 +52,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 | `default_time_zone` | `STRING` | 這個專案的預設時區。 |
 | `default_kms_key_name` | `STRING` | 這個專案的預設金鑰名稱。 |
 | `default_query_job_timeout_ms` | `STRING` | 這個專案的預設查詢逾時時間 (以毫秒為單位)。 這也適用於[連續查詢](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction?hl=zh-tw)。 |
-| `default_interactive_query_queue_timeout_ms` | `STRING` | 這個專案中排入佇列的互動式查詢預設逾時時間 (以毫秒為單位)。 |
+| `default_interactive_query_queue_timeout_ms` | `STRING` | 這個專案中排入佇列的互動式查詢預設逾時時間 (毫秒)。 |
 | `default_batch_query_queue_timeout_ms` | `STRING` | 這個專案中排入佇列的批次查詢預設逾時時間 (毫秒)。 |
+| `preflight_fluid_autoscaling_reservations` | `STRING` | 已選擇彈性調度功能，並以秒計費 (無最短時間限制) 的預訂項目清單。 |
 
 為確保穩定性，建議您在資訊結構定義查詢中明確列出資料欄，而非使用萬用字元 (`SELECT *`)。明確列出資料欄可避免基礎結構定義變更時，查詢中斷。
 
@@ -71,7 +72,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 請替換下列項目：
 
-* `REGION`：任何[資料集區域名稱。](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)例如：`region-us`。
+* `REGION`：任何[資料集區域名稱](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。例如：`region-us`。
 
 ## 範例
 
@@ -111,11 +112,11 @@ FROM
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-05-30 (世界標準時間)。
+上次更新時間：2026-06-03 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-30 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-03 (世界標準時間)。"],[],[]]

@@ -27,6 +27,15 @@ To get the latest product updates delivered to you, add the URL of this page to 
 reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators), or add the
 [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## June 03, 2026
+
+Feature
+
+[BigQuery fluid scaling](/bigquery/docs/slots#slot-autoscaling), which provides
+per-second billing with no minimum duration for autoscaling reservations,
+is [generally available](https://cloud.google.com/products#product-launch-stages)
+(GA).
+
 ## June 02, 2026
 
 Feature
@@ -4237,8 +4246,4 @@ Libraries
 
 * Update dependency com.google.apis:google-api-services-bigquery to v2-rev20250112-2.0.0 ([#3651](https://github.com/googleapis/java-bigquery/issues/3651)) ([fd06100](https://github.com/googleapis/java-bigquery/commit/fd06100c4c18b0416d384ec1f6bdfc796b70ad9f))
 * Update dependency com.google.cloud:sdk-platform-java-config to v3.42.0 ([#3653](https://github.com/googleapis/java-bigquery/issues/3653)) ([1a14342](https://github.com/googleapis/java-bigquery/commit/1a143428c7f584db3dd6e827c2ee8fe980afe18c))
-* Update github/codeql-action action to v2.28.1 ([#3637](https://github.com/googleapis/java-bigquery/issues/3637)) ([858e517](https://github.com/googleapis/java-bigquery/commit/858e51792d98276f10fd780ef6edd0bb4a1b4f54))
-
-Feature
-
-You can now use the [`BY NAME`](/bigquery/docs/reference/standard-sql/query-syntax#by_name_or_corresponding)
+* Update github/codeql-action action to v2.28.1 (

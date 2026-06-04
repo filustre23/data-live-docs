@@ -1130,5 +1130,4 @@ client = bigquery.Client()
 # destination_table_id = "your-project.destination_dataset.destination_table"
 
 job = client.copy_table(source_table_id, destination_table_id)
-job.result
 ```
