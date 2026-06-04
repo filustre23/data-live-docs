@@ -929,4 +929,4 @@ The following types of models are regression models:
   the model.
 * `mean_squared_log_error`: a `FLOAT64` value that contains the mean squared
   logarithmic error for the model. The mean squared logarithmic error
-  measures the d
+  measures the

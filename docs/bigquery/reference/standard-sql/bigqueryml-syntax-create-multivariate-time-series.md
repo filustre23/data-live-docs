@@ -971,4 +971,4 @@ table only contains holidays and events from the following regions:
 
 ## Custom holidays
 
-You can combine use
+You can combine u

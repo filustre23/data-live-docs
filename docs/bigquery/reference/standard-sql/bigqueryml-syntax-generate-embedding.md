@@ -651,5 +651,3 @@ ML.GENERATE_EMBEDDING(
       information about the token count for each modality of input that
       you provide.
   + The `multimodalembedding@001` model also outputs the following fields:
-
-    - `m`

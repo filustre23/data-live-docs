@@ -156,8 +156,8 @@ On ChatGPT Business and Enterprise workspaces, admins may need to enable the Hex
 
 #### Install the Hex plugin in Codex[​](#install-the-hex-plugin-in-codex "Direct link to Install the Hex plugin in Codex")
 
-1. In the Codex app, open **Plugins** and search for "Hex", or in Codex CLI run `/plugins`.
-2. Select the Hex plugin and click **Add to Codex** (app) or **Install plugin** (CLI).
+1. In the Codex app, open **Plugins** and search for "Data Analytics". Select **+ Add plugin**.
+2. Next to the Hex plugin, select **Connect**.
 3. When prompted, connect the bundled Hex app and complete the OAuth flow to authorize access to your Hex workspace (and specify a workspace if you have access to multiple).
 
 #### Use Hex in Codex[​](#use-hex-in-codex "Direct link to Use Hex in Codex")
