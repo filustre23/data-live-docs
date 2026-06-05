@@ -235,7 +235,7 @@ resource "google_bigquery_dataset" "default" {
 
    將程式碼範例複製到新建立的 `main.tf`。
 
-   視需要從 GitHub 複製程式碼。如果 Terraform 程式碼片段是端對端解決方案的一部分，建議您使用這個方法。
+   視需要從 GitHub 複製程式碼。如果 Terraform 代码片段是端對端解決方案的一部分，建議您這麼做。
 3. 查看並修改範例參數，套用至您的環境。
 4. 儲存變更。
 5. 初始化 Terraform。每個目錄只需執行一次這項操作。
@@ -449,6 +449,25 @@ parent: //bigquery.googleapis.com/projects/my_project/datasets/my_dataset
 tagValue: tagValues/4567890123
 ```
 
+您可以使用 `gcloud resource-manager tags bindings list`，列出 BigQuery 資料集繼承的標記。您也可以使用 `namespacedTagValue` 屬性的 [`--filter`](https://docs.cloud.google.com/sdk/gcloud/reference/topic/filters?hl=zh-tw) 選項，依專案 ID、標記值或標記鍵篩選標記。
+
+```
+gcloud resource-manager tags bindings list \
+    --parent=//bigquery.googleapis.com/projects/PROJECT_ID/datasets/DATASET_ID \
+    --effective \
+    --filter=namespacedTagValue:TAG_FILTER
+```
+
+請替換下列項目：
+
+* `PROJECT_ID`：包含資料集的專案 ID。
+* `DATASET_ID`：資料集 ID。
+* `TAG_FILTER`：根據下列其中一個項目指定值，篩選出已繼承的標記：
+
+  + 依專案 ID 篩選標記。例如 `myproject`。
+  + 指定標記值的永久 ID 或命名空間名稱，即可篩選標記值。例如 `tagValues/4567890123` 或 `1234567/my_tag_key/my_tag_value`。
+  + 指定標記鍵的顯示名稱，即可篩選標記鍵。例如 `tagkey`。
+
 ### Terraform
 
 使用 `terraform state show` 指令列出資料集的屬性，包括 `resource_tags` 欄位。在資料集 Terraform 設定檔的執行目錄中，執行下列指令。
@@ -475,6 +494,8 @@ WHERE option_name='tags'
 更改下列內容：
 
 * `REGION`：資料集所在的[區域](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
+
+**注意：** 您可以使用 [`gcloud resource-manager tags bindings list`](https://docs.cloud.google.com/bigquery/docs/tags?hl=zh-tw#gcloud_1) 指令，列出 BigQuery 資料集和資料表繼承的標記。
 
 ### 從資料集卸離標記
 
@@ -737,7 +758,7 @@ resource "google_bigquery_table" "default" {
 
    將程式碼範例複製到新建立的 `main.tf`。
 
-   視需要從 GitHub 複製程式碼。如果 Terraform 程式碼片段是端對端解決方案的一部分，建議您使用這個方法。
+   視需要從 GitHub 複製程式碼。如果 Terraform 代码片段是端對端解決方案的一部分，建議您這麼做。
 3. 查看並修改範例參數，套用至您的環境。
 4. 儲存變更。
 5. 初始化 Terraform。每個目錄只需執行一次這項操作。
@@ -956,6 +977,25 @@ parent: //bigquery.googleapis.com/projects/my_project/datasets/my_dataset
 tagValue: tagValues/4567890123
 ```
 
+您可以使用 `gcloud resource-manager tags bindings list`，列出 BigQuery 資料表繼承的標記。您也可以使用 `namespacedTagValue` 屬性的 [`--filter`](https://docs.cloud.google.com/sdk/gcloud/reference/topic/filters?hl=zh-tw) 選項，依專案 ID、標記值或標記鍵篩選標記。
+
+```
+gcloud resource-manager tags bindings list \
+    --parent=//bigquery.googleapis.com/projects/PROJECT_ID/datasets/DATASET_ID/tables/TABLE_ID \
+    --effective \
+    --filter=namespacedTagValue:TAG_FILTER
+```
+
+請替換下列項目：
+
+* `PROJECT_ID`：包含資料集的專案 ID。
+* `DATASET_ID`：資料集 ID。
+* `TAG_FILTER`：根據下列其中一個項目指定值，篩選出已繼承的標記：
+
+  + 依專案 ID 篩選標記。例如 `myproject`。
+  + 指定標記值的永久 ID 或命名空間名稱，即可篩選標記值。例如 `tagValues/4567890123` 或 `1234567/my_tag_key/my_tag_value`。
+  + 指定標記鍵的顯示名稱，即可篩選標記鍵。例如 `tagkey`。
+
 ### Terraform
 
 使用 `terraform state show` 指令列出資料表的屬性，包括 `resource_tags` 欄位。在執行資料表 Terraform 設定檔的目錄中執行這項指令。
@@ -980,6 +1020,8 @@ WHERE option_name='tags'
 ```
 
 將 `DATASET_ID` 替換為包含資料表的資料集 ID。
+
+**注意：** 您可以使用 [`gcloud resource-manager tags bindings list`](https://docs.cloud.google.com/bigquery/docs/tags?hl=zh-tw#gcloud_4) 指令，列出 BigQuery 資料集和資料表繼承的標記。
 
 ### 從資料表取消連結標記
 
@@ -1129,11 +1171,11 @@ gcloud resource-manager tags bindings delete \
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-06-03 (世界標準時間)。
+上次更新時間：2026-06-04 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-03 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-04 (世界標準時間)。"],[],[]]

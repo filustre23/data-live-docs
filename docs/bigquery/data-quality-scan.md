@@ -364,6 +364,8 @@ public sealed partial class GeneratedDataScanServiceClientSnippets
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[為本機開發環境設定驗證機制](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
 
 ```
+//go:build examples
+
 package main
 
 import (
@@ -733,6 +735,8 @@ public sealed partial class GeneratedDataScanServiceClientSnippets
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[為本機開發環境設定驗證機制](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
 
 ```
+//go:build examples
+
 package main
 
 import (
@@ -953,6 +957,8 @@ public sealed partial class GeneratedDataScanServiceClientSnippets
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[為本機開發環境設定驗證機制](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
 
 ```
+//go:build examples
+
 package main
 
 import (
@@ -1151,5 +1157,5 @@ gcloud dataplex datascans jobs list \
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[為本機開發環境設定驗證機制](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
 
 ```
-using Google.
+using
 ```
