@@ -14,7 +14,7 @@ Save and categorize content based on your preferences.
 
 # BigQuery Connection API audit logging
 
-This document describes audit logging for BigQuery Connection API. Google Cloud services
+This document lists the audited methods for BigQuery Connection API. Google Cloud services
 generate audit logs that record administrative and access activities within your Google Cloud resources.
 For more information about Cloud Audit Logs, see the following:
 
@@ -26,12 +26,17 @@ For more information about Cloud Audit Logs, see the following:
 
 ## Service name
 
-BigQuery Connection API audit logs use the service name `bigqueryconnection.googleapis.com`.
-Filter for this service:
+To view the BigQuery Connection API audit logs, do the following:
 
-```
-    protoPayload.serviceName="bigqueryconnection.googleapis.com"
-```
+1. In the Google Cloud console, go to the Logs Explorer page:
+
+   [Go to Logs Explorer](https://console.cloud.google.com/logs/query)
+2. Copy and paste the following query into the **Query** field of the
+   Logs Explorer, and then click **Run query**.
+
+   ```
+       protoPayload.serviceName="bigqueryconnection.googleapis.com"
+   ```
 
 ## Methods by permission type
 
@@ -166,11 +171,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-06-03 UTC.
+Last updated 2026-06-05 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-06-03 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-06-05 UTC."],[],[]]

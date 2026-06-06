@@ -65,7 +65,7 @@ another when it ends. For more information see [Audit logs for long-running oper
 
 | Permission type | Methods |
 | --- | --- |
-| `ADMIN_WRITE` | `datasetservice.delete` `datasetservice.insert` `datasetservice.update` `google.cloud.bigquery.v2.DatasetService.DeleteDataset` `google.cloud.bigquery.v2.DatasetService.InsertDataset` `google.cloud.bigquery.v2.DatasetService.PatchDataset` `google.cloud.bigquery.v2.DatasetService.UndeleteDataset` `google.cloud.bigquery.v2.DatasetService.UpdateDataset` `google.cloud.bigquery.v2.JobService.InsertJob` (LRO) `google.cloud.bigquery.v2.JobService.Query` (LRO) `google.cloud.bigquery.v2.RoutineService.DeleteRoutine` `google.cloud.bigquery.v2.RoutineService.InsertRoutine` `google.cloud.bigquery.v2.RowAccessPolicyService.CreateRowAccessPolicy` `google.cloud.bigquery.v2.RowAccessPolicyService.DeleteRowAccessPolicy` `google.cloud.bigquery.v2.TableService.DeleteTable` `google.cloud.bigquery.v2.TableService.InsertTable` `google.cloud.bigquery.v2.TableService.PatchTable` `google.cloud.bigquery.v2.TableService.UpdateTable` `google.iam.v1.IAMPolicy.SetIamPolicy` `jobservice.getqueryresults` `jobservice.insert` `jobservice.query` `tabledataservice.list` `tableservice.delete` `tableservice.insert` `tableservice.update` |
+| `ADMIN_WRITE` | `datasetservice.delete` `datasetservice.insert` `datasetservice.update` `google.cloud.bigquery.v2.DatasetService.DeleteDataset` `google.cloud.bigquery.v2.DatasetService.InsertDataset` `google.cloud.bigquery.v2.DatasetService.PatchDataset` `google.cloud.bigquery.v2.DatasetService.UndeleteDataset` `google.cloud.bigquery.v2.DatasetService.UpdateDataset` `google.cloud.bigquery.v2.JobService.CancelJob` `google.cloud.bigquery.v2.JobService.InsertJob` (LRO) `google.cloud.bigquery.v2.JobService.Query` (LRO) `google.cloud.bigquery.v2.RoutineService.DeleteRoutine` `google.cloud.bigquery.v2.RoutineService.InsertRoutine` `google.cloud.bigquery.v2.RowAccessPolicyService.BatchDeleteRowAccessPolicies` `google.cloud.bigquery.v2.RowAccessPolicyService.CreateRowAccessPolicy` `google.cloud.bigquery.v2.RowAccessPolicyService.DeleteRowAccessPolicy` `google.cloud.bigquery.v2.RowAccessPolicyService.UpdateRowAccessPolicy` `google.cloud.bigquery.v2.TableService.DeleteTable` `google.cloud.bigquery.v2.TableService.InsertTable` `google.cloud.bigquery.v2.TableService.PatchTable` `google.cloud.bigquery.v2.TableService.UpdateTable` `google.iam.v1.IAMPolicy.SetIamPolicy` `jobservice.getqueryresults` `jobservice.insert` `jobservice.query` `tabledataservice.list` `tableservice.delete` `tableservice.insert` `tableservice.update` |
 | `DATA_READ` | `google.cloud.bigquery.v2.JobService.GetQueryResults` `google.cloud.bigquery.v2.TableDataService.List` |
 
 ## API interface audit logs
@@ -171,6 +171,16 @@ The following audit logs are associated with methods belonging to
 
 The following audit logs are associated with methods belonging to
 `google.cloud.bigquery.v2.JobService`.
+
+#### `CancelJob`
+
+* **Method**: `google.cloud.bigquery.v2.JobService.CancelJob`
+* **Audit log type**: [Data access](/logging/docs/audit#data-access)
+* **Permissions**:
+  + `bigquery.jobs.create - ADMIN_WRITE`
+* **Method is a long-running or streaming operation**:
+  No.
+* **Filter for this method**: `protoPayload.methodName="google.cloud.bigquery.v2.JobService.CancelJob"`
 
 #### `DeleteJob`
 
@@ -281,6 +291,8 @@ The following audit logs are associated with methods belonging to
 * **Method**: `google.cloud.bigquery.v2.RowAccessPolicyService.BatchDeleteRowAccessPolicies`
 * **Audit log type**: [Admin activity](/logging/docs/audit#admin-activity)
 * **Permissions**:
+  + `bigquery.rowAccessPolicies.delete - ADMIN_WRITE`
+  + `bigquery.rowAccessPolicies.setIamPolicy - ADMIN_WRITE`
 * **Method is a long-running or streaming operation**:
   No.
 * **Filter for this method**: `protoPayload.methodName="google.cloud.bigquery.v2.RowAccessPolicyService.BatchDeleteRowAccessPolicies"`
@@ -292,6 +304,7 @@ The following audit logs are associated with methods belonging to
 * **Permissions**:
   + `bigquery.rowAccessPolicies.create - ADMIN_WRITE`
   + `bigquery.rowAccessPolicies.setIamPolicy - ADMIN_WRITE`
+  + `bigquery.tables.getData - DATA_READ`
 * **Method is a long-running or streaming operation**:
   No.
 * **Filter for this method**: `protoPayload.methodName="google.cloud.bigquery.v2.RowAccessPolicyService.CreateRowAccessPolicy"`
@@ -312,8 +325,9 @@ The following audit logs are associated with methods belonging to
 * **Method**: `google.cloud.bigquery.v2.RowAccessPolicyService.UpdateRowAccessPolicy`
 * **Audit log type**: [Admin activity](/logging/docs/audit#admin-activity)
 * **Permissions**:
-  + `bigquery.rowAccessPolicies.setIamPolicy - PERMISSION_TYPE_UNSPECIFIED`
-  + `bigquery.rowAccessPolicies.update - PERMISSION_TYPE_UNSPECIFIED`
+  + `bigquery.rowAccessPolicies.setIamPolicy - ADMIN_WRITE`
+  + `bigquery.rowAccessPolicies.update - ADMIN_WRITE`
+  + `bigquery.tables.getData - DATA_READ`
 * **Method is a long-running or streaming operation**:
   No.
 * **Filter for this method**: `protoPayload.methodName="google.cloud.bigquery.v2.RowAccessPolicyService.UpdateRowAccessPolicy"`
@@ -388,6 +402,7 @@ The following audit logs are associated with methods belonging to
 * **Method**: `google.iam.v1.IAMPolicy.SetIamPolicy`
 * **Audit log type**: [Admin activity](/logging/docs/audit#admin-activity)
 * **Permissions**:
+  + `bigquery.datasets.update - ADMIN_WRITE`
   + `bigquery.tables.setIamPolicy - ADMIN_WRITE`
 * **Method is a long-running or streaming operation**:
   No.
@@ -432,6 +447,15 @@ The following audit logs are associated with methods belonging to
 * **Method is a long-running or streaming operation**:
   No.
 * **Filter for this method**: `protoPayload.methodName="jobservice.insert"`
+
+#### `jobcompleted`
+
+* **Method**: `jobservice.jobcompleted`
+* **Audit log type**: [Data access](/logging/docs/audit#data-access)
+* **Permissions**:
+* **Method is a long-running or streaming operation**:
+  [**Long-running operation**](/logging/docs/audit/understanding-audit-logs#lro)
+* **Filter for this method**: `protoPayload.methodName="jobservice.jobcompleted"`
 
 #### `query`
 
@@ -803,27 +827,5 @@ with an existing dataset.
   FROM `my-project-id.auditlog_dataset.cloudaudit_googleapis_com_data_access_*`
   WHERE
     JSON_QUERY(protopayload_auditlog.metadataJson, "$.tableDataRead") IS NOT NULL
-    OR JSON_QUERY(protopayload_auditlog.metadataJson, "$.tableDataChange") IS NOT NULL
-  GROUP BY datasetRef
-  ORDER BY datasetRef
+    OR JSON_QUERY(protopayload_auditlog.metadataJson
 ```
-
-## Troubleshooting
-
-This section shows you how to resolve issues with BigQuery audit
-logs.
-
-### Truncated log entry
-
-The following issue occurs when a log message is larger than
-the [log message size limit](#limitation):
-
-The `protoPayload.metadata` submessage in the
-Cloud Logging `LogEntry` message is truncated.
-
-To resolve this issue, consider the following strategies:
-
-* Retrieve the full log message by using the
-  BigQuery API [jobs.get](/bigquery/docs/reference/rest/v2/jobs/get) method.
-* Reduce the size of the metadata in the log message; for example, by using
-  wildcards on common path prefixes to reduce the size of the `sourceUri` list.
