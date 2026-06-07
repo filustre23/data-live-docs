@@ -969,4 +969,15 @@ The `MODEL_REGISTRY` option specifies the model registry destination.
 `VERTEX_AI` is the only supported model registry destination. To learn more, see
 [Register a BigQuery ML model](/bigquery/docs/create_vertex#register-model).
 
-###
+### `VERTEX_AI_MODEL_ID`
+
+The `VERTEX_AI_MODEL_ID` option specifies an Gemini Enterprise Agent Platform model ID
+to register the model with. The model ID is associated with your
+BigQuery ML model, and is visible from the
+Model Registry. If you don't specify an
+Agent Platform model ID, the BigQuery ML
+model name is used.
+
+The `VERTEX_AI_MODEL_ID` value can have up to 63 characters, and valid
+characters are `[a-z0-9_-]`. The first character cannot be a number or hyphen.
+If you don't specify an A
