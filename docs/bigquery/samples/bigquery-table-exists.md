@@ -84,8 +84,8 @@ public class TableExists {
       BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
 
       Table table = bigquery.getTable(TableId.of(datasetName, tableName));
-      if (table != null
-          && table
+      if (tabl&&e != null
+           table
               .exists()) { // table will be null if it is not found and setThrowNotFound is not set
         // to `true`
         System.out.println("Table already exist");
@@ -107,7 +107,7 @@ public class TableExists {
 
 ```
 // Import the Google Cloud client library
-const {BigQuery} = require('@google-cloud/bigquery');
+const {BigQuery} = require(&#39;@google-cloud/bigquery');
 const bigquery = new BigQuery();
 
 async function tableExists() {

@@ -43,7 +43,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 * 在凭据自动售卖模式下读取表数据：
   项目的 [BigLake Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake?hl=zh-cn#biglake.viewer)  (`roles/biglake.viewer`) 角色。如果您使用 Managed Service for Apache Spark、Managed Service for Apache Spark 或 Dataflow 等查询引擎读取表数据，请向您用于在该引擎中运行作业的服务账号授予此角色。
 * 以凭据自动售卖模式写入表数据：项目的 [BigLake Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake?hl=zh-cn#biglake.editor)  (`roles/biglake.editor`) 角色。如果您使用 Managed Service for Apache Spark、Managed Service for Apache Spark 或 Dataflow 等查询引擎来写入表数据，请向您用于在该引擎中运行作业的服务账号授予此角色。
-* 在凭据贩卖模式下使用自动预配的 Lakehouse 运行时目录服务账号：目标 Cloud Storage 存储桶上的 [Storage Object User](https://docs.cloud.google.com/iam/docs/roles-permissions/storage?hl=zh-cn#storage.objectUser)  (`roles/storage.objectUser`)。创建目录后，请向目录的自动预配 Lakehouse 运行时目录服务账号明确授予存储桶的 Storage Object User 角色 (`roles/storage.objectUser`)。
+* 在凭据贩售模式下使用自动预配的 Lakehouse 运行时目录服务账号：[Storage Object User](https://docs.cloud.google.com/iam/docs/roles-permissions/storage?hl=zh-cn#storage.objectUser)  (`roles/storage.objectUser`) 针对目标 Cloud Storage 存储桶。创建目录后，请向目录的自动预配 Lakehouse 运行时目录服务账号明确授予存储桶的 Storage Object User 角色 (`roles/storage.objectUser`)。
 * 在非凭证自动售卖模式下读取目录资源和表数据：
   + 项目的 [BigLake Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake?hl=zh-cn#biglake.viewer)  (`roles/biglake.viewer`) 角色
   + 针对 Cloud Storage 存储桶的 [Storage Object Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/storage?hl=zh-cn#storage.objectViewer)  (`roles/storage.objectViewer`) 角色
@@ -143,7 +143,7 @@ gcloud biglake iceberg catalogs create \
 
 目录管理员可以在创建或更新目录时启用凭据自动售卖。作为目录用户，您可以在[配置 Apache Iceberg REST 目录端点](#configure-catalog)时指定访问权限委托，从而指示 Apache Iceberg REST 目录端点返回降级后的存储凭据。
 
-自动预配的 Lakehouse 运行时目录服务账号需要对目标 Cloud Storage 存储桶具有明确的 Storage Object User 角色 (`roles/storage.objectUser`)。默认情况下，该链接的访问权限为“只能查看”。
+自动预配的 Lakehouse 运行时目录服务账号需要对目标 Cloud Storage 存储桶具有明确的 Storage Object User 角色 (`roles/storage.objectUser`)。默认情况下，该账号的访问权限为“只能查看”。
 如果没有此角色，出售的凭据将没有足够的范围来执行存储写入操作。如果您使用 `gcloud` 或 Terraform 等工具，则必须手动授予此角色。
 
 ### 控制台
@@ -161,7 +161,7 @@ gcloud biglake iceberg catalogs create \
 6. 在**身份验证方法**下，点击**设置存储桶权限**。
 7. 在对话框中，点击**确认**。
 
-   这会验证您的目录的服务账号是否对您的存储桶具有 Storage Object Admin 角色。
+   这会验证您的目录的服务账号是否对存储桶具有 Storage Object Admin 角色。
 
 ### gcloud
 
@@ -252,7 +252,7 @@ spark = SparkSession.builder.appName("APP_NAME") \
 
 * `CATALOG_NAME`：Apache Iceberg REST Catalog 端点的名称。
 * `APP_NAME`：Spark 会话的名称。
-* `REST_API_VERSION`：对于稳定的 API 版本，请设置为 `v1`。如果您需要解决数据沿袭生成方面的[已知问题](https://docs.cloud.google.com/dataproc/docs/guides/create-lakehouse?hl=zh-cn#lineage-known-issue)，请设置为 `v1beta`。
+* `REST_API_VERSION`：对于稳定的 API 版本，设置为 `v1`。
 * `WAREHOUSE_PATH`：数据仓库的路径。请使用 `gs://CLOUD_STORAGE_BUCKET_NAME`。如需使用 [BigQuery 目录联合](https://docs.cloud.google.com/lakehouse/docs/understand-catalog-types?hl=zh-cn#catalog-federation)，请参阅[将目录联合与 BigQuery 搭配使用](https://docs.cloud.google.com/lakehouse/docs/use-catalog-federation?hl=zh-cn#federation)。
 * `PROJECT_ID`：使用 Apache Iceberg REST Catalog 端点所产生的费用将计入该项目，该项目可能与拥有 Cloud Storage 存储桶的项目不同。如需详细了解使用 REST API 时的项目配置，请参阅[系统参数](https://docs.cloud.google.com/apis/docs/system-parameters?hl=zh-cn)。
 
@@ -341,7 +341,7 @@ gcloud dataproc batches submit pyspark PYSPARK_FILE \
 * `REGION`：Managed Service for Apache Spark 批量工作负载的区域。
 * `RUNTIME_VERSION`：Managed Service for Apache Spark 运行时版本，例如 `2.2`。
 * `CATALOG_NAME`：Apache Iceberg REST Catalog 端点的名称。
-* `REST_API_VERSION`：对于稳定的 API 版本，请设置为 `v1`。如果您需要解决数据沿袭生成方面的[已知问题](https://docs.cloud.google.com/dataproc/docs/guides/create-lakehouse?hl=zh-cn#lineage-known-issue)，请设置为 `v1beta`。
+* `REST_API_VERSION`：对于稳定的 API 版本，设置为 `v1`。
 * `WAREHOUSE_PATH`：数据仓库的路径。请使用 `gs://CLOUD_STORAGE_BUCKET_NAME`。如需使用 [BigQuery 目录联合](https://docs.cloud.google.com/lakehouse/docs/understand-catalog-types?hl=zh-cn#catalog-federation)，请参阅[将目录联合与 BigQuery 搭配使用](https://docs.cloud.google.com/lakehouse/docs/use-catalog-federation?hl=zh-cn#federation)。
 
 ### 通过凭证分发进行配置
@@ -408,7 +408,7 @@ gcloud dataproc clusters create CLUSTER_NAME \
 * `DATAPROC_VERSION`：Managed Service for Apache Spark 映像版本，例如 `2.2`。
 * `NETWORK_ID`：集群网络 ID。如需了解详情，请参阅 [Managed Service for Apache Spark 集群网络配置](https://docs.cloud.google.com/dataproc/docs/concepts/configuring-clusters/network?hl=zh-cn)。
 * `CATALOG_NAME`：使用 Apache Iceberg REST Catalog 端点的 Trino Catalog 的名称。
-* `REST_API_VERSION`：对于稳定的 API 版本，请设置为 `v1`。如果您需要解决数据沿袭生成方面的[已知问题](https://docs.cloud.google.com/dataproc/docs/guides/create-lakehouse?hl=zh-cn#lineage-known-issue)，请设置为 `v1beta`。
+* `REST_API_VERSION`：对于稳定的 API 版本，设置为 `v1`。
 * `WAREHOUSE_PATH`：数据仓库的路径。
   请使用 `gs://CLOUD_STORAGE_BUCKET_NAME`。
 * `PROJECT_ID`：用于 Lakehouse 运行时目录的 Google Cloud 项目 ID。
@@ -456,7 +456,7 @@ spark = SparkSession.builder.appName("APP_NAME") \
 
 * `CATALOG_NAME`：Apache Iceberg REST Catalog 端点的名称。
 * `APP_NAME`：Spark 会话的名称。
-* `REST_API_VERSION`：对于稳定的 API 版本，请设置为 `v1`。如果您需要解决数据沿袭生成方面的[已知问题](https://docs.cloud.google.com/dataproc/docs/guides/create-lakehouse?hl=zh-cn#lineage-known-issue)，请设置为 `v1beta`。
+* `REST_API_VERSION`：对于稳定的 API 版本，设置为 `v1`。
 * `WAREHOUSE_PATH`：数据仓库的路径。请使用 `gs://CLOUD_STORAGE_BUCKET_NAME`。如需使用 [BigQuery 目录联合](https://docs.cloud.google.com/lakehouse/docs/understand-catalog-types?hl=zh-cn#catalog-federation)，请参阅[将目录联合与 BigQuery 搭配使用](https://docs.cloud.google.com/lakehouse/docs/use-catalog-federation?hl=zh-cn#federation)。
 * `PROJECT_ID`：使用 Apache Iceberg REST 目录端点所产生的费用将计入该项目，该项目可能与拥有 Cloud Storage 存储桶的项目不同。如需详细了解使用 REST API 时的项目配置，请参阅[系统参数](https://docs.cloud.google.com/apis/docs/system-parameters?hl=zh-cn)。
 
@@ -523,7 +523,7 @@ spark = SparkSession.builder.appName("APP_NAME") \
 
 * `CATALOG_NAME`：Apache Iceberg REST Catalog 端点的名称。
 * `APP_NAME`：Spark 会话的名称。
-* `REST_API_VERSION`：对于稳定的 API 版本，请设置为 `v1`。如果您需要解决数据沿袭生成方面的[已知问题](https://docs.cloud.google.com/dataproc/docs/guides/create-lakehouse?hl=zh-cn#lineage-known-issue)，请设置为 `v1beta`。
+* `REST_API_VERSION`：对于稳定的 API 版本，设置为 `v1`。
 * `WAREHOUSE_PATH`：数据仓库的路径。请使用 `gs://CLOUD_STORAGE_BUCKET_NAME`。如需使用 [BigQuery 目录联合](https://docs.cloud.google.com/lakehouse/docs/understand-catalog-types?hl=zh-cn#catalog-federation)，请参阅[将目录联合与 BigQuery 搭配使用](https://docs.cloud.google.com/lakehouse/docs/use-catalog-federation?hl=zh-cn#federation)。
 * `PROJECT_ID`：使用 Apache Iceberg REST 目录端点所产生的费用将计入该项目，该项目可能与拥有 Cloud Storage 存储桶的项目不同。如需详细了解使用 REST API 时的项目配置，请参阅[系统参数](https://docs.cloud.google.com/apis/docs/system-parameters?hl=zh-cn)。
 * `TOKEN`：您的身份验证令牌，有效期为一小时，例如使用 `gcloud auth application-default print-access-token` 生成的令牌。
@@ -574,9 +574,9 @@ spark = SparkSession.builder.appName("APP_NAME") \
 1. 在 Google Cloud 控制台中，前往 **Lakehouse**。
 
    [前往 Lakehouse](https://console.cloud.google.com/biglake?hl=zh-cn)
-2. 选择现有目录，如果没有，则创建一个。
+2. 选择现有目录，如果没有，则创建一个目录。
 3. 在菜单栏中，点击 **+ 创建命名空间**。
-4. 对于**命名空间名称**，为命名空间输入一个唯一的名称。
+4. 对于**命名空间名称**，为您的命名空间输入一个唯一的名称。
 5. 对于**位置**，选择要与命名空间关联的 Cloud Storage 存储桶。
 6. 点击**创建**。
 
@@ -618,11 +618,11 @@ USE CATALOG_NAME.SCHEMA_NAME;
 
 如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-最后更新时间 (UTC)：2026-06-04。
+最后更新时间 (UTC)：2026-06-05。
 
 
 
 
 需要向我们提供更多信息？
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["很难理解","hardToUnderstand","thumb-down"],["信息或示例代码不正确","incorrectInformationOrSampleCode","thumb-down"],["没有我需要的信息/示例","missingTheInformationSamplesINeed","thumb-down"],["翻译问题","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-06-04。"],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["很难理解","hardToUnderstand","thumb-down"],["信息或示例代码不正确","incorrectInformationOrSampleCode","thumb-down"],["没有我需要的信息/示例","missingTheInformationSamplesINeed","thumb-down"],["翻译问题","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-06-05。"],[],[]]

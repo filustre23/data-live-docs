@@ -60,14 +60,14 @@ If you are using [Gradle](https://gradle.org/),
 add the following to your dependencies:
 
 ```
-implementation 'com.google.cloud:google-cloud-bigquerymigration:0.95.0'
+implementation 'com.google.cloud:google-cloud-bigquerymigration:0.96.0'
 ```
 
 If you are using [sbt](https://www.scala-sbt.org/), add
 the following to your dependencies:
 
 ```
-libraryDependencies += "com.google.cloud" % "google-cloud-bigquerymigration" % "0.95.0"
+libraryDependencies += "com.google.cloud" % "google-cloud-bigquerymigration" % "0.96.0"
 ```
 
 If you're using Visual Studio Code or IntelliJ, you can add client libraries to your
