@@ -64,6 +64,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 下圖顯示基礎資料表和資料表副本的儲存空間費用差異：
 
+資料表本機副本的計費範例
 
 **注意：**
 

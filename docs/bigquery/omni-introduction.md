@@ -75,7 +75,7 @@ BigQuery Omni 會使用標準 AWS IAM 角色或 Azure Active Directory 主體，
 * `SELECT` 陳述式
 * `CREATE EXTERNAL TABLE` 陳述式
 
-
+**圖 1：**查詢時，資料在 Google Cloud 與 AWS 或 Azure 之間的移動情形。
 
 1. BigQuery 控制層會透過Google Cloud 主控台、bq 指令列工具、API 方法或用戶端程式庫，接收您提交的查詢工作。
 2. BigQuery 控制層會將查詢工作傳送至 AWS 或 Azure 上的 BigQuery 資料層進行處理。
@@ -93,7 +93,7 @@ BigQuery Omni 會使用標準 AWS IAM 角色或 Azure Active Directory 主體，
 
 下圖說明在 `EXPORT DATA` 陳述式執行期間，資料如何在 Google Cloud 和 AWS 或 Azure 之間移動。
 
-
+**圖 2：**匯出查詢時， Google Cloud 與 AWS 或 Azure 之間的資料移動。
 
 1. BigQuery 控制層會透過 Google Cloud 主控台、bq 指令列工具、API 方法或用戶端程式庫，接收您提交的匯出查詢工作。查詢包含 Amazon S3 儲存桶或 Blob 儲存空間中查詢結果的目的地路徑。
 2. BigQuery 控制層會將匯出查詢工作傳送至 BigQuery 資料層 (位於 AWS 或 Azure) 進行處理。

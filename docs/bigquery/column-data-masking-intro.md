@@ -46,6 +46,8 @@ BigQuery 支援資料欄層級的[資料遮蓋](https://docs.cloud.google.com/bi
 
 圖 1 顯示設定資料遮蓋的工作流程：
 
+**圖 1.** 資料遮蓋元件。
+
 請按照下列步驟設定資料遮蓋：
 
 1. [設定分類和一或多個政策標記](https://docs.cloud.google.com/bigquery/docs/column-level-security?hl=zh-tw#create_taxonomy)。
@@ -58,6 +60,8 @@ BigQuery 支援資料欄層級的[資料遮蓋](https://docs.cloud.google.com/bi
    與資料政策相關聯的政策標記，也可用於資料欄層級的存取控管。在這種情況下，政策標記也會與一或多個獲派「Data Catalog 精細讀取者」角色的主體建立關聯。這樣一來，這些主體就能存取原始的未遮蓋欄資料。
 
 圖 2 顯示資料欄層級的存取控管和資料遮蓋功能如何搭配運作：
+
+**圖 2.** 資料遮蓋元件。
 
 如要進一步瞭解角色互動，請參閱「[遮蓋讀者和精細讀者角色如何互動](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro?hl=zh-tw#role-interaction)」。如要進一步瞭解政策標記沿用設定，請參閱「[角色和政策標記階層](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro?hl=zh-tw#auth-inheritance)」。
 

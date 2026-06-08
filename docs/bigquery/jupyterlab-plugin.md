@@ -93,7 +93,7 @@ BigQuery JupyterLab 插件包含 [Dataproc JupyterLab 插件](https://docs.cloud
 
 如需在 JupyterLab 中处理 BigQuery 数据，请执行以下操作：
 
-1. 在 JupyterLab 边栏中，打开**数据集资源管理器**窗格：点击
+1. 在 JupyterLab 边栏中，打开**数据集资源管理器**窗格：点击 数据集图标。
 2. 如需展开项目，请在**数据集资源管理器**窗格中点击项目名称旁边的 arrow\_right 展开箭头。
 
    **数据集资源管理器**窗格会显示项目中位于您为会话配置的 BigQuery 区域中的所有数据集。您可以通过多种方式与项目和数据集互动：

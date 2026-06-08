@@ -71,13 +71,13 @@ BigQuery 分區和分群建議工具會產生[分區](https://docs.cloud.google.
 |  | 台灣 | `asia-east1` |  |
 |  | 東京 | `asia-northeast1` |  |
 | **歐洲** | | | |
-|  | 比利時 | `europe-west1` |  |
+|  | 比利時 | `europe-west1` | [低二氧化碳排放](https://cloud.google.com/sustainability/region-carbon?hl=zh-tw#region-picker) |
 |  | 柏林 | `europe-west10` |  |
 |  | 歐洲 (多區域) | `eu` |
 |  | 法蘭克福 | `europe-west3` |  |
-|  | 倫敦 | `europe-west2` |  |
-|  | 荷蘭 | `europe-west4` |  |
-|  | 蘇黎世 | `europe-west6` |  |
+|  | 倫敦 | `europe-west2` | [低二氧化碳排放](https://cloud.google.com/sustainability/region-carbon?hl=zh-tw#region-picker) |
+|  | 荷蘭 | `europe-west4` | [低二氧化碳排放](https://cloud.google.com/sustainability/region-carbon?hl=zh-tw#region-picker) |
+|  | 蘇黎世 | `europe-west6` | [低二氧化碳排放](https://cloud.google.com/sustainability/region-carbon?hl=zh-tw#region-picker) |
 | **美洲** | | | |
 |  | 愛荷華州 | `us-central1` | [低二氧化碳排放](https://cloud.google.com/sustainability/region-carbon?hl=zh-tw#region-picker) |
 |  | 拉斯維加斯 | `us-west4` |  |

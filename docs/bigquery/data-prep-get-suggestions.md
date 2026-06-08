@@ -43,6 +43,8 @@ Google uses AI technology to translate content into your preferred language. AI 
 4. 選用：如要簡化檢視畫面，請依序點選「全螢幕」，開啟全螢幕模式。
 5. 選用：如要查看資料準備詳細資料、版本記錄、新增註解或回覆現有註解，請使用工具列。
 
+   「註解」工具列功能目前為[預先發布版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages)。如要提供意見或尋求這項功能的支援，請傳送電子郵件至 [bqui-workspace-pod@google.com](mailto:bqui-workspace-pod@google.com)。
+
 ### 從表格建立
 
 如要從現有資料表建立新的資料準備作業，請按照下列步驟操作：
@@ -54,6 +56,8 @@ Google uses AI technology to translate content into your preferred language. AI 
 4. 按一下資料表名稱旁的 more\_vert，然後依序點選「動作」**>「在以下項目中開啟」>「資料準備」**。系統會開啟資料準備編輯器，並在「資料」分頁中顯示資料預覽畫面，以及 Gemini 提供的初步資料準備建議。
 5. 選用：如要簡化檢視畫面，請依序點選「全螢幕」，開啟全螢幕模式。
 6. 選用：如要查看資料準備詳細資料、版本記錄、新增註解或回覆現有註解，請使用工具列。
+
+   「註解」工具列功能目前為[預先發布版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages)。如要提供意見或尋求這項功能的支援，請傳送電子郵件至 [bqui-workspace-pod@google.com](mailto:bqui-workspace-pod@google.com)。
 
 ### 從檔案建立
 
@@ -83,6 +87,8 @@ Google uses AI technology to translate content into your preferred language. AI 
 10. 選用：如要簡化檢視畫面，請依序點選「全螢幕」，開啟全螢幕模式。
 11. 選用：如要查看資料準備詳細資料、版本記錄、新增註解或回覆現有註解，請使用工具列。
 
+    「註解」工具列功能目前為[預先發布版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages)。如要提供意見回饋或尋求這項功能的支援，請傳送電子郵件至 [bqui-workspace-pod@google.com](mailto:bqui-workspace-pod@google.com)。
+
 #### 準備檔案
 
 在資料檢視畫面中，按照下列步驟準備您載入的暫存資料：
@@ -106,6 +112,8 @@ Google uses AI technology to translate content into your preferred language. AI 
 5. 選取圖表中的其中一個節點。系統會開啟資料準備編輯器，並在「資料」分頁中顯示資料預覽畫面，以及 Gemini 提供的初步資料準備建議。
 6. 選用：如要簡化檢視畫面，請依序點選「全螢幕」，開啟全螢幕模式。
 7. 選用：如要查看資料準備詳細資料、版本記錄、新增註解或回覆現有註解，請使用工具列。
+
+   「註解」工具列功能目前為[預先發布版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages)。如要提供意見或尋求這項功能的支援，請傳送電子郵件至 [bqui-workspace-pod@google.com](mailto:bqui-workspace-pod@google.com)。
 
 ## 新增資料準備步驟
 

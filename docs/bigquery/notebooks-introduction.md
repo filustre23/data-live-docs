@@ -79,11 +79,11 @@ BigQuery Studio 可讓您儲存、共用及管理筆記本版本。下表列出 
 |  | 約翰尼斯堡 | `africa-south1` |  |
 | **美洲** | | | |
 |  | 哥倫布 | `us-east5` |  |
-|  | 達拉斯 | `us-south1` |  |
-|  | 愛荷華州 | `us-central1` |  |
+|  | 達拉斯 | `us-south1` | [低二氧化碳排放](https://cloud.google.com/sustainability/region-carbon?hl=zh-tw#region-picker) |
+|  | 愛荷華州 | `us-central1` | [低二氧化碳排放](https://cloud.google.com/sustainability/region-carbon?hl=zh-tw#region-picker) |
 |  | 洛杉磯 | `us-west2` |  |
 |  | 拉斯維加斯 | `us-west4` |  |
-|  | 蒙特婁 | `northamerica-northeast1` |  |
+|  | 蒙特婁 | `northamerica-northeast1` | [低二氧化碳排放](https://cloud.google.com/sustainability/region-carbon?hl=zh-tw#region-picker) |
 |  | 北維吉尼亞州 | `us-east4` |  |
 |  | 俄勒岡州 | `us-west1` | [低二氧化碳排放](https://cloud.google.com/sustainability/region-carbon?hl=zh-tw#region-picker) |
 |  | 聖保羅 | `southamerica-east1` | [低二氧化碳排放](https://cloud.google.com/sustainability/region-carbon?hl=zh-tw#region-picker) |

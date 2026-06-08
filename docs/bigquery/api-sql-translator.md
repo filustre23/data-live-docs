@@ -120,13 +120,13 @@ Google uses AI technology to translate content into your preferred language. AI 
 |  | 台灣 | `asia-east1` |  |
 |  | 東京 | `asia-northeast1` |  |
 | **歐洲** | | | |
-|  | 比利時 | `europe-west1` |  |
+|  | 比利時 | `europe-west1` | [低二氧化碳排放](https://cloud.google.com/sustainability/region-carbon?hl=zh-tw#region-picker) |
 |  | 柏林 | `europe-west10` |  |
 |  | 歐洲 (多區域) | `eu` |
-|  | 芬蘭 | `europe-north1` |  |
+|  | 芬蘭 | `europe-north1` | [低二氧化碳排放](https://cloud.google.com/sustainability/region-carbon?hl=zh-tw#region-picker) |
 |  | 法蘭克福 | `europe-west3` |  |
-|  | 倫敦 | `europe-west2` |  |
-|  | 馬德里 | `europe-southwest1` |  |
+|  | 倫敦 | `europe-west2` | [低二氧化碳排放](https://cloud.google.com/sustainability/region-carbon?hl=zh-tw#region-picker) |
+|  | 馬德里 | `europe-southwest1` | [低二氧化碳排放](https://cloud.google.com/sustainability/region-carbon?hl=zh-tw#region-picker) |
 |  | 米蘭 | `europe-west8` |  |
 |  | 荷蘭 | `europe-west4` | [低二氧化碳排放](https://cloud.google.com/sustainability/region-carbon?hl=zh-tw#region-picker) |
 |  | 巴黎 | `europe-west9` | [低二氧化碳排放](https://cloud.google.com/sustainability/region-carbon?hl=zh-tw#region-picker) |

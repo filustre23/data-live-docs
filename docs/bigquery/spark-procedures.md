@@ -207,7 +207,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 在查詢編輯器中，[使用 PySpark 編輯器以 Python 建立 Spark 的預存程序](#use-python-pyspark-editor)。
-3. 依序點按
+3. 依序點按 「儲存」**>「儲存程序」**。
 4. 在「儲存預存程序」對話方塊中，指定要儲存預存程序的資料集名稱，以及預存程序的名稱。
 5. 按一下 [儲存]。
 

@@ -182,7 +182,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    ```
 
    作業完成後，您應該會看到類似 `Successfully created model named imported_tf_model` 的訊息。
-4. 新模型會顯示在「資源」面板中。模型會以模型圖示
+4. 新模型會顯示在「資源」面板中。模型會以模型圖示 來表示。
 5. 在「Resources」(資源) 面板中選取新模型，「Query editor」(查詢編輯器) 下方就會顯示該模型的相關資訊。
 
 ### bq

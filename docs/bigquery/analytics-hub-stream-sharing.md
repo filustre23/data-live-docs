@@ -50,7 +50,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 下圖說明 Pub/Sub 資源的發布端和訂閱端如何與 BigQuery 共用功能互動：
 
-
+**圖 1：**使用 Pub/Sub 主題共用主題發布者和訂閱者工作流程。
 
 共用主題
 :   共用主題是透過 BigQuery sharing 功能共用 Pub/Sub 主題的單位。身為共用主題發布者，您可以建立或使用現有的 Pub/Sub 主題，將訊息資料發布給訂閱者。BigQuery sharing 不會複製來源 Pub/Sub 主題。

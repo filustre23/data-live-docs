@@ -70,6 +70,48 @@ BigQuery 資料集有下列限制：
 [前往 BigQuery 頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)2. 點選左側窗格中的 explore「Explorer」。
 3. 選取要建立資料集的專案。
 4. 依序點選 more\_vert「View actions」(查看動作) 和「Create dataset」(建立資料集)。
+5. 在「Create dataset」(建立資料集) 頁面：
+
+1. 針對「Dataset ID」(資料集 ID)，輸入唯一的資料集[名稱](#dataset-naming)。
+2. 針對「Location type」(位置類型)，選擇資料集的地理[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。資料集建立後即無法變更位置。
+3. 選用：如要建立[外部資料集](https://docs.cloud.google.com/bigquery/docs/spanner-external-datasets?hl=zh-tw)，請選取「連結至外部資料集」。
+4. 如不需設定其他選項 (例如標記和資料表到期時間)，請按一下「建立資料集」。否則，請展開下節，設定其他資料集選項。
+
+#### 資料集的其他選項
+
+1. 選用：展開「標記」部分，在資料集中新增[標記](https://docs.cloud.google.com/bigquery/docs/tags?hl=zh-tw#attach_tags_when_you_create_a_new_dataset)。
+2. 如要套用現有標籤，請按照下列步驟操作：
+
+1. 按一下「選取範圍」旁的下拉式箭頭，然後選擇「目前範圍」，即「選取目前的機構」或「選取目前的專案」。
+
+或者，按一下「選取範圍」搜尋資源，或查看目前的資源清單。
+
+2. 從清單中為「鍵 1」和「值 1」選擇適當的值。
+
+3. 如要手動輸入新標記，請按照下列步驟操作：
+
+1. 按一下「選取範圍」旁的下拉式箭頭，然後依序選擇「手動輸入 ID」>「機構」、「專案」或「標記」。
+2. 如要為專案或機構建立標記，請在對話方塊中輸入 `PROJECT_ID` 或 `ORGANIZATION_ID`，然後按一下「儲存」。
+3. 針對「鍵 1」和「值 1」，從清單中選擇適當的值。
+4. 如要在表格中新增其他代碼，請按一下「新增代碼」，然後按照上述步驟操作。
+
+4. (選用) 展開「Advanced options」(進階選項) 部分，設定下列一或多個選項。
+
+1. 如要變更「Encryption」(加密) 選項，以透過 [Cloud Key Management Service](https://docs.cloud.google.com/kms/docs/key-management-service?hl=zh-tw) 使用自己的加密編譯金鑰，請選取「Cloud KMS key」(Cloud KMS 金鑰)。
+2. 如要使用不區分大小寫的資料表名稱，請選取「啟用不區分大小寫的資料表名稱」。
+3. 如要變更**預設定序**
+   [規格](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts?hl=zh-tw#collate_spec_details)，請從清單中選擇定序類型。
+4. 如要為資料集中的資料表設定到期時間，請選取「啟用資料表到期時間」，然後以天為單位指定「預設資料表存在時間上限」。
+**注意：**如果專案未與帳單帳戶建立關聯，BigQuery 會自動為您在專案中建立的資料集設定預設資料表到期時間。您可以為資料集指定較短的預設資料表到期時間，但無法指定較長的預設資料表到期時間。5. 如要設定[**預設捨入模式**](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/RoundingMode?hl=zh-tw)，請從清單中選擇捨入模式。
+6. 如要啟用實體[**儲存空間計費模式**](https://docs.cloud.google.com/bigquery/docs/datasets-intro?hl=zh-tw#dataset_storage_billing_models)，請從清單中選擇計費模式。
+
+變更資料集的計費模式後，最久需要 24 小時才會生效。
+
+變更資料集的儲存空間計費模式後，必須等待 14 天才能再次變更。
+
+7. 如要設定資料集的[時間回溯期](https://docs.cloud.google.com/bigquery/docs/time-travel?hl=zh-tw#time_travel)，請從清單中選擇回溯期大小。
+
+5. 點選「建立資料集」。
 
 ### SQL
 
@@ -623,11 +665,11 @@ end
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-06-06 (世界標準時間)。
+上次更新時間：2026-06-08 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-06 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-08 (世界標準時間)。"],[],[]]

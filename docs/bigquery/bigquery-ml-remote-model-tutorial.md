@@ -339,7 +339,7 @@ resource`。
 
    作業完成後，畫面上會顯示類似如下的訊息：`Successfully created model named bert_sentiment`。
 
-   新模型會顯示在「資源」面板中。模型會以模型圖示
+   新模型會顯示在「資源」面板中。模型會以模型圖示 來表示。
 
    在「Resources」(資源) 面板中選取新模型，「Query editor」(查詢編輯器) 下方就會顯示該模型的相關資訊。
 

@@ -266,6 +266,60 @@ WHERE
 
 您可以使用 [BigQuery 管理資源圖表](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts?hl=zh-tw#view-resource-utilization)，選取「待處理」指標的「工作並行」圖表，監控預留項目的查詢佇列長度。
 
+您也可以在 Cloud Monitoring 中查看[工作計數](https://docs.cloud.google.com/monitoring/api/metrics_gcp_a_b?hl=zh-tw#gcp-bigquery)指標，並依**待處理**狀態的工作數量進行篩選，監控佇列長度。
+
+## 排解佇列時間過長的問題
+
+查詢作業可能看起來很慢，因為在開始執行前，作業會在佇列中等待相當長的時間。這段時間是*佇列時間*。
+已排入佇列的工作會顯示「`PENDING`」狀態。
+
+### 找出排隊時間較長的情況
+
+您可以透過下列方法判斷佇列時間是否過長：
+
+* **`INFORMATION_SCHEMA`**：
+  [`INFORMATION_SCHEMA.JOBS*` 檢視畫面](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw)
+  可提供查詢佇列時間的洞察資料。舉例來說，您可以從 `start_time` 減去 `creation_time`，計算特定工作的佇列時間，或是找出長時間處於 `state="PENDING"` 狀態的工作。您可以從[範例查詢](#monitoring)著手，觀察查詢負載，並找出達到動態並行門檻的時間。
+* **監控**：
+  在 Monitoring 中使用 [`bigquery.googleapis.com/job/num_in_flight`](https://docs.cloud.google.com/monitoring/api/metrics_gcp_a_b?hl=zh-tw#bigquery/job/num_in_flight) 指標，並依 `state=pending` 篩選，即可監控佇列長度隨時間的變化。
+* 您也可以使用[BigQuery 管理資源圖表](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts?hl=zh-tw)，如「[監控](#monitoring)」一節所述。
+
+### 常見原因
+
+以下列出幾個常見的佇列時間過長原因：
+
+* **並行限制**：專案或預訂項目已達到允許的並行查詢數上限，該上限是動態決定或[手動設定](#set_the_maximum_concurrency_target)。
+  達到上限後，新查詢就必須等待。
+* **運算單元爭用**：可用運算單元不足，無法處理工作負載。這會導致執行中的查詢速度變慢，佔用並行查詢運算單元的時間變長，其他查詢的佇列時間也會增加。
+* **工作負載尖峰**：提交的查詢數量突然增加。
+* **查詢效率不佳**：個別查詢未經過最佳化。即使查詢量不高，這些效率不彰的查詢仍可能長時間佔用過多時段，導致有效查詢的周轉率降低。這樣一來，系統就不會啟動新的查詢，而是強制查詢在佇列中等待。
+
+### 解決佇列時間過長的問題
+
+如要解決排隊時間過長的問題，請考慮採取下列行動：
+
+* **評估工作負載**：判斷查詢量或複雜度最近是否增加。
+* **檢查預留項目使用率**：使用[管理資源圖表](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts?hl=zh-tw)，確認預留項目是否經常達到運算單元用量上限。
+* **檢查並行程度**：比較執行中的查詢數量與待處理的查詢數量。
+* **最佳化及調整**：
+  + 對於時效性較低的工作負載，請使用[批次查詢優先順序](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#batch)，這類工作負載的佇列限制較高。
+  + [最佳化長時間執行的查詢](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-overview?hl=zh-tw)。
+  + 如果經常達到容量上限，請[增加預留運算單元](https://docs.cloud.google.com/bigquery/docs/reservations-tasks?hl=zh-tw#update_reservations)。
+  + 平緩查詢提交尖峰。
+  + 視需要調整保留項目的[最高並行目標](#set_the_maximum_concurrency_target)。
+
+## 限制
+
+* 每個隨需專案一次最多可將 1,000 個互動式查詢和 20,000 個批次查詢加入佇列。如果查詢超出這項限制，系統就會傳回配額錯誤。這些限制無法提高。
+* 在預留項目中，指派給該預留項目的每個專案一次最多可將 1,000 個互動式查詢和 20,000 個批次查詢排入佇列。如果查詢超出這項限制，系統就會傳回配額錯誤。這些限制無法提高。
+* 根據預設，如果查詢工作未在 6 小時內開始執行 (互動式查詢) 或 24 小時內開始執行 (批次查詢)，就會逾時。
+* 您無法為在隨選專案中執行的查詢設定並行數上限目標。
+* 您無法為使用 Standard 版預留資源執行的查詢設定並行上限目標。如要進一步瞭解版本，請參閱「[BigQuery 版本簡介](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)」。
+
+## 後續步驟
+
+* 進一步瞭解如何診斷及解決[查詢佇列限制錯誤](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas?hl=zh-tw#ts-query-queue-limit)。
+
 
 
 

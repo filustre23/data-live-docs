@@ -42,7 +42,7 @@ All mathematical functions have the following behaviors:
 | [`ATAN2`](/bigquery/docs/reference/standard-sql/mathematical_functions#atan2) | Computes the inverse tangent of `X/Y`, using the signs of `X` and `Y` to determine the quadrant. |
 | [`ATANH`](/bigquery/docs/reference/standard-sql/mathematical_functions#atanh) | Computes the inverse hyperbolic tangent of `X`. |
 | [`AVG`](/bigquery/docs/reference/standard-sql/aggregate_functions#avg) | Gets the average of non-`NULL` values.  For more information, see [Aggregate functions](/bigquery/docs/reference/standard-sql/aggregate_functions). |
-| [`AVG` (Differential Privacy)](/bigquery/docs/reference/standard-sql/aggregate-dp-functions#dp_avg) | `DIFFERENTIAL_PRIVACY`-supported `AVG`. |
+| [`AVG` (Differential Privacy)](/bigquery/docs/reference/standard-sql/aggregate-dp-functions#dp_avg) | `DIFFERENTIAL_PRIVACY`-supported `AVG`.   Gets the differentially-private average of non-`NULL`, non-`NaN` values in a query with a `DIFFERENTIAL_PRIVACY` clause.   For more information, see [Differential privacy functions](/bigquery/docs/reference/standard-sql/aggregate-dp-functions). |
 | [`CBRT`](/bigquery/docs/reference/standard-sql/mathematical_functions#cbrt) | Computes the cube root of `X`. |
 | [`CEIL`](/bigquery/docs/reference/standard-sql/mathematical_functions#ceil) | Gets the smallest integral value that isn't less than `X`. |
 | [`CEILING`](/bigquery/docs/reference/standard-sql/mathematical_functions#ceiling) | Synonym of `CEIL`. |
@@ -86,7 +86,7 @@ All mathematical functions have the following behaviors:
 | [`SINH`](/bigquery/docs/reference/standard-sql/mathematical_functions#sinh) | Computes the hyperbolic sine of `X`. |
 | [`SQRT`](/bigquery/docs/reference/standard-sql/mathematical_functions#sqrt) | Computes the square root of `X`. |
 | [`SUM`](/bigquery/docs/reference/standard-sql/aggregate_functions#sum) | Gets the sum of non-`NULL` values.  For more information, see [Aggregate functions](/bigquery/docs/reference/standard-sql/aggregate_functions). |
-| [`SUM` (Differential Privacy)](/bigquery/docs/reference/standard-sql/aggregate-dp-functions#dp_sum) | `DIFFERENTIAL_PRIVACY`-supported `SUM`.   Gets the differentially-private sum of non-`NULL`, non-`NaN` values in a query with a `DIFFERENTIAL_PRIVACY` clause. |
+| [`SUM` (Differential Privacy)](/bigquery/docs/reference/standard-sql/aggregate-dp-functions#dp_sum) | `DIFFERENTIAL_PRIVACY`-supported `SUM`.   Gets the differentially-private sum of non-`NULL`, non-`NaN` values in a query with a `DIFFERENTIAL_PRIVACY` clause.   For more information, see [Differential privacy functions](/bigquery/docs/reference/standard-sql/aggregate-dp-functions). |
 | [`TAN`](/bigquery/docs/reference/standard-sql/mathematical_functions#tan) | Computes the tangent of `X`. |
 | [`TANH`](/bigquery/docs/reference/standard-sql/mathematical_functions#tanh) | Computes the hyperbolic tangent of `X`. |
 | [`TRUNC`](/bigquery/docs/reference/standard-sql/mathematical_functions#trunc) | Rounds a number like `ROUND(X)` or `ROUND(X, N)`, but always rounds towards zero and never overflows. |

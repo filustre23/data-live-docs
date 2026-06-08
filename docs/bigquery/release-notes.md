@@ -27,6 +27,17 @@ To get the latest product updates delivered to you, add the URL of this page to 
 reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators), or add the
 [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## June 08, 2026
+
+Feature
+
+You can use custom constraints with Organization Policy to provide more
+granular control over specific fields for some BigQuery sharing
+resources. For more information, see
+[Manage Sharing data exchanges and listings using custom constraints](/bigquery/docs/analytics-hub-custom-constraints).
+This feature is [generally available](https://cloud.google.com/products#product-launch-stages)
+(GA).
+
 ## June 03, 2026
 
 Feature
@@ -4244,6 +4255,4 @@ Libraries
 
 ##### Dependencies
 
-* Update dependency com.google.apis:google-api-services-bigquery to v2-rev20250112-2.0.0 ([#3651](https://github.com/googleapis/java-bigquery/issues/3651)) ([fd06100](https://github.com/googleapis/java-bigquery/commit/fd06100c4c18b0416d384ec1f6bdfc796b70ad9f))
-* Update dependency com.google.cloud:sdk-platform-java-config to v3.42.0 ([#3653](https://github.com/googleapis/java-bigquery/issues/3653)) ([1a14342](https://github.com/googleapis/java-bigquery/commit/1a143428c7f584db3dd6e827c2ee8fe980afe18c))
-* Update github/codeql-action action to v2.28.1 (
+* Update dependency com.google.apis:google-api-services-bigquery to v2-rev20250112-2.0.0 (

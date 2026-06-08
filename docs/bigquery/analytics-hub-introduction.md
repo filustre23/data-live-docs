@@ -195,8 +195,8 @@ BigQuery sharing 功能支援下列區域和多重區域。
 | 地區說明 | 區域名稱 | 詳細資料 |
 | --- | --- | --- |
 | 俄亥俄州哥倫布 | `us-east5` |  |
-| 達拉斯 | `us-south1` |  |
-| 愛荷華州 | `us-central1` |  |
+| 達拉斯 | `us-south1` | [低二氧化碳排放](https://cloud.google.com/sustainability/region-carbon?hl=zh-tw#region-picker) |
+| 愛荷華州 | `us-central1` | [低二氧化碳排放](https://cloud.google.com/sustainability/region-carbon?hl=zh-tw#region-picker) |
 | 拉斯維加斯 | `us-west4` |  |
 | 洛杉磯 | `us-west2` |  |
 | 墨西哥 | `northamerica-south1` |  |

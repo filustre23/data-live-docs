@@ -280,6 +280,7 @@ bqclient.create_dataset("bqml_tutorial", exists_ok=True)
    作業完成後，您會看到類似以下的訊息：`Successfully created model named imported_onnx_model`。
 
    新模型會顯示在「資源」面板中。模型會以模型圖示來表示：
+   在「資源」面板中選取新模型，「查詢編輯器」旁就會顯示該模型的相關資訊。
 
 ### bq
 
