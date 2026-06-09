@@ -36,6 +36,13 @@ BigQuery](/bigquery/docs/use-cloud-assist#analyze-lineage). This feature is in [
 
 Feature
 
+You can now use Gemini Cloud Assist to
+[schedule queries](/bigquery/docs/use-cloud-assist#schedule_a_query). This
+feature is in
+[Preview](https://cloud.google.com/products#product-launch-stages).
+
+Feature
+
 You can use the Google-developed, open source
 [Java Database Connectivity (JDBC) driver for BigQuery](/bigquery/docs/jdbc-for-bigquery)
 to connect your Java applications to BigQuery. This feature is
@@ -4261,8 +4268,4 @@ BigQuery data preparation provides [context-aware join operation recommendations
 
 Feature
 
-You can create a [JavaScript user-defined aggregate function](/bigquery/docs/user-defined-aggregates#create-javascript-udaf) by using the [`CREATE AGGREGATE FUNCTION` statement](/bigquery/docs/reference/standard-sql/data-definition-language#javascript-create-udaf-function). This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
-
-## February 03, 2025
-
-Libraries
+You can create a [JavaScript user-defined aggregate function](/bigquery/docs/user-defined-aggregates#create-javascript-udaf) by using the [`CREATE AGGREGATE FUNCTION`](/bigquery/docs/reference/standard-sql/data-definition-language#javascript-create-udaf-function)

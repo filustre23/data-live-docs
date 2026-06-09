@@ -326,7 +326,7 @@ The valid range for the `INT64` arrays is `[1, ∞)`.
 **Syntax**
 
 ```
-TF_VERSION = { '1.15' | '2.8.0' }
+TF_VERSION = { '1.15' | &#39;2.8.0' }
 ```
 
 **Description**

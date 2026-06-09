@@ -922,11 +922,4 @@ option is set to `VERTEX_AI`.
 
 ### `VERTEX_AI_MODEL_VERSION_ALIASES`
 
-The `VERTEX_AI_MODEL_VERSION_ALIASES` option specifies an Agent Platform model alias to use when registering a model. Model
-aliases are helpful for fetching or deploying a particular model version by
-reference without needing to know the specific version ID. To learn more about
-how Model Registry aliases work, see
-[How to use model version aliases](/vertex-ai/docs/model-registry/model-alias).
-
-You can only set the `VERTEX_AI_MODEL_VERSION_ALIASES` option when the
-`MODEL_REGISTRY` option is set to `VERTEX_AI`.
+The `VERTEX_AI_MODEL_VERSION_ALIASES` option specifi
