@@ -8,7 +8,7 @@ info
 
 * Generative apps are available in **Beta** on all [plans](https://hex.tech/pricing/). Paid plans include monthly per-seat [credit grants](/docs/administration/credits) that can be used towards Hex AI features.
 * Users need [Can Edit](/docs/collaborate/sharing-and-permissions/project-sharing#project-permissions) or higher permissions on a project to create a Generative app.
-* To share suggestions for new features or improvements, reach out to [[email protected]](/cdn-cgi/l/email-protection#10636560607f6264507875683e64757378).
+* To share suggestions for new features or improvements, reach out to [[email protected]](/cdn-cgi/l/email-protection#b3c0c6c3c3dcc1c7f3dbd6cb9dc7d6d0db).
 
 Generative apps give you a fully customized, code-generated app experience where the Hex agent builds your UI, visuals, and theming from a plain-language description. Unlike [Classic apps](/docs/share-insights/apps/apps-introduction), which use a fixed grid of standard components, Generative apps produce flexible, web-style interfaces with custom layout, styling, and components tailored to what you're trying to build. This gives you more expressive power when a standard dashboard layout isn't enough.
 
@@ -44,6 +44,10 @@ Each time the agent writes or edits a file, the updated app is pushed to the **A
 * "Match the color palette to our brand: #0F62FE for primary"
 
 The agent can also read the rendered app and its console output, so it can fix layout issues, broken components, and runtime errors when you ask.
+
+### Choose a model and effort[​](#choose-a-model-and-effort "Direct link to Choose a model and effort")
+
+For open-ended builds — like generating a full app from scratch or making sweeping structural changes — consider selecting a higher effort level from the [Model & Effort Picker](/docs/explore-data/notebook-view/notebook-agent#choose-a-model-and-effort) in the prompt bar. Higher effort gives the agent more reasoning depth for complex, multi-step generation. For targeted tweaks, Auto is fine.
 
 ## Publish and share your Generative app[​](#publish-and-share-your-generative-app "Direct link to Publish and share your Generative app")
 
@@ -89,6 +93,7 @@ While Generative apps are in Beta, some Hex features are not yet supported. Thes
   + [From a project](#from-a-project)
   + [From your workspace homepage](#from-your-workspace-homepage)
 * [Iterate on your app](#iterate-on-your-app)
+  + [Choose a model and effort](#choose-a-model-and-effort)
 * [Publish and share your Generative app](#publish-and-share-your-generative-app)
   + [Scheduled runs and notifications](#scheduled-runs-and-notifications)
 * [Switch between Classic and Generative apps](#switch-between-classic-and-generative-apps)

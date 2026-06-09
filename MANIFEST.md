@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-06-09T08:33+00:00_
+_Generated 2026-06-09T14:34+00:00_
 
-**9 sources, 5137 topics total**
+**9 sources, 5142 topics total**
 
 ## airflow
 
@@ -3131,7 +3131,7 @@ _145 topics_
 
 Upstream: <https://docs.getdbt.com/docs/>
 
-_1061 topics_
+_1066 topics_
 
 - `dbt-core/best-practices/best-practice-workflows`
 - `dbt-core/best-practices/clone-incremental-models`
@@ -3296,10 +3296,15 @@ _1061 topics_
 - `dbt-core/docs/dbt-ai/wizard-ide`
 - `dbt-core/docs/dbt-ai/wizard-mcp`
 - `dbt-core/docs/dbt-ai/wizard-migrate`
+- `dbt-core/docs/dbt-ai/wizard-platform-mcp`
+- `dbt-core/docs/dbt-ai/wizard-platform-privacy-data`
+- `dbt-core/docs/dbt-ai/wizard-platform-skills`
+- `dbt-core/docs/dbt-ai/wizard-platform-subagents`
 - `dbt-core/docs/dbt-ai/wizard-quickstart`
 - `dbt-core/docs/dbt-ai/wizard-skills`
 - `dbt-core/docs/dbt-ai/wizard-slash-commands`
 - `dbt-core/docs/dbt-ai/wizard-subagents`
+- `dbt-core/docs/dbt-ai/wizard-telemetry`
 - `dbt-core/docs/dbt-ai/wizard-use-cases`
 - `dbt-core/docs/dbt-apis/admin-api`
 - `dbt-core/docs/dbt-apis/apis-overview`

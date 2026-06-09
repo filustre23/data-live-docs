@@ -13,7 +13,7 @@ To ensure everyone can use AI, Hex awards monthly credit grants to Editor and Ex
 info
 
 * Credits will go into effect for legacy customers with advance notice to Admins.
-* Customers with annual contracts who wish to purchase add-on credits can contact [[email protected]](/cdn-cgi/l/email-protection#0e7d6f626b7d4e666b76207a6b6d66) to update their contract.
+* Customers with annual contracts who wish to purchase add-on credits can contact [[email protected]](/cdn-cgi/l/email-protection#1f6c7e737a6c5f777a67316b7a7c77) to update their contract.
 
 ## Credit Consumption[​](#credit-consumption "Direct link to Credit Consumption")
 
@@ -105,6 +105,12 @@ Legacy customers can safely enable auto top-ups before credits go into effect fo
 * Add-on credits purchased via [auto top-up](#what-are-auto-top-ups) rollover to the next monthly billing cycle.
 * Committed add-on credits purchased for annual contracts expire at the end of the contract cycle.
 
+### Can I choose which model powers my requests?[​](#can-i-choose-which-model-powers-my-requests "Direct link to Can I choose which model powers my requests?")
+
+Yes - the Model & Effort Picker lets you control which underlying model runs your request and how much reasoning depth it applies. By default, requests run on **Auto**, which is appropriate for most questions and keeps credit consumption predictable.
+
+If you select a specific model, you can also set an effort level — higher effort levels will generally use more credits. Learn more about [choosing a model and effort](/docs/explore-data/threads#choosing-a-model-and-effort).
+
 #### On this page
 
 * [Overview](#overview)
@@ -114,3 +120,4 @@ Legacy customers can safely enable auto top-ups before credits go into effect fo
   + [What is the shared workspace credit pool?](#what-is-the-shared-workspace-credit-pool)
   + [What are auto top-ups?](#what-are-auto-top-ups)
   + [Do credits roll over?](#do-credits-roll-over)
+  + [Can I choose which model powers my requests?](#can-i-choose-which-model-powers-my-requests)

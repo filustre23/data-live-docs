@@ -95,6 +95,22 @@ The agent can surface all projects that you have [Can view app](/docs/collaborat
 
 In order to view a Thread that has been shared with you, you must have at least [Can view results](/docs/connect-to-data/data-connections/data-connections-introduction#can-view-results) access on all data connections that were used in the Thread, including data connections used in the projects the agent used as context.
 
+## Choosing a model and effort[​](#choosing-a-model-and-effort "Direct link to Choosing a model and effort")
+
+The **Model & Effort Picker** is an optional control in the Threads prompt bar that lets you choose which underlying model powers your thread and how much reasoning depth it applies.
+
+### Model selection[​](#model-selection "Direct link to Model selection")
+
+By default, Threads runs on **Auto**, which lets Hex choose the best model for your question. Auto is the right choice for most day-to-day analytics questions. Your model selection is stored per thread, so reopening a thread restores your last-used model and effort. New threads always start on Auto.
+
+If you specify a model, that model will only be applied to the main agent. Model selection does not apply to subagents that are built for purpose specific tasks such as visualizations.
+
+### Effort levels[​](#effort-levels "Direct link to Effort levels")
+
+Effort is only available when you've selected a specific model (not on Auto). The effort levels available in Hex map directly to the effort levels exposed by the underlying AI provider for that model. For guidance on how each level behaves and when to use it, refer to the provider's documentation: [Anthropic effort levels](https://platform.claude.com/docs/en/build-with-claude/effort#effort-levels) and [OpenAI reasoning effort](https://developers.openai.com/api/docs/guides/reasoning#reasoning-effort).
+
+For information on how model and effort choices affect credit consumption, see [Credits](/docs/administration/credits).
+
 ## Uploading files[​](#uploading-files "Direct link to Uploading files")
 
 info
@@ -154,6 +170,9 @@ Workspace Managers and Admins can curate context in the workspace to continually
   + [Endorsed Mode off: Agent can access all data](#endorsed-mode-off-agent-can-access-all-data)
 * [Threads behavior and exploring](#threads-behavior-and-exploring)
   + [Projects as context](#projects-as-context)
+* [Choosing a model and effort](#choosing-a-model-and-effort)
+  + [Model selection](#model-selection)
+  + [Effort levels](#effort-levels)
 * [Uploading files](#uploading-files)
   + [CSV](#csv)
   + [Images](#images)

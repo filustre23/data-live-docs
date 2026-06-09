@@ -9,7 +9,7 @@ info
 * Paid [plans](https://hex.tech/pricing/) include monthly per-seat [credit grants](/docs/administration/credits) that can be used towards Hex AI features.
 * Users need the **Admin**, **Manager**, or **Editor** workspace role and **Can Edit** or higher project permissions to use the Notebook agent.
 * The Notebook agent is not compatible with **Published apps**.
-* To share suggestions for new features or improvements, reach out to [[email protected]](/cdn-cgi/l/email-protection#9cefe9ececf3eee8dcf4f9e4b2e8f9fff4).
+* To share suggestions for new features or improvements, reach out to [[email protected]](/cdn-cgi/l/email-protection#b0c3c5c0c0dfc2c4f0d8d5c89ec4d5d3d8).
 
 The Notebook agent offers a natural language experience to assist with code generation and exploratory analysis within Hex projects. The agent has full access to your project context and warehouse schema information, so you can ask questions about - and receive answers for - your data. The agent can also help with syntax, act as a sounding board for brainstorming solutions, or create entirely new lines of analysis.
 
@@ -66,6 +66,22 @@ Upload files to bring external context into Hex quickly. Add a file or image, an
 Personal preferences let you specify how the Notebook Agent should respond when working with you. Specify preferred formatting, a specific response style, or other guidance and the agent will use it across all your interactions. These instructions only apply to you and aren’t visible to other users in your workspace. For more details see [Agent personalization](/docs/agent-management/agent-personalization).
 
 [](/assets/medias/user-rules-01f4bd0c1bb62c5dfb559e450d3e8709.mp4)
+
+### Choose a model and effort[​](#choose-a-model-and-effort "Direct link to Choose a model and effort")
+
+The **Model & Effort Picker** is an optional control in the Notebook agent prompt bar that lets you choose which underlying model powers a Notebook Agent thread and how much reasoning depth it applies.
+
+#### Model selection[​](#model-selection "Direct link to Model selection")
+
+By default, the Notebook agent runs on **Auto**, which lets Hex choose the best model for your request. Auto is the right choice for most tasks. Your selection is stored per thread, so reopening a thread restores your last-used model and effort. New threads always start on Auto.
+
+If you specify a model, that model will only be applied to the main agent. Model selection does not apply to subagents that are built for purpose specific tasks such as visualizations.
+
+#### Effort levels[​](#effort-levels "Direct link to Effort levels")
+
+Effort is only shown when you've selected a specific model (not on Auto). The effort levels available in Hex map directly to the effort levels exposed by the underlying AI provider for that model. For guidance on how each level behaves and when to use it, refer to the provider's documentation: [Anthropic effort levels](https://platform.claude.com/docs/en/build-with-claude/effort#effort-levels) and [OpenAI reasoning effort](https://developers.openai.com/api/docs/guides/reasoning#reasoning-effort).
+
+For information on how model and effort choices affect credit consumption, see [Credits](/docs/administration/credits).
 
 ## Notebook agent capabilities[​](#notebook-agent-capabilities "Direct link to Notebook agent capabilities")
 
@@ -136,7 +152,7 @@ Only projects you have [**Can Explore**](/docs/collaborate/sharing-and-permissio
 
 ## Providing feedback[​](#providing-feedback "Direct link to Providing feedback")
 
-Use the in product feedback buttons to report bugs or issues. Our team reviews these reports daily. If you want to share suggestions for new features or improvements, reach out to us directly at [[email protected]](/cdn-cgi/l/email-protection#9be8eeebebf4e9efdbf3fee3b5effef8f3).
+Use the in product feedback buttons to report bugs or issues. Our team reviews these reports daily. If you want to share suggestions for new features or improvements, reach out to us directly at [[email protected]](/cdn-cgi/l/email-protection#89fafcf9f9e6fbfdc9e1ecf1a7fdeceae1).
 
 #### On this page
 
@@ -148,6 +164,7 @@ Use the in product feedback buttons to report bugs or issues. Our team reviews t
   + [Confirm or Undo pending changes](#confirm-or-undo-pending-changes)
   + [Upload files](#upload-files)
   + [Personal preferences](#personal-preferences)
+  + [Choose a model and effort](#choose-a-model-and-effort)
 * [Notebook agent capabilities](#notebook-agent-capabilities)
   + [Generate new cells](#generate-new-cells)
   + [Subagents](#subagents)
