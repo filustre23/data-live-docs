@@ -31,11 +31,38 @@ reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators), or add the
 
 Feature
 
+You can [analyze data lineage with Gemini Cloud Assist in
+BigQuery](/bigquery/docs/use-cloud-assist#analyze-lineage). This feature is in [Preview](https://cloud.google.com/products#product-launch-stages).
+
+Feature
+
+You can use the Google-developed, open source
+[Java Database Connectivity (JDBC) driver for BigQuery](/bigquery/docs/jdbc-for-bigquery)
+to connect your Java applications to BigQuery. This feature is
+[generally available](https://cloud.google.com/products#product-launch-stages)
+(GA).
+
+Feature
+
 You can use custom constraints with Organization Policy to provide more
 granular control over specific fields for some BigQuery sharing
 resources. For more information, see
 [Manage Sharing data exchanges and listings using custom constraints](/bigquery/docs/analytics-hub-custom-constraints).
 This feature is [generally available](https://cloud.google.com/products#product-launch-stages)
+(GA).
+
+Feature
+
+[IAM deny policies](/bigquery/docs/control-access-to-resources-iam#deny_access_to_a_resource)
+for BigQuery are now [generally available](https://cloud.google.com/products#product-launch-stages)
+(GA).
+
+Feature
+
+You can manage and limit the costs associated with BigQuery generative AI
+functions by configuring [daily token quotas](/bigquery/docs/control-genai-costs).
+Token-based cost management for BigQuery generative AI functions is
+[generally available](https://cloud.google.com/products/#product-launch-stages)
 (GA).
 
 ## June 03, 2026
@@ -4239,20 +4266,3 @@ You can create a [JavaScript user-defined aggregate function](/bigquery/docs/use
 ## February 03, 2025
 
 Libraries
-
-### Java
-
-#### [2.47.0](https://github.com/googleapis/java-bigquery/compare/v2.46.0...v2.47.0) (2025-01-29)
-
-##### Features
-
-* **bigquery:** Support resource tags for datasets in java client ([#3647](https://github.com/googleapis/java-bigquery/issues/3647)) ([01e0b74](https://github.com/googleapis/java-bigquery/commit/01e0b742b9ffeafaa89b080a39d8a66c12c1fd3b))
-
-##### Bug Fixes
-
-* **bigquery:** Remove ReadAPI bypass in executeSelect() ([#3624](https://github.com/googleapis/java-bigquery/issues/3624)) ([fadd992](https://github.com/googleapis/java-bigquery/commit/fadd992a63fd1bc87c99cc689ed103f05de49a99))
-* Close bq read client ([#3644](https://github.com/googleapis/java-bigquery/issues/3644)) ([8833c97](https://github.com/googleapis/java-bigquery/commit/8833c97d73e3ba8e6a2061bbc55a6254b9e6668e))
-
-##### Dependencies
-
-* Update dependency com.google.apis:google-api-services-bigquery to v2-rev20250112-2.0.0 (

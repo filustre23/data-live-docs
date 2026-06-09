@@ -963,12 +963,4 @@ table only contains holidays and events from the following regions:
 * `MY`: Malaysia
 * `NA`: North America
 * `NL`: Netherlands
-* `NZ`: New Zealand
-* `PT`: Portugal
-* `SK`: Slovakia
-* `US`: United States
-* `ZA`: South Africa
-
-## Custom holidays
-
-You can combine u
+* `NZ`

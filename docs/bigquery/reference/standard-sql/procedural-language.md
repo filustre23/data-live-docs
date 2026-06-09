@@ -556,6 +556,5 @@ IF EXISTS(SELECT 1 FROM schema.products
            WHERE product_id = target_product_id) THEN
   SELECT CONCAT('found product ', CAST(target_product_id AS STRING));
   ELSEIF EXISTS(SELECT 1 FROM schema.more_products
-           WHERE product_id = target_product_id) THEN
-  SELECT CONCAT
+           WHERE product_id
 ```

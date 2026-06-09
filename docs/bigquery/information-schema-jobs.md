@@ -317,10 +317,5 @@ FROM
   `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS
 WHERE
   job_type = 'LOAD'
-GROUP BY
-  user_email;
+GROUP BY<
 ```
-
-**注意：** `INFORMATION_SCHEMA` 檢視表名稱會區分大小寫。
-
-結果大致如下：

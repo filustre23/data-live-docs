@@ -129,10 +129,10 @@ AI.SCORE(
   control or know the region where your processing requests are handled.
 
   Beginning June 15, 2026, Vertex AI will limit access to
-  Gemini 2.5 Flash, which is used by default, to projects that have
-  already used it in the last 90 days. If your project doesn't have access to
-  Gemini 2.5 Flash, you can specify a Gemini 3 model
-  using the `endpoint` parameter.
+  Gemini 2.5 Flash, which is used by default. Only projects that have already used it
+  in the last 90 days will have access. If your project doesn't have access to Gemini
+  2.5 Flash, you can specify a Gemini 3 model using the `endpoint`
+  parameter.
 
   ```
   https://aiplatform.googleapis.com/v1/projects/PROJECT_ID/locations/global/publishers/google/models/gemini-3.1-flash-lite
@@ -317,9 +317,13 @@ You can run `AI.SCORE` in all of the
 that support Gemini models, and also in the `US` and `EU`
 multi-regions.
 
-## Quotas
+## Quotas and limits
 
-See [Generative AI functions quotas and limits](/bigquery/quotas#generative_ai_functions).
+For quota and limit information, see
+[Generative AI functions](/bigquery/quotas#generative_ai_functions) in the
+BigQuery quotas and limits reference.
+For information about managing the cost of this function, see
+[Control costs with token quotas](/bigquery/docs/control-genai-costs).
 
 ## What's next
 
@@ -341,11 +345,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-06-05 UTC.
+Last updated 2026-06-08 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-06-05 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-06-08 UTC."],[],[]]

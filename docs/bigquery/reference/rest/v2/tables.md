@@ -221,7 +221,3 @@ Represents the type of a field element.
 | JSON representation |
 | --- |
 | ``` {   "type": string } ``` |
-
-| Fields | |
-| --- | --- |
-| `type` |  |

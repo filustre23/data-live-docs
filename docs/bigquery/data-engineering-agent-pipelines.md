@@ -57,6 +57,7 @@ The Data Engineering Agent has the following limitations:
   tables, declarations, or queries with the `hasOutput` flag set to `true`.
 * The Data Engineering Agent is subject to the [general limitations of AI
   technology](/gemini/docs/discover/responsible-ai).
+* When creating pipelines over Apache Iceberg external tables managed by the Lakehouse runtime catalog (formerly BigLake metastore), all [Lakehouse runtime catalog limitations](/lakehouse/docs/about-lakehouse-catalogs#limitations) apply. Most notably, the agent cannot generate write mutations (such as `INSERT`, `UPDATE`, `DELETE`, or `MERGE`) or DDL statements (such as `CREATE TABLE` or `DROP TABLE`) on Iceberg tables. For more information, see [Apache Iceberg REST catalog endpoint concepts](/lakehouse/docs/understand-catalog-types).
 
 ## Before you begin
 
@@ -129,6 +130,8 @@ You might also be able to get
 this permission
 with [custom roles](/iam/docs/creating-custom-roles) or
 other [predefined roles](/iam/docs/roles-overview#predefined).
+
+For details on the required roles to query Apache Iceberg tables, see [Required roles for Lakehouse Apache Iceberg support](/lakehouse/docs/lakehouse-iceberg-rest-catalog#required_roles).
 
 ### Knowledge Catalog integration prerequisites
 
@@ -503,11 +506,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-06-03 UTC.
+Last updated 2026-06-08 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-06-03 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-06-08 UTC."],[],[]]

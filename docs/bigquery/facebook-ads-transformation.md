@@ -386,6 +386,4 @@ Google uses AI technology to translate content into your preferred language. AI 
 | `time_updated` | TimeUpdated | *日期時間* | 目標對象上次更新時間。 |
 | `time_content_updated` | TimeContentUpdated | *日期時間* | 上次修改目標對象內容的時間。 |
 | `rule` | 規則 | *字串* | 用來控管目標對象成員資格的規則。 |
-| `rule_aggregation` | RuleAggregation | *字串* | 目標對象規則的匯總設定。 |
-| `approximate_count_lower_bound` | ApproximateCountLowerBound | *整數* | 目標對象規模的下限近似值。 |
-| `approximate_cou` |
+|  |

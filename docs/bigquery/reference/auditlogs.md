@@ -826,6 +826,5 @@ with an existing dataset.
     COUNTIF(JSON_QUERY(protopayload_auditlog.metadataJson, "$.tableDataChange") IS NOT NULL) AS dataChangeEvents
   FROM `my-project-id.auditlog_dataset.cloudaudit_googleapis_com_data_access_*`
   WHERE
-    JSON_QUERY(protopayload_auditlog.metadataJson, "$.tableDataRead") IS NOT NULL
-    OR JSON_QUERY(protopayload_auditlog.metadataJson
+    JSON_QUERY(protopayload_auditlog.metadataJson, "$.tableDataRead") IS NOT
 ```

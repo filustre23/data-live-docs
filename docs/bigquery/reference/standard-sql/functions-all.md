@@ -256,5 +256,4 @@ This topic contains all functions supported by GoogleSQL for BigQuery.
 | [`PERCENTILE_CONT`](/bigquery/docs/reference/standard-sql/navigation_functions#percentile_cont) | Computes the specified percentile for a value, using linear interpolation. |
 | [`PERCENTILE_CONT` (Differential Privacy)](/bigquery/docs/reference/standard-sql/aggregate-dp-functions#dp_percentile_cont) | `DIFFERENTIAL_PRIVACY`-supported `PERCENTILE_CONT`.   Computes a differentially-private percentile across privacy unit columns in a query with a `DIFFERENTIAL_PRIVACY` clause. |
 | [`PERCENTILE_DISC`](/bigquery/docs/reference/standard-sql/navigation_functions#percentile_disc) | Computes the specified percentile for a discrete value. |
-| [`POW`](/bigquery/docs/reference/standard-sql/mathematical_functions#pow) | Produces the value of `X` raised to the power of `Y`. |
-| [`POWER`](/bigquery/docs/reference/standard-sql/mathematical_functions#power) | Synonym of `POW`. |
+|  |

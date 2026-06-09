@@ -343,9 +343,4 @@ Returns the [RFC 7946](https://tools.ietf.org/html/rfc7946) compliant [GeoJSON](
 representation of the input `GEOGRAPHY`.
 
 A GoogleSQL `GEOGRAPHY` has spherical
-geodesic edges, whereas a GeoJSON `Geometry` object explicitly has planar edges.
-To convert between these two types of edges, GoogleSQL adds additional
-points to the line where necessary so that the resulting sequence of edges
-remains within 10 meters of the original edge.
-
-See [`ST_GEOGF`](#st_geogfromgeojson)
+geo

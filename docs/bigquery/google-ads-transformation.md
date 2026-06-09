@@ -240,5 +240,4 @@ Google Ads API Resource:
 | ad\_group\_ad\_ad\_legacy\_responsive\_display\_ad\_price\_prefix | Prefix before price. For example 'as low as'. | PricePrefix |
 | ad\_group\_ad\_ad\_legacy\_responsive\_display\_ad\_promo\_text | Promotion text used for dynamic formats of responsive ads. For example 'Free two-day shipping'. | PromoText |
 | ad\_group\_ad\_ad\_legacy\_responsive\_display\_ad\_short\_headline | The short version of the ad's headline. | ShortHeadline |
-| ad\_group\_ad\_ad\_legacy\_responsive\_display\_ad\_square\_logo\_image | The MediaFile resource name of the square logo image used in the ad. | EnhancedDisplayCreativeLogoImageMediaId |
-| ad\_group\_ad\_ad\_legacy\_responsive\_display\_ad\_square\_marketing\_image | The MediaFile resource name of the square marketing image used in the ad. |
+| ad\_group\_ad\_ad\_legacy\_responsive\_d |

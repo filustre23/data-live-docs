@@ -225,6 +225,4 @@ BigQuery 提供下列其他匯總函式：
 | `HIER_COLUMN` | BigQuery 不支援階層式查詢。 |
 | `HIER_DEPTH` | BigQuery 不支援階層式查詢。 |
 | `HIER_DESCRIPTION` | BigQuery 不支援階層式查詢。 |
-| `HIER_HAS_CHILDREN` | BigQuery 不支援階層式查詢。 |
-| `HIER_LEVEL` | BigQuery 不支援階層式查詢。 |
-| `HIER_MEMBER_NAME` | BigQuery 不支援階層式查詢。 |
+|

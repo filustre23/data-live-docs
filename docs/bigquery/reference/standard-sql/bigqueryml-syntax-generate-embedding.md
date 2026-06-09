@@ -646,8 +646,3 @@ ML.GENERATE_EMBEDDING(
 
   + The `gemini-embedding-2-preview` model also outputs the following
     field:
-
-    - `ml_generate_embedding_statistics`: a `JSON` value that contains
-      information about the token count for each modality of input that
-      you provide.
-  + The `multimodalembedding@001` model also outputs the following fields:

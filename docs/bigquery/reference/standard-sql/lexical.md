@@ -827,10 +827,4 @@ SELECT INTERVAL '-2 10 0:30' MONTH TO MINUTE
 SELECT INTERVAL '-30:10' MINUTE TO SECOND
 ```
 
-For more information on how to construct interval with a datetime part range,
-see
-[Construct an interval with a datetime part range](/bigquery/docs/reference/standard-sql/data-types#single_datetime_part_interval).
-
-### JSON literals
-
-Syntax:
+For more information on how to construct interval with a datetime part range

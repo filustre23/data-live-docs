@@ -260,6 +260,5 @@ public class CreateCampaignmanagerTransfer {
               .build();
       TransferConfig config = client.createTransferConfig(request);
       System.out.println("Campaignmanager transfer created successfully :" + config.getName());
-    } catch (ApiException ex) {
-      System.out.
+    } catch (ApiException
 ```

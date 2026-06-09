@@ -928,4 +928,5 @@ reference without needing to know the specific version ID. To learn more about
 how Model Registry aliases work, see
 [How to use model version aliases](/vertex-ai/docs/model-registry/model-alias).
 
-You can only set the
+You can only set the `VERTEX_AI_MODEL_VERSION_ALIASES` option when the
+`MODEL_REGISTRY` option is set to `VERTEX_AI`.

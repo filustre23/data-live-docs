@@ -926,7 +926,4 @@ The model and input table must be in the same region.
   function, the
   [safety attributes](/vertex-ai/docs/generative-ai/multimodal/configure-safety-attributes)
   are in the `safety_ratings` element. This column is returned when
-  `flatten_json_output` is `FALSE`.
-* `ml_generate_text_llm_result`: a `STRING` value that contains
-  the generated text. This column is returned when `flatten_json_output`
-  is `TRUE`.
+  `flatten_json_output`

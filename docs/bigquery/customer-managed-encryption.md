@@ -1031,5 +1031,5 @@ public class CopyTableCMEK {
     // TODO(developer): Replace these variables before running the sample.
     String destinationDatasetName = "MY_DESTINATION_DATASET_NAME";
     String destinationTableId = "MY_DESTINATION_TABLE_NAME";
-    String sourceDatasetName =
+    String sourceDatasetName
 ```

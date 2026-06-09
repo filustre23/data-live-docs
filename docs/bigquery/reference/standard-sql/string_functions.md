@@ -506,6 +506,5 @@ With Employees AS
     'Doe' AS last_name
   UNION ALL
   SELECT
-    'Jane' AS first_name,
-    'Smith' AS
+    'Jane'
 ```

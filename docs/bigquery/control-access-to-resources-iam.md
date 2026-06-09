@@ -1232,5 +1232,5 @@ public class RevokeDatasetAccess {
   }
 
   public static void revokeDatasetAccess(String projectId, String datasetName, String entityEmail) {
-    try {
+    try
 ```

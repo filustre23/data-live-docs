@@ -506,10 +506,4 @@ that can be queued per project.
 
 * [增加預訂中的運算單元](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#estimate-slots)。如果工作負載需求量高，請從隨選 (依查詢付費模式)[切換](https://docs.cloud.google.com/bigquery/docs/reservations-intro?hl=zh-tw#choosing_a_model)至預留 (以容量為準的模式)。
 * 在互動式查詢之間分散工作負載。
-* 因為批次查詢的佇列長度比互動式查詢長，請使用[批次優先順序工作](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#batch)，而非互動式查詢。
-
-### 隨機播放大小限制錯誤
-
-如果專案超出可供隨機存取作業使用的磁碟和記憶體大小上限，BigQuery 就會傳回這項錯誤。
-
-這項配額的計算方式是以預訂為單位，並根據預訂項目將配額分配給各個專案。Clo
+* 因為批次查詢的佇列長度比互動式查詢長，請使用[批次優先順序工作](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#batch)，而非互動式
