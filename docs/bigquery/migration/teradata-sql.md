@@ -179,4 +179,4 @@ Teradata 中的 `QUALIFY` 子句可讓您[篩選窗型函式的結果](https://d
 | `SELECT col1, col2  FROM table  AVG(col1) OVER (PARTITION BY col1 ORDER BY col2 ROWS BETWEEN 2 PRECEDING AND CURRENT ROW);` | `SELECT col1, col2  FROM table  AVG(col1) OVER (PARTITION BY col1 ORDER BY col2 RANGE BETWEEN 2 PRECEDING AND CURRENT ROW);`    在 BigQuery 中，`RANGE` 和 `ROWS` 都可以用於窗格框架子句。不過，窗型子句只能搭配 `AVG()` 等窗型函式使用，不能搭配 `ROW_NUMBER()` 等編號函式使用。 |
 | `SELECT col1, col2  FROM table  QUALIFY ROW_NUMBER() OVER (PARTITION BY col1 ORDER BY col2) = 1;` | `SELECT col1, col2 FROM   Dataset-name.table  QUALIFY row_number() OVER (PARTITION BY upper(a.col1) ORDER BY upper(a.col2)) = 1` |
 
-### `NORM`
+### `NO`

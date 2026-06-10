@@ -246,5 +246,5 @@ public class CreateAzureBlobStorageTransfer {
             .setDestinationDatasetId(datasetId)
             .setDisplayName(displayName)
             .setDataSourceId("azure_blob_storage")
-            .setPar
+            .setP
 ```

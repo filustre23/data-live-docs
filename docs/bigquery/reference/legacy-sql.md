@@ -475,5 +475,5 @@ SELECT
   GROUPING(is_male) as rollup_gender,
   COUNT(1) as count
 FROM
-  [bigquery-public-
+  [bigquery-public
 ```

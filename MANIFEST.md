@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-06-09T14:34+00:00_
+_Generated 2026-06-10T02:00+00:00_
 
-**9 sources, 5142 topics total**
+**9 sources, 5144 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_1422 topics_
+_1424 topics_
 
 - `anthropic-sdk/agents-and-tools/agent-skills/best-practices`
 - `anthropic-sdk/agents-and-tools/agent-skills/enterprise`
@@ -1367,6 +1367,7 @@ _1422 topics_
 - `anthropic-sdk/build-with-claude/effort`
 - `anthropic-sdk/build-with-claude/embeddings`
 - `anthropic-sdk/build-with-claude/extended-thinking`
+- `anthropic-sdk/build-with-claude/fallback-credit`
 - `anthropic-sdk/build-with-claude/fast-mode`
 - `anthropic-sdk/build-with-claude/files`
 - `anthropic-sdk/build-with-claude/handling-stop-reasons`
@@ -1376,6 +1377,7 @@ _1422 topics_
 - `anthropic-sdk/build-with-claude/overview`
 - `anthropic-sdk/build-with-claude/pdf-support`
 - `anthropic-sdk/build-with-claude/prompt-caching`
+- `anthropic-sdk/build-with-claude/refusals-and-fallback`
 - `anthropic-sdk/build-with-claude/search-results`
 - `anthropic-sdk/build-with-claude/skills-guide`
 - `anthropic-sdk/build-with-claude/streaming`

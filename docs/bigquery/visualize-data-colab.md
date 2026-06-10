@@ -16,11 +16,13 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 以圖表呈現查詢結果
 
-您可以使用[視覺化儲存格](https://docs.cloud.google.com/colab/docs/visualization-cells?hl=zh-tw)產生及自訂圖表，在筆記本環境中進行大規模分析。在本快速入門導覽課程中，您將瞭解如何完成下列工作：
+您可以在 Colab Enterprise 筆記本中使用[視覺化儲存格](https://docs.cloud.google.com/colab/docs/visualization-cells?hl=zh-tw)，產生及自訂圖表，以便進行大規模分析，完全不必離開筆記本環境。
 
-1. 使用 `bigquery-public-data.ml_datasets.penguins` 公開資料集執行 SQL 查詢。
-2. 使用 SQL 儲存格疊代查詢結果。
-3. 使用視覺化儲存格分析不同物種的企鵝特徵。
+本指南說明如何在 Colab Enterprise 筆記本中使用視覺化儲存格，分析 `bigquery-public-data.ml_datasets.penguins` 公開資料集中的資料。您將完成下列工作：
+
+1. 直接在筆記本中執行 SQL 查詢。
+2. 使用 Python DataFrames 篩選查詢結果。
+3. 不必編寫程式碼，即可生成及自訂直條圖。
 
 ## 事前準備
 
@@ -72,20 +74,20 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### 所需權限
 
-如要建立及執行 Notebook，您必須具備下列 Identity and Access Management (IAM) 角色：
+如要建立及執行 Notebook，您需要下列 Identity and Access Management (IAM) 角色：
 
 * [BigQuery 使用者 (`roles/bigquery.user`)](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.user)
 * [Colab Enterprise 使用者 (`roles/aiplatform.colabEnterpriseUser`)](https://docs.cloud.google.com/vertex-ai/docs/general/access-control?hl=zh-tw#aiplatform.colabEnterpriseUser)
 
-## 建立筆記本
+## 建立 Colab Enterprise 筆記本
 
 如要建立新筆記本，請按照「[從 BigQuery 編輯器建立筆記本](https://docs.cloud.google.com/bigquery/docs/create-notebooks?hl=zh-tw#create-notebook-console)」一文中的操作說明進行。
 
-## 執行查詢
+## 在 Colab Enterprise 筆記本中執行 SQL 查詢
 
 如要在筆記本中執行 SQL 查詢，請按照下列步驟操作：
 
-1. 如要在筆記本中建立新的 SQL 儲存格，請按一下「SQL」add。
+1. 在筆記本中，按一下「程式碼」add 下拉式選單，然後選取「新增 SQL 儲存格」。
 2. 輸入下列查詢：
 
    ```
@@ -104,17 +106,16 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    查詢結果會自動儲存到名為 `female_penguins` 的 DataFrame 中。
 
-## 以視覺化方式呈現結果
+## 在 Colab Enterprise 筆記本中將結果視覺化
 
-1. 如要在筆記本中建立新的圖表儲存格，請按一下「圖表」add。
+1. 在筆記本中，按一下「程式碼」add下拉式選單，然後選取「新增圖表儲存格」。
 2. 按一下「選擇資料框架」，然後選取 `female_penguins`。
 
    系統隨即會顯示圖表介面。
 3. 按一下「散布圖」開啟圖表選單，然後選取
    bar\_chart「直條圖」。
 4. 在「指標」部分，確認顯示 `culmen_length_mm` 和 `culmen_depth_mm`。如果缺少指標，請按一下「新增指標」add\_circle\_outline，然後選取所需指標。如要移除指標，請將指標懸停在指標名稱上，然後按一下「關閉」圖示 close。
-5. 針對每個指標，按一下「編輯」edit。
-   在「匯總」部分，選取「平均值」。
+5. 將指標懸停在匯總類型 (例如「平均值」或「總和」) 上方，即可顯示 edit 圖示，然後按一下該圖示，將匯總類型變更為「平均值」。
 
 ## 清除所用資源
 
@@ -140,7 +141,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 * 進一步瞭解 [BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/bigquery-dataframes-introduction?hl=zh-tw)。
 * 進一步瞭解 [Colab Enterprise 中的 SQL 儲存格](https://docs.cloud.google.com/colab/docs/sql-cells?hl=zh-tw)。
 * 進一步瞭解 [Colab Enterprise 中的視覺化儲存格](https://docs.cloud.google.com/colab/docs/visualization-cells?hl=zh-tw)。
-* 瞭解如何[使用 BigQuery DataFrame 繪製圖表](https://docs.cloud.google.com/bigquery/docs/dataframes-visualizations?hl=zh-tw)。
+* 瞭解如何[使用 BigQuery DataFrame 呈現圖表](https://docs.cloud.google.com/bigquery/docs/dataframes-visualizations?hl=zh-tw)。
 * 瞭解如何[使用 BigQuery DataFrames 筆記本](https://github.com/googleapis/python-bigquery-dataframes/tree/main/notebooks/getting_started/getting_started_bq_dataframes.ipynb)。
 
 
@@ -150,11 +151,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-06-04 (世界標準時間)。
+上次更新時間：2026-06-09 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-04 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-09 (世界標準時間)。"],[],[]]

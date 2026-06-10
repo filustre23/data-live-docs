@@ -1147,3 +1147,5 @@ repeated <element-type> <name>
 * 半形波浪號 (`~`)，以 Unicode 規則運算式 `\u007E` 表示。
 
 如需其他規範，請參閱「[資料欄名稱](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#column_names)」。
+
+<
