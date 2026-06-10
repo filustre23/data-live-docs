@@ -10,7 +10,7 @@ Connect AI assistants to Hex through the Model Context Protocol (MCP).](/docs/ap
 
 [## 📄️External Apps
 
-Connect Hex's agent to external apps like Notion, Linear, and your own custom MCP-compatible tools.](/docs/api-integrations/external-apps)
+Connect Hex's agent via MCP to external apps like Notion, Linear, or your own custom MCP-compatible tools.](/docs/api-integrations/external-apps)
 
 [## 📄️Hex Agent in Slack
 

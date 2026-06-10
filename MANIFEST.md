@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-06-10T02:00+00:00_
+_Generated 2026-06-10T08:47+00:00_
 
-**9 sources, 5144 topics total**
+**9 sources, 5254 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_1424 topics_
+_1533 topics_
 
 - `anthropic-sdk/agents-and-tools/agent-skills/best-practices`
 - `anthropic-sdk/agents-and-tools/agent-skills/enterprise`
@@ -123,6 +123,18 @@ _1424 topics_
 - `anthropic-sdk/api/beta/agents/update`
 - `anthropic-sdk/api/beta/agents/versions`
 - `anthropic-sdk/api/beta/agents/versions/list`
+- `anthropic-sdk/api/beta/deployment_runs`
+- `anthropic-sdk/api/beta/deployment_runs/list`
+- `anthropic-sdk/api/beta/deployment_runs/retrieve`
+- `anthropic-sdk/api/beta/deployments`
+- `anthropic-sdk/api/beta/deployments/archive`
+- `anthropic-sdk/api/beta/deployments/create`
+- `anthropic-sdk/api/beta/deployments/list`
+- `anthropic-sdk/api/beta/deployments/pause`
+- `anthropic-sdk/api/beta/deployments/retrieve`
+- `anthropic-sdk/api/beta/deployments/run`
+- `anthropic-sdk/api/beta/deployments/unpause`
+- `anthropic-sdk/api/beta/deployments/update`
 - `anthropic-sdk/api/beta/environments`
 - `anthropic-sdk/api/beta/environments/archive`
 - `anthropic-sdk/api/beta/environments/create`
@@ -241,6 +253,18 @@ _1424 topics_
 - `anthropic-sdk/api/cli/beta/agents/update`
 - `anthropic-sdk/api/cli/beta/agents/versions`
 - `anthropic-sdk/api/cli/beta/agents/versions/list`
+- `anthropic-sdk/api/cli/beta/deployment_runs`
+- `anthropic-sdk/api/cli/beta/deployment_runs/list`
+- `anthropic-sdk/api/cli/beta/deployment_runs/retrieve`
+- `anthropic-sdk/api/cli/beta/deployments`
+- `anthropic-sdk/api/cli/beta/deployments/archive`
+- `anthropic-sdk/api/cli/beta/deployments/create`
+- `anthropic-sdk/api/cli/beta/deployments/list`
+- `anthropic-sdk/api/cli/beta/deployments/pause`
+- `anthropic-sdk/api/cli/beta/deployments/retrieve`
+- `anthropic-sdk/api/cli/beta/deployments/run`
+- `anthropic-sdk/api/cli/beta/deployments/unpause`
+- `anthropic-sdk/api/cli/beta/deployments/update`
 - `anthropic-sdk/api/cli/beta/environments`
 - `anthropic-sdk/api/cli/beta/environments/archive`
 - `anthropic-sdk/api/cli/beta/environments/create`
@@ -419,6 +443,18 @@ _1424 topics_
 - `anthropic-sdk/api/csharp/beta/agents/update`
 - `anthropic-sdk/api/csharp/beta/agents/versions`
 - `anthropic-sdk/api/csharp/beta/agents/versions/list`
+- `anthropic-sdk/api/csharp/beta/deployment_runs`
+- `anthropic-sdk/api/csharp/beta/deployment_runs/list`
+- `anthropic-sdk/api/csharp/beta/deployment_runs/retrieve`
+- `anthropic-sdk/api/csharp/beta/deployments`
+- `anthropic-sdk/api/csharp/beta/deployments/archive`
+- `anthropic-sdk/api/csharp/beta/deployments/create`
+- `anthropic-sdk/api/csharp/beta/deployments/list`
+- `anthropic-sdk/api/csharp/beta/deployments/pause`
+- `anthropic-sdk/api/csharp/beta/deployments/retrieve`
+- `anthropic-sdk/api/csharp/beta/deployments/run`
+- `anthropic-sdk/api/csharp/beta/deployments/unpause`
+- `anthropic-sdk/api/csharp/beta/deployments/update`
 - `anthropic-sdk/api/csharp/beta/environments`
 - `anthropic-sdk/api/csharp/beta/environments/archive`
 - `anthropic-sdk/api/csharp/beta/environments/create`
@@ -551,6 +587,18 @@ _1424 topics_
 - `anthropic-sdk/api/go/beta/agents/update`
 - `anthropic-sdk/api/go/beta/agents/versions`
 - `anthropic-sdk/api/go/beta/agents/versions/list`
+- `anthropic-sdk/api/go/beta/deployment_runs`
+- `anthropic-sdk/api/go/beta/deployment_runs/list`
+- `anthropic-sdk/api/go/beta/deployment_runs/retrieve`
+- `anthropic-sdk/api/go/beta/deployments`
+- `anthropic-sdk/api/go/beta/deployments/archive`
+- `anthropic-sdk/api/go/beta/deployments/create`
+- `anthropic-sdk/api/go/beta/deployments/list`
+- `anthropic-sdk/api/go/beta/deployments/pause`
+- `anthropic-sdk/api/go/beta/deployments/retrieve`
+- `anthropic-sdk/api/go/beta/deployments/run`
+- `anthropic-sdk/api/go/beta/deployments/unpause`
+- `anthropic-sdk/api/go/beta/deployments/update`
 - `anthropic-sdk/api/go/beta/environments`
 - `anthropic-sdk/api/go/beta/environments/archive`
 - `anthropic-sdk/api/go/beta/environments/create`
@@ -684,6 +732,18 @@ _1424 topics_
 - `anthropic-sdk/api/java/beta/agents/update`
 - `anthropic-sdk/api/java/beta/agents/versions`
 - `anthropic-sdk/api/java/beta/agents/versions/list`
+- `anthropic-sdk/api/java/beta/deployment_runs`
+- `anthropic-sdk/api/java/beta/deployment_runs/list`
+- `anthropic-sdk/api/java/beta/deployment_runs/retrieve`
+- `anthropic-sdk/api/java/beta/deployments`
+- `anthropic-sdk/api/java/beta/deployments/archive`
+- `anthropic-sdk/api/java/beta/deployments/create`
+- `anthropic-sdk/api/java/beta/deployments/list`
+- `anthropic-sdk/api/java/beta/deployments/pause`
+- `anthropic-sdk/api/java/beta/deployments/retrieve`
+- `anthropic-sdk/api/java/beta/deployments/run`
+- `anthropic-sdk/api/java/beta/deployments/unpause`
+- `anthropic-sdk/api/java/beta/deployments/update`
 - `anthropic-sdk/api/java/beta/environments`
 - `anthropic-sdk/api/java/beta/environments/archive`
 - `anthropic-sdk/api/java/beta/environments/create`
@@ -830,6 +890,18 @@ _1424 topics_
 - `anthropic-sdk/api/php/beta/agents/update`
 - `anthropic-sdk/api/php/beta/agents/versions`
 - `anthropic-sdk/api/php/beta/agents/versions/list`
+- `anthropic-sdk/api/php/beta/deployment_runs`
+- `anthropic-sdk/api/php/beta/deployment_runs/list`
+- `anthropic-sdk/api/php/beta/deployment_runs/retrieve`
+- `anthropic-sdk/api/php/beta/deployments`
+- `anthropic-sdk/api/php/beta/deployments/archive`
+- `anthropic-sdk/api/php/beta/deployments/create`
+- `anthropic-sdk/api/php/beta/deployments/list`
+- `anthropic-sdk/api/php/beta/deployments/pause`
+- `anthropic-sdk/api/php/beta/deployments/retrieve`
+- `anthropic-sdk/api/php/beta/deployments/run`
+- `anthropic-sdk/api/php/beta/deployments/unpause`
+- `anthropic-sdk/api/php/beta/deployments/update`
 - `anthropic-sdk/api/php/beta/environments`
 - `anthropic-sdk/api/php/beta/environments/archive`
 - `anthropic-sdk/api/php/beta/environments/create`
@@ -962,6 +1034,18 @@ _1424 topics_
 - `anthropic-sdk/api/python/beta/agents/update`
 - `anthropic-sdk/api/python/beta/agents/versions`
 - `anthropic-sdk/api/python/beta/agents/versions/list`
+- `anthropic-sdk/api/python/beta/deployment_runs`
+- `anthropic-sdk/api/python/beta/deployment_runs/list`
+- `anthropic-sdk/api/python/beta/deployment_runs/retrieve`
+- `anthropic-sdk/api/python/beta/deployments`
+- `anthropic-sdk/api/python/beta/deployments/archive`
+- `anthropic-sdk/api/python/beta/deployments/create`
+- `anthropic-sdk/api/python/beta/deployments/list`
+- `anthropic-sdk/api/python/beta/deployments/pause`
+- `anthropic-sdk/api/python/beta/deployments/retrieve`
+- `anthropic-sdk/api/python/beta/deployments/run`
+- `anthropic-sdk/api/python/beta/deployments/unpause`
+- `anthropic-sdk/api/python/beta/deployments/update`
 - `anthropic-sdk/api/python/beta/environments`
 - `anthropic-sdk/api/python/beta/environments/archive`
 - `anthropic-sdk/api/python/beta/environments/create`
@@ -1095,6 +1179,18 @@ _1424 topics_
 - `anthropic-sdk/api/ruby/beta/agents/update`
 - `anthropic-sdk/api/ruby/beta/agents/versions`
 - `anthropic-sdk/api/ruby/beta/agents/versions/list`
+- `anthropic-sdk/api/ruby/beta/deployment_runs`
+- `anthropic-sdk/api/ruby/beta/deployment_runs/list`
+- `anthropic-sdk/api/ruby/beta/deployment_runs/retrieve`
+- `anthropic-sdk/api/ruby/beta/deployments`
+- `anthropic-sdk/api/ruby/beta/deployments/archive`
+- `anthropic-sdk/api/ruby/beta/deployments/create`
+- `anthropic-sdk/api/ruby/beta/deployments/list`
+- `anthropic-sdk/api/ruby/beta/deployments/pause`
+- `anthropic-sdk/api/ruby/beta/deployments/retrieve`
+- `anthropic-sdk/api/ruby/beta/deployments/run`
+- `anthropic-sdk/api/ruby/beta/deployments/unpause`
+- `anthropic-sdk/api/ruby/beta/deployments/update`
 - `anthropic-sdk/api/ruby/beta/environments`
 - `anthropic-sdk/api/ruby/beta/environments/archive`
 - `anthropic-sdk/api/ruby/beta/environments/create`
@@ -1228,6 +1324,18 @@ _1424 topics_
 - `anthropic-sdk/api/typescript/beta/agents/update`
 - `anthropic-sdk/api/typescript/beta/agents/versions`
 - `anthropic-sdk/api/typescript/beta/agents/versions/list`
+- `anthropic-sdk/api/typescript/beta/deployment_runs`
+- `anthropic-sdk/api/typescript/beta/deployment_runs/list`
+- `anthropic-sdk/api/typescript/beta/deployment_runs/retrieve`
+- `anthropic-sdk/api/typescript/beta/deployments`
+- `anthropic-sdk/api/typescript/beta/deployments/archive`
+- `anthropic-sdk/api/typescript/beta/deployments/create`
+- `anthropic-sdk/api/typescript/beta/deployments/list`
+- `anthropic-sdk/api/typescript/beta/deployments/pause`
+- `anthropic-sdk/api/typescript/beta/deployments/retrieve`
+- `anthropic-sdk/api/typescript/beta/deployments/run`
+- `anthropic-sdk/api/typescript/beta/deployments/unpause`
+- `anthropic-sdk/api/typescript/beta/deployments/update`
 - `anthropic-sdk/api/typescript/beta/environments`
 - `anthropic-sdk/api/typescript/beta/environments/archive`
 - `anthropic-sdk/api/typescript/beta/environments/create`
@@ -1433,6 +1541,7 @@ _1424 topics_
 - `anthropic-sdk/managed-agents/permission-policies`
 - `anthropic-sdk/managed-agents/quickstart`
 - `anthropic-sdk/managed-agents/reference`
+- `anthropic-sdk/managed-agents/scheduled-deployments`
 - `anthropic-sdk/managed-agents/self-hosted-sandboxes`
 - `anthropic-sdk/managed-agents/self-hosted-sandboxes-security`
 - `anthropic-sdk/managed-agents/session-operations`
@@ -2981,9 +3090,10 @@ _1527 topics_
 
 Upstream: <https://code.claude.com/docs/en/>
 
-_145 topics_
+_146 topics_
 
 - `claude-code/admin-setup`
+- `claude-code/advisor`
 - `claude-code/agent-sdk/agent-loop`
 - `claude-code/agent-sdk/claude-code-features`
 - `claude-code/agent-sdk/cost-tracking`
