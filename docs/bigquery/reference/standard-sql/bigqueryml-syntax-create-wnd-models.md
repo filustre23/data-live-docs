@@ -904,11 +904,4 @@ value for [`NUM_TRIALS`](#num_trials).
 
 The possible objectives are a subset of the
 [model evaluation metrics](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate#output)
-for the model type. If you aren't running hyperparameter tuning, or if you are
-and you don't specify an objective, then the default objective
-is used. For `DNN_LINEAR_COMBINED_CLASSIFIER` models, the default is `ROC_AUC`.
-For `DNN_LINEAR_COMBINED_REGRESSOR` models, the default is `R2_SCORE`.
-
-### `KMS_KEY_NAME`
-
-**Syntax**
+fo

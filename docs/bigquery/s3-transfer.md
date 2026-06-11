@@ -16,7 +16,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 將 Amazon S3 資料載入 BigQuery
 
-您可以使用 Amazon S3 專用的 [BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)連接器，將資料從 Amazon S3 載入至 BigQuery。透過 BigQuery 資料移轉服務，您可以安排週期性移轉工作，將 Amazon S3 的最新資料新增至 BigQuery。
+您可以使用 Amazon S3 專用的 [BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)連接器，將資料從 Amazon S3 載入至 BigQuery。透過 BigQuery 資料移轉服務，您可以安排週期性移轉工作，將 Amazon S3 中的最新資料新增至 BigQuery。
 
 ## 事前準備
 
@@ -24,7 +24,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 * 確認您已完成[啟用 BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service?hl=zh-tw)的一切必要動作。
 * 請[建立 BigQuery 資料集](https://docs.cloud.google.com/bigquery/docs/datasets?hl=zh-tw)來儲存您的資料。
-* [建立資料移轉作業的目的地資料表](https://docs.cloud.google.com/bigquery/docs/tables?hl=zh-tw#create_an_empty_table_with_a_schema_definition)，並指定結構定義。目的地資料表必須遵循[資料表命名規則](https://docs.cloud.google.com/bigquery/docs/tables?hl=zh-tw#table_naming)。目的地資料表名稱也支援[參數](https://docs.cloud.google.com/bigquery/docs/s3-transfer-parameters?hl=zh-tw)。您可以建立 BigQuery 資料表或[建立 Iceberg 受管理資料表](https://docs.cloud.google.com/bigquery/docs/iceberg-tables?hl=zh-tw#create-iceberg-tables)。
+* [建立資料移轉目的地資料表](https://docs.cloud.google.com/bigquery/docs/tables?hl=zh-tw#create_an_empty_table_with_a_schema_definition)，並指定結構定義。目的地資料表必須遵循[資料表命名規則](https://docs.cloud.google.com/bigquery/docs/tables?hl=zh-tw#table_naming)。目的地資料表名稱也支援[參數](https://docs.cloud.google.com/bigquery/docs/s3-transfer-parameters?hl=zh-tw)。您可以建立 BigQuery 資料表，或[建立 Iceberg 受管理資料表](https://docs.cloud.google.com/bigquery/docs/iceberg-tables?hl=zh-tw#create-iceberg-tables)。
 * 擷取您的 Amazon S3 URI、存取金鑰 ID，以及私密存取金鑰。如需存取金鑰管理方面的資訊，請參閱 [AWS 說明文件](https://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html)。
 * 如要為 Pub/Sub 設定移轉作業執行通知，您必須擁有 `pubsub.topics.setIamPolicy` 權限。如果您只想設定電子郵件通知，則不需要擁有 Pub/Sub 權限。詳情請參閱 [BigQuery 資料移轉服務執行通知](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications?hl=zh-tw)一文。
 
@@ -42,6 +42,7 @@ Amazon S3 資料移轉作業有下列限制：
   + [JSON 限制](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json?hl=zh-tw#limitations)
   + [巢狀與重複資料的限制](https://docs.cloud.google.com/bigquery/docs/nested-repeated?hl=zh-tw#limitations)
 * 週期性資料移轉作業之間的最短時間間隔為 1 小時。週期性資料移轉的預設間隔為 24 小時。
+* Amazon S3 資料移轉作業支援的 Amazon S3 區域限制，與 Storage 移轉服務相同。詳情請參閱「[支援的區域](https://docs.cloud.google.com/storage-transfer/docs/source-amazon-s3?hl=zh-tw#supported_regions)」。
 
 ## 所需權限
 
@@ -49,7 +50,7 @@ Amazon S3 資料移轉作業有下列限制：
 
 ### 必要的 BigQuery 角色
 
-如要取得建立 BigQuery 資料移轉服務資料移轉作業所需的權限，請要求系統管理員在專案中授予您 [BigQuery 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.admin)  (`roles/bigquery.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得建立 BigQuery 資料移轉服務資料移轉作業所需的權限，請要求管理員在專案中授予您 [BigQuery 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.admin)  (`roles/bigquery.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
 這個預先定義的角色具備建立 BigQuery 資料移轉服務資料移轉作業所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
@@ -73,7 +74,7 @@ Amazon S3 資料移轉作業有下列限制：
 
 ### 必要的 Amazon S3 角色
 
-參閱 Amazon S3 的說明文件，以確保您已設定啟用資料移轉所需的任何權限。Amazon S3 來源資料至少必須套用 AWS 代管政策 [`AmazonS3ReadOnlyAccess`](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage.html#attach-managed-policy-console)。
+請參閱 Amazon S3 的說明文件，確保您已設定啟用資料移轉所需的任何權限。Amazon S3 來源資料至少必須套用 AWS 代管政策 [`AmazonS3ReadOnlyAccess`](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage.html#attach-managed-policy-console)。
 
 ## 設定 Amazon S3 資料移轉作業
 
@@ -84,7 +85,7 @@ Amazon S3 資料移轉作業有下列限制：
 1. 前往 Google Cloud 控制台的「資料移轉」頁面。
 
    [前往「資料轉移」頁面](https://console.cloud.google.com/bigquery/transfers?hl=zh-tw)
-2. 按一下 add「建立轉移作業」。
+2. 按一下「建立移轉作業」add。
 3. 在「Create Transfer」(建立轉移作業) 頁面：
 
    * 在「Source type」(來源類型) 部分，「Source」(來源) 請選取「Amazon S3」。
@@ -154,8 +155,8 @@ bq mk \
 * data\_source：必填，資料來源：`amazon_s3`。
 * display\_name：必填，資料移轉設定的顯示名稱。移轉作業名稱可以是任意值，日後需要修改移轉作業時，能夠據此識別即可。
 * dataset：必填，資料移轉設定的目標資料集。
-* service\_account：用於驗證資料移轉的服務帳戶名稱。服務帳戶應由用於建立資料移轉的 `project_id` 擁有，且應具備所有[必要權限](#required_permissions)。
-* parameters：必填，已建立移轉設定的 JSON 格式參數。例如：`--params='{"param":"param_value"}'`。以下是 Amazon S3 移轉作業的參數：
+* service\_account：用於驗證資料移轉的服務帳戶名稱。服務帳戶應由用於建立資料移轉的 `project_id` 所擁有，且應具備所有[必要權限](#required_permissions)。
+* parameters：必填，已建立移轉設定的 JSON 格式參數。例如：`--params='{"param":"param_value"}'`。以下是 Amazon S3 轉移作業的參數：
 
   + destination\_table\_name\_template：必填，目的地資料表的名稱。
   + data\_path：必填，Amazon S3 URI，格式如下：
@@ -169,10 +170,10 @@ bq mk \
   + write\_disposition：選用。`WRITE_APPEND` 只會轉移上次成功執行後修改的檔案。`WRITE_TRUNCATE` 會轉移所有相符的檔案，包括先前轉移的檔案。預設值為 `WRITE_APPEND`。
   + max\_bad\_records：選用。允許的損壞記錄數量。預設值為 `0`。
   + decimal\_target\_types：選用。以半形逗號分隔的清單，內含來源小數值可能轉換成的 SQL 資料類型。如果未提供這個欄位，ORC 的預設資料類型為「NUMERIC, STRING」(NUMERIC、STRING)，其他檔案格式則為「NUMERIC」。
-  + ignore\_unknown\_values：選用屬性，如果 file\_format 不是 `JSON` 或 `CSV`，系統會忽略這個屬性。是否要忽略資料中的不明值。
-  + field\_delimiter：選用，僅適用於 `file_format` 為 `CSV` 的情況。分隔欄位的字元。預設值為逗號。
+  + ignore\_unknown\_values：選用，如果 file\_format 不是 `JSON` 或 `CSV`，則會忽略這個選項。是否要忽略資料中的不明值。
+  + field\_delimiter：選用，僅適用於 `file_format` 為 `CSV` 的情況。分隔欄位的字元。預設值為半形逗號。
   + skip\_leading\_rows：選用，僅適用於 file\_format 為 `CSV` 的情況。指出您不想匯入的標題列數。預設值為 `0`。
-  + allow\_quoted\_newlines：選用，僅適用於 file\_format 為 `CSV` 的情況。指出是否允許在引用欄位中使用換行符號。
+  + allow\_quoted\_newlines：選用，僅適用於 file\_format 為 `CSV` 的情況。指出是否允許在引用的欄位使用換行符號。
   + allow\_jagged\_rows：選用，僅適用於 file\_format 為 `CSV` 的情況。指出是否接受缺少結尾選用欄的資料列。缺少的值將以 NULL 填入。
 
 **注意：** 您無法使用指令列工具設定通知。
@@ -267,5 +268,5 @@ public class CreateAmazonS3Transfer {
 
   public static void createAmazonS3Transfer(String projectId, TransferConfig transferConfig)
       throws IOException {
-    try (DataTransferServiceClient client = DataTransferServiceClient.create())
+    try (DataTransferServiceClient client =
 ```

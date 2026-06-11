@@ -27,6 +27,17 @@ To get the latest product updates delivered to you, add the URL of this page to 
 reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators), or add the
 [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## June 10, 2026
+
+Feature
+
+BigQuery continuous queries now support the following aggregation functions:
+
+* [`ARRAY_AGG`](/bigquery/docs/reference/standard-sql/aggregate_functions#array_agg)
+* [`STRING_AGG`](/bigquery/docs/reference/standard-sql/aggregate_functions#string_agg)
+
+Support for these functions is in [Preview](https://cloud.google.com/products#product-launch-stages).
+
 ## June 08, 2026
 
 Feature
@@ -4262,10 +4273,4 @@ Libraries
 
 Feature
 
-BigQuery data preparation provides [context-aware join operation recommendations from Gemini](/bigquery/docs/data-prep-get-suggestions#add-join). Data preparation is available in [Preview](https://cloud.google.com/products#product-launch-stages).
-
-## February 06, 2025
-
-Feature
-
-You can create a [JavaScript user-defined aggregate function](/bigquery/docs/user-defined-aggregates#create-javascript-udaf) by using the [`CREATE AGGREGATE FUNCTION`](/bigquery/docs/reference/standard-sql/data-definition-language#javascript-create-udaf-function)
+BigQuery data preparation provides [context-aw](/bigquery/docs/data-prep-get-suggestions#add-join)

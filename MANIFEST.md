@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-06-10T15:18+00:00_
+_Generated 2026-06-11T02:21+00:00_
 
-**9 sources, 5254 topics total**
+**9 sources, 5253 topics total**
 
 ## airflow
 
@@ -3243,7 +3243,7 @@ _146 topics_
 
 Upstream: <https://docs.getdbt.com/docs/>
 
-_1066 topics_
+_1065 topics_
 
 - `dbt-core/best-practices/best-practice-workflows`
 - `dbt-core/best-practices/clone-incremental-models`
@@ -3402,7 +3402,6 @@ _1066 topics_
 - `dbt-core/docs/dbt-ai/wizard-cli`
 - `dbt-core/docs/dbt-ai/wizard-cli-reference`
 - `dbt-core/docs/dbt-ai/wizard-config`
-- `dbt-core/docs/dbt-ai/wizard-configure`
 - `dbt-core/docs/dbt-ai/wizard-headless`
 - `dbt-core/docs/dbt-ai/wizard-how-it-works`
 - `dbt-core/docs/dbt-ai/wizard-ide`

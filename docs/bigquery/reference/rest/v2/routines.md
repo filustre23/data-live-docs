@@ -232,7 +232,7 @@ Options for the runtime of the external system.
 
 | JSON representation |
 | --- |
-| ``` {   "containerMemory": string,   "containerCpu": number,   "runtimeConnection": string,   "maxBatchingRows": string,   "runtimeVersion": string } ``` |
+| ``` {   "containerMemory": string,   "containerCpu": number,   "runtimeConnection": string,   "maxBatchingRows": string,   "runtimeVersion": string,   "containerRequestConcurrency": string } ``` |
 
 | Fields | |
 | --- | --- |
@@ -241,6 +241,7 @@ Options for the runtime of the external system.
 | `runtimeConnection` | `string`  Optional. Fully qualified name of the connection whose service account will be used to execute the code in the container. Format: `"projects/{projectId}/locations/{locationId}/connections/{connectionId}"` |
 | `maxBatchingRows` | `string (int64 format)`  Optional. Maximum number of rows in each batch sent to the external runtime. If absent or if 0, BigQuery dynamically decides the number of rows in a batch. |
 | `runtimeVersion` | `string`  Optional. Language runtime version. Example: `python-3.11`. |
+| `containerRequestConcurrency` | `string (int64 format)`  Optional. Maximum number of requests that a Python UDF instance can handle concurrently. If absent or if `0`, the default concurrency value is used. For more information, see [Configure container limits for Python UDFs](https://cloud.google.com/bigquery/docs/user-defined-functions-python#configure-container-limits). |
 
 ## RoutineBuildStatus
 
@@ -266,9 +267,3 @@ The build state of a routine.
 | --- | --- |
 | `BUILD_STATE_UNSPECIFIED` | Default value. |
 | `IN_PROGRESS` | The build is in progress. |
-| `SUCCEEDED` | The build has succeeded. |
-| `FAILED` | The build has failed. |
-
-| Methods | |
-| --- | --- |
-|  |
