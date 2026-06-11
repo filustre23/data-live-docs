@@ -9,7 +9,7 @@ info
 * Paid [plans](https://hex.tech/pricing/) include monthly per-seat [credit grants](/docs/administration/credits) that can be used towards Hex AI features.
 * Users need the **Admin**, **Manager**, or **Editor** workspace role and **Can Edit** or higher project permissions to use the Notebook agent.
 * The Notebook agent is not compatible with **Published apps**.
-* To share suggestions for new features or improvements, reach out to [[email protected]](/cdn-cgi/l/email-protection#71020401011e0305311914095f05141219).
+* To share suggestions for new features or improvements, reach out to [[email protected]](/cdn-cgi/l/email-protection#3f4c4a4f4f504d4b7f575a47114b5a5c57).
 
 The Notebook agent offers a natural language experience to assist with code generation and exploratory analysis within Hex projects. The agent has full access to your project context and warehouse schema information, so you can ask questions about - and receive answers for - your data. The agent can also help with syntax, act as a sounding board for brainstorming solutions, or create entirely new lines of analysis.
 
@@ -95,6 +95,10 @@ For complex analytical requests, the Hex Agent uses subagents to break your ques
 
 We've also expanded the Subagents charting capabilities, so it can now create reference lines, dual y-axis charts, and handle multi-series visualization styling.
 
+### Web search[​](#web-search "Direct link to Web search")
+
+The Notebook Agent can search the web and extract content from URLs—pulling in real-time information beyond what's available in your workspace. Ask a question and it searches on its own when needed, or drop in a URL to pull the page contents directly into context. Admins can enable/disable this feature in [workspace settings](/docs/administration/workspace_settings/enable-ai-and-agents#allow-agent-web-search).
+
 ### Edit existing cells[​](#edit-existing-cells "Direct link to Edit existing cells")
 
 The Notebook agent can also modify existing cells in your project. To modify a cell, point the Agent at a specific cell in your project via [@ Mention](/docs/explore-data/notebook-view/notebook-agent#mention-cells-and-tables) and state your request.
@@ -152,7 +156,7 @@ Only projects you have [**Can Explore**](/docs/collaborate/sharing-and-permissio
 
 ## Providing feedback[​](#providing-feedback "Direct link to Providing feedback")
 
-Use the in product feedback buttons to report bugs or issues. Our team reviews these reports daily. If you want to share suggestions for new features or improvements, reach out to us directly at [[email protected]](/cdn-cgi/l/email-protection#0b787e7b7b64797f4b636e73257f6e6863).
+Use the in product feedback buttons to report bugs or issues. Our team reviews these reports daily. If you want to share suggestions for new features or improvements, reach out to us directly at [[email protected]](/cdn-cgi/l/email-protection#a6d5d3d6d6c9d4d2e6cec3de88d2c3c5ce).
 
 #### On this page
 
@@ -168,6 +172,7 @@ Use the in product feedback buttons to report bugs or issues. Our team reviews t
 * [Notebook agent capabilities](#notebook-agent-capabilities)
   + [Generate new cells](#generate-new-cells)
   + [Subagents](#subagents)
+  + [Web search](#web-search)
   + [Edit existing cells](#edit-existing-cells)
   + [Move cells](#move-cells)
   + [Delete cells](#delete-cells)

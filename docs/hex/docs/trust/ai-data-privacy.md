@@ -16,9 +16,13 @@ Depending on your plan, Hex may use data from your AI sessions to improve Hex's 
 
 ## Third-party partner interactions[​](#third-party-partner-interactions "Direct link to Third-party partner interactions")
 
-* Hex's LLM providers do not train on customer data and have a zero retention policy. Hex's use of AI session data to improve its AI features is governed by your applicable [Terms of Service](/docs/legal/terms-and-conditions). Hex does not disclose customer data to other customers. **Our LLM providers have a zero retention policy**, so your data is never stored.
+* Hex's LLM providers do not train on customer data. By default, Hex's LLM providers operate under a zero data retention policy. Certain advanced models require the model provider to retain prompts and outputs for a limited period for safety and security monitoring purposes. These models are only available when enabled by a workspace Admin. Retained data is not used for training and is automatically deleted at the end of the applicable retention period. Retention periods are dictated by the model provider and may vary by model. Hex's use of AI session data to improve its AI features is governed by your applicable [Terms of Service](/docs/legal/terms-and-conditions). Hex does not disclose customer data to other customers.
 * **Hex uses Customer Database Metadata like schemas and Customer Data project code and output content as model context**. This means that any sensitive information in your projects, table or column names, or in your code, could be passed to a model for inference.
 * **Hex's AI features are built on Hex’s secure data platform**. These features are protected by secure practices and policies, are included in our third-party audits and bug bounty program, and safeguarded by the principle of least-privilege. You can learn more on our [Data Privacy and Usage FAQ](/docs/trust/data-privacy-and-usage-faq), [Trust Center](https://trust.hex.tech/), and read our [AI Product Specific Terms](/docs/legal/hex-service-agreement#hex-magic-and-hex-magic-typeahead-collectively-hex-magic).
+
+## Model data retention settings[​](#model-data-retention-settings "Direct link to Model data retention settings")
+
+Workspace Admins can turn on **Allow Data Retention For Specific Models** in **Settings > AI & agents** to use models that require provider data retention, such as Claude Fable 5. When this setting is off, all model usage in Hex uses zero data retention.
 
 ## Bring Your Own Key (BYOK)[​](#bring-your-own-key-byok "Direct link to Bring Your Own Key (BYOK)")
 
@@ -40,11 +44,12 @@ Once a key has been added, you can add a new API key from the refresh button at 
 
 tip
 
-BYOK is currently available only for OpenAI and Anthropic. Please reach out to [[email protected]](/cdn-cgi/l/email-protection#fa898f8a8a95888eba929f82d48e9f9992) if you're interested in using another provider.
+BYOK is currently available only for OpenAI and Anthropic. Please reach out to [[email protected]](/cdn-cgi/l/email-protection#34474144445b4640745c514c1a4051575c) if you're interested in using another provider.
 
 #### On this page
 
 * [Workspace AI features opt-out](#workspace-ai-features-opt-out)
   + [AI training opt-out](#ai-training-opt-out)
 * [Third-party partner interactions](#third-party-partner-interactions)
+* [Model data retention settings](#model-data-retention-settings)
 * [Bring Your Own Key (BYOK)](#bring-your-own-key-byok)

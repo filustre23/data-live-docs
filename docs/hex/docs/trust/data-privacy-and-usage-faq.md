@@ -2,7 +2,7 @@ On this page
 
 # Data Privacy and Usage FAQ
 
-*Last Modified: January 23rd, 2026*
+*Last Modified: June 8th, 2026*
 
 warning
 
@@ -54,7 +54,7 @@ The Hex Service is data agnostic: customers are responsible for any GDPR, CCPA, 
 
 Hex is an active participant in the [Data Privacy Framework](https://www.dataprivacyframework.gov/participant/6049) and is both GDPR and CCPA compliant. Hex may enter into Data Processing Agreements (DPAs) with customers that require additional privacy guarantees.
 
-Hex is compliant with the CAN-SPAM Act: Hex users may easily unsubscribe from Hex marketing and sales communications. Data subject access requests for Hex users may be sent to [[email protected]](/cdn-cgi/l/email-protection#daaaa8b3acbbb9a39ab2bfa2f4aebfb9b2). Hex’s [Privacy Policy](/docs/legal/privacy) contains additional information.
+Hex is compliant with the CAN-SPAM Act: Hex users may easily unsubscribe from Hex marketing and sales communications. Data subject access requests for Hex users may be sent to [[email protected]](/cdn-cgi/l/email-protection#8cfcfee5faedeff5cce4e9f4a2f8e9efe4). Hex’s [Privacy Policy](/docs/legal/privacy) contains additional information.
 
 ## How does Hex interact with its LLM providers? What data is sent to the LLM providers?[​](#how-does-hex-interact-with-its-llm-providers-what-data-is-sent-to-the-llm-providers "Direct link to How does Hex interact with its LLM providers? What data is sent to the LLM providers?")
 
@@ -64,7 +64,7 @@ Hex sends Customer Input Data (project code), Customer Output Data (project/cell
 
 ## Who are Hex's LLM providers?[​](#who-are-hexs-llm-providers "Direct link to Who are Hex's LLM providers?")
 
-Hex uses OpenAI and Anthropic as its LLM providers with a zero retention policy. Hex's LLM providers do not train on customer data.
+Hex uses OpenAI and Anthropic as its LLM providers. Hex's LLM providers do not train on customer data. By default, Hex's LLM providers operate under a zero data retention policy. Certain advanced models require the model provider to retain prompts and outputs for a limited period for safety and security monitoring purposes. Retention periods are dictated by the model provider and may vary by model. These models are only available when enabled by a workspace Admin. For more information, see [AI data privacy](/docs/trust/ai-data-privacy).
 
 For [Hex Typeahead](/docs/explore-data/cells/code-typeahead), Hex uses
 a hosted open source model on Baseten with a zero retention, zero training policy.
@@ -75,13 +75,13 @@ For more information on Hex's AI providers, see [Hex's Subprocessors List](/docs
 
 **Hex has a Business Associate Agreement (BAA) with its LLM providers** that enables utilizing PHI data within Hex's AI features.
 
-**LLM providers do not retain any data submitted to Hex's AI features.**
+**By default, LLM providers do not retain data submitted to Hex's AI features.** If a workspace Admin enables a model with required data retention, prompts and outputs processed by that model may be retained by the model provider for a limited period for safety and security monitoring purposes. Retained data is not used for training. Customers processing PHI should review the applicable model's retention terms with their compliance team before enabling.
 
 ## Do LLM providers retain data sent to it via Hex's AI features?[​](#do-llm-providers-retain-data-sent-to-it-via-hexs-ai-features "Direct link to Do LLM providers retain data sent to it via Hex's AI features?")
 
 Customer's database schemas are stored in an embedding in a vector database (which is not a trained model) in Hex’s infrastructure. The embedding model we use is OpenAI’s Ada model. Your embeddings are only used for your tenant; they are not used for other customers.
 
-**LLM providers do not retain any data submitted to Hex's AI features.**
+**By default, LLM providers do not retain data submitted to Hex's AI features.** Certain advanced models require the model provider to retain prompts and outputs for a limited period for safety and security monitoring purposes. These models are only available when enabled by a workspace Admin. Retained data is not used for training and is automatically deleted at the end of the applicable retention period. For more information, see [AI data privacy](/docs/trust/ai-data-privacy).
 
 ## Does Hex utilize Customer Data, input data, or output data to train LLM provider models or any other models?[​](#does-hex-utilize-customer-data-input-data-or-output-data-to-train-llm-provider-models-or-any-other-models "Direct link to Does Hex utilize Customer Data, input data, or output data to train LLM provider models or any other models?")
 

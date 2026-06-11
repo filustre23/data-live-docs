@@ -17,6 +17,11 @@ tip
 
 Keeping Endorsed mode enforced for Explorers is recommended when you want to ensure that self-serve users only interact with data that has been explicitly reviewed and approved by your data team.
 
+## Allow agent web search[​](#allow-agent-web-search "Direct link to Allow agent web search")
+
+Admins can use the **Allow agent web search** toggle in **Settings > AI & agents** to control whether the Threads agent and Notebook agent can search the web when prompted. When this setting is turned off, agents will not be able to search the web or extract content from URLs that are shared in prompts.
+
 #### On this page
 
 * [Endorsed mode for Explorers](#endorsed-mode-for-explorers)
+* [Allow agent web search](#allow-agent-web-search)

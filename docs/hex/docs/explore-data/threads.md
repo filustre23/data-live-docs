@@ -78,6 +78,10 @@ Of course, users can also ask follow up questions in their threads to tweak resu
 
 If there is a particular data source you want the agent to use when answering your question, you can tag data sources with `@` in your prompt.
 
+### Web search[​](#web-search "Direct link to Web search")
+
+The Threads Agent can search the web and extract content from URLs—pulling in real-time information beyond what's available in your workspace. Ask a question and it searches on its own when needed, or drop in a URL to pull the page contents directly into context. Admins can enable/disable this feature in [workspace settings](/docs/administration/workspace_settings/enable-ai-and-agents#allow-agent-web-search).
+
 ### Projects as context[​](#projects-as-context "Direct link to Projects as context")
 
 When answering questions, the agent will search across the workspace for relevant projects on its own, prioritizing [Endorsed](/docs/organize-content/statuses-categories#endorsed-statuses) projects - and if [Endorsed Mode](/docs/organize-content/statuses-categories#endorsed-mode) is enabled, surfacing only those. When the Agent uses a project, it will cite what it used (e.g. links to the project or specific cells) so you can see where the answer came from. Users can also @-mention or paste a URL from a specific project into their prompt to focus the agent's work.
@@ -169,6 +173,7 @@ Workspace Managers and Admins can curate context in the workspace to continually
   + [Endorsed Mode on: Agent can access endorsed assets only](#endorsed-mode-on-agent-can-access-endorsed-assets-only)
   + [Endorsed Mode off: Agent can access all data](#endorsed-mode-off-agent-can-access-all-data)
 * [Threads behavior and exploring](#threads-behavior-and-exploring)
+  + [Web search](#web-search)
   + [Projects as context](#projects-as-context)
 * [Choosing a model and effort](#choosing-a-model-and-effort)
   + [Model selection](#model-selection)

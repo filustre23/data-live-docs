@@ -2,7 +2,7 @@
 
 [## 📄️Data Privacy and Usage FAQ
 
-Last Modified: January 23rd, 2026](/docs/trust/data-privacy-and-usage-faq)
+Last Modified: June 8th, 2026](/docs/trust/data-privacy-and-usage-faq)
 
 [## 📄️AI data privacy
 
