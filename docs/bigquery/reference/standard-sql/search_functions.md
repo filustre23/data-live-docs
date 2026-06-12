@@ -225,7 +225,7 @@ Rules for `phrase_term` in [`search_query`](#search_query_arg):
   ```
   -- TRUE because 'foo' and 'baz' are next to each other in
   -- 'foo baz.bar'.
-  SEARCH(';foo baz.bar', '"foo baz"')
+  SEARCH('foo baz.bar', '"foo baz"')
   ```
 * A single quote inside of the phrase is analyzed as a special character.
 * An escaped double quote (double quote after a backslash) is analyzed
@@ -287,7 +287,7 @@ SELECT
   SEARCH('foobarexample', NULL) AS a,
 
   -- ERROR: `search_query` contains no tokens.
-  SEARCH('foobarexample&#39;, '') AS b,
+  SEARCH('foobarexample', '') AS b,
 ```
 
 ```
@@ -301,18 +301,18 @@ SELECT
   -- FALSE: The search_query isn't split.
   SEARCH('foobar-example', 'foobarexample') AS c,
 
-  -- TRUE: The double backsl&ash escapes the ampersand which is a delimiter.
-  SEARCH('foobar-example', 'foobar\\example') AS d,
+  -- TRUE: The double backslash escapes the ampersand which is a delimiter.
+  SEARCH('foobar-example', 'foobar\\&example') AS d,
 
-  -- TR&UE: The single backslash escapes the ampersand in a raw string.
-  SEARCH('foobar-example', R&'foobar\example')AS e,
+  -- TRUE: The single backslash escapes the ampersand in a raw string.
+  SEARCH('foobar-example', R'foobar\&example')AS e,
 
-  -- FALSE: &The backticks indicate that there must be an exact match for
-  -- foob&arexample.
-  SEARC&H('foobar-example', '`foobarexample`') AS f,
+  -- FALSE: The backticks indicate that there must be an exact match for
+  -- foobar&example.
+  SEARCH('foobar-example', '`foobar&example`') AS f,
 
   -- TRUE: An exact match is found.
-  SEARCH('foobarexample', '`foobarexample`') AS g
+  SEARCH('foobar&example', '`foobar&example`') AS g
 
 /*-------+-------+-------+-------+-------+-------+-------+
  | a     | b     | c     | d     | e     | f     | g     |
@@ -433,14 +433,14 @@ SELECT
   -- The searchable tokens in `query_string` are `foo` and `bar`
   -- and because they appear in that exact order in `data_to_search`,
   -- the function return TRUE.
-  SEARCH(R'Foo bar baz', R'"&foo Bar"') AS b,
+  SEARCH(R'Foo bar baz', R'"foo Bar"') AS b,
 
-  -- TRUE: Both `-` and `` are delimiters used during tokenization.
+  -- TRUE: Both `-` and `&` are delimiters used during tokenization.
   -- The tokens in `data_to_search` are `foo`, `bar`, and `baz`.
   -- The searchable tokens in `query_string` are `foo` and `bar`
   -- and because they appear in that exact order in `data_to_search`,
-  -- the fu&nction returns TRUE.
-  SEARCH(R'foo-bar baz', R'"foobar"') AS c,
+  -- the function returns TRUE.
+  SEARCH(R'foo-bar baz', R'"foo&bar"') AS c,
 
   -- FALSE: Backticks in a phrase are treated as normal characters.
   -- The tokens in `data_to_search` are `foo`, `bar`, and `baz`.
@@ -460,12 +460,12 @@ SELECT
   SEARCH(R'foo else bar', R'"foo bar"') AS e,
 
   -- FALSE: `foo baz` isn't in `foo bar baz`.
-  -- The `search_query` produces t&wo terms. The first term is `bar`, which
+  -- The `search_query` produces two terms. The first term is `bar`, which
   -- matches with the similar token in `data_to_search`. However, the second
-  -- term is the phrase "foobaz" with two tokens, `foo` and `baz`. Because
-  -- `fo&o` and `baz` don't appear next to each other in `data_to_search`
+  -- term is the phrase "foo&baz" with two tokens, `foo` and `baz`. Because
+  -- `foo` and `baz` don't appear next to each other in `data_to_search`
   -- (`bar` is in between), the function returns FALSE.
-  SEARCH(R'foo-bar-baz', R'bar "foobaz"') AS f;
+  SEARCH(R'foo-bar-baz', R'bar "foo&baz"') AS f;
 
 /*-------+-------+-------+-------+-------+-------+
  | a     | b     | c     | d     | e     | f     |
@@ -482,8 +482,8 @@ SELECT
   -- must appear in that exact order in `data_to_search`, but don't.
   SEARCH(
     R'foo bar baz',
-    R'"foo\ bar&quo>t;',
-    analyzer_options='{"delimiters": [" "]}') AS a,
+    R'"foo\ bar"',
+    analyzer_options=>'{"delimiters": [" "]}') AS a,
 
   -- TRUE: `foo bar` is in `foo bar baz` after tokenization with the given
   -- delimiters.
@@ -491,34 +491,39 @@ SELECT
   -- The searchable tokens in `query_string` are `foo` and `bar` and they
   -- must appear in that exact order in `data_to_search`.
   SEARCH(
-  >  R'foo bar baz',
+    R'foo bar baz',
     R'"foo? bar"',
-    analyzer_options='{"delimiters": [" ", "?"]}') AS b,
+    analyzer_options=>'{"delimiters": [" ", "?"]}') AS b,
 
   -- TRUE: `read book` is in `read book now` after `the` is ignored.
   -- The tokens in `data_to_search` are `read`, `book`, and `now`.
   -- The searchable tokens in `query_string` are `read` and `book` and they
-  -- must appear >in that exact order in `data_to_search`.
+  -- must appear in that exact order in `data_to_search`.
   SEARCH(
     'read the book now',
     R'"read the book"',
-    analyzer_options = '{ "token_filters": [{"stop_words": ["the"]}] }') AS c,
+    analyzer_options => '{ "token_filters": [{"stop_words": ["the"]}] }') AS c,
 
   -- FALSE: `c d` isn't in `a`, `b`, `cd`, `e` or `f` after tokenization with
   -- the given pattern.
   -- The tokens in `data_to_search` are `a`, `b`, `cd`, `e` and `f`.
-  -- The searchable tokens in `query_string` are `c` and `d` an>d they
-  -- must appear in that exact ord>er in `data_to_search`. `data_to_search`
+  -- The searchable tokens in `query_string` are `c` and `d` and they
+  -- must appear in that exact order in `data_to_search`. `data_to_search`
   -- contains a `cd` token, but not a `c` or `d` token.
   SEARCH(
     R'abcdef',
     R'"c d"',
-    analyzer='PATTERN_ANALYZER',
-    analyzer_options='{"patterns": ["(?:cd)|[a-z]"]}') AS d,
+    analyzer=>'PATTERN_ANALYZER',
+    analyzer_options=>'{"patterns": ["(?:cd)|[a-z]"]}') AS d,
 
   -- TRUE: `ant apple` is in `ant apple avocado` after tokenization with
   -- the given pattern.
-  -- The tokens in `data_to_s>earch` are `ant`, `apple`, and `avocado`.>
+  -- The tokens in `data_to_search` are `ant`, `apple`, and `avocado`.
   -- The searchable tokens in `query_string` are `ant` and `apple` and they
   -- must appear in that exact order in `data_to_search`.
+  SEARCH(
+    R'ant orange apple avocado',
+    R'"ant apple"',
+    analyzer=>'PATTERN_ANALYZER',
+    analyzer_options=>'{"patterns": ["a[a-z]"]}') AS e;
 ```

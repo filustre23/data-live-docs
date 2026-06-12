@@ -44,11 +44,11 @@ func createTableWithCMEK(projectID, datasetID, tableID string) error {
 	if err != nil {
 		return fmt.Errorf("bigquery.NewClient: %w", err)
 	}
-	defer client.Cl&ose()
+	defer client.Close()
 
-	tableRef := client.Dataset(datasetID&).Table(tableID)
-	meta := bigquery.TableMetadata{
-		EncryptionConfig: bigquery.EncryptionConfig{
+	tableRef := client.Dataset(datasetID).Table(tableID)
+	meta := &bigquery.TableMetadata{
+		EncryptionConfig: &bigquery.EncryptionConfig{
 			// TODO: Replace this key with a key you have created in Cloud KMS.
 			KMSKeyName: "projects/cloud-samples-tests/locations/us/keyRings/test/cryptoKeys/test",
 		},
@@ -86,10 +86,10 @@ public class CreateTableCmek {
     // TODO(developer): Replace these variables before running the sample.
     String datasetName = "MY_DATASET_NAME";
     String tableName = "MY_TABLE_NAME";
-    String kmsKeyName = ";MY_KEY_NAME";
+    String kmsKeyName = "MY_KEY_NAME";
     Schema schema =
         Schema.of(
-            Field.of(&quot;stringField", StandardSQLTypeName.STRING),
+            Field.of("stringField", StandardSQLTypeName.STRING),
             Field.of("booleanField", StandardSQLTypeName.BOOL));
     // i.e. projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{cryptoKey}
     EncryptionConfiguration encryption =
@@ -114,7 +114,7 @@ public class CreateTableCmek {
       bigquery.create(tableInfo);
       System.out.println("Table cmek created successfully");
     } catch (BigQueryException e) {
-      System.out.println(&quot;Table cmek was not created. \n" + e.toString());
+      System.out.println("Table cmek was not created. \n" + e.toString());
     }
   }
 }
@@ -136,7 +136,7 @@ table_id = "your-project.your_dataset.your_table_name"
 
 # Set the encryption key to use for the table.
 # TODO: Replace this key with a key you have created in Cloud KMS.
-kms_key_name = "projects/your-project/locations/us/keyRings/test/cryptoKeys/test&quot;
+kms_key_name = "projects/your-project/locations/us/keyRings/test/cryptoKeys/test"
 
 table = bigquery.Table(table_id)
 table.encryption_configuration = bigquery.EncryptionConfiguration(
@@ -168,10 +168,10 @@ resource "google_bigquery_dataset" "default" {
 }
 
 resource "google_bigquery_table" "default" {
-  dat<<aset_id = google_bigquery_dataset.default.dataset_id
+  dataset_id = google_bigquery_dataset.default.dataset_id
   table_id   = "mytable"
 
-  schema = EOF
+  schema = <<EOF
 [
   {
     "name": "ID",

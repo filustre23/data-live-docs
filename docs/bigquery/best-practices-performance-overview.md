@@ -52,7 +52,7 @@ BigQuery 針對查詢提供了兩種計費模式：[以量計價](https://cloud.
 
 如果查詢要求的運算單元數量高於可用數量，系統會將查詢[排入佇列](https://docs.cloud.google.com/bigquery/docs/query-queues?hl=zh-tw)，直到處理資源可用為止。查詢開始執行後，BigQuery 會根據階段大小和複雜度，以及可用的運算單元數量，計算每個查詢階段使用的運算單元數量。BigQuery 會使用「公平排程」技術，確保每項查詢都有足夠的容量可供處理。
 
-使用更多運算單元不一定能加快查詢速度。但若運算單元集區較大，也許可以為大型或非常複雜的查詢提升效能，也能提升高度並行工作負載的效能。如要提升查詢效能，可以[修改運算單元預留項目](https://docs.cloud.google.com/bigquery/docs/reservations-tasks?hl=zh-tw)，或為[運算單元自動調度資源](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro?hl=zh-tw)設定較高的上限。
+運算單元數量增加不一定能加快查詢速度。不過，運算單元集區越大，大型或複雜查詢的效能就越好，高度並行工作負載的效能也會提升。如要提升查詢效能，可以[修改運算單元預留量](https://docs.cloud.google.com/bigquery/docs/reservations-tasks?hl=zh-tw)，或為[運算單元自動調度資源](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro?hl=zh-tw)設定較高的上限。您也可以使用 Gemini Cloud Assist，[透過自然語言提示管理預留量和容量](https://docs.cloud.google.com/bigquery/docs/use-cloud-assist?hl=zh-tw#administer_bigquery)。
 
 ## 查詢計畫和執行圖表
 
@@ -81,11 +81,11 @@ BigQuery 執行查詢工作時，會將宣告式 SQL 陳述式轉換成執行圖
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-06-11 (世界標準時間)。
+上次更新時間：2026-06-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-11 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-12 (世界標準時間)。"],[],[]]

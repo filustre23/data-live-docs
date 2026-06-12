@@ -310,5 +310,5 @@ GROUP BY priority;
 
 ```
 SELECT
-  user_email AS user,
+  user_email AS
 ```

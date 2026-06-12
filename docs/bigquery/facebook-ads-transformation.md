@@ -379,5 +379,3 @@ Google uses AI technology to translate content into your preferred language. AI 
 | `id` | ID | *字串* | 自訂目標對象的 ID。 |
 |  | 目標 | *字串* | 目標欄位。 |
 | `account_id` | AccountID | *字串* | 從 Account\_ID 對應的廣告帳戶 ID。 |
-| `name` | 名稱 | *字串* | 自訂目標對象的名稱。 |
-|  |

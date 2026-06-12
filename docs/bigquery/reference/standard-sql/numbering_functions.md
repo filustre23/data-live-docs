@@ -351,5 +351,5 @@ To learn more about the `OVER` clause and how to use it, see
 ```
 WITH Numbers AS
  (SELECT 1 as x
-  UNION ALL<
+  UNION ALL SELECT 2
 ```

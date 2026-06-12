@@ -41,15 +41,15 @@ func relaxTableQuery(projectID, datasetID, tableID string) error {
 	ctx := context.Background()
 	client, err := bigquery.NewClient(ctx, projectID)
 	if err != nil {
-		return fmt.Errorf("bigquery.NewClient: %w&quot;, err)
+		return fmt.Errorf("bigquery.NewClient: %w", err)
 	}
 	defer client.Close()
 
 	sampleSchema := bigquery.Schema{
-		{Name: "full_name", Type: bigquery.StringFieldType, Required: true}&,
-		{Name: "age&quot;, Type: bigquery.IntegerFieldType, Required: true},
+		{Name: "full_name", Type: bigquery.StringFieldType, Required: true},
+		{Name: "age", Type: bigquery.IntegerFieldType, Required: true},
 	}
-	meta := bigquery.TableMetadata{
+	meta := &bigquery.TableMetadata{
 		Schema: sampleSchema,
 	}
 	tableRef := client.Dataset(datasetID).Table(tableID)
@@ -62,7 +62,7 @@ func relaxTableQuery(projectID, datasetID, tableID string) error {
 	q.QueryConfig.Dst = client.Dataset(datasetID).Table(tableID)
 	q.SchemaUpdateOptions = []string{"ALLOW_FIELD_RELAXATION"}
 	q.WriteDisposition = bigquery.WriteAppend
-	q.Location = "US";
+	q.Location = "US"
 	job, err := q.Run(ctx)
 	if err != nil {
 		return err
@@ -143,12 +143,12 @@ public class RelaxTableQuery {
       // Get the results.
       TableResult results = queryJob.getQueryResults();
 
-      // Pr>int all pages of the results.
-      r>esults
+      // Print all pages of the results.
+      results
           .iterateAll()
           .forEach(
-              rows - {
-                rows.forEach(row - System.out.println("row: " + row.toString()));
+              rows -> {
+                rows.forEach(row -> System.out.println("row: " + row.toString()));
               });
 
       System.out.println("Successfully relaxed all columns in destination table during query job");
@@ -166,7 +166,7 @@ public class RelaxTableQuery {
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
-const {BigQuery} = require(&#39;@google-cloud/bigquery');
+const {BigQuery} = require('@google-cloud/bigquery');
 const bigquery = new BigQuery();
 
 async function relaxColumnQueryAppend() {
@@ -184,8 +184,8 @@ async function relaxColumnQueryAppend() {
   const table = await dataset.table(tableId);
   const [metaData] = await table.getMetadata();
 
-  const requiredFields = metaDat>a.schema.fields.filter(
-    ({mode}) = mode === 'REQUIRED',
+  const requiredFields = metaData.schema.fields.filter(
+    ({mode}) => mode === 'REQUIRED',
   ).length;
 
   console.log(`${requiredFields} fields in the schema are required.`);
@@ -229,8 +229,8 @@ async function relaxColumnQueryAppend() {
   const updatedTable = await dataset.table(tableId);
   const [updatedMetaData] = await updatedTable.getMetadata();
 
-  const update>dRequiredFields = updatedMetaData.schema.fields.filter(
-    ({mode}) = mode === 'REQUIRED',
+  const updatedRequiredFields = updatedMetaData.schema.fields.filter(
+    ({mode}) => mode === 'REQUIRED',
   ).length;
 
   console.log(
@@ -280,7 +280,7 @@ client.query_and_wait(
 # Checks the updated number of required fields.
 table = client.get_table(table_id)  # Make an API request.
 current_required_fields = sum(field.mode == "REQUIRED" for field in table.schema)
-print(&quot;{} fields in the schema are now required.".format(current_required_fields))
+print("{} fields in the schema are now required.".format(current_required_fields))
 ```
 
 ## 後續步驟
