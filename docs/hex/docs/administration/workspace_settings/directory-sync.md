@@ -6,7 +6,7 @@ Set Hex user roles from your directory provider (Okta, Rippling, Google, Azure a
 
 info
 
-* Available on the Enterprise [plan](https://hex.tech/pricing). If your workspace is single tenant, please contact [[email protected]](/cdn-cgi/l/email-protection#c4b7b1b4b4abb6b084aca1bceab0a1a7ac) for assistance configuring.
+* Available on the Enterprise [plan](https://hex.tech/pricing). If your workspace is single tenant, please contact [[email protected]](/cdn-cgi/l/email-protection#4d3e383d3d223f390d2528356339282e25) for assistance configuring.
 * Only workspace Admins can configure directory sync.
 
 Teams who use a directory provider for authentication and access controls for their various tools can now sync with Hex. When using directory sync, Hex users, roles, and group membership can all be managed in a third party tool, like Okta, Azure, and others. This allows teams to quickly and easily keep a single source of truth for which users should have access and engage with Hex.
@@ -21,11 +21,11 @@ Teams who use a directory provider for authentication and access controls for th
 
 info
 
-Changes made to your directory details can take up to 5 minutes to be reflected in Hex. If your changes take longer than this time to be reflected reach out to [[email protected]](/cdn-cgi/l/email-protection#d8abada8a8b7aaac98b0bda0f6acbdbbb0)
+Changes made to your directory details can take up to 5 minutes to be reflected in Hex. If your changes take longer than this time to be reflected reach out to [[email protected]](/cdn-cgi/l/email-protection#a0d3d5d0d0cfd2d4e0c8c5d88ed4c5c3c8)
 
 ### Setup steps:[​](#setup-steps "Direct link to Setup steps:")
 
-* In the Hex Administration panel, go to the **Users & groups** panel and scroll down to **Directory sync** — if you don’t see this option then Directory Sync is not currently available for your workspace. Get in touch with us at [`[email protected]`](/cdn-cgi/l/email-protection#e48c8188888ba48c819cca9081878c) to change that!
+* In the Hex Administration panel, go to the **Users & groups** panel and scroll down to **Directory sync** — if you don’t see this option then Directory Sync is not currently available for your workspace. Get in touch with us at [`[email protected]`](/cdn-cgi/l/email-protection#422a272e2e2d022a273a6c3627212a) to change that!
 * Click on **Configure**, which will take you to a portal to select which directory provider your company uses.
 
 #### Manage groups and user roles in directory[​](#manage-groups-and-user-roles-in-directory "Direct link to Manage groups and user roles in directory")

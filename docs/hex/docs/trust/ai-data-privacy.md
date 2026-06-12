@@ -44,7 +44,7 @@ Once a key has been added, you can add a new API key from the refresh button at 
 
 tip
 
-BYOK is currently available only for OpenAI and Anthropic. Please reach out to [[email protected]](/cdn-cgi/l/email-protection#4d3e383d3d223f390d2528356339282e25) if you're interested in using another provider.
+BYOK is currently available only for OpenAI and Anthropic. Please reach out to [[email protected]](/cdn-cgi/l/email-protection#54272124243b2620143c312c7a2031373c) if you're interested in using another provider.
 
 #### On this page
 
