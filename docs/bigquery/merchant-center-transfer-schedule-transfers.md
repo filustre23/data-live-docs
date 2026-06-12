@@ -21,14 +21,16 @@ Google uses AI technology to translate content into your preferred language. AI 
 這項產品適用《[服務專屬條款](https://docs.cloud.google.com/terms/service-terms?hl=zh-tw#1)》中「一般服務條款」一節的《正式發布前產品條款》。正式發布前的產品是按照「原樣」提供，支援範圍可能有限。
 詳情請參閱[推出階段說明](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
 
-**注意：** 如要取得 BigQuery 資料移轉服務 Merchant Center 移轉的支援或提供意見，請傳送電子郵件至 [gmc-transfer-preview@google.com](mailto:gmc-transfer-preview@google.com)。
+**注意：** 如要取得 Merchant Center 移轉服務的支援，或透過 BigQuery 資料移轉服務提供意見回饋，請傳送電子郵件至 [gmc-transfer-preview@google.com](mailto:gmc-transfer-preview@google.com)。
+
+你可以使用 Merchant Center 連接器的 [BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)，將 Google Merchant Center 的資料載入至 BigQuery。透過 BigQuery 資料移轉服務，您可以排定週期性移轉工作，將最新的 Merchant Center 資料新增至 BigQuery。
 
 ## 事前準備
 
 建立 Merchant Center 資料移轉作業前，請先完成下列事項：
 
 * 確認您已完成[啟用 BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service?hl=zh-tw)的一切必要動作。
-* [建立 BigQuery 資料集](https://docs.cloud.google.com/bigquery/docs/datasets?hl=zh-tw)，儲存 Merchant Center 資料。
+* [建立 BigQuery 資料集](https://docs.cloud.google.com/bigquery/docs/datasets?hl=zh-tw)，用來儲存 Merchant Center 資料。
   + 資料集區域方面，我們支援在美國或歐盟使用預設選項「多區域」。
   + 如要在特定區域建立資料集，Merchant Center 資料移轉功能僅支援下列區域：
   + `us-east4 (Northern Virginia)`、
@@ -46,7 +48,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### 必要的 BigQuery 角色
 
-如要取得建立 BigQuery 資料移轉服務資料移轉作業所需的權限，請要求系統管理員在專案中授予您 [BigQuery 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.admin)  (`roles/bigquery.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得建立 BigQuery 資料移轉服務資料移轉作業所需的權限，請要求管理員在專案中授予您 [BigQuery 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.admin)  (`roles/bigquery.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
 這個預先定義的角色具備建立 BigQuery 資料移轉服務資料移轉作業所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
@@ -70,23 +72,23 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### 必要的 Merchant Center 角色
 
-* 在移轉作業設定中所使用 Merchant Center 帳戶的[標準存取權](https://support.google.com/merchants/answer/1637190?hl=zh-tw)。如果使用服務帳戶設定轉移，[服務帳戶必須有權存取](https://developers.google.com/merchant/api/guides/authorization/access-your-account?hl=zh-tw#give-service-account-access-account) Merchant Center 帳戶。如要驗證存取權，請按一下 [Merchant Center 使用者介面](https://merchants.google.com/?hl=zh-tw)中的「使用者」部分。
+* 在移轉設定中使用的 Merchant Center 帳戶的[標準存取權](https://support.google.com/merchants/answer/1637190?hl=zh-tw)。如果使用服務帳戶設定移轉作業，[服務帳戶必須有權存取](https://developers.google.com/merchant/api/guides/authorization/access-your-account?hl=zh-tw#give-service-account-access-account) Merchant Center 帳戶。如要驗證存取權，請按一下 [Merchant Center UI](https://merchants.google.com/?hl=zh-tw) 中的「使用者」區段。
 * 如要存取價格競爭力、價格分析和暢銷商品資料，你必須符合[市場洞察的資格規定](https://support.google.com/merchants/answer/9712881?hl=zh-tw)。
 
 ## 設定 Merchant Center 轉移作業
 
-如要設定 Merchant Center 報表的資料移轉作業，必須符合下列條件：
+如要設定 Merchant Center 報表的資料移轉作業，必須具備下列條件：
 
 * **商家 ID** 或**多重客戶帳戶 ID**：這是[Merchant Center 使用者介面](https://merchants.google.com/mc?hl=zh-tw)中顯示的商家 ID。
 
-如何建立 Merchant Center 報表的資料移轉作業：
+如要建立 Merchant Center 報表的資料移轉作業，請按照下列步驟操作：
 
 ### 控制台
 
 1. 前往 Google Cloud 控制台的「資料移轉」頁面。
 
    [前往「資料轉移」頁面](https://console.cloud.google.com/bigquery/transfers?hl=zh-tw)
-2. 按一下 add「建立轉移作業」。
+2. 按一下「建立移轉作業」add。
 3. 在「Create Transfer」(建立轉移作業) 頁面：
 
    * 在「Source type」(來源類型) 區段中，針對「Source」(來源) 選擇 [Google Merchant Center]。
@@ -142,7 +144,7 @@ bq mk \
 * name 是移轉設定的顯示名稱。移轉作業名稱可以是任意值，日後需要修改移轉作業時，能夠據此識別即可。
 * parameters 含有已建立移轉設定的 JSON 格式參數，例如：`--params='{"param":"param_value"}'`。
   + 如要轉移 Merchant Center 資料，請提供 `merchant_id` 參數。
-  + `export_products` 參數可指定是否要轉移產品和產品問題資料。即使未指定 `export_products` 參數，系統預設也會納入這個參數。Google 建議您明確加入這個參數，並將其設為「true」。
+  + `export_products` 參數會指定是否要轉移產品和產品問題資料。即使未指定 `export_products` 參數，系統預設也會納入這個參數。Google 建議您明確納入這個參數，並將其設為「true」。
   + `export_regional_inventories` 參數會指定是否要轉移區域商品目錄資料。
   + `export_local_inventories` 參數會指定是否要轉移店面商品目錄資料。
   + `export_price_competitiveness` 參數可指定是否要轉移價格競爭力資料。
@@ -174,7 +176,7 @@ follow the instructions to retrieve an authentication code.`
 
 **注意：** 當您使用指令列工具建立 Merchant Center 資料移轉作業時，系統會採用「Schedule」(排程) 的預設值 (移轉作業的建立時間，每 24 小時執行一次) 來設定移轉作業的設定。第一次移轉作業會立刻開始執行，且會執行失敗，並顯示以下錯誤訊息：「No data to transfer found for the Merchant account」(找不到該商家帳戶的資料來移轉)。
 
-如果您才剛建立這項資料移轉作業，可能必須等待最多一天，才能讓您商家帳戶的資料準備就緒，以供移轉。下一次排定的移轉作業應該就能順利執行。如果你的商家帳戶資料會在相同日期準備就緒 (以世界標準時間為準)，可以為今天的執行作業[設定補充作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)。
+如果您才剛建立這項資料移轉作業，可能需要等待最多一天，商家帳戶資料才會準備就緒，以供移轉。下一次排定的執行作業應該就能順利執行。如果商家帳戶資料會在相同日期準備就緒 (以世界標準時間為準)，可以為今天的執行作業[設定補充作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)。
 
 ### API
 
@@ -182,7 +184,7 @@ follow the instructions to retrieve an authentication code.`
 
 ## 排解 Merchant Center 轉移設定問題
 
-如果您無法順利設定資料移轉作業，請參閱[排解 BigQuery 資料移轉服務的移轉作業設定問題](https://docs.cloud.google.com/bigquery/docs/transfer-troubleshooting?hl=zh-tw)中的 [Merchant Center 移轉問題](https://docs.cloud.google.com/bigquery/docs/transfer-troubleshooting?hl=zh-tw#merchant)小節。
+如果您無法順利設定資料移轉作業，請參閱[排解 BigQuery 資料移轉服務的移轉作業設定問題](https://docs.cloud.google.com/bigquery/docs/transfer-troubleshooting?hl=zh-tw)中的「[Merchant Center 移轉問題](https://docs.cloud.google.com/bigquery/docs/transfer-troubleshooting?hl=zh-tw#merchant)」一節。
 
 
 
@@ -191,11 +193,11 @@ follow the instructions to retrieve an authentication code.`
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-06-04 (世界標準時間)。
+上次更新時間：2026-06-11 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-04 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-11 (世界標準時間)。"],[],[]]

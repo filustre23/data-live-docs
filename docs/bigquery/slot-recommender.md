@@ -16,12 +16,12 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 查看版本運算單元建議
 
-BigQuery 運算單元建議工具會為[版本](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)或隨選工作負載提供建議。這項工具會分析查詢作業的過往運算單元用量，並計算版本承諾使用運算單元和[自動調度資源](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro?hl=zh-tw)運算單元的最佳成本設定，同時維持類似的效能。運算單元建議工具也會建議可提升效能的最大預留項目大小。
+您可以使用 BigQuery 運算單元建議工具，盡可能善用 BigQuery 運算單元。這項工具會為[版本](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)或隨選工作負載提供建議。建議工具會分析查詢作業的過往運算單元用量，協助您計算版本承諾使用運算單元和[自動調度資源](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro?hl=zh-tw)運算單元的最佳成本設定，同時維持類似的查詢效能。此外，這項工具也會建議最大預留大小，以提升效能。
 
 運算單元建議工具適用於預留和以量計價的計費方式：
 
-* 如果是預訂帳單，您可以取得 Enterprise 或 Enterprise Plus 版本工作負載的成本最佳化建議，以及預訂項目的效能建議。
-* 如果是隨選計費，您可以將一或多個專案轉換為 Enterprise 版，取得整個機構、特定專案或一組專案的隨選工作負載成本最佳化建議。
+* 如果是預訂計費，請取得 Enterprise 或 Enterprise Plus 版本工作負載的成本最佳化建議。您也會收到預留項目的成效建議。
+* 如果是以量計價帳單，系統會針對貴機構或特定專案的以量計價工作負載，提供費用最佳化建議。這包括將專案轉換為 Enterprise 版時的建議。
 
 如要進一步瞭解建議工具服務，請參閱「[建議工具總覽](https://docs.cloud.google.com/recommender/docs/overview?hl=zh-tw)」。
 
@@ -35,7 +35,7 @@ BigQuery 運算單元建議工具會為[版本](https://docs.cloud.google.com/bi
 
 最佳化建議包含下列詳細資料：
 
-* 基準承諾使用運算單元：為達到最佳成本效益，且不影響效能的承諾使用運算單元數量。您也可以選取「查看最佳承諾」，在上方的使用情形圖表中查看最佳承諾。
+* 承諾使用運算單元基準：為達到最佳成本效益，且不影響效能的承諾使用運算單元數量。您也可以選取「查看最佳承諾使用運算單元」，在先前的用量圖表中查看最佳承諾使用運算單元。
 * 基準承諾使用每月費用：最佳承諾使用運算單元的每月費用，計算依據為自訂版本承諾使用價格。一個月的定義為 730 小時。
 * 自動調度運算單元：一次使用的自動調度運算單元數量上限。這代表自動調度資源涵蓋的額外運算單元，不包括承諾或基準運算單元。
 * 自動調度資源的預期使用率：自動調度資源運算單元的預期每月使用率，計算方式為預期使用的自動調度資源運算單元除以自動調度資源運算單元上限。
@@ -141,11 +141,11 @@ Viewer` IAM 角色具備這項權限。
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-06-03 (世界標準時間)。
+上次更新時間：2026-06-11 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-03 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-11 (世界標準時間)。"],[],[]]

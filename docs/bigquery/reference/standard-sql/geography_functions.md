@@ -321,26 +321,4 @@ ST_ASBINARY(geography_expression)
 
 **Description**
 
-Returns the [WKB](https://en.wikipedia.org/wiki/Well-known_text#Well-known_binary) representation of an input
-`GEOGRAPHY`.
-
-See [`ST_GEOGFROMWKB`](#st_geogfromwkb) to construct a
-`GEOGRAPHY` from WKB.
-
-**Return type**
-
-`BYTES`
-
-## `ST_ASGEOJSON`
-
-```
-ST_ASGEOJSON(geography_expression)
-```
-
-**Description**
-
-Returns the [RFC 7946](https://tools.ietf.org/html/rfc7946) compliant [GeoJSON](https://en.wikipedia.org/wiki/GeoJSON)
-representation of the input `GEOGRAPHY`.
-
-A GoogleSQL `GEOGRAPHY` has spherical
-geo
+Returns the [WKB](https://en.wikipedia.org/wiki/Well-known_text#Well-known_binary) representation of a

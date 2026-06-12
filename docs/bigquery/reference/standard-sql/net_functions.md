@@ -463,8 +463,5 @@ SELECT
   description,
   FORMAT("%T", NET.HOST(input)) AS host,
   FORMAT("%T", NET.PUBLIC_SUFFIX(input)) AS suffix,
-  FORMAT("%T", NET.REG_DOMAIN(input)) AS domain
-FROM (
-  SELECT "" AS input, "invalid input" AS description
-  UNION ALL SELECT "http://abc.xyz"
+  FORMAT("%T", NET.REG_DOMAIN(input)) AS
 ```

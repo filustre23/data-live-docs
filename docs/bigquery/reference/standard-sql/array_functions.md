@@ -540,15 +540,3 @@ If any argument is `NULL`, the function will return a `NULL` array.
 **Examples**
 
 The following returns an array of integers, with a default step of 1.
-
-```
-SELECT GENERATE_ARRAY(1, 5) AS example_array;
-
-/*-----------------+
- | example_array   |
- +-----------------+
- | [1, 2, 3, 4, 5] |
- +-----------------*/
-```
-
-The following returns an array using a user-specified step size.

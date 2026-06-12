@@ -821,10 +821,4 @@ SELECT INTERVAL '-23-2 10 0:-30' YEAR TO MINUTE
 SELECT INTERVAL '23--2 10 0:30' YEAR TO MINUTE
 
 -- 0 years, -2 months, 10 days, 0 hours, 30 minutes, and 0 seconds (-0-2 10 0:30:0)
-SELECT INTERVAL '-2 10 0:30' MONTH TO MINUTE
-
--- 0 years, 0 months, 0 days, 0 hours, -30 minutes, and -10 seconds (0-0 0 -0:30:10)
-SELECT INTERVAL '-30:10' MINUTE TO SECOND
 ```
-
-For more information on how to construct interval with a datetime part range

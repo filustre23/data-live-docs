@@ -285,9 +285,4 @@ User-provided metadata for a dataset.
 | Fields | |
 | --- | --- |
 | `friendlyName` | `string`  A short name for the dataset, such as `"Analytics Data 2011"`. |
-| `description` | `string`  A long description, perhaps several paragraphs, describing the dataset contents in detail. |
-| `labels` | `map (key: string, value: string)`  Labels provided for the dataset.  An object containing a list of `"key": value` pairs. Example: `{ "name": "wrench", "mass": "1.3kg", "count": "3" }`. |
-
-## BigQueryAcl
-
-An access control list.
+| `description` | `string` |

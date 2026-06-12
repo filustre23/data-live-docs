@@ -458,9 +458,3 @@ BigQuery 支援[column-](https://docs.cloud.google.com/bigquery/docs/column-leve
 * **Oracle DWH 資料大小：**結構定義的來源大小對所選資料轉移方法有重大影響，尤其是在資料量龐大 (TB 以上) 時。如果資料量相對較小，資料轉移程序可以簡化。處理大規模資料會使整體程序更加複雜。
 * **停機時間：**決定是否要停機，是將資料遷移至 BigQuery 的重要環節。為減少停機時間，您可以大量載入穩定的歷來資料，並使用 CDC 解決方案，趕上轉移程序期間發生的變更。
 * **價格：**在某些情況下，您可能需要第三方整合工具 (例如 ETL 或複製工具)，這類工具需要額外授權。
-
-#### 初始資料移轉 (批次)
-
-使用批次方法轉移資料表示資料會以單一程序匯出 (例如將 Oracle DWH 結構定義資料匯出至 CSV、Avro 或 Parquet 檔案，或匯入 Cloud Storage 以在 BigQuery 上建立資料集)。您可以使用 [ETL/ELT 遷移作業](#etl-elt-migration)中說明的所有 ETL 工具和概念，進行初始載入。
-
-如果不想使用 ETL/ELT 工具進行初始載入，可以編寫自訂指令碼，將資料匯出至檔案 (CSV、Avro 或 Parquet)，然後使用 `gcloud storage`、BigQuery 資料移轉服務或 Transfer Appliance，將資料上傳至 Cloud Storage。如要進一步瞭解如何調整大型資料移轉作業和移轉選項的效能，請參閱[轉移大型資料集](https://docs.cloud.google.com/solutions/transferring-big-data-sets-to-gcp?hl=zh-tw)。然後將資料從 Cloud Storage 載入

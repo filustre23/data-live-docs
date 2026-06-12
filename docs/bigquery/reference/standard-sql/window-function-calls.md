@@ -543,12 +543,5 @@ This computes a grand total for all items in the
 * (**banana**, **apple**, **leek**, **cabbage**, **lettuce**, **kale**) = 54 total purchases
 
 ```
-SELECT item, purchases, category, SUM(purchases)
-  OVER () AS total_purchases
-FROM Produce
-
-/*-------------------------------------------------------+
- | item      | purchases  | category   | total_purchases |
- +-------------------------------------------------------+
- | banana    | 2          | fruit      | 54              |
+SELECT item, purchases,
 ```

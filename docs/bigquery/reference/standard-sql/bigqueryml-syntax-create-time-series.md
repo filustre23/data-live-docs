@@ -980,11 +980,4 @@ CREATE OR REPLACE MODEL `mydataset.arima_model`
               primary_date,
               5 AS preholiday_days,
               1 AS postholiday_days
-            FROM
-              UNNEST(
-                [
-                  DATE('2018-10-31'),
-                  DATE('2019-10-31'),
-                  DATE('2020-10-31'),
-                  DATE('2021-10-31'
 ```

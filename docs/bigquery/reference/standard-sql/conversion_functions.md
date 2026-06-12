@@ -567,12 +567,5 @@ SELECT CAST(CURRENT_DATE() AS STRING FORMAT 'DAY') AS current_day
 ```
 SELECT CAST(
   TIMESTAMP '2008-12-25 00:00:00+00:00'
-  AS STRING FORMAT 'YYYY-MM-DD HH24:MI:SS TZH:TZM') AS date_time_to_string
-
--- Results depend upon where this query was executed.
-/*------------------------------+
- | date_time_to_string          |
- +------------------------------+
- | 2008-12-24 16:00:00 -08:00   |
- +------------------------------*/
+  <
 ```

@@ -15,6 +15,7 @@
 * [May 21 - Securely embed your generative Hex apps](/changelog/2026-05-21)
 * [May 28 - Hex now connects to your apps as an MCP client](/changelog/2026-05-28)
 * [June 2 - Hex is now in Codex](/changelog/2026-06-02)
+* [June 11 - Agent web search, model picker, and Fable 5 support](/changelog/2026-06-11)
 
 ### 2025[​](#2025 "Direct link to 2025")
 

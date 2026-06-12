@@ -25,7 +25,6 @@
 * getListDataConnections
 * postCreateDataConnection
 * patchUpdateDataConnectionSchema
-* postDeactivateUser
 * getGetCollection
 * patchEditCollection
 * getListCollections
@@ -44,6 +43,7 @@
 * getGetChartImageFromLogic
 * getMe
 * getListUsers
+* postDeactivateUser
 
 [API docs by Redocly](https://redocly.com/redoc/)
 

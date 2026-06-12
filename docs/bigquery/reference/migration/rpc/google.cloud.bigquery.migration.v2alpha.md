@@ -233,11 +233,4 @@ The possible dialect options for translation.
 | `mysql_dialect` | `MySQLDialect`  The MySQL dialect |
 | `db2_dialect` | `DB2Dialect`  DB2 dialect |
 | `sqlite_dialect` | `SQLiteDialect`  SQLite dialect |
-| `greenplum_dialect` | `GreenplumDialect`  Greenplum dialect |
-
-## ErrorDetail
-
-Provides details for errors, e.g. issues that where encountered when processing a subtask.
-
-| Fields | |
-| --- | --- |
+| `greenplum_dialect` |  |

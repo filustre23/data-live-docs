@@ -290,12 +290,3 @@ The identifier case type.
 | `ORIGINAL` | Identifiers' cases will be kept as the original cases. |
 | `UPPER` | Identifiers will be in upper cases. |
 | `LOWER` | Identifiers will be in lower cases. |
-
-## IdentifierRewriteMode
-
-The SQL identifier rewrite mode.
-
-| Enums | |
-| --- | --- |
-| `IDENTIFIER_REWRITE_MODE_UNSPECIFIED` | SQL Identifier rewrite mode is unspecified. |
-| `NONE` |

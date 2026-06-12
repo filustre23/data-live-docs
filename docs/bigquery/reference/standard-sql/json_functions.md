@@ -535,18 +535,5 @@ SELECT JSON_ARRAY_APPEND(JSON '{"a": [1]}', '$.a', 2) AS json_data
 In the following example, a value is appended into a JSON null.
 
 ```
-SELECT JSON_ARRAY_APPEND(JSON '{"a": null}', '$.a', 10)
-
-/*------------+
- | json_data  |
- +------------+
- | {"a":[10]} |
- +------------*/
-```
-
-In the following example, path `$.a` isn't an array, so the operation is
-ignored.
-
-```
-SELECT JSON_ARRAY_APPEND
+SELECT JSON_ARRAY_APPEND(
 ```

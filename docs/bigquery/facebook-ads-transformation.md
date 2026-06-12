@@ -380,10 +380,4 @@ Google uses AI technology to translate content into your preferred language. AI 
 |  | 目標 | *字串* | 目標欄位。 |
 | `account_id` | AccountID | *字串* | 從 Account\_ID 對應的廣告帳戶 ID。 |
 | `name` | 名稱 | *字串* | 自訂目標對象的名稱。 |
-| `description` | 說明 | *字串* | 目標對象說明。 |
-| `subtype` | 子類型 | *字串* | 目標對象的子類型類別。 |
-| `time_created` | TimeCreated | *日期時間* | 目標對象建立時間。 |
-| `time_updated` | TimeUpdated | *日期時間* | 目標對象上次更新時間。 |
-| `time_content_updated` | TimeContentUpdated | *日期時間* | 上次修改目標對象內容的時間。 |
-| `rule` | 規則 | *字串* | 用來控管目標對象成員資格的規則。 |
 |  |

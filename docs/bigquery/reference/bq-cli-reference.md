@@ -659,13 +659,4 @@ bq head --max_rows=10 --start_row=50 --selected_fields=field1,field3 \
 :   如要讀取查詢工作的結果，請使用有效工作 ID 指定這個旗標。
 
 **`--max_rows=MAX or -n=MAX`**
-:   一個整數，用來指定顯示資料表資料時要列印的資料列數量上限。預設值為 `100`。
-
-**`--selected_fields=COLUMN_NAMES or -c=COLUMN_NAMES`**
-:   以半形逗號分隔的清單，用來指定顯示資料表資料時要傳回的欄位 (包括巢狀和重複欄位) 子集。如未指定此旗標，系統會傳回所有資料欄。
-
-**`--start_row=START_ROW or -s=START_ROW`**
-:   一個整數，用來指定顯示資料表資料前要略過的資料列數量。預設值為 `0`，資料表資料會從第一列開始。
-
-**`--table={true|false}` 或 `-t={true|false}`**
-:   如果指令引數不是表格或檢視區塊，請設為 `true` 以傳回錯誤。預設值為
+:   一

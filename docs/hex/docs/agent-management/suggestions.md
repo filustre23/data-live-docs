@@ -26,7 +26,7 @@ tip
 
 Not every warning becomes a suggestion. Hex filters for durable, reusable knowledge gaps — things an Admin can fix once to prevent similar issues in future conversations. One-off mistakes and product limitations are filtered out.
 
-## Reviewing a suggestion[​](#reviewing-a-suggestion "Direct link to Reviewing a suggestion")
+## Review a suggestion[​](#review-a-suggestion "Direct link to Review a suggestion")
 
 The Suggestions page lists all suggestions for your workspace, grouped by status. Each row shows a title, status, evidence count, and timestamps. You can sort by evidence count, last updated, or created date to prioritize your review. Evidence count is the number of signals contributing to the suggestion.
 
@@ -66,7 +66,7 @@ For changes to workspace rules or guides managed in Hex, click publish to apply 
 
 Review proposed changes carefully — they're AI-generated recommendations, not automatic fixes, and may need small adjustments before applying.
 
-## Resolving a suggestion[​](#resolving-a-suggestion "Direct link to Resolving a suggestion")
+## Resolve a suggestion[​](#resolve-a-suggestion "Direct link to Resolve a suggestion")
 
 After reviewing the suggestion and making any necessary changes, you can close the suggestion:
 
@@ -85,12 +85,40 @@ You can also manage suggestions programmatically using the [Hex CLI](/docs/api-i
 
 You can find a suggestion's ID by opening it in Context Studio — the ID appears in the sidebar on the right and in the URL.
 
+## Configure suggestions[​](#configure-suggestions "Direct link to Configure suggestions")
+
+Admins can fine tune how the review agent generates suggestions from the gear icon on the top right of the Suggestions tab. Use this to control how sensitive suggestions are to recurring agent interactions, and to give the review agent stylistic and structural guidance for the changes it proposes.
+
+### Thresholds[​](#thresholds "Direct link to Thresholds")
+
+Thresholds set the minimum signal required before the review agent will generate a new suggestion. Higher values require more repeated activity across users and conversations before a suggestion is surfaced while lower values allow suggestions to be generated from narrower signals.
+
+| Setting | Default | Description |
+| --- | --- | --- |
+| **Minimum users** | 2 | The minimum number of distinct users that must encounter a knowledge gap before a suggestion is generated. |
+| **Minimum conversations** | 2 | The minimum number of separate agent conversations that must reflect the gap. |
+| **Minimum sources** | 3 | The minimum number of underlying signals supporting the suggestion. (There may be multiple sources from one conversation). |
+
+### Custom instructions[​](#custom-instructions "Direct link to Custom instructions")
+
+Use the custom instructions field to tailor the suggestions that the review agent proposes. This guidance is applied to every suggestion the review agent generates.
+
+Examples of potential instructions:
+
+* **Asset preferences** — which asset types to favor when proposing changes (e.g., "prefer updating guides over adding column descriptions", "create/update semantic model metadata rather than guides when the gap is metric-related").
+* **Stylistic conventions** — tone, formatting, and naming standards (e.g., "use camelCase for semantic metric names", "write column descriptions as complete sentences ending in a period").
+
+Click **Save** to apply your changes.
+
 #### On this page
 
 * [What are Suggestions?](#what-are-suggestions)
 * [How suggestions are created](#how-suggestions-are-created)
-* [Reviewing a suggestion](#reviewing-a-suggestion)
+* [Review a suggestion](#review-a-suggestion)
   + [Summary and evidence](#summary-and-evidence)
   + [Changes](#changes)
-* [Resolving a suggestion](#resolving-a-suggestion)
+* [Resolve a suggestion](#resolve-a-suggestion)
 * [Manage suggestions with the CLI](#manage-suggestions-with-the-cli)
+* [Configure suggestions](#configure-suggestions)
+  + [Thresholds](#thresholds)
+  + [Custom instructions](#custom-instructions)

@@ -291,10 +291,5 @@ public class QuickstartSample {
 ### Python
 
 ```
-from google.cloud import bigquery_connection_v1 as bq_connection
-
-
-def main(
-    project_id: str = "your-project-id", location: str = "US", transport: str = "grpc"
-) -> None<
+from google.cloud import bigquery_con
 ```

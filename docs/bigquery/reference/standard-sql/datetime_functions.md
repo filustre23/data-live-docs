@@ -590,21 +590,5 @@ FROM table;
 
 /*---------------------+-------------+---------------+
  | datetime            | week_sunday | week_monday   |
- +---------------------+-------------+---------------+
- | 2017-11-05T00:00:00 | 45          | 44            |
- +---------------------+-------------+---------------*/
+ +------------
 ```
-
-## `FORMAT_DATETIME`
-
-```
-FORMAT_DATETIME(format_string, datetime_expr)
-```
-
-**Description**
-
-Formats a `DATETIME` value according to a specified format string.
-
-**Definitions**
-
-* `format_string`: A

@@ -244,11 +244,3 @@ Job configuration. See the [Jobs](https://cloud.google.com/bigquery/docs/referen
 | `loadConfig` | `object (BigQueryAuditMetadata.JobConfig.Load)`  Load job information. |
 | `extractConfig` | `object (BigQueryAuditMetadata.JobConfig.Extract)`  Extract job information. |
 | `tableCopyConfig` | `object (BigQueryAuditMetadata.JobConfig.TableCopy)`  TableCopy job information. |
-
-## BigQueryAuditMetadata.JobConfig.Query
-
-Query job configuration.
-
-| JSON representation |
-| --- |
-| ``` {   "query": string,   "queryTruncated": boolean,   "destinationTable": string, ``` |

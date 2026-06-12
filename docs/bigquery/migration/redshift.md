@@ -336,5 +336,5 @@ public class CreateRedshiftTransfer {
     String vpcAndReserveIpRange = "MY_VPC_AND_IP_RANGE";
     Map<String, Value> params = new HashMap<>();
     params.put("jdbc_url", Value.newBuilder().setStringValue(jdbcUrl).build());
-    params.put("database_username", Value.newBuilder().
+    params.put
 ```

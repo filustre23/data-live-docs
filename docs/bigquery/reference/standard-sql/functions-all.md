@@ -253,7 +253,3 @@ This topic contains all functions supported by GoogleSQL for BigQuery.
 | [`PATH_LAST`](/bigquery/docs/reference/standard-sql/graph-sql-functions#path_last) | Gets the last node in a graph path. |
 | [`PATH_LENGTH`](/bigquery/docs/reference/standard-sql/graph-sql-functions#path_length) | Gets the number of edges in a graph path. |
 | [`PERCENT_RANK`](/bigquery/docs/reference/standard-sql/numbering_functions#percent_rank) | Gets the percentile rank (from 0 to 1) of each row within a window. |
-| [`PERCENTILE_CONT`](/bigquery/docs/reference/standard-sql/navigation_functions#percentile_cont) | Computes the specified percentile for a value, using linear interpolation. |
-| [`PERCENTILE_CONT` (Differential Privacy)](/bigquery/docs/reference/standard-sql/aggregate-dp-functions#dp_percentile_cont) | `DIFFERENTIAL_PRIVACY`-supported `PERCENTILE_CONT`.   Computes a differentially-private percentile across privacy unit columns in a query with a `DIFFERENTIAL_PRIVACY` clause. |
-| [`PERCENTILE_DISC`](/bigquery/docs/reference/standard-sql/navigation_functions#percentile_disc) | Computes the specified percentile for a discrete value. |
-|  |

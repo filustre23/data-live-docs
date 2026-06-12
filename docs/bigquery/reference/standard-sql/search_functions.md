@@ -521,9 +521,4 @@ SELECT
   -- The tokens in `data_to_s>earch` are `ant`, `apple`, and `avocado`.>
   -- The searchable tokens in `query_string` are `ant` and `apple` and they
   -- must appear in that exact order in `data_to_search`.
-  SEARCH(
-    R'ant orange apple avocado',
-    R'"ant apple"',
-    analyzer='PATTERN_ANALYZER',
-    analyzer_options='{"patterns": ["a[a-z]"]}') AS e
 ```

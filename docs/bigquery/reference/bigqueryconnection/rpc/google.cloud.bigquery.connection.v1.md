@@ -228,11 +228,4 @@ Network related configuration.
 | Fields | |
 | --- | --- |
 | Union field `network`.  `network` can be only one of the following: | |
-| `private_service_connect` | `PrivateServiceConnect`  Private Service Connect networking configuration. |
-
-## PrivateServiceConnect
-
-Private Service Connect configuration.
-
-|
-|  |
+| `private_service_connect` |  |

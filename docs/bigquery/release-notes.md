@@ -27,6 +27,23 @@ To get the latest product updates delivered to you, add the URL of this page to 
 reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators), or add the
 [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## June 11, 2026
+
+Feature
+
+You can [monitor performance, analyze capacity, and optimize costs with Gemini Cloud Assist in BigQuery](/bigquery/docs/use-cloud-assist#administer_bigquery).
+This feature is in [Preview](https://cloud.google.com/products#product-launch-stages).
+
+Feature
+
+Support for the
+[`AI.KEY_DRIVERS` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-key-drivers)
+is restored. You can use the
+`AI.KEY_DRIVERS` function to identify segments of data that cause statistically significant changes to a summable metric.
+
+This feature is in
+[Preview](https://cloud.google.com/products/#product-launch-stages).
+
 ## June 10, 2026
 
 Feature
@@ -4260,17 +4277,3 @@ Libraries
 ##### Bug Fixes
 
 * **bigquery:** Broken github.com/envoyproxy/go-control-plane/envoy dep ([#11556](https://github.com/googleapis/google-cloud-go/issues/11556)) ([e70d63b](https://github.com/googleapis/google-cloud-go/commit/e70d63bbc267c3b166bf264670b8b282a3651cc5)), refs [#11542](https://github.com/googleapis/google-cloud-go/issues/11542)
-
-Libraries
-
-### Go
-
-#### [1.66.1](https://github.com/googleapis/google-cloud-go/compare/bigquery/v1.66.0...bigquery/v1.66.1) (2025-02-03)
-
-##### Bug Fixes
-
-* **bigquery:** Move MaxStaleness field to table level ([#10066](https://github.com/googleapis/google-cloud-go/issues/10066)) ([164492d](https://github.com/googleapis/google-cloud-go/commit/164492d749ef0eeaf03a93d94b4a2c6c407eb4d6))
-
-Feature
-
-BigQuery data preparation provides [context-aw](/bigquery/docs/data-prep-get-suggestions#add-join)

@@ -946,23 +946,5 @@ HPARAM_TUNING_OBJECTIVES = { 'PRECISION' | 'RECALL' | 'ACCURACY' | 'F1_SCORE' | 
 For `RANDOM_FOREST_REGRESSOR` models:
 
 ```
-HPARAM_TUNING_OBJECTIVES = { 'MEAN_ABSOLUTE_ERROR' | 'MEAN_SQUARED_ERROR' | 'MEAN_SQUARED_LOG_ERROR' | 'MEDIAN_ABSOLUTE_ERROR' | 'R2_SCORE' | 'EXPLAINED_VARIANCE' }
+HPARAM_TUNING_OBJECTIVES = { 'MEAN_ABSOLUTE_ERROR' | 'MEAN_SQUARED_ERROR' | 'MEAN_SQUARED_LOG_ERROR' | 'MEDIAN_ABSOLUTE_ERROR' | 'R2_SCORE' | 'EXPLAINED_VARIANCE'
 ```
-
-**Description**
-The hyperparameter tuning objective for the model; only one objective is
-supported. If you specify a value for this option, you must also specify a
-value for [`NUM_TRIALS`](#num_trials).
-
-**Arguments**
-
-The possible objectives are a subset of the
-[model evaluation metrics](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate#output)
-for the model type. If you aren't running hyperparameter tuning, or if you are
-and you don't specify an objective, the default objective
-is used. For `RANDOM_FOREST_CLASSIFIER` models, the default is `ROC_AUC`.
-For `RANDOM_FOREST_REGRESSOR` models, the default is `R2_SCORE`.
-
-### `MODEL_REGISTRY`
-
-The

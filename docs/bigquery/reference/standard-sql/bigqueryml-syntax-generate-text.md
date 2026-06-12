@@ -911,19 +911,3 @@ STRUCT(
 The model and input table must be in the same region.
 
 ## Output
-
-`ML.GENERATE_TEXT` returns the input table plus the following columns:
-
-### Gemini API models
-
-* `ml_generate_text_result`:
-  This is the
-  [JSON response](/vertex-ai/generative-ai/docs/reference/rest/v1/GenerateContentResponse)
-  from the
-  [`projects.locations.endpoints.generateContent`](/vertex-ai/generative-ai/docs/reference/rest/v1/projects.locations.endpoints/generateContent)
-  call to the model. The generated text is in the `text` element. If you
-  specified the `safety_settings` argument in the `ML.GENERATE_TEXT`
-  function, the
-  [safety attributes](/vertex-ai/docs/generative-ai/multimodal/configure-safety-attributes)
-  are in the `safety_ratings` element. This column is returned when
-  `flatten_json_output`

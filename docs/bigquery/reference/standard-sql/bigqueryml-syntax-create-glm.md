@@ -962,19 +962,4 @@ For information about supported locations, see
 
 ## Limitations
 
-`CREATE MODEL` statements must comply with the following rules:
-
-* For linear regression models, the `label` column must be real-valued (the
-  column values cannot be +/- infinity or `NaN`).
-* For logistic regression models, the `label` column can contain up
-  to 50 unique values; that is, the number of classes is less than or equal to 50. If you need to classify into more than 50 labels, contact [bqml-feedback@google.com](mailto:bqml-feedback@google.com).
-
-## Examples
-
-The following examples create models named `mymodel` in `mydataset` in your
-default project.
-
-### Train a linear regression model
-
-The following example creates and trains a linear regression model. The learn
-rate is set to `0.15`, the L1 regularization is set to `1`
+`CREATE MODEL` statements must comply with th

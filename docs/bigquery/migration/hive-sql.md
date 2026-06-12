@@ -302,8 +302,4 @@ BigQuery 提供下列其他字串函式：
 | `POWER` | `POWER, POW` |
 | `RAND` | `RAND` |
 | `ROUND` | `ROUND` |
-| `SIGN` | `SIGN` |
-| `SIN` | `SIN` |
-| `SQRT` | `SQRT` |
-| `HASH` | `FARM_FINGERPRINT, MD5, SHA1, SHA256, SHA512` |
-|  |
+| `SIGN` |

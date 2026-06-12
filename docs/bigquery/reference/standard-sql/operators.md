@@ -532,13 +532,4 @@ SELECT
 /*-------------------------+--------------------------------+
  | date_plus               | time_minus                     |
  +-------------------------+--------------------------------+
- | 2021-04-21 01:00:00     | 2021-05-02 00:00:52.345+00     |
- +-------------------------+--------------------------------*/
-```
-
-**Multiplication and division**
-
-```
-interval_expression * integer_expression = INTERVAL
-interval_expression / integer_expression =
 ```

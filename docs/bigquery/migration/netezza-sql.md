@@ -322,14 +322,4 @@ IBM Netezza 資料倉儲技術專為與 Netezza 專屬的 SQL 語法搭配使用
 |  | [`TO_HEX`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions?hl=zh-tw#to_hex) |
 | `TRANSLATE` |  |
 |  | [`TRIM`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions?hl=zh-tw#trim) |
-| `UPPER` | [`UPPER`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions?hl=zh-tw#upper) |
-| `UNICODE` |  |
-| `UNICODES` |  |
-
-### 數學函式
-
-| **Netezza** | **BigQuery** |
-| --- | --- |
-| `ABS` | [`ABS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions?hl=zh-tw#abs) |
-| `ACOS` | [`ACOS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions?hl=zh-tw#acos) |
-|  |  |
+| `UPPER` |  |

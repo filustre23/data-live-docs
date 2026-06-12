@@ -197,5 +197,4 @@ Defines the properties and custom parameters for a data source.
 | `supports_custom_schedule` | `bool`  Specifies whether the data source supports a user defined schedule, or operates on the default schedule. When set to `true`, user can override default schedule. |
 | `parameters[]` | `DataSourceParameter`  Data source parameters. |
 | `help_url` | `string`  Url for the help document for this data source. |
-| `authorization_type` | `AuthorizationType`  Indicates the type of authorization. |
-| `data_refresh_type` | `DataRefreshType`  Specifies whether the data source supports automatic data refresh for the past few days, and how it's supported. For some data sources, data |
+|  |

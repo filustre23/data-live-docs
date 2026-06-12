@@ -401,11 +401,5 @@ The following example loads an Avro file into a table. Avro is a
 self-describing format, so BigQuery infers the schema.
 
 ```
-LOAD DATA INTO mydataset.table1
-  FROM FILES(
-    format='AVRO',
-    uris = ['gs://bucket/path/file.avro']
-  )
+LOAD DATA
 ```
-
-The following example loads two CSV files into a table, using s

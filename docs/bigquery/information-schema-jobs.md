@@ -311,10 +311,4 @@ GROUP BY priority;
 ```
 SELECT
   user_email AS user,
-  COUNT(*) num_jobs
-FROM
-  `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS
-WHERE
-  job_type = 'LOAD'
-GROUP
 ```

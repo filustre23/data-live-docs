@@ -307,22 +307,3 @@ the calculation.
 
 To learn more about the `OVER` clause and how to use it, see
 [Window function calls](/bigquery/docs/reference/standard-sql/window-function-calls).
-
-
-
-**Supported Argument Types**
-
-`value_expression` can be any data type that an expression can return.
-
-**Return Data Type**
-
-Same type as `value_expression`.
-
-**Examples**
-
-The following example computes the slowest time for each division.
-
-```
-WITH finishers AS
- (SELECT 'Sophia Liu' as
-```

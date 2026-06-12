@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-06-11T15:43+00:00_
+_Generated 2026-06-12T02:13+00:00_
 
-**9 sources, 5251 topics total**
+**9 sources, 5268 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_1533 topics_
+_1544 topics_
 
 - `anthropic-sdk/agents-and-tools/agent-skills/best-practices`
 - `anthropic-sdk/agents-and-tools/agent-skills/enterprise`
@@ -413,6 +413,8 @@ _1533 topics_
 - `anthropic-sdk/api/compliance/apps/projects`
 - `anthropic-sdk/api/compliance/apps/projects/attachments`
 - `anthropic-sdk/api/compliance/apps/projects/attachments/list`
+- `anthropic-sdk/api/compliance/apps/projects/collaborators`
+- `anthropic-sdk/api/compliance/apps/projects/collaborators/list`
 - `anthropic-sdk/api/compliance/apps/projects/delete`
 - `anthropic-sdk/api/compliance/apps/projects/documents`
 - `anthropic-sdk/api/compliance/apps/projects/documents/delete`
@@ -420,6 +422,11 @@ _1533 topics_
 - `anthropic-sdk/api/compliance/apps/projects/documents/retrieve`
 - `anthropic-sdk/api/compliance/apps/projects/list`
 - `anthropic-sdk/api/compliance/apps/projects/retrieve`
+- `anthropic-sdk/api/compliance/code`
+- `anthropic-sdk/api/compliance/code/artifacts`
+- `anthropic-sdk/api/compliance/code/artifacts/delete`
+- `anthropic-sdk/api/compliance/code/artifacts/list`
+- `anthropic-sdk/api/compliance/code/artifacts/retrieve_version`
 - `anthropic-sdk/api/compliance/groups`
 - `anthropic-sdk/api/compliance/groups/list`
 - `anthropic-sdk/api/compliance/groups/members`
@@ -432,6 +439,8 @@ _1533 topics_
 - `anthropic-sdk/api/compliance/organizations/roles/permissions`
 - `anthropic-sdk/api/compliance/organizations/roles/permissions/list`
 - `anthropic-sdk/api/compliance/organizations/roles/retrieve`
+- `anthropic-sdk/api/compliance/organizations/settings`
+- `anthropic-sdk/api/compliance/organizations/settings/retrieve`
 - `anthropic-sdk/api/compliance/organizations/users`
 - `anthropic-sdk/api/compliance/organizations/users/list`
 - `anthropic-sdk/api/csharp/beta`
@@ -1496,6 +1505,7 @@ _1533 topics_
 - `anthropic-sdk/build-with-claude/working-with-messages`
 - `anthropic-sdk/get-started`
 - `anthropic-sdk/intro`
+- `anthropic-sdk/manage-claude/access-transparency`
 - `anthropic-sdk/manage-claude/admin-api`
 - `anthropic-sdk/manage-claude/api-and-data-retention`
 - `anthropic-sdk/manage-claude/authentication`
@@ -1515,6 +1525,7 @@ _1533 topics_
 - `anthropic-sdk/manage-claude/data-residency`
 - `anthropic-sdk/manage-claude/rate-limits-api`
 - `anthropic-sdk/manage-claude/usage-cost-api`
+- `anthropic-sdk/manage-claude/wif-admin-api`
 - `anthropic-sdk/manage-claude/wif-providers/aws`
 - `anthropic-sdk/manage-claude/wif-providers/azure`
 - `anthropic-sdk/manage-claude/wif-providers/gcp`
@@ -3243,7 +3254,7 @@ _146 topics_
 
 Upstream: <https://docs.getdbt.com/docs/>
 
-_1063 topics_
+_1067 topics_
 
 - `dbt-core/best-practices/best-practice-workflows`
 - `dbt-core/best-practices/clone-incremental-models`
@@ -3309,7 +3320,6 @@ _1063 topics_
 - `dbt-core/community/resources/speaking-at-a-meetup`
 - `dbt-core/community/resources/viewpoint`
 - `dbt-core/docs/about-dbt-extension`
-- `dbt-core/docs/about-dbt-install`
 - `dbt-core/docs/about-dbt-lsp`
 - `dbt-core/docs/about-setup`
 - `dbt-core/docs/build/about-metricflow`
@@ -3541,6 +3551,8 @@ _1063 topics_
 - `dbt-core/docs/get-started-dbt`
 - `dbt-core/docs/install-dbt-extension`
 - `dbt-core/docs/introduction`
+- `dbt-core/docs/local/about-local`
+- `dbt-core/docs/local/configure-environment-variables`
 - `dbt-core/docs/local/connect-data-platform/about-dbt-connections`
 - `dbt-core/docs/local/connect-data-platform/alloydb-setup`
 - `dbt-core/docs/local/connect-data-platform/athena-setup`
@@ -4064,6 +4076,9 @@ _1063 topics_
 - `dbt-core/reference/global-configs/about-global-configs`
 - `dbt-core/reference/global-configs/adapter-behavior-changes`
 - `dbt-core/reference/global-configs/behavior-changes`
+- `dbt-core/reference/global-configs/behavior-flag-introduction`
+- `dbt-core/reference/global-configs/behavior-flag-maturity`
+- `dbt-core/reference/global-configs/behavior-flag-removed`
 - `dbt-core/reference/global-configs/bigquery-changes`
 - `dbt-core/reference/global-configs/cache`
 - `dbt-core/reference/global-configs/command-line-options`
@@ -4473,7 +4488,7 @@ _153 topics_
 
 Upstream: <https://learn.hex.tech/>
 
-_359 topics_
+_361 topics_
 
 - `hex/changelog`
 - `hex/changelog/2020-12-17`
@@ -4578,6 +4593,7 @@ _359 topics_
 - `hex/changelog/2026-05-21`
 - `hex/changelog/2026-05-28`
 - `hex/changelog/2026-06-02`
+- `hex/changelog/2026-06-11`
 - `hex/changelog/archive`
 - `hex/changelog/page/10`
 - `hex/changelog/page/11`
@@ -4587,6 +4603,7 @@ _359 topics_
 - `hex/changelog/page/15`
 - `hex/changelog/page/16`
 - `hex/changelog/page/17`
+- `hex/changelog/page/18`
 - `hex/changelog/page/2`
 - `hex/changelog/page/3`
 - `hex/changelog/page/4`

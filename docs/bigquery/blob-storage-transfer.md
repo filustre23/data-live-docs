@@ -242,9 +242,5 @@ public class CreateAzureBlobStorageTransfer {
       String projectId, String displayName, String datasetId, Map<String, Value> params)
       throws IOException {
     TransferConfig transferConfig =
-        TransferConfig.newBuilder()
-            .setDestinationDatasetId(datasetId)
-            .setDisplayName(displayName)
-            .setDataSourceId("azure_blob_storage")
-            .setP
+        TransferConfig.newBuilder
 ```

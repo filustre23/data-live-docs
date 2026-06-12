@@ -257,6 +257,4 @@ The possible dialect options for translation.
 | `bigqueryDialect` | `object (BigQueryDialect)`  The BigQuery dialect |
 | `hiveqlDialect` | `object (HiveQLDialect)`  The HiveQL dialect |
 | `redshiftDialect` | `object (RedshiftDialect)`  The Redshift dialect |
-| `teradataDialect` | `object (TeradataDialect)`  The Teradata dialect |
-| `oracleDialect` | `object (OracleDialect)`  The Oracle dialect |
-| `sparksqlDialect` | `object (SparkSQLDialect)`  The SparkSQL dialect< |
+| `teradataDialect` | `object (` |

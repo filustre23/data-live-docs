@@ -696,11 +696,5 @@ following:
 ```
 SELECT emp_id, session_range AS normalized FROM (
   SELECT emp_id, session_range
-  FROM RANGE_SESSIONIZE(
-    TABLE mydataset.my_sessionized_range_table,
-    'duration',
-    ['emp_id'],
-    'MEETS')
-)
-GROUP BY emp_id
+  FROM
 ```

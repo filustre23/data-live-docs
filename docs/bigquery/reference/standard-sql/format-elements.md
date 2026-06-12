@@ -510,22 +510,3 @@ SELECT CAST(TIME '21:30:00' AS STRING FORMAT 'HH12') AS date_time_to_string;
 ```
 CAST(expression AS STRING FORMAT format_string_expression)
 ```
-
-Casts a data type that contains the minute part to a string. Includes
-format elements, which provide instructions for how to conduct the cast.
-
-* `expression`: This expression contains the data type with the minute
-  that you need to format.
-* `format_string_expression`: A string which contains format elements, including
-  the minute format element.
-
-These data types include a minute part:
-
-* `TIME`
-* `DATETIME`
-* `TIMESTAMP`
-
-If `expression` or `format_string_expression` is `NULL` the return value is
-`NULL`. If `format_string_expression` is an empty string, the output is an
-empty string. An error is generated if a value that isn't a supported
-format element appears in

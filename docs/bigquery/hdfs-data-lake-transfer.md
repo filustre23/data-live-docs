@@ -446,10 +446,4 @@ JSON 檔案中的 `condition` 欄位支援下列值，每個值都有 `partition
 
    # This runs AFTER parsing arguments to ensure no placeholder values are left.
    if [[ "$DUMPER_EXECUTABLE" == "DUMPER_PATH"* || "$GCS_BASE_PATH" == "gs://PATH_TO_DUMPER_OUTPUT" || "$LOCAL_BASE_DIR" == "LOCAL_BASE_DIRECTORY_PATH" ]]; then
-     echo "ERROR: One or more configuration variables have not been set. Please provide them as command-line arguments or edit the script." >&2
-     echo "Run with --help for more information." >&2
-     exit 1
-   fi
-
-   # If Kerberos authentication is
    ```

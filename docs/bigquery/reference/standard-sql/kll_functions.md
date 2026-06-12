@@ -501,28 +501,4 @@ inputs are greater than or equal to *v*. This is an aggregate function.
 If the merged sketches were initialized with different precisions, the precision
 is downgraded to the lowest precision involved in the merge — except if the
 aggregations are small enough to still capture the input exactly — then the
-mergee's precision is maintained.
-
-Returns an error if the underlying type of one or more input sketches isn't
-compatible with type `INT64`.
-
-Returns an error if the input isn't a valid KLL quantiles sketch.
-
-**Supported Argument Types**
-
-* `sketch`: `BYTES` KLL sketch initialized on `INT64` data type
-* `phi`: `FLOAT64` between 0 and 1
-
-**Return Type**
-
-`INT64`
-
-**Example**
-
-The following query initializes two KLL sketches from five rows of data each.
-Then it merges these two sketches and returns the value of the ninth decile or
-90th percentile of the merged sketch.
-
-```
-SELECT
-```
+mergee's pr

@@ -500,10 +500,4 @@ that can be queued per project.
 
 ##### 避免大量互動式查詢受到限制
 
-執行大量互動式查詢時，這些查詢可能會達到佇列中互動式查詢數量的[上限](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#query_jobs)。這項上限無法提高。
-
-如果您執行大量互動式查詢，特別是在涉及自動觸發程序 (例如 Cloud Run 函式) 的情況下，請先[監控](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer?hl=zh-tw)並停止導致錯誤的 Cloud Run 函式，然後使用下列其中一種建議策略，避免超出這項限制：
-
-* [增加預訂中的運算單元](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#estimate-slots)。如果工作負載需求量高，請從隨選 (依查詢付費模式)[切換](https://docs.cloud.google.com/bigquery/docs/reservations-intro?hl=zh-tw#choosing_a_model)至預留 (以容量為準的模式)。
-* 在互動式查詢之間分散工作負載。
-* 因為批次查詢的佇列長度比互動式查詢長，請使用[批次優先順序工作](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#batch)，而非互動式
+執行大量互動式查詢時，這些查詢可能會達

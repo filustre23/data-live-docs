@@ -247,15 +247,4 @@ This type has no fields.
 
 The dialect definition for Greenplum.
 
-## HiveQLDialect
-
-This type has no fields.
-
-The dialect definition for HiveQL.
-
-## ListMigrationSubtasksRequest
-
-A request to list previously created migration subtasks.
-
-| Fields | |
-| --- | --- |
+## Hive

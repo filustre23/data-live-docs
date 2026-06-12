@@ -983,18 +983,4 @@ SELECT TEXT_ANALYZE(
   analyzer=>'LOG_ANALYZER',
   analyzer_options=>'''
   {
-    "token_filters": [
-      {
-        "stop_words": ["they", "pie"]
-      }
-    ]
-  }
-  '''
-) AS results
-
-/*---------------------------------------------------+
- | results                                           |
- +---------------------------------------------------+
- | ['I', 'like', 'you', 'like', 'like, '2', 'PIEs' ] |
- +---------------------------------------------------*/
 ```

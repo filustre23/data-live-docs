@@ -904,24 +904,3 @@ The following types of models are classification models:
 * `roc_auc`: a `FLOAT64` value that contains the
   [area under the receiver operating characteristic curve](https://en.wikipedia.org/wiki/Receiver_operating_characteristic#Area_under_the_curve)
   for the model.
-
-### Regression
-
-The following types of models are regression models:
-
-* Linear regression
-* Boosted tree regressor
-* Random forest regressor
-* Deep neural network (DNN) regressor
-* Wide & Deep regressor
-* AutoML Tables regressor
-
-`ML.EVALUATE` returns the following columns for regression models:
-
-* `trial_id`: an `INT64` value that identifies the hyperparameter tuning trial.
-  This column is only returned if you ran hyperparameter tuning when creating the
-  model. This column doesn't apply for AutoML Tables models.
-* `mean_absolute_error`: a `FLOAT64` value that contains the
-  [mean absolute error](https://en.wikipedia.org/wiki/Mean_absolute_error) for
-  the model.
-* `mean_squared_error`: a

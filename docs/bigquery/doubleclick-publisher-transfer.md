@@ -257,6 +257,4 @@ public class CreateAdManagerTransfer {
               .setParent(parent.toString())
               .setTransferConfig(transferConfig)
               .build();
-      TransferConfig config = client.createTransferConfig(request);
-      System.out.println("Ad manager transfer created successfully :"
 ```

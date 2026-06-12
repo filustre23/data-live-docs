@@ -633,16 +633,4 @@ ML.GENERATE_EMBEDDING(
 
   + If `flatten_json_output` is `FALSE`, this is the
     [JSON response](/vertex-ai/docs/reference/rest/v1/projects.locations.endpoints/predict#response-body)
-    from the [`projects.locations.endpoints.predict`](/vertex-ai/docs/reference/rest/v1/projects.locations.endpoints/predict) call to the model. The
-    generated embeddings are in the `textEmbedding`, `imageEmbedding`, or `videoEmbeddings`
-    element, depending on the type of input data you
-    used.
-  + If `flatten_json_output` is `TRUE`, this is an `ARRAY<FLOAT64>`
-    value that contains the generated embeddings.
-* `ml_generate_embedding_status`: a `STRING` value that contains the API
-  response status for the corresponding row. This value is empty if the
-  operation was successful.
-* Additional output fields depend on which embedding model you use:
-
-  + The `gemini-embedding-2-preview` model also outputs the following
-    field:
+    from the

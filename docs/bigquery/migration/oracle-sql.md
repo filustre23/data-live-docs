@@ -219,10 +219,4 @@ BigQuery 提供下列其他匯總函式：
 | `FEATURE_ID` | BigQuery 中沒有隱含的資料表。考慮使用 UDF 和 BigQuery ML |
 | `FEATURE_SET` | BigQuery 中沒有隱含的資料表。考慮使用 UDF 和 BigQuery ML |
 | `FEATURE_VALUE` | BigQuery 中沒有隱含的資料表。考慮使用 UDF 和 BigQuery ML |
-| `FIRST_VALUE` | `FIRST_VALUE` |
-| `HIER_CAPTION` | BigQuery 不支援階層式查詢。 |
-| `HIER_CHILD_COUNT` | BigQuery 不支援階層式查詢。 |
-| `HIER_COLUMN` | BigQuery 不支援階層式查詢。 |
-| `HIER_DEPTH` | BigQuery 不支援階層式查詢。 |
-| `HIER_DESCRIPTION` | BigQuery 不支援階層式查詢。 |
-|<
+|  |
