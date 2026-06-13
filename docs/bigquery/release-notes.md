@@ -27,6 +27,17 @@ To get the latest product updates delivered to you, add the URL of this page to 
 reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators), or add the
 [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## June 12, 2026
+
+Feature
+
+[BigQuery AI functions](/bigquery/docs/generative-ai-overview) can use
+[`ObjectRef` values](/bigquery/docs/work-with-objectref) directly as input,
+without calling the `OBJ.GET_ACCESS_URL` function.
+This feature is
+[generally available](https://cloud.google.com/products#product-launch-stages)
+(GA).
+
 ## June 11, 2026
 
 Feature
@@ -4273,7 +4284,3 @@ Libraries
 ### Go
 
 #### [1.66.2](https://github.com/googleapis/google-cloud-go/compare/bigquery/v1.66.1...bigquery/v1.66.2) (2025-02-04)
-
-##### Bug Fixes
-
-* **bigquery:** Broken github.com/envoyproxy/go-control-plane/envoy dep ([#11556](https://github.com/googleapis/google-cloud-go/issues/11556)) ([e70d63b](https://github.com/googleapis/google-cloud-go/commit/e70d63bbc267c3b166bf264670b8b282a3651cc5)), refs [#11542](https://github.com/googleapis/google-cloud-go/issues/11542)

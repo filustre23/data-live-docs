@@ -26,12 +26,11 @@ new queries, we recommend that you use `AI.GENERATE_EMBEDDING` instead.
 You can create embeddings for the following types of data:
 
 * Text data from standard tables.
-* Visual data that is returned as [`ObjectRefRuntime`](/bigquery/docs/reference/standard-sql/objectref_functions#objectrefruntime)
-  values by the
-  [`OBJ.GET_ACCESS_URL` function](/bigquery/docs/reference/standard-sql/objectref_functions#objget_access_url).
-  You can use
-  [`ObjectRef`](/bigquery/docs/work-with-objectref)
-  values from standard tables as input to the `OBJ.GET_ACCESS_URL` function.
+* [`ObjectRef` values](/bigquery/docs/work-with-objectref).
+  You can create an `ObjectRef` value by passing a Cloud Storage URI
+  to the
+  [`OBJ.MAKE_REF` function](/bigquery/docs/reference/standard-sql/objectref_functions#objmake_ref)
+  or using an `ObjectRef` column from a table.
 * Visual data in [object tables](/bigquery/docs/object-table-introduction).
 * Combinations of unstructured data, including text, images, audio, video, and
   PDFs, represented by a `STRUCT` that contains
@@ -633,4 +632,4 @@ ML.GENERATE_EMBEDDING(
 
   + If `flatten_json_output` is `FALSE`, this is the
     [JSON response](/vertex-ai/docs/reference/rest/v1/projects.locations.endpoints/predict#response-body)
-    from the
+    from the [`projects.locations.endpoints`](/vertex-ai/docs/reference/rest/v1/projects.locations.endpoints/predict)

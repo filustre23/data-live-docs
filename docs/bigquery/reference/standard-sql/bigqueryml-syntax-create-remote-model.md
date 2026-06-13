@@ -148,9 +148,9 @@ ENDPOINT = 'vertex_ai_llm_endpoint'
 
 The Agent Platform endpoint for the remote model to use. You can
 specify the name of the Agent Platform model, for example
-`gemini-2.5-flash`, or you can specify the Agent Platform model's
+`gemini-2.5-pro`, or you can specify the Agent Platform model's
 endpoint URL, for example
-`https://europe-west6-aiplatform.googleapis.com/v1/projects/myproject/locations/europe-west6/publishers/google/models/gemini-2.5-flash`. If you specify the model name, BigQuery ML
+`https://europe-west6-aiplatform.googleapis.com/v1/projects/myproject/locations/europe-west6/publishers/google/models/gemini-2.5-pro`. If you specify the model name, BigQuery ML
 automatically identifies and uses the full endpoint of the
 Agent Platform model based on the location of the dataset in which
 you create the model.
@@ -178,7 +178,7 @@ you can specify the
 as shown in the following example:
 
 ```
-  https://aiplatform.googleapis.com/v1/projects/test-project/locations/global/publishers/google/models/gemini-2.5-flash
+  https://aiplatform.googleapis.com/v1/projects/test-project/locations/global/publishers/google/models/gemini-2.5-pro
 ```
 
 Using the global endpoint for your requests can improve overall
@@ -300,7 +300,7 @@ Gemini model:
 ```
 CREATE OR REPLACE MODEL `mydataset.gemini_model`
 REMOTE WITH CONNECTION DEFAULT
-OPTIONS(ENDPOINT = 'gemini-2.5-flash');
+OPTIONS(ENDPOINT = 'gemini-2.5-pro');
 ```
 
 ### Create a partner model that uses the default connection
@@ -329,11 +329,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-06-11 UTC.
+Last updated 2026-06-12 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-06-11 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-06-12 UTC."],[],[]]

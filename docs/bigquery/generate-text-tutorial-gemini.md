@@ -10,8 +10,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 使用 Gemini 模型和 AI.GENERATE\_TEXT 函式生成文字 透過集合功能整理內容 你可以依據偏好儲存及分類內容。
 
-本教學課程說明如何建立以 [`gemini-2.5-flash` 模型](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models?hl=zh-tw#gemini-models)為基礎的[遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw)，
-以及如何使用 [`AI.GENERATE_TEXT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text?hl=zh-tw)來擷取關鍵字和執行情緒分析。
+本教學課程說明如何建立以 [`gemini-2.5-flash` 模型](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models?hl=zh-tw#gemini-models)為基礎的[遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw)，以及如何使用 [`AI.GENERATE_TEXT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text?hl=zh-tw)擷取關鍵字並執行情緒分析。
 
 ## 費用
 
@@ -115,7 +114,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    2. 選取專案。
    3. 按一下person\_add「Grant access」(授予存取權)。
    4. 在「New principals」(新增主體) 欄位中，輸入您的使用者 ID。 這通常是指 Google 帳戶的電子郵件地址。
-   5. 按一下「選取角色」，然後搜尋角色。
+   5. 按一下「Select a role」(選取角色)，然後搜尋角色。
    6. 如要授予其他角色，請按一下add「Add another role」(新增其他角色)，然後新增其他角色。
    7. 按一下「Save」(儲存)。
 
@@ -133,9 +132,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 
   **選取或建立專案所需的角色**
 
-  * **選取專案**：選取專案時，不需要具備特定 IAM 角色，只要您已獲授角色，即可選取任何專案。
+  * **選取專案**：選取專案時，不需要具備特定 IAM 角色，只要您在專案中獲派角色，即可選取該專案。
   * **建立專案**：如要建立專案，您需要「專案建立者」角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
-  **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，而不要選取現有專案。完成這些步驟後，您就可以刪除專案，並移除與該專案相關聯的所有資源。
+  **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，而不要選取現有專案。因此您在完成這些步驟之後，就可以刪除專案，並移除與該專案相關聯的所有資源。
   * 建立 Google Cloud 專案：
 
     ```
@@ -172,9 +171,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 
   **選取或建立專案所需的角色**
 
-  * **選取專案**：選取專案時，不需要具備特定 IAM 角色，只要您已獲授角色，即可選取任何專案。
+  * **選取專案**：選取專案時，不需要具備特定 IAM 角色，只要您在專案中獲派角色，即可選取該專案。
   * **建立專案**：如要建立專案，您需要「專案建立者」角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
-  **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，而不要選取現有專案。完成這些步驟後，您就可以刪除專案，並移除與該專案相關聯的所有資源。
+  **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，而不要選取現有專案。因此您在完成這些步驟之後，就可以刪除專案，並移除與該專案相關聯的所有資源。
   * 建立 Google Cloud 專案：
 
     ```
@@ -211,7 +210,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    更改下列內容：
 
    * `PROJECT_ID`：專案 ID。
-   * `USER_IDENTIFIER`：使用者帳戶的 ID。 例如：`myemail@example.com`。
+   * `USER_IDENTIFIER`：使用者帳戶的 ID。 `myemail@example.com`。
    * `ROLE`：授予使用者帳戶的 IAM 角色。
 
 ## 建立資料集
@@ -224,7 +223,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    [前往 BigQuery 頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 在「Explorer」窗格中，按一下專案名稱。
-3. 依序點按 more\_vert「View actions」(查看動作) >「Create dataset」(建立資料集)
+3. 依序點按 more\_vert「View actions」(查看動作) >「Create dataset」(建立資料集)。
 4. 在「建立資料集」頁面中，執行下列操作：
 
    * 在「Dataset ID」(資料集 ID) 中輸入 `bqml_tutorial`。
@@ -263,7 +262,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 建立連線
 
-在建立資料集的 `US` 多區域中，建立 [Cloud 資源連線](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection?hl=zh-tw)。然後取得連線的服務帳戶。
+在建立資料集的 `US` 多區域中，建立 [Cloud 資源連線](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection?hl=zh-tw)，然後取得連線的服務帳戶。
 
 選取下列選項之一：
 
@@ -279,7 +278,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 4. 在「Connections」(連線) 頁面中，按一下「Create connection」(建立連線)。
 5. 在「連線類型」中，選擇「Vertex AI 遠端模型、遠端函式、BigLake 和 Spanner (Cloud 資源)」。
 6. 在「連線 ID」欄位中，輸入連線名稱。
-7. 在「位置類型」部分，選取連線位置。連線應與資料集等其他資源位於同一位置。
+7. 針對「位置類型」，選取連線位置。連線應與其他資源 (例如資料集) 位於同一位置。
 8. 點選「建立連線」。
 9. 點選「前往連線」。
 10. 在「連線資訊」窗格中，複製服務帳戶 ID，以便在後續步驟中使用。
@@ -463,7 +462,7 @@ async function createConnection(projectId, location, connectionId) {
 
 請使用 [`google_bigquery_connection`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_connection) 資源。
 
-**注意：** 如要使用 Terraform 建立 BigQuery 物件，請務必啟用 [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest?hl=zh-tw)。
+**注意：** 如要使用 Terraform 建立 BigQuery 物件，必須啟用 [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -488,10 +487,9 @@ resource "google_bigquery_connection" "default" {
 ## 準備 Cloud Shell
 
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
-2. 設定要套用 Terraform 設定的預設 Google Cloud 專案
-   。
+2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
 
-   每項專案只需要執行一次這個指令，而且可以在任何目錄中執行。
+   每項專案只需要執行一次這個指令，且可以在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
@@ -510,9 +508,9 @@ resource "google_bigquery_connection" "default" {
    ```
 2. 如果您正在學習教學課程，可以複製每個章節或步驟中的程式碼範例。
 
-   將程式碼範例複製到新建立的 `main.tf`。
+   將程式碼範例複製到新建立的 `main.tf` 中。
 
-   視需要從 GitHub 複製程式碼。如果 Terraform 程式碼片段是端對端解決方案的一部分，建議您使用這個方法。
+   視需要從 GitHub 複製程式碼。如果 Terraform 代码片段是端對端解決方案的一部分，建議您這麼做。
 3. 查看並修改範例參數，套用至您的環境。
 4. 儲存變更。
 5. 初始化 Terraform。每個目錄只需執行一次這項操作。
@@ -536,20 +534,20 @@ resource "google_bigquery_connection" "default" {
    ```
 
    視需要修正設定。
-2. 執行下列指令，並在提示中輸入 `yes`，套用 Terraform 設定：
+2. 執行下列指令並在提示中輸入 `yes`，套用 Terraform 設定：
 
    ```
    terraform apply
    ```
 
    等待 Terraform 顯示「Apply complete!」訊息。
-3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)即可查看結果。在 Google Cloud 控制台中，前往 UI 中的資源，確認 Terraform 已建立或更新這些資源。
+3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)，查看結果。在 Google Cloud 控制台中，前往 UI 中的資源，確認 Terraform 已建立或更新這些資源。
 
 **注意：**Terraform 範例通常會假設 Google Cloud 專案已啟用必要的 API。
 
 ## 將權限授予連線的服務帳戶
 
-為連線的服務帳戶授予 Vertex AI 使用者角色。您必須在「[開始前](#before_you_begin)」一節中建立或選取的專案中授予這個角色。在其他專案中授予角色會導致 `bqcx-1234567890-xxxx@gcp-sa-bigquery-condel.iam.gserviceaccount.com does not have the permission to access resource` 錯誤。
+將「Agent Platform User」(`roles/aiplatform.user`) 角色授予連線的服務帳戶。您必須在「[事前準備](#before_you_begin)」一節中建立或選取的專案中授予這個角色。在其他專案中授予角色會導致 `bqcx-1234567890-xxxx@gcp-sa-bigquery-condel.iam.gserviceaccount.com does not have the permission to access resource` 錯誤。
 
 如要授予角色，請按照下列步驟操作：
 
@@ -558,7 +556,7 @@ resource "google_bigquery_connection" "default" {
    [前往「IAM & Admin」(IAM 與管理)](https://console.cloud.google.com/project/_/iam-admin?hl=zh-tw)
 2. 按一下 person\_add「授予存取權」。
 3. 在「新增主體」欄位，輸入先前複製的服務帳戶 ID。
-4. 在「選取角色」欄位中，選擇「Vertex AI」，然後選取「Vertex AI 使用者」角色。
+4. 在「Select a role」(請選擇角色) 欄位中，搜尋「Agent Platform User」(代理程式平台使用者) 角色。
 5. 按一下 [儲存]。
 
 ## 建立遠端模型
@@ -583,7 +581,7 @@ CREATE OR REPLACE MODEL `bqml_tutorial.gemini_model`
 
   在 Google Cloud 控制台中[查看連線詳細資料](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw#view-connections)時，這是「連線 ID」中顯示的完整連線 ID 最後一個部分的值，例如 `projects/myproject/locations/connection_location/connections/myconnection`
 
-查詢作業會在幾秒內完成，模型 `gemini_model` 隨即會顯示在 `bqml_tutorial` 資料集中。沒有查詢結果。
+查詢作業會在幾秒內完成，模型 `gemini_model` 會顯示在 `bqml_tutorial` 資料集中。沒有查詢結果。
 
 ## 執行關鍵字擷取
 
@@ -640,7 +638,7 @@ CREATE OR REPLACE MODEL `bqml_tutorial.gemini_model`
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在查詢編輯器中執行下列陳述式，對電影評論進行情緒分析：
+2. 在查詢編輯器中執行下列陳述式，對電影評論執行情緒分析：
 
    ```
    SELECT
@@ -749,11 +747,11 @@ gcloud projects delete PROJECT_ID
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-06-11 (世界標準時間)。
+上次更新時間：2026-06-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-11 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-12 (世界標準時間)。"],[],[]]
