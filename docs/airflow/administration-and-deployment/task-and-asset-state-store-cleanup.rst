@@ -15,22 +15,22 @@
     specific language governing permissions and limitations
     under the License.
 
-.. _task-and-asset-store-cleanup:
+.. _task-and-asset-state-store-cleanup:
 
-Task and Asset Store Cleanup
-=============================
+Task and Asset State Store Cleanup
+==================================
 
 .. versionadded:: 3.3
 
-Airflow does not automatically purge task store rows on a schedule. Cleanup (also known as "garbage collection") is the responsibility of the user (you) and must be triggered explicitly via the CLI. This page explains what gets cleaned up, how to run it, and how to integrate it into a recurring maintenance workflow.
+Airflow does not automatically purge task state store rows on a schedule. Cleanup (also known as "garbage collection") is the responsibility of the user (you) and must be triggered explicitly via the CLI. This page explains what gets cleaned up, how to run it, and how to integrate it into a recurring maintenance workflow.
 
 
 What gets cleaned up
 --------------------
 
-The cleanup command operates only on **task store** rows in the ``MetastoreStoreBackend``. Asset store rows are never touched by this command. Asset store rows are removed only by the orphan sweep when an asset is deactivated (see :ref:`task-and-asset-store`).
+The cleanup command operates only on **task state store** rows in the ``MetastoreBackend``. Asset store rows are never touched by this command. Asset store rows are removed only by the orphan sweep when an asset is deactivated (see :ref:`task-and-asset-state-store`).
 
-A task store row is eligible for deletion when its ``expires_at`` timestamp is in the past. ``expires_at`` is computed on the worker at write time:
+A task state store row is eligible for deletion when its ``expires_at`` timestamp is in the past. ``expires_at`` is computed on the worker at write time:
 
 * Keys written with an explicit ``retention=timedelta(...)`` expire after that duration from the time of the write.
 * Keys written with ``retention=None`` (the default) pick up an expiry based on ``[state_store] default_retention_days``. If that value is ``> 0``, the key expires that many days after the write.
@@ -48,7 +48,7 @@ Running cleanup
 
 The command is::
 
-    airflow state-store cleanup-task-store
+    airflow state-store cleanup-task-state-store
 
 It reads ``[state_store] default_retention_days`` and ``[state_store] state_cleanup_batch_size`` from the ``airflow.cfg`` file, then deletes all eligible rows.
 
@@ -56,13 +56,13 @@ It reads ``[state_store] default_retention_days`` and ``[state_store] state_clea
 
 Use ``--dry-run`` to preview what would be deleted without removing anything::
 
-    airflow state-store cleanup-task-store --dry-run
+    airflow state-store cleanup-task-state-store --dry-run
 
 The output lists every row that would be deleted, grouped by dag, run, task, map index, and key.
 
 **Batching**
 
-By default (``state_cleanup_batch_size = 0``) all eligible rows are deleted in a single statement. On deployments with large ``task_store`` tables, set a batch size to reduce lock duration per transaction::
+By default (``state_cleanup_batch_size = 0``) all eligible rows are deleted in a single statement. On deployments with large ``task_state_store`` tables, set a batch size to reduce lock duration per transaction::
 
     # airflow.cfg
     [state_store]
@@ -70,4 +70,4 @@ By default (``state_cleanup_batch_size = 0``) all eligible rows are deleted in a
 
 The command then deletes rows in batches of 10,000, committing after each batch, until no eligible rows remain.
 
-How often to run cleanup depends on your write volume and the value of ``default_retention_days``. A weekly cleanup may be sufficient for most environments. For high-throughput pipelines that write task store entries on every task execution, consider running cleanup more frequently to keep the ``task_store`` table small.
+How often to run cleanup depends on your write volume and the value of ``default_retention_days``. A weekly cleanup may be sufficient for most environments. For high-throughput pipelines that write task state store entries on every task execution, consider running cleanup more frequently to keep the ``task_state_store`` table small.

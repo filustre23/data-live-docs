@@ -15,7 +15,7 @@
     specific language governing permissions and limitations
     under the License.
 
-.. _concepts:task-store:
+.. _concepts:task-state-store:
 
 .. spelling:word-list::
 
@@ -23,20 +23,20 @@
    Intra
    checkpointing
 
-Task Store
-==========
+Task State Store
+================
 
 .. versionadded:: 3.3
 
 Task store is a persistent key/value store scoped to a single task instance (``dag_id`` + ``run_id`` + ``task_id`` + ``map_index``). It survives worker crashes and task retries within the same Dag run, making it suitable for storing external job IDs, intra-task checkpoints, and progress metadata.
 
-Data persisted via task store is accessed through the task context via ``context["task_store"]`` and exposes four methods: ``get``, ``set``, ``delete``, and ``clear``.
+Data persisted via task state store is accessed through the task context via ``context["task_state_store"]`` and exposes four methods: ``get``, ``set``, ``delete``, and ``clear``.
 
 
-Accessing task store
---------------------
+Accessing task state store
+--------------------------
 
-Inside any ``@task``-decorated function or ``BaseOperator.execute()`` method, task store is available through the ``context`` dictionary via the ``task_store`` key. From there, it can be used to retrieve, set, delete, or clear data for a specific key-value pair. In this example, the ``job_id`` is retrieved from task store, then updated, before being deleted. All data for that task is then removed using the ``clear`` method.
+Inside any ``@task``-decorated function or ``BaseOperator.execute()`` method, task state store is available through the ``context`` dictionary via the ``task_state_store`` key. From there, it can be used to retrieve, set, delete, or clear data for a specific key-value pair. In this example, the ``job_id`` is retrieved from task state store, then updated, before being deleted. All data for that task is then removed using the ``clear`` method.
 
 .. code-block:: python
 
@@ -46,19 +46,19 @@ Inside any ``@task``-decorated function or ``BaseOperator.execute()`` method, ta
 
     @task
     def my_task(**context):
-        # Retrieve task_store from context
-        task_store = context["task_store"]
-        my_value = task_store.get("my_key", default="my_default_key")
+        # Retrieve task_state_store from context
+        task_state_store = context["task_state_store"]
+        my_value = task_state_store.get("my_key", default="my_default_key")
 
         # Set the new value
         new_value = f"It is {random.randint(1, 12 + 1)} o'clock"
-        task_store.set("my_key", new_value)
+        task_state_store.set("my_key", new_value)
 
         # Delete the value
-        task_store.delete("my_key")
+        task_state_store.delete("my_key")
 
         # Clear all store entries for the task
-        task_store.clear()
+        task_state_store.clear()
 
 Reference
 ---------
@@ -70,7 +70,7 @@ Returns the stored JSON value, or the ``default`` value if the key does not exis
 
 .. code-block:: python
 
-    value = task_store.get(
+    value = task_state_store.get(
         "job_id", default="123456789"
     )  # returns the value associated with `job_id` or the default value
 
@@ -99,10 +99,10 @@ The optional ``retention`` argument controls when the key expires:
    .. code-block:: python
 
        # correct
-       task_store.set("key", "val", retention=timedelta(days=7))
+       task_state_store.set("key", "val", retention=timedelta(days=7))
 
        # wrong — raises TypeError
-       task_store.set("key", "val", retention=7)
+       task_state_store.set("key", "val", retention=7)
 
 ``NEVER_EXPIRE`` sentinel
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -113,7 +113,7 @@ Import ``NEVER_EXPIRE`` from ``airflow.sdk``:
 
     from airflow.sdk import NEVER_EXPIRE
 
-    task_store.set("job_id", job_id, retention=NEVER_EXPIRE)
+    task_state_store.set("job_id", job_id, retention=NEVER_EXPIRE)
 
 ``delete(key)``
 ~~~~~~~~~~~~~~~
@@ -122,22 +122,22 @@ Deletes a single key. No-op if the key does not exist.
 
 .. code-block:: python
 
-    task_store.delete("job_id")
+    task_state_store.delete("job_id")
 
 ``clear(all_map_indices=False)``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Deletes *all* task store keys for this task instance.
+Deletes *all* task state store keys for this task instance.
 
 For :doc:`mapped tasks </authoring-and-scheduling/dynamic-task-mapping>`, the default clears only the current map index. Pass ``all_map_indices=True`` to wipe the store across **every** mapped instance of the task (fleet-wide reset).
 
 .. code-block:: python
 
     # clear only this map index
-    task_store.clear()
+    task_state_store.clear()
 
     # clear all map indices (fleet-wide)
-    task_store.clear(all_map_indices=True)
+    task_state_store.clear(all_map_indices=True)
 
 
 Some Example Use Cases
@@ -160,22 +160,22 @@ the default retention window.
 
         @task
         def run_spark_job(**context):
-            task_store = context["task_store"]
+            task_state_store = context["task_state_store"]
 
             # Check for an already-submitted job from a previous attempt.
-            job_id = task_store.get("job_id")
+            job_id = task_state_store.get("job_id")
             if job_id is None:
                 job_id = spark_client.submit_job(...)
                 # Store with NEVER_EXPIRE so the key is not garbage-collected before the job finishes
-                task_store.set("job_id", job_id, retention=NEVER_EXPIRE)
+                task_state_store.set("job_id", job_id, retention=NEVER_EXPIRE)
 
             # Reattach to the job and wait for completion.
             result = spark_client.wait_for_completion(job_id)
             return result
 
-On a retry, the task finds the stored ``job_id`` and reattaches instead of submitting a duplicate job. Another example of this sort of logic can be found in `example_task_store.py <https://github.com/apache/airflow/blob/main/airflow-core/src/airflow/example_dags/example_task_store.py>`_.
+On a retry, the task finds the stored ``job_id`` and reattaches instead of submitting a duplicate job. Another example of this sort of logic can be found in `example_task_state_store.py <https://github.com/apache/airflow/blob/main/airflow-core/src/airflow/example_dags/example_task_state_store.py>`_.
 
-For ``BaseOperator`` subclasses, the :class:`~airflow.sdk.bases.resumablemixin.ResumableJobMixin` encapsulates this pattern. It persists the external job ID to task store after submission and, on retry, reconnects to an active job or resubmits if the prior job reached a terminal failure state.
+For ``BaseOperator`` subclasses, the :class:`~airflow.sdk.bases.resumablemixin.ResumableJobMixin` encapsulates this pattern. It persists the external job ID to task state store after submission and, on retry, reconnects to an active job or resubmits if the prior job reached a terminal failure state.
 
 Intra-task checkpointing
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -190,15 +190,15 @@ For tasks that process paginated or batched data, store the last-completed offse
 
         @task
         def ingest_pages(**context):
-            # Retrieve the task_store
-            task_store = context["task_store"]
-            raw = task_store.get("last_page")
+            # Retrieve the task_state_store
+            task_state_store = context["task_state_store"]
+            raw = task_state_store.get("last_page")
 
             start_page = raw + 1 if raw is not None else 1
 
             for page in range(start_page, total_pages + 1):
                 fetch_and_load(page)
-                task_store.set("last_page", page)  # Update the task_store for reuse later
+                task_state_store.set("last_page", page)  # Update the task_state_store for reuse later
 
 
 On a retry, the task reads ``last_page`` and skips pages that were already processed.
@@ -217,18 +217,18 @@ Task store can expose in-progress metrics for observability — row counts, stat
 
         @task
         def ingest_rows(**context):
-            task_store = context["task_store"]
+            task_state_store = context["task_state_store"]
             total = 0
 
             for batch in get_batches():
                 load(batch)
                 total += len(batch)
-                task_store.set(
+                task_state_store.set(
                     "progress",
                     {"rows_loaded": total, "status": "running"},
                 )
 
-            task_store.set(
+            task_state_store.set(
                 "progress",
                 {"rows_loaded": total, "status": "done"},
             )
@@ -249,30 +249,30 @@ If the worker process crashes, the task instance is retried. Task store data wri
 Deferrable tasks
 ~~~~~~~~~~~~~~~~
 
-Once a task defers, the Triggerer handles continuity across poke cycles. Use task store in deferrable tasks only when you need to survive an operator-initiated clear, not for normal poke continuity.
+Once a task defers, the Triggerer handles continuity across poke cycles. Use task state store in deferrable tasks only when you need to survive an operator-initiated clear, not for normal poke continuity.
 
 
 Mapped tasks
 ------------
 
-When a task is dynamically mapped (``task.expand(...)``), each map index has its own task store namespace. ``clear()`` without arguments clears the store only for the current index. ``clear(all_map_indices=True)`` wipes the store across every index of the task.
+When a task is dynamically mapped (``task.expand(...)``), each map index has its own task state store namespace. ``clear()`` without arguments clears the store only for the current index. ``clear(all_map_indices=True)`` wipes the store across every index of the task.
 
 .. code-block:: python
 
     # Inside a mapped task — clear only this index
-    task_store.clear()
+    task_state_store.clear()
 
     # Wipe store for all indices of this task
-    task_store.clear(all_map_indices=True)
+    task_state_store.clear(all_map_indices=True)
 
 
 Automatic cleanup (``clear_on_success``)
 ----------------------------------------
 
-When ``[state_store] clear_on_success = True``, all task store keys for a task instance are automatically deleted when the task moves to the ``success`` state. This is useful for reducing storage when post-success observability is not needed.
+When ``[state_store] clear_on_success = True``, all task state store keys for a task instance are automatically deleted when the task moves to the ``success`` state. This is useful for reducing storage when post-success observability is not needed.
 
 .. note::
 
-   ``clear_on_success`` clears **task store only**. Asset store is scoped to the asset, not the task instance, and is never affected by this setting. Asset store persists across runs and must be cleared explicitly.
+   ``clear_on_success`` clears **task state store only**. Asset store is scoped to the asset, not the task instance, and is never affected by this setting. Asset store persists across runs and must be cleared explicitly.
 
-See :doc:`/administration-and-deployment/task-and-asset-store` for full configuration details.
+See :doc:`/administration-and-deployment/task-and-asset-state-store` for full configuration details.
