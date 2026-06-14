@@ -980,4 +980,8 @@ CREATE OR REPLACE MODEL `mydataset.arima_model`
               primary_date,
               5 AS preholiday_days,
               1 AS postholiday_days
+            FROM
+              UNNEST(
+                [
+                  DATE(
 ```

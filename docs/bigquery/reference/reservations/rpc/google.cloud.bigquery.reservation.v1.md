@@ -174,4 +174,4 @@ A capacity commitment is a way to purchase compute capacity for BigQuery jobs (i
 
 | UpdateBiReservation |
 | --- |
-| `rpc UpdateBiReserv` |
+| `rpc UpdateBiReservation(UpdateBiReservationRequest) returns (` |

@@ -983,4 +983,11 @@ SELECT TEXT_ANALYZE(
   analyzer=>'LOG_ANALYZER',
   analyzer_options=>'''
   {
+    "token_filters": [
+      {
+        "stop_words": ["they", "pie"]
+      }
+    ]
+  }
+  ''
 ```

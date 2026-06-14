@@ -401,5 +401,6 @@ The following example loads an Avro file into a table. Avro is a
 self-describing format, so BigQuery infers the schema.
 
 ```
-LOAD DATA
+LOAD DATA INTO mydataset.table1
+  FROM FILES
 ```

@@ -22,8 +22,8 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 本教學課程會逐步引導您完成下列工作：
 
-* 透過 `gemini-2.5-flash` 模型建立[遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw)。
-* 透過對 `ML.GENERATE_TEXT` 函式的呼叫進行疊代，使用遠端模型和 `bigquery-public-data.bbc_news.fulltext` 公開資料表與 `bqutil.procedure.bqml_generate_text` 預存程序。
+* 建立[`gemini-2.5-pro` 模型上的遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw)。
+* 透過呼叫 `ML.GENERATE_TEXT` 函式進行疊代，使用遠端模型和 `bigquery-public-data.bbc_news.fulltext` 公開資料表，以及 `bqutil.procedure.bqml_generate_text` 預存程序。
 
 ## 所需權限
 
@@ -75,7 +75,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    **選取或建立專案所需的角色**
 
-   * **選取專案**：選取專案時，不需要具備特定 IAM 角色，只要您已獲授角色，即可選取任何專案。
+   * **選取專案**：選取專案時，不需要具備特定 IAM 角色，只要您在專案中獲派角色，即可選取該專案。
    * **建立專案**：如要建立專案，您需要「專案建立者」角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
    **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，而不要選取現有專案。完成這些步驟後，您就可以刪除專案，並移除與該專案相關聯的所有資源。
 
@@ -85,7 +85,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    **啟用 API 時所需的角色**
 
-   如要啟用 API，您需要服務使用情形管理員 IAM 角色 (`roles/serviceusage.serviceUsageAdmin`)，其中包含 `serviceusage.services.enable` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   如要啟用 API，您需要具備服務使用情形管理員 IAM 角色 (`roles/serviceusage.serviceUsageAdmin`)，其中包含 `serviceusage.services.enable` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
    [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery.googleapis.com%2Cbigqueryconnection.googleapis.com%2Caiplatform.googleapis.com&hl=zh-tw)
 
@@ -97,7 +97,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    [前往「BigQuery」**BigQuery**頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 在「Explorer」窗格中，按一下專案名稱。
-3. 依序點按 more\_vert「View actions」(查看動作)**>「Create dataset」(建立資料集)**。
+3. 依序點按 more\_vert「View actions」(查看動作)「>」(大於符號)「Create dataset」(建立資料集)。
 4. 在「建立資料集」頁面中，執行下列操作：
 
    1. 在「Dataset ID」(資料集 ID) 中輸入 `sample`。
@@ -106,7 +106,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 建立文字生成模型
 
-建立遠端模型，代表託管的 Agent Platform 模型：`gemini-2.5-flash`
+建立遠端模型，代表託管的 Agent Platform 模型：`gemini-2.5-pro`
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -116,14 +116,14 @@ Google uses AI technology to translate content into your preferred language. AI 
    ```
    CREATE OR REPLACE MODEL `sample.generate_text`
      REMOTE WITH CONNECTION DEFAULT
-     OPTIONS (ENDPOINT = 'gemini-2.5-flash');
+     OPTIONS (ENDPOINT = 'gemini-2.5-pro');
    ```
 
    查詢作業會在幾秒內完成，完成後，`generate_text`模型會顯示在「Explorer」(探索工具) 窗格的 `sample` 資料集中。由於查詢使用 `CREATE MODEL` 陳述式建立模型，因此沒有查詢結果。
 
 ## 執行預存程序
 
-執行 `bqutil.procedure.bqml_generate_text` 預存程序，該程序會使用 `sample.generate_text` 模型和 `bigquery-public-data.bbc_news.fulltext` 公開資料表，反覆呼叫 `ML.GENERATE_TEXT` 函式：
+執行 `bqutil.procedure.bqml_generate_text` 預存程序，透過 `sample.generate_text` 模型和 `bigquery-public-data.bbc_news.fulltext` 公開資料表，反覆呼叫 `ML.GENERATE_TEXT` 函式：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -176,11 +176,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-06-12 (世界標準時間)。
+上次更新時間：2026-06-13 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-12 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-13 (世界標準時間)。"],[],[]]

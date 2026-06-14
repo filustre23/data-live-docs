@@ -247,4 +247,8 @@ This type has no fields.
 
 The dialect definition for Greenplum.
 
-## Hive
+## HiveQLDialect
+
+This type has no fields.
+
+The dialect definition for HiveQL.

@@ -237,4 +237,4 @@ Options used in model training.
 | `l2Regularization` | `number`  L2 regularization coefficient. |
 | `minRelativeProgress` | `number`  When earlyStop is true, stops training when accuracy improvement is less than 'minRelativeProgress'. Used only for iterative training algorithms. |
 | `warmStart` | `boolean`  Whether to train a model from the last checkpoint. |
-|  |
+| `earlyStop` | `boolean`  Whether to stop early when the loss doesn't improve significantly any more (compared to minRelativeProgress). Used only for iterative training algorithms. |

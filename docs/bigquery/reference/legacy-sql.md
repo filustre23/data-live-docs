@@ -471,4 +471,6 @@ ORDER BY
 SELECT
   year,
   GROUPING(year) as rollup_year,
+  is_male,
+  GROUPING(is_male) as
 ```

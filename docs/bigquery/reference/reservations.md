@@ -296,5 +296,7 @@ public class QuickstartSample {
       // list reservations in the project
       String parent = String.format("projects/%s/locations/%s", projectId, location);
       client
-          .listReservations(
+          .listReservations(parent)
+          .iterateAll()
+          .forEach
 ```

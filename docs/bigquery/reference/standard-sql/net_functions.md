@@ -463,5 +463,7 @@ SELECT
   description,
   FORMAT("%T", NET.HOST(input)) AS host,
   FORMAT("%T", NET.PUBLIC_SUFFIX(input)) AS suffix,
-  FORMAT("%T", NET.REG_DOMAIN(input)) AS
+  FORMAT("%T", NET.REG_DOMAIN(input)) AS domain
+FROM (
+  SELECT ""
 ```

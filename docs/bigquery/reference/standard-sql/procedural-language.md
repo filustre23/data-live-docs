@@ -554,5 +554,6 @@ value of `default_product_id`.
 DECLARE target_product_id INT64 DEFAULT 103;
 IF EXISTS(SELECT 1 FROM schema.products
            WHERE product_id = target_product_id) THEN
-  SELECT CONCAT('found product ', CAST
+  SELECT CONCAT('found product ', CAST(target_product_id AS STRING));
+  ELSEIF
 ```

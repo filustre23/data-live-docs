@@ -259,5 +259,6 @@ public class CreateCampaignmanagerTransfer {
               .setTransferConfig(transferConfig)
               .build();
       TransferConfig config = client.createTransferConfig(request);
-      System.out.println("Campaignmanager transfer created successfully :" + config.
+      System.out.println("Campaignmanager transfer created successfully :" + config.getName());
+    } catch
 ```

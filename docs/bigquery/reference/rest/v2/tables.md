@@ -213,3 +213,7 @@ A list of data policy options. For more information, see [Mask data by applying 
 | Fields | |
 | --- | --- |
 | `dataPolicies[]` | `object (DataPolicyOption)`  Contains a list of data policy options. At most 9 data policies are allowed per field. |
+
+## FieldElementType
+
+Represents the type of a field element.

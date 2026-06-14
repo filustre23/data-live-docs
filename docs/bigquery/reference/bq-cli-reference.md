@@ -659,4 +659,7 @@ bq head --max_rows=10 --start_row=50 --selected_fields=field1,field3 \
 :   如要讀取查詢工作的結果，請使用有效工作 ID 指定這個旗標。
 
 **`--max_rows=MAX or -n=MAX`**
-:   一
+:   一個整數，用來指定顯示資料表資料時要列印的資料列數量上限。預設值為 `100`。
+
+**`--selected_fields=COLUMN_NAMES or -c=COLUMN_NAMES`**
+:   以半形逗號分隔的清單，用來指定顯示資料表資料時

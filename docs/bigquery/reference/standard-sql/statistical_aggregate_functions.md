@@ -454,5 +454,8 @@ STDDEV(
   [ DISTINCT ]
   expression
 )
-[ OVER </
+[ OVER over_clause ]
+
+over_clause:
+  { named_window
 ```

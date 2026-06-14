@@ -954,9 +954,3 @@ for run in response.runs:
 您可以根據資料列計數指標，為排程查詢設定快訊政策。詳情請參閱「[使用排程查詢設定快訊](https://docs.cloud.google.com/bigquery/docs/create-alert-scheduled-query?hl=zh-tw)」。
 
 ## 刪除預定查詢
-
-### 控制台
-
-如要透過 Google Cloud 控制台的「Scheduled queries」(已排定的查詢) 頁面刪除已排定的查詢，請按照下列步驟操作：
-
-1. 在導覽選單中，按一下「排程查詢」。<

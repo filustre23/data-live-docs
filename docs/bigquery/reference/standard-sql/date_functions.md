@@ -663,5 +663,9 @@ Formats a `DATE` value according to a specified format string.
 **Examples**
 
 ```
-SELECT FORMAT_DATE('%x', DATE '2008-12-25'
+SELECT FORMAT_DATE('%x', DATE '2008-12-25') AS US_format;
+
+/*------------+
+ | US_format  |
+ +---------
 ```

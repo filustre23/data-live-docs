@@ -500,5 +500,7 @@ SELECT CONCAT('Summer', ' ', 1923) as release_date;
 ```
 
 ```
-With
+With Employees AS
+  (SELECT
+    'John'
 ```

@@ -843,5 +843,5 @@ public class LoadPartitionedTable {
 
       // Load data from a GCS parquet file into the table
       // Blocks until this load table job completes its execution, either failing or succeeding.
-      Job completedJob = loadJob.
+      Job completedJob
 ```

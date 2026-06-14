@@ -368,5 +368,5 @@ SELECT ARRAY_AGG(x) AS array_agg FROM UNNEST([2, 1,-2, 3, -2, 1, 2]) AS x;
 
 ```
 SELECT ARRAY_AGG(DISTINCT x) AS array_agg
-FROM UNNEST([2, 1,
+FROM UNNEST([2, 1, -2, 3, -2</
 ```

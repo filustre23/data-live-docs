@@ -218,4 +218,5 @@ BigQuery 提供下列其他匯總函式：
 | `FEATURE_DETAILS` | BigQuery 中沒有隱含的資料表。考慮使用 UDF 和 BigQuery ML |
 | `FEATURE_ID` | BigQuery 中沒有隱含的資料表。考慮使用 UDF 和 BigQuery ML |
 | `FEATURE_SET` | BigQuery 中沒有隱含的資料表。考慮使用 UDF 和 BigQuery ML |
-| `FEATURE_VALUE` </ |
+| `FEATURE_VALUE` | BigQuery 中沒有隱含的資料表。考慮使用 UDF 和 BigQuery ML |
+| `FIRST_VALUE` |  |

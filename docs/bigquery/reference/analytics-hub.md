@@ -306,5 +306,6 @@ func createOrGetDataExchange(ctx context.Context, client *analyticshub.Client, p
 }
 
 // createListing creates an example listing within the specified exchange using the provided source dataset.
-func createListing(ctx context.Context, client *analyticshub.Client, projectID, location, exchangeID, listingID, sourceDataset string) (*
+func createListing(ctx context.Context, client *analyticshub.Client, projectID, location, exchangeID, listingID, sourceDataset string) (*analyticshubpb.Listing, error) {
+	
 ```

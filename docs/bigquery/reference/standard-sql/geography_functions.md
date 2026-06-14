@@ -321,4 +321,14 @@ ST_ASBINARY(geography_expression)
 
 **Description**
 
-Returns the [WKB](https://en.wikipedia.org/wiki/Well-known_text#Well-known_binary) representation of a
+Returns the [WKB](https://en.wikipedia.org/wiki/Well-known_text#Well-known_binary) representation of an input
+`GEOGRAPHY`.
+
+See [`ST_GEOGFROMWKB`](#st_geogfromwkb) to construct a
+`GEOGRAPHY` from WKB.
+
+**Return type**
+
+`BYTES`
+
+##

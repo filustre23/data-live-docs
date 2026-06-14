@@ -526,4 +526,10 @@ SELECT
     R'"ant apple"',
     analyzer=>'PATTERN_ANALYZER',
     analyzer_options=>'{"patterns": ["a[a-z]"]}') AS e;
+
+/*-------+-------+-------+-------+-------+
+ | a     | b     | c     | d     | e     |
+ +-------+-------+-------+-------+-------+
+ | false | true  | true  | false | true  |
+ +-------+-------+-------+-------+-------
 ```

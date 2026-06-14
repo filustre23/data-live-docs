@@ -539,4 +539,5 @@ produced:
 ```
 -- ERROR
 SELECT COSINE_DISTANCE(
+  [(1, 9.0), (
 ```

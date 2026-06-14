@@ -358,5 +358,5 @@ func main() {
 
 	// Set a snapshot time if it's been specified.
 	if *snapshotMillis > 0 {
-		ts := timestamppb.New(time
+		ts := timestamppb.New(time.Unix(0, *snapshotMillis*1000
 ```

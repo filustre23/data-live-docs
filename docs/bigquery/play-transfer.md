@@ -270,4 +270,9 @@ public class CreatePlayTransfer {
 
 如要瞭解 Google Play 資料移轉定價，請參閱[定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#data-transfer-service-pricing)頁面。
 
-資料移轉至 BigQuery 之後，即適用標準的 BigQuery [儲存空間](https://cloud.google.com/bigquery/pricing?hl=zh-tw#storage)和
+資料移轉至 BigQuery 之後，即適用標準的 BigQuery [儲存空間](https://cloud.google.com/bigquery/pricing?hl=zh-tw#storage)和[查詢](https://cloud.google.com/bigquery/pricing?hl=zh-tw#queries)計價方式。
+
+## 後續步驟
+
+* 如要瞭解 Google Play 報告如何移轉至 BigQuery，請參閱 [Google Play 報告轉換](https://docs.cloud.google.com/bigquery/docs/play-transformation?hl=zh-tw)一文。
+* 如需 B

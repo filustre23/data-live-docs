@@ -986,4 +986,7 @@ value for the [`DATA_SPLIT_METHOD` option](#data_split_method):
   m rows are used as test data, where m is the value
   specified for [`DATA_SPLIT_TEST_FRACTION`](#data_split_test_fraction).
   The remaining rows are used as training data.
-* If
+* If you are running hyperparameter tuning and you are specifying `CUSTOM` as
+  the value for `DATA_SPLIT_METHOD`, then you must provide the name of a column
+  of type `STRING`. Rows with a value of `TRAIN` are used as training data, rows
+  with a value of

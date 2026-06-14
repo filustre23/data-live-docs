@@ -310,5 +310,6 @@ GROUP BY priority;
 
 ```
 SELECT
-  user_email AS
+  user_email AS user,
+  COUNT(*) num_job
 ```

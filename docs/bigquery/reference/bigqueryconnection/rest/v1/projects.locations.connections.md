@@ -290,4 +290,4 @@ Username and Password authentication.
 
 | JSON representation |
 | --- |
-| ``` {   "username" ``` |
+| ``` {   "username": string,   "password": {     object (Secret)   } } ``` |

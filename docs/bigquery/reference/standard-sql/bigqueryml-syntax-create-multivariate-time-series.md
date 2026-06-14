@@ -945,4 +945,10 @@ table only contains holidays and events from the following regions:
 * `CH`: Switzerland
 * `CL`: Chile
 * `CZ`: Czechia
-* `DE`
+* `DE`: Germany
+* `DK`: Denmark
+* `EMEA`: Europe, the Middle East and Africa
+* `ES`: Spain
+* `FR`: France
+* `GB`: United Kingdom
+* `GLOBAL`<

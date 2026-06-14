@@ -449,4 +449,6 @@ WITH CustomerRawKeys AS (
 SELECT
   ci.customer_id,
   KEYS.ADD_KEY_FROM_RAW_BYTES(
+    KEYS.NEW_KEYSET('AEAD_AES_GCM_256'),
+    'AES_CBC_PKCS',
 ```

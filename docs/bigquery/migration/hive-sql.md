@@ -301,4 +301,6 @@ BigQuery 提供下列其他字串函式：
 | `MOD (% operator)` | `MOD` |
 | `POWER` | `POWER, POW` |
 | `RAND` | `RAND` |
-| `ROUND` |  |
+| `ROUND` | `ROUND` |
+| `SIGN` | `SIGN` |
+|  |

@@ -558,4 +558,6 @@ Some examples of valid `field_path` values include:
 SELECT * FROM T1 t1, t1.array_column;
 
 SELECT * FROM T1 t1, t1.struct_column.array_field;
+
+SELECT (SELECT ARRAY_AGG(c)
 ```

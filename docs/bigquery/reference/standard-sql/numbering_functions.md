@@ -352,4 +352,7 @@ To learn more about the `OVER` clause and how to use it, see
 WITH Numbers AS
  (SELECT 1 as x
   UNION ALL SELECT 2
+  UNION ALL SELECT 2
+  UNION ALL SELECT 5
+  UNION ALL SELECT 8
 ```

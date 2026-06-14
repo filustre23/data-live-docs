@@ -238,4 +238,4 @@ Configuration for writing message data in Avro format. Message payloads and meta
 
 | JSON representation |
 | --- |
-| ``` {   "writeMetadata": boolean ``` |
+| ``` {   "writeMetadata": boolean,   "useTopicSchema": boolean } ``` |

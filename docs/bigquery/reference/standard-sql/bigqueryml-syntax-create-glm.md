@@ -962,4 +962,9 @@ For information about supported locations, see
 
 ## Limitations
 
-`CREATE MODEL` statements must comply with th
+`CREATE MODEL` statements must comply with the following rules:
+
+* For linear regression models, the `label` column must be real-valued (the
+  column values cannot be +/- infinity or `NaN`).
+* For logistic regression models, the `label` column can contain up
+  to 50 unique values; that is, the number of classes is les

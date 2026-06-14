@@ -501,4 +501,13 @@ inputs are greater than or equal to *v*. This is an aggregate function.
 If the merged sketches were initialized with different precisions, the precision
 is downgraded to the lowest precision involved in the merge — except if the
 aggregations are small enough to still capture the input exactly — then the
-mergee's pr
+mergee's precision is maintained.
+
+Returns an error if the underlying type of one or more input sketches isn't
+compatible with type `INT64`.
+
+Returns an error if the input isn't a valid KLL quantiles sketch.
+
+**Supported Argument Types**
+
+* `sketch`:

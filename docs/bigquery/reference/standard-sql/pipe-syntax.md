@@ -478,5 +478,6 @@ to disambiguate columns after the `JOIN` operator.
 -- AGGREGATE creates an output table, so the sales_table alias is now out of
 -- scope. Add a t1 alias so the join can refer to its id column.
 |> AS t1
-|> JOIN (SELECT 456 AS id, "yellow" AS
+|> JOIN (SELECT 456 AS id, "yellow" AS color) AS t2
+   ON CAST</
 ```

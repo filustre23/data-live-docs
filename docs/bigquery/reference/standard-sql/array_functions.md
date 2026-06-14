@@ -540,3 +540,7 @@ If any argument is `NULL`, the function will return a `NULL` array.
 **Examples**
 
 The following returns an array of integers, with a default step of 1.
+
+```
+SELECT GENERATE_ARRAY(1, 5)
+```

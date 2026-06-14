@@ -904,3 +904,14 @@ The following types of models are classification models:
 * `roc_auc`: a `FLOAT64` value that contains the
   [area under the receiver operating characteristic curve](https://en.wikipedia.org/wiki/Receiver_operating_characteristic#Area_under_the_curve)
   for the model.
+
+### Regression
+
+The following types of models are regression models:
+
+* Linear regression
+* Boosted tree regressor
+* Random forest regressor
+* Deep neural network (DNN) regressor
+* Wide & Deep regressor
+* AutoML Tables regressor</

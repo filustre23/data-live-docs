@@ -1229,7 +1229,5 @@ public class RevokeDatasetAccess {
     revokeDatasetAccess(projectId, datasetName, entityEmail);
   }
 
-  public static void revokeDatasetAccess(String projectId, String datasetName, String entityEmail) {
-    try {
-      // Initialize client that will be used to send requests. This client only needs
+  public static void revokeDatasetAccess(String projectId, String datasetName, String entityEmail)
 ```

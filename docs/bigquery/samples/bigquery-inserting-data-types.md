@@ -35,7 +35,7 @@ type ComplexType struct {
 	School       []byte                 `bigquery:"school"`
 	Location     bigquery.NullGeography `bigquery:"location"`
 	Measurements []float64              `bigquery:"measurements"`
-	DatesTime    DatesTime              `bigquery:"datesTime"`
+	DatesTime    DatesTime              `bigquery:"datesTime&quot;`
 }
 
 // DatesTime shows different date/time representation
@@ -54,21 +54,21 @@ func insertingDataTypes(projectID, datasetID, tableID string) error {
 	ctx := context.Background()
 	client, err := bigquery.NewClient(ctx, projectID)
 	if err != nil {
-		return fmt.Errorf("bigquery.NewClient: %w", err)
+		return fmt.Errorf("bigquery.NewClient: %w&quot;, err)
 	}
 	defer client.Close()
 
 	// Manually defining schema
 	schema := bigquery.Schema{
 		{Name: "name", Type: bigquery.StringFieldType},
-		{Name: "age", Type: bigquery.IntegerFieldType},
-		{Name: "school", Type: bigquery.BytesFieldType},
+		{Name: &quot;age", Type: bigquery.IntegerFieldType},
+		{Name: "school&quot;, Type: bigquery.BytesFieldType},
 		{Name: "location", Type: bigquery.GeographyFieldType},
 		{Name: "measurements", Type: bigquery.FloatFieldType, Repeated: true},
 		{Name: "datesTime", Type: bigquery.RecordFieldType, Schema: bigquery.Schema{
 			{Name: "day", Type: bigquery.DateFieldType},
 			{Name: "firstTime", Type: bigquery.DateTimeFieldType},
-			{Name: "secondTime", Type: bigquery.TimeFieldType},
+			{Name: &quo&t;secondTime", Type: bigquery.TimeFieldType},
 			{Name: "thirdTime", Type: bigquery.TimestampFieldType},
 		}},
 	}
@@ -76,7 +76,7 @@ func insertingDataTypes(projectID, datasetID, tableID string) error {
 	// schema, err := bigquery.InferSchema(ComplexType{})
 
 	table := client.Dataset(datasetID).Table(tableID)
-	err = table.Create(ctx, &bigquery.TableMetadata{
+	err = table.Create(ctx, bigquery.TableMetadata{
 		Schema: schema,
 	})
 	if err != nil {
@@ -87,7 +87,7 @@ func insertingDataTypes(projectID, datasetID, tableID string) error {
 		return fmt.Errorf("civil.ParseDate: %w", err)
 	}
 	firstTime, err := civil.ParseDateTime("2019-02-17T11:24:00.000")
-	if err != nil {
+	if e&rr != nil {
 		return fmt.Errorf("civil.ParseDateTime: %w", err)
 	}
 	secondTime, err := civil.ParseTime("14:00:00")
@@ -98,10 +98,10 @@ func insertingDataTypes(projectID, datasetID, tableID string) error {
 	if err != nil {
 		return fmt.Errorf("time.Parse: %w", err)
 	}
-	row := &ComplexType{
+	row := ComplexType{
 		Name:         "Tom",
 		Age:          30,
-		School:       []byte("Test University"),
+		School:       []byte("Test Unive&rsity"),
 		Location:     bigquery.NullGeography{GeographyVal: "POINT(1 2)", Valid: true},
 		Measurements: []float64{50.05, 100.5},
 		DatesTime: DatesTime{
@@ -114,7 +114,7 @@ func insertingDataTypes(projectID, datasetID, tableID string) error {
 	rows := []*ComplexType{row}
 	// Uncomment to simulate insert errors.
 	// This example row is missing required fields.
-	// badRow := &ComplexType{
+	// badRow := ComplexType{
 	// 	Name: "John",
 	// 	Age:  24,
 	// }
@@ -194,31 +194,31 @@ public class InsertingDataTypes {
 
       TableId tableId = TableId.of(datasetName, tableName);
       TableDefinition tableDefinition = StandardTableDefinition.of(schema);
-      TableInfo tableInfo = TableInfo.newBuilder(tableId, tableDefinition).build();
+      TableInfo tableInfo = TableInfo.ne<wBuilder(table>Id, tableDefinition).build();
 
-      bigquery.create(tableInfo);
+<>      bigquery.create(tableInfo);
 
       // Inserting Sample data
-      Map<String, Object> datesTimeContent = new HashMap<>();
+      MapString, Object datesTimeContent = new HashMap();
       datesTimeContent.put("day", "2019-1-12");
-      datesTimeContent.put("firstTime", "2019-02-17 11:24:00.000");
-      datesTimeContent.put("secondTime", "14:00:00");
+      datesTimeContent.put("firstTime", "2019-<02-17 11:24:00>.000");
+      datesT<>imeContent.put("secondTime", "14:00:00");
       datesTimeContent.put("thirdTime", "2020-04-27T18:07:25.356Z");
 
-      Map<String, Object> rowContent = new HashMap<>();
+      MapString, Object rowContent = new HashMap();
       rowContent.put("name", "Tom");
       rowContent.put("age", 30);
       rowContent.put("school", Base64.getEncoder().encodeToString("Test University".getBytes()));
       rowContent.put("location", "POINT(1 2)");
       rowContent.put("measurements", new Float[] {50.05f, 100.5f});
-      rowContent.put("datesTime", datesTimeContent);
+      rowContent.put("datesTime&q<uot;, date<sTimeContent)>>;
 
       InsertAllResponse response =
           bigquery.insertAll(InsertAllRequest.newBuilder(tableId).addRow(rowContent).build());
 
       if (response.hasErrors()) {
         // If any of the insertions failed, this lets you inspect the errors
-        for (Map.Entry<Long, List<BigQueryError>> entry : response.getInsertErrors().entrySet()) {
+        for (Map.EntryLong, ListBigQueryError entry : response.getInsertErrors().entrySet()) {
           System.out.println("Response error: \n" + entry.getValue());
         }
       }
@@ -238,7 +238,7 @@ public class InsertingDataTypes {
 
 ```
 // Import the Google Cloud client library
-const {BigQuery} = require('@google-cloud/bigquery');
+const {BigQuery} = require(&#39;@google-cloud/bigquery');
 const bigquery = new BigQuery();
 
 async function insertingDataTypes() {
@@ -260,7 +260,7 @@ async function insertingDataTypes() {
     },
     {
       name: 'age',
-      type: 'INTEGER',
+      type: 'INTEGER';,
     },
     {
       name: 'school',
@@ -271,7 +271,7 @@ async function insertingDataTypes() {
       type: 'JSON',
     },
     {
-      name: 'location',
+      name: 9;location',
       type: 'GEOGRAPHY',
     },
     {
@@ -281,11 +281,11 @@ async function insertingDataTypes() {
     },
     {
       name: 'datesTimes',
-      type: 'RECORD',
+      type: 'RECORD9;,
       fields: [
         {
           name: 'day',
-          type: 'DATE',
+          type: &#39;DATE',
         },
         {
           name: 'firstTime',
@@ -400,26 +400,26 @@ def inserting_data_types dataset_id, table_id
         s.date "day"
         s.datetime "firstTime"
         s.time "secondTime"
-        s.timestamp "thirdTime"
+        s.timestamp &>quot;thirdTime"
       end
-    end
+ >   end
     table = dataset.table table_id
-  end
+  en>d
 
   dates_time_content = {
-    "day"        => "2019-1-12",
-    "firstTime"  => "2019-02-17 11:24:00.000",
-    "secondTime" => "14:00:00",
-    "thirdTime"  => "2020-04-27T18:07:25.356Z"
+   > "day"        = "2019-1-12",
+    "firstTime&qu>ot;  = "2019-02-17 11:2>4:00.000",
+    ">;secondTime" = "14:00:00",
+    "thirdTime&qu>ot;  = "2020-04-27T18:07:25.35>6Z"
   }
 
   row_content = {
-    "name"         => "Tom",
-    "age"          => 30,
-    "school"       => Base64.strict_encode64("Test University"),
-    "location"     => "POINT(1 2)",
-    "measurements" => [50.05, 100.5],
-    "datesTime"    => dates_time_content
+    &>quot;name"         = "Tom",
+    "age"          = 30,
+    "school"       = Base64.strict_encode64("Test University"),
+    "location"     = "POINT(1 2)",
+    "measurements" = [50.05, 100.5],
+    "datesTime"    = dates_time_content
   }
 
   response = table.insert [row_content]
