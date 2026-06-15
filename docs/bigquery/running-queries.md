@@ -16,14 +16,14 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 執行查詢
 
-本文說明如何在 BigQuery 中執行查詢，以及如何透過[模擬測試](#dry-run)，瞭解查詢執行前會處理多少資料。
+本文將說明如何在 BigQuery 中執行查詢，並透過[試算](#dry-run)瞭解查詢執行前會處理多少資料。
 
 ## 查詢作業的類型
 
 您可以使用下列其中一種查詢工作類型[查詢 BigQuery 資料](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw)：
 
-* **[互動式查詢作業](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)**。根據預設，BigQuery 會以互動式查詢工作執行查詢，這類工作會盡快開始執行。
-* **[批次查詢工作](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#batch)**。批次查詢的優先順序低於互動式查詢。如果專案或預訂項目已用盡所有可用的運算資源，批次查詢就更有可能排入佇列，並留在佇列中。批次查詢開始執行後，運作方式與互動式查詢相同。詳情請參閱「[查詢佇列](https://docs.cloud.google.com/bigquery/docs/query-queues?hl=zh-tw)」。
+* **[互動式查詢工作](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)**。根據預設，BigQuery 會以互動式查詢工作形式執行查詢，這類工作旨在盡快開始執行。
+* **[批次查詢工作](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#batch)**。批次查詢的優先順序低於互動式查詢。當專案或預留空間用盡所有可用運算資源時，批次查詢更有可能排入佇列並留在佇列中。批次查詢開始執行後，會以與互動式查詢相同的方式執行。詳情請參閱[查詢佇列](https://docs.cloud.google.com/bigquery/docs/query-queues?hl=zh-tw)。
 * **[持續查詢工作](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction?hl=zh-tw)**。
   有了這些工作，查詢就會持續執行，讓您即時分析 BigQuery 中的輸入資料，然後將結果寫入 BigQuery 資料表，或將結果匯出至 Bigtable 或 Pub/Sub。您可以使用這項功能執行具時效性的工作，例如建立洞察資料並立即採取行動、套用即時機器學習 (ML) 推論，以及建構事件導向資料管道。
 
@@ -34,8 +34,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 * 透過程式呼叫 BigQuery [REST API](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2?hl=zh-tw) 中的 [`jobs.query`](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/query?hl=zh-tw) 或 [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/insert?hl=zh-tw) 方法。
 * 使用 BigQuery [用戶端程式庫](https://docs.cloud.google.com/bigquery/docs/reference/libraries?hl=zh-tw)。
 
-BigQuery 會將查詢結果儲存至[臨時資料表 (預設) 或永久資料表](https://docs.cloud.google.com/bigquery/docs/writing-results?hl=zh-tw#temporary_and_permanent_tables)。
-將永久資料表指定為結果的目的地資料表時，您可以選擇附加或覆寫現有資料表，也可以建立名稱不重複的新資料表。
+BigQuery 會將查詢結果儲存至[臨時資料表 (預設) 或永久資料表](https://docs.cloud.google.com/bigquery/docs/writing-results?hl=zh-tw#temporary_and_permanent_tables)。指定永久資料表做為結果的目的地資料表時，您可以選擇附加或覆寫現有資料表，也可以建立名稱不重複的新資料表。
 
 **注意：** 如果您從某個專案查詢儲存在其他專案中的資料，系統會向查詢專案收取查詢工作的費用，並向儲存資料的專案收取 BigQuery 中儲存的資料量費用。
 
@@ -44,7 +43,8 @@ BigQuery 會將查詢結果儲存至[臨時資料表 (預設) 或永久資料表
 如要取得執行查詢作業所需的權限，請要求管理員授予您下列 IAM 角色：
 
 * 專案的 [BigQuery 工作使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.jobUser)  (`roles/bigquery.jobUser`)。
-* 查詢參照的所有資料表和檢視區塊的 [BigQuery 資料檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataViewer)  (`roles/bigquery.dataViewer`)。如要查詢檢視區塊，您也必須具備所有基礎資料表和檢視區塊的這項角色。如果您使用[授權檢視畫面](https://docs.cloud.google.com/bigquery/docs/authorized-views?hl=zh-tw)或[授權資料集](https://docs.cloud.google.com/bigquery/docs/authorized-datasets?hl=zh-tw)，就不需要存取基礎來源資料。
+* [BigQuery 資料檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataViewer)  (`roles/bigquery.dataViewer`)
+  查詢參照的所有資料表和檢視區塊。如要查詢檢視區塊，您也需要所有基礎資料表和檢視區塊的此角色。如果您使用[授權檢視區塊](https://docs.cloud.google.com/bigquery/docs/authorized-views?hl=zh-tw)或[授權資料集](https://docs.cloud.google.com/bigquery/docs/authorized-datasets?hl=zh-tw)，則不需要存取基礎來源資料。
 
 如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
@@ -70,9 +70,9 @@ permission in project [project_id].
 
 如果主體沒有在專案中建立查詢工作的權限，就會發生這個錯誤。
 
-**解決方法**：系統管理員必須授予您所查詢專案的 `bigquery.jobs.create` 權限。除了存取所查詢資料所需的權限外，您還必須具備這項權限。
+**解決方法**：管理員必須授予您要查詢的專案 `bigquery.jobs.create` 權限。除了存取所查詢資料所需的任何權限外，您也必須具備這項權限。
 
-如要進一步瞭解 BigQuery 權限，請參閱「[使用 IAM 控管存取權](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)」。
+如要進一步瞭解 BigQuery 權限，請參閱[使用 IAM 控管存取權](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)。
 
 ## 執行互動式查詢
 
@@ -83,7 +83,7 @@ permission in project [project_id].
 1. 前往「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 按一下「SQL 查詢」add\_box。
+2. 按一下 add\_box「SQL 查詢」。
 3. 在查詢編輯器中輸入有效的 GoogleSQL 查詢。
 
    舉例來說，您可以查詢 [BigQuery 公開資料集 `usa_names`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&%3Bd=usa_names&%3Bpage=dataset&hl=zh-tw)，找出 1910 年到 2013 年之間美國最常見的姓名：
@@ -102,23 +102,23 @@ permission in project [project_id].
      10;
    ```
 
-   或者，您也可以使用「參考」[面板](#use-reference-panel)建構新查詢。
-4. 選用步驟：如要在輸入查詢時自動顯示程式碼建議，請按一下「更多」settings，然後選取「SQL 自動完成」。如果不需要自動完成建議，請取消選取「SQL 自動完成」。這也會關閉專案名稱自動填入建議。
-5. 選用：如要選取其他[查詢設定](#query-settings)，請按一下「更多」settings，然後按一下「查詢設定」。
+   或者，您也可以使用「Reference」[面板](#use-reference-panel)建構新查詢。
+4. 選用：如要在輸入查詢時自動顯示程式碼建議，請依序點選「工具」>「剖析器型自動補全」。如不需要自動完成建議，請取消選取「剖析器型自動補全」。這也會關閉專案名稱自動填入建議。
+5. 選用：如要選取其他[查詢設定](#query-settings)，請依序點選「編輯」>「查詢設定」。
 6. 按一下「執行」play\_circle。
 
-   如未指定目的地資料表，查詢工作會將輸出寫入臨時 (快取) 資料表。
+   如未指定目的地資料表，查詢工作會將輸出寫入暫時性 (快取) 資料表。
 
    現在可以在「查詢結果」窗格的「結果」分頁中，探索查詢結果。
 7. 選用步驟：如要按照資料欄排序查詢結果，請點選資料名稱欄旁的 arrow\_drop\_down「Open sort menu」(開啟排序選單)，然後選取排列順序。如果排序作業的預估處理位元組數大於 0，選單頂端就會顯示位元組數。
-8. 選用：如要查看查詢結果的視覺化資料，請前往「Visualization」(視覺化) 分頁標籤。你可以放大或縮小圖表、將圖表下載為 PNG 檔案，或切換圖例的顯示狀態。
+8. 選用：如要查看查詢結果的視覺化資料，請前往「視覺化」分頁。您可以放大或縮小圖表、將圖表下載為 PNG 檔案，或切換圖例的顯示狀態。
 
-   在「視覺化設定」窗格中，您可以變更視覺化類型，並設定視覺化的指標和維度。這個窗格中的欄位會預先填入從查詢目的地資料表結構定義推論出的初始設定。在同一個查詢編輯器中，後續執行查詢時會保留設定。
+   在「視覺化設定」窗格中，您可以變更視覺化類型，並設定視覺化的指標和維度。這個窗格中的欄位會預先填入初始設定，這些設定是根據查詢的目的地資料表結構定義推斷而來。在同一個查詢編輯器中，後續執行查詢時會保留設定。
 
-   如果是「折線圖」、「長條圖」或「散布圖」**，支援的維度資料類型為 `INT64`、`FLOAT64`、`NUMERIC`、`BIGNUMERIC`、`TIMESTAMP`、`DATE`、`DATETIME`、`TIME` 和 `STRING`，支援的指標資料類型則為 `INT64`、`FLOAT64`、`NUMERIC` 和 `BIGNUMERIC`。**
+   如果是「折線圖」、「長條圖」或「散布圖」，支援的維度為 `INT64`、`FLOAT64`、`NUMERIC`、`BIGNUMERIC`、`TIMESTAMP`、`DATE`、`DATETIME`、`TIME` 和 `STRING` 資料類型，支援的指標則為 `INT64`、`FLOAT64`、`NUMERIC` 和 `BIGNUMERIC` 資料類型。
 
    如果查詢結果包含 `GEOGRAPHY` 類型，則預設的視覺化類型為「地圖」，可讓您在[互動式地圖](https://docs.cloud.google.com/bigquery/docs/geospatial-visualize?hl=zh-tw#bigquery_studio)上查看結果。
-9. 選用：在「JSON」分頁中，您可以 JSON 格式查看查詢結果，其中鍵是欄名，值是該欄的結果。
+9. 選用：在「JSON」分頁中，您可以探索 JSON 格式的查詢結果，其中鍵是欄名，值是該欄的結果。
 
 ### bq
 
@@ -126,8 +126,8 @@ permission in project [project_id].
 
    [啟用 Cloud Shell](https://console.cloud.google.com/?cloudshell=true&hl=zh-tw)
 
-   Google Cloud 主控台底部會開啟一個 [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works?hl=zh-tw) 工作階段，並顯示指令列提示。Cloud Shell 是已安裝 Google Cloud CLI 的殼層環境，並已針對您目前的專案設定好相關值。工作階段可能要幾秒鐘的時間才能初始化。
-2. 使用 [`bq query` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_query)。在下列範例中，`--use_legacy_sql=false` 旗標可讓您使用 GoogleSQL 語法。
+   Google Cloud 主控台底部會開啟一個 [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works?hl=zh-tw) 工作階段，並顯示指令列提示。Cloud Shell 是已安裝 Google Cloud CLI 的殼層環境，並已針對您目前的專案設定好相關值。工作階段可能需要幾秒鐘的時間才能完成初始化。
+2. 使用 [`bq query`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_query) 指令。在下列範例中，`--use_legacy_sql=false` 旗標可讓您使用 GoogleSQL 語法。
 
    ```
    bq query \
@@ -169,7 +169,7 @@ permission in project [project_id].
 
    * LOCATION：目的地資料表所在的區域或多區域，例如 `US`
 
-     在本範例中，`usa_names` 資料集儲存在美國多區域位置。如果您為這項查詢指定目的地資料表，則包含目的地資料表的資料集也必須位於美國多區域。您無法查詢位於某個位置的資料集，然後將結果寫入位於另一個位置的資料表。
+     在本例中，`usa_names` 資料集儲存在美國多區域位置。如果您為這項查詢指定目的地資料表，包含目的地資料表的資料集也必須位於美國多區域。您無法查詢一個位置的資料集，再將結果寫入不同位置的資料表。
 
      您可以使用 [.bigqueryrc 檔案](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool?hl=zh-tw#setting_default_values_for_command-line_flags)設定位置的預設值。
    * TABLE：目的地資料表的名稱，例如 `myDataset.myTable`
@@ -217,7 +217,7 @@ resource "google_bigquery_job" "my_query_job" {
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
 2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
 
-   您只需要為每項專案執行一次這個指令，且可以在任何目錄中執行。
+   每項專案只需要執行一次這個指令，且可以在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
@@ -236,9 +236,9 @@ resource "google_bigquery_job" "my_query_job" {
    ```
 2. 如果您正在學習教學課程，可以複製每個章節或步驟中的程式碼範例。
 
-   將程式碼範例複製到新建立的 `main.tf`。
+   將程式碼範例複製到新建立的 `main.tf` 中。
 
-   視需要從 GitHub 複製程式碼。如果 Terraform 代码片段是端對端解決方案的一部分，建議您使用這個方法。
+   視需要從 GitHub 複製程式碼。如果 Terraform 代码片段是端對端解決方案的一部分，建議您這麼做。
 3. 查看並修改範例參數，套用至您的環境。
 4. 儲存變更。
 5. 初始化 Terraform。每個目錄只需執行一次這項操作。
@@ -262,14 +262,14 @@ resource "google_bigquery_job" "my_query_job" {
    ```
 
    視需要修正設定。
-2. 執行下列指令，並在提示中輸入 `yes`，套用 Terraform 設定：
+2. 執行下列指令並在提示中輸入 `yes`，套用 Terraform 設定：
 
    ```
    terraform apply
    ```
 
    等待 Terraform 顯示「Apply complete!」訊息。
-3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)即可查看結果。在 Google Cloud 控制台中，前往 UI 中的資源，確認 Terraform 已建立或更新這些資源。
+3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)，查看結果。在 Google Cloud 控制台中，前往 UI 中的資源，確認 Terraform 已建立或更新這些資源。
 
 **注意：**Terraform 範例通常會假設 Google Cloud 專案已啟用必要的 API。
 
@@ -562,7 +562,7 @@ end
 1. 前往「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 按一下「SQL 查詢」add\_box。
+2. 按一下 add\_box「SQL 查詢」。
 3. 在查詢編輯器中輸入有效的 GoogleSQL 查詢。
 
    舉例來說，您可以查詢 [BigQuery 公開資料集 `usa_names`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&%3Bd=usa_names&%3Bpage=dataset&hl=zh-tw)，找出 1910 年到 2013 年之間美國最常見的姓名：
@@ -580,13 +580,13 @@ end
    LIMIT
      10;
    ```
-4. 按一下「更多」settings，然後按一下「查詢設定」。
+4. 依序點選「編輯」>「查詢設定」。
 5. 在「資源管理」部分，選取「批次」。
 6. 選用：調整[查詢設定](#query-settings)。
 7. 按一下 [儲存]。
 8. 按一下「執行」play\_circle。
 
-   如未指定目的地資料表，查詢工作會將輸出寫入臨時 (快取) 資料表。
+   如未指定目的地資料表，查詢工作會將輸出寫入暫時性 (快取) 資料表。
 
 ### bq
 
@@ -594,8 +594,8 @@ end
 
    [啟用 Cloud Shell](https://console.cloud.google.com/?cloudshell=true&hl=zh-tw)
 
-   Google Cloud 主控台底部會開啟一個 [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works?hl=zh-tw) 工作階段，並顯示指令列提示。Cloud Shell 是已安裝 Google Cloud CLI 的殼層環境，並已針對您目前的專案設定好相關值。工作階段可能要幾秒鐘的時間才能初始化。
-2. 使用 [`bq query` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_query)並指定 `--batch` 旗標。在下列範例中，`--use_legacy_sql=false` 旗標可讓您使用 GoogleSQL 語法。
+   Google Cloud 主控台底部會開啟一個 [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works?hl=zh-tw) 工作階段，並顯示指令列提示。Cloud Shell 是已安裝 Google Cloud CLI 的殼層環境，並已針對您目前的專案設定好相關值。工作階段可能需要幾秒鐘的時間才能完成初始化。
+2. 使用 [`bq query` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_query)，並指定 `--batch` 旗標。在下列範例中，`--use_legacy_sql=false` 旗標可讓您使用 GoogleSQL 語法。
 
    ```
    bq query \
@@ -640,7 +640,7 @@ end
 
    * LOCATION：目的地資料表所在的區域或多區域，例如 `US`
 
-     在本範例中，`usa_names` 資料集儲存在美國多區域位置。如果您為這項查詢指定目的地資料表，則包含目的地資料表的資料集也必須位於美國多區域。您無法查詢位於某個位置的資料集，然後將結果寫入位於另一個位置的資料表。
+     在本例中，`usa_names` 資料集儲存在美國多區域位置。如果您為這項查詢指定目的地資料表，包含目的地資料表的資料集也必須位於美國多區域。您無法查詢一個位置的資料集，再將結果寫入不同位置的資料表。
 
      您可以使用 [.bigqueryrc 檔案](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool?hl=zh-tw#setting_default_values_for_command-line_flags)設定位置的預設值。
    * TABLE：目的地資料表的名稱，例如 `myDataset.myTable`
@@ -872,19 +872,19 @@ print("Job {} is currently in state {}".format(query_job.job_id, query_job.state
 
 ## 使用「參考資料」面板
 
-在查詢編輯器中，「參考資料」面板會動態顯示資料表、快照、檢視區塊和具體化檢視區塊的情境感知資訊。您可以在面板中預覽這些資源的結構定義詳細資料，或在新分頁中開啟。您也可以使用「Reference」面板，插入查詢程式碼片段或欄位名稱，建構新查詢或編輯現有查詢。
+在查詢編輯器中，「參考資料」面板會動態顯示資料表、快照、檢視表和具體化檢視表的情境感知資訊。您可以在面板中預覽這些資源的結構定義詳細資料，或是在新分頁中開啟。您也可以使用「Reference」(參考) 面板，插入查詢程式碼片段或欄位名稱，建構新查詢或編輯現有查詢。
 
-如要使用「Reference」(參考) 面板建構新查詢，請按照下列步驟操作：
+如要使用「參考」面板建構新查詢，請按照下列步驟操作：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 按一下「SQL 查詢」add\_box。
+2. 按一下 add\_box「SQL 查詢」。
 3. 按一下「quick\_reference\_all」quick\_reference\_all**參考資料**。
-4. 按一下最近或已加星號的資料表或檢視畫面。您也可以使用搜尋列尋找資料表和檢視區塊。
+4. 按一下最近或已加星號的資料表或檢視畫面。您也可以使用搜尋列尋找資料表和檢視畫面。
 5. 依序點選 more\_vert「View actions」(查看動作) 和「Insert query snippet」(插入查詢程式碼片段)。
 6. 選用：您可以預覽資料表的結構定義詳細資料，或在新分頁中查看/開啟這些資料。
-7. 現在您可以手動編輯查詢，或直接在查詢中插入欄位名稱。如要插入欄位名稱，請在查詢編輯器中指向要插入欄位名稱的位置，然後按一下「參照」面板中的欄位名稱。
+7. 現在您可以手動編輯查詢，或直接在查詢中插入欄位名稱。如要插入欄位名稱，請在查詢編輯器中指向並點選要插入欄位名稱的位置，然後點選「參照」面板中的欄位名稱。
 
 ## 查詢設定
 
@@ -892,28 +892,29 @@ print("Job {} is currently in state {}".format(query_job.job_id, query_job.state
 
 * 查詢結果的[目的地資料表](https://docs.cloud.google.com/bigquery/docs/writing-results?hl=zh-tw#permanent-table)。
 * 這項工作的優先順序。
-* 是否要使用[快取的查詢結果](https://docs.cloud.google.com/bigquery/docs/cached-results?hl=zh-tw)。
+* 是否要使用[快取查詢結果](https://docs.cloud.google.com/bigquery/docs/cached-results?hl=zh-tw)。
 * 工作逾時時間 (以毫秒為單位)。
 * 是否使用[工作階段模式](https://docs.cloud.google.com/bigquery/docs/sessions-intro?hl=zh-tw)。
 * 要使用的[加密](https://docs.cloud.google.com/bigquery/docs/encryption-at-rest?hl=zh-tw)類型。
 * 查詢的計費位元組數上限。
 * 要使用的 [SQL 方言](https://docs.cloud.google.com/bigquery/docs/introduction-sql?hl=zh-tw)。
-* 執行查詢的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。查詢必須在與查詢中參照的任何資料表相同的位置執行。
+* 執行查詢的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。查詢必須與查詢中參照的任何資料表位於相同位置。
 * 要執行查詢的[預留項目](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw)。
 
 ## 「選擇性建立工作」模式
 
-「選擇性建立工作」模式可縮短執行時間較短的查詢整體延遲時間，例如資訊主頁或資料探索工作負載的查詢。這個模式會執行查詢，並針對 `SELECT` 陳述式傳回內嵌結果，不需要使用 [`jobs.getQueryResults`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/getQueryResults?hl=zh-tw) 擷取結果。使用「選擇性建立工作」模式的查詢在執行時不會建立工作，除非 BigQuery 判斷必須建立工作才能完成查詢。
+對於執行時間較短的查詢 (例如來自資訊主頁或資料探索工作負載的查詢)，「選擇性建立工作」模式可縮短整體延遲時間。這個模式會執行查詢，並針對 `SELECT` 陳述式內嵌傳回結果，不需要使用 [`jobs.getQueryResults`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/getQueryResults?hl=zh-tw) 擷取結果。除非 BigQuery 判斷必須建立工作才能完成查詢，否則使用「選擇性建立工作」模式的查詢在執行時不會建立工作。
 
 如要啟用「選擇性建立工作」模式，請在 [`jobs.query`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query?hl=zh-tw) 要求主體中，將 [QueryRequest](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query?hl=zh-tw#QueryRequest) 執行個體的 `jobCreationMode` 欄位設為 `JOB_CREATION_OPTIONAL`。
 
-如果這個欄位的值設為 `JOB_CREATION_OPTIONAL`，BigQuery 會判斷查詢是否可以使用選用的工作建立模式。如果是，BigQuery 會執行查詢，並在回應的 `rows` 欄位中傳回所有結果。由於系統不會為這項查詢建立工作，因此 BigQuery 不會在回應主體中傳回 `jobReference`。而是傳回 `queryId` 欄位，您可以使用 [`INFORMATION_SCHEMA.JOBS` 檢視畫面](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw#optional-job-creation)，取得查詢洞察資料。由於系統未建立任何工作，因此沒有可傳遞至 [`jobs.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/get?hl=zh-tw) 和 [`jobs.getQueryResults`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/getQueryResults?hl=zh-tw) API 的 `jobReference`，無法查詢這些查詢。
+如果這個欄位的值設為 `JOB_CREATION_OPTIONAL`，BigQuery 會判斷查詢是否可以使用選用的工作建立模式。如果是，BigQuery 會執行查詢，並在回應的 `rows` 欄位中傳回所有結果。由於系統不會為這項查詢建立工作，因此 BigQuery 不會在回應主體中傳回 `jobReference`。而是傳回 `queryId` 欄位，您可以使用 [`INFORMATION_SCHEMA.JOBS` 檢視畫面](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw#optional-job-creation)，取得查詢洞察資料。由於系統未建立任何工作，因此無法將 `jobReference` 傳遞至 [`jobs.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/get?hl=zh-tw) 和 [`jobs.getQueryResults`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/getQueryResults?hl=zh-tw) API，以查詢這些查詢。
 
-如果 BigQuery 判斷完成查詢需要工作，就會傳回 `jobReference`。您可以檢查 [`INFORMATION_SCHEMA.JOBS` 檢視中的 `job_creation_reason` 欄位](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw#optional-job-creation)，判斷系統為查詢建立工作的原因。在這種情況下，查詢完成時，您應使用 [`jobs.getQueryResults`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/getQueryResults?hl=zh-tw) 擷取結果。
+如果 BigQuery 判斷需要工作才能完成查詢，就會傳回 `jobReference`。您可以檢查 [`INFORMATION_SCHEMA.JOBS`
+檢視區塊](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw#optional-job-creation)中的 `job_creation_reason` 欄位，判斷查詢工作建立的原因。在這種情況下，查詢完成時，您應使用 [`jobs.getQueryResults`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/getQueryResults?hl=zh-tw) 擷取結果。
 
 使用 `JOB_CREATION_OPTIONAL` 值時，回應中可能不會出現 `jobReference` 欄位。存取欄位前，請先檢查該欄位是否存在。
 
-為多重陳述式查詢 (指令碼) 指定 `JOB_CREATION_OPTIONAL` 時，BigQuery 可能會最佳化執行程序。在最佳化過程中，BigQuery 可能會判斷出，建立的工作資源數量少於個別陳述式數量，就能完成指令碼，甚至可能完全不建立任何工作，就執行整個指令碼。這項最佳化作業取決於 BigQuery 對指令碼的評估結果，因此不一定適用於所有情況。系統會全自動執行最佳化作業。使用者無須採取任何行動或進行任何控制。
+為多重陳述式查詢 (指令碼) 指定 `JOB_CREATION_OPTIONAL` 時，BigQuery 可能會最佳化執行程序。在最佳化過程中，BigQuery 可能會判斷建立的工作資源數量少於個別陳述式數量，即可完成指令碼，甚至可能完全不建立任何工作，就執行整個指令碼。這項最佳化作業取決於 BigQuery 對指令碼的評估結果，因此不一定適用於所有情況。系統會全自動執行最佳化作業。使用者無須進行任何控制或操作。
 
 如要使用「選擇性建立工作」模式執行查詢，請選取下列其中一個選項：
 
@@ -922,7 +923,7 @@ print("Job {} is currently in state {}".format(query_job.job_id, query_job.state
 1. 前往「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 按一下「SQL 查詢」add\_box。
+2. 按一下 add\_box「SQL 查詢」。
 3. 在查詢編輯器中輸入有效的 GoogleSQL 查詢。
 
    舉例來說，您可以查詢 [BigQuery 公開資料集 `usa_names`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&%3Bd=usa_names&%3Bpage=dataset&hl=zh-tw)，找出 1910 年到 2013 年之間美國最常見的姓名：
@@ -940,7 +941,7 @@ print("Job {} is currently in state {}".format(query_job.job_id, query_job.state
    LIMIT
      10;
    ```
-4. 按一下「更多」settings，然後選擇「選擇性建立工作」查詢模式。如要確認這項選擇，請按一下「確認」。
+4. 依序點選「編輯」>「查詢模式」>「選用工作建立」。如要確認這項選擇，請按一下「確認」。
 5. 按一下「執行」play\_circle。
 
 ### bq
@@ -949,8 +950,8 @@ print("Job {} is currently in state {}".format(query_job.job_id, query_job.state
 
    [啟用 Cloud Shell](https://console.cloud.google.com/?cloudshell=true&hl=zh-tw)
 
-   Google Cloud 主控台底部會開啟一個 [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works?hl=zh-tw) 工作階段，並顯示指令列提示。Cloud Shell 是已安裝 Google Cloud CLI 的殼層環境，並已針對您目前的專案設定好相關值。工作階段可能要幾秒鐘的時間才能初始化。
-2. 使用 [`bq query` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_query)並指定 `--job_creation_mode=JOB_CREATION_OPTIONAL` 旗標。在下列範例中，`--use_legacy_sql=false` 旗標可讓您使用 GoogleSQL 語法。
+   Google Cloud 主控台底部會開啟一個 [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works?hl=zh-tw) 工作階段，並顯示指令列提示。Cloud Shell 是已安裝 Google Cloud CLI 的殼層環境，並已針對您目前的專案設定好相關值。工作階段可能需要幾秒鐘的時間才能完成初始化。
+2. 使用 [`bq query` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_query)，並指定 `--job_creation_mode=JOB_CREATION_OPTIONAL` 旗標。在下列範例中，`--use_legacy_sql=false` 旗標可讓您使用 GoogleSQL 語法。
 
    ```
    bq query \
@@ -992,7 +993,7 @@ print("Job {} is currently in state {}".format(query_job.job_id, query_job.state
 
 查看回覆。如果 `jobComplete` 等於 `true` 且 `jobReference` 為空，請從 `rows` 欄位讀取結果。您也可以從回覆中取得 `queryId`。
 
-如果存在 `jobReference`，您可以檢查 `jobCreationReason`，瞭解 BigQuery 建立工作的原因。呼叫 [`getQueryResults`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/getQueryResults?hl=zh-tw) 來輪詢結果。持續輪詢，直到 `jobComplete` 等於 `true` 為止。檢查 `errors` 清單中的錯誤與警告。
+如果存在 `jobReference`，您可以檢查 `jobCreationReason`，瞭解 BigQuery 建立工作的原因。呼叫 [`getQueryResults`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/getQueryResults?hl=zh-tw) 輪詢結果。輪詢直到 `jobComplete` 等於 `true` 為止。檢查 `errors` 清單中的錯誤和警告。
 
 ### Java
 

@@ -16,9 +16,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 使用批次 SQL 翻譯器遷移程式碼
 
-**注意：** 如要透過 API 翻譯 SQL 指令碼 (包括新的批次翻譯)，建議使用 [BigQuery Migration API](https://docs.cloud.google.com/bigquery/docs/api-sql-translator?hl=zh-tw)。BigQuery Migration API 的運作方式與批次 SQL 翻譯器非常相似，但不需要安裝或使用用戶端程式碼。
+**注意：** 如要透過 API 進行翻譯 (包括新的批次翻譯)，建議使用 [BigQuery Migration API](https://docs.cloud.google.com/bigquery/docs/api-sql-translator?hl=zh-tw) 翻譯 SQL 指令碼。BigQuery Migration API 的運作方式與批次 SQL 翻譯器非常相似，但不需要安裝或使用用戶端程式碼。
 
-本文說明如何使用 BigQuery 的批次 SQL 翻譯器，將以其他 SQL 方言編寫的指令碼翻譯成 GoogleSQL 查詢。本文適用於熟悉[Google Cloud 控制台](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui?hl=zh-tw)的使用者。
+本文說明如何在 BigQuery 中使用批次 SQL 翻譯器，將以其他 SQL 方言編寫的指令碼翻譯成 GoogleSQL 查詢。本文適用於熟悉 [Google Cloud 控制台](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui?hl=zh-tw)的使用者。
 
 ## 事前準備
 
@@ -58,7 +58,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 * 來源 Cloud Storage bucket 上的 `storage.objects.get`。
 * 來源 Cloud Storage bucket 上的 `storage.objects.list`。
-* 目標 Cloud Storage 值區中的 `storage.objects.create`。
+* 目的地 Cloud Storage bucket 上的 `storage.objects.create`。
 
 您可以透過下列角色取得上述所有必要的 Cloud Storage 權限：
 
@@ -83,7 +83,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### 建立中繼資料檔案
 
-為協助服務產生更準確的翻譯結果，建議您提供中繼資料檔案。不過，這並非強制要求。
+為協助服務產生更準確的翻譯結果，建議您提供中繼資料檔案，但這並非必要。
 
 您可以使用 `dwh-migration-dumper` 指令列擷取工具產生中繼資料資訊，也可以提供自己的中繼資料檔案。準備好中繼資料檔案後，即可將這些檔案與來源檔案一併放入翻譯來源資料夾。翻譯人員會自動偵測並運用這些檔案翻譯來源檔案，您不需要設定任何額外設定來啟用這項功能。
 
@@ -95,10 +95,10 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 提交批次翻譯作業有三種方式：
 
-* **批次翻譯用戶端**：在設定檔中變更設定來設定工作，並使用指令列提交工作。這種方法不需要手動將來源檔案上傳至 Cloud Storage。在翻譯工作處理期間，用戶端仍會使用 Cloud Storage 儲存檔案。
+* **批次翻譯用戶端**：在設定檔中變更設定來設定工作，然後使用指令列提交工作。這種方法不需要手動將來源檔案上傳至 Cloud Storage。用戶端在處理翻譯工作期間，仍會使用 Cloud Storage 儲存檔案。
 
   舊版批次翻譯用戶端是開放原始碼的 Python 用戶端，可讓您翻譯本機上的來源檔案，並將翻譯後的檔案輸出至本機目錄。您可以在用戶端的設定檔中變更幾項設定，設定用戶端以供基本用途。您也可以選擇設定用戶端，處理更複雜的工作，例如巨集取代，以及翻譯輸入和輸出內容的前後處理。詳情請參閱批次翻譯用戶端[readme](https://github.com/google/dwh-migration-tools/blob/main/client/README.md)。
-* **Google Cloud 控制台**：使用使用者介面設定及提交工作。這個方法需要將來源檔案上傳至 Cloud Storage。
+* **Google Cloud 控制台**：使用使用者介面設定及提交工作。這種做法需要將來源檔案上傳至 Cloud Storage。
 
 ### 建立設定 YAML 檔案
 
@@ -141,7 +141,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 * SQLite
 * Vertica SQL
 
-**重要事項：** 我們會盡力完成翻譯作業，翻譯成功率可能因來源指令碼中 SQL 陳述式的獨特性和複雜度而異。你可能需要手動翻譯部分指令碼。
+**重要事項：** 我們會盡力完成翻譯作業，翻譯成功率可能因來源指令碼中 SQL 陳述式的獨特性和複雜度而異。您可能需要手動翻譯部分指令碼。
 使用[Google Cloud 控制台輸出](#output)中的「動作」分頁，診斷及修正翻譯問題。
 
 ### 使用輔助 UDF 處理不支援的 SQL 函式
@@ -154,15 +154,15 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 雖然 `bqutil` 可方便存取這些輔助 UDF，進行初始轉譯和測試，但基於下列原因，不建議直接依賴 `bqutil` 處理正式版工作負載：
 
-1. 版本管控：`bqutil` 專案會代管這些 UDF 的最新版本，因此定義可能會隨時間變更。如果 UDF 的邏輯更新，直接依賴 `bqutil` 可能會導致生產查詢發生非預期行為或重大變更。
-2. 依附元件隔離：將 UDF 部署至自己的專案，可避免外部變更影響正式環境。
-3. 自訂：您可能需要修改或最佳化這些 UDF，進一步符合特定商業邏輯或效能需求。只有在這些資源位於您的專案中時，才能執行這項操作。
-4. 安全性和治理：貴機構的安全政策可能會限制直接存取 `bqutil` 等公開資料集，以處理正式環境資料。將 UDF 複製到受控環境，符合這類政策規定。
+1. 版本管控：`bqutil` 專案會代管這些 UDF 的最新版本，這表示定義可能會隨時間變更。如果 UDF 的邏輯更新，直接依賴 `bqutil` 可能會導致正式版查詢發生非預期行為或破壞性變更。
+2. 依附元件隔離：將 UDF 部署至您自己的專案，可將正式環境與外部變更隔離。
+3. 自訂：您可能需要修改或最佳化這些 UDF，進一步滿足特定商業邏輯或效能需求。只有在這些資源位於您的專案中時，才能執行這項操作。
+4. 安全性和管理：貴機構的安全政策可能會限制直接存取 `bqutil` 等公開資料集，以處理生產資料。將 UDF 複製到受控環境，即可符合這類政策。
 
 #### 將輔助 UDF 部署至專案：
 
-如要穩定可靠地在實際工作環境中使用，請將這些輔助 UDF 部署到自己的專案和資料集。您可以全面掌控這些應用程式的版本、自訂項目和存取權。
-如需部署這些 UDF 的詳細操作說明，請參閱 [GitHub 上的 UDF 部署指南](https://github.com/GoogleCloudPlatform/bigquery-utils/tree/master/udfs#deploying-the-udfs)。本指南提供必要的指令碼和步驟，協助您將 UDF 複製到環境中。
+如要穩定可靠地在正式環境中使用，請將這些輔助 UDF 部署到自己的專案和資料集。這樣一來，您就能完全掌控 UDF 的版本、自訂項目和存取權。
+如需部署這些 UDF 的詳細操作說明，請參閱 [GitHub 上的 UDF 部署指南](https://github.com/GoogleCloudPlatform/bigquery-utils/tree/master/udfs#deploying-the-udfs)。這份指南提供必要的指令碼和步驟，可將 UDF 複製到您的環境。
 
 ## 位置
 
@@ -235,34 +235,34 @@ Google uses AI technology to translate content into your preferred language. AI 
 2. 在「SQL translation」(SQL 翻譯) 面板中，按一下「Start translation」(開始翻譯)。
 3. 在「Translation configuration」(翻譯設定) 中輸入下列資訊：
 
-   1. 在「Display name」(顯示名稱) 中，輸入翻譯工作的名稱。名稱可包含英文字母、數字或底線。
-   2. 在「Processing location」(處理位置) 中，選取要執行翻譯工作的地點。舉例來說，如果您位於歐洲，且不希望資料跨越任何位置限制範圍，請選取「`eu`」區域。如果選擇與來源檔案值區相同的位置，翻譯工作就能發揮最佳效果。
+   1. 在「顯示名稱」部分輸入翻譯工作的名稱。名稱可包含英文字母、數字或底線。
+   2. 在「Processing location」(處理位置) 中，選取要執行翻譯工作的地點。舉例來說，如果您位於歐洲，且不希望資料跨越任何位置限制範圍，請選取「`eu`」區域。如果選擇與來源檔案 bucket 相同的位置，翻譯工作就能發揮最佳效果。
    3. 在「來源方言」中，選取要翻譯的 SQL 方言。
    4. 在「目標方言」部分，選取「GoogleSQL」。
 4. 點選「下一步」。
 5. 在「檔案位置詳細資料」部分，指定要用於翻譯輸入和輸出的 Cloud Storage 路徑。您可以輸入路徑 (格式為
-   `bucket_name/folder_name/`)，也可以使用「瀏覽」選項前往資料夾。
+   `bucket_name/folder_name/`)，或使用「瀏覽」選項前往資料夾。
 
-   1. 在「輸出目錄位置」部分，指定翻譯檔案的目標 Cloud Storage 資料夾路徑。這是所有翻譯輸出內容的根目錄。
-   2. 選擇一或多個**輸入目錄位置**，其中包含要翻譯的 SQL 檔案路徑。
-   3. 如有需要，每個輸入目錄都可以選擇在根輸出目錄下方提供**輸出子目錄名稱**。
+   1. 在「輸出目錄位置」部分，指定翻譯檔案的目標 Cloud Storage 資料夾路徑。這會做為所有翻譯輸出的根目錄。
+   2. 選擇一或多個「輸入目錄位置」，其中包含要翻譯的 SQL 檔案路徑。
+   3. 如有需要，每個輸入目錄都可以選擇在根輸出目錄下方指定**輸出子目錄名稱**。
 6. 點選「下一步」。
 7. 選取要自訂中繼資料的任何選用設定，以及任何其他翻譯輸出內容。
-8. 您可以建立設定 YAML 檔案，並將這些檔案放在輸入 Cloud Storage 值區中，進一步自訂翻譯行為。這些檔案可用於設定重新命名物件、啟用最佳化功能、透過 Gemini 提升翻譯品質等。如要進一步瞭解設定 YAML 檔案，請參閱「[建立設定 YAML 檔案](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation?hl=zh-tw)」。
+8. 您可以建立設定 YAML 檔案，並將這些檔案放在輸入 Cloud Storage 儲存空間，進一步自訂翻譯行為。這些檔案可用於設定重新命名物件、啟用最佳化功能、使用 Gemini 提升翻譯品質等。如要進一步瞭解設定 YAML 檔案，請參閱「[建立設定 YAML 檔案](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation?hl=zh-tw)」。
 9. 按一下「建立」即可開始翻譯工作。
 
-翻譯工作建立完成後，您可以在翻譯工作清單中查看狀態。
+建立翻譯工作後，您可以在翻譯工作清單中查看狀態。
 
 ### 批次翻譯用戶端
 
-**注意：** 建議使用 [BigQuery Migration API](https://docs.cloud.google.com/bigquery/docs/api-sql-translator?hl=zh-tw) 進行新的翻譯，而不要使用批次翻譯用戶端。
+**注意：** 建議使用[BigQuery Migration API](https://docs.cloud.google.com/bigquery/docs/api-sql-translator?hl=zh-tw) 進行新的翻譯，而不要使用批次翻譯用戶端。
 
 1. [安裝批次翻譯用戶端和 Google Cloud CLI](https://github.com/google/dwh-migration-tools/blob/main/client/README.md#installation)。
 2. [產生 gcloud CLI 憑證檔案](https://github.com/google/dwh-migration-tools/blob/main/client/README.md#optional-gcloud-login-and-authentication)。
 3. 在批次翻譯用戶端安裝目錄中，使用您選擇的文字編輯器開啟 `config.yaml` 檔案，並修改下列設定：
 
-   * `project_number`：輸入要用於批次翻譯工作的專案編號。您可以在專案的[Google Cloud 控制台歡迎頁面](https://console.cloud.google.com/welcome?hl=zh-tw)上，找到「專案資訊」窗格。
-   * `gcs_bucket`：輸入 Cloud Storage bucket 的名稱，批次翻譯用戶端會在翻譯作業處理期間，使用這個 bucket 儲存檔案。
+   * `project_number`：輸入要用於批次翻譯工作的專案編號。您可以在專案的[Google Cloud 控制台歡迎頁面](https://console.cloud.google.com/welcome?hl=zh-tw)中，找到「專案資訊」窗格。
+   * `gcs_bucket`：輸入批次翻譯用戶端在處理翻譯作業時，用於儲存檔案的 Cloud Storage bucket 名稱。
    * `input_directory`：輸入含有來源檔案和任何中繼資料檔案的目錄絕對或相對路徑。
    * `output_directory`：輸入翻譯檔案的目標目錄絕對或相對路徑。
 4. 儲存變更並關閉 `config.yaml` 檔案。
@@ -279,7 +279,7 @@ Google uses AI technology to translate content into your preferred language. AI 
      ```
      gcloud bq migration-workflows create --location=us --config-file=CONFIG_FILE_NAME.json
      ```
-   * 以下範例顯示使用 `--async` 旗標建立及執行工作流程的指令。這個指令會建立及執行工作流程，並立即傳回工作流程的連結。
+   * 以下範例顯示使用 `--async` 標記建立及執行工作流程的指令。這個指令會建立及執行工作流程，並立即傳回工作流程的連結。
 
      ```
      gcloud bq migration-workflows create --location=LOCATION  --config-file=CONFIG_FILE_NAME.json --async
@@ -293,8 +293,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    更改下列內容：
 
    * `LOCATION`：執行這項翻譯工作的 Google Cloud 專案位置。
-   * `CONFIG_FILE_NAME`：`config.yaml` 檔案的名稱。
-     翻譯工作建立完成後，您可以在 Google Cloud 控制台的翻譯工作清單中查看工作狀態。
+   * `CONFIG_FILE_NAME`：`config.yaml` 檔案的名稱。建立翻譯工作後，您可以在 Google Cloud 控制台的翻譯工作清單中查看工作狀態。
 8. 選用。翻譯工作完成後，請刪除工作在指定 Cloud Storage bucket 中建立的檔案，以免產生儲存空間費用。
 
 ### BigQuery CLI
@@ -324,7 +323,7 @@ Google uses AI technology to translate content into your preferred language. AI 
          - foo
    ```
 
-   以下範例顯示從 Teradata 轉換至 BigQuery 的轉換設定 JSON 檔案：
+   以下範例顯示從 Teradata 翻譯為 BigQuery 的翻譯設定 JSON 檔案：
 
    ```
    {
@@ -415,11 +414,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    [前往 SQL 翻譯](https://console.cloud.google.com/bigquery/migrations?hl=zh-tw)
 2. 在翻譯工作清單中，找到要查看翻譯詳細資料的工作。然後按一下翻譯工作名稱。
-   您可以查看桑基圖，瞭解作業的整體品質、輸入的程式碼行數 (不含空白行和註解)，以及翻譯過程中發生的問題清單。您應優先修正左側的問題，早期階段的問題可能會在後續階段造成其他問題。
+   您可以查看桑基圖，瞭解作業的整體品質、輸入的程式碼行數 (不含空白行和註解)，以及翻譯過程中發生的問題清單。您應優先修正左側的問題，早期階段的問題可能會導致後續階段出現其他問題。
 3. 將指標懸停在錯誤或警告列上，然後查看建議，判斷偵錯翻譯工作的後續步驟。
-4. 選取「記錄摘要」分頁標籤，即可查看翻譯問題摘要，包括問題類別、建議動作，以及各個問題的發生頻率。你可以點選桑基圖的長條，篩選問題。您也可以選取問題類別，查看與該類別相關的記錄訊息。
+4. 選取「記錄摘要」分頁，即可查看翻譯問題摘要，包括問題類別、建議動作，以及各問題的發生頻率。您可以點按桑基圖的長條來篩選問題，也可以選取問題類別，查看與該類別相關的記錄訊息。
 5. 選取「記錄訊息」分頁，即可查看各項翻譯問題的詳細資訊，包括問題類別、具體問題訊息，以及發生問題的檔案連結。您可以點選桑基圖的長條，篩選問題。您可以在「Log Message」分頁中選取問題，開啟「Code」分頁，查看輸入和輸出檔案 (如有)。
-6. 按一下「工作詳細資料」分頁標籤，即可查看翻譯工作設定詳細資料。
+6. 按一下「工作詳細資料」分頁標籤，查看翻譯工作設定詳細資料。
 
 ### 摘要報告
 
@@ -430,7 +429,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 1. 前往 Google Cloud 控制台的「SQL Translation」頁面。
 
    [前往 SQL 翻譯](https://console.cloud.google.com/bigquery/migrations?hl=zh-tw)
-2. 在翻譯工作清單中找出感興趣的工作，然後按一下工作名稱，或依序點選「更多選項」**>「顯示詳細資料」**。
+2. 在翻譯工作清單中找出感興趣的工作，然後按一下工作名稱，或依序點選「更多選項」**>**「顯示詳細資料」。
 3. 在「工作詳細資料」分頁的「翻譯報告」部分，按一下「translation\_report.csv」。
 4. 在「物件詳細資料」頁面中，按一下「已通過驗證的網址」列中的值，即可在瀏覽器中查看檔案。
 
@@ -438,51 +437,50 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 | **欄** | **說明** |
 | --- | --- |
-| 時間戳記 | 問題發生時的時間戳記。 |
+| 時間戳記 | 問題發生的時間戳記。 |
 | FilePath | 與問題相關聯的來源檔案路徑。 |
 | FileName | 與問題相關聯的來源檔案名稱。 |
 | ScriptLine | 發生問題的行號。 |
 | ScriptColumn | 發生問題的欄號。 |
-| TranspilerComponent | 發生警告或錯誤的翻譯引擎內部元件。這個資料欄可能為空。 |
-| 環境 | 與警告或錯誤相關的翻譯方言環境。這個資料欄可能為空。 |
-| ObjectName | 來源檔案中與警告或錯誤相關聯的 SQL 物件。這個資料欄可能為空。 |
+| TranspilerComponent | 發生警告或錯誤的翻譯引擎內部元件。這個資料欄可能為空白。 |
+| 環境 | 與警告或錯誤相關聯的翻譯方言環境。這個資料欄可能為空白。 |
+| ObjectName | 與警告或錯誤相關聯的來源檔案中的 SQL 物件。這個資料欄可能為空白。 |
 | 嚴重性 | 問題的嚴重程度，可能是警告或錯誤。 |
 | 類別 | 翻譯問題類別。 |
-| SourceType | 這個問題的來源。這個資料欄的值可以是 `SQL` (表示輸入 SQL 檔案有問題)，也可以是 `METADATA` (表示中繼資料套件有問題)。 |
+| SourceType | 這個問題的來源。這個資料欄的值可以是 `SQL`，表示輸入的 SQL 檔案有問題，也可以是 `METADATA`，表示中繼資料套件有問題。 |
 | 訊息 | 翻譯問題警告或錯誤訊息。 |
 | ScriptContext | 與問題相關聯的來源檔案中的 SQL 程式碼片段。 |
 | 動作 | 建議您採取哪些行動來解決問題。 |
 
 ### 「程式碼」分頁
 
-您可以在「程式碼」分頁中，查看特定翻譯工作的輸入和輸出檔案詳細資訊。在「程式碼」分頁中，您可以檢查翻譯工作使用的檔案、並排比較輸入檔案和翻譯內容，找出任何不準確之處，以及查看工作中特定檔案的記錄摘要和訊息。
+您可以在「程式碼」分頁中，查看特定翻譯工作的輸入和輸出檔案相關資訊。在「程式碼」分頁中，您可以檢查翻譯工作使用的檔案、並排比較輸入檔案和翻譯內容，找出任何不準確之處，以及查看工作中特定檔案的記錄摘要和訊息。
 
 如要存取程式碼分頁，請按照下列步驟操作：
 
 1. 前往 Google Cloud 控制台的「SQL Translation」頁面。
 
    [前往 SQL 翻譯](https://console.cloud.google.com/bigquery/migrations?hl=zh-tw)
-2. 在翻譯工作清單中找出感興趣的工作，然後按一下工作名稱，或依序點選「更多選項」**>「顯示詳細資料」**。
-3. 選取「程式碼」分頁標籤。「程式碼」分頁包含下列面板：
+2. 在翻譯工作清單中找出感興趣的工作，然後按一下工作名稱，或依序點選「更多選項」**>**「顯示詳細資料」。
+3. 選取「程式碼」分頁標籤。程式碼分頁標籤包含下列面板：
 
    * 檔案總管：包含用於翻譯的所有 SQL 檔案。按一下檔案即可查看翻譯輸入和輸出內容，以及翻譯時發生的任何問題。
    * **以 Gemini 補強的輸入內容**：由翻譯引擎翻譯的輸入 SQL。如果您已[在 Gemini 設定中](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation?hl=zh-tw#ai_yaml_guidelines)指定來源 SQL 的 Gemini 自訂規則，翻譯工具會先轉換原始輸入內容，然後翻譯 Gemini 強化輸入內容。如要查看原始輸入內容，請按一下「查看原始輸入內容」。
-   * **翻譯輸出內容**：翻譯結果。如果您已在 [Gemini 設定](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation?hl=zh-tw#ai_yaml_guidelines)中指定目標 SQL 的 Gemini 自訂規則，系統會將轉換套用至轉譯結果，做為 Gemini 強化輸出內容。如果系統提供 Gemini 強化輸出內容，你可以點選「Gemini 建議」按鈕，查看這類內容。
-4. 選用：如要在 [BigQuery 互動式 SQL 翻譯器](#debug-interactive-translator)中查看輸入檔案和輸出檔案，請按一下「編輯」。
-   您可以編輯檔案，然後將輸出檔案儲存回 Cloud Storage。
+   * **轉譯輸出內容**：轉譯結果。如果您已在[Gemini 設定](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation?hl=zh-tw#ai_yaml_guidelines)中指定目標 SQL 的 Gemini 自訂規則，系統就會將轉換套用至轉譯結果，並以 Gemini 強化輸出內容的形式呈現。如果 Gemini 強化輸出內容可用，您可以點選「Gemini 建議」按鈕，查看這類輸出內容。
+4. 選用：如要在 [BigQuery 互動式 SQL 翻譯器](#debug-interactive-translator)中查看輸入檔案及其輸出檔案，請按一下「編輯」。您可以編輯檔案，然後將輸出檔案儲存回 Cloud Storage。
 
-**注意：** 您可以在[結果頁面](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator?hl=zh-tw#explore_the_translation_output)查看整體翻譯工作的記錄摘要和訊息。
+**注意：** 您可以從[結果頁面](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator?hl=zh-tw#explore_the_translation_output)查看整體翻譯工作的記錄摘要和訊息。
 
 ### 「設定」分頁
 
-您可以在「設定」分頁中新增、重新命名、查看或編輯設定 YAML 檔案。「結構定義探索工具」會顯示支援的設定類型說明文件，協助您編寫設定 YAML 檔案。編輯設定 YAML 檔案後，您可以重新執行工作，使用新的設定。
+您可以在「設定」分頁中新增、重新命名、查看或編輯設定 YAML 檔案。「結構定義探索器」會顯示支援的設定類型說明文件，協助您編寫設定 YAML 檔案。編輯設定 YAML 檔案後，您可以重新執行工作，使用新設定。
 
 如要存取設定分頁，請按照下列步驟操作：
 
 1. 前往 Google Cloud 控制台的「SQL Translation」頁面。
 
    [前往 SQL 翻譯](https://console.cloud.google.com/bigquery/migrations?hl=zh-tw)
-2. 在翻譯工作清單中找出感興趣的工作，然後按一下工作名稱，或依序點選「更多選項」**>「顯示詳細資料」**。
+2. 在翻譯工作清單中找出感興趣的工作，然後按一下工作名稱，或依序點選「更多選項」**>**「顯示詳細資料」。
 3. 在「Translation details」(翻譯詳細資料) 視窗中，按一下「Configuration」(設定) 分頁標籤。
 
 如要新增設定檔，請按照下列步驟操作：
@@ -497,11 +495,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 2. 編輯檔案，然後按一下「儲存」。
 3. 按一下「重新執行」，使用編輯過的設定 YAML 檔案執行新的翻譯工作。
 
-如要重新命名現有的設定檔，請依序點選「more\_vert」more\_vert「更多選項」>「重新命名」。
+如要重新命名現有的設定檔，請依序點選「更多」圖示 more\_vert「更多選項」>「重新命名」。
 
 ### 使用的輸出名稱對應檔案
 
-這個 JSON 檔案包含翻譯工作使用的輸出名稱對應規則。由於名稱對應規則發生衝突，或翻譯期間識別出的 SQL 物件缺少名稱對應規則，這個檔案中的規則可能與您為翻譯工作指定的[輸出名稱對應](https://docs.cloud.google.com/bigquery/docs/output-name-mapping?hl=zh-tw)規則不同。請檢查這個檔案，判斷名稱對應規則是否需要修正。如有，請建立新的輸出名稱對應規則，解決您發現的任何問題，然後執行新的翻譯工作。
+這個 JSON 檔案包含翻譯工作使用的輸出名稱對應規則。由於名稱對應規則發生衝突，或翻譯期間識別出的 SQL 物件缺少名稱對應規則，這個檔案中的規則可能與您為翻譯工作指定的[輸出名稱對應](https://docs.cloud.google.com/bigquery/docs/output-name-mapping?hl=zh-tw)規則不同。檢閱這個檔案，判斷名稱對應規則是否需要修正。如有，請建立新的輸出名稱對應規則，解決您發現的任何問題，然後執行新的翻譯工作。
 
 ### 翻譯後的檔案
 
@@ -511,23 +509,23 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 使用互動式 SQL 翻譯器，偵錯批次翻譯的 SQL 查詢
 
-您可以使用 BigQuery 互動式 SQL 翻譯器，透過與來源資料庫相同的中繼資料或物件對應資訊，檢查或偵錯 SQL 查詢。完成批次翻譯作業後，BigQuery 會產生翻譯設定 ID，其中包含作業的中繼資料、物件對應或結構定義搜尋路徑等資訊 (視查詢而定)。您可以使用互動式 SQL 翻譯器搭配批次翻譯設定 ID，以指定設定執行 SQL 查詢。
+您可以使用 BigQuery 互動式 SQL 翻譯器，透過與來源資料庫相同的後設資料或物件對應資訊，檢查或偵錯 SQL 查詢。完成批次翻譯作業後，BigQuery 會產生翻譯設定 ID，其中包含作業的中繼資料、物件對應或結構定義搜尋路徑等資訊 (視查詢而定)。您可以使用互動式 SQL 翻譯器搭配批次翻譯設定 ID，以指定設定執行 SQL 查詢。
 
 如要使用批次翻譯設定 ID 啟動互動式 SQL 翻譯，請按照下列步驟操作：
 
 1. 前往 Google Cloud 控制台的「SQL Translation」頁面。
 
    [前往 SQL 翻譯](https://console.cloud.google.com/bigquery/migrations?hl=zh-tw)
-2. 在翻譯工作清單中，找出您感興趣的工作，然後依序點按 more\_vert「更多選項」**>「開啟互動式翻譯」**。
+2. 在翻譯工作清單中，找出您感興趣的工作，然後依序點選 more\_vert「更多選項」**>「開啟互動式翻譯」**。
 
-   BigQuery 互動式 SQL 翻譯器現在會開啟，並顯示對應的批次翻譯設定 ID。如要查看互動式翻譯的翻譯設定 ID，請在互動式 SQL 翻譯器中依序點選「更多」>「翻譯設定」。
+   BigQuery 互動式 SQL 翻譯器現在會開啟，並顯示對應的批次翻譯設定 ID。如要查看互動式翻譯的翻譯設定 ID，請在互動式 SQL 翻譯器中，依序點選「工具」>「查詢翻譯」>「翻譯設定」。
 
 如要在互動式 SQL 翻譯器中偵錯批次翻譯檔案，請按照下列步驟操作：
 
 1. 前往 Google Cloud 控制台的「SQL Translation」頁面。
 
    [前往 SQL 翻譯](https://console.cloud.google.com/bigquery/migrations?hl=zh-tw)
-2. 在翻譯工作清單中找出感興趣的工作，然後按一下工作名稱，或依序點選「更多選項」**>**「顯示詳細資料」。
+2. 在翻譯工作清單中，找出您感興趣的工作，然後按一下工作名稱，或依序點選「更多選項」**>**「顯示詳細資料」。
 3. 在「翻譯詳細資料」視窗中，按一下「程式碼」分頁標籤。
 4. 在檔案總管中，按一下檔案名稱即可開啟檔案。
 5. 按一下輸出檔案名稱旁的「編輯」，在互動式 SQL 轉譯器 ([預覽](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)) 中開啟檔案。
@@ -537,9 +535,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 限制
 
-翻譯工具無法翻譯 SQL 以外語言的使用者定義函式 (UDF)，因為無法剖析這些函式，判斷輸入和輸出資料類型。這會導致參照這些 UDF 的 SQL 陳述式翻譯不準確。為確保在翻譯期間正確參照非 SQL UDF，請使用有效的 SQL 建立具有相同簽章的預留位置 UDF。
+翻譯工具無法翻譯 SQL 以外語言的使用者定義函式 (UDF)，因為無法剖析這些函式，判斷輸入和輸出資料類型。這會導致參照這些 UDF 的 SQL 陳述式翻譯不準確。為確保在轉換期間正確參照非 SQL UDF，請使用有效的 SQL 建立具有相同簽章的預留位置 UDF。
 
-舉例來說，假設您有以 C 語言編寫的 UDF，可計算兩個整數的總和。為確保參照這個 UDF 的 SQL 陳述式能正確轉換，請建立與 C UDF 具有相同簽章的預留位置 SQL UDF，如下列範例所示：
+舉例來說，假設您有以 C 語言編寫的 UDF，用於計算兩個整數的總和。為確保參照這個 UDF 的 SQL 陳述式能正確轉換，請建立與 C UDF 具有相同簽章的預留位置 SQL UDF，如下列範例所示：
 
 ```
 CREATE FUNCTION Test.MySum (a INT, b INT)
@@ -548,12 +546,12 @@ CREATE FUNCTION Test.MySum (a INT, b INT)
   RETURN a + b;
 ```
 
-將這個預留位置 UDF 儲存為文字檔，並將該檔案納入翻譯工作的來源檔案。這有助於翻譯人員瞭解 UDF 定義，並識別預期的輸入和輸出資料類型。
+將這個預留位置 UDF 儲存為文字檔，並將該檔案納入翻譯工作的來源檔案。這可讓翻譯工具瞭解 UDF 定義，並識別預期的輸入和輸出資料類型。
 
 ## 配額與限制
 
 * 適用 [BigQuery Migration API 配額](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#migration-api-limits)。
-* 每個專案最多只能有 10 個有效翻譯工作。
+* 每個專案最多只能有 10 項有效翻譯工作。
 * 雖然來源和中繼資料檔案總數沒有硬性限制，但建議檔案數量不要超過 1000 個，以獲得更佳的效能。
 
 ## 排解翻譯錯誤
@@ -564,7 +562,7 @@ CREATE FUNCTION Test.MySum (a INT, b INT)
 
 如要找出翻譯失敗的內容，請前往「翻譯詳細資料」頁面，然後開啟「記錄訊息」分頁。
 
-翻譯服務最適合搭配中繼資料 DDL 使用。如果找不到 SQL 物件定義，轉譯引擎就會引發 `RelationNotFound` 或 `AttributeNotFound` 問題。建議使用中繼資料擷取工具產生中繼資料套件，確保所有物件定義都存在。建議您先新增中繼資料，因為這通常能解決大多數翻譯錯誤，而且還能間接修正許多因缺少中繼資料而導致的錯誤。
+翻譯服務最適合搭配中繼資料 DDL 使用。如果找不到 SQL 物件定義，轉譯引擎就會提出 `RelationNotFound` 或 `AttributeNotFound` 問題。建議使用中繼資料擷取工具產生中繼資料套件，確保所有物件定義都存在。建議您先新增中繼資料，因為這通常能解決大多數的翻譯錯誤，而且還能間接修正許多因缺少中繼資料而導致的錯誤。
 
 詳情請參閱「[產生翻譯和評估用的中繼資料](https://docs.cloud.google.com/bigquery/docs/generate-metadata?hl=zh-tw)」。
 
@@ -577,7 +575,7 @@ CREATE FUNCTION Test.MySum (a INT, b INT)
 
 **注意：** 如要尋求支援或針對這項功能提供意見回饋，請傳送電子郵件至 [bq-edw-migration-support@google.com](mailto:bq-edw-migration-support@google.com)。
 
-如要修正 `RelationNotFound` 或 `AttributeNotFound` 錯誤導致的翻譯工作失敗問題，你也可以按照下列步驟使用 Gemini 嘗試解決這些問題。
+如要修正 `RelationNotFound` 或 `AttributeNotFound` 錯誤導致的翻譯工作失敗問題，你也可以按照下列步驟，使用 Gemini 嘗試解決這些問題。
 
 1. 前往「Translation details」(翻譯詳細資料) 頁面，然後開啟「Log Messages」(記錄訊息) 分頁。
 2. 在「類別」欄中，按一下含有 `RelationNotFound` 或 `AttributeNotFound` 訊息的查詢。
@@ -590,7 +588,7 @@ CREATE FUNCTION Test.MySum (a INT, b INT)
 
 ## 定價
 
-批次 SQL 翻譯器為免費工具，使用者無須付費。不過，儲存輸入和輸出檔案所用的儲存空間仍須支付一般費用。詳情請參閱「[儲存空間價格](https://cloud.google.com/bigquery/pricing?hl=zh-tw#storage)」。
+批次 SQL 翻譯器為免費工具，使用者無須付費。不過，儲存輸入和輸出檔案的空間仍會產生一般費用。詳情請參閱[儲存空間價格](https://cloud.google.com/bigquery/pricing?hl=zh-tw#storage)。
 
 ## 後續步驟
 
@@ -611,11 +609,11 @@ CREATE FUNCTION Test.MySum (a INT, b INT)
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-06-13 (世界標準時間)。
+上次更新時間：2026-06-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-13 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-15 (世界標準時間)。"],[],[]]

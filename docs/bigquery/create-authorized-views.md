@@ -12,7 +12,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 在本教學課程中，您會在 BigQuery 中建立授權檢視表，供資料分析師使用。[授權檢視表](https://docs.cloud.google.com/bigquery/docs/authorized-views?hl=zh-tw)可讓您與特定使用者和群組分享查詢結果，無須授予他們基礎來源資料的存取權。檢視畫面會取得來源資料的存取權，而非使用者或群組。您也可以使用檢視表的 SQL 查詢，從查詢結果中排除資料欄和欄位。
 
-除了使用已授權檢視表，您也可以在來源資料中設定資料欄層級的存取控管，然後讓使用者存取查詢受控資料的檢視表。如要進一步瞭解資料欄層級存取權控管，請參閱「[資料欄層級存取控管機制簡介](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro?hl=zh-tw)」。
+除了使用已授權檢視表，您也可以在來源資料中設定資料欄層級的存取權控管，然後讓使用者存取查詢受控資料的檢視表。如要進一步瞭解資料欄層級存取權控管，請參閱[資料欄層級存取控管機制簡介](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro?hl=zh-tw)。
 
 如果您有多個授權檢視表存取同一個來源資料集，可以[授權包含檢視表的資料集](https://docs.cloud.google.com/bigquery/docs/authorized-datasets?hl=zh-tw)，不必授權個別檢視表。
 
@@ -23,8 +23,8 @@ Google uses AI technology to translate content into your preferred language. AI 
 * 建立資料集，以便加入授權 view。
 * 從 SQL 查詢建立授權 view，限制資料分析師可在查詢結果中查看的資料欄。
 * 授予資料分析師執行查詢工作的權限。
-* 授予資料分析師對內含已授權檢視表的資料集存取權。
-* 將來源資料集的檢視權限授予已授權的檢視表。
+* 授予資料分析師對內含授權檢視表的資料集存取權。
+* 將來源資料集的存取權授予已授權檢視表。
 
 ## 費用
 
@@ -84,7 +84,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    **啟用 API 時所需的角色**
 
-   如要啟用 API，您需要服務使用情形管理員 IAM 角色 (`roles/serviceusage.serviceUsageAdmin`)，其中包含 `serviceusage.services.enable` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   如要啟用 API，您需要具備服務使用情形管理員 IAM 角色 (`roles/serviceusage.serviceUsageAdmin`)，其中包含 `serviceusage.services.enable` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
    [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery.googleapis.com&hl=zh-tw)
 3. 請確認您具備[必要權限](https://docs.cloud.google.com/bigquery/docs/authorized-views?hl=zh-tw#required_permissions)，可執行本文件中的工作。
@@ -108,7 +108,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    1. 在「Dataset ID」(資料集 ID) 中輸入 `github_source_data`。
    2. 確認「位置類型」已選取「多區域」。
-   3. 如果是「多區域」，請選擇「美國」或「歐盟」。在本教學課程中建立的所有資源都應位於同一個多區域位置。
+   3. 針對「Multi-region」(多區域)，選擇「US」(美國) 或「EU」(歐盟)。您在本教學課程中建立的所有資源都應位於同一個多區域位置。
    4. 點選「建立資料集」。
 
 ### SQL
@@ -181,15 +181,15 @@ source_dataset = client.create_dataset(source_dataset)  # API request
    LIMIT
      1000;
    ```
-3. 按一下 [More] (更多) 並選取 [Query settings] (查詢設定)。
-4. 在「Destination」(目的地) 部分，選取「Set a destination table for query results」(為查詢結果設定目的地資料表)。
+3. 依序點選「編輯」>「查詢設定」。
+4. 在「Destination」(目的地) 部分，選取「為查詢結果設定目的地資料表」。
 5. 在「Dataset」(資料集) 中輸入 `PROJECT_ID.github_source_data`。
 
    將 `PROJECT_ID` 替換為專案 ID。
 6. 在「Table Id」(資料表 ID) 中輸入 `github_contributors`。
 7. 按一下 [儲存]。
 8. 按一下「執行」。
-9. 查詢完成後，在「Explorer」窗格中，依序點選「Datasets」(資料集) 和 **`github_source_data`** 資料集。
+9. 查詢完成後，在「Explorer」窗格中，依序點選「Datasets」和 **`github_source_data`** 資料集。
 10. 依序點選「總覽」**>「資料表」**，然後點選 **`github_contributors`** 資料表。
 11. 如要確認資料已寫入資料表，請按一下「預覽」分頁標籤。
 
@@ -236,9 +236,9 @@ client.query_and_wait(
 )  # API request - starts the query and waits for query to finish
 ```
 
-## 建立資料集來儲存授權 view
+## 建立資料集來儲存授權檢視表
 
-建立來源資料集之後，您會建立新的獨立資料集，儲存將與資料分析師分享的授權 view。在後續步驟中，您會授權檢視表存取來源資料集中的資料。資料分析師接著就能存取授權 view，但無法直接存取來源資料。
+建立來源資料集後，請建立新的獨立資料集，儲存您要與資料分析師共用的授權檢視表。在後續步驟中，您會授予授權檢視表來源資料集中的資料存取權。資料分析師就能存取授權檢視表，但無法直接存取來源資料。
 
 授權檢視區塊應在與來源資料不同的資料集中建立。
 這樣一來，資料擁有者就能授權使用者存取授權 view，不必同時授予基礎資料的存取權。來源資料集和授權 view 資料集必須位於同一個區域[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
@@ -252,12 +252,12 @@ client.query_and_wait(
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
 3. 在「Explorer」窗格中，選取要建立資料集的專案。
-4. 展開「查看動作」more\_vert選項，然後點選「建立資料集」。
+4. 展開「View actions」(查看動作) 選項 more\_vert，然後點選「Create dataset」(建立資料集)。
 5. 在「建立資料集」頁面中，執行下列操作：
 
    1. 在「Dataset ID」(資料集 ID) 中輸入 `shared_views`。
    2. 確認「位置類型」已選取「多區域」。
-   3. 如果是「多區域」，請選擇「美國」或「歐盟」。在本教學課程中建立的所有資源都應位於同一個多區域位置。
+   3. 針對「Multi-region」(多區域)，選擇「US」(美國) 或「EU」(歐盟)。您在本教學課程中建立的所有資源都應位於同一個多區域位置。
    4. 點選「建立資料集」。
 
 ### SQL
@@ -307,7 +307,7 @@ shared_dataset = client.create_dataset(shared_dataset)  # API request
 
 您可在新資料集中建立您想要授權的視圖。這是您與資料分析師分享的視圖。這個檢視表是使用 SQL 查詢建立，可排除您不希望資料分析師看到的資料欄。
 
-`github_contributors` 來源資料表包含兩個 [`RECORD`](https://docs.cloud.google.com/bigquery/docs/nested-repeated?hl=zh-tw#define_nested_and_repeated_columns) 類型的欄位：`author` 和 `committer`。在本教學課程中，您的授權 view 會排除所有作者資料 (作者姓名除外)，以及所有修訂者資料 (修訂者姓名除外)。
+`github_contributors` 來源資料表包含兩個 [`RECORD`](https://docs.cloud.google.com/bigquery/docs/nested-repeated?hl=zh-tw#define_nested_and_repeated_columns) 類型的欄位：`author` 和 `committer`。在本教學課程中，授權 view 會排除所有作者資料，只保留作者姓名，並排除所有提交者資料，只保留提交者姓名。
 
 如要在新資料集中建立檢視表，請選擇下列任一選項：
 
@@ -329,7 +329,7 @@ shared_dataset = client.create_dataset(shared_dataset)  # API request
    ```
 
    將 `PROJECT_ID` 替換為專案 ID。
-3. 依序點按「儲存」>「儲存檢視畫面」。
+3. 依序點選「檔案」>「儲存」>「儲存檢視畫面」。
 4. 在「Save view」(儲存檢視表) 對話方塊中，執行下列操作：
 
    1. 在「Project」(專案) 部分，確認已選取專案。
@@ -407,9 +407,9 @@ view = client.create_table(view)  # API request
 
 ## 授予資料分析師執行查詢工作的權限
 
-資料分析師需要 `bigquery.jobs.create` 權限，才能執行查詢工作並查詢檢視表。這項權限僅適用於執行查詢工作的專案 (計費或執行專案)，這類專案可能與含有檢視區塊的專案不同。
+資料分析師需要 `bigquery.jobs.create` 權限，才能執行查詢工作並查詢檢視表。這項權限僅適用於執行查詢工作的專案 (計費或執行專案)，這可能與包含檢視區塊的專案不同。
 
-在本節中，您會為資料分析師授予 `bigquery.user` 角色，讓他們在執行工作的專案中使用。`bigquery.user` 角色包含 `bigquery.jobs.create` 權限。在後續步驟中，您會授予資料分析師存取檢視區塊的權限。
+在本節中，您會為資料分析師授予 `bigquery.user` 角色，讓他們在執行工作的專案中使用該角色。`bigquery.user` 角色包含 `bigquery.jobs.create` 權限。在後續步驟中，您會授予資料分析師存取檢視畫面的權限。
 
 如要將資料分析師群組指派給專案的 `bigquery.user` 角色，讓他們能執行工作，請按照下列步驟操作：
 
@@ -417,20 +417,20 @@ view = client.create_table(view)  # API request
 
    [前往「IAM」(身分與存取權管理) 頁面](https://console.cloud.google.com/iam-admin/iam?hl=zh-tw)
 2. 確認分析師用來執行工作的專案已在專案選取器中選取。
-3. 按一下person\_add「授予存取權」。
+3. 按一下person\_add「Grant access」(授予存取權)。
 4. 在「授予存取權」對話方塊中，執行下列操作：
 
    1. 在「New principals」(新增主體) 欄位中，輸入包含資料分析師的群組。例如：`data_analysts@example.com`。
    2. 在「請選擇角色」欄位中，搜尋並選取「BigQuery 使用者」角色。
    3. 按一下 [儲存]。
 
-## 授予資料分析師查詢已授權 view 的權限
+## 授予資料分析師查詢已授權檢視表的權限
 
-如要讓資料分析師查詢檢視表，您必須在資料集層級或檢視表層級授予 `bigquery.dataViewer` 角色。在資料集層級授予這個角色，分析師就能存取資料集中的所有資料表和檢視表。由於本教學課程中建立的資料集只包含一個已授權檢視表，因此您會在資料集層級授予存取權。如果您需要授予存取權給一系列授權檢視表，建議改用[授權資料集](https://docs.cloud.google.com/bigquery/docs/authorized-datasets?hl=zh-tw)。
+如要讓資料分析師查詢檢視表，您需要在資料集層級或檢視表層級授予 `bigquery.dataViewer` 角色。在資料集層級授予這個角色後，分析師就能存取資料集中的所有資料表和檢視表。由於本教學課程中建立的資料集只包含一個授權檢視表，因此您要在資料集層級授予存取權。如果您需要授予存取權的授權檢視表數量眾多，建議改用[授權資料集](https://docs.cloud.google.com/bigquery/docs/authorized-datasets?hl=zh-tw)。
 
-您先前授予資料分析師的 `bigquery.user` 角色，可讓他們在執行查詢工作的專案中建立查詢工作。但他們至少需具備已授權檢視表或內含該檢視表資料集的 `bigquery.dataViewer` 存取權，才能成功查詢檢視表。
+您先前授予資料分析師的 `bigquery.user` 角色，可讓他們在執行查詢工作的專案中建立查詢工作。但他們至少需具備已授權檢視表或內有該檢視表資料集的 `bigquery.dataViewer` 存取權，才能成功查詢檢視表。
 
-如要授予資料分析師對內含授權檢視表的資料集 `bigquery.dataViewer` 存取權，請按照下列步驟操作：
+如要授予資料分析師對授權檢視表所屬資料集的 `bigquery.dataViewer` 存取權，請按照下列步驟操作：
 
 ### 控制台
 
@@ -439,7 +439,7 @@ view = client.create_table(view)  # API request
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
 3. 在「Explorer」窗格中，按一下「Datasets」(資料集)，然後選取「`shared_views`」資料集，開啟「Details」(詳細資料) 分頁。
-4. 依序點選「共用」person\_add「權限」。
+4. 依序點選「共用」person\_add>「權限」。
 5. 在「共用權限」窗格中，按一下「新增主體」。
 6. 在「New principals」(新增主體) 部分，輸入包含資料分析師的群組，例如 `data_analysts@example.com`。
 7. 按一下「選取角色」，然後依序選取「BigQuery」>「BigQuery 資料檢視者」。
@@ -479,7 +479,7 @@ shared_dataset = client.update_dataset(
 
 ## 授權視圖存取來源資料集
 
-為內含授權 view 的資料集建立存取控管後，您可授予授權 view 來源資料集的檢視權限。這項授權會授予該檢視表對來源資料的存取權，而非授予資料分析師群組存取權。
+為內含授權檢視表的資料集建立存取權控制後，請授予授權檢視表來源資料集的存取權。這項授權會授予檢視表來源資料集的存取權，但不會授予資料分析師群組存取權。
 
 如要授權檢視表存取來源資料，請選擇下列其中一個選項：
 
@@ -491,7 +491,7 @@ shared_dataset = client.update_dataset(
 2. 點選左側窗格中的 explore「Explorer」。
 3. 在「Explorer」窗格中，按一下「Datasets」(資料集)，然後選取「`github_source_data`」資料集，開啟「Details」(詳細資料) 分頁。
 4. 依序點選「共用」>「授權檢視」。
-5. 在「Authorized views」(授權 view) 窗格中，輸入「Authorized view」(授權 view) `PROJECT_ID.shared_views.github_analyst_view`。
+5. 在「Authorized views」(授權 view) 窗格中，為「Authorized view」(授權 view) 輸入 `PROJECT_ID.shared_views.github_analyst_view`。
 
    將 PROJECT\_ID 替換為專案 ID。
 6. 按一下「新增授權」。
@@ -528,7 +528,7 @@ source_dataset = client.update_dataset(
 
 ## 驗證設定
 
-設定完成時，資料分析師群組的成員 (例如 `data_analysts`) 可以透過查詢檢視表來驗證設定。
+設定完成時，資料分析師群組 (例如 `data_analysts`) 的成員可以透過查詢檢視表來驗證設定。
 
 如要驗證設定，資料分析師應執行下列查詢：
 
@@ -547,7 +547,7 @@ source_dataset = client.update_dataset(
    將 `PROJECT_ID` 替換為專案 ID。
 3. 按一下「執行」play\_circle。
 
-查詢結果類似下方。結果中只會顯示作者名稱和提交者名稱。
+查詢結果類似於下列內容。結果中只會顯示作者名稱和提交者名稱。
 
 如要進一步瞭解如何執行查詢，請參閱「[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)」。
 
@@ -725,12 +725,12 @@ gcloud projects delete PROJECT_ID
 
 或者，如要移除本教學課程中使用的個別資源，請執行下列操作：
 
-1. [刪除授權 view](https://docs.cloud.google.com/bigquery/docs/managing-views?hl=zh-tw#delete_views)。
+1. [刪除授權檢視表](https://docs.cloud.google.com/bigquery/docs/managing-views?hl=zh-tw#delete_views)。
 2. [刪除包含授權 view 的資料集](https://docs.cloud.google.com/bigquery/docs/managing-datasets?hl=zh-tw#delete-datasets)。
 3. [刪除來源資料集中的資料表](https://docs.cloud.google.com/bigquery/docs/managing-tables?hl=zh-tw#deleting_a_table)。
 4. [刪除來源資料集](https://docs.cloud.google.com/bigquery/docs/managing-datasets?hl=zh-tw#delete-datasets)。
 
-您建立了本教學課程中使用的資源，因此不需要其他權限即可刪除這些資源。
+由於您建立了本教學課程中使用的資源，因此不需要其他權限即可刪除這些資源。
 
 ## 後續步驟
 
@@ -747,11 +747,11 @@ gcloud projects delete PROJECT_ID
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-06-13 (世界標準時間)。
+上次更新時間：2026-06-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-13 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-15 (世界標準時間)。"],[],[]]

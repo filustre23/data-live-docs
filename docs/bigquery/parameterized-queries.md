@@ -16,7 +16,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 執行參數化查詢
 
-使用 GoogleSQL 語法查詢 BigQuery 資料時，您可以運用參數保護查詢，避免使用者輸入內容遭到 [SQL 注入](https://en.wikipedia.org/wiki/SQL_injection)。參數會取代 GoogleSQL 查詢中的任意運算式。
+使用 GoogleSQL 語法查詢 BigQuery 資料時，您可以運用參數保護查詢，避免使用者輸入內容遭到 [SQL 植入](https://en.wikipedia.org/wiki/SQL_injection)。參數會取代 GoogleSQL 查詢中的任意運算式。
 
 您可以傳遞各種資料類型的查詢參數，包括：
 
@@ -29,9 +29,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 查詢參數僅支援 [GoogleSQL 語法](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql?hl=zh-tw)。參數不可取代 ID、資料欄名稱、資料表名稱，或是查詢的其他部分。
 
-如要指定具名參數，請使用 `@` 字元，後面加上 [ID](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#identifiers)，例如 `@param_name`。或者，您可以使用預留位置值 `?` 來指定位置參數。查詢可以使用位置或已命名參數，但不得同時使用這兩者。
+如要指定已命名參數，請使用 `@` 字元，後面加上 [ID](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#identifiers)，例如 `@param_name`。或者，您可以使用預留位置值 `?` 來指定位置參數。查詢可以使用位置或已命名參數，但不得同時使用這兩者。
 
-**注意：** 為保護可能含有機密資訊的資料，當您使用參數執行查詢時，BigQuery [記錄](https://docs.cloud.google.com/bigquery/docs/monitoring?hl=zh-tw#logs)不會記錄參數值。
+**注意：** 為保護可能含有私密資訊的資料，當您使用參數執行查詢時，BigQuery [記錄](https://docs.cloud.google.com/bigquery/docs/monitoring?hl=zh-tw#logs)不會記錄參數值。
 
 您可以在 BigQuery 中透過下列方式執行參數化查詢：
 
@@ -46,16 +46,16 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 如要在 Google Cloud 控制台中執行參數化查詢，請在「查詢設定」中設定參數，然後在 SQL 查詢中參照這些參數，方法是在每個參數名稱前面加上 `@` 字元。
 
-**支援的資料類型**： Google Cloud 控制台僅支援原始資料類型的參數化查詢，例如 `BIGNUMERIC`、`BOOL`、`BYTES`、`DATE`、`DATETIME`、`FLOAT64`、`GEOGRAPHY`、`INT64`、`INTERVAL`、`NUMERIC`、`STRING`、`TIME` 或 `TIMESTAMP`。控制台不支援複雜資料類型，例如 `ARRAY` 和 `STRUCT`。 Google Cloud
+**支援的資料類型**： Google Cloud 控制台僅支援原始資料類型的參數化查詢，例如 `BIGNUMERIC`、`BOOL`、`BYTES`、`DATE`、`DATETIME`、`FLOAT64`、`GEOGRAPHY`、`INT64`、`INTERVAL`、`NUMERIC`、`STRING`、`TIME` 或 `TIMESTAMP`。 Google Cloud 控制台不支援複雜資料類型，例如 `ARRAY` 和 `STRUCT`。
 
 ## 在 Google Cloud 控制台中新增參數
 
 1. 前往「BigQuery」頁面
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在查詢編輯器工具列中，按一下 settings「更多」，然後選取「查詢設定」。
+2. 在查詢編輯器工具列中，依序點選「編輯」>「查詢設定」。
 3. 在「查詢設定」窗格中，找到「查詢參數」部分，然後按一下「新增參數」。
-4. 請為查詢中的每個參數提供下列資訊：
+4. 請針對查詢中的每個參數提供下列資訊：
 
    * **名稱**：輸入參數名稱 (請勿加入 `@` 字元)。
    * **類型**：選取參數的資料類型。
@@ -82,9 +82,9 @@ Google uses AI technology to translate content into your preferred language. AI 
        word_count DESC;
    ```
 
-   在這個範例中，您會將 `corpus` 參數新增為 `STRING`，並將值設為 `romeoandjuliet`，然後將 `min_word_count` 參數新增為 `INT64`，並將值設為 `250`。
+   以這個範例來說，您會將 `corpus` 參數新增為 `STRING`，並將值設為 `romeoandjuliet`；將 `min_word_count` 參數新增為 `INT64`，並將值設為 `250`。
 
-   如果查詢缺少參數或參數無效，系統會顯示錯誤訊息。按一下錯誤訊息中的「設定參數」，即可調整參數設定。
+   如果查詢缺少或包含無效參數，系統會顯示錯誤訊息。按一下錯誤訊息中的「設定參數」，即可調整參數設定。
 2. 如要在查詢編輯器中執行參數化查詢，請按一下「執行」。
 
 ### bq
@@ -93,7 +93,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    [啟用 Cloud Shell](https://console.cloud.google.com/?cloudshell=true&hl=zh-tw)
 
-   Google Cloud 主控台底部會開啟一個 [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works?hl=zh-tw) 工作階段，並顯示指令列提示。Cloud Shell 是已安裝 Google Cloud CLI 的殼層環境，並已針對您目前的專案設定好相關值。工作階段可能要幾秒鐘的時間才能初始化。
+   Google Cloud 主控台底部會開啟一個 [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works?hl=zh-tw) 工作階段，並顯示指令列提示。Cloud Shell 是已安裝 Google Cloud CLI 的殼層環境，並已針對您目前的專案設定好相關值。工作階段可能需要幾秒鐘的時間才能完成初始化。
 2. 請使用 `--parameter`，以 `name:type:value` 的格式來提供參數的值。如果名稱留白，會產生位置參數。如果您省略類型，系統會假設類型是 `STRING`。
 
    `--parameter` 標記必須與標記 `--use_legacy_sql=false` 一起使用，以便指定 GoogleSQL 語法。
@@ -654,8 +654,8 @@ Google Cloud 控制台不支援參數化查詢中的陣列。
 
    [啟用 Cloud Shell](https://console.cloud.google.com/?cloudshell=true&hl=zh-tw)
 
-   Google Cloud 主控台底部會開啟一個 [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works?hl=zh-tw) 工作階段，並顯示指令列提示。Cloud Shell 是已安裝 Google Cloud CLI 的殼層環境，並已針對您目前的專案設定好相關值。工作階段可能要幾秒鐘的時間才能初始化。
-2. 這項查詢會針對在美國出生的男嬰，挑出開頭為英文字母 W 的姓名中最受歡迎的：
+   Google Cloud 主控台底部會開啟一個 [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works?hl=zh-tw) 工作階段，並顯示指令列提示。Cloud Shell 是已安裝 Google Cloud CLI 的殼層環境，並已針對您目前的專案設定好相關值。工作階段可能需要幾秒鐘的時間才能完成初始化。
+2. 下列查詢會針對在美國出生的男嬰，挑出開頭為英文字母 W 的姓名中最受歡迎的：
 
    **注意：**這個範例查詢的是以美國為基礎的公開資料集。由於該公開資料集儲存在美國的多地區位置，因此您目的地資料表所屬的資料集也必須位於美國。您無法查詢位於某個位置的資料集，然後將結果寫入位於另一個位置的目的地資料表。 
 

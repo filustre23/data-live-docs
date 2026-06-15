@@ -30,12 +30,11 @@ GoogleSQL 是符合 ANSI 標準的[結構化查詢語言 (SQL)](https://en.wikip
   + 瀏覽次數
   + 函式
   + 索引
-  + 容量承諾、預留項目和指派作業
+  + 容量承諾、預留項目和指派項目
   + 資料列層級存取權政策
 * [資料操縱語言 (DML) 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax?hl=zh-tw)可讓您在 BigQuery 資料表中更新、插入及刪除資料。
 * [資料控管語言 (DCL) 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language?hl=zh-tw)可讓您控管 BigQuery 系統資源，例如存取權和容量。
-* [交易控制語言 (TCL) 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language?hl=zh-tw#transactions)
-  可讓您管理資料修改的交易。
+* [交易控制語言 (TCL) 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language?hl=zh-tw#transactions)可讓您管理資料修改的交易。
 * 使用[載入陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements?hl=zh-tw)和[匯出陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements?hl=zh-tw)，管理 BigQuery 的資料輸入和輸出。
 
 ## BigQuery SQL 語法
@@ -53,13 +52,12 @@ Google Cloud 控制台的預設方言是 GoogleSQL。如要將方言變更為舊
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在查詢編輯器中，依序點選「更多」>「查詢設定」按鈕。
-3. 在「Advanced options」(進階選項) 部分的「SQL dialect」(SQL 方言) 中，點選「Legacy」(舊版)，然後按一下「Save」(儲存)。這將為此查詢設定舊版 SQL 選項。按一下「add\_box」add\_box**SQL 查詢**來建立新查詢時，必須再次選取舊版 SQL 選項。
+2. 在查詢編輯器中，依序點選「編輯」>「查詢設定」。
+3. 在「Advanced options」(進階選項) 部分的「SQL dialect」(SQL 方言) 中，點選「Legacy」(舊版)，然後按一下「Save」(儲存)。這會為此查詢設定舊版 SQL 選項。按一下「add\_box」add\_box「SQL Query」(SQL 查詢) 建立新查詢時，必須再次選取舊版 SQL 選項。
 
 ### SQL
 
-預設 SQL 方言為 GoogleSQL。
-如要設定 SQL 方言，請在查詢中加入 `#standardSQL` 或 `#legacySQL` 前置字串。這些查詢前置字串不區分大小寫，必須位於查詢之前，且必須以換行字元與查詢分隔。以下範例會將方言設為舊版 SQL，並查詢 natality 資料集：
+預設 SQL 方言為 GoogleSQL。如要設定 SQL 方言，請在查詢中加入 `#standardSQL` 或 `#legacySQL` 前置字串。這些查詢前置字串不區分大小寫，必須位於查詢之前，且必須以換行字元與查詢分隔。以下範例會將方言設為舊版 SQL，並查詢 natality 資料集：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -126,7 +124,7 @@ Google Cloud 控制台的預設方言是 GoogleSQL。如要將方言變更為舊
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
-C# 程式庫預設使用 GoogleSQL。
+根據預設，C# 程式庫會使用 GoogleSQL。
 
 **切換至舊版 SQL 方言**
 
@@ -429,7 +427,7 @@ end
 * 如要瞭解如何在 BigQuery 中執行 SQL 查詢，請參閱[執行互動式和批次查詢工作](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw)。
 * 如要進一步瞭解查詢最佳化，請參閱「[最佳化查詢效能簡介](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-overview?hl=zh-tw)」。
 * 如要瞭解用於查詢 BigQuery 資料的 GoogleSQL 語法，請參閱「[查詢語法](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw)」。
-* 如要進一步瞭解如何在查詢中使用管道語法，請參閱[管道語法](https://docs.cloud.google.com/bigquery/docs/pipe-syntax?hl=zh-tw)。
+* 如要進一步瞭解如何在查詢中使用管道語法，請參閱「[管道語法](https://docs.cloud.google.com/bigquery/docs/pipe-syntax?hl=zh-tw)」。
 
 
 
@@ -438,11 +436,11 @@ end
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-06-13 (世界標準時間)。
+上次更新時間：2026-06-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-13 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-15 (世界標準時間)。"],[],[]]

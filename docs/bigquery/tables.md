@@ -28,17 +28,18 @@ Google uses AI technology to translate content into your preferred language. AI 
 * 列出資料集中的資料表。
 * 取得資料表中繼資料。
 
-如要進一步瞭解如何管理資料表，包括更新資料表屬性、複製資料表及刪除資料表，請參閱[管理資料表](https://docs.cloud.google.com/bigquery/docs/managing-tables?hl=zh-tw)一文。
+如要進一步瞭解如何管理資料表，包括更新資料表屬性、複製資料表及刪除資料表，請參閱「[管理資料表](https://docs.cloud.google.com/bigquery/docs/managing-tables?hl=zh-tw)」一文。
 
 ## 事前準備
 
-授予身分與存取權管理 (IAM) 角色，讓使用者擁有執行本文各項工作所需的權限。
+授予身分與存取權管理 (IAM) 角色，讓使用者取得必要權限，執行本文中的各項工作。
 
 ### 必要的角色
 
-如要取得建立資料表所需的權限，請要求管理員授予您下列 IAM 角色：
+如要取得建立表格所需的權限，請要求管理員授予您下列 IAM 角色：
 
-* 如果您要透過載入資料或將查詢結果儲存至資料表來建立資料表，請在專案中指派 [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.jobUser)  (`roles/bigquery.jobUser`)。
+* [BigQuery 作業使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.jobUser)  (`roles/bigquery.jobUser`)
+  (如果您要透過載入資料或將查詢結果儲存至資料表的方式建立資料表，則需要專案的這項權限)。
 * 資料集的「BigQuery 資料編輯者」 (`roles/bigquery.dataEditor`)，您要在該資料集建立資料表。
 
 如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
@@ -52,15 +53,15 @@ Google uses AI technology to translate content into your preferred language. AI 
 * `bigquery.tables.create`
   在要建立資料表的資料集上。
 * `bigquery.tables.getData`
-  如果您要將查詢結果儲存為資料表，則必須擁有查詢參照的所有資料表和檢視區塊的存取權。
+  如果您要將查詢結果儲存為資料表，請在查詢參照的所有資料表和檢視區塊上執行這項操作。
 * `bigquery.jobs.create`
   專案，如果您是透過載入資料或將查詢結果儲存至資料表來建立資料表。
 * `bigquery.tables.updateData`
-  資料表，如果您要使用查詢結果附加或覆寫資料表，就需要這個權限。
+  如果您要使用查詢結果附加或覆寫資料表，就需要這個權限。
 
 您或許還可透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)取得這些權限。
 
-**注意：** 如果您擁有 `bigquery.datasets.create` 權限，可以在建立的資料集中建立資料表。
+**注意：** 如果您擁有 `bigquery.datasets.create` 權限，可以在您建立的資料集中建立資料表。
 
 ## 資料表命名
 
@@ -93,7 +94,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 * 使用用戶端程式庫。
 * 從查詢結果建立。
 * 定義參照外部資料來源的資料表。
-* 載入資料時建立。
+* 在載入資料時建立。
 * 使用[`CREATE TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#creating_a_new_table)資料定義語言 (DDL) 陳述式。
 
 ### 建立具有結構定義的空白資料表
@@ -105,7 +106,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 * 使用 bq 指令列工具提交 JSON 結構定義檔案。
 * 呼叫 API 的 [`tables.insert` 方法](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/insert?hl=zh-tw)時，在[資料表資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables?hl=zh-tw#resource:-table)中提供結構定義。
 
-如要進一步瞭解如何指定資料表結構定義，請參閱[指定結構定義](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw)一文。
+如要進一步瞭解如何指定資料表結構定義，請參閱[指定結構定義](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw)。
 
 您可以在建立資料表後於其中[載入資料](https://docs.cloud.google.com/bigquery/docs/loading-data?hl=zh-tw)，或透過[寫入查詢結果](https://docs.cloud.google.com/bigquery/docs/writing-results?hl=zh-tw)填入資料。
 
@@ -121,14 +122,13 @@ Google uses AI technology to translate content into your preferred language. AI 
 4. 在「資料集資訊」部分，按一下 add\_box「建立資料表」。
 5. 在「建立資料表」窗格中，指定下列詳細資料：
 
-1. 在「來源」部分，從「建立資料表來源」清單中選取「空白資料表」。
+1. 在「來源」部分，從「使用下列資料建立資料表」清單中選取「空白資料表」。
 2. 在「目的地」部分，指定下列詳細資料：
    1. 在「Dataset」(資料集) 部分，選取要建立資料表的資料集。
    2. 在「Table」(資料表) 欄位中，輸入要建立的資料表名稱。
-   3. 確認「資料表類型」欄位已設為「原生資料表」。
-3. 在「Schema」(結構定義) 區段中，輸入[結構定義](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw)。
-   你可以使用下列任一方法手動輸入結構定義資訊：
-   * 選項 1：按一下「以文字形式編輯」，然後以 JSON 陣列的形式貼上結構定義。如果您使用 JSON 陣列，可透過與[建立 JSON 結構定義檔](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#specifying_a_json_schema_file)一樣的程序產生結構定義。您可以輸入下列指令，查看現有資料表的 JSON 格式結構定義：
+   3. 確認「Table type」(資料表類型) 欄位已設為「Native table」(原生資料表)。
+3. 在「Schema」(結構定義) 部分輸入[結構定義](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw)。你可以使用下列任一方法手動輸入結構定義資訊：
+   * 選項 1：按一下「以文字形式編輯」，然後以 JSON 陣列的形式貼上結構定義。如果您使用 JSON 陣列，可透過與[建立 JSON 結構定義檔](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#specifying_a_json_schema_file)一樣的程序產生結構定義。如要以 JSON 格式查看現有資料表的結構定義，請輸入下列指令：
 
      ```
          bq show --format=prettyjson dataset.table
@@ -136,7 +136,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    * 選項 2：按一下 add\_box
      「新增欄位」，然後輸入表格結構定義。指定每個欄位的「Name」(名稱)、「[Type](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#standard_sql_data_types)」(類型) 和「[Mode](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#modes)」(模式)。
 4. 選用：指定「分區與叢集設定」。詳情請參閱「[建立分區資料表](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables?hl=zh-tw)」和「[建立及使用叢集資料表](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables?hl=zh-tw)」。
-5. 選用步驟：如要使用客戶自行管理的加密金鑰，請在「Advanced options」(進階選項) 部分選取「Use a customer-managed encryption key (CMEK)」(使用客戶自行管理的加密金鑰 (CMEK)) 選項。根據預設，BigQuery 會使用 Google-owned and Google-managed encryption key[加密靜態儲存的客戶內容](https://docs.cloud.google.com/docs/security/encryption/default-encryption?hl=zh-tw)。
+5. 選用步驟：如要在「Advanced options」(進階選項) 部分使用客戶自行管理的加密金鑰，請選取「Use a customer-managed encryption key (CMEK)」(使用客戶自行管理的加密金鑰 (CMEK)) 選項。根據預設，BigQuery 會使用 Google-owned and Google-managed encryption key[加密靜態儲存的客戶內容](https://docs.cloud.google.com/docs/security/encryption/default-encryption?hl=zh-tw)。
 6. 點選「建立資料表」。
 
 **注意：** 使用 Google Cloud 控制台建立空白資料表時，您無法新增標籤、說明或到期時間。您可以在使用 bq 指令列工具或 API 建立資料表時，新增這些選用屬性。在 Google Cloud 控制台中建立資料表後，即可新增到期時間、說明和標籤。
@@ -172,7 +172,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    [啟用 Cloud Shell](https://console.cloud.google.com/?cloudshell=true&hl=zh-tw)
 
-   Google Cloud 主控台底部會開啟一個 [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works?hl=zh-tw) 工作階段，並顯示指令列提示。Cloud Shell 是已安裝 Google Cloud CLI 的殼層環境，並已針對您目前的專案設定好相關值。工作階段可能要幾秒鐘的時間才能初始化。
+   Google Cloud 主控台底部會開啟一個 [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works?hl=zh-tw) 工作階段，並顯示指令列提示。Cloud Shell 是已安裝 Google Cloud CLI 的殼層環境，並已針對您目前的專案設定好相關值。工作階段可能需要幾秒鐘的時間才能完成初始化。
 2. 請使用 [`bq mk` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_mk)，並加上 `--table` 或 `-t` 旗標。您可以透過內嵌方式或 JSON 結構定義檔提供資料表結構定義資訊。如需完整的參數清單，請參閱 [`bq mk --table` 參考資料](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#mk-table)。部分選用參數包括：
 
    * `--expiration`
@@ -188,7 +188,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    * 如要進一步瞭解 `--time_partitioning_field`、`--time_partitioning_type` 和 `--range_partitioning`，請參閱[分區資料表](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables?hl=zh-tw)。
    * 如要進一步瞭解 `--clustering_fields`，請參閱[叢集資料表](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables?hl=zh-tw)。
-   * 如要進一步瞭解 `--destination_kms_key`，請參閱[客戶管理的加密金鑰](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw)。
+   * 如要進一步瞭解 `--destination_kms_key`，請參閱[客戶自行管理的加密金鑰](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw)。
 
    如要建立非預設專案中的資料表，請使用下列格式將專案 ID 新增至資料集：`project_id:dataset`。
 
@@ -311,7 +311,7 @@ EOF
 
 **建立資料表並授予存取權**
 
-下列範例會建立名為 `mytable` 的資料表，然後使用 [`google_bigquery_table_iam_policy`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_table_iam#google_bigquery_table_iam_policy) 資源授予存取權。只有在您想將資料表存取權授予給無權存取資料表所屬資料集的主體時，才需要執行這個步驟。
+以下範例會建立名為 `mytable` 的資料表，然後使用 [`google_bigquery_table_iam_policy`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_table_iam#google_bigquery_table_iam_policy) 資源授予存取權。只有在您想將資料表存取權授予給沒有資料表所在資料集存取權的主體時，才需要執行這個步驟。
 
 ```
 resource "google_bigquery_dataset" "default" {
@@ -444,7 +444,7 @@ resource "google_project_iam_member" "service_account_access" {
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
 2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
 
-   您只需要為每項專案執行一次這個指令，且可以在任何目錄中執行。
+   每項專案只需要執行一次這個指令，且可以在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
@@ -463,9 +463,9 @@ resource "google_project_iam_member" "service_account_access" {
    ```
 2. 如果您正在學習教學課程，可以複製每個章節或步驟中的程式碼範例。
 
-   將程式碼範例複製到新建立的 `main.tf`。
+   將程式碼範例複製到新建立的 `main.tf` 中。
 
-   視需要從 GitHub 複製程式碼。如果 Terraform 代码片段是端對端解決方案的一部分，建議您使用這個方法。
+   視需要從 GitHub 複製程式碼。如果 Terraform 代码片段是端對端解決方案的一部分，建議您這麼做。
 3. 查看並修改範例參數，套用至您的環境。
 4. 儲存變更。
 5. 初始化 Terraform。每個目錄只需執行一次這項操作。
@@ -489,14 +489,14 @@ resource "google_project_iam_member" "service_account_access" {
    ```
 
    視需要修正設定。
-2. 執行下列指令，並在提示中輸入 `yes`，套用 Terraform 設定：
+2. 執行下列指令並在提示中輸入 `yes`，套用 Terraform 設定：
 
    ```
    terraform apply
    ```
 
    等待 Terraform 顯示「Apply complete!」訊息。
-3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)即可查看結果。在 Google Cloud 控制台中，前往 UI 中的資源，確認 Terraform 已建立或更新這些資源。
+3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)，查看結果。在 Google Cloud 控制台中，前往 UI 中的資源，確認 Terraform 已建立或更新這些資源。
 
 **注意：**Terraform 範例通常會假設 Google Cloud 專案已啟用必要的 API。
 
@@ -802,7 +802,7 @@ public class CreateTableWithoutSchema {
 
 ### 控制台
 
-1. 在 Google Cloud 控制台中開啟 BigQuery 頁面。
+1. 在 Google Cloud 控制台開啟 BigQuery 頁面。
 
    [前往 BigQuery 頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
@@ -810,9 +810,9 @@ public class CreateTableWithoutSchema {
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Explorer」窗格中展開專案，按一下「Datasets」(資料集)，然後選取資料集。
 4. 在查詢編輯器中輸入有效的 SQL 查詢。
-5. 按一下「更多」，然後選取「查詢設定」。
+5. 依序點選「編輯」>「查詢設定」。
 6. 選取「為查詢結果設定目標資料表」選項。
-7. 在「目的地」部分，選取要建立資料表的「資料集」，然後選擇「資料表 ID」。
+7. 在「Destination」(目的地) 區段中，選取要建立資料表的「Dataset」(資料集)，然後選擇「Table Id」(資料表 ID)。
 8. 在「Destination table write preference」(目標資料表寫入偏好設定) 區段，選擇下列其中一項：
 
    * [Write if empty] (空白時寫入)：僅在資料表空白時將查詢結果寫入資料表。
@@ -855,7 +855,7 @@ public class CreateTableWithoutSchema {
 
    [啟用 Cloud Shell](https://console.cloud.google.com/?cloudshell=true&hl=zh-tw)
 
-   Google Cloud 主控台底部會開啟一個 [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works?hl=zh-tw) 工作階段，並顯示指令列提示。Cloud Shell 是已安裝 Google Cloud CLI 的殼層環境，並已針對您目前的專案設定好相關值。工作階段可能要幾秒鐘的時間才能初始化。
+   Google Cloud 主控台底部會開啟一個 [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works?hl=zh-tw) 工作階段，並顯示指令列提示。Cloud Shell 是已安裝 Google Cloud CLI 的殼層環境，並已針對您目前的專案設定好相關值。工作階段可能需要幾秒鐘的時間才能完成初始化。
 2. 輸入 [`bq query`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_query) 指令並指定 `--destination_table` 旗標，根據查詢結果建立永久資料表。指定 `use_legacy_sql=false` 旗標以使用 GoogleSQL 語法。如要將查詢結果寫入不在預設專案內的資料表，請使用下列格式將專案 ID 新增至資料集名稱：`project_id:dataset`。
 
    選用：提供 `--location` 旗標，並將值設為您的[位置](https://docs.cloud.google.com/bigquery/docs/dataset-locations?hl=zh-tw)。
@@ -886,7 +886,7 @@ public class CreateTableWithoutSchema {
 
      **注意：**這些範例會查詢位於美國的公開資料集。由於該公開資料集儲存在美國的多地區位置，因此您目的地資料表所屬的資料集也必須位於美國。您無法查詢位於某個位置的資料集，然後將結果寫入位於另一個位置的目的地資料表。 
 
-     輸入下列指令，將查詢結果寫入 `mydataset` 中名為 `mytable` 的目標資料表。該資料集位於預設專案中。由於您未在指令中指定任何寫入配置旗標，因此資料表必須為新資料表或空白資料表。否則，系統會傳回 `Already exists` 錯誤。查詢會從[美國人名資料公開資料集](https://console.cloud.google.com/marketplace/product/social-security-administration/us-names?hl=zh-tw)中擷取資料。
+     輸入下列指令，將查詢結果寫入 `mydataset` 中名為 `mytable` 的目標資料表。該資料集位於預設專案中。由於您未在指令中指定任何寫入配置旗標，因此資料表必須為新資料表或空白資料表。否則，系統會傳回 `Already exists` 錯誤。查詢會從[美國人名資料公開資料集](https://console.cloud.google.com/marketplace/product/social-security-administration/us-names?hl=zh-tw)擷取資料。
 
      ```
      bq query \
@@ -1124,7 +1124,7 @@ async function queryDestinationTable() {
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
-如要將查詢結果儲存至永久性資料表，請建立 [QueryJobConfig](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.QueryJob?hl=zh-tw#google_cloud_bigquery_job_QueryJob)，並將[目的地](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.QueryJob?hl=zh-tw#google_cloud_bigquery_job_QueryJob_destination)設為所要的 [TableReference](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.table.TableReference?hl=zh-tw)。接著，將工作設定傳送至[查詢方法](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.client.Client?hl=zh-tw#google_cloud_bigquery_client_Client_query)。
+如要將查詢結果儲存至永久資料表，請建立 [QueryJobConfig](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.QueryJob?hl=zh-tw#google_cloud_bigquery_job_QueryJob)，並將[目的地](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.QueryJob?hl=zh-tw#google_cloud_bigquery_job_QueryJob_destination)設為所要的 [TableReference](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.table.TableReference?hl=zh-tw)。接著，將工作設定傳送至[查詢方法](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.client.Client?hl=zh-tw#google_cloud_bigquery_client_Client_query)。
 
 ```
 from google.cloud import bigquery
@@ -1166,13 +1166,13 @@ print("Query results loaded to the table {}".format(table_id))
 
 ### 建立多模態資料表
 
-您可以建立含有一個或多個 [`ObjectRef`](https://docs.cloud.google.com/bigquery/docs/objectref-columns?hl=zh-tw) 欄的資料表，以便儲存與資料表中其他結構化資料相關的非結構化資料中繼資料。舉例來說，在產品資料表中，您可以建立 `ObjectRef` 欄，儲存產品圖片資訊和其他產品資料。非結構化資料本身會儲存在 Cloud Storage 中，並透過[物件資料表](https://docs.cloud.google.com/bigquery/docs/object-table-introduction?hl=zh-tw)在 BigQuery 中提供。
+您可以建立含有一個或多個 [`ObjectRef`](https://docs.cloud.google.com/bigquery/docs/objectref-columns?hl=zh-tw) 資料欄的資料表，以便儲存與資料表中其他結構化資料相關的非結構化資料中繼資料。舉例來說，在產品資料表中，您可以建立 `ObjectRef` 資料欄，連同其他產品資料一併儲存產品圖片資訊。非結構化資料本身會儲存在 Cloud Storage 中，並透過[物件資料表](https://docs.cloud.google.com/bigquery/docs/object-table-introduction?hl=zh-tw)在 BigQuery 中提供。
 
 如要瞭解如何建立多模態資料表，請參閱「[使用 SQL 和 BigQuery DataFrames 分析多模態資料](https://docs.cloud.google.com/bigquery/docs/multimodal-data-sql-tutorial?hl=zh-tw)」。
 
 ## 控管資料表的存取權
 
-如要設定資料表和檢視表的存取權，您可以為下列層級的實體授予 IAM 角色，這些層級會依允許的資源範圍排序 (從最大到最小)：
+如要設定資料表和檢視表的存取權，您可以為下列層級的實體授予 IAM 角色，這些層級會依允許的資源範圍列出 (從最大到最小)：
 
 * [Google Cloud 資源階層](https://docs.cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy?hl=zh-tw)中的較高層級，例如專案、資料夾或機構層級
 * 資料集層級
@@ -1184,13 +1184,13 @@ print("Query results loaded to the table {}".format(table_id))
 * [資料欄資料遮蓋](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro?hl=zh-tw)
 * [資料列層級安全性](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro?hl=zh-tw)
 
-透過 IAM 保護的任何資源，存取權都是累加的。舉例來說，如果實體沒有專案等高層級的存取權，您可以授予實體資料集層級的存取權，這樣實體就能存取資料集中的資料表和檢視區塊。同樣地，如果實體沒有高層級或資料集層級的存取權，您可以在資料表或檢視表層級授予實體存取權。
+透過 IAM 保護的任何資源，存取權都是累加的。舉例來說，如果實體沒有專案等高層級的存取權，您可以授予實體資料集層級的存取權，這樣實體就能存取資料集中的資料表和檢視區塊。同樣地，如果實體沒有高層級或資料集層級的存取權，您可以授予實體資料表或檢視表層級的存取權。
 
 在[Google Cloud資源階層](https://docs.cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy?hl=zh-tw)中的較高層級 (例如專案、資料夾或機構層級) 授予 IAM 角色，可讓實體存取更多資源。舉例來說，在專案層級將特定角色授予實體，可讓該實體擁有適用於專案中所有資料集的權限。
 
-在資料集層級授予角色，即可讓實體對特定資料集裡的資料表和檢視表執行指定作業，即使實體沒有較高層級的存取權也一樣。如要瞭解如何設定資料集層級的存取權控管設定，請參閱[控管資料集存取權](https://docs.cloud.google.com/bigquery/docs/dataset-access-controls?hl=zh-tw)一文。
+在資料集層級授予角色，即可讓實體對特定資料集裡的資料表和檢視表執行指定作業，即使實體不具備較高層級的存取權也一樣。如要瞭解如何設定資料集層級的存取權控管設定，請參閱「[控管資料集存取權](https://docs.cloud.google.com/bigquery/docs/dataset-access-controls?hl=zh-tw)」一文。
 
-在資料表或檢視表層級授予角色，即可讓實體對特定資料表和檢視表執行指定作業，即使實體沒有較高層級的存取權也一樣。如要瞭解如何設定資料表層級的存取權控管設定，請參閱[控管資料表和檢視區塊的存取權](https://docs.cloud.google.com/bigquery/docs/table-access-controls?hl=zh-tw)一文。
+在資料表或檢視表層級授予角色，即可讓實體對特定資料表和檢視表執行指定作業，即使實體沒有較高層級的存取權也是如此。如要瞭解如何設定資料表層級的存取權控管設定，請參閱[控管資料表和檢視表的存取權](https://docs.cloud.google.com/bigquery/docs/table-access-controls?hl=zh-tw)一文。
 
 您也可以建立 [IAM 自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)。建立自訂角色之後，您就能依據要讓實體執行的特定作業授予權限。
 
@@ -1240,8 +1240,8 @@ print("Query results loaded to the table {}".format(table_id))
 
    [啟用 Cloud Shell](https://console.cloud.google.com/?cloudshell=true&hl=zh-tw)
 
-   Google Cloud 主控台底部會開啟一個 [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works?hl=zh-tw) 工作階段，並顯示指令列提示。Cloud Shell 是已安裝 Google Cloud CLI 的殼層環境，並已針對您目前的專案設定好相關值。工作階段可能要幾秒鐘的時間才能初始化。
-2. 發出 [`bq show`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_show) 指令，即可顯示所有資料表資訊。使用 `--schema` 旗標可以只顯示資料表結構定義資訊。`--format` 旗標可用來控制輸出內容。
+   Google Cloud 主控台底部會開啟一個 [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works?hl=zh-tw) 工作階段，並顯示指令列提示。Cloud Shell 是已安裝 Google Cloud CLI 的殼層環境，並已針對您目前的專案設定好相關值。工作階段可能需要幾秒鐘的時間才能完成初始化。
+2. 發出 [`bq show`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_show) 指令，即可顯示所有資料表資訊。使用 `--schema` 標記，可以只顯示資料表結構定義資訊。`--format` 標記可用來控制輸出內容。
 
    如果您要取得非預設專案中之資料表的相關資訊，請使用下列格式將專案 ID 新增至資料集：`project_id:dataset`。
 

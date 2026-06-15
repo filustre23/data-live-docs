@@ -16,7 +16,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 客戶自行管理的 Cloud KMS 金鑰
 
-**注意：** 使用以特定 BigQuery 版本建立的預留項目時，這項功能可能無法使用。如要進一步瞭解各版本啟用的功能，請參閱「[BigQuery 版本簡介](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)」。
+**注意：** 使用以特定 BigQuery 版本建立的預留項目時，可能無法使用這項功能。如要進一步瞭解各版本啟用的功能，請參閱「[BigQuery 版本簡介](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)」。
 
 根據預設，BigQuery 會[加密靜態儲存的內容](https://docs.cloud.google.com/docs/security/encryption/default-encryption?hl=zh-tw)。BigQuery 會為您處理並管理這個預設加密作業，您不必採取任何其他動作。首先，系統會使用「資料加密金鑰」對 BigQuery 資料表中的資料進行加密，然後使用「金鑰加密金鑰」為資料加密金鑰進行加密，這個方法稱為[信封式加密](https://docs.cloud.google.com/kms/docs/envelope-encryption?hl=zh-tw)。
 金鑰加密金鑰不會直接加密您的資料，其用途是對 Google 用來加密您資料的資料加密金鑰進行加密。
@@ -38,7 +38,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 * 新專案會自動啟用 BigQuery。如果您是使用現有專案來執行 BigQuery，請[啟用 BigQuery API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery&hl=zh-tw)。
 * 針對執行 Cloud KMS 的 Google Cloud 專案，[啟用 Cloud Key Management Service API](https://console.cloud.google.com/apis/enableflow?apiid=cloudkms.googleapis.com&hl=zh-tw)。
 
-每次查詢 CMEK 加密資料表時，系統都會使用 Cloud KMS 執行一次解密呼叫。詳情請參閱 [Cloud KMS 定價](https://cloud.google.com/kms/pricing?hl=zh-tw)。
+針對 CMEK 加密資料表，每次查詢都會使用 Cloud KMS 執行一次解密呼叫。詳情請參閱 [Cloud KMS 定價](https://cloud.google.com/kms/pricing?hl=zh-tw)。
 
 ## 加密規格
 
@@ -46,8 +46,7 @@ BigQuery 中用來保護您資料的 Cloud KMS 金鑰是 AES-256 金鑰。這類
 
 ## 手動或自動建立金鑰
 
-您可以手動建立 CMEK 金鑰，也可以使用 Cloud KMS Autokey。
-Autokey 會自動佈建及指派 CMEK 金鑰，簡化建立及管理金鑰的程序。使用 Autokey 時，您不需要事先佈建金鑰環、金鑰和服務帳戶。而是會在建立 BigQuery 資源時，視需要產生。詳情請參閱「[Autokey 總覽](https://docs.cloud.google.com/kms/docs/autokey-overview?hl=zh-tw)」。
+您可以手動建立 CMEK 金鑰，也可以使用 Cloud KMS Autokey。Autokey 會自動佈建及指派 CMEK 金鑰，簡化建立及管理作業。使用 Autokey 時，您不需要事先佈建金鑰環、金鑰和服務帳戶，系統會在建立 BigQuery 資源時視需要產生這些項目。詳情請參閱 [Autokey 總覽](https://docs.cloud.google.com/kms/docs/autokey-overview?hl=zh-tw)。
 
 ### 手動建立金鑰環和金鑰
 
@@ -88,7 +87,7 @@ bq-PROJECT_NUMBER@bigquery-encryption.iam.gserviceaccount.com
 1. 前往 Google Cloud 控制台的「資訊主頁」[頁面](https://console.cloud.google.com/home?hl=zh-tw)。
 
    [前往「資訊主頁」頁面](https://console.cloud.google.com/首頁?hl=zh-tw)
-2. 按一下頁面頂端的「Select from」下拉式清單。在顯示的「Select from」(可用的選項) 視窗中，選取您的專案。
+2. 按一下頁面頂端的「Select from」下拉式清單。在顯示的「Select from」視窗中，選取您的專案。
 3. 專案資訊主頁的「Project info」(專案資訊) 卡片會顯示專案 ID 和專案編號。
 4. 在下列字串中，將 PROJECT\_NUMBER 替換為您的專案編號。這個新字串會識別您的 BigQuery 服務帳戶 ID。
 
@@ -98,7 +97,7 @@ bq-PROJECT_NUMBER@bigquery-encryption.iam.gserviceaccount.com
 
 ### bq
 
-使用 `bq show` 指令並加上 `--encryption_service_account` 標記，即可取得服務帳戶 ID：
+使用 `bq show` 指令搭配 `--encryption_service_account` 標記，即可取得服務帳戶 ID：
 
 ```
 bq show --encryption_service_account
@@ -151,20 +150,20 @@ KMS_KEY
 更改下列內容：
 
 * `KMS_PROJECT_ID`：執行 Cloud KMS 的 Google Cloud專案 ID
-* `PROJECT_NUMBER`：執行 BigQuery 的 Google Cloud 專案編號 (而非專案 ID)
+* `PROJECT_NUMBER`：執行 BigQuery 的專案編號 (而非專案 ID) Google Cloud
 * `KMS_KEY_LOCATION`：Cloud KMS 金鑰的位置名稱
 * `KMS_KEY_RING`：Cloud KMS 金鑰的金鑰環名稱
-* `KMS_KEY`：Cloud KMS 金鑰的名稱
+* `KMS_KEY`：Cloud KMS 金鑰的金鑰名稱
 
 ## 金鑰資源 ID
 
-使用 CMEK 時需要 Cloud KMS 金鑰的資源 ID，如範例所示。這個鍵會區分大小寫，且採用下列格式：
+使用 CMEK 時需要 Cloud KMS 金鑰的資源 ID，如範例所示。這個金鑰會區分大小寫，格式如下：
 
 ```
 projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY
 ```
 
-**注意：** 您無法指定包含 `/cryptoKeyVersions/` 權杖的金鑰資源 ID。BigQuery 一律會使用標示為 `primary` 的金鑰版本，在建立資料表時保護資料表。
+**注意：** 您無法指定包含 `/cryptoKeyVersions/` 符記的金鑰資源 ID。BigQuery 一律會使用標示為 `primary` 的金鑰版本，在建立資料表時保護資料表。
 
 ### 擷取金鑰資源 ID
 
@@ -173,7 +172,7 @@ projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY
    [開啟「Cryptographic Keys」(加密編譯金鑰) 頁面](https://console.cloud.google.com/security/kms?hl=zh-tw)
 2. 按一下包含金鑰的金鑰環名稱。
 3. 找到您要擷取資源 ID 的金鑰環，按一下「更多」圖示 *more\_vert*。
-4. 按一下「複製資源名稱」。金鑰的資源 ID 會複製到剪貼簿。資源 ID 也稱為資源名稱。
+4. 點選「複製資源名稱」，系統會將金鑰的資源 ID 複製到剪貼簿。資源 ID 也稱為資源名稱。
 
 ## 建立受 Cloud KMS 保護的資料表
 
@@ -187,13 +186,13 @@ projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY
 2. 點選左側窗格中的 explore「Explorer」。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
-3. 在「Explorer」窗格中展開專案，按一下「Datasets」，然後按一下資料集。資料集會在分頁中開啟。
+3. 在「Explorer」窗格中展開專案，點選「Datasets」，然後點選資料集。資料集會在分頁中開啟。
 4. 在詳細資料窗格中，按一下 add\_box「建立資料表」。
 5. 在「Create table」(建立資料表) 頁面中填寫[建立包含結構定義的空白資料表](https://docs.cloud.google.com/bigquery/docs/tables?hl=zh-tw#create_an_empty_table_with_a_schema_definition)的必要資訊。請先設定加密類型，並完成指定要與資料表搭配使用的 Cloud KMS 金鑰，接著才按一下「建立資料表」：
 
    1. 點選「進階選項」。
    2. 按一下「客戶管理的金鑰」。
-   3. 選取金鑰。如果清單中未顯示你要使用的金鑰，請輸入金鑰的[資源 ID](#key_resource_id)。
+   3. 選取金鑰。如果清單中沒有您要使用的金鑰，請輸入該金鑰的[資源 ID](#key_resource_id)。
 6. 點選「建立資料表」。
 
 ### SQL
@@ -320,10 +319,9 @@ resource "google_project_iam_member" "service_account_access" {
 ## 準備 Cloud Shell
 
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
-2. 設定要套用 Terraform 設定的預設 Google Cloud 專案
-   。
+2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
 
-   每項專案只需要執行一次這個指令，而且可以在任何目錄中執行。
+   每項專案只需要執行一次這個指令，且可以在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
@@ -342,9 +340,9 @@ resource "google_project_iam_member" "service_account_access" {
    ```
 2. 如果您正在學習教學課程，可以複製每個章節或步驟中的程式碼範例。
 
-   將程式碼範例複製到新建立的 `main.tf`。
+   將程式碼範例複製到新建立的 `main.tf` 中。
 
-   視需要從 GitHub 複製程式碼。如果 Terraform 程式碼片段是端對端解決方案的一部分，建議您使用這個方法。
+   視需要從 GitHub 複製程式碼。如果 Terraform 代码片段是端對端解決方案的一部分，建議您這麼做。
 3. 查看並修改範例參數，套用至您的環境。
 4. 儲存變更。
 5. 初始化 Terraform。每個目錄只需執行一次這項操作。
@@ -368,14 +366,14 @@ resource "google_project_iam_member" "service_account_access" {
    ```
 
    視需要修正設定。
-2. 執行下列指令，並在提示中輸入 `yes`，套用 Terraform 設定：
+2. 執行下列指令並在提示中輸入 `yes`，套用 Terraform 設定：
 
    ```
    terraform apply
    ```
 
    等待 Terraform 顯示「Apply complete!」訊息。
-3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)即可查看結果。在 Google Cloud 控制台中，前往 UI 中的資源，確認 Terraform 已建立或更新這些資源。
+3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)，查看結果。在 Google Cloud 控制台中，前往 UI 中的資源，確認 Terraform 已建立或更新這些資源。
 
 **注意：**Terraform 範例通常會假設 Google Cloud 專案已啟用必要的 API。
 
@@ -512,13 +510,13 @@ print(f"Key: {table.encryption_configuration.kms_key_name}.")
 
 ### 查詢受 Cloud KMS 金鑰保護的資料表
 
-不需要任何特殊設定，即可查詢 Cloud KMS 保護的資料表。BigQuery 會儲存用於加密資料表內容的金鑰名稱，並且在查詢受 Cloud KMS 保護的資料表時使用該金鑰。
+不需要任何特殊設定，即可查詢受 Cloud KMS 保護的資料表。BigQuery 會儲存用於加密資料表內容的金鑰名稱，並且在查詢受 Cloud KMS 保護的資料表時使用該金鑰。
 
 只要 BigQuery 可存取用來加密資料表內容的 Cloud KMS 金鑰，包括 BigQuery 主控台和 bq 指令列工具在內的所有現有工具，其執行方式都與使用預設加密資料表相同。
 
 ### 使用 Cloud KMS 金鑰保護查詢結果
 
-根據預設，查詢結果會儲存在以Google-owned and Google-managed encryption key加密的暫存資料表中。如果專案已有[預設金鑰](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw#project_default_key)，系統會將該金鑰套用至臨時 (預設) 查詢結果資料表。如要改用 Cloud KMS 金鑰加密查詢結果，請選取下列其中一個選項：
+根據預設，查詢結果會儲存在以Google-owned and Google-managed encryption key加密的臨時資料表中。如果專案已有[預設金鑰](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw#project_default_key)，該金鑰會套用至臨時 (預設) 查詢結果資料表。如要改用 Cloud KMS 金鑰加密查詢結果，請選取下列任一選項：
 
 ### 控制台
 
@@ -527,9 +525,9 @@ print(f"Key: {table.encryption_configuration.kms_key_name}.")
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 按一下 [Compose new query] (撰寫新查詢)。
 3. 在查詢文字區域中輸入有效的 GoogleSQL 查詢。
-4. 依序點按「更多」、「查詢設定」和「進階選項」。
+4. 依序點選「編輯」>「查詢設定」，然後點選「進階選項」。
 5. 選取「客戶管理的加密技術」。
-6. 選取金鑰。如果清單中未顯示你要使用的金鑰，請輸入金鑰的[資源 ID](#key_resource_id)。
+6. 選取金鑰。如果清單中沒有您要使用的金鑰，請輸入該金鑰的[資源 ID](#key_resource_id)。
 7. 按一下 [儲存]。
 8. 按一下「執行」。
 
@@ -726,7 +724,7 @@ if table.encryption_configuration.kms_key_name == kms_key_name:
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
-3. 在「Explorer」窗格中展開專案，按一下「Datasets」，然後按一下資料集。資料集會在分頁中開啟。
+3. 在「Explorer」窗格中展開專案，點選「Datasets」，然後點選資料集。資料集會在分頁中開啟。
 4. 在詳細資料窗格中，按一下「建立資料表」。
 5. 輸入載入資料表時要使用的選項，但請先按一下 [Advanced options] (進階選項)，再點選 [Create table] (建立資料表)。
 6. 在「Encryption」(加密) 底下，選取 [Customer-managed key] (客戶管理的金鑰)。
@@ -883,7 +881,7 @@ public class LoadJsonFromGCSCMEK {
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
-將 [LoadJobConfig.destination\_encryption\_configuration](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.LoadJobConfig?hl=zh-tw#google_cloud_bigquery_job_LoadJobConfig_destination_encryption_configuration) 屬性設為 [EncryptionConfiguration](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.encryption_configuration.EncryptionConfiguration?hl=zh-tw)，透過客戶代管的加密金鑰來保護載入工作目的地資料表，然後載入資料表。
+將 [LoadJobConfig.destination\_encryption\_configuration](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.LoadJobConfig?hl=zh-tw#google_cloud_bigquery_job_LoadJobConfig_destination_encryption_configuration) 屬性設為 [EncryptionConfiguration](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.encryption_configuration.EncryptionConfiguration?hl=zh-tw)，透過客戶管理的加密金鑰來保護載入工作目的地資料表，然後載入資料表。
 
 ```
 from google.cloud import bigquery
@@ -1031,5 +1029,4 @@ public class CopyTableCMEK {
     // TODO(developer): Replace these variables before running the sample.
     String destinationDatasetName = "MY_DESTINATION_DATASET_NAME";
     String destinationTableId = "MY_DESTINATION_TABLE_NAME";
-    </
 ```

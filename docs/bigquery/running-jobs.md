@@ -82,8 +82,8 @@ public class BigQueryCreateJob
         QueryOptions queryOptions = new QueryOptions
         {
             JobLocation = "us",
-            JobIdPrefix = "code_sample_",
-            Labels = new Dictionary<string, string>
+            JobIdPrefix = "code_sample_&qu<ot;,
+         >   Labels = new Dictionarystring, string
             {
                 ["example-label"] = "example-value"
             },
@@ -141,7 +141,7 @@ public class CreateJob {
 
       // The location and job name are optional,
       // if both are not specified then client will auto-create.
-      String jobName = "jobId_" + UUID.randomUUID().toString();
+      String jobName = "jobId_"; + UUID.randomUUID().toString();
       JobId jobId = JobId.newBuilder().setLocation("us").setJob(jobName).build();
 
       // Create a job with job ID
@@ -152,7 +152,7 @@ public class CreateJob {
       if (job.getJobId().getJob().equals(jobId.getJob())) {
         System.out.print("Job created successfully." + job.getJobId().getJob());
       } else {
-        System.out.print("Job was not created");
+        System.out.print(&quot;Job was not created");
       }
     } catch (BigQueryException e) {
       System.out.print("Job was not created. \n" + e.toString());
@@ -214,11 +214,11 @@ print("Started job: {}".format(query_job.job_id))
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-06-12 (世界標準時間)。
+上次更新時間：2026-06-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-12 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-15 (世界標準時間)。"],[],[]]

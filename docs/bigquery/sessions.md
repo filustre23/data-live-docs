@@ -31,10 +31,10 @@ Google uses AI technology to translate content into your preferred language. AI 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 按一下「撰寫新查詢」add\_box。系統會開啟新的編輯器分頁。
-3. 依序點選「更多」**>「查詢設定」**。系統隨即會顯示「查詢設定」面板。
+2. 按一下「撰寫新查詢」add\_box，系統會開啟新的編輯器分頁。
+3. 依序點選「編輯」>「查詢設定」，系統會顯示「查詢設定」面板。
 4. 在「工作階段管理」部分，按一下「使用工作階段模式」，啟用工作階段模式。
-5. 在「其他設定」**> 資料位置**中，選取位置。工作階段建立後，工作階段中的所有查詢都會限制在這個位置，且無法變更位置。
+5. 在「其他設定」**>「資料位置」**中，選取位置。工作階段建立後，工作階段中的所有查詢都會限制在這個位置，且無法變更位置。
 6. 按一下 [儲存]。
 7. [在編輯器分頁中編寫查詢](https://docs.cloud.google.com/bigquery/docs/sessions-write-queries?hl=zh-tw)
    並運作執行。執行第一次查詢後，系統就會建立新工作階段。
@@ -121,7 +121,7 @@ bq query \
 
 查詢結果後方會顯示工作階段 ID。
 
-如果您要使用 Cloud Shell 執行大量查詢，可以在 [`.bigqueryrc`](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool?hl=zh-tw#adding_flags_to_bigqueryrc) 中將工作階段 ID 新增至 `[query]`，這樣就不必將工作階段 ID 複製並貼到每個指令中。
+如果打算使用 Cloud Shell 執行大量查詢，可以在 [`.bigqueryrc`](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool?hl=zh-tw#adding_flags_to_bigqueryrc) 中將工作階段 ID 新增至 `[query]`，這樣就不必將工作階段 ID 複製並貼到每個指令中。
 
 `.bigqueryrc` 中的工作階段 ID 如下所示：
 
@@ -130,7 +130,7 @@ bq query \
 --session_id=CgwKCmZhbGl1LXRlc3QQARokMDAzYjI0OWQtZ
 ```
 
-將工作階段 ID 新增至 `.bigqueryrc` 後，即可從 `bq query` 指令中省略 `--session_id` 標記。如要使用其他工作階段，或工作階段終止，就必須更新 `.bigqueryrc` 檔案。
+將工作階段 ID 新增至 `.bigqueryrc` 後，您可以從 `bq query` 指令中省略 `--session_id` 標記。如要使用其他工作階段或工作階段終止，您必須更新 `.bigqueryrc` 檔案。
 
 ### API
 
@@ -169,7 +169,7 @@ bq query \
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 找出含有工作階段的編輯器分頁並關閉。工作階段已終止。
+2. 找出含有工作階段的編輯器分頁並關閉，工作階段就會終止。
 
 ### SQL
 
@@ -189,7 +189,7 @@ bq query \
 
 ### 依 ID 終止工作階段
 
-您可以使用工作階段 ID 終止工作階段。您不必在工作階段中，也能以這種方式終止工作階段。
+您可以使用工作階段 ID 終止工作階段。您不需要加入工作階段，即可透過這種方式終止工作階段。
 
 [取得工作階段 ID](https://docs.cloud.google.com/bigquery/docs/sessions?hl=zh-tw#get-id)，然後執行下列陳述式：
 
@@ -201,13 +201,13 @@ CALL BQ.ABORT_SESSION(SESSION_ID);
 
 ## 取得有效工作階段的 ID
 
-在某些情況下，您需要參照工作階段，才能繼續在其中作業。舉例來說，如果您使用 Cloud Shell，每次為該工作階段執行指令時，都必須加入工作階段 ID。
+在某些情況下，您需要參照工作階段，才能繼續在其中工作。舉例來說，如果您使用 Cloud Shell，每次為該工作階段執行指令時，都必須加入工作階段 ID。
 
 ### 控制台
 
-在 Google Cloud 控制台中，您不需要提供工作階段 ID，即可在工作階段內執行新查詢。您只要在含有工作階段的編輯器分頁中繼續作業即可。不過，如要在 Cloud Shell 或 API 呼叫中參照工作階段，您必須知道在控制台中建立的工作階段 ID。
+在 Google Cloud 控制台中，您不需要提供工作階段 ID，即可在工作階段內執行新查詢。只要在含有工作階段的編輯器分頁中繼續作業即可。不過，如要在 Cloud Shell 或 API 呼叫中參照工作階段，您必須知道在控制台中建立的工作階段 ID。
 
-完成這些步驟之前，請確保您已在有效的工作階段中執行至少一項查詢。
+完成這些步驟前，請確認您已在有效的工作階段中執行至少一項查詢。
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -232,7 +232,7 @@ In session: CgwKCmZhbGl1LXRlc3QQARokMDAzYjI0OWQtZ
 
 ### API
 
-如要透過 API 呼叫將 SQL 指令傳送至工作階段，您需要在 API 呼叫中加入工作階段 ID。您可以[建立工作階段](https://docs.cloud.google.com/bigquery/docs/sessions?hl=zh-tw#create-session)或[列出工作階段](#list-sessions)，取得工作階段 ID。
+如要透過 API 呼叫將 SQL 指令傳遞至工作階段，您需要在 API 呼叫中加入工作階段 ID。您可以在[建立工作階段](https://docs.cloud.google.com/bigquery/docs/sessions?hl=zh-tw#create-session)時取得工作階段 ID，也可以[列出工作階段](#list-sessions)。
 
 使用 API 呼叫建立工作階段時，回應中的工作階段 ID 類似於下列內容：
 
@@ -257,7 +257,7 @@ sessionId: CgwKCmZhbGl1LXRlc3QQARokMDAzYjI0OWQtZ
 
    * 如要顯示近期工作資訊，請按一下「個人記錄」。
    * 如要顯示專案中近期工作資訊，請按一下「專案記錄」。
-5. 您可以在「工作階段 ID」欄中查看工作的階段 ID。
+5. 「工作階段 ID」欄會顯示工作的階段 ID。
 
 ### SQL
 
@@ -283,7 +283,8 @@ sessionId: CgwKCmZhbGl1LXRlc3QQARokMDAzYjI0OWQtZ
    請替換下列項目：
 
    * `VIEW`：`INFORMATION_SCHEMA` 檢視畫面：
-     + [`JOBS_BY_USER`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-by-user?hl=zh-tw#schema)：只會傳回目前專案中，由目前使用者建立的作業
+     + [`JOBS_BY_USER`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-by-user?hl=zh-tw#schema)：
+       只會傳回目前專案中，由目前使用者建立的工作
      + [`SESSIONS_BY_USER`](https://docs.cloud.google.com/bigquery/docs/information-schema-sessions-by-user?hl=zh-tw#schema)：
        只會傳回目前專案中，由目前使用者建立的工作階段
      + [`SESSIONS_BY_PROJECT`](https://docs.cloud.google.com/bigquery/docs/information-schema-sessions-by-project?hl=zh-tw#schema)：
@@ -306,7 +307,7 @@ sessionId: CgwKCmZhbGl1LXRlc3QQARokMDAzYjI0OWQtZ
 
 ## 查看工作階段記錄
 
-工作階段會擷取您在一段時間內的 SQL 活動。這項資訊會儲存在工作階段記錄中。工作階段記錄可讓您追蹤工作階段期間所做的變更。無論工作失敗或成功，都會記錄在工作階段記錄中，方便您日後查看。
+工作階段會擷取您在一段時間內的 SQL 活動。這項資訊會儲存在工作階段記錄中。工作階段記錄可讓您追蹤工作階段中所做的變更。無論工作失敗或成功，都會記錄在工作階段記錄中，方便您日後回顧所執行的操作。
 
 ### 控制台
 
@@ -319,7 +320,7 @@ sessionId: CgwKCmZhbGl1LXRlc3QQARokMDAzYjI0OWQtZ
 3. 在「Explorer」窗格中，按一下「Job history」。
 4. 選取要查看的工作記錄類型：
 
-   * 如要顯示近期工作資訊，請按一下「Personal history」(個人記錄)。
+   * 如要顯示近期工作資訊，請按一下「個人記錄」。
    * 如要顯示專案中近期工作資訊，請按一下「專案記錄」。
 5. 按一下「篩選器」filter\_list，然後選取「工作階段 ID」。
 6. 在「工作階段 ID」欄位中，搜尋工作階段 ID：
@@ -352,7 +353,8 @@ sessionId: CgwKCmZhbGl1LXRlc3QQARokMDAzYjI0OWQtZ
 
      選取下列任一檢視畫面：
 
-     + [`JOBS_BY_USER`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw#schema)：只會傳回目前專案中，由目前使用者建立的工作
+     + [`JOBS_BY_USER`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw#schema)：
+       只會傳回目前專案中，由目前使用者建立的工作
      + [`SESSIONS_BY_USER`](https://docs.cloud.google.com/bigquery/docs/information-schema-sessions-by-user?hl=zh-tw#schema)：
        只會傳回目前專案中，由目前使用者建立的工作階段
      + [`SESSIONS_BY_PROJECT`](https://docs.cloud.google.com/bigquery/docs/information-schema-sessions-by-project?hl=zh-tw#schema)：
@@ -399,11 +401,11 @@ WHERE
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-06-13 (世界標準時間)。
+上次更新時間：2026-06-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-13 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-15 (世界標準時間)。"],[],[]]

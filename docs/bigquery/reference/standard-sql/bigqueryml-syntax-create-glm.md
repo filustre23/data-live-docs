@@ -967,4 +967,13 @@ For information about supported locations, see
 * For linear regression models, the `label` column must be real-valued (the
   column values cannot be +/- infinity or `NaN`).
 * For logistic regression models, the `label` column can contain up
-  to 50 unique values; that is, the number of classes is les
+  to 50 unique values; that is, the number of classes is less than or equal to 50. If you need to classify into more than 50 labels, contact [bqml-feedback@google.com](mailto:bqml-feedback@google.com).
+
+## Examples
+
+The following examples create models named `mymodel` in `mydataset` in your
+default project.
+
+### Train a linear regression model
+
+The following example creates and trains a linear reg

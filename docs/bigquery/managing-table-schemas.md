@@ -18,13 +18,13 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 本文說明如何修改現有 BigQuery 資料表的結構定義。
 
-您可以使用 SQL [資料定義語言 (DDL) 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw)，進行本文所述的大部分結構定義修改。這些對帳單不會產生費用。
+您可以使用 SQL [資料定義語言 (DDL) 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw)，進行本文所述的大部分結構定義修改作業。這些陳述式不會產生費用。
 
-如要以本頁所述的所有方式修改資料表結構，請將資料表資料[匯出](https://docs.cloud.google.com/bigquery/docs/exporting-data?hl=zh-tw)至 Cloud Storage，然後將資料[載入](https://docs.cloud.google.com/bigquery/docs/loading-data?hl=zh-tw)至結構定義經過修改的新資料表。BigQuery 載入和擷取工作免費，但您必須付費才能將匯出的資料儲存在 Cloud Storage 中。以下各節說明如何以其他方式執行各種結構定義修改。
+如要以本頁所述的所有方式修改資料表結構，請將資料表資料[匯出](https://docs.cloud.google.com/bigquery/docs/exporting-data?hl=zh-tw)至 Cloud Storage，然後將結構定義經過修改的資料[載入](https://docs.cloud.google.com/bigquery/docs/loading-data?hl=zh-tw)至新的資料表。BigQuery 載入和擷取作業免費，但將匯出的資料儲存在 Cloud Storage 中會產生費用。以下各節將說明執行各類型結構修改作業的其他方式。
 
 BigQuery 中的結構定義更新不會導致資料遺失。
 
-**注意：** 更新結構定義後，變更內容可能不會立即反映在 [`INFORMATION_SCHEMA.TABLES`](https://docs.cloud.google.com/bigquery/docs/information-schema-tables?hl=zh-tw) 和 [`INFORMATION_SCHEMA.COLUMNS`](https://docs.cloud.google.com/bigquery/docs/information-schema-columns?hl=zh-tw) 檢視畫面中。如要查看立即結構定義異動，請呼叫 [`tables.get` 方法](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get?hl=zh-tw)。
+**注意：** 更新結構定義後，變更內容可能不會立即反映在 [`INFORMATION_SCHEMA.TABLES`](https://docs.cloud.google.com/bigquery/docs/information-schema-tables?hl=zh-tw) 和 [`INFORMATION_SCHEMA.COLUMNS`](https://docs.cloud.google.com/bigquery/docs/information-schema-columns?hl=zh-tw) 檢視畫面中。如要查看即時結構定義變更，請呼叫 [`tables.get` 方法](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get?hl=zh-tw)。
 
 ## 新增資料欄
 
@@ -36,11 +36,11 @@ BigQuery 中的結構定義更新不會導致資料遺失。
 
 您新增的任何資料欄都必須遵守 BigQuery 的[資料欄名稱](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#column_names)規則。如要進一步瞭解如何建立結構定義元件，請參閱[指定結構定義](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw)。
 
-您無法在資料表結構定義中間新增資料欄。系統一律會在表格或欄位的結尾處新增資料欄和巢狀欄位。如要在表格結構定義中間建立新資料欄，唯一方法是使用所選結構定義建立新表格，然後從原始表格複製資料。
+您無法在資料表結構定義中間新增資料欄。系統一律會在資料表或欄位的結尾新增資料欄和巢狀欄位。如要在資料表結構定義中間建立新資料欄，唯一的方法是建立所選結構定義的新資料表，然後從原始資料表複製資料。
 
 ### 新增空白資料欄
 
-新增資料欄至現有的資料表結構定義時，資料欄必須為 `NULLABLE` 或 `REPEATED`。您無法將 `REQUIRED` 資料欄新增至現有的資料表結構定義。在 API 或 bq 指令列工具中，將 `REQUIRED` 資料欄新增至現有資料表結構定義會導致錯誤。不過，您可以建立巢狀 `REQUIRED` 欄，做為新 `RECORD` 欄位的一部分。只有在載入資料時建立資料表，或者使用結構定義建立空白資料表時，您才能新增 `REQUIRED` 資料欄。
+新增資料欄至現有的資料表結構定義時，資料欄必須為 `NULLABLE` 或 `REPEATED`。您無法將 `REQUIRED` 資料欄新增至現有的資料表結構定義。在 API 或 bq 指令列工具中，將 `REQUIRED` 資料欄新增至現有的資料表結構定義會導致錯誤。不過，您可以建立巢狀 `REQUIRED` 欄，做為新 `RECORD` 欄位的一部分。只有在載入資料時建立資料表，或者使用結構定義建立空白資料表時，您才能新增 `REQUIRED` 資料欄。
 
 如何將空白資料欄新增至資料表的結構定義：
 
@@ -55,7 +55,7 @@ BigQuery 中的結構定義更新不會導致資料遺失。
 3. 在「Explorer」窗格中展開專案，按一下「Datasets」(資料集)，然後選取資料集。
 4. 依序點選「總覽」**>「表格」**，然後選取所需表格。
 5. 在詳細資料窗格中，按一下「結構定義」分頁標籤。
-6. 點選「編輯結構定義」。你可能需要捲動頁面才能看到這個按鈕。
+6. 點選「編輯結構定義」。你可能需要捲動畫面才能看到這個按鈕。
 7. 在「目前的結構定義」頁面中，按一下「新欄位」下方的「新增欄位」。
 
    * 在「Name」(名稱) 部分，輸入資料欄名稱。
@@ -383,7 +383,7 @@ else:
     print("The column has not been added.")
 ```
 
-### 在 `RECORD` 欄中新增巢狀資料欄
+### 將巢狀資料欄新增至 `RECORD` 資料欄
 
 除了新增資料欄至資料表的結構定義外，您也可以將巢狀資料欄新增至 `RECORD` 資料欄。新增巢狀資料欄的程序與新增資料欄的程序類似。
 
@@ -546,7 +546,7 @@ bq update PROJECT_ID:DATASET.TABLE SCHEMA
 
 #### 在載入附加工作中新增資料欄
 
-您可以在載入工作期間將資料附加至資料表時一併新增資料欄。新結構定義取決於下列其中一項：
+您可以在載入工作期間將資料附加至資料表時一併新增資料欄。新結構定義的決定方式如下：
 
 * 自動偵測 (適用於 CSV 和 JSON 檔案)
 * 可在 JSON 結構定義檔中指定 (適用於 CSV 和 JSON 檔)
@@ -930,7 +930,7 @@ print("Table {} now contains {} columns.".format(table_id, len(table.schema)))
 
 指定 `use_legacy_sql=false` 旗標，以在查詢中使用 GoogleSQL 語法。
 
-如果您要附加的資料表位於非預設專案中的資料集裡，請依照下列格式將該專案的 ID 加到資料集名稱中：`PROJECT_ID:DATASET`。請注意，您要查詢的資料表和目的地資料表必須位於同一位置。
+如果您要附加的資料表位於非預設專案中的資料集裡，請依照下列格式將該專案的 ID 加到資料集名稱中：`PROJECT_ID:DATASET`。請注意，您要查詢的資料表和目的地資料表必須位於相同位置。
 
 (選用) 提供 `--location` 旗標，並將值設為您的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
 
