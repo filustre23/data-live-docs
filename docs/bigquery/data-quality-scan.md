@@ -50,10 +50,10 @@ Google uses AI technology to translate content into your preferred language. AI 
 * 對 `DataScan` 資源執行特定工作：
   + 專案的 [Dataplex DataScan 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex?hl=zh-tw#dataplex.dataScanAdmin)  (`roles/dataplex.dataScanAdmin`)，可取得完整存取權
   + 專案的 [Dataplex DataScan 建立者](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex?hl=zh-tw#dataplex.dataScanCreator)  (`roles/dataplex.dataScanCreator`)，可建立掃描作業
-  + 專案的「Dataplex DataScan 編輯者」 (`roles/dataplex.dataScanEditor`) 寫入存取權
+  + 專案的「Dataplex DataScan 編輯者」 (`roles/dataplex.dataScanEditor`)，可取得寫入存取權
   + 專案的 [Dataplex DataScan 檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex?hl=zh-tw#dataplex.dataScanViewer)  (`roles/dataplex.dataScanViewer`)，可讀取掃描中繼資料
-  + 專案的 [Dataplex DataScan 資料檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex?hl=zh-tw#dataplex.dataScanDataViewer)  (`roles/dataplex.dataScanDataViewer`)
-    ，可讀取掃描資料，包括規則和結果
+  + [Dataplex DataScan 資料檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex?hl=zh-tw#dataplex.dataScanDataViewer)  (`roles/dataplex.dataScanDataViewer`)
+    專案，可讀取掃描資料，包括規則和結果
 
 如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
@@ -64,7 +64,8 @@ Google uses AI technology to translate content into your preferred language. AI 
 如要執行及管理資料品質掃描作業，必須具備下列權限：
 
 * 對 BigQuery 資料表執行資料品質掃描：
-  + 專案的 `bigquery.jobs.create` 權限，以便執行掃描工作
+  + 專案的 `bigquery.jobs.create`
+    權限，可執行掃描工作
   + `bigquery.tables.get`
     要掃描的 BigQuery 資料表
   + `bigquery.tables.getData`
@@ -76,7 +77,7 @@ Google uses AI technology to translate content into your preferred language. AI 
     位於與資料表相同位置的 `@bigquery` 項目群組
 * 建立 `DataScan`：
   `dataplex.datascans.create`
-  在專案中
+  專案
 * 刪除 `DataScan`：
   `dataplex.datascans.delete`
   專案
@@ -86,7 +87,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 * 查看`DataScan`詳細資料，包括規則和結果：
   `dataplex.datascans.getData`
   在專案上
-* 列出專案的 `DataScan`：
+* 列出專案中的 `DataScan`：
   `dataplex.datascans.list`
 * 執行 `DataScan`：
   `dataplex.datascans.run`
@@ -114,10 +115,10 @@ Google uses AI technology to translate content into your preferred language. AI 
 **重要事項：**您必須將這些角色授予含有資料品質掃描的專案的 Knowledge Catalog 服務帳戶，*而非*使用者帳戶。如果未將角色授予正確的主體，可能會導致權限錯誤。
 
 * 讀取 BigQuery 資料表資料：
-  要掃描的 BigQuery 資料表，以及規則中參照的任何其他資料表，都必須具備 [BigQuery 資料檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataViewer)  (`roles/bigquery.dataViewer`) 權限。
+  要掃描的 BigQuery 資料表和規則中參照的任何其他資料表，都必須具備 [BigQuery 資料檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataViewer)  (`roles/bigquery.dataViewer`) 權限
 * 讀取 Iceberg REST 目錄資料表資料：
   [BigLake Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake?hl=zh-tw#biglake.viewer)  (`roles/biglake.viewer`)
-  掃描 Iceberg REST 目錄資料表，以及規則中參照的任何其他資料表
+  要掃描的 Iceberg REST 目錄資料表，以及規則中參照的任何其他資料表
 * 將掃描結果匯出至 BigQuery 資料表：
   結果資料集和資料表的「BigQuery 資料編輯者」 (`roles/bigquery.dataEditor`)
 * 掃描 Knowledge Catalog lake 中整理的 BigQuery 資料：
@@ -201,20 +202,22 @@ Google uses AI technology to translate content into your preferred language. AI 
       如要瀏覽 Knowledge Catalog 湖泊中的資料表，請按一下「Browse within Knowledge Catalog Lakes」(在 Knowledge Catalog 湖泊中瀏覽)。
    5. 在「範圍」欄位中，選擇「增量」或「完整資料」。
 
-      * 如果選擇「增量」：在「時間戳記欄」欄位中，從 BigQuery 資料表選取 `DATE` 或 `TIMESTAMP` 類型的資料欄，這類資料欄的值只會增加，可用於識別新的記錄。或者，您也可以選取用來將資料表分區的資料欄。
-   6. 如要篩選資料，請選取「篩選列」核取方塊。提供由有效 SQL 運算式組成的資料列篩選器，該運算式可用於 GoogleSQL 語法的 [`WHERE` 子句](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw#where_clause)。例如：`col1 >= 0`。篩選器可由多個資料欄條件組合而成。例如：`col1 >= 0 AND col2 < 10`。
+      * 如果選擇「增量」：在「時間戳記欄」欄位中，從 BigQuery 資料表選取 `DATE` 或 `TIMESTAMP` 類型的資料欄，這類資料欄的值會隨著新增記錄而增加，並能用來識別新的記錄。或者，您也可以選取用來將資料表分區的資料欄。
+   6. 選用：如要篩選資料，請選取「篩選資料列」核取方塊。提供由有效 SQL 運算式組成的資料列篩選器，該運算式可用於 GoogleSQL 語法的 [`WHERE` 子句](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw#where_clause)。例如：`col1 >= 0`。篩選器可由多個資料欄條件組合而成。例如：`col1 >= 0 AND col2 < 10`。
    7. 如要對資料取樣，請在「取樣大小」清單中選取取樣百分比。選擇介於 0.0% 和 100.0% 之間的百分比值，最多可有 3 個小數位數。如果是較大的資料集，請選擇較低的取樣百分比。舉例來說，如果是 1 PB 的資料表，輸入 0.1% 到 1.0% 之間的值，資料品質掃描就會取樣 1 到 10 TB 的資料。如果是增量資料掃描，資料品質掃描會對最新的增量套用取樣。
-   8. 如要將資料品質掃描結果發布為 Knowledge Catalog 中繼資料，請選取「將結果發布至 Knowledge Catalog」核取方塊。
+   8. 選用：如要將資料品質掃描結果發布為 Knowledge Catalog 中繼資料，請選取「將結果發布至 Knowledge Catalog」核取方塊。
 
       您可以在來源資料表的 BigQuery 和 Knowledge Catalog 頁面中，查看「資料品質」分頁的最新掃描結果。如要讓使用者存取已發布的掃描結果，請參閱本文的「[授予資料品質掃描結果的存取權](#share-results)」一節。
-   9. 在「時間表」部分，選擇下列其中一個選項：
+   9. 如需「憑證類型」，請參閱「[設定執行身分](https://docs.cloud.google.com/dataplex/docs/use-auto-data-quality?hl=zh-tw#configure-execution-identity)」。
+   10. 如要[使用規則建立資料品質掃描作業](https://docs.cloud.google.com/dataplex/docs/reuse-data-quality-rules?hl=zh-tw#create-scan-catalog)，請依序選取「規則類型」**> 使用項目規則建立**。
+   11. 在「時間表」部分，選擇下列其中一個選項：
 
-      * **重複**：按照排程執行資料品質掃描，包括每小時、每天、每週、每月或自訂。指定掃描的頻率和時間。如果選擇自訂，請使用 [cron](https://en.wikipedia.org/wiki/Cron) 格式指定排程。
-      * **隨選**：按需求執行資料品質掃描作業。
-      * **單次執行**：立即執行一次資料品質掃描，並在自動刪除時間過後移除掃描作業。這項功能為[預先發布版](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
+       * **重複**：按照排程執行資料品質掃描，包括每小時、每天、每週、每月或自訂。指定掃描的頻率和時間。如果選擇自訂，請使用 [cron](https://en.wikipedia.org/wiki/Cron) 格式指定排程。
+       * **隨選**：按需求執行資料品質掃描作業。
+       * **單次執行**：立即執行一次資料品質掃描，並在自動刪除時間過後移除掃描作業。這項功能為[預先發布版](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
 
-        + **設定掃描後結果自動刪除**：自動刪除時間是指掃描執行後到刪除掃描結果之間的時間間隔。如果資料品質掃描未指定自動刪除時間，系統會在執行後 24 小時自動刪除。自動刪除時間範圍為 0 秒 (立即刪除) 到 365 天。
-   10. 按一下「繼續」。
+         + **設定掃描後結果自動刪除**：自動刪除時間是指掃描執行後到刪除掃描結果之間的時間間隔。如果資料品質掃描未指定自動刪除時間，系統會在執行後 24 小時自動刪除。自動刪除時間範圍為 0 秒 (立即刪除) 到 365 天。
+   12. 按一下「繼續」。
 4. 在「資料品質規則」視窗中，定義要為這項資料品質掃描設定的規則。
 
    1. 按一下「新增規則」，然後選擇下列任一做法。
@@ -223,7 +226,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
         1. **選擇資料欄**：選取要取得建議規則的資料欄。
         2. **選擇掃描專案**：如果資料剖析掃描作業所在的專案，與您要建立資料品質掃描作業的專案不同，請選取要從哪個專案提取剖析掃描作業。
-        3. **選擇資料概況結果**：選取一或多個資料概況結果，然後按一下「確定」。系統會根據這些資訊產生建議規則清單，供您做為起點。
+        3. **選擇資料概況結果**：選取一或多個資料概況結果，然後按一下「確定」。系統會根據這些資訊，列出建議的規則，方便您做為起點。
         4. 找出要新增的規則，勾選對應的核取方塊，然後按一下「選取」。選取後，規則就會新增至目前的規則清單。接著即可編輯規則。
       * **內建規則類型**：根據預先定義的規則建立規則。請參閱[預先定義的規則](https://docs.cloud.google.com/dataplex/docs/auto-data-quality-overview?hl=zh-tw#predefined-rules)清單。
 
@@ -235,13 +238,13 @@ Google uses AI technology to translate content into your preferred language. AI 
         1. 在「維度」中，選擇一個維度。
         2. 在「通過門檻」中，選擇必須通過檢查的記錄百分比。
         3. 在「欄名稱」中選擇資料欄。
-        4. 在「提供 SQL 運算式」欄位中，輸入評估布林值 `true` (通過) 或 `false` (失敗) 的 SQL 運算式。詳情請參閱「[支援的自訂 SQL 規則類型](https://docs.cloud.google.com/dataplex/docs/auto-data-quality-overview?hl=zh-tw#supported-custom-sql-rule-types)」和「[定義資料品質規則](https://docs.cloud.google.com/dataplex/docs/use-auto-data-quality?hl=zh-tw#sample-rules)」中的範例。
+        4. 在「提供 SQL 運算式」欄位中，輸入評估結果為布林值 `true` (通過) 或 `false` (失敗) 的 SQL 運算式。詳情請參閱「[支援的自訂 SQL 規則類型](https://docs.cloud.google.com/dataplex/docs/auto-data-quality-overview?hl=zh-tw#supported-custom-sql-rule-types)」和「[定義資料品質規則](https://docs.cloud.google.com/dataplex/docs/use-auto-data-quality?hl=zh-tw#sample-rules)」中的範例。
         5. 按一下「新增」。
       * **SQL 匯總檢查規則**：建立自訂 SQL 資料表條件規則。
 
         1. 在「維度」中，選擇一個維度。
         2. 在「欄名稱」中選擇資料欄。
-        3. 在「提供 SQL 運算式」欄位中，輸入評估布林值 `true` (通過) 或 `false` (失敗) 的 SQL 運算式。詳情請參閱「[支援的自訂 SQL 規則類型](https://docs.cloud.google.com/dataplex/docs/auto-data-quality-overview?hl=zh-tw#supported-custom-sql-rule-types)」和「[定義資料品質規則](https://docs.cloud.google.com/dataplex/docs/use-auto-data-quality?hl=zh-tw#sample-rules)」中的範例。
+        3. 在「提供 SQL 運算式」欄位中，輸入評估結果為布林值 `true` (通過) 或 `false` (失敗) 的 SQL 運算式。詳情請參閱「[支援的自訂 SQL 規則類型](https://docs.cloud.google.com/dataplex/docs/auto-data-quality-overview?hl=zh-tw#supported-custom-sql-rule-types)」和「[定義資料品質規則](https://docs.cloud.google.com/dataplex/docs/use-auto-data-quality?hl=zh-tw#sample-rules)」中的範例。
         4. 按一下「新增」。
       * **SQL 斷言規則**：建立自訂 SQL 斷言規則，檢查資料是否處於無效狀態。
 
@@ -254,7 +257,7 @@ Google uses AI technology to translate content into your preferred language. AI 
       * **規則名稱**：輸入自訂規則名稱，長度上限為 63 個半形字元。
         規則名稱可包含英文字母 (a-z、A-Z)、數字 (0-9) 和連字號 (-)，且開頭須為英文字母，結尾須為數字或英文字母。
       * **說明**：輸入規則說明，長度上限為 1,024 個字元。
-   3. 重複上述步驟，在資料品質掃描中新增其他規則。完成後，按一下「繼續」。
+   3. 重複上述步驟，在資料品質掃描作業中新增其他規則。完成後，按一下「繼續」。
 5. 選用：將掃描結果匯出至 BigQuery 標準資料表。在「將掃描結果匯出至 BigQuery 資料表」部分，執行下列操作：
 
    1. 在「選取 BigQuery 資料集」欄位中，按一下「瀏覽」。選取要儲存資料品質掃描結果的 BigQuery 資料集。
@@ -284,7 +287,7 @@ gcloud dataplex datascans create data-quality DATASCAN \
     --data-source-entity=DATA_SOURCE_ENTITY
 ```
 
-如果來源資料並非在 Knowledge Catalog 湖泊中整理，請加入 `--data-source-resource` 旗標：
+如果來源資料並非在 Knowledge Catalog 湖泊內管理，請加入 `--data-source-resource` 標記：
 
 ```
 gcloud dataplex datascans create data-quality DATASCAN \
@@ -1117,7 +1120,7 @@ end
 
    系統會顯示最近發布的結果。
 
-   **注意：** 如果這是第一次執行掃描，可能無法取得已發布的結果。
+   **注意：** 如果這是第一次執行掃描，可能無法取得發布的結果。
 
 ### 查看歷來掃描結果
 
@@ -1147,7 +1150,7 @@ gcloud dataplex datascans jobs list \
 請替換下列變數：
 
 * `LOCATION`：建立資料品質掃描的 Google Cloud 區域。
-* `DATASCAN`：要查看歷史記錄作業的資料品質掃描名稱。
+* `DATASCAN`：要查看歷史作業的資料品質掃描名稱。
 
 ### C#
 
@@ -1156,5 +1159,5 @@ gcloud dataplex datascans jobs list \
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[為本機開發環境設定驗證機制](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
 
 ```
-using Google.Api.Gax
+using
 ```
