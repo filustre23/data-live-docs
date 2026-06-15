@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-06-15T09:30+00:00_
+_Generated 2026-06-15T17:05+00:00_
 
-**9 sources, 5270 topics total**
+**9 sources, 5271 topics total**
 
 ## airflow
 
@@ -3255,7 +3255,7 @@ _146 topics_
 
 Upstream: <https://docs.getdbt.com/docs/>
 
-_1068 topics_
+_1069 topics_
 
 - `dbt-core/best-practices/best-practice-workflows`
 - `dbt-core/best-practices/clone-incremental-models`
@@ -3665,6 +3665,7 @@ _1068 topics_
 - `dbt-core/docs/platform/connect-data-platform/connect-onehouse`
 - `dbt-core/docs/platform/connect-data-platform/connect-postgresql-alloydb`
 - `dbt-core/docs/platform/connect-data-platform/connect-redshift`
+- `dbt-core/docs/platform/connect-data-platform/connect-salesforce`
 - `dbt-core/docs/platform/connect-data-platform/connect-snowflake`
 - `dbt-core/docs/platform/connect-data-platform/connect-starburst-trino`
 - `dbt-core/docs/platform/connect-data-platform/connect-teradata`
