@@ -1134,7 +1134,7 @@ update_cache=True
 project_run = api_client.run_project(project_id=PROJECT_ID, run_project_request_body=input_request_body)
 ```
 
-### Get a run status[​](#get-a-run-status "Direct link to Get a run status")
+### Get a run status[ ​](#get-a-run-status "Direct link to Get a run status")
 
 The status of a run can be viewed using the `run_status_url` as part of the returned object from the `run_project` method. The `get_run_status` method can also be used to programmatically check the status of a run:
 
@@ -1193,7 +1193,7 @@ A 429 status code indicates that you have hit the request rate limit. See the se
 
 ### 500 Internal server error[​](#500-internal-server-error "Direct link to 500 Internal server error")
 
-A 500 status code indicates an error with the Hex application. Please contact [Hex support](/cdn-cgi/l/email-protection#dcafa9acacb3aea89cb4b9a4f2a8b9bfb4) for help troubleshooting.
+A 500 status code indicates an error with the Hex application. Please contact [Hex support](/cdn-cgi/l/email-protection#74070104041b0600341c110c5a0011171c) for help troubleshooting.
 
 ### 503 Service Unavailable[​](#503-service-unavailable "Direct link to 503 Service Unavailable")
 

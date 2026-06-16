@@ -157,6 +157,10 @@ When using Threads with an OAuth data connection, the user's personal credential
 
 If the data connection has [credential sharing disabled for notebooks](/docs/connect-to-data/data-connections/oauth-data-connections#credential-sharing), users will not be able to share threads they've created with any other users in the workspace.
 
+## Scheduling Threads with Tasks[​](#scheduling-threads-with-tasks "Direct link to Scheduling Threads with Tasks")
+
+To run an agent analysis on a recurring schedule and deliver the result to Slack or email, create a [Task](/docs/explore-data/tasks). Each Task run kicks off a brand-new Thread that you can reply to and explore from.
+
 ## Improving Threads results[​](#improving-threads-results "Direct link to Improving Threads results")
 
 Workspace Managers and Admins can curate context in the workspace to continually improve Threads results. Workspace Managers and Admins can add context in the form of [semantic projects](/docs/connect-to-data/semantic-models/semantic-authoring/semantic-authoring-overview), [project and data endorsements](/docs/agent-management/context-management/guides), [data metadata](/docs/explore-data/data-browser#schema-metadata), and the [agent rules file](/docs/agent-management/context-management/guides). Read more about curating context to improve AI results in Hex [here](/tutorials/ai-best-practices/setup-for-ai-agents).
@@ -185,4 +189,5 @@ Workspace Managers and Admins can curate context in the workspace to continually
 * [Saving as a project](#saving-as-a-project)
 * [Sensitive Threads](#sensitive-threads)
 * [OAuth and Threads](#oauth-and-threads)
+* [Scheduling Threads with Tasks](#scheduling-threads-with-tasks)
 * [Improving Threads results](#improving-threads-results)

@@ -13,6 +13,10 @@ info
 
 Hex apps can be configured to be run on a schedule that suits your use case, with a maximum frequency of hourly.
 
+tip
+
+Scheduled runs execute a previously published Hex app. To instead schedule the [Hex agent](/docs/explore-data/threads) against a fresh prompt and deliver the answer to Slack or email, see [Tasks](/docs/explore-data/tasks).
+
 When a scheduled run is triggered, the cells [required by the app](/docs/explore-data/projects/project-execution/execution-model) are run, providing a way to automate code execution. Scheduled runs can also be used to [update the published results](#update-published-results), and to trigger [app notifications](/docs/share-insights/app-notifications).
 
 tip

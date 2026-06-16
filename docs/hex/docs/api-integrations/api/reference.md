@@ -2505,6 +2505,6 @@ Copy
 
 ##### Request Body schema: application/json required
 
-|  |  |
-| --- | --- |
-| sharing | object |
+|  |
+| --- |
+| sharing |

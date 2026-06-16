@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-06-16T02:50+00:00_
+_Generated 2026-06-16T09:28+00:00_
 
-**9 sources, 5272 topics total**
+**9 sources, 5275 topics total**
 
 ## airflow
 
@@ -3102,7 +3102,7 @@ _1527 topics_
 
 Upstream: <https://code.claude.com/docs/en/>
 
-_146 topics_
+_148 topics_
 
 - `claude-code/admin-setup`
 - `claude-code/advisor`
@@ -3247,6 +3247,8 @@ _146 topics_
 - `claude-code/whats-new/2026-w20`
 - `claude-code/whats-new/2026-w21`
 - `claude-code/whats-new/2026-w22`
+- `claude-code/whats-new/2026-w23`
+- `claude-code/whats-new/2026-w24`
 - `claude-code/workflows`
 - `claude-code/worktrees`
 - `claude-code/zero-data-retention`
@@ -4492,7 +4494,7 @@ _153 topics_
 
 Upstream: <https://learn.hex.tech/>
 
-_361 topics_
+_362 topics_
 
 - `hex/changelog`
 - `hex/changelog/2020-12-17`
@@ -4750,6 +4752,7 @@ _361 topics_
 - `hex/docs/explore-data/projects/project-execution/run-modes-and-cell-staleness`
 - `hex/docs/explore-data/projects/project-execution/run-stats`
 - `hex/docs/explore-data/projects/projects-introduction`
+- `hex/docs/explore-data/tasks`
 - `hex/docs/explore-data/threads`
 - `hex/docs/find-and-organize-content`
 - `hex/docs/getting-started`

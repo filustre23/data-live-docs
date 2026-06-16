@@ -16,6 +16,10 @@
 
 Use Threads to have conversational interactions with your data.](/docs/explore-data/threads)
 
+[## 📄️Tasks
+
+Schedule the Threads agent to run on a recurring cadence and deliver answers to Slack or email.](/docs/explore-data/tasks)
+
 [## 📄️Chat with App
 
 Use Chat with App to have conversational interactions with your published applications.](/docs/explore-data/chat-with-app)
