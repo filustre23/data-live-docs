@@ -21,7 +21,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 * [`INFORMATION_SCHEMA` 觀看次數](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw)
 * [查詢執行圖表](https://docs.cloud.google.com/bigquery/docs/query-insights?hl=zh-tw#view_query_performance_insights)
 * [工作記錄](https://docs.cloud.google.com/bigquery/docs/managing-jobs?hl=zh-tw#view-job)
-* [行政工作探索工具](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer?hl=zh-tw)
+* [工作機會探索工具](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer?hl=zh-tw)
 
 由於 BigQuery 持續查詢的執行時間較長，通常在 SQL 查詢完成時產生的指標可能會缺漏或不準確。
 
@@ -29,13 +29,13 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 您可以使用多個 `INFORMATION_SCHEMA` 檢視畫面，監控持續查詢和持續查詢預留項目。
 
-**注意：** `JOBS* INFORMATION_SCHEMA` 檢視畫面只會保留執行中持續查詢的資料兩天。
+**注意：** `JOBS* INFORMATION_SCHEMA` 檢視畫面只會保留執行中連續查詢的資料兩天。
 
 ### 查看工作詳細資料
 
 您可以使用 [`JOBS`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw) 檢視表取得持續查詢工作的中繼資料。
 
-下列查詢會傳回所有有效持續查詢的中繼資料。中繼資料包含輸出浮水印時間戳記，代表持續查詢成功處理資料的時間點。
+下列查詢會傳回所有有效連續查詢的中繼資料。中繼資料包括輸出浮水印時間戳記，代表持續查詢已成功處理資料的時間點。
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -70,7 +70,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 您可以使用 [`ASSIGNMENTS`](https://docs.cloud.google.com/bigquery/docs/information-schema-assignments?hl=zh-tw) 和 [`RESERVATIONS`](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations?hl=zh-tw) 檢視畫面，取得持續查詢預留指派詳細資料。
 
-傳回連續查詢的保留項目指派詳細資料：
+傳回連續查詢的保留項目指派作業詳細資料：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -97,11 +97,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    * `ADMIN_PROJECT_ID`：擁有預留資源的[管理專案](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#admin-project) ID。
    * `LOCATION`：預訂地點。
-   * `PROJECT_ID`：指派給預留項目的專案 ID。系統只會傳回在這個專案中執行的持續查詢相關資訊。
+   * `PROJECT_ID`：指派給預留項目的專案 ID。系統只會傳回在這個專案中執行的連續查詢相關資訊。
 
 ### 查看運算單元消耗量資訊
 
-您可以使用 [`ASSIGNMENTS`](https://docs.cloud.google.com/bigquery/docs/information-schema-assignments?hl=zh-tw)、[`RESERVATIONS`](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations?hl=zh-tw) 和 [`JOBS_TIMELINE`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline?hl=zh-tw) 檢視畫面，取得持續查詢的查詢配額消耗資訊。
+您可以使用 [`ASSIGNMENTS`](https://docs.cloud.google.com/bigquery/docs/information-schema-assignments?hl=zh-tw)、[`RESERVATIONS`](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations?hl=zh-tw) 和 [`JOBS_TIMELINE`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline?hl=zh-tw) 檢視畫面，取得持續查詢時段的用量資訊。
 
 傳回持續查詢的時段消耗量資訊：
 
@@ -142,10 +142,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    * `ADMIN_PROJECT_ID`：擁有預留資源的[管理專案](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#admin-project) ID。
    * `LOCATION`：預訂地點。
-   * `PROJECT_ID`：指派給預留項目的專案 ID。系統只會傳回在這個專案中執行的持續查詢相關資訊。
+   * `PROJECT_ID`：指派給預留項目的專案 ID。系統只會傳回在這個專案中執行的連續查詢相關資訊。
 
-您也可以使用其他工具 (例如 [Metrics Explorer](https://docs.cloud.google.com/monitoring/charts/metrics-explorer?hl=zh-tw) 和[管理資源圖表](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts?hl=zh-tw#view-resource-utilization)) 監控持續查詢預留量。
-詳情請參閱「[監控 BigQuery 預留項目](https://docs.cloud.google.com/bigquery/docs/reservations-monitoring?hl=zh-tw)」。
+您也可以使用其他工具 (例如 [Metrics Explorer](https://docs.cloud.google.com/monitoring/charts/metrics-explorer?hl=zh-tw) 和[管理資源圖表](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts?hl=zh-tw#view-resource-utilization)) 監控持續查詢預留項目。詳情請參閱「[監控 BigQuery 預留項目](https://docs.cloud.google.com/bigquery/docs/reservations-monitoring?hl=zh-tw)」一文。
 
 ## 使用查詢執行圖表
 
@@ -157,9 +156,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 請注意，工作記錄清單會依工作開始時間排序，因此已執行一段時間的連續查詢可能不會出現在清單開頭。
 
-## 使用管理工作探索工具
+## 使用工作探索工具
 
-在管理工作探索器中[篩選工作](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer?hl=zh-tw#filter-jobs)，將「工作類別」篩選器設為「持續查詢」，即可顯示持續查詢。
+在工作探索器中[篩選工作](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer?hl=zh-tw#filter-jobs)，將「工作類別」篩選器設為「持續查詢」，即可顯示持續查詢。
 
 ## 使用 Cloud Monitoring
 
@@ -167,17 +166,17 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 查詢失敗時發出快訊
 
-建議您建立快訊，在持續查詢失敗時收到通知，不必定期檢查。其中一種做法是建立自訂的 [Cloud Logging 記錄指標](https://docs.cloud.google.com/logging/docs/logs-based-metrics/counter-metrics?hl=zh-tw)，並為作業設定篩選器，然後根據該指標建立 [Cloud Monitoring 警告政策](https://docs.cloud.google.com/monitoring/alerts/using-alerting-ui?hl=zh-tw)：
+與其例行檢查持續查詢是否失敗，不如建立警告，在發生失敗時通知您。方法之一是建立自訂 [Cloud Logging 記錄指標](https://docs.cloud.google.com/logging/docs/logs-based-metrics/counter-metrics?hl=zh-tw)，並為作業設定篩選器，然後根據該指標建立 [Cloud Monitoring 警告政策](https://docs.cloud.google.com/monitoring/alerts/using-alerting-ui?hl=zh-tw)：
 
 1. 建立持續查詢時，請使用[自訂工作 ID 前置字元](https://docs.cloud.google.com/bigquery/docs/continuous-queries?hl=zh-tw#custom-job-id)。多個連續查詢可以共用相同的前置字元。
-   舉例來說，您可以使用 `prod-` 前置字串表示生產查詢。
+   舉例來說，您可以使用 `prod-` 前置字串表示正式版查詢。
 2. 前往 Google Cloud 控制台的「記錄指標」頁面。
 
    [前往「記錄指標」](https://console.cloud.google.com/logs/metrics?hl=zh-tw)
-3. 按一下「建立指標」，「建立記錄指標」面板隨即顯示。
+3. 按一下「建立指標」，系統會顯示「建立記錄指標」面板。
 4. 在「Metric type」(指標類型) 部分，選取「Counter」(計數器)。
 5. 在「詳細資料」部分，為指標命名。例如：`CUSTOM_JOB_ID_PREFIX-metric`。
-6. 在「選取篩選條件」部分，在「建立篩選器」編輯器中輸入下列內容：
+6. 在「選取篩選條件」部分，於「建立篩選器」編輯器中輸入下列內容：
 
    ```
    resource.type = "bigquery_project"
@@ -190,10 +189,10 @@ Google uses AI technology to translate content into your preferred language. AI 
    * `PROJECT_ID`：專案名稱。
    * `CUSTOM_JOB_ID_PREFIX`：您為持續查詢設定的[自訂工作 ID 前置字元](https://docs.cloud.google.com/bigquery/docs/continuous-queries?hl=zh-tw#custom-job-id)名稱。
 7. 點選「建立指標」。
-8. 在導覽選單中，按一下「以記錄為準的指標」。您剛建立的指標會顯示在使用者定義指標清單中。
-9. 在指標的資料列中，依序點選 more\_vert「更多動作」和「運用指標建立快訊」。
+8. 在導覽選單中，按一下「記錄指標」。您剛建立的指標會顯示在使用者定義的指標清單中。
+9. 在指標資料列中，依序點選 more\_vert「More actions」(更多動作) 和「Create alert from metric」(運用指標建立快訊)。
 10. 點選「下一步」。您不需要變更「政策設定模式」頁面的預設設定。
-11. 點選「下一步」。您不需要變更「Configure alert trigger」(設定快訊觸發條件) 頁面的預設設定。
+11. 點選「下一步」。您不需要變更「Configure alert trigger」(設定警告觸發條件) 頁面的預設設定。
 12. 選取通知管道，然後輸入快訊政策的名稱。
 13. 點選「建立政策」。
 
@@ -222,7 +221,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    * `CUSTOM_JOB_ID_PREFIX`：您為持續查詢設定的[自訂工作 ID 前置字元](https://docs.cloud.google.com/bigquery/docs/continuous-queries?hl=zh-tw#custom-job-id)名稱。
 2. 建立 [Cloud Run 函式](https://docs.cloud.google.com/functions/docs/calling?hl=zh-tw)，在 Pub/Sub 收到符合篩選條件的記錄時觸發。
 
-   Cloud Run 函式可以接受 Pub/Sub 訊息中的資料酬載，並嘗試使用與失敗查詢相同的 SQL 語法，啟動新的持續查詢，但會從先前工作停止後不久開始。
+   Cloud Run 函式可以接受 Pub/Sub 訊息中的資料酬載，並嘗試使用與失敗查詢相同的 SQL 語法啟動新的持續查詢，但會從先前工作停止後開始。
 
 舉例來說，您可以使用類似下列的函式：
 
@@ -360,11 +359,11 @@ def retry_continuous_query(event, context):
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-06-13 (世界標準時間)。
+上次更新時間：2026-06-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-13 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-15 (世界標準時間)。"],[],[]]

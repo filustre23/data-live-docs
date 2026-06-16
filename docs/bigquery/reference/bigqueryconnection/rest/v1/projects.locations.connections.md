@@ -291,7 +291,3 @@ Username and Password authentication.
 | JSON representation |
 | --- |
 | ``` {   "username": string,   "password": {     object (Secret)   } } ``` |
-
-| Fields | |
-| --- | --- |
-| `username` |  |

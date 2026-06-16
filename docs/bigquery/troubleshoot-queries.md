@@ -23,7 +23,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 如要排解查詢效能緩慢的問題，請按照下列步驟操作：
 
 * 查看「[Google Cloud Service Health](https://status.cloud.google.com/?hl=zh-tw)」頁面，瞭解是否發生已知 BigQuery 服務中斷問題，進而影響查詢效能。
-* 在[管理工作探索器](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer?hl=zh-tw)中查看查詢的工作時間軸，瞭解查詢各階段的執行時間。
+* 在[工作探索器](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer?hl=zh-tw)中查看查詢的工作時間軸，瞭解查詢各階段的執行時間。
 
   + 如果大部分經過的時間都是因為建立時間過長，請[與 Cloud Customer Care 團隊聯絡](https://docs.cloud.google.com/support?hl=zh-tw)以尋求協助。
   + 如果大部分經過的時間都是因為執行時間過長，請查看[查詢效能深入分析](https://docs.cloud.google.com/bigquery/docs/query-insights?hl=zh-tw)。查詢效能洞察功能會通知您查詢的執行時間是否比平均執行時間長，並提供可能原因。可能原因包括查詢時段爭用或重組配額不足。如要進一步瞭解各項查詢效能問題和可能的解決方法，請參閱「[解讀查詢效能洞察](https://docs.cloud.google.com/bigquery/docs/query-insights?hl=zh-tw#interpret_query_performance_insights)」。
@@ -752,11 +752,11 @@ tcpdump -s 0 -w debug.pcap -K -n host bigquery.googleapis.com
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-06-12 (世界標準時間)。
+上次更新時間：2026-06-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-12 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-15 (世界標準時間)。"],[],[]]

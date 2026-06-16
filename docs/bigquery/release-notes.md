@@ -27,6 +27,38 @@ To get the latest product updates delivered to you, add the URL of this page to 
 reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators), or add the
 [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## June 15, 2026
+
+Feature
+
+Use Gemini Cloud Assist to analyze your SQL queries and receive
+recommendations to [optimize query performance in BigQuery](/bigquery/docs/use-cloud-assist#optimize-query).
+This feature is available to customers who use BigQuery editions.
+This feature is in
+[Preview](https://cloud.google.com/products#product-launch-stages).
+
+Issue
+
+Support for configuring daily token quotas for BigQuery generative AI
+functions has been temporarily disabled. We are working to restore this
+feature as soon as possible.
+
+Feature
+
+You can resize the width of table columns in BigQuery Studio for
+BigQuery listings such as datasets, repositories, job history,
+and connections. To resize a column, hover over the column divider and drag it
+to your preferred width.
+
+Feature
+
+You can use Gemini Code Assist directly within the BigQuery **Jobs explorer**,
+**Job details**, **Job history**, and **Capacity management** pages to help you
+troubleshoot and analyze performance issues. For more information, see
+[Troubleshoot job
+performance](/bigquery/docs/admin-jobs-explorer#get-job-details). This feature
+is in [Preview](https://cloud.google.com/products#product-launch-stages).
+
 ## June 12, 2026
 
 Feature
@@ -937,7 +969,7 @@ Feature
 You can now understand and debug BigQuery query performance with
 a
 [visual mapping of your SQL query in the query execution graph](/bigquery/docs/query-plan-explanation#query_text_heatmap).
-A heatmap highlights the steps that consume more slot-time. This feature is
+A heatmap highlights the steps that consume more slot time. This feature is
 [generally available](https://cloud.google.com/products#product-launch-stages)
 (GA).
 
@@ -4267,20 +4299,4 @@ Libraries
 * Update dependency com.google.api.grpc:proto-google-cloud-bigqueryconnection-v1 to v2.59.0 ([#3660](https://github.com/googleapis/java-bigquery/issues/3660)) ([3a6228b](https://github.com/googleapis/java-bigquery/commit/3a6228b4adc638759d3b2725c612e97e1a3b9cec))
 * Update dependency com.google.apis:google-api-services-bigquery to v2-rev20250128-2.0.0 ([#3667](https://github.com/googleapis/java-bigquery/issues/3667)) ([0b92af6](https://github.com/googleapis/java-bigquery/commit/0b92af6eba4a633bb514089c24b7dd19cf286789))
 * Update dependency com.google.cloud:google-cloud-datacatalog-bom to v1.63.0 ([#3661](https://github.com/googleapis/java-bigquery/issues/3661)) ([9bc8c01](https://github.com/googleapis/java-bigquery/commit/9bc8c0115dc16fb950567cd85cc7dfaa9df50d7d))
-* Update dependency com.google.cloud:sdk-platform-java-config to v3.43.0 ([#3669](https://github.com/googleapis/java-bigquery/issues/3669)) ([4d9e0ff](https://github.com/googleapis/java-bigquery/commit/4d9e0ff30269127f47484910e71fa7a21a735492))
-
-##### Documentation
-
-* Update CONTRIBUTING.md for users without branch permissions ([#3670](https://github.com/googleapis/java-bigquery/issues/3670)) ([009b9a2](https://github.com/googleapis/java-bigquery/commit/009b9a2b3940ab66220e68ddd565710b8552cc45))
-
-Feature
-
-Subscriber email logging lets you log the principal identifiers of users who execute jobs and queries against linked datasets. You can enable logging at the [listing level](/bigquery/docs/analytics-hub-manage-listings#create_a_listing) and the [data exchange level](/bigquery/docs/analytics-hub-manage-exchanges#create-exchange) (for all the listings in the data exchange). Once you enable and save subscriber email logging, this setting cannot be edited. This feature is in [preview](https://cloud.google.com/products#product-launch-stages).
-
-## February 10, 2025
-
-Libraries
-
-### Go
-
-#### [1.66.2](https://github.com/googleapis/google-cloud-go/compare/bigquery/v1.66.1...bigquery/v1.66.2) (2025-02-04)
+* Update dependency com.google.cloud:sdk-platform-java-config to v3.43.0 ([#3669](https://github.com/googleapis/java-bigquery/issues/3669)) (

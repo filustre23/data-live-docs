@@ -14,47 +14,73 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 你可以依據偏好儲存及分類內容。
 
-# 使用管理工作探索工具
+# 監控工作
 
-BigQuery 管理員可以使用管理工作探索器，監控整個機構的工作活動。工作探索器也提供一系列篩選器和排序選項，可協助您排解問題並找出有問題的工作。工作探索器可讓您快速查看工作資訊 (例如擁有者、專案、時段用量、持續時間等)，不必深入瞭解 `INFORMATION_SCHEMA`，也不必撰寫 `INFORMATION_SCHEMA` 查詢。
+BigQuery 管理員可以透過 Google Cloud 控制台的管理工作探索器，監控整個機構的工作。工作探索器提供篩選器和排序選項，可協助您找出、比較及排解有問題的工作。您不必撰寫 `INFORMATION_SCHEMA` 查詢，即可查看工作詳細資料，例如擁有者、專案、運算單元使用情形、花費的時間等。
 
-您也可以選取個別工作，開啟[工作詳細資料頁面](#get-job-details)，其中提供執行圖、SQL 文字和執行記錄等查詢詳細資料，協助您診斷及排解查詢問題。您可以在這個頁面[比較兩項工作](#compare-jobs)，找出兩者之間的重大差異，並解決潛在的效能問題。
+工作多層檢視可讓您執行下列操作：
 
-BigQuery 提供下列`INFORMATION_SCHEMA`檢視畫面，顯示工作詳細資料和洞察資訊：
+* **篩選及識別工作。**依據工作狀態、時間長度、擁有者或運算單元使用情形等條件[套用篩選器](#filter-jobs)，在機構中搜尋特定查詢。
+* **排解工作問題**：選取個別工作，即可在「工作詳細資料」頁面 ([預覽版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages)) 中，查看查詢執行圖表、SQL 文字和執行記錄。
+* **比較成效**。[比較工作](#compare-jobs)
+  ([預覽版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))，找出顯著的指標差異，並解決潛在的效能問題。
+* **取得 AI 輔助。** [直接從工作探索器](#troubleshoot-with-ai) ([預覽版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages)) 使用 Gemini Code Assist，分析工作統計資料或說明執行緩慢的查詢。
+
+BigQuery 會在下列`INFORMATION_SCHEMA`檢視畫面中提供工作詳細資料和洞察資訊：
 
 * [`INFORMATION_SCHEMA.JOBS_BY_PROJECT`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw)
 * [`INFORMATION_SCHEMA.JOBS_BY_ORGANIZATION`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-by-organization?hl=zh-tw)
 * [`INFORMATION_SCHEMA.JOBS_BY_USER`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-by-user?hl=zh-tw)
 
-**注意：** 如果您使用組織權限限制，請參閱「[啟用 Google 擁有的資源存取權](https://docs.cloud.google.com/resource-manager/docs/organization-restrictions/additional-considerations?hl=zh-tw#google-owned-resources)」一文。
+**注意：** 如果您使用機構限制，請參閱「[啟用 Google 擁有的資源存取權](https://docs.cloud.google.com/resource-manager/docs/organization-restrictions/additional-considerations?hl=zh-tw#google-owned-resources)」。
 
-## 必要的角色
+## 事前準備
 
-如要取得使用管理工作探索器所需的權限，請要求系統管理員授予您機構或專案的 [BigQuery 資源檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.resourceViewer)  (`roles/bigquery.resourceViewer`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要使用 Gemini Code Assist [排解 BigQuery (搶先版) 中的工作問題](#troubleshoot-with-ai)，請參閱「[設定 Gemini Code Assist](https://docs.cloud.google.com/cloud-assist/set-up-gemini?hl=zh-tw)」，啟用 API 並授予必要角色。
 
-這個預先定義的角色具備使用管理工作探索工具所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
+### 必要的角色
+
+如要取得使用作業探索工具監控作業所需的權限，請要求管理員授予您下列 IAM 角色：
+
+* 在專案層級查看工作：
+  專案的 [BigQuery 資源檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.resourceViewer)  (`roles/bigquery.resourceViewer`)
+* 在機構層級查看工作：
+  機構的 [BigQuery 資源檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.resourceViewer)  (`roles/bigquery.resourceViewer`)
+* 依機構中的保留項目篩選：
+  [BigQuery 資源檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.resourceViewer)  (`roles/bigquery.resourceViewer`)
+  機構
+* 查看工作詳細資料：
+  在執行查詢的專案中，使用 [BigQuery 資源檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.resourceViewer)  (`roles/bigquery.resourceViewer`)
+* 查看系統層級的詳細資料：
+  管理專案的 [BigQuery 資源檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.resourceViewer)  (`roles/bigquery.resourceViewer`)
+
+如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+
+這些預先定義的角色具備使用工作探索器監控工作所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
 #### 所需權限
 
-如要使用管理工作探索器，必須具備下列權限：
+如要使用工作探索器監控工作，必須具備下列權限：
 
-* 如要查看專案層級的資料：
+* 查看專案層級的工作：
   `bigquery.jobs.listAll`
   專案
-* 如要查看機構層級的資料：
+* 查看機構層級的工作：
   `bigquery.jobs.listAll`
-  在機構上
-* 如要依貴機構的預訂記錄篩選：
+  在機構
+* 依機構的預訂項目篩選：
   `bigquery.reservations.list`
-  在機構上
+  在機構
 
 您或許還可透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)取得這些權限。
 
-**注意：** 只有在您定義 Google Cloud 機構時，才能使用這個機構檢視畫面。
+**注意：** 只有在您定義機構時，才能使用機構檢視畫面。 Google Cloud
+
+如要使用 Gemini Code Assist 排解工作問題，請參閱[使用 Gemini Code Assist 的其他 IAM 需求](https://docs.cloud.google.com/cloud-assist/iam-requirements?hl=zh-tw)。
 
 ## 篩選工作
 
-如要篩選 `INFORMATION_SCHEMA.JOBS*` 檢視區塊中包含的查詢工作，請執行下列操作：
+如要篩選 `INFORMATION_SCHEMA.JOBS*` 檢視區塊中包含查詢的工作，請執行下列操作：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -63,200 +89,159 @@ BigQuery 提供下列`INFORMATION_SCHEMA`檢視畫面，顯示工作詳細資料
 3. 從「位置」清單中，選取要查看工作的地點。
 4. 視需要套用選用的「篩選器」：
 
-   * **工作範圍**。例如目前的專案、機構和您的工作。
-   * **狀態**。例如已完成、發生錯誤、進行中和已加入佇列。
-   * **工作優先順序**：例如互動式或批次工作。
-   * **工作 ID**。
-   * **擁有者**。工作擁有者的電子郵件 ID (僅適用於工作範圍為專案或機構時)。
-   * **專案 ID**。(僅適用於工作範圍為機構時)
-   * **預訂 ID**。(僅適用於工作範圍為機構時)
-   * **運算單元時間超過**。工作耗費的時間超過指定時段。
-   * **持續時間超過**。工作時間超過指定時長。
-   * **處理的位元組數超過**。處理的位元組數超過指定位元組數的工作。
-   * **查詢洞察**。查詢洞察類型，例如時段競爭、超過記憶體重組容量，以及資料輸入規模調整。
-   * **查詢雜湊**。查詢雜湊包含查詢的雜湊。這是十六進位 STRING 雜湊，會忽略註解、參數值、UDF 和常值。如果 [GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw) 查詢成功，但未命中快取，就會顯示這個欄位。
-   * **標籤**。`key:value` 組合，可指派給工作。您可以透過鍵、值或 `key:value` 組合進行篩選。
-   * **工作類別**。查詢類型，例如「標準」或「持續查詢」。
+   * **工作範圍**：依工作可見度層級篩選工作，例如目前專案、機構和您的工作。您可以選擇查看目前專案的工作、整個機構的工作，或只查看您發起的工作。
+   * **狀態**：依目前執行狀態篩選工作，例如已完成、發生錯誤、有效和已加入佇列。這有助於找出有效或失敗的工作。
+   * **工作類別**：依執行的作業類型篩選工作，例如用於即時資料處理的標準 SQL 查詢或持續查詢。
+   * **工作建立原因**：根據 BigQuery 建立工作的原因篩選工作，例如查詢超出逾時時間，或產生的結果過大，無法以單一回應傳回。
+   * **工作優先順序**：依工作執行優先順序篩選工作，例如互動式或批次工作。
+   * **工作 ID**：依工作的專屬英數 ID 篩選特定工作。
+   * **擁有者**：依啟動作業的使用者或服務帳戶電子郵件地址篩選作業。
+   * **專案 ID**：篩選在特定專案中執行的工作。只有在「工作範圍」設為「機構」時，才能使用這個篩選器。
+   * **預留項目 ID**：篩選使用特定預留項目運算單元的工作。這有助於監控不同工作負載耗用預留容量的情況。
+   * **時間用量超過**：篩選時間用量超過指定毫秒數的工作。這是用來找出耗用大量資源查詢的關鍵指標。
+   * **時間長度超過**：篩選完成時間超過指定時間長度的工作。您可以使用這項功能，找出執行速度低於預期的查詢。
+   * **處理的位元組數超過**：篩選掃描資料量超過指定量的作業。這有助於找出可能導致資料處理費用偏高的查詢。
+   * **查詢洞察**：篩選 BigQuery 判定有特定效能問題的工作，例如時段爭用、超出記憶體隨機存取容量，以及資料輸入規模變化。
+   * **查詢雜湊**：篩選具有特定查詢雜湊的工作。查詢雜湊會識別查詢的邏輯，忽略註解、參數值、UDF 和常值中的差異，協助您找出相同查詢邏輯的所有執行作業。這個欄位會顯示成功的[GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw) 查詢 (非快取命中)。
+   * **標籤**：根據您或貴機構附加至工作的自訂中繼資料標籤篩選工作。這可讓您依部門或應用程式分類及追蹤工作。
 
-## 查看查詢執行詳細資料
-
-如要查看工作的查詢執行詳細資料，請按照下列步驟操作：
-
-1. 前往「Jobs explorer」(工作探索工具) 頁面。
-
-   [前往「Jobs explorer」(工作探索工具)](https://console.cloud.google.com/bigquery/admin/jobs-explorer?hl=zh-tw)
-2. 如要查看工作，請按一下「工作探索工具」。
-3. [篩選工作](#filter-jobs)，查看受限的工作。
-4. 按一下要查看查詢執行詳細資料的工作。
-5. 在「查詢結果」窗格中，按一下「執行圖表」分頁標籤，即可查看工作的執行詳細資料。
-
-如要瞭解如何解讀洞察資料，請參閱「[解讀查詢效能洞察資料](https://docs.cloud.google.com/bigquery/docs/query-insights?hl=zh-tw#interpret_query_performance_insights)」。
-
-## 取得 BigQuery 工作詳細資料
+## 排解工作成效問題
 
 **預覽**
 
 這項產品或功能適用《[服務專屬條款](https://docs.cloud.google.com/terms/service-terms?hl=zh-tw#1)》中「一般服務條款」一節的《正式發布前產品條款》。正式發布前的產品和功能是按照「原樣」提供，支援範圍可能有限。
 詳情請參閱[推出階段說明](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
 
-如要尋求支援或針對這項功能提供意見回饋，請傳送電子郵件至 [bq-performance-troubleshooting+feedback@google.com](mailto:bq-performance-troubleshooting+feedback@google.com)。
+**注意：** 如要尋求支援或針對這項功能提供意見回饋，請傳送電子郵件至 [bq-performance-troubleshooting+feedback@google.com](mailto:bq-performance-troubleshooting+feedback@google.com)。
 
-在管理工作探索器中，您可以查看 BigQuery 詳細資料頁面。BigQuery 工作詳細資料頁面會將多項查詢詳細資料整合至一個頁面，協助您診斷及排解查詢問題。「效能」分頁會彙整查詢資訊，包括執行圖表、SQL 文字和執行記錄。
-
-「效能」分頁也支援查詢比較，可讓您比較查詢的歷來用量，並分析及解決任何可能的效能下降問題。如要進一步瞭解如何比較工作，請參閱[比較工作](#compare-jobs)。
-
-### 事前準備
-
-如要取得處理 BigQuery 工作詳細資料和系統層級詳細資料所需的權限，請要求管理員在機構或專案中授予您下列 IAM 角色：
-
-* 查看工作詳細資料：
-  BigQuery 資源檢視者 (`roles/bigquery.resourceViewer`) - 執行查詢的專案
-* 查看系統層級詳細資料：
-  BigQuery 資源檢視者 (`roles/bigquery.resourceViewer`) - 管理專案
-
-如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
-
-這些預先定義的角色具備處理 BigQuery 工作詳細資料和系統層級詳細資料所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
-
-#### 所需權限
-
-如要使用 BigQuery 工作詳細資料和系統層級詳細資料，您必須具備下列權限：
-
-* 如要查看專案層級的資料：
-  `bigquery.jobs.listAll`
-  專案
-* 如要查看機構層級的資料：
-  `bigquery.jobs.listAll`
-  在機構上
-* 如要依貴機構的預訂記錄篩選：
-  `bigquery.reservations.list`
-  在機構上
-
-您或許還可透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)取得這些權限。
+如要診斷及排解查詢問題，您可以在「作業詳細資料」頁面查看執行指標、SQL 文字和歷來成效差異。
 
 ### 查看工作詳細資料
 
-如要查看工作詳細資料頁面，請按照下列步驟操作：
+如要查看工作的詳細資料並分析查詢執行作業，請按照下列步驟操作：
 
-1. 前往「Jobs Explorer」(工作探索工具) 頁面。
+1. 前往「Jobs explorer」(工作探索工具) 頁面。
 
-   [前往 Jobs Explorer](https://console.cloud.google.com/bigquery/admin/jobs-explorer?hl=zh-tw)
-2. 選用：[篩選](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer?hl=zh-tw#filter-jobs)工作機會，縮小顯示範圍。
-3. 按一下要查看的工作 ID。如果查詢未建立工作，系統會顯示查詢 ID，並停用連結。如果是其他查詢，按一下工作 ID 會顯示「工作詳細資料」頁面。
-
-系統預設會顯示「成效」分頁。你可以前往其他分頁，查看更多工作資訊。
+   [前往「Jobs explorer」](https://console.cloud.google.com/bigquery/admin/jobs-explorer?hl=zh-tw)
+2. 選用：如要縮小顯示的工作範圍，請[篩選](#filter-jobs)工作。
+3. 按一下要調查的工作 ID。如果查詢未建立工作，系統會顯示查詢 ID，但連結會停用。按一下有效的工作 ID，即可開啟「工作詳細資料」頁面，並預設顯示「成效」分頁。
 
 ### 可用的查詢資訊
 
-下表說明「成效」分頁中提供的資訊和指標。
+為協助您診斷查詢效能，作業詳細資料中的「效能」分頁會彙整下列資訊和指標 (如適用)：
 
-* **SQL 查詢**：建立這項工作的 SQL 查詢文字。
-* **工作詳細資料**：工作相關資訊，包括工作 ID、建立時間、處理的位元組數等。詳情請參閱「[查看工作詳細資料](https://docs.cloud.google.com/bigquery/docs/managing-jobs?hl=zh-tw#view-job)」。
-* **效能差異**：與先前執行相同查詢時相比，這項作業的效能資訊。BigQuery 會比較目前的工作與過去執行的工作，找出處理的位元組數相近 (± 5%) 且工作時間最短的工作 (如有)。如果沒有這類過去的執行作業，BigQuery 會將目前的工作與過去 30 天的平均執行作業進行比較。如果沒有先前的執行作業，這個部分會指出系統找不到類似的工作可供比較。
-* **執行記錄**：這項查詢的其他執行作業清單 (依查詢雜湊排序)。從這個面板中，您可以選取要與目前查看工作進行比較的工作。如要進一步瞭解如何比較工作，請參閱「[比較工作](#compare-jobs)」。
-* **執行期間的系統負載**：BigQuery 用於執行工作的資源說明。包括這項工作使用的預訂設定資訊 (如適用)。
-* **執行圖**：這項工作的執行圖。詳情請參閱「[取得查詢效能深入分析](https://docs.cloud.google.com/bigquery/docs/query-insights?hl=zh-tw)」。
+* **工作詳細資料**：工作相關資訊，包括工作 ID、建立時間、處理的位元組數和運算單元使用量。詳情請參閱「[查看工作詳細資料](https://docs.cloud.google.com/bigquery/docs/managing-jobs?hl=zh-tw#view-job)」。
+* **執行記錄**：查詢的歷史執行作業清單，依查詢雜湊分組。你可以從這份清單中選取工作，直接與目前的工作進行比較。詳情請參閱[比較工作](#compare-jobs)。
+* **執行圖**：以視覺化方式呈現查詢執行階段。展開「執行圖」部分，檢查時段爭用、隨機播放容量和資料輸入規模。詳情請參閱「[取得查詢效能深入分析](https://docs.cloud.google.com/bigquery/docs/query-insights?hl=zh-tw)」。
 
-## 比較工作
+  以下範例顯示已啟用 SQL 文字對應的執行圖：
+* **執行期間的系統負載**：工作執行期間分配的運算資源和預留設定摘要。
+
+## 比較作業和系統，診斷效能回歸問題
 
 **預覽**
 
 這項產品或功能適用《[服務專屬條款](https://docs.cloud.google.com/terms/service-terms?hl=zh-tw#1)》中「一般服務條款」一節的《正式發布前產品條款》。正式發布前的產品和功能是按照「原樣」提供，支援範圍可能有限。
 詳情請參閱[推出階段說明](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
 
-如要尋求支援或針對這項功能提供意見回饋，請傳送電子郵件至 [bq-performance-troubleshooting+feedback@google.com](mailto:bq-performance-troubleshooting+feedback@google.com)。
+**注意：** 如要尋求支援或針對這項功能提供意見回饋，請傳送電子郵件至 [bq-performance-troubleshooting+feedback@google.com](mailto:bq-performance-troubleshooting+feedback@google.com)。
 
-您可以透過工作成效比較功能，比較基準工作與目標工作，並透過查詢分析功能，找出兩項工作之間差異顯著的詳細資料。這有助於排解兩個查詢工作之間潛在的效能問題。
+您可以透過成效比較工具，分析兩個查詢作業或兩個系統間隔的成效差異。分析結果會顯示查詢詳細資料、資源用量變化，以及基準和目標環境之間差異顯著的系統環境設定。
 
-比較兩個查詢時，請考量工作時間、時段時間和處理的位元組等重要詳細資料，以便最佳化查詢。
+### 瞭解比較分析
 
-### 事前準備
+比較工具會評估查詢層級指標和系統層級因素的成效。您可以開啟「只顯示顯著差異」切換按鈕，將檢視畫面限制為差異大於 20% 的指標。
 
-如要取得處理 BigQuery 工作詳細資料和系統層級詳細資料所需的權限，請要求管理員在機構或專案中授予您下列 IAM 角色：
+顯著差異會以不同顏色標示，方便您掃描問題：
 
-* 查看工作詳細資料：
-  BigQuery 資源檢視者 (`roles/bigquery.resourceViewer`) - 執行查詢的專案
-* 查看系統層級詳細資料：
-  BigQuery 資源檢視者 (`roles/bigquery.resourceViewer`) - 管理專案
-
-如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
-
-這些預先定義的角色具備處理 BigQuery 工作詳細資料和系統層級詳細資料所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
-
-#### 所需權限
-
-如要使用 BigQuery 工作詳細資料和系統層級詳細資料，您必須具備下列權限：
-
-* 如要查看專案層級的資料：
-  `bigquery.jobs.listAll`
-  專案
-* 如要查看機構層級的資料：
-  `bigquery.jobs.listAll`
-  在機構上
-* 如要依貴機構的預訂記錄篩選：
-  `bigquery.reservations.list`
-  在機構上
-
-您或許還可透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)取得這些權限。
-
-### 瞭解工作效能比較
-
-以下各節說明「工作成效比較」頁面，以及該頁面提供的疑難排解資訊。
-
-開啟「僅顯示顯著差異」切換鈕，即可只查看這兩個工作之間的所有指標顯著差異。
-
-顯著差異會以綠色、黃色和紅色醒目顯示：
-
-* **綠色**：變更朝正向發展。舉例來說，查詢時間越短越好，因此如果目標工作比基準工作更快完成，就會標示為綠色。
-* **黃色**：變動方向為負值，但差異小於 20%。
-* **紅色**：變更朝負面方向發展，且差異大於 20%。
-
-#### 查詢層級分析
-
-「查詢層級分析」窗格會說明兩個工作在查詢層級的差異。其中包含「指標」、「SQL 文字」和「執行圖表」三個分頁。
-
-* 「指標」分頁會說明這兩項工作的查詢指標。使用這個分頁判斷工作時間、未使用的加速器和其他指標之間是否有差異。
-* 「SQL text」(SQL 文字) 分頁會顯示建立作業的兩項 SQL 陳述式，並醒目顯示兩者之間的差異。使用這個分頁，判斷 SQL 陳述式變更是否影響工作效能。
-* 「執行圖」分頁會比較這兩項作業的[執行圖](https://docs.cloud.google.com/bigquery/docs/query-plan-explanation?hl=zh-tw)。使用這個分頁，判斷工作執行期間是否在任何階段發生差異。
-
-#### 系統層級分析
-
-「系統層級分析」窗格會說明可能影響系統層級這兩項工作的因素。其中包含三個部分：「專案」資料表、「預訂」資料表和「設定」資料表。
-
-「系統層級分析」窗格會根據兩項查詢的差異，建議可改善的項目。
-
-舉例來說，如果某項工作獲得的運算單元比先前的執行作業少，可能是因為系統的資源受限。如果出現這類訊息，請查看專案層級指標，確認專案整體是否分配到較少的時段。如果專案並未獲得較少的運算單元，則可能是專案層級發生爭用，例如工作並行數增加。如果專案收到的運算單元較少，請檢查預訂層級，找出任何限制。
-
-* 「專案」表格會比較專案層級的這兩項工作。使用這個表格判斷是否能在專案層級進行最佳化。
-* 「預留項目」表格會比較[預留項目](https://docs.cloud.google.com/bigquery/docs/reservations-intro?hl=zh-tw)層級的這兩項工作。使用這份表格找出兩項查詢之間預訂用量的差異，這些差異可能會影響工作效能。
-* 「設定」表格會比較這兩項作業的預留設定。使用這份表格偵測預留項目設定的任何變更，這些變更可能導致效能受到影響。
+* **綠色**：指標有所改善 (例如目標執行中的查詢時間縮短)。
+* **黃色**：指標下降不到 20%。
+* **紅色**：指標降幅超過 20%。
 
 ### 比較兩項工作
 
-如要比較兩項工作：
+如要比較基準工作與目標工作執行作業，請執行下列操作：
 
-1. 前往「Jobs Explorer」(工作探索工具) 頁面。
+1. 開啟「Jobs explorer」(工作探索工具) 頁面。
 
-   [前往 Jobs Explorer](https://console.cloud.google.com/bigquery/admin/jobs-explorer?hl=zh-tw)
-2. 選用：[篩選](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer?hl=zh-tw#filter-jobs)工作機會，縮小顯示範圍。
-3. 按一下要查看及比較的初始工作 ID。系統隨即會顯示「工作詳細資料」頁面。
-4. 按一下「成效」分頁標籤。
-5. 按一下「比較工作」。
-6. 在「Job one (baseline job)」(工作一 (基準工作)) 欄位中，按一下「Browse」(瀏覽)。系統隨即會顯示「類似的同類工作」面板。
-7. 找出要與基準工作比較的工作，然後按一下「比較」。系統會顯示工作效能比較。
-8. 如要只查看兩項工作之間的顯著差異，請開啟「僅顯示顯著差異」切換鈕。
+   [前往「Jobs explorer」](https://console.cloud.google.com/bigquery/admin/jobs-explorer?hl=zh-tw)
+2. 選用：如要縮小顯示的工作範圍，請[篩選](#filter-jobs)工作。
+3. 按一下基準工作的工作 ID，開啟「工作詳細資料」頁面，然後選取「成效」分頁標籤。
+4. 在「動作」選單中，按一下「比較工作」。
+5. 在「Job one (baseline job)」(工作一 (基準工作)) 欄位中，按一下「Browse」(瀏覽)，開啟「Similar comparable jobs」(類似可比較的工作) 窗格。
+6. 選取要與基準比較的目標工作，然後按一下「比較」。
+7. 選用：如要著重於重大效能迴歸，請開啟「只顯示顯著差異」。這樣一來，系統只會顯示差異大於 20% 的指標。
 
-#### 變更要比較的工作
+如要隨時變更比較的工作，請按一下基準或目標工作欄位中的「瀏覽」，然後從可比較的工作清單中選取新工作。
 
-如要變更比較的工作，請按照下列步驟操作：
+#### 查詢層級分析
 
-1. 前往「工作效能比較」頁面。
-2. 在「Job one (baseline job)」(工作一 (基準工作)) 欄位中，按一下「Browse」(瀏覽)。
-3. 在「類似的同類工作」窗格中，找出要比較的工作，然後按一下「比較」。
+比較兩項工作後，您可以查看「查詢層級分析」部分，比較兩個工作執行項目在下列三個分頁中的差異：
+
+* **指標**：比較核心查詢指標，例如工作時間長度、運算單元時間、已處理的位元組數和未使用的加速器。
+* **SQL 文字**：顯示兩項工作的 SQL 陳述式，並醒目顯示文字差異。
+* **執行圖表**：比較兩個作業的[執行圖表](https://docs.cloud.google.com/bigquery/docs/query-plan-explanation?hl=zh-tw)，找出發生瓶頸的位置。
+
+### 比較兩個系統間隔
+
+管理員和分析師可以執行系統效能比較，分析更廣泛的環境指標。這項工具可讓您比較特定預訂和專案的歷史間隔，瞭解使用率變化，並判斷效能下降的原因是工作負載內部或外部因素。
+
+您可以透過下列任一方式前往系統效能比較檢視畫面：
+
+* 在「工作詳細資料」頁面中[比較兩項工作](#compare-two-jobs)後，按一下「系統層級輸出」部分中的「查看更多」，即可查看系統比較詳細資料。
+* 如果使用 Gemini Cloud Assist 執行系統比較，Gemini Cloud Assist 會產生連結，開啟系統比較結果。
+
+如要比較不同時間範圍的系統層級資料，請按照下列步驟操作：
+
+1. 在「系統效能比較」檢視畫面中，按一下「系統」。
+2. 按一下「瀏覽」，然後選取預留項目或專案範圍，即可選取要分析效能的系統。
+3. 定義比較時間範圍：
+   * **目標間隔**：選取發生成效問題的日期和時間範圍，然後按一下「套用」。
+   * **基準間隔**：選取做為效能基準的參考日期和時間範圍，然後按一下「套用」。
+
+#### 系統層級分析
+
+比較間隔後，檢視畫面會將所選環境的使用率變化、並行作業變化和設定差異，對應至其父項群組。這有助於判斷工作負載是否受到時段爭用或設定回歸的影響。資料會產生在下列三個區塊中：
+
+* **專案**：比較專案層級的並行工作數、排入佇列的並行工作數和總配額用量。
+* **預留項目**：比較共用[預留項目](https://docs.cloud.google.com/bigquery/docs/reservations-intro?hl=zh-tw)的預留項目用量、閒置運算單元共用情形和專案並行數。
+* **設定分析**：比較兩次執行之間的工作負載管理設定，例如預訂大小上限和閒置時段借用規則。
+
+## 使用代理程式成效疑難排解深入分析
+
+**預覽**
+
+這項產品或功能適用《[服務專屬條款](https://docs.cloud.google.com/terms/service-terms?hl=zh-tw#1)》中「一般服務條款」一節的《正式發布前產品條款》。正式發布前的產品和功能是按照「原樣」提供，支援範圍可能有限。
+詳情請參閱[推出階段說明](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
+
+如要提供意見或尋求這項功能的支援，請傳送電子郵件至 [bq-performance-troubleshooting+feedback@google.com](mailto:bq-performance-troubleshooting+feedback@google.com)。
+
+監控管理工作或評估效能比較時，BigQuery 會整合基礎可觀測性診斷與 Gemini Cloud Assist，將即時通訊窗格變成主動式疑難排解助理，協助您排解工作層級和系統層級的異常狀況。
+
+洞察資料的存取權受到控管，如果權限不足，收到的洞察資料可能會受到限制。如要進一步瞭解權限，請參閱「[使用 IAM 控管資源存取權](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam?hl=zh-tw)」。
+
+### 排解即時通訊效能問題
+
+如要初始化情境感知疑難排解功能，並根據效能深入分析採取行動，請按照下列步驟操作：
+
+1. 如要開啟 Gemini Cloud Assist 對話窗格並自動載入相關工作或系統背景資訊，請執行下列其中一項操作：
+   * 在「Jobs explorer」或「Job history」頁面中，將游標懸停在工作上，然後點按該表格列中的「Gemini」spark。
+   * 在「容量管理」頁面中，將滑鼠游標懸停在預留項目上，然後點選該表格列中的 spark「Gemini」。
+   * 在「Studio」、「Monitoring」或「Jobs explorer」中，按一下 spark「Gemini」。
+2. 以自然語言提交提示。舉例來說，問問 Gemini 說明作業執行速度緩慢的原因、分析特定作業統計資料、分析特定預留項目效能、排解系統效能問題，或是比較兩個類似歷來作業的效能差異。
+3. 如果違反機構層級或預留層級的門檻 (例如因作用中專案並行作業量意外暴增，導致嚴重佇列)，請查看產生的「成效洞察」報表。這份報告會詳細說明下列重大瓶頸：
+   * **排隊並行數增加**：並行查詢需求量暴增，超過並行軟性限制或預留配額。
+   * **提高專案並行程度**：追蹤確切的高並行專案或頂尖使用者帳戶，這些專案或帳戶會推動共用預留或隨選配額的系統負載。
+4. 觀察「主要指標比較」表格，追蹤精確的數值差異，例如專案平均並行數、佇列運算單元或預留運算單元上限的變化。
+5. 透過 Gemini Cloud Assist 產生的可操作移交連結，直接執行內嵌解決方案。這些捷徑會將您重新導向至特定產品內建工具，並預先填入相關情境，協助您解決問題：
+
+   * **編輯預留項目**：開啟工作負載管理側邊面板，調整預留項目大小上限或啟用進階縮放功能。
+   * **在工作探索工具中查看工作成效**：開啟特定工作的「成效詳細資料」分頁。
+   * **在「工作探索」中比較工作效能**：並排比較兩項工作的效能。
 
 ## 定價
 
-您無須額外付費，即可使用工作探索工具。用於填入這些圖表的查詢不會產生費用，也不會使用使用者擁有的預留項目中的運算單元。如果查詢處理的資料量過大，就會逾時。
+您無須另外付費，就能使用工作探索器。系統不會對用於填入這些圖表的查詢收費，也不會使用使用者自有預留位置中的預留位置。如果查詢處理的資料量過多，系統會逾時。
 
 ## 後續步驟
 
@@ -272,11 +257,11 @@ BigQuery 提供下列`INFORMATION_SCHEMA`檢視畫面，顯示工作詳細資料
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-06-12 (世界標準時間)。
+上次更新時間：2026-06-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-12 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-15 (世界標準時間)。"],[],[]]

@@ -390,9 +390,15 @@ import com.google.cloud.bigquery.TableResult;
 
 public class SimpleQuery {
 
-  public static void runSimpleQuery() {
+  public static void main(String[] args) {
     // TODO(developer): Replace this query before running the sample.
-    String query = "SELECT corpus FROM `bigquery-public-data.samples.shakespeare` GROUP BY corpus;";
+    String query =
+        "SELECT name, SUM(number) as total_people "
+            + "FROM `bigquery-public-data.usa_names.usa_1910_2013` "
+            + "WHERE state = 'TX' "
+            + "GROUP BY name, state "
+            + "ORDER BY total_people DESC "
+            + "LIMIT 100;";
     simpleQuery(query);
   }
 
@@ -409,7 +415,14 @@ public class SimpleQuery {
       TableResult result = bigquery.query(queryConfig);
 
       // Print the results.
-      result.iterateAll().forEach(rows -> rows.forEach(row -> System.out.println(row.getValue())));
+      result
+          .iterateAll()
+          .forEach(
+              row -> {
+                System.out.print("name:" + row.get("name").getStringValue());
+                System.out.print(", count:" + row.get("total_people").getLongValue());
+                System.out.println();
+              });
 
       System.out.println("Query ran successfully");
     } catch (BigQueryException | InterruptedException e) {
@@ -1123,3 +1136,10 @@ for row in rows:
 在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+
+```
+// Demonstrates issuing a query that may be run in short query mode.
+
+// Import the Google Cloud client library
+const {BigQuery} = require('
+```

@@ -29,10 +29,10 @@ Google uses AI technology to translate content into your preferred language. AI 
 BigQuery 中的 Notebook 具有下列優點：
 
 * **與 Python 完美整合**：使用 BigQuery DataFrames API 時，不必進行任何額外設定。
-* **AI 輔助開發**：使用 [Gemini 生成式 AI](https://docs.cloud.google.com/bigquery/docs/(/bigquery/docs/write-sql-gemini)?hl=zh-tw) 輔助開發程式碼。
+* **AI 輔助開發**：使用 [Gemini 生成式 AI](https://docs.cloud.google.com/bigquery/docs/write-sql-gemini?hl=zh-tw) 輔助開發程式碼。
 * **熟悉的編輯器功能**：使用 SQL 自動完成功能，與 BigQuery SQL 編輯器類似。
 * **整合式視覺化**：使用互動式 [DataFrame 視覺化](https://docs.cloud.google.com/bigquery/docs/create-notebooks?hl=zh-tw#cells)，或 [matplotlib](https://matplotlib.org/) 和 [seaborn](https://seaborn.pydata.org/) 等程式庫，直接在工作流程中將資料視覺化。
-* **SQL-Python 互通性**：在參照 Python 變數的儲存格中[執行 SQL](https://docs.cloud.google.com/bigquery/docs/(/bigquery/docs/create-notebooks?hl=zh-tw#cells))。
+* **SQL-Python 互通性**：在參照 Python 變數的儲存格中[執行 SQL](https://docs.cloud.google.com/bigquery/docs/create-notebooks?hl=zh-tw#cells)。
 
 ## 筆記本庫
 
@@ -130,11 +130,11 @@ BigQuery 會使用 [Colab Enterprise 執行階段](https://docs.cloud.google.com
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-06-13 (世界標準時間)。
+上次更新時間：2026-06-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-13 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-15 (世界標準時間)。"],[],[]]

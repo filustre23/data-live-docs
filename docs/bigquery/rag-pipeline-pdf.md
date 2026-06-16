@@ -12,7 +12,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 本教學課程會逐步說明如何根據已剖析的 PDF 內容，建立檢索增強生成 (RAG) 管道。
 
-由於 PDF 檔案結構複雜，且包含文字、圖表和表格，因此在檢索增強生成 (RAG) pipeline 中使用這類檔案可能會有困難。本教學課程將說明如何搭配使用 [`ML.PROCESS_DOCUEMNT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-parse-document?hl=zh-tw)和 Document AI 的版面配置剖析器，根據從 PDF 檔案擷取的關鍵資訊建構 RAG pipeline。
+由於 PDF 檔案結構複雜，且包含文字、圖表和表格，因此在檢索增強生成 (RAG) pipeline 中使用這類檔案可能會有困難。本教學課程將說明如何搭配使用 [`ML.PROCESS_DOCUMENT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-process-document?hl=zh-tw)和 Document AI 的版面配置剖析器，根據從 PDF 檔案擷取的關鍵資訊建構 RAG pipeline。
 
 ## 目標
 
@@ -868,11 +868,11 @@ gcloud projects delete PROJECT_ID
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-06-13 (世界標準時間)。
+上次更新時間：2026-06-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-13 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-15 (世界標準時間)。"],[],[]]
