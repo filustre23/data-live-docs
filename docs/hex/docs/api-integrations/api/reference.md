@@ -33,8 +33,6 @@
 * putUpsertGuideDraft
 * postPublishGuideDrafts
 * delDeleteGuideDraft
-* getListThreads
-* getGetThread
 * getListCells
 * postCreateCell
 * getGetCell
@@ -44,6 +42,10 @@
 * getMe
 * getListUsers
 * postDeactivateUser
+* postCreateThread
+* getListThreads
+* getGetThread
+* postContinueThread
 
 [API docs by Redocly](https://redocly.com/redoc/)
 
@@ -2503,8 +2505,4 @@ Copy
 | --- | --- |
 | dataConnectionId required | string <uuid>  (DataConnectionId) ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}...Show pattern  Unique ID for a data connection. |
 
-##### Request Body schema: application/json required
-
-|  |
-| --- |
-| sharing |
+##### Request Body schema: application/json

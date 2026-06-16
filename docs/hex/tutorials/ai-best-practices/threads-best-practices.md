@@ -18,7 +18,7 @@ Every strong Threads prompt has three parts: **Task + Question + Parameters**
 
 Think of it like giving directions to someone helping you with a project. You wouldn't just say "sales stuff" — you'd tell them what you're trying to accomplish, what specifically you need to know, and any important constraints or context.
 
-### Task[​](#task "Direct link to Task")
+### Goal[​](#goal "Direct link to Goal")
 
 **What it is:** What you're asking Threads to do for you. This grounds the agent instead of forcing it to guess your intent.
 
@@ -197,7 +197,7 @@ Either way, you'll get there faster than you used to.
 #### On this page
 
 * [The prompt template](#the-prompt-template)
-  + [Task](#task)
+  + [Goal](#goal)
   + [Question](#question)
   + [Parameters](#parameters)
 * [When you don't know where to start](#when-you-dont-know-where-to-start)
