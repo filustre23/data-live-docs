@@ -60,7 +60,7 @@ things that warrant attention or action.
 
 > I want you to summarize last week's GTM performance from our @GTMDashboard using our revenue and pipeline data. What changed most significantly compared to the prior week, and what should leadership pay attention to going into this week?
 >
-> Focus on new ARR, pipeline created, pipeline velocity, and win rate by segment. Flag any metric that moved more than 15% from the prior week. Only surface things that warrant attention — skip metrics that are tracking as expected. Send to #gtm-weekly every Monday at 7am.
+> Focus on new ARR, pipeline created, pipeline velocity, and win rate by segment. Flag any metric that moved more than 15% from the prior week. Only surface things that warrant attention — skip metrics that are tracking as expected. Run every Monday at 7am.
 
 **Monthly product engagement digest**
 
@@ -124,7 +124,7 @@ same day last week]?
 
 > I want you to scan our key product and business metrics for anything that looks unusual. Did any metric move more than 20% from yesterday or from the same day last week?
 >
-> Check daily active users, new signups, sessions, and support ticket open rate. Ignore weekends when comparing to same-day-last-week. If everything looks normal, confirm that explicitly. Run every morning at 7am and send to #data-alerts.
+> Check daily active users, new signups, sessions, and support ticket open rate. Ignore weekends when comparing to same-day-last-week. If everything looks normal, confirm that explicitly. Run every morning at 7am.
 
 **Weekly customer health check**
 
@@ -136,13 +136,13 @@ same day last week]?
 
 > I want you to check whether our data pipelines ran successfully overnight. Are there any tables or models that failed to update, ran significantly longer than usual, or are showing row count anomalies?
 >
-> Compare last run time and row counts against the rolling seven-day average. Flag anything more than two standard deviations from the norm. If everything ran clean, confirm it. Run every morning at 6am and send to #data-eng.
+> Compare last run time and row counts against the rolling seven-day average. Flag anything more than two standard deviations from the norm. If everything ran clean, confirm it. Run every morning at 6am.
 
 **Support volume spike detection**
 
 > I want you to monitor our incoming support ticket volume for unusual spikes. Did ticket volume or a specific ticket category spike significantly in the last 24 hours compared to the prior seven-day average?
 >
-> Look at overall ticket count and break it down by category. Flag any category that's more than 40% above its seven-day rolling average. Include the top three most common ticket subjects for any flagged category. Run daily at 9am and send to #support-ops.
+> Look at overall ticket count and break it down by category. Flag any category that's more than 40% above its seven-day rolling average. Include the top three most common ticket subjects for any flagged category. Run daily at 9am.
 
 ### Getting good results[​](#getting-good-results-1 "Direct link to Getting good results")
 
@@ -193,7 +193,7 @@ Format as [bullet points / a short brief / an exec summary].
 
 
 
-Send to [destination] every [cadence].
+Run every [cadence].
 ```
 
 ### Worked examples[​](#worked-examples-2 "Direct link to Worked examples")
@@ -202,7 +202,7 @@ Send to [destination] every [cadence].
 
 > Pull together a weekly summary of business performance using our `@Revenue semantic model`, `@Pipeline semantic model`, and `@Product Usage semantic model`.
 >
-> What changed most significantly across revenue, pipeline health, and product engagement last week? Flag anything that moved more than 15% from the prior week or that came in meaningfully above or below plan. Format as a short brief with one section per area. Send to #leadership-digest every Monday at 8am.
+> What changed most significantly across revenue, pipeline health, and product engagement last week? Flag anything that moved more than 15% from the prior week or that came in meaningfully above or below plan. Format as a short brief with one section per area. Run every Monday at 8am.
 
 **End-of-quarter GTM and finance rollup**
 
@@ -214,13 +214,13 @@ Send to [destination] every [cadence].
 
 > Pull together a weekly health summary using our `@Product Usage semantic model` and the `pipeline_run_log` table from `@Snowflake`.
 >
-> For product: which features saw the biggest changes in adoption last week? For data: did all pipelines run successfully, and are there any models with row count anomalies or delayed refreshes? Separate findings by area. Send to #data-team every Monday at 9am.
+> For product: which features saw the biggest changes in adoption last week? For data: did all pipelines run successfully, and are there any models with row count anomalies or delayed refreshes? Separate findings by area. Run every Monday at 9am.
 
 **Monthly cross-functional KPI digest**
 
 > Summarize last month's performance using our `@Company KPIs semantic model`, our `@Feature Adoption Hex project`, and the `revenue_recognition` table from `@Snowflake`.
 >
-> For each area, surface the two or three most important developments and flag anything that warrants a decision. Focus on signals, not routine updates. Format as a monthly brief with one section per function. Send to #leadership on the first Monday of every month.
+> For each area, surface the two or three most important developments and flag anything that warrants a decision. Focus on signals, not routine updates. Format as a monthly brief with one section per function. Run on the first Monday of every month.
 
 ### Getting good results[​](#getting-good-results-2 "Direct link to Getting good results")
 

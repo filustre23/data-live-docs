@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-06-16T16:30+00:00_
+_Generated 2026-06-17T02:43+00:00_
 
-**9 sources, 5276 topics total**
+**9 sources, 5278 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_1545 topics_
+_1546 topics_
 
 - `anthropic-sdk/agents-and-tools/agent-skills/best-practices`
 - `anthropic-sdk/agents-and-tools/agent-skills/enterprise`
@@ -1525,6 +1525,7 @@ _1545 topics_
 - `anthropic-sdk/manage-claude/compliance-org-data`
 - `anthropic-sdk/manage-claude/data-residency`
 - `anthropic-sdk/manage-claude/rate-limits-api`
+- `anthropic-sdk/manage-claude/spend-limits-api`
 - `anthropic-sdk/manage-claude/usage-cost-api`
 - `anthropic-sdk/manage-claude/wif-admin-api`
 - `anthropic-sdk/manage-claude/wif-providers/aws`
@@ -4494,7 +4495,7 @@ _153 topics_
 
 Upstream: <https://learn.hex.tech/>
 
-_363 topics_
+_364 topics_
 
 - `hex/changelog`
 - `hex/changelog/2020-12-17`
@@ -4600,6 +4601,7 @@ _363 topics_
 - `hex/changelog/2026-05-28`
 - `hex/changelog/2026-06-02`
 - `hex/changelog/2026-06-11`
+- `hex/changelog/2026-06-16`
 - `hex/changelog/archive`
 - `hex/changelog/page/10`
 - `hex/changelog/page/11`

@@ -16,6 +16,7 @@
 * [May 28 - Hex now connects to your apps as an MCP client](/changelog/2026-05-28)
 * [June 2 - Hex is now in Codex](/changelog/2026-06-02)
 * [June 11 - Agent web search, model picker, and Fable 5 support](/changelog/2026-06-11)
+* [June 16 - That question you keep asking… can just run itself](/changelog/2026-06-16)
 
 ### 2025[​](#2025 "Direct link to 2025")
 
