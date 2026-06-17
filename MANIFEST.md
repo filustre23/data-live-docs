@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-06-17T02:43+00:00_
+_Generated 2026-06-17T09:00+00:00_
 
-**9 sources, 5278 topics total**
+**9 sources, 5336 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_1546 topics_
+_1604 topics_
 
 - `anthropic-sdk/agents-and-tools/agent-skills/best-practices`
 - `anthropic-sdk/agents-and-tools/agent-skills/enterprise`
@@ -59,6 +59,22 @@ _1546 topics_
 - `anthropic-sdk/agents-and-tools/tool-use/web-fetch-tool`
 - `anthropic-sdk/agents-and-tools/tool-use/web-search-tool`
 - `anthropic-sdk/api/admin`
+- `anthropic-sdk/api/admin/analytics`
+- `anthropic-sdk/api/admin/analytics/chat_projects`
+- `anthropic-sdk/api/admin/analytics/chat_projects/list`
+- `anthropic-sdk/api/admin/analytics/connectors`
+- `anthropic-sdk/api/admin/analytics/connectors/list`
+- `anthropic-sdk/api/admin/analytics/cost`
+- `anthropic-sdk/api/admin/analytics/cost/list`
+- `anthropic-sdk/api/admin/analytics/cost/list_by_user`
+- `anthropic-sdk/api/admin/analytics/retrieve_summaries`
+- `anthropic-sdk/api/admin/analytics/skills`
+- `anthropic-sdk/api/admin/analytics/skills/list`
+- `anthropic-sdk/api/admin/analytics/usage`
+- `anthropic-sdk/api/admin/analytics/usage/list`
+- `anthropic-sdk/api/admin/analytics/usage/list_by_user`
+- `anthropic-sdk/api/admin/analytics/users`
+- `anthropic-sdk/api/admin/analytics/users/list`
 - `anthropic-sdk/api/admin/api_keys`
 - `anthropic-sdk/api/admin/api_keys/list`
 - `anthropic-sdk/api/admin/api_keys/retrieve`
@@ -72,6 +88,22 @@ _1546 topics_
 - `anthropic-sdk/api/admin/external_keys/retrieve`
 - `anthropic-sdk/api/admin/external_keys/update`
 - `anthropic-sdk/api/admin/external_keys/validate`
+- `anthropic-sdk/api/admin/federation_issuers`
+- `anthropic-sdk/api/admin/federation_issuers/archive`
+- `anthropic-sdk/api/admin/federation_issuers/create`
+- `anthropic-sdk/api/admin/federation_issuers/list`
+- `anthropic-sdk/api/admin/federation_issuers/retrieve`
+- `anthropic-sdk/api/admin/federation_issuers/update`
+- `anthropic-sdk/api/admin/federation_rules`
+- `anthropic-sdk/api/admin/federation_rules/archive`
+- `anthropic-sdk/api/admin/federation_rules/create`
+- `anthropic-sdk/api/admin/federation_rules/list`
+- `anthropic-sdk/api/admin/federation_rules/retrieve`
+- `anthropic-sdk/api/admin/federation_rules/update`
+- `anthropic-sdk/api/admin/federation_rules/workspaces`
+- `anthropic-sdk/api/admin/federation_rules/workspaces/create`
+- `anthropic-sdk/api/admin/federation_rules/workspaces/delete`
+- `anthropic-sdk/api/admin/federation_rules/workspaces/list`
 - `anthropic-sdk/api/admin/invites`
 - `anthropic-sdk/api/admin/invites/create`
 - `anthropic-sdk/api/admin/invites/delete`
@@ -92,6 +124,26 @@ _1546 topics_
 - `anthropic-sdk/api/admin/organizations/me`
 - `anthropic-sdk/api/admin/rate_limits`
 - `anthropic-sdk/api/admin/rate_limits/list`
+- `anthropic-sdk/api/admin/service_accounts`
+- `anthropic-sdk/api/admin/service_accounts/archive`
+- `anthropic-sdk/api/admin/service_accounts/create`
+- `anthropic-sdk/api/admin/service_accounts/list`
+- `anthropic-sdk/api/admin/service_accounts/retrieve`
+- `anthropic-sdk/api/admin/service_accounts/update`
+- `anthropic-sdk/api/admin/service_accounts/workspaces`
+- `anthropic-sdk/api/admin/service_accounts/workspaces/create`
+- `anthropic-sdk/api/admin/service_accounts/workspaces/delete`
+- `anthropic-sdk/api/admin/service_accounts/workspaces/list`
+- `anthropic-sdk/api/admin/spend_limits`
+- `anthropic-sdk/api/admin/spend_limits/create`
+- `anthropic-sdk/api/admin/spend_limits/delete`
+- `anthropic-sdk/api/admin/spend_limits/increase_requests`
+- `anthropic-sdk/api/admin/spend_limits/increase_requests/approve`
+- `anthropic-sdk/api/admin/spend_limits/increase_requests/deny`
+- `anthropic-sdk/api/admin/spend_limits/increase_requests/list`
+- `anthropic-sdk/api/admin/spend_limits/increase_requests/retrieve`
+- `anthropic-sdk/api/admin/spend_limits/list_effective`
+- `anthropic-sdk/api/admin/spend_limits/retrieve`
 - `anthropic-sdk/api/admin/usage_report`
 - `anthropic-sdk/api/admin/usage_report/retrieve_claude_code`
 - `anthropic-sdk/api/admin/usage_report/retrieve_messages`
@@ -113,6 +165,12 @@ _1546 topics_
 - `anthropic-sdk/api/admin/workspaces/rate_limits`
 - `anthropic-sdk/api/admin/workspaces/rate_limits/list`
 - `anthropic-sdk/api/admin/workspaces/retrieve`
+- `anthropic-sdk/api/admin/workspaces/service_accounts`
+- `anthropic-sdk/api/admin/workspaces/service_accounts/create`
+- `anthropic-sdk/api/admin/workspaces/service_accounts/delete`
+- `anthropic-sdk/api/admin/workspaces/service_accounts/list`
+- `anthropic-sdk/api/admin/workspaces/service_accounts/retrieve`
+- `anthropic-sdk/api/admin/workspaces/service_accounts/update`
 - `anthropic-sdk/api/admin/workspaces/update`
 - `anthropic-sdk/api/beta`
 - `anthropic-sdk/api/beta/agents`
