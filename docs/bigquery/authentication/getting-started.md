@@ -16,17 +16,15 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 開始使用驗證功能
 
-應用程式預設憑證 (ADC) 可讓應用程式以服務帳戶憑證做為身分識別，藉此存取 BigQuery 資源。
-
-請注意，BigQuery 不支援使用 [API 金鑰](https://docs.cloud.google.com/docs/authentication/api-keys-use?hl=zh-tw)。
+如要驗證應用程式對 BigQuery 資源的存取權，可以使用應用程式預設憑證 (ADC)。ADC 會使用服務帳戶憑證，為本機開發和已部署的環境提供一致的驗證方法。這樣一來，您從開發環境移至正式環境時，就不必修改驗證程式碼。BigQuery 不支援使用 [API 金鑰](https://docs.cloud.google.com/docs/authentication/api-keys-use?hl=zh-tw)進行驗證。
 
 ## 事前準備
 
-選取這個頁面上的分頁，瞭解如何使用範例：
+選取這個頁面上您打算如何使用範例的分頁：
 
 ### C#
 
-如要在本機開發環境中使用本頁的 .NET 範例，請安裝並初始化 gcloud CLI，然後使用您的使用者憑證設定應用程式預設憑證。
+如要在本機開發環境中使用本頁的 .NET 範例，請安裝並初始化 gcloud CLI，然後使用使用者憑證設定應用程式預設憑證。
 
 1. [安裝](https://docs.cloud.google.com/sdk/docs/install?hl=zh-tw) Google Cloud CLI。
 2. 若您採用的是外部識別資訊提供者 (IdP)，請先[使用聯合身分登入 gcloud CLI](https://docs.cloud.google.com/iam/docs/workforce-log-in-gcloud?hl=zh-tw)。
@@ -44,7 +42,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### Go
 
-如要在本機開發環境中使用本頁的 Go 範例，請安裝並初始化 gcloud CLI，然後使用使用者憑證設定應用程式預設憑證。
+如要在本機開發環境中使用本頁的 Go 範例，請安裝並初始化 gcloud CLI，然後使用您的使用者憑證設定應用程式預設憑證。
 
 1. [安裝](https://docs.cloud.google.com/sdk/docs/install?hl=zh-tw) Google Cloud CLI。
 2. 若您採用的是外部識別資訊提供者 (IdP)，請先[使用聯合身分登入 gcloud CLI](https://docs.cloud.google.com/iam/docs/workforce-log-in-gcloud?hl=zh-tw)。
@@ -80,7 +78,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### Node.js
 
-如要在本機開發環境中使用本頁的 Node.js 範例，請安裝並初始化 gcloud CLI，然後使用您的使用者憑證設定應用程式預設憑證。
+如要在本機開發環境中使用本頁的 Node.js 範例，請安裝並初始化 gcloud CLI，然後使用使用者憑證設定應用程式預設憑證。
 
 1. [安裝](https://docs.cloud.google.com/sdk/docs/install?hl=zh-tw) Google Cloud CLI。
 2. 若您採用的是外部識別資訊提供者 (IdP)，請先[使用聯合身分登入 gcloud CLI](https://docs.cloud.google.com/iam/docs/workforce-log-in-gcloud?hl=zh-tw)。
@@ -134,7 +132,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### Ruby
 
-如要在本機開發環境中使用本頁的 Ruby 範例，請安裝並初始化 gcloud CLI，然後使用您的使用者憑證設定應用程式預設憑證。
+如要在本機開發環境中使用本頁的 Ruby 範例，請安裝並初始化 gcloud CLI，然後使用使用者憑證設定應用程式預設憑證。
 
 1. [安裝](https://docs.cloud.google.com/sdk/docs/install?hl=zh-tw) Google Cloud CLI。
 2. 若您採用的是外部識別資訊提供者 (IdP)，請先[使用聯合身分登入 gcloud CLI](https://docs.cloud.google.com/iam/docs/workforce-log-in-gcloud?hl=zh-tw)。
@@ -150,13 +148,13 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 詳情請參閱[這篇文章](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#local-development)，瞭解如何設定本機開發環境的驗證機制。
 
-如要瞭解如何設定正式環境的驗證機制，請參閱「[為在 Google Cloud上執行的程式碼設定應用程式預設憑證](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#on-gcp)」。
+如要瞭解如何設定正式環境的驗證機制，請參閱[為在 Google Cloud上執行的程式碼設定應用程式預設憑證](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#on-gcp)。
 
 ## 應用程式預設憑證
 
-用戶端程式庫可以使用[應用程式預設憑證](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=zh-tw)，輕鬆向 Google API 進行驗證，然後傳送要求給這些 API。有了應用程式預設憑證，您就能在本機測試應用程式並部署，不必變更基礎程式碼。詳情請參閱「[進行驗證以使用用戶端程式庫](https://docs.cloud.google.com/docs/authentication/client-libraries?hl=zh-tw)」一文。
+用戶端程式庫可以使用[應用程式預設憑證](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=zh-tw)，輕鬆向 Google API 進行驗證，然後傳送要求給這些 API。有了應用程式預設憑證，您就能在本機測試應用程式，然後再部署，過程中無須變更基礎程式碼。詳情請參閱「[進行驗證以使用用戶端程式庫](https://docs.cloud.google.com/docs/authentication/client-libraries?hl=zh-tw)」一文。
 
-當您使用 [BigQuery 用戶端程式庫](https://docs.cloud.google.com/bigquery/docs/reference/libraries?hl=zh-tw)建立服務物件時，如果未傳遞明確憑證，您的應用程式將會使用應用程式預設憑證進行驗證。下列範例說明如何使用 ADC 向 BigQuery 進行驗證。
+當您使用 [BigQuery API 用戶端程式庫](https://docs.cloud.google.com/bigquery/docs/reference/libraries?hl=zh-tw)建立服務物件時，如果未傳遞明確憑證，您的應用程式將會使用應用程式預設憑證進行驗證。下列範例說明如何使用 ADC 向 BigQuery 進行驗證。
 
 ### C#
 
@@ -332,11 +330,11 @@ end
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-06-15 (世界標準時間)。
+上次更新時間：2026-06-16 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-15 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-16 (世界標準時間)。"],[],[]]

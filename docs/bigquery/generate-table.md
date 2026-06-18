@@ -406,7 +406,7 @@ resource "google_bigquery_connection" "default" {
 
 ### 授予服務帳戶存取權
 
-為連線的服務帳戶授予 Vertex AI 使用者角色。
+為連線的服務帳戶授予 Agent Platform 使用者角色。
 
 如果您打算在建立遠端模型時將端點指定為網址 (例如 `endpoint = 'https://us-central1-aiplatform.googleapis.com/v1/projects/myproject/locations/us-central1/publishers/google/models/gemini-2.5-pro'`)，請在網址指定的專案中授予這個角色。
 
@@ -425,7 +425,7 @@ resource "google_bigquery_connection" "default" {
 
    「新增主體」對話方塊隨即開啟。
 3. 在「新增主體」欄位，輸入先前複製的服務帳戶 ID。
-4. 在「選取角色」欄位中，依序選取「Vertex AI」和「Vertex AI 使用者」。
+4. 在「選取角色」欄位中，依序選取「Vertex AI」和「Agent Platform User」(Agent Platform 使用者)。
 5. 按一下 [儲存]。
 
 ### gcloud

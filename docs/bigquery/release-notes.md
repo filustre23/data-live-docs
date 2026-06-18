@@ -27,6 +27,33 @@ To get the latest product updates delivered to you, add the URL of this page to 
 reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators), or add the
 [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## June 17, 2026
+
+Feature
+
+You can enable [autonomous embedding
+generation](/bigquery/docs/autonomous-embedding-generation) on new or existing
+tables that you make with the [`CREATE
+TABLE`](/bigquery/docs/autonomous-embedding-generation#create_an_automatically_generated_embedding_column)
+or [`ALTER
+TABLE`](/bigquery/docs/autonomous-embedding-generation#add_an_automatically_generated_embedding_column_to_an_existing_table)
+statements. When you do this, BigQuery maintains a column of embeddings on the
+table based on a source column. When you add or modify data in the source
+column, BigQuery automatically generates or updates the embedding column for
+that data.
+
+This feature is
+[generally available](https://cloud.google.com/products#product-launch-stages)
+(GA).
+
+## June 16, 2026
+
+Announcement
+
+Table Explorer behavior is moving to the **Reference** panel. This transition
+will occur in July 2026 or later. For more information, see
+[Table Explorer](/bigquery/docs/table-explorer).
+
 ## June 15, 2026
 
 Feature
@@ -4292,11 +4319,4 @@ Libraries
 
 ##### Features
 
-* Implement wasNull for BigQueryResultSet ([#3650](https://github.com/googleapis/java-bigquery/issues/3650)) ([c7ef94b](https://github.com/googleapis/java-bigquery/commit/c7ef94be115cd572df589385f9be801033d72d6d))
-
-##### Dependencies
-
-* Update dependency com.google.api.grpc:proto-google-cloud-bigqueryconnection-v1 to v2.59.0 ([#3660](https://github.com/googleapis/java-bigquery/issues/3660)) ([3a6228b](https://github.com/googleapis/java-bigquery/commit/3a6228b4adc638759d3b2725c612e97e1a3b9cec))
-* Update dependency com.google.apis:google-api-services-bigquery to v2-rev20250128-2.0.0 ([#3667](https://github.com/googleapis/java-bigquery/issues/3667)) ([0b92af6](https://github.com/googleapis/java-bigquery/commit/0b92af6eba4a633bb514089c24b7dd19cf286789))
-* Update dependency com.google.cloud:google-cloud-datacatalog-bom to v1.63.0 ([#3661](https://github.com/googleapis/java-bigquery/issues/3661)) ([9bc8c01](https://github.com/googleapis/java-bigquery/commit/9bc8c0115dc16fb950567cd85cc7dfaa9df50d7d))
-* Update dependency com.google.cloud:sdk-platform-java-config to v3.43.0 ([#3669](https://github.com/googleapis/java-bigquery/issues/3669)) (
+* Implement wasNull for BigQueryResultSet (

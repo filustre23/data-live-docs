@@ -730,5 +730,5 @@ public class WriteCommittedStream {
       // For more information about JsonStreamWriter, see:
       // https://googleapis.dev/java/google-cloud-bigquerystorage/latest/com/google/cloud/bigquery/storage/v1/JsonStreamWriter.html
       streamWriter =
-          JsonStreamWriter.newBuilder(writeStream.getName(), writeStream.getTableSchema
+          JsonStreamWriter.newBuilder(writeStream.getName(), writeStream.getTableSchema(), client)
 ```

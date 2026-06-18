@@ -10,15 +10,16 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 透過 Gemini Enterprise Agent Platform 上的遠端模型進行預測 透過集合功能整理內容 你可以依據偏好儲存及分類內容。
 
-在本教學課程中，您會在 BigQuery 中將 Gemini Enterprise Agent Platform 端點註冊為遠端模型。接著，您可以使用 [`ML.PREDICT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict?hl=zh-tw)，透過遠端模型進行預測。
+在本教學課程中，您會在 BigQuery 中將 Gemini Enterprise Agent Platform 端點註冊為遠端模型，然後使用 [`ML.PREDICT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict?hl=zh-tw)，透過遠端模型進行預測。
 
-當模型過大而無法匯入 BigQuery 時，您可以使用遠端模型。如要針對線上、批次和微批次用途使用單一推論點，這項功能也十分實用。
+當模型過大而無法匯入 BigQuery 時，您可以使用遠端模型。此外，如果您想針對線上、批次和微批次用途使用單一推論點，遠端模型也能派上用場。
 
 **注意：** 如要查看使用 BigQuery 筆記本中 Python 的教學課程版本，請參閱 GitHub 中的 [BQML 遠端模型教學課程](https://github.com/GoogleCloudPlatform/bigquery-ml-utils/blob/master/notebooks/bqml-inference-remote-model-tutorial.md)。
 
 ## 目標
 
-* 將預先訓練的 TensorFlow 模型匯入 Gemini Enterprise Agent Platform Model Registry。
+* 將預先訓練的 TensorFlow 模型匯入 Gemini Enterprise Agent Platform
+  Model Registry。
 * 將模型部署至 Gemini Enterprise Agent Platform 端點。
 * 建立 Cloud 資源連結。
 * 使用 `CREATE MODEL` 陳述式在 BigQuery 中建立遠端模型。
@@ -84,21 +85,21 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    **啟用 API 時所需的角色**
 
-   如要啟用 API，您需要服務使用情形管理員 IAM 角色 (`roles/serviceusage.serviceUsageAdmin`)，其中包含 `serviceusage.services.enable` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   如要啟用 API，您需要具備服務使用情形管理員 IAM 角色 (`roles/serviceusage.serviceUsageAdmin`)，其中包含 `serviceusage.services.enable` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
    [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery.googleapis.com%2Caiplatform.googleapis.com%2Cstorage-component.googleapis.com%2Cbigqueryconnection.googleapis.com&hl=zh-tw)
 3. 請確認您具備[必要權限](#required_permissions)，可執行本文件中的工作。
 
 ### 必要的角色
 
-如果您建立新專案，您就是專案擁有者，並會獲得完成本教學課程所需的所有 IAM 權限。
+如果您建立新專案，您就是專案擁有者，並已獲得完成本教學課程所需的所有 IAM 權限。
 
 如果您使用現有專案，請執行下列操作。
 
 請確認您在專案中具備下列角色：
 
 * [BigQuery Studio 管理員](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.studioAdmin) (`roles/bigquery.studioAdmin`)
-* [Vertex AI 使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform?hl=zh-tw#aiplatform.user) (`roles/aiplatform.user`)
+* [Agent Platform 使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform?hl=zh-tw#aiplatform.user) (`roles/aiplatform.user`)
 * [BigQuery Connection 管理員](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.connectionAdmin) (`roles/bigquery.connectionAdmin`)
 
 #### 檢查角色
@@ -119,17 +120,17 @@ Google uses AI technology to translate content into your preferred language. AI 
 2. 選取專案。
 3. 按一下person\_add「Grant access」(授予存取權)。
 4. 在「New principals」(新增主體) 欄位中，輸入您的使用者 ID。 這通常是指 Google 帳戶的電子郵件地址。
-5. 按一下「選取角色」，然後搜尋角色。
+5. 按一下「Select a role」(選取角色)，然後搜尋角色。
 6. 如要授予其他角色，請按一下add「Add another role」(新增其他角色)，然後新增其他角色。
 7. 按一下「Save」(儲存)。
 
-如要進一步瞭解 BigQuery 中的 IAM 權限，請參閱「[BigQuery 權限](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bq-permissions)」。
+如要進一步瞭解 BigQuery 中的 IAM 權限，請參閱 [BigQuery 權限](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bq-permissions)。
 
 ## 將模型匯入 Gemini Enterprise Agent Platform Model Registry
 
-在本教學課程中，您會使用 Cloud Storage 中 `gs://cloud-samples-data/bigquery/ml/remote_model_tutorial/` 提供的預先訓練 TensorFlow 模型。Cloud Storage 值區位於 `US` 多區域位置。
+在本教學課程中，您會使用 Cloud Storage 中 `gs://cloud-samples-data/bigquery/ml/remote_model_tutorial/` 提供的預先訓練 TensorFlow 模型。Cloud Storage bucket 位於 `US` 多區域位置。
 
-模型是名為 `saved_model.pb` 的 TensorFlow 模型。這是自訂情緒分析模型，以純文字 IMDB 電影評論資料微調 BERT 模型而建立。模型會使用電影評論的文字輸入內容，並傳回介於 0 到 1 之間的情緒分數。將模型匯入 Model Registry 時，您會使用預先建構的 TensorFlow 容器。
+這個模型是名為 `saved_model.pb` 的 TensorFlow 模型，是透過純文字 IMDB 電影評論資料微調 BERT 模型所建立的自訂情緒分析模型。這個模型會使用電影評論的文字輸入內容，並傳回介於 0 到 1 之間的情緒分數。將模型匯入 Model Registry 時，您會使用預先建構的 TensorFlow 容器。
 
 **注意：** 如需建立範例模型的教學課程，請參閱 TensorFlow 說明文件中的「[使用 BERT 分類文字](https://www.tensorflow.org/text/tutorials/classify_text_with_bert?hl=zh-tw)」。
 
@@ -143,8 +144,8 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    1. 選取「匯入為新模型」。
    2. 在「Name」(名稱) 中輸入 `bert_sentiment`。
-   3. 在「Description」(說明) 中輸入 `BQML tutorial model`。
-   4. 在「區域」部分，選取 `us-central1`。您必須選擇美國境內的區域，因為 Cloud Storage bucket 位於`US`多區域位置。
+   3. 在「說明」中輸入 `BQML tutorial model`。
+   4. 在「區域」部分，選取 `us-central1`。由於 Cloud Storage bucket 位於`US`多區域位置，因此您必須選擇美國境內的區域。
    5. 按一下「繼續」。
 4. 如要完成**步驟二：模型設定**，請執行下列操作：
 
@@ -152,12 +153,12 @@ Google uses AI technology to translate content into your preferred language. AI 
    2. 在「預先建構的容器設定」部分，執行下列操作：
 
       1. 在**「Model framework」(模型架構)** 中選擇「TensorFlow」。
-      2. 在「Model framework version」(模型架構版本) 中選擇「2.15」。
+      2. 在**「Model framework version」(模型架構版本)** 中選取「2.15」。
       3. 在「Accelerator type」(加速器類型) 部分，選擇「GPU」。
-      4. 在「Model artifact location」(模型構件位置) 中輸入 `gs://cloud-samples-data/bigquery/ml/remote_model_tutorial/`。
-      5. 其餘選項均保留預設值，然後按一下「匯入」。
+      4. 在「Model artifact location」(模型構件位置) 中，輸入 `gs://cloud-samples-data/bigquery/ml/remote_model_tutorial/`。
+      5. 其餘選項均保留預設值，然後點選「匯入」。
 
-匯入完成後，模型會顯示在「Model Registry」(模型登錄) 頁面。
+匯入完成後，模型會顯示在「模型登錄」頁面。
 
 ## 將模型部署至 Gemini Enterprise Agent Platform 端點
 
@@ -176,14 +177,15 @@ Google uses AI technology to translate content into your preferred language. AI 
    3. 其餘設定均保留預設值，然後點選「繼續」。
 6. 在步驟二「模型設定」中，請執行下列操作：
 
-   1. 在「Compute settings」(運算設定) 部分，為「Minimum number of compute nodes」(運算節點數量下限) 輸入 `1`。這是模型隨時可用的節點數量。
+   1. 在「運算設定」專區，為「運算節點數量下限」輸入 `1`。這是模型隨時可用的節點數量。
 
-      **注意：** 在正式版中，您應設定運算節點數量上限。這個選項會啟用 Gemini Enterprise Agent Platform 的自動調整規模功能，讓端點在 BigQuery 資料表含有大量資料列時，處理更多要求。
+      **注意：** 在正式版中，您應設定運算節點數量上限。
+      這個選項會啟用 Gemini Enterprise Agent Platform 的自動調度資源功能，讓端點在 BigQuery 資料表含有大量資料列時，處理更多要求。
    2. 在「進階縮放選項」部分，針對「機型」選擇「標準 (n1-standard-2)」。由於您在匯入模型時選擇 GPU 做為加速器類型，因此選擇機型後，系統會自動設定加速器類型和加速器數量。
    3. 保留其餘預設值，然後按一下「部署」。
 
       模型部署到端點後，狀態會變更為 `Active`。
-   4. 複製「ID」欄中的數字端點 ID，以及「Region」欄中的值。稍後會用到。
+   4. 複製「ID」欄中的端點 ID 數字，以及「Region」欄中的值，稍後會用到。
 
 ## 建立資料集
 
@@ -195,7 +197,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    [前往 BigQuery 頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 在「Explorer」窗格中，按一下專案名稱。
-3. 依序點按 more\_vert「View actions」(查看動作) >「Create dataset」(建立資料集)
+3. 依序點按 more\_vert「View actions」(查看動作) >「Create dataset」(建立資料集)。
 4. 在「建立資料集」頁面中，執行下列操作：
 
    * 在「Dataset ID」(資料集 ID) 中輸入 `bqml_tutorial`。
@@ -247,7 +249,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 3. 在「Explorer」窗格中，點選「新增資料」add。
 
    「新增資料」對話方塊隨即開啟。
-4. 在「Filter By」(依據篩選) 窗格的「Data Source Type」(資料來源類型) 專區中，選取「Databases」(資料庫)。
+4. 在「依條件篩選」窗格的「資料來源類型」部分，選取「資料庫」。
 
    或者，您也可以在「Search for data sources」(搜尋資料來源) 欄位中輸入 `Vertex AI`。
 5. 在「精選資料來源」部分，點選「Vertex AI」。
@@ -256,7 +258,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 8. 在「連線 ID」欄位中輸入 `bqml_tutorial`。
 9. 確認已選取「多區域 - 美國」。
 10. 點選「建立連線」。
-11. 按一下視窗底部的「前往連線」。或者，在「Explorer」窗格中，依序點選「Connections」和 **`us.bqml_tutorial`**。
+11. 按一下視窗底部的「前往連線」。或者，在「Explorer」窗格中，依序點選「連線」和 **`us.bqml_tutorial`**。
 12. 在「連線資訊」窗格中，複製服務帳戶 ID。設定連線的權限時，您需要這個 ID。建立連線資源時，BigQuery 會建立專屬的系統服務帳戶，並將其與連線建立關聯。
 
 ### bq
@@ -292,7 +294,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 設定連線存取權
 
-為 Cloud 資源連線的服務帳戶授予 Vertex AI 使用者角色。您必須在建立遠端模型端點的專案中授予這個角色。
+將 Agent Platform User 角色授予 Cloud 資源連線的服務帳戶。您必須在建立遠端模型端點的專案中授予這個角色。
 
 **注意：** 如果連線位於不同專案中，系統會傳回以下錯誤：
 `bqcx-1234567890-xxxx@gcp-sa-bigquery-condel.iam.gserviceaccount.com does not have the permission to access
@@ -305,16 +307,16 @@ resource`。
    [前往「IAM & Admin」(IAM 與管理)](https://console.cloud.google.com/project/_/iam-admin?hl=zh-tw)
 2. 按一下 person\_add「授予存取權」。
 3. 在「新增主體」欄位，輸入先前複製的 Cloud 資源連線服務帳戶 ID。
-4. 在「選取角色」欄位中，選擇「Vertex AI」，然後選取「Vertex AI 使用者」。
+4. 在「選取角色」欄位中，依序選擇「Vertex AI」和「Agent Platform User」(Agent Platform 使用者)。
 5. 按一下 [儲存]。
 
 ## 建立 BigQuery ML 遠端模型
 
-您可以使用 `REMOTE WITH CONNECTION` 子句搭配 `CREATE MODEL` 陳述式，建立 BigQuery ML 遠端模型。如要進一步瞭解 `CREATE MODEL` 陳述式，請參閱「[透過自訂模型建立遠端模型的 CREATE MODEL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https?hl=zh-tw)」。
+您可以使用 `REMOTE WITH CONNECTION` 子句搭配 `CREATE MODEL` 陳述式，建立 BigQuery ML 遠端模型。如要進一步瞭解 `CREATE MODEL` 陳述式，請參閱[適用於自訂模型的遠端模型 CREATE MODEL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https?hl=zh-tw)。
 
-在 `US` 多區域位置建立模型。在 BigQuery 多區域 (`US`、`EU`) 資料集中，您只能建立連線至端點的遠端模型，該端點部署在相同多區域位置 (`US`、`EU`) 內的區域。
+您可以在 `US` 多區域位置建立模型。在 BigQuery 多區域 (`US`、`EU`) 資料集中，您只能建立連線至端點的遠端模型，而端點必須部署在相同多區域位置 (`US`、`EU`) 內的區域。
 
-建立遠端模型時，您需要[將模型部署](#deploy-model)至 Gemini Enterprise Agent Platform 時產生的端點 ID。此外，輸入和輸出欄位名稱與型別必須與 Gemini Enterprise Agent Platform 模型完全相同。在這個範例中，輸入內容是文字 `STRING`，輸出內容則是 `FLOAT64` 類型的 `ARRAY`。
+建立遠端模型時，您需要[將模型部署](#deploy-model)至 Gemini Enterprise Agent Platform 時產生的端點 ID。此外，輸入和輸出欄位名稱與型別必須與 Gemini Enterprise Agent Platform 模型完全相同。在本範例中，輸入內容為文字 `STRING`，輸出內容則為 `FLOAT64` 類型的 `ARRAY`。
 
 ### 控制台
 
@@ -322,7 +324,7 @@ resource`。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 如要**建立新項目**，請按一下「SQL 查詢」。
-3. 在查詢編輯器中輸入這個 `CREATE MODEL` 陳述式，然後按一下「執行」：
+3. 在查詢編輯器中輸入這項 `CREATE MODEL` 陳述式，然後按一下「執行」：
 
    ```
    CREATE OR REPLACE MODEL `PROJECT_ID.bqml_tutorial.bert_sentiment`
@@ -337,11 +339,11 @@ resource`。
    * PROJECT\_ID：您的專案名稱。
    * ENDPOINT\_ID：先前複製的端點 ID。
 
-   作業完成後，畫面上會顯示類似如下的訊息：`Successfully created model named bert_sentiment`。
+   作業完成後，您會看到類似 `Successfully created model named bert_sentiment` 的訊息。
 
-   新模型會顯示在「資源」面板中。模型會以模型圖示 來表示。
+   新模型會顯示在「資源」面板中。模型會以模型圖示 表示。
 
-   在「Resources」(資源) 面板中選取新模型，「Query editor」(查詢編輯器) 下方就會顯示該模型的相關資訊。
+   在「Resources」(資源)  面板中選取新模型，「Query editor」(查詢編輯器) 下方就會顯示該模型的相關資訊。
 
 ### bq
 
@@ -376,9 +378,9 @@ resource`。
 
 ## 使用 `ML.PREDICT` 取得預測結果
 
-您可以使用 `ML.PREDICT` 函式，從遠端模型取得情緒預測結果。輸入內容是文字資料欄 (`review`)，內含 `bigquery-public-data.imdb.reviews` 資料表的電影評論。
+您可以使用 `ML.PREDICT` 函式，從遠端模型取得情緒預測結果。輸入內容是文字資料欄 (`review`)，內含 `bigquery-public-data.imdb.reviews` 資料表中的電影評論。
 
-在本例中，我們選取了 10,000 筆記錄，並傳送進行預測。遠端模型預設要求批量大小為 128 個執行個體。
+在本範例中，我們選取並傳送 10,000 筆記錄進行預測。遠端模型預設會將要求批次大小設為 128 個執行個體。
 
 ### 控制台
 
@@ -482,11 +484,11 @@ gcloud projects delete PROJECT_ID
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-06-13 (世界標準時間)。
+上次更新時間：2026-06-16 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-13 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-16 (世界標準時間)。"],[],[]]

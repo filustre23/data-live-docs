@@ -167,7 +167,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 請確認建立移轉作業的主體在包含移轉作業的專案中，具有下列角色：
 
 * 記錄檢視者 (`roles/logging.viewer`)
-* Storage 管理員 (`roles/storage.admin`)，或是授予下列權限的[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)：
+* Storage 管理員 (`roles/storage.admin`)，或授予下列權限的[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)：
   + `storage.objects.create`
   + `storage.objects.get`
   + `storage.objects.list`
@@ -194,16 +194,16 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 #### 本機需求條件
 
-* 遷移代理程式會使用 JDBC 連線和 API 與 Teradata 執行個體互動。 Google Cloud 確認網路存取權未遭防火牆封鎖。
+* 遷移代理程式會使用 JDBC 連線和 Google Cloud API 與 Teradata 執行個體連線。確認網路存取權未遭防火牆封鎖。
 * 確認已安裝 Java Runtime Environment 8 以上版本。
 * 請確認您選擇的擷取方法有足夠的儲存空間，詳情請參閱「[擷取方法](https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview?hl=zh-tw#extraction_method)」。
-* 如果您決定使用 Teradata Parallel Transporter (TPT) 擷取功能，請確認已安裝 [`tbuild`](https://docs.teradata.com/r/Teradata-Parallel-Transporter-Reference/July-2017/Teradata-PT-Utility-Commands/Command-Syntax/tbuild) 公用程式。如要進一步瞭解如何選擇擷取方法，請參閱「[擷取方法](https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview?hl=zh-tw#extraction_method)」。
+* 如果您決定使用 Teradata Parallel Transporter (TPT) 擷取，請確保已安裝 [`tbuild`](https://docs.teradata.com/r/Teradata-Parallel-Transporter-Reference/July-2017/Teradata-PT-Utility-Commands/Command-Syntax/tbuild) 公用程式。如要進一步瞭解如何選擇擷取方法，請參閱「[擷取方法](https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview?hl=zh-tw#extraction_method)」。
 
 #### Teradata 連線詳細資料
 
 * 請確認您擁有 Teradata 使用者的使用者名稱和密碼，且該使用者有權讀取系統資料表和要遷移的資料表。
 
-  系統會透過提示擷取使用者名稱和密碼，且只會儲存在 RAM 中。您也可以選擇在後續步驟中，為使用者名稱或密碼建立憑證檔案。使用憑證檔案時，請採取適當步驟來控管對本機檔案系統中儲存憑證檔案的資料夾的存取權，因為憑證檔案未經過加密。
+  系統會透過提示擷取使用者名稱和密碼，並只儲存在 RAM 中。您也可以選擇在後續步驟中，為使用者名稱或密碼建立憑證檔案。使用憑證檔案時，請採取適當步驟來控管對本機檔案系統中儲存憑證檔案的資料夾的存取權，因為憑證檔案未經過加密。
 * 請務必知道要連線至 Teradata 執行個體的主機名稱和通訊埠編號。
 
   系統不支援 LDAP 等驗證模式。
@@ -218,9 +218,85 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### 更新 VPC Service Controls 輸出規則
 
-在 VPC Service Controls 邊界中，將 BigQuery 資料移轉服務代管 Google Cloud 專案 (專案編號：990232121269) 新增至[輸出規則](https://docs.cloud.google.com/vpc-service-controls/docs/ingress-egress-rules?hl=zh-tw#egress_rules_reference)。
+將與您所在區域對應的 BigQuery 資料移轉服務代管 Google Cloud 專案，新增至 VPC Service Controls 範圍的[輸出規則](https://docs.cloud.google.com/vpc-service-controls/docs/ingress-egress-rules?hl=zh-tw#egress_rules_reference)。
 
-在內部部署執行的代理程式與 BigQuery 資料移轉服務之間的通訊管道，是將 Pub/Sub 訊息發布至每個移轉主題。BigQuery 資料移轉服務需要將指令傳送給代理程式，才能擷取資料；代理程式則需要將訊息發布回 BigQuery 資料移轉服務，才能更新狀態並傳回資料擷取回應。
+下表列出用於資料移轉的區域位置專案編號。請新增與資料集位置對應的專案編號。
+
+#### 多地區位置
+
+| 多地區說明 | 多地區名稱 | 專案編號 |
+| --- | --- | --- |
+| 歐盟成員國境內的資料中心 | `eu` | 17253722542  272853474138  420718595790  929473878322  990232121269 |
+| 美國資料中心 | `us` | 1005756709729  140222280645  247872939591  312976397333  521896999118  525821192359  892499355189  949134172629  990232121269 |
+
+#### 地區位置
+
+| 區域說明 | 區域名稱 | 專案編號 |
+| --- | --- | --- |
+| **美洲** | | |
+| 蒙特婁 | `northamerica-northeast1` | 603911341430  644379120249  665941355665  743643531530  990232121269 |
+| 多倫多 | `northamerica-northeast2` | 181203883014  569023246094  814935732186  833015518790  990232121269 |
+| 墨西哥 | `northamerica-south1` | 439376105624  737643102222  746316165749  863053761002  990232121269 |
+| 聖保羅 | `southamerica-east1` | 133435938206  376122552368  485381725001  796391836836  990232121269 |
+| 聖地亞哥 | `southamerica-west1` | 1087357303029  348543783783  659924941015  862900136725  990232121269 |
+| 愛荷華州 | `us-central1` | 298453567688  788415223852  850878823175  986263347210  990232121269 |
+| 南卡羅來納州 | `us-east1` | 1055108947046  1084124504460  335013112247  724101498857  990232121269 |
+| 北維吉尼亞州 | `us-east4` | 1029854080039  517474920593  970314007431  98298633330  990232121269 |
+| 俄亥俄州哥倫布 | `us-east5` | 1018267783826  386306739011  420397636038  778968775575  990232121269 |
+| 達拉斯 | `us-south1` | 1000457898916  1047122215716  241710172671  955278753983  990232121269 |
+| 俄勒岡州 | `us-west1` | 232019391832  341405773774  376906440760  477215631937  990232121269 |
+| 洛杉磯 | `us-west2` | 1082081077124  593499865061  796558996990  812061960238  990232121269 |
+| 鹽湖城 | `us-west3` | 34769458069  488393466740  870087576864  878441810105  990232121269 |
+| 拉斯維加斯 | `us-west4` | 219770299440  421529192039  516260452158  653925368482  990232121269 |
+| **歐洲** | | |
+| 華沙 | `europe-central2` | 408105394529  556626738827  613447812609  875068591969  990232121269 |
+| 芬蘭 | `europe-north1` | 1049140453480  148002628360  610856287987  657186468367  990232121269 |
+| 斯德哥爾摩 | `europe-north2` | 264708615094  275871864623  353052212156  915614473443  990232121269 |
+| 馬德里 | `europe-southwest1` | 1035291313153  1048466610864  16585749286  684773867031  990232121269 |
+| 比利時 | `europe-west1` | 311010690362  337985836396  348525528820  874692481832  990232121269 |
+| 柏林 | `europe-west10` | 1014021387408  1021109191575  1076988971454  965306537493  990232121269 |
+| 杜林 | `europe-west12` | 624998300135  664251133452  672417986210  702529954322  990232121269 |
+| 倫敦 | `europe-west2` | 1013046052024  424062913611  625972158490  707263280432  990232121269 |
+| 法蘭克福 | `europe-west3` | 1087781646048  143240061766  312688138599  715827071311  990232121269 |
+| 荷蘭 | `europe-west4` | 110044889848  398757511504  557234723212  769143166592  990232121269 |
+| 蘇黎世 | `europe-west6` | 163551586425  378713015688  416925392034  669890417706  990232121269 |
+| 米蘭 | `europe-west8` | 103481800693  1082157965924  23655501621  555661886352  990232121269 |
+| 巴黎 | `europe-west9` | 1085882338778  176207547936  221990904254  670920836007  990232121269 |
+| **亞太地區** | | |
+| 台灣 | `asia-east1` | 21873972082  271898158674  389278959284  922460772707  990232121269 |
+| 香港 | `asia-east2` | 263483805684  773980783174  865347783058  90665746791  990232121269 |
+| 東京 | `asia-northeast1` | 415417931028  53965067050  953665196151  983967577764  990232121269 |
+| 大阪 | `asia-northeast2` | 205726704771  478186599828  57312416489  861476638029  990232121269 |
+| 首爾 | `asia-northeast3` | 320159292295  548035635347  791473645597  935702892639  990232121269 |
+| 孟買 | `asia-south1` | 13592990997  229940966341  68960523189  901420668689  990232121269 |
+| 德里 | `asia-south2` | 496191507005  54806403576  741779061357  809478923584  990232121269 |
+| 新加坡 | `asia-southeast1` | 541653567103  60558171982  753901882843  944188302893  990232121269 |
+| 雅加達 | `asia-southeast2` | 1074047252998  17464964742  271871433529  427023413305  990232121269 |
+| 曼谷 | `asia-southeast3` | 1020436856624  355273974477  603543103680  777922772431  990232121269 |
+| 雪梨 | `australia-southeast1` | 163046745040  591848239128  623326425100  814418810594  990232121269 |
+| 墨爾本 | `australia-southeast2` | 1062391852597  441829466914  714897033691  748594785463  990232121269 |
+| **中東地區** | | |
+| 杜哈 | `me-central1` | 260539430499  380691191456  707684919235  799708208022  990232121269 |
+| 達曼 | `me-central2` | 1067269861014  364585730608  702115426609  932431265647  990232121269 |
+| 特拉維夫市 | `me-west1` | 356023739839  748664533815  869899828196  940471234508  990232121269 |
+| **非洲** | | |
+| 約翰尼斯堡 | `africa-south1` | 366497204741  900693348777  930834390708  990232121269  995904484959 |
+| **其他** | | |
+| AWS ap-northeast-2 | `aws-ap-northeast-2` | 118757274428  227045504542  31525566793  415505940944  990232121269 |
+| AWS ap-southeast-2 | `aws-ap-southeast-2` | 179772227799  236687515237  779037664799  925378406445  990232121269 |
+| AWS eu-central-1 | `aws-eu-central-1` | 469423327197  5211207427  905007897524  989902812500  990232121269 |
+| AWS eu-west-1 | `aws-eu-west-1` | 477582827438  653238211450  795832028199  961178626984  990232121269 |
+| AWS us-east-1 | `aws-us-east-1` | 1005783963369  293187121246  622189180485  78860240845  990232121269 |
+| AWS us-west-2 | `aws-us-west-2` | 206681800614  264089603202  419256100048  79353630998  990232121269 |
+| Azure eastus2 | `azure-eastus2` | 1021739993926  1054000274357  495696597482  590387575526  990232121269 |
+| Azure westus2 | `azure-westus2` | 118244543872  242088193076  278777007439  662989519829  990232121269 |
+| 僅供內部使用的位置 (europe-west15) | `europe-west15` | 1075380375245  635354739083  663432613496  904125362271  990232121269 |
+| 僅限內部使用的位置 (us-central2) | `us-central2` | 1085843140251  269725830808  498892726043  68311303080  990232121269 |
+| 僅供內部使用的位置 (us-east7) | `us-east7` | 173063949542  661852837608  704905947583  956740768291  990232121269 |
+| 合成位置 (us-synthetic1) | `us-synthetic1` | 131957618958  250975404179  740244847288  787843086952  990232121269 |
+| 僅限內部使用的位置 (us-west8) | `us-west8` | 13105749132  248649202605  477355088721  653053504449  990232121269 |
+
+在內部部署執行的代理程式與 BigQuery 資料移轉服務之間的通訊管道，是將 Pub/Sub 訊息發布至每個移轉主題。BigQuery 資料移轉服務需要將指令傳送至代理程式來擷取資料，而代理程式需要將訊息發布回 BigQuery 資料移轉服務，以更新狀態並傳回資料擷取回應。
 
 ### 建立自訂結構定義檔案
 
@@ -230,11 +306,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### 下載遷移代理程式
 
-[將遷移代理程式下載](https://storage.googleapis.com/data_transfer_agent/latest/mirroring-agent.jar)到可連線至資料倉儲的機器。將遷移代理程式 JAR 檔案移至與 Teradata JDBC 驅動程式 JAR 檔案相同的目錄。
+[將遷移代理程式下載](https://storage.googleapis.com/data_transfer_agent/latest/mirroring-agent.jar)至可連線至資料倉儲的機器。將遷移代理程式 JAR 檔案移至與 Teradata JDBC 驅動程式 JAR 檔案相同的目錄。
 
 ### 設定存取模組的憑證檔案
 
-如果您使用 [Teradata Parallel Transporter (TPT) 公用程式的 Cloud Storage 存取模組](https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview?hl=zh-tw#extraction_method)進行擷取作業，則必須提供憑證檔案。
+如果您使用 [Cloud Storage 的存取模組搭配 Teradata Parallel Transporter (TPT) 公用程式](https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview?hl=zh-tw#extraction_method)進行擷取，則必須提供憑證檔案。
 
 建立憑證檔案前，您必須[建立服務帳戶金鑰](https://docs.cloud.google.com/iam/docs/keys-create-delete?hl=zh-tw#creating)。從下載的服務帳戶金鑰檔案中，取得下列資訊：
 
@@ -264,7 +340,7 @@ gcs_secret_access_key = ACCESS_KEY
 
 您無法使用 bq 指令列工具建立隨選移轉作業，必須改用 Google Cloud 控制台或 BigQuery 資料移轉服務 API。
 
-如果您要建立週期性移轉作業，強烈建議您指定結構定義檔案，這樣後續移轉作業的資料載入 BigQuery 時，才能正確進行資料分割。如果沒有結構定義檔案，BigQuery 資料移轉服務會從要移轉的來源資料推斷資料表結構定義，但所有有關分割、叢集、主鍵和變更追蹤的資訊都會遺失。此外，後續轉移作業會略過初始轉移作業中已轉移的資料表。如要進一步瞭解如何建立結構定義檔案，請參閱「[自訂結構定義檔案](https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview?hl=zh-tw#custom_schema_file)」。
+如果您要建立週期性移轉作業，強烈建議您指定結構定義檔案，這樣後續移轉作業的資料載入 BigQuery 時，才能正確進行資料分割。如果沒有結構定義檔案，BigQuery 資料移轉服務會從要移轉的來源資料推斷資料表結構定義，但所有有關分割、叢集、主鍵和變更追蹤的資訊都會遺失。此外，後續轉移作業會略過初始轉移作業中已轉移的表格。如要進一步瞭解如何建立結構定義檔案，請參閱「[自訂結構定義檔案](https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview?hl=zh-tw#custom_schema_file)」。
 
 ### 控制台
 
@@ -277,11 +353,11 @@ gcs_secret_access_key = ACCESS_KEY
 
    * 選擇「遷移：Teradata」。
    * 在「Transfer config name」(轉移設定名稱) 部分，輸入移轉作業的顯示名稱，例如 `My Migration`。顯示名稱可以是任意值，日後需要修改移轉作業時能夠據此識別。
-   * 選用：在「Schedule options」(排程選項) 中，您可以保留預設值「Daily」(每日) (以建立時間為準)，或選擇其他時間，進行週期性增量轉移。如果只要移轉一次，請選擇「隨選」。
+   * 選用：在「Schedule options」(排程選項) 中，您可以保留預設值「Daily」(每日) (以建立時間為準)，或選擇其他時間，進行週期性增量轉移。如要進行一次性轉移，請選擇「On-demand」(隨選)。
    * 在「Destination settings」(目的地設定) 中，選擇適當的資料集。
 5. 接著在「Data source details」(資料來源詳細資料) 部分，輸入 Teradata 移轉作業的特定詳細資料。
 
-   * 在「資料庫類型」部分，選擇「Teradata」。
+   * 在「Database type」(資料庫類型) 部分，選擇「Teradata」。
    * 在「Cloud Storage bucket」，瀏覽用來暫存移轉資料的 Cloud Storage bucket 名稱。請勿輸入前置字串 `gs://`，只要輸入 bucket 名稱即可。
    * 在「Database name」(資料庫名稱) 中，輸入 Teradata 來源資料庫的名稱。
    * 在「Table name patterns」(資料表名稱格式) 部分，輸入符合來源資料庫中資料表名稱的格式。您可以使用規則運算式指定模式。例如：
@@ -289,9 +365,9 @@ gcs_secret_access_key = ACCESS_KEY
      + `sales|expenses` 會比對名為 `sales` 和 `expenses` 的資料表。
      + `.*` 會比對所有資料表。**注意：** 如要瞭解 Teradata 轉移作業的規則運算式語法，請參閱 [re2 程式庫](https://github.com/google/re2/wiki/Syntax)。
    * 在「服務帳戶電子郵件」部分，輸入與遷移代理程式所用服務帳戶憑證相關聯的電子郵件地址。
-   * 選用：在「結構定義檔路徑」中，輸入自訂結構定義檔的路徑和檔案名稱。如要進一步瞭解如何建立自訂結構定義檔案，請參閱「[自訂結構定義檔案](https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview?hl=zh-tw#custom_schema_file)」。您可以將這個欄位留空，讓 BigQuery [自動偵測來源資料表結構定義](https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview?hl=zh-tw#default_schema_detection)。
-   * 選用：在「翻譯輸出根目錄」部分，輸入 BigQuery 翻譯引擎提供的結構定義對應檔案路徑和檔案名稱。如要進一步瞭解如何產生結構定義對應檔案，請參閱「[使用翻譯引擎輸出內容進行結構定義](https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview?hl=zh-tw#using_translation_engine_output_for_schema)」([預覽版](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages))。您可以將這個欄位留空，讓 BigQuery [自動偵測來源資料表結構定義](https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview?hl=zh-tw#default_schema_detection)。
-   * 選用：如要「啟用直接卸載至 GCS」，請選取核取方塊，啟用 [Cloud Storage 的存取模組](https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview?hl=zh-tw#extraction_method)。
+   * 選用：針對「結構定義檔案路徑」，輸入自訂結構定義檔案的路徑和檔案名稱。如要進一步瞭解如何建立自訂結構定義檔案，請參閱「[自訂結構定義檔案](https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview?hl=zh-tw#custom_schema_file)」。您可以將這個欄位留空，讓 BigQuery [自動偵測來源資料表的結構定義](https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview?hl=zh-tw#default_schema_detection)。
+   * 選用：在「翻譯輸出根目錄」中，輸入 BigQuery 翻譯引擎提供的結構定義對應檔案路徑和檔案名稱。如要進一步瞭解如何產生結構定義對應檔案，請參閱「[使用翻譯引擎輸出內容進行結構定義](https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview?hl=zh-tw#using_translation_engine_output_for_schema)」([預覽版](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages))。您可以將這個欄位留空，讓 BigQuery [自動偵測來源資料表結構定義](https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview?hl=zh-tw#default_schema_detection)。
+   * 選用：如要「啟用直接卸載至 GCS」，請勾選核取方塊，啟用 [Cloud Storage 的存取模組](https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview?hl=zh-tw#extraction_method)。
 6. 在「Service Account」(服務帳戶) 選單，選取與貴機構Google Cloud 專案相關聯的[服務帳戶](https://docs.cloud.google.com/iam/docs/service-account-overview?hl=zh-tw)。您可以將服務帳戶與移轉作業建立關聯，這樣就不需要使用者憑證。如要進一步瞭解如何搭配使用服務帳戶與資料移轉作業，請參閱[使用服務帳戶](https://docs.cloud.google.com/bigquery/docs/use-service-accounts?hl=zh-tw)的相關說明。
 
    * 如果使用[聯合身分](https://docs.cloud.google.com/iam/docs/workforce-identity-federation?hl=zh-tw)登入，您必須擁有服務帳戶才能建立移轉作業。如果是以 [Google 帳戶](https://docs.cloud.google.com/iam/docs/principals-overview?hl=zh-tw#google-account)登入，則不一定要透過服務帳戶建立移轉作業。
@@ -299,14 +375,14 @@ gcs_secret_access_key = ACCESS_KEY
 7. 選用：在「Notification options」(通知選項) 專區，執行下列操作：
 
    * 如要在移轉作業失敗時，讓移轉管理員收到電子郵件通知，請點選「電子郵件通知」切換按鈕。
-   * 點選「Pub/Sub notifications」(Pub/Sub 通知) 切換按鈕，即可設定移轉作業的 Pub/Sub 執行[通知](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications?hl=zh-tw)。在「Select a Pub/Sub topic」(選取 Pub/Sub 主題)，選擇您的[主題](https://docs.cloud.google.com/pubsub/docs/overview?hl=zh-tw#types)名稱，或點選「Create a topic」(建立主題)。
+   * 點選「Pub/Sub notifications」(Pub/Sub 通知) 切換按鈕，為移轉作業設定 Pub/Sub 執行[通知](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications?hl=zh-tw)。在「Select a Pub/Sub topic」(選取 Pub/Sub 主題) 選取[主題](https://docs.cloud.google.com/pubsub/docs/overview?hl=zh-tw#types)名稱，或是點選「Create a topic」(建立主題)。
 8. 按一下 [儲存]。
 9. 在「Transfer details」(移轉作業詳細資料) 頁面中，按一下「Configuration」(設定) 分頁標籤。
 10. 請記下這項轉移作業的資源名稱，因為您需要這個名稱才能執行遷移代理程式。
 
 ### bq
 
-使用 bq 工具建立 Cloud Storage 移轉作業時，系統會將移轉設定設為每 24 小時執行一次。如要進行隨選移轉，請使用 Google Cloud 控制台或 BigQuery 資料移轉服務 API。
+使用 bq 工具建立 Cloud Storage 移轉作業時，系統會將移轉設定設為每 24 小時重複執行一次。如要執行隨選移轉作業，請使用 Google Cloud 控制台或 BigQuery 資料移轉服務 API。
 
 您無法使用 bq 工具設定通知。
 
@@ -333,10 +409,10 @@ bq mk \
 * project ID 是您的專案 ID。如未提供 `--project_id` 指定特定專案，系統會使用預設專案。
 * dataset 是您要指定給移轉設定的資料集 (`--target_dataset`)。
 * name 是移轉設定的顯示名稱 (`--display_name`)。移轉作業的顯示名稱可以是任意值，日後需要修改移轉作業時，能夠據此識別即可。
-* service\_account 是用於驗證移轉作業的服務帳戶名稱。服務帳戶應由用於建立轉移作業的 `project_id` 擁有，且應具備所有列出的[必要權限](#set_required_permissions)。
+* service\_account 是用於驗證移轉作業的服務帳戶名稱。服務帳戶應由用於建立轉移作業的相同 `project_id` 所擁有，且應具備所有列出的[必要權限](#set_required_permissions)。
 * parameters 含有已建立移轉設定的 JSON 格式參數 (`--params`)。例如 `--params='{"param":"param_value"}'`。
   + 如要遷移 Teradata，請使用下列參數：
-    - `bucket` 是 Cloud Storage bucket，在遷移期間會做為暫存區。
+    - `bucket` 是在遷移期間做為暫存區的 Cloud Storage bucket。
     - `database_type` 是 Teradata。
     - `agent_service_account` 是與您建立的服務帳戶相關聯的電子郵件地址。
     - `database_name` 是 Teradata 中的來源資料庫名稱。
@@ -346,7 +422,7 @@ bq mk \
     - `is_direct_gcs_unload_enabled` 是布林值旗標，可啟用直接卸載至 Cloud Storage 的功能。
 * data\_source 是資料來源 (`--data_source`)：`on_premises`。
 
-舉例來說，下列指令會使用 Cloud Storage bucket `mybucket` 和目標資料集 `mydataset`，建立名為 `My Transfer` 的 Teradata 移轉作業。這項轉移作業會遷移 Teradata 資料倉儲 `mydatabase` 中的所有資料表，以及選用的結構定義檔案 `myschemafile.json`。
+舉例來說，下列指令會使用 Cloud Storage 值區 `mybucket` 和目標資料集 `mydataset`，建立名為 `My Transfer` 的 Teradata 移轉作業。這項移轉作業會從 Teradata 資料倉儲 `mydatabase` 移轉所有資料表，而選用的結構定義檔為 `myschemafile.json`。
 
 ```
 bq mk \
@@ -381,31 +457,5 @@ follow the instructions to retrieve an authentication code.`
 ```
 import com.google.api.gax.rpc.ApiException;
 import com.google.cloud.bigquery.datatransfer.v1.CreateTransferConfigRequest;
-import com.google.cloud.bigquery.datatransfer.v1.DataTransferServiceClient;
-import com.google.cloud.bigquery.datatransfer.v1.ProjectName;
-import com.google.cloud.bigquery.datatransfer.v1.TransferConfig;
-import com.google.protobuf.Struct;
-import com.google.protobuf.Value;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
-// Sample to create a teradata transfer config.
-public class CreateTeradataTransfer {
-
-  public static void main(String[] args) throws IOException {
-    // TODO(developer): Replace these variables before running the sample.
-    final String projectId = "MY_PROJECT_ID";
-    String datasetId = "MY_DATASET_ID";
-    String databaseType = "Teradata";
-    String bucket = "cloud-sample-data";
-    String databaseName = "MY_DATABASE_NAME";
-    String tableNamePatterns = "*";
-    String serviceAccount = "MY_SERVICE_ACCOUNT";
-    String schemaFilePath = "/your-schema-path";
-    Map<String, Value> params = new HashMap<>();
-    params.put("database_type", Value.newBuilder().setStringValue(databaseType).build());
-    params.put("bucket", Value.newBuilder().setStringValue(bucket).build());
-    params.put("database_name", Value.newBuilder().setStringValue(databaseName).build());
-    params.put("table_name_patterns",
+import com.google.cloud.bigquery.datatransfer.v1.
 ```

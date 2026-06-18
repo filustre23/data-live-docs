@@ -20,6 +20,11 @@ Send feedback
   + [JSON representation](#DataPolicyList.SCHEMA_REPRESENTATION)
 * [FieldElementType](#FieldElementType)
   + [JSON representation](#FieldElementType.SCHEMA_REPRESENTATION)
+* [GeneratedColumn](#GeneratedColumn)
+  + [JSON representation](#GeneratedColumn.SCHEMA_REPRESENTATION)
+* [GeneratedMode](#GeneratedMode)
+* [GeneratedExpressionInfo](#GeneratedExpressionInfo)
+  + [JSON representation](#GeneratedExpressionInfo.SCHEMA_REPRESENTATION)
 * [TimePartitioning](#TimePartitioning)
   + [JSON representation](#TimePartitioning.SCHEMA_REPRESENTATION)
 * [RangePartitioning](#RangePartitioning)
@@ -169,7 +174,7 @@ A field in TableSchema
 
 | JSON representation |
 | --- |
-| ``` {   "name": string,   "type": string,   "mode": string,   "fields": [     {       object (TableFieldSchema)     }   ],   "description": string,   "policyTags": {     "names": [       string     ]   },   "dataPolicies": [     {       object (DataPolicyOption)     }   ],   "dataPolicyList": {     object (DataPolicyList)   },   "maxLength": string,   "precision": string,   "scale": string,   "roundingMode": enum (RoundingMode),   "collation": string,   "defaultValueExpression": string,   "rangeElementType": {     object (FieldElementType)   } } ``` |
+| ``` {   "name": string,   "type": string,   "mode": string,   "fields": [     {       object (TableFieldSchema)     }   ],   "description": string,   "policyTags": {     "names": [       string     ]   },   "dataPolicies": [     {       object (DataPolicyOption)     }   ],   "dataPolicyList": {     object (DataPolicyList)   },   "maxLength": string,   "precision": string,   "scale": string,   "roundingMode": enum (RoundingMode),   "collation": string,   "defaultValueExpression": string,   "rangeElementType": {     object (FieldElementType)   },   "generatedColumn": {     object (GeneratedColumn)   } } ``` |
 
 | Fields | |
 | --- | --- |
@@ -189,6 +194,7 @@ A field in TableSchema
 | `collation` | `string`  Optional. Field collation can be set only when the type of field is STRING. The following values are supported:   * 'und:ci': undetermined locale, case insensitive. * '': empty string. Default to case-sensitive behavior. |
 | `defaultValueExpression` | `string`  Optional. A SQL expression to specify the [default value](https://cloud.google.com/bigquery/docs/default-values) for this field. |
 | `rangeElementType` | `object (FieldElementType)`  Optional. The subtype of the RANGE, if the type of this field is RANGE. If the type is RANGE, this field is required. Values for the field element type can be the following:   * DATE * DATETIME * TIMESTAMP |
+| `generatedColumn` | `object (GeneratedColumn)`  Optional. Definition of how values are generated for the field. Only valid for top-level schema fields (not nested fields). |
 
 ## DataPolicyOption
 
@@ -209,11 +215,3 @@ A list of data policy options. For more information, see [Mask data by applying 
 | JSON representation |
 | --- |
 | ``` {   "dataPolicies": [     {       object (DataPolicyOption)     }   ] } ``` |
-
-| Fields | |
-| --- | --- |
-| `dataPolicies[]` | `object (DataPolicyOption)`  Contains a list of data policy options. At most 9 data policies are allowed per field. |
-
-## FieldElementType
-
-Represents the type of a field element.

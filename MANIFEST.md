@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-06-17T14:58+00:00_
+_Generated 2026-06-18T02:05+00:00_
 
-**9 sources, 5336 topics total**
+**9 sources, 5338 topics total**
 
 ## airflow
 
@@ -3316,7 +3316,7 @@ _148 topics_
 
 Upstream: <https://docs.getdbt.com/docs/>
 
-_1070 topics_
+_1072 topics_
 
 - `dbt-core/best-practices/best-practice-workflows`
 - `dbt-core/best-practices/clone-incremental-models`
@@ -3621,6 +3621,7 @@ _1070 topics_
 - `dbt-core/docs/local/connect-data-platform/azuresynapse-setup`
 - `dbt-core/docs/local/connect-data-platform/bigquery-setup`
 - `dbt-core/docs/local/connect-data-platform/clickhouse-setup`
+- `dbt-core/docs/local/connect-data-platform/confluent-setup`
 - `dbt-core/docs/local/connect-data-platform/cratedb-setup`
 - `dbt-core/docs/local/connect-data-platform/databend-setup`
 - `dbt-core/docs/local/connect-data-platform/databricks-setup`
@@ -4215,6 +4216,7 @@ _1070 topics_
 - `dbt-core/reference/resource-configs/check_cols`
 - `dbt-core/reference/resource-configs/clickhouse-configs`
 - `dbt-core/reference/resource-configs/column_types`
+- `dbt-core/reference/resource-configs/confluent-configs`
 - `dbt-core/reference/resource-configs/contract`
 - `dbt-core/reference/resource-configs/database`
 - `dbt-core/reference/resource-configs/databricks-configs`

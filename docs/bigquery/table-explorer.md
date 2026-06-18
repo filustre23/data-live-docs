@@ -16,41 +16,37 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 使用資料表探索工具建立查詢
 
-**預覽**
+**警告：** Table Explorer 的行為即將移至「Reference」面板。如要進一步瞭解「參考資料」面板如何動態顯示資料表、快照、檢視區塊和具體化檢視區塊的情境感知資訊，請參閱「[使用參考資料面板](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#use-reference-panel)」。如要深入瞭解資料或在 Gemini Cloud Assist 的協助下撰寫程式碼，請參閱「[使用 Gemini Cloud Assist](https://docs.cloud.google.com/bigquery/docs/use-cloud-assist?hl=zh-tw)」。
 
-這項功能適用《[服務專屬條款](https://docs.cloud.google.com/terms/service-terms?hl=zh-tw#1)》中「一般服務條款」一節的《正式發布前產品條款》。正式發布前功能是依「原樣」提供，支援服務可能受限。
-詳情請參閱[推出階段說明](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
-
-如要尋求支援或針對這項功能提供意見回饋，請傳送電子郵件至 [bq-studio-product-team@google.com](mailto:bq-studio-product-team@google.com)。
+如要尋求支援或針對這項功能提供意見回饋，請傳送電子郵件至 [bigquery-explorer-feedback@google.com](mailto:bigquery-explorer-feedback@google.com)。
 
 本文將說明如何使用資料表探索工具檢查資料表資料，以及建立資料探索查詢。
 
 ## 關於資料表探索工具
 
-資料表探索工具提供自動化方式，可讓您以視覺化方式探索資料表資料，並根據所選資料表欄位建立查詢。
+資料表探索工具提供自動化方式，以視覺化方式探索資料表資料，並根據所選資料表欄位建立查詢。
 
 在資料表探索器中，選取要檢查的資料表欄位。
 一次最多可選取 10 個資料表欄位。
 
-資料表探索工具會將所選欄位顯示為互動式資訊卡，並列出每個欄位最多 10 個最常見的值，依 `count` 欄排序。您可以選取要仔細檢查的欄位和相異值，與資訊卡互動。資料表探索工具會根據您的選取項目建立資料探索查詢。
+資料表探索工具會將所選欄位顯示為互動式資訊卡，並列出每個欄位最多 10 個最常見的值，依 `count` 欄排序。您可以選取要仔細檢查的欄位和不重複值，與資訊卡互動。資料表探索工具會根據您的選取項目建立資料探索查詢。
 
-您可以將這項查詢複製到查詢編輯器的新查詢中，
-或在資料表瀏覽器中套用查詢。套用查詢後，資料表探索工具會執行查詢，並以查詢結果重新整理顯示的資訊卡。如要繼續探索表格資料，請從重新整理的資訊卡中選取更多欄位或值。
+您可以將這項查詢複製到查詢編輯器的新查詢中，或在資料表瀏覽器中套用查詢。套用查詢後，資料表探索工具會執行查詢，並以查詢結果重新整理顯示的資訊卡。如要繼續探索表格資料，請從重新整理的資訊卡中選取更多欄位或值。
 
 ## 限制
 
-* 資料表探索器適用於 BigQuery 資料表、BigLake 資料表、外部資料表和檢視區塊。
-* 資料表探索工具一次只能探索一個資料表。這項功能不支援同時探索多個資料表，也不支援產生跨資料表作業，例如 `JOIN` 作業。
-* 資料表探索工具會建立 SQL 查詢，直接反映您選取的資料表欄位和不重複值。您可以執行表格探索工具建立的查詢，或在查詢編輯器中手動編輯查詢。資料表探索器不會提供 AI 輔助功能，生成、補全或說明 SQL 查詢。
-* 如要探索資料表資料，並為設有欄層級存取控管清單 (ACL) 或使用者權限受限的資料表產生查詢，您必須擁有所有所選欄位的讀取權限。如要執行產生的查詢，您必須具備足夠的[權限](#roles)。
+* 資料表探索工具適用於 BigQuery 資料表、BigLake 資料表、外部資料表和檢視區塊。
+* 資料表探索工具一次只能探索一個資料表，不支援同時探索多個資料表，也不支援產生跨資料表作業，例如 `JOIN` 作業。
+* 資料表探索工具會建立 SQL 查詢，直接反映您選取的資料表欄位和相異值。您可以執行資料表探索工具建立的查詢，或在查詢編輯器中手動編輯查詢。資料表探索工具不會提供 AI 輔助功能，生成、補全或說明 SQL 查詢。
+* 如要探索資料表資料，並為設有資料欄層級存取權控管 (ACL) 或使用者權限受限的資料表產生查詢，您必須擁有所有選取欄位的讀取權限。如要執行產生的查詢，您必須具備足夠的[權限](#roles)。
 
 ## 定價
 
-資料表探索工具會根據您選取的資料表欄位和相異值執行查詢，並顯示資料表探索結果。這些查詢會產生運算定價費用。在您確認選取的資料表欄位並觸發查詢執行作業前，資料表探索工具會顯示每個查詢將處理的資料量。
+資料表探索工具會根據您選取的資料表欄位和相異值執行查詢，並顯示資料表探索結果。這些查詢會產生運算價格費用。在您確認選取的資料表欄位並觸發查詢執行作業前，資料表探索工具會顯示每個查詢將處理的資料量。
 
-如果您執行資料表多層檢視產生的查詢，也可能會產生運算費用。
+此外，如果您執行資料表多層檢視產生的查詢，也可能會產生運算費用。
 
-如要進一步瞭解 BigQuery 的運算價格，請參閱[價格](https://cloud.google.com/bigquery/pricing?hl=zh-tw)。
+如要進一步瞭解 BigQuery 的運算價格，請參閱「[價格](https://cloud.google.com/bigquery/pricing?hl=zh-tw)」一文。
 
 ## 事前準備
 
@@ -141,7 +137,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 探索資料表中的資料，建立查詢
 
-如要探索資料表資料，並根據所選資料表欄位和值建立查詢，請按照下列步驟操作：
+如要探索表格資料，並根據所選表格欄位和值建立查詢，請按照下列步驟操作：
 
 1. 前往 Google Cloud 控制台的「BigQuery Studio」。
 
@@ -161,12 +157,12 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    點按「儲存」後，BigQuery 會執行查詢，顯示所選欄位的常見值，這會產生費用。您可以在「選取欄位」窗格頂端，查看將處理的資料量。
 
-   表格探索工具會將所選欄位顯示為資訊卡，並列出最多十個最常見的值，依 `Count` 欄排序。在「產生的查詢」部分，您會看到可執行的查詢，顯示相同的資料。
+   資料表探索工具會以資訊卡形式顯示所選欄位，最多顯示依 `Count` 欄排序的前十個最常見值。在「產生的查詢」部分，您可以查看查詢，並執行查詢來顯示相同資料。
 9. 選用：如要修改結果，可以嘗試下列做法：
 
    1. 在顯示的所選欄位資訊卡中，選取相異值，進一步篩選資料。
    2. 如要還原所有變更，請按一下「重設」。
-   3. 在「Generated Query」(產生的查詢) 區段中，按一下「Copy to query」(複製到查詢)，將生成的程式碼複製到查詢編輯器中新的「未命名的查詢」。在新建立的查詢分頁中，您可以編輯、執行及管理查詢。
+   3. 在「Generated Query」(產生的查詢) 區段中，按一下「Copy to query」(複製到查詢)，將產生的程式碼複製到查詢編輯器中新的未命名查詢。在新建的查詢分頁中，您可以編輯、執行及管理查詢。
 10. 如要執行生成的查詢，請按一下「套用」。
 
     BigQuery 會執行產生的查詢，並以查詢結果重新整理顯示的資訊卡。
@@ -181,9 +177,9 @@ permission in project [project_id].
 
 如果主體沒有在專案中建立查詢工作的權限，就會發生這個錯誤。
 
-**解決方法**：系統管理員必須授予您所查詢專案的 `bigquery.jobs.create` 權限。除了存取所查詢資料所需的權限外，您還必須具備這項權限。
+**解決方法**：管理員必須授予您要查詢的專案 `bigquery.jobs.create` 權限。除了存取所查詢資料所需的任何權限外，您也必須具備這項權限。
 
-如要進一步瞭解 BigQuery 權限，請參閱「[使用 IAM 控管存取權](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)」。
+如要進一步瞭解 BigQuery 權限，請參閱[使用 IAM 控管存取權](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)。
 
 ## 後續步驟
 
@@ -198,11 +194,11 @@ permission in project [project_id].
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-06-15 (世界標準時間)。
+上次更新時間：2026-06-16 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-15 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-16 (世界標準時間)。"],[],[]]

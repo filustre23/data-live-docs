@@ -31,7 +31,7 @@ This document describes how to create, edit, manage, and delete data agents in
 BigQuery.
 
 In BigQuery, you can have
-[conversations](/bigquery/docs/ca/create-conversations)
+[conversations](/bigquery/docs/create-conversations)
 with data agents to ask questions about BigQuery data using
 natural language. Data agents contain table metadata and use-case-specific query
 processing instructions that define the best way to answer user questions about
@@ -92,9 +92,8 @@ roles](/gemini/docs/conversational-analytics-api/access-control).
 To have conversations,
 see the [required roles for conversations](/bigquery/docs/create-conversations#required_roles).
 
-To work with BigQuery resources, such as viewing tables or
-running queries, see [BigQuery
-roles](/bigquery/docs/access-control#bigquery-roles).
+Agents act on your behalf and uses your permissions. Agents can only access
+data and resources that you have permission to access.
 
 ## Best practices
 
@@ -287,18 +286,13 @@ queries.
 When a user asks a question that matches the template's pattern, the
 conversational analytics agent extracts parameter values from the question—
 for example, product name, region, and date. It then injects these values into
-the parameterized SQL query. Matching responses from the query template appear
+the [parameterized query](/bigquery/docs/parameterized-queries).
+Matching responses from the query template appear
 as **verified**.
 
 Parameterized verified queries significantly enhance the power and flexibility
 of verified queries. They ensure consistent, trusted answers across various
-inputs and reduce the number of individual queries to maintain. For more
-information, see the following:
-
-* To create a parameterized verified query, see
-  [Create parameterized verified queries](#create-param-verified-queries).
-* To learn about parameterized queries in general, see
-  [Run parameterized queries](/bigquery/docs/parameterized-queries).
+inputs and reduce the number of individual queries to maintain.
 
 #### How it works
 
@@ -315,7 +309,7 @@ After the verified query is saved, a user can ask the conversational analytics
 agent a question in natural language; for example, "What were the sales for
 laptops in North America?"
 
-To answer the user's question, the conversational agent performs the following
+To answer the user's question, the agent performs the following
 steps:
 
 1. Matches the question to the pattern associated with the parameterized
@@ -357,7 +351,7 @@ Before you create or modify a query, draft the query, considering the natural
 language pattern and your question. For example, if you ask "Do we know the
 total stock for organic bananas in the US-EAST warehouse?," you can rewrite the
 question as the parameterized verified query as "What is the total stock for
-@product in the @region warehouse?" The conversational analytics agent turns
+@product in the @region warehouse?" The agent turns
 this question into a SQL query that you update with default values.
 
 To create a parameterized verified query for a data agent, you can either
@@ -450,7 +444,7 @@ Conversational analytics then does the following:
 3. Executes the query: `SELECT SUM(stock) AS total_stock FROM inventory WHERE product_id = 'organic bananas' AND region = 'US-EAST';`
 4. Returns the calculated `total_stock`.
 
-#### Create or review glossary terms
+### Create or review glossary terms
 
 You can create BigQuery custom glossary terms local to an agent,
 or review business glossary terms imported from Knowledge Catalog that
@@ -462,7 +456,7 @@ apply to the knowledge sources that you selected for an agent.
   terms in Knowledge Catalog instead of for individual agents.
 * If you need to modify business glossary terms imported from
   Knowledge Catalog, you must edit them in Knowledge Catalog
-  and return to conversational analytics to see them.
+  and return to BigQuery to see them.
 * BigQuery custom glossary terms stay in BigQuery.
   They don't appear in Knowledge Catalog.
 * If you're not using Knowledge Catalog, you can create
@@ -487,16 +481,20 @@ Follow these steps to view business glossary terms imported from Knowledge Catal
 1. In the **Glossary** section of the agent **Editor** page, click
    **Add term**.
 2. Navigate to the page section called **Imported from Dataplex**.
-3. To modify imported terms in Knowledge Catalog, you must click the link
-   "Go to Dataplex glossaries."
+3. To modify imported terms in Knowledge Catalog, click
+   **Go to Dataplex glossaries**.
 4. After you've modified the terms in Knowledge Catalog, you can
    return to the agent **Editor** page to view the modified terms.
 
-#### Configure settings
+### Configure settings
 
 In the **Settings** section, you can configure the following optional settings:
 
-1. Create [labels](/bigquery/docs/labels-intro) to help you organize your
+1. In the **Model** section, choose which types of models are available to
+   users in a conversation with
+   the agent. Both Preview and Generally Available models are available by
+   default. Models that are in Preview might use the global endpoint.
+2. Create [labels](/bigquery/docs/labels-intro) to help you organize your
    Google Cloud resources. Labels are key-value pairs that let you group
    related objects together or with other Google Cloud resources.
 
@@ -507,7 +505,7 @@ In the **Settings** section, you can configure the following optional settings:
    4. If you want to add more labels, click **Add label** again.
    5. To delete a label, click **Delete**.
    6. When you're finished, click **Add**. The new agent page reopens.
-2. Optional: Set a size limit for the queries processed by the data agent. In
+3. Set a size limit for the queries processed by the data agent. In
    the **Settings** section, type a value in the **Maximum bytes billed**
    field. You must set this limit to `10485760` or higher, otherwise you
    receive the following error message:
@@ -697,12 +695,6 @@ Grant these roles at the project level:
   in Data Studio. These roles provide the
   `cloudaicompanion.topics.create` permission.
 
-**Data Studio Pro**
-
-Accessing BigQuery data agents in Data Studio's
-**Chat with your data** page typically requires a Data Studio
-Pro subscription, with Gemini features enabled for the project.
-
 ##### Troubleshoot common issues
 
 The following are common issues when sharing data agents with
@@ -863,23 +855,18 @@ following steps:
 * **Authenticate**: Complete the one-time OAuth sign-in to securely
   authenticate to BigQuery.
 * **Chat**: Ask natural language questions to the agent. The requests are processed
-  by the BigQuery conversational analytics agent, and the
+  by the agent, and the
   response is streamed back to Gemini Enterprise as text,
   Markdown, charts, or tables.
 * **View conversation history**: Conversations are automatically saved in the
   history pane.
 
-## Locations
-
-Conversational analytics operates globally; you can't choose which region to
-use.
-
 ## What's next
 
 * Learn more about [conversational analytics in
-  BigQuery](/bigquery/docs/ca/conversational-analytics).
+  BigQuery](/bigquery/docs/conversational-analytics).
 * Learn more about the [Conversational Analytics API](/gemini/docs/conversational-analytics-api/overview).
-* [Analyze data with conversations](/bigquery/docs/ca/create-conversations).
+* [Analyze data with conversations](/bigquery/docs/create-conversations).
 * Learn more about how the [Gemini Data Analytics Data Agent Viewer
   (`roles/geminidataanalytics.dataAgentViewer`)](/gemini/docs/conversational-analytics-api/access-control#predefined-roles)
   role gives permission to view the data agent.
@@ -891,11 +878,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-06-15 UTC.
+Last updated 2026-06-17 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-06-15 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-06-17 UTC."],[],[]]

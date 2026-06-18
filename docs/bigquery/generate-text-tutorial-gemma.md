@@ -14,9 +14,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 你可以依據偏好儲存及分類內容。
 
-# 使用 Gemma 開放式模型和 AI.GENERATE\_TEXT 函式生成文字
+# 使用 Gemma 開放模型和 AI.GENERATE\_TEXT 函式生成文字
 
-本教學課程說明如何建立以 [Gemma 模型](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models?hl=zh-tw#gemma-models)為基礎的[遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open?hl=zh-tw)，然後使用 [`AI.GENERATE_TEXT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text?hl=zh-tw)，從 `bigquery-public-data.imdb.reviews` 公開資料表擷取關鍵字，並對電影評論執行情緒分析。
+本教學課程說明如何建立以 [Gemma 模型](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models?hl=zh-tw#gemma-models)為基礎的[遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open?hl=zh-tw)，然後如何使用 [`AI.GENERATE_TEXT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text?hl=zh-tw)，從 `bigquery-public-data.imdb.reviews` 公開資料表擷取關鍵字，並對電影評論執行情緒分析。
 
 ## 所需權限
 
@@ -24,7 +24,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 * 建立及使用 BigQuery 資料集、連線和模型：BigQuery 管理員 (`roles/bigquery.admin`)。
 * 將權限授予連線的服務帳戶：專案 IAM 管理員 (`roles/resourcemanager.projectIamAdmin`)。
-* 在 Gemini Enterprise Agent Platform 中部署及取消部署模型：Vertex AI 管理員 (`roles/aiplatform.admin`)。
+* 在 Gemini Enterprise Agent Platform 中部署及取消部署模型：Agent Platform 管理員 (`roles/aiplatform.admin`)。
 
 這些預先定義的角色具備執行本文所述工作所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
@@ -64,7 +64,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 如要進一步瞭解 BigQuery 定價，請參閱 BigQuery 說明文件中的「[BigQuery 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw)」一文。
 
-部署至 Agent Platform 的開放模型會依機器時數計費。也就是說，端點完全設定完成後就會開始計費，直到您取消部署為止。如要進一步瞭解 Agent Platform 計價方式，請參閱[這個頁面](https://cloud.google.com/vertex-ai/pricing?hl=zh-tw#prediction-prices)。
+部署至 Agent Platform 的開放模型會依機器時數計費。也就是說，端點完全設定完成後就會開始計費，直到您解除部署為止。如要進一步瞭解 Agent Platform 計價方式，請參閱[這個頁面](https://cloud.google.com/vertex-ai/pricing?hl=zh-tw#prediction-prices)。
 
 ## 事前準備
 
@@ -72,8 +72,8 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    **選取或建立專案所需的角色**
 
-   * **選取專案**：選取專案時，不需要具備特定 IAM 角色，只要您已獲授角色，即可選取任何專案。
-   * **建立專案**：如要建立專案，您需要具備專案建立者角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   * **選取專案**：選取專案時，不需要具備特定 IAM 角色，只要您在專案中獲派角色，即可選取該專案。
+   * **建立專案**：如要建立專案，您需要「專案建立者」角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
    **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，而不要選取現有專案。完成這些步驟後，您就可以刪除專案，並移除與該專案相關聯的所有資源。
 
    [前往專案選取器](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
@@ -82,7 +82,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    **啟用 API 時所需的角色**
 
-   如要啟用 API，您需要服務使用情形管理員 IAM 角色 (`roles/serviceusage.serviceUsageAdmin`)，其中包含 `serviceusage.services.enable` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   如要啟用 API，您需要具備服務使用情形管理員 IAM 角色 (`roles/serviceusage.serviceUsageAdmin`)，其中包含 `serviceusage.services.enable` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
    [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery.googleapis.com%2Cbigqueryconnection.googleapis.com%2Caiplatform.googleapis.com&hl=zh-tw)
 
@@ -96,7 +96,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    [前往 BigQuery 頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 在「Explorer」窗格中，按一下專案名稱。
-3. 依序點按 more\_vert「View actions」(查看動作) >「Create dataset」(建立資料集)
+3. 依序點按 more\_vert「View actions」(查看動作) >「Create dataset」(建立資料集)。
 4. 在「建立資料集」頁面中，執行下列操作：
 
    * 在「Dataset ID」(資料集 ID) 中輸入 `bqml_tutorial`。
@@ -151,7 +151,7 @@ CREATE OR REPLACE MODEL `bqml_tutorial.gemma_model`
   );
 ```
 
-查詢作業最多需要 20 分鐘才能完成，完成後，`gemma_model` 模型會顯示在「Explorer」(探索工具) 窗格的 `bqml_tutorial` 資料集中。由於查詢是使用 `CREATE MODEL` 陳述式建立模型，因此不會有查詢結果。
+**查詢作業最多需要 20 分鐘才能完成，完成後，模型會出現在「Explorer」(探索工具) 窗格的 `bqml_tutorial` 資料集中。由於查詢是使用 `CREATE MODEL` 陳述式建立模型，因此不會有查詢結果。**`gemma_model`
 
 ## 執行關鍵字擷取
 
@@ -182,7 +182,7 @@ CREATE OR REPLACE MODEL `bqml_tutorial.gemma_model`
          100 AS max_output_tokens));
    ```
 
-   輸出結果會與下列內容相似，為求明確起見，我們省略了非產生的資料欄：
+   輸出結果會與下列內容類似，為求明確，我們省略了非產生的資料欄：
 
    ```
    +----------------------------------------------+-------------------------+-----------------------------+-----+
@@ -209,9 +209,9 @@ CREATE OR REPLACE MODEL `bqml_tutorial.gemma_model`
    結果包含下列資料欄：
 
    * `result`：生成的文字。
-   * `status`：對應資料列的 API 回應狀態。如果作業成功，這個值會留空。
+   * `status`：對應資料列的 API 回應狀態。如果作業成功，這個值會是空白。
    * `prompt`：用於情緒分析的提示。
-   * `bigquery-public-data.imdb.reviews` 資料表中的所有欄。
+   * `bigquery-public-data.imdb.reviews` 資料表中的所有資料欄。
 
 ## 執行情緒分析
 
@@ -242,7 +242,7 @@ CREATE OR REPLACE MODEL `bqml_tutorial.gemma_model`
          128 AS max_output_tokens));
    ```
 
-   輸出結果會與下列內容相似，為求明確起見，我們省略了非產生的資料欄：
+   輸出結果會與下列內容類似，為求明確，我們省略了非產生的資料欄：
 
    ```
    +-----------------------------+-------------------------+-----------------------------+-----+
@@ -270,7 +270,7 @@ CREATE OR REPLACE MODEL `bqml_tutorial.gemma_model`
 
 ## 取消部署模型
 
-如果您選擇不[刪除專案 (建議做法)](#clean_up)，請務必在 Agent Platform 中取消部署 Gemma 模型，以免持續產生相關費用。BigQuery 會在指定閒置時間 (預設為 6.5 小時) 過後，自動取消部署模型。或者，您也可以使用 [`ALTER MODEL` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-alter-model?hl=zh-tw)立即取消部署模型，如下列範例所示：
+如果您選擇不[按照建議刪除專案](#clean_up)，請務必在 Agent Platform 中取消部署 Gemma 模型，以免持續產生費用。BigQuery 會在指定閒置時間 (預設為 6.5 小時) 過後，自動取消部署模型。或者，您也可以使用 [`ALTER MODEL` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-alter-model?hl=zh-tw)立即取消部署模型，如下例所示：
 
 ```
 ALTER MODEL `bqml_tutorial.gemma_model`

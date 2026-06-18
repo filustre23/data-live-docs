@@ -45,7 +45,7 @@ following IAM roles on the project:
 * Run query jobs:
   [BigQuery Job User](/iam/docs/roles-permissions/bigquery#bigquery.jobUser)  (`roles/bigquery.jobUser`)
 * Access a foundation model in Gemini Enterprise Agent Platform:
-  [Vertex AI User](/iam/docs/roles-permissions/aiplatform#aiplatform.user)  (`roles/aiplatform.user`)
+  [Agent Platform User](/iam/docs/roles-permissions/aiplatform#aiplatform.user)  (`roles/aiplatform.user`)
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access).
 
@@ -80,7 +80,7 @@ principal. The principal is the user or group that runs the query that uses
       or `//iam.googleapis.com/locations/global/workforcePools/example-pool/group/example-group@example.com`.
    4. In the **Assign roles** section, for **Select a role**, click the
       drop-down arrow.
-   5. Search for the **Vertex AI User** role and select it.
+   5. Search for the **Agent Platform User** role and select it.
    6. Click **Add another role**.
    7. In the **Assign roles** section, for **Select a role**, click the
       drop-down arrow.
@@ -470,7 +470,7 @@ For more information, see [Create and set up a Cloud resource connection](/bigqu
 To run queries that use generative `AI.*` functions that call Gemini Enterprise Agent Platform
 models, you must grant appropriate permissions to the service account that was
 created when you created your connection. To run functions that call a
-Gemini Enterprise Agent Platform foundation model, the [Vertex AI User role](/iam/docs/roles-permissions/aiplatform#aiplatform.user)
+Gemini Enterprise Agent Platform foundation model, the [Agent Platform User role](/iam/docs/roles-permissions/aiplatform#aiplatform.user)
 (`roles/aiplatform.user`) is required.
 
 Select one of the following options:
@@ -486,7 +486,7 @@ Select one of the following options:
 3. In the **New principals** field, enter the service account ID that you
    copied earlier.
 4. In the **Assign roles** section, click **Add roles**.
-5. Search for the **Vertex AI User** role, select it, and then
+5. Search for the **Agent Platform User** role, select it, and then
    click **Apply**.
 6. Click **Save**.
 
@@ -645,11 +645,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-06-15 UTC.
+Last updated 2026-06-16 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-06-15 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-06-16 UTC."],[],[]]
