@@ -7,6 +7,16 @@ hide:
 
 ## Latest Changes
 
+### Internal
+
+* 🔨 Use `gpt-5.5` model in `translate.py`, specify `-chat` to avoid warnings. PR [#15792](https://github.com/fastapi/fastapi/pull/15792) by [@YuriiMotov](https://github.com/YuriiMotov).
+
+## 0.137.2 (2026-06-18)
+
+### Features
+
+* ✨ Add `iter_route_contexts()` for advanced use cases that used to use `router.routes` (e.g. Jupyverse). PR [#15785](https://github.com/fastapi/fastapi/pull/15785) by [@tiangolo](https://github.com/tiangolo).
+
 ### Translations
 
 * 🌐 Fix broken Markdown in Korean custom response docs. PR [#15774](https://github.com/fastapi/fastapi/pull/15774) by [@kooqooo](https://github.com/kooqooo).
