@@ -1093,3 +1093,6 @@ Knowledge Catalog 會儲存最近 300 項作業的資料剖析掃描記錄，或
 
    [前往「Data profiling & quality」(資料剖析與品質) 頁面](https://console.cloud.google.com/bigquery/governance/metadata-curation/data-profiling-and-quality?hl=zh-tw)
 2. 按一下資料剖析掃描的名稱。
+3. 按一下「工作記錄」分頁標籤。
+
+   「Jobs history」(工作記錄) 分頁會提供過去工作相關資

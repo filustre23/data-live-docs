@@ -1120,5 +1120,5 @@ client = bigquery.Client()
 job = client.copy_table(source_table_id, destination_table_id)
 job.result()  # Wait for the job to complete.
 
-print(
+print("A copy of the table created.")
 ```

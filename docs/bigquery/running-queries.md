@@ -1141,5 +1141,5 @@ for row in rows:
 // Demonstrates issuing a query that may be run in short query mode.
 
 // Import the Google Cloud client library
-const {BigQuery} = require('
+const {BigQuery} = require('@google-cloud/bigquery');
 ```

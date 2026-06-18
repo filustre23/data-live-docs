@@ -32,11 +32,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 * `roles/bigquery.dataEditor`
 * `roles/bigquery.metadataViewer`
 
-如要進一步瞭解 BigQuery 權限，請參閱「[使用 IAM 控管存取權](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)」。
+如要進一步瞭解 BigQuery 權限，請參閱[使用 IAM 控管存取權](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)。
 
 ## 結構定義
 
-當您查詢 `INFORMATION_SCHEMA.COLUMNS` 檢視表時，系統會在查詢結果中，針對資料集中的每個資料欄 (欄位)，分別列出一個相對應的資料列。
+當您查詢 `INFORMATION_SCHEMA.COLUMNS` 檢視表時，系統會在查詢結果中，針對資料表中的每個資料欄 (欄位)，分別列出一個相對應的資料列。
 
 `INFORMATION_SCHEMA.COLUMNS` 檢視表具有下列結構定義：
 
@@ -50,8 +50,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 | `is_nullable` | `STRING` | `YES` 或 `NO`，視資料欄的模式是否允許使用 `NULL` 值而定。 |
 | `data_type` | `STRING` | 資料欄的 GoogleSQL [資料類型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw)。 |
 | `is_generated` | `STRING` | 如果資料欄是[自動產生的嵌入資料欄](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation?hl=zh-tw)，值為 `ALWAYS`；否則值為 `NEVER`。 |
-| `generation_expression` | `STRING` | 如果資料欄是自動產生的嵌入資料欄，這個值就是用於定義資料欄的生成運算式；否則這個值為 `NULL`。 |
+| `generation_expression` | `STRING` | 如果資料欄是自動產生的嵌入資料欄，這個值就是用於定義資料欄的產生運算式；否則這個值為 `NULL`。 |
 | `is_stored` | `STRING` | 如果資料欄是自動產生的嵌入資料欄，值為 `YES`；否則值為 `NULL`。 |
+| `async_generation_status` | `STRUCT` | 如果資料欄是自動產生的嵌入資料欄，則包含背景嵌入生成作業的封鎖錯誤；否則值為 `NULL`。如要瞭解封鎖錯誤，請參閱 `async_generation_status.blocking_error.message` 欄位。封鎖錯誤可能包括：  * 權限遭拒錯誤 * 找不到錯誤 * 不支援的嵌入模型端點錯誤 * Vertex AI API 未啟用錯誤  下一個嵌入生成工作成功後，系統會清除 `async_generation_status` 欄。 |
 | `is_hidden` | `STRING` | `YES` 或 `NO`，視資料欄是否為虛擬資料欄 (例如 \_PARTITIONTIME 或 \_PARTITIONDATE) 而定。 |
 | `is_updatable` | `STRING` | 此值一律為 `NULL`。 |
 | `is_system_defined` | `STRING` | `YES` 或 `NO`，視資料欄是否為虛擬資料欄 (例如 \_PARTITIONTIME 或 \_PARTITIONDATE) 而定。 |
@@ -76,10 +77,10 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 取代下列項目：
 
-* 選用：`PROJECT_ID`：您的 Google Cloud 專案 ID。如未指定，系統會使用預設專案。
+* 選用：`PROJECT_ID`：專案 ID。 Google Cloud 如未指定，系統會使用預設專案。
 * `REGION`：任何[資料集區域名稱](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
   例如：`` `region-us` ``。
-* `DATASET_ID`：資料集 ID。詳情請參閱「[資料集限定符](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw#dataset_qualifier)」。**注意：**您必須使用[區域限定詞](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw#region_qualifier)查詢 `INFORMATION_SCHEMA` 檢視畫面。查詢執行位置必須與 `INFORMATION_SCHEMA` 檢視區塊的區域相符。
+* `DATASET_ID`：資料集的 ID。詳情請參閱「[資料集限定符](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw#dataset_qualifier)」。**注意：**您必須使用[區域限定詞](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw#region_qualifier)查詢 `INFORMATION_SCHEMA` 檢視畫面。查詢執行位置必須與 `INFORMATION_SCHEMA` 檢視區塊的區域相符。
 
 ## 範例
 
@@ -91,7 +92,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 * `IS_UPDATABLE`
 
-**注意：** `INFORMATION_SCHEMA` 檢視表名稱會區分大小寫。
+**附註：** `INFORMATION_SCHEMA` 檢視表名稱會區分大小寫。
 
 ```
   SELECT
@@ -124,11 +125,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-06-16 (世界標準時間)。
+上次更新時間：2026-06-18 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-16 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-18 (世界標準時間)。"],[],[]]

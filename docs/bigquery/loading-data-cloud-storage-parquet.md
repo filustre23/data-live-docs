@@ -1145,3 +1145,5 @@ repeated <element-type> <name>
 * 左大括號 {`{`)，以 Unicode 規則運算式 `\u007B` 表示。
 * 右大括號 (`}`)，以 Unicode 正則運算式 `\u007D` 表示。
 * 半形波浪號 (`~`)，以 Unicode 規則運算式 `\u007E` 表示。
+
+如需其他規範，請參閱「[資料欄名稱](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#column_names)」。

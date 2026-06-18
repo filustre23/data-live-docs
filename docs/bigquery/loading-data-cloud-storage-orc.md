@@ -1003,4 +1003,4 @@ if (isset($job->info()['status']['errorResult'])) {
 
 在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
 
-如要向 Big
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「

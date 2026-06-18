@@ -1043,4 +1043,5 @@ public class LoadJsonFromGCSTruncate {
     String sourceUri = "gs://cloud-samples-data/bigquery/us-states/us-states.json";
     Schema schema =
         Schema.of(
+            <
 ```
