@@ -22,9 +22,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 建立保留項目指派作業
 
-如要使用購買的配額，請建立「指派作業」，將專案、資料夾或機構指派給配額預留項目。您無法在指派層級指派或分配特定數量的配額；配額是在預留層級管理及指派。
+如要使用購買的運算單元，請建立*指派作業*，將專案、資料夾或機構指派給運算單元保留項目。您無法在指派層級指派或分配特定數量的運算單元，運算單元是在預訂層級管理及指派。
 
-專案會使用資源階層中最具體的單一保留項目。資料夾指派作業會覆寫機構指派作業，專案指派作業則會覆寫資料夾指派作業。[標準版](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)保留項目無法使用資料夾和機構指派作業。
+專案會使用資源階層中指派給專案的最明確單一預留項目。資料夾指派作業會覆寫機構指派作業，專案指派作業則會覆寫資料夾指派作業。[標準版](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)保留項目無法指派資料夾和機構。
 
 如要在預訂項目中建立指派項目，預訂項目必須符合下列至少一項條件：
 
@@ -64,7 +64,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 6. 按一下「建立作業」。
 7. 在「建立作業」部分，按一下「瀏覽」。
 8. 瀏覽或搜尋機構，然後選取所需項目。
-9. 在「Job Type」(工作類型) 部分，選取要為這項預訂指派的工作類型。選項包括：
+9. 在「Job Type」(工作類型) 區段中，選取要為這項預留項目指派的工作類型。選項包括：
 
    * `QUERY`
    * `CONTINUOUS`
@@ -147,7 +147,7 @@ bq mk \
 6. 按一下「建立作業」。
 7. 在「建立作業」部分，按一下「瀏覽」。
 8. 瀏覽或搜尋專案或資料夾，並選取所需項目。
-9. 在「Job Type」(工作類型) 部分，選取要為這項預訂指派的工作類型。選項包括：
+9. 在「Job Type」(工作類型) 區段中，選取要為這項預留項目指派的工作類型。選項包括：
 
    * `QUERY`
    * `CONTINUOUS`
@@ -157,7 +157,7 @@ bq mk \
 
    控制台目前不支援建立及修改更精細的背景工作類型，例如 `BACKGROUND_COLUMN_METADATA_INDEX`。
 
-   如要進一步瞭解工作類型，請參閱[預留指派](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#assignments)。預設值為 `QUERY`。
+   如要進一步瞭解工作類型，請參閱「[預留指派項目](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#assignments)」。預設值為 `QUERY`。
 10. 點選「建立」。
 
 ### SQL
@@ -274,7 +274,7 @@ resource "google_bigquery_reservation_assignment" "default" {
 
    將程式碼範例複製到新建立的 `main.tf` 中。
 
-   視需要從 GitHub 複製程式碼。如果 Terraform 代码片段是端對端解決方案的一部分，建議您這麼做。
+   視需要從 GitHub 複製程式碼。如果 Terraform 代码片段是端對端解決方案的一部分，建議您使用這個方法。
 3. 查看並修改範例參數，套用至您的環境。
 4. 儲存變更。
 5. 初始化 Terraform。每個目錄只需執行一次這項操作。
@@ -305,7 +305,7 @@ resource "google_bigquery_reservation_assignment" "default" {
    ```
 
    等待 Terraform 顯示「Apply complete!」訊息。
-3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)，查看結果。在 Google Cloud 控制台中，前往 UI 中的資源，確認 Terraform 已建立或更新這些資源。
+3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)即可查看結果。在 Google Cloud 控制台中，前往 UI 中的資源，確認 Terraform 已建立或更新這些資源。
 
 **注意：**Terraform 範例通常會假設 Google Cloud 專案已啟用必要的 API。
 
@@ -314,6 +314,88 @@ resource "google_bigquery_reservation_assignment" "default" {
 如要建立只使用[閒置運算單元](https://docs.cloud.google.com/bigquery/docs/slots?hl=zh-tw#idle_slots)的專案，請[建立保留項目](https://docs.cloud.google.com/bigquery/docs/reservations-tasks?hl=zh-tw#create_reservations)，並指派 `0` 個運算單元給該保留項目，然後按照先前的步驟將專案指派給該保留項目。
 
 **注意：** 在單一區域中，專案最多只能指派給一個預留項目。
+
+### 指派給特定使用者
+
+**預覽**
+
+這項功能適用《[服務專屬條款](https://docs.cloud.google.com/terms/service-terms?hl=zh-tw#1)》中「一般服務條款」一節的《正式發布前產品條款》。正式發布前功能是依「原樣」提供，支援服務可能受限。
+詳情請參閱[推出階段說明](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
+
+您可以將預留項目指派給專案、資料夾或機構中的特定主體，例如使用者或服務帳戶。這項功能有助於將特定使用者的工作負載，導向專屬的保留項目。
+
+在決定要為工作使用哪個保留項目時，BigQuery 會依下列順序評估指派作業：
+
+1. 評估資源階層，從專案開始，然後是父項資料夾，最後是機構。
+2. 在階層的每個層級，BigQuery 會先檢查是否有與執行工作的主體相符的指派項目。
+3. 如果該層級沒有與主體相符的指派項目，請檢查同一層級是否有沒有主體的一般指派項目。
+4. 如果找不到指派項目，請前往階層中的下一個層級。
+
+如果專案層級的指派作業沒有主體，就會覆寫資料夾層級的指派作業 (有主體)。
+
+#### 支援的主體格式
+
+`principal` 選項支援下列 [IAM v2 主體](https://docs.cloud.google.com/iam/docs/principal-identifiers?hl=zh-tw)格式：
+
+| 身分類型 | 主要格式 |
+| --- | --- |
+| 使用者 | `principal://goog/subject/EMAIL_ADDRESS` |
+| 服務帳戶 | `principal://iam.googleapis.com/projects/-/serviceAccounts/EMAIL_ADDRESS` |
+| 工作團隊身分集區身分 | `principal://iam.googleapis.com/locations/global/workforcePools/POOL_ID/subject/SUBJECT_ID` |
+| Workload Identity Pool 身分 | `principal://iam.googleapis.com/projects/PROJECT_NUMBER/locations/global/workloadIdentityPools/POOL_ID/subject/SUBJECT_ID` |
+
+**注意：** 值 `unknown_or_deleted_user` 是系統使用的哨兵值，代表已刪除或停用的使用者帳戶。您無法使用這個值指派預訂。
+
+#### 將主體指派給預留項目
+
+### SQL
+
+如要建立使用者專屬的指派項目，請使用 `CREATE ASSIGNMENT` DDL 陳述式搭配 `principal` 選項。
+
+```
+CREATE ASSIGNMENT
+  `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME.ASSIGNMENT_ID`
+OPTIONS (
+  assignee = 'projects/PROJECT_ID',
+  principal = 'principal://goog/subject/EMAIL_ADDRESS',
+  job_type = 'QUERY');
+```
+
+更改下列內容：
+
+* `ADMIN_PROJECT_ID`：擁有預訂資源的[管理專案](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#admin-project)專案 ID
+* `LOCATION`：預訂的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)
+* `RESERVATION_NAME`：預訂名稱
+* `ASSIGNMENT_ID`：指派作業 ID
+* `PROJECT_ID`：專案 ID
+* `EMAIL\_ADDRESS：使用者的電子郵件地址
+* `JOB_TYPE`：要指派給這項預留的[工作類型](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#assignments)，例如 `QUERY`、`CONTINUOUS`、`PIPELINE`、`BACKGROUND` 或 `ML_EXTERNAL`
+
+### bq
+
+如要建立使用者專屬的指派項目，請使用 `bq mk` 指令並加上 `--principal` 旗標：
+
+```
+bq mk \
+    --project_id=ADMIN_PROJECT_ID \
+    --location=LOCATION \
+    --reservation_assignment \
+    --reservation_id=RESERVATION_NAME \
+    --assignee_id=PROJECT_ID \
+    --assignee_type=PROJECT \
+    --principal=PRINCIPAL \
+    --job_type=JOB_TYPE
+```
+
+更改下列內容：
+
+* `ADMIN_PROJECT_ID`：擁有預訂資源的[管理專案](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#admin-project)專案 ID
+* `LOCATION`：預訂的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)
+* `RESERVATION_NAME`：預訂名稱
+* `ASSIGNMENT_ID`：指派作業 ID
+* `PROJECT_ID`：專案 ID
+* `PRINCIPAL: the principal identifier, for example,`principal://goog/subject/EMAIL\_ADDRESS`
+* `JOB_TYPE`：要指派給這項預留的[工作類型](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#assignments)，例如 `QUERY`、`CONTINUOUS`、`PIPELINE`、`BACKGROUND` 或 `ML_EXTERNAL`
 
 ### 將專案指派給「`none`」
 
@@ -418,7 +500,7 @@ resource "google_bigquery_reservation_assignment" "default" {
 
    將程式碼範例複製到新建立的 `main.tf` 中。
 
-   視需要從 GitHub 複製程式碼。如果 Terraform 代码片段是端對端解決方案的一部分，建議您這麼做。
+   視需要從 GitHub 複製程式碼。如果 Terraform 代码片段是端對端解決方案的一部分，建議您使用這個方法。
 3. 查看並修改範例參數，套用至您的環境。
 4. 儲存變更。
 5. 初始化 Terraform。每個目錄只需執行一次這項操作。
@@ -449,7 +531,7 @@ resource "google_bigquery_reservation_assignment" "default" {
    ```
 
    等待 Terraform 顯示「Apply complete!」訊息。
-3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)，查看結果。在 Google Cloud 控制台中，前往 UI 中的資源，確認 Terraform 已建立或更新這些資源。
+3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)即可查看結果。在 Google Cloud 控制台中，前往 UI 中的資源，確認 Terraform 已建立或更新這些資源。
 
 **注意：**Terraform 範例通常會假設 Google Cloud 專案已啟用必要的 API。
 
@@ -511,7 +593,7 @@ SELECT 42;
 
    [啟用 Cloud Shell](https://console.cloud.google.com/?cloudshell=true&hl=zh-tw)
 
-   Google Cloud 主控台底部會開啟一個 [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works?hl=zh-tw) 工作階段，並顯示指令列提示。Cloud Shell 是已安裝 Google Cloud CLI 的殼層環境，並已針對您目前的專案設定好相關值。工作階段可能需要幾秒鐘的時間才能完成初始化。
+   控制台底部會開啟 [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works?hl=zh-tw) 工作階段，並顯示指令列提示。 Google Cloud Cloud Shell 是已安裝 Google Cloud CLI 的殼層環境，並已針對您目前的專案設定好相關值。工作階段可能要幾秒鐘的時間才能初始化。
 2. 在 Cloud Shell 中，使用 [`bq query` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_query)和 `--reservation_id` 旗標執行查詢：
 
    ```
@@ -551,9 +633,9 @@ SELECT 42;
 * [隨機森林](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-random-forest?hl=zh-tw)
 * [廣度和深度網路](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-wnd-models?hl=zh-tw)
 
-如要使用這些服務將保留的運算單元指派給查詢，請建立使用 `ML_EXTERNAL` 工作類型的保留項目指派。如果系統找不到使用 `ML_EXTERNAL` 工作類型的保留項目指派，查詢工作就會以[隨選價格](https://cloud.google.com/bigquery/pricing?hl=zh-tw#on_demand_pricing)執行。
+如要使用這些服務將保留的時段指派給查詢，請建立使用 `ML_EXTERNAL` 工作類型的預留指派項目。如果系統找不到 `ML_EXTERNAL` 工作類型的預訂指派，查詢工作會使用[以量計價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#on_demand_pricing)模式執行。
 
-如果是外部模型訓練工作，保留項目指派中的運算單元會用於預先處理、訓練和後續處理步驟。訓練期間，運算單元無法搶占，但預先處理和後續處理期間，可以使用閒置運算單元。
+如果是外部模型訓練工作，保留項目指派中的運算單元會用於預先處理、訓練和後續處理步驟。訓練期間無法搶佔這些位置，但預先處理和後續處理期間可以使用閒置位置。
 
 #### 矩陣分解模型
 
@@ -638,12 +720,26 @@ bq show \
     --assignee_type=PROJECT
 ```
 
+如要找出特定使用者的指派項目，請加入 `--principal` 旗標：
+
+```
+bq show \
+    --project_id=ADMIN_PROJECT_ID \
+    --location=LOCATION \
+    --reservation_assignment \
+    --job_type=JOB_TYPE \
+    --assignee_id=PROJECT_ID \
+    --assignee_type=PROJECT \
+    --principal=PRINCIPAL
+```
+
 更改下列內容：
 
 * `ADMIN_PROJECT_ID`：擁有預訂資源的專案 ID
 * `LOCATION`：要查看預訂的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)
 * `JOB_TYPE`：要指派給這項預留的[工作類型](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#assignments)，例如 `QUERY`、`CONTINUOUS`、`PIPELINE`、`BACKGROUND` 或 `ML_EXTERNAL`
 * `PROJECT_ID`：專案 ID
+* `PRINCIPAL`：主體 ID，例如 `principal://goog/subject/EMAIL_ADDRESS`
 
 ## 更新保留項目指派作業
 
@@ -689,7 +785,7 @@ bq update \
 
 ## 刪除預留項目指派作業
 
-如要從保留項目中移除專案，請刪除保留項目指派作業。如果專案未指派給任何保留項目，則會沿用上層資料夾或機構中的任何指派作業，否則會採用以量計價模式 (如果沒有上層指派作業)。
+如要將專案從預訂項目中移除，請刪除預訂項目指派作業。如果未將專案指派給任何保留項目，該專案會繼承上層資料夾或機構中的任何指派作業，否則如果沒有上層指派作業，則會採用以量計價模式。
 
 刪除保留項目指派作業後，使用該保留項目中時段執行的工作會繼續執行，直到完成為止。
 
@@ -773,11 +869,11 @@ bq rm \
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-06-16 (世界標準時間)。
+上次更新時間：2026-06-19 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-16 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-19 (世界標準時間)。"],[],[]]

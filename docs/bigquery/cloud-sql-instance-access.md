@@ -40,7 +40,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 1. 在 Google Cloud 控制台中，前往 BigQuery 資料移轉服務連接器專案的「VPC network peering」頁面。
 
-   [前往「VPC Network Peering」(虛擬私有雲網路對等互連)](https://console.cloud.google.com/networking/peering/list?hl=zh-tw)
+   [前往「VPC Network Peering」(虛擬私有雲網路對等互連)](https://console.cloud.google.com/networking/vpc-connectivity/peering?hl=zh-tw)
 2. 按一下 add「建立對接連線」。
 3. 在「Name」欄位中，輸入對等互連設定的名稱。
 4. 在「Your VPC network」(您的 VPC 網路) 中，選取您要在 BigQuery 資料移轉服務連接器專案中對等互連的 VPC 網路。
@@ -55,7 +55,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 1. 在 Google Cloud 控制台中，前往 BigQuery 資料移轉服務連接器專案的「VPC Network Peering」頁面。
 
-   [前往「VPC Network Peering」(虛擬私有雲網路對等互連)](https://console.cloud.google.com/networking/peering/list?hl=zh-tw)
+   [前往「VPC Network Peering」(虛擬私有雲網路對等互連)](https://console.cloud.google.com/networking/vpc-connectivity/peering?hl=zh-tw)
 2. 按一下 add「建立對接連線」。
 3. 在「Name」欄位中，輸入對等互連設定的名稱。
 4. 選取您要在 Cloud SQL 資料庫專案中建立對等互連的 VPC 網路。
@@ -150,11 +150,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-06-16 (世界標準時間)。
+上次更新時間：2026-06-19 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-16 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-19 (世界標準時間)。"],[],[]]

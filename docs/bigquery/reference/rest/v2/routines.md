@@ -262,3 +262,7 @@ The status of a routine build.
 ## BuildState
 
 The build state of a routine.
+
+| Enums | |
+| --- | --- |
+| `BUILD_STATE_UNSPECIFIED` | Default value. |

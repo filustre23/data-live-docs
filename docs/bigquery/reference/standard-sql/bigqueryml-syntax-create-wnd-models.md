@@ -892,5 +892,14 @@ HPARAM_TUNING_OBJECTIVES = { 'PRECISION' | 'RECALL' | 'ACCURACY' | 'F1_SCORE' | 
 For `DNN_LINEAR_COMBINED_REGRESSOR` models:
 
 ```
-HPARAM_TUNING_OBJECTIVES = { 'MEAN_ABSOLUTE_ERROR' | 'MEAN_SQUARED_ERROR' | 'MEAN_SQUARED_LOG_ERROR' | 'MEDIAN_ABSOLUTE_ERROR' | 'R2_SCORE'
+HPARAM_TUNING_OBJECTIVES = { 'MEAN_ABSOLUTE_ERROR' | 'MEAN_SQUARED_ERROR' | 'MEAN_SQUARED_LOG_ERROR' | 'MEDIAN_ABSOLUTE_ERROR' | 'R2_SCORE' | 'EXPLAINED_VARIANCE' }
 ```
+
+**Description**
+The hyperparameter tuning objective for the model; only one objective is
+supported. If you specify a value for this option, you must also specify a
+value for [`NUM_TRIALS`](#num_trials).
+
+**Arguments**
+
+The possible objectives are a subset
