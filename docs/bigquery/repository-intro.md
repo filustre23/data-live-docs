@@ -21,15 +21,15 @@ Google uses AI technology to translate content into your preferred language. AI 
 這項產品或功能適用《[服務專屬條款](https://docs.cloud.google.com/terms/service-terms?hl=zh-tw#1)》中「一般服務條款」一節的《正式發布前產品條款》。正式發布前的產品和功能是按照「原樣」提供，支援範圍可能有限。
 詳情請參閱[推出階段說明](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
 
-**注意：** 如要提供意見回饋或提出與這項預先發布版功能相關的問題，請傳送電子郵件至 [bigquery-repositories-feedback@google.com](mailto:%20bigquery-repositories-feedback@google.com)。
+**注意：** 如要提供意見回饋或提出與這項預先發布版功能相關的問題，請傳送電子郵件至 [bigquery-repositories-feedback@google.com](mailto:bigquery-repositories-feedback@google.com)。
 
-本文說明 BigQuery 中的存放區概念。您可以使用存放區，對 BigQuery 中使用的檔案執行版本管控。BigQuery 會使用 Git 記錄變更及管理檔案版本。
+本文說明 BigQuery 存放區，可為您在 BigQuery 中使用的檔案提供版本控管功能。這些存放區可協助您追蹤查詢和筆記本等 BigQuery 資產的變更、與團隊協作，以及還原至先前的版本。
 
-每個 BigQuery 存放區都代表一個 Git 存放區。您可以使用 BigQuery 的內建 Git 功能，也可以連線至第三方 Git 存放區。在每個存放區中，您可以建立一或多個[工作區](https://docs.cloud.google.com/bigquery/docs/workspaces-intro?hl=zh-tw)，編輯存放區中儲存的程式碼。
+BigQuery 存放區的功能與 Git 存放區相同。您可以使用 BigQuery 的內建 Git 功能，或連結至現有的第三方 Git 存放區。您可以在每個存放區中建立[工作區](https://docs.cloud.google.com/bigquery/docs/workspaces-intro?hl=zh-tw)，編輯儲存在該處的程式碼。
 
-如要查看存放區，請前往 BigQuery 頁面，在左側窗格中依序點選「Explorer」explore和「Repositories」。存放區會依字母順序顯示在詳細資料窗格的新分頁中。
+如要查看存放區，請前往 BigQuery 頁面，在左側窗格中依序點選「Explorer」explore和「Repositories」。詳細資料窗格的新分頁會依字母順序顯示存放區。
 
-**重要事項：** 如果您在 BigQuery 存放區中建立資產 (例如查詢、筆記本 (包括含 Apache Spark 工作的筆記本)、BigQuery 管道或 Dataform 工作流程)，就無法在 BigQuery 存放區中排定執行時間。如要排定及執行 Dataform 工作流程，您必須使用 Dataform 存放區。如要排定查詢和筆記本的執行時間，請使用 BigQuery Studio。詳情請參閱「[排定查詢時間](https://docs.cloud.google.com/bigquery/docs/scheduling-queries?hl=zh-tw)」、「[排定筆記本時間](https://docs.cloud.google.com/bigquery/docs/orchestrate-notebooks?hl=zh-tw)」和「[排定管道時間](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines?hl=zh-tw)」。
+**重要事項：** 如果您在 BigQuery 存放區中建立資產 (例如查詢、筆記本 (包括含 Apache Spark 工作的筆記本)、BigQuery 管道或 Dataform 工作流程)，就無法在 BigQuery 存放區中排定執行時間。如要排定及執行 Dataform 工作流程，您需要使用 Dataform 存放區。如要排定查詢和筆記本的執行時間，請使用 BigQuery Studio。詳情請參閱「[排定查詢時間](https://docs.cloud.google.com/bigquery/docs/scheduling-queries?hl=zh-tw)」、「[排定筆記本時間](https://docs.cloud.google.com/bigquery/docs/orchestrate-notebooks?hl=zh-tw)」和「[排定管道時間](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines?hl=zh-tw)」。
 
 ## 第三方存放區
 
@@ -62,7 +62,7 @@ service-YOUR_PROJECT_NUMBER@gcp-sa-dataform.iam.gserviceaccount.com
 
 ## 配額
 
-使用 BigQuery 存放區時，適用 [Dataform 配額](https://docs.cloud.google.com/dataform/docs/quotas?hl=zh-tw#quotas)。
+使用 BigQuery 存放區時，會套用 [Dataform 配額](https://docs.cloud.google.com/dataform/docs/quotas?hl=zh-tw#quotas)。
 
 ## 定價
 
@@ -83,11 +83,11 @@ service-YOUR_PROJECT_NUMBER@gcp-sa-dataform.iam.gserviceaccount.com
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-06-16 (世界標準時間)。
+上次更新時間：2026-06-18 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-16 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-18 (世界標準時間)。"],[],[]]

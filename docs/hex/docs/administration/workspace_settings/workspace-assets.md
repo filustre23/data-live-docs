@@ -89,7 +89,7 @@ If you're unsure whether your organization uses GitHub Enterprise Cloud or Serve
 
 info
 
-If your GitHub Enterprise Server deployment requires a VPN for connection, please contact [[email protected]](/cdn-cgi/l/email-protection#c8bbbdb8b8a7babc88a0adb0e6bcadaba0) for assistance with this integration.
+If your GitHub Enterprise Server deployment requires a VPN for connection, please contact [[email protected]](/cdn-cgi/l/email-protection#6714121717081513270f021f491302040f) for assistance with this integration.
 
 To configure a GitHub Enterprise Server connection:
 

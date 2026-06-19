@@ -159,16 +159,6 @@ AI.CLASSIFY(
   processing location, because when you use the global endpoint, you can't
   control or know the region where your processing requests are handled.
 
-  Beginning June 15, 2026, Agent Platform will limit access to
-  Gemini 2.5 Flash, which is used by default. Only existing projects that have used it
-  in the last 90 days will have access. If your project doesn't have access to Gemini
-  2.5 Flash, you can specify a Gemini 3 model using the `endpoint`
-  parameter.
-
-  ```
-  https://aiplatform.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/publishers/google/models/gemini-3.1-flash-lite
-  ```
-
   Agent Platform doesn't support regional endpoints for
   Gemini 3 models. For these models, use `global`, `us`, or
   `eu` as the location.
@@ -468,11 +458,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-06-15 UTC.
+Last updated 2026-06-18 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-06-15 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-06-18 UTC."],[],[]]

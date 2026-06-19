@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-06-18T14:53+00:00_
+_Generated 2026-06-19T02:15+00:00_
 
-**9 sources, 5338 topics total**
+**9 sources, 5340 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_1604 topics_
+_1605 topics_
 
 - `anthropic-sdk/agents-and-tools/agent-skills/best-practices`
 - `anthropic-sdk/agents-and-tools/agent-skills/enterprise`
@@ -1565,6 +1565,7 @@ _1604 topics_
 - `anthropic-sdk/intro`
 - `anthropic-sdk/manage-claude/access-transparency`
 - `anthropic-sdk/manage-claude/admin-api`
+- `anthropic-sdk/manage-claude/admin-api-keys`
 - `anthropic-sdk/manage-claude/analytics-api`
 - `anthropic-sdk/manage-claude/api-and-data-retention`
 - `anthropic-sdk/manage-claude/authentication`
@@ -3161,7 +3162,7 @@ _1527 topics_
 
 Upstream: <https://code.claude.com/docs/en/>
 
-_148 topics_
+_149 topics_
 
 - `claude-code/admin-setup`
 - `claude-code/advisor`
@@ -3200,6 +3201,7 @@ _148 topics_
 - `claude-code/agents`
 - `claude-code/amazon-bedrock`
 - `claude-code/analytics`
+- `claude-code/artifacts`
 - `claude-code/authentication`
 - `claude-code/auto-mode-config`
 - `claude-code/best-practices`

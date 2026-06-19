@@ -20,144 +20,1029 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 當您在 BigQuery 中查看資料表和檢視表時，suffix 的值是您在建立移轉時設定的資料表尾碼。
 
-| **YouTube 內容擁有者報告** | **BigQuery 資料表** | **BigQuery 檢視區塊** |
-| --- | --- | --- |
-| **影片報表** |  |  |
-| [使用者活動](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#video-user-activity) | p\_content\_owner\_basic\_a4\_suffix | content\_owner\_basic\_a4\_suffix |
-| [依省份劃分的使用者活動](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#video-province) | p\_content\_owner\_province\_a3\_suffix | content\_owner\_province\_3\_suffix |
-| [播放位置](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#video-playback-locations) | p\_content\_owner\_playback\_location\_a3\_suffix | content\_owner\_playback\_location\_a3\_suffix |
-| [流量來源](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#video-traffic-sources) | p\_content\_owner\_traffic\_source\_a3\_suffix | content\_owner\_traffic\_source\_a3\_suffix |
-| [裝置類型和作業系統](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#video-device-type-and-operating-system) | p\_content\_owner\_device\_os\_a3\_suffix | content\_owner\_device\_os\_a3\_suffix |
-| [觀眾客層](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#video-viewer-demographics) | p\_content\_owner\_demographics\_a1\_suffix | content\_owner\_demographics\_a1\_suffix |
-| [內容共享 (依平台分組)](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#video-content-sharing) | p\_content\_owner\_sharing\_service\_a1\_suffix | content\_owner\_sharing\_service\_a1\_suffix |
-| [註解](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#video-annotations) | p\_content\_owner\_annotations\_a1\_suffix | content\_owner\_annotations\_a1\_suffix |
-| [資訊卡](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#video-cards) | p\_content\_owner\_cards\_a1\_suffix | content\_owner\_cards\_a1\_suffix |
-| [片尾](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#video-end-screens) | p\_content\_owner\_end\_screens\_a1\_suffix | content\_owner\_end\_screens\_a1\_suffix |
-| [字幕](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#video-subtitles) | p\_content\_owner\_subtitles\_a3\_suffix | content\_owner\_subtitles\_a3\_suffix |
-| [合併](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#video-combined) | p\_content\_owner\_combined\_a3\_suffix | content\_owner\_combined\_a3\_suffix |
-| **播放清單報表** |  |  |
-| [使用者活動](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#playlist-user-activity) | p\_content\_owner\_playlist\_basic\_a2\_suffix | content\_owner\_playlist\_basic\_a2\_suffix |
-| [依省份劃分的使用者活動](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#playlist-province) | p\_content\_owner\_playlist\_province\_a2\_suffix | content\_owner\_playlist\_province\_a2\_suffix |
-| [播放位置](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#playlist-playback-locations) | p\_content\_owner\_playlist\_playback\_location\_a2\_suffix | content\_owner\_playlist\_playback\_location\_a2 |
-| [流量來源](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#playlist-traffic-sources) | p\_content\_owner\_playlist\_traffic\_source\_a2 | content\_owner\_playlist\_traffic\_source\_a2\_suffix |
-| [裝置類型和作業系統](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#playlist-device-type-and-operating-system) | p\_content\_owner\_playlist\_device\_os\_a2\_suffix | content\_owner\_playlist\_device\_os\_a2\_suffix |
-| [合併](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#playlist-combined) | p\_content\_owner\_playlist\_combined\_a2\_suffix | content\_owner\_playlist\_combined\_a2\_suffix |
-| **廣告費率報表** |  |  |
-| [廣告費率報表](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#ad-rate-reports) | p\_content\_owner\_ad\_rates\_a1\_suffix | content\_owner\_ad\_rates\_a1\_suffix |
-| **預估收益報表** |  |  |
-| [預估影片收益](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#estimated-revenue-videos) | p\_content\_owner\_estimated\_revenue\_a1\_suffix | content\_owner\_estimated\_revenue\_a1\_suffix |
-| [預估資產收益](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#estimated-revenue-assets) | p\_content\_owner\_asset\_estimated\_revenue\_a1\_suffix | content\_owner\_asset\_estimated\_revenue\_a1\_suffix |
-| **素材資源報表** |  |  |
-| [使用者活動](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#asset-user-activity) | p\_content\_owner\_asset\_basic\_a3\_suffix | content\_owner\_asset\_basic\_a3\_suffix |
-| [依省份劃分的使用者活動](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#asset-province) | p\_content\_owner\_asset\_province\_a3\_suffix | content\_owner\_asset\_province\_a3\_suffix |
-| [影片播放位置](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#asset-playback-locations) | p\_content\_owner\_asset\_playback\_location\_a3\_suffix | content\_owner\_asset\_playback\_location\_a3\_suffix |
-| [流量來源](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#asset-traffic-sources) | p\_content\_owner\_asset\_traffic\_source\_a3\_suffix | content\_owner\_asset\_traffic\_source\_a3\_suffix |
-| [裝置類型和作業系統](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#asset-device-type-and-operating-system) | p\_content\_owner\_asset\_device\_os\_a3\_suffix | content\_owner\_asset\_device\_os\_a3\_suffix |
-| [觀眾客層](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#asset-viewer-demographics) | p\_content\_owner\_asset\_demographics\_a1\_suffix | content\_owner\_asset\_demographics\_a1\_suffix |
-| [內容共享 (依平台分組)](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#asset-content-sharing) | p\_content\_owner\_asset\_sharing\_service\_a1\_suffix | content\_owner\_asset\_sharing\_service\_a1\_suffix |
-| [註解](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#asset-annotations) | p\_content\_owner\_asset\_annotations\_a1\_suffix | content\_owner\_asset\_annotations\_a1\_suffix |
-| [資訊卡](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#asset-cards) | p\_content\_owner\_asset\_cards\_a1\_suffix | content\_owner\_asset\_cards\_a1\_suffix |
-| [片尾](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#asset-end-screens) | p\_content\_owner\_asset\_end\_screens\_a1\_suffix | content\_owner\_asset\_end\_screens\_a1\_suffix |
-| [合併](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#asset-combined) | p\_content\_owner\_asset\_combined\_a3\_suffix | content\_owner\_asset\_combined\_a3\_suffix |
-| **觸及報表** |  |  |
-| [觸及基本版](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#reach-reports) | p\_content\_owner\_reach\_basic\_a1\_suffix | content\_owner\_reach\_basic\_a1\_suffix |
-| [合併觸及](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#reach-reports) | p\_content\_owner\_reach\_combined\_a1\_suffix | content\_owner\_reach\_combined\_a1\_suffix |
+## YouTube 內容擁有者報告
 
-| **YouTube 系統管理報表** | **BigQuery 資料表** | **BigQuery 檢視區塊** |
-| --- | --- | --- |
-| **財務摘要報表** |  |  |
-| [每月付款摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/financial-summaries?hl=zh-tw#monthly-payments-summary) | p\_content\_owner\_payments\_summary\_a1\_suffix | content\_owner\_payments\_summary\_a1\_suffix |
-| **廣告收益報表** |  |  |
-| [每月全球廣告收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#monthly-global-ad-revenue-summary) | p\_content\_owner\_global\_ad\_revenue\_summary\_a1\_suffix | content\_owner\_global\_ad\_revenue\_summary\_a1\_suffix |
-| [每月國家/地區廣告收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#monthly-country-ad-revenue-summary) | p\_content\_owner\_country\_ad\_revenue\_summary\_a1\_suffix | content\_owner\_country\_ad\_revenue\_summary\_a1\_suffix |
-| [每月每日廣告收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#monthly-day-ad-revenue-summary) | p\_content\_owner\_day\_ad\_revenue\_summary\_a1\_suffix | content\_owner\_day\_ad\_revenue\_summary\_a1\_suffix |
-| [每週全球廣告收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#weekly-global-ad-revenue-summary) | p\_content\_owner\_global\_ad\_revenue\_summary\_weekly\_a1\_suffix | content\_owner\_global\_ad\_revenue\_summary\_weekly\_a1\_suffix |
-| [每週國家/地區廣告收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#weekly-country-ad-revenue-summary) | p\_content\_owner\_country\_ad\_revenue\_summary\_weekly\_a1\_suffix | content\_owner\_country\_ad\_revenue\_summary\_weekly\_a1\_suffix |
-| [每週每日廣告收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#weekly-day-ad-revenue-summary) | p\_content\_owner\_day\_ad\_revenue\_summary\_weekly\_a1\_suffix | content\_owner\_day\_ad\_revenue\_summary\_weekly\_a1\_suffix |
-| [每部影片的匯總廣告收益](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#aggregate-ad-revenue-per-video) | p\_content\_owner\_ad\_revenue\_summary\_a1\_suffix | content\_owner\_ad\_revenue\_summary\_a1\_suffix |
-| [每週影片廣告收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#weekly-video-ad-revenue-summary) | p\_content\_owner\_ad\_revenue\_summary\_weekly\_a1\_suffix | content\_owner\_ad\_revenue\_summary\_weekly\_a1\_suffix |
-| [每週影片廣告收益](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#weekly-video-ad-revenue) | p\_content\_owner\_ad\_revenue\_raw\_weekly\_a1\_suffix | content\_owner\_ad\_revenue\_raw\_weekly\_a1\_suffix |
-| [每部影片的每日廣告收益](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#daily-ad-revenue-per-video) | p\_content\_owner\_ad\_revenue\_raw\_a1\_suffix | content\_owner\_ad\_revenue\_raw\_a1\_suffix |
-| [每項資產的匯總廣告收益](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#aggregate-ad-revenue-per-asset) | p\_content\_owner\_asset\_ad\_revenue\_summary\_a1\_suffix | content\_owner\_asset\_ad\_revenue\_summary\_a1\_suffix |
-| [每日每項資產的廣告收益](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#daily-ad-revenue-per-asset) | p\_content\_owner\_asset\_ad\_revenue\_raw\_a1\_suffix | content\_owner\_asset\_ad\_revenue\_raw\_a1\_suffix |
-| [每月聲明廣告收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#monthly-claim-ad-revenue-summary) | p\_content\_owner\_claim\_ad\_revenue\_summary\_a1\_suffix | content\_owner\_claim\_ad\_revenue\_summary\_a1\_suffix |
-| [每週著作權聲明廣告收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#weekly-claim-ad-revenue-summary) | p\_content\_owner\_claim\_ad\_revenue\_summary\_weekly\_a1\_suffix | content\_owner\_claim\_ad\_revenue\_summary\_weekly\_a1\_suffix |
-| [每月聲明廣告收益](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#monthly-claim-ad-revenue) | p\_content\_owner\_claim\_ad\_revenue\_raw\_a1\_suffix | content\_owner\_claim\_ad\_revenue\_raw\_a1\_suffix |
-| [每週聲明廣告收益](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#weekly-claim-ad-revenue) | p\_content\_owner\_claim\_ad\_revenue\_raw\_weekly\_a1\_suffix | content\_owner\_claim\_ad\_revenue\_raw\_weekly\_a1\_suffix |
-| [每月全球廣告調整項收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#monthly-global-ad-adjustment-revenue-summary) | p\_content\_owner\_global\_ad\_adjustment\_revenue\_summary\_a1\_suffix | content\_owner\_global\_ad\_adjustment\_revenue\_summary\_a1\_suffix |
-| [每月素材資源廣告調整項收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#monthly-asset-ad-adjustment-revenue-summary) | p\_content\_owner\_asset\_ad\_adjustment\_revenue\_summary\_a1\_suffix | content\_owner\_asset\_ad\_adjustment\_revenue\_summary\_a1\_suffix |
-| [每月素材資源廣告調整項收益](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#monthly-asset-ad-adjustment-revenue) | p\_content\_owner\_asset\_ad\_adjustment\_revenue\_raw\_a1\_suffix | content\_owner\_asset\_ad\_adjustment\_revenue\_raw\_a1\_suffix |
-| [每月影片廣告調整項收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#monthly-video-ad-adjustment-revenue-summary) | p\_content\_owner\_ad\_adjustment\_revenue\_summary\_a1\_suffix | content\_owner\_ad\_adjustment\_revenue\_summary\_a1\_suffix |
-| [每月影片廣告調整項收益原始資料](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#monthly-video-ad-adjustment-revenue-raw) | p\_content\_owner\_ad\_adjustment\_revenue\_raw\_a1\_suffix | content\_owner\_ad\_adjustment\_revenue\_raw\_a1\_suffix |
-| [每月著作權聲明廣告調整項收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#monthly-claim-ad-adjustment-revenue-summary) | p\_content\_owner\_claim\_ad\_adjustment\_revenue\_summary\_a1\_suffix | content\_owner\_claim\_ad\_adjustment\_revenue\_summary\_a1\_suffix |
-| [每月著作權聲明廣告調整項收益](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#monthly-claim-ad-adjustment-revenue) | p\_content\_owner\_claim\_ad\_adjustment\_revenue\_raw\_a1\_suffix | content\_owner\_claim\_ad\_adjustment\_revenue\_raw\_a1\_suffix |
-| [每月國家/地區廣告調整項收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#monthly-country-ad-adjustment-revenue-summary) | p\_content\_owner\_country\_ad\_adjustment\_revenue\_summary\_a1\_suffix | content\_owner\_country\_ad\_adjustment\_revenue\_summary\_a1\_suffix |
-| [每月每日廣告調整項收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#monthly-day-ad-adjustment-revenue-summary) | p\_content\_owner\_day\_ad\_adjustment\_revenue\_summary\_a1\_suffix | content\_owner\_day\_ad\_adjustment\_revenue\_summary\_a1\_suffix |
-| **訂閱收益報表** |  |  |
-| [每月音樂收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#monthly-music-revenue-summary) | p\_content\_owner\_country\_music\_red\_revenue\_summary\_a1\_suffix | content\_owner\_country\_music\_red\_revenue\_summary\_a1\_suffix |
-| [每月音樂唱片公司影片收益](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#monthly-music-label-video-revenue) | p\_music\_content\_owner\_red\_revenue\_raw\_a1\_suffix | music\_content\_owner\_red\_revenue\_raw\_a1\_suffix |
-| [每月音樂唱片公司資產收益](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#monthly-music-label-assets-revenue) | p\_music\_content\_owner\_asset\_red\_revenue\_raw\_a1\_suffix | music\_content\_owner\_asset\_red\_revenue\_raw\_a1\_suffix |
-| [每月唱片公司訂閱者收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#monthly-music-label-subscriber-revenue-summary) | p\_music\_content\_owner\_subscriber\_red\_revenue\_summary\_a1\_suffix | music\_content\_owner\_subscriber\_red\_revenue\_summary\_a1\_suffix |
-| [每月詞曲出版社收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#monthly-music-publisher-revenue-summary) | p\_publisher\_content\_owner\_music\_red\_revenue\_summary\_a1\_suffix | publisher\_content\_owner\_music\_red\_revenue\_summary\_a1\_suffix |
-| [每月詞曲出版社訂閱收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#monthly-music-publisher-subscription-revenue-summary) | p\_publisher\_content\_owner\_subscriber\_red\_revenue\_summary\_a1\_suffix | publisher\_content\_owner\_subscriber\_red\_revenue\_summary\_a1\_suffix |
-| [每月詞曲出版社非音樂訂閱收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#monthly-music-publisher-non-music-subscription-revenue-summary) | p\_publisher\_content\_owner\_non\_music\_red\_revenue\_summary\_a1\_suffix | publisher\_content\_owner\_non\_music\_red\_revenue\_summary\_a1\_suffix |
-| [每月音樂唱片公司音樂收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#monthly-music-label-music-revenue-summary) | p\_music\_content\_owner\_country\_music\_red\_revenue\_summary\_a1\_suffix | music\_content\_owner\_country\_music\_red\_revenue\_summary\_a1\_suffix |
-| [月費方案音樂影片收益](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#monthly-subscriptions-music-video-revenue) | p\_content\_owner\_music\_red\_revenue\_raw\_a1\_suffix | content\_owner\_music\_red\_revenue\_raw\_a1\_suffix |
-| [每月訂閱音樂資產收益](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#monthly-subscriptions-music-assets-revenue) | p\_content\_owner\_music\_asset\_red\_revenue\_raw\_a1\_suffix | content\_owner\_music\_asset\_red\_revenue\_raw\_a1\_suffix |
-| [每週音樂收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#weekly-music-revenue-summary) | p\_music\_content\_owner\_country\_music\_red\_revenue\_summary\_weekly\_a1\_suffix | music\_content\_owner\_country\_music\_red\_revenue\_summary\_weekly\_a1\_suffix |
-| [每週音樂唱片公司影片收益](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#weekly-music-label-videos-revenue) | p\_music\_content\_owner\_red\_revenue\_raw\_weekly\_a1\_suffix | music\_content\_owner\_red\_revenue\_raw\_weekly\_a1\_suffix |
-| [每週音樂唱片公司資產收益](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#weekly-music-label-assets-revenue) | p\_music\_content\_owner\_asset\_red\_revenue\_raw\_weekly\_a1\_suffix | music\_content\_owner\_asset\_red\_revenue\_raw\_weekly\_a1\_suffix |
-| [每月非音樂摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#monthly-non-music-summary) | p\_content\_owner\_country\_non\_music\_red\_revenue\_summary\_a1\_suffix | content\_owner\_country\_non\_music\_red\_revenue\_summary\_a1\_suffix |
-| [每月唱片公司非音樂收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#monthly-music-label-non-music-revenue-summary) | p\_music\_content\_owner\_country\_non\_music\_red\_revenue\_summary\_a1\_suffix | music\_content\_owner\_country\_non\_music\_red\_revenue\_summary\_a1\_suffix |
-| [非音樂影片的每月訂閱收益](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#monthly-subscriptions-non-music-videos-revenue) | p\_content\_owner\_non\_music\_red\_revenue\_raw\_a1\_suffix | content\_owner\_non\_music\_red\_revenue\_raw\_a1\_suffix |
-| [每月訂閱非音樂資產收益](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#monthly-subscriptions-non-music-assets-revenuee) | p\_content\_owner\_non\_music\_asset\_red\_revenue\_raw\_a1\_suffix | content\_owner\_non\_music\_asset\_red\_revenue\_raw\_a1\_suffix |
-| [每週非音樂收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#weekly-non-music-revenue-summary) | p\_music\_content\_owner\_country\_non\_music\_red\_revenue\_summary\_weekly\_a1\_suffix | music\_content\_owner\_country\_non\_music\_red\_revenue\_summary\_weekly\_a1\_suffix |
-| [每月音樂唱片公司資產訂閱調整項收益原始資料](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#monthly-music-label-asset-subscription-adjustment-revenue-raw) | p\_music\_content\_owner\_asset\_red\_adjustment\_revenue\_raw\_a1\_suffix | music\_content\_owner\_asset\_red\_adjustment\_revenue\_raw\_a1\_suffix |
-| [月費方案調整項音樂影片原始資料](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#monthly-subscriptions-adjustment-music-video-raw) | p\_music\_content\_owner\_red\_adjustment\_revenue\_raw\_a1\_suffix | music\_content\_owner\_red\_adjustment\_revenue\_raw\_a1\_suffix |
-| [每月音樂唱片公司鄉村音樂訂閱調整項收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#monthly-music-label-country-music-subscription-adjustment-revenue-summary) | p\_music\_content\_owner\_country\_music\_red\_adjustment\_revenue\_summary\_a1\_suffix | music\_content\_owner\_country\_music\_red\_adjustment\_revenue\_summary\_a1\_suffix |
-| [每月音樂唱片公司國家/地區非音樂訂閱調整項收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#monthly-music-label-country-non-music-subscription-adjustment-revenue-summary) | p\_music\_content\_owner\_country\_non\_music\_red\_adjustment\_revenue\_summary\_a1\_suffix | music\_content\_owner\_country\_non\_music\_red\_adjustment\_revenue\_summary\_a1\_suffix |
-| [每月非音樂資產訂閱調整項收益原始資料](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#monthly-non-music-asset-subscription-adjustment-revenue-raw) | p\_content\_owner\_non\_music\_asset\_red\_adjustment\_revenue\_raw\_a1\_suffix | content\_owner\_non\_music\_asset\_red\_adjustment\_revenue\_raw\_a1\_suffix |
-| [每月非音樂訂閱調整項收益原始資料](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#monthly-non-music-subscription-adjustment-revenue-raw) | p\_content\_owner\_non\_music\_red\_adjustment\_revenue\_raw\_a1\_suffix | content\_owner\_non\_music\_red\_adjustment\_revenue\_raw\_a1\_suffix |
-| [每月音樂影片訂閱調整項收益原始資料](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#monthly-music-video-subscription-adjustment-revenue-raw) | p\_content\_owner\_music\_video\_red\_adjustment\_revenue\_raw\_a1\_suffix | content\_owner\_music\_video\_red\_adjustment\_revenue\_raw\_a1\_suffix |
-| [每月音樂資產訂閱調整項收益原始資料](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#monthly-music-asset-subscription-adjustment-revenue-raw) | p\_content\_owner\_music\_asset\_red\_adjustment\_revenue\_raw\_a1\_suffix | content\_owner\_music\_asset\_red\_adjustment\_revenue\_raw\_a1\_suffix |
-| [每月詞曲出版社資產訂閱調整項收益原始資料](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#monthly-music-publisher-asset-subscription-adjustment-revenue-raw) | p\_publisher\_content\_owner\_asset\_red\_adjustment\_revenue\_raw\_a1\_suffix | publisher\_content\_owner\_asset\_red\_adjustment\_revenue\_raw\_a1\_suffix |
-| [每月詞曲出版社國家/地區非音樂訂閱調整項收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#monthly-music-publisher-country-non-music-subscription-adjustment-revenue-summary) | p\_publisher\_content\_owner\_country\_non\_music\_red\_adjustment\_revenue\_summary\_a1\_suffix | publisher\_content\_owner\_country\_non\_music\_red\_adjustment\_revenue\_summary\_a1\_suffix |
-| [每月詞曲出版社國家/地區音樂訂閱調整項收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#monthly-music-publisher-country-music-subscription-adjustment-revenue-summary) | p\_publisher\_content\_owner\_country\_music\_red\_adjustment\_revenue\_summary\_a1\_suffix | publisher\_content\_owner\_country\_music\_red\_adjustment\_revenue\_summary\_a1\_suffix |
-| **Shorts 收益報表** |  |  |
-| [每月 YouTube Shorts 唱片公司內容擁有者收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/shorts?hl=zh-tw#monthly-youtube-shorts-music-label-content-owner-revenue-summary) | p\_music\_content\_owner\_shorts\_revenue\_summary\_a1\_suffix | music\_content\_owner\_shorts\_revenue\_summary\_a1\_suffix |
-| [每月 YouTube Shorts 詞曲出版社內容擁有者收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/shorts?hl=zh-tw#monthly-youtube-shorts-music-publisher-content-owner-revenue-summary) | p\_publisher\_content\_owner\_shorts\_revenue\_summary\_a1\_suffix | publisher\_content\_owner\_shorts\_revenue\_summary\_a1\_suffix |
-| [每月 YouTube Shorts 全球廣告收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/shorts?hl=zh-tw#monthly-youtube-shorts-global-ad-revenue-summary) | p\_content\_owner\_shorts\_global\_ad\_revenue\_summary\_a2\_suffix | content\_owner\_shorts\_global\_ad\_revenue\_summary\_a2\_suffix |
-| [每日 YouTube Shorts 廣告收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/shorts?hl=zh-tw#daily-youtube-shorts-ad-revenue-summary) | p\_content\_owner\_shorts\_day\_ad\_revenue\_summary\_a2\_suffix | content\_owner\_shorts\_day\_ad\_revenue\_summary\_a2\_suffix |
-| [每月 YouTube Shorts 國家/地區廣告收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/shorts?hl=zh-tw#monthly-youtube-shorts-country-ad-revenue-summary) | p\_content\_owner\_shorts\_country\_ad\_revenue\_summary\_a2\_suffix | content\_owner\_shorts\_country\_ad\_revenue\_summary\_a2\_suffix |
-| [每月 YouTube Shorts 廣告收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/shorts?hl=zh-tw#monthly-youtube-shorts-ad-revenue-summary) | p\_content\_owner\_shorts\_ad\_revenue\_summary\_a2\_suffix | content\_owner\_shorts\_ad\_revenue\_summary\_a2\_suffix |
-| [每月 YouTube Shorts 訂閱收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/shorts?hl=zh-tw#monthly-youtube-shorts-subscriptions-revenue-summary) | p\_content\_owner\_shorts\_red\_revenue\_summary\_a1\_suffix | content\_owner\_shorts\_red\_revenue\_summary\_a1\_suffix |
-| [每月 YouTube Shorts 訂閱收益影片摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/shorts?hl=zh-tw#monthly-youtube-shorts-subscriptions-revenue-video-summary) | p\_content\_owner\_shorts\_red\_revenue\_video\_summary\_a1\_suffix | content\_owner\_shorts\_red\_revenue\_video\_summary\_a1\_suffix |
-| **扣繳稅額報表** |  |  |
-| [預扣稅額](https://developers.google.com/youtube/reporting/v1/reports/system_managed/taxes?hl=zh-tw#tax-withholding) | p\_content\_owner\_tax\_withholding\_a1\_suffix | content\_owner\_tax\_withholding\_a1\_suffix |
-| **影片報表** |  |  |
-| [每日影片中繼資料 (1.4 版)](https://developers.google.com/youtube/reporting/v1/reports/system_managed/videos?hl=zh-tw#daily-video-metadata-version-1.4) | p\_content\_owner\_video\_metadata\_a4\_suffix | content\_owner\_video\_metadata\_a4\_suffix |
-| **素材資源報表** |  |  |
-| [每日資產報表](https://developers.google.com/youtube/reporting/v1/reports/system_managed/assets?hl=zh-tw#daily-asset-report-version-1.3) | p\_content\_owner\_asset\_a3\_suffix | content\_owner\_asset\_a3\_suffix |
-| [每日資產衝突](https://developers.google.com/youtube/reporting/v1/reports/system_managed/assets?hl=zh-tw#daily-asset-conflicts-version-1.3) | p\_content\_owner\_asset\_conflict\_a3\_suffix | content\_owner\_asset\_conflict\_a3\_suffix |
-| **參考檔案報表** |  |  |
-| [每週參考資料](https://developers.google.com/youtube/reporting/v1/reports/system_managed/references?hl=zh-tw#weekly-references) | p\_content\_owner\_active\_references\_a1\_suffix | content\_owner\_active\_references\_a1\_suffix |
-| **著作權聲明報表** |  |  |
-| [每日兌換次數 (1.2 版)](https://developers.google.com/youtube/reporting/v1/reports/system_managed/claims?hl=zh-tw#daily-claims-version-1.2) | p\_content\_owner\_active\_claims\_a3\_suffix | content\_owner\_active\_claims\_a3\_suffix |
-| [每月音訊廣告收益聲明](https://developers.google.com/youtube/reporting/v1/reports/system_managed/claims?hl=zh-tw#monthly-ad-revenue-audio-claims) | p\_content\_owner\_claim\_audio\_tier\_revenue\_raw\_a1\_suffix | content\_owner\_claim\_audio\_tier\_revenue\_raw\_a1\_suffix |
-| [每月音訊著作權聲明廣告收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/claims?hl=zh-tw#monthly-ad-revenue-audio-claims-summary) | p\_content\_owner\_claim\_audio\_tier\_revenue\_summary\_a1\_suffix | content\_owner\_claim\_audio\_tier\_revenue\_summary\_a1\_suffix |
+以下各節說明 YouTube 內容擁有者報表的轉換。
 
+### 影片報表
 
+下列報表著重於影片層級的使用者活動、播放位置、流量來源和客層。
 
+#### 使用者活動
 
-提供意見
+YouTube 報表：
+[使用者活動](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#video-user-activity)
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+BigQuery 資料表：
+:   p\_content\_owner\_basic\_a4\_suffix
 
-上次更新時間：2026-06-15 (世界標準時間)。
+BigQuery 檢視畫面：
+:   content\_owner\_basic\_a4\_suffix
 
+#### 使用者活動 (依省分組)
 
+YouTube 報表：
+[依省份劃分的使用者活動](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#video-province)
 
+BigQuery 資料表：
+:   p\_content\_owner\_province\_a3\_suffix
 
-想進一步說明嗎？
+BigQuery 檢視畫面：
+:   content\_owner\_province\_3\_suffix
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-15 (世界標準時間)。"],[],[]]
+#### 播放位置
+
+YouTube 報表：
+[播放位置](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#video-playback-locations)
+
+BigQuery 資料表：
+:   p\_content\_owner\_playback\_location\_a3\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_playback\_location\_a3\_suffix
+
+#### 流量來源
+
+YouTube 報表：
+[流量來源](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#video-traffic-sources)
+
+BigQuery 資料表：
+:   p\_content\_owner\_traffic\_source\_a3\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_traffic\_source\_a3\_suffix
+
+#### 裝置類型和作業系統
+
+YouTube 報表：
+[裝置類型和作業系統](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#video-device-type-and-operating-system)
+
+BigQuery 資料表：
+:   p\_content\_owner\_device\_os\_a3\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_device\_os\_a3\_suffix
+
+#### 觀眾客層
+
+YouTube 報表：
+[觀眾客層](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#video-viewer-demographics)
+
+BigQuery 資料表：
+:   p\_content\_owner\_demographics\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_demographics\_a1\_suffix
+
+#### 內容共享 (依平台分組)
+
+YouTube 報表：
+[依平台分享內容](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#video-content-sharing)
+
+BigQuery 資料表：
+:   p\_content\_owner\_sharing\_service\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_sharing\_service\_a1\_suffix
+
+#### 註解
+
+YouTube 報表：
+[註解](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#video-annotations)
+
+BigQuery 資料表：
+:   p\_content\_owner\_annotations\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_annotations\_a1\_suffix
+
+#### 資訊卡
+
+YouTube 報表：
+[資訊卡](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#video-cards)
+
+BigQuery 資料表：
+:   p\_content\_owner\_cards\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_cards\_a1\_suffix
+
+#### 結束畫面
+
+YouTube 報表：
+[結束畫面](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#video-end-screens)
+
+BigQuery 資料表：
+:   p\_content\_owner\_end\_screens\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_end\_screens\_a1\_suffix
+
+#### 字幕
+
+YouTube 報表：
+[字幕](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#video-subtitles)
+
+BigQuery 資料表：
+:   p\_content\_owner\_subtitles\_a3\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_subtitles\_a3\_suffix
+
+#### 合併
+
+YouTube 報表：
+[合併](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#video-combined)
+
+BigQuery 資料表：
+:   p\_content\_owner\_combined\_a3\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_combined\_a3\_suffix
+
+### 播放清單報表
+
+下列報表包含播放清單的成效指標和使用者活動。
+
+#### 使用者活動
+
+YouTube 報表：
+[使用者活動](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#playlist-user-activity)
+
+BigQuery 資料表：
+:   p\_content\_owner\_playlist\_basic\_a2\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_playlist\_basic\_a2\_suffix
+
+#### 使用者活動 (依省分組)
+
+YouTube 報表：
+[依省份劃分的使用者活動](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#playlist-province)
+
+BigQuery 資料表：
+:   p\_content\_owner\_playlist\_province\_a2\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_playlist\_province\_a2\_suffix
+
+#### 播放位置
+
+YouTube 報表：
+[播放位置](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#playlist-playback-locations)
+
+BigQuery 資料表：
+:   p\_content\_owner\_playlist\_playback\_location\_a2\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_playlist\_playback\_location\_a2
+
+#### 流量來源
+
+YouTube 報表：
+[流量來源](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#playlist-traffic-sources)
+
+BigQuery 資料表：
+:   p\_content\_owner\_playlist\_traffic\_source\_a2
+
+BigQuery 檢視畫面：
+:   content\_owner\_playlist\_traffic\_source\_a2\_suffix
+
+#### 裝置類型和作業系統
+
+YouTube 報表：
+[裝置類型和作業系統](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#playlist-device-type-and-operating-system)
+
+BigQuery 資料表：
+:   p\_content\_owner\_playlist\_device\_os\_a2\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_playlist\_device\_os\_a2\_suffix
+
+#### 合併
+
+YouTube 報表：
+[合併](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#playlist-combined)
+
+BigQuery 資料表：
+:   p\_content\_owner\_playlist\_combined\_a2\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_playlist\_combined\_a2\_suffix
+
+### 廣告費率報表
+
+下列報表會顯示主要廣告指標和交易率。
+
+#### 廣告費率報表
+
+YouTube 報表：
+[廣告費率報表](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#ad-rate-reports)
+
+BigQuery 資料表：
+:   p\_content\_owner\_ad\_rates\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_ad\_rates\_a1\_suffix
+
+### 預估收益報表
+
+下列報表會預估影片和資產層級的收益。
+
+#### 估算的影片收益
+
+YouTube 報表：
+[影片預估收益](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#estimated-revenue-videos)
+
+BigQuery 資料表：
+:   p\_content\_owner\_estimated\_revenue\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_estimated\_revenue\_a1\_suffix
+
+#### 估算的資產收益
+
+YouTube 報表：
+[預估資產收益](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#estimated-revenue-assets)
+
+BigQuery 資料表：
+:   p\_content\_owner\_asset\_estimated\_revenue\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_asset\_estimated\_revenue\_a1\_suffix
+
+### 資產報表
+
+下列報表著重於素材資源成效、使用者參與度和中繼資料。
+
+#### 使用者活動
+
+YouTube 報表：
+[使用者活動](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#asset-user-activity)
+
+BigQuery 資料表：
+:   p\_content\_owner\_asset\_basic\_a3\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_asset\_basic\_a3\_suffix
+
+#### 使用者活動 (依省分組)
+
+YouTube 報表：
+[依省份劃分的使用者活動](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#asset-province)
+
+BigQuery 資料表：
+:   p\_content\_owner\_asset\_province\_a3\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_asset\_province\_a3\_suffix
+
+#### 影片播放位置
+
+YouTube 報表：
+[影片播放位置](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#asset-playback-locations)
+
+BigQuery 資料表：
+:   p\_content\_owner\_asset\_playback\_location\_a3\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_asset\_playback\_location\_a3\_suffix
+
+#### 流量來源
+
+YouTube 報表：
+[流量來源](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#asset-traffic-sources)
+
+BigQuery 資料表：
+:   p\_content\_owner\_asset\_traffic\_source\_a3\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_asset\_traffic\_source\_a3\_suffix
+
+#### 裝置類型和作業系統
+
+YouTube 報表：
+[裝置類型和作業系統](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#asset-device-type-and-operating-system)
+
+BigQuery 資料表：
+:   p\_content\_owner\_asset\_device\_os\_a3\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_asset\_device\_os\_a3\_suffix
+
+#### 觀眾客層
+
+YouTube 報表：
+[觀眾客層](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#asset-viewer-demographics)
+
+BigQuery 資料表：
+:   p\_content\_owner\_asset\_demographics\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_asset\_demographics\_a1\_suffix
+
+#### 內容共享 (依平台分組)
+
+YouTube 報表：
+[依平台分享內容](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#asset-content-sharing)
+
+BigQuery 資料表：
+:   p\_content\_owner\_asset\_sharing\_service\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_asset\_sharing\_service\_a1\_suffix
+
+#### 註解
+
+YouTube 報表：
+[註解](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#asset-annotations)
+
+BigQuery 資料表：
+:   p\_content\_owner\_asset\_annotations\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_asset\_annotations\_a1\_suffix
+
+#### 資訊卡
+
+YouTube 報表：
+[資訊卡](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#asset-cards)
+
+BigQuery 資料表：
+:   p\_content\_owner\_asset\_cards\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_asset\_cards\_a1\_suffix
+
+#### 結束畫面
+
+YouTube 報表：
+[結束畫面](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#asset-end-screens)
+
+BigQuery 資料表：
+:   p\_content\_owner\_asset\_end\_screens\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_asset\_end\_screens\_a1\_suffix
+
+#### 合併
+
+YouTube 報表：
+[合併](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#asset-combined)
+
+BigQuery 資料表：
+:   p\_content\_owner\_asset\_combined\_a3\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_asset\_combined\_a3\_suffix
+
+### 觸及報表
+
+下列報表涵蓋頻道內容的觀眾觸及率指標。
+
+#### 觸及基本版
+
+YouTube 報表：
+[觸及基本](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#reach-reports)
+
+BigQuery 資料表：
+:   p\_content\_owner\_reach\_basic\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_reach\_basic\_a1\_suffix
+
+#### 綜合觸及
+
+YouTube 報表：
+[合併觸及](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#reach-reports)
+
+BigQuery 資料表：
+:   p\_content\_owner\_reach\_combined\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_reach\_combined\_a1\_suffix
+
+## YouTube 系統代管報表
+
+以下各節說明 YouTube 系統管理的報表轉換。
+
+### 財務摘要報表
+
+下列報表會彙整聯播網的付款和帳單資料。
+
+#### 每月付款摘要
+
+YouTube 報表：
+[每月付款摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/financial-summaries?hl=zh-tw#monthly-payments-summary)
+
+BigQuery 資料表：
+:   p\_content\_owner\_payments\_summary\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_payments\_summary\_a1\_suffix
+
+### 廣告收益報表
+
+下列報表提供不同維度的廣告收益摘要，例如國家/地區、影片和資產。
+
+#### 每月全球廣告收益摘要
+
+YouTube 報表：
+[每月全球廣告收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#monthly-global-ad-revenue-summary)
+
+BigQuery 資料表：
+:   p\_content\_owner\_global\_ad\_revenue\_summary\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_global\_ad\_revenue\_summary\_a1\_suffix
+
+#### 每月國家/地區廣告收益摘要
+
+YouTube 報表：
+[每月國家/地區廣告收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#monthly-country-ad-revenue-summary)
+
+BigQuery 資料表：
+:   p\_content\_owner\_country\_ad\_revenue\_summary\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_country\_ad\_revenue\_summary\_a1\_suffix
+
+#### 每月每日廣告收益摘要
+
+YouTube 報表：
+[每月每日廣告收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#monthly-day-ad-revenue-summary)
+
+BigQuery 資料表：
+:   p\_content\_owner\_day\_ad\_revenue\_summary\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_day\_ad\_revenue\_summary\_a1\_suffix
+
+#### 每週全球廣告收益摘要
+
+YouTube 報表：
+[每週全球廣告收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#weekly-global-ad-revenue-summary)
+
+BigQuery 資料表：
+:   p\_content\_owner\_global\_ad\_revenue\_summary\_weekly\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_global\_ad\_revenue\_summary\_weekly\_a1\_suffix
+
+#### 每週國家/地區廣告收益摘要
+
+YouTube 報表：
+[每週國家/地區廣告收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#weekly-country-ad-revenue-summary)
+
+BigQuery 資料表：
+:   p\_content\_owner\_country\_ad\_revenue\_summary\_weekly\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_country\_ad\_revenue\_summary\_weekly\_a1\_suffix
+
+#### 每週每日廣告收益摘要
+
+YouTube 報表：
+[每週每日廣告收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#weekly-day-ad-revenue-summary)
+
+BigQuery 資料表：
+:   p\_content\_owner\_day\_ad\_revenue\_summary\_weekly\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_day\_ad\_revenue\_summary\_weekly\_a1\_suffix
+
+#### 每部影片的匯總廣告收益
+
+YouTube 報表：
+[每部影片的匯總廣告收益](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#aggregate-ad-revenue-per-video)
+
+BigQuery 資料表：
+:   p\_content\_owner\_ad\_revenue\_summary\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_ad\_revenue\_summary\_a1\_suffix
+
+#### 每週影片廣告收益摘要
+
+YouTube 報表：
+[每週影片廣告收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#weekly-video-ad-revenue-summary)
+
+BigQuery 資料表：
+:   p\_content\_owner\_ad\_revenue\_summary\_weekly\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_ad\_revenue\_summary\_weekly\_a1\_suffix
+
+#### 每週影片廣告收益
+
+YouTube 報表：
+[每週影片廣告收益](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#weekly-video-ad-revenue)
+
+BigQuery 資料表：
+:   p\_content\_owner\_ad\_revenue\_raw\_weekly\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_ad\_revenue\_raw\_weekly\_a1\_suffix
+
+#### 每部影片的每日廣告收益
+
+YouTube 報表：
+[每部影片的每日廣告收益](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#daily-ad-revenue-per-video)
+
+BigQuery 資料表：
+:   p\_content\_owner\_ad\_revenue\_raw\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_ad\_revenue\_raw\_a1\_suffix
+
+#### 每項資產的匯總廣告收益
+
+YouTube 報表：
+[每項資產的廣告收益總計](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#aggregate-ad-revenue-per-asset)
+
+BigQuery 資料表：
+:   p\_content\_owner\_asset\_ad\_revenue\_summary\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_asset\_ad\_revenue\_summary\_a1\_suffix
+
+#### 每項資產的每日廣告收益
+
+YouTube 報表：
+[每日每項資產的廣告收益](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#daily-ad-revenue-per-asset)
+
+BigQuery 資料表：
+:   p\_content\_owner\_asset\_ad\_revenue\_raw\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_asset\_ad\_revenue\_raw\_a1\_suffix
+
+#### 每月聲明廣告收益摘要
+
+YouTube 報表：
+[每月著作權聲明廣告收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#monthly-claim-ad-revenue-summary)
+
+BigQuery 資料表：
+:   p\_content\_owner\_claim\_ad\_revenue\_summary\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_claim\_ad\_revenue\_summary\_a1\_suffix
+
+#### 每週著作權聲明廣告收益摘要
+
+YouTube 報表：
+[每週著作權聲明廣告收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#weekly-claim-ad-revenue-summary)
+
+BigQuery 資料表：
+:   p\_content\_owner\_claim\_ad\_revenue\_summary\_weekly\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_claim\_ad\_revenue\_summary\_weekly\_a1\_suffix
+
+#### 每月著作權聲明廣告收益
+
+YouTube 報表：
+[每月著作權聲明廣告收益](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#monthly-claim-ad-revenue)
+
+BigQuery 資料表：
+:   p\_content\_owner\_claim\_ad\_revenue\_raw\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_claim\_ad\_revenue\_raw\_a1\_suffix
+
+#### 每週著作權聲明廣告收益
+
+YouTube 報表：
+[每週著作權聲明廣告收益](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#weekly-claim-ad-revenue)
+
+BigQuery 資料表：
+:   p\_content\_owner\_claim\_ad\_revenue\_raw\_weekly\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_claim\_ad\_revenue\_raw\_weekly\_a1\_suffix
+
+#### 每月全球廣告調整項收益摘要
+
+YouTube 報表：
+[每月全球廣告調整項收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#monthly-global-ad-adjustment-revenue-summary)
+
+BigQuery 資料表：
+:   p\_content\_owner\_global\_ad\_adjustment\_revenue\_summary\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_global\_ad\_adjustment\_revenue\_summary\_a1\_suffix
+
+#### 每月素材資源廣告調整項收益摘要
+
+YouTube 報表：
+[每月素材資源廣告調整項收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#monthly-asset-ad-adjustment-revenue-summary)
+
+BigQuery 資料表：
+:   p\_content\_owner\_asset\_ad\_adjustment\_revenue\_summary\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_asset\_ad\_adjustment\_revenue\_summary\_a1\_suffix
+
+#### 每月素材資源廣告調整項收益
+
+YouTube 報表：
+[每月素材資源廣告調整項收益](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#monthly-asset-ad-adjustment-revenue)
+
+BigQuery 資料表：
+:   p\_content\_owner\_asset\_ad\_adjustment\_revenue\_raw\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_asset\_ad\_adjustment\_revenue\_raw\_a1\_suffix
+
+#### 每月影片廣告調整項收益摘要
+
+YouTube 報表：
+[每月影片廣告調整項收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#monthly-video-ad-adjustment-revenue-summary)
+
+BigQuery 資料表：
+:   p\_content\_owner\_ad\_adjustment\_revenue\_summary\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_ad\_adjustment\_revenue\_summary\_a1\_suffix
+
+#### 每月影片廣告調整項收益原始資料
+
+YouTube 報表：
+[每月影片廣告調整項收益原始資料](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#monthly-video-ad-adjustment-revenue-raw)
+
+BigQuery 資料表：
+:   p\_content\_owner\_ad\_adjustment\_revenue\_raw\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_ad\_adjustment\_revenue\_raw\_a1\_suffix
+
+#### 每月著作權聲明廣告調整項收益摘要
+
+YouTube 報表：
+[每月聲明廣告調整項收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#monthly-claim-ad-adjustment-revenue-summary)
+
+BigQuery 資料表：
+:   p\_content\_owner\_claim\_ad\_adjustment\_revenue\_summary\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_claim\_ad\_adjustment\_revenue\_summary\_a1\_suffix
+
+#### 每月著作權聲明廣告調整項收益
+
+YouTube 報表：
+[每月著作權聲明廣告調整項收益](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#monthly-claim-ad-adjustment-revenue)
+
+BigQuery 資料表：
+:   p\_content\_owner\_claim\_ad\_adjustment\_revenue\_raw\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_claim\_ad\_adjustment\_revenue\_raw\_a1\_suffix
+
+#### 每月國家/地區廣告調整項收益摘要
+
+YouTube 報表：
+[每月國家/地區廣告調整項收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#monthly-country-ad-adjustment-revenue-summary)
+
+BigQuery 資料表：
+:   p\_content\_owner\_country\_ad\_adjustment\_revenue\_summary\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_country\_ad\_adjustment\_revenue\_summary\_a1\_suffix
+
+#### 每月每日廣告調整項收益摘要
+
+YouTube 報表：
+[每月每日廣告調整項收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#monthly-day-ad-adjustment-revenue-summary)
+
+BigQuery 資料表：
+:   p\_content\_owner\_day\_ad\_adjustment\_revenue\_summary\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_day\_ad\_adjustment\_revenue\_summary\_a1\_suffix
+
+### 訂閱收益報表
+
+下列報表會彙整影片和資產的音樂與非音樂訂閱收益。
+
+#### 每月音樂收益摘要
+
+YouTube 報表：
+[每月音樂收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#monthly-music-revenue-summary)
+
+BigQuery 資料表：
+:   p\_content\_owner\_country\_music\_red\_revenue\_summary\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_country\_music\_red\_revenue\_summary\_a1\_suffix
+
+#### 每月音樂唱片公司影片收益
+
+YouTube 報表：
+[每月唱片公司影片收益](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#monthly-music-label-video-revenue)
+
+BigQuery 資料表：
+:   p\_music\_content\_owner\_red\_revenue\_raw\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   music\_content\_owner\_red\_revenue\_raw\_a1\_suffix
+
+#### 每月音樂唱片公司資產收益
+
+YouTube 報表：
+[每月唱片公司資產收益](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#monthly-music-label-assets-revenue)
+
+BigQuery 資料表：
+:   p\_music\_content\_owner\_asset\_red\_revenue\_raw\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   music\_content\_owner\_asset\_red\_revenue\_raw\_a1\_suffix
+
+#### 每月音樂唱片公司訂閱者收益摘要
+
+YouTube 報表：
+[每月唱片公司訂閱者收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#monthly-music-label-subscriber-revenue-summary)
+
+BigQuery 資料表：
+:   p\_music\_content\_owner\_subscriber\_red\_revenue\_summary\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   music\_content\_owner\_subscriber\_red\_revenue\_summary\_a1\_suffix
+
+#### 每月詞曲出版社收益摘要
+
+YouTube 報表：
+[每月詞曲出版社收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#monthly-music-publisher-revenue-summary)
+
+BigQuery 資料表：
+:   p\_publisher\_content\_owner\_music\_red\_revenue\_summary\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   publisher\_content\_owner\_music\_red\_revenue\_summary\_a1\_suffix
+
+#### 每月詞曲出版社訂閱收益摘要
+
+YouTube 報表：
+[每月詞曲出版社訂閱收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#monthly-music-publisher-subscription-revenue-summary)
+
+BigQuery 資料表：
+:   p\_publisher\_content\_owner\_subscriber\_red\_revenue\_summary\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   publisher\_content\_owner\_subscriber\_red\_revenue\_summary\_a1\_suffix
+
+#### 每月詞曲出版社非音樂訂閱收益摘要
+
+YouTube 報表：
+[每月詞曲出版社非音樂訂閱收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#monthly-music-publisher-non-music-subscription-revenue-summary)
+
+BigQuery 資料表：
+:   p\_publisher\_content\_owner\_non\_music\_red\_revenue\_summary\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   publisher\_content\_owner\_non\_music\_red\_revenue\_summary\_a1\_suffix
+
+#### 每月唱片公司音樂收益摘要
+
+YouTube 報表：
+[每月唱片公司音樂收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#monthly-music-label-music-revenue-summary)
+
+BigQuery 資料表：
+:   p\_music\_content\_owner\_country\_music\_red\_revenue\_summary\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   music\_content\_owner\_country\_music\_red\_revenue\_summary\_a1\_suffix
+
+#### 按月訂閱音樂影片收益
+
+YouTube 報表：
+[每月訂閱音樂影片收益](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#monthly-subscriptions-music-video-revenue)
+
+BigQuery 資料表：
+:   p\_content\_owner\_music\_red\_revenue\_raw\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_music\_red\_revenue\_raw\_a1\_suffix
+
+#### 每月訂閱音樂資產收益
+
+YouTube 報表：
+[每月訂閱音樂資產收益](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#monthly-subscriptions-music-assets-revenue)
+
+BigQuery 資料表：
+:   p\_content\_owner\_music\_asset\_red\_revenue\_raw\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_music\_asset\_red\_revenue\_raw\_a1\_suffix
+
+#### 每週音樂收益摘要
+
+YouTube 報表：
+[每週音樂收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#weekly-music-revenue-summary)
+
+BigQuery 資料表：
+:   p\_music\_content\_owner\_country\_music\_red\_revenue\_summary\_weekly\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   music\_content\_owner\_country\_music\_red\_revenue\_summary\_weekly\_a1\_suffix
+
+#### 音樂唱片公司每週影片收益
+
+YouTube 報表：
+[每週唱片公司影片收益](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#weekly-music-label-videos-revenue)
+
+BigQuery 資料表：
+:   p\_music\_content\_owner\_red\_revenue\_raw\_weekly\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   music\_content\_owner\_red\_revenue\_raw\_weekly\_a1\_suffix
+
+#### 每週音樂唱片公司資產收益
+
+YouTube 報表：
+[每週唱片公司資產收益](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#weekly-music-label-assets-revenue)
+
+BigQuery 資料表：
+:   p\_music\_content\_owner\_asset\_red\_revenue\_raw\_weekly\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   music\_content\_owner\_asset\_red\_revenue\_raw\_weekly\_a1\_suffix
+
+#### 每月非音樂摘要
+
+YouTube 報表：
+[每月非音樂摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#monthly-non-music-summary)
+
+BigQuery 資料表：
+:   p\_content\_owner\_country\_non\_music\_red\_revenue\_summary\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_country\_non\_music\_red\_revenue\_summary\_a1\_suffix
+
+#### 每月音樂唱片公司非音樂收益摘要
+
+YouTube 報表：
+[每月唱片公司非音樂收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#monthly-music-label-non-music-revenue-summary)
+
+BigQuery 資料表：
+:   p\_music\_content\_owner\_country\_non\_music\_red\_revenue\_summary\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   music\_content\_owner\_country\_non\_music\_red\_revenue\_summary\_a1\_suffix
+
+#### 非音樂影片的每月訂閱收益
+
+YouTube 報表：
+[每月訂閱非音樂影片收益](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#monthly-subscriptions-non-music-videos-revenue)
+
+BigQuery 資料表：
+:   p\_content\_owner\_non\_music\_red\_revenue\_raw\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_non\_music\_red\_revenue\_raw\_a1\_suffix
+
+#### 非音樂資產的每月訂閱收益
+
+YouTube 報表：
+[每月訂閱非音樂素材資源收益](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#monthly-subscriptions-non-music-assets-revenue)
+
+BigQuery 資料表：
+:   p\_content\_owner\_non\_music\_asset\_red\_revenue\_raw\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_non\_music\_asset\_red\_revenue\_raw\_a1\_suffix
+
+#### 每週非音樂收益摘要
+
+YouTube 報表：
+[每週非音樂收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#weekly-non-music-revenue-summary)
+
+BigQuery 資料表：
+:   p\_music\_content\_owner\_country\_non\_music\_red\_revenue\_summary\_weekly\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   music\_content\_owner\_country\_non\_music\_red\_revenue\_summary\_weekly\_a1\_suffix
+
+#### 每月音樂唱片公司資產訂閱調整項收益原始資料
+
+YouTube 報表：
+[每月唱片公司資產訂閱調整項收益原始資料](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#monthly-music-label-asset-subscription-adjustment-revenue-raw)
+
+BigQuery 資料表：
+:   p\_music\_content\_owner\_asset\_red\_adjustment\_revenue\_raw\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   music\_content\_owner\_asset\_red\_adjustment\_revenue\_raw\_a1\_suffix
+
+#### 按月訂閱調整音樂影片原始
+
+YouTube 報表：
+[每月訂閱調整音樂影片原始資料](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#monthly-subscriptions-adjustment-music-video-raw)
+
+BigQuery 資料表：
+:   p\_music\_content\_owner\_red\_adjustment\_revenue\_raw\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   music\_content\_owner\_red\_adjustment\_revenue\_raw\_a1\_suffix
+
+#### 每月唱片公司鄉村音樂訂閱調整項收益摘要
+
+YouTube 報表：
+[每月唱片公司國家/地區音樂訂閱調整項收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#monthly-music-label-country-music-subscription-adjustment-revenue-summary)
+
+BigQuery 資料表：
+:   p\_music\_content\_owner\_country\_music\_red\_adjustment\_revenue\_summary\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   music\_content\_owner\_country\_music\_red\_adjustment\_revenue\_summary\_a1\_suffix
+
+#### 每月音樂唱片公司國家/地區非音樂訂閱調整收益摘要
+
+YouTube 報表：
+[每月唱片公司國家/地區非音樂訂閱調整項收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#monthly-music-label-country-non-music-subscription-adjustment-revenue-summary)
+
+BigQuery 資料表：
+:   p\_music\_content\_owner\_country\_non\_music\_red\_adjustment\_revenue\_summary\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   music\_content\_owner\_country\_non\_music\_red\_adjustment\_revenue\_summary\_a1\_suffix
+
+#### 每月非音樂資產訂閱調整項收益原始資料
+
+YouTube 報表：
+[每月非音樂資產訂閱調整項收益原始資料](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#monthly-non-music-asset-subscription-adjustment-revenue-raw)
+
+BigQuery 資料表：
+:   p\_content\_owner\_non\_music\_asset\_red\_adjustment\_revenue\_raw\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_non\_music\_asset\_red\_adjustment\_revenue\_raw\_a1\_suffix
+
+#### 每月非音樂訂閱調整項收益原始資料
+
+YouTube 報表：
+[每月非音樂訂閱調整項收益原始資料](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#monthly-non-music-subscription-adjustment-revenue-raw)
+
+BigQuery 資料表：
+:   p\_content\_owner\_non\_music\_red\_adjustment\_revenue\_raw\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_non\_music\_red\_adjustment\_revenue\_raw\_a1\_suffix
+
+#### 每月音樂影片訂閱調整項收益原始資料
+
+YouTube 報表：
+[每月音樂影片訂閱調整項收益原始資料](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#monthly-music-video-subscription-adjustment-revenue-raw)
+
+BigQuery 資料表：
+:   p\_content\_owner\_music\_video\_red\_adjustment\_revenue\_raw\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_music\_video\_red\_adjustment\_revenue\_raw\_a1\_suffix
+
+#### 每月音樂資產訂閱調整項收益原始資料
+
+YouTube 報表：
+[每月音樂資產訂閱調整項收益原始資料](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#monthly-music-asset-subscription-adjustment-revenue-raw)
+
+BigQuery 資料表：
+:   p\_content\_owner\_music\_asset\_red\_adjustment\_revenue\_raw\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   content\_owner\_music\_asset\_red\_adjustment\_revenue\_raw\_a1\_suffix
+
+#### 每月詞曲出版社素材訂閱調整項收益原始資料
+
+YouTube 報表：
+[每月詞曲出版社資產訂閱調整收益原始資料](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#monthly-music-publisher-asset-subscription-adjustment-revenue-raw)
+
+BigQuery 資料表：
+:   p\_publisher\_content\_owner\_asset\_red\_adjustment\_revenue\_raw\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   publisher\_content\_owner\_asset\_red\_adjustment\_revenue\_raw\_a1\_suffix
+
+#### 每月詞曲出版社國家/地區非音樂訂閱調整收益摘要
+
+YouTube 報表：
+[每月詞曲出版社國家/地區非音樂訂閱調整收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#monthly-music-publisher-country-non-music-subscription-adjustment-revenue-summary)
+
+BigQuery 資料表：
+:   p\_publisher\_content\_owner\_country\_non\_music\_red\_adjustment\_revenue\_summary\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   publisher\_content\_owner\_country\_non\_music\_red\_adjustment\_revenue\_summary\_a1\_suffix
+
+#### 每月詞曲出版社鄉村音樂訂閱調整項收益摘要
+
+YouTube 報表：
+[每月詞曲出版社國家/地區音樂訂閱調整收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#monthly-music-publisher-country-music-subscription-adjustment-revenue-summary)
+
+BigQuery 資料表：
+:   p\_publisher\_content\_owner\_country\_music\_red\_adjustment\_revenue\_summary\_a1\_suffix
+
+BigQuery 檢視畫面：
+:   publisher\_content\_owner\_country\_music\_red\_adjustment\_revenue\_summary\_a1\_suffix
+
+### YouTube Shorts 收益報表
+
+下列報表會匯總 YouTube Shorts 的收益和參與度指標。

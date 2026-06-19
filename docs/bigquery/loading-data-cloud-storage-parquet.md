@@ -1147,3 +1147,17 @@ repeated <element-type> <name>
 * 半形波浪號 (`~`)，以 Unicode 規則運算式 `\u007E` 表示。
 
 如需其他規範，請參閱「[資料欄名稱](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#column_names)」。
+
+BigQuery Storage Read API 和 BigQuery Storage Write API 都支援擴充的資料欄字元。如要搭配 BigQuery Storage Read API 使用擴充的 Unicode 字元清單，您必須設定旗標。您可以使用 `displayName` 屬性擷取資料欄名稱。以下範例說明如何使用 Python 用戶端設定旗標：
+
+```
+from google.cloud.bigquery_storage import types
+requested_session = types.ReadSession()
+
+#set avro serialization options for flexible column.
+options = types.AvroSerializationOptions()
+options.enable_display_name_attribute = True
+requested_session.read_options.avro_serialization_options = options
+```
+
+如要透過 BigQuery Storage Write API 使用擴充的 Unicode 字元清單，您必須提供含有

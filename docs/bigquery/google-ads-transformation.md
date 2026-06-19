@@ -302,5 +302,4 @@ Google Ads API Resource:
 | ad\_group\_ad\_ad\_expanded\_text\_ad\_headline\_part3 | The third part of the ad's headline. | ExpandedTextAdHeadlinePart3 |
 | ad\_group\_ad\_ad\_expanded\_text\_ad\_path1 | The text that can appear alongside the ad's displayed URL. | Path1 |
 | ad\_group\_ad\_ad\_expanded\_text\_ad\_path2 | Additional text that can appear alongside the ad's displayed URL. | Path2 |
-| ad\_group\_ad\_ad\_final\_app\_urls | A list of final app URLs that will be used on mobile if the user has the specific app installed. | CreativeFinalAppUrls |
-| ad\_group\_ad\_ad\_final\_mobile\_urls | The list of possible final mobile URLs after all cross-domain redirects for the ad. | CreativeFinalMobileUrls |
+| ad\_group\_ad\_ad\_final\_app\_urls |

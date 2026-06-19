@@ -39,13 +39,14 @@
 * patchUpdateCell
 * delDeleteCell
 * getGetChartImageFromLogic
-* getMe
-* getListUsers
-* postDeactivateUser
+* postExportProject
 * postCreateThread
 * getListThreads
 * getGetThread
 * postContinueThread
+* getMe
+* getListUsers
+* postDeactivateUser
 
 [API docs by Redocly](https://redocly.com/redoc/)
 
@@ -2503,6 +2504,4 @@ Copy
 
 |  |  |
 | --- | --- |
-| dataConnectionId required | string <uuid>  (DataConnectionId) ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}...Show pattern  Unique ID for a data connection. |
-
-##### Request Body schema: application/json
+| dataConnectionId required | string <uuid>  (DataConnectionId) ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}... |
