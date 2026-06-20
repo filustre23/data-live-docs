@@ -402,7 +402,5 @@ self-describing format, so BigQuery infers the schema.
 
 ```
 LOAD DATA INTO mydataset.table1
-  FROM FILES(
-    format='AVRO',
-    uris = ['gs://bucket/path/file.avro'
+  FROM FILES
 ```

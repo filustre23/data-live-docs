@@ -352,6 +352,7 @@ bq mk \
 
   + 路徑應採用 `gs://translation_target_base_uri/metadata/config/db/schema/` 格式，且必須以 `/` 結尾。
 * `storage_integration_object_name`：指定 Snowflake 儲存空間整合物件的名稱。
+* `max_file_size_mb`：(選用) 指定從 Snowflake 卸載至暫存位置的每個檔案大小上限 (以 MB 為單位)。這個值必須介於 `16` 至 `5120` 之間。預設值為 `512`。
 * `cloud_provider`：輸入 `AWS`、`AZURE` 或 `GCP`，視代管 Snowflake 帳戶的雲端服務供應商而定。
 * `staging_s3_uri`：輸入將做為暫存區使用的 [S3 值區 URI](#preparing-s3-bucket)。只有在 `cloud_provider` 為 `AWS` 時才需要。
 * `aws_access_key_id`：輸入[存取金鑰組](#snowflake_key_pair)。只有在 `cloud_provider` 為 `AWS` 時才需要。
@@ -379,6 +380,7 @@ bq mk \
   "schema": "your_snowflake_schema",
   "service_account": "your_service_account",
   "storage_integration_object_name": "your_storage_integration_object",
+  "max_file_size_mb": "512",
   "staging_s3_uri": "s3://your/s3/bucket/uri",
   "table_name_patterns": ".*",
   "translation_output_gcs_path": "gs://sf_test_translation/output/metadata/config/database_name/schema_name/",
