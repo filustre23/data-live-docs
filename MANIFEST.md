@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-06-20T01:30+00:00_
+_Generated 2026-06-20T08:44+00:00_
 
-**9 sources, 5340 topics total**
+**9 sources, 5341 topics total**
 
 ## airflow
 
@@ -4397,7 +4397,7 @@ _1072 topics_
 
 Upstream: <https://fastapi.tiangolo.com/>
 
-_153 topics_
+_154 topics_
 
 - `fastapi/_llm-test`
 - `fastapi/about/index`
@@ -4522,6 +4522,7 @@ _153 topics_
 - `fastapi/tutorial/extra-data-types`
 - `fastapi/tutorial/extra-models`
 - `fastapi/tutorial/first-steps`
+- `fastapi/tutorial/frontend`
 - `fastapi/tutorial/handling-errors`
 - `fastapi/tutorial/header-param-models`
 - `fastapi/tutorial/header-params`
