@@ -13,7 +13,7 @@ To ensure everyone can use AI, Hex awards monthly credit grants to Editor and Ex
 info
 
 * Credits will go into effect for legacy customers with advance notice to Admins.
-* Customers with annual contracts who wish to purchase add-on credits can contact [[email protected]](/cdn-cgi/l/email-protection#a5d6c4c9c0d6e5cdc0dd8bd1c0c6cd) to update their contract.
+* Customers with annual contracts who wish to purchase add-on credits can contact [[email protected]](/cdn-cgi/l/email-protection#aad9cbc6cfd9eac2cfd284decfc9c2) to update their contract.
 
 ## Credit Consumption[​](#credit-consumption "Direct link to Credit Consumption")
 
