@@ -294,3 +294,7 @@ The identifier case type.
 ## IdentifierRewriteMode
 
 The SQL identifier rewrite mode.
+
+| Enums | |
+| --- | --- |
+| `IDENTIFIER_REWRITE_MODE_UNSPECIFIED` | SQL Identifier rewrite mode is unspecified. |
