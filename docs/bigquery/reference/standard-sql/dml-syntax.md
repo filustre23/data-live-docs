@@ -624,5 +624,6 @@ marks `supply_constrained` as `false`:
 UPDATE dataset.Inventory
 SET quantity = quantity +
   (SELECT quantity FROM dataset.NewArrivals
-   WHERE Inventory.product
+   WHERE Inventory.product = NewArrivals.product),
+    supply_constrained =
 ```
