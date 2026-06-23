@@ -264,7 +264,4 @@ BigQuery 也提供下列[位元匯總](https://docs.cloud.google.com/bigquery/do
 | --- | --- |
 | `CASEexpression  WHEN value THEN result  [WHEN...]  [ELSE else_result]  END` | `CASE expression  WHEN value THEN result  [WHEN...]  [ELSE else_result]  END` |
 | `COALESCE(expression1[, ...])` | `COALESCE(expression1[, ...])` |
-| `DECODE(  expression,  search1, result1  [, search2, result2...]  [, default]  )` | `CASE expression  WHEN value1 THEN result1  [WHEN value2 THEN result2]  [ELSE default]  END` |
-| `GREATEST(value [, ...])` | `GREATEST(value [, ...])` |
-| `LEAST(value [, ...])` | `LEAST(value [, ...])` |
-| `NVL(expression1[, ...])` |  |
+| `DECODE(  expression,  search1, result1  [, search2, result2...]  [, default]  )` |  |

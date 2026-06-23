@@ -151,8 +151,8 @@ follow these steps:
    A new chat panel opens.
 4. In the **Ask a question** field, enter your question and choose a mode:
 
-   * **Thinking** (default): detailed reasoning.
-   * **Fast**: best for most questions.
+   * **Fast** (default): best for most questions.
+   * **Thinking**: detailed reasoning.
 
    You can also click one of the Gemini-suggested questions to get
    started.
@@ -272,8 +272,8 @@ conversation. To have a conversation, do the following:
 
 1. In the **Ask a question** field, enter your question and choose a mode:
 
-   * **Thinking** (default): detailed reasoning.
-   * **Fast**: best for most questions.
+   * **Fast** (default): best for most questions.
+   * **Thinking**: detailed reasoning.
 2. Click send\_spark **Send**.
 
    The Conversational Analytics API processes your question and returns the results.
@@ -393,11 +393,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-06-18 UTC.
+Last updated 2026-06-22 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-06-18 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-06-22 UTC."],[],[]]

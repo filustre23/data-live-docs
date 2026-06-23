@@ -947,24 +947,4 @@ given model type. You can use the
 a different metric if you need to.
 
 For more information about the training objectives and hyperparameters
-supported for linear regression models, see
-[`LINEAR_REG`](/bigquery/docs/hp-tuning-overview#linear_reg). For more
-information about the training objectives and hyperparameters supported for
-logistic regression models, see
-[`LOGISTIC_REG`](/bigquery/docs/hp-tuning-overview#logistic_reg).
-To try a tutorial that walks you through hyperparameter tuning, see
-[Improve model performance with hyperparameter tuning](/bigquery/docs/hyperparameter-tuning-tutorial).
-
-## Locations
-
-For information about supported locations, see
-[Locations for non-remote models](/bigquery/docs/locations#locations-for-non-remote-models).
-
-## Limitations
-
-`CREATE MODEL` statements must comply with the following rules:
-
-* For linear regression models, the `label` column must be real-valued (the
-  column values cannot be +/- infinity or `NaN`).
-* For logistic regression models, the `label` column can contain up
-  to 50 unique values; that is, the number of classes is les
+supported for linear regression mode

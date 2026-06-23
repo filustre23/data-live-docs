@@ -694,8 +694,5 @@ If you need to normalize sessionized data, you can use a query similar to the
 following:
 
 ```
-SELECT emp_id, session_range AS normalized FROM (
-  SELECT emp_id, session_range
-  FROM RANGE_SESSIONIZE(
-    TABLE mydataset.my_sessionized_range_table
+SELECT
 ```

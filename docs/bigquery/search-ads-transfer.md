@@ -443,14 +443,5 @@ ORDER BY
   JOIN
     `DATASET.sa_AdGroup_CUSTOMER_ID` a
   ON
-    (k.ad_group_id = a.ad_group_id AND k._DATA_DATE = a._DATA_DATE)
-  WHERE
-    k._DATA_DATE = k._LATEST_DATE
-  GROUP BY
-    1, 2, 3, 4
+    (k.ad_group_id = a.ad_group_id AND k._DATA_DATE = a.
 ```
-
-更改下列內容：
-
-* `DATASET`：資料集名稱
-* <

@@ -698,9 +698,4 @@ Search Ads 360 API 資源：[ad\_group\_criterion](https://developers.google.com
 | ad\_group\_criterion\_bid\_modifier | 條件相符時的出價調節係數。修飾符必須介於 0.1 到 10.0 之間。大多數可指定條件類型都支援調節係數。 |
 | ad\_group\_criterion\_cpc\_bid\_micros | 單次點擊出價。 |
 | ad\_group\_criterion\_creation\_time | 這個廣告群組條件的建立時間戳記。時間戳記採用客戶時區，格式為「yyyy-MM-dd HH:mm:ss」。 |
-| ad\_group\_criterion\_criterion\_id | 指定條件的 ID。 |
-| ad\_group\_criterion\_gender\_type | 性別類型。 |
-| ad\_group\_criterion\_last\_modified\_time | 這個廣告群組條件上次修改的日期時間。日期時間採用客戶時區，格式為「yyyy-MM-dd HH:mm:ss.ssssss」。 |
-| ad\_group\_criterion\_location\_geo\_target\_constant | 地理目標常數資源名稱。 |
-| ad\_group\_criterion\_status | 條件的狀態。這是由用戶端設定的廣告群組條件實體狀態。注意：使用者介面報表可能會納入其他資訊，影響條件是否符合放送資格。在某些情況下，即使透過 API 移除條件，該條件在使用者介面中仍可能顯示為已啟用。舉例來說，除非排除，否則廣告活動預設會向所有年齡層的使用者顯示。由於這些年齡層符合廣告放送資格，使用者介面會將每個年齡範圍顯示為「已啟用」，但 AdGroupCriterion.status 會顯示「已移除」，因為沒有新增任何正向條件。 |
-| ad\_group\_criterion\_type | 條件類型。 |
+|  |

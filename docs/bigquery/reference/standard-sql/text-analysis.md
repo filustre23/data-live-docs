@@ -976,18 +976,3 @@ Exclude a list of terms (tokens) from the results.
 
 In the following query, the words `they` and `pie` are excluded from the
 results:
-
-```
-SELECT TEXT_ANALYZE(
-  'I like pie, you like-pie, they like 2 PIEs.',
-  analyzer=>'LOG_ANALYZER',
-  analyzer_options=>'''
-  {
-    "token_filters": [
-      {
-        "stop_words": ["they", "pie"]
-      }
-    ]
-  }
-  ''
-```

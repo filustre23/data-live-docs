@@ -261,11 +261,3 @@ Request message for invoking `FinalizeWriteStream`.
 ## FinalizeWriteStreamResponse
 
 Response message for `FinalizeWriteStream`.
-
-| Fields | |
-| --- | --- |
-| `row_count` | `int64`  Number of rows in the finalized stream. |
-
-## FlushRowsRequest
-
-Request message for `FlushRows`.

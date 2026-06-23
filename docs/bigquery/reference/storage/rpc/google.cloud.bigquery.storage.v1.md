@@ -249,6 +249,3 @@ The precision of the timestamp value in the Avro message. This precision will **
 
 | Enums | |
 | --- | --- |
-| `PICOS_TIMESTAMP_PRECISION_UNSPECIFIED` | Unspecified timestamp precision. The default precision is microseconds. |
-| `TIMESTAMP_PRECISION_MICROS` | Timestamp values returned by Read API will be truncated to microsecond level precision. The value will be encoded as Avro TIMESTAMP type in a 64 bit integer. |
-| `TIMESTAMP_PRECISION_NANOS` |

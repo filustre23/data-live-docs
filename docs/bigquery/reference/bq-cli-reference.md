@@ -639,27 +639,3 @@ bq get-iam-policy --reservation myReservation
 使用 `bq head` 指令顯示資料表的指定資料列和資料欄。根據預設，系統會顯示前 100 列的所有資料欄。
 
 #### 劇情概要
-
-```
-bq head [FLAGS] [TABLE]
-```
-
-#### 範例
-
-```
-bq head --max_rows=10 --start_row=50 --selected_fields=field1,field3 \
-  myDataset.myTable
-```
-
-#### 旗標和引數
-
-`bq head` 指令會使用下列旗標和引數：
-
-**`--job=JOB or -j=JOB`**
-:   如要讀取查詢工作的結果，請使用有效工作 ID 指定這個旗標。
-
-**`--max_rows=MAX or -n=MAX`**
-:   一個整數，用來指定顯示資料表資料時要列印的資料列數量上限。預設值為 `100`。
-
-**`--selected_fields=COLUMN_NAMES or -c=COLUMN_NAMES`**
-:   以半形逗號分隔的清單，用來指定顯示資料表資料時

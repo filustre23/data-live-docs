@@ -281,9 +281,3 @@ User-provided metadata for a dataset.
 | JSON representation |
 | --- |
 | ``` {   "friendlyName": string,   "description": string,   "labels": {     string: string,     ...   } } ``` |
-
-| Fields | |
-| --- | --- |
-| `friendlyName` | `string`  A short name for the dataset, such as `"Analytics Data 2011"`. |
-| `description` | `string`  A long description, perhaps several paragraphs, describing the dataset contents in detail. |
-| `labels` | `map (key: string, value: strin` |

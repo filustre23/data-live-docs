@@ -249,9 +249,3 @@ This topic contains all functions supported by GoogleSQL for BigQuery.
 | [`PARSE_NUMERIC`](/bigquery/docs/reference/standard-sql/conversion_functions#parse_numeric) | Converts a `STRING` value to a `NUMERIC` value. |
 | [`PARSE_TIME`](/bigquery/docs/reference/standard-sql/time_functions#parse_time) | Converts a `STRING` value to a `TIME` value. |
 | [`PARSE_TIMESTAMP`](/bigquery/docs/reference/standard-sql/timestamp_functions#parse_timestamp) | Converts a `STRING` value to a `TIMESTAMP` value. |
-| [`PATH_FIRST`](/bigquery/docs/reference/standard-sql/graph-sql-functions#path_first) | Gets the first node in a graph path. |
-| [`PATH_LAST`](/bigquery/docs/reference/standard-sql/graph-sql-functions#path_last) | Gets the last node in a graph path. |
-| [`PATH_LENGTH`](/bigquery/docs/reference/standard-sql/graph-sql-functions#path_length) | Gets the number of edges in a graph path. |
-| [`PERCENT_RANK`](/bigquery/docs/reference/standard-sql/numbering_functions#percent_rank) | Gets the percentile rank (from 0 to 1) of each row within a window. |
-| [`PERCENTILE_CONT`](/bigquery/docs/reference/standard-sql/navigation_functions#percentile_cont) | Computes the specified percentile for a value, using linear interpolation. |
-|  |

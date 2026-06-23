@@ -279,22 +279,4 @@ ORDER BY
 
 ## 疑難排解
 
-如要啟用這個檢視畫面，請在專案或機構中將 `enable_info_schema_storage` 的值設為 `TRUE`。如要進一步瞭解如何管理設定，請參閱「[管理設定](https://docs.cloud.google.com/bigquery/docs/default-configuration?hl=zh-tw)」。
-
-如果尚未設定，您會看到下列錯誤訊息：
-
-```
-INFORMATION_SCHEMA.TABLE_STORAGE hasn't been enabled for project <myproject>.
-Consider using one of the following SQL statements to enable data collection:
-ALTER PROJECT `<myproject>`
-SET OPTIONS (`region-<region>.enable_info_schema_storage` = TRUE)
-
-Or to enable for the entire organization:
-ALTER ORGANIZATION
-SET OPTIONS (`region-<region>.enable_info_schema_storage` = TRUE)
-
-After enabling, please allow around 1 day for the complete historical data to
-become available.
-```
-
-執行錯誤訊息中說明的 SQL 陳述式，啟用檢視畫面。
+如要啟用這個檢視畫面，請在專案或機構中將 `enable_info_schema_storage` 的值設為 `TRUE`。如要進一步瞭解如何管理設定，請參閱「

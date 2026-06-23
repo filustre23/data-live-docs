@@ -230,12 +230,4 @@ Configuration for a Cloud Storage subscription.
 
 This type has no fields.
 
-Configuration for writing message data in text format. Message payloads will be written to files as raw text, separated by a newline.
-
-## AvroConfig
-
-Configuration for writing message data in Avro format. Message payloads and metadata will be written to files as an Avro binary.
-
-| JSON representation |
-| --- |
-| ``` {   "writeMetadata": boolean,   "useTopicSchema": boolean } ``` |
+Configuration for writing message data in text format. Message payloads will be written to files as raw text, separated by a newlin

@@ -242,9 +242,4 @@ Job configuration. See the [Jobs](https://cloud.google.com/bigquery/docs/referen
 | Union field `config`. Job configuration information. `config` can be only one of the following: | |
 | `queryConfig` | `object (BigQueryAuditMetadata.JobConfig.Query)`  Query job information. |
 | `loadConfig` | `object (BigQueryAuditMetadata.JobConfig.Load)`  Load job information. |
-| `extractConfig` | `object (BigQueryAuditMetadata.JobConfig.Extract)`  Extract job information. |
-| `tableCopyConfig` | `object (BigQueryAuditMetadata.JobConfig.TableCopy)`  TableCopy job information. |
-
-## BigQueryAuditMetadata.JobConfig.Query
-
-Query job configuration.
+| `extractConfig` | `object (` |

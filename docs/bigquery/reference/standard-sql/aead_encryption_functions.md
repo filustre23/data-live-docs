@@ -443,12 +443,4 @@ WITH CustomerRawKeys AS (
   SELECT 3, b'0123012301230123'
 ), CustomerIds AS (
   SELECT 1 AS customer_id UNION ALL
-  SELECT 2 UNION ALL
-  SELECT 3
-)
-SELECT
-  ci.customer_id,
-  KEYS.ADD_KEY_FROM_RAW_BYTES(
-    KEYS.NEW_KEYSET('AEAD_AES_GCM_256'),
-    'AES_CBC_PKCS',
 ```

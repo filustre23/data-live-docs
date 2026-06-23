@@ -286,11 +286,5 @@ The identifier case type.
 
 | Enums | |
 | --- | --- |
-| `IDENTIFIER_CASE_UNSPECIFIED` | The identifier case is not specified. |
-| `ORIGINAL` | Identifiers' cases will be kept as the original cases. |
-| `UPPER` | Identifiers will be in upper cases. |
-| `LOWER` | Identifiers will be in lower cases. |
-
-## IdentifierRewriteMode
-
-The SQL identifier rewrite mode.
+|
+|  |

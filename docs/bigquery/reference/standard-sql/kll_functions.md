@@ -486,28 +486,5 @@ FROM (SELECT KLL_QUANTILES.INIT_INT64(x, 1000) AS kll_sketch
 ## `KLL_QUANTILES.MERGE_POINT_INT64`
 
 ```
-KLL_QUANTILES.MERGE_POINT_INT64(sketch, phi)
+KLL_QUANTILES.MERGE_POINT_INT64(sketch, phi
 ```
-
-**Description**
-
-Takes KLL sketches as `BYTES` and merges them, then extracts a single
-quantile from the merged sketch. The `phi` argument specifies the quantile
-to return as a fraction of the total number of rows in the input, normalized
-between 0 and 1. This means that the function will return a value *v* such that
-approximately Φ \* *n* inputs are less than or equal to *v*, and a (1-Φ) \* *n*
-inputs are greater than or equal to *v*. This is an aggregate function.
-
-If the merged sketches were initialized with different precisions, the precision
-is downgraded to the lowest precision involved in the merge — except if the
-aggregations are small enough to still capture the input exactly — then the
-mergee's precision is maintained.
-
-Returns an error if the underlying type of one or more input sketches isn't
-compatible with type `INT64`.
-
-Returns an error if the input isn't a valid KLL quantiles sketch.
-
-**Supported Argument Types**
-
-* `sketch`:

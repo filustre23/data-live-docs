@@ -930,25 +930,4 @@ year 2022-2023.
 | US | PresidentDay | 2023-02-20 | 1 | 1 |
 | US | Superbowl | 2022-02-13 | 1 | 1 |
 | US | Superbowl | 2023-02-05 | 1 | 1 |
-| US | VeteranDay | 2022-11-11 | 1 | 1 |
-| US | VeteranDay | 2023-11-11 | 1 | 1 |
-
-You can also see the holidays for a region by running `SELECT * FROM
-bigquery-public-data.ml_datasets.holidays_and_events_for_forecasting WHERE
-region = region`.
-
-The `bigquery-public-data.ml_datasets.holidays_and_events_for_forecasting`
-table only contains holidays and events from the following regions:
-
-* `AU`: Australia
-* `CA`: Canada
-* `CH`: Switzerland
-* `CL`: Chile
-* `CZ`: Czechia
-* `DE`: Germany
-* `DK`: Denmark
-* `EMEA`: Europe, the Middle East and Africa
-* `ES`: Spain
-* `FR`: France
-* `GB`: United Kingdom
-* `GLOBAL`<
+| US | Veter |

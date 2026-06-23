@@ -255,7 +255,4 @@ public class CreateAdManagerTransfer {
       CreateTransferConfigRequest request =
           CreateTransferConfigRequest.newBuilder()
               .setParent(parent.toString())
-              .setTransferConfig(transferConfig)
-              .build();
-      TransferConfig config
 ```

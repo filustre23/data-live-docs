@@ -347,11 +347,3 @@ To learn more about the `OVER` clause and how to use it, see
 `INT64`
 
 **Examples**
-
-```
-WITH Numbers AS
- (SELECT 1 as x
-  UNION ALL SELECT 2
-  UNION ALL SELECT 2
-  UNION
-```

@@ -262,17 +262,4 @@ public class CreatePlayTransfer {
 
 ## 查詢資料
 
-資料移轉至 BigQuery 時，系統會將資料寫入擷取時間分區資料表。詳情請參閱[分區資料表簡介](https://docs.cloud.google.com/bigquery/docs/partitioned-tables?hl=zh-tw)一文。
-
-如果您要直接查詢資料表，而不要使用自動產生的檢視表，您必須在查詢中使用 `_PARTITIONTIME` 虛擬資料欄。詳情請參閱[查詢分區資料表](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables?hl=zh-tw)一文。
-
-## 定價
-
-如要瞭解 Google Play 資料移轉定價，請參閱[定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#data-transfer-service-pricing)頁面。
-
-資料移轉至 BigQuery 之後，即適用標準的 BigQuery [儲存空間](https://cloud.google.com/bigquery/pricing?hl=zh-tw#storage)和[查詢](https://cloud.google.com/bigquery/pricing?hl=zh-tw#queries)計價方式。
-
-## 後續步驟
-
-* 如要瞭解 Google Play 報告如何移轉至 BigQuery，請參閱 [Google Play 報告轉換](https://docs.cloud.google.com/bigquery/docs/play-transformation?hl=zh-tw)一文。
-* 如需 B
+資料移

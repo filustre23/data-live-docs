@@ -976,12 +976,5 @@ CREATE OR REPLACE MODEL `mydataset.arima_model`
         custom_holiday AS (
             SELECT
               'US' AS region,
-              'Halloween' AS holiday_name,
-              primary_date,
-              5 AS preholiday_days,
-              1 AS postholiday_days
-            FROM
-              UNNEST(
-                [
-                  DATE(
+              'Halloween'
 ```

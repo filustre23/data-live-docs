@@ -585,14 +585,5 @@ WITH table AS (SELECT DATETIME(TIMESTAMP "2017-11-05 00:00:00+00", "UTC") AS dat
 SELECT
   datetime,
   EXTRACT(WEEK(SUNDAY) FROM datetime) AS week_sunday,
-  EXTRACT(WEEK(MONDAY) FROM datetime) AS week_monday
-FROM table;
-
-/*---------------------+-------------+---------------+
- | datetime            | week_sunday | week_monday   |
- +---------------------+-------------+---------------+
- | 2017-11-05T00:00:00 | 45          | 44            |
- +---------------------+-------------+---------------*/
+  EXTRACT(
 ```
-
-## `FORMAT_DATETIME`

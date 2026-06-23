@@ -314,14 +314,4 @@ IBM Netezza 資料倉儲技術專為與 Netezza 專屬的 SQL 語法搭配使用
 | `SUBSTR` | [`SUBSTR`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions?hl=zh-tw#substr) |
 |  | [`TO_BASE32`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions?hl=zh-tw#to_base32) |
 |  | [`TO_BASE64`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions?hl=zh-tw#to_base64) |
-| `TO_CHAR` |  |
-| `TO_DATE` |  |
-| `TO_NUMBER` |  |
-| `TO_TIMESTAMP` |  |
-|  | [`TO_CODE_POINTS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions?hl=zh-tw#to_code_points) |
-|  | [`TO_HEX`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions?hl=zh-tw#to_hex) |
-| `TRANSLATE` |  |
-|  | [`TRIM`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions?hl=zh-tw#trim) |
-| `UPPER` | [`UPPER`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions?hl=zh-tw#upper) |
-| `UNICODE` |  |
-| `UNICODES` |  |
+|  |

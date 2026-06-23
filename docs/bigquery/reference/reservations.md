@@ -294,9 +294,5 @@ public class QuickstartSample {
   public static void quickStartSample(String projectId, String location) throws IOException {
     try (ReservationServiceClient client = ReservationServiceClient.create()) {
       // list reservations in the project
-      String parent = String.format("projects/%s/locations/%s", projectId, location);
-      client
-          .listReservations(parent)
-          .iterateAll()
-          .forEach
+      String parent
 ```

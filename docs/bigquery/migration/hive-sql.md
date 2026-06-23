@@ -298,9 +298,4 @@ BigQuery 提供下列其他字串函式：
 | `LN` | `LN` |
 | `LNNVL` | 使用 `ISNULL`。 |
 | `LOG` | `LOG` |
-| `MOD (% operator)` | `MOD` |
-| `POWER` | `POWER, POW` |
-| `RAND` | `RAND` |
-| `ROUND` | `ROUND` |
-| `SIGN` | `SIGN` |
-|  |
+| `MOD (% operator)` |  |

@@ -255,7 +255,4 @@ The possible dialect options for translation.
 | --- | --- |
 | Union field `dialect_value`. The possible dialect options that this message represents. `dialect_value` can be only one of the following: | |
 | `bigqueryDialect` | `object (BigQueryDialect)`  The BigQuery dialect |
-| `hiveqlDialect` | `object (HiveQLDialect)`  The HiveQL dialect |
-| `redshiftDialect` | `object (RedshiftDialect)`  The Redshift dialect |
-| `teradataDialect` | `object (TeradataDialect)`  The Teradata dialect |
-| `oracleDialect` |  |
+| `hiveqlDialect` | `object (` |

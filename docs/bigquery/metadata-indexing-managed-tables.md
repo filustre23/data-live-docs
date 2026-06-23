@@ -16,7 +16,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # BigQuery 資料表的中繼資料索引
 
-本文說明 BigQuery 中的資料欄中繼資料索引，並說明如何分配專屬資源，提升索引新鮮度和查詢效能。
+本文說明 BigQuery 中的資料欄中繼資料索引，並說明如何分配專用資源，以提升索引新鮮度和查詢效能。
 
 如果 BigQuery 資料表超過 1 GiB，BigQuery 會自動為中繼資料建立索引。這類中繼資料包括檔案位置、分割資訊和資料欄層級屬性，BigQuery 會使用這些資料來最佳化及加速查詢。
 
@@ -24,7 +24,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 查看中繼資料索引重新整理時間
 
-如要查看資料表的上次中繼資料索引重新整理時間，請查詢 [`INFORMATION_SCHEMA.TABLE_STORAGE` 檢視的 `LAST_METADATA_INDEX_REFRESH_TIME` 欄](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage?hl=zh-tw)。方法很簡單，按照以下步驟操作即可：
+如要查看資料表的上次中繼資料索引重新整理時間，請查詢 [`INFORMATION_SCHEMA.TABLE_STORAGE` 檢視的 `LAST_METADATA_INDEX_REFRESH_TIME` 欄](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage?hl=zh-tw)。方法如下：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -50,7 +50,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 查看資料欄中繼資料索引使用情況
 
-如要查看工作完成後是否使用了資料欄中繼資料索引，請檢查 [Job](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw) 資源的 [`TableMetadataCacheUsage` 屬性](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#tablemetadatacacheusage)。如果 `unusedReason` 欄位空白 (未填入資料)，系統會使用資料欄中繼資料索引。如果已填入值，隨附的 `explanation` 欄位會說明為何未使用資料欄中繼資料索引。
+如要查看工作完成後是否使用了資料欄中繼資料索引，請檢查 [Job](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw) 資源的 [`TableMetadataCacheUsage` 屬性](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#tablemetadatacacheusage)。如果 `unusedReason` 欄位空白 (未填入資料)，系統會使用資料欄中繼資料索引。如果已填入值，隨附的 `explanation` 欄位會說明未使用資料欄中繼資料索引的原因。
 
 您也可以使用 [`INFORMATION_SCHEMA.JOBS` 檢視區塊中的 `metadata_cache_statistics` 欄位，查看資料欄中繼資料索引的使用情形](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw)。
 
@@ -78,12 +78,12 @@ WHERE
 
 ## 設定專屬的索引資源
 
-如要在專案中設定中繼資料索引更新的資源，您必須先為專案指派預留項目。方法很簡單，按照以下步驟操作即可：
+如要在專案中設定中繼資料索引更新的資源，您必須先為專案指派預留項目。方法如下：
 
 1. [建立`BACKGROUND`預留項目](https://docs.cloud.google.com/bigquery/docs/reservations-tasks?hl=zh-tw)。
 2. [將專案指派給預留項目](https://docs.cloud.google.com/bigquery/docs/reservations-assignments?hl=zh-tw#assign_my_prod_project_to_prod_reservation)。
 
-設定預留空間後，請選取下列其中一種方法，將配額指派給中繼資料索引工作。根據預設，以這種方式分配的運算單元會在閒置時與其他工作共用。詳情請參閱「[閒置運算單元](https://docs.cloud.google.com/bigquery/docs/slots?hl=zh-tw#idle_slots)」。
+設定預留空間後，請選取下列其中一種方法，將預留空間指派給中繼資料索引工作。根據預設，以這種方式分配的運算單元會在閒置時與其他工作共用。詳情請參閱「[閒置運算單元](https://docs.cloud.google.com/bigquery/docs/slots?hl=zh-tw#idle_slots)」。
 
 ### 控制台
 
@@ -113,7 +113,7 @@ bq mk \
 更改下列內容：
 
 * `ADMIN_PROJECT_ID`：擁有預留資源的[管理專案](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#admin-project)專案 ID。
-* `LOCATION`：預訂的[地點](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
+* `LOCATION`：預訂的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
 * `RESERVATION_NAME`：預訂名稱。
 * `PROJECT_ID`：要指派給這項預留量的專案 ID。
 
@@ -136,7 +136,7 @@ bq mk \
 
    更改下列內容：
    * `ADMIN_PROJECT_ID`：擁有預留資源的[管理專案](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#admin-project)專案 ID。
-   * `LOCATION`：預訂的[地點](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
+   * `LOCATION`：預訂的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
    * `RESERVATION_NAME`：預訂名稱。
    * `ASSIGNMENT_ID`：指派作業的 ID。ID 在專案和位置中不得重複，開頭和結尾須為小寫英文字母或數字，且只能包含小寫英文字母、數字和破折號。
    * `PROJECT_ID`：包含資料表的專案 ID。這項專案已指派給預留項目。
@@ -144,7 +144,7 @@ bq mk \
 
 ## 查看索引工作資訊
 
-設定專屬的索引工作後，您可以使用 [`JOBS` 檢視索引工作的相關資訊。](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw)下列 SQL 範例會顯示 PROJECT\_NAME 中最新的五項重新整理工作。
+設定專屬的索引工作後，您可以使用 [`JOBS` 檢視索引工作相關資訊。](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw)下列 SQL 範例會顯示 PROJECT\_NAME 中最新的五項重新整理工作。
 
 ```
 SELECT *
@@ -160,13 +160,13 @@ LIMIT 5;
 
 將 `PROJECT_NAME` 替換為包含中繼資料索引作業的專案名稱。
 
-## 設定中繼資料索引警告
+## 設定中繼資料索引警報
 
 如果 BigQuery 效能未達到既定條件，Cloud Monitoring 快訊程序會通知您。詳情請參閱「[快訊總覽](https://docs.cloud.google.com/monitoring/alerts?hl=zh-tw)」。透過中繼資料索引，您可以設定版位用量和過時的快訊。
 
 ### 運算單元用量快訊
 
-如果背景預訂量超過分配量的特定百分比，系統就會發送這則快訊。預設值為 95%。您可以針對特定預訂或所有背景預訂設定這項快訊。觸發這項快訊時，建議您[增加預留大小](https://docs.cloud.google.com/bigquery/docs/reservations-tasks?hl=zh-tw#update_reservations)。
+如果背景預訂量超過分配量的特定百分比，系統就會發送這則快訊。預設值為 95%。您可以為特定預訂或所有背景預訂設定這項快訊。觸發這項快訊時，建議您[增加預留大小](https://docs.cloud.google.com/bigquery/docs/reservations-tasks?hl=zh-tw#update_reservations)。
 
 如要為每個背景預訂設定這項快訊，請按照下列步驟操作：
 
@@ -180,9 +180,9 @@ LIMIT 5;
 6. 在「設定通知」中，選取通知管道。
 7. 點選「建立」。
 
-### 過時警報
+### 過時快訊
 
-如果資料欄中繼資料索引的平均舊度與現有平均值相比增加太多，系統就會發送這則快訊。預設門檻為：如果 4 小時的平均值超過前一個平均值的兩倍，且持續超過 30 分鐘，觸發這項快訊時，建議您[增加預留大小](https://docs.cloud.google.com/bigquery/docs/reservations-tasks?hl=zh-tw#update_reservations)，或建立[背景預留](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#assignments) (如果沒有)。
+如果資料欄中繼資料索引的平均舊度與現有平均值相比增加太多，系統就會發送這則快訊。預設門檻為：如果 4 小時的平均值超過前一個平均值的兩倍，且持續超過 30 分鐘，觸發這項快訊時，建議您[增加預留大小](https://docs.cloud.google.com/bigquery/docs/reservations-tasks?hl=zh-tw#update_reservations)，或建立[背景預留](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#assignments) (如果沒有的話)。
 
 如要設定這項快訊，請按照下列步驟操作：
 
@@ -196,14 +196,18 @@ LIMIT 5;
 6. 在「設定通知」中，選取通知管道。
 7. 點選「建立」。
 
+## 效能注意事項
+
+BigQuery 會使用分區和分群功能自動修剪資料，而中繼資料索引功能則可根據未用於分區或分群的資料欄修剪資料，進一步最佳化查詢。如果篩選資料欄與資料表的分區或叢集資料欄之間存在排序依附元件，修剪作業的成效就會提高。在這些情況下，即使篩選條件是根據並非資料表叢集設定明確部分的資料欄，您也可能會發現掃描的位元組數少於預期。如果資料表只經過分區處理，但未叢集處理，則修剪作業對隨選查詢的效用有限，您可能不會看到掃描的位元組減少。
+
 ## 限制
 
-中繼資料查詢效能提升功能僅適用於 `SELECT`、`INSERT` 和 `CREATE TABLE AS SELECT` 陳述式。資料操縱語言 (DML) 陳述式不會因中繼資料索引而有所改善。
+中繼資料查詢效能提升僅適用於 `SELECT`、`INSERT` 和 `CREATE TABLE AS SELECT` 陳述式。資料操縱語言 (DML) 陳述式不會因中繼資料索引而有所改善。
 
 ## 後續步驟
 
-* 瞭解如何使用 [`JOBS` 檢視畫面查看專案中的所有工作](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw)。
-* 瞭解如何[查看運算單元數量和使用率](https://docs.cloud.google.com/bigquery/docs/slot-estimator?hl=zh-tw#view_slot_capacity_and_utilization)。
+* 瞭解如何使用 [`JOBS` 檢視畫面](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw)查看專案中的所有工作。
+* 瞭解如何[查看運算單元容量和使用率](https://docs.cloud.google.com/bigquery/docs/slot-estimator?hl=zh-tw#view_slot_capacity_and_utilization)。
 
 
 
@@ -212,11 +216,11 @@ LIMIT 5;
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-06-19 (世界標準時間)。
+上次更新時間：2026-06-22 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-19 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-22 (世界標準時間)。"],[],[]]

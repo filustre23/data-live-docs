@@ -293,31 +293,5 @@ window_specification:
   [ named_window ]
   [ PARTITION BY partition_expression [, ...] ]
   ORDER BY expression [ { ASC | DESC }  ] [, ...]
-  [ window_frame_clause ]
+  [<
 ```
-
-**Description**
-
-Returns the value of the `value_expression` for the last row in the current
-window frame.
-
-This function includes `NULL` values in the calculation unless `IGNORE NULLS` is
-present. If `IGNORE NULLS` is present, the function excludes `NULL` values from
-the calculation.
-
-To learn more about the `OVER` clause and how to use it, see
-[Window function calls](/bigquery/docs/reference/standard-sql/window-function-calls).
-
-
-
-**Supported Argument Types**
-
-`value_expression` can be any data type that an expression can return.
-
-**Return Data Type**
-
-Same type as `value_expression`.
-
-**Examples**
-
-The following examp

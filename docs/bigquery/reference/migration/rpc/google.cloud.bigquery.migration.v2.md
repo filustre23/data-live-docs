@@ -239,16 +239,4 @@ A request to get a previously created migration workflow.
 | Fields | |
 | --- | --- |
 | `name` | `string`  Required. The unique identifier for the migration workflow. Example: `projects/123/locations/us/workflows/1234` |
-| `read_mask` | `FieldMask`  The list of fields to be retrieved. |
-
-## GreenplumDialect
-
-This type has no fields.
-
-The dialect definition for Greenplum.
-
-## HiveQLDialect
-
-This type has no fields.
-
-The dialect definition for HiveQL.
+| `rea` |

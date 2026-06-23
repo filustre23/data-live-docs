@@ -555,17 +555,5 @@ SELECT CAST(CURRENT_DATE() AS STRING) AS current_date
 ```
 
 ```
-SELECT CAST(CURRENT_DATE() AS STRING FORMAT 'DAY') AS current_day
-
-/*-------------+
- | current_day |
- +-------------+
- | MONDAY      |
- +-------------*/
-```
-
-```
-SELECT CAST(
-  TIMESTAMP '2008-12-25 00:00:00+00:00'
-  AS STRING FORMAT 'YYYY-MM-DD HH24:MI:SS TZH:TZM')
+SELECT CAST(CURRENT_DATE() AS STRING FORMAT 'DAY') AS
 ```

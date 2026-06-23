@@ -387,6 +387,4 @@ The following options are supported:
 | `is_primary` | `BOOLEAN` | Declares if the dataset is the primary replica. |
 | `labels` | `<ARRAY<STRUCT<STRING, STRING>>>` | An array of labels for the dataset, expressed as key-value pairs. |
 | `location` | `STRING` | The location in which to create the dataset. If you don't specify this option, the dataset is created in the location where the query runs. If you specify this option and also explicitly set the location for the query job, the two values must match; otherwise the query fails. |
-| `max_time_travel_hours` | `SMALLINT` | Specifies the duration in hours of the [time travel window](/bigquery/docs/time-travel#time_travel) for the dataset. The `max_time_travel_hours` value must be an integer expressed in multiples of 24 (48, 72, 96, 120, 144, 168) between 48 (2 days) and 168 (7 days). 168 hours is the default if this option isn't specified. |
-| `primary_replica` | `STRING` | The replica name to set as the [primary replica](/bigquery/docs/data-replication). |
-| `storage_billing_model` | `STRING` | Alters the [storage billing model](/bigquery/docs/datasets-intro#dataset_storage_billing_models) for the dataset. Set the `storage_billing_model` value to `PHYSICAL` to use physical bytes when calculating storage charges, or to `LOGICAL` to use logical bytes. `LOGICAL` is the default.  The `storage_billing_model` option is only avail |
+| `max_time_travel_hours` | `SMALLINT` | Specifies the duration in hours of the |

@@ -370,15 +370,4 @@ Google uses AI technology to translate content into your preferred language. AI 
 | `timezone_id` | TimezoneId | *字串* | 商家的時區 ID。 |
 | `link` | 連結 | *字串* | 商家檔案的連結。 |
 | `created_time` | CreatedTime | *日期時間* | 商家建立時間。 |
-| `updated_time` | UpdatedTime | *日期時間* | 上次更新時間。 |
-
-### 「`CustomAudiences`」報表
-
-| **Meta API 欄位名稱** | **對應的 BigQuery 欄位名稱** | **類型** | **說明** |
-| --- | --- | --- | --- |
-| `id` | ID | *字串* | 自訂目標對象的 ID。 |
-|  | 目標 | *字串* | 目標欄位。 |
-| `account_id` | AccountID | *字串* | 從 Account\_ID 對應的廣告帳戶 ID。 |
-| `name` | 名稱 | *字串* | 自訂目標對象的名稱。 |
-| `description` | 說明 | *字串* | 目標對象說明。 |
-| `subtype` | 子類型 | *字串* |  |
+| `updated_time` | UpdatedTi |

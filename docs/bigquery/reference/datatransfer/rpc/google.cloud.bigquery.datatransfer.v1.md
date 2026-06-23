@@ -195,6 +195,4 @@ Defines the properties and custom parameters for a data source.
 | `update_deadline_seconds` | `int32`  The number of seconds to wait for an update from the data source before the Data Transfer Service marks the transfer as FAILED. |
 | `default_schedule` | `string`  Default data transfer schedule. Examples of valid schedules include: `1st,3rd monday of month 15:30`, `every wed,fri of jan,jun 13:15`, and `first sunday of quarter 00:00`. |
 | `supports_custom_schedule` | `bool`  Specifies whether the data source supports a user defined schedule, or operates on the default schedule. When set to `true`, user can override default schedule. |
-| `parameters[]` | `DataSourceParameter`  Data source parameters. |
-| `help_url` | `string`  Url for the help document for this data source. |
-| `authorization_type` | `AuthorizationType`  Indicates the type of authorization. |
+| `parameters[]` |  |

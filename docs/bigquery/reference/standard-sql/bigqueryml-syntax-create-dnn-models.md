@@ -893,23 +893,4 @@ value for [`NUM_TRIALS`](#num_trials).
 The possible objectives are a subset of the
 [model evaluation metrics](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate#output)
 for the model type. If you aren't running hyperparameter tuning, or if you are
-and you don't specify an objective, then the default objective
-is used. For `DNN_CLASSIFIER` models, the default is `ROC_AUC`.
-For `DNN_REGRESSOR` models, the default is `R2_SCORE`.
-
-### `MODEL_REGISTRY`
-
-The `MODEL_REGISTRY` option specifies the model registry destination.
-`VERTEX_AI` is the only supported model registry destination. To learn more, see
-[Register a BigQuery ML model](/bigquery/docs/create_vertex#register-model).
-
-### `VERTEX_AI_MODEL_ID`
-
-The `VERTEX_AI_MODEL_ID` option specifies an Gemini Enterprise Agent Platform model ID
-to register the model with. The model ID is associated with your
-BigQuery ML model, and is visible from the
-Model Registry. If you don't specify an
-Agent Platform model ID, the BigQuery ML
-model name is used.
-
-The `VERTEX_AI_MODEL_ID` value can have u
+and you don't

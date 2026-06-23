@@ -449,16 +449,4 @@ BigQuery 支援[column-](https://docs.cloud.google.com/bigquery/docs/column-leve
 
 視資料大小和網路頻寬而定，將現有 Oracle 資料倉儲的初始資料遷移至 BigQuery，可能與增量 ETL/ELT 管道不同。如果資料大小為幾 TB，可以使用相同的 ETL/ELT 管道。
 
-如果資料量最多只有幾 TB，傾印資料並使用 `gcloud storage` 進行轉移，會比使用類似 [JdbcIO](https://beam.apache.org/releases/javadoc/current/org/apache/beam/sdk/io/jdbc/JdbcIO.html) 的程式輔助資料庫擷取方法更有效率，因為程式輔助方法可能需要更精細的效能調整。如果資料大小超過幾 TB，且儲存在雲端或線上儲存空間 (例如 Amazon Simple Storage Service (Amazon S3))，建議使用 [BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)。對於大規模移轉作業 (尤其是網路頻寬受限的移轉作業)，[Transfer Appliance](https://docs.cloud.google.com/transfer-appliance?hl=zh-tw) 是實用的選項。
-
-#### 初始載入的限制
-
-規劃資料遷移作業時，請注意下列事項：
-
-* **Oracle DWH 資料大小：**結構定義的來源大小對所選資料轉移方法有重大影響，尤其是在資料量龐大 (TB 以上) 時。如果資料量相對較小，資料轉移程序可以簡化。處理大規模資料會使整體程序更加複雜。
-* **停機時間：**決定是否要停機，是將資料遷移至 BigQuery 的重要環節。為減少停機時間，您可以大量載入穩定的歷來資料，並使用 CDC 解決方案，趕上轉移程序期間發生的變更。
-* **價格：**在某些情況下，您可能需要第三方整合工具 (例如 ETL 或複製工具)，這類工具需要額外授權。
-
-#### 初始資料移轉 (批次)
-
-使用批次方法轉移資料表示資料會以單一程序匯出 (例如將 Oracle DWH 結構定義資料匯出至 CSV、Avro 或 Parquet 檔案，或
+如果資料量最多只有幾 TB，傾印資料並使用 `gcloud storage` 進行轉移，會比使用類似 [JdbcIO](https://beam.apache.org/releases/javadoc/current/org/apache/beam/sdk/io/jdbc/JdbcIO.html) 的程式輔助資料庫擷取方法更有效率，因為程式輔助方法可能需要更精細的效能調整。如果資料大小超過幾 TB，且儲存在雲端或線上儲存空間 (例如 Amazon Simple Storage Service (Amazon S3))，建議使用 [BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)。對於大規模移轉作業 (尤其是網路頻寬受限

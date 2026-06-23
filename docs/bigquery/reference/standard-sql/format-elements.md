@@ -501,19 +501,4 @@ SELECT CAST(TIME '21:30:00' AS STRING FORMAT 'HH12') AS date_time_to_string;
 /*---------------------+
  | date_time_to_string |
  +---------------------+
- | 09                  |
- +---------------------*/
 ```
-
-#### Format minute part as string
-
-```
-CAST(expression AS STRING FORMAT format_string_expression)
-```
-
-Casts a data type that contains the minute part to a string. Includes
-format elements, which provide instructions for how to conduct the cast.
-
-* `expression`: This expression contains the data type with the minute
-  that you need to format.
-* `format_string_expression`: A strin

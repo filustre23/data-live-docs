@@ -256,9 +256,4 @@ The status of a routine build.
 | `buildState` | `enum (BuildState)`  Output only. The current build state of the routine. |
 | `errorResult` | `object (ErrorProto)`  Output only. A result object that will be present only if the build has failed. |
 | `buildStateUpdateTime` | `string (Timestamp format)`  Output only. The time when the build state was updated last. |
-| `buildDuration` | `string (Duration format)`  Output only. The time taken for the image build. Populated only after the build succeeds or fails.  A duration in seconds with up to nine fractional digits, ending with '`s`'. Example: `"3.5s"`. |
-| `imageSizeBytes` | `string (int64 format)`  Output only. The size of the image in bytes. Populated only after the build succeeds. |
-
-## BuildState
-
-The build state of a routine.
+| `buildDuration` | `string (` |

@@ -285,11 +285,4 @@ public class QuickstartSample {
         System.out.println(dataSource.getDisplayName());
         System.out.printf("\tID: %s%n", dataSource.getDataSourceId());
         System.out.printf("\tFull path: %s%n", dataSource.getName());
-        System.out.printf("\tDescription: %s%n", dataSource.getDescription());
-      }
-    }
-  }
-}
 ```
-
-### Node.js

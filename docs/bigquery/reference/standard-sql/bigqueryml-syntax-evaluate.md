@@ -895,23 +895,4 @@ The following types of models are classification models:
   [accuracy](https://en.wikipedia.org/wiki/Accuracy_and_precision) for the
   model. `accuracy` is computed as a global total or micro-average. For a
   micro-average, the metric is calculated globally by counting the total
-  number of correctly predicted rows.
-* `f1_score`: a `FLOAT64` value that contains the
-  [F1 score](https://en.wikipedia.org/wiki/F-score) for the model.
-* `log_loss`: a `FLOAT64` value that contains the
-  [logistic loss](https://en.wikipedia.org/wiki/Loss_functions_for_classification#Logistic_loss)
-  for the model.
-* `roc_auc`: a `FLOAT64` value that contains the
-  [area under the receiver operating characteristic curve](https://en.wikipedia.org/wiki/Receiver_operating_characteristic#Area_under_the_curve)
-  for the model.
-
-### Regression
-
-The following types of models are regression models:
-
-* Linear regression
-* Boosted tree regressor
-* Random forest regressor
-* Deep neural network (DNN) regressor
-* Wide & Deep regressor
-* AutoML Tables regressor</
+  n

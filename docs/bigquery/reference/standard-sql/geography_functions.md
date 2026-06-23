@@ -306,29 +306,4 @@ The optional `use_spheroid` parameter determines how this function measures
 distance. If `use_spheroid` is `FALSE`, the function measures distance on the
 surface of a perfect sphere.
 
-The `use_spheroid` parameter currently only supports
-the value `FALSE`. The default value of `use_spheroid` is `FALSE`.
-
-**Return type**
-
-`FLOAT64`
-
-## `ST_ASBINARY`
-
-```
-ST_ASBINARY(geography_expression)
-```
-
-**Description**
-
-Returns the [WKB](https://en.wikipedia.org/wiki/Well-known_text#Well-known_binary) representation of an input
-`GEOGRAPHY`.
-
-See [`ST_GEOGFROMWKB`](#st_geogfromwkb) to construct a
-`GEOGRAPHY` from WKB.
-
-**Return type**
-
-`BYTES`
-
-##
+The `use_spheroid` parameter

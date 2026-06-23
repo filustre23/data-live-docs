@@ -653,19 +653,4 @@ Formats a `DATE` value according to a specified format string.
 **Definitions**
 
 * `format_string`: A `STRING` value that contains the
-  [format elements](/bigquery/docs/reference/standard-sql/format-elements#format_elements_date_time) to use with `date_expr`.
-* `date_expr`: A `DATE` value that represents the date to format.
-
-**Return Data Type**
-
-`STRING`
-
-**Examples**
-
-```
-SELECT FORMAT_DATE('%x', DATE '2008-12-25') AS US_format;
-
-/*------------+
- | US_format  |
- +---------
-```
+  [format elements<](/bigquery/docs/reference/standard-sql/format-elements#format_elements_date_time)

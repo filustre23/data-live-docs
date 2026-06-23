@@ -464,13 +464,4 @@ ORDER BY
 
 ##### 範例
 
-這個查詢會在先前的範例中加入 `GROUPING` 函式，以便更清楚識別因 `ROLLUP` 函式而新增的資料列。
-
-```
-#legacySQL
-SELECT
-  year,
-  GROUPING(year) as rollup_year,
-  is_male,
-  GROUPING(is_male) as
-```
+這個查詢會在先前的範例中加入 `GROUPING` 函

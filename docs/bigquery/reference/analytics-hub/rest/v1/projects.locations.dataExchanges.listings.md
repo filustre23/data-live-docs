@@ -290,11 +290,5 @@ Specifies the details of the Marketplace Data Product associated with the Listin
 
 Indicates whether this commercial access is currently active.
 
-| Enums | |
-| --- | --- |
-| `COMMERCIAL_STATE_UNSPECIFIED` | Commercialization is incomplete and cannot be used. |
-| `ONBOARDING` | Commercialization has been initialized. |
-| `ACTIVE` | Commercialization is complete and available for use. |
-
-| Methods | |
-| --- | --- |
+|
+|  |

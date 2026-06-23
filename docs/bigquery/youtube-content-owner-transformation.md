@@ -1030,19 +1030,4 @@ BigQuery 資料表：
 :   p\_publisher\_content\_owner\_country\_non\_music\_red\_adjustment\_revenue\_summary\_a1\_suffix
 
 BigQuery 檢視畫面：
-:   publisher\_content\_owner\_country\_non\_music\_red\_adjustment\_revenue\_summary\_a1\_suffix
-
-#### 每月詞曲出版社鄉村音樂訂閱調整項收益摘要
-
-YouTube 報表：
-[每月詞曲出版社國家/地區音樂訂閱調整收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/subscriptions?hl=zh-tw#monthly-music-publisher-country-music-subscription-adjustment-revenue-summary)
-
-BigQuery 資料表：
-:   p\_publisher\_content\_owner\_country\_music\_red\_adjustment\_revenue\_summary\_a1\_suffix
-
-BigQuery 檢視畫面：
-:   publisher\_content\_owner\_country\_music\_red\_adjustment\_revenue\_summary\_a1\_suffix
-
-### YouTube Shorts 收益報表
-
-下列報表會匯總 YouTube Shorts 的收益和參與度指標。
+:   publisher\_content\_owner\_country\_non\_music

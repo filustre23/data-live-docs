@@ -538,11 +538,4 @@ This computes a grand total for all items in the
 * (**banana**, **apple**, **leek**, **cabbage**, **lettuce**, **kale**) = 54 total purchases
 * (**banana**, **apple**, **leek**, **cabbage**, **lettuce**, **kale**) = 54 total purchases
 * (**banana**, **apple**, **leek**, **cabbage**, **lettuce**, **kale**) = 54 total purchases
-* (**banana**, **apple**, **leek**, **cabbage**, **lettuce**, **kale**) = 54 total purchases
-* (**banana**, **apple**, **leek**, **cabbage**, **lettuce**, **kale**) = 54 total purchases
-* (**banana**, **apple**, **leek**, **cabbage**, **lettuce**, **kale**) = 54 total purchases
-
-```
-SELECT item, purchases, category, SUM(purchases)
-  OVER
-```
+* (**banana**, **apple**, **leek**, **cabbage**, **lettuce**, **kale**

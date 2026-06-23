@@ -619,11 +619,3 @@ Inventory
 The following example generates a table with inventory totals that include
 existing inventory and inventory from the `NewArrivals` table, and
 marks `supply_constrained` as `false`:
-
-```
-UPDATE dataset.Inventory
-SET quantity = quantity +
-  (SELECT quantity FROM dataset.NewArrivals
-   WHERE Inventory.product = NewArrivals.product),
-    supply_constrained =
-```

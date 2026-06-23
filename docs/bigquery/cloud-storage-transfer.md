@@ -294,6 +294,5 @@ public class CreateCloudStorageTransfer {
         "destination_table_name_template", Value.newBuilder().setStringValue(tableId).build());
     params.put("data_path_template", Value.newBuilder().setStringValue(sourceUri).build());
     params.put("write_disposition", Value.newBuilder().setStringValue("APPEND").build());
-    params.put("file_format", Value.newBuilder().setStringValue(fileFormat).build());
-    params.put
+    params.put("file_f
 ```

@@ -213,10 +213,4 @@ BigQuery 提供下列其他匯總函式：
 | `COVAR_SAMP` | `COVAR_SAMP` |
 | `CUBE_TABLE` | BigQuery 不支援這項功能。考慮使用 BI 工具或自訂 UDF |
 | `CUME_DIST` | `CUME_DIST` |
-| `DENSE_RANK(ANSI)` | `DENSE_RANK` |
-| `FEATURE_COMPARE` | BigQuery 中沒有隱含的資料表。考慮使用 UDF 和 BigQuery ML |
-| `FEATURE_DETAILS` | BigQuery 中沒有隱含的資料表。考慮使用 UDF 和 BigQuery ML |
-| `FEATURE_ID` | BigQuery 中沒有隱含的資料表。考慮使用 UDF 和 BigQuery ML |
-| `FEATURE_SET` | BigQuery 中沒有隱含的資料表。考慮使用 UDF 和 BigQuery ML |
-| `FEATURE_VALUE` | BigQuery 中沒有隱含的資料表。考慮使用 UDF 和 BigQuery ML |
-| `FIRST_VALUE` |  |
+| `DENSE_RANK(ANSI)` |  |

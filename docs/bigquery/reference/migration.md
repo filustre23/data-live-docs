@@ -314,6 +314,5 @@ def create_migration_workflow(
     client = bigquery_migration_v2.MigrationServiceClient()
 
     # Set the source dialect to Teradata SQL.
-    source_dialect = bigquery_migration_v2.Dialect()
-    source_dialect.teradata_dialect = bigquery_migration_v2.
+    source_dialect = bigquery_migration_v2.
 ```

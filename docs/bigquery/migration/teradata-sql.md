@@ -175,5 +175,4 @@ Teradata 中的 `QUALIFY` 子句可讓您[篩選窗型函式的結果](https://d
 
 | Teradata | BigQuery |
 | --- | --- |
-| `SELECT col1, col2  FROM table  QUALIFY ROW_NUMBER() OVER (PARTITION BY col1 ORDER BY col2) = 1;` | 在 BigQuery 中，含有 `ROW_NUMBER()`、`SUM()`、`COUNT()` 等時間窗口函式和 `OVER PARTITION BY` 的 Teradata `QUALIFY` 子句會以包含分析值的子查詢中的 `WHERE` 子句表示。    使用 `ROW_NUMBER()`：    `SELECT col1, col2   FROM (    SELECT col1, col2,     ROW_NUMBER() OVER (PARTITION BY col1 ORDER BY col2) RN     FROM table  ) WHERE RN = 1;`    使用支援較大分割區的 `ARRAY_AGG`：    `SELECT    result.*  FROM (    SELECT      ARRAY_AGG(table ORDER BY table.col2        DESC LIMIT 1)[OFFSET(0)]    FROM table    GROUP BY col1  ) AS result;` |
-| `SELECT col1, col2  FROM table  AVG(col1) OVER (PARTITION BY col1 ORDER BY col2 ROWS BETWEEN 2 PRECEDING AND CURRENT ROW);` | `SELECT col1, col2  FROM table  AVG(col1) OVER (PARTITION BY col1 ORDER BY col2 RANGE BETWEEN 2 PRECEDING AND CURRENT ROW);`    在 BigQuery 中，`RANGE` 和 `ROWS` 都可以用於窗格框架子句。不過，窗型子句只 |
+| `SELECT col1, col2  FROM table  QUALIFY ROW_NUMBER() OVER (PARTITION BY col1 ORDER BY col2) = 1;` | 在 BigQuery 中，含有 `ROW_NUMBER()`、`SUM()`、`COUNT()` 等時間窗口函式和 `OVER PARTITION BY` 的 Teradata `QUALIFY` 子句會以包含分析值的子查詢中的 `WHERE` 子句表示。    使用 `ROW_NUMBER()`：    `SELECT col1, col2   FROM (    SELEC` |

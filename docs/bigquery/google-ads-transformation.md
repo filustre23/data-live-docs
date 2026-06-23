@@ -295,11 +295,4 @@ Google Ads API Resource:
 | ad\_group\_ad\_ad\_display\_url | The URL that appears in the ad description for some ad formats. | DisplayUrl |
 | ad\_group\_ad\_ad\_expanded\_dynamic\_search\_ad\_description | The description of the ad. |  |
 | ad\_group\_ad\_ad\_expanded\_dynamic\_search\_ad\_description2 | The second description of the ad. | ExpandedDynamicSearchCreativeDescription2 |
-| ad\_group\_ad\_ad\_expanded\_text\_ad\_description | The description of the ad. |  |
-| ad\_group\_ad\_ad\_expanded\_text\_ad\_description2 | The second description of the ad. | ExpandedTextAdDescription2 |
-| ad\_group\_ad\_ad\_expanded\_text\_ad\_headline\_part1 | The first part of the ad's headline. | HeadlinePart1 |
-| ad\_group\_ad\_ad\_expanded\_text\_ad\_headline\_part2 | The second part of the ad's headline. | HeadlinePart2 |
-| ad\_group\_ad\_ad\_expanded\_text\_ad\_headline\_part3 | The third part of the ad's headline. | ExpandedTextAdHeadlinePart3 |
-| ad\_group\_ad\_ad\_expanded\_text\_ad\_path1 | The text that can appear alongside the ad's displayed URL. | Path1 |
-| ad\_group\_ad\_ad\_expanded\_text\_ad\_path2 | Additional text that can appear alongside the ad's displayed URL. | Path2 |
-| ad\_group\_ad\_ad\_final\_app\_urls |
+|  |

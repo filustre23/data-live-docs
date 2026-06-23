@@ -444,18 +444,4 @@ FROM
  | results |
  +---------+
  | NaN     |
- +---------*/
-```
-
-## `STDDEV`
-
-```
-STDDEV(
-  [ DISTINCT ]
-  expression
-)
-[ OVER over_clause ]
-
-over_clause:
-  { named_window
 ```

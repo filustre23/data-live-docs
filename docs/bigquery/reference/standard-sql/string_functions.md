@@ -490,17 +490,5 @@ SELECT CONCAT('T.P.', ' ', 'Bar') as author;
 ```
 
 ```
-SELECT CONCAT('Summer', ' ', 1923) as release_date;
-
-/*---------------------+
- | release_date        |
- +---------------------+
- | Summer 1923         |
- +---------------------*/
-```
-
-```
-With Employees AS
-  (SELECT
-    'John'
+SELECT CONCAT('Summer', ' '
 ```

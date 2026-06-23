@@ -207,11 +207,3 @@ Data policy option. For more information, see [Mask data by applying data polici
 | Fields | |
 | --- | --- |
 | `name` | `string`  Data policy resource name in the form of projects/projectId/locations/locationId/dataPolicies/data\_policy\_id. |
-
-## DataPolicyList
-
-A list of data policy options. For more information, see [Mask data by applying data policies to a column](https://docs.cloud.google.com/bigquery/docs/column-data-masking#data-policies-on-column).
-
-| JSON representation |
-| --- |
-| ``` {   "dataPolicies": [     {       object (DataPolicyOption)     }   ] } ``` |

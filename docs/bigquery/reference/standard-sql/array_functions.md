@@ -523,24 +523,3 @@ The `GENERATE_ARRAY` function accepts the following data types as inputs:
 * `INT64`
 * `NUMERIC`
 * `BIGNUMERIC`
-* `FLOAT64`
-
-The `step_expression` parameter determines the increment used to
-generate array values. The default value for this parameter is `1`.
-
-This function returns an error if `step_expression` is set to 0, or if any
-input is `NaN`.
-
-If any argument is `NULL`, the function will return a `NULL` array.
-
-**Return Data Type**
-
-`ARRAY`
-
-**Examples**
-
-The following returns an array of integers, with a default step of 1.
-
-```
-SELECT GENERATE_ARRAY(1, 5)
-```

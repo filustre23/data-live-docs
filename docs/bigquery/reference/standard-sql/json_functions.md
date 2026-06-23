@@ -523,26 +523,5 @@ SELECT JSON_ARRAY_APPEND(
 In the following example, path `$.a` is matched and appends `2`.
 
 ```
-SELECT JSON_ARRAY_APPEND(JSON '{"a": [1]}', '$.a', 2) AS json_data
-
-/*-------------+
- | json_data   |
- +-------------+
- | {"a":[1,2]} |
- +-------------*/
+SELECT JSON_ARRAY_APPEND(JSON '{"a": [1]}', '$.a',
 ```
-
-In the following example, a value is appended into a JSON null.
-
-```
-SELECT JSON_ARRAY_APPEND(JSON '{"a": null}', '$.a', 10)
-
-/*------------+
- | json_data  |
- +------------+
- | {"a":[10]} |
- +------------*/
-```
-
-In the following example, path `$.a` isn't an array, so the operation is
-ignored.

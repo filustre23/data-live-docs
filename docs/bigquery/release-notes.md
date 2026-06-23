@@ -27,6 +27,19 @@ To get the latest product updates delivered to you, add the URL of this page to 
 reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators), or add the
 [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## June 22, 2026
+
+Feature
+
+You can use the BigQuery Data Transfer Service to transfer metadata from the
+following data sources into Knowledge Catalog:
+
+* [Oracle](/bigquery/docs/oracle-transfer#transfer_metadata)
+* [MySQL](/bigquery/docs/mysql-transfer#transfer_metadata)
+
+This feature is in
+[Preview](https://cloud.google.com/products#product-launch-stages).
+
 ## June 17, 2026
 
 Feature
@@ -4311,12 +4324,4 @@ Libraries
 
 ##### Bug Fixes
 
-* Avoid schema field mutation when passing selectedFields opt ([#1437](https://github.com/googleapis/nodejs-bigquery/issues/1437)) ([27044d5](https://github.com/googleapis/nodejs-bigquery/commit/27044d52e6bb6b4b6dbc746a0cfb02951817d7f1))
-
-### Java
-
-#### [2.48.0](https://github.com/googleapis/java-bigquery/compare/v2.47.0...v2.48.0) (2025-02-13)
-
-##### Features
-
-* Implement wasNull for BigQueryResultSet (
+* Avoid schema field mutation when passing selectedFields opt (
