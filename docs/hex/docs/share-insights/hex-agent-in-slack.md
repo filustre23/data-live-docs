@@ -8,7 +8,6 @@ info
 
 * Hex Agent in Slack is available on our [Team](https://hex.tech/pricing/) plan and above.
 * Hex Agent in Slack contributes towards monthly agent usage limits. Later this year we plan to allow you to purchase additional AI usage for power users. Until then, limits will be enforced only as-needed.
-* Hex Agent in Slack is currently available on our US Multi-tenant and EU Multi-tenant stacks. Hex Agent is not yet supported on HIPAA Multi-tenant and Single-tenant stacks.
 * Users need the **Admin**, **Manager**, **Editor**, or **Explorer¹** workspace role to access the Hex Slack Agent.
 
 ¹ Explorers can access Hex Agent in Slack if they have access to Threads. Threads is off by default for Explorers, but can be enabled by a Workspace Admin.
