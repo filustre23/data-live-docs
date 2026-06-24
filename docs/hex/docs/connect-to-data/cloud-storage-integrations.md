@@ -35,6 +35,10 @@ The **Enable writeback** toggle controls whether the integration can [export fil
 4. **Finalize the integration in Hex**  
    Return to the draft in Hex and complete the setup.
 
+caution
+
+Hex includes the external ID on `sts:AssumeRole` but **not** on `sts:TagSession`. If your trust policy applies an `sts:ExternalId` condition to *both* actions, validation fails with an `AccessDenied` error on `TagSession`. Split your trust policy into separate statements (with distinct SIDs) and apply the external ID condition to `sts:AssumeRole` only.
+
 ### Google Cloud Storage (GCS)[​](#google-cloud-storage-gcs "Direct link to Google Cloud Storage (GCS)")
 
 To set up your Service Account, you will need to enter the bucket name and a service account key JSON.

@@ -47,6 +47,7 @@
 * getMe
 * getListUsers
 * postDeactivateUser
+* getListTopics
 
 [API docs by Redocly](https://redocly.com/redoc/)
 
@@ -2504,4 +2505,4 @@ Copy
 
 |  |  |
 | --- | --- |
-| dataConnectionId required | string <uuid>  (DataConnectionId) ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}... |
+| dataConnectionId required | string |

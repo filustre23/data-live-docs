@@ -48,6 +48,10 @@ Securely connect Hex to your Postgres database to directly query, transform, wri
 
 Securely connect Hex to your Presto database to directly query, transform, writeback, and analyze your data.](/docs/connect-to-data/data-connections/setup-guides/connect-to-presto)
 
+[## 📄️RDS (AWS)
+
+Securely connect Hex to Amazon RDS to directly query, transform, writeback, and analyze your data.](/docs/connect-to-data/data-connections/setup-guides/connect-to-amazon-rds)
+
 [## 📄️Redshift (AWS)
 
 Securely connect Hex to Redshift (AWS) to directly query, transform, writeback, and analyze your data.](/docs/connect-to-data/data-connections/setup-guides/connect-to-amazon-redshift)

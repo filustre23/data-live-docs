@@ -41,8 +41,27 @@ Workspaces on the Team and Enterprise [plans](https://hex.tech/pricing) can expo
 
 To export an existing Hex project to either file format, select **Export** from the dropdown menu in the project title.
 
+## Validate the Hex file format with JSON Schema[​](#validate-the-hex-file-format-with-json-schema "Direct link to Validate the Hex file format with JSON Schema")
+
+The Hex file format has a public [JSON Schema](https://json-schema.org/) published on [SchemaStore](https://www.schemastore.org/). Any editor with YAML language server support can use it to check your files as you edit them outside of Hex — no setup or Hex account required.
+
+Once the schema is applied, your editor gives you:
+
+* **Validation:** flags fields that don’t match the Hex file format as you type.
+* **Autocomplete / IntelliSense:** suggests valid keys and values.
+* **Hover documentation:** shows descriptions for fields as you write them.
+
+In VS Code and VS Code–based editors, opening a Hex file prompts you to install the [YAML extension](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml), which pulls the schema from SchemaStore automatically.
+
+Because the schema is public, you can also use it to programmatically validate or interpret Hex files outside Hex — for example, in custom tooling or in CI.
+
+tip
+
+Schema detection is filename-based, so editors apply it to files matching `*.hex.yaml`. Name your file accordingly to get automatic validation — or start your workflow by exporting with the [Hex CLI](/docs/api-integrations/cli), which writes files with the correct `.hex.yaml` extension automatically.
+
 #### On this page
 
 * [Import projects](#import-projects)
   + [Import a new version of a project](#import-a-new-version-of-a-project)
 * [Export projects](#export-projects)
+* [Validate the Hex file format with JSON Schema](#validate-the-hex-file-format-with-json-schema)

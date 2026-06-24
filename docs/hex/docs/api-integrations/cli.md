@@ -112,7 +112,7 @@ hex auth --help
 ```
 
 ```
-Usage: hex [OPTIONS] [COMMAND]
+Usage: hex [options] [command]
 
 
 
@@ -120,55 +120,67 @@ Commands:
 
 
 
-app          Manage and run Hex apps
+app               Manage and run Hex apps
 
 
 
-project      Manage and run Hex projects
+auth              Manage authentication with Hex
 
 
 
-cell         Manage project cells
+cell              Manage project cells
 
 
 
-run          Manage running Hex projects and apps
+collection        Manage project collections
 
 
 
-connection   Manage data connections
+config            Manage CLI configuration
 
 
 
-collection   Manage project collections
+connection        Manage data connections
 
 
 
-group        Manage workspace groups
+group             Manage workspace groups
 
 
 
-user         Manage workspace users
+install           Manage additional tools provided by the Hex CLI
 
 
 
-auth         Manage authentication with Hex
+project           Manage and run Hex projects
 
 
 
-install      Manage additional tools provided by the Hex CLI, such as Claude skills
+run               Manage running Hex projects and apps
 
 
 
-config       Manage CLI configuration
+suggestion        Manage context suggestions from the Context Studio
 
 
 
-completions  Generate shell completion scripts
+thread            Manage Hex agent threads
 
 
 
-help         Print this message or the help of the given subcommand(s)
+user              Manage workspace users
+
+
+
+guide             Manage guides
+
+
+
+context           Manage context
+
+
+
+help              Print this message or the help of the given subcommand(s)
 
 
 
@@ -176,31 +188,31 @@ Options:
 
 
 
---profile <PROFILE>  Profile to use (from ~/.config/hex/config.toml) [env: HEX_PROFILE=]
+-V, --version         output the version number
 
 
 
---json               Output as JSON (for scripting)
+--profile <name>  Profile to use (from config) (env: HEX_PROFILE)
 
 
 
--q, --quiet              Suppress non-essential output
+--json            Output as JSON (for scripting) (default: false)
 
 
 
--v, --verbose            Show verbose output for debugging
+-q, --quiet           Suppress non-essential output (default: false)
 
 
 
---no-color           Disable colored output
+-v, --verbose         Show verbose output for debugging (default: false)
 
 
 
--h, --help               Print help
+--no-color        Disable colored output
 
 
 
--V, --version            Print version
+-h, --help            Print help
 ```
 
 ### Configuration for AI agents[​](#configuration-for-ai-agents "Direct link to Configuration for AI agents")
@@ -209,7 +221,7 @@ AI agents that can interact with your command line, such as Claude Code, can be 
 
 ## Bugs & issues[​](#bugs--issues "Direct link to Bugs & issues")
 
-Please contact [[email protected]](/cdn-cgi/l/email-protection#e5969095958a9791a58d809dcb9180868d) if you encounter any bugs, or other issues.
+Please contact [[email protected]](/cdn-cgi/l/email-protection#a8dbddd8d8c7dadce8c0cdd086dccdcbc0) if you encounter any bugs, or other issues.
 
 #### On this page
 

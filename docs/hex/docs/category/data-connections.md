@@ -6,7 +6,7 @@ Connect your Hex data notebooks directly to your data warehouse or other databas
 
 [## 🗃Setup guides
 
-16 items](/docs/category/setup-guides)
+17 items](/docs/category/setup-guides)
 
 [## 📄️Allow connections from Hex IP addresses
 

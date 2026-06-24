@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-06-24T01:53+00:00_
+_Generated 2026-06-24T08:39+00:00_
 
-**9 sources, 5342 topics total**
+**9 sources, 5343 topics total**
 
 ## airflow
 
@@ -4559,7 +4559,7 @@ _154 topics_
 
 Upstream: <https://learn.hex.tech/>
 
-_364 topics_
+_365 topics_
 
 - `hex/changelog`
 - `hex/changelog/2020-12-17`
@@ -4747,6 +4747,7 @@ _364 topics_
 - `hex/docs/connect-to-data/data-connections/oauth-data-connections`
 - `hex/docs/connect-to-data/data-connections/setup-guides/connect-to-alloydb`
 - `hex/docs/connect-to-data/data-connections/setup-guides/connect-to-amazon-athena`
+- `hex/docs/connect-to-data/data-connections/setup-guides/connect-to-amazon-rds`
 - `hex/docs/connect-to-data/data-connections/setup-guides/connect-to-amazon-redshift`
 - `hex/docs/connect-to-data/data-connections/setup-guides/connect-to-bigquery`
 - `hex/docs/connect-to-data/data-connections/setup-guides/connect-to-clickhouse`

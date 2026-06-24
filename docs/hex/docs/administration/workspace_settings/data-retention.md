@@ -6,7 +6,7 @@ Enable custom data retention policies within Hex.
 
 info
 
-* Available on select Enterprise [plans](https://hex.tech/pricing). Contact [[email protected]](/cdn-cgi/l/email-protection#d3a0b2bfb6a093bbb6abfda7b6b0bb) to request access.
+* Available on select Enterprise [plans](https://hex.tech/pricing). Contact [[email protected]](/cdn-cgi/l/email-protection#7d0e1c11180e3d1518055309181e15) to request access.
 
 Data retention allows Hex Admins to enable custom data retention policies of 7, 14, 30, 60, or 90 days for both cell outputs and cached warehouse data. When these data retention policies for cell outputs and cached warehouse data are enabled, data that is older than the retention policy will be permanently deleted.
 
