@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-06-25T08:40+00:00_
+_Generated 2026-06-25T14:10+00:00_
 
-**9 sources, 5344 topics total**
+**9 sources, 5347 topics total**
 
 ## airflow
 
@@ -3162,7 +3162,7 @@ _1527 topics_
 
 Upstream: <https://code.claude.com/docs/en/>
 
-_150 topics_
+_153 topics_
 
 - `claude-code/admin-setup`
 - `claude-code/advisor`
@@ -3251,6 +3251,9 @@ _150 topics_
 - `claude-code/large-codebases`
 - `claude-code/legal-and-compliance`
 - `claude-code/llm-gateway`
+- `claude-code/llm-gateway-connect`
+- `claude-code/llm-gateway-protocol`
+- `claude-code/llm-gateway-rollout`
 - `claude-code/managed-mcp`
 - `claude-code/mcp`
 - `claude-code/mcp-quickstart`
