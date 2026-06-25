@@ -57,7 +57,7 @@ Use the Context Studio to monitor AI usage across your workspace and manage the 
 
 * **Hex's AI providers do not train on customer data.** By default, Hex's AI providers operate under zero data retention agreements. Certain advanced models require the model provider to retain prompts and outputs for a limited period for safety and security monitoring purposes. Retention periods are dictated by the model provider and may vary by model. These models are only available when enabled by a workspace Admin. Retained data is not used for training and is retained for a limited period as determined by the model provider. For more details, see [AI data privacy](/docs/trust/ai-data-privacy).
 * **BYOK** (Enterprise plan only): Option to route requests via your own API keys for supported AI providers. See [AI data privacy](/docs/trust/ai-data-privacy#bring-your-own-key-byok).
-* **Terms**: See the [Hex Service Agreement: Hex Magic](/docs/legal/hex-service-agreement#hex-magic-and-hex-magic-typeahead-collectively-hex-magic).
+* **Terms**: See the [Terms and Conditions](/docs/legal/terms-and-conditions).
 
 #### On this page
 

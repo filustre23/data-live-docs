@@ -40,7 +40,7 @@ Hex may view Customer Data within the Hex Service during Support interactions.
 
 Hex may use Customer Account Data for sales and marketing purposes (see [How does Hex use my personal information? Is Hex GDPR and CCPA compliant?](#how-does-hex-use-my-personal-information-is-hex-gdpr-and-ccpa-compliant)). Hex associates Customer Account Data with Hex Service Usage Data, which are then utilized to improve the performance and reliability of the Hex Service.
 
-Customer Data submitted to Hex's AI features are subject to the [Hex Magic Product Specific Terms](/docs/legal/hex-service-agreement#hex-magic-and-hex-magic-typeahead-collectively-hex-magic).
+Customer Data submitted to Hex's AI features are subject to the [Terms and Conditions](/docs/legal/terms-and-conditions).
 
 Full definitions of Customer Data and Hex Metadata and Hex’s usage of both are available here: <https://trust.hex.tech/faq>.
 
@@ -54,13 +54,13 @@ The Hex Service is data agnostic: customers are responsible for any GDPR, CCPA, 
 
 Hex is an active participant in the [Data Privacy Framework](https://www.dataprivacyframework.gov/participant/6049) and is both GDPR and CCPA compliant. Hex may enter into Data Processing Agreements (DPAs) with customers that require additional privacy guarantees.
 
-Hex is compliant with the CAN-SPAM Act: Hex users may easily unsubscribe from Hex marketing and sales communications. Data subject access requests for Hex users may be sent to [[email protected]](/cdn-cgi/l/email-protection#1767657e6176746e577f726f396372747f). Hex’s [Privacy Policy](/docs/legal/privacy) contains additional information.
+Hex is compliant with the CAN-SPAM Act: Hex users may easily unsubscribe from Hex marketing and sales communications. Data subject access requests for Hex users may be sent to [[email protected]](/cdn-cgi/l/email-protection#09797b607f686a7049616c71277d6c6a61). Hex’s [Privacy Policy](/docs/legal/privacy) contains additional information.
 
 ## How does Hex interact with its LLM providers? What data is sent to the LLM providers?[​](#how-does-hex-interact-with-its-llm-providers-what-data-is-sent-to-the-llm-providers "Direct link to How does Hex interact with its LLM providers? What data is sent to the LLM providers?")
 
 **Hex constructs requests to its LLM providers when a user uses Hex's AI features. Hex only sends context based on the user’s workspace.** Hex never uses your data or metadata to improve other customers’ requests.
 
-Hex sends Customer Input Data (project code), Customer Output Data (project/cell runs), and Hex Metadata (schema information and table and column names), submitted prompts, and any resulting responses to LLM providers for the purposes of delivering Hex's AI features. Customer Data submitted to Hex's AI features are subject to the [Hex Magic Product Specific Terms](/docs/legal/hex-service-agreement#hex-magic-and-hex-magic-typeahead-collectively-hex-magic).
+Hex sends Customer Input Data (project code), Customer Output Data (project/cell runs), and Hex Metadata (schema information and table and column names), submitted prompts, and any resulting responses to LLM providers for the purposes of delivering Hex's AI features. Customer Data submitted to Hex's AI features are subject to the [Terms and Conditions](/docs/legal/terms-and-conditions).
 
 ## Who are Hex's LLM providers?[​](#who-are-hexs-llm-providers "Direct link to Who are Hex's LLM providers?")
 
@@ -93,7 +93,7 @@ Hex employees may look at AI Inputs and Outputs data, including prompts and rele
 
 ## Who owns the intellectual property that Hex's AI features generate?[​](#who-owns-the-intellectual-property-that-hexs-ai-features-generate "Direct link to Who owns the intellectual property that Hex's AI features generate?")
 
-**Hex’s customers own all outputs from AI features, to the extent that the customer has opted in to utilize Hex's AI features.** Customer Data submitted to Hex's AI features are subject to the [Hex Magic Product Specific Terms](/docs/legal/hex-service-agreement#hex-magic-and-hex-magic-typeahead-collectively-hex-magic).
+**Hex’s customers own all outputs from AI features, to the extent that the customer has opted in to utilize Hex's AI features.** Customer Data submitted to Hex's AI features are subject to the [Terms and Conditions](/docs/legal/terms-and-conditions).
 
 ## What data are Hex's AI features trained on? What sorts of bias risk might there be?[​](#what-data-are-hexs-ai-features-trained-on-what-sorts-of-bias-risk-might-there-be "Direct link to What data are Hex's AI features trained on? What sorts of bias risk might there be?")
 

@@ -18,7 +18,7 @@ Depending on your plan, Hex may use data from your AI sessions to improve Hex's 
 
 * Hex's LLM providers do not train on customer data. By default, Hex's LLM providers operate under a zero data retention policy. Certain advanced models require the model provider to retain prompts and outputs for a limited period for safety and security monitoring purposes. These models are only available when enabled by a workspace Admin. Retained data is not used for training and is automatically deleted at the end of the applicable retention period. Retention periods are dictated by the model provider and may vary by model. Hex's use of AI session data to improve its AI features is governed by your applicable [Terms of Service](/docs/legal/terms-and-conditions). Hex does not disclose customer data to other customers.
 * **Hex uses Customer Database Metadata like schemas and Customer Data project code and output content as model context**. This means that any sensitive information in your projects, table or column names, or in your code, could be passed to a model for inference.
-* **Hex's AI features are built on Hex’s secure data platform**. These features are protected by secure practices and policies, are included in our third-party audits and bug bounty program, and safeguarded by the principle of least-privilege. You can learn more on our [Data Privacy and Usage FAQ](/docs/trust/data-privacy-and-usage-faq), [Trust Center](https://trust.hex.tech/), and read our [AI Product Specific Terms](/docs/legal/hex-service-agreement#hex-magic-and-hex-magic-typeahead-collectively-hex-magic).
+* **Hex's AI features are built on Hex’s secure data platform**. These features are protected by secure practices and policies, are included in our third-party audits and bug bounty program, and safeguarded by the principle of least-privilege. You can learn more on our [Data Privacy and Usage FAQ](/docs/trust/data-privacy-and-usage-faq), [Trust Center](https://trust.hex.tech/), and read our [Terms and Conditions](/docs/legal/terms-and-conditions).
 
 ## Model data retention settings[​](#model-data-retention-settings "Direct link to Model data retention settings")
 
@@ -44,7 +44,7 @@ Once a key has been added, you can add a new API key from the refresh button at 
 
 tip
 
-BYOK is currently available only for OpenAI and Anthropic. Please reach out to [[email protected]](/cdn-cgi/l/email-protection#4734323737283533072f223f693322242f) if you're interested in using another provider.
+BYOK is currently available only for OpenAI and Anthropic. Please reach out to [[email protected]](/cdn-cgi/l/email-protection#12616762627d6066527a776a3c6677717a) if you're interested in using another provider.
 
 #### On this page
 
