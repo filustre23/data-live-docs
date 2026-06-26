@@ -28,7 +28,6 @@ are [case-sensitive](#case_sensitivity).
 ### Quoted identifiers
 
 * Must be enclosed by backtick (`) characters.
-* Can contain any characters, including spaces and symbols.
 * Can't be empty.
 * Have the same escape sequences as [string literals](#string_and_bytes_literals).
 * If an identifier is the same as a [reserved keyword](#reserved_keywords), the
@@ -815,5 +814,5 @@ INTERVAL '-23-2 10 -12:30' YEAR TO MINUTE
 SELECT INTERVAL '-23-2 10 -0:30' YEAR TO MINUTE
 
 -- Produces an error because the negative sign for minutes must come before the hour.
-SELECT INTERVAL '-23-2 10 0:-30'
+SELECT INTERVAL '-23-2 10 0:-30' YEAR
 ```

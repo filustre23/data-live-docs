@@ -4591,4 +4591,4 @@ The BigQuery Data Transfer Service's minimum interval time between recurring tra
 
 Feature
 
-BigQuery now supports exporting table data in Parquet format. This feature is in [Preview](https://cloud.google.com/products/#product-launch-stages). For more information, see [Parquet export details](/bigquery/docs/exporting-data#parquet_export_details).
+BigQuery now supports exporting table data in Parquet format. This feature is in

@@ -18,7 +18,7 @@ Represents a data transfer configuration. A transfer configuration contains all 
 
 | JSON representation |
 | --- |
-| ``` {   "name": string,   "displayName": string,   "dataSourceId": string,   "params": {     object   },   "schedule": string,   "scheduleOptions": {     object (ScheduleOptions)   },   "scheduleOptionsV2": {     object (ScheduleOptionsV2)   },   "dataRefreshWindowDays": integer,   "disabled": boolean,   "updateTime": string,   "nextRunTime": string,   "state": enum (TransferState),   "userId": string,   "datasetRegion": string,   "notificationPubsubTopic": string,   "emailPreferences": {     object (EmailPreferences)   },   "encryptionConfiguration": {     object (EncryptionConfiguration)   },   "error": {     object (Status)   },   "managedTableType": enum (ManagedTableType),    // Union field destination can be only one of the following:   "destinationDatasetId": string   // End of list of possible types for union field destination.   "ownerInfo": {     object (UserInfo)   } } ``` |
+| ``` {   "name": string,   "displayName": string,   "dataSourceId": string,   "params": {     object   },   "schedule": string,   "scheduleOptions": {     object (ScheduleOptions)   },   "scheduleOptionsV2": {     object (ScheduleOptionsV2)   },   "dataRefreshWindowDays": integer,   "disabled": boolean,   "updateTime": string,   "nextRunTime": string,   "state": enum (TransferState),   "userId": string,   "datasetRegion": string,   "notificationPubsubTopic": string,   "emailPreferences": {     object (EmailPreferences)   },   "encryptionConfiguration": {     object (EncryptionConfiguration)   },   "error": {     object (Status)   },   "managedTableType": enum (ManagedTableType),   "metadataDestination": {     object (MetadataDestination)   },    // Union field destination can be only one of the following:   "destinationDatasetId": string   // End of list of possible types for union field destination.   "ownerInfo": {     object (UserInfo)   } } ``` |
 
 | Fields | |
 | --- | --- |
@@ -41,6 +41,7 @@ Represents a data transfer configuration. A transfer configuration contains all 
 | `encryptionConfiguration` | `object (EncryptionConfiguration)`  The encryption configuration part. Currently, it is only used for the optional KMS key name. The BigQuery service account of your project must be granted permissions to use the key. Read methods will return the key name applied in effect. Write methods will apply the key if it is present, or otherwise try to apply project default keys if it is absent. |
 | `error` | `object (Status)`  Output only. Error code with detailed information about reason of the latest config failure. |
 | `managedTableType` | `enum (ManagedTableType)`  The classification of the destination table. |
+| `metadataDestination` | `object (MetadataDestination)`  The metadata destination of the transfer config. |
 | Union field `destination`. The destination of the transfer config. `destination` can be only one of the following: | |
 | `destinationDatasetId` | `string`  The BigQuery target dataset id. |
 | `ownerInfo` | `object (UserInfo)`  Output only. Information about the user whose credentials are used to transfer data. Populated only for `transferConfigs.get` requests. In case the user information is not available, this field will not be populated. |
@@ -62,11 +63,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2025-10-07 UTC.
+Last updated 2026-06-23 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2025-10-07 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-06-23 UTC."],[],[]]

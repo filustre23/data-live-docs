@@ -50,11 +50,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 事前準備
 
-授予 Identity and Access Management (IAM) 角色，讓使用者具備執行本文中各項工作所需的權限，並建立資料集來儲存資料。
+授予 Identity and Access Management (IAM) 角色，讓使用者擁有執行本文中各項工作所需的權限，並建立資料集來儲存資料。
 
 ### 所需權限
 
-如要將資料載入 BigQuery，您需要具備執行載入工作，以及將資料載入 BigQuery 資料表和分區的 IAM 權限。如要從 Cloud Storage 載入資料，您也需要 IAM 權限，才能存取包含資料的值區。
+如要將資料載入 BigQuery，您需要具備 IAM 權限，才能執行載入工作，並將資料載入 BigQuery 資料表和分區。如要從 Cloud Storage 載入資料，您也需要 IAM 權限，才能存取包含資料的值區。
 
 #### 將資料載入 BigQuery 的權限
 
@@ -65,7 +65,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 * `bigquery.tables.update`
 * `bigquery.jobs.create`
 
-以下每個預先定義的 IAM 角色都包含將資料載入 BigQuery 資料表或分區所需的權限：
+下列每個預先定義的 IAM 角色都包含將資料載入 BigQuery 資料表或分區所需的權限：
 
 * `roles/bigquery.dataEditor`
 * `roles/bigquery.dataOwner`
@@ -81,7 +81,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 如要取得從 Cloud Storage bucket 載入資料所需的權限，請要求管理員授予您 bucket 的「[Storage 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/storage?hl=zh-tw#storage.admin) 」(`roles/storage.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
-這個預先定義的角色具備從 Cloud Storage 值區載入資料所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
+這個預先定義的角色具備從 Cloud Storage bucket 載入資料所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
 #### 所需權限
 
@@ -99,7 +99,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## CSV 壓縮
 
-您可以使用 `gzip` 公用程式壓縮 CSV 檔案。請注意，`gzip` 會執行完整檔案壓縮，這與其他檔案格式 (例如 Avro) 的壓縮編解碼器執行的檔案內容壓縮不同。使用 `gzip` 壓縮 CSV 檔案可能會影響效能；如要進一步瞭解相關取捨，請參閱「[載入壓縮與未壓縮資料](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#loading_compressed_and_uncompressed_data)」。
+您可以使用 `gzip` 公用程式壓縮 CSV 檔案。請注意，`gzip` 會執行完整檔案壓縮，這與其他檔案格式 (例如 Avro) 的壓縮轉碼器執行的檔案內容壓縮不同。使用 `gzip` 壓縮 CSV 檔案可能會影響效能；如要進一步瞭解相關取捨，請參閱「[載入壓縮與未壓縮資料](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#loading_compressed_and_uncompressed_data)」。
 
 ## 將 CSV 資料載入資料表
 
@@ -126,12 +126,12 @@ Google uses AI technology to translate content into your preferred language. AI 
 1. 在「來源」部分中，從「建立資料表來源」清單中選取「Google Cloud Storage」。
    接著，按照下列步驟操作：
    1. 從 Cloud Storage bucket 選取檔案，或輸入 [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#gcs-uri)。
-      您無法在 Google Cloud 控制台中加入多個 URI，但支援使用[萬用字元](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#load-wildcards)。Cloud Storage 值區的位置必須與要建立、附加或覆寫的資料表所在的資料集位置相同。
+      您無法在 Google Cloud 控制台中加入多個 URI，但支援使用[萬用字元](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#load-wildcards)。Cloud Storage 值區的位置必須與要建立、附加或覆寫的表格所在的資料集位置相同。
    2. 在「File format」(檔案格式) 部分，選取「CSV」。
 2. 在「目的地」部分，指定下列詳細資料：
    1. 在「Dataset」(資料集) 部分，選取要建立資料表的資料集。
    2. 在「Table」(資料表) 欄位中，輸入要建立的資料表名稱。
-   3. 確認「資料表類型」欄位已設為「原生資料表」。
+   3. 確認「Table type」(資料表類型) 欄位已設為「Native table」(原生資料表)。
 3. 在「Schema」(結構定義) 區段中，輸入[結構定義](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw)。如要啟用結構定義的[自動偵測](https://docs.cloud.google.com/bigquery/docs/schema-detect?hl=zh-tw)功能，請選取「自動偵測」。
    你可以使用下列任一方法手動輸入結構定義資訊：
    * 選項 1：按一下「以文字形式編輯」，然後以 JSON 陣列的形式貼上結構定義。如果您使用 JSON 陣列，可透過與[建立 JSON 結構定義檔](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#specifying_a_json_schema_file)一樣的程序產生結構定義。您可以輸入下列指令，查看現有資料表的 JSON 格式結構定義：
@@ -145,37 +145,35 @@ Google uses AI technology to translate content into your preferred language. AI 
 5. 按一下「進階選項」，然後執行下列操作：
    * 讓「Write preference」(寫入偏好設定) 的 [Write if empty] (空白時寫入) 選項維持在已選取狀態。這個選項能建立新的資料表，並將您的資料載入其中。
    * 針對「Number of errors allowed」(允許的錯誤數量)，請接受預設值 `0`，或輸入可忽略的含錯列數上限。如果含有錯誤的列數超過這個值，該項工作就會產生 `invalid` 訊息並發生失敗。這個選項僅適用於 CSV 和 JSON 檔案。
-   * 在「時區」中，輸入剖析時間戳記值時要使用的預設時區 (如果時間戳記值沒有特定時區)。如要查看更多有效的時區名稱，請按[這裡](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#time_zone_name)。如果沒有這個值，系統會使用預設時區 UTC 剖析未指定時區的時間戳記值。
-   * 在「Date Format」(日期格式) 輸入[格式元素](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements?hl=zh-tw#format_string_as_datetime)，定義輸入檔案中的 DATE 值格式。這個欄位應採用 SQL 樣式格式 (例如 `MM/DD/YYYY`)。如果提供這個值，則只有這個格式是相容的 DATE 格式。[結構定義自動偵測](https://docs.cloud.google.com/bigquery/docs/schema-detect?hl=zh-tw#date_and_time_values)也會根據這個格式，而非現有格式，決定 DATE 欄類型。如果沒有這個值，系統會使用[預設格式](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv?hl=zh-tw#data_types)剖析 DATE 欄位。
+   * 在「時區」中，輸入剖析時間戳記值時要採用的預設時區 (如果沒有特定時區)。如要查看更多有效的時區名稱，請按[這裡](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#time_zone_name)。如果沒有這個值，系統會使用預設時區 (世界標準時間) 剖析未指定時區的時間戳記值。
+   * 在「Date Format」(日期格式) 輸入格式元素，定義輸入檔案中的 DATE 值格式。這個欄位應採用 SQL 樣式格式 (例如 `MM/DD/YYYY`)。如果提供這個值，則只有這個格式是相容的 DATE 格式。[結構定義自動偵測](https://docs.cloud.google.com/bigquery/docs/schema-detect?hl=zh-tw#date_and_time_values)功能也會根據這個格式，而非現有格式，決定 DATE 資料欄類型。如果沒有這個值，系統會使用[預設格式](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv?hl=zh-tw#data_types)剖析 DATE 欄位。
    * 在「日期時間格式」中，輸入[格式元素](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements?hl=zh-tw#format_string_as_datetime)，定義輸入檔案中的 DATETIME 值格式。這個欄位應採用 SQL 樣式，例如 `MM/DD/YYYY HH24:MI:SS.FF3`。
      如果這個值存在，則只有這個格式與 DATETIME 相容。
      [結構定義自動偵測](https://docs.cloud.google.com/bigquery/docs/schema-detect?hl=zh-tw#date_and_time_values)功能也會根據這個格式，而非現有格式，決定 DATETIME 資料欄類型。如果沒有這個值，系統會使用[預設格式](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv?hl=zh-tw#data_types)剖析 DATETIME 欄位。
-   * 在「時間格式」中，輸入格式元素，定義輸入檔案中的 TIME 值格式。這個欄位應採用 SQL 樣式，例如 `HH24:MI:SS.FF3`。如果這個值存在，則只有這個格式是相容的 TIME 格式。[結構定義自動偵測](https://docs.cloud.google.com/bigquery/docs/schema-detect?hl=zh-tw#date_and_time_values)功能也會根據這個格式，而非現有格式，決定 TIME 資料欄類型。如果沒有這個值，系統會使用[預設格式](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv?hl=zh-tw#data_types)剖析 TIME 欄位。
-   * 在「時間戳記格式」**中，輸入**格式元素，定義輸入檔案中的 TIMESTAMP 值格式。這個欄位應採用 SQL 樣式，例如 `MM/DD/YYYY HH24:MI:SS.FF3`。
-     如果這個值存在，則只有這個格式是相容的 TIMESTAMP 格式。
-     [結構定義自動偵測](https://docs.cloud.google.com/bigquery/docs/schema-detect?hl=zh-tw#date_and_time_values)功能也會根據這個格式 (而非現有格式) 決定 TIMESTAMP 欄類型。如果沒有這個值，系統會使用[預設格式](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv?hl=zh-tw#data_types)剖析 TIMESTAMP 欄位。
+   * 在「時間格式」中，輸入[格式元素，定義輸入檔案中的 TIME 值格式。](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements?hl=zh-tw#format_string_as_datetime)這個欄位應採用 SQL 樣式，例如 `HH24:MI:SS.FF3`。如果這個值存在，則只有這個格式是相容的 TIME 格式。[結構定義自動偵測](https://docs.cloud.google.com/bigquery/docs/schema-detect?hl=zh-tw#date_and_time_values)功能也會根據這個格式，而非現有格式，決定時間資料欄類型。如果沒有這個值，系統會使用[預設格式](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv?hl=zh-tw#data_types)剖析 TIME 欄位。
+   * 在「時間戳記格式」中，輸入格式元素，定義輸入檔案中的 TIMESTAMP 值格式。這個欄位應採用 SQL 樣式，例如 `MM/DD/YYYY HH24:MI:SS.FF3`。如果這個值存在，則只有這個格式是相容的 TIMESTAMP 格式。[結構定義自動偵測](https://docs.cloud.google.com/bigquery/docs/schema-detect?hl=zh-tw#date_and_time_values)功能也會根據這個格式 (而非現有格式) 決定 TIMESTAMP 欄類型。如果沒有這個值，TIMESTAMP 欄位會以[預設格式](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv?hl=zh-tw#data_types)剖析。
    * 如要忽略不在資料表結構定義中的資料列值，請選取「Unknown values」(不明的值)。
    * 針對「Field delimiter」(欄位分隔符號)，選擇在 CSV 檔案中分隔儲存格的字元：[Comma] (半形逗號)、[Tab] (定位點符號)、[Pipe] (管線符號) 或 [Custom] (自訂)。如果選擇「自訂」，請在「自訂欄位分隔符號」方塊中輸入分隔符號。預設值為 [Comma] (半形逗號)。
    * 針對「來源資料欄比對」，選擇下列其中一個策略，
      用來比對載入的資料欄與結構定義。
    + `Default`：系統會根據結構定義的提供方式選擇預設行為。
-     如果啟用自動偵測功能，系統預設會依名稱比對資料欄。
+     如果啟用自動偵測功能，預設行為是依名稱比對資料欄。
      否則，系統會預設依位置比對欄。這是為了確保行為回溯相容。
    + `Position`：依位置比對資料欄，並假設資料欄的排序方式與結構定義相同。
-   + `Name`：依名稱比對，方法是將標題列讀取為資料欄名稱，然後重新排序資料欄，以符合結構定義中的欄位名稱。系統會根據「要略過的標題列」，從最後略過的列讀取資料欄名稱。* 針對「Header rows to skip」(要略過的標題列)，在 CSV 檔案頂端輸入要略過的標題列數。預設值為 `0`。
+   + `Name`：依名稱比對，方法是將標題列讀取為資料欄名稱，然後重新排序資料欄，以符合架構中的欄位名稱。系統會根據「要略過的標題列」，從最後略過的列讀取資料欄名稱。* 針對「Header rows to skip」(要略過的標題列)，在 CSV 檔案頂端輸入要略過的標題列數。預設值為 `0`。
    * 針對「Quoted newlines」(引用換行符號)，勾選「Allow quoted newlines」(允許引用換行符號)，以允許在 CSV 檔案中使用包含換行符號字元的引用資料區段。預設值為 `false`。
    * 針對「不規則資料列」，勾選「允許不規則資料列」，以接受在 CSV 檔案中使用缺少結尾自選欄的資料列。系統會將缺少的值視為空值。如果取消勾選，系統會將缺少結尾資料欄的記錄視為損壞記錄；如果損壞記錄過多，工作結果中就會出現無效錯誤。預設值為 `false`。
-   * 在「空值標記」中，輸入代表 CSV 資料中空值的自訂字串清單。
-   * 針對 **Encryption**，請按一下 **Customer-managed key**，以使用 [Cloud Key Management Service key](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw)。如果您保留 **Google-managed key** 設定，BigQuery 會[加密靜態資料](https://docs.cloud.google.com/docs/security/encryption/default-encryption?hl=zh-tw)。
+   * 在「Null markers」(空值標記) 輸入自訂字串清單，代表 CSV 資料中的空值。
+   * 針對「Encryption」(加密)，請按一下「Customer-managed key」(客戶管理的金鑰)，以使用 [Cloud Key Management Service 金鑰](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw)。如果您保留 **Google-managed key** 設定，BigQuery 會[加密靜態資料](https://docs.cloud.google.com/docs/security/encryption/default-encryption?hl=zh-tw)。
 6. 點選「建立資料表」。
 
-**注意：** 使用Google Cloud 控制台 將資料載入空白資料表時，您無法新增標籤、說明、資料表到期時間或分區到期時間。  
+**注意：** 使用Google Cloud console 將資料載入空白資料表時，您無法新增標籤、說明、資料表到期時間或分區到期時間。  
   
 資料表建立完成之後，您就能更新資料表的到期時間、說明和標籤，但您無法在使用 Google Cloud 控制台建立資料表之後，新增分區到期時間。詳情請參閱[管理資料表](https://docs.cloud.google.com/bigquery/docs/managing-tables?hl=zh-tw)。
 
 ### SQL
 
-使用 [`LOAD DATA` DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements?hl=zh-tw)。以下範例會將 CSV 檔案載入新資料表 `mytable`：
+使用 [`LOAD DATA` DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements?hl=zh-tw)。下列範例會將 CSV 檔案載入新資料表 `mytable`：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -205,8 +203,8 @@ Google uses AI technology to translate content into your preferred language. AI 
 * `--allow_quoted_newlines`：如果有指定，系統會允許在 CSV 檔案中使用包含換行符號字元的引用資料區段。預設值為 `false`。
 * `--field_delimiter`：用來表示資料中資料欄間界線的字元，`\t` 和 `tab` 都可用來表示 Tab 字元分隔。預設值為 `,`。
 * `--null_marker`：選用的自訂字串，代表 CSV 資料中的 NULL 值。
-* `--null_markers`：選用的逗號分隔的清單，代表 CSV 資料中的空值。這個選項無法與 `--null_marker` 旗標搭配使用。
-* `--source_column_match`：指定比對載入的資料欄與結構定義所用的策略。您可以指定 `POSITION`，依位置比對載入的資料欄，前提是資料欄的排序方式與結構定義相同。您也可以指定 `NAME`，將標題列讀取為資料欄名稱，並重新排序資料欄，以符合結構定義中的欄位名稱，藉此依名稱比對。如未指定這個值，系統會根據結構定義的提供方式設定預設值。如果啟用 `--autodetect`，預設行為是依名稱比對資料欄。否則，系統預設會依位置比對欄。
+* `--null_markers`：選用的自訂字串清單，以半形逗號分隔，代表 CSV 資料中的 NULL 值。這個選項無法與 `--null_marker` 旗標搭配使用。
+* `--source_column_match`：指定比對載入的資料欄與結構定義所用的策略。您可以指定 `POSITION`，依位置比對載入的資料欄，前提是資料欄的排序方式與結構定義相同。您也可以指定 `NAME`，將標題列讀取為資料欄名稱，並重新排序資料欄，以符合結構定義中的欄位名稱，藉此依名稱比對。如未指定這個值，預設值會根據結構定義的提供方式而定。如果啟用 `--autodetect`，預設行為是依名稱比對資料欄。否則，系統預設會依位置比對欄。
 * `--skip_leading_rows`：指定在 CSV 檔案頂端要略過的標題列數。預設值為 `0`。
 * `--quote`：用來括住記錄的引號字元。預設值為 `"`。如要表示沒有引號字元，請使用空白字串。
 * `--max_bad_records`：這是一個整數，用來指定整個工作失敗前可允許的錯誤記錄數量上限。預設值為 `0`。無論 `--max_bad_records` 的值為何，系統最多只會傳回五個任何類型的錯誤。
@@ -221,10 +219,10 @@ Google uses AI technology to translate content into your preferred language. AI 
 * `--time_partitioning_expiration`：這是一個整數，用來指定系統應在何時刪除時間分區 (以秒為單位)。到期時間為分區的世界標準時間日期加上整數值。
 * `--time_partitioning_field`：用於建立分區資料表的 `DATE` 或 `TIMESTAMP` 資料欄。如果啟用時間分區時沒有這個值，系統就會建立擷取時間分區資料表。
 * `--require_partition_filter`：這個選項啟用後，系統會要求使用者加入 `WHERE` 子句，以指定要查詢的分區。使用分區篩選器可以降低成本並提升效能。詳情請參閱[查詢分區資料表](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables?hl=zh-tw)一文。
-* `--clustering_fields`：以半形逗號分隔的資料欄名稱清單 (最多四個名稱)，可用來建立[分群資料表](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables?hl=zh-tw)。
+* `--clustering_fields`：以半形逗號分隔的資料欄名稱清單 (最多四個名稱)，可用來建立[叢集資料表](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables?hl=zh-tw)。
 * `--destination_kms_key`：用來加密資料表資料的 Cloud KMS 金鑰。
 * `--column_name_character_map`：定義資料欄名稱字元的範圍和處理方式，並可選擇啟用[彈性資料欄名稱](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet?hl=zh-tw#flexible-column-names)。CSV 檔案必須有 `--autodetect` 選項。
-  詳情請參閱「[`load_option_list`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements?hl=zh-tw#load_option_list)」。
+  詳情請參閱 [`load_option_list`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements?hl=zh-tw#load_option_list)。
 
   如要進一步瞭解 `bq load` 指令，請參閱：
 
@@ -326,7 +324,7 @@ schema
     qtr:STRING,sales:FLOAT,year:STRING
 ```
 
-**注意：** 使用 bq 指令列工具指定結構定義時，無法加入 `RECORD` ([`STRUCT`](#struct-type)) 類型、欄位說明，也不能指定欄位模式。所有欄位模式均預設為 `NULLABLE`。如要加入欄位說明、模式和 `RECORD` 類型，請改為提供 [JSON 結構定義檔](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#specifying_a_json_schema_file)。
+**注意：** 使用 bq 指令列工具指定結構定義時，無法加入 `RECORD` ([`STRUCT`](#struct-type)) 類型和欄位說明，也不能指定欄位模式。所有欄位模式均預設為 `NULLABLE`。如要加入欄位說明、模式和 `RECORD` 類型，請改為提供 [JSON 結構定義檔](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#specifying_a_json_schema_file)。
 
 下列指令會將 `gs://mybucket/` 中多個檔案的資料載入 `mydataset` 中名為 `mytable` 的資料表。Cloud Storage URI 使用萬用字元。結構定義由系統自動偵測。
 
@@ -363,7 +361,7 @@ schema
 **API 附註：**
 
 * 載入工作不可部分完成，且資料狀態具一致性。如果載入工作失敗，所有資料都無法使用；如果載入工作成功，則所有資料都可以使用。
-* 最佳做法是產生唯一 ID，並在呼叫 `jobs.insert` 建立載入工作時，將該 ID 當做 `jobReference.jobId` 傳送。這個方法較不受網路故障問題的影響，因為用戶端可使用已知的工作 ID 進行輪詢或重試。
+* 最佳做法是產生唯一 ID，並在呼叫 `jobs.insert` 建立載入工作時，將該唯一 ID 當做 `jobReference.jobId` 傳送。這個方法較不受網路故障問題的影響，因為用戶端可使用已知的工作 ID 進行輪詢或重試。
 * 對指定的工作 ID 呼叫 `jobs.insert` 是一種冪等作業。也就是說，您可以對同一個工作 ID 重試無數次，最多會有一個作業成功。
 
 ### C#
@@ -846,5 +844,5 @@ public class LoadPartitionedTable {
       Job completedJob = loadJob.waitFor();
 
       // Check for errors
-      if (completedJob ==
+      if (completedJob == null</
 ```

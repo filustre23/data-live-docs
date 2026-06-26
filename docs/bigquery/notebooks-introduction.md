@@ -36,11 +36,11 @@ BigQuery 中的 Notebook 具有下列優點：
 
 ## 筆記本庫
 
-筆記本庫是探索及使用預先建構筆記本範本的中心樞紐。這些範本可讓您執行常見工作，例如資料準備、資料分析和視覺化。筆記本範本也有助於探索 BigQuery Studio 功能、管理工作流程，以及推廣最佳做法。
+筆記本庫是中心樞紐，可供探索及使用預先建構的筆記本範本。這些範本可讓您執行資料準備、資料分析和視覺化等常見工作。筆記本範本也有助於探索 BigQuery Studio 功能、管理工作流程，以及推廣最佳做法。
 
 您可以使用筆記本範本庫，簡化整個意圖到洞察工作流程，包括資料生命週期的各個階段，從擷取和探索到進階分析和 BigQuery ML。
 
-筆記本庫提供各種程度的範本，包括 SQL、Python、Apache Spark 和 DataFrame 的基本範本。您也可以探索 BigQuery 中的生成式 AI 和多模態資料分析等主題。
+筆記本庫提供各種技能程度適用的範本。範本庫包含 SQL、Python、Apache Spark 和 DataFrame 的基本範本。您也可以探索 BigQuery 中的生成式 AI 和多模態資料分析等主題。
 
 如要開始使用筆記本庫，請按照下列步驟操作：
 
@@ -56,17 +56,17 @@ BigQuery 中的 Notebook 具有下列優點：
 
 BigQuery 會使用 [Colab Enterprise 執行階段](https://docs.cloud.google.com/colab/docs/create-runtime?hl=zh-tw)執行筆記本。
 
-筆記本執行階段是分配給特定使用者的 Compute Engine 虛擬機器，可讓使用者在筆記本中執行程式碼。多個筆記本可以共用同一個執行階段，但每個執行階段只屬於一位使用者，其他人無法使用。筆記本執行階段是根據範本建立，通常由具備管理員權限的使用者定義。您可以隨時改用不同範本類型的執行階段。
+筆記本執行階段是分配給特定使用者的 Compute Engine 虛擬機器，可讓使用者在筆記本中執行程式碼。多個筆記本可以共用同一個執行階段。不過，每個執行階段都只屬於一位使用者，其他人無法使用。筆記本執行階段是根據範本建立，通常由具備管理員權限的使用者定義。您隨時可以改用不同範本類型的執行階段。
 
 ## 筆記本安全性
 
-您可以使用 Identity and Access Management (IAM) 角色控管筆記本的存取權。詳情請參閱「[授予筆記本存取權](https://docs.cloud.google.com/bigquery/docs/create-notebooks?hl=zh-tw#grant_access_to_notebooks)」。
+您可以使用 Identity and Access Management (IAM) 角色控管筆記本存取權。詳情請參閱「[授予筆記本存取權](https://docs.cloud.google.com/bigquery/docs/create-notebooks?hl=zh-tw#grant_access_to_notebooks)」和「[筆記本的安全性考量](https://docs.cloud.google.com/bigquery/docs/create-notebooks?hl=zh-tw#notebooks-security)」。
 
 如要偵測筆記本中使用的 Python 套件是否有安全漏洞，請安裝並使用 [Notebook Security Scanner](https://docs.cloud.google.com/security-command-center/docs/enable-notebook-security-scanner?hl=zh-tw) ([搶先版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))。
 
 ## 支援的地區
 
-您可以在 BigQuery Studio 中儲存、共用及管理筆記本版本。下表列出 BigQuery Studio 的適用區域：
+BigQuery Studio 可讓您儲存、共用及管理筆記本版本。下表列出 BigQuery Studio 的適用地區：
 
 |  | 區域說明 | 區域名稱 | 詳細資料 |
 | --- | --- | --- | --- |
@@ -94,15 +94,19 @@ BigQuery 會使用 [Colab Enterprise 執行階段](https://docs.cloud.google.com
 |  | 東京 | `asia-northeast1` |  |
 | **歐洲** | | | |
 |  | 比利時 | `europe-west1` | [低二氧化碳排放](https://cloud.google.com/sustainability/region-carbon?hl=zh-tw#region-picker) |
+|  | 芬蘭 | `europe-north1` | [低二氧化碳排放](https://cloud.google.com/sustainability/region-carbon?hl=zh-tw#region-picker) |
 |  | 法蘭克福 | `europe-west3` |  |
 |  | 倫敦 | `europe-west2` | [低二氧化碳排放](https://cloud.google.com/sustainability/region-carbon?hl=zh-tw#region-picker) |
 |  | 馬德里 | `europe-southwest1` | [低二氧化碳排放](https://cloud.google.com/sustainability/region-carbon?hl=zh-tw#region-picker) |
+|  | 米蘭 | `europe-west8` |  |
 |  | 荷蘭 | `europe-west4` | [低二氧化碳排放](https://cloud.google.com/sustainability/region-carbon?hl=zh-tw#region-picker) |
 |  | 杜林 | `europe-west12` |  |
+|  | 華沙 | `europe-central2` |  |
 |  | 蘇黎世 | `europe-west6` | [低二氧化碳排放](https://cloud.google.com/sustainability/region-carbon?hl=zh-tw#region-picker) |
 | **中東地區** | | | |
-|  | 杜哈 | `me-central1` |  |
 |  | 達曼 | `me-central2` |  |
+|  | 杜哈 | `me-central1` |  |
+|  | 特拉維夫市 | `me-west1` |  |
 
 **注意：** 所有程式碼資產都會儲存在預設區域。更新預設區域後，之後建立的所有程式碼資產都會使用新的區域。
 
@@ -112,7 +116,7 @@ BigQuery 會使用 [Colab Enterprise 執行階段](https://docs.cloud.google.com
 
 ## 監控運算單元用量
 
-如要監控 BigQuery Studio 筆記本的運算單元用量，請在 Google Cloud 控制台中查看 [Cloud Billing 帳單報表](https://docs.cloud.google.com/billing/docs/reports?hl=zh-tw)。在 Cloud Billing 帳單報表中，套用標籤為 **goog-bq-feature-type** 且值為 **BQ\_STUDIO\_NOTEBOOK** 的篩選條件，即可查看 BigQuery Studio 筆記本的運算單元用量和費用。
+如要監控 BigQuery Studio 筆記本的配額用量，請在 Google Cloud 控制台中查看 [Cloud Billing 報表](https://docs.cloud.google.com/billing/docs/reports?hl=zh-tw)。在 Cloud Billing 帳單報表中，套用標籤為 **goog-bq-feature-type** 且值為 **BQ\_STUDIO\_NOTEBOOK** 的篩選條件，即可查看 BigQuery Studio 筆記本的運算單元用量和費用。
 
 ## 疑難排解
 
@@ -130,11 +134,11 @@ BigQuery 會使用 [Colab Enterprise 執行階段](https://docs.cloud.google.com
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-06-19 (世界標準時間)。
+上次更新時間：2026-06-24 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-19 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-24 (世界標準時間)。"],[],[]]

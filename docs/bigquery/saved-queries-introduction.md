@@ -28,7 +28,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### 已儲存的查詢安全性
 
-您可以使用 Identity and Access Management (IAM) 角色，控管已儲存查詢的存取權。詳情請參閱[共用已儲存的查詢](https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries?hl=zh-tw#share-saved-query)。
+您可以使用 Identity and Access Management (IAM) 角色，控管已儲存查詢的存取權。詳情請參閱「[共用已儲存的查詢](https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries?hl=zh-tw#share-saved-query)」和「[已儲存查詢的安全考量](https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries?hl=zh-tw#saved-queries-security)」。
 
 ### 支援的地區
 
@@ -136,8 +136,6 @@ Google uses AI technology to translate content into your preferred language. AI 
   + `dataform.repositories.create`
   + `dataform.repositories.list`
 
-**警告：** 程式碼資產的可見度由專案層級的 Dataform 權限控管。具備 `dataform.repositories.list` 權限的使用者 (這項權限包含在標準 BigQuery 角色中，例如「BigQuery Job User」、「BigQuery Studio User」和「BigQuery User」)，可以在專案的「Explorer」面板中查看所有程式碼資產，無論這些資產是由他們建立，還是與他們共用。 Google Cloud 如要限制瀏覽權限，可以建立排除 `dataform.repositories.list` 權限的[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)。
-
 如要讓沒有 BigQuery 管理員、BigQuery 工作使用者或 BigQuery 使用者角色的使用者使用已儲存的查詢，請在 IAM 中授予他們[必要權限](https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries?hl=zh-tw#required_permissions)。
 
 [自訂角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#custom)不會自動更新。
@@ -155,11 +153,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-06-23 (世界標準時間)。
+上次更新時間：2026-06-24 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-23 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-24 (世界標準時間)。"],[],[]]

@@ -959,4 +959,6 @@ for run in response.runs:
 
 如要透過 Google Cloud 控制台的「Scheduled queries」(已排定的查詢) 頁面刪除已排定的查詢，請按照下列步驟操作：
 
-1. 在導覽選單中，按一下「排程查詢」
+1. 在導覽選單中，按一下「排程查詢」。
+2. 在排定查詢清單中，按一下要刪除的排定查詢名稱。
+3. 在「Scheduled query details」(已排定查詢詳細資料)

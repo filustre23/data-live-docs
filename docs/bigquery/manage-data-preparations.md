@@ -16,7 +16,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 管理資料準備作業
 
-本文說明如何管理 BigQuery 資料準備作業，包括管理存取權、版本管理、效能和中繼資料。本文也會說明如何執行基本工作，例如查看及下載資料準備作業。
+本文說明如何管理 BigQuery 資料準備作業，包括管理存取權、版本管理、效能和中繼資料。本文也說明如何執行基本工作，例如查看及下載資料準備作業。
 
 資料準備是 [Dataform](https://docs.cloud.google.com/dataform/docs/overview?hl=zh-tw) 支援的 [BigQuery](https://docs.cloud.google.com/bigquery/docs/query-overview?hl=zh-tw#bigquery-studio) 資源。詳情請參閱「[BigQuery 資料準備總覽](https://docs.cloud.google.com/bigquery/docs/data-prep-introduction?hl=zh-tw)」一文。
 
@@ -31,19 +31,18 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 #### 取得資料準備功能的使用者存取權
 
-如要取得在 BigQuery 中準備資料所需的權限，請要求系統管理員授予您下列 IAM 角色：
+如要取得在 BigQuery 中準備資料所需的權限，請要求管理員授予您下列 IAM 角色：
 
 * 專案的「BigQuery Studio 使用者」 (`roles/bigquery.studioUser`)
-* [Gemini for Google Cloud 使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/cloudaicompanion?hl=zh-tw#cloudaicompanion.user)  (`roles/cloudaicompanion.user`)
-  專案
+* 專案的 [Gemini for Google Cloud 使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/cloudaicompanion?hl=zh-tw#cloudaicompanion.user)  (`roles/cloudaicompanion.user`)
 * 存取來源資料表：
   資料表、資料集或專案的 [BigQuery 資料檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataViewer)  (`roles/bigquery.dataViewer`)
-* 分享資料準備作業：
-  資料表、資料集或專案的[Dataform 程式碼擁有者](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform?hl=zh-tw#dataform.codeOwner)  (`roles/dataform.codeOwner`)
+* 分享資料準備：
+  資料表、資料集或專案的 [Dataform 程式碼擁有者](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform?hl=zh-tw#dataform.codeOwner)  (`roles/dataform.codeOwner`)
 
 如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
-如要進一步瞭解 BigQuery 資料集的 IAM，請參閱「[授予資料集存取權](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam?hl=zh-tw#grant_access_to_a_dataset)」。
+如要進一步瞭解 BigQuery 中資料集的 IAM，請參閱「[授予資料集存取權](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam?hl=zh-tw#grant_access_to_a_dataset)」。
 
 您或許還可透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)取得這些權限。
 
@@ -61,6 +60,15 @@ Google uses AI technology to translate content into your preferred language. AI 
   資料表、資料集或專案的「BigQuery 資料編輯者」 (`roles/bigquery.dataEditor`)
 
 視資料準備管道而定，Dataform 服務帳戶可能需要額外權限。詳情請參閱「[授予 Dataform 必要存取權](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#grant-dataform-required-access)」。
+
+#### 資料準備作業的安全注意事項
+
+由於 BigQuery 中的程式碼資產是由 Dataform 支援，因此請考慮以下安全影響，以確保使用者能存取這些資產：
+
+* 程式碼資產的可見度取決於專案層級的 Dataform 權限。擁有 `dataform.repositories.list` 權限的使用者 (包含在標準 BigQuery 角色中，例如「BigQuery Job User」、「BigQuery Studio User」和「BigQuery User」)，可以在專案的 Google Cloud 「Explorer」面板中查看所有程式碼資產，無論這些資產是由他們建立，還是與他們共用。如要限制瀏覽權限，可以建立排除 `dataform.repositories.list` 權限的[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)。
+* 與 Dataform 服務代理程式共用的任何密鑰，都可能遭到可編輯這些資產的使用者存取。為確保憑證安全，請限制只有信任的使用者可以建立及編輯憑證，並限制 Dataform 服務代理程式可存取的密鑰。詳情請參閱「[在套件安裝期間存取密鑰](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#secret-access-risk)」。
+
+詳情請參閱「[Dataform 權限的安全考量](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#security-considerations-permissions)」。
 
 ## 查看現有資料準備作業
 
@@ -84,8 +92,8 @@ Google uses AI technology to translate content into your preferred language. AI 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
 3. 在「Explorer」窗格中，按一下「資料準備」，然後選取資料準備作業。
-4. 在資料準備的工具列中，依序選取「更多」**>「寫入模式」**。
-5. 選取其中一個選項，詳情請參閱「[寫入模式](https://docs.cloud.google.com/bigquery/docs/data-prep-introduction?hl=zh-tw#write-mode)」。
+4. 在資料準備工具列中，依序選取「更多」**>「寫入模式」**。
+5. 選取其中一個選項。詳情請參閱「[寫入模式](https://docs.cloud.google.com/bigquery/docs/data-prep-introduction?hl=zh-tw#write-mode)」。
 6. 按一下 [儲存]。
 
 ## 協助我們改良建議功能
@@ -100,7 +108,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 資料準備版本
 
-您可以選擇在[存放區](https://docs.cloud.google.com/bigquery/docs/repository-intro?hl=zh-tw)內或外部建立資料準備作業。資料準備作業的版本控管方式會因資料準備作業所在位置而異。
+您可以選擇在[存放區](https://docs.cloud.google.com/bigquery/docs/repository-intro?hl=zh-tw)內或外部建立資料準備作業。資料準備作業的版本管理方式會因資料準備作業所在位置而異。
 
 ### 存放區中的資料準備版本管理
 
@@ -134,7 +142,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 **注意：**2025 年 7 月前建立的資料準備檔案會自動遷移至 SQLX 格式，這會改變檔案的儲存和執行方式。在下列情況中，系統會觸發這項一次性遷移作業：
 
 * 開啟現有資料準備時，系統會遷移該資料準備。
-* 儲存或更新資料準備工作時，系統會遷移管道中的資料準備工作。
+* 儲存或更新資料準備工作時，管道中的資料準備工作就會遷移。
 
 ## 上傳資料準備檔案
 
@@ -145,7 +153,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
 3. 在「Explorer」窗格中展開專案。
-4. 按一下「資料準備」，然後依序點按 more\_vert「查看動作」>「上傳至資料準備」。
+4. 按一下「資料準備」，然後點按 more\_vert「查看動作」>「上傳至資料準備」。
 5. 在「上傳資料準備」對話方塊中，選取要上傳的檔案，或輸入資料準備的網址。
 6. 輸入資料準備作業的名稱。
 7. 選取管理及儲存資源的資料準備位置。
@@ -153,7 +161,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 管理 Knowledge Catalog 中的中繼資料
 
-您可以使用 Knowledge Catalog 儲存及管理資料準備作業的中繼資料。預設情況下，Knowledge Catalog 會提供資料準備功能，不需額外設定。
+您可以透過 Knowledge Catalog 儲存及管理資料準備作業的中繼資料，預設情況下，Knowledge Catalog 會提供資料準備功能，不需額外設定。
 
 您可以使用 Knowledge Catalog 管理所有 [BigQuery 位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)的資料準備作業。在 Knowledge Catalog 中管理資料準備作業時，須遵守 [Knowledge Catalog 配額和限制](https://docs.cloud.google.com/dataplex/docs/quotas?hl=zh-tw)，以及 [Knowledge Catalog 定價](https://cloud.google.com/dataplex/pricing?hl=zh-tw)。
 
@@ -165,21 +173,21 @@ Knowledge Catalog 會自動從資料準備作業擷取下列中繼資料：
 * 資料資產類型
 * 對應 Google Cloud 專案
 
-Knowledge Catalog 會將資料準備作業記錄為[項目](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources?hl=zh-tw#entries)，並提供下列項目值：
+Knowledge Catalog 會將資料準備作業記錄為「項目」，並提供下列項目值：
 
 系統項目群組
-:   資料準備的[系統項目群組](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources?hl=zh-tw#entry-groups)為 `@dataform`。如要查看 Knowledge Catalog 中資料準備項目的詳細資料，請查看 `dataform` 系統項目群組。如需查看項目群組中所有項目的清單，請參閱 Knowledge Catalog 說明文件中的「[查看項目群組的詳細資料](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources?hl=zh-tw#entry-group-details)」。�
+:   資料準備的[系統項目群組](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources?hl=zh-tw#entry-groups)為 `@dataform`。如要查看 Knowledge Catalog 中資料準備項目的詳細資料，請查看 `dataform` 系統項目群組。如需查看項目群組中所有項目的清單，請參閱 Knowledge Catalog 說明文件中的「[查看項目群組詳細資料](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources?hl=zh-tw#entry-group-details)」一節。
 
 系統項目類型
-:   資料準備的[系統項目類型](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources?hl=zh-tw#entry-types)為 `dataform-code-asset`。如要查看資料準備的詳細資料，您需要查看 `dataform-code-asset` 系統項目類型、使用切面篩選器篩選結果，並[將 `dataform-code-asset` 切面內的 `type` 欄位設為 `DATA_PREPARATION`](https://docs.cloud.google.com/dataplex/docs/search-syntax?hl=zh-tw#aspect-search)。然後選取所選資料準備的項目。
-    如要瞭解如何查看所選項目類型的詳細資料，請參閱 Knowledge Catalog 說明文件中的「[查看項目類型的詳細資料](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources?hl=zh-tw#entry-type-details)」。如需查看所選項目詳細資料的操作說明，請參閱 Knowledge Catalog 說明文件中的「[查看項目的詳細資料](https://docs.cloud.google.com/dataplex/docs/search-assets?hl=zh-tw#view-entry-details)」一節。
+:   資料準備的[系統項目類型](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources?hl=zh-tw#entry-types)為 `dataform-code-asset`。如要查看資料準備作業的詳細資料，請查看 `dataform-code-asset` 系統項目類型、使用切面篩選器篩選結果，並將 `dataform-code-asset` 切面內的 `type` 欄位設為 `DATA_PREPARATION`。[然後選取所選資料準備的項目。
+    如要瞭解如何查看所選項目類型的詳細資料，請參閱 Knowledge Catalog 說明文件中的「[查看項目類型的詳細資料](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources?hl=zh-tw#entry-type-details)」。如要瞭解如何查看所選項目的詳細資料，請參閱 Knowledge Catalog 說明文件中的「[查看項目的詳細資料](https://docs.cloud.google.com/dataplex/docs/search-assets?hl=zh-tw#view-entry-details)」一節。](https://docs.cloud.google.com/dataplex/docs/search-syntax?hl=zh-tw#aspect-search)
 
 系統切面類型
-:   資料準備的[系統層面類型](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata?hl=zh-tw#aspect-types)為 `dataform-code-asset`。如要透過[切面](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata?hl=zh-tw#aspects)註解資料準備項目，為 Knowledge Catalog 中的資料準備作業提供額外脈絡，請查看 `dataform-code-asset` 切面類型、使用以切面為準的篩選器篩選結果，並[將 `dataform-code-asset` 切面內的 `type` 欄位設為 `DATA_PREPARATION`](https://docs.cloud.google.com/dataplex/docs/search-syntax?hl=zh-tw#aspect-search)。如需如何使用切面註解項目的操作說明，請參閱 Knowledge Catalog 說明文件中的「[管理切面及豐富中繼資料](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata?hl=zh-tw)」一文。
+:   資料準備的[系統層面類型](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata?hl=zh-tw#aspect-types)為 `dataform-code-asset`。如要透過[切面](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata?hl=zh-tw#aspects)為 Knowledge Catalog 中的資料準備項目加上註解，進一步瞭解資料準備作業，請查看 `dataform-code-asset` 切面類型、使用以切面為準的篩選器篩選結果，並[將 `dataform-code-asset` 切面內的 `type` 欄位設為 `DATA_PREPARATION`](https://docs.cloud.google.com/dataplex/docs/search-syntax?hl=zh-tw#aspect-search)。如需如何使用切面註解項目的操作說明，請參閱 Knowledge Catalog 說明文件中的「[管理切面及豐富中繼資料](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata?hl=zh-tw)」一文。
 
 類型
 :   資料畫布的類型為 `DATA_PREPARATION`。
-    您可以使用[以切面為準的篩選器](https://docs.cloud.google.com/dataplex/docs/search-syntax?hl=zh-tw#aspect-search)，在 `dataform-code-asset` 系統項目類型和 `dataform-code-asset` 切面類型中，透過 `aspect:dataplex-types.global.dataform-code-asset.type=DATA_PREPARATION` 查詢篩選資料準備作業。
+    您可以使用[以切面為準的篩選器](https://docs.cloud.google.com/dataplex/docs/search-syntax?hl=zh-tw#aspect-search)，透過 `dataform-code-asset` 系統項目類型和 `dataform-code-asset` 切面類型中的 `aspect:dataplex-types.global.dataform-code-asset.type=DATA_PREPARATION` 查詢，篩選資料準備作業。
 
 如需搜尋資產的操作說明，請參閱 Knowledge Catalog 說明文件中的「[在 Knowledge Catalog 中搜尋資料資產](https://docs.cloud.google.com/dataplex/docs/search-assets?hl=zh-tw)」。
 
@@ -196,11 +204,11 @@ Knowledge Catalog 會將資料準備作業記錄為[項目](https://docs.cloud.g
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-06-19 (世界標準時間)。
+上次更新時間：2026-06-24 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-19 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-24 (世界標準時間)。"],[],[]]

@@ -15,15 +15,15 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 使用 BigLake metastore (傳統版) 管理開放原始碼中繼資料
 
-**警告：** 我們不再建議使用 BigLake metastore (傳統版) 進行 Google Cloud。請改用[Lakehouse 執行階段目錄](https://docs.cloud.google.com/bigquery/docs/about-blms?hl=zh-tw)。
+**警告：** 我們不再建議使用 BigLake metastore (傳統版) 進行 Google Cloud。請改用 [Lakehouse 執行階段目錄](https://docs.cloud.google.com/bigquery/docs/about-blms?hl=zh-tw)。
 
-BigLake metastore (傳統版) 是 Google Cloud上資料分析產品的統一實體中繼資料服務。BigLake 中繼存放區 (傳統版) 提供單一中繼資料來源，方便您管理及存取多個來源的資料。資料分析師和工程師可透過 BigQuery 和 Managed Service for Apache Spark 上的各種開放資料處理引擎存取 BigLake metastore (傳統版)，因此這項服務是實用的工具。
+BigLake metastore (傳統版) 是統一的實體中繼資料服務，適用於 Google Cloud上的資料分析產品。BigLake 中繼存放區 (傳統版) 提供單一中繼資料來源，方便您管理及存取多個來源的資料。資料分析師和工程師可透過 BigQuery 和 Managed Service for Apache Spark 上的各種開放資料處理引擎存取 BigLake metastore (傳統版)，因此這項服務是實用的工具。
 
-如要管理商務中繼資料，請參閱 [Knowledge Catalog](https://docs.cloud.google.com/dataplex?hl=zh-tw)。
+如要管理商務中繼資料，請參閱「[Knowledge Catalog](https://docs.cloud.google.com/dataplex?hl=zh-tw)」。
 
-## BigLake Metastore (傳統版) 的運作方式
+## BigLake metastore (傳統版) 的運作方式
 
-BigLake metastore (傳統版) 是無伺服器服務，使用前不必佈建資源。您可以在 Managed Service for Apache Spark 叢集中，將其做為 [Hive Metastore](https://cwiki.apache.org/confluence/display/Hive/Design#Design-Metastore) 的無伺服器替代方案。BigLake metastore (傳統版) 的運作方式與 Hive Metastore 相同，都是透過 Hive 相容的 API 運作，因此您可以在 BigQuery 中立即查詢開放格式資料表，不必執行任何其他步驟。BigLake metastore (傳統版) 僅支援 [Apache Iceberg 資料表](https://iceberg.apache.org/docs/latest/)。
+BigLake metastore (傳統版) 是無伺服器服務，您不必先佈建資源，即可使用這項服務。在 Managed Service for Apache Spark 叢集中，您可以將其做為 [Hive Metastore](https://cwiki.apache.org/confluence/display/Hive/Design#Design-Metastore) 的無伺服器替代方案。BigLake metastore (傳統版) 的運作方式與 Hive Metastore 相同，都是透過 Hive 相容的 API 運作，因此您可以在 BigQuery 中立即查詢開放格式資料表，不必執行任何其他步驟。BigLake metastore (傳統版) 僅支援 [Apache Iceberg 資料表](https://iceberg.apache.org/docs/latest/)。
 
 BigLake metastore (傳統版) 提供 [API](https://docs.cloud.google.com/bigquery/docs/reference/biglake/rest?hl=zh-tw)、用戶端程式庫和資料引擎整合 (例如 [Apache Spark](https://spark.apache.org/))，可管理目錄、資料庫和資料表。
 
@@ -44,7 +44,7 @@ BigLake Metastore (傳統版) 有下列限制：
 
 您必須先啟用計費功能和 BigLake API，才能使用 BigLake Metastore (傳統版)。
 
-1. 請管理員授予您專案的「服務使用情形管理員」(`roles/serviceusage.serviceUsageAdmin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+1. 請管理員授予您專案的「Service Usage 管理員」(`roles/serviceusage.serviceUsageAdmin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 2. 為 Google Cloud 專案啟用計費功能。瞭解如何[檢查專案是否已啟用計費功能](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw)。
 3. 啟用 BigLake API。
 
@@ -52,7 +52,7 @@ BigLake Metastore (傳統版) 有下列限制：
 
 ## 必要的角色
 
-* 如要完全控管 BigLake metastore (傳統版) 資源，您需要 BigLake 管理員角色 (`roles/biglake.admin`)。如果您使用 [BigQuery Spark 連接器](https://docs.cloud.google.com/dataproc/docs/tutorials/bigquery-connector-spark-example?hl=zh-tw)服務帳戶、[Managed Service for Apache Spark 服務帳戶](https://docs.cloud.google.com/dataproc-serverless/docs/concepts/service-account?hl=zh-tw)或 [Managed Service for Apache Spark VM 服務帳戶](https://docs.cloud.google.com/dataproc/docs/concepts/iam/dataproc-principals?hl=zh-tw#vm_service_account_data_plane_identity)，請將 BigLake 管理員角色授予該帳戶。
+* 如要完全控管 BigLake Metastore (傳統版) 資源，您需要 BigLake 管理員角色 (`roles/biglake.admin`)。如果您使用 [BigQuery Spark 連接器](https://docs.cloud.google.com/dataproc/docs/tutorials/bigquery-connector-spark-example?hl=zh-tw)服務帳戶、[Managed Service for Apache Spark 服務帳戶](https://docs.cloud.google.com/dataproc-serverless/docs/concepts/service-account?hl=zh-tw)或 [Managed Service for Apache Spark VM 服務帳戶](https://docs.cloud.google.com/dataproc/docs/concepts/iam/dataproc-principals?hl=zh-tw#vm_service_account_data_plane_identity)，請將 BigLake 管理員角色授予該帳戶。
 * 如要取得 BigLake Metastore (傳統版) 資源的唯讀存取權，您需要 BigLake 檢視者角色 (`roles/biglake.viewer`)。舉例來說，在 BigQuery 中查詢 BigLake Metastore (傳統版) 資料表時，使用者或 BigQuery 連線服務帳戶必須具備 BigLake 檢視者角色。
 * 如要透過連線建立 BigQuery 資料表，您需要 BigQuery 連線使用者角色 (`roles/bigquery.connectionUser`)。如要進一步瞭解如何共用連線，請參閱「[與使用者共用連線](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection?hl=zh-tw#share_connections)」。
 
@@ -60,22 +60,22 @@ BigLake Metastore (傳統版) 有下列限制：
 
 * **使用者：**直接呼叫 BigLake API 時，或從 BigQuery 查詢 Apache Iceberg 代管資料表，但沒有連線時。在這種情況下，BigQuery 會使用使用者的憑證。
 * **[BigQuery Cloud 資源連結](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection?hl=zh-tw)：**從 BigQuery 透過連線查詢 Iceberg 代管資料表時，BigQuery 會使用連線服務帳戶憑證存取 BigLake 中繼存放區 (傳統版)。
-* **[BigQuery Spark 連接器](https://docs.cloud.google.com/bigquery/docs/connect-to-spark?hl=zh-tw)：**在 BigQuery [Spark 預存程序](https://docs.cloud.google.com/bigquery/docs/spark-procedures?hl=zh-tw)中，搭配使用 Spark 和 BigLake 中繼存放區 (傳統版) 時。Spark 會使用 Spark Connector 的服務帳戶憑證，存取 BigLake 中繼存放區 (傳統版) 並建立 BigQuery 資料表。
+* **[BigQuery Spark 連接器](https://docs.cloud.google.com/bigquery/docs/connect-to-spark?hl=zh-tw)：**在 BigQuery [Spark 預存程序](https://docs.cloud.google.com/bigquery/docs/spark-procedures?hl=zh-tw)中，搭配使用 Spark 和 BigLake 中繼存放區 (傳統版)。Spark 會使用 Spark 連接器的服務帳戶憑證，存取 BigLake 中繼存放區 (傳統版) 並建立 BigQuery 資料表。
 * **[Managed Service for Apache Spark 服務帳戶](https://docs.cloud.google.com/dataproc-serverless/docs/concepts/service-account?hl=zh-tw)：**
   在 Managed Service for Apache Spark 中使用 Spark 和 BigLake 時，Spark 會使用服務帳戶憑證。
 * **[Managed Service for Apache Spark VM 服務帳戶](https://docs.cloud.google.com/dataproc/docs/concepts/iam/dataproc-principals?hl=zh-tw#vm_service_account_data_plane_identity)：**
-  使用 Managed Service for Apache Spark 時 (而非 Managed Service for Apache Spark)。Apache Spark 會使用 VM 服務帳戶憑證。
+  使用 Managed Service for Apache Spark (而非 Managed Service for Apache Spark) 時。Apache Spark 會使用 VM 服務帳戶憑證。
 
 視權限而定，您可以將這些角色授予自己，或請管理員授予您這些角色。如要進一步瞭解如何授予角色，請參閱「[查看可針對資源授予的角色](https://docs.cloud.google.com/iam/docs/viewing-grantable-roles?hl=zh-tw)」。
 
-如要查看存取 BigLake Metastore (傳統版) 資源的確切必要權限，請展開「Required permissions」(必要權限) 部分：
+如要查看存取 BigLake Metastore (傳統版) 資源的確切必要權限，請展開「Required permissions」(必要權限)部分：
 
 ### 所需權限
 
 * 專案層級的 `biglake.tables.get`，適用於所有唯讀存取權。查詢 Iceberg 代管資料表
   資料表是唯讀資料表。
-* 專案層級的 `biglake.{catalogs|databases|tables}.*`，適用於所有讀取和寫入權限。一般來說，Apache Spark 需要讀取及寫入資料，包括建立、管理及查看目錄、資料庫和資料表。
-* 在 BigQuery 雲端資源連結層級或更高等級，建立使用連結的 Iceberg 代管資料表。`bigquery.connections.delegate`
+* 專案層級的 `biglake.{catalogs|databases|tables}.*`，適用於所有讀取和寫入權限。一般來說，Apache Spark 需要讀取和寫入資料，包括建立、管理及查看目錄、資料庫和資料表。
+* BigQuery 雲端資源連線層級或更高等級的 `bigquery.connections.delegate`，可使用連線建立 Iceberg 代管資料表。
 
 ## 連線至 BigLake metastore (傳統版)
 
@@ -83,10 +83,10 @@ BigLake Metastore (傳統版) 有下列限制：
 
 ### 連線至 Managed Service for Apache Spark VM
 
-如要透過 Managed Service for Apache Spark VM 連線至 BigLake metastore (傳統版)，請完成下列步驟：
+如要透過 Managed Service for Apache Spark VM 連線至 BigLake metastore (傳統版)，請按照下列步驟操作：
 
 1. [使用 SSH 連線至 Managed Service for Apache Spark。](https://docs.cloud.google.com/dataproc/docs/concepts/accessing/ssh?hl=zh-tw)
-2. 在 [Spark SQL CLI](https://spark.apache.org/docs/latest/sql-distributed-sql-engine-spark-sql-cli.html) 中，使用下列陳述式安裝及設定 Apache Iceberg 自訂目錄，以便搭配 BigLake 中繼資料存放區 (傳統版) 使用：
+2. 在 [Spark SQL CLI](https://spark.apache.org/docs/latest/sql-distributed-sql-engine-spark-sql-cli.html) 中，使用下列陳述式安裝及設定 Apache Iceberg 自訂目錄，以便使用 BigLake 中繼存放區 (傳統版)：
 
    ```
    spark-sql \
@@ -105,9 +105,9 @@ BigLake Metastore (傳統版) 有下列限制：
 
 更改下列內容：
 
-* `ICEBERG_SPARK_PACKAGE`：要搭配 Spark 使用的 Apache Iceberg 版本。建議使用與 [Managed Service for Apache Spark](https://docs.cloud.google.com/dataproc/docs/concepts/versioning/dataproc-version-clusters?hl=zh-tw) 或 [Managed Service for Apache Spark](https://docs.cloud.google.com/dataproc-serverless/docs/concepts/versions/spark-runtime-versions?hl=zh-tw) 執行個體中 Spark 版本相符的 Spark 版本。如要查看可用的 Apache Iceberg 版本清單，請參閱「[Apache Iceberg 下載](https://iceberg.apache.org/releases/)」。舉例來說，Apache Spark 3.3 的標記為：  
+* `ICEBERG_SPARK_PACKAGE`：要搭配 Spark 使用的 Apache Iceberg 版本。建議您使用與 [Managed Service for Apache Spark](https://docs.cloud.google.com/dataproc/docs/concepts/versioning/dataproc-version-clusters?hl=zh-tw) 或 [Managed Service for Apache Spark](https://docs.cloud.google.com/dataproc-serverless/docs/concepts/versions/spark-runtime-versions?hl=zh-tw) 執行個體中 Spark 版本相符的 Spark 版本。如要查看可用的 Apache Iceberg 版本清單，請參閱「[Apache Iceberg 下載項目](https://iceberg.apache.org/releases/)」。舉例來說，Apache Spark 3.3 的標記為：  
   `--packages org.apache.iceberg:iceberg-spark-runtime-3.3_2.13:1.2.1`
-* `BIGLAKE_ICEBERG_CATALOG_JAR`：要安裝的 Iceberg 自訂目錄外掛程式的 Cloud Storage URI。根據您的環境，選取下列其中一個選項：
+* `BIGLAKE_ICEBERG_CATALOG_JAR`：要安裝的 Iceberg 自訂目錄外掛程式 Cloud Storage URI。根據您的環境，選取下列其中一個選項：
   + `Iceberg 1.9.1`：gs://spark-lib/biglake/biglake-catalog-iceberg1.9.1-0.1.3-with-dependencies.jar
   + `Iceberg 1.5.1`：gs://spark-lib/biglake/biglake-catalog-iceberg1.5.1-0.1.2-with-dependencies.jar
   + `Iceberg 1.5.0`：gs://spark-lib/biglake/biglake-catalog-iceberg1.5.0-0.1.1-with-dependencies.jar
@@ -184,7 +184,7 @@ CREATE NAMESPACE SPARK_CATALOG;
 
 ### Terraform
 
-這會在由「google\_biglake\_catalog.default.id」變數指定的目錄中，建立名為「my\_database」的「HIVE」類型 BigLake 資料庫。詳情請參閱 [Terraform BigLake 說明文件](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/biglake_catalog)。
+這會在「google\_biglake\_catalog.default.id」變數指定的目錄中，建立名為「my\_database」的「HIVE」類型 BigLake 資料庫。詳情請參閱 [Terraform BigLake 說明文件](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/biglake_catalog)。
 
 ```
 resource "google_biglake_catalog" "default" {
@@ -213,7 +213,7 @@ CREATE NAMESPACE SPARK_CATALOG.BLMS_DB;
 
 ### Terraform
 
-這會在由「google\_biglake\_catalog.default.id」變數指定的目錄中，建立名為「my\_database」的「HIVE」類型 BigLake 資料庫。詳情請參閱 [Terraform BigLake 說明文件](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/biglake_catalog)。
+這會在「google\_biglake\_catalog.default.id」變數指定的目錄中，建立名為「my\_database」的「HIVE」類型 BigLake 資料庫。詳情請參閱 [Terraform BigLake 說明文件](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/biglake_catalog)。
 
 ```
 resource "google_biglake_database" "default" {
@@ -231,7 +231,7 @@ hive_options {
 
 ### 製作表格
 
-資料表名稱有相關限制。詳情請參閱「[資料表命名](https://docs.cloud.google.com/bigquery/docs/tables?hl=zh-tw#table_naming)」。如要建立資料表，請選取下列任一選項：
+資料表名稱有相關限制。詳情請參閱「[資料表命名](https://docs.cloud.google.com/bigquery/docs/tables?hl=zh-tw#table_naming)」。如要建立資料表，請選取下列其中一個選項：
 
 ### API
 
@@ -246,11 +246,11 @@ CREATE TABLE SPARK_CATALOG.BLMS_DB.BLMS_TABLE
 
 更改下列內容：
 
-* `BLMS_TABLE`：要建立的 BigLake Metastore (傳統版) 資料表 ID
+* `BLMS_TABLE`：要建立的 BigLake metastore (傳統版) 資料表 ID
 
 ### Terraform
 
-這會在「google\_biglake\_database.default.id」變數指定的資料庫中，註冊名稱為「my\_table」且類型為「Hive」的 BigLake Metastore (傳統版) 資料表。請注意，資料表必須先存在，才能在目錄中註冊，您可以從 Apache Spark 等引擎初始化資料表，詳情請參閱 Terraform 供應商說明文件：[BigLake 資料表](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/biglake_table)。
+這會在「google\_biglake\_database.default.id」變數指定的資料庫中，註冊名稱為「my\_table」且類型為「Hive」的 BigLake metastore (傳統版) 資料表。請注意，資料表必須先存在，才能在目錄中註冊，這可透過從 Apache Spark 等引擎初始化資料表來完成。詳情請參閱 Terraform 供應商說明文件：[BigLake 資料表](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/biglake_table)。
 
 ```
 resource "google_biglake_table" "default" {
@@ -300,7 +300,7 @@ hive_options {
 
 ### 端對端 Terraform 範例
 
-這個 [GitHub 範例](https://github.com/terraform-google-modules/terraform-docs-samples/blob/main/bigquery/biglake/biglake_metastore_create_table/main.tf)提供可執行的 E2E 範例，會建立 BigLake 中繼存放區 (傳統版) 的目錄、資料庫和資料表。如要進一步瞭解如何使用這個範例，請參閱「[基本 Terraform 指令](https://cloud.google.com/docs/terraform/basic-commands?hl=zh-tw)」。
+這個 [GitHub 範例](https://github.com/terraform-google-modules/terraform-docs-samples/blob/main/bigquery/biglake/biglake_metastore_create_table/main.tf)提供可執行的端對端範例，會建立 BigLake 中繼存放區 (傳統版) 的目錄、資料庫和資料表。如要進一步瞭解如何使用這個範例，請參閱「[基本 Terraform 指令](https://cloud.google.com/docs/terraform/basic-commands?hl=zh-tw)」。
 
 #### 將 Iceberg 資料表從 Hive Metastore 複製到 BigLake metastore (傳統版)
 
@@ -351,7 +351,7 @@ CREATE EXTERNAL TABLE 'BQ_TABLE_PATH'
 
 ## 查看 Metastore 資源
 
-以下各節說明如何在 BigLake 中繼存放區 (傳統版) 查看資源。
+以下各節說明如何在 BigLake 中繼資料存放區 (傳統版) 中查看資源。
 
 ### 查看目錄
 
@@ -363,11 +363,22 @@ CREATE EXTERNAL TABLE 'BQ_TABLE_PATH'
 
 如要查看資料庫，請按照下列步驟操作：
 
+### 控制台
+
+如要查看資料庫並複製其連結，請按照下列步驟操作：
+
+1. 前往 Google Cloud 控制台的「BigQuery」頁面。
+
+   [前往 BigQuery](https://console.cloud.google.com/bigquery?hl=zh-tw)
+2. 在「Explorer」窗格中，展開專案和目錄。
+3. 按一下要查看的資料庫 (命名空間)。資料庫詳細資料會在新分頁中開啟。
+4. 選用：如要分享資料庫的連結，請依序點按 link「複製連結」。
+
 ### API
 
 如要查看資料庫中的所有資料表，請使用 [`projects.locations.catalogs.databases.list`](https://docs.cloud.google.com/bigquery/docs/reference/biglake/rest/v1/projects.locations.catalogs.databases/list?hl=zh-tw) 方法並指定資料庫名稱。
 
-如要查看資料庫的相關資訊，請使用 [`projects.locations.catalogs.databases.get`](https://docs.cloud.google.com/bigquery/docs/reference/biglake/rest/v1/projects.locations.catalogs.databases/get?hl=zh-tw) 方法並指定資料庫名稱。
+如要查看資料庫的相關資訊，請使用 [`projects.locations.catalogs.databases.get`](https://docs.cloud.google.com/bigquery/docs/reference/biglake/rest/v1/projects.locations.catalogs.databases/get?hl=zh-tw) 方法，並指定資料庫名稱。
 
 ### Spark SQL
 
@@ -413,7 +424,7 @@ DESCRIBE TABLE [EXTENDED] SPARK_CATALOG.BLMS_DB.BLMS_TABLE;
 
 ### 更新表格
 
-為避免多項工作嘗試同時更新同一資料表時發生衝突，BigLake 中繼資料存放區 (傳統版) 會使用樂觀鎖定。如要使用樂觀鎖定，請先使用 `GetTable` 方法取得資料表的目前版本 (稱為 *etag*)。接著，您可以變更資料表，並使用 `UpdateTable` 方法，傳入先前擷取的 etag。如果在您擷取 etag 後，有其他工作更新資料表，`UpdateTable` 方法就會失敗。這項措施可確保一次只有一項工作能更新資料表，避免發生衝突。
+為避免多項工作嘗試同時更新同一資料表時發生衝突，BigLake 中繼資料儲存庫 (傳統版) 會使用樂觀鎖定。如要使用樂觀鎖定，您必須先使用 `GetTable` 方法取得資料表的目前版本 (稱為 *etag*)。接著，您可以變更資料表，並使用 `UpdateTable` 方法，傳入先前擷取的 etag。如果在您擷取 etag 後，有其他工作更新資料表，`UpdateTable` 方法就會失敗。這項措施可確保一次只有一項工作能更新資料表，避免發生衝突。
 
 如要更新表格，請選取下列其中一個選項：
 
@@ -423,7 +434,7 @@ DESCRIBE TABLE [EXTENDED] SPARK_CATALOG.BLMS_DB.BLMS_TABLE;
 
 ### Spark SQL
 
-如需 SQL 中的資料表更新選項，請參閱 [`ALTER TABLE`](https://iceberg.apache.org/docs/latest/spark-ddl/#alter-table)。
+如需 SQL 中的資料表更新選項，請參閱[`ALTER TABLE`](https://iceberg.apache.org/docs/latest/spark-ddl/#alter-table)。
 
 ### 重新命名表格
 
@@ -504,11 +515,11 @@ DROP TABLE SPARK_CATALOG.BLMS_DB.BLMS_TABLE PURGE;
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-06-19 (世界標準時間)。
+上次更新時間：2026-06-25 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-19 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-25 (世界標準時間)。"],[],[]]

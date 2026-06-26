@@ -16,17 +16,17 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 排定筆記本
 
-本文說明如何[在 BigQuery 中排定及部署 Colab Enterprise 筆記本](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction?hl=zh-tw)，自動執行各種工作。舉例來說，您可以指定時間和頻率執行筆記本，自動訓練機器學習模型、呼叫外部 API 或執行 BigQuery DataFrames 程式碼。
+本文說明如何排定及部署 BigQuery 中的 Colab Enterprise 筆記本，自動執行各種工作。舉例來說，您可以指定時間和頻率執行筆記本，自動訓練機器學習模型、呼叫外部 API 或執行 BigQuery DataFrames 程式碼。
 
-系統會自動儲存您對筆記本所做的變更，但只有您和[有權存取筆記本](https://docs.cloud.google.com/bigquery/docs/manage-notebooks?hl=zh-tw#grant_access_to_notebooks)的使用者才能查看。如要使用新版筆記本更新時間表，請[部署筆記本](#deploy)。部署筆記本後，系統會使用目前版本的筆記本更新時間表。時間表會執行最新部署的筆記本版本。
+系統會自動儲存您對筆記本所做的變更，但只有您和[有權存取筆記本](https://docs.cloud.google.com/bigquery/docs/manage-notebooks?hl=zh-tw#grant_access_to_notebooks)的使用者可以查看。如要使用新版筆記本更新排程，請[部署筆記本](#deploy)。部署筆記本時，系統會使用目前版本的筆記本更新排程。排程會執行最新部署的筆記本版本。
 
 系統會使用您的 Google 帳戶使用者憑證或[自訂服務帳戶](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#about-service-accounts)，執行每個筆記本排程。您可以在設定排程時選取要使用的帳戶。
 
-筆記本是由 [Dataform](https://docs.cloud.google.com/dataform/docs/overview?hl=zh-tw) 支援的程式碼資產。不過，筆記本不會顯示在 Dataform 中。Dataform 會將排定執行的筆記本輸出內容，寫入排程建立期間選取的 [Cloud Storage bucket](https://docs.cloud.google.com/storage/docs/buckets?hl=zh-tw)。
+筆記本是由 [Dataform](https://docs.cloud.google.com/dataform/docs/overview?hl=zh-tw) 支援的程式碼資產。不過，筆記本不會顯示在 Dataform 中。
+Dataform 會將排定執行的筆記本輸出內容，寫入排程建立期間選取的 [Cloud Storage 值區](https://docs.cloud.google.com/storage/docs/buckets?hl=zh-tw)。
 
 筆記本排程使用[標準 E2 執行階段](https://docs.cloud.google.com/colab/docs/runtimes?hl=zh-tw)。
-系統會收取 Colab Enterprise 執行階段費用，並根據 E2 機型收取執行階段處理費用。
-如要瞭解標準 E2 執行階段的價格，請參閱 [Colab Enterprise 價格](https://cloud.google.com/colab/pricing?hl=zh-tw)。
+系統會收取 Colab Enterprise 執行階段費用。系統會根據 E2 機型，收取執行階段處理費用。如要瞭解標準 E2 執行階段的定價，請參閱 [Colab Enterprise 定價](https://cloud.google.com/colab/pricing?hl=zh-tw)。
 
 ## 事前準備
 
@@ -40,7 +40,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 :   按照「[授予專案的單一角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw#grant-single-role)」一文的說明，在所選專案中，將 Notebook Executor User 角色授予服務帳戶。
 
 [儲存空間管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/storage?hl=zh-tw#storage.admin) (`roles/storage.admin`)
-:   按照「[在 bucket 層級政策中新增主體](https://docs.cloud.google.com/storage/docs/access-control/using-iam-permissions?hl=zh-tw#bucket-add)」一文的說明，將服務帳戶新增為 Cloud Storage bucket 的主體，並授予該主體 Storage 管理員角色。您打算使用這個 bucket 儲存排定執行的筆記本輸出內容。
+:   按照「[在 bucket 層級政策中新增主體](https://docs.cloud.google.com/storage/docs/access-control/using-iam-permissions?hl=zh-tw#bucket-add)」一文的說明，將服務帳戶新增為主體，並指派 Storage 管理員角色。這個 Cloud Storage bucket 之後會用於儲存排定執行的筆記本輸出內容。
 
 [服務帳戶使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/iam?hl=zh-tw#iam.serviceAccountUser) (`roles/iam.serviceAccountUser`)
 :   按照「[為服務帳戶授予單一角色](https://docs.cloud.google.com/iam/docs/manage-access-service-accounts?hl=zh-tw#grant-single-role)」一文中的步驟，將服務帳戶新增為自己的主體。換句話說，請將服務帳戶新增為同一個服務帳戶的主體。然後將服務帳戶使用者角色授予這個主體。
@@ -54,6 +54,16 @@ Google uses AI technology to translate content into your preferred language. AI 
 :   按照「[使用 Google Cloud console 授予或撤銷多個 IAM 角色](https://docs.cloud.google.com/iam/docs/manage-access-service-accounts?hl=zh-tw#multiple-roles-console)」一文的說明，在自訂服務帳戶中，將服務帳戶使用者角色授予預設的 Dataform 服務代理程式。
 
 如要進一步瞭解 Dataform 中的服務帳戶，請參閱「[關於 Dataform 中的服務帳戶](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#about-service-accounts)」。
+
+### VPC Service Controls 規定
+
+如果您使用 VPC Service Controls 保護筆記本，請注意排定執行的作業是由 Dataform 支援。為排定執行的作業設定 VPC Service Controls 時，請確保符合下列規定：
+
+* 您必須設定[`dataform.restrictGitRemotes`機構政策服務](https://docs.cloud.google.com/dataform/docs/restrict-git-remotes?hl=zh-tw)。
+* Dataform 和 BigQuery 必須受限於相同的 VPC Service Controls 服務範圍。
+* 如要允許使用者在排定或手動觸發執行作業時，使用 Google 帳戶的使用者憑證進行驗證，請將使用者身分新增至連入規則。詳情請參閱「[更新 service perimeter 的輸入和輸出政策](https://docs.cloud.google.com/vpc-service-controls/docs/configuring-ingress-egress-policies?hl=zh-tw#updating)」和「[輸入規則參考資料](https://docs.cloud.google.com/vpc-service-controls/docs/ingress-egress-rules?hl=zh-tw#ingress-rules-reference)」。
+
+如需詳細設定步驟和安全性考量事項，請參閱「[為 Dataform 設定 VPC Service Controls](https://docs.cloud.google.com/dataform/docs/vpc-service-controls?hl=zh-tw)」。
 
 ### 必要的角色
 
@@ -80,7 +90,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 建立排程
 
-****提示：** 您也可以使用「Pipelines & Connections」(管線和連線) 頁面，透過[簡化且專為 BigQuery 設計的工作流程](https://docs.cloud.google.com/bigquery/docs/pipeline-connection-page?hl=zh-tw)建立筆記本排程。這項功能目前為[搶先版](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。**
+**提示：** 您也可以使用「管道和連線」頁面，透過[簡化、BigQuery 專屬的工作流程](https://docs.cloud.google.com/bigquery/docs/pipeline-connection-page?hl=zh-tw)建立筆記本排程。這項功能為[預先發布版](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
 
 如要建立筆記本排程，請按照下列步驟操作：
 
@@ -175,7 +185,8 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 部署筆記本
 
-部署筆記本會使用目前版本的筆記本更新排程。排程會執行最新部署的筆記本版本。
+部署筆記本時，系統會使用目前版本的筆記本更新排程。
+排程會執行最新部署的筆記本版本。
 
 如果這個筆記本有排程，當您編輯筆記本時，BigQuery 會提示您部署變更，以更新排程。
 
@@ -189,7 +200,8 @@ Google uses AI technology to translate content into your preferred language. AI 
 4. 按一下所選筆記本的名稱。
 5. 點選「Deploy」(部署)。
 
-系統會以目前版本的筆記本更新對應的排程。最新部署的筆記本版本會在排定的時間執行。
+系統會以目前版本的筆記本更新對應的排程。
+系統會在排定的時間執行最新部署的筆記本版本。
 
 ## 手動執行已部署的筆記本
 
@@ -366,11 +378,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-06-19 (世界標準時間)。
+上次更新時間：2026-06-25 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-19 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-25 (世界標準時間)。"],[],[]]

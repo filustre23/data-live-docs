@@ -29,7 +29,6 @@
 * patchEditCollection
 * getListCollections
 * postCreateCollection
-* getListDraftGuides
 * putUpsertGuideDraft
 * postPublishGuideDrafts
 * delDeleteGuideDraft
@@ -48,6 +47,7 @@
 * getListUsers
 * postDeactivateUser
 * getListTopics
+* getListDraftGuides
 
 [API docs by Redocly](https://redocly.com/redoc/)
 

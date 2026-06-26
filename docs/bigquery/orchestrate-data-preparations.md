@@ -24,6 +24,16 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 請先[建立資料準備](https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions?hl=zh-tw)。
 
+### VPC Service Controls 規定
+
+如果您使用 VPC Service Controls 保護資料準備作業，請注意，排定執行的作業是由 Dataform 支援。為排定執行的作業設定 VPC Service Controls 時，請確保符合下列規定：
+
+* 您必須設定[`dataform.restrictGitRemotes`機構政策服務](https://docs.cloud.google.com/dataform/docs/restrict-git-remotes?hl=zh-tw)。
+* Dataform 和 BigQuery 必須受限於相同的 VPC Service Controls 服務範圍。
+* 如要允許使用者在排定或手動觸發執行作業時，使用 Google 帳戶的使用者憑證進行驗證，請將使用者身分新增至連入規則。詳情請參閱「[更新 service perimeter 的輸入和輸出政策](https://docs.cloud.google.com/vpc-service-controls/docs/configuring-ingress-egress-policies?hl=zh-tw#updating)」和「[輸入規則參考資料](https://docs.cloud.google.com/vpc-service-controls/docs/ingress-egress-rules?hl=zh-tw#ingress-rules-reference)」。
+
+如需詳細設定步驟和安全性考量事項，請參閱「[為 Dataform 設定 VPC Service Controls](https://docs.cloud.google.com/dataform/docs/vpc-service-controls?hl=zh-tw)」。
+
 ### 必要的角色
 
 如要[在開發環境中手動執行資料準備作業](#run-undeployed-manually)，或[排定資料準備作業的執行時間](#create-schedule)，請務必將角色授予您打算用來執行資料準備作業的服務帳戶。詳情請參閱「[授予 Dataform 服務帳戶存取權](https://docs.cloud.google.com/bigquery/docs/manage-data-preparations?hl=zh-tw#dataform-service-account-iam)」。
@@ -37,7 +47,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 開發資料準備作業
 
-開發資料準備作業時，您可以手動執行步驟並檢查輸出內容，然後再將變更部署至正式環境。您可以在資料上測試目前開發的版本，而 BigQuery 會根據[排程](#create-schedule)繼續執行最新部署的版本。執行作業前，您必須[設定目的地](https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions?hl=zh-tw#add-or-change-destination)，並修正所有驗證錯誤。
+開發資料準備作業時，您可以手動執行步驟並檢查輸出內容，然後再將變更部署至實際工作環境。您可以根據[排程](#create-schedule)，在資料上測試目前開發的版本，同時讓 BigQuery 繼續執行最新部署的版本。執行作業前，請務必[設定目的地](https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions?hl=zh-tw#add-or-change-destination)，並修正所有驗證錯誤。
 
 ### 在開發環境中手動執行資料準備作業
 
@@ -68,7 +78,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 部署資料準備作業
 
-如要為資料準備作業版本排定執行時間，請先儲存並部署變更。排程一律會執行最新部署的版本，忽略任何未部署的變更。
+如要為資料準備作業版本安排執行時間，請先儲存並部署變更。排程一律會執行最新部署的版本，並忽略任何未部署的變更。
 
 如要部署資料準備作業，請按照下列步驟操作：
 
@@ -229,11 +239,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-06-19 (世界標準時間)。
+上次更新時間：2026-06-25 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-19 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-25 (世界標準時間)。"],[],[]]

@@ -27,6 +27,65 @@ To get the latest product updates delivered to you, add the URL of this page to 
 reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators), or add the
 [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## June 25, 2026
+
+Feature
+
+You can now use the [`VECTOR_SEARCH` function](/bigquery/docs/reference/standard-sql/search_functions#vector_search)
+to combine a semantic search with a lexical (keyword) search. This is known as a
+hybrid search. You can also extend a
+[vector index](/bigquery/docs/reference/standard-sql/data-definition-language#create_vector_index_statement)
+to include keyword information to improve the speed of the lexical search
+portion of a hybrid search.
+
+This feature is in [Preview](https://cloud.google.com/products#product-launch-stages).
+
+Change
+
+An updated version of the
+[Simba ODBC driver for BigQuery](/bigquery/docs/reference/odbc-jdbc-drivers#current_odbc_driver)
+is now available.
+
+## June 23, 2026
+
+Feature
+
+You can now configure your BigQuery pipelines to automatically trigger
+executions based on updates to specific BigQuery tables. For more information,
+see [Trigger-based
+scheduling](/bigquery/docs/schedule-pipelines#trigger-based-scheduling). This feature is in
+[Preview](https://cloud.google.com/products#product-launch-stages).
+
+Feature
+
+[Conversational analytics](/bigquery/docs/conversational-analytics) in BigQuery
+is now [generally available](https://cloud.google.com/products#product-launch-stages)
+(GA) and includes the following features:
+
+* You can select whether an agent can only use generally available models, or
+  a mix of preview and generally available models.
+* You can change the thinking mode of an agent within a conversation.
+* Agents can ask clarifying questions about your input prompt.
+* Agent responses include context citations, to help you understand the specific
+  sources used to generate the answer.
+* Parameters are supported in verified queries.
+* Agents can use the following AI functions to answer your questions:
+
+  + [`AI.KEY_DRIVERS`](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-key-drivers)
+  + [`AI.IF`](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-if)
+  + [`AI.SCORE`](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-score)
+  + [`AI.CLASSIFY`](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-classify)
+  + [`AI.SIMILARITY`](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-similarity)
+  + [`AI.SEARCH`](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-search)
+* Conversational analytics supports US MREP and EU MREP
+  [locations](/bigquery/docs/conversational-analytics#locations) that govern
+  the storage of agent and conversation resources, and the location used for
+  ML processing.
+
+You can also create a
+[conversation with a dataset](/bigquery/docs/create-conversations#datasets).
+This feature is in [preview](https://cloud.google.com/products#product-launch-stages).
+
 ## June 22, 2026
 
 Feature
@@ -4285,43 +4344,4 @@ You can use the [best sellers](/bigquery/docs/merchant-center-best-sellers-migra
 
 Announcement
 
-You can now see a [list of BigQuery API and service dependencies](/bigquery/docs/service-dependencies). You can also review the effects of disabling an API or service.
-
-## February 24, 2025
-
-Feature
-
-You can now use the [`@@location` system variable](/bigquery/docs/reference/system-variables) to set the location in which to run a query. This feature is in [preview](https://cloud.google.com/products#product-launch-stages).
-
-## February 17, 2025
-
-Libraries
-
-### Java
-
-#### [2.48.0](https://github.com/googleapis/java-bigquery/compare/v2.47.0...v2.48.0) (2025-02-13)
-
-##### Features
-
-* Implement wasNull for BigQueryResultSet ([#3650](https://github.com/googleapis/java-bigquery/issues/3650)) ([c7ef94b](https://github.com/googleapis/java-bigquery/commit/c7ef94be115cd572df589385f9be801033d72d6d))
-
-##### Dependencies
-
-* Update dependency com.google.api.grpc:proto-google-cloud-bigqueryconnection-v1 to v2.59.0 ([#3660](https://github.com/googleapis/java-bigquery/issues/3660)) ([3a6228b](https://github.com/googleapis/java-bigquery/commit/3a6228b4adc638759d3b2725c612e97e1a3b9cec))
-* Update dependency com.google.apis:google-api-services-bigquery to v2-rev20250128-2.0.0 ([#3667](https://github.com/googleapis/java-bigquery/issues/3667)) ([0b92af6](https://github.com/googleapis/java-bigquery/commit/0b92af6eba4a633bb514089c24b7dd19cf286789))
-* Update dependency com.google.cloud:google-cloud-datacatalog-bom to v1.63.0 ([#3661](https://github.com/googleapis/java-bigquery/issues/3661)) ([9bc8c01](https://github.com/googleapis/java-bigquery/commit/9bc8c0115dc16fb950567cd85cc7dfaa9df50d7d))
-* Update dependency com.google.cloud:sdk-platform-java-config to v3.43.0 ([#3669](https://github.com/googleapis/java-bigquery/issues/3669)) ([4d9e0ff](https://github.com/googleapis/java-bigquery/commit/4d9e0ff30269127f47484910e71fa7a21a735492))
-
-##### Documentation
-
-* Update CONTRIBUTING.md for users without branch permissions ([#3670](https://github.com/googleapis/java-bigquery/issues/3670)) ([009b9a2](https://github.com/googleapis/java-bigquery/commit/009b9a2b3940ab66220e68ddd565710b8552cc45))
-
-Libraries
-
-### Node.js
-
-#### [7.9.2](https://github.com/googleapis/nodejs-bigquery/compare/v7.9.1...v7.9.2) (2025-02-12)
-
-##### Bug Fixes
-
-* Avoid schema field mutation when passing selectedFields opt (
+You can now see a [list of BigQuery API and service dependencies](/bigquery/docs/service-dependencies). You can also revie

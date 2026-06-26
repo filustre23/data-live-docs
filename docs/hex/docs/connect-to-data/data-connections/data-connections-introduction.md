@@ -99,6 +99,10 @@ caution
 
 Automated refreshes query your data connection's entire schema. Consider query costs and your data warehouse load when deciding on a cadence schedule.
 
+#### Schema refresh history[​](#schema-refresh-history "Direct link to Schema refresh history")
+
+In Settings > Data Sources, Admins have access to the Schema refresh history. This shows a table view of the recent schema refreshes, including how long the refresh took, outcome (success, failure, partial success, cancelled, skipped), and any error messages we received from the warehouse. You can also filter the table by Status and Outcome.
+
 #### Schema filtering[​](#schema-filtering "Direct link to Schema filtering")
 
 **Schema filtering** limits the databases, schemas, and/or tables that are made visible to users and to AI agents in the [Data browser](/docs/explore-data/data-browser). This helps focus your workspace users on the relevant data assets, and helps improve AI agent accuracy. Filtering your schema also reduces the time required for schema refreshes, since schema refreshes will only sync non-filtered data objects.

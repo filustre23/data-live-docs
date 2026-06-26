@@ -1160,4 +1160,4 @@ options.enable_display_name_attribute = True
 requested_session.read_options.avro_serialization_options = options
 ```
 
-如要透過 BigQuery Storage Write API 使用擴充的 Unicode 字元清單，您必須提供含有
+如要透過 BigQuery Storage Write API 使用擴充的 Unicode 字元清單，您必須提供含有 `column_name` 標記的結構定義，除非您使用 `JsonStreamWriter` 寫入器物件。以下範例說明如

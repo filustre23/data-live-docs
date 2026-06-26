@@ -1209,5 +1209,5 @@ OPTIONS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dat
 ```
 ALTER TABLE myproject.table1
 ALTER COLUMN column_name SET OPTIONS (
-  data_policies +=</
+  data_policies += ["{'name':'myproject.region-us.data_policy_name1'}"</
 ```

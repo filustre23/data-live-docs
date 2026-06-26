@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-06-25T14:10+00:00_
+_Generated 2026-06-26T01:50+00:00_
 
-**9 sources, 5347 topics total**
+**9 sources, 5351 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_1605 topics_
+_1606 topics_
 
 - `anthropic-sdk/agents-and-tools/agent-skills/best-practices`
 - `anthropic-sdk/agents-and-tools/agent-skills/enterprise`
@@ -1560,6 +1560,7 @@ _1605 topics_
 - `anthropic-sdk/build-with-claude/task-budgets`
 - `anthropic-sdk/build-with-claude/token-counting`
 - `anthropic-sdk/build-with-claude/vision`
+- `anthropic-sdk/build-with-claude/vision-coordinates`
 - `anthropic-sdk/build-with-claude/working-with-messages`
 - `anthropic-sdk/get-started`
 - `anthropic-sdk/intro`
@@ -3162,7 +3163,7 @@ _1527 topics_
 
 Upstream: <https://code.claude.com/docs/en/>
 
-_153 topics_
+_154 topics_
 
 - `claude-code/admin-setup`
 - `claude-code/advisor`
@@ -3233,6 +3234,7 @@ _153 topics_
 - `claude-code/env-vars`
 - `claude-code/errors`
 - `claude-code/fast-mode`
+- `claude-code/feature-availability`
 - `claude-code/features-overview`
 - `claude-code/fullscreen`
 - `claude-code/github-actions`
@@ -3322,7 +3324,7 @@ _153 topics_
 
 Upstream: <https://docs.getdbt.com/docs/>
 
-_1072 topics_
+_1073 topics_
 
 - `dbt-core/best-practices/best-practice-workflows`
 - `dbt-core/best-practices/clone-incremental-models`
@@ -3362,6 +3364,7 @@ _1072 topics_
 - `dbt-core/best-practices/how-we-style/4-how-we-style-our-jinja`
 - `dbt-core/best-practices/how-we-style/5-how-we-style-our-yaml`
 - `dbt-core/best-practices/how-we-style/6-how-we-style-conclusion`
+- `dbt-core/best-practices/idempotence`
 - `dbt-core/best-practices/materializations/materializations-guide-1-guide-overview`
 - `dbt-core/best-practices/materializations/materializations-guide-2-available-materializations`
 - `dbt-core/best-practices/materializations/materializations-guide-3-configuring-materializations`
@@ -4562,7 +4565,7 @@ _154 topics_
 
 Upstream: <https://learn.hex.tech/>
 
-_366 topics_
+_367 topics_
 
 - `hex/changelog`
 - `hex/changelog/2020-12-17`
@@ -4669,6 +4672,7 @@ _366 topics_
 - `hex/changelog/2026-06-02`
 - `hex/changelog/2026-06-11`
 - `hex/changelog/2026-06-16`
+- `hex/changelog/2026-06-25`
 - `hex/changelog/archive`
 - `hex/changelog/page/10`
 - `hex/changelog/page/11`

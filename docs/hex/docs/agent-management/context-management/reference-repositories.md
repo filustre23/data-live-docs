@@ -29,9 +29,9 @@ Providing a detailed description helps the agent determine when a repository is 
 
 Note that only one Git provider account can be connected to a given Hex workspace. Once connected, all users with access to the agent can use information from synced repositories.
 
-caution
+info
 
-Only GitHub and GitLab (cloud) are supported at this time.
+GitHub, GitLab cloud, and GitLab self hosted are supported at this time.
 
 ## Using reference repositories[​](#using-reference-repositories "Direct link to Using reference repositories")
 
