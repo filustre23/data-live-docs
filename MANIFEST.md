@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-06-26T14:10+00:00_
+_Generated 2026-06-27T01:40+00:00_
 
-**9 sources, 5351 topics total**
+**9 sources, 5352 topics total**
 
 ## airflow
 
@@ -3324,7 +3324,7 @@ _154 topics_
 
 Upstream: <https://docs.getdbt.com/docs/>
 
-_1073 topics_
+_1074 topics_
 
 - `dbt-core/best-practices/best-practice-workflows`
 - `dbt-core/best-practices/clone-incremental-models`
@@ -4037,6 +4037,7 @@ _1073 topics_
 - `dbt-core/guides/sl-snowflake-qs`
 - `dbt-core/guides/snowflake-qs`
 - `dbt-core/guides/starburst-galaxy-qs`
+- `dbt-core/guides/tenancy-migration`
 - `dbt-core/guides/teradata-qs`
 - `dbt-core/guides/terminal-guide`
 - `dbt-core/guides/using-jinja`
