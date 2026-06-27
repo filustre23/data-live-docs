@@ -1474,6 +1474,8 @@ This API endpoint is subject to a maximum of 3 requests per minute.
 
 **415**
 
+**500**
+
 **502**
 
 post/v1/semantic-(projects|models)/{semanticProjectId}/ingest
@@ -1504,6 +1506,7 @@ Copy
 * 400
 * 403
 * 415
+* 500
 * 502
 
 Content type
@@ -2498,11 +2501,3 @@ Copy
 ## EditDataConnection
 
 ##### Authorizations:
-
-*bearerAuth*
-
-##### path Parameters
-
-|  |  |
-| --- | --- |
-| dataConnectionId required | string |
