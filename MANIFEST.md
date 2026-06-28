@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-06-27T19:09+00:00_
+_Generated 2026-06-28T08:44+00:00_
 
-**9 sources, 5354 topics total**
+**9 sources, 5333 topics total**
 
 ## airflow
 
@@ -1629,7 +1629,7 @@ _1606 topics_
 
 Upstream: <https://cloud.google.com/bigquery/docs/>
 
-_1527 topics_
+_1506 topics_
 
 - `bigquery/access-control`
 - `bigquery/access-control-basic-roles`
@@ -1642,12 +1642,10 @@ _1527 topics_
 - `bigquery/advanced-runtime`
 - `bigquery/aead-encryption-concepts`
 - `bigquery/ai-application-overview`
-- `bigquery/ai-introduction`
 - `bigquery/alloydb-federated-queries`
 - `bigquery/analysis-rules`
 - `bigquery/analytics-hub-audit-logging`
 - `bigquery/analytics-hub-cloud-marketplace`
-- `bigquery/analytics-hub-custom-constraints`
 - `bigquery/analytics-hub-grant-roles`
 - `bigquery/analytics-hub-introduction`
 - `bigquery/analytics-hub-manage-exchanges`
@@ -1757,14 +1755,11 @@ _1527 topics_
 - `bigquery/continuous-queries-monitor`
 - `bigquery/contribution-analysis`
 - `bigquery/control-access-to-resources-iam`
-- `bigquery/conversational-analytics`
 - `bigquery/create-alert-scheduled-query`
 - `bigquery/create-authorized-views`
 - `bigquery/create-bigtable-external-table`
 - `bigquery/create-cloud-resource-connection`
 - `bigquery/create-cloud-storage-table-biglake`
-- `bigquery/create-conversations`
-- `bigquery/create-data-agents`
 - `bigquery/create-delta-lake-table`
 - `bigquery/create-machine-learning-model`
 - `bigquery/create-machine-learning-model-console`
@@ -1783,7 +1778,6 @@ _1527 topics_
 - `bigquery/data-catalog`
 - `bigquery/data-catalog-overview`
 - `bigquery/data-clean-rooms`
-- `bigquery/data-engineering-agent-pipelines`
 - `bigquery/data-governance`
 - `bigquery/data-insights`
 - `bigquery/data-manipulation-language`
@@ -2055,7 +2049,6 @@ _1527 topics_
 - `bigquery/metadata-caching-external-tables`
 - `bigquery/metadata-indexing-managed-tables`
 - `bigquery/migration-assessment`
-- `bigquery/migration-custom-org-policies`
 - `bigquery/migration-intro`
 - `bigquery/migration/hive`
 - `bigquery/migration/hive-overview`
@@ -2113,7 +2106,6 @@ _1527 topics_
 - `bigquery/parameterized-queries`
 - `bigquery/partitioned-tables`
 - `bigquery/paypal-transfer`
-- `bigquery/permissions-for-ai-functions`
 - `bigquery/pipe-syntax-guide`
 - `bigquery/pipelines-introduction`
 - `bigquery/play-transfer`
@@ -2191,14 +2183,6 @@ _1527 topics_
 - `bigquery/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/setIamPolicy`
 - `bigquery/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe`
 - `bigquery/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/testIamPermissions`
-- `bigquery/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.queryTemplates`
-- `bigquery/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.queryTemplates/approve`
-- `bigquery/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.queryTemplates/create`
-- `bigquery/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.queryTemplates/delete`
-- `bigquery/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.queryTemplates/get`
-- `bigquery/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.queryTemplates/list`
-- `bigquery/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.queryTemplates/patch`
-- `bigquery/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.queryTemplates/submit`
 - `bigquery/reference/analytics-hub/rest/v1/projects.locations.dataExchanges/create`
 - `bigquery/reference/analytics-hub/rest/v1/projects.locations.dataExchanges/delete`
 - `bigquery/reference/analytics-hub/rest/v1/projects.locations.dataExchanges/get`
@@ -2651,16 +2635,12 @@ _1527 topics_
 - `bigquery/reference/standard-sql/approximate_aggregate_functions`
 - `bigquery/reference/standard-sql/array_functions`
 - `bigquery/reference/standard-sql/bigqueryml-syntax-advanced-weights`
-- `bigquery/reference/standard-sql/bigqueryml-syntax-ai-classify`
-- `bigquery/reference/standard-sql/bigqueryml-syntax-ai-detect-anomalies`
 - `bigquery/reference/standard-sql/bigqueryml-syntax-ai-evaluate`
 - `bigquery/reference/standard-sql/bigqueryml-syntax-ai-forecast`
 - `bigquery/reference/standard-sql/bigqueryml-syntax-ai-generate`
 - `bigquery/reference/standard-sql/bigqueryml-syntax-ai-generate-bool`
 - `bigquery/reference/standard-sql/bigqueryml-syntax-ai-generate-double`
 - `bigquery/reference/standard-sql/bigqueryml-syntax-ai-generate-int`
-- `bigquery/reference/standard-sql/bigqueryml-syntax-ai-if`
-- `bigquery/reference/standard-sql/bigqueryml-syntax-ai-score`
 - `bigquery/reference/standard-sql/bigqueryml-syntax-alter-model`
 - `bigquery/reference/standard-sql/bigqueryml-syntax-annotate-image`
 - `bigquery/reference/standard-sql/bigqueryml-syntax-arima-coefficients`
@@ -2814,7 +2794,6 @@ _1527 topics_
 - `bigquery/regional-endpoints`
 - `bigquery/regression-overview`
 - `bigquery/release-notes`
-- `bigquery/release-notes-archive`
 - `bigquery/reliability-intro`
 - `bigquery/remote-functions`
 - `bigquery/remote-functions-translation-tutorial`

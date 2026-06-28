@@ -1078,5 +1078,7 @@ public class RelaxTableQuery {
   }
 
   // To relax all columns in a destination table when you append data to it during a query job
-  public static void relaxTableQuery(String projectId, String datasetName
+  public static void relaxTableQuery(String projectId, String datasetName, String tableName)
+      throws Exception {
+    try {
 ```

@@ -246,4 +246,5 @@ Progress information for a given Stream.
 | --- | --- |
 | `estimated_row_count` | `int64`  Number of estimated rows in the current stream. May change over time as different readers in the stream progress at rates which are relatively fast or slow. |
 | `fraction_consumed` | `float`  A value in the range [0.0, 1.0] that represents the fraction of rows assigned to this stream that have been processed by the server. In the presence of read filters, the server may process more rows than it returns, so this value reflects progress through the pre-filtering rows.  This value is only populated for sessions created through the BALANCED sharding strategy. |
-|  |
+| `progress` | `Progress`  Represents the progress of the current stream. |
+| `is_splittable` |

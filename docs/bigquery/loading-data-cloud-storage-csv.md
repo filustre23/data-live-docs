@@ -844,5 +844,5 @@ public class LoadPartitionedTable {
       Job completedJob = loadJob.waitFor();
 
       // Check for errors
-      if (completedJob == null</
+      if (completedJob == null
 ```
