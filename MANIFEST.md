@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-06-30T01:48+00:00_
+_Generated 2026-06-30T08:43+00:00_
 
-**9 sources, 5334 topics total**
+**9 sources, 5340 topics total**
 
 ## airflow
 
@@ -3142,7 +3142,7 @@ _1506 topics_
 
 Upstream: <https://code.claude.com/docs/en/>
 
-_156 topics_
+_162 topics_
 
 - `claude-code/admin-setup`
 - `claude-code/advisor`
@@ -3191,6 +3191,11 @@ _156 topics_
 - `claude-code/channels-reference`
 - `claude-code/checkpointing`
 - `claude-code/chrome`
+- `claude-code/claude-apps-gateway`
+- `claude-code/claude-apps-gateway-config`
+- `claude-code/claude-apps-gateway-deploy`
+- `claude-code/claude-apps-gateway-on-gcp`
+- `claude-code/claude-apps-gateway-spend-limits`
 - `claude-code/claude-code-on-the-web`
 - `claude-code/claude-directory`
 - `claude-code/claude-platform-on-aws`
@@ -3216,6 +3221,7 @@ _156 topics_
 - `claude-code/feature-availability`
 - `claude-code/features-overview`
 - `claude-code/fullscreen`
+- `claude-code/gateways`
 - `claude-code/github-actions`
 - `claude-code/github-enterprise-server`
 - `claude-code/gitlab-ci-cd`
