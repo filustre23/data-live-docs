@@ -34,13 +34,13 @@ For best practices on descriptions, exclusions, and permissions, see [Optimizing
 
 ## Configure the Hex MCP Server[​](#configure-the-hex-mcp-server "Direct link to Configure the Hex MCP Server")
 
-### Connect to Claude[​](#connect-to-claude "Direct link to Connect to Claude")
+### Connect Hex to Claude[​](#connect-hex-to-claude "Direct link to Connect Hex to Claude")
 
 info
 
 Claude owners (on Claude Teams or Enterprise plans) or users (on a Claude Individual plan) can configure the [Hex Connector](https://claude.com/connectors/hex) for their workspace.
 
-#### Add the Hex Connector to your Claude workspace[​](#add-the-hex-connector-to-your-claude-workspace "Direct link to Add the Hex Connector to your Claude workspace")
+#### Add the Hex Connector in Claude[​](#add-the-hex-connector-in-claude "Direct link to Add the Hex Connector in Claude")
 
 1. In Claude, go to **Settings → Connectors → Browse Connectors** and search for "Hex".
 
@@ -56,17 +56,17 @@ info
 
 If you want to connect to multiple workspaces that have different URLs (e.g., `app.hex.tech` vs. `eu.hex.tech`), you can configure additional [custom Claude connectors](https://support.claude.com/en/articles/11175166-getting-started-with-custom-connectors-using-remote-mcp).
 
-#### How to use the Hex Connector in Claude[​](#how-to-use-the-hex-connector-in-claude "Direct link to How to use the Hex Connector in Claude")
+#### Use Hex in Claude[​](#use-hex-in-claude "Direct link to Use Hex in Claude")
 
-Once the Hex Connector is [added](#connect-to-claude) by a Claude workspace owner, users can enable it by navigating to **Settings → Connectors** and clicking **Connect** next to the Hex Connector.
+Once the Hex Connector is [added](#connect-hex-to-claude) by a Claude workspace owner, users can enable it by navigating to **Settings → Connectors** and clicking **Connect** next to the Hex Connector.
 
 Once you open a new chat, ensure that the Hex Connector is toggled on via the **+** icon in the bottom left:
 
-#### Search for existing projects[​](#search-for-existing-projects "Direct link to Search for existing projects")
+#### Search for projects in Claude[​](#search-for-projects-in-claude "Direct link to Search for projects in Claude")
 
 You can use the Hex Connector to search for relevant projects in your Hex workspace. Claude will return visual project cards that display the project title, description, and other information, including a link to the project in your Hex workspace.
 
-#### Threads in the Hex Connector in Claude[​](#threads-in-the-hex-connector-in-claude "Direct link to Threads in the Hex Connector in Claude")
+#### Start Threads in Claude[​](#start-threads-in-claude "Direct link to Start Threads in Claude")
 
 You can ask open-ended data questions in your Claude chat, and the Hex Connector will kick off a Thread to answer the question. An interactive widget in the Claude chat will appear and show the Hex Thread's "thinking" steps, allowing you to follow along with the Thread in real time without leaving Claude.
 
@@ -82,7 +82,7 @@ info
 
 Interactive widgets that are created by the Hex Connector in a Claude chat, including thinking blocks and chart carousels, will expire after 24 hours.
 
-### Connect to Cursor[​](#connect-to-cursor "Direct link to Connect to Cursor")
+### Connect Hex to Cursor[​](#connect-hex-to-cursor "Direct link to Connect Hex to Cursor")
 
 In Cursor settings, go to **Settings → Cursor Settings → Tools & MCP**.
 
@@ -124,7 +124,7 @@ After adding the MCP server, go back to the **Settings** page and select **Conne
 
 When successfully connected, you should see the connected Hex MCP server and can configure tool permissions under **Tools & MCP**.
 
-### Connect to ChatGPT[​](#connect-to-chatgpt "Direct link to Connect to ChatGPT")
+### Connect Hex to ChatGPT[​](#connect-hex-to-chatgpt "Direct link to Connect Hex to ChatGPT")
 
 info
 
@@ -136,35 +136,33 @@ tip
 
 If your Hex workspace uses a custom URL, connect through a custom MCP connector in [ChatGPT Developer Mode](https://help.openai.com/en/articles/12584461-developer-mode-apps-and-full-mcp-connectors-in-chatgpt-beta/) instead of the official app listing. A workspace admin must enable Developer Mode, then create an app with your Hex MCP server URL (for example, `https://eu.hex.tech/mcp`). Developer Mode is available on Business and Enterprise plans with full MCP support; Plus and Pro users can connect read-only MCP tools.
 
-#### Add the Hex app to ChatGPT[​](#add-the-hex-app-to-chatgpt "Direct link to Add the Hex app to ChatGPT")
+#### Add the Hex app in ChatGPT[​](#add-the-hex-app-in-chatgpt "Direct link to Add the Hex app in ChatGPT")
 
 1. In ChatGPT, open **Apps** from the sidebar or go to [chatgpt.com/apps](https://chatgpt.com/apps).
 2. Search for "Hex" and select the Hex app.
 3. Click **Connect** and complete the OAuth flow to authorize access to your Hex workspace (and specify a workspace if you have access to multiple).
 
-#### Use the Hex app in ChatGPT[​](#use-the-hex-app-in-chatgpt "Direct link to Use the Hex app in ChatGPT")
+#### Use Hex in ChatGPT[​](#use-hex-in-chatgpt "Direct link to Use Hex in ChatGPT")
 
 Once connected, start a new chat and enable the Hex app from the **+** (Tools) menu, or mention `@Hex` in your prompt to invoke it. You can search for projects, ask data questions, and start Threads from your ChatGPT conversation.
 
-### Connect to Codex[​](#connect-to-codex "Direct link to Connect to Codex")
+### Connect Hex to Codex[​](#connect-hex-to-codex "Direct link to Connect Hex to Codex")
 
 info
 
 On ChatGPT Business and Enterprise workspaces, admins may need to enable the Hex app under **Workspace settings → Apps** before users can install the [Hex plugin](https://developers.openai.com/codex/plugins) in Codex. See [Plugins in Codex](https://help.openai.com/en/articles/20001256-plugins-in-codex) for admin setup details.
 
-[Codex](https://developers.openai.com/codex/plugins) connects to Hex through the official Hex plugin in the Codex plugin directory. The plugin bundles Hex skills, app integration, and MCP tools, and connects to `app.hex.tech` through the bundled Hex app.
-
 #### Install the Hex plugin in Codex[​](#install-the-hex-plugin-in-codex "Direct link to Install the Hex plugin in Codex")
 
-1. In the Codex app, open **Plugins** and search for "Data Analytics". Select **+ Add plugin**.
+1. In the Codex app, open **Plugins** and search for "Hex".
 2. Next to the Hex plugin, select **Connect**.
-3. When prompted, connect the bundled Hex app and complete the OAuth flow to authorize access to your Hex workspace (and specify a workspace if you have access to multiple).
+3. When prompted, connect the bundled Hex app and complete the OAuth flow to authorize access to your Hex workspace.
 
 #### Use Hex in Codex[​](#use-hex-in-codex "Direct link to Use Hex in Codex")
 
 After installation, start a new thread and ask Codex to analyze data in Hex, or type `@` to invoke the Hex plugin or one of its bundled skills. You can search for projects, ask data questions, and start Threads. Users with edit access can also create and modify Hex notebooks through the bundled [Hex CLI](/docs/api-integrations/cli) integration.
 
-### Connect to Glean[​](#connect-to-glean "Direct link to Connect to Glean")
+### Connect Hex to Glean[​](#connect-hex-to-glean "Direct link to Connect Hex to Glean")
 
 info
 
@@ -190,9 +188,23 @@ For single-tenant, EU multi-tenant, or HIPAA multi-tenant customers, replace `ap
 
 Once the MCP action pack is published, users can ask data questions or search for projects in Glean Assistant, or add Hex tools to agent workflows in Agent Builder. On first use, each user completes the OAuth flow to connect their Hex workspace.
 
-### Connect to other MCP clients[​](#connect-to-other-mcp-clients "Direct link to Connect to other MCP clients")
+### Connect Hex to Figma[​](#connect-hex-to-figma "Direct link to Connect Hex to Figma")
 
-The Hex MCP server can be used by MCP clients other than Claude, Cursor, ChatGPT, Codex, and Glean. Any tool that supports MCP integrations can be linked to the Hex MCP server, including internal tools or other tools for which a native integration is not yet available.
+#### Add the Hex Connector in Figma[​](#add-the-hex-connector-in-figma "Direct link to Add the Hex Connector in Figma")
+
+When using the Figma Design Agent, add Hex as a connector — this will prompt you to authenticate. More details can be found in Figma's docs [here](https://help.figma.com/hc/en-us/articles/35440096186007-Use-verified-partner-MCP-connectors-with-the-Figma-agent-and-Figma-Make#h_01KAC4Y0E71YB3NMHJJ9HH4PZ8).
+
+tip
+
+The Hex connector currently only connects to `app.hex.tech`. For single-tenant, EU multi-tenant, or HIPAA multi-tenant customers, ask a Figma Admin to create a custom MCP connector using the URL for your MCP server, e.g. `https://eu.hex.tech/mcp`.
+
+#### Use Hex in Figma[​](#use-hex-in-figma "Direct link to Use Hex in Figma")
+
+To use the connector in chat, call it by @ mentioning Hex, as shown below.
+
+### Connect Hex to other MCP clients[​](#connect-hex-to-other-mcp-clients "Direct link to Connect Hex to other MCP clients")
+
+The Hex MCP server can be used in any MCP clients that supports custom connectors, including internal tools or other tools for which a native integration is not yet available.
 
 To connect to another MCP client, open your configuration file and add the Hex MCP server configuration:
 
@@ -364,12 +376,13 @@ To help users discover relevant work:
 * [Overview](#overview)
 * [Data connection access](#data-connection-access)
 * [Configure the Hex MCP Server](#configure-the-hex-mcp-server)
-  + [Connect to Claude](#connect-to-claude)
-  + [Connect to Cursor](#connect-to-cursor)
-  + [Connect to ChatGPT](#connect-to-chatgpt)
-  + [Connect to Codex](#connect-to-codex)
-  + [Connect to Glean](#connect-to-glean)
-  + [Connect to other MCP clients](#connect-to-other-mcp-clients)
+  + [Connect Hex to Claude](#connect-hex-to-claude)
+  + [Connect Hex to Cursor](#connect-hex-to-cursor)
+  + [Connect Hex to ChatGPT](#connect-hex-to-chatgpt)
+  + [Connect Hex to Codex](#connect-hex-to-codex)
+  + [Connect Hex to Glean](#connect-hex-to-glean)
+  + [Connect Hex to Figma](#connect-hex-to-figma)
+  + [Connect Hex to other MCP clients](#connect-hex-to-other-mcp-clients)
 * [Available actions](#available-actions)
   + [Search for projects in your workspace](#search-for-projects-in-your-workspace)
   + [Create a new Thread](#create-a-new-thread)

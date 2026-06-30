@@ -7,7 +7,7 @@ Ask questions in Slack and get back answers from the Hex Agent.
 info
 
 * Hex Agent in Slack is available on our [Team](https://hex.tech/pricing/) plan and above.
-* Hex Agent in Slack contributes towards monthly agent usage limits. Later this year we plan to allow you to purchase additional AI usage for power users. Until then, limits will be enforced only as-needed.
+* Paid [plans](https://hex.tech/pricing/) include monthly per-seat [credit grants](/docs/administration/credits) that can be used towards Hex AI features.
 * Users need the **Admin**, **Manager**, **Editor**, or **Explorer¹** workspace role to access the Hex Slack Agent.
 
 ¹ Explorers can access Hex Agent in Slack if they have access to Threads. Threads is off by default for Explorers, but can be enabled by a Workspace Admin.

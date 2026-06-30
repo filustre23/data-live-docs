@@ -1,6 +1,6 @@
 On this page
 
-# How Credits Work
+# Credits
 
 AI features in Hex use a credit system.
 
@@ -12,8 +12,7 @@ To ensure everyone can use AI, Hex awards monthly credit grants to Editor and Ex
 
 info
 
-* Credits will go into effect for legacy customers with advance notice to Admins.
-* Customers with annual contracts who wish to purchase add-on credits can contact [[email protected]](/cdn-cgi/l/email-protection#e59684898096a58d809dcb9180868d) to update their contract.
+* Customers with annual contracts who wish to purchase add-on credits can contact [[email protected]](/cdn-cgi/l/email-protection#3a495b565f497a525f42144e5f5952) to update their contract.
 
 ## Credit Consumption[​](#credit-consumption "Direct link to Credit Consumption")
 
@@ -35,15 +34,15 @@ Below are some illustrative examples:
 
 Not all AI features consume credits. For example, title generation is included in paid plans and Context Studio topic generation is included in Team+ plans. Other AI features may be exempt from credit consumption temporarily during their Preview or Beta period. The list of features that consume credits is subject to change as we evolve our product offering, and currently includes all [Hex agents](/docs/getting-started/ai-overview), including agent runs triggered from external integrations such as Slack, MCP, or CLI.
 
-### What are monthly credit grants?[​](#what-are-monthly-credit-grants "Direct link to What are monthly credit grants?")
+### Monthly credit grants[​](#monthly-credit-grants "Direct link to Monthly credit grants")
 
 To ensure everyone can try and use Hex’s AI features, users on paid seats are awarded a monthly credit grant. Monthly per-seat credit grants are assigned to the individual user, reset each billing cycle, and can’t be transferred, shared, or rolled over.
 
 You can view the current balance of your monthly credit grant by clicking into the workspace dropdown, located in top left corner your Hex workspace's homepage.
 
-Credit grants vary by plan and seat type:
+Monthly credit grants vary by plan and seat type:
 
-| Plan | Seat Type | Credit Grant |
+| Plan | Seat Type | Monthly Credit Grant |
 | --- | --- | --- |
 | Professional | Editor | 30 credits/mo |
 | Team | Editor | 40 credits/mo |
@@ -51,30 +50,30 @@ Credit grants vary by plan and seat type:
 | Enterprise | Editor | 60 credits/mo |
 | Enterprise | Explorer | 10 credits/mo |
 
-Once you’ve used your monthly credit grant, you can draw additional credits from the [workspace credit pool](#what-is-the-shared-workspace-credit-pool), if available.
+Once you’ve used your monthly credit grant, you can draw additional credits from the [workspace credit pool](#workspace-credit-pool), if available.
 
 info
 
-* Monthly per-seat credit grants are currently enforced for most customers. Legacy customers will receive advance notice before enforcement.
+* Monthly per-seat credit grants are currently enforced for most customers.
 * Monthly per-seat credit grants apply to standard seat-based subscriptions, and do not necessarily apply to custom Enterprise contract structures.
 
-Admins can manage credits and view usage in **Settings > Billing & Credits**.
+Admins can manage credits and view usage in **Settings > Billing & credits**.
 
-### What are add-on credits?[​](#what-are-add-on-credits "Direct link to What are add-on credits?")
+### Add-on credits[​](#add-on-credits "Direct link to Add-on credits")
 
 Admins can opt to purchase pooled add-on credits for additional usage. There are a few ways to purchase or earn add-on credits:
 
-* Admins can enable [auto top-ups](#what-are-auto-top-ups) to automatically refill their workspace credit pool when needed.
+* Admins can enable [auto top-ups](#auto-top-ups) to automatically refill their workspace credit pool when needed.
 * Customers with annual contracts can purchase committed add-on credits upfront at contract start or renewal.
 * Hex may occasionally award bonus add-on credits.
 
 Add-on credits go to the shared workspace credit pool, which Admins can view in **Settings > Billing & credits**.
 
-### What is the shared workspace credit pool?[​](#what-is-the-shared-workspace-credit-pool "Direct link to What is the shared workspace credit pool?")
+### Workspace credit pool[​](#workspace-credit-pool "Direct link to Workspace credit pool")
 
 The shared workspace credit pool is your balance of add-on credits. By default, any user who depletes their monthly per-seat credit grant can draw from the shared workspace credit pool.
 
-### What are auto top-ups?[​](#what-are-auto-top-ups "Direct link to What are auto top-ups?")
+### Auto top-ups[​](#auto-top-ups "Direct link to Auto top-ups")
 
 You can think of auto top-ups as "pay-as-you-go" credits. When auto top-ups are enabled, your workspace credit pool will automatically refill when needed.
 
@@ -95,14 +94,12 @@ Admins can set a monthly limit on auto top-up purchases to help stay within budg
 
 Auto top-up spend limits are anchored to your monthly billing cycle and will go into effect immediately once saved.
 
-info
-
-Legacy customers can safely enable auto top-ups before credits go into effect for their workspace. Auto top-ups will begin once credits go into effect.
+## FAQs[​](#faqs "Direct link to FAQs")
 
 ### Do credits roll over?[​](#do-credits-roll-over "Direct link to Do credits roll over?")
 
-* [Per-seat credit grants](#what-are-per-seat-credit-grants) do not rollover.
-* Add-on credits purchased via [auto top-up](#what-are-auto-top-ups) rollover to the next monthly billing cycle.
+* [Monthly per-seat credit grants](#monthly-credit-grants) do not rollover.
+* Add-on credits purchased via [auto top-up](#auto-top-ups) rollover to the next monthly billing cycle.
 * Committed add-on credits purchased for annual contracts expire at the end of the contract cycle.
 
 ### Can I choose which model powers my requests?[​](#can-i-choose-which-model-powers-my-requests "Direct link to Can I choose which model powers my requests?")
@@ -115,9 +112,10 @@ If you select a specific model, you can also set an effort level — higher effo
 
 * [Overview](#overview)
 * [Credit Consumption](#credit-consumption)
-  + [What are monthly credit grants?](#what-are-monthly-credit-grants)
-  + [What are add-on credits?](#what-are-add-on-credits)
-  + [What is the shared workspace credit pool?](#what-is-the-shared-workspace-credit-pool)
-  + [What are auto top-ups?](#what-are-auto-top-ups)
+  + [Monthly credit grants](#monthly-credit-grants)
+  + [Add-on credits](#add-on-credits)
+  + [Workspace credit pool](#workspace-credit-pool)
+  + [Auto top-ups](#auto-top-ups)
+* [FAQs](#faqs)
   + [Do credits roll over?](#do-credits-roll-over)
   + [Can I choose which model powers my requests?](#can-i-choose-which-model-powers-my-requests)
