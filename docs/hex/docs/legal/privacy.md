@@ -95,7 +95,7 @@ Depending on the U.S. state in which you reside, you may have one or more of the
 
 These rights are available to residents of states with applicable comprehensive privacy laws, including but not limited to California, Colorado, Connecticut, Delaware, Indiana, Iowa, Kentucky, Maryland, Minnesota, Montana, Nebraska, New Hampshire, New Jersey, Oregon, Rhode Island, Tennessee, Texas, Utah, and Virginia. The specific rights available to you depend on your state of residence and applicable law.
 
-To exercise any of these rights, please contact us at [[email protected]](/cdn-cgi/l/email-protection#3d4d4f544b5c5e447d5558451349585e55) or +1 877-241-7171. We will verify your identity before processing your request using the information associated with your account. You may also designate an authorized agent to submit a request on your behalf.
+To exercise any of these rights, please contact us at [[email protected]](/cdn-cgi/l/email-protection#a8d8dac1dec9cbd1e8c0cdd086dccdcbc0) or +1 877-241-7171. We will verify your identity before processing your request using the information associated with your account. You may also designate an authorized agent to submit a request on your behalf.
 
 Automated Decision-Making. We do not use your personal information to engage in automated processing or profiling personal information to evaluate, analyze, or predict personal aspects related to your economic situation, health, personal preferences, interests, reliability, behavior, location, or movements to make a decision that produces legal or similarly significant effects.
 
@@ -103,7 +103,7 @@ Sensitive Personal Information. While certain of the personal information we col
 
 Consumers Under 18. We do not have actual knowledge that we have collected, sold, or shared the personal information of residents who are under 18 years of age.
 
-Additional Information for Nevada Residents. While we do not currently sell personal information as defined under Nevada law, if you are a Nevada resident and would like to make a request to opt out of any potential future sales, please email [[email protected]](/cdn-cgi/l/email-protection#80f0f2e9f6e1e3f9c0e8e5f8aef4e5e3e8).
+Additional Information for Nevada Residents. While we do not currently sell personal information as defined under Nevada law, if you are a Nevada resident and would like to make a request to opt out of any potential future sales, please email [[email protected]](/cdn-cgi/l/email-protection#dbaba9b2adbab8a29bb3bea3f5afbeb8b3).
 
 **INFORMATION FOR EEA, UK, AND SWISS USERS**
 
@@ -130,7 +130,7 @@ Our Legal Bases for Processing. We rely on the following legal bases for process
 * Compliance with Law: where we need to comply with a legal or regulatory obligation.
 * Consent: where we have your specific consent to carry out the processing for the purpose in question, such as for optional cookies used for analytics or interest-based advertising.
 
-You may submit requests to exercise your rights by emailing [[email protected]](/cdn-cgi/l/email-protection#0676746f7067657f466e637e287263656e). We may request specific information from you to help us confirm your identity and process your request.
+You may submit requests to exercise your rights by emailing [[email protected]](/cdn-cgi/l/email-protection#92e2e0fbe4f3f1ebd2faf7eabce6f7f1fa). We may request specific information from you to help us confirm your identity and process your request.
 
 *How May I Exercise My Individual Rights?*
 
@@ -138,17 +138,17 @@ Company users may access and update their NPI by sending an email to [[email pr
 
 *Who Can I Contact at Company Regarding Data Protection Issues?*
 
-Company has designated a Privacy Officer to assist with data privacy and data protection issues. You may contact them by emailing [[email protected]](/cdn-cgi/l/email-protection#09797b607f686a7049616c71277d6c6a61) and addressing your questions or concerns to the Privacy Officer.
+Company has designated a Privacy Officer to assist with data privacy and data protection issues. You may contact them by emailing [[email protected]](/cdn-cgi/l/email-protection#3f4f4d56495e5c467f575a47114b5a5c57) and addressing your questions or concerns to the Privacy Officer.
 
 Residents of the EEA, UK, and Switzerland have the right to lodge a complaint with a supervisory authority concerning Company's data processing activities.
 
-VeraSafe has been appointed as Company's representative in the European Union for data protection matters, pursuant to Article 27 of the General Data Protection Regulation of the European Union. If you are in the EEA, VeraSafe can be contacted in addition to or instead of [[email protected]](/cdn-cgi/l/email-protection#4232302b3423213b022a273a6c3627212a), only on matters related to the processing of personal data.
+VeraSafe has been appointed as Company's representative in the European Union for data protection matters, pursuant to Article 27 of the General Data Protection Regulation of the European Union. If you are in the EEA, VeraSafe can be contacted in addition to or instead of [[email protected]](/cdn-cgi/l/email-protection#0373716a7562607a436b667b2d7766606b), only on matters related to the processing of personal data.
 
 To make such an inquiry, please contact VeraSafe using this contact form: <https://verasafe.com/public-resources/contact-data-protection-representative> or via telephone at: +420 228 881 031.
 
 Alternatively, VeraSafe can be contacted at: VeraSafe Ireland Ltd., Unit 3D North Point House, North Point Business Park, New Mallow Road, Cork T23AT2P, Ireland.
 
-VeraSafe has been appointed as Company's representative in the United Kingdom for data protection matters, pursuant to Article 27 of the United Kingdom General Data Protection Regulation. If you are located within the United Kingdom, VeraSafe can be contacted in addition to or instead of [[email protected]](/cdn-cgi/l/email-protection#59292b302f383a2019313c21772d3c3a31), only on matters related to the processing of personal data.
+VeraSafe has been appointed as Company's representative in the United Kingdom for data protection matters, pursuant to Article 27 of the United Kingdom General Data Protection Regulation. If you are located within the United Kingdom, VeraSafe can be contacted in addition to or instead of [[email protected]](/cdn-cgi/l/email-protection#2151534857404258614944590f55444249), only on matters related to the processing of personal data.
 
 To make such an inquiry, please contact VeraSafe using this contact form: <https://verasafe.com/public-resources/contact-data-protection-representative> or via telephone at: +44 (20) 4532 2003.
 
@@ -160,7 +160,7 @@ Company participates in the EU-U.S. Data Privacy Framework ("EU-U.S. DPF"), the 
 
 Company is responsible for the processing of personal data it receives under the DPF, and subsequently transfers to a third party acting as an agent on its behalf and for all onward transfers of personal data from the EU, United Kingdom, and Switzerland, including the onward transfer liability provisions.
 
-In compliance with the DPF, Company commits to resolve complaints about our collection or use of your personal information. EU, Swiss, and/or UK individuals with inquiries or complaints regarding our Privacy Policy should first contact us at: [[email protected]](/cdn-cgi/l/email-protection#b2c2c0dbc4d3d1cbf2dad7ca9cc6d7d1da).
+In compliance with the DPF, Company commits to resolve complaints about our collection or use of your personal information. EU, Swiss, and/or UK individuals with inquiries or complaints regarding our Privacy Policy should first contact us at: [[email protected]](/cdn-cgi/l/email-protection#bbcbc9d2cddad8c2fbd3dec395cfded8d3).
 
 Company has further committed to cooperate with and comply respectively with the advice of the panel established by the EU data protection authorities (DPAs), the UK Information Commissioner's Office (ICO), the Gibraltar Regulatory Authority (GRA), and the Swiss Federal Data Protection and Information Commissioner (FDPIC) with regard to unresolved complaints concerning our handling of personal data received in reliance on the DPF.
 
@@ -170,11 +170,11 @@ The Federal Trade Commission has jurisdiction over Company's compliance with the
 
 **YOUR CHOICES/PREFERENCES**
 
-Marketing Communications. You can opt out/unsubscribe from our promotional emails via the link provided in the emails we send you or by sending an email to [[email protected]](/cdn-cgi/l/email-protection#1464667d6275776d547c716c3a6071777c). Even if you opt out of receiving promotional messages from us, you will continue to receive administrative messages from us if you are a user of the Hex platform.
+Marketing Communications. You can opt out/unsubscribe from our promotional emails via the link provided in the emails we send you or by sending an email to [[email protected]](/cdn-cgi/l/email-protection#6c1c1e051a0d0f152c0409144218090f04). Even if you opt out of receiving promotional messages from us, you will continue to receive administrative messages from us if you are a user of the Hex platform.
 
 If you choose not to provide us with certain personal information, some features of our Services may not work as intended.
 
-You have the right to opt out of the disclosure of your personal information to third parties who are not acting as our agents. If you do not wish us to share your personal information with such third parties, you may opt out at any time by sending an email to [[email protected]](/cdn-cgi/l/email-protection#0e7e7c67786f6d774e666b76207a6b6d66). Your choice to opt out will in no way affect the Services we provide to you. We will honor your preferences unless disclosure is required by law or to a third party acting on our behalf under written contract.
+You have the right to opt out of the disclosure of your personal information to third parties who are not acting as our agents. If you do not wish us to share your personal information with such third parties, you may opt out at any time by sending an email to [[email protected]](/cdn-cgi/l/email-protection#96e6e4ffe0f7f5efd6fef3eeb8e2f3f5fe). Your choice to opt out will in no way affect the Services we provide to you. We will honor your preferences unless disclosure is required by law or to a third party acting on our behalf under written contract.
 
 Your U.S. State Privacy Rights. If you are a U.S. resident, please review our Information for U.S. State Residents section for more information about the types of personal information we collect and disclose, as well as how to exercise your rights under applicable state law.
 
@@ -184,7 +184,7 @@ The above rights may be limited under applicable law. Before fulfilling your req
 
 **IF YOU HAVE QUESTIONS**
 
-If you have any questions about this Privacy Policy or the practices described herein, you may contact us at [[email protected]](/cdn-cgi/l/email-protection#d2a2a0bba4b3b1ab92bab7aafca6b7b1ba).
+If you have any questions about this Privacy Policy or the practices described herein, you may contact us at [[email protected]](/cdn-cgi/l/email-protection#0777756e7166647e476f627f297362646f).
 
 **CHANGES TO THIS STATEMENT**
 

@@ -37,6 +37,10 @@ Getting started with Chat with App is simple:
 3. **View responses:** The agent will respond with insights, summaries, or an extended analysis based on your request
 4. **Continue in Thread:** Each Chat with App conversation starts a Thread with the app as context. You can view (and continue) the conversation in the Threads interface by clicking the down caret next to the chat title
 
+info
+
+Chat with App is not yet supported for [Generative apps](/docs/share-insights/apps/generative-apps).
+
 ### Open full thread[​](#open-full-thread "Direct link to Open full thread")
 
 Since each chat with app conversation is its own Thread, you can continue every chat with app conversation in the [Threads](/docs/explore-data/threads) interface. Just click the down carat next to the chat title and select "Open full thread".
