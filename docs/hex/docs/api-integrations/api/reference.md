@@ -34,14 +34,15 @@
 * delDeleteGuideDraft
 * getListCells
 * postCreateCell
-* getGetCell
 * patchUpdateCell
 * delDeleteCell
+* getGetCell
 * getGetChartImageFromLogic
 * postExportProject
 * postCreateThread
 * getListThreads
 * getGetThread
+* getGetThreadMessages
 * postContinueThread
 * getMe
 * getListUsers
@@ -2498,6 +2499,4 @@ Copy
 
 }`
 
-## EditDataConnection
-
-##### Authorizations:
+##

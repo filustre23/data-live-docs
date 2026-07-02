@@ -3452,8 +3452,6 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
           - `"reasoning_extraction"ReasoningExtraction`
 
-          - `"military_weapons"MilitaryWeapons`
-
         - `JsonElement Type "refusal"constant`
 
       - `JsonElement Type "fallback"constant`
@@ -3572,8 +3570,6 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
       - `"frontier_llm"FrontierLlm`
 
       - `"reasoning_extraction"ReasoningExtraction`
-
-      - `"military_weapons"MilitaryWeapons`
 
     - `required string? Explanation`
 
@@ -9251,8 +9247,6 @@ Console.WriteLine(betaMessageTokensCount);
 
         - `"reasoning_extraction"ReasoningExtraction`
 
-        - `"military_weapons"MilitaryWeapons`
-
       - `JsonElement Type "refusal"constant`
 
     - `JsonElement Type "fallback"constant`
@@ -10972,8 +10966,6 @@ Console.WriteLine(betaMessageTokensCount);
 
       - `"reasoning_extraction"ReasoningExtraction`
 
-      - `"military_weapons"MilitaryWeapons`
-
     - `JsonElement Type "refusal"constant`
 
   - `JsonElement Type "fallback"constant`
@@ -11531,8 +11523,6 @@ Console.WriteLine(betaMessageTokensCount);
     - `"frontier_llm"FrontierLlm`
 
     - `"reasoning_extraction"ReasoningExtraction`
-
-    - `"military_weapons"MilitaryWeapons`
 
   - `JsonElement Type "refusal"constant`
 
@@ -12976,8 +12966,6 @@ Console.WriteLine(betaMessageTokensCount);
 
           - `"reasoning_extraction"ReasoningExtraction`
 
-          - `"military_weapons"MilitaryWeapons`
-
         - `JsonElement Type "refusal"constant`
 
       - `JsonElement Type "fallback"constant`
@@ -13096,8 +13084,6 @@ Console.WriteLine(betaMessageTokensCount);
       - `"frontier_llm"FrontierLlm`
 
       - `"reasoning_extraction"ReasoningExtraction`
-
-      - `"military_weapons"MilitaryWeapons`
 
     - `required string? Explanation`
 
@@ -16121,8 +16107,6 @@ Console.WriteLine(betaMessageTokensCount);
 
           - `"reasoning_extraction"ReasoningExtraction`
 
-          - `"military_weapons"MilitaryWeapons`
-
         - `JsonElement Type "refusal"constant`
 
       - `JsonElement Type "fallback"constant`
@@ -16228,8 +16212,6 @@ Console.WriteLine(betaMessageTokensCount);
         - `"frontier_llm"FrontierLlm`
 
         - `"reasoning_extraction"ReasoningExtraction`
-
-        - `"military_weapons"MilitaryWeapons`
 
       - `required string? Explanation`
 
@@ -17424,8 +17406,6 @@ Console.WriteLine(betaMessageTokensCount);
 
             - `"reasoning_extraction"ReasoningExtraction`
 
-            - `"military_weapons"MilitaryWeapons`
-
           - `JsonElement Type "refusal"constant`
 
         - `JsonElement Type "fallback"constant`
@@ -17544,8 +17524,6 @@ Console.WriteLine(betaMessageTokensCount);
         - `"frontier_llm"FrontierLlm`
 
         - `"reasoning_extraction"ReasoningExtraction`
-
-        - `"military_weapons"MilitaryWeapons`
 
       - `required string? Explanation`
 
@@ -18733,8 +18711,6 @@ Console.WriteLine(betaMessageTokensCount);
 
               - `"reasoning_extraction"ReasoningExtraction`
 
-              - `"military_weapons"MilitaryWeapons`
-
             - `JsonElement Type "refusal"constant`
 
           - `JsonElement Type "fallback"constant`
@@ -18853,8 +18829,6 @@ Console.WriteLine(betaMessageTokensCount);
           - `"frontier_llm"FrontierLlm`
 
           - `"reasoning_extraction"ReasoningExtraction`
-
-          - `"military_weapons"MilitaryWeapons`
 
         - `required string? Explanation`
 
@@ -19439,8 +19413,6 @@ Console.WriteLine(betaMessageTokensCount);
     - `"frontier_llm"FrontierLlm`
 
     - `"reasoning_extraction"ReasoningExtraction`
-
-    - `"military_weapons"MilitaryWeapons`
 
   - `required string? Explanation`
 
@@ -30521,8 +30493,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                 - `"reasoning_extraction"ReasoningExtraction`
 
-                - `"military_weapons"MilitaryWeapons`
-
               - `JsonElement Type "refusal"constant`
 
             - `JsonElement Type "fallback"constant`
@@ -30641,8 +30611,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
             - `"frontier_llm"FrontierLlm`
 
             - `"reasoning_extraction"ReasoningExtraction`
-
-            - `"military_weapons"MilitaryWeapons`
 
           - `required string? Explanation`
 
@@ -32107,8 +32075,6 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                 - `"reasoning_extraction"ReasoningExtraction`
 
-                - `"military_weapons"MilitaryWeapons`
-
               - `JsonElement Type "refusal"constant`
 
             - `JsonElement Type "fallback"constant`
@@ -32227,8 +32193,6 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
             - `"frontier_llm"FrontierLlm`
 
             - `"reasoning_extraction"ReasoningExtraction`
-
-            - `"military_weapons"MilitaryWeapons`
 
           - `required string? Explanation`
 
@@ -33520,8 +33484,6 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
               - `"reasoning_extraction"ReasoningExtraction`
 
-              - `"military_weapons"MilitaryWeapons`
-
             - `JsonElement Type "refusal"constant`
 
           - `JsonElement Type "fallback"constant`
@@ -33640,8 +33602,6 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
           - `"frontier_llm"FrontierLlm`
 
           - `"reasoning_extraction"ReasoningExtraction`
-
-          - `"military_weapons"MilitaryWeapons`
 
         - `required string? Explanation`
 
@@ -34895,8 +34855,6 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
             - `"reasoning_extraction"ReasoningExtraction`
 
-            - `"military_weapons"MilitaryWeapons`
-
           - `JsonElement Type "refusal"constant`
 
         - `JsonElement Type "fallback"constant`
@@ -35015,8 +34973,6 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
         - `"frontier_llm"FrontierLlm`
 
         - `"reasoning_extraction"ReasoningExtraction`
-
-        - `"military_weapons"MilitaryWeapons`
 
       - `required string? Explanation`
 

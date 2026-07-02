@@ -5097,8 +5097,6 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
           - `REASONING_EXTRACTION("reasoning_extraction")`
 
-          - `MILITARY_WEAPONS("military_weapons")`
-
         - `JsonValue; type "refusal"constant`
 
           - `REFUSAL("refusal")`
@@ -5239,8 +5237,6 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
       - `FRONTIER_LLM("frontier_llm")`
 
       - `REASONING_EXTRACTION("reasoning_extraction")`
-
-      - `MILITARY_WEAPONS("military_weapons")`
 
     - `Optional<String> explanation`
 
@@ -11510,8 +11506,6 @@ public final class Main {
 
         - `REASONING_EXTRACTION("reasoning_extraction")`
 
-        - `MILITARY_WEAPONS("military_weapons")`
-
       - `JsonValue; type "refusal"constant`
 
         - `REFUSAL("refusal")`
@@ -13461,8 +13455,6 @@ public final class Main {
 
       - `REASONING_EXTRACTION("reasoning_extraction")`
 
-      - `MILITARY_WEAPONS("military_weapons")`
-
     - `JsonValue; type "refusal"constant`
 
       - `REFUSAL("refusal")`
@@ -14038,8 +14030,6 @@ public final class Main {
     - `FRONTIER_LLM("frontier_llm")`
 
     - `REASONING_EXTRACTION("reasoning_extraction")`
-
-    - `MILITARY_WEAPONS("military_weapons")`
 
   - `JsonValue; type "refusal"constant`
 
@@ -15661,8 +15651,6 @@ public final class Main {
 
           - `REASONING_EXTRACTION("reasoning_extraction")`
 
-          - `MILITARY_WEAPONS("military_weapons")`
-
         - `JsonValue; type "refusal"constant`
 
           - `REFUSAL("refusal")`
@@ -15803,8 +15791,6 @@ public final class Main {
       - `FRONTIER_LLM("frontier_llm")`
 
       - `REASONING_EXTRACTION("reasoning_extraction")`
-
-      - `MILITARY_WEAPONS("military_weapons")`
 
     - `Optional<String> explanation`
 
@@ -19144,8 +19130,6 @@ public final class Main {
 
           - `REASONING_EXTRACTION("reasoning_extraction")`
 
-          - `MILITARY_WEAPONS("military_weapons")`
-
         - `JsonValue; type "refusal"constant`
 
           - `REFUSAL("refusal")`
@@ -19263,8 +19247,6 @@ public final class Main {
         - `FRONTIER_LLM("frontier_llm")`
 
         - `REASONING_EXTRACTION("reasoning_extraction")`
-
-        - `MILITARY_WEAPONS("military_weapons")`
 
       - `Optional<String> explanation`
 
@@ -20571,8 +20553,6 @@ public final class Main {
 
             - `REASONING_EXTRACTION("reasoning_extraction")`
 
-            - `MILITARY_WEAPONS("military_weapons")`
-
           - `JsonValue; type "refusal"constant`
 
             - `REFUSAL("refusal")`
@@ -20713,8 +20693,6 @@ public final class Main {
         - `FRONTIER_LLM("frontier_llm")`
 
         - `REASONING_EXTRACTION("reasoning_extraction")`
-
-        - `MILITARY_WEAPONS("military_weapons")`
 
       - `Optional<String> explanation`
 
@@ -22018,8 +21996,6 @@ public final class Main {
 
               - `REASONING_EXTRACTION("reasoning_extraction")`
 
-              - `MILITARY_WEAPONS("military_weapons")`
-
             - `JsonValue; type "refusal"constant`
 
               - `REFUSAL("refusal")`
@@ -22160,8 +22136,6 @@ public final class Main {
           - `FRONTIER_LLM("frontier_llm")`
 
           - `REASONING_EXTRACTION("reasoning_extraction")`
-
-          - `MILITARY_WEAPONS("military_weapons")`
 
         - `Optional<String> explanation`
 
@@ -22807,8 +22781,6 @@ public final class Main {
     - `FRONTIER_LLM("frontier_llm")`
 
     - `REASONING_EXTRACTION("reasoning_extraction")`
-
-    - `MILITARY_WEAPONS("military_weapons")`
 
   - `Optional<String> explanation`
 
@@ -34827,8 +34799,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                 - `REASONING_EXTRACTION("reasoning_extraction")`
 
-                - `MILITARY_WEAPONS("military_weapons")`
-
               - `JsonValue; type "refusal"constant`
 
                 - `REFUSAL("refusal")`
@@ -34969,8 +34939,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
             - `FRONTIER_LLM("frontier_llm")`
 
             - `REASONING_EXTRACTION("reasoning_extraction")`
-
-            - `MILITARY_WEAPONS("military_weapons")`
 
           - `Optional<String> explanation`
 
@@ -36616,8 +36584,6 @@ public final class Main {
 
                 - `REASONING_EXTRACTION("reasoning_extraction")`
 
-                - `MILITARY_WEAPONS("military_weapons")`
-
               - `JsonValue; type "refusal"constant`
 
                 - `REFUSAL("refusal")`
@@ -36758,8 +36724,6 @@ public final class Main {
             - `FRONTIER_LLM("frontier_llm")`
 
             - `REASONING_EXTRACTION("reasoning_extraction")`
-
-            - `MILITARY_WEAPONS("military_weapons")`
 
           - `Optional<String> explanation`
 
@@ -38191,8 +38155,6 @@ public final class Main {
 
               - `REASONING_EXTRACTION("reasoning_extraction")`
 
-              - `MILITARY_WEAPONS("military_weapons")`
-
             - `JsonValue; type "refusal"constant`
 
               - `REFUSAL("refusal")`
@@ -38333,8 +38295,6 @@ public final class Main {
           - `FRONTIER_LLM("frontier_llm")`
 
           - `REASONING_EXTRACTION("reasoning_extraction")`
-
-          - `MILITARY_WEAPONS("military_weapons")`
 
         - `Optional<String> explanation`
 
@@ -39728,8 +39688,6 @@ public final class Main {
 
             - `REASONING_EXTRACTION("reasoning_extraction")`
 
-            - `MILITARY_WEAPONS("military_weapons")`
-
           - `JsonValue; type "refusal"constant`
 
             - `REFUSAL("refusal")`
@@ -39870,8 +39828,6 @@ public final class Main {
         - `FRONTIER_LLM("frontier_llm")`
 
         - `REASONING_EXTRACTION("reasoning_extraction")`
-
-        - `MILITARY_WEAPONS("military_weapons")`
 
       - `Optional<String> explanation`
 

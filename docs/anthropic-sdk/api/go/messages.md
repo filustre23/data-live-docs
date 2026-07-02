@@ -2793,8 +2793,6 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
       - `const RefusalStopDetailsCategoryReasoningExtraction RefusalStopDetailsCategory = "reasoning_extraction"`
 
-      - `const RefusalStopDetailsCategoryMilitaryWeapons RefusalStopDetailsCategory = "military_weapons"`
-
     - `Explanation string`
 
       Human-readable explanation of the refusal.
@@ -9519,8 +9517,6 @@ func main() {
 
       - `const RefusalStopDetailsCategoryReasoningExtraction RefusalStopDetailsCategory = "reasoning_extraction"`
 
-      - `const RefusalStopDetailsCategoryMilitaryWeapons RefusalStopDetailsCategory = "military_weapons"`
-
     - `Explanation string`
 
       Human-readable explanation of the refusal.
@@ -12823,8 +12819,6 @@ func main() {
 
         - `const RefusalStopDetailsCategoryReasoningExtraction RefusalStopDetailsCategory = "reasoning_extraction"`
 
-        - `const RefusalStopDetailsCategoryMilitaryWeapons RefusalStopDetailsCategory = "military_weapons"`
-
       - `Explanation string`
 
         Human-readable explanation of the refusal.
@@ -13701,8 +13695,6 @@ func main() {
         - `const RefusalStopDetailsCategoryFrontierLLM RefusalStopDetailsCategory = "frontier_llm"`
 
         - `const RefusalStopDetailsCategoryReasoningExtraction RefusalStopDetailsCategory = "reasoning_extraction"`
-
-        - `const RefusalStopDetailsCategoryMilitaryWeapons RefusalStopDetailsCategory = "military_weapons"`
 
       - `Explanation string`
 
@@ -14642,8 +14634,6 @@ func main() {
 
           - `const RefusalStopDetailsCategoryReasoningExtraction RefusalStopDetailsCategory = "reasoning_extraction"`
 
-          - `const RefusalStopDetailsCategoryMilitaryWeapons RefusalStopDetailsCategory = "military_weapons"`
-
         - `Explanation string`
 
           Human-readable explanation of the refusal.
@@ -14995,8 +14985,6 @@ func main() {
     - `const RefusalStopDetailsCategoryFrontierLLM RefusalStopDetailsCategory = "frontier_llm"`
 
     - `const RefusalStopDetailsCategoryReasoningExtraction RefusalStopDetailsCategory = "reasoning_extraction"`
-
-    - `const RefusalStopDetailsCategoryMilitaryWeapons RefusalStopDetailsCategory = "military_weapons"`
 
   - `Explanation string`
 
@@ -24195,8 +24183,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
             - `const RefusalStopDetailsCategoryReasoningExtraction RefusalStopDetailsCategory = "reasoning_extraction"`
 
-            - `const RefusalStopDetailsCategoryMilitaryWeapons RefusalStopDetailsCategory = "military_weapons"`
-
           - `Explanation string`
 
             Human-readable explanation of the refusal.
@@ -25483,8 +25469,6 @@ func main() {
 
             - `const RefusalStopDetailsCategoryReasoningExtraction RefusalStopDetailsCategory = "reasoning_extraction"`
 
-            - `const RefusalStopDetailsCategoryMilitaryWeapons RefusalStopDetailsCategory = "military_weapons"`
-
           - `Explanation string`
 
             Human-readable explanation of the refusal.
@@ -26551,8 +26535,6 @@ func main() {
 
           - `const RefusalStopDetailsCategoryReasoningExtraction RefusalStopDetailsCategory = "reasoning_extraction"`
 
-          - `const RefusalStopDetailsCategoryMilitaryWeapons RefusalStopDetailsCategory = "military_weapons"`
-
         - `Explanation string`
 
           Human-readable explanation of the refusal.
@@ -27580,8 +27562,6 @@ func main() {
         - `const RefusalStopDetailsCategoryFrontierLLM RefusalStopDetailsCategory = "frontier_llm"`
 
         - `const RefusalStopDetailsCategoryReasoningExtraction RefusalStopDetailsCategory = "reasoning_extraction"`
-
-        - `const RefusalStopDetailsCategoryMilitaryWeapons RefusalStopDetailsCategory = "military_weapons"`
 
       - `Explanation string`
 

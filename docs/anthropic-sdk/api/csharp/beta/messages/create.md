@@ -3450,8 +3450,6 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
           - `"reasoning_extraction"ReasoningExtraction`
 
-          - `"military_weapons"MilitaryWeapons`
-
         - `JsonElement Type "refusal"constant`
 
       - `JsonElement Type "fallback"constant`
@@ -3570,8 +3568,6 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
       - `"frontier_llm"FrontierLlm`
 
       - `"reasoning_extraction"ReasoningExtraction`
-
-      - `"military_weapons"MilitaryWeapons`
 
     - `required string? Explanation`
 
