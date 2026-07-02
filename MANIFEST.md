@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-07-01T14:19+00:00_
+_Generated 2026-07-02T01:44+00:00_
 
-**9 sources, 5434 topics total**
+**9 sources, 5438 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_1698 topics_
+_1702 topics_
 
 - `anthropic-sdk/agents-and-tools/agent-skills/best-practices`
 - `anthropic-sdk/agents-and-tools/agent-skills/enterprise`
@@ -60,6 +60,8 @@ _1698 topics_
 - `anthropic-sdk/agents-and-tools/tool-use/web-search-tool`
 - `anthropic-sdk/api/admin`
 - `anthropic-sdk/api/admin/analytics`
+- `anthropic-sdk/api/admin/analytics/artifacts`
+- `anthropic-sdk/api/admin/analytics/artifacts/list`
 - `anthropic-sdk/api/admin/analytics/chat_projects`
 - `anthropic-sdk/api/admin/analytics/chat_projects/list`
 - `anthropic-sdk/api/admin/analytics/connectors`
@@ -67,6 +69,8 @@ _1698 topics_
 - `anthropic-sdk/api/admin/analytics/cost`
 - `anthropic-sdk/api/admin/analytics/cost/list`
 - `anthropic-sdk/api/admin/analytics/cost/list_by_user`
+- `anthropic-sdk/api/admin/analytics/plugins`
+- `anthropic-sdk/api/admin/analytics/plugins/list`
 - `anthropic-sdk/api/admin/analytics/retrieve_summaries`
 - `anthropic-sdk/api/admin/analytics/skills`
 - `anthropic-sdk/api/admin/analytics/skills/list`
