@@ -51,7 +51,7 @@ You must not:
 
 You must not access or use for any commercial purposes any part of the Website or any services or materials available through the Website.
 
-If You wish to make any use of material on the Website other than that set out in this section, please address your request to: [[email protected]](/cdn-cgi/l/email-protection#f49891939598b49c918cda8091979c)
+If You wish to make any use of material on the Website other than that set out in this section, please address your request to: [[email protected]](/cdn-cgi/l/email-protection#2a464f4d4b466a424f52045e4f4942)
 
 If You print, copy, modify, download, or otherwise use or provide any other person with access to any part of the Website in breach of the Terms of Use, your right to use the Website will stop immediately and You must, at our option, return or destroy any copies of the materials You have made. No right, title, or interest in or to the Website or any content on the Website is transferred to You, and all rights not expressly granted are reserved by the Company. Any use of the Website not expressly permitted by these Terms of Use is a breach of these Terms of Use and may violate copyright, trademark, and other laws.
 
@@ -143,7 +143,7 @@ Hex is committed to respecting and protecting the legal rights of copyright owne
 
 (f) A statement that, under penalty of perjury, the information in the notification is accurate and You are authorized to act on behalf of the owner of the exclusive right that is allegedly infringed.
 
-Hex's Copyright Agent to receive DMCA Takedown Notices is: [[email protected]](/cdn-cgi/l/email-protection#204c4547414c604845580e54454348)
+Hex's Copyright Agent to receive DMCA Takedown Notices is: [[email protected]](/cdn-cgi/l/email-protection#b5d9d0d2d4d9f5ddd0cd9bc1d0d6dd)
 
 UNDER FEDERAL LAW, IF YOU KNOWINGLY MISREPRESENT THAT ONLINE MATERIAL IS INFRINGING, YOU MAY BE SUBJECT TO CRIMINAL PROSECUTION FOR PERJURY AND CIVIL PENALTIES, INCLUDING MONETARY DAMAGES, COURT COSTS, AND ATTORNEYS' FEES.
 
@@ -194,7 +194,7 @@ If the Website contains links to other sites and resources provided by third par
 
 **Telephone Contact and Recording Policy**
 
-By providing us with a telephone number for a mobile device, including a number that You later convert to a mobile device number, You are expressly consenting to receiving communications—including but not limited to prerecorded or artificial voice message calls, text messages, and calls made by an automatic telephone dialing system—from us and our affiliates and agents at that number, about any product or services offered by Company. This express consent applies to each such telephone number that You provide to us now or in the future. Calls and messages may incur access fees from your mobile services provider. You understand that You need not provide this consent as a condition of obtaining goods or services from Company, and that You may decline to provide or revoke your consent at any time by emailing [[email protected]](/cdn-cgi/l/email-protection#4f3c3a3f3f203d3b0f272a37613b2a2c27) or by any other method that reasonably ensures we receive your revocation. By providing us with a telephone number, You agree that Company may record any telephone conversation with You (or any another individual) during any telephone call to or from that number for training purposes, whether or not the call was initiated by You, and whether or Company disclosed the fact that the call was recorded during the call.
+By providing us with a telephone number for a mobile device, including a number that You later convert to a mobile device number, You are expressly consenting to receiving communications—including but not limited to prerecorded or artificial voice message calls, text messages, and calls made by an automatic telephone dialing system—from us and our affiliates and agents at that number, about any product or services offered by Company. This express consent applies to each such telephone number that You provide to us now or in the future. Calls and messages may incur access fees from your mobile services provider. You understand that You need not provide this consent as a condition of obtaining goods or services from Company, and that You may decline to provide or revoke your consent at any time by emailing [[email protected]](/cdn-cgi/l/email-protection#5d2e282d2d322f291d3538257329383e35) or by any other method that reasonably ensures we receive your revocation. By providing us with a telephone number, You agree that Company may record any telephone conversation with You (or any another individual) during any telephone call to or from that number for training purposes, whether or not the call was initiated by You, and whether or Company disclosed the fact that the call was recorded during the call.
 
 **Geographic Restrictions**
 
@@ -248,8 +248,8 @@ The Terms of Use, our Privacy Policy, and Hex Terms of Service constitute the so
 
 This website is operated by Hex Technologies Inc.
 
-Send Hex your notice by email at [[email protected]](/cdn-cgi/l/email-protection#620e0705030e220a071a4c1607010a) or certified mail, return receipt requested, to Hex at 2261 Market Street #4233, San Francisco, CA 94114 USA, Attn: Legal.
+Send Hex your notice by email at [[email protected]](/cdn-cgi/l/email-protection#650900020409250d001d4b1100060d) or certified mail, return receipt requested, to Hex at 2261 Market Street #4233, San Francisco, CA 94114 USA, Attn: Legal.
 
-All other feedback, comments, requests for technical support, and other communications relating to the Website should be directed to: at [[email protected]](/cdn-cgi/l/email-protection#2a464f4d4b466a424f52045e4f4942).
+All other feedback, comments, requests for technical support, and other communications relating to the Website should be directed to: at [[email protected]](/cdn-cgi/l/email-protection#c1ada4a6a0ad81a9a4b9efb5a4a2a9).
 
 Unless specified otherwise, any notices or other communications to You permitted or required under this Agreement, will be in writing and given by Company via email, Site notification, or messaging service (including SMS).
