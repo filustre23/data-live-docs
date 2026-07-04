@@ -122,7 +122,7 @@ Area layers represent rows as polygon shapes on the map, like states, countries,
   + Countries (postal: US, iso\_a2: US, iso\_a3: USA)
   + US States (name: California, two\_letter\_abbr: CA)
   + US Counties (name: Alameda, code (FIPS): 001)
-  + More regions are on the way! Reach out to [[email protected]](/cdn-cgi/l/email-protection#a9c1ccc5c5c6e9c1ccd187ddcccac1) if you work with a region not listed here.
+  + More regions are on the way! Reach out to [[email protected]](/cdn-cgi/l/email-protection#452d2029292a052d203d6b3120262d) if you work with a region not listed here.
 * **GeoJSON/WKT:** (Custom only) The column from the dataframe that contains geographic information about what to display on the map. Each row must contain either a [GeoJSON string](https://geojson.org/) or a [Well-known text (WKT)](https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry) geometry. Most Python geospatial libraries and SQL GIS functions return data in one of these two formats. For examples of what data in these formats looks like, visit the links for each type.
 
 **Fill:** The color that fills each area polygon. This configuration can be toggled off entirely, leaving them transparent.
