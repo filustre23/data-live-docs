@@ -961,4 +961,4 @@ for run in response.runs:
 
 1. 在導覽選單中，按一下「排程查詢」。
 2. 在排定查詢清單中，按一下要刪除的排定查詢名稱。
-3. 在「Scheduled query details」(已排定查詢詳細資料)
+3. 在「Scheduled query details」(已排定查詢詳細資料) 頁面，按一下「Delete」(刪除)。

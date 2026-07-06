@@ -552,5 +552,5 @@ value of `default_product_id`.
 
 ```
 DECLARE target_product_id INT64 DEFAULT 103;
-IF EXISTS(SELECT 1 FROM schema
+IF
 ```

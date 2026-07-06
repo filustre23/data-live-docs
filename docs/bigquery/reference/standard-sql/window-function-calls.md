@@ -536,6 +536,4 @@ This computes a grand total for all items in the
 [`Produce`](#produce_table) table.
 
 * (**banana**, **apple**, **leek**, **cabbage**, **lettuce**, **kale**) = 54 total purchases
-* (**banana**, **apple**, **leek**, **cabbage**, **lettuce**, **kale**) = 54 total purchases
-* (**banana**, **apple**, **leek**, **cabbage**, **lettuce**, **kale**) = 54 total purchases
-* (**banana**, **apple**, **leek**, **cabbage**, **lettuce**, **kale**
+* (**banana**, **apple**, **leek**, **cabbage**, **lettuce**,

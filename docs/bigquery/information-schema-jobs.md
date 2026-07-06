@@ -288,13 +288,5 @@ FROM
 WHERE
   creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 7 hour)
   AND job_type = 'QUERY'
-GROUP BY priority;
-```
-
-結果大致如下：
-
-```
-+-------------+-------------+
-| priority    | active_jobs |
-+-------------+-----------
+GROUP
 ```

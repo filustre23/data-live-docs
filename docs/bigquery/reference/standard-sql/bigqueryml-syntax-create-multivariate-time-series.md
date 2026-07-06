@@ -925,9 +925,4 @@ year 2022-2023.
 | US | MemorialDay | 2022-05-30 | 1 | 1 |
 | US | MemorialDay | 2023-05-29 | 1 | 1 |
 | US | MLKDay | 2022-01-17 | 1 | 1 |
-| US | MLKDay | 2023-01-16 | 1 | 1 |
-| US | PresidentDay | 2022-02-21 | 1 | 1 |
-| US | PresidentDay | 2023-02-20 | 1 | 1 |
-| US | Superbowl | 2022-02-13 | 1 | 1 |
-| US | Superbowl | 2023-02-05 | 1 | 1 |
-| US | Veter |
+| US | MLKDay | 2023-01-16</ |

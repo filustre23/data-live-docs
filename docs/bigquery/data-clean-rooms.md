@@ -16,9 +16,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 透過資料無塵室共用機密資料
 
-資料無塵室提供安全強化環境，多方可共用、彙整及分析資料資產，不必移動或揭露基礎資料。
+資料無塵室提供安全強化環境，讓多方不必移動或揭露基礎資料，也能共用、彙整及分析資料資產。
 
-BigQuery 資料無塵室使用 BigQuery sharing (舊稱 Analytics Hub) 平台。標準的 [BigQuery sharing 資料交換庫](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges?hl=zh-tw)可讓您大規模跨機構共用資料，而資料無塵室則可解決共用機密和受保護資料的使用案例。資料無塵室提供額外的安全控管措施，可保護基礎資料，並強制執行資料擁有者定義的[分析規則](https://docs.cloud.google.com/bigquery/docs/analysis-rules?hl=zh-tw)。
+BigQuery 資料無塵室使用 BigQuery sharing (舊稱 Analytics Hub) 平台。標準的 [BigQuery 資料共用交換庫](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges?hl=zh-tw)可讓您大規模跨機構共用資料，而資料無塵室則可解決共用機密和受保護資料的用途。資料無塵室提供額外的安全控管措施，可保護基礎資料，並強制執行資料擁有者定義的[分析規則](https://docs.cloud.google.com/bigquery/docs/analysis-rules?hl=zh-tw)。
 
 主要用途包括：
 
@@ -38,8 +38,8 @@ BigQuery 資料無塵室使用 BigQuery sharing (舊稱 Analytics Hub) 平台。
 BigQuery 資料無塵室有三種主要角色：
 
 * **資料無塵室擁有者**：管理 Google Cloud 專案中一或多個資料無塵室的權限、可見度和成員資格。資料無塵室擁有者可以將資料貢獻者和資料無塵室訂閱者角色指派給使用者。這個角色類似於 [Analytics Hub 管理員](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles?hl=zh-tw#ah-admin-role) IAM 角色。
-* **資料貢獻者**：將資料發布至資料無塵室。在許多情況下，資料無塵室擁有者也是資料貢獻者。這個角色類似於 [Analytics Hub 發布者](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles?hl=zh-tw#ah-publisher-role)身分與存取權管理角色。
-* **資料無塵室訂閱者**：訂閱資料無塵室中發布的資料，並對資料執行查詢。這個角色類似於[Analytics Hub 訂閱者](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles?hl=zh-tw#ah-subscriber-role)和 [Analytics Hub 訂閱項目擁有者](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub?hl=zh-tw#analyticshub.subscriptionOwner) IAM 角色的組合。
+* **資料貢獻者**：將資料發布至資料無塵室。在許多情況下，資料無塵室擁有者也是資料提供者。這個角色類似於 [Analytics Hub 發布者](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles?hl=zh-tw#ah-publisher-role)身分與存取權管理角色。
+* **資料無塵室訂閱者**：訂閱資料無塵室中發布的資料，並對資料執行查詢。這個角色類似於 [Analytics Hub 訂閱者](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles?hl=zh-tw#ah-subscriber-role)和 [Analytics Hub 訂閱項目擁有者](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub?hl=zh-tw#analyticshub.subscriptionOwner) IAM 角色的組合。
 
 ## 架構
 
@@ -55,11 +55,12 @@ BigQuery 資料無塵室採用 BigQuery 資料的發布及訂閱模型。BigQuer
 
 #### 清單
 
-資料提供者將資料新增至資料無塵室時，系統會建立資料集。當中包含資料提供者共用資源的參照，以及有助於訂閱者使用資料的說明資訊。資料貢獻者可以建立資料集，並加入說明、範例查詢和文件連結等資訊，供訂閱者參考。
+資料貢獻者將資料新增至資料無塵室時，系統會建立目錄。
+當中包含資料提供者共用資源的參照，以及有助於訂閱者使用資料的說明資訊。資料貢獻者可以建立項目，並加入說明、範例查詢和文件連結等資訊，供訂閱者參考。
 
 #### 連結的資料集
 
-連結的資料集是唯讀 BigQuery 資料集，做為資料無塵室中所有資料的符號連結。資料無塵室訂閱者查詢連結資料集中的資源時，系統會傳回共用資源中的資料，並符合資料提供者設定的分析規則。訂閱資料無塵室後，系統會在專案中建立連結的資料集，系統不會建立資料副本，訂閱者也無法查看特定中繼資料，例如檢視定義。
+連結的資料集是唯讀 BigQuery 資料集，做為資料無塵室中所有資料的符號連結。資料無塵室訂閱者查詢連結資料集中的資源時，系統會傳回共用資源中的資料，並符合資料提供者設定的分析規則。訂閱資料無塵室後，系統會在您的專案中建立連結的資料集。系統不會建立資料副本，訂閱者也無法查看特定中繼資料，例如檢視定義。
 
 #### 分析規則
 
@@ -67,8 +68,7 @@ BigQuery 資料無塵室採用 BigQuery 資料的發布及訂閱模型。BigQuer
 
 #### 資料輸出控制項
 
-[資料輸出](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction?hl=zh-tw#data_egress)控制項
-可自動防止資料無塵室訂閱者從資料無塵室複製及匯出原始資料。資料貢獻者可以設定其他控制項，防止訂閱者複製及匯出查詢結果。
+[資料輸出](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction?hl=zh-tw#data_egress)控制項會自動防止資料無塵室訂閱者從資料無塵室複製及匯出原始資料。資料貢獻者可以設定其他控制項，防止訂閱者複製及匯出查詢結果。
 
 #### 查詢範本
 
@@ -83,7 +83,7 @@ BigQuery 資料無塵室採用 BigQuery 資料的發布及訂閱模型。BigQuer
 
 BigQuery 資料無塵室有下列限制：
 
-* 您只能在檢視區塊中設定[分析規則](https://docs.cloud.google.com/bigquery/docs/analysis-rules?hl=zh-tw)，無法在資料表或具體化檢視區塊中設定。因此，如果資料貢獻者直接將資料表、具體化檢視表或沒有分析規則的檢視表分享到資料無塵室，資料無塵室訂閱者就能以原始格式存取這些資源中的資料。
+* 您只能在檢視區塊中設定[分析規則](https://docs.cloud.google.com/bigquery/docs/analysis-rules?hl=zh-tw)，無法在資料表或具體化檢視區塊中設定。因此，如果資料貢獻者直接將資料表、具體化檢視表或沒有數據分析規則的檢視表分享到資料無塵室，資料無塵室訂閱者就能以原始格式存取這些資源中的資料。
 * 由於資料無塵室使用 BigQuery 共用平台，因此適用所有 [BigQuery 共用限制](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction?hl=zh-tw#limitations)。
 * 資料無塵室僅適用於 [BigQuery sharing 區域](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction?hl=zh-tw#supported-regions)。
 * 資料無塵室訂閱者無法在 Knowledge Catalog 或 Data Catalog 中搜尋共用資源。
@@ -133,11 +133,11 @@ BigQuery 資料無塵室有下列限制：
 gcloud services enable analyticshub.googleapis.com
 ```
 
-啟用 Analytics Hub API 後，您就能存取「共用 (Analytics Hub)」頁面。
+啟用 Analytics Hub API 後，您就能存取「Sharing (Analytics Hub)」頁面。
 
 ### 指派 Analytics Hub 管理員角色
 
-資料無塵室擁有者 (也就是建立資料無塵室的使用者) 必須具備[Analytics Hub 管理員角色](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles?hl=zh-tw#ah-admin-role) (`roles/analyticshub.admin`)。如要瞭解如何將這個角色授予其他使用者，請參閱「[建立 BigQuery 共用管理員](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges?hl=zh-tw#create-exchange-administrator)」。
+資料無塵室擁有者 (建立資料無塵室的使用者) 必須具備[Analytics Hub 管理員角色](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles?hl=zh-tw#ah-admin-role) (`roles/analyticshub.admin`)。如要瞭解如何將這個角色授予其他使用者，請參閱「[建立 BigQuery 共用管理員](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges?hl=zh-tw#create-exchange-administrator)」。
 
 ## 資料無塵室擁有者工作流程
 
@@ -162,11 +162,12 @@ gcloud services enable analyticshub.googleapis.com
 
    [前往「共用」(Analytics Hub)](https://console.cloud.google.com/bigquery/analytics-hub?hl=zh-tw)
 2. 按一下「建立資料無塵室」。
-3. 在「Project」(專案) 部分，選取資料無塵室的專案。您必須為專案啟用 Analytics Hub API。
+3. 在「Project」(專案) 中，選取資料無塵室的專案。您必須為專案啟用 Analytics Hub API。
 4. 指定資料無塵室的位置、名稱、主要聯絡人、圖示 (選用) 和說明。您只能列出與資料無塵室位於相同區域的資料無塵室資源。
 5. 選用：如要記錄在連結資料集上執行工作和查詢的所有使用者的[主體 ID](https://docs.cloud.google.com/iam/docs/principal-identifiers?hl=zh-tw)，請按一下「訂閱端電子郵件記錄」切換鈕。記錄的資料會顯示在 [`INFORMATION_SCHEMA.SHARED_DATASET_USAGE` 檢視畫面](https://docs.cloud.google.com/bigquery/docs/information-schema-shared-dataset-usage?hl=zh-tw)的 `job_principal_subject` 欄位中。
 
-   **注意：** 啟用並儲存電子郵件記錄功能後，就無法編輯這項設定。如要停用電子郵件記錄功能，請刪除資料無塵室，然後重新建立，但不要點選「訂閱者電子郵件記錄」切換鈕。
+   **注意：** 啟用並儲存電子郵件記錄功能後，就無法編輯這項設定。
+   如要停用電子郵件記錄功能，請刪除資料無塵室，然後重新建立，但不要點選「訂閱者電子郵件記錄」切換按鈕。
 6. 按一下「建立資料無塵室」。
 7. 選用：在「資料無塵室權限」部分，新增其他資料無塵室擁有者、資料貢獻者或資料無塵室訂閱者。
 
@@ -208,7 +209,7 @@ gcloud services enable analyticshub.googleapis.com
 3. 在「詳細資料」分頁中，按一下「編輯資料無塵室詳細資料」。
 4. 視需要更新資料無塵室名稱、主要聯絡人、圖示、說明或訂閱者電子郵件記錄設定。
 
-   **注意：** 啟用並儲存電子郵件記錄功能後，就無法編輯這項設定。如要停用電子郵件記錄功能，請刪除資料無塵室，然後重新建立，但不要點選「訂閱者電子郵件記錄」切換鈕。
+   **注意：** 啟用並儲存電子郵件記錄功能後，就無法編輯這項設定。如要停用電子郵件記錄功能，請刪除資料無塵室，然後重新建立，但不要點選「訂閱者電子郵件記錄」切換按鈕。
 5. 按一下 [儲存]。
 
 ### API
@@ -253,7 +254,7 @@ curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Ty
 1. 前往 Google Cloud 控制台的「Sharing (Analytics Hub)」頁面。
 
    [前往「共用」(Analytics Hub)](https://console.cloud.google.com/bigquery/analytics-hub?hl=zh-tw)
-2. 在要刪除的資料無塵室資料列中，依序點按more\_vert「更多動作」>「刪除」。
+2. 在要刪除的資料無塵室所在資料列中，依序點按「更多動作」圖示 more\_vert **>「刪除」**。
 3. 如要確認，請輸入 `delete`，然後按一下「刪除」。這項操作無法復原。
 
 ### API
@@ -285,14 +286,14 @@ curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Ty
 1. 前往 Google Cloud 控制台的「Sharing (Analytics Hub)」頁面。
 
    [前往「共用」(Analytics Hub)](https://console.cloud.google.com/bigquery/analytics-hub?hl=zh-tw)
-2. 按一下要授予權限的資料無塵室顯示名稱。
+2. 按一下要授予權限的資料淨室顯示名稱。
 3. 在「詳細資料」分頁中，按一下「設定權限」。
 4. 按一下「Add principal」(新增主體)。
 5. 在「New principals」(新增主體) 中，輸入要新增的資料貢獻者使用者名稱或電子郵件地址。
 6. 在「選取角色」部分，依序選取「Analytics Hub」>「Analytics Hub 發布者」。
 7. 按一下 [儲存]。
 
-您隨時可以點選「設定權限」，刪除及更新資料貢獻者。
+如要刪除及更新資料貢獻者，請隨時點選「設定權限」。
 
 ### API
 
@@ -322,25 +323,23 @@ curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Ty
 
 ### 管理資料無塵室訂閱者
 
-資料無塵室擁有者可以管理哪些使用者能訂閱資料無塵室 (即訂閱者)。如要允許使用者訂閱資料無塵室，請在特定資料無塵室中，授予使用者「Analytics Hub 訂閱者」角色 (`roles/analyticshub.subscriber`) 和「Analytics Hub 訂閱擁有者」角色 (`roles/analyticshub.subscriptionOwner`)：
+資料無塵室擁有者可以管理哪些使用者能訂閱資料無塵室 (即訂閱者)。如要允許使用者訂閱資料無塵室，請在特定資料無塵室中，授予使用者 [Analytics Hub 訂閱者角色](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles?hl=zh-tw#ah-subscriber-role) (`roles/analyticshub.subscriber`) 和 [Analytics Hub 訂閱擁有者角色](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles?hl=zh-tw#ah-subscription-owner-role) (`roles/analyticshub.subscriptionOwner`)：
 
 ### 控制台
 
 1. 前往 Google Cloud 控制台的「Sharing (Analytics Hub)」頁面。
 
    [前往「共用」(Analytics Hub)](https://console.cloud.google.com/bigquery/analytics-hub?hl=zh-tw)
-2. 按一下要授予權限的資料無塵室顯示名稱。
+2. 按一下要授予權限的資料淨室顯示名稱。
 3. 在「詳細資料」分頁中，按一下「設定權限」。
 4. 按一下「Add principal」(新增主體)。
 5. 在「New principals」(新增主體) 中，輸入要新增的資料無塵室訂閱者使用者名稱或電子郵件地址。
 6. 在「選取角色」部分，依序選取「Analytics Hub」>「Analytics Hub 訂閱者」。
-7. 按一下
-   add\_box
-   「Add another role」(新增其他角色)。
+7. 按一下「新增其他角色」add\_box。
 8. 在「選取角色」部分，依序選取「Analytics Hub」>「Analytics Hub 訂閱項目擁有者」。
 9. 按一下 [儲存]。
 
-如要隨時刪除及更新訂閱者，請按一下「設定權限」。
+如要刪除及更新訂閱者，請按一下「設定權限」。
 
 ### API
 
@@ -372,7 +371,7 @@ curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Ty
 
 要求主體中的政策應符合 [Policy](https://docs.cloud.google.com/iam/reference/rest/v1/Policy?hl=zh-tw) 的結構。
 
-您可以透過[「IAM」頁面](https://console.cloud.google.com/iam-admin?hl=zh-tw)，授予整個專案的 Analytics Hub 訂閱者角色 (`roles/analyticshub.subscriber`) 和 Analytics Hub 訂閱擁有者角色 (`roles/analyticshub.subscriptionOwner`)，讓使用者有權訂閱專案中的任何資料無塵室。不過，我們不建議這麼做，因為這可能會導致使用者擁有過於寬鬆的存取權。
+您可以透過[「IAM」頁面](https://console.cloud.google.com/iam-admin?hl=zh-tw)，為整個專案授予 Analytics Hub 訂閱者角色 (`roles/analyticshub.subscriber`) 和 Analytics Hub 訂閱擁有者角色 (`roles/analyticshub.subscriptionOwner`)，讓使用者有權訂閱專案中的任何資料無塵室。不過，我們不建議這麼做，因為這可能會導致使用者擁有過於寬鬆的存取權。
 
 ### 共用資料無塵室
 
@@ -388,7 +387,7 @@ curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Ty
 
 資料貢獻者可以執行下列操作：
 
-* 建立房源，將資料新增至資料無塵室。
+* 建立產品資訊，將資料新增至資料無塵室。
 * 更新產品資訊。
 * 刪除房源資訊。
 * 共用資料無塵室。
@@ -406,7 +405,7 @@ curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Ty
 
 ### 建立商家資訊 (新增資料)
 
-**注意：** 如果協作環境需要通用 ID，才能在資料貢獻者和資料無塵室訂閱者資料集之間聯結資料，請先設定[實體解析](https://docs.cloud.google.com/bigquery/docs/entity-resolution-setup?hl=zh-tw)，再按照下列步驟操作。
+**注意：** 如果協作環境需要通用 ID，才能在資料貢獻者和資料無塵室訂閱者資料集中聯結資料，請先設定[實體解析](https://docs.cloud.google.com/bigquery/docs/entity-resolution-setup?hl=zh-tw)，再按照下列步驟操作。
 
 如要使用[數據分析規則](https://docs.cloud.google.com/bigquery/docs/analysis-rules?hl=zh-tw)準備資料，並以清單形式發布至資料無塵室，請按照下列步驟操作：
 
@@ -419,15 +418,15 @@ curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Ty
 
    如果您的機構與資料無塵室擁有者不同，且您看不到資料無塵室，請向資料無塵室擁有者索取直接連結。
 3. 按一下「新增資料」。
-4. 在「選取資料集」和「資料表/檢視表名稱」部分，輸入要在資料無塵室中列出的資料表或檢視表，以及對應的資料集。您將新增分析規則，防止以原始形式存取這項基礎資料，步驟如下：
+4. 在「選取資料集」和「資料表/檢視表名稱」部分，輸入要在資料無塵室中列出的資料表或檢視表，以及對應的資料集。您將新增分析規則，防止未經授權存取這項基礎資料。
 5. 選取要發布的資源資料欄。
 6. 設定房源的檢視畫面名稱、主要聯絡人和說明 (選填)。
 7. 點選「下一步」。
 8. 為房源選擇分析規則，並設定詳細資料。
 9. 為房源設定[資料外流](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction?hl=zh-tw#data_egress)控管機制。
 10. 點選「下一步」。
-11. 請檢查要新增至資料無塵室的資料和分析規則。
-12. 按一下「新增資料」。系統會為您的資料建立檢視區塊，並新增為資料無塵室的項目。系統不會新增來源資料表或檢視表本身。
+11. 查看要新增至資料無塵室的資料和分析規則。
+12. 按一下「新增資料」。系統會為您的資料建立檢視表，並新增為資料無塵室的項目。系統不會新增來源資料表或檢視表本身。
 
 ### API
 
@@ -453,9 +452,9 @@ curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Ty
 
 在資料無塵室中列出資源，即表示您授予所有現有和未來的資料無塵室訂閱者，存取共用資源中資料的權限。
 
-如果您嘗試使用沒有分析規則的共用資源建立項目，系統會顯示警告，提醒訂閱者可以存取該資源的原始資料。如果您確認要發布這類資源，且不使用分析規則，仍可建立商家資訊。
+如果嘗試使用沒有分析規則的共用資源建立項目，系統會顯示警告，提醒訂閱者可以存取該資源的原始資料。如果您確認要發布這類資源，即使沒有分析規則，仍可建立商家資訊。
 
-如果收到 `Failed to save listing` 錯誤訊息，請確認您[具備執行資料貢獻者工作的必要權限](#additional_data_contributor_permissions)。
+如果收到 `Failed to save listing` 錯誤訊息，請確認你[具備執行資料貢獻者工作的必要權限](#additional_data_contributor_permissions)。
 
 ### 更新產品資訊
 
@@ -464,13 +463,13 @@ curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Ty
 1. 前往 Google Cloud 控制台的「Sharing (Analytics Hub)」頁面。
 
    [前往「共用」(Analytics Hub)](https://console.cloud.google.com/bigquery/analytics-hub?hl=zh-tw)
-2. 按一下含有房源的資料無塵室顯示名稱。
-3. 在要更新的房源所在列中，依序點選 more\_vert「更多動作」>「編輯房源」。
+2. 按一下含有房源資訊的資料無塵室顯示名稱。
+3. **找出要更新的房源，然後依序點選該列的 more\_vert「更多動作」>「編輯房源」**。
 4. 視需要更新主要聯絡人或說明。
 5. 點選「下一步」。
 6. 視需要更新分析規則。您只能更新所選規則的參數。你無法切換至其他規則。
 7. 點選「下一步」。
-8. 查看商家資訊，然後按一下**新增資料**。
+8. 查看商家資訊，然後按一下「新增資料」。
 
 ### API
 
@@ -491,7 +490,7 @@ curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Ty
 * `LISTING_ID`：您的房源 ID。
 * `LISTING_NAME`：商家檔案名稱。
 
-建立項目後，就無法變更來源資源或資料輸出控管設定。
+建立房源後，就無法變更來源資源或資料外流控管設定。
 
 ### 刪除產品資訊
 
@@ -500,7 +499,7 @@ curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Ty
 1. 前往 Google Cloud 控制台的「Sharing (Analytics Hub)」頁面。
 
    [前往「共用」(Analytics Hub)](https://console.cloud.google.com/bigquery/analytics-hub?hl=zh-tw)
-2. 按一下含有房源的資料無塵室顯示名稱。
+2. 按一下含有房源資訊的資料無塵室顯示名稱。
 3. 在要刪除的房源資料列中，依序點選more\_vert「更多動作」**>「刪除房源」**。
 4. 如要確認，請輸入 `delete`，然後按一下「刪除」。這項操作無法復原。
 
@@ -521,7 +520,7 @@ curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Ty
 * `CLEAN_ROOM_ID`：您的資料無塵室 ID。
 * `LISTING_ID`：您的房源 ID。
 
-刪除房源資訊時，系統不會刪除共用資源和連結的資料集。連結的資料集會與來源資料集取消連結，因此資料無塵室訂閱者開始無法查詢該清單中的資料。
+刪除房源後，系統不會刪除共用資源和連結的資料集。連結的資料集會與來源資料集取消連結，因此資料無塵室訂閱者開始無法查詢該清單中的資料。
 
 ### 共用資料無塵室
 
@@ -535,7 +534,7 @@ curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Ty
 
 ### 監控房源
 
-如要查看您在資料無塵室中分享的資源，其來源資料集的用量指標，請查詢 [`INFORMATION_SCHEMA.SHARED_DATASET_USAGE` 檢視區塊](https://docs.cloud.google.com/bigquery/docs/information-schema-shared-dataset-usage?hl=zh-tw)。
+如要查看資料無塵室中分享資源的來源資料集用量指標，請查詢 [`INFORMATION_SCHEMA.SHARED_DATASET_USAGE` 檢視區塊](https://docs.cloud.google.com/bigquery/docs/information-schema-shared-dataset-usage?hl=zh-tw)。
 
 如要查看產品資訊資料無塵室訂閱者，請按照下列步驟操作：
 
@@ -543,13 +542,13 @@ curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Ty
 
    [前往「共用」(Analytics Hub)](https://console.cloud.google.com/bigquery/analytics-hub?hl=zh-tw)
 2. 按一下資料無塵室的顯示名稱。
-3. 在要查看的商品資訊列中，依序點選 more\_vert「更多動作」>「查看訂閱項目」。
+3. 在要查看的房源資料列中，依序點選 more\_vert「更多動作」>「查看訂閱項目」。
 
 ## 資料無塵室訂閱者工作流程
 
 訂閱者可以查看及訂閱資料無塵室。訂閱資料無塵室後，系統會在訂閱者的專案中建立一個連結的資料集。每個連結的資料集都與資料無塵室同名。
 
-您無法訂閱資料無塵室中的特定資料清單。您只能訂閱資料無塵室本身。
+您無法訂閱資料無塵室中的特定清單。您只能訂閱資料無塵室本身。
 
 ### 其他訂閱者權限
 
@@ -559,7 +558,7 @@ curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Ty
 
 ### 訂閱資料無塵室
 
-訂閱資料無塵室後，您就能在專案中建立連結的資料集，並查詢商家資訊中的資料。如要訂閱資料淨室，請按照下列步驟操作：
+訂閱資料無塵室後，您就能在專案中建立連結的資料集，並查詢商家檔案中的資料。如要訂閱資料淨室，請按照下列步驟操作：
 
 ### 控制台
 
@@ -573,7 +572,7 @@ curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Ty
 4. 如要顯示您有權存取的資料無塵室，請在篩選器清單中選取「資料無塵室」。
 5. 按一下要訂閱的資料無塵室。系統會開啟資料無塵室的說明頁面。這個頁面也會顯示供應商是否已啟用訂閱者電子郵件記錄功能。
 6. 按一下「訂閱」。
-7. 選取訂閱項目的目標專案，然後按一下「訂閱」。
+7. 選取訂閱的目標專案，然後按一下「訂閱」。
 
 ### API
 
@@ -585,15 +584,32 @@ curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Ty
   curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -L -X POST https://analyticshub.googleapis.com/v1/projects/DCR_PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID:subscribe  --data '{"destination":"projects/SUBSCRIBER_PROJECT_ID/locations/LOCATION","subscription":"SUBSCRIPTION"}'
 ```
 
-請替換下列項目：
+更改下列內容：
 
 * `DCR_PROJECT_ID`：建立資料無塵室的專案 ID。
-* `SUBSCRIBER_PROJECT_ID`：訂閱者專案的專案 ID。
 * `LOCATION`：資料無塵室的位置。
 * `CLEAN_ROOM_ID`：您的資料無塵室 ID。
+* `SUBSCRIBER_PROJECT_ID`：訂閱者專案的專案 ID。
 * `SUBSCRIPTION`：訂閱方案名稱。
+* `LINKED_DATASET_ID`：您要授予連結資料集的 ID。
+* `PRIMARY_REGION`：要建立連結資料集的主要地理區域。
 
-在要求主體中，指定要建立[連結資料集](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction?hl=zh-tw#linked_datasets)的資料集。
+在要求主體中，指定目的地位置、訂閱名稱，以及要建立[連結資料集](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction?hl=zh-tw#linked_datasets)的資料集：
+
+```
+{
+  "destination": "projects/SUBSCRIBER_PROJECT_ID/locations/LOCATION",
+  "subscription": "SUBSCRIPTION",
+  "destinationDataset": {
+    "datasetReference": {
+      "projectId": "SUBSCRIBER_PROJECT_ID",
+      "datasetId": "LINKED_DATASET_ID"
+    },
+    "location": "PRIMARY_REGION"
+  }
+}
+```
+
 如果要求成功，回應主體會包含[訂閱物件](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe?hl=zh-tw#response-body)。
 
 如果您使用 `logLinkedDatasetQueryUserEmail` 欄位為資料無塵室啟用訂閱者電子郵件記錄功能，訂閱回應會包含 `log_linked_dataset_query_user_email: true`。記錄的資料會顯示在 [`INFORMATION_SCHEMA.SHARED_DATASET_USAGE` 檢視畫面的 `job_principal_subject` 欄位中](https://docs.cloud.google.com/bigquery/docs/information-schema-shared-dataset-usage?hl=zh-tw)。
@@ -602,25 +618,25 @@ curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Ty
 
 資料無塵室訂閱者可以編輯連結資料集的某些中繼資料，例如說明和標籤。您也可以為連結的資料集設定權限。不過，連結資料集的變更不會影響來源資料集。您也無法查看檢視畫面定義。
 
-連結資料集中包含的資源為唯讀。訂閱者無法編輯連結資料集中資源的資料或中繼資料。您也無法為連結資料集中的個別資源指定權限。
+連結資料集中包含的資源為唯讀。訂閱者無法編輯連結資料集中資源的資料或中繼資料。此外，您也無法為連結資料集中的個別資源指定權限。
 
 如要取消訂閱資料無塵室，請刪除連結的資料集。
 
-#### 查詢已連結資料集中的資料
+#### 查詢連結資料集中的資料
 
 如要查詢連結資料集中的資料，請使用 [`SELECT WITH AGGREGATION_THRESHOLD` 語法](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw#agg_threshold_clause)，以便對強制執行分析規則的檢視區塊執行查詢。如需這類語法的範例，請參閱「[查詢匯總門檻分析規則 - 強制執行的檢視畫面](https://docs.cloud.google.com/bigquery/docs/analysis-rules?hl=zh-tw#view_in_privacy_query)」。
 
-## 情境範例：廣告主和發布商歸因分析
+## 範例情境：廣告主和發布商的歸因分析
 
 某廣告主想追蹤行銷廣告活動的成效，廣告主擁有顧客的第一方資料，包括購買記錄、受眾特徵和興趣。發布商擁有網站資料，包括向訪客顯示的廣告和轉換。
 
-廣告主和發布商同意使用資料無塵室合併資料，並評估廣告活動成效。在本例中，發布商會建立資料無塵室，並開放廣告主使用資料進行分析。歸因報表會顯示哪些廣告最能有效提高銷售量，廣告主可以運用這項資訊，改善日後的行銷廣告活動。
+廣告主和發布商同意使用資料無塵室合併資料，並評估廣告活動成效。在本例中，發布商會建立資料無塵室，並開放廣告主使用資料進行分析。歸因報表會顯示哪些廣告最能有效提高銷售量。廣告主可以根據這項資訊，改善日後的行銷廣告活動。
 
 廣告主和發布商會透過下列各節所述程序，協調 BigQuery 資料無塵室。
 
 ### 建立資料無塵室 (發布商)
 
-1. 發布商機構的資料無塵室擁有者會在 BigQuery 專案中啟用 Analytics Hub API，並將使用者 A 指派為資料無塵室擁有者 (Analytics Hub 管理員 (`roles/analyticshub.admin`))。
+1. 發布商機構的資料無塵室擁有者在 BigQuery 專案中啟用 Analytics Hub API，並將使用者 A 指派為資料無塵室擁有者 (Analytics Hub 管理員 (`roles/analyticshub.admin`))。
 2. 使用者 A 建立名為「`Campaign Analysis`」的資料無塵室，並指派下列權限：
    * 資料貢獻者 (Analytics Hub 發布者 (`roles/analyticshub.publisher`))：
      使用者 B，發布者機構的資料工程師。
@@ -629,7 +645,7 @@ curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Ty
 
 ### 將資料新增至資料無塵室 (發布商)
 
-1. 使用者 B 在名為 `Publisher Conversion Data` 的資料無塵室中建立新項目。建立商家資訊時，系統會建立含有分析規則的新檢視畫面。
+1. 使用者 B 在資料無塵室中建立名為 `Publisher Conversion Data` 的新刊登。建立商家資訊時，系統會建立含有分析規則的新檢視畫面。
 
 ### 訂閱資料無塵室 (廣告主)
 
@@ -642,10 +658,10 @@ curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Ty
 
 在[資料準備](#add-data)過程中，BigQuery 中的實體解析功能會執行下列操作：
 
-* 對於資料提供者，系統會使用所選通用供應商的 ID，在共用資源中重複資料並解決記錄。這個程序可讓不同貢獻者加入。
-* 對於資料無塵室訂閱者，這項功能會將第一方資料集中的記錄去重並解析，然後連結至資料貢獻者資料集中的實體。這個程序可讓訂閱者和資料提供者資料之間進行聯結。
+* 對於資料貢獻者，系統會使用所選通用供應商的 ID，在共用資源中重複資料並解決記錄。這個程序可讓不同貢獻者加入。
+* 對於資料無塵室訂閱者，系統會將第一方資料集中的記錄去重複化並解析，然後連結至資料貢獻者資料集中的實體。這個程序可讓訂閱者和資料貢獻者資料之間進行聯結。
 
-如要使用所選的識別資訊提供者設定實體解析，請參閱[在 BigQuery 中設定及使用實體解析](https://docs.cloud.google.com/bigquery/docs/entity-resolution-setup?hl=zh-tw)。
+如要使用所選的身分識別提供者設定實體解析，請參閱「[在 BigQuery 中設定及使用實體解析](https://docs.cloud.google.com/bigquery/docs/entity-resolution-setup?hl=zh-tw)」。
 
 ## 探索資料無塵室資產
 
@@ -676,9 +692,9 @@ do [ "$(bq show -d --project_id $PROJECT $dataset | egrep LINKED)" ] \
 && echo $dataset; done
 ```
 
-請將 `PROJECT_ID` 替換為包含連結資料集的專案。
+請將 `PROJECT_ID` 替換為包含已連結資料集的專案。
 
-**注意：** 在「Explorer」窗格中，連結的資料集也會顯示與標準資料集不同的圖示。
+**注意：** 在「Explorer」窗格中，連結的資料集圖示與標準資料集不同。
 
 ## 定價
 
@@ -697,11 +713,11 @@ do [ "$(bq show -d --project_id $PROJECT $dataset | egrep LINKED)" ] \
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-06-20 (世界標準時間)。
+上次更新時間：2026-06-29 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-20 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-29 (世界標準時間)。"],[],[]]

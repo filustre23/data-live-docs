@@ -976,3 +976,7 @@ Exclude a list of terms (tokens) from the results.
 
 In the following query, the words `they` and `pie` are excluded from the
 results:
+
+```
+SELECT
+```

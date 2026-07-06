@@ -474,7 +474,5 @@ to disambiguate columns after the `JOIN` operator.
   UNION ALL
   SELECT "000456" AS id, "bananas" AS item, 5 AS sales
 ) AS sales_table
-|> AGGREGATE SUM(sales) AS total_sales GROUP BY id, item
--- AGGREGATE creates an output table, so the sales_table alias is now out of
--- scope. Add a t1 alias so the join can refer to its id column.
+|> AGGREGATE SUM(sales) AS total_sales GROUP BY
 ```

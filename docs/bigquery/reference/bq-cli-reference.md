@@ -633,9 +633,3 @@ bq get-iam-policy --reservation myReservation
 :   要取得政策的資料表或檢視區塊。
 
 如要進一步瞭解 `bq get-iam-policy` 指令，請參閱「[使用 IAM 控管資源存取權](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam?hl=zh-tw#bq)」。
-
-### `bq head`
-
-使用 `bq head` 指令顯示資料表的指定資料列和資料欄。根據預設，系統會顯示前 100 列的所有資料欄。
-
-#### 劇情概要

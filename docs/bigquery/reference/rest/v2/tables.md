@@ -206,4 +206,4 @@ Data policy option. For more information, see [Mask data by applying data polici
 
 | Fields | |
 | --- | --- |
-| `name` | `string`  Data policy resource name in the form of projects/projectId/locations/locationId/dataPolicies/data\_policy\_id. |
+|  |

@@ -338,12 +338,3 @@ receives a rank value which increments by the number of peers with the previous
 rank value, instead of `DENSE_RANK`, which always increments by 1.
 
 To learn more about the `OVER` clause and how to use it, see
-[Window function calls](/bigquery/docs/reference/standard-sql/window-function-calls).
-
-
-
-**Return Type**
-
-`INT64`
-
-**Examples**

@@ -254,5 +254,5 @@ public class CreateAdManagerTransfer {
       ProjectName parent = ProjectName.of(projectId);
       CreateTransferConfigRequest request =
           CreateTransferConfigRequest.newBuilder()
-              .setParent(parent.toString())
+              .setParent(parent.
 ```

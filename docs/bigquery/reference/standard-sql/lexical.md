@@ -813,6 +813,5 @@ INTERVAL '-23-2 10 -12:30' YEAR TO MINUTE
 -- -23 years, -2 months, 10 days, 0 hours, -30 minutes, and 0 seconds (-23-2 10 -0:30:0)
 SELECT INTERVAL '-23-2 10 -0:30' YEAR TO MINUTE
 
--- Produces an error because the negative sign for minutes must come before the hour.
-SELECT INTERVAL '-23-2 10 0:-30' YEAR
+-- Produces an error because the neg
 ```

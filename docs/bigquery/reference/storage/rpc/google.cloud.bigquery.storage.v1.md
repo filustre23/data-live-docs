@@ -247,5 +247,4 @@ Contains options specific to Avro Serialization.
 
 The precision of the timestamp value in the Avro message. This precision will **only** be applied to the column(s) with the `TIMESTAMP_PICOS` type.
 
-| Enums | |
-| --- | --- |
+<

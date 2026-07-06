@@ -18,7 +18,7 @@ This document describes the `ML.GENERATE_EMBEDDING` function, which
 lets you create [embeddings](#embeddings) that describe an entity—for example,
 a piece of text or an image.
 
-The
+**Note:** The
 [`AI.GENERATE_EMBEDDING` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding)
 offers the same functionality with simplified column names in the output. For
 new queries, we recommend that you use `AI.GENERATE_EMBEDDING` instead.
@@ -616,9 +616,4 @@ ML.GENERATE_EMBEDDING(
   + If `flatten_json_output` is `FALSE`, this is the
     [JSON response](/vertex-ai/docs/reference/rest/v1/projects.locations.endpoints/predict#response-body)
     from the [`projects.locations.endpoints.predict`](/vertex-ai/docs/reference/rest/v1/projects.locations.endpoints/predict) call to the model. The
-    generated embeddings are in the first element of the `predictions`
-    array.
-  + If `flatten_json_output` is `TRUE`, this is an `ARRAY<FLOAT64>`
-    value that contains the generated embeddings.
-* `ml_generate_embedding_status`: a `STRING` value that contains the API
-  response status for the corresponding row.
+    generated embeddings are in the first element of the `predictions<`

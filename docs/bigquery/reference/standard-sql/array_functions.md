@@ -515,11 +515,4 @@ GENERATE_ARRAY(start_expression, end_expression[, step_expression])
 
 **Description**
 
-Returns an array of values. The `start_expression` and `end_expression`
-parameters determine the inclusive start and end of the array.
-
-The `GENERATE_ARRAY` function accepts the following data types as inputs:
-
-* `INT64`
-* `NUMERIC`
-* `BIGNUMERIC`
+Returns an array of values. The `start_expression` and

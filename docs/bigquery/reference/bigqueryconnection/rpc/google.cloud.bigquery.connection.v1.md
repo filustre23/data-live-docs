@@ -224,6 +224,3 @@ Remote endpoint specification.
 ## Network
 
 Network related configuration.
-
-| Fields< | |
-| --- | --- |

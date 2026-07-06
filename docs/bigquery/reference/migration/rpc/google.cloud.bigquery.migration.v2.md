@@ -238,5 +238,4 @@ A request to get a previously created migration workflow.
 
 | Fields | |
 | --- | --- |
-| `name` | `string`  Required. The unique identifier for the migration workflow. Example: `projects/123/locations/us/workflows/1234` |
-| `rea` |
+| `name` | `string`  Required. The unique identifier for the m |

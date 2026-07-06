@@ -257,7 +257,3 @@ Request message for invoking `FinalizeWriteStream`.
 | Fields | |
 | --- | --- |
 | `name` | `string`  Required. Name of the stream to finalize, in the form of `projects/{project}/datasets/{dataset}/tables/{table}/streams/{stream}`.  Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `name`:   * `bigquery.tables.updateData` |
-
-## FinalizeWriteStreamResponse
-
-Response message for `FinalizeWriteStream`.

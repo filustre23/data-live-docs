@@ -18,7 +18,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 本文說明如何管理現有的資料移轉設定。
 
-您也可以[手動觸發現有轉移作業](#manually_trigger_a_transfer)，也就是啟動*補充執行*。
+您也可以[手動觸發現有轉移作業](#manually_trigger_a_transfer)，也就是啟動*回填執行*。
 
 ## 查看轉移作業
 
@@ -32,7 +32,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 此外，如要透過 Google Cloud 控制台查看記錄訊息，您必須具備查看 Cloud Logging 資料的權限。「記錄檢視者」角色 (`roles/logging.viewer`) 可讓您以唯讀存取 Logging 的所有功能。如要進一步瞭解適用於 Cloud 記錄資料的 Identity and Access Management (IAM) 權限和角色，請參閱 Cloud Logging [存取權控管指南](https://docs.cloud.google.com/logging/docs/access-control?hl=zh-tw)。
 
-如要進一步瞭解 BigQuery 資料移轉服務中的 IAM 角色，請參閱[存取權控管](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)。
+如要進一步瞭解 BigQuery 資料移轉服務中的身分與存取權管理角色，請參閱[存取權控管](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)。
 
 ### 取得轉移詳細資料
 
@@ -46,7 +46,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    [前往「資料轉移」頁面](https://console.cloud.google.com/bigquery/transfers?hl=zh-tw)
 2. 選取要查看詳細資料的轉移作業。
-3. 如要查看移轉設定和資料來源詳細資料，請在「Transfer details」(移轉作業詳細資料) 頁面中，按一下「Configuration」(設定)。以下範例顯示 Google Ads 移轉的設定屬性：
+3. 如要查看移轉設定和資料來源詳細資料，請在「移轉詳細資料」頁面中按一下「設定」。以下範例顯示 Google Ads 移轉的設定屬性：
 
 ### bq
 
@@ -58,8 +58,7 @@ bq show \
 --transfer_config resource_name
 ```
 
-將 `resource_name` 替換為移轉的資源名稱 (也稱為移轉設定)。如果您不知道移轉的資源名稱，請使用以下指令找出資源名稱：
-[`bq ls --transfer_config --transfer_location=location`](#list_transfer_configurations)。
+將 `resource_name` 替換為移轉的資源名稱 (也稱為移轉設定)。如果您不知道移轉的資源名稱，請使用 [`bq ls --transfer_config --transfer_location=location`](#list_transfer_configurations) 找出資源名稱。
 
 例如，輸入下列指令來顯示 `projects/myproject/locations/us/transferConfigs/1234a123-1234-1a23-1be9-12ab3c456de7` 的移轉設定。
 
@@ -71,7 +70,7 @@ bq show \
 
 ### API
 
-使用 [`projects.locations.transferConfigs.get`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/get?hl=zh-tw) 方法，並使用 `name` 參數提供轉移設定。
+請使用 [`projects.locations.transferConfigs.get`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/get?hl=zh-tw) 方法，並透過 `name` 參數提供轉移設定。
 
 ### Java
 
@@ -127,7 +126,7 @@ public class GetTransferConfigInfo {
 
 如要列出特定資料來源的移轉設定，請提供 `--filter` 標記。
 
-如要以分頁格式查看特定數量的移轉設定，請提供 `--max_results` 標記來指定移轉次數。這個指令會傳回您使用 `--page_token` 旗標提供的頁面符記，以便查看下 n 個設定。如果省略 `--max_results`，系統最多會傳回 1000 項設定，且 `--max_results` 不會接受大於 1000 的值。如果專案有超過 1000 個設定，請使用 `--max_results` 和 `--page_token` 逐一查看所有設定。
+如要以分頁格式查看特定數量的移轉設定，請提供 `--max_results` 標記來指定移轉數量。這個指令會傳回您使用 `--page_token` 旗標提供的頁面符記，以便查看下 n 個設定。如果省略 `--max_results`，系統最多會傳回 1000 項設定，且 `--max_results` 不會接受大於 1000 的值。如果專案有超過 1000 個設定，請使用 `--max_results` 和 `--page_token` 逐一查看所有設定。
 
 ```
 bq ls \
@@ -147,20 +146,21 @@ bq ls \
   + `amazon_s3` - [Amazon S3 資料移轉](https://docs.cloud.google.com/bigquery/docs/s3-transfer?hl=zh-tw#bq)
   + `azure_blob_storage` - [Azure Blob 儲存體資料移轉](https://docs.cloud.google.com/bigquery/docs/blob-storage-transfer?hl=zh-tw#bq)
   + `dcm_dt` - [Campaign Manager 資料移轉](https://docs.cloud.google.com/bigquery/docs/doubleclick-campaign-transfer?hl=zh-tw#set_up_a_campaign_manager_transfer)
-  + `google_cloud_storage` - [Cloud Storage 資料移轉](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer?hl=zh-tw#set_up_a_cloud_storage_transfer)
+  + `google_cloud_storage` - [Cloud Storage 資料轉移](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer?hl=zh-tw#set_up_a_cloud_storage_transfer)
   + `cross_region_copy` - [資料集副本](https://docs.cloud.google.com/bigquery/docs/copying-datasets?hl=zh-tw)
-  + `dfp_dt`- [Google Ad Manager 資料移轉](https://docs.cloud.google.com/bigquery/docs/doubleclick-publisher-transfer?hl=zh-tw#set_up_a_google_ad_manager_transfer)
-  + `displayvideo`- [Display & Video 360 資料移轉](https://docs.cloud.google.com/bigquery/docs/display-video-transfer?hl=zh-tw)
-  + `google_ads` - [Google Ads 資料移轉](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer?hl=zh-tw)
-  + `merchant_center` - [Google Merchant Center 資料移轉](https://docs.cloud.google.com/bigquery/docs/merchant-center-transfer-schedule-transfers?hl=zh-tw)
-  + `mysql` - [MySQL 資料移轉](https://docs.cloud.google.com/bigquery/docs/mysql-transfer?hl=zh-tw#set-up-a-mysql-data-transfer)
-  + `play` - [Google Play 資料移轉](https://docs.cloud.google.com/bigquery/docs/play-transfer?hl=zh-tw#setup-transfer)
+  + `dfp_dt`- [Google Ad Manager 資料轉移](https://docs.cloud.google.com/bigquery/docs/doubleclick-publisher-transfer?hl=zh-tw#set_up_a_google_ad_manager_transfer)
+  + `displayvideo`- [Display & Video 360 資料轉移](https://docs.cloud.google.com/bigquery/docs/display-video-transfer?hl=zh-tw)
+  + `google_ads` - [Google Ads 資料轉移](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer?hl=zh-tw)
+  + `merchant_center` - [Google Merchant Center 資料轉移](https://docs.cloud.google.com/bigquery/docs/merchant-center-transfer-schedule-transfers?hl=zh-tw)
+  + `mysql` - [MySQL 資料轉移](https://docs.cloud.google.com/bigquery/docs/mysql-transfer?hl=zh-tw#set-up-a-mysql-data-transfer)
+  + `play` - [Google Play 資料轉移](https://docs.cloud.google.com/bigquery/docs/play-transfer?hl=zh-tw#setup-transfer)
   + `scheduled_query` - [已排定查詢的資料移轉](https://docs.cloud.google.com/bigquery/docs/scheduling-queries?hl=zh-tw)
-  + `search_ads`- [Search Ads 360 資料移轉](https://docs.cloud.google.com/bigquery/docs/search-ads-transfer?hl=zh-tw)
-  + `youtube_channel` - [YouTube 頻道資料移轉](https://docs.cloud.google.com/bigquery/docs/youtube-channel-transfer?hl=zh-tw#set_up_a_youtube_channel_transfer)
+  + `search_ads`- [Search Ads 360 資料轉移](https://docs.cloud.google.com/bigquery/docs/search-ads-transfer?hl=zh-tw)
+  + `youtube_channel` - [YouTube 頻道資料轉移](https://docs.cloud.google.com/bigquery/docs/youtube-channel-transfer?hl=zh-tw#set_up_a_youtube_channel_transfer)
   + `youtube_content_owner` - [YouTube 內容擁有者資料移轉](https://docs.cloud.google.com/bigquery/docs/youtube-content-owner-transfer?hl=zh-tw#set_up_a_youtube_content_owner_transfer)
   + `redshift` - [Amazon Redshift 遷移](https://docs.cloud.google.com/bigquery/docs/migration/redshift?hl=zh-tw#set-up-transfer)
   + `on_premises` - [Teradata 遷移](https://docs.cloud.google.com/bigquery/docs/migration/teradata?hl=zh-tw)
+  + `snowflake_migration` - [Snowflake 遷移](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer?hl=zh-tw#bq)
 
 範例：
 
@@ -192,7 +192,7 @@ bq ls \
 --max_results=3
 ```
 
-這個指令會傳回下一頁憑證。複製頁面權杖並在 `bq ls` 指令中提供，即可查看下 3 個結果。
+這個指令會傳回下一頁憑證。複製頁面憑證並在 `bq ls` 指令中提供，即可查看下 3 個結果。
 
 ```
 bq ls \
@@ -303,7 +303,7 @@ def list_transfer_configs(project_id: str, location: str) -> None:
         )
 ```
 
-### 查看移轉執行記錄
+### 查看轉移執行記錄
 
 在執行排定的移轉作業時，系統會為每個移轉設定都保留一個執行紀錄，當中包含成功的移轉執行和失敗的移轉執行。已超過 90 天的移轉執行作業會自動從執行記錄中刪除。
 
@@ -362,7 +362,7 @@ bq ls \
 projects/myproject/locations/us/transferConfigs/1234a123-1234-1a23-1be9-12ab3c456de7
 ```
 
-這個指令會傳回下一頁憑證。複製頁面權杖並在 `bq ls` 指令中提供，即可查看下 3 個結果。
+這個指令會傳回下一頁憑證。複製頁面憑證並在 `bq ls` 指令中提供，即可查看下 3 個結果。
 
 ```
 bq ls \
@@ -441,11 +441,11 @@ public class RunHistory {
 2. 在資料移轉清單中，按一下要查看的移轉作業。
 3. 系統會將您帶往所選移轉作業的「執行記錄」頁面。
 4. 按一下個別移轉作業，即可開啟該移轉作業的「執行詳細資料」面板。
-5. 在「執行詳細資料」中，記下任何錯誤訊息。與 Cloud Customer Care 團隊聯絡時必須提供這些資訊。執行作業詳細資料還包括記錄訊息和警告。
+5. 在「執行詳細資料」中，記下任何錯誤訊息。與 Cloud Customer Care 聯絡時必須提供這些資訊。執行作業詳細資料還包括記錄訊息和警告。
 
 ### bq
 
-如要查看移轉執行作業的詳細資料，請輸入 `bq show` 指令並使用 `--transfer_run` 標記提供移轉執行作業的執行作業名稱。`--format` 標記可用來控管輸出格式。
+如要查看移轉執行作業的詳細資料，請輸入 `bq show` 指令並使用 `--transfer_run` 標記提供移轉執行作業的執行作業名稱。`--format` 旗標可用來控制輸出格式。
 
 ```
 bq show \
@@ -453,8 +453,7 @@ bq show \
 --transfer_run run_name
 ```
 
-將 `run_name` 替換為移轉執行的執行名稱。
-您可以使用 [`bq ls`](#view_the_run_history) 指令來擷取執行作業名稱。
+將 `run_name` 替換為移轉執行的執行名稱。您可以使用 [`bq ls`](#view_the_run_history) 指令來擷取執行作業名稱。
 
 範例：
 
@@ -490,7 +489,7 @@ run_name
 
 範例：
 
-輸入下列指令來查看以下移轉執行作業的前 2 個記錄訊息：`projects/myproject/locations/us/transferConfigs/1234a123-1234-1a23-1be9-12ab3c456de7/runs/1a2b345c-0000-1234-5a67-89de1f12345g`。
+輸入下列指令，查看移轉執行作業 `projects/myproject/locations/us/transferConfigs/1234a123-1234-1a23-1be9-12ab3c456de7/runs/1a2b345c-0000-1234-5a67-89de1f12345g` 的前 2 則記錄訊息。
 
 ```
 bq ls \
@@ -565,7 +564,7 @@ public class RunDetails {
 
 ### 必要的角色
 
-如要取得修改移轉作業所需的權限，請要求管理員授予您專案的 [BigQuery 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.admin)  (`roles/bigquery.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得修改移轉作業所需的權限，請要求管理員授予您專案的「BigQuery 管理員」 (`roles/bigquery.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
 您或許也能透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)，取得必要權限。
 
@@ -589,7 +588,7 @@ public class RunDetails {
 
    [前往「資料轉移」頁面](https://console.cloud.google.com/bigquery/transfers?hl=zh-tw)
 2. 在資料移轉清單中，按一下要查看的移轉作業。
-3. 按一下「編輯」即可更新移轉設定。
+3. 按一下「編輯」即可更新轉移設定。
 
 ### bq
 
@@ -613,10 +612,9 @@ RESOURCE_NAME
 * `NAME`：移轉設定的顯示名稱。
 * `PARAMETERS`：移轉設定的 JSON 格式參數。例如：`--params='{"param1":"param_value1"}'`。如要瞭解支援的參數，請參閱資料來源的轉移指南。
 * `INTEGER`：0 到 30 之間的值。如要瞭解如何設定重新整理視窗，請參閱相關移轉類型的說明文件。
-* `SCHEDULE`：週期性排程，例如 `--schedule="every 3 hours"`。如要瞭解 `schedule` 語法，請參閱「[設定 `schedule` 格式](https://docs.cloud.google.com/appengine/docs/flexible/python/scheduling-jobs-with-cron-yaml?hl=zh-tw#formatting_the_schedule)」。
+* `SCHEDULE`：週期性時間表，例如 `--schedule="every 3 hours"`。如要瞭解 `schedule` 語法，請參閱「[設定 `schedule` 格式](https://docs.cloud.google.com/appengine/docs/flexible/python/scheduling-jobs-with-cron-yaml?hl=zh-tw#formatting_the_schedule)」。
 * DATASET\_ID：移轉設定的目標資料集。
-* DESTINATION\_KEY：[Cloud KMS 金鑰資源 ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw#key_resource_id)，例如 `projects/project_name/locations/us/keyRings/key_ring_name/cryptoKeys/key_name`。
-  CMEK 僅適用於[排定的查詢](https://docs.cloud.google.com/bigquery/docs/scheduling-queries?hl=zh-tw)或 [Cloud Storage](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer-overview?hl=zh-tw) 移轉作業。
+* DESTINATION\_KEY：[Cloud KMS 金鑰資源 ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw#key_resource_id)，例如 `projects/project_name/locations/us/keyRings/key_ring_name/cryptoKeys/key_name`。CMEK 僅適用於[排定的查詢](https://docs.cloud.google.com/bigquery/docs/scheduling-queries?hl=zh-tw)或 [Cloud Storage](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer-overview?hl=zh-tw) 移轉作業。
 * SERVICE\_ACCOUNT：指定要用於這項轉移作業的服務帳戶。
 * RESOURCE\_NAME：移轉的資源名稱，也稱為移轉設定。如果您不知道移轉的資源名稱，請使用 [`bq ls --transfer_config --transfer_location=location`](#list_transfer_configurations) 找出資源名稱。
 
@@ -876,7 +874,7 @@ print("Updated config: '{}'".format(transfer_config.name))
 ### 停用移轉
 
 停用轉移作業後，系統會在轉移作業名稱中加入 disabled。
-停用轉移功能後，系統不會再排定新的轉移作業，也不允許新的回填作業。正在進行中的移轉執行將會如常完成。
+停用轉移功能後，系統不會排定新的轉移作業，也不允許新的回填作業。正在進行中的移轉執行將會如常完成。
 
 停用移轉並**不會**移除任何已經移轉至 BigQuery 的資料。先前已移轉的資料會產生標準的 BigQuery [儲存空間費用](https://cloud.google.com/bigquery/pricing?hl=zh-tw#storage)，直到您[刪除資料集](https://docs.cloud.google.com/bigquery/docs/managing-datasets?hl=zh-tw#delete_a_dataset)或[刪除資料表](https://docs.cloud.google.com/bigquery/docs/managing-tables?hl=zh-tw#deleting_tables)為止。
 
@@ -984,4 +982,5 @@ public class DisableTransferConfig {
     String configId = "MY_CONFIG_ID";
     TransferConfig transferConfig =
         TransferConfig.newBuilder().setName(configId).setDisabled(true).build();
+    FieldMask </
 ```

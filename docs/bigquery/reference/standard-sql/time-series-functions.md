@@ -608,5 +608,5 @@ belongs is returned:
 
 ```
 WITH some_datetimes AS (
-  SELECT DATETIME '2000-12-20 00:00:00' AS my_datetime UNI
+  SELECT
 ```

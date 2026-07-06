@@ -170,4 +170,4 @@ A capacity commitment is a way to purchase compute capacity for BigQuery jobs (i
 
 | UpdateAssignment |
 | --- |
-| `rpc UpdateAssignment(UpdateAssignmentRequest) returns (Assignment)`  Updates an existing assignment.  Only the `priority` field can be updated.  Authorization scopes  Requires one of the following OAuth scopes: |
+| `rpc UpdateAssignment(UpdateAssignmentRequest) returns (` |

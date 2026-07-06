@@ -292,7 +292,5 @@ public class QuickstartSample {
   }
 
   public static void quickStartSample(String projectId, String location) throws IOException {
-    try (ReservationServiceClient client = ReservationServiceClient.create()) {
-      // list reservations in the project
-      String parent
+    try (ReservationServiceClient client = ReservationServiceClient.create
 ```

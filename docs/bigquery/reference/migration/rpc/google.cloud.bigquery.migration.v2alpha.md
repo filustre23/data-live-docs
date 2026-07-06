@@ -231,4 +231,4 @@ The possible dialect options for translation.
 | `postgresql_dialect` | `PostgresqlDialect`  The Postgresql dialect |
 | `presto_dialect` | `PrestoDialect`  The Presto dialect |
 | `mysql_dialect` | `MySQLDialect`  The MySQL dialect |
-| `db2_dialect` | `DB2Dialect`  DB2 dialect |
+| `db2_dialect` |  |

@@ -976,5 +976,6 @@ CREATE OR REPLACE MODEL `mydataset.arima_model`
         custom_holiday AS (
             SELECT
               'US' AS region,
-              'Halloween'
+              'Halloween' AS holiday_name,
+              prima
 ```

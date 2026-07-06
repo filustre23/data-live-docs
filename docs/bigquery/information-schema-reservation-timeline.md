@@ -16,7 +16,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # RESERVATIONS\_TIMELINE 檢視畫面
 
-`INFORMATION_SCHEMA.RESERVATIONS_TIMELINE` 檢視畫面會即時顯示每個預留項目管理專案的預留項目中繼資料時間切片，每分鐘更新一次。此外，`per_second_details` 陣列會顯示每秒的自動調整規模詳細資料。
+`INFORMATION_SCHEMA.RESERVATIONS_TIMELINE` 檢視畫面會即時顯示每個預留項目管理專案的預留項目中繼資料時間切片，此外，`per_second_details` 陣列會顯示每秒的自動調整規模詳細資料。
 
 **注意：** 檢視區塊名稱 `INFORMATION_SCHEMA.RESERVATIONS_TIMELINE` 和 `INFORMATION_SCHEMA.RESERVATIONS_TIMELINE_BY_PROJECT` 是同義詞，可以互換使用。
 
@@ -34,19 +34,19 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 結構定義
 
-查詢 `INFORMATION_SCHEMA.RESERVATIONS_TIMELINE` 檢視表時，查詢結果會包含過去 180 天內，每分鐘的每個 BigQuery 預留項目，以及超過 180 天前，每分鐘的預留項目變更。每個週期都從整分鐘間隔開始，且持續整整一分鐘。
+查詢 `INFORMATION_SCHEMA.RESERVATIONS_TIMELINE` 檢視表時，查詢結果會包含過去 180 天內，每分鐘的每個 BigQuery 預留項目，以及超過 180 天的任何預留項目變更，每分鐘都會有一個資料列。每個週期都從整分鐘間隔開始，且持續時間正好是一分鐘。
 
 `INFORMATION_SCHEMA.RESERVATIONS_TIMELINE` 檢視表具有下列結構定義：
 
 | 資料欄名稱 | 資料類型 | 值 |
 | --- | --- | --- |
-| `autoscale` | `STRUCT` | 內含保留項目的自動調度容量相關資訊。欄位包括：   * `current_slots`：預訂可用的自動調度資源配額數量。   因為 `current_slots` 可能在一分鐘內更新多次，   請改用 `per_second_details.autoscale_current_slots`。   反映每秒的準確狀態。 此外，使用者減少 `max_slots` 後，可能需要一段時間才能傳播，因此 `current_slots` 可能會維持原始值，且在短時間內 (不到一分鐘) 可能會大於 `max_slots`。 * `max_slots`：自動調度資源可為預留項目新增的運算單元數量上限。 **附註：**如果經常變更 `max_slots`，建議改用 `per_second_details.autoscale_max_slots`。 |
+| `autoscale` | `STRUCT` | 內含保留項目的自動調度容量相關資訊。欄位包括：   * `current_slots`：預訂可用的自動調度資源配額數量。   由於 `current_slots` 可能在一分鐘內更新多次，   請改用 `per_second_details.autoscale_current_slots`。   反映每秒的準確狀態。 此外，使用者減少 `max_slots` 後，可能需要一段時間才能傳播，因此 `current_slots` 可能會維持原始值，且在短時間內 (不到一分鐘) 可能會大於 `max_slots`。 * `max_slots`：自動調度資源可為預留項目新增的運算單元數量上限。 **附註：**如果經常變更 `max_slots`，建議改用 `per_second_details.autoscale_max_slots`。 |
 | `edition` | `STRING` | 與這項預訂相關聯的版本。如要進一步瞭解版本，請參閱「[BigQuery 版本簡介](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)」。 |
 | `ignore_idle_slots` | `BOOL` | 如果已啟用運算單元共用功能，則為 False，否則為 True。 |
 | `labels` | `RECORD` | 與預訂項目相關聯的標籤陣列。 |
 | `reservation_group_path` | `ARRAY<STRING>` | 預留項目連結的預留項目群組。 舉例來說，如果預訂項目連結至群組 `my-group`，`reservation_group_path` 欄位會包含類似 `[my-group]` 的清單。 |
 | `period_start` | `TIMESTAMP` | 這個一分鐘期間的開始時間。 |
-| `per_second_details` | `STRUCT` | 包含每秒的預訂容量和使用量資訊。欄位包括：   * `start_time`：秒的確切時間戳記。 * `autoscale_current_slots`：此秒預留項目可用的自動調度資源運算單元數量。這個數字不含基準運算單元。   **注意：**減少 `max_slots` 時，變更可能不會立即生效。在這段短暫期間 (不到一分鐘)，`current_slots` 可能會維持原始值，高於 `max_slots` 的值。 * `autoscale_max_slots`：自動調度資源功能在這個時間點可為預留項目新增的運算單元數量上限。   這個數字不含基準運算單元。 * `slots_assigned`：這個保留項目在該秒分配到的運算單元數量。這等於預留項目的基準運算單元數量。 * `slots_max_assigned`：這個預留項目的運算單元容量上限，包括目前運算單元共用量。如果 `ignore_idle_slots` 為 true，這個欄位與 `slots_assigned` 相同。否則，`slots_max_assigned` 欄位會顯示管理專案中所有容量使用承諾的總配額數。 * `borrowed_slots`：從閒置時段分享功能使用的時段數量。只有在 `ignore_idle_slots` 為 false，且這段時間內使用了閒置運算單元時，才會填入這個欄位。 * `lent_slots`：其他預留項目從這個預留項目的基準運算單元集區使用的運算單元數量。只有在 `ignore_idle_slots` 為 false，且其他預留項目在這段時間內使用了閒置運算單元時，才會填入這個欄位。   如果在這 1 分鐘內有任何自動調度資源或預訂異動，陣列會填入 60 列。不過，如果非自動調整規模的預訂項目在這分鐘內維持不變，陣列就會是空白，否則系統會重複相同數字 60 次。 |
+| `per_second_details` | `STRUCT` | 包含每秒的預訂容量和使用量資訊。欄位包括：   * `start_time`：秒的確切時間戳記。 * `autoscale_current_slots`：此秒保留項目可用的自動調度運算單元數量。   這個數字不含基準運算單元。   **注意：**減少 `max_slots` 時，變更可能不會立即生效。在這段短暫期間 (不到一分鐘)，`current_slots` 可能會維持原始值，高於 `max_slots` 的值。 * `autoscale_max_slots`：自動調度資源功能在這個時間點可為預留項目新增的運算單元數量上限。   這個數字不含基準運算單元。 * `slots_assigned`：在這個時間點指派給這項預留項目的運算單元數量。這等於預留項目的基準運算單元數量。 * `slots_max_assigned`：這個預留項目的運算單元數量上限，包括運算單元共用。如果 `ignore_idle_slots` 為 true，這個欄位與 `slots_assigned` 相同。否則，這個欄位的值會是管理專案中所有容量使用承諾或所有基準的總配額，取較大者。 * `borrowed_slots`：從閒置時段分享功能使用的時段數量。只有在 `ignore_idle_slots` 為 false，且這段時間使用了閒置運算單元時，才會填入這個欄位。 * `lent_slots`：其他預留項目從這個預留項目的基準運算單元集區使用的運算單元數量。只有在 `ignore_idle_slots` 為 false，且其他預留項目在這段時間內使用了閒置運算單元時，才會填入這個欄位。   如果在這 1 分鐘內有任何自動調度資源或預訂異動，陣列會填入 60 列。不過，如果非自動調整規模的預訂項目在這 1 分鐘內維持不變，陣列就會是空白，否則會重複相同數字 60 次。 |
 | `project_id` | `STRING` | 預訂管理專案的 ID。 |
 | `project_number` | `INTEGER` | 專案編號。 |
 | `reservation_id` | `STRING` | 用於與 jobs\_timeline 表格聯結。格式為 *project\_id*:*location*.*reservation\_name*。 |
@@ -78,7 +78,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 #### 範例：查看每秒自動調度資源的次數
 
-以下範例顯示所有工作每秒的自動調度資源 `YOUR_RESERVATION_ID` 規模：
+以下範例顯示所有工作每秒的 `YOUR_RESERVATION_ID` 自動調整規模：
 
 ```
 SELECT s.start_time, s.autoscale_current_slots
@@ -104,7 +104,7 @@ ORDER BY period_start, s.start_time
 ```
 
 
-**注意：**`period_start` 欄是分割區索引鍵，因此請務必依 `period_start` 篩選，以提高查詢效率。
+**注意：**`period_start` 資料欄是分割區索引鍵，因此請務必依 `period_start` 篩選，提高查詢效率。
 
 #### 範例：查看每秒的運算單元總用量
 
@@ -116,7 +116,7 @@ ORDER BY period_start, s.start_time
 
 例如 `` `myproject`.`region-us`.INFORMATION_SCHEMA.JOBS_TIMELINE_BY_ORGANIZATION ``。
 
-以下範例顯示指派給 `YOUR_RESERVATION_ID` 的專案在所有工作中的每秒時段用量：
+以下範例顯示指派給 `YOUR_RESERVATION_ID` 的專案在所有工作中，每秒的時段用量：
 
 ```
 SELECT
@@ -157,7 +157,7 @@ ORDER BY
 +-----------------------+---------------------+--------------------------+------------------------------+
 ```
 
-#### 範例：依預留項目劃分的運算單元用量
+#### 範例：各預留項目的運算單元用量
 
 以下範例顯示過去 1 天內每個預訂項目每秒的運算單元用量：
 
@@ -210,11 +210,11 @@ ORDER BY
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-06-18 (世界標準時間)。
+上次更新時間：2026-06-29 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-18 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-29 (世界標準時間)。"],[],[]]

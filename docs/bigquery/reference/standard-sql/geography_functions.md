@@ -300,10 +300,4 @@ Returns the area in square meters covered by the polygons in the input
 
 If `geography_expression` is a point or a line, returns zero. If
 `geography_expression` is a collection, returns the area of the polygons in the
-collection; if the collection doesn't contain polygons, returns zero.
-
-The optional `use_spheroid` parameter determines how this function measures
-distance. If `use_spheroid` is `FALSE`, the function measures distance on the
-surface of a perfect sphere.
-
-The `use_spheroid` parameter
+collection; if the collection doesn't cont

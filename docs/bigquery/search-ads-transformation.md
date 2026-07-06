@@ -695,7 +695,4 @@ Search Ads 360 API 資源：[ad\_group\_criterion](https://developers.google.com
 | Search Ads 360 欄位名稱 | 說明 |
 | --- | --- |
 | ad\_group\_criterion\_age\_range\_type | 年齡層類型。 |
-| ad\_group\_criterion\_bid\_modifier | 條件相符時的出價調節係數。修飾符必須介於 0.1 到 10.0 之間。大多數可指定條件類型都支援調節係數。 |
-| ad\_group\_criterion\_cpc\_bid\_micros | 單次點擊出價。 |
-| ad\_group\_criterion\_creation\_time | 這個廣告群組條件的建立時間戳記。時間戳記採用客戶時區，格式為「yyyy-MM-dd HH:mm:ss」。 |
-|  |
+| ad\_group\_criterion\_bid\_modifier | 條件相符時的出價調節係數。修飾符必須介於 0.1 到 10.0 之間。大多數可指定條 |

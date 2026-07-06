@@ -1055,5 +1055,5 @@ def get_data_scan
   request = Google::Cloud::Dataplex::V1::GetDataScanRequest.new
 
   # Call the get_data_scan method.
-  result =
+  result = client.get_data_scan <
 ```

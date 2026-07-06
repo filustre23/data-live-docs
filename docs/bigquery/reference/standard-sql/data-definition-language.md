@@ -386,5 +386,4 @@ The following options are supported:
 | `is_case_insensitive` | `BOOL` | `TRUE` if the dataset and its table names are case-insensitive, otherwise `FALSE`. By default, this is `FALSE`, which means the dataset and its table names are case-sensitive.  * Datasets: `mydataset` and `MyDataset` can   coexist in the same project, unless one of them has case-sensitivity   turned off. * Tables: `mytable` and `MyTable` can coexist in   the same dataset if case-sensitivity for the dataset is turned on. |
 | `is_primary` | `BOOLEAN` | Declares if the dataset is the primary replica. |
 | `labels` | `<ARRAY<STRUCT<STRING, STRING>>>` | An array of labels for the dataset, expressed as key-value pairs. |
-| `location` | `STRING` | The location in which to create the dataset. If you don't specify this option, the dataset is created in the location where the query runs. If you specify this option and also explicitly set the location for the query job, the two values must match; otherwise the query fails. |
-| `max_time_travel_hours` | `SMALLINT` | Specifies the duration in hours of the |
+| `location` | `STRING` | The location in which to create the dataset. If you don't specify this option, the dataset is created in the location where |

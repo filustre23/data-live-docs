@@ -553,7 +553,3 @@ resolves to a field within a data type. `field_path` can go
 arbitrarily deep into a nested data structure.
 
 Some examples of valid `field_path` values include:
-
-```
-SELECT * FROM T1 t1,
-```

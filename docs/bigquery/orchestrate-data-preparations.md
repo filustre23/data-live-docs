@@ -65,7 +65,12 @@ Google uses AI technology to translate content into your preferred language. AI 
 6. 在「驗證」部分，使用 Google 帳戶使用者憑證或服務帳戶授權資料準備作業。
 
    * 如要使用 Google 帳戶使用者憑證 ([預覽](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))，請選取「以我的使用者憑證執行」。這是預設選項。
-   * 如要使用服務帳戶，請選取「以所選服務帳戶執行」，然後選取服務帳戶。如果服務帳戶需要其他權限，請按一下「全部授予」，將必要角色授予該帳戶。**注意：** 如果資料準備作業使用 Google 雲端硬碟做為資料來源，請務必選取「使用所選服務帳戶執行」。這項作業不支援使用者憑證。您也必須與服務帳戶共用 Google 雲端硬碟檔案。
+
+     選用：在「Extended access options」(擴充存取權選項) 部分，選取資料準備作業所需的其他服務：
+
+     + **Google 雲端硬碟**：允許唯讀存取 Google 雲端硬碟檔案。
+   * 如要使用服務帳戶，請選取「以所選服務帳戶執行」，然後選取服務帳戶。如果服務帳戶需要其他權限，請按一下「全部授予」，將必要角色授予該帳戶。**注意：** 如要使用 Google 帳戶使用者憑證驗證以 Google 雲端硬碟做為資料來源的資料準備作業，請在「Extended access options」(擴充存取權選項) 部分選取「Google Drive」(Google 雲端硬碟) 服務。
+   如要使用服務帳戶驗證資料準備作業，請與該服務帳戶共用 Google 雲端硬碟檔案。
 7. 按一下 [儲存]。
 8. 修正顯示的所有驗證錯誤。
 9. 在資料準備編輯器工具列中，按一下「執行」。
@@ -113,7 +118,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 7. 在「驗證」部分，使用 Google 帳戶使用者憑證或服務帳戶授權資料準備作業。
 
    * 如要使用 Google 帳戶使用者憑證 ([預覽](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))，請選取「以我的使用者憑證執行」。
-   * 如要使用服務帳戶，請選取「以所選服務帳戶執行」，然後選取服務帳戶。**注意：** 如果資料準備作業使用 Google 雲端硬碟做為資料來源，請務必選取「使用所選服務帳戶執行」。這項作業不支援使用者憑證。您也必須與服務帳戶共用 Google 雲端硬碟檔案。
+
+     選用：在「Extended access options」(擴充存取權選項) 部分，選取資料準備作業所需的其他服務：
+
+     + **Google 雲端硬碟**：允許唯讀存取 Google 雲端硬碟檔案。
+   * 如要使用服務帳戶，請選取「以所選服務帳戶執行」，然後選取服務帳戶。**附註：** 如要使用 Google 帳戶使用者憑證，驗證以 Google 雲端硬碟做為資料來源的資料準備作業，請在「Extended access options」(擴充存取權選項) 部分選取「Google Drive」(Google 雲端硬碟) 服務。如要使用服務帳戶驗證資料準備作業，請與該服務帳戶共用 Google 雲端硬碟檔案。
 8. 排定頻率。
 9. 按一下「建立時間表」。如果選取「使用我的使用者憑證執行」做為驗證方法，您必須[授權 Google 帳戶](#authorize-google-account) ([預覽](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))。
 
@@ -128,7 +137,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 5. 在「驗證」部分，使用 Google 帳戶使用者憑證或服務帳戶授權資料準備作業。
 
    * 如要使用 Google 帳戶使用者憑證 ([預覽](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))，請選取「以我的使用者憑證執行」。
-   * 如要使用服務帳戶，請選取「以所選服務帳戶執行」，然後選取服務帳戶。**注意：** 如果資料準備作業使用 Google 雲端硬碟做為資料來源，請務必選取「使用所選服務帳戶執行」。這項作業不支援使用者憑證。您也必須與服務帳戶共用 Google 雲端硬碟檔案。
+
+     選用：在「Extended access options」(擴充存取權選項) 部分，選取資料準備作業所需的其他服務：
+
+     + **Google 雲端硬碟**：允許唯讀存取 Google 雲端硬碟檔案。
+   * 如要使用服務帳戶，請選取「以所選服務帳戶執行」，然後選取服務帳戶。**附註：** 如要使用 Google 帳戶使用者憑證，驗證以 Google 雲端硬碟做為資料來源的資料準備作業，請在「Extended access options」(擴充存取權選項) 部分選取「Google Drive」(Google 雲端硬碟) 服務。如要使用服務帳戶驗證資料準備作業，請與該服務帳戶共用 Google 雲端硬碟檔案。
 6. 在「排程頻率」部分，執行下列操作：
 
    1. 在「Repeats」(重複頻率) 選單中，選取資料準備作業的執行頻率。
@@ -145,9 +158,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 **注意：** 如要尋求支援或針對這項功能提供意見回饋，請傳送電子郵件至 [dataform-preview-support@google.com](mailto:dataform-preview-support@google.com)。
 
-如要使用[Google 帳戶](https://docs.cloud.google.com/iam/docs/principals-overview?hl=zh-tw#google-account)使用者憑證驗證資源，您必須手動授予 BigQuery 管道權限，才能取得 Google 帳戶的存取權杖，並代表您存取來源資料。您可以使用 OAuth 對話方塊介面手動授予核准。
+如要使用[Google 帳戶](https://docs.cloud.google.com/iam/docs/principals-overview?hl=zh-tw#google-account)使用者憑證驗證資源，您必須手動授予 BigQuery 管道權限，才能取得 Google 帳戶的存取權杖，並代表您存取來源資料。您可以使用 OAuth 對話方塊介面手動授予核准。如果您選取任何**擴充存取權選項**，就必須授予這些服務的存取權，例如 Google 雲端硬碟或知識目錄。
 
-**注意：** 使用 Google 帳戶的使用者憑證執行或排定 BigQuery 管道時，系統不支援情境感知存取權 (CAA) 政策，包括以 IP 為準、以地理位置為準，以及裝置合規政策，因為權杖要求來自 Google 基礎架構。除非[豁免 Dataform OAuth 用戶端 ID 遵守政策](https://docs.cloud.google.com/dataform/docs/troubleshooting?hl=zh-tw#euc-permission-denied)，否則 CAA 政策會禁止執行這些作業。
+**注意：** 使用 Google 帳戶的使用者憑證執行或排定 BigQuery 管道時，系統不支援情境感知存取權 (CAA) 政策，包括以 IP 為準、以地理位置為準和裝置合規政策，因為權杖要求來自 Google 基礎架構。除非[豁免 Dataform OAuth 用戶端 ID 遵守政策](https://docs.cloud.google.com/dataform/docs/troubleshooting?hl=zh-tw#euc-permission-denied)，否則 CAA 政策會封鎖這些執行作業。
 
 您只需要授予 BigQuery 管道一次權限。
 
@@ -239,11 +252,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-06-25 (世界標準時間)。
+上次更新時間：2026-06-29 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-25 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-29 (世界標準時間)。"],[],[]]

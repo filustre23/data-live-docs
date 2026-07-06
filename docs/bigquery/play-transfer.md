@@ -255,11 +255,3 @@ public class CreatePlayTransfer {
 ```
 
 **警告：** 如果您變更報表的結構定義，則當天所有檔案的結構定義都必須相同，否則當天所有的資料移轉作業都會失敗。
-
-## 排解 Google Play 轉移設定問題
-
-如果您無法順利設定資料移轉作業，請參閱[排解 BigQuery 資料移轉服務移轉設定問題](https://docs.cloud.google.com/bigquery/docs/transfer-troubleshooting?hl=zh-tw)。
-
-## 查詢資料
-
-資料移

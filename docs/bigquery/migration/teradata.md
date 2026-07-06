@@ -455,6 +455,5 @@ follow the instructions to retrieve an authentication code.`
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
-import com.google.api.gax.rpc.ApiException;
-import com.google.cloud.bigquery.datatransfer.v1.
+import com.google.api.gax.rpc.
 ```

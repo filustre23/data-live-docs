@@ -21,7 +21,7 @@ unstructured data from BigQuery
 unstructured data from BigQuery
 [object tables](/bigquery/docs/object-table-introduction).
 
-The
+**Note:** The
 [`AI.GENERATE_TEXT` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text)
 offers the same functionality with simplified column names in the output. For
 new queries, we recommend that you use `AI.GENERATE_TEXT` instead.
@@ -899,11 +899,4 @@ STRUCT(
   that provides additional parameters to the model. The value must conform
   to the
   [`generateContent` request body](/vertex-ai/generative-ai/docs/reference/rest/v1/projects.locations.endpoints/generateContent)
-  format. You can provide a value for any field in the request body except
-  for the `contents[]` field. If you set this field, then you can't also
-  specify any model parameters in the top-level struct argument to the
-  `ML.GENERATE_TEXT` function.
-
-#### Details
-
-The model and input table must be in the same region.
+  format. You can provide a valu

@@ -1123,4 +1123,8 @@ job.result()  # Wait for the job to complete.
 print("A copy of the table created.")
 ```
 
-### 複
+### 複製多個來源資料表
+
+您可以透過下列方式，將多個來源資料表複製到目的地資料表：
+
+* 使用 bq 指令列工具的 `bq cp`

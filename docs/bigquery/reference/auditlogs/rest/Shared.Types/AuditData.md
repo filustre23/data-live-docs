@@ -280,4 +280,4 @@ User-provided metadata for a dataset.
 
 | JSON representation |
 | --- |
-| ``` {   "friendlyName": string,   "description": string,   "labels": {     string: string,     ...   } } ``` |
+| ``` {   "friendlyName": string,   "description": string,   "labels": { ``` |

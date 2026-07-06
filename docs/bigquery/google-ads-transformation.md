@@ -293,6 +293,4 @@ Google Ads API Resource:
 | ad\_group\_ad\_ad\_call\_ad\_phone\_number | The phone number in the ad. | CallOnlyPhoneNumber |
 | ad\_group\_ad\_ad\_device\_preference | The device preference for the ad. You can only specify a preference for mobile devices. When this preference is set the ad will be preferred over other ads when being displayed on a mobile device. The ad can still be displayed on other device types, For example if no other ads are available. If unspecified (no device preference), all devices are targeted. This is only supported by some ad types. |  |
 | ad\_group\_ad\_ad\_display\_url | The URL that appears in the ad description for some ad formats. | DisplayUrl |
-| ad\_group\_ad\_ad\_expanded\_dynamic\_search\_ad\_description | The description of the ad. |  |
-| ad\_group\_ad\_ad\_expanded\_dynamic\_search\_ad\_description2 | The second description of the ad. | ExpandedDynamicSearchCreativeDescription2 |
-|  |
+|

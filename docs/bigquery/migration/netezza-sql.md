@@ -312,6 +312,4 @@ IBM Netezza 資料倉儲技術專為與 Netezza 專屬的 SQL 語法搭配使用
 | `STRING_TO_INT` |  |
 | `STRPOS` | [`STRPOS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions?hl=zh-tw#strpos) |
 | `SUBSTR` | [`SUBSTR`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions?hl=zh-tw#substr) |
-|  | [`TO_BASE32`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions?hl=zh-tw#to_base32) |
-|  | [`TO_BASE64`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions?hl=zh-tw#to_base64) |
-|  |
+|  |  |

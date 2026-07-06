@@ -526,5 +526,5 @@ value.
 
 ```
 SELECT
-  DATE "2021-04-20" + INTERVAL 25 HOUR AS date_plus,
+  DATE "2021-04-20" + INTERVAL
 ```

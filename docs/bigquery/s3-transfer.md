@@ -266,5 +266,5 @@ public class CreateAmazonS3Transfer {
     createAmazonS3Transfer(projectId, transferConfig);
   }
 
-  public static void createAmazonS3Transfer(String projectId, TransferConfig transferConfig)
+  public static void createAmazonS3Transfer(String projectId,
 ```

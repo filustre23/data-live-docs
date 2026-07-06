@@ -646,11 +646,4 @@ SELECT
 FORMAT_DATE(format_string, date_expr)
 ```
 
-**Description**
-
-Formats a `DATE` value according to a specified format string.
-
-**Definitions**
-
-* `format_string`: A `STRING` value that contains the
-  [format elements<](/bigquery/docs/reference/standard-sql/format-elements#format_elements_date_time)
+**Descripti**

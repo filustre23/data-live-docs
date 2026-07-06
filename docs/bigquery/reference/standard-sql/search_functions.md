@@ -15,7 +15,7 @@ GoogleSQL for BigQuery supports the following search functions.
 | Name | Summary |
 | --- | --- |
 | [`SEARCH`](/bigquery/docs/reference/standard-sql/search_functions#search) | Checks to see whether a table or other search data contains a set of search terms. |
-| [`VECTOR_SEARCH`](/bigquery/docs/reference/standard-sql/search_functions#vector_search) | Performs a vector search on embeddings to find semantically similar entities. |
+| [`VECTOR_SEARCH`](/bigquery/docs/reference/standard-sql/search_functions#vector_search) | Performs a semantic search or a hybrid search on embeddings to find similar entities. |
 
 ## `SEARCH`
 
@@ -519,8 +519,5 @@ SELECT
   -- TRUE: `ant apple` is in `ant apple avocado` after tokenization with
   -- the given pattern.
   -- The tokens in `data_to_search` are `ant`, `apple`, and `avocado`.
-  -- The searchable tokens in `query_string` are `ant` and `apple` and they
-  -- must appear in that exact order in `data_to_search`.
-  SEARCH(
-    R
+  -- The searchable tokens in `query_string` are
 ```

@@ -438,10 +438,5 @@ FROM
       (2.0, 6.0),
       (9.0, 3.0),
       (2.0, 6.0),
-      (CAST('Infinity' as FLOAT64), 3.0)])
-
-/*---------+
- | results |
- +---------+
- | NaN     |
+      (CAST('Infinity' as FLOAT64),
 ```

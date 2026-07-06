@@ -822,6 +822,5 @@ with an existing dataset.
   SELECT
     REGEXP_EXTRACT(protopayload_auditlog.resourceName, '^projects/[^/]+/datasets/([^/]+)/tables') AS datasetRef,
     COUNT(DISTINCT REGEXP_EXTRACT(protopayload_auditlog.resourceName, '^projects/[^/]+/datasets/[^/]+/tables/(.*)$')) AS active_tables,
-    COUNTIF(JSON_QUERY(protopayload_auditlog.metadataJson, "$.tableDataRead") IS NOT NULL) AS dataReadEvents,
-    COUNTIF(JSON_QUERY(protopayload_auditlog.
+    COUNTIF(JSON_QUERY(protopayload_auditlog.metadataJson, "$.tableDataRead") IS NOT NULL) AS d
 ```

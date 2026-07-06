@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-07-05T13:17+00:00_
+_Generated 2026-07-06T01:06+00:00_
 
-**9 sources, 5438 topics total**
+**9 sources, 5437 topics total**
 
 ## airflow
 
@@ -1725,7 +1725,7 @@ _1702 topics_
 
 Upstream: <https://cloud.google.com/bigquery/docs/>
 
-_1506 topics_
+_1505 topics_
 
 - `bigquery/access-control`
 - `bigquery/access-control-basic-roles`
@@ -2149,7 +2149,6 @@ _1506 topics_
 - `bigquery/migration/hive`
 - `bigquery/migration/hive-overview`
 - `bigquery/migration/hive-sql`
-- `bigquery/migration/migration-overview`
 - `bigquery/migration/netezza`
 - `bigquery/migration/netezza-sql`
 - `bigquery/migration/oracle-migration`

@@ -445,5 +445,5 @@ JSON 檔案中的 `condition` 欄位支援下列值，每個值都有 `partition
    done
 
    # This runs AFTER parsing arguments to ensure no placeholder values are left.
-   if [[ "$DUMPER_EXECUTABLE" == "DUMPER_PATH"<
+   if
    ```

@@ -523,5 +523,5 @@ SELECT JSON_ARRAY_APPEND(
 In the following example, path `$.a` is matched and appends `2`.
 
 ```
-SELECT JSON_ARRAY_APPEND(JSON '{"a": [1]}', '$.a',
+SELECT JSON_ARRAY_APPEND
 ```

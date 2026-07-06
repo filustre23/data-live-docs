@@ -27,6 +27,55 @@ To get the latest product updates delivered to you, add the URL of this page to 
 reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators), or add the
 [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## July 01, 2026
+
+Feature
+
+You can now use pre-trained TimesFM models in BigQuery ML
+directly from
+[Connected Sheets](https://docs.cloud.google.com/bigquery/docs/connected-sheets).
+These models let you create
+forecasts and detect anomalies in your data by using the
+[`AI.FORECAST`](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-forecast)
+and
+[`AI.DETECT_ANOMALIES`](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-detect-anomalies)
+functions. This feature is
+[generally available](https://cloud.google.com/products#product-launch-stages)
+(GA).
+
+## June 30, 2026
+
+Feature
+
+You can specify an optional `principal` property on
+[BigQuery reservation assignments](/bigquery/docs/reservations-assignments) to
+route queries to specific reservations based on the identity of the user,
+service account, or third-party identity executing the job.
+
+## June 29, 2026
+
+Change
+
+Effective *March 9, 2026*, new users are required to have a Cloud Billing
+account to use the [BigQuery Migration Service](/bigquery/docs/migration-intro).
+This change applies to users starting new projects using BigQuery Migration
+Service features, such as SQL translation and migration assessment.
+
+After *May 18, 2026*, all users are required to have a Cloud Billing account to
+use the BigQuery Migration Service.
+
+[Pricing for the BigQuery Migration Service](/bigquery/docs/migration-intro#pricing)
+remains without charge.
+
+Feature
+
+You can now grant data preparations and pipelines access to additional
+services when running or scheduling them with user credentials
+for a Google Account. You can grant [data preparations access to Google Drive](/bigquery/docs/orchestrate-data-preparations),
+and [grant pipelines access to Google Drive, Bigtable, and Knowledge Catalog](/bigquery/docs/schedule-pipelines).
+Extended access options are available in
+[Preview](https://cloud.google.com/products#product-launch-stages).
+
 ## June 25, 2026
 
 Change
@@ -4324,24 +4373,4 @@ Libraries
 * Update dependency com.google.apis:google-api-services-bigquery to v2-rev20250216-2.0.0 ([#3688](https://github.com/googleapis/java-bigquery/issues/3688)) ([e3beb6f](https://github.com/googleapis/java-bigquery/commit/e3beb6ffe433db8ad4087d0f27a8f0d23e7c9322))
 * Update dependency com.google.cloud:google-cloud-datacatalog-bom to v1.64.0 ([#3681](https://github.com/googleapis/java-bigquery/issues/3681)) ([9e4e261](https://github.com/googleapis/java-bigquery/commit/9e4e26116226d17cc42ae030eed284bd6674b74b))
 * Update dependency com.google.cloud:sdk-platform-java-config to v3.44.0 ([#3694](https://github.com/googleapis/java-bigquery/issues/3694)) ([f69fbd3](https://github.com/googleapis/java-bigquery/commit/f69fbd371f18da6ddc43d4f32f532e684026fe16))
-* Update dependency com.google.oauth-client:google-oauth-client-java6 to v1.38.0 ([#3685](https://github.com/googleapis/java-bigquery/issues/3685)) ([53bd7af](https://github.com/googleapis/java-bigquery/commit/53bd7af47783674a3accbadb1172edbcf628ab2b))
-* Update dependency com.google.oauth-client:google-oauth-client-jetty to v1.38.0 ([#3686](https://github.com/googleapis/java-bigquery/issues/3686)) ([d71b2a3](https://github.com/googleapis/java-bigquery/commit/d71b2a34a728fb6ee1c88cdc895b87959e230b7a))
-* Update ossf/scorecard-action action to v2.4.1 ([#3690](https://github.com/googleapis/java-bigquery/issues/3690)) ([cdb61fe](https://github.com/googleapis/java-bigquery/commit/cdb61febcb1a64f6ddd3c0e3c29fa7995f1d3fa5))
-
-Feature
-
-Gemini in BigQuery can help you [complete Python code](/bigquery/docs/write-sql-gemini#complete_python_code) with contextually appropriate recommendations that are based on content in the query editor. This feature is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
-
-Feature
-
-You can create a [SQL user-defined aggregate function](/bigquery/docs/user-defined-aggregates#create-sql-udaf) by using the [`CREATE AGGREGATE FUNCTION` statement](/bigquery/docs/reference/standard-sql/data-definition-language#sql-create-udaf-function). This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
-
-## February 25, 2025
-
-Feature
-
-BigQuery [resource utilization charts](/bigquery/docs/admin-resource-charts#view-resource-utilization) provide metrics views and more chart configuration options in [Preview](https://cloud.google.com/products/#product-launch-stages).
-
-Feature
-
-You can use the [best sellers](/bigquery/docs/merchant-center-best-sellers-migration) and [price competitiveness](/bigquery/docs/merchant-center-price-competitiveness-migration) migration guides to transition to the newer version of the reports. This feature is in [previe](https://cloud.google.com/products#product-launch-stages)
+* Update dependency com.google.oauth-client:google-oauth-client-java6 to v1.38.0 (

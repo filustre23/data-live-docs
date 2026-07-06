@@ -212,5 +212,4 @@ BigQuery 提供下列其他匯總函式：
 | `COVAR_POP` | `COVAR_POP` |
 | `COVAR_SAMP` | `COVAR_SAMP` |
 | `CUBE_TABLE` | BigQuery 不支援這項功能。考慮使用 BI 工具或自訂 UDF |
-| `CUME_DIST` | `CUME_DIST` |
-| `DENSE_RANK(ANSI)` |  |
+| `CUME_DIST` |

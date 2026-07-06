@@ -367,7 +367,4 @@ Google uses AI technology to translate content into your preferred language. AI 
 | `id` | ID | *字串* | 商家 ID。 |
 | `name` | 名稱 | *字串* | 商家名稱。 |
 | `primary_page` | PrimaryPage | *字串* | 與商家相關的主要頁面。 |
-| `timezone_id` | TimezoneId | *字串* | 商家的時區 ID。 |
-| `link` | 連結 | *字串* | 商家檔案的連結。 |
-| `created_time` | CreatedTime | *日期時間* | 商家建立時間。 |
-| `updated_time` | UpdatedTi |
+| `timezone_id` | TimezoneId | *字串* | 商家 |

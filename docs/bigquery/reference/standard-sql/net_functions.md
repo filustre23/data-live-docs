@@ -461,6 +461,5 @@ value in the future.
 SELECT
   FORMAT("%T", input) AS input,
   description,
-  FORMAT("%T", NET.HOST(input)) AS host,
-  FORMAT("%T",
+  FORMAT("%T", NET.HOST(input))
 ```

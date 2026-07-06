@@ -287,8 +287,3 @@ Specifies the details of the Marketplace Data Product associated with the Listin
 | `commercialState` | `enum (CommercialState)`  Output only. Commercial state of the Marketplace Data Product. |
 
 ## CommercialState
-
-Indicates whether this commercial access is currently active.
-
-|
-|  |

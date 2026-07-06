@@ -939,12 +939,4 @@ to improve model performance for your data. To use
 hyperparameter tuning, set the [`NUM_TRIALs` option](#num_trials) to the
 number of trials that you want to run. BigQuery ML then trains the
 model the number of times that you specify, using different hyperparameter
-values, and returns the model that performs the best.
-
-Hyperparameter tuning defaults to improving the key performance metric for the
-given model type. You can use the
-[`HPARAM_TUNING_OBJECTIVES` option](#hparam_tuning_objectives) to tune for
-a different metric if you need to.
-
-For more information about the training objectives and hyperparameters
-supported for linear regression mode
+values, and returns the model that performs the

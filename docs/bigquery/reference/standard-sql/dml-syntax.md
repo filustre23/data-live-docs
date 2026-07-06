@@ -616,6 +616,4 @@ Inventory
 
 #### `UPDATE` using joins
 
-The following example generates a table with inventory totals that include
-existing inventory and inventory from the `NewArrivals` table, and
-marks `supply_constrained` as `false`:
+The following example generates a tab

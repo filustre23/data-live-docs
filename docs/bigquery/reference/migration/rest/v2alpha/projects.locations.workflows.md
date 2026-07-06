@@ -283,8 +283,3 @@ Settings related to SQL identifiers.
 ## IdentifierCase
 
 The identifier case type.
-
-| Enums | |
-| --- | --- |
-|
-|  |

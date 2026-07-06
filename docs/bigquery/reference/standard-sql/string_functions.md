@@ -488,7 +488,3 @@ SELECT CONCAT('T.P.', ' ', 'Bar') as author;
  | T.P. Bar            |
  +---------------------*/
 ```
-
-```
-SELECT CONCAT('Summer', ' '
-```

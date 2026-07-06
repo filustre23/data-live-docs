@@ -521,7 +521,5 @@ SELECT TIMESTAMP("2008-12-25 15:30:00+00") AS timestamp_str;
 ```
 
 ```
-SELECT TIMESTAMP("2008-12-25 15:30:00", "America/Los_Angeles") AS timestamp_str;
-
--- Display of results may differ, depending upon the
+SELECT TIMESTAMP("2008-12-25 15:30:00",
 ```

@@ -584,8 +584,3 @@ sections, but here are a few general limitations to keep in mind:
   -- not allowed"
   ```
 * [External tables](/bigquery/docs/external-data-sources) don't support collation.
-
-
-
-
-Send feedback

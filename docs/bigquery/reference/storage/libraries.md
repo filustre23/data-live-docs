@@ -352,7 +352,4 @@ func main() {
 			Table:       readTable,
 			DataFormat:  dataFormat,
 			ReadOptions: tableReadOptions,
-		},
-		MaxStreamCount: 1,
-	}
 ```

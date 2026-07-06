@@ -334,6 +334,5 @@ public class CreateRedshiftTransfer {
     String redShiftSchema = "MY_REDSHIFT_SCHEMA";
     String tableNamePatterns = "*";
     String vpcAndReserveIpRange = "MY_VPC_AND_IP_RANGE";
-    Map<String, Value> params = new HashMap<>();
-    params
+    Map<String, Value>
 ```

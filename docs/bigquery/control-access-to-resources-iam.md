@@ -1236,5 +1236,5 @@ public class RevokeDatasetAccess {
   public static void revokeDatasetAccess(String projectId, String datasetName, String entityEmail) {
     try {
       // Initialize client that will be used to send requests. This client only needs
-      // to be created once, and
+      // to be created once, and can be reused for multiple requests.
 ```

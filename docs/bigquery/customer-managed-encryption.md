@@ -1030,5 +1030,5 @@ public class CopyTableCMEK {
     String destinationDatasetName = "MY_DESTINATION_DATASET_NAME";
     String destinationTableId = "MY_DESTINATION_TABLE_NAME";
     String sourceDatasetName = "MY_SOURCE_DATASET_NAME";
-    String source
+    String sourceTableId = "MY_SOURCE_TABLE_NAME"
 ```

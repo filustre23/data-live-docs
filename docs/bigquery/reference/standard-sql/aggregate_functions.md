@@ -360,8 +360,4 @@ If there are zero input rows, this function returns `NULL`.
 SELECT ARRAY_AGG(x) AS array_agg FROM UNNEST([2, 1,-2, 3, -2, 1, 2]) AS x;
 
 /*-------------------------+
- | array_agg               |
- +-------------------------+
- | [2, 1, -2, 3, -2, 1, 2] |
- +-------------------------*/
 ```

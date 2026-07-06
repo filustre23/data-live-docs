@@ -496,9 +496,5 @@ SELECT CAST(TIME '21:30:00' AS STRING FORMAT 'HH24') AS date_time_to_string;
 ```
 
 ```
-SELECT CAST(TIME '21:30:00' AS STRING FORMAT 'HH12') AS date_time_to_string;
-
-/*---------------------+
- | date_time_to_string |
- +---------------------+
+SELECT CAST(TIME '21:30:00' AS STRING FORMAT 'HH12')
 ```

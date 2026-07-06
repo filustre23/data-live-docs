@@ -255,5 +255,4 @@ The status of a routine build.
 | --- | --- |
 | `buildState` | `enum (BuildState)`  Output only. The current build state of the routine. |
 | `errorResult` | `object (ErrorProto)`  Output only. A result object that will be present only if the build has failed. |
-| `buildStateUpdateTime` | `string (Timestamp format)`  Output only. The time when the build state was updated last. |
-| `buildDuration` | `string (` |
+| `buildStateUpdateTime` | `string (Timestamp format)`  Output only. |

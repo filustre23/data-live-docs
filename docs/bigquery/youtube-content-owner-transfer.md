@@ -238,6 +238,5 @@ public class CreateYoutubeContentOwnerTransfer {
               .setTransferConfig(transferConfig)
               .build();
       TransferConfig config = client.createTransferConfig(request);
-      System.out.println(
-          "Youtube content owner channel transfer created successfully :" + config.
+      System.out.println
 ```

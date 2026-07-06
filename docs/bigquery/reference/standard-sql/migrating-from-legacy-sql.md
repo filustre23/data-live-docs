@@ -431,6 +431,6 @@ FROM
 
 The following is a list of keywords allowed in legacy SQL, but not in GoogleSQL:
 
-|  |
-| --- |
-| * `ALL` * `AND` * `ANY` * `ARRAY` * `ASSERT_ROWS_MODIFIED` * `AT` * `COLLATE` * `CURRENT` * `DEFAULT` * `DESC` * `END` * `ENUM` |
+|  |  |
+| --- | --- |
+| * `ALL` * `AND` * `ANY` * `ARRAY` * `ASSERT_ROWS_MODIFIED` * `AT` * `COLLATE` * `CURRENT` * `DEFAULT` * `DESC` * `END` * `ENUM` | * `ESCAPE` * `EXCEPT` |

@@ -676,5 +676,5 @@ async function appendRowsPending() {
       destinationTable,
     });
     const streamId = writeStream.name;
-    console.
+    console.log(`Stream created: ${streamId
 ```

@@ -282,4 +282,4 @@ Client authentication.
 | Fields | |
 | --- | --- |
 | `usernamePassword` | `object (UsernamePassword)`  Username/password authentication. |
-| `serviceAccount` | `string`  Output only. Google-managed service account associated with this connection, e.g., `service-{project_number}@gcp-sa-bigqueryconnection.iam.gserviceaccount.com`. BigQuery jobs using this connection will act as `serviceAccount` identity |
+| `serviceAccount` |  |

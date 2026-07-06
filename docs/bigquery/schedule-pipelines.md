@@ -120,6 +120,12 @@ Google uses AI technology to translate content into your preferred language. AI 
 6. 在「驗證」部分，使用 Google 帳戶使用者憑證或服務帳戶授權管道。
 
    * 如要使用 Google 帳戶使用者憑證 ([預覽](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))，請選取「以我的使用者憑證執行」。
+
+     選用：在「Extended access options」(擴充存取權選項) 部分，選取管道所需的其他服務：
+
+     + **Knowledge Catalog**：可更新 Google Cloud Knowledge Catalog 中繼資料。
+     + **Google 雲端硬碟**：允許唯讀存取 Google 雲端硬碟檔案。
+     + **Bigtable**：可讀取 Google Bigtable 資料 (唯讀)。
    * 如要使用服務帳戶，請選取「以所選服務帳戶執行」，然後選取服務帳戶。
 7. 如果管道包含筆記本，請在「筆記本選項」部分，選取「執行階段範本」欄位中的 Colaboratory 筆記本執行階段範本或預設執行階段規格。如要進一步瞭解如何建立 Colab 筆記本執行階段範本，請參閱「[建立執行階段範本](https://docs.cloud.google.com/colab/docs/create-runtime-template?hl=zh-tw)」。
 
@@ -153,6 +159,12 @@ Google uses AI technology to translate content into your preferred language. AI 
 5. 在「驗證」部分，使用 Google 帳戶使用者憑證或服務帳戶授權管道。
 
    * 如要使用 Google 帳戶使用者憑證 ([預覽](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))，請選取「以我的使用者憑證執行」。
+
+     選用：在「Extended access options」(擴充存取權選項) 部分，選取管道所需的其他服務：
+
+     + **Knowledge Catalog**：可更新 Google Cloud Knowledge Catalog 中繼資料。
+     + **Google 雲端硬碟**：允許唯讀存取 Google 雲端硬碟檔案。
+     + **Bigtable**：可讀取 Google Bigtable 資料 (唯讀)。
    * 如要使用服務帳戶，請選取「以所選服務帳戶執行」，然後選取服務帳戶。
 6. 如果管道包含筆記本，請在「筆記本選項」部分，選取「執行階段範本」欄位中的 Colab 筆記本執行階段範本或預設執行階段規格。如要進一步瞭解如何建立 Colab 筆記本執行階段範本，請參閱「[建立執行階段範本](https://docs.cloud.google.com/colab/docs/create-runtime-template?hl=zh-tw)」一文。
 
@@ -180,9 +192,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 **注意：** 如要尋求支援或針對這項功能提供意見回饋，請傳送電子郵件至 [dataform-preview-support@google.com](mailto:dataform-preview-support@google.com)。
 
-如要使用[Google 帳戶](https://docs.cloud.google.com/iam/docs/principals-overview?hl=zh-tw#google-account)使用者憑證驗證資源，您必須手動授予 BigQuery 管道權限，才能取得 Google 帳戶的存取權杖，並代表您存取來源資料。您可以使用 OAuth 對話方塊介面手動授予核准。
+如要使用[Google 帳戶](https://docs.cloud.google.com/iam/docs/principals-overview?hl=zh-tw#google-account)使用者憑證驗證資源，您必須手動授予 BigQuery 管道權限，才能取得 Google 帳戶的存取權杖，並代表您存取來源資料。您可以使用 OAuth 對話方塊介面手動授予核准。如果您選取任何**擴充存取權選項**，就必須授予這些服務的存取權，例如 Google 雲端硬碟或知識目錄。
 
-**注意：** 使用 Google 帳戶的使用者憑證執行或排定 BigQuery 管道時，系統不支援情境感知存取權 (CAA) 政策，包括以 IP 為準、以地理位置為準，以及裝置合規政策，因為權杖要求來自 Google 基礎架構。除非[豁免 Dataform OAuth 用戶端 ID 遵守政策](https://docs.cloud.google.com/dataform/docs/troubleshooting?hl=zh-tw#euc-permission-denied)，否則 CAA 政策會禁止執行這些作業。
+**注意：** 使用 Google 帳戶的使用者憑證執行或排定 BigQuery 管道時，系統不支援情境感知存取權 (CAA) 政策，包括以 IP 為準、以地理位置為準和裝置合規政策，因為權杖要求來自 Google 基礎架構。除非[豁免 Dataform OAuth 用戶端 ID 遵守政策](https://docs.cloud.google.com/dataform/docs/troubleshooting?hl=zh-tw#euc-permission-denied)，否則 CAA 政策會封鎖這些執行作業。
 
 您只需要授予 BigQuery 管道一次權限。
 
@@ -445,11 +457,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-06-25 (世界標準時間)。
+上次更新時間：2026-06-30 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-25 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-30 (世界標準時間)。"],[],[]]

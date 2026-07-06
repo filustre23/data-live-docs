@@ -1081,4 +1081,5 @@ public class RelaxTableQuery {
   public static void relaxTableQuery(String projectId, String datasetName, String tableName)
       throws Exception {
     try {
+      // Initialize client that will be used to send requests. This client only needs to be created
 ```

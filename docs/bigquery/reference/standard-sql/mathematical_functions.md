@@ -530,5 +530,5 @@ first vector has two dimensions and the second vector has three:
 
 ```
 -- ERROR
-SELECT COSINE_DISTANCE([9.0, 7.0], [8.0,
+SELECT COSINE_DISTANCE([9.0
 ```

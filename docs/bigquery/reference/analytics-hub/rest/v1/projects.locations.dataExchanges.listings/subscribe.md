@@ -225,9 +225,3 @@ Configuration for a Cloud Storage subscription.
 | Union field `output_format`. Defaults to text format. `output_format` can be only one of the following: | |
 | `textConfig` | `object (TextConfig)`  Optional. If set, message data will be written to Cloud Storage in text format. |
 | `avroConfig` | `object (AvroConfig)`  Optional. If set, message data will be written to Cloud Storage in Avro format. |
-
-## TextConfig
-
-This type has no fields.
-
-Configuration for writing message data in text format. Message payloads will be written to files as raw text, separated by a newlin

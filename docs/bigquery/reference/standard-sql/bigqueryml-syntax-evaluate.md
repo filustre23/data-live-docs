@@ -890,9 +890,3 @@ The following types of models are classification models:
   model.
 * `recall`: a `FLOAT64` value that contains the
   [recall](https://en.wikipedia.org/wiki/Precision_and_recall) for the
-  model.
-* `accuracy`: a `FLOAT64` value that contains the
-  [accuracy](https://en.wikipedia.org/wiki/Accuracy_and_precision) for the
-  model. `accuracy` is computed as a global total or micro-average. For a
-  micro-average, the metric is calculated globally by counting the total
-  n
