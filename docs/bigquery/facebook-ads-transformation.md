@@ -31,7 +31,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 | `account_id` | AccountId | *字串* | 直接在 Facebook 中查看廣告帳戶時的 ID。 |
 | `account_status` | AccountStatus | *整數* | 帳戶狀態。1 = 有效、2 = 已停用、3 = 未結算、7 = 待審核、9 = 寬限期內、101 = 暫時無法使用、100 = 待關閉。 |
 | `age` | 年齡 | *Double* | 廣告帳戶的開立時間 (以天為單位)。 |
-| `amount_spent` | AmountSpent | *整數* | 帳戶目前的支出總金額。這項設定可以重設。 |
+| `amount_spent` | AmountSpent | *整數* | 帳戶目前的支出總額。這項設定可以重設。 |
 | `balance` | 餘額 | *整數* | 應付帳單金額。 |
 | `business_city` | BusinessCity | *字串* | 商家地址所在的城市。 |
 | `business_country_code` | BusinessCountryCode | *字串* | 商家地址的國家/地區代碼。 |
@@ -62,7 +62,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 |  | TimeIncrement | *字串* | 資料匯總的天數。這個值會設為 1。 |
 |  | 等級 | *字串* | 代表結果的層級。這個值會設為 `ad`。 |
 | `account_currency` | AccountCurrency | *字串* | 廣告帳戶使用的幣別。 |
-| `action_attribution_windows` | ActionAttributionWindows | *字串* | 以半形逗號分隔的清單，用於決定動作的歸屬期。舉例來說，28d\_click 表示 API 會傳回使用者點按廣告後 28 天內發生的所有動作。這個選項設為 [1d\_view,28d\_click]。 |
+| `action_attribution_windows` | ActionAttributionWindows | *字串* | 以半形逗號分隔的清單，用於決定動作的歸因回溯期。舉例來說，28d\_click 表示 API 會傳回使用者點按廣告後 28 天內發生的所有動作。這個選項設為 [1d\_view,28d\_click]。 |
 | `account_id` | AdAccountId | *字串* | 與報表列相關聯的廣告帳戶 ID。 |
 | `account_name` | AdAccountName | *字串* | 與報表列相關聯的廣告帳戶名稱。 |
 | `campaign_id` | CampaignId | *字串* | 與報表列相關聯的廣告活動 ID。 |
@@ -71,18 +71,18 @@ Google uses AI technology to translate content into your preferred language. AI 
 | `adset_name` | AdSetName | *字串* | 與報表列相關聯的廣告組合名稱。 |
 | `ad_id` | AdId | *字串* | 與報表列相關聯的廣告 ID。 |
 | `ad_name` | AdName | *字串* | 與報表列相關聯的廣告名稱。 |
-| `buying_type` | BuyingType | *字串* | 廣告活動中目標廣告的付費方式。 |
+| `buying_type` | BuyingType | *字串* | 廣告活動中指定廣告的付費方式。 |
 | `clicks` | 點擊次數 | *長* | 廣告獲得的總點擊次數。視宣傳內容而定，這類互動可能包括粉絲專頁按讚、活動回應或應用程式安裝。在 Facebook 使用者介面中，這是「點擊次數 (全部)」欄位。 |
 | `conversion_rate_ranking` | ConversionRateRanking | *字串* | 轉換率排名。 |
-| `cost_per_estimated_ad_recallers` | CostPerEstimatedAdRecallers | *十進位* | 我們預估在 2 天內，每多一位使用者回憶起看過您的廣告，您需要支付的平均費用。 |
+| `cost_per_estimated_ad_recallers` | CostPerEstimatedAdRecallers | *十進位* | 我們預估在 2 天內詢問時，每位額外使用者回憶起看過您廣告的平均費用。 |
 | `cost_per_inline_link_click` | CostPerInlineLinkClick | *十進位* | 廣告中連結的平均單次點擊出價。 |
 | `cost_per_inline_post_engagement` | CostPerInlinePostEngagement | *十進位* | 貼文的平均單次參與出價。 |
 | `cost_per_unique_click` | CostPerUniqueClick | *十進位* | 這些廣告的單次不重複點擊平均費用，計算方式為支出金額除以獲得的不重複點擊次數。 |
 | `cost_per_unique_inline_link_click` | CostPerUniqueInlineLinkClick | *十進位* | 您為每次不重複的內嵌連結點擊支付的平均費用。 |
 | `cpc` | 單次點擊出價 | *十進位* | 這些廣告的平均單次點擊出價，計算方式為支出金額除以獲得的點擊次數。 |
 | `cpm` | 千次曝光出價 | *十進位* | 您為廣告每獲得 1,000 次曝光所支付的平均費用。 |
-| `cpp` | 單次通話成本 | *十進位* | 您為廣告向 1,000 位不重複使用者放送所支付的平均費用。 |
-| `ctr` | 點閱率 | *Double* | 獲得的點擊次數除以曝光次數。在 Facebook 使用者介面中，這是「點閱率 (全部)」欄位。 |
+| `cpp` | 單次通話成本 | *十進位* | 廣告每觸及 1,000 位不重複使用者，您支付的平均費用。 |
+| `ctr` | 點閱率 | *Double* | 獲得的點擊次數除以曝光次數。在 Facebook 使用者介面中，這是「點閱率 (全部)」% 欄位。 |
 | `estimated_ad_recall_rate` | EstimatedAdRecallRate | *Double* | 預估記得廣告的人數除以廣告觸及人數。 |
 | `estimated_ad_recallers` | EstimatedAdRecallers | *Double* | 我們預估在 2 天內，會記得看過您廣告的人數。 |
 | `frequency` | 頻率 | *Double* | 廣告向每位使用者放送的平均次數。 |
@@ -90,14 +90,14 @@ Google uses AI technology to translate content into your preferred language. AI 
 | `inline_link_clicks` | InlineLinkClicks | *長* | 廣告中連結的總點擊次數。 |
 | `inline_link_click_ctr` | InlineLinkClicksCounter | *Double* | 連結的內嵌點擊點閱率。 |
 | `inline_post_engagement` | InlinePostEngagement | *長* | 貼文的參與總次數。 |
-| `instant_experience_clicks_to_open` | InstantExperienceClicksToOpen | *長* | 對應至 META API 的 instant\_experience\_clicks\_to\_open 欄位。 |
-| `instant_experience_clicks_to_start` | InstantExperienceClicksToStart | *長* | 對應至 META API 中的 instant\_experience\_clicks\_to\_start 欄位。 |
-| `instant_experience_outbound_clicks` | InstantExperienceOutboundClicks | *長* | 對應於 META API 中的 instant\_experience\_outbound\_clicks 欄位。 |
+| `instant_experience_clicks_to_open` | InstantExperienceClicksToOpen | *長* | 對應至 META API 中的 instant\_experience\_clicks\_to\_open 欄位。 |
+| `instant_experience_clicks_to_start` | InstantExperienceClicksToStart | *長* | 對應於 META API 中的 instant\_experience\_clicks\_to\_start 欄位。 |
+| `instant_experience_outbound_clicks` | InstantExperienceOutboundClicks | *長* | 對應至 META API 中的 instant\_experience\_outbound\_clicks 欄位。 |
 | `objective` | 目標 | *字串* | 您為廣告活動選取的目標。目標反映您希望透過廣告達成的目標。 |
 | `quality_ranking` | QualityRanking | *字串* | 品質排名。 |
 | `reach` | 觸及率 | *長* | 廣告的放送對象人數。 |
 | `spend` | 支出 | *十進位* | 到目前為止的總支出金額。 |
-|  | UniqueClicks | *長* | 點擊廣告的不重複使用者總數。舉例來說，如果 3 位使用者點擊同一則廣告 5 次，系統會計為 3 次不重複點擊。 |
+|  | UniqueClicks | *長* | 點擊廣告的不重複使用者總數。舉例來說，如果 3 位使用者點按同一則廣告 5 次，系統會計為 3 次不重複點擊。 |
 |  | UniqueCTR | *Double* | 點按廣告的人數除以觸及人數。舉例來說，如果您獲得 20 次不重複點擊，且廣告放送對象為 1,000 位不重複使用者，則不重複點閱率為 2%。 |
 | `inline_link_clicks` | UniqueInlineLinkClicks | *長* | 廣告獲得的不重複內嵌連結點擊次數。在 Facebook 使用者介面中，這是「不重複連結點擊次數」欄位。 |
 |  | UniqueInlineLinkClickCounter | *Double* | 不重複內嵌連結點擊的點閱率。 |
@@ -142,7 +142,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 | `date_stop` | DateEnd | *日期* | 要擷取洞察資料的結束日期。在 Facebook 使用者介面中，這是「報表結束」欄位。 |
 |  | TimeIncrement | *字串* | 資料匯總的天數。這個值設為 1。 |
 |  | 等級 | *字串* | 代表結果的層級。值是在 `ad` 設定。 |
-| `action_attribution_windows` | ActionAttributionWindows | *字串* | 以半形逗號分隔的清單，用於決定動作的歸屬期。舉例來說，28d\_click 表示 API 會傳回使用者點按廣告後 28 天內發生的所有動作。預設選項為 [1d\_view,7d\_click]。可能的值包括 1d\_view、7d\_view、28d\_view、1d\_click、7d\_click、28d\_click、default。 |
+| `action_attribution_windows` | ActionAttributionWindows | *字串* | 以半形逗號分隔的清單，用於決定動作的歸因回溯期。舉例來說，28d\_click 表示 API 會傳回使用者點按廣告後 28 天內發生的所有動作。預設選項為 [1d\_view,7d\_click]。可能的值包括 1d\_view、7d\_view、28d\_view、1d\_click、7d\_click、28d\_click、default。 |
 |  | ActionCollection | *字串* | 這項資訊來自您在轉移期間選擇的動作集合。 |
 | `account_id` | AdAccountId | *字串* | 與報表列相關聯的廣告帳戶 ID。 |
 | `account_name` | AdAccountName | *字串* | 與報表列相關聯的廣告帳戶名稱。 |
@@ -152,14 +152,14 @@ Google uses AI technology to translate content into your preferred language. AI 
 | `adset_name` | AdSetName | *字串* | 與報表列相關聯的廣告組合名稱。 |
 | `ad_id` | AdId | *字串* | 與報表列相關聯的廣告 ID。 |
 | `ad_name` | AdName | *字串* | 與報表列相關聯的廣告名稱。 |
-| `ACTION_COLLECTION.value` | ActionValue | *整數* | 預設歸屬期的指標值。  Facebook 廣告計畫更新這個資料類型對應。詳情請參閱 [2026 年 7 月 25 日](https://docs.cloud.google.com/bigquery/docs/transfer-changes?hl=zh-tw#Jul25-fb-ads)。 |
-| `ACTION_COLLECTION.1d_click` | Action1dClick | *字串* | 廣告獲得點擊後 1 天的歸屬期指標值。 |
-| `ACTION_COLLECTION.1d_view` | Action1dView | *字串* | 廣告觀看後 1 天的歸屬期指標值。 |
-| `ACTION_COLLECTION.7d_click` | Action7dClick | *字串* | 點擊廣告後 7 天的歸屬期指標值。 |
-| `ACTION_COLLECTION.7d_view` | Action7dView | *字串* | 廣告觀看後 7 天的歸屬期指標值。 |
-| `ACTION_COLLECTION.28d_click` | Action28dClick | *字串* | 廣告獲得點擊後 28 天的歸屬期指標值。 |
-| `ACTION_COLLECTION.28d_view` | Action28dView | *字串* | 觀看廣告後 28 天的歸屬期指標值。 |
-| `ACTION_COLLECTION.dda` | ActionDDA | *字串* | 歸屬期的指標值，由以數據為準歸因模式提供。 |
+| `ACTION_COLLECTION.value` | ActionValue | *整數* | 預設歸因期間的指標值。  Facebook 廣告計畫更新這個資料類型對應。詳情請參閱 [2026 年 7 月 25 日](https://docs.cloud.google.com/bigquery/docs/transfer-changes?hl=zh-tw#Jul25-fb-ads)。 |
+| `ACTION_COLLECTION.1d_click` | Action1dClick | *字串* | 廣告獲得點擊後 1 天的歸因期指標值。 |
+| `ACTION_COLLECTION.1d_view` | Action1dView | *字串* | 廣告觀看後 1 天的歸因回溯期指標值。 |
+| `ACTION_COLLECTION.7d_click` | Action7dClick | *字串* | 歸因期為點擊廣告後 7 天的指標值。 |
+| `ACTION_COLLECTION.7d_view` | Action7dView | *字串* | 廣告觀看後 7 天的歸因回溯期指標值。 |
+| `ACTION_COLLECTION.28d_click` | Action28dClick | *字串* | 廣告獲得點擊後 28 天的歸因期指標值。 |
+| `ACTION_COLLECTION.28d_view` | Action28dView | *字串* | 歸因期為觀看廣告後 28 天的指標值。 |
+| `ACTION_COLLECTION.dda` | ActionDDA | *字串* | 歸因期間的指標值，由以數據為準歸因模式提供。 |
 | **一般細目** | | | |
 |  | 年齡 | *字串* | 這列指標的年齡範圍。 |
 |  | 性別 | *字串* | 這列指標的性別。 |
@@ -176,7 +176,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 |  | ActionType | *字串* | 使用者看到廣告後，即使沒有點擊，也會對廣告採取動作。 |
 |  | ActionCanvasComponentName | *字串* | 畫布廣告中的元件名稱。 |
 |  | ActionCarouselCardId | *字串* | 使用者看到廣告時互動的特定輪播資訊卡 ID。 |
-|  | ActionCarouselCardName | *字串* | 使用者看到廣告時與之互動的特定輪播資訊卡。系統會根據廣告標題識別資訊卡。 |
+|  | ActionCarouselCardName | *字串* | 使用者看到廣告時與之互動的特定輪播資訊卡。資訊卡會依標題分類。 |
 |  | ActionDestination | *字串* | 使用者點按廣告後前往的到達網頁。 |
 |  | ActionDevice | *字串* | 您追蹤的轉換事件發生所在的裝置。 |
 |  | ActionReaction | *字串* | 廣告或加強推廣貼文的表情符號回應次數。 |
@@ -186,6 +186,8 @@ Google uses AI technology to translate content into your preferred language. AI 
 |  | ActionConvertedProductId | *字串* | 已轉換的產品 ID - 適用於協作廣告。 |
 
 ### 「`AdInsightsMMM`」報表
+
+**注意：** 自 2026 年 7 月 6 日起，系統將暫時停用 `AdInsightsMMM` 報表。詳情請參閱 [2026 年 7 月 6 日](https://docs.cloud.google.com/bigquery/docs/transfer-changes?hl=zh-tw#Jul06-fb-ads)。
 
 | **Meta API 欄位名稱** | **對應的 BigQuery 欄位名稱** | **類型** | **說明** |
 | --- | --- | --- | --- |
@@ -215,7 +217,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 | `name` | 名稱 | *字串* | 廣告的名稱。 |
 | `status` | AdStatus | *字串* | 廣告的狀態。 |
 | `bid_info` | BidInfo | *字串* | 與廣告相關聯的出價資訊。 |
-| `bid_type` | BidType | *字串* | 與廣告相關聯的出價方式。 |
+| `bid_type` | BidType | *字串* | 與廣告相關聯的出價類型。 |
 | `campaign_id` | CampaignId | *字串* | 廣告活動的 ID。 |
 | `adset_id` | AdSetId | *字串* | 廣告組合的 ID。 |
 | `creative` | AdCreativeId | *字串* | 廣告素材的 ID。 |
@@ -307,7 +309,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 | `learning_stage_info.status` | LearningStageInfoStatus | *字串* | 學習階段的狀態。 |
 | `learning_stage_info.conversions` | LearningStageInfoConversions | *整數* | 學習階段的轉換次數。 |
 | `learning_stage_info.attribution_windows` | LearningStageInfoAttributionWindows | *字串* | 學習階段的歸屬期。 |
-| `learning_stage_info.last_sig_edit_time` | LearningStageInfoLastSigEditTime | *日期時間* | 學習階段的上次重大編輯時間。 |
+| `learning_stage_info.last_sig_edit_time` | LearningStageInfoLastSigEditTime | *日期時間* | 學習階段的最後一次重大編輯時間。 |
 
 ### 「`Campaigns`」報表
 
@@ -322,7 +324,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 | `status` | 狀態 | *字串* | 廣告活動的目前狀態。 |
 | `created_time` | CreatedTime | *日期時間* | 建立時間。 |
 | `objective` | 目標 | *字串* | 選取的廣告活動目標。 |
-| `spend_cap` | SpendCap | *整數* | 整個生命週期的支出上限。 |
+| `spend_cap` | SpendCap | *整數* | 生命週期支出上限。 |
 | `daily_budget` | DailyBudget | *整數* | 每日預算。 |
 | `budget_remaining` | BudgetRemaining | *整數* | 廣告活動的剩餘預算。 |
 | `lifetime_budget` | LifetimeBudget | *整數* | 整個生命週期的預算總額。 |
@@ -365,6 +367,4 @@ Google uses AI technology to translate content into your preferred language. AI 
 | **Meta API 欄位名稱** | **對應的 BigQuery 欄位名稱** | **類型** | **說明** |
 | --- | --- | --- | --- |
 | `id` | ID | *字串* | 商家 ID。 |
-| `name` | 名稱 | *字串* | 商家名稱。 |
-| `primary_page` | PrimaryPage | *字串* | 與商家相關的主要頁面。 |
-| `timezone_id` | TimezoneId | *字串* | 商家 |
+| `name` | 名稱 | *字* |

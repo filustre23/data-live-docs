@@ -32,8 +32,10 @@ function_name(
 Each aggregate function supports all or a subset of the aggregate function call
 syntax. To build an aggregate function, use the following syntax:
 
-* `DISTINCT`: Each distinct value of
-  `expression` is aggregated only once into the result.
+* `DISTINCT`: Aggregate each distinct value of an expression only once into the
+  result.
+* `function_arguments`: Specify the input values, columns, or expressions that
+  the aggregate function evaluates and summarizes across the rows of a group.
 * `IGNORE NULLS` or `RESPECT NULLS`: If `IGNORE NULLS` is
   specified, the `NULL` values are excluded from the result. If
   `RESPECT NULLS` is specified, both `NULL` and non-`NULL` values can be
@@ -247,11 +249,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-06-29 UTC.
+Last updated 2026-07-06 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-06-29 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-07-06 UTC."],[],[]]

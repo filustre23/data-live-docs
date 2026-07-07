@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-07-06T15:17+00:00_
+_Generated 2026-07-07T01:47+00:00_
 
-**9 sources, 5437 topics total**
+**9 sources, 5441 topics total**
 
 ## airflow
 
@@ -1725,7 +1725,7 @@ _1702 topics_
 
 Upstream: <https://cloud.google.com/bigquery/docs/>
 
-_1505 topics_
+_1506 topics_
 
 - `bigquery/access-control`
 - `bigquery/access-control-basic-roles`
@@ -2149,6 +2149,7 @@ _1505 topics_
 - `bigquery/migration/hive`
 - `bigquery/migration/hive-overview`
 - `bigquery/migration/hive-sql`
+- `bigquery/migration/migration-overview`
 - `bigquery/migration/netezza`
 - `bigquery/migration/netezza-sql`
 - `bigquery/migration/oracle-migration`
@@ -3407,7 +3408,7 @@ _163 topics_
 
 Upstream: <https://docs.getdbt.com/docs/>
 
-_1076 topics_
+_1079 topics_
 
 - `dbt-core/best-practices/best-practice-workflows`
 - `dbt-core/best-practices/clone-incremental-models`
@@ -3636,8 +3637,11 @@ _1076 topics_
 - `dbt-core/docs/deploy/dbt-state-about`
 - `dbt-core/docs/deploy/dbt-state-cicd`
 - `dbt-core/docs/deploy/dbt-state-deferral`
+- `dbt-core/docs/deploy/dbt-state-enable-jobs`
+- `dbt-core/docs/deploy/dbt-state-enable-studio`
 - `dbt-core/docs/deploy/dbt-state-examples`
 - `dbt-core/docs/deploy/dbt-state-interface`
+- `dbt-core/docs/deploy/dbt-state-lag-tolerance`
 - `dbt-core/docs/deploy/dbt-state-migration`
 - `dbt-core/docs/deploy/dbt-state-setup`
 - `dbt-core/docs/deploy/deploy-environments`

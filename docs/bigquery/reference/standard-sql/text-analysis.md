@@ -969,14 +969,4 @@ Exclude a list of terms (tokens) from the results.
 **Definitions**
 
 * `array_of_stop_words`: A JSON array containing strings that represent terms.
-  These terms shouldn't be included in the results. The array must have at
-  least one element. An empty string is a valid array element.
-
-**Example**
-
-In the following query, the words `they` and `pie` are excluded from the
-results:
-
-```
-SELECT
-```
+  These terms shouldn&#

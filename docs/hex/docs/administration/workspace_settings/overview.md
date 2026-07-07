@@ -32,7 +32,7 @@ New users can also be added to your workspace by way of a [project invite](/docs
 
 To invite users to your workspace, navigate to **Settings > Users**, and click **+ User**.
 
-Type or paste the email (or a comma-separated list of emails) you wish to add to your workspace. Then select a workspace role from the drop-down menu and click **Add users**. The invited user(s) will receive an invite email from **[[email protected]](/cdn-cgi/l/email-protection#93fdfce7faf5ead3fbf6ebbde7f6f0fb)** prompting them to join your workspace. You will see the invited user(s) appear in the **Users** list.
+Type or paste the email (or a comma-separated list of emails) you wish to add to your workspace. Then select a workspace role from the drop-down menu and click **Add users**. The invited user(s) will receive an invite email from **[[email protected]](/cdn-cgi/l/email-protection#1e70716a7778675e767b66306a7b7d76)** prompting them to join your workspace. You will see the invited user(s) appear in the **Users** list.
 
 ### Allowed domains[​](#allowed-domains "Direct link to Allowed domains")
 

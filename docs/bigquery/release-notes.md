@@ -27,6 +27,20 @@ To get the latest product updates delivered to you, add the URL of this page to 
 reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators), or add the
 [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## July 06, 2026
+
+Change
+
+For [data transfers from Facebook Ads](/bigquery/docs/facebook-ads-transfer),
+support for the `AdInsightsMMM` report has been temporarily disabled. Existing
+data transfers from Facebook Ads that include the `AdInsightsMMM` report will
+continue to run, but the transfer won't include data from the `AdInsightsMMM`
+report.
+
+This change is due to schema changes in the Facebook Ads API.
+
+For more information, see [July 06, 2026](/bigquery/docs/transfer-changes#Jul06-fb-ads).
+
 ## July 01, 2026
 
 Feature
@@ -4370,7 +4384,4 @@ Libraries
 
 * Update actions/upload-artifact action to v4.6.1 ([#3691](https://github.com/googleapis/java-bigquery/issues/3691)) ([9c0edea](https://github.com/googleapis/java-bigquery/commit/9c0edea7c00b3ffbe6b6a404e4161f768acb34f2))
 * Update dependency com.google.api.grpc:proto-google-cloud-bigqueryconnection-v1 to v2.60.0 ([#3680](https://github.com/googleapis/java-bigquery/issues/3680)) ([6d9a40d](https://github.com/googleapis/java-bigquery/commit/6d9a40d55a6bbcbff7df39723d33f0af2b24f66e))
-* Update dependency com.google.apis:google-api-services-bigquery to v2-rev20250216-2.0.0 ([#3688](https://github.com/googleapis/java-bigquery/issues/3688)) ([e3beb6f](https://github.com/googleapis/java-bigquery/commit/e3beb6ffe433db8ad4087d0f27a8f0d23e7c9322))
-* Update dependency com.google.cloud:google-cloud-datacatalog-bom to v1.64.0 ([#3681](https://github.com/googleapis/java-bigquery/issues/3681)) ([9e4e261](https://github.com/googleapis/java-bigquery/commit/9e4e26116226d17cc42ae030eed284bd6674b74b))
-* Update dependency com.google.cloud:sdk-platform-java-config to v3.44.0 ([#3694](https://github.com/googleapis/java-bigquery/issues/3694)) ([f69fbd3](https://github.com/googleapis/java-bigquery/commit/f69fbd371f18da6ddc43d4f32f532e684026fe16))
-* Update dependency com.google.oauth-client:google-oauth-client-java6 to v1.38.0 (
+* Update dependency com.google.apis:google-api-services-bigquery to v2-rev20250216-2.0.0 ([#3688](https://github.com/googleapis/java-bigquery/issues/3688)) (
