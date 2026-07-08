@@ -87,7 +87,7 @@ You can find a suggestion's ID by opening it in Context Studio — the ID appear
 
 ## Configure suggestions[​](#configure-suggestions "Direct link to Configure suggestions")
 
-Admins can fine tune how the review agent generates suggestions from the gear icon on the top right of the Suggestions tab. Use this to control how sensitive suggestions are to recurring agent interactions, and to give the review agent stylistic and structural guidance for the changes it proposes.
+Admins can fine tune how the review agent generates suggestions from the "Configure Suggestions" button. Use this to control how sensitive suggestions are to recurring agent interactions, and to give the review agent stylistic and structural guidance for the changes it proposes.
 
 ### Thresholds[​](#thresholds "Direct link to Thresholds")
 

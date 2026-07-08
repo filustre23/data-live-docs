@@ -32,12 +32,12 @@
 * putUpsertGuideDraft
 * postPublishGuideDrafts
 * delDeleteGuideDraft
-* getListCells
-* postCreateCell
+* getGetChartImageFromLogic
+* getGetCell
 * patchUpdateCell
 * delDeleteCell
-* getGetCell
-* getGetChartImageFromLogic
+* postCreateCell
+* getListCells
 * postExportProject
 * postCreateThread
 * getListThreads
@@ -2498,5 +2498,3 @@ Copy
         + "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08"}}]}
 
 }`
-
-##

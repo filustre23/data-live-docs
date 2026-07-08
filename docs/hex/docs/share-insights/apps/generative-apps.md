@@ -8,7 +8,7 @@ info
 
 * Generative apps are available in **Beta** on all [plans](https://hex.tech/pricing/). Paid plans include monthly per-seat [credit grants](/docs/administration/credits) that can be used towards Hex AI features.
 * Users need [Can Edit](/docs/collaborate/sharing-and-permissions/project-sharing#project-permissions) or higher permissions on a project to create a Generative app.
-* To share suggestions for new features or improvements, reach out to [[email protected]](/cdn-cgi/l/email-protection#cdbeb8bdbda2bfb98da5a8b5e3b9a8aea5).
+* To share suggestions for new features or improvements, reach out to [[email protected]](/cdn-cgi/l/email-protection#e89b9d9898879a9ca8808d90c69c8d8b80).
 
 Generative apps give you a fully customized, code-generated app experience where the Hex agent builds your UI, visuals, and theming from a plain-language description. Unlike [Classic apps](/docs/share-insights/apps/apps-introduction), which use a fixed grid of standard components, Generative apps produce flexible, web-style interfaces with custom layout, styling, and components tailored to what you're trying to build. This gives you more expressive power when a standard dashboard layout isn't enough.
 
@@ -74,7 +74,7 @@ The zip contains two files:
 
 Then point the agent at your brand. Anything you have helps: **brand guidelines** (a hosted styleguide page or a document), a **design system** (a hosted token reference, a CSS/SCSS file, a Figma export, a Tailwind config, or a repo link), or other artifacts like a logo and color palette. A prompt looks like:
 
-> We're Nexacorp. Following `creating-a-design-md.md`, build us a `design.md` from our design system: `[link to your brand / tokens / CSS / repo]`. Return the finished file as a single copyable Markdown code block, including its frontmatter, so I can paste it straight into a workspace guide.
+> We're NexaCorp. Following `creating-a-design-md.md`, build us a `design.md` from our design system: `[link to your brand / tokens / CSS / repo]`. Return the finished file as a single copyable Markdown code block, including its frontmatter, so I can paste it straight into a workspace guide.
 
 Review the result, tweak any values, and add it to your workspace as described below. If you don't have a formal design system, you can still hand the agent a few brand colors and fonts, or start from the example and edit it directly.
 
