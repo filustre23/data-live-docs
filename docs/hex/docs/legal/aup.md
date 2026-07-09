@@ -98,7 +98,7 @@ Subject to the use restrictions herein, Customer may conduct benchmark tests of 
 
 ## IV. VIOLATIONS[​](#ivviolations "Direct link to IV. VIOLATIONS")
 
-Customer will report any violations of this Acceptable Use Policy, or any issues with any of the Hex Offerings, including the Service and the Hex AI Features, to Hex at [[email protected]](/cdn-cgi/l/email-protection#8ce0e9ebede0cce4e9f4a2f8e9efe4).
+Customer will report any violations of this Acceptable Use Policy, or any issues with any of the Hex Offerings, including the Service and the Hex AI Features, to Hex at [[email protected]](/cdn-cgi/l/email-protection#a6cac3c1c7cae6cec3de88d2c3c5ce).
 
 ## V. GENERAL TERMS[​](#vgeneral-terms "Direct link to V. GENERAL TERMS")
 

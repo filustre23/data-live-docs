@@ -32,13 +32,27 @@ New users can also be added to your workspace by way of a [project invite](/docs
 
 To invite users to your workspace, navigate to **Settings > Users**, and click **+ User**.
 
-Type or paste the email (or a comma-separated list of emails) you wish to add to your workspace. Then select a workspace role from the drop-down menu and click **Add users**. The invited user(s) will receive an invite email from **[[email protected]](/cdn-cgi/l/email-protection#9cf2f3e8f5fae5dcf4f9e4b2e8f9fff4)** prompting them to join your workspace. You will see the invited user(s) appear in the **Users** list.
+Type or paste the email (or a comma-separated list of emails) you wish to add to your workspace. Then select a workspace role from the drop-down menu and click **Add users**. The invited user(s) will receive an invite email from **[[email protected]](/cdn-cgi/l/email-protection#036d6c776a657a436b667b2d7766606b)** prompting them to join your workspace. You will see the invited user(s) appear in the **Users** list.
 
 ### Allowed domains[​](#allowed-domains "Direct link to Allowed domains")
 
 Admins can add any number of allowed domains to their workspace. Adding an allowed domain lets anyone with an email address matching that domain (e.g. hex.tech) to discover and join your workspace. This enables you to grant a trusted organization access to your Hex workspaces without having to manually invite each individual person.
 
 When you add an allowed domain, you will be prompted to specify the default workspace role that you would like to assign to users with that domain. This role can be changed for individual users once they have joined your workspace. Many Hex Admins prefer to create allowed domains with Viewer as the default role, and handle role promotion requests later on. If there are users who match the allowed domain who you know will require a different workspace role (e.g., Admins), you can invite that user individually via [workspace invite](#workspace-invites).
+
+### Role requests[​](#role-requests "Direct link to Role requests")
+
+info
+
+* Available on the Enterprise [plan](https://hex.tech/pricing/).
+* Only workspace Admins can configure role requests.
+
+By default, users can request a workspace role upgrade in Hex when they need additional permissions. Admins can configure role request behavior from **Settings** → **Users**, under the **Role requests** section.
+
+Use role request settings to:
+
+* Add a custom message that appears when users request a role upgrade. This is useful for linking to an internal access request process or explaining how role changes are approved.
+* Disable role requests in Hex. When role requests are disabled, users see your custom message instead of the request form. If no custom message is set, Hex shows a default message explaining that role requests are disabled.
 
 ### Invite links[​](#invite-links "Direct link to Invite links")
 
@@ -104,6 +118,7 @@ Only Python 3.11 and 3.12 will be fully patched with the latest fixes for securi
   + [Add and manage users](#add-and-manage-users)
   + [Workspace invites](#workspace-invites)
   + [Allowed domains](#allowed-domains)
+  + [Role requests](#role-requests)
   + [Invite links](#invite-links)
   + [Deactivate users](#deactivate-users)
   + [Groups](#groups)

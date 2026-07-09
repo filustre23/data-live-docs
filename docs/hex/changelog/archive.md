@@ -18,6 +18,7 @@
 * [June 11 - Agent web search, model picker, and Fable 5 support](/changelog/2026-06-11)
 * [June 16 - That question you keep asking… can just run itself](/changelog/2026-06-16)
 * [June 25 - Hex in Figma, IAM role support for AWS, and schema refresh history!](/changelog/2026-06-25)
+* [July 8 - Two new models and more controls over generative apps](/changelog/2026-07-08)
 
 ### 2025[​](#2025 "Direct link to 2025")
 

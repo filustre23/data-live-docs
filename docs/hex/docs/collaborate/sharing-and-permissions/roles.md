@@ -54,6 +54,8 @@ Every user in a workspace is assigned one of the following roles: **Admin**, **M
 
 Only Admins can add new workspace members and edit users' workspace roles. Admins can configure workspace roles for [individual users](/docs/administration/workspace_settings/overview#add-and-manage-users), [allowed domains](/docs/administration/workspace_settings/overview#allowed-domains), and [directory sync](/docs/administration/workspace_settings/directory-sync).
 
+Admins on the Enterprise plan can also [customize or disable role requests](/docs/administration/workspace_settings/overview#role-requests) from workspace settings.
+
 ## Workspace roles and paid seats[​](#workspace-roles-and-paid-seats "Direct link to Workspace roles and paid seats")
 
 Users with the Admin, Manager, or Editor workspace roles are considered "Paid Author Seats". Users with the Explore workspace role are considered “Paid Explorer Seats”. Users with the Viewer workspace role are considered "Viewer Seats", which may be free or paid depending on your pricing plan.
