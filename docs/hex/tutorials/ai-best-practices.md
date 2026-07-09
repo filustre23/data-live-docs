@@ -23,3 +23,7 @@ A practical guide to building automated, recurring analyses with Tasks. Covers d
 [## 📄️Optimizing your data connections for the Hex Agent
 
 Best practices for workspace admins to configure data connections so the agent can find the right data quickly and accurately.](/tutorials/ai-best-practices/optimizing-data-connections-for-agents)
+
+[## 📄️Model picker best practices
+
+Choose the right model and effort level for your analytical work in Hex.](/tutorials/ai-best-practices/model-picker-best-practices)

@@ -266,7 +266,7 @@ easy to trace back in time if you don't like the output of a session.
 
 The agent automatically summarizes the conversation when about 70% of the [context window](https://docs.anthropic.com/en/docs/build-with-claude/context-windows) is reached. While you can technically continue a very long conversation without hitting a hard stop, we recommend periodically starting a new thread when you begin a new or major analysis step. This helps preserve clarity and ensures the agent has the right context to work with.
 
-## Reviewing and trust[​](#reviewing-and-trust "Direct link to Reviewing and trust")
+## Reviewing and trust[  ​](#reviewing-and-trust "Direct link to Reviewing and trust")
 
 Do not blindly trust outputs; always read the SQL or Python before relying on it! Reproduce results with a smaller sample or a secondary check. Ask the agent to explain assumptions or summarize risks. If something looks off, tell it exactly what and why, then re-prompt for a fix.
 
