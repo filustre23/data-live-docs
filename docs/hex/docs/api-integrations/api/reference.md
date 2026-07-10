@@ -1,13 +1,13 @@
 * postCreatePresignedUrl
 * postCreateProject
 * getListProjects
-* getGetProject
-* patchUpdateProject
 * getGetQueriedTables
 * patchEditProjectSharingCollections
 * patchEditProjectSharingOrgAndPublic
 * patchEditProjectSharingGroups
 * patchEditProjectSharingUsers
+* patchUpdateProject
+* getGetProject
 * postIngestSemanticProject
 * patchUpdateSemanticProject
 * postRunProject
@@ -436,280 +436,6 @@ Copy
 * "pagination": {
   + "after": "string",
   + "before": "string"}
-
-}`
-
-## GetProject
-
-Get metadata about a single project.
-
-##### Authorizations:
-
-*bearerAuth*
-
-##### path Parameters
-
-|  |  |
-| --- | --- |
-| projectId required | string <uuid>  (ProjectId) ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}...Show pattern  Unique ID for a Hex project. This can be found in the Variables side bar of the Logic View of a project, or by visiting the Project, and copying the UUID after `hex` in the URL. |
-
-##### query Parameters
-
-|  |  |
-| --- | --- |
-| includeSharing | boolean  Default:  false |
-
-### Responses
-
-**200**
-
-**403**
-
-**404**
-
-get/v1/projects/{projectId}
-
-https://app.hex.tech/api/v1/projects/{projectId}
-
-### Response samples
-
-* 200
-* 403
-* 404
-
-Content type
-
-application/json
-
-Copy
-
- Expand all  Collapse all
-
-`{
-
-* "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
-* "title": "string",
-* "description": "string",
-* "type": "PROJECT",
-* "creator": {
-  + "email": "string"},
-* "owner": {
-  + "email": "string"},
-* "status": {
-  + "name": "string"},
-* "categories": [
-  + {
-    - "description": "string",
-    - "name": "string"}],
-* "reviews": {
-  + "required": true},
-* "analytics": {
-  + "publishedResultsUpdatedAt": "string",
-  + "lastViewedAt": "string",
-  + "appViews": {
-    - "lastThirtyDays": 0,
-    - "lastFourteenDays": 0,
-    - "lastSevenDays": 0,
-    - "allTime": 0}},
-* "lastEditedAt": "string",
-* "lastPublishedAt": "string",
-* "createdAt": "string",
-* "archivedAt": "string",
-* "trashedAt": "string",
-* "schedules": [
-  + {
-    - "cadence": "HOURLY",
-    - "enabled": true,
-    - "hourly": {
-      * "timezone": "string",
-      * "minute": 59},
-    - "daily": {
-      * "timezone": "string",
-      * "minute": 59,
-      * "hour": 23},
-    - "weekly": {
-      * "timezone": "string",
-      * "minute": 59,
-      * "hour": 23,
-      * "dayOfWeek": "SUNDAY"},
-    - "monthly": {
-      * "timezone": "string",
-      * "minute": 59,
-      * "hour": 23,
-      * "day": 1},
-    - "custom": {
-      * "timezone": "string",
-      * "cron": "string"}}],
-* "sharing": {
-  + "users": [
-    - {
-      * "access": "NONE",
-      * "user": {
-        + "email": "string"}}],
-  + "collections": [
-    - {
-      * "access": "NONE",
-      * "collection": {
-        + "name": "string"}}],
-  + "groups": [
-    - {
-      * "access": "NONE",
-      * "group": {
-        + "name": "string"}}],
-  + "workspace": {
-    - "access": "NONE"},
-  + "publicWeb": {
-    - "access": "NONE"},
-  + "support": {
-    - "access": "NONE"}}
-
-}`
-
-## UpdateProject
-
-Use this endpoint to add or remove a status (including endorsements) from a project
-
-##### Authorizations:
-
-*bearerAuth*
-
-##### path Parameters
-
-|  |  |
-| --- | --- |
-| projectId required | string <uuid>  (ProjectId) ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}...Show pattern  Unique ID for a Hex project. This can be found in the Variables side bar of the Logic View of a project, or by visiting the Project, and copying the UUID after `hex` in the URL. |
-
-##### Request Body schema: application/json required
-
-|  |  |
-| --- | --- |
-| status | string or null |
-
-### Responses
-
-**200**
-
-**400**
-
-**403**
-
-**404**
-
-**500**
-
-patch/v1/projects/{projectId}
-
-https://app.hex.tech/api/v1/projects/{projectId}
-
-### Request samples
-
-* Payload
-
-Content type
-
-application/json
-
-Copy
-
-`{
-
-* "status": "string"
-
-}`
-
-### Response samples
-
-* 200
-* 400
-* 403
-* 404
-* 500
-
-Content type
-
-application/json
-
-Copy
-
- Expand all  Collapse all
-
-`{
-
-* "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
-* "title": "string",
-* "description": "string",
-* "type": "PROJECT",
-* "creator": {
-  + "email": "string"},
-* "owner": {
-  + "email": "string"},
-* "status": {
-  + "name": "string"},
-* "categories": [
-  + {
-    - "description": "string",
-    - "name": "string"}],
-* "reviews": {
-  + "required": true},
-* "analytics": {
-  + "publishedResultsUpdatedAt": "string",
-  + "lastViewedAt": "string",
-  + "appViews": {
-    - "lastThirtyDays": 0,
-    - "lastFourteenDays": 0,
-    - "lastSevenDays": 0,
-    - "allTime": 0}},
-* "lastEditedAt": "string",
-* "lastPublishedAt": "string",
-* "createdAt": "string",
-* "archivedAt": "string",
-* "trashedAt": "string",
-* "schedules": [
-  + {
-    - "cadence": "HOURLY",
-    - "enabled": true,
-    - "hourly": {
-      * "timezone": "string",
-      * "minute": 59},
-    - "daily": {
-      * "timezone": "string",
-      * "minute": 59,
-      * "hour": 23},
-    - "weekly": {
-      * "timezone": "string",
-      * "minute": 59,
-      * "hour": 23,
-      * "dayOfWeek": "SUNDAY"},
-    - "monthly": {
-      * "timezone": "string",
-      * "minute": 59,
-      * "hour": 23,
-      * "day": 1},
-    - "custom": {
-      * "timezone": "string",
-      * "cron": "string"}}],
-* "sharing": {
-  + "users": [
-    - {
-      * "access": "NONE",
-      * "user": {
-        + "email": "string"}}],
-  + "collections": [
-    - {
-      * "access": "NONE",
-      * "collection": {
-        + "name": "string"}}],
-  + "groups": [
-    - {
-      * "access": "NONE",
-      * "group": {
-        + "name": "string"}}],
-  + "workspace": {
-    - "access": "NONE"},
-  + "publicWeb": {
-    - "access": "NONE"},
-  + "support": {
-    - "access": "NONE"}}
 
 }`
 
@@ -1438,6 +1164,306 @@ Copy
     - "userIds": [
       * "497f6eca-6276-4993-bfeb-53cbbbba6f08"],
     - "reason": "string"}]
+
+}`
+
+## UpdateProject
+
+Use this endpoint to add or remove a status (including endorsements) from a project
+
+##### Authorizations:
+
+*bearerAuth*
+
+##### path Parameters
+
+|  |  |
+| --- | --- |
+| projectId required | string <uuid>  (ProjectId) ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}...Show pattern  Unique ID for a Hex project. This can be found in the Variables side bar of the Logic View of a project, or by visiting the Project, and copying the UUID after `hex` in the URL. |
+
+##### Request Body schema: application/json required
+
+|  |  |
+| --- | --- |
+| status | string or null |
+
+### Responses
+
+**200**
+
+**400**
+
+**403**
+
+**404**
+
+**500**
+
+patch/v1/projects/{projectId}
+
+https://app.hex.tech/api/v1/projects/{projectId}
+
+### Request samples
+
+* Payload
+
+Content type
+
+application/json
+
+Copy
+
+`{
+
+* "status": "string"
+
+}`
+
+### Response samples
+
+* 200
+* 400
+* 403
+* 404
+* 500
+
+Content type
+
+application/json
+
+Copy
+
+ Expand all  Collapse all
+
+`{
+
+* "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+* "title": "string",
+* "description": "string",
+* "type": "PROJECT",
+* "creator": {
+  + "email": "string"},
+* "owner": {
+  + "email": "string"},
+* "status": {
+  + "name": "string"},
+* "categories": [
+  + {
+    - "description": "string",
+    - "name": "string"}],
+* "reviews": {
+  + "required": true},
+* "analytics": {
+  + "publishedResultsUpdatedAt": "string",
+  + "lastViewedAt": "string",
+  + "appViews": {
+    - "lastThirtyDays": 0,
+    - "lastFourteenDays": 0,
+    - "lastSevenDays": 0,
+    - "allTime": 0}},
+* "lastEditedAt": "string",
+* "lastPublishedAt": "string",
+* "createdAt": "string",
+* "archivedAt": "string",
+* "trashedAt": "string",
+* "schedules": [
+  + {
+    - "cadence": "HOURLY",
+    - "enabled": true,
+    - "hourly": {
+      * "timezone": "string",
+      * "minute": 59},
+    - "daily": {
+      * "timezone": "string",
+      * "minute": 59,
+      * "hour": 23},
+    - "weekly": {
+      * "timezone": "string",
+      * "minute": 59,
+      * "hour": 23,
+      * "dayOfWeek": "SUNDAY"},
+    - "monthly": {
+      * "timezone": "string",
+      * "minute": 59,
+      * "hour": 23,
+      * "day": 1},
+    - "custom": {
+      * "timezone": "string",
+      * "cron": "string"}}],
+* "sharing": {
+  + "users": [
+    - {
+      * "access": "NONE",
+      * "user": {
+        + "email": "string"}}],
+  + "collections": [
+    - {
+      * "access": "NONE",
+      * "collection": {
+        + "name": "string"}}],
+  + "groups": [
+    - {
+      * "access": "NONE",
+      * "group": {
+        + "name": "string"}}],
+  + "workspace": {
+    - "access": "NONE"},
+  + "publicWeb": {
+    - "access": "NONE"},
+  + "support": {
+    - "access": "NONE"}}
+
+}`
+
+## GetProject
+
+Get metadata about a single project.
+
+This endpoint is subject to the following rate limits:
+
+* `hex-api`: Default rate limit group for the Hex API
+  + Max 30 requests per minute
+
+##### Authorizations:
+
+*bearerAuth*
+
+##### path Parameters
+
+|  |  |
+| --- | --- |
+| projectId required | string  The project to fetch. |
+
+##### query Parameters
+
+|  |  |
+| --- | --- |
+| includeSharing | boolean  Default:  false  Whether to include sharing metadata in the response. |
+
+### Responses
+
+**200** 
+
+Successful response
+
+**400** 
+
+Invalid input data
+
+**401** 
+
+Authorization not provided
+
+**403** 
+
+Insufficient access
+
+**404** 
+
+Not found
+
+**500** 
+
+Internal server error
+
+get/v1/projects/{projectId}
+
+https://app.hex.tech/api/v1/projects/{projectId}
+
+### Response samples
+
+* 200
+* 400
+* 401
+* 403
+* 404
+* 500
+
+Content type
+
+application/json
+
+Copy
+
+ Expand all  Collapse all
+
+`{
+
+* "id": "string",
+* "title": "string",
+* "description": "string",
+* "type": "PROJECT",
+* "creator": {
+  + "email": "string"},
+* "owner": {
+  + "email": "string"},
+* "status": {
+  + "name": "string"},
+* "categories": [
+  + {
+    - "name": "string",
+    - "description": "string"}],
+* "reviews": {
+  + "required": true},
+* "analytics": {
+  + "appViews": {
+    - "allTime": 0,
+    - "lastSevenDays": 0,
+    - "lastFourteenDays": 0,
+    - "lastThirtyDays": 0},
+  + "lastViewedAt": "string",
+  + "publishedResultsUpdatedAt": "string"},
+* "lastEditedAt": "string",
+* "lastPublishedAt": "string",
+* "createdAt": "string",
+* "archivedAt": "string",
+* "trashedAt": "string",
+* "schedules": [
+  + {
+    - "cadence": "HOURLY",
+    - "enabled": true,
+    - "hourly": {
+      * "minute": 0,
+      * "timezone": "string"},
+    - "daily": {
+      * "hour": 0,
+      * "minute": 0,
+      * "timezone": "string"},
+    - "weekly": {
+      * "dayOfWeek": "SUNDAY",
+      * "hour": 0,
+      * "minute": 0,
+      * "timezone": "string"},
+    - "monthly": {
+      * "day": 0,
+      * "hour": 0,
+      * "minute": 0,
+      * "timezone": "string"},
+    - "custom": {
+      * "cron": "string",
+      * "timezone": "string"}}],
+* "sharing": {
+  + "users": [
+    - {
+      * "user": {
+        + "email": "string"},
+      * "access": "NONE"}],
+  + "collections": [
+    - {
+      * "collection": {
+        + "name": "string"},
+      * "access": "NONE"}],
+  + "groups": [
+    - {
+      * "group": {
+        + "name": "string"},
+      * "access": "NONE"}],
+  + "workspace": {
+    - "access": "NONE"},
+  + "publicWeb": {
+    - "access": "NONE"},
+  + "support": {
+    - "access": "NONE"}}
 
 }`
 
@@ -2489,12 +2515,4 @@ Copy
   + "workspace": {
     - "public": "NONE",
     - "guests": "NONE",
-    - "members": "NONE"},
-  + "groups": [
-    - {
-      * "access": "NONE",
-      * "group": {
-        + "name": "string",
-        + "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08"}}]}
-
-}`
+    - "members": "NONE"`

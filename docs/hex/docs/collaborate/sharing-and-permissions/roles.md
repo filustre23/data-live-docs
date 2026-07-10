@@ -34,11 +34,14 @@ Every user in a workspace is assigned one of the following roles: **Admin**, **M
 | Create or edit the [workspace context](/tutorials/ai-best-practices/workspace-context-best-practices) | ✔ | ✔ |  |  |  |  |
 | Access Observability in [Context Studio](/docs/agent-management/context-studio) | ✔ | ✔ |  |  |  |  |
 | See Context Management in [Context Studio](/docs/agent-management/context-studio) | ✔ | ✔ | ✔ | ✔ |  |  |
-| See all user's individual [Threads](/docs/explore-data/threads) | ✔ |  |  |  |  |  |
+| See all users' individual [Threads](/docs/explore-data/threads) | ✔ |  |  |  |  |  |
 | Create and duplicate projects, components, and collections | ✔ | ✔ | ✔ |  |  |  |
-| Use the [Hex API](/docs/api-integrations/api/overview) | ✔ | ✔ | ✔ |  |  |  |
+| Use the Hex [API](/docs/api-integrations/api/overview) and [CLI](/docs/api-integrations/cli) | ✔ | ✔ | ✔ |  |  |  |
 | Create and share [Threads](/docs/explore-data/threads) | ✔ | ✔ | ✔ | ✔ |  |  |
+| Schedule Threads via [Tasks](/docs/explore-data/tasks) | ✔ | ✔ | ✔ | ✔ |  |  |
 | View [Threads](/docs/explore-data/threads) shared with them | ✔ | ✔ | ✔ | ✔ | ✔ |  |
+| Use the [Hex MCP Server](/docs/api-integrations/mcp-server) | ✔ | ✔ | ✔ | ✔ |  |  |
+| Use [External Apps](/docs/api-integrations/external-apps) in the Hex Agent | ✔ | ✔ | ✔ | ✔ |  |  |
 | Schedule project runs | ✔ | ✔ | ✔ | ✔² |  |  |
 | Build, save, and share explorations | ✔ | ✔ | ✔ | ✔ |  |  |
 | Subscribe to conditional notifications | ✔ | ✔ | ✔ | ✔ |  |  |

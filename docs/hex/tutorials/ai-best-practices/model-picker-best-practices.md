@@ -22,6 +22,10 @@ When starting a new agent conversation, you can select the **Auto** dropdown to 
 
 To optimize credits and effort, Hex defaults to **Auto**, which automatically selects the model best suited for the task based on our evals. Auto is typically the right choice for most day-to-day analytics questions. Unless you're doing a very simple or complex task, or aren't getting useful responses, we recommend starting in Auto mode.
 
+info
+
+Admins can also set a default model for the whole workspace, or restrict which models show up in the picker, from **Settings > AI & Agents**.
+
 ## Choosing the right model for your task[​](#choosing-the-right-model-for-your-task "Direct link to Choosing the right model for your task")
 
 The Hex Agent works with a range of models and efforts, each suited to different kinds of analytical work. Here's how to pick the right one for the job.
@@ -48,7 +52,7 @@ You can adjust the effort for the model you've chosen in the model picker. For g
 
 ## Let's talk about Kimi[​](#lets-talk-about-kimi "Direct link to Let's talk about Kimi")
 
-Kimi 2.7 is an open-source model, best known for its lower token costs. In our testing, we found Kimi to be, at times, 1/3rd the cost of frontier models in certain environments.
+Kimi 2.7 is an open-source model, best known for its lower token costs. In [our benchmarking of Kimi performance and cost](https://hex.tech/blog/kimi-in-hex/), we found Kimi to be, at times, 1/3rd the cost of frontier models in certain environments.
 
 It's best suited for straightforward analytical questions, especially when they are heavily documented or semantically modeled. It excels in execution but is less capable at judgment — ambiguous problems, cross-domain analysis, nuanced interpretation of results.
 

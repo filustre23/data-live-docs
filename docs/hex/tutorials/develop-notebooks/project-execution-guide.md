@@ -33,7 +33,7 @@ Your Hex Admins enable caching and a default cache timer at the workspace level.
 * From the Environment tab of the left sidebar, you can change the cache timer to either increase or decrease
   it.
 * Within an individual Data Connection SQL cell, you can opt to rerun without cached results
-* In the App Configuration Options screen of the App Builder, you can set a cache timer for published apps.
+* In the **App run settings** menu of the App Builder, you can set a cache timer for published apps.
 * On a published app, you can opt to rerun the app without cached results from the three-dot menu.
 
 [Read more about SQL caching!](/docs/explore-data/cells/sql-cells/query-caching)
@@ -79,13 +79,13 @@ Now let’s say that the SQL cell that was updated by the input parameter genera
 * Those 3 chart cells will rerun and re-render
 * The other 2 won’t since they’re not affected by any of the changes made by the user interaction
 
-# Performance Recommendations
+## Performance Recommendations[​](#performance-recommendations "Direct link to Performance Recommendations")
 
 info
 
 **Query Caching** -- Keep query caching enabled for both your notebook and its published app! Whenever possible, extend the query cache timer so that the cached results can be referenced for longer.
 
-## Project Size[​](#project-size "Direct link to Project Size")
+### Project Size[​](#project-size "Direct link to Project Size")
 
 It might be tempting to build long Hex projects with hundreds of cells, but we recommend keeping your project to around 200 or fewer cells. This is a rough heuristic, since the details of your project strongly influence its performance (e.g. number of chart cells, size of data, complexity of logic). Projects larger than this can experience lag due to a few factors:
 
@@ -97,7 +97,7 @@ More cells means more browser capacity is consumed, which can translate to slugg
 
 While Hex [prunes select unused cells](https://learn.hex.tech/docs/explore-data/projects/project-execution/execution-model#skipping-cells-in-published-apps) from the published app DAG, it does not eliminate everything. For example, Python cells are always executed. This means that if you have unused or unnecessary code in your project, it can still run in the background and increase the time needed for your published app to process. We recommend removing or commenting out any unused logic.
 
-## Input Parameters[​](#input-parameters "Direct link to Input Parameters")
+### Input Parameters[​](#input-parameters "Direct link to Input Parameters")
 
 Be thoughtful when passing input parameters into data connection SQL:
 
@@ -113,15 +113,15 @@ generates the query `select * from table where field = B`. Since each of these a
 **Example:** You have SQL Cell 1 that sends the query `select * from table` to the warehouse and stores the results in a cached dataframe. You then have a dropdown input parameter with options A and B. Finally, you have SQL Cell 2 that generates the query `select * from dataframe where field = {{input_parameter}}`.
 When you select option A, the query `select * from dataframe where field = A` is run against the cached dataframe instead of sent to the warehouse. Results will return faster since they do not need to traverse from the warehouse to Hex.
 
-## App Settings[​](#app-settings "Direct link to App Settings")
+### App Run Settings[​](#app-run-settings "Direct link to App Run Settings")
 
 If your app includes input parameters but **does not** have complex SQL logic sent to the warehouse or running on large data (> ~2M rows):
 
-* Set the [App Interaction settings](/docs/share-insights/apps/app-run-settings#interaction) to automatically rerun downstream cells.
+* Toggle on **Auto-rerun cells** in [App run settings](/docs/share-insights/apps/app-run-settings) to automatically rerun downstream cells.
 
 If your app includes a number of input parameters AND it includes complex SQL logic, large query results, or does not use chained dataframe SQL:
 
-* Set the App Interaction settings to wait for users to click a button.
+* Toggle off **Auto-rerun cells** in **App run settings** to wait for users to click a button.
 * This will prevent Hex from automatically running computationally complex queries each time a user selects a value from an input parameter.
 
 #### On this page
@@ -132,6 +132,7 @@ If your app includes a number of input parameters AND it includes complex SQL lo
   + [OAuth data sources](#oauth-data-sources)
 * [Loading an App the First Time](#loading-an-app-the-first-time)
 * [Interacting with the App](#interacting-with-the-app)
-* [Project Size](#project-size)
-* [Input Parameters](#input-parameters)
-* [App Settings](#app-settings)
+* [Performance Recommendations](#performance-recommendations)
+  + [Project Size](#project-size)
+  + [Input Parameters](#input-parameters)
+  + [App Run Settings](#app-run-settings)

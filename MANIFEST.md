@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-07-09T14:41+00:00_
+_Generated 2026-07-10T01:28+00:00_
 
-**9 sources, 5443 topics total**
+**9 sources, 5462 topics total**
 
 ## airflow
 
@@ -3408,7 +3408,7 @@ _163 topics_
 
 Upstream: <https://docs.getdbt.com/docs/>
 
-_1079 topics_
+_1098 topics_
 
 - `dbt-core/best-practices/best-practice-workflows`
 - `dbt-core/best-practices/clone-incremental-models`
@@ -3551,6 +3551,7 @@ _1079 topics_
 - `dbt-core/docs/dbt-ai/dbt-ai-faqs`
 - `dbt-core/docs/dbt-ai/integrate-mcp-claude`
 - `dbt-core/docs/dbt-ai/integrate-mcp-cursor`
+- `dbt-core/docs/dbt-ai/integrate-mcp-snowflake-cortex`
 - `dbt-core/docs/dbt-ai/integrate-mcp-vscode`
 - `dbt-core/docs/dbt-ai/mcp-available-tools`
 - `dbt-core/docs/dbt-ai/mcp-environment-variables`
@@ -4085,6 +4086,7 @@ _1079 topics_
 - `dbt-core/guides/bigquery-qs`
 - `dbt-core/guides/building-packages`
 - `dbt-core/guides/canvas-qs`
+- `dbt-core/guides/clone-jaffle-shop`
 - `dbt-core/guides/core-migration-1`
 - `dbt-core/guides/core-migration-2`
 - `dbt-core/guides/core-migration-3`
@@ -4239,9 +4241,26 @@ _1079 topics_
 - `dbt-core/reference/global-configs/about-global-configs`
 - `dbt-core/reference/global-configs/adapter-behavior-changes`
 - `dbt-core/reference/global-configs/behavior-changes`
-- `dbt-core/reference/global-configs/behavior-flag-introduction`
-- `dbt-core/reference/global-configs/behavior-flag-maturity`
-- `dbt-core/reference/global-configs/behavior-flag-removed`
+- `dbt-core/reference/global-configs/behavior-flags/allow_jinja_file_extensions`
+- `dbt-core/reference/global-configs/behavior-flags/enable_truthy_nulls_equals_macro`
+- `dbt-core/reference/global-configs/behavior-flags/latest_version_pointer_enabled_by_default`
+- `dbt-core/reference/global-configs/behavior-flags/require_all_warnings_handled_by_warn_error`
+- `dbt-core/reference/global-configs/behavior-flags/require_batched_execution_for_custom_microbatch_strategy`
+- `dbt-core/reference/global-configs/behavior-flags/require_corrected_analysis_fqns`
+- `dbt-core/reference/global-configs/behavior-flags/require_explicit_package_overrides_for_builtin_materializations`
+- `dbt-core/reference/global-configs/behavior-flags/require_generic_test_arguments_property`
+- `dbt-core/reference/global-configs/behavior-flags/require_nested_cumulative_type_params`
+- `dbt-core/reference/global-configs/behavior-flags/require_ref_searches_node_package_before_root`
+- `dbt-core/reference/global-configs/behavior-flags/require_resource_names_without_spaces`
+- `dbt-core/reference/global-configs/behavior-flags/require_source_and_semantic_model_names_without_spaces`
+- `dbt-core/reference/global-configs/behavior-flags/require_sql_header_in_test_configs`
+- `dbt-core/reference/global-configs/behavior-flags/require_unique_project_resource_names`
+- `dbt-core/reference/global-configs/behavior-flags/require_valid_schema_from_generate_schema_name`
+- `dbt-core/reference/global-configs/behavior-flags/require_yaml_configuration_for_mf_time_spines`
+- `dbt-core/reference/global-configs/behavior-flags/skip_nodes_if_on_run_start_fails`
+- `dbt-core/reference/global-configs/behavior-flags/source_freshness_run_project_hooks`
+- `dbt-core/reference/global-configs/behavior-flags/state_modified_compare_more_unrendered_values`
+- `dbt-core/reference/global-configs/behavior-flags/validate_macro_args`
 - `dbt-core/reference/global-configs/bigquery-changes`
 - `dbt-core/reference/global-configs/cache`
 - `dbt-core/reference/global-configs/command-line-options`
