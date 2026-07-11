@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-07-11T01:20+00:00_
+_Generated 2026-07-11T07:44+00:00_
 
-**9 sources, 5462 topics total**
+**9 sources, 5464 topics total**
 
 ## airflow
 
@@ -5050,7 +5050,7 @@ _369 topics_
 
 Upstream: <https://openai.github.io/openai-agents-python/>
 
-_381 topics_
+_382 topics_
 
 - `openai-agents/agents`
 - `openai-agents/config`
@@ -5161,6 +5161,7 @@ _381 topics_
 - `openai-agents/ref/extensions/experimental/codex/thread`
 - `openai-agents/ref/extensions/experimental/codex/thread_options`
 - `openai-agents/ref/extensions/experimental/codex/turn_options`
+- `openai-agents/ref/extensions/experimental/hosted_multi_agent/model`
 - `openai-agents/ref/extensions/handoff_filters`
 - `openai-agents/ref/extensions/handoff_prompt`
 - `openai-agents/ref/extensions/litellm`
@@ -5438,7 +5439,7 @@ _381 topics_
 
 Upstream: <https://docs.pydantic.dev/>
 
-_88 topics_
+_89 topics_
 
 - `pydantic/api/aliases`
 - `pydantic/api/annotated_handlers`
@@ -5497,6 +5498,7 @@ _88 topics_
 - `pydantic/concepts/validators`
 - `pydantic/contributing`
 - `pydantic/errors/errors`
+- `pydantic/errors/troubleshooting`
 - `pydantic/errors/usage_errors`
 - `pydantic/errors/validation_errors`
 - `pydantic/examples/custom_validators`
