@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-07-11T07:44+00:00_
+_Generated 2026-07-11T18:51+00:00_
 
-**9 sources, 5464 topics total**
+**9 sources, 5466 topics total**
 
 ## airflow
 
@@ -3238,7 +3238,7 @@ _1506 topics_
 
 Upstream: <https://code.claude.com/docs/en/>
 
-_163 topics_
+_165 topics_
 
 - `claude-code/admin-setup`
 - `claude-code/advisor`
@@ -3400,6 +3400,8 @@ _163 topics_
 - `claude-code/whats-new/2026-w24`
 - `claude-code/whats-new/2026-w25`
 - `claude-code/whats-new/2026-w26`
+- `claude-code/whats-new/2026-w27`
+- `claude-code/whats-new/2026-w28`
 - `claude-code/workflows`
 - `claude-code/worktrees`
 - `claude-code/zero-data-retention`
