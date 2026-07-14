@@ -107,6 +107,8 @@ The **Model & Effort Picker** is an optional control in the Threads prompt bar t
 
 By default, Threads runs on **Auto**, which lets Hex choose the best model for your question. Auto is the right choice for most day-to-day analytics questions. Your model selection is stored per thread, so reopening a thread restores your last-used model and effort. New threads always start on Auto.
 
+Admins can also set a default model for the whole workspace from **Settings > AI & Agents**. This default model will apply across all agent surfaces (including Threads, Notebook Agent, Chat with App) and entrypoints (including Slack, MCP, CLI).
+
 If you specify a model, that model will only be applied to the main agent. Model selection does not apply to subagents that are built for purpose specific tasks such as visualizations.
 
 ### Effort levels[​](#effort-levels "Direct link to Effort levels")
@@ -114,6 +116,8 @@ If you specify a model, that model will only be applied to the main agent. Model
 Effort is only available when you've selected a specific model (not on Auto). The effort levels available in Hex map directly to the effort levels exposed by the underlying AI provider for that model. For guidance on how each level behaves and when to use it, refer to the provider's documentation: [Anthropic effort levels](https://platform.claude.com/docs/en/build-with-claude/effort#effort-levels) and [OpenAI reasoning effort](https://developers.openai.com/api/docs/guides/reasoning#reasoning-effort).
 
 For information on how model and effort choices affect credit consumption, see [Credits](/docs/administration/credits).
+
+Check out our [Model picker best practices](/tutorials/ai-best-practices/model-picker-best-practices) for more on making the most of the Model & Effort Picker.
 
 ## Uploading files[​](#uploading-files "Direct link to Uploading files")
 

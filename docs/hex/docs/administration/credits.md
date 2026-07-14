@@ -12,7 +12,7 @@ To ensure everyone can use AI, Hex awards monthly credit grants to Editor and Ex
 
 info
 
-* Customers with annual contracts who wish to purchase add-on credits can contact [[email protected]](/cdn-cgi/l/email-protection#4132202d2432012924396f35242229) to update their contract.
+* Customers with annual contracts who wish to purchase add-on credits can contact [[email protected]](/cdn-cgi/l/email-protection#cbb8aaa7aeb88ba3aeb3e5bfaea8a3) to update their contract.
 
 ## Credit Consumption[​](#credit-consumption "Direct link to Credit Consumption")
 
@@ -36,9 +36,13 @@ Not all AI features consume credits. For example, title generation is included i
 
 ### Monthly credit grants[​](#monthly-credit-grants "Direct link to Monthly credit grants")
 
+info
+
+* Monthly per-seat credit grants apply to standard seat-based subscriptions, and do not necessarily apply to custom Enterprise contract structures.
+
 To ensure everyone can try and use Hex’s AI features, users on paid seats are awarded a monthly credit grant. Monthly per-seat credit grants are assigned to the individual user, reset each billing cycle, and can’t be transferred, shared, or rolled over.
 
-You can view the current balance of your monthly credit grant by clicking into the workspace dropdown, located in top left corner your Hex workspace's homepage.
+You can view the current balance of your monthly credit grant in the user meter by clicking into the workspace dropdown, located in top left corner your Hex workspace's homepage.
 
 Monthly credit grants vary by plan and seat type:
 
@@ -51,11 +55,6 @@ Monthly credit grants vary by plan and seat type:
 | Enterprise | Explorer | 10 credits/mo |
 
 Once you’ve used your monthly credit grant, you can draw additional credits from the [workspace credit pool](#workspace-credit-pool), if available.
-
-info
-
-* Monthly per-seat credit grants are currently enforced for most customers.
-* Monthly per-seat credit grants apply to standard seat-based subscriptions, and do not necessarily apply to custom Enterprise contract structures.
 
 Admins can manage credits and view usage in **Settings > Billing & credits**.
 
@@ -73,28 +72,68 @@ Add-on credits go to the shared workspace credit pool, which Admins can view in 
 
 The shared workspace credit pool is your balance of add-on credits. By default, any user who depletes their monthly per-seat credit grant can draw from the shared workspace credit pool.
 
-### Auto top-ups[​](#auto-top-ups "Direct link to Auto top-ups")
+## Auto top-ups[​](#auto-top-ups "Direct link to Auto top-ups")
 
 You can think of auto top-ups as "pay-as-you-go" credits. When auto top-ups are enabled, your workspace credit pool will automatically refill when needed.
 
-#### Auto top-up mechanics[​](#auto-top-up-mechanics "Direct link to Auto top-up mechanics")
+### Mechanics[​](#mechanics "Direct link to Mechanics")
 
 * Enabling auto top-ups will automatically purchase a 50-credit pack ($25) for the workspace pool when the balance falls below 25 credits.
   + Customers paying by credit card will be charged immediately for auto top-ups.
   + Customers with alternate payment methods will be charged at the end of their true-up period.
 * Credits purchased via auto top-up rollover to the next monthly billing cycle.
 
-#### Auto top-up spend limits[​](#auto-top-up-spend-limits "Direct link to Auto top-up spend limits")
+### Spend limits[​](#spend-limits "Direct link to Spend limits")
 
 Admins can set a monthly limit on auto top-up purchases to help stay within budget.
 
-* From **Settings > Billing & credits > Credits**, click "Enable auto top-ups" (or "Edit" if auto top-ups are already enabled).
+* From **Settings > Billing & credits > Credits**, click **Enable auto top-ups** (or **Edit** if auto top-ups are already enabled).
 * Set a custom spend limit, or choose from a preset option.
 * Click "Save".
 
 Auto top-up spend limits are anchored to your monthly billing cycle and will go into effect immediately once saved.
 
+## Credit usage controls[​](#credit-usage-controls "Direct link to Credit usage controls")
+
+Admins can control how many add-on credits each user is allowed by applying a credit allocation to a User, Group, or Workspace.
+
+info
+
+* Credit allocations will always respect your workspace credit pool settings. Regardless of their allocation, users will be limited to the auto top-up [spend limit](#spend-limits) or to the workspace credit pool balance if [auto top-ups](#auto-top-ups) are disabled.
+* Credit allocations are respected in order of User > Group (highest wins) > Workspace Default
+
+Manage credit allocations from **Settings > Billing & credits > Credit usage controls**. The Workspace Default allocation is always active, and all active allocations can be adjusted via the three dot (...) menu to the right.
+
+To create a new User or Group credit allocation, click `+ Add allocation` and choose from Unlimited, Custom amount, or No access.
+
+## Credit usage visibility[​](#credit-usage-visibility "Direct link to Credit usage visibility")
+
+All Hex users can view their own credit balance, and Admins and Managers have additional workspace-wide visibility.
+
+### Personal credit usage visibility[​](#personal-credit-usage-visibility "Direct link to Personal credit usage visibility")
+
+**User meter:** Users can view their current cycle credit balance by clicking the workspace drop-down menu in the top left.
+
+**Agent message credit receipts:** Users can view message-level credit receipts from the three-dots menu below the agent's response.
+
+**80% usage warning**: Users will be warned if they exceed 80% of their monthly limit.
+
+**Out of credits warning**: Users will be warned when they are out of credits.
+
+### Admin credit usage visibility[​](#admin-credit-usage-visibility "Direct link to Admin credit usage visibility")
+
+Admins can view workspace-wide credit usage from **Settings > Billing & credits > Credits**
+
+* **Usage log:** review current and historical cycle credit consumption
+* **Workspace credit pool:** view shared add-on credit balance
+
+**Admins and Managers** can view thread-level credit usage in the [Context Studio](/docs/agent-management/context-studio).
+
 ## FAQs[​](#faqs "Direct link to FAQs")
+
+### What happens when I run out of credits?[​](#what-happens-when-i-run-out-of-credits "Direct link to What happens when I run out of credits?")
+
+Once users consume their monthly grant and add-on credits, they will be blocked from submitting additional agent prompts. If an agent run is in progress when a user runs out of credits, the agent run will execute to completion — after this run completes, all subsequent agent chats will be blocked. Any spillover credits consumed in the final agent run will be billed for workspaces with add-on credits enabled, and exempted for workspaces with add-on credits disabled.
 
 ### Do credits roll over?[​](#do-credits-roll-over "Direct link to Do credits roll over?")
 
@@ -102,11 +141,18 @@ Auto top-up spend limits are anchored to your monthly billing cycle and will go 
 * Add-on credits purchased via [auto top-up](#auto-top-ups) rollover to the next monthly billing cycle.
 * Committed add-on credits purchased for annual contracts expire at the end of the contract cycle.
 
-### Can I choose which model powers my requests?[​](#can-i-choose-which-model-powers-my-requests "Direct link to Can I choose which model powers my requests?")
+### How can I manage credit efficiency?[​](#how-can-i-manage-credit-efficiency "Direct link to How can I manage credit efficiency?")
 
-Yes - the Model & Effort Picker lets you control which underlying model runs your request and how much reasoning depth it applies. By default, requests run on **Auto**, which is appropriate for most questions and keeps credit consumption predictable.
+Hex provides several tools and resources to help teams optimize their credit usage:
 
-If you select a specific model, you can also set an effort level — higher effort levels will generally use more credits. Learn more about [choosing a model and effort](/docs/explore-data/threads#choosing-a-model-and-effort).
+* **[Credit efficiency tactics](https://hex.tech/blog/tactics-for-credit-efficiency-in-hex/)** — Learn about agent optimization strategies from our team
+* **[Context Studio](/docs/agent-management/context-studio)** — Refine workspace context
+* **[Model & Effort Picker](/docs/explore-data/threads#choosing-a-model-and-effort)** — Adjust model and effort selection
+* **[AI best practices](/tutorials/ai-best-practices)** — Explore recommended patterns for using AI in Hex
+
+## How does BYOK work with credits?[​](#how-does-byok-work-with-credits "Direct link to How does BYOK work with credits?")
+
+On the Hex Enterprise plan, Admins can bring your own key ([BYOK](/docs/trust/ai-data-privacy#bring-your-own-key-byok)) to route all LLM usage in Hex through your model provider API key. Since AI usage in Hex will not consume credits with BYOK enabled, AI usage visibility will need to be accessed through your external model provider.
 
 #### On this page
 
@@ -115,7 +161,15 @@ If you select a specific model, you can also set an effort level — higher effo
   + [Monthly credit grants](#monthly-credit-grants)
   + [Add-on credits](#add-on-credits)
   + [Workspace credit pool](#workspace-credit-pool)
-  + [Auto top-ups](#auto-top-ups)
+* [Auto top-ups](#auto-top-ups)
+  + [Mechanics](#mechanics)
+  + [Spend limits](#spend-limits)
+* [Credit usage controls](#credit-usage-controls)
+* [Credit usage visibility](#credit-usage-visibility)
+  + [Personal credit usage visibility](#personal-credit-usage-visibility)
+  + [Admin credit usage visibility](#admin-credit-usage-visibility)
 * [FAQs](#faqs)
+  + [What happens when I run out of credits?](#what-happens-when-i-run-out-of-credits)
   + [Do credits roll over?](#do-credits-roll-over)
-  + [Can I choose which model powers my requests?](#can-i-choose-which-model-powers-my-requests)
+  + [How can I manage credit efficiency?](#how-can-i-manage-credit-efficiency)
+* [How does BYOK work with credits?](#how-does-byok-work-with-credits)

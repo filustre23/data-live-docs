@@ -23,6 +23,8 @@ From the Dashboard, you can:
 * Review patterns in warnings and user feedback
 * Filter conversations to narrow in on specific areas of interest
 
+Contents of [Sensitive Threads](/docs/explore-data/threads#sensitive-threads) are hidden in the Context Studio — Admins can see that the thread exists, along with the creator and timestamp, but not the messages themselves. Workspace admins can still access the full contents of Sensitive Threads if they have a direct link to the Thread.
+
 ### Filters[​](#filters "Direct link to Filters")
 
 Use filters to narrow the Dashboard to specific conversations or usage patterns. You can filter by:
@@ -79,6 +81,24 @@ Warnings are important signals for improving workspace context. In a single conv
 
 Each warning includes suggested context updates to help improve future agent responses. Repeated warning patterns can also contribute to [Suggestions](/docs/agent-management/suggestions), which groups recurring issues into concrete changes you can review and apply.
 
+## Export[​](#export "Direct link to Export")
+
+Data from the Observability Dashboard and Thread Inspector can be exported programmatically via the [API](/docs/api-integrations/api/overview) or [CLI](/docs/api-integrations/cli).
+
+| Interface | Key References |
+| --- | --- |
+| API | [`GetThread`](/docs/api-integrations/api/reference#operation/GetThread), [`ListThreads`](/docs/api-integrations/api/reference#operation/ListThreads), [`GetThreadMessages`](/docs/api-integrations/api/reference#operation/GetThreadMessages), [`ListTopics`](/docs/api-integrations/api/reference#operation/ListTopics) |
+| CLI | `hex thread get <thread_id>`, `hex thread list`, `hex thread messages`, `hex context topic list` |
+
+Workspace Admins can access every non-[Sensitive](/docs/explore-data/threads#sensitive-threads) Thread — Threads marked Sensitive are returned with their title redacted. Managers receive Threads they created plus Threads that have been shared with them.
+
+info
+
+Credit consumption data is available in the Context Studio, providing insight for context curation guidance. Note that this is not a billing source of truth — the [**Settings > Billing and credits**](/docs/administration/credits) page should be used as the authoritative source for credit consumption. Differences between credit usage information in the Context Studio vs **Billing and credits** settings include:
+
+* Date fields in the Context Studio are based on Thread creation date. Credits consumed by messages added later are reflected under the original Thread-creation date in Context Studio, but may appear in a later billing cycle in **Billing and credits**
+* Deleted Threads do not appear in the Context Studio. Thus, Context Studio credit totals may be missing deleted Thread consumption that is accounted for in **Billing and credits**
+
 ## Next steps[​](#next-steps "Direct link to Next steps")
 
 Use what you learn from agent conversations to review and refine the context that shapes future responses.
@@ -94,4 +114,5 @@ Use what you learn from agent conversations to review and refine the context tha
   + [Overview](#overview)
   + [Timeline](#timeline)
   + [Warnings](#warnings)
+* [Export](#export)
 * [Next steps](#next-steps)

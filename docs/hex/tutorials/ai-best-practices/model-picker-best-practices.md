@@ -24,7 +24,7 @@ To optimize credits and effort, Hex defaults to **Auto**, which automatically se
 
 info
 
-Admins can also set a default model for the whole workspace, or restrict which models show up in the picker, from **Settings > AI & Agents**.
+Admins can also set a default model for the whole workspace from **Settings > AI & Agents**.
 
 ## Choosing the right model for your task[​](#choosing-the-right-model-for-your-task "Direct link to Choosing the right model for your task")
 

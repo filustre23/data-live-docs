@@ -84,6 +84,7 @@ Initially designed to run published Hex projects with specific inputs—enabling
 * **Groups** and access controls
 * **Collections** of projects
 * **Data connections** and credentials (for [Tier 1](/docs/connect-to-data/data-connections/data-connections-introduction#tier-1) connectors)
+* **Threads** and their metadata
 
 This expanded API surface allows teams to automate administration, enforce governance, and integrate Hex more deeply into existing systems. You can find the full reference documentation for the Hex API [here](/docs/api-integrations/api/reference).
 
@@ -1134,7 +1135,7 @@ update_cache=True
 project_run = api_client.run_project(project_id=PROJECT_ID, run_project_request_body=input_request_body)
 ```
 
-### Get a run status[ ​](#get-a-run-status "Direct link to Get a run status")
+### Get a run status[​](#get-a-run-status "Direct link to Get a run status")
 
 The status of a run can be viewed using the `run_status_url` as part of the returned object from the `run_project` method. The `get_run_status` method can also be used to programmatically check the status of a run:
 
@@ -1193,7 +1194,7 @@ A 429 status code indicates that you have hit the request rate limit. See the se
 
 ### 500 Internal server error[​](#500-internal-server-error "Direct link to 500 Internal server error")
 
-A 500 status code indicates an error with the Hex application. Please contact [Hex support](/cdn-cgi/l/email-protection#a5d6d0d5d5cad7d1e5cdc0dd8bd1c0c6cd) for help troubleshooting.
+A 500 status code indicates an error with the Hex application. Please contact [Hex support](/cdn-cgi/l/email-protection#592a2c2929362b2d19313c21772d3c3a31) for help troubleshooting.
 
 ### 503 Service Unavailable[​](#503-service-unavailable "Direct link to 503 Service Unavailable")
 
