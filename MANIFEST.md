@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-07-14T07:51+00:00_
+_Generated 2026-07-14T19:08+00:00_
 
-**9 sources, 5469 topics total**
+**9 sources, 5476 topics total**
 
 ## airflow
 
@@ -3412,7 +3412,7 @@ _167 topics_
 
 Upstream: <https://docs.getdbt.com/docs/>
 
-_1099 topics_
+_1106 topics_
 
 - `dbt-core/best-practices/best-practice-workflows`
 - `dbt-core/best-practices/clone-incremental-models`
@@ -3815,6 +3815,12 @@ _1099 topics_
 - `dbt-core/docs/platform/account-settings`
 - `dbt-core/docs/platform/billing`
 - `dbt-core/docs/platform/billing-faqs`
+- `dbt-core/docs/platform/billing/dbt-ai-usage`
+- `dbt-core/docs/platform/billing/dbt-state-usage`
+- `dbt-core/docs/platform/billing/how-pricing-works`
+- `dbt-core/docs/platform/billing/managing-usage`
+- `dbt-core/docs/platform/billing/optimize-costs`
+- `dbt-core/docs/platform/billing/plans-and-billing`
 - `dbt-core/docs/platform/build-canvas-copilot`
 - `dbt-core/docs/platform/canvas`
 - `dbt-core/docs/platform/canvas-interface`
@@ -3908,6 +3914,7 @@ _1099 topics_
 - `dbt-core/docs/platform/studio-ide/keyboard-shortcuts`
 - `dbt-core/docs/platform/studio-ide/lint-format`
 - `dbt-core/docs/platform/use-canvas`
+- `dbt-core/docs/platform/wizard-byok-platform`
 - `dbt-core/docs/platform/wizard-home`
 - `dbt-core/docs/platform/wizard-overview`
 - `dbt-core/docs/platform/wizard-platform`
