@@ -8,7 +8,7 @@ info
 
 * Generative apps are available in **Beta** on all [plans](https://hex.tech/pricing/). Paid plans include monthly per-seat [credit grants](/docs/administration/credits) that can be used towards Hex AI features.
 * Users need [Can Edit](/docs/collaborate/sharing-and-permissions/project-sharing#project-permissions) or higher permissions on a project to create a Generative app.
-* To share suggestions for new features or improvements, reach out to [[email protected]](/cdn-cgi/l/email-protection#6615131616091412260e031e481203050e).
+* To share suggestions for new features or improvements, reach out to [[email protected]](/cdn-cgi/l/email-protection#dba8aeababb4a9af9bb3bea3f5afbeb8b3).
 
 Generative apps give you a fully customized, code-generated app experience where the Hex agent builds your UI, visuals, and theming from a plain-language description. Unlike [Classic apps](/docs/share-insights/apps/apps-introduction), which use a fixed grid of standard components, Generative apps produce flexible, web-style interfaces with custom layout, styling, and components tailored to what you're trying to build. This gives you more expressive power when a standard dashboard layout isn't enough.
 
@@ -100,6 +100,25 @@ Just like with our Classic apps, the best way to share your Generative app with 
 
 You can set up [scheduled runs](/docs/share-insights/scheduled-runs) to run your Generative app on a defined schedule. Scheduled runs can only be configured on an already published app. Use schedules to [update published results](/docs/share-insights/scheduled-runs#update-published-results) or send [app notifications](/docs/share-insights/app-notifications) - however, Generative apps do not currently support app notifications with an attached screenshot. Configure schedules from the **Scheduled runs** tab in the Notebook sidebar, or from **Scheduled runs & Notifications** menu in the published app.
 
+### CSV downloads[​](#csv-downloads "Direct link to CSV downloads")
+
+info
+
+Generative apps created before July 7, 2026 do not have this feature enabled and need to be manually upgraded. See [Upgrading existing apps](#upgrading-existing-apps) below.
+
+In a Generative app, you can download the underlying data from any chart or table as a CSV file (up to 100MB per download). Hover over the chart or table, select **...** at the bottom right, then select **Download CSV**.
+
+The CSV reflects the data exactly as it's displayed, so you download the data as you see it in your app. To enable this, **Download and copy CSVs from tables** must be turned on in your [workspace settings](/docs/administration/workspace_settings/workspace-security#download-and-copy-csvs-from-tables) for the download option to appear in your Generative app.
+
+#### Upgrading existing apps[​](#upgrading-existing-apps "Direct link to Upgrading existing apps")
+
+Apps that were published or created before July 7, 2026 don't have this feature enabled and need a one-time upgrade. To upgrade:
+
+1. Open the app builder and prompt the Hex agent: "Upgrade the charts and tables in this generative app to include 'Download CSV' functionality."
+2. Once the agent confirms the upgrade was successful, publish the project. Your charts and tables will now include the **Download CSV** option.
+
+[](/assets/medias/upgrade-download-csv-1289c4d5d41add2cc263e108f13cc825.mp4)
+
 ## Switch between Classic and Generative apps[​](#switch-between-classic-and-generative-apps "Direct link to Switch between Classic and Generative apps")
 
 You can switch a project between Classic and Generative app types from the **App type** menu in the App builder. Switching between app types won't affect your work in either view or the underlying cells in the Notebook. Only one version of your project can be published at a time - you cannot have a single project with both a published Classic and Generative app.
@@ -125,7 +144,6 @@ While Generative apps are in Beta, some Hex features are not yet supported. Thes
 * [App notifications with screenshots](/docs/share-insights/app-notifications#attaching-screenshots)
 * [Saved views](/docs/share-insights/apps/saved-views)
 * [Export as PDF](/docs/share-insights/apps/export-as-pdf)
-* [CSV downloads](/docs/administration/workspace_settings/workspace-security#download-and-copy-csvs-from-tables)
 * [Google Sheets export](/docs/administration/workspace_settings/workspace-security#send-data-to-google-sheets)
 * [Published app comments](/docs/collaborate/comments#published-app-comments-vs-notebook-comments)
 * [Chat with App](/docs/explore-data/chat-with-app)
@@ -143,6 +161,7 @@ While Generative apps are in Beta, some Hex features are not yet supported. Thes
   + [Best practices](#best-practices)
 * [Publish and share your Generative app](#publish-and-share-your-generative-app)
   + [Scheduled runs and notifications](#scheduled-runs-and-notifications)
+  + [CSV downloads](#csv-downloads)
 * [Switch between Classic and Generative apps](#switch-between-classic-and-generative-apps)
 * [Security FAQ](#security-faq)
   + [How is the agent's generated code isolated?](#how-is-the-agents-generated-code-isolated)

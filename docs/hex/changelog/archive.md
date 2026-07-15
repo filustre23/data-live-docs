@@ -19,6 +19,7 @@
 * [June 16 - That question you keep asking… can just run itself](/changelog/2026-06-16)
 * [June 25 - Hex in Figma, IAM role support for AWS, and schema refresh history!](/changelog/2026-06-25)
 * [July 8 - Two new models and more controls over generative apps](/changelog/2026-07-08)
+* [July 14 - More control over credits, thread metadata, and role requests](/changelog/2026-07-14)
 
 ### 2025[​](#2025 "Direct link to 2025")
 

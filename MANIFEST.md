@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-07-14T19:08+00:00_
+_Generated 2026-07-15T07:48+00:00_
 
-**9 sources, 5476 topics total**
+**9 sources, 5493 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_1702 topics_
+_1718 topics_
 
 - `anthropic-sdk/agents-and-tools/agent-skills/best-practices`
 - `anthropic-sdk/agents-and-tools/agent-skills/enterprise`
@@ -128,6 +128,21 @@ _1702 topics_
 - `anthropic-sdk/api/admin/organizations/me`
 - `anthropic-sdk/api/admin/rate_limits`
 - `anthropic-sdk/api/admin/rate_limits/list`
+- `anthropic-sdk/api/admin/rbac_groups`
+- `anthropic-sdk/api/admin/rbac_groups/create`
+- `anthropic-sdk/api/admin/rbac_groups/delete`
+- `anthropic-sdk/api/admin/rbac_groups/list`
+- `anthropic-sdk/api/admin/rbac_groups/members`
+- `anthropic-sdk/api/admin/rbac_groups/members/create`
+- `anthropic-sdk/api/admin/rbac_groups/members/delete`
+- `anthropic-sdk/api/admin/rbac_groups/members/list`
+- `anthropic-sdk/api/admin/rbac_groups/retrieve`
+- `anthropic-sdk/api/admin/rbac_groups/update`
+- `anthropic-sdk/api/admin/rbac_roles`
+- `anthropic-sdk/api/admin/rbac_roles/list`
+- `anthropic-sdk/api/admin/rbac_roles/permissions`
+- `anthropic-sdk/api/admin/rbac_roles/permissions/list`
+- `anthropic-sdk/api/admin/rbac_roles/retrieve`
 - `anthropic-sdk/api/admin/service_accounts`
 - `anthropic-sdk/api/admin/service_accounts/archive`
 - `anthropic-sdk/api/admin/service_accounts/create`
@@ -1683,6 +1698,7 @@ _1702 topics_
 - `anthropic-sdk/manage-claude/rate-limits-api`
 - `anthropic-sdk/manage-claude/spend-limits-api`
 - `anthropic-sdk/manage-claude/usage-cost-api`
+- `anthropic-sdk/manage-claude/user-management`
 - `anthropic-sdk/manage-claude/wif-admin-api`
 - `anthropic-sdk/manage-claude/wif-providers/aws`
 - `anthropic-sdk/manage-claude/wif-providers/azure`
@@ -1704,7 +1720,7 @@ _1702 topics_
 - `anthropic-sdk/managed-agents/github`
 - `anthropic-sdk/managed-agents/mcp-connector`
 - `anthropic-sdk/managed-agents/memory`
-- `anthropic-sdk/managed-agents/multi-agent`
+- `anthropic-sdk/managed-agents/multiagent-orchestration`
 - `anthropic-sdk/managed-agents/onboarding`
 - `anthropic-sdk/managed-agents/overview`
 - `anthropic-sdk/managed-agents/permission-policies`
@@ -4686,7 +4702,7 @@ _154 topics_
 
 Upstream: <https://learn.hex.tech/>
 
-_369 topics_
+_370 topics_
 
 - `hex/changelog`
 - `hex/changelog/2020-12-17`
@@ -4795,6 +4811,7 @@ _369 topics_
 - `hex/changelog/2026-06-16`
 - `hex/changelog/2026-06-25`
 - `hex/changelog/2026-07-08`
+- `hex/changelog/2026-07-14`
 - `hex/changelog/archive`
 - `hex/changelog/page/10`
 - `hex/changelog/page/11`
