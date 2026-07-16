@@ -30,6 +30,17 @@ Manage your notification preferences for different Hex interactions.
 
 All email notifications are on by default. You can authenticate with your Slack account in order to customize notification preferences in Slack.
 
+### Desktop notifications[​](#desktop-notifications "Direct link to Desktop notifications")
+
+tip
+
+Desktop notifications can be blocked by browser or operating system settings. If notifications aren't appearing:
+
+* **Browser:** Check your browser's site settings for Hex
+* **Operating system:** Make sure notifications are enabled for your browser in your system settings.
+
+Under the desktop notification section, you can enable agent chat response notifications. When enabled, you'll receive a push notification when the agent completes a response or needs your input to proceed in an unfocused tab.
+
 ## API keys[​](#api-keys "Direct link to API keys")
 
 Manage the tokens you have generated to access the Hex API. This section is only visible if your Admin has enabled [API access](/docs/administration/workspace_settings/workspace-security#enable-api-access).
@@ -43,4 +54,5 @@ For more information, view Hex's [API documentation](/docs/api-integrations/api/
   + [Agent preferences](#agent-preferences)
   + [Theme](#theme)
 * [Notifications](#notifications)
+  + [Desktop notifications](#desktop-notifications)
 * [API keys](#api-keys)
