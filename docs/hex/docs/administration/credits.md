@@ -12,7 +12,7 @@ To ensure everyone can use AI, Hex awards monthly credit grants to Editor and Ex
 
 info
 
-* Customers with annual contracts who wish to purchase add-on credits can contact [[email protected]](/cdn-cgi/l/email-protection#9be8faf7fee8dbf3fee3b5effef8f3) to update their contract.
+* Customers with annual contracts who wish to purchase add-on credits can contact [[email protected]](/cdn-cgi/l/email-protection#6112000d0412210904194f15040209) to update their contract.
 
 ## Credit Consumption[​](#credit-consumption "Direct link to Credit Consumption")
 
@@ -150,7 +150,7 @@ Hex provides several tools and resources to help teams optimize their credit usa
 * **[Model & Effort Picker](/docs/explore-data/threads#choosing-a-model-and-effort)** — Adjust model and effort selection
 * **[AI best practices](/tutorials/ai-best-practices)** — Explore recommended patterns for using AI in Hex
 
-## How does BYOK work with credits?[​](#how-does-byok-work-with-credits "Direct link to How does BYOK work with credits?")
+### How does BYOK work with credits?[​](#how-does-byok-work-with-credits "Direct link to How does BYOK work with credits?")
 
 On the Hex Enterprise plan, Admins can bring your own key ([BYOK](/docs/trust/ai-data-privacy#bring-your-own-key-byok)) to route all LLM usage in Hex through your model provider API key. Since AI usage in Hex will not consume credits with BYOK enabled, AI usage visibility will need to be accessed through your external model provider.
 
@@ -172,4 +172,4 @@ On the Hex Enterprise plan, Admins can bring your own key ([BYOK](/docs/trust/ai
   + [What happens when I run out of credits?](#what-happens-when-i-run-out-of-credits)
   + [Do credits roll over?](#do-credits-roll-over)
   + [How can I manage credit efficiency?](#how-can-i-manage-credit-efficiency)
-* [How does BYOK work with credits?](#how-does-byok-work-with-credits)
+  + [How does BYOK work with credits?](#how-does-byok-work-with-credits)

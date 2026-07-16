@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-07-15T13:21+00:00_
+_Generated 2026-07-16T01:01+00:00_
 
-**9 sources, 5493 topics total**
+**9 sources, 5494 topics total**
 
 ## airflow
 
@@ -3428,7 +3428,7 @@ _167 topics_
 
 Upstream: <https://docs.getdbt.com/docs/>
 
-_1106 topics_
+_1107 topics_
 
 - `dbt-core/best-practices/best-practice-workflows`
 - `dbt-core/best-practices/clone-incremental-models`
@@ -3805,6 +3805,7 @@ _1106 topics_
 - `dbt-core/docs/mesh/iceberg/bigquery-iceberg-support`
 - `dbt-core/docs/mesh/iceberg/databricks-iceberg-support`
 - `dbt-core/docs/mesh/iceberg/snowflake-iceberg-support`
+- `dbt-core/docs/optimize-builds`
 - `dbt-core/docs/platform-integrations/avail-sl-integrations`
 - `dbt-core/docs/platform-integrations/downstream-exposures`
 - `dbt-core/docs/platform-integrations/downstream-exposures-tableau`
