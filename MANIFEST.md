@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-07-16T13:27+00:00_
+_Generated 2026-07-17T01:01+00:00_
 
-**9 sources, 5494 topics total**
+**9 sources, 5429 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_1718 topics_
+_1719 topics_
 
 - `anthropic-sdk/agents-and-tools/agent-skills/best-practices`
 - `anthropic-sdk/agents-and-tools/agent-skills/enterprise`
@@ -1720,6 +1720,7 @@ _1718 topics_
 - `anthropic-sdk/managed-agents/github`
 - `anthropic-sdk/managed-agents/mcp-connector`
 - `anthropic-sdk/managed-agents/memory`
+- `anthropic-sdk/managed-agents/migration`
 - `anthropic-sdk/managed-agents/multiagent-orchestration`
 - `anthropic-sdk/managed-agents/onboarding`
 - `anthropic-sdk/managed-agents/overview`
@@ -3254,7 +3255,7 @@ _1506 topics_
 
 Upstream: <https://code.claude.com/docs/en/>
 
-_167 topics_
+_101 topics_
 
 - `claude-code/accessibility`
 - `claude-code/admin-setup`
@@ -3319,6 +3320,7 @@ _167 topics_
 - `claude-code/communications-kit`
 - `claude-code/computer-use`
 - `claude-code/context-window`
+- `claude-code/corporate-launcher`
 - `claude-code/costs`
 - `claude-code/data-usage`
 - `claude-code/debug-your-config`
@@ -3356,73 +3358,6 @@ _167 topics_
 - `claude-code/llm-gateway-connect`
 - `claude-code/llm-gateway-protocol`
 - `claude-code/llm-gateway-rollout`
-- `claude-code/managed-mcp`
-- `claude-code/mcp`
-- `claude-code/mcp-quickstart`
-- `claude-code/memory`
-- `claude-code/microsoft-foundry`
-- `claude-code/model-config`
-- `claude-code/monitoring-usage`
-- `claude-code/network-config`
-- `claude-code/output-styles`
-- `claude-code/overview`
-- `claude-code/permission-modes`
-- `claude-code/permissions`
-- `claude-code/platforms`
-- `claude-code/plugin-dependencies`
-- `claude-code/plugin-hints`
-- `claude-code/plugin-marketplaces`
-- `claude-code/plugin-relevance`
-- `claude-code/plugins`
-- `claude-code/plugins-reference`
-- `claude-code/prompt-caching`
-- `claude-code/prompt-library`
-- `claude-code/quickstart`
-- `claude-code/remote-control`
-- `claude-code/routines`
-- `claude-code/sandbox-environments`
-- `claude-code/sandboxing`
-- `claude-code/scheduled-tasks`
-- `claude-code/security`
-- `claude-code/security-guidance`
-- `claude-code/server-managed-settings`
-- `claude-code/sessions`
-- `claude-code/settings`
-- `claude-code/setup`
-- `claude-code/skills`
-- `claude-code/slack`
-- `claude-code/statusline`
-- `claude-code/sub-agents`
-- `claude-code/terminal-config`
-- `claude-code/third-party-integrations`
-- `claude-code/tools-reference`
-- `claude-code/troubleshoot-install`
-- `claude-code/troubleshooting`
-- `claude-code/ultraplan`
-- `claude-code/ultrareview`
-- `claude-code/voice-dictation`
-- `claude-code/vs-code`
-- `claude-code/web-quickstart`
-- `claude-code/whats-new`
-- `claude-code/whats-new/2026-w13`
-- `claude-code/whats-new/2026-w14`
-- `claude-code/whats-new/2026-w15`
-- `claude-code/whats-new/2026-w16`
-- `claude-code/whats-new/2026-w17`
-- `claude-code/whats-new/2026-w18`
-- `claude-code/whats-new/2026-w19`
-- `claude-code/whats-new/2026-w20`
-- `claude-code/whats-new/2026-w21`
-- `claude-code/whats-new/2026-w22`
-- `claude-code/whats-new/2026-w23`
-- `claude-code/whats-new/2026-w24`
-- `claude-code/whats-new/2026-w25`
-- `claude-code/whats-new/2026-w26`
-- `claude-code/whats-new/2026-w27`
-- `claude-code/whats-new/2026-w28`
-- `claude-code/workflows`
-- `claude-code/worktrees`
-- `claude-code/zero-data-retention`
 
 ## dbt-core
 
