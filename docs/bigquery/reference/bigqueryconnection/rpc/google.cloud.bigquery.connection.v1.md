@@ -220,7 +220,3 @@ Remote endpoint specification.
 | --- | --- |
 | Union field `endpoint`.  `endpoint` can be only one of the following: | |
 | `host_port` | `string`  Host and port in a format of `hostname:port` as defined in <https://www.ietf.org/rfc/rfc3986.html#section-3.2.2> and <https://www.ietf.org/rfc/rfc3986.html#section-3.2.3>. |
-
-## Network
-
-Network related configuration.

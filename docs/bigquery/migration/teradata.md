@@ -44,10 +44,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
   **Roles required to enable APIs**
 
-  To enable APIs, you need the Service Usage Admin IAM
-  role (`roles/serviceusage.serviceUsageAdmin`), which
-  contains the `serviceusage.services.enable` permission. [Learn how to grant
-  roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw).
+  To enable APIs, you need the `serviceusage.services.enable` permission. If you
+  created the project, then you likely already have this permission through the
+  Owner role (`roles/owner`). Otherwise, you can get this permission through the
+  Service Usage Admin role (`roles/serviceusage.serviceUsageAdmin`).
+  [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw).
 
   [Enable the APIs](https://console.cloud.google.com/apis/enableflow?apiid=bigquery.googleapis.com%2Cbigquerydatatransfer.googleapis.com%2Cstorage-component.googleapis.com%2Cpubsub.googleapis.com&hl=zh-tw)
 - Create a service account:
@@ -112,10 +113,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
   **Roles required to enable APIs**
 
-  To enable APIs, you need the Service Usage Admin IAM
-  role (`roles/serviceusage.serviceUsageAdmin`), which
-  contains the `serviceusage.services.enable` permission. [Learn how to grant
-  roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw).
+  To enable APIs, you need the `serviceusage.services.enable` permission. If you
+  created the project, then you likely already have this permission through the
+  Owner role (`roles/owner`). Otherwise, you can get this permission through the
+  Service Usage Admin role (`roles/serviceusage.serviceUsageAdmin`).
+  [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw).
 
   [Enable the APIs](https://console.cloud.google.com/apis/enableflow?apiid=bigquery.googleapis.com%2Cbigquerydatatransfer.googleapis.com%2Cstorage-component.googleapis.com%2Cpubsub.googleapis.com&hl=zh-tw)
 - Create a service account:
@@ -197,7 +199,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 * 遷移代理程式會使用 JDBC 連線和 Google Cloud API 與 Teradata 執行個體連線。確認網路存取權未遭防火牆封鎖。
 * 確認已安裝 Java Runtime Environment 8 以上版本。
 * 請確認您選擇的擷取方法有足夠的儲存空間，詳情請參閱「[擷取方法](https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview?hl=zh-tw#extraction_method)」。
-* 如果您決定使用 Teradata Parallel Transporter (TPT) 擷取，請確保已安裝 [`tbuild`](https://docs.teradata.com/r/Teradata-Parallel-Transporter-Reference/July-2017/Teradata-PT-Utility-Commands/Command-Syntax/tbuild) 公用程式。如要進一步瞭解如何選擇擷取方法，請參閱「[擷取方法](https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview?hl=zh-tw#extraction_method)」。
+* 如果您決定使用 Teradata Parallel Transporter (TPT) 擷取功能，請確認已安裝 [`tbuild`](https://docs.teradata.com/r/Teradata-Parallel-Transporter-Reference/July-2017/Teradata-PT-Utility-Commands/Command-Syntax/tbuild) 公用程式。如要進一步瞭解如何選擇擷取方法，請參閱「[擷取方法](https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview?hl=zh-tw#extraction_method)」。
 
 #### Teradata 連線詳細資料
 
@@ -220,7 +222,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 將與您所在區域對應的 BigQuery 資料移轉服務代管 Google Cloud 專案，新增至 VPC Service Controls 範圍的[輸出規則](https://docs.cloud.google.com/vpc-service-controls/docs/ingress-egress-rules?hl=zh-tw#egress_rules_reference)。
 
-下表列出用於資料移轉的區域位置專案編號。請新增與資料集位置對應的專案編號。
+下表列出用於資料移轉的區域位置專案編號。新增與資料集位置對應的專案編號。
 
 #### 多地區位置
 
@@ -353,7 +355,7 @@ gcs_secret_access_key = ACCESS_KEY
 
    * 選擇「遷移：Teradata」。
    * 在「Transfer config name」(轉移設定名稱) 部分，輸入移轉作業的顯示名稱，例如 `My Migration`。顯示名稱可以是任意值，日後需要修改移轉作業時能夠據此識別。
-   * 選用：在「Schedule options」(排程選項) 中，您可以保留預設值「Daily」(每日) (以建立時間為準)，或選擇其他時間，進行週期性增量轉移。如要進行一次性轉移，請選擇「On-demand」(隨選)。
+   * 選用：在「Schedule options」(排程選項) 中，您可以保留預設值「Daily」(每日) (以建立時間為準)，或選擇其他時間，進行週期性增量轉移。如果只要移轉一次，請選擇「隨選」。
    * 在「Destination settings」(目的地設定) 中，選擇適當的資料集。
 5. 接著在「Data source details」(資料來源詳細資料) 部分，輸入 Teradata 移轉作業的特定詳細資料。
 
@@ -367,7 +369,7 @@ gcs_secret_access_key = ACCESS_KEY
    * 在「服務帳戶電子郵件」部分，輸入與遷移代理程式所用服務帳戶憑證相關聯的電子郵件地址。
    * 選用：針對「結構定義檔案路徑」，輸入自訂結構定義檔案的路徑和檔案名稱。如要進一步瞭解如何建立自訂結構定義檔案，請參閱「[自訂結構定義檔案](https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview?hl=zh-tw#custom_schema_file)」。您可以將這個欄位留空，讓 BigQuery [自動偵測來源資料表的結構定義](https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview?hl=zh-tw#default_schema_detection)。
    * 選用：在「翻譯輸出根目錄」中，輸入 BigQuery 翻譯引擎提供的結構定義對應檔案路徑和檔案名稱。如要進一步瞭解如何產生結構定義對應檔案，請參閱「[使用翻譯引擎輸出內容進行結構定義](https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview?hl=zh-tw#using_translation_engine_output_for_schema)」([預覽版](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages))。您可以將這個欄位留空，讓 BigQuery [自動偵測來源資料表結構定義](https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview?hl=zh-tw#default_schema_detection)。
-   * 選用：如要「啟用直接卸載至 GCS」，請勾選核取方塊，啟用 [Cloud Storage 的存取模組](https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview?hl=zh-tw#extraction_method)。
+   * 選用：如要「啟用直接卸載至 GCS」，請選取核取方塊，啟用 [Cloud Storage 的存取模組](https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview?hl=zh-tw#extraction_method)。
 6. 在「Service Account」(服務帳戶) 選單，選取與貴機構Google Cloud 專案相關聯的[服務帳戶](https://docs.cloud.google.com/iam/docs/service-account-overview?hl=zh-tw)。您可以將服務帳戶與移轉作業建立關聯，這樣就不需要使用者憑證。如要進一步瞭解如何搭配使用服務帳戶與資料移轉作業，請參閱[使用服務帳戶](https://docs.cloud.google.com/bigquery/docs/use-service-accounts?hl=zh-tw)的相關說明。
 
    * 如果使用[聯合身分](https://docs.cloud.google.com/iam/docs/workforce-identity-federation?hl=zh-tw)登入，您必須擁有服務帳戶才能建立移轉作業。如果是以 [Google 帳戶](https://docs.cloud.google.com/iam/docs/principals-overview?hl=zh-tw#google-account)登入，則不一定要透過服務帳戶建立移轉作業。
@@ -375,14 +377,14 @@ gcs_secret_access_key = ACCESS_KEY
 7. 選用：在「Notification options」(通知選項) 專區，執行下列操作：
 
    * 如要在移轉作業失敗時，讓移轉管理員收到電子郵件通知，請點選「電子郵件通知」切換按鈕。
-   * 點選「Pub/Sub notifications」(Pub/Sub 通知) 切換按鈕，為移轉作業設定 Pub/Sub 執行[通知](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications?hl=zh-tw)。在「Select a Pub/Sub topic」(選取 Pub/Sub 主題) 選取[主題](https://docs.cloud.google.com/pubsub/docs/overview?hl=zh-tw#types)名稱，或是點選「Create a topic」(建立主題)。
+   * 點選「Pub/Sub notifications」(Pub/Sub 通知) 切換按鈕，即可設定移轉作業的 Pub/Sub 執行[通知](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications?hl=zh-tw)。在「Select a Pub/Sub topic」(選取 Pub/Sub 主題) 選取[主題](https://docs.cloud.google.com/pubsub/docs/overview?hl=zh-tw#types)名稱，或是點選「Create a topic」(建立主題)。
 8. 按一下 [儲存]。
 9. 在「Transfer details」(移轉作業詳細資料) 頁面中，按一下「Configuration」(設定) 分頁標籤。
 10. 請記下這項轉移作業的資源名稱，因為您需要這個名稱才能執行遷移代理程式。
 
 ### bq
 
-使用 bq 工具建立 Cloud Storage 移轉作業時，系統會將移轉設定設為每 24 小時重複執行一次。如要執行隨選移轉作業，請使用 Google Cloud 控制台或 BigQuery 資料移轉服務 API。
+使用 bq 工具建立 Cloud Storage 移轉作業時，系統會將移轉設定設為每 24 小時執行一次。如要進行隨選移轉，請使用 Google Cloud 控制台或 BigQuery 資料移轉服務 API。
 
 您無法使用 bq 工具設定通知。
 
@@ -412,7 +414,7 @@ bq mk \
 * service\_account 是用於驗證移轉作業的服務帳戶名稱。服務帳戶應由用於建立轉移作業的相同 `project_id` 所擁有，且應具備所有列出的[必要權限](#set_required_permissions)。
 * parameters 含有已建立移轉設定的 JSON 格式參數 (`--params`)。例如 `--params='{"param":"param_value"}'`。
   + 如要遷移 Teradata，請使用下列參數：
-    - `bucket` 是在遷移期間做為暫存區的 Cloud Storage bucket。
+    - `bucket` 是 Cloud Storage bucket，在遷移期間會做為暫存區。
     - `database_type` 是 Teradata。
     - `agent_service_account` 是與您建立的服務帳戶相關聯的電子郵件地址。
     - `database_name` 是 Teradata 中的來源資料庫名稱。
@@ -422,7 +424,7 @@ bq mk \
     - `is_direct_gcs_unload_enabled` 是布林值旗標，可啟用直接卸載至 Cloud Storage 的功能。
 * data\_source 是資料來源 (`--data_source`)：`on_premises`。
 
-舉例來說，下列指令會使用 Cloud Storage 值區 `mybucket` 和目標資料集 `mydataset`，建立名為 `My Transfer` 的 Teradata 移轉作業。這項移轉作業會從 Teradata 資料倉儲 `mydatabase` 移轉所有資料表，而選用的結構定義檔為 `myschemafile.json`。
+舉例來說，下列指令會使用 Cloud Storage bucket `mybucket` 和目標資料集 `mydataset`，建立名為 `My Transfer` 的 Teradata 移轉作業。這項轉移作業會遷移 Teradata 資料倉儲 `mydatabase` 中的所有資料表，而選用的結構定義檔案為 `myschemafile.json`。
 
 ```
 bq mk \
@@ -455,5 +457,5 @@ follow the instructions to retrieve an authentication code.`
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
-import com.google.api.gax.rpc.
+import
 ```

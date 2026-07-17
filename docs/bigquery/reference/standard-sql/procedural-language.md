@@ -551,6 +551,5 @@ it outputs a string stating that the product hasn't been found, also with the
 value of `default_product_id`.
 
 ```
-DECLARE target_product_id INT64 DEFAULT 103;
-IF
+DECLARE target_product_id
 ```

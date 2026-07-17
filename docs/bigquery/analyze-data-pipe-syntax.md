@@ -23,16 +23,16 @@ Google uses AI technology to translate content into your preferred language. AI 
 * 如要瞭解 pipe 語法，請參閱「[使用 pipe 查詢語法](https://docs.cloud.google.com/bigquery/docs/pipe-syntax-guide?hl=zh-tw)」。
 * 如需完整的語法詳細資料，請參閱「[管道查詢語法](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax?hl=zh-tw)」參考文件。
 
-在本教學課程中，您將使用公開的[`bigquery-public-data.austin_bikeshare.bikeshare_trips`資料表](https://console.cloud.google.com/bigquery?p=bigquery-public-data&%3Bd=austin_bikeshare&%3Bt=bikeshare_trips&%3Bpage=table&hl=zh-tw)，以管道語法建構複雜查詢，該資料表包含自行車行程資料。
+在本教學課程中，您將使用公開的[`bigquery-public-data.austin_bikeshare.bikeshare_trips`資料表](https://console.cloud.google.com/bigquery?p=bigquery-public-data&%3Bd=austin_bikeshare&%3Bt=bikeshare_trips&%3Bpage=table&hl=zh-tw)，以管道語法建構複雜查詢，該資料表包含自行車行程的資料。
 
 ## 目標
 
-* 如要查看資料表資料，請使用 [`FROM` 子句](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax?hl=zh-tw#from_queries)啟動查詢。
+* 使用 [`FROM` 子句](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax?hl=zh-tw#from_queries)啟動查詢，即可查看資料表資料。
 * 使用 [`EXTEND` 管道運算子](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax?hl=zh-tw#extend_pipe_operator)新增資料欄。
 * 使用 [`AGGREGATE` 管道運算子](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax?hl=zh-tw#extend_pipe_operator)，按日和週匯總資料。
-* 使用 [`CROSS JOIN` 管道運算子](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax?hl=zh-tw#join_pipe_operator)，匯總滑動時間區間的資料。
+* 使用 [`CROSS JOIN` 管道運算子](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax?hl=zh-tw#join_pipe_operator)，匯總滑動視窗中的資料。
 * 使用 [`WHERE` 管道運算子](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax?hl=zh-tw#where_pipe_operator)篩選資料。
-* 執行多層匯總時，請比較管道語法的線性查詢結構與標準語法的巢狀查詢結構。
+* 執行多層級彙整時，請比較管道語法的線性查詢結構與標準語法的巢狀查詢結構。
 
 ## 事前準備
 
@@ -79,13 +79,13 @@ Google uses AI technology to translate content into your preferred language. AI 
   [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
 - [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project).
 
-1. 新專案會自動啟用 BigQuery。如要在現有專案中啟用 BigQuery，
+1. 新專案會自動啟用 BigQuery。如要在現有專案中啟用 BigQuery，請按照下列步驟操作：
 
    啟用 BigQuery API。
 
    **啟用 API 時所需的角色**
 
-   如要啟用 API，您需要服務使用情形管理員 IAM 角色 (`roles/serviceusage.serviceUsageAdmin`)，其中包含 `serviceusage.services.enable` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用情形管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
    [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery&hl=zh-tw)
 
@@ -108,7 +108,7 @@ SELECT *
 FROM `bigquery-public-data.austin_bikeshare.bikeshare_trips`;
 ```
 
-在管道語法中，查詢可以從 [`FROM` 子句](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax?hl=zh-tw#from_queries)開始，不必使用 `SELECT` 子句，即可傳回表格結果。
+在管道語法中，查詢可以從 [`FROM` 子句](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax?hl=zh-tw#from_queries)開始，不必使用 `SELECT` 子句即可傳回表格結果。
 
 結果大致如下：
 
@@ -156,9 +156,9 @@ FROM `bigquery-public-data.austin_bikeshare.bikeshare_trips`;
 
 ## 匯總每日資料
 
-您可以依日期分組，找出每天的行程總數和使用的單車數。
+您可以依日期分組，找出每天的行程總數和使用自行車數。
 
-* 使用[`AGGREGATE` 管道運算子](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax?hl=zh-tw#aggregate_pipe_operator)搭配 `COUNT` 函式，找出行程總數和使用的自行車數量。
+* 使用[`AGGREGATE` 管道運算子](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax?hl=zh-tw#aggregate_pipe_operator)搭配 `COUNT` 函式，找出行程總數和使用的單車數量。
 * 使用 `GROUP BY` 子句，依日期將結果分組。
 
 ### 管道語法
@@ -238,7 +238,7 @@ ORDER BY date DESC;
 +------------+-------+----------------+
 ```
 
-在管道語法中，您可以直接將排序後置字元新增至 `GROUP BY` 子句，而不必使用 [`ORDER BY` 管道運算子](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax?hl=zh-tw#order_by_pipe_operator)。在 `GROUP BY` 子句中加入後置字元，是 `AGGREGATE` 管道語法支援的其中一項選用[簡寫排序功能。在標準語法中，這是不可能的，您必須使用 `ORDER BY` 子句進行排序。](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax?hl=zh-tw#shorthand_order_pipe_syntax)
+在管道語法中，您可以直接將排序後置字元新增至 `GROUP BY` 子句，而不必使用 [`ORDER BY` 管道運算子](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax?hl=zh-tw#order_by_pipe_operator)。在 `GROUP BY` 子句中加入後置字元，是 `AGGREGATE` 管道語法支援的其中一項選用[簡短排序功能。在標準語法中，這是不可能的，您必須使用 `ORDER BY` 子句進行排序。](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax?hl=zh-tw#shorthand_order_pipe_syntax)
 
 ## 匯總每週資料
 
@@ -286,9 +286,9 @@ ORDER BY date DESC;
 
 前一節的結果顯示開始和結束日期之間的*固定時間範圍*內的行程，例如 `2024-06-23` 到 `2024-06-29`。您可能想查看*滑動時間範圍*內的行程，也就是七天內每天都會更新的行程。換句話說，您可能想知道特定日期後一週的行程次數和單車使用次數。
 
-如要將滑動視窗套用至資料，請先從每個行程的開始日期起，往前複製六個額外的*有效*天。接著，使用 `DATE_ADD` 函式計算有效天數的日期。最後，匯總每個有效日期的行程和單車 ID。
+如要將滑動視窗套用至資料，請先從每個行程的開始日期起，往前複製六個額外的*有效*天。接著，使用 `DATE_ADD` 函式計算活動日期的日期。最後，匯總每個有效日期的行程和單車 ID。
 
-1. 如要將資料向前複製，請使用 `GENERATE_ARRAY` 函式和 cross join：
+1. 如要向前複製資料，請使用 `GENERATE_ARRAY` 函式和 cross join：
 
    ### 管道語法
 
@@ -306,8 +306,8 @@ ORDER BY date DESC;
    CROSS JOIN UNNEST(GENERATE_ARRAY(0, 6)) AS diff_days;
    ```
 
-   `GENERATE_ARRAY` 函式會建立含有七個元素的陣列，分別是 `0` 到 `6`。`CROSS JOIN UNNEST` 運算會建立每個資料列的七個副本，並新增 `diff_days` 資料欄，其中包含 `0` 到 `6` 的陣列元素值。您可以將 `diff_days` 值做為原始日期的調整值，將時間範圍往前推移該天數，最多可推移至原始日期後七天。
-2. 如要查看行程的計算結果，請使用 `EXTEND` 管道運算子搭配 `DATE_ADD` 函式，建立名為 `active_date` 的資料欄，其中包含開始日期加上 `diff_days` 資料欄中的值：
+   `GENERATE_ARRAY` 函式會建立含有七個元素的陣列，分別是 `0` 至 `6`。`CROSS JOIN UNNEST` 運算會建立每個資料列的七個副本，並新增 `diff_days` 資料欄，其中包含 `0` 到 `6` 的陣列元素值。您可以將 `diff_days` 值做為原始日期的調整值，將時間範圍往前推移該天數，最多可推移至原始日期後七天。
+2. 如要查看行程的計算結果，請使用 `EXTEND` 管道運算子和 `DATE_ADD` 函式，建立名為 `active_date` 的資料欄，其中包含開始日期和 `diff_days` 資料欄中的值：
 
    ### 管道語法
 
@@ -328,7 +328,7 @@ ORDER BY date DESC;
      CROSS JOIN UNNEST(GENERATE_ARRAY(0, 6)) AS diff_days)
    ```
 
-   舉例來說，如果旅程從 `2024-05-20`開始，則在 `2024-05-26`之前每天都算有效。
+   舉例來說，如果旅程從 `2024-05-20` 開始，則在 `2024-05-26` 之前每天都視為有效。
 3. 最後，匯總行程 ID 和單車 ID，並依 `active_date` 分組：
 
    ### 管道語法
@@ -371,11 +371,11 @@ ORDER BY date DESC;
    +-------------+-----------------+-----------------+
    ```
 
-## 篩選未來日期
+## 篩選未來的日期
 
 在上述查詢中，日期會延伸到未來，最多可超出資料中的最後一個日期六天。如要篩除超出資料結束日期的日期，請在查詢中設定最晚日期：
 
-1. 新增另一個 `EXTEND` 管道運算子，使用含 `OVER` 子句的視窗函式，計算資料表中的最大日期。
+1. 新增另一個 `EXTEND` 管道運算子，使用含 `OVER` 子句的 window 函式，計算資料表中的最大日期。
 2. 使用 `WHERE` 管道運算子，篩除超過最晚日期的產生資料列。
 
 ### 管道語法
@@ -439,11 +439,11 @@ ORDER BY active_date DESC;
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-05 (世界標準時間)。
+上次更新時間：2026-07-16 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-05 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-16 (世界標準時間)。"],[],[]]

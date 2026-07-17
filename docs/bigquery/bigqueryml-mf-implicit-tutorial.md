@@ -12,9 +12,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 本教學課程說明如何建立[矩陣分解模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization?hl=zh-tw)，並在公開的 [`GA360_test.ga_sessions_sample` 資料表](https://console.cloud.google.com/bigquery?p=cloud-training-demos&%3Bd=GA360_test&%3Bt=ga_sessions_sample&%3Bpage=table&hl=zh-tw)中，使用 Google Analytics 360 使用者工作階段資料訓練模型。接著，您可以使用矩陣分解模型，為網站使用者生成內容建議。
 
-使用使用者工作階段持續時間等間接顧客偏好資訊訓練模型，稱為使用*隱性意見回饋*訓練。使用隱性意見回饋做為訓練資料時，系統會使用[加權交替最小平方演算法](http://yifanhu.net/PUB/cf.pdf)訓練矩陣分解模型。
+使用使用者工作階段持續時間等間接顧客偏好資訊訓練模型，稱為使用*隱含意見回饋*訓練模型。使用隱性意見回饋做為訓練資料時，系統會使用[加權交替最小平方演算法](http://yifanhu.net/PUB/cf.pdf)訓練矩陣分解模型。
 
-**重要事項：** 您必須預訂才能使用矩陣因式分解模型。詳情請參閱[定價](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization?hl=zh-tw#pricing)。
+**重要事項：** 您必須預訂，才能使用矩陣因式分解模型。詳情請參閱[定價](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization?hl=zh-tw#pricing)。
 
 ## 目標
 
@@ -84,7 +84,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    **啟用 API 時所需的角色**
 
-   如要啟用 API，您需要服務使用情形管理員 IAM 角色 (`roles/serviceusage.serviceUsageAdmin`)，其中包含 `serviceusage.services.enable` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用情形管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
    [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery&hl=zh-tw)
 
@@ -114,11 +114,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    [前往 BigQuery 頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 在「Explorer」窗格中，按一下專案名稱。
-3. 依序點按 more\_vert「View actions」(查看動作) >「Create dataset」(建立資料集)
+3. 依序點按 more\_vert「View actions」(查看動作) >「Create dataset」(建立資料集)。
 4. 在「建立資料集」頁面中，執行下列操作：
 
    * 在「Dataset ID」(資料集 ID) 中輸入 `bqml_tutorial`。
-   * 針對「位置類型」選取「多區域」，然後選取「美國」。
+   * 針對「Location type」(位置類型) 選取「Multi-region」(多區域)，然後選取「US」(美國)。
    * 其餘設定請保留預設狀態，然後按一下「建立資料集」。
 
 ### bq
@@ -235,13 +235,13 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 建立模型
 
-建立矩陣分解模型，並根據 `analytics_session_data` 資料表中的資料訓練模型。模型經過訓練後，可預測每個 `visitorId`-`contentId` 配對的信心評分。系統會根據工作階段持續時間中位數，以置中和縮放方式建立信賴度評分。如果記錄中的工作階段持續時間是中位數的 3.33 倍以上，系統會將其篩除為離群值。
+建立矩陣分解模型，並根據 `analytics_session_data` 資料表中的資料訓練模型。模型經過訓練後，可預測每對 `visitorId`-`contentId` 的信心評分。系統會以工作階段時間中位數為中心和比例，建立信賴度評分。如果記錄的會話時間長度超過中位數的 3.33 倍，就會做為離群值篩除。
 
 下列 `CREATE MODEL` 陳述式會使用這些資料欄產生建議：
 
 * `visitorId`：訪客 ID。
 * `contentId`—內容 ID。
-* `rating`：針對每位訪客與內容配對計算的隱含評分，範圍為 0 到 1，並經過置中和縮放。
+* `rating`：針對每位訪客與內容配對計算的隱含評分 (0 到 1)，並經過置中和縮放處理。
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -273,7 +273,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 您也可以在Google Cloud 控制台中查看模型的訓練統計資料。
 
-機器學習演算法會使用不同參數建立多個模型疊代版本，然後選取能將[損失](https://en.wikipedia.org/wiki/Loss_function)降到最低的模型版本。這項程序稱為經驗風險最小化。模型訓練統計資料會顯示模型每次疊代的相關損失。
+機器學習演算法會使用不同參數建立多個模型疊代版本，然後選取可將[損失](https://en.wikipedia.org/wiki/Loss_function)降到最低的模型版本。這項程序稱為經驗風險最小化。模型訓練統計資料會顯示模型每次疊代的相關損失。
 
 如要查看模型的訓練統計資料，請按照下列步驟操作：
 
@@ -336,11 +336,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    如要進一步瞭解 `ML.EVALUATE` 函式輸出內容，請參閱「[輸出內容](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate?hl=zh-tw#output)」。
 
-## 取得部分訪客與內容組合的預測評分
+## 取得部分訪客與內容配對的預測評分
 
 使用 `ML.RECOMMEND` 取得五位網站訪客對每項內容的預測評分。
 
-請按照下列步驟取得預測評分：
+如要取得預測評分，請按照下列步驟操作：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -387,7 +387,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 將預測評分寫入資料表。在查詢編輯器中貼上以下查詢，然後點選「執行」：
+2. 將預測評分寫入資料表。在查詢編輯器中貼上下列查詢，然後點選「執行」：
 
    ```
    CREATE OR REPLACE TABLE `bqml_tutorial.recommend_content`
@@ -397,7 +397,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    FROM
      ML.RECOMMEND(MODEL `bqml_tutorial.mf_implicit`);
    ```
-3. 為每位訪客選取前五個結果。在查詢編輯器中貼上以下查詢，然後點選「執行」：
+3. 為每位訪客選取前五個結果。在查詢編輯器中貼上下列查詢，然後點選「執行」：
 
    ```
    SELECT
@@ -483,11 +483,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-05 (世界標準時間)。
+上次更新時間：2026-07-16 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-05 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-16 (世界標準時間)。"],[],[]]

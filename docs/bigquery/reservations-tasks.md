@@ -56,9 +56,12 @@ Google uses AI technology to translate content into your preferred language. AI 
 9. 如要停用[閒置的運算單元共用功能](https://docs.cloud.google.com/bigquery/docs/slots?hl=zh-tw#idle_slots)，並只使用指定的運算單元容量，請按一下「忽略閒置的運算單元」切換鈕。
 10. 如要展開「進階設定」部分，請按一下expand\_more展開箭頭。
 11. 選用：如要設定目標工作並行數，請點選「覆寫自動目標工作並行設定」切換鈕，然後輸入「目標工作並行數」。
-12. **費用預估**表格會顯示時段明細。
-    「運算能力摘要」表格會顯示預留項目的摘要。
-13. 按一下 [儲存]。
+12. 選用：如要為預訂設定預設專案排程政策，請設定下列至少一個選項：
+
+    1. 如要限制指派給預留項目的每個專案可同時執行的查詢數量，請點選「覆寫專案並行」切換鈕，將其設為開啟，然後在「專案並行」欄位中輸入值。
+    2. 如要限制指派給預留項目的每個專案的運算單元用量，請點選「覆寫專案運算單元數量上限」切換鈕，將其設為開啟，然後在「專案運算單元數量上限」欄位中輸入值。**注意：** 這些設定會做為指派給預訂的所有專案的預設值。您可以使用[指派規則](https://docs.cloud.google.com/bigquery/docs/reservations-assignments?hl=zh-tw#scheduling-policy-assignments)，針對特定專案覆寫這些限制。
+13. 查看「預估費用」表格中顯示的時段明細，以及「容量摘要」表格中的預訂摘要。
+14. 按一下 [儲存]。
 
 新預訂項目會顯示在「預訂時段」分頁中。
 
@@ -77,7 +80,9 @@ Google uses AI technology to translate content into your preferred language. AI 
    OPTIONS (
      slot_capacity = NUMBER_OF_BASELINE_SLOTS,
      edition = EDITION,
-     autoscale_max_slots = NUMBER_OF_AUTOSCALING_SLOTS);
+     autoscale_max_slots = NUMBER_OF_AUTOSCALING_SLOTS,
+     scheduling_policy_max_slots = MAX_SLOTS_PER_PROJECT,
+     scheduling_policy_concurrency = MAX_CONCURRENCY_PER_PROJECT);
    ```
 
    請替換下列項目：
@@ -90,7 +95,9 @@ Google uses AI technology to translate content into your preferred language. AI 
    * `NUMBER_OF_BASELINE_SLOTS`：要分配給預訂的基準時段數量。您無法在同一個預訂中設定 `slot_capacity` 選項和 `standard` 版本選項。
    * `EDITION`：預訂的方案。
      支援的值為 `STANDARD`、`ENTERPRISE` 和 `ENTERPRISE_PLUS`。將預留項目指派給版本時，功能和價格會有所變更。詳情請參閱 [BigQuery 版本簡介](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)。
-   * `NUMBER_OF_AUTOSCALING_SLOTS`：指派給預留項目的自動調度資源運算單元數量。這等於預留項目大小上限減去基準運算單元數量。
+   * `NUMBER_OF_AUTOSCALING_SLOTS`：指派給預訂的自動調度資源運算單元數量。這等於預留項目大小上限減去基準運算單元數量。
+   * `MAX_SLOTS_PER_PROJECT`：指派給預留項目的每個專案執行查詢時，運算單元用量的預設上限。
+   * `MAX_CONCURRENCY_PER_PROJECT`：預留項目中每個專案可同時執行的查詢數量預設上限。
 3. 按一下「執行」play\_circle。
 
 如要進一步瞭解如何執行查詢，請參閱「[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)」。
@@ -116,10 +123,10 @@ bq mk \
 更改下列內容：
 
 * `ADMIN_PROJECT_ID`：專案 ID
-* `LOCATION`：預訂的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。如果選取 [BigQuery Omni 位置](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw#locations)，版本選項會限制為 Enterprise 版。
+* `LOCATION`：預訂的[地點](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。如果選取 [BigQuery Omni 位置](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw#locations)，版本選項會限制為 Enterprise 版。
 * `NUMBER_OF_BASELINE_SLOTS`：要分配給預留項目的基準運算單元數量
 * `RESERVATION_NAME`：預訂名稱。名稱只能包含小寫英數字元或連字號，開頭必須是字母，而且結尾不得為連字號，長度上限為 64 個字元。
-* `EDITION`：預訂的方案。
+* `EDITION`：預訂的版別。
   支援的值為 `STANDARD`、`ENTERPRISE` 和 `ENTERPRISE_PLUS`。將預留項目指派給版本時，功能和價格會有所變更。詳情請參閱 [BigQuery 版本簡介](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)。
 * `NUMBER_OF_AUTOSCALING_SLOTS`：指派給預訂的自動調度資源運算單元數量。這等於預留項目大小上限減去基準運算單元數量。這無法透過 `--max_slots` 或 `--scaling_mode` 旗標設定。
 * `MAXIMUM_NUMBER_OF_SLOTS`：預留項目可消耗的運算單元數量上限。這個值必須使用 `--scaling_mode` 標記設定 ([預先發布版](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages))。
@@ -177,9 +184,9 @@ resource "google_bigquery_reservation" "default" {
    ```
 2. 如果您正在學習教學課程，可以複製每個章節或步驟中的程式碼範例。
 
-   將程式碼範例複製到新建立的 `main.tf` 中。
+   將範例程式碼複製到新建立的 `main.tf` 中。
 
-   視需要從 GitHub 複製程式碼。如果 Terraform 程式碼片段是端對端解決方案的一部分，建議您使用這種做法。
+   視需要從 GitHub 複製程式碼。如果 Terraform 代码片段是端對端解決方案的一部分，建議您使用這個方法。
 3. 查看並修改範例參數，套用至您的環境。
 4. 儲存變更。
 5. 初始化 Terraform。每個目錄只需執行一次這項操作。
@@ -293,7 +300,7 @@ ALTER PROJECT `PROJECT_NAME` SET OPTIONS (
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在導覽面板中，前往「運算資源管理」區段，然後點選「建立預留項目」。
+2. 在導覽面板中，前往「工作負載管理」部分，然後按一下「建立預訂」。
 3. 在「Reservation name」(預留項目名稱) 欄位中，輸入預留項目的名稱。
 4. 在「位置」清單中選取位置。如果選取 [BigQuery Omni 位置](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw#locations)，版本選項會限制為 Enterprise 版。
 5. 從「Edition」(版本) 清單中選取版本。詳情請參閱[瞭解 BigQuery 版本](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)。
@@ -303,15 +310,18 @@ ALTER PROJECT `PROJECT_NAME` SET OPTIONS (
    可用的自動調度資源運算單元數量，是從**預留項目大小上限**減去**基準運算單元**值而得。舉例來說，如果您建立的預留項目有 100 個基準運算單元，且預留項目大小上限為 400，則預留項目會有 300 個自動調度運算單元。如要進一步瞭解基準運算單元，請參閱「[使用預留項目搭配基準和自動調度運算單元](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro?hl=zh-tw#using_reservations_with_baseline_and_autoscaling_slots)」一文。
 8. 如要停用[閒置的運算單元共用功能](https://docs.cloud.google.com/bigquery/docs/slots?hl=zh-tw#idle_slots)，並只使用指定的運算單元容量，請按一下「忽略閒置的運算單元」切換鈕。
 9. 如要展開「進階設定」部分，請按一下expand\_more展開箭頭。
+10. 選用：如要為預訂設定預設專案排程政策，請設定下列選項：
 
-   在「如何使用閒置時段？」清單中，選取設定選項。
+    * **專案並行數量：**限制這個預留項目中，任意特定專案的執行工作並行數量。
+    * **專案運算單元上限：**限制這個預留項目中，任何特定專案執行查詢時的運算單元用量。**注意：** 這些設定會做為指派給預訂的所有專案的預設值。您可以使用[指派規則](https://docs.cloud.google.com/bigquery/docs/reservations-assignments?hl=zh-tw#scheduling-policy-assignments)，針對特定專案覆寫這些限制。
+11. 在「如何使用閒置時段？」清單中，選取設定選項。
 
-   * **最容易預測：**先耗用基準運算單元，接著是閒置運算單元，最後是自動調度資源運算單元，但不會超過指定的運算單元數量上限。
-   * **較難預測：**只會消耗基準和閒置運算單元，最多不會超過運算單元數量上限。不會使用自動調度資源運算單元。
-   * **變化最大：**會使用所有可用的閒置運算單元，以便擴充至基準值以上，接著才會使用自動調度運算單元，但不會超過上限與基準值之間的差異。這可能會導致預訂項目超過指定的運算單元數量上限。
-10. **費用預估**表格會顯示時段明細。
+    * **最容易預測：**先耗用基準運算單元，接著是閒置運算單元，最後是自動調度資源運算單元，但不會超過指定的運算單元數量上限。
+    * **較難預測：**只會消耗基準和閒置運算單元，最多不會超過運算單元數量上限。不會使用自動調度資源運算單元。
+    * **變化最大：**會使用所有可用的閒置運算單元，以便擴充至基準值以上，接著才會使用自動調度運算單元，但不會超過上限與基準值之間的差異。這可能會導致預訂項目超過指定的運算單元數量上限。
+12. **費用預估**表格會顯示時段明細。
     「運算能力摘要」表格會顯示預留項目的摘要。
-11. 按一下 [儲存]。
+13. 按一下 [儲存]。
 
 新預訂項目會顯示在「預訂時段」分頁中。
 
@@ -359,9 +369,11 @@ bq mk \
    OPTIONS (
      slot_capacity = NUMBER_OF_BASELINE_SLOTS,
      edition = EDITION,
-     ignore_idle_slots=IGNORE_IDLE_SLOTS
+     ignore_idle_slots = IGNORE_IDLE_SLOTS,
      max_slots = MAX_NUMBER_OF_SLOTS,
-     scaling_mode = SCALING_MODE);
+     scaling_mode = SCALING_MODE,
+     scheduling_policy_max_slots = MAX_SLOTS_PER_PROJECT,
+     scheduling_policy_concurrency = MAX_CONCURRENCY_PER_PROJECT);
    ```
 
    請替換下列項目：
@@ -369,11 +381,13 @@ bq mk \
    * `ADMIN_PROJECT_ID`：[管理專案](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#admin-project)的專案 ID，該專案擁有預留資源。
    * `LOCATION`：預訂的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。如果選取 [BigQuery Omni 位置](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw#locations)，版本選項會限制為 Enterprise 版。
    * `RESERVATION_NAME`：預留項目名稱。名稱只能包含小寫英數字元或連字號，開頭必須是字母，而且結尾不得為連字號，長度上限為 64 個字元。
-   * `NUMBER_OF_BASELINE_SLOTS`：要分配給預訂的版位數量基準。您無法在同一個預訂中設定 `slot_capacity` 選項和 `standard` 版本選項。
+   * `NUMBER_OF_BASELINE_SLOTS`：要分配給預留項目的運算單元基準數量。您無法在同一個預訂中設定 `slot_capacity` 選項和 `standard` 版本選項。
    * `EDITION`：預訂的方案。將預留項目指派給版本時，功能和價格會有所變更。詳情請參閱 [BigQuery 版本簡介](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)。
    * `IGNORE_IDLE_SLOTS`：預留項目是否使用[閒置運算單元](https://docs.cloud.google.com/bigquery/docs/slots?hl=zh-tw#idle_slots)。預設值為 `false`。
    * `MAX_NUMBER_OF_SLOTS`：預留項目可消耗的運算單元數量上限。這個值必須使用 `scaling_mode` 選項設定。
    * `SCALING_MODE`：預訂的資源調度模式。選項包括 `ALL_SLOTS`、`IDLE_SLOTS_ONLY` 或 `AUTOSCALE_ONLY`。這個值必須使用 `max_slots` 選項設定。這個值必須與 `ignore_idle_slots` 選項一致。詳情請參閱「[預留項目預測](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#predictable)」。
+   * `MAX_SLOTS_PER_PROJECT`：指派給預留項目的每個專案執行查詢時，運算單元用量的預設上限。
+   * `MAX_CONCURRENCY_PER_PROJECT`：預留項目中每個專案可同時執行的查詢數量預設上限。
 3. 按一下「執行」play\_circle。
 
 如要進一步瞭解如何執行查詢，請參閱「[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)」。
@@ -428,9 +442,9 @@ resource "google_bigquery_reservation" "default" {
    ```
 2. 如果您正在學習教學課程，可以複製每個章節或步驟中的程式碼範例。
 
-   將程式碼範例複製到新建立的 `main.tf` 中。
+   將範例程式碼複製到新建立的 `main.tf` 中。
 
-   視需要從 GitHub 複製程式碼。如果 Terraform 程式碼片段是端對端解決方案的一部分，建議您使用這種做法。
+   視需要從 GitHub 複製程式碼。如果 Terraform 代码片段是端對端解決方案的一部分，建議您使用這個方法。
 3. 查看並修改範例參數，套用至您的環境。
 4. 儲存變更。
 5. 初始化 Terraform。每個目錄只需執行一次這項操作。
@@ -536,7 +550,7 @@ resource "google_bigquery_reservation" "default" {
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在導覽選單中，按一下「容量管理」。
+2. 按一下導覽選單中的「工作負載管理」。
 3. 按一下「運算單元預留項目」分頁標籤。
 4. 找出要更新的預訂。
 5. 展開「動作」more\_vert選項。
@@ -549,7 +563,7 @@ resource "google_bigquery_reservation" "default" {
 
 ### SQL
 
-如要變更預留空間大小，請使用[`ALTER RESERVATION SET OPTIONS`資料定義語言 (DDL) 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_reservation_set_options_statement)。
+如要變更預訂大小，請使用[`ALTER RESERVATION SET OPTIONS`資料定義語言 (DDL) 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_reservation_set_options_statement)。
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -570,7 +584,7 @@ resource "google_bigquery_reservation" "default" {
    * `LOCATION`：預訂的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)，例如 `europe-west9`。
    * `RESERVATION_NAME`：預訂名稱。名稱只能包含小寫英數字元或連字號，開頭必須是字母，而且結尾不得為連字號，長度上限為 64 個字元。
    * `NUMBER_OF_BASELINE_SLOTS`：要分配給預訂的基準時段數量。
-   * `NUMBER_OF_AUTOSCALING_SLOTS`：指派給預留項目的自動調度資源運算單元數量。這等於預留項目大小上限減去基準運算單元數量。
+   * `NUMBER_OF_AUTOSCALING_SLOTS`：指派給預訂的自動調度資源運算單元數量。這等於預留項目大小上限減去基準運算單元數量。
 3. 按一下「執行」play\_circle。
 
 如要進一步瞭解如何執行查詢，請參閱「[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)」。
@@ -717,13 +731,13 @@ bq ls --reservation \
 
 ## 刪除預留項目
 
-如果刪除預留項目，任何使用該預留項目運算單元的執行中工作都會失敗。為避免發生錯誤，請先讓執行中的工作完成，再刪除預訂。
+如果刪除預留項目，任何使用該預留項目運算單元的工作都會失敗。為避免發生錯誤，請先讓執行中的工作完成，再刪除預訂。
 
 ### 所需權限
 
 如要刪除預留項目，您需要下列 Identity and Access Management (IAM) 權限：
 
-* `bigquery.reservations.delete` [管理專案](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#admin-project)，該專案會保留承諾使用合約的擁有權。
+* `bigquery.reservations.delete` [管理專案](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#admin-project)，該專案會維護承諾使用合約的所有權。
 
 下列預先定義的 IAM 角色都具備這項權限：
 
@@ -742,8 +756,8 @@ bq ls --reservation \
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在導覽選單中，按一下「容量管理」。
-3. 按一下「預訂」分頁標籤。
+2. 按一下導覽選單中的「工作負載管理」。
+3. 按一下「運算單元預留項目」分頁標籤。
 4. 找出要刪除的預訂。
 5. 展開「動作」more\_vert選項。
 6. 點選「刪除」。
@@ -914,7 +928,7 @@ bq set-iam-policy --reservation RESOURCE FILE_NAME
 
 如要進一步瞭解 IAM，請參閱「[管理其他資源的存取權](https://docs.cloud.google.com/iam/docs/manage-access-other-resources?hl=zh-tw)」。
 
-## 使用預留項目群組優先處理閒置運算單元
+## 使用預留群組優先處理閒置運算單元
 
 您可以建立預留項目群組，控管哪些預留項目可優先存取閒置運算單元。預留項目群組中的預留項目會彼此共用閒置運算單元，然後再提供給專案中的其他預留項目。
 
@@ -935,7 +949,7 @@ bq set-iam-policy --reservation RESOURCE FILE_NAME
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在導覽選單中，按一下「容量管理」。
+2. 按一下導覽選單中的「工作負載管理」。
 3. 找出要新增至群組的預訂項目，然後選取旁邊的核取方塊。
 4. 按一下表格標題中的「建立預留項目群組」按鈕。
 5. 在「建立預訂群組」窗格的「群組名稱」欄位中，輸入群組名稱。
@@ -959,7 +973,7 @@ bq mk \
 更改下列內容：
 
 * `ADMIN_PROJECT_ID`：專案 ID
-* `LOCATION`：預訂的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
+* `LOCATION`：預訂的[地點](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
 * `RESERVATION_GROUP_NAME`：預訂群組的名稱。名稱只能包含小寫英數字元或連字號，開頭必須是字母，而且結尾不得為連字號，長度上限為 64 個字元。
 
 ### Terraform
@@ -1005,9 +1019,9 @@ resource "google_bigquery_reservation_group" "default" {
    ```
 2. 如果您正在學習教學課程，可以複製每個章節或步驟中的程式碼範例。
 
-   將程式碼範例複製到新建立的 `main.tf` 中。
+   將範例程式碼複製到新建立的 `main.tf` 中。
 
-   視需要從 GitHub 複製程式碼。如果 Terraform 程式碼片段是端對端解決方案的一部分，建議您使用這種做法。
+   視需要從 GitHub 複製程式碼。如果 Terraform 代码片段是端對端解決方案的一部分，建議您使用這個方法。
 3. 查看並修改範例參數，套用至您的環境。
 4. 儲存變更。
 5. 初始化 Terraform。每個目錄只需執行一次這項操作。
@@ -1051,7 +1065,7 @@ resource "google_bigquery_reservation_group" "default" {
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在導覽選單中，按一下「容量管理」。
+2. 按一下導覽選單中的「工作負載管理」。
 3. 展開「動作」more\_vert選項。
 4. 按一下 [編輯]。
 5. 在「編輯預留項目群組」窗格中，選取「預留項目」欄位中要新增的預留項目。然後點選「OK」。
@@ -1087,7 +1101,7 @@ bq update \
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在導覽選單中，按一下「容量管理」。
+2. 按一下導覽選單中的「工作負載管理」。
 3. 在「運算單元保留項目」分頁中，您可以在表格中查看預留項目群組和預留項目 (沒有上層群組)。
 4. 按一下預留項目群組旁的展開按鈕，預留項目群組資料列就會展開，並在後續資料列中顯示成員預留項目。
 
@@ -1116,7 +1130,7 @@ bq ls \
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在導覽選單中，按一下「容量管理」。
+2. 按一下導覽選單中的「工作負載管理」。
 3. 展開「動作」more\_vert選項。
 4. 按一下 [編輯]。
 5. 在「編輯預留項目群組」窗格中，選取「預留項目」欄位中要移除的預留項目。然後點選「OK」。
@@ -1129,7 +1143,7 @@ bq ls \
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在導覽選單中，按一下「容量管理」。
+2. 按一下導覽選單中的「工作負載管理」。
 3. 展開「動作」more\_vert選項。
 4. 按一下 [編輯]。
 5. 在「編輯預留項目群組」窗格中，按一下「取消分組」。
@@ -1164,7 +1178,7 @@ bq update \
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在導覽選單中，按一下「容量管理」。
+2. 按一下導覽選單中的「工作負載管理」。
 3. 找出要刪除的預訂群組。確認該帳戶沒有任何預訂記錄。
 4. 展開預留項目群組的「動作」more\_vert選項。
 5. 按一下 [編輯]。
@@ -1210,11 +1224,11 @@ bq rm \
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-05 (世界標準時間)。
+上次更新時間：2026-07-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-05 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-12 (世界標準時間)。"],[],[]]

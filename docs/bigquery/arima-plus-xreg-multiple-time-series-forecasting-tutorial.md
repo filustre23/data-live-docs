@@ -12,13 +12,13 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 本教學課程說明如何使用[多元時間序列模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series?hl=zh-tw)，根據多個輸入特徵的歷史值，預測特定資料欄的未來值。
 
-本教學課程會預測多個時間序列。系統會針對一或多個指定資料欄中的每個值，計算每個時間點的預測值。舉例來說，如果您想預測天氣，並指定包含州別資料的資料欄，預測資料會包含州別 A 所有時間點的預測值，接著是州別 B 所有時間點的預測值，依此類推。假設您想預測天氣，並指定包含州和城市資料的資料欄，預測資料就會包含州 A 和城市 A 所有時間點的預測值，然後是州 A 和城市 B 所有時間點的預測值，依此類推。
+本教學課程會預測多個時間序列。系統會針對一或多個指定資料欄中的每個值，計算每個時間點的預測值。舉例來說，如果您想預測天氣，並指定包含州別資料的資料欄，預測資料會包含州別 A 所有時間點的預測值，接著是州別 B 所有時間點的預測值，依此類推。如果您想預測天氣，並指定包含州和城市資料的資料欄，預測資料會包含州 A 和城市 A 所有時間點的預測值，然後是州 A 和城市 B 所有時間點的預測值，依此類推。
 
 本教學課程會使用公開的
 [`bigquery-public-data.iowa_liquor_sales.sales`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&%3Bd=iowa_liquor_sales&%3Bpage=dataset&%3Bt=sales&%3Bpage=table&hl=zh-tw)
 和
 [`bigquery-public-data.covid19_weathersource_com.postal_code_day_history`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&%3Bd=covid19_weathersource_com&%3Bpage=dataset&%3Bt=postal_code_day_history&%3Bpage=table&hl=zh-tw)
-資料表中的資料。`bigquery-public-data.iowa_liquor_sales.sales` 資料表包含愛荷華州多個城市的酒類銷售資料。`bigquery-public-data.covid19_weathersource_com.postal_code_day_history`資料表包含全球各地的歷史天氣資料，例如溫度和濕度。
+資料表中的資料。`bigquery-public-data.iowa_liquor_sales.sales` 資料表包含從愛荷華州多個城市收集的酒類銷售資料。`bigquery-public-data.covid19_weathersource_com.postal_code_day_history` 表格包含全球各地的歷史天氣資料，例如溫度和濕度。
 
 建議您先閱讀「[使用多變數模型預測單一時間序列](https://docs.cloud.google.com/bigquery/docs/arima-plus-xreg-single-time-series-forecasting-tutorial?hl=zh-tw)」，再開始閱讀本教學課程。
 
@@ -92,7 +92,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    **啟用 API 時所需的角色**
 
-   如要啟用 API，您需要服務使用情形管理員 IAM 角色 (`roles/serviceusage.serviceUsageAdmin`)，其中包含 `serviceusage.services.enable` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用情形管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
    [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery&hl=zh-tw)
 
@@ -106,11 +106,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    [前往 BigQuery 頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 在「Explorer」窗格中，按一下專案名稱。
-3. 依序點按 more\_vert「View actions」(查看動作) >「Create dataset」(建立資料集)
+3. 依序點按 more\_vert「View actions」(查看動作) >「Create dataset」(建立資料集)。
 4. 在「建立資料集」頁面中，執行下列操作：
 
    * 在「Dataset ID」(資料集 ID) 中輸入 `bqml_tutorial`。
-   * 針對「位置類型」選取「多區域」，然後選取「美國」。
+   * 針對「Location type」(位置類型) 選取「Multi-region」(多區域)，然後選取「US」(美國)。
    * 其餘設定請保留預設狀態，然後按一下「建立資料集」。
 
 ### bq
@@ -145,14 +145,14 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 建立輸入資料表
 
-建立資料表，用來訓練及評估模型。這個資料表結合了 `bigquery-public-data.iowa_liquor_sales.sales` 和 `bigquery-public-data.covid19_weathersource_com.postal_code_day_history` 資料表的資料欄，用於分析天氣如何影響酒類商店訂購的商品類型和數量。您也會建立下列額外資料欄，做為模型的輸入變數：
+建立資料表，用來訓練及評估模型。這份表格結合了 `bigquery-public-data.iowa_liquor_sales.sales` 和 `bigquery-public-data.covid19_weathersource_com.postal_code_day_history` 資料表的資料欄，用於分析天氣如何影響酒類商店訂購的商品類型和數量。您也會建立下列額外資料欄，做為模型的輸入變數：
 
 * `date`：訂單日期
 * `store_number`：下單商店的專屬編號
 * `item_number`：訂購商品的專屬編號
 * `bottles_sold`：訂購的相關商品瓶數
 * `temperature`：訂單日期當天，商店所在位置的平均溫度
-* `humidity`：訂單日期當天，商店位置的平均濕度
+* `humidity`：訂單日期當天，商店所在位置的平均濕度
 
 請按照下列步驟建立輸入資料表：
 
@@ -218,7 +218,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 建立時間序列模型
 
-建立時間序列模型，預測 2022 年 9 月 1 日前，`bqml_tutorial.iowa_liquor_sales_with_weather` 資料表中每個日期的商店 ID 和項目 ID 組合所售出的瓶裝水數量。在預測期間，使用商店位置在各日期的平均溫度和濕度做為評估特徵。`bqml_tutorial.iowa_liquor_sales_with_weather` 資料表中約有 100 萬種不同的商品編號和商店編號組合，也就是說，有 100 萬個不同的時間序列需要預測。
+建立時間序列模型，預測 2022 年 9 月 1 日前，`bqml_tutorial.iowa_liquor_sales_with_weather` 表格中每個日期的商店 ID 和項目 ID 組合的瓶裝水銷售量。在預測期間，使用各日期的商店位置平均溫度和濕度做為評估特徵。`bqml_tutorial.iowa_liquor_sales_with_weather` 表格中約有 100 萬種不同的商品編號和商店編號組合，也就是說，有 100 萬個不同的時間序列需要預測。
 
 請按照下列步驟建立模型：
 
@@ -283,13 +283,13 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    輸出資料列會依 `store_number` 值排序，然後依 `item_ID` 值排序，最後依 `forecast_timestamp` 欄值依時間順序排序。在時間序列預測中，預測間隔 (以 `prediction_interval_lower_bound` 和 `prediction_interval_upper_bound` 欄值表示) 與 `forecast_value` 欄值同樣重要。`forecast_value` 值是預測間隔的中間點。預測區間取決於 `standard_error` 和 `confidence_level` 資料欄值。
 
-   如要進一步瞭解輸出資料欄，請參閱[`ML.FORECAST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-forecast?hl=zh-tw)。
+   如要進一步瞭解輸出資料欄，請參閱 [`ML.FORECAST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-forecast?hl=zh-tw)。
 
 ## 說明預測結果
 
 您可以使用 `ML.EXPLAIN_FORECAST` 函式，除了取得預測資料，還能取得可解釋性指標。`ML.EXPLAIN_FORECAST` 函式會預測未來時間序列值，並傳回時間序列的所有個別元件。
 
-與 `ML.FORECAST` 函式類似，`ML.EXPLAIN_FORECAST` 函式中使用的 `STRUCT(5 AS horizon, 0.8 AS confidence_level)` 子句表示查詢會預測未來 30 個時間點，並產生信賴度為 80% 的預測間隔。
+與 `ML.FORECAST` 函式類似，`ML.EXPLAIN_FORECAST` 函式中使用的 `STRUCT(5 AS horizon, 0.8 AS confidence_level)` 子句表示查詢會預測未來 30 個時間點，並產生信賴度為 80% 的預測區間。
 
 `ML.EXPLAIN_FORECAST` 函式會提供歷史資料和預測資料。如要只查看預測資料，請在查詢中新增 `time_series_type` 選項，並將選項值指定為 `forecast`。
 
@@ -322,15 +322,15 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    輸出資料列會依 `time_series_timestamp` 資料欄值的時間順序排序。
 
-   如要進一步瞭解輸出資料欄，請參閱[`ML.EXPLAIN_FORECAST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast?hl=zh-tw)。
+   如要進一步瞭解輸出資料欄，請參閱 [`ML.EXPLAIN_FORECAST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast?hl=zh-tw)。
 
 ## 評估預測準確率
 
-在模型未接受訓練的資料上執行模型，評估模型的預測準確度。您可以使用 `ML.EVALUATE` 函式執行這項操作。`ML.EVALUATE` 函式會分別評估每個時間序列。
+在模型未接受訓練的資料上執行模型，評估模型的預測準確度。您可以使用 `ML.EVALUATE` 函式執行這項操作。`ML.EVALUATE` 函式會獨立評估每個時間序列。
 
 在下列 GoogleSQL 查詢中，第二個 `SELECT` 陳述式提供含有未來特徵的資料，用於預測未來值，以便與實際資料比較。
 
-請按照下列步驟評估模型準確率：
+如要評估模型準確率，請按照下列步驟操作：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -356,13 +356,13 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    結果應如下所示：
 
-   如要進一步瞭解輸出資料欄，請參閱[`ML.EVALUATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate?hl=zh-tw)。
+   如要進一步瞭解輸出資料欄，請參閱 [`ML.EVALUATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate?hl=zh-tw)。
 
 ## 使用模型偵測異常狀況
 
 使用 `ML.DETECT_ANOMALIES` 函式偵測訓練資料中的異常狀況。
 
-在下列查詢中，`STRUCT(0.95 AS anomaly_prob_threshold)` 子句會導致 `ML.DETECT_ANOMALIES` 函式以 95% 的信賴水準找出異常資料點。
+在下列查詢中，`STRUCT(0.95 AS anomaly_prob_threshold)` 子句會導致 `ML.DETECT_ANOMALIES` 函式以 95% 的信賴水準識別異常資料點。
 
 請按照下列步驟偵測訓練資料中的異常狀況：
 
@@ -383,13 +383,13 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    結果應如下所示：
 
-   結果中的 `anomaly_probability` 欄會指出特定 `bottles_sold` 欄值是否異常。
+   結果中的 `anomaly_probability` 欄會指出特定 `bottles_sold` 欄值異常的可能性。
 
-   如要進一步瞭解輸出資料欄，請參閱[`ML.DETECT_ANOMALIES`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-anomalies?hl=zh-tw)。
+   如要進一步瞭解輸出資料欄，請參閱 [`ML.DETECT_ANOMALIES`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-anomalies?hl=zh-tw)。
 
 ### 偵測新資料中的異常狀況
 
-將輸入資料提供給 `ML.DETECT_ANOMALIES` 函式，即可偵測新資料中的異常狀況。新資料的資料簽章必須與訓練資料相同。
+將輸入資料提供給 `ML.DETECT_ANOMALIES` 函式，偵測新資料中的異常狀況。新資料的資料簽章必須與訓練資料相同。
 
 如要偵測新資料中的異常狀況，請按照下列步驟操作：
 
@@ -458,7 +458,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 * 瞭解如何[使用單變數模型預測單一時間序列](https://docs.cloud.google.com/bigquery/docs/arima-single-time-series-forecasting-tutorial?hl=zh-tw)
 * 瞭解如何[使用單變數模型預測多個時間序列](https://docs.cloud.google.com/bigquery/docs/arima-multiple-time-series-forecasting-tutorial?hl=zh-tw)
-* 瞭解如何[在預測多個資料列的時間序列時，擴充單變數模型](https://docs.cloud.google.com/bigquery/docs/arima-speed-up-tutorial?hl=zh-tw)。
+* 瞭解如何[在預測多個資料列的時間序列時，擴展單變數模型](https://docs.cloud.google.com/bigquery/docs/arima-speed-up-tutorial?hl=zh-tw)。
 * 瞭解如何[使用單變數模型，以階層方式預測多個時間序列](https://docs.cloud.google.com/bigquery/docs/arima-time-series-forecasting-with-hierarchical-time-series?hl=zh-tw)
 * 如需 BigQuery ML 的總覽，請參閱 [BigQuery 中的 AI 和 ML 簡介](https://docs.cloud.google.com/bigquery/docs/bqml-introduction?hl=zh-tw)。
 
@@ -469,11 +469,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-05 (世界標準時間)。
+上次更新時間：2026-07-16 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-05 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-16 (世界標準時間)。"],[],[]]

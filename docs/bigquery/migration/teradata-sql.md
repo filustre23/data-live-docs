@@ -175,4 +175,4 @@ Teradata 中的 `QUALIFY` 子句可讓您[篩選窗型函式的結果](https://d
 
 | Teradata | BigQuery |
 | --- | --- |
-| `SELECT col1, col2  FROM table  QUALIFY ROW_NUMBER() OVER (PARTITION BY col1 ORDER BY col2) = 1;` | 在 BigQuery 中，含有 `ROW_NUMBER()`、`SUM()`、`COUNT()` 等時間窗口函式和 |
+| `SELECT col1, col2</` |

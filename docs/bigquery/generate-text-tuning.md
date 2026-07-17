@@ -16,14 +16,14 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 使用資料調整模型
 
-本文說明如何建立參照 Gemini Enterprise Agent Platform 模型的 BigQuery ML [遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned?hl=zh-tw)，然後設定模型執行監督式微調。Agent Platform 模型必須是下列其中一項：
+本文說明如何建立參照 Gemini Enterprise Agent Platform 模型的 BigQuery ML [遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned?hl=zh-tw)，然後設定模型以執行監督式微調。Agent Platform 模型必須是下列其中一項：
 
 * `gemini-2.5-pro`
 * `gemini-2.5-flash-lite`
 * `gemini-2.0-flash-001`
 * `gemini-2.0-flash-lite-001`
 
-建立遠端模型後，請使用 [`ML.EVALUATE` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate?hl=zh-tw)評估模型，並確認模型效能是否符合您的用途。接著，您可以使用模型和 [`AI.GENERATE_TEXT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text?hl=zh-tw)，分析 BigQuery 資料表中的文字。
+建立遠端模型後，請使用 [`ML.EVALUATE` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate?hl=zh-tw)評估模型，並確認模型效能是否符合您的用途。接著，您可以使用該模型和 [`AI.GENERATE_TEXT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text?hl=zh-tw)，分析 BigQuery 資料表中的文字。
 
 詳情請參閱「[Vertex AI Gemini API 模型監督式微調](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models/tune-gemini-overview?hl=zh-tw)」。
 
@@ -33,13 +33,14 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 * 建立及使用 BigQuery 資料集、資料表和模型：
   專案的 BigQuery 資料編輯器 (`roles/bigquery.dataEditor`)。
-* 建立、委派及使用 BigQuery 連線：專案的 BigQuery 連線管理員 (`roles/bigquery.connectionsAdmin`)。
+* 建立、委派及使用 BigQuery 連線：
+  專案的 BigQuery 連線管理員 (`roles/bigquery.connectionsAdmin`)。
 
-  如果沒有設定[預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw)，您可以在執行 `CREATE MODEL` 陳述式時建立並設定連線。如要這麼做，您必須具備專案的 BigQuery 管理員角色 (`roles/bigquery.admin`)。詳情請參閱「[設定預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw#configure_the_default_connection)」。
-* 將權限授予連線的服務帳戶：在含有 Gemini Enterprise Agent Platform 端點的專案中，授予專案 IAM 管理員 (`roles/resourcemanager.projectIamAdmin`) 權限。這是您透過將模型名稱指定為端點所建立遠端模型的目前專案。這是您透過指定網址做為端點所建立遠端模型時，網址中識別的專案。
+  如果沒有設定[預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw)，您可以在執行 `CREATE MODEL` 陳述式時建立並設定連線。如要執行這項操作，您必須具備專案的 BigQuery 管理員角色 (`roles/bigquery.admin`)。詳情請參閱「[設定預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw#configure_the_default_connection)」。
+* 將權限授予連線的服務帳戶：在含有 Gemini Enterprise Agent Platform 端點的專案中，授予專案 IAM 管理員 (`roles/resourcemanager.projectIamAdmin`) 權限。這是您透過將模型名稱指定為端點所建立遠端模型的目前專案。這是您透過指定網址做為端點所建立遠端模型網址中識別的專案。
 * 建立 BigQuery 工作：專案中的 BigQuery 工作使用者 (`roles/bigquery.jobUser`)。
 
-這些預先定義的角色具備執行本文所述工作所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
+這些預先定義的角色具備執行本文中工作所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
 #### 所需權限
 
@@ -64,8 +65,8 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    **選取或建立專案所需的角色**
 
-   * **選取專案**：選取專案時，不需要具備特定 IAM 角色，只要您已獲授角色，即可選取任何專案。
-   * **建立專案**：如要建立專案，您需要「專案建立者」角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   * **選取專案**：選取專案時，不需要具備特定 IAM 角色，只要您在專案中獲派角色，即可選取該專案。
+   * **建立專案**：如要建立專案，您需要專案建立者角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
    **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，而不要選取現有專案。完成這些步驟後，您就可以刪除專案，並移除與該專案相關聯的所有資源。
 
    [前往專案選取器](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
@@ -74,7 +75,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    **啟用 API 時所需的角色**
 
-   如要啟用 API，您需要服務使用情形管理員 IAM 角色 (`roles/serviceusage.serviceUsageAdmin`)，其中包含 `serviceusage.services.enable` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用情形管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
    [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery.googleapis.com%2Cbigqueryconnection.googleapis.com%2Caiplatform.googleapis.com%2Ccompute.googleapis.com&hl=zh-tw)
 
@@ -123,7 +124,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 建立[Cloud 資源連線](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection?hl=zh-tw)，並取得連線的服務帳戶。在與上一步建立的資料集相同的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)中建立連線。
 
-如果已設定預設連線，或您具備 BigQuery 管理員角色，可以略過這個步驟。
+如果已設定預設連線，或具備 BigQuery 管理員角色，可以略過這個步驟。
 
 選取下列選項之一：
 
@@ -139,7 +140,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 4. 在「Connections」(連線) 頁面中，按一下「Create connection」(建立連線)。
 5. 在「連線類型」中，選擇「Vertex AI 遠端模型、遠端函式、BigLake 和 Spanner (Cloud 資源)」。
 6. 在「連線 ID」欄位中，輸入連線名稱。
-7. 在「位置類型」部分，選取連線位置。連線應與資料集等其他資源位於同一位置。
+7. 在「位置類型」中，選取連線位置。連線應與資料集等其他資源位於同一位置。
 8. 點選「建立連線」。
 9. 點選「前往連線」。
 10. 在「連線資訊」窗格中，複製服務帳戶 ID，以便在後續步驟中使用。
@@ -323,7 +324,7 @@ async function createConnection(projectId, location, connectionId) {
 
 請使用 [`google_bigquery_connection`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_connection) 資源。
 
-**注意：** 如要使用 Terraform 建立 BigQuery 物件，請務必啟用 [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest?hl=zh-tw)。
+**注意：** 如要使用 Terraform 建立 BigQuery 物件，必須啟用 [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -348,10 +349,9 @@ resource "google_bigquery_connection" "default" {
 ## 準備 Cloud Shell
 
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
-2. 設定要套用 Terraform 設定的預設 Google Cloud 專案
-   。
+2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
 
-   每項專案只需要執行一次這個指令，而且可以在任何目錄中執行。
+   每項專案只需要執行一次這個指令，且可以在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
@@ -368,11 +368,11 @@ resource "google_bigquery_connection" "default" {
    ```
    mkdir DIRECTORY && cd DIRECTORY && touch main.tf
    ```
-2. 如果您正在學習教學課程，可以複製每個章節或步驟中的程式碼範例。
+2. 如果您正在學習教學課程，可以複製每個章節或步驟中的範例程式碼。
 
-   將程式碼範例複製到新建立的 `main.tf`。
+   將範例程式碼複製到新建立的 `main.tf` 中。
 
-   視需要從 GitHub 複製程式碼。如果 Terraform 程式碼片段是端對端解決方案的一部分，建議您使用這個方法。
+   視需要從 GitHub 複製程式碼。如果 Terraform 程式碼片段是端對端解決方案的一部分，建議您使用這種做法。
 3. 查看並修改範例參數，套用至您的環境。
 4. 儲存變更。
 5. 初始化 Terraform。每個目錄只需執行一次這項操作。
@@ -396,7 +396,7 @@ resource "google_bigquery_connection" "default" {
    ```
 
    視需要修正設定。
-2. 執行下列指令，並在提示中輸入 `yes`，套用 Terraform 設定：
+2. 執行下列指令並在提示中輸入 `yes`，套用 Terraform 設定：
 
    ```
    terraform apply
@@ -432,7 +432,7 @@ resource "google_bigquery_connection" "default" {
 
 ### gcloud
 
-使用 [`gcloud projects add-iam-policy-binding`](https://docs.cloud.google.com/sdk/gcloud/reference/projects/add-iam-policy-binding?hl=zh-tw) 指令：
+使用 [`gcloud projects add-iam-policy-binding` 指令](https://docs.cloud.google.com/sdk/gcloud/reference/projects/add-iam-policy-binding?hl=zh-tw)：
 
 ```
 gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount:MEMBER' --role='roles/aiplatform.serviceAgent' --condition=None
@@ -443,7 +443,7 @@ gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount
 * `PROJECT_NUMBER`：您的專案編號。
 * `MEMBER`：您先前複製的服務帳戶 ID。
 
-與連線相關聯的服務帳戶是「BigQuery 連線委派服務代理」的執行個體，因此可以指派服務代理角色。
+與連線相關聯的服務帳戶是 [BigQuery 連線委派服務代理程式](https://docs.cloud.google.com/iam/docs/service-agents?hl=zh-tw#bigquery-connection-delegation-service-agent)的執行個體，因此可以指派服務代理程式角色。
 
 ## 建立經過監督式調整的模型
 
@@ -478,17 +478,17 @@ gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount
    * `REGION`：連線使用的區域。
    * `CONNECTION_ID`：BigQuery 連線的 ID。這個連線必須與您使用的資料集位於相同的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
 
-     在 Google Cloud 控制台中[查看連線詳細資料](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw#view-connections)時，這是顯示在「連線 ID」中的完整連線 ID 最後一個部分的值，例如 `projects/myproject/locations/connection_location/connections/myconnection`。
+     在 Google Cloud 控制台中[查看連線詳細資料](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw#view-connections)時，這是「連線 ID」中顯示的完整連線 ID 最後一個部分的值，例如 `projects/myproject/locations/connection_location/connections/myconnection`。
    * `ENDPOINT`：`STRING` 值，指定要使用的模型名稱。
    * `MAX_ITERATIONS`：`INT64` 值，指定要執行的監督式微調步驟數。`MAX_ITERATIONS` 值必須介於 `1` 至 `∞` 之間。
 
-     Gemini 模型會使用「週期」而非「步驟」訓練，因此 BigQuery ML 會將 `MAX_ITERATIONS` 值轉換為週期。`MAX_ITERATIONS` 的預設值是輸入資料中的列數，相當於一個訓練週期。如要使用多個訓練週期，請指定訓練資料中的資料列數倍數。舉例來說，如果您有 100 列輸入資料，並想使用兩個訓練週期，請為引數值指定 `200`。如果您提供的值不是輸入資料列數的倍數，BigQuery ML 會無條件進位至最接近的訓練週期。舉例來說，如果您有 100 列輸入資料，並為 `MAX_ITERATIONS` 值指定 `101`，則訓練會執行兩個訓練週期。
+     Gemini 模型是使用訓練週期而非步驟進行訓練，因此 BigQuery ML 會將 `MAX_ITERATIONS` 值轉換為訓練週期。`MAX_ITERATIONS` 的預設值是輸入資料中的列數，相當於一個訓練週期。如要使用多個訓練週期，請指定訓練資料中的資料列數倍數。舉例來說，如果您有 100 列輸入資料，並想使用兩個 Epoch，請為引數值指定 `200`。如果您提供的值不是輸入資料列數的倍數，BigQuery ML 會無條件進位至最接近的訓練週期。舉例來說，如果您有 100 列輸入資料，並為 `MAX_ITERATIONS` 值指定 `101`，則訓練會執行兩個訓練週期。
 
      如要進一步瞭解用於調整 Gemini 模型的參數，請參閱「[建立調整作業](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models/gemini-use-supervised-tuning?hl=zh-tw#create_a_text_model_supervised_tuning_job)」。
    * `DATA_SPLIT_METHOD`：`STRING` 值，指定將輸入資料拆分成訓練集和評估集的方法。有效選項如下：
      + `AUTO_SPLIT`：BigQuery ML 會自動分割資料。資料的分割方式取決於輸入表格中的列數。這是預設值。
-     + `RANDOM`：資料會先隨機化，再分成多個集合。如要自訂資料分割，可以搭配 `DATA_SPLIT_EVAL_FRACTION` 選項使用這個選項。
-     + `CUSTOM`：使用 `DATA_SPLIT_COL` 選項中提供的資料欄分割資料。`DATA_SPLIT_COL` 值必須是 `BOOL` 類型資料欄的名稱。含有 `TRUE` 或 `NULL` 值的資料列會做為評估資料使用，含有 `FALSE` 值的資料列則做為訓練資料使用。
+     + `RANDOM`：資料會先隨機化，再分成多個集合。如要自訂資料分割，可以搭配使用這個選項和 `DATA_SPLIT_EVAL_FRACTION` 選項。
+     + `CUSTOM`：使用 `DATA_SPLIT_COL` 選項中提供的資料欄分割資料。`DATA_SPLIT_COL` 值必須是 `BOOL` 類型的資料欄名稱。含有 `TRUE` 或 `NULL` 值的資料列會做為評估資料使用，含有 `FALSE` 值的資料列則做為訓練資料使用。
      + `SEQ`：使用 `DATA_SPLIT_COL` 選項中提供的資料欄分割資料。`DATA_SPLIT_COL` 值必須是下列其中一種類型的資料欄名稱：
        - `NUMERIC`
        - `BIGNUMERIC`
@@ -501,10 +501,10 @@ gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount
      + `NO_SPLIT`：不分割資料，所有輸入資料都會做為訓練資料。
 
      如要進一步瞭解這些資料分割選項，請參閱 [`DATA_SPLIT_METHOD`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned?hl=zh-tw#data_split_method)。
-   * `DATA_SPLIT_EVAL_FRACTION`：一個 `FLOAT64` 值，指定執行監督式微調時，要將多少比例的資料做為評估資料。值必須介於 `[0, 1.0]`。預設值為 `0.2`。
+   * `DATA_SPLIT_EVAL_FRACTION`：一個 `FLOAT64` 值，指定執行監督式微調時，要將多少比例的資料做為評估資料。值必須介於 `[0, 1.0]` 之間。預設值為 `0.2`。
 
-     當您將 `RANDOM` 或 `SEQ` 指定為 `DATA_SPLIT_METHOD` 選項的值時，請使用這個選項。如要自訂資料分割，可以使用 `DATA_SPLIT_METHOD` 選項搭配 `DATA_SPLIT_EVAL_FRACTION` 選項。
-   * `DATA_SPLIT_COL`：`STRING` 值，指定用於將輸入資料排序至訓練或評估集的資料欄名稱。指定 `CUSTOM` 或 `SEQ` 做為 `DATA_SPLIT_METHOD` 選項的值時，請使用 `CUSTOM`。
+     當您將 `RANDOM` 或 `SEQ` 指定為 `DATA_SPLIT_METHOD` 選項的值時，請使用這個選項。如要自訂資料分割，請搭配使用 `DATA_SPLIT_METHOD` 選項和 `DATA_SPLIT_EVAL_FRACTION` 選項。
+   * `DATA_SPLIT_COL`：`STRING` 值，指定用於將輸入資料排序至訓練或評估集的資料欄名稱。指定 `CUSTOM` 或 `SEQ` 做為 `DATA_SPLIT_METHOD` 選項的值時，請使用 。
    * `EVALUATION_TASK`：`STRING` 值，指定要微調模型執行的工作類型。有效選項如下：
      + `TEXT_GENERATION`
      + `CLASSIFICATION`
@@ -514,14 +514,14 @@ gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount
 
      預設值為 `UNSPECIFIED`。
    * `INPUT_PROMPT_COL`：`STRING` 值，其中包含執行監督式微調時要使用的訓練資料表中的提示資料欄名稱。預設值為 `prompt`。
-   * `INPUT_LABEL_COLS`：`ARRAY<<STRING>` 值，其中包含訓練資料表中的標籤資料欄名稱，可用於監督式微調。陣列中只能指定一個元素。預設值為空陣列。這會導致 `label` 成為 `LABEL_COLUMN` 引數的預設值。
+   * `INPUT_LABEL_COLS`：`ARRAY<<STRING>` 值，其中包含訓練資料表中的標籤資料欄名稱，用於監督式微調。陣列中只能指定一個元素。預設值為空陣列。這會導致 `label` 成為 `LABEL_COLUMN` 引數的預設值。
    * `PROMPT_COLUMN`：訓練資料表中的資料欄，內含用於評估 `LABEL_COLUMN` 資料欄內容的提示。這個資料欄必須是 `STRING` 類型，或轉換為 `STRING`。如果您為 `INPUT_PROMPT_COL` 選項指定值，則必須為 `PROMPT_COLUMN` 指定相同的值。否則，這個值必須是 `prompt`。如果資料表沒有 `prompt` 資料欄，請使用別名指定現有資料表資料欄。例如：`AS SELECT hint AS prompt, label FROM mydataset.mytable`。
    * `LABEL_COLUMN`：訓練資料表中的資料欄，內含用於訓練模型的範例。這個資料欄必須是 `STRING` 類型，或轉換為 `STRING`。如果您為 `INPUT_LABEL_COLS` 選項指定值，則必須為 `LABEL_COLUMN` 指定相同的值。否則，這個值必須是 `label`。如果資料表沒有 `label` 資料欄，請使用別名指定現有資料表資料欄。例如：`AS SELECT prompt, feature AS label FROM mydataset.mytable`。
    * `TABLE_PROJECT_ID`：包含訓練資料表的專案 ID。
    * `TABLE_DATASET`：包含訓練資料表的資料集名稱。
    * `TABLE_NAME`：包含用於訓練模型資料的資料表名稱。
 
-## 評估微調後的模型
+## 評估微調模型
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -551,7 +551,7 @@ gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount
 
      資料表必須包含一個資料欄，其名稱與模型訓練期間提供的提示資料欄名稱相符。您可以在模型訓練期間使用 `prompt_col` 選項提供這個值。如未指定 `prompt_col`，系統會使用訓練資料中名為 `prompt` 的資料欄。如果沒有名為 `prompt` 的資料欄，系統會傳回錯誤。
 
-     資料表必須有一個資料欄，其名稱與模型訓練期間提供的標籤資料欄名稱相符。您可以在模型訓練期間使用 `input_label_cols` 選項提供這個值。如果未指定 `input_label_cols`，系統會使用訓練資料中名為「label」的資料欄。`label`如果沒有名為 `label` 的資料欄，系統會傳回錯誤。
+     資料表必須包含一個資料欄，其名稱與模型訓練期間提供的標籤資料欄名稱相符。您可以在模型訓練期間使用 `input_label_cols` 選項提供這個值。如果未指定 `input_label_cols`，系統則會使用訓練資料中名為「label」(標籤) 的資料欄。`label`如果沒有名為 `label` 的資料欄，系統會傳回錯誤。
    * `TASK_TYPE`：`STRING` 值，指定要評估模型效能的任務類型。有效選項如下：
      + `TEXT_GENERATION`
      + `CLASSIFICATION`
@@ -562,15 +562,15 @@ gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount
      如要取得較短的回覆，請指定較低的值；如要取得較長的回覆，請調高此值。預設值為 `128`。
    * `TEMPERATURE`：介於 `[0.0,1.0]` 範圍內的 `FLOAT64` 值，可控制選取詞元時的隨機程度。預設值為 `0`。
 
-     如果希望提示生成更具確定性、較不具開放性和創意性的回覆，建議調低 `temperature` 值。另一方面，如果 `temperature` 值較高，則可能產生較多元或有創意的結果。如果 `0` 為 `temperature`，則模型一律會選取可能性最高的回覆。
-   * `TOP_K`：介於 `[1,40]` 之間的 `INT64` 值，用於決定模型選取時考量的初始詞元集區。如要取得較不隨機的回覆，請指定較低的值；如要取得較隨機的回覆，請調高此值。預設值為 `40`。
-   * `TOP_P`：`FLOAT64` 範圍 `[0.0,1.0]` 中的 `FLOAT64` 值，有助於判斷要從 `TOP_K` 決定的集區中選取哪些權杖。如要取得較不隨機的回覆，請指定較低的值；如要取得較隨機的回覆，請調高此值。預設值為 `0.95`。
+     如果希望提示生成更具確定性、較不具開放性和創意性的回覆，建議調低 `temperature` 值。另一方面，如果 `temperature` 值較高，則可能產生較多元或有創意的結果。如果 `0` 為 `temperature`，則模型具有確定性，即一律會選取可能性最高的回覆。
+   * `TOP_K`：介於 `[1,40]` 範圍內的 `INT64` 值，決定模型選取時考量的初始詞元集區。如要取得較不隨機的回覆，請指定較低的值；如要取得較隨機的回覆，請調高此值。預設值為 `40`。
+   * `TOP_P`：`[0.0,1.0]` 範圍內的 `FLOAT64` 值 `FLOAT64` 有助於判斷要選取 `TOP_K` 所決定集區中的哪些權杖。如要取得較不隨機的回覆，請指定較低的值；如要取得較隨機的回覆，請調高此值。預設值為 `0.95`。
 
 ## 生成文字
 
 使用 [`AI.GENERATE_TEXT` 函式生成文字：](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text?hl=zh-tw)
 
-### 提示資料欄
+### 提示欄
 
 使用資料表欄位提供提示，生成文字。
 
@@ -591,19 +591,18 @@ FROM AI.GENERATE_TEXT(
 * `DATASET_ID`：包含模型的資料集 ID。
 * `MODEL_NAME`：模型名稱。
 * `TABLE_NAME`：包含提示的資料表名稱。這個資料表必須有一個資料欄，名稱與微調模型中的特徵欄名稱相符。建立模型時，可以使用 `PROMPT_COL` 選項設定模型中的特徵資料欄名稱。否則，模型中的特徵欄名稱預設為 `prompt`，您也可以使用別名來使用名稱不同的資料欄。
-* `TOKENS`：`INT64` 值，用於設定回覆中可生成的詞元數量上限。
-  這個值必須介於 `[1,8192]` 的範圍之間。
+* `TOKENS`：`INT64` 值，用於設定回覆中可生成的詞元數量上限。這個值必須介於 `[1,8192]` 的範圍之間。
   如要取得較短的回覆，請指定較低的值；如要取得較長的回覆，請調高此值。預設值為 `128`。
 * `TEMPERATURE`：
   介於 `[0.0,1.0]` 之間的 `FLOAT64` 值，
   可控制選取詞元時的隨機程度。
   預設值為 `0`。
 
-  如果希望提示生成更具確定性、較不具開放性和創意性的回覆，建議調低 `temperature` 值。另一方面，如果 `temperature` 值較高，則可能產生較多元或有創意的結果。如果 `0` 為 `temperature`，則模型一律會選取可能性最高的回覆。
+  如果希望提示生成更具確定性、較不具開放性和創意性的回覆，建議調低 `temperature` 值。另一方面，如果 `temperature` 值較高，則可能產生較多元或有創意的結果。如果 `0` 為 `temperature`，則模型具有確定性，即一律會選取可能性最高的回覆。
 * `TOP_P`：`[0.0,1.0]` 範圍內的 `FLOAT64` 值有助於判斷所選符記的機率。如要取得較不隨機的回覆，請指定較低的值；如要取得較隨機的回覆，請調高此值。預設值為 `0.95`。
 * `STOP_SEQUENCES`：`ARRAY<STRING>` 值，可移除模型回應中包含的指定字串。字串必須完全相符，包括大小寫。預設值為空陣列。
-* `GROUND_WITH_GOOGLE_SEARCH`：`BOOL` 值，用於判斷 Gemini Enterprise Agent Platform 模型在生成回覆時是否使用[以 Google 搜尋強化事實基礎](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/grounding/overview?hl=zh-tw#ground-public)。建立基準後，模型就能在生成回覆時使用網路上其他資訊，讓回覆內容更具體且符合事實。如果將這個欄位設為 `True`，結果中會包含額外的 `grounding_result` 欄，提供模型用來收集額外資訊的來源。預設值為 `FALSE`。
-* `SAFETY_SETTINGS`：`ARRAY<STRUCT<STRING AS category, STRING AS threshold>>` 值，可設定內容安全門檻來篩選回應。結構體中的第一個元素會指定有害類別，第二個元素則會指定對應的封鎖門檻。模型會篩除違反這些設定的內容。每個類別只能指定一次。舉例來說，您無法同時指定 `STRUCT('HARM_CATEGORY_DANGEROUS_CONTENT' AS category, 'BLOCK_MEDIUM_AND_ABOVE' AS threshold)` 和 `STRUCT('HARM_CATEGORY_DANGEROUS_CONTENT' AS category, 'BLOCK_ONLY_HIGH' AS threshold)`。如果特定類別沒有安全設定，系統會使用 `BLOCK_MEDIUM_AND_ABOVE` 安全設定。
+* `GROUND_WITH_GOOGLE_SEARCH`：`BOOL` 值，用於判斷 Gemini Enterprise Agent Platform 模型在生成回覆時是否使用 [以 Google 搜尋強化事實基礎](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/grounding/overview?hl=zh-tw#ground-public)。建立基準後，模型就能在生成回覆時使用網路上其他資訊，讓回覆內容更具體且符合事實。如果將這個欄位設為 `True`，結果中會包含額外的 `grounding_result` 欄，提供模型用來收集額外資訊的來源。預設值為 `FALSE`。
+* `SAFETY_SETTINGS`：`ARRAY<STRUCT<STRING AS category, STRING AS threshold>>` 值，用於設定內容安全門檻，以篩選回應。結構體中的第一個元素會指定有害類別，第二個元素則會指定對應的封鎖門檻。模型會篩除違反這些設定的內容。每個類別只能指定一次。舉例來說，您無法同時指定 `STRUCT('HARM_CATEGORY_DANGEROUS_CONTENT' AS category, 'BLOCK_MEDIUM_AND_ABOVE' AS threshold)` 和 `STRUCT('HARM_CATEGORY_DANGEROUS_CONTENT' AS category, 'BLOCK_ONLY_HIGH' AS threshold)`。如果特定類別沒有安全設定，系統會使用 `BLOCK_MEDIUM_AND_ABOVE` 安全設定。
 
   支援的類別如下：
 
@@ -626,7 +625,7 @@ FROM AI.GENERATE_TEXT(
     active` 錯誤。
   + `SHARED`：即使您已購買佈建輸送量配額，`AI.GENERATE_TEXT` 函式也只會使用[動態共用配額 (DSQ)](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/dynamic-shared-quota?hl=zh-tw)。
   + `UNSPECIFIED`：`AI.GENERATE_TEXT` 函式會依下列方式使用配額：
-    - 如未購買佈建輸送量配額，`AI.GENERATE_TEXT` 函式會使用 DSQ 配額。
+    - 如果尚未購買佈建輸送量配額，`AI.GENERATE_TEXT` 函式會使用 DSQ 配額。
     - 如果您已購買佈建輸送量配額，`AI.GENERATE_TEXT` 函式會優先使用該配額。如果要求超出佈建輸送量配額，溢出的流量會使用 DSQ 配額。
 
   預設值為 `UNSPECIFIED`。
@@ -637,7 +636,7 @@ FROM AI.GENERATE_TEXT(
 以下範例顯示具有這些特徵的要求：
 
 * 使用 `prompts` 資料表的 `prompt` 資料欄做為提示。
-* 傳回簡短且中等可能性的回覆。
+* 傳回簡短且中等可能性的回應。
 * 並在不同資料欄中傳回生成的文字和安全屬性。
 
 ```
@@ -671,19 +670,18 @@ FROM AI.GENERATE_TEXT(
 * `DATASET_ID`：包含模型的資料集 ID。
 * `MODEL_NAME`：模型名稱。
 * `PROMPT_QUERY`：提供提示資料的查詢。
-* `TOKENS`：`INT64` 值，用於設定回覆中可生成的詞元數量上限。
-  這個值必須介於 `[1,8192]` 的範圍之間。
+* `TOKENS`：`INT64` 值，用於設定回覆中可生成的詞元數量上限。這個值必須介於 `[1,8192]` 的範圍之間。
   如要取得較短的回覆，請指定較低的值；如要取得較長的回覆，請調高此值。預設值為 `128`。
 * `TEMPERATURE`：
   介於 `[0.0,1.0]` 之間的 `FLOAT64` 值，
   可控制選取詞元時的隨機程度。
   預設值為 `0`。
 
-  如果希望提示生成更具確定性、較不具開放性和創意性的回覆，建議調低 `temperature` 值。另一方面，如果 `temperature` 值較高，則可能產生較多元或有創意的結果。如果 `0` 為 `temperature`，則模型一律會選取可能性最高的回覆。
+  如果希望提示生成更具確定性、較不具開放性和創意性的回覆，建議調低 `temperature` 值。另一方面，如果 `temperature` 值較高，則可能產生較多元或有創意的結果。如果 `0` 為 `temperature`，則模型具有確定性，即一律會選取可能性最高的回覆。
 * `TOP_P`：`[0.0,1.0]` 範圍內的 `FLOAT64` 值有助於判斷所選符記的機率。如要取得較不隨機的回覆，請指定較低的值；如要取得較隨機的回覆，請調高此值。預設值為 `0.95`。
 * `STOP_SEQUENCES`：`ARRAY<STRING>` 值，可移除模型回應中包含的指定字串。字串必須完全相符，包括大小寫。預設值為空陣列。
-* `GROUND_WITH_GOOGLE_SEARCH`：`BOOL` 值，用於判斷 Gemini Enterprise Agent Platform 模型在生成回覆時是否使用[以 Google 搜尋強化事實基礎](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/grounding/overview?hl=zh-tw#ground-public)。建立基準後，模型就能在生成回覆時使用網路上其他資訊，讓回覆內容更具體且符合事實。如果將這個欄位設為 `True`，結果中會包含額外的 `grounding_result` 欄，提供模型用來收集額外資訊的來源。預設值為 `FALSE`。
-* `SAFETY_SETTINGS`：`ARRAY<STRUCT<STRING AS category, STRING AS threshold>>` 值，可設定內容安全門檻來篩選回應。結構體中的第一個元素會指定有害類別，第二個元素則會指定對應的封鎖門檻。模型會篩除違反這些設定的內容。每個類別只能指定一次。舉例來說，您無法同時指定 `STRUCT('HARM_CATEGORY_DANGEROUS_CONTENT' AS category, 'BLOCK_MEDIUM_AND_ABOVE' AS threshold)` 和 `STRUCT('HARM_CATEGORY_DANGEROUS_CONTENT' AS category, 'BLOCK_ONLY_HIGH' AS threshold)`。如果特定類別沒有安全設定，系統會使用 `BLOCK_MEDIUM_AND_ABOVE` 安全設定。
+* `GROUND_WITH_GOOGLE_SEARCH`：`BOOL` 值，用於判斷 Gemini Enterprise Agent Platform 模型在生成回覆時是否使用 [以 Google 搜尋強化事實基礎](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/grounding/overview?hl=zh-tw#ground-public)。建立基準後，模型就能在生成回覆時使用網路上其他資訊，讓回覆內容更具體且符合事實。如果將這個欄位設為 `True`，結果中會包含額外的 `grounding_result` 欄，提供模型用來收集額外資訊的來源。預設值為 `FALSE`。
+* `SAFETY_SETTINGS`：`ARRAY<STRUCT<STRING AS category, STRING AS threshold>>` 值，用於設定內容安全門檻，以篩選回應。結構體中的第一個元素會指定有害類別，第二個元素則會指定對應的封鎖門檻。模型會篩除違反這些設定的內容。每個類別只能指定一次。舉例來說，您無法同時指定 `STRUCT('HARM_CATEGORY_DANGEROUS_CONTENT' AS category, 'BLOCK_MEDIUM_AND_ABOVE' AS threshold)` 和 `STRUCT('HARM_CATEGORY_DANGEROUS_CONTENT' AS category, 'BLOCK_ONLY_HIGH' AS threshold)`。如果特定類別沒有安全設定，系統會使用 `BLOCK_MEDIUM_AND_ABOVE` 安全設定。
 
   支援的類別如下：
 
@@ -706,7 +704,7 @@ FROM AI.GENERATE_TEXT(
     active` 錯誤。
   + `SHARED`：即使您已購買佈建輸送量配額，`AI.GENERATE_TEXT` 函式也只會使用[動態共用配額 (DSQ)](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/dynamic-shared-quota?hl=zh-tw)。
   + `UNSPECIFIED`：`AI.GENERATE_TEXT` 函式會依下列方式使用配額：
-    - 如未購買佈建輸送量配額，`AI.GENERATE_TEXT` 函式會使用 DSQ 配額。
+    - 如果尚未購買佈建輸送量配額，`AI.GENERATE_TEXT` 函式會使用 DSQ 配額。
     - 如果您已購買佈建輸送量配額，`AI.GENERATE_TEXT` 函式會優先使用該配額。如果要求超出佈建輸送量配額，溢出的流量會使用 DSQ 配額。
 
   預設值為 `UNSPECIFIED`。
@@ -739,9 +737,9 @@ FROM
 
 以下範例顯示具有這些特徵的要求：
 
-* 使用查詢串連字串，提供含有資料表欄的提示[前置字元](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/prompts/structure-prompts?hl=zh-tw)，藉此建立提示資料。
-* 傳回簡短且中等可能性的回覆。
-* 不會在個別資料欄中傳回生成的文字和安全屬性。
+* 使用查詢，透過串連字串建立提示資料，提供提示[前置字元](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/prompts/structure-prompts?hl=zh-tw)和資料表欄。
+* 傳回簡短且中等可能性的回應。
+* 不會在個別資料欄中傳回生成的文字和安全性屬性。
 
 ```
 SELECT *
@@ -763,11 +761,11 @@ FROM
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-06-30 (世界標準時間)。
+上次更新時間：2026-07-16 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-30 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-16 (世界標準時間)。"],[],[]]

@@ -92,7 +92,7 @@ Google uses AI technology to translate content into your preferred language. AI 
        - [工作階段服務帳戶的服務帳戶使用者 (roles/iam.serviceAccountUser) 角色](https://docs.cloud.google.com/iam/docs/service-account-permissions?hl=zh-tw#user-role)。這個角色包含模擬服務帳戶所需的 `iam.serviceAccounts.actAs` 權限。
      + 服務帳戶憑證：如要為筆記本工作階段指定服務帳戶憑證，而非使用者憑證，[工作階段服務帳戶](https://docs.cloud.google.com/dataproc-serverless/docs/concepts/service-account?hl=zh-tw)必須具備下列角色：
        - [Dataproc Worker (`roles/dataproc.worker` 角色)](https://docs.cloud.google.com/iam/docs/roles-permissions/dataproc?hl=zh-tw#dataproc.worker)
-   * Notebook 執行階段：除非您選取其他執行階段，否則 Notebook 會使用預設的 Gemini Enterprise Agent Platform 執行階段。如要定義自己的執行階段，請在 Google Cloud 控制台的「執行階段」[頁面](https://console.cloud.google.com/vertex-ai/colab/runtimes?hl=zh-tw)建立執行階段。**注意**，使用 [NumPy 程式庫](https://numpy.org/)時，請在筆記本執行階段使用 Spark 3.5 支援的 NumPy 1.26 版。
+   * Notebook 執行階段：除非您選取其他執行階段，否則 Notebook 會使用預設的 Gemini Enterprise Agent Platform 執行階段。如要自行定義執行階段，請在 Google Cloud 控制台的「執行階段」[頁面](https://console.cloud.google.com/vertex-ai/colab/runtimes?hl=zh-tw)建立執行階段。**注意**，使用 [NumPy 程式庫](https://numpy.org/)時，請在筆記本執行階段使用 Spark 3.5 支援的 NumPy 1.26 版。
 
 ## 定價
 
@@ -112,7 +112,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 您可以在 BigQuery Studio Python 筆記本中，透過下列方式建立 Spark 工作階段：
 
 * 在筆記本中設定及建立單一工作階段。
-* 在[**互動式工作階段範本**](https://docs.cloud.google.com/dataproc-serverless/docs/guides/create-serverless-sessions-templates?hl=zh-tw#create-dataproc-serverless-session-template)中設定 Spark 工作階段，然後使用範本在 Notebook 中設定及建立工作階段。BigQuery 提供 `Query using Spark` 功能，可協助您開始編寫範本化工作階段的程式碼，如「範本化 Spark 工作階段」分頁標籤所述。
+* 在[**互動式工作階段範本**](https://docs.cloud.google.com/dataproc-serverless/docs/guides/create-serverless-sessions-templates?hl=zh-tw#create-dataproc-serverless-session-template)中設定 Spark 工作階段，然後使用範本在 Notebook 中設定及建立工作階段。BigQuery 提供 `Query using Spark` 功能，可協助您開始編寫範本化工作階段的程式碼，如「範本化 Spark 工作階段」分頁說明。
 
 ### 單次
 
@@ -141,9 +141,7 @@ spark = (
 更改下列內容：
 
 * APP\_NAME：工作階段的選用名稱。
-* **選用工作階段設定：**您可以新增 Managed Service for Apache Spark API
-  [`Session`](https://docs.cloud.google.com/dataproc-serverless/docs/reference/rest/v1/projects.locations.sessions?hl=zh-tw#Session)
-  設定，自訂工作階段。以下舉幾個例子說明：
+* **選用工作階段設定：**您可以新增 Managed Service for Apache Spark API [`Session`](https://docs.cloud.google.com/dataproc-serverless/docs/reference/rest/v1/projects.locations.sessions?hl=zh-tw#Session) 設定，自訂工作階段。以下舉幾個例子說明：
   + [`RuntimeConfig`](https://docs.cloud.google.com/dataproc-serverless/docs/reference/rest/v1/RuntimeConfig?hl=zh-tw)：
 
     - `session.runtime_config.properties={spark.property.key1:VALUE_1,...,spark.property.keyN:VALUE_N}`
@@ -158,12 +156,12 @@ spark = (
 
 您可以在筆記本儲存格中輸入並執行程式碼，根據現有的[工作階段範本](https://docs.cloud.google.com/dataproc-serverless/docs/guides/create-serverless-sessions-templates?hl=zh-tw#create-dataproc-serverless-session-template)建立 Spark 工作階段。您在筆記本程式碼中提供的任何 `session` 設定，都會覆寫在工作階段範本中設定的相同設定。
 
-如要快速上手，請使用`Query using Spark`範本預先填入 Spark 工作階段範本程式碼：
+如要快速上手，請使用`Query using Spark`範本預先填入筆記本，其中包含 Spark 工作階段範本程式碼：
 
-1. 在編輯器窗格的分頁列中，按一下「+」符號旁的arrow\_drop\_down下拉式箭頭，然後點選「筆記本」。
+1. 在編輯器窗格的分頁列中，按一下「+」符號旁的arrow\_drop\_down下拉式箭頭，然後按一下「筆記本」。
 2. 在「從範本開始」下方，按一下「使用 Spark 查詢」，然後點選「使用範本」，將程式碼插入筆記本。
 3. 如「[附註](#notes)」所述，指定變數。
-4. 您可以刪除插入筆記本中的任何其他程式碼範例儲存格。
+4. 您可以刪除插入筆記本中的任何其他範例程式碼儲存格。
 
 ```
 from google.cloud.dataproc_spark_connect import DataprocSparkSession
@@ -186,7 +184,7 @@ spark = (
 請替換下列項目：
 
 * PROJECT\_ID：專案 ID，列於[Google Cloud 控制台資訊主頁](https://console.cloud.google.com/home/dashboard?hl=zh-tw)的「專案資訊」部分。
-* LOCATION：筆記本工作階段執行的 [Compute Engine 區域](https://docs.cloud.google.com/compute/docs/regions-zones?hl=zh-tw#available)。如未提供，系統會使用建立筆記本的 VM 區域。
+* LOCATION：筆記本工作階段執行的 [Compute Engine 區域](https://docs.cloud.google.com/compute/docs/regions-zones?hl=zh-tw#available)。如未提供，系統會使用建立筆記本的 VM 所在區域。
 * SESSION\_TEMPLATE：現有[互動式工作階段範本](https://docs.cloud.google.com/dataproc-serverless/docs/guides/create-serverless-sessions-templates?hl=zh-tw#create-dataproc-serverless-session-template)的名稱。系統會從範本取得工作階段設定。
   範本也必須指定下列設定：
 
@@ -200,13 +198,13 @@ spark = (
 
 在筆記本中建立 Spark 工作階段後，即可使用該工作階段在筆記本中執行 Spark 筆記本程式碼。
 
-**支援 Spark Connect PySpark API：**Spark Connect 筆記本工作階段支援大多數 [PySpark API](https://spark.apache.org/docs/latest/api/python/reference/index.html)，包括 [DataFrame](https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/dataframe.html)、[Functions](https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/functions.html) 和 [Column](https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/column.html)，但不支援 [SparkContext](https://spark.apache.org/docs/latest/api/python/reference/api/pyspark.SparkContext.html) 和 [RDD](https://spark.apache.org/docs/latest/api/python/reference/api/pyspark.RDD.html) 等其他 PySpark API。詳情請參閱「[Spark 3.5 支援的項目](https://spark.apache.org/docs/latest/spark-connect-overview.html#what-is-supported)」。
+**支援 Spark Connect PySpark API：**Spark Connect 筆記本工作階段支援大部分的 [PySpark API](https://spark.apache.org/docs/latest/api/python/reference/index.html)，包括 [DataFrame](https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/dataframe.html)、[Functions](https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/functions.html) 和 [Column](https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/column.html)，但不支援 [SparkContext](https://spark.apache.org/docs/latest/api/python/reference/api/pyspark.SparkContext.html) 和 [RDD](https://spark.apache.org/docs/latest/api/python/reference/api/pyspark.RDD.html) 等其他 PySpark API。詳情請參閱「[Spark 3.5 支援的項目](https://spark.apache.org/docs/latest/spark-connect-overview.html#what-is-supported)」。
 
 **提示：** 您可以查看 [Spark SQL API 參考資料](https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/index.html)，瞭解 Spark Connect 是否支援某個 API。支援的 API 說明文件會顯示「支援 Spark Connect」訊息：
 
 **Spark Connect 筆記本直接寫入**：BigQuery Studio 筆記本中的 Spark 工作階段會預先設定 [Spark BigQuery 連接器](https://docs.cloud.google.com/dataproc/docs/tutorials/bigquery-connector-spark-example?hl=zh-tw)，以便直接寫入資料。DIRECT 寫入方法會使用 [BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api?hl=zh-tw)，將資料直接寫入 BigQuery；INDIRECT 寫入方法 (Managed Service for Apache Spark 批次作業的預設方法) 會將資料寫入中繼 Cloud Storage 值區，然後將資料寫入 BigQuery (如要進一步瞭解 INDIRECT 寫入，請參閱「[在 BigQuery 間讀寫資料](https://docs.cloud.google.com/dataproc/docs/tutorials/bigquery-connector-spark-example?hl=zh-tw#read-and-write-data-from-and-to-bigquery)」)。
 
-**Managed Service for Apache Spark 專屬 API：**Managed Service for Apache Spark 擴充了 `addArtifacts` 方法，可簡化將 `PyPI` 套件動態新增至 Spark 工作階段的程序。您可以採用 [`version-scheme`](https://packaging.python.org/en/latest/specifications/version-specifiers/#examples-of-compliant-version-schemes) 格式指定清單 (類似於 `pip install`)。這會指示 Spark Connect 伺服器在所有叢集節點上安裝套件及其依附元件，讓工作站可將這些套件用於 UDF。
+**Managed Service for Apache Spark 專屬 API：**Managed Service for Apache Spark 擴充了 `addArtifacts` 方法，可簡化將 `PyPI` 套件動態新增至 Spark 工作階段的程序。您可以指定 [`version-scheme`](https://packaging.python.org/en/latest/specifications/version-specifiers/#examples-of-compliant-version-schemes) 格式的清單 (類似於 `pip install`)。這會指示 Spark Connect 伺服器在所有叢集節點上安裝套件及其依附元件，讓工作站可供 UDF 使用。
 
 以下範例會在叢集上安裝指定的 `textdistance` 版本和最新相容的 `random2` 程式庫，讓使用 `textdistance` 和 `random2` 的 UDF 在工作節點上執行。
 
@@ -214,7 +212,7 @@ spark = (
 spark.addArtifacts("textdistance==4.6.1", "random2", pypi=True)
 ```
 
-**筆記本程式碼說明：**在 BigQuery Studio 筆記本中，將指標懸停在類別或方法名稱上時，系統會提供程式碼說明；輸入程式碼時，系統會提供程式碼自動完成說明。
+**筆記本程式碼說明：**在 BigQuery Studio 筆記本中，將指標懸停在類別或方法名稱上時，系統會提供程式碼說明；輸入程式碼時，系統也會提供程式碼自動完成說明。
 
 在下列範例中，輸入 `DataprocSparkSession` 並將指標懸停在這個類別名稱上，會顯示程式碼自動完成和說明文件輔助功能。
 
@@ -259,7 +257,8 @@ word_counts_df.show()
 
 **輸出內容：**
 
-儲存格輸出內容會列出字數統計輸出內容的範例。如要在 Google Cloud 控制台中查看工作階段詳細資料，請按一下「Interactive Session Detail View」(互動式工作階段詳細資料檢視畫面) 連結。如要監控 Spark 工作階段，請在工作階段詳細資料頁面中按一下「View Spark UI」(查看 Spark UI)。
+儲存格輸出內容會列出字數統計輸出內容的範例。如要在 Google Cloud 控制台中查看工作階段詳細資料，請按一下「Interactive Session Detail View」(互動式工作階段詳細資料檢視畫面) 連結。系統會開啟 Spark 詳細資料面板，提供「記錄」、「執行器」、「SQL」和「工作」 (包括事件時間軸) 的分頁。
+如要監控 Spark 工作階段，請在工作階段詳細資料頁面中按一下「View Spark UI」(查看 Spark UI)。
 
 
 
@@ -345,13 +344,14 @@ df.printSchema()
 注意：
 
 * PROJECT\_ID：專案 ID，列於[Google Cloud 控制台資訊主頁](https://console.cloud.google.com/home/dashboard?hl=zh-tw)的「專案資訊」部分。
-* REGION 和 SUBNET\_NAME：指定 [Compute Engine 區域](https://docs.cloud.google.com/compute/docs/regions-zones?hl=zh-tw#available)，以及工作階段區域中的子網路名稱。Managed Service for Apache Spark 會在指定子網路上啟用[Private Google Access (PGA)](https://docs.cloud.google.com/vpc/docs/private-google-access?hl=zh-tw)。
+* REGION 和 SUBNET\_NAME：指定 [Compute Engine 區域](https://docs.cloud.google.com/compute/docs/regions-zones?hl=zh-tw#available)，以及工作階段區域中的子網路名稱。Managed Service for Apache Spark 會在指定的子網路上啟用[私人 Google 存取權 (PGA)](https://docs.cloud.google.com/vpc/docs/private-google-access?hl=zh-tw)。
 * LOCATION：預設值為 `BigQuery_metastore_config.location` 和 `spark.sql.catalog.{catalog}.gcp_location`，但您可以選擇任何`US`[支援的 BigQuery 位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#supported_locations)。
-* BUCKET 和 WAREHOUSE\_DIRECTORY：用於 Iceberg 倉儲目錄的 Cloud Storage 值區和資料夾。
+* BUCKET 和 WAREHOUSE\_DIRECTORY：用於 Iceberg 倉庫目錄的 Cloud Storage 值區和資料夾。
 * CATALOG 和 NAMESPACE：Iceberg 目錄名稱和命名空間會合併，用於識別 Iceberg 資料表 (`catalog.namespace.table_name`)。
 * APP\_NAME：工作階段的選用名稱。
 
-儲存格輸出內容會列出 `sample_iceberg_table`，並顯示 Google Cloud 控制台的「互動式工作階段詳細資料」頁面連結。您可以在工作階段詳細資料頁面點選「View Spark UI」(查看 Spark UI)，監控 Spark 工作階段。
+儲存格輸出內容會列出新增資料欄的 `sample_iceberg_table`，並在 Google Cloud 控制台中顯示「互動式工作階段詳細資料」頁面的連結。系統會開啟 Spark 詳細資料面板，提供「記錄」、「執行器」、「SQL」和「工作」 (包括事件時間軸) 的分頁。
+您可以在工作階段詳細資料頁面點選「View Spark UI」(查看 Spark UI)，監控 Spark 工作階段。
 
 
 
@@ -424,7 +424,7 @@ sdf = spark.read.format('bigquery') \
 1. 點選工具列中的「+ Code」，插入新的程式碼儲存格。
    新的程式碼儲存格會顯示 `Start coding or generate with AI`。
    點選「生成」。
-2. 在「生成」編輯器中輸入自然語言提示，然後按一下 `enter`。**請務必在提示中加入 `spark` 或 `pyspark` 關鍵字。**
+2. 在「生成」編輯器中輸入自然語言提示，然後按一下 `enter`。**請務必在提示中加入關鍵字 `spark` 或 `pyspark`。**
 
    提示詞範例：
 
@@ -471,11 +471,11 @@ sdf = spark.read.format('bigquery') \
 
 請完成下列步驟，以批次工作負載的形式執行 BigQuery Studio 筆記本程式碼。
 
-1. 在本機終端機或 [Cloud Shell](https://console.cloud.google.com/?cloudshell=true&hl=zh-tw) 中，將筆記本程式碼下載到檔案。
+1. 將筆記本程式碼下載到本機終端機或 [Cloud Shell](https://console.cloud.google.com/?cloudshell=true&hl=zh-tw) 的檔案中。
 
-   建議您下載到 Cloud Shell 並在其中作業，因為 Cloud Shell 已預先安裝[文字編輯器和其他工具](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works?hl=zh-tw#tools)，並提供內建的 [Python 支援](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works?hl=zh-tw#language_support)。
+   建議您下載至 Cloud Shell 並在其中作業，因為 Cloud Shell 已預先安裝[文字編輯器和其他工具](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works?hl=zh-tw#tools)，並提供內建的 [Python 支援](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works?hl=zh-tw#language_support)。
    1. 在 Google Cloud 控制台的「BigQuery Studio」[頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)上，開啟「Explorer」窗格中的筆記本。
-   2. 如要展開選單列，請依序點選 keyboard\_arrow\_down **切換標題顯示設定**。
+   2. 如要展開選單列，請依序點選「keyboard\_arrow\_down」keyboard\_arrow\_down「切換標題顯示設定」。
    3. 依序點選「File」**>「Download」**，然後點選「Download.py」。
 2. 生成 `requirements.txt`。
 
@@ -484,7 +484,7 @@ sdf = spark.read.format('bigquery') \
       ```
       pip install pipreqs
       ```
-   2. 執行 `pipreqs` 即可生成 `requirements.txt`。
+   2. 執行 `pipreqs` 來產生 `requirements.txt`。
 
       ```
       pipreqs filename.py
@@ -496,7 +496,7 @@ sdf = spark.read.format('bigquery') \
       ```
 3. 編輯下載的 `.py` 檔案，更新 Spark 工作階段程式碼。
 
-   1. 移除或註解排除任何殼層指令碼指令。
+   1. 移除或註解排除任何 Shell 指令碼指令。
    2. 移除設定 Spark 工作階段的程式碼，然後將設定參數指定為批次工作負載提交參數。(請參閱「[提交 Spark 批次工作負載](https://docs.cloud.google.com/dataproc-serverless/docs/quickstarts/spark-batch?hl=zh-tw#submit_a_spark_batch_workload)」)。
 
       範例：
@@ -538,7 +538,7 @@ sdf = spark.read.format('bigquery') \
         ```
 4. 執行批次工作負載。
 
-   1. 如需操作說明，請參閱「[提交 Spark 批次工作負載](https://docs.cloud.google.com/dataproc-serverless/docs/quickstarts/spark-batch?hl=zh-tw#submit_a_spark_batch_workload)」。
+   1. 如需操作說明，請參閱「[提交 Spark 批次工作負載](https://docs.cloud.google.com/dataproc-serverless/docs/quickstarts/spark-batch?hl=zh-tw#submit_a_spark_batch_workload)」一文。
 
       * 請務必加入 --deps-bucket 標記，指向包含 `requirements.txt` 檔案的 Cloud Storage bucket。
 
@@ -566,9 +566,9 @@ sdf = spark.read.format('bigquery') \
 
 ## 排解筆記本錯誤
 
-如果含有 Spark 程式碼的儲存格發生失敗情形，您可以按一下儲存格輸出內容中的「Interactive Session Detail View」(互動式工作階段詳細資料檢視畫面) 連結，排解錯誤 (請參閱「[Wordcount and Iceberg table examples](#dataproc_serverless_bq_notebook-Wordcount)」)。
+如果含有 Spark 程式碼的儲存格發生失敗，您可以按一下儲存格輸出內容中的「Interactive Session Detail View」(互動式工作階段詳細資料檢視畫面) 連結，排解錯誤 (請參閱「[Wordcount and Iceberg table examples](#dataproc_serverless_bq_notebook-Wordcount)」(字數統計和 Iceberg 表格範例))。
 
-如果遇到 Notebook 程式碼錯誤，通常只要前往 **Spark UI** 中的最後一個 Spark 工作，就能取得額外資訊，協助您偵錯失敗的工作。
+如果筆記本程式碼發生錯誤，請前往 **Spark UI** 中的最後一個 Spark 工作，通常會提供額外資訊，協助您偵錯失敗的工作。
 
 ### 已知問題和解決方案
 
@@ -578,9 +578,9 @@ sdf = spark.read.format('bigquery') \
 
 ## 後續步驟
 
-* YouTube 影片示範：[Unleashing the power of Apache Spark integrated with BigQuery](https://www.youtube.com/watch?v=DIZn6Nuur7k&hl=zh-tw)。
-* [將 Lakehouse 執行階段目錄與 Managed Service for Apache Spark 搭配使用](https://docs.cloud.google.com/bigquery/docs/bqms-use-dataproc?hl=zh-tw)
-* [將 Lakehouse 執行階段目錄與 Managed Service for Apache Spark 搭配使用](https://docs.cloud.google.com/bigquery/docs/bqms-use-dataproc-serverless?hl=zh-tw)
+* YouTube 影片示範：[Unleashing the power of Apache Spark integrated with BigQuery](https://www.youtube.com/watch?v=DIZn6Nuur7k&hl=zh-tw) (發揮與 BigQuery 整合的 Apache Spark 強大功能)。
+* [搭配使用 Lakehouse 執行階段目錄與 Managed Service for Apache Spark](https://docs.cloud.google.com/bigquery/docs/bqms-use-dataproc?hl=zh-tw)
+* [搭配使用 Lakehouse 執行階段目錄與 Managed Service for Apache Spark](https://docs.cloud.google.com/bigquery/docs/bqms-use-dataproc-serverless?hl=zh-tw)
 
 
 
@@ -589,11 +589,11 @@ sdf = spark.read.format('bigquery') \
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-05 (世界標準時間)。
+上次更新時間：2026-07-14 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-05 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-14 (世界標準時間)。"],[],[]]

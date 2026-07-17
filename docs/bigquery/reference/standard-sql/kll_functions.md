@@ -480,7 +480,5 @@ FROM (SELECT KLL_QUANTILES.INIT_INT64(x, 1000) AS kll_sketch
             SELECT 7 AS x UNION ALL
             SELECT 8 AS x UNION ALL
             SELECT 9 AS x UNION ALL
-            SELECT 10 AS x));
+            SELECT 10
 ```
-
-## `KLL_QUANTILES.MERGE_POINT_INT64`

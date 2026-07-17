@@ -16,7 +16,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 將 MySQL 資料載入 BigQuery
 
-您可以使用 MySQL 連接器的 [BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)，將資料從 MySQL 載入至 BigQuery。支援託管於地端部署環境、[Cloud SQL](https://docs.cloud.google.com/sql/docs/introduction?hl=zh-tw)，以及其他公有雲供應商 (例如 Amazon Web Services (AWS) 和 Microsoft Azure) 的 MySQL 執行個體。您可以使用 BigQuery 資料移轉服務，安排週期性移轉工作，將 MySQL 的最新資料新增至 BigQuery。
+您可以使用 MySQL 連接器的 [BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)，將資料從 MySQL 載入至 BigQuery。支援託管於內部部署環境、[Cloud SQL](https://docs.cloud.google.com/sql/docs/introduction?hl=zh-tw)，以及其他公有雲供應商 (例如 Amazon Web Services (AWS) 和 Microsoft Azure) 的 MySQL 執行個體。您可以使用 BigQuery 資料移轉服務，安排週期性移轉工作，將 MySQL 的最新資料新增至 BigQuery。
 
 ## 事前準備
 
@@ -66,9 +66,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 MySQL 資料移轉作業有以下限制：
 
 * MySQL 資料庫的同時連線數量上限取決於 MySQL 設定參數 `max_connections`。預設值為 151 個連線，但可視需要設定更高的上限。因此，同時對單一 MySQL 資料庫執行的遷移作業數量，會受限於該上限。這項限制也表示並行傳輸作業的數量應小於 MySQL 資料庫支援的最大並行連線數。
-* 單一移轉設定在特定時間只能支援一次資料移轉作業。如果排定在第一次資料轉移完成前執行第二次資料轉移，則系統只會完成第一次資料轉移，並略過與第一次轉移重疊的任何其他資料轉移。
+* 單一移轉設定在特定時間只能支援一次資料移轉作業。如果排定在第一次資料轉移完成前執行第二次資料轉移，則只有第一次資料轉移會完成，任何與第一次轉移重疊的資料轉移都會略過。
   + 為避免在單一轉移設定中略過轉移作業，建議您設定「重複頻率」，增加大型資料轉移作業之間的時間間隔。
-* 在資料轉移期間，MySQL 連接器會識別已建立索引和已分割的鍵欄，以便以平行批次方式轉移資料。因此，我們建議您在資料表中指定主鍵欄或使用索引欄，以提升資料轉移的效能並降低錯誤率。
+* 在資料轉移期間，MySQL 連接器會識別已建立索引和已分割的鍵欄，以便平行批次轉移資料。因此，我們建議您在資料表中指定主鍵欄或使用索引欄，以提升資料轉移的效能並降低錯誤率。
   + 如果您有索引或主鍵限制，建立平行批次時，系統僅支援下列資料欄類型：
     - `INTEGER`
     - `TINYINT`
@@ -80,7 +80,7 @@ MySQL 資料移轉作業有以下限制：
     - `BIGINT`
     - `DECIMAL`
     - `DATE`
-  + 如果 MySQL 資料移轉作業未使用主鍵或索引欄，每個資料表最多只能支援 2,000,000 筆記錄。
+  + 如果 MySQL 資料移轉作業未使用主鍵或索引資料欄，每個資料表最多只能支援 2,000,000 筆記錄。
 
 ### 增量移轉限制
 
@@ -89,13 +89,13 @@ MySQL 增量轉移作業有以下限制：
 * 浮水印資料欄只能選擇 `TIMESTAMP` 個資料欄。
 * 只有含有有效浮水印欄的資產，才支援增量擷取。
 * 浮水印資料欄中的值必須單調遞增。
-* 增量移轉無法同步處理來源資料表中的刪除作業。
+* 增量轉移作業無法同步處理來源資料表中的刪除作業。
 * 單一轉移設定只能支援增量或完整擷取。
 * 第一次執行增量擷取後，就無法更新 `asset` 清單中的物件。
 * 首次執行增量擷取後，就無法在轉移設定中變更寫入模式。
 * 第一次執行遞增式擷取作業後，就無法變更時間戳記欄或主鍵。
-* 目的地 BigQuery 資料表會使用您提供的主鍵進行分群，並受[分群資料表限制](https://docs.cloud.google.com/bigquery/docs/clustered-tables?hl=zh-tw#limitations)約束。
-* 首次將現有轉移設定更新為增量擷取模式時，更新後的第一次資料轉移作業會轉移資料來源中的所有可用資料。後續的增量資料轉移作業只會轉移資料來源中的新資料列和更新資料列。
+* 目的地 BigQuery 資料表會使用您提供的主鍵進行叢集，並受[叢集資料表限制](https://docs.cloud.google.com/bigquery/docs/clustered-tables?hl=zh-tw#limitations)約束。
+* 首次將現有轉移設定更新為增量擷取模式時，更新後的第一次資料轉移會從資料來源轉移所有可用資料。後續的增量資料轉移作業只會轉移資料來源中的新資料列和更新資料列。
 * 建議您在浮水印資料欄上建立索引。這個連結器會使用遞增轉移中的篩選器，因此為這些資料欄建立索引可提升效能。
 * 進行增量移轉時，您必須使用更新後的資料類型對應。
 
@@ -110,7 +110,7 @@ MySQL 連接器支援傳輸層安全 (TLS) 設定，可加密傳輸至 BigQuery 
 * 「加密資料，並驗證 CA 和主機名稱」模式。這個模式會使用 TCPS 通訊協定透過 TLS 完整驗證伺服器。這項功能會加密所有傳輸中的資料，並驗證資料庫伺服器的憑證是否由信任的憑證授權單位 (CA) 簽署。這個模式也會檢查您連線的主機名稱，是否與伺服器憑證中的一般名稱 (CN) 或主體別名 (SAN) 完全相符。這個模式可防止攻擊者使用其他網域的有效憑證，冒充您的資料庫伺服器。
 
   如果主機名稱與憑證 CN 或 SAN 不符，連線就會失敗。您必須設定 DNS 解析，以符合憑證或使用其他安全模式。如要採取最安全的做法，防止中間人 (PITM) 攻擊，請使用這個模式。
-* 「加密資料，但僅驗證 CA」模式。這個模式會透過 TCPS 通訊協定使用 TLS 加密所有資料，並驗證伺服器的憑證是否由用戶端信任的 CA 簽署。不過，這個模式不會驗證伺服器的主機名稱。只要憑證有效且由可信任的 CA 發行，這個模式就能成功連線，無論憑證中的主機名稱是否與您連線的主機名稱相符。
+* 「加密資料，但僅驗證 CA」模式。這個模式會透過 TCPS 通訊協定使用 TLS 加密所有資料，並驗證伺服器憑證是否由用戶端信任的 CA 簽署。不過，這個模式不會驗證伺服器的主機名稱。只要憑證有效且由可信任的 CA 發行，這個模式就能成功連線，無論憑證中的主機名稱是否與您連線的主機名稱相符。
 
   如果您想確保連線至憑證由信任的 CA 簽署的伺服器，但主機名稱無法驗證，或您無法控管主機名稱設定，請使用這個模式。
 * 「僅加密」模式。這個模式會加密用戶端與伺服器之間傳輸的所有資料。不會執行任何憑證或主機名稱驗證。
@@ -126,7 +126,7 @@ MySQL 連接器支援傳輸層安全 (TLS) 設定，可加密傳輸至 BigQuery 
 
 如果您使用「加密資料，並驗證 CA 和主機名稱」模式或「加密資料，並驗證 CA」模式，也可以提供一或多個 PEM 編碼的憑證。在某些情況下，BigQuery 資料移轉服務需要在 TLS 連線期間驗證資料庫伺服器的身分，這時就需要這些憑證：
 
-* 如果使用貴機構內私人 CA 簽署的憑證或自行簽署的憑證，請提供完整的憑證鏈結或單一自行簽署憑證。如果是透過代管雲端服務供應商的內部 CA 發行的憑證，例如 Amazon Relational Database Service (RDS)，則必須執行這項操作。
+* 如果使用貴機構內私人 CA 簽署的憑證或自行簽署的憑證，請提供完整的憑證鏈結或單一自行簽署憑證。如果是透過代管雲端服務的內部 CA 發行的憑證，例如 Amazon Relational Database Service (RDS)，則必須執行這項操作。
 * 如果資料庫伺服器憑證是由公開 CA 簽署 (例如 Let's Encrypt、DigiCert 或 GlobalSign)，您就不需要提供憑證。BigQuery 資料移轉服務會預先安裝並信任這些公開 CA 的根憑證。
 
 您可以在轉移設定的「信任的 PEM 憑證」欄位中指定 PEM 編碼憑證，但須符合下列規定：
@@ -138,33 +138,33 @@ MySQL 連接器支援傳輸層安全 (TLS) 設定，可加密傳輸至 BigQuery 
 
 ### 完整或累加轉移
 
-[設定 MySQL 移轉作業](#set-up-a-mysql-data-transfer)時，您可以在移轉作業設定中選取「完整」或「增量」寫入偏好設定，指定資料載入 BigQuery 的方式。[預先發布版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages)支援增量轉移。
+[設定 MySQL 移轉作業](#set-up-a-mysql-data-transfer)時，您可以在移轉設定中選取「完整」或「增量」寫入偏好設定，指定資料載入 BigQuery 的方式。[預先發布版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages)支援增量轉移。
 
 **注意：** 如要要求意見回饋或取得增量轉移支援，請傳送電子郵件至 [dts-preview-support@google.com](mailto:dts-preview-support@google.com)。
 您可以設定*完整*資料轉移，在每次資料轉移時，轉移 MySQL 資料集的所有資料。
 
-或者，您也可以設定*增量*資料移轉作業 ([搶先版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))，只移轉上次資料移轉後變更的資料，而不是在每次資料移轉時載入整個資料集。如果為資料移轉作業選取「增量」，則必須指定「附加」或「更新插入」寫入模式，定義在增量資料移轉期間，資料如何寫入 BigQuery。以下各節說明可用的寫入模式。
+或者，您也可以設定*增量*資料移轉作業 ([預覽](https://cloud.google.com/products#product-launch-stages))，只移轉上次資料移轉作業後變更的資料，而非在每次資料移轉作業中載入整個資料集。如果為資料移轉選取「Incremental」(增量)，請務必指定「Append」(附加) 或「Upsert」(新增或更新) 寫入模式，定義增量資料移轉期間資料寫入 BigQuery 的方式。以下各節說明可用的寫入模式。
 
 #### 附加寫入模式
 
-附加寫入模式只會在目的地資料表中插入新資料列。這個選項會嚴格附加移轉的資料，不會檢查現有記錄，因此這個模式可能會導致目的地資料表中的資料重複。
+附加寫入模式只會將新資料列插入目的地資料表。這個選項會嚴格附加移轉的資料，不會檢查現有記錄，因此這個模式可能會導致目的地表格中的資料重複。
 
-選取附加模式時，必須選取浮水印欄。MySQL 連接器必須使用水位線資料欄，才能追蹤來源資料表中的變更。
+選取附加模式時，必須選取浮水印欄。MySQL 連接器必須使用浮水印資料欄，才能追蹤來源資料表中的變更。
 
-如果是 MySQL 轉移作業，建議選取只在建立記錄時更新的資料欄，後續更新不會變更該資料欄。例如「`CREATED_AT`」欄。
+如果是 MySQL 轉移作業，建議選取只在記錄建立時更新的欄，且不會隨著後續更新而變更，例如 `CREATED_AT` 欄。
 
 #### Upsert 寫入模式
 
-新增或更新寫入模式會檢查主鍵，以更新資料列或在目的地資料表中插入新資料列。您可以指定主鍵，讓 MySQL 連接器判斷需要哪些變更，才能讓目的地資料表與來源資料表保持同步。如果在資料移轉期間，目標 BigQuery 資料表中存在指定的主鍵，MySQL 連接器就會使用來源資料表中的新資料更新該資料列。如果資料轉移期間沒有主鍵，MySQL 連接器就會插入新資料列。
+系統會檢查主鍵，以更新資料列或在目標資料表中插入新資料列。您可以指定主鍵，讓 MySQL 連接器判斷需要哪些變更，才能讓目的地資料表與來源資料表保持同步。如果在資料移轉期間，目標 BigQuery 資料表中存在指定的主鍵，MySQL 連接器就會使用來源資料表中的新資料更新該資料列。如果資料轉移期間沒有主鍵，MySQL 連接器就會插入新資料列。
 
 選取「新增或更新」模式時，必須選取浮水印欄和主鍵：
 
 * MySQL 連接器必須使用水位線資料欄，才能追蹤來源資料表中的變更。
-  + 選取每次修改資料列時都會更新的水印資料欄。建議使用與 `UPDATED_AT` 或 `LAST_MODIFIED` 欄類似的欄。
+  + 選取每次修改資料列時都會更新的水印資料欄。建議使用與 `UPDATED_AT` 或 `LAST_MODIFIED` 欄類似的資料欄。
 
 * 主鍵可以是資料表上的一或多個資料欄，MySQL 連接器會根據這些資料欄判斷是否需要插入或更新資料列。
 
-  選取包含非空值的資料欄，這些值在資料表的所有資料列中都是不重複的。建議您使用包含系統產生的 ID、專屬參照代碼 (例如自動遞增的 ID) 或不可變動的時間序列 ID 的資料欄。
+  選取包含非空值的資料欄，這些值在資料表的所有資料列中都是不重複的。建議您使用包含系統產生的 ID、不重複的參照代碼 (例如自動遞增 ID) 或不可變動的時間序列 ID 的資料欄。
 
   為避免資料遺失或損毀，您選取的主鍵資料欄必須具有不重複的值。如果您對所選主鍵欄的唯一性有疑慮，建議改用附加寫入模式。
 
@@ -176,7 +176,7 @@ MySQL 連接器支援傳輸層安全 (TLS) 設定，可加密傳輸至 BigQuery 
 | --- | --- |
 | 新增資料欄 | 目的地 BigQuery 資料表會新增資料欄。 這個資料欄的所有先前記錄都會有空值。 |
 | 刪除資料欄 | 刪除的資料欄仍會保留在目的地 BigQuery 資料表中。系統會為這個已刪除資料欄的新項目填入空值。 |
-| 變更資料欄中的資料類型 | 連接器僅支援 `ALTER COLUMN` DDL 陳述式支援的資料類型轉換。如果轉換成其他資料類型，資料轉移作業就會失敗。 如果遇到任何問題，建議建立新的轉移設定。 |
+| 變更資料欄中的資料類型 | 連接器僅支援 `ALTER COLUMN` DDL 陳述式支援的資料類型轉換。轉換為任何其他資料類型都會導致資料轉移失敗。 如果遇到任何問題，建議建立新的轉移設定。 |
 | 重新命名資料欄 | 原始資料欄會保留在目的地 BigQuery 資料表中，而目的地資料表會新增一個名稱更新的資料欄。 |
 
 ## 將 MySQL 資料載入 BigQuery
@@ -365,7 +365,7 @@ bq mk
 ## 後續步驟
 
 * 請參閱 [BigQuery 資料移轉服務總覽](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)。
-* 瞭解如何[管理移轉作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw)，包括取得移轉設定、列出移轉設定，以及查看移轉設定的執行記錄。
+* 瞭解如何[管理移轉作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw)，包括取得移轉設定資訊、列出移轉設定，以及查看移轉作業的執行記錄。
 * 瞭解如何[使用 BigQuery Omni 作業載入資料](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer?hl=zh-tw)。
 
 
@@ -375,11 +375,11 @@ bq mk
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-05 (世界標準時間)。
+上次更新時間：2026-07-14 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-05 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-14 (世界標準時間)。"],[],[]]

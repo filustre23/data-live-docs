@@ -23,7 +23,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 如要進一步瞭解 Identity and Access Management (IAM) 角色，請參閱 IAM 說明文件中的「[角色和權限](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw)」。
 
-**注意：** 如果您以程式輔助方式啟用 BigQuery 資料移轉服務後，立即呼叫 BigQuery 資料移轉服務 API，請實作重試機制，並在連續呼叫之間加入延遲時間。這是必要步驟，因為 API 啟用作業是非同步作業，且最終一致性會導致傳播延遲。
+**注意：** 如果您以程式輔助方式啟用 BigQuery 資料移轉服務後，立即呼叫 BigQuery 資料移轉服務 API，請實作重試機制，並在連續呼叫之間加入退避延遲。這是必要步驟，因為 API 啟用作業是非同步作業，且會因最終一致性而產生傳播延遲。
 
 ## 建立專案並啟用 BigQuery API
 
@@ -38,10 +38,10 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    **選取或建立專案所需的角色**
 
-   * **選取專案**：選取專案時，不需要具備特定 IAM 角色，只要您已獲授角色，即可選取任何專案。
-   * **建立專案**：如要建立專案，您需要「專案建立者」角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   * **選取專案**：選取專案時，不需要具備特定 IAM 角色，只要您在專案中獲派角色，即可選取該專案。
+   * **建立專案**：如要建立專案，您需要專案建立者角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
    **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，而不要選取現有專案。完成這些步驟後，您就可以刪除專案，並移除與該專案相關聯的所有資源。
-3. 為專案啟用計費功能，以便進行所有轉移作業。免費轉移不會產生任何費用。
+3. 為專案啟用計費功能，以進行所有轉移作業。免費轉移的費用為 $0 美元。
 
    即使要從多個來源移轉資料，每個專案也只需要啟用一次計費功能。資料移轉完成後，您也必須啟用帳單，才能在 BigQuery 中查詢資料。
 
@@ -68,9 +68,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 BigQuery 資料移轉服務會使用[服務代理程式](https://docs.cloud.google.com/iam/docs/service-account-types?hl=zh-tw#service-agents)存取及管理資源。包括但不限於下列資源：
 
 * 擷取服務帳戶的存取權杖，以便授權資料移轉。
-* 如果啟用此選項，系統會將通知發布至提供的 Pub/Sub 主題。
+* 如果啟用，系統會將通知發布至提供的 Pub/Sub 主題。
 * 啟動 BigQuery 工作。
-* 從提供的 Pub/Sub 訂閱項目擷取事件，用於 Cloud Storage 事件驅動的轉移作業
+* 從提供的 Pub/Sub 訂閱項目擷取事件，以進行 Cloud Storage 事件驅動的轉移作業
 
 啟用 BigQuery 資料移轉服務並首次使用 API 後，系統會自動為您建立服務代理程式。服務代理建立後，Google 會自動授予預先定義的[服務代理角色](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquerydatatransfer.serviceAgent)。
 
@@ -84,21 +84,39 @@ gcloud iam service-accounts add-iam-policy-binding service_account \
 --role roles/iam.serviceAccountTokenCreator
 ```
 
-其中：
+更改下列內容：
 
 * service\_account 是用於授權資料移轉的跨專案服務帳戶。
 * project\_number 是啟用 BigQuery 資料移轉服務的專案編號。
 
 如要進一步瞭解跨專案資源設定，請參閱 Identity and Access Management 服務帳戶模擬說明文件中的「[為不同專案中的資源設定](https://docs.cloud.google.com/iam/docs/attach-service-accounts?hl=zh-tw#attaching-different-project)」。
 
-透過 Google Cloud 控制台啟用 BigQuery 資料移轉服務 API 時，Google 會自動嘗試授予必要權限。不過，如果您透過 Terraform、Google Cloud CLI 或其他程式輔助方法啟用 API 或建立轉移作業，則必須手動設定必要權限。如要使用其他專案的服務帳戶授權轉移作業，請注意下列事項：
+透過 Google Cloud 控制台啟用 BigQuery 資料移轉服務 API 時，Google 會自動嘗試授予必要權限。不過，如果您透過 Terraform、Google Cloud CLI 或其他程式輔助方法啟用 API 或建立轉移作業，則必須手動建立必要權限。如要使用其他專案的服務帳戶授權轉移作業，請注意下列事項：
 
 * **建立跨專案移轉的權限：**如要安全地存取跨專案資料來源，請將來源服務帳戶身分識別的 `roles/iam.serviceAccountTokenCreator` 角色授予 DTS 服務代理 (位於目的地專案中)。
 * **實施最小權限原則：**在資源層級 (針對使用的特定服務帳戶) 授予這個角色，而非專案層級。
 
+#### 限制
+
+您無法使用 Google Cloud 控制台，將跨專案服務帳戶附加至資料移轉作業。您可以改用下列 Google Cloud CLI 指令，附加跨專案服務帳戶：
+
+```
+bq update
+--transfer_config
+--update_credentials
+--service_account_name="SERVICE_ACCOUNT" projects/PROJECT_ID/locations/LOCATION/transferConfigs/CONFIG_ID
+```
+
+更改下列內容：
+
+* SERVICE\_ACCOUNT：跨專案服務帳戶的名稱。
+* PROJECT\_ID：與資料移轉作業相關聯的專案名稱。
+* LOCATION：資料移轉的位置。
+* CONFIG\_ID：移轉設定 ID。
+
 ### 手動建立服務代理
 
-如要在與 API 互動前觸發服務代理建立作業，例如需要授予服務代理額外角色，可以使用下列其中一種方法：
+如要在與 API 互動前觸發服務代理建立作業 (例如需要授予服務代理額外角色)，可以使用下列其中一種方法：
 
 * API：
   [services.GenerateServiceIdentity](https://docs.cloud.google.com/service-usage/docs/reference/rest/v1beta1/services/generateServiceIdentity?hl=zh-tw)
@@ -107,7 +125,7 @@ gcloud iam service-accounts add-iam-policy-binding service_account \
 * Terraform 供應商：
   [google\_project\_service\_identity](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/project_service_identity)
 
-手動觸發建立服務代理時，Google 不會自動授予預先定義的[服務代理角色](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquerydatatransfer.serviceAgent)。您必須使用下列 Google Cloud CLI 指令，手動授予服務代理程式預先定義的角色：
+手動觸發服務代理建立作業時，Google 不會自動授予預先定義的[服務代理角色](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquerydatatransfer.serviceAgent)。您必須使用下列 Google Cloud CLI 指令，手動授予服務代理預先定義的角色：
 
 ```
 gcloud projects add-iam-policy-binding project_number \
@@ -115,7 +133,7 @@ gcloud projects add-iam-policy-binding project_number \
 --role roles/bigquerydatatransfer.serviceAgent
 ```
 
-其中：
+更改下列內容：
 
 * project\_number 是啟用 BigQuery 資料移轉服務的專案編號。
 
@@ -123,7 +141,7 @@ gcloud projects add-iam-policy-binding project_number \
 
 ## 授予 `bigquery.admin` 存取權
 
-建議將`bigquery.admin`預先定義的 IAM 角色授予建立 BigQuery 資料移轉服務移轉作業的使用者。`bigquery.admin` 角色包含執行最常見工作所需的 IAM 權限。`bigquery.admin` 角色具備下列 BigQuery 資料移轉服務權限：
+建議將 `bigquery.admin` 預先定義的 IAM 角色授予建立 BigQuery 資料移轉服務移轉作業的使用者。`bigquery.admin` 角色包含執行最常見工作所需的 IAM 權限。`bigquery.admin` 角色具備下列 BigQuery 資料移轉服務權限：
 
 * BigQuery 資料移轉服務權限：
   + `bigquery.transfers.update`
@@ -135,7 +153,7 @@ gcloud projects add-iam-policy-binding project_number \
   + `bigquery.datasets.setIamPolicy`
   + `bigquery.jobs.create`
 
-**注意：** 自 2026 年 3 月 17 日起，BigQuery 資料移轉服務將需要 `bigquery.datasets.getIamPolicy` 和 `bigquery.datasets.setIamPolicy` 權限。詳情請參閱「[資料集層級存取控管的變更](https://docs.cloud.google.com/bigquery/docs/dataset-access-control?hl=zh-tw)」。**注意：** 如果 `bigquery.admin` 角色對特定用途而言過於廣泛，您可以[建立自訂 IAM 角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)，只授予必要的權限。
+**注意：** 自 2026 年 3 月 17 日起，BigQuery 資料移轉服務將需要 `bigquery.datasets.getIamPolicy` 和 `bigquery.datasets.setIamPolicy` 權限。詳情請參閱「[資料集層級存取控管異動](https://docs.cloud.google.com/bigquery/docs/dataset-access-control?hl=zh-tw)」。**注意：** 如果 `bigquery.admin` 角色權限過於廣泛，無法滿足特定用途，您可以[建立自訂 IAM 角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)，只授予必要的權限。
 
 在某些情況下，不同資料來源可能需要不同的權限。如需特定 IAM 資訊，請參閱各資料來源移轉指南的「必要權限」一節。舉例來說，請參閱 [Amazon S3 移轉權限](https://docs.cloud.google.com/bigquery/docs/s3-transfer?hl=zh-tw#required_permissions)或 [Cloud Storage 移轉權限](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer?hl=zh-tw#required_permissions)。
 
@@ -173,7 +191,7 @@ gcloud projects add-iam-policy-binding project_id \
 其中：
 
 * project\_id 是您的專案 ID。
-* principal 是 `group` 或 `user`。
+* principal 可以是 `group` 或 `user`。
 * address 是使用者或群組的電子郵件地址。
 
 例如：
@@ -207,10 +225,10 @@ gcloud projects add-iam-policy-binding myproject \
 
 * 行銷平台：
 
-+ [Facebook 廣告](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer?hl=zh-tw)
++ [Facebook 廣告](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer-intro?hl=zh-tw)
 + [HubSpot](https://docs.cloud.google.com/bigquery/docs/hubspot-transfer?hl=zh-tw) ([預先發布版](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages))
-+ [Klaviyo](https://docs.cloud.google.com/bigquery/docs/klaviyo-transfer?hl=zh-tw) ([預先發布版](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages))
-+ [Mailchimp](https://docs.cloud.google.com/bigquery/docs/mailchimp-transfer?hl=zh-tw) ([預先發布版](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages))
++ [Klaviyo](https://docs.cloud.google.com/bigquery/docs/klaviyo-transfer-intro?hl=zh-tw) ([預先發布版](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages))
++ [Mailchimp](https://docs.cloud.google.com/bigquery/docs/mailchimp-transfer?hl=zh-tw) ([預覽](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages))
 
 * 付款平台：
 
@@ -256,11 +274,11 @@ gcloud projects add-iam-policy-binding myproject \
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-05 (世界標準時間)。
+上次更新時間：2026-07-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-05 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-15 (世界標準時間)。"],[],[]]

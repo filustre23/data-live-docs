@@ -144,7 +144,7 @@ WHERE
 
 ## 使用 DML DELETE 刪除分區
 
-如果符合條件的 `DELETE` 陳述式涵蓋分區中的所有資料列，BigQuery 就會移除整個分區。這項移除作業不會掃描位元組或耗用配額。以下 `DELETE` 陳述式範例涵蓋 `_PARTITIONDATE` 虛擬資料欄上篩選條件的整個分區：
+如果符合條件的 `DELETE` 陳述式涵蓋分區中的所有資料列，BigQuery 就會移除整個分區。系統會移除這些資料，不會掃描位元組或耗用配額。以下 `DELETE` 陳述式範例涵蓋 `_PARTITIONDATE` 虛擬資料欄的篩選器整個分區：
 
 ```
 DELETE mydataset.mytable
@@ -153,18 +153,20 @@ WHERE _PARTITIONDATE IN ('2076-10-07', '2076-03-06');
 
 ### 常見的資格不符情形
 
-如果查詢具有下列特徵，可能無法透過最佳化獲得改善：
+最佳化資格可能因分區類型、基礎儲存空間中繼資料和篩選器述詞而異。舉例來說，如果查詢具有下列特徵，使用 `DML DELETE` 進行最佳化可能無法帶來效益：
 
 * 部分分區涵蓋範圍
 * 參照非分區資料欄
 * 透過 BigQuery [Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api?hl=zh-tw) 或[舊版串流 API](https://docs.cloud.google.com/bigquery/streaming-data-into-bigquery?hl=zh-tw) [最近擷取的資料](https://docs.cloud.google.com/bigquery/docs/write-api?hl=zh-tw#stream_into_partitioned_tables)
 * 含有子查詢或不支援述詞的篩選器
 
-最佳化資格可能因分區類型、基礎儲存空間中繼資料和篩選器述詞而異。最佳做法是執行試運算，確認查詢結果處理的位元組為 0。
+如果分區資料表是使用分區資料欄以外的資料欄叢集，這項最佳化功能可能也不適用。
+
+最佳做法是執行模擬測試，確認查詢結果處理的位元組數為 0。
 
 ### 多陳述式交易
 
-這項最佳化功能適用於[多陳述式交易](https://docs.cloud.google.com/bigquery/docs/transactions?hl=zh-tw)。以下查詢範例會在單一交易中，以另一個資料表的資料取代分區，且不會掃描分區的 `DELETE` 陳述式。
+這項最佳化功能適用於[多陳述式交易](https://docs.cloud.google.com/bigquery/docs/transactions?hl=zh-tw)。以下查詢範例會在單一交易中，將分區資料替換成另一個資料表中的資料，且不會掃描 `DELETE` 陳述式的分區。
 
 ```
 DECLARE REPLACE_DAY DATE;
@@ -215,16 +217,16 @@ WHERE
   AND field1 = 21
 ```
 
-## 每小時、每月和每年分區資料表的 DML
+## 按小時、月和年分區資料表的 DML
 
-您可以使用 DML 陳述式修改每小時、每月或每年分區的資料表。提供相關日期/時間戳記/日期時間的小時、月份或年份範圍，如下列每月分區資料表的範例所示：
+您可以使用 DML 陳述式修改按小時、月或年分區的資料表。提供相關日期/時間戳記/日期時間的小時、月份或年份範圍，如下列按月分區資料表的範例所示：
 
 ```
     bq query --nouse_legacy_sql 'DELETE FROM my_dataset.my_table WHERE
     TIMESTAMP_TRUNC(ts_column, MONTH) = "2020-01-01 00:00:00";'
 ```
 
-或是 `DATETIME` 資料欄分區資料表的另一個範例：
+或者，以下是另一個分區資料表的範例，其中包含 `DATETIME` 資料欄：
 
 ```
     bq query --nouse_legacy_sql 'DELETE FROM my_dataset.my_table WHERE
@@ -279,9 +281,9 @@ WHEN NOT MATCHED BY SOURCE AND T._PARTITIONTIME = '2018-01-03' THEN
   DELETE
 ```
 
-在聯結階段，系統只會掃描目標資料表中的下列分區：`'2018-01-01'`、`'2018-01-02'` 和 `'2018-01-03'`，也就是所有 `search_condition` 篩選條件的聯集。
+在彙整階段，系統只會掃描目標資料表中下列分區：`'2018-01-01'`、`'2018-01-02'` 和 `'2018-01-03'`，也就是所有 `search_condition` 篩選條件的聯集。
 
-從查詢執行計畫：
+查詢執行計畫：
 
 ```
 READ
@@ -307,7 +309,7 @@ SOURCE` 子句。因此不會修剪任何分區。
 
 #### 在 `merge_condition` 中使用常數 false 述詞
 
-如果同時使用 `WHEN NOT MATCHED` 和 `WHEN NOT MATCHED BY SOURCE` 子句，BigQuery 通常會執行完整外部聯結，而這無法修剪。不過，如果合併條件使用常數假述詞，BigQuery 就能使用篩選條件來縮減分區。如要進一步瞭解如何使用常數 false 述詞，請參閱[`MERGE` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax?hl=zh-tw#merge_statement)說明文件中的 `merge_condition` 子句說明。
+如果同時使用 `WHEN NOT MATCHED` 和 `WHEN NOT MATCHED BY SOURCE` 子句，BigQuery 通常會執行完整外部聯結，這無法修剪。不過，如果合併條件使用常數假述詞，BigQuery 就能使用篩選條件來縮減分區。如要進一步瞭解如何使用常數 false 述詞，請參閱[`MERGE` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax?hl=zh-tw#merge_statement)說明文件中的 `merge_condition` 子句說明。
 
 下列範例只會掃描目標和來源資料表中的 `'2018-01-01'` 分區。
 
@@ -325,7 +327,7 @@ WHEN NOT MATCHED BY SOURCE AND _PARTITIONTIME = '2018-01-01' THEN
 
 查詢最佳化工具會嘗試在 `merge_condition` 中使用篩選器來縮減分區。查詢最佳化工具不一定能將述詞下推至資料表掃描階段，視彙整類型而定。
 
-在下列範例中，`merge_condition` 會做為述詞，用來彙整來源和目標資料表。查詢最佳化工具掃描這兩個資料表時，可以將這個述詞下推。因此，查詢只會掃描目標和來源資料表中的 `'2018-01-01'` 分區。
+在下列範例中，`merge_condition` 會做為述詞，用來彙整來源和目標資料表。查詢最佳化工具掃描這兩個資料表時，可以將這個述詞向下推送。因此，查詢只會掃描目標和來源資料表中的 `'2018-01-01'` 分區。
 
 ```
 MERGE dataset.target T
@@ -337,7 +339,7 @@ WHEN MATCHED THEN
   UPDATE SET COLUMN_ID = NEW_VALUE
 ```
 
-在下一個範例中，`merge_condition` 不包含來源資料表的述詞，因此無法對來源資料表執行分區修剪作業。陳述式確實包含目標資料表的述詞，但陳述式使用 `WHEN NOT MATCHED BY SOURCE` 子句，而非 `WHEN MATCHED` 子句。也就是說，查詢必須掃描整個目標資料表，找出不相符的資料列。
+在下一個範例中，`merge_condition` 不含來源資料表的述詞，因此無法對來源資料表執行分區修剪作業。陳述式確實包含目標資料表的述詞，但陳述式使用 `WHEN NOT MATCHED BY SOURCE` 子句，而非 `WHEN MATCHED` 子句。也就是說，查詢必須掃描整個目標資料表，找出不相符的資料列。
 
 ```
 MERGE dataset.target T
@@ -353,13 +355,13 @@ WHEN NOT MATCHED BY SOURCE THEN
 
 ## 配額
 
-如要瞭解 DML 配額資訊，請參閱[配額與限制](https://docs.cloud.google.com/bigquery/quota-policy?hl=zh-tw)頁面上的「[DML 陳述式](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#data-manipulation-language-statements)」一節。
+如要瞭解 DML 配額資訊，請參閱「[配額與限制](https://docs.cloud.google.com/bigquery/quota-policy?hl=zh-tw)」頁面上的「[DML 陳述式](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#data-manipulation-language-statements)」一節。
 
 ## 定價
 
 如要瞭解 DML 定價，請參閱[分區資料表](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax?hl=zh-tw#partitioned_tables)上執行的 DML 陳述式查詢大小計算方式。
 
-## 表格安全性
+## 資料表安全性
 
 如要控管 BigQuery 資料表的存取權，請參閱「[使用 IAM 控管資源存取權](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam?hl=zh-tw)」。
 
@@ -377,11 +379,11 @@ WHEN NOT MATCHED BY SOURCE THEN
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-05 (世界標準時間)。
+上次更新時間：2026-07-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-05 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-12 (世界標準時間)。"],[],[]]

@@ -195,5 +195,4 @@ Defines the properties and custom parameters for a data source.
 | `transfer_type (deprecated)` | `TransferType`  This item is deprecated!  Deprecated. This field has no effect. |
 | `supports_multiple_transfers (deprecated)` | `bool`  This item is deprecated!  Deprecated. This field has no effect. |
 | `update_deadline_seconds` | `int32`  The number of seconds to wait for an update from the data source before the Data Transfer Service marks the transfer as FAILED. |
-| `default_schedule` | `string`  Default data transfer schedule. Examples of valid schedules include: `1st,3rd monday of month 15:30`, `every wed,fri of jan,jun 13:15`, and `first sunday of quarter 00:00`. |
-|
+| `default_schedule` | `string`  Default data transfer schedule. Examples of valid schedules include: `1st,3rd monday of mo` |

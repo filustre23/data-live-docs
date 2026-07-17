@@ -20,7 +20,7 @@ function_name(
   [ DISTINCT ]
   function_arguments
   [ { IGNORE | RESPECT } NULLS ]
-  [ HAVING { MAX | MIN } having_expression ]
+  [ { HAVING { MAX | MIN } having_expression | GROUP BY grouping_expression [, ... ] } ]
   [ ORDER BY key [ { ASC | DESC } ] [, ... ] ]
   [ LIMIT n ]
 )
@@ -47,6 +47,8 @@ syntax. To build an aggregate function, use the following syntax:
 * `HAVING MAX` or `HAVING MIN`: Restricts the set of rows that the
   function aggregates by a maximum or minimum value.
   For details, see [HAVING MAX and HAVING MIN clause](#max_min_clause).
+* `GROUP BY`: Performs an additional grouping on input rows to the aggregate
+  function. Used to define [multi-level aggregates](#multi_level_aggregation).
 * `ORDER BY`: Specifies the order of the values.
 
   + For each sort key, the default sort direction is `ASC`.
@@ -86,7 +88,7 @@ syntax. To build an aggregate function, use the following syntax:
 The clauses in an aggregate function call are applied in the following order:
 
 * `OVER`
-* `HAVING MAX`/`HAVING MIN`
+* `HAVING MAX`/`HAVING MIN` or `GROUP BY`
 * `IGNORE NULLS` or `RESPECT NULLS`
 * `DISTINCT`
 * `ORDER BY`
@@ -242,18 +244,191 @@ FROM UNNEST([0, 2, 4, 4, 5]) AS x;
  +------+------*/
 ```
 
+## Multi-level aggregation
 
+**Preview**
 
+This product or feature is subject to the "Pre-GA Offerings Terms"
+in the General Service Terms section of the
+[Service Specific Terms](https://cloud.google.com/terms/service-terms).
+Pre-GA products and features are available "as is" and might have
+limited support. For more information, see the
+[launch stage descriptions](https://cloud.google.com/products#product-launch-stages).
 
-Send feedback
+**Note:** To provide feedback or request support for this feature, send an email to
+[bigquery-sql-preview-support@googlegroups.com](mailto:bigquery-sql-preview-support@googlegroups.com).
 
-Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
+Standard SQL doesn't allow an aggregate function to have other aggregate
+functions as arguments. As a result, expressing multi-stage aggregation
+typically requires using a subquery.
 
-Last updated 2026-07-06 UTC.
+For example, say you have a table of sales data and want to calculate the
+average daily sales by averaging the sums of the rows. You can do this with a
+subquery:
 
+```
+WITH Sales AS (
+  SELECT 'Apples' AS Product, 100 AS revenue, TIMESTAMP '2026-01-01 10:00:00' AS time UNION ALL
+  SELECT 'Apples', 150, TIMESTAMP '2026-01-01 12:00:00' UNION ALL
+  SELECT 'Apples', 200, TIMESTAMP '2026-01-02 10:00:00' UNION ALL
+  SELECT 'Oranges', 50, TIMESTAMP '2026-01-01 10:00:00' UNION ALL
+  SELECT 'Oranges', 60, TIMESTAMP '2026-01-02 10:00:00' UNION ALL
+  SELECT 'Oranges', 70, TIMESTAMP '2026-01-02 12:00:00'
+)
+SELECT
+  Product,
+  AVG(daily_sales) AS avg_daily_sales
+FROM
+  (
+    SELECT
+      Product,
+      SUM(revenue) AS daily_sales
+    FROM Sales
+    GROUP BY Product, DATE(time)
+  )
+GROUP BY Product
+ORDER BY Product;
 
+/*---------+-----------------+
+ | Product | avg_daily_sales |
+ +---------+-----------------+
+ | Apples  |             225 |
+ | Oranges |              90 |
+ +---------+-----------------*/
+```
 
+*Multi-level aggregate* syntax removes this restriction by allowing you to add
+an aggregate function as an argument to another aggregate function, when the
+outer aggregate function has its own `GROUP BY` clause. Using multi-level
+aggregation, the previous query can be simplified to the following:
 
-Need to tell us more?
+```
+WITH Sales AS (
+  SELECT 'Apples' AS Product, 100 AS revenue, TIMESTAMP '2026-01-01 10:00:00' AS time UNION ALL
+  SELECT 'Apples', 150, TIMESTAMP '2026-01-01 12:00:00' UNION ALL
+  SELECT 'Apples', 200, TIMESTAMP '2026-01-02 10:00:00' UNION ALL
+  SELECT 'Oranges', 50, TIMESTAMP '2026-01-01 10:00:00' UNION ALL
+  SELECT 'Oranges', 60, TIMESTAMP '2026-01-02 10:00:00' UNION ALL
+  SELECT 'Oranges', 70, TIMESTAMP '2026-01-02 12:00:00'
+)
+SELECT
+  Product,
+  AVG(SUM(revenue) GROUP BY DATE(time)) AS avg_daily_sales
+FROM Sales
+GROUP BY Product
+ORDER BY Product;
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-07-06 UTC."],[],[]]
+/*---------+-----------------+
+ | Product | avg_daily_sales |
+ +---------+-----------------+
+ | Apples  |             225 |
+ | Oranges |              90 |
+ +---------+-----------------*/
+```
+
+When an aggregate function has a `GROUP BY` clause, it becomes a multi-level
+aggregate function. Multi-level aggregate functions work by first grouping the
+input rows based the `GROUP BY` modifier on the aggregate function, and then
+evaluating the inner aggregate function arguments over those groups. The
+intermediate inner aggregation results are then passed to the enclosing
+aggregate function.
+
+In the previous example, the `SUM(revenue)` aggregation is effectively grouped
+by both `Product` and `DATE(time)` to calculate an intermediate aggregation
+result. This intermediate result is then averaged while grouping by `Product` to
+get the final result per product.
+
+### Multi-level aggregation rules and constraints
+
+The following rules and constraints apply to multi-level aggregation:
+
+* Multi-level aggregation is supported in only function arguments, the
+  `DISTINCT` clause, and the `GROUP BY` modifier within the aggregate function
+  call.
+* You can't use the `HAVING MIN` or `HAVING MAX` clause in addition to a
+  `GROUP BY` clause in a multi-level aggregation function.
+* You also can't use the following clauses in a multi-aggregation function:
+
+  + `ORDER BY`
+  + `LIMIT`
+  + `IGNORE NULLS` or `RESPECT NULLS`
+* You can't use multi-level aggregate functions in the [`PIVOT`
+  operator](/bigquery/docs/reference/standard-sql/query-syntax#pivot_operator).
+* You can't use a `GROUPING` function within a multi-level aggregate body, or
+  with `GROUP BY` modifiers. For example, the following expressions result in
+  an error:
+
+  ```
+    SUM(GROUPING(...) GROUP BY Y)   -- Error
+    GROUPING(... GROUP BY Y)        -- Error
+  ```
+* You can't use multi-level aggregation with the [differential privacy
+  clause](/bigquery/docs/reference/standard-sql/query-syntax#dp_clause).
+* You can't use multi-level aggregation with the [aggregation threshold
+  clause](/bigquery/docs/reference/standard-sql/query-syntax#agg_threshold_clause).
+* You can't use grouping keys with collation in a multi-level aggregation.
+* You can't use multi-level aggregation with continuous queries.
+* You can't use an empty aggregate function list in the inner aggregation of a
+  multi-level aggregation (for example, `COUNT(* GROUP BY field1)`).
+* You can't use more than two nested aggregate functions in a multi-level
+  aggregation:
+
+  ```
+  SUM(AVG(MIN(X) GROUP BY Y) GROUP BY Z) -- Error; 3 nested aggregate functions.
+  ```
+
+### Avoid overcounting with multi-level aggregation
+
+Aggregating over the result of a `JOIN` operation can result in *overcounting*
+of the aggregated result. Consider the following query which attempts to
+calculate the average salary of employees with at least one dependent child:
+
+```
+WITH Employees AS (
+  SELECT 1 AS empno, 150000 AS salary UNION ALL
+  SELECT 2, 100000 UNION ALL
+  SELECT 3, 80000
+),
+Dependents AS (
+  SELECT 1 AS empno, 'Child' AS relationship UNION ALL
+  SELECT 2, 'Child' UNION ALL
+  SELECT 2, 'Child' UNION ALL
+  SELECT 3, 'Child' UNION ALL
+  SELECT 3, 'Child'
+)
+SELECT
+  empno,
+  salary,
+  relationship
+FROM Employees
+INNER JOIN Dependents
+  USING (empno)
+WHERE relationship = 'Child'
+ORDER BY empno;
+
+/*-------+--------+--------------+
+ | empno | salary | relationship |
+ +-------+--------+--------------+
+ | 1     | 150000 | Child        |
+ | 2     | 100000 | Child        |
+ | 2     | 100000 | Child        |
+ | 3     |  80000 | Child        |
+ | 3     |  80000 | Child        |
+ +-------+--------+--------------*/
+```
+
+The issue is that the `INNER JOIN` operation results in a table where the salary
+for a given employee appears more than once if they have more than
+one child listed in the `Dependents` table. For example, employees 2 and 3 are
+repeated for each dependent child. Taking the average (`AVG`) of salary on this
+table *overcounts* those two salaries, leading to an incorrect result.
+
+Overcounting like in the previous example can be avoided with multi-level
+aggregation. The following revised version of the previous query uses
+multi-level aggregation with an `ANY_VALUE` function to get the correct average
+without overcounting:
+
+```
+WITH Employees AS (
+  SELECT 1 AS empno, 150000 AS salary UNION ALL
+```

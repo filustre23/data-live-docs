@@ -14,7 +14,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 如需包含這個程式碼範例的詳細說明文件，請參閱下列文章：
 
-* [將標籤新增至資源](https://docs.cloud.google.com/bigquery/docs/adding-labels?hl=zh-tw)
+* [為資源新增標籤](https://docs.cloud.google.com/bigquery/docs/adding-labels?hl=zh-tw)
 * [更新標籤](https://docs.cloud.google.com/bigquery/docs/updating-labels?hl=zh-tw)
 
 ## 程式碼範例
@@ -104,65 +104,6 @@ public class LabelTable {
     }
   }
 }
-```
-
-### Node.js
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-// Import the Google Cloud client library
-const {BigQuery} = require('@google-cloud/bigquery');
-const bigquery = new BigQuery();
-
-async function labelTable() {
-  // Adds a label to an existing table.
-
-  /**
-   * TODO(developer): Uncomment the following lines before running the sample.
-   */
-  // const datasetId = 'my_dataset';
-  // const tableId = 'my_table';
-
-  const dataset = bigquery.dataset(datasetId);
-  const [table] = await dataset.table(tableId).get();
-
-  // Retrieve current table metadata
-  const [metadata] = await table.getMetadata();
-
-  // Add label to table metadata
-  metadata.labels = {color: 'green'};
-  const [apiResponse] = await table.setMetadata(metadata);
-
-  console.log(`${tableId} labels:`);
-  console.log(apiResponse.labels);
-}
-```
-
-### Python
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-from google.cloud import bigquery
-
-client = bigquery.Client()
-
-# TODO(dev): Change table_id to the full name of the table you want to create.
-table_id = "your-project.your_dataset.your_table_name"
-
-table = client.get_table(table_id)  # API request
-
-labels = {"color": "green"}
-table.labels = labels
-
-table = client.update_table(table, ["labels"])  # API request
-
-print(f"Added {table.labels} to {table_id}.")
 ```
 
 ## 後續步驟

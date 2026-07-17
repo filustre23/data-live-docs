@@ -224,4 +224,4 @@ Configuration for a Cloud Storage subscription.
 | `serviceAccountEmail` | `string`  Optional. The service account to use to write to Cloud Storage. The subscription creator or updater that specifies this field must have `iam.serviceAccounts.actAs` permission on the service account. If not specified, the Pub/Sub [service agent](https://cloud.google.com/iam/docs/service-agents), service-{projectNumber}@gcp-sa-pubsub.iam.gserviceaccount.com, is used. |
 | Union field `output_format`. Defaults to text format. `output_format` can be only one of the following: | |
 | `textConfig` | `object (TextConfig)`  Optional. If set, message data will be written to Cloud Storage in text format. |
-| `avroConfig` | `object (AvroConfig)`  Optional. If set, message data will be written to Cloud Storage in Avro format. |
+| `avroConfig` |  |

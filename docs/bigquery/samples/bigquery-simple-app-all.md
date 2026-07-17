@@ -15,15 +15,8 @@ Google uses AI technology to translate content into your preferred language. AI 
 如需包含這個程式碼範例的詳細說明文件，請參閱下列文章：
 
 * [BigQuery API 用戶端程式庫](https://docs.cloud.google.com/bigquery/docs/reference/libraries?hl=zh-tw)
-* [開始進行驗證](https://docs.cloud.google.com/bigquery/docs/authentication/getting-started?hl=zh-tw)
-* [使用 BigQuery C# 用戶端程式庫查詢公開資料集](https://docs.cloud.google.com/walkthroughs/bigquery/csharp-client-library?hl=zh-tw)
+* [開始使用驗證功能](https://docs.cloud.google.com/bigquery/docs/authentication/getting-started?hl=zh-tw)
 * [使用 BigQuery 用戶端程式庫查詢公開資料集](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)
-* [使用 BigQuery Go 用戶端程式庫查詢公開資料集](https://docs.cloud.google.com/walkthroughs/bigquery/go-client-library?hl=zh-tw)
-* [使用 BigQuery Java 用戶端程式庫查詢公開資料集](https://docs.cloud.google.com/walkthroughs/bigquery/java-client-library?hl=zh-tw)
-* [使用 BigQuery Node.js 用戶端程式庫查詢公開資料集](https://docs.cloud.google.com/walkthroughs/bigquery/node-client-library?hl=zh-tw)
-* [使用 BigQuery PHP 用戶端程式庫查詢公開資料集](https://docs.cloud.google.com/walkthroughs/bigquery/php-client-library?hl=zh-tw)
-* [使用 BigQuery Python 用戶端程式庫查詢公開資料集](https://docs.cloud.google.com/walkthroughs/bigquery/python-client-library?hl=zh-tw)
-* [使用 BigQuery Ruby 用戶端程式庫查詢公開資料集](https://docs.cloud.google.com/walkthroughs/bigquery/ruby-client-library?hl=zh-tw)
 
 ## 程式碼範例
 
@@ -224,52 +217,6 @@ public class SimpleApp {
 }
 ```
 
-### Node.js
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-// Import the Google Cloud client library
-const {BigQuery} = require('@google-cloud/bigquery');
-
-async function queryStackOverflow() {
-  // Queries a public Stack Overflow dataset.
-
-  // Create a client
-  const bigqueryClient = new BigQuery();
-
-  // The SQL query to run
-  const sqlQuery = `SELECT
-    CONCAT(
-      'https://stackoverflow.com/questions/',
-      CAST(id as STRING)) as url,
-    view_count
-    FROM \`bigquery-public-data.stackoverflow.posts_questions\`
-    WHERE tags like '%google-bigquery%'
-    ORDER BY view_count DESC
-    LIMIT 10`;
-
-  const options = {
-    query: sqlQuery,
-    // Location must match that of the dataset(s) referenced in the query.
-    location: 'US',
-  };
-
-  // Run the query
-  const [rows] = await bigqueryClient.query(options);
-
-  console.log('Query Results:');
-  rows.forEach(row => {
-    const url = row['url'];
-    const viewCount = row['view_count'];
-    console.log(`url: ${url}, ${viewCount} views`);
-  });
-}
-queryStackOverflow();
-```
-
 ### PHP
 
 在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 PHP 設定說明操作。詳情請參閱 [BigQuery PHP API 參考說明文件](https://docs.cloud.google.com/php/docs/reference/cloud-bigquery/latest/BigQueryClient?hl=zh-tw)。
@@ -311,40 +258,6 @@ if ($queryResults->isComplete()) {
 } else {
     throw new Exception('The query failed to complete');
 }
-```
-
-### Python
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-from google.cloud import bigquery
-
-
-
-def query_stackoverflow() -> None:
-    client = bigquery.Client()
-    results = client.query_and_wait(
-        """
-        SELECT
-          CONCAT(
-            'https://stackoverflow.com/questions/',
-            CAST(id as STRING)) as url,
-          view_count
-        FROM `bigquery-public-data.stackoverflow.posts_questions`
-        WHERE tags like '%google-bigquery%'
-        ORDER BY view_count DESC
-        LIMIT 10"""
-    )  # Waits for job to complete.
-
-    for row in results:
-        print("{} : {} views".format(row.url, row.view_count))
-
-
-if __name__ == "__main__":
-    query_stackoverflow()
 ```
 
 ### Ruby

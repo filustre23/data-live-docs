@@ -310,6 +310,4 @@ IBM Netezza 資料倉儲技術專為與 Netezza 專屬的 SQL 語法搭配使用
 |  | [`SPLIT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions?hl=zh-tw#split) |
 |  | [`STARTS_WITH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions?hl=zh-tw#starts_with) |
 | `STRING_TO_INT` |  |
-| `STRPOS` | [`STRPOS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions?hl=zh-tw#strpos) |
-| `SUBSTR` | [`SUBSTR`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions?hl=zh-tw#substr) |
-|  |  |
+| `STRPOS` |  |

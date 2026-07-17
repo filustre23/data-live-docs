@@ -16,7 +16,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 分析圖片
 
-本教學課程說明如何整合 BigQuery ML 與 Gemini，從非結構化圖片資料取得洞察資訊。在本教學課程中，您會根據 [gemini-2.5-flash](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models?hl=zh-tw#gemini-models) 建立[遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw)，並使用 [`AI.GENERATE_TEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text?hl=zh-tw) 函式，從一系列電影海報中自動擷取中繼資料，例如片名和上映年份。
+本教學課程說明如何整合 BigQuery ML 與 Gemini，從非結構化圖片資料取得洞察資訊。在本教學課程中，您將根據 [gemini-2.5-flash](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models?hl=zh-tw#gemini-models) 建立[遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw)，並使用 [`AI.GENERATE_TEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text?hl=zh-tw) 函式，從一系列電影海報中自動擷取中繼資料，例如片名和上映年份。
 
 ## 目標
 
@@ -41,8 +41,8 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    **選取或建立專案所需的角色**
 
-   * **選取專案**：選取專案時，不需要具備特定 IAM 角色，只要您已獲授角色，即可選取任何專案。
-   * **建立專案**：如要建立專案，您需要具備專案建立者角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   * **選取專案**：選取專案時，不需要具備特定 IAM 角色，只要您在專案中獲派角色，即可選取該專案。
+   * **建立專案**：如要建立專案，您需要專案建立者角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
    **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，而不要選取現有專案。完成這些步驟後，您就可以刪除專案，並移除與該專案相關聯的所有資源。
 
    [前往專案選取器](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
@@ -51,7 +51,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    **啟用 API 時所需的角色**
 
-   如要啟用 API，您需要服務使用情形管理員 IAM 角色 (`roles/serviceusage.serviceUsageAdmin`)，其中包含 `serviceusage.services.enable` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用情形管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
    [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery.googleapis.com%2Cbigqueryconnection.googleapis.com%2Caiplatform.googleapis.com&hl=zh-tw)
 
@@ -62,7 +62,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 * 建立及使用 BigQuery 資料集、連線和模型：BigQuery 管理員 (`roles/bigquery.admin`)。
 * 將權限授予連線的服務帳戶：專案 IAM 管理員 (`roles/resourcemanager.projectIamAdmin`)。
 
-這些預先定義的角色具備執行本文所述工作所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
+這些預先定義的角色具備執行本文中工作所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
 #### 所需權限
 
@@ -94,7 +94,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在導覽選單中，按一下「容量管理」。
+2. 按一下導覽選單中的「工作負載管理」。
 3. 按一下「建立預留項目」。
 4. 在「Create reservation」(建立預留項目) 頁面執行下列操作：
 
@@ -102,16 +102,16 @@ Google uses AI technology to translate content into your preferred language. AI 
    2. 在「位置」部分，選取「us (多個美國區域)」。
    3. 其餘預設設定維持不變，然後點選「儲存」。
 
-### 指派預訂項目
+### 指派預留項目
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在導覽選單中，按一下「容量管理」。
+2. 按一下導覽選單中的「工作負載管理」。
 3. 在「運算單元預留項目」表格中，找出要指派給專案的預留項目。
 4. 依序點按 more\_vert「查看動作」**>「建立指派項目」**。
 5. 在「Create an assignment」(建立指派作業) 中，按一下「Browse」(瀏覽)，然後選取您的專案。
-6. 在「Job type」(工作類型) 區段選取「QUERY」(查詢)。選取這個選項可確保 SQL 查詢使用此預留項目的運算單元。
+6. 在「Job type」(工作類型) 區段選取「QUERY」(查詢)。選取這個選項，即可確保 SQL 查詢使用這個預留項目的運算單元。
 7. 點選「建立」。
 
 ## 建立資料集
@@ -124,7 +124,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    [前往 BigQuery 頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 在「Explorer」窗格中，按一下專案名稱。
-3. 依序點按 more\_vert「View actions」(查看動作) >「Create dataset」(建立資料集)
+3. 依序點按 more\_vert「View actions」(查看動作) >「Create dataset」(建立資料集)。
 4. 在「建立資料集」頁面中，執行下列操作：
 
    * 在「Dataset ID」(資料集 ID) 中輸入 `bqml_tutorial`。
@@ -164,7 +164,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 ## 建立物件資料表
 
 在公開的 Cloud Storage [bucket](https://console.cloud.google.com/storage/browser/cloud-samples-data/vertex-ai/dataset-management/datasets/classic-movie-posters;tab=objects?amp%3BforceOnObjectsSortingFiltering=false&hl=zh-tw) 中，為電影海報圖片建立物件資料表。
-您可以使用物件資料表分析圖片，不必將圖片從 Cloud Storage 移出。
+您可以使用物件表格分析圖片，不必將圖片從 Cloud Storage 移出。
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -182,7 +182,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 建立遠端模型
 
-建立代表 Agent Platform 模型的遠端模型：`gemini-2.5-flash`
+建立遠端模型，代表 Agent Platform 模型：`gemini-2.5-flash`
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -195,7 +195,8 @@ Google uses AI technology to translate content into your preferred language. AI 
      OPTIONS (ENDPOINT = 'gemini-2.5-flash');
    ```
 
-   查詢作業可能需要幾分鐘才能完成，完成後，`gemini-vision` 模型會顯示在「Explorer」窗格的 `bqml_tutorial` 資料集中。由於查詢是使用 `CREATE MODEL` 陳述式建立模型，因此不會有查詢結果。
+   查詢作業可能需要幾分鐘才能完成，完成後，`gemini-vision` 模型會顯示在「Explorer」 窗格的 `bqml_tutorial` 資料集中。
+   由於查詢使用 `CREATE MODEL` 陳述式建立模型，因此不會有查詢結果。
 
 ## 分析電影海報
 
@@ -218,7 +219,7 @@ Google uses AI technology to translate content into your preferred language. AI 
          STRUCT( 0.2 AS temperature,
            'For the movie represented by this poster, what is the movie title and year of release? Answer in JSON format with two keys: title, year. title should be string, year should be integer.' AS PROMPT)));
    ```
-3. 在查詢編輯器中執行下列陳述式，查看資料表資料：
+3. 在查詢編輯器中執行下列陳述式，即可查看資料表資料：
 
    ```
    SELECT * FROM `bqml_tutorial.movie_posters_results`;
@@ -272,7 +273,7 @@ Google uses AI technology to translate content into your preferred language. AI 
      FROM
        `bqml_tutorial.movie_posters_results` results );
    ```
-3. 在查詢編輯器中執行下列陳述式，查看資料表資料：
+3. 在查詢編輯器中執行下列陳述式，即可查看資料表資料：
 
    ```
    SELECT * FROM `bqml_tutorial.movie_posters_results_formatted`;
@@ -344,7 +345,7 @@ bq rm -r bqml_tutorial
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在導覽選單中，按一下「容量管理」。
+2. 按一下導覽選單中的「工作負載管理」。
 3. 在「運算單元預留項目」表格中，找出 **`bqml-tutorial-reservation`**。
 4. 依序點選 more\_vert「查看動作」 >「刪除」。
 
@@ -363,7 +364,7 @@ bq rm --reservation --location=us bqml-tutorial-reservation
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 點選左側窗格中的 explore「Explorer」，找出專案，然後點選「Connections」(連線)。
+2. 在左側窗格中，依序點選 explore「Explorer」、專案和「Connections」。
 3. 在表格中找出連線。
 4. 依序點選 more\_vert「查看動作」**> 刪除**。
 
@@ -391,11 +392,11 @@ bq rm --connection --location=us CONNECTION_ID
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-05 (世界標準時間)。
+上次更新時間：2026-07-16 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-05 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-16 (世界標準時間)。"],[],[]]

@@ -14,7 +14,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 如需包含這個程式碼範例的詳細說明文件，請參閱下列文章：
 
-* [管理邏輯檢視畫面](https://docs.cloud.google.com/bigquery/docs/managing-views?hl=zh-tw)
+* [管理邏輯檢視區塊](https://docs.cloud.google.com/bigquery/docs/managing-views?hl=zh-tw)
 * [管理資料表](https://docs.cloud.google.com/bigquery/docs/managing-tables?hl=zh-tw)
 
 ## 程式碼範例
@@ -96,34 +96,6 @@ public class UpdateTableDescription {
       System.out.println("Table description was not updated \n" + e.toString());
     }
   }
-}
-```
-
-### Node.js
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-// Import the Google Cloud client library
-const {BigQuery} = require('@google-cloud/bigquery');
-const bigquery = new BigQuery();
-
-async function updateTableDescription() {
-  // Updates a table's description.
-
-  // Retreive current table metadata
-  const table = bigquery.dataset(datasetId).table(tableId);
-  const [metadata] = await table.getMetadata();
-
-  // Set new table description
-  const description = 'New table description.';
-  metadata.description = description;
-  const [apiResponse] = await table.setMetadata(metadata);
-  const newDescription = apiResponse.description;
-
-  console.log(`${tableId} description: ${newDescription}`);
 }
 ```
 

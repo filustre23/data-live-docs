@@ -16,11 +16,22 @@ Save and categorize content based on your preferences.
 
 This document describes the `AI.FORECAST` function, which lets you
 forecast a time series by using BigQuery ML's built-in
-[TimesFM model](/bigquery/docs/timesfm-model).
-
-Using the `AI.FORECAST` function with the built-in TimesFM model lets you
+[TimesFM model](/bigquery/docs/timesfm-model). This lets you to
 perform forecasting without having to create and train your own model, so you
 can avoid the need for model management.
+
+For example, imagine you have a table containing sales data for a
+product. You could run a query similar to the following to forecast
+sales for the next 30 data points:
+
+```
+SELECT *
+FROM AI.FORECAST(
+  TABLE `mydataset.input_table`,
+  data_col => 'units_sold',
+  timestamp_col => 'sales_date',
+  horizon => 30);
+```
 
 ## Syntax
 
@@ -300,11 +311,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-06-29 UTC.
+Last updated 2026-07-15 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-06-29 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-07-15 UTC."],[],[]]

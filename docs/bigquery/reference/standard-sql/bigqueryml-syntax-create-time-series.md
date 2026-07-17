@@ -973,6 +973,4 @@ CREATE OR REPLACE MODEL `mydataset.arima_model`
     model_type = 'ARIMA_PLUS',
     holiday_region = 'US',...) AS (
         training_data AS (SELECT * FROM `mydataset.timeseries_data`),
-        custom_holiday AS (
-            SELECT
 ```

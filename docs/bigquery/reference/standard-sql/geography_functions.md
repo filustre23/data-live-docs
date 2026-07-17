@@ -295,9 +295,4 @@ ST_AREA(geography_expression[, use_spheroid])
 
 **Description**
 
-Returns the area in square meters covered by the polygons in the input
-`GEOGRAPHY`.
-
-If `geography_expression` is a point or a line, returns zero. If
-`geography_expression` is a collection, returns the area of the polygons in the
-collection; if the collection doesn't cont
+Returns the area in squa

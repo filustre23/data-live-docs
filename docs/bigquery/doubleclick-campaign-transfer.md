@@ -258,5 +258,5 @@ public class CreateCampaignmanagerTransfer {
               .setParent(parent.toString())
               .setTransferConfig(transferConfig)
               .build();
-      TransferConfig config = client.createTransferConfig
+      TransferConfig
 ```

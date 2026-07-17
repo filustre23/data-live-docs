@@ -287,5 +287,3 @@ public class QuickstartSample {
   }
 }
 ```
-
-### Python

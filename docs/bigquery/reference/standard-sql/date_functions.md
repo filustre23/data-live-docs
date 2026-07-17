@@ -641,9 +641,3 @@ SELECT
 ```
 
 ## `FORMAT_DATE`
-
-```
-FORMAT_DATE(format_string, date_expr)
-```
-
-**Descripti**

@@ -921,8 +921,4 @@ year 2022-2023.
 | US | Juneteenth | 2022-06-19 | 1 | 1 |
 | US | Juneteenth | 2023-06-19 | 1 | 1 |
 | US | LaborDay | 2022-09-05 | 1 | 1 |
-| US | LaborDay | 2023-09-04 | 1 | 1 |
-| US | MemorialDay | 2022-05-30 | 1 | 1 |
-| US | MemorialDay | 2023-05-29 | 1 | 1 |
-| US | MLKDay | 2022-01-17 | 1 | 1 |
-| US | MLKDay | 2023-01-16</ |
+| US |<

@@ -16,24 +16,29 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 資料遮蓋簡介
 
-**注意：** 使用以特定 BigQuery 版本建立的預留項目時，這項功能可能無法使用。如要進一步瞭解各版本啟用的功能，請參閱「[BigQuery 版本簡介](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)」。
+**注意：** 使用以特定 BigQuery 版本建立的預留項目時，可能無法使用這項功能。如要進一步瞭解各版本啟用的功能，請參閱「[BigQuery 版本簡介](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)」。
 
-BigQuery 支援資料欄層級的[資料遮蓋](https://docs.cloud.google.com/bigquery/docs/column-data-masking?hl=zh-tw)功能。您能針對不同使用者群組，選擇性地掩蓋特定資料欄的資料，但這些使用者還是能正常使用該資料欄。資料遮蓋功能是以[資料欄層級存取控管](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro?hl=zh-tw)為基礎建構而成，因此請先熟悉這項功能再繼續操作。
+BigQuery 支援資料欄層級的[資料遮蓋](https://docs.cloud.google.com/bigquery/docs/column-data-masking?hl=zh-tw)功能。您可以針對不同的使用者群組，選擇性地掩蓋特定欄位資料，但這些使用者還是能正常使用該資料欄。資料遮蓋功能是以[資料欄層級存取控管](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro?hl=zh-tw)為基礎建構而成，因此請先熟悉這項功能再繼續操作。
 
 搭配使用資料遮蓋和資料欄層級存取控管時，您可以根據不同使用者群組的需求，設定資料欄資料的存取權範圍，從完全存取到完全無法存取。舉例來說，您可能想授予會計群組完整存取權、分析師群組遮蓋存取權，以及銷售群組無存取權，以存取稅號資料。
 
+本文說明如何使用政策標記進行資料遮蓋。您也可以使用[資料治理標記](https://docs.cloud.google.com/bigquery/docs/tags?hl=zh-tw#data-governance-tags)，這類 Resource Manager 標記可用於資料遮蓋和資料欄層級的存取權控管。
+
 ## 優點
 
-資料遮蓋功能有以下優點：
+資料遮蓋功能具備下列優點：
 
-* 可簡化資料共用程序。您可以遮蓋敏感資料欄，與更多人共用資料表。
-* 與資料欄層級存取控管機制不同，您不需要排除使用者無法存取的資料欄，即可修改現有查詢。設定資料遮蓋後，現有查詢會根據使用者獲派的角色，自動遮蓋資料欄資料。
-* 您可以大規模套用資料存取權政策。您可以編寫資料政策、將其與政策標記建立關聯，然後將政策標記套用至任意數量的資料欄。
-* 可啟用屬性式存取控管。附加至資料欄的政策標記會提供情境資料存取權，這項權限取決於資料政策，以及與該政策標記相關聯的主體。
+* 可簡化資料共用程序。您可以遮蓋敏感資料欄，與更多人分享資料表。
+* 與欄層級存取權控管不同，您不需要排除使用者無法存取的資料欄，即可修改現有查詢。設定資料遮蓋後，現有查詢會根據使用者獲派的角色，自動遮蓋資料欄資料。
+* 您可以大規模套用資料存取權政策。您可以編寫資料政策、將政策與政策標記建立關聯，然後將政策標記套用至任意數量的資料欄。
+* 可啟用屬性式存取控管。附加至資料欄的政策標記會提供情境資料存取權，這項權限取決於資料政策和與該政策標記相關聯的主體。
 
 ## 資料遮蓋工作流程
 
-資料遮蓋方式有兩種。您可以建立分類和政策標記，然後在政策標記上設定資料政策。或者，您也可以直接在資料欄上設定資料政策。這樣一來，您就能在資料上對應資料遮蓋規則，不必處理政策標記或建立其他分類。
+如要遮蓋資料，請建立分類和政策標記，然後在政策標記上設定資料政策。或者，您也可以執行下列任一操作：
+
+* **直接在資料欄上設定資料政策。**將資料遮蓋規則對應至資料，無須處理政策標記或建立其他分類。
+* **使用資料治理標記**。使用[資料治理標記](https://docs.cloud.google.com/bigquery/docs/tags?hl=zh-tw#data-governance-tags) (搶先版) 控管資料欄層級的存取權，並遮蓋資料。
 
 ### 直接在資料欄上設定資料政策
 
@@ -59,7 +64,7 @@ BigQuery 支援資料欄層級的[資料遮蓋](https://docs.cloud.google.com/bi
 
    與資料政策相關聯的政策標記，也可用於資料欄層級的存取控管。在這種情況下，政策標記也會與一或多個獲派「Data Catalog 精細讀取者」角色的主體建立關聯。這樣一來，這些主體就能存取原始的未遮蓋欄資料。
 
-圖 2 顯示資料欄層級的存取控管和資料遮蓋功能如何搭配運作：
+圖 2 顯示資料欄層級的存取控管和資料遮蓋如何搭配運作：
 
 **圖 2.** 資料遮蓋元件。
 
@@ -67,16 +72,16 @@ BigQuery 支援資料欄層級的[資料遮蓋](https://docs.cloud.google.com/bi
 
 ## 資料遮蓋規則
 
-使用資料遮蓋功能時，系統會在查詢執行階段，根據執行查詢的使用者角色，將資料遮蓋規則套用至資料欄。遮蓋作業優先於查詢中涉及的任何其他作業。資料遮蓋規則會決定套用至資料欄資料的資料遮蓋類型。
+使用資料遮蓋功能時，系統會根據執行查詢的使用者角色，在查詢執行階段將資料遮蓋規則套用至資料欄。遮蓋作業優先於查詢中涉及的任何其他作業。資料遮蓋規則會決定套用至資料欄資料的資料遮蓋類型。
 
 您可以使用下列資料遮蓋規則：
 
 * **自訂遮蓋常式**。
-  傳回對資料欄套用[使用者定義函式 (UDF)](https://docs.cloud.google.com/bigquery/docs/user-defined-functions?hl=zh-tw#custom-mask) 後的資料欄值。如要管理遮蓋規則，必須具備[常式權限](https://docs.cloud.google.com/bigquery/docs/routines?hl=zh-tw#permissions)。這項規則的設計宗旨是支援所有 [BigQuery 資料類型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw)，但 `STRUCT` 資料類型除外。不過，除了 `STRING` 和 `BYTES` 以外的資料類型，支援程度有限。
+  將[使用者定義函式 (UDF)](https://docs.cloud.google.com/bigquery/docs/user-defined-functions?hl=zh-tw#custom-mask)套用至資料欄後，傳回該資料欄的值。如要管理遮蓋規則，必須具備[常式權限](https://docs.cloud.google.com/bigquery/docs/routines?hl=zh-tw#permissions)。這項規則的設計宗旨是支援所有 [BigQuery 資料類型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw)，但 `STRUCT` 資料類型除外。不過，除了 `STRING` 和 `BYTES` 以外的資料類型，支援程度有限。
   輸出內容取決於定義的函式。
 
   如要進一步瞭解如何為自訂遮蓋常式建立 UDF，請參閱「[建立自訂遮蓋常式](https://docs.cloud.google.com/bigquery/docs/user-defined-functions?hl=zh-tw#custom-mask)」。
-* **日期年份遮罩**。傳回將值截斷至年份後，並將值的所有非年份部分設為年初的資料欄值。這項規則只能用於使用 `DATE`、`DATETIME` 和 `TIMESTAMP` 資料類型的欄。例如：
+* **日期年份遮罩**。傳回將值截斷至年份後的值，並將值中所有非年份的部分設為年初。這項規則只能用於使用 `DATE`、`DATETIME` 和 `TIMESTAMP` 資料類型的欄。例如：
 
   | 類型 | 原始 | 已遮蓋 |
   | --- | --- | --- |
@@ -84,9 +89,9 @@ BigQuery 支援資料欄層級的[資料遮蓋](https://docs.cloud.google.com/bi
   | `DATETIME` | 2030-07-17T01:45:06 | 2030-01-01T00:00:00 |
   | `TIMESTAMP` | 2030-07-17 01:45:06 | 2030-01-01 00:00:00 |
 
-  **注意：** 系統會根據世界標準時間 (UTC) 截斷資料。如要變更這項設定，請使用 **@@time\_zone**
+  **注意：** 系統會根據世界標準時間時區截斷資料。如要變更這項設定，請使用 **@@time\_zone**
   [系統變數](https://docs.cloud.google.com/bigquery/docs/reference/system-variables?hl=zh-tw)調整預設時區。
-* **預設遮蓋值**。根據資料欄的資料類型，傳回該資料欄的預設遮蓋值。如要隱藏資料欄的值，但顯示資料類型，請使用這項功能。將這項資料遮蓋規則套用至資料欄後，對於具備「經過遮蓋的讀取者」存取權的使用者而言，該資料欄在查詢[`JOIN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw#join_types)作業中的實用性會降低。這是因為預設值不夠獨特，無法在聯結資料表時派上用場。
+* **預設遮蓋值**。根據資料欄的資料類型，傳回資料欄的預設遮蓋值。如要隱藏資料欄的值，但顯示資料類型，請使用這項功能。將這項資料遮蓋規則套用至資料欄後，對於具備「經過遮蓋的讀取者」存取權的使用者而言，該資料欄在查詢[`JOIN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw#join_types)作業中的實用性會降低。這是因為預設值不夠獨特，無法在聯結資料表時派上用場。
 
   下表顯示各資料類型的預設遮蓋值：
 
@@ -107,7 +112,7 @@ BigQuery 支援資料欄層級的[資料遮蓋](https://docs.cloud.google.com/bi
   | `ARRAY` | [] |
   | `STRUCT` | NOT\_APPLICABLE  政策標記無法套用至使用 `STRUCT` 資料類型的資料欄，但可以與這類資料欄的葉節點欄位建立關聯。 |
   | `JSON` | null |
-* **電子郵件遮罩**。傳回欄的值，並將有效電子郵件的使用者名稱替換為 `XXXXX`。如果資料欄的值不是有效的電子郵件地址，系統會先透過 [SHA-256](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/hash_functions?hl=zh-tw#sha256) 雜湊函式執行該值，然後傳回結果。這項規則只能用於使用 `STRING`
+* **電子郵件遮罩**。傳回欄的值，並將有效電子郵件地址的使用者名稱替換為 `XXXXX`。如果資料欄的值不是有效的電子郵件地址，系統會先透過 [SHA-256](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/hash_functions?hl=zh-tw#sha256) 雜湊函式處理資料欄的值，然後再傳回。這項規則只能用於使用 `STRING`
   資料類型的資料欄。例如：
 
   | 原始 | 已遮蓋 |
@@ -116,16 +121,16 @@ BigQuery 支援資料欄層級的[資料遮蓋](https://docs.cloud.google.com/bi
   | `randomtext` | `jQHDyQuj7vJcveEe59ygb3Zcvj0B5FJINBzgM6Bypgw=` |
   | `test@gmail@gmail.com` | `Qdje6MO+GLwI0u+KyRyAICDjHbLF1ImxRqaW08tY52k=` |
 * **前四個字元**。傳回資料欄值的前 4 個字元，並以 `XXXXX` 取代字串的其餘部分。如果資料欄的值長度等於或小於 4 個字元，則函式會執行 [SHA-256](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/hash_functions?hl=zh-tw#sha256) 雜湊函式，並傳回資料欄的值。這項規則只能用於使用 `STRING` 資料類型的資料欄。
-* **雜湊 (SHA-256)**。傳回欄位值，但會先透過 [SHA-256](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/hash_functions?hl=zh-tw#sha256) 雜湊函式執行。如要讓使用者在查詢的 [`JOIN` 作業中使用這個資料欄，請使用這項設定。](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw#join_types)這項規則只能用於使用 `STRING` 或 `BYTES` 資料類型的資料欄。
+* **雜湊 (SHA-256)**。傳回經過 [SHA-256](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/hash_functions?hl=zh-tw#sha256) 雜湊函式處理後的欄值。如要讓使用者在查詢的 [`JOIN` 作業](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw#join_types)中使用這個資料欄，請使用這個值。這項規則只能用於使用 `STRING` 或 `BYTES` 資料類型的資料欄。
 
   資料遮蓋功能使用的 SHA-256 函式會保留類型，因此傳回的雜湊值與資料欄值具有相同的資料類型。舉例來說，`STRING` 資料欄值的雜湊值也具有 `STRING` 資料類型。
 
-  **重要事項：** SHA-256 是決定性雜湊函式，初始值一律會解析為相同的雜湊值。不過，這項功能不需要加密金鑰。
+  **重要事項：** SHA-256 是確定性雜湊函式，初始值一律會解析為相同的雜湊值。不過，這項功能不需要加密金鑰。
   惡意行為人可能會使用暴力攻擊法，透過 SHA-256 演算法執行所有可能的原始值，並查看哪個值產生的雜湊與資料遮蓋傳回的雜湊相符，藉此判斷原始值。
 * **隨機雜湊**。使用加鹽雜湊演算法傳回資料欄值的雜湊。隨機雜湊比標準 `Hash
   (SHA-256)` 規則更安全。這項規則只能用於使用 `STRING` 或 `BYTES` 資料類型的資料欄。
 
-  + **非決定性：**系統會為每項查詢產生不重複的隨機值 (鹽)。不同查詢的同一資料欄值會產生不同的雜湊結果。這有助於防範暴力破解攻擊，以及長期分析遮蓋資料模式。
+  + **非決定性：**系統會為每項查詢產生不重複的隨機值 (鹽)。不同查詢的同一資料欄值會產生不同的雜湊結果。這有助於防止暴力破解攻擊，以及長期分析遮蓋的資料模式。
   + **加入控制項：**
     - 只能*在同一個查詢中*，對以 `RANDOM_HASH` 遮蓋的資料欄執行聯結。
     - 由於每個查詢都有隨機鹽，因此無法跨不同查詢進行聯結。
@@ -137,34 +142,34 @@ BigQuery 支援資料欄層級的[資料遮蓋](https://docs.cloud.google.com/bi
 
 ### 比較資料遮蓋規則
 
-下表比較 BigQuery 中可用的不同資料遮蓋選項，並考量這些選項是否可用於 join，以及相對安全強度：
+下表比較 BigQuery 中可用的不同資料遮蓋選項，並考量這些選項是否可用於聯結，以及相對安全強度：
 
 * **可聯結性：**指遮蓋資料是否可用於 SQL `JOIN` 作業。可使用遮蓋方法，針對指定輸入內容產生一致的輸出內容 (聯結範圍的決定性)，並保留足夠的獨特性。
-* **安全強度：**指出防止原始資料去識別化或反向工程的保護等級。這是相對比較。
+* **安全性強度：**指出防護等級，可避免原始資料遭到去識別化或反向工程破解。這是相對比較。
 
 | 遮蓋選項 | 類型 | 可加入性 | 安全強度 |
 | --- | --- | --- | --- |
 | 失效 | 預先定義 | 否 | **最高：**以 `NULL` 取代資料。不會洩漏原始值相關資訊。 |
 | 預設遮蓋值 | 預先定義 | 否 | **最高：**根據資料類型，以預設值取代資料。不會洩漏原始值相關資訊。 |
-| 電子郵件遮罩 | 預先定義 | 否 | **中度：**隱藏使用者名稱 (例如「`user@example.com`」會變成「`XXXXX@example.com`」)，但網域名稱仍會顯示。未遮蓋的網域可能會洩漏機構所屬關係，因此屬於敏感資訊。這項資訊可能會與其他資料相互關聯，用於去匿名化作業。如果網域中潛在的個人人數較少，就比較容易推斷出原始使用者，因此這項遮蓋功能的效用會降低。如果該值不是有效的電子郵件地址，系統會使用 SHA-256 進行雜湊處理 (**中等：**安全性強度)。 |
-| 前四個字元 | 預先定義 | 否 | **低到中等：**傳回前 4 個字元， 其餘字元則以 `XXXXX` 取代。如果字串長度為 4 個字元以下，系統會使用 SHA-256 雜湊處理。在這些短字串上使用 SHA-256 時，安全性為「非常低」，因為輸入空間有限 (1 到 4 個字元)，因此計算所有可能輸入內容的彩虹表非常簡單，可進行反向查閱。 |
-| 最後四個字元 | 預先定義 | 否 | **低到中等：**傳回最後 4 個字元，並在前面加上 `XXXXX` 來取代其餘字元。如果字串長度為 4 個字元以下，系統會使用 SHA-256 雜湊處理。與「前四個字元」類似，如果對短字串使用 SHA-256，由於容易進行反向查閱，安全性會**非常低**。 |
+| 電子郵件遮罩 | 預先定義 | 否 | **中度：**隱藏使用者名稱 (例如「`user@example.com`」會變成「`XXXXX@example.com`」)，但網域名稱仍會顯示。未遮蓋的網域可能會洩漏機構所屬關係，因此屬於敏感資訊。這項資訊可能會與其他資料相互關聯，用於去匿名化。如果網域中潛在的個人人數較少，就比較容易推斷出原始使用者，因此這項遮蓋功能的效用會降低。如果該值不是有效的電子郵件地址，系統會使用 SHA-256 進行雜湊處理 (**中等：**安全性強度)。 |
+| 前四個字元 | 預先定義 | 否 | **低到中等：**傳回前 4 個字元， 其餘字元則以 `XXXXX` 取代。如果字串長度為 4 個半形字元以下，系統會使用 SHA-256 雜湊處理。在這些短字串上使用 SHA-256 時，安全性為「非常低」，因為輸入空間有限 (1 到 4 個字元)，因此計算所有可能輸入內容的彩虹表非常簡單，可進行反向查閱。 |
+| 最後四個字元 | 預先定義 | 否 | **低到中等：**傳回最後 4 個字元，並在前面加上 `XXXXX`，取代其餘字元。如果字串長度為 4 個字元以下，系統會使用 SHA-256 雜湊處理。與「前四個字元」類似，如果對短字串使用 SHA-256，由於容易進行反向查閱，安全性會**非常低**。 |
 | 日期年份遮罩 | 預先定義 | 否 | **中等：**只顯示年份，截斷日期其餘部分 (例如 `2030-07-17` 會變成 `2030-01-01`)。會洩漏部分資訊，容易受到統計分析。 |
-| 隨機雜湊 | 預先定義 | 是 (在同一查詢中) | **高：**在雜湊運算中，使用服務*每次執行查詢時*產生的不重複隨機密碼編譯鹽。這項功能可有效防範預先計算的資料表攻擊 (例如彩虹表)。對於相同的輸入值，*只有在同一次查詢執行期間*，輸出內容才會保持一致。由於每個查詢的鹽值會變更，因此無法跨不同查詢執行聯結。 |
-| 雜湊 (SHA-256) | 預先定義 | 是 | **中等：**雖然 SHA-256 在密碼學上具有強大的*抗碰撞性*，但在遮蓋處理的環境中，仍容易受到各種攻擊。由於是確定性雜湊，因此容易受到彩虹表攻擊、已知明文攻擊和統計分析。您可以在這裡跨不同查詢執行進行聯結。 |
-| 自訂遮蓋常式 - SHA-256 | 自訂 | 是 | **中等：**與預先定義的 SHA-256 具有相同的安全屬性。具有強大的*抗碰撞性*，但由於其確定性，容易受到彩虹表、已知明文和統計分析攻擊。 |
-| 自訂遮蓋常式 - 加鹽 SHA-256 | 自訂 | 是 | **高 (取決於適當的鹽保護措施)：**使用*一致的私密*鹽，在自訂 UDF 定義中硬式編碼，可提供比標準 SHA-256 更高的安全性。安全性取決於鹽的私密性。必須限制 UDF 定義的存取權。 BigQuery 會從執行詳細資料中遮蓋常數，有助於防止鹽值曝光。與 `RANDOM_HASH` 不同的是，使用這個*特定* UDF 時，鹽值在各項查詢中會保持一致，因此支援跨查詢的聯結。 |
-| 自訂遮蓋常式 - AEAD 加密 | 自訂 | 是 | **高 (取決於金鑰管理是否得當)：**可提供強大的安全性和加入能力。  **重要考量：**如要搭配使用 AEAD 加密和以 KMS 包裝的金鑰集，查詢使用者通常需要 KMS 金鑰的 `cloudkms.cryptoKeyVersions.useToDecryptViaDelegation` 權限。這項權限可讓使用者將包裝金鑰組用於*加密和解密*。因此，您必須保護*已包裝的金鑰集*。如果使用者有權存取*包裝金鑰*，就能解密 (取消遮蓋) 敏感資料欄資料。 |
+| 隨機雜湊 | 預先定義 | 是 (在同一查詢中) | **高：**在雜湊運算中，使用服務*在每次執行查詢時*產生的不重複隨機私密鹽。這項功能可有效防範預先計算的資料表攻擊 (例如彩虹表)。對於相同的輸入值，輸出內容*只會在同一次查詢執行中*保持一致。由於每個查詢的鹽值會變更，因此無法跨不同查詢執行作業進行聯結。 |
+| 雜湊 (SHA-256) | 預先定義 | 是 | **中等：**雖然 SHA-256 在密碼學上具有強大的*抗碰撞性*，但在遮蓋處理的環境中，仍可能受到各種攻擊。由於這是確定性雜湊，因此容易受到彩虹表攻擊、已知明文攻擊和統計分析。您可以在這裡跨不同查詢執行聯結。 |
+| 自訂遮蓋常式 - SHA-256 | 自訂 | 是 | **中等：**與預先定義的 SHA-256 具有相同的安全屬性。*抗碰撞性*強大，但由於具有確定性，容易受到彩虹表、已知明文和統計分析攻擊。 |
+| 自訂遮蓋常式 - 加鹽 SHA-256 | 自訂 | 是 | **高 (取決於適當的鹽保護)：**使用*一致的私密*鹽，在自訂 UDF 定義中硬式編碼，可提供比標準 SHA-256 更高的安全性。安全性取決於鹽的私密性。UDF 定義的存取權必須受到限制。 BigQuery 會從執行詳細資料中遮蓋常數，防止鹽值曝光。與 `RANDOM_HASH` 不同的是，使用這個*特定* UDF 的查詢會採用一致的鹽值，因此支援跨查詢的聯結。 |
+| 自訂遮蓋處理常式 - AEAD 加密 | 自訂 | 是 | **高 (取決於金鑰管理是否得當)：**可提供強大的安全性和可加入性。  **重要注意事項：**如要使用 AEAD 加密搭配以 KMS 包裝的金鑰集，查詢使用者通常需要 KMS 金鑰的 `cloudkms.cryptoKeyVersions.useToDecryptViaDelegation` 權限。這項權限可讓使用者使用包裝金鑰組進行*加密和解密*。因此，您必須保護*包裝的金鑰集*。如果使用者有權存取*包裝金鑰*，就能解密 (取消遮蓋) 敏感資料欄資料。 |
 
-### 雜湊衝突和彙整完整性
+### 雜湊碰撞和聯結完整性
 
-雜湊技術 (例如 SHA-256 和隨機雜湊) 在理論上存在[雜湊衝突](https://en.wikipedia.org/wiki/Hash_collision)的風險，也就是兩個不同的原始值會產生相同的雜湊值。如果使用這些規則遮蓋資料欄，並在 `JOIN` 作業中使用，可能會發生衝突，導致查詢結果中的資料關聯不正確 (錯誤的相符項目)。
+雜湊技術 (例如 SHA-256 和隨機雜湊) 有理論上的[雜湊衝突](https://en.wikipedia.org/wiki/Hash_collision)風險，也就是兩個不同的原始值會產生相同的雜湊值。如果使用這些規則遮蓋資料欄，然後在 `JOIN` 作業中使用，可能會發生衝突，導致查詢結果中的資料關聯不正確 (錯誤的相符項目)。
 
 不過，就任何實際資料集而言，SHA-256 碰撞的統計機率實際上微乎其微。因此，使用者可以非常放心地依據雜湊值遮蓋規則，確保聯結完整性。
 
 ### 資料遮蓋規則階層
 
-您最多可以為政策標記設定九項資料政策，每項政策都可與不同的資料遮蓋規則建立關聯。其中一項政策會保留給[資料欄層級存取控管設定](https://docs.cloud.google.com/bigquery/docs/column-level-security?hl=zh-tw#set_up_column-level_access_control)。這樣一來，系統就能根據使用者所屬的群組，對使用者查詢中的資料欄套用多項資料政策。發生這種情況時，BigQuery 會根據下列階層選擇要套用的資料遮蓋規則：
+您最多可以為政策標記設定九項資料政策，每項政策都可與不同的資料遮蓋規則建立關聯。其中一項政策會保留給[資料欄層級存取控管設定](https://docs.cloud.google.com/bigquery/docs/column-level-security?hl=zh-tw#set_up_column-level_access_control)。這樣一來，系統就能根據使用者所屬的群組，將多項資料政策套用至使用者查詢中的資料欄。發生這種情況時，BigQuery 會根據下列階層選擇要套用的資料遮蓋規則：
 
 1. 自訂遮蓋處理常式
 2. 隨機雜湊
@@ -186,7 +191,7 @@ BigQuery 支援資料欄層級的[資料遮蓋](https://docs.cloud.google.com/bi
 
 ### 管理分類和政策標記的角色
 
-您必須具備「Data Catalog 政策標記管理員」角色，才能建立及管理分類和政策標記。
+您必須具備「Data Catalog Policy Tag Admin」角色，才能建立及管理分類和政策標記。
 
 | 角色/ID | 權限 | 說明 |
 | --- | --- | --- |
@@ -194,17 +199,17 @@ BigQuery 支援資料欄層級的[資料遮蓋](https://docs.cloud.google.com/bi
 
 ### 建立及管理資料政策的角色
 
-如要建立及管理資料政策，您需要下列任一 BigQuery 角色：
+如要建立及管理資料政策，您必須具備下列任一 BigQuery 角色：
 
 | 角色/ID | 權限 | 說明 |
 | --- | --- | --- |
-| BigQuery 資料政策管理員 (`bigquerydatapolicy.admin`)    BigQuery 管理員 (`bigquery.admin`)    BigQuery 資料擁有者 (`bigquery.dataOwner`) | `bigquery.dataPolicies.create`  `bigquery.dataPolicies.delete`  `bigquery.dataPolicies.get`  `bigquery.dataPolicies.getIamPolicy`  `bigquery.dataPolicies.list`  `bigquery.dataPolicies.setIamPolicy`  `bigquery.dataPolicies.update` | `bigquery.dataPolicies.create` 和 `bigquery.dataPolicies.list` 權限適用於專案層級。其他權限則適用於資料政策層級。  這個角色可執行下列作業：   * 建立、讀取、更新及刪除資料政策。 * 取得及設定資料政策的身分與存取權管理政策。 |
+| BigQuery 資料政策管理員 (`bigquerydatapolicy.admin`)    BigQuery 管理員 (`bigquery.admin`)    BigQuery 資料擁有者 (`bigquery.dataOwner`) | `bigquery.dataPolicies.create`  `bigquery.dataPolicies.delete`  `bigquery.dataPolicies.get`  `bigquery.dataPolicies.getIamPolicy`  `bigquery.dataPolicies.list`  `bigquery.dataPolicies.setIamPolicy`  `bigquery.dataPolicies.update` | `bigquery.dataPolicies.create` 和 `bigquery.dataPolicies.list` 權限適用於專案層級。其他權限則適用於資料政策層級。  這個角色可授予下列權限：   * 建立、讀取、更新及刪除資料政策。 * 取得及設定資料政策的身分與存取權管理政策。 |
 
-您也需要 `datacatalog.taxonomies.get` 權限，可透過多個[Data Catalog 預先定義角色](https://docs.cloud.google.com/iam/docs/roles-permissions/datacatalog?hl=zh-tw)取得這項權限。
+您也需要 `datacatalog.taxonomies.get` 權限，可透過多個[Data Catalog 預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-permissions/datacatalog?hl=zh-tw)取得這項權限。
 
 ### 可將政策標記附加至資料欄的角色
 
-您必須具備 `datacatalog.taxonomies.get` 和 `bigquery.tables.setCategory` 權限，才能將政策標記附加至資料欄。`datacatalog.taxonomies.get` 包含在 Data Catalog 政策標記管理員和檢視者角色中。`bigquery.tables.setCategory` 包含在 BigQuery 管理員 (`roles/bigquery.admin`) 和 BigQuery 資料擁有者 (`roles/bigquery.dataOwner`) 角色中。
+如要將政策標記附加至資料欄，您必須具備 `datacatalog.taxonomies.get` 和 `bigquery.tables.setCategory` 權限。`datacatalog.taxonomies.get` 包含在 Data Catalog 政策標記管理員和檢視者角色中。`bigquery.tables.setCategory` 包含在 BigQuery 管理員 (`roles/bigquery.admin`) 和 BigQuery 資料擁有者 (`roles/bigquery.dataOwner`) 角色中。
 
 ### 查詢遮蓋資料的角色
 
@@ -212,31 +217,31 @@ BigQuery 支援資料欄層級的[資料遮蓋](https://docs.cloud.google.com/bi
 
 | 角色/ID | 權限 | 說明 |
 | --- | --- | --- |
-| 經過遮蓋的讀取者 (`bigquerydatapolicy.maskedReader`) | `bigquery.dataPolicies.maskedGet` | 這個角色只能授予 Resource Manager 資源 (專案、資料夾和機構)。  這個角色可授予權限，查看與資料政策相關聯的資料欄遮蓋資料。  此外，使用者必須具備適當的權限，才能查詢資料表。 詳情請參閱「[必要權限](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#required_permissions)」。 |
+| 經過遮蓋的讀取者 (`bigquerydatapolicy.maskedReader`) | `bigquery.dataPolicies.maskedGet` | 這個角色只能授予 Resource Manager 資源 (專案、資料夾和機構)。  這個角色可查看與資料政策相關聯的欄位遮蓋資料。  此外，使用者必須具備適當的權限，才能查詢資料表。 詳情請參閱「[必要權限](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#required_permissions)」。 |
 
 ### 遮蓋資料讀取者和精細讀取者角色如何互動
 
 資料遮罩功能是以資料欄層級存取控管機制為基礎。針對特定資料欄，部分使用者可能具備 BigQuery 經過遮蓋的讀取者角色，可讀取經過遮蓋的資料；部分使用者可能具備 Data Catalog 精細讀取者角色，可讀取未經遮蓋的資料；部分使用者可能同時具備這兩種角色；部分使用者可能都不具備。這些角色之間的互動方式如下：
 
-* 同時具備「精細讀取者」和「經過遮蓋的讀取者」角色的使用者：使用者看到的內容取決於每個角色在政策標記階層中的授予位置。詳情請參閱「[政策標記階層中的授權沿用設定](#auth-inheritance)」。
+* 同時具備「精細讀取者」和「經過遮蓋的讀取者」角色的使用者：使用者看到的內容取決於政策標記階層中授予每個角色的位置。詳情請參閱「[政策標記階層中的授權沿用設定](#auth-inheritance)」。
 * 具備精細讀取者角色的使用者：可以查看未遮蓋 (未模糊處理) 的資料欄資料。
-* 具備「遮蓋讀取者」角色的使用者：可查看遮蓋 (隱藏) 的資料欄資料。
+* 具備「已遮蓋讀取者」角色的使用者：可查看已遮蓋 (隱藏) 的資料欄資料。
 * 不具備上述任一角色的使用者：權限遭拒。
 
-如果資料表含有受保護或受保護且經過遮蓋的資料欄，使用者必須是適當群組的成員，才能對該資料表執行 `SELECT * FROM` 陳述式，因為這樣才能取得所有這些資料欄的「遮蓋讀取者」或「精細讀取者」角色。
+如果資料表含有受保護或受保護且經過遮蓋的資料欄，使用者必須是適當群組的成員，才能對該資料表執行 `SELECT * FROM` 陳述式，因為這樣才能獲得所有這些資料欄的「遮蓋讀取者」或「精細讀取者」角色。
 
 如果使用者未獲授權，則必須在 `SELECT` 陳述式中指定他們有權存取的資料欄，或使用 `SELECT * EXCEPT
 (restricted_columns) FROM` 排除受保護或遮蓋的資料欄。
 
-### 政策標記階層中的授權沿用
+### 政策標記階層中的授權沿用機制
 
-系統會從與資料欄相關聯的政策標記開始評估角色，然後在分類法的每個升級層級進行檢查，直到判斷使用者是否具備適當權限，或是到達政策標記階層的頂端為止。
+系統會從與資料欄相關聯的政策標記開始評估角色，然後檢查分類法中每個升級層級，直到判斷使用者是否具備適當權限，或到達政策標記階層的頂端為止。
 
 舉例來說，請參考圖 4 所示的政策標記和資料政策設定：
 
 **圖 4**：政策標記和資料政策設定。
 
-您有一個以 `Financial` 政策標記註解的資料表欄，以及同時是 ftes@example.com 和 analysts@example.com 群組成員的使用者。當使用者執行包含已註解資料欄的查詢時，系統會根據政策標記分類中定義的階層，判斷該使用者的存取權。由於使用者是透過`Financial`政策標記取得 Data Catalog 精細讀取者角色，因此查詢會傳回未遮蓋的資料欄資料。
+您有一個以 `Financial` 政策標記註解的資料表欄，以及同時是 ftes@example.com 和 analysts@example.com 群組成員的使用者。當使用者執行包含註解資料欄的查詢時，系統會根據政策標記分類中定義的階層，判斷該使用者的存取權。由於使用者是透過`Financial`政策標記取得 Data Catalog 精細讀取者角色，因此查詢會傳回未遮蓋的資料欄資料。
 
 如果另一個使用者 (僅是 ftes@example.com 角色的成員) 執行包含註解資料欄的查詢，查詢會傳回使用 SHA-256 演算法雜湊處理的資料欄資料，因為 `Confidential` 政策標記 (`Financial` 政策標記的父項) 授予該使用者 BigQuery 遮蓋讀取者角色。
 
@@ -246,7 +251,7 @@ BigQuery 支援資料欄層級的[資料遮蓋](https://docs.cloud.google.com/bi
 
 **圖 5.** 政策標記和資料政策設定。
 
-您遇到與圖 4 相同的情況，但使用者在政策標記階層的較高層級中獲派「精細讀取者」角色，在政策標記階層的較低層級中獲派「經過遮蓋的讀取者」角色。因此，查詢會傳回這位使用者遭遮蓋的資料欄資料。即使使用者在標記階層中較高的位置獲派精細讀取者角色，服務仍會使用在政策標記階層中遇到的第一個指派角色，檢查使用者存取權，因此使用者無法存取資料欄。
+您遇到與圖 4 相同的情況，但使用者在政策標記階層的較高層級中獲派「精細讀取者」角色，在政策標記階層的較低層級中獲派「經過遮蓋的讀取者」角色。因此，查詢會傳回這位使用者遭遮蓋的資料欄資料。即使使用者在標記階層中較高的位置獲派精細讀取者角色，服務仍會使用在政策標記階層中遇到的第一個指派角色，檢查使用者存取權，因此使用者仍無法存取資料欄。
 
 如要建立單一資料政策，並將其套用至政策標記階層的多個層級，請在代表最高階層的政策標記上設定資料政策。舉例來說，假設分類架構具有下列結構：
 
@@ -261,13 +266,13 @@ BigQuery 支援資料欄層級的[資料遮蓋](https://docs.cloud.google.com/bi
 
 ## 資料遮蓋功能與不相容的功能
 
-如果使用[與資料遮蓋功能不相容的 BigQuery 功能](#compatibility)，服務會將遮蓋資料欄視為安全資料欄，只允許具備 Data Catalog 精細讀取者角色的使用者存取。
+如果使用[與資料遮蓋功能不相容的 BigQuery 功能](#compatibility)，服務會將遮蓋的資料欄視為安全資料欄，只允許具備 Data Catalog 精細讀取者角色的使用者存取。
 
-舉例來說，請參考圖 6 所示的政策標記和資料政策設定：
+舉例來說，請參閱圖 6 所示的政策標記和資料政策設定：
 
 **圖 6**：政策標記和資料政策設定。
 
-您有一個以 `Financial` 政策標記註解的資料表欄，以及 analysts@example.com 群組的成員。如果使用者嘗試透過不相容的功能存取註解欄，系統會顯示存取遭拒錯誤。這是因為他們是透過 `Financial` 政策標記取得 BigQuery 遮蓋讀取者角色，但在此情況下，他們必須具備 Data Catalog 精細讀取者角色。由於服務已為使用者判斷適用的角色，因此不會繼續檢查政策標記階層中較上層的額外權限。
+您有一個以 `Financial` 政策標記註解的資料表欄，以及 analysts@example.com 群組的成員。如果使用者嘗試透過不相容的功能存取註解欄，系統會顯示存取遭拒錯誤。這是因為他們是透過 `Financial` 政策標記取得 BigQuery 遮蓋讀取者角色，但在這個情況下，他們必須具備 Data Catalog 精細讀取者角色。由於服務已為使用者判斷適用的角色，因此不會繼續檢查政策標記階層中較上層的額外權限。
 
 ## 資料遮蓋範例 (含輸出內容)
 
@@ -287,7 +292,7 @@ BigQuery 支援資料欄層級的[資料遮蓋](https://docs.cloud.google.com/bi
 
 * **data-users@example.com**：這個群組已獲授 `PII` 和 `Confidential` 政策標記的 BigQuery 遮蓋讀取者角色。系統會傳回下列結果：
 
-  | **SSN** | **優先順序** | **生命週期價值** | **建立日期** | **電子郵件** |
+  | **SSN** | **Priority** | **生命週期價值** | **建立日期** | **電子郵件** |
   | --- | --- | --- | --- | --- |
   | 空值 | "" | 0 | 1983 年 3 月 8 日 | 空值 |
   | 空值 | "" | 0 | 2009 年 12 月 29 日 | 空值 |
@@ -295,7 +300,7 @@ BigQuery 支援資料欄層級的[資料遮蓋](https://docs.cloud.google.com/bi
   | 空值 | "" | 0 | 1997 年 5 月 5 日 | 空值 |
 * **accounting@example.com**：這個群組已獲授與政策標記的「Data Catalog 精細讀取者」角色。`SSN`系統會傳回下列結果：
 
-  | **SSN** | **優先順序** | **生命週期價值** | **建立日期** | **NULL** |
+  | **SSN** | **Priority** | **生命週期價值** | **建立日期** | **NULL** |
   | --- | --- | --- | --- | --- |
   | 123-45-6789 | "" | 0 | 1983 年 3 月 8 日 | 空值 |
   | 234-56-7891 | "" | 0 | 2009 年 12 月 29 日 | 空值 |
@@ -303,26 +308,26 @@ BigQuery 支援資料欄層級的[資料遮蓋](https://docs.cloud.google.com/bi
   | 456-78-9123 | "" | 0 | 1997 年 5 月 5 日 | 空值 |
 * **sales-exec@example.com**：這個群組已獲授與政策標記的 Data Catalog 精細讀取者角色。`Confidential`系統會傳回下列結果：
 
-  | **SSN** | **優先順序** | **生命週期價值** | **建立日期** | **電子郵件** |
+  | **SSN** | **Priority** | **生命週期價值** | **建立日期** | **電子郵件** |
   | --- | --- | --- | --- | --- |
   | 空值 | 高 | 90,000 | 1983 年 3 月 8 日 | 空值 |
   | 空值 | 高 | 84,875 | 2009 年 12 月 29 日 | 空值 |
   | 空值 | 中 | 38,000 | 2021 年 7 月 14 日 | 空值 |
   | 空值 | 低 | 245 | 1997 年 5 月 5 日 | 空值 |
-* **fin-dev@example.com**：這個群組已獲授與`Financial`政策標記的 BigQuery 遮蓋讀取者角色。系統會傳回下列結果：
+* **fin-dev@example.com**：這個群組已獲授與政策標記的 BigQuery 遮蓋讀取者角色。`Financial`系統會傳回下列結果：
 
-  | **SSN** | **優先順序** | **生命週期價值** | **建立日期** | **電子郵件** |
+  | **SSN** | **Priority** | **生命週期價值** | **建立日期** | **電子郵件** |
   | --- | --- | --- | --- | --- |
   | 空值 | "" | Zmy9vydG5q= | 1983 年 3 月 8 日 | 空值 |
   | 空值 | "" | GhwTwq6Ynm= | 2009 年 12 月 29 日 | 空值 |
   | 空值 | "" | B6y7dsgaT9= | 2021 年 7 月 14 日 | 空值 |
   | 空值 | "" | Uh02hnR1sg= | 1997 年 5 月 5 日 | 空值 |
-* **其他所有使用者**：如果使用者不屬於任何列出的群組，就會收到存取遭拒的錯誤訊息，因為他們未獲授與 Data Catalog 精細讀取者或 BigQuery 經過遮蓋的讀取者角色。如要查詢 `Accounts` 資料表，他們必須只指定有權存取的 `SELECT * EXCEPT
+* **所有其他使用者**：如果使用者不屬於任何列出的群組，就會收到存取遭拒的錯誤訊息，因為他們未獲授與 Data Catalog 精細讀取者或 BigQuery 經過遮蓋的讀取者角色。如要查詢 `Accounts` 資料表，他們必須只指定有權存取的 `SELECT * EXCEPT
   (restricted_columns) FROM Accounts` 資料欄，才能排除受保護或遮蓋的資料欄。
 
 ## 費用注意事項
 
-資料遮蓋可能會間接影響處理的位元組數，進而影響查詢費用。如果使用者查詢的資料欄已透過「Nullify」或「Default Masking Value」規則遮蓋，系統就不會掃描該資料欄，因此處理的位元組數會較少。
+資料遮蓋可能會間接影響處理的位元組數，進而影響查詢費用。如果使用者查詢的資料欄已透過 Nullify 或 Default Masking Value 規則遮蓋，系統就不會掃描該資料欄，因此處理的位元組數會較少。
 
 ## 規定與限制
 
@@ -332,20 +337,20 @@ BigQuery 支援資料欄層級的[資料遮蓋](https://docs.cloud.google.com/bi
 
 * 使用以特定 BigQuery 版本建立的預留項目時，可能無法使用這項功能。如要進一步瞭解各版本啟用的功能，請參閱「[BigQuery 版本簡介](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)」。
 * 每個政策標記最多可建立九項資料政策。其中一項政策會保留給[資料欄層級存取控管設定](https://docs.cloud.google.com/bigquery/docs/column-level-security?hl=zh-tw#set_up_column-level_access_control)。
-* 資料政策、相關聯的政策標記，以及使用這些政策標記的任何常式，都必須位於同一個專案中。
+* 資料政策、相關聯的政策標記，以及使用這些標記的任何常式，都必須位於同一個專案中。
 
 ### 政策標記
 
 * 含有政策標記分類的專案必須屬於某個機構。
-* 從根節點到最低層級的子標記，政策標記階層最多只能有五個層級，如下方螢幕截圖所示：
+* 從根節點到最低層級的子標記，政策標記階層最多只能有五層，如下列螢幕截圖所示：
 
 ### 設定存取控管機制
 
-如果分類的政策標記至少有一個與資料政策相關聯，系統就會自動強制執行[存取控管](https://docs.cloud.google.com/bigquery/docs/column-level-security?hl=zh-tw#enforce_access_control)。如要關閉存取控管功能，請先刪除與分類相關的所有資料政策。
+分類架構的政策標記至少與一項資料政策建立關聯後，系統就會自動強制執行[存取控管](https://docs.cloud.google.com/bigquery/docs/column-level-security?hl=zh-tw#enforce_access_control)。如要關閉存取控管功能，請先刪除與分類相關的所有資料政策。
 
 ### 具體化檢視表和重複記錄遮蓋查詢
 
-如果您有現有的具體化檢視區塊，對相關聯的基礎資料表重複執行記錄遮蓋查詢會失敗。如要解決這個問題，請刪除具體化檢視區塊。如果基於其他原因需要 materialized view，您可以在其他資料集中建立。
+如果已有具體化檢視區塊，對相關聯的基礎資料表重複執行記錄遮蓋查詢會失敗。如要解決這個問題，請刪除具體化檢視區塊。如果基於其他原因需要 materialized view，您可以在其他資料集中建立。
 
 ### 查詢分區資料表中的遮蓋資料欄
 
@@ -361,14 +366,14 @@ BigQuery 支援資料欄層級的[資料遮蓋](https://docs.cloud.google.com/bi
 
 * 自訂資料遮蓋功能支援所有 [BigQuery 資料類型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw)，但 `STRUCT` 除外，因為資料遮蓋功能只能套用至 `STRUCT` 資料類型的葉節點欄位。
 * 刪除自訂遮蓋常式不會刪除使用該常式的所有資料政策。不過，使用已刪除遮蓋處理常式的資料政策會留下空白的遮蓋規則。如果其他資料政策具有相同標記，且使用者具備「遮蓋讀取者」角色，就能查看遮蓋資料。其他人會看到訊息
-  `Permission denied.` 系統可能會在七天後，透過自動程序清除空白遮蓋規則的懸空參照。
+  `Permission denied.` 系統會在七天後，透過自動程序清除空白遮蓋規則的懸空參照。
 * 每個政策標記只能有一個自訂遮蓋處理常式。
 
 ## 與其他 BigQuery 功能的相容性
 
 ### BigQuery API
 
-與 [`tabledata.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list?hl=zh-tw) 方法不相容。如要呼叫 `tabledata.list`，您必須擁有這個方法傳回的所有資料欄的完整存取權。「Data Catalog 精細讀取者」角色可授予適當的存取權。
+與 [`tabledata.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list?hl=zh-tw) 方法不相容。如要呼叫 `tabledata.list`，您必須擁有這個方法傳回的所有資料欄的完整存取權。「Data Catalog 精細讀取者」角色會授予適當的存取權。
 
 ### BigLake 資料表
 
@@ -388,7 +393,7 @@ BigQuery 支援資料欄層級的[資料遮蓋](https://docs.cloud.google.com/bi
 
 ### 定序
 
-部分相容。您可以對彙整的資料欄套用 DDM，但系統會在彙整前套用遮蓋功能。這個作業順序可能會導致非預期的結果，因為排序規則可能無法如預期影響遮蓋值 (例如，遮蓋後可能無法進行不區分大小寫的相符項目比對)。您可以採取變通做法，例如使用自訂遮蓋常式，在套用遮蓋函式前先將資料正規化。
+部分相容。您可以對彙整的資料欄套用 DDM，但系統會在彙整前套用遮蓋功能。這個作業順序可能會導致非預期結果，因為排序規則可能無法如預期影響遮蓋值 (例如，遮蓋後可能無法進行不區分大小寫的比對)。您可以採取變通做法，例如使用自訂遮蓋常式，在套用遮蓋函式前先將資料正規化。
 
 ### 複製工作
 
@@ -400,7 +405,7 @@ BigQuery 支援資料欄層級的[資料遮蓋](https://docs.cloud.google.com/bi
 
 ### 資料列層級安全性
 
-僅適用於具有非子查詢資料列存取政策的查詢。資料遮蓋功能會套用在資料列層級安全防護之上，舉例來說，如果 `location = "US"` 套用資料列存取權政策，且 `location` 遭到遮蓋，使用者就能看到 `location = "US"` 的資料列，但結果中的位置欄位會遭到遮蓋。
+僅適用於具有非子查詢資料列存取政策的查詢。資料遮蓋功能會套用在資料列層級安全防護之上，舉例來說，如果 `location = "US"` 套用了資料列存取政策，且 `location` 已遮蓋，使用者就能看到 `location = "US"` 的資料列，但結果中的位置欄位會遭到遮蓋。
 
 如果查詢涉及子查詢資料列存取政策，則必須具備資料列存取政策所參照資料欄的「精細讀取者」存取權。
 
@@ -408,13 +413,13 @@ BigQuery 支援資料欄層級的[資料遮蓋](https://docs.cloud.google.com/bi
 
 部分相容。您可以對套用資料遮蓋的已建立索引或未建立索引資料欄，呼叫 [`SEARCH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions?hl=zh-tw) 函式。
 
-對套用資料遮蓋的資料欄呼叫 `SEARCH` 函式時，請務必使用與存取層級相容的搜尋條件。舉例來說，如果您擁有「已遮蓋的讀取者」存取權，並使用「雜湊 (SHA-256)」資料遮蓋規則，您會在 `SEARCH` 子句中使用雜湊值，類似於下列範例：
+對套用資料遮蓋的資料欄呼叫 `SEARCH` 函式時，必須使用與存取層級相容的搜尋條件。舉例來說，如果您擁有「已遮蓋的讀取者」存取權，並使用「雜湊 (SHA-256)」資料遮蓋規則，您會在 `SEARCH` 子句中使用雜湊值，類似於下列範例：
 
 ```
 SELECT * FROM myDataset.Customers WHERE SEARCH(Email, "sg172y34shw94fujaweu");
 ```
 
-如果您擁有精細的讀取權限，則會在 `SEARCH` 子句中使用實際的資料欄值，類似於下列範例：
+如果您擁有精細讀取權限，則會在 `SEARCH` 子句中使用實際的資料欄值，類似於下列範例：
 
 ```
 SELECT * FROM myDataset.Customers WHERE SEARCH(Email, "jane.doe@example.com");
@@ -426,11 +431,11 @@ SELECT * FROM myDataset.Customers WHERE SEARCH(Email, "jane.doe@example.com");
 
 ### 快照
 
-不相容。如要建立資料表快照，您必須擁有來源資料表所有資料欄的完整存取權。「Data Catalog 精細讀取者」角色會授予適當的存取權。
+不相容。如要建立資料表快照，您必須擁有來源資料表所有資料欄的完整存取權。「Data Catalog 精細讀取者」角色可授予適當的存取權。
 
 ### 重新命名資料表
 
-相容。資料遮蓋不會影響資料表重新命名。
+相容。資料遮蓋功能不會影響資料表重新命名。
 
 ### 時間回溯
 
@@ -460,11 +465,11 @@ SELECT * FROM myDataset.Customers WHERE SEARCH(Email, "jane.doe@example.com");
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-05 (世界標準時間)。
+上次更新時間：2026-07-16 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-05 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-16 (世界標準時間)。"],[],[]]

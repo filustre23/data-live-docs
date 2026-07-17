@@ -193,37 +193,6 @@ public class LoadLocalFile {
 }
 ```
 
-### Node.js
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-// Imports the Google Cloud client library
-const {BigQuery} = require('@google-cloud/bigquery');
-const bigquery = new BigQuery();
-
-async function loadLocalFile() {
-  // Imports a local file into a table.
-
-  /**
-   * TODO(developer): Uncomment the following lines before running the sample.
-   */
-  // const filename = '/path/to/file.csv';
-  // const datasetId = 'my_dataset';
-  // const tableId = 'my_table';
-
-  // Load data from a local file into the table
-  const [job] = await bigquery
-    .dataset(datasetId)
-    .table(tableId)
-    .load(filename);
-
-  console.log(`Job ${job.id} completed.`);
-}
-```
-
 ### PHP
 
 在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 PHP 設定說明操作。詳情請參閱 [BigQuery PHP API 參考說明文件](https://docs.cloud.google.com/php/docs/reference/cloud-bigquery/latest/BigQueryClient?hl=zh-tw)。
@@ -271,40 +240,6 @@ function import_from_local_csv(
         print('Data imported successfully' . PHP_EOL);
     }
 }
-```
-
-### Python
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-from google.cloud import bigquery
-
-# Construct a BigQuery client object.
-client = bigquery.Client()
-
-# TODO(developer): Set table_id to the ID of the table to create.
-# table_id = "your-project.your_dataset.your_table_name"
-
-job_config = bigquery.LoadJobConfig(
-    source_format=bigquery.SourceFormat.CSV,
-    skip_leading_rows=1,
-    autodetect=True,
-)
-
-with open(file_path, "rb") as source_file:
-    job = client.load_table_from_file(source_file, table_id, job_config=job_config)
-
-job.result()  # Waits for the job to complete.
-
-table = client.get_table(table_id)  # Make an API request.
-print(
-    "Loaded {} rows and {} columns to {}".format(
-        table.num_rows, len(table.schema), table_id
-    )
-)
 ```
 
 ### Ruby

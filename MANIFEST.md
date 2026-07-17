@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-07-17T01:01+00:00_
+_Generated 2026-07-17T07:58+00:00_
 
-**9 sources, 5429 topics total**
+**9 sources, 5506 topics total**
 
 ## airflow
 
@@ -1742,7 +1742,7 @@ _1719 topics_
 
 Upstream: <https://cloud.google.com/bigquery/docs/>
 
-_1506 topics_
+_1516 topics_
 
 - `bigquery/access-control`
 - `bigquery/access-control-basic-roles`
@@ -2515,6 +2515,24 @@ _1506 topics_
 - `bigquery/reference/bigquerydatapolicy/rest/v2beta1/projects.locations.dataPolicies/setIamPolicy`
 - `bigquery/reference/bigquerydatapolicy/rest/v2beta1/projects.locations.dataPolicies/testIamPermissions`
 - `bigquery/reference/bq-cli-reference`
+- `bigquery/reference/data-transfer/partner/rest/v1/Code`
+- `bigquery/reference/data-transfer/partner/rest/v1/EmailPreferences`
+- `bigquery/reference/data-transfer/partner/rest/v1/IsDataTransferServiceEnabledResponse`
+- `bigquery/reference/data-transfer/partner/rest/v1/ListDataSourcesResponse`
+- `bigquery/reference/data-transfer/partner/rest/v1/ListTransferConfigsResponse`
+- `bigquery/reference/data-transfer/partner/rest/v1/StartManualTransferRunsResponse`
+- `bigquery/reference/data-transfer/partner/rest/v1/TimeRange`
+- `bigquery/reference/data-transfer/partner/rest/v1/projects.dataSources/list`
+- `bigquery/reference/data-transfer/partner/rest/v1/projects.locations.dataSources/get`
+- `bigquery/reference/data-transfer/partner/rest/v1/projects.locations.transferConfigs.runs/startBigQueryJobs`
+- `bigquery/reference/data-transfer/partner/rest/v1/projects.locations.transferConfigs/delete`
+- `bigquery/reference/data-transfer/partner/rest/v1/projects.locations.transferConfigs/scheduleRuns`
+- `bigquery/reference/data-transfer/partner/rest/v1/projects.locations.transferConfigs/startManualRuns`
+- `bigquery/reference/data-transfer/partner/rest/v1/projects.locations/get`
+- `bigquery/reference/data-transfer/partner/rest/v1/projects.transferConfigs.runs/list`
+- `bigquery/reference/data-transfer/partner/rest/v1/projects.transferConfigs/list`
+- `bigquery/reference/data-transfer/partner/rest/v1/projects.transferConfigs/startManualRuns`
+- `bigquery/reference/data-transfer/partner/rest/v1/projects/isEnabled`
 - `bigquery/reference/datatransfer/libraries`
 - `bigquery/reference/datatransfer/rest`
 - `bigquery/reference/datatransfer/rest/v1/CheckValidCredsResponse`
@@ -2970,12 +2988,7 @@ _1506 topics_
 - `bigquery/samples/bigquery-create-table-snapshot`
 - `bigquery/samples/bigquery-create-view`
 - `bigquery/samples/bigquery-dataframes-clustering-model`
-- `bigquery/samples/bigquery-dataframes-load-data-from-bigquery`
 - `bigquery/samples/bigquery-dataframes-load-data-from-bigquery-job`
-- `bigquery/samples/bigquery-dataframes-load-data-from-csv`
-- `bigquery/samples/bigquery-dataframes-pandas-methods`
-- `bigquery/samples/bigquery-dataframes-regression-model`
-- `bigquery/samples/bigquery-dataframes-remote-function`
 - `bigquery/samples/bigquery-dataset-exists`
 - `bigquery/samples/bigquery-ddl-create-view`
 - `bigquery/samples/bigquery-delete-dataset`
@@ -3002,7 +3015,6 @@ _1506 topics_
 - `bigquery/samples/bigquery-insert-geography-wkt`
 - `bigquery/samples/bigquery-insert-geojson`
 - `bigquery/samples/bigquery-inserting-data-types`
-- `bigquery/samples/bigquery-jupyter-magic-gender-by-year`
 - `bigquery/samples/bigquery-label-dataset`
 - `bigquery/samples/bigquery-label-table`
 - `bigquery/samples/bigquery-list-datasets`
@@ -3015,7 +3027,6 @@ _1506 topics_
 - `bigquery/samples/bigquery-list-tables`
 - `bigquery/samples/bigquery-load-from-file`
 - `bigquery/samples/bigquery-load-table-clustered`
-- `bigquery/samples/bigquery-load-table-dataframe`
 - `bigquery/samples/bigquery-load-table-gcs-avro`
 - `bigquery/samples/bigquery-load-table-gcs-avro-truncate`
 - `bigquery/samples/bigquery-load-table-gcs-csv`
@@ -3034,10 +3045,6 @@ _1506 topics_
 - `bigquery/samples/bigquery-migration-pandas-gbq-query-legacy`
 - `bigquery/samples/bigquery-nested-repeated-schema`
 - `bigquery/samples/bigquery-pandas-gbq-read-gbq-legacy`
-- `bigquery/samples/bigquery-pandas-gbq-read-gbq-simple`
-- `bigquery/samples/bigquery-pandas-gbq-to-gbq-simple`
-- `bigquery/samples/bigquery-pandas-public-data`
-- `bigquery/samples/bigquery-pandas-public-data-sandbox`
 - `bigquery/samples/bigquery-query`
 - `bigquery/samples/bigquery-query-batch`
 - `bigquery/samples/bigquery-query-clustered-table`
@@ -3053,7 +3060,6 @@ _1506 topics_
 - `bigquery/samples/bigquery-query-legacy`
 - `bigquery/samples/bigquery-query-legacy-large-results`
 - `bigquery/samples/bigquery-query-materialized-view`
-- `bigquery/samples/bigquery-query-natality-tutorial`
 - `bigquery/samples/bigquery-query-no-cache`
 - `bigquery/samples/bigquery-query-pagination`
 - `bigquery/samples/bigquery-query-params-arrays`
@@ -3064,6 +3070,7 @@ _1506 topics_
 - `bigquery/samples/bigquery-query-params-structs`
 - `bigquery/samples/bigquery-query-params-timestamps`
 - `bigquery/samples/bigquery-query-partitioned-table`
+- `bigquery/samples/bigquery-query-results-dataframe`
 - `bigquery/samples/bigquery-query-results-geodataframe`
 - `bigquery/samples/bigquery-query-script`
 - `bigquery/samples/bigquery-query-total-rows`
@@ -3097,6 +3104,8 @@ _1506 topics_
 - `bigquery/samples/bigqueryconnection-create-connection`
 - `bigquery/samples/bigqueryconnection-delete-connection`
 - `bigquery/samples/bigqueryconnection-get-connection`
+- `bigquery/samples/bigqueryconnection-list-connections`
+- `bigquery/samples/bigqueryconnection-quickstart`
 - `bigquery/samples/bigqueryconnection-share-connection`
 - `bigquery/samples/bigqueryconnection-update-connection`
 - `bigquery/samples/bigquerydatatransfer-copy-dataset`
@@ -3194,6 +3203,7 @@ _1506 topics_
 - `bigquery/time-travel`
 - `bigquery/timesfm-model`
 - `bigquery/timesfm-time-series-forecasting-tutorial`
+- `bigquery/tpc-differences`
 - `bigquery/transactions`
 - `bigquery/transcribe`
 - `bigquery/transfer-changes`
@@ -3255,7 +3265,7 @@ _1506 topics_
 
 Upstream: <https://code.claude.com/docs/en/>
 
-_101 topics_
+_168 topics_
 
 - `claude-code/accessibility`
 - `claude-code/admin-setup`
@@ -3358,6 +3368,73 @@ _101 topics_
 - `claude-code/llm-gateway-connect`
 - `claude-code/llm-gateway-protocol`
 - `claude-code/llm-gateway-rollout`
+- `claude-code/managed-mcp`
+- `claude-code/mcp`
+- `claude-code/mcp-quickstart`
+- `claude-code/memory`
+- `claude-code/microsoft-foundry`
+- `claude-code/model-config`
+- `claude-code/monitoring-usage`
+- `claude-code/network-config`
+- `claude-code/output-styles`
+- `claude-code/overview`
+- `claude-code/permission-modes`
+- `claude-code/permissions`
+- `claude-code/platforms`
+- `claude-code/plugin-dependencies`
+- `claude-code/plugin-hints`
+- `claude-code/plugin-marketplaces`
+- `claude-code/plugin-relevance`
+- `claude-code/plugins`
+- `claude-code/plugins-reference`
+- `claude-code/prompt-caching`
+- `claude-code/prompt-library`
+- `claude-code/quickstart`
+- `claude-code/remote-control`
+- `claude-code/routines`
+- `claude-code/sandbox-environments`
+- `claude-code/sandboxing`
+- `claude-code/scheduled-tasks`
+- `claude-code/security`
+- `claude-code/security-guidance`
+- `claude-code/server-managed-settings`
+- `claude-code/sessions`
+- `claude-code/settings`
+- `claude-code/setup`
+- `claude-code/skills`
+- `claude-code/slack`
+- `claude-code/statusline`
+- `claude-code/sub-agents`
+- `claude-code/terminal-config`
+- `claude-code/third-party-integrations`
+- `claude-code/tools-reference`
+- `claude-code/troubleshoot-install`
+- `claude-code/troubleshooting`
+- `claude-code/ultraplan`
+- `claude-code/ultrareview`
+- `claude-code/voice-dictation`
+- `claude-code/vs-code`
+- `claude-code/web-quickstart`
+- `claude-code/whats-new`
+- `claude-code/whats-new/2026-w13`
+- `claude-code/whats-new/2026-w14`
+- `claude-code/whats-new/2026-w15`
+- `claude-code/whats-new/2026-w16`
+- `claude-code/whats-new/2026-w17`
+- `claude-code/whats-new/2026-w18`
+- `claude-code/whats-new/2026-w19`
+- `claude-code/whats-new/2026-w20`
+- `claude-code/whats-new/2026-w21`
+- `claude-code/whats-new/2026-w22`
+- `claude-code/whats-new/2026-w23`
+- `claude-code/whats-new/2026-w24`
+- `claude-code/whats-new/2026-w25`
+- `claude-code/whats-new/2026-w26`
+- `claude-code/whats-new/2026-w27`
+- `claude-code/whats-new/2026-w28`
+- `claude-code/workflows`
+- `claude-code/worktrees`
+- `claude-code/zero-data-retention`
 
 ## dbt-core
 

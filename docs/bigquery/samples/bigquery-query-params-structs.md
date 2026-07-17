@@ -131,68 +131,6 @@ public class QueryWithStructsParameters {
 }
 ```
 
-### Node.js
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-// Run a query using struct query parameters
-
-// Import the Google Cloud client library
-const {BigQuery} = require('@google-cloud/bigquery');
-const bigquery = new BigQuery();
-
-async function queryParamsStructs() {
-  // The SQL query to run
-  const sqlQuery = 'SELECT @struct_value AS struct_obj;';
-
-  const options = {
-    query: sqlQuery,
-    // Location must match that of the dataset(s) referenced in the query.
-    location: 'US',
-    params: {struct_value: {x: 1, y: 'foo'}},
-  };
-
-  // Run the query
-  const [rows] = await bigquery.query(options);
-
-  console.log('Rows:');
-  rows.forEach(row => console.log(row.struct_obj.y));
-}
-```
-
-### Python
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-from google.cloud import bigquery
-
-# Construct a BigQuery client object.
-client = bigquery.Client()
-
-query = "SELECT @struct_value AS s;"
-job_config = bigquery.QueryJobConfig(
-    query_parameters=[
-        bigquery.StructQueryParameter(
-            "struct_value",
-            bigquery.ScalarQueryParameter("x", "INT64", 1),
-            bigquery.ScalarQueryParameter("y", "STRING", "foo"),
-        )
-    ]
-)
-results = client.query_and_wait(
-    query, job_config=job_config
-)  # Make an API request and waits for results.
-
-for row in results:
-    print(row.s)
-```
-
 ## 後續步驟
 
 如要搜尋及篩選其他 Google Cloud 產品的程式碼範例，請參閱[Google Cloud 範例瀏覽工具](https://docs.cloud.google.com/docs/samples?product=bigquery&hl=zh-tw)。

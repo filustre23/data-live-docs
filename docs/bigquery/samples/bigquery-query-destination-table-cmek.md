@@ -128,45 +128,6 @@ public class QueryDestinationTableCmek {
 }
 ```
 
-### Python
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-from google.cloud import bigquery
-
-# Construct a BigQuery client object.
-client = bigquery.Client()
-
-# TODO(developer): Set table_id to the ID of the destination table.
-# table_id = "your-project.your_dataset.your_table_name"
-
-# Set the encryption key to use for the destination.
-# TODO(developer): Replace this key with a key you have created in KMS.
-# kms_key_name = "projects/{}/locations/{}/keyRings/{}/cryptoKeys/{}".format(
-#     your-project, location, your-ring, your-key
-# )
-
-job_config = bigquery.QueryJobConfig(
-    destination=table_id,
-    destination_encryption_configuration=bigquery.EncryptionConfiguration(
-        kms_key_name=kms_key_name
-    ),
-)
-
-# Start the query, passing in the extra configuration.
-query_job = client.query(
-    "SELECT 17 AS my_col;", job_config=job_config
-)  # Make an API request.
-query_job.result()  # Wait for the job to complete.
-
-table = client.get_table(table_id)  # Make an API request.
-if table.encryption_configuration.kms_key_name == kms_key_name:
-    print("The destination table is written using the encryption configuration")
-```
-
 ## 後續步驟
 
 如要搜尋及篩選其他 Google Cloud 產品的程式碼範例，請參閱[Google Cloud 範例瀏覽工具](https://docs.cloud.google.com/docs/samples?product=bigquery&hl=zh-tw)。

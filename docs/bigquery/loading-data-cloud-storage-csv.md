@@ -845,5 +845,5 @@ public class LoadPartitionedTable {
 
       // Check for errors
       if (completedJob == null) {
-        throw
+        throw new Exception("Job not executed since it no longer exists.");
 ```

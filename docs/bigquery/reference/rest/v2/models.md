@@ -232,5 +232,4 @@ Options used in model training.
 | --- | --- |
 | `maxIterations` | `string (int64 format)`  The maximum number of iterations in training. Used only for iterative training algorithms. |
 | `lossType` | `enum (LossType)`  Type of loss function used during training run. |
-| `learnRate` | `number`  Learning rate in training. Used only for iterative training algorithms. |
-| `l1Regularization` | `number`  L1 regularization coefficient. |
+| `learnRate` | `number`  Learning rate in training. Used only for iterative traini |

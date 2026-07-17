@@ -84,7 +84,9 @@ a key. The `AGG` function invokes the calculation exactly once per key
 with the guarantee of avoiding overcounting. Measures are useful for defining
 business metrics. You can perform aggregation using the `AGG`
 function instead of complex aggregation queries.
-
+For more information about
+overcounting with aggregations, see
+[multi-level aggregation](/bigquery/docs/reference/standard-sql/aggregate-function-calls#multi_level_aggregation_overcounting).
 For more information and examples of using the `AGG` function
 with measures, see [work with measures](/bigquery/docs/graph-measures).
 
@@ -357,7 +359,5 @@ If there are zero input rows, this function returns `NULL`.
 **Examples**
 
 ```
-SELECT ARRAY_AGG(x) AS array_agg FROM UNNEST([2, 1,-2, 3, -2, 1, 2]) AS x;
-
-/*-------------------------+
+SELECT ARRAY_AGG(x) AS array_agg FROM UNNEST([2, 1,-2, 3, -2,<
 ```

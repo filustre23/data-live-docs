@@ -50,10 +50,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
   **Roles required to enable APIs**
 
-  To enable APIs, you need the Service Usage Admin IAM
-  role (`roles/serviceusage.serviceUsageAdmin`), which
-  contains the `serviceusage.services.enable` permission. [Learn how to grant
-  roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw).
+  To enable APIs, you need the `serviceusage.services.enable` permission. If you
+  created the project, then you likely already have this permission through the
+  Owner role (`roles/owner`). Otherwise, you can get this permission through the
+  Service Usage Admin role (`roles/serviceusage.serviceUsageAdmin`).
+  [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw).
 
   [Enable the APIs](https://console.cloud.google.com/apis/enableflow?apiid=bigquery.googleapis.com%2Cbigquerydatatransfer.googleapis.com&hl=zh-tw)
 
@@ -80,10 +81,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
   **Roles required to enable APIs**
 
-  To enable APIs, you need the Service Usage Admin IAM
-  role (`roles/serviceusage.serviceUsageAdmin`), which
-  contains the `serviceusage.services.enable` permission. [Learn how to grant
-  roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw).
+  To enable APIs, you need the `serviceusage.services.enable` permission. If you
+  created the project, then you likely already have this permission through the
+  Owner role (`roles/owner`). Otherwise, you can get this permission through the
+  Service Usage Admin role (`roles/serviceusage.serviceUsageAdmin`).
+  [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw).
 
   [Enable the APIs](https://console.cloud.google.com/apis/enableflow?apiid=bigquery.googleapis.com%2Cbigquerydatatransfer.googleapis.com&hl=zh-tw)
 
@@ -332,7 +334,5 @@ public class CreateRedshiftTransfer {
     String secretAccessId = "MY_AWS_SECRET_ACCESS_ID";
     String s3Bucket = "MY_S3_BUCKET_URI";
     String redShiftSchema = "MY_REDSHIFT_SCHEMA";
-    String tableNamePatterns = "*";
-    String vpcAndReserveIpRange = "MY_VPC_AND_IP_RANGE";
-    Map<String, Value>
+    String tableNamePatterns = "*"
 ```

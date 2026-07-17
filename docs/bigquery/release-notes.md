@@ -27,6 +27,139 @@ To get the latest product updates delivered to you, add the URL of this page to 
 reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators), or add the
 [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## July 15, 2026
+
+Feature
+
+BigQuery supports [data governance tags](/bigquery/docs/tags#data-governance-tags),
+which let you enforce column-level security and data masking. Data governance
+tags are a type of Resource Manager tag that you can attach to sensitive columns
+and use in BigQuery data policies to grant conditional access to your users.
+This feature is in [Preview](https://cloud.google.com/products#product-launch-stages).
+
+## July 14, 2026
+
+Feature
+
+[Conversational analytics](/bigquery/docs/conversational-analytics#bigquery-ml-support)
+now supports the
+[`AI.AGG` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-agg).
+This function is in
+[Preview](https://cloud.google.com/products#product-launch-stages).
+
+Announcement
+
+As part of
+[Gemini in BigQuery](/bigquery/docs/gemini-security-privacy-compliance),
+[conversational analytics](/bigquery/docs/conversational-analytics)
+now supports [HIPAA](https://cloud.google.com/security/compliance/hipaa)
+compliance.
+
+## July 13, 2026
+
+Feature
+
+Table partitioning, multi-statement transactions, and advanced runtime are now
+[generally available](https://cloud.google.com/products#product-launch-stages)
+(GA) for
+[Apache Iceberg managed tables](/bigquery/docs/biglake-iceberg-tables-in-bigquery).
+
+Security
+
+A Missing Authorization vulnerability was discovered in repositories in
+BigQuery, Dataform, and Colab Enterprise. An authenticated attacker could
+potentially escalate permissions and perform cross-tenant repository takeover.
+For more information, see the
+[GCP-2026-047](/support/bulletins#gcp-2026-047) security bulletin.
+
+Feature
+
+[Project caps (also known as scheduling policies)](/bigquery/docs/reservations-workload-management#scheduling-policies)
+let you limit maximum slots and concurrency per project within a BigQuery
+reservation. This feature is in
+[Preview](https://cloud.google.com/products#product-launch-stages).
+
+Feature
+
+The BigQuery [**Overview** page](/bigquery/docs/bigquery-web-ui#open-overview)
+is a hub for discovering tutorials, features, and resources to help you get the
+most out of BigQuery. It provides guided paths for users of all skill levels.
+This feature is now
+[generally available](https://cloud.google.com/products#product-launch-stages)
+(GA).
+
+Feature
+
+You can use the [BigQuery Migration Service MCP server](/bigquery/docs/use-bigquery-migration-mcp)
+to perform SQL translation tasks, including translating SQL queries into
+GoogleSQL syntax, generating DDL statements from SQL input queries, and getting
+explanations of SQL translations.
+
+This feature is
+[Generally Available](https://cloud.google.com/products/#product-launch-stages).
+
+Feature
+
+Incremental data transfers for the
+[BigQuery Data Transfer Service for Salesforce](/bigquery/docs/salesforce-transfer)
+are now
+[generally available](https://cloud.google.com/products#product-launch-stages)
+(GA).
+
+Feature
+
+You can now use the
+[`ALTER SEARCH INDEX` DDL statement](/bigquery/docs/reference/standard-sql/data-definition-language#alter_search_index_statement)
+to
+[update the configuration](/bigquery/docs/search-index#update_a_search_index)
+of a search index. This feature is in
+[Preview](https://cloud.google.com/products#product-launch-stages).
+
+## July 09, 2026
+
+Feature
+
+You can use the BigQuery Data Transfer Service to transfer metadata from the
+following data sources into Knowledge Catalog:
+
+* [PostgreSQL](/bigquery/docs/postgresql-transfer#transfer_metadata)
+* [Microsoft SQL Server](/bigquery/docs/sqlserver-transfer#transfer_metadata)
+
+This feature is in
+[Preview](https://cloud.google.com/products#product-launch-stages).
+
+Feature
+
+[The Data Agent Kit extension](/data-cloud-extension) is an extension for agent
+coding tools, such as VS Code, Antigravity, and Cursor, that lets
+you interact with BigQuery resources directly in your agent environment. You can
+use this extension to browse datasets, manage pipelines, run queries, and prompt
+your agent to perform other BigQuery tasks directly in your preferred IDE. This
+feature is in
+[Preview](https://cloud.google.com/products#product-launch-stages).
+
+Feature
+
+Support for hybrid search (using the `VECTOR_SEARCH` function to combine a
+semantic search with a lexical (keyword) search) has been temporarily disabled.
+We are working to restore this feature as soon as possible.
+
+## July 08, 2026
+
+Change
+
+An updated version of the
+[Simba ODBC driver for BigQuery](/bigquery/docs/reference/odbc-jdbc-drivers#current_odbc_driver)
+is now available.
+
+Feature
+
+You can now perform
+[multi-level aggregation](/bigquery/docs/reference/standard-sql/aggregate-function-calls#multi_level_aggregation)
+in GoogleSQL, which lets you use an aggregate function as an
+argument to another aggregate function. This feature is in
+[Preview](https://cloud.google.com/products#product-launch-stages).
+
 ## July 06, 2026
 
 Change
@@ -65,6 +198,10 @@ You can specify an optional `principal` property on
 [BigQuery reservation assignments](/bigquery/docs/reservations-assignments) to
 route queries to specific reservations based on the identity of the user,
 service account, or third-party identity executing the job.
+
+Change
+
+In the Google Cloud console, **Capacity management** has been renamed [**Workload management**](/bigquery/docs/reservations-intro).
 
 ## June 29, 2026
 
@@ -4309,79 +4446,3 @@ Feature
 You can now create an [external dataset](/bigquery/docs/spanner-external-datasets) in BigQuery that links to an existing database in [Spanner](/spanner/docs). This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
 
 ## March 13, 2025
-
-Feature
-
-[Dataform](/dataform/docs/cmek#org-policy) now supports the [CMEK organization policy](//kms/docs/cmek-org-policy).
-
-Feature
-
-You can now use Gemini Cloud Assist chat to generate [SQL queries](/bigquery/docs/write-sql-gemini#chat) and [Python code](/bigquery/docs/write-sql-gemini#chat-python). This feature is in [preview](https://cloud.google.com/products#product-launch-stages).
-
-## March 12, 2025
-
-Feature
-
-You can configure reusable, default Cloud resource connections in a project. [Default connections](/bigquery/docs/default-connections) are available in [Preview](https://cloud.google.com/products#product-launch-stages).
-
-Change
-
-An updated version of [ODBC driver for BigQuery](/bigquery/docs/reference/odbc-jdbc-drivers#odbc_release_3121004) is now available.
-
-## March 10, 2025
-
-Announcement
-
-Analytics Hub [egress controls](/bigquery/docs/analytics-hub-introduction#data_egress) and [data clean room](/bigquery/docs/data-clean-rooms#subscriber_workflows) subscriptions are now available in all BigQuery [editions](/bigquery/docs/editions-intro#analysis_features) and on-demand pricing.
-
-## March 06, 2025
-
-Feature
-
-BigQuery Data Transfer Service now supports [custom reports for Google Ads](/bigquery/docs/google-ads-transfer#custom_reports). You can use Google Ads Query Language (GAQL) queries in your transfer configuration to ingest custom Google Ads reports and fields beyond those available in the [standard reports and fields](/bigquery/docs/google-ads-transformation). This feature is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
-
-## March 04, 2025
-
-Change
-
-BigQuery is now available in the [Stockholm (europe-north2) region](/bigquery/docs/locations#regions).
-
-## March 03, 2025
-
-Libraries
-
-### Python
-
-#### [3.30.0](https://github.com/googleapis/python-bigquery/compare/v3.29.0...v3.30.0) (2025-02-26)
-
-##### Features
-
-* Add roundingmode enum, wiring, and tests ([#2121](https://github.com/googleapis/python-bigquery/issues/2121)) ([3a48948](https://github.com/googleapis/python-bigquery/commit/3a4894827f6e73a4a88cb22933c2004697dabcc7))
-* Adds foreign\_type\_info attribute to table class and adds unit tests. ([#2126](https://github.com/googleapis/python-bigquery/issues/2126)) ([2c19681](https://github.com/googleapis/python-bigquery/commit/2c1968115bef8e1dc84e0125615f551b9b011a4b))
-* Support resource\_tags for table ([#2093](https://github.com/googleapis/python-bigquery/issues/2093)) ([d4070ca](https://github.com/googleapis/python-bigquery/commit/d4070ca21b5797e900a9e87b966837ee1c278217))
-
-##### Bug Fixes
-
-* Avoid blocking in download thread when using BQ Storage API ([#2034](https://github.com/googleapis/python-bigquery/issues/2034)) ([54c8d07](https://github.com/googleapis/python-bigquery/commit/54c8d07f06a8ae460c9e0fb1614e1fbc21efb5df))
-* Retry 404 errors in `Client.query(...)` ([#2135](https://github.com/googleapis/python-bigquery/issues/2135)) ([c6d5f8a](https://github.com/googleapis/python-bigquery/commit/c6d5f8aaec21ab8f17436407aded4bc2316323fd))
-
-##### Dependencies
-
-* Updates required checks list in github ([#2136](https://github.com/googleapis/python-bigquery/issues/2136)) ([fea49ff](https://github.com/googleapis/python-bigquery/commit/fea49ffbf8aa1d53451864ceb7fd73189b6661cb))
-* Use pandas-gbq to determine schema in `load_table_from_dataframe` ([#2095](https://github.com/googleapis/python-bigquery/issues/2095)) ([7603bd7](https://github.com/googleapis/python-bigquery/commit/7603bd71d60592ef2a551d9eea09987b218edc73))
-
-##### Documentation
-
-* Update magics.rst ([#2125](https://github.com/googleapis/python-bigquery/issues/2125)) ([b5bcfb3](https://github.com/googleapis/python-bigquery/commit/b5bcfb303d27015b747a3b0747ecd7f7ed0ed557))
-
-Libraries
-
-### Java
-
-#### [2.48.1](https://github.com/googleapis/java-bigquery/compare/v2.48.0...v2.48.1) (2025-02-26)
-
-##### Dependencies
-
-* Update actions/upload-artifact action to v4.6.1 ([#3691](https://github.com/googleapis/java-bigquery/issues/3691)) ([9c0edea](https://github.com/googleapis/java-bigquery/commit/9c0edea7c00b3ffbe6b6a404e4161f768acb34f2))
-* Update dependency com.google.api.grpc:proto-google-cloud-bigqueryconnection-v1 to v2.60.0 ([#3680](https://github.com/googleapis/java-bigquery/issues/3680)) ([6d9a40d](https://github.com/googleapis/java-bigquery/commit/6d9a40d55a6bbcbff7df39723d33f0af2b24f66e))
-* Update dependency com.google.apis:google-api-services-bigquery to v2-rev20250216-2.0.0 ([#3688](https://github.com/googleapis/java-bigquery/issues/3688)) (

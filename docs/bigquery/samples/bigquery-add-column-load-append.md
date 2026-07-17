@@ -178,64 +178,6 @@ public class AddColumnLoadAppend {
 }
 ```
 
-### Node.js
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-// Import the Google Cloud client libraries
-const {BigQuery} = require('@google-cloud/bigquery');
-
-// Instantiate client
-const bigquery = new BigQuery();
-
-async function addColumnLoadAppend() {
-  // Adds a new column to a BigQuery table while appending rows via a load job.
-
-  /**
-   * TODO(developer): Uncomment the following lines before running the sample.
-   */
-  // const fileName = '/path/to/file.csv';
-  // const datasetId = 'my_dataset';
-  // const tableId = 'my_table';
-
-  // In this example, the existing table contains only the 'Name', 'Age',
-  // & 'Weight' columns. 'REQUIRED' fields cannot  be added to an existing
-  // schema, so the additional column must be 'NULLABLE'.
-  const schema = 'Name:STRING, Age:INTEGER, Weight:FLOAT, IsMagic:BOOLEAN';
-
-  // Retrieve destination table reference
-  const [table] = await bigquery.dataset(datasetId).table(tableId).get();
-  const destinationTableRef = table.metadata.tableReference;
-
-  // Set load job options
-  const options = {
-    schema: schema,
-    schemaUpdateOptions: ['ALLOW_FIELD_ADDITION'],
-    writeDisposition: 'WRITE_APPEND',
-    destinationTable: destinationTableRef,
-  };
-
-  // Load data from a local file into the table
-  const [job] = await bigquery
-    .dataset(datasetId)
-    .table(tableId)
-    .load(fileName, options);
-
-  console.log(`Job ${job.id} completed.`);
-  console.log('New Schema:');
-  console.log(job.configuration.load.schema.fields);
-
-  // Check the job's status for errors
-  const errors = job.status.errors;
-  if (errors && errors.length > 0) {
-    throw errors;
-  }
-}
-```
-
 ### PHP
 
 在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 PHP 設定說明操作。詳情請參閱 [BigQuery PHP API 參考說明文件](https://docs.cloud.google.com/php/docs/reference/cloud-bigquery/latest/BigQueryClient?hl=zh-tw)。

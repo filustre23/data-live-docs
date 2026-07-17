@@ -124,33 +124,6 @@ public class UpdateMaterializedView {
 }
 ```
 
-### Python
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-import datetime
-
-from google.cloud import bigquery
-
-bigquery_client = bigquery.Client()
-
-view_id = "my-project.my_dataset.my_materialized_view"
-view = bigquery.Table(view_id)
-view.mview_enable_refresh = True
-view.mview_refresh_interval = datetime.timedelta(hours=1)
-
-# Make an API request to update the materialized view.
-view = bigquery_client.update_table(
-    view,
-    # Pass in a list of any fields you need to modify.
-    ["mview_enable_refresh", "mview_refresh_interval"],
-)
-print(f"Updated {view.table_type}: {str(view.reference)}")
-```
-
 ## 後續步驟
 
 如要搜尋及篩選其他 Google Cloud 產品的程式碼範例，請參閱[Google Cloud 範例瀏覽工具](https://docs.cloud.google.com/docs/samples?product=bigquery&hl=zh-tw)。

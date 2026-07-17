@@ -32,11 +32,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 * 建立、委派及使用 BigQuery 連線：
   專案的 BigQuery 連線管理員 (`roles/bigquery.connectionsAdmin`)。
 
-  如果沒有設定[預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw)，您可以在執行 `CREATE MODEL` 陳述式時建立並設定連線。如要這麼做，您必須擁有專案的 BigQuery 管理員 (`roles/bigquery.admin`) 權限。詳情請參閱「[設定預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw#configure_the_default_connection)」。
-* 授予連線服務帳戶權限：在包含 Gemini Enterprise Agent Platform 端點的專案中，授予專案 IAM 管理員 (`roles/resourcemanager.projectIamAdmin`) 權限。如果您將模型名稱指定為端點，這就是您建立遠端模型的專案。如果您將網址指定為端點，這就是您建立遠端模型的專案 (網址中會顯示專案 ID)。
+  如果沒有設定[預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw)，您可以在執行 `CREATE MODEL` 陳述式時建立並設定連線。如要執行這項操作，您必須具備專案的 BigQuery 管理員角色 (`roles/bigquery.admin`)。詳情請參閱「[設定預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw#configure_the_default_connection)」。
+* 將權限授予連線的服務帳戶：在含有 Gemini Enterprise Agent Platform 端點的專案中，授予專案 IAM 管理員 (`roles/resourcemanager.projectIamAdmin`) 權限。這是您透過將模型名稱指定為端點所建立遠端模型的目前專案。這是您透過指定網址做為端點所建立遠端模型網址中識別的專案。
 * 建立 BigQuery 工作：專案中的 BigQuery 工作使用者 (`roles/bigquery.jobUser`)。
 
-這些預先定義的角色具備執行本文所述工作所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
+這些預先定義的角色具備執行本文中工作所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
 #### 所需權限
 
@@ -63,7 +63,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    **選取或建立專案所需的角色**
 
    * **選取專案**：選取專案時，不需要具備特定 IAM 角色，只要您在專案中獲派角色，即可選取該專案。
-   * **建立專案**：如要建立專案，您需要「專案建立者」角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   * **建立專案**：如要建立專案，您需要專案建立者角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
    **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，而不要選取現有專案。完成這些步驟後，您就可以刪除專案，並移除與該專案相關聯的所有資源。
 
    [前往專案選取器](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
@@ -72,7 +72,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    **啟用 API 時所需的角色**
 
-   如要啟用 API，您需要具備服務使用情形管理員 IAM 角色 (`roles/serviceusage.serviceUsageAdmin`)，其中包含 `serviceusage.services.enable` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用情形管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
    [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery.googleapis.com%2Cbigqueryconnection.googleapis.com%2Caiplatform.googleapis.com&hl=zh-tw)
 
@@ -119,7 +119,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 建立連線
 
-為遠端模型建立[Cloud 資源連線](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection?hl=zh-tw)，並取得連線的服務帳戶。在與上一步建立的資料集相同的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)建立連線。
+建立供遠端模型使用的[Cloud 資源連線](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection?hl=zh-tw)，並取得連線的服務帳戶。在與上一步建立的資料集相同的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)中建立連線。
 
 如果已設定預設連線，或具備 BigQuery 管理員角色，可以略過這個步驟。
 
@@ -137,7 +137,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 4. 在「Connections」(連線) 頁面中，按一下「Create connection」(建立連線)。
 5. 在「連線類型」中，選擇「Vertex AI 遠端模型、遠端函式、BigLake 和 Spanner (Cloud 資源)」。
 6. 在「連線 ID」欄位中，輸入連線名稱。
-7. 針對「位置類型」，選取連線位置。連線應與其他資源 (例如資料集) 位於同一位置。
+7. 在「位置類型」中，選取連線位置。連線應與資料集等其他資源位於同一位置。
 8. 點選「建立連線」。
 9. 點選「前往連線」。
 10. 在「連線資訊」窗格中，複製服務帳戶 ID，以便在後續步驟中使用。
@@ -365,11 +365,11 @@ resource "google_bigquery_connection" "default" {
    ```
    mkdir DIRECTORY && cd DIRECTORY && touch main.tf
    ```
-2. 如果您正在學習教學課程，可以複製每個章節或步驟中的程式碼範例。
+2. 如果您正在學習教學課程，可以複製每個章節或步驟中的範例程式碼。
 
-   將程式碼範例複製到新建立的 `main.tf` 中。
+   將範例程式碼複製到新建立的 `main.tf` 中。
 
-   視需要從 GitHub 複製程式碼。如果 Terraform 代码片段是端對端解決方案的一部分，建議您這麼做。
+   視需要從 GitHub 複製程式碼。如果 Terraform 程式碼片段是端對端解決方案的一部分，建議您使用這種做法。
 3. 查看並修改範例參數，套用至您的環境。
 4. 儲存變更。
 5. 初始化 Terraform。每個目錄只需執行一次這項操作。
@@ -400,15 +400,15 @@ resource "google_bigquery_connection" "default" {
    ```
 
    等待 Terraform 顯示「Apply complete!」訊息。
-3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)，查看結果。在 Google Cloud 控制台中，前往 UI 中的資源，確認 Terraform 已建立或更新這些資源。
+3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)即可查看結果。在 Google Cloud 控制台中，前往 UI 中的資源，確認 Terraform 已建立或更新這些資源。
 
 **注意：**Terraform 範例通常會假設 Google Cloud 專案已啟用必要的 API。
 
 ### 授予服務帳戶存取權
 
-為連線的服務帳戶授予 Agent Platform 使用者角色。
+將 Agent Platform 使用者角色授予連線的服務帳戶。
 
-如果您打算在建立遠端模型時將端點指定為網址 (例如 `endpoint = 'https://us-central1-aiplatform.googleapis.com/v1/projects/myproject/locations/us-central1/publishers/google/models/gemini-2.5-pro'`)，請在網址指定的專案中授予這個角色。
+如果您打算在建立遠端模型時，將端點指定為網址 (例如 `endpoint = 'https://us-central1-aiplatform.googleapis.com/v1/projects/myproject/locations/us-central1/publishers/google/models/gemini-2.5-pro'`)，請在網址指定的專案中授予這個角色。
 
 如果您打算在建立遠端模型時使用模型名稱指定端點 (例如 `endpoint = 'gemini-2.5-pro'`)，請在您打算建立遠端模型的專案中授予這個角色。
 
@@ -464,8 +464,7 @@ gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount
    * `CONNECTION_ID`：BigQuery 連線的 ID
 
      在 Google Cloud 控制台中[查看連線詳細資料](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw#view-connections)時，這是「連線 ID」中顯示的完整連線 ID 最後一個部分的值，例如 `projects/myproject/locations/connection_location/connections/myconnection`
-   * ：要使用的 Gemini 模型名稱。如為支援的 Gemini 模型，您可以指定[全域端點](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw#global-endpoint)，提高可用性。詳情請參閱 [`ENDPOINT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw#endpoint)。
-     `ENDPOINT`
+   * `ENDPOINT`：要使用的 Gemini 模型名稱。對於支援的 Gemini 模型，您可以指定[全域端點](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw#global-endpoint)，以提升可用性。詳情請參閱 [`ENDPOINT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw#endpoint)。
 
 ## 生成結構化資料
 
@@ -494,11 +493,11 @@ FROM AI.GENERATE_TABLE(
 * `TOKENS`：`INT64` 值，用於設定回覆中可生成的詞元數量上限。這個值必須在 `[1,8192]` 範圍內。如要取得較短的回覆，請指定較低的值；如要取得較長的回覆，請調高此值。預設值為 `128`。
 * `TEMPERATURE`：介於 `[0.0,2.0]` 之間的 `FLOAT64` 值，可控制選取詞元時的隨機程度。預設值為 `1.0`。
 
-  如果希望提示詞生成更具確定性、較不具開放性和創意性的回覆，建議調低 `temperature` 的值。另一方面，如果 `temperature` 的值較高，則可能產生較多元或有創意的結果。如果 `temperature` 的值為 `0`，則模型一律會選取可能性最高的回覆。
+  如果希望提示生成更具確定性、較不具開放性和創意性的回覆，建議調低 `temperature` 的值。另一方面，如果 `temperature` 的值較高，則可能產生較多元或有創意的結果。`0` 值代表具有確定性，即模型一律會選取可能性最高的回覆。`temperature`
 * `TOP_P`：`FLOAT64` 範圍內的 `FLOAT64` 值 (`[0.0,1.0]`) 有助於判斷所選符記的機率。如要取得較不隨機的回覆，請指定較低的值；如要取得較隨機的回覆，請調高此值。預設值為 `0.95`。
 * `STOP_SEQUENCES`：`ARRAY<STRING>` 值，可移除模型回覆中包含的指定字串。字串必須完全相符，包括大小寫。預設值為空陣列。
 * `SAFETY_SETTINGS`：`ARRAY<STRUCT<STRING AS category, STRING AS
-  threshold>>` 值，用於設定內容安全門檻，以篩選回覆。結構體中的第一個元素會指定有害類別，第二個元素則會指定對應的封鎖門檻。模型會篩除違反這些設定的內容。每個類別只能指定一次。舉例來說，您無法同時指定 `STRUCT('HARM_CATEGORY_DANGEROUS_CONTENT' AS category,
+  threshold>>` 值，可設定內容安全門檻來篩選回應。結構體中的第一個元素會指定危害類別，第二個元素則會指定對應的封鎖門檻。模型會篩除違反這些設定的內容。每個類別只能指定一次。舉例來說，您無法同時指定 `STRUCT('HARM_CATEGORY_DANGEROUS_CONTENT' AS category,
   'BLOCK_MEDIUM_AND_ABOVE' AS threshold)` 和 `STRUCT('HARM_CATEGORY_DANGEROUS_CONTENT' AS category, 'BLOCK_ONLY_HIGH' AS
   threshold)`。如果特定類別沒有安全設定，系統會使用 `BLOCK_MEDIUM_AND_ABOVE` 安全設定。
 
@@ -580,11 +579,11 @@ FROM
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-06-30 (世界標準時間)。
+上次更新時間：2026-07-16 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-30 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-16 (世界標準時間)。"],[],[]]

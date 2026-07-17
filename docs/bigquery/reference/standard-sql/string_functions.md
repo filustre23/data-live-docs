@@ -483,8 +483,4 @@ values into a string.
 SELECT CONCAT('T.P.', ' ', 'Bar') as author;
 
 /*---------------------+
- | author              |
- +---------------------+
- | T.P. Bar            |
- +---------------------*/
 ```

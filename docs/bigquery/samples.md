@@ -21,23 +21,25 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 
 
-Python
 Java
-Node.js
 Go
+Python
+Node.js
 PHP
 C#
 Ruby
 Terraform
 C++
 
-BigQuery 儲存空間
 BigQuery Connection API
-BigQuery Reservation API
 BigQuery DataPolicy API
+BigQuery Reservation API
+BigQuery 儲存空間
 
+BigLake
 BigQuery
 BigQuery 資料移轉服務
+BigQuery ML
 
 
 

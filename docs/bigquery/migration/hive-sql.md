@@ -295,5 +295,4 @@ BigQuery 提供下列其他字串函式：
 | `FLOOR` | `FLOOR` |
 | `GREATEST` | `GREATEST` |
 | `LEAST` | `LEAST` |
-| `LN` | `LN` |
-| `LNNVL` | 使用 |
+|

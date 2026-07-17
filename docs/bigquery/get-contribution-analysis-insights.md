@@ -19,14 +19,14 @@ Google uses AI technology to translate content into your preferred language. AI 
 在本教學課程中，您將使用[貢獻度分析](https://docs.cloud.google.com/bigquery/docs/contribution-analysis?hl=zh-tw)模型，分析愛荷華州酒類銷售資料集中 2020 年和 2021 年的銷售變化。本教學課程會逐步引導您完成下列工作：
 
 * 根據愛荷華州公開酒類資料建立輸入資料表。
-* 建立使用[可相加指標](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis?hl=zh-tw#use_a_summable_metric)的[貢獻度分析模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis?hl=zh-tw)。這類模型會針對資料中的一或多個維度組合，彙整特定指標，藉此判斷這些維度對指標值的影響。
+* 建立使用[可相加指標](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis?hl=zh-tw#use_a_summable_metric)的[貢獻度分析模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis?hl=zh-tw)。這類模型會針對資料中一或多個維度的組合，彙整特定指標，判斷這些維度對指標值的影響。
 * 使用 [`ML.GET_INSIGHTS` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-get-insights?hl=zh-tw)，從模型取得指標洞察。
 
 開始本教學課程前，請先熟悉[貢獻度分析](https://docs.cloud.google.com/bigquery/docs/contribution-analysis?hl=zh-tw)應用情境。
 
 ## 所需權限
 
-* 如要建立資料集，您需要 `bigquery.datasets.create` Identity and Access Management (IAM) 權限。
+* 如要建立資料集，您需要 `bigquery.datasets.create` 身分與存取權管理 (IAM) 權限。
 * 如要建立模型，您必須具備下列權限：
 
   + `bigquery.jobs.create`
@@ -57,8 +57,8 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    **選取或建立專案所需的角色**
 
-   * **選取專案**：選取專案時，不需要具備特定 IAM 角色，只要您已獲授角色，即可選取任何專案。
-   * **建立專案**：如要建立專案，您需要「專案建立者」角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   * **選取專案**：選取專案時，不需要具備特定 IAM 角色，只要您在專案中獲派角色，即可選取該專案。
+   * **建立專案**：如要建立專案，您需要專案建立者角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
    **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，而不要選取現有專案。完成這些步驟後，您就可以刪除專案，並移除與該專案相關聯的所有資源。
 
    [前往專案選取器](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
@@ -67,7 +67,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    **啟用 API 時所需的角色**
 
-   如要啟用 API，您需要服務使用情形管理員 IAM 角色 (`roles/serviceusage.serviceUsageAdmin`)，其中包含 `serviceusage.services.enable` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用情形管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
    [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery.googleapis.com&hl=zh-tw)
 
@@ -81,11 +81,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    [前往 BigQuery 頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 在「Explorer」窗格中，按一下專案名稱。
-3. 依序點按 more\_vert「View actions」(查看動作) >「Create dataset」(建立資料集)
+3. 依序點按 more\_vert「View actions」(查看動作) >「Create dataset」(建立資料集)。
 4. 在「建立資料集」頁面中，執行下列操作：
 
    * 在「Dataset ID」(資料集 ID) 中輸入 `bqml_tutorial`。
-   * 針對「位置類型」選取「多區域」，然後選取「美國」。
+   * 針對「Location type」(位置類型) 選取「Multi-region」(多區域)，然後選取「US」(美國)。
    * 其餘設定請保留預設狀態，然後按一下「建立資料集」。
 
 ### bq
@@ -186,7 +186,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在查詢編輯器中，執行下列陳述式，從[可加總指標貢獻度分析模型輸出內容](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-get-insights?hl=zh-tw#output_for_summable_metric_contribution_analysis_models)中選取資料欄：
+2. 在查詢編輯器中執行下列陳述式，從[可加總指標貢獻度分析模型的輸出內容](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-get-insights?hl=zh-tw#output_for_summable_metric_contribution_analysis_models)選取資料欄：
 
    ```
    SELECT
@@ -214,7 +214,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 | vendor\_name=DIAGEO AMERICAS | 84681073 | 77259259 | 7421814 | 0.096 | 1571126 | 0.018 | 0.197 | 7421814 |
 | category\_name=100% AGAVE TEQUILA | 23915100 | 17252174 | 6662926 | 0.386 | 5528662 | 0.3 | 0.055 | 6662926 |
 
-輸出內容會自動依貢獻度 (或 `ABS(difference)`) 遞減排序。在 `all` 列中，「`difference`」欄顯示 2020 年至 2021 年的總銷售額增加了 $31,595,222 美元，如「`relative_difference`」欄所示，增幅為 7.9%。在第二列中，`vendor_name=SAZERAC COMPANY INC`為 $11,491,923，`unexpected_difference`表示這個資料區隔的成長率比整體資料的成長率高出 28%，如 `relative_unexpected_difference` 欄所示。詳情請參閱「[可加總的指標輸出資料欄](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-get-insights?hl=zh-tw#output_for_summable_metric_contribution_analysis_models)」。
+輸出內容會自動依貢獻度或 `ABS(difference)` 遞減排序。在 `all` 列中，「`difference`」欄顯示 2020 年至 2021 年的總銷售額增加了 $31,595,222 美元，如「`relative_difference`」欄所示，增幅為 7.9%。在第二列中，`vendor_name=SAZERAC COMPANY INC`為 $11,491,923，`unexpected_difference`表示這個資料區隔的成長率比整體資料的成長率高出 28%，如 `relative_unexpected_difference` 欄所示。詳情請參閱[可加總的指標輸出資料欄](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-get-insights?hl=zh-tw#output_for_summable_metric_contribution_analysis_models)。
 
 ## 清除所用資源
 
@@ -238,11 +238,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-06-30 (世界標準時間)。
+上次更新時間：2026-07-16 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-30 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-16 (世界標準時間)。"],[],[]]

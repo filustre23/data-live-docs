@@ -8,7 +8,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 取得檢視表屬性 透過集合功能整理內容 你可以依據偏好儲存及分類內容。
 
-根據指定的檢視畫面 ID 擷取檢視畫面的屬性。
+針對指定檢視畫面 ID 擷取檢視畫面的屬性。
 
 ## 深入探索
 
@@ -92,60 +92,6 @@ public class GetView {
     }
   }
 }
-```
-
-### Node.js
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-// Import the Google Cloud client library
-const {BigQuery} = require('@google-cloud/bigquery');
-const bigquery = new BigQuery();
-
-async function getView() {
-  // Retrieves view properties.
-
-  /**
-   * TODO(developer): Uncomment the following lines before running the sample
-   */
-  // const datasetId = "my_dataset";
-  // const tableId = "my_view";
-
-  // Retrieve view
-  const dataset = bigquery.dataset(datasetId);
-  const [view] = await dataset.table(tableId).get();
-
-  const fullTableId = view.metadata.id;
-  const viewQuery = view.metadata.view.query;
-
-  // Display view properties
-  console.log(`View at ${fullTableId}`);
-  console.log(`View query: ${viewQuery}`);
-}
-getView();
-```
-
-### Python
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-from google.cloud import bigquery
-
-client = bigquery.Client()
-
-view_id = "my-project.my_dataset.my_view"
-# Make an API request to get the table resource.
-view = client.get_table(view_id)
-
-# Display view properties
-print(f"Retrieved {view.table_type}: {str(view.reference)}")
-print(f"View Query:\n{view.view_query}")
 ```
 
 ## 後續步驟

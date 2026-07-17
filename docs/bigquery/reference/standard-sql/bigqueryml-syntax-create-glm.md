@@ -934,9 +934,4 @@ to the model except for the columns included in
 ## Hyperparameter tuning
 
 Linear and logistic regression models support
-[hyperparameter tuning](/bigquery/docs/hp-tuning-overview), which you can use
-to improve model performance for your data. To use
-hyperparameter tuning, set the [`NUM_TRIALs` option](#num_trials) to the
-number of trials that you want to run. BigQuery ML then trains the
-model the number of times that you specify, using different hyperparameter
-values, and returns the model that performs the
+[hyperparameter tuning](/bigquery/docs/hp-tuning-overview), which you c

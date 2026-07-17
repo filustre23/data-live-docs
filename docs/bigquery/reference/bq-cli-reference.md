@@ -630,6 +630,3 @@ bq get-iam-policy --reservation myReservation
     ([預覽](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages))。預設值為 `false`。使用這個旗標時，`RESOURCE` 會視為預訂 ID。預留項目可選擇性加上專案和位置前置字元：`myProject:myLocation.myReservation`。
 
 **`RESOURCE`**
-:   要取得政策的資料表或檢視區塊。
-
-如要進一步瞭解 `bq get-iam-policy` 指令，請參閱「[使用 IAM 控管資源存取權](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam?hl=zh-tw#bq)」。

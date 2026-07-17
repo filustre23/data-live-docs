@@ -22,7 +22,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 * 在 Cloud Storage bucket 中的圖片資料上建立 [BigQuery 物件資料表](https://docs.cloud.google.com/bigquery/docs/object-table-introduction?hl=zh-tw)。
 * 使用 [BigQuery 中的 Colab Enterprise 筆記本](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction?hl=zh-tw)探索圖片資料。
-* 建立以 [Gemini Enterprise Agent Platform `multimodalembedding` 基礎模型](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models?hl=zh-tw#foundation_model_apis)為目標的 BigQuery ML [遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw)。
+* 建立以 [Gemini Enterprise Agent Platform `multimodalembedding` 基礎模型](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models?hl=zh-tw#foundation_model_apis)為目標的 BigQuery ML[遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw)。
 * 使用遠端模型和 [`AI.GENERATE_EMBEDDING` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding?hl=zh-tw)，從物件資料表中的圖片產生嵌入。
 * 修正任何嵌入生成錯誤。
 * 選擇性步驟：建立[向量索引](https://docs.cloud.google.com/bigquery/docs/vector-index?hl=zh-tw)，為圖片嵌入項目建立索引。
@@ -40,7 +40,7 @@ Google uses AI technology to translate content into your preferred language. AI 
   BigQuery Studio 管理員 (`roles/bigquery.studioAdmin`)。
 * 將權限授予連線的服務帳戶：專案 IAM 管理員 (`roles/resourcemanager.projectIamAdmin`)。
 
-這些預先定義的角色具備執行本文所述工作所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
+這些預先定義的角色具備執行本文中工作所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
 #### 所需權限
 
@@ -111,8 +111,8 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    **選取或建立專案所需的角色**
 
-   * **選取專案**：選取專案時，不需要具備特定 IAM 角色，只要您已獲授角色，即可選取任何專案。
-   * **建立專案**：如要建立專案，您需要「專案建立者」角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   * **選取專案**：選取專案時，不需要具備特定 IAM 角色，只要您在專案中獲派角色，即可選取該專案。
+   * **建立專案**：如要建立專案，您需要專案建立者角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
    **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，而不要選取現有專案。完成這些步驟後，您就可以刪除專案，並移除與該專案相關聯的所有資源。
 
    [前往專案選取器](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
@@ -121,7 +121,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    **啟用 API 時所需的角色**
 
-   如要啟用 API，您需要服務使用情形管理員 IAM 角色 (`roles/serviceusage.serviceUsageAdmin`)，其中包含 `serviceusage.services.enable` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用情形管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
    [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery.googleapis.com%2Cbigqueryconnection.googleapis.com%2Caiplatform.googleapis.com&hl=zh-tw)
 
@@ -135,7 +135,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    [前往 BigQuery 頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 在「Explorer」窗格中，按一下專案名稱。
-3. 依序點按 more\_vert「View actions」(查看動作) >「Create dataset」(建立資料集)
+3. 依序點按 more\_vert「View actions」(查看動作) >「Create dataset」(建立資料集)。
 4. 在「建立資料集」頁面中，執行下列操作：
 
    * 在「Dataset ID」(資料集 ID) 中輸入 `bqml_tutorial`。
@@ -174,8 +174,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 建立物件資料表
 
-在公開的 Cloud Storage [`gcs-public-data--met` bucket](https://console.cloud.google.com/storage/browser/gcs-public-data--met;tab=objects?amp%3BforceOnObjectsSortingFiltering=false&hl=zh-tw) 中，針對藝術圖片建立物件資料表。
-有了物件表格，您就能分析圖片，不必將圖片從 Cloud Storage 移出。
+在公開的 Cloud Storage [`gcs-public-data--met` bucket](https://console.cloud.google.com/storage/browser/gcs-public-data--met;tab=objects?amp%3BforceOnObjectsSortingFiltering=false&hl=zh-tw) 中，針對藝術圖片建立物件資料表。有了物件資料表，您就能分析圖片，不必將圖片從 Cloud Storage 移出。
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -302,7 +301,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 生成圖片嵌入
 
-使用 [`AI.GENERATE_EMBEDDING` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding?hl=zh-tw)從物件資料表中的圖片產生嵌入內容，然後將這些內容寫入資料表，以供後續步驟使用。產生嵌入內容的作業成本高昂，因此查詢會使用包含 `LIMIT` 子句的子查詢，將嵌入內容的產生作業限制為 10,000 張圖片，而不是嵌入 601,294 張圖片的完整資料集。這也有助於將圖片數量控制在 `AI.GENERATE_EMBEDDING` 函式的 25,000 張上限內。這項查詢大約需要 40 分鐘才能執行完畢。
+使用 [`AI.GENERATE_EMBEDDING` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding?hl=zh-tw)從物件資料表中的圖片產生嵌入內容，然後將這些內容寫入資料表，以供後續步驟使用。產生嵌入內容的作業成本高昂，因此查詢會使用包含 `LIMIT` 子句的子查詢，將嵌入內容的產生限制為 10,000 張圖片，而不是嵌入 601,294 張圖片的完整資料集。這也有助於將圖片數量控制在 `AI.GENERATE_EMBEDDING` 函式的 25,000 張上限內。這項查詢大約需要 40 分鐘才能執行完畢。
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -321,7 +320,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 修正任何嵌入生成錯誤
 
-檢查並修正任何嵌入生成錯誤。由於 [Agent Platform 上的生成式 AI 配額](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/quotas?hl=zh-tw)或服務無法使用，因此可能無法生成嵌入內容。
+檢查並修正任何嵌入生成錯誤。由於 [Agent Platform 生成式 AI 配額](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/quotas?hl=zh-tw)或服務無法使用，因此可能無法生成嵌入內容。
 
 `AI.GENERATE_EMBEDDING` 函式會在 `status` 欄中傳回錯誤詳細資料。如果成功產生嵌入內容，這個資料欄會是空白；如果產生失敗，則會顯示錯誤訊息。
 
@@ -345,7 +344,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 建立向量索引
 
-您可以視需要使用 [`CREATE VECTOR INDEX` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#create_vector_index_statement)，在 `met_images_embeddings` 資料表的 `embedding` 資料欄上建立 `met_images_index` 向量索引。向量索引可讓您更快執行向量搜尋，但會降低召回率，因此傳回的結果會更近似。
+您可以視需要使用 [`CREATE VECTOR INDEX` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#create_vector_index_statement)，在 `met_images_embeddings` 資料表的 `embedding` 資料欄上建立 `met_images_index` 向量索引。向量索引可加快向量搜尋速度，但會降低召回率，因此傳回的結果會更近似。
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -372,7 +371,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 為搜尋文字生成嵌入
 
-如要搜尋與指定文字搜尋字串相應的圖片，您必須先為該字串建立文字嵌入。使用與建立圖像嵌入相同的遠端模型建立文字嵌入，然後將文字嵌入寫入資料表，以供後續步驟使用。搜尋字串為 `pictures of white or cream colored dress from victorian era`。
+如要搜尋與指定文字搜尋字串相應的圖片，您必須先為該字串建立文字嵌入。使用與建立圖片嵌入時相同的遠端模型建立文字嵌入，然後將文字嵌入寫入表格，以供後續步驟使用。搜尋字串為 `pictures of white or cream colored dress from victorian era`。
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -418,7 +417,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 開啟您先前建立的 `met-image-analysis` 筆記本。
+2. 開啟先前建立的 `met-image-analysis` 筆記本。
 3. 以視覺化方式呈現向量搜尋結果：
 
    1. 在筆記本中新增程式碼儲存格。
@@ -458,11 +457,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-06-30 (世界標準時間)。
+上次更新時間：2026-07-16 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-30 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-16 (世界標準時間)。"],[],[]]

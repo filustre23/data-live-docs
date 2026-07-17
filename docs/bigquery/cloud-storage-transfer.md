@@ -16,7 +16,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 將 Cloud Storage 資料載入 BigQuery
 
-您可以使用 Cloud Storage 連接器的 [BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)，將資料從 Cloud Storage 載入 BigQuery。您可以使用 BigQuery 資料移轉服務，安排週期性移轉工作，將 Cloud Storage 中的最新資料新增至 BigQuery。
+您可以使用 Cloud Storage 連接器的 [BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)，將資料從 Cloud Storage 載入至 BigQuery。您可以使用 BigQuery 資料移轉服務，安排週期性移轉工作，將 Cloud Storage 中的最新資料新增至 BigQuery。
 
 ## 事前準備
 
@@ -25,17 +25,17 @@ Google uses AI technology to translate content into your preferred language. AI 
 * 確認您已完成[啟用 BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service?hl=zh-tw)中的一切必要動作。
 * 請擷取您的 [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer-overview?hl=zh-tw#google-cloud-storage-uri)。
 * 請[建立 BigQuery 資料集](https://docs.cloud.google.com/bigquery/docs/datasets?hl=zh-tw)來儲存您的資料。
-* [建立資料移轉作業的目的地資料表](https://docs.cloud.google.com/bigquery/docs/tables?hl=zh-tw#create_an_empty_table_with_a_schema_definition)，並指定結構定義。您可以建立 BigQuery 資料表或[建立 Iceberg 受管理資料表](https://docs.cloud.google.com/bigquery/docs/iceberg-tables?hl=zh-tw#create-iceberg-tables)。
-* 如果您打算指定客戶自行管理的加密金鑰 (CMEK)，請確保[服務帳戶具有加密和解密權限](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw#grant_permission)，且您擁有使用 CMEK 時所需的 [Cloud KMS 金鑰資源 ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw#key_resource_id)。如要瞭解 CMEK 如何與 BigQuery 資料移轉服務搭配運作，請參閱[指定移轉作業加密金鑰](#CMEK)。
+* [建立資料移轉作業的目的地資料表](https://docs.cloud.google.com/bigquery/docs/tables?hl=zh-tw#create_an_empty_table_with_a_schema_definition)，並指定結構定義。您可以建立 BigQuery 資料表，或[建立 Iceberg 受管理資料表](https://docs.cloud.google.com/bigquery/docs/iceberg-tables?hl=zh-tw#create-iceberg-tables)。
+* 如果您打算指定客戶管理的加密金鑰 (CMEK)，請確保[服務帳戶具有加密和解密權限](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw#grant_permission)，且您擁有使用 CMEK 時所需的 [Cloud KMS 金鑰資源 ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw#key_resource_id)。如要瞭解 CMEK 如何與 BigQuery 資料移轉服務搭配運作，請參閱[指定移轉作業加密金鑰](#CMEK)。
 
 ## 限制
 
 從 Cloud Storage 到 BigQuery 的週期性資料移轉作業會受到下列限制：
 
 * 只要資料移轉的檔案符合由萬用字元或執行階段參數所定義的模式，就**必須**使用您為目的地資料表設定的結構定義，否則移轉作業會失敗。在執行階段之間變更資料表結構定義，也會導致移轉失敗。
-* 由於 [Cloud Storage 物件可進行版本管理](https://docs.cloud.google.com/storage/docs/object-versioning?hl=zh-tw)，請務必注意 BigQuery 資料移轉作業並不支援已封存的 Cloud Storage 物件。只有未封存的物件才能移轉。
-* 不同於[從 Cloud Storage 將資料個別載入到 BigQuery](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage?hl=zh-tw)，對於持續進行的資料移轉作業，您必須在設定移轉前先建立目的地資料表。如果是 CSV 和 JSON 檔案，您也必須預先定義[表格結構定義](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw)。BigQuery 無法在週期性資料移轉流程期間建立資料表。
-* 從 Cloud Storage 移轉資料時，系統預設會將「寫入偏好設定」參數設為 `APPEND`。在這個模式下，未經修改的檔案只能載入 BigQuery 一次。如果檔案的 `last modification time` 屬性更新，檔案就會重新載入。
+* 由於 [Cloud Storage 提供物件版本管理功能](https://docs.cloud.google.com/storage/docs/object-versioning?hl=zh-tw)，請務必注意 BigQuery 資料移轉作業並不支援已封存的 Cloud Storage 物件。只有未封存的物件才能移轉。
+* 不同於[從 Cloud Storage 將資料個別載入到 BigQuery](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage?hl=zh-tw)，對於持續進行的資料移轉作業，您必須在設定移轉前先建立目標資料表。如果是 CSV 和 JSON 檔案，您也必須預先定義[表格結構定義](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw)。BigQuery 無法在週期性資料移轉流程期間建立資料表。
+* 從 Cloud Storage 移轉資料時，系統預設會將「寫入偏好設定」參數設為 `APPEND`。在此模式下，未經修改的檔案只能載入 BigQuery 一次。如果檔案的 `last modification time` 屬性更新，檔案就會重新載入。
 * 如果 Cloud Storage 檔案在資料移轉期間經過修改，BigQuery 資料移轉服務無法保證所有檔案都會移轉，或只移轉一次。
 * 將資料從 Cloud Storage 值區載入 BigQuery 時有下列限制：
 
@@ -53,8 +53,8 @@ Google uses AI technology to translate content into your preferred language. AI 
 ## 間隔下限
 
 * 系統會立即選取來源檔案進行資料移轉，不設檔案建立時間下限。
-* 週期性資料轉移作業之間的最短時間間隔為 15 分鐘。週期性資料移轉作業的預設間隔為每 24 小時。
-* 您可以設定[事件驅動的轉移作業](https://docs.cloud.google.com/bigquery/docs/event-driven-transfer?hl=zh-tw)，自動排定資料轉移作業，縮短間隔時間。
+* 週期性資料轉移作業之間的最短時間間隔為 15 分鐘。週期性資料移轉的預設間隔為每 24 小時一次。
+* 您可以設定[事件驅動的移轉作業](https://docs.cloud.google.com/bigquery/docs/event-driven-transfer?hl=zh-tw)，自動排定資料移轉作業，縮短間隔時間。
 
 ## 所需權限
 
@@ -62,7 +62,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### 必要的 BigQuery 角色
 
-如要取得建立 BigQuery 資料移轉服務資料移轉作業所需的權限，請要求系統管理員在專案中授予您 [BigQuery 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.admin)  (`roles/bigquery.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得建立 BigQuery 資料移轉服務資料移轉作業所需的權限，請要求管理員在專案中授予您 [BigQuery 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.admin)  (`roles/bigquery.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
 這個預先定義的角色具備建立 BigQuery 資料移轉服務資料移轉作業所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
@@ -84,7 +84,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 詳情請參閱「[授予 `bigquery.admin` 存取權](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service?hl=zh-tw#grant_bigqueryadmin_access)」。
 
-### 必要 Cloud Storage 角色
+### 必要的 Cloud Storage 角色
 
 您必須取得個別值區或更高層級的 `storage.objects.get` 權限。如要使用 URI [萬用字元](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer-overview?hl=zh-tw#wildcard-support)，您必須具備 `storage.objects.list` 權限。如果要在每次成功移轉後刪除來源檔案，您也需要具有 `storage.objects.delete` 權限。`storage.objectAdmin` 預先定義的 [IAM 角色](https://docs.cloud.google.com/storage/docs/access-control/iam-roles?hl=zh-tw)具有以上所有權限。
 
@@ -111,7 +111,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    * 在「Dataset」(資料集) 部分，選取您為了儲存資料而建立的資料集。
    * 如要移轉至 BigQuery 資料表，請選取「Native table」(原生資料表)。
-   * 如要移轉至 Iceberg 代管資料表，請選取「Apache Iceberg」。
+   * 如要移轉至 Iceberg 代管資料表，請選取「Iceberg Managed」。
 7. 在「Data source details」(資料來源詳細資料) 區段：
 
    1. 在「Destination table」(目標資料表) 中輸入目標資料表的名稱。
@@ -138,7 +138,7 @@ Google uses AI technology to translate content into your preferred language. AI 
             * 您在這個欄位提供資料類型時採用的順序不會有影響。
       2. 如要在移轉資料時，捨棄不符合目的地資料表結構定義的資料，請勾選「JSON, CSV」(JSON、CSV) 底下的「Ignore unknown values」(略過不明的值) 方塊。
       3. 如果希望資料移轉作業將 Avro 邏輯類型轉換為對應的 BigQuery 資料類型，請在「AVRO」底下勾選「Use avro logical types」方塊。預設會忽略多數類型的 `logicalType` 屬性，並改用基礎 Avro 類型。
-      4. 在「CSV」底下執行下列操作：
+      4. 在「CSV」**CSV** 下方：
 
          1. 在「Field delimiter」(欄位分隔符號) 部分輸入分隔欄位的字元。預設值為半形逗號。
          2. 在「Quote character」(引用字元) 輸入 CSV 檔案中用來引用資料區段的字元，預設值為英文雙引號 (`"`)。
@@ -178,7 +178,7 @@ Google uses AI technology to translate content into your preferred language. AI 
   使用 bq 指令列工具建立 Cloud Storage 資料移轉作業時，系統會採用「Schedule」(排程) 的預設值 (每 24 小時) 進行移轉設定。
 * 您無法使用 bq 指令列工具設定通知。
 
-下列範例顯示的指令會建立 Cloud Storage 資料移轉作業，並包含所有必要參數：
+下列範例顯示建立 Cloud Storage 資料移轉作業的指令，其中包含所有必要參數：
 
 ```
 bq mk \
@@ -207,21 +207,21 @@ bq mk \
   + `max_bad_records`：可忽略的錯誤記錄數量上限，適用於任何 `file_format` 值。預設值為 `0`。
   + `decimal_target_types`：針對任何 `file_format` 值，輸入以半形逗號分隔的清單，內含來源小數值可能轉換成的 SQL 資料類型。如果未提供這個欄位，`ORC` 的預設資料類型為 `"NUMERIC,STRING"`，其他檔案格式則為 `"NUMERIC"`。
   + `ignore_unknown_values`：針對任何 `file_format` 值，設為 `TRUE` 即可接受含有與結構定義不符值的資料列。詳情請參閱[`JobConfigurationLoad` 參考表](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#JobConfigurationLoad.FIELDS.ignore_unknown_values)中的 `ignoreUnknownvalues` 欄位詳細資料。
-  + `use_avro_logical_types`：如果是 `AVRO` `file_format` 值，請設為 `TRUE`，將邏輯型別解譯為對應型別 (例如 `TIMESTAMP`)，而非僅使用原始型別 (例如 `INTEGER`)。
+  + `use_avro_logical_types`：如果是 `AVRO` `file_format` 值，請設為 `TRUE`，將邏輯型別解讀為對應型別 (例如 `TIMESTAMP`)，而非僅使用原始型別 (例如 `INTEGER`)。
   + `parquet_enum_as_string`：如為 `PARQUET` `file_format` 值，請設為 `TRUE`，將 `PARQUET` `ENUM` 邏輯型別推斷為 `STRING`，而非預設的 `BYTES`。
   + `parquet_enable_list_inference`：如為 `PARQUET` `file_format` 值，請設為 `TRUE`，以便專門針對 `PARQUET` `LIST` 邏輯型別使用結構定義推斷。
   + `reference_file_schema_uri`：參考檔案的 URI 路徑，其中包含讀取器結構定義。
   + `field_delimiter`：適用於 `CSV` `file_format` 值，用來分隔欄位的字元。預設值為半形逗號。
   + `quote`：適用於 `CSV` `file_format` 值，CSV 檔案中用來引用資料區段的字元。預設值為英文雙引號 (`"`)。
-  + `skip_leading_rows`：針對 `CSV` `file_format` 值，指出不想匯入的開頭標題列數。預設值為 0。
-  + `allow_quoted_newlines`：如為 `CSV` `file_format` 值，請設為 `TRUE`，允許在加上引號的欄位中換行。
+  + `skip_leading_rows`：針對 `CSV` `file_format` 值，指出您不想匯入的開頭標題列數。預設值為 0。
+  + `allow_quoted_newlines`：如果是 `CSV` `file_format` 值，請設為 `TRUE`，允許在加上引號的欄位中換行。
   + `allow_jagged_rows`：如為 `CSV` `file_format` 值，請設為 `TRUE`，接受缺少結尾自選欄的資料列。缺少的值會填入 `NULL`。
   + `preserve_ascii_control_characters`：針對 `CSV` `file_format` 值，請設為 `TRUE`，保留任何內嵌的 ASCII 控制字元。
   + `encoding`：指定 `CSV` 編碼類型。支援的值為 `UTF8`、`ISO_8859_1`、`UTF16BE`、`UTF16LE`、`UTF32BE` 和 `UTF32LE`。
   + `delete_source_files`：設為 `TRUE`，即可在每次成功移轉後刪除來源檔案。如果首次刪除來源檔案失敗，系統並不會重試刪除工作。預設值為 `FALSE`。
 * SERVICE\_ACCOUNT\_NAME 是用於驗證移轉作業的服務帳戶名稱。服務帳戶應由用於建立轉移作業的 `project_id` 擁有，且應具備所有[必要權限](#required_permissions)。
 
-舉例來說，下列指令會使用 `gs://mybucket/myfile/*.csv` 的 `data_path_template` 值、目標資料集 `mydataset` 以及 `file_format`
+舉例來說，下列指令會使用 `gs://mybucket/myfile/*.csv` 的 `data_path_template` 值、目標資料集 `mydataset` 和 `file_format`
 `CSV`，建立名為 `My Transfer` 的 Cloud Storage 資料移轉作業。本範例包含有關 `CSV` file\_format 的選用參數非預設值。
 
 資料移轉作業會在預設專案中建立：
@@ -293,5 +293,5 @@ public class CreateCloudStorageTransfer {
     params.put(
         "destination_table_name_template", Value.newBuilder().setStringValue(tableId).build());
     params.put("data_path_template", Value.newBuilder().setStringValue(sourceUri).build());
-    params.put("write_disposition", Value.newBuilder().setStringValue(
+    params.put("write_disposition",
 ```

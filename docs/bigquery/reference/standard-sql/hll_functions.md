@@ -108,16 +108,17 @@ is represented using the `BYTES` data type. You can then merge sketches using
 you can extract the final count of distinct values from the sketch using
 `HLL_COUNT.EXTRACT`.
 
-This function supports an optional parameter, `precision`. This parameter
-defines the accuracy of the estimate at the cost of additional memory required
-to process the sketches or store them on disk. The range for this value is
-`10` to `24`. The default value is `15`. For more information about precision,
-see [Precision for sketches](/bigquery/docs/sketches#precision_hll).
-
 If the input is `NULL`, this function returns `NULL`.
 
 For more information, see [HyperLogLog in Practice: Algorithmic Engineering of
 a State of The Art Cardinality Estimation Algorithm](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/40671.pdf).
+
+**Definitions**
+
+* `precision`: Defines the accuracy of the estimate at the cost of additional
+  memory required to process the sketches or store them on disk. The range for
+  this value is `10` to `24`. The default value is `15`. For more information
+  about precision, see [Precision for sketches](/bigquery/docs/sketches#precision_hll).
 
 **Supported input types**
 
@@ -289,11 +290,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-06-29 UTC.
+Last updated 2026-07-13 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-06-29 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-07-13 UTC."],[],[]]

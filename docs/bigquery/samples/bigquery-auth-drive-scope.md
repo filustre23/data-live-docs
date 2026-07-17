@@ -19,46 +19,47 @@ Google uses AI technology to translate content into your preferred language. AI 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
-GoogleCredentials credentials =
-    ServiceAccountCredentials.getApplicationDefault()
-        .createScoped(
-            ImmutableSet.of(
-                "https://www.googleapis.com/auth/bigquery",
-                "https://www.googleapis.com/auth/drive"));
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.auth.oauth2.ServiceAccountCredentials;
+import com.google.cloud.bigquery.BigQuery;
+import com.google.cloud.bigquery.BigQueryException;
+import com.google.cloud.bigquery.BigQueryOptions;
+import com.google.cloud.bigquery.Dataset;
+import com.google.common.collect.ImmutableSet;
+import java.io.IOException;
 
-// Initialize client that will be used to send requests. This client only needs to be created
-// once, and can be reused for multiple requests.
-BigQuery bigquery =
-    BigQueryOptions.newBuilder().setCredentials(credentials).build().getService();
-```
+public class AuthDriveScope {
 
-### Python
+  public static void main(String[] args) throws IOException {
+    setAuthDriveScope();
+  }
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+  public static void setAuthDriveScope() throws IOException {
+    // Create credentials with Drive & BigQuery API scopes.
+    // Both APIs must be enabled for your project before running this code.
+    GoogleCredentials credentials =
+        ServiceAccountCredentials.getApplicationDefault()
+            .createScoped(
+                ImmutableSet.of(
+                    "https://www.googleapis.com/auth/bigquery",
+                    "https://www.googleapis.com/auth/drive"));
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+    try {
+      // Initialize client that will be used to send requests. This client only needs to be created
+      // once, and can be reused for multiple requests.
+      BigQuery bigquery =
+          BigQueryOptions.newBuilder().setCredentials(credentials).build().getService();
 
-```
-from google.cloud import bigquery
-import google.auth
-
-# Create credentials with Drive & BigQuery API scopes.
-# Both APIs must be enabled for your project before running this code.
-#
-# If you are using credentials from gcloud, you must authorize the
-# application first with the following command:
-#
-# gcloud auth application-default login \
-#   --scopes=https://www.googleapis.com/auth/drive,https://www.googleapis.com/auth/cloud-platform
-credentials, project = google.auth.default(
-    scopes=[
-        "https://www.googleapis.com/auth/drive",
-        "https://www.googleapis.com/auth/cloud-platform",
-    ]
-)
-
-# Construct a BigQuery client object.
-client = bigquery.Client(credentials=credentials, project=project)
+      // Use the client.
+      System.out.println("Auth succeeded with multiple scopes. Datasets:");
+      for (Dataset dataset : bigquery.listDatasets().iterateAll()) {
+        System.out.printf("Dataset: %s%n", dataset.getDatasetId().getDataset());
+      }
+    } catch (BigQueryException e) {
+      System.out.println("Auth failed due to error: \n" + e.toString());
+    }
+  }
+}
 ```
 
 ## 後續步驟

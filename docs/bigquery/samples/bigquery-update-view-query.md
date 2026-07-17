@@ -14,7 +14,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 如需包含這個程式碼範例的詳細說明文件，請參閱下列文章：
 
-* [管理邏輯檢視畫面](https://docs.cloud.google.com/bigquery/docs/managing-views?hl=zh-tw)
+* [管理邏輯檢視區塊](https://docs.cloud.google.com/bigquery/docs/managing-views?hl=zh-tw)
 
 ## 程式碼範例
 
@@ -111,75 +111,6 @@ public class UpdateViewQuery {
     }
   }
 }
-```
-
-### Node.js
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-// Import the Google Cloud client library and create a client
-const {BigQuery} = require('@google-cloud/bigquery');
-const bigquery = new BigQuery();
-
-async function updateViewQuery() {
-  // Updates a view named "my_existing_view" in "my_dataset".
-
-  /**
-   * TODO(developer): Uncomment the following lines before running the sample.
-   */
-  // const datasetId = "my_existing_dataset"
-  // const tableId = "my_existing_table"
-  const dataset = await bigquery.dataset(datasetId);
-
-  // This example updates a view into the USA names dataset to include state.
-  const newViewQuery = `SELECT name, state 
-  FROM \`bigquery-public-data.usa_names.usa_1910_current\`
-  LIMIT 10`;
-
-  // Retrieve existing view
-  const [view] = await dataset.table(tableId).get();
-
-  // Retrieve existing view metadata
-  const [metadata] = await view.getMetadata();
-
-  // Update view query
-  metadata.view = newViewQuery;
-
-  // Set metadata
-  await view.setMetadata(metadata);
-
-  console.log(`View ${tableId} updated.`);
-}
-```
-
-### Python
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-from google.cloud import bigquery
-
-client = bigquery.Client()
-
-view_id = "my-project.my_dataset.my_view"
-source_id = "my-project.my_dataset.my_table"
-view = bigquery.Table(view_id)
-
-# The source table in this example is created from a CSV file in Google
-# Cloud Storage located at
-# `gs://cloud-samples-data/bigquery/us-states/us-states.csv`. It contains
-# 50 US states, while the view returns only those states with names
-# starting with the letter 'M'.
-view.view_query = f"SELECT name, post_abbr FROM `{source_id}` WHERE name LIKE 'M%'"
-
-# Make an API request to update the query property of the view.
-view = client.update_table(view, ["view_query"])
-print(f"Updated {view.table_type}: {str(view.reference)}")
 ```
 
 ## 後續步驟

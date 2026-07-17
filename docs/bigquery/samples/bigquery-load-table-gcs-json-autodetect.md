@@ -126,58 +126,6 @@ public class LoadJsonFromGcsAutodetect {
 }
 ```
 
-### Node.js
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-// Import the Google Cloud client libraries
-const {BigQuery} = require('@google-cloud/bigquery');
-const {Storage} = require('@google-cloud/storage');
-
-/**
- * TODO(developer): Uncomment the following lines before running the sample.
- */
-// const datasetId = "my_dataset";
-// const tableId = "my_table";
-
-/**
- * This sample loads the JSON file at
- * https://storage.googleapis.com/cloud-samples-data/bigquery/us-states/us-states.json
- *
- * TODO(developer): Replace the following lines with the path to your file.
- */
-const bucketName = 'cloud-samples-data';
-const filename = 'bigquery/us-states/us-states.json';
-
-async function loadJSONFromGCSAutodetect() {
-  // Imports a GCS file into a table with autodetected schema.
-
-  // Instantiate clients
-  const bigquery = new BigQuery();
-  const storage = new Storage();
-
-  // Configure the load job. For full list of options, see:
-  // https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad
-  const metadata = {
-    sourceFormat: 'NEWLINE_DELIMITED_JSON',
-    autodetect: true,
-    location: 'US',
-  };
-
-  // Load data from a Google Cloud Storage file into the table
-  const [job] = await bigquery
-    .dataset(datasetId)
-    .table(tableId)
-    .load(storage.bucket(bucketName).file(filename), metadata);
-  // load() waits for the job to finish
-  console.log(`Job ${job.id} completed.`);
-}
-loadJSONFromGCSAutodetect();
-```
-
 ### PHP
 
 在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 PHP 設定說明操作。詳情請參閱 [BigQuery PHP API 參考說明文件](https://docs.cloud.google.com/php/docs/reference/cloud-bigquery/latest/BigQueryClient?hl=zh-tw)。
@@ -225,38 +173,6 @@ function import_from_storage_json_autodetect(
         print('Data imported successfully' . PHP_EOL);
     }
 }
-```
-
-### Python
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-from google.cloud import bigquery
-
-# Construct a BigQuery client object.
-client = bigquery.Client()
-
-# TODO(developer): Set table_id to the ID of the table to create.
-# table_id = "your-project.your_dataset.your_table_name
-
-# Set the encryption key to use for the destination.
-# TODO: Replace this key with a key you have created in KMS.
-# kms_key_name = "projects/{}/locations/{}/keyRings/{}/cryptoKeys/{}".format(
-#     "cloud-samples-tests", "us", "test", "test"
-# )
-job_config = bigquery.LoadJobConfig(
-    autodetect=True, source_format=bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-)
-uri = "gs://cloud-samples-data/bigquery/us-states/us-states.json"
-load_job = client.load_table_from_uri(
-    uri, table_id, job_config=job_config
-)  # Make an API request.
-load_job.result()  # Waits for the job to complete.
-destination_table = client.get_table(table_id)
-print("Loaded {} rows.".format(destination_table.num_rows))
 ```
 
 ### Ruby

@@ -886,5 +886,5 @@ Specify one of the following values:
 For `DNN_LINEAR_COMBINED_CLASSIFIER` models:
 
 ```
-HPARAM_TUNING_OBJECTIVES = { 'PRECISION' | 'RECALL' | 'ACCURACY' |
+HPARAM_TUNING_OBJECTIVES = { 'PRECISION' |
 ```

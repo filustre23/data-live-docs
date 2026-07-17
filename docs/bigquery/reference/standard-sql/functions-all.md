@@ -246,5 +246,4 @@ This topic contains all functions supported by GoogleSQL for BigQuery.
 | [`PARSE_DATE`](/bigquery/docs/reference/standard-sql/date_functions#parse_date) | Converts a `STRING` value to a `DATE` value. |
 | [`PARSE_DATETIME`](/bigquery/docs/reference/standard-sql/datetime_functions#parse_datetime) | Converts a `STRING` value to a `DATETIME` value. |
 | [`PARSE_JSON`](/bigquery/docs/reference/standard-sql/json_functions#parse_json) | Converts a JSON-formatted `STRING` value to a `JSON` value. |
-| [`PARSE_NUMERIC`](/bigquery/docs/reference/standard-sql/conversion_functions#parse_numeric) | Converts a `STRING` value to a `NUMERIC` value. |
-| [`PARSE_TIME`](/bigquery/docs/reference/standard-sql/time_functions#parse_time) | Converts a `STRING<` |
+| [`PARSE_NUMERIC<`](/bigquery/docs/reference/standard-sql/conversion_functions#parse_numeric) |

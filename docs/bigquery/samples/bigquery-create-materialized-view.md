@@ -8,7 +8,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 建立 materialized view 透過集合功能整理內容 你可以依據偏好儲存及分類內容。
 
-建立 materialized view。
+建立具體化檢視表。
 
 ## 深入探索
 
@@ -117,31 +117,6 @@ public class CreateMaterializedView {
     }
   }
 }
-```
-
-### Python
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-from google.cloud import bigquery
-
-bigquery_client = bigquery.Client()
-
-view_id = "my-project.my_dataset.my_materialized_view"
-base_table_id = "my-project.my_dataset.my_base_table"
-view = bigquery.Table(view_id)
-view.mview_query = f"""
-SELECT product_id, SUM(clicks) AS sum_clicks
-FROM  `{base_table_id}`
-GROUP BY 1
-"""
-
-# Make an API request to create the materialized view.
-view = bigquery_client.create_table(view)
-print(f"Created {view.table_type}: {str(view.reference)}")
 ```
 
 ### Terraform

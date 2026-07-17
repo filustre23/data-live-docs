@@ -8,7 +8,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 以批次做為優先順序執行查詢 透過集合功能整理內容 你可以依據偏好儲存及分類內容。
 
-以批次優先順序執行查詢工作。
+以批次做為優先順序執行查詢工作。
 
 ## 深入探索
 
@@ -146,86 +146,6 @@ public class QueryBatch {
     }
   }
 }
-```
-
-### Node.js
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-// Import the Google Cloud client library and create a client
-const {BigQuery} = require('@google-cloud/bigquery');
-const bigquery = new BigQuery();
-
-async function queryBatch() {
-  // Runs a query at batch priority.
-
-  // Create query job configuration. For all options, see
-  // https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#jobconfigurationquery
-  const queryJobConfig = {
-    query: `SELECT corpus
-            FROM \`bigquery-public-data.samples.shakespeare\` 
-            LIMIT 10`,
-    useLegacySql: false,
-    priority: 'BATCH',
-  };
-
-  // Create job configuration. For all options, see
-  // https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#jobconfiguration
-  const jobConfig = {
-    // Specify a job configuration to set optional job resource properties.
-    configuration: {
-      query: queryJobConfig,
-    },
-  };
-
-  // Make API request.
-  const [job] = await bigquery.createJob(jobConfig);
-
-  const jobId = job.metadata.id;
-  const state = job.metadata.status.state;
-  console.log(`Job ${jobId} is currently in state ${state}`);
-}
-```
-
-### Python
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-from google.cloud import bigquery
-
-# Construct a BigQuery client object.
-client = bigquery.Client()
-
-job_config = bigquery.QueryJobConfig(
-    # Run at batch priority, which won't count toward concurrent rate limit.
-    priority=bigquery.QueryPriority.BATCH
-)
-
-sql = """
-    SELECT corpus
-    FROM `bigquery-public-data.samples.shakespeare`
-    GROUP BY corpus;
-"""
-
-# Start the query, passing in the extra configuration.
-query_job = client.query(sql, job_config=job_config)  # Make an API request.
-
-# Check on the progress by getting the job's updated state. Once the state
-# is `DONE`, the results are ready.
-query_job = typing.cast(
-    "bigquery.QueryJob",
-    client.get_job(
-        query_job.job_id, location=query_job.location
-    ),  # Make an API request.
-)
-
-print("Job {} is currently in state {}".format(query_job.job_id, query_job.state))
 ```
 
 ## 後續步驟

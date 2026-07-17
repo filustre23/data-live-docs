@@ -24,7 +24,7 @@ BigQuery 的「排程」頁面提供相關工具，可排定在 Managed Airflow 
 
 您在 BigQuery 中排定的 Airflow DAG 會在專案中一或多個 Managed Airflow 環境中執行。BigQuery 的「排程」頁面會彙整專案中所有 Airflow DAG 的資訊。
 
-在 DAG 執行期間，Airflow 會排程及執行 DAG 中的個別工作，並按照 DAG 定義的順序執行。在 BigQuery 的「排程」頁面中，您可以查看過去 DAG 執行的狀態、探索所有 DAG 執行作業和這些 DAG 執行作業中所有工作的詳細記錄，以及查看 DAG 的詳細資料。
+在 DAG 執行期間，Airflow 會排定並執行組成 DAG 的個別工作，順序由 DAG 定義。在 BigQuery 的「Scheduling」(排程) 頁面中，您可以查看過去 DAG 執行作業的狀態、瀏覽所有 DAG 執行作業和這些 DAG 執行作業中所有工作的詳細記錄，以及查看 DAG 的詳細資料。
 
 **注意：** 您無法在 BigQuery 中管理 Managed Airflow 環境。如要管理環境 (例如建立環境、為 DAG 檔案安裝依附元件、上傳、刪除或變更個別 DAG)，請使用 Managed Airflow。
 
@@ -38,12 +38,12 @@ BigQuery 的「排程」頁面提供相關工具，可排定在 Managed Airflow 
 
    **啟用 API 時所需的角色**
 
-   如要啟用 API，您需要具備服務使用情形管理員 IAM 角色 (`roles/serviceusage.serviceUsageAdmin`)，其中包含 `serviceusage.services.enable` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用情形管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
    [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=composer.googleapis.com&hl=zh-tw)
-2. 確認 Google Cloud 專案至少有一個 Managed Airflow 3 環境，且至少已上傳一個 DAG 檔案：
+2. 確認專案至少有一個 Managed Airflow 3 環境，且至少已上傳一個 DAG 檔案： Google Cloud
 
-* 如要開始使用 Airflow DAG，請按照「[在 Managed Airflow 3 中執行 Apache Airflow DAG](https://docs.cloud.google.com/composer/docs/composer-3/run-apache-airflow-dag?hl=zh-tw)」指南中的操作說明進行。在本指南中，您將建立具有預設設定的 Managed Airflow 3 環境、將 DAG 上傳至該環境，並確認 Airflow 是否執行 DAG。
+* 如要開始使用 Airflow DAG，請按照「[在 Managed Airflow 3 中執行 Apache Airflow DAG](https://docs.cloud.google.com/composer/docs/composer-3/run-apache-airflow-dag?hl=zh-tw)」指南中的操作說明進行。在本指南中，您將建立具有預設設定的 Managed Airflow 第 3 代環境、將 DAG 上傳至該環境，並確認 Airflow 是否執行 DAG。
 * 如需將 Airflow DAG 上傳至 Managed Airflow 3 環境的詳細操作說明，請參閱「[新增及更新 DAG](https://docs.cloud.google.com/composer/docs/composer-3/manage-dags?hl=zh-tw)」。
 * 如需建立 Managed Airflow 第 3 代環境的詳細操作說明，請參閱「[建立 Managed Airflow 環境](https://docs.cloud.google.com/composer/docs/composer-3/create-environments?hl=zh-tw)」。
 
@@ -52,7 +52,8 @@ BigQuery 的「排程」頁面提供相關工具，可排定在 Managed Airflow 
 如要取得排定 Airflow DAG 時間所需的權限，請要求管理員授予您專案的下列 IAM 角色：
 
 * 如要查看 Airflow DAG 及其詳細資料：[環境和 Storage 物件檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/composer?hl=zh-tw#composer.environmentAndStorageObjectViewer)  (`roles/composer.environmentAndStorageObjectViewer`)
-* 如要觸發及暫停 Airflow DAG，請使用「環境與 Storage 物件使用者」 (`roles/composer.environmentAndStorageObjectUser`)。
+* 如要觸發及暫停 Airflow DAG：
+  「環境與 Storage 物件使用者」 (`roles/composer.environmentAndStorageObjectUser`)
 
 如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
@@ -62,9 +63,9 @@ BigQuery 的「排程」頁面提供相關工具，可排定在 Managed Airflow 
 
 如要排定 Airflow DAG 的執行時間，您必須具備下列權限：
 
-* 如要查看 Airflow DAG 及其詳細資料：
+* 如要查看 Airflow DAG 及其詳細資料，請按照下列步驟操作：
   `composers.dags.list, composer.environments.list`
-* 如要觸發及暫停 Airflow DAG，請按照下列步驟操作：
+* 如要觸發及暫停 Airflow DAG：
   `composers.dags.list, composer.environments.list, composer.dags.execute`
 
 您或許還可透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)取得這些權限。
@@ -94,7 +95,7 @@ BigQuery 的「排程」頁面提供相關工具，可排定在 Managed Airflow 
    [前往「排程」頁面](https://console.cloud.google.com/bigquery/orchestration?hl=zh-tw)
 2. 按一下所選 DAG 的名稱。
 3. 在「DAG details」(DAG 詳細資料) 頁面上，選取「Details」(詳細資料) 分頁標籤。
-4. 如要查看過去的 DAG 執行作業，請選取「Runs」(執行作業) 分頁標籤。
+4. 如要查看過去的 DAG 執行作業，請選取「執行作業」分頁標籤。
 
    1. 選用：根據預設，「執行作業」分頁會顯示過去 10 天的 DAG 執行作業。如要依其他時間範圍篩選 DAG 執行作業，請在「10 days」(10 天) 下拉式選單中選取時間範圍，然後按一下「OK」(確定)。
    2. 選用：如要在所有 DAG 執行作業的清單中顯示其他資料欄和 DAG 執行作業詳細資料，請按一下「資料欄顯示選項」view\_column，然後選取資料欄並按一下「確定」。
@@ -142,11 +143,11 @@ BigQuery 的「排程」頁面提供相關工具，可排定在 Managed Airflow 
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-05 (世界標準時間)。
+上次更新時間：2026-07-16 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-05 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-16 (世界標準時間)。"],[],[]]

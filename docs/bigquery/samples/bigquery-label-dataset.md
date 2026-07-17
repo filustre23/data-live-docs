@@ -14,7 +14,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 如需包含這個程式碼範例的詳細說明文件，請參閱下列文章：
 
-* [將標籤新增至資源](https://docs.cloud.google.com/bigquery/docs/adding-labels?hl=zh-tw)
+* [為資源新增標籤](https://docs.cloud.google.com/bigquery/docs/adding-labels?hl=zh-tw)
 * [更新標籤](https://docs.cloud.google.com/bigquery/docs/updating-labels?hl=zh-tw)
 
 ## 程式碼範例
@@ -101,60 +101,6 @@ public class LabelDataset {
     }
   }
 }
-```
-
-### Node.js
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-// Import the Google Cloud client library
-const {BigQuery} = require('@google-cloud/bigquery');
-const bigquery = new BigQuery();
-
-async function labelDataset() {
-  // Updates a label on a dataset.
-
-  /**
-   * TODO(developer): Uncomment the following lines before running the sample
-   */
-  // const datasetId = "my_dataset";
-
-  // Retrieve current dataset metadata.
-  const dataset = bigquery.dataset(datasetId);
-  const [metadata] = await dataset.getMetadata();
-
-  // Add label to dataset metadata
-  metadata.labels = {color: 'green'};
-  const [apiResponse] = await dataset.setMetadata(metadata);
-
-  console.log(`${datasetId} labels:`);
-  console.log(apiResponse.labels);
-}
-```
-
-### Python
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-from google.cloud import bigquery
-
-# Construct a BigQuery client object.
-client = bigquery.Client()
-
-# TODO(developer): Set dataset_id to the ID of the dataset to fetch.
-# dataset_id = "your-project.your_dataset"
-
-dataset = client.get_dataset(dataset_id)  # Make an API request.
-dataset.labels = {"color": "green"}
-dataset = client.update_dataset(dataset, ["labels"])  # Make an API request.
-
-print("Labels added to {}".format(dataset_id))
 ```
 
 ## 後續步驟

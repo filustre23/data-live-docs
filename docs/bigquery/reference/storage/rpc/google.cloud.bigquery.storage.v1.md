@@ -244,7 +244,3 @@ Contains options specific to Avro Serialization.
 | `picos_timestamp_precision` | `PicosTimestampPrecision`  Optional. Set timestamp precision option. If not set, the default precision is microseconds. |
 
 ## PicosTimestampPrecision
-
-The precision of the timestamp value in the Avro message. This precision will **only** be applied to the column(s) with the `TIMESTAMP_PICOS` type.
-
-<

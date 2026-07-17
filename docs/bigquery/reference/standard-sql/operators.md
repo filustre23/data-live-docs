@@ -525,6 +525,5 @@ value.
 **Example**
 
 ```
-SELECT
-  DATE "2021-04-20" + INTERVAL
+SELECT</
 ```

@@ -490,5 +490,4 @@ that can be queued per project.
   + **使用模擬測試模式**。以[模擬測試模式](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#dry-run)執行查詢，估算讀取的位元組數，但不會實際處理查詢。
   + **預覽資料表資料。**如要試用或探索資料，而非執行查詢，請使用 BigQuery 的[資料表預覽功能](https://docs.cloud.google.com/bigquery/docs/best-practices-costs?hl=zh-tw#preview-data)預覽資料表資料。
   + **使用[快取查詢結果](https://docs.cloud.google.com/bigquery/docs/cached-results?hl=zh-tw)。**
-    所有查詢結果 (包括互動式與批次查詢) 皆會以快取方式存放在暫時性資料表中約 24 小時，但也有一些[例外狀況](https://docs.cloud.google.com/bigquery/docs/cached-results?hl=zh-tw#cache-exceptions)。執行快取查詢時，仍會計入並行查詢限制，但使用快取結果的查詢作業因為 BigQuery 不需計算結果集，執行速度會比未使用快取結果的查詢作業快上許多。
-  + **使用 BigQuery BI Engine。**如果您在使用商業智慧 (BI) 工具建立資訊主頁時遇到這個錯誤，且該資訊主頁會查詢 BigQuery 中的資料，建議您使用
+    所有查詢結果 (包括互動式與批次查詢) 皆會以快取方式存放在暫時性資料表中約 24 小時，但也有一些[例外狀況](https://docs.cloud.google.com/bigquery/docs/cached-results?hl=zh-tw#cache-exceptions)。執行快取查詢時，仍會計入並行查詢限制，但使用快取結果的

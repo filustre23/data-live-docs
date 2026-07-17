@@ -8,7 +8,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 在查詢附加工作中放寬資料欄 透過集合功能整理內容 你可以依據偏好儲存及分類內容。
 
-在查詢附加工作中，將必要資料欄變更為可為空值的資料欄。
+在查詢附加工作中，將資料欄從必要變更為可為空值。
 
 ## 深入探索
 
@@ -157,130 +157,6 @@ public class RelaxTableQuery {
     }
   }
 }
-```
-
-### Node.js
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-const {BigQuery} = require('@google-cloud/bigquery');
-const bigquery = new BigQuery();
-
-async function relaxColumnQueryAppend() {
-  // Change required to null in query append job
-
-  /**
-   * TODO(developer): Uncomment the following lines before running the sample.
-   */
-  // const projectId = "my_project"
-  // const datasetId = "my_dataset"
-  // const tableId = "my_table"
-
-  // Retrieve the destination table and checks the number of required fields.
-  const dataset = await bigquery.dataset(datasetId);
-  const table = await dataset.table(tableId);
-  const [metaData] = await table.getMetadata();
-
-  const requiredFields = metaData.schema.fields.filter(
-    ({mode}) => mode === 'REQUIRED',
-  ).length;
-
-  console.log(`${requiredFields} fields in the schema are required.`);
-
-  // Create destination table reference
-  const tableRef = {
-    projectId,
-    tableId,
-    datasetId,
-  };
-
-  /* Configure the query to append the results to a destination table,
-   * allowing field relaxation. In this example, the existing table
-   * contains 'age' as a required column.
-   *
-   * For all options, see https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationQuery
-   */
-  const queryJobConfig = {
-    query: `SELECT age FROM \`${projectId}.${datasetId}.${tableId}\``,
-    destinationTable: tableRef,
-    schemaUpdateOptions: ['ALLOW_FIELD_RELAXATION'],
-    writeDisposition: ['WRITE_APPEND'],
-    useLegacySql: false,
-  };
-
-  // Configure the job.
-  const jobConfig = {
-    configuration: {
-      query: queryJobConfig,
-    },
-  };
-
-  // Start the query, passing in the extra configuration.
-  const response = await bigquery.createJob(jobConfig);
-  const job = response[0];
-
-  // Wait for job to complete.
-  await job.getQueryResults(job);
-
-  // Check the updated number of required fields.
-  const updatedTable = await dataset.table(tableId);
-  const [updatedMetaData] = await updatedTable.getMetadata();
-
-  const updatedRequiredFields = updatedMetaData.schema.fields.filter(
-    ({mode}) => mode === 'REQUIRED',
-  ).length;
-
-  console.log(
-    `${updatedRequiredFields} fields in the schema are now required.`,
-  );
-}
-```
-
-### Python
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-from google.cloud import bigquery
-
-# Construct a BigQuery client object.
-client = bigquery.Client()
-
-# TODO(developer): Set table_id to the ID of the destination table.
-# table_id = "your-project.your_dataset.your_table_name"
-
-# Retrieves the destination table and checks the number of required fields.
-table = client.get_table(table_id)  # Make an API request.
-original_required_fields = sum(field.mode == "REQUIRED" for field in table.schema)
-
-# In this example, the existing table has 2 required fields.
-print("{} fields in the schema are required.".format(original_required_fields))
-
-# Configures the query to append the results to a destination table,
-# allowing field relaxation.
-job_config = bigquery.QueryJobConfig(
-    destination=table_id,
-    schema_update_options=[bigquery.SchemaUpdateOption.ALLOW_FIELD_RELAXATION],
-    write_disposition=bigquery.WriteDisposition.WRITE_APPEND,
-)
-
-# Start the query, passing in the extra configuration.
-client.query_and_wait(
-    # In this example, the existing table contains 'full_name' and 'age' as
-    # required columns, but the query results will omit the second column.
-    'SELECT "Beyonce" as full_name;',
-    job_config=job_config,
-)  # Make an API request and wait for job to complete
-
-# Checks the updated number of required fields.
-table = client.get_table(table_id)  # Make an API request.
-current_required_fields = sum(field.mode == "REQUIRED" for field in table.schema)
-print("{} fields in the schema are now required.".format(current_required_fields))
 ```
 
 ## 後續步驟

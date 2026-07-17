@@ -24,10 +24,10 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 * 確認您已完成[啟用 BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service?hl=zh-tw)的一切必要動作。
 * 選擇現有的 BigQuery 資料集，或[建立新的資料集](https://docs.cloud.google.com/bigquery/docs/datasets?hl=zh-tw)來儲存資料。
-* 選擇現有的 BigQuery 資料表，或[建立新的資料移轉目的地資料表](https://docs.cloud.google.com/bigquery/docs/tables?hl=zh-tw#create_an_empty_table_with_a_schema_definition)，並指定結構定義。目的地資料表必須遵循[資料表命名規則](https://docs.cloud.google.com/bigquery/docs/tables?hl=zh-tw#table_naming)。目的地資料表名稱也支援[參數](https://docs.cloud.google.com/bigquery/docs/blob-storage-transfer-parameters?hl=zh-tw)。您可以建立 BigQuery 資料表或[建立 Iceberg 受管理資料表](https://docs.cloud.google.com/bigquery/docs/iceberg-tables?hl=zh-tw#create-iceberg-tables)。
+* 選擇現有的 BigQuery 資料表，或[建立新的資料移轉目的地資料表](https://docs.cloud.google.com/bigquery/docs/tables?hl=zh-tw#create_an_empty_table_with_a_schema_definition)，並指定結構定義。目的地資料表必須遵循[資料表命名規則](https://docs.cloud.google.com/bigquery/docs/tables?hl=zh-tw#table_naming)。目的地資料表名稱也支援[參數](https://docs.cloud.google.com/bigquery/docs/blob-storage-transfer-parameters?hl=zh-tw)。您可以建立 BigQuery 資料表，或[建立 Iceberg 受管理資料表](https://docs.cloud.google.com/bigquery/docs/iceberg-tables?hl=zh-tw#create-iceberg-tables)。
 * 擷取 Blob 儲存體帳戶名稱、容器名稱、資料路徑 (選用) 和 SAS 權杖。如要瞭解如何使用共用存取簽章 (SAS) 授予 Blob 儲存空間的存取權，請參閱「[共用存取簽章 (SAS)](https://docs.cloud.google.com/bigquery/docs/blob-storage-transfer-intro?hl=zh-tw#shared-access-signature)」。
 * 如果使用 Azure Storage 防火牆限制 Azure 資源的存取權，請[將 BigQuery 資料移轉服務工作人員新增至允許的 IP 清單](https://docs.cloud.google.com/bigquery/docs/blob-storage-transfer-intro?hl=zh-tw#ip_restrictions)。
-* 如果您打算指定客戶自行管理的加密金鑰 (CMEK)，請確保[服務帳戶具有加密和解密權限](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw#grant_permission)，且您擁有使用 CMEK 時所需的 [Cloud KMS 金鑰資源 ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw#key_resource_id)。如要瞭解 CMEK 如何與 BigQuery 資料移轉服務搭配運作，請參閱[指定移轉作業加密金鑰](#CMEK)。
+* 如果您打算指定客戶管理的加密金鑰 (CMEK)，請確保[服務帳戶具有加密和解密權限](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw#grant_permission)，且您擁有使用 CMEK 時所需的 [Cloud KMS 金鑰資源 ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw#key_resource_id)。如要瞭解 CMEK 如何與 BigQuery 資料移轉服務搭配運作，請參閱[指定移轉作業加密金鑰](#CMEK)。
 
 ## 所需權限
 
@@ -35,7 +35,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### 必要的 BigQuery 角色
 
-如要取得建立 BigQuery 資料移轉服務資料移轉作業所需的權限，請要求系統管理員在專案中授予您 [BigQuery 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.admin)  (`roles/bigquery.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得建立 BigQuery 資料移轉服務資料移轉作業所需的權限，請要求管理員在專案中授予您 [BigQuery 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.admin)  (`roles/bigquery.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
 這個預先定義的角色具備建立 BigQuery 資料移轉服務資料移轉作業所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
@@ -59,7 +59,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### 必要的 Blob Storage 角色
 
-如要瞭解在 Blob 儲存空間中啟用資料移轉所需的權限，請參閱「[共用存取簽章 (SAS)](https://docs.cloud.google.com/bigquery/docs/blob-storage-transfer-intro?hl=zh-tw#shared-access-signature)」。
+如要瞭解在 Blob 儲存空間中啟用資料移轉作業所需的權限，請參閱「[共用存取簽章 (SAS)](https://docs.cloud.google.com/bigquery/docs/blob-storage-transfer-intro?hl=zh-tw#shared-access-signature)」。
 
 ## 限制
 
@@ -94,7 +94,7 @@ Blob 儲存空間資料移轉作業有下列限制：
 
      + 在「Dataset」(資料集) 部分，選取您為了儲存資料而建立的資料集。
      + 如要移轉至 BigQuery 資料表，請選取「Native table」(原生資料表)。
-     + 如要移轉至 Iceberg 代管資料表，請選取「Apache Iceberg」。
+     + 如要移轉至 Iceberg 代管資料表，請選取「Iceberg Managed」。
    * 在「Data source details」(資料來源詳細資料) 部分執行下列操作：
 
      + 在「Destination table」(目的地資料表)，輸入您為了在 BigQuery 儲存資料而建立的資料表名稱。目的地資料表名稱支援[參數](https://docs.cloud.google.com/bigquery/docs/blob-storage-transfer-parameters?hl=zh-tw)。
@@ -241,4 +241,5 @@ public class CreateAzureBlobStorageTransfer {
   public static void createAzureBlobStorageTransfer(
       String projectId, String displayName, String datasetId, Map<String, Value> params)
       throws IOException {
+    <
 ```

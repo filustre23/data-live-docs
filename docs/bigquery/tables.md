@@ -55,7 +55,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 * `bigquery.tables.getData`
   如果您要將查詢結果儲存為資料表，請在查詢參照的所有資料表和檢視區塊上執行這項操作。
 * `bigquery.jobs.create`
-  專案，如果您是透過載入資料或將查詢結果儲存至資料表來建立資料表。
+  專案，前提是您要透過載入資料或將查詢結果儲存至資料表的方式建立資料表。
 * `bigquery.tables.updateData`
   如果您要使用查詢結果附加或覆寫資料表，就需要這個權限。
 
@@ -68,7 +68,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 在 BigQuery 中建立資料表時，每個資料集裡的資料表名稱不得重複。資料表名稱可以：
 
 * 包含的字元總計最多 1,024 個 UTF-8 位元組。
-* 包含類別 L (字母)、M (標記)、N (數字)、Pc (連接符，包括底線)、Pd (破折號)、Zs (空格) 的 Unicode 字元。詳情請參閱「[一般類別](https://wikipedia.org/wiki/Unicode_character_property#General_Category)」。
+* 包含類別 L (字母)、M (符號)、N (數字)、Pc (連接符，包括底線)、Pd (破折號)、Zs (空格) 的 Unicode 字元。詳情請參閱「[一般類別](https://wikipedia.org/wiki/Unicode_character_property#General_Category)」。
 
 以下都是有效的資料表名稱範例：`table 01`、`ग्राहक`、`00_お客様`、`étudiant-01`。
 
@@ -94,7 +94,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 * 使用用戶端程式庫。
 * 從查詢結果建立。
 * 定義參照外部資料來源的資料表。
-* 在載入資料時建立。
+* 載入資料時建立。
 * 使用[`CREATE TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#creating_a_new_table)資料定義語言 (DDL) 陳述式。
 
 ### 建立具有結構定義的空白資料表
@@ -461,11 +461,11 @@ resource "google_project_iam_member" "service_account_access" {
    ```
    mkdir DIRECTORY && cd DIRECTORY && touch main.tf
    ```
-2. 如果您正在學習教學課程，可以複製每個章節或步驟中的程式碼範例。
+2. 如果您正在學習教學課程，可以複製每個章節或步驟中的範例程式碼。
 
-   將程式碼範例複製到新建立的 `main.tf` 中。
+   將範例程式碼複製到新建立的 `main.tf` 中。
 
-   視需要從 GitHub 複製程式碼。如果 Terraform 代码片段是端對端解決方案的一部分，建議您使用這個方法。
+   視需要從 GitHub 複製程式碼。如果 Terraform 程式碼片段是端對端解決方案的一部分，建議您使用這種做法。
 3. 查看並修改範例參數，套用至您的環境。
 4. 儲存變更。
 5. 初始化 Terraform。每個目錄只需執行一次這項操作。
@@ -822,7 +822,7 @@ public class CreateTableWithoutSchema {
 10. 如要更新查詢設定，請按一下「儲存」。
 11. 按一下「執行」。這會建立一個查詢工作，將查詢結果寫入您指定的資料表。
 
-如果您在執行查詢前忘記指定目的地資料表，也可以按一下編輯器上方的 [[Save Results] (儲存結果)](#save-query-results) 按鈕，將快取結果資料表複製至永久資料表。
+如果您在執行查詢前忘記指定目標資料表，也可以按一下編輯器上方的 [[Save Results] (儲存結果)](#save-query-results) 按鈕，將快取結果資料表複製至永久資料表。
 
 ### SQL
 
@@ -860,10 +860,10 @@ public class CreateTableWithoutSchema {
 
    選用：提供 `--location` 旗標，並將值設為您的[位置](https://docs.cloud.google.com/bigquery/docs/dataset-locations?hl=zh-tw)。
 
-   如要控管現有目的地資料表的寫入配置，請指定以下其中一種選用旗標：
+   如要控管現有目標資料表的寫入配置，請指定以下其中一種選用旗標：
 
-   * `--append_table`：如果目的地資料表已存在，查詢結果會附加至該資料表。
-   * `--replace`：如果目的地資料表已存在，查詢結果會覆寫該資料表。
+   * `--append_table`：如果目標資料表已存在，查詢結果會附加至該資料表。
+   * `--replace`：如果目標資料表已存在，查詢結果會覆寫該資料表。
 
      ```
      bq --location=location query \
@@ -921,7 +921,7 @@ public class CreateTableWithoutSchema {
      number DESC'
      ```
 
-     輸入下列指令，將查詢結果附加至 `mydataset` 中名為 `mytable` 的目標資料表。該資料集位於 `my-other-project`，而非預設專案。指令使用 `--append_table` 旗標將查詢結果附加至目的地資料表。
+     輸入下列指令，將查詢結果附加至 `mydataset` 中名為 `mytable` 的目標資料表。該資料集位於 `my-other-project`，而非預設專案。指令使用 `--append_table` 旗標將查詢結果附加至目標資料表。
 
      ```
      bq query \
@@ -1172,7 +1172,7 @@ print("Query results loaded to the table {}".format(table_id))
 
 ## 控管資料表的存取權
 
-如要設定資料表和檢視表的存取權，您可以為下列層級的實體授予 IAM 角色，這些層級會依允許的資源範圍列出 (從最大到最小)：
+如要設定資料表和檢視表的存取權，請在下列層級為實體授予 IAM 角色。這些層級會依允許的資源範圍列出 (從最大到最小)：
 
 * [Google Cloud 資源階層](https://docs.cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy?hl=zh-tw)中的較高層級，例如專案、資料夾或機構層級
 * 資料集層級
@@ -1180,11 +1180,11 @@ print("Query results loaded to the table {}".format(table_id))
 
 您也可以使用下列方法，限制資料表中的資料存取權：
 
-* [資料欄層級安全防護](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro?hl=zh-tw)
-* [資料欄資料遮蓋](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro?hl=zh-tw)
+* [資料欄層級安全防護機制](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro?hl=zh-tw)
+* [資料欄遮蓋](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro?hl=zh-tw)
 * [資料列層級安全性](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro?hl=zh-tw)
 
-透過 IAM 保護的任何資源，存取權都是累加的。舉例來說，如果實體沒有專案等高層級的存取權，您可以授予實體資料集層級的存取權，這樣實體就能存取資料集中的資料表和檢視區塊。同樣地，如果實體沒有高層級或資料集層級的存取權，您可以授予實體資料表或檢視表層級的存取權。
+存取受 IAM 保護的資源時，存取權是累加的。舉例來說，如果實體沒有專案等高層級的存取權，您可以在資料集層級授予實體存取權，這樣實體就能存取資料集中的資料表和檢視區塊。同樣地，如果實體沒有高層級或資料集層級的存取權，您可以在資料表或檢視區塊層級授予實體存取權。
 
 在[Google Cloud資源階層](https://docs.cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy?hl=zh-tw)中的較高層級 (例如專案、資料夾或機構層級) 授予 IAM 角色，可讓實體存取更多資源。舉例來說，在專案層級將特定角色授予實體，可讓該實體擁有適用於專案中所有資料集的權限。
 
@@ -1289,5 +1289,10 @@ print("Query results loaded to the table {}".format(table_id))
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
-import
+import (
+	"context"
+	"fmt"
+	"io"
+
+	"cloud.google.com/go/bigquery"
 ```

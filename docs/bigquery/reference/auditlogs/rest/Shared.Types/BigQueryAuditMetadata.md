@@ -241,4 +241,4 @@ Job configuration. See the [Jobs](https://cloud.google.com/bigquery/docs/referen
 | `reservation` | `string`  User specified reservation for the job. |
 | Union field `config`. Job configuration information. `config` can be only one of the following: | |
 | `queryConfig` | `object (BigQueryAuditMetadata.JobConfig.Query)`  Query job information. |
-| `loadConfig` | `object (BigQueryAuditMetadata.JobConfig.Load)`  Load job information.</ |
+| `loadConfig` |

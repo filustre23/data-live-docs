@@ -16,7 +16,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 探索 Cloud Storage 資料並匯入目錄
 
-本文說明如何使用 Knowledge Catalog 自動探索功能。這項 BigQuery 功能可掃描 Cloud Storage 值區中的資料，然後擷取中繼資料並編入目錄。在探索掃描作業中，自動探索功能會為結構化資料建立 BigLake 或外部資料表，並為非結構化資料建立物件資料表。這個集中式資料表資料可簡化 AI 輔助的資料洞察、資料安全性及治理。
+本文說明如何使用 Knowledge Catalog 自動探索功能。這項 BigQuery 功能可掃描 Cloud Storage 值區中的資料，然後擷取中繼資料並編入目錄。在探索掃描作業中，自動探索功能會為結構化資料建立 BigLake 或外部資料表，並為非結構化資料建立物件資料表。這個集中式資料表可簡化 AI 輔助的資料洞察、資料安全性及治理。
 
 如要自動探索 Cloud Storage 資料，請建立並執行探索掃描作業。
 
@@ -33,7 +33,7 @@ Google uses AI technology to translate content into your preferred language. AI 
   [非 BigLake 外部](https://docs.cloud.google.com/bigquery/docs/external-tables?hl=zh-tw) 或 [BigLake 物件](https://docs.cloud.google.com/bigquery/docs/object-table-introduction?hl=zh-tw)
   資料表。
 
-如果是圖片和影片等非結構化資料，探索掃描會偵測並註冊共用相同資料檔案格式的檔案群組。檔案必須位於包含相同檔案格式的資料夾中。舉例來說，`gs://images/group1` 只能包含 GIF 圖片，`gs://images/group2` 只能包含 JPEG 圖片，探索掃描才能偵測及註冊兩個 BigLake 物件資料表。
+如果是圖片和影片等非結構化資料，探索掃描作業會偵測並註冊共用相同資料檔案格式的檔案群組。檔案必須位於包含相同檔案格式的資料夾中。舉例來說，`gs://images/group1` 只能包含 GIF 圖片，而 `gs://images/group2` 只能包含 JPEG 圖片，探索掃描才能偵測及註冊兩個 BigLake 物件表格。
 
 如果是 Avro 等結構化資料，探索掃描會將檔案群組註冊為 BigLake 外部資料表，且只會偵測位於含有相同資料格式和相容結構定義的資料夾中的檔案。
 
@@ -51,7 +51,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 * 圖片 (例如 JPEG、PNG 和 BMP)
 * 文件 (例如 PDF、投影片簡報和文字報表)
-* 音訊或視訊 (例如 WAV、MP3 和 MP4)
+* 音訊或影片 (例如 WAV、MP3 和 MP4)
 
 **注意：** 探索掃描不支援 Apache Iceberg 和 Delta Lake 資料表格式。
 
@@ -74,15 +74,15 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 **非結構化資料**
 
-如果是物件資料表，壓縮作業主要透過 [Cloud Storage 物件中繼資料](https://docs.cloud.google.com/storage/docs/metadata?hl=zh-tw)管理，而非 BigQuery 內部設定。
+如果是物件資料表，壓縮作業主要是透過 [Cloud Storage 物件中繼資料](https://docs.cloud.google.com/storage/docs/metadata?hl=zh-tw)管理，而非 BigQuery 內部設定。
 
 * 標準中繼資料壓縮：如果檔案使用標準的 .gz 或 .bz2 副檔名，BigQuery 會自動辨識以 gzip 和 bzip2 壓縮的檔案。
-* Content-Encoding：您可以在 Cloud Storage 中使用 [Content-Encoding gzip](https://docs.cloud.google.com/storage/docs/metadata?hl=zh-tw#content-encoding) 中繼資料，提供壓縮檔案，同時保留原始內容類型。
+* Content-Encoding：您可以在 Cloud Storage 中使用 [Content-Encoding gzip](https://docs.cloud.google.com/storage/docs/metadata?hl=zh-tw#content-encoding) 中繼資料，在提供壓縮檔案的同時，維持檔案的原始內容類型。
 * 媒體內部壓縮：系統原生支援本質上經過壓縮的格式 (例如圖片的 JPEG、音訊的 MP3、影片的 MP4)。
 
 如要瞭解探索掃描支援的資料表數量上限，請參閱「[配額與限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#dataplex-discovery)」。
 
-系統會在 BigQuery 中將探索到的資料表註冊為 BigLake 外部資料表、BigLake 物件資料表或外部資料表，讓這些資料表可供 BigQuery 分析。此外，系統也會啟用 BigLake 資料表和物件資料表的 Metadata 快取功能。所有 BigLake 資料表都會自動擷取至 Knowledge Catalog，供您搜尋及探索。
+探索到的資料表會以 BigLake 外部資料表、BigLake 物件資料表或外部資料表的形式，在 BigQuery 中註冊。這樣一來，他們就能在 BigQuery 中分析資料。BigLake 資料表和物件資料表的中繼資料快取功能也會啟用。所有 BigLake 資料表都會自動擷取至 Knowledge Catalog，供您搜尋及探索。
 
 ## 事前準備
 
@@ -90,11 +90,12 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 **啟用 API 時所需的角色**
 
-如要啟用 API，您需要具備服務使用情形管理員 IAM 角色 (`roles/serviceusage.serviceUsageAdmin`)，其中包含 `serviceusage.services.enable` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用情形管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
 [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=dataplex.googleapis.com&hl=zh-tw)
 
-**注意：** 下一節列出的角色適用於標準探索掃描。如要使用非結構化資料語意推論功能，從檔案中擷取 AI 輔助洞察資料，您也必須套用「[使用非結構化資料的資料洞察](https://docs.cloud.google.com/dataplex/docs/use-data-insights-unstructured-data?hl=zh-tw#roles-permissions)」一文列出的其他角色。
+**注意：** 下一節列出的角色適用於標準探索掃描。
+如要使用非結構化資料語意推論功能，從檔案中擷取 AI 輔助洞察資料，您也必須套用「[使用非結構化資料的資料洞察](https://docs.cloud.google.com/dataplex/docs/use-data-insights-unstructured-data?hl=zh-tw#roles-permissions)」一文列出的其他角色。
 
 ### Knowledge Catalog 服務帳戶的必要角色
 
@@ -110,8 +111,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 **重要事項：**您必須將這些角色授予 Knowledge Catalog 服務帳戶，*而非*使用者帳戶。如果未將角色授予正確的主體，可能會導致權限錯誤。
 
-* [Dataplex Discovery 服務代理](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex?hl=zh-tw#dataplex.discoveryServiceAgent)  (`roles/dataplex.discoveryServiceAgent`)
-  在儲存空間 bucket 上
+* 儲存空間 bucket 的 [Dataplex Discovery 服務代理](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex?hl=zh-tw#dataplex.discoveryServiceAgent)  (`roles/dataplex.discoveryServiceAgent`)
 * 使用者專案的 [Dataplex Discovery 發布服務代理](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex?hl=zh-tw#dataplex.discoveryPublishingServiceAgent)  (`roles/dataplex.discoveryPublishingServiceAgent`)
 * 建立 BigLake 資料表：
   BigQuery 連線上的 [Dataplex Discovery BigLake 發布服務代理](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex?hl=zh-tw#dataplex.discoveryBigLakePublishingServiceAgent)  (`roles/dataplex.discoveryBigLakePublishingServiceAgent`)
@@ -198,13 +198,13 @@ Google uses AI technology to translate content into your preferred language. AI 
   在專案或 DataScan 資源中
 * 查看 DataScan 詳細資料 (不含結果)：
   `dataplex.datascans.get`
-  投影機上的 DataScan 資源
+  在投影機上顯示 DataScan 資源
 * 查看 DataScan 詳細資料，包括結果：
   `dataplex.datascans.getData`
   在專案或 DataScan 資源中
 * 列出 DataScan：
   `dataplex.datascans.list`
-  專案或 DataScan 資源
+  在專案或 DataScan 資源中
 * 執行 DataScan：
   `dataplex.datascans.run`
   專案或 DataScan 資源
@@ -242,34 +242,34 @@ Google uses AI technology to translate content into your preferred language. AI 
    * **包含**：如果只應掃描部分資料，請提供與要納入的物件相符的 glob 模式清單。
    * **排除**：提供與要排除的物件相符的 glob 模式清單。
 
-   舉例來說，如要從探索掃描中排除 `gs://test_bucket/foo/..`，請輸入 `**/foo/**` 做為排除路徑。引號會導致錯誤，請務必輸入 `**/foo/**`，而非 `"**/foo/**"`。
+   舉例來說，如要從探索掃描中排除 `gs://test_bucket/foo/..`，請輸入 `**/foo/**` 做為排除路徑。引號會導致錯誤。請務必輸入 `**/foo/**`，而非 `"**/foo/**"`。
 
    如果您同時提供納入模式和排除模式，系統會先套用排除模式。
 9. 在「非結構化資料選項」部分，選取「啟用語意推論」。
 
    如要在 Knowledge Catalog 中查看非結構化資料的資料洞察，就必須選取這個選項。詳情請參閱「[關於非結構化資料的資料洞察](https://docs.cloud.google.com/dataplex/docs/data-insights-unstructured-data?hl=zh-tw)」。
-10. 選用：在「專案」中，選取包含探索掃描所建立 BigLake 外部或非 BigLake 外部資料表的 BigQuery 資料集專案。如果未提供，系統會在包含 Cloud Storage 值區的專案中建立資料集。
+10. 選用步驟：在「專案」中，選取包含探索掃描所建立 BigLake 外部或非 BigLake 外部資料表的 BigQuery 資料集專案。如未提供，系統會在包含 Cloud Storage bucket 的專案中建立資料集。
 11. 在「位置類型」中，選取「區域」或「多區域」(視可用選項而定)，建立 BigQuery 發布資料集。
-12. 如要從掃描的資料建立 BigLake 資料表，請在「連線 ID」欄位中提供 Google Cloud 資源連線 ID。詳情請參閱 [Google Cloud BigQuery 中的資源連線](https://docs.cloud.google.com/bigquery/docs/connections-api-intro?hl=zh-tw#cloud-resource-connections)。
+12. 如要從掃描的資料建立 BigLake 資料表，請在「連線 ID」欄位中提供 Google Cloud 資源連線 ID。詳情請參閱 [Google Cloud BigQuery 中的資源連結](https://docs.cloud.google.com/bigquery/docs/connections-api-intro?hl=zh-tw#cloud-resource-connections)。
 
     您可以在與 BigQuery 資料集位置相同的位置建立新的連線 ID，[與 Cloud Storage 值區位置相容](https://docs.cloud.google.com/bigquery/docs/external-tables?hl=zh-tw#storage-location-considerations)。
 
-    如果未提供資源連線 ID，探索掃描會建立[非 BigLake 外部資料表](https://docs.cloud.google.com/bigquery/docs/external-data-sources?hl=zh-tw#non-biglake-tables)。如要瞭解這兩種外部資料表類型的差異，以及探索服務可能選擇其中一種的原因，請參閱[行為差異比較](https://docs.cloud.google.com/bigquery/docs/external-data-sources?hl=zh-tw#external_data_source_feature_comparison)。
+    如未提供資源連線 ID，探索掃描會建立[非 BigLake 外部資料表](https://docs.cloud.google.com/bigquery/docs/external-data-sources?hl=zh-tw#non-biglake-tables)。如要瞭解這些外部資料表類型的差異，以及探索服務可能選擇其中一種的原因，請參閱[行為差異比較](https://docs.cloud.google.com/bigquery/docs/external-data-sources?hl=zh-tw#external_data_source_feature_comparison)。
 13. 在「探索頻率」部分，設定探索掃描的執行時間：
 
-    * **重複**：掃描作業會依預先定義的時間表執行。提供掃描開始時間、執行掃描的日期和頻率 (例如每小時)。
+    * **重複**：掃描會依預先決定的時間表執行。提供掃描開始時間、執行掃描的日期和頻率 (例如每小時)。
     * **隨選**：掃描作業會視需要執行。
-14. 選用：在「JSON 或 CSV 規格」部分，指定掃描應如何處理 JSON 和 CSV 檔案。按一下「JSON 或 CSV 規格」。
+14. 選用：在「JSON or CSV specifications」(JSON 或 CSV 規格) 區段中，指定掃描作業應如何處理 JSON 和 CSV 檔案。按一下「JSON 或 CSV 規格」。
 
-    1. 如要設定 JSON 選項，請選取「啟用 JSON 剖析選項」。
-       * **停用類型推斷**：探索掃描作業是否應在掃描資料時推斷資料類型。如果停用 JSON 資料的類型推斷功能，所有資料欄都會註冊為原始類型，例如字串、數字或布林值。
+    1. 如要設定 JSON 選項，請選取「Enable JSON parsing options」(啟用 JSON 剖析選項)。
+       * **停用型別推斷**：探索掃描作業是否應在掃描資料時推斷資料型別。如果停用 JSON 資料的型別推斷功能，所有資料欄都會註冊為原始型別，例如字串、數字或布林值。
        * **編碼格式**：資料的字元編碼，例如 UTF-8、US-ASCII 或 ISO-8859-1。如未指定值，系統會預設使用 UTF-8。
     2. 如要設定 CSV 選項，請勾選「啟用 CSV 剖析選項」。
-       * **停用類型推斷**：探索掃描作業是否應在掃描資料時推斷資料類型。如果停用 CSV 資料的類型推斷功能，所有資料欄都會註冊為字串。
+       * **停用型別推斷**：探索掃描作業是否應在掃描資料時推斷資料型別。如果停用 CSV 資料的型別推斷功能，所有資料欄都會註冊為字串。
        * **標題列**：標題列數，可以是 `0` 或 `1`。
          如果指定值 `0`，探索掃描會推斷標題，並從檔案中擷取資料欄名稱。預設值為 `0`。
-       * **資料欄分隔符號**：用於分隔值的字元。請提供單一字元、`\r` (回車字元) 或 `\n` (換行)。預設值為逗號 (`,`)。
-       * **編碼格式**：資料的字元編碼，例如 `UTF-8`、`US-ASCII` 或 `ISO-8859-1`。如果未指定值，系統會預設使用 UTF-8。
+       * **資料欄分隔符號字元**：用來分隔值的字元。請提供單一字元，即 `\r` (回車) 或 `\n` (換行)。預設值為半形逗號 (`,`)。
+       * **編碼格式**：資料的字元編碼，例如 `UTF-8`、`US-ASCII` 或 `ISO-8859-1`。如未指定值，系統會預設使用 UTF-8。
 15. 按一下「建立」 (排定掃描時間)、「立即執行」 (隨選掃描) 或「建立並執行」 (一次性掃描)。
 
     系統會按照您設定的時間表執行排定掃描作業。
@@ -341,7 +341,7 @@ gcloud dataplex datascans create data-discovery --location=LOCATION
 
 ## 管理已發布的 BigLake 資料表
 
-探索掃描作業會在 BigQuery 中建立及管理已發布的 BigLake 資料表。根據預設，每當執行排程或隨選掃描作業時，探索掃描作業都會處理新資料探索、結構定義推論和結構定義演進。如要指出中繼資料是由掃描作業管理，掃描作業會發布標籤設為 `discovery-managed` 的資料表 `metadata-managed-mode`。
+探索掃描作業會在 BigQuery 中建立及管理已發布的 BigLake 資料表。根據預設，每次執行排定或隨選掃描時，探索掃描都會處理新資料探索、結構定義推論和結構定義演進。如要指出中繼資料是由掃描作業管理，掃描作業會發布標籤設為 `discovery-managed` 的資料表 `metadata-managed-mode`。
 
 如要自行管理結構定義和其他中繼資料 (例如 CSV 或 JSON 選項)，請將 `metadata-managed-mode` 標籤設為 `user_managed`。這樣下次執行探索掃描時，結構定義就不會變更。如果探索掃描推斷的結構定義不正確，或與特定資料表的預期結構定義不同，這個方法就非常實用。將 `metadata-managed-mode` 標籤設為 `user_managed`，即可降低費用。
 
@@ -390,7 +390,7 @@ gcloud dataplex datascans create data-discovery --location=LOCATION
       **注意：** 如果 **metadata-managed-mode** 標籤設為 `user_managed`，探索掃描不會覆寫資料表的中繼資料，因此資料表不會遭到刪除。
 7. 按一下「執行」。探索掃描作業會視需求執行。
 
-探索掃描執行完畢後，BigLake 資料表會從 BigQuery 中刪除，且無法透過 Spark 列出或查詢。
+探索掃描作業執行完畢後，BigLake 資料表會在 BigQuery 中刪除，且無法透過 Spark 列出或查詢。
 
 ## 依需求執行探索掃描
 
@@ -552,7 +552,7 @@ gcloud dataplex datascans update data-discovery SCAN_ID --location=LOCATION --de
 
 ## 刪除探索掃描作業
 
-如要刪除探索掃描作業，請選取下列其中一個選項。
+如要刪除探索掃描，請選取下列其中一個選項。
 
 ### 控制台
 
@@ -585,11 +585,11 @@ gcloud dataplex datascans delete SCAN_ID --location=LOCATION --async
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-05 (世界標準時間)。
+上次更新時間：2026-07-16 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-05 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-16 (世界標準時間)。"],[],[]]

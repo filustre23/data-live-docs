@@ -120,34 +120,6 @@ public class CreateTableCmek {
 }
 ```
 
-### Python
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-from google.cloud import bigquery
-
-client = bigquery.Client()
-
-# TODO(dev): Change table_id to the full name of the table you want to create.
-table_id = "your-project.your_dataset.your_table_name"
-
-# Set the encryption key to use for the table.
-# TODO: Replace this key with a key you have created in Cloud KMS.
-kms_key_name = "projects/your-project/locations/us/keyRings/test/cryptoKeys/test"
-
-table = bigquery.Table(table_id)
-table.encryption_configuration = bigquery.EncryptionConfiguration(
-    kms_key_name=kms_key_name
-)
-table = client.create_table(table)  # API request
-
-print(f"Created {table_id}.")
-print(f"Key: {table.encryption_configuration.kms_key_name}.")
-```
-
 ### Terraform
 
 如要瞭解如何套用或移除 Terraform 設定，請參閱「[基本 Terraform 指令](https://docs.cloud.google.com/docs/terraform/basic-commands?hl=zh-tw)」。詳情請參閱 [Terraform 供應商參考文件](https://registry.terraform.io/providers/hashicorp/google/latest/docs)。

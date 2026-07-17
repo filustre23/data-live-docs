@@ -10,7 +10,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 使用 ONNX 格式的 PyTorch 模型進行預測 透過集合功能整理內容 你可以依據偏好儲存及分類內容。
 
-[開放式類神經網路交換格式](https://onnx.ai/) (ONNX) 提供統一格式，可表示任何機器學習框架。BigQuery ML 支援 ONNX，因此您可以：
+[開放式神經網路交換格式](https://onnx.ai/) (ONNX) 提供統一格式，可表示任何機器學習架構。BigQuery ML 支援 ONNX，因此您可以：
 
 * 使用您喜愛的架構訓練模型。
 * 將模型轉換為 ONNX 模型格式。
@@ -18,12 +18,12 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 本教學課程說明如何將使用 [PyTorch](https://pytorch.org/) 訓練的 ONNX 模型匯入 BigQuery 資料集，並使用這些模型預測 SQL 查詢。
 
-**重要事項：** 如要使用匯入的模型和物件資料表執行預測，必須先預訂資源。詳情請參閱「[匯入 ONNX 模型時的限制](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-onnx?hl=zh-tw#limitations)」。
+**重要事項：** 如要使用匯入的模型和物件表格執行預測，必須先預訂資源。詳情請參閱「[匯入 ONNX 模型時的限制](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-onnx?hl=zh-tw#limitations)」一節。
 
 ## 目標
 
 * 使用 [PyTorch](https://pytorch.org/) 匯入預先訓練模型。
-* 使用 [torch.onnx](https://pytorch.org/docs/stable/onnx.html) [將模型轉換為 ONNX 格式](https://github.com/onnx/tutorials#converting-to-onnx-format)。
+* 使用 [torch.onnx](https://pytorch.org/docs/stable/onnx.html)[將模型轉換為 ONNX 格式](https://github.com/onnx/tutorials#converting-to-onnx-format)。
 * 使用 `CREATE MODEL` 陳述式將 ONNX 模型匯入 BigQuery。
 * 使用 `ML.PREDICT` 函式，透過匯入的 ONNX 模型進行預測。
 
@@ -87,7 +87,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    **啟用 API 時所需的角色**
 
-   如要啟用 API，您需要服務使用情形管理員 IAM 角色 (`roles/serviceusage.serviceUsageAdmin`)，其中包含 `serviceusage.services.enable` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用情形管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
    [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery.googleapis.com%2Cstorage-component.googleapis.com%2Cbigqueryconnection.googleapis.com&hl=zh-tw)
 3. 請確認您具備[必要權限](#required_roles)，可執行本文件中的工作。
@@ -96,7 +96,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 如果您建立新專案，您就是專案擁有者，並已獲得完成本教學課程所需的所有 Identity and Access Management (IAM) 權限。
 
-如果您使用現有專案，請執行下列操作。
+如果您使用現有專案，請按照下列步驟操作。
 
 請確認您在專案中具備下列角色：
 
@@ -122,7 +122,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 2. 選取專案。
 3. 按一下person\_add「Grant access」(授予存取權)。
 4. 在「New principals」(新增主體) 欄位中，輸入您的使用者 ID。 這通常是指 Google 帳戶的電子郵件地址。
-5. 按一下「選取角色」，然後搜尋角色。
+5. 按一下「Select a role」(選取角色)，然後搜尋角色。
 6. 如要授予其他角色，請按一下add「Add another role」(新增其他角色)，然後新增其他角色。
 7. 按一下「Save」(儲存)。
 
@@ -202,11 +202,11 @@ torch.onnx.export(final_model,            # model being run
 
    [前往 BigQuery 頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 在「Explorer」窗格中，按一下專案名稱。
-3. 依序點按 more\_vert「View actions」(查看動作) >「Create dataset」(建立資料集)
+3. 依序點按 more\_vert「View actions」(查看動作) >「Create dataset」(建立資料集)。
 4. 在「建立資料集」頁面中，執行下列操作：
 
    * 在「Dataset ID」(資料集 ID) 中輸入 `bqml_tutorial`。
-   * 針對「位置類型」選取「多區域」，然後選取「美國」。
+   * 針對「Location type」(位置類型) 選取「Multi-region」(多區域)，然後選取「US」(美國)。
    * 其餘設定請保留預設狀態，然後按一下「建立資料集」。
 
 ### bq
@@ -291,11 +291,11 @@ torch.onnx.export(final_model,            # model being run
    imported_onnx_model  MODEL
    ```
 
-如要進一步瞭解如何將 ONNX 模型匯入 BigQuery，包括格式和儲存空間需求，請參閱[匯入 ONNX 模型的 `CREATE MODEL` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-onnx?hl=zh-tw)。
+如要進一步瞭解如何將 ONNX 模型匯入 BigQuery (包括格式和儲存空間需求)，請參閱[匯入 ONNX 模型的 `CREATE MODEL` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-onnx?hl=zh-tw)。
 
 ## 在 BigQuery 建立物件資料表，用於分析圖片資料
 
-[物件資料表](https://docs.cloud.google.com/bigquery/docs/object-table-introduction?hl=zh-tw)是位於 Cloud Storage 中的非結構化資料物件的唯讀資料表。物件資料表可讓您透過 BigQuery 分析非結構化資料。
+[物件資料表](https://docs.cloud.google.com/bigquery/docs/object-table-introduction?hl=zh-tw)是儲存在 Cloud Storage 中的非結構化資料物件唯讀資料表。您可以使用物件資料表，透過 BigQuery 分析非結構化資料。
 
 在本教學課程中，您將使用 `ML.PREDICT` 函式，輸出儲存在 Cloud Storage bucket 中輸入圖片的預測類別標籤。
 
@@ -303,7 +303,7 @@ torch.onnx.export(final_model,            # model being run
 
 * 建立 Cloud Storage bucket，並上傳金魚圖片。
 * 建立 Cloud 資源連結，用於存取物件資料表。
-* 將存取權授予資源連線的服務帳戶。
+* 授予資源連線服務帳戶存取權。
 
 ### 建立 bucket 並上傳圖片
 
@@ -325,16 +325,16 @@ torch.onnx.export(final_model,            # model being run
       2. 按一下「繼續」。
    2. 在「Choose where to store your data」(選擇資料的儲存位置) 部分，執行下列操作：
 
-      1. 「位置類型」請選取「多區域」。
+      1. 在「位置類型」中，選取「多區域」。
       2. 從位置類型選單中，選取「US (multiple
          regions in United States)」(美國 (多個美國區域))。
       3. 按一下「繼續」。
-   3. 在「為資料選擇儲存空間級別」專區中：
+   3. 在「為資料選擇儲存空間級別」部分：
 
       1. 選取「設定預設級別」。
       2. 選取「標準」。
       3. 按一下「繼續」。
-   4. 其餘區段則保留預設值。
+   4. 其餘部分則保留預設值。
 4. 點選「建立」。
 
 ### 指令列
@@ -389,7 +389,7 @@ Completed files 1/1 | 164.3kiB/164.3kiB
 
 ### 建立 BigQuery Cloud 資源連結
 
-您必須擁有 Cloud 資源連結，才能連線至本教學課程稍後建立的[物件資料表](https://docs.cloud.google.com/bigquery/docs/object-table-introduction?hl=zh-tw)。
+您必須建立 Cloud 資源連結，才能連線至本教學課程稍後建立的[物件資料表](https://docs.cloud.google.com/bigquery/docs/object-table-introduction?hl=zh-tw)。
 
 您可以透過雲端資源連線，查詢儲存在 BigQuery 外部的資料，例如 Cloud Storage 或 Spanner 等 Google Cloud 服務，或是 AWS 或 Azure 等第三方來源。這些外部連結會使用 BigQuery Connection API。
 
@@ -406,7 +406,7 @@ Completed files 1/1 | 164.3kiB/164.3kiB
 3. 在「Explorer」窗格中，點選「新增資料」add。
 
    「新增資料」對話方塊隨即開啟。
-4. 在「Filter By」(依據篩選) 窗格的「Data Source Type」(資料來源類型) 專區中，選取「Databases」(資料庫)。
+4. 在「依條件篩選」窗格的「資料來源類型」部分，選取「資料庫」。
 
    或者，您也可以在「Search for data sources」(搜尋資料來源) 欄位中輸入 `Vertex AI`。
 5. 在「精選資料來源」部分，點選「Vertex AI」。
@@ -427,7 +427,7 @@ Completed files 1/1 | 164.3kiB/164.3kiB
        --connection_type=CLOUD_RESOURCE bqml_tutorial
    ```
 
-   將 `PROJECT_ID` 替換為Google Cloud 專案 ID。`--project_id` 參數會覆寫預設專案。
+   將 `PROJECT_ID` 替換為您的Google Cloud 專案 ID。`--project_id` 參數會覆寫預設專案。
 
    建立連線資源時，BigQuery 會建立專屬的系統服務帳戶，並將其與連線建立關聯。
 
@@ -451,7 +451,7 @@ Completed files 1/1 | 164.3kiB/164.3kiB
 
 ### 設定連線存取權
 
-將 Storage 物件管理員角色授予 Cloud 資源連結的服務帳戶。您必須在上傳圖片檔案的專案中授予這個角色。
+將 Storage 物件管理員角色授予 Cloud 資源連線的服務帳戶。您必須在上傳圖片檔案的同一個專案中授予這個角色。
 
 **注意：** 如果連線位於不同專案中，系統會傳回以下錯誤：
 `bqcx-1234567890-xxxx@gcp-sa-bigquery-condel.iam.gserviceaccount.com does not have the permission to access
@@ -526,17 +526,18 @@ resource`。
 
 ## 使用匯入的 ONNX 模型進行預測
 
-**重要事項：**您必須預訂，才能使用匯入的模型和物件表格執行預測。詳情請參閱有關匯入 ONNX 模型的[限制](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-onnx?hl=zh-tw#limitations)。  
+**重要事項：**您必須預訂，才能使用匯入的模型和物件表格執行預測。詳情請參閱「[限制](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-onnx?hl=zh-tw#limitations)」一節。  
   
-如果沒有預訂，使用 `ML.PREDICT` 執行查詢會產生這項錯誤：`` BigQuery ML inference using imported models and
+如果沒有預訂，使用 `ML.PREDICT`
+執行查詢會產生這項錯誤：`` BigQuery ML inference using imported models and
 object tables requires a reservation, but no reservations were assigned for
 job type `QUERY`...` ``。
 
-您可以使用下列包含 [`ML.PREDICT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict?hl=zh-tw) 函式的查詢，根據輸入物件資料表 `goldfish_image_table` 中的圖片資料進行預測。這項查詢會根據 [ImageNet 標籤](https://raw.githubusercontent.com/pytorch/hub/master/imagenet_classes.txt)字典，輸出輸入圖片的預測類別標籤。
+您可以使用下列查詢 (內含 [`ML.PREDICT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict?hl=zh-tw) 函式)，根據輸入物件資料表 `goldfish_image_table` 中的圖片資料進行預測。這項查詢會根據 [ImageNet 標籤](https://raw.githubusercontent.com/pytorch/hub/master/imagenet_classes.txt)字典，輸出輸入圖片的預測類別標籤。
 
 在查詢中，您必須使用 [`ML.DECODE_IMAGE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-decode-image?hl=zh-tw) 函式解碼圖片資料，`ML.PREDICT` 才能解讀資料。系統會呼叫 [`ML.RESIZE_IMAGE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-resize-image?hl=zh-tw) 函式，將圖片大小調整為符合模型輸入大小 (224\*224)。
 
-如要進一步瞭解如何對圖片物件資料表執行推論，請參閱[對圖片物件資料表執行推論](https://docs.cloud.google.com/bigquery/docs/object-table-inference?hl=zh-tw)。
+如要進一步瞭解如何對圖片物件資料表執行推論，請參閱「[對圖片物件資料表執行推論](https://docs.cloud.google.com/bigquery/docs/object-table-inference?hl=zh-tw)」。
 
 如要根據圖片資料進行預測，請按照下列步驟操作。
 
@@ -562,7 +563,7 @@ job type `QUERY`...` ``。
           bqml_tutorial.goldfish_image_table))
    ```
 
-   查詢結果類似於下列內容：
+   查詢結果大致如下：
 
 ### bq
 
@@ -643,11 +644,11 @@ gcloud projects delete PROJECT_ID
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-05 (世界標準時間)。
+上次更新時間：2026-07-16 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-05 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-16 (世界標準時間)。"],[],[]]

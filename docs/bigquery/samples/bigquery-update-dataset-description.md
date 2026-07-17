@@ -96,62 +96,6 @@ public class UpdateDatasetDescription {
 }
 ```
 
-### Node.js
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-// Import the Google Cloud client library
-const {BigQuery} = require('@google-cloud/bigquery');
-const bigquery = new BigQuery();
-
-async function updateDatasetDescription() {
-  // Updates a dataset's description.
-
-  // Retreive current dataset metadata
-  const dataset = bigquery.dataset(datasetId);
-  const [metadata] = await dataset.getMetadata();
-
-  // Set new dataset description
-  const description = 'New dataset description.';
-  metadata.description = description;
-
-  const [apiResponse] = await dataset.setMetadata(metadata);
-  const newDescription = apiResponse.description;
-
-  console.log(`${datasetId} description: ${newDescription}`);
-}
-```
-
-### Python
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-from google.cloud import bigquery
-
-# Construct a BigQuery client object.
-client = bigquery.Client()
-
-# TODO(developer): Set dataset_id to the ID of the dataset to fetch.
-# dataset_id = 'your-project.your_dataset'
-
-dataset = client.get_dataset(dataset_id)  # Make an API request.
-dataset.description = "Updated description."
-dataset = client.update_dataset(dataset, ["description"])  # Make an API request.
-
-full_dataset_id = "{}.{}".format(dataset.project, dataset.dataset_id)
-print(
-    "Updated dataset '{}' with description '{}'.".format(
-        full_dataset_id, dataset.description
-    )
-)
-```
-
 ## 後續步驟
 
 如要搜尋及篩選其他 Google Cloud 產品的程式碼範例，請參閱[Google Cloud 範例瀏覽工具](https://docs.cloud.google.com/docs/samples?product=bigquery&hl=zh-tw)。

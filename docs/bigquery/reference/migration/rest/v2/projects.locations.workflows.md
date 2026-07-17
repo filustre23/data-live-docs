@@ -254,4 +254,3 @@ The possible dialect options for translation.
 | Fields | |
 | --- | --- |
 | Union field `dialect_value`. The possible dialect options that this message represents. `dialect_value` can be only one of the following: | |
-| `bigqueryDialect` | `object (BigQueryDialect)` |

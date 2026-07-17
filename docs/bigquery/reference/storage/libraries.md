@@ -350,6 +350,5 @@ func main() {
 		Parent: fmt.Sprintf("projects/%s", *projectID),
 		ReadSession: &storagepb.ReadSession{
 			Table:       readTable,
-			DataFormat:  dataFormat,
-			ReadOptions: tableReadOptions,
+			DataFormat:
 ```

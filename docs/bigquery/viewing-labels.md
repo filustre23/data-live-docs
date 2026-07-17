@@ -30,7 +30,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 事前準備
 
-授予身分與存取權管理 (IAM) 角色，讓使用者取得執行本文各項工作所需的權限。
+授予身分與存取權管理 (IAM) 角色，讓使用者擁有執行本文各項工作所需的權限。
 
 ### 所需權限
 
@@ -40,7 +40,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 如要查看資料集詳細資料，您需要 `bigquery.datasets.get` IAM 權限。
 
-下列預先定義的 IAM 角色都具備查看資料集詳細資料所需的權限：
+下列預先定義的 IAM 角色都包含查看資料集詳細資料所需的權限：
 
 * `roles/bigquery.user`
 * `roles/bigquery.metadataViewer`
@@ -55,7 +55,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 #### 查看資料表或檢視表詳細資料的權限
 
-如要查看資料表或檢視表詳細資料，必須具備 `bigquery.tables.get` IAM 權限。
+如要查看資料表或檢視表的詳細資料，您需要 `bigquery.tables.get` IAM 權限。
 
 所有預先定義的 IAM 角色都具備查看表格或詳細資料所需的權限，但 `roles/bigquery.user` 和 `roles/bigquery.jobUser` **除外**。
 
@@ -85,7 +85,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### SQL
 
-查詢[`INFORMATION_SCHEMA.SCHEMATA_OPTIONS`檢視區塊](https://docs.cloud.google.com/bigquery/docs/information-schema-datasets?hl=zh-tw#schemata_options_view)，即可查看資料集標籤；查詢[`INFORMATION_SCHEMA.TABLE_OPTIONS`檢視區塊](https://docs.cloud.google.com/bigquery/docs/information-schema-table-options?hl=zh-tw)，即可查看資料表標籤。舉例來說，下列 SQL 查詢會傳回名為 `mydataset` 的資料集標籤：
+查詢 [`INFORMATION_SCHEMA.SCHEMATA_OPTIONS` 檢視區塊](https://docs.cloud.google.com/bigquery/docs/information-schema-datasets?hl=zh-tw#schemata_options_view)，即可查看資料集的標籤；查詢 [`INFORMATION_SCHEMA.TABLE_OPTIONS` 檢視區塊](https://docs.cloud.google.com/bigquery/docs/information-schema-table-options?hl=zh-tw)，即可查看資料表的標籤。舉例來說，下列 SQL 查詢會傳回名為 `mydataset` 的資料集標籤：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -144,7 +144,7 @@ bq show --format=pretty mydataset
 bq show --format=pretty myotherproject:mydataset.mytable
 ```
 
-分群資料表的輸出內容如下：
+叢集資料表的輸出內容如下：
 
 ```
 +-----------------+------------------------------+------------+-------------+-----------------+------------------------------------------------+------------------+---------+
@@ -504,9 +504,9 @@ bq show -j --format=pretty bqjob_r1234d57f78901_000023746d4q12_1
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在導覽選單中，按一下「容量管理」。
+2. 按一下導覽選單中的「工作負載管理」。
 3. 按一下「運算單元預留項目」分頁標籤。
-4. 每個預訂的標籤會列在「標籤」欄中。
+4. 每個預訂項目的標籤會列在「標籤」欄中。
 
 ### SQL
 
@@ -578,11 +578,11 @@ bq show --format=prettyjson --reservation=true --location=LOCATION RESERVATION_N
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-05 (世界標準時間)。
+上次更新時間：2026-07-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-05 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-12 (世界標準時間)。"],[],[]]

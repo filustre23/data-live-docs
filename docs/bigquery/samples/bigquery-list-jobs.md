@@ -110,69 +110,6 @@ public class ListJobs {
 }
 ```
 
-### Node.js
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-// Import the Google Cloud client library
-const {BigQuery} = require('@google-cloud/bigquery');
-const bigquery = new BigQuery();
-
-async function listJobs() {
-  // Lists all jobs in current GCP project.
-
-  // List the 10 most recent jobs in reverse chronological order.
-  //  Omit the max_results parameter to list jobs from the past 6 months.
-  const options = {maxResults: 10};
-  const [jobs] = await bigquery.getJobs(options);
-
-  console.log('Jobs:');
-  jobs.forEach(job => console.log(job.id));
-}
-```
-
-### Python
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-from google.cloud import bigquery
-
-import datetime
-
-# Construct a BigQuery client object.
-client = bigquery.Client()
-
-# List the 10 most recent jobs in reverse chronological order.
-# Omit the max_results parameter to list jobs from the past 6 months.
-print("Last 10 jobs:")
-for job in client.list_jobs(max_results=10):  # API request(s)
-    print("{}".format(job.job_id))
-
-# The following are examples of additional optional parameters:
-
-# Use min_creation_time and/or max_creation_time to specify a time window.
-print("Jobs from the last ten minutes:")
-ten_mins_ago = datetime.datetime.utcnow() - datetime.timedelta(minutes=10)
-for job in client.list_jobs(min_creation_time=ten_mins_ago):
-    print("{}".format(job.job_id))
-
-# Use all_users to include jobs run by all users in the project.
-print("Last 10 jobs run by all users:")
-for job in client.list_jobs(max_results=10, all_users=True):
-    print("{} run by user: {}".format(job.job_id, job.user_email))
-
-# Use state_filter to filter by job state.
-print("Last 10 jobs done:")
-for job in client.list_jobs(max_results=10, state_filter="DONE"):
-    print("{}".format(job.job_id))
-```
-
 ## 後續步驟
 
 如要搜尋及篩選其他 Google Cloud 產品的程式碼範例，請參閱[Google Cloud 範例瀏覽工具](https://docs.cloud.google.com/docs/samples?product=bigquery&hl=zh-tw)。

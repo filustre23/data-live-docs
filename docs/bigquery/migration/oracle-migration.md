@@ -447,6 +447,4 @@ BigQuery 支援[column-](https://docs.cloud.google.com/bigquery/docs/column-leve
 
 ### 初始載入
 
-視資料大小和網路頻寬而定，將現有 Oracle 資料倉儲的初始資料遷移至 BigQuery，可能與增量 ETL/ELT 管道不同。如果資料大小為幾 TB，可以使用相同的 ETL/ELT 管道。
-
-如果資料量最多只有幾 TB，傾印資料並使用 `gcloud storage` 進行轉移，會比使用類似 [JdbcIO](https://beam.apache.org/releases/javadoc/current/org/apache/beam/sdk/io/jdbc/JdbcIO.html) 的程式輔助資料庫擷取
+視資料大小和網路頻寬而定，將現有 Oracle 資料倉儲的初始資料遷移至 BigQuery，可能與增量 ETL/ELT 管道不同。如果資料大小

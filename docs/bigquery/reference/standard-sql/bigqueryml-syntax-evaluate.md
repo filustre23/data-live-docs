@@ -885,8 +885,4 @@ The following types of models are classification models:
   trial. This column is only returned if you ran hyperparameter tuning when
   creating the model. This column doesn't apply for
   AutoML Tables models.
-* `precision`: a `FLOAT64` value that contains the
-  [precision](https://en.wikipedia.org/wiki/Accuracy_and_precision) for the
-  model.
-* `recall`: a `FLOAT64` value that contains the
-  [recall](https://en.wikipedia.org/wiki/Precision_and_recall) for the
+* `precision`: a

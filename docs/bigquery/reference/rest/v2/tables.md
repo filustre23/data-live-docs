@@ -203,7 +203,3 @@ Data policy option. For more information, see [Mask data by applying data polici
 | JSON representation |
 | --- |
 | ``` {   "name": string } ``` |
-
-| Fields | |
-| --- | --- |
-|  |

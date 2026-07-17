@@ -15,7 +15,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 如需包含這個程式碼範例的詳細說明文件，請參閱下列文章：
 
 * [管理資料表資料](https://docs.cloud.google.com/bigquery/docs/managing-table-data?hl=zh-tw)
-* [使用分頁功能透過 BigQuery API 讀取資料](https://docs.cloud.google.com/bigquery/docs/paging-results?hl=zh-tw)
+* [使用 BigQuery API 進行分頁](https://docs.cloud.google.com/bigquery/docs/paging-results?hl=zh-tw)
 
 ## 程式碼範例
 
@@ -158,77 +158,6 @@ public class BrowseTable {
 }
 ```
 
-### Node.js
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-// Import the Google Cloud client library using default credentials
-const {BigQuery} = require('@google-cloud/bigquery');
-const bigquery = new BigQuery();
-
-async function browseTable() {
-  // Retrieve a table's rows using manual pagination.
-
-  /**
-   * TODO(developer): Uncomment the following lines before running the sample.
-   */
-  // const datasetId = 'my_dataset'; // Existing dataset
-  // const tableId = 'my_table'; // Table to create
-
-  const query = `SELECT name, SUM(number) as total_people
-    FROM \`bigquery-public-data.usa_names.usa_1910_2013\`
-    GROUP BY name 
-    ORDER BY total_people 
-    DESC LIMIT 100`;
-
-  // Create table reference.
-  const dataset = bigquery.dataset(datasetId);
-  const destinationTable = dataset.table(tableId);
-
-  // For all options, see https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#jobconfigurationquery
-  const queryOptions = {
-    query: query,
-    destination: destinationTable,
-  };
-
-  // Run the query as a job
-  const [job] = await bigquery.createQueryJob(queryOptions);
-
-  // For all options, see https://cloud.google.com/bigquery/docs/reference/v2/jobs/getQueryResults
-  const queryResultsOptions = {
-    // Retrieve zero resulting rows.
-    maxResults: 0,
-  };
-
-  // Wait for the job to finish.
-  await job.getQueryResults(queryResultsOptions);
-
-  function manualPaginationCallback(err, rows, nextQuery) {
-    rows.forEach(row => {
-      console.log(`name: ${row.name}, ${row.total_people} total people`);
-    });
-
-    if (nextQuery) {
-      // More results exist.
-      destinationTable.getRows(nextQuery, manualPaginationCallback);
-    }
-  }
-
-  // For all options, see https://cloud.google.com/bigquery/docs/reference/v2/tabledata/list
-  const getRowsOptions = {
-    autoPaginate: false,
-    maxResults: 20,
-  };
-
-  // Retrieve all rows.
-  destinationTable.getRows(getRowsOptions, manualPaginationCallback);
-}
-browseTable();
-```
-
 ### PHP
 
 在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 PHP 設定說明操作。詳情請參閱 [BigQuery PHP API 參考說明文件](https://docs.cloud.google.com/php/docs/reference/cloud-bigquery/latest/BigQueryClient?hl=zh-tw)。
@@ -273,52 +202,6 @@ function browse_table(
         $numRows++;
     }
 }
-```
-
-### Python
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-from google.cloud import bigquery
-
-# Construct a BigQuery client object.
-client = bigquery.Client()
-
-# TODO(developer): Set table_id to the ID of the table to browse data rows.
-# table_id = "your-project.your_dataset.your_table_name"
-
-# Download all rows from a table.
-rows_iter = client.list_rows(table_id)  # Make an API request.
-
-# Iterate over rows to make the API requests to fetch row data.
-rows = list(rows_iter)
-print("Downloaded {} rows from table {}".format(len(rows), table_id))
-
-# Download at most 10 rows.
-rows_iter = client.list_rows(table_id, max_results=10)
-rows = list(rows_iter)
-print("Downloaded {} rows from table {}".format(len(rows), table_id))
-
-# Specify selected fields to limit the results to certain columns.
-table = client.get_table(table_id)  # Make an API request.
-fields = table.schema[:2]  # First two columns.
-rows_iter = client.list_rows(table_id, selected_fields=fields, max_results=10)
-print("Selected {} columns from table {}.".format(len(rows_iter.schema), table_id))
-
-rows = list(rows_iter)
-print("Downloaded {} rows from table {}".format(len(rows), table_id))
-
-# Print row data in tabular format.
-rows_iter = client.list_rows(table_id, max_results=10)
-format_string = "{!s:<16} " * len(rows_iter.schema)
-field_names = [field.name for field in rows_iter.schema]
-print(format_string.format(*field_names))  # Prints column headers.
-
-for row in rows_iter:
-    print(format_string.format(*row))  # Prints row data.
 ```
 
 ### Ruby

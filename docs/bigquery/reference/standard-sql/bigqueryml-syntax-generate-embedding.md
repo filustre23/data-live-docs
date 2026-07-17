@@ -614,6 +614,3 @@ ML.GENERATE_EMBEDDING(
 * `ml_generate_embedding_result`:
 
   + If `flatten_json_output` is `FALSE`, this is the
-    [JSON response](/vertex-ai/docs/reference/rest/v1/projects.locations.endpoints/predict#response-body)
-    from the [`projects.locations.endpoints.predict`](/vertex-ai/docs/reference/rest/v1/projects.locations.endpoints/predict) call to the model. The
-    generated embeddings are in the first element of the `predictions<`

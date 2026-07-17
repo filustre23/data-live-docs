@@ -8,7 +8,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 位置參數和指定類型 透過集合功能整理內容 你可以依據偏好儲存及分類內容。
 
-使用位置參數和指定的參數類型執行查詢。
+使用位置參數和指定參數類型執行查詢。
 
 ## 程式碼範例
 
@@ -75,42 +75,6 @@ public class QueryWithPositionalTypesParameters {
       System.out.println("Query not performed \n" + e.toString());
     }
   }
-}
-```
-
-### Node.js
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-// Import the Google Cloud client library
-const {BigQuery} = require('@google-cloud/bigquery');
-const bigquery = new BigQuery();
-
-async function queryParamsPositionalTypes() {
-  // Run a query using positional query parameters and provided parameter types.
-
-  // The SQL query to run
-  const sqlQuery = `SELECT word, word_count
-  FROM \`bigquery-public-data.samples.shakespeare\`
-  WHERE word IN UNNEST(?)
-  AND corpus = ?
-  AND word_count >= ?
-  ORDER BY word_count DESC`;
-
-  const queryOptions = {
-    query: sqlQuery,
-    params: [['and', 'is', 'the', 'moon'], 'romeoandjuliet', 250],
-    types: [['STRING'], 'STRING', 'INT64'],
-  };
-
-  // Run the query
-  const [rows] = await bigquery.query(queryOptions);
-
-  console.log('Rows:');
-  rows.forEach(row => console.log(row));
 }
 ```
 

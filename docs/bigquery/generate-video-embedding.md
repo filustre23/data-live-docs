@@ -16,7 +16,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 使用 AI.GENERATE\_EMBEDDING 函式生成影片嵌入
 
-本文說明如何建立參照 Gemini Enterprise Agent Platform 嵌入[基礎模型](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/google-models?hl=zh-tw#foundation_models)的 BigQuery ML [遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw)。接著，您將使用前面建立的模型和 [`AI.GENERATE_EMBEDDING` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding?hl=zh-tw)，透過 BigQuery [物件資料表](https://docs.cloud.google.com/bigquery/docs/object-table-introduction?hl=zh-tw)中的資料建立影片嵌入。
+本文說明如何建立 BigQuery ML [遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw)，參照 Gemini Enterprise Agent Platform 嵌入[基礎模型](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/google-models?hl=zh-tw#foundation_models)。接著，您將使用前面建立的模型和 [`AI.GENERATE_EMBEDDING` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding?hl=zh-tw)，透過 BigQuery [物件資料表](https://docs.cloud.google.com/bigquery/docs/object-table-introduction?hl=zh-tw)中的資料建立影片嵌入。
 
 ## 必要的角色
 
@@ -27,13 +27,13 @@ Google uses AI technology to translate content into your preferred language. AI 
 * 建立、委派及使用 BigQuery 連線：
   專案的 BigQuery 連線管理員 (`roles/bigquery.connectionsAdmin`)。
 
-  如果沒有設定[預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw)，您可以在執行 `CREATE MODEL` 陳述式時建立並設定連線。如要這麼做，您必須擁有專案的 BigQuery 管理員 (`roles/bigquery.admin`) 權限。詳情請參閱「[設定預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw#configure_the_default_connection)」。
-* 授予連線服務帳戶權限：在包含 Gemini Enterprise Agent Platform 端點的專案中，授予專案 IAM 管理員 (`roles/resourcemanager.projectIamAdmin`) 權限。如果您將模型名稱指定為端點，這就是您建立遠端模型的專案。如果您將網址指定為端點，這就是您建立遠端模型的專案 (網址中會顯示專案 ID)。
+  如果沒有設定[預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw)，您可以在執行 `CREATE MODEL` 陳述式時建立並設定連線。如要執行這項操作，您必須具備專案的 BigQuery 管理員角色 (`roles/bigquery.admin`)。詳情請參閱「[設定預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw#configure_the_default_connection)」。
+* 將權限授予連線的服務帳戶：在含有 Gemini Enterprise Agent Platform 端點的專案中，授予專案 IAM 管理員 (`roles/resourcemanager.projectIamAdmin`) 權限。這是您透過將模型名稱指定為端點所建立遠端模型的目前專案。這是您透過指定網址做為端點所建立遠端模型網址中識別的專案。
 
   如果您使用遠端模型分析物件資料表中的非結構化資料，且物件資料表使用的 Cloud Storage bucket 與 Agent Platform 端點位於不同專案，您也必須在物件資料表使用的 Cloud Storage bucket 上擁有 Storage Admin (`roles/storage.admin`) 權限。
 * 建立 BigQuery 工作：專案中的 BigQuery 工作使用者 (`roles/bigquery.jobUser`)。
 
-這些預先定義的角色具備執行本文所述工作所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
+這些預先定義的角色具備執行本文中工作所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
 #### 所需權限
 
@@ -62,7 +62,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    **選取或建立專案所需的角色**
 
    * **選取專案**：選取專案時，不需要具備特定 IAM 角色，只要您在專案中獲派角色，即可選取該專案。
-   * **建立專案**：如要建立專案，您需要「專案建立者」角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   * **建立專案**：如要建立專案，您需要專案建立者角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
    **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，而不要選取現有專案。完成這些步驟後，您就可以刪除專案，並移除與該專案相關聯的所有資源。
 
    [前往專案選取器](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
@@ -71,7 +71,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    **啟用 API 時所需的角色**
 
-   如要啟用 API，您需要具備服務使用情形管理員 IAM 角色 (`roles/serviceusage.serviceUsageAdmin`)，其中包含 `serviceusage.services.enable` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用情形管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
    [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery.googleapis.com%2Cbigqueryconnection.googleapis.com%2Cstorage.googleapis.com%2Caiplatform.googleapis.com&hl=zh-tw)
 
@@ -136,7 +136,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 4. 在「Connections」(連線) 頁面中，按一下「Create connection」(建立連線)。
 5. 在「連線類型」中，選擇「Vertex AI 遠端模型、遠端函式、BigLake 和 Spanner (Cloud 資源)」。
 6. 在「連線 ID」欄位中，輸入連線名稱。
-7. 針對「位置類型」，選取連線位置。連線應與其他資源 (例如資料集) 位於同一位置。
+7. 在「位置類型」中，選取連線位置。連線應與資料集等其他資源位於同一位置。
 8. 點選「建立連線」。
 9. 點選「前往連線」。
 10. 在「連線資訊」窗格中，複製服務帳戶 ID，以便在後續步驟中使用。
@@ -364,11 +364,11 @@ resource "google_bigquery_connection" "default" {
    ```
    mkdir DIRECTORY && cd DIRECTORY && touch main.tf
    ```
-2. 如果您正在學習教學課程，可以複製每個章節或步驟中的程式碼範例。
+2. 如果您正在學習教學課程，可以複製每個章節或步驟中的範例程式碼。
 
-   將程式碼範例複製到新建立的 `main.tf` 中。
+   將範例程式碼複製到新建立的 `main.tf` 中。
 
-   視需要從 GitHub 複製程式碼。如果 Terraform 代码片段是端對端解決方案的一部分，建議您這麼做。
+   視需要從 GitHub 複製程式碼。如果 Terraform 程式碼片段是端對端解決方案的一部分，建議您使用這種做法。
 3. 查看並修改範例參數，套用至您的環境。
 4. 儲存變更。
 5. 初始化 Terraform。每個目錄只需執行一次這項操作。
@@ -399,7 +399,7 @@ resource "google_bigquery_connection" "default" {
    ```
 
    等待 Terraform 顯示「Apply complete!」訊息。
-3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)，查看結果。在 Google Cloud 控制台中，前往 UI 中的資源，確認 Terraform 已建立或更新這些資源。
+3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)即可查看結果。在 Google Cloud 控制台中，前往 UI 中的資源，確認 Terraform 已建立或更新這些資源。
 
 **注意：**Terraform 範例通常會假設 Google Cloud 專案已啟用必要的 API。
 
@@ -486,10 +486,10 @@ gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount
 
      如要停用中繼資料快取功能，請指定 0。這是目前的預設做法。
 
-     如要啟用中繼資料快取，請指定 [間隔常值](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#interval_literals)，值介於 30 分鐘到 7 天之間。舉例來說，如要指定 4 小時的過時間隔，請指定 `INTERVAL 4 HOUR`。使用這個值時，如果表格作業在過去 4 小時內重新整理過，就會使用快取中繼資料。如果快取中繼資料的更新時間超過 4 小時，作業就會改為從 Cloud Storage 擷取中繼資料。
-   * `CACHE_MODE`：指定中繼資料快取是自動還是手動重新整理。如要進一步瞭解中繼資料快取注意事項，請參閱「[中繼資料快取，提升效能](https://docs.cloud.google.com/bigquery/docs/object-table-introduction?hl=zh-tw#metadata_caching_for_performance)」。
+     如要啟用中繼資料快取功能，請指定介於 30 分鐘至 7 天之間的[間隔常值](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#interval_literals)。舉例來說，如要指定 4 小時的過時間隔，請輸入 `INTERVAL 4 HOUR`。如果資料表在過去 4 小時內重新整理過，針對資料表執行的作業就會使用快取中繼資料。如果快取中繼資料的建立時間早於該時間，作業會改為從 Cloud Storage 擷取中繼資料。
+   * `CACHE_MODE`：指定中繼資料快取是否自動或手動重新整理。如要進一步瞭解中繼資料快取注意事項，請參閱「[中繼資料快取，提升效能](https://docs.cloud.google.com/bigquery/docs/object-table-introduction?hl=zh-tw#metadata_caching_for_performance)」。
 
-     設為 `AUTOMATIC`，中繼資料快取就會以系統定義的時間間隔重新整理，通常介於 30 到 60 分鐘之間。
+     將值設為 `AUTOMATIC`，中繼資料快取就會以系統定義的時間間隔重新整理，通常介於 30 到 60 分鐘之間。
 
      如要依您決定的時間表重新整理中繼資料快取，請設為 `MANUAL`。在這種情況下，您可以呼叫 [`BQ.REFRESH_EXTERNAL_METADATA_CACHE` 系統程序](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures?hl=zh-tw#bqrefresh_external_metadata_cache)來重新整理快取。
 
@@ -524,10 +524,10 @@ PROJECT_ID:DATASET_ID.TABLE_NAME
 
   如要停用中繼資料快取功能，請指定 0。這是目前的預設做法。
 
-  如要啟用中繼資料快取，請指定 [間隔常值](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#interval_literals)，值介於 30 分鐘到 7 天之間。舉例來說，如要指定 4 小時的過時間隔，請指定 `INTERVAL 4 HOUR`。使用這個值時，如果表格作業在過去 4 小時內重新整理過，就會使用快取中繼資料。如果快取中繼資料的更新時間超過 4 小時，作業就會改為從 Cloud Storage 擷取中繼資料。
-* `CACHE_MODE`：指定中繼資料快取是自動還是手動重新整理。如要進一步瞭解中繼資料快取注意事項，請參閱「[中繼資料快取，提升效能](https://docs.cloud.google.com/bigquery/docs/object-table-introduction?hl=zh-tw#metadata_caching_for_performance)」。
+  如要啟用中繼資料快取功能，請指定介於 30 分鐘至 7 天之間的[間隔常值](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#interval_literals)。舉例來說，如要指定 4 小時的過時間隔，請輸入 `INTERVAL 4 HOUR`。如果資料表在過去 4 小時內重新整理過，針對資料表執行的作業就會使用快取中繼資料。如果快取中繼資料的建立時間早於該時間，作業會改為從 Cloud Storage 擷取中繼資料。
+* `CACHE_MODE`：指定中繼資料快取是否自動或手動重新整理。如要進一步瞭解中繼資料快取注意事項，請參閱「[中繼資料快取，提升效能](https://docs.cloud.google.com/bigquery/docs/object-table-introduction?hl=zh-tw#metadata_caching_for_performance)」。
 
-  設為 `AUTOMATIC`，中繼資料快取就會以系統定義的時間間隔重新整理，通常介於 30 到 60 分鐘之間。
+  將值設為 `AUTOMATIC`，中繼資料快取就會以系統定義的時間間隔重新整理，通常介於 30 到 60 分鐘之間。
 
   如要依您決定的時間表重新整理中繼資料快取，請設為 `MANUAL`。在這種情況下，您可以呼叫 [`BQ.REFRESH_EXTERNAL_METADATA_CACHE` 系統程序](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures?hl=zh-tw#bqrefresh_external_metadata_cache)來重新整理快取。
 
@@ -587,8 +587,9 @@ FROM AI.GENERATE_EMBEDDING(
 * `MODEL_NAME`：`multimodalembedding@001` 模型上的遠端模型名稱。
 * `TABLE_NAME`：包含要嵌入影片的物件資料表名稱。
 * `START_SECOND`：`FLOAT64` 值，指定影片中開始嵌入的秒數。預設值為 `0`。這個值必須為正數，且小於 `end_second` 值。
-* `END_SECOND`：`FLOAT64` 值，指定影片中要結束嵌入的秒數。預設值為 `120`。這個值必須為正數，且大於 `start_second` 值。
-* `INTERVAL_SECONDS`：`FLOAT64` 值，用於指定建立嵌入時使用的間隔。舉例來說，如果您設定 `start_second = 0`、`end_second = 120` 和 `interval_seconds = 10`，則影片會分割成十二個 10 秒片段 (`[0, 10), [10, 20), [20, 30)...`)，並為每個片段產生嵌入。這個值必須大於 `4` 且小於 `120`。預設值為 `16`。
+* `END_SECOND`：`FLOAT64` 值，指定影片中要結束嵌入的秒數。預設值為 `120`。
+  這個值必須為正數，且大於 `start_second` 值。
+* `INTERVAL_SECONDS`：`FLOAT64` 值，指定建立嵌入時要使用的間隔。舉例來說，如果您設定 `start_second = 0`、`end_second = 120` 和 `interval_seconds = 10`，影片就會分割成十二個 10 秒片段 (`[0, 10), [10, 20), [20, 30)...`)，並為每個片段生成嵌入內容。這個值必須大於 `4`，且小於 `120`。預設值為 `16`。
 
 ## 範例
 
@@ -619,11 +620,11 @@ FROM
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-06-30 (世界標準時間)。
+上次更新時間：2026-07-16 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-30 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-16 (世界標準時間)。"],[],[]]

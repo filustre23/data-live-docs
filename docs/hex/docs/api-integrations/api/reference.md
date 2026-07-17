@@ -14,7 +14,6 @@
 * getGetProjectRuns
 * getGetRunStatus
 * delCancelRun
-* getGetChartImageFromRun
 * getGetGroup
 * delDeleteGroup
 * patchEditGroup
@@ -39,6 +38,7 @@
 * postCreateCell
 * getListCells
 * postExportProject
+* getGetChartImageFromRun
 * postCreateThread
 * getListThreads
 * getGetThread
@@ -2017,86 +2017,6 @@ Copy
 
 }`
 
-## GetChartImageFromRun
-
-Get the rendered PNG image of a chart cell from a completed run by staticCellId.
-The "staticId" path parameter should be the cell's staticId (which remains stable across project versions),
-as opposed to its cellId (which is scoped to a specific version).
-
-Returns a JSON object containing the base64-encoded PNG image of the chart cell
-as rendered at the time of the specified run, along with project/run/cell IDs and MIME type.
-The cell must have been executed and must not be in an error state.
-Only chart-type cells are supported.
-
-The optional `width` and `height` query params set the output image size in pixels.
-Both must be provided to apply, and must be between 100 and 2000.
-The optional `includeTitle` query param includes the chart title in the image when true.
-
-Rate limit: 20 requests per minute.
-
-##### Authorizations:
-
-*bearerAuth*
-
-##### path Parameters
-
-|  |  |
-| --- | --- |
-| projectId required | string <uuid>  (ProjectId) ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}...Show pattern  Unique ID for a Hex project. This can be found in the Variables side bar of the Logic View of a project, or by visiting the Project, and copying the UUID after `hex` in the URL. |
-| runId required | string <uuid>  (InputRunId) ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}...Show pattern  Unique ID for a run of a Hex project. This ID is part of the response returned by the RunProject endpoint. The GetProjectRuns endpoint can also be used to find the specific runs for a project. |
-| staticId required | string <uuid>  (StaticCellId) ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}...Show pattern  Unique static ID for a cell. This can be found by going into the menu of a cell in the notebook. |
-
-##### query Parameters
-
-|  |  |
-| --- | --- |
-| width | integer <int32>  (ChartImageDimension)   [ 100 .. 2000 ]  Chart image total dimension (width or height) in pixels. |
-| height | integer <int32>  (ChartImageDimension)   [ 100 .. 2000 ]  Chart image total dimension (width or height) in pixels. |
-| includeTitle | boolean |
-
-### Responses
-
-**200**
-
-**400**
-
-**403**
-
-**404**
-
-**422**
-
-**500**
-
-get/v1/projects/{projectId}/runs/{runId}/cells/{staticId}/image
-
-https://app.hex.tech/api/v1/projects/{projectId}/runs/{runId}/cells/{staticId}/image
-
-### Response samples
-
-* 200
-* 400
-* 403
-* 404
-* 422
-* 500
-
-Content type
-
-application/json
-
-Copy
-
-`{
-
-* "projectId": "5a8591dd-4039-49df-9202-96385ba3eff8",
-* "runId": "78c33d18-170c-44d3-a227-b3194f134f73",
-* "staticId": "a1fad2c1-0d45-4ff9-a7df-774e2bcf0e0b",
-* "imageBase64": "string",
-* "mimeType": "string"
-
-}`
-
 ## GetGroup
 
 ##### Authorizations:
@@ -2515,4 +2435,61 @@ Copy
   + "workspace": {
     - "public": "NONE",
     - "guests": "NONE",
-    - "members": "NONE"`
+    - "members": "NONE"},
+  + "groups": [
+    - {
+      * "access": "NONE",
+      * "group": {
+        + "name": "string",
+        + "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08"}}]}
+
+}`
+
+## EditDataConnection
+
+##### Authorizations:
+
+*bearerAuth*
+
+##### path Parameters
+
+|  |  |
+| --- | --- |
+| dataConnectionId required | string <uuid>  (DataConnectionId) ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}...Show pattern  Unique ID for a data connection. |
+
+##### Request Body schema: application/json required
+
+|  |  |
+| --- | --- |
+| sharing | object |
+| schemaRefreshAccess | string (DataConnectionSchemaRefreshAccess)  Enum: "ADMINS" "USERS\_WITH\_QUERY\_ACCESS" |
+| schemaRefreshSchedule | object or null |
+| schemaFilters | object |
+| allowWritebackCells | boolean |
+| includeMagic | boolean |
+| connectViaSsh | boolean |
+| description | string |
+| connectionDetails | object or object or object or object or object or object or object (EditConnectionDetails) |
+| name | string |
+
+### Responses
+
+**201**
+
+**400**
+
+**403**
+
+**404**
+
+**422**
+
+**500**
+
+patch/v1/data-connections/{dataConnectionId}
+
+https://app.hex.tech/api/v1/data-connections/{dataConnectionId}
+
+### Request samples
+
+* Payload

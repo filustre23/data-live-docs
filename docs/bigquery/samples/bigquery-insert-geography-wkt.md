@@ -18,42 +18,6 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 程式碼範例
 
-### Python
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-from google.cloud import bigquery
-import shapely.geometry
-import shapely.wkt
-
-bigquery_client = bigquery.Client()
-
-# This example uses a table containing a column named "geo" with the
-# GEOGRAPHY data type.
-table_id = "my-project.my_dataset.my_table"
-
-# Use the Shapely library to generate WKT of a line from LAX to
-# JFK airports. Alternatively, you may define WKT data directly.
-my_geography = shapely.geometry.LineString(
-    [(-118.4085, 33.9416), (-73.7781, 40.6413)]
-)
-rows = [
-    # Convert data into a WKT string.
-    {"geo": shapely.wkt.dumps(my_geography)},
-]
-
-#  table already exists and has a column
-# named "geo" with data type GEOGRAPHY.
-errors = bigquery_client.insert_rows_json(table_id, rows)
-if errors:
-    raise RuntimeError(f"row insert failed: {errors}")
-else:
-    print(f"wrote 1 row to {table_id}")
-```
-
 ### Ruby
 
 在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Ruby 設定說明操作。詳情請參閱 [BigQuery Ruby API 參考說明文件](https://googleapis.dev/ruby/google-cloud-bigquery/latest/Google/Cloud/Bigquery.html)。
@@ -91,7 +55,7 @@ end
 
 ## 後續步驟
 
-如要搜尋及篩選其他 Google Cloud 產品的程式碼範例，請參閱[Google Cloud 瀏覽器範例](https://docs.cloud.google.com/docs/samples?product=bigquery&hl=zh-tw)。
+如要搜尋及篩選其他 Google Cloud 產品的程式碼範例，請參閱[Google Cloud 範例瀏覽工具](https://docs.cloud.google.com/docs/samples?product=bigquery&hl=zh-tw)。
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 

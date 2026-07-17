@@ -177,52 +177,6 @@ public class ExtractTableToCsv {
 }
 ```
 
-### Node.js
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-// Import the Google Cloud client libraries
-const {BigQuery} = require('@google-cloud/bigquery');
-const {Storage} = require('@google-cloud/storage');
-
-const bigquery = new BigQuery();
-const storage = new Storage();
-
-async function extractTableToGCS() {
-  // Exports my_dataset:my_table to gcs://my-bucket/my-file as raw CSV.
-
-  /**
-   * TODO(developer): Uncomment the following lines before running the sample.
-   */
-  // const datasetId = "my_dataset";
-  // const tableId = "my_table";
-  // const bucketName = "my-bucket";
-  // const filename = "file.csv";
-
-  // Location must match that of the source table.
-  const options = {
-    location: 'US',
-  };
-
-  // Export data from the table into a Google Cloud Storage file
-  const [job] = await bigquery
-    .dataset(datasetId)
-    .table(tableId)
-    .extract(storage.bucket(bucketName).file(filename), options);
-
-  console.log(`Job ${job.id} created.`);
-
-  // Check the job's status for errors
-  const errors = job.status.errors;
-  if (errors && errors.length > 0) {
-    throw errors;
-  }
-}
-```
-
 ### PHP
 
 在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 PHP 設定說明操作。詳情請參閱 [BigQuery PHP API 參考說明文件](https://docs.cloud.google.com/php/docs/reference/cloud-bigquery/latest/BigQueryClient?hl=zh-tw)。

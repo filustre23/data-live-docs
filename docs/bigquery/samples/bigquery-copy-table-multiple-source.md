@@ -139,69 +139,6 @@ public class CopyMultipleTables {
 }
 ```
 
-### Node.js
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-// Import the Google Cloud client library
-const {BigQuery} = require('@google-cloud/bigquery');
-const bigquery = new BigQuery();
-
-async function copyTableMultipleSource() {
-  // Copy multiple source tables to a given destination.
-
-  /**
-   * TODO(developer): Uncomment the following lines before running the sample.
-   */
-  // const datasetId = "my_dataset";
-  // sourceTable = 'my_table';
-  // destinationTable = 'testing';
-
-  // Create a client
-  const dataset = bigquery.dataset(datasetId);
-
-  const metadata = {
-    createDisposition: 'CREATE_NEVER',
-    writeDisposition: 'WRITE_TRUNCATE',
-  };
-
-  // Create table references
-  const table = dataset.table(sourceTable);
-  const yourTable = dataset.table(destinationTable);
-
-  // Copy table
-  const [apiResponse] = await table.copy(yourTable, metadata);
-  console.log(apiResponse.configuration.copy);
-}
-```
-
-### Python
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-from google.cloud import bigquery
-
-# Construct a BigQuery client object.
-client = bigquery.Client()
-
-# TODO(developer): Set dest_table_id to the ID of the destination table.
-# dest_table_id = "your-project.your_dataset.your_table_name"
-
-# TODO(developer): Set table_ids to the list of the IDs of the original tables.
-# table_ids = ["your-project.your_dataset.your_table_name", ...]
-
-job = client.copy_table(table_ids, dest_table_id)  # Make an API request.
-job.result()  # Wait for the job to complete.
-
-print("The tables {} have been appended to {}".format(table_ids, dest_table_id))
-```
-
 ## 後續步驟
 
 如要搜尋及篩選其他 Google Cloud 產品的程式碼範例，請參閱[Google Cloud 範例瀏覽工具](https://docs.cloud.google.com/docs/samples?product=bigquery&hl=zh-tw)。

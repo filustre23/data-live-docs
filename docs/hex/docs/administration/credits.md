@@ -12,7 +12,7 @@ To ensure everyone can use AI, Hex awards monthly credit grants to Editor and Ex
 
 info
 
-* Customers with annual contracts who wish to purchase add-on credits can contact [[email protected]](/cdn-cgi/l/email-protection#5625373a3325163e332e782233353e) to update their contract.
+* Customers with annual contracts who wish to purchase add-on credits can contact [[email protected]](/cdn-cgi/l/email-protection#3d4e5c51584e7d5558451349585e55) to update their contract.
 
 ## Credit Consumption[​](#credit-consumption "Direct link to Credit Consumption")
 
@@ -116,9 +116,7 @@ All Hex users can view their own credit balance, and Admins and Managers have ad
 
 **Agent message credit receipts:** Users can view message-level credit receipts from the three-dots menu below the agent's response.
 
-**80% usage warning**: Users will be warned if they exceed 80% of their monthly limit.
-
-**Out of credits warning**: Users will be warned when they are out of credits.
+**Usage warnings**: Users are warned when they've used 80% of their credits, when they are out of credits, and when the workspace pool is out of add-on credits.
 
 ### Admin credit usage visibility[​](#admin-credit-usage-visibility "Direct link to Admin credit usage visibility")
 
@@ -133,7 +131,7 @@ Admins can view workspace-wide credit usage from **Settings > Billing & credits 
 
 ### What happens when I run out of credits?[​](#what-happens-when-i-run-out-of-credits "Direct link to What happens when I run out of credits?")
 
-Once users consume their monthly grant and add-on credits, they will be blocked from submitting additional agent prompts. If an agent run is in progress when a user runs out of credits, the agent run will execute to completion — after this run completes, all subsequent agent chats will be blocked. Any spillover credits consumed in the final agent run will be billed for workspaces with add-on credits enabled, and exempted for workspaces with add-on credits disabled.
+Once the workspace credit pool is empty or users consume their monthly grant and add-on credits, users will be blocked from submitting additional agent prompts. If an agent run is in progress when a user runs out of credits, the agent run will execute to completion — after this run completes, all subsequent agent chats will be blocked. Any spillover credits consumed in the final agent run will be billed for workspaces with add-on credits enabled, and exempted for workspaces with add-on credits disabled.
 
 ### Do credits roll over?[​](#do-credits-roll-over "Direct link to Do credits roll over?")
 

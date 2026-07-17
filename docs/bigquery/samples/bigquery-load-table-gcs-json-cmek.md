@@ -138,55 +138,6 @@ public class LoadJsonFromGcsCmek {
 }
 ```
 
-### Python
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-from google.cloud import bigquery
-
-# Construct a BigQuery client object.
-client = bigquery.Client()
-
-# TODO(developer): Set table_id to the ID of the table to create.
-# table_id = "your-project.your_dataset.your_table_name
-
-# Set the encryption key to use for the destination.
-# TODO: Replace this key with a key you have created in KMS.
-# kms_key_name = "projects/{}/locations/{}/keyRings/{}/cryptoKeys/{}".format(
-#     "cloud-samples-tests", "us", "test", "test"
-# )
-
-job_config = bigquery.LoadJobConfig(
-    autodetect=True,
-    source_format=bigquery.SourceFormat.NEWLINE_DELIMITED_JSON,
-    destination_encryption_configuration=bigquery.EncryptionConfiguration(
-        kms_key_name=kms_key_name
-    ),
-)
-
-uri = "gs://cloud-samples-data/bigquery/us-states/us-states.json"
-
-load_job = client.load_table_from_uri(
-    uri,
-    table_id,
-    location="US",  # Must match the destination dataset location.
-    job_config=job_config,
-)  # Make an API request.
-
-assert load_job.job_type == "load"
-
-load_job.result()  # Waits for the job to complete.
-
-assert load_job.state == "DONE"
-table = client.get_table(table_id)
-
-if table.encryption_configuration.kms_key_name == kms_key_name:
-    print("A table loaded with encryption configuration key")
-```
-
 ## 後續步驟
 
 如要搜尋及篩選其他 Google Cloud 產品的程式碼範例，請參閱[Google Cloud 範例瀏覽工具](https://docs.cloud.google.com/docs/samples?product=bigquery&hl=zh-tw)。

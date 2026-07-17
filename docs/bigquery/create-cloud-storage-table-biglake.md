@@ -24,8 +24,8 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    **選取或建立專案所需的角色**
 
-   * **選取專案**：選取專案時，不需要具備特定 IAM 角色，只要您已獲授角色，即可選取任何專案。
-   * **建立專案**：如要建立專案，您需要具備專案建立者角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   * **選取專案**：選取專案時，不需要具備特定 IAM 角色，只要您在專案中獲派角色，即可選取該專案。
+   * **建立專案**：如要建立專案，您需要專案建立者角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
    **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，而不要選取現有專案。完成這些步驟後，您就可以刪除專案，並移除與該專案相關聯的所有資源。
 
    [前往專案選取器](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
@@ -34,7 +34,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    **啟用 API 時所需的角色**
 
-   如要啟用 API，您需要服務使用情形管理員 IAM 角色 (`roles/serviceusage.serviceUsageAdmin`)，其中包含 `serviceusage.services.enable` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用情形管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
    [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=bigqueryconnection.googleapis.com&hl=zh-tw)
 
@@ -107,11 +107,11 @@ BigQuery 管理員 (`roles/bigquery.admin`) 預先定義的身分與存取權管
    4. 在「Table type」(資料表類型) 中，選取「External table」(外部資料表)。
    5. 選取「使用 Cloud 資源連結建立 BigLake 資料表」。
    6. 在「連線 ID」部分，選取您先前建立的連線。
-7. 在「結構定義」部分，您可以啟用[結構定義自動偵測](https://docs.cloud.google.com/bigquery/docs/schema-detect?hl=zh-tw)功能，也可以在有來源檔案時手動指定結構定義。如果沒有來源檔案，就必須手動指定結構定義。
+7. 在「Schema」(結構定義) 區段中，您可以啟用[結構定義自動偵測](https://docs.cloud.google.com/bigquery/docs/schema-detect?hl=zh-tw)功能，也可以在有來源檔案時手動指定結構定義。如果沒有來源檔案，就必須手動指定結構定義。
 
    * 如要啟用結構定義自動偵測功能，請選取「自動偵測」選項。
    * 如要手動指定結構定義，請取消勾選「自動偵測」選項。啟用「以文字形式編輯」，然後以 [JSON 陣列](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#specifying_a_json_schema_file)的形式輸入資料表結構定義。
-8. 如要忽略含有與結構定義不符之額外資料欄值的資料列，請展開「進階選項」部分，然後選取「不明的值」。
+8. 如要忽略含多餘資料欄值 (與結構定義不符) 的資料列，請展開「進階選項」部分，然後選取「不明的值」。
 9. 點選「建立資料表」。
 
 建立永久資料表後，您就可以把這個資料表當做原生 BigQuery 資料表一樣執行查詢。查詢完成後，可以[匯出結果](https://docs.cloud.google.com/bigquery/docs/writing-results?hl=zh-tw)為 CSV 或 JSON 檔案、將結果儲存為資料表，或將結果儲存至 Google 試算表。
@@ -164,7 +164,7 @@ BigQuery 管理員 (`roles/bigquery.admin`) 預先定義的身分與存取權管
 
      指定以多個檔案為目標的 `uris` 值時，所有這些檔案都必須共用相容的結構定義。
 
-     如要進一步瞭解如何在 BigQuery 中使用 Cloud Storage URI，請參閱「[Cloud Storage 資源路徑](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage?hl=zh-tw#google-cloud-storage-uri)」。
+     如要進一步瞭解如何在 BigQuery 中使用 Cloud Storage URI，請參閱[Cloud Storage 資源路徑](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage?hl=zh-tw#google-cloud-storage-uri)。
    * `STALENESS_INTERVAL`：指定對 BigLake 資料表執行的作業是否使用快取中繼資料，以及快取中繼資料必須有多新，作業才能使用。如要進一步瞭解中繼資料快取注意事項，請參閱「[中繼資料快取提升效能](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw#metadata_caching_for_performance)」。
 
      如要停用中繼資料快取功能，請指定 0。這是目前的預設做法。
@@ -172,7 +172,7 @@ BigQuery 管理員 (`roles/bigquery.admin`) 預先定義的身分與存取權管
      如要啟用中繼資料快取功能，請指定介於 30 分鐘至 7 天之間的[間隔常值](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#interval_literals)。舉例來說，如要指定 4 小時的過時間隔，請輸入 `INTERVAL 4 HOUR`。如果資料表在過去 4 小時內重新整理過，針對資料表執行的作業就會使用快取中繼資料。如果快取中繼資料的建立時間早於該時間，作業會改為從 Cloud Storage 擷取中繼資料。
    * `CACHE_MODE`：指定中繼資料快取是否自動或手動重新整理。如要進一步瞭解中繼資料快取注意事項，請參閱「[中繼資料快取，提升效能](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw#metadata_caching_for_performance)」。
 
-     設為 `AUTOMATIC`，中繼資料快取就會以系統定義的時間間隔重新整理，通常介於 30 到 60 分鐘之間。
+     將值設為 `AUTOMATIC`，中繼資料快取就會以系統定義的時間間隔重新整理，通常介於 30 到 60 分鐘之間。
 
      如要依您決定的時間表重新整理中繼資料快取，請設為 `MANUAL`。在這種情況下，您可以呼叫 [`BQ.REFRESH_EXTERNAL_METADATA_CACHE` 系統程序](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures?hl=zh-tw#bqrefresh_external_metadata_cache)來重新整理快取。
 
@@ -183,7 +183,7 @@ BigQuery 管理員 (`roles/bigquery.admin`) 預先定義的身分與存取權管
 
 ### bq
 
-**選項 1：資料表定義檔**
+**選項 1：表格定義檔案**
 
 使用 [`bq mkdef` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_mkdef)建立資料表定義檔，然後將路徑傳遞至 [`bq mk` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_mk)，如下所示：
 
@@ -211,7 +211,7 @@ bq mk --table \
   例如：`PARQUET`。
 * `BUCKET_PATH`：包含資料表的 Cloud Storage bucket 路徑，格式為 `gs://bucket_name/[folder_name/]file_pattern`。
 
-  如要在 `file_pattern` 中指定一個星號 (`*`) 萬用字元，即可從值區選取多個檔案。例如：`gs://mybucket/file00*.parquet`。詳情請參閱「[Cloud Storage URI 的萬用字元支援](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage?hl=zh-tw#wildcard-support)」。
+  如要從 bucket 選取多個檔案，請在 `file_pattern` 中指定一個星號 (`*`) 萬用字元。例如：`gs://mybucket/file00*.parquet`。詳情請參閱「[Cloud Storage URI 的萬用字元支援](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage?hl=zh-tw#wildcard-support)」。
 
   您可以提供多個路徑，為 `uris` 選項指定多個值區。
 
@@ -284,7 +284,7 @@ bq mk --table \
   例如 `CSV`。
 * `BUCKET_PATH`：包含資料表的 Cloud Storage bucket 路徑，格式為 `gs://bucket_name/[folder_name/]file_pattern`。
 
-  如要在 `file_pattern` 中指定一個星號 (`*`) 萬用字元，即可從值區選取多個檔案。例如：`gs://mybucket/file00*.parquet`。詳情請參閱「[Cloud Storage URI 的萬用字元支援](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage?hl=zh-tw#wildcard-support)」。
+  如要從 bucket 選取多個檔案，請在 `file_pattern` 中指定一個星號 (`*`) 萬用字元。例如：`gs://mybucket/file00*.parquet`。詳情請參閱「[Cloud Storage URI 的萬用字元支援](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage?hl=zh-tw#wildcard-support)」。
 
   您可以提供多個路徑，為 `uris` 選項指定多個值區。
 
@@ -423,10 +423,9 @@ resource "google_bigquery_table" "default" {
 ## 準備 Cloud Shell
 
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
-2. 設定要套用 Terraform 設定的預設 Google Cloud 專案
-   。
+2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
 
-   每項專案只需要執行一次這個指令，而且可以在任何目錄中執行。
+   每項專案只需要執行一次這個指令，且可以在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
@@ -443,11 +442,11 @@ resource "google_bigquery_table" "default" {
    ```
    mkdir DIRECTORY && cd DIRECTORY && touch main.tf
    ```
-2. 如果您正在學習教學課程，可以複製每個章節或步驟中的程式碼範例。
+2. 如果您正在學習教學課程，可以複製每個章節或步驟中的範例程式碼。
 
-   將程式碼範例複製到新建立的 `main.tf`。
+   將範例程式碼複製到新建立的 `main.tf` 中。
 
-   視需要從 GitHub 複製程式碼。如果 Terraform 程式碼片段是端對端解決方案的一部分，建議您使用這個方法。
+   視需要從 GitHub 複製程式碼。如果 Terraform 程式碼片段是端對端解決方案的一部分，建議您使用這種做法。
 3. 查看並修改範例參數，套用至您的環境。
 4. 儲存變更。
 5. 初始化 Terraform。每個目錄只需執行一次這項操作。
@@ -471,7 +470,7 @@ resource "google_bigquery_table" "default" {
    ```
 
    視需要修正設定。
-2. 執行下列指令，並在提示中輸入 `yes`，套用 Terraform 設定：
+2. 執行下列指令並在提示中輸入 `yes`，套用 Terraform 設定：
 
    ```
    terraform apply
@@ -523,10 +522,10 @@ BigLake 支援自動偵測結構定義。不過，如果您未提供結構定義
    2. 在「Dataset」(資料集) 部分，選取要建立資料表的資料集。
    3. 在「Table」(資料表) 中，輸入要建立的資料表名稱。
    4. 在「Table type」(資料表類型) 中，選取「External table」(外部資料表)。
-   5. 勾選「使用 Cloud 資源連線建立 BigLake 資料表」核取方塊。
+   5. 選取「使用 Cloud 資源連線建立 BigLake 資料表」核取方塊。
    6. 在「連線 ID」部分，選取您先前建立的連線。
 7. 在「Schema」(結構定義) 區段中，選取「Auto detect」(自動偵測) 選項，啟用[結構定義自動偵測](https://docs.cloud.google.com/bigquery/docs/schema-detect?hl=zh-tw)功能。
-8. 如要忽略含有與結構定義不符之額外資料欄值的資料列，請展開「進階選項」部分，然後選取「不明的值」。
+8. 如要忽略含有與結構定義不符之額外資料欄值的資料列，請展開「Advanced options」(進階選項) 部分，然後選取「Unknown values」(不明的值)。
 9. 點選「建立資料表」。
 
 ### SQL
@@ -567,7 +566,7 @@ BigLake 支援自動偵測結構定義。不過，如果您未提供結構定義
      在 Google Cloud 控制台中[查看連線詳細資料](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw#view-connections)時，連線 ID 是「連線 ID」中顯示的完整連線 ID 最後一個部分的值，例如 `projects/myproject/locations/connection_location/connections/myconnection`。
 
      如要使用[預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw)，請指定 `DEFAULT`，而非包含 PROJECT\_ID.REGION.CONNECTION\_ID 的連線字串。
-   * `HIVE_PARTITION_URI_PREFIX`：Hive 分區 URI 前置字串，例如 `gs://mybucket/`
+   * `HIVE_PARTITION_URI_PREFIX`：Hive 分割 URI 前置字串，例如 `gs://mybucket/`
    * `FILE_PATH`：要建立的外部資料表資料來源路徑，例如 `gs://mybucket/*.parquet`
    * `STALENESS_INTERVAL`：指定對 BigLake 資料表執行的作業是否使用快取中繼資料，以及快取中繼資料必須有多新，作業才能使用。如要進一步瞭解中繼資料快取注意事項，請參閱「[中繼資料快取提升效能](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw#metadata_caching_for_performance)」。
 
@@ -576,7 +575,7 @@ BigLake 支援自動偵測結構定義。不過，如果您未提供結構定義
      如要啟用中繼資料快取功能，請指定介於 30 分鐘至 7 天之間的[間隔常值](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#interval_literals)。舉例來說，如要指定 4 小時的過時間隔，請輸入 `INTERVAL 4 HOUR`。如果資料表在過去 4 小時內重新整理過，針對資料表執行的作業就會使用快取中繼資料。如果快取中繼資料的建立時間早於該時間，作業會改為從 Cloud Storage 擷取中繼資料。
    * `CACHE_MODE`：指定中繼資料快取是否自動或手動重新整理。如要進一步瞭解中繼資料快取注意事項，請參閱「[中繼資料快取，提升效能](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw#metadata_caching_for_performance)」。
 
-     設為 `AUTOMATIC`，中繼資料快取就會以系統定義的時間間隔重新整理，通常介於 30 到 60 分鐘之間。
+     將值設為 `AUTOMATIC`，中繼資料快取就會以系統定義的時間間隔重新整理，通常介於 30 到 60 分鐘之間。
 
      如要依您決定的時間表重新整理中繼資料快取，請設為 `MANUAL`。在這種情況下，您可以呼叫 [`BQ.REFRESH_EXTERNAL_METADATA_CACHE` 系統程序](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures?hl=zh-tw#bqrefresh_external_metadata_cache)來重新整理快取。
 
@@ -670,7 +669,7 @@ bq mkdef \
 
   設為 `AUTOMATIC`，中繼資料快取就會以系統定義的時間間隔重新整理，通常介於 30 到 60 分鐘之間。
 
-  如要依您決定的時間表重新整理中繼資料快取，請設為 `MANUAL`。在這種情況下，您可以呼叫 [`BQ.REFRESH_EXTERNAL_METADATA_CACHE` 系統程序](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures?hl=zh-tw#bqrefresh_external_metadata_cache)來重新整理快取。
+  如要依您決定的時間表重新整理中繼資料快取，請設為 `MANUAL`。在這種情況下，您可以呼叫[`BQ.REFRESH_EXTERNAL_METADATA_CACHE` 系統程序](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures?hl=zh-tw#bqrefresh_external_metadata_cache)來重新整理快取。
 
   如果 `STALENESS_INTERVAL` 設為大於 0 的值，就必須設定 `CACHE_MODE`。
 * `GCS_URIS`：Cloud Storage 資料夾的路徑，使用萬用字元格式。
@@ -870,10 +869,9 @@ resource "google_bigquery_table" "default" {
 ## 準備 Cloud Shell
 
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
-2. 設定要套用 Terraform 設定的預設 Google Cloud 專案
-   。
+2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
 
-   每項專案只需要執行一次這個指令，而且可以在任何目錄中執行。
+   每項專案只需要執行一次這個指令，且可以在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
@@ -890,11 +888,11 @@ resource "google_bigquery_table" "default" {
    ```
    mkdir DIRECTORY && cd DIRECTORY && touch main.tf
    ```
-2. 如果您正在學習教學課程，可以複製每個章節或步驟中的程式碼範例。
+2. 如果您正在學習教學課程，可以複製每個章節或步驟中的範例程式碼。
 
-   將程式碼範例複製到新建立的 `main.tf`。
+   將範例程式碼複製到新建立的 `main.tf` 中。
 
-   視需要從 GitHub 複製程式碼。如果 Terraform 程式碼片段是端對端解決方案的一部分，建議您使用這個方法。
+   視需要從 GitHub 複製程式碼。如果 Terraform 程式碼片段是端對端解決方案的一部分，建議您使用這種做法。
 3. 查看並修改範例參數，套用至您的環境。
 4. 儲存變更。
 5. 初始化 Terraform。每個目錄只需執行一次這項操作。
@@ -918,7 +916,7 @@ resource "google_bigquery_table" "default" {
    ```
 
    視需要修正設定。
-2. 執行下列指令，並在提示中輸入 `yes`，套用 Terraform 設定：
+2. 執行下列指令並在提示中輸入 `yes`，套用 Terraform 設定：
 
    ```
    terraform apply
@@ -1033,7 +1031,7 @@ SELECT * FROM projectid.mydataset.mytable;
 
      指定以多個檔案為目標的 `uris` 值時，所有這些檔案都必須共用相容的結構定義。
 
-     如要進一步瞭解如何在 BigQuery 中使用 Cloud Storage URI，請參閱「[Cloud Storage 資源路徑](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage?hl=zh-tw#google-cloud-storage-uri)」。
+     如要進一步瞭解如何在 BigQuery 中使用 Cloud Storage URI，請參閱[Cloud Storage 資源路徑](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage?hl=zh-tw#google-cloud-storage-uri)。
    * `STALENESS_INTERVAL`：指定對資料表執行的作業是否使用快取中繼資料，以及作業必須使用多新的快取中繼資料
 
      如要進一步瞭解中繼資料快取注意事項，請參閱「[中繼資料快取提升效能](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw#metadata_caching_for_performance)」。
@@ -1045,7 +1043,7 @@ SELECT * FROM projectid.mydataset.mytable;
 
      如要進一步瞭解中繼資料快取注意事項，請參閱「[中繼資料快取，提升效能](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw#metadata_caching_for_performance)」。
 
-     設為 `AUTOMATIC`，中繼資料快取就會以系統定義的時間間隔重新整理，通常介於 30 到 60 分鐘之間。
+     將值設為 `AUTOMATIC`，中繼資料快取就會以系統定義的時間間隔重新整理，通常介於 30 到 60 分鐘之間。
 
      如要依您決定的時間表重新整理中繼資料快取，請設為 `MANUAL`。在這種情況下，您可以呼叫 [`BQ.REFRESH_EXTERNAL_METADATA_CACHE` 系統程序](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures?hl=zh-tw#bqrefresh_external_metadata_cache)來重新整理快取。
 
@@ -1149,11 +1147,11 @@ bq update --project_id=myproject --max_staleness='0-0 0 4:30:0' \
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-05 (世界標準時間)。
+上次更新時間：2026-07-16 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-05 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-16 (世界標準時間)。"],[],[]]

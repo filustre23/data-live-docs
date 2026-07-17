@@ -77,64 +77,6 @@ public class QueryScript {
 }
 ```
 
-### Python
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-from google.cloud import bigquery
-
-# Construct a BigQuery client object.
-client = bigquery.Client()
-
-# Run a SQL script.
-sql_script = """
--- Declare a variable to hold names as an array.
-DECLARE top_names ARRAY<STRING>;
-
--- Build an array of the top 100 names from the year 2017.
-SET top_names = (
-SELECT ARRAY_AGG(name ORDER BY number DESC LIMIT 100)
-FROM `bigquery-public-data.usa_names.usa_1910_2013`
-WHERE year = 2000
-);
-
--- Which names appear as words in Shakespeare's plays?
-SELECT
-name AS shakespeare_name
-FROM UNNEST(top_names) AS name
-WHERE name IN (
-SELECT word
-FROM `bigquery-public-data.samples.shakespeare`
-);
-"""
-parent_job = client.query(sql_script)
-
-# Wait for the whole script to finish.
-rows_iterable = parent_job.result()
-print("Script created {} child jobs.".format(parent_job.num_child_jobs))
-
-# Fetch result rows for the final sub-job in the script.
-rows = list(rows_iterable)
-print(
-    "{} of the top 100 names from year 2000 also appear in Shakespeare's works.".format(
-        len(rows)
-    )
-)
-
-# Fetch jobs created by the SQL script.
-child_jobs_iterable = client.list_jobs(parent_job=parent_job)
-for child_job in child_jobs_iterable:
-    child_rows = list(child_job.result())
-    print(
-        "Child job with ID {} produced {} row(s).".format(
-            child_job.job_id, len(child_rows)
-        )
-    )
-```
-
 ## 後續步驟
 
 如要搜尋及篩選其他 Google Cloud 產品的程式碼範例，請參閱[Google Cloud 範例瀏覽工具](https://docs.cloud.google.com/docs/samples?product=bigquery&hl=zh-tw)。

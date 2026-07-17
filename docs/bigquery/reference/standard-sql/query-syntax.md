@@ -549,7 +549,4 @@ See [Join operation](#join_types).
 #### `field_path`
 
 In the `FROM` clause, `field_path` is any path that
-resolves to a field within a data type. `field_path` can go
-arbitrarily deep into a nested data structure.
-
-Some examples of valid `field_path` values include:
+resolves to a field w

@@ -317,6 +317,8 @@ The `CHANGES` function returns a table with the following columns:
   `DELETE`.
 * `_CHANGE_TIMESTAMP`: a `TIMESTAMP` value indicating the commit time of the
   transaction that made the change.
+* `_CHANGE_IS_FOR_UPDATE`: a `BOOL` value that is `TRUE` for a
+  `DELETE` event produced by a row update. Otherwise, the value is `FALSE`.
 
 **Limitations**
 
@@ -389,7 +391,8 @@ SELECT
   product,
   inventory,
   _CHANGE_TYPE AS change_type,
-  _CHANGE_TIMESTAMP AS change_time
+  _CHANGE_TIMESTAMP AS change_time,
+  _CHANGE_IS_FOR_UPDATE as change_is_for_update
 FROM
   CHANGES(TABLE mydataset.Produce, NULL, NULL)
 ORDER BY change_time, product;
@@ -398,15 +401,15 @@ ORDER BY change_time, product;
 The output is similar to the following:
 
 ```
-+---------+-----------+-------------+---------------------+
-| product | inventory | change_type |     change_time     |
-+---------+-----------+-------------+---------------------+
-| bananas |        20 | INSERT      | 2024-01-09 17:13:58 |
-| carrots |        30 | INSERT      | 2024-01-09 17:13:58 |
-| bananas |        20 | DELETE      | 2024-01-09 17:14:30 |
-| carrots |        30 | DELETE      | 2024-01-09 17:15:24 |
-| carrots |        20 | UPDATE      | 2024-01-09 17:15:24 |
-+---------+-----------+-------------+---------------------+
++---------+-----------+-------------+---------------------+----------------------+
+| product | inventory | change_type |     change_time     | change_is_for_update |
++---------+-----------+-------------+---------------------+----------------------+
+| bananas |        20 | INSERT      | 2024-01-09 17:13:58 | false                |
+| carrots |        30 | INSERT      | 2024-01-09 17:13:58 | false                |
+| bananas |        20 | DELETE      | 2024-01-09 17:14:30 | false                |
+| carrots |        30 | DELETE      | 2024-01-09 17:15:24 | true                 |
+| carrots |        20 | UPDATE      | 2024-01-09 17:15:24 | false                |
++---------+-----------+-------------+---------------------+----------------------+
 ```
 
 **Enabling change history for an existing table**
@@ -595,18 +598,4 @@ FROM some_datetimes;
 -- + Bucket: ...
 -- + Bucket: [1949-12-30 00:00:00, 1949-12-30 12:00:00)
 -- + Bucket: [1949-12-30 12:00:00, 1950-01-01 00:00:00)
--- + Origin: [1950-01-01 00:00:00]
--- + Bucket: [1950-01-01 00:00:00, 1950-01-01 12:00:00)
--- + Bucket: [1950-01-01 12:00:00, 1950-02-00 00:00:00)
--- + Bucket: ...
-```
-
-In the following example, the origin has been changed to `2000-12-24 12:00:00`,
-and all buckets expand in both directions from this point. The size of each
-bucket is seven days. The lower bound of the bucket in which `my_datetime`
-belongs is returned:
-
-```
-WITH some_datetimes AS (
-  SELECT
 ```

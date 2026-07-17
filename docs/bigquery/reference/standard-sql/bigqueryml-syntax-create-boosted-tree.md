@@ -968,14 +968,4 @@ evaluation, or test set. Use when you are specifying `CUSTOM` or `SEQ` as the
 value for the [`DATA_SPLIT_METHOD` option](#data_split_method):
 
 * If you aren't running hyperparameter tuning and you are specifying `SEQ` as
-  the value for `DATA_SPLIT_METHOD`, then the data is first sorted smallest to
-  largest based on the specified column. The last n rows are used
-  as evaluation data, where n is the value specified for
-  [`DATA_SPLIT_EVAL_FRACTION`](#data_split_eval_fraction). The remaining rows
-  are used as training data.
-* If you aren't running hyperparameter tuning and you are specifying `CUSTOM`
-  as the value for `DATA_SPLIT_METHOD`, then you must provide the name
-  of a column of type `BOOL`. Rows with a value of `TRUE` or `NULL` are used as
-  evaluation data, rows with a value of `FALSE` are used as training
-  data.
-* If you are running hyperparameter tuning and you are specifying
+  the value for `DATA_SPLIT_METH`

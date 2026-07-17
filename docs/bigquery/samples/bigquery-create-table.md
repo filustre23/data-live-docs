@@ -144,42 +144,6 @@ public class CreateTable {
 }
 ```
 
-### Node.js
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-// Import the Google Cloud client library and create a client
-const {BigQuery} = require('@google-cloud/bigquery');
-const bigquery = new BigQuery();
-
-async function createTable() {
-  // Creates a new table named "my_table" in "my_dataset".
-
-  /**
-   * TODO(developer): Uncomment the following lines before running the sample.
-   */
-  // const datasetId = "my_dataset";
-  // const tableId = "my_table";
-  // const schema = 'Name:string, Age:integer, Weight:float, IsMagic:boolean';
-
-  // For all options, see https://cloud.google.com/bigquery/docs/reference/v2/tables#resource
-  const options = {
-    schema: schema,
-    location: 'US',
-  };
-
-  // Create a new table in the dataset
-  const [table] = await bigquery
-    .dataset(datasetId)
-    .createTable(tableId, options);
-
-  console.log(`Table ${table.id} created.`);
-}
-```
-
 ### PHP
 
 在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 PHP 設定說明操作。詳情請參閱 [BigQuery PHP API 參考說明文件](https://docs.cloud.google.com/php/docs/reference/cloud-bigquery/latest/BigQueryClient?hl=zh-tw)。
@@ -224,33 +188,6 @@ function create_table(
     $table = $dataset->createTable($tableId, ['schema' => $schema]);
     printf('Created table %s' . PHP_EOL, $tableId);
 }
-```
-
-### Python
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-from google.cloud import bigquery
-
-# Construct a BigQuery client object.
-client = bigquery.Client()
-
-# TODO(developer): Set table_id to the ID of the table to create.
-# table_id = "your-project.your_dataset.your_table_name"
-
-schema = [
-    bigquery.SchemaField("full_name", "STRING", mode="REQUIRED"),
-    bigquery.SchemaField("age", "INTEGER", mode="REQUIRED"),
-]
-
-table = bigquery.Table(table_id, schema=schema)
-table = client.create_table(table)  # Make an API request.
-print(
-    "Created table {}.{}.{}".format(table.project, table.dataset_id, table.table_id)
-)
 ```
 
 ### Ruby

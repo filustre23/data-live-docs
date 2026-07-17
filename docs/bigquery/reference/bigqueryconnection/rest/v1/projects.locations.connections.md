@@ -281,5 +281,4 @@ Client authentication.
 
 | Fields | |
 | --- | --- |
-| `usernamePassword` | `object (UsernamePassword)`  Username/password authentication. |
-| `serviceAccount` |  |
+| `usernamePassword` | `object (` |

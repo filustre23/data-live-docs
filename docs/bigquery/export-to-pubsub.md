@@ -24,7 +24,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 必要條件
 
-您必須[建立服務帳戶](https://docs.cloud.google.com/iam/docs/service-accounts-create?hl=zh-tw)。如要執行持續查詢，將結果匯出至 Pub/Sub 主題，就必須使用[服務帳戶](https://docs.cloud.google.com/iam/docs/service-account-overview?hl=zh-tw)。
+您必須[建立服務帳戶](https://docs.cloud.google.com/iam/docs/service-accounts-create?hl=zh-tw)。如要執行持續查詢，並將結果匯出至 Pub/Sub 主題，您必須擁有[服務帳戶](https://docs.cloud.google.com/iam/docs/service-account-overview?hl=zh-tw)。
 
 您必須建立 [Pub/Sub 主題](https://docs.cloud.google.com/pubsub/docs/publish-message-overview?hl=zh-tw#about_topics)，才能以訊息形式接收持續查詢結果，並建立 [Pub/Sub 訂閱項目](https://docs.cloud.google.com/pubsub/docs/subscription-overview?hl=zh-tw)，供目標應用程式接收這些訊息。
 
@@ -34,10 +34,10 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### 使用者帳戶權限
 
-如要在 BigQuery 中建立工作，使用者帳戶必須具備 `bigquery.jobs.create` IAM 權限。下列每個 IAM 角色都會授予 `bigquery.jobs.create` 權限：
+如要在 BigQuery 中建立工作，使用者帳戶必須具備 `bigquery.jobs.create` IAM 權限。下列 IAM 角色都會授予 `bigquery.jobs.create` 權限：
 
 * [BigQuery 使用者 (`roles/bigquery.user`)](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.user)
-* [BigQuery Job User (`roles/bigquery.jobUser`)](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.jobUser)
+* [BigQuery 作業使用者 (`roles/bigquery.jobUser`)](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.jobUser)
 * [BigQuery 管理員 (`roles/bigquery.admin`)](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.admin)
 
 如要提交使用服務帳戶執行的工作，使用者帳戶必須具備「服務帳戶使用者」(`roles/iam.serviceAccountUser`) 角色。如果您使用同一個使用者帳戶建立服務帳戶，則該使用者帳戶必須具備[服務帳戶管理員 (`roles/iam.serviceAccountAdmin`)](https://docs.cloud.google.com/iam/docs/roles-permissions/iam?hl=zh-tw#iam.serviceAccountUser) 角色。如要瞭解如何限制使用者存取單一服務帳戶，而非專案中的所有服務帳戶，請參閱「[授予單一角色](https://docs.cloud.google.com/iam/docs/manage-access-service-accounts?hl=zh-tw#grant-single-role)」。
@@ -66,7 +66,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 **啟用 API 時所需的角色**
 
-如要啟用 API，您需要具備服務使用情形管理員 IAM 角色 (`roles/serviceusage.serviceUsageAdmin`)，其中包含 `serviceusage.services.enable` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用情形管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
 [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery.googleapis.com%2Cpubsub.googleapis.com&hl=zh-tw)
 
@@ -99,7 +99,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    更改下列內容：
 
    * `PROJECT_ID`：您的專案 ID。
-   * `TOPIC_ID`：Pub/Sub 主題 ID。您可以從 Google Cloud 控制台的「Topics」[頁面](https://console.cloud.google.com/cloudpubsub/topic/list?hl=zh-tw)取得主題 ID。
+   * `TOPIC_ID`：Pub/Sub 主題 ID。您可以前往 Google Cloud 控制台的「主題」[頁面](https://console.cloud.google.com/cloudpubsub/topic/list?hl=zh-tw)取得主題 ID。
    * `QUERY`：用於選取要匯出資料的 SQL 陳述式。SQL 陳述式只能包含[支援的作業](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction?hl=zh-tw#supported_functionality)。您必須在持續查詢的 `FROM` 子句中使用 [`APPENDS` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions?hl=zh-tw#appends)，指定開始處理資料的時間點。
 7. 按一下「執行」。
 
@@ -109,7 +109,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    [啟用 Cloud Shell](https://console.cloud.google.com/?cloudshell=true&hl=zh-tw)
 
-   Google Cloud 主控台底部會開啟一個 [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works?hl=zh-tw) 工作階段，並顯示指令列提示。Cloud Shell 是已安裝 Google Cloud CLI 的殼層環境，並已針對您目前的專案設定好相關值。工作階段可能需要幾秒鐘的時間才能完成初始化。
+   控制台底部會開啟 [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works?hl=zh-tw) 工作階段，並顯示指令列提示。 Google Cloud Cloud Shell 是已安裝 Google Cloud CLI 的殼層環境，並已針對您目前的專案設定好相關值。工作階段可能要幾秒鐘的時間才能初始化。
 2. 在指令列中，使用 [`bq query` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_query)和下列旗標執行持續查詢：
 
    * 將 `--continuous` 旗標設為 `true`，即可持續查詢。
@@ -124,12 +124,13 @@ Google uses AI technology to translate content into your preferred language. AI 
    更改下列內容：
 
    * `PROJECT_ID`：您的專案 ID。
-   * `SERVICE_ACCOUNT_EMAIL`：服務帳戶電子郵件地址。您可以在 Google Cloud 控制台的「服務帳戶」[頁面](https://console.cloud.google.com/iam-admin/serviceaccounts?hl=zh-tw)中取得服務帳戶電子郵件地址。
+   * `SERVICE_ACCOUNT_EMAIL`：服務帳戶電子郵件地址。您可以在 Google Cloud 控制台的「服務帳戶」[頁面](https://console.cloud.google.com/iam-admin/serviceaccounts?hl=zh-tw)取得服務帳戶電子郵件地址。
    * `QUERY`：用於選取要匯出資料的 SQL 陳述式。SQL 陳述式只能包含[支援的作業](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction?hl=zh-tw#supported_functionality)。您必須在持續查詢的 `FROM` 子句中使用 [`APPENDS` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions?hl=zh-tw#appends)，指定開始處理資料的時間點。
 
 ### API
 
-1. 呼叫 [`jobs.insert` 方法](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert?hl=zh-tw)，執行持續查詢。在您傳入的 [`Job` 資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw)的 [`JobConfigurationQuery` 資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#JobConfigurationQuery)中，設定下列欄位：
+1. 呼叫 [`jobs.insert` 方法](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert?hl=zh-tw)，執行持續查詢。
+   在您傳遞的 [`Job` 資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw)中，設定 [`JobConfigurationQuery` 資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#JobConfigurationQuery)中的下列欄位：
 
    * 將 `continuous` 欄位設為 `true`，讓查詢持續執行。
    * 使用 `connection_property` 欄位指定要使用的服務帳戶。
@@ -148,11 +149,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    * `PROJECT_ID`：您的專案 ID。
    * `QUERY`：用於選取要匯出資料的 SQL 陳述式。SQL 陳述式只能包含[支援的作業](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction?hl=zh-tw#supported_functionality)。您必須在持續查詢的 `FROM` 子句中使用 [`APPENDS` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions?hl=zh-tw#appends)，指定開始處理資料的時間點。
-   * `SERVICE_ACCOUNT_EMAIL`：服務帳戶電子郵件地址。您可以在 Google Cloud 控制台的「服務帳戶」[頁面](https://console.cloud.google.com/iam-admin/serviceaccounts?hl=zh-tw)中取得服務帳戶電子郵件地址。
+   * `SERVICE_ACCOUNT_EMAIL`：服務帳戶電子郵件地址。您可以在 Google Cloud 控制台的「服務帳戶」[頁面](https://console.cloud.google.com/iam-admin/serviceaccounts?hl=zh-tw)取得服務帳戶電子郵件地址。
 
 ## 將多個資料欄匯出至 Pub/Sub
 
-如要在輸出內容中加入多個資料欄，可以建立包含資料欄值的結構體資料欄，然後使用 [`TO_JSON_STRING` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions?hl=zh-tw#to_json_string)將結構體值轉換為 JSON 字串。以下範例會匯出四個資料欄的資料，並將格式設為 JSON 字串：
+如要在輸出內容中加入多個資料欄，可以建立包含資料欄值的 struct 資料欄，然後使用 [`TO_JSON_STRING` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions?hl=zh-tw#to_json_string)將 struct 值轉換為 JSON 字串。以下範例會匯出四個資料欄的資料，並以 JSON 字串格式呈現：
 
 ```
 EXPORT DATA
@@ -187,15 +188,16 @@ AS (
 * 您必須使用[持續查詢](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction?hl=zh-tw)，才能匯出至 Pub/Sub。
 * 您無法在持續查詢中將結構定義傳遞至 Pub/Sub 主題。
 * 您無法將資料匯出至使用結構定義的 Pub/Sub 主題。
-* 匯出至 Pub/Sub 時，您可以匯出部分值為 `NULL` 的 JSON 格式記錄，但無法匯出僅包含 `NULL` 值的記錄。如要從查詢結果中排除 `NULL` 記錄，可以在持續查詢中加入 `WHERE message IS NOT NULL` 篩選條件。
+* 匯出至 Pub/Sub 時，您可以匯出 JSON 格式的記錄，其中部分值為 `NULL`，但無法匯出僅包含 `NULL` 值的記錄。在持續查詢中加入 `WHERE message IS NOT NULL` 篩選器，即可從查詢結果中排除 `NULL` 記錄。
 * 將資料匯出至透過[位置端點](https://docs.cloud.google.com/pubsub/docs/reference/service_apis_overview?hl=zh-tw#pubsub_endpoints)設定的 Pub/Sub 主題時，端點必須設定在與 BigQuery 資料集相同的 Google Cloud 區域邊界內，而該資料集包含您要查詢的資料表。
 * 匯出的資料不得超過 [Pub/Sub 配額](https://docs.cloud.google.com/pubsub/quotas?hl=zh-tw)。
 
 ## 定價
 
-匯出持續查詢中的資料時，系統會根據 [BigQuery 容量運算價格](https://cloud.google.com/bigquery/pricing?hl=zh-tw#capacity_compute_analysis_pricing)計費。如要執行持續查詢，您必須擁有使用 [企業版或 Enterprise Plus 版](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)的[預留](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw)，以及使用 `CONTINUOUS` 工作類型的[預留指派](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#assignments)。
+匯出持續查詢中的資料時，系統會按照 [BigQuery 容量運算價格](https://cloud.google.com/bigquery/pricing?hl=zh-tw#capacity_compute_analysis_pricing)計費。如要執行連續查詢，您必須擁有使用 [Enterprise 或 Enterprise Plus 版本](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)的[預留位置](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw)，以及使用 `CONTINUOUS` 工作類型的[預留位置指派](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#assignments)。
 
-資料匯出後，系統會開始收取 Pub/Sub 使用費用。詳情請參閱 [Pub/Sub 定價](https://cloud.google.com/pubsub/pricing?hl=zh-tw)。
+匯出資料後，系統會向您收取 Pub/Sub 使用費。
+詳情請參閱「[Pub/Sub 定價](https://cloud.google.com/pubsub/pricing?hl=zh-tw)」。
 
 
 
@@ -204,11 +206,11 @@ AS (
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-06-30 (世界標準時間)。
+上次更新時間：2026-07-16 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-30 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-16 (世界標準時間)。"],[],[]]

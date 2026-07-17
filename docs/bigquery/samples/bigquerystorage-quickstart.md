@@ -705,131 +705,6 @@ public class StorageSample {
 }
 ```
 
-### Node.js
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-// The read stream contains blocks of Avro-encoded bytes. We use the
-// 'avsc' library to decode these blocks. Install avsc with the following
-// command: npm install avsc
-const avro = require('avsc');
-
-// See reference documentation at
-// https://cloud.google.com/bigquery/docs/reference/storage
-const {BigQueryReadClient} = require('@google-cloud/bigquery-storage');
-
-const client = new BigQueryReadClient();
-
-async function bigqueryStorageQuickstart() {
-  // Get current project ID. The read session is created in this project.
-  // This project can be different from that which contains the table.
-  const myProjectId = await client.getProjectId();
-
-  // This example reads baby name data from the public datasets.
-  const projectId = 'bigquery-public-data';
-  const datasetId = 'usa_names';
-  const tableId = 'usa_1910_current';
-
-  const tableReference = `projects/${projectId}/datasets/${datasetId}/tables/${tableId}`;
-
-  const parent = `projects/${myProjectId}`;
-
-  /* We limit the output columns to a subset of those allowed in the table,
-   * and set a simple filter to only report names from the state of
-   * Washington (WA).
-   */
-  const readOptions = {
-    selectedFields: ['name', 'number', 'state'],
-    rowRestriction: 'state = "WA"',
-  };
-
-  let tableModifiers = null;
-  const snapshotSeconds = 0;
-
-  // Set a snapshot time if it's been specified.
-  if (snapshotSeconds > 0) {
-    tableModifiers = {snapshotTime: {seconds: snapshotSeconds}};
-  }
-
-  // API request.
-  const request = {
-    parent,
-    readSession: {
-      table: tableReference,
-      // This API can also deliver data serialized in Apache Arrow format.
-      // This example leverages Apache Avro.
-      dataFormat: 'AVRO',
-      readOptions,
-      tableModifiers,
-    },
-  };
-
-  const [session] = await client.createReadSession(request);
-
-  const schema = JSON.parse(session.avroSchema.schema);
-
-  const avroType = avro.Type.forSchema(schema);
-
-  /* The offset requested must be less than the last
-   * row read from ReadRows. Requesting a larger offset is
-   * undefined.
-   */
-  let offset = 0;
-
-  const readRowsRequest = {
-    // Required stream name and optional offset. Offset requested must be less than
-    // the last row read from readRows(). Requesting a larger offset is undefined.
-    readStream: session.streams[0].name,
-    offset,
-  };
-
-  const names = new Set();
-  const states = [];
-
-  /* We'll use only a single stream for reading data from the table. Because
-   * of dynamic sharding, this will yield all the rows in the table. However,
-   * if you wanted to fan out multiple readers you could do so by having a
-   * reader process each individual stream.
-   */
-  client
-    .readRows(readRowsRequest)
-    .on('error', console.error)
-    .on('data', data => {
-      offset = data.avroRows.serializedBinaryRows.offset;
-
-      try {
-        // Decode all rows in buffer
-        let pos;
-        do {
-          const decodedData = avroType.decode(
-            data.avroRows.serializedBinaryRows,
-            pos,
-          );
-
-          if (decodedData.value) {
-            names.add(decodedData.value.name);
-
-            if (!states.includes(decodedData.value.state)) {
-              states.push(decodedData.value.state);
-            }
-          }
-
-          pos = decodedData.offset;
-        } while (pos > 0);
-      } catch (error) {
-        console.log(error);
-      }
-    })
-    .on('end', () => {
-      console.log(`Got ${names.size} unique names in states: ${states}`);
-      console.log(`Last offset: ${offset}`);
-    });
-}
-```
-
 ### PHP
 
 在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 PHP 設定說明操作。詳情請參閱 [BigQuery PHP API 參考說明文件](https://docs.cloud.google.com/php/docs/reference/cloud-bigquery/latest/BigQueryClient?hl=zh-tw)。
@@ -1003,7 +878,7 @@ print("Got {} unique names in states: {}".format(len(names), ", ".join(states)))
 
 ## 後續步驟
 
-如要搜尋及篩選其他 Google Cloud 產品的程式碼範例，請參閱[Google Cloud 範例瀏覽工具](https://docs.cloud.google.com/docs/samples?product=bigquerystorage&hl=zh-tw)。
+如要搜尋及篩選其他 Google Cloud 產品的程式碼範例，請參閱[Google Cloud 範例瀏覽工具](https://docs.cloud.google.com/docs/samples?product=bigquery&hl=zh-tw)。
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 

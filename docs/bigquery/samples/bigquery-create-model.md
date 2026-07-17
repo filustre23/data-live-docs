@@ -75,55 +75,6 @@ public class CreateModel {
 }
 ```
 
-### Node.js
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-// Import the Google Cloud client library
-const {BigQuery} = require('@google-cloud/bigquery');
-const bigquery = new BigQuery();
-
-async function createModel() {
-  // Creates a model named "my_model" in "my_dataset".
-
-  /**
-   * TODO(developer): Uncomment the following lines before running the sample
-   */
-  // const datasetId = "my_dataset";
-  // const modelId = "my_model";
-
-  const query = `CREATE OR REPLACE MODEL \`${datasetId}.${modelId}\`
-       OPTIONS(model_type='logistic_reg') AS
-       SELECT
-         IF(totals.transactions IS NULL, 0, 1) AS label,
-         IFNULL(device.operatingSystem, "") AS os,
-         device.isMobile AS is_mobile,
-         IFNULL(geoNetwork.country, "") AS country,
-         IFNULL(totals.pageviews, 0) AS pageviews
-       FROM
-         \`bigquery-public-data.google_analytics_sample.ga_sessions_*\`
-       WHERE
-         _TABLE_SUFFIX BETWEEN '20160801' AND '20170631'
-       LIMIT  100000;`;
-
-  const queryOptions = {
-    query: query,
-  };
-
-  // Run query to create a model
-  const [job] = await bigquery.createQueryJob(queryOptions);
-
-  // Wait for the query to finish
-  await job.getQueryResults();
-
-  console.log(`Model ${modelId} created.`);
-}
-createModel();
-```
-
 ## 後續步驟
 
 如要搜尋及篩選其他 Google Cloud 產品的程式碼範例，請參閱[Google Cloud 範例瀏覽工具](https://docs.cloud.google.com/docs/samples?product=bigquery&hl=zh-tw)。

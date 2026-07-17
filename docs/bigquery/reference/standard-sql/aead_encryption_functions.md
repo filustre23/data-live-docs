@@ -441,6 +441,4 @@ WITH CustomerRawKeys AS (
   SELECT 1 AS customer_id, b'0123456789012345' AS raw_key_bytes UNION ALL
   SELECT 2, b'9876543210543210' UNION ALL
   SELECT 3, b'0123012301230123'
-), CustomerIds AS (
-  SELECT
 ```

@@ -80,7 +80,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    **啟用 API 時所需的角色**
 
-   如要啟用 API，您需要服務使用情形管理員 IAM 角色 (`roles/serviceusage.serviceUsageAdmin`)，其中包含 `serviceusage.services.enable` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用情形管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
    [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery&hl=zh-tw)
 
@@ -132,7 +132,7 @@ WHERE num_bikes_available > 30
 
 ### 執行查詢
 
-如要使用 Google Cloud 控制台執行查詢，請按照下列步驟操作：
+如何使用 Google Cloud 控制台執行查詢：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -162,7 +162,7 @@ WHERE num_bikes_available > 30
 2. 您可以對地圖套用統一或資料導向樣式。
    如要以視覺化方式呈現各個車站的可用自行車數量，請在「資料欄」中選取 `num_bikes_available`。
 3. 如要提升可視性，請調整「不透明度」、「顏色」或「點大小」。如果資料包含離群值，可以調整「最小值」和「最大值」。地圖上仍會顯示超出這個範圍的值，但不會套用任何顏色。
-4. 如要查看地理位置的屬性，請按一下該地理位置。
+4. 如要查看地理區域的屬性，請按一下該區域。
 5. 如要以衛星模式查看地圖，請按一下「衛星」。
 
 ## 在 Geo Viz 中將查詢結果視覺化
@@ -213,7 +213,7 @@ WHERE num_bikes_available > 30
 系統支援的樣式屬性包含：
 
 * **fillColor**。多邊形或點的填滿顏色。例如，可以使用「linear」或「interval」函式以數值來對應顏色漸層。
-* **fillOpacity**。多邊形或點的填充透明度。值必須介於 0 到 1 之間，其中 `0` = 透明，且 `1` = 不透明。
+* **fillOpacity**。多邊形或點的填充不透明度。值必須介於 0 到 1 之間，其中 `0` = 透明，且 `1` = 不透明。
 * **strokeColor**。多邊形或線條的筆觸或外框顏色。
 * **strokeOpacity**。多邊形或線條的筆觸或外框的透明度。值必須介於 0 到 1 之間，其中 `0` = 透明，且 `1` = 不透明。
 * **strokeWeight**。多邊形或線條的筆觸或外框寬度 (以像素為單位)。
@@ -222,13 +222,13 @@ WHERE num_bikes_available > 30
 每種樣式可能得到全域值 (應用於每個結果) 或是資料導向值 (根據每個結果資料列的資料採取不同的應用方式)。針對資料導向值，以下的項目皆會影響其結果：
 
 * **function**。用於從欄位值計算樣式值的函式。
-* **身分**。每個欄位的資料值都做為樣式值使用。
+* **identity**。每個欄位的資料值都做為樣式值使用。
 * **類別**。將領域中列出的每個欄位的資料值以一對一的方式對應至範圍中的相應樣式。
 * **間隔**。每個欄位的資料值會無條件捨去至領域中最接近的值，並依據範圍中對應的樣式進行樣式設定。
 * **線性**。每個欄位的資料值會線性內插於領域的值之間，並混合採用範圍中對應的樣式。
-* **欄位**。將資料中的指定欄位當成樣式函式的輸入使用。
+* **field**。將資料中的指定欄位當成樣式函式的輸入使用。
 * **網域**。來自欄位的範例輸入值的已排序清單。範例輸入 (領域) 會根據指定的函式與範例輸出 (範圍) 配對，並用於推測所有輸入 (包括未列於領域中的輸入) 的樣式值。領域中的值必須要有相同的類型 (文字或數字等)，做為您要進行視覺化之欄位的值。
-* **範圍**。樣式規則的範例輸出值清單。範圍中的值必須要有相同的類型 (顏色或數字)，做為您要控制的樣式屬性。例如，`fillColor` 屬性的範圍應該僅包含顏色。
+* **range**。樣式規則的範例輸出值清單。範圍中的值必須要有相同的類型 (顏色或數字)，做為您要控制的樣式屬性。例如，`fillColor` 屬性的範圍應該僅包含顏色。
 
 如要將您的地圖進行格式化，請進行以下操作：
 
@@ -275,7 +275,7 @@ WHERE num_bikes_available > 30
 
 ## 後續步驟
 
-* 如要進一步瞭解地理空間分析的視覺化選項，請參閱「[視覺化地理空間資料](https://docs.cloud.google.com/bigquery/docs/geospatial-visualize?hl=zh-tw)」。
+* 如要進一步瞭解地理空間分析的視覺化選項，請參閱「[視覺化呈現地理空間資料](https://docs.cloud.google.com/bigquery/docs/geospatial-visualize?hl=zh-tw)」。
 * 如要進一步瞭解如何使用地理空間分析資料，請參閱「[使用地理空間資料](https://docs.cloud.google.com/bigquery/docs/geospatial-data?hl=zh-tw)」。
 * 如需使用地理空間分析的教學課程，請參閱[使用地理空間分析繪製颶風路徑](https://docs.cloud.google.com/bigquery/docs/geospatial-tutorial-hurricane?hl=zh-tw)。
 * 如要查看地理空間分析的 GoogleSQL 函式說明文件，請參閱[GoogleSQL 中的地理函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions?hl=zh-tw)。
@@ -287,11 +287,11 @@ WHERE num_bikes_available > 30
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-06-30 (世界標準時間)。
+上次更新時間：2026-07-16 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-30 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-16 (世界標準時間)。"],[],[]]

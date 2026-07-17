@@ -85,7 +85,7 @@ ONNX 提供統一格式，可用於表示任何機器學習 (ML) 架構。BigQue
 
    **啟用 API 時所需的角色**
 
-   如要啟用 API，您需要服務使用情形管理員 IAM 角色 (`roles/serviceusage.serviceUsageAdmin`)，其中包含 `serviceusage.services.enable` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用情形管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
    [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery.googleapis.com%2Cstorage-component.googleapis.com&hl=zh-tw)
 3. 請確認您具備[必要權限](#required_permissions)，可執行本文件中的工作。
@@ -94,7 +94,7 @@ ONNX 提供統一格式，可用於表示任何機器學習 (ML) 架構。BigQue
 
 如果您建立新專案，您就是專案擁有者，並已獲得完成本教學課程所需的所有 Identity and Access Management (IAM) 權限。
 
-如果您使用現有專案，請按照下列步驟操作。
+如果您使用現有專案，請執行下列操作。
 
 請確認您在專案中具備下列角色：
 
@@ -119,7 +119,7 @@ ONNX 提供統一格式，可用於表示任何機器學習 (ML) 架構。BigQue
 2. 選取專案。
 3. 按一下person\_add「Grant access」(授予存取權)。
 4. 在「New principals」(新增主體) 欄位中，輸入您的使用者 ID。 這通常是指 Google 帳戶的電子郵件地址。
-5. 按一下「選取角色」，然後搜尋角色。
+5. 按一下「Select a role」(選取角色)，然後搜尋角色。
 6. 如要授予其他角色，請按一下add「Add another role」(新增其他角色)，然後新增其他角色。
 7. 按一下「Save」(儲存)。
 
@@ -131,7 +131,7 @@ ONNX 提供統一格式，可用於表示任何機器學習 (ML) 架構。BigQue
 
 ### 使用 scikit-learn 訓練分類模型
 
-使用下列程式碼範例，在 [Iris](https://scikit-learn.org/stable/auto_examples/datasets/plot_iris_dataset.html) 資料集上建立並訓練 scikit-learn [管道](https://scikit-learn.org/stable/modules/compose.html#pipeline)。如需安裝及使用 scikit-learn 的操作說明，請參閱 [scikit-learn 安裝指南](https://scikit-learn.org/stable/install.html)。
+使用下列程式碼範例，在 [Iris](https://scikit-learn.org/stable/auto_examples/datasets/plot_iris_dataset.html) 資料集上建立及訓練 scikit-learn [管道](https://scikit-learn.org/stable/modules/compose.html#pipeline)。如需安裝及使用 scikit-learn 的操作說明，請參閱 [scikit-learn 安裝指南](https://scikit-learn.org/stable/install.html)。
 
 ```
 import numpy
@@ -191,7 +191,7 @@ with open('pipeline_rf.onnx', 'wb') as f:
 
 儲存模型後，請按照下列步驟操作：
 
-* [建立 Cloud Storage bucket](https://docs.cloud.google.com/storage/docs/creating-buckets?hl=zh-tw) 來儲存模型。
+* [建立 Cloud Storage 值區](https://docs.cloud.google.com/storage/docs/creating-buckets?hl=zh-tw)來儲存模型。
 * [將 ONNX 模型上傳至 Cloud Storage bucket](https://docs.cloud.google.com/storage/docs/uploading-objects?hl=zh-tw)。
 
 ## 建立資料集
@@ -204,11 +204,11 @@ with open('pipeline_rf.onnx', 'wb') as f:
 
    [前往 BigQuery 頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 在「Explorer」窗格中，按一下專案名稱。
-3. 依序點按 more\_vert「View actions」(查看動作) >「Create dataset」(建立資料集)
+3. 依序點按 more\_vert「View actions」(查看動作) >「Create dataset」(建立資料集)。
 4. 在「建立資料集」頁面中，執行下列操作：
 
    * 在「Dataset ID」(資料集 ID) 中輸入 `bqml_tutorial`。
-   * 針對「位置類型」選取「多區域」，然後選取「美國」。
+   * 針對「Location type」(位置類型) 選取「Multi-region」(多區域)，然後選取「US」(美國)。
    * 其餘設定請保留預設狀態，然後按一下「建立資料集」。
 
 ### bq
@@ -243,8 +243,7 @@ with open('pipeline_rf.onnx', 'wb') as f:
 
 ### BigQuery DataFrames
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定說明操作。
-詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -314,8 +313,7 @@ bqclient.create_dataset("bqml_tutorial", exists_ok=True)
 
 ### BigQuery DataFrames
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定說明操作。
-詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -335,7 +333,7 @@ imported_onnx_model = ONNXModel(
 )
 ```
 
-如要進一步瞭解如何將 ONNX 模型匯入 BigQuery，包括格式和儲存空間需求，請參閱[匯入 ONNX 模型的 `CREATE MODEL` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-onnx?hl=zh-tw)。
+如要進一步瞭解如何將 ONNX 模型匯入 BigQuery (包括格式和儲存空間需求)，請參閱[匯入 ONNX 模型的 `CREATE MODEL` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-onnx?hl=zh-tw)。
 
 ## 使用匯入的 ONNX 模型進行預測
 
@@ -350,9 +348,10 @@ imported_onnx_model = ONNXModel(
 
 這些輸入內容與`initial_types`您[將模型轉換為 ONNX 格式](https://github.com/onnx/tutorials#converting-to-onnx-format)時定義的內容相符。
 
-輸出內容包括 `label` 和 `probabilities` 資料欄，以及輸入資料表中的資料欄。`label` 代表預測的類別標籤。`probabilities` 是機率陣列，代表每個類別的機率。
+輸出內容包括 `label` 和 `probabilities` 資料欄，以及輸入資料表中的資料欄。`label` 代表預測的類別標籤。
+`probabilities` 是機率陣列，代表每個類別的機率。
 
-如要使用匯入的 ONNX 模型進行預測，請選擇下列其中一種做法：
+如要使用匯入的 ONNX 模型進行預測，請選擇下列其中一個選項：
 
 ### 控制台
 
@@ -370,7 +369,7 @@ imported_onnx_model = ONNXModel(
    )
    ```
 
-   查詢結果類似於下列內容：
+   查詢結果大致如下：
 
 ### bq
 
@@ -386,8 +385,7 @@ MODEL `example_dataset.imported_onnx_model`,
 
 ### BigQuery DataFrames
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定說明操作。
-詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -461,11 +459,11 @@ gcloud projects delete PROJECT_ID
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-05 (世界標準時間)。
+上次更新時間：2026-07-16 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-05 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-16 (世界標準時間)。"],[],[]]

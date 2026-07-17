@@ -527,8 +527,3 @@ SELECT COSINE_DISTANCE([(1, 0.0), (2, 0.0)], [(1, 3.0), (2, 4.0)]) AS results;
 Both non-sparse vectors must have the same
 dimensions. If not, an error is produced. In the following example, the
 first vector has two dimensions and the second vector has three:
-
-```
--- ERROR
-SELECT COSINE_DISTANCE([9.0
-```

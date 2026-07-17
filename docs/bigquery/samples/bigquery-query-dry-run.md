@@ -118,44 +118,6 @@ public class QueryDryRun {
 }
 ```
 
-### Node.js
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-// Import the Google Cloud client library
-const {BigQuery} = require('@google-cloud/bigquery');
-const bigquery = new BigQuery();
-
-async function queryDryRun() {
-  // Runs a dry query of the U.S. given names dataset for the state of Texas.
-
-  const query = `SELECT name
-    FROM \`bigquery-public-data.usa_names.usa_1910_2013\`
-    WHERE state = 'TX'
-    LIMIT 100`;
-
-  // For all options, see https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query
-  const options = {
-    query: query,
-    // Location must match that of the dataset(s) referenced in the query.
-    location: 'US',
-    dryRun: true,
-  };
-
-  // Run the query as a job
-  const [job] = await bigquery.createQueryJob(options);
-
-  // Print the status and statistics
-  console.log('Status:');
-  console.log(job.metadata.status);
-  console.log('\nJob Statistics:');
-  console.log(job.metadata.statistics);
-}
-```
-
 ### PHP
 
 在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 PHP 設定說明操作。詳情請參閱 [BigQuery PHP API 參考說明文件](https://docs.cloud.google.com/php/docs/reference/cloud-bigquery/latest/BigQueryClient?hl=zh-tw)。
@@ -189,35 +151,6 @@ function dry_run_query(string $projectId, string $query): void
 
     printf('This query will process %s bytes' . PHP_EOL, $info['statistics']['totalBytesProcessed']);
 }
-```
-
-### Python
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-from google.cloud import bigquery
-
-# Construct a BigQuery client object.
-client = bigquery.Client()
-
-job_config = bigquery.QueryJobConfig(dry_run=True, use_query_cache=False)
-
-# Start the query, passing in the extra configuration.
-query_job = client.query(
-    (
-        "SELECT name, COUNT(*) as name_count "
-        "FROM `bigquery-public-data.usa_names.usa_1910_2013` "
-        "WHERE state = 'WA' "
-        "GROUP BY name"
-    ),
-    job_config=job_config,
-)  # Make an API request.
-
-# A dry run query completes immediately.
-print("This query will process {} bytes.".format(query_job.total_bytes_processed))
 ```
 
 ## 後續步驟

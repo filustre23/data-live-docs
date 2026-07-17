@@ -982,5 +982,5 @@ public class DisableTransferConfig {
     String configId = "MY_CONFIG_ID";
     TransferConfig transferConfig =
         TransferConfig.newBuilder().setName(configId).setDisabled(true).build();
-    FieldMask </
+    FieldMask updateMask =
 ```

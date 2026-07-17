@@ -24,7 +24,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 * 使用 [`AI.GENERATE_EMBEDDING` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding?hl=zh-tw)搭配遠端模型，從 BigQuery 資料表中的文字生成嵌入。
 * 建立[向量索引](https://docs.cloud.google.com/bigquery/docs/vector-index?hl=zh-tw)，為嵌入建立索引，以提升搜尋效能。
 * 使用 [`VECTOR_SEARCH` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions?hl=zh-tw#vector_search)搭配嵌入項目，搜尋相似文字。
-* 使用 [`AI.GENERATE_TEXT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text?hl=zh-tw)生成文字，並運用向量搜尋結果增強提示輸入內容，藉此執行 RAG，提升結果品質。
+* 使用 [`AI.GENERATE_TEXT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text?hl=zh-tw)生成文字，並運用向量搜尋結果擴增提示輸入內容，藉此執行 RAG，提升結果品質。
 
 本教學課程使用 BigQuery 公開資料表 `patents-public-data.google_patents_research.publications`。
 
@@ -35,7 +35,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 * 建立及使用 BigQuery 資料集、連線和模型：BigQuery 管理員 (`roles/bigquery.admin`)。
 * 將權限授予連線的服務帳戶：專案 IAM 管理員 (`roles/resourcemanager.projectIamAdmin`)。
 
-這些預先定義的角色具備執行本文所述工作所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
+這些預先定義的角色具備執行本文中工作所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
 #### 所需權限
 
@@ -78,8 +78,8 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    **選取或建立專案所需的角色**
 
-   * **選取專案**：選取專案時，不需要具備特定 IAM 角色，只要您已獲授角色，即可選取任何專案。
-   * **建立專案**：如要建立專案，您需要「專案建立者」角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   * **選取專案**：選取專案時，不需要具備特定 IAM 角色，只要您在專案中獲派角色，即可選取該專案。
+   * **建立專案**：如要建立專案，您需要專案建立者角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
    **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，而不要選取現有專案。完成這些步驟後，您就可以刪除專案，並移除與該專案相關聯的所有資源。
 
    [前往專案選取器](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
@@ -88,7 +88,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    **啟用 API 時所需的角色**
 
-   如要啟用 API，您需要服務使用情形管理員 IAM 角色 (`roles/serviceusage.serviceUsageAdmin`)，其中包含 `serviceusage.services.enable` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用情形管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
    [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery.googleapis.com%2Cbigqueryconnection.googleapis.com%2Caiplatform.googleapis.com&hl=zh-tw)
 
@@ -102,7 +102,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    [前往 BigQuery 頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 在「Explorer」窗格中，按一下專案名稱。
-3. 依序點按 more\_vert「View actions」(查看動作) >「Create dataset」(建立資料集)
+3. 依序點按 more\_vert「View actions」(查看動作) >「Create dataset」(建立資料集)。
 4. 在「建立資料集」頁面中，執行下列操作：
 
    * 在「Dataset ID」(資料集 ID) 中輸入 `bqml_tutorial`。
@@ -141,7 +141,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 建立用於生成文字嵌入的遠端模型
 
-建立遠端模型，代表代管的 Agent Platform 文字嵌入生成模型：
+建立遠端模型，代表託管的 Agent Platform 文字嵌入生成模型：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -155,11 +155,11 @@ Google uses AI technology to translate content into your preferred language. AI 
    ```
 
    查詢會在幾秒內完成，之後即可透過「Explorer」窗格存取模型
-   `embedding_model`。由於查詢是使用 `CREATE MODEL` 陳述式建立模型，因此不會有查詢結果。
+   `embedding_model`。由於查詢使用 `CREATE MODEL` 陳述式建立模型，因此不會有查詢結果。
 
 ## 生成文字嵌入
 
-使用 [`AI.GENERATE_EMBEDDING` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding?hl=zh-tw)從專利摘要產生文字嵌入，然後寫入 BigQuery 資料表，以便搜尋。
+使用 [`AI.GENERATE_EMBEDDING` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding?hl=zh-tw)從專利摘要生成文字嵌入，然後將這些嵌入寫入 BigQuery 資料表，以便進行搜尋。
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -181,7 +181,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 這項查詢大約需要 5 分鐘才能完成。
 
-使用 [`AI.GENERATE_EMBEDDING` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding?hl=zh-tw)產生嵌入內容時，可能會因為 Agent Platform LLM [配額](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#cloud_ai_service_functions)或服務無法使用而失敗。錯誤詳細資料會顯示在 `status` 欄中。如果資料欄為空白，表示已成功產生嵌入內容。`status`
+使用 [`AI.GENERATE_EMBEDDING` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding?hl=zh-tw)產生嵌入內容時，可能會因 Agent Platform LLM [配額](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#cloud_ai_service_functions)或服務無法使用而失敗。錯誤詳細資料會傳回至 `status` 欄。如果資料欄為空白，表示已成功產生嵌入內容。`status`
 
 如要瞭解 BigQuery 中其他產生文字嵌入的方法，請參閱[使用預先訓練的 TensorFlow 模型嵌入文字教學課程](https://docs.cloud.google.com/bigquery/docs/generate-embedding-with-tensorflow-models?hl=zh-tw)。
 
@@ -194,7 +194,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 1. 前往「BigQuery」頁面
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在查詢編輯器中，執行下列 SQL 陳述式：
+2. 在查詢編輯器中執行下列 SQL 陳述式：
 
    ```
    CREATE OR REPLACE VECTOR INDEX my_index
@@ -206,14 +206,14 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 建立向量索引通常只需要幾秒鐘。向量索引需要再 2 到 3 分鐘才能填入資料並供您使用。
 
-### 確認向量索引是否準備就緒
+### 確認向量索引是否就緒
 
 系統會以非同步方式填入向量索引。您可以查詢 [`INFORMATION_SCHEMA.VECTOR_INDEXES` 檢視區塊](https://docs.cloud.google.com/bigquery/docs/information-schema-vector-indexes?hl=zh-tw)，並確認 `coverage_percentage` 欄值大於 `0`，且 `last_refresh_time` 欄值不是 `NULL`，藉此檢查索引是否已可供使用。
 
 1. 前往「BigQuery」頁面
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在查詢編輯器中，執行下列 SQL 陳述式：
+2. 在查詢編輯器中執行下列 SQL 陳述式：
 
    ```
    SELECT table_name, index_name, index_status,
@@ -230,12 +230,12 @@ Google uses AI technology to translate content into your preferred language. AI 
 `top_k` 引數會決定要傳回的相符項目數量，在本例中為五個。`fraction_lists_to_search` 選項會決定要搜尋的向量索引清單百分比。[您建立的向量索引](#create_a_vector_index)有 500 個清單，因此 `.01` 的 `fraction_lists_to_search` 值表示這項向量搜尋會掃描其中五個清單。如這裡所示，`fraction_lists_to_search` 值越低，[召回率](https://developers.google.com/machine-learning/crash-course/classification/accuracy-precision-recall?hl=zh-tw#recall)就越低，但效能會越快。如要進一步瞭解向量索引清單，請參閱`num_lists`
 [向量索引選項](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#vector_index_option_list)。
 
-您必須使用與要比較資料表相同的模型，才能在這項查詢中產生嵌入，否則搜尋結果將不準確。
+您必須使用與要比較資料表中的嵌入相同的模型，產生這項查詢中的嵌入，否則搜尋結果不會準確。
 
 1. 前往「BigQuery」頁面
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在查詢編輯器中，執行下列 SQL 陳述式：
+2. 在查詢編輯器中執行下列 SQL 陳述式：
 
    ```
    SELECT query.query, base.publication_number, base.title, base.abstract
@@ -280,7 +280,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    ```
 
    查詢會在幾秒內完成，之後即可透過「Explorer」窗格存取模型
-   `text_model`。由於查詢是使用 `CREATE MODEL` 陳述式建立模型，因此不會有查詢結果。
+   `text_model`。由於查詢使用 `CREATE MODEL` 陳述式建立模型，因此不會有查詢結果。
 
 ## 根據向量搜尋結果生成文字
 
@@ -360,11 +360,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-05 (世界標準時間)。
+上次更新時間：2026-07-16 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-05 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-16 (世界標準時間)。"],[],[]]

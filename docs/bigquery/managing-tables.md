@@ -1127,4 +1127,6 @@ print("A copy of the table created.")
 
 您可以透過下列方式，將多個來源資料表複製到目的地資料表：
 
-* 使用 bq 指令列工具的 `bq cp`
+* 使用 bq 指令列工具的 `bq cp` 指令。
+* 呼叫 [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert?hl=zh-tw) 方法、設定 `copy` 工作，然後指定 `sourceTables` 屬性。
+* 使用用戶端程式庫。

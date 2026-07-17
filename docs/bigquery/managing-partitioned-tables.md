@@ -24,12 +24,12 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 您可以透過下列方式取得分區資料表的相關資訊：
 
-* 使用 [`INFORMATION_SCHEMA.PARTITIONS`](https://docs.cloud.google.com/bigquery/docs/information-schema-partitions?hl=zh-tw) 檢視畫面 (「預覽」)。
+* 使用「預覽」[`INFORMATION_SCHEMA.PARTITIONS`](https://docs.cloud.google.com/bigquery/docs/information-schema-partitions?hl=zh-tw)檢視畫面 ()。
 * 使用 `__PARTITIONS_SUMMARY__` 中繼資料表 (僅限舊版 SQL)。
 
 ### 使用 `INFORMATION_SCHEMA` 檢視表取得分區中繼資料
 
-查詢 `INFORMATION_SCHEMA.PARTITIONS` 檢視表時，查詢結果會為每個分區包含一個資料列。舉例來說，下列查詢會列出資料集中特定資料表的所有分區：
+查詢 `INFORMATION_SCHEMA.PARTITIONS` 檢視表時，查詢結果會為每個分區包含一個資料列。例如，下列查詢會列出資料集中特定資料表的所有分區：
 
 ```
 #standardSQL
@@ -42,7 +42,7 @@ WHERE
   AND partition_id IS NOT NULL --filter out non-partitioned tables
 ```
 
-詳情請參閱「[`INFORMATION_SCHEMA.PARTITIONS`](https://docs.cloud.google.com/bigquery/docs/information-schema-partitions?hl=zh-tw)」。
+詳情請參閱 [`INFORMATION_SCHEMA.PARTITIONS`](https://docs.cloud.google.com/bigquery/docs/information-schema-partitions?hl=zh-tw)。
 
 ### 使用中繼資料表取得分區中繼資料
 
@@ -71,7 +71,7 @@ FROM
 | `creation_time` | 分區的建立時間，從世界標準時間 1970 年 1 月 1 日開始計算，並以毫秒為單位。 |
 | `last_modified_time` | 分區的前次修改時間，從世界標準時間 1970 年 1 月 1 日開始計算，並以毫秒為單位。 |
 
-如要執行使用 `__PARTITIONS_SUMMARY__` 中繼資料表的查詢工作，您至少必須具備 `bigquery.jobs.create` 權限和 `bigquery.tables.getData` 權限。
+如要執行使用 `__PARTITIONS_SUMMARY__` 中繼資料表的查詢工作，您至少必須具備 `bigquery.jobs.create` 和 `bigquery.tables.getData` 權限。
 
 如要進一步瞭解 BigQuery 中的身分與存取權管理角色，請參閱[存取權控管](https://docs.cloud.google.com/bigquery/access-control?hl=zh-tw)。
 
@@ -79,20 +79,21 @@ FROM
 
 建立以擷取時間或時間單位資料欄分區的資料表時，您可以指定分區到期時間。這項設定會指定 BigQuery 保留各分區資料的時間長度。這項設定會套用至資料表中的所有分區，但系統會根據分區時間，為每個分區獨立計算。
 
-分區的到期時間是根據世界標準時間的分區界線計算。舉例來說，如果採用每日分區，分區界線就是午夜 (世界標準時間 00:00:00)。如果資料表的分區到期時間為 6 小時，則每個分區會在隔天的世界標準時間 06:00:00 到期。分區過期時，BigQuery 會刪除該分區中的資料。
+分區的到期時間是根據世界標準時間的分區界線計算。舉例來說，如果採用每日分區，分區界線就是午夜 (世界標準時間 00:00:00)。如果資料表的分區到期時間為 6 小時，則每個分區會在隔天的世界標準時間 06:00:00 到期。分區到期後，BigQuery 就會開始刪除該分區中的資料。
 
 您也可以在資料集層級指定[預設分區到期時間](https://docs.cloud.google.com/bigquery/docs/updating-datasets?hl=zh-tw#partition-expiration)。如果您為資料表設定分區到期時間，該值會覆寫預設分區到期時間。如果您未指定任何分區到期時間 (在資料表或資料集上)，分區就永遠不會過期。
 
 **注意：** 整數範圍分區資料表不支援分區到期時間。
 
-如果您設定資料表到期時間，該值會優先於分區到期時間。舉例來說，如果資料表到期時間設為 5 天，分區到期時間設為 7 天，則資料表和其中的所有分區會在 5 天後刪除。
+如果您設定了資料表到期時間，該值會優先於分區到期時間。舉例來說，如果資料表到期時間設為 5 天，分區到期時間設為 7 天，則資料表和其中的所有分區會在 5 天後刪除。
 
 建立資料表後，您可以隨時更新資料表的分區到期時間。無論分區何時建立，新設定都會套用到該資料表中的所有分區。如果現有分區的建立時間早於新的有效期限，就會立即過期。同樣地，如果資料要複製或插入按時間單位資料欄分區的資料表，系統會立即讓任何早於資料表設定分區到期時間的分區過期。
 
-分區到期時，BigQuery 會刪除該分區。
-系統會依據[時間旅行](https://docs.cloud.google.com/bigquery/docs/time-travel?hl=zh-tw)和[安全防護](https://docs.cloud.google.com/bigquery/docs/time-travel?hl=zh-tw#fail-safe)政策保留分割區資料，並視您的帳單模式而定，可能需要支付相關費用。在此之前，資料表配額的[分區計數](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#partitioned_tables)仍會維持不變。如要立即刪除分區，可以[手動刪除分區](#delete_a_partition)。
+分區到期時，BigQuery 會將分區標示為待刪除，但不會立即刪除。背景程序會以非同步方式處理實際刪除作業，可能需要幾天才能完成。在背景程序刪除分區前，該分區仍會計入[資料表配額](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#partitioned_tables)。如要立即刪除分區，可以[手動刪除分區](#delete_a_partition)。
 
-**注意：** BigQuery 稽核記錄不會記錄過期分區的自動刪除作業。
+刪除資料分割後，系統會根據[時間旅行](https://docs.cloud.google.com/bigquery/docs/time-travel?hl=zh-tw)和[安全防護](https://docs.cloud.google.com/bigquery/docs/time-travel?hl=zh-tw#fail-safe)政策保留資料分割資料，並視您的帳單模型收取費用。
+
+**注意：** 系統不會在 BigQuery 稽核記錄中記錄過期分區的自動刪除作業。
 
 ### 更新分區到期時間
 
@@ -104,7 +105,7 @@ FROM
 
 ### SQL
 
-使用 [`ALTER TABLE SET OPTIONS` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_table_set_options_statement)。以下範例會將效期更新為 5 天。如要移除資料表的分區到期時間，請將 `partition_expiration_days` 設為 `NULL`。
+使用 [`ALTER TABLE SET OPTIONS` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_table_set_options_statement)。以下範例會將效期更新為 5 天。如要移除資料表的分區到期日，請將 `partition_expiration_days` 設為 `NULL`。
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -162,11 +163,11 @@ myotherproject:mydataset.mytable
 
 ## 設定分區篩選器必要條件
 
-建立分區資料表時，您可以要求對該資料表的所有查詢，都必須包含根據分區資料欄篩選的述詞篩選器 (`WHERE` 子句)。這項設定可以提升效能並降低成本，因為 BigQuery 可以使用篩選器，修剪不符合述詞的分區。這項規定也適用於參照分區資料表的檢視區和具體化檢視區查詢。
+建立分區資料表時，您可以要求對該資料表的所有查詢都必須包含述詞篩選器 (`WHERE` 子句)，以篩選分區資料欄。這項設定可以提升效能並降低成本，因為 BigQuery 可以使用篩選器，修剪不符合述詞的分區。這項規定也適用於參照分區資料表的檢視區塊和具體化檢視區塊查詢。
 
 如要瞭解如何在建立分區資料表時新增「Require partition filter」(需要分區篩選器) 選項，請參閱[建立分區資料表](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables?hl=zh-tw)一節。
 
-如果分區資料表設有「需要分區篩選器」，則對該資料表執行的每項查詢都必須至少包含一個述詞，且該述詞只能參照分區欄。如果查詢沒有這類述詞，就會傳回下列錯誤：
+如果分區資料表設有「需要分區篩選器」，則對該資料表執行的每項查詢都必須至少包含一個述詞，且該述詞只會參照分區欄。如果查詢沒有這類述詞，系統會傳回下列錯誤：
 
 `Cannot query over table 'project_id.dataset.table' without a
 filter that can be used for partition elimination`。
@@ -175,7 +176,7 @@ filter that can be used for partition elimination`。
 
 ### 更新分區篩選器必要條件
 
-如果您在建立分區資料表時未啟用「Require partition filter」(需要分區篩選器) 選項，可以更新資料表以新增選項。
+如果您在建立分區資料表時未啟用「需要分區篩選器」選項，可以更新資料表以新增選項。
 
 ### 控制台
 
@@ -271,7 +272,7 @@ public class UpdateTableRequirePartitionFilter {
 * 將分區資料表複製到新的目的地資料表
   :   所有分區資訊都會隨資料表一起複製。新資料表與舊資料表的分區相同。
 * 將非分區資料表複製到現有的分區資料表
-  :   這項操作僅支援擷取時間分區。BigQuery 會將來源資料複製到代表目前日期的分區。這項作業不支援依時間單位資料欄分區或整數範圍分區的資料表。
+  :   這項操作僅支援擷取時間分區。BigQuery 會將來源資料複製到代表目前日期的分區。這項作業不支援以時間單位資料欄分區或整數範圍分區的資料表。
 * 將分區資料表複製到其他分區資料表
   :   來源與目的地資料表的分區設定必須相符。
 * 將分區資料表複製到非分區資料表
@@ -280,7 +281,7 @@ public class UpdateTableRequirePartitionFilter {
   :   如果您將多個來源資料表複製到相同工作中的分區資料表，來源資料表不能同時包含分區與非分區資料表。
 
       如果所有來源資料表都是分區資料表，則所有來源資料表的分區設定都必須符合目的地資料表的分區設定。
-* 複製具有[分群規格](https://docs.cloud.google.com/bigquery/docs/clustered-tables?hl=zh-tw)的分區資料表
+* 複製具有[叢集規格](https://docs.cloud.google.com/bigquery/docs/clustered-tables?hl=zh-tw)的分區資料表
   :   如果您複製到新資料表，所有分群資訊都會隨資料表一起複製。新資料表與舊資料表的叢集相同。
 
       如果複製到現有資料表，來源和目的地資料表的叢集規格必須相符。
@@ -390,7 +391,7 @@ myotherproject:mydataset2.mytable2
 
 **注意：** 含分區修飾符的 `bq cp` 指令適用於以資料欄為基礎的分區，其中來源分區和目的地分區相同。`bq cp` 指令也適用於以擷取時間為準的分區，其中分區代表相同的時間單位，或包含來源分區的較粗略時間單位。舉例來說，如果 `$20180130` 是來源分區修飾符，有效目的地分區修飾符包括 `$20180130`、`$201801` 和 `$2018`。如要將以資料欄為準的分區複製到完全不同的分區修飾符，或複製到更精細的時間單位分區，請使用 [`INSERT SELECT` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax?hl=zh-tw#insert_statement)。
 
-如要複製多個分區，請以逗號分隔的清單形式指定分區：
+如要複製多個分區，請以逗號分隔清單的形式指定分區：
 
 ```
 bq cp \
@@ -412,7 +413,7 @@ myotherproject:mydataset.mytable2
 
 ## 刪除分區
 
-您可以從分區資料表刪除個別分區。不過，您無法刪除特殊 `__NULL__` 或 `__UNPARTITIONED__` 分區。
+您可以從分區資料表刪除個別分區。但無法刪除特殊 `__NULL__` 或 `__UNPARTITIONED__` 分區。
 
 一次只能刪除一個分區。
 
@@ -428,7 +429,7 @@ Google Cloud 主控台不支援刪除分區。
 
 ### SQL
 
-如果[符合條件的 `DELETE` 陳述式](https://docs.cloud.google.com/bigquery/docs/using-dml-with-partitioned-tables?hl=zh-tw#using_dml_delete_to_delete_partitions)涵蓋分區中的所有資料列，BigQuery 就會移除整個分區。系統會移除這些檔案，不會掃描位元組或耗用配額。以下 `DELETE` 陳述式範例涵蓋 `_PARTITIONDATE` 虛擬資料欄篩選器的整個分區：
+如果[符合條件的 `DELETE` 陳述式](https://docs.cloud.google.com/bigquery/docs/using-dml-with-partitioned-tables?hl=zh-tw#using_dml_delete_to_delete_partitions)涵蓋分區中的所有資料列，BigQuery 就會移除整個分區。系統會移除這些資料，不會掃描位元組或耗用配額。以下 `DELETE` 陳述式範例涵蓋 `_PARTITIONDATE` 虛擬資料欄篩選器的整個分區：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -460,9 +461,9 @@ bq rm --table project_id:dataset.table$partition
 
 分區裝飾器格式如下，視分區類型而定：
 
-* 每小時分割：`yyyymmddhh`。範例：`$2016030100`。
+* 每小時分區：`yyyymmddhh`。範例：`$2016030100`。
 * 每日分割：`yyyymmdd`。範例：`$20160301`。
-* 每月分割：`yyyymm`。範例：`$201603`。
+* 每月分區：`yyyymm`。範例：`$201603`。
 * 年度分區：`yyyy`。範例：`$2016`。
 * 整數範圍分區：分區範圍的起始值。範例：`$20`。
 
@@ -496,7 +497,7 @@ bq rm --table 'mydataset.mytable$20'
 
 ## 分區資料表安全性
 
-分區資料表的存取控管方式與標準資料表相同。詳情請參閱[資料表存取權控管簡介](https://docs.cloud.google.com/bigquery/docs/table-access-controls-intro?hl=zh-tw)。
+分區資料表的存取權控管方式與標準資料表相同。詳情請參閱[資料表存取權控管簡介](https://docs.cloud.google.com/bigquery/docs/table-access-controls-intro?hl=zh-tw)。
 
 
 
@@ -505,11 +506,11 @@ bq rm --table 'mydataset.mytable$20'
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-05 (世界標準時間)。
+上次更新時間：2026-07-10 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-05 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-10 (世界標準時間)。"],[],[]]

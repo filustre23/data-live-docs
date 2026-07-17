@@ -283,6 +283,5 @@ public class QuickstartSample {
       System.out.println("Supported Data Sources:");
       for (DataSource dataSource : response.iterateAll()) {
         System.out.println(dataSource.getDisplayName());
-        System.out.printf("\tID: %s%n", dataSource.getDataSourceId());
-        System.out.
+        System.out.printf("\tID: %s%n", dataSour
 ```

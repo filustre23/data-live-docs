@@ -20,7 +20,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 事前準備
 
-授予身分與存取權管理 (IAM) 角色，讓使用者擁有執行本文件各項工作所需的權限。執行工作所需的權限 (如有) 會列在工作「必要權限」部分。
+授予身分與存取權管理 (IAM) 角色，讓使用者擁有執行本文件各項工作所需的權限。如要執行工作，必須具備的權限會列在工作「必要權限」部分。
 
 ## 更新資料集標籤
 
@@ -47,7 +47,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### 更新資料集標籤
 
-如要在資料集中更新標籤，請選取下列其中一個選項：
+如要在資料集中更新標籤，請選取下列任一選項：
 
 ### 控制台
 
@@ -61,7 +61,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### SQL
 
-使用 [`ALTER SCHEMA SET OPTIONS` DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_schema_set_options_statement)，在現有資料集上設定標籤。設定標籤會覆寫資料集上的所有現有標籤。以下範例會在資料集 `mydataset` 上設定單一標籤：
+使用 [`ALTER SCHEMA SET OPTIONS` DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_schema_set_options_statement)，在現有資料集上設定標籤。設定標籤會覆寫資料集上的所有現有標籤。以下範例是在資料集 `mydataset` 上設定單一標籤：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -513,9 +513,9 @@ assert table.labels == labels
 
 ### 必要的 IAM 角色
 
-如要取得更新預留項目標籤所需的權限，請要求管理員授予管理專案的 [BigQuery 資源編輯者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.resourceEditor)  (`roles/bigquery.resourceEditor`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得更新預訂標籤所需的權限，請要求管理員授予管理專案的[BigQuery 資源編輯者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.resourceEditor)  (`roles/bigquery.resourceEditor`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
-這個預先定義的角色具備 `bigquery.reservations.update` 權限，可將標籤更新至預訂項目。
+這個預先定義的角色具備 `bigquery.reservations.update` 權限，可更新預訂項目的標籤。
 
 您或許還可透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)取得這項權限。
 
@@ -528,7 +528,7 @@ assert table.labels == labels
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在導覽選單中，按一下「容量管理」。
+2. 按一下導覽選單中的「工作負載管理」。
 3. 按一下「運算單元預留項目」分頁標籤。
 4. 找出要更新的預訂。
 5. 展開「動作」more\_vert選項。
@@ -547,7 +547,7 @@ bq update --set_label KEY:VALUE  --reservation RESERVATION_NAME
 
 更改下列內容：
 
-* `KEY:VALUE`：要更新預訂項目的標籤鍵/值組合。鍵不得重複。鍵和值只能使用小寫字母、數字字元、底線和連字號。所有字元都必須使用 UTF-8 編碼，且可使用國際字元。如要更新預訂中的多個標籤，請重複使用 `--set_label` 旗標，並為每個標籤指定專屬鍵。
+* `KEY:VALUE`：您要更新預訂項目的標籤鍵/值組合。鍵不得重複。鍵和值只能使用小寫字母、數字字元、底線和連字號。所有字元都必須使用 UTF-8 編碼，且可使用國際字元。如要更新預訂中的多個標籤，請重複使用 `--set_label` 旗標，並為每個標籤指定專屬鍵。
 * `RESERVATION_NAME`：預訂名稱。
 
 ### SQL
@@ -581,7 +581,7 @@ bq update --set_label KEY:VALUE  --reservation RESERVATION_NAME
 * `bigquery.datasets.update` (可轉換資料集標籤)
 * `bigquery.tables.update` (可轉換資料表或檢視表標籤)
 
-下列預先定義的 IAM 角色都包含轉換資料集標籤所需的權限：
+下列每個預先定義的 IAM 角色都包含轉換資料集標籤所需的權限：
 
 * `roles/bigquery.dataOwner`
 * `roles/bigquery.admin`
@@ -660,11 +660,11 @@ Dataset 'myotherproject:mydataset' successfully updated.
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-05 (世界標準時間)。
+上次更新時間：2026-07-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-05 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-12 (世界標準時間)。"],[],[]]

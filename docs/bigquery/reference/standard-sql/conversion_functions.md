@@ -553,7 +553,3 @@ SELECT CAST(CURRENT_DATE() AS STRING) AS current_date
  | 2021-03-09    |
  +---------------*/
 ```
-
-```
-SELECT CAST(CURRENT_DATE()
-```

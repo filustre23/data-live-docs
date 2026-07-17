@@ -608,12 +608,5 @@ Inventory
 | dryer             |       30 |               NULL |
 | front load washer |       10 |               true |
 | microwave         |       20 |               NULL |
-| oven              |        5 |               NULL |
-| refrigerator      |       10 |               NULL |
-| top load washer   |        0 |               true |
-+-------------------+----------+--------------------+
+| oven              |        5 |               N
 ```
-
-#### `UPDATE` using joins
-
-The following example generates a tab

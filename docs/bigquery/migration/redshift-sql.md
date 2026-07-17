@@ -262,5 +262,4 @@ BigQuery 也提供下列[位元匯總](https://docs.cloud.google.com/bigquery/do
 
 | **Amazon Redshift** | **BigQuery** |
 | --- | --- |
-| `CASEexpression  WHEN value THEN result  [WHEN...]  [ELSE else_result]  END` | `CASE expression  WHEN value THEN result  [WHEN...]  [ELSE else_result]  END` |
-| `COALESCE(expression1[, ...])` |  |
+| `CASEexpression  WHEN value THEN result  [WHEN...]  [ELSE else_result]  END` | `CASE expression  WHEN value THEN result  [WHEN...]` |

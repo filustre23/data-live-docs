@@ -60,38 +60,6 @@ public class UpdateDatasetPartitionExpiration {
 }
 ```
 
-### Python
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-from google.cloud import bigquery
-
-# Construct a BigQuery client object.
-client = bigquery.Client()
-
-# TODO(developer): Set dataset_id to the ID of the dataset to fetch.
-# dataset_id = 'your-project.your_dataset'
-
-dataset = client.get_dataset(dataset_id)  # Make an API request.
-
-# Set the default partition expiration (applies to new tables, only) in
-# milliseconds. This example sets the default expiration to 90 days.
-dataset.default_partition_expiration_ms = 90 * 24 * 60 * 60 * 1000
-
-dataset = client.update_dataset(
-    dataset, ["default_partition_expiration_ms"]
-)  # Make an API request.
-
-print(
-    "Updated dataset {}.{} with new default partition expiration {}".format(
-        dataset.project, dataset.dataset_id, dataset.default_partition_expiration_ms
-    )
-)
-```
-
 ## 後續步驟
 
 如要搜尋及篩選其他 Google Cloud 產品的程式碼範例，請參閱[Google Cloud 範例瀏覽工具](https://docs.cloud.google.com/docs/samples?product=bigquery&hl=zh-tw)。

@@ -12,7 +12,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 本教學課程說明如何使用 BigQuery ML 中的[超參數調整](https://docs.cloud.google.com/bigquery/docs/hp-tuning-overview?hl=zh-tw)功能，調整機器學習模型並提升效能。
 
-如要執行超參數調整，請指定 `CREATE MODEL` 陳述式的 [`NUM_TRIALS` 選項](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create?hl=zh-tw#num_trials)，並搭配其他模型專屬選項。設定這些選項後，BigQuery ML 會訓練多個版本的模型 (或*試驗*)，每個版本都有稍微不同的參數，並傳回成效最佳的試驗。
+如要執行超參數調整，請指定 `CREATE MODEL` 陳述式的 [`NUM_TRIALS` 選項](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create?hl=zh-tw#num_trials)，並搭配其他模型專屬選項。設定這些選項後，BigQuery ML 會訓練多個版本的模型 (或*試驗*)，每個版本的參數略有不同，並傳回成效最佳的試驗。
 
 本教學課程使用公開的[`tlc_yellow_trips_2018`範例資料表](https://console.cloud.google.com/bigquery?p=bigquery-public-data&%3Bd=new_york_taxi_trips&%3Bt=tlc_yellow_trips_2018&%3Bpage=table&hl=zh-tw)，其中包含 2018 年紐約市的計程車車程資訊。
 
@@ -85,7 +85,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    **啟用 API 時所需的角色**
 
-   如要啟用 API，您需要服務使用情形管理員 IAM 角色 (`roles/serviceusage.serviceUsageAdmin`)，其中包含 `serviceusage.services.enable` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用情形管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
    [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery&hl=zh-tw)
 
@@ -115,11 +115,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    [前往 BigQuery 頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 在「Explorer」窗格中，按一下專案名稱。
-3. 依序點按 more\_vert「View actions」(查看動作) >「Create dataset」(建立資料集)
+3. 依序點按 more\_vert「View actions」(查看動作) >「Create dataset」(建立資料集)。
 4. 在「建立資料集」頁面中，執行下列操作：
 
    * 在「Dataset ID」(資料集 ID) 中輸入 `bqml_tutorial`。
-   * 針對「位置類型」選取「多區域」，然後選取「美國」。
+   * 針對「Location type」(位置類型) 選取「Multi-region」(多區域)，然後選取「US」(美國)。
    * 其餘設定請保留預設狀態，然後按一下「建立資料集」。
 
 ### bq
@@ -227,7 +227,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    +---------------------+--------------------+------------------------+-----------------------+---------------------+---------------------+
    ```
 
-基準模型的 `r2_score` 值為負數，表示資料適配度不佳；[R2 分數](https://en.wikipedia.org/wiki/Coefficient_of_determination)越接近 1，表示模型適配度越好。
+基準模型的 `r2_score` 值為負數，表示資料適配度不佳；[R2 分數](https://en.wikipedia.org/wiki/Coefficient_of_determination)越接近 1，模型適配度就越好。
 
 ## 建立線性迴歸模型並調整超參數
 
@@ -236,8 +236,8 @@ Google uses AI technology to translate content into your preferred language. AI 
 您可以在 `CREATE MODEL` 陳述式中使用下列超參數調整選項：
 
 * [`NUM_TRIALS` 選項](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm?hl=zh-tw#num_trials)，將試驗次數設為 20 次。
-* [`MAX_PARALLEL_TRIALS`選項](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm?hl=zh-tw#max_parallel_trials)：在每個訓練工作中執行兩項試驗，總共執行十項工作和二十項試驗。這可縮短訓練所需時間。不過，這兩項並行試驗無法互相參考訓練結果。
-* [`L1_REG`選項](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm?hl=zh-tw#l1_reg)，可在不同試驗中嘗試不同的 L1 正規化值。L1 正則化會從模型中移除不相關的特徵，有助於避免[過度配適](https://developers.google.com/machine-learning/glossary/?hl=zh-tw#overfitting)。
+* [`MAX_PARALLEL_TRIALS`選項](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm?hl=zh-tw#max_parallel_trials)：在每個訓練工作中執行兩項試驗，總共執行十項工作和二十項試驗。這可減少所需的訓練時間。不過，這兩項並行試驗不會互相參考訓練結果。
+* [`L1_REG`選項](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm?hl=zh-tw#l1_reg)，在不同試驗中嘗試不同的 L1 正則化值。L1 正則化會從模型中移除不相關的特徵，有助於避免[過度配適](https://developers.google.com/machine-learning/glossary/?hl=zh-tw#overfitting)。
 
 模型支援的其他超參數調整選項會使用預設值，如下所示：
 
@@ -268,7 +268,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    查詢大約需要 20 分鐘才能完成。
 
-## 取得訓練試用版資訊
+## 取得訓練試用資訊
 
 使用 `ML.TRIAL_INFO` 函式，取得所有試驗的相關資訊，包括超參數值、目標和狀態。這個函式也會根據這項資訊，傳回效能最佳的試驗。
 
@@ -300,11 +300,12 @@ Google uses AI technology to translate content into your preferred language. AI 
    +----------+-------------------------------------+-----------------------------------+--------------------+--------------------+-----------+---------------+------------+
    ```
 
-   `is_optimal` 資料欄值表示微調作業傳回的最佳模型是試驗 7。
+   「最佳模型」資料欄值 `is_optimal` 表示微調作業傳回的最佳模型是試驗 7。
 
 ## 評估微調模型試驗
 
-使用 `ML.EVALUATE` 函式評估試驗成效。`ML.EVALUATE` 函式會根據訓練期間計算出的所有試驗評估指標，評估模型傳回的預測內容分級。
+使用 `ML.EVALUATE` 函式評估試驗成效。
+`ML.EVALUATE` 函式會根據訓練期間計算出的評估指標，評估模型傳回的預測內容分級。
 
 請按照下列步驟評估模型試驗：
 
@@ -340,11 +341,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 如要進一步瞭解`ML.TRIAL_INFO`目標`ML.EVALUATE`與評估指標的差異，請參閱「[提供模型函式](https://docs.cloud.google.com/bigquery/docs/hp-tuning-overview?hl=zh-tw#model_serving_functions)」。
 
-## 使用微調模型預測計程車小費
+## 使用微調後的模型預測計程車小費
 
 使用微調作業傳回的最佳模型，預測不同計程車行程的小費。除非您指定 `TRIAL_ID` 引數來選取其他試用版，否則 `ML.PREDICT` 函式會自動使用最佳模型。預測結果會顯示在 `predicted_label` 欄中。
 
-請按照下列步驟取得預測結果：
+如要取得預測結果，請按照下列步驟操作：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -427,11 +428,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-05 (世界標準時間)。
+上次更新時間：2026-07-16 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-05 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-16 (世界標準時間)。"],[],[]]

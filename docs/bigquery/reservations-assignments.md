@@ -22,9 +22,19 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 建立保留項目指派作業
 
-如要使用購買的運算單元，請建立*指派作業*，將專案、資料夾或機構指派給運算單元保留項目。您無法在指派層級指派或分配特定數量的運算單元，運算單元是在預訂層級管理及指派。
+如要使用購買的配額，請建立*指派作業*，將專案、資料夾、機構或主體指派給配額預留項目。您無法在指派層級指派或分配特定數量的運算單元，運算單元是在預訂層級管理及指派。
 
-專案會使用資源階層中指派給專案的最明確單一預留項目。資料夾指派作業會覆寫機構指派作業，專案指派作業則會覆寫資料夾指派作業。[標準版](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)保留項目無法指派資料夾和機構。
+### 指派邏輯和條件
+
+專案會使用資源階層中指派給專案的最明確單一預留項目。BigQuery 會使用下列評估邏輯選取正確的預訂：
+
+1. **資源階層優先順序：**BigQuery 會根據指派對象資源的祖先 (專案 > 資料夾 > 機構)，評估指派作業。資料夾和機構指派作業不適用於[標準版](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)保留項目。
+2. **使用 `principal` 屬性指派特定使用者 ([預先發布](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))：**
+   BigQuery 預留項目指派作業支援選用的 `principal` 屬性，管理員可根據執行作業的使用者或服務帳戶身分，將查詢作業導向特定預留項目。在特定指派對象資源中，如果指派作業與主體相符，優先順序會高於主體未設定的通用指派作業。
+
+   每個專案的使用者專屬指派項目預設上限為 10 個。如需變更預設限制的協助，請傳送電子郵件至 [bigquery-wlm-feedback@google.com](mailto:bigquery-wlm-feedback@google.com)。
+
+   **提示：** 如要確保特定使用者即使在專案層級的通用指派下，仍能正確轉送，請在該專案層級建立另一個使用者專屬指派。
 
 如要在預訂項目中建立指派項目，預訂項目必須符合下列至少一項條件：
 
@@ -57,7 +67,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在導覽選單中，按一下「容量管理」。
+2. 按一下導覽選單中的「工作負載管理」。
 3. 按一下「預訂」分頁標籤。
 4. 在預訂表格中找出預訂項目。
 5. 展開「動作」more\_vert選項。
@@ -75,7 +85,8 @@ Google uses AI technology to translate content into your preferred language. AI 
    如要進一步瞭解工作類型，請參閱「[預留指派項目](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#assignments)」。預設值為 `QUERY`。
 
    如要進一步瞭解如何透過 Enterprise Plus 版指派，允許使用者使用 Gemini in BigQuery，請參閱「[設定 Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/gemini-set-up?hl=zh-tw)」。
-10. 點選「建立」。
+10. 選用：在「使用者」欄位中，輸入使用者、服務帳戶或第三方身分的電子郵件地址。
+11. 點選「建立」。
 
 ### SQL
 
@@ -91,7 +102,8 @@ Google uses AI technology to translate content into your preferred language. AI 
      `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME.ASSIGNMENT_ID`
    OPTIONS (
      assignee = 'organizations/ORGANIZATION_ID',
-     job_type = 'JOB_TYPE');
+     job_type = 'JOB_TYPE',
+     principal = 'PRINCIPAL');
    ```
 
    請替換下列項目：
@@ -104,6 +116,14 @@ Google uses AI technology to translate content into your preferred language. AI 
      ID 在專案和位置中不得重複，開頭和結尾須為小寫英文字母或數字，且只能使用小寫英文字母、數字和破折號。
    * `ORGANIZATION_ID`：[機構 ID](https://docs.cloud.google.com/resource-manager/docs/creating-managing-organization?hl=zh-tw#retrieving_your_organization_id)
    * `JOB_TYPE`：要指派給這項預留的[工作類型](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#assignments)，例如 `QUERY`、`CONTINUOUS`、`PIPELINE`、`BACKGROUND` 或 `ML_EXTERNAL`
+   * 選用：`PRINCIPAL`：身分格式，指定使用者、服務帳戶或第三方身分
+
+     `principal` 欄位僅支援下列 [IAM 主體 ID](https://docs.cloud.google.com/iam/docs/principal-identifiers?hl=zh-tw) 格式：
+
+     + Google 帳戶
+     + 服務帳戶
+     + 工作團隊身分集區中的單一身分
+     + workload identity pool 中的單一身分
 3. 按一下「執行」play\_circle。
 
 如要進一步瞭解如何執行查詢，請參閱「[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)」。
@@ -118,9 +138,10 @@ bq mk \
     --location=LOCATION \
     --reservation_assignment \
     --reservation_id=RESERVATION_NAME \
+    --assignee_type=ORGANIZATION \
     --assignee_id=ORGANIZATION_ID \
     --job_type=JOB_TYPE \
-    --assignee_type=ORGANIZATION
+    --principal=PRINCIPAL
 ```
 
 更改下列內容：
@@ -130,8 +151,126 @@ bq mk \
 * `RESERVATION_NAME`：預訂名稱
 * `ORGANIZATION_ID`：[機構 ID](https://docs.cloud.google.com/resource-manager/docs/creating-managing-organization?hl=zh-tw#retrieving_your_organization_id)
 * `JOB_TYPE`：要指派給這項預留的[工作類型](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#assignments)，例如 `QUERY`、`CONTINUOUS`、`PIPELINE`、`BACKGROUND` 或 `ML_EXTERNAL`
+* 選用：`PRINCIPAL`：指定使用者、服務帳戶或第三方身分的身分識別格式。
+
+  `--principal` 旗標僅支援下列 [IAM 主體 ID](https://docs.cloud.google.com/iam/docs/principal-identifiers?hl=zh-tw) 格式：
+
+  + Google 帳戶
+  + 服務帳戶
+  + 工作團隊身分集區中的單一身分
+  + workload identity pool 中的單一身分
 
 建立預訂指派項目後，請等待至少 5 分鐘再執行查詢。否則系統可能會按照以量計價的定價模式計費。
+
+### 設定專案上限和排程政策覆寫
+
+**預覽**
+
+這項功能適用《[服務專屬條款](https://docs.cloud.google.com/terms/service-terms?hl=zh-tw#1)》中「一般服務條款」一節的《正式發布前產品條款》。正式發布前功能是依「原樣」提供，支援服務可能受限。
+詳情請參閱[推出階段說明](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
+
+如要尋求支援或針對這項功能提供意見回饋，請傳送電子郵件至 [bigquery-wlm-feedback@google.com](mailto:bigquery-wlm-feedback@google.com)。
+
+您可以建立專案上限 (一種指派規則)，為預訂項目的預設[排程政策](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#scheduling-policies)設定專案專屬的覆寫設定。
+舉例來說，您可以限制專案的運算單元用量和並行查詢數量。
+
+與其他決定專案使用哪個預訂項目的預訂指派不同，專案上限是僅控管特定專案排程行為的指派資源。
+
+建立專案上限時，須遵守下列限制：
+
+* *指派對象*必須是 Google Cloud 專案。不支援資料夾和機構。
+* *工作類型*必須未設定，或明確設為 `JOB_TYPE_UNSPECIFIED`。
+* 如要變更 `max_slots` 政策值，必須先啟動新查詢，更新才會生效。
+
+如要透過這些排程政策指派項目建立專案上限，請選取下列任一選項：
+
+### 控制台
+
+1. 前往 Google Cloud 控制台的「BigQuery」頁面。
+
+   [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
+2. 在導覽選單中，依序前往「Administration」**>「Workload management」**。
+3. 按一下「指派規則」分頁標籤。
+4. 按一下「建立指派規則」。
+5. 在「規則類型」清單中，選取「專案上限」。
+6. 在「Select a project」清單中選取專案，然後按一下「Continue」。
+7. 在「預留項目」清單中選取預留項目，然後按一下「繼續」。
+8. 在「專案覆寫」部分，於「最大時段數」和「最大並行數」欄位中輸入值。
+9. 點選「建立」。
+
+### SQL
+
+如要建立專案排程政策指派，請使用 `CREATE
+ASSIGNMENT` DDL 陳述式搭配 `scheduling_policy_max_slots` 和 `scheduling_policy_concurrency` 選項。
+
+```
+CREATE ASSIGNMENT
+  `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME.ASSIGNMENT_ID`
+OPTIONS (
+  assignee = 'projects/PROJECT_ID',
+  scheduling_policy_max_slots = MAX_SLOTS,
+  scheduling_policy_concurrency = MAX_CONCURRENCY);
+```
+
+更改下列內容：
+
+* `ADMIN_PROJECT_ID`：擁有預訂資源的[管理專案](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#admin-project)專案 ID
+* `LOCATION`：預訂的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)
+* `RESERVATION_NAME`：預訂名稱
+* `ASSIGNMENT_ID`：指派作業的 ID
+* `PROJECT_ID`：要指派的 Google Cloud 專案
+  ID
+* `MAX_SLOTS`：專案中執行的查詢可消耗的運算單元數量上限
+* `MAX_CONCURRENCY`：專案可同時執行的查詢數量上限
+
+### bq
+
+如要使用 `bq` 指令列工具建立排程政策指派，請使用 `bq mk` 指令搭配 `--scheduling_policy_max_slots` 和 `--scheduling_policy_concurrency` 旗標。
+
+```
+bq mk \
+    --project_id=ADMIN_PROJECT_ID \
+    --location=LOCATION \
+    --reservation_assignment \
+    --reservation_id=RESERVATION_NAME \
+    --assignee_id=PROJECT_ID \
+    --assignee_type=PROJECT \
+    --scheduling_policy_max_slots=MAX_SLOTS \
+    --scheduling_policy_concurrency=MAX_CONCURRENCY
+```
+
+更改下列內容：
+
+* `ADMIN_PROJECT_ID`：擁有預訂資源的[管理專案](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#admin-project)專案 ID
+* `LOCATION`：預訂的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)
+* `RESERVATION_NAME`：預訂名稱
+* `PROJECT_ID`：要指派的 Google Cloud 專案
+  ID
+* `MAX_SLOTS`：專案中執行的查詢可消耗的運算單元數量上限
+* `MAX_CONCURRENCY`：專案可同時執行的查詢數量上限
+
+如要修改或移除現有的排程政策指派項目，請使用 `ALTER ASSIGNMENT` DDL 陳述式：
+
+```
+ALTER ASSIGNMENT
+  `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME.ASSIGNMENT_ID`
+SET OPTIONS (
+  scheduling_policy_max_slots = NEW_MAX_SLOTS,
+  scheduling_policy_concurrency = NEW_MAX_CONCURRENCY);
+-- To remove a scheduling policy setting, set its values to null. To all
+   settings, delete the assignment.
+```
+
+更改下列內容：
+
+* `ADMIN_PROJECT_ID`：擁有預訂資源的[管理專案](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#admin-project)專案 ID
+* `LOCATION`：預訂的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)
+* `RESERVATION_NAME`：預訂名稱
+* `ASSIGNMENT_ID`：指派作業的 ID
+* `NEW_MAX_SLOTS`：專案中執行的查詢可消耗的運算單元數量上限
+* `NEW_MAX_CONCURRENCY`：專案可同時執行的查詢數量上限
+
+如要查看有效的排程政策覆寫，請查看 `INFORMATION_SCHEMA.ASSIGNMENTS` 檢視畫面中的 `scheduling_policy` 和 `assignment_type` 欄。
 
 ### 將專案或資料夾指派給預留項目
 
@@ -140,7 +279,7 @@ bq mk \
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在導覽選單中，按一下「容量管理」。
+2. 按一下導覽選單中的「工作負載管理」。
 3. 按一下「預訂」分頁標籤。
 4. 在預訂表格中找出預訂項目。
 5. 展開「動作」more\_vert選項。
@@ -158,7 +297,8 @@ bq mk \
    控制台目前不支援建立及修改更精細的背景工作類型，例如 `BACKGROUND_COLUMN_METADATA_INDEX`。
 
    如要進一步瞭解工作類型，請參閱「[預留指派項目](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#assignments)」。預設值為 `QUERY`。
-10. 點選「建立」。
+10. 選用：在「使用者」欄位中，輸入使用者、服務帳戶或第三方身分的電子郵件地址。
+11. 點選「建立」。
 
 ### SQL
 
@@ -174,7 +314,8 @@ bq mk \
      `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME.ASSIGNMENT_ID`
    OPTIONS(
      assignee="projects/PROJECT_ID",
-     job_type="JOB_TYPE");
+     job_type="JOB_TYPE",
+     principal="PRINCIPAL");
    ```
 
    請替換下列項目：
@@ -187,6 +328,12 @@ bq mk \
      ID 在專案和位置中不得重複，開頭和結尾須為小寫英文字母或數字，且只能使用小寫英文字母、數字和破折號。
    * `PROJECT_ID`：要指派給預留項目的專案 ID
    * `JOB_TYPE`：要指派給這項預訂的[工作類型](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#assignments)，例如 `QUERY`、`CONTINUOUS`、`PIPELINE`、`BACKGROUND_CHANGE_DATA_CAPTURE`、`BACKGROUND_COLUMN_METADATA_INDEX`、`BACKGROUND_SEARCH_INDEX_REFRESH`、`BACKGROUND` 或 `ML_EXTERNAL`
+   * 選用：`PRINCIPAL`：身分格式，指定使用者、服務帳戶或第三方身分。`principal` 欄位僅支援下列 [IAM 主體 ID](https://docs.cloud.google.com/iam/docs/principal-identifiers?hl=zh-tw) 格式：
+
+     + Google 帳戶
+     + 服務帳戶
+     + 工作團隊身分集區中的單一身分
+     + workload identity pool 中的單一身分
 3. 按一下「執行」play\_circle。
 
 如要進一步瞭解如何執行查詢，請參閱「[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)」。
@@ -201,9 +348,10 @@ bq mk \
     --location=LOCATION \
     --reservation_assignment \
     --reservation_id=RESERVATION_NAME \
+    --assignee_type=PROJECT \
     --assignee_id=PROJECT_ID \
     --job_type=JOB_TYPE \
-    --assignee_type=PROJECT
+    --principal=PRINCIPAL
 ```
 
 更改下列內容：
@@ -213,6 +361,14 @@ bq mk \
 * `RESERVATION_NAME`：預訂名稱
 * `PROJECT_ID`：要指派給這項預留位置的專案 ID
 * `JOB_TYPE`：要指派給這項預訂的[工作類型](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#assignments)，例如 `QUERY`、`CONTINUOUS`、`PIPELINE`、`BACKGROUND_CHANGE_DATA_CAPTURE`、`BACKGROUND_COLUMN_METADATA_INDEX`、`BACKGROUND_SEARCH_INDEX_REFRESH`、`BACKGROUND` 或 `ML_EXTERNAL`
+* 選用：`PRINCIPAL`：指定使用者、服務帳戶或第三方身分的身分識別格式。
+
+  `--principal` 旗標僅支援下列 [IAM 主體 ID](https://docs.cloud.google.com/iam/docs/principal-identifiers?hl=zh-tw) 格式：
+
+  + Google 帳戶
+  + 服務帳戶
+  + 工作團隊身分集區中的單一身分
+  + workload identity pool 中的單一身分
 
 ### Terraform
 
@@ -270,11 +426,11 @@ resource "google_bigquery_reservation_assignment" "default" {
    ```
    mkdir DIRECTORY && cd DIRECTORY && touch main.tf
    ```
-2. 如果您正在學習教學課程，可以複製每個章節或步驟中的程式碼範例。
+2. 如果您正在學習教學課程，可以複製每個章節或步驟中的範例程式碼。
 
-   將程式碼範例複製到新建立的 `main.tf` 中。
+   將範例程式碼複製到新建立的 `main.tf` 中。
 
-   視需要從 GitHub 複製程式碼。如果 Terraform 代码片段是端對端解決方案的一部分，建議您使用這個方法。
+   視需要從 GitHub 複製程式碼。如果 Terraform 程式碼片段是端對端解決方案的一部分，建議您使用這種做法。
 3. 查看並修改範例參數，套用至您的環境。
 4. 儲存變更。
 5. 初始化 Terraform。每個目錄只需執行一次這項操作。
@@ -331,7 +487,7 @@ resource "google_bigquery_reservation_assignment" "default" {
 3. 如果該層級沒有與主體相符的指派項目，請檢查同一層級是否有沒有主體的一般指派項目。
 4. 如果找不到指派項目，請前往階層中的下一個層級。
 
-如果專案層級的指派作業沒有主體，就會覆寫資料夾層級的指派作業 (有主體)。
+如果專案層級的指派作業沒有主體，就會覆寫資料夾層級有主體的指派作業。
 
 #### 支援的主體格式
 
@@ -344,7 +500,7 @@ resource "google_bigquery_reservation_assignment" "default" {
 | 工作團隊身分集區身分 | `principal://iam.googleapis.com/locations/global/workforcePools/POOL_ID/subject/SUBJECT_ID` |
 | Workload Identity Pool 身分 | `principal://iam.googleapis.com/projects/PROJECT_NUMBER/locations/global/workloadIdentityPools/POOL_ID/subject/SUBJECT_ID` |
 
-**注意：** 值 `unknown_or_deleted_user` 是系統使用的哨兵值，代表已刪除或停用的使用者帳戶。您無法使用這個值指派預訂。
+**注意：** 值 `unknown_or_deleted_user` 是系統用來代表已刪除或停用使用者帳戶的哨兵值。您無法使用這個值指派預訂。
 
 #### 將主體指派給預留項目
 
@@ -399,7 +555,7 @@ bq mk \
 
 ### 將專案指派給「`none`」
 
-指派給 `none` 表示沒有指派作業。指派給 `none` 的專案會採用以量計價方案。
+指派給 `none` 代表沒有指派作業。指派給 `none` 的專案會採用以量計價方案。
 
 **注意：** 只有 QUERY 工作支援指派至 `none`。
 
@@ -422,7 +578,7 @@ bq mk \
 
    請替換下列項目：
 
-   * `LOCATION`：應採用隨選定價的職缺[地點](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)
+   * `LOCATION`：應採用隨選價格的職缺[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)
    * `ASSIGNMENT_ID`：指派作業的 ID
 
      ID 在專案和位置中不得重複，開頭和結尾須為小寫英文字母或數字，且只能使用小寫英文字母、數字和破折號。
@@ -449,7 +605,7 @@ bq mk \
 更改下列內容：
 
 * `ADMIN_PROJECT_ID`：擁有預訂資源的[管理專案](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#admin-project)專案 ID
-* `LOCATION`：應採用以量計價定價的職缺[地點](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)
+* `LOCATION`：應採用以量計價定價的職缺[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)
 * `PROJECT_ID`：要指派給 `none` 的專案 ID
 
 ### Terraform
@@ -463,14 +619,18 @@ bq mk \
 以下範例會將專案指派給 `none`：
 
 ```
-data "google_project" "project" {}
-
 resource "google_bigquery_reservation_assignment" "default" {
-  assignee    = "projects/${data.google_project.project.project_id}"
+  assignee    = "projects/PROJECT_ID"
   job_type    = "QUERY"
-  reservation = "projects/${data.google_project.project.project_id}/locations/us/reservations/none"
+  reservation = "projects/ADMIN_PROJECT_ID/locations/LOCATION/reservations/none"
 }
 ```
+
+更改下列內容：
+
+* `ADMIN_PROJECT_ID`：擁有預訂資源的[管理專案](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#admin-project)專案 ID
+* `LOCATION`：應採用以量計價定價的職缺[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)
+* `PROJECT_ID`：要指派給 `none` 的專案 ID
 
 如要在 Google Cloud 專案中套用 Terraform 設定，請完成下列各節的步驟。
 
@@ -496,11 +656,11 @@ resource "google_bigquery_reservation_assignment" "default" {
    ```
    mkdir DIRECTORY && cd DIRECTORY && touch main.tf
    ```
-2. 如果您正在學習教學課程，可以複製每個章節或步驟中的程式碼範例。
+2. 如果您正在學習教學課程，可以複製每個章節或步驟中的範例程式碼。
 
-   將程式碼範例複製到新建立的 `main.tf` 中。
+   將範例程式碼複製到新建立的 `main.tf` 中。
 
-   視需要從 GitHub 複製程式碼。如果 Terraform 代码片段是端對端解決方案的一部分，建議您使用這個方法。
+   視需要從 GitHub 複製程式碼。如果 Terraform 程式碼片段是端對端解決方案的一部分，建議您使用這種做法。
 3. 查看並修改範例參數，套用至您的環境。
 4. 儲存變更。
 5. 初始化 Terraform。每個目錄只需執行一次這項操作。
@@ -594,7 +754,7 @@ SELECT 42;
    [啟用 Cloud Shell](https://console.cloud.google.com/?cloudshell=true&hl=zh-tw)
 
    控制台底部會開啟 [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works?hl=zh-tw) 工作階段，並顯示指令列提示。 Google Cloud Cloud Shell 是已安裝 Google Cloud CLI 的殼層環境，並已針對您目前的專案設定好相關值。工作階段可能要幾秒鐘的時間才能初始化。
-2. 在 Cloud Shell 中，使用 [`bq query` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_query)和 `--reservation_id` 旗標執行查詢：
+2. 在 Cloud Shell 中，使用 [`bq query` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_query)搭配 `--reservation_id` 旗標執行查詢：
 
    ```
    bq query --use_legacy_sql=false --reservation_id=RESERVATION_ID
@@ -606,7 +766,7 @@ SELECT 42;
    * `RESERVATION_ID`：要執行查詢的預訂。
    * `QUERY`：查詢的 SQL 陳述式。
 
-   舉例來說，下列查詢會在 `US` 多區域的 `test-reservation` 預留項目中執行：
+   舉例來說，下列查詢會在 `US` 多地區的 `test-reservation` 預留項目中執行：
 
    ```
    bq query --reservation_id=project1.US:test-reservation 'SELECT 42;'
@@ -628,7 +788,7 @@ SELECT 42;
 
 * [自動編碼器](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder?hl=zh-tw)
 * [AutoML](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-automl?hl=zh-tw)
-* [強化型樹狀結構](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree?hl=zh-tw)
+* [提升樹](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree?hl=zh-tw)
 * [深層類神經網路 (DNN)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models?hl=zh-tw)
 * [隨機森林](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-random-forest?hl=zh-tw)
 * [廣度和深度網路](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-wnd-models?hl=zh-tw)
@@ -672,7 +832,7 @@ SELECT 42;
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在導覽選單中，按一下「容量管理」。
+2. 按一下導覽選單中的「工作負載管理」。
 3. 按一下「預訂」分頁標籤。
 4. 在預訂項目表格中展開預訂項目，即可查看指派給該預訂項目的資源，或使用「篩選」欄位依資源名稱篩選。
 
@@ -706,7 +866,7 @@ SELECT 42;
 
 ### bq
 
-**注意：** 這項指令無法在 Cloud Shell 中執行。如要使用這項指令，請從本機指令列運作執行。
+**注意：** 這項指令無法在 Cloud Shell 中執行。如要使用這項指令，請從本機指令列執行。
 
 如要找出專案的查詢工作所指派的預留項目，請使用 `bq show` 指令搭配 `--reservation_assignment` 旗標：
 
@@ -736,10 +896,13 @@ bq show \
 更改下列內容：
 
 * `ADMIN_PROJECT_ID`：擁有預訂資源的專案 ID
-* `LOCATION`：要查看預訂的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)
+* `LOCATION`：要查看預訂的[地點](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)
 * `JOB_TYPE`：要指派給這項預留的[工作類型](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#assignments)，例如 `QUERY`、`CONTINUOUS`、`PIPELINE`、`BACKGROUND` 或 `ML_EXTERNAL`
 * `PROJECT_ID`：專案 ID
 * `PRINCIPAL`：主體 ID，例如 `principal://goog/subject/EMAIL_ADDRESS`
+
+如要查看特定使用者的有效指派規則，請檢查「`INFORMATION_SCHEMA.ASSIGNMENTS`」檢視畫面中的「`principal`」欄，或執行「`bq ls
+--reservation_assignment`」。此外，您也可以查詢 `INFORMATION_SCHEMA.JOBS` 檢視畫面，確認哪個預訂執行了特定工作。使用 `bq show --reservation_assignment` 指令時，您可以加入選用的 `--principal` 旗標，篩選特定使用者指派項目。
 
 ## 更新保留項目指派作業
 
@@ -781,7 +944,7 @@ bq update \
 
   如要取得指派 ID，請參閱「[列出專案的預訂指派作業](#list-assignment)」。
 
-**注意：** 更新後的預約指派只會套用至新工作。現有工作會繼續使用原始預留項目指派。
+**注意：** 更新後的預訂指派項目只會套用至新工作。現有工作會繼續使用原始預留項目指派。
 
 ## 刪除預留項目指派作業
 
@@ -803,14 +966,14 @@ bq update \
 
 ### 將專案從預訂項目中移除
 
-如要將專案從保留項目中移除：
+如要將專案從預訂項目中移除：
 
 ### 控制台
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在導覽選單中，按一下「容量管理」。
+2. 按一下導覽選單中的「工作負載管理」。
 3. 按一下「預訂」分頁標籤。
 4. 在預訂表格中展開預訂項目，找出專案。
 5. 展開「動作」more\_vert選項。
@@ -869,11 +1032,11 @@ bq rm \
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-05 (世界標準時間)。
+上次更新時間：2026-07-14 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-05 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-14 (世界標準時間)。"],[],[]]

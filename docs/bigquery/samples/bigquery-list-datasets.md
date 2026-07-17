@@ -141,32 +141,6 @@ public class ListDatasets {
 }
 ```
 
-### Node.js
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-// Import the Google Cloud client library
-const {BigQuery} = require('@google-cloud/bigquery');
-const bigquery = new BigQuery();
-
-async function listDatasets() {
-  /**
-   * TODO(developer): Uncomment the following lines before running the sample.
-   */
-  // const projectId = "my_project_id";
-
-  // Lists all datasets in the specified project.
-  // If projectId is not specified, this method will take
-  // the projectId from the authenticated BigQuery Client.
-  const [datasets] = await bigquery.getDatasets({projectId});
-  console.log('Datasets:');
-  datasets.forEach(dataset => console.log(dataset.id));
-}
-```
-
 ### PHP
 
 在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 PHP 設定說明操作。詳情請參閱 [BigQuery PHP API 參考說明文件](https://docs.cloud.google.com/php/docs/reference/cloud-bigquery/latest/BigQueryClient?hl=zh-tw)。
@@ -191,29 +165,6 @@ function list_datasets(string $projectId): void
         print($dataset->id() . PHP_EOL);
     }
 }
-```
-
-### Python
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-from google.cloud import bigquery
-
-# Construct a BigQuery client object.
-client = bigquery.Client()
-
-datasets = list(client.list_datasets())  # Make an API request.
-project = client.project
-
-if datasets:
-    print("Datasets in project {}:".format(project))
-    for dataset in datasets:
-        print("\t{}".format(dataset.dataset_id))
-else:
-    print("{} project does not contain any datasets.".format(project))
 ```
 
 ### Ruby

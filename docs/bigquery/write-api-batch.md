@@ -677,4 +677,6 @@ async function appendRowsPending() {
     });
     const streamId = writeStream.name;
     console.log(`Stream created: ${streamId}`);
+
+    const connection = await writeCli
 ```

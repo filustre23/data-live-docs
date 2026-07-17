@@ -510,9 +510,5 @@ SELECT ARRAY_TO_STRING([b'prefix', b'middle', b'suffix', b'\x00'], b'--') AS dat
 ## `GENERATE_ARRAY`
 
 ```
-GENERATE_ARRAY(start_expression, end_expression[, step_expression])
+GENERATE_ARRAY(start_expression, end_expression[
 ```
-
-**Description**
-
-Returns an array of values. The `start_expression` and

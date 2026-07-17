@@ -443,5 +443,5 @@ ORDER BY
   JOIN
     `DATASET.sa_AdGroup_CUSTOMER_ID` a
   ON
-    (k.ad_group_id = a.ad_group_id AND
+    (k.
 ```

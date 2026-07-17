@@ -45,6 +45,9 @@ Returns the average of non-`NULL`, non-`NaN` values in the expression.
 This function first computes the average per privacy unit column, and then
 computes the final result by averaging these averages.
 
+You can't use an `AVG` (`DIFFERENTIAL_PRIVACY`) function with
+[multi-level aggregation](/bigquery/docs/reference/standard-sql/aggregate-function-calls#multi_level_aggregation).
+
 This function must be used with the [`DIFFERENTIAL_PRIVACY` clause](/bigquery/docs/reference/standard-sql/query-syntax#dp_clause)
 and can support the following arguments:
 
@@ -131,6 +134,9 @@ WITH DIFFERENTIAL_PRIVACY ...
 Returns the number of rows in the
 [differentially private](/bigquery/docs/reference/standard-sql/query-syntax#dp_clause) `FROM` clause. The final result
 is an aggregation across a privacy unit column.
+
+You can't use a `COUNT` (`DIFFERENTIAL_PRIVACY`) function with
+[multi-level aggregation](/bigquery/docs/reference/standard-sql/aggregate-function-calls#multi_level_aggregation).
 
 This function must be used with the [`DIFFERENTIAL_PRIVACY` clause](/bigquery/docs/reference/standard-sql/query-syntax#dp_clause)
 and can support the following arguments:
@@ -289,6 +295,9 @@ WITH DIFFERENTIAL_PRIVACY ...
 Takes an expression and computes a percentile for it. The final result is an
 aggregation across privacy unit columns.
 
+You can't use a `PERCENTILE_CONT` (`DIFFERENTIAL_PRIVACY`) function with
+[multi-level aggregation](/bigquery/docs/reference/standard-sql/aggregate-function-calls#multi_level_aggregation).
+
 This function must be used with the [`DIFFERENTIAL_PRIVACY` clause](/bigquery/docs/reference/standard-sql/query-syntax#dp_clause)
 and can support these arguments:
 
@@ -350,6 +359,9 @@ WITH DIFFERENTIAL_PRIVACY ...
 
 Returns the sum of non-`NULL`, non-`NaN` values in the expression. The final
 result is an aggregation across privacy unit columns.
+
+You can't use a `SUM` (`DIFFERENTIAL_PRIVACY`) function with
+[multi-level aggregation](/bigquery/docs/reference/standard-sql/aggregate-function-calls#multi_level_aggregation).
 
 This function must be used with the [`DIFFERENTIAL_PRIVACY` clause](/bigquery/docs/reference/standard-sql/query-syntax#dp_clause)
 and can support these arguments:
@@ -521,11 +533,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-06-29 UTC.
+Last updated 2026-07-10 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-06-29 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-07-10 UTC."],[],[]]

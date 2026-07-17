@@ -895,8 +895,3 @@ STRUCT(
   [safety category](/vertex-ai/generative-ai/docs/multimodal/configure-safety-filters#harm_categories)
   and
   [blocking threshold](/vertex-ai/generative-ai/docs/multimodal/configure-safety-filters#how-to-configure-content-filters).
-* `MODEL_PARAMS`: a JSON-formatted string literal
-  that provides additional parameters to the model. The value must conform
-  to the
-  [`generateContent` request body](/vertex-ai/generative-ai/docs/reference/rest/v1/projects.locations.endpoints/generateContent)
-  format. You can provide a valu

@@ -474,5 +474,5 @@ to disambiguate columns after the `JOIN` operator.
   UNION ALL
   SELECT "000456" AS id, "bananas" AS item, 5 AS sales
 ) AS sales_table
-|> AGGREGATE SUM(sales) AS total_sales GROUP BY
+|> AGGREGATE SUM(sales
 ```

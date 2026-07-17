@@ -8,13 +8,13 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 使用 Analytics Hub 建立資料交換和項目 透過集合功能整理內容 你可以依據偏好儲存及分類內容。
 
-本快速入門導覽課程會示範如何使用 Analytics Hub API 建立資料交換庫和清單。
+本快速入門導覽課程說明如何使用 Analytics Hub API 建立資料交換庫和清單。
 
 ## 深入探索
 
 如需包含這個程式碼範例的詳細說明文件，請參閱下列文章：
 
-* [Sharing 用戶端程式庫](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub?hl=zh-tw)
+* [共用用戶端程式庫](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub?hl=zh-tw)
 
 ## 程式碼範例
 
@@ -182,11 +182,14 @@ func deleteDataExchange(ctx context.Context, client *analyticshub.Client, projec
 
 ```
 /**
+ * This snippet has been automatically generated and should be regarded as a code template only.
+ * It will require modifications to work.
+ * It may require correct/in-range values for request initialization.
  * TODO(developer): Uncomment these variables before running the sample.
  */
 /**
- *  Required. The parent resource path of the DataExchanges.
- *  e.g. `projects/myproject/locations/US`.
+ *  Required. The parent resource path of the listing.
+ *  e.g. `projects/myproject/locations/US/dataExchanges/123`.
  */
 // const parent = 'abc123'
 /**
@@ -200,32 +203,32 @@ func deleteDataExchange(ctx context.Context, client *analyticshub.Client, projec
  */
 // const pageToken = 'abc123'
 
-// Imports the Dataexchange library
+// Imports the Analyticshub library
 const {AnalyticsHubServiceClient} =
-  require('@google-cloud/bigquery-data-exchange').v1beta1;
+  require('@google-cloud/bigquery-analyticshub').v1;
 
 // Instantiates a client
-const dataexchangeClient = new AnalyticsHubServiceClient();
+const analyticshubClient = new AnalyticsHubServiceClient();
 
-async function callListDataExchanges() {
+async function callListListings() {
   // Construct request
   const request = {
     parent,
   };
 
   // Run request
-  const iterable = await dataexchangeClient.listDataExchangesAsync(request);
+  const iterable = await analyticshubClient.listListingsAsync(request);
   for await (const response of iterable) {
     console.log(response);
   }
 }
 
-callListDataExchanges();
+callListListings();
 ```
 
 ## 後續步驟
 
-如要搜尋及篩選其他 Google Cloud 產品的程式碼範例，請參閱[Google Cloud 範例瀏覽工具](https://docs.cloud.google.com/docs/samples?product=analyticshub&hl=zh-tw)。
+如要搜尋及篩選其他 Google Cloud 產品的程式碼範例，請參閱[Google Cloud 範例瀏覽工具](https://docs.cloud.google.com/docs/samples?product=bigquery&hl=zh-tw)。
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 

@@ -8,7 +8,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 取得資料集標籤 透過集合功能整理內容 你可以依據偏好儲存及分類內容。
 
-根據指定的資料集 ID 擷取資料集的標籤。
+根據指定資料集 ID 擷取資料集的標籤。
 
 ## 深入探索
 
@@ -97,65 +97,6 @@ public class GetDatasetLabels {
     }
   }
 }
-```
-
-### Node.js
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-// Import the Google Cloud client library
-const {BigQuery} = require('@google-cloud/bigquery');
-const bigquery = new BigQuery();
-
-async function getDatasetLabels() {
-  // Gets labels on a dataset.
-
-  /**
-   * TODO(developer): Uncomment the following lines before running the sample.
-   */
-  // const datasetId = "my_dataset";
-
-  // Retrieve current dataset metadata.
-  const dataset = bigquery.dataset(datasetId);
-  const [metadata] = await dataset.getMetadata();
-  const labels = metadata.labels;
-
-  console.log(`${datasetId} Labels:`);
-  for (const [key, value] of Object.entries(labels)) {
-    console.log(`${key}: ${value}`);
-  }
-}
-getDatasetLabels();
-```
-
-### Python
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-from google.cloud import bigquery
-
-# Construct a BigQuery client object.
-client = bigquery.Client()
-
-# TODO(developer): Set dataset_id to the ID of the dataset to fetch.
-# dataset_id = "your-project.your_dataset"
-
-dataset = client.get_dataset(dataset_id)  # Make an API request.
-
-# View dataset labels.
-print("Dataset ID: {}".format(dataset_id))
-print("Labels:")
-if dataset.labels:
-    for label, value in dataset.labels.items():
-        print("\t{}: {}".format(label, value))
-else:
-    print("\tDataset has no labels defined.")
 ```
 
 ## 後續步驟

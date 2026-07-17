@@ -28,13 +28,13 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 應用實例
 
-以下僅列出幾個使用案例，說明連結試算表如何讓您在試算表中分析大量資料，不必具備 SQL 知識也能輕鬆操作。
+以下僅列出幾個使用案例，說明連結試算表如何讓您在試算表中分析大量資料，不必具備 SQL 相關知識。
 
-* **業務規劃：**建構及準備資料集，然後允許他人從資料中找出洞察資訊。舉例來說，分析銷售資料，判斷不同地點的熱銷產品。
-* **客戶服務：**找出每 10,000 位顧客的投訴次數最多門市。
-* **銷售：**建立內部財務和銷售報表，並與銷售代表分享收益報表。
+* **業務規劃：**建構及準備資料集，然後允許其他人從資料中找出洞察資訊。舉例來說，分析銷售資料，判斷不同地點的熱銷產品。
+* **客戶服務：**找出每 10,000 位顧客中，投訴次數最多的商店。
+* **銷售：**製作內部財務和銷售報表，並與銷售代表分享收益報表。
 
-## 存取權控管
+## 存取控管
 
 BigQuery 資料集和資料表的直接存取權，是在 BigQuery 中控管。如要只授予使用者 Google 試算表存取權，請共用試算表，但不要授予 BigQuery 存取權。
 
@@ -52,7 +52,7 @@ protoPayload.metadata.firstPartyAppMetadata.sheetsMetadata.docId != NULL_VALUE
 
 ### VPC Service Controls
 
-您可以使用 [VPC Service Controls](https://docs.cloud.google.com/vpc-service-controls?hl=zh-tw) 限制Google Cloud 資源的存取權。由於 VPC Service Controls 不支援 Google 試算表，因此您可能無法存取 VPC Service Controls 保護的 BigQuery 資料。不過，如果您具備必要權限且符合 VPC Service Controls 的存取限制規定，只要設定 VPC Service Controls 範圍，即可允許透過「連結試算表」發出的查詢。如要執行這項操作，您必須使用下列項目設定重疊範圍：
+您可以使用 [VPC Service Controls](https://docs.cloud.google.com/vpc-service-controls?hl=zh-tw) 限制Google Cloud 資源的存取權。由於 VPC Service Controls 不支援 Google 試算表，因此您可能無法存取 VPC Service Controls 保護的 BigQuery 資料。不過，如果您具備必要權限且符合 VPC Service Controls 的存取限制規定，只要設定 VPC Service Controls 範圍，即可允許透過「連結試算表」發出的查詢。如要執行這項操作，請使用下列項目設定重疊範圍：
 
 * 存取層級或輸入規則，允許來自 perimeter 外部的受信任 IP 位址、身分和受信任的用戶端裝置提出要求。
 * 外送規則，允許將查詢結果複製到使用者的試算表。
@@ -73,7 +73,7 @@ protoPayload.metadata.firstPartyAppMetadata.sheetsMetadata.docId != NULL_VALUE
 ```
 
 **注意：** 連結試算表已排定的重新整理作業並不會反映任何使用者相關資料 (例如 IP 位址或裝置資訊)。
-以使用者相關資料來限制存取權的虛擬私有雲 (VPC-SC) 範圍會導致排定的重新整理作業失敗。
+使用終端使用者內容來限制存取權的 VPC Service Controls perimeter 會導致排定的重新整理作業失敗。
 
 ## 事前準備
 
@@ -128,11 +128,11 @@ protoPayload.metadata.firstPartyAppMetadata.sheetsMetadata.docId != NULL_VALUE
 
    **啟用 API 時所需的角色**
 
-   如要啟用 API，您需要服務使用情形管理員 IAM 角色 (`roles/serviceusage.serviceUsageAdmin`)，其中包含 `serviceusage.services.enable` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用情形管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
    [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery&hl=zh-tw)
 
-如要避免繼續計費，請刪除您建立的資源。詳情請參閱[清除所用資源](#clean-up)一節。
+如要避免繼續計費，可以刪除您建立的資源。詳情請參閱[清除所用資源](#clean-up)一節。
 
 ## 從連結試算表開啟 BigQuery 資料集
 
@@ -141,7 +141,7 @@ protoPayload.metadata.firstPartyAppMetadata.sheetsMetadata.docId != NULL_VALUE
 1. 建立或開啟 Google 試算表。
 2. 依序點選「資料」、「資料連接器」，然後點選「連結至 BigQuery」。
 
-   **注意：** 如果沒有看到「資料連結器」選項，請參閱「[事前準備](#before_you_begin)」一文。
+   **附註：** 如果沒有看到「資料連結器」選項，請參閱「[事前準備](#before_you_begin)」一節。
 3. 選取已啟用計費功能的 Google Cloud 專案。
 4. 按一下「公開資料集」。
 5. 在搜尋框中輸入「chicago」，然後選取「chicago\_taxi\_trips」資料集。
@@ -149,26 +149,26 @@ protoPayload.metadata.firstPartyAppMetadata.sheetsMetadata.docId != NULL_VALUE
 
    試算表應類似以下內容：
 
-開始使用試算表。您可以使用熟悉的 Google 試算表技巧，建立資料透視表、公式、圖表、計算欄和排定查詢時間。詳情請參閱「[連結試算表教學課程](https://www.youtube.com/watch?v=rkimIhnLKGI&hl=zh-tw)」。
+開始使用試算表。您可以使用熟悉的 Google 試算表技巧，建立資料透視表、公式、圖表、計算欄和排定查詢。詳情請參閱[連結試算表教學課程](https://www.youtube.com/watch?v=rkimIhnLKGI&hl=zh-tw)。
 
-雖然試算表只會預覽 500 列，但所有資料透視表、公式和圖表都會使用整組資料。資料透視表傳回的結果資料列數上限為 200,000 列。
+雖然試算表只會預覽 500 列，但所有資料透視表、公式和圖表都會使用整個資料集。資料透視表傳回的結果最多可有 20 萬列。
 
-您也可以將資料匯出至 Google 試算表。資料擷取作業傳回的結果資料列和儲存格數量上限取決於下列條件：
+您也可以將資料匯出至 Google 試算表。資料擷取作業傳回的資料列和儲存格數量上限取決於下列條件：
 
 * 如果列數小於或等於 50,000，則沒有儲存格限制。
 * 如果列數大於 5 萬但小於或等於 50 萬，則儲存格數量必須小於或等於 5 百萬。
 * 如果資料列數量超過 50 萬，系統就不支援資料提取功能。
 
-使用連結試算表從資料建立圖表、資料透視表、公式或其他計算儲存格時，連結試算表會代替您在 BigQuery 中執行查詢。如要查看這項查詢，請按照下列步驟操作：
+使用連結試算表從資料建立圖表、資料透視表、公式或其他計算儲存格時，連結試算表會代表您在 BigQuery 中執行查詢。如要查看這項查詢，請按照下列步驟操作：
 
 1. 選取您建立的儲存格或圖表。
-2. 將游標懸停在「重新整理」refresh上。
+2. 將游標懸停在「重新整理」refresh 上。
 3. 選用：如要重新整理「連結試算表」中的查詢結果，請按一下 refresh「重新整理」。
 4. 如要在 BigQuery 中查看查詢，請按一下 info\_outline「BigQuery 查詢詳細資料」。
 
    查詢會在 Google Cloud 控制台中開啟。
 
-## 在連結試算表中開啟資料表
+## 在連結試算表開啟資料表
 
 如要在已連結的試算表中開啟資料表，請按照下列步驟操作：
 
@@ -177,35 +177,35 @@ protoPayload.metadata.firstPartyAppMetadata.sheetsMetadata.docId != NULL_VALUE
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
 
-   如果沒有看到左側窗格，請按一下「展開左側窗格」圖示 last\_page 開啟窗格。
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Explorer」窗格中展開專案，按一下「Datasets」，然後按一下包含要透過 Google 試算表開啟的資料表的資料集。
-4. 依序點選「總覽」**>「表格」**，然後在表格名稱旁依序點選 more\_vert「查看動作」>「在 > 已連結的試算表開啟」。
+4. 依序點選「總覽」**>「表格」**，然後在表格名稱旁點選 more\_vert「查看動作」，並選取「在『已連結的試算表』中開啟」**>**。
 
 ## 在連結試算表中開啟已儲存的查詢
 
-確認您已[儲存查詢](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries?hl=zh-tw#view_all_saved_queries)。詳情請參閱「[建立已儲存的查詢](https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries?hl=zh-tw)」。
+確認您有[已儲存的查詢](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries?hl=zh-tw#view_all_saved_queries)。詳情請參閱「[建立已儲存的查詢](https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries?hl=zh-tw)」。
 
-如要在連結試算表開啟已儲存的查詢，請按照下列步驟操作：
+如要在連結試算表中開啟已儲存的查詢，請按照下列步驟操作：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
 3. 在「Explorer」窗格中展開專案，然後按一下「Queries」。
-   找出要在連結試算表開啟的已儲存查詢。
-4. 按一下已儲存查詢旁的 more\_vert「開啟動作」，然後依序點選「開啟方式」「連結試算表」。
+   找出要透過連結試算表開啟的已儲存的查詢。
+4. 按一下已儲存的查詢旁的 more\_vert「開啟動作」**，然後依序點選「開啟方式」>「連結試算表」**。
 
-   或者，按一下已儲存的查詢名稱，在詳細資料窗格中開啟查詢，然後按一下「在 **> 已連結的試算表**中開啟」。
+   或者，按一下已儲存的查詢名稱，在詳細資料窗格中開啟查詢，然後按一下「在以下項目中開啟」**>「連結試算表」**。
 
 ## 透過連結試算表監控 BigQuery 使用情形
 
-BigQuery 管理員可以監控及稽核連結試算表的資源耗用情形，瞭解使用模式、管理費用，以及找出常用報表。以下各節提供 SQL 查詢範例，協助您在機構和專案層級監控這項用量。詳情請參閱[`JOBS`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw)。
+BigQuery 管理員可以監控及稽核連結試算表的資源耗用情形，瞭解使用模式、管理費用，以及找出常用報表。以下各節提供 SQL 查詢範例，協助您在機構和專案層級監控這項用量。詳情請參閱「[`JOBS` 查看](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw)」。
 
-所有來自連結試算表的查詢都會獲派專屬工作 ID 前置字元：`sheets_dataconnector`。您可以使用這個前置字元，在 `INFORMATION_SCHEMA.JOBS` 檢視畫面中篩選工作。
+所有來自連結試算表的查詢都會指派專屬工作 ID 前置字元：`sheets_dataconnector`。您可以使用這個前置字串，在 `INFORMATION_SCHEMA.JOBS` 檢視畫面中篩選工作。
 
-### 在機構層級匯總使用者的連結試算表用量
+### 在機構層級匯總使用者連結試算表用量
 
-以下查詢會提供貴機構過去 30 天內，使用已連結試算表最多的使用者摘要，並依總計帳單資料量排序。這項查詢會彙整每位使用者的查詢總數、計費位元組總數和運算單元毫秒總數。這項資訊有助於瞭解資源採用情況，以及找出資源用量最多的消費者。
+以下查詢會提供貴機構過去 30 天內，主要連結試算表使用者的摘要，並依總計帳單資料排序。這項查詢會彙整每位使用者的查詢總數、帳單總位元組數和運算單元總毫秒數。這項資訊有助於瞭解採用情形，以及找出資源用量最高的使用者。
 
 ```
 SELECT
@@ -231,7 +231,7 @@ ORDER BY
 
 將 `REGION_NAME` 替換為專案的區域。例如：`region-us`。
 
-**注意：** 您必須使用區域限定詞查詢 `INFORMATION_SCHEMA` 檢視畫面。查詢執行位置必須與`INFORMATION_SCHEMA`檢視區塊的區域相符。
+**注意：** 您必須使用區域限定詞查詢 `INFORMATION_SCHEMA` 檢視畫面。查詢執行的位置必須與`INFORMATION_SCHEMA`檢視區塊的區域相符。
 
 傳回的結果看起來類似下列內容：
 
@@ -270,7 +270,7 @@ ORDER BY
 
 將 `REGION_NAME` 替換為專案的區域。例如：`region-us`。
 
-**注意：** 您必須使用區域限定詞查詢 `INFORMATION_SCHEMA` 檢視畫面。查詢執行位置必須與`INFORMATION_SCHEMA`檢視區塊的區域相符。
+**注意：** 您必須使用區域限定詞查詢 `INFORMATION_SCHEMA` 檢視畫面。查詢執行的位置必須與`INFORMATION_SCHEMA`檢視區塊的區域相符。
 
 傳回的結果看起來類似下列內容：
 
@@ -286,7 +286,7 @@ ORDER BY
 
 ### 在專案層級匯總使用者連結試算表用量
 
-如果您沒有機構層級的權限，或只需要監控特定專案，請執行下列查詢，找出專案中過去 30 天內最常使用 Google 試算表連結的使用者。這項查詢會彙整每位使用者的查詢總數、計費位元組總數和運算單元毫秒總數。這項資訊有助於瞭解採用情況，以及找出資源的主要消費者。
+如果您沒有機構層級的權限，或只需要監控特定專案，請執行下列查詢，找出專案中過去 30 天內最常使用 Google 試算表連結的使用者。這項查詢會彙整每位使用者的查詢總數、計費位元組總數和運算單元毫秒總數。這項資訊有助於瞭解採用情形，以及找出資源用量最高的消費者。
 
 ```
 SELECT
@@ -315,7 +315,7 @@ LIMIT
 
 將 `REGION_NAME` 替換為專案的區域。例如：`region-us`。
 
-**注意：** 您必須使用區域限定詞查詢 `INFORMATION_SCHEMA` 檢視畫面。查詢執行位置必須與`INFORMATION_SCHEMA`檢視區塊的區域相符。
+**注意：** 您必須使用區域限定詞查詢 `INFORMATION_SCHEMA` 檢視畫面。查詢執行的位置必須與`INFORMATION_SCHEMA`檢視區塊的區域相符。
 
 傳回的結果看起來類似下列內容：
 
@@ -331,7 +331,7 @@ LIMIT
 
 ### 在專案層級尋找連結試算表查詢作業的工作記錄
 
-如果您沒有機構層級的權限，或只需要監控特定專案，請執行下列查詢，查看目前專案所有已連結試算表查詢的詳細記錄：
+如果您沒有機構層級的權限，或只需要監控特定專案，請執行下列查詢，查看目前專案中所有已連結試算表查詢的詳細記錄：
 
 ```
 SELECT
@@ -355,7 +355,7 @@ ORDER BY
 
 將 `REGION_NAME` 替換為專案的區域。例如：`region-us`。
 
-**注意：** 您必須使用區域限定詞查詢 `INFORMATION_SCHEMA` 檢視畫面。查詢執行位置必須與`INFORMATION_SCHEMA`檢視區塊的區域相符。
+**注意：** 您必須使用區域限定詞查詢 `INFORMATION_SCHEMA` 檢視畫面。查詢執行的位置必須與`INFORMATION_SCHEMA`檢視區塊的區域相符。
 
 傳回的結果看起來類似下列內容：
 
@@ -371,7 +371,7 @@ ORDER BY
 
 ## 正在清除所用資源
 
-如要避免系統向您的 Google Cloud 帳戶收取這個教學課程所用資源的費用，請執行下列動作：
+如要避免系統向您的 Google Cloud 帳戶收取這個教學課程所用資源的費用，請按照下列步驟操作：
 
 **注意**：刪除專案會造成以下結果：
 
@@ -388,8 +388,8 @@ ORDER BY
 
 ## 後續步驟
 
-* 如需更多資訊，請參閱「[開始在 Google 試算表中使用 BigQuery 資料](https://support.google.com/docs/answer/9702507?hl=zh-tw)」一文。
-* 在 YouTube 上觀看[連結試算表使用教學播放清單](https://www.youtube.com/playlist?list=PLU8ezI8GYqs74i8hy_qln3FvkAuSpE-r1&hl=zh-tw)中的影片。
+* 如需更多資訊，請參閱「[開始在 Google 試算表中使用 BigQuery 資料](https://support.google.com/docs/answer/9702507?hl=zh-tw)」主題。
+* 在 YouTube 上觀看[連結試算表播放清單](https://www.youtube.com/playlist?list=PLU8ezI8GYqs74i8hy_qln3FvkAuSpE-r1&hl=zh-tw)中的影片。
 
 
 
@@ -398,11 +398,11 @@ ORDER BY
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-05 (世界標準時間)。
+上次更新時間：2026-07-16 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-05 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-16 (世界標準時間)。"],[],[]]

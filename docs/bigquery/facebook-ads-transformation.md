@@ -364,7 +364,5 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### 「`Businesses`」報表
 
-| **Meta API 欄位名稱** | **對應的 BigQuery 欄位名稱** | **類型** | **說明** |
-| --- | --- | --- | --- |
-| `id` | ID | *字串* | 商家 ID。 |
-| `name` | 名稱 | *字* |
+| **Meta API 欄位名稱** | **對應的 BigQue** |
+| --- | --- |

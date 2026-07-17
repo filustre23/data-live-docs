@@ -18,40 +18,6 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 程式碼範例
 
-### Python
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-import geojson
-from google.cloud import bigquery
-
-bigquery_client = bigquery.Client()
-
-# This example uses a table containing a column named "geo" with the
-# GEOGRAPHY data type.
-table_id = "my-project.my_dataset.my_table"
-
-# Use the python-geojson library to generate GeoJSON of a line from LAX to
-# JFK airports. Alternatively, you may define GeoJSON data directly, but it
-# must be converted to a string before loading it into BigQuery.
-my_geography = geojson.LineString([(-118.4085, 33.9416), (-73.7781, 40.6413)])
-rows = [
-    # Convert GeoJSON data into a string.
-    {"geo": geojson.dumps(my_geography)}
-]
-
-#  table already exists and has a column
-# named "geo" with data type GEOGRAPHY.
-errors = bigquery_client.insert_rows_json(table_id, rows)
-if errors:
-    raise RuntimeError(f"row insert failed: {errors}")
-else:
-    print(f"wrote 1 row to {table_id}")
-```
-
 ### Ruby
 
 在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Ruby 設定說明操作。詳情請參閱 [BigQuery Ruby API 參考說明文件](https://googleapis.dev/ruby/google-cloud-bigquery/latest/Google/Cloud/Bigquery.html)。
