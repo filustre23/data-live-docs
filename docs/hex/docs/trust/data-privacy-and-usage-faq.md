@@ -54,7 +54,7 @@ The Hex Service is data agnostic: customers are responsible for any GDPR, CCPA, 
 
 Hex is an active participant in the [Data Privacy Framework](https://www.dataprivacyframework.gov/participant/6049) and is both GDPR and CCPA compliant. Hex may enter into Data Processing Agreements (DPAs) with customers that require additional privacy guarantees.
 
-Hex is compliant with the CAN-SPAM Act: Hex users may easily unsubscribe from Hex marketing and sales communications. Data subject access requests for Hex users may be sent to [[email protected]](/cdn-cgi/l/email-protection#2353514a5542405a634b465b0d5746404b). Hex’s [Privacy Policy](/docs/legal/privacy) contains additional information.
+Hex is compliant with the CAN-SPAM Act: Hex users may easily unsubscribe from Hex marketing and sales communications. Data subject access requests for Hex users may be sent to [[email protected]](/cdn-cgi/l/email-protection#0b7b79627d6a68724b636e73257f6e6863). Hex’s [Privacy Policy](/docs/legal/privacy) contains additional information.
 
 ## How does Hex interact with its LLM providers? What data is sent to the LLM providers?[​](#how-does-hex-interact-with-its-llm-providers-what-data-is-sent-to-the-llm-providers "Direct link to How does Hex interact with its LLM providers? What data is sent to the LLM providers?")
 
@@ -66,8 +66,7 @@ Hex sends Customer Input Data (project code), Customer Output Data (project/cell
 
 Hex uses OpenAI and Anthropic as its LLM providers. Hex's LLM providers do not train on customer data. By default, Hex's LLM providers operate under a zero data retention policy. Certain advanced models require the model provider to retain prompts and outputs for a limited period for safety and security monitoring purposes. Retention periods are dictated by the model provider and may vary by model. These models are only available when enabled by a workspace Admin. For more information, see [AI data privacy](/docs/trust/ai-data-privacy).
 
-For [Hex Typeahead](/docs/explore-data/cells/code-typeahead), Hex uses
-a hosted open source model on Baseten with a zero retention, zero training policy.
+For certain AI features, Hex hosts models on Baseten with a zero retention, zero training policy.
 
 For more information on Hex's AI providers, see [Hex's Subprocessors List](/docs/legal/subprocessors).
 

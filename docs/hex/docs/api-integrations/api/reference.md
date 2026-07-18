@@ -35,6 +35,7 @@
 * getGetCell
 * patchUpdateCell
 * delDeleteCell
+* getGetCellOutput
 * postCreateCell
 * getListCells
 * postExportProject
@@ -1322,7 +1323,8 @@ Get metadata about a single project.
 This endpoint is subject to the following rate limits:
 
 * `hex-api`: Default rate limit group for the Hex API
-  + Max 30 requests per minute
+  + Max requests per minute may vary (default: 30)
+  + Max requests per hour may vary (default: 1800)
 
 ##### Authorizations:
 
@@ -2491,5 +2493,3 @@ patch/v1/data-connections/{dataConnectionId}
 https://app.hex.tech/api/v1/data-connections/{dataConnectionId}
 
 ### Request samples
-
-* Payload
