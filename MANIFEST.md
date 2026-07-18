@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-07-18T07:38+00:00_
+_Generated 2026-07-18T18:53+00:00_
 
-**9 sources, 5507 topics total**
+**9 sources, 5508 topics total**
 
 ## airflow
 
@@ -3442,7 +3442,7 @@ _170 topics_
 
 Upstream: <https://docs.getdbt.com/docs/>
 
-_1106 topics_
+_1107 topics_
 
 - `dbt-core/best-practices/best-practice-workflows`
 - `dbt-core/best-practices/clone-incremental-models`
@@ -3771,7 +3771,7 @@ _1106 topics_
 - `dbt-core/docs/local/connect-data-platform/greenplum-setup`
 - `dbt-core/docs/local/connect-data-platform/hive-setup`
 - `dbt-core/docs/local/connect-data-platform/hologres-setup`
-- `dbt-core/docs/local/connect-data-platform/ibmdb2-setup`
+- `dbt-core/docs/local/connect-data-platform/ibm-db2-setup`
 - `dbt-core/docs/local/connect-data-platform/ibmnetezza-setup`
 - `dbt-core/docs/local/connect-data-platform/impala-setup`
 - `dbt-core/docs/local/connect-data-platform/infer-setup`
@@ -4406,6 +4406,7 @@ _1106 topics_
 - `dbt-core/reference/resource-configs/group`
 - `dbt-core/reference/resource-configs/hard-deletes`
 - `dbt-core/reference/resource-configs/hive-configs`
+- `dbt-core/reference/resource-configs/ibm-db2-config`
 - `dbt-core/reference/resource-configs/ibm-netezza-config`
 - `dbt-core/reference/resource-configs/impala-configs`
 - `dbt-core/reference/resource-configs/infer-configs`
