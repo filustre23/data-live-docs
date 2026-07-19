@@ -51,7 +51,7 @@ You must not:
 
 You must not access or use for any commercial purposes any part of the Website or any services or materials available through the Website.
 
-If You wish to make any use of material on the Website other than that set out in this section, please address your request to: [[email protected]](/cdn-cgi/l/email-protection#fa969f9d9b96ba929f82d48e9f9992)
+If You wish to make any use of material on the Website other than that set out in this section, please address your request to: [[email protected]](/cdn-cgi/l/email-protection#7b171e1c1a173b131e03550f1e1813)
 
 If You print, copy, modify, download, or otherwise use or provide any other person with access to any part of the Website in breach of the Terms of Use, your right to use the Website will stop immediately and You must, at our option, return or destroy any copies of the materials You have made. No right, title, or interest in or to the Website or any content on the Website is transferred to You, and all rights not expressly granted are reserved by the Company. Any use of the Website not expressly permitted by these Terms of Use is a breach of these Terms of Use and may violate copyright, trademark, and other laws.
 
@@ -143,7 +143,7 @@ Hex is committed to respecting and protecting the legal rights of copyright owne
 
 (f) A statement that, under penalty of perjury, the information in the notification is accurate and You are authorized to act on behalf of the owner of the exclusive right that is allegedly infringed.
 
-Hex's Copyright Agent to receive DMCA Takedown Notices is: [[email protected]](/cdn-cgi/l/email-protection#80ece5e7e1ecc0e8e5f8aef4e5e3e8)
+Hex's Copyright Agent to receive DMCA Takedown Notices is: [[email protected]](/cdn-cgi/l/email-protection#a1cdc4c6c0cde1c9c4d98fd5c4c2c9)
 
 UNDER FEDERAL LAW, IF YOU KNOWINGLY MISREPRESENT THAT ONLINE MATERIAL IS INFRINGING, YOU MAY BE SUBJECT TO CRIMINAL PROSECUTION FOR PERJURY AND CIVIL PENALTIES, INCLUDING MONETARY DAMAGES, COURT COSTS, AND ATTORNEYS' FEES.
 
@@ -248,8 +248,8 @@ The Terms of Use, our Privacy Policy, and Hex Terms of Service constitute the so
 
 This website is operated by Hex Technologies Inc.
 
-Send Hex your notice by email at [[email protected]](/cdn-cgi/l/email-protection#e9858c8e8885a9818c91c79d8c8a81) or certified mail, return receipt requested, to Hex at 2261 Market Street #4233, San Francisco, CA 94114 USA, Attn: Legal.
+Send Hex your notice by email at [[email protected]](/cdn-cgi/l/email-protection#79151c1e181539111c01570d1c1a11) or certified mail, return receipt requested, to Hex at 2261 Market Street #4233, San Francisco, CA 94114 USA, Attn: Legal.
 
-All other feedback, comments, requests for technical support, and other communications relating to the Website should be directed to: at [[email protected]](/cdn-cgi/l/email-protection#e68a8381878aa68e839ec89283858e).
+All other feedback, comments, requests for technical support, and other communications relating to the Website should be directed to: at [[email protected]](/cdn-cgi/l/email-protection#e8848d8f8984a8808d90c69c8d8b80).
 
 Unless specified otherwise, any notices or other communications to You permitted or required under this Agreement, will be in writing and given by Company via email, Site notification, or messaging service (including SMS).
