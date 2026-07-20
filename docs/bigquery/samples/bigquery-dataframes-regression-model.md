@@ -1,5 +1,5 @@
-# 죄송합니다. 페이지를 찾을 수 없습니다
+# 抱歉，找不到该页面
 
-404 오류. 요청된 URL(/bigquery/docs/samples/bigquery-dataframes-regression-model)이 서버에 존재하지 않습니다.
+404 错误。 在此服务器上找不到请求的网址 /bigquery/docs/samples/bigquery-dataframes-regression-model。
 
-[홈으로 돌아가기](/)
+[返回首页](/)

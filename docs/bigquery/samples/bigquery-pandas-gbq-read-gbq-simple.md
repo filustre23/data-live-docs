@@ -1,5 +1,5 @@
-# 抱歉，找不到该页面
+# Não é possível encontrar essa página
 
-404 错误。 在此服务器上找不到请求的网址 /bigquery/docs/samples/bigquery-pandas-gbq-read-gbq-simple。
+Erro 404 O URL solicitado /bigquery/docs/samples/bigquery-pandas-gbq-read-gbq-simple não foi encontrado neste servidor.
 
-[返回首页](/)
+[Voltar para a página inicial](/)

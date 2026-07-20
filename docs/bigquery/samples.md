@@ -30,6 +30,7 @@ C#
 Ruby
 Terraform
 C++
+Rust
 
 BigQuery Connection API
 BigQuery DataPolicy API

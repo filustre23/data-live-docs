@@ -1,5 +1,5 @@
-# 죄송합니다. 페이지를 찾을 수 없습니다
+# Não é possível encontrar essa página
 
-404 오류. 요청된 URL(/bigquery/docs/samples/bigquery-query-results-dataframe)이 서버에 존재하지 않습니다.
+Erro 404 O URL solicitado /bigquery/docs/samples/bigquery-query-results-dataframe não foi encontrado neste servidor.
 
-[홈으로 돌아가기](/)
+[Voltar para a página inicial](/)

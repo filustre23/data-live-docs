@@ -1,5 +1,5 @@
-# 很抱歉，找不到頁面
+# Não é possível encontrar essa página
 
-404 錯誤。 在這個伺服器找不到所要求的網址 (/bigquery/docs/samples/bigquery-jupyter-magic-gender-by-year)。
+Erro 404 O URL solicitado /bigquery/docs/samples/bigquery-jupyter-magic-gender-by-year não foi encontrado neste servidor.
 
-[返回首頁](/)
+[Voltar para a página inicial](/)

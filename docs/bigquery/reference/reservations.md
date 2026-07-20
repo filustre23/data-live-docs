@@ -68,7 +68,9 @@ If you are using [Gradle](https://gradle.org/),
 add the following to your dependencies:
 
 ```
-implementation 'com.google.cloud:google-cloud-bigqueryreservation:2.95.0'
+implementation platform('com.google.cloud:libraries-bom:26.83.0')
+
+implementation 'com.google.cloud:google-cloud-bigqueryreservation'
 ```
 
 If you are using [sbt](https://www.scala-sbt.org/), add
@@ -292,5 +294,5 @@ public class QuickstartSample {
   }
 
   public static void quickStartSample(String projectId, String location) throws IOException {
-    try (ReservationServiceClient client =
+    try (ReservationServic
 ```

@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-07-20T00:58+00:00_
+_Generated 2026-07-20T08:23+00:00_
 
-**9 sources, 5518 topics total**
+**9 sources, 5530 topics total**
 
 ## airflow
 
@@ -1742,7 +1742,7 @@ _1719 topics_
 
 Upstream: <https://cloud.google.com/bigquery/docs/>
 
-_1526 topics_
+_1538 topics_
 
 - `bigquery/access-control`
 - `bigquery/access-control-basic-roles`
@@ -2422,6 +2422,8 @@ _1526 topics_
 - `bigquery/reference/biglake/rest/v1/projects.locations.catalogs/list`
 - `bigquery/reference/biglake/rest/v1alpha1/projects.locations.catalogs`
 - `bigquery/reference/biglake/rest/v1alpha1/projects.locations.catalogs.databases`
+- `bigquery/reference/biglake/rest/v1alpha1/projects.locations.catalogs.databases.locks`
+- `bigquery/reference/biglake/rest/v1alpha1/projects.locations.catalogs.databases.locks/list`
 - `bigquery/reference/biglake/rest/v1alpha1/projects.locations.catalogs.databases.tables`
 - `bigquery/reference/biglake/rest/v1alpha1/projects.locations.catalogs.databases.tables/create`
 - `bigquery/reference/biglake/rest/v1alpha1/projects.locations.catalogs.databases.tables/delete`
@@ -2516,21 +2518,32 @@ _1526 topics_
 - `bigquery/reference/bigquerydatapolicy/rest/v2beta1/projects.locations.dataPolicies/setIamPolicy`
 - `bigquery/reference/bigquerydatapolicy/rest/v2beta1/projects.locations.dataPolicies/testIamPermissions`
 - `bigquery/reference/bq-cli-reference`
-- `bigquery/reference/data-transfer/partner/rest/v1/CheckValidCredsResponse`
-- `bigquery/reference/data-transfer/partner/rest/v1/ListDataSourcesResponse`
-- `bigquery/reference/data-transfer/partner/rest/v1/TimeRange`
+- `bigquery/reference/data-transfer/partner/rest/v1/Code`
+- `bigquery/reference/data-transfer/partner/rest/v1/IsDataTransferServiceEnabledResponse`
+- `bigquery/reference/data-transfer/partner/rest/v1/ListTransferConfigsResponse`
+- `bigquery/reference/data-transfer/partner/rest/v1/ListTransferLogsResponse`
 - `bigquery/reference/data-transfer/partner/rest/v1/projects`
-- `bigquery/reference/data-transfer/partner/rest/v1/projects.locations.dataSourceDefinitions`
-- `bigquery/reference/data-transfer/partner/rest/v1/projects.locations.dataSources`
+- `bigquery/reference/data-transfer/partner/rest/v1/projects.dataSources/checkValidCreds`
+- `bigquery/reference/data-transfer/partner/rest/v1/projects.dataSources/list`
+- `bigquery/reference/data-transfer/partner/rest/v1/projects.locations`
+- `bigquery/reference/data-transfer/partner/rest/v1/projects.locations.dataSourceDefinitions/list`
+- `bigquery/reference/data-transfer/partner/rest/v1/projects.locations.dataSourceDefinitions/patch`
+- `bigquery/reference/data-transfer/partner/rest/v1/projects.locations.dataSources/checkValidCreds`
+- `bigquery/reference/data-transfer/partner/rest/v1/projects.locations.dataSources/get`
+- `bigquery/reference/data-transfer/partner/rest/v1/projects.locations.dataSources/list`
+- `bigquery/reference/data-transfer/partner/rest/v1/projects.locations.transferConfigs.runs.transferLogs/list`
+- `bigquery/reference/data-transfer/partner/rest/v1/projects.locations.transferConfigs.runs/delete`
+- `bigquery/reference/data-transfer/partner/rest/v1/projects.locations.transferConfigs.runs/finishRun`
 - `bigquery/reference/data-transfer/partner/rest/v1/projects.locations.transferConfigs.runs/get`
-- `bigquery/reference/data-transfer/partner/rest/v1/projects.locations.transferConfigs.runs/startBigQueryJobs`
-- `bigquery/reference/data-transfer/partner/rest/v1/projects.locations.transferConfigs/delete`
-- `bigquery/reference/data-transfer/partner/rest/v1/projects.locations.transferConfigs/startManualRuns`
 - `bigquery/reference/data-transfer/partner/rest/v1/projects.locations/enrollDataSources`
-- `bigquery/reference/data-transfer/partner/rest/v1/projects.locations/isDataTransferServiceEnabled`
+- `bigquery/reference/data-transfer/partner/rest/v1/projects.transferConfigs.runs`
+- `bigquery/reference/data-transfer/partner/rest/v1/projects.transferConfigs.runs.transferLogs`
+- `bigquery/reference/data-transfer/partner/rest/v1/projects.transferConfigs.runs/delete`
+- `bigquery/reference/data-transfer/partner/rest/v1/projects.transferConfigs.runs/list`
+- `bigquery/reference/data-transfer/partner/rest/v1/projects.transferConfigs/create`
+- `bigquery/reference/data-transfer/partner/rest/v1/projects.transferConfigs/get`
 - `bigquery/reference/data-transfer/partner/rest/v1/projects.transferConfigs/scheduleRuns`
-- `bigquery/reference/data-transfer/partner/rpc`
-- `bigquery/reference/data-transfer/partner/rpc/google.cloud.bigquery.datatransfer.v1`
+- `bigquery/reference/data-transfer/partner/rest/v1/projects/enrollDataSources`
 - `bigquery/reference/datatransfer/libraries`
 - `bigquery/reference/datatransfer/rest`
 - `bigquery/reference/datatransfer/rest/v1/CheckValidCredsResponse`
@@ -3069,7 +3082,6 @@ _1526 topics_
 - `bigquery/samples/bigquery-query-legacy`
 - `bigquery/samples/bigquery-query-legacy-large-results`
 - `bigquery/samples/bigquery-query-materialized-view`
-- `bigquery/samples/bigquery-query-natality-tutorial`
 - `bigquery/samples/bigquery-query-no-cache`
 - `bigquery/samples/bigquery-query-pagination`
 - `bigquery/samples/bigquery-query-params-arrays`

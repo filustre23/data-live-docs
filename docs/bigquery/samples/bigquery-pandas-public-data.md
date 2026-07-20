@@ -1,5 +1,5 @@
-# お探しのページが見つかりません
+# Désolé, impossible de trouver cette page
 
-404 エラー。 リクエストされた URL（/bigquery/docs/samples/bigquery-pandas-public-data）は、このサーバーで見つかりませんでした。
+Erreur 404. L'URL demandée /bigquery/docs/samples/bigquery-pandas-public-data n'a pas été trouvée sur ce serveur.
 
-[ホームに戻る](/)
+[Retour à la page d'accueil](/)

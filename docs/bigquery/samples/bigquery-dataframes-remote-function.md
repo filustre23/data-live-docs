@@ -1,5 +1,5 @@
-# お探しのページが見つかりません
+# 很抱歉，找不到頁面
 
-404 エラー。 リクエストされた URL（/bigquery/docs/samples/bigquery-dataframes-remote-function）は、このサーバーで見つかりませんでした。
+404 錯誤。 在這個伺服器找不到所要求的網址 (/bigquery/docs/samples/bigquery-dataframes-remote-function)。
 
-[ホームに戻る](/)
+[返回首頁](/)

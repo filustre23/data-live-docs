@@ -1,5 +1,5 @@
-# お探しのページが見つかりません
+# Não é possível encontrar essa página
 
-404 エラー。 リクエストされた URL（/bigquery/docs/samples/bigquery-dataframes-pandas-methods）は、このサーバーで見つかりませんでした。
+Erro 404 O URL solicitado /bigquery/docs/samples/bigquery-dataframes-pandas-methods não foi encontrado neste servidor.
 
-[ホームに戻る](/)
+[Voltar para a página inicial](/)

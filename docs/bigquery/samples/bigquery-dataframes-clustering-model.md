@@ -1,5 +1,5 @@
-# Impossibile trovare la pagina
+# 很抱歉，找不到頁面
 
-Errore 404. L'URL richiesto /bigquery/docs/samples/bigquery-dataframes-clustering-model non è stato trovato su questo server.
+404 錯誤。 在這個伺服器找不到所要求的網址 (/bigquery/docs/samples/bigquery-dataframes-clustering-model)。
 
-[Torna alla home page](/)
+[返回首頁](/)

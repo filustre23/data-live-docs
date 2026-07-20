@@ -228,6 +228,37 @@ def query
 end
 ```
 
+### Rust
+
+```
+use google_cloud_bigquery::client::BigQuery;
+
+pub async fn sample(project_id: &str) -> anyhow::Result<()> {
+    let client = BigQuery::builder().build().await?;
+
+    let mut rows = client
+        .query(
+            "SELECT \
+        name FROM `bigquery-public-data.usa_names.usa_1910_2013` \
+        WHERE state = 'TX' \
+        LIMIT 100",
+        )
+        .with_project_id(project_id)
+        .set_location("US")
+        .run()
+        .await?
+        .until_done()
+        .await?
+        .read();
+
+    while let Some(row) = rows.next().await.transpose()? {
+        let name: String = row.get("name");
+        println!("Name: {name}");
+    }
+    Ok(())
+}
+```
+
 ### Terraform
 
 如要瞭解如何套用或移除 Terraform 設定，請參閱「[基本 Terraform 指令](https://docs.cloud.google.com/docs/terraform/basic-commands?hl=zh-tw)」。詳情請參閱 [Terraform 供應商參考文件](https://registry.terraform.io/providers/hashicorp/google/latest/docs)。
