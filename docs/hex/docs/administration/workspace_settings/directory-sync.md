@@ -21,11 +21,11 @@ Teams who use a directory provider for authentication and access controls for th
 
 info
 
-Changes made to your directory details can take up to 5 minutes to be reflected in Hex. If your changes take longer than this time to be reflected reach out to [[email protected]](/cdn-cgi/l/email-protection#b6c5c3c6c6d9c4c2f6ded3ce98c2d3d5de)
+Changes made to your directory details can take up to 5 minutes to be reflected in Hex. If your changes take longer than this time to be reflected reach out to [[email protected]](/cdn-cgi/l/email-protection#93e0e6e3e3fce1e7d3fbf6ebbde7f6f0fb)
 
 ### Setup steps:[​](#setup-steps "Direct link to Setup steps:")
 
-* In the Hex Administration panel, go to the **Users & groups** panel and scroll down to **Directory sync** — if you don’t see this option then Directory Sync is not currently available for your workspace. Get in touch with us at [`[email protected]`](/cdn-cgi/l/email-protection#5f373a3333301f373a27712b3a3c37) to change that!
+* In the Hex Administration panel, go to the **Users & groups** panel and scroll down to **Directory sync** — if you don’t see this option then Directory Sync is not currently available for your workspace. Get in touch with us at [`[email protected]`](/cdn-cgi/l/email-protection#ef878a838380af878a97c19b8a8c87) to change that!
 * Click on **Configure**, which will take you to a portal to select which directory provider your company uses.
 
 #### Manage groups and user roles in directory[​](#manage-groups-and-user-roles-in-directory "Direct link to Manage groups and user roles in directory")

@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-07-19T13:01+00:00_
+_Generated 2026-07-20T00:58+00:00_
 
-**9 sources, 5508 topics total**
+**9 sources, 5518 topics total**
 
 ## airflow
 
@@ -1742,7 +1742,7 @@ _1719 topics_
 
 Upstream: <https://cloud.google.com/bigquery/docs/>
 
-_1516 topics_
+_1526 topics_
 
 - `bigquery/access-control`
 - `bigquery/access-control-basic-roles`
@@ -1853,6 +1853,7 @@ _1516 topics_
 - `bigquery/column-level-security-writes`
 - `bigquery/conditions`
 - `bigquery/config-yaml-translation`
+- `bigquery/configure-blms`
 - `bigquery/connect-databricks`
 - `bigquery/connect-to-alloydb`
 - `bigquery/connect-to-sap-datasphere`
@@ -2515,24 +2516,21 @@ _1516 topics_
 - `bigquery/reference/bigquerydatapolicy/rest/v2beta1/projects.locations.dataPolicies/setIamPolicy`
 - `bigquery/reference/bigquerydatapolicy/rest/v2beta1/projects.locations.dataPolicies/testIamPermissions`
 - `bigquery/reference/bq-cli-reference`
-- `bigquery/reference/data-transfer/partner/rest/v1/Code`
-- `bigquery/reference/data-transfer/partner/rest/v1/EmailPreferences`
-- `bigquery/reference/data-transfer/partner/rest/v1/IsDataTransferServiceEnabledResponse`
+- `bigquery/reference/data-transfer/partner/rest/v1/CheckValidCredsResponse`
 - `bigquery/reference/data-transfer/partner/rest/v1/ListDataSourcesResponse`
-- `bigquery/reference/data-transfer/partner/rest/v1/ListTransferConfigsResponse`
-- `bigquery/reference/data-transfer/partner/rest/v1/StartManualTransferRunsResponse`
 - `bigquery/reference/data-transfer/partner/rest/v1/TimeRange`
-- `bigquery/reference/data-transfer/partner/rest/v1/projects.dataSources/list`
-- `bigquery/reference/data-transfer/partner/rest/v1/projects.locations.dataSources/get`
+- `bigquery/reference/data-transfer/partner/rest/v1/projects`
+- `bigquery/reference/data-transfer/partner/rest/v1/projects.locations.dataSourceDefinitions`
+- `bigquery/reference/data-transfer/partner/rest/v1/projects.locations.dataSources`
+- `bigquery/reference/data-transfer/partner/rest/v1/projects.locations.transferConfigs.runs/get`
 - `bigquery/reference/data-transfer/partner/rest/v1/projects.locations.transferConfigs.runs/startBigQueryJobs`
 - `bigquery/reference/data-transfer/partner/rest/v1/projects.locations.transferConfigs/delete`
-- `bigquery/reference/data-transfer/partner/rest/v1/projects.locations.transferConfigs/scheduleRuns`
 - `bigquery/reference/data-transfer/partner/rest/v1/projects.locations.transferConfigs/startManualRuns`
-- `bigquery/reference/data-transfer/partner/rest/v1/projects.locations/get`
-- `bigquery/reference/data-transfer/partner/rest/v1/projects.transferConfigs.runs/list`
-- `bigquery/reference/data-transfer/partner/rest/v1/projects.transferConfigs/list`
-- `bigquery/reference/data-transfer/partner/rest/v1/projects.transferConfigs/startManualRuns`
-- `bigquery/reference/data-transfer/partner/rest/v1/projects/isEnabled`
+- `bigquery/reference/data-transfer/partner/rest/v1/projects.locations/enrollDataSources`
+- `bigquery/reference/data-transfer/partner/rest/v1/projects.locations/isDataTransferServiceEnabled`
+- `bigquery/reference/data-transfer/partner/rest/v1/projects.transferConfigs/scheduleRuns`
+- `bigquery/reference/data-transfer/partner/rpc`
+- `bigquery/reference/data-transfer/partner/rpc/google.cloud.bigquery.datatransfer.v1`
 - `bigquery/reference/datatransfer/libraries`
 - `bigquery/reference/datatransfer/rest`
 - `bigquery/reference/datatransfer/rest/v1/CheckValidCredsResponse`
@@ -2988,7 +2986,12 @@ _1516 topics_
 - `bigquery/samples/bigquery-create-table-snapshot`
 - `bigquery/samples/bigquery-create-view`
 - `bigquery/samples/bigquery-dataframes-clustering-model`
+- `bigquery/samples/bigquery-dataframes-load-data-from-bigquery`
 - `bigquery/samples/bigquery-dataframes-load-data-from-bigquery-job`
+- `bigquery/samples/bigquery-dataframes-load-data-from-csv`
+- `bigquery/samples/bigquery-dataframes-pandas-methods`
+- `bigquery/samples/bigquery-dataframes-regression-model`
+- `bigquery/samples/bigquery-dataframes-remote-function`
 - `bigquery/samples/bigquery-dataset-exists`
 - `bigquery/samples/bigquery-ddl-create-view`
 - `bigquery/samples/bigquery-delete-dataset`
@@ -3015,6 +3018,7 @@ _1516 topics_
 - `bigquery/samples/bigquery-insert-geography-wkt`
 - `bigquery/samples/bigquery-insert-geojson`
 - `bigquery/samples/bigquery-inserting-data-types`
+- `bigquery/samples/bigquery-jupyter-magic-gender-by-year`
 - `bigquery/samples/bigquery-label-dataset`
 - `bigquery/samples/bigquery-label-table`
 - `bigquery/samples/bigquery-list-datasets`
@@ -3027,6 +3031,7 @@ _1516 topics_
 - `bigquery/samples/bigquery-list-tables`
 - `bigquery/samples/bigquery-load-from-file`
 - `bigquery/samples/bigquery-load-table-clustered`
+- `bigquery/samples/bigquery-load-table-dataframe`
 - `bigquery/samples/bigquery-load-table-gcs-avro`
 - `bigquery/samples/bigquery-load-table-gcs-avro-truncate`
 - `bigquery/samples/bigquery-load-table-gcs-csv`
@@ -3045,6 +3050,10 @@ _1516 topics_
 - `bigquery/samples/bigquery-migration-pandas-gbq-query-legacy`
 - `bigquery/samples/bigquery-nested-repeated-schema`
 - `bigquery/samples/bigquery-pandas-gbq-read-gbq-legacy`
+- `bigquery/samples/bigquery-pandas-gbq-read-gbq-simple`
+- `bigquery/samples/bigquery-pandas-gbq-to-gbq-simple`
+- `bigquery/samples/bigquery-pandas-public-data`
+- `bigquery/samples/bigquery-pandas-public-data-sandbox`
 - `bigquery/samples/bigquery-query`
 - `bigquery/samples/bigquery-query-batch`
 - `bigquery/samples/bigquery-query-clustered-table`
@@ -3060,6 +3069,7 @@ _1516 topics_
 - `bigquery/samples/bigquery-query-legacy`
 - `bigquery/samples/bigquery-query-legacy-large-results`
 - `bigquery/samples/bigquery-query-materialized-view`
+- `bigquery/samples/bigquery-query-natality-tutorial`
 - `bigquery/samples/bigquery-query-no-cache`
 - `bigquery/samples/bigquery-query-pagination`
 - `bigquery/samples/bigquery-query-params-arrays`

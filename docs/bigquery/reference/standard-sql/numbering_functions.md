@@ -333,13 +333,4 @@ window_specification:
 **Description**
 
 Returns the ordinal (1-based) rank of each row within the ordered partition.
-All peer rows receive the same rank value. The next row or set of peer rows
-receives a rank value which increments by the number of peers with the previous
-rank value, instead of `DENSE_RANK`, which always increments by 1.
-
-To learn more about the `OVER` clause and how to use it, see
-[Window function calls](/bigquery/docs/reference/standard-sql/window-function-calls).
-
-
-
-**Return Type**
+All peer rows receive the sam

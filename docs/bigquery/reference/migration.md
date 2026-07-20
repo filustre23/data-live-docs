@@ -60,7 +60,9 @@ If you are using [Gradle](https://gradle.org/),
 add the following to your dependencies:
 
 ```
-implementation 'com.google.cloud:google-cloud-bigquerymigration:0.97.0'
+implementation platform('com.google.cloud:libraries-bom:26.83.0')
+
+implementation 'com.google.cloud:google-cloud-bigquerymigration'
 ```
 
 If you are using [sbt](https://www.scala-sbt.org/), add
@@ -311,7 +313,5 @@ def create_migration_workflow(
     parent = f"projects/{project_id}/locations/us"
 
     # Construct a BigQuery Migration client object.
-    client = bigquery_migration_v2.MigrationServiceClient()
-
-    # Se
+    client = bigquery_migration_v2.
 ```

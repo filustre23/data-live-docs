@@ -584,5 +584,4 @@ the second column using weeks that begin on Monday.
 WITH table AS (SELECT DATETIME(TIMESTAMP "2017-11-05 00:00:00+00", "UTC") AS datetime)
 SELECT
   datetime,
-  EXTRACT(WEEK(SUNDAY) FROM datetime) AS
 ```

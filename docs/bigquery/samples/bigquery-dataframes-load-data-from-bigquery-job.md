@@ -1,5 +1,5 @@
-# Não é possível encontrar essa página
+# 抱歉，找不到该页面
 
-Erro 404 O URL solicitado /bigquery/docs/samples/bigquery-dataframes-load-data-from-bigquery-job não foi encontrado neste servidor.
+404 错误。 在此服务器上找不到请求的网址 /bigquery/docs/samples/bigquery-dataframes-load-data-from-bigquery-job。
 
-[Voltar para a página inicial](/)
+[返回首页](/)

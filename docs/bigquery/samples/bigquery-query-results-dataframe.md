@@ -1,5 +1,5 @@
-# お探しのページが見つかりません
+# 죄송합니다. 페이지를 찾을 수 없습니다
 
-404 エラー。 リクエストされた URL（/bigquery/docs/samples/bigquery-query-results-dataframe）は、このサーバーで見つかりませんでした。
+404 오류. 요청된 URL(/bigquery/docs/samples/bigquery-query-results-dataframe)이 서버에 존재하지 않습니다.
 
-[ホームに戻る](/)
+[홈으로 돌아가기](/)

@@ -1,5 +1,5 @@
-# Diese Seite konnte nicht gefunden werden
+# 抱歉，找不到该页面
 
-Fehler 404. Die gewünschte URL (/bigquery/docs/samples/bigquery-query-results-geodataframe) wurde auf diesem Server nicht gefunden.
+404 错误。 在此服务器上找不到请求的网址 /bigquery/docs/samples/bigquery-query-results-geodataframe。
 
-[Zurück zur Übersicht](/)
+[返回首页](/)

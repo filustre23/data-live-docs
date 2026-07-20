@@ -1,5 +1,5 @@
-# Maaf, kami tidak dapat menemukan halaman yang dicari
+# 很抱歉，找不到頁面
 
-Error 404. URL yang diminta /bigquery/docs/samples/bigquery-pandas-gbq-read-gbq-legacy tidak ditemukan di server ini.
+404 錯誤。 在這個伺服器找不到所要求的網址 (/bigquery/docs/samples/bigquery-pandas-gbq-read-gbq-legacy)。
 
-[Kembali ke beranda](/)
+[返回首頁](/)

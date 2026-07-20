@@ -1,5 +1,5 @@
-# Não é possível encontrar essa página
+# 很抱歉，找不到頁面
 
-Erro 404 O URL solicitado /bigquery/docs/samples/bigquery-list-models-streaming não foi encontrado neste servidor.
+404 錯誤。 在這個伺服器找不到所要求的網址 (/bigquery/docs/samples/bigquery-list-models-streaming)。
 
-[Voltar para a página inicial](/)
+[返回首頁](/)

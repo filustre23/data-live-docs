@@ -110,7 +110,7 @@ Input/output argument of a function or a stored procedure.
 
 | JSON representation |
 | --- |
-| ``` {   "name": string,   "argumentKind": enum (ArgumentKind),   "mode": enum (Mode),   "dataType": {     object (StandardSqlDataType)   } } ``` |
+| ``` {   "name": string,   "argumentKind": enum (ArgumentKind),   "mode": enum (Mode),   "dataType": {     object (StandardSqlDataType)   },   "tableType": {     object (StandardSqlTableType)   } } ``` |
 
 | Fields | |
 | --- | --- |
@@ -118,6 +118,7 @@ Input/output argument of a function or a stored procedure.
 | `argumentKind` | `enum (ArgumentKind)`  Optional. Defaults to FIXED\_TYPE. |
 | `mode` | `enum (Mode)`  Optional. Specifies whether the argument is input or output. Can be set for procedures only. |
 | `dataType` | `object (StandardSqlDataType)`  Set if argumentKind == FIXED\_TYPE. |
+| `tableType` | `object (StandardSqlTableType)`  Optional. Set if argumentKind == FIXED\_TABLE. |
 
 ## ArgumentKind
 
@@ -128,6 +129,8 @@ Represents the kind of a given argument.
 | `ARGUMENT_KIND_UNSPECIFIED` | Default value. |
 | `FIXED_TYPE` | The argument is a variable with fully specified type, which can be a struct or an array, but not a table. |
 | `ANY_TYPE` | The argument is any type, including struct or array, but not a table. |
+| `FIXED_TABLE` | The argument is a table with fully specified column names and types. |
+| `ANY_TABLE` | The argument is any table type. |
 
 ## Mode
 
@@ -250,8 +253,3 @@ The status of a routine build.
 | JSON representation |
 | --- |
 | ``` {   "buildState": enum (BuildState),   "errorResult": {     object (ErrorProto)   },   "buildStateUpdateTime": string,   "buildDuration": string,   "imageSizeBytes": string } ``` |
-
-| Fields | |
-| --- | --- |
-| `buildState` | `enum (BuildState)`  Output only. The current build state of the routine. |
-| `errorResult` | `object (ErrorProto)`  Output only. A result object that will be present only if the build has failed. |

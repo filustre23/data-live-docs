@@ -26,9 +26,10 @@ This code sample demonstrates using the low-level generated client for Python.
 import datetime
 import decimal
 
+from google.protobuf import descriptor_pb2
+
 from google.cloud import bigquery_storage_v1
 from google.cloud.bigquery_storage_v1 import types, writer
-from google.protobuf import descriptor_pb2
 
 # If you make updates to the sample_data.proto protocol buffers definition,
 # run:
@@ -39,7 +40,7 @@ from google.protobuf import descriptor_pb2
 from . import sample_data_pb2
 
 
-def append_rows_proto2(project_id: str, dataset_id: str, table_id: str) -> None:
+def append_rows_proto2(project_id: str, dataset_id: str, table_id: str):
     """Create a write stream, write some sample data, and commit the stream."""
     write_client = bigquery_storage_v1.BigQueryWriteClient()
     parent = write_client.table_path(project_id, dataset_id, table_id)
