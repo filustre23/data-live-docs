@@ -152,7 +152,7 @@ Decide on how you want to handle OAuth credential sharing in Hex projects via th
 1. **Enabled**
 2. **Disabled**
 
-This setting determines whether users editing or viewing a project use the project owner's OAuth token or if they must authenticate with their own credentials.
+This setting determines whether users can share credentials or must authenticate with their own. Notebook credential sharing uses the project owner's OAuth token; published app credential sharing uses the publisher's OAuth token.
 
 #### Notebook View[​](#notebook-view "Direct link to Notebook View")
 
@@ -196,7 +196,7 @@ Users can review their existing tokens in **Settings > Connected Apps**, which 
 
 ### Scheduled runs[​](#scheduled-runs "Direct link to Scheduled runs")
 
-Scheduled runs for projects which use OAuth data connections have some limitations depending on whether credential sharing is enabled for the project. When credential sharing is **disabled for the published app**, scheduled runs can only be scheduled by the project owner. Additionally, scheduled run notifications will not include screenshots. If credential sharing is **enabled for the published app**, the project owner's token will be used to execute the project run and a screenshot of the resulting app can be included in scheduled run notifications.
+Scheduled runs for projects which use OAuth data connections have some limitations depending on whether credential sharing is enabled for the project. When credential sharing is **disabled for the published app**, scheduled runs can only be scheduled by the project owner. Additionally, scheduled run notifications will not include screenshots. If credential sharing is **enabled for the published app**, the publisher's token will be used to execute the project run and a screenshot of the resulting app can be included in scheduled run notifications.
 
 ### Published app caching[​](#published-app-caching "Direct link to Published app caching")
 
@@ -256,11 +256,11 @@ Note that using `use warehouse` statements within a project will not solve this 
 
 ### Expired app credentials[​](#expired-app-credentials "Direct link to Expired app credentials")
 
-When app credential sharing is enabled, the project owner's credentials are used to run the published apps. A Snowflake OAuth token expires after a set number of days (based on how the integration was configured in Snowflake).
+When app credential sharing is enabled, the publisher's credentials are used to run the published apps. A Snowflake OAuth token expires after a set number of days (based on how the integration was configured in Snowflake).
 
-This can lead to a case where the project owner's credentials have not been refreshed recently and the published app is no longer working.
+This can lead to a case where the publisher's credentials have not been refreshed recently and the published app is no longer working.
 
-When this happens, Hex will prompt you to contact the project owner to have them refresh their credentials. If this person is unavailable (for example, they are out of office), you can also ask a workspace admin to [transfer ownership](/docs/explore-data/projects/create-and-manage-projects#transfer-owner) of the project so that a different user's credentials are used in the published app.
+When this happens, Hex will prompt you to contact the publisher to have them refresh their credentials. If this person is unavailable (for example, they are out of office), you can also ask a workspace admin to [transfer ownership](/docs/explore-data/projects/create-and-manage-projects#transfer-owner) of the project so that a different user can refresh credentials and republish the app.
 
 #### On this page
 
