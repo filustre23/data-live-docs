@@ -105,6 +105,8 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### Knowledge Catalog 服務帳戶角色和權限
 
+**注意：** 如要掃描以 CMEK 加密的 BigQuery 資源，您也必須將 `roles/cloudkms.cryptoKeyEncrypterDecrypter` 角色授予相關服務代理程式。詳情請參閱「[DataScans CMEK 權限](https://docs.cloud.google.com/bigquery/docs/cmek?hl=zh-tw#datascan-cmek-permissions)」。
+
 如果您尚未建立任何資料品質或資料剖析掃描作業，或這個專案沒有 Knowledge Catalog 湖泊，請執行下列指令建立服務 ID：
 `gcloud beta services identity create --service=dataplex.googleapis.com`。
 如果存在，這項指令會傳回 Knowledge Catalog 服務 ID。
@@ -1117,7 +1119,3 @@ def sample_get_data_scan():
 ### Ruby
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[為本機開發環境設定驗證機制](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
-
-```
-require
-```

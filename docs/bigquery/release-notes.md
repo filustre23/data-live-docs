@@ -27,6 +27,42 @@ To get the latest product updates delivered to you, add the URL of this page to 
 reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators), or add the
 [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## July 20, 2026
+
+Feature
+
+[*Lakehouse for Apache Iceberg*](/lakehouse/docs/introduction): Cross-cloud
+Lakehouse now supports integration with SAP Business Data Cloud
+(BDC) in Preview.
+
+This update includes the following features:
+
+* **Federation from SAP BDC:** Create Delta Sharing catalogs in
+  Lakehouse to automatically synchronize shares, schemas, and
+  tables from SAP BDC.
+* **Querying SAP data:** Query synchronized SAP BDC tables directly from
+  BigQuery without data migration.
+* **Publishing to SAP BDC:** Publish Apache Iceberg REST catalog (IRC) tables
+  or Knowledge Catalog Data Products from
+  Lakehouse directly to SAP BDC, allowing SAP users and
+  applications to consume Google Cloud data directly as remote tables
+  in SAP Datasphere without migrating data.
+
+For more information, see [Set up cross-cloud Lakehouse for SAP
+BDC](/lakehouse/docs/set-up-cross-cloud-lakehouse-sap-bdc), [Query SAP BDC
+data](/lakehouse/docs/query-sap-data), and [Publish Lakehouse
+tables to SAP BDC](/lakehouse/docs/publish-data-to-sap-bdc).
+
+Issue
+
+[*Lakehouse for Apache Iceberg*](/lakehouse/docs/introduction): Data Products with
+special characters, such as "/" or "-", are not supported and will not be
+available in BigQuery even if shared from SAP BDC to
+BigQuery. If you share a Data Product with special characters,
+this could cause the stop a refresh and require
+re-enrollment. Known SAP systems producing these Data Products include
+SAP Business Warehouse (BW) sources and SAP SuccessFactors.
+
 ## July 15, 2026
 
 Feature
@@ -4426,23 +4462,3 @@ Repositories perform version control on files by using Git to record changes and
 You can have a repository use Git directly on BigQuery, or you can [connect a repository to a third-party Git provider](/bigquery/docs/repositories#connect-third-party).
 
 This feature is in [preview](https://cloud.google.com/products/#product-launch-stages).
-
-Announcement
-
-BigQuery workflows have been renamed to BigQuery pipelines in the Google Cloud console. For more information, see [Introduction to BigQuery pipelines](/bigquery/docs/workflows-introduction).
-
-## March 17, 2025
-
-Feature
-
-You can now use [`EXPORT DATA` statements](/bigquery/docs/reference/standard-sql/other-statements) to [reverse ETL BigQuery data to Spanner](/bigquery/docs/export-to-spanner). This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
-
-Feature
-
-You can now use the [`TYPEOF` function](/bigquery/docs/reference/standard-sql/utility-functions#typeof) to determine the data type of an expression. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
-
-Feature
-
-You can now create an [external dataset](/bigquery/docs/spanner-external-datasets) in BigQuery that links to an existing database in [Spanner](/spanner/docs). This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
-
-## March 13, 2025

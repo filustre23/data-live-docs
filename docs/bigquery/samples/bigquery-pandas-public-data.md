@@ -1,5 +1,5 @@
-# Désolé, impossible de trouver cette page
+# 抱歉，找不到该页面
 
-Erreur 404. L'URL demandée /bigquery/docs/samples/bigquery-pandas-public-data n'a pas été trouvée sur ce serveur.
+404 错误。 在此服务器上找不到请求的网址 /bigquery/docs/samples/bigquery-pandas-public-data。
 
-[Retour à la page d'accueil](/)
+[返回首页](/)

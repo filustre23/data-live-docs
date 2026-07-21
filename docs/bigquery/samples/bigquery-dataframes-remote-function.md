@@ -1,5 +1,5 @@
-# 很抱歉，找不到頁面
+# Désolé, impossible de trouver cette page
 
-404 錯誤。 在這個伺服器找不到所要求的網址 (/bigquery/docs/samples/bigquery-dataframes-remote-function)。
+Erreur 404. L'URL demandée /bigquery/docs/samples/bigquery-dataframes-remote-function n'a pas été trouvée sur ce serveur.
 
-[返回首頁](/)
+[Retour à la page d'accueil](/)

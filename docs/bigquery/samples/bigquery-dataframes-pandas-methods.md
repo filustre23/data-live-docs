@@ -1,5 +1,5 @@
-# Não é possível encontrar essa página
+# Maaf, kami tidak dapat menemukan halaman yang dicari
 
-Erro 404 O URL solicitado /bigquery/docs/samples/bigquery-dataframes-pandas-methods não foi encontrado neste servidor.
+Error 404. URL yang diminta /bigquery/docs/samples/bigquery-dataframes-pandas-methods tidak ditemukan di server ini.
 
-[Voltar para a página inicial](/)
+[Kembali ke beranda](/)

@@ -8,7 +8,7 @@ info
 
 * Generative apps are available in **Beta** on all [plans](https://hex.tech/pricing/). Paid plans include monthly per-seat [credit grants](/docs/administration/credits) that can be used towards Hex AI features.
 * Users need [Can Edit](/docs/collaborate/sharing-and-permissions/project-sharing#project-permissions) or higher permissions on a project to create a Generative app.
-* To share suggestions for new features or improvements, reach out to [[email protected]](/cdn-cgi/l/email-protection#4f3c3a3f3f203d3b0f272a37613b2a2c27).
+* Generative apps don't yet support every Classic app feature. If your project needs [saved views](/docs/share-insights/apps/saved-views), [PDF export](/docs/share-insights/apps/export-as-pdf), or another capability listed under [Limitations](#limitations), use a [Classic app](/docs/share-insights/apps/apps-introduction) instead.
 
 Generative apps give you a fully customized, code-generated app experience where the Hex agent builds your UI, visuals, and theming from a plain-language description. Unlike [Classic apps](/docs/share-insights/apps/apps-introduction), which use a fixed grid of standard components, Generative apps produce flexible, web-style interfaces with custom layout, styling, and components tailored to what you're trying to build. This gives you more expressive power when a standard dashboard layout isn't enough.
 
@@ -48,6 +48,14 @@ The agent can also read the rendered app and its console output, so it can fix l
 ### Choose a model and effort[​](#choose-a-model-and-effort "Direct link to Choose a model and effort")
 
 For open-ended builds — like generating a full app from scratch or making sweeping structural changes — consider selecting a higher effort level from the [Model & Effort Picker](/docs/explore-data/notebook-view/notebook-agent#choose-a-model-and-effort) in the prompt bar. Higher effort gives the agent more reasoning depth for complex, multi-step generation. For targeted tweaks, Auto is fine.
+
+### Edit code directly[​](#edit-code-directly "Direct link to Edit code directly")
+
+You can edit the code that underlies a generative app yourself instead of going through the agent. From the App builder select **Code** to open the file tree for your app - `App.js`, its components, and styles - and edit the code directly. Make your edit, then select **Preview** to see it rendered in your app.
+
+[](/assets/medias/gen-apps-editing-code-d68de53428e1395bd664d0ff545b64a4.mp4)
+
+Editing directly is the faster path for small, precise changes, such as fixing a typo or removing a section. For larger changes, prompting the agent is usually still easier.
 
 ## Control app style with a `design.md`[​](#control-app-style-with-a-designmd "Direct link to control-app-style-with-a-designmd")
 
@@ -155,6 +163,7 @@ While Generative apps are in Beta, some Hex features are not yet supported. Thes
   + [From your workspace homepage](#from-your-workspace-homepage)
 * [Iterate on your app](#iterate-on-your-app)
   + [Choose a model and effort](#choose-a-model-and-effort)
+  + [Edit code directly](#edit-code-directly)
 * [Control app style with a `design.md`](#control-app-style-with-a-designmd)
   + [Create your `design.md` with an agent](#create-your-designmd-with-an-agent)
   + [Add it to your workspace](#add-it-to-your-workspace)

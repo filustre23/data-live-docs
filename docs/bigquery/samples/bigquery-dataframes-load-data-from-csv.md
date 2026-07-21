@@ -1,5 +1,5 @@
-# 抱歉，找不到该页面
+# Maaf, kami tidak dapat menemukan halaman yang dicari
 
-404 错误。 在此服务器上找不到请求的网址 /bigquery/docs/samples/bigquery-dataframes-load-data-from-csv。
+Error 404. URL yang diminta /bigquery/docs/samples/bigquery-dataframes-load-data-from-csv tidak ditemukan di server ini.
 
-[返回首页](/)
+[Kembali ke beranda](/)

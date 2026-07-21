@@ -1,5 +1,5 @@
-# 抱歉，找不到该页面
+# 很抱歉，找不到頁面
 
-404 错误。 在此服务器上找不到请求的网址 /bigquery/docs/samples/bigquery-query-results-geodataframe。
+404 錯誤。 在這個伺服器找不到所要求的網址 (/bigquery/docs/samples/bigquery-query-results-geodataframe)。
 
-[返回首页](/)
+[返回首頁](/)
