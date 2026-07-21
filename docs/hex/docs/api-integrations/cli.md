@@ -18,7 +18,15 @@ The Hex CLI manages Hex projects, cells, runs, data connections, and workspace r
 Install the CLI with [Homebrew](https://brew.sh/):
 
 ```
-brew install hex-inc/hex-cli/hex
+brew tap hex-inc/hex-cli
+
+
+
+brew trust --tap hex-inc/hex-cli
+
+
+
+brew install hex
 ```
 
 Alternatively, you can manually install the CLI using the following command:
@@ -221,7 +229,7 @@ AI agents that can interact with your command line, such as Claude Code, can be 
 
 ## Bugs & issues[​](#bugs--issues "Direct link to Bugs & issues")
 
-Please contact [[email protected]](/cdn-cgi/l/email-protection#d2a1a7a2a2bda0a692bab7aafca6b7b1ba) if you encounter any bugs, or other issues.
+Please contact [[email protected]](/cdn-cgi/l/email-protection#2e5d5b5e5e415c5a6e464b56005a4b4d46) if you encounter any bugs, or other issues.
 
 #### On this page
 

@@ -20,6 +20,7 @@
 * [June 25 - Hex in Figma, IAM role support for AWS, and schema refresh history!](/changelog/2026-06-25)
 * [July 8 - Two new models and more controls over generative apps](/changelog/2026-07-08)
 * [July 14 - More control over credits, thread metadata, and role requests](/changelog/2026-07-14)
+* [July 21 - Get hands-on with your generative apps](/changelog/2026-07-21)
 
 ### 2025[​](#2025 "Direct link to 2025")
 
