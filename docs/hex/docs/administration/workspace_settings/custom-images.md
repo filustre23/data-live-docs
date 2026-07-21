@@ -4,7 +4,7 @@ On this page
 
 info
 
-* Available on select Enterprise [plans](https://hex.tech/pricing). Contact [[email protected]](/cdn-cgi/l/email-protection#4c3f2d20293f0c2429346238292f24) to request access.
+* Available on select Enterprise [plans](https://hex.tech/pricing). Contact [[email protected]](/cdn-cgi/l/email-protection#dcafbdb0b9af9cb4b9a4f2a8b9bfb4) to request access.
 
 By default, Hex is set up with images for multiple versions of Python, each of which contain many pre-installed packages. These images are often sufficient for most projects, and are designed to get users off the ground quickly.
 
@@ -480,7 +480,7 @@ Deleting an image will immediately break any published apps that utilize the ima
 
 ### Enable fast launch[​](#enable-fast-launch "Direct link to Enable fast launch")
 
-Fast launch can be enabled on an image from the **Edit image** modal, accessed via the three-dot menu to the right of the image. The number of images that can have fast launch enabled is limited by workspace. Once you have reached the maximum number of fast launch images, the toggle will be disabled and show a message indicating that you need to fast launch needs to be disabled on another image in order to enable it on the new image. To alter the number of images you can enable fast Launch for, please contact [[email protected]](/cdn-cgi/l/email-protection#80f3e1ece5f3c0e8e5f8aef4e5e3e8).
+Fast launch can be enabled on an image from the **Edit image** modal, accessed via the three-dot menu to the right of the image. The number of images that can have fast launch enabled is limited by workspace. Once you have reached the maximum number of fast launch images, the toggle will be disabled and show a message indicating that you need to fast launch needs to be disabled on another image in order to enable it on the new image. To alter the number of images you can enable fast Launch for, please contact [[email protected]](/cdn-cgi/l/email-protection#91e2f0fdf4e2d1f9f4e9bfe5f4f2f9).
 
 ### How fast launch works[​](#how-fast-launch-works "Direct link to How fast launch works")
 

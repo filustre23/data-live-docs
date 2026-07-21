@@ -9,7 +9,7 @@ info
 * Paid [plans](https://hex.tech/pricing/) include monthly per-seat [credit grants](/docs/administration/credits) that can be used towards Hex AI features.
 * Users need the **Admin**, **Manager**, or **Editor** workspace role and **Can Edit** or higher project permissions to use the Notebook agent.
 * The Notebook agent is not compatible with **Published apps**.
-* To share suggestions for new features or improvements, reach out to [[email protected]](/cdn-cgi/l/email-protection#bfcccacfcfd0cdcbffd7dac791cbdadcd7).
+* To share suggestions for new features or improvements, reach out to [[email protected]](/cdn-cgi/l/email-protection#2d5e585d5d425f596d4548550359484e45).
 
 The Notebook agent offers a natural language experience to assist with code generation and exploratory analysis within Hex projects. The agent has full access to your project context and warehouse schema information, so you can ask questions about - and receive answers for - your data. The agent can also help with syntax, act as a sounding board for brainstorming solutions, or create entirely new lines of analysis.
 
@@ -156,7 +156,7 @@ Only projects you have [**Can Explore**](/docs/collaborate/sharing-and-permissio
 
 ## Providing feedback[​](#providing-feedback "Direct link to Providing feedback")
 
-Use the in product feedback buttons to report bugs or issues. Our team reviews these reports daily. If you want to share suggestions for new features or improvements, reach out to us directly at [[email protected]](/cdn-cgi/l/email-protection#f784828787988583b79f928fd98392949f).
+Use the in product feedback buttons to report bugs or issues. Our team reviews these reports daily. If you want to share suggestions for new features or improvements, reach out to us directly at [[email protected]](/cdn-cgi/l/email-protection#64171114140b1610240c011c4a1001070c).
 
 #### On this page
 
