@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-07-21T19:17+00:00_
+_Generated 2026-07-22T07:59+00:00_
 
-**9 sources, 4343 topics total**
+**9 sources, 4344 topics total**
 
 ## airflow
 
@@ -2099,7 +2099,7 @@ _1528 topics_
 
 Upstream: <https://code.claude.com/docs/en/>
 
-_170 topics_
+_171 topics_
 
 - `claude-code/accessibility`
 - `claude-code/admin-setup`
@@ -2170,6 +2170,7 @@ _170 topics_
 - `claude-code/debug-your-config`
 - `claude-code/deep-links`
 - `claude-code/desktop`
+- `claude-code/desktop-ios-simulator`
 - `claude-code/desktop-linux`
 - `claude-code/desktop-quickstart`
 - `claude-code/desktop-scheduled-tasks`
