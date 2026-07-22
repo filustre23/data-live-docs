@@ -186,7 +186,7 @@ c) Any other published materials made available by Hex, which further describe H
 
 **Address:** 2261 Market St #4233, San Francisco, CA 94114
 
-**Contact Details for Data Protection**: [[email protected]](/cdn-cgi/l/email-protection#bececcd7c8dfddc7fed6dbc690cadbddd6)
+**Contact Details for Data Protection**: [[email protected]](/cdn-cgi/l/email-protection#7404061d0215170d341c110c5a0011171c)
 
 **Hex Activities:** Processing to carry out the Services pursuant to the Agreement entered into between Customer and Hex.
 
