@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-07-22T13:27+00:00_
+_Generated 2026-07-23T01:03+00:00_
 
-**9 sources, 4344 topics total**
+**9 sources, 4349 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_541 topics_
+_545 topics_
 
 - `anthropic-sdk/about-claude/glossary`
 - `anthropic-sdk/about-claude/model-deprecations`
@@ -230,6 +230,12 @@ _541 topics_
 - `anthropic-sdk/api/beta/deployments/run`
 - `anthropic-sdk/api/beta/deployments/unpause`
 - `anthropic-sdk/api/beta/deployments/update`
+- `anthropic-sdk/api/beta/dreams`
+- `anthropic-sdk/api/beta/dreams/archive`
+- `anthropic-sdk/api/beta/dreams/cancel`
+- `anthropic-sdk/api/beta/dreams/create`
+- `anthropic-sdk/api/beta/dreams/list`
+- `anthropic-sdk/api/beta/dreams/retrieve`
 - `anthropic-sdk/api/beta/environments`
 - `anthropic-sdk/api/beta/environments/archive`
 - `anthropic-sdk/api/beta/environments/create`
@@ -457,7 +463,6 @@ _541 topics_
 - `anthropic-sdk/build-with-claude/prompt-engineering/prompting-claude-fable-5`
 - `anthropic-sdk/build-with-claude/prompt-engineering/prompting-claude-opus-4-8`
 - `anthropic-sdk/build-with-claude/prompt-engineering/prompting-claude-sonnet-5`
-- `anthropic-sdk/build-with-claude/prompt-engineering/prompting-tools`
 - `anthropic-sdk/build-with-claude/refusals-and-fallback`
 - `anthropic-sdk/build-with-claude/search-results`
 - `anthropic-sdk/build-with-claude/skills-guide`
@@ -552,7 +557,6 @@ _541 topics_
 - `anthropic-sdk/release-notes/system-prompts`
 - `anthropic-sdk/resources/overview`
 - `anthropic-sdk/test-and-evaluate/develop-tests`
-- `anthropic-sdk/test-and-evaluate/eval-tool`
 - `anthropic-sdk/test-and-evaluate/strengthen-guardrails/handle-streaming-refusals`
 - `anthropic-sdk/test-and-evaluate/strengthen-guardrails/increase-consistency`
 - `anthropic-sdk/test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks`
@@ -2099,7 +2103,7 @@ _1528 topics_
 
 Upstream: <https://code.claude.com/docs/en/>
 
-_171 topics_
+_172 topics_
 
 - `claude-code/accessibility`
 - `claude-code/admin-setup`
@@ -2157,6 +2161,7 @@ _171 topics_
 - `claude-code/claude-code-on-the-web`
 - `claude-code/claude-directory`
 - `claude-code/claude-platform-on-aws`
+- `claude-code/claude-security`
 - `claude-code/cli-reference`
 - `claude-code/code-review`
 - `claude-code/commands`
