@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-07-23T08:07+00:00_
+_Generated 2026-07-23T13:40+00:00_
 
-**9 sources, 4349 topics total**
+**9 sources, 4352 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_545 topics_
+_548 topics_
 
 - `anthropic-sdk/about-claude/glossary`
 - `anthropic-sdk/about-claude/model-deprecations`
@@ -433,7 +433,6 @@ _545 topics_
 - `anthropic-sdk/api/service-tiers`
 - `anthropic-sdk/api/supported-regions`
 - `anthropic-sdk/api/versioning`
-- `anthropic-sdk/build-with-claude/adaptive-thinking`
 - `anthropic-sdk/build-with-claude/batch-processing`
 - `anthropic-sdk/build-with-claude/cache-diagnostics`
 - `anthropic-sdk/build-with-claude/citations`
@@ -469,6 +468,10 @@ _545 topics_
 - `anthropic-sdk/build-with-claude/streaming`
 - `anthropic-sdk/build-with-claude/structured-outputs`
 - `anthropic-sdk/build-with-claude/task-budgets`
+- `anthropic-sdk/build-with-claude/thinking`
+- `anthropic-sdk/build-with-claude/thinking-steering-and-cost`
+- `anthropic-sdk/build-with-claude/thinking-tool-workflows`
+- `anthropic-sdk/build-with-claude/thinking-troubleshooting`
 - `anthropic-sdk/build-with-claude/token-counting`
 - `anthropic-sdk/build-with-claude/vision`
 - `anthropic-sdk/build-with-claude/vision-coordinates`
