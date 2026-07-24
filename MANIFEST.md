@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-07-23T13:40+00:00_
+_Generated 2026-07-24T01:04+00:00_
 
-**9 sources, 4352 topics total**
+**9 sources, 4362 topics total**
 
 ## airflow
 
@@ -2285,13 +2285,21 @@ _172 topics_
 
 Upstream: <https://docs.getdbt.com/docs/>
 
-_1107 topics_
+_1117 topics_
 
 - `dbt-core/best-practices/best-practice-workflows`
 - `dbt-core/best-practices/clone-incremental-models`
 - `dbt-core/best-practices/custom-generic-tests`
 - `dbt-core/best-practices/dbt-unity-catalog-best-practices`
 - `dbt-core/best-practices/dont-nest-your-curlies`
+- `dbt-core/best-practices/how-to-use-wizard/wizard-1-intro`
+- `dbt-core/best-practices/how-to-use-wizard/wizard-2-understand-project`
+- `dbt-core/best-practices/how-to-use-wizard/wizard-3-validate-changes`
+- `dbt-core/best-practices/how-to-use-wizard/wizard-4-data-informed-tests`
+- `dbt-core/best-practices/how-to-use-wizard/wizard-5-debug-failed-job`
+- `dbt-core/best-practices/how-to-use-wizard/wizard-6-production-deferral`
+- `dbt-core/best-practices/how-to-use-wizard/wizard-7-semantic-layer`
+- `dbt-core/best-practices/how-to-use-wizard/wizard-8-plugins-hooks`
 - `dbt-core/best-practices/how-we-build-our-metrics/semantic-layer-1-intro`
 - `dbt-core/best-practices/how-we-build-our-metrics/semantic-layer-2-setup`
 - `dbt-core/best-practices/how-we-build-our-metrics/semantic-layer-3-build-semantic-models`
@@ -2355,6 +2363,7 @@ _1107 topics_
 - `dbt-core/docs/about-dbt-lsp`
 - `dbt-core/docs/about-setup`
 - `dbt-core/docs/build/about-metricflow`
+- `dbt-core/docs/build/about-static-analysis`
 - `dbt-core/docs/build/advanced-topics`
 - `dbt-core/docs/build/analyses`
 - `dbt-core/docs/build/build-metrics-intro`
@@ -2474,6 +2483,7 @@ _1107 topics_
 - `dbt-core/docs/dbt-apis/sl-python-sdk`
 - `dbt-core/docs/dbt-apis/user-tokens`
 - `dbt-core/docs/dbt-extension-features`
+- `dbt-core/docs/dbt-licensing`
 - `dbt-core/docs/dbt-platform-environments`
 - `dbt-core/docs/dbt-support`
 - `dbt-core/docs/dbt-versions/2022-release-notes`
@@ -2565,6 +2575,7 @@ _1107 topics_
 - `dbt-core/docs/explore/project-recommendations`
 - `dbt-core/docs/explore/set-up-cost-insights`
 - `dbt-core/docs/explore/view-downstream-exposures`
+- `dbt-core/docs/fusion/about-core`
 - `dbt-core/docs/fusion/about-fusion`
 - `dbt-core/docs/fusion/about-fusion-install`
 - `dbt-core/docs/fusion/adbc`
@@ -2575,15 +2586,11 @@ _1107 topics_
 - `dbt-core/docs/fusion/connect-data-platform-fusion/redshift-setup`
 - `dbt-core/docs/fusion/connect-data-platform-fusion/salesforce-data-cloud-setup`
 - `dbt-core/docs/fusion/connect-data-platform-fusion/snowflake-setup`
-- `dbt-core/docs/fusion/fusion`
 - `dbt-core/docs/fusion/fusion-availability`
-- `dbt-core/docs/fusion/fusion-networking`
 - `dbt-core/docs/fusion/fusion-readiness`
 - `dbt-core/docs/fusion/fusion-releases`
 - `dbt-core/docs/fusion/get-started-fusion`
-- `dbt-core/docs/fusion/new-concepts`
 - `dbt-core/docs/fusion/supported-features`
-- `dbt-core/docs/fusion/telemetry-observability`
 - `dbt-core/docs/fusion/vs-compare-changes`
 - `dbt-core/docs/get-started-dbt`
 - `dbt-core/docs/install-dbt-extension`
@@ -2648,7 +2655,9 @@ _1107 topics_
 - `dbt-core/docs/local/connect-data-platform/yellowbrick-setup`
 - `dbt-core/docs/local/connection-profiles`
 - `dbt-core/docs/local/dbt-core-environments`
+- `dbt-core/docs/local/fusion-networking-requirements`
 - `dbt-core/docs/local/install-dbt`
+- `dbt-core/docs/local/install-dbt-core-2-oss`
 - `dbt-core/docs/local/profiles.yml`
 - `dbt-core/docs/mesh/about-mesh`
 - `dbt-core/docs/mesh/govern/about-model-governance`
@@ -3349,6 +3358,7 @@ _1107 topics_
 - `dbt-core/reference/snapshot-properties`
 - `dbt-core/reference/source-configs`
 - `dbt-core/reference/source-properties`
+- `dbt-core/reference/telemetry-observability`
 - `dbt-core/sql-reference/aggregate-functions/sql-array-agg`
 - `dbt-core/sql-reference/aggregate-functions/sql-avg`
 - `dbt-core/sql-reference/aggregate-functions/sql-count`
