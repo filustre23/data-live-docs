@@ -10,10 +10,10 @@
 * getGetProject
 * postIngestSemanticProject
 * patchUpdateSemanticProject
-* postRunProject
-* getGetProjectRuns
 * getGetRunStatus
 * delCancelRun
+* getGetProjectRuns
+* postRunProject
 * getGetGroup
 * delDeleteGroup
 * patchEditGroup
@@ -1662,11 +1662,9 @@ Copy
 
 }`
 
-## RunProject
+## GetRunStatus
 
-Trigger a run of the latest published version of a project.
-
-This API endpoint is subject to a maximum of 20 requests per minute and 60 requests per hour.
+Get the status of a project run.
 
 ##### Authorizations:
 
@@ -1677,28 +1675,17 @@ This API endpoint is subject to a maximum of 20 requests per minute and 60 reque
 |  |  |
 | --- | --- |
 | projectId required | string <uuid>  (ProjectId) ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}...Show pattern  Unique ID for a Hex project. This can be found in the Variables side bar of the Logic View of a project, or by visiting the Project, and copying the UUID after `hex` in the URL. |
+| runId required | string <uuid>  (InputRunId) ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}...Show pattern  Unique ID for a run of a Hex project. This ID is part of the response returned by the RunProject endpoint. The GetProjectRuns endpoint can also be used to find the specific runs for a project. |
 
 ##### header Parameters
 
 |  |  |
 | --- | --- |
-| flag-config-override | string |
-
-##### Request Body schema: application/json optional
-
-|  |  |
-| --- | --- |
-| inputParams | object  Optionally specify input parameters for this project run. These should be structured as a dictionary of key/value pairs, where the key name matches the name of the variable in the Hex project.  Only parameters that are added to the published app can be set via this request parameter. Any additional inputs will be ignored. It is invalid to pass in both a viewId and inputParams.  If no input parameters are provided, the project will be run with the default input values. Note that if input parameters are provided, this run will not be able to update the cached values for the project, and the updateCache setting (below) will be ignored. |
-| dryRun | boolean  Default:  "false"  When true, this endpoint will perform a dry run that does not run the project. This can be useful for validating the structure of an API call, and inspecting a dummy response, without running a project. |
-| updateCache | boolean  Deprecated |
-| notifications | Array of objects (ProjectRunNotification)  Optionally specify a list of notification details that will be delivered once a project run completes. Notifications can be configured for delivery to Slack channels, Hex users, or Hex groups. |
-| updatePublishedResults | boolean  Default:  "false"  When true, the cached state of the published app will be updated with the latest run results. You must have at least "Can Edit" permissions on the project to do so. Note: this cannot be set to true if custom input parameters are provided. |
-| useCachedSqlResults | boolean  Default:  "true"  When false, the project will run without using any cached SQL results, and will update those cached SQL results. |
-| viewId | string  Optionally specify a SavedView viewId to use for the project run. If specified, the saved view's inputs will be used for the project run. It is invalid to pass in both a viewId and inputParams. If not specified, the default inputs will be used. |
+| enable-expanded-stats | string |
 
 ### Responses
 
-**201**
+**200**
 
 **400**
 
@@ -1706,60 +1693,16 @@ This API endpoint is subject to a maximum of 20 requests per minute and 60 reque
 
 **422**
 
-**503**
+get/v1/projects/{projectId}/runs/{runId}
 
-post/v1/projects/{projectId}/runs
-
-https://app.hex.tech/api/v1/projects/{projectId}/runs
-
-### Request samples
-
-* Payload
-
-Content type
-
-application/json
-
-Copy
-
- Expand all  Collapse all
-
-`{
-
-* "inputParams": {
-  + "text_input_1": "Hello World",
-  + "numeric_input_1": 123},
-* "dryRun": "false",
-* "updateCache": true,
-* "notifications": [
-  + {
-    - "type": "ALL",
-    - "includeSuccessScreenshot": "true",
-    - "slackChannelIds": [
-      * "C0000000"],
-    - "userIds": [
-      * "uuid-user-1",
-      * "uuid-user-2"]},
-  + {
-    - "type": "FAILURE",
-    - "includeSuccessScreenshot": "false",
-    - "userIds": [
-      * "uuid-user-1"],
-    - "groupIds": [
-      * "uuid-group-1"]}],
-* "updatePublishedResults": "false",
-* "useCachedSqlResults": "true",
-* "viewId": "string"
-
-}`
+https://app.hex.tech/api/v1/projects/{projectId}/runs/{runId}
 
 ### Response samples
 
-* 201
+* 200
 * 400
 * 403
 * 422
-* 503
 
 Content type
 
@@ -1772,11 +1715,16 @@ Copy
 `{
 
 * "projectId": "5a8591dd-4039-49df-9202-96385ba3eff8",
+* "projectVersion": 0,
 * "runId": "78c33d18-170c-44d3-a227-b3194f134f73",
 * "runUrl": "string",
-* "runStatusUrl": "string",
+* "status": "PENDING",
+* "runTrigger": "API",
+* "startTime": "2019-08-24T14:15:22Z",
+* "endTime": "2019-08-24T14:15:22Z",
+* "elapsedTime": 0.1,
+* "flagConfigOverride": "string",
 * "traceId": "string",
-* "projectVersion": 0,
 * "notifications": [
   + {
     - "type": "SUCCESS",
@@ -1787,9 +1735,63 @@ Copy
     - "screenshotFormat": [
       * "png"],
     - "recipient": {
-      * "id": "C0123456",
-      * "name": "data-team",
-      * "isPrivate": false}}]
+      * "id": "string",
+      * "name": "string",
+      * "isPrivate": true}}],
+* "stateEvents": [
+  + {
+    - "type": "string",
+    - "value": "string",
+    - "timestamp": "string"}]
+
+}`
+
+## CancelRun
+
+Cancel a project run.
+
+##### Authorizations:
+
+*bearerAuth*
+
+##### path Parameters
+
+|  |  |
+| --- | --- |
+| projectId required | string <uuid>  (ProjectId) ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}...Show pattern  Unique ID for a Hex project. This can be found in the Variables side bar of the Logic View of a project, or by visiting the Project, and copying the UUID after `hex` in the URL. |
+| runId required | string <uuid>  (InputRunId) ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}...Show pattern  Unique ID for a run of a Hex project. This ID is part of the response returned by the RunProject endpoint. The GetProjectRuns endpoint can also be used to find the specific runs for a project. |
+
+### Responses
+
+**204**
+
+**400**
+
+**403**
+
+**422**
+
+delete/v1/projects/{projectId}/runs/{runId}
+
+https://app.hex.tech/api/v1/projects/{projectId}/runs/{runId}
+
+### Response samples
+
+* 400
+* 403
+* 422
+
+Content type
+
+application/json
+
+Copy
+
+`{
+
+* "details": "string",
+* "traceId": "string",
+* "reason": "string"
 
 }`
 
@@ -1872,9 +1874,9 @@ Copy
         + "screenshotFormat": [
           - "png"],
         + "recipient": {
-          - "id": "C0123456",
-          - "name": "data-team",
-          - "isPrivate": false}}],
+          - "id": "string",
+          - "name": "string",
+          - "isPrivate": true}}],
     - "stateEvents": [
       * {
         + "type": "string",
@@ -1886,9 +1888,15 @@ Copy
 
 }`
 
-## GetRunStatus
+## RunProject
 
-Get the status of a project run.
+Trigger a run of the latest published version of a project.
+
+This endpoint is subject to the following rate limits:
+
+* `hex-run-kernel`: Rate limits for starting project runs or sending thread messages
+  + Max requests per minute may vary
+  + Max requests per hour may vary
 
 ##### Authorizations:
 
@@ -1898,35 +1906,49 @@ Get the status of a project run.
 
 |  |  |
 | --- | --- |
-| projectId required | string <uuid>  (ProjectId) ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}...Show pattern  Unique ID for a Hex project. This can be found in the Variables side bar of the Logic View of a project, or by visiting the Project, and copying the UUID after `hex` in the URL. |
-| runId required | string <uuid>  (InputRunId) ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}...Show pattern  Unique ID for a run of a Hex project. This ID is part of the response returned by the RunProject endpoint. The GetProjectRuns endpoint can also be used to find the specific runs for a project. |
+| projectId required | string  The project whose latest published version should run. |
 
-##### header Parameters
+##### Request Body schema: application/json optional
 
 |  |  |
 | --- | --- |
-| enable-expanded-stats | string |
+| inputParams | object  Published app input values keyed by variable name. |
+| dryRun | boolean  Default:  false  Validate the request without starting a run. |
+| updateCache | boolean  `updateCache` is deprecated. Please use the new `updatePublishedResults` and `useCachedSqlResults` parameters instead. When true, published results are updated and cached SQL results are not used. When false, published results are not updated and cached SQL results may be used. |
+| notifications | Array of objects |
+| updatePublishedResults | boolean  Default:  false  Update the published app with the run results. |
+| useCachedSqlResults | boolean  Default:  true  Allow SQL cells to reuse cached results. |
+| viewId | string  Use the inputs from this saved view. |
 
 ### Responses
 
-**200**
+**201** 
 
-**400**
+Successful response
 
-**403**
+**400** 
 
-**422**
+Invalid input data
 
-get/v1/projects/{projectId}/runs/{runId}
+**403** 
 
-https://app.hex.tech/api/v1/projects/{projectId}/runs/{runId}
+Insufficient access
 
-### Response samples
+**422** 
 
-* 200
-* 400
-* 403
-* 422
+Unprocessable content
+
+**503** 
+
+Service unavailable
+
+post/v1/projects/{projectId}/runs
+
+https://app.hex.tech/api/v1/projects/{projectId}/runs
+
+### Request samples
+
+* Payload
 
 Content type
 
@@ -1938,17 +1960,54 @@ Copy
 
 `{
 
-* "projectId": "5a8591dd-4039-49df-9202-96385ba3eff8",
-* "projectVersion": 0,
-* "runId": "78c33d18-170c-44d3-a227-b3194f134f73",
+* "inputParams": {
+  + "property1": null,
+  + "property2": null},
+* "dryRun": false,
+* "updateCache": true,
+* "notifications": [
+  + {
+    - "type": "SUCCESS",
+    - "includeSuccessScreenshot": true,
+    - "screenshotFormat": "png",
+    - "slackChannelIds": [
+      * "string"],
+    - "userIds": [
+      * "string"],
+    - "groupIds": [
+      * "string"],
+    - "subject": "string",
+    - "body": "string"}],
+* "updatePublishedResults": false,
+* "useCachedSqlResults": true,
+* "viewId": "string"
+
+}`
+
+### Response samples
+
+* 201
+* 400
+* 403
+* 422
+* 503
+
+Content type
+
+application/json
+
+Copy
+
+ Expand all  Collapse all
+
+`{
+
+* "projectId": "string",
+* "runId": "string",
 * "runUrl": "string",
-* "status": "PENDING",
-* "runTrigger": "API",
-* "startTime": "2019-08-24T14:15:22Z",
-* "endTime": "2019-08-24T14:15:22Z",
-* "elapsedTime": 0.1,
-* "flagConfigOverride": "string",
+* "runStatusUrl": "string",
 * "traceId": "string",
+* "projectVersion": 0,
 * "notifications": [
   + {
     - "type": "SUCCESS",
@@ -1959,63 +2018,9 @@ Copy
     - "screenshotFormat": [
       * "png"],
     - "recipient": {
-      * "id": "C0123456",
-      * "name": "data-team",
-      * "isPrivate": false}}],
-* "stateEvents": [
-  + {
-    - "type": "string",
-    - "value": "string",
-    - "timestamp": "string"}]
-
-}`
-
-## CancelRun
-
-Cancel a project run.
-
-##### Authorizations:
-
-*bearerAuth*
-
-##### path Parameters
-
-|  |  |
-| --- | --- |
-| projectId required | string <uuid>  (ProjectId) ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}...Show pattern  Unique ID for a Hex project. This can be found in the Variables side bar of the Logic View of a project, or by visiting the Project, and copying the UUID after `hex` in the URL. |
-| runId required | string <uuid>  (InputRunId) ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}...Show pattern  Unique ID for a run of a Hex project. This ID is part of the response returned by the RunProject endpoint. The GetProjectRuns endpoint can also be used to find the specific runs for a project. |
-
-### Responses
-
-**204**
-
-**400**
-
-**403**
-
-**422**
-
-delete/v1/projects/{projectId}/runs/{runId}
-
-https://app.hex.tech/api/v1/projects/{projectId}/runs/{runId}
-
-### Response samples
-
-* 400
-* 403
-* 422
-
-Content type
-
-application/json
-
-Copy
-
-`{
-
-* "details": "string",
-* "traceId": "string",
-* "reason": "string"
+      * "id": "string",
+      * "name": "string",
+      * "isPrivate": true}}]
 
 }`
 
@@ -2493,3 +2498,24 @@ patch/v1/data-connections/{dataConnectionId}
 https://app.hex.tech/api/v1/data-connections/{dataConnectionId}
 
 ### Request samples
+
+* Payload
+
+Content type
+
+application/json
+
+Copy
+
+ Expand all  Collapse all
+
+`{
+
+* "sharing": {
+  + "workspace": {
+    - "public": "NONE",
+    - "guests": "NONE",
+    - "members": "NONE"},
+  + "groups": {
+    - "upsert": [
+      * <`

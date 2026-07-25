@@ -12,7 +12,7 @@ To ensure everyone can use AI, Hex awards monthly credit grants to Editor and Ex
 
 info
 
-* Customers with annual contracts who wish to purchase add-on credits can contact [[email protected]](/cdn-cgi/l/email-protection#1a697b767f695a727f62346e7f7972) to update their contract.
+* Customers with annual contracts who wish to purchase add-on credits can contact [[email protected]](/cdn-cgi/l/email-protection#f281939e9781b29a978adc8697919a) to update their contract.
 
 ## Credit Consumption[​](#credit-consumption "Direct link to Credit Consumption")
 
@@ -56,7 +56,7 @@ Monthly credit grants vary by plan and seat type:
 
 Once you’ve used your monthly credit grant, you can draw additional credits from the [workspace credit pool](#workspace-credit-pool), if available.
 
-Admins can manage credits and view usage in **Settings > Billing & credits**.
+Admins can manage credits and view usage in **Settings > Credits**.
 
 ### Add-on credits[​](#add-on-credits "Direct link to Add-on credits")
 
@@ -66,7 +66,7 @@ Admins can opt to purchase pooled add-on credits for additional usage. There are
 * Customers with annual contracts can purchase committed add-on credits upfront at contract start or renewal.
 * Hex may occasionally award bonus add-on credits.
 
-Add-on credits go to the shared workspace credit pool, which Admins can view in **Settings > Billing & credits**.
+Add-on credits go to the shared workspace credit pool, which Admins can view in **Settings > Credits**.
 
 ### Workspace credit pool[​](#workspace-credit-pool "Direct link to Workspace credit pool")
 
@@ -87,7 +87,7 @@ You can think of auto top-ups as "pay-as-you-go" credits. When auto top-ups are 
 
 Admins can set a monthly limit on auto top-up purchases to help stay within budget.
 
-* From **Settings > Billing & credits > Credits**, click **Enable auto top-ups** (or **Edit** if auto top-ups are already enabled).
+* From **Settings > Credits**, click **Enable auto top-ups** (or **Edit** if auto top-ups are already enabled).
 * Set a custom spend limit, or choose from a preset option.
 * Click "Save".
 
@@ -102,7 +102,7 @@ info
 * Credit allocations will always respect your workspace credit pool settings. Regardless of their allocation, users will be limited to the auto top-up [spend limit](#spend-limits) or to the workspace credit pool balance if [auto top-ups](#auto-top-ups) are disabled.
 * Credit allocations are respected in order of User > Group (highest wins) > Workspace Default
 
-Manage credit allocations from **Settings > Billing & credits > Credit usage controls**. The Workspace Default allocation is always active, and all active allocations can be adjusted via the three dot (...) menu to the right.
+Manage credit allocations from **Settings > Credits > Credit usage controls**. The Workspace Default allocation is always active, and all active allocations can be adjusted via the three dot (...) menu to the right.
 
 To create a new User or Group credit allocation, click `+ Add allocation` and choose from Unlimited, Custom amount, or No access.
 
@@ -120,7 +120,7 @@ All Hex users can view their own credit balance, and Admins and Managers have ad
 
 ### Admin credit usage visibility[​](#admin-credit-usage-visibility "Direct link to Admin credit usage visibility")
 
-Admins can view workspace-wide credit usage from **Settings > Billing & credits > Credits**
+Admins can view workspace-wide credit usage from **Settings > Credits**
 
 * **Usage log:** review current and historical cycle credit consumption
 * **Workspace credit pool:** view shared add-on credit balance

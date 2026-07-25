@@ -7,7 +7,7 @@ Use the Hex Embed API to securely embed Hex apps in your own web application wit
 info
 
 * Available with the Embedded Analytics add-on for customers on the **Enterprise** [plan](https://hex.tech/pricing).
-* Contact [[email protected]](/cdn-cgi/l/email-protection#d2a1b3beb7a192bab7aafca6b7b1ba) to request a trial.
+* Contact [[email protected]](/cdn-cgi/l/email-protection#2d5e4c41485e6d4548550359484e45) to request a trial.
 
 ## What is signed embedding?[​](#what-is-signed-embedding "Direct link to What is signed embedding?")
 
@@ -19,7 +19,7 @@ Signed embedding is the best choice for secure, seamless embedded analytics. In 
 
 ## Configure a project for signed embedding[​](#configure-a-project-for-signed-embedding "Direct link to Configure a project for signed embedding")
 
-To use signed embedding, the feature must be enabled on your Hex workspace. For assistance, contact your account team or [[email protected]](/cdn-cgi/l/email-protection#c1b2b4b1b1aeb3b581a9a4b9efb5a4a2a9).
+To use signed embedding, the feature must be enabled on your Hex workspace. For assistance, contact your account team or [[email protected]](/cdn-cgi/l/email-protection#6d1e181d1d021f192d0508154319080e05).
 
 ### Enable signed embedding on a project[​](#enable-signed-embedding-on-a-project "Direct link to Enable signed embedding on a project")
 
@@ -368,7 +368,7 @@ To test your Embed API implementation without contributing to your usage limit, 
 
 For multi-tenant customers, the Embed API rate limit is 20 requests per minute. Exceeding this rate limit will result in an `Error: Failed to load` message in the embedded app. After the minute has refreshed, app loading will resume as normal.
 
-If you require a higher rate limit, or would like to upgrade to a "soft" limit that will still allow app loads, please contact [[email protected]](/cdn-cgi/l/email-protection#d4a7b5b8b1a794bcb1acfaa0b1b7bc).
+If you require a higher rate limit, or would like to upgrade to a "soft" limit that will still allow app loads, please contact [[email protected]](/cdn-cgi/l/email-protection#95e6f4f9f0e6d5fdf0edbbe1f0f6fd).
 
 ## Implement iframe configuration for signed embedding[​](#implement-iframe-configuration-for-signed-embedding "Direct link to Implement iframe configuration for signed embedding")
 

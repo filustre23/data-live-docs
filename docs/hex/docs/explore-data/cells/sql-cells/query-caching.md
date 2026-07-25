@@ -90,7 +90,7 @@ There are a few scenarios where you may expect your query results to be cached, 
 * The results of the query are larger than 16 GB
 * The query is dependent on a variable whose value is changing (e.g., the query uses Jinja to reference the current timestamp)
 
-If your query does not meet any of these conditions and is still failing to cache, reach out to [[email protected]](/cdn-cgi/l/email-protection#81f2f4f1f1eef3f5c1e9e4f9aff5e4e2e9) for assistance troubleshooting.
+If your query does not meet any of these conditions and is still failing to cache, reach out to [[email protected]](/cdn-cgi/l/email-protection#98ebede8e8f7eaecd8f0fde0b6ecfdfbf0) for assistance troubleshooting.
 
 **Does running a query without cached results update the results for everyone?**
 
