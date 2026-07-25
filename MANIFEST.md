@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-07-24T13:23+00:00_
+_Generated 2026-07-25T01:16+00:00_
 
-**9 sources, 4362 topics total**
+**9 sources, 4363 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_548 topics_
+_549 topics_
 
 - `anthropic-sdk/about-claude/glossary`
 - `anthropic-sdk/about-claude/model-deprecations`
@@ -25,7 +25,7 @@ _548 topics_
 - `anthropic-sdk/about-claude/models/migration-guide`
 - `anthropic-sdk/about-claude/models/model-ids-and-versions`
 - `anthropic-sdk/about-claude/models/overview`
-- `anthropic-sdk/about-claude/models/whats-new-claude-4-8`
+- `anthropic-sdk/about-claude/models/whats-new-opus-5`
 - `anthropic-sdk/about-claude/models/whats-new-sonnet-5`
 - `anthropic-sdk/about-claude/pricing`
 - `anthropic-sdk/about-claude/use-case-guides/classification`
@@ -461,6 +461,7 @@ _548 topics_
 - `anthropic-sdk/build-with-claude/prompt-engineering/overview`
 - `anthropic-sdk/build-with-claude/prompt-engineering/prompting-claude-fable-5`
 - `anthropic-sdk/build-with-claude/prompt-engineering/prompting-claude-opus-4-8`
+- `anthropic-sdk/build-with-claude/prompt-engineering/prompting-claude-opus-5`
 - `anthropic-sdk/build-with-claude/prompt-engineering/prompting-claude-sonnet-5`
 - `anthropic-sdk/build-with-claude/refusals-and-fallback`
 - `anthropic-sdk/build-with-claude/search-results`
