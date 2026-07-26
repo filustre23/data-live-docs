@@ -27,6 +27,14 @@ To get the latest product updates delivered to you, add the URL of this page to 
 reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators), or add the
 [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## July 23, 2026
+
+Change
+
+An updated version of the
+[Simba ODBC driver for BigQuery](/bigquery/docs/reference/odbc-jdbc-drivers#current_odbc_driver)
+is now available.
+
 ## July 20, 2026
 
 Feature
@@ -4457,8 +4465,4 @@ Feature
 
 You can now use [repositories](/bigquery/docs/repository-intro) and [workspaces](/bigquery/docs/workspaces-intro) in BigQuery to perform version control.
 
-Repositories perform version control on files by using Git to record changes and manage file versions. You can use workspaces within repositories to edit the code stored in the repository.
-
-You can have a repository use Git directly on BigQuery, or you can [connect a repository to a third-party Git provider](/bigquery/docs/repositories#connect-third-party).
-
-This feature is in [preview](https://cloud.google.com/products/#product-launch-stages).
+Repositories perform version control on files by using Git to record changes and manage file versions. You can use workspaces within repositories to edit the

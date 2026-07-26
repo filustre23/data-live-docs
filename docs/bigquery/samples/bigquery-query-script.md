@@ -77,6 +77,39 @@ public class QueryScript {
 }
 ```
 
+### Rust
+
+```
+use google_cloud_bigquery::client::BigQuery;
+
+pub async fn sample(project_id: &str) -> anyhow::Result<()> {
+    let client = BigQuery::builder().build().await?;
+
+    let mut rows = client
+        .query(
+            r#"
+DECLARE target_state STRING DEFAULT 'TX';
+SELECT name FROM `bigquery-public-data.usa_names.usa_1910_2013`
+WHERE state = target_state
+LIMIT 10;
+"#,
+        )
+        .with_project_id(project_id)
+        .set_location("US")
+        .run()
+        .await?
+        .until_done()
+        .await?
+        .read();
+
+    while let Some(row) = rows.next().await.transpose()? {
+        let name: String = row.get("name");
+        println!("Name: {name}");
+    }
+    Ok(())
+}
+```
+
 ## 後續步驟
 
 如要搜尋及篩選其他 Google Cloud 產品的程式碼範例，請參閱[Google Cloud 範例瀏覽工具](https://docs.cloud.google.com/docs/samples?product=bigquery&hl=zh-tw)。

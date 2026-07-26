@@ -10,6 +10,8 @@ Send feedback
 
 * [Resource: DataPolicy](#DataPolicy)
   + [JSON representation](#DataPolicy.SCHEMA_REPRESENTATION)
+* [DataGovernanceTag](#DataGovernanceTag)
+  + [JSON representation](#DataGovernanceTag.SCHEMA_REPRESENTATION)
 * [DataMaskingPolicy](#DataMaskingPolicy)
   + [JSON representation](#DataMaskingPolicy.SCHEMA_REPRESENTATION)
 * [PredefinedExpression](#PredefinedExpression)
@@ -23,7 +25,7 @@ Represents the label-policy binding.
 
 | JSON representation |
 | --- |
-| ``` {   "name": string,   "dataPolicyId": string,   "dataPolicyType": enum (DataPolicyType),   "policyTag": string,   "grantees": [     string   ],   "version": enum (Version),    // Union field policy can be only one of the following:   "dataMaskingPolicy": {     object (DataMaskingPolicy)   }   // End of list of possible types for union field policy.   "etag": string } ``` |
+| ``` {   "name": string,   "dataPolicyId": string,   "dataPolicyType": enum (DataPolicyType),   "policyTag": string,   "grantees": [     string   ],   "version": enum (Version),    // Union field matching_label can be only one of the following:   "dataGovernanceTag": {     object (DataGovernanceTag)   }   // End of list of possible types for union field matching_label.    // Union field policy can be only one of the following:   "dataMaskingPolicy": {     object (DataMaskingPolicy)   }   // End of list of possible types for union field policy.   "etag": string } ``` |
 
 | Fields | |
 | --- | --- |
@@ -33,9 +35,24 @@ Represents the label-policy binding.
 | `policyTag` | `string`  Output only. Policy tag resource name, in the format of `projects/{projectNumber}/locations/{locationId}/taxonomies/{taxonomyId}/policyTags/{policyTag_id}`. policyTag is supported only for V1 data policies. |
 | `grantees[]` | `string`  Optional. The list of IAM principals that have Fine Grained Access to the underlying data goverened by this data policy.  Uses the [IAM V2 principal syntax](https://cloud.google.com/iam/docs/principal-identifiers#v2) Only supports principal types users, groups, serviceaccounts, cloudidentity. This field is supported in V2 Data Policy only. In case of V1 data policies (i.e. verion = 1 and policyTag is set), this field is not populated. |
 | `version` | `enum (Version)`  Output only. The version of the Data Policy resource. |
+| Union field `matching_label`. Label that is bound to this data policy. `matching_label` can be only one of the following: | |
+| `dataGovernanceTag` | `object (DataGovernanceTag)`  Optional. Data Governance tag bound to the Data Policy. |
 | Union field `policy`. The policy that is bound to this data policy. `policy` can be only one of the following: | |
 | `dataMaskingPolicy` | `object (DataMaskingPolicy)`  Optional. The data masking policy that specifies the data masking rule to use. It must be set if the data policy type is DATA\_MASKING\_POLICY. |
 | `etag` | `string`  The etag for this Data Policy. This field is used for dataPolicies.patch calls. If Data Policy exists, this field is required and must match the server's etag. It will also be populated in the response of dataPolicies.get, dataPolicies.create, and dataPolicies.patch calls. |
+
+## DataGovernanceTag
+
+This is a namespaced name specifying the key and the value. For example: `project-id/pii/sensitive`.
+
+| JSON representation |
+| --- |
+| ``` {   "key": string,   "value": string } ``` |
+
+| Fields | |
+| --- | --- |
+| `key` | `string`  Optional. Tag keys are globally unique. Tag key is expected to be in the namespaced format, for example `parent-id/pii` where `parent-id` is the ID of the parent organization or project resource for this tag key. |
+| `value` | `string`  Optional. Specifies the tag value as the short name, for example `sensitive`. |
 
 ## DataMaskingPolicy
 
@@ -108,11 +125,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2025-07-28 UTC.
+Last updated 2026-07-21 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2025-07-28 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-07-21 UTC."],[],[]]

@@ -102,9 +102,8 @@ BigQuery Google Cloud 控制台是圖形化介面，可用於建立及管理 Big
 * **管理**：可執行管理工作，例如[監控](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts?hl=zh-tw)、查看[工作](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer?hl=zh-tw)相關資訊、[管理容量](https://docs.cloud.google.com/bigquery/docs/reservations-intro?hl=zh-tw)、查看[災難復原](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery?hl=zh-tw)相關資訊，以及顯示[建議](https://docs.cloud.google.com/bigquery/docs/recommendations-intro?hl=zh-tw)。
 * **遷移**：可供您查看及設定[將資料倉儲遷移至 BigQuery](https://docs.cloud.google.com/bigquery/docs/migration/migration-overview?hl=zh-tw) 的選項。
 * **合作夥伴中心**：提供[合作夥伴](https://docs.cloud.google.com/bigquery/docs/bigquery-ready-overview?hl=zh-tw#partner_center)的工具和服務，加快工作流程。
-* **設定** ([預先發布版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))：
-  可自訂 BigQuery 預設值或使用者介面[設定](https://docs.cloud.google.com/bigquery/docs/default-configuration?hl=zh-tw#configuration-settings)。
-* **版本資訊**：包含 BigQuery 的最新[產品更新和公告](https://docs.cloud.google.com/bigquery/docs/release-notes?hl=zh-tw)。
+* **設定**：可自訂 BigQuery 使用者和管理員設定。
+* **版本說明**：包含 BigQuery 的最新[產品更新和公告](https://docs.cloud.google.com/bigquery/docs/release-notes?hl=zh-tw)。
 
 ## BigQuery Studio 頁面
 
@@ -120,15 +119,16 @@ BigQuery [**Studio**](https://docs.cloud.google.com/bigquery/docs/query-overview
    * **將資料串流至 BigQuery**：以低延遲的方式將資料擷取至 BigQuery。您可以使用 [Dataflow](https://docs.cloud.google.com/dataflow/docs/guides/write-to-bigquery?hl=zh-tw)、[Pub/Sub](https://docs.cloud.google.com/pubsub/docs/overview?hl=zh-tw) 或[合作夥伴解決方案](https://docs.cloud.google.com/bigquery/docs/load-data-third-party?hl=zh-tw)等應用程式，從資料來源擷取資料。
 
    如要進一步瞭解如何將資料載入 BigQuery，請參閱「[載入資料簡介](https://docs.cloud.google.com/bigquery/docs/loading-data?hl=zh-tw)」。
-2. *左窗格的「傳統 Explorer」分頁*：使用舊版「Explorer」窗格查看 BigQuery 資源。
-3. *左側窗格的「檔案」分頁* ([預覽](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages))：使用「檔案」分頁，透過資料夾整理程式碼資產，例如儲存的查詢和筆記本。詳情請參閱「[使用資料夾整理程式碼資產](https://docs.cloud.google.com/bigquery/docs/code-asset-folders?hl=zh-tw)」。
+2. *左窗格的「傳統 Explorer」分頁標籤*：使用舊版「Explorer」窗格查看 BigQuery 資源。
+3. *左側窗格的「檔案」分頁* ([預覽](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages))：
+   使用「檔案」分頁，透過資料夾整理程式碼資產，例如已儲存的查詢和筆記本。詳情請參閱「[使用資料夾整理程式碼資產](https://docs.cloud.google.com/bigquery/docs/code-asset-folders?hl=zh-tw)」。
 4. *左窗格的「存放區」分頁* ([預覽版](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages))：
    使用「存放區」分頁儲存程式碼、編輯檔案，以及透過存放區或以 Git 為基礎的遠端存放區，使用版本管控功能追蹤變更。詳情請參閱「[存放區簡介](https://docs.cloud.google.com/bigquery/docs/repository-intro?hl=zh-tw)」。
 5. ***「首頁」**分頁*：使用「首頁」分頁查看下列資源：
 
    * 「查看 Studio 的新功能」部分會列出 BigQuery Studio 的新功能。按一下「試試看」即可查看功能。如果沒有看到這個部分，請按一下「What's new in Studio」(Studio 的新功能) 展開這個部分。
    * 「建立新項目」部分，提供建立新 SQL 查詢、筆記本、Apache Spark 筆記本、資料畫布、資料準備檔案、管道或資料表的選項。
-   * 「最近」部分：可查看最近存取的 10 項資源。這些資源包括資料表、已儲存的查詢、模型和常式。
+   * 「最近」部分會顯示您最近存取的 10 項資源。這些資源包括資料表、已儲存的查詢、模型和常式。
    * 「使用範本試試看」部分，可讓您使用範本開始查詢資料及處理筆記本。
    * 「新增自己的資料」部分，可協助您開始將資料載入 BigQuery。
 6. *查詢編輯器*：使用查詢編輯器建立及[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)。您也可以在執行查詢後開啟的「Query results」(查詢結果) 窗格中查看結果。
@@ -193,7 +193,7 @@ BigQuery 的「Studio」頁面是查看 BigQuery 資源的中心位置，您可�
 
 ### 在 Studio 中使用分頁
 
-每當您選取資源或在詳細資料窗格中點按 add\_box「SQL query」(SQL 查詢)，系統就會開啟新分頁。如果開啟多個分頁，可以將分頁分割成兩個窗格，並並排顯示。
+每當您選取資源或在詳細資料窗格中點按 add\_box「SQL query」(SQL 查詢)，系統就會開啟新分頁。如果開啟多個分頁，可以將分頁分割成兩個窗格，並排顯示。
 
 #### 防止分頁遭取代
 
@@ -223,7 +223,7 @@ BigQuery 的「Studio」頁面是查看 BigQuery 資源的中心位置，您可�
 2. 依序點按「查詢」和「在新分頁中開啟」或「在分割分頁中開啟」：
 3. 按一下要查詢的欄位名稱：
 
-下圖顯示詳細資料窗格，其中開啟了兩個分頁。一個分頁顯示 SQL 查詢，另一個分頁則顯示資料表的詳細資料。
+下圖顯示詳細資料窗格，其中開啟了兩個分頁。一個分頁包含 SQL 查詢，另一個分頁則顯示資料表的詳細資料。
 
 #### 在窗格之間移動分頁
 
@@ -315,11 +315,11 @@ BigQuery Google Cloud 控制台不支援[虛擬私有雲](https://docs.cloud.goo
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-16 (世界標準時間)。
+上次更新時間：2026-07-23 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-16 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-23 (世界標準時間)。"],[],[]]

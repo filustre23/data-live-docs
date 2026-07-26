@@ -126,6 +126,42 @@ print(
 )
 ```
 
+### Rust
+
+```
+use google_cloud_bigquery::client::BigQuery;
+
+pub async fn sample(project_id: &str, dataset_id: &str, view_id: &str) -> anyhow::Result<()> {
+    let client = BigQuery::builder().build().await?;
+
+    // Query parameters cannot be used as substitutes for identifiers, column names or table
+    // names. Ensure resource identifiers are validated before formatting into SQL statements
+    // to prevent SQL injection.
+    validate_resource_names(project_id, dataset_id, view_id)?;
+
+    // Create a view using standard SQL DDL
+    let ddl_sql = format!(
+        "CREATE OR REPLACE VIEW `{project_id}.{dataset_id}.{view_id}` AS \
+         SELECT name, state \
+         FROM `bigquery-public-data.usa_names.usa_1910_2013` \
+         WHERE state = 'NY' \
+         LIMIT 100;"
+    );
+
+    client
+        .query(ddl_sql)
+        .with_project_id(project_id)
+        .set_location("US")
+        .run()
+        .await?
+        .until_done()
+        .await?;
+
+    println!("View `{dataset_id}.{view_id}` created successfully using DDL.");
+    Ok(())
+}
+```
+
 ## 後續步驟
 
 如要搜尋及篩選其他 Google Cloud 產品的程式碼範例，請參閱[Google Cloud 範例瀏覽工具](https://docs.cloud.google.com/docs/samples?product=bigquery&hl=zh-tw)。

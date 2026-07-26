@@ -27,11 +27,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 * 建立、委派及使用 BigQuery 連線：
   BigQuery 連線管理員 (`roles/bigquery.connectionsAdmin`)
 
-  如果沒有設定[預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw)，您可以在執行 `CREATE MODEL` 陳述式時建立並設定連線。如要這麼做，您必須具備專案的 BigQuery 管理員角色 (`roles/bigquery.admin`)。詳情請參閱「[設定預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw#configure_the_default_connection)」。
+  如果沒有設定[預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw)，您可以在執行 `CREATE MODEL` 陳述式時建立並設定連線。如要執行這項操作，您必須具備專案的 BigQuery 管理員角色 (`roles/bigquery.admin`)。詳情請參閱「[設定預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw#configure_the_default_connection)」。
 * 將權限授予連線的服務帳戶：專案 IAM 管理員 (`roles/resourcemanager.projectIamAdmin`)
 * 建立 BigQuery 工作：BigQuery 工作使用者 (`roles/bigquery.jobUser`)
 
-這些預先定義的角色具備執行本文所述工作所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
+這些預先定義的角色具備執行本文中工作所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
 #### 所需權限
 
@@ -76,10 +76,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
   **Roles required to enable APIs**
 
-  To enable APIs, you need the Service Usage Admin IAM
-  role (`roles/serviceusage.serviceUsageAdmin`), which
-  contains the `serviceusage.services.enable` permission. [Learn how to grant
-  roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw).
+  To enable APIs, you need the `serviceusage.services.enable` permission. If you
+  created the project, then you likely already have this permission through the
+  Owner role (`roles/owner`). Otherwise, you can get this permission through the
+  Service Usage Admin role (`roles/serviceusage.serviceUsageAdmin`).
+  [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw).
 
   [Enable the APIs](https://console.cloud.google.com/apis/enableflow?apiid=bigquery.googleapis.com%2Cbigqueryconnection.googleapis.com%2Clanguage.googleapis.com&hl=zh-tw)
 
@@ -106,10 +107,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
   **Roles required to enable APIs**
 
-  To enable APIs, you need the Service Usage Admin IAM
-  role (`roles/serviceusage.serviceUsageAdmin`), which
-  contains the `serviceusage.services.enable` permission. [Learn how to grant
-  roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw).
+  To enable APIs, you need the `serviceusage.services.enable` permission. If you
+  created the project, then you likely already have this permission through the
+  Owner role (`roles/owner`). Otherwise, you can get this permission through the
+  Service Usage Admin role (`roles/serviceusage.serviceUsageAdmin`).
+  [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw).
 
   [Enable the APIs](https://console.cloud.google.com/apis/enableflow?apiid=bigquery.googleapis.com%2Cbigqueryconnection.googleapis.com%2Clanguage.googleapis.com&hl=zh-tw)
 
@@ -126,7 +128,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Explorer」窗格中，按一下專案名稱。
-4. 依序點按 more\_vert「View actions」(查看動作) >「Create dataset」(建立資料集)。
+4. 依序點按 more\_vert「View actions」(查看動作)「>」(大於符號)「Create dataset」(建立資料集)。
 5. 在「建立資料集」頁面中，執行下列操作：
 
    1. 在「Dataset ID」(資料集 ID) 部分，輸入資料集的名稱。
@@ -147,7 +149,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    更改下列內容：
 
    * `LOCATION`：資料集的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
-   * `DATASET_ID` 是您要建立的資料集 ID。
+   * `DATASET_ID`：您要建立的資料集 ID。
 2. 確認資料集已建立完成：
 
    ```
@@ -158,7 +160,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 建立[Cloud 資源連線](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection?hl=zh-tw)，並取得連線的服務帳戶。在與上一步建立的資料集相同的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)中建立連線。
 
-如果已設定預設連線，或您具備 BigQuery 管理員角色，可以略過這個步驟。
+如果已設定預設連線，或具備 BigQuery 管理員角色，可以略過這個步驟。
 
 選取下列選項之一：
 
@@ -174,7 +176,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 4. 在「Connections」(連線) 頁面中，按一下「Create connection」(建立連線)。
 5. 在「連線類型」中，選擇「Vertex AI 遠端模型、遠端函式、BigLake 和 Spanner (Cloud 資源)」。
 6. 在「連線 ID」欄位中，輸入連線名稱。
-7. 在「位置類型」部分，選取連線位置。連線應與資料集等其他資源位於同一位置。
+7. 在「位置類型」中，選取連線位置。連線應與資料集等其他資源位於同一位置。
 8. 點選「建立連線」。
 9. 點選「前往連線」。
 10. 在「連線資訊」窗格中，複製服務帳戶 ID，以便在後續步驟中使用。
@@ -358,7 +360,7 @@ async function createConnection(projectId, location, connectionId) {
 
 請使用 [`google_bigquery_connection`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_connection) 資源。
 
-**注意：** 如要使用 Terraform 建立 BigQuery 物件，請務必啟用 [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest?hl=zh-tw)。
+**注意：** 如要使用 Terraform 建立 BigQuery 物件，必須啟用 [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -383,10 +385,9 @@ resource "google_bigquery_connection" "default" {
 ## 準備 Cloud Shell
 
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
-2. 設定要套用 Terraform 設定的預設 Google Cloud 專案
-   。
+2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
 
-   每項專案只需要執行一次這個指令，而且可以在任何目錄中執行。
+   每項專案只需要執行一次這個指令，且可以在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
@@ -405,9 +406,9 @@ resource "google_bigquery_connection" "default" {
    ```
 2. 如果您正在學習教學課程，可以複製每個章節或步驟中的程式碼範例。
 
-   將程式碼範例複製到新建立的 `main.tf`。
+   將程式碼範例複製到新建立的 `main.tf` 中。
 
-   視需要從 GitHub 複製程式碼。如果 Terraform 程式碼片段是端對端解決方案的一部分，建議您使用這個方法。
+   視需要從 GitHub 複製程式碼。如果 Terraform 代码片段是端對端解決方案的一部分，建議您使用這個方法。
 3. 查看並修改範例參數，套用至您的環境。
 4. 儲存變更。
 5. 初始化 Terraform。每個目錄只需執行一次這項操作。
@@ -431,7 +432,7 @@ resource "google_bigquery_connection" "default" {
    ```
 
    視需要修正設定。
-2. 執行下列指令，並在提示中輸入 `yes`，套用 Terraform 設定：
+2. 執行下列指令並在提示中輸入 `yes`，套用 Terraform 設定：
 
    ```
    terraform apply
@@ -451,18 +452,18 @@ resource "google_bigquery_connection" "default" {
 1. 前往「IAM & Admin」(IAM 與管理) 頁面。
 
    [前往「IAM & Admin」(IAM 與管理)](https://console.cloud.google.com/project/_/iam-admin?hl=zh-tw)
-2. 按一下「新增」圖示 person\_add。
+2. 按一下「新增」person\_add。
 
    「新增主體」對話方塊隨即開啟。
 3. 在「新增主體」欄位，輸入先前複製的服務帳戶 ID。
-4. 在「Select a role」(選取角色) 欄位中，依序選取「Service Usage」(服務使用情形) 和「Service Usage Consumer」(服務用量消費者)。
+4. 在「Select a role」(選取角色) 欄位中，依序選取「Service Usage」(服務使用情形) 和「Service Usage Consumer」(服務使用情形用戶)。
 5. 按一下 [Add another role] (新增其他角色)。
 6. 在「請選擇角色」欄位中，選取「BigQuery」，然後選取「BigQuery 連線使用者」。
 7. 按一下 [儲存]。
 
 ### gcloud
 
-使用 [`gcloud projects add-iam-policy-binding`](https://docs.cloud.google.com/sdk/gcloud/reference/projects/add-iam-policy-binding?hl=zh-tw) 指令：
+使用 [`gcloud projects add-iam-policy-binding` 指令](https://docs.cloud.google.com/sdk/gcloud/reference/projects/add-iam-policy-binding?hl=zh-tw)：
 
 ```
 gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount:MEMBER' --role='roles/serviceusage.serviceUsageConsumer' --condition=None
@@ -517,7 +518,7 @@ FROM ML.UNDERSTAND_TEXT(
 * `PROJECT_ID`：您的專案 ID。
 * `DATASET_ID`：包含模型的資料集 ID。
 * `MODEL_NAME`：模型名稱。
-* `TABLE_NAME`：資料表名稱，其中包含要分析的文字 (位於名為 `text_content` 的資料欄中)。如果文字位於其他名稱的資料欄中，請將 `text_content` 指定為該資料欄的別名。
+* `TABLE_NAME`：資料表名稱，其中包含要分析的文字，位於名為 `text_content` 的資料欄中。如果文字位於其他名稱的資料欄中，請將 `text_content` 指定為該資料欄的別名。
 * `QUERY`：查詢，其中包含要描述的文字 (位於名為 `text_content` 的資料欄中)。如果文字位於名稱不同的資料欄中，請將 `text_content` 指定為該資料欄的別名。
 * `FEATURE_NAME`：支援的 [Natural Language API 功能](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-understand-text?hl=zh-tw#nlp-syntax)名稱。
 * `FLATTEN_JSON_OUTPUT`：`BOOL` 值，用於判斷函式傳回的 JSON 內容是否要剖析為個別資料欄。
@@ -550,8 +551,8 @@ SELECT * FROM ML.UNDERSTAND_TEXT(
 ## 後續步驟
 
 * 如要進一步瞭解 BigQuery ML 中的模型推論，請參閱「[模型推論總覽](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/inference-overview?hl=zh-tw)」。
-* 如要進一步瞭解生成式 AI 模型支援的 SQL 陳述式和函式，請參閱[生成式 AI 模型的端對端使用者歷程](https://docs.cloud.google.com/bigquery/docs/e2e-journey-genai?hl=zh-tw)。
-* 試試[使用 BigQuery ML 和 Gemini Enterprise Agent Platform 預先訓練模型分析非結構化資料](https://github.com/GoogleCloudPlatform/vertex-ai-samples/blob/main/notebooks/community/bigquery_ml/bq_ml_with_vision_translation_nlp.ipynb)的筆記本。
+* 如要進一步瞭解生成式 AI 模型支援的 SQL 陳述式和函式，請參閱[生成式 AI 模型端對端使用者歷程](https://docs.cloud.google.com/bigquery/docs/e2e-journey-genai?hl=zh-tw)。
+* 試試「[使用 BigQuery ML 和 Gemini Enterprise Agent Platform 預先訓練模型分析非結構化資料](https://github.com/GoogleCloudPlatform/vertex-ai-samples/blob/main/notebooks/community/bigquery_ml/bq_ml_with_vision_translation_nlp.ipynb)」筆記本。
 
 
 
@@ -560,11 +561,11 @@ SELECT * FROM ML.UNDERSTAND_TEXT(
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-12 (世界標準時間)。
+上次更新時間：2026-07-23 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-12 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-23 (世界標準時間)。"],[],[]]

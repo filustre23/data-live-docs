@@ -229,6 +229,42 @@ def browse_table
 end
 ```
 
+### Rust
+
+```
+use google_cloud_bigquery::client::BigQuery;
+
+pub async fn sample(project_id: &str) -> anyhow::Result<()> {
+    let client = BigQuery::builder().build().await?;
+
+    let mut rows = client
+        .query(
+            r#"
+SELECT name, gender, number
+FROM `bigquery-public-data.usa_names.usa_1910_2013`
+LIMIT 10
+"#,
+        )
+        .with_project_id(project_id)
+        .set_max_results(5_u32)
+        .set_location("US")
+        .run()
+        .await?
+        .until_done()
+        .await?
+        .read()
+        .set_max_rows_buffered(5);
+
+    while let Some(row) = rows.next().await.transpose()? {
+        let name: String = row.get("name");
+        let gender: String = row.get("gender");
+        let number: i64 = row.get("number");
+        println!("Name: {name}, Gender: {gender}, Number: {number}");
+    }
+    Ok(())
+}
+```
+
 ## 後續步驟
 
 如要搜尋及篩選其他 Google Cloud 產品的程式碼範例，請參閱[Google Cloud 範例瀏覽工具](https://docs.cloud.google.com/docs/samples?product=bigquery&hl=zh-tw)。

@@ -20,18 +20,18 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 必要的角色
 
-如要建立遠端模型並為圖片加上註解，您必須具備專案層級的下列身分與存取權管理 (IAM) 角色：
+如要建立遠端模型並為圖片加上註解，您必須具備專案層級的下列 Identity and Access Management (IAM) 角色：
 
 * 建立及使用 BigQuery 資料集、資料表和模型：
   BigQuery 資料編輯者 (`roles/bigquery.dataEditor`)
 * 建立、委派及使用 BigQuery 連線：
   BigQuery 連線管理員 (`roles/bigquery.connectionsAdmin`)
 
-  如果沒有設定[預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw)，您可以在執行 `CREATE MODEL` 陳述式時建立並設定連線。如要這麼做，您必須具備專案的 BigQuery 管理員角色 (`roles/bigquery.admin`)。詳情請參閱「[設定預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw#configure_the_default_connection)」。
+  如果沒有設定[預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw)，您可以在執行 `CREATE MODEL` 陳述式時建立並設定連線。如要執行這項操作，您必須具備專案的 BigQuery 管理員角色 (`roles/bigquery.admin`)。詳情請參閱「[設定預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw#configure_the_default_connection)」。
 * 將權限授予連線的服務帳戶：專案 IAM 管理員 (`roles/resourcemanager.projectIamAdmin`)
 * 建立 BigQuery 工作：BigQuery 工作使用者 (`roles/bigquery.jobUser`)
 
-這些預先定義的角色具備執行本文所述工作所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
+這些預先定義的角色具備執行本文中工作所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
 #### 所需權限
 
@@ -131,7 +131,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Explorer」窗格中，按一下專案名稱。
-4. 依序點按 more\_vert「View actions」(查看動作) >「Create dataset」(建立資料集)。
+4. 依序點按 more\_vert「View actions」(查看動作)「>」(大於符號)「Create dataset」(建立資料集)。
 5. 在「建立資料集」頁面中，執行下列操作：
 
    1. 在「Dataset ID」(資料集 ID) 部分，輸入資料集的名稱。
@@ -152,7 +152,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    更改下列內容：
 
    * `LOCATION`：資料集的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
-   * `DATASET_ID` 是您要建立的資料集 ID。
+   * `DATASET_ID`：您要建立的資料集 ID。
 2. 確認資料集已建立完成：
 
    ```
@@ -163,7 +163,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 建立[Cloud 資源連線](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection?hl=zh-tw)，並取得連線的服務帳戶。在與上一步建立的資料集相同的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)中建立連線。
 
-如果已設定預設連線，或您具備 BigQuery 管理員角色，可以略過這個步驟。
+如果已設定預設連線，或具備 BigQuery 管理員角色，可以略過這個步驟。
 
 選取下列選項之一：
 
@@ -179,7 +179,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 4. 在「Connections」(連線) 頁面中，按一下「Create connection」(建立連線)。
 5. 在「連線類型」中，選擇「Vertex AI 遠端模型、遠端函式、BigLake 和 Spanner (Cloud 資源)」。
 6. 在「連線 ID」欄位中，輸入連線名稱。
-7. 在「位置類型」部分，選取連線位置。連線應與資料集等其他資源位於同一位置。
+7. 在「位置類型」中，選取連線位置。連線應與資料集等其他資源位於同一位置。
 8. 點選「建立連線」。
 9. 點選「前往連線」。
 10. 在「連線資訊」窗格中，複製服務帳戶 ID，以便在後續步驟中使用。
@@ -363,7 +363,7 @@ async function createConnection(projectId, location, connectionId) {
 
 請使用 [`google_bigquery_connection`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_connection) 資源。
 
-**注意：** 如要使用 Terraform 建立 BigQuery 物件，請務必啟用 [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest?hl=zh-tw)。
+**注意：** 如要使用 Terraform 建立 BigQuery 物件，必須啟用 [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -388,10 +388,9 @@ resource "google_bigquery_connection" "default" {
 ## 準備 Cloud Shell
 
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
-2. 設定要套用 Terraform 設定的預設 Google Cloud 專案
-   。
+2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
 
-   每項專案只需要執行一次這個指令，而且可以在任何目錄中執行。
+   每項專案只需要執行一次這個指令，且可以在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
@@ -410,9 +409,9 @@ resource "google_bigquery_connection" "default" {
    ```
 2. 如果您正在學習教學課程，可以複製每個章節或步驟中的程式碼範例。
 
-   將程式碼範例複製到新建立的 `main.tf`。
+   將程式碼範例複製到新建立的 `main.tf` 中。
 
-   視需要從 GitHub 複製程式碼。如果 Terraform 程式碼片段是端對端解決方案的一部分，建議您使用這個方法。
+   視需要從 GitHub 複製程式碼。如果 Terraform 代码片段是端對端解決方案的一部分，建議您使用這個方法。
 3. 查看並修改範例參數，套用至您的環境。
 4. 儲存變更。
 5. 初始化 Terraform。每個目錄只需執行一次這項操作。
@@ -436,7 +435,7 @@ resource "google_bigquery_connection" "default" {
    ```
 
    視需要修正設定。
-2. 執行下列指令，並在提示中輸入 `yes`，套用 Terraform 設定：
+2. 執行下列指令並在提示中輸入 `yes`，套用 Terraform 設定：
 
    ```
    terraform apply
@@ -456,18 +455,18 @@ resource "google_bigquery_connection" "default" {
 1. 前往「IAM & Admin」(IAM 與管理) 頁面。
 
    [前往「IAM & Admin」(IAM 與管理)](https://console.cloud.google.com/project/_/iam-admin?hl=zh-tw)
-2. 按一下「新增」圖示 person\_add。
+2. 按一下「新增」person\_add。
 
    「新增主體」對話方塊隨即開啟。
 3. 在「新增主體」欄位，輸入先前複製的服務帳戶 ID。
-4. 在「Select a role」(選取角色) 欄位中，依序選取「Service Usage」(服務使用情形) 和「Service Usage Consumer」(服務用量消費者)。
+4. 在「Select a role」(選取角色) 欄位中，依序選取「Service Usage」(服務使用情形) 和「Service Usage Consumer」(服務使用情形用戶)。
 5. 按一下 [Add another role] (新增其他角色)。
 6. 在「請選擇角色」欄位中，選取「BigQuery」，然後選取「BigQuery 連線使用者」。
 7. 按一下 [儲存]。
 
 ### gcloud
 
-使用 [`gcloud projects add-iam-policy-binding`](https://docs.cloud.google.com/sdk/gcloud/reference/projects/add-iam-policy-binding?hl=zh-tw) 指令：
+使用 [`gcloud projects add-iam-policy-binding` 指令](https://docs.cloud.google.com/sdk/gcloud/reference/projects/add-iam-policy-binding?hl=zh-tw)：
 
 ```
 gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount:MEMBER' --role='roles/serviceusage.serviceUsageConsumer' --condition=None
@@ -485,7 +484,7 @@ gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount
 
 建立含有圖片內容的物件資料表。有了物件資料表，您就能分析圖片，不必將圖片從 Cloud Storage 移出。
 
-物件資料表使用的 Cloud Storage bucket 應位於同一個專案中，您打算在該專案中建立模型並呼叫 `ML.ANNOTATE_IMAGE` 函式。如要呼叫與物件資料表所用 Cloud Storage bucket 所在專案不同的 `ML.ANNOTATE_IMAGE` 函式，請[在 bucket 層級授予 Storage 管理員角色](https://docs.cloud.google.com/storage/docs/access-control/using-iam-permissions?hl=zh-tw#bucket-add)。
+物件資料表使用的 Cloud Storage bucket 應位於您打算建立模型並呼叫 `ML.ANNOTATE_IMAGE` 函式的專案中。如要呼叫與物件資料表所用 Cloud Storage bucket 所在專案不同的 `ML.ANNOTATE_IMAGE` 函式，請[在 bucket 層級授予 Storage 管理員角色](https://docs.cloud.google.com/storage/docs/access-control/using-iam-permissions?hl=zh-tw#bucket-add)。
 
 ## 建立模型
 
@@ -506,7 +505,7 @@ OPTIONS (REMOTE_SERVICE_TYPE = 'CLOUD_AI_VISION_V1');
 * `REGION`：連線使用的區域。
 * `CONNECTION_ID`：連線 ID，例如 `myconnection`。
 
-  在 Google Cloud 控制台中[查看連線詳細資料](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw#view-connections)時，連線 ID 是「連線 ID」中顯示的完整連線 ID 最後一個區段的值，例如 `projects/myproject/locations/connection_location/connections/myconnection`。
+  在 Google Cloud 控制台中[查看連線詳細資料](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw#view-connections)時，連線 ID 是「連線 ID」中顯示的完整連線 ID 最後一個部分的值，例如 `projects/myproject/locations/connection_location/connections/myconnection`。
 
 ## 為圖片加上註解
 
@@ -527,11 +526,11 @@ FROM ML.ANNOTATE_IMAGE(
 * `DATASET_ID`：包含模型的資料集 ID。
 * `MODEL_NAME`：模型名稱。
 * `OBJECT_TABLE_NAME`：包含要註解圖片 URI 的物件資料表名稱。
-* ：支援的 [Cloud Vision API 功能](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-annotate-image?hl=zh-tw#syntax)名稱。`FEATURE_NAME`
+* `FEATURE_NAME`：支援的 [Cloud Vision API 功能](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-annotate-image?hl=zh-tw#syntax)名稱。
 
 **範例 1**
 
-以下範例會為圖片中顯示的項目加上標籤：
+以下範例會為圖片中的項目加上標籤：
 
 ```
 SELECT *
@@ -560,7 +559,7 @@ FROM ML.ANNOTATE_IMAGE(
 * 如要進一步瞭解 BigQuery ML 中的模型推論，請參閱「[模型推論總覽](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/inference-overview?hl=zh-tw)」。
 * 如要進一步瞭解如何使用 Cloud AI API 執行 AI 工作，請參閱「[AI 應用程式總覽](https://docs.cloud.google.com/bigquery/docs/ai-application-overview?hl=zh-tw)」。
 * 如要瞭解生成式 AI 模型支援的 SQL 陳述式和函式，請參閱「[生成式 AI 模型的使用者端對端歷程](https://docs.cloud.google.com/bigquery/docs/e2e-journey-genai?hl=zh-tw)」。
-* 試試[使用 BigQuery ML 和 Gemini Enterprise Agent Platform 預先訓練模型分析非結構化資料](https://github.com/GoogleCloudPlatform/vertex-ai-samples/blob/main/notebooks/community/bigquery_ml/bq_ml_with_vision_translation_nlp.ipynb)的筆記本。
+* 試試「[使用 BigQuery ML 和 Gemini Enterprise Agent Platform 預先訓練模型分析非結構化資料](https://github.com/GoogleCloudPlatform/vertex-ai-samples/blob/main/notebooks/community/bigquery_ml/bq_ml_with_vision_translation_nlp.ipynb)」筆記本。
 
 
 
@@ -569,11 +568,11 @@ FROM ML.ANNOTATE_IMAGE(
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-16 (世界標準時間)。
+上次更新時間：2026-07-23 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-16 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-23 (世界標準時間)。"],[],[]]

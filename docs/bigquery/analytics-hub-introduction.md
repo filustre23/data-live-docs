@@ -31,7 +31,7 @@ Analytics Hub Identity and Access Management (IAM) 角色可讓您執行下列�
 
 ## 架構
 
-BigQuery 共用功能是根據資料資源的發布和訂閱模型建構而成，可讓您在原地進行零複製共用。Google Cloud BigQuery sharing 支援下列 Google Cloud 資源：
+BigQuery 共用功能是根據Google Cloud 資料資源的發布和訂閱模型所建構，可讓您在原地進行零複製共用。BigQuery 共用功能支援下列 Google Cloud 資源：
 
 * BigQuery 資料集
 * Pub/Sub 主題
@@ -44,11 +44,11 @@ BigQuery 共用功能是根據資料資源的發布和訂閱模型建構而成�
 
 #### 共用資源
 
-共用資源是發布端在 BigQuery sharing 中分享的單位。
+共用資源是發布者在 BigQuery 共用中分享的單位。
 
 ##### 共用的資料集
 
-共用資料集是 BigQuery 資料集，也是 BigQuery sharing 中的資料共用單位。BigQuery 架構將運算和儲存空間分開，因此資料發布者可以與任意數量的訂閱者共用資料集，不必複製多份資料。發布者可以在專案中建立或使用現有的 BigQuery 資料集，並加入下列支援的物件，然後傳送給訂閱者：
+共用資料集是 BigQuery 資料集，也是 BigQuery 共用功能中的資料共用單位。BigQuery 架構將運算和儲存空間分開，因此資料發布者可以與任意數量的訂閱者共用資料集，不必重複複製資料。發布者可以在專案中建立或使用現有的 BigQuery 資料集，並加入下列支援的物件，然後傳送給訂閱者：
 
 * [授權 view](https://docs.cloud.google.com/bigquery/docs/authorized-views?hl=zh-tw)
 * [已授權的資料集](https://docs.cloud.google.com/bigquery/docs/authorized-datasets?hl=zh-tw)
@@ -68,7 +68,7 @@ BigQuery 共用功能是根據資料資源的發布和訂閱模型建構而成�
 請注意 VPC Service Controls 和共用功能有下列限制：
 
 * 請勿在 VPC Service Controls 範圍內的專案中發布共用資料。如果專案中的共用資料集位於 VPC Service Controls 範圍內，您需要為交換庫專案 (代管的項目) 和所有訂閱端專案設定適當的[輸入和輸出規則](https://docs.cloud.google.com/vpc-service-controls/docs/ingress-egress-rules?hl=zh-tw)，才能順利訂閱發布端提供的項目。
-* 請勿將交換庫專案放在 VPC Service Controls perimeter 中，否則可能會中斷發布工作流程，且需要為發布端專案和所有訂閱端專案設定[輸入和輸出規則](https://docs.cloud.google.com/vpc-service-controls/docs/ingress-egress-rules?hl=zh-tw)，才能順利訂閱產品資訊。
+* 請勿將交易所專案放在 VPC Service Controls perimeter 中，否則可能會中斷發布工作流程，且需要為發布者專案和所有訂閱者專案設定[輸入和輸出規則](https://docs.cloud.google.com/vpc-service-controls/docs/ingress-egress-rules?hl=zh-tw)，才能順利訂閱產品資訊。
 
 ##### 共用主題
 
@@ -76,25 +76,25 @@ BigQuery 共用功能是根據資料資源的發布和訂閱模型建構而成�
 
 #### 資料交換庫
 
-資料交換是容器，可讓您透過自助服務共用資料。其中包含參照共用資源的項目。發布者和管理員可以在交易平台和商家資訊層級授予訂閱者存取權。這有助於避免明確授予基礎共用資源的存取權。您可以瀏覽資料交換，探索可存取的資料，並訂閱共用資源。[建立資料交換庫](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges?hl=zh-tw#create-exchange)時，您可以指派主要聯絡人的聯絡電子郵件地址。使用者可以透過這個電子郵件地址，向資料交易擁有者提出問題或疑慮。
+資料交換是容器，可讓您透過自助服務共用資料。其中包含參照共用資源的項目。發布者和管理員可以在交易平台和商家資訊層級授予訂閱者存取權。這有助於避免明確授予基礎共用資源的存取權。您可以瀏覽資料交換，探索可存取的資料，並訂閱共用資源。[建立資料交換庫](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges?hl=zh-tw#create-exchange)時，您可以指派主要聯絡人的電子郵件地址。使用者可以透過這個電子郵件地址，向資料交換擁有者提出問題或疑慮。
 
 資料交換可以是下列其中一種類型：
 
-* **私人資料交換。**根據預設，資料交換是私人的，只有可存取該交換庫的使用者或群組，才能查看或訂閱清單。
+* **私人資料交換。**根據預設，資料交換是私人的，只有可存取該交換的使用者或群組，才能查看或訂閱清單。
 * **公開資料交換。**根據預設，資料交換是私人的，只有可存取該交換的使用者或群組，才能查看或訂閱清單。不過，您可以選擇公開資料交換。[Google Cloud 使用者 (`allAuthenticatedUsers`)](https://docs.cloud.google.com/iam/docs/principals-overview?hl=zh-tw#all-authenticated-users) 可以[探索](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings?hl=zh-tw#discover-listings)公開資料交換庫中的清單，並[訂閱](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings?hl=zh-tw#subscribe-listings)這些清單。如要進一步瞭解公開資料交換庫，請參閱「[將資料交換庫設為公開](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges?hl=zh-tw#make-data-exchange-public)」。
 
 Analytics Hub 管理員角色可讓您建立多個資料交換，並管理執行共用工作的使用者。
 
 #### 清單
 
-清單是發布者在資料交換庫中列出的共用資源參照資訊。發布者可以建立資源清單，並指定資源說明、要執行的範例查詢或範例訊息資料、任何相關文件連結，以及有助於訂閱者使用共用資源的任何其他資訊。建立房源資訊時，你可以指派主要聯絡電子郵件地址、供應商名稱和聯絡人，以及發布者名稱和聯絡人。
+清單是發布者在資料交換庫中列出的共用資源參照資訊。發布者可以建立資源清單，並指定資源說明、要執行的範例查詢或範例訊息資料、任何相關文件連結，以及有助於訂閱者使用共用資源的任何額外資訊。建立房源資訊時，你可以指派主要聯絡電子郵件地址、供應商名稱和聯絡人，以及發布者名稱和聯絡人。
 
-使用者可以透過主要聯絡人電子郵件地址，詢問資料交換相關問題或提出疑慮。供應商名稱和聯絡人是最初提供項目資料的代理商。這項資訊為選填。發布者名稱和聯絡人是發布資料的機構，這些資料會用於 BigQuery sharing。您可以選擇是否提供這項資訊，詳情請參閱「[管理房源](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-listings?hl=zh-tw)」。
+使用者可以透過主要聯絡人電子郵件地址，詢問資料交換相關問題或提出疑慮。供應商名稱和聯絡人是最初提供項目資料的代理商。這項資訊為選填。發布者名稱和聯絡人是發布資料的機構，這些資料會用於 BigQuery sharing。您可以選擇是否提供這項資訊。詳情請參閱「[管理房源](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-listings?hl=zh-tw)」。
 
 根據為商家資訊設定的 IAM 政策，以及包含商家資訊的資料交換類型，商家資訊可分為下列兩種：
 
-* **公開產品資訊。**公開清單會與所有[Google Cloud 使用者 (`allAuthenticatedUsers`)](https://docs.cloud.google.com/iam/docs/principals-overview?hl=zh-tw#all-authenticated-users) 共用。公開資料交換庫中的清單就是公開清單。這些資訊可以是*免費公開資源*或*商業資源*的參考資料。如果清單是商業資源，訂閱者可以直接向資料供應商要求存取清單，也可以瀏覽及購買[整合 Google Cloud Marketplace 的商業清單](https://docs.cloud.google.com/bigquery/docs/analytics-hub-cloud-marketplace?hl=zh-tw)。
-* **私人房源**。私人房源資訊會直接分享給個人或群組。舉例來說，私人產品資訊可以參照您與機構內其他內部團隊共用的行銷指標資料集。
+* **公開資訊。**公開清單會與所有[Google Cloud 使用者 (`allAuthenticatedUsers`)](https://docs.cloud.google.com/iam/docs/principals-overview?hl=zh-tw#all-authenticated-users) 共用。公開資料交換庫中的清單就是公開清單。這些資訊可以是*免費公開資源*或*商業資源*的參考資料。如果清單是商業資源，訂閱者可以直接向資料供應商要求存取清單，也可以瀏覽及購買[整合 Google Cloud Marketplace 的商業清單](https://docs.cloud.google.com/bigquery/docs/analytics-hub-cloud-marketplace?hl=zh-tw)。
+* **私人房源**。私人房源資訊會直接分享給個人或群組。舉例來說，私有項目可以參照您與機構內其他內部團隊共用的行銷指標資料集。
 
 ### 訂閱者工作流程
 
@@ -121,7 +121,7 @@ Analytics Hub 管理員角色可讓您建立多個資料交換，並管理執行
 
 ##### 已連結的 Pub/Sub 訂閱項目
 
-訂閱共用主題的房源資訊時，系統會在訂閱端專案中建立連結的 Pub/Sub 訂閱項目。系統不會建立共用主題或訊息資料的副本。連結的 [Pub/Sub 訂閱項目](https://docs.cloud.google.com/pubsub/docs/subscription-overview?hl=zh-tw)訂閱者可以存取發布至共用主題的訊息。訂閱者可存取共用主題的訊息資料，不需額外 IAM 授權。發布者可以直接在 Pub/Sub 中管理訂閱項目，也可以透過 BigQuery sharing 共用訂閱項目管理功能。如要進一步瞭解連結的 Pub/Sub 訂閱項目，請參閱「[透過 Pub/Sub 串流分享](https://docs.cloud.google.com/bigquery/docs/analytics-hub-stream-sharing?hl=zh-tw)」。
+訂閱共用主題的房源資訊時，系統會在訂閱端專案中建立連結的 Pub/Sub 訂閱項目。系統不會建立共用主題或訊息資料的副本。連結的 [Pub/Sub 訂閱項目](https://docs.cloud.google.com/pubsub/docs/subscription-overview?hl=zh-tw)訂閱者可以存取發布至共用主題的訊息。訂閱者可存取共用主題的訊息資料，不需額外 IAM 授權。發布者可以直接在 Pub/Sub 中管理訂閱項目，也可以透過 BigQuery 共用訂閱項目管理功能。如要進一步瞭解連結的 Pub/Sub 訂閱項目，請參閱「[透過 Pub/Sub 串流分享](https://docs.cloud.google.com/bigquery/docs/analytics-hub-stream-sharing?hl=zh-tw)」。
 
 ## 資料輸出選項 (僅限 BigQuery 共用資料集)
 
@@ -131,7 +131,6 @@ Analytics Hub 管理員角色可讓您建立多個資料交換，並管理執行
 
 * 無法使用複製、複製、匯出及快照 API。
 * 您無法在 Google Cloud 控制台中複製、複製、匯出及建立快照。
-* 您無法將受限資料集連結至資料表探索工具。
 * 受限資料集無法使用 BigQuery 資料移轉服務。
 * [`CREATE TABLE AS SELECT` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#create_table_statement)和[寫入目的地資料表](https://docs.cloud.google.com/bigquery/docs/writing-results?hl=zh-tw)的功能無法使用。
 * [`CREATE VIEW AS SELECT` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#create_view_statement)，以及寫入目的地檢視區塊。
@@ -144,7 +143,7 @@ BigQuery 共用功能有下列限制：
 
 * 一個共用資料集最多可連結 1,000 個資料集。
 * 共用主題最多可有 10,000 個 Pub/Sub 訂閱項目。這項限制包括連結的 Pub/Sub 訂閱項目，以及在 BigQuery sharing 外部建立的 Pub/Sub 訂閱項目 (例如直接從 Pub/Sub 建立)。
-* [建立房源資訊](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-listings?hl=zh-tw#create_a_listing)時，無法選取包含不支援資源的資料集做為共用資料集。如要進一步瞭解 BigQuery sharing 支援的 BigQuery 物件，請參閱[共用資料集](#shared_datasets)。
+* [建立房源資訊](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-listings?hl=zh-tw#create_a_listing)時，無法選取包含不支援資源的資料集做為共用資料集。如要進一步瞭解 BigQuery Sharing 支援的 BigQuery 物件，請參閱[共用資料集](#shared_datasets)。
 * 您無法在連結資料集中的個別表格上設定 [IAM 角色](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)或 [IAM 政策](https://docs.cloud.google.com/config-connector/docs/reference/resource-docs/iam/iampolicy?hl=zh-tw)。請改為在連結的資料集層級套用。
 * 您無法在連結資料集中的資料表上附加 [IAM 標記](https://docs.cloud.google.com/bigquery/docs/tags?hl=zh-tw)。請改為在連結的資料集層級套用。
 * 2023 年 7 月 25 日前建立的連結資料集，不會由[訂閱資源](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-subscriptions?hl=zh-tw)回填。
@@ -153,7 +152,7 @@ BigQuery 共用功能有下列限制：
 
   + 您必須授予訂閱者明確的權限，才能讀取來源資料集，並查詢連結資料集中的檢視表。如要授予檢視表的存取權，最佳做法是建立[授權檢視表](https://docs.cloud.google.com/bigquery/docs/share-access-views?hl=zh-tw)。授權檢視表可授予訂閱者檢視資料的權限，但不會授予基礎來源資料的存取權。
   + [查詢計畫](https://docs.cloud.google.com/bigquery/docs/query-plan-explanation?hl=zh-tw)會顯示共用檢視區塊查詢和常式查詢，包括專案 ID，以及授權檢視區塊中涉及的其他資料集。請勿在共用檢視區塊或常式查詢中加入任何您認為是機密的資訊，例如加密金鑰。
-  + 系統會在 [Data Catalog](https://docs.cloud.google.com/data-catalog/docs/concepts/overview?hl=zh-tw) (已淘汰) 和 [Knowledge Catalog](https://docs.cloud.google.com/dataplex/docs/catalog-overview?hl=zh-tw) 中為共用資料集建立索引。訂閱者可以立即查看共用資料集的更新內容，例如新增資料表或檢視區塊。不過，在某些情況下，例如共用資料集有超過 100 個訂閱者或表格時，這些服務可能需要最多 18 小時才能為更新內容建立索引。由於索引作業會延遲，訂閱者無法立即在 Google Cloud 控制台中搜尋這些更新的資源。
+  + 系統會在 [Data Catalog](https://docs.cloud.google.com/data-catalog/docs/concepts/overview?hl=zh-tw) (已淘汰) 和 [Knowledge Catalog](https://docs.cloud.google.com/dataplex/docs/catalog-overview?hl=zh-tw) 中為共用資料集建立索引。訂閱者可以立即查看共用資料集的更新內容，例如新增資料表或檢視區塊。不過，在特定情況下 (例如共用資料集中有超過 100 個訂閱者或表格)，這些服務可能需要最多 18 小時才能為更新內容建立索引。由於索引作業會延遲，訂閱者無法立即在 Google Cloud 控制台中搜尋這些更新的資源。
   + 系統會在 Data Catalog (已淘汰) 和 Knowledge Catalog 中為共用主題建立索引，但您無法依資源類型進行篩選。
   + 如果您已在列出的資料表上設定[資料列層級安全防護](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro?hl=zh-tw)或[資料遮蓋](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro?hl=zh-tw)政策，訂閱者必須是 Enterprise 或 Enterprise Plus 客戶，才能在連結的資料集上執行查詢作業。如需版本相關資訊，請參閱「[BigQuery 版本簡介](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)」。
 * 如果您是訂閱者，則適用下列 BigQuery 互通性限制：
@@ -177,7 +176,7 @@ BigQuery 共用功能有下列限制：
     - [BigQuery Storage Read API](https://docs.cloud.google.com/bigquery/docs/reference/storage?hl=zh-tw#read_from_a_session_stream)
     - [`tabledata.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list?hl=zh-tw)
     - [BigQuery BI Engine 查詢](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro?hl=zh-tw)
-  + 只有 2024 年 4 月 22 日之後的查詢，才會填入[檢視畫面](https://docs.cloud.google.com/bigquery/docs/views-intro?hl=zh-tw)的用量指標。
+  + 只有 2024 年 4 月 22 日後的查詢，才會填入[檢視畫面](https://docs.cloud.google.com/bigquery/docs/views-intro?hl=zh-tw)的用量指標。
   + 系統不會擷取 BigQuery 中已連結的 Pub/Sub 訂閱項目用量指標。您可以繼續直接在 Pub/Sub 中查看用量。
   + BigQuery sharing 用量指標資訊主頁不提供 SQL 預存程序。您可以在 `INFORMATION_SCHEMA.ROUTINES` 檢視畫面中查看詳細資料，但無法在 `INFORMATION_SCHEMA.SHARED_DATASET_USAGE` 檢視畫面中查看。詳情請參閱「[使用 `INFORMATION_SCHEMA` 檢視畫面](https://docs.cloud.google.com/bigquery/docs/analytics-hub-monitor-listings?hl=zh-tw#use-information-schema)」。
 * 訂閱 Salesforce Data Cloud 資料時，有下列限制：
@@ -267,7 +266,7 @@ BigQuery sharing 功能支援下列區域和多重區域。
 | 歐盟1[成員國](https://europa.eu/european-union/about-eu/countries_en)境內的資料中心 | `EU` |
 | 美國資料中心 | `US` |
 
-1 位於 `EU` 多區域的資料，不會存放在 `europe-west2` (倫敦) 或 `europe-west6` (蘇黎世) 資料中心。
+1 位於 `EU` 多地區的資料，不會存放在 `europe-west2` (倫敦) 或 `europe-west6` (蘇黎世) 資料中心。
 
 #### Omni 區域
 
@@ -301,20 +300,20 @@ BigQuery 共用管理員可以執行下列工作：
 
 * 在貴機構的預測專案中，建立、更新、刪除及共用資料交換。
 * 使用 Analytics Hub 管理員角色，管理其他 *BigQuery sharing 管理員*。
-* 授予貴機構員工 [Analytics Hub 發布者角色](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#analyticshub.publisher) (`roles/analyticshub.publisher`)，即可管理 *BigQuery sharing 發布者*。如要讓員工只能更新、刪除及分享商家檔案，但無法建立商家檔案，請授予他們「Analytics Hub 清單管理員」角色 (`roles/analyticshub.listingAdmin`)。
+* 授予貴機構員工 [Analytics Hub 發布者角色](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#analyticshub.publisher) (`roles/analyticshub.publisher`)，即可管理 *BigQuery sharing 發布者*。如要讓員工只能更新、刪除及共用項目，但無法建立項目，請授予他們 [Analytics Hub 項目管理員角色](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#analyticshub.listingAdmin) (`roles/analyticshub.listingAdmin`)。
 * 授予包含所有供應商的 Google 群組「Analytics Hub 訂閱者」角色 (`roles/analyticshub.subscriber`)，即可管理 *BigQuery sharing 訂閱者*。如要讓供應商只能查看可用的交易平台和刊登項目，請授予他們[Analytics Hub 檢視者角色](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#analyticshub.viewer) (`roles/analyticshub.viewer`)。這些供應商無法訂閱刊登項目。
 
 詳情請參閱「[BigQuery sharing IAM 角色](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles?hl=zh-tw#user_roles)」和「[管理資料交換庫](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges?hl=zh-tw)」。
 
-#### 發布端
+#### 發布者
 
 發布商會在「預測」專案或其他專案中，為資料集建立下列項目：
 
-* 清單 A：需求預測資料集 1
+* 商品 A：需求預測資料集 1
 * 項目 B：需求預測資料集 2
 * 項目 C：需求預測資料集 3
 
-資料供應商可以[追蹤共用資料集的用量指標](https://docs.cloud.google.com/bigquery/docs/analytics-hub-monitor-listings?hl=zh-tw#use-analytics-hub)。用量指標包括下列詳細資料：
+資料供應商可以[追蹤共用資料集的用量指標](https://docs.cloud.google.com/bigquery/docs/analytics-hub-monitor-listings?hl=zh-tw#use-analytics-hub)。用量指標包含下列詳細資料：
 
 * 針對共用資料集執行的工作。
 * 訂閱者專案和機構組織的共用資料集用量詳細資料。
@@ -324,13 +323,13 @@ BigQuery 共用管理員可以執行下列工作：
 
 #### 訂閱人數
 
-訂閱者可以瀏覽資料交換中可存取的清單。他們也可以訂閱這些資訊，並建立連結的資料集，將這些資料集新增至專案。供應商接著就能對這些連結的資料集執行查詢，並即時擷取結果。
+訂閱者可以瀏覽資料交換中可存取的清單。他們也可以訂閱這些資訊，並建立連結的資料集，將這些資料集新增至專案。供應商就能對這些連結的資料集執行查詢，並即時擷取結果。
 
 詳情請參閱「[查看及訂閱商家資訊和資料交換](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings?hl=zh-tw)」。
 
 ### 資料營利
 
-假設您是金融資料供應商，貴機構已在名為「 Google Cloud `MarketDataSource`」的專案中，整理出歷史股權價格資料集。您想向外部金融機構和個別交易人提供這項資料，藉此營利。接下來的章節將說明如何透過 BigQuery 共用功能，從資料中獲利。
+假設您是金融資料供應商，貴機構在名為 Google Cloud `MarketDataSource` 的專案中，策劃了歷史股權價格資料集。您想向外部金融機構和個別交易人提供這項資料，藉此營利。接下來的章節將說明如何透過 BigQuery 共用功能，從資料中獲利。
 
 #### 管理員
 
@@ -339,15 +338,15 @@ BigQuery 共用管理員可以執行下列工作：
 分享管理員可以執行下列工作：
 
 * 建立公開資料交易平台，並[與 Google Cloud Marketplace 整合](https://docs.cloud.google.com/bigquery/docs/analytics-hub-cloud-marketplace?hl=zh-tw)。
-* 授予負責建立商業項目的資料工程師 [Analytics Hub 發布者角色](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#analyticshub.publisher) (`roles/analyticshub.publisher`)，即可管理 *BigQuery sharing 發布者*。如要讓員工只能更新、刪除及分享商家檔案，但無法建立商家檔案，請授予[Analytics Hub 商家檔案管理員角色](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#analyticshub.listingAdmin) (`roles/analyticshub.listingAdmin`)。
+* 授予負責建立商業項目的資料工程師 [Analytics Hub 發布者角色](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#analyticshub.publisher) (`roles/analyticshub.publisher`)，即可管理 *BigQuery sharing 發布者*。如要讓員工只能更新、刪除及分享產品資訊，但無法建立產品資訊，請授予他們 [Analytics Hub 產品資訊管理員角色](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#analyticshub.listingAdmin) (`roles/analyticshub.listingAdmin`)。
 * 在 Google Cloud Marketplace 中管理商業條款和定價模式。
 
-#### 發布端
+#### 發布者
 
 發布商為財務資料集建立下列項目：
 
 * 項目 A：全球股價 (月費方案)
-* 方案 B：即時市場信號 (年約方案)
+* 項目 B：即時市場信號 (年約方案)
 * 項目 C：歷來經濟指標 (免費試用)
 
 發布者可以使用[用量指標資訊主頁](https://docs.cloud.google.com/bigquery/docs/analytics-hub-monitor-listings?hl=zh-tw#use-analytics-hub)追蹤目錄的成效，查看訂閱機構的用量詳細資料，以及處理的資料總量。
@@ -399,11 +398,11 @@ BigQuery sharing 是 BigQuery 的一部分，符合下列法規遵循計畫：
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-13 (世界標準時間)。
+上次更新時間：2026-07-21 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-13 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-21 (世界標準時間)。"],[],[]]

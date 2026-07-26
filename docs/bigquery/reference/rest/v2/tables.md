@@ -174,7 +174,7 @@ A field in TableSchema
 
 | JSON representation |
 | --- |
-| ``` {   "name": string,   "type": string,   "mode": string,   "fields": [     {       object (TableFieldSchema)     }   ],   "description": string,   "policyTags": {     "names": [       string     ]   },   "dataPolicies": [     {       object (DataPolicyOption)     }   ],   "dataPolicyList": {     object (DataPolicyList)   },   "maxLength": string,   "precision": string,   "scale": string,   "roundingMode": enum (RoundingMode),   "collation": string,   "defaultValueExpression": string,   "rangeElementType": {     object (FieldElementType)   },   "generatedColumn": {     object (GeneratedColumn)   } } ``` |
+| ``` {   "name": string,   "type": string,   "mode": string,   "fields": [     {       object (TableFieldSchema)     }   ],   "description": string,   "policyTags": {     "names": [       string     ]   },   "dataGovernanceTagsInfo": {     "dataGovernanceTags": {       string: string,       ...     }   },   "dataPolicies": [     {       object (DataPolicyOption)     }   ],   "dataPolicyList": {     object (DataPolicyList)   },   "maxLength": string,   "precision": string,   "scale": string,   "roundingMode": enum (RoundingMode),   "collation": string,   "defaultValueExpression": string,   "rangeElementType": {     object (FieldElementType)   },   "generatedColumn": {     object (GeneratedColumn)   } } ``` |
 
 | Fields | |
 | --- | --- |
@@ -185,6 +185,8 @@ A field in TableSchema
 | `description` | `string`  Optional. The field description. The maximum length is 1,024 characters. |
 | `policyTags` | `object`  Optional. The policy tags attached to this field, used for field-level access control. If not set, defaults to empty policyTags. |
 | `policyTags.names[]` | `string`  A list of policy tag resource names. For example, "projects/1/locations/eu/taxonomies/2/policyTags/3". At most 1 policy tag is currently allowed. |
+| `dataGovernanceTagsInfo` | `object`  Optional. Specifies the data governance tags on this field. This field works with other column-level security fields as follows:   * **Precedence**: If a data governance tag is attached to a column, it takes precedence over the policy tag attached to the column. However, if a data policy is attached to a column, it takes precedence over the data governance tag. * **Patching behavior**: Describes how this field behaves during a `Table.patch` schema update:   + **Unset**: If the `dataGovernanceTagsInfo` field is omitted from the update request, the existing tags on the column are preserved.   + **Empty Field**: To clear data governance tags from a column, send the `dataGovernanceTagsInfo` field as an empty object. This removes all tags from the column.   + **Updating tags**: To replace an existing tag, send the field with the new tag. |
+| `dataGovernanceTagsInfo.dataGovernanceTags` | `map (key: string, value: string)`  Optional. The data governance tags added to this field are used for field-level access control. Only one data governance tag is currently supported on a field. Tag keys are globally unique. Tag key is expected to be in the namespaced format, for example "parent-id/pii" where parent-id is the ID of the parent organization or project resource for this tag key. Tag value is expected to be the short name, for example "sensitive". See [Tag definitions](https://cloud.google.com/iam/docs/tags-access-control#definitions) for more details. For example: "parent-id/pii": "sensitive", "myProject/cost\_center": "sales" |
 | `dataPolicies[]` | `object (DataPolicyOption)`  Optional. Data policies attached to this field, used for field-level access control. |
 | `dataPolicyList` | `object (DataPolicyList)`  Optional. Specifies data policies attached to this field, used for field-level access control. When set, this will be the source of truth for data policy information. |
 | `maxLength` | `string (int64 format)`  Optional. Maximum length of values of this field for STRINGS or BYTES.  If maxLength is not specified, no maximum length constraint is imposed on this field.  If type = "STRING", then maxLength represents the maximum UTF-8 length of strings in this field.  If type = "BYTES", then maxLength represents the maximum number of bytes in this field.  It is invalid to set this field if type ≠ "STRING" and ≠ "BYTES". |
@@ -192,14 +194,4 @@ A field in TableSchema
 | `scale` | `string (int64 format)`  Optional. See documentation for precision. |
 | `roundingMode` | `enum (RoundingMode)`  Optional. Specifies the rounding mode to be used when storing values of NUMERIC and BIGNUMERIC type. |
 | `collation` | `string`  Optional. Field collation can be set only when the type of field is STRING. The following values are supported:   * 'und:ci': undetermined locale, case insensitive. * '': empty string. Default to case-sensitive behavior. |
-| `defaultValueExpression` | `string`  Optional. A SQL expression to specify the [default value](https://cloud.google.com/bigquery/docs/default-values) for this field. |
-| `rangeElementType` | `object (FieldElementType)`  Optional. The subtype of the RANGE, if the type of this field is RANGE. If the type is RANGE, this field is required. Values for the field element type can be the following:   * DATE * DATETIME * TIMESTAMP |
-| `generatedColumn` | `object (GeneratedColumn)`  Optional. Definition of how values are generated for the field. Only valid for top-level schema fields (not nested fields). |
-
-## DataPolicyOption
-
-Data policy option. For more information, see [Mask data by applying data policies to a column](https://docs.cloud.google.com/bigquery/docs/column-data-masking#data-policies-on-column).
-
-| JSON representation |
-| --- |
-| ``` {   "name": string } ``` |
+|

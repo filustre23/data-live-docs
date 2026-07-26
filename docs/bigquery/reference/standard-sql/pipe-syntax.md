@@ -114,6 +114,26 @@ Pipe operators have the following semantic behavior:
   Columns from earlier in the same query aren't visible. Inside subqueries,
   correlated references to outer columns are still allowed.
 
+### Order preservation
+
+The following operators preserve row order if the input table is ordered:
+
+* [`SELECT`](#select_pipe_operator) (except when using `SELECT DISTINCT` or
+  window functions)
+* [`EXTEND`](#extend_pipe_operator) (except when using window functions)
+* [`SET`](#set_pipe_operator) (except when using window functions)
+* [`DROP`](#drop_pipe_operator)
+* [`RENAME`](#rename_pipe_operator)
+* [`AS`](#as_pipe_operator)
+* [`LIMIT`](#limit_pipe_operator)
+* [`WITH`](#with_pipe_operator)
+
+When you use these operators after an
+[`ORDER BY` operator](#order_by_pipe_operator), the result remains ordered.
+Additionally, if a
+[`LIMIT` operator](#limit_pipe_operator) follows an order-preserving operator, the
+query computes the top rows based on that order.
+
 ## `FROM` queries
 
 In pipe syntax, a query can start with a standard [`FROM` clause](/bigquery/docs/reference/standard-sql/query-syntax#from_clause)
@@ -472,7 +492,4 @@ to disambiguate columns after the `JOIN` operator.
 (
   SELECT "000123" AS id, "apples" AS item, 2 AS sales
   UNION ALL
-  SELECT "000456" AS id, "bananas" AS item, 5 AS sales
-) AS sales_table
-|> AGGREGATE SUM(sales
 ```

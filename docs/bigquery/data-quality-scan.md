@@ -73,7 +73,7 @@ Google uses AI technology to translate content into your preferred language. AI 
   + `bigquery.tables.update`
     掃描的資料表
   + `dataplex.entryGroups.useDataQualityScorecardAspect`
-    位於與資料表相同位置的項目群組上`@bigquery`
+    位於與資料表相同位置的 `@bigquery` 項目群組
 * 建立 `DataScan`：
   `dataplex.datascans.create`
   專案
@@ -254,12 +254,12 @@ Google uses AI technology to translate content into your preferred language. AI 
         2. 選用：在「欄名稱」中選擇欄。
         3. 在「Provide a SQL statement」(提供 SQL 陳述式) 欄位中，輸入會傳回符合無效狀態資料列的 SQL 陳述式。如果傳回任何資料列，即代表這項規則失敗。請省略 SQL 陳述式結尾的分號。詳情請參閱「[支援的自訂 SQL 規則類型](https://docs.cloud.google.com/dataplex/docs/auto-data-quality-overview?hl=zh-tw#supported-custom-sql-rule-types)」和「[定義資料品質規則](https://docs.cloud.google.com/dataplex/docs/use-auto-data-quality?hl=zh-tw#sample-rules)」中的範例。
         4. 按一下「新增」。
-   2. 選用：您可以為任何資料品質規則指派自訂規則名稱，用於監控和警報，以及說明。如要這麼做，請編輯規則並指定下列詳細資料：
+   2. 選用：您可以為任何資料品質規則指派自訂規則名稱，用於監控和警示，以及說明。如要這麼做，請編輯規則並指定下列詳細資料：
 
       * **規則名稱**：輸入自訂規則名稱，長度上限為 63 個半形字元。
         規則名稱可包含英文字母 (a-z、A-Z)、數字 (0-9) 和連字號 (-)，且開頭須為英文字母，結尾須為數字或英文字母。
       * **說明**：輸入規則說明，長度上限為 1,024 個字元。
-   3. 重複上述步驟，在資料品質掃描作業中新增其他規則。完成後，按一下「繼續」。
+   3. 重複上述步驟，在資料品質掃描中新增其他規則。完成後，按一下「繼續」。
 5. 選用步驟：將掃描結果匯出至 BigQuery 標準資料表。在「將掃描結果匯出至 BigQuery 資料表」部分，請執行下列操作：
 
    1. 在「選取 BigQuery 資料集」欄位中，按一下「瀏覽」。選取 BigQuery 資料集，用來儲存資料品質掃描結果。
@@ -710,7 +710,7 @@ POST https://dataplex.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/d
 更改下列內容：
 
 * `PROJECT_ID`：專案 ID。
-* `LOCATION`：要建立資料品質掃描的區域。
+* `LOCATION`：要建立資料品質掃描作業的區域。
 * `DATASCAN_ID`：資料品質掃描的 ID。
 * `DATASET_ID`：BigQuery 資料集的 ID。
 * `TABLE_ID`：BigQuery 資料表的 ID。

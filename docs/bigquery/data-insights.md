@@ -16,9 +16,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 資料洞察總覽
 
-您可以透過 AI 生成的說明、關係圖和 SQL 查詢，使用資料洞察探索不熟悉的資料。這項 Gemini in BigQuery 功能會分析中繼資料，協助您快速瞭解資料結構和內容。有了這些洞察，您不必進行大量手動設定，即可開始分析。
+您可以透過 AI 生成的說明、關係圖和 SQL 查詢，使用資料洞察探索不熟悉的資料。這項 Gemini in BigQuery 功能會分析中繼資料，協助您快速瞭解資料結構和內容。您可根據這些洞察資訊開始分析，不必手動進行大量設定。
 
-**注意：** 如要提供這項功能的意見回饋，請傳送電子郵件至 [dataplex-data-insights-help@google.com](mailto:dataplex-data-insights-help@google.com)。
+**附註：** 如要提供這項功能的意見回饋，請傳送電子郵件至 [dataplex-data-insights-help@google.com](mailto:dataplex-data-insights-help@google.com)。
 
 ## 事前準備
 
@@ -35,29 +35,30 @@ Google uses AI technology to translate content into your preferred language. AI 
 * **資料表：**Gemini 會生成自然語言問題和對應的 SQL 查詢，協助您瞭解單一資料表中的資料。透過資料表洞察，您可以偵測資料表中的資料模式、異常狀況、離群值或品質問題。Gemini 也會生成資料表和資料欄說明。
 * **資料集：**
   ([預覽](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))
-  Gemini 會生成互動式關係圖，顯示跨資料表關係和跨資料表 SQL 查詢，協助您瞭解資料集內的資料表關係。透過關係圖，您可以瞭解資料的衍生方式，有助於解決品質、一致性或多餘問題。透過跨資料表查詢，您可以找出更廣泛的關係。舉例來說，您可以運用銷售資料表和客戶資料表中的資料，計算各客層的收益。
+  Gemini 會生成互動式關係圖，顯示跨資料表關係和跨資料表 SQL 查詢，協助您瞭解資料集中資料表的關係。透過關係圖，您可以瞭解資料的衍生方式，有助於解決品質、一致性或備援問題。透過跨資料表查詢，您可以找出更廣泛的關係。舉例來說，您可以運用銷售資料表和顧客資料表中的資料，計算各顧客區隔的收益。
 
 如要進一步調查，可以在[資料畫布](https://docs.cloud.google.com/bigquery/docs/data-canvas?hl=zh-tw)中提出後續問題。
 
-### 資料表深入分析結果
+### 資料表深入分析
 
-資料表洞察可協助您瞭解單一 BigQuery 資料表中的內容、品質和模式。舉例來說，您可以產生執行統計分析的查詢，並使用資料表洞察功能偵測資料模式、異常狀況和離群值。資料表洞察資料也有助於偵測品質問題，特別是當資料表提供[資料剖析掃描](https://docs.cloud.google.com/dataplex/docs/data-profiling-overview?hl=zh-tw)時。為資料表生成洞察結果時，Gemini 會根據資料表的中繼資料提供資料表說明、資料欄說明和剖析掃描輸出內容。可用的選項如下：
+資料表洞察可協助您瞭解單一 BigQuery 資料表中的內容、品質和模式。舉例來說，您可以產生執行統計分析的查詢，並使用資料表洞察功能偵測資料模式、異常狀況和離群值。資料表洞察資料也有助於偵測品質問題，特別是當資料表提供[資料剖析掃描](https://docs.cloud.google.com/dataplex/docs/data-profiling-overview?hl=zh-tw)時。為資料表生成洞察資料時，Gemini 會根據資料表的中繼資料提供資料表說明、資料欄說明和剖析掃描輸出內容。可用的選項如下：
 
 * **生成查詢：**建議自然語言問題，並提供對應的 SQL 查詢來回答問題。這有助於發掘模式、評估資料品質及執行統計分析，無須從頭編寫 SQL。
-* **生成說明：**為資料表及其資料欄生成說明。Gemini 會使用剖析掃描輸出內容 (如有)，做為生成說明的依據。您可以查看、編輯這些說明，然後發布至 Knowledge Catalog，提升資料可探索性和說明文件品質。
+* **生成說明：**生成資料表和資料欄的說明。Gemini 會使用剖析掃描輸出內容 (如有)，做為生成說明時的依據。您可以查看、編輯這些說明，然後發布至 Knowledge Catalog，提升資料可探索性和文件品質。
 
 ### 資料集洞察
 
-資料集洞察可協助您瞭解 BigQuery 資料集內多個資料表之間的關係和聯結路徑，全面掌握資料集的內容。為資料集產生洞察時，Gemini 會提供下列資訊：
+資料集洞察可協助您瞭解 BigQuery 資料集內多個資料表之間的關係和聯結路徑，全面掌握資料集內容。為資料集生成洞察資料時，Gemini 會提供下列資訊：
 
 * **資料集說明：**提供 AI 生成的資料集摘要。
-* **關係：**顯示互動式地圖，以視覺化方式呈現資料集內資料表之間的關係。您可以將游標懸停在連線上方，查看關係詳細資料，例如聯結鍵。
-* **關係資料表：**以表格形式呈現資料表之間的關係，包括外鍵和推斷的聯結。關係可由結構定義 (來自主鍵和外鍵限制)、根據使用情況 (來自查詢記錄)，或由 Gemini 根據資料表和資料欄名稱與說明推斷。
+* **關係：**顯示互動式地圖，以視覺化方式呈現資料集內資料表之間的關係。將游標懸停在連線上，即可查看關係詳細資料，例如合併鍵。
+* **關係表：**以表格形式呈現資料表之間的關係，包括外鍵和推斷的聯結。關係可由結構定義 (來自主鍵和外鍵限制)、根據使用情況 (來自查詢記錄) 建立，或由 Gemini 根據資料表和資料欄名稱與說明推斷。
 * **查詢建議：**根據已識別的關係，提供範例 SQL 查詢，說明如何聯結不同資料表中的資料。
 
 ## 資料表資料洞察範例
 
-假設有一個名為 `telco_churn` 的資料表，其中包含 `CustomerID`、`Tenure`、`InternetService`、`Contract`、`MonthlyCharges` 和 `Churn` 等資料欄。下表說明該資料表的中繼資料。
+假設有一個名為 `telco_churn` 的資料表，其中包含 `CustomerID`、`Tenure`、`InternetService`、`Contract`、`MonthlyCharges` 和 `Churn` 等資料欄。
+下表說明資料表的 metadata。
 
 | 欄位名稱 | 類型 |
 | --- | --- |
@@ -73,9 +74,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 | `MonthlyCharges` | `FLOAT64` |
 | `Churn` | `BOOL` |
 
-資料洞察會為這個資料表生成下列查詢範例：
+資料洞察會為這個資料表生成下列範例查詢：
 
-* 找出訂閱所有進階服務，且已成為客戶超過 50 個月的使用者。
+* 找出訂閱所有進階服務，且成為客戶超過 50 個月的使用者。
 
   ```
   SELECT
@@ -138,7 +139,7 @@ LIMIT 5;
 
 ### 資料消費者工作流程
 
-這些工作流程著重於資料分析師、業務分析師，以及其他需要尋找、瞭解及分析資料的使用者。
+這些工作流程著重於資料分析師、業務分析師和其他需要尋找、瞭解及分析資料的使用者。
 
 * **瞭解 BigQuery 資料表：**快速掌握特定資料表的結構定義、內容和潛在用途。在 BigQuery Studio 中選取資料表後，您可以執行下列工作：
 
@@ -147,9 +148,9 @@ LIMIT 5;
   + 調整並執行建議的查詢，開始進行分析。
 
   如要進一步瞭解如何產生及查看資料表洞察資料，請參閱「[產生資料表洞察資料](https://docs.cloud.google.com/bigquery/docs/generate-table-insights?hl=zh-tw)」。
-* **探索整個資料集：**瞭解資料集內資料表之間的關係，並掌握整體結構。在 BigQuery Studio 中選取資料集後，即可執行下列工作：
+* **探索整個資料集：**發掘資料集內各個表格之間的關係，並瞭解整體結構。在 BigQuery Studio 中選取資料集後，即可執行下列工作：
 
-  + 產生及查看資料集洞察資訊。
+  + 生成及查看資料集洞察資訊。
   + 使用互動式關係圖，以視覺化方式呈現表格連結。
   + 分析關係資料表，找出彙整索引鍵和連線類型 (結構定義、使用情況、LLM 推斷)。
   + 使用建議的跨資料表 SQL 查詢，有效查詢多個資料表。
@@ -162,11 +163,11 @@ LIMIT 5;
 
 * **產生基準資料文件：**自動建立及維護必要的中繼資料說明。您可以執行下列工作：
 
-  + 建立或修改資料表後，請觸發資料洞察功能，產生資料表和資料欄說明。您也可以使用 [Knowledge Catalog 自動中繼資料產生 API](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata?hl=zh-tw#add-aspects)，大規模產生這些說明。
+  + 建立或修改資料表後，觸發資料洞察功能，即可生成資料表和資料欄說明。您也可以使用 [Knowledge Catalog 自動中繼資料生成 API](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata?hl=zh-tw#add-aspects)，大規模生成這些說明。
   + 檢查並修正 AI 生成的文字，確保技術正確性與業務相關性。
 
   如要進一步瞭解如何產生資料表和資料欄說明，請參閱「[產生資料表洞察](https://docs.cloud.google.com/bigquery/docs/generate-table-insights?hl=zh-tw)」。
-* **協助使用者瞭解資料集**：讓消費者更容易瞭解及使用提供的資料集。您可以執行下列工作：
+* **協助使用者更瞭解資料集**：讓消費者更容易瞭解及使用提供的資料集。您可以執行下列工作：
 
   + 針對重要資料集 (尤其是關係複雜的資料集) 產生深入分析資訊。
   + 請務必對資料表執行資料剖析掃描，以提供豐富的背景資訊，取得更準確實用的洞察資料。
@@ -187,7 +188,7 @@ LIMIT 5;
 
 ## 定價
 
-如要瞭解這項功能的定價詳情，請參閱 [Gemini in BigQuery 定價總覽](https://docs.cloud.google.com/gemini/pricing?hl=zh-tw#gemini-in-bigquery-pricing)。
+如要瞭解這項功能的定價詳情，請參閱「[Data Cloud Agent 定價](https://cloud.google.com/products/data-agents/pricing?hl=zh-tw)」。
 
 ## 配額與限制
 
@@ -200,7 +201,7 @@ LIMIT 5;
 * 資料洞察功能適用於 BigQuery 資料表、BigLake 資料表、外部資料表和檢視區塊。
 * 多雲端客戶無法使用其他雲端的資料。
 * 資料洞察不支援 `GEO` 或 `JSON` 欄類型。
-* 洞察執行作業不保證每次都會顯示查詢。如要提高生成更吸引人查詢的機率，請重新啟動洞察管道。
+* 洞察資料執行作業不保證每次都會顯示查詢。如要提高生成更吸引人查詢的機率，請重新啟動洞察管道。
 * 如果資料表設有資料欄層級的存取控管機制，且使用者權限受到限制，只要您具備資料表所有資料欄的讀取權限，就能產生洞察資料。如要執行產生的查詢，您必須具備足夠的[權限](https://docs.cloud.google.com/bigquery/docs/generate-table-insights?hl=zh-tw#roles)。
 * Gemini 最多可為資料表中的 350 個資料欄生成說明。
 * 如果是資料集洞察，您無法在關係圖中編輯關係。
@@ -227,11 +228,11 @@ LIMIT 5;
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-18 (世界標準時間)。
+上次更新時間：2026-07-23 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-18 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-23 (世界標準時間)。"],[],[]]

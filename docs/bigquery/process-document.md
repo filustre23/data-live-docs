@@ -26,17 +26,17 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 如要建立遠端模型及處理文件，您需要在專案層級具備下列 Identity and Access Management (IAM) 角色：
 
-* 建立文件處理器：Document AI 編輯者 (`roles/documentai.editor`)
+* 建立文件處理器：Document AI 編輯器 (`roles/documentai.editor`)
 * 建立及使用 BigQuery 資料集、資料表和模型：
   BigQuery 資料編輯者 (`roles/bigquery.dataEditor`)
 * 建立、委派及使用 BigQuery 連線：
   BigQuery 連線管理員 (`roles/bigquery.connectionsAdmin`)
 
-  如果沒有設定[預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw)，您可以在執行 `CREATE MODEL` 陳述式時建立並設定連線。如要這麼做，您必須具備專案的 BigQuery 管理員角色 (`roles/bigquery.admin`)。詳情請參閱「[設定預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw#configure_the_default_connection)」。
+  如果沒有設定[預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw)，您可以在執行 `CREATE MODEL` 陳述式時建立並設定連線。如要執行這項操作，您必須具備專案的 BigQuery 管理員角色 (`roles/bigquery.admin`)。詳情請參閱「[設定預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw#configure_the_default_connection)」。
 * 將權限授予連線的服務帳戶：專案 IAM 管理員 (`roles/resourcemanager.projectIamAdmin`)
 * 建立 BigQuery 工作：BigQuery 工作使用者 (`roles/bigquery.jobUser`)
 
-這些預先定義的角色具備執行本文所述工作所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
+這些預先定義的角色具備執行本文中工作所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
 #### 所需權限
 
@@ -88,10 +88,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
   **Roles required to enable APIs**
 
-  To enable APIs, you need the Service Usage Admin IAM
-  role (`roles/serviceusage.serviceUsageAdmin`), which
-  contains the `serviceusage.services.enable` permission. [Learn how to grant
-  roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw).
+  To enable APIs, you need the `serviceusage.services.enable` permission. If you
+  created the project, then you likely already have this permission through the
+  Owner role (`roles/owner`). Otherwise, you can get this permission through the
+  Service Usage Admin role (`roles/serviceusage.serviceUsageAdmin`).
+  [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw).
 
   [Enable the APIs](https://console.cloud.google.com/apis/enableflow?apiid=bigquery.googleapis.com%2Cbigqueryconnection.googleapis.com%2Cdocumentai.googleapis.com&hl=zh-tw)
 
@@ -118,10 +119,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
   **Roles required to enable APIs**
 
-  To enable APIs, you need the Service Usage Admin IAM
-  role (`roles/serviceusage.serviceUsageAdmin`), which
-  contains the `serviceusage.services.enable` permission. [Learn how to grant
-  roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw).
+  To enable APIs, you need the `serviceusage.services.enable` permission. If you
+  created the project, then you likely already have this permission through the
+  Owner role (`roles/owner`). Otherwise, you can get this permission through the
+  Service Usage Admin role (`roles/serviceusage.serviceUsageAdmin`).
+  [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw).
 
   [Enable the APIs](https://console.cloud.google.com/apis/enableflow?apiid=bigquery.googleapis.com%2Cbigqueryconnection.googleapis.com%2Cdocumentai.googleapis.com&hl=zh-tw)
 
@@ -144,7 +146,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Explorer」窗格中，按一下專案名稱。
-4. 依序點按 more\_vert「View actions」(查看動作) >「Create dataset」(建立資料集)。
+4. 依序點按 more\_vert「View actions」(查看動作)「>」(大於符號)「Create dataset」(建立資料集)。
 5. 在「建立資料集」頁面中，執行下列操作：
 
    1. 在「Dataset ID」(資料集 ID) 部分，輸入資料集的名稱。
@@ -165,7 +167,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    更改下列內容：
 
    * `LOCATION`：資料集的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
-   * `DATASET_ID` 是您要建立的資料集 ID。
+   * `DATASET_ID`：您要建立的資料集 ID。
 2. 確認資料集已建立完成：
 
    ```
@@ -176,7 +178,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 建立[Cloud 資源連線](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection?hl=zh-tw)，並取得連線的服務帳戶。在與上一步建立的資料集相同的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)中建立連線。
 
-如果已設定預設連線，或您具備 BigQuery 管理員角色，可以略過這個步驟。
+如果已設定預設連線，或具備 BigQuery 管理員角色，可以略過這個步驟。
 
 選取下列選項之一：
 
@@ -192,7 +194,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 4. 在「Connections」(連線) 頁面中，按一下「Create connection」(建立連線)。
 5. 在「連線類型」中，選擇「Vertex AI 遠端模型、遠端函式、BigLake 和 Spanner (Cloud 資源)」。
 6. 在「連線 ID」欄位中，輸入連線名稱。
-7. 在「位置類型」部分，選取連線位置。連線應與資料集等其他資源位於同一位置。
+7. 在「位置類型」中，選取連線位置。連線應與資料集等其他資源位於同一位置。
 8. 點選「建立連線」。
 9. 點選「前往連線」。
 10. 在「連線資訊」窗格中，複製服務帳戶 ID，以便在後續步驟中使用。
@@ -403,7 +405,7 @@ resource "google_bigquery_connection" "default" {
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
 2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
 
-   您只需要為每項專案執行一次這個指令，且可以在任何目錄中執行。
+   每項專案只需要執行一次這個指令，且可以在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
@@ -422,7 +424,7 @@ resource "google_bigquery_connection" "default" {
    ```
 2. 如果您正在學習教學課程，可以複製每個章節或步驟中的程式碼範例。
 
-   將程式碼範例複製到新建立的 `main.tf`。
+   將程式碼範例複製到新建立的 `main.tf` 中。
 
    視需要從 GitHub 複製程式碼。如果 Terraform 代码片段是端對端解決方案的一部分，建議您使用這個方法。
 3. 查看並修改範例參數，套用至您的環境。
@@ -448,7 +450,7 @@ resource "google_bigquery_connection" "default" {
    ```
 
    視需要修正設定。
-2. 執行下列指令，並在提示中輸入 `yes`，套用 Terraform 設定：
+2. 執行下列指令並在提示中輸入 `yes`，套用 Terraform 設定：
 
    ```
    terraform apply
@@ -479,7 +481,7 @@ resource "google_bigquery_connection" "default" {
 
 ### gcloud
 
-使用 [`gcloud projects add-iam-policy-binding`](https://docs.cloud.google.com/sdk/gcloud/reference/projects/add-iam-policy-binding?hl=zh-tw) 指令：
+使用 [`gcloud projects add-iam-policy-binding` 指令](https://docs.cloud.google.com/sdk/gcloud/reference/projects/add-iam-policy-binding?hl=zh-tw)：
 
 ```
 gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount:MEMBER' --role='roles/documentai.viewer' --condition=None
@@ -493,10 +495,10 @@ gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount
 
 如未授予權限，就會發生 `Permission denied` 錯誤。
 
-**注意：**如果在與物件表格所用 Cloud Storage 值區不同的專案中建立處理器，請按照下列方式授予服務帳戶 Identity and Access Management (IAM) 角色：
+**注意：**如果您在與物件表格所用 Cloud Storage 值區不同的專案中建立處理器，請按照下列方式授予服務帳戶 Identity and Access Management (IAM) 角色：
 
 * 在含有處理器的專案中，將 Document AI 檢視者角色授予服務帳戶。
-* 在包含 Cloud Storage bucket 的專案中，將「Storage 物件檢視者」角色授予服務帳戶。
+* 在包含 Cloud Storage bucket 的專案中，授予服務帳戶「Storage 物件檢視者」角色。
 
 ## 建立模型
 
@@ -521,7 +523,7 @@ OPTIONS (
 * `CONNECTION_ID`：連線 ID，例如 `myconnection`。
 
   在 Google Cloud 控制台中[查看連線詳細資料](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw#view-connections)時，連線 ID 是「連線 ID」中顯示的完整連線 ID 最後一個區段的值，例如 `projects/myproject/locations/connection_location/connections/myconnection`。
-* `PROCESSOR_ID`：文件處理器 ID。如要找出這個值，請[查看處理器詳細資料](https://docs.cloud.google.com/document-ai/docs/create-processor?hl=zh-tw#get-processor)，然後查看「Basic Information」(基本資訊) 區段中的「ID」列。
+* `PROCESSOR_ID`：文件處理器 ID。如要找出這個值，請[查看處理器詳細資料](https://docs.cloud.google.com/document-ai/docs/create-processor?hl=zh-tw#get-processor)，然後查看「基本資訊」部分中的「ID」列。
 
 **重要事項：** 即使連線位於預設專案中，您也必須指定連線的專案 ID。
 
@@ -550,7 +552,7 @@ FROM ML.PROCESS_DOCUMENT(
 * `DATASET_ID`：包含模型的資料集 ID。
 * `MODEL_NAME`：模型名稱。
 * `OBJECT_TABLE_NAME`：包含要處理文件 URI 的物件資料表名稱。
-* `PROCESS_OPTIONS`：指定如何處理文件的 JSON 設定。舉例來說，您可以使用這項功能，為版面配置剖析器指定文件分塊
+* `PROCESS_OPTIONS`：JSON 設定，用於指定如何處理文件。舉例來說，您可以使用這項功能，為版面配置剖析器指定文件分塊
 
 或者，使用 `ML.PROCESS_DOCUMENT` 處理部分文件：
 
@@ -581,7 +583,7 @@ FROM ML.PROCESS_DOCUMENT(
 
 **範例 1**
 
-下列範例使用[費用剖析器](https://docs.cloud.google.com/document-ai/docs/processors-list?hl=zh-tw#processor_expense-parser)處理 `documents` 資料表代表的文件：
+下列範例使用[費用剖析器](https://docs.cloud.google.com/document-ai/docs/processors-list?hl=zh-tw#processor_expense-parser)處理 `documents` 表格代表的文件：
 
 ```
 SELECT *
@@ -591,7 +593,7 @@ FROM ML.PROCESS_DOCUMENT(
 );
 ```
 
-這項查詢會傳回已剖析的費用報表，包括貨幣、總金額、收據日期和費用報表中的明細項目。`ml_process_document_result` 欄包含費用剖析器的原始輸出內容，`ml_process_document_status` 欄則包含文件處理作業傳回的任何錯誤。
+這項查詢會傳回已剖析的費用報告，包括貨幣、總金額、收據日期和費用報告中的明細項目。`ml_process_document_result` 欄包含費用剖析器的原始輸出內容，`ml_process_document_status` 欄則包含文件處理作業傳回的任何錯誤。
 
 **示例 2**
 
@@ -612,7 +614,7 @@ FROM
 
 * 如要進一步瞭解 BigQuery ML 中的模型推論，請參閱「[模型推論總覽](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/inference-overview?hl=zh-tw)」。
 * 如要進一步瞭解如何使用 Cloud AI API 執行 AI 工作，請參閱「[AI 應用程式總覽](https://docs.cloud.google.com/bigquery/docs/ai-application-overview?hl=zh-tw)」。
-* 如要進一步瞭解生成式 AI 模型支援的 SQL 陳述式和函式，請參閱[生成式 AI 模型的端對端使用者歷程](https://docs.cloud.google.com/bigquery/docs/e2e-journey-genai?hl=zh-tw)。
+* 如要進一步瞭解生成式 AI 模型支援的 SQL 陳述式和函式，請參閱[生成式 AI 模型端對端使用者歷程](https://docs.cloud.google.com/bigquery/docs/e2e-journey-genai?hl=zh-tw)。
 
 
 
@@ -621,11 +623,11 @@ FROM
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-12 (世界標準時間)。
+上次更新時間：2026-07-23 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-12 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-23 (世界標準時間)。"],[],[]]

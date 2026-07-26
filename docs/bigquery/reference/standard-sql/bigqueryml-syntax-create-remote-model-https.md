@@ -181,7 +181,7 @@ uses supervised tuning, you need to grant the
 [Vertex AI Service Agent role](/vertex-ai/docs/general/access-control#aiplatform.serviceAgent)
 to the connection's service account in the project where you create the model.
 Otherwise, you need to grant the
-[Vertex AI User role](/vertex-ai/docs/general/access-control#aiplatform.user)
+[Agent Platform User role](/gemini-enterprise-agent-platform/machine-learning/general/access-control#aiplatform.user)
 to the connection's service account in the project where you create the model.
 
 If you are using the remote model to analyze unstructured data from an
@@ -257,11 +257,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-07-17 UTC.
+Last updated 2026-07-21 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-07-17 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-07-21 UTC."],[],[]]

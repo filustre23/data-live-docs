@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-07-25T18:57+00:00_
+_Generated 2026-07-26T08:06+00:00_
 
-**9 sources, 4363 topics total**
+**9 sources, 4323 topics total**
 
 ## airflow
 
@@ -572,7 +572,7 @@ _549 topics_
 
 Upstream: <https://cloud.google.com/bigquery/docs/>
 
-_1528 topics_
+_1488 topics_
 
 - `bigquery/access-control`
 - `bigquery/access-control-basic-roles`
@@ -683,7 +683,6 @@ _1528 topics_
 - `bigquery/column-level-security-writes`
 - `bigquery/conditions`
 - `bigquery/config-yaml-translation`
-- `bigquery/configure-blms`
 - `bigquery/connect-databricks`
 - `bigquery/connect-to-alloydb`
 - `bigquery/connect-to-sap-datasphere`
@@ -1252,8 +1251,6 @@ _1528 topics_
 - `bigquery/reference/biglake/rest/v1/projects.locations.catalogs/list`
 - `bigquery/reference/biglake/rest/v1alpha1/projects.locations.catalogs`
 - `bigquery/reference/biglake/rest/v1alpha1/projects.locations.catalogs.databases`
-- `bigquery/reference/biglake/rest/v1alpha1/projects.locations.catalogs.databases.locks/check`
-- `bigquery/reference/biglake/rest/v1alpha1/projects.locations.catalogs.databases.locks/list`
 - `bigquery/reference/biglake/rest/v1alpha1/projects.locations.catalogs.databases.tables`
 - `bigquery/reference/biglake/rest/v1alpha1/projects.locations.catalogs.databases.tables/create`
 - `bigquery/reference/biglake/rest/v1alpha1/projects.locations.catalogs.databases.tables/delete`
@@ -1348,21 +1345,6 @@ _1528 topics_
 - `bigquery/reference/bigquerydatapolicy/rest/v2beta1/projects.locations.dataPolicies/setIamPolicy`
 - `bigquery/reference/bigquerydatapolicy/rest/v2beta1/projects.locations.dataPolicies/testIamPermissions`
 - `bigquery/reference/bq-cli-reference`
-- `bigquery/reference/data-transfer/partner/rest/v1/ListDataSourcesResponse`
-- `bigquery/reference/data-transfer/partner/rest/v1/ListTransferRunsResponse`
-- `bigquery/reference/data-transfer/partner/rest/v1/projects.locations.dataSourceDefinitions/delete`
-- `bigquery/reference/data-transfer/partner/rest/v1/projects.locations.dataSourceDefinitions/list`
-- `bigquery/reference/data-transfer/partner/rest/v1/projects.locations.dataSources/list`
-- `bigquery/reference/data-transfer/partner/rest/v1/projects.locations.transferConfigs.runs/patch`
-- `bigquery/reference/data-transfer/partner/rest/v1/projects.locations.transferConfigs.runs/startBigQueryJobs`
-- `bigquery/reference/data-transfer/partner/rest/v1/projects.locations.transferConfigs/delete`
-- `bigquery/reference/data-transfer/partner/rest/v1/projects.locations.transferConfigs/list`
-- `bigquery/reference/data-transfer/partner/rest/v1/projects.locations.transferConfigs/scheduleRuns`
-- `bigquery/reference/data-transfer/partner/rest/v1/projects.transferConfigs`
-- `bigquery/reference/data-transfer/partner/rest/v1/projects.transferConfigs.runs.transferLogs/list`
-- `bigquery/reference/data-transfer/partner/rest/v1/projects.transferConfigs.runs/list`
-- `bigquery/reference/data-transfer/partner/rest/v1/projects.transferConfigs/delete`
-- `bigquery/reference/data-transfer/partner/rpc/google.cloud.location`
 - `bigquery/reference/datatransfer/libraries`
 - `bigquery/reference/datatransfer/rest`
 - `bigquery/reference/datatransfer/rest/v1/CheckValidCredsResponse`
@@ -1815,15 +1797,7 @@ _1528 topics_
 - `bigquery/samples/bigquery-create-table-from-template`
 - `bigquery/samples/bigquery-create-table-partitioned`
 - `bigquery/samples/bigquery-create-table-range-partitioned`
-- `bigquery/samples/bigquery-create-table-snapshot`
 - `bigquery/samples/bigquery-create-view`
-- `bigquery/samples/bigquery-dataframes-clustering-model`
-- `bigquery/samples/bigquery-dataframes-load-data-from-bigquery`
-- `bigquery/samples/bigquery-dataframes-load-data-from-bigquery-job`
-- `bigquery/samples/bigquery-dataframes-load-data-from-csv`
-- `bigquery/samples/bigquery-dataframes-pandas-methods`
-- `bigquery/samples/bigquery-dataframes-regression-model`
-- `bigquery/samples/bigquery-dataframes-remote-function`
 - `bigquery/samples/bigquery-dataset-exists`
 - `bigquery/samples/bigquery-ddl-create-view`
 - `bigquery/samples/bigquery-delete-dataset`
@@ -1850,20 +1824,17 @@ _1528 topics_
 - `bigquery/samples/bigquery-insert-geography-wkt`
 - `bigquery/samples/bigquery-insert-geojson`
 - `bigquery/samples/bigquery-inserting-data-types`
-- `bigquery/samples/bigquery-jupyter-magic-gender-by-year`
 - `bigquery/samples/bigquery-label-dataset`
 - `bigquery/samples/bigquery-label-table`
 - `bigquery/samples/bigquery-list-datasets`
 - `bigquery/samples/bigquery-list-datasets-by-label`
 - `bigquery/samples/bigquery-list-jobs`
 - `bigquery/samples/bigquery-list-models`
-- `bigquery/samples/bigquery-list-models-streaming`
 - `bigquery/samples/bigquery-list-routines`
 - `bigquery/samples/bigquery-list-rows-dataframe`
 - `bigquery/samples/bigquery-list-tables`
 - `bigquery/samples/bigquery-load-from-file`
 - `bigquery/samples/bigquery-load-table-clustered`
-- `bigquery/samples/bigquery-load-table-dataframe`
 - `bigquery/samples/bigquery-load-table-gcs-avro`
 - `bigquery/samples/bigquery-load-table-gcs-avro-truncate`
 - `bigquery/samples/bigquery-load-table-gcs-csv`
@@ -1881,11 +1852,6 @@ _1528 topics_
 - `bigquery/samples/bigquery-migration-pandas-gbq-query`
 - `bigquery/samples/bigquery-migration-pandas-gbq-query-legacy`
 - `bigquery/samples/bigquery-nested-repeated-schema`
-- `bigquery/samples/bigquery-pandas-gbq-read-gbq-legacy`
-- `bigquery/samples/bigquery-pandas-gbq-read-gbq-simple`
-- `bigquery/samples/bigquery-pandas-gbq-to-gbq-simple`
-- `bigquery/samples/bigquery-pandas-public-data`
-- `bigquery/samples/bigquery-pandas-public-data-sandbox`
 - `bigquery/samples/bigquery-query`
 - `bigquery/samples/bigquery-query-batch`
 - `bigquery/samples/bigquery-query-clustered-table`
@@ -1901,7 +1867,6 @@ _1528 topics_
 - `bigquery/samples/bigquery-query-legacy`
 - `bigquery/samples/bigquery-query-legacy-large-results`
 - `bigquery/samples/bigquery-query-materialized-view`
-- `bigquery/samples/bigquery-query-natality-tutorial`
 - `bigquery/samples/bigquery-query-no-cache`
 - `bigquery/samples/bigquery-query-pagination`
 - `bigquery/samples/bigquery-query-params-arrays`
@@ -1912,8 +1877,6 @@ _1528 topics_
 - `bigquery/samples/bigquery-query-params-structs`
 - `bigquery/samples/bigquery-query-params-timestamps`
 - `bigquery/samples/bigquery-query-partitioned-table`
-- `bigquery/samples/bigquery-query-results-dataframe`
-- `bigquery/samples/bigquery-query-results-geodataframe`
 - `bigquery/samples/bigquery-query-script`
 - `bigquery/samples/bigquery-query-total-rows`
 - `bigquery/samples/bigquery-relax-column`
@@ -1946,8 +1909,6 @@ _1528 topics_
 - `bigquery/samples/bigqueryconnection-create-connection`
 - `bigquery/samples/bigqueryconnection-delete-connection`
 - `bigquery/samples/bigqueryconnection-get-connection`
-- `bigquery/samples/bigqueryconnection-list-connections`
-- `bigquery/samples/bigqueryconnection-quickstart`
 - `bigquery/samples/bigqueryconnection-share-connection`
 - `bigquery/samples/bigqueryconnection-update-connection`
 - `bigquery/samples/bigquerydatatransfer-copy-dataset`
@@ -2045,7 +2006,6 @@ _1528 topics_
 - `bigquery/time-travel`
 - `bigquery/timesfm-model`
 - `bigquery/timesfm-time-series-forecasting-tutorial`
-- `bigquery/tpc-differences`
 - `bigquery/transactions`
 - `bigquery/transcribe`
 - `bigquery/transfer-changes`
