@@ -38,15 +38,16 @@ Hex imports Cube and MetricFlow semantic model files stored in GitHub, while Sno
 
 ## Setting up Semantic Model Sync[​](#setting-up-semantic-model-sync "Direct link to Setting up Semantic Model Sync")
 
+caution
+
+The GitHub Action-based setup below is **deprecated** in favor of syncing [Hex](/docs/connect-to-data/semantic-models/semantic-authoring/semantic-authoring-overview#sync-from-github-optional), [Cube](/docs/connect-to-data/semantic-models/semantic-model-sync/cube) and [dbt MetricFlow](/docs/connect-to-data/semantic-models/semantic-model-sync/dbt-metricflow) semantic projects with the `hex context` CLI commands (or our [GitHub Action](https://github.com/hex-inc/action-context-toolkit)). See [Context Sync](/docs/agent-management/context-management/context-sync#migrating-from-semantic-model-syncs-github-action) for details.
+
+This does not apply to [Snowflake Semantic Views](/docs/connect-to-data/semantic-models/semantic-model-sync/snowflake-semantic-views), which continue to sync directly from Snowflake.
+
 info
 
 * Users will need the **Admin** workspace role in Hex to import semantic models
 * For Cube and MetricFlow based semantic models, users will need **Admin** role for the repository in GitHub containing the semantic model code
-
-tip
-
-* Cube and MetricFlow workflows use GitHub and it is possible to enable Semantic Model Sync with any Git host (i.e. BitBucket, GitLab) as long as the workflow is able to send a `.zip` file to Hex's [IngestSemanticModel API endpoint](/docs/api-integrations/api/reference).
-* The setup uses [GitHub actions](https://docs.github.com/en/actions). The equivalent functionality for Bitbucket and GitLab is [Bitbucket Pipelines](https://www.atlassian.com/software/bitbucket/features/pipelines) and [GitLab CI/CD](https://docs.gitlab.com/ci/).
 
 Creating a semantic project establishes a layer where logic is defined and reused throughout Hex. Users can point to existing semantic projects that contain definitions for models, dimensions, measures, and joins. Through Hex Semantic Model Sync, Hex imports the semantic concepts and enables users to explore using these predefined concepts.
 

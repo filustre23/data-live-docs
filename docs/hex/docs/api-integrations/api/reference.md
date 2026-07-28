@@ -1,6 +1,6 @@
 * postCreatePresignedUrl
-* postCreateProject
 * getListProjects
+* postCreateProject
 * getGetQueriedTables
 * patchEditProjectSharingCollections
 * patchEditProjectSharingOrgAndPublic
@@ -31,13 +31,13 @@
 * putUpsertGuideDraft
 * postPublishGuideDrafts
 * delDeleteGuideDraft
-* getGetChartImageFromLogic
 * getGetCell
 * patchUpdateCell
 * delDeleteCell
 * getGetCellOutput
 * postCreateCell
 * getListCells
+* getGetChartImageFromLogic
 * postExportProject
 * getGetChartImageFromRun
 * postCreateThread
@@ -155,150 +155,6 @@ Copy
 `{
 
 * "url": "string"
-
-}`
-
-## CreateProject
-
-Create a new project.
-
-Creates a new project in the workspace with the specified title.
-Optionally provide a description and project language.
-
-##### Authorizations:
-
-*bearerAuth*
-
-##### Request Body schema: application/json required
-
-|  |  |
-| --- | --- |
-| description | string |
-| title required | string |
-
-### Responses
-
-**201**
-
-**400**
-
-**403**
-
-**500**
-
-post/v1/projects
-
-https://app.hex.tech/api/v1/projects
-
-### Request samples
-
-* Payload
-
-Content type
-
-application/json
-
-Copy
-
-`{
-
-* "description": "string",
-* "title": "string"
-
-}`
-
-### Response samples
-
-* 201
-* 400
-* 403
-* 500
-
-Content type
-
-application/json
-
-Copy
-
- Expand all  Collapse all
-
-`{
-
-* "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
-* "title": "string",
-* "description": "string",
-* "type": "PROJECT",
-* "creator": {
-  + "email": "string"},
-* "owner": {
-  + "email": "string"},
-* "status": {
-  + "name": "string"},
-* "categories": [
-  + {
-    - "description": "string",
-    - "name": "string"}],
-* "reviews": {
-  + "required": true},
-* "analytics": {
-  + "publishedResultsUpdatedAt": "string",
-  + "lastViewedAt": "string",
-  + "appViews": {
-    - "lastThirtyDays": 0,
-    - "lastFourteenDays": 0,
-    - "lastSevenDays": 0,
-    - "allTime": 0}},
-* "lastEditedAt": "string",
-* "lastPublishedAt": "string",
-* "createdAt": "string",
-* "archivedAt": "string",
-* "trashedAt": "string",
-* "schedules": [
-  + {
-    - "cadence": "HOURLY",
-    - "enabled": true,
-    - "hourly": {
-      * "timezone": "string",
-      * "minute": 59},
-    - "daily": {
-      * "timezone": "string",
-      * "minute": 59,
-      * "hour": 23},
-    - "weekly": {
-      * "timezone": "string",
-      * "minute": 59,
-      * "hour": 23,
-      * "dayOfWeek": "SUNDAY"},
-    - "monthly": {
-      * "timezone": "string",
-      * "minute": 59,
-      * "hour": 23,
-      * "day": 1},
-    - "custom": {
-      * "timezone": "string",
-      * "cron": "string"}}],
-* "sharing": {
-  + "users": [
-    - {
-      * "access": "NONE",
-      * "user": {
-        + "email": "string"}}],
-  + "collections": [
-    - {
-      * "access": "NONE",
-      * "collection": {
-        + "name": "string"}}],
-  + "groups": [
-    - {
-      * "access": "NONE",
-      * "group": {
-        + "name": "string"}}],
-  + "workspace": {
-    - "access": "NONE"},
-  + "publicWeb": {
-    - "access": "NONE"},
-  + "support": {
-    - "access": "NONE"}}
 
 }`
 
@@ -437,6 +293,156 @@ Copy
 * "pagination": {
   + "after": "string",
   + "before": "string"}
+
+}`
+
+## CreateProject
+
+Create a new project in the workspace with the specified title, and optionally a description.
+
+This endpoint is subject to the following rate limits:
+
+* `hex-api`: Default rate limit group for the Hex API
+  + Max requests per minute may vary (default: 30)
+  + Max requests per hour may vary (default: 1800)
+
+##### Authorizations:
+
+*bearerAuth*
+
+##### Request Body schema: application/json required
+
+|  |  |
+| --- | --- |
+| title required | string  The title of the new project. |
+| description | string  An optional description for the new project. |
+
+### Responses
+
+**201** 
+
+Successful response
+
+**400** 
+
+Invalid input data
+
+**403** 
+
+Insufficient access
+
+post/v1/projects
+
+https://app.hex.tech/api/v1/projects
+
+### Request samples
+
+* Payload
+
+Content type
+
+application/json
+
+Copy
+
+`{
+
+* "title": "string",
+* "description": "string"
+
+}`
+
+### Response samples
+
+* 201
+* 400
+* 403
+
+Content type
+
+application/json
+
+Copy
+
+ Expand all  Collapse all
+
+`{
+
+* "id": "string",
+* "title": "string",
+* "description": "string",
+* "type": "PROJECT",
+* "creator": {
+  + "email": "string"},
+* "owner": {
+  + "email": "string"},
+* "status": {
+  + "name": "string"},
+* "categories": [
+  + {
+    - "name": "string",
+    - "description": "string"}],
+* "reviews": {
+  + "required": true},
+* "analytics": {
+  + "appViews": {
+    - "allTime": 0,
+    - "lastSevenDays": 0,
+    - "lastFourteenDays": 0,
+    - "lastThirtyDays": 0},
+  + "lastViewedAt": "string",
+  + "publishedResultsUpdatedAt": "string"},
+* "lastEditedAt": "string",
+* "lastPublishedAt": "string",
+* "createdAt": "string",
+* "archivedAt": "string",
+* "trashedAt": "string",
+* "schedules": [
+  + {
+    - "cadence": "HOURLY",
+    - "enabled": true,
+    - "hourly": {
+      * "minute": 0,
+      * "timezone": "string"},
+    - "daily": {
+      * "hour": 0,
+      * "minute": 0,
+      * "timezone": "string"},
+    - "weekly": {
+      * "dayOfWeek": "SUNDAY",
+      * "hour": 0,
+      * "minute": 0,
+      * "timezone": "string"},
+    - "monthly": {
+      * "day": 0,
+      * "hour": 0,
+      * "minute": 0,
+      * "timezone": "string"},
+    - "custom": {
+      * "cron": "string",
+      * "timezone": "string"}}],
+* "sharing": {
+  + "users": [
+    - {
+      * "user": {
+        + "email": "string"},
+      * "access": "NONE"}],
+  + "collections": [
+    - {
+      * "collection": {
+        + "name": "string"},
+      * "access": "NONE"}],
+  + "groups": [
+    - {
+      * "group": {
+        + "name": "string"},
+      * "access": "NONE"}],
+  + "workspace": {
+    - "access": "NONE"},
+  + "publicWeb": {
+    - "access": "NONE"},
+  + "support": {
+    - "access": "NONE"}}
 
 }`
 
@@ -1915,7 +1921,7 @@ This endpoint is subject to the following rate limits:
 | inputParams | object  Published app input values keyed by variable name. |
 | dryRun | boolean  Default:  false  Validate the request without starting a run. |
 | updateCache | boolean  `updateCache` is deprecated. Please use the new `updatePublishedResults` and `useCachedSqlResults` parameters instead. When true, published results are updated and cached SQL results are not used. When false, published results are not updated and cached SQL results may be used. |
-| notifications | Array of objects |
+| notifications | Array of objects (ProjectRunNotification) |
 | updatePublishedResults | boolean  Default:  false  Update the published app with the run results. |
 | useCachedSqlResults | boolean  Default:  true  Allow SQL cells to reuse cached results. |
 | viewId | string  Use the inputs from this saved view. |
@@ -2518,4 +2524,4 @@ Copy
     - "members": "NONE"},
   + "groups": {
     - "upsert": [
-      * <`
+      * {`

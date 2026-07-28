@@ -18,6 +18,10 @@ Connect and manage Semantic Models in the Context Studio.](/docs/agent-managemen
 
 Connect to git repositories to provide the Hex Agent with richer context](/docs/agent-management/context-management/reference-repositories)
 
+[## 📄️Context Sync
+
+Programmatically sync guides and semantic projects into Hex from an external source of truth, such as a git repository.](/docs/agent-management/context-management/context-sync)
+
 [## 📄️External Apps
 
 Connect Hex's agent via MCP to external apps like Notion, Linear, or your own custom MCP-compatible tools.](/docs/api-integrations/external-apps)

@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-07-28T07:55+00:00_
+_Generated 2026-07-28T13:48+00:00_
 
-**9 sources, 4329 topics total**
+**9 sources, 4330 topics total**
 
 ## airflow
 
@@ -3533,7 +3533,7 @@ _154 topics_
 
 Upstream: <https://learn.hex.tech/>
 
-_371 topics_
+_372 topics_
 
 - `hex/changelog`
 - `hex/changelog/2020-12-17`
@@ -3682,6 +3682,7 @@ _371 topics_
 - `hex/docs/agent-management`
 - `hex/docs/agent-management/agent-personalization`
 - `hex/docs/agent-management/context-management`
+- `hex/docs/agent-management/context-management/context-sync`
 - `hex/docs/agent-management/context-management/endorsements-in-context-studio`
 - `hex/docs/agent-management/context-management/guides`
 - `hex/docs/agent-management/context-management/models`
