@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-07-28T01:17+00:00_
+_Generated 2026-07-28T07:55+00:00_
 
-**9 sources, 4323 topics total**
+**9 sources, 4329 topics total**
 
 ## airflow
 
@@ -2246,7 +2246,7 @@ _172 topics_
 
 Upstream: <https://docs.getdbt.com/docs/>
 
-_1117 topics_
+_1119 topics_
 
 - `dbt-core/best-practices/best-practice-workflows`
 - `dbt-core/best-practices/clone-incremental-models`
@@ -2348,6 +2348,12 @@ _1117 topics_
 - `dbt-core/docs/build/fill-nulls-advanced`
 - `dbt-core/docs/build/groups`
 - `dbt-core/docs/build/hooks-operations`
+- `dbt-core/docs/build/iceberg/about-catalogs`
+- `dbt-core/docs/build/iceberg/adapters/bigquery-iceberg-support`
+- `dbt-core/docs/build/iceberg/adapters/databricks-iceberg-support`
+- `dbt-core/docs/build/iceberg/adapters/snowflake-iceberg-support`
+- `dbt-core/docs/build/iceberg/apache-iceberg-support`
+- `dbt-core/docs/build/iceberg/catalogs-yml`
 - `dbt-core/docs/build/incremental-microbatch`
 - `dbt-core/docs/build/incremental-models`
 - `dbt-core/docs/build/incremental-models-overview`
@@ -2621,16 +2627,12 @@ _1117 topics_
 - `dbt-core/docs/local/install-dbt-core-2-oss`
 - `dbt-core/docs/local/profiles.yml`
 - `dbt-core/docs/mesh/about-mesh`
+- `dbt-core/docs/mesh/cross-platform-mesh`
 - `dbt-core/docs/mesh/govern/about-model-governance`
 - `dbt-core/docs/mesh/govern/model-access`
 - `dbt-core/docs/mesh/govern/model-contracts`
 - `dbt-core/docs/mesh/govern/model-versions`
 - `dbt-core/docs/mesh/govern/project-dependencies`
-- `dbt-core/docs/mesh/iceberg/about-catalogs`
-- `dbt-core/docs/mesh/iceberg/apache-iceberg-support`
-- `dbt-core/docs/mesh/iceberg/bigquery-iceberg-support`
-- `dbt-core/docs/mesh/iceberg/databricks-iceberg-support`
-- `dbt-core/docs/mesh/iceberg/snowflake-iceberg-support`
 - `dbt-core/docs/optimize-builds`
 - `dbt-core/docs/platform-integrations/avail-sl-integrations`
 - `dbt-core/docs/platform-integrations/downstream-exposures`
@@ -3909,7 +3911,7 @@ _371 topics_
 
 Upstream: <https://openai.github.io/openai-agents-python/>
 
-_382 topics_
+_386 topics_
 
 - `openai-agents/agents`
 - `openai-agents/config`
@@ -4007,6 +4009,7 @@ _382 topics_
 - `openai-agents/ref/agent_tool_state`
 - `openai-agents/ref/apply_diff`
 - `openai-agents/ref/computer`
+- `openai-agents/ref/decorators`
 - `openai-agents/ref/editor`
 - `openai-agents/ref/exceptions`
 - `openai-agents/ref/extensions/experimental/codex/codex`
@@ -4047,6 +4050,7 @@ _382 topics_
 - `openai-agents/ref/extensions/sandbox/modal/sandbox`
 - `openai-agents/ref/extensions/sandbox/runloop/mounts`
 - `openai-agents/ref/extensions/sandbox/runloop/sandbox`
+- `openai-agents/ref/extensions/sandbox/vercel/mounts`
 - `openai-agents/ref/extensions/sandbox/vercel/sandbox`
 - `openai-agents/ref/extensions/tool_output_trimmer`
 - `openai-agents/ref/extensions/visualization`
@@ -4118,6 +4122,7 @@ _382 topics_
 - `openai-agents/ref/run_internal/session_persistence`
 - `openai-agents/ref/run_internal/streaming`
 - `openai-agents/ref/run_internal/tool_actions`
+- `openai-agents/ref/run_internal/tool_caller`
 - `openai-agents/ref/run_internal/tool_execution`
 - `openai-agents/ref/run_internal/tool_planning`
 - `openai-agents/ref/run_internal/tool_use_tracker`
@@ -4178,6 +4183,7 @@ _382 topics_
 - `openai-agents/ref/sandbox/session/manifest_application`
 - `openai-agents/ref/sandbox/session/manifest_ops`
 - `openai-agents/ref/sandbox/session/mount_lifecycle`
+- `openai-agents/ref/sandbox/session/pty_output`
 - `openai-agents/ref/sandbox/session/pty_types`
 - `openai-agents/ref/sandbox/session/runtime_helpers`
 - `openai-agents/ref/sandbox/session/sandbox_client`
