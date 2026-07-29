@@ -12,7 +12,7 @@ To ensure everyone can use AI, Hex awards monthly credit grants to Editor and Ex
 
 info
 
-* Customers with annual contracts who wish to purchase add-on credits can contact [[email protected]](/cdn-cgi/l/email-protection#7f0c1e131a0c3f171a07510b1a1c17) to update their contract.
+* Customers with annual contracts who wish to purchase add-on credits can contact [[email protected]](/cdn-cgi/l/email-protection#196a78757c6a59717c61376d7c7a71) to update their contract.
 
 ## Credit Consumption[​](#credit-consumption "Direct link to Credit Consumption")
 
