@@ -294,7 +294,7 @@ Raises the mathematical constant **e** to the power of `power`.
 
 > `number`
 >
-> > `Exp(1)` → 2.718281828459045
+> > `Exp(1)`   → 2.718281828459045
 
 ##### Round(number)[​](#roundnumber "Direct link to Round(number)")
 

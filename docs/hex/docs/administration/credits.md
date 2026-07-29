@@ -12,7 +12,7 @@ To ensure everyone can use AI, Hex awards monthly credit grants to Editor and Ex
 
 info
 
-* Customers with annual contracts who wish to purchase add-on credits can contact [[email protected]](/cdn-cgi/l/email-protection#b6c5d7dad3c5f6ded3ce98c2d3d5de) to update their contract.
+* Customers with annual contracts who wish to purchase add-on credits can contact [[email protected]](/cdn-cgi/l/email-protection#7f0c1e131a0c3f171a07510b1a1c17) to update their contract.
 
 ## Credit Consumption[​](#credit-consumption "Direct link to Credit Consumption")
 
@@ -99,6 +99,7 @@ Admins can control how many add-on credits each user is allowed by applying a cr
 
 info
 
+* Available on Team and Enterprise [plans](https://hex.tech/pricing).
 * Credit allocations will always respect your workspace credit pool settings. Regardless of their allocation, users will be limited to the auto top-up [spend limit](#spend-limits) or to the workspace credit pool balance if [auto top-ups](#auto-top-ups) are disabled.
 * Credit allocations are respected in order of User > Group (highest wins) > Workspace Default
 

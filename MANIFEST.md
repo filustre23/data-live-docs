@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-07-28T13:48+00:00_
+_Generated 2026-07-29T01:14+00:00_
 
-**9 sources, 4330 topics total**
+**9 sources, 4333 topics total**
 
 ## airflow
 
@@ -2067,7 +2067,7 @@ _1488 topics_
 
 Upstream: <https://code.claude.com/docs/en/>
 
-_172 topics_
+_173 topics_
 
 - `claude-code/accessibility`
 - `claude-code/admin-setup`
@@ -2127,6 +2127,7 @@ _172 topics_
 - `claude-code/claude-platform-on-aws`
 - `claude-code/claude-security`
 - `claude-code/cli-reference`
+- `claude-code/cloud-environments`
 - `claude-code/code-review`
 - `claude-code/commands`
 - `claude-code/common-workflows`
@@ -3372,7 +3373,7 @@ _1119 topics_
 
 Upstream: <https://fastapi.tiangolo.com/>
 
-_154 topics_
+_155 topics_
 
 - `fastapi/_llm-test`
 - `fastapi/about/index`
@@ -3466,6 +3467,7 @@ _154 topics_
 - `fastapi/reference/response`
 - `fastapi/reference/responses`
 - `fastapi/reference/security/index`
+- `fastapi/reference/sse`
 - `fastapi/reference/staticfiles`
 - `fastapi/reference/status`
 - `fastapi/reference/templating`
@@ -3533,7 +3535,7 @@ _154 topics_
 
 Upstream: <https://learn.hex.tech/>
 
-_372 topics_
+_373 topics_
 
 - `hex/changelog`
 - `hex/changelog/2020-12-17`
@@ -3688,6 +3690,7 @@ _372 topics_
 - `hex/docs/agent-management/context-management/models`
 - `hex/docs/agent-management/context-management/reference-repositories`
 - `hex/docs/agent-management/context-studio`
+- `hex/docs/agent-management/evals`
 - `hex/docs/agent-management/observability`
 - `hex/docs/agent-management/suggestions`
 - `hex/docs/api-integrations`

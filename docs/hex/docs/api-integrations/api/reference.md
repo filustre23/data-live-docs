@@ -2523,5 +2523,4 @@ Copy
     - "guests": "NONE",
     - "members": "NONE"},
   + "groups": {
-    - "upsert": [
-      * {`
+    - "upsert": [`

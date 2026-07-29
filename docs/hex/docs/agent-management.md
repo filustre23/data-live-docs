@@ -12,6 +12,10 @@ Understand how Agents are being used across your workspace.](/docs/agent-managem
 
 AI-recommended improvements to your workspace context, based on patterns in agent conversations.](/docs/agent-management/suggestions)
 
+[## 📄️Evals
+
+Define eval suites and rubrics to assess agent responses and track regressions and improvements over time.](/docs/agent-management/evals)
+
 [## 🗃Context Management
 
 6 items](/docs/agent-management/context-management)

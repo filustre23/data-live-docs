@@ -94,10 +94,10 @@ Workspace Admins can access every non-[Sensitive](/docs/explore-data/threads#sen
 
 info
 
-Credit consumption data is available in the Context Studio, providing insight for context curation guidance. Note that this is not a billing source of truth — the [**Settings > Billing and credits**](/docs/administration/credits) page should be used as the authoritative source for credit consumption. Differences between credit usage information in the Context Studio vs **Billing and credits** settings include:
+Credit consumption data is available in the Context Studio, providing insight for context curation guidance. Note that this is not a billing source of truth — the [**Settings > Credits**](/docs/administration/credits) page should be used as the authoritative source for credit consumption. Differences between credit usage information in the Context Studio vs **Credits** settings include:
 
-* Date fields in the Context Studio are based on Thread creation date. Credits consumed by messages added later are reflected under the original Thread-creation date in Context Studio, but may appear in a later billing cycle in **Billing and credits**
-* Deleted Threads do not appear in the Context Studio. Thus, Context Studio credit totals may be missing deleted Thread consumption that is accounted for in **Billing and credits**
+* Date fields in the Context Studio are based on Thread creation date. Credits consumed by messages added later are reflected under the original Thread-creation date in Context Studio, but may appear in a later billing cycle in **Credits**
+* Deleted Threads do not appear in the Context Studio. Thus, Context Studio credit totals may be missing deleted Thread consumption that is accounted for in **Credits**
 
 ## Next steps[​](#next-steps "Direct link to Next steps")
 
