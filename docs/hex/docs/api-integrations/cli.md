@@ -26,7 +26,7 @@ brew trust --tap hex-inc/hex-cli
 
 
 
-brew install hex
+brew install hex-inc/hex-cli/hex
 ```
 
 Alternatively, you can manually install the CLI using the following command:
@@ -229,7 +229,7 @@ AI agents that can interact with your command line, such as Claude Code, can be 
 
 ## Bugs & issues[​](#bugs--issues "Direct link to Bugs & issues")
 
-Please contact [[email protected]](/cdn-cgi/l/email-protection#4734323737283533072f223f693322242f) if you encounter any bugs, or other issues.
+Please contact [[email protected]](/cdn-cgi/l/email-protection#88fbfdf8f8e7fafcc8e0edf0a6fcedebe0) if you encounter any bugs, or other issues.
 
 #### On this page
 

@@ -30,13 +30,15 @@ Because the Hex Agent uses [Threads](/docs/explore-data/threads) as its underlyi
 
 To answer a user's question, the agent searches across all connections, databases, schemas, and tables that are [included for AI](/docs/explore-data/data-browser#exclusion-and-endorsement) and that the user has access to. If your workspace has a [default data connection](/tutorials/ai-best-practices/setup-for-ai-agents#setup-the-default-data-connection), the agent searches that connection first.
 
-Admins can restrict which data connections the Hex Agent may use when Threads are started from external integrations, including Slack and the [Hex MCP Server](/docs/api-integrations/mcp-server), under **Settings** → **Integrations** → **Agent integration data connection access**, or on each connection’s **Access** tab under **Settings** → **Data sources**. For more information, see [Hex Agent data connection access](/docs/api-integrations/hex-agent-data-connection-access).
+Admins can mark data connections as **Sensitive** so the Hex Agent treats them carefully in Threads started from external integrations, including Slack and the [Hex MCP Server](/docs/api-integrations/mcp-server). Configure this under **Settings** → **Integrations** → **Configure sensitive data connections for external integrations**, or on each connection's **Access** tab under **Settings** → **Data sources**. For more information, see [Sensitive data connections for external integrations](/docs/api-integrations/hex-agent-data-connection-access).
+
+When **Hex Agent in Slack** is enabled, Admins can also choose how the agent treats sensitive data connections under **Settings** → **Integrations**:
+
+* **Reply privately** — The agent answers the question using the sensitive connection, posts a public reply with a link to Hex, and sends the full response as a private Slack message that only the requester can see. The requester can share that response with the Slack thread.
+* **Reply with a link** — The agent answers the question using the sensitive connection, but replies in Slack with only a link to Hex. Anyone who opens the link must authenticate to view the response.
+* **Do not use sensitive connections** — The agent does not use sensitive connections when answering questions in Slack.
 
 For best practices on descriptions, exclusions, and permissions, see [Optimizing your data connections for the Hex Agent](/tutorials/ai-best-practices/optimizing-data-connections-for-agents).
-
-tip
-
-Threads leveraging an OAuth [data connection](/docs/connect-to-data/data-connections/oauth-data-connections) will send results to public channels, and will leverage the OAuth credentials of the user asking the question.
 
 ## Add Hex Agent to Slack[​](#add-hex-agent-to-slack "Direct link to Add Hex Agent to Slack")
 
@@ -65,7 +67,7 @@ To ask a follow-up question, just reply in the same Slack thread! If the message
 * **Create dedicated Slack channels**: Separate channels for different data domains (e.g., #revenue-insights, #product-analytics, #marketing-metrics) with appropriate permissions and pinned context about available data.
 * **Question effectively**: Be specific with time ranges, segments, and metrics ("show Q4 Enterprise ARR by Region" not "show revenue"). Follow up by replying with **@Hex** in the same Slack thread to maintain context.
 * **Set clear boundaries**: Hex Agent shines when used for quick insights and explorations. Complex analysis or sensitive customer-specific queries should move to full Hex projects.
-* **Brief teams on data visibility**: Ensure users understand that data queried through Slack (and, by extension, public Threads) will appear in Slack channels. Use private channels for sensitive data.
+* **Brief teams on data visibility**: Ensure users understand that data queried through Slack can appear in Slack channels, unless Admins have configured [sensitive connection handling](#hex-agent-data-connection-permissions) to reply with a link or privately. Use private channels when channel-wide visibility is a concern.
 * **Monitor for patterns**: Review common questions often to identify patterns that should become [Semantic models](/docs/connect-to-data/semantic-models/intro-to-semantic-models) or [Workspace rules](/docs/agent-management/context-management/guides).
 
 #### On this page

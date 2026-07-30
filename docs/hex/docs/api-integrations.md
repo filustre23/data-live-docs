@@ -16,9 +16,9 @@ Connect Hex's agent via MCP to external apps like Notion, Linear, or your own cu
 
 Receive Hex notifications directly in Slack and deliver scheduled run notifications from your Hex projects to Slack channels.](/docs/api-integrations/slack)
 
-[## 📄️Integration data connection access
+[## 📄️Sensitive data connections
 
-Restrict which data connections the Hex Agent may use in Threads started from Slack, MCP, and other external clients.](/docs/api-integrations/hex-agent-data-connection-access)
+Mark data connections as sensitive to control how the Hex Agent uses them in Slack, MCP, and other external clients.](/docs/api-integrations/hex-agent-data-connection-access)
 
 [## 🗃Public API
 

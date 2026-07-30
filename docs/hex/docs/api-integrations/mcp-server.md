@@ -28,7 +28,7 @@ The Hex MCP server can only answer text-based prompts. It is not currently possi
 
 Threads created through the Hex MCP server behave the same as [Threads in the Hex app](/docs/explore-data/threads#data-sources): the agent automatically selects among the data connections the user has access to in order to answer a question. If your workspace has a [default data connection](/tutorials/ai-best-practices/setup-for-ai-agents#setup-the-default-data-connection), the agent searches that connection first.
 
-Admins can restrict which data connections the Hex Agent may use when Threads are started from external integrations, including the Hex MCP server and [Hex Agent in Slack](/docs/share-insights/hex-agent-in-slack), under **Settings** → **Integrations** → **Agent integration data connection access**, or on each connection's **Access** tab under **Settings** → **Data sources**. For more information, see [Hex Agent data connection access](/docs/api-integrations/hex-agent-data-connection-access).
+Admins can mark data connections as **Sensitive** so the Hex Agent treats them carefully in Threads started from external integrations, including the Hex MCP server and [Hex Agent in Slack](/docs/share-insights/hex-agent-in-slack). The MCP server never uses sensitive connections. Configure this under **Settings** → **Integrations** → **Configure sensitive data connections for external integrations**, or on each connection's **Access** tab under **Settings** → **Data sources**. For more information, see [Sensitive data connections for external integrations](/docs/api-integrations/hex-agent-data-connection-access).
 
 For best practices on descriptions, exclusions, and permissions, see [Optimizing your data connections for the Hex Agent](/tutorials/ai-best-practices/optimizing-data-connections-for-agents).
 
@@ -272,7 +272,7 @@ Create a new Hex [Thread](/docs/explore-data/threads) to ask questions about you
 
 info
 
-* MCP Threads can make use of any data connections that you have access to and are [accessible from external integrations](/docs/api-integrations/hex-agent-data-connection-access)—you do not need to pick a connection in the client. See [Data sources in Threads](/docs/explore-data/threads#data-sources).
+* MCP Threads can make use of any [non-sensitive](/docs/api-integrations/hex-agent-data-connection-access) data connections that you have access to—you do not need to pick a connection in the client. See [Data sources in Threads](/docs/explore-data/threads#data-sources).
 * Threads typically take several minutes to complete as the agent analyzes your data.
 
 ### Get an existing Thread[​](#get-an-existing-thread "Direct link to Get an existing Thread")

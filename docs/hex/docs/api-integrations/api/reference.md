@@ -10,10 +10,10 @@
 * getGetProject
 * postIngestSemanticProject
 * patchUpdateSemanticProject
-* getGetRunStatus
-* delCancelRun
 * getGetProjectRuns
 * postRunProject
+* delCancelRun
+* getGetRunStatus
 * getGetGroup
 * delDeleteGroup
 * patchEditGroup
@@ -1668,139 +1668,6 @@ Copy
 
 }`
 
-## GetRunStatus
-
-Get the status of a project run.
-
-##### Authorizations:
-
-*bearerAuth*
-
-##### path Parameters
-
-|  |  |
-| --- | --- |
-| projectId required | string <uuid>  (ProjectId) ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}...Show pattern  Unique ID for a Hex project. This can be found in the Variables side bar of the Logic View of a project, or by visiting the Project, and copying the UUID after `hex` in the URL. |
-| runId required | string <uuid>  (InputRunId) ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}...Show pattern  Unique ID for a run of a Hex project. This ID is part of the response returned by the RunProject endpoint. The GetProjectRuns endpoint can also be used to find the specific runs for a project. |
-
-##### header Parameters
-
-|  |  |
-| --- | --- |
-| enable-expanded-stats | string |
-
-### Responses
-
-**200**
-
-**400**
-
-**403**
-
-**422**
-
-get/v1/projects/{projectId}/runs/{runId}
-
-https://app.hex.tech/api/v1/projects/{projectId}/runs/{runId}
-
-### Response samples
-
-* 200
-* 400
-* 403
-* 422
-
-Content type
-
-application/json
-
-Copy
-
- Expand all  Collapse all
-
-`{
-
-* "projectId": "5a8591dd-4039-49df-9202-96385ba3eff8",
-* "projectVersion": 0,
-* "runId": "78c33d18-170c-44d3-a227-b3194f134f73",
-* "runUrl": "string",
-* "status": "PENDING",
-* "runTrigger": "API",
-* "startTime": "2019-08-24T14:15:22Z",
-* "endTime": "2019-08-24T14:15:22Z",
-* "elapsedTime": 0.1,
-* "flagConfigOverride": "string",
-* "traceId": "string",
-* "notifications": [
-  + {
-    - "type": "SUCCESS",
-    - "subject": "string",
-    - "body": "string",
-    - "recipientType": "USER",
-    - "includeSuccessScreenshot": true,
-    - "screenshotFormat": [
-      * "png"],
-    - "recipient": {
-      * "id": "string",
-      * "name": "string",
-      * "isPrivate": true}}],
-* "stateEvents": [
-  + {
-    - "type": "string",
-    - "value": "string",
-    - "timestamp": "string"}]
-
-}`
-
-## CancelRun
-
-Cancel a project run.
-
-##### Authorizations:
-
-*bearerAuth*
-
-##### path Parameters
-
-|  |  |
-| --- | --- |
-| projectId required | string <uuid>  (ProjectId) ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}...Show pattern  Unique ID for a Hex project. This can be found in the Variables side bar of the Logic View of a project, or by visiting the Project, and copying the UUID after `hex` in the URL. |
-| runId required | string <uuid>  (InputRunId) ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}...Show pattern  Unique ID for a run of a Hex project. This ID is part of the response returned by the RunProject endpoint. The GetProjectRuns endpoint can also be used to find the specific runs for a project. |
-
-### Responses
-
-**204**
-
-**400**
-
-**403**
-
-**422**
-
-delete/v1/projects/{projectId}/runs/{runId}
-
-https://app.hex.tech/api/v1/projects/{projectId}/runs/{runId}
-
-### Response samples
-
-* 400
-* 403
-* 422
-
-Content type
-
-application/json
-
-Copy
-
-`{
-
-* "details": "string",
-* "traceId": "string",
-* "reason": "string"
-
-}`
-
 ## GetProjectRuns
 
 Get the status of runs of a project.
@@ -1823,7 +1690,7 @@ Use the `runTriggerFilter` parameter to filter to a specific type.
 | --- | --- |
 | limit | integer <int32>  (PageSize)   [ 1 .. 100 ]  Default:  "25"  Number of results to fetch per page for paginated requests |
 | offset | integer <int32>  (Offset)   >= 0  Default:  "0"  Offset for paginated requests |
-| statusFilter | string (ProjectRunStatus)  Enum: "PENDING" "RUNNING" "ERRORED" "COMPLETED" "KILLED" "UNABLE\_TO\_ALLOCATE\_KERNEL"  Current status of a project run |
+| statusFilter | string (ProjectRunStatus)  Enum: "PENDING" "RUNNING" "ERRORED" "COMPLETED" "KILLED" "UNABLE\_TO\_ALLOCATE\_KERNEL" |
 | runTriggerFilter | string (RunTypeFilter)  Enum: "API" "SCHEDULED" "APP\_REFRESH" "ALL"  Filter by how the run was triggered Valid values: `API`, `SCHEDULED`, `APP_REFRESH` |
 
 ### Responses
@@ -2027,6 +1894,153 @@ Copy
       * "id": "string",
       * "name": "string",
       * "isPrivate": true}}]
+
+}`
+
+## CancelRun
+
+Cancel a project run.
+
+##### Authorizations:
+
+*bearerAuth*
+
+##### path Parameters
+
+|  |  |
+| --- | --- |
+| projectId required | string <uuid>  (ProjectId) ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}...Show pattern  Unique ID for a Hex project. This can be found in the Variables side bar of the Logic View of a project, or by visiting the Project, and copying the UUID after `hex` in the URL. |
+| runId required | string <uuid>  (InputRunId) ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}...Show pattern  Unique ID for a run of a Hex project. This ID is part of the response returned by the RunProject endpoint. The GetProjectRuns endpoint can also be used to find the specific runs for a project. |
+
+### Responses
+
+**204**
+
+**400**
+
+**403**
+
+**422**
+
+delete/v1/projects/{projectId}/runs/{runId}
+
+https://app.hex.tech/api/v1/projects/{projectId}/runs/{runId}
+
+### Response samples
+
+* 400
+* 403
+* 422
+
+Content type
+
+application/json
+
+Copy
+
+`{
+
+* "details": "string",
+* "traceId": "string",
+* "reason": "string"
+
+}`
+
+## GetRunStatus
+
+Get the status of a project run.
+
+This endpoint is subject to the following rate limits:
+
+* `hex-api`: Default rate limit group for the Hex API
+  + Max requests per minute may vary (default: 30)
+  + Max requests per hour may vary (default: 1800)
+
+##### Authorizations:
+
+*bearerAuth*
+
+##### path Parameters
+
+|  |  |
+| --- | --- |
+| projectId required | string  The project the run belongs to. |
+| runId required | string  The run to retrieve. |
+
+##### header Parameters
+
+|  |  |
+| --- | --- |
+| enable-expanded-stats | string  Include state events and the run's flag configuration override. Set to `true` to enable. |
+
+### Responses
+
+**200** 
+
+Successful response
+
+**400** 
+
+Invalid input data
+
+**403** 
+
+Insufficient access
+
+**422** 
+
+Unprocessable content
+
+get/v1/projects/{projectId}/runs/{runId}
+
+https://app.hex.tech/api/v1/projects/{projectId}/runs/{runId}
+
+### Response samples
+
+* 200
+* 400
+* 403
+* 422
+
+Content type
+
+application/json
+
+Copy
+
+ Expand all  Collapse all
+
+`{
+
+* "projectId": "string",
+* "projectVersion": 0,
+* "runId": "string",
+* "runUrl": "string",
+* "status": "PENDING",
+* "runTrigger": "API",
+* "startTime": "string",
+* "endTime": "string",
+* "elapsedTime": 0,
+* "flagConfigOverride": "string",
+* "traceId": "string",
+* "notifications": [
+  + {
+    - "type": "SUCCESS",
+    - "subject": "string",
+    - "body": "string",
+    - "recipientType": "USER",
+    - "includeSuccessScreenshot": true,
+    - "screenshotFormat": [
+      * "png"],
+    - "recipient": {
+      * "id": "string",
+      * "name": "string",
+      * "isPrivate": true}}],
+* "stateEvents": [
+  + {
+    - "type": "string",
+    - "value": "string",
+    - "timestamp": "string"}]
 
 }`
 
@@ -2523,4 +2537,7 @@ Copy
     - "guests": "NONE",
     - "members": "NONE"},
   + "groups": {
-    - "upsert": [`
+    - "upsert": [
+      * {
+        + "access": "NONE",
+        + "group": {`
