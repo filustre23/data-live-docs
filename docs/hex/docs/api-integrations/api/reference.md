@@ -24,13 +24,13 @@
 * getListDataConnections
 * postCreateDataConnection
 * patchUpdateDataConnectionSchema
+* putUpsertGuideDraft
+* postPublishGuideDrafts
+* delDeleteGuideDraft
 * getGetCollection
 * patchEditCollection
 * getListCollections
 * postCreateCollection
-* putUpsertGuideDraft
-* postPublishGuideDrafts
-* delDeleteGuideDraft
 * getGetCell
 * patchUpdateCell
 * delDeleteCell
@@ -2013,7 +2013,7 @@ Copy
 `{
 
 * "projectId": "string",
-* "projectVersion": 0,
+* "projectVersion": "string",
 * "runId": "string",
 * "runUrl": "string",
 * "status": "PENDING",

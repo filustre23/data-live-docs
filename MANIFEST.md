@@ -1,6 +1,6 @@
 # data-live-docs — index
 
-_Generated 2026-07-30T13:43+00:00_
+_Generated 2026-07-31T01:15+00:00_
 
 **9 sources, 4336 topics total**
 
@@ -2371,7 +2371,7 @@ _1121 topics_
 - `dbt-core/docs/build/metrics-overview`
 - `dbt-core/docs/build/models`
 - `dbt-core/docs/build/organize-your-outputs`
-- `dbt-core/docs/build/osi-semantic-models`
+- `dbt-core/docs/build/ossie-semantic-models`
 - `dbt-core/docs/build/packages`
 - `dbt-core/docs/build/parallel-batch-execution`
 - `dbt-core/docs/build/project-variables`

@@ -7,7 +7,7 @@ Measure how reliably the Hex agent answers questions, and track regressions and 
 info
 
 * Available on the Team and Enterprise [plans](https://hex.tech/pricing/).
-* Users need the Admin or Manager workspace role to create and view evals.
+* Users need the Editor, Manager or Admin workspace role to create and view evals.
 
 Evals let you programmatically run [threads](/docs/explore-data/threads) with the Hex agent and grade each response against rubrics you define. You can use evals to:
 
@@ -33,7 +33,7 @@ An **eval suite** holds one or more **cases**, each graded by one or more **rubr
 Before you begin, make sure:
 
 * The [Hex CLI](/docs/api-integrations/cli) is installed and authenticated
-* You have an **Admin** or **Manager** role in the workspace
+* You have an **Admin**, **Manager**, or **Editor** role in the workspace
 * You have access to any resources referenced by the eval
 
 The example below defines a single case with one rubric — enough to create and run your first suite. See [Write an eval suite](#write-an-eval-suite) for the full schema.

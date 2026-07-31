@@ -125,7 +125,7 @@ Mirrored from <https://docs.getdbt.com/docs/>. Do not edit by hand — regenerat
 - docs/build/metrics-overview
 - docs/build/models
 - docs/build/organize-your-outputs
-- docs/build/osi-semantic-models
+- docs/build/ossie-semantic-models
 - docs/build/packages
 - docs/build/parallel-batch-execution
 - docs/build/project-variables
