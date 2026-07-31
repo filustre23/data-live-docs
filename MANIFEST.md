@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-07-31T01:15+00:00_
+_Generated 2026-07-31T08:07+00:00_
 
-**9 sources, 4336 topics total**
+**9 sources, 4337 topics total**
 
 ## airflow
 
@@ -2248,7 +2248,7 @@ _174 topics_
 
 Upstream: <https://docs.getdbt.com/docs/>
 
-_1121 topics_
+_1122 topics_
 
 - `dbt-core/best-practices/best-practice-workflows`
 - `dbt-core/best-practices/clone-incremental-models`
@@ -2736,6 +2736,7 @@ _1121 topics_
 - `dbt-core/docs/platform/secure/about-network-security`
 - `dbt-core/docs/platform/secure/ip-restrictions`
 - `dbt-core/docs/platform/secure/private-connectivity/aws/databricks`
+- `dbt-core/docs/platform/secure/private-connectivity/aws/ingress`
 - `dbt-core/docs/platform/secure/private-connectivity/aws/overview`
 - `dbt-core/docs/platform/secure/private-connectivity/aws/postgres`
 - `dbt-core/docs/platform/secure/private-connectivity/aws/redshift`
