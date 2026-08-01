@@ -84,9 +84,20 @@ Interactive widgets that are created by the Hex Connector in a Claude chat, incl
 
 ### Connect Hex to Cursor[​](#connect-hex-to-cursor "Direct link to Connect Hex to Cursor")
 
-In Cursor settings, go to **Settings → Cursor Settings → Tools & MCP**.
+Cursor supports Hex through the official [Hex plugin](https://cursor.com/marketplace/hex) in the Cursor Marketplace. The official plugin connects to `app.hex.tech` and does not let you specify a custom Hex URL (for example, `eu.hex.tech` or a single-tenant domain).
 
-From **Tools & MCP** settings, add the Hex MCP server as a remote MCP server URL: `https://app.hex.tech/mcp` so Hex can connect via OAuth. You can also directly edit your `~/.cursor/mcp.json` file to add Hex as an MCP server:
+#### Install the Hex plugin in Cursor[​](#install-the-hex-plugin-in-cursor "Direct link to Install the Hex plugin in Cursor")
+
+*Follow these instructions if you use Hex at `app.hex.tech`.*
+
+1. In Cursor chat, run `/add-plugin hex`, or install from the [Cursor Marketplace](https://cursor.com/marketplace/hex).
+2. Complete the OAuth flow to authorize access to your Hex workspace (and specify a workspace if you have access to multiple).
+
+#### Connect via remote MCP[​](#connect-via-remote-mcp "Direct link to Connect via remote MCP")
+
+*Follow these instructions if you use Hex anywhere other than `app.hex.tech`.*
+
+For single-tenant, EU multi-tenant, or HIPAA multi-tenant customers, go to **Settings → Cursor Settings → Tools & MCP** and add the Hex MCP server as a remote MCP server URL. You can also edit your `~/.cursor/mcp.json` file to add Hex as an MCP server:
 
 ```
 {
@@ -118,11 +129,15 @@ From **Tools & MCP** settings, add the Hex MCP server as a remote MCP server URL
 
 tip
 
-For single-tenant, EU multi-tenant, or HIPAA multi-tenant customers, replace `app.hex.tech` with your custom Hex URL (e.g., `your-company.hex.tech`, `eu.hex.tech`, `hc.hex.tech`).
+Replace `app.hex.tech` with your custom Hex URL (e.g., `your-company.hex.tech`, `eu.hex.tech`, `hc.hex.tech`).
 
 After adding the MCP server, go back to the **Settings** page and select **Connect** to start the OAuth flow. You will be redirected back to our external authentication provider to approve the connection (and specify a workspace if you have access to multiple).
 
 When successfully connected, you should see the connected Hex MCP server and can configure tool permissions under **Tools & MCP**.
+
+#### Use Hex in Cursor[​](#use-hex-in-cursor "Direct link to Use Hex in Cursor")
+
+After installation, start a new chat and ask Cursor to analyze data in Hex, or type `@` to invoke the Hex plugin or one of its bundled skills. You can search for projects, ask data questions, and start Threads. Users with edit access can also create and modify Hex notebooks through the bundled [Hex CLI](/docs/api-integrations/cli) integration.
 
 ### Connect Hex to ChatGPT[​](#connect-hex-to-chatgpt "Direct link to Connect Hex to ChatGPT")
 
