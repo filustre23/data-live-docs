@@ -4,7 +4,7 @@ On this page
 
 info
 
-* Available on select Enterprise [plans](https://hex.tech/pricing). Contact [[email protected]](/cdn-cgi/l/email-protection#bccfddd0d9cffcd4d9c492c8d9dfd4) to request access.
+* Available on select Enterprise [plans](https://hex.tech/pricing). Contact [[email protected]](/cdn-cgi/l/email-protection#a9dac8c5ccdae9c1ccd187ddcccac1) to request access.
 
 By default, Hex is set up with images for multiple versions of Python, each of which contain many pre-installed packages. These images are often sufficient for most projects, and are designed to get users off the ground quickly.
 
