@@ -4,10 +4,6 @@ On this page
 
 Learn simple methods to get your data into Hex by uploading files and setting up data connections
 
-tip
-
-Follow along with this tutorial in its companion [Hex Project!](https://app.hex.tech/hex/app/c5386acd-bcc2-4d24-9f8b-5d1bc27ed4ca/latest)
-
 There are two primary ways to get your data into a Hex project:
 
 1. through an individual project's file uploader option or
