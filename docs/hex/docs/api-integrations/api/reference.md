@@ -5,7 +5,6 @@
 * patchEditProjectSharingCollections
 * patchEditProjectSharingOrgAndPublic
 * patchEditProjectSharingGroups
-* patchEditProjectSharingUsers
 * patchUpdateProject
 * getGetProject
 * postIngestSemanticProject
@@ -19,10 +18,10 @@
 * patchEditGroup
 * getListGroups
 * postCreateGroup
-* getGetDataConnection
-* patchEditDataConnection
-* getListDataConnections
 * postCreateDataConnection
+* getListDataConnections
+* patchEditDataConnection
+* getGetDataConnection
 * patchUpdateDataConnectionSchema
 * putUpsertGuideDraft
 * postPublishGuideDrafts
@@ -38,6 +37,7 @@
 * postCreateCell
 * getListCells
 * getGetChartImageFromLogic
+* patchEditProjectSharingUsers
 * postExportProject
 * getGetChartImageFromRun
 * postCreateThread
@@ -1004,171 +1004,6 @@ Copy
 * "errors": [
   + {
     - "groupIds": [
-      * "497f6eca-6276-4993-bfeb-53cbbbba6f08"],
-    - "reason": "string"}]
-
-}`
-
-## EditProjectSharingUsers
-
-Add users to a project or update/remove their project sharing access.
-For projects, use `CAN_VIEW` to grant the UI permission labeled "Can explore".
-Use `APP_ONLY` to grant the UI permission labeled "Can view app".
-
-##### Authorizations:
-
-*bearerAuth*
-
-##### path Parameters
-
-|  |  |
-| --- | --- |
-| projectId required | string <uuid>  (ProjectId) ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}...Show pattern  Unique ID for a Hex project. This can be found in the Variables side bar of the Logic View of a project, or by visiting the Project, and copying the UUID after `hex` in the URL. |
-
-##### Request Body schema: application/json required
-
-|  |  |
-| --- | --- |
-| sharing required | object |
-| |  |  | | --- | --- | | upsert required | object | | |  |  | | --- | --- | | users required | Array of objects  <= 25 items | | Array (<= 25 items)  |  |  | | --- | --- | | access required | string (AccessLevelEnum)  Enum: "NONE" "APP\_ONLY" "CAN\_VIEW" "CAN\_EDIT" "FULL\_ACCESS" | | user required | object | | | | | | |
-
-### Responses
-
-**200**
-
-**400**
-
-**403**
-
-**404**
-
-**500**
-
-patch/v1/projects/{projectId}/sharing/users
-
-https://app.hex.tech/api/v1/projects/{projectId}/sharing/users
-
-### Request samples
-
-* Payload
-
-Content type
-
-application/json
-
-Copy
-
- Expand all  Collapse all
-
-`{
-
-* "sharing": {
-  + "upsert": {
-    - "users": [
-      * {
-        + "access": "NONE",
-        + "user": {
-          - "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08"}}]}}
-
-}`
-
-### Response samples
-
-* 200
-* 400
-* 403
-* 404
-* 500
-
-Content type
-
-application/json
-
-Copy
-
- Expand all  Collapse all
-
-`{
-
-* "project": {
-  + "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
-  + "title": "string",
-  + "description": "string",
-  + "type": "PROJECT",
-  + "creator": {
-    - "email": "string"},
-  + "owner": {
-    - "email": "string"},
-  + "status": {
-    - "name": "string"},
-  + "categories": [
-    - {
-      * "description": "string",
-      * "name": "string"}],
-  + "reviews": {
-    - "required": true},
-  + "analytics": {
-    - "publishedResultsUpdatedAt": "string",
-    - "lastViewedAt": "string",
-    - "appViews": {
-      * "lastThirtyDays": 0,
-      * "lastFourteenDays": 0,
-      * "lastSevenDays": 0,
-      * "allTime": 0}},
-  + "lastEditedAt": "string",
-  + "lastPublishedAt": "string",
-  + "createdAt": "string",
-  + "archivedAt": "string",
-  + "trashedAt": "string",
-  + "schedules": [
-    - {
-      * "cadence": "HOURLY",
-      * "enabled": true,
-      * "hourly": {
-        + "timezone": "string",
-        + "minute": 59},
-      * "daily": {
-        + "timezone": "string",
-        + "minute": 59,
-        + "hour": 23},
-      * "weekly": {
-        + "timezone": "string",
-        + "minute": 59,
-        + "hour": 23,
-        + "dayOfWeek": "SUNDAY"},
-      * "monthly": {
-        + "timezone": "string",
-        + "minute": 59,
-        + "hour": 23,
-        + "day": 1},
-      * "custom": {
-        + "timezone": "string",
-        + "cron": "string"}}],
-  + "sharing": {
-    - "users": [
-      * {
-        + "access": "NONE",
-        + "user": {
-          - "email": "string"}}],
-    - "collections": [
-      * {
-        + "access": "NONE",
-        + "collection": {
-          - "name": "string"}}],
-    - "groups": [
-      * {
-        + "access": "NONE",
-        + "group": {
-          - "name": "string"}}],
-    - "workspace": {
-      * "access": "NONE"},
-    - "publicWeb": {
-      * "access": "NONE"},
-    - "support": {
-      * "access": "NONE"}}},
-* "errors": [
-  + {
-    - "userIds": [
       * "497f6eca-6276-4993-bfeb-53cbbbba6f08"],
     - "reason": "string"}]
 
@@ -2351,37 +2186,144 @@ Copy
 
 }`
 
-## GetDataConnection
+## CreateDataConnection
 
 ##### Authorizations:
 
 *bearerAuth*
 
-##### path Parameters
+##### Request Body schema: application/json required
 
 |  |  |
 | --- | --- |
-| dataConnectionId required | string <uuid>  (DataConnectionId) ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}...Show pattern  Unique ID for a data connection. |
+| sharing | object |
+| schemaRefreshAccess | string (DataConnectionSchemaRefreshAccess)  Enum: "ADMINS" "USERS\_WITH\_QUERY\_ACCESS" |
+| schemaRefreshSchedule | object (SchemaRefreshScheduleApiResource) |
+| schemaFilters | object |
+| allowWritebackCells | boolean |
+| includeMagic | boolean |
+| connectViaSsh | boolean |
+| description | string |
+| connectionDetails required | object or object or object or object or object or object or object (CreateConnectionDetails) |
+| type required | string (DataConnectionApiType)  Enum: "athena" "bigquery" "clickhouse" "databricks" "postgres" "redshift" "snowflake" "trino" |
+| name required | string (Name)   non-empty |
 
 ### Responses
 
-**200**
+**201**
 
 **400**
 
 **403**
 
+**404**
+
+**422**
+
 **500**
 
-get/v1/data-connections/{dataConnectionId}
+post/v1/data-connections
 
-https://app.hex.tech/api/v1/data-connections/{dataConnectionId}
+https://app.hex.tech/api/v1/data-connections
+
+### Request samples
+
+* Payload
+
+Content type
+
+application/json
+
+Copy
+
+ Expand all  Collapse all
+
+`{
+
+* "sharing": {
+  + "workspace": {
+    - "public": "NONE",
+    - "guests": "NONE",
+    - "members": "NONE"},
+  + "groups": [
+    - {
+      * "access": "NONE",
+      * "group": {
+        + "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08"}}]},
+* "schemaRefreshAccess": "ADMINS",
+* "schemaRefreshSchedule": {
+  + "cadence": "HOURLY",
+  + "enabled": true,
+  + "daily": {
+    - "timezoneString": "string",
+    - "minute": 59,
+    - "hour": 23},
+  + "weekly": {
+    - "timezoneString": "string",
+    - "minute": 59,
+    - "hour": 23,
+    - "dayOfWeek": "SUNDAY"},
+  + "monthly": {
+    - "timezoneString": "string",
+    - "minute": 59,
+    - "hour": 23,
+    - "day": 1},
+  + "custom": {
+    - "timezoneString": "string",
+    - "cron": "string"}},
+* "schemaFilters": {
+  + "tables": {
+    - "exclude": {
+      * "values": [
+        + "string"],
+      * "matchType": "EXACT"},
+    - "include": {
+      * "values": [
+        + "string"],
+      * "matchType": "EXACT"}},
+  + "schemas": {
+    - "exclude": {
+      * "values": [
+        + "string"],
+      * "matchType": "EXACT"},
+    - "include": {
+      * "values": [
+        + "string"],
+      * "matchType": "EXACT"}},
+  + "databases": {
+    - "exclude": {
+      * "values": [
+        + "string"],
+      * "matchType": "EXACT"},
+    - "include": {
+      * "values": [
+        + "string"],
+      * "matchType": "EXACT"}}},
+* "allowWritebackCells": true,
+* "includeMagic": true,
+* "connectViaSsh": true,
+* "description": "string",
+* "connectionDetails": {
+  + "athena": {
+    - "secretAccessKey": "string",
+    - "accessKeyId": "string",
+    - "workgroup": "string",
+    - "catalog": "string",
+    - "s3OutputPath": "string",
+    - "port": 0.1,
+    - "hostname": "string"}},
+* "type": "athena",
+* "name": "string"
+
+}`
 
 ### Response samples
 
-* 200
+* 201
 * 400
 * 403
+* 404
+* 422
 * 500
 
 Content type
@@ -2472,54 +2414,68 @@ Copy
 
 }`
 
-## EditDataConnection
+## ListDataConnections
+
+List the workspace's data connections.
+
+This endpoint is subject to the following rate limits:
+
+* `hex-api`: Default rate limit group for the Hex API
+  + Max requests per minute may vary (default: 30)
+  + Max requests per hour may vary (default: 1800)
 
 ##### Authorizations:
 
 *bearerAuth*
 
-##### path Parameters
+##### query Parameters
 
 |  |  |
 | --- | --- |
-| dataConnectionId required | string <uuid>  (DataConnectionId) ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}...Show pattern  Unique ID for a data connection. |
-
-##### Request Body schema: application/json required
-
-|  |  |
-| --- | --- |
-| sharing | object |
-| schemaRefreshAccess | string (DataConnectionSchemaRefreshAccess)  Enum: "ADMINS" "USERS\_WITH\_QUERY\_ACCESS" |
-| schemaRefreshSchedule | object or null |
-| schemaFilters | object |
-| allowWritebackCells | boolean |
-| includeMagic | boolean |
-| connectViaSsh | boolean |
-| description | string |
-| connectionDetails | object or object or object or object or object or object or object (EditConnectionDetails) |
-| name | string |
+| after | string or null  Default:  null |
+| before | string or null  Default:  null |
+| limit | number  [ 1 .. 100 ]  Default:  25 |
+| sortBy | string  Default:  "NAME"  Enum: "NAME" "CREATED\_AT" |
+| sortDirection | string  Default:  "ASC"  Enum: "ASC" "DESC" |
 
 ### Responses
 
-**201**
+**200** 
 
-**400**
+Successful response
 
-**403**
+**400** 
 
-**404**
+Invalid input data
 
-**422**
+**401** 
 
-**500**
+Authorization not provided
 
-patch/v1/data-connections/{dataConnectionId}
+**403** 
 
-https://app.hex.tech/api/v1/data-connections/{dataConnectionId}
+Insufficient access
 
-### Request samples
+**404** 
 
-* Payload
+Not found
+
+**500** 
+
+Internal server error
+
+get/v1/data-connections
+
+https://app.hex.tech/api/v1/data-connections
+
+### Response samples
+
+* 200
+* 400
+* 401
+* 403
+* 404
+* 500
 
 Content type
 
@@ -2531,13 +2487,60 @@ Copy
 
 `{
 
-* "sharing": {
-  + "workspace": {
-    - "public": "NONE",
-    - "guests": "NONE",
-    - "members": "NONE"},
-  + "groups": {
-    - "upsert": [
-      * {
-        + "access": "NONE",
-        + "group": {`
+* "values": [
+  + {
+    - "id": "string",
+    - "name": "string",
+    - "type": "athena",
+    - "description": "string",
+    - "connectionDetails": {
+      * "athena": {
+        + "hostname": "string",
+        + "port": 0,
+        + "s3OutputPath": "string",
+        + "catalog": "string",
+        + "workgroup": "string",
+        + "accessKeyId": "string"}},
+    - "connectViaSsh": true,
+    - "includeMagic": true,
+    - "allowWritebackCells": true,
+    - "schemaFilters": {
+      * "databases": {
+        + "include": {
+          - "matchType": "EXACT",
+          - "values": [
+            * "string"]},
+        + "exclude": {
+          - "matchType": "EXACT",
+          - "values": [
+            * "string"]}},
+      * "schemas": {
+        + "include": {
+          - "matchType": "EXACT",
+          - "values": [
+            * "string"]},
+        + "exclude": {
+          - "matchType": "EXACT",
+          - "values": [
+            * "string"]}},
+      * "tables": {
+        + "include": {
+          - "matchType": "EXACT",
+          - "values": [
+            * "string"]},
+        + "exclude": {
+          - "matchType": "EXACT",
+          - "values": [
+            * "string"]}}},
+    - "schemaRefreshSchedule": {
+      * "cadence": "HOURLY",
+      * "enabled": true,
+      * "daily": {
+        + "hour": 0,
+        + "minute": 0,
+        + "timezoneString": "string"},
+      * "weekly": {
+        + "dayOfWeek": "SUNDAY",
+        + "hour": 0,
+        + "minute": 0,
+        + "timezoneString": "string"`
