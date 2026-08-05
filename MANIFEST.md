@@ -1,6 +1,6 @@
 # data-live-docs — index
 
-_Generated 2026-08-05T01:22+00:00_
+_Generated 2026-08-05T07:54+00:00_
 
 **9 sources, 4340 topics total**
 
@@ -2099,6 +2099,7 @@ _174 topics_
 - `claude-code/agent-sdk/subagents`
 - `claude-code/agent-sdk/todo-tracking`
 - `claude-code/agent-sdk/tool-search`
+- `claude-code/agent-sdk/troubleshooting`
 - `claude-code/agent-sdk/typescript`
 - `claude-code/agent-sdk/typescript-v2-preview`
 - `claude-code/agent-sdk/user-input`
@@ -2217,7 +2218,6 @@ _174 topics_
 - `claude-code/tools-reference`
 - `claude-code/troubleshoot-install`
 - `claude-code/troubleshooting`
-- `claude-code/ultraplan`
 - `claude-code/ultrareview`
 - `claude-code/voice-dictation`
 - `claude-code/vs-code`

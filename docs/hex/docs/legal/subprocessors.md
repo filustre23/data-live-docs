@@ -2,7 +2,7 @@ On this page
 
 # List of Subprocessors
 
-**Last Modified**: *June 2, 2026*
+**Last Modified**: *August 4, 2026*
 
 Hex utilizes the following subprocessors in the delivery of the Hex Service.
 
@@ -22,6 +22,7 @@ Any Subprocessor with a Data Residency listed as "Deployment Region" means the g
 | **AI services** | [Anthropic](https://www.anthropic.com/) \* | [Anthropic Trust](https://trust.anthropic.com/) | USA | USA |
 |  | [Baseten](https://www.baseten.co/) | [Baseten Trust](https://trust.baseten.co/) | USA | Deployment Region |
 |  | [Google](https://cloud.google.com/) \* | [Google Cloud Security](https://cloud.google.com/security) | USA | Deployment Region |
+|  | [Modal](https://modal.com/) | [Modal Security](https://modal.com/docs/guide/security) | USA | Deployment Region |
 |  | [OpenAI](https://openai.com/) \* | [OpenAI Security](https://openai.com/security-and-privacy/) | USA | Deployment Region |
 |  | [Parallel](https://parallel.ai/) \* | [Parallel Trust Center](https://trust.parallel.ai/) | USA | USA |
 | **Browser automation** | [Browserbase](https://www.browserbase.com/) | [Browserbase Security](https://docs.browserbase.com/account/enterprise/security) | USA | USA |

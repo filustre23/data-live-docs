@@ -34,6 +34,7 @@ Mirrored from <https://code.claude.com/docs/en/>. Do not edit by hand — regene
 - agent-sdk/subagents
 - agent-sdk/todo-tracking
 - agent-sdk/tool-search
+- agent-sdk/troubleshooting
 - agent-sdk/typescript
 - agent-sdk/typescript-v2-preview
 - agent-sdk/user-input
@@ -152,7 +153,6 @@ Mirrored from <https://code.claude.com/docs/en/>. Do not edit by hand — regene
 - tools-reference
 - troubleshoot-install
 - troubleshooting
-- ultraplan
 - ultrareview
 - voice-dictation
 - vs-code
