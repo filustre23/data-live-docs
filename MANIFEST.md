@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-08-05T13:51+00:00_
+_Generated 2026-08-06T01:20+00:00_
 
-**9 sources, 4340 topics total**
+**9 sources, 4344 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_549 topics_
+_552 topics_
 
 - `anthropic-sdk/about-claude/glossary`
 - `anthropic-sdk/about-claude/model-deprecations`
@@ -516,6 +516,9 @@ _549 topics_
 - `anthropic-sdk/manage-claude/compliance-integration-patterns`
 - `anthropic-sdk/manage-claude/compliance-org-data`
 - `anthropic-sdk/manage-claude/data-residency`
+- `anthropic-sdk/manage-claude/inference-hooks`
+- `anthropic-sdk/manage-claude/inference-hooks-configuration`
+- `anthropic-sdk/manage-claude/inference-hooks-endpoint`
 - `anthropic-sdk/manage-claude/rate-limits-api`
 - `anthropic-sdk/manage-claude/spend-limits-api`
 - `anthropic-sdk/manage-claude/usage-cost-api`
@@ -2067,7 +2070,7 @@ _1488 topics_
 
 Upstream: <https://code.claude.com/docs/en/>
 
-_174 topics_
+_175 topics_
 
 - `claude-code/accessibility`
 - `claude-code/admin-setup`
@@ -2128,6 +2131,7 @@ _174 topics_
 - `claude-code/claude-directory`
 - `claude-code/claude-platform-on-aws`
 - `claude-code/claude-security`
+- `claude-code/claude-tag`
 - `claude-code/cli-reference`
 - `claude-code/cloud-environments`
 - `claude-code/code-review`
