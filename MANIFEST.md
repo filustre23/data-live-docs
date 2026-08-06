@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-08-06T01:20+00:00_
+_Generated 2026-08-06T07:56+00:00_
 
-**9 sources, 4344 topics total**
+**9 sources, 4346 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_552 topics_
+_553 topics_
 
 - `anthropic-sdk/about-claude/glossary`
 - `anthropic-sdk/about-claude/model-deprecations`
@@ -501,6 +501,7 @@ _552 topics_
 - `anthropic-sdk/manage-claude/admin-api-keys`
 - `anthropic-sdk/manage-claude/analytics-api`
 - `anthropic-sdk/manage-claude/api-and-data-retention`
+- `anthropic-sdk/manage-claude/app-attest`
 - `anthropic-sdk/manage-claude/authentication`
 - `anthropic-sdk/manage-claude/claude-code-analytics-api`
 - `anthropic-sdk/manage-claude/cmek`
@@ -2070,7 +2071,7 @@ _1488 topics_
 
 Upstream: <https://code.claude.com/docs/en/>
 
-_175 topics_
+_176 topics_
 
 - `claude-code/accessibility`
 - `claude-code/admin-setup`
@@ -2161,6 +2162,7 @@ _175 topics_
 - `claude-code/fullscreen`
 - `claude-code/gateways`
 - `claude-code/github-actions`
+- `claude-code/github-actions-cloud-providers`
 - `claude-code/github-enterprise-server`
 - `claude-code/gitlab-ci-cd`
 - `claude-code/glossary`

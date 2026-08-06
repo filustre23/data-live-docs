@@ -2541,6 +2541,4 @@ Copy
         + "timezoneString": "string"},
       * "weekly": {
         + "dayOfWeek": "SUNDAY",
-        + "hour": 0,
-        + "minute": 0,
-        + "timezoneString": "string"`
+        + "hour": 0,`
