@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-08-07T02:18+00:00_
+_Generated 2026-08-07T12:46+00:00_
 
-**9 sources, 4346 topics total**
+**9 sources, 4353 topics total**
 
 ## airflow
 
@@ -2071,7 +2071,7 @@ _1488 topics_
 
 Upstream: <https://code.claude.com/docs/en/>
 
-_176 topics_
+_183 topics_
 
 - `claude-code/accessibility`
 - `claude-code/admin-setup`
@@ -2211,6 +2211,13 @@ _176 topics_
 - `claude-code/scheduled-tasks`
 - `claude-code/security`
 - `claude-code/security-guidance`
+- `claude-code/self-hosted-environments`
+- `claude-code/self-hosted-environments-configuration`
+- `claude-code/self-hosted-environments-deploy`
+- `claude-code/self-hosted-environments-identity`
+- `claude-code/self-hosted-environments-quickstart`
+- `claude-code/self-hosted-environments-reference`
+- `claude-code/self-hosted-environments-testing`
 - `claude-code/server-managed-settings`
 - `claude-code/sessions`
 - `claude-code/settings`
