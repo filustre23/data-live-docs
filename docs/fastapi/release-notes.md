@@ -13,6 +13,10 @@ hide:
 
 ### Internal
 
+* 🔐 Use PR Submit for pull requests. PR [#16167](https://github.com/fastapi/fastapi/pull/16167) by [@tiangolo](https://github.com/tiangolo).
+* 👷 Use GitHub CLI for Git authentication. PR [#16166](https://github.com/fastapi/fastapi/pull/16166) by [@tiangolo](https://github.com/tiangolo).
+* 👷 Use PR Push commit identity. PR [#16164](https://github.com/fastapi/fastapi/pull/16164) by [@tiangolo](https://github.com/tiangolo).
+* 🔒 Replace pre-commit PAT with PR Push. PR [#16161](https://github.com/fastapi/fastapi/pull/16161) by [@tiangolo](https://github.com/tiangolo).
 * 👷 Disable saving Zensical's `.cache` in `build-docs.yml`. PR [#16156](https://github.com/fastapi/fastapi/pull/16156) by [@YuriiMotov](https://github.com/YuriiMotov).
 * 🔥 Remove the old Latest Changes workflow. PR [#16148](https://github.com/fastapi/fastapi/pull/16148) by [@tiangolo](https://github.com/tiangolo).
 * ⬆ Bump the python-packages group with 12 updates. PR [#16121](https://github.com/fastapi/fastapi/pull/16121) by [@dependabot[bot]](https://github.com/apps/dependabot).
