@@ -9,8 +9,6 @@
 * getGetProject
 * postIngestSemanticProject
 * patchUpdateSemanticProject
-* getGetProjectRuns
-* postRunProject
 * delCancelRun
 * getGetRunStatus
 * getGetGroup
@@ -40,6 +38,8 @@
 * patchEditProjectSharingUsers
 * postExportProject
 * getGetChartImageFromRun
+* getGetProjectRuns
+* postRunProject
 * postCreateThread
 * getListThreads
 * getGetThread
@@ -1503,235 +1503,6 @@ Copy
 
 }`
 
-## GetProjectRuns
-
-Get the status of runs of a project.
-By default, all run types are returned (API-triggered, scheduled, and publish/refresh runs).
-Use the `runTriggerFilter` parameter to filter to a specific type.
-
-##### Authorizations:
-
-*bearerAuth*
-
-##### path Parameters
-
-|  |  |
-| --- | --- |
-| projectId required | string <uuid>  (ProjectId) ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}...Show pattern  Unique ID for a Hex project. This can be found in the Variables side bar of the Logic View of a project, or by visiting the Project, and copying the UUID after `hex` in the URL. |
-
-##### query Parameters
-
-|  |  |
-| --- | --- |
-| limit | integer <int32>  (PageSize)   [ 1 .. 100 ]  Default:  "25"  Number of results to fetch per page for paginated requests |
-| offset | integer <int32>  (Offset)   >= 0  Default:  "0"  Offset for paginated requests |
-| statusFilter | string (ProjectRunStatus)  Enum: "PENDING" "RUNNING" "ERRORED" "COMPLETED" "KILLED" "UNABLE\_TO\_ALLOCATE\_KERNEL" |
-| runTriggerFilter | string (RunTypeFilter)  Enum: "API" "SCHEDULED" "APP\_REFRESH" "ALL"  Filter by how the run was triggered Valid values: `API`, `SCHEDULED`, `APP_REFRESH` |
-
-### Responses
-
-**200**
-
-**400**
-
-**403**
-
-**422**
-
-get/v1/projects/{projectId}/runs
-
-https://app.hex.tech/api/v1/projects/{projectId}/runs
-
-### Response samples
-
-* 200
-* 400
-* 403
-* 422
-
-Content type
-
-application/json
-
-Copy
-
- Expand all  Collapse all
-
-`{
-
-* "runs": [
-  + {
-    - "projectId": "5a8591dd-4039-49df-9202-96385ba3eff8",
-    - "projectVersion": 0,
-    - "runId": "78c33d18-170c-44d3-a227-b3194f134f73",
-    - "runUrl": "string",
-    - "status": "PENDING",
-    - "runTrigger": "API",
-    - "startTime": "2019-08-24T14:15:22Z",
-    - "endTime": "2019-08-24T14:15:22Z",
-    - "elapsedTime": 0.1,
-    - "flagConfigOverride": "string",
-    - "traceId": "string",
-    - "notifications": [
-      * {
-        + "type": "SUCCESS",
-        + "subject": "string",
-        + "body": "string",
-        + "recipientType": "USER",
-        + "includeSuccessScreenshot": true,
-        + "screenshotFormat": [
-          - "png"],
-        + "recipient": {
-          - "id": "string",
-          - "name": "string",
-          - "isPrivate": true}}],
-    - "stateEvents": [
-      * {
-        + "type": "string",
-        + "value": "string",
-        + "timestamp": "string"}]}],
-* "nextPage": "string",
-* "previousPage": "string",
-* "traceId": "string"
-
-}`
-
-## RunProject
-
-Trigger a run of the latest published version of a project.
-
-This endpoint is subject to the following rate limits:
-
-* `hex-run-kernel`: Rate limits for starting project runs or sending thread messages
-  + Max requests per minute may vary
-  + Max requests per hour may vary
-
-##### Authorizations:
-
-*bearerAuth*
-
-##### path Parameters
-
-|  |  |
-| --- | --- |
-| projectId required | string  The project whose latest published version should run. |
-
-##### Request Body schema: application/json optional
-
-|  |  |
-| --- | --- |
-| inputParams | object  Published app input values keyed by variable name. |
-| dryRun | boolean  Default:  false  Validate the request without starting a run. |
-| updateCache | boolean  `updateCache` is deprecated. Please use the new `updatePublishedResults` and `useCachedSqlResults` parameters instead. When true, published results are updated and cached SQL results are not used. When false, published results are not updated and cached SQL results may be used. |
-| notifications | Array of objects (ProjectRunNotification) |
-| updatePublishedResults | boolean  Default:  false  Update the published app with the run results. |
-| useCachedSqlResults | boolean  Default:  true  Allow SQL cells to reuse cached results. |
-| viewId | string  Use the inputs from this saved view. |
-
-### Responses
-
-**201** 
-
-Successful response
-
-**400** 
-
-Invalid input data
-
-**403** 
-
-Insufficient access
-
-**422** 
-
-Unprocessable content
-
-**503** 
-
-Service unavailable
-
-post/v1/projects/{projectId}/runs
-
-https://app.hex.tech/api/v1/projects/{projectId}/runs
-
-### Request samples
-
-* Payload
-
-Content type
-
-application/json
-
-Copy
-
- Expand all  Collapse all
-
-`{
-
-* "inputParams": {
-  + "property1": null,
-  + "property2": null},
-* "dryRun": false,
-* "updateCache": true,
-* "notifications": [
-  + {
-    - "type": "SUCCESS",
-    - "includeSuccessScreenshot": true,
-    - "screenshotFormat": "png",
-    - "slackChannelIds": [
-      * "string"],
-    - "userIds": [
-      * "string"],
-    - "groupIds": [
-      * "string"],
-    - "subject": "string",
-    - "body": "string"}],
-* "updatePublishedResults": false,
-* "useCachedSqlResults": true,
-* "viewId": "string"
-
-}`
-
-### Response samples
-
-* 201
-* 400
-* 403
-* 422
-* 503
-
-Content type
-
-application/json
-
-Copy
-
- Expand all  Collapse all
-
-`{
-
-* "projectId": "string",
-* "runId": "string",
-* "runUrl": "string",
-* "runStatusUrl": "string",
-* "traceId": "string",
-* "projectVersion": 0,
-* "notifications": [
-  + {
-    - "type": "SUCCESS",
-    - "subject": "string",
-    - "body": "string",
-    - "recipientType": "USER",
-    - "includeSuccessScreenshot": true,
-    - "screenshotFormat": [
-      * "png"],
-    - "recipient": {
-      * "id": "string",
-      * "name": "string",
-      * "isPrivate": true}}]
-
-}`
-
 ## CancelRun
 
 Cancel a project run.
@@ -2541,4 +2312,204 @@ Copy
         + "timezoneString": "string"},
       * "weekly": {
         + "dayOfWeek": "SUNDAY",
-        + "hour": 0,`
+        + "hour": 0,
+        + "minute": 0,
+        + "timezoneString": "string"},
+      * "monthly": {
+        + "day": 0,
+        + "hour": 0,
+        + "minute": 0,
+        + "timezoneString": "string"},
+      * "custom": {
+        + "cron": "string",
+        + "timezoneString": "string"}},
+    - "schemaRefreshAccess": "ADMINS",
+    - "sharing": {
+      * "groups": [
+        + {
+          - "group": {
+            * "id": "string",
+            * "name": "string"},
+          - "access": "NONE"}],
+      * "workspace": {
+        + "members": "NONE",
+        + "guests": "NONE",
+        + "public": "NONE"}}}],
+* "pagination": {
+  + "before": null,
+  + "after": null}
+
+}`
+
+## EditDataConnection
+
+##### Authorizations:
+
+*bearerAuth*
+
+##### path Parameters
+
+|  |  |
+| --- | --- |
+| dataConnectionId required | string <uuid>  (DataConnectionId) ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}...Show pattern  Unique ID for a data connection. |
+
+##### Request Body schema: application/json required
+
+|  |  |
+| --- | --- |
+| sharing | object |
+| schemaRefreshAccess | string (DataConnectionSchemaRefreshAccess)  Enum: "ADMINS" "USERS\_WITH\_QUERY\_ACCESS" |
+| schemaRefreshSchedule | object or null |
+| schemaFilters | object |
+| allowWritebackCells | boolean |
+| includeMagic | boolean |
+| connectViaSsh | boolean |
+| description | string |
+| connectionDetails | object or object or object or object or object or object or object (EditConnectionDetails) |
+| name | string |
+
+### Responses
+
+**201**
+
+**400**
+
+**403**
+
+**404**
+
+**422**
+
+**500**
+
+patch/v1/data-connections/{dataConnectionId}
+
+https://app.hex.tech/api/v1/data-connections/{dataConnectionId}
+
+### Request samples
+
+* Payload
+
+Content type
+
+application/json
+
+Copy
+
+ Expand all  Collapse all
+
+`{
+
+* "sharing": {
+  + "workspace": {
+    - "public": "NONE",
+    - "guests": "NONE",
+    - "members": "NONE"},
+  + "groups": {
+    - "upsert": [
+      * {
+        + "access": "NONE",
+        + "group": {
+          - "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08"}}]}},
+* "schemaRefreshAccess": "ADMINS",
+* "schemaRefreshSchedule": {
+  + "cadence": "HOURLY",
+  + "enabled": true,
+  + "daily": {
+    - "timezoneString": "string",
+    - "minute": 59,
+    - "hour": 23},
+  + "weekly": {
+    - "timezoneString": "string",
+    - "minute": 59,
+    - "hour": 23,
+    - "dayOfWeek": "SUNDAY"},
+  + "monthly": {
+    - "timezoneString": "string",
+    - "minute": 59,
+    - "hour": 23,
+    - "day": 1},
+  + "custom": {
+    - "timezoneString": "string",
+    - "cron": "string"}},
+* "schemaFilters": {
+  + "tables": {
+    - "exclude": {
+      * "values": [
+        + "string"],
+      * "matchType": "EXACT"},
+    - "include": {
+      * "values": [
+        + "string"],
+      * "matchType": "EXACT"}},
+  + "schemas": {
+    - "exclude": {
+      * "values": [
+        + "string"],
+      * "matchType": "EXACT"},
+    - "include": {
+      * "values": [
+        + "string"],
+      * "matchType": "EXACT"}},
+  + "databases": {
+    - "exclude": {
+      * "values": [
+        + "string"],
+      * "matchType": "EXACT"},
+    - "include": {
+      * "values": [
+        + "string"],
+      * "matchType": "EXACT"}}},
+* "allowWritebackCells": true,
+* "includeMagic": true,
+* "connectViaSsh": true,
+* "description": "string",
+* "connectionDetails": {
+  + "athena": {
+    - "secretAccessKey": "string",
+    - "accessKeyId": "string",
+    - "workgroup": "string",
+    - "catalog": "string",
+    - "s3OutputPath": "string",
+    - "port": 0.1,
+    - "hostname": "string"}},
+* "name": "string"
+
+}`
+
+### Response samples
+
+* 201
+* 400
+* 403
+* 404
+* 422
+* 500
+
+Content type
+
+application/json
+
+Copy
+
+ Expand all  Collapse all
+
+`{
+
+* "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+* "name": "string",
+* "type": "athena",
+* "description": "string",
+* "connectionDetails": {
+  + "athena": {
+    - "accessKeyId": "string",
+    - "workgroup": "string",
+    - "catalog": "string",
+    - "s3OutputPath": "string",
+    - "port": 0.1,
+    - "hostname": "string"}},
+* "connectViaSsh": true,
+* "includeMagic": true,
+* "allowWritebackCells": true,
+* "schemaFilters": {
+  + "tables": {`

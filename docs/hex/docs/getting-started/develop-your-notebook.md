@@ -36,7 +36,7 @@ SQL cell outputs are stored as a dataframe, which is a standard table format wit
 
 ### Using the Notebook Agent[​](#using-the-notebook-agent "Direct link to Using the Notebook Agent")
 
-The [Notebook Agent](/docs/explore-data/notebook-view/notebook-agent) offers a natural language experience to assist with code generation and exploratory analysis within Hex projects. Within any Hex project, you can access this from the **Ask a question** modal in the bottom-right corner of the Notebook.
+The [Notebook Agent](/docs/explore-data/notebook-view/notebook-agent) offers a natural language experience to assist with code generation and exploratory analysis within Hex projects. Within any Hex project, you can access this by selecting **Agent** in the top right of the project header.
 
 [](/assets/medias/ask-sidebar-to-edit-query-c0425c3c734830f202a8de4a5ddfe160.mp4)
 

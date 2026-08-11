@@ -9,7 +9,7 @@ info
 * Paid [plans](https://hex.tech/pricing/) include monthly per-seat [credit grants](/docs/administration/credits) that can be used towards Hex AI features.
 * Users need the **Admin**, **Manager**, or **Editor** workspace role and **Can Edit** or higher project permissions to use the Notebook agent.
 * The Notebook agent is not compatible with **Published apps**.
-* To share suggestions for new features or improvements, reach out to [[email protected]](/cdn-cgi/l/email-protection#72010702021d0006321a170a5c0617111a).
+* To share suggestions for new features or improvements, reach out to [[email protected]](/cdn-cgi/l/email-protection#394a4c4949564b4d79515c41174d5c5a51).
 
 The Notebook agent offers a natural language experience to assist with code generation and exploratory analysis within Hex projects. The agent has full access to your project context and warehouse schema information, so you can ask questions about - and receive answers for - your data. The agent can also help with syntax, act as a sounding board for brainstorming solutions, or create entirely new lines of analysis.
 
@@ -25,9 +25,9 @@ Check out our [Modeling workbench](/docs/connect-to-data/semantic-models/semanti
 
 ## Using the Notebook agent[​](#using-the-notebook-agent "Direct link to Using the Notebook agent")
 
-Access the Notebook agent in a Hex project from the **Ask a question** modal in the bottom-right corner of the Notebook.
+Access the Notebook agent in a Hex project by selecting **Agent** in the project header.
 
-[](/assets/medias/using-the-notebook-agent-11e84c63b3943f7e5ae74775f94b3fa3.mp4)
+[](/assets/medias/opening-the-notebook-agent-31285ad379099f7c7cefcd9cfcde9ecf.mp4)
 
 ### Start a new thread[​](#start-a-new-thread "Direct link to Start a new thread")
 
@@ -37,9 +37,7 @@ Staring a new thread will save a version of your project, so you're able to acce
 
 ### Access chat history[​](#access-chat-history "Direct link to Access chat history")
 
-Access your previous chat history from **History** at the top of the active chat window. Your chat history reflects your personal chat requests, and chat requests persist for 30 days.
-
-[](/assets/medias/view-history-tab-b4134c145a9968bbdd99b63519d68ec9.mp4)
+Access your previous chat history by selecting the title of your current thread at the top of the active chat window. Your chat history reflects your personal chat requests, and chat requests persist for 30 days.
 
 ### Mention cells and tables[​](#mention-cells-and-tables "Direct link to Mention cells and tables")
 
@@ -156,7 +154,7 @@ Only projects you have [**Can Explore**](/docs/collaborate/sharing-and-permissio
 
 ## Providing feedback[​](#providing-feedback "Direct link to Providing feedback")
 
-Use the in product feedback buttons to report bugs or issues. Our team reviews these reports daily. If you want to share suggestions for new features or improvements, reach out to us directly at [[email protected]](/cdn-cgi/l/email-protection#93e0e6e3e3fce1e7d3fbf6ebbde7f6f0fb).
+Use the in product feedback buttons to report bugs or issues. Our team reviews these reports daily. If you want to share suggestions for new features or improvements, reach out to us directly at [[email protected]](/cdn-cgi/l/email-protection#dba8aeababb4a9af9bb3bea3f5afbeb8b3).
 
 #### On this page
 

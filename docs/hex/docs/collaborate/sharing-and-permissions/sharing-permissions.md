@@ -77,7 +77,7 @@ There are different types of permissions available for different resources.
 
 * Projects can be shared with **Full Access**, **Can Edit**, **Can Explore**, or **Can View App** permissions ([Learn more](/docs/collaborate/sharing-and-permissions/project-sharing#project-permissions)).
 * Components can be shared with **Full Access**, **Can Edit**, or **Can Import** permissions ([Learn more](/docs/explore-data/components#component-permissions)).
-* Threads can be shared with the **Can view thread** permission ([Learn more](/docs/explore-data/threads#sharing)).
+* Threads can be shared with **Full Access**, **Can Edit**, or **Can View** permissions ([Learn more](/docs/explore-data/threads#sharing)).
 
 ## What if you have conflicting permissions?[​](#what-if-you-have-conflicting-permissions "Direct link to What if you have conflicting permissions?")
 

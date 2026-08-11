@@ -32,7 +32,7 @@ Each Chat with App conversation kicks off a Thread that can be accessed from bot
 
 Getting started with Chat with App is simple:
 
-1. **Open the chat sidebar:** Click the interlocking circles icon in the lower right of your published app to open the chat interface
+1. **Open the chat sidebar:** Select the agent icon in the top right of your published app to open the chat interface
 2. **Ask questions:** Type natural language questions or requests in the chat
 3. **View responses:** The agent will respond with insights, summaries, or an extended analysis based on your request
 4. **Continue in Thread:** Each Chat with App conversation starts a Thread with the app as context. You can view (and continue) the conversation in the Threads interface by clicking the down caret next to the chat title

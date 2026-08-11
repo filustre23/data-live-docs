@@ -23,6 +23,7 @@
 * [July 21 - Get hands-on with your generative apps](/changelog/2026-07-21)
 * [July 30 - Command (line) and conquer](/changelog/2026-07-30)
 * [August 4 - 🧪 Introducing Evals](/changelog/2026-08-04)
+* [August 10 - Tune how the agent runs](/changelog/2026-08-10)
 
 ### 2025[​](#2025 "Direct link to 2025")
 

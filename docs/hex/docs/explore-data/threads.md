@@ -38,11 +38,11 @@ Hex’s [Slack integration](/docs/share-insights/hex-agent-in-slack) enables you
 
 ### MCP Server[​](#mcp-server "Direct link to MCP Server")
 
-The Hex Model Context Protocol ([MCP server](/docs/api-integrations/mcp-server)) enables AI assistants like Claude and Cursor to interact directly with your Hex workspace.
+The Hex Model Context Protocol ([MCP server](/docs/api-integrations/mcp-server)) enables AI assistants like Claude and Cursor to kick off Threads within your Hex workspace.
 
 ### CLI[​](#cli "Direct link to CLI")
 
-Hex's Command Line Interface ([CLI](/docs/api-integrations/cli)) can be used directly or via a local AI agent to automate Hex workflows, inspect workspace state, and more.
+Hex's Command Line Interface ([CLI](/docs/api-integrations/cli)) can be used directly or via a local AI agent to automate Hex workflows, including creating and returning Threads.
 
 ## Data sources[​](#data-sources "Direct link to Data sources")
 
@@ -77,6 +77,18 @@ In the agent response, the agent will typically explain the logic it used to arr
 Of course, users can also ask follow up questions in their threads to tweak results.
 
 If there is a particular data source you want the agent to use when answering your question, you can tag data sources with `@` in your prompt.
+
+### Viewing the project behind a Thread[​](#viewing-the-project-behind-a-thread "Direct link to Viewing the project behind a Thread")
+
+Every Thread is backed by an [unlisted project](#unlisted-projects) that the agent uses to answer questions. **Editors** and above can navigate between the Thread, Notebook, and App view from the top of the page:
+
+* **Agent** — the conversation itself. This is the default view when you start a new thread.
+* **Notebook** — the Notebook the agent has been building in, where you can see the underlying logic.
+* **App** — a preview of the app, if one has been made.
+
+You can open the Notebook or App view side-by-side with the conversation, or return to a fullscreen view of the conversation. Selecting a cell reference in one of the agent's responses will take you directly to that cell in the Notebook.
+
+[](/assets/medias/clicking-a-cell-in-threads-e07a11e5ed4ad6045374178697dcb64d.mp4)
 
 ### Web search[​](#web-search "Direct link to Web search")
 
@@ -139,15 +151,30 @@ Upload an image to be used in analysis. Agents can use it to answer questions, e
 
 To share, open the **Share** modal in the upper right.
 
-Threads shared with other users are read-only. In the modal, choose to share the thread with individual users, groups of users, or with the entire workspace. A recipient will only be able to view a thread that has been shared with them if they have [Can view results](/docs/connect-to-data/data-connections/data-connections-introduction#can-view-results) access on all data connections that were used in the Thread, including data connections used in the projects the agent used as context.
+In the modal, choose to share the thread with individual users, groups of users, or with the entire workspace, and choose a permission level:
 
-When a recipient views a Thread that has been shared with them, they will be able to fully interact with the Thread, including exploring from results and expanding tool calls/thinking text. The recipient will be able to see the prompts the sharer has sent. The recipient will not be able to continue the Thread with their own prompts; additional prompts can only be sent by the Thread owner.
+* **Full access** — full permissions to edit, share, rename, and delete the underlying project.
+* **Can edit** — can edit the underlying project's contents directly in the Notebook.
+* **Can view** — can view the agent conversation.
+* **Can view app** — can view and comment on the published app, if one exists.
+
+Regardless of permission level, only the thread's creator can send new messages in the original agent conversation. Anyone with **Can edit** access or higher can still make changes directly in the unlisted project.
+
+A recipient will only be able to view a thread that has been shared with them if they have [Can view results](/docs/connect-to-data/data-connections/data-connections-introduction#can-view-results) access on all data connections that were used in the Thread, including data connections used in the projects the agent used as context.
 
 If further prompts are sent and analysis is performed in a Thread that has been shared with users, recipients will be able to see the Thread update in real time.
 
-## Saving as a project[​](#saving-as-a-project "Direct link to Saving as a project")
+## Unlisted projects[​](#unlisted-projects "Direct link to Unlisted projects")
 
-Users with Editor roles or higher will be able to save a Thread as a project. This gives users a familiar environment to review and understand the logic the agent used to produce Thread results. The prompt history will be included in a markdown cell at the top of the project to maintain context. Saving a Thread as a project will copy the underlying logic from the Thread at the time it is saved; further changes made to the Thread will not be reflected in the saved project.
+Every Thread is backed by a project. To keep your workspace's project list focused on finished work, that project starts out **unlisted** — hidden from your workspace's project list, search, and the public API until you save it.
+
+You can tell a thread's project is unlisted by the **Unlisted** label at the top of the Notebook or App view. Unlisted projects still follow the same sharing and data connection permissions as any other project, but are excluded from broader discovery until you decide to save them.
+
+## Saving your Thread as a project[​](#saving-your-thread-as-a-project "Direct link to Saving your Thread as a project")
+
+Users with **Editor** roles or higher can save an unlisted project to make it visible in the workspace's project list. Hover on the **Unlisted** label, then select **Save as project**.
+
+Saving a project won't create a copy of your Thread's work — it's the same project your Thread has been using all along, made visible to the rest of your workspace. The Thread stays attached to the project, so you can keep chatting with the agent. Others with **Can edit** permissions can edit the Notebook or start their own agent conversations on the project, but can't continue your original Thread.
 
 ## Sensitive Threads[​](#sensitive-threads "Direct link to Sensitive Threads")
 
@@ -181,6 +208,7 @@ Workspace Managers and Admins can curate context in the workspace to continually
   + [Endorsed Mode on: Agent can access endorsed assets only](#endorsed-mode-on-agent-can-access-endorsed-assets-only)
   + [Endorsed Mode off: Agent can access all data](#endorsed-mode-off-agent-can-access-all-data)
 * [Threads behavior and exploring](#threads-behavior-and-exploring)
+  + [Viewing the project behind a Thread](#viewing-the-project-behind-a-thread)
   + [Web search](#web-search)
   + [Projects as context](#projects-as-context)
 * [Choosing a model and effort](#choosing-a-model-and-effort)
@@ -190,7 +218,8 @@ Workspace Managers and Admins can curate context in the workspace to continually
   + [CSV](#csv)
   + [Images](#images)
 * [Sharing](#sharing)
-* [Saving as a project](#saving-as-a-project)
+* [Unlisted projects](#unlisted-projects)
+* [Saving your Thread as a project](#saving-your-thread-as-a-project)
 * [Sensitive Threads](#sensitive-threads)
 * [OAuth and Threads](#oauth-and-threads)
 * [Scheduling Threads with Tasks](#scheduling-threads-with-tasks)
