@@ -229,7 +229,7 @@ AI agents that can interact with your command line, such as Claude Code, can be 
 
 ## Bugs & issues[​](#bugs--issues "Direct link to Bugs & issues")
 
-Please contact [[email protected]](/cdn-cgi/l/email-protection#3b484e4b4b54494f7b535e43154f5e5853) if you encounter any bugs, or other issues.
+Please contact [[email protected]](/cdn-cgi/l/email-protection#9be8eeebebf4e9efdbf3fee3b5effef8f3) if you encounter any bugs, or other issues.
 
 #### On this page
 
