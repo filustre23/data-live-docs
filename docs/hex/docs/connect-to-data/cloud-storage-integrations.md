@@ -20,9 +20,159 @@ To create a cloud storage integration, go to **Settings > Integrations > Extern
 
 To create an Amazon S3 integration, enter the bucket name and AWS region, then choose an authentication method. Hex supports two authentication methods for Amazon S3: **access key** and **IAM role**.
 
-The IAM user or role Hex uses must be allowed to perform the `s3:HeadBucket`, `s3:ListBucket`, and `s3:GetObject` actions on the bucket, and on files and folders in the bucket. If writeback is enabled, `s3:PutObject` is also required.
+The IAM user or role Hex uses must be allowed to perform the `s3:ListBucket` and `s3:GetObject` actions on the bucket and on files and folders in the bucket. If writeback is enabled, `s3:PutObject` is also required.
 
 The **Enable writeback** toggle controls whether the integration can [export files from Hex to S3](#export-files-to-your-cloud-storage-integration). Users with access to this integration will have the ability to read in files from the integration, and writeback abilities (if enabled).
+
+#### Sample IAM policy[​](#sample-iam-policy "Direct link to Sample IAM policy")
+
+Below is a sample IAM policy for read-only access. Replace `<YOUR BUCKET ARN HERE>` with your bucket's ARN (such as `arn:aws:s3:::my-bucket-name`).
+
+```
+{
+
+
+
+"Version": "2012-10-17",
+
+
+
+"Statement": [
+
+
+
+{
+
+
+
+"Sid": "BucketLevelAccess",
+
+
+
+"Effect": "Allow",
+
+
+
+"Action": [
+
+
+
+"s3:ListBucket"
+
+
+
+],
+
+
+
+"Resource": [
+
+
+
+"<YOUR BUCKET ARN HERE>"
+
+
+
+]
+
+
+
+},
+
+
+
+{
+
+
+
+"Sid": "ObjectLevelAccess",
+
+
+
+"Effect": "Allow",
+
+
+
+"Action": [
+
+
+
+"s3:GetObject"
+
+
+
+],
+
+
+
+"Resource": [
+
+
+
+"<YOUR BUCKET ARN HERE>/*"
+
+
+
+]
+
+
+
+}
+
+
+
+]
+
+
+
+}
+```
+
+To enable writeback, add `s3:PutObject` to the `ObjectLevelAccess` statement:
+
+```
+{
+
+
+
+"Sid": "ObjectLevelAccess",
+
+
+
+"Effect": "Allow",
+
+
+
+"Action": [
+
+
+
+"s3:GetObject",
+
+
+
+"s3:PutObject"
+
+
+
+],
+
+
+
+"Resource": [
+
+
+
+"<YOUR BUCKET ARN HERE>/*"
+
+
+
+]
+
+
+
+}
+```
 
 #### IAM role authentication[​](#iam-role-authentication "Direct link to IAM role authentication")
 

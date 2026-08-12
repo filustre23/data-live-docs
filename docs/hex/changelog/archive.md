@@ -24,6 +24,7 @@
 * [July 30 - Command (line) and conquer](/changelog/2026-07-30)
 * [August 4 - 🧪 Introducing Evals](/changelog/2026-08-04)
 * [August 10 - Tune how the agent runs](/changelog/2026-08-10)
+* [August 11 - Start building an app right from your conversation](/changelog/2026-08-11)
 
 ### 2025[​](#2025 "Direct link to 2025")
 

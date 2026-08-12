@@ -277,7 +277,7 @@ info
 
 The response structure and fields provided by the call output are subject to change.
 
-### Create a new Thread[​](#create-a-new-thread "Direct link to Create a new Thread")
+### Create a new Thread[  ​](#create-a-new-thread "Direct link to Create a new Thread")
 
 Create a new Hex [Thread](/docs/explore-data/threads) to ask questions about your data using the Hex Agent.
 
