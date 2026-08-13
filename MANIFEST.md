@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-08-13T07:16+00:00_
+_Generated 2026-08-13T18:53+00:00_
 
-**9 sources, 4362 topics total**
+**9 sources, 4363 topics total**
 
 ## airflow
 
@@ -2266,7 +2266,7 @@ _187 topics_
 
 Upstream: <https://docs.getdbt.com/docs/>
 
-_1124 topics_
+_1125 topics_
 
 - `dbt-core/best-practices/best-practice-workflows`
 - `dbt-core/best-practices/clone-incremental-models`
@@ -2628,6 +2628,7 @@ _1124 topics_
 - `dbt-core/docs/local/connect-data-platform/redshift-setup`
 - `dbt-core/docs/local/connect-data-platform/risingwave-setup`
 - `dbt-core/docs/local/connect-data-platform/rockset-setup`
+- `dbt-core/docs/local/connect-data-platform/sail-setup`
 - `dbt-core/docs/local/connect-data-platform/salesforce-data-cloud-setup`
 - `dbt-core/docs/local/connect-data-platform/singlestore-setup`
 - `dbt-core/docs/local/connect-data-platform/snowflake-setup`
