@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-08-12T18:53+00:00_
+_Generated 2026-08-13T07:16+00:00_
 
-**9 sources, 4359 topics total**
+**9 sources, 4362 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_553 topics_
+_554 topics_
 
 - `anthropic-sdk/about-claude/glossary`
 - `anthropic-sdk/about-claude/model-deprecations`
@@ -28,7 +28,6 @@ _553 topics_
 - `anthropic-sdk/about-claude/models/whats-new-opus-5`
 - `anthropic-sdk/about-claude/models/whats-new-sonnet-5`
 - `anthropic-sdk/about-claude/pricing`
-- `anthropic-sdk/about-claude/use-case-guides/classification`
 - `anthropic-sdk/about-claude/use-case-guides/content-moderation`
 - `anthropic-sdk/about-claude/use-case-guides/customer-support-chat`
 - `anthropic-sdk/about-claude/use-case-guides/legal-summarization`
@@ -495,6 +494,7 @@ _553 topics_
 - `anthropic-sdk/cli-sdks-libraries/sdks/typescript`
 - `anthropic-sdk/get-api-key`
 - `anthropic-sdk/get-started`
+- `anthropic-sdk/home`
 - `anthropic-sdk/intro`
 - `anthropic-sdk/manage-claude/access-transparency`
 - `anthropic-sdk/manage-claude/admin-api`
@@ -536,6 +536,7 @@ _553 topics_
 - `anthropic-sdk/manage-claude/workload-identity-federation`
 - `anthropic-sdk/manage-claude/workspaces`
 - `anthropic-sdk/managed-agents/agent-setup`
+- `anthropic-sdk/managed-agents/budgets`
 - `anthropic-sdk/managed-agents/cloud-sandboxes-reference`
 - `anthropic-sdk/managed-agents/define-outcomes`
 - `anthropic-sdk/managed-agents/dreams`
@@ -2265,7 +2266,7 @@ _187 topics_
 
 Upstream: <https://docs.getdbt.com/docs/>
 
-_1122 topics_
+_1124 topics_
 
 - `dbt-core/best-practices/best-practice-workflows`
 - `dbt-core/best-practices/clone-incremental-models`
@@ -2321,6 +2322,7 @@ _1122 topics_
 - `dbt-core/best-practices/materializations/materializations-guide-5-best-practices`
 - `dbt-core/best-practices/materializations/materializations-guide-6-examining-builds`
 - `dbt-core/best-practices/materializations/materializations-guide-7-conclusion`
+- `dbt-core/best-practices/optimize-static-analysis-for-development-and-deployment`
 - `dbt-core/community/contribute`
 - `dbt-core/community/contributing/contributing-coding`
 - `dbt-core/community/contributing/contributing-online-community`
@@ -2986,6 +2988,7 @@ _1122 topics_
 - `dbt-core/guides/fusion-qs`
 - `dbt-core/guides/fusion-upgrade`
 - `dbt-core/guides/fusion-upgrade-prepare`
+- `dbt-core/guides/iceberg-guide`
 - `dbt-core/guides/manual-install-qs`
 - `dbt-core/guides/mesh-qs`
 - `dbt-core/guides/mf-time-spine`

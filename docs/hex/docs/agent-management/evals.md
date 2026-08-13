@@ -130,6 +130,8 @@ Canceling stops any cases that haven't finished. Cases that already completed ke
 * **Cancelled** — the case was still running when the suite run was cancelled.
 * **Skipped** — the case was excluded from a partial run.
 
+A rubric can be marked `warnOnly`: it is still graded and reported, but it never causes a case to fail or error. See [Warn-only rubrics](#warn-only-rubrics).
+
 #### Multiple attempts[​](#multiple-attempts "Direct link to Multiple attempts")
 
 Each case can run 1-3 attempts. Every attempt is graded independently against the case’s rubrics.
@@ -379,6 +381,7 @@ Choose a rubric type based on what you want to check.
 | `criterion` | Yes | string | What the judge checks for, written as a clear pass/fail question or statement. |
 | `expected` | No | string | An optional description of the correct answer to grade against. |
 | `expectedSql` | No | SQL target | An optional query whose result is the correct answer to grade against. |
+| `warnOnly` | No | boolean | Default `false`. Grade and report this rubric without letting it fail or error the case. See [Warn-only rubrics](#warn-only-rubrics). |
 
 `expected` and `expectedSql` can be used together. When both are set, the judge sees your description alongside the query result.
 
@@ -394,6 +397,37 @@ Choose a rubric type based on what you want to check.
 | `outputFormat` | No | `int` or `float` | Default `float`. |
 | `strictHeadline` | No | boolean | Default `true`. Grades the number identified as the answer’s primary result, and fails the rubric if no primary result can be identified. Set to `false` to pass when any number in the response matches the target. |
 | `extractionGuidance` | No | string | Hint for which number to grade when the answer has several, e.g. "the enterprise ARR, not total ARR". |
+| `warnOnly` | No | boolean | Default `false`. Grade and report this rubric without letting it fail or error the case. See [Warn-only rubrics](#warn-only-rubrics). |
+
+#### Warn-only rubrics[​](#warn-only-rubrics "Direct link to Warn-only rubrics")
+
+Any rubric can set `warnOnly: true`. It is graded and reported like any other rubric, but it cannot fail or error its case, so a check that does not pass will not lower your suite's pass rate.
+
+```
+rubrics:
+
+
+
+- id: cites_a_source
+
+
+
+type: judge_final_answer
+
+
+
+criterion: "Does the final answer name the table it queried?"
+
+
+
+warnOnly: true
+```
+
+Use it for diagnostic checks: things worth measuring and tracking over time, but that should not decide whether a case passes. It also lets you trial a new rubric on real runs, so you can see how often it would fire before it can fail a case. Omit the field and the rubric counts toward the case result as normal.
+
+This covers grading errors as well as failures. If a warn-only rubric cannot be graded at all, for example because the judge call fails, the case is still unaffected.
+
+Every case needs at least one rubric that is not warn-only. A case whose rubrics are all warn-only is rejected when you submit the suite.
 
 ### Attach context to a case[​](#attach-context-to-a-case "Direct link to Attach context to a case")
 
