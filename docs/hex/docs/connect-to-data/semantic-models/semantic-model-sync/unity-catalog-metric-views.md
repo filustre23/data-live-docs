@@ -6,7 +6,7 @@ info
 
 * Unity Catalog Metric Views is currently in **beta**.
 * Unity Catalog Metric Views are refreshed with Data connection schema refreshes, but syncing of UC Metric Views is not yet supported.
-* Reach out to [[email protected]](/cdn-cgi/l/email-protection#80f3f5f0f0eff2f4c0e8e5f8aef4e5e3e8) to learn more or [request a demo](https://hex.tech/request-a-demo/).
+* Reach out to [[email protected]](/cdn-cgi/l/email-protection#7c0f090c0c130e083c1419045208191f14) to learn more or [request a demo](https://hex.tech/request-a-demo/).
 
 ## Overview[​](#overview "Direct link to Overview")
 
