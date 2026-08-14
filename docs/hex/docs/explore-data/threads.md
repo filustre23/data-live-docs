@@ -10,7 +10,7 @@ The Threads agent heavily prioritizes semantic models and [endorsed](/docs/organ
 
 info
 
-* Threads is available on the [Team and Enterprise plans](https://hex.tech/pricing/), which include monthly per-seat [credit grants](/docs/administration/credits) that can be used towards Hex AI features.
+* Threads is available on all [plans](https://hex.tech/pricing/), which include monthly per-seat [credit grants](/docs/administration/credits) that can be used towards Hex AI features.
 * Users require an [Explorer role](/docs/collaborate/sharing-and-permissions/roles) or higher to use Threads.
 * Users with any role except [Guest](/docs/collaborate/sharing-and-permissions/roles) can view Threads shared with them.
 

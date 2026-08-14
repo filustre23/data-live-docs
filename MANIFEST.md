@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-08-13T18:53+00:00_
+_Generated 2026-08-14T07:14+00:00_
 
-**9 sources, 4363 topics total**
+**9 sources, 4375 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_554 topics_
+_565 topics_
 
 - `anthropic-sdk/about-claude/glossary`
 - `anthropic-sdk/about-claude/model-deprecations`
@@ -391,6 +391,16 @@ _554 topics_
 - `anthropic-sdk/api/compliance/apps/projects/documents/retrieve`
 - `anthropic-sdk/api/compliance/apps/projects/list`
 - `anthropic-sdk/api/compliance/apps/projects/retrieve`
+- `anthropic-sdk/api/compliance/apps/sessions`
+- `anthropic-sdk/api/compliance/apps/sessions/local`
+- `anthropic-sdk/api/compliance/apps/sessions/local/list`
+- `anthropic-sdk/api/compliance/apps/sessions/local/messages`
+- `anthropic-sdk/api/compliance/apps/sessions/local/messages/list`
+- `anthropic-sdk/api/compliance/apps/sessions/local/retrieve`
+- `anthropic-sdk/api/compliance/apps/sessions/remote`
+- `anthropic-sdk/api/compliance/apps/sessions/remote/list`
+- `anthropic-sdk/api/compliance/apps/sessions/remote/messages`
+- `anthropic-sdk/api/compliance/apps/sessions/remote/messages/list`
 - `anthropic-sdk/api/compliance/code`
 - `anthropic-sdk/api/compliance/code/artifacts`
 - `anthropic-sdk/api/compliance/code/artifacts/delete`
@@ -516,6 +526,7 @@ _554 topics_
 - `anthropic-sdk/manage-claude/compliance-faq`
 - `anthropic-sdk/manage-claude/compliance-integration-patterns`
 - `anthropic-sdk/manage-claude/compliance-org-data`
+- `anthropic-sdk/manage-claude/compliance-sessions`
 - `anthropic-sdk/manage-claude/data-residency`
 - `anthropic-sdk/manage-claude/inference-hooks`
 - `anthropic-sdk/manage-claude/inference-hooks-configuration`
@@ -2266,7 +2277,7 @@ _187 topics_
 
 Upstream: <https://docs.getdbt.com/docs/>
 
-_1125 topics_
+_1126 topics_
 
 - `dbt-core/best-practices/best-practice-workflows`
 - `dbt-core/best-practices/clone-incremental-models`
@@ -3134,6 +3145,7 @@ _1125 topics_
 - `dbt-core/reference/global-configs/behavior-flags/require_generic_test_arguments_property`
 - `dbt-core/reference/global-configs/behavior-flags/require_nested_cumulative_type_params`
 - `dbt-core/reference/global-configs/behavior-flags/require_ref_searches_node_package_before_root`
+- `dbt-core/reference/global-configs/behavior-flags/require_resource_names_without_plus_prefix`
 - `dbt-core/reference/global-configs/behavior-flags/require_resource_names_without_spaces`
 - `dbt-core/reference/global-configs/behavior-flags/require_source_and_semantic_model_names_without_spaces`
 - `dbt-core/reference/global-configs/behavior-flags/require_sql_header_in_test_configs`

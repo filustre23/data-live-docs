@@ -12,7 +12,7 @@ To ensure everyone can use AI, Hex awards monthly credit grants to Editor and Ex
 
 info
 
-* Customers with annual contracts who wish to purchase add-on credits can contact [[email protected]](/cdn-cgi/l/email-protection#196a78757c6a59717c61376d7c7a71) to update their contract.
+* Customers with annual contracts who wish to purchase add-on credits can contact [[email protected]](/cdn-cgi/l/email-protection#c9baa8a5acba89a1acb1e7bdacaaa1) to update their contract.
 
 ## Credit Consumption[​](#credit-consumption "Direct link to Credit Consumption")
 
@@ -48,6 +48,7 @@ Monthly credit grants vary by plan and seat type:
 
 | Plan | Seat Type | Monthly Credit Grant |
 | --- | --- | --- |
+| Community | Editor | 5 credits/mo |
 | Professional | Editor | 30 credits/mo |
 | Team | Editor | 40 credits/mo |
 | Team | Explorer | 10 credits/mo |

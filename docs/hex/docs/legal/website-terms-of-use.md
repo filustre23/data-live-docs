@@ -143,7 +143,7 @@ Hex is committed to respecting and protecting the legal rights of copyright owne
 
 (f) A statement that, under penalty of perjury, the information in the notification is accurate and You are authorized to act on behalf of the owner of the exclusive right that is allegedly infringed.
 
-Hex's Copyright Agent to receive DMCA Takedown Notices is: [[email protected]](/cdn-cgi/l/email-protection#82eee7e5e3eec2eae7faacf6e7e1ea)
+Hex's Copyright Agent to receive DMCA Takedown Notices is: [[email protected]](/cdn-cgi/l/email-protection#e9858c8e8885a9818c91c79d8c8a81)
 
 UNDER FEDERAL LAW, IF YOU KNOWINGLY MISREPRESENT THAT ONLINE MATERIAL IS INFRINGING, YOU MAY BE SUBJECT TO CRIMINAL PROSECUTION FOR PERJURY AND CIVIL PENALTIES, INCLUDING MONETARY DAMAGES, COURT COSTS, AND ATTORNEYS' FEES.
 
@@ -194,7 +194,7 @@ If the Website contains links to other sites and resources provided by third par
 
 **Telephone Contact and Recording Policy**
 
-By providing us with a telephone number for a mobile device, including a number that You later convert to a mobile device number, You are expressly consenting to receiving communications—including but not limited to prerecorded or artificial voice message calls, text messages, and calls made by an automatic telephone dialing system—from us and our affiliates and agents at that number, about any product or services offered by Company. This express consent applies to each such telephone number that You provide to us now or in the future. Calls and messages may incur access fees from your mobile services provider. You understand that You need not provide this consent as a condition of obtaining goods or services from Company, and that You may decline to provide or revoke your consent at any time by emailing [[email protected]](/cdn-cgi/l/email-protection#05767075756a7771456d607d2b7160666d) or by any other method that reasonably ensures we receive your revocation. By providing us with a telephone number, You agree that Company may record any telephone conversation with You (or any another individual) during any telephone call to or from that number for training purposes, whether or not the call was initiated by You, and whether or Company disclosed the fact that the call was recorded during the call.
+By providing us with a telephone number for a mobile device, including a number that You later convert to a mobile device number, You are expressly consenting to receiving communications—including but not limited to prerecorded or artificial voice message calls, text messages, and calls made by an automatic telephone dialing system—from us and our affiliates and agents at that number, about any product or services offered by Company. This express consent applies to each such telephone number that You provide to us now or in the future. Calls and messages may incur access fees from your mobile services provider. You understand that You need not provide this consent as a condition of obtaining goods or services from Company, and that You may decline to provide or revoke your consent at any time by emailing [[email protected]](/cdn-cgi/l/email-protection#6e1d1b1e1e011c1a2e060b16401a0b0d06) or by any other method that reasonably ensures we receive your revocation. By providing us with a telephone number, You agree that Company may record any telephone conversation with You (or any another individual) during any telephone call to or from that number for training purposes, whether or not the call was initiated by You, and whether or Company disclosed the fact that the call was recorded during the call.
 
 **Geographic Restrictions**
 
@@ -248,8 +248,8 @@ The Terms of Use, our Privacy Policy, and Hex Terms of Service constitute the so
 
 This website is operated by Hex Technologies Inc.
 
-Send Hex your notice by email at [[email protected]](/cdn-cgi/l/email-protection#e78b8280868ba78f829fc99382848f) or certified mail, return receipt requested, to Hex at 2261 Market Street #4233, San Francisco, CA 94114 USA, Attn: Legal.
+Send Hex your notice by email at [[email protected]](/cdn-cgi/l/email-protection#f39f9694929fb39b968bdd8796909b) or certified mail, return receipt requested, to Hex at 2261 Market Street #4233, San Francisco, CA 94114 USA, Attn: Legal.
 
-All other feedback, comments, requests for technical support, and other communications relating to the Website should be directed to: at [[email protected]](/cdn-cgi/l/email-protection#2e424b494f426e464b56005a4b4d46).
+All other feedback, comments, requests for technical support, and other communications relating to the Website should be directed to: at [[email protected]](/cdn-cgi/l/email-protection#2f434a484e436f474a57015b4a4c47).
 
 Unless specified otherwise, any notices or other communications to You permitted or required under this Agreement, will be in writing and given by Company via email, Site notification, or messaging service (including SMS).
