@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-08-14T18:43+00:00_
+_Generated 2026-08-15T06:25+00:00_
 
-**9 sources, 4375 topics total**
+**9 sources, 4376 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_565 topics_
+_566 topics_
 
 - `anthropic-sdk/about-claude/glossary`
 - `anthropic-sdk/about-claude/model-deprecations`
@@ -24,6 +24,7 @@ _565 topics_
 - `anthropic-sdk/about-claude/models/introducing-claude-fable-5-and-claude-mythos-5`
 - `anthropic-sdk/about-claude/models/migration-guide`
 - `anthropic-sdk/about-claude/models/model-ids-and-versions`
+- `anthropic-sdk/about-claude/models/optimizing-for-cost-and-intelligence`
 - `anthropic-sdk/about-claude/models/overview`
 - `anthropic-sdk/about-claude/models/whats-new-opus-5`
 - `anthropic-sdk/about-claude/models/whats-new-sonnet-5`
