@@ -4,7 +4,7 @@ Securely connect your Hex workspace to your Starburst database.
 
 info
 
-* **More detailed setup instructions for connecting to Starburst are coming soon! In the meantime, please reach out to [[email protected]](/cdn-cgi/l/email-protection#96e5e3e6e6f9e4e2d6fef3eeb8e2f3f5fe) with any questions.**
+* **More detailed setup instructions for connecting to Starburst are coming soon! In the meantime, please reach out to [[email protected]](/cdn-cgi/l/email-protection#0d7e787d7d627f794d6568752379686e65) with any questions.**
 
 To connect Hex to **[Starburst](https://www.starburst.io/)**, you'll need:
 
