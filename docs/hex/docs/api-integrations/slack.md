@@ -8,7 +8,7 @@ info
 
 * Available on the Team and Enterprise [plans](https://hex.tech/pricing/).
 * Users will need the Admin workspace [role](/docs/collaborate/sharing-and-permissions/roles) to configure the integration.
-* Some functionality may not work as expected for workspaces on Slack Enterprise Grid. Please reach out to **[[email protected]](/cdn-cgi/l/email-protection#ff8c8a8f8f908d8bbf979a87d18b9a9c97)** if you're affected.
+* Some functionality may not work as expected for workspaces on Slack Enterprise Grid. Please reach out to **[[email protected]](/cdn-cgi/l/email-protection#89fafcf9f9e6fbfdc9e1ecf1a7fdeceae1)** if you're affected.
 
 ## Enabling the integration[​](#enabling-the-integration "Direct link to Enabling the integration")
 
@@ -36,7 +36,7 @@ The integration will also allow you to enable the **Hex Agent in Slack**, which 
 
 **How can I get additional support for this integration?**
 
-Please contact us at **[[email protected]](/cdn-cgi/l/email-protection#88fbfdf8f8e7fafcc8e0edf0a6fcedebe0)** for any feedback or issues around using the Hex integration for Slack.
+Please contact us at **[[email protected]](/cdn-cgi/l/email-protection#ea999f9a9a85989eaa828f92c49e8f8982)** for any feedback or issues around using the Hex integration for Slack.
 
 #### On this page
 
