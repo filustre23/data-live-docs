@@ -1,6 +1,6 @@
 # data-live-docs — index
 
-_Generated 2026-08-18T18:27+00:00_
+_Generated 2026-08-19T06:31+00:00_
 
 **9 sources, 4385 topics total**
 
@@ -2084,7 +2084,7 @@ _1488 topics_
 
 Upstream: <https://code.claude.com/docs/en/>
 
-_187 topics_
+_186 topics_
 
 - `claude-code/accessibility`
 - `claude-code/admin-setup`
@@ -2110,7 +2110,6 @@ _187 topics_
 - `claude-code/agent-sdk/session-storage`
 - `claude-code/agent-sdk/sessions`
 - `claude-code/agent-sdk/skills`
-- `claude-code/agent-sdk/slash-commands`
 - `claude-code/agent-sdk/streaming-output`
 - `claude-code/agent-sdk/streaming-vs-single-mode`
 - `claude-code/agent-sdk/structured-outputs`
@@ -3573,7 +3572,7 @@ _155 topics_
 
 Upstream: <https://learn.hex.tech/>
 
-_378 topics_
+_379 topics_
 
 - `hex/changelog`
 - `hex/changelog/2020-12-17`
@@ -3688,6 +3687,7 @@ _378 topics_
 - `hex/changelog/2026-08-04`
 - `hex/changelog/2026-08-10`
 - `hex/changelog/2026-08-11`
+- `hex/changelog/2026-08-18`
 - `hex/changelog/archive`
 - `hex/changelog/page/10`
 - `hex/changelog/page/11`

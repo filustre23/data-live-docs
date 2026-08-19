@@ -12,7 +12,7 @@ To ensure everyone can use AI, Hex awards monthly credit grants to Editor and Ex
 
 info
 
-* Customers with annual contracts who wish to purchase add-on credits can contact [[email protected]](/cdn-cgi/l/email-protection#afdccec3cadcefc7cad781dbcaccc7) to update their contract.
+* Customers with annual contracts who wish to purchase add-on credits can contact [[email protected]](/cdn-cgi/l/email-protection#5221333e3721123a372a7c2637313a) to update their contract.
 
 ## Credit Consumption[​](#credit-consumption "Direct link to Credit Consumption")
 
@@ -96,17 +96,17 @@ Auto top-up spend limits are anchored to your monthly billing cycle and will go 
 
 ## Credit usage controls[​](#credit-usage-controls "Direct link to Credit usage controls")
 
-Admins can control how many add-on credits each user is allowed by applying a credit allocation to a User, Group, or Workspace.
+Admins can control how many add-on credits each user is allowed by applying a credit limit to a User, Group, or Workspace.
 
 info
 
 * Available on Team and Enterprise [plans](https://hex.tech/pricing).
-* Credit allocations will always respect your workspace credit pool settings. Regardless of their allocation, users will be limited to the auto top-up [spend limit](#spend-limits) or to the workspace credit pool balance if [auto top-ups](#auto-top-ups) are disabled.
-* Credit allocations are respected in order of User > Group (highest wins) > Workspace Default
+* Credit limits will always respect your workspace credit pool settings. Regardless of their limit, users will be limited to the auto top-up [spend limit](#spend-limits) or to the workspace credit pool balance if [auto top-ups](#auto-top-ups) are disabled.
+* Credit limits are respected in order of User > Group (highest wins) > Workspace Default
 
-Manage credit allocations from **Settings > Credits > Credit usage controls**. The Workspace Default allocation is always active, and all active allocations can be adjusted via the three dot (...) menu to the right.
+Manage credit limits from **Settings > Credits > Credit usage controls**. The Workspace Default limit is always active, and all active limits can be adjusted via the three dot (...) menu to the right.
 
-To create a new User or Group credit allocation, click `+ Add allocation` and choose from Unlimited, Custom amount, or No access.
+To create a new User or Group credit limit, click `+ Add limit` and choose from Unlimited, Custom amount, or No access.
 
 ## Credit usage visibility[​](#credit-usage-visibility "Direct link to Credit usage visibility")
 

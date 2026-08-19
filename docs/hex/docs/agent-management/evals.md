@@ -90,6 +90,144 @@ Running a suite consumes [credits](/docs/administration/credits), similar to any
 
 Credits are attributed to the user who starts the suite run. Hex uses that user’s available credits first, then draws from the workspace’s shared credit pool if needed.
 
+## Bootstrap a suite with your coding agent[​](#bootstrap-prompt "Direct link to Bootstrap a suite with your coding agent")
+
+To build a suite grounded in how your workspace is used, hand this prompt to your coding agent. It walks the agent through installing the Hex CLI, reading your workspace topics and threads, and creating a starter `evals.yaml` for you to run.
+
+info
+
+Bootstrapping from workspace usage requires the Manager or Admin role, which is needed to list workspace topics and threads. Editors can still create and run eval suites by writing `evals.yaml` directly.
+
+Bootstrap prompt
+
+```
+You're going to help me bootstrap an eval suite for our Hex agent, grounded in how our workspace is actually used, so we can test and improve our agent's context. Build the suite from our real usage where it exists, and fall back to our key tables where usage is thin. Follow these steps in order.
+
+
+
+1. Check prerequisites. The Hex CLI supports macOS and Linux only; on Windows, run it under WSL. Run `hex --version`. If it's missing, install it:
+
+
+
+- macOS: `brew tap hex-inc/hex-cli && brew install hex-inc/hex-cli/hex`
+
+
+
+- Linux (or WSL): `curl -fsSL https://hex.tech/install.sh | bash`
+
+
+
+Then run `hex auth status`. If I'm not authenticated, stop and tell me to run `hex auth login`; don't authenticate on my behalf. If I have multiple profiles, ask which to use (`hex auth switch <profile>`). This flow needs a Manager or higher role; if a command is rejected as unauthorized, tell me.
+
+
+
+2. Install the Hex agent skill and read it. Run `hex install agent-skill` with the flag for your agent environment (`--claude`, `--codex`, or `--path <dir>`), then read the installed SKILL.md, especially the evals section — it documents the `hex eval` commands and how async runs work. For the full `evals.yaml` schema (every case and rubric field), read https://learn.hex.tech/docs/agent-management/evals; the example in step 5 covers the essentials. `hex eval run` validates the file and reports schema errors before starting a run.
+
+
+
+3. Find how the workspace is actually used. Hex already classifies threads into workspace topics, so use those instead of inventing categories. Run `hex context topic list --json`, then `hex thread list --topic-ids <id> --num-days 30 -n 100 --json` for each. The list isn't ranked, so rank it yourself by distinct question intent, not raw count: duplicates and our own test/eval runs inflate it, and widen `--num-days` if 30 days looks thin. Pick the 3 to 6 most-used topics and gather about 25 representative threads, reading each with `hex thread get <thread_id> --json` for its `resources` array (the exact tables and semantic models it touched) and `hex thread messages <thread_id> --json` for the conversation, where the agent's replies usually include the SQL it ran. Those two are what make the suite specific to us rather than generically plausible, so don't skip them. Keep notes in a scratch file outside any repo, delete it when you're done, and never copy thread content into evals.yaml. If there are no topics, or usage looks thin, duplicated or synthetic, stop and confirm with me that we should build from expected usage of our key tables instead.
+
+
+
+4. Ground the schema and characterize each topic. For each topic or table theme, note how the question gets phrased and what a correct answer depends on: which tables, metrics, and filters the agent should reach for, and any known traps (dedup rules, excluding test/internal rows, valid-order filters, unit mismatches like cents vs dollars). Ground table and column names, in order of preference, in: (1) our workspace guides or context docs, if we maintain them (read these first); (2) the `resources` and message SQL from the threads you read in step 3; (3) the connection's prose description from `hex connection get` as a last resort. Mark any identifier you couldn't confirm against real usage with a `# TODO-verify` comment.
+
+
+
+5. Generate `evals.yaml` as a judge-only starter suite. If an `evals.yaml` already exists, show it to me and ask before replacing it. Aim for 5 to 10 cases total. The file has a top-level `name` and a `cases:` list. Each case needs:
+
+
+
+- an `id` prefixed by its topic (for example `revenue-mrr-trend`)
+
+
+
+- a realistic `prompt`: paraphrased, never copied verbatim, with no customer names or sensitive values
+
+
+
+- `attempts` from 1 to 3 (higher surfaces run-to-run variance)
+
+
+
+- 1 to 2 `rubrics`, defaulting to `judge_thread`. Give each a yes/no `criterion` naming the expected sources and the trap to avoid, drawing on steps 3 and 4. `judge_thread` grades against the whole conversation, so it can check method: which tables the agent reached for, whether it deduplicated, whether it excluded test rows. Use `judge_final_answer` only when the criterion is about the delivered answer itself, such as whether it states a single number.
+
+
+
+For a case with a deterministic answer, you can also give the judge ground truth: add an `expectedSql` block to the rubric with `sql` and `dataConnectionId` keys, taking the `dataConnectionId` from `hex connection list --json` (ask me if it's ambiguous). The query runs at grade time and the judge sees its result alongside the conversation. Only do this with identifiers I've confirmed. For a strict numeric check with an explicit tolerance instead of a judge's call, see `numeric_value` in the docs from step 2.
+
+
+
+If my instructions conflict with your recommendation (for example, building from synthetic threads you'd have skipped), say so, proceed as I ask, and note the suite's trust level in a top-of-file comment. Here's the minimal shape:
+
+
+
+name: Starter suite
+
+
+
+cases:
+
+
+
+- id: revenue-mrr-trend
+
+
+
+prompt: "How has MRR trended over the last 6 months?"
+
+
+
+attempts: 1
+
+
+
+rubrics:
+
+
+
+- id: uses-revenue-model
+
+
+
+type: judge_thread
+
+
+
+criterion: Uses the canonical revenue tables and reports a month-over-month MRR trend.
+
+
+
+- id: customers-active-total
+
+
+
+prompt: "How many active customers do we have?"
+
+
+
+attempts: 1
+
+
+
+rubrics:
+
+
+
+- id: dedupes-and-excludes-test
+
+
+
+type: judge_thread
+
+
+
+criterion: Counts distinct customers, deduplicating fragmented ids and excluding test/internal accounts.
+
+
+
+6. Don't run the evals yourself. When you're done, tell me to review evals.yaml and then start a run with `hex eval run evals.yaml`. Runs are async; results show up in Hex under Context Studio, then Evals (or via `hex eval get <run_id>`). As a next step, to test whether a context change (guides, warehouse descriptions) improves the agent, compare a baseline run against a run using `--preview-id` before publishing the change.
+```
+
 ## Review results[​](#review-results "Direct link to Review results")
 
 Evals can only be defined and run from the CLI, but you can review results in either the CLI or the Evals page in Context Studio.
@@ -385,7 +523,7 @@ Choose a rubric type based on what you want to check.
 
 `expected` and `expectedSql` can be used together. When both are set, the judge sees your description alongside the query result.
 
-#### Fields for `numeric_value`[​](#fields-for-numeric_value "Direct link to fields-for-numeric_value")
+#### Fields for `numeric_value`[  ​](#fields-for-numeric_value "Direct link to fields-for-numeric_value")
 
 | Field | Required | Type | Notes |
 | --- | --- | --- | --- |
@@ -494,6 +632,7 @@ The selected model must be available in your workspace.
 * [Terminology](#terminology)
 * [Run your first eval](#run-your-first-eval)
   + [Billing](#billing)
+* [Bootstrap a suite with your coding agent](#bootstrap-prompt)
 * [Review results](#review-results)
   + [Review results in the CLI](#review-results-in-the-cli)
   + [Review results in Context Studio](#review-results-in-context-studio)
