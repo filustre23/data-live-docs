@@ -3,7 +3,6 @@
 * postCreateProject
 * getGetQueriedTables
 * patchEditProjectSharingCollections
-* patchEditProjectSharingOrgAndPublic
 * patchEditProjectSharingGroups
 * postIngestSemanticProject
 * patchUpdateSemanticProject
@@ -34,6 +33,7 @@
 * getListCells
 * getGetChartImageFromLogic
 * patchEditProjectSharingUsers
+* patchEditProjectSharingOrgAndPublic
 * postExportProject
 * getGetChartImageFromRun
 * getGetProject
@@ -680,166 +680,6 @@ Copy
   + {
     - "collectionIds": [
       * "497f6eca-6276-4993-bfeb-53cbbbba6f08"],
-    - "reason": "string"}]
-
-}`
-
-## EditProjectSharingOrgAndPublic
-
-Update workspace or public-web sharing for a project.
-For projects, use `CAN_VIEW` to grant the UI permission labeled "Can explore".
-Use `APP_ONLY` to grant the UI permission labeled "Can view app".
-
-##### Authorizations:
-
-*bearerAuth*
-
-##### path Parameters
-
-|  |  |
-| --- | --- |
-| projectId required | string <uuid>  (ProjectId) ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}...Show pattern  Unique ID for a Hex project. This can be found in the Variables side bar of the Logic View of a project, or by visiting the Project, and copying the UUID after `hex` in the URL. |
-
-##### Request Body schema: application/json required
-
-|  |  |
-| --- | --- |
-| sharing required | object |
-| |  |  | | --- | --- | | publicWeb | string (PublicWebAccessLevel)  Enum: "NONE" "APP\_ONLY" "CAN\_VIEW" "CAN\_EDIT" "FULL\_ACCESS" | | workspace | string (AccessLevelEnum)  Enum: "NONE" "APP\_ONLY" "CAN\_VIEW" "CAN\_EDIT" "FULL\_ACCESS" | | |
-
-### Responses
-
-**200**
-
-**400**
-
-**403**
-
-**404**
-
-**500**
-
-patch/v1/projects/{projectId}/sharing/workspaceAndPublic
-
-https://app.hex.tech/api/v1/projects/{projectId}/sharing/workspaceAndPublic
-
-### Request samples
-
-* Payload
-
-Content type
-
-application/json
-
-Copy
-
- Expand all  Collapse all
-
-`{
-
-* "sharing": {
-  + "publicWeb": "NONE",
-  + "workspace": "NONE"}
-
-}`
-
-### Response samples
-
-* 200
-* 400
-* 403
-* 404
-* 500
-
-Content type
-
-application/json
-
-Copy
-
- Expand all  Collapse all
-
-`{
-
-* "project": {
-  + "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
-  + "title": "string",
-  + "description": "string",
-  + "type": "PROJECT",
-  + "creator": {
-    - "email": "string"},
-  + "owner": {
-    - "email": "string"},
-  + "status": {
-    - "name": "string"},
-  + "categories": [
-    - {
-      * "description": "string",
-      * "name": "string"}],
-  + "reviews": {
-    - "required": true},
-  + "analytics": {
-    - "publishedResultsUpdatedAt": "string",
-    - "lastViewedAt": "string",
-    - "appViews": {
-      * "lastThirtyDays": 0,
-      * "lastFourteenDays": 0,
-      * "lastSevenDays": 0,
-      * "allTime": 0}},
-  + "lastEditedAt": "string",
-  + "lastPublishedAt": "string",
-  + "createdAt": "string",
-  + "archivedAt": "string",
-  + "trashedAt": "string",
-  + "schedules": [
-    - {
-      * "cadence": "HOURLY",
-      * "enabled": true,
-      * "hourly": {
-        + "timezone": "string",
-        + "minute": 59},
-      * "daily": {
-        + "timezone": "string",
-        + "minute": 59,
-        + "hour": 23},
-      * "weekly": {
-        + "timezone": "string",
-        + "minute": 59,
-        + "hour": 23,
-        + "dayOfWeek": "SUNDAY"},
-      * "monthly": {
-        + "timezone": "string",
-        + "minute": 59,
-        + "hour": 23,
-        + "day": 1},
-      * "custom": {
-        + "timezone": "string",
-        + "cron": "string"}}],
-  + "sharing": {
-    - "users": [
-      * {
-        + "access": "NONE",
-        + "user": {
-          - "email": "string"}}],
-    - "collections": [
-      * {
-        + "access": "NONE",
-        + "collection": {
-          - "name": "string"}}],
-    - "groups": [
-      * {
-        + "access": "NONE",
-        + "group": {
-          - "name": "string"}}],
-    - "workspace": {
-      * "access": "NONE"},
-    - "publicWeb": {
-      * "access": "NONE"},
-    - "support": {
-      * "access": "NONE"}}},
-* "errors": [
-  + {
-    - "type": "workspace",
     - "reason": "string"}]
 
 }`
@@ -2500,4 +2340,213 @@ Copy
 
 * "updated": {
   + "tables": [
-    - {`
+    - {
+      * "status": "string",
+      * "name": "string"}],
+  + "schemas": [
+    - {
+      * "status": "string",
+      * "name": "string"}],
+  + "databases": [
+    - {
+      * "status": "string",
+      * "name": "string"}]}
+
+}`
+
+## UpsertGuideDraft
+
+Update or create guide drafts by filePath.
+
+Accepts a dictionary mapping file paths to their contents.
+For each file:
+
+* If the guide doesn't exist, it will be created.
+* If the guide exists but has no draft, a new draft will be created.
+* If the guide exists with a draft, the draft contents will be updated.
+
+##### Authorizations:
+
+*bearerAuth*
+
+##### Request Body schema: application/json required
+
+|  |  |
+| --- | --- |
+| forceWrite | boolean  If true, will overwrite an existing guide that is synced from a different source if there is a guide of the same name e.g. guide1.md is authored in Hex, request.files includes guide1.md -> this will overwrite the guide that was authored in Hex  default: false |
+| files required | Array of objects  A mapping from filePath -> contents |
+
+### Responses
+
+**200**
+
+**400**
+
+**403**
+
+**500**
+
+put/v1/guides/draft
+
+https://app.hex.tech/api/v1/guides/draft
+
+### Request samples
+
+* Payload
+
+Content type
+
+application/json
+
+Copy
+
+ Expand all  Collapse all
+
+`{
+
+* "forceWrite": true,
+* "files": [
+  + {
+    - "externalSource": {
+      * "id": "string",
+      * "source": "unknown"},
+    - "contents": "string",
+    - "filePath": "string",
+    - "property1": null,
+    - "property2": null}]
+
+}`
+
+### Response samples
+
+* 200
+* 400
+* 403
+* 500
+
+Content type
+
+application/json
+
+Copy
+
+ Expand all  Collapse all
+
+`{
+
+* "files": [
+  + {
+    - "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+    - "filePath": "string"}],
+* "warnings": [
+  + {
+    - "message": "string",
+    - "filePath": "string"}],
+* "traceId": "string"
+
+}`
+
+## PublishGuideDrafts
+
+Publish all currently drafted guides.
+
+##### Authorizations:
+
+*bearerAuth*
+
+##### Request Body schema: application/json required
+
+|  |  |
+| --- | --- |
+| orgGuideFileIds | Array of strings <uuid>  (OrgGuideFileId) [ items <uuid >^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}...Show pattern ]  The IDs of the guides to publish if publishAllGuides is false. |
+| publishAllDraftGuides | boolean  Publish all draft guides (ignores the orgGuideFileIds field if true) |
+
+### Responses
+
+**200**
+
+**400**
+
+**403**
+
+**500**
+
+post/v1/guides/publish
+
+https://app.hex.tech/api/v1/guides/publish
+
+### Request samples
+
+* Payload
+
+Content type
+
+application/json
+
+Copy
+
+ Expand all  Collapse all
+
+`{
+
+* "orgGuideFileIds": [
+  + "497f6eca-6276-4993-bfeb-53cbbbba6f08"],
+* "publishAllDraftGuides": true
+
+}`
+
+### Response samples
+
+* 200
+* 400
+* 403
+* 500
+
+Content type
+
+application/json
+
+Copy
+
+ Expand all  Collapse all
+
+`{
+
+* "message": "string",
+* "publishedGuides": [
+  + {
+    - "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+    - "filePath": "string"}],
+* "traceId": "string"
+
+}`
+
+## DeleteGuideDraft
+
+##### Authorizations:
+
+*bearerAuth*
+
+##### path Parameters
+
+|  |  |
+| --- | --- |
+| orgGuideFileId required | string <uuid>  (OrgGuideFileId) ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}...Show pattern  Unique ID for a guide file. This can be found by going into the menu of a guide file in the guide files side bar. |
+
+### Responses
+
+**204**
+
+**400**
+
+**403**
+
+**500**
+
+delete/v1/guides/draft/{orgGuideFileId}
+
+https://app.hex.tech/api/v1/guides/draft/{orgGuideFileId}
+
+### Response samples
+
+* 400
