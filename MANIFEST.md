@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-08-20T06:33+00:00_
+_Generated 2026-08-20T18:28+00:00_
 
-**9 sources, 4387 topics total**
+**9 sources, 4388 topics total**
 
 ## airflow
 
@@ -2278,7 +2278,7 @@ _186 topics_
 
 Upstream: <https://docs.getdbt.com/docs/>
 
-_1126 topics_
+_1127 topics_
 
 - `dbt-core/best-practices/best-practice-workflows`
 - `dbt-core/best-practices/clone-incremental-models`
@@ -3008,6 +3008,7 @@ _1126 topics_
 - `dbt-core/guides/microsoft-fabric-qs`
 - `dbt-core/guides/migrate-from-spark-to-databricks`
 - `dbt-core/guides/migrate-from-stored-procedures`
+- `dbt-core/guides/migrate-off-legacy-dbt-versions`
 - `dbt-core/guides/productionize-your-dbt-databricks-project`
 - `dbt-core/guides/prompt-cookbook`
 - `dbt-core/guides/qs-mcp-local`
