@@ -17,7 +17,7 @@ info
 
 ### Creating a review request[​](#creating-a-review-request "Direct link to Creating a review request")
 
-After clicking **Publish** in a notebook, click **Request review** in the bottom right of the publish modal. For projects that [require reviews](#marking-a-project-as-requiring-reviews), this is a necessary step before publishing.
+After clicking **Publish** in a notebook, click **Request review** in the bottom right of the publish modal. For projects that [require reviews](#required-reviews), this is a necessary step before publishing.
 
 Include a title for the changes you are requesting a review for, and optionally a description to let your reviewer(s) know why you are requesting a review.
 

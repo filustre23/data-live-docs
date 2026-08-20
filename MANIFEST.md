@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-08-19T18:24+00:00_
+_Generated 2026-08-20T06:33+00:00_
 
-**9 sources, 4385 topics total**
+**9 sources, 4387 topics total**
 
 ## airflow
 
@@ -16,8 +16,9 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_566 topics_
+_567 topics_
 
+- `anthropic-sdk/about-claude/additional-resources`
 - `anthropic-sdk/about-claude/glossary`
 - `anthropic-sdk/about-claude/model-deprecations`
 - `anthropic-sdk/about-claude/models/choosing-a-model`
@@ -3958,7 +3959,7 @@ _379 topics_
 
 Upstream: <https://openai.github.io/openai-agents-python/>
 
-_395 topics_
+_396 topics_
 
 - `openai-agents/agents`
 - `openai-agents/config`
@@ -4160,6 +4161,7 @@ _395 topics_
 - `openai-agents/ref/run_internal/agent_bindings`
 - `openai-agents/ref/run_internal/agent_runner_helpers`
 - `openai-agents/ref/run_internal/approvals`
+- `openai-agents/ref/run_internal/blocked_output`
 - `openai-agents/ref/run_internal/error_handlers`
 - `openai-agents/ref/run_internal/guardrails`
 - `openai-agents/ref/run_internal/items`
