@@ -419,6 +419,26 @@ expected: "18432" # optional ground truth
 
 
 
+# A diagnostic check: measured and reported, but it can't fail the case.
+
+
+
+- id: cites_a_source
+
+
+
+type: judge_final_answer
+
+
+
+criterion: "Does the final answer name the table it queried?"
+
+
+
+warnOnly: true
+
+
+
 # numeric_value (literal target): compare a number within tolerance
 
 
@@ -463,7 +483,7 @@ dataConnectionId: "dc_..."
 
 
 
-timeoutSeconds: 30      # optional, max 60
+timeoutSeconds: 30      # optional, max 120
 ```
 
 ### Suite-level fields[​](#suite-level-fields "Direct link to Suite-level fields")
@@ -520,22 +540,24 @@ Choose a rubric type based on what you want to check.
 | `expected` | No | string | An optional description of the correct answer to grade against. |
 | `expectedSql` | No | SQL target | An optional query whose result is the correct answer to grade against. |
 | `warnOnly` | No | boolean | Default `false`. Grade and report this rubric without letting it fail or error the case. See [Warn-only rubrics](#warn-only-rubrics). |
+| `measure` | No | string | Groups this rubric with others checking the same quality, so they roll up into one rate. Lowercase kebab-case. See [Measures](#measures). |
 
 `expected` and `expectedSql` can be used together. When both are set, the judge sees your description alongside the query result.
 
-#### Fields for `numeric_value`[  ​](#fields-for-numeric_value "Direct link to fields-for-numeric_value")
+#### Fields for `numeric_value`[ ​](#fields-for-numeric_value "Direct link to fields-for-numeric_value")
 
 | Field | Required | Type | Notes |
 | --- | --- | --- | --- |
 | `id` | Yes | string | Unique identifier. |
 | `type` | Yes | `numeric_value` | — |
-| `target` | Yes | number or SQL target | Fixed number, or `{ sql, dataConnectionId }` run at grade time. Optionally add `timeoutSeconds` (max 60s). |
+| `target` | Yes | number or SQL target | Fixed number, or `{ sql, dataConnectionId }` run at grade time. Optionally add `timeoutSeconds` (max 120s). |
 | `tolerancePercentage` | No | number | Allowed difference as a percent of `target`. Default 1. Applies even when `absoluteTolerance` is set. |
 | `absoluteTolerance` | No | number | Allowed difference as a fixed amount, in the target’s units. Checked in addition to `tolerancePercentage`, not instead of it — a value passes if it's within either. For an exact match, set both `absoluteTolerance: 0` and `tolerancePercentage: 0`. |
 | `outputFormat` | No | `int` or `float` | Default `float`. |
 | `strictHeadline` | No | boolean | Default `true`. Grades the number identified as the answer’s primary result, and fails the rubric if no primary result can be identified. Set to `false` to pass when any number in the response matches the target. |
 | `extractionGuidance` | No | string | Hint for which number to grade when the answer has several, e.g. "the enterprise ARR, not total ARR". |
 | `warnOnly` | No | boolean | Default `false`. Grade and report this rubric without letting it fail or error the case. See [Warn-only rubrics](#warn-only-rubrics). |
+| `measure` | No | string | Groups this rubric with others checking the same quality, so they roll up into one rate. Lowercase kebab-case. See [Measures](#measures). |
 
 #### Warn-only rubrics[​](#warn-only-rubrics "Direct link to Warn-only rubrics")
 
@@ -566,6 +588,58 @@ Use it for diagnostic checks: things worth measuring and tracking over time, but
 This covers grading errors as well as failures. If a warn-only rubric cannot be graded at all, for example because the judge call fails, the case is still unaffected.
 
 Every case needs at least one rubric that is not warn-only. A case whose rubrics are all warn-only is rejected when you submit the suite.
+
+### Measures[​](#measures "Direct link to Measures")
+
+A measure groups related rubrics across cases, so you can see how often the agent passed that type of check across the whole suite.
+
+For example, several cases might include rubrics that check whether the agent used the correct tables or definitions to reach its answer. If those rubrics all use the `correct-method` measure, you can see how often the agent passed that check across the suite instead of reviewing each rubric individually.
+
+Measures are optional. A suite without measures works the same way as a suite with them.
+
+You can add `measure` to any type of rubric:
+
+```
+rubrics:
+
+
+
+- id: counted_distinct_users
+
+
+
+type: judge_thread
+
+
+
+criterion: "Did the agent count distinct users rather than sessions?"
+
+
+
+measure: correct-method
+```
+
+A rubric can have at most one measure, and the same measure can be used across multiple rubrics and cases. Measure names are lowercase kebab-case and must start with a letter.
+
+Measures are scoped to a suite. Measure names are user-defined rather than selected from a predefined list, so it’s important to use them consistently within a suite. Here are some suggested measures:
+
+| Measure | Checks |
+| --- | --- |
+| `objective-met` | The agent answered the question that was asked. |
+| `correct-method` | It got there the right way — right tables, filters, and definitions. |
+| `answer-grounded` | The answer is backed by what the agent actually queried. |
+
+These are examples, not predefined values. We recommend naming measures so that a passing check represents a positive outcome. That way, a higher pass rate consistently means better performance.
+
+Renaming a measure starts its history over
+
+A measure is identified by its exact string name. If you rename a measure, results recorded under the old name will not be included in the new measure's history.
+
+A measure's pass rate shows how often the rubrics tagged with that measure passed. Every tagged rubric counts equally within its case, and every case counts equally across the suite, however many attempts it ran. Tagging more rubrics with the same measure, or running more attempts, adds confidence rather than weight. Checks that errored or were not graded are excluded rather than counted as failures.
+
+Warn-only rubrics still contribute to a measure's pass rate. This lets you track a check across the suite without making it affect whether the case passes. As a result, a case can pass even if one of its measures has a pass rate below 100%.
+
+Once a suite defines measures, their pass rates appear with the rest of the run results in the CLI and on the Evals pages in Context Studio.
 
 ### Attach context to a case[​](#attach-context-to-a-case "Direct link to Attach context to a case")
 
@@ -645,5 +719,6 @@ The selected model must be available in your workspace.
   + [Suite-level fields](#suite-level-fields)
   + [Case-level fields](#case-level-fields)
   + [Rubric types](#rubric-types)
+  + [Measures](#measures)
   + [Attach context to a case](#attach-context-to-a-case)
 * [Compare models](#compare-models)

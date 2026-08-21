@@ -2544,9 +2544,3 @@ Copy
 **500**
 
 delete/v1/guides/draft/{orgGuideFileId}
-
-https://app.hex.tech/api/v1/guides/draft/{orgGuideFileId}
-
-### Response samples
-
-* 400

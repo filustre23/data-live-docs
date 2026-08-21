@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-08-20T18:28+00:00_
+_Generated 2026-08-21T06:33+00:00_
 
-**9 sources, 4388 topics total**
+**9 sources, 4408 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_567 topics_
+_584 topics_
 
 - `anthropic-sdk/about-claude/additional-resources`
 - `anthropic-sdk/about-claude/glossary`
@@ -53,6 +53,7 @@ _567 topics_
 - `anthropic-sdk/agents-and-tools/remote-mcp-servers`
 - `anthropic-sdk/agents-and-tools/tool-use/advisor-tool`
 - `anthropic-sdk/agents-and-tools/tool-use/bash-tool`
+- `anthropic-sdk/agents-and-tools/tool-use/browser-use-tool`
 - `anthropic-sdk/agents-and-tools/tool-use/build-a-tool-using-agent`
 - `anthropic-sdk/agents-and-tools/tool-use/code-execution-tool`
 - `anthropic-sdk/agents-and-tools/tool-use/computer-use-tool`
@@ -425,6 +426,12 @@ _567 topics_
 - `anthropic-sdk/api/compliance/organizations/users`
 - `anthropic-sdk/api/compliance/organizations/users/list`
 - `anthropic-sdk/api/errors`
+- `anthropic-sdk/api/files`
+- `anthropic-sdk/api/files/delete`
+- `anthropic-sdk/api/files/download`
+- `anthropic-sdk/api/files/list`
+- `anthropic-sdk/api/files/retrieve_metadata`
+- `anthropic-sdk/api/files/upload`
 - `anthropic-sdk/api/ip-addresses`
 - `anthropic-sdk/api/messages`
 - `anthropic-sdk/api/messages/batches`
@@ -442,6 +449,16 @@ _567 topics_
 - `anthropic-sdk/api/overview`
 - `anthropic-sdk/api/rate-limits`
 - `anthropic-sdk/api/service-tiers`
+- `anthropic-sdk/api/skills`
+- `anthropic-sdk/api/skills/create`
+- `anthropic-sdk/api/skills/delete`
+- `anthropic-sdk/api/skills/list`
+- `anthropic-sdk/api/skills/retrieve`
+- `anthropic-sdk/api/skills/versions`
+- `anthropic-sdk/api/skills/versions/create`
+- `anthropic-sdk/api/skills/versions/delete`
+- `anthropic-sdk/api/skills/versions/list`
+- `anthropic-sdk/api/skills/versions/retrieve`
 - `anthropic-sdk/api/supported-regions`
 - `anthropic-sdk/api/versioning`
 - `anthropic-sdk/build-with-claude/batch-processing`
@@ -3574,7 +3591,7 @@ _155 topics_
 
 Upstream: <https://learn.hex.tech/>
 
-_379 topics_
+_382 topics_
 
 - `hex/changelog`
 - `hex/changelog/2020-12-17`
@@ -3869,6 +3886,9 @@ _379 topics_
 - `hex/docs/legal/terms-and-conditions-2020-03-27`
 - `hex/docs/legal/tos`
 - `hex/docs/legal/website-terms-of-use`
+- `hex/docs/migrate-to-hex`
+- `hex/docs/migrate-to-hex/migrate-from-looker`
+- `hex/docs/migrate-to-hex/migrate-from-tableau`
 - `hex/docs/organize-content/archive`
 - `hex/docs/organize-content/collections`
 - `hex/docs/organize-content/organize-projects`

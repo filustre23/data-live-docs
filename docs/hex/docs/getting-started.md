@@ -2,7 +2,7 @@
 
 [## 📄️What is Hex
 
-Hex is the modern workspace for collaborative data science and analytics](/docs)
+Hex is an AI analytics platform that makes it easy for anyone to explore data, with answers you can trust](/docs)
 
 [## 📄️Connect your data
 

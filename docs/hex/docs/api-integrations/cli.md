@@ -225,11 +225,14 @@ Options:
 
 ### Configuration for AI agents[​](#configuration-for-ai-agents "Direct link to Configuration for AI agents")
 
-AI agents that can interact with your command line, such as Claude Code, can be instructed to use the `hex` CLI to accomplish tasks. Install the available Claude skill with `hex install agent-skill --claude`.
+AI agents that can interact with your command line, such as Claude Code, Cursor, or Codex, can use the `hex` CLI to create projects, edit cells, and run the Hex Agent.
+
+* Install the general Hex CLI skill with `hex install agent-skill --claude` (or `--codex` / `--path <dir>`).
+* To rebuild Tableau or Looker dashboards in Hex, install the [Hex migration skills](/docs/migrate-to-hex).
 
 ## Bugs & issues[​](#bugs--issues "Direct link to Bugs & issues")
 
-Please contact [[email protected]](/cdn-cgi/l/email-protection#e0939590908f9294a0888598ce94858388) if you encounter any bugs, or other issues.
+Please contact [[email protected]](/cdn-cgi/l/email-protection#8ffcfaffffe0fdfbcfe7eaf7a1fbeaece7) if you encounter any bugs, or other issues.
 
 #### On this page
 

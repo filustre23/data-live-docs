@@ -2,59 +2,64 @@ On this page
 
 # What is Hex?
 
-Hex is a modern, collaborative workspace for data science and analytics.
+Hex is an AI analytics platform that makes it easy for anyone to explore data, with answers you can trust.
 
-## The fastest way to work with data, together[​](#the-fastest-way-to-work-with-data-together "Direct link to The fastest way to work with data, together")
+## The fastest way to get trusted answers from data[​](#the-fastest-way-to-get-trusted-answers-from-data "Direct link to The fastest way to get trusted answers from data")
 
-Hex is an integrated environment that helps you do amazing work with data, whether you're using SQL, Python, or no-code. Hex combines the best of traditional data science notebooks, with integrated AI assist, easy-to-build data apps and reports, and advanced collaboration, so your data and business teams can use data in new ways.
+Hex allows you to ask questions, explore data, and build shareable apps, all in plain language. It gives your company a shared platform to collaborate with teammates and AI agents, with every answer and analysis grounded in trusted context about your business.
 
-Data-driven organizations of all sizes, from startups to Fortune 500 companies, use Hex to reduce time-to-insight and make better decisions faster. Hex enables teams to:
+Companies use Hex across a range of analytics workflows to bring data into everyday work across the organization, from analysts and data scientists to business users and executives.
 
-* **Maximize speed and quality** of data work with zero-setup, multi-language notebooks.
-* **Find insights worth reporting** with fast ad hoc and exploratory data analysis.
-* **Operationalize data** with interactive dashboards, reports, and data apps.
-* **Tighten the feedback loop** on both published artifacts and underlying code.
-* **Empower everyone** to make data-informed decisions.
+* **[Self-serve in plain language](/docs/explore-data/threads).** Get answers and ask follow-ups without navigating complicated drag-and-drop interfaces or filing a ticket to the data team.
+* **[Explore data deeply](/docs/explore-data/notebook-view/notebook-agent).** Investigate questions with AI-generated SQL + Python, test ideas, and follow analysis wherever it leads.
+* **[Build and share artifacts](/docs/share-insights/apps/generative-apps).** Turn analysis into interactive apps, dashboards, and reports with just a prompt.
+* **[Ground every answer in shared context](/docs/agent-management/context-management).** Keep AI aligned with trusted business definitions and logic.
+* **[Govern and improve AI at scale](/docs/agent-management/context-studio).** Observe usage, audit how answers are produced, and automate improvements to context over time.
 
 ## How is Hex different?[​](#how-is-hex-different "Direct link to How is Hex different?")
 
-Hex is a new kind of data tool, built to be more integrated, collaborative, and powerful than existing point solutions.
+### Ask, explore, publish — from anywhere[​](#ask-explore-publish--from-anywhere "Direct link to Ask, explore, publish — from anywhere")
 
-### Hex builds on traditional data notebooks[​](#hex-builds-on-traditional-data-notebooks "Direct link to Hex builds on traditional data notebooks")
+Hex connects together workflows that are often fragmented across BI tools, notebooks, and standalone AI assistants, without forcing everyone into a single interface. Teams can ask questions and build in Hex or through the tools they already use, while staying connected to the same trusted context, execution layer, and governance.
 
-Hex takes the iterative workflow so beloved in data notebooks and brings it to the cloud. One key difference is Hex’s [reactive execution](/docs/explore-data/projects/project-execution/execution-model) compute model, which makes analyses more interpretable, reproducible, and performant. Other Hex features are natural extensions of the notebook format to make them both more accessible and more powerful:
+* **[In Hex](/docs/getting-started/ai-overview):** Ask a question, dig into the data, then turn the result into a dashboard or app in one seamless flow.
+* **[Through MCP](/docs/api-integrations/mcp-server):** Ask questions and explore data from tools like Claude or ChatGPT, while using the same governed context and retaining visibility into how answers are produced.
+* **[From the CLI](/docs/api-integrations/cli):** Build and edit analysis from coding agents like Claude Code or Codex, then publish that work into the same shared, governed environment.
+* **[In Slack](/docs/share-insights/hex-agent-in-slack):** Ask about a metric in the middle of a conversation and get a trusted answer with the same context Hex uses everywhere else.
 
-* **Secure data connections:** Connect directly to [data warehouses](/docs/connect-to-data/data-connections/data-connections-introduction) like Snowflake, Redshift, and BigQuery, or to [cloud storage solutions](/docs/connect-to-data/cloud-storage-integrations) like Amazon S3.
-* **SQL support:** Flow between [SQL](/docs/explore-data/cells/sql-cells/sql-cells-introduction), Python, and no-code to suit the task at hand.
-* **No-code cells:** Add built-in [charts](/docs/explore-data/cells/visualization-cells/chart-cells), [input parameters](/docs/explore-data/cells/input-cells/input-cells-introduction), [pivot tables](/docs/explore-data/cells/transform-cells/pivot-cells), and other handy cell types.
-* **AI assist:** Ask the [Notebook Agent](/docs/explore-data/cells/sql-cells/sql-cells-introduction#notebook-agent) to help you generate, edit, debug, or document your code, create and modify charts, and even generate entire analyses.
-* **Collaboration:** [Multiplayer](/docs/collaborate/real-time-collaboration), [commenting](/docs/collaborate/comments), and [versioning](/docs/explore-data/projects/history-and-versions) make data a team sport.
-* **Consistency:** Standardize metrics and analyses with reusable [components](/docs/explore-data/components) and [dbt semantic layer cells](/docs/explore-data/cells/data-cells/dbt-metrics-cells).
-* **Compute pushdown:** Handle datasets of any size with [query mode](/docs/explore-data/cells/sql-cells/sql-cells-introduction#when-should-i-use-query-mode-vs-dataframe-mode).
+That means answers from AI don't become yet another disconnected analytics layer. Questions, analysis, apps, and the context behind them stay connected, reusable, and governed, whether the work starts in Hex or somewhere else.
 
-### Hex lets you build beautiful, interactive data apps and reports[​](#hex-lets-you-build-beautiful-interactive-data-apps-and-reports "Direct link to Hex lets you build beautiful, interactive data apps and reports")
+### Trust and control behind every answer[​](#trust-and-control-behind-every-answer "Direct link to Trust and control behind every answer")
 
-Traditional dashboarding tools can be rigid and difficult. Hex is built to be flexible and fast, allowing you to query, transform, and visualize your data in a bunch of different ways to find answers. Then, when you're ready to share, Hex makes it easy to publish your work as an interactive experience that anyone can use.
+Hex gives data teams the trust and control they need to deliver AI analytics across an organization. By grounding every agent interaction in shared context about your company's data, Hex's context engine keeps answers accurate and consistent, while giving you complete visibility into how answers were produced and control over who can access what.
 
-* **Fast iteration:** Hex lets teams quickly iterate on new analyses and reports, moving seamlessly from ad hoc exploration to operational dashboard with [built-in charts](/docs/explore-data/cells/visualization-cells/chart-cells), a drag-and-drop [App builder](/docs/share-insights/apps/app-builder), and [version control](/docs/explore-data/projects/history-and-versions).
-* **Collaboration:** Hex tightens the feedback-loop by allowing you to [control permissions](/docs/collaborate/sharing-and-permissions/project-sharing#project-permissions) and [separate comments](/docs/collaborate/comments#published-app-comments-vs-notebook-comments) on your published artifacts from comments on your underlying code.
-* **Parameterization:** Hex lets you add interactivity to any analysis, report or dashboard with [input parameters](/docs/explore-data/cells/input-cells/input-cells-introduction). Quickly filter, group, and pivot your data to find insights faster.
-* **Transparency:** In Hex, you can optionally share a dashboard or report with [Can Explore permissions](/docs/collaborate/sharing-and-permissions/project-sharing#can-explore) to give more technical stakeholders a peek under the hood. Stakeholders can also drill down into the underlying data using [Explore](/docs/share-insights/explore), or set up [app notifications](/docs/share-insights/app-notifications) via email or Slack to stay informed.
+* **[Bring context from anywhere](/docs/agent-management/context-management).** Sync semantic models, dbt code, warehouse metadata, markdown files, external apps, and other context resources without rebuilding everything in a proprietary layer. Or build context directly in Hex and keep it portable.
+* **[Improve context over time](/docs/agent-management/suggestions).** Hex automatically identifies gaps in your context, captures useful knowledge from questions and analysis, and continuously sharpens your context resources so future answers improve with use.
+* **[Continuously evaluate answers](/docs/agent-management/evals).** Use evals to measure response quality, catch regressions, and improve agent performance over time.
+* **[See every step behind every answer](/docs/agent-management/observability).** With Context Studio, inspect the context used, queries run, and steps taken to produce an answer. Whether the question was asked in Hex, Slack, ChatGPT, Claude Code, Cursor, or elsewhere, you retain full visibility and lineage into what happened.
+* **[Keep access governed](/docs/administration/workspace_settings/overview).** Apply permissions and data controls consistently so every user and agent only accesses the data and context they're authorized to see and use.
 
 ## Resources to get started[​](#resources-to-get-started "Direct link to Resources to get started")
 
-Here are a few resources to help you get started:
+Connect your data, set up foundational context, and start exploring with AI.
 
-* Browse our [Use Case Gallery](https://hex.tech/use-cases/) of sample projects to get inspired.
-* Check out our [video library](https://www.youtube.com/@_hex_tech) for how-tos and tutorials.
-* Browse templates in the **?** menu in the bottom left of your project.
+**For admins**
 
-Don't hesitate to reach out to [[email protected]](/cdn-cgi/l/email-protection#a1d2d4d1d1ced3d5e1c9c4d98fd5c4c2c9) or chat with us live from the **?** menu in the bottom left of your project.
+* **[Connect your data](/docs/getting-started/connect-your-data).** Set up the warehouse and data connections your team will use in Hex.
+* **[Set up your workspace for AI agents](/tutorials/ai-best-practices/setup-for-ai-agents).** Configure trusted data, context, and workspace foundations so AI agents can return better answers.
+* **[Admin 101](/tutorials/quickstart/admin-101).** Learn the core workspace, permissions, and administration setup.
+
+**For users**
+
+* **[Learn the Hex basics](/tutorials/quickstart/hex-basics).** Get familiar with asking questions, exploring data, building analyses, and publishing apps.
+* **[Explore AI best practices](/tutorials/ai-best-practices).** Learn how to get better results from AI across Threads, Notebook Agent, and other Hex workflows.
+
+Don't hesitate to reach out to [[email protected]](/cdn-cgi/l/email-protection#b0c3c5c0c0dfc2c4f0d8d5c89ec4d5d3d8) or chat with us live from the **?** menu in the bottom left of your project.
 
 #### On this page
 
-* [The fastest way to work with data, together](#the-fastest-way-to-work-with-data-together)
+* [The fastest way to get trusted answers from data](#the-fastest-way-to-get-trusted-answers-from-data)
 * [How is Hex different?](#how-is-hex-different)
-  + [Hex builds on traditional data notebooks](#hex-builds-on-traditional-data-notebooks)
-  + [Hex lets you build beautiful, interactive data apps and reports](#hex-lets-you-build-beautiful-interactive-data-apps-and-reports)
+  + [Ask, explore, publish — from anywhere](#ask-explore-publish--from-anywhere)
+  + [Trust and control behind every answer](#trust-and-control-behind-every-answer)
 * [Resources to get started](#resources-to-get-started)
