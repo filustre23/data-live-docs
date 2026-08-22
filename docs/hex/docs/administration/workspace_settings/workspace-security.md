@@ -103,7 +103,7 @@ By default, users with the Editor role can create [project data connections](/do
 
 Admins may choose to disable this feature so that data connections can only be created in workspace settings by Admins.
 
-If disabled, any existing project data connections will continue to work. Reach out to [support](/cdn-cgi/l/email-protection#b8cbcdc8c8d7caccf8d0ddc096ccdddbd0) to get a list of projects that are currently using a project data connection.
+If disabled, any existing project data connections will continue to work. Reach out to [support](/cdn-cgi/l/email-protection#34474144445b4640745c514c1a4051575c) to get a list of projects that are currently using a project data connection.
 
 ## SSO configuration[​](#sso-configuration "Direct link to SSO configuration")
 
@@ -120,6 +120,17 @@ When on, users will be able to configure and use tokens to access the Hex public
 warning
 
 Setting the maximum expiration to a lower value will revoke any existing tokens that have existed longer than the new maximum expiration.
+
+caution
+
+This setting only governs [personal access tokens](/docs/api-integrations/api/overview#personal-access-tokens). This is true whether API access is turned off for the entire workspace, or revoked for an individual user. It does **not** restrict:
+
+* [Workspace tokens](/docs/api-integrations/api/overview#workspace-tokens), which are not subject to this setting. Existing workspace tokens keep working, and Admins can still create new ones.
+* [Signed embedding](/docs/share-insights/embedding/signed-embedding), which uses a workspace token.
+* The [Hex MCP server](/docs/api-integrations/mcp-server), which authenticates separately from personal access tokens.
+* [Public and private embedded apps](/docs/share-insights/embedding/public-and-private-embedding), which rely on project sharing rather than API tokens.
+
+To revoke all of a user's access to Hex, [deactivate the user](/docs/administration/workspace_settings/overview#deactivate-users) instead.
 
 ## Workspace SSH key[​](#workspace-ssh-key "Direct link to Workspace SSH key")
 

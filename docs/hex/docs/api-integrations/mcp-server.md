@@ -9,6 +9,7 @@ info
 * Available on the Team and Enterprise [plans](https://hex.tech/pricing/).
 * Hex MCP server works with Claude Desktop, Claude Code, Cursor, ChatGPT, Codex, and Glean, as well as most standard MCP clients.
 * Users will need the Explorer workspace [role](/docs/collaborate/sharing-and-permissions/roles) or higher to use the Hex MCP server.
+* MCP access is not governed by the workspace [API access](/docs/administration/workspace_settings/workspace-security#enable-api-access) setting, which only affects personal access tokens. Turning off API access for the workspace, or revoking it for an individual user, does not disable MCP access. To revoke all of a user's access, [deactivate the user](/docs/administration/workspace_settings/overview#deactivate-users).
 * Hex MCP server is currently in beta.
 
 ## Overview[​](#overview "Direct link to Overview")

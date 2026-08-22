@@ -32,7 +32,7 @@ New users can also be added to your workspace by way of a [project invite](/docs
 
 To invite users to your workspace, navigate to **Settings > Users**, and click **+ User**.
 
-Type or paste the email (or a comma-separated list of emails) you wish to add to your workspace. Then select a workspace role from the drop-down menu and click **Add users**. The invited user(s) will receive an invite email from **[[email protected]](/cdn-cgi/l/email-protection#4c222338252a350c2429346238292f24)** prompting them to join your workspace. You will see the invited user(s) appear in the **Users** list.
+Type or paste the email (or a comma-separated list of emails) you wish to add to your workspace. Then select a workspace role from the drop-down menu and click **Add users**. The invited user(s) will receive an invite email from **[[email protected]](/cdn-cgi/l/email-protection#97f9f8e3fef1eed7fff2efb9e3f2f4ff)** prompting them to join your workspace. You will see the invited user(s) appear in the **Users** list.
 
 ### Allowed domains[​](#allowed-domains "Direct link to Allowed domains")
 
@@ -61,6 +61,8 @@ Admins can create any number of workspace invite links. Workspace invite links a
 ### Deactivate users[​](#deactivate-users "Direct link to Deactivate users")
 
 Admins can deactivate users from the **Settings** → **Users** tab, under the "Access & Security" header. Click the three-dot menu to the right of the user's name and select **Deactivate**. This will prompt you to transfer ownership of the deactivated user's projects.
+
+Deactivating a user is the only way to revoke all of that user's access to Hex. Turning off [API access](/docs/administration/workspace_settings/workspace-security#enable-api-access), either for the whole workspace or for an individual user, only affects [personal access tokens](/docs/api-integrations/api/overview#personal-access-tokens). It does not invalidate [workspace tokens](/docs/api-integrations/api/overview#workspace-tokens), and it does not prevent the user from reaching Hex through the [MCP server](/docs/api-integrations/mcp-server), [public and private embedded apps](/docs/share-insights/embedding/public-and-private-embedding), or [signed embedding](/docs/share-insights/embedding/signed-embedding).
 
 ### Groups[​](#groups "Direct link to Groups")
 

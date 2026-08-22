@@ -7,6 +7,7 @@ Embed entire apps or specific cells in an iframe on your website, or in a Notion
 info
 
 * Users need **Can Edit** or higher [project permissions](/docs/collaborate/sharing-and-permissions/project-sharing#project-permissions) to implement public or private embedding.
+* Public and private embedding do not use API tokens, so they are unaffected by the workspace [API access](/docs/administration/workspace_settings/workspace-security#enable-api-access) setting.
 
 ## Public embedding[​](#public-embedding "Direct link to Public embedding")
 
