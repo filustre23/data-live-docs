@@ -22,7 +22,7 @@ Integrate Hex with your dbt metadata and/or dbt Semantic layer.](/docs/connect-t
 
 [## 📄️OAuth data connections
 
-Configure OAuth data connections to require users to authenticate into your data warehouse with user-specific credentials.](/docs/connect-to-data/data-connections/oauth-data-connections)
+Require users to authenticate to your data warehouse with their own credentials using OAuth data connections.](/docs/connect-to-data/data-connections/oauth-data-connections)
 
 [## 📄️ClickHouse chDB integration
 

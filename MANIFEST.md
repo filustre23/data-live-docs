@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-08-24T18:30+00:00_
+_Generated 2026-08-25T06:34+00:00_
 
-**9 sources, 4414 topics total**
+**9 sources, 4442 topics total**
 
 ## airflow
 
@@ -16,19 +16,15 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_584 topics_
+_612 topics_
 
 - `anthropic-sdk/about-claude/additional-resources`
 - `anthropic-sdk/about-claude/glossary`
 - `anthropic-sdk/about-claude/model-deprecations`
 - `anthropic-sdk/about-claude/models/choosing-a-model`
-- `anthropic-sdk/about-claude/models/introducing-claude-fable-5-and-claude-mythos-5`
 - `anthropic-sdk/about-claude/models/migration-guide`
 - `anthropic-sdk/about-claude/models/model-ids-and-versions`
 - `anthropic-sdk/about-claude/models/optimizing-for-cost-and-intelligence`
-- `anthropic-sdk/about-claude/models/overview`
-- `anthropic-sdk/about-claude/models/whats-new-opus-5`
-- `anthropic-sdk/about-claude/models/whats-new-sonnet-5`
 - `anthropic-sdk/about-claude/pricing`
 - `anthropic-sdk/about-claude/use-case-guides/content-moderation`
 - `anthropic-sdk/about-claude/use-case-guides/customer-support-chat`
@@ -592,8 +588,40 @@ _584 topics_
 - `anthropic-sdk/managed-agents/tools`
 - `anthropic-sdk/managed-agents/vaults`
 - `anthropic-sdk/managed-agents/webhooks`
+- `anthropic-sdk/models/fable-5/introducing-claude-fable-5-and-claude-mythos-5`
+- `anthropic-sdk/models/fable-5/overview`
+- `anthropic-sdk/models/haiku-4-5/overview`
+- `anthropic-sdk/models/mythos-5/overview`
+- `anthropic-sdk/models/opus-4-5/overview`
+- `anthropic-sdk/models/opus-4-6/overview`
+- `anthropic-sdk/models/opus-4-7/overview`
+- `anthropic-sdk/models/opus-4-8/overview`
+- `anthropic-sdk/models/opus-5/overview`
+- `anthropic-sdk/models/opus-5/whats-new-opus-5`
+- `anthropic-sdk/models/overview`
+- `anthropic-sdk/models/sonnet-4-5/overview`
+- `anthropic-sdk/models/sonnet-4-6/overview`
+- `anthropic-sdk/models/sonnet-5/overview`
+- `anthropic-sdk/models/sonnet-5/whats-new-sonnet-5`
 - `anthropic-sdk/release-notes/overview`
-- `anthropic-sdk/release-notes/system-prompts`
+- `anthropic-sdk/release-notes/system-prompts/claude-fable-5`
+- `anthropic-sdk/release-notes/system-prompts/claude-haiku-3`
+- `anthropic-sdk/release-notes/system-prompts/claude-haiku-3-5`
+- `anthropic-sdk/release-notes/system-prompts/claude-haiku-4-5`
+- `anthropic-sdk/release-notes/system-prompts/claude-opus-3`
+- `anthropic-sdk/release-notes/system-prompts/claude-opus-4`
+- `anthropic-sdk/release-notes/system-prompts/claude-opus-4-1`
+- `anthropic-sdk/release-notes/system-prompts/claude-opus-4-5`
+- `anthropic-sdk/release-notes/system-prompts/claude-opus-4-6`
+- `anthropic-sdk/release-notes/system-prompts/claude-opus-4-7`
+- `anthropic-sdk/release-notes/system-prompts/claude-opus-4-8`
+- `anthropic-sdk/release-notes/system-prompts/claude-opus-5`
+- `anthropic-sdk/release-notes/system-prompts/claude-sonnet-3-5`
+- `anthropic-sdk/release-notes/system-prompts/claude-sonnet-3-7`
+- `anthropic-sdk/release-notes/system-prompts/claude-sonnet-4`
+- `anthropic-sdk/release-notes/system-prompts/claude-sonnet-4-5`
+- `anthropic-sdk/release-notes/system-prompts/claude-sonnet-4-6`
+- `anthropic-sdk/release-notes/system-prompts/overview`
 - `anthropic-sdk/resources/overview`
 - `anthropic-sdk/test-and-evaluate/develop-tests`
 - `anthropic-sdk/test-and-evaluate/strengthen-guardrails/handle-streaming-refusals`

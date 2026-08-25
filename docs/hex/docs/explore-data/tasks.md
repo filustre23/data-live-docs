@@ -94,7 +94,7 @@ Notification recipients need at least [Can view results](/docs/connect-to-data/d
 
 When a Task runs against an [OAuth data connection](/docs/connect-to-data/data-connections/oauth-data-connections), it uses the Task creator's OAuth credentials to execute queries, ensuring the Task always sees exactly the same data its creator has access to. This is the same model as [Hex Agent in Slack](/docs/share-insights/hex-agent-in-slack).
 
-If the connection has [credential sharing disabled for notebooks](/docs/connect-to-data/data-connections/oauth-data-connections#credential-sharing), the resulting Thread cannot be shared with other users in the workspace — but the notification will still deliver to the Task's configured destination.
+If the connection [requires personal credentials](/docs/connect-to-data/data-connections/oauth-data-connections#notebook-view) for authoring and [**User-scoped results**](/docs/connect-to-data/data-connections/oauth-data-connections#user-scoped-results) is **On**, the resulting Thread cannot be shared with other users in the workspace — but the notification will still deliver to the Task's configured destination.
 
 If the Task creator's OAuth session expires, the next run will fail and the creator will be notified to reauthenticate.
 

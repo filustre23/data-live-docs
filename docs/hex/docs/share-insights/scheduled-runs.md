@@ -52,6 +52,10 @@ Users with **Can edit** permission can cancel in-progress scheduled runs from th
 
 If your app is set to [show results from a previous run](/docs/share-insights/apps/app-run-settings#when-an-app-user-opens-the-published-app), users with **Can edit** permission can leverage scheduled runs to update the results a user sees when they open the app.
 
+tip
+
+For OAuth connections with **User-scoped results** enabled, a scheduled run only updates the schedule owner's cached results — not a shared cache for other viewers. See [OAuth scheduled runs](/docs/connect-to-data/data-connections/oauth-data-connections#scheduled-runs).
+
 Runs that update the published results are marked in the scheduled runs list with a refresh icon.
 
 By default, scheduled runs created by users with **Can edit** permission will update the published results.

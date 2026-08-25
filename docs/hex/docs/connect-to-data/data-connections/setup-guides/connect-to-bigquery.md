@@ -20,7 +20,9 @@ If you have relatively small data and are very early, using something lightweigh
 1. Sign up for free [GCP / BigQuery](https://cloud.google.com/bigquery) account if you don't have one.
 2. Set up a Service User Account in Google Cloud.
 3. In Hex, go to **Settings** → **Data sources**.
-4. Click **+ Connection**, select **BigQuery**, and fill out the fields below.
+4. Select **+ Connection**, select **BigQuery**, and fill out the fields below.
+
+You can authenticate with a **service account** (steps above) or with **OAuth** for per-user warehouse credentials.
 
 ## Basic settings[​](#basic-settings "Direct link to Basic settings")
 
@@ -67,8 +69,44 @@ tip
 
 If you use a firewall to restrict database access, you'll need to [add Hex's IP addresses to your allowlist](/docs/connect-to-data/data-connections/allow-connections-from-hex-ip-addresses).
 
+## OAuth setup[​](#bigquery-oauth-setup "Direct link to OAuth setup")
+
+info
+
+* Available on the **Enterprise** [plan](https://hex.tech/pricing).
+* Users need the **Admin** [workspace role](/docs/collaborate/sharing-and-permissions/roles) to configure OAuth data connections.
+
+OAuth requires each Hex user to authenticate to BigQuery with their own credentials. Create an OAuth client in Google Cloud, add the client credentials in Hex to create a workspace OAuth token, then set a data connection's authentication type to **OAuth Token**.
+
+Connections with OAuth enabled can affect product behavior — [learn more](/docs/connect-to-data/data-connections/oauth-data-connections).
+
+### Step 1: Create an OAuth client in Google Cloud[​](#step-1-create-an-oauth-client-in-google-cloud "Direct link to Step 1: Create an OAuth client in Google Cloud")
+
+A Google Cloud admin creates an OAuth client in the [Google Cloud Console](https://console.cloud.google.com) and retrieves the `CLIENT_ID` and `CLIENT_SECRET`.
+
+In the console, select **APIs & Services → Credentials → + Create credentials → OAuth client ID**, choose **Web application** as the application type, and add an authorized redirect URI:
+
+* Multi-tenant: `https://app.hex.tech/bigquery-oauth-success`
+* Single-tenant, EU, or HIPAA: `https://<YOUR-HEX-DOMAIN-NAME>/bigquery-oauth-success`
+
+See the [Google Cloud OAuth documentation](https://developers.google.com/identity/protocols/oauth2) for more detail.
+
+### Step 2: Create the OAuth connection in Hex[​](#step-2-create-the-oauth-connection-in-hex "Direct link to Step 2: Create the OAuth connection in Hex")
+
+1. Go to **Workspace Settings → Data sources**.
+2. Find **BigQuery OAuth Connections** and select **+ Connection**.
+3. Enter the Client ID and Client Secret, then follow the prompts to authenticate. You are redirected to the Google login screen. After you authenticate, setup is complete.
+
+### Step 3: Update your data connection[​](#step-3-update-your-data-connection "Direct link to Step 3: Update your data connection")
+
+Edit your BigQuery data connection and set **Authentication type** to **OAuth Token**. Configure [OAuth permissions](/docs/connect-to-data/data-connections/oauth-data-connections#credential-sharing) on the connection as needed.
+
 #### On this page
 
 * [How to get set up](#how-to-get-set-up)
 * [Basic settings](#basic-settings)
 * [Additional settings](#additional-settings)
+* [OAuth setup](#bigquery-oauth-setup)
+  + [Step 1: Create an OAuth client in Google Cloud](#step-1-create-an-oauth-client-in-google-cloud)
+  + [Step 2: Create the OAuth connection in Hex](#step-2-create-the-oauth-connection-in-hex)
+  + [Step 3: Update your data connection](#step-3-update-your-data-connection)

@@ -184,9 +184,11 @@ We recommend that users only use sensitive threads when necessary, because it ma
 
 ## OAuth and Threads[​](#oauth-and-threads "Direct link to OAuth and Threads")
 
-When using Threads with an OAuth data connection, the user's personal credentials will be used to execute SQL queries. If the data connection has [credential sharing enabled for notebooks](/docs/connect-to-data/data-connections/oauth-data-connections#credential-sharing), threads can be [shared](#sharing) with other users in the workspace. Recipients of shared Threads will see the outputs that were created using the Thread creator's OAuth credentials.
+When using Threads with an OAuth data connection, query credentials follow the connection's [authoring queries](/docs/connect-to-data/data-connections/oauth-data-connections#notebook-view) setting.
 
-If the data connection has [credential sharing disabled for notebooks](/docs/connect-to-data/data-connections/oauth-data-connections#credential-sharing), users will not be able to share threads they've created with any other users in the workspace.
+If the connection **requires personal credentials** and [**User-scoped results**](/docs/connect-to-data/data-connections/oauth-data-connections#user-scoped-results) is **On**, users cannot [share](#sharing) Threads with other users in the workspace.
+
+If personal credentials are required but **User-scoped results** is **Off**, Threads can be shared as usual. Recipients see outputs created with the credentials that ran those queries.
 
 ## Scheduling Threads with Tasks[​](#scheduling-threads-with-tasks "Direct link to Scheduling Threads with Tasks")
 

@@ -192,16 +192,16 @@ The generated SQL you see here may be more complex than you'd expect due to the 
 
 When exploring on a database table from an [OAuth data connection](/docs/connect-to-data/data-connections/oauth-data-connections), users will always be required to use their own OAuth tokens. If an exploration performed directly on a database table is shared between users, the underlying query will always rerun using each user's token; it will not be possible to view data outputs that were a result of another user's token.
 
-When exploring from an app that has [token sharing disabled](/docs/connect-to-data/data-connections/oauth-data-connections#published-app-view), users will always be required to use their own OAuth tokens when exploring from the app.
+When exploring from an app that [requires personal credentials](/docs/connect-to-data/data-connections/oauth-data-connections#published-app-view), users will always be required to use their own OAuth tokens when exploring from the app.
 
-When exploring from an app that has [token sharing enabled](/docs/connect-to-data/data-connections/oauth-data-connections#published-app-view), exploring from the app will use data that was a result of queries that ran using the shared token. If fresh queries against the database need to be executed when using an exploration, they will never be executed using the shared token; instead, new queries will always be executed using the user's individual token.
+When exploring from an app that [allows embedding publisher credentials](/docs/connect-to-data/data-connections/oauth-data-connections#published-app-view) and credentials are embedded, exploring from the app will use data that was a result of queries that ran using the publisher's token. If fresh queries against the database need to be executed when using an exploration, they will never be executed using the shared token; instead, new queries will always be executed using the user's individual token.
 
 ## How to set up an app for optimal exploring[​](#how-to-set-up-an-app-for-optimal-exploring "Direct link to How to set up an app for optimal exploring")
 
 There are a few ways projects can be fine-tuned such that their apps are optimized for exploring:
 
 * Dataframes that feed into charts and pivots should have plenty of columns. When a user explores from a cell in an app, the columns available to them in the field picker are populated by the columns of the dataframe that feeds into the chart or pivot. Having plenty of columns gives the end users choices when it comes to slicing and dicing the data, instead of being limited to the few columns that were used to configure the chart or pivot.
-* Prevent, to the extent possible, aggregation upstream of charts. For example, say that one were to roll up distinct users per day in a dataframe and then chain that into a chart cell. Because distinct users can’t be re-aggregated from daily into weekly or monthly grains, exploring from the chart cell won't allow users to accurately slice-and-dice distinct users along other dimensions. Instead, perform aggregations within chart cells or pivot cells in order to allow workflows like these to be possible.
+* Prevent, to the extent possible, aggregation upstream of charts. For example, say that one were to roll up distinct users per day in a dataframe and then chain that into a chart cell. Because distinct users can  ’t be re-aggregated from daily into weekly or monthly grains, exploring from the chart cell won't allow users to accurately slice-and-dice distinct users along other dimensions. Instead, perform aggregations within chart cells or pivot cells in order to allow workflows like these to be possible.
 
 #### On this page
 

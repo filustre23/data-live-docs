@@ -12,7 +12,7 @@ To ensure everyone can use AI, Hex awards monthly credit grants to Editor and Ex
 
 info
 
-* Customers with annual contracts who wish to purchase add-on credits can contact [[email protected]](/cdn-cgi/l/email-protection#3d4e5c51584e7d5558451349585e55) to update their contract.
+* Customers with annual contracts who wish to purchase add-on credits can contact [[email protected]](/cdn-cgi/l/email-protection#aeddcfc2cbddeec6cbd680dacbcdc6) to update their contract.
 
 ## Credit Consumption[​](#credit-consumption "Direct link to Credit Consumption")
 
@@ -126,11 +126,13 @@ All Hex users can view their own credit balance, and Admins and Managers have ad
 
 Admins can view workspace-wide credit usage from **Settings > Credits**
 
-* **Usage log:** review current and historical cycle credit consumption
+* **Usage log - Current cycle:** review credit consumption by user, total add-on credit usage, and allocation amounts for the current billing cycle
 
-* **Workspace credit pool:** view shared add-on credit balance
+* **Usage log - Historical cycle:** review add-on credit consumption by user and seat type for historical billing cycles
 
-**Admins and Managers** can view thread-level credit usage in the [Context Studio](/docs/agent-management/context-studio).
+* **Workspace credit pool:** view shared add-on credit balance, usage, and top-up spend amount for the current billing cycle
+
+**[Context Studio](/docs/agent-management/context-studio):** Admins and Managers can view total credit consumption for individual Threads
 
 ## FAQs[​](#faqs "Direct link to FAQs")
 

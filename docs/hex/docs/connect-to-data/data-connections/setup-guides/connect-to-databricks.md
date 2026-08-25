@@ -23,7 +23,9 @@ Databricks can be especially useful for machine learning/artificial intelligence
 3. Locate your [JDBC URL](https://docs.databricks.com/aws/en/integrations/jdbc/legacy#legacy-databricks-jdbc-driver).
 4. Generate an [access token](https://docs.databricks.com/dev-tools/api/latest/authentication.html) in Databricks for a user with access to the data you want to query.
 5. In Hex, go to **Settings** → **Data sources**.
-6. Click **+ Connection**, select **Databricks**, and fill out the fields below.
+6. Select **+ Connection**, select **Databricks**, and fill out the fields below.
+
+You can authenticate with an **access token** (steps above) or with **OAuth** for per-user warehouse credentials.
 
 ## Basic settings[​](#basic-settings "Direct link to Basic settings")
 
@@ -44,8 +46,42 @@ tip
 
 If you use a firewall to restrict database access, you'll need to [add Hex's IP addresses to your allowlist](/docs/connect-to-data/data-connections/allow-connections-from-hex-ip-addresses).
 
+## OAuth setup[​](#databricks-oauth-setup "Direct link to OAuth setup")
+
+info
+
+* Available on the **Enterprise** [plan](https://hex.tech/pricing).
+* Users need the **Admin** [workspace role](/docs/collaborate/sharing-and-permissions/roles) to configure OAuth data connections.
+
+OAuth requires each Hex user to authenticate to Databricks with their own credentials. Create a custom OAuth application in Databricks, add the client credentials in Hex to create a workspace OAuth token, then set a data connection's authentication type to **OAuth Token**.
+
+Connections with OAuth enabled can affect product behavior — [learn more](/docs/connect-to-data/data-connections/oauth-data-connections).
+
+### Step 1: Create a custom OAuth application in Databricks[​](#step-1-create-a-custom-oauth-application-in-databricks "Direct link to Step 1: Create a custom OAuth application in Databricks")
+
+A Databricks Admin enables a custom OAuth application and creates a `CLIENT_ID` and `CLIENT_SECRET`. Follow the [Databricks OAuth documentation](https://docs.databricks.com/en/integrations/enable-disable-oauth.html#enable-custom-oauth-applications-using-the-databricks-ui).
+
+Set the allowed redirect URL to:
+
+* Multi-tenant: `https://app.hex.tech/databricks-oauth-success`
+* Single-tenant, EU, or HIPAA: `https://<YOUR-HEX-DOMAIN-NAME>/databricks-oauth-success`
+
+### Step 2: Create the OAuth connection in Hex[​](#step-2-create-the-oauth-connection-in-hex "Direct link to Step 2: Create the OAuth connection in Hex")
+
+1. Go to **Workspace Settings → Data sources**.
+2. Find **Databricks OAuth Connections** and select **+ Connection**.
+3. Provide a connection name and host (`https://<your-databricks-instance>.cloud.databricks.com`), enter the Client ID and Client Secret, then select **Add connection**. You are redirected to the Databricks login screen. After you authenticate, setup is complete.
+
+### Step 3: Update your data connection[​](#step-3-update-your-data-connection "Direct link to Step 3: Update your data connection")
+
+Edit your Databricks data connection and set **Authentication type** to **OAuth Token**. Configure [OAuth permissions](/docs/connect-to-data/data-connections/oauth-data-connections#credential-sharing) on the connection as needed.
+
 #### On this page
 
 * [How to get set up](#how-to-get-set-up)
 * [Basic settings](#basic-settings)
 * [Additional settings](#additional-settings)
+* [OAuth setup](#databricks-oauth-setup)
+  + [Step 1: Create a custom OAuth application in Databricks](#step-1-create-a-custom-oauth-application-in-databricks)
+  + [Step 2: Create the OAuth connection in Hex](#step-2-create-the-oauth-connection-in-hex)
+  + [Step 3: Update your data connection](#step-3-update-your-data-connection)
