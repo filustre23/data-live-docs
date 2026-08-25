@@ -744,7 +744,7 @@ Mirrored from <https://docs.getdbt.com/docs/>. Do not edit by hand — regenerat
 - guides/set-up-ci
 - guides/set-up-your-databricks-dbt-project
 - guides/sl-partner-integration-guide
-- guides/sl-snowflake-qs
+- guides/sl-qs
 - guides/snowflake-qs
 - guides/starburst-galaxy-qs
 - guides/tenancy-migration

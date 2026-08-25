@@ -1,6 +1,6 @@
 # data-live-docs — index
 
-_Generated 2026-08-25T06:34+00:00_
+_Generated 2026-08-25T18:29+00:00_
 
 **9 sources, 4442 topics total**
 
@@ -3070,7 +3070,7 @@ _1128 topics_
 - `dbt-core/guides/set-up-ci`
 - `dbt-core/guides/set-up-your-databricks-dbt-project`
 - `dbt-core/guides/sl-partner-integration-guide`
-- `dbt-core/guides/sl-snowflake-qs`
+- `dbt-core/guides/sl-qs`
 - `dbt-core/guides/snowflake-qs`
 - `dbt-core/guides/starburst-galaxy-qs`
 - `dbt-core/guides/tenancy-migration`
