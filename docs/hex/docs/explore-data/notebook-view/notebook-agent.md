@@ -9,7 +9,7 @@ info
 * Paid [plans](https://hex.tech/pricing/) include monthly per-seat [credit grants](/docs/administration/credits) that can be used towards Hex AI features.
 * Users need the **Admin**, **Manager**, or **Editor** workspace role and **Can Edit** or higher project permissions to use the Notebook agent.
 * The Notebook agent is not compatible with **Published apps**.
-* To share suggestions for new features or improvements, reach out to [[email protected]](/cdn-cgi/l/email-protection#becdcbceced1cccafed6dbc690cadbddd6).
+* To share suggestions for new features or improvements, reach out to [[email protected]](/cdn-cgi/l/email-protection#25565055554a5751654d405d0b5140464d).
 
 The Notebook agent offers a natural language experience to assist with code generation and exploratory analysis within Hex projects. The agent has full access to your project context and warehouse schema information, so you can ask questions about - and receive answers for - your data. The agent can also help with syntax, act as a sounding board for brainstorming solutions, or create entirely new lines of analysis.
 
@@ -71,7 +71,7 @@ The **Model & Effort Picker** is an optional control in the Notebook agent promp
 
 #### Model selection[​](#model-selection "Direct link to Model selection")
 
-By default, the Notebook agent runs on **Auto**, which lets Hex choose the best model for your request. Auto is the right choice for most tasks. Your selection is stored per thread, so reopening a thread restores your last-used model and effort. New threads always start on Auto.
+By default, the Notebook agent runs on **Auto**. Hex does not do model routing — Auto defaults to a single model Hex chooses to optimize for speed, cost, and quality. Auto is the right choice for most tasks. If you need a smarter or cheaper model for a task, select it from the model picker. Your selection is stored per thread, so reopening a thread restores your last-used model and effort. New threads always start on Auto.
 
 If you specify a model, that model will only be applied to the main agent. Model selection does not apply to subagents that are built for purpose specific tasks such as visualizations.
 
@@ -154,7 +154,7 @@ Only projects you have [**Can Explore**](/docs/collaborate/sharing-and-permissio
 
 ## Providing feedback[​](#providing-feedback "Direct link to Providing feedback")
 
-Use the in product feedback buttons to report bugs or issues. Our team reviews these reports daily. If you want to share suggestions for new features or improvements, reach out to us directly at [[email protected]](/cdn-cgi/l/email-protection#dba8aeababb4a9af9bb3bea3f5afbeb8b3).
+Use the in product feedback buttons to report bugs or issues. Our team reviews these reports daily. If you want to share suggestions for new features or improvements, reach out to us directly at [[email protected]](/cdn-cgi/l/email-protection#6e1d1b1e1e011c1a2e060b16401a0b0d06).
 
 #### On this page
 

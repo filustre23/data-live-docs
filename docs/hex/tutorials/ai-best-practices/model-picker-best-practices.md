@@ -20,7 +20,7 @@ When starting a new agent conversation, you can select the **Auto** dropdown to 
 
 ## Auto[​](#auto "Direct link to Auto")
 
-To optimize credits and effort, Hex defaults to **Auto**, which automatically selects the model best suited for the task based on our evals. Auto is typically the right choice for most day-to-day analytics questions. Unless you're doing a very simple or complex task, or aren't getting useful responses, we recommend starting in Auto mode.
+**Auto** is Hex's default model setting. Hex does not do model routing — Auto defaults to a single model Hex chooses to optimize for speed, cost, and quality. Auto is typically the right choice for most day-to-day analytics questions. If you need a smarter or cheaper model for a task, select it from the model picker.
 
 info
 

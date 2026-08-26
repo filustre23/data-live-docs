@@ -173,6 +173,7 @@ Mirrored from <https://docs.getdbt.com/docs/>. Do not edit by hand — regenerat
 - docs/dbt-ai/mcp-troubleshooting
 - docs/dbt-ai/setup-local-mcp
 - docs/dbt-ai/setup-remote-mcp
+- docs/dbt-ai/wizard-billing-faqs
 - docs/dbt-ai/wizard-byok
 - docs/dbt-ai/wizard-cli
 - docs/dbt-ai/wizard-cli-reference
@@ -183,7 +184,6 @@ Mirrored from <https://docs.getdbt.com/docs/>. Do not edit by hand — regenerat
 - docs/dbt-ai/wizard-mcp
 - docs/dbt-ai/wizard-migrate
 - docs/dbt-ai/wizard-platform-mcp
-- docs/dbt-ai/wizard-platform-privacy-data
 - docs/dbt-ai/wizard-platform-skills
 - docs/dbt-ai/wizard-platform-subagents
 - docs/dbt-ai/wizard-quickstart

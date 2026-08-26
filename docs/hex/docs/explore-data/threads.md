@@ -117,7 +117,7 @@ The **Model & Effort Picker** is an optional control in the Threads prompt bar t
 
 ### Model selection[​](#model-selection "Direct link to Model selection")
 
-By default, Threads runs on **Auto**, which lets Hex choose the best model for your question. Auto is the right choice for most day-to-day analytics questions. Your model selection is stored per thread, so reopening a thread restores your last-used model and effort. New threads always start on Auto.
+By default, Threads runs on **Auto**. Hex does not do model routing — Auto defaults to a single model Hex chooses to optimize for speed, cost, and quality. Auto is the right choice for most day-to-day analytics questions. If you need a smarter or cheaper model for a task, select it from the model picker. Your model selection is stored per thread, so reopening a thread restores your last-used model and effort. New threads always start on Auto.
 
 Admins can also set a default model for the whole workspace from **Settings > AI & Agents**. This default model will apply across all agent surfaces (including Threads, Notebook Agent, Chat with App) and entrypoints (including Slack, MCP, CLI).
 

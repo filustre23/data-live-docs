@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-08-25T18:29+00:00_
+_Generated 2026-08-26T06:36+00:00_
 
-**9 sources, 4442 topics total**
+**9 sources, 4446 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_612 topics_
+_616 topics_
 
 - `anthropic-sdk/about-claude/additional-resources`
 - `anthropic-sdk/about-claude/glossary`
@@ -589,18 +589,22 @@ _612 topics_
 - `anthropic-sdk/managed-agents/vaults`
 - `anthropic-sdk/managed-agents/webhooks`
 - `anthropic-sdk/models/fable-5/introducing-claude-fable-5-and-claude-mythos-5`
+- `anthropic-sdk/models/fable-5/migration-guide`
 - `anthropic-sdk/models/fable-5/overview`
+- `anthropic-sdk/models/haiku-4-5/migration-guide`
 - `anthropic-sdk/models/haiku-4-5/overview`
 - `anthropic-sdk/models/mythos-5/overview`
 - `anthropic-sdk/models/opus-4-5/overview`
 - `anthropic-sdk/models/opus-4-6/overview`
 - `anthropic-sdk/models/opus-4-7/overview`
 - `anthropic-sdk/models/opus-4-8/overview`
+- `anthropic-sdk/models/opus-5/migration-guide`
 - `anthropic-sdk/models/opus-5/overview`
 - `anthropic-sdk/models/opus-5/whats-new-opus-5`
 - `anthropic-sdk/models/overview`
 - `anthropic-sdk/models/sonnet-4-5/overview`
 - `anthropic-sdk/models/sonnet-4-6/overview`
+- `anthropic-sdk/models/sonnet-5/migration-guide`
 - `anthropic-sdk/models/sonnet-5/overview`
 - `anthropic-sdk/models/sonnet-5/whats-new-sonnet-5`
 - `anthropic-sdk/release-notes/overview`
@@ -2499,6 +2503,7 @@ _1128 topics_
 - `dbt-core/docs/dbt-ai/mcp-troubleshooting`
 - `dbt-core/docs/dbt-ai/setup-local-mcp`
 - `dbt-core/docs/dbt-ai/setup-remote-mcp`
+- `dbt-core/docs/dbt-ai/wizard-billing-faqs`
 - `dbt-core/docs/dbt-ai/wizard-byok`
 - `dbt-core/docs/dbt-ai/wizard-cli`
 - `dbt-core/docs/dbt-ai/wizard-cli-reference`
@@ -2509,7 +2514,6 @@ _1128 topics_
 - `dbt-core/docs/dbt-ai/wizard-mcp`
 - `dbt-core/docs/dbt-ai/wizard-migrate`
 - `dbt-core/docs/dbt-ai/wizard-platform-mcp`
-- `dbt-core/docs/dbt-ai/wizard-platform-privacy-data`
 - `dbt-core/docs/dbt-ai/wizard-platform-skills`
 - `dbt-core/docs/dbt-ai/wizard-platform-subagents`
 - `dbt-core/docs/dbt-ai/wizard-quickstart`
