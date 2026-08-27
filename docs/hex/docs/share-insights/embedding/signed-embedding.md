@@ -7,7 +7,7 @@ Use the Hex Embed API to securely embed Hex apps in your own web application wit
 info
 
 * Available with the Embedded Analytics add-on for customers on the **Enterprise** [plan](https://hex.tech/pricing).
-* Contact [[email protected]](/cdn-cgi/l/email-protection#453624292036052d203d6b3120262d) to request a trial.
+* Contact [[email protected]](/cdn-cgi/l/email-protection#7102101d1402311914095f05141219) to request a trial.
 * Signed embedding uses a [workspace token](/docs/api-integrations/api/overview#workspace-tokens), which is not subject to the workspace [API access](/docs/administration/workspace_settings/workspace-security#enable-api-access) setting. Turning off API access, either workspace-wide or for an individual user, only affects personal access tokens. It does not invalidate workspace tokens or prevent Admins from creating new ones, so signed embeds are unaffected.
 
 ## What is signed embedding?[​](#what-is-signed-embedding "Direct link to What is signed embedding?")
@@ -20,7 +20,7 @@ Signed embedding is the best choice for secure, seamless embedded analytics. In 
 
 ## Configure a project for signed embedding[​](#configure-a-project-for-signed-embedding "Direct link to Configure a project for signed embedding")
 
-To use signed embedding, the feature must be enabled on your Hex workspace. For assistance, contact your account team or [[email protected]](/cdn-cgi/l/email-protection#92e1e7e2e2fde0e6d2faf7eabce6f7f1fa).
+To use signed embedding, the feature must be enabled on your Hex workspace. For assistance, contact your account team or [[email protected]](/cdn-cgi/l/email-protection#70030500001f0204301815085e04151318).
 
 ### Enable signed embedding on a project[​](#enable-signed-embedding-on-a-project "Direct link to Enable signed embedding on a project")
 
@@ -369,7 +369,7 @@ To test your Embed API implementation without contributing to your usage limit, 
 
 For multi-tenant customers, the Embed API rate limit is 20 requests per minute. Exceeding this rate limit will result in an `Error: Failed to load` message in the embedded app. After the minute has refreshed, app loading will resume as normal.
 
-If you require a higher rate limit, or would like to upgrade to a "soft" limit that will still allow app loads, please contact [[email protected]](/cdn-cgi/l/email-protection#196a78757c6a59717c61376d7c7a71).
+If you require a higher rate limit, or would like to upgrade to a "soft" limit that will still allow app loads, please contact [[email protected]](/cdn-cgi/l/email-protection#deadbfb2bbad9eb6bba6f0aabbbdb6).
 
 ## Implement iframe configuration for signed embedding[​](#implement-iframe-configuration-for-signed-embedding "Direct link to Implement iframe configuration for signed embedding")
 

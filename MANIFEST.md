@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-08-26T18:38+00:00_
+_Generated 2026-08-27T01:41+00:00_
 
-**9 sources, 4446 topics total**
+**9 sources, 4520 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_616 topics_
+_688 topics_
 
 - `anthropic-sdk/about-claude/additional-resources`
 - `anthropic-sdk/about-claude/glossary`
@@ -286,6 +286,78 @@ _616 topics_
 - `anthropic-sdk/api/beta/models`
 - `anthropic-sdk/api/beta/models/list`
 - `anthropic-sdk/api/beta/models/retrieve`
+- `anthropic-sdk/api/beta/organization`
+- `anthropic-sdk/api/beta/organization/api_keys`
+- `anthropic-sdk/api/beta/organization/api_keys/list`
+- `anthropic-sdk/api/beta/organization/api_keys/retrieve`
+- `anthropic-sdk/api/beta/organization/api_keys/update`
+- `anthropic-sdk/api/beta/organization/external_keys`
+- `anthropic-sdk/api/beta/organization/external_keys/create`
+- `anthropic-sdk/api/beta/organization/external_keys/delete`
+- `anthropic-sdk/api/beta/organization/external_keys/list`
+- `anthropic-sdk/api/beta/organization/external_keys/retrieve`
+- `anthropic-sdk/api/beta/organization/external_keys/update`
+- `anthropic-sdk/api/beta/organization/external_keys/validate`
+- `anthropic-sdk/api/beta/organization/federation`
+- `anthropic-sdk/api/beta/organization/federation/issuers`
+- `anthropic-sdk/api/beta/organization/federation/issuers/archive`
+- `anthropic-sdk/api/beta/organization/federation/issuers/create`
+- `anthropic-sdk/api/beta/organization/federation/issuers/list`
+- `anthropic-sdk/api/beta/organization/federation/issuers/retrieve`
+- `anthropic-sdk/api/beta/organization/federation/issuers/update`
+- `anthropic-sdk/api/beta/organization/federation/rules`
+- `anthropic-sdk/api/beta/organization/federation/rules/archive`
+- `anthropic-sdk/api/beta/organization/federation/rules/create`
+- `anthropic-sdk/api/beta/organization/federation/rules/list`
+- `anthropic-sdk/api/beta/organization/federation/rules/retrieve`
+- `anthropic-sdk/api/beta/organization/federation/rules/update`
+- `anthropic-sdk/api/beta/organization/federation/rules/workspaces`
+- `anthropic-sdk/api/beta/organization/federation/rules/workspaces/add`
+- `anthropic-sdk/api/beta/organization/federation/rules/workspaces/list`
+- `anthropic-sdk/api/beta/organization/federation/rules/workspaces/remove`
+- `anthropic-sdk/api/beta/organization/invites`
+- `anthropic-sdk/api/beta/organization/invites/create`
+- `anthropic-sdk/api/beta/organization/invites/delete`
+- `anthropic-sdk/api/beta/organization/invites/list`
+- `anthropic-sdk/api/beta/organization/invites/retrieve`
+- `anthropic-sdk/api/beta/organization/rate_limits`
+- `anthropic-sdk/api/beta/organization/rate_limits/list`
+- `anthropic-sdk/api/beta/organization/retrieve`
+- `anthropic-sdk/api/beta/organization/service_accounts`
+- `anthropic-sdk/api/beta/organization/service_accounts/archive`
+- `anthropic-sdk/api/beta/organization/service_accounts/create`
+- `anthropic-sdk/api/beta/organization/service_accounts/list`
+- `anthropic-sdk/api/beta/organization/service_accounts/retrieve`
+- `anthropic-sdk/api/beta/organization/service_accounts/update`
+- `anthropic-sdk/api/beta/organization/service_accounts/workspaces`
+- `anthropic-sdk/api/beta/organization/service_accounts/workspaces/add`
+- `anthropic-sdk/api/beta/organization/service_accounts/workspaces/list`
+- `anthropic-sdk/api/beta/organization/service_accounts/workspaces/remove`
+- `anthropic-sdk/api/beta/organization/users`
+- `anthropic-sdk/api/beta/organization/users/list`
+- `anthropic-sdk/api/beta/organization/users/remove`
+- `anthropic-sdk/api/beta/organization/users/retrieve`
+- `anthropic-sdk/api/beta/organization/users/update`
+- `anthropic-sdk/api/beta/organization/workspaces`
+- `anthropic-sdk/api/beta/organization/workspaces/archive`
+- `anthropic-sdk/api/beta/organization/workspaces/create`
+- `anthropic-sdk/api/beta/organization/workspaces/list`
+- `anthropic-sdk/api/beta/organization/workspaces/members`
+- `anthropic-sdk/api/beta/organization/workspaces/members/add`
+- `anthropic-sdk/api/beta/organization/workspaces/members/list`
+- `anthropic-sdk/api/beta/organization/workspaces/members/remove`
+- `anthropic-sdk/api/beta/organization/workspaces/members/retrieve`
+- `anthropic-sdk/api/beta/organization/workspaces/members/update`
+- `anthropic-sdk/api/beta/organization/workspaces/rate_limits`
+- `anthropic-sdk/api/beta/organization/workspaces/rate_limits/list`
+- `anthropic-sdk/api/beta/organization/workspaces/retrieve`
+- `anthropic-sdk/api/beta/organization/workspaces/service_accounts`
+- `anthropic-sdk/api/beta/organization/workspaces/service_accounts/add`
+- `anthropic-sdk/api/beta/organization/workspaces/service_accounts/list`
+- `anthropic-sdk/api/beta/organization/workspaces/service_accounts/remove`
+- `anthropic-sdk/api/beta/organization/workspaces/service_accounts/retrieve`
+- `anthropic-sdk/api/beta/organization/workspaces/service_accounts/update`
+- `anthropic-sdk/api/beta/organization/workspaces/update`
 - `anthropic-sdk/api/beta/sessions`
 - `anthropic-sdk/api/beta/sessions/archive`
 - `anthropic-sdk/api/beta/sessions/create`
@@ -2332,7 +2404,7 @@ _191 topics_
 
 Upstream: <https://docs.getdbt.com/docs/>
 
-_1128 topics_
+_1130 topics_
 
 - `dbt-core/best-practices/best-practice-workflows`
 - `dbt-core/best-practices/clone-incremental-models`
@@ -2819,6 +2891,7 @@ _1128 topics_
 - `dbt-core/docs/platform/manage-access/sso-oauth-intro`
 - `dbt-core/docs/platform/manage-access/sso-overview`
 - `dbt-core/docs/platform/migration`
+- `dbt-core/docs/platform/platform-cli-migration`
 - `dbt-core/docs/platform/secure/about-network-security`
 - `dbt-core/docs/platform/secure/ip-restrictions`
 - `dbt-core/docs/platform/secure/private-connectivity/aws/databricks`
@@ -3117,6 +3190,7 @@ _1128 topics_
 - `dbt-core/reference/commands/show`
 - `dbt-core/reference/commands/snapshot`
 - `dbt-core/reference/commands/source`
+- `dbt-core/reference/commands/state-explain`
 - `dbt-core/reference/commands/system`
 - `dbt-core/reference/commands/test`
 - `dbt-core/reference/commands/version`
