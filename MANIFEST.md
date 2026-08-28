@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-08-27T12:35+00:00_
+_Generated 2026-08-28T03:33+00:00_
 
-**9 sources, 4520 topics total**
+**9 sources, 4523 topics total**
 
 ## airflow
 
@@ -2404,7 +2404,7 @@ _191 topics_
 
 Upstream: <https://docs.getdbt.com/docs/>
 
-_1130 topics_
+_1132 topics_
 
 - `dbt-core/best-practices/best-practice-workflows`
 - `dbt-core/best-practices/clone-incremental-models`
@@ -3351,6 +3351,7 @@ _1130 topics_
 - `dbt-core/reference/references-overview`
 - `dbt-core/reference/resource-configs/access`
 - `dbt-core/reference/resource-configs/alias`
+- `dbt-core/reference/resource-configs/allow-clones`
 - `dbt-core/reference/resource-configs/athena-configs`
 - `dbt-core/reference/resource-configs/azuresynapse-configs`
 - `dbt-core/reference/resource-configs/batch_size`
@@ -3360,6 +3361,7 @@ _1130 topics_
 - `dbt-core/reference/resource-configs/check_cols`
 - `dbt-core/reference/resource-configs/clickhouse-configs`
 - `dbt-core/reference/resource-configs/column_types`
+- `dbt-core/reference/resource-configs/compare-unrendered-code`
 - `dbt-core/reference/resource-configs/confluent-configs`
 - `dbt-core/reference/resource-configs/contract`
 - `dbt-core/reference/resource-configs/database`
@@ -3703,7 +3705,7 @@ _155 topics_
 
 Upstream: <https://learn.hex.tech/>
 
-_382 topics_
+_383 topics_
 
 - `hex/changelog`
 - `hex/changelog/2020-12-17`
@@ -3819,6 +3821,7 @@ _382 topics_
 - `hex/changelog/2026-08-10`
 - `hex/changelog/2026-08-11`
 - `hex/changelog/2026-08-18`
+- `hex/changelog/2026-08-27`
 - `hex/changelog/archive`
 - `hex/changelog/page/10`
 - `hex/changelog/page/11`

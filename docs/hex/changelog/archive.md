@@ -26,6 +26,7 @@
 * [August 10 - Tune how the agent runs](/changelog/2026-08-10)
 * [August 11 - Start building an app right from your conversation](/changelog/2026-08-11)
 * [August 18 - Semantic projects via CLI](/changelog/2026-08-18)
+* [August 27 - Chart controls and easier collaboration](/changelog/2026-08-27)
 
 ### 2025[​](#2025 "Direct link to 2025")
 

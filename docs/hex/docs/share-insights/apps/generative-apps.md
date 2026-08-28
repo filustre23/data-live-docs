@@ -57,6 +57,20 @@ You can edit the code that underlies a generative app yourself instead of going 
 
 Editing directly is the faster path for small, precise changes, such as fixing a typo or removing a section. For larger changes, prompting the agent is usually still easier.
 
+### Chart controls[​](#chart-controls "Direct link to Chart controls")
+
+Every code-generated chart built within a Generative app includes a style panel with controls that let you make quick, manual adjustments without needing to prompt the agent. In a Generative app, you can select the entire chart or a specific sub-element to see the controls relevant to that element. Changes are previewed instantly and persist across future agent updates, so you can combine manual refinement with agent-driven development.
+
+[](/assets/medias/chart-controls-9f99050bea4119fe16e1a852237eea23.mp4)
+
+#### Get started[​](#get-started "Direct link to Get started")
+
+1. Open the Generative app's editable draft.
+2. In the preview toolbar, select **Select**. If prompted, complete the one-time upgrade first.
+3. Select a chart, or an element such as its axis, series, title, or legend.
+4. Adjust the available settings in the **Style** panel.
+5. Apply the changes.
+
 ## Control app style with a `design.md`[​](#control-app-style-with-a-designmd "Direct link to control-app-style-with-a-designmd")
 
 A `design.md` is a single file that captures your brand's visual language — colors, typography, spacing, component defaults, and tone — as a set of design tokens plus plain-language rules for how to use them. When the Hex agent builds a Generative app, it reads this file first and styles the app with your brand instead of its built-in defaults. Set it up once and you stop re-explaining your brand in every prompt; the agent applies it to every app it builds.
@@ -164,6 +178,7 @@ While Generative apps are in Beta, some Hex features are not yet supported. Thes
 * [Iterate on your app](#iterate-on-your-app)
   + [Choose a model and effort](#choose-a-model-and-effort)
   + [Edit code directly](#edit-code-directly)
+  + [Chart controls](#chart-controls)
 * [Control app style with a `design.md`](#control-app-style-with-a-designmd)
   + [Create your `design.md` with an agent](#create-your-designmd-with-an-agent)
   + [Add it to your workspace](#add-it-to-your-workspace)
