@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-08-29T03:38+00:00_
+_Generated 2026-08-29T11:06+00:00_
 
-**9 sources, 4523 topics total**
+**9 sources, 4514 topics total**
 
 ## airflow
 
@@ -2404,7 +2404,7 @@ _191 topics_
 
 Upstream: <https://docs.getdbt.com/docs/>
 
-_1132 topics_
+_1123 topics_
 
 - `dbt-core/best-practices/best-practice-workflows`
 - `dbt-core/best-practices/clone-incremental-models`
@@ -2552,8 +2552,8 @@ _1132 topics_
 - `dbt-core/docs/configuration-checklist`
 - `dbt-core/docs/configure-dbt-extension`
 - `dbt-core/docs/connect-adapters`
-- `dbt-core/docs/contribute-core-adapters`
-- `dbt-core/docs/contribute-core-adapters-v2`
+- `dbt-core/docs/contribute-dbt-adapters`
+- `dbt-core/docs/contribute-dbt-adapters-v2`
 - `dbt-core/docs/dbt-ai/_wizard-cli-full-generated`
 - `dbt-core/docs/dbt-ai/_wizard-slash-commands-generated`
 - `dbt-core/docs/dbt-ai/about-dbt-ai`
@@ -2619,31 +2619,39 @@ _1132 topics_
 - `dbt-core/docs/dbt-versions/2025-release-notes`
 - `dbt-core/docs/dbt-versions/about-versions`
 - `dbt-core/docs/dbt-versions/compatible-track-changelog`
-- `dbt-core/docs/dbt-versions/core-upgrade/01-upgrading-to-v2`
-- `dbt-core/docs/dbt-versions/core-upgrade/03-upgrading-to-v1.12`
-- `dbt-core/docs/dbt-versions/core-upgrade/04-upgrading-to-v1.11`
-- `dbt-core/docs/dbt-versions/core-upgrade/05-upgrading-to-v1.10`
-- `dbt-core/docs/dbt-versions/core-upgrade/06-upgrading-to-v1.9`
-- `dbt-core/docs/dbt-versions/core-upgrade/07-upgrading-to-v1.8`
-- `dbt-core/docs/dbt-versions/core-upgrade/08-upgrading-to-v1.7`
-- `dbt-core/docs/dbt-versions/core-upgrade/11-Older versions/09-upgrading-to-v1.6`
-- `dbt-core/docs/dbt-versions/core-upgrade/11-Older versions/10-upgrading-to-v1.5`
-- `dbt-core/docs/dbt-versions/core-upgrade/11-Older versions/12-upgrading-to-v1.4`
-- `dbt-core/docs/dbt-versions/core-upgrade/11-Older versions/13-upgrading-to-v1.3`
-- `dbt-core/docs/dbt-versions/core-upgrade/11-Older versions/14-upgrading-to-v1.2`
-- `dbt-core/docs/dbt-versions/core-upgrade/11-Older versions/15-upgrading-to-v1.1`
-- `dbt-core/docs/dbt-versions/core-upgrade/11-Older versions/16-upgrading-to-v1.0`
-- `dbt-core/docs/dbt-versions/core-upgrade/11-Older versions/upgrading-to-dbt-utils-v1.0`
 - `dbt-core/docs/dbt-versions/dbt-platform-release-notes-gen`
+- `dbt-core/docs/dbt-versions/dbt-upgrade/01-upgrading-to-v2`
+- `dbt-core/docs/dbt-versions/dbt-upgrade/03-upgrading-to-v1.12`
+- `dbt-core/docs/dbt-versions/dbt-upgrade/04-upgrading-to-v1.11`
+- `dbt-core/docs/dbt-versions/dbt-upgrade/05-upgrading-to-v1.10`
+- `dbt-core/docs/dbt-versions/dbt-upgrade/06-upgrading-to-v1.9`
+- `dbt-core/docs/dbt-versions/dbt-upgrade/07-upgrading-to-v1.8`
+- `dbt-core/docs/dbt-versions/dbt-upgrade/08-upgrading-to-v1.7`
+- `dbt-core/docs/dbt-versions/dbt-upgrade/11-Older versions/09-upgrading-to-v1.6`
+- `dbt-core/docs/dbt-versions/dbt-upgrade/11-Older versions/10-upgrading-to-v1.5`
+- `dbt-core/docs/dbt-versions/dbt-upgrade/11-Older versions/12-upgrading-to-v1.4`
+- `dbt-core/docs/dbt-versions/dbt-upgrade/11-Older versions/13-upgrading-to-v1.3`
+- `dbt-core/docs/dbt-versions/dbt-upgrade/11-Older versions/14-upgrading-to-v1.2`
+- `dbt-core/docs/dbt-versions/dbt-upgrade/11-Older versions/15-upgrading-to-v1.1`
+- `dbt-core/docs/dbt-versions/dbt-upgrade/11-Older versions/16-upgrading-to-v1.0`
+- `dbt-core/docs/dbt-versions/dbt-upgrade/11-Older versions/upgrading-to-dbt-utils-v1.0`
+- `dbt-core/docs/dbt-versions/dbt-version-compatibility`
 - `dbt-core/docs/dbt-versions/dbt-versions`
 - `dbt-core/docs/dbt-versions/experimental-features`
-- `dbt-core/docs/dbt-versions/fusion-version-compatibility`
 - `dbt-core/docs/dbt-versions/product-lifecycles`
 - `dbt-core/docs/dbt-versions/release-notes`
 - `dbt-core/docs/dbt-versions/release-notes/98-dbt-cloud-changelog-2021`
 - `dbt-core/docs/dbt-versions/release-notes/99-dbt-cloud-changelog-2019-2020`
 - `dbt-core/docs/dbt-versions/release-tracks`
 - `dbt-core/docs/dbt-versions/upgrade-dbt-platform-version`
+- `dbt-core/docs/dbt/about-dbt-install`
+- `dbt-core/docs/dbt/adbc`
+- `dbt-core/docs/dbt/dbt-availability`
+- `dbt-core/docs/dbt/dbt-readiness`
+- `dbt-core/docs/dbt/dbt-releases`
+- `dbt-core/docs/dbt/get-started-dbt`
+- `dbt-core/docs/dbt/supported-features`
+- `dbt-core/docs/dbt/vs-compare-changes`
 - `dbt-core/docs/deploy/about-ci`
 - `dbt-core/docs/deploy/advanced-ci`
 - `dbt-core/docs/deploy/artifacts`
@@ -2703,23 +2711,6 @@ _1132 topics_
 - `dbt-core/docs/explore/project-recommendations`
 - `dbt-core/docs/explore/set-up-cost-insights`
 - `dbt-core/docs/explore/view-downstream-exposures`
-- `dbt-core/docs/fusion/about-core`
-- `dbt-core/docs/fusion/about-fusion`
-- `dbt-core/docs/fusion/about-fusion-install`
-- `dbt-core/docs/fusion/adbc`
-- `dbt-core/docs/fusion/connect-data-platform-fusion/bigquery-setup`
-- `dbt-core/docs/fusion/connect-data-platform-fusion/connection-profiles`
-- `dbt-core/docs/fusion/connect-data-platform-fusion/databricks-setup`
-- `dbt-core/docs/fusion/connect-data-platform-fusion/profiles.yml`
-- `dbt-core/docs/fusion/connect-data-platform-fusion/redshift-setup`
-- `dbt-core/docs/fusion/connect-data-platform-fusion/salesforce-data-cloud-setup`
-- `dbt-core/docs/fusion/connect-data-platform-fusion/snowflake-setup`
-- `dbt-core/docs/fusion/fusion-availability`
-- `dbt-core/docs/fusion/fusion-readiness`
-- `dbt-core/docs/fusion/fusion-releases`
-- `dbt-core/docs/fusion/get-started-fusion`
-- `dbt-core/docs/fusion/supported-features`
-- `dbt-core/docs/fusion/vs-compare-changes`
 - `dbt-core/docs/get-started-dbt`
 - `dbt-core/docs/install-dbt-extension`
 - `dbt-core/docs/introduction`
@@ -2783,10 +2774,10 @@ _1132 topics_
 - `dbt-core/docs/local/connect-data-platform/ydb-setup`
 - `dbt-core/docs/local/connect-data-platform/yellowbrick-setup`
 - `dbt-core/docs/local/connection-profiles`
-- `dbt-core/docs/local/dbt-core-environments`
-- `dbt-core/docs/local/fusion-networking-requirements`
+- `dbt-core/docs/local/dbt-environments`
+- `dbt-core/docs/local/dbt-networking-requirements`
 - `dbt-core/docs/local/install-dbt`
-- `dbt-core/docs/local/install-dbt-core-2-oss`
+- `dbt-core/docs/local/install-dbt-2-oss`
 - `dbt-core/docs/local/profiles.yml`
 - `dbt-core/docs/mesh/about-mesh`
 - `dbt-core/docs/mesh/cross-platform-mesh`
@@ -2932,7 +2923,7 @@ _1132 topics_
 - `dbt-core/docs/sign-in-dbt-extension`
 - `dbt-core/docs/supported-data-platforms`
 - `dbt-core/docs/trusted-adapters`
-- `dbt-core/docs/upgrade-to-fusion-extension`
+- `dbt-core/docs/upgrade-to-dbt-extension`
 - `dbt-core/docs/use-dbt-semantic-layer/consume-metrics`
 - `dbt-core/docs/use-dbt-semantic-layer/dbt-sl`
 - `dbt-core/docs/use-dbt-semantic-layer/deploy-sl`
@@ -3108,26 +3099,26 @@ _1132 topics_
 - `dbt-core/guides/building-packages`
 - `dbt-core/guides/canvas-qs`
 - `dbt-core/guides/clone-jaffle-shop`
-- `dbt-core/guides/core-migration-1`
-- `dbt-core/guides/core-migration-2`
-- `dbt-core/guides/core-migration-3`
 - `dbt-core/guides/create-new-materializations`
 - `dbt-core/guides/custom-cicd-pipelines`
 - `dbt-core/guides/customize-schema-alias`
 - `dbt-core/guides/databricks-qs`
 - `dbt-core/guides/databricks-workflows`
+- `dbt-core/guides/dbt-migration-1`
+- `dbt-core/guides/dbt-migration-2`
+- `dbt-core/guides/dbt-migration-3`
 - `dbt-core/guides/dbt-models-on-databricks`
+- `dbt-core/guides/dbt-package-compat`
+- `dbt-core/guides/dbt-platform-local-workflow`
 - `dbt-core/guides/dbt-python-bigframes`
 - `dbt-core/guides/dbt-python-snowpark`
+- `dbt-core/guides/dbt-qs`
+- `dbt-core/guides/dbt-upgrade`
+- `dbt-core/guides/dbt-upgrade-prepare`
 - `dbt-core/guides/debug-errors`
 - `dbt-core/guides/debug-schema-names`
 - `dbt-core/guides/dremio-lakehouse`
 - `dbt-core/guides/duckdb-qs`
-- `dbt-core/guides/fusion-package-compat`
-- `dbt-core/guides/fusion-platform-local-workflow`
-- `dbt-core/guides/fusion-qs`
-- `dbt-core/guides/fusion-upgrade`
-- `dbt-core/guides/fusion-upgrade-prepare`
 - `dbt-core/guides/iceberg-guide`
 - `dbt-core/guides/manual-install-qs`
 - `dbt-core/guides/mesh-qs`
