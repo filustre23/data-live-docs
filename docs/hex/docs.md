@@ -54,7 +54,7 @@ Connect your data, set up foundational context, and start exploring with AI.
 * **[Learn the Hex basics](/tutorials/quickstart/hex-basics).** Get familiar with asking questions, exploring data, building analyses, and publishing apps.
 * **[Explore AI best practices](/tutorials/ai-best-practices).** Learn how to get better results from AI across Threads, Notebook Agent, and other Hex workflows.
 
-Don't hesitate to reach out to [[email protected]](/cdn-cgi/l/email-protection#a6d5d3d6d6c9d4d2e6cec3de88d2c3c5ce) or chat with us live from the **?** menu in the bottom left of your project.
+Don't hesitate to reach out to [[email protected]](/cdn-cgi/l/email-protection#a5d6d0d5d5cad7d1e5cdc0dd8bd1c0c6cd) or chat with us live from the **?** menu in the bottom left of your project.
 
 #### On this page
 
