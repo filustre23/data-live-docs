@@ -1,559 +1,559 @@
 {
-  "duration_s": 0.96,
+  "duration_s": 1.34,
   "failed_count": 0,
   "failed_pages": [],
-  "fetched_at": "2026-08-30T11:00:24.388506+00:00",
+  "fetched_at": "2026-08-30T20:22:26.314763+00:00",
   "file_count": 92,
   "files": {
     "api/aliases.md": {
       "bytes": 21,
-      "fetched_at": "2026-08-30T11:00:24.384856+00:00",
+      "fetched_at": "2026-08-30T20:22:26.306001+00:00",
       "sha256": "c02588828a424785b1463529a832e4dd25dc487ea8097e015a020e4ce49a10f5",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/api/aliases.md"
     },
     "api/annotated_handlers.md": {
       "bytes": 32,
-      "fetched_at": "2026-08-30T11:00:24.384971+00:00",
+      "fetched_at": "2026-08-30T20:22:26.306325+00:00",
       "sha256": "898a961c16e9b3fff7352deb33806287bbad8764f319a24faf8d47257ce8a8f8",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/api/annotated_handlers.md"
     },
     "api/base_model.md": {
       "bytes": 930,
-      "fetched_at": "2026-08-30T11:00:24.384598+00:00",
+      "fetched_at": "2026-08-30T20:22:26.305319+00:00",
       "sha256": "c658c1b542279d3704e399264b031602c040a71853ef18daa11290920edc26e2",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/api/base_model.md"
     },
     "api/config.md": {
       "bytes": 239,
-      "fetched_at": "2026-08-30T11:00:24.385322+00:00",
+      "fetched_at": "2026-08-30T20:22:26.307364+00:00",
       "sha256": "70c1a8e34789ae9a983e9958d760fd85f5e37a8a0bf5536cef598ac87451ed64",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/api/config.md"
     },
     "api/dataclasses.md": {
       "bytes": 25,
-      "fetched_at": "2026-08-30T11:00:24.385918+00:00",
+      "fetched_at": "2026-08-30T20:22:26.308969+00:00",
       "sha256": "f5b36aca073eb993fad651f3376c75f28530a358448d896ede4bf3c9094e0483",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/api/dataclasses.md"
     },
     "api/errors.md": {
       "bytes": 20,
-      "fetched_at": "2026-08-30T11:00:24.385246+00:00",
+      "fetched_at": "2026-08-30T20:22:26.307149+00:00",
       "sha256": "96f41e4a4e4d873184508784e7a3bb6e165b22b5edfc2d2bcc3152e325ce6051",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/api/errors.md"
     },
     "api/experimental.md": {
       "bytes": 265,
-      "fetched_at": "2026-08-30T11:00:24.384776+00:00",
+      "fetched_at": "2026-08-30T20:22:26.305788+00:00",
       "sha256": "313a537df95549f5fc7843689e4f782332ad0107824adc687895559f8a2b57eb",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/api/experimental.md"
     },
     "api/fields.md": {
       "bytes": 430,
-      "fetched_at": "2026-08-30T11:00:24.385167+00:00",
+      "fetched_at": "2026-08-30T20:22:26.306908+00:00",
       "sha256": "f8bcf375e89f8e624756f6532cc0f9db0fc876ecb1c4622d6bdefafe74e59538",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/api/fields.md"
     },
     "api/functional_serializers.md": {
       "bytes": 36,
-      "fetched_at": "2026-08-30T11:00:24.385756+00:00",
+      "fetched_at": "2026-08-30T20:22:26.308472+00:00",
       "sha256": "a019080a60ab5acd13b7f3150eab32501dc9f4aad7c775bb8d15e1fbdf22785c",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/api/functional_serializers.md"
     },
     "api/functional_validators.md": {
       "bytes": 35,
-      "fetched_at": "2026-08-30T11:00:24.385591+00:00",
+      "fetched_at": "2026-08-30T20:22:26.308032+00:00",
       "sha256": "70c45b47ab1bdd5c4d52dc8ebc0fe2dac9a09958035be879d0080a4fb4533e9e",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/api/functional_validators.md"
     },
     "api/json_schema.md": {
       "bytes": 25,
-      "fetched_at": "2026-08-30T11:00:24.385467+00:00",
+      "fetched_at": "2026-08-30T20:22:26.307711+00:00",
       "sha256": "ba40934a820aadd9e842af74efe558f53af880f782f8b3fa53d8d50789b6889d",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/api/json_schema.md"
     },
     "api/networks.md": {
       "bytes": 22,
-      "fetched_at": "2026-08-30T11:00:24.384733+00:00",
+      "fetched_at": "2026-08-30T20:22:26.305676+00:00",
       "sha256": "d3ae7a040e35abb47fd564a391ad01c1fd7338718fee3c77c400e97408c77db0",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/api/networks.md"
     },
     "api/pydantic_core.md": {
       "bytes": 706,
-      "fetched_at": "2026-08-30T11:00:24.384690+00:00",
+      "fetched_at": "2026-08-30T20:22:26.305541+00:00",
       "sha256": "4caacfed84e3bd97551411ba8c9c1c91b5c6eaabfa4b408c5d46d43cce8e9920",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/api/pydantic_core.md"
     },
     "api/pydantic_core_schema.md": {
       "bytes": 30,
-      "fetched_at": "2026-08-30T11:00:24.385879+00:00",
+      "fetched_at": "2026-08-30T20:22:26.308854+00:00",
       "sha256": "cc30c5592403795d3c7c1eac674a619f1a9e6731b3daa3eb45725d35d8ac78be",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/api/pydantic_core_schema.md"
     },
     "api/pydantic_extra_types_color.md": {
       "bytes": 31,
-      "fetched_at": "2026-08-30T11:00:24.385794+00:00",
+      "fetched_at": "2026-08-30T20:22:26.308624+00:00",
       "sha256": "c3738cd0e235d50932ad81a1175d1f214f8e22d8dd0cc32a672d683e4ce35330",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/api/pydantic_extra_types_color.md"
     },
     "api/pydantic_extra_types_coordinate.md": {
       "bytes": 36,
-      "fetched_at": "2026-08-30T11:00:24.385284+00:00",
+      "fetched_at": "2026-08-30T20:22:26.307257+00:00",
       "sha256": "b2061b270fb11eb6d8c5510a24b70b6c4a345b8618b909ef066b2ca3921dd7cb",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/api/pydantic_extra_types_coordinate.md"
     },
     "api/pydantic_extra_types_country.md": {
       "bytes": 33,
-      "fetched_at": "2026-08-30T11:00:24.385510+00:00",
+      "fetched_at": "2026-08-30T20:22:26.307820+00:00",
       "sha256": "1016760aab3a61a72ee0ad7247038c0cccbe8ceca05a34e2c83babbdb90f00d0",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/api/pydantic_extra_types_country.md"
     },
     "api/pydantic_extra_types_currency_code.md": {
       "bytes": 39,
-      "fetched_at": "2026-08-30T11:00:24.384895+00:00",
+      "fetched_at": "2026-08-30T20:22:26.306110+00:00",
       "sha256": "ad71e89514df2d87e53f770983958110aa8ad758bb173719a88aed2dd8579dde",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/api/pydantic_extra_types_currency_code.md"
     },
     "api/pydantic_extra_types_isbn.md": {
       "bytes": 30,
-      "fetched_at": "2026-08-30T11:00:24.384816+00:00",
+      "fetched_at": "2026-08-30T20:22:26.305894+00:00",
       "sha256": "0758c035222c7d9e9ba6935999b2ddd057e11092cc40e27652f3eeb5a553f8f3",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/api/pydantic_extra_types_isbn.md"
     },
     "api/pydantic_extra_types_language_code.md": {
       "bytes": 39,
-      "fetched_at": "2026-08-30T11:00:24.386066+00:00",
+      "fetched_at": "2026-08-30T20:22:26.309268+00:00",
       "sha256": "8bb2d7acffcd4fc33eaad0e83b447efc09eba367a6f661d51b64eea594bdf820",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/api/pydantic_extra_types_language_code.md"
     },
     "api/pydantic_extra_types_mac_address.md": {
       "bytes": 37,
-      "fetched_at": "2026-08-30T11:00:24.385634+00:00",
+      "fetched_at": "2026-08-30T20:22:26.308145+00:00",
       "sha256": "d6edab693dc592ff7a18a83ce09798fc116ab3a74cb8e3221f3801326e0df744",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/api/pydantic_extra_types_mac_address.md"
     },
     "api/pydantic_extra_types_payment.md": {
       "bytes": 33,
-      "fetched_at": "2026-08-30T11:00:24.385717+00:00",
+      "fetched_at": "2026-08-30T20:22:26.308367+00:00",
       "sha256": "e347eec1be8db55970d9383629a8b9b7f697e19317d8ddfd09409b1ac301f69f",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/api/pydantic_extra_types_payment.md"
     },
     "api/pydantic_extra_types_pendulum_dt.md": {
       "bytes": 37,
-      "fetched_at": "2026-08-30T11:00:24.385087+00:00",
+      "fetched_at": "2026-08-30T20:22:26.306686+00:00",
       "sha256": "a53b10c87ed85de9aab22f6b94682a7940d8e26c991844014fb1df626bdfa074",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/api/pydantic_extra_types_pendulum_dt.md"
     },
     "api/pydantic_extra_types_phone_numbers.md": {
       "bytes": 39,
-      "fetched_at": "2026-08-30T11:00:24.385011+00:00",
+      "fetched_at": "2026-08-30T20:22:26.306430+00:00",
       "sha256": "1251d7637af076303584bafcb6928181b6961a842644fc355774e75110a4c332",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/api/pydantic_extra_types_phone_numbers.md"
     },
     "api/pydantic_extra_types_routing_numbers.md": {
       "bytes": 40,
-      "fetched_at": "2026-08-30T11:00:24.385049+00:00",
+      "fetched_at": "2026-08-30T20:22:26.306533+00:00",
       "sha256": "16e8dd734035970a177bdb6e1771c00eb2f5a6d4cd5e265584bc968d8148ad68",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/api/pydantic_extra_types_routing_numbers.md"
     },
     "api/pydantic_extra_types_script_code.md": {
       "bytes": 37,
-      "fetched_at": "2026-08-30T11:00:24.384646+00:00",
+      "fetched_at": "2026-08-30T20:22:26.305434+00:00",
       "sha256": "13c2e0068536b0478c81dd004c0e7f82e1366f196fd7101c5a221dd01cf28c47",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/api/pydantic_extra_types_script_code.md"
     },
     "api/pydantic_extra_types_semantic_version.md": {
       "bytes": 42,
-      "fetched_at": "2026-08-30T11:00:24.385677+00:00",
+      "fetched_at": "2026-08-30T20:22:26.308258+00:00",
       "sha256": "a8c8fc1d97d5129b9b52d0359cfb5b15da6fc381323311565f690862702a839c",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/api/pydantic_extra_types_semantic_version.md"
     },
     "api/pydantic_extra_types_timezone_name.md": {
       "bytes": 39,
-      "fetched_at": "2026-08-30T11:00:24.385207+00:00",
+      "fetched_at": "2026-08-30T20:22:26.307025+00:00",
       "sha256": "2db1112fb2d3e3e759bd2b277c5650dc652f7ef76a7dc0785f50d319a746ce3b",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/api/pydantic_extra_types_timezone_name.md"
     },
     "api/pydantic_extra_types_ulid.md": {
       "bytes": 30,
-      "fetched_at": "2026-08-30T11:00:24.385424+00:00",
+      "fetched_at": "2026-08-30T20:22:26.307598+00:00",
       "sha256": "bc9cd5274106a9f43e65a41c27bbd32312a78c3e6c685e5acee3e05174b62824",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/api/pydantic_extra_types_ulid.md"
     },
     "api/pydantic_settings.md": {
       "bytes": 22,
-      "fetched_at": "2026-08-30T11:00:24.385832+00:00",
+      "fetched_at": "2026-08-30T20:22:26.308745+00:00",
       "sha256": "fd6cc54aadf1ccf8101760130e14627a8b5e20f8a06dd970e967ba5719630cd4",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/api/pydantic_settings.md"
     },
     "api/root_model.md": {
       "bytes": 24,
-      "fetched_at": "2026-08-30T11:00:24.384933+00:00",
+      "fetched_at": "2026-08-30T20:22:26.306218+00:00",
       "sha256": "67186da1096bf00908a4499768af806b7110ac0173090f1ef94c020ed6b05e02",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/api/root_model.md"
     },
     "api/standard_library_types.md": {
       "bytes": 64020,
-      "fetched_at": "2026-08-30T11:00:24.386023+00:00",
+      "fetched_at": "2026-08-30T20:22:26.309152+00:00",
       "sha256": "2515ea7519e8e9815af32645175dbedb7a3abb989d8546693014c1ecebd493b8",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/api/standard_library_types.md"
     },
     "api/type_adapter.md": {
       "bytes": 38,
-      "fetched_at": "2026-08-30T11:00:24.384549+00:00",
+      "fetched_at": "2026-08-30T20:22:26.305201+00:00",
       "sha256": "c4165225df9d09c9129e860cc351bebf5066bd402da97daf6f86dc837a69f402",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/api/type_adapter.md"
     },
     "api/types.md": {
       "bytes": 101,
-      "fetched_at": "2026-08-30T11:00:24.385128+00:00",
+      "fetched_at": "2026-08-30T20:22:26.306800+00:00",
       "sha256": "632428da80a75cfffa56af7a0f29f437063a5d070b93b819af59933ca22532a7",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/api/types.md"
     },
     "api/validate_call.md": {
       "bytes": 37,
-      "fetched_at": "2026-08-30T11:00:24.385362+00:00",
+      "fetched_at": "2026-08-30T20:22:26.307470+00:00",
       "sha256": "2b0f6db845f8cbf6fb028afd4085a26395e978063932a438ef26fdcc2ec7b8e1",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/api/validate_call.md"
     },
     "api/version.md": {
       "bytes": 150,
-      "fetched_at": "2026-08-30T11:00:24.385550+00:00",
+      "fetched_at": "2026-08-30T20:22:26.307926+00:00",
       "sha256": "79ee358670c3a224f51346269f8b991735f9ee9e7f9efe67331420ebc324fcaa",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/api/version.md"
     },
     "badge/v1.json": {
       "bytes": 1003,
-      "fetched_at": "2026-08-30T11:00:24.386277+00:00",
+      "fetched_at": "2026-08-30T20:22:26.309821+00:00",
       "sha256": "a9a6819fe4967c56e70bc050a61f6363f13f807d88342a4b0dec6d3a4a20a836",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/badge/v1.json"
     },
     "badge/v2.json": {
       "bytes": 1003,
-      "fetched_at": "2026-08-30T11:00:24.386318+00:00",
+      "fetched_at": "2026-08-30T20:22:26.309936+00:00",
       "sha256": "355b7c2e87ce11e61bb441fb7c98fc6f59431fea56566b0a0630897f822c8989",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/badge/v2.json"
     },
     "concepts/alias.md": {
       "bytes": 13902,
-      "fetched_at": "2026-08-30T11:00:24.387326+00:00",
+      "fetched_at": "2026-08-30T20:22:26.312466+00:00",
       "sha256": "e1c0e47174ec2aecd079b787ecfa60aa1501d5f36a02efeaca47b6eb00382e48",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/concepts/alias.md"
     },
     "concepts/config.md": {
       "bytes": 7003,
-      "fetched_at": "2026-08-30T11:00:24.387624+00:00",
+      "fetched_at": "2026-08-30T20:22:26.313087+00:00",
       "sha256": "b7feb6acd6eac55c23979954f0332c4ad59dd1f8b65a66ec8f0502cad9f5f422",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/concepts/config.md"
     },
     "concepts/conversion_table.md": {
       "bytes": 482,
-      "fetched_at": "2026-08-30T11:00:24.387718+00:00",
+      "fetched_at": "2026-08-30T20:22:26.313319+00:00",
       "sha256": "d599331ebabb99675c70492545bfc56d622ca7ea24e4d3fa9ddee92f51f47aa2",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/concepts/conversion_table.md"
     },
     "concepts/dataclasses.md": {
       "bytes": 13036,
-      "fetched_at": "2026-08-30T11:00:24.388060+00:00",
+      "fetched_at": "2026-08-30T20:22:26.314134+00:00",
       "sha256": "b67e769b54c1c2e7810193a7d41d93f41709933e692207e2154ccb1059c7b794",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/concepts/dataclasses.md"
     },
     "concepts/experimental.md": {
       "bytes": 20917,
-      "fetched_at": "2026-08-30T11:00:24.387115+00:00",
+      "fetched_at": "2026-08-30T20:22:26.311970+00:00",
       "sha256": "a14981be0506ba2fb7e42430aad538b27dcbd90d1d71677a42dce820a6701122",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/concepts/experimental.md"
     },
     "concepts/fields.md": {
       "bytes": 27991,
-      "fetched_at": "2026-08-30T11:00:24.387483+00:00",
+      "fetched_at": "2026-08-30T20:22:26.312803+00:00",
       "sha256": "8373e2c9839d47aebd0092641e0c3dbc510ddb9513e015f97c1728ec184ad809",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/concepts/fields.md"
     },
     "concepts/forward_annotations.md": {
       "bytes": 6588,
-      "fetched_at": "2026-08-30T11:00:24.387050+00:00",
+      "fetched_at": "2026-08-30T20:22:26.311837+00:00",
       "sha256": "24b446959b5d07b9a823ae1154756f1421f2ca0c0f554a91a7432d75913a32b5",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/concepts/forward_annotations.md"
     },
     "concepts/json.md": {
       "bytes": 8916,
-      "fetched_at": "2026-08-30T11:00:24.387276+00:00",
+      "fetched_at": "2026-08-30T20:22:26.312343+00:00",
       "sha256": "76c9a7a7bf2b355fdfbb0fe3785be1bc81b620eee5a77e984a0434e9c0a8b57e",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/concepts/json.md"
     },
     "concepts/json_schema.md": {
       "bytes": 36327,
-      "fetched_at": "2026-08-30T11:00:24.387792+00:00",
+      "fetched_at": "2026-08-30T20:22:26.313465+00:00",
       "sha256": "8f68fa28ccd58ea28b9b7e43ff23b122107212c4fad660516561ecddd7bb2353",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/concepts/json_schema.md"
     },
     "concepts/models.md": {
       "bytes": 58968,
-      "fetched_at": "2026-08-30T11:00:24.387578+00:00",
+      "fetched_at": "2026-08-30T20:22:26.312972+00:00",
       "sha256": "1631e7ecaf922d26b3d8a09e37c43f2b7a00cf850a7a3a6aa779d12de5490279",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/concepts/models.md"
     },
     "concepts/performance.md": {
       "bytes": 6276,
-      "fetched_at": "2026-08-30T11:00:24.387964+00:00",
+      "fetched_at": "2026-08-30T20:22:26.313890+00:00",
       "sha256": "5e32927f07e61a83f8bd46ece46e58b2330fc3076cc1cf7999490d2d20a48497",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/concepts/performance.md"
     },
     "concepts/pydantic_settings.md": {
       "bytes": 684,
-      "fetched_at": "2026-08-30T11:00:24.388003+00:00",
+      "fetched_at": "2026-08-30T20:22:26.314002+00:00",
       "sha256": "268eece5efac124913d18ed5a8002116a16dbfa6de20c47ee6999d4a3858bec4",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/concepts/pydantic_settings.md"
     },
     "concepts/serialization.md": {
       "bytes": 33194,
-      "fetched_at": "2026-08-30T11:00:24.387182+00:00",
+      "fetched_at": "2026-08-30T20:22:26.312110+00:00",
       "sha256": "433a23f06e1d85c7b39ecfa69778f5ba494c5af32e59a93699c52070766f6e4c",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/concepts/serialization.md"
     },
     "concepts/strict_mode.md": {
       "bytes": 6309,
-      "fetched_at": "2026-08-30T11:00:24.387230+00:00",
+      "fetched_at": "2026-08-30T20:22:26.312225+00:00",
       "sha256": "ba862d10c09759f6f339856a03167c3efb0b1555d55078df330b41068891f9c1",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/concepts/strict_mode.md"
     },
     "concepts/type_adapter.md": {
       "bytes": 5474,
-      "fetched_at": "2026-08-30T11:00:24.387002+00:00",
+      "fetched_at": "2026-08-30T20:22:26.311718+00:00",
       "sha256": "394db30bfb25b648bbb9abb972f74ef78e229f18735ddfbd84764adaecf8fcb2",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/concepts/type_adapter.md"
     },
     "concepts/types.md": {
       "bytes": 30733,
-      "fetched_at": "2026-08-30T11:00:24.387408+00:00",
+      "fetched_at": "2026-08-30T20:22:26.312649+00:00",
       "sha256": "cb0eefb41d6973715c51c7fd9683b3614fbc4f0d7c69a80ef9f086ba0f6147e2",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/concepts/types.md"
     },
     "concepts/unions.md": {
       "bytes": 22566,
-      "fetched_at": "2026-08-30T11:00:24.387853+00:00",
+      "fetched_at": "2026-08-30T20:22:26.313625+00:00",
       "sha256": "5b1e65ced2a072abc6fa12418d7a60bf2f3df5a0f827986bd8b45bf705d9feb1",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/concepts/unions.md"
     },
     "concepts/validation_decorator.md": {
       "bytes": 11536,
-      "fetched_at": "2026-08-30T11:00:24.387676+00:00",
+      "fetched_at": "2026-08-30T20:22:26.313212+00:00",
       "sha256": "eb0273f7c5b9042282cf0819cd3a845a182f0b6b1d15fe9819968591587c77f8",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/concepts/validation_decorator.md"
     },
     "concepts/validators.md": {
       "bytes": 30386,
-      "fetched_at": "2026-08-30T11:00:24.387921+00:00",
+      "fetched_at": "2026-08-30T20:22:26.313774+00:00",
       "sha256": "63ec434550a9f910018e4d5f33f37216253f488d974108f126e957b8bd71da5b",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/concepts/validators.md"
     },
     "contributing.md": {
       "bytes": 12547,
-      "fetched_at": "2026-08-30T11:00:24.383106+00:00",
+      "fetched_at": "2026-08-30T20:22:26.302165+00:00",
       "sha256": "530e038d499d9c9f330e49bd43bf2b44334df71fb5dfbe906e0007fad7c3c56d",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/contributing.md"
     },
     "errors/errors.md": {
       "bytes": 10382,
-      "fetched_at": "2026-08-30T11:00:24.384205+00:00",
+      "fetched_at": "2026-08-30T20:22:26.304544+00:00",
       "sha256": "da239c0d9a77100bad78c1a61b65b5d16e8681a468f1eb39f7f7e4596be795b5",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/errors/errors.md"
     },
     "errors/troubleshooting.md": {
       "bytes": 6341,
-      "fetched_at": "2026-08-30T11:00:24.384149+00:00",
+      "fetched_at": "2026-08-30T20:22:26.304416+00:00",
       "sha256": "93929657b9c649fa421d81a3f40575619b32ac690efa9b428e10c05950c2e0b5",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/errors/troubleshooting.md"
     },
     "errors/usage_errors.md": {
       "bytes": 35327,
-      "fetched_at": "2026-08-30T11:00:24.384366+00:00",
+      "fetched_at": "2026-08-30T20:22:26.304913+00:00",
       "sha256": "3d0fed8a69d46d7e708a7468aecd3292de6799f0fdb7dbd996fcffec7f2a5ad8",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/errors/usage_errors.md"
     },
     "errors/validation_errors.md": {
       "bytes": 47382,
-      "fetched_at": "2026-08-30T11:00:24.384291+00:00",
+      "fetched_at": "2026-08-30T20:22:26.304762+00:00",
       "sha256": "41ed9cbdb4e712547d23a0acb8002190ca16c3ffae651b04df1ae713e23d4243",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/errors/validation_errors.md"
     },
     "examples/custom_validators.md": {
       "bytes": 10467,
-      "fetched_at": "2026-08-30T11:00:24.383759+00:00",
+      "fetched_at": "2026-08-30T20:22:26.303624+00:00",
       "sha256": "ce41aef205ada6c944ae923d7884c57a8899433d120364f55f8195a74a77833c",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/examples/custom_validators.md"
     },
     "examples/dynamic_models.md": {
       "bytes": 6864,
-      "fetched_at": "2026-08-30T11:00:24.383707+00:00",
+      "fetched_at": "2026-08-30T20:22:26.303478+00:00",
       "sha256": "32c305ed70be81457f810378c5d2ecb33062163a4d4639ac8406ab1e231e460c",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/examples/dynamic_models.md"
     },
     "examples/files.md": {
       "bytes": 8484,
-      "fetched_at": "2026-08-30T11:00:24.383566+00:00",
+      "fetched_at": "2026-08-30T20:22:26.303123+00:00",
       "sha256": "20376184b58ab1ebee64c031ac5e67e6cfe15eca7b9849dfeef65690e9a6c6c6",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/examples/files.md"
     },
     "examples/orms.md": {
       "bytes": 2374,
-      "fetched_at": "2026-08-30T11:00:24.383612+00:00",
+      "fetched_at": "2026-08-30T20:22:26.303239+00:00",
       "sha256": "979c3056277c1e0e316ea6af083c8956e5326b3ececb8ed3fdf4d1941e286476",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/examples/orms.md"
     },
     "examples/pydantic_ai.md": {
       "bytes": 1806,
-      "fetched_at": "2026-08-30T11:00:24.383508+00:00",
+      "fetched_at": "2026-08-30T20:22:26.302987+00:00",
       "sha256": "01825ddccfb9f5d956a3fc6b0d90b140dfa2dbdae7b4ae8f962bead8e640c5a6",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/examples/pydantic_ai.md"
     },
     "examples/queues.md": {
       "bytes": 6494,
-      "fetched_at": "2026-08-30T11:00:24.383660+00:00",
+      "fetched_at": "2026-08-30T20:22:26.303359+00:00",
       "sha256": "ebd4151f11ad5006ccedb4a005592221386c2072320bb05d8fc3e96668fea1a7",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/examples/queues.md"
     },
     "examples/requests.md": {
       "bytes": 2342,
-      "fetched_at": "2026-08-30T11:00:24.383802+00:00",
+      "fetched_at": "2026-08-30T20:22:26.303740+00:00",
       "sha256": "49dd656450257aa72e8c48fdbc70a9cd18c4c129e315dae7e164a3efc4691950",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/examples/requests.md"
     },
     "help_with_pydantic.md": {
       "bytes": 1430,
-      "fetched_at": "2026-08-30T11:00:24.383026+00:00",
+      "fetched_at": "2026-08-30T20:22:26.302001+00:00",
       "sha256": "80749990594c67e34dabbbe762e8638aac006cb733bbee212fb7414cbd9c509c",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/help_with_pydantic.md"
     },
     "index.md": {
       "bytes": 7933,
-      "fetched_at": "2026-08-30T11:00:24.382906+00:00",
+      "fetched_at": "2026-08-30T20:22:26.301734+00:00",
       "sha256": "406b0e58fdc427e05e9cd3c857ca5309b9a775700dda7fd1668e8d5c7569461a",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/index.md"
     },
     "install.md": {
       "bytes": 2256,
-      "fetched_at": "2026-08-30T11:00:24.383224+00:00",
+      "fetched_at": "2026-08-30T20:22:26.302431+00:00",
       "sha256": "df9a582a4eb819e48b4542fa44ac3917cac8803bd79a2d248af782b702523d31",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/install.md"
     },
     "integrations/aws_lambda.md": {
       "bytes": 7592,
-      "fetched_at": "2026-08-30T11:00:24.386505+00:00",
+      "fetched_at": "2026-08-30T20:22:26.310343+00:00",
       "sha256": "6a503d84c5d10872fcb98f5b7c29f6e2934f619065e3222ffea28220000e5827",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/integrations/aws_lambda.md"
     },
     "integrations/datamodel_code_generator.md": {
       "bytes": 3188,
-      "fetched_at": "2026-08-30T11:00:24.386403+00:00",
+      "fetched_at": "2026-08-30T20:22:26.310112+00:00",
       "sha256": "66b4413be7ec7b0d736f72c94883ac2ae3596ccd77e6602510108f05f5e7c863",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/integrations/datamodel_code_generator.md"
     },
     "integrations/devtools.md": {
       "bytes": 1556,
-      "fetched_at": "2026-08-30T11:00:24.386589+00:00",
+      "fetched_at": "2026-08-30T20:22:26.310589+00:00",
       "sha256": "a1b9dc8c68bd6b06c37446d47600bb7b470683fbdd1c5ce0f96fde4d28bbdab0",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/integrations/devtools.md"
     },
     "integrations/documentation.md": {
       "bytes": 1494,
-      "fetched_at": "2026-08-30T11:00:24.386547+00:00",
+      "fetched_at": "2026-08-30T20:22:26.310450+00:00",
       "sha256": "c65c9e97f7c031d759342083691b8d87d2ff810967ca768e30a108c13e9f1138",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/integrations/documentation.md"
     },
     "integrations/hypothesis.md": {
       "bytes": 982,
-      "fetched_at": "2026-08-30T11:00:24.386843+00:00",
+      "fetched_at": "2026-08-30T20:22:26.311283+00:00",
       "sha256": "e54b6510507b66058ddbf5f9b8b1d7bc7bcdaa9977e903f52eafa1f0046d18fa",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/integrations/hypothesis.md"
     },
     "integrations/linting.md": {
       "bytes": 405,
-      "fetched_at": "2026-08-30T11:00:24.386805+00:00",
+      "fetched_at": "2026-08-30T20:22:26.311177+00:00",
       "sha256": "e2dea8b1cc03e372b3d345aa80ee90af5d10e9efeef8b2df8727f6d4bc1fceab",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/integrations/linting.md"
     },
     "integrations/llms.md": {
       "bytes": 1301,
-      "fetched_at": "2026-08-30T11:00:24.386918+00:00",
+      "fetched_at": "2026-08-30T20:22:26.311492+00:00",
       "sha256": "74a4297eabce3b229a1ccc0e75d3b792b49d293e8e15b14d88e7940cecfe4e79",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/integrations/llms.md"
     },
     "integrations/logfire.md": {
       "bytes": 4877,
-      "fetched_at": "2026-08-30T11:00:24.386457+00:00",
+      "fetched_at": "2026-08-30T20:22:26.310229+00:00",
       "sha256": "270513aed15c0f696e841e3d4569f77eb04680035af54fba9a9b19d9c86d4533",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/integrations/logfire.md"
     },
     "integrations/mypy.md": {
       "bytes": 7128,
-      "fetched_at": "2026-08-30T11:00:24.386684+00:00",
+      "fetched_at": "2026-08-30T20:22:26.310845+00:00",
       "sha256": "06f7284d247d74064c709988fd2343ed6384012f8cdf945e48d1ed60eedabdd9",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/integrations/mypy.md"
     },
     "integrations/pycharm.md": {
       "bytes": 950,
-      "fetched_at": "2026-08-30T11:00:24.386766+00:00",
+      "fetched_at": "2026-08-30T20:22:26.311071+00:00",
       "sha256": "738a7467597cee117d51f6827e7a0dd396099be77a7e225354baa3d9e8eaca26",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/integrations/pycharm.md"
     },
     "integrations/pyrefly.md": {
       "bytes": 2254,
-      "fetched_at": "2026-08-30T11:00:24.386727+00:00",
+      "fetched_at": "2026-08-30T20:22:26.310960+00:00",
       "sha256": "007d2c5c2545c80aac5b4e51c5617f82f882076affdaa8f2c8c410eff98bce63",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/integrations/pyrefly.md"
     },
     "integrations/rich.md": {
       "bytes": 359,
-      "fetched_at": "2026-08-30T11:00:24.386881+00:00",
+      "fetched_at": "2026-08-30T20:22:26.311386+00:00",
       "sha256": "e8badaed160f0c77c417057b298fca00331efd0c0222ead7e7d0047488f93f91",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/integrations/rich.md"
     },
     "integrations/visual_studio_code.md": {
       "bytes": 10821,
-      "fetched_at": "2026-08-30T11:00:24.386640+00:00",
+      "fetched_at": "2026-08-30T20:22:26.310723+00:00",
       "sha256": "d53d42ed8fee155a6579d7d0f12343dc480bbd4ee8479a1f9f614ad69dd8b1fa",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/integrations/visual_studio_code.md"
     },
     "internals/architecture.md": {
       "bytes": 9945,
-      "fetched_at": "2026-08-30T11:00:24.386215+00:00",
+      "fetched_at": "2026-08-30T20:22:26.309637+00:00",
       "sha256": "194852f3393a5afe4863dedb906df414802d94299a03170ea27bfe874d3722ea",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/internals/architecture.md"
     },
     "internals/resolving_annotations.md": {
       "bytes": 10819,
-      "fetched_at": "2026-08-30T11:00:24.386164+00:00",
+      "fetched_at": "2026-08-30T20:22:26.309485+00:00",
       "sha256": "a04f24b28079b0a33844da9d8c7bc61c2aad1e0b2f5a297f3d32898b6f7135ec",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/internals/resolving_annotations.md"
     },
     "migration.md": {
       "bytes": 49962,
-      "fetched_at": "2026-08-30T11:00:24.383321+00:00",
+      "fetched_at": "2026-08-30T20:22:26.302638+00:00",
       "sha256": "2967636ca79f6d0eb684e8c2945cb916163d96266f32a43658dc5e24cb9fad5a",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/migration.md"
     },
     "plugins/people.yml": {
       "bytes": 20197,
-      "fetched_at": "2026-08-30T11:00:24.383947+00:00",
+      "fetched_at": "2026-08-30T20:22:26.304015+00:00",
       "sha256": "8b6137954f3f0bd05a53c6097d01fbff197f4c1d417eb67da29aed2b69fe8d7d",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/plugins/people.yml"
     },
     "pydantic_people.md": {
       "bytes": 1439,
-      "fetched_at": "2026-08-30T11:00:24.383153+00:00",
+      "fetched_at": "2026-08-30T20:22:26.302280+00:00",
       "sha256": "2641f8f247570cd21e2fa7b04ec188ba3d195422e99fcf7edb6685f8a069f1f6",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/pydantic_people.md"
     },
     "version-policy.md": {
       "bytes": 6635,
-      "fetched_at": "2026-08-30T11:00:24.382964+00:00",
+      "fetched_at": "2026-08-30T20:22:26.301864+00:00",
       "sha256": "08250a1f910b862b9c2349ce21dd4aa8d67e8b41aa32d5fe89acb9fa988335b7",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/version-policy.md"
     },
     "why.md": {
       "bytes": 15204,
-      "fetched_at": "2026-08-30T11:00:24.382792+00:00",
+      "fetched_at": "2026-08-30T20:22:26.301513+00:00",
       "sha256": "28e041170086209a9a68d381e95fc56ba7c81156fb4cbdce891ddee1f711db2a",
       "source_url": "https://github.com/pydantic/pydantic/blob/main/docs/why.md"
     }
