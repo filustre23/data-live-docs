@@ -35,7 +35,7 @@ WHERE account_owner_email == {{hex_user_email}}
 * Execute dynamic Python code:
 
 ```
-if hex_user_email in ('[email protected]', '[email protected]', '[email protected]'):
+if hex_user_email in ('melissa@company.com', 'dylan@company.com', 'alex@company.com'):
 
 
 
@@ -53,7 +53,7 @@ department = 'other'
 * Display customized Markdown text, using a [Jinja if statement](https://jinja.palletsprojects.com/en/3.1.x/templates/#if):
 
 ```
-{% if hex_user_email == '[email protected]' %}
+{% if hex_user_email == 'jaylin@company.com' %}
 
 
 
@@ -61,7 +61,7 @@ Hi Jaylin!
 
 
 
-{% elif hex_user_email == '[email protected]' %}
+{% elif hex_user_email == 'imani@company.com' %}
 
 
 
@@ -90,7 +90,7 @@ Why? Apps set to **show results from a previous run** automatically load using t
 
 **Note: `hex_user_email` will only evaluate to the user's email address *in the published app***.
 
-When viewing the project's Notebook view + App builder, the variable will always equal `[email protected]`.
+When viewing the project's Notebook view + App builder, the variable will always equal `example-user@example.com`.
 
 If an anonymous user (i.e., someone without a Hex account) views the published App, `hex_user_email` will be a random hash. An app will only ever have anonymous viewers if it's [been made available publicly](/docs/collaborate/sharing-and-permissions/sharing-permissions#public-share-permissions).
 

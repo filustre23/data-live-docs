@@ -51,7 +51,7 @@ Use the Context Studio to monitor AI usage across your workspace and manage the 
 * **Workspace controls**: Admins can enable/disable all AI features for the entire workspace from **Settings > AI & Agents**. See [Enable AI & Agents](/docs/administration/workspace_settings/enable-ai-and-agents).
 * **Feature toggles**:
   + Typeahead can be controlled at the workspace and per-user level. See [Typeahead](/docs/explore-data/cells/code-typeahead#enable-typeahead).
-* **Plan availability**: Features may vary by plan and beta status. See in-product settings or reach out to `[email protected]` for details.
+* **Plan availability**: Features may vary by plan and beta status. See in-product settings or reach out to `support@hex.tech` for details.
 
 ## Security, privacy, and compliance[​](#security-privacy-and-compliance "Direct link to Security, privacy, and compliance")
 

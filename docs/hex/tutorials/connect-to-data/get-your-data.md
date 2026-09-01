@@ -33,7 +33,7 @@ You'll need to add our IP addresses to your allow-list in order to allow Hex to 
 
 tip
 
-Do you use a data source we don't support right now? Let us know at `[email protected]` if there's one you want us to prioritize adding.
+Do you use a data source we don't support right now? Let us know at `support@hex.tech` if there's one you want us to prioritize adding.
 
 To add a data connection, go to a project's **Data sources** tab in the sidebar, click the **+ Add** button in the Data Connections section, and fill in your details. More detailed instruction [here](/docs/connect-to-data/data-connections/data-connections-introduction#add-a-new-connection).
 

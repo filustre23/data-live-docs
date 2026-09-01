@@ -231,7 +231,7 @@ Splits `text` into separate parts separated by `delimiter` and returns the `part
 
 > `text`
 >
-> > `SplitPart("[email protected]", "@", 1)` → 'jane'
+> > `SplitPart("jane@example.com", "@", 1)` → 'jane'
 
 ### 🧮 Math[​](#-math "Direct link to 🧮 Math")
 

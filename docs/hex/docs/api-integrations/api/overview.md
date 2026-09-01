@@ -315,7 +315,7 @@ group_payload = {
 
 
 
-"users": [{"id": email_to_id["[email protected]"]}, {"id": email_to_id["[email protected]"]}]
+"users": [{"id": email_to_id["alice@example.com"]}, {"id": email_to_id["bob@example.com"]}]
 
 
 
@@ -1194,7 +1194,7 @@ A 429 status code indicates that you have hit the request rate limit. See the se
 
 ### 500 Internal server error[​](#500-internal-server-error "Direct link to 500 Internal server error")
 
-A 500 status code indicates an error with the Hex application. Please contact [Hex support](/cdn-cgi/l/email-protection#81f2f4f1f1eef3f5c1e9e4f9aff5e4e2e9) for help troubleshooting.
+A 500 status code indicates an error with the Hex application. Please contact [Hex support](mailto:support@hex.tech) for help troubleshooting.
 
 ### 503 Service Unavailable[​](#503-service-unavailable "Direct link to 503 Service Unavailable")
 

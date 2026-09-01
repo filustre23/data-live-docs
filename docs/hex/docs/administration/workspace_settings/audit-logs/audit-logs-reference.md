@@ -34,7 +34,7 @@ The following is an example event object:
 
 
 
-"email": "[email protected]",
+"email": "user@hex.tech",
 
 
 
