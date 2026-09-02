@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-09-01T15:54+00:00_
+_Generated 2026-09-02T02:19+00:00_
 
-**9 sources, 4514 topics total**
+**9 sources, 4525 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_688 topics_
+_698 topics_
 
 - `anthropic-sdk/about-claude/additional-resources`
 - `anthropic-sdk/about-claude/glossary`
@@ -291,6 +291,9 @@ _688 topics_
 - `anthropic-sdk/api/beta/organization/api_keys/list`
 - `anthropic-sdk/api/beta/organization/api_keys/retrieve`
 - `anthropic-sdk/api/beta/organization/api_keys/update`
+- `anthropic-sdk/api/beta/organization/compliance_settings`
+- `anthropic-sdk/api/beta/organization/compliance_settings/retrieve`
+- `anthropic-sdk/api/beta/organization/compliance_settings/update`
 - `anthropic-sdk/api/beta/organization/external_keys`
 - `anthropic-sdk/api/beta/organization/external_keys/create`
 - `anthropic-sdk/api/beta/organization/external_keys/delete`
@@ -552,10 +555,12 @@ _688 topics_
 - `anthropic-sdk/build-with-claude/multilingual-support`
 - `anthropic-sdk/build-with-claude/overview`
 - `anthropic-sdk/build-with-claude/pdf-support`
+- `anthropic-sdk/build-with-claude/preserved-thinking`
 - `anthropic-sdk/build-with-claude/prompt-caching`
 - `anthropic-sdk/build-with-claude/prompt-engineering/claude-prompting-best-practices`
 - `anthropic-sdk/build-with-claude/prompt-engineering/overview`
 - `anthropic-sdk/build-with-claude/prompt-engineering/prompting-claude-fable-5`
+- `anthropic-sdk/build-with-claude/prompt-engineering/prompting-claude-fable-5-1`
 - `anthropic-sdk/build-with-claude/prompt-engineering/prompting-claude-opus-4-8`
 - `anthropic-sdk/build-with-claude/prompt-engineering/prompting-claude-opus-5`
 - `anthropic-sdk/build-with-claude/prompt-engineering/prompting-claude-sonnet-5`
@@ -660,11 +665,15 @@ _688 topics_
 - `anthropic-sdk/managed-agents/tools`
 - `anthropic-sdk/managed-agents/vaults`
 - `anthropic-sdk/managed-agents/webhooks`
+- `anthropic-sdk/models/fable-5-1/migration-guide`
+- `anthropic-sdk/models/fable-5-1/overview`
+- `anthropic-sdk/models/fable-5-1/whats-new-fable-5-1`
 - `anthropic-sdk/models/fable-5/introducing-claude-fable-5-and-claude-mythos-5`
 - `anthropic-sdk/models/fable-5/migration-guide`
 - `anthropic-sdk/models/fable-5/overview`
 - `anthropic-sdk/models/haiku-4-5/migration-guide`
 - `anthropic-sdk/models/haiku-4-5/overview`
+- `anthropic-sdk/models/mythos-5-1/overview`
 - `anthropic-sdk/models/mythos-5/overview`
 - `anthropic-sdk/models/opus-4-5/overview`
 - `anthropic-sdk/models/opus-4-6/overview`
@@ -681,6 +690,7 @@ _688 topics_
 - `anthropic-sdk/models/sonnet-5/whats-new-sonnet-5`
 - `anthropic-sdk/release-notes/overview`
 - `anthropic-sdk/release-notes/system-prompts/claude-fable-5`
+- `anthropic-sdk/release-notes/system-prompts/claude-fable-5-1`
 - `anthropic-sdk/release-notes/system-prompts/claude-haiku-3`
 - `anthropic-sdk/release-notes/system-prompts/claude-haiku-3-5`
 - `anthropic-sdk/release-notes/system-prompts/claude-haiku-4-5`
@@ -2404,7 +2414,7 @@ _191 topics_
 
 Upstream: <https://docs.getdbt.com/docs/>
 
-_1123 topics_
+_1124 topics_
 
 - `dbt-core/best-practices/best-practice-workflows`
 - `dbt-core/best-practices/clone-incremental-models`
@@ -2557,7 +2567,6 @@ _1123 topics_
 - `dbt-core/docs/dbt-ai/_wizard-cli-full-generated`
 - `dbt-core/docs/dbt-ai/_wizard-slash-commands-generated`
 - `dbt-core/docs/dbt-ai/about-dbt-ai`
-- `dbt-core/docs/dbt-ai/about-dbt-wizard-cli`
 - `dbt-core/docs/dbt-ai/about-mcp`
 - `dbt-core/docs/dbt-ai/analyst-agent`
 - `dbt-core/docs/dbt-ai/copilot-overview`
@@ -2573,6 +2582,8 @@ _1123 topics_
 - `dbt-core/docs/dbt-ai/mcp-quickstart-oauth`
 - `dbt-core/docs/dbt-ai/mcp-quickstart-remote`
 - `dbt-core/docs/dbt-ai/mcp-troubleshooting`
+- `dbt-core/docs/dbt-ai/pricing-billing/overview`
+- `dbt-core/docs/dbt-ai/pricing-billing/trial-and-billing`
 - `dbt-core/docs/dbt-ai/setup-local-mcp`
 - `dbt-core/docs/dbt-ai/setup-remote-mcp`
 - `dbt-core/docs/dbt-ai/wizard-billing-faqs`
@@ -2838,7 +2849,6 @@ _1123 topics_
 - `dbt-core/docs/platform/connect-data-platform/connect-snowflake`
 - `dbt-core/docs/platform/connect-data-platform/connect-starburst-trino`
 - `dbt-core/docs/platform/connect-data-platform/connect-teradata`
-- `dbt-core/docs/platform/enable-dbt-ai`
 - `dbt-core/docs/platform/git/authenticate-azure`
 - `dbt-core/docs/platform/git/connect-azure-devops`
 - `dbt-core/docs/platform/git/connect-github`
@@ -2881,6 +2891,7 @@ _1123 topics_
 - `dbt-core/docs/platform/manage-access/sso-faq`
 - `dbt-core/docs/platform/manage-access/sso-oauth-intro`
 - `dbt-core/docs/platform/manage-access/sso-overview`
+- `dbt-core/docs/platform/manage-dbt-ai`
 - `dbt-core/docs/platform/migration`
 - `dbt-core/docs/platform/platform-cli-migration`
 - `dbt-core/docs/platform/secure/about-network-security`

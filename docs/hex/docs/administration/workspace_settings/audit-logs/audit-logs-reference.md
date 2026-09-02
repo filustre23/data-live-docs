@@ -346,6 +346,7 @@ For instance, the UPDATE\_PROJECT\_ACCESS event type includes a principal resour
 | CREATE\_USER\_MCP\_CONNECTION | A user connected to an MCP server | * User MCP Server Connection |
 | DELETE\_USER\_MCP\_CONNECTION | A user deleted their connection to an MCP server | * User MCP Server Connection |
 | CALL\_MCP\_SERVER\_TOOL | An MCP tool was called as part of an agent chat | * User MCP Server Connection |
+| SEND\_LLM\_REQUEST | Complete a request to an LLM provider as part of handling a Hex agent query | * Workspace |
 
 #### On this page
 

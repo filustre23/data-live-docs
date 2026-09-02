@@ -7,7 +7,7 @@ info
 * Chat with App is available on the [Team and Enterprise plans](https://hex.tech/pricing/), which include monthly per-seat [credit grants](/docs/administration/credits) that can be used towards Hex AI features.
 * Users require an **[Explorer role](/docs/collaborate/sharing-and-permissions/roles)** or higher to use Chat with App.
 * Users must have **[Can explore](/docs/collaborate/sharing-and-permissions/project-sharing)** access or higher on a published app in order to chat with it.
-* Users must have **[Can view results](/docs/connect-to-data/data-connections/data-connections-introduction#workspace-data-connection-permissions)** access or higher on all data connections used in the app.
+* Users must have **[Can query](/docs/connect-to-data/data-connections/data-connections-introduction#can-query)** access on all data connections used in the app.
 
 Chat with App lets you ask natural language questions and run analysis from a conversational sidebar on any published app. Each conversation is backed by the [Threads](/docs/explore-data/threads) agent with the app as context, so in addition to interacting with the app itself - viewing outputs, updating inputs, applying filters, re-running the app - the agent can write and run SQL and python, pull from semantic models, build charts, and work with uploaded files to extend its analysis beyond what is in the app.
 
