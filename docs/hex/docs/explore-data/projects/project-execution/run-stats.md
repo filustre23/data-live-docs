@@ -10,40 +10,33 @@ Run stats help users with Can Edit permission understand a project's performance
 
 ### Notebooks[​](#notebooks "Direct link to Notebooks")
 
-Access run stats via the Run button dropdown in the upper right corner of your project.
+Access run stats via the **Run stats** icon in the upper right corner of your project.
 
-[](/assets/medias/open-run-stats-5b1f1c76c5a88f35eddce9027d9e4ba6.mp4)
+In the panel, you’ll see all runs from the past two days. Each run of the entire project, a selection of cells, or a singular cell will create a new row labeled with the user, date and time, run scope, run time, cache, and session type.
 
-By default, stats from the most recent run will be shown. Select the timestamp of your run from the date time dropdown in the upper left corner of the run stats modal.
-
-You'll see any notebook runs (not app runs) up to two days old. Every run of the entire notebook, a selection of cells, or a singular cell, will produce a new profile labeled with the date and time. If you see **No runs found** upon opening the run stats, no runs of the notebook happened in the last two days. Run your notebook to see stats on project and cell runs.
+You can sort the list by **Most recent** or **Oldest first**, and use filters to narrow runs by **User**, **Session type**, or **Cache**.
 
 ### Published apps[​](#published-apps "Direct link to Published apps")
 
-From the top-right three-dot menu, select "Advanced" -> "Enter debug mode". Then, from the question mark in the bottom-left, select "View run stats."
-
-By default, stats from the most recent run will be shown. You can also select other runs from the **current** app session — at present, it's not possible to access runs from other app sessions.
+From the three-dot menu in the upper right corner, select **Advanced > View run stats** and you’ll be redirected to the notebook. When you open the run stats panel, it opens directly to the run associated with the app session you were viewing.
 
 ### Run level stats[​](#run-level-stats "Direct link to Run level stats")
 
-The top of the run stats provides some overall information about the run, as well as the legend used for interpreting the per cell information that follows. Here you'll see the total run time, the total time spent reading from (and writing to) cache, as well as kernel initialization time.
+After you select a run, the top of the panel provides general information about the run and the legend used to interpret the per cell information. Here, you’ll see the total run time and kernel initialization time - this can be impacted by the time spent loading [files](/docs/explore-data/projects/environment-configuration/files) and imported [GitHub packages](/docs/administration/workspace_settings/workspace-assets#git-package-import)
 
-* **Total**: The total time spent executing the selected run.
-* **Cache**: The total time spent reading from and writing to Hex's [SQL cache](/docs/explore-data/cells/sql-cells/query-caching).
-* **Kernel initialization**: The time spent initializing your kernel to run the cells in your project. This is impacted by time spent loading [files](/docs/explore-data/projects/environment-configuration/files) and imported [GitHub packages](/docs/administration/workspace_settings/workspace-assets#git-package-import)
-
-In the top right of the modal, you can filter by type of cell, searching cell name or sorting by slowest to fastest, fastest to slowest, or execution order of cells.
+In the upper right corner of the panel, you can filter by cell type, search by cell name, or sort by **Execution Order**, **Notebook Order**, **Slowest**, or **Fastest**.
 
 ### Cell level stats[​](#cell-level-stats "Direct link to Cell level stats")
 
-Click into an individual cell to view the time spent queueing, running, processing and reading to and writing from cache.
+Click into an individual cell to view the time spent preparing, executing, streaming, reading from cache, and processing.
 
 The legend explains the time spent:
 
-* **Queued**: The time spent waiting in the ‘queue’ to execute. Typically this is time spent waiting for upstream cells.
-* **Running**: The time spent running a cell. Notice that cells run during the ‘queue’ time of other cells.
-* **Processing**: The time spent processing the cell’s query or command output within Hex before displaying the output.
-* **Cache**: The time spent reading from and writing to Hex’s cache.
+* **Preparing:** The time spent connecting to the warehouse and preparing the query
+* **Executing:** The time spent executing the cell's query or code
+* **Streaming:** The time spent streaming query results from the warehouse
+* **Cache:** The time spent reading from Hex’s cache
+* **Processing:** The time spent processing the cell’s query or output before displaying it
 
 #### On this page
 

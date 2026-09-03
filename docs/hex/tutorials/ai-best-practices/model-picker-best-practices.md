@@ -4,19 +4,17 @@ On this page
 
 Choose the right model and effort level for your analytical work in Hex.
 
-When you attack a problem with the wrong tool, even if you get to the solution, you can waste time and energy. With AI, that manifests as choosing the right model for your task. More and more models are being released, each with their own strengths and cost trade-offs. We think you should be able to pick the right one for whatever you need to do in Hex.
+You may have opened the model picker and wondered which name to pick — or been sent here to figure that out for yourself or your team. You don't need to memorize every option. When you want more control, match the model to the kind of question you're asking and how much you want to spend on credits.
 
-We recently launched the ability to pick your model based on what you want to build. With this launch, it's important to understand the capabilities and estimated cost of using each model. Because agents are non-deterministic, you should treat these as guidelines on what you can expect.
-
-Let's break them down by the tasks they are best suited for, the expected cost to use them, and the responses you'll likely get.
+Because the agent won't give the same answer every time, treat the guidance below as a starting point — not a guarantee. Match the model to what you're asking, try it, and adjust if the answer feels off.
 
 tip
 
-This information was published in July 2026 and includes models available up to that date range.
+This information was published in August 2026 and reflects models available through that date. Recommendations are informed by findings from [DataBench](https://hex.tech/blog/databench-agentic-analytics-benchmark/), our benchmark for realistic analytical work with agents.
 
 ## How to pick your model[​](#how-to-pick-your-model "Direct link to How to pick your model")
 
-When starting a new agent conversation, you can select the **Auto** dropdown to choose a different model for your session.
+When starting a new agent conversation, select the **Auto** dropdown to choose a different model for your session.
 
 ## Auto[​](#auto "Direct link to Auto")
 
@@ -28,37 +26,47 @@ Admins can also set a default model for the whole workspace from **Settings > AI
 
 ## Choosing the right model for your task[​](#choosing-the-right-model-for-your-task "Direct link to Choosing the right model for your task")
 
-The Hex Agent works with a range of models and efforts, each suited to different kinds of analytical work. Here's how to pick the right one for the job.
+Match the model to the shape of the ask — clear vs. ambiguous, lookup vs. judgment call — and to whether you're optimizing for depth or credits. Credit estimates below assume Medium effort.
 
-You can increase the effort on each model to improve thinking, but each estimate below is based on Medium effort across all models.
-
-| Model | Credits | Best for | When to reach for it |
+| Model | Credits | Best suited for | When to reach for it |
 | --- | --- | --- | --- |
-| **Fable 5** | $$$$ | The most ambiguous, open-ended analysis | Exploratory work where the question isn't fully defined, complex data investigations, or analyses requiring nuanced reasoning across many variables. Use when getting it right matters more than cost. |
-| **Opus 4.7** | $$$ | Complex, multi-step analysis | Building involved queries, debugging tricky logic, structured deep-dives, or analyses with several moving pieces. A strong default when work is complex but doesn't quite need Fable. |
-| **GPT 5.5** | $$$ | Complex analysis (alternative to Opus) | Comparable to Opus 4.7 — the right pick often comes down to the task and personal preference. Worth trying both to see which fits your workflow. |
-| **Sonnet 4.6** | $$ | Everyday analysis and quick iterations | Writing SQL, summarizing results, light data wrangling, and most day-to-day asks. The best balance of capability and cost for most work. |
-| **Kimi 2.7** | $ | Simple, well-defined questions | Quick syntax help, basic transformations, or straightforward lookups. Use when the ask is unambiguous and you just need a fast answer. |
+| **Fable 5** | $$$$ | Ambiguous, open-ended analysis | Exploratory work where the question isn't fully defined, or investigations that need careful, nuanced reasoning. A strong pick when getting it right matters more than cost — and when you may want to raise effort as you go. |
+| **Opus 5** | $$$$ | Hard analytical judgment | Deep investigations, multi-step reasoning, and high-stakes questions where you want maximum capability. Prefer Medium or High effort for most asks; the highest effort levels can add unnecessary complexity to an answer that was already on track. |
+| **Opus 4.8** | $$$ | Complex, multi-step analysis | Building involved queries, debugging tricky logic, or structured deep-dives with several moving pieces. Strong when the work is complex but doesn't need Opus 5 or Fable. |
+| **GPT 5.6 Sol** | $$$ | Complex analysis at a lower credit cost | Multi-step analytical work where you want strong results without full frontier-model spend. Worth trying alongside Opus to see which fits your workflow. |
+| **Sonnet 5** | $$ | Everyday questions and quick iterations | Writing SQL, summarizing results, light data wrangling, and routine asks. For everyday work where credits matter more, also consider Terra or Luna. |
+| **GPT 5.6 Terra** | $$ | Balanced everyday analysis | A practical all-rounder when you want solid day-to-day results without spending at the top of the range. |
+| **GPT 5.6 Luna** | $ | Clear asks when you want to conserve credits | Well-defined questions where you still want solid quality at a much lower cost. Raise effort if you need a bit more depth — Luna stays relatively affordable as you do. |
+| **Kimi 2.7** | $ | Simple, well-defined questions | Quick syntax help, basic transformations, or straightforward lookups. Another strong option when you're optimizing for spend and the ask is unambiguous. |
 
 **A note on Fable 5:** Because Fable 5 is part of Anthropic's Mythos class, Anthropic requires a 30-day retention window on all prompts and outputs for safety review. You must [enable data retention](/docs/trust/ai-data-privacy#model-data-retention-settings) in Hex to use Fable 5.
 
 ### How to think about effort within a model[​](#how-to-think-about-effort-within-a-model "Direct link to How to think about effort within a model")
 
-The guidance above assumes medium effort, which is the default for most tasks. Lower effort is faster and cheaper but may miss nuance; higher effort can improve results on harder problems but increases cost meaningfully — sometimes enough to make a smaller model at high effort more expensive than a larger model at medium. When in doubt, start at medium and adjust based on the result.
+Medium effort is a sensible default for most tasks. Lower effort is faster and cheaper; higher effort can help on harder problems — but more thinking is not always better.
 
-Analytical questions that look simple sometimes aren't — a tidy-looking dataset can hide messy logic underneath. If an answer feels shallow or off, try increasing the effort or moving up a model tier; the question may have needed more reasoning than it appeared.
+Practical takeaways:
 
-You can adjust the effort for the model you've chosen in the model picker. For guidance on how each level behaves and when to use it, review the provider's documentation: [Anthropic effort levels](https://platform.claude.com/docs/en/build-with-claude/effort#effort-levels) and [OpenAI reasoning effort](https://developers.openai.com/api/docs/guides/reasoning#reasoning-effort). Kimi 2.7 currently only allows Medium effort.
+* Start at Medium and adjust based on the result.
+* On **Opus 5**, prefer Medium or High over Max for most analytical asks.
+* On **Fable 5**, raising effort is a safer bet when the problem is still fuzzy.
+* On **Luna**, raising effort is often an affordable way to get closer to Sol-quality results.
 
-## Let's talk about Kimi[​](#lets-talk-about-kimi "Direct link to Let's talk about Kimi")
+Analytical questions that look simple sometimes aren't — a tidy-looking dataset can hide messy logic underneath. If an answer feels shallow or off, try increasing the effort, switching models, or following up with a sharper question. Keep your judgment in the loop.
 
-Kimi 2.7 is an open-source model, best known for its lower token costs. In [our benchmarking of Kimi performance and cost](https://hex.tech/blog/kimi-in-hex/), we found Kimi to be, at times, 1/3rd the cost of frontier models in certain environments.
+You can adjust effort in the model picker. For more detail from the providers, see [Anthropic effort levels](https://platform.claude.com/docs/en/build-with-claude/effort#effort-levels) and [OpenAI reasoning effort](https://developers.openai.com/api/docs/guides/reasoning#reasoning-effort). Kimi 2.7 currently only allows Medium effort.
 
-It's best suited for straightforward analytical questions, especially when they are heavily documented or semantically modeled. It excels in execution but is less capable at judgment — ambiguous problems, cross-domain analysis, nuanced interpretation of results.
+## Conserving credits[​](#conserving-credits "Direct link to Conserving credits")
 
-When using Kimi, you'll see substantially more thinking messages; don't worry, that's a feature, not a bug. The model is designed to validate its thinking heavily and spends its tokens affirming what it's attempting to do, rather than how (judgment). You also may experience slightly longer thinking times, but not always.
+If your goal is to stretch credits without giving up useful answers, reach for **GPT 5.6 Luna** or **Kimi 2.7** — the two low-cost models in the picker.
 
-A good mental model is: If a senior analyst would hand the task to a junior with clear instructions, Kimi 2.7 can probably do it cheaper. If they'd want to think through it with a peer, use Opus or GPT.
+**GPT 5.6 Luna** is built for clear, well-scoped questions where you still want solid analytical quality at a low cost. Raise effort when you need a bit more depth without a big jump in spend.
+
+**Kimi 2.7** is an open-source model we host on US-based infrastructure, known for lower costs. In [our benchmarking](https://hex.tech/blog/kimi-in-hex/), Kimi was at times about one-third the cost of frontier models in certain environments. It works best when the ask is clear and well defined.
+
+When using Kimi, you'll see substantially more thinking messages; that's expected. The model spends time validating what it's attempting to do. You may also see slightly longer thinking times, but not always.
+
+A good mental model: if a senior analyst would hand the task to a junior with clear instructions, **Luna** or **Kimi** can often do it cheaper. If they'd want to think it through with a peer, reach for **Sol**, **Opus**, or **Fable**.
 
 ## Match the model to the ask[​](#match-the-model-to-the-ask "Direct link to Match the model to the ask")
 
@@ -67,11 +75,12 @@ If you're still unsure which model to reach for, think about the shape of the qu
 | Model | The kind of ask |
 | --- | --- |
 | **Fable 5** | "Build me a 12-month forecast from this messy data, then help me write an annual plan with targets GTM leaders should actually care about." Open-ended, high-stakes, and still half-formed. |
-| **Opus 4.7** / **GPT 5.5** | "Why are customers dropping out of the conversion funnel, and where should I be paying attention?" Multi-step diagnosis with real judgment calls. Try both and see which one you prefer. |
-| **Sonnet 4.6** | "Tell me more about this metric." Everyday analysis, quick iterations, and the questions you ask ten times a week. |
-| **Kimi 2.7** | "How many checkouts did we have last week? What did they purchase?" Clear ask, clear answer, no ambiguity required. |
+| **Opus 5** | "Why is revenue diverging from pipeline across three regions, and what should we do about it?" Hard judgment calls where capability matters most. |
+| **Opus 4.8** / **GPT 5.6 Sol** | "Why are customers dropping out of the conversion funnel, and where should I be paying attention?" Multi-step diagnosis with real judgment calls. Try Sol when you want similar depth at lower cost. |
+| **Sonnet 5** / **GPT 5.6 Terra** | "Tell me more about this metric." Everyday analysis and the questions you ask many times a week. |
+| **GPT 5.6 Luna** / **Kimi 2.7** | "How many checkouts did we have last week? What did they purchase?" Clear ask, clear answer — and a chance to conserve credits. |
 
-Start in Auto. Move up when the question gets fuzzy. Move down when you already know exactly what you need.
+Start in Auto. Move up when the question gets fuzzy or the stakes get high. Move down when you already know exactly what you need — or when you're deliberately optimizing for spend.
 
 #### On this page
 
@@ -79,5 +88,5 @@ Start in Auto. Move up when the question gets fuzzy. Move down when you already 
 * [Auto](#auto)
 * [Choosing the right model for your task](#choosing-the-right-model-for-your-task)
   + [How to think about effort within a model](#how-to-think-about-effort-within-a-model)
-* [Let's talk about Kimi](#lets-talk-about-kimi)
+* [Conserving credits](#conserving-credits)
 * [Match the model to the ask](#match-the-model-to-the-ask)

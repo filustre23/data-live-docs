@@ -157,7 +157,7 @@ Hex provides several tools and resources to help teams optimize their credit usa
 
 ### How does BYOK work with credits?[​](#how-does-byok-work-with-credits "Direct link to How does BYOK work with credits?")
 
-On the Hex Enterprise plan, Admins can bring your own key ([BYOK](/docs/trust/ai-data-privacy#bring-your-own-key-byok)) to route all LLM usage in Hex through your model provider API key. Since AI usage in Hex will not consume credits with BYOK enabled, AI usage visibility will need to be accessed through your external model provider.
+On the Hex Enterprise plan, Admins can bring your own key ([BYOK](/docs/trust/ai-data-privacy#bring-your-own-key-byok)) to route all LLM usage in Hex through your model provider API key. Users still receive their monthly per-seat credit grants, but those grants aren't drawn down by agent usage. Since AI usage in Hex will not consume credits with BYOK enabled, AI usage visibility will need to be accessed through your external model provider.
 
 #### On this page
 

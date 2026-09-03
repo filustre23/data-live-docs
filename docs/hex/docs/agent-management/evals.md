@@ -540,11 +540,11 @@ Choose a rubric type based on what you want to check.
 | `expected` | No | string | An optional description of the correct answer to grade against. |
 | `expectedSql` | No | SQL target | An optional query whose result is the correct answer to grade against. |
 | `warnOnly` | No | boolean | Default `false`. Grade and report this rubric without letting it fail or error the case. See [Warn-only rubrics](#warn-only-rubrics). |
-| `measure` | No | string | Groups this rubric with others checking the same quality, so they roll up into one rate. Lowercase kebab-case. See [Measures](#measures). |
+| `measure` | No | string | Groups this rubric with others checking the same quality, so they roll up into one rate. Lowercase kebab-case or snake\_case. See [Measures](#measures). |
 
 `expected` and `expectedSql` can be used together. When both are set, the judge sees your description alongside the query result.
 
-#### Fields for `numeric_value`[ ​](#fields-for-numeric_value "Direct link to fields-for-numeric_value")
+#### Fields for `numeric_value`[​](#fields-for-numeric_value "Direct link to fields-for-numeric_value")
 
 | Field | Required | Type | Notes |
 | --- | --- | --- | --- |
@@ -557,7 +557,7 @@ Choose a rubric type based on what you want to check.
 | `strictHeadline` | No | boolean | Default `true`. Grades the number identified as the answer’s primary result, and fails the rubric if no primary result can be identified. Set to `false` to pass when any number in the response matches the target. |
 | `extractionGuidance` | No | string | Hint for which number to grade when the answer has several, e.g. "the enterprise ARR, not total ARR". |
 | `warnOnly` | No | boolean | Default `false`. Grade and report this rubric without letting it fail or error the case. See [Warn-only rubrics](#warn-only-rubrics). |
-| `measure` | No | string | Groups this rubric with others checking the same quality, so they roll up into one rate. Lowercase kebab-case. See [Measures](#measures). |
+| `measure` | No | string | Groups this rubric with others checking the same quality, so they roll up into one rate. Lowercase kebab-case or snake\_case. See [Measures](#measures). |
 
 #### Warn-only rubrics[​](#warn-only-rubrics "Direct link to Warn-only rubrics")
 
@@ -619,7 +619,7 @@ criterion: "Did the agent count distinct users rather than sessions?"
 measure: correct-method
 ```
 
-A rubric can have at most one measure, and the same measure can be used across multiple rubrics and cases. Measure names are lowercase kebab-case and must start with a letter.
+A rubric can have at most one measure, and the same measure can be used across multiple rubrics and cases. Measure names are lowercase kebab-case or snake\_case and must start with a letter.
 
 Measures are scoped to a suite. Measure names are user-defined rather than selected from a predefined list, so it’s important to use them consistently within a suite. Here are some suggested measures:
 
