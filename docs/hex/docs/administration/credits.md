@@ -44,16 +44,15 @@ To ensure everyone can try and use Hex’s AI features, users on paid seats are 
 
 You can view the current balance of your monthly credit grant in the user meter by clicking into the workspace dropdown, located in top left corner your Hex workspace's homepage.
 
-Monthly credit grants vary by plan and seat type:
+Credit grants vary by plan and seat type:
 
-| Plan | Seat Type | Monthly Credit Grant |
+| Plan | Seat Type | Credit Grant |
 | --- | --- | --- |
-| Community | Editor | 5 credits/mo |
-| Professional | Editor | 30 credits/mo |
-| Team | Editor | 40 credits/mo |
-| Team | Explorer | 10 credits/mo |
-| Enterprise | Editor | 60 credits/mo |
-| Enterprise | Explorer | 10 credits/mo |
+| Community | Editor | 5 credits/month |
+| Professional | Editor | 30 credits/month |
+| Team | Editor | 40 credits/month |
+| Team | Explorer | 10 credits/month |
+| Enterprise | Explorer & Editor | Specified on order form |
 
 Once you’ve used your monthly credit grant, you can draw additional credits from the [workspace credit pool](#workspace-credit-pool), if available.
 
