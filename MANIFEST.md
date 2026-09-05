@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-09-05T02:08+00:00_
+_Generated 2026-09-05T08:23+00:00_
 
-**9 sources, 4527 topics total**
+**9 sources, 4528 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_698 topics_
+_699 topics_
 
 - `anthropic-sdk/about-claude/additional-resources`
 - `anthropic-sdk/about-claude/glossary`
@@ -579,6 +579,7 @@ _698 topics_
 - `anthropic-sdk/build-with-claude/vision-coordinates`
 - `anthropic-sdk/build-with-claude/working-with-messages`
 - `anthropic-sdk/claude_api_primer`
+- `anthropic-sdk/cli-sdks-libraries/cli/apply`
 - `anthropic-sdk/cli-sdks-libraries/cli/authentication`
 - `anthropic-sdk/cli-sdks-libraries/cli/quickstart`
 - `anthropic-sdk/cli-sdks-libraries/cli/scripting`
