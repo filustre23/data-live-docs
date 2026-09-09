@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-09-08T15:48+00:00_
+_Generated 2026-09-09T02:30+00:00_
 
-**9 sources, 4529 topics total**
+**9 sources, 4531 topics total**
 
 ## airflow
 
@@ -2415,7 +2415,7 @@ _191 topics_
 
 Upstream: <https://docs.getdbt.com/docs/>
 
-_1126 topics_
+_1127 topics_
 
 - `dbt-core/best-practices/best-practice-workflows`
 - `dbt-core/best-practices/clone-incremental-models`
@@ -3367,6 +3367,7 @@ _1126 topics_
 - `dbt-core/reference/resource-configs/clickhouse-configs`
 - `dbt-core/reference/resource-configs/column_types`
 - `dbt-core/reference/resource-configs/compare-unrendered-code`
+- `dbt-core/reference/resource-configs/compute`
 - `dbt-core/reference/resource-configs/confluent-configs`
 - `dbt-core/reference/resource-configs/contract`
 - `dbt-core/reference/resource-configs/database`
@@ -4100,7 +4101,7 @@ _383 topics_
 
 Upstream: <https://openai.github.io/openai-agents-python/>
 
-_397 topics_
+_398 topics_
 
 - `openai-agents/agents`
 - `openai-agents/config`
@@ -4306,6 +4307,7 @@ _397 topics_
 - `openai-agents/ref/run_internal/error_handlers`
 - `openai-agents/ref/run_internal/guardrails`
 - `openai-agents/ref/run_internal/items`
+- `openai-agents/ref/run_internal/model_provider_lifecycle`
 - `openai-agents/ref/run_internal/model_retry`
 - `openai-agents/ref/run_internal/oai_conversation`
 - `openai-agents/ref/run_internal/prompt_cache_key`
