@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-09-09T15:44+00:00_
+_Generated 2026-09-10T02:18+00:00_
 
-**9 sources, 4531 topics total**
+**9 sources, 4534 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_699 topics_
+_700 topics_
 
 - `anthropic-sdk/about-claude/additional-resources`
 - `anthropic-sdk/about-claude/glossary`
@@ -26,6 +26,7 @@ _699 topics_
 - `anthropic-sdk/about-claude/models/model-ids-and-versions`
 - `anthropic-sdk/about-claude/models/optimizing-for-cost-and-intelligence`
 - `anthropic-sdk/about-claude/pricing`
+- `anthropic-sdk/about-claude/use-case-guides/commerce-agents`
 - `anthropic-sdk/about-claude/use-case-guides/content-moderation`
 - `anthropic-sdk/about-claude/use-case-guides/customer-support-chat`
 - `anthropic-sdk/about-claude/use-case-guides/legal-summarization`
@@ -3711,7 +3712,7 @@ _155 topics_
 
 Upstream: <https://learn.hex.tech/>
 
-_383 topics_
+_384 topics_
 
 - `hex/changelog`
 - `hex/changelog/2020-12-17`
@@ -4081,6 +4082,7 @@ _383 topics_
 - `hex/tutorials/quickstart/admin-101`
 - `hex/tutorials/quickstart/hex-advanced`
 - `hex/tutorials/quickstart/hex-basics`
+- `hex/tutorials/quickstart/working-with-hex-from-anywhere`
 - `hex/tutorials/video-library`
 - `hex/tutorials/video-library/hex-foundations/adding-context`
 - `hex/tutorials/video-library/hex-foundations/apps-publishing`
@@ -4506,7 +4508,7 @@ _398 topics_
 
 Upstream: <https://docs.pydantic.dev/>
 
-_89 topics_
+_90 topics_
 
 - `pydantic/api/aliases`
 - `pydantic/api/annotated_handlers`
@@ -4569,6 +4571,7 @@ _89 topics_
 - `pydantic/errors/usage_errors`
 - `pydantic/errors/validation_errors`
 - `pydantic/examples/custom_validators`
+- `pydantic/examples/cyclic_references`
 - `pydantic/examples/dynamic_models`
 - `pydantic/examples/files`
 - `pydantic/examples/orms`
