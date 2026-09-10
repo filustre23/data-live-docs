@@ -328,7 +328,7 @@ Note that **View data** is not possible from [legacy pivot cells](/docs/explore-
 
 Hex's chart cells provide fine-grained options for choosing colors.
 
-[](/assets/medias/custom-chart-colors-aebf783d91b0165f5a48e5a052eee8bf.mp4)
+[](/assets/medias/custom-chart-colors-5100c7c9296aaff87d621750179eed67.mp4)
 
 To customize the colors of your chart:
 

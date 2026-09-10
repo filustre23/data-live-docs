@@ -8,22 +8,48 @@ info
 
 * Available on the Team and Enterprise [plans](https://hex.tech/pricing/).
 * Hex MCP server works with Claude Desktop, Claude Code, Cursor, ChatGPT, Codex, and Glean, as well as most standard MCP clients.
-* Users will need the Explorer workspace [role](/docs/collaborate/sharing-and-permissions/roles) or higher to use the Hex MCP server.
+* Users will need the Explorer workspace [role](/docs/collaborate/sharing-and-permissions/roles) or higher to use the Hex MCP server. The [project editing tools](#project-editing-tools) additionally require the Editor role or higher.
 * MCP access is not governed by the workspace [API access](/docs/administration/workspace_settings/workspace-security#enable-api-access) setting, which only affects personal access tokens. Turning off API access for the workspace, or revoking it for an individual user, does not disable MCP access. To revoke all of a user's access, [deactivate the user](/docs/administration/workspace_settings/overview#deactivate-users).
 * Hex MCP server is currently in beta.
 
 ## Overview[​](#overview "Direct link to Overview")
 
-The Model Context Protocol (MCP) allows AI applications to securely connect to external data sources and tools. The Hex MCP server enables AI assistants to interact directly with your Hex workspace. Through the MCP server, AI assistants can search your projects, create and continue [Threads](/docs/explore-data/threads) conversations, and help you explore your data through natural language.
+The Model Context Protocol (MCP) allows AI applications to securely connect to external data sources and tools. The Hex MCP server enables AI assistants to interact directly with your Hex workspace. Through the MCP server, AI assistants can search your projects, create and continue [Threads](/docs/explore-data/threads) conversations, explore your data through natural language, and build and edit Hex projects.
 
-The Hex MCP server provides four [Tools](#available-actions):
+The Hex MCP server provides two groups of [tools](#available-actions).
+
+**Knowledge tools** let an agent search your workspace and run Threads. These are available to Explorers and above:
 
 * **search\_projects**: Find projects in your Hex workspace
 * **create\_thread**: Start a new Thread conversation
 * **get\_thread**: Retrieve messages and results from a Thread
 * **continue\_thread**: Add follow-up questions to an existing Thread
+* **get\_me**: Return the authenticated user and workspace
 
-The Hex MCP server can only answer text-based prompts. It is not currently possible to upload files to your conversation and pass them along to Hex.
+**Project editing tools** let an agent author and run notebooks. These require the Editor [role](/docs/collaborate/sharing-and-permissions/roles) or above:
+
+* **create\_project** / **get\_project**: Create a project, or read a project's metadata
+* **list\_cells**: Read the cells in a project's draft version
+* **get\_cell**: Read a single cell by its ID
+* **create\_cell** / **update\_cell** / **delete\_cell**: Add, edit, and remove SQL, Python, and Markdown cells
+* **run\_cell** / **run\_notebook**: Run a single cell and its dependencies, or the whole draft notebook
+* **get\_run** / **get\_cell\_output**: Poll the status of a run, or read a SQL cell's output
+* **get\_cell\_image**: Return a rendered PNG of a chart cell
+* **list\_data\_connections**: List the workspace's data connections to resolve one by name
+
+It is not currently possible to upload files to your conversation and pass them along to Hex.
+
+## Roles and licensing[​](#roles-and-licensing "Direct link to Roles and licensing")
+
+The knowledge tools require the Explorer [role](/docs/collaborate/sharing-and-permissions/roles) or above. The project editing tools require the Editor role or above, matching the access needed to author projects in the Hex app or through the [CLI](/docs/api-integrations/cli).
+
+An Explorer connected to the MCP server can search projects and run Threads, but cannot create or edit projects.
+
+Workspace roles determine whether a user can edit projects at all. Individual [project permissions](/docs/collaborate/sharing-and-permissions/project-sharing#project-permissions) determine which projects they can edit, and the MCP server enforces both. An agent can read any project the user can view: `get_project`, `list_cells`, and `get_cell` all work with view-level access. Creating, updating, or deleting a cell requires **Can Edit** or **Full Access** on that specific project, and returns a "Not authorized" error otherwise.
+
+info
+
+This applies to workspace Admins as well. The Admin role does not grant edit access to every project in the workspace, so an agent connected as an Admin can still be refused an edit on a project that has not been shared with them.
 
 ## Data connection access[​](#data-connection-access "Direct link to Data connection access")
 
@@ -138,7 +164,7 @@ When successfully connected, you should see the connected Hex MCP server and can
 
 #### Use Hex in Cursor[​](#use-hex-in-cursor "Direct link to Use Hex in Cursor")
 
-After installation, start a new chat and ask Cursor to analyze data in Hex, or type `@` to invoke the Hex plugin or one of its bundled skills. You can search for projects, ask data questions, and start Threads. Users with edit access can also create and modify Hex notebooks through the bundled [Hex CLI](/docs/api-integrations/cli) integration.
+After installation, start a new chat and ask Cursor to analyze data in Hex, or type `@` to invoke the Hex plugin or one of its bundled skills. You can search for projects, ask data questions, and start Threads. Users with the Editor role or above can also create and modify Hex notebooks, either through the [project editing tools](#project-editing-tools) or through the bundled [Hex CLI](/docs/api-integrations/cli) integration.
 
 ### Connect Hex to ChatGPT[​](#connect-hex-to-chatgpt "Direct link to Connect Hex to ChatGPT")
 
@@ -176,7 +202,7 @@ On ChatGPT Business and Enterprise workspaces, admins may need to enable the Hex
 
 #### Use Hex in Codex[​](#use-hex-in-codex "Direct link to Use Hex in Codex")
 
-After installation, start a new thread and ask Codex to analyze data in Hex, or type `@` to invoke the Hex plugin or one of its bundled skills. You can search for projects, ask data questions, and start Threads. Users with edit access can also create and modify Hex notebooks through the bundled [Hex CLI](/docs/api-integrations/cli) integration.
+After installation, start a new thread and ask Codex to analyze data in Hex, or type `@` to invoke the Hex plugin or one of its bundled skills. You can search for projects, ask data questions, and start Threads. Users with the Editor role or above can also create and modify Hex notebooks, either through the [project editing tools](#project-editing-tools) or through the bundled [Hex CLI](/docs/api-integrations/cli) integration.
 
 ### Connect Hex to Glean[​](#connect-hex-to-glean "Direct link to Connect Hex to Glean")
 
@@ -260,7 +286,9 @@ After you've added the MCP server to your application, restart the application t
 
 ## Available actions[​](#available-actions "Direct link to Available actions")
 
-### Search for projects in your workspace[​](#search-for-projects-in-your-workspace "Direct link to Search for projects in your workspace")
+### Knowledge tools[​](#knowledge-tools "Direct link to Knowledge tools")
+
+#### Search for projects in your workspace[​](#search-for-projects-in-your-workspace "Direct link to Search for projects in your workspace")
 
 **Input**: Search query to find relevant projects. This action will return both published and unpublished Hex projects.
 
@@ -278,7 +306,7 @@ info
 
 The response structure and fields provided by the call output are subject to change.
 
-### Create a new Thread[​](#create-a-new-thread "Direct link to Create a new Thread")
+#### Create a new Thread[​](#create-a-new-thread "Direct link to Create a new Thread")
 
 Create a new Hex [Thread](/docs/explore-data/threads) to ask questions about your data using the Hex Agent.
 
@@ -291,7 +319,7 @@ info
 * MCP Threads can make use of any [non-sensitive](/docs/api-integrations/hex-agent-data-connection-access) data connections that you have access to—you do not need to pick a connection in the client. See [Data sources in Threads](/docs/explore-data/threads#data-sources).
 * Threads typically take several minutes to complete as the agent analyzes your data.
 
-### Get an existing Thread[​](#get-an-existing-thread "Direct link to Get an existing Thread")
+#### Get an existing Thread[​](#get-an-existing-thread "Direct link to Get an existing Thread")
 
 Retrieve messages and results from an existing Hex [Thread](/docs/explore-data/threads).
 
@@ -315,7 +343,7 @@ tip
 
 If the Thread hasn't finished, you can call `get_thread` again to check for updates. The tool is designed to be called multiple times until the Thread reaches idle status.
 
-### Continue an existing Thread[​](#continue-an-existing-thread "Direct link to Continue an existing Thread")
+#### Continue an existing Thread[​](#continue-an-existing-thread "Direct link to Continue an existing Thread")
 
 Continue a conversation by providing a new prompt to an existing Hex [Thread](/docs/explore-data/threads).
 
@@ -330,6 +358,195 @@ Continue a conversation by providing a new prompt to an existing Hex [Thread](/d
 warning
 
 You can only continue a Thread once it has finished running. If you try to continue a running Thread, you'll receive an error message asking you to wait for the current operation to complete.
+
+info
+
+Threads started through the MCP server are always new, standalone Threads. It is not currently possible to start a Thread on an existing project through the MCP server, or to continue a Thread that was started in the Hex app.
+
+#### Get the current user[​](#get-the-current-user "Direct link to Get the current user")
+
+Return the authenticated user and workspace. Useful for confirming which workspace an agent is connected to, and which role it is operating under.
+
+**Input**: None
+
+**Output**: User ID, name, email, workspace role, and workspace ID
+
+### Project editing tools[​](#project-editing-tools "Direct link to Project editing tools")
+
+These tools let an agent create a project, author its cells, and run it. They require the Editor [role](/docs/collaborate/sharing-and-permissions/roles) or above.
+
+info
+
+Edits made through these tools always apply to a project's **draft** version — the notebook you see in the Hex editor. They do not modify published [app](/docs/share-insights/apps/publish-and-share-apps) versions. To make an agent's work visible to your workspace, publish the project from the Hex app.
+
+#### Create a project[​](#create-a-project "Direct link to Create a project")
+
+Create a new, empty project in the workspace.
+
+**Input**: Project title, and optionally a description
+
+**Output**: The new project, including its ID
+
+#### Get a project[​](#get-a-project "Direct link to Get a project")
+
+Retrieve metadata about a single project.
+
+**Input**: Project ID. Optionally request sharing metadata, which is omitted by default.
+
+**Output**:
+
+* `id`, `title`, `description`, and `type`
+* `creator` and `owner`
+* `createdAt`, `lastEditedAt`, and `lastPublishedAt` (null if the project has never been published)
+* `archivedAt` and `trashedAt`
+* `categories`, `status`, `reviews`, and `schedules`
+* `analytics`: app view counts and the date the project was last viewed
+* `sharing` (only when requested): user, group, collection, workspace, public web, and support access
+
+#### List cells in a project[​](#list-cells-in-a-project "Direct link to List cells in a project")
+
+List the cells in a project's draft version.
+
+**Input**: Project ID. Optionally a page size (25 by default, 100 maximum) and a pagination cursor.
+
+**Output**:
+
+* `values` (array): List of cells, each with the following fields:
+  + `id`: The cell's ID within the draft version
+  + `staticId`: A stable ID for the cell
+  + `cellType`: For example, `SQL`, `CODE`, `MARKDOWN`, or `EXPLORE`
+  + `label`: The cell's label, or null if it has none
+  + `dataConnectionId`: The attached data connection, or null
+  + `contents`: An object with `codeCell`, `sqlCell`, and `markdownCell` keys. All three are always present; the one matching the cell's type holds a `source`, and the others are null. `sqlCell` also carries its `outputDataframe` name.
+  + `projectId`: The project the cell belongs to
+* `pagination`: `before` and `after` cursors
+
+info
+
+Every cell in the notebook is listed, but `contents` is only populated for code, SQL, and Markdown cells. Other cell types — charts, inputs, and so on — are returned with their type and label, but their configuration is not included and cannot be edited through these tools.
+
+The list is flat and in notebook order. It does not report which cells sit inside a [section](/docs/explore-data/notebook-view/sections), so an agent cannot read a notebook's nesting back out, even though `create_cell` can place a new cell inside a section.
+
+#### Get a cell[​](#get-a-cell "Direct link to Get a cell")
+
+Retrieve a single cell.
+
+**Input**: Cell ID
+
+**Output**: The same cell fields returned by `list_cells`
+
+tip
+
+Read project state before changing it. Calling `get_project` and `list_cells` before `update_cell` or `delete_cell` avoids edits against a stale view of the notebook.
+
+#### List data connections[​](#list-data-connections "Direct link to List data connections")
+
+List the workspace's data connections, so an agent can resolve a connection by name before creating or updating a SQL cell.
+
+**Input**: Optionally a page size (25 by default, 100 maximum), a pagination cursor, and a sort order — by name or creation date, ascending or descending.
+
+**Output**:
+
+* `values` (array): List of data connections. Every connection includes its `id`, `name`, `type`, and `description`. Depending on your access, a connection may also include its connection details, sharing settings, and schema filter and refresh settings.
+* `pagination`: `before` and `after` cursors
+
+#### Create a cell[​](#create-a-cell "Direct link to Create a cell")
+
+Add a cell to a project's draft version.
+
+**Input**: Project ID, the cell type, and the matching cell contents:
+
+* **CODE**: A [Python cell](/docs/explore-data/cells/python-cells). Pass the Python source.
+* **SQL**: A [SQL cell](/docs/explore-data/cells/sql-cells/sql-cells-introduction). Pass the query source, plus either a data connection ID to query a [data connection](/docs/connect-to-data/data-connections/data-connections-introduction), or a flag to query the results of other SQL cells in the project. These two options are mutually exclusive. You can also set a custom output dataframe name; one is generated automatically if you don't.
+* **MARKDOWN**: A [text cell](/docs/explore-data/cells/text-cells). Pass the Markdown source.
+
+You can also pass a label, and a location. By default a new cell is appended to the end of the project; to place it elsewhere, insert it after a specific cell, or add it as a child of a [section](/docs/explore-data/notebook-view/sections) cell at either the beginning or end of that section.
+
+tip
+
+`list_cells` returns the `dataConnectionId` of every SQL cell in a project, so the simplest way to point a new SQL cell at the right warehouse is to reuse the ID from a SQL cell that already queries it. In a new project with no SQL cells yet, use `list_data_connections` to resolve a connection by name.
+
+**Output**: The newly created cell
+
+#### Update a cell[​](#update-a-cell "Direct link to Update a cell")
+
+Update a cell's source. For SQL cells, you can also update the output dataframe name and the data connection.
+
+**Input**: Cell ID and the new contents. For SQL cells, you can also pass a data connection to attach.
+
+**Output**: The updated cell
+
+info
+
+A cell's label cannot be changed after the cell is created. `create_cell` accepts a label, but `update_cell` does not, so an agent that needs a different label must delete the cell and recreate it.
+
+#### Delete a cell[​](#delete-a-cell "Direct link to Delete a cell")
+
+Remove a cell from a project's draft version.
+
+**Input**: Cell ID
+
+caution
+
+Cell edits made through the MCP server apply directly to the project's live draft version. There is no separate staging step, so changes are immediately part of the notebook that collaborators open.
+
+#### Run a cell[​](#run-a-cell "Direct link to Run a cell")
+
+Run a single cell and its upstream dependencies in the draft version. The run is asynchronous.
+
+**Input**: Cell ID. Optionally a dry run, which validates the request without executing it.
+
+**Output**: A `runId` identifying the draft session, and a link to the project in Hex. A dry run returns no `runId`.
+
+For SQL cells, poll `get_cell_output` to read the result or error.
+
+#### Run a notebook[​](#run-a-notebook "Direct link to Run a notebook")
+
+Run the entire draft version of a project. The run is asynchronous.
+
+**Input**: Project ID. SQL cells reuse cached results by default; you can disable this to force fresh queries.
+
+**Output**: A `runId` identifying the draft session, and a link to the project in Hex
+
+Poll `get_run` until the run has finished.
+
+#### Get the status of a run[​](#get-the-status-of-a-run "Direct link to Get the status of a run")
+
+Check the progress of a project run.
+
+**Input**: Project ID and run ID
+
+**Output**: The run's status, along with its `runUrl`, what triggered it, its start and end times, and its elapsed time in milliseconds. The run is finished when the status is `COMPLETED`, `ERRORED`, `KILLED`, or `UNABLE_TO_ALLOCATE_KERNEL`.
+
+#### Get the output of a cell[​](#get-the-output-of-a-cell "Direct link to Get the output of a cell")
+
+Read the latest output preview for a SQL cell in the active draft notebook session.
+
+**Input**: Cell ID
+
+**Output**: The cell's most recent output preview, or its error. The preview returns a limited number of rows and reports the row limit, the number of rows returned, the total row count, and whether the result was truncated — so an agent can tell when it is not seeing the full result. Columns are never dropped.
+
+tip
+
+Poll `get_run` or `get_cell_output` every five seconds until the run has finished.
+
+caution
+
+The `runId` identifies the long-running draft session, not a single execution, so it can correlate with earlier runs of the same project. If the project ran recently, confirm the reported start time is at or after your request before trusting that the run has finished — and after editing a cell, confirm the output you read reflects the new source rather than the previous execution.
+
+#### Get a chart image[​](#get-a-chart-image "Direct link to Get a chart image")
+
+Retrieve a rendered PNG image of a [chart cell](/docs/explore-data/cells/visualization-cells/chart-cells).
+
+**Input**: The cell's ID — either its draft version ID or its static ID. Optionally an image width and height in pixels (between 100 and 2000 — both must be provided to take effect), and whether to include the chart title.
+
+**Output**: The chart rendered as a PNG image
+
+The cell must live in the project's draft version, must already have been executed, and must not be in an error state. Only chart cells are supported; calling it on a SQL or Python cell returns an error. If the cell has not been run, the call returns an error explaining that no image could be generated. `get_thread` also reports the cell ID of each chart in a Thread, so charts produced by the Hex Agent can be fetched this way too.
+
+tip
+
+Some MCP clients, including Claude, render Hex charts natively in an interactive widget. `get_cell_image` is most useful for clients that don't support those widgets, and for agents that need to reason about a chart's appearance. Omit the width and height unless you need more detail: the default image is tens of kilobytes, while a dense chart at the maximum 2000x2000 can exceed 500KB. Request one chart at a time.
 
 ## Example workflows[​](#example-workflows "Direct link to Example workflows")
 
@@ -387,9 +604,42 @@ To help users discover relevant work:
    * If they want to ask questions about the data in those projects
    * The AI assistant uses `create_thread` to start the analysis
 
+### Building a project[​](#building-a-project "Direct link to Building a project")
+
+A typical workflow for having an agent build a working notebook:
+
+1. **User describes what they want**:
+
+   ```
+   Build me a Hex project that tracks weekly active users by plan tier.
+   ```
+2. **AI assistant creates the project**:
+
+   * Uses `create_project` with a title and description
+   * Receives the new project's metadata, including its `projectId`
+3. **AI assistant authors the notebook**:
+
+   * Uses `create_cell` to add a Markdown cell describing the analysis
+   * Adds a SQL cell with a `dataConnectionId`, naming the output dataframe
+   * Adds a Python cell that reads that dataframe and builds the aggregation
+4. **AI assistant runs the notebook**:
+
+   * Calls `run_notebook` and receives a `runId`, along with a link to the project in Hex
+   * Polls `get_run` until the run has finished
+   * If a SQL cell errored, reads the error with `get_cell_output`, fixes the query with `update_cell`, and re-runs
+5. **AI assistant reviews the result**:
+
+   * Reads the SQL cell's output with `get_cell_output` to confirm the numbers look right
+   * Shares the project link so the user can review, add charts, and publish it in Hex
+
+tip
+
+Editing an existing project follows the same shape, but starts with `get_project` and `list_cells` so the agent is working from the notebook's current state rather than guessing at it.
+
 #### On this page
 
 * [Overview](#overview)
+* [Roles and licensing](#roles-and-licensing)
 * [Data connection access](#data-connection-access)
 * [Configure the Hex MCP Server](#configure-the-hex-mcp-server)
   + [Connect Hex to Claude](#connect-hex-to-claude)
@@ -400,10 +650,9 @@ To help users discover relevant work:
   + [Connect Hex to Figma](#connect-hex-to-figma)
   + [Connect Hex to other MCP clients](#connect-hex-to-other-mcp-clients)
 * [Available actions](#available-actions)
-  + [Search for projects in your workspace](#search-for-projects-in-your-workspace)
-  + [Create a new Thread](#create-a-new-thread)
-  + [Get an existing Thread](#get-an-existing-thread)
-  + [Continue an existing Thread](#continue-an-existing-thread)
+  + [Knowledge tools](#knowledge-tools)
+  + [Project editing tools](#project-editing-tools)
 * [Example workflows](#example-workflows)
   + [Asking a data question](#asking-a-data-question)
   + [Finding and exploring projects](#finding-and-exploring-projects)
+  + [Building a project](#building-a-project)

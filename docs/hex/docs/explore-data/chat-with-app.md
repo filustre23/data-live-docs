@@ -28,7 +28,7 @@ Each Chat with App conversation kicks off a Thread that can be accessed from bot
 
 ## How to use[​](#how-to-use "Direct link to How to use")
 
-[](/assets/medias/chat-with-app-5dcc4c75752fffd82b751ebf2ab2d24b.mp4)
+[](/assets/medias/chat-with-app-979774570a6dccc2b93ba775d2cbe980.mp4)
 
 Getting started with Chat with App is simple:
 

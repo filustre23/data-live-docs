@@ -20,6 +20,8 @@ chDB operates using lazy evaluation, meaning commands execute only when action c
 
 To use chDB in a project, first import the data connection that has chDB enabled into your project. Once imported, you can create a chDB session with Hex's easy button:
 
+[](/assets/medias/get-clickhouse-session-a71e3e8335df202c51f4f974377d7f37.mp4)
+
 info
 
 Hex’s ClickHouse data connection already stores the network and auth details allowing Hex to read those settings and instantiate a [ClickHouse DataStore](https://github.com/ClickHouse/clickhouse-docs/blob/main/docs/chdb/datastore/quickstart.md). Hex's built-in [hextoolkit package](https://learn.hex.tech/tutorials/connect-to-data/using-the-hextoolkit) securely handles this allowing you quickly and securely create your chDB connection to ClickHouse. The following code is generated:

@@ -230,6 +230,8 @@ AI agents that can interact with your command line, such as Claude Code, Cursor,
 * Install the general Hex CLI skill with `hex install agent-skill --claude` (or `--codex` / `--path <dir>`).
 * To rebuild Tableau or Looker dashboards in Hex, install the [Hex migration skills](/docs/migrate-to-hex).
 
+Agents that connect to Hex remotely rather than through your command line can create and edit projects through the [Hex MCP server](/docs/api-integrations/mcp-server#project-editing-tools) instead.
+
 ## Bugs & issues[​](#bugs--issues "Direct link to Bugs & issues")
 
 Please contact [support@hex.tech](mailto:support@hex.tech) if you encounter any bugs, or other issues.

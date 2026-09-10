@@ -55,7 +55,7 @@ You can perform actions on entire rows of elements to modify the layout of your 
 
 Separate your app into different views with App tabs. You can add multiple tabs to your published apps to break down your project into different sections for a more dashboard-like experience. Add and rename tabs from **App Settings** in the right sidebar.
 
-[](/assets/medias/app-tabs-151df06f0ac25e0d99d9251c13be1465.mp4)
+[](/assets/medias/app-tabs-deaba53da8665051989fc66307cd558d.mp4)
 
 You can drag and drop cells between tabs, and also add apps to specific tabs from the Outline, Notebook view, or App builder.
 

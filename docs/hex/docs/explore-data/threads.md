@@ -64,7 +64,7 @@ When the agent is not restricted to only use endorsed data, Threads will still p
 
 To use Threads, it's as simple as asking a question in the prompt bar. After you hit enter on your question, Threads will display the agent's thinking text and show you the tools the agent is calling, as well as the results of those tool calls, in real time.
 
-[](/assets/medias/threads-demo-e34da037ef13bc3941d3d8feb6f136ed.mp4)
+[](/assets/medias/threads-demo-e5fc8a68045eb8c0aca1991deda7389a.mp4)
 
 The agent has a search tool to find existing published apps in the workspace that may answer the user's question. The tool call searches the workspace for published apps, prioritizing [endorsed](/docs/organize-content/statuses-categories#endorsed-statuses) projects, and the agent judges whether the projects are relevant enough to the user's question. If the agent deems any published apps to be useful, the agent will return the published apps to the user as part of its response. The agent will not look at any unpublished projects.
 

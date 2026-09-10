@@ -8,7 +8,7 @@ Organize your workspace by updating projects individually or in bulk.
 
 When viewing the **Projects** page, all users in a workspace are able to filter the list of projects to find relevant projects. Users can filter by project title, status, categories, and a number of other fields including the project owner and your level of access.
 
-[](/assets/medias/filter-projects-4dca147d98ba3448506172711db3081c.mp4)
+[](/assets/medias/filter-projects-7e5c70ea1bf163795297ee3433211bf6.mp4)
 
 Additionally, users can sort this list on a number of attributes, including when the project was last edited, the number of app views, or when the app was last published.
 

@@ -4,7 +4,7 @@ On this page
 
 Explore allows anyone to ask and answer questions from data without needing code. Explorations use a drag-and-drop interface that allows users to quickly visualize their data in charts, pivots, and tables. Explorations also provide methods to group and aggregate data, create spreadsheet calculations, filter data, and join tables together.
 
-[](/assets/medias/explore-overview-ed7c7cc00deab94c91297e8989239dc2.mp4)
+[](/assets/medias/explore-overview-612b840ef5eac85ab58c73af4b0380ef.mp4)
 
 Explore shows up in two places in Hex:
 
@@ -40,7 +40,7 @@ The table and visualization always reflect the same data, with the table providi
 
 Users can drag and drop columns from the field picker into the drop zones of the chart in order to render a visualization. Alternatively, users can click on the pills above the chart in order to assign columns to different chart configs (like X-Axis and Y-axis), or use the + from fields in the field picker to assign to chart configs. Click **Show options** in the upper right to configure more advanced chart details.
 
-[](/assets/medias/drag-interactions-a24d9aa488e6276f93fc188e8f43f690.mp4)
+[](/assets/medias/drag-interactions-cdcb0bb25e7cc3d450fde2622f058927.mp4)
 
 To create a pivot table, click **Pivot Table** from the chart type dropdown in the upper left of your exploration. Drag and drop columns from the field picker into the drop zones of the pivot in order to add fields as rows, columns, or values. It's also possible to click on the pills in the top bar above the pivot in order to assign the pivot configs, or use the **+** from the fields in the field picker.
 
@@ -66,7 +66,7 @@ In addition to exploring from database tables and dataframes, you can explore [s
 
 Editors can also explore models from semantic projects in [Chart cells](/docs/explore-data/cells/visualization-cells/chart-cells) within a Notebook.
 
-[](/assets/medias/explore-cell-sm-f25b1ffb36f8b2b53cc7cf8898dcbb1a.mp4)
+[](/assets/medias/explore-cell-sm-f4708c8e29d7c5007f175123d5dab0e0.mp4)
 
 ## Joins[​](#joins "Direct link to Joins")
 
@@ -132,7 +132,7 @@ info
 
 Use drilling to understand the "why" behind the data shown in visualizations. Users can click on a data point (like a bar in a chart), or drag to select multiple data points, and select **Drill down**. This opens a menu of columns for users to choose from (the columns displayed are those defined in the dataframe that's fed into the visualization). Once a column is selected, the underlying data will be broken out by the selected column in an exploration modal. To go back or "undo" your drill down actions, simply click the **Drill up** button located in the top right corner of the Explore view.
 
-[](/assets/medias/drilling_take_2-eb10d0abb1e693f9997aaff4ba99a9f7.mp4)
+[](/assets/medias/drilling_take_2-17edf1d7e3964eb51362f6eb80562f46.mp4)
 
 Users can drill into pivot values in the notebook and the published app. Drilling is not possible in [legacy pivot cells](/docs/explore-data/cells/transform-cells/pivot-cells#legacy-pivots). Upgrade your pivot cell to enable drilling.
 

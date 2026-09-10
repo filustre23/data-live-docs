@@ -14,7 +14,7 @@ Once your semantic project is in Hex, use the [Data browser](/docs/explore-data/
 
 Create a [Chart cell](/docs/explore-data/cells/visualization-cells/chart-cells) from the add cell bar (**Chart cell**), then select a semantic model as the source. You can [chain results](/docs/share-insights/explore#outputting-a-dataframe) into downstream cells and [add visualizations](/docs/explore-data/cells/visualization-cells/chart-cells) to published apps.
 
-[](/assets/medias/models-in-notebook-8910c9186d5631748c9c2c54757129e1.mp4)
+[](/assets/medias/models-in-notebook-62a8bca48e7358d63df565c4ba07df1f.mp4)
 
 #### On this page
 

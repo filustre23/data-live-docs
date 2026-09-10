@@ -4,7 +4,7 @@ On this page
 
 This guide is designed to help you get the most out of the [Hex Notebook Agent](https://learn.hex.tech/docs/explore-data/notebook-view/notebook-agent). The agent can generate and edit cells directly in your notebook, and it can also act as a thought partner that explains, summarizes, and guides.
 
-[](/assets/medias/full-agent-demo-be1018e554ab587b0fdb09010ead4f6b.mp4)
+[](/assets/medias/full-agent-demo-fe7b01791b53b4e2d8ff6d0d88c516ff.mp4)
 
 ## Introduction[​](#introduction "Direct link to Introduction")
 
@@ -231,7 +231,7 @@ stacked and left in a pending state until keeping. We recommend keeping changes
 as soon as you're happy with them and not letting changes stack up too long. If
 you don't want to keep the changes, you can undo them cell by cell or undo all.
 
-[](/assets/medias/undo-changes-567a62e35d891085f4c7760025dfe075.mp4)
+[](/assets/medias/undo-changes-684d5b859680bbddbcd1e23518803332.mp4)
 
 ## Iterative refinement[​](#iterative-refinement "Direct link to Iterative refinement")
 

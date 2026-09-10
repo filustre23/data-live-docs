@@ -14,7 +14,7 @@ Generative apps give you a fully customized, code-generated app experience where
 
 Generative apps are built from cells in the project's [Notebook view](/docs/explore-data/notebook-view/develop-your-notebook). The agent can build that notebook from scratch, or layer a Generative app on top of an existing one.
 
-[](/assets/medias/editorial-style-gen-app-48d53551663571da97efe2a49dc48998.mp4)
+[](/assets/medias/editorial-style-gen-app-cbb96472e3ac3a1e17a836858af287d7.mp4)
 
 ## Create a Generative app[​](#create-a-generative-app "Direct link to Create a Generative app")
 
@@ -53,7 +53,7 @@ For open-ended builds — like generating a full app from scratch or making swee
 
 You can edit the code that underlies a generative app yourself instead of going through the agent. From the App builder select **Code** to open the file tree for your app - `App.js`, its components, and styles - and edit the code directly. Make your edit, then select **Preview** to see it rendered in your app.
 
-[](/assets/medias/gen-apps-editing-code-d68de53428e1395bd664d0ff545b64a4.mp4)
+[](/assets/medias/gen-apps-editing-code-8b0706c6928abf7ff62a16c6dfd1a39e.mp4)
 
 Editing directly is the faster path for small, precise changes, such as fixing a typo or removing a section. For larger changes, prompting the agent is usually still easier.
 
@@ -61,7 +61,7 @@ Editing directly is the faster path for small, precise changes, such as fixing a
 
 Every code-generated chart built within a Generative app includes a style panel with controls that let you make quick, manual adjustments without needing to prompt the agent. In a Generative app, you can select the entire chart or a specific sub-element to see the controls relevant to that element. Changes are previewed instantly and persist across future agent updates, so you can combine manual refinement with agent-driven development.
 
-[](/assets/medias/chart-controls-9f99050bea4119fe16e1a852237eea23.mp4)
+[](/assets/medias/chart-controls-b9a45b46f34273444bd688794c74d224.mp4)
 
 #### Get started[​](#get-started "Direct link to Get started")
 
