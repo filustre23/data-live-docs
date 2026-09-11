@@ -2544,3 +2544,25 @@ Copy
 **500**
 
 delete/v1/guides/draft/{orgGuideFileId}
+
+https://app.hex.tech/api/v1/guides/draft/{orgGuideFileId}
+
+### Response samples
+
+* 400
+* 403
+* 500
+
+Content type
+
+application/json
+
+Copy
+
+`{
+
+* "details": "string",
+* "traceId": "string",
+* "reason": "string"
+
+}`

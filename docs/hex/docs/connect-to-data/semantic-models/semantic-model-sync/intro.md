@@ -40,7 +40,7 @@ Hex imports Cube and MetricFlow semantic model files stored in GitHub, while Sno
 
 caution
 
-The GitHub Action-based setup below is **deprecated** in favor of syncing [Hex](/docs/connect-to-data/semantic-models/semantic-authoring/semantic-authoring-overview#sync-from-github-optional), [Cube](/docs/connect-to-data/semantic-models/semantic-model-sync/cube) and [dbt MetricFlow](/docs/connect-to-data/semantic-models/semantic-model-sync/dbt-metricflow) semantic projects with the `hex context` CLI commands (or our [GitHub Action](https://github.com/hex-inc/action-context-toolkit)). See [Context Sync](/docs/agent-management/context-management/context-sync#migrating-from-semantic-model-syncs-github-action) for details.
+The Semantic Model Sync GitHub Actions workflow described below is **deprecated**. To sync [Hex](/docs/connect-to-data/semantic-models/semantic-authoring/semantic-authoring-overview#sync-from-github-optional), [Cube](/docs/connect-to-data/semantic-models/semantic-model-sync/cube) and [dbt MetricFlow](/docs/connect-to-data/semantic-models/semantic-model-sync/dbt-metricflow) semantic projects, use the `hex context` CLI commands or [Hex Context Toolkit GitHub Action](https://github.com/hex-inc/action-context-toolkit). See [Context Sync](/docs/agent-management/context-management/context-sync#migrating-from-semantic-model-syncs-github-action) for details.
 
 This does not apply to [Snowflake Semantic Views](/docs/connect-to-data/semantic-models/semantic-model-sync/snowflake-semantic-views), which continue to sync directly from Snowflake.
 

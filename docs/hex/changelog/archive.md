@@ -27,6 +27,7 @@
 * [August 11 - Start building an app right from your conversation](/changelog/2026-08-11)
 * [August 18 - Semantic projects via CLI](/changelog/2026-08-18)
 * [August 27 - Chart controls and easier collaboration](/changelog/2026-08-27)
+* [September 10 - More control over Generative app iteration](/changelog/2026-09-10)
 
 ### 2025[​](#2025 "Direct link to 2025")
 
