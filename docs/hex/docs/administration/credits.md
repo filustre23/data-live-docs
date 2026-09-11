@@ -42,7 +42,7 @@ info
 
 To ensure everyone can try and use Hex’s AI features, users on paid seats are awarded a monthly credit grant. Monthly per-seat credit grants are assigned to the individual user, reset each billing cycle, and can’t be transferred, shared, or rolled over.
 
-You can view the current balance of your monthly credit grant in the user meter by clicking into the workspace dropdown, located in top left corner your Hex workspace's homepage.
+You can view the current balance of your monthly credit grant in the user credit meter, located in the user menu at the bottom of your Hex workspace's left sidebar.
 
 Credit grants vary by plan and seat type:
 
@@ -113,7 +113,7 @@ All Hex users can view their own credit balance, and Admins and Managers have ad
 
 ### Personal credit usage visibility[​](#personal-credit-usage-visibility "Direct link to Personal credit usage visibility")
 
-**User meter:** Users can view their current cycle credit balance by clicking the workspace drop-down menu in the top left.
+**User meter:** Users can view their current cycle credit balance by clicking into the user menu in the bottom left.
 
 **Thread inspector:** Users can view credit consumption at the the Thread level via the Thread inspector in the top right. Available for standalone Threads and Threads created from a Published App
 

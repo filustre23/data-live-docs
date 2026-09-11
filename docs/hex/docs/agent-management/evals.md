@@ -7,7 +7,8 @@ Measure how reliably the Hex agent answers questions, and track regressions and 
 info
 
 * Available on the Team and Enterprise [plans](https://hex.tech/pricing/).
-* Users need the Editor, Manager or Admin workspace role to create and view evals.
+* Users need the Editor, Manager or Admin workspace role to run evals.
+* Users need the Explorer role or higher to view evals.
 
 Evals let you programmatically run [threads](/docs/explore-data/threads) with the Hex agent and grade each response against rubrics you define. You can use evals to:
 
@@ -18,6 +19,8 @@ Evals let you programmatically run [threads](/docs/explore-data/threads) with th
 * Compare performance across context or model configurations
 
 Because eval suites are defined in YAML files, you can keep them in version control alongside your context files and include them in your development workflows.
+
+You can also [publish your eval suites](#publishing-your-eval-suites) to Hex and add a schedule to run your suites on a periodic basis. Once you publish an eval suite, you will be able to see the performance of eval runs over time in the Hex UI.
 
 ## Terminology[​](#terminology "Direct link to Terminology")
 
@@ -244,7 +247,9 @@ Append `--json` to any command for machine-readable output.
 
 ### Review results in Context Studio[​](#review-results-in-context-studio "Direct link to Review results in Context Studio")
 
-The Evals page is where you can see all eval suites run in your workspace. This page shows an overview of each suite, including the number of cases passed, who ran each suite, run time, and more.
+The Evals page is where you can see all eval suites run in your workspace. This page shows an overview of each suite and a summary of recent runs.
+
+Open a suite to see the list of eval suite runs. This page includes the number of cases passed, who ran each suite, run time, and more
 
 You can also select multiple runs to compare them side by side — for example, to compare the same suite using published context versus a Context Preview.
 
@@ -554,7 +559,7 @@ Choose a rubric type based on what you want to check.
 | `tolerancePercentage` | No | number | Allowed difference as a percent of `target`. Default 1. Applies even when `absoluteTolerance` is set. |
 | `absoluteTolerance` | No | number | Allowed difference as a fixed amount, in the target’s units. Checked in addition to `tolerancePercentage`, not instead of it — a value passes if it's within either. For an exact match, set both `absoluteTolerance: 0` and `tolerancePercentage: 0`. |
 | `outputFormat` | No | `int` or `float` | Default `float`. |
-| `strictHeadline` | No | boolean | Default `true`. Grades the number identified as the answer’s primary result, and fails the rubric if no primary result can be identified. Set to `false` to pass when any number in the response matches the target. |
+| `strictHeadline` | No | boolean | Default `true`. Grades the number identified as the answer  ’s primary result, and fails the rubric if no primary result can be identified. Set to `false` to pass when any number in the response matches the target. |
 | `extractionGuidance` | No | string | Hint for which number to grade when the answer has several, e.g. "the enterprise ARR, not total ARR". |
 | `warnOnly` | No | boolean | Default `false`. Grade and report this rubric without letting it fail or error the case. See [Warn-only rubrics](#warn-only-rubrics). |
 | `measure` | No | string | Groups this rubric with others checking the same quality, so they roll up into one rate. Lowercase kebab-case or snake\_case. See [Measures](#measures). |
@@ -701,6 +706,42 @@ If both are provided, the CLI flags override the suite’s modelSelection. If ne
 
 The selected model must be available in your workspace.
 
+## Publishing your eval suites[​](#publishing-your-eval-suites "Direct link to Publishing your eval suites")
+
+info
+
+* Users need the Manager or Admin workspace role to publish evals.
+
+You can sync your eval suites stored in your repo via the Hex CLI or third-party CI like GitHub Actions. See [Context Sync](/docs/agent-management/context-management/context-sync) for more details.
+
+Once you have published your eval suites, you can trigger a one off run using the latest published eval suite or setup a schedule to run this suite on a periodic basis.
+
+You can trigger a run via the CLI using the eval suite ID to run the latest published version of the suite. The eval suite ID is the `id` field in the eval suite YAML definition. If no `id` field is present, the `name` is slugified and converted into an ID (e.g. `name: "My Eval Suite"` becomes `id: my-eval-suite`).
+
+```
+hex eval run --suite-id <eval_suite_id>
+```
+
+You can see all published suites using the `hex eval suite list` command, and also see all runs by from a published suite by adding the `--suite-id` option to the `hex eval list --suite-id <suite_id>` command.
+
+### Setting up a schedule[​](#setting-up-a-schedule "Direct link to Setting up a schedule")
+
+You can also set up a schedule on a published eval suite. Scheduled evals will always run the latest version of an eval suite. You must be a manager or above to set up and run a scheduled eval run.
+
+Scheduled evals run on a fixed schedule — daily, weekly, or monthly — within a 2-hour delivery window you select at setup. Hex uses these windows to distribute load across the platform. Pick a cadence in the schedule selector, choose the day and time the eval should run, and then save your schedule.
+
+You can also configure scheduled evals via the CLI using the following commands:
+
+* `hex eval schedule create <suite_id> --cadence <daily|weekly|monthly> --start-hour <start_hour> --timezone <timezone>`
+  + valid start-hour choices are: `6`, `8`, `10`, `12`, `14`, `16`, `18`, `20`, `22`, where each has a 2 hour window, except for 22hrs which is anytime between 22hrs and 6hrs the following day.
+  + timezone is an IANA timezone (e.g. `America/Los_Angeles` or `Europe/London`)
+  + if specifying weekly, you must also specify a `--day-of-week`
+  + if specifying monthly, you must also specify a `--day-of-month`
+* `hex eval schedule update <schedule_id>`
+* `hex eval schedule delete <schedule_id>`
+* `hex eval schedule get <schedule_id>`
+* `hex eval schedule list`
+
 #### On this page
 
 * [Terminology](#terminology)
@@ -722,3 +763,5 @@ The selected model must be available in your workspace.
   + [Measures](#measures)
   + [Attach context to a case](#attach-context-to-a-case)
 * [Compare models](#compare-models)
+* [Publishing your eval suites](#publishing-your-eval-suites)
+  + [Setting up a schedule](#setting-up-a-schedule)

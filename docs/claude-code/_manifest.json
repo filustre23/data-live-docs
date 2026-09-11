@@ -1,1153 +1,1153 @@
 {
-  "duration_s": 121.28,
+  "duration_s": 153.01,
   "failed_count": 0,
   "failed_pages": [],
-  "fetched_at": "2026-09-10T10:24:05.367081+00:00",
+  "fetched_at": "2026-09-10T20:22:17.548429+00:00",
   "file_count": 191,
   "files": {
     "accessibility.md": {
       "bytes": 14604,
-      "fetched_at": "2026-09-10T10:22:05.165999+00:00",
+      "fetched_at": "2026-09-10T20:19:46.435567+00:00",
       "sha256": "62728ac7ccaa16f72f2c53bc2dcd418ac3b56331bab27bd0c067b906b6da1cd9",
       "source_url": "https://code.claude.com/docs/en/accessibility"
     },
     "admin-setup.md": {
       "bytes": 41437,
-      "fetched_at": "2026-09-10T10:22:06.461426+00:00",
+      "fetched_at": "2026-09-10T20:19:47.104710+00:00",
       "sha256": "be808602dcfae635423ddeb59347c1d58ce53ca6e9debb1c89f3eb8754299f5a",
       "source_url": "https://code.claude.com/docs/en/admin-setup"
     },
     "advisor.md": {
-      "bytes": 18362,
-      "fetched_at": "2026-09-10T10:22:07.105264+00:00",
-      "sha256": "85cf79fb9bbbfd3931d4e5862e0edc795e325a7f772f53d52b15c66853628d90",
+      "bytes": 18335,
+      "fetched_at": "2026-09-10T20:19:47.674783+00:00",
+      "sha256": "9bb286e382e8547120075b4cb3e29d7f8cf830de87d761fe311b4c195e26af95",
       "source_url": "https://code.claude.com/docs/en/advisor"
     },
     "agent-sdk/agent-loop.md": {
       "bytes": 49605,
-      "fetched_at": "2026-09-10T10:22:07.676056+00:00",
+      "fetched_at": "2026-09-10T20:19:48.080320+00:00",
       "sha256": "a2b4426257b024dfdec36a164df4db3bb7dc9b9203d441aad19855496a9f797f",
       "source_url": "https://code.claude.com/docs/en/agent-sdk/agent-loop"
     },
     "agent-sdk/claude-code-features.md": {
       "bytes": 29536,
-      "fetched_at": "2026-09-10T10:22:08.242697+00:00",
+      "fetched_at": "2026-09-10T20:19:48.820629+00:00",
       "sha256": "57e4ddef10b85b80215ae060afb7a1c9a9dad7701a52a57f8390d411c8d71f19",
       "source_url": "https://code.claude.com/docs/en/agent-sdk/claude-code-features"
     },
     "agent-sdk/cost-tracking.md": {
       "bytes": 26882,
-      "fetched_at": "2026-09-10T10:22:08.838386+00:00",
+      "fetched_at": "2026-09-10T20:19:49.327875+00:00",
       "sha256": "53b62d03543df5389b9e092abd489c63c1a8ba5457403754a508781b06a5a9db",
       "source_url": "https://code.claude.com/docs/en/agent-sdk/cost-tracking"
     },
     "agent-sdk/custom-tools.md": {
       "bytes": 41393,
-      "fetched_at": "2026-09-10T10:22:09.231239+00:00",
+      "fetched_at": "2026-09-10T20:19:50.203804+00:00",
       "sha256": "839f9e77351743e25c28455ae2fe841498dba2cc2e0cca090fa5533e856f65aa",
       "source_url": "https://code.claude.com/docs/en/agent-sdk/custom-tools"
     },
     "agent-sdk/examples.md": {
       "bytes": 1960,
-      "fetched_at": "2026-09-10T10:22:09.859692+00:00",
+      "fetched_at": "2026-09-10T20:19:51.251587+00:00",
       "sha256": "82e9d6a127da350342d302286a7d63c8a8394fdf25c5f8624cced3cd72c5e705",
       "source_url": "https://code.claude.com/docs/en/agent-sdk/examples"
     },
     "agent-sdk/file-checkpointing.md": {
       "bytes": 33394,
-      "fetched_at": "2026-09-10T10:22:10.378788+00:00",
+      "fetched_at": "2026-09-10T20:19:52.006994+00:00",
       "sha256": "550722eaa3163a65a19b80883583a8abcca552474da36edb8533932be3f77716",
       "source_url": "https://code.claude.com/docs/en/agent-sdk/file-checkpointing"
     },
     "agent-sdk/hooks.md": {
       "bytes": 55469,
-      "fetched_at": "2026-09-10T10:22:11.397038+00:00",
+      "fetched_at": "2026-09-10T20:19:52.642244+00:00",
       "sha256": "65359c89d3bc92bc528010b1f3ce6184ef7585aa86040b4378b6086bb11b8a8e",
       "source_url": "https://code.claude.com/docs/en/agent-sdk/hooks"
     },
     "agent-sdk/hosting.md": {
       "bytes": 25318,
-      "fetched_at": "2026-09-10T10:22:12.176991+00:00",
+      "fetched_at": "2026-09-10T20:19:53.171876+00:00",
       "sha256": "45b0d2caa90b7120d0a6d52e931aee339dd8cae26c9c117e20abf03d7f5c8187",
       "source_url": "https://code.claude.com/docs/en/agent-sdk/hosting"
     },
     "agent-sdk/mcp.md": {
       "bytes": 35899,
-      "fetched_at": "2026-09-10T10:22:12.972005+00:00",
+      "fetched_at": "2026-09-10T20:19:53.920246+00:00",
       "sha256": "6c825ca20031c7494d157449c68deb67bf1596790b8a2596c704eee9902cf0aa",
       "source_url": "https://code.claude.com/docs/en/agent-sdk/mcp"
     },
     "agent-sdk/migration-guide.md": {
       "bytes": 7356,
-      "fetched_at": "2026-09-10T10:22:13.478821+00:00",
+      "fetched_at": "2026-09-10T20:19:54.573166+00:00",
       "sha256": "1c9fd0cee873c913d41cf515cd3c70464d2dbe9208691e70b09e43cc2dbd2a8c",
       "source_url": "https://code.claude.com/docs/en/agent-sdk/migration-guide"
     },
     "agent-sdk/modifying-system-prompts.md": {
       "bytes": 27675,
-      "fetched_at": "2026-09-10T10:22:14.067036+00:00",
+      "fetched_at": "2026-09-10T20:19:55.248591+00:00",
       "sha256": "e337ab15ea5a1172b8a1a09c332ac01c6472d559ba3ea775a67661bd36a02912",
       "source_url": "https://code.claude.com/docs/en/agent-sdk/modifying-system-prompts"
     },
     "agent-sdk/observability.md": {
       "bytes": 19974,
-      "fetched_at": "2026-09-10T10:22:15.363473+00:00",
+      "fetched_at": "2026-09-10T20:19:55.842855+00:00",
       "sha256": "dbbf23f75e67fa9bebc0078781ef429e8058f567e7032dff2068a4627df83d57",
       "source_url": "https://code.claude.com/docs/en/agent-sdk/observability"
     },
     "agent-sdk/overview.md": {
       "bytes": 9408,
-      "fetched_at": "2026-09-10T10:22:16.843349+00:00",
+      "fetched_at": "2026-09-10T20:19:56.408262+00:00",
       "sha256": "97ffb20562a473292629fbfb8b8e8611dc72f8afae55a3364baf95a30340d356",
       "source_url": "https://code.claude.com/docs/en/agent-sdk/overview"
     },
     "agent-sdk/permissions.md": {
       "bytes": 25000,
-      "fetched_at": "2026-09-10T10:22:17.390605+00:00",
+      "fetched_at": "2026-09-10T20:19:57.272246+00:00",
       "sha256": "7d0d0929f4e41e635803e5c20ad027944ed01f14f55a4bb02a814ca3c743b3f5",
       "source_url": "https://code.claude.com/docs/en/agent-sdk/permissions"
     },
     "agent-sdk/plugins.md": {
       "bytes": 12053,
-      "fetched_at": "2026-09-10T10:22:18.047454+00:00",
+      "fetched_at": "2026-09-10T20:19:58.098936+00:00",
       "sha256": "c8b179ee93ae6f4ee0a7b01b688153988c893a1cbca544859adea71097d296c0",
       "source_url": "https://code.claude.com/docs/en/agent-sdk/plugins"
     },
     "agent-sdk/python.md": {
       "bytes": 198289,
-      "fetched_at": "2026-09-10T10:22:18.959825+00:00",
+      "fetched_at": "2026-09-10T20:19:58.998524+00:00",
       "sha256": "14b214e0ffde49dc2fd7b9ec157be353fd1e0576dd762cd8b07a3c83c9cbfc2c",
       "source_url": "https://code.claude.com/docs/en/agent-sdk/python"
     },
     "agent-sdk/quickstart.md": {
       "bytes": 15237,
-      "fetched_at": "2026-09-10T10:22:19.527269+00:00",
+      "fetched_at": "2026-09-10T20:19:59.654435+00:00",
       "sha256": "3a97c3e7c68c3b97928642007842a2eaba424585d4a4f60c175dda54d8ee28cc",
       "source_url": "https://code.claude.com/docs/en/agent-sdk/quickstart"
     },
     "agent-sdk/secure-deployment.md": {
       "bytes": 24211,
-      "fetched_at": "2026-09-10T10:22:20.063773+00:00",
+      "fetched_at": "2026-09-10T20:20:01.216428+00:00",
       "sha256": "28dfc5d54cb6af1c5db00ab8206c5d62e41d2fceb765cea093a9fd25b450c75c",
       "source_url": "https://code.claude.com/docs/en/agent-sdk/secure-deployment"
     },
     "agent-sdk/session-storage.md": {
       "bytes": 24363,
-      "fetched_at": "2026-09-10T10:22:20.611523+00:00",
+      "fetched_at": "2026-09-10T20:20:01.908762+00:00",
       "sha256": "876ad14246e0642c6797d67635995a4dfbad0508d733d9d8373d8c98f6e54b7c",
       "source_url": "https://code.claude.com/docs/en/agent-sdk/session-storage"
     },
     "agent-sdk/sessions.md": {
       "bytes": 23890,
-      "fetched_at": "2026-09-10T10:22:21.171058+00:00",
+      "fetched_at": "2026-09-10T20:20:04.381968+00:00",
       "sha256": "f0bc3b89f2dacc9c9d45bcd3d35333744eca350e0dd5e190b1eea4772cc3c088",
       "source_url": "https://code.claude.com/docs/en/agent-sdk/sessions"
     },
     "agent-sdk/skills.md": {
       "bytes": 26976,
-      "fetched_at": "2026-09-10T10:22:21.829297+00:00",
+      "fetched_at": "2026-09-10T20:20:05.906728+00:00",
       "sha256": "2a24a587d9bccdae8ec6a9b512145b3d807746548723b9f1e1e44a7d4dbf95f9",
       "source_url": "https://code.claude.com/docs/en/agent-sdk/skills"
     },
     "agent-sdk/streaming-output.md": {
       "bytes": 14833,
-      "fetched_at": "2026-09-10T10:22:22.391286+00:00",
+      "fetched_at": "2026-09-10T20:20:06.682885+00:00",
       "sha256": "500f01fde1a92663ff70d4d61e19f7fa454b941e32cdd2171acb41216bf19bb4",
       "source_url": "https://code.claude.com/docs/en/agent-sdk/streaming-output"
     },
     "agent-sdk/streaming-vs-single-mode.md": {
       "bytes": 9277,
-      "fetched_at": "2026-09-10T10:22:22.892258+00:00",
+      "fetched_at": "2026-09-10T20:20:07.695550+00:00",
       "sha256": "2f93a33306a429379f467bb73a7cc45e3adce502fb03fe65d3f74c6980863530",
       "source_url": "https://code.claude.com/docs/en/agent-sdk/streaming-vs-single-mode"
     },
     "agent-sdk/structured-outputs.md": {
       "bytes": 21249,
-      "fetched_at": "2026-09-10T10:22:23.876006+00:00",
+      "fetched_at": "2026-09-10T20:20:08.579997+00:00",
       "sha256": "e7e708a14472f4f6ef64941ab543658ad7bb353ef00a3a6a147557c41868ea23",
       "source_url": "https://code.claude.com/docs/en/agent-sdk/structured-outputs"
     },
     "agent-sdk/subagents.md": {
       "bytes": 45403,
-      "fetched_at": "2026-09-10T10:22:24.460223+00:00",
+      "fetched_at": "2026-09-10T20:20:09.545728+00:00",
       "sha256": "279ffda8a50c4a30333720c7939cef049cf64ea4876e07260d5ddd8e58cd1ed7",
       "source_url": "https://code.claude.com/docs/en/agent-sdk/subagents"
     },
     "agent-sdk/todo-tracking.md": {
       "bytes": 19208,
-      "fetched_at": "2026-09-10T10:22:24.992886+00:00",
+      "fetched_at": "2026-09-10T20:20:10.174160+00:00",
       "sha256": "c23eac91565e34a772c3ff498672f03185f259b705c34c59b06f43c0b277e1b0",
       "source_url": "https://code.claude.com/docs/en/agent-sdk/todo-tracking"
     },
     "agent-sdk/tool-search.md": {
       "bytes": 12790,
-      "fetched_at": "2026-09-10T10:22:25.589234+00:00",
+      "fetched_at": "2026-09-10T20:20:10.851404+00:00",
       "sha256": "7d57d9540d5b058e63981f5fc6046439e32dd6dbaf9a03472f32182dd3b9aef3",
       "source_url": "https://code.claude.com/docs/en/agent-sdk/tool-search"
     },
     "agent-sdk/troubleshooting.md": {
       "bytes": 11198,
-      "fetched_at": "2026-09-10T10:22:26.589183+00:00",
+      "fetched_at": "2026-09-10T20:20:11.381380+00:00",
       "sha256": "cbdc767a3f63d1b3a1a6176b000d8dd6111d6bc8c474b5761a714edc54d6a6e0",
       "source_url": "https://code.claude.com/docs/en/agent-sdk/troubleshooting"
     },
     "agent-sdk/typescript-v2-preview.md": {
       "bytes": 12266,
-      "fetched_at": "2026-09-10T10:22:27.655033+00:00",
+      "fetched_at": "2026-09-10T20:20:12.351044+00:00",
       "sha256": "d59d67e7bc6f7f27a75fbae3837acc1396216aad619d5bc8161185aed1121ba5",
       "source_url": "https://code.claude.com/docs/en/agent-sdk/typescript-v2-preview"
     },
     "agent-sdk/typescript.md": {
-      "bytes": 356693,
-      "fetched_at": "2026-09-10T10:22:27.048837+00:00",
-      "sha256": "21bb02873d4aee6d6ffd39c9401dca891c57423489b9133e98fdac8513d9ac65",
+      "bytes": 356677,
+      "fetched_at": "2026-09-10T20:20:11.796687+00:00",
+      "sha256": "db8e423d995f602bd73f8c51f0c9d9dd86a00c8ba51f89b7b26a7219e1a71273",
       "source_url": "https://code.claude.com/docs/en/agent-sdk/typescript"
     },
     "agent-sdk/user-input.md": {
       "bytes": 39717,
-      "fetched_at": "2026-09-10T10:22:28.021673+00:00",
+      "fetched_at": "2026-09-10T20:20:13.017224+00:00",
       "sha256": "59d839a8526a2cbbad4e4537a86af6564f1d382511f32ce560d491da4c9fa439",
       "source_url": "https://code.claude.com/docs/en/agent-sdk/user-input"
     },
     "agent-teams.md": {
-      "bytes": 40971,
-      "fetched_at": "2026-09-10T10:22:28.593684+00:00",
-      "sha256": "f1eda9dccfdb487448e693fad701d0198d4690241650e3859624303e2a9f970e",
+      "bytes": 41274,
+      "fetched_at": "2026-09-10T20:20:14.002118+00:00",
+      "sha256": "5b0e96d7dd9d36179705b2ebb99af2ff13cb9d902c15944a816285d5110e62bc",
       "source_url": "https://code.claude.com/docs/en/agent-teams"
     },
     "agent-view.md": {
       "bytes": 249764,
-      "fetched_at": "2026-09-10T10:22:29.909953+00:00",
+      "fetched_at": "2026-09-10T20:20:15.079533+00:00",
       "sha256": "3867379da06226c4f1337dfcb980da342a841c30d0f9e419afe7b77d9fdefbe5",
       "source_url": "https://code.claude.com/docs/en/agent-view"
     },
     "agents.md": {
-      "bytes": 8816,
-      "fetched_at": "2026-09-10T10:22:30.422602+00:00",
-      "sha256": "9c04817ac2da54facb24635398c28bafe77c222dc6f23946284fbdf98cf09f74",
+      "bytes": 8884,
+      "fetched_at": "2026-09-10T20:20:15.614280+00:00",
+      "sha256": "6e0ffb25fbbc6f951535ec66cec02c234b5de402aac194dff47c7abaf4ec5091",
       "source_url": "https://code.claude.com/docs/en/agents"
     },
     "amazon-bedrock.md": {
-      "bytes": 42834,
-      "fetched_at": "2026-09-10T10:22:30.974002+00:00",
-      "sha256": "8128f8bd49a21a8917324981a467fa4c1826fb1a3d6d57f192ccabcbc2c0c0d7",
+      "bytes": 42644,
+      "fetched_at": "2026-09-10T20:20:15.980367+00:00",
+      "sha256": "118c2e3a625d8b747d15762b647ac64d10a82f56dfa3b5ac93a441c253149b78",
       "source_url": "https://code.claude.com/docs/en/amazon-bedrock"
     },
     "analytics.md": {
-      "bytes": 12545,
-      "fetched_at": "2026-09-10T10:22:31.587715+00:00",
-      "sha256": "6e1a46fbf128d24c0a252cd28d1c7377b3c050b24cc9827caf6e7e537e31fa97",
+      "bytes": 12271,
+      "fetched_at": "2026-09-10T20:20:16.577234+00:00",
+      "sha256": "fa9e1e1fe4d0cebb3838b14d198ba6a4a94cd7433b4e4116569310854dbd94be",
       "source_url": "https://code.claude.com/docs/en/analytics"
     },
     "artifacts.md": {
-      "bytes": 40529,
-      "fetched_at": "2026-09-10T10:22:32.191961+00:00",
-      "sha256": "0f148397173f2e9c29244248740ba037c793e5fa3c4a75b7a741a7ff6b947431",
+      "bytes": 40392,
+      "fetched_at": "2026-09-10T20:20:17.206130+00:00",
+      "sha256": "9d3cc0d8bb6d756b3854463a669174337657320267e67b3f824961df4705cbb6",
       "source_url": "https://code.claude.com/docs/en/artifacts"
     },
     "authentication.md": {
       "bytes": 29535,
-      "fetched_at": "2026-09-10T10:22:32.960481+00:00",
+      "fetched_at": "2026-09-10T20:20:17.565435+00:00",
       "sha256": "bf535f977b9e5d794b07a3375039a42b3a97e8ba4f896e83d493456c392bf96f",
       "source_url": "https://code.claude.com/docs/en/authentication"
     },
     "auto-mode-config.md": {
       "bytes": 35791,
-      "fetched_at": "2026-09-10T10:22:33.581550+00:00",
+      "fetched_at": "2026-09-10T20:20:19.983926+00:00",
       "sha256": "8cf836f14171b07eb4c9a26c47e65ca41a27f4053c939898252a172210081192",
       "source_url": "https://code.claude.com/docs/en/auto-mode-config"
     },
     "best-practices.md": {
       "bytes": 40068,
-      "fetched_at": "2026-09-10T10:22:34.147559+00:00",
+      "fetched_at": "2026-09-10T20:20:20.562426+00:00",
       "sha256": "43682a0568aae99707d7ff5bc29e9fba6bb5e1bd62168e17b7bcc53fd2f361e4",
       "source_url": "https://code.claude.com/docs/en/best-practices"
     },
     "champion-kit.md": {
       "bytes": 21930,
-      "fetched_at": "2026-09-10T10:22:34.746284+00:00",
+      "fetched_at": "2026-09-10T20:20:21.194856+00:00",
       "sha256": "1bb275f0f68295151d238827b3bd2a38ce4d4093b3858cc0d48c0457278203c2",
       "source_url": "https://code.claude.com/docs/en/champion-kit"
     },
     "changelog.md": {
       "bytes": 679797,
-      "fetched_at": "2026-09-10T10:22:35.208585+00:00",
+      "fetched_at": "2026-09-10T20:20:23.907427+00:00",
       "sha256": "bf5f577551ad6459d444e473d210238aaab280881c9162a8be00ed72e88faffe",
       "source_url": "https://code.claude.com/docs/en/changelog"
     },
     "channels-reference.md": {
-      "bytes": 50258,
-      "fetched_at": "2026-09-10T10:22:36.285985+00:00",
-      "sha256": "3db15890de6d90a2d5628bbc239276a2348c975e1abd889ba4ec8df9ee200113",
+      "bytes": 50351,
+      "fetched_at": "2026-09-10T20:20:25.254854+00:00",
+      "sha256": "fe5f5de5df3787bf5eef7ecb3f98d56e2a41760f9c3c75bde5cc11aae7d8bcaa",
       "source_url": "https://code.claude.com/docs/en/channels-reference"
     },
     "channels.md": {
       "bytes": 23847,
-      "fetched_at": "2026-09-10T10:22:35.606124+00:00",
+      "fetched_at": "2026-09-10T20:20:24.607123+00:00",
       "sha256": "294a7e533dfaae5eb2b82f4e5db0faafb6c79e779129fa3315cdf647578a3ce9",
       "source_url": "https://code.claude.com/docs/en/channels"
     },
     "checkpointing.md": {
       "bytes": 7921,
-      "fetched_at": "2026-09-10T10:22:36.841426+00:00",
+      "fetched_at": "2026-09-10T20:20:25.757349+00:00",
       "sha256": "800b186125a039986b885b8d3bdde95a0185a6eb1451723fcc2ff8657c463ef6",
       "source_url": "https://code.claude.com/docs/en/checkpointing"
     },
     "chrome.md": {
       "bytes": 19587,
-      "fetched_at": "2026-09-10T10:22:37.457656+00:00",
+      "fetched_at": "2026-09-10T20:20:26.607270+00:00",
       "sha256": "2214b06f38da822b3b628bf472c1571085201cd07a3827fa7d978477a945c39d",
       "source_url": "https://code.claude.com/docs/en/chrome"
     },
     "claude-apps-gateway-config.md": {
-      "bytes": 118335,
-      "fetched_at": "2026-09-10T10:22:39.014243+00:00",
-      "sha256": "9229625de5e6eded5eb72a0d67e0c5c5319dfb0f667206443ebf82efa44e84bb",
+      "bytes": 117716,
+      "fetched_at": "2026-09-10T20:20:28.193711+00:00",
+      "sha256": "3e72cdb2c47590306b036594ea742225a76b0e5c9528a090f5a818ffb92b1945",
       "source_url": "https://code.claude.com/docs/en/claude-apps-gateway-config"
     },
     "claude-apps-gateway-deploy.md": {
-      "bytes": 69931,
-      "fetched_at": "2026-09-10T10:22:39.699413+00:00",
-      "sha256": "0b0fbd350248e16167f1fedcbcf88570088408c1e80ae020810b0c3f5557c1ba",
+      "bytes": 70043,
+      "fetched_at": "2026-09-10T20:20:29.241030+00:00",
+      "sha256": "09270d8f4e207724e6aae6f48b9a970996cef9e8db5702abe212c1240143bdb0",
       "source_url": "https://code.claude.com/docs/en/claude-apps-gateway-deploy"
     },
     "claude-apps-gateway-on-aws.md": {
       "bytes": 51083,
-      "fetched_at": "2026-09-10T10:22:40.455053+00:00",
+      "fetched_at": "2026-09-10T20:20:29.942700+00:00",
       "sha256": "f2bfe2859aefd42acffcc4d8e61d3c3fb1572a24bcb3a05ea391a29b877422df",
       "source_url": "https://code.claude.com/docs/en/claude-apps-gateway-on-aws"
     },
     "claude-apps-gateway-on-gcp.md": {
       "bytes": 25008,
-      "fetched_at": "2026-09-10T10:22:41.029753+00:00",
+      "fetched_at": "2026-09-10T20:20:30.516504+00:00",
       "sha256": "caa7e445cfbc099cddef18f5b448cb245d93c04df03ff514772a395cc1b4ba19",
       "source_url": "https://code.claude.com/docs/en/claude-apps-gateway-on-gcp"
     },
     "claude-apps-gateway-spend-limits.md": {
       "bytes": 18029,
-      "fetched_at": "2026-09-10T10:22:41.804677+00:00",
+      "fetched_at": "2026-09-10T20:20:31.083280+00:00",
       "sha256": "3676d3409fb9fbf79f5eaa20c08f00c4c8888aa201edbfc621d0c6cb08308b49",
       "source_url": "https://code.claude.com/docs/en/claude-apps-gateway-spend-limits"
     },
     "claude-apps-gateway.md": {
       "bytes": 58757,
-      "fetched_at": "2026-09-10T10:22:38.257567+00:00",
+      "fetched_at": "2026-09-10T20:20:27.408858+00:00",
       "sha256": "e93487955aced4946e1cff68b094d56224f333f1e656401c76d06911d6034ac4",
       "source_url": "https://code.claude.com/docs/en/claude-apps-gateway"
     },
     "claude-code-on-the-web.md": {
-      "bytes": 39265,
-      "fetched_at": "2026-09-10T10:22:42.370236+00:00",
-      "sha256": "71a62b53b59053b863af0c96ee6c5f5c2f519c6a244cd67465e283b13511b98d",
+      "bytes": 39529,
+      "fetched_at": "2026-09-10T20:20:32.037984+00:00",
+      "sha256": "45891d4a8de6a48a925c31908887ed5ecd6fd85e439f410be3de52165a78c18f",
       "source_url": "https://code.claude.com/docs/en/claude-code-on-the-web"
     },
     "claude-directory.md": {
       "bytes": 99321,
-      "fetched_at": "2026-09-10T10:22:45.048103+00:00",
+      "fetched_at": "2026-09-10T20:20:33.227042+00:00",
       "sha256": "949efc8d560f951e3db828976f873ac73dcfc281133a9af1935690589ad97cd6",
       "source_url": "https://code.claude.com/docs/en/claude-directory"
     },
     "claude-platform-on-aws.md": {
       "bytes": 18685,
-      "fetched_at": "2026-09-10T10:22:45.901009+00:00",
+      "fetched_at": "2026-09-10T20:20:33.777265+00:00",
       "sha256": "8b8b259956c3abb62366823f071d1c3f429b7947ec2fbb34a4907342afc0dbe1",
       "source_url": "https://code.claude.com/docs/en/claude-platform-on-aws"
     },
     "claude-security.md": {
       "bytes": 14005,
-      "fetched_at": "2026-09-10T10:22:46.411629+00:00",
+      "fetched_at": "2026-09-10T20:20:36.683552+00:00",
       "sha256": "63157222542e5eeb606248492a7fc86bfd52c79fc7df9fad5af512f16a8c41f0",
       "source_url": "https://code.claude.com/docs/en/claude-security"
     },
     "claude-tag.md": {
       "bytes": 991,
-      "fetched_at": "2026-09-10T10:22:46.934419+00:00",
+      "fetched_at": "2026-09-10T20:20:37.230055+00:00",
       "sha256": "71a0a4e6c77545d48c76a50df303a62f20d933d79939fd42e4af178f3ff241fd",
       "source_url": "https://code.claude.com/docs/en/claude-tag"
     },
     "cli-reference.md": {
       "bytes": 113300,
-      "fetched_at": "2026-09-10T10:22:47.485251+00:00",
-      "sha256": "adb9c54834d3b757be74a6010ade324b2e7822cdf6add91d7fb0413873293509",
+      "fetched_at": "2026-09-10T20:20:40.052982+00:00",
+      "sha256": "a61f5118bb992a19ffb0b9dda3443ec512b7e7181b7b1b458bb96f0f6dd58b01",
       "source_url": "https://code.claude.com/docs/en/cli-reference"
     },
     "cloud-environments.md": {
-      "bytes": 65147,
-      "fetched_at": "2026-09-10T10:22:48.070222+00:00",
-      "sha256": "658a4b2e4514fc4ef61790b2cfe58fe40e811b65139b04fb49b0558c40d935e5",
+      "bytes": 65221,
+      "fetched_at": "2026-09-10T20:20:40.824913+00:00",
+      "sha256": "29998b3dc2a851eaf60b64058c4be0d382bad76c81ed9bdb2cdcdfd5aca7b178",
       "source_url": "https://code.claude.com/docs/en/cloud-environments"
     },
     "code-review.md": {
       "bytes": 34207,
-      "fetched_at": "2026-09-10T10:22:49.227539+00:00",
+      "fetched_at": "2026-09-10T20:20:41.899794+00:00",
       "sha256": "85ed7113474c8f54eabd52278112a333bb56ce6be29711f5bdd23db1e1345297",
       "source_url": "https://code.claude.com/docs/en/code-review"
     },
     "commands.md": {
       "bytes": 175106,
-      "fetched_at": "2026-09-10T10:22:50.099160+00:00",
+      "fetched_at": "2026-09-10T20:20:42.460467+00:00",
       "sha256": "427c727590e91f7f06fc5bf233af574ef24ddc9bfd20a7d6df65ece628434a9b",
       "source_url": "https://code.claude.com/docs/en/commands"
     },
     "common-workflows.md": {
       "bytes": 18996,
-      "fetched_at": "2026-09-10T10:22:50.800215+00:00",
+      "fetched_at": "2026-09-10T20:20:42.984509+00:00",
       "sha256": "b1af423b31aa38de0b6dfb817dff13042dd1d5ba99b0067f61279065de034995",
       "source_url": "https://code.claude.com/docs/en/common-workflows"
     },
     "communications-kit.md": {
       "bytes": 25716,
-      "fetched_at": "2026-09-10T10:22:51.306180+00:00",
+      "fetched_at": "2026-09-10T20:20:43.517490+00:00",
       "sha256": "91defabfdba853124b55f2e8d5ffe60b96343c6f2726099c7efc5b12e715d42e",
       "source_url": "https://code.claude.com/docs/en/communications-kit"
     },
     "computer-use.md": {
       "bytes": 12653,
-      "fetched_at": "2026-09-10T10:22:51.979779+00:00",
+      "fetched_at": "2026-09-10T20:20:44.330298+00:00",
       "sha256": "ca890ccf3f7241255a576174d50be10e5ddf01a6660700c64b0f6f9ae3e16b7f",
       "source_url": "https://code.claude.com/docs/en/computer-use"
     },
     "context-window.md": {
       "bytes": 61504,
-      "fetched_at": "2026-09-10T10:22:52.828195+00:00",
+      "fetched_at": "2026-09-10T20:20:44.769323+00:00",
       "sha256": "aed34268947d9ad8e5eaee057f7428eeb913b72da1a8e34ab105fd5558424a06",
       "source_url": "https://code.claude.com/docs/en/context-window"
     },
     "corporate-launcher.md": {
       "bytes": 13330,
-      "fetched_at": "2026-09-10T10:22:53.457307+00:00",
+      "fetched_at": "2026-09-10T20:20:45.542317+00:00",
       "sha256": "aa63abe5707ddc28d7cdcf5331d40face45a17457a7daaec6f294e07cc04b320",
       "source_url": "https://code.claude.com/docs/en/corporate-launcher"
     },
     "costs.md": {
       "bytes": 41617,
-      "fetched_at": "2026-09-10T10:22:53.823744+00:00",
+      "fetched_at": "2026-09-10T20:20:46.058607+00:00",
       "sha256": "d09be801c891e4f8c7770f615269ecc1443daae3c7ae64d1e8e55e9a8bba2285",
       "source_url": "https://code.claude.com/docs/en/costs"
     },
     "cross-session-messaging.md": {
       "bytes": 40894,
-      "fetched_at": "2026-09-10T10:22:54.207115+00:00",
+      "fetched_at": "2026-09-10T20:20:46.448241+00:00",
       "sha256": "c7cf0dce69ed18d6c9085d87e0784bcef17c7057f950182ed31c2d697fdf3fbe",
       "source_url": "https://code.claude.com/docs/en/cross-session-messaging"
     },
     "data-usage.md": {
       "bytes": 22277,
-      "fetched_at": "2026-09-10T10:22:54.739240+00:00",
+      "fetched_at": "2026-09-10T20:20:46.839100+00:00",
       "sha256": "7e49068be87bb5081cd803900a6712b27fe361dbd38b14672f8fcc3c1b4f1720",
       "source_url": "https://code.claude.com/docs/en/data-usage"
     },
     "debug-your-config.md": {
       "bytes": 23694,
-      "fetched_at": "2026-09-10T10:22:55.320532+00:00",
+      "fetched_at": "2026-09-10T20:20:47.517444+00:00",
       "sha256": "08a9a7963a467a947e86ce53d7545ab0701100f213f37232e54befed4441a137",
       "source_url": "https://code.claude.com/docs/en/debug-your-config"
     },
     "deep-links.md": {
       "bytes": 14624,
-      "fetched_at": "2026-09-10T10:22:55.819115+00:00",
+      "fetched_at": "2026-09-10T20:20:48.228946+00:00",
       "sha256": "e1d6a53e3e9acdb2b0b485adb3502d395a4e43be53ab0f62099e5815f67a00f8",
       "source_url": "https://code.claude.com/docs/en/deep-links"
     },
     "desktop-ios-simulator.md": {
       "bytes": 12362,
-      "fetched_at": "2026-09-10T10:22:57.338542+00:00",
+      "fetched_at": "2026-09-10T20:20:50.609454+00:00",
       "sha256": "9ef38bd26965240e873fa23a9b06bcac4e78e280a2f384bf3daf59a800b13a9f",
       "source_url": "https://code.claude.com/docs/en/desktop-ios-simulator"
     },
     "desktop-linux.md": {
       "bytes": 11546,
-      "fetched_at": "2026-09-10T10:22:57.870163+00:00",
+      "fetched_at": "2026-09-10T20:20:51.319053+00:00",
       "sha256": "12d9a33f896c68a5827969b4ef5c27838d0be37e0672a95f0835d664d386b66a",
       "source_url": "https://code.claude.com/docs/en/desktop-linux"
     },
     "desktop-quickstart.md": {
       "bytes": 11429,
-      "fetched_at": "2026-09-10T10:22:58.315336+00:00",
+      "fetched_at": "2026-09-10T20:20:52.125098+00:00",
       "sha256": "6dcb9d6b3588f16a44d0e79daa4be816081a4fdd11ae2216e18bd6a584e7d17a",
       "source_url": "https://code.claude.com/docs/en/desktop-quickstart"
     },
     "desktop-scheduled-tasks.md": {
-      "bytes": 11841,
-      "fetched_at": "2026-09-10T10:22:58.970508+00:00",
-      "sha256": "569fa744e39dd53195446d2abc24dae6be1d702c3c70bf87bd058912ce66caf9",
+      "bytes": 12275,
+      "fetched_at": "2026-09-10T20:20:52.661059+00:00",
+      "sha256": "1bc1f38acdba7def39ee3da2d8a8fb0e468c5c322b0c30734e6f7fede367ab90",
       "source_url": "https://code.claude.com/docs/en/desktop-scheduled-tasks"
     },
     "desktop-wsl.md": {
       "bytes": 2962,
-      "fetched_at": "2026-09-10T10:22:59.626618+00:00",
+      "fetched_at": "2026-09-10T20:20:53.332135+00:00",
       "sha256": "acbb2a4fa359dc84d507d8b7cea5b4153e194fe45b993d10837452b2fabe8ffc",
       "source_url": "https://code.claude.com/docs/en/desktop-wsl"
     },
     "desktop.md": {
-      "bytes": 101937,
-      "fetched_at": "2026-09-10T10:22:56.595357+00:00",
-      "sha256": "b78f5f245773175e9751fdce6ed3a2cf535b20ee0f90d6f0c4472d8344589a2c",
+      "bytes": 102084,
+      "fetched_at": "2026-09-10T20:20:49.153473+00:00",
+      "sha256": "3c585962a30144144f6f07cddbab26d1e8ab8f6272e881441abe0a1401514a09",
       "source_url": "https://code.claude.com/docs/en/desktop"
     },
     "devcontainer.md": {
       "bytes": 18608,
-      "fetched_at": "2026-09-10T10:23:00.215250+00:00",
+      "fetched_at": "2026-09-10T20:20:54.016675+00:00",
       "sha256": "6ab6c842a9f979f21eef0da2f8547b33e2f0fef2944cfe0bedbbca1454a050e7",
       "source_url": "https://code.claude.com/docs/en/devcontainer"
     },
     "discover-plugins.md": {
       "bytes": 33950,
-      "fetched_at": "2026-09-10T10:23:00.837064+00:00",
+      "fetched_at": "2026-09-10T20:20:54.649037+00:00",
       "sha256": "54bdd0313e00579d8bfecf68144ea25d68ae37d6d627521f519d70303da98ab2",
       "source_url": "https://code.claude.com/docs/en/discover-plugins"
     },
     "env-vars.md": {
       "bytes": 484329,
-      "fetched_at": "2026-09-10T10:23:01.485118+00:00",
+      "fetched_at": "2026-09-10T20:20:55.062378+00:00",
       "sha256": "a2e450e338df4921fedf8a4d6349da010fb4bd9de2cbc5f1d02529ca47e45555",
       "source_url": "https://code.claude.com/docs/en/env-vars"
     },
     "errors.md": {
-      "bytes": 402528,
-      "fetched_at": "2026-09-10T10:23:02.930180+00:00",
-      "sha256": "c0b0753e850810f04f73c043924cca1e519fd14f77141f1a1e515ae9bc00ffea",
+      "bytes": 407010,
+      "fetched_at": "2026-09-10T20:20:55.494781+00:00",
+      "sha256": "cedae078bb24e3dd92cea275d721922757ef3033cb73b29437ded35042280bde",
       "source_url": "https://code.claude.com/docs/en/errors"
     },
     "fast-mode.md": {
       "bytes": 18884,
-      "fetched_at": "2026-09-10T10:23:03.575973+00:00",
+      "fetched_at": "2026-09-10T20:20:56.033326+00:00",
       "sha256": "9c7b13a89a9bda9f1697f84bf21acd27c60cfcebff78640a57c2e09eb626a397",
       "source_url": "https://code.claude.com/docs/en/fast-mode"
     },
     "feature-availability.md": {
       "bytes": 23063,
-      "fetched_at": "2026-09-10T10:23:04.213282+00:00",
+      "fetched_at": "2026-09-10T20:20:56.706681+00:00",
       "sha256": "b44ff22bcd559ff34523504ef538b64ca758b6bade6c5d1274ca84d1e48ee78c",
       "source_url": "https://code.claude.com/docs/en/feature-availability"
     },
     "features-overview.md": {
       "bytes": 32367,
-      "fetched_at": "2026-09-10T10:23:04.820043+00:00",
+      "fetched_at": "2026-09-10T20:20:58.182833+00:00",
       "sha256": "b817faae653dc3b493b5a6d278528ad57d26b40c08316244d72a4f4e1434bc15",
       "source_url": "https://code.claude.com/docs/en/features-overview"
     },
     "fullscreen.md": {
-      "bytes": 32535,
-      "fetched_at": "2026-09-10T10:23:05.207915+00:00",
-      "sha256": "ce5719a7b797157ac9b0c8924fff881d168dfbf79172e543b251d02c61aeee0b",
+      "bytes": 32658,
+      "fetched_at": "2026-09-10T20:20:58.946216+00:00",
+      "sha256": "80e06152d72cdacbe94feca2ead9f36f846da3183bb2e3c2a0b1dd1cc9119f9b",
       "source_url": "https://code.claude.com/docs/en/fullscreen"
     },
     "gateways.md": {
       "bytes": 9286,
-      "fetched_at": "2026-09-10T10:23:06.312415+00:00",
+      "fetched_at": "2026-09-10T20:20:59.496070+00:00",
       "sha256": "3069bdb2ae05612f0d61d698552f8573bd498ebf7aea3fd903746b5c88c1cdb0",
       "source_url": "https://code.claude.com/docs/en/gateways"
     },
     "github-actions-cloud-providers.md": {
       "bytes": 18972,
-      "fetched_at": "2026-09-10T10:23:07.479943+00:00",
+      "fetched_at": "2026-09-10T20:21:01.012238+00:00",
       "sha256": "05540411b87f60ec8f2d062d822a7359cf05b2f1704706c7220073feb9ef6039",
       "source_url": "https://code.claude.com/docs/en/github-actions-cloud-providers"
     },
     "github-actions.md": {
       "bytes": 32984,
-      "fetched_at": "2026-09-10T10:23:06.896729+00:00",
+      "fetched_at": "2026-09-10T20:21:00.358004+00:00",
       "sha256": "3f0e87aa1174cb1f6baf548e94bba9de7c69b4da470c65ff29776582451dd554",
       "source_url": "https://code.claude.com/docs/en/github-actions"
     },
     "github-enterprise-server.md": {
       "bytes": 23509,
-      "fetched_at": "2026-09-10T10:23:08.011763+00:00",
+      "fetched_at": "2026-09-10T20:21:01.614679+00:00",
       "sha256": "a9817d4511f753e3aee0771587f1f591cab66a6584715845eb856fe33770a6b1",
       "source_url": "https://code.claude.com/docs/en/github-enterprise-server"
     },
     "gitlab-ci-cd.md": {
       "bytes": 18835,
-      "fetched_at": "2026-09-10T10:23:08.585252+00:00",
+      "fetched_at": "2026-09-10T20:21:02.247037+00:00",
       "sha256": "c0786bbeeb973c89bce40e46742e35aeea084fcda0340368c19e63d915b85e83",
       "source_url": "https://code.claude.com/docs/en/gitlab-ci-cd"
     },
     "glossary.md": {
       "bytes": 23506,
-      "fetched_at": "2026-09-10T10:23:09.099861+00:00",
+      "fetched_at": "2026-09-10T20:21:03.324875+00:00",
       "sha256": "8dc3e3e2f1b5d37a54dd2d622ec5d95fc5f9509ec6553351cd3ec837e3af582d",
       "source_url": "https://code.claude.com/docs/en/glossary"
     },
     "goal.md": {
       "bytes": 15428,
-      "fetched_at": "2026-09-10T10:23:09.537839+00:00",
+      "fetched_at": "2026-09-10T20:21:04.139979+00:00",
       "sha256": "c4541af0af790dbe36801db79afd07937053e693f4a468fd861b0cfc44a4df34",
       "source_url": "https://code.claude.com/docs/en/goal"
     },
     "google-vertex-ai.md": {
       "bytes": 21480,
-      "fetched_at": "2026-09-10T10:23:10.056402+00:00",
+      "fetched_at": "2026-09-10T20:21:04.930793+00:00",
       "sha256": "367dd9b8f61ef9d1cb6e26f674a45b76b17e0b8b0f541f641d9151d49351be5e",
       "source_url": "https://code.claude.com/docs/en/google-vertex-ai"
     },
     "headless.md": {
       "bytes": 36066,
-      "fetched_at": "2026-09-10T10:23:10.420788+00:00",
+      "fetched_at": "2026-09-10T20:21:05.535921+00:00",
       "sha256": "8c3d88d22cbde5db709f29f43c225e08fbdf0d347098e87a84d2b399fbde80b5",
       "source_url": "https://code.claude.com/docs/en/headless"
     },
     "hooks-guide.md": {
       "bytes": 81859,
-      "fetched_at": "2026-09-10T10:23:11.157603+00:00",
+      "fetched_at": "2026-09-10T20:21:07.211713+00:00",
       "sha256": "b5632cf6b8c78f04797a91ed590ed7718f6af17cc923a856cbad3b3a2f7138a8",
       "source_url": "https://code.claude.com/docs/en/hooks-guide"
     },
     "hooks.md": {
-      "bytes": 319955,
-      "fetched_at": "2026-09-10T10:23:10.799196+00:00",
-      "sha256": "b387875a7957cf3451e74471c48c88c5afc0843850788aaaecefc4599ca2b4f0",
+      "bytes": 321997,
+      "fetched_at": "2026-09-10T20:21:06.821671+00:00",
+      "sha256": "46053b3b5f21a8c1df638d47cda29da1e5ff9f0c35995105ea5953e17892d12f",
       "source_url": "https://code.claude.com/docs/en/hooks"
     },
     "how-claude-code-works.md": {
       "bytes": 19609,
-      "fetched_at": "2026-09-10T10:23:11.710751+00:00",
+      "fetched_at": "2026-09-10T20:21:07.876823+00:00",
       "sha256": "30758f2ce7d306277e3587329033d17656993b4643ae83f69308d02ace197dde",
       "source_url": "https://code.claude.com/docs/en/how-claude-code-works"
     },
     "interactive-mode.md": {
-      "bytes": 90000,
-      "fetched_at": "2026-09-10T10:23:12.382749+00:00",
-      "sha256": "9ddab25ddb7ac5e181e7bf4fd110161b5410461ed61ead720b1cf7115c2d938b",
+      "bytes": 89893,
+      "fetched_at": "2026-09-10T20:21:08.880725+00:00",
+      "sha256": "1e3027bdf11a854695eb89f120776fbf4341e7de4206ecfa878a5018b145a8ee",
       "source_url": "https://code.claude.com/docs/en/interactive-mode"
     },
     "jetbrains.md": {
       "bytes": 12528,
-      "fetched_at": "2026-09-10T10:23:12.934238+00:00",
+      "fetched_at": "2026-09-10T20:21:09.628697+00:00",
       "sha256": "9c962c071eefc435d9adb90636ecbf7c8a5878b7d9e64246e377a0a1fbfca305",
       "source_url": "https://code.claude.com/docs/en/jetbrains"
     },
     "keybindings.md": {
-      "bytes": 44158,
-      "fetched_at": "2026-09-10T10:23:13.878496+00:00",
-      "sha256": "d170308ad1e378b3128caf78e55aa713ed11470d01463d89a3bcd30eca23c6b4",
+      "bytes": 44282,
+      "fetched_at": "2026-09-10T20:21:10.258705+00:00",
+      "sha256": "d6070bb5c33a18703cd975c228b81773cd8d2d69519f3a7bc404f3f766f84667",
       "source_url": "https://code.claude.com/docs/en/keybindings"
     },
     "large-codebases.md": {
       "bytes": 35714,
-      "fetched_at": "2026-09-10T10:23:14.570084+00:00",
+      "fetched_at": "2026-09-10T20:21:10.675536+00:00",
       "sha256": "ccaf014e4b5bb5d1f89b6320784d680179ee94039a1856f40119fe4d8aa467a9",
       "source_url": "https://code.claude.com/docs/en/large-codebases"
     },
     "legal-and-compliance.md": {
       "bytes": 6149,
-      "fetched_at": "2026-09-10T10:23:15.168406+00:00",
+      "fetched_at": "2026-09-10T20:21:11.877250+00:00",
       "sha256": "4a4cc1762fb1d992a66347dcf94c60a27d328391d8074c13e8ae9d5c4182413b",
       "source_url": "https://code.claude.com/docs/en/legal-and-compliance"
     },
     "llm-gateway-connect.md": {
       "bytes": 54157,
-      "fetched_at": "2026-09-10T10:23:16.525602+00:00",
+      "fetched_at": "2026-09-10T20:21:13.088042+00:00",
       "sha256": "0878d79128adc92c1fbd31981cb9cc54ab15f513945cddee3a0cd5e59ea631d4",
       "source_url": "https://code.claude.com/docs/en/llm-gateway-connect"
     },
     "llm-gateway-protocol.md": {
       "bytes": 34879,
-      "fetched_at": "2026-09-10T10:23:17.126739+00:00",
+      "fetched_at": "2026-09-10T20:21:13.937011+00:00",
       "sha256": "a7202b36cfd845a5dadb303d407ae1f737d8de66a43d2e3574497d7f69949783",
       "source_url": "https://code.claude.com/docs/en/llm-gateway-protocol"
     },
     "llm-gateway-rollout.md": {
       "bytes": 32752,
-      "fetched_at": "2026-09-10T10:23:17.705186+00:00",
+      "fetched_at": "2026-09-10T20:21:14.596654+00:00",
       "sha256": "12a0e018c724b243a3b57f71633ec5ea5856be0e860b9a784c3f5da31a72df4d",
       "source_url": "https://code.claude.com/docs/en/llm-gateway-rollout"
     },
     "llm-gateway.md": {
       "bytes": 6182,
-      "fetched_at": "2026-09-10T10:23:15.726327+00:00",
+      "fetched_at": "2026-09-10T20:21:12.412576+00:00",
       "sha256": "236a7b796b0255310652fa290588809971d92ef4f8b43f2a3da5c1b16544f85f",
       "source_url": "https://code.claude.com/docs/en/llm-gateway"
     },
     "managed-mcp.md": {
       "bytes": 50677,
-      "fetched_at": "2026-09-10T10:23:18.429231+00:00",
+      "fetched_at": "2026-09-10T20:21:15.815749+00:00",
       "sha256": "281b3472edebefc30e32ecc0da6b4b825410dfdee315ccf1c38317d3aaf96bc2",
       "source_url": "https://code.claude.com/docs/en/managed-mcp"
     },
     "managed-settings.md": {
-      "bytes": 64391,
-      "fetched_at": "2026-09-10T10:23:19.301439+00:00",
-      "sha256": "474fabdd0e21e3681c0623388b1798edfe31f25d56e84af43f844b92b9b7b4a7",
+      "bytes": 64545,
+      "fetched_at": "2026-09-10T20:21:16.211206+00:00",
+      "sha256": "d004e5b69cafe5d2bb7b626e4b76989e9712594969ab0ca8ce430cadf56dcb6b",
       "source_url": "https://code.claude.com/docs/en/managed-settings"
     },
     "mcp-quickstart.md": {
       "bytes": 25883,
-      "fetched_at": "2026-09-10T10:23:20.342860+00:00",
+      "fetched_at": "2026-09-10T20:21:17.218627+00:00",
       "sha256": "28772a8c727884cd7c2b5bd1d06c77a39b01b3c97a65fb43e89048c79b615723",
       "source_url": "https://code.claude.com/docs/en/mcp-quickstart"
     },
     "mcp.md": {
       "bytes": 113035,
-      "fetched_at": "2026-09-10T10:23:19.664557+00:00",
+      "fetched_at": "2026-09-10T20:21:16.589221+00:00",
       "sha256": "6eb0ec76ddcb57cd8a138b2f3bef5020f186262ab9c2fe620adfa51fcce13603",
       "source_url": "https://code.claude.com/docs/en/mcp"
     },
     "memory.md": {
-      "bytes": 37525,
-      "fetched_at": "2026-09-10T10:23:20.743223+00:00",
-      "sha256": "69a0358e18ac29f59dc3f1782384eba4e2c6bae29e4320611a6390a5aef81067",
+      "bytes": 38070,
+      "fetched_at": "2026-09-10T20:21:17.611487+00:00",
+      "sha256": "f212449ea6fbdb88bea34ad85c967ae3681470bdbd376ac84bda7f535029e677",
       "source_url": "https://code.claude.com/docs/en/memory"
     },
     "microsoft-foundry.md": {
       "bytes": 10573,
-      "fetched_at": "2026-09-10T10:23:21.290134+00:00",
+      "fetched_at": "2026-09-10T20:21:18.334884+00:00",
       "sha256": "2b5f9e4235f1dda584b53ee1d2d96bef8b4ca13dde339afb3572d9194cfdc7f7",
       "source_url": "https://code.claude.com/docs/en/microsoft-foundry"
     },
     "mobile.md": {
       "bytes": 8882,
-      "fetched_at": "2026-09-10T10:23:21.675416+00:00",
+      "fetched_at": "2026-09-10T20:21:19.022296+00:00",
       "sha256": "d53b1faa01cdcfcf922170f5f056e78ed8cdfd599f9f88c5da9eca43942ebe88",
       "source_url": "https://code.claude.com/docs/en/mobile"
     },
     "model-config.md": {
-      "bytes": 110275,
-      "fetched_at": "2026-09-10T10:23:22.046150+00:00",
-      "sha256": "ee7bc6489e19d93a548a0e4b9e74f18e6b823d759e2a004b55e1ab5c7821ae21",
+      "bytes": 110936,
+      "fetched_at": "2026-09-10T20:21:19.404192+00:00",
+      "sha256": "a8b6116a31f02c7ae380d0a2e8d33a5293115aefe25fb82599fd77af15b7432f",
       "source_url": "https://code.claude.com/docs/en/model-config"
     },
     "monitoring-usage.md": {
-      "bytes": 139839,
-      "fetched_at": "2026-09-10T10:23:22.440211+00:00",
-      "sha256": "03ae53b71fc0d8adb3264e0376942037557201d4a2fe0be1c7a8df2d12c74e98",
+      "bytes": 139905,
+      "fetched_at": "2026-09-10T20:21:19.887273+00:00",
+      "sha256": "7d2a4052783017dfaf8bb770f33c7ddab3a9b5374144b5821c37f55e7034e63c",
       "source_url": "https://code.claude.com/docs/en/monitoring-usage"
     },
     "network-config.md": {
       "bytes": 39698,
-      "fetched_at": "2026-09-10T10:23:23.085520+00:00",
+      "fetched_at": "2026-09-10T20:21:20.295196+00:00",
       "sha256": "37954df0b7775772198b3ffc6690ff19b520ee8974633a22f1719b8db07aa3fd",
       "source_url": "https://code.claude.com/docs/en/network-config"
     },
     "output-styles.md": {
       "bytes": 11621,
-      "fetched_at": "2026-09-10T10:23:23.473127+00:00",
+      "fetched_at": "2026-09-10T20:21:21.372159+00:00",
       "sha256": "ee687cf4fca32cf584f711e0e53a2dc161e9874d61bdd0e9d21fff9696edf71e",
       "source_url": "https://code.claude.com/docs/en/output-styles"
     },
     "overview.md": {
       "bytes": 16629,
-      "fetched_at": "2026-09-10T10:23:24.052633+00:00",
+      "fetched_at": "2026-09-10T20:21:21.761793+00:00",
       "sha256": "295c5a56b733060475aaaf3fc8bfa0d39d97684f04892cac38747be5aa849290",
       "source_url": "https://code.claude.com/docs/en/overview"
     },
     "permission-modes.md": {
       "bytes": 80189,
-      "fetched_at": "2026-09-10T10:23:24.419716+00:00",
+      "fetched_at": "2026-09-10T20:21:22.131604+00:00",
       "sha256": "72ecdef3d08bf2164052cc57fd5db8021a5a2b54f26a650a19724d8213f1b9f3",
       "source_url": "https://code.claude.com/docs/en/permission-modes"
     },
     "permissions.md": {
       "bytes": 79884,
-      "fetched_at": "2026-09-10T10:23:24.843562+00:00",
+      "fetched_at": "2026-09-10T20:21:22.500489+00:00",
       "sha256": "6cc02236c28e33b38f1977f95d5c1b3c8805c0ad97cb377866cd1de1c5cb8cbc",
       "source_url": "https://code.claude.com/docs/en/permissions"
     },
     "platforms.md": {
       "bytes": 12499,
-      "fetched_at": "2026-09-10T10:23:25.330344+00:00",
+      "fetched_at": "2026-09-10T20:21:23.089949+00:00",
       "sha256": "2d9e36e37fd82e2771084ac7c8d8189de6918a4149c683be62e2ba0d97db9a9c",
       "source_url": "https://code.claude.com/docs/en/platforms"
     },
     "plugin-dependencies.md": {
       "bytes": 24396,
-      "fetched_at": "2026-09-10T10:23:25.885817+00:00",
+      "fetched_at": "2026-09-10T20:21:23.643502+00:00",
       "sha256": "566c016cf497b7e27052dffed7a4458b7875fa7f48a360c7b1a1e43995fea154",
       "source_url": "https://code.claude.com/docs/en/plugin-dependencies"
     },
     "plugin-hints.md": {
-      "bytes": 10007,
-      "fetched_at": "2026-09-10T10:23:26.574983+00:00",
-      "sha256": "cba6d1e4cb50ace8a02ed15cddc3f37f8098eadc01cae61a0f732b526b5b1232",
+      "bytes": 9922,
+      "fetched_at": "2026-09-10T20:21:24.198745+00:00",
+      "sha256": "e4eec32c94725f49b9194827b8bf8276d54273f6262f231fd4a32cdc26bd5f66",
       "source_url": "https://code.claude.com/docs/en/plugin-hints"
     },
     "plugin-marketplaces.md": {
-      "bytes": 117783,
-      "fetched_at": "2026-09-10T10:23:27.515795+00:00",
-      "sha256": "b4e24fbb220bba40120fff65cf2f0f17556b1f313abd6507dbb71e0a84fe52d3",
+      "bytes": 117936,
+      "fetched_at": "2026-09-10T20:21:24.572240+00:00",
+      "sha256": "29a446b8bdb5490e4288c254287432c33a9bbfe6523cb1f535cc3870f865e580",
       "source_url": "https://code.claude.com/docs/en/plugin-marketplaces"
     },
     "plugin-relevance.md": {
       "bytes": 15665,
-      "fetched_at": "2026-09-10T10:23:28.291825+00:00",
+      "fetched_at": "2026-09-10T20:21:25.447370+00:00",
       "sha256": "1dd6dcbd13adf115d9728d92bf152976b1e65d955ea5f933e5d5b1724b2c03c1",
       "source_url": "https://code.claude.com/docs/en/plugin-relevance"
     },
     "plugins-reference.md": {
       "bytes": 118247,
-      "fetched_at": "2026-09-10T10:23:29.445903+00:00",
+      "fetched_at": "2026-09-10T20:21:27.897214+00:00",
       "sha256": "65ccac0ce011a4d500c5613cf74cb850f55ab3e0927bfa91c8d6d02471b5baf4",
       "source_url": "https://code.claude.com/docs/en/plugins-reference"
     },
     "plugins.md": {
       "bytes": 30162,
-      "fetched_at": "2026-09-10T10:23:28.679021+00:00",
+      "fetched_at": "2026-09-10T20:21:25.833318+00:00",
       "sha256": "5a0772d4f9dbfb3ccc384af5ae3a1bc6fc9daea6713ac2d47c63553e6bd464c8",
       "source_url": "https://code.claude.com/docs/en/plugins"
     },
     "prompt-caching.md": {
-      "bytes": 40852,
-      "fetched_at": "2026-09-10T10:23:29.802333+00:00",
-      "sha256": "48fc7bdce45dae304fcfbccb74328e7358936f22c9daf1e85fd1607722f9ccca",
+      "bytes": 42432,
+      "fetched_at": "2026-09-10T20:21:29.976943+00:00",
+      "sha256": "7490003d816ce360d2ae5498b1738d8772cf47f5b678e32086fdf6fa75f4c7ce",
       "source_url": "https://code.claude.com/docs/en/prompt-caching"
     },
     "prompt-library.md": {
       "bytes": 56598,
-      "fetched_at": "2026-09-10T10:23:30.545697+00:00",
+      "fetched_at": "2026-09-10T20:21:30.739251+00:00",
       "sha256": "985ba3bd07863a741e2e5f137e14bc8fb173fa547242ad52de426929d3e9ecba",
       "source_url": "https://code.claude.com/docs/en/prompt-library"
     },
     "quickstart.md": {
       "bytes": 13342,
-      "fetched_at": "2026-09-10T10:23:31.078308+00:00",
+      "fetched_at": "2026-09-10T20:21:31.337501+00:00",
       "sha256": "c68c8537c767e88dc4cddfdb6d5e9a2aa85ed3118f3c9d0e2a4539c82222e06f",
       "source_url": "https://code.claude.com/docs/en/quickstart"
     },
     "remote-control.md": {
-      "bytes": 62738,
-      "fetched_at": "2026-09-10T10:23:31.443267+00:00",
-      "sha256": "358742fd85c6163107ba64ac9e182a0548c7fd239357162de4efc0e18bed4d74",
+      "bytes": 62893,
+      "fetched_at": "2026-09-10T20:21:32.042939+00:00",
+      "sha256": "c3804a1433cddd85d457d2f01de2071830a072b9cff24e5d176846b810328a08",
       "source_url": "https://code.claude.com/docs/en/remote-control"
     },
     "routines.md": {
       "bytes": 33219,
-      "fetched_at": "2026-09-10T10:23:31.803825+00:00",
+      "fetched_at": "2026-09-10T20:21:32.658502+00:00",
       "sha256": "58c1526fa9b251f49a825d2006c13838445e1a0cdc0d6eda817c1282420f482b",
       "source_url": "https://code.claude.com/docs/en/routines"
     },
     "sandbox-environments.md": {
       "bytes": 19894,
-      "fetched_at": "2026-09-10T10:23:32.194949+00:00",
+      "fetched_at": "2026-09-10T20:21:33.380331+00:00",
       "sha256": "a863dc49f631afb71a1979e17d7ea8bfd8a67415242281d43384f3c8605562a7",
       "source_url": "https://code.claude.com/docs/en/sandbox-environments"
     },
     "sandboxing.md": {
       "bytes": 75062,
-      "fetched_at": "2026-09-10T10:23:32.879122+00:00",
+      "fetched_at": "2026-09-10T20:21:34.664229+00:00",
       "sha256": "9173fa7bfc40900080b167be86897899912ce55ff61ad1072f71a5eab69e80ce",
       "source_url": "https://code.claude.com/docs/en/sandboxing"
     },
     "scheduled-tasks.md": {
-      "bytes": 17141,
-      "fetched_at": "2026-09-10T10:23:35.037634+00:00",
-      "sha256": "d53b7df219de27767f0f1acd5040eafa2e154c5c9998b0e56e1a07295669f6e3",
+      "bytes": 17714,
+      "fetched_at": "2026-09-10T20:21:36.076690+00:00",
+      "sha256": "5f3f6064bcdc5c454244a49e2ac80652cd3f4e891090d544b85cb155f5cdbaa3",
       "source_url": "https://code.claude.com/docs/en/scheduled-tasks"
     },
     "security-guidance.md": {
       "bytes": 20529,
-      "fetched_at": "2026-09-10T10:23:36.095381+00:00",
+      "fetched_at": "2026-09-10T20:21:39.415272+00:00",
       "sha256": "5805edbe465de5277faa6e5972eaaf486ff9fc65695ad06d5e649f6f71105a00",
       "source_url": "https://code.claude.com/docs/en/security-guidance"
     },
     "security.md": {
       "bytes": 12878,
-      "fetched_at": "2026-09-10T10:23:35.584633+00:00",
+      "fetched_at": "2026-09-10T20:21:36.974544+00:00",
       "sha256": "b1e29041159b512f992ed30ec0b081fb01ab465fc47166190002df9ca13f8638",
       "source_url": "https://code.claude.com/docs/en/security"
     },
     "self-hosted-environments-configuration.md": {
       "bytes": 53114,
-      "fetched_at": "2026-09-10T10:23:38.780864+00:00",
+      "fetched_at": "2026-09-10T20:21:41.485920+00:00",
       "sha256": "ea12d20d5a276a8ea1fdead3ba100fa8021a10d8d5e0e7e08c6c65b7b6e34e9d",
       "source_url": "https://code.claude.com/docs/en/self-hosted-environments-configuration"
     },
     "self-hosted-environments-deploy.md": {
       "bytes": 60811,
-      "fetched_at": "2026-09-10T10:23:39.463674+00:00",
+      "fetched_at": "2026-09-10T20:21:42.207930+00:00",
       "sha256": "ca956e16e1ac95806858a845c8e1ff60a4b2c8a11397404d430c16db3753ac5c",
       "source_url": "https://code.claude.com/docs/en/self-hosted-environments-deploy"
     },
     "self-hosted-environments-identity.md": {
       "bytes": 25388,
-      "fetched_at": "2026-09-10T10:23:39.964464+00:00",
+      "fetched_at": "2026-09-10T20:21:42.989698+00:00",
       "sha256": "04787fc3c8280d8a5e80d75283aa00e1a788cea90ce17924ff07738e488c2d03",
       "source_url": "https://code.claude.com/docs/en/self-hosted-environments-identity"
     },
     "self-hosted-environments-quickstart.md": {
       "bytes": 11691,
-      "fetched_at": "2026-09-10T10:23:40.508238+00:00",
+      "fetched_at": "2026-09-10T20:21:44.565792+00:00",
       "sha256": "e6e70c877cc20278dced5c63fc014f033650c51e0de6cccf1d8165bdd72e0d8b",
       "source_url": "https://code.claude.com/docs/en/self-hosted-environments-quickstart"
     },
     "self-hosted-environments-reference.md": {
       "bytes": 86490,
-      "fetched_at": "2026-09-10T10:23:41.972414+00:00",
+      "fetched_at": "2026-09-10T20:21:45.285241+00:00",
       "sha256": "4739e5cb92adb1b34c04e2d5a81861d3f93cd8358bc7504aa5de16b03690d782",
       "source_url": "https://code.claude.com/docs/en/self-hosted-environments-reference"
     },
     "self-hosted-environments-testing.md": {
       "bytes": 15651,
-      "fetched_at": "2026-09-10T10:23:42.501103+00:00",
+      "fetched_at": "2026-09-10T20:21:46.656647+00:00",
       "sha256": "1c0cf02a5024078b7cd182a0b4e62226b28c7e47299da19d1e9441b631b62523",
       "source_url": "https://code.claude.com/docs/en/self-hosted-environments-testing"
     },
     "self-hosted-environments.md": {
       "bytes": 20071,
-      "fetched_at": "2026-09-10T10:23:38.177694+00:00",
+      "fetched_at": "2026-09-10T20:21:40.220348+00:00",
       "sha256": "5898f4265c7f77f2a4c0212d1eb2f8d9c7db8182879be2b100839f307555e9ce",
       "source_url": "https://code.claude.com/docs/en/self-hosted-environments"
     },
     "server-managed-settings.md": {
       "bytes": 46110,
-      "fetched_at": "2026-09-10T10:23:43.126056+00:00",
+      "fetched_at": "2026-09-10T20:21:47.065513+00:00",
       "sha256": "8e7a0e4545e8e12507ad6ac1004e608e1d02179be6b8435f265f07d0f195ef0c",
       "source_url": "https://code.claude.com/docs/en/server-managed-settings"
     },
     "sessions.md": {
       "bytes": 38784,
-      "fetched_at": "2026-09-10T10:23:43.484970+00:00",
+      "fetched_at": "2026-09-10T20:21:47.962358+00:00",
       "sha256": "ded87757c4421ed8ccafabba28b541781ee3d0e360f4b543acc3b04c02b8ec93",
       "source_url": "https://code.claude.com/docs/en/sessions"
     },
     "settings-example.md": {
       "bytes": 15669,
-      "fetched_at": "2026-09-10T10:23:44.743747+00:00",
+      "fetched_at": "2026-09-10T20:21:49.173395+00:00",
       "sha256": "86e06ed3ff05f33354094cf76fa5d2d51cb0ea6ee23e4a690c69fdb01a640afa",
       "source_url": "https://code.claude.com/docs/en/settings-example"
     },
     "settings-reference.md": {
-      "bytes": 434670,
-      "fetched_at": "2026-09-10T10:23:45.140640+00:00",
-      "sha256": "ca8028b4bef6b527283a2bf08e4b8fb9f8513f4be3958250b9152be402f26386",
+      "bytes": 435134,
+      "fetched_at": "2026-09-10T20:21:49.699478+00:00",
+      "sha256": "811cfad7d21b8ebbbd64aeb288e903c6720594286d2a21d2b787639b7ab0ac1b",
       "source_url": "https://code.claude.com/docs/en/settings-reference"
     },
     "settings.md": {
       "bytes": 58564,
-      "fetched_at": "2026-09-10T10:23:43.844964+00:00",
+      "fetched_at": "2026-09-10T20:21:48.617087+00:00",
       "sha256": "21ae4e9c5eb6ba961e39b6d2215344bd301f2a6313cbc18c4f107fdd3f73ff01",
       "source_url": "https://code.claude.com/docs/en/settings"
     },
     "setup.md": {
       "bytes": 31070,
-      "fetched_at": "2026-09-10T10:23:45.795821+00:00",
+      "fetched_at": "2026-09-10T20:21:50.642328+00:00",
       "sha256": "519f37d769814f3bb872b982a7718d2d9fc47eea934be4aa8b384c31cfb38083",
       "source_url": "https://code.claude.com/docs/en/setup"
     },
     "skills.md": {
-      "bytes": 109647,
-      "fetched_at": "2026-09-10T10:23:47.036950+00:00",
-      "sha256": "d50b199a07603cd17f157e1bd8f4438d2bc0a97402f6c1596b7c815a01ccab6d",
+      "bytes": 110484,
+      "fetched_at": "2026-09-10T20:21:51.036161+00:00",
+      "sha256": "92f568c9ad872e31846d9bdd796c60f39a9dbb6a54bc0813cc4055247983fd29",
       "source_url": "https://code.claude.com/docs/en/skills"
     },
     "slack.md": {
       "bytes": 15675,
-      "fetched_at": "2026-09-10T10:23:47.847887+00:00",
+      "fetched_at": "2026-09-10T20:21:52.002255+00:00",
       "sha256": "b47ea831ba59427cdccc99002e750ff9d6c2f7ec7c6d3b203eebcd5aad5f0407",
       "source_url": "https://code.claude.com/docs/en/slack"
     },
     "statusline.md": {
       "bytes": 79133,
-      "fetched_at": "2026-09-10T10:23:48.500897+00:00",
+      "fetched_at": "2026-09-10T20:21:52.692887+00:00",
       "sha256": "25714ae87efd73e8e4306f76fde76471ba55cb1a50ce48d4126baa0731d1cbd1",
       "source_url": "https://code.claude.com/docs/en/statusline"
     },
     "sub-agents.md": {
       "bytes": 113078,
-      "fetched_at": "2026-09-10T10:23:48.864287+00:00",
+      "fetched_at": "2026-09-10T20:21:53.056425+00:00",
       "sha256": "73532b0b6accc67223319be1b24adec1e3b41a9d96a580770694ce718437d2bc",
       "source_url": "https://code.claude.com/docs/en/sub-agents"
     },
     "terminal-config.md": {
       "bytes": 26456,
-      "fetched_at": "2026-09-10T10:23:49.215792+00:00",
+      "fetched_at": "2026-09-10T20:21:54.254345+00:00",
       "sha256": "1e5f700df62e014ebb0e7cd1524ab61151744128cdb843eefd6ce39af714204e",
       "source_url": "https://code.claude.com/docs/en/terminal-config"
     },
     "third-party-integrations.md": {
-      "bytes": 13928,
-      "fetched_at": "2026-09-10T10:23:50.192598+00:00",
-      "sha256": "32bbffbc078f85a6c9a1c72d76f93e1babf5bbd466dcd988c162dade74ecf19b",
+      "bytes": 13610,
+      "fetched_at": "2026-09-10T20:21:54.938494+00:00",
+      "sha256": "5944e5c095d12e5e65938933d9384a6b4d953a9b8261570eed34a09404184829",
       "source_url": "https://code.claude.com/docs/en/third-party-integrations"
     },
     "tools-reference.md": {
-      "bytes": 106766,
-      "fetched_at": "2026-09-10T10:23:50.599109+00:00",
-      "sha256": "6f4311f69231cc54b54ae9deced919c7937f3545f182bf352bb92d38ce58c1e2",
+      "bytes": 106357,
+      "fetched_at": "2026-09-10T20:21:55.639078+00:00",
+      "sha256": "99a2854ac812e07d3285a40ddb8f770a7258dab8f95872e9823905d34e4c64b3",
       "source_url": "https://code.claude.com/docs/en/tools-reference"
     },
     "troubleshoot-install.md": {
       "bytes": 63280,
-      "fetched_at": "2026-09-10T10:23:51.402073+00:00",
+      "fetched_at": "2026-09-10T20:21:56.292992+00:00",
       "sha256": "c83d61a9b307685768a93997521188fc5ff121e43600061575eada47bfd2e639",
       "source_url": "https://code.claude.com/docs/en/troubleshoot-install"
     },
     "troubleshooting.md": {
       "bytes": 13819,
-      "fetched_at": "2026-09-10T10:23:51.786003+00:00",
+      "fetched_at": "2026-09-10T20:21:56.913733+00:00",
       "sha256": "8c42670f513efbb5b1f402ac1873a4b94462aa16e58dad79866ee88ab6792d1a",
       "source_url": "https://code.claude.com/docs/en/troubleshooting"
     },
     "ultrareview.md": {
       "bytes": 18537,
-      "fetched_at": "2026-09-10T10:23:52.321997+00:00",
+      "fetched_at": "2026-09-10T20:21:57.506417+00:00",
       "sha256": "57bb68ba2d4d0e9e3e3f4e0bf3965f870d4bad62770702da97074c9155de0e2a",
       "source_url": "https://code.claude.com/docs/en/ultrareview"
     },
     "voice-dictation.md": {
       "bytes": 16962,
-      "fetched_at": "2026-09-10T10:23:53.004666+00:00",
+      "fetched_at": "2026-09-10T20:21:58.411879+00:00",
       "sha256": "5ccf72c81a7326a8bad526c0092bf1b3d24802bebcb6c649e3cf90d623f39e4d",
       "source_url": "https://code.claude.com/docs/en/voice-dictation"
     },
     "vs-code.md": {
-      "bytes": 66151,
-      "fetched_at": "2026-09-10T10:23:53.393652+00:00",
-      "sha256": "a0e5b3aa4e3e200ef7e076ea9a4736201d98ff8ec10dba1a4559178bb0d533c3",
+      "bytes": 66381,
+      "fetched_at": "2026-09-10T20:21:58.809926+00:00",
+      "sha256": "94a7c6a70d3b74518f25b67f3c9c570e880f26d490eaa147cc666a939f07231f",
       "source_url": "https://code.claude.com/docs/en/vs-code"
     },
     "web-quickstart.md": {
       "bytes": 22764,
-      "fetched_at": "2026-09-10T10:23:53.967580+00:00",
+      "fetched_at": "2026-09-10T20:21:59.497100+00:00",
       "sha256": "54fca3b95788fb68bcb5692798c9b347415b513919d1c4513d64baf804178fe7",
       "source_url": "https://code.claude.com/docs/en/web-quickstart"
     },
     "whats-new.md": {
       "bytes": 14051,
-      "fetched_at": "2026-09-10T10:23:54.357889+00:00",
+      "fetched_at": "2026-09-10T20:22:00.494088+00:00",
       "sha256": "30c6a1c955d7f66fa30e1fad08d49ff79ae92643906de413a303fd594d741667",
       "source_url": "https://code.claude.com/docs/en/whats-new"
     },
     "whats-new/2026-w13.md": {
       "bytes": 7992,
-      "fetched_at": "2026-09-10T10:23:54.819241+00:00",
+      "fetched_at": "2026-09-10T20:22:01.028606+00:00",
       "sha256": "ed224aa7504b9d2bccb51ae70f3a55f45f9319f6fa9e84c4a22fcd854197b6ef",
       "source_url": "https://code.claude.com/docs/en/whats-new/2026-w13"
     },
     "whats-new/2026-w14.md": {
       "bytes": 7906,
-      "fetched_at": "2026-09-10T10:23:55.204384+00:00",
+      "fetched_at": "2026-09-10T20:22:01.577475+00:00",
       "sha256": "cfd2170641de2347d5d14d76ad8ec787d0cf8cf61a8a9b6971a700c099bd8715",
       "source_url": "https://code.claude.com/docs/en/whats-new/2026-w14"
     },
     "whats-new/2026-w15.md": {
       "bytes": 7364,
-      "fetched_at": "2026-09-10T10:23:55.587013+00:00",
+      "fetched_at": "2026-09-10T20:22:02.157169+00:00",
       "sha256": "282687bbdbe4b964dc44ecfe2dc4a5e1e05603fc16309b9c51e520a25e6d2b39",
       "source_url": "https://code.claude.com/docs/en/whats-new/2026-w15"
     },
     "whats-new/2026-w16.md": {
       "bytes": 8932,
-      "fetched_at": "2026-09-10T10:23:55.975594+00:00",
+      "fetched_at": "2026-09-10T20:22:02.727954+00:00",
       "sha256": "cef88008fa8788cc06714b7bfe784cb9a237e0f78a7f25fd2a2a98e8ef0c9704",
       "source_url": "https://code.claude.com/docs/en/whats-new/2026-w16"
     },
     "whats-new/2026-w17.md": {
       "bytes": 7272,
-      "fetched_at": "2026-09-10T10:23:56.379032+00:00",
+      "fetched_at": "2026-09-10T20:22:03.733885+00:00",
       "sha256": "973f7c7c7430178c62d52865f989d560aae6df76a80dcea301d7fe3087843e8c",
       "source_url": "https://code.claude.com/docs/en/whats-new/2026-w17"
     },
     "whats-new/2026-w18.md": {
       "bytes": 6692,
-      "fetched_at": "2026-09-10T10:23:56.748861+00:00",
+      "fetched_at": "2026-09-10T20:22:04.313604+00:00",
       "sha256": "8ba891ebc6152a8185e5f7475f9ec55c277ee348e6c8c1c8b29d0585d2812c68",
       "source_url": "https://code.claude.com/docs/en/whats-new/2026-w18"
     },
     "whats-new/2026-w19.md": {
       "bytes": 4609,
-      "fetched_at": "2026-09-10T10:23:57.125223+00:00",
+      "fetched_at": "2026-09-10T20:22:05.038427+00:00",
       "sha256": "6adcc16ab8c4acf12e3a36ac273013e6e17dc9f20a40f52ae27cc2f9e2d4220d",
       "source_url": "https://code.claude.com/docs/en/whats-new/2026-w19"
     },
     "whats-new/2026-w20.md": {
       "bytes": 6858,
-      "fetched_at": "2026-09-10T10:23:57.525827+00:00",
+      "fetched_at": "2026-09-10T20:22:06.478723+00:00",
       "sha256": "6adb77dd7f1009b3890ab1d5c64042e231933e7abd3e1936a663463286acd1c5",
       "source_url": "https://code.claude.com/docs/en/whats-new/2026-w20"
     },
     "whats-new/2026-w21.md": {
       "bytes": 4333,
-      "fetched_at": "2026-09-10T10:23:57.970778+00:00",
+      "fetched_at": "2026-09-10T20:22:07.237157+00:00",
       "sha256": "0d91a4159d2aa6359cf929701cb39759ad7f8910a39de76b355d27bfd0921e46",
       "source_url": "https://code.claude.com/docs/en/whats-new/2026-w21"
     },
     "whats-new/2026-w22.md": {
       "bytes": 7371,
-      "fetched_at": "2026-09-10T10:23:58.348023+00:00",
+      "fetched_at": "2026-09-10T20:22:07.773011+00:00",
       "sha256": "9ebbf9240f833d3933766850c066734b62111dbe59ab34df416065f5570438ef",
       "source_url": "https://code.claude.com/docs/en/whats-new/2026-w22"
     },
     "whats-new/2026-w23.md": {
       "bytes": 6586,
-      "fetched_at": "2026-09-10T10:23:58.720889+00:00",
+      "fetched_at": "2026-09-10T20:22:08.350324+00:00",
       "sha256": "226b64f003432d664b840391fbfc0bbe06ca73f1480e18b5f5b6943e821daba4",
       "source_url": "https://code.claude.com/docs/en/whats-new/2026-w23"
     },
     "whats-new/2026-w24.md": {
       "bytes": 5354,
-      "fetched_at": "2026-09-10T10:23:59.107088+00:00",
+      "fetched_at": "2026-09-10T20:22:10.217456+00:00",
       "sha256": "7a2ee84a1e8ef73acccdc418876e8e5182918c40eebce6ff1e5ee7c043682556",
       "source_url": "https://code.claude.com/docs/en/whats-new/2026-w24"
     },
     "whats-new/2026-w25.md": {
       "bytes": 5365,
-      "fetched_at": "2026-09-10T10:23:59.508381+00:00",
+      "fetched_at": "2026-09-10T20:22:10.760722+00:00",
       "sha256": "9423716d28a7bca0fb8794bb207945d8082a516221978db16da3e35de7603c7d",
       "source_url": "https://code.claude.com/docs/en/whats-new/2026-w25"
     },
     "whats-new/2026-w26.md": {
       "bytes": 4456,
-      "fetched_at": "2026-09-10T10:23:59.887279+00:00",
+      "fetched_at": "2026-09-10T20:22:11.310501+00:00",
       "sha256": "daa492028b273039d527cdd5cb4fd93e0d8361e64b35e0e1941ad6dae2d46b9e",
       "source_url": "https://code.claude.com/docs/en/whats-new/2026-w26"
     },
     "whats-new/2026-w27.md": {
       "bytes": 6804,
-      "fetched_at": "2026-09-10T10:24:00.261423+00:00",
+      "fetched_at": "2026-09-10T20:22:11.885708+00:00",
       "sha256": "5654dcbca409024332797dcc36f6089252b026353c54fa2c93703a66b0819870",
       "source_url": "https://code.claude.com/docs/en/whats-new/2026-w27"
     },
     "whats-new/2026-w28.md": {
       "bytes": 4309,
-      "fetched_at": "2026-09-10T10:24:00.667655+00:00",
+      "fetched_at": "2026-09-10T20:22:12.410265+00:00",
       "sha256": "181a056217f5115c1f17afc54f2051f2964dd7912fbf26d8269f4478b50a3058",
       "source_url": "https://code.claude.com/docs/en/whats-new/2026-w28"
     },
     "whats-new/2026-w29.md": {
       "bytes": 5449,
-      "fetched_at": "2026-09-10T10:24:01.049604+00:00",
+      "fetched_at": "2026-09-10T20:22:13.073941+00:00",
       "sha256": "118acce134ea5a471a45c714615904a70330fe7e8d3b70d9091fd2060cd1bb0e",
       "source_url": "https://code.claude.com/docs/en/whats-new/2026-w29"
     },
     "whats-new/2026-w30.md": {
       "bytes": 7002,
-      "fetched_at": "2026-09-10T10:24:01.431891+00:00",
+      "fetched_at": "2026-09-10T20:22:13.653032+00:00",
       "sha256": "459a4fd02f2d8def22603001222056cdfbd81dee4ad35e851f10e7be42e9ffeb",
       "source_url": "https://code.claude.com/docs/en/whats-new/2026-w30"
     },
     "whats-new/2026-w32.md": {
       "bytes": 8737,
-      "fetched_at": "2026-09-10T10:24:01.806291+00:00",
+      "fetched_at": "2026-09-10T20:22:14.578181+00:00",
       "sha256": "de203d78c64f3538ec3ef388dcdb2550914243ffba0ed1e4a2550f8d41f14930",
       "source_url": "https://code.claude.com/docs/en/whats-new/2026-w32"
     },
     "whats-new/2026-w33.md": {
       "bytes": 7554,
-      "fetched_at": "2026-09-10T10:24:02.196352+00:00",
+      "fetched_at": "2026-09-10T20:22:15.210861+00:00",
       "sha256": "be5c3e889a7836d2aff2aa080ff8115861b47e0fc87764e64f844b3cd80314f6",
       "source_url": "https://code.claude.com/docs/en/whats-new/2026-w33"
     },
     "whats-new/2026-w34.md": {
       "bytes": 8432,
-      "fetched_at": "2026-09-10T10:24:02.623137+00:00",
+      "fetched_at": "2026-09-10T20:22:15.716484+00:00",
       "sha256": "f60234a2a7d0b415f4c379dd923f040bc43bf854fc3cb97a2612ff124f94d985",
       "source_url": "https://code.claude.com/docs/en/whats-new/2026-w34"
     },
     "workflows.md": {
-      "bytes": 39615,
-      "fetched_at": "2026-09-10T10:24:03.272966+00:00",
-      "sha256": "7bcd5b7fb045d11fac39e8ccf6025d38c79e8df6dfa8862d9bbab81995ae2dfd",
+      "bytes": 39814,
+      "fetched_at": "2026-09-10T20:22:16.315049+00:00",
+      "sha256": "f9feb5ce790118eaaf468bee35b915b04323c9b5d7c66763fde997953e3010d6",
       "source_url": "https://code.claude.com/docs/en/workflows"
     },
     "worktrees.md": {
       "bytes": 36635,
-      "fetched_at": "2026-09-10T10:24:04.587963+00:00",
+      "fetched_at": "2026-09-10T20:22:16.711986+00:00",
       "sha256": "b99e19d466ffbd9677ea3003ba478c133eec4e265679a407166aec3da13db080",
       "source_url": "https://code.claude.com/docs/en/worktrees"
     },
     "zero-data-retention.md": {
       "bytes": 9038,
-      "fetched_at": "2026-09-10T10:24:05.066757+00:00",
+      "fetched_at": "2026-09-10T20:22:17.248087+00:00",
       "sha256": "d52b165461f9550eb4c1fbee59c179875a3d2f78ceafd57bf990b2a99b8e4d7b",
       "source_url": "https://code.claude.com/docs/en/zero-data-retention"
     }

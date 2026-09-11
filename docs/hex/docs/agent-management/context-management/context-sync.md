@@ -17,6 +17,7 @@ Supported resources:
 
 * [Guides](/docs/agent-management/context-management/guides#workspace-guide-library) - including the [workspace context file](/docs/agent-management/context-management/guides#workspace-context)
 * [Semantic projects](/docs/connect-to-data/semantic-models/intro-to-semantic-models) sourced from [Hex](/docs/connect-to-data/semantic-models/semantic-authoring/semantic-authoring-overview#sync-from-github-optional), [Cube](/docs/connect-to-data/semantic-models/semantic-model-sync/cube), or [dbt MetricFlow](/docs/connect-to-data/semantic-models/semantic-model-sync/dbt-metricflow)
+* [Evals](/docs/agent-management/evals)
 
 tip
 
@@ -24,112 +25,64 @@ Context Sync does not apply to [Snowflake Semantic Views](/docs/connect-to-data/
 
 ## Create a configuration file[​](#create-a-configuration-file "Direct link to Create a configuration file")
 
-In your repository, create a `hex_context.config.json` file in the repository root that points to the resources you want to sync.
+In your repository, create a `hex_context.config.yaml` (or `.json`) file in the repository root that points to the resources you want to sync.
 
 Example:
 
 ```
-{
+guides:
 
 
 
-"guides": [
+- path: path/to/my/guide.md
 
 
 
-{
+- path: path_i_want_to_change.md
 
 
 
-"path": "path/to/my/guide.md"
+hexFilePath: path/that/will/show/up/in/hex.md
 
 
 
-},
+- pattern: guides/*.md
 
 
 
-{
+transform:
 
 
 
-"path": "path_i_want_to_change.md",
+stripFolders: true
 
 
 
-"hexFilePath": "path/that/will/show/up/in/hex.md"
+- pattern: guides/**/*.md
 
 
 
-},
+semanticProjects:
 
 
 
-{
+- id: <semantic-project-uuid>
 
 
 
-"pattern": "guides/*.md",
+path: path/to/dir
 
 
 
-"transform": {
+evals:
 
 
 
-"stripFolders": true
+suites:
 
 
 
-}
-
-
-
-},
-
-
-
-{
-
-
-
-"pattern": "guides/**/*.md"
-
-
-
-}
-
-
-
-],
-
-
-
-"semanticProjects": [
-
-
-
-{
-
-
-
-"id": "<semantic-project-uuid>",
-
-
-
-"path": "path/to/dir"
-
-
-
-}
-
-
-
-]
-
-
-
-}
+- path: evals/suite.yaml
 ```
 
 ### Guides[​](#guides "Direct link to Guides")
@@ -137,12 +90,12 @@ Example:
 There are two ways to point to guides: paths or patterns.
 
 * `path` - the path to a single file.
-  + `{ "path": "guides/arr.md" }`
+  + `path: "guides/arr.md"`
   + Optionally, specify `"hexFilePath"` if you want the path that appears in Hex to be different from its path in your repository.
 * `pattern` - a glob that matches multiple files
-  + `{ "pattern": "guides/*.md" }` matches all `.md` files directly inside a `guides` folder.
-  + `{ "pattern": "guides/**/*.md" }` matches files in subdirectories.
-  + Optionally, specify `"transform": { "stripFolders": true }` to rewrite the uploaded path to only include the file name, ignoring the folder path (e.g. `folder1/folder2/guide.md` becomes `guide.md`).
+  + `pattern: "guides/*.md"` matches all `.md` files directly inside a `guides` folder.
+  + `pattern: "guides/**/*.md"` matches files in subdirectories.
+  + Optionally, specify `transform:` with `stripFolders: true` to rewrite the uploaded path to only include the file name, ignoring the folder path (e.g. `folder1/folder2/guide.md` becomes `guide.md`).
 
 tip
 
@@ -156,6 +109,15 @@ Each entry in `semanticProjects` requires:
 * `path` - the path to the local directory containing that project's semantic model and view files.
 
 Before syncing a semantic project this way, make sure it's prepared correctly for import - see [Syncing Hex semantic models](/docs/connect-to-data/semantic-models/semantic-authoring/semantic-authoring-overview#sync-from-github-optional), [Syncing from Cube](/docs/connect-to-data/semantic-models/semantic-model-sync/cube), or [Syncing from dbt MetricFlow](/docs/connect-to-data/semantic-models/semantic-model-sync/dbt-metricflow) for details on required metadata and supported features.
+
+### Evals[​](#evals "Direct link to Evals")
+
+Each entry in `evals.suites` either a path or a pattern:
+
+* `path` - the path to the [eval suite yaml file](/docs/agent-management/evals#write-an-eval-suite)
+* `pattern` - a glob that matches multiple eval suite yaml files
+  + `pattern: "evals/*.yaml"` matches all `.yaml` files directly inside a `evals` folder.
+  + `pattern: "evals/**/*.yaml"` matches files in subdirectories.
 
 ## Sync resources with the CLI[​](#sync-resources-with-the-cli "Direct link to Sync resources with the CLI")
 
@@ -266,7 +228,7 @@ token: ${{ secrets.HEX_API_TOKEN }}
 comment_on_pr: true
 ```
 
-After you add the workflow, changes to the guides and semantic projects defined in `hex_context.config.json` are synced automatically. You can review and debug runs from the **Actions** tab in the GitHub repository by selecting the `hex_context_toolkit` workflow. On Pull Requests, the workflow will add a comment summarizing any changed resources, along with a link to test them in a thread preview.
+After you add the workflow, changes to the guides and semantic projects defined in `hex_context.config.yaml` are synced automatically. You can review and debug runs from the **Actions** tab in the GitHub repository by selecting the `hex_context_toolkit` workflow. On Pull Requests, the workflow will add a comment summarizing any changed resources, along with a link to test them in a thread preview.
 
 For in-depth documentation on workflow configuration, see the [Hex Context Toolkit GitHub Action](https://github.com/hex-inc/action-context-toolkit/blob/main/README.md).
 
@@ -338,7 +300,7 @@ hex context publish "$PREVIEW_ID"
 fi
 ```
 
-If your config file isn't at the default location (`./hex_context.config.json`), pass `--config-path <path>` to `hex context preview`.
+If your config file isn't at the default location (`./hex_context.config.yaml`), pass `--config-path <path>` to `hex context preview`.
 
 ## Migrate from the Semantic Model Sync GitHub Action[​](#migrate-from-the-semantic-model-sync-github-action "Direct link to Migrate from the Semantic Model Sync GitHub Action")
 
@@ -346,7 +308,7 @@ caution
 
 The GitHub Actions workflow described in [Semantic Model Sync](/docs/connect-to-data/semantic-models/semantic-model-sync/intro) is deprecated for semantic projects. This workflow calls Hex's `IngestSemanticModel` API which publishes changes without the chance to first preview them in the app. Use the Hex Context Toolkit GitHub Action or the Hex CLI context commands described on this page instead.
 
-To migrate to Context Sync, add the semantic project's `id` and the `path` to its model files to your `hex_context.config.json`. Replace any existing workspace token(s) with a new one that has the **Guides: Read, Write** and **Semantic layer sync** scopes. Use the Hex Context Toolkit GitHub Action or the Hex CLI to stage and publish changes.
+To migrate to Context Sync, add the semantic project's `id` and the `path` to its model files to your `hex_context.config.yaml`. Replace any existing workspace token(s) with a new one that has the **Guides: Read, Write** and **Semantic layer sync** scopes. Use the Hex Context Toolkit GitHub Action or the Hex CLI to stage and publish changes.
 
 All of the advice about preparing an external semantic layer for import into Hex still applies, since it reflects how Hex translates each spec's concepts (not how the files get uploaded):
 
@@ -360,6 +322,7 @@ This deprecation doesn't apply to [Snowflake Semantic Views](/docs/connect-to-da
 * [Create a configuration file](#create-a-configuration-file)
   + [Guides](#guides)
   + [Semantic projects](#semantic-projects)
+  + [Evals](#evals)
 * [Sync resources with the CLI](#sync-resources-with-the-cli)
 * [Sync automatically in CI](#sync-automatically-in-ci)
   + [Create a workspace token](#create-a-workspace-token)
