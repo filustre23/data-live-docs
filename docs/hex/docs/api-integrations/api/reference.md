@@ -3,7 +3,6 @@
 * postCreateProject
 * getGetQueriedTables
 * patchEditProjectSharingCollections
-* patchEditProjectSharingGroups
 * postIngestSemanticProject
 * patchUpdateSemanticProject
 * delCancelRun
@@ -32,6 +31,7 @@
 * postCreateCell
 * getListCells
 * getGetChartImageFromLogic
+* patchEditProjectSharingGroups
 * patchEditProjectSharingUsers
 * patchEditProjectSharingOrgAndPublic
 * postExportProject
@@ -679,171 +679,6 @@ Copy
 * "errors": [
   + {
     - "collectionIds": [
-      * "497f6eca-6276-4993-bfeb-53cbbbba6f08"],
-    - "reason": "string"}]
-
-}`
-
-## EditProjectSharingGroups
-
-Add groups to a project or update/remove their project sharing access.
-For projects, use `CAN_VIEW` to grant the UI permission labeled "Can explore".
-Use `APP_ONLY` to grant the UI permission labeled "Can view app".
-
-##### Authorizations:
-
-*bearerAuth*
-
-##### path Parameters
-
-|  |  |
-| --- | --- |
-| projectId required | string <uuid>  (ProjectId) ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}...Show pattern  Unique ID for a Hex project. This can be found in the Variables side bar of the Logic View of a project, or by visiting the Project, and copying the UUID after `hex` in the URL. |
-
-##### Request Body schema: application/json required
-
-|  |  |
-| --- | --- |
-| sharing required | object |
-| |  |  | | --- | --- | | upsert required | object | | |  |  | | --- | --- | | groups required | Array of objects  <= 25 items | | Array (<= 25 items)  |  |  | | --- | --- | | access required | string (AccessLevelEnum)  Enum: "NONE" "APP\_ONLY" "CAN\_VIEW" "CAN\_EDIT" "FULL\_ACCESS" | | group required | object | | | | | | |
-
-### Responses
-
-**200**
-
-**400**
-
-**403**
-
-**404**
-
-**500**
-
-patch/v1/projects/{projectId}/sharing/groups
-
-https://app.hex.tech/api/v1/projects/{projectId}/sharing/groups
-
-### Request samples
-
-* Payload
-
-Content type
-
-application/json
-
-Copy
-
- Expand all  Collapse all
-
-`{
-
-* "sharing": {
-  + "upsert": {
-    - "groups": [
-      * {
-        + "access": "NONE",
-        + "group": {
-          - "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08"}}]}}
-
-}`
-
-### Response samples
-
-* 200
-* 400
-* 403
-* 404
-* 500
-
-Content type
-
-application/json
-
-Copy
-
- Expand all  Collapse all
-
-`{
-
-* "project": {
-  + "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
-  + "title": "string",
-  + "description": "string",
-  + "type": "PROJECT",
-  + "creator": {
-    - "email": "string"},
-  + "owner": {
-    - "email": "string"},
-  + "status": {
-    - "name": "string"},
-  + "categories": [
-    - {
-      * "description": "string",
-      * "name": "string"}],
-  + "reviews": {
-    - "required": true},
-  + "analytics": {
-    - "publishedResultsUpdatedAt": "string",
-    - "lastViewedAt": "string",
-    - "appViews": {
-      * "lastThirtyDays": 0,
-      * "lastFourteenDays": 0,
-      * "lastSevenDays": 0,
-      * "allTime": 0}},
-  + "lastEditedAt": "string",
-  + "lastPublishedAt": "string",
-  + "createdAt": "string",
-  + "archivedAt": "string",
-  + "trashedAt": "string",
-  + "schedules": [
-    - {
-      * "cadence": "HOURLY",
-      * "enabled": true,
-      * "hourly": {
-        + "timezone": "string",
-        + "minute": 59},
-      * "daily": {
-        + "timezone": "string",
-        + "minute": 59,
-        + "hour": 23},
-      * "weekly": {
-        + "timezone": "string",
-        + "minute": 59,
-        + "hour": 23,
-        + "dayOfWeek": "SUNDAY"},
-      * "monthly": {
-        + "timezone": "string",
-        + "minute": 59,
-        + "hour": 23,
-        + "day": 1},
-      * "custom": {
-        + "timezone": "string",
-        + "cron": "string"}}],
-  + "sharing": {
-    - "users": [
-      * {
-        + "access": "NONE",
-        + "user": {
-          - "email": "string"}}],
-    - "collections": [
-      * {
-        + "access": "NONE",
-        + "collection": {
-          - "name": "string"}}],
-    - "groups": [
-      * {
-        + "access": "NONE",
-        + "group": {
-          - "name": "string"}}],
-    - "workspace": {
-      * "access": "NONE"},
-    - "publicWeb": {
-      * "access": "NONE"},
-    - "support": {
-      * "access": "NONE"}}},
-* "errors": [
-  + {
-    - "groupIds": [
       * "497f6eca-6276-4993-bfeb-53cbbbba6f08"],
     - "reason": "string"}]
 
@@ -2566,3 +2401,203 @@ Copy
 * "reason": "string"
 
 }`
+
+## GetCollection
+
+##### Authorizations:
+
+*bearerAuth*
+
+##### path Parameters
+
+|  |  |
+| --- | --- |
+| collectionId required | string <uuid>  (CollectionId) ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}...Show pattern  Unique ID for a collection. |
+
+### Responses
+
+**200**
+
+**400**
+
+**403**
+
+**500**
+
+get/v1/collections/{collectionId}
+
+https://app.hex.tech/api/v1/collections/{collectionId}
+
+### Response samples
+
+* 200
+* 400
+* 403
+* 500
+
+Content type
+
+application/json
+
+Copy
+
+ Expand all  Collapse all
+
+`{
+
+* "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+* "name": "string",
+* "description": "string",
+* "creator": {
+  + "email": "string",
+  + "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08"},
+* "sharing": {
+  + "users": [
+    - {
+      * "access": "string",
+      * "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08"}],
+  + "groups": [
+    - {
+      * "access": "string",
+      * "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08"}],
+  + "workspace": {
+    - "members": "string"}}
+
+}`
+
+## EditCollection
+
+##### Authorizations:
+
+*bearerAuth*
+
+##### path Parameters
+
+|  |  |
+| --- | --- |
+| collectionId required | string <uuid>  (CollectionId) ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}...Show pattern  Unique ID for a collection. |
+
+##### Request Body schema: application/json required
+
+|  |  |
+| --- | --- |
+| sharing | object |
+| description | string |
+| name | string (Name)   non-empty |
+
+### Responses
+
+**200**
+
+**400**
+
+**403**
+
+**500**
+
+patch/v1/collections/{collectionId}
+
+https://app.hex.tech/api/v1/collections/{collectionId}
+
+### Request samples
+
+* Payload
+
+Content type
+
+application/json
+
+Copy
+
+ Expand all  Collapse all
+
+`{
+
+* "sharing": {
+  + "upsert": {
+    - "users": [
+      * {
+        + "access": "string",
+        + "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08"}],
+    - "groups": [
+      * {
+        + "access": "string",
+        + "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08"}],
+    - "workspace": {
+      * "members": "string"}}},
+* "description": "string",
+* "name": "string"
+
+}`
+
+### Response samples
+
+* 200
+* 400
+* 403
+* 500
+
+Content type
+
+application/json
+
+Copy
+
+ Expand all  Collapse all
+
+`{
+
+* "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+* "name": "string",
+* "description": "string",
+* "creator": {
+  + "email": "string",
+  + "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08"},
+* "sharing": {
+  + "users": [
+    - {
+      * "access": "string",
+      * "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08"}],
+  + "groups": [
+    - {
+      * "access": "string",
+      * "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08"}],
+  + "workspace": {
+    - "members": "string"}}
+
+}`
+
+## ListCollections
+
+##### Authorizations:
+
+*bearerAuth*
+
+##### query Parameters
+
+|  |  |
+| --- | --- |
+| after | any  Default:  null |
+| before | any  Default:  null |
+| limit | integer <int32>  (PageSize)   [ 1 .. 100 ]  Default:  "25"  Number of results to fetch per page for paginated requests |
+| sortBy | string (ListCollectionsSortByEnum)  Value: "NAME" |
+
+### Responses
+
+**200**
+
+**400**
+
+**403**
+
+**500**
+
+get/v1/collections
+
+https://app.hex.tech/api/v1/collections
+
+### Response samples
+
+* 200
+* 400
+* 403
