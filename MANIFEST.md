@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-09-13T02:00+00:00_
+_Generated 2026-09-13T08:32+00:00_
 
-**9 sources, 4465 topics total**
+**9 sources, 4466 topics total**
 
 ## airflow
 
@@ -4439,7 +4439,7 @@ _398 topics_
 
 Upstream: <https://docs.pydantic.dev/>
 
-_90 topics_
+_91 topics_
 
 - `pydantic/api/aliases`
 - `pydantic/api/annotated_handlers`
@@ -4497,6 +4497,7 @@ _90 topics_
 - `pydantic/concepts/validation_decorator`
 - `pydantic/concepts/validators`
 - `pydantic/contributing`
+- `pydantic/enterprise-support`
 - `pydantic/errors/errors`
 - `pydantic/errors/troubleshooting`
 - `pydantic/errors/usage_errors`
