@@ -40,6 +40,11 @@
 * patchUpdateProject
 * getGetProjectRuns
 * postRunProject
+* getGetSuggestion
+* postUpdateSuggestion
+* getListSuggestions
+* postUpdateSuggestionChange
+* postTriggerSuggestionReview
 * postCreateThread
 * getListThreads
 * getGetThread
@@ -2591,13 +2596,3 @@ Copy
 **403**
 
 **500**
-
-get/v1/collections
-
-https://app.hex.tech/api/v1/collections
-
-### Response samples
-
-* 200
-* 400
-* 403

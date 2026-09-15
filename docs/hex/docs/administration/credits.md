@@ -22,13 +22,14 @@ You can view how many credits a given agent task consumed after the task is comp
 
 Below are some illustrative examples:
 
-| Example Prompt | Example Credit Consumption\* |
+| Example Task | Example Credit Consumption\* |
 | --- | --- |
 | How many customers do we have? | ~1 credit |
 | Build me a subscription retention line chart broken out by pricing plan | ~2 credits |
 | What user actions correlate most strongly with 30-day retention? | ~3 credits |
 | Build me a 12-month ARR forecast. | ~5 credits |
 | Build a data app that visualizes sales by product category, and lets users generate sales forecasts by customizing timeframe and subcategory inputs. | ~10 credits |
+| Trigger a Context Studio suggestion refresh via CLI or API | ~0.5 credits |
 
 *\* Actual credit consumption will vary based on your particular data, context, and prompt history.*
 
