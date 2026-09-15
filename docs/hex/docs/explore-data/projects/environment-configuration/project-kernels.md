@@ -62,6 +62,12 @@ info
 
 If a single project run lasts longer than 24 hours, the kernel stops automatically. This means any "run" action must be able to execute all cells within 24 hours, or the kernel will timeout before the run completes.
 
+### Lifetime timeout[​](#lifetime-timeout "Direct link to Lifetime timeout")
+
+Every kernel has a maximum lifetime of 36 hours, regardless of activity. Once a kernel hits this limit, it stops automatically, even if a cell is actively running or the idle timeout hasn't been reached.
+
+This applies across all session types, whether in the Notebook, a Published App, or a scheduled or API-triggered run.
+
 ## Concurrent active kernel limit[​](#concurrent-active-kernel-limit "Direct link to Concurrent active kernel limit")
 
 Each Hex user can have up to 25 concurrent kernels. Workspaces on multi-tenant deployments can have up to 500 concurrent kernels total. If you reach the limit, free capacity by [stopping kernels manually](#stopping-active-kernels). These sessions count toward the limit:
@@ -88,5 +94,6 @@ To view the currently active kernels in a workspace, head to **Settings** > **Co
 * [Kernel timeouts](#kernel-timeouts)
   + [Idle timeout](#idle-timeout)
   + [Execution timeout](#execution-timeout)
+  + [Lifetime timeout](#lifetime-timeout)
 * [Concurrent active kernel limit](#concurrent-active-kernel-limit)
 * [Stopping active kernels](#stopping-active-kernels)
