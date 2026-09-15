@@ -20,7 +20,7 @@ Generative apps are built from cells in the project's [Notebook view](/docs/expl
 
 tip
 
-The Hex agent is capable of building more than just dashboards! Prompt it to build you a slide deck, or an interactive quiz, or whatever you can think of. Its work will be grounded in your workspace's data and context no matter what you ask it to build.
+The Hex agent can build more than dashboards — slide decks, scorecards, simulators, and whatever else you describe. Start from a [sample prompt](/tutorials/ai-best-practices/generative-app-examples) if you want a copy-paste starting point. The agent grounds the app in your workspace data and context either way.
 
 ### From a project[​](#from-a-project "Direct link to From a project")
 

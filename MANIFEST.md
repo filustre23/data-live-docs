@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-09-14T17:23+00:00_
+_Generated 2026-09-15T02:51+00:00_
 
-**9 sources, 4466 topics total**
+**9 sources, 4467 topics total**
 
 ## airflow
 
@@ -3641,7 +3641,7 @@ _155 topics_
 
 Upstream: <https://learn.hex.tech/>
 
-_386 topics_
+_387 topics_
 
 - `hex/changelog`
 - `hex/changelog/2020-12-17`
@@ -3983,6 +3983,7 @@ _386 topics_
 - `hex/tutorials/admin-portal/workspace-setup`
 - `hex/tutorials/admin-resource-portal`
 - `hex/tutorials/ai-best-practices`
+- `hex/tutorials/ai-best-practices/generative-app-examples`
 - `hex/tutorials/ai-best-practices/model-picker-best-practices`
 - `hex/tutorials/ai-best-practices/notebook-agent-best-practices`
 - `hex/tutorials/ai-best-practices/optimizing-data-connections-for-agents`

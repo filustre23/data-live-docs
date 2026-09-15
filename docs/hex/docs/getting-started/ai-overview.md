@@ -19,7 +19,7 @@ info
 
 Use Generative Apps to create fully customizable data apps by describing you want to the Hex agent. Build anything - like powerful dashboards or interactive presentations, all while maintaining governance and observability, leveraging the trusted context of your workspace, and harnessing the infinite flexibility of code-generation.
 
-[Learn more about Generative Apps in docs.](/docs/share-insights/apps/generative-apps)
+[Learn more about Generative apps](/docs/share-insights/apps/generative-apps), or [copy a sample prompt](/tutorials/ai-best-practices/generative-app-examples) to start building.
 
 ### Notebook Agent[​](#notebook-agent "Direct link to Notebook Agent")
 

@@ -20,6 +20,10 @@ A guide for prompting Threads. Touches on how to structure your questions, nail 
 
 A practical guide to building automated, recurring analyses with Tasks. Covers dashboard digests, anomaly detection, and cross-tool summaries.](/tutorials/ai-best-practices/tasks-cookbook)
 
+[## 📄️Generative app examples
+
+Copy-and-paste prompts for creating Generative apps — dashboards, funnels, storyboards, simulators, and more.](/tutorials/ai-best-practices/generative-app-examples)
+
 [## 📄️Optimizing your data connections for the Hex Agent
 
 Best practices for workspace admins to configure data connections so the agent can find the right data quickly and accurately.](/tutorials/ai-best-practices/optimizing-data-connections-for-agents)

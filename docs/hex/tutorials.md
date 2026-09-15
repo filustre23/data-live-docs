@@ -24,6 +24,12 @@ Learn more advanced functionality as an Editor in Hex.
 
 ### Powerful Hex features[​](#powerful-hex-features "Direct link to Powerful Hex features")
 
+### Generative app examples
+
+Copy-and-paste prompts for dashboards, storyboards, simulators, and more.
+
+5-8 min
+
 ### Notebook Agent best practices
 
 Recommended patterns for AI agents in notebooks.
@@ -35,12 +41,6 @@ Recommended patterns for AI agents in notebooks.
 Make SQL queries dynamically respond to user input.
 
 5-8 min
-
-### Query caching for performant projects
-
-Optimize your projects with query caching
-
-8-10 min
 
 ### Connect to data[​](#connect-to-data "Direct link to Connect to data")
 

@@ -716,7 +716,7 @@ You can sync your eval suites stored in your repo via the Hex CLI or third-party
 
 Once you have published your eval suites, you can trigger a one off run using the latest published eval suite or setup a schedule to run this suite on a periodic basis.
 
-You can trigger a run via the CLI using the eval suite ID to run the latest published version of the suite. The eval suite ID is the `id` field in the eval suite YAML definition. If no `id` field is present, the `name` is slugified and converted into an ID (e.g. `name: "My Eval Suite"` becomes `id: my-eval-suite`).
+You can trigger a run via the CLI using the eval suite ID to run the latest published version of the suite. The eval suite ID is the `id` field in the eval suite YAML definition. If no `id` field is present, the `name` is converted into an ID (e.g. `name: "My Eval Suite"` becomes `id: my-eval-suite`).
 
 ```
 hex eval run --suite-id <eval_suite_id>
