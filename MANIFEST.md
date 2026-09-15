@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-09-15T10:53+00:00_
+_Generated 2026-09-15T16:06+00:00_
 
-**9 sources, 4470 topics total**
+**9 sources, 4472 topics total**
 
 ## airflow
 
@@ -2348,7 +2348,7 @@ _195 topics_
 
 Upstream: <https://docs.getdbt.com/docs/>
 
-_1127 topics_
+_1129 topics_
 
 - `dbt-core/best-practices/best-practice-workflows`
 - `dbt-core/best-practices/clone-incremental-models`
@@ -2516,6 +2516,7 @@ _1127 topics_
 - `dbt-core/docs/dbt-ai/mcp-quickstart-oauth`
 - `dbt-core/docs/dbt-ai/mcp-quickstart-remote`
 - `dbt-core/docs/dbt-ai/mcp-troubleshooting`
+- `dbt-core/docs/dbt-ai/package-skills`
 - `dbt-core/docs/dbt-ai/pricing-billing/overview`
 - `dbt-core/docs/dbt-ai/pricing-billing/trial-and-billing`
 - `dbt-core/docs/dbt-ai/setup-local-mcp`
@@ -3283,6 +3284,7 @@ _1127 topics_
 - `dbt-core/reference/project-configs/quoting`
 - `dbt-core/reference/project-configs/require-dbt-version`
 - `dbt-core/reference/project-configs/seed-paths`
+- `dbt-core/reference/project-configs/skill-paths`
 - `dbt-core/reference/project-configs/snapshot-paths`
 - `dbt-core/reference/project-configs/test-paths`
 - `dbt-core/reference/project-configs/version`
