@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-09-16T02:51+00:00_
+_Generated 2026-09-16T10:42+00:00_
 
-**9 sources, 4473 topics total**
+**9 sources, 4475 topics total**
 
 ## airflow
 
@@ -2349,7 +2349,7 @@ _196 topics_
 
 Upstream: <https://docs.getdbt.com/docs/>
 
-_1129 topics_
+_1131 topics_
 
 - `dbt-core/best-practices/best-practice-workflows`
 - `dbt-core/best-practices/clone-incremental-models`
@@ -2439,6 +2439,7 @@ _1129 topics_
 - `dbt-core/docs/build/custom-schemas`
 - `dbt-core/docs/build/custom-target-names`
 - `dbt-core/docs/build/data-tests`
+- `dbt-core/docs/build/dbt-information-schema`
 - `dbt-core/docs/build/dbt-tips`
 - `dbt-core/docs/build/derived-metrics`
 - `dbt-core/docs/build/dimensions`
@@ -3249,6 +3250,7 @@ _1129 topics_
 - `dbt-core/reference/global-configs/user-settings`
 - `dbt-core/reference/global-configs/version-compatibility`
 - `dbt-core/reference/global-configs/warnings`
+- `dbt-core/reference/info-schema`
 - `dbt-core/reference/macro-properties`
 - `dbt-core/reference/metric-properties`
 - `dbt-core/reference/model-configs`
