@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-09-16T10:42+00:00_
+_Generated 2026-09-16T15:59+00:00_
 
-**9 sources, 4475 topics total**
+**9 sources, 4484 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_628 topics_
+_629 topics_
 
 - `anthropic-sdk/about-claude/additional-resources`
 - `anthropic-sdk/about-claude/glossary`
@@ -512,6 +512,7 @@ _628 topics_
 - `anthropic-sdk/cli-sdks-libraries/cli/authentication`
 - `anthropic-sdk/cli-sdks-libraries/cli/quickstart`
 - `anthropic-sdk/cli-sdks-libraries/cli/scripting`
+- `anthropic-sdk/cli-sdks-libraries/cli/sessions-connect`
 - `anthropic-sdk/cli-sdks-libraries/cli/using`
 - `anthropic-sdk/cli-sdks-libraries/libraries/apple-foundation-models`
 - `anthropic-sdk/cli-sdks-libraries/libraries/openai-sdk`
@@ -2349,7 +2350,7 @@ _196 topics_
 
 Upstream: <https://docs.getdbt.com/docs/>
 
-_1131 topics_
+_1139 topics_
 
 - `dbt-core/best-practices/best-practice-workflows`
 - `dbt-core/best-practices/clone-incremental-models`
@@ -2477,6 +2478,7 @@ _1131 topics_
 - `dbt-core/docs/build/ossie-semantic-models`
 - `dbt-core/docs/build/packages`
 - `dbt-core/docs/build/parallel-batch-execution`
+- `dbt-core/docs/build/project-checks`
 - `dbt-core/docs/build/project-variables`
 - `dbt-core/docs/build/projects`
 - `dbt-core/docs/build/python-models`
@@ -3103,13 +3105,17 @@ _1131 topics_
 - `dbt-core/reference/analysis-properties`
 - `dbt-core/reference/artifacts/catalog-json`
 - `dbt-core/reference/artifacts/dbt-artifacts`
+- `dbt-core/reference/artifacts/freshness-json`
 - `dbt-core/reference/artifacts/manifest-json`
 - `dbt-core/reference/artifacts/other-artifacts`
 - `dbt-core/reference/artifacts/run-results-json`
 - `dbt-core/reference/artifacts/sl-manifest`
 - `dbt-core/reference/artifacts/sources-json`
 - `dbt-core/reference/changes-overview`
+- `dbt-core/reference/check-configs`
+- `dbt-core/reference/check-properties`
 - `dbt-core/reference/commands/build`
+- `dbt-core/reference/commands/check`
 - `dbt-core/reference/commands/clean`
 - `dbt-core/reference/commands/clone`
 - `dbt-core/reference/commands/cmd-docs`
@@ -3117,6 +3123,7 @@ _1131 topics_
 - `dbt-core/reference/commands/dbt-environment`
 - `dbt-core/reference/commands/debug`
 - `dbt-core/reference/commands/deps`
+- `dbt-core/reference/commands/freshness`
 - `dbt-core/reference/commands/init`
 - `dbt-core/reference/commands/invocation`
 - `dbt-core/reference/commands/lint`
@@ -3163,6 +3170,7 @@ _1131 topics_
 - `dbt-core/reference/dbt-jinja-functions/fromjson`
 - `dbt-core/reference/dbt-jinja-functions/fromyaml`
 - `dbt-core/reference/dbt-jinja-functions/graph`
+- `dbt-core/reference/dbt-jinja-functions/info-schema`
 - `dbt-core/reference/dbt-jinja-functions/invocation_id`
 - `dbt-core/reference/dbt-jinja-functions/local-md5`
 - `dbt-core/reference/dbt-jinja-functions/log`
@@ -3271,6 +3279,7 @@ _1131 topics_
 - `dbt-core/reference/programmatic-invocations`
 - `dbt-core/reference/project-configs/analysis-paths`
 - `dbt-core/reference/project-configs/asset-paths`
+- `dbt-core/reference/project-configs/check-paths`
 - `dbt-core/reference/project-configs/clean-targets`
 - `dbt-core/reference/project-configs/config-version`
 - `dbt-core/reference/project-configs/dispatch-config`
@@ -3369,6 +3378,7 @@ _1131 topics_
 - `dbt-core/reference/resource-configs/runtime-version`
 - `dbt-core/reference/resource-configs/salesforce-data-cloud-configs`
 - `dbt-core/reference/resource-configs/schema`
+- `dbt-core/reference/resource-configs/selection-filter-on`
 - `dbt-core/reference/resource-configs/severity`
 - `dbt-core/reference/resource-configs/singlestore-configs`
 - `dbt-core/reference/resource-configs/snapshot_meta_column_names`
@@ -3411,7 +3421,6 @@ _1131 topics_
 - `dbt-core/reference/resource-properties/deprecation_date`
 - `dbt-core/reference/resource-properties/description`
 - `dbt-core/reference/resource-properties/external`
-- `dbt-core/reference/resource-properties/freshness`
 - `dbt-core/reference/resource-properties/function-arguments`
 - `dbt-core/reference/resource-properties/identifier`
 - `dbt-core/reference/resource-properties/latest_version`
