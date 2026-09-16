@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-09-16T15:59+00:00_
+_Generated 2026-09-16T20:50+00:00_
 
-**9 sources, 4484 topics total**
+**9 sources, 4493 topics total**
 
 ## airflow
 
@@ -2350,7 +2350,7 @@ _196 topics_
 
 Upstream: <https://docs.getdbt.com/docs/>
 
-_1139 topics_
+_1147 topics_
 
 - `dbt-core/best-practices/best-practice-workflows`
 - `dbt-core/best-practices/clone-incremental-models`
@@ -2530,6 +2530,9 @@ _1139 topics_
 - `dbt-core/docs/dbt-ai/wizard-cli`
 - `dbt-core/docs/dbt-ai/wizard-cli-reference`
 - `dbt-core/docs/dbt-ai/wizard-config`
+- `dbt-core/docs/dbt-ai/wizard-desktop`
+- `dbt-core/docs/dbt-ai/wizard-desktop-settings`
+- `dbt-core/docs/dbt-ai/wizard-desktop-use`
 - `dbt-core/docs/dbt-ai/wizard-headless`
 - `dbt-core/docs/dbt-ai/wizard-how-it-works`
 - `dbt-core/docs/dbt-ai/wizard-ide`
@@ -2664,6 +2667,9 @@ _1139 topics_
 - `dbt-core/docs/get-started-dbt`
 - `dbt-core/docs/install-dbt-extension`
 - `dbt-core/docs/introduction`
+- `dbt-core/docs/lake-compute/compute-faq`
+- `dbt-core/docs/lake-compute/compute-onboarding`
+- `dbt-core/docs/lake-compute/lake-compute`
 - `dbt-core/docs/local/about-local`
 - `dbt-core/docs/local/configure-environment-variables`
 - `dbt-core/docs/local/connect-data-platform/about-dbt-connections`
@@ -2779,6 +2785,7 @@ _1139 topics_
 - `dbt-core/docs/platform/connect-data-platform/connect-apache-spark`
 - `dbt-core/docs/platform/connect-data-platform/connect-azure-synapse-analytics`
 - `dbt-core/docs/platform/connect-data-platform/connect-bigquery`
+- `dbt-core/docs/platform/connect-data-platform/connect-clickhouse`
 - `dbt-core/docs/platform/connect-data-platform/connect-databricks`
 - `dbt-core/docs/platform/connect-data-platform/connect-microsoft-fabric`
 - `dbt-core/docs/platform/connect-data-platform/connect-onehouse`
@@ -3056,6 +3063,7 @@ _1139 topics_
 - `dbt-core/guides/customize-schema-alias`
 - `dbt-core/guides/databricks-qs`
 - `dbt-core/guides/databricks-workflows`
+- `dbt-core/guides/dbt-charts-qs`
 - `dbt-core/guides/dbt-migration-1`
 - `dbt-core/guides/dbt-migration-2`
 - `dbt-core/guides/dbt-migration-3`
@@ -3658,7 +3666,7 @@ _155 topics_
 
 Upstream: <https://learn.hex.tech/>
 
-_387 topics_
+_388 topics_
 
 - `hex/changelog`
 - `hex/changelog/2020-12-17`
@@ -3776,6 +3784,7 @@ _387 topics_
 - `hex/changelog/2026-08-18`
 - `hex/changelog/2026-08-27`
 - `hex/changelog/2026-09-10`
+- `hex/changelog/2026-09-15`
 - `hex/changelog/archive`
 - `hex/changelog/page/10`
 - `hex/changelog/page/11`
