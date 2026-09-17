@@ -42,7 +42,7 @@ tip
 
 All Editors and Explorers in your org have access to the **[Demo] Hex Public Data** connection to explore Hex functionality while you’re getting set up.
 
-## 4. 🤖 Agentic capabilities 🤖[​](#4--agentic-capabilities- "Direct link to 4. 🤖 Agentic capabilities 🤖")
+## 3. 🤖 Agentic capabilities 🤖[​](#3--agentic-capabilities- "Direct link to 3. 🤖 Agentic capabilities 🤖")
 
 Hex’s AI [Agents](/docs/getting-started/ai-overview) can superpower your team across your projects, workspace, and even outside of Hex, all using natural language. Describe an analysis or ask a business question, and an Agent will work with you to explore your data.
 
@@ -53,7 +53,7 @@ Hex’s AI [Agents](/docs/getting-started/ai-overview) can superpower your team 
 * [**Chat with App**](/docs/explore-data/chat-with-app): Interact with published Apps via natural language to view and summarize information, understand the project's underlying logic, and update inputs and filters
 * [**Modeling agent**](/docs/connect-to-data/semantic-models/semantic-authoring/semantic-authoring-overview#modeling-agent): Assists admins and managers in creating and editing semantic projects
 
-## 5. 🎯 Data governance and workspace management 🎯[​](#5--data-governance-and-workspace-management- "Direct link to 5. 🎯 Data governance and workspace management 🎯")
+## 4. 🎯 Data governance and workspace management 🎯[​](#4--data-governance-and-workspace-management- "Direct link to 4. 🎯 Data governance and workspace management 🎯")
 
 As your team grows and starts creating tons of great content, maintaining an organized workspace will become more important. Hex provides Admins a number of tools to keep projects organized at the user and team level. Without implementing these features, it can be difficult for human analysts and agents to find what they're looking for, which can limit collaboration and lead to duplicative work.
 
@@ -83,6 +83,6 @@ Covered the basics of Admin 101? Looking to configure integrations, manage users
 
 * [1. 🤓 User management and permissions 🤓](#1--user-management-and-permissions-)
 * [2. ☁️ Data management and access ☁️](#2-️data-management-and-access-️)
-* [4. 🤖 Agentic capabilities 🤖](#4--agentic-capabilities-)
-* [5. 🎯 Data governance and workspace management 🎯](#5--data-governance-and-workspace-management-)
+* [3. 🤖 Agentic capabilities 🤖](#3--agentic-capabilities-)
+* [4. 🎯 Data governance and workspace management 🎯](#4--data-governance-and-workspace-management-)
   + [💪🏼 Level up your workspace 💪🏼](#-level-up-your-workspace-)

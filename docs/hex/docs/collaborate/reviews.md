@@ -59,7 +59,7 @@ The review request will be marked as either **Pending**, **Changes Requested**, 
 
 Once a review request is in the **Request approved** state, the **Publish** button will become enabled and it will be possible to publish the approved changes.
 
-If the review has not yet been approved, the **Publish** button will be greyed out. If the review is not [required](#marking-a-project-as-requiring-reviews), you can override the review request and publish without approval by clicking the down arrow next to the **Publish** button.
+If the review has not yet been approved, the **Publish** button will be greyed out. If the review is not [required](#required-reviews), you can override the review request and publish without approval by clicking the down arrow next to the **Publish** button.
 
 ## Required reviews[​](#required-reviews "Direct link to Required reviews")
 
@@ -70,7 +70,7 @@ Reviews can be required on a project via one of two mechanisms:
 
 The review outcomes are the same as [optional reviews](#understanding-review-request-states).
 
-However, unlike optional reviews, where any user with **Full access** can publish without approval, only Admins can publish without approval when reviews are required.
+Whether reviews are optional or required, Admins, Managers, and users with **Full access** to the project can override the review request and publish without approval.
 
 ## FAQ[​](#faq "Direct link to FAQ")
 
