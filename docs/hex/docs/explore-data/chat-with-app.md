@@ -37,10 +37,6 @@ Getting started with Chat with App is simple:
 3. **View responses:** The agent will respond with insights, summaries, or an extended analysis based on your request
 4. **Continue in Thread:** Each Chat with App conversation starts a Thread with the app as context. You can view (and continue) the conversation in the Threads interface by clicking the down caret next to the chat title
 
-info
-
-Chat with App is not yet supported for [Generative apps](/docs/share-insights/apps/generative-apps).
-
 ### Open full thread[​](#open-full-thread "Direct link to Open full thread")
 
 Since each chat with app conversation is its own Thread, you can continue every chat with app conversation in the [Threads](/docs/explore-data/threads) interface. Just click the down carat next to the chat title and select "Open full thread".
@@ -63,6 +59,18 @@ To get the best results from Chat with App:
 * **Provide context when needed:** Reference specific data or outputs to provide the agent direction
 * **Iterate with follow-up questions:** Build on previous responses to refine your analysis
 
+### Chat with a Generative app[​](#generative-apps "Direct link to Chat with a Generative app")
+
+On a [Generative app](/docs/share-insights/apps/generative-apps), the agent doesn't automatically see the app as it's rendered on your screen unless you tell it where to look. That means it won't know which filters or sorts you've applied, which input values you've selected, or which part of the app you're looking at. Be specific about which part of the app you're asking about and any state you've applied to it. You can also `@`-mention a specific cell to aim the agent straight at it. Prompts such as these give the agent what it needs:
+
+> Go to slide 2 and tell me why churn spiked in March
+
+> I filtered the pipeline chart to EMEA, which accounts are driving the total?
+
+> Open the revenue tab and summarize the trend
+
+> I set the date input to last quarter, why is revenue down?
+
 #### On this page
 
 * [What the agent can do](#what-the-agent-can-do)
@@ -70,3 +78,4 @@ To get the best results from Chat with App:
   + [Open full thread](#open-full-thread)
   + [Sharing conversations](#sharing-conversations)
 * [Best practices](#best-practices)
+  + [Chat with a Generative app](#generative-apps)

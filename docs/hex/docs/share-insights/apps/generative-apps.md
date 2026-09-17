@@ -168,7 +168,8 @@ While Generative apps are in Beta, some Hex features are not yet supported. Thes
 * [Export as PDF](/docs/share-insights/apps/export-as-pdf)
 * [Google Sheets export](/docs/administration/workspace_settings/workspace-security#send-data-to-google-sheets)
 * [Published app comments](/docs/collaborate/comments#published-app-comments-vs-notebook-comments)
-* [Chat with App](/docs/explore-data/chat-with-app)
+
+[Chat with App](/docs/explore-data/chat-with-app) is supported on Generative apps, and being specific helps the agent do its best work. See [Chat with a Generative app](/docs/explore-data/chat-with-app#generative-apps).
 
 #### On this page
 

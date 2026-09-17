@@ -178,6 +178,7 @@ List all viewable projects, sorted by most recently created first.
 | includeArchived | boolean  Default:  false |
 | includeComponents | boolean  Default:  false |
 | includeTrashed | boolean  Default:  false |
+| includeUnlisted | boolean  Default:  false |
 | includeSharing | boolean  Default:  false |
 | statuses | Array of strings  Default:  "" |
 | categories | Array of strings  Default:  "" |
@@ -2592,7 +2593,3 @@ Copy
 **200**
 
 **400**
-
-**403**
-
-**500**

@@ -201,7 +201,7 @@ When exploring from an app that [allows embedding publisher credentials](/docs/c
 There are a few ways projects can be fine-tuned such that their apps are optimized for exploring:
 
 * Dataframes that feed into charts and pivots should have plenty of columns. When a user explores from a cell in an app, the columns available to them in the field picker are populated by the columns of the dataframe that feeds into the chart or pivot. Having plenty of columns gives the end users choices when it comes to slicing and dicing the data, instead of being limited to the few columns that were used to configure the chart or pivot.
-* Prevent, to the extent possible, aggregation upstream of charts. For example, say that one were to roll up distinct users per day in a dataframe and then chain that into a chart cell. Because distinct users can  ’t be re-aggregated from daily into weekly or monthly grains, exploring from the chart cell won't allow users to accurately slice-and-dice distinct users along other dimensions. Instead, perform aggregations within chart cells or pivot cells in order to allow workflows like these to be possible.
+* Prevent, to the extent possible, aggregation upstream of charts. For example, say that one were to roll up distinct users per day in a dataframe and then chain that into a chart cell. Because distinct users can’t be re-aggregated from daily into weekly or monthly grains, exploring from the chart cell won't allow users to accurately slice-and-dice distinct users along other dimensions. Instead, perform aggregations within chart cells or pivot cells in order to allow workflows like these to be possible.
 
 #### On this page
 

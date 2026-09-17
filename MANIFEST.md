@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-09-16T20:50+00:00_
+_Generated 2026-09-17T02:55+00:00_
 
-**9 sources, 4493 topics total**
+**9 sources, 4494 topics total**
 
 ## airflow
 
@@ -2350,7 +2350,7 @@ _196 topics_
 
 Upstream: <https://docs.getdbt.com/docs/>
 
-_1147 topics_
+_1148 topics_
 
 - `dbt-core/best-practices/best-practice-workflows`
 - `dbt-core/best-practices/clone-incremental-models`
@@ -3221,6 +3221,7 @@ _1147 topics_
 - `dbt-core/reference/function-properties`
 - `dbt-core/reference/global-configs/about-global-configs`
 - `dbt-core/reference/global-configs/adapter-behavior-changes`
+- `dbt-core/reference/global-configs/batch-tests`
 - `dbt-core/reference/global-configs/behavior-changes`
 - `dbt-core/reference/global-configs/behavior-flags/allow_jinja_file_extensions`
 - `dbt-core/reference/global-configs/behavior-flags/enable_truthy_nulls_equals_macro`
