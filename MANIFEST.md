@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-09-21T17:42+00:00_
+_Generated 2026-09-21T21:38+00:00_
 
-**9 sources, 4495 topics total**
+**9 sources, 4500 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_629 topics_
+_634 topics_
 
 - `anthropic-sdk/about-claude/additional-resources`
 - `anthropic-sdk/about-claude/glossary`
@@ -470,6 +470,11 @@ _629 topics_
 - `anthropic-sdk/build-with-claude/claude-on-vertex-ai`
 - `anthropic-sdk/build-with-claude/claude-platform-on-aws`
 - `anthropic-sdk/build-with-claude/compaction`
+- `anthropic-sdk/build-with-claude/compaction-background`
+- `anthropic-sdk/build-with-claude/compaction-keep-recent-turns`
+- `anthropic-sdk/build-with-claude/compaction-on-demand`
+- `anthropic-sdk/build-with-claude/compaction-thinking-blocks`
+- `anthropic-sdk/build-with-claude/compaction-threshold`
 - `anthropic-sdk/build-with-claude/context-editing`
 - `anthropic-sdk/build-with-claude/context-windows`
 - `anthropic-sdk/build-with-claude/effort`
