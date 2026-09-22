@@ -391,11 +391,7 @@ export ANTHROPIC_API_KEY="your-api-key-here"
       </MultiFileExample>
 
       <ForLanguage tab="CLI">
-        `ant apply` prints the environment's ID and records it in `claude-lock.json`. You'll reference it in every session you create.
-
-        <Tip>
-          [`ant apply`](https://platform.claude.com/docs/en/cli-sdks-libraries/cli/apply) accepts more than one file, so you can create the agent and the environment with one command instead: `ant apply coding-assistant.md environment.yaml`.
-        </Tip>
+        [`ant apply`](https://platform.claude.com/docs/en/cli-sdks-libraries/cli/apply) records the environment's ID in `claude-lock.json` too. To create the agent and the environment with one command, pass both files: `ant apply coding-assistant.md environment.yaml`.
       </ForLanguage>
 
       ```python Python
@@ -480,7 +476,7 @@ export ANTHROPIC_API_KEY="your-api-key-here"
       ```
 
       <ForLanguage not="CLI">
-        Save the returned `environment.id`. You'll reference it in every session you create.
+        Save the returned `environment.id` too.
       </ForLanguage>
     </CodeGroup>
 
