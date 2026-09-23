@@ -1351,6 +1351,7 @@ Copy
 | schemaRefreshAccess | string (DataConnectionSchemaRefreshAccess)  Enum: "ADMINS" "USERS\_WITH\_QUERY\_ACCESS" |
 | schemaRefreshSchedule | object (SchemaRefreshScheduleApiResource) |
 | schemaFilters | object |
+| sensitivity | object |
 | allowWritebackCells | boolean |
 | includeMagic | boolean |
 | connectViaSsh | boolean |
@@ -1450,6 +1451,8 @@ Copy
       * "values": [
         + "string"],
       * "matchType": "EXACT"}}},
+* "sensitivity": {
+  + "configured": true},
 * "allowWritebackCells": true,
 * "includeMagic": true,
 * "connectViaSsh": true,
@@ -1491,6 +1494,10 @@ Copy
 * "name": "string",
 * "type": "athena",
 * "description": "string",
+* "sensitivity": {
+  + "configured": true,
+  + "effective": true,
+  + "overrideReason": "USER_SCOPED_OAUTH_RESULTS"},
 * "connectionDetails": {
   + "athena": {
     - "accessKeyId": "string",
@@ -1644,6 +1651,10 @@ Copy
     - "name": "string",
     - "type": "athena",
     - "description": "string",
+    - "sensitivity": {
+      * "configured": true,
+      * "effective": true,
+      * "overrideReason": "USER_SCOPED_OAUTH_RESULTS"},
     - "connectionDetails": {
       * "athena": {
         + "hostname": "string",
@@ -1741,6 +1752,7 @@ Copy
 | schemaRefreshAccess | string (DataConnectionSchemaRefreshAccess)  Enum: "ADMINS" "USERS\_WITH\_QUERY\_ACCESS" |
 | schemaRefreshSchedule | object or null |
 | schemaFilters | object |
+| sensitivity | object |
 | allowWritebackCells | boolean |
 | includeMagic | boolean |
 | connectViaSsh | boolean |
@@ -1840,6 +1852,8 @@ Copy
       * "values": [
         + "string"],
       * "matchType": "EXACT"}}},
+* "sensitivity": {
+  + "configured": true},
 * "allowWritebackCells": true,
 * "includeMagic": true,
 * "connectViaSsh": true,
@@ -1880,6 +1894,10 @@ Copy
 * "name": "string",
 * "type": "athena",
 * "description": "string",
+* "sensitivity": {
+  + "configured": true,
+  + "effective": true,
+  + "overrideReason": "USER_SCOPED_OAUTH_RESULTS"},
 * "connectionDetails": {
   + "athena": {
     - "accessKeyId": "string",
@@ -2027,6 +2045,10 @@ Copy
 * "name": "string",
 * "type": "athena",
 * "description": "string",
+* "sensitivity": {
+  + "configured": true,
+  + "effective": true,
+  + "overrideReason": "USER_SCOPED_OAUTH_RESULTS"},
 * "connectionDetails": {
   + "athena": {
     - "hostname": "string",
@@ -2567,29 +2589,4 @@ Copy
   + "groups": [
     - {
       * "access": "string",
-      * "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08"}],
-  + "workspace": {
-    - "members": "string"}}
-
-}`
-
-## ListCollections
-
-##### Authorizations:
-
-*bearerAuth*
-
-##### query Parameters
-
-|  |  |
-| --- | --- |
-| after | any  Default:  null |
-| before | any  Default:  null |
-| limit | integer <int32>  (PageSize)   [ 1 .. 100 ]  Default:  "25"  Number of results to fetch per page for paginated requests |
-| sortBy | string (ListCollectionsSortByEnum)  Value: "NAME" |
-
-### Responses
-
-**200**
-
-**400**
+      * "id": "497f6eca-627`
