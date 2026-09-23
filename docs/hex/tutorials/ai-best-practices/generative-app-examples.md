@@ -12,9 +12,9 @@ Filter or search for a use case, then copy a prompt and paste it into the App bu
 
 Search generative app examples
 
-AllBusiness reviewsProduct analyticsBoard reportingPlanningVisualization
+AllBusiness reviewsProduct analyticsBoard reportingPlanningVisualizationMarketing
 
-6 examples
+9 examples
 
 Interactive / analysis
 
@@ -109,5 +109,56 @@ Built in
 * D3 animation
 * Hover highlight
 * Timeline playback
+
+View promptCopy prompt
+
+Dashboard
+
+Operating model scorecard
+
+Who it's for
+
+Company-wide operating reviews — how the business turns pipeline into revenue
+
+Built in
+
+* Quarter scrubber with progress indicator
+* Pace-to-target KPI cards with sparklines
+* Left-to-right operating-model metric tree
+* Metric detail with segment filters and what-stands-out callouts
+
+View promptCopy prompt
+
+Interactive / ops
+
+Campaign launcher
+
+Who it's for
+
+Marketing ops launching gated-content or event campaigns across Salesforce and HubSpot
+
+Built in
+
+* Locked 3-step Salesforce → HubSpot stepper
+* Auto campaign naming with uniqueness warnings
+* Sticky launch result panel
+* Searchable recent campaigns table
+
+View promptCopy prompt
+
+Interactive / ops
+
+Audience builder
+
+Who it's for
+
+Marketers building an email audience from contacts with a plain-English prompt or SQL
+
+Built in
+
+* Plain-English or SQL audience input
+* Interpreted filters with field tags
+* Export to CSV, HubSpot list, or SQL
+* Searchable matched-contacts table
 
 View promptCopy prompt

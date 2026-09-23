@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-09-23T15:59+00:00_
+_Generated 2026-09-23T21:01+00:00_
 
-**9 sources, 4501 topics total**
+**9 sources, 4504 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_634 topics_
+_637 topics_
 
 - `anthropic-sdk/about-claude/additional-resources`
 - `anthropic-sdk/about-claude/glossary`
@@ -497,6 +497,7 @@ _634 topics_
 - `anthropic-sdk/build-with-claude/prompt-engineering/prompting-claude-fable-5-1`
 - `anthropic-sdk/build-with-claude/prompt-engineering/prompting-claude-opus-4-8`
 - `anthropic-sdk/build-with-claude/prompt-engineering/prompting-claude-opus-5`
+- `anthropic-sdk/build-with-claude/prompt-engineering/prompting-claude-opus-5-5`
 - `anthropic-sdk/build-with-claude/prompt-engineering/prompting-claude-sonnet-5`
 - `anthropic-sdk/build-with-claude/refusals-and-fallback`
 - `anthropic-sdk/build-with-claude/search-results`
@@ -615,9 +616,10 @@ _634 topics_
 - `anthropic-sdk/models/opus-4-6/overview`
 - `anthropic-sdk/models/opus-4-7/overview`
 - `anthropic-sdk/models/opus-4-8/overview`
-- `anthropic-sdk/models/opus-5/migration-guide`
+- `anthropic-sdk/models/opus-5-5/migration-guide`
+- `anthropic-sdk/models/opus-5-5/overview`
+- `anthropic-sdk/models/opus-5-5/whats-new-opus-5-5`
 - `anthropic-sdk/models/opus-5/overview`
-- `anthropic-sdk/models/opus-5/whats-new-opus-5`
 - `anthropic-sdk/models/overview`
 - `anthropic-sdk/models/sonnet-4-5/overview`
 - `anthropic-sdk/models/sonnet-4-6/overview`
@@ -638,6 +640,7 @@ _634 topics_
 - `anthropic-sdk/release-notes/system-prompts/claude-opus-4-7`
 - `anthropic-sdk/release-notes/system-prompts/claude-opus-4-8`
 - `anthropic-sdk/release-notes/system-prompts/claude-opus-5`
+- `anthropic-sdk/release-notes/system-prompts/claude-opus-5-5`
 - `anthropic-sdk/release-notes/system-prompts/claude-sonnet-3-5`
 - `anthropic-sdk/release-notes/system-prompts/claude-sonnet-3-7`
 - `anthropic-sdk/release-notes/system-prompts/claude-sonnet-4`
