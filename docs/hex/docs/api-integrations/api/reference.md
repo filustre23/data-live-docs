@@ -31,6 +31,7 @@
 * postCreateCell
 * getListCells
 * getGetChartImageFromLogic
+* postBatchUpdateComputeProfile
 * patchEditProjectSharingGroups
 * patchEditProjectSharingUsers
 * patchEditProjectSharingOrgAndPublic
@@ -2587,6 +2588,4 @@ Copy
       * "access": "string",
       * "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08"}],
   + "groups": [
-    - {
-      * "access": "string",
-      * "id": "497f6eca-627`
+    - {`
