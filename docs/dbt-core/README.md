@@ -430,7 +430,6 @@ Mirrored from <https://docs.getdbt.com/docs/>. Do not edit by hand — regenerat
 - docs/platform/build-canvas-copilot
 - docs/platform/canvas
 - docs/platform/canvas-interface
-- docs/platform/cloud-cli-installation
 - docs/platform/configure-dbt-cli
 - docs/platform/connect-data-platform/about-connections
 - docs/platform/connect-data-platform/connect-amazon-athena
@@ -447,6 +446,7 @@ Mirrored from <https://docs.getdbt.com/docs/>. Do not edit by hand — regenerat
 - docs/platform/connect-data-platform/connect-snowflake
 - docs/platform/connect-data-platform/connect-starburst-trino
 - docs/platform/connect-data-platform/connect-teradata
+- docs/platform/dbt-cli-installation
 - docs/platform/git/authenticate-azure
 - docs/platform/git/connect-azure-devops
 - docs/platform/git/connect-github

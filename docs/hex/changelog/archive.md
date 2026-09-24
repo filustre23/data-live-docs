@@ -29,7 +29,7 @@
 * [August 27 - Chart controls and easier collaboration](/changelog/2026-08-27)
 * [September 10 - More control over Generative app iteration](/changelog/2026-09-10)
 * [September 15 - Publish eval suites, skip approvals, and build Hex projects from your chat agent](/changelog/2026-09-15)
-* [September 22 - Explore and share insights from Generative Apps](/changelog/2026-09-22)
+* [September 23 - Explore and share insights from Generative Apps](/changelog/2026-09-22)
 
 ### 2025[​](#2025 "Direct link to 2025")
 

@@ -1,6 +1,6 @@
 # data-live-docs — index
 
-_Generated 2026-09-23T21:01+00:00_
+_Generated 2026-09-24T02:41+00:00_
 
 **9 sources, 4504 topics total**
 
@@ -2787,7 +2787,6 @@ _1148 topics_
 - `dbt-core/docs/platform/build-canvas-copilot`
 - `dbt-core/docs/platform/canvas`
 - `dbt-core/docs/platform/canvas-interface`
-- `dbt-core/docs/platform/cloud-cli-installation`
 - `dbt-core/docs/platform/configure-dbt-cli`
 - `dbt-core/docs/platform/connect-data-platform/about-connections`
 - `dbt-core/docs/platform/connect-data-platform/connect-amazon-athena`
@@ -2804,6 +2803,7 @@ _1148 topics_
 - `dbt-core/docs/platform/connect-data-platform/connect-snowflake`
 - `dbt-core/docs/platform/connect-data-platform/connect-starburst-trino`
 - `dbt-core/docs/platform/connect-data-platform/connect-teradata`
+- `dbt-core/docs/platform/dbt-cli-installation`
 - `dbt-core/docs/platform/git/authenticate-azure`
 - `dbt-core/docs/platform/git/connect-azure-devops`
 - `dbt-core/docs/platform/git/connect-github`

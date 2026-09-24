@@ -80,11 +80,11 @@ Anyone with [Can Edit](/docs/collaborate/sharing-and-permissions/project-sharing
 
 #### Who can leave a review?[​](#who-can-leave-a-review "Direct link to Who can leave a review?")
 
-Anyone with [Can Explore](/docs/collaborate/sharing-and-permissions/project-sharing#can-explore) access to a project can review work. This allows stakeholders to review projects as well as collaborators.
+Anyone with [Can Explore](/docs/collaborate/sharing-and-permissions/project-sharing#can-explore) access to a project can review work. This allows stakeholders to review projects as well as collaborators. However, only review approvals from users who are Editor or above will "count" toward unblocking publishing a project that requires reviews.
 
 #### If I request a review from multiple users or a group, do all users need to approve?[​](#if-i-request-a-review-from-multiple-users-or-a-group-do-all-users-need-to-approve "Direct link to If I request a review from multiple users or a group, do all users need to approve?")
 
-No, only one user needs to approve in order for the review to be marked as "approved". If any reviewers requests changes, though, that same reviewer will need to update their review decision in order for the review request to be marked as "approved".
+No, only one user who is an Editor or above needs to approve in order for the review to be marked as "approved" and unblock publishing. If any reviewers requests changes, though, that same reviewer will need to update their review decision in order for the review request to be marked as "approved".
 
 #### How do reviews work with Git Export?[​](#how-do-reviews-work-with-git-export "Direct link to How do reviews work with Git Export?")
 
