@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-09-24T21:07+00:00_
+_Generated 2026-09-25T02:58+00:00_
 
-**9 sources, 4504 topics total**
+**9 sources, 4518 topics total**
 
 ## airflow
 
@@ -2155,7 +2155,7 @@ _1488 topics_
 
 Upstream: <https://code.claude.com/docs/en/>
 
-_197 topics_
+_210 topics_
 
 - `claude-code/accessibility`
 - `claude-code/admin-setup`
@@ -2240,7 +2240,6 @@ _197 topics_
 - `claude-code/desktop-scheduled-tasks`
 - `claude-code/desktop-wsl`
 - `claude-code/devcontainer`
-- `claude-code/discover-plugins`
 - `claude-code/env-vars`
 - `claude-code/errors`
 - `claude-code/fast-mode`
@@ -2283,13 +2282,27 @@ _197 topics_
 - `claude-code/permission-modes`
 - `claude-code/permissions`
 - `claude-code/platforms`
-- `claude-code/plugin-dependencies`
 - `claude-code/plugin-evals`
-- `claude-code/plugin-hints`
-- `claude-code/plugin-marketplaces`
-- `claude-code/plugin-relevance`
-- `claude-code/plugins`
-- `claude-code/plugins-reference`
+- `claude-code/plugins/anthropic-marketplaces`
+- `claude-code/plugins/cli-hints`
+- `claude-code/plugins/cli-reference`
+- `claude-code/plugins/code-intelligence`
+- `claude-code/plugins/components`
+- `claude-code/plugins/create`
+- `claude-code/plugins/create-marketplace`
+- `claude-code/plugins/dependencies`
+- `claude-code/plugins/host-marketplace`
+- `claude-code/plugins/install`
+- `claude-code/plugins/loading`
+- `claude-code/plugins/manifest-reference`
+- `claude-code/plugins/marketplace-reference`
+- `claude-code/plugins/measure`
+- `claude-code/plugins/org`
+- `claude-code/plugins/overview`
+- `claude-code/plugins/publish`
+- `claude-code/plugins/relevance`
+- `claude-code/plugins/security`
+- `claude-code/plugins/troubleshooting`
 - `claude-code/prompt-caching`
 - `claude-code/prompt-library`
 - `claude-code/quickstart`
@@ -4072,7 +4085,7 @@ _389 topics_
 
 Upstream: <https://openai.github.io/openai-agents-python/>
 
-_398 topics_
+_399 topics_
 
 - `openai-agents/agents`
 - `openai-agents/config`
@@ -4273,6 +4286,7 @@ _398 topics_
 - `openai-agents/ref/run_error_handlers`
 - `openai-agents/ref/run_internal/agent_bindings`
 - `openai-agents/ref/run_internal/agent_runner_helpers`
+- `openai-agents/ref/run_internal/agent_tool_configuration`
 - `openai-agents/ref/run_internal/approvals`
 - `openai-agents/ref/run_internal/blocked_output`
 - `openai-agents/ref/run_internal/error_handlers`
