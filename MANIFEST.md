@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-09-28T12:40+00:00_
+_Generated 2026-09-28T22:55+00:00_
 
-**9 sources, 4517 topics total**
+**9 sources, 4519 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_637 topics_
+_639 topics_
 
 - `anthropic-sdk/about-claude/additional-resources`
 - `anthropic-sdk/about-claude/glossary`
@@ -536,6 +536,7 @@ _637 topics_
 - `anthropic-sdk/home`
 - `anthropic-sdk/intro`
 - `anthropic-sdk/manage-claude/access-transparency`
+- `anthropic-sdk/manage-claude/access-transparency-log`
 - `anthropic-sdk/manage-claude/admin-api`
 - `anthropic-sdk/manage-claude/admin-api-keys`
 - `anthropic-sdk/manage-claude/analytics-api`
@@ -646,6 +647,7 @@ _637 topics_
 - `anthropic-sdk/release-notes/system-prompts/claude-sonnet-4`
 - `anthropic-sdk/release-notes/system-prompts/claude-sonnet-4-5`
 - `anthropic-sdk/release-notes/system-prompts/claude-sonnet-4-6`
+- `anthropic-sdk/release-notes/system-prompts/claude-sonnet-5`
 - `anthropic-sdk/release-notes/system-prompts/overview`
 - `anthropic-sdk/resources/overview`
 - `anthropic-sdk/test-and-evaluate/develop-tests`

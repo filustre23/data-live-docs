@@ -18,7 +18,7 @@ Receive Hex notifications directly in Slack and deliver scheduled run notificati
 
 [## 📄️Sensitive data connections
 
-Mark data connections as sensitive to control how the Hex Agent uses them in Slack, MCP, and other external clients.](/docs/api-integrations/hex-agent-data-connection-access)
+Mark data connections as sensitive to control how the Hex Agent uses them in Slack, MCP, API, and CLI.](/docs/api-integrations/hex-agent-data-connection-access)
 
 [## 🗃Public API
 

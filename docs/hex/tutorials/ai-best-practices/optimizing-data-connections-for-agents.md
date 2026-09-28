@@ -103,7 +103,7 @@ Automatic data connection selection is especially important when someone uses th
 
 With automatic connection selection, the Hex Agent can query across all connections available to the user who started the Thread, which is much more useful for workspaces with diverse data sources. The same best practices above apply — clear descriptions and curated metadata help the agent respond accurately.
 
-To mark connections as sensitive for those external surfaces, use **Settings** → **Integrations** → **Configure sensitive data connections for external integrations**, or open a connection under **Settings** → **Data sources** and use the **Access** tab. Sensitive connections are unavailable to the [Hex MCP Server](/docs/api-integrations/mcp-server), and Admins control how the [Hex Agent in Slack](/docs/share-insights/hex-agent-in-slack#hex-agent-data-connection-permissions) treats them. See [Sensitive data connections for external integrations](/docs/api-integrations/hex-agent-data-connection-access) for more information.
+To mark connections as sensitive for those external surfaces, use **Settings** → **Integrations** → **Configure sensitive data connections for external integrations**, or open a connection under **Settings** → **Data sources** and use the **Access** tab. Admins can allow the [Hex MCP Server](/docs/api-integrations/mcp-server), API, and CLI to query sensitive connections, and control how the [Hex Agent in Slack](/docs/share-insights/hex-agent-in-slack#hex-agent-data-connection-permissions) treats them. See [Sensitive data connections for external integrations](/docs/api-integrations/hex-agent-data-connection-access) for more information.
 
 #### On this page
 

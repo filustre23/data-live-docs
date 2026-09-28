@@ -55,7 +55,9 @@ This applies to workspace Admins as well. The Admin role does not grant edit acc
 
 Threads created through the Hex MCP server behave the same as [Threads in the Hex app](/docs/explore-data/threads#data-sources): the agent automatically selects among the data connections the user has access to in order to answer a question. If your workspace has a [default data connection](/tutorials/ai-best-practices/setup-for-ai-agents#setup-the-default-data-connection), the agent searches that connection first.
 
-Admins can mark data connections as **Sensitive** so the Hex Agent treats them carefully in Threads started from external integrations, including the Hex MCP server and [Hex Agent in Slack](/docs/share-insights/hex-agent-in-slack). The MCP server never uses sensitive connections. Configure this under **Settings** → **Integrations** → **Configure sensitive data connections for external integrations**, or on each connection's **Access** tab under **Settings** → **Data sources**. For more information, see [Sensitive data connections for external integrations](/docs/api-integrations/hex-agent-data-connection-access).
+Admins can mark data connections as **Sensitive** so the Hex Agent treats them carefully in Threads started from external integrations, including the Hex MCP server and [Hex Agent in Slack](/docs/share-insights/hex-agent-in-slack). Mark connections under **Settings** → **Integrations** → **Configure sensitive data connections for external integrations**, or on each connection's **Access** tab under **Settings** → **Data sources**.
+
+The MCP server does not query sensitive connections by default, and cannot read cell outputs from projects that use them. Admins can allow that access with **Allow sensitive data connections in MCP, API, and CLI**. For more information, see [Sensitive data connections for external integrations](/docs/api-integrations/hex-agent-data-connection-access#mcp-api-cli).
 
 For best practices on descriptions, exclusions, and permissions, see [Optimizing your data connections for the Hex Agent](/tutorials/ai-best-practices/optimizing-data-connections-for-agents).
 
@@ -316,7 +318,7 @@ Create a new Hex [Thread](/docs/explore-data/threads) to ask questions about you
 
 info
 
-* MCP Threads can make use of any [non-sensitive](/docs/api-integrations/hex-agent-data-connection-access) data connections that you have access to—you do not need to pick a connection in the client. See [Data sources in Threads](/docs/explore-data/threads#data-sources).
+* MCP Threads automatically select among the data connections you have access to. Connections marked [Sensitive](/docs/api-integrations/hex-agent-data-connection-access#mcp-api-cli) are excluded unless an Admin has allowed them. You do not need to pick a connection in the client. See [Data sources in Threads](/docs/explore-data/threads#data-sources).
 * Threads typically take several minutes to complete as the agent analyzes your data.
 
 #### Get an existing Thread[​](#get-an-existing-thread "Direct link to Get an existing Thread")
@@ -525,6 +527,8 @@ Read the latest output preview for a SQL cell in the active draft notebook sessi
 **Input**: Cell ID
 
 **Output**: The cell's most recent output preview, or its error. The preview returns a limited number of rows and reports the row limit, the number of rows returned, the total row count, and whether the result was truncated — so an agent can tell when it is not seeing the full result. Columns are never dropped.
+
+If the project uses a sensitive connection, `get_cell_output` and chart images are blocked unless an Admin has allowed [sensitive connections in MCP, API, and CLI](/docs/api-integrations/hex-agent-data-connection-access#mcp-api-cli). You can still list, edit, and run cells in that project.
 
 tip
 
