@@ -30,6 +30,7 @@
 * [September 10 - More control over Generative app iteration](/changelog/2026-09-10)
 * [September 15 - Publish eval suites, skip approvals, and build Hex projects from your chat agent](/changelog/2026-09-15)
 * [September 23 - Explore and share insights from Generative Apps](/changelog/2026-09-22)
+* [September 29 - See how your team uses the agent](/changelog/2026-09-29)
 
 ### 2025[​](#2025 "Direct link to 2025")
 

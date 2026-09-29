@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-09-29T12:01+00:00_
+_Generated 2026-09-29T17:33+00:00_
 
-**9 sources, 4522 topics total**
+**9 sources, 4524 topics total**
 
 ## airflow
 
@@ -3531,7 +3531,7 @@ _1148 topics_
 
 Upstream: <https://fastapi.tiangolo.com/>
 
-_155 topics_
+_156 topics_
 
 - `fastapi/_llm-test`
 - `fastapi/about/index`
@@ -3550,6 +3550,7 @@ _155 topics_
 - `fastapi/advanced/middleware`
 - `fastapi/advanced/openapi-callbacks`
 - `fastapi/advanced/openapi-webhooks`
+- `fastapi/advanced/opentelemetry`
 - `fastapi/advanced/path-operation-advanced-configuration`
 - `fastapi/advanced/response-change-status-code`
 - `fastapi/advanced/response-cookies`
@@ -3693,7 +3694,7 @@ _155 topics_
 
 Upstream: <https://learn.hex.tech/>
 
-_389 topics_
+_390 topics_
 
 - `hex/changelog`
 - `hex/changelog/2020-12-17`
@@ -3813,6 +3814,7 @@ _389 topics_
 - `hex/changelog/2026-09-10`
 - `hex/changelog/2026-09-15`
 - `hex/changelog/2026-09-22`
+- `hex/changelog/2026-09-29`
 - `hex/changelog/archive`
 - `hex/changelog/page/10`
 - `hex/changelog/page/11`
