@@ -63,13 +63,38 @@ Every code-generated chart built within a Generative app includes a style panel 
 
 [](/assets/medias/chart-controls-b9a45b46f34273444bd688794c74d224.mp4)
 
-#### Get started[​](#get-started "Direct link to Get started")
+#### Get started[​](#chart-controls-get-started "Direct link to Get started")
 
 1. Open the Generative app's editable draft.
 2. In the preview toolbar, select **Select**. If prompted, complete the one-time upgrade first.
 3. Select a chart, or an element such as its axis, series, title, or legend.
 4. Adjust the available settings in the **Style** panel.
 5. Apply the changes.
+
+### Quick edits[​](#quick-edits "Direct link to Quick edits")
+
+In a Generative app, you can prompt for changes directly on a chart using the prompt bar in its chart controls. A small, fast model handles simple styling requests, like changing colors, labels, or axis formatting, so they apply faster than a full agent request. Anything beyond a style change goes to the main Hex agent. Quick edits also remember context, so follow-ups like "make the color darker" or "undo that" work without repeating yourself.
+
+A few example prompts that work with quick edits:
+
+* Move the legend to the bottom
+* Sort bars largest to smallest
+* Rename the chart to Monthly Revenue
+* Hide the legend
+* Show data labels
+* Rotate x-axis labels
+* Format data labels as $k
+* + more
+
+[](/assets/medias/chart-controls-quick-edits-9f1b8a171ebdd3d55af7692248408a86.mp4)
+
+#### Get started[​](#quick-edits-get-started "Direct link to Get started")
+
+1. Open the Generative app's editable draft.
+2. In the preview toolbar, select **Select**. If prompted, complete the one-time upgrade first.
+3. Select a chart.
+4. Type your request into the **Ask or edit...** bar. For example, "Switch this to a line chart" or "Rename the y-axis to Revenue (USD)."
+5. Quick edits confirm with a green message. Any requests outside of a quick style change goes to the main agent.
 
 ## Control app style with a `design.md`[​](#control-app-style-with-a-designmd "Direct link to control-app-style-with-a-designmd")
 
@@ -180,6 +205,7 @@ While Generative apps are in Beta, some Hex features are not yet supported. Thes
   + [Choose a model and effort](#choose-a-model-and-effort)
   + [Edit code directly](#edit-code-directly)
   + [Chart controls](#chart-controls)
+  + [Quick edits](#quick-edits)
 * [Control app style with a `design.md`](#control-app-style-with-a-designmd)
   + [Create your `design.md` with an agent](#create-your-designmd-with-an-agent)
   + [Add it to your workspace](#add-it-to-your-workspace)

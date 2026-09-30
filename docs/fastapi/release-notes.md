@@ -7,6 +7,12 @@ hide:
 
 ## Latest Changes
 
+## 0.142.1 (2026-09-29)
+
+### Fixes
+
+* 🐛 Fix repeated endpoint wrapping in included routers. PR [#16414](https://github.com/fastapi/fastapi/pull/16414) by [@tiangolo](https://github.com/tiangolo).
+
 ## 0.142.0 (2026-09-29)
 
 ### Features
