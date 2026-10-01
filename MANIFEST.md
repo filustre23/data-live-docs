@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-10-01T12:18+00:00_
+_Generated 2026-10-01T22:19+00:00_
 
-**9 sources, 4623 topics total**
+**9 sources, 4640 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_740 topics_
+_748 topics_
 
 - `anthropic-sdk/about-claude/additional-resources`
 - `anthropic-sdk/about-claude/glossary`
@@ -156,23 +156,28 @@ _740 topics_
 - `anthropic-sdk/api/beta/models/retrieve`
 - `anthropic-sdk/api/beta/organization`
 - `anthropic-sdk/api/beta/organization/analytics`
+- `anthropic-sdk/api/beta/organization/analytics/apps`
+- `anthropic-sdk/api/beta/organization/analytics/apps/chat`
+- `anthropic-sdk/api/beta/organization/analytics/apps/chat/projects`
+- `anthropic-sdk/api/beta/organization/analytics/apps/chat/projects/list`
 - `anthropic-sdk/api/beta/organization/analytics/artifacts`
 - `anthropic-sdk/api/beta/organization/analytics/artifacts/list`
-- `anthropic-sdk/api/beta/organization/analytics/chat_projects`
-- `anthropic-sdk/api/beta/organization/analytics/chat_projects/list`
 - `anthropic-sdk/api/beta/organization/analytics/connectors`
 - `anthropic-sdk/api/beta/organization/analytics/connectors/list`
-- `anthropic-sdk/api/beta/organization/analytics/cost`
-- `anthropic-sdk/api/beta/organization/analytics/cost/list`
-- `anthropic-sdk/api/beta/organization/analytics/cost/list_by_user`
+- `anthropic-sdk/api/beta/organization/analytics/cost_report`
+- `anthropic-sdk/api/beta/organization/analytics/cost_report/list`
 - `anthropic-sdk/api/beta/organization/analytics/plugins`
 - `anthropic-sdk/api/beta/organization/analytics/plugins/list`
-- `anthropic-sdk/api/beta/organization/analytics/retrieve_summaries`
 - `anthropic-sdk/api/beta/organization/analytics/skills`
 - `anthropic-sdk/api/beta/organization/analytics/skills/list`
-- `anthropic-sdk/api/beta/organization/analytics/usage`
-- `anthropic-sdk/api/beta/organization/analytics/usage/list`
-- `anthropic-sdk/api/beta/organization/analytics/usage/list_by_user`
+- `anthropic-sdk/api/beta/organization/analytics/summaries`
+- `anthropic-sdk/api/beta/organization/analytics/summaries/list`
+- `anthropic-sdk/api/beta/organization/analytics/usage_report`
+- `anthropic-sdk/api/beta/organization/analytics/usage_report/list`
+- `anthropic-sdk/api/beta/organization/analytics/user_cost_report`
+- `anthropic-sdk/api/beta/organization/analytics/user_cost_report/list`
+- `anthropic-sdk/api/beta/organization/analytics/user_usage_report`
+- `anthropic-sdk/api/beta/organization/analytics/user_usage_report/list`
 - `anthropic-sdk/api/beta/organization/analytics/users`
 - `anthropic-sdk/api/beta/organization/analytics/users/list`
 - `anthropic-sdk/api/beta/organization/api_keys`
@@ -254,9 +259,9 @@ _740 topics_
 - `anthropic-sdk/api/beta/organization/rbac_groups/delete`
 - `anthropic-sdk/api/beta/organization/rbac_groups/list`
 - `anthropic-sdk/api/beta/organization/rbac_groups/members`
-- `anthropic-sdk/api/beta/organization/rbac_groups/members/create`
-- `anthropic-sdk/api/beta/organization/rbac_groups/members/delete`
+- `anthropic-sdk/api/beta/organization/rbac_groups/members/add`
 - `anthropic-sdk/api/beta/organization/rbac_groups/members/list`
+- `anthropic-sdk/api/beta/organization/rbac_groups/members/remove`
 - `anthropic-sdk/api/beta/organization/rbac_groups/retrieve`
 - `anthropic-sdk/api/beta/organization/rbac_groups/update`
 - `anthropic-sdk/api/beta/organization/rbac_roles`
@@ -276,15 +281,17 @@ _740 topics_
 - `anthropic-sdk/api/beta/organization/service_accounts/workspaces/list`
 - `anthropic-sdk/api/beta/organization/service_accounts/workspaces/remove`
 - `anthropic-sdk/api/beta/organization/spend_limits`
-- `anthropic-sdk/api/beta/organization/spend_limits/create`
 - `anthropic-sdk/api/beta/organization/spend_limits/delete`
+- `anthropic-sdk/api/beta/organization/spend_limits/effective`
+- `anthropic-sdk/api/beta/organization/spend_limits/effective/list`
 - `anthropic-sdk/api/beta/organization/spend_limits/increase_requests`
 - `anthropic-sdk/api/beta/organization/spend_limits/increase_requests/approve`
 - `anthropic-sdk/api/beta/organization/spend_limits/increase_requests/deny`
 - `anthropic-sdk/api/beta/organization/spend_limits/increase_requests/list`
 - `anthropic-sdk/api/beta/organization/spend_limits/increase_requests/retrieve`
-- `anthropic-sdk/api/beta/organization/spend_limits/list_effective`
+- `anthropic-sdk/api/beta/organization/spend_limits/list`
 - `anthropic-sdk/api/beta/organization/spend_limits/retrieve`
+- `anthropic-sdk/api/beta/organization/spend_limits/set`
 - `anthropic-sdk/api/beta/organization/usage_report`
 - `anthropic-sdk/api/beta/organization/usage_report/retrieve_claude_code`
 - `anthropic-sdk/api/beta/organization/usage_report/retrieve_messages`
@@ -660,6 +667,7 @@ _740 topics_
 - `anthropic-sdk/manage-claude/inference-hooks`
 - `anthropic-sdk/manage-claude/inference-hooks-configuration`
 - `anthropic-sdk/manage-claude/inference-hooks-endpoint`
+- `anthropic-sdk/manage-claude/plugins-api`
 - `anthropic-sdk/manage-claude/rate-limits-api`
 - `anthropic-sdk/manage-claude/spend-limits-api`
 - `anthropic-sdk/manage-claude/usage-cost-api`
@@ -2258,7 +2266,7 @@ _1488 topics_
 
 Upstream: <https://code.claude.com/docs/en/>
 
-_209 topics_
+_218 topics_
 
 - `claude-code/accessibility`
 - `claude-code/admin-setup`
@@ -2399,6 +2407,15 @@ _209 topics_
 - `claude-code/plugins/manifest-reference`
 - `claude-code/plugins/marketplace-reference`
 - `claude-code/plugins/measure`
+- `claude-code/plugins/mods/admin`
+- `claude-code/plugins/mods/api`
+- `claude-code/plugins/mods/create`
+- `claude-code/plugins/mods/events`
+- `claude-code/plugins/mods/interface`
+- `claude-code/plugins/mods/overview`
+- `claude-code/plugins/mods/reference`
+- `claude-code/plugins/mods/test`
+- `claude-code/plugins/mods/troubleshoot`
 - `claude-code/plugins/org`
 - `claude-code/plugins/overview`
 - `claude-code/plugins/publish`

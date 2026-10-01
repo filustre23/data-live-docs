@@ -32,12 +32,20 @@ Update the guidance and data definitions agents rely on, including unstructured 
 | --- | --- | --- | --- | --- | --- |
 | Observability dashboard | ✔ | ✔ | — | — | — |
 | Individual conversations | ✔ | — | — | — | — |
+| Suggestions | ✔ | ✔ \* | — | — | — |
+| Evals | ✔ | ✔ | ✔ \* | Read only | — |
 | Context Management (Guides, Endorsements, Models) | ✔ | ✔ | Read only | Read only | — |
+
+\* Managers can accept or reject suggestions but can't see evidence from individual conversations.
+
+\* Editors can only run and view evals, while Managers and Admins can publish and schedule them.
 
 ## Where to go next[​](#where-to-go-next "Direct link to Where to go next")
 
 * [Observability](/docs/agent-management/observability): Monitor agent usage, topics, warnings, and individual conversations
 * [Context Management](/docs/agent-management/context-management): Manage guides, endorsements, and semantic models
+* [Suggestions](/docs/agent-management/suggestions): Improve workspace context based on patterns in agent conversations
+* [Evals](/docs/agent-management/evals): Measure agent performance against defined rubrics and track progress
 
 #### On this page
 

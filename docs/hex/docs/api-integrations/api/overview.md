@@ -47,7 +47,7 @@ Workspace tokens are created, managed, and shared by Admins of a workspace. Unli
 
 To create a Workspace token, head to the [user settings](/docs/administration/user-settings), and then the **API keys** page under the **Account** section. Then, select the **New Token** button and provide a description and an expiration time frame. Workspace tokens can be configured to have the following scopes:
 
-* Read projects: The token will work with any API endpoint that only gets information (e.g. [`ListProjects`](/docs/api-integrations/api/reference#operation/ListProjects) and [`GetProjectRuns`](/docs/api-integrations/api/reference#operation/GetProjectRuns)).
+* Read projects: The token will work with any API endpoint that only gets information (e.g. [`ListProjects`](/docs/api-integrations/api/reference#operation/ListProjects)).
 * Run projects: The token will also work with the RunProjects endpoint.
 * For Users, Groups, Collections, and Data connections: The token can be specified to have read-only or write access (which includes read).
 

@@ -627,7 +627,7 @@ interface Query extends AsyncGenerator<SDKMessage, void> {
 | `supportedModels()` | Returns available models with display info |
 | `supportedAgents()` | Returns available subagents as [`AgentInfo`](#agentinfo)`[]` |
 | `mcpServerStatus()` | Returns the status of connected MCP servers as [`McpServerStatus`](#mcpserverstatus)`[]` |
-| `getContextUsage(opts?)` | Returns an [`SDKControlGetContextUsageResponse`](#sdkcontrolgetcontextusageresponse) breaking down the session's context window usage by category, skill, and tool. With the default `detail`, it is the same data `/context` shows in an interactive session. The [`detail` option](#sdkcontrolgetcontextusageresponse) requires Agent SDK v0.3.257 or later |
+| `getContextUsage(opts?)` | Returns an [`SDKControlGetContextUsageResponse`](#sdkcontrolgetcontextusageresponse) breaking down the session's context window usage by category, skill, and tool. With the default `detail`, it is the same data `/context` shows in an interactive session, computed with token-counting API requests that don't appear in the message stream; see [how these requests are handled](#sdkcontrolgetcontextusageresponse). The [`detail` option](#sdkcontrolgetcontextusageresponse) requires Agent SDK v0.3.257 or later |
 | `readFile(path, options?)` | Reads a file from the session's filesystem. Claude Code resolves the path against `cwd`; [What `readFile()` can read](#what-readfile-can-read) lists the files it serves. Pass `{ maxBytes }` to change the read cap (default 1 MB, ceiling 10 MB) and `{ encoding: 'base64' }` for binary files such as images. Resolves with an [`SDKControlReadFileResponse`](#sdkcontrolreadfileresponse), or `null` on permission denial, a missing file, or a transport error. Requires TypeScript SDK v0.2.121 or later |
 | `reloadPlugins(options?)` | Reloads plugins from disk, so plugins you install or edit mid-session reach the running session. Resolves with an [`SDKControlReloadPluginsResponse`](#sdkcontrolreloadpluginsresponse) listing the session's commands, subagents, plugins, and MCP server status. Requires Agent SDK v0.2.85 or later. The [`holdOnCacheImpact` option](#sdkcontrolreloadpluginsresponse) requires Agent SDK v0.3.268 or later |
 | `reloadSkills()` | Reloads skills from disk, so skills you add or edit mid-session become available to the running session. Resolves with an [`SDKControlReloadSkillsResponse`](#sdkcontrolreloadskillsresponse) listing the skills available after the reload. Requires Agent SDK v0.3.163 or later |
@@ -809,7 +809,10 @@ The receipt is a snapshot taken at the moment the interrupt is processed, and on
 
 Return type of [`getContextUsage()`](#query-object). With the default `detail`, this is the same payload Claude Code renders for the `/context` command in an interactive session, so alongside the token counts it carries display fields such as `color` and `gridRows` that Claude Code uses to draw the `/context` usage grid.
 
-The method's optional `detail` argument chooses how Claude Code counts each category. With the default, `'full'`, Claude Code counts each category with token-counting API requests. Pass `{ detail: 'summary' }` to get an answer from the last response's usage and local estimates instead. No token-count requests go out, and the per-category numbers are approximate. The `detail` argument requires Agent SDK v0.3.257 or later.
+The method's optional `detail` argument chooses how Claude Code counts each category. The `detail` argument requires Agent SDK v0.3.257 or later.
+
+* **`'full'`**: the default. Claude Code counts each category with [token-counting](https://platform.claude.com/docs/en/build-with-claude/token-counting) API requests. These requests don't appear in the message stream, so cost tracking that reads the stream won't see them. On the Anthropic API, token counting isn't billed.
+* **`'summary'`**: pass `{ detail: 'summary' }` to get an answer from the last response's usage and local estimates instead. No token-count requests go out, and the per-category numbers are approximate.
 
 When you send `/context` as a prompt instead of calling the method, Claude Code attaches an [`SDKContextUsage`](#sdkcontextusage) payload to the `context_usage` field of the assistant message that delivers the result. That field requires Agent SDK v0.3.232 or later.
 
@@ -915,7 +918,7 @@ Read token attribution from the collection fields:
 * `memoryFiles` lists each loaded memory file with its cost.
 * `skills.skillFrontmatter` attributes the skill listing's tokens to each included skill. The per-skill counts measure each skill's listing entry as Claude Code actually sends it, which can be shorter than the skill's full frontmatter. Compare `skills.totalSkills` with `skills.includedSkills` to see whether every discovered skill made it into the listing.
 
-`totalTokens` is the session's current context usage, and `maxTokens` is the window that usage is measured against. That window is the model's context window, or the lower auto-compaction window when one applies. `rawMaxTokens` carries the same value as `maxTokens`, and `percentage` is `totalTokens` as a rounded percentage of that window.
+`totalTokens` is the session's current context usage, and `maxTokens` is the window that usage is measured against. That window is the model's context window, or the lower auto-compaction window when one applies. `rawMaxTokens` carries the same value as `maxTokens`, and `percentage` is `totalTokens` as a rounded percentage of that window. `apiUsage` holds the usage from the latest API response, not a running total for the session.
 
 Claude Code leaves the optional `deferredBuiltinTools`, `systemTools`, and `systemPromptSections` diagnostics unset, so expect them to be absent even though the type declares them.
 
@@ -1441,7 +1444,7 @@ Set `shouldQuery` or `client_composed` to change how Claude Code handles a messa
 
 On a message that carries a `tool_result` block, `tool_use_result` is the tool's structured output object rather than the text sent to the model. Its shape depends on the tool named by the matching `tool_use` block, so the field is typed `unknown`; the built-in shapes are listed under [Tool Output Types](#tool-output-types).
 
-For the `Agent` tool, `tool_use_result` is [`AgentOutput`](#agent-2). On a `completed` result, `content` holds the subagent's report without the agent ID and usage trailer that Claude Code appends to the `tool_result` text, so render from `tool_use_result` instead of parsing that text.
+For the `Agent` tool, `tool_use_result` is [`AgentOutput`](#agent-2). Render from it rather than parsing the `tool_result` text. A `completed` result's `content` holds the subagent's report, or, for a subagent whose report goes through a `SubagentHandback` tool call, a short note about that hand-back in place of the report. In [auto mode](/docs/en/permission-modes#eliminate-prompts-with-auto-mode) on Claude Code v2.1.271 or later, every subagent that produces a `completed` result reports that way unless it is a [fork](/docs/en/sub-agents#fork-the-current-conversation), and Claude receives the report as a separate message from the subagent.
 
 For an MCP tool whose result contains `resource_link` blocks, `tool_use_result` is an object with a `resourceLinks` array of [`SDKMcpResourceLink`](#sdkmcpresourcelink) entries. Claude receives each link as a line of text in the `tool_result` block, so read `resourceLinks` to render the files the server returned instead of parsing that text. Claude Code omits `resourceLinks` when the result has no links and on results from subagents, keeps at most 50 links per result, and stops adding links once the array reaches 64 KiB of serialized JSON. `resourceLinks` requires Agent SDK v0.3.257 or later.
 
@@ -1900,7 +1903,7 @@ type SDKPermissionDenial = {
 
 ### `SDKContextUsage`
 
-Structured form of the `/context` report, carried as `context_usage` on the [`SDKAssistantMessage`](#sdkassistantmessage) that delivers a `/context` result. Agent SDK v0.3.232 and later export the type. Unlike [`SDKControlGetContextUsageResponse`](#sdkcontrolgetcontextusageresponse), it carries only the data needed to render the usage breakdown, without display fields such as `color` and `gridRows`.
+Structured form of the `/context` report, carried as `context_usage` on the [`SDKAssistantMessage`](#sdkassistantmessage) that delivers a `/context` result. Agent SDK v0.3.232 and later export the type. Unlike [`SDKControlGetContextUsageResponse`](#sdkcontrolgetcontextusageresponse), it carries only the data needed to render the usage breakdown, without display fields such as `color` and `gridRows`. Claude Code computes the report with token-counting API requests that don't appear in the message stream; see [how these requests are handled](#sdkcontrolgetcontextusageresponse).
 
 ```typescript theme={null}
 type SDKContextUsage = {
