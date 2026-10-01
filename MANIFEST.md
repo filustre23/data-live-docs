@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-09-30T21:49+00:00_
+_Generated 2026-10-01T03:37+00:00_
 
-**9 sources, 4525 topics total**
+**9 sources, 4623 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_642 topics_
+_740 topics_
 
 - `anthropic-sdk/about-claude/additional-resources`
 - `anthropic-sdk/about-claude/glossary`
@@ -224,6 +224,29 @@ _642 topics_
 - `anthropic-sdk/api/beta/organization/mcp_tunnels/tunnel_certificates/create`
 - `anthropic-sdk/api/beta/organization/mcp_tunnels/tunnel_certificates/list`
 - `anthropic-sdk/api/beta/organization/mcp_tunnels/tunnel_certificates/retrieve`
+- `anthropic-sdk/api/beta/organization/plugin_marketplaces`
+- `anthropic-sdk/api/beta/organization/plugin_marketplaces/list`
+- `anthropic-sdk/api/beta/organization/plugin_marketplaces/retrieve`
+- `anthropic-sdk/api/beta/organization/plugin_marketplaces/update`
+- `anthropic-sdk/api/beta/organization/plugin_marketplaces/validate_archive`
+- `anthropic-sdk/api/beta/organization/plugin_marketplaces/validate_repository`
+- `anthropic-sdk/api/beta/organization/plugins`
+- `anthropic-sdk/api/beta/organization/plugins/create`
+- `anthropic-sdk/api/beta/organization/plugins/delete`
+- `anthropic-sdk/api/beta/organization/plugins/installation_settings`
+- `anthropic-sdk/api/beta/organization/plugins/installation_settings/list`
+- `anthropic-sdk/api/beta/organization/plugins/installation_settings/remove`
+- `anthropic-sdk/api/beta/organization/plugins/installation_settings/set`
+- `anthropic-sdk/api/beta/organization/plugins/list`
+- `anthropic-sdk/api/beta/organization/plugins/retrieve`
+- `anthropic-sdk/api/beta/organization/plugins/shares`
+- `anthropic-sdk/api/beta/organization/plugins/shares/list`
+- `anthropic-sdk/api/beta/organization/plugins/update`
+- `anthropic-sdk/api/beta/organization/plugins/versions`
+- `anthropic-sdk/api/beta/organization/plugins/versions/create`
+- `anthropic-sdk/api/beta/organization/plugins/versions/download`
+- `anthropic-sdk/api/beta/organization/plugins/versions/list`
+- `anthropic-sdk/api/beta/organization/plugins/versions/retrieve`
 - `anthropic-sdk/api/beta/organization/rate_limits`
 - `anthropic-sdk/api/beta/organization/rate_limits/list`
 - `anthropic-sdk/api/beta/organization/rbac_groups`
@@ -446,6 +469,81 @@ _642 topics_
 - `anthropic-sdk/api/models`
 - `anthropic-sdk/api/models/list`
 - `anthropic-sdk/api/models/retrieve`
+- `anthropic-sdk/api/organization`
+- `anthropic-sdk/api/organization/api_keys`
+- `anthropic-sdk/api/organization/api_keys/list`
+- `anthropic-sdk/api/organization/api_keys/retrieve`
+- `anthropic-sdk/api/organization/api_keys/update`
+- `anthropic-sdk/api/organization/compliance_settings`
+- `anthropic-sdk/api/organization/compliance_settings/retrieve`
+- `anthropic-sdk/api/organization/compliance_settings/update`
+- `anthropic-sdk/api/organization/external_keys`
+- `anthropic-sdk/api/organization/external_keys/create`
+- `anthropic-sdk/api/organization/external_keys/delete`
+- `anthropic-sdk/api/organization/external_keys/list`
+- `anthropic-sdk/api/organization/external_keys/retrieve`
+- `anthropic-sdk/api/organization/external_keys/update`
+- `anthropic-sdk/api/organization/external_keys/validate`
+- `anthropic-sdk/api/organization/federation`
+- `anthropic-sdk/api/organization/federation/issuers`
+- `anthropic-sdk/api/organization/federation/issuers/archive`
+- `anthropic-sdk/api/organization/federation/issuers/create`
+- `anthropic-sdk/api/organization/federation/issuers/list`
+- `anthropic-sdk/api/organization/federation/issuers/retrieve`
+- `anthropic-sdk/api/organization/federation/issuers/update`
+- `anthropic-sdk/api/organization/federation/rules`
+- `anthropic-sdk/api/organization/federation/rules/archive`
+- `anthropic-sdk/api/organization/federation/rules/create`
+- `anthropic-sdk/api/organization/federation/rules/list`
+- `anthropic-sdk/api/organization/federation/rules/retrieve`
+- `anthropic-sdk/api/organization/federation/rules/update`
+- `anthropic-sdk/api/organization/federation/rules/workspaces`
+- `anthropic-sdk/api/organization/federation/rules/workspaces/add`
+- `anthropic-sdk/api/organization/federation/rules/workspaces/list`
+- `anthropic-sdk/api/organization/federation/rules/workspaces/remove`
+- `anthropic-sdk/api/organization/invites`
+- `anthropic-sdk/api/organization/invites/create`
+- `anthropic-sdk/api/organization/invites/delete`
+- `anthropic-sdk/api/organization/invites/list`
+- `anthropic-sdk/api/organization/invites/retrieve`
+- `anthropic-sdk/api/organization/rate_limits`
+- `anthropic-sdk/api/organization/rate_limits/list`
+- `anthropic-sdk/api/organization/retrieve`
+- `anthropic-sdk/api/organization/service_accounts`
+- `anthropic-sdk/api/organization/service_accounts/archive`
+- `anthropic-sdk/api/organization/service_accounts/create`
+- `anthropic-sdk/api/organization/service_accounts/list`
+- `anthropic-sdk/api/organization/service_accounts/retrieve`
+- `anthropic-sdk/api/organization/service_accounts/update`
+- `anthropic-sdk/api/organization/service_accounts/workspaces`
+- `anthropic-sdk/api/organization/service_accounts/workspaces/add`
+- `anthropic-sdk/api/organization/service_accounts/workspaces/list`
+- `anthropic-sdk/api/organization/service_accounts/workspaces/remove`
+- `anthropic-sdk/api/organization/users`
+- `anthropic-sdk/api/organization/users/list`
+- `anthropic-sdk/api/organization/users/remove`
+- `anthropic-sdk/api/organization/users/retrieve`
+- `anthropic-sdk/api/organization/users/update`
+- `anthropic-sdk/api/organization/workspaces`
+- `anthropic-sdk/api/organization/workspaces/archive`
+- `anthropic-sdk/api/organization/workspaces/create`
+- `anthropic-sdk/api/organization/workspaces/list`
+- `anthropic-sdk/api/organization/workspaces/members`
+- `anthropic-sdk/api/organization/workspaces/members/add`
+- `anthropic-sdk/api/organization/workspaces/members/list`
+- `anthropic-sdk/api/organization/workspaces/members/remove`
+- `anthropic-sdk/api/organization/workspaces/members/retrieve`
+- `anthropic-sdk/api/organization/workspaces/members/update`
+- `anthropic-sdk/api/organization/workspaces/rate_limits`
+- `anthropic-sdk/api/organization/workspaces/rate_limits/list`
+- `anthropic-sdk/api/organization/workspaces/retrieve`
+- `anthropic-sdk/api/organization/workspaces/service_accounts`
+- `anthropic-sdk/api/organization/workspaces/service_accounts/add`
+- `anthropic-sdk/api/organization/workspaces/service_accounts/list`
+- `anthropic-sdk/api/organization/workspaces/service_accounts/remove`
+- `anthropic-sdk/api/organization/workspaces/service_accounts/retrieve`
+- `anthropic-sdk/api/organization/workspaces/service_accounts/update`
+- `anthropic-sdk/api/organization/workspaces/update`
 - `anthropic-sdk/api/overview`
 - `anthropic-sdk/api/rate-limits`
 - `anthropic-sdk/api/service-tiers`
