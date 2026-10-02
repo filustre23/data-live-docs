@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-10-02T11:48+00:00_
+_Generated 2026-10-02T17:19+00:00_
 
-**9 sources, 4641 topics total**
+**9 sources, 4646 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_748 topics_
+_753 topics_
 
 - `anthropic-sdk/about-claude/additional-resources`
 - `anthropic-sdk/about-claude/glossary`
@@ -703,7 +703,12 @@ _748 topics_
 - `anthropic-sdk/managed-agents/reference`
 - `anthropic-sdk/managed-agents/scheduled-deployments`
 - `anthropic-sdk/managed-agents/self-hosted-sandboxes`
+- `anthropic-sdk/managed-agents/self-hosted-sandboxes-custom-tools`
+- `anthropic-sdk/managed-agents/self-hosted-sandboxes-memory`
+- `anthropic-sdk/managed-agents/self-hosted-sandboxes-operations`
+- `anthropic-sdk/managed-agents/self-hosted-sandboxes-reference`
 - `anthropic-sdk/managed-agents/self-hosted-sandboxes-security`
+- `anthropic-sdk/managed-agents/self-hosted-sandboxes-workers`
 - `anthropic-sdk/managed-agents/session-operations`
 - `anthropic-sdk/managed-agents/sessions`
 - `anthropic-sdk/managed-agents/skills`
