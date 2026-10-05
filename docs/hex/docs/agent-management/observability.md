@@ -29,7 +29,7 @@ Contents of [Sensitive Threads](/docs/explore-data/threads#sensitive-threads) ar
 
 Use filters to narrow the Dashboard to specific conversations or usage patterns. You can filter by:
 
-* Agent type (Threads, Notebook agent, Modeling agent, Published app agent)
+* Activity type (Analysis, App building, Modeling)
 * Workspace role
 * Individual users
 * Source location (Hex, Slack, or MCP)
@@ -55,7 +55,7 @@ The Thread Inspector includes three sections:
 
 ### Overview[​](#overview "Direct link to Overview")
 
-The Overview provides a high-level summary of the conversation, including who asked the question, when the conversation occurred, and a synopsis of the user’s questions and the agent’s responses.
+The Overview provides a summary of the conversation, including the user’s intent, the agent’s assumptions, and details such as the user who created it, the model used, and the credits consumed.
 
 ### Timeline[​](#timeline "Direct link to Timeline")
 
