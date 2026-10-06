@@ -15,7 +15,7 @@ The HIPAA configuration is an organization setting on Claude Enterprise plans, f
   * Claude Code in the Code tab of Claude Desktop
   * Cowork in Claude Desktop
 
-  The Claude Code extensions for VS Code and JetBrains aren't part of (local mode). They keep working with the HIPAA configuration applied, but your BAA doesn't cover them. See the [Implementation Guide](https://trust.anthropic.com/resources?s=rgirr4qe8u7ek8c2igx3\&name=claude-for-enterprise-hipaa-ready-offering-implementation-guide) for the full list of Eligible Services.
+  The Claude Code extensions for VS Code and JetBrains aren't part of (local mode). They keep working with the HIPAA configuration applied, but your BAA doesn't cover them. See the [Implementation Guide](https://trust.anthropic.com/resources?s=l1wrssd9hsbi4gak0tp5a6\&name=%5Banthropic%5D-hipaa-ready-offering-implementation-guide) for the full list of Eligible Services.
 </Note>
 
 This page is for the IT or security administrator who prepares developers' computers. The Primary Owner of your Claude organization applies the configuration itself. [Use Claude Code (local mode) and Cowork (local mode) on a HIPAA-ready Enterprise plan](https://support.claude.com/en/articles/17318731) explains what your BAA includes, how the configuration is applied, and how to schedule the date it's applied.
@@ -209,7 +209,7 @@ With the HIPAA configuration applied, some Claude Code features are off or behav
 
 With the HIPAA configuration applied, Claude Code removes the credentials it uses to reach Anthropic, such as `ANTHROPIC_API_KEY` and `ANTHROPIC_AUTH_TOKEN`, from the environment of the shell commands, hooks, and MCP servers it starts.
 
-The HIPAA configuration doesn't remove cloud provider or GitHub credentials, so a command that pushes to GitHub or calls another service still works with that developer's access. Your BAA with Anthropic doesn't cover the data it sends there. See the [Implementation Guide](https://trust.anthropic.com/resources?s=rgirr4qe8u7ek8c2igx3\&name=claude-for-enterprise-hipaa-ready-offering-implementation-guide) for the full list of Eligible Services.
+The HIPAA configuration doesn't remove cloud provider or GitHub credentials, so a command that pushes to GitHub or calls another service still works with that developer's access. Your BAA with Anthropic doesn't cover the data it sends there. See the [Implementation Guide](https://trust.anthropic.com/resources?s=l1wrssd9hsbi4gak0tp5a6\&name=%5Banthropic%5D-hipaa-ready-offering-implementation-guide) for the full list of Eligible Services.
 
 To limit which commands and hosts Claude can use, see [permission rules](/docs/en/permissions) and the [sandbox](/docs/en/sandboxing).
 
