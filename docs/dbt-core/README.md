@@ -266,7 +266,7 @@ Mirrored from <https://docs.getdbt.com/docs/>. Do not edit by hand — regenerat
 - docs/deploy/dbt-state-about
 - docs/deploy/dbt-state-cicd
 - docs/deploy/dbt-state-deferral
-- docs/deploy/dbt-state-enable-jobs
+- docs/deploy/dbt-state-enable-env-jobs
 - docs/deploy/dbt-state-enable-studio
 - docs/deploy/dbt-state-examples
 - docs/deploy/dbt-state-interface

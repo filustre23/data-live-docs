@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-10-06T12:39+00:00_
+_Generated 2026-10-06T22:14+00:00_
 
-**9 sources, 4647 topics total**
+**9 sources, 4648 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_753 topics_
+_754 topics_
 
 - `anthropic-sdk/about-claude/additional-resources`
 - `anthropic-sdk/about-claude/glossary`
@@ -713,6 +713,7 @@ _753 topics_
 - `anthropic-sdk/managed-agents/sessions`
 - `anthropic-sdk/managed-agents/skills`
 - `anthropic-sdk/managed-agents/tools`
+- `anthropic-sdk/managed-agents/tools-web-restrictions`
 - `anthropic-sdk/managed-agents/vaults`
 - `anthropic-sdk/managed-agents/webhooks`
 - `anthropic-sdk/models/fable-5-1/migration-guide`
@@ -2762,7 +2763,7 @@ _1149 topics_
 - `dbt-core/docs/deploy/dbt-state-about`
 - `dbt-core/docs/deploy/dbt-state-cicd`
 - `dbt-core/docs/deploy/dbt-state-deferral`
-- `dbt-core/docs/deploy/dbt-state-enable-jobs`
+- `dbt-core/docs/deploy/dbt-state-enable-env-jobs`
 - `dbt-core/docs/deploy/dbt-state-enable-studio`
 - `dbt-core/docs/deploy/dbt-state-examples`
 - `dbt-core/docs/deploy/dbt-state-interface`
