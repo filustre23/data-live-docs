@@ -7,6 +7,18 @@ hide:
 
 ## Latest Changes
 
+## 0.142.4 (2026-10-07)
+
+### Fixes
+
+* 🐛 Isolate FastAPI telemetry for excluded requests. PR [#16470](https://github.com/fastapi/fastapi/pull/16470) by [@tiangolo](https://github.com/tiangolo).
+
+## 0.142.3 (2026-10-07)
+
+### Fixes
+
+* 🐛 Cache OpenTelemetry tracers to preserve warning deduplication. PR [#16468](https://github.com/fastapi/fastapi/pull/16468) by [@tiangolo](https://github.com/tiangolo).
+
 ### Docs
 
 * 📝 Remove HTML title from newsletter to avoid the tooltip. PR [#16461](https://github.com/fastapi/fastapi/pull/16461) by [@tiangolo](https://github.com/tiangolo).
