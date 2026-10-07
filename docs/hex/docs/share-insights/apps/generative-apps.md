@@ -186,6 +186,8 @@ The iframe has no independent way to fetch data. It receives data exclusively fr
 
 ## Limitations[​](#limitations "Direct link to Limitations")
 
+### Feature Limitations[​](#feature-limitations "Direct link to Feature Limitations")
+
 While Generative apps are in Beta, some Hex features are not yet supported. These include:
 
 * [App notifications with screenshots](/docs/share-insights/app-notifications#attaching-screenshots)
@@ -195,6 +197,14 @@ While Generative apps are in Beta, some Hex features are not yet supported. Thes
 * [Published app comments](/docs/collaborate/comments#published-app-comments-vs-notebook-comments)
 
 [Chat with App](/docs/explore-data/chat-with-app) is supported on Generative apps, and being specific helps the agent do its best work. See [Chat with a Generative app](/docs/explore-data/chat-with-app#generative-apps).
+
+### Product Limitations[​](#product-limitations "Direct link to Product Limitations")
+
+#### SQL cell output size[​](#sql-cell-output-size "Direct link to SQL cell output size")
+
+Generative apps cap SQL cell outputs at 5 MB to improve app performance. If a SQL cell’s result is larger than 5 MB, the app displays only the current table page, which is 50 rows by default.
+
+To stay within the limit, reduce the size of your SQL results by filtering rows, aggregating data, or removing columns the app does not need.
 
 #### On this page
 
@@ -218,3 +228,5 @@ While Generative apps are in Beta, some Hex features are not yet supported. Thes
   + [How is the agent's generated code isolated?](#how-is-the-agents-generated-code-isolated)
   + [How does the app access my data?](#how-does-the-app-access-my-data)
 * [Limitations](#limitations)
+  + [Feature Limitations](#feature-limitations)
+  + [Product Limitations](#product-limitations)
