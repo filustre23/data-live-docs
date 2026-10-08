@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-10-07T22:37+00:00_
+_Generated 2026-10-08T04:02+00:00_
 
-**9 sources, 4648 topics total**
+**9 sources, 4654 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_754 topics_
+_760 topics_
 
 - `anthropic-sdk/about-claude/additional-resources`
 - `anthropic-sdk/about-claude/glossary`
@@ -600,6 +600,7 @@ _754 topics_
 - `anthropic-sdk/build-with-claude/prompt-engineering/overview`
 - `anthropic-sdk/build-with-claude/prompt-engineering/prompting-claude-fable-5`
 - `anthropic-sdk/build-with-claude/prompt-engineering/prompting-claude-fable-5-1`
+- `anthropic-sdk/build-with-claude/prompt-engineering/prompting-claude-haiku-5-5`
 - `anthropic-sdk/build-with-claude/prompt-engineering/prompting-claude-opus-4-8`
 - `anthropic-sdk/build-with-claude/prompt-engineering/prompting-claude-opus-5`
 - `anthropic-sdk/build-with-claude/prompt-engineering/prompting-claude-opus-5-5`
@@ -689,6 +690,7 @@ _754 topics_
 - `anthropic-sdk/managed-agents/define-outcomes`
 - `anthropic-sdk/managed-agents/dreams`
 - `anthropic-sdk/managed-agents/environments`
+- `anthropic-sdk/managed-agents/event-deltas`
 - `anthropic-sdk/managed-agents/events-and-streaming`
 - `anthropic-sdk/managed-agents/files`
 - `anthropic-sdk/managed-agents/github`
@@ -709,6 +711,7 @@ _754 topics_
 - `anthropic-sdk/managed-agents/self-hosted-sandboxes-reference`
 - `anthropic-sdk/managed-agents/self-hosted-sandboxes-security`
 - `anthropic-sdk/managed-agents/self-hosted-sandboxes-workers`
+- `anthropic-sdk/managed-agents/session-observability`
 - `anthropic-sdk/managed-agents/session-operations`
 - `anthropic-sdk/managed-agents/sessions`
 - `anthropic-sdk/managed-agents/skills`
@@ -722,8 +725,10 @@ _754 topics_
 - `anthropic-sdk/models/fable-5/introducing-claude-fable-5-and-claude-mythos-5`
 - `anthropic-sdk/models/fable-5/migration-guide`
 - `anthropic-sdk/models/fable-5/overview`
-- `anthropic-sdk/models/haiku-4-5/migration-guide`
 - `anthropic-sdk/models/haiku-4-5/overview`
+- `anthropic-sdk/models/haiku-5-5/migration-guide`
+- `anthropic-sdk/models/haiku-5-5/overview`
+- `anthropic-sdk/models/haiku-5-5/whats-new-haiku-5-5`
 - `anthropic-sdk/models/mythos-5-1/overview`
 - `anthropic-sdk/models/mythos-5/overview`
 - `anthropic-sdk/models/opus-4-5/overview`
@@ -747,6 +752,7 @@ _754 topics_
 - `anthropic-sdk/release-notes/system-prompts/claude-haiku-3`
 - `anthropic-sdk/release-notes/system-prompts/claude-haiku-3-5`
 - `anthropic-sdk/release-notes/system-prompts/claude-haiku-4-5`
+- `anthropic-sdk/release-notes/system-prompts/claude-haiku-5-5`
 - `anthropic-sdk/release-notes/system-prompts/claude-opus-3`
 - `anthropic-sdk/release-notes/system-prompts/claude-opus-4`
 - `anthropic-sdk/release-notes/system-prompts/claude-opus-4-1`
