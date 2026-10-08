@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-10-08T04:02+00:00_
+_Generated 2026-10-08T12:43+00:00_
 
-**9 sources, 4654 topics total**
+**9 sources, 4656 topics total**
 
 ## airflow
 
@@ -2505,7 +2505,7 @@ _220 topics_
 
 Upstream: <https://docs.getdbt.com/docs/>
 
-_1149 topics_
+_1151 topics_
 
 - `dbt-core/best-practices/best-practice-workflows`
 - `dbt-core/best-practices/clone-incremental-models`
@@ -2529,6 +2529,8 @@ _1149 topics_
 - `dbt-core/best-practices/how-we-build-our-metrics/semantic-layer-7-semantic-structure`
 - `dbt-core/best-practices/how-we-build-our-metrics/semantic-layer-8-refactor-a-rollup`
 - `dbt-core/best-practices/how-we-build-our-metrics/semantic-layer-9-conclusion`
+- `dbt-core/best-practices/how-we-handle-cdc/1-intro`
+- `dbt-core/best-practices/how-we-handle-cdc/2-choosing-incremental-or-snapshots`
 - `dbt-core/best-practices/how-we-handle-real-time-data/1-intro`
 - `dbt-core/best-practices/how-we-handle-real-time-data/2-incremental-patterns`
 - `dbt-core/best-practices/how-we-handle-real-time-data/3-warehouse-native-features`
