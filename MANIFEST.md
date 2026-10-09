@@ -1,6 +1,6 @@
 # data-live-docs — index
 
-_Generated 2026-10-09T12:30+00:00_
+_Generated 2026-10-09T22:12+00:00_
 
 **9 sources, 4656 topics total**
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_760 topics_
+_762 topics_
 
 - `anthropic-sdk/about-claude/additional-resources`
 - `anthropic-sdk/about-claude/glossary`
@@ -713,12 +713,14 @@ _760 topics_
 - `anthropic-sdk/managed-agents/self-hosted-sandboxes-workers`
 - `anthropic-sdk/managed-agents/session-observability`
 - `anthropic-sdk/managed-agents/session-operations`
+- `anthropic-sdk/managed-agents/session-threads`
 - `anthropic-sdk/managed-agents/sessions`
 - `anthropic-sdk/managed-agents/skills`
 - `anthropic-sdk/managed-agents/tools`
 - `anthropic-sdk/managed-agents/tools-web-restrictions`
 - `anthropic-sdk/managed-agents/vaults`
 - `anthropic-sdk/managed-agents/webhooks`
+- `anthropic-sdk/managed-agents/workflow-runs`
 - `anthropic-sdk/models/fable-5-1/migration-guide`
 - `anthropic-sdk/models/fable-5-1/overview`
 - `anthropic-sdk/models/fable-5-1/whats-new-fable-5-1`
@@ -2505,7 +2507,7 @@ _220 topics_
 
 Upstream: <https://docs.getdbt.com/docs/>
 
-_1151 topics_
+_1149 topics_
 
 - `dbt-core/best-practices/best-practice-workflows`
 - `dbt-core/best-practices/clone-incremental-models`
@@ -2656,7 +2658,6 @@ _1151 topics_
 - `dbt-core/docs/community-adapters`
 - `dbt-core/docs/configuration-checklist`
 - `dbt-core/docs/configure-dbt-extension`
-- `dbt-core/docs/connect-adapters`
 - `dbt-core/docs/contribute-dbt-adapters`
 - `dbt-core/docs/contribute-dbt-adapters-v2`
 - `dbt-core/docs/dbt-ai/_wizard-cli-full-generated`
@@ -3037,7 +3038,6 @@ _1151 topics_
 - `dbt-core/docs/running-a-dbt-project/using-threads`
 - `dbt-core/docs/sign-in-dbt-extension`
 - `dbt-core/docs/supported-data-platforms`
-- `dbt-core/docs/trusted-adapters`
 - `dbt-core/docs/upgrade-to-dbt-extension`
 - `dbt-core/docs/use-dbt-semantic-layer/consume-metrics`
 - `dbt-core/docs/use-dbt-semantic-layer/dbt-sl`
