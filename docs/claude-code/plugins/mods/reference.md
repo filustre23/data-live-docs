@@ -179,7 +179,7 @@ The mods API is the `$` argument every hook receives. Its methods are grouped in
 | [`$.ui`](/docs/en/plugins/mods/interface#pick-where-to-draw) | `resolve`, `invalidate`, `open`, `close`, `panes`, `focus`, `scroll`, `toast`, `status`, `log`, `notice`, `ask`, `copy`, `selection`, `blit` |
 | [`$.command`](/docs/en/plugins/mods/api#add-a-command) | `register`, `run`, `list` |
 | [`$.tool`](/docs/en/plugins/mods/api#add-a-tool) | `register`, `call`, `check`, `list` |
-| `$.agent` | `register`, `spawn`, `list` |
+| `$.agent` | `register`, `spawn`, `list`. `list()` returns this session's subagents and teammates, each with a `status` of `pending`, `running`, `waiting`, `idle`, `completed`, `failed`, or `killed`, where `idle` and `waiting` require Claude Code v2.1.289 or later. |
 | [`$.model`](/docs/en/plugins/mods/api#call-a-model) | `complete`, `fork`, `classify` |
 | [`$.prompt`](/docs/en/plugins/mods/api#start-a-turn-from-a-background-job) | `submit`, `read`, `fill`, `suggest`, `compose`. Claude reads text from `submit({ text })` after a sentence that names your mod as the sender. `submit({ text, asUser: true })` sends the text as the user's own words, without that sentence. |
 | `$.turn` | `abort` |
@@ -281,6 +281,7 @@ Hooks and mods API calls run under time and size limits. Claude Code skips a hoo
 | `$.process.run` timeout | 30 seconds by default, 10 minutes at most |
 | `$.model.complete` `maxTokens` | 1024 by default, up to 64,000 or the model's output limit |
 | `$.fs.read` and `$.fs.write` | 4 MiB for one file |
+| A hook's `drop` reason or `config.set` `deny` reason | 4,096 characters. The end of a longer reason is cut, and the drop or deny still applies. The cut requires Claude Code v2.1.292 or later, and on earlier versions the hook [fails](/docs/en/plugins/mods/events#handle-a-hook-that-fails) instead. |
 | Text in one tree | The first 100,000 characters are drawn |
 | A `Code`'s `language` or `path`, a `Select` option's `value`, or a `Client`'s `module` | 10,000 characters. If one is longer, Claude Code [draws its own version of the site](/docs/en/plugins/mods/interface#build-a-tree-from-elements). |
 | A `Link`'s `href` | 2,048 characters. A longer `href` keeps the whole tree from drawing. |

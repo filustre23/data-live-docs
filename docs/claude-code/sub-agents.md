@@ -579,7 +579,9 @@ Set `permissionMode` to choose the permission mode a subagent runs in. Use the m
 The main conversation's permission mode decides whether Claude Code uses the value you set:
 
 * When the main conversation is in `bypassPermissions`, `acceptEdits`, or [auto mode](/docs/en/permission-modes#eliminate-prompts-with-auto-mode), the subagent runs in that same mode and Claude Code ignores the `permissionMode` you set. Under auto mode, the classifier evaluates the subagent's tool calls with the main conversation's block and allow rules. When the subagent finishes, the classifier also reviews its work and its final report before the report is delivered, as [How auto mode handles subagents](/docs/en/permission-modes#eliminate-prompts-with-auto-mode) describes.
-* When the main conversation is in `default`, `dontAsk`, or `plan` mode, the subagent runs in the permission mode you set, except `bypassPermissions`. A subagent that declares `bypassPermissions` keeps the main conversation's mode instead. The `bypassPermissions` exception requires Claude Code v2.1.267 or later.
+* When the main conversation is in `default`, `dontAsk`, or `plan` mode, the subagent runs in the permission mode you set. It keeps the main conversation's permission mode instead in these cases:
+  * You set `bypassPermissions`. The `bypassPermissions` exception requires Claude Code v2.1.267 or later.
+  * You set `auto` and [auto mode isn't available](/docs/en/permission-modes#eliminate-prompts-with-auto-mode) to the subagent, such as when a settings file sets [`disableAutoMode`](/docs/en/settings-reference#disableautomode) or the subagent's model doesn't support auto mode.
 
 `permissionMode` accepts these values, and `manual` as an alias for `default`:
 
