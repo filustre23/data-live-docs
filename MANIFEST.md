@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-10-10T03:52+00:00_
+_Generated 2026-10-10T11:49+00:00_
 
-**9 sources, 4656 topics total**
+**9 sources, 4654 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_762 topics_
+_760 topics_
 
 - `anthropic-sdk/about-claude/additional-resources`
 - `anthropic-sdk/about-claude/glossary`
@@ -724,8 +724,6 @@ _762 topics_
 - `anthropic-sdk/models/fable-5-1/migration-guide`
 - `anthropic-sdk/models/fable-5-1/overview`
 - `anthropic-sdk/models/fable-5-1/whats-new-fable-5-1`
-- `anthropic-sdk/models/fable-5/introducing-claude-fable-5-and-claude-mythos-5`
-- `anthropic-sdk/models/fable-5/migration-guide`
 - `anthropic-sdk/models/fable-5/overview`
 - `anthropic-sdk/models/haiku-4-5/overview`
 - `anthropic-sdk/models/haiku-5-5/migration-guide`
