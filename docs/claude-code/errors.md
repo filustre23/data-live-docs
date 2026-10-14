@@ -152,6 +152,7 @@ Match the message you see to a section below.
 | `Request too large for the API's 32MB request limit` | [Request errors](#request-too-large) |
 | `Image was too large` | [Request errors](#image-was-too-large) |
 | `Unable to resize image` | [Request errors](#unable-to-resize-image) |
+| `Request rejected as unprocessable by the model` | [Request errors](#request-rejected-as-unprocessable-by-the-model) |
 | `PDF too large` / `PDF is password protected` / `pdftoppm is not installed` | [Request errors](#pdf-errors) |
 | `Extra inputs are not permitted` | [Request errors](#extra-inputs-are-not-permitted) |
 | `API Error: 400 ... tools.N.custom.input_schema: JSON schema is invalid` / `Property keys should match pattern` | [Request errors](#tool-input-schema-is-invalid) |
@@ -203,6 +204,7 @@ Match the message you see to a section below.
 | `Couldn't verify your organization's policy for cloud sessions` | [Command-line errors](#couldnt-verify-your-organizations-policy-for-cloud-sessions) |
 | `Cloud sessions aren't available:` followed by why your organization's policy couldn't be loaded | [Command-line errors](#couldnt-verify-your-organizations-policy-for-cloud-sessions) |
 | `Cloud sessions need a claude.ai sign-in` | [Unable to get organization UUID](/docs/en/claude-code-on-the-web#unable-to-get-organization-uuid) |
+| `Nothing was stashed: "<path>" is now a folder in place of a tracked file or link` / `are now folders in place of tracked files or links` | [Command-line errors](#nothing-was-stashed-because-a-folder-replaced-a-tracked-file) |
 | `Error: --json-schema is not a valid JSON Schema` | [Command-line errors](#the-json-schema-value-is-not-a-valid-json-schema) |
 | `Error: Invalid --agents configuration:` | [Command-line errors](#invalid-agents-configuration) |
 | `Error: --agents takes a JSON object, or a file path only with --print (-p)` | [Command-line errors](#invalid-agents-configuration) |
@@ -262,6 +264,7 @@ Match the message you see to a section below.
 | `Output styles are saved to local settings (.claude/settings.local.json), which this session doesn't load` | [Command-line errors](#output-styles-are-saved-to-local-settings-which-this-session-doesnt-load) |
 | `/recap only runs when you ask for it yourself in this session` | [Command-line errors](#recap-only-runs-when-you-ask-for-it-yourself) |
 | `` `plugin eval` is currently in early access `` / `` `plugin eval` is currently unavailable `` | [Plugin errors](#plugin-eval-is-currently-in-early-access) |
+| `cannot be evaluated where sessions load it` | [Test plugins with evals](/docs/en/plugin-evals#cannot-be-evaluated-where-sessions-load-it) |
 | `Marketplace "<name>" is registered from an untrusted source` | [Plugin errors](#marketplace-is-registered-from-an-untrusted-source) |
 | `Claude Code refuses the marketplace name "<name>"` | [Plugin errors](#claude-code-refuses-the-marketplace-name) |
 | `Marketplace name impersonates an official Anthropic/Claude marketplace` | [Plugin errors](#claude-code-refuses-the-marketplace-name) |
@@ -2230,6 +2233,20 @@ Claude Code normally resizes large images automatically. These errors mean the i
 * If the message reports a dimension or size limit, resize or recompress the image below that limit before attaching.
 * If the message names a cause, such as a CMYK JPEG, an animated WebP, or a possibly damaged file, re-save the image in the format the message suggests and attach it again.
 
+### Request rejected as unprocessable by the model
+
+The API refused the request as one the model can't process. The message is the API's own.
+
+```text theme={null}
+API Error: 400 Request rejected as unprocessable by the model (too many or oversized images, or unsupported parameters)
+```
+
+Claude Code can remove the oldest images and documents from a refused request and send it again. Before v2.1.290, Claude Code didn't remove images on this refusal, so a long session that accumulated hundreds of them could fail with this error on every turn.
+
+**What to do:**
+
+* If the message keeps appearing in a conversation with images or documents, remove them yourself. Press Esc twice to step back past the turns that added them, or run `/clear` to start fresh.
+
 ### PDF errors
 
 The PDF you attached couldn't be processed. The messages are shown here in their non-interactive form; in an interactive session they instead prompt you to double press esc and try again.
@@ -2940,6 +2957,20 @@ Before v2.1.296, these failures printed the `Couldn't verify` message too.
 
 * For the `Couldn't verify` message, check your network connection and try again. Inside a session, restart Claude Code first
 * For a `Cloud sessions aren't available:` message, do what its cause calls for, such as checking your proxy or unsetting the credential it names, then run the command again
+
+<h3 id="nothing-was-stashed-because-a-folder-replaced-a-tracked-file">
+  Nothing was stashed because a folder replaced a tracked file
+</h3>
+
+This message means a folder in your checkout now sits where a git-tracked file or link used to be. It appears after you choose the stash option while pulling a [cloud session](/docs/en/claude-code-on-the-web#from-cloud-to-terminal) into your terminal, for example with `claude --teleport` or `/teleport`. Stashing that state could delete the files inside the folder, so Claude Code refuses the stash and leaves your checkout and index unchanged:
+
+```text wrap theme={null}
+Error: Nothing was stashed: "f" is now a folder in place of a tracked file or link, and stashing could delete what's in it for good. Commit the change or move the folder somewhere else, then try again.
+```
+
+**What to do:**
+
+* Commit the change or move the folder somewhere else, as the message says, then run the teleport again
 
 <h3 id="the-json-schema-value-is-not-a-valid-json-schema">
   The `--json-schema` value is not a valid JSON Schema
