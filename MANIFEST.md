@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-10-14T11:04+00:00_
+_Generated 2026-10-14T16:24+00:00_
 
-**9 sources, 4659 topics total**
+**9 sources, 4662 topics total**
 
 ## airflow
 
@@ -2509,7 +2509,7 @@ _221 topics_
 
 Upstream: <https://docs.getdbt.com/docs/>
 
-_1150 topics_
+_1153 topics_
 
 - `dbt-core/best-practices/best-practice-workflows`
 - `dbt-core/best-practices/clone-incremental-models`
@@ -2616,6 +2616,7 @@ _1150 topics_
 - `dbt-core/docs/build/groups`
 - `dbt-core/docs/build/hooks-operations`
 - `dbt-core/docs/build/iceberg/about-catalogs`
+- `dbt-core/docs/build/iceberg/adapters/aws-iceberg-support`
 - `dbt-core/docs/build/iceberg/adapters/bigquery-iceberg-support`
 - `dbt-core/docs/build/iceberg/adapters/databricks-iceberg-support`
 - `dbt-core/docs/build/iceberg/adapters/duckdb-iceberg-support`
@@ -2716,6 +2717,7 @@ _1150 topics_
 - `dbt-core/docs/dbt-apis/project-state`
 - `dbt-core/docs/dbt-apis/rate-limits`
 - `dbt-core/docs/dbt-apis/schema-discovery-about`
+- `dbt-core/docs/dbt-apis/service-principals`
 - `dbt-core/docs/dbt-apis/service-tokens`
 - `dbt-core/docs/dbt-apis/sl-api-overview`
 - `dbt-core/docs/dbt-apis/sl-graphql`
@@ -2734,6 +2736,7 @@ _1150 topics_
 - `dbt-core/docs/dbt-versions/compatible-track-changelog`
 - `dbt-core/docs/dbt-versions/dbt-platform-release-notes-gen`
 - `dbt-core/docs/dbt-versions/dbt-upgrade/01-upgrading-to-v2`
+- `dbt-core/docs/dbt-versions/dbt-upgrade/02-upgrading-to-v1.13`
 - `dbt-core/docs/dbt-versions/dbt-upgrade/03-upgrading-to-v1.12`
 - `dbt-core/docs/dbt-versions/dbt-upgrade/04-upgrading-to-v1.11`
 - `dbt-core/docs/dbt-versions/dbt-upgrade/05-upgrading-to-v1.10`
