@@ -1220,6 +1220,7 @@ Copy
 | limit | integer <int32>  (LargerPageSize)   [ 1 .. 500 ]  Default:  "25"  Number of results to fetch per page for paginated requests |
 | sortBy | string (ListGroupsSortByEnum)  Enum: "CREATED\_AT" "NAME" |
 | sortDirection | string (SortDirectionEnum)  Enum: "DESC" "ASC" |
+| userId | string  Default:  null  When set, return only groups this user belongs to. |
 
 ### Responses
 
@@ -2586,6 +2587,4 @@ Copy
   + "users": [
     - {
       * "access": "string",
-      * "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08"}],
-  + "groups": [
-    - {`
+      * "id": "497f6eca-6276-4993-bfeb-53cbbbba6`

@@ -42,7 +42,7 @@ BYOK is primarily intended to support internal security or procurement requireme
 BYOK is currently supported for:
 
 * **Direct providers** who serve their own models through their own API.
-* **[Cloud providers](#cloud-provider-setup)** who serve a direct provider's models from within their cloud.
+* **Cloud providers** who serve a direct provider's models from within their cloud.
 
 | Provider Type | Provider | Models Available | `Fast Mode` Available?\* | Credentials |
 | --- | --- | --- | --- | --- |
@@ -54,6 +54,90 @@ BYOK is currently supported for:
 *\* `Fast mode` is available when using specific models selected from the model picker (not Auto mode), and if the model has a fast path available from the provider.*
 
 *\*\*GEAP was formerly known as Google Vertex*
+
+### Model access requirements[​](#model-access-requirements "Direct link to Model access requirements")
+
+Hex may route AI requests to any model in the supported model list below.
+
+```
+Anthropic
+
+
+
+- claude-fable-5-1
+
+
+
+- claude-opus-5-5
+
+
+
+- claude-opus-5
+
+
+
+- claude-opus-4-8
+
+
+
+- claude-opus-4-6
+
+
+
+- claude-sonnet-5-5
+
+
+
+- claude-sonnet-5
+
+
+
+- claude-haiku-5-5
+
+
+
+- claude-haiku-4-5
+
+
+
+OpenAI
+
+
+
+- gpt-6-astra
+
+
+
+- gpt-6.1-sol
+
+
+
+- gpt-6-sol
+
+
+
+- gpt-5.6
+
+
+
+- gpt-5.6-terra
+
+
+
+- gpt-6-luna
+
+
+
+- gpt-5.6-luna
+
+
+
+# Model list verified: October 14, 2026
+```
+
+Ensure these models are available to your direct provider key, enabled in your cloud provider account, or exposed by your gateway under the exact IDs shown. If Hex sends requests to a model you haven't enabled, fallback requests to other models will be attempted. However, these fallback attempts will also fail if these fallback models are not enabled for your workspace or exposed via your key.
+
+If you're experiencing persistent agent failures with BYOK configured, check the current list of models used in Hex above, and ensure all models are enabled in your BYOK setup. Reach out to [support@hex.tech](mailto:support@hex.tech) if you're still seeing issues after confirming this.
 
 ### Scope[​](#scope "Direct link to Scope")
 
@@ -71,22 +155,6 @@ To set up BYOK, head to **Settings > AI & agents > Provider settings** and selec
 The **Require your own API keys** setting can be toggled on to require AI usage in Hex to route through your provided key. If no key is configured, requests fail rather than falling back to Hex-managed keys.
 
 To rotate a key, use the refresh button to the right of the **Model provider** setting and add the new key.
-
-### Cloud providers[​](#cloud-providers "Direct link to Cloud providers")
-
-info
-
-* Currently, only Anthropic models are supported via cloud providers.
-* Anthropic's `Fast mode` is not available via cloud providers.
-
-When setting up a cloud provider, you must enable specific models via your cloud provider to allow for model usage in Hex.
-
-* A list of current models used in Hex and directions to enable these models in your given cloud provider are outlined in the Hex BYOK setup flow.
-
-If Hex sends requests to a model you haven't enabled, fallback requests to other models will be attempted. However, these fallback attempts will also fail if these fallback models are not enabled for your workspace or exposed via your key.
-
-* If you're experiencing persistent agent failures with a cloud provider configured, check the current list models used in Hex via the refresh button to the right of the **Model provider** setting, and ensure all models are enabled in your cloud provider.
-* Reach out to [support@hex.tech](mailto:support@hex.tech) if you're still seeing issues after confirming this.
 
 ### Third-party gateways[​](#third-party-gateways "Direct link to Third-party gateways")
 
@@ -411,9 +479,9 @@ Please reach out to [support@hex.tech](mailto:support@hex.tech) if you're intere
 * [Model data retention settings](#model-data-retention-settings)
 * [Bring Your Own Key (BYOK)](#bring-your-own-key-byok)
   + [Supported providers](#supported-providers)
+  + [Model access requirements](#model-access-requirements)
   + [Scope](#scope)
   + [Configuration](#configuration)
-  + [Cloud providers](#cloud-providers)
   + [Third-party gateways](#third-party-gateways)
   + [Troubleshooting gateway setup](#troubleshooting-gateway-setup)
   + [Model availability](#model-availability)

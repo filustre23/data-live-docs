@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-10-14T16:24+00:00_
+_Generated 2026-10-14T21:17+00:00_
 
-**9 sources, 4662 topics total**
+**9 sources, 4677 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_763 topics_
+_778 topics_
 
 - `anthropic-sdk/about-claude/additional-resources`
 - `anthropic-sdk/about-claude/glossary`
@@ -292,6 +292,17 @@ _763 topics_
 - `anthropic-sdk/api/beta/organization/spend_limits/list`
 - `anthropic-sdk/api/beta/organization/spend_limits/retrieve`
 - `anthropic-sdk/api/beta/organization/spend_limits/set`
+- `anthropic-sdk/api/beta/organization/telemetry_destinations`
+- `anthropic-sdk/api/beta/organization/telemetry_destinations/create`
+- `anthropic-sdk/api/beta/organization/telemetry_destinations/delete`
+- `anthropic-sdk/api/beta/organization/telemetry_destinations/list`
+- `anthropic-sdk/api/beta/organization/telemetry_destinations/retrieve`
+- `anthropic-sdk/api/beta/organization/telemetry_destinations/test`
+- `anthropic-sdk/api/beta/organization/telemetry_destinations/update`
+- `anthropic-sdk/api/beta/organization/telemetry_destinations/workspaces`
+- `anthropic-sdk/api/beta/organization/telemetry_destinations/workspaces/add`
+- `anthropic-sdk/api/beta/organization/telemetry_destinations/workspaces/list`
+- `anthropic-sdk/api/beta/organization/telemetry_destinations/workspaces/remove`
 - `anthropic-sdk/api/beta/organization/usage_report`
 - `anthropic-sdk/api/beta/organization/usage_report/retrieve_claude_code`
 - `anthropic-sdk/api/beta/organization/usage_report/retrieve_messages`
@@ -476,6 +487,7 @@ _763 topics_
 - `anthropic-sdk/api/models`
 - `anthropic-sdk/api/models/list`
 - `anthropic-sdk/api/models/retrieve`
+- `anthropic-sdk/api/opentelemetry/spans`
 - `anthropic-sdk/api/organization`
 - `anthropic-sdk/api/organization/api_keys`
 - `anthropic-sdk/api/organization/api_keys/list`
@@ -668,6 +680,9 @@ _763 topics_
 - `anthropic-sdk/manage-claude/inference-hooks`
 - `anthropic-sdk/manage-claude/inference-hooks-configuration`
 - `anthropic-sdk/manage-claude/inference-hooks-endpoint`
+- `anthropic-sdk/manage-claude/opentelemetry`
+- `anthropic-sdk/manage-claude/opentelemetry/api`
+- `anthropic-sdk/manage-claude/opentelemetry/sdk`
 - `anthropic-sdk/manage-claude/plugins-api`
 - `anthropic-sdk/manage-claude/rate-limits-api`
 - `anthropic-sdk/manage-claude/spend-limits-api`
