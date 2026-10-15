@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-10-15T16:12+00:00_
+_Generated 2026-10-15T20:56+00:00_
 
-**9 sources, 4678 topics total**
+**9 sources, 4686 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_779 topics_
+_781 topics_
 
 - `anthropic-sdk/about-claude/additional-resources`
 - `anthropic-sdk/about-claude/api-credits-for-subscribers`
@@ -51,6 +51,7 @@ _779 topics_
 - `anthropic-sdk/agents-and-tools/remote-mcp-servers`
 - `anthropic-sdk/agents-and-tools/tool-use/advisor-tool`
 - `anthropic-sdk/agents-and-tools/tool-use/bash-tool`
+- `anthropic-sdk/agents-and-tools/tool-use/browser-use-sdk`
 - `anthropic-sdk/agents-and-tools/tool-use/browser-use-tool`
 - `anthropic-sdk/agents-and-tools/tool-use/build-a-tool-using-agent`
 - `anthropic-sdk/agents-and-tools/tool-use/code-execution-tool`
@@ -702,6 +703,7 @@ _779 topics_
 - `anthropic-sdk/manage-claude/workspaces`
 - `anthropic-sdk/managed-agents/agent-setup`
 - `anthropic-sdk/managed-agents/budgets`
+- `anthropic-sdk/managed-agents/choosing-an-environment`
 - `anthropic-sdk/managed-agents/cloud-sandboxes-reference`
 - `anthropic-sdk/managed-agents/define-outcomes`
 - `anthropic-sdk/managed-agents/dreams`
@@ -2297,7 +2299,7 @@ _1488 topics_
 
 Upstream: <https://code.claude.com/docs/en/>
 
-_221 topics_
+_227 topics_
 
 - `claude-code/accessibility`
 - `claude-code/admin-setup`
@@ -2364,6 +2366,12 @@ _221 topics_
 - `claude-code/cli-reference`
 - `claude-code/cloud-environments`
 - `claude-code/code-review`
+- `claude-code/code-review-costs`
+- `claude-code/code-review-customize`
+- `claude-code/code-review-local`
+- `claude-code/code-review-pull-requests`
+- `claude-code/code-review-setup`
+- `claude-code/code-review-troubleshooting`
 - `claude-code/commands`
 - `claude-code/common-workflows`
 - `claude-code/communications-kit`
