@@ -7,8 +7,24 @@ hide:
 
 ## Latest Changes
 
+### Translations
+
+* 🌐 Update translations for zh-hant (update-outdated). PR [#16500](https://github.com/fastapi/fastapi/pull/16500) by [@pr-submit[bot]](https://github.com/apps/pr-submit).
+* 🌐 Update translations for ja (update-outdated). PR [#16499](https://github.com/fastapi/fastapi/pull/16499) by [@pr-submit[bot]](https://github.com/apps/pr-submit).
+* 🌐 Update translations for zh (update-outdated). PR [#16501](https://github.com/fastapi/fastapi/pull/16501) by [@pr-submit[bot]](https://github.com/apps/pr-submit).
+* 🌐 Update translations for hi (update-outdated). PR [#16498](https://github.com/fastapi/fastapi/pull/16498) by [@pr-submit[bot]](https://github.com/apps/pr-submit).
+* 🌐 Update translations for es (update-outdated). PR [#16497](https://github.com/fastapi/fastapi/pull/16497) by [@pr-submit[bot]](https://github.com/apps/pr-submit).
+* 🌐 Update translations for fr (update-outdated). PR [#16495](https://github.com/fastapi/fastapi/pull/16495) by [@pr-submit[bot]](https://github.com/apps/pr-submit).
+* 🌐 Update translations for ko (update-outdated). PR [#16496](https://github.com/fastapi/fastapi/pull/16496) by [@pr-submit[bot]](https://github.com/apps/pr-submit).
+* 🌐 Update translations for de (update-outdated). PR [#16493](https://github.com/fastapi/fastapi/pull/16493) by [@pr-submit[bot]](https://github.com/apps/pr-submit).
+* 🌐 Update translations for uk (update-outdated). PR [#16494](https://github.com/fastapi/fastapi/pull/16494) by [@pr-submit[bot]](https://github.com/apps/pr-submit).
+* 🌐 Update translations for tr (update-outdated). PR [#16490](https://github.com/fastapi/fastapi/pull/16490) by [@pr-submit[bot]](https://github.com/apps/pr-submit).
+* 🌐 Update translations for pt (update-outdated). PR [#16491](https://github.com/fastapi/fastapi/pull/16491) by [@pr-submit[bot]](https://github.com/apps/pr-submit).
+* 🌐 Update translations for ru (update-outdated). PR [#16492](https://github.com/fastapi/fastapi/pull/16492) by [@pr-submit[bot]](https://github.com/apps/pr-submit).
+
 ### Internal
 
+* ⬆ Bump pydantic-ai-slim from 2.49.0 to 2.53.0. PR [#16487](https://github.com/fastapi/fastapi/pull/16487) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆ Bump werkzeug from 3.1.6 to 3.1.9. PR [#16464](https://github.com/fastapi/fastapi/pull/16464) by [@dependabot[bot]](https://github.com/apps/dependabot).
 
 ## 0.143.1 (2026-10-14)
