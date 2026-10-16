@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-10-16T10:34+00:00_
+_Generated 2026-10-16T20:22+00:00_
 
-**9 sources, 4687 topics total**
+**9 sources, 4688 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_782 topics_
+_783 topics_
 
 - `anthropic-sdk/about-claude/additional-resources`
 - `anthropic-sdk/about-claude/api-credits-for-subscribers`
@@ -669,6 +669,7 @@ _782 topics_
 - `anthropic-sdk/manage-claude/cmek`
 - `anthropic-sdk/manage-claude/cmek-aws-kms`
 - `anthropic-sdk/manage-claude/cmek-azure-key-vault`
+- `anthropic-sdk/manage-claude/cmek-claude-platform-on-aws`
 - `anthropic-sdk/manage-claude/cmek-google-cloud-kms`
 - `anthropic-sdk/manage-claude/compliance-activity-feed`
 - `anthropic-sdk/manage-claude/compliance-api`
