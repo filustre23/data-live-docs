@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-10-15T20:56+00:00_
+_Generated 2026-10-16T02:44+00:00_
 
-**9 sources, 4686 topics total**
+**9 sources, 4687 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_781 topics_
+_782 topics_
 
 - `anthropic-sdk/about-claude/additional-resources`
 - `anthropic-sdk/about-claude/api-credits-for-subscribers`
@@ -425,6 +425,12 @@ _781 topics_
 - `anthropic-sdk/api/compliance/apps/chats/list`
 - `anthropic-sdk/api/compliance/apps/chats/messages`
 - `anthropic-sdk/api/compliance/apps/chats/messages/list`
+- `anthropic-sdk/api/compliance/apps/code`
+- `anthropic-sdk/api/compliance/apps/code/artifacts`
+- `anthropic-sdk/api/compliance/apps/code/artifacts/delete`
+- `anthropic-sdk/api/compliance/apps/code/artifacts/download`
+- `anthropic-sdk/api/compliance/apps/code/artifacts/list`
+- `anthropic-sdk/api/compliance/apps/code/artifacts/retrieve_version`
 - `anthropic-sdk/api/compliance/apps/projects`
 - `anthropic-sdk/api/compliance/apps/projects/attachments`
 - `anthropic-sdk/api/compliance/apps/projects/attachments/list`
@@ -447,11 +453,6 @@ _781 topics_
 - `anthropic-sdk/api/compliance/apps/sessions/remote/list`
 - `anthropic-sdk/api/compliance/apps/sessions/remote/messages`
 - `anthropic-sdk/api/compliance/apps/sessions/remote/messages/list`
-- `anthropic-sdk/api/compliance/code`
-- `anthropic-sdk/api/compliance/code/artifacts`
-- `anthropic-sdk/api/compliance/code/artifacts/delete`
-- `anthropic-sdk/api/compliance/code/artifacts/list`
-- `anthropic-sdk/api/compliance/code/artifacts/retrieve_version`
 - `anthropic-sdk/api/compliance/groups`
 - `anthropic-sdk/api/compliance/groups/list`
 - `anthropic-sdk/api/compliance/groups/members`
