@@ -7,6 +7,12 @@ hide:
 
 ## Latest Changes
 
+## 0.143.4 (2026-10-17)
+
+### Upgrades
+
+* ⬆️ Add httpx2 to optional dependencies. PR [#16512](https://github.com/fastapi/fastapi/pull/16512) by [@tiangolo](https://github.com/tiangolo).
+
 ## 0.143.3 (2026-10-16)
 
 ### Fixes
