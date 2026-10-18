@@ -7,6 +7,12 @@ hide:
 
 ## Latest Changes
 
+## 0.143.5 (2026-10-18)
+
+### Fixes
+
+* 🐛 Fix handling of empty value for `byte` file list parameter. PR [#9383](https://github.com/fastapi/fastapi/pull/9383) by [@Viicos](https://github.com/Viicos).
+
 ## 0.143.4 (2026-10-17)
 
 ### Upgrades
