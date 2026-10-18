@@ -7,6 +7,30 @@ hide:
 
 ## Latest Changes
 
+## 0.146.0 (2026-10-18)
+
+The `root_path` parameter in `FastAPI()` is deprecated. Configure the server with `fastapi run --root-path /api/v1` instead.
+
+### Breaking Changes
+
+* 🗑️ Deprecate the `root_path` parameter in `FastAPI`. PR [#16520](https://github.com/fastapi/fastapi/pull/16520) by [@tiangolo](https://github.com/tiangolo).
+
+## 0.145.0 (2026-10-18)
+
+### Breaking Changes
+
+* 🔥 Remove deprecated `openapi_prefix` and unused `**extra` from `FastAPI`. PR [#16518](https://github.com/fastapi/fastapi/pull/16518) by [@tiangolo](https://github.com/tiangolo).
+
+### Docs
+
+* 📝 Document URL paths in templates. PR [#16517](https://github.com/fastapi/fastapi/pull/16517) by [@tiangolo](https://github.com/tiangolo).
+
+## 0.144.0 (2026-10-18)
+
+### Features
+
+* ✨ Add WebSocket support to security dependencies. PR [#10147](https://github.com/fastapi/fastapi/pull/10147) by [@mnixry](https://github.com/mnixry).
+
 ## 0.143.5 (2026-10-18)
 
 ### Fixes
