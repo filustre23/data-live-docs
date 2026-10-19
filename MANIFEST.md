@@ -1,6 +1,6 @@
 # data-live-docs — index
 
-_Generated 2026-10-19T17:47+00:00_
+_Generated 2026-10-19T18:13+00:00_
 
 **9 sources, 4689 topics total**
 
@@ -2535,7 +2535,7 @@ _227 topics_
 
 Upstream: <https://docs.getdbt.com/docs/>
 
-_1154 topics_
+_1156 topics_
 
 - `dbt-core/best-practices/best-practice-workflows`
 - `dbt-core/best-practices/clone-incremental-models`
@@ -2578,6 +2578,7 @@ _1154 topics_
 - `dbt-core/best-practices/how-we-structure/3-intermediate`
 - `dbt-core/best-practices/how-we-structure/4-marts`
 - `dbt-core/best-practices/how-we-structure/5-the-rest-of-the-project`
+- `dbt-core/best-practices/how-we-structure/6-mapping-folders-to-warehouse`
 - `dbt-core/best-practices/how-we-style/0-how-we-style-our-dbt-projects`
 - `dbt-core/best-practices/how-we-style/1-how-we-style-our-dbt-models`
 - `dbt-core/best-practices/how-we-style/2-how-we-style-our-sql`
@@ -3458,6 +3459,7 @@ _1154 topics_
 - `dbt-core/reference/global-configs/version-compatibility`
 - `dbt-core/reference/global-configs/warnings`
 - `dbt-core/reference/info-schema`
+- `dbt-core/reference/jinja-file-support`
 - `dbt-core/reference/macro-properties`
 - `dbt-core/reference/metric-properties`
 - `dbt-core/reference/model-configs`
@@ -4256,7 +4258,7 @@ _390 topics_
 
 Upstream: <https://openai.github.io/openai-agents-python/>
 
-_399 topics_
+_397 topics_
 
 - `openai-agents/agents`
 - `openai-agents/config`
@@ -4395,8 +4397,6 @@ _399 topics_
 - `openai-agents/ref/extensions/sandbox/e2b/sandbox`
 - `openai-agents/ref/extensions/sandbox/modal/mounts`
 - `openai-agents/ref/extensions/sandbox/modal/sandbox`
-- `openai-agents/ref/extensions/sandbox/runloop/mounts`
-- `openai-agents/ref/extensions/sandbox/runloop/sandbox`
 - `openai-agents/ref/extensions/sandbox/vercel/mounts`
 - `openai-agents/ref/extensions/sandbox/vercel/sandbox`
 - `openai-agents/ref/extensions/tool_output_trimmer`
