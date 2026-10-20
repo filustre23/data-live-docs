@@ -7,6 +7,16 @@ hide:
 
 ## Latest Changes
 
+## 0.151.0 (2026-10-20)
+
+JSON request bodies now distinguish an explicit `null` from an omitted value. For individual `Body` parameters, `null` is validated as `None`: nullable types accept it, and non-nullable types reject it even when a default is defined. Defaults and default factories apply only when the value is omitted. This applies both to parameters inside JSON objects and to parameters representing the entire body. Clients that used `null` to request a default should omit the value instead.
+
+When a JSON object is expected because of `Body(embed=True)` or multiple body parameters, sending `null` as the entire body now returns a validation error.
+
+### Breaking Changes
+
+* 🐛 Distinguish JSON null from omitted body values. PR [#16536](https://github.com/fastapi/fastapi/pull/16536) by [@tiangolo](https://github.com/tiangolo).
+
 ## 0.150.0 (2026-10-20)
 
 When no file is selected, browsers submit a file part with an empty filename and empty content. FastAPI now treats this as missing: required file fields return a validation error, and fields with defaults or default factories use them. Unselected inputs are ignored in lists of files. Named zero-byte files are still accepted.

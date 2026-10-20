@@ -148,7 +148,7 @@ Then run `hex auth status`. If I'm not authenticated, stop and tell me to run `h
 
 
 
-- `attempts` from 1 to 3 (higher surfaces run-to-run variance)
+- `attempts` from 1 to 5 (higher surfaces run-to-run variance)
 
 
 
@@ -277,15 +277,15 @@ A rubric can be marked `warnOnly`: it is still graded and reported, but it never
 
 #### Multiple attempts[​](#multiple-attempts "Direct link to Multiple attempts")
 
-Each case can run 1-3 attempts. Every attempt is graded independently against the case’s rubrics.
+Each case can run 1-5 attempts. Every attempt is graded independently against the case’s rubrics.
 
-For cases with 2 or 3 attempts, the case passes as long as no more than one attempt fails.
+With one attempt, that attempt must pass. With multiple attempts, the case can tolerate one failed attempt and still pass.
 
-* 1 attempt: it must pass
-* 2 attempts: at least 1 must pass
-* 3 attempts: at least 2 must pass
+If any attempt errors, the case is marked **Error**, regardless of how many other attempts pass.
 
 The Hex agent is non-deterministic, so the same prompt can produce different responses across runs. Multiple attempts help distinguish a one-off failure, which is tolerated, from a repeated failure that causes the case to fail.
+
+More attempts use more AI credits and take longer to run.
 
 ## Designing useful evals[​](#designing-useful-evals "Direct link to Designing useful evals")
 
@@ -344,7 +344,7 @@ prompt: "How many monthly active users did we have in March 2024?"
 
 
 
-attempts: 1   # 1-3; re-runs the case to show variance
+attempts: 1   # 1-5; re-runs the case to show variance
 
 
 
@@ -504,7 +504,7 @@ timeoutSeconds: 30      # optional, max 120
 Eval suite limits:
 
 * A suite can contain up to 100 cases
-* Each case can run 1-3 attempts
+* Each case can run 1-5 attempts
 * Each case can have up to 15 rubrics
 * A workspace can have up to 3 runs in progress at once
 
@@ -522,7 +522,7 @@ Use `hex eval suite ids --search <string>` to find existing suite IDs in your wo
 | --- | --- | --- | --- |
 | `id` | Yes | string | Unique identifier for the case within the suite. |
 | `prompt` | Yes | string | The question given to the agent. |
-| `attempts` | Yes | number | How many times to run the case, 1-3. No default. See [Multiple attempts](#multiple-attempts). |
+| `attempts` | Yes | number | How many times to run the case, 1-5. No default. See [Multiple attempts](#multiple-attempts). |
 | `rubrics` | Yes | array | One or more rubrics to grade the case. See [Rubric types](#rubric-types). |
 | `attachments` | No | object | Resources to expose to the agent up front. See [Attach context to a case](#attach-context-to-a-case). |
 | `threadOptions` | No | object | Per-case thread settings, such as `endorsedMode`. |
@@ -559,7 +559,7 @@ Choose a rubric type based on what you want to check.
 | `tolerancePercentage` | No | number | Allowed difference as a percent of `target`. Default 1. Applies even when `absoluteTolerance` is set. |
 | `absoluteTolerance` | No | number | Allowed difference as a fixed amount, in the target’s units. Checked in addition to `tolerancePercentage`, not instead of it — a value passes if it's within either. For an exact match, set both `absoluteTolerance: 0` and `tolerancePercentage: 0`. |
 | `outputFormat` | No | `int` or `float` | Default `float`. |
-| `strictHeadline` | No | boolean | Default `true`. Grades the number identified as the answer  ’s primary result, and fails the rubric if no primary result can be identified. Set to `false` to pass when any number in the response matches the target. |
+| `strictHeadline` | No | boolean | Default `true`. Grades the number identified as the answer’s primary result, and fails the rubric if no primary result can be identified. Set to `false` to pass when any number in the response matches the target. |
 | `extractionGuidance` | No | string | Hint for which number to grade when the answer has several, e.g. "the enterprise ARR, not total ARR". |
 | `warnOnly` | No | boolean | Default `false`. Grade and report this rubric without letting it fail or error the case. See [Warn-only rubrics](#warn-only-rubrics). |
 | `measure` | No | string | Groups this rubric with others checking the same quality, so they roll up into one rate. Lowercase kebab-case or snake\_case. See [Measures](#measures). |
