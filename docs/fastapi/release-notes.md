@@ -7,6 +7,28 @@ hide:
 
 ## Latest Changes
 
+## 0.154.0 (2026-10-20)
+
+### Features
+
+* ✨ Add Pydantic validation options to request parameters. PR [#16542](https://github.com/fastapi/fastapi/pull/16542) by [@tiangolo](https://github.com/tiangolo).
+
+## 0.153.0 (2026-10-20)
+
+Unions of form models now apply the same browser form handling as individual models. Empty scalar fields use defaults or produce missing-field errors, empty list items are preserved, omitted boolean fields become `False`, and unselected files are treated as missing. JSON request bodies are unchanged.
+
+### Fixes
+
+* 🐛 Apply browser form handling to unions of Pydantic models. PR [#16540](https://github.com/fastapi/fastapi/pull/16540) by [@tiangolo](https://github.com/tiangolo).
+
+## 0.152.0 (2026-10-20)
+
+Validation errors for header parameter models now report the HTTP header name, such as `int-val`, instead of the Python field name, `int_val`. Explicit aliases, `Header(convert_underscores=False)`, and Pydantic models with `loc_by_alias=False` keep their existing behavior.
+
+### Fixes
+
+* 🐛 Fix header model validation errors to report HTTP header names. PR [#16538](https://github.com/fastapi/fastapi/pull/16538) by [@tiangolo](https://github.com/tiangolo).
+
 ## 0.151.0 (2026-10-20)
 
 JSON request bodies now distinguish an explicit `null` from an omitted value. For individual `Body` parameters, `null` is validated as `None`: nullable types accept it, and non-nullable types reject it even when a default is defined. Defaults and default factories apply only when the value is omitted. This applies both to parameters inside JSON objects and to parameters representing the entire body. Clients that used `null` to request a default should omit the value instead.

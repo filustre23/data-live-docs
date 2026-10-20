@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-10-20T10:52+00:00_
+_Generated 2026-10-20T21:06+00:00_
 
-**9 sources, 4691 topics total**
+**9 sources, 4704 topics total**
 
 ## airflow
 
@@ -2537,7 +2537,7 @@ _227 topics_
 
 Upstream: <https://docs.getdbt.com/docs/>
 
-_1156 topics_
+_1169 topics_
 
 - `dbt-core/best-practices/best-practice-workflows`
 - `dbt-core/best-practices/clone-incremental-models`
@@ -3240,6 +3240,19 @@ _1156 topics_
 - `dbt-core/faqs/Warehouse/db-connection-dbt-compile`
 - `dbt-core/faqs/Warehouse/loading-data`
 - `dbt-core/faqs/Warehouse/sample-profiles`
+- `dbt-core/faqs/dbt-mcp/troubleshooting/claude-code`
+- `dbt-core/faqs/dbt-mcp/troubleshooting/claude-desktop-errors`
+- `dbt-core/faqs/dbt-mcp/troubleshooting/execute-sql`
+- `dbt-core/faqs/dbt-mcp/troubleshooting/multicell`
+- `dbt-core/faqs/dbt-mcp/troubleshooting/oauth`
+- `dbt-core/faqs/dbt-mcp/troubleshooting/server-not-starting`
+- `dbt-core/faqs/dbt-mcp/troubleshooting/snowflake-empty-results`
+- `dbt-core/faqs/dbt-mcp/troubleshooting/snowflake-oauth-fails`
+- `dbt-core/faqs/dbt-mcp/troubleshooting/snowflake-permission-errors`
+- `dbt-core/faqs/dbt-mcp/troubleshooting/toolset-disabled`
+- `dbt-core/faqs/dbt-mcp/troubleshooting/urls-vs-ids`
+- `dbt-core/faqs/dbt-mcp/troubleshooting/uvx`
+- `dbt-core/faqs/dbt-mcp/troubleshooting/wsl`
 - `dbt-core/guides/_config`
 - `dbt-core/guides/adapter-creation`
 - `dbt-core/guides/adapter-creation-v2`
