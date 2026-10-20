@@ -38,7 +38,7 @@ The simplest way to start is with automatic caching:
   ```
 
   ```bash CLI
-  ant messages create --transform usage <<'YAML'
+  ant messages create <<'YAML'
   model: claude-opus-5-5
   max_tokens: 1024
   cache_control:
@@ -303,7 +303,7 @@ Automatic caching is the simplest way to enable prompt caching. Instead of placi
   ```
 
   ```bash CLI
-  ant messages create --transform usage <<'YAML'
+  ant messages create <<'YAML'
   model: claude-opus-5-5
   max_tokens: 1024
   cache_control:
@@ -929,8 +929,7 @@ Place the `cache_control` breakpoint on the last block that is shared with the f
   ```
 
   ```bash CLI
-  ant messages create \
-    --transform '{stop_reason,content,usage}' --format yaml <<'YAML'
+  ant messages create <<'YAML'
   model: claude-opus-5-5
   max_tokens: 0
   system:
@@ -1184,7 +1183,7 @@ Fire a pre-warm request when your application starts (or on a scheduled interval
 
   ```bash CLI
   # Warm the cache at application startup or on a scheduled interval.
-  ant messages create --transform usage <<'YAML'
+  ant messages create <<'YAML'
   model: claude-opus-5-5
   max_tokens: 0
   system:
@@ -1200,7 +1199,7 @@ Fire a pre-warm request when your application starts (or on a scheduled interval
   YAML
 
   # Later, when the user submits a message, the system-prompt prefix is already cached.
-  ant messages create --transform 'content.#(type=="text").text' --raw-output <<'YAML'
+  ant messages create <<'YAML'
   model: claude-opus-5-5
   max_tokens: 1024
   system:
@@ -1294,9 +1293,7 @@ Fire a pre-warm request when your application starts (or on a scheduled interval
 
   // Later, when the user submits a message, the system-prompt prefix is already cached.
   const response = await respond("How do I implement a binary search tree?");
-  const textBlock = response.content.find(
-    (block): block is Anthropic.TextBlock => block.type === "text"
-  );
+  const textBlock = response.content.find((block) => block.type === "text");
   console.log(textBlock?.text);
   ```
 
@@ -1582,7 +1579,7 @@ The following code snippets showcase various prompt caching patterns. These exam
       ```
 
       ```bash CLI
-      ant messages create --transform usage <<'YAML'
+      ant messages create <<'YAML'
       model: claude-opus-5-5
       max_tokens: 1024
       system:
@@ -1906,7 +1903,7 @@ The following code snippets showcase various prompt caching patterns. These exam
       ```
 
       ```bash CLI
-      ant messages create --transform usage <<'YAML'
+      ant messages create <<'YAML'
       model: claude-opus-5-5
       max_tokens: 1024
       system:
@@ -2365,7 +2362,7 @@ The following code snippets showcase various prompt caching patterns. These exam
       ```
 
       ```bash CLI
-      ant messages create --transform usage <<'YAML'
+      ant messages create <<'YAML'
       model: claude-opus-5-5
       max_tokens: 1024
       tools:

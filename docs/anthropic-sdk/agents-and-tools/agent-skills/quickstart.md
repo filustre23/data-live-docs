@@ -8,7 +8,7 @@ This tutorial shows you how to use Agent Skills to create a PowerPoint presentat
 
 ## Prerequisites
 
-* A [Claude API key](https://platform.claude.com/settings/keys) or a logged-in [ant CLI](https://platform.claude.com/docs/en/cli-sdks-libraries/cli/authentication)
+* A [Claude API key](https://platform.claude.com/settings/keys) from the Claude Console, or a logged-in [ant CLI](https://platform.claude.com/docs/en/cli-sdks-libraries/cli/authentication)
 * A [client SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) for your language, or `curl` and `jq`
 * Basic familiarity with making API requests
 
@@ -189,20 +189,18 @@ Use the PowerPoint Skill to create a presentation about renewable energy. Specif
     model: "claude-opus-5-5",
     max_tokens: 16000,
     container: {
-      skills: [{ type: "anthropic", skill_id: "pptx", version: "latest" }],
+      skills: [{ type: "anthropic", skill_id: "pptx", version: "latest" }]
     },
     messages: [
       {
         role: "user",
-        content: "Create a presentation about renewable energy with 5 slides",
-      },
+        content: "Create a presentation about renewable energy with 5 slides"
+      }
     ],
-    tools: [{ type: "code_execution_20260521", name: "code_execution" }],
+    tools: [{ type: "code_execution_20260521", name: "code_execution" }]
   });
 
-  console.log(
-    `stop_reason=${response.stop_reason}, blocks=${response.content.length}`,
-  );
+  console.log(`stop_reason=${response.stop_reason}, blocks=${response.content.length}`);
   ```
 
   ```csharp C#
@@ -374,12 +372,10 @@ The presentation was created in the code execution container and saved as a file
 
   if [[ -n "$file_id" ]]; then
     # Download the file and save it
-    output_path="${TMPDIR:-/tmp}/renewable_energy.pptx"
     curl --fail-with-body -sS "https://api.anthropic.com/v1/files/$file_id/content" \
       -H "x-api-key: $ANTHROPIC_API_KEY" \
       -H "anthropic-version: 2023-06-01" \
-      -o "$output_path"
-    echo "Presentation saved to $output_path"
+      -o "${TMPDIR:-/tmp}/renewable_energy.pptx"
   fi
   ```
 
@@ -399,9 +395,7 @@ The presentation was created in the code execution container and saved as a file
 
   if [[ -n "$file_id" ]]; then
     # Download the file and save it
-    output_path="${TMPDIR:-/tmp}/renewable_energy.pptx"
-    ant files download --file-id "$file_id" --output "$output_path"
-    echo "Presentation saved to $output_path"
+    ant files download --file-id "$file_id" --output "${TMPDIR:-/tmp}/renewable_energy.pptx"
   fi
   ```
 

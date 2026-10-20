@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-10-19T18:13+00:00_
+_Generated 2026-10-20T08:56+00:00_
 
-**9 sources, 4689 topics total**
+**9 sources, 4691 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_783 topics_
+_785 topics_
 
 - `anthropic-sdk/about-claude/additional-resources`
 - `anthropic-sdk/about-claude/api-credits-for-subscribers`
@@ -467,6 +467,8 @@ _783 topics_
 - `anthropic-sdk/api/compliance/organizations/roles/retrieve`
 - `anthropic-sdk/api/compliance/organizations/settings`
 - `anthropic-sdk/api/compliance/organizations/settings/retrieve`
+- `anthropic-sdk/api/compliance/organizations/user_preferences`
+- `anthropic-sdk/api/compliance/organizations/user_preferences/list`
 - `anthropic-sdk/api/compliance/organizations/users`
 - `anthropic-sdk/api/compliance/organizations/users/list`
 - `anthropic-sdk/api/errors`

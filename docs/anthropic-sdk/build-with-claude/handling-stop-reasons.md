@@ -61,15 +61,14 @@ The most common stop reason. Indicates Claude finished its response naturally.
       "model": "claude-opus-5-5",
       "max_tokens": 1024,
       "messages": [{"role": "user", "content": "Hello!"}]
-    }' | jq 'if .stop_reason == "end_turn" then (.content[] | select(.type == "text") | .text) else . end'
+    }'
   ```
 
   ```bash CLI
   ant messages create \
     --model claude-opus-5-5 \
     --max-tokens 1024 \
-    --message '{role: user, content: "Hello!"}' \
-    --format json | jq 'if .stop_reason == "end_turn" then (.content[] | select(.type == "text") | .text) else . end'
+    --message '{role: user, content: "Hello!"}'
   ```
 
   ```python Python
@@ -98,9 +97,7 @@ The most common stop reason. Indicates Claude finished its response naturally.
 
   if (response.stop_reason === "end_turn") {
     // Process the complete response
-    const textBlock = response.content.find(
-      (block): block is Anthropic.TextBlock => block.type === "text"
-    );
+    const textBlock = response.content.find((block) => block.type === "text");
     console.log(textBlock?.text);
   }
   ```
@@ -754,15 +751,14 @@ Claude stopped because it reached the `max_tokens` limit specified in your reque
       "model": "claude-opus-5-5",
       "max_tokens": 10,
       "messages": [{"role": "user", "content": "Explain quantum physics"}]
-    }' | jq '.stop_reason'
+    }'
   ```
 
   ```bash CLI
   ant messages create \
     --model claude-opus-5-5 \
     --max-tokens 10 \
-    --message '{role: user, content: "Explain quantum physics"}' \
-    --format json | jq '.stop_reason'
+    --message '{role: user, content: "Explain quantum physics"}'
   ```
 
   ```python Python
@@ -895,49 +891,14 @@ Claude stopped because it reached the `max_tokens` limit specified in your reque
 <Accordion title="Incomplete tool use blocks">
   If Claude's response is cut off because it hit the `max_tokens` limit, and the truncated response contains an incomplete tool use block, you'll need to retry the request with a higher `max_tokens` value to get the full tool use.
 
-  <CodeGroup exclude="shell:cURL">
-    ```bash CLI
-    RESPONSE=$(ant messages create --max-tokens 1024 --format jsonl <<'YAML'
-    model: claude-opus-5-5
-    tools:
-      - name: get_weather
-        description: Get the current weather in a given location
-        input_schema:
-          type: object
-          properties:
-            location:
-              type: string
-          required:
-            - location
-    messages:
-      - role: user
-        content: What is the weather in San Francisco?
-    YAML
-    )
+  <CodeGroup exclude="shell:cURL, shell:CLI">
+    <CodeGroupItem language="cURL">
+      This workflow needs more logic than a single shell command. Use the [Claude SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) to run it.
+    </CodeGroupItem>
 
-    # Check if the response was truncated mid tool use
-    STOP_REASON=$(jq -r '.stop_reason' <<<"$RESPONSE")
-    LAST_TYPE=$(jq -r '.content[-1].type' <<<"$RESPONSE")
-    if [ "$STOP_REASON" = "max_tokens" ] && [ "$LAST_TYPE" = "tool_use" ]; then
-      # Retry with a higher max_tokens
-      ant messages create --max-tokens 4096 <<'YAML'
-    model: claude-opus-5-5
-    tools:
-      - name: get_weather
-        description: Get the current weather in a given location
-        input_schema:
-          type: object
-          properties:
-            location:
-              type: string
-          required:
-            - location
-    messages:
-      - role: user
-        content: What is the weather in San Francisco?
-    YAML
-    fi
-    ```
+    <CodeGroupItem language="CLI">
+      This workflow needs more logic than a single shell command. Use the [Claude SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) to run it.
+    </CodeGroupItem>
 
     ```python Python
     # Check if response was truncated during tool use
@@ -1103,7 +1064,7 @@ Claude encountered one of your custom stop sequences.
       "max_tokens": 1024,
       "stop_sequences": ["END", "STOP"],
       "messages": [{"role": "user", "content": "Generate text until you say END"}]
-    }' | jq '{stop_reason, stop_sequence}'
+    }'
   ```
 
   ```bash CLI
@@ -1111,8 +1072,7 @@ Claude encountered one of your custom stop sequences.
     --model claude-opus-5-5 \
     --max-tokens 1024 \
     --stop-sequence END --stop-sequence STOP \
-    --message '{role: user, content: "Generate text until you say END"}' \
-    --format json | jq '{stop_reason, stop_sequence}'
+    --message '{role: user, content: "Generate text until you say END"}'
   ```
 
   ```python Python
@@ -1256,11 +1216,11 @@ Claude is calling a tool and expects you to run it.
         }
       }],
       "messages": [{"role": "user", "content": "What is the weather in San Francisco?"}]
-    }' | jq '.stop_reason, (.content[] | select(.type == "tool_use"))'
+    }'
   ```
 
   ```bash CLI
-  ant messages create --format json <<'YAML' | jq '.stop_reason, (.content[] | select(.type == "tool_use"))'
+  ant messages create <<'YAML'
   model: claude-opus-5-5
   max_tokens: 1024
   messages:
@@ -1591,13 +1551,13 @@ When this happens, the response may contain a `server_tool_use` block without a 
       "max_tokens": 4096,
       "tools": [{"type": "web_search_20250305", "name": "web_search"}],
       "messages": [{"role": "user", "content": "Search for latest AI news"}]
-    }' | jq '{stop_reason, content}'
+    }'
   ```
 
   ```bash CLI
   # Inspect stop_reason; if it is pause_turn, re-run with the assistant
   # response appended to --message.
-  ant messages create --format json <<'YAML' | jq '{stop_reason, content}'
+  ant messages create <<'YAML'
   model: claude-opus-5-5
   max_tokens: 4096
   tools:
@@ -1809,15 +1769,14 @@ Claude declined to generate a response. Safety classifiers return this stop reas
       "model": "claude-opus-5-5",
       "max_tokens": 1024,
       "messages": [{"role": "user", "content": "[Unsafe request]"}]
-    }' | jq '{stop_reason, stop_details}'
+    }'
   ```
 
   ```bash CLI
   ant messages create \
     --model claude-opus-5-5 \
     --max-tokens 1024 \
-    --message '{role: user, content: "[Unsafe request]"}' \
-    --format json | jq '{stop_reason, stop_details}'
+    --message '{role: user, content: "[Unsafe request]"}'
   ```
 
   ```python Python
@@ -1966,15 +1925,14 @@ Claude stopped because it reached the model's context window limit. This lets yo
       "model": "claude-opus-5-5",
       "max_tokens": 20000,
       "messages": [{"role": "user", "content": "Large input that uses most of context window..."}]
-    }' | jq '.stop_reason'
+    }'
   ```
 
   ```bash CLI
   ant messages create \
     --model claude-opus-5-5 \
     --max-tokens 20000 \
-    --message '{role: user, content: "Large input that uses most of context window..."}' \
-    --format json | jq '.stop_reason'
+    --message '{role: user, content: "Large input that uses most of context window..."}'
   ```
 
   ```python Python
@@ -2143,9 +2101,7 @@ Make it a habit to check the `stop_reason` in your response handling logic:
         return handleRefusal(response);
       default: {
         // Handle end_turn and other cases
-        const textBlock = response.content.find(
-          (block): block is Anthropic.Beta.BetaTextBlock => block.type === "text"
-        );
+        const textBlock = response.content.find((block) => block.type === "text");
         return textBlock?.text ?? "";
       }
     }
@@ -2266,9 +2222,7 @@ When a response is truncated because of token limits or the context window, appe
 
   ```typescript TypeScript
   function handleTruncatedResponse(response: Anthropic.Beta.BetaMessage): string {
-    const textBlock = response.content.find(
-      (block): block is Anthropic.Beta.BetaTextBlock => block.type === "text"
-    );
+    const textBlock = response.content.find((block) => block.type === "text");
     const text = textBlock?.text ?? "";
 
     if (
@@ -2653,7 +2607,7 @@ It's important to distinguish between `stop_reason` values and actual errors:
   ```bash cURL
   # cURL exits non-zero on HTTP errors with --fail-with-body; inspect
   # $? for errors and stop_reason for successful responses.
-  curl --fail-with-body -sS https://api.anthropic.com/v1/messages \
+  curl --fail-with-body https://api.anthropic.com/v1/messages \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -H "content-type: application/json" \
@@ -2661,7 +2615,7 @@ It's important to distinguish between `stop_reason` values and actual errors:
       "model": "claude-opus-5-5",
       "max_tokens": 1024,
       "messages": [{"role": "user", "content": "Hello!"}]
-    }' | jq '.stop_reason'
+    }'
   ```
 
   ```bash CLI
@@ -2669,8 +2623,7 @@ It's important to distinguish between `stop_reason` values and actual errors:
   ant messages create \
     --model claude-opus-5-5 \
     --max-tokens 1024 \
-    --message '{role: user, content: "Hello!"}' \
-    --format json | jq '.stop_reason'
+    --message '{role: user, content: "Hello!"}'
   ```
 
   ```python Python
@@ -2882,11 +2835,10 @@ When using streaming, `stop_reason` is:
 
   ```bash CLI
   # stop_reason appears in the message_delta event.
-  ant messages create --stream --format jsonl \
+  ant messages create --stream \
     --model claude-opus-5-5 \
     --max-tokens 1024 \
-    --message '{role: user, content: "Hello!"}' |
-    jq -c 'select(.type == "message_delta") | .delta.stop_reason'
+    --message '{role: user, content: "Hello!"}'
   ```
 
   ```python Python
@@ -3286,9 +3238,7 @@ When using streaming, `stop_reason` is:
         messages
       });
 
-      const textBlock = response.content.find(
-        (block): block is Anthropic.TextBlock => block.type === "text"
-      );
+      const textBlock = response.content.find((block) => block.type === "text");
       fullResponse += textBlock?.text ?? "";
 
       if (response.stop_reason !== "max_tokens") {
@@ -3544,9 +3494,7 @@ With the `model_context_window_exceeded` stop reason, you can request the maximu
         console.log(`Generated ${tokens} tokens (natural completion)`);
     }
 
-    const textBlock = response.content.find(
-      (block): block is Anthropic.Beta.BetaTextBlock => block.type === "text"
-    );
+    const textBlock = response.content.find((block) => block.type === "text");
     return textBlock?.text ?? "";
   }
   ```
