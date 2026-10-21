@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -102,6 +102,66 @@ public class GetJob {
       System.out.println("Job not retrieved. \n" + e.toString());
     }
   }
+}
+```
+
+### Python
+
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+
+```
+from google.cloud import bigquery
+
+
+def get_job(
+    client: bigquery.Client,
+    location: str = "us",
+    job_id: str = "abcd-efgh-ijkl-mnop",
+) -> None:
+    job = client.get_job(job_id, location=location)
+
+    # All job classes have "location" and "job_id" string properties.
+    # Use these properties for job operations such as "cancel_job" and
+    # "delete_job".
+    print(f"{job.location}:{job.job_id}")
+    print(f"Type: {job.job_type}")
+    print(f"State: {job.state}")
+    print(f"Created: {job.created.isoformat()}")
+```
+
+### Rust
+
+```
+use google_cloud_bigquery_v2::client::JobService;
+
+pub async fn sample(project_id: &str, job_id: &str) -> anyhow::Result<()> {
+    let job_service = JobService::builder().build().await?;
+    let job = job_service
+        .get_job()
+        .set_project_id(project_id)
+        .set_job_id(job_id)
+        .send()
+        .await?;
+
+    if let Some(job_ref) = job.job_reference {
+        println!("Job ID: {}", job_ref.job_id);
+    }
+
+    if let Some(status) = job.status {
+        println!("State: {:?}", status.state);
+    }
+
+    if let Some(stats) = job.statistics {
+        println!("Creation Time: {:?}", stats.creation_time);
+        println!("End Time: {:?}", stats.end_time);
+        if let Some(q_stats) = stats.query {
+            println!("Total Bytes Processed: {:?}", q_stats.total_bytes_processed);
+        }
+    }
+
+    Ok(())
 }
 ```
 

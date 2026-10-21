@@ -16,9 +16,31 @@ Save and categorize content based on your preferences.
 
 This document describes the `AI.EVALUATE` function, which lets you
 evaluate [TimesFM](/bigquery/docs/timesfm-model) forecasted data against a
-reference time series based on historical data.
+reference time series based on historical data, or
+[TabFM](/bigquery/docs/tabfm-model) predicted data against
+ground truth data.
+
+For example, suppose you have
+tables that contain data about car rentals each day. The following query
+returns statistics about how well the model predicts car rentals in the current
+year based on the previous year:
+
+```
+SELECT *
+FROM
+  AI.EVALUATE(
+    TABLE rentals.last_year,
+    TABLE rentals.this_year,
+    data_col => 'num_rentals',
+    timestamp_col => 'date');
+```
 
 ## Syntax
+
+Choose one of the following syntaxes based on whether you're evaluating TimesFM
+or TabFM predictions:
+
+### TimesFM
 
 ```
 SELECT
@@ -40,8 +62,9 @@ FROM
 
 `AI.EVALUATE` takes the following arguments:
 
-* `HISTORY_TIME_SERIES_TABLE`: the name of the table that
-  contains historical time series data which is used to generate a forecast.
+* `HISTORY_TIME_SERIES_TABLE`: the name of the table
+  that contains historical time series data, which is used to generate a
+  forecast.
   For example, `` `mydataset.mytable` ``.
   The forecasted values are then evaluated against the data in the
   `ACTUAL_TIME_SERIES_TABLE` or `ACTUAL_TIME_SERIES_QUERY_STATEMENT` argument.
@@ -97,10 +120,9 @@ FROM
   + `DATE`
   + `DATETIME`
 * `MODEL`: a `STRING` value that specifies the name
-  of the model to use. Supported models include `TimesFM 2.0` and `TimesFM 2.5`.
+  of the model to use. Supported models include `TimesFM 2.5`
+  and `TimesFM 3.0` ([Preview](https://cloud.google.com/products#product-launch-stages)).
   The default value is `TimesFM 2.5`.
-
-  **Note:** We recommend using `TimesFM 2.5` for all new evaluation tasks.
 * `ID_COLS`: an `ARRAY<STRING>` value that specifies the
   names of one or more ID columns. Each unique combination of IDs identifies a
   unique time series to evaluate. Specify one or more values for this argument
@@ -119,39 +141,81 @@ FROM
   series date range is March 1 to April 15, data points are selected starting
   at April 15 and working backwards. Valid values for models are as follows:
 
-  | **Model Name** | **Supported Context Window Length** |
+  | **Model name** | **Supported context window length** |
   | --- | --- |
-  | TimesFM 2.0 | 64, 128, 256, 512, 1024, 2048 |
-  | TimesFM 2.5 | 64, 128, 256, 512, 1024, 2048, 4096, 8192, 15360 |
+  | `TimesFM 2.5` | 64, 128, 256, 512, 1024, 2048, 4096, 8192, 15360 |
+  | `TimesFM 3.0` | `n * 32` where `n` is an integer in the range `[2, 64]` |
 
-  If you don't specify a `CONTEXT_WINDOW` value, the `AI.EVALUATE` function
+  If you don't specify a `CONTEXT_WINDOW` value when you use the
+  `TimesFM 2.5` model, the `AI.FORECAST` function
   automatically chooses the smallest possible context window length to use that
   is still large enough to cover the number of time series data points in your
-  input data. The following table shows the relationships between the number of
-  time series data points in the input data, the selected context window length,
-  and the corresponding supported TimesFM model name:
+  input data. If you don't specify a `CONTEXT_WINDOW` value when you use the
+  `TimesFM 3.0` model, the `AI.FORECAST` function defaults to the maximum
+  supported size, `2048`. The following table shows the relationships between
+  the number of time series data points in the input data, the selected context
+  window length, and the corresponding supported TimesFM model name:
 
-  | **Number of time series data points** | **Context window length** | **Supported Model Names** |
+  | **Number of time series data points** | **Context window length** | **Supported model names** |
   | --- | --- | --- |
-  | (1, 64] | 64 | TimesFM 2.0, TimesFM 2.5 |
-  | (65, 128] | 128 | TimesFM 2.0, TimesFM 2.5 |
-  | (129, 256] | 256 | TimesFM 2.0, TimesFM 2.5 |
-  | (257, 512] | 512 | TimesFM 2.0, TimesFM 2.5 |
-  | (513, 1024] | 1,024 | TimesFM 2.0, TimesFM 2.5 |
-  | (1025, 2048] | 2,048 | TimesFM 2.0, TimesFM 2.5 |
-  | (2049, 4096] | 4,096 | TimesFM 2.5 |
-  | (4097, 8192] | 8,192 | TimesFM 2.5 |
-  | (8193, 15360] | 15,360 | TimesFM 2.5 |
-  | 15360 | 15,360 | TimesFM 2.5 |
+  | (`1`, `64`] | 64 | `TimesFM 2.5`, `TimesFM 3.0` |
+  | (`65`, `128`] | 128 | `TimesFM 2.5`, `TimesFM 3.0` |
+  | (`129`, `256`] | 256 | `TimesFM 2.5`, `TimesFM 3.0` |
+  | (`257`, `512`] | 512 | `TimesFM 2.5`, `TimesFM 3.0` |
+  | (`513`, `1024`] | 1,024 | `TimesFM 2.5`, `TimesFM 3.0` |
+  | (`1025`, `2048`] | 2,048 | `TimesFM 2.5`, `TimesFM 3.0` |
+  | (`2049`, `4096`] | 4,096 | `TimesFM 2.5` |
+  | (`4097`, `8192`] | 8,192 | `TimesFM 2.5` |
+  | (`8193`, `15360`] | 15,360 | `TimesFM 2.5` |
+  | `15360` | 15,360 | `TimesFM 2.5` |
 
-  For the `TimesFM 2.0` model, 2,048 is the maximum number of time series data
+  For the `TimesFM 3.0` model, 2,048 is the maximum number of
+  time series data
   points that are passed to the model. For the `TimesFM 2.5` model, 15,360 is
   the maximum number of time series data points that are passed to the model.
   Any additional time series data points in the input data are ignored.
 
+### TabFM
+
+```
+SELECT
+  *
+FROM
+  AI.EVALUATE(
+  { TABLE TRAINING_TABLE | (TRAINING_QUERY)  },
+  { TABLE PREDICTION_TABLE | (PREDICTION_QUERY)  },
+  label_col => 'LABEL_COL'
+  )
+```
+
+### Arguments
+
+`AI.EVALUATE` takes the following arguments:
+
+* `TRAINING_TABLE | TRAINING_QUERY`: the table or query
+  that contains the training data. The table or query result must contain a
+  column named `label` or the column that you specify in the `LABEL_COL`
+  argument. Every other column is considered a feature column. The feature and
+  label columns must be one of the following types: `STRING`, `BOOL`,
+  `INT64`, `FLOAT64`, `NUMERIC` or `BIGNUMERIC`.
+* `PREDICTION_TABLE | PREDICTION_QUERY`: the table or
+  query that contains the data to evaluate. The table or query result
+  must contain all of the feature columns in the training data and can
+  optionally contain additional columns.
+* `LABEL_COL`: a `STRING` value that specifies
+  the name of the label column in the training data. You must provide this
+  argument for TabFM evaluation. If the column is of type `STRING` or `BOOL`,
+  then classification is evaluated. If the column is of type `INT64`, `FLOAT64`,
+  `NUMERIC` or `BIGNUMERIC`, then regression is evaluated.
+
 ## Output
 
-`AI.EVALUATE` returns the following columns:
+`AI.EVALUATE` returns the following columns based on whether you're evaluating
+TimesFM or TabFM predictions:
+
+### TimesFM
+
+The following columns are returned for TimesFM forecasted data:
 
 * `id_cols`: one or more values that contain the identifiers of a time
   series. `id_cols` can be an `INT64`, `STRING`, `ARRAY<INT64>` or
@@ -182,6 +246,40 @@ FROM
   `The time series data is too short.` This error indicates that there wasn't
   enough historical data in the time series to generate forecasted data to
   evaluate. A minimum of 3 data points is required.
+
+### TabFM
+
+The following columns are returned for TabFM regression predictions:
+
+* `mean_absolute_error`: a `FLOAT64` value that contains the
+  [mean absolute error](https://en.wikipedia.org/wiki/Mean_absolute_error)
+  for the data.
+* `mean_squared_error`: a `FLOAT64` value that contains the
+  [mean squared error](https://en.wikipedia.org/wiki/Mean_squared_error) for
+  the data.
+* `mean_squared_log_error`: a `FLOAT64` value that contains the mean squared
+  logarithmic error for the data.
+* `median_absolute_error`: a `FLOAT64` value that contains the median absolute
+  error for the data.
+* `r2_score`: a `FLOAT64` value that contains the
+  [coefficient of determination](https://en.wikipedia.org/wiki/Coefficient_of_determination)
+  for the data.
+* `explained_variance`: a `FLOAT64` value that contains the
+  [explained variance](https://en.wikipedia.org/wiki/Explained_variation) for
+  the data.
+
+The following columns are returned for TabFM classification predictions:
+
+* `precision`: a `FLOAT64` value that contains the
+  [macro-average precision](https://www.evidentlyai.com/classification-metrics/multi-class-metrics#macro-averaging)
+  across all classes.
+* `recall`: a `FLOAT64` value that contains the
+  [macro-average recall](https://www.evidentlyai.com/classification-metrics/multi-class-metrics#macro-averaging)
+  across all classes.
+* `accuracy`: a `FLOAT64` value that contains the accuracy of the prediction.
+* `f1_score`: a `FLOAT64` value that contains the macro-average
+  [`F1`score](https://en.wikipedia.org/wiki/F-score)
+  across all classes.
 
 ## Examples
 
@@ -240,38 +338,24 @@ FROM
     id_cols => ['usertype']);
 ```
 
-## Locations
+### Evaluate regression prediction
 
-`AI.EVALUATE` and the TimesFM model are available in all
-[supported BigQuery ML locations](/bigquery/docs/locations#locations-for-non-remote-models).
+The following query evaluates the performance of TabFM regression to predict a
+penguin's mass:
 
-## Pricing
-
-`AI.EVALUATE` usage is billed at the evaluation, inspection, and prediction
-rate documented in the **BigQuery ML on-demand pricing** section
-of the [BigQuery ML pricing](https://cloud.google.com/bigquery/pricing#bigquery-ml-pricing) page.
-
-## What's next
-
-* Try [using a TimesFM model with the `AI.FORECAST` function](/bigquery/docs/timesfm-time-series-forecasting-tutorial).
-* For information about forecasting in BigQuery ML, see
-  [Forecasting overview](/bigquery/docs/forecasting-overview).
-* For more information about supported SQL statements and functions for
-  time series forecasting models, see
-  [End-to-end user journeys for time series forecasting models](/bigquery/docs/e2e-journey-forecast).
-
-
-
-
-Send feedback
-
-Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
-
-Last updated 2026-07-23 UTC.
-
-
-
-
-Need to tell us more?
-
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-07-23 UTC."],[],[]]
+```
+WITH prepared_data AS (
+  SELECT *, RAND() <= 0.8 AS training
+  FROM `bigquery-public-data.ml_datasets.penguins`
+  WHERE body_mass_g > 0
+)
+SELECT
+ *
+FROM
+ AI.EVALUATE(
+  # Training data
+  (SELECT * EXCEPT(training) FROM prepared_data WHERE training),
+  # Prediction data
+  (SELECT * EXCEPT(training) FROM prepared_data WHERE NOT training),
+  label_col =>
+```

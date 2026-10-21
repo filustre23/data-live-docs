@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -16,7 +16,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 列出資料集
 
-本文說明如何在 BigQuery 中列出資料集並取得相關資訊。
+列出 BigQuery 中的資料集，即可探索及瀏覽 Google Cloud 專案中的資料集。如要驗證資源及管理權限，您可以檢查資料集詳細資料，例如位置、標籤和存取權控管。
 
 ## 事前準備
 
@@ -24,13 +24,13 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### 必要角色
 
-如要取得列出資料集或取得資料集資訊所需的權限，請要求系統管理員授予您專案的「[BigQuery 中繼資料檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.metadataViewer) 」(`roles/bigquery.metadataViewer`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得列出資料集或取得資料集資訊所需的權限，請要求管理員授予您專案的「[BigQuery 中繼資料檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.metadataViewer) 」(`roles/bigquery.metadataViewer`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
 這個預先定義的角色具備 `bigquery.datasets.get` 權限，可列出資料集或取得資料集資訊。
 
 您或許還可透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)取得這項權限。
 
-在專案或機構層級套用 `roles/bigquery.metadataViewer` 角色時，您可以列出專案中的所有資料集。在資料集層級套用 `roles/bigquery.metadataViewer` 角色時，您可以列出您已獲授該角色的所有資料集。
+在專案或機構層級套用 `roles/bigquery.metadataViewer` 角色時，您可以列出專案中的所有資料集。在資料集層級套用 `roles/bigquery.metadataViewer` 角色時，您可以列出已獲授該角色的所有資料集。
 
 ## 列出資料集
 
@@ -40,7 +40,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 1. 在導覽選單中，按一下「Studio」。
 2. 點選左側窗格中的 explore「Explorer」。
-3. 在「Explorer」窗格中展開專案，然後按一下「Datasets」(資料集)，即可查看該專案中的資料集，接著按一下資料集名稱。你也可以使用搜尋欄位或篩選器尋找資料集。
+3. 在「Explorer」窗格中展開專案，然後按一下「Datasets」(資料集)，即可查看該專案中的資料集，接著點選資料集名稱。你也可以使用搜尋欄位或篩選器尋找資料集。
 
 ### SQL
 
@@ -60,7 +60,8 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    更改下列內容：
 
-   * `PROJECT_ID`：專案的 ID。Google Cloud 如未指定，系統會使用預設專案。
+   * `PROJECT_ID`：
+     Google Cloud 專案的 ID。如未指定，系統會使用預設專案。
    * `REGION`：任何[資料集區域名稱](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。例如：`us`。
 3. 按一下「執行」play\_circle。
 
@@ -68,7 +69,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### bq
 
-發出 `bq ls` 指令，依資料集 ID 列出資料集。`--format` 標記可用來控管輸出。如要列出預設專案以外的專案資料集，請將 `--project_id` 旗標新增至該指令。
+發出 `bq ls` 指令，依資料集 ID 列出資料集。`--format` 標記可用來控管輸出。如要列出預設專案以外的專案資料集，請將 `--project_id` 標記新增至該指令。
 
 如要列出專案中的所有資料集，包括[隱藏資料集](https://docs.cloud.google.com/bigquery/docs/datasets?hl=zh-tw#hidden_datasets)，請使用 `--all` 標記或 `-a` 捷徑。
 
@@ -76,7 +77,8 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 其他標記包括：
 
-* `--filter`：列出符合篩選器運算式的資料集。以空格分隔的方式列出標籤鍵和值，格式為 `labels.key:value`。如要進一步瞭解如何使用標籤篩選資料集，請參閱「[新增及使用標籤](https://docs.cloud.google.com/bigquery/docs/filtering-labels?hl=zh-tw#filtering_datasets_using_labels)」。使用 `status:live` 關鍵字，根據狀態篩選資料集。`status` 的有效值為 `live`(預設值)、`deleted` 和 `any`。
+* `--filter`：列出符合篩選器運算式的資料集。以空格分隔的方式列出標籤鍵和值，格式為 `labels.key:value`。如要進一步瞭解如何使用標籤篩選資料集，請參閱[新增及使用標籤](https://docs.cloud.google.com/bigquery/docs/filtering-labels?hl=zh-tw#filtering_datasets_using_labels)。
+  使用 `status:live` 關鍵字，根據狀態篩選資料集。`status` 的有效值為 `live`(預設值)、`deleted` 和 `any`。
 * `--max_results` 或 `-n`：用來表示結果數量上限的整數。預設值為 `50`。
 
 ```
@@ -348,7 +350,7 @@ end
 ### 控制台
 
 1. 點選左側窗格中的 explore「Explorer」。
-2. 在「Explorer」窗格中展開專案，然後按一下「Datasets」(資料集)，即可查看該專案中的資料集，接著按一下資料集名稱。你也可以使用搜尋欄位或篩選器尋找資料集。
+2. 在「Explorer」窗格中展開專案，然後按一下「Datasets」(資料集)，即可查看該專案中的資料集，接著點選資料集名稱。你也可以使用搜尋欄位或篩選器尋找資料集。
 
    說明和詳細資料會顯示在「詳細資料」分頁中。
 3. 選用：您可以前往其他分頁，查看資料集中的資料表、常式和模型清單。
@@ -371,9 +373,10 @@ end
      PROJECT_ID.`region-REGION`.INFORMATION_SCHEMA.SCHEMATA;
    ```
 
-   請替換下列項目：
+   更改下列內容：
 
-   * `PROJECT_ID`：專案的 ID。 Google Cloud 如未指定，系統會使用預設專案。
+   * `PROJECT_ID`：
+     Google Cloud 專案的 ID。如未指定，系統會使用預設專案。
    * `REGION`：任何[資料集區域名稱](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。例如：`us`。
 3. 按一下「執行」play\_circle。
 
@@ -391,9 +394,9 @@ FROM
 ### bq
 
 請發出 `bq show` 指令。`--format` 旗標可用來控制輸出內容。如要取得預設專案以外的資料集相關資訊，請使用下列格式將專案 ID 新增至資料集名稱：`project_id:dataset`。
-輸出內容會顯示資料集的資訊，例如存取權控管、標籤和位置。這項指令不會顯示資料集的繼承權限，但您可以在 Google Cloud 控制台中查看。
+輸出內容會顯示資料集的資訊，例如存取權控管、標籤和位置。這項指令不會顯示資料集的沿用權限，但您可以在 Google Cloud 控制台中查看。
 
-如要顯示[隱藏資料集](https://docs.cloud.google.com/bigquery/docs/datasets?hl=zh-tw#hidden_datasets)的相關資訊，請使用 [`bq ls --all`](https://docs.cloud.google.com/bigquery/docs/listing-datasets?hl=zh-tw) 指令列出所有資料集，然後在 `bq show` 指令中使用隱藏資料集的名稱。
+如要顯示[隱藏資料集](https://docs.cloud.google.com/bigquery/docs/datasets?hl=zh-tw#hidden_datasets)的相關資訊，請使用 [`bq ls --all`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_ls) 指令列出所有資料集，然後在 `bq show` 指令中使用隱藏資料集的名稱。
 
 ```
 bq show --format=prettyjson project_id:dataset
@@ -692,11 +695,11 @@ except NotFound:
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-20 (世界標準時間)。
+上次更新時間：2026-10-19 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-20 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-19 (世界標準時間)。"],[],[]]

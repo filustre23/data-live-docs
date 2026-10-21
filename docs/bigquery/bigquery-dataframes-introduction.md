@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -16,9 +16,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # BigQuery DataFrames 簡介
 
-BigQuery DataFrames 是一組開放原始碼 Python 程式庫，可讓您使用熟悉的 Python API，充分運用 BigQuery 資料處理功能。BigQuery DataFrames 提供由 BigQuery 引擎驅動的 Pythonic DataFrame，並透過 SQL 轉換將處理作業下推至 BigQuery，實作 pandas 和 scikit-learn API。因此您可以使用 BigQuery 探索及處理 TB 級資料，並訓練機器學習 (ML) 模型，所有作業都可透過 Python API 完成。
+BigQuery DataFrames 是開放原始碼的 Python 程式庫，可讓您使用熟悉的 Python API，充分運用 BigQuery 資料處理功能。BigQuery DataFrames 提供由 BigQuery 引擎驅動的 Pythonic DataFrame，並透過 SQL 轉換將資料處理作業下推至 BigQuery，實作 pandas 和 scikit-learn API。因此您可以使用 BigQuery 探索及處理 TB 級資料、建構資料管道，以及訓練機器學習 (ML) 模型，所有作業都可透過 Python API 完成，不必將資料移至用戶端電腦。
 
-如果您熟悉 pandas，可以使用 BigQuery DataFrame 處理 BigQuery 資料，且程式碼變更幅度極小。舉例來說，您可以使用熟悉的 pandas 方法分析 BigQuery 資料表中的資料：
+如果您熟悉 pandas，可以使用 BigQuery DataFrames 處理 BigQuery 資料，且程式碼變更幅度極小。舉例來說，您可以使用熟悉的 pandas 方法分析 BigQuery 資料表中的資料：
 
 ```
 import bigframes.pandas as bpd
@@ -45,15 +45,15 @@ print(f"average_body_mass: {average_body_mass}")
 )
 ```
 
-**注意：** BigQuery DataFrames 2.0 版中的部分預設參數有破壞性變更。如要瞭解這些變更，以及如何遷移至 2.0 版，請參閱「[遷移至 BigQuery DataFrames 2.0](https://docs.cloud.google.com/bigquery/docs/migrate-dataframes?hl=zh-tw)」一文。
+**注意：** BigQuery DataFrames 2.0 版中的部分預設參數有重大變更。如要瞭解這些變更，以及如何遷移至 2.0 版，請參閱「[遷移至 BigQuery DataFrames 2.0](https://docs.cloud.google.com/bigquery/docs/migrate-dataframes?hl=zh-tw)」一文。
 
 ## BigQuery DataFrames 的優點
 
 BigQuery DataFrames 的功能如下：
 
-* 透過透明的 SQL 轉換，實作超過 750 個 pandas 和 scikit-learn API，並轉換為 BigQuery 和 BigQuery ML API。
+* 透過 SQL 轉換為 BigQuery 和 BigQuery ML API，提供超過 750 個 pandas 和 scikit-learn API。
 * 延後執行查詢，以提升效能。
-* 使用使用者定義的 Python 函式擴充資料轉換作業，以便在 Google Cloud中處理資料。這些函式會自動部署為 BigQuery [遠端函式](https://docs.cloud.google.com/bigquery/docs/remote-functions?hl=zh-tw)。
+* 使用 Python 使用者定義函式擴充資料轉換作業，以便在 Google Cloud中處理資料。這些函式會自動部署為 BigQuery [遠端函式](https://docs.cloud.google.com/bigquery/docs/remote-functions?hl=zh-tw)。
 * 與 Gemini Enterprise Agent Platform 整合，可使用 Gemini 模型生成文字。
 
 ## 授權
@@ -74,7 +74,7 @@ BigQuery DataFrames 也包含衍生自下列第三方套件的程式碼：
 
 * [BigQuery 配額](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw)適用於 BigQuery DataFrames，包括硬體、軟體和網路元件。
 * 支援部分 pandas 和 scikit-learn API。詳情請參閱「[支援的 pandas API](https://dataframes.bigquery.dev/supported_pandas_apis.html)」。
-* 您必須明確清理任何自動建立的 Cloud Run 函式，這是工作階段清理作業的一部分。詳情請參閱「[支援的 pandas API](https://dataframes.bigquery.dev/supported_pandas_apis.html)」。
+* 您必須明確清理自動建立的 Cloud Run 函式，這是工作階段清理作業的一部分。詳情請參閱「[支援的 pandas API](https://dataframes.bigquery.dev/supported_pandas_apis.html)」。
 
 ## 定價
 
@@ -82,12 +82,36 @@ BigQuery DataFrames 也包含衍生自下列第三方套件的程式碼：
 * BigQuery DataFrames 會使用 BigQuery、Cloud Run 函式、Agent Platform 和其他Google Cloud 服務，這些服務會產生各自的費用。
 * 在一般使用期間，BigQuery DataFrames 會將中繼結果等臨時資料儲存在 BigQuery 資料表中。根據預設，這些資料表會保留七天，且系統會向您收取儲存在其中的資料費用。資料表會在您於 [`bf.options.bigquery.project` 選項](https://dataframes.bigquery.dev/reference/api/bigframes._config.BigQueryOptions.html)中指定的 Google Cloud 專案中，於 `_anonymous_` 資料集內建立。
 
+## 用途
+
+您可以使用 BigQuery DataFrames 進行下列分析和機器學習用途：
+
+* [機器學習和 AI](https://docs.cloud.google.com/bigquery/docs/dataframes-ml-ai?hl=zh-tw)
+* [自訂 Python 函式](https://docs.cloud.google.com/bigquery/docs/dataframes-custom-python-functions?hl=zh-tw)
+* [使用 BigQuery DataFrames 繪製圖表](https://docs.cloud.google.com/bigquery/docs/dataframes-visualizations?hl=zh-tw)
+* [在 dbt 中使用 BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-dbt?hl=zh-tw)
+* [使用 BigQuery JupyterLab 外掛程式](https://docs.cloud.google.com/bigquery/docs/jupyterlab-plugin?hl=zh-tw)
+
+## 程式碼範例和參考文件
+
+探索 BigQuery DataFrames 的程式碼範例、筆記本和參考文件：
+
+* [GitHub 上的 BigQuery DataFrames 筆記本範例](https://github.com/google/bigframes/tree/main/notebooks)
+* [BigQuery DataFrames API 參考資料](https://dataframes.bigquery.dev/reference/index.html)
+  (包括 [`bigframes.pandas`](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.html)
+  和 [`bigframes.bigquery.ai`](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ai.html))
+* [BigQuery DataFrames Cloud 用戶端程式庫參考資料](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)
+* [BigQuery Python 程式庫總覽](https://docs.cloud.google.com/bigquery/docs/python-libraries?hl=zh-tw)
+* [GitHub 上的 BigQuery DataFrames 程式碼存放區](https://github.com/google/bigframes)
+  和 [PyPI 上的套件](https://pypi.org/project/bigframes/)
+
 ## 後續步驟
 
-* 試用 [BigQuery DataFrames 快速入門指南](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)。
-* [安裝 BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/install-dataframes?hl=zh-tw)。
-* 瞭解如何[使用 BigQuery DataFrame 繪製圖表](https://docs.cloud.google.com/bigquery/docs/dataframes-visualizations?hl=zh-tw)。
-* 瞭解如何[使用 `dbt-bigquery` 轉接頭](https://docs.cloud.google.com/bigquery/docs/dataframes-dbt?hl=zh-tw)。
+* 試用 [BigQuery DataFrames 快速入門導覽](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)。
+* [安裝及設定 BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/install-dataframes?hl=zh-tw)。
+* 瞭解如何[操控資料](https://docs.cloud.google.com/bigquery/docs/dataframes-data-manipulation?hl=zh-tw)和[使用資料型別系統](https://docs.cloud.google.com/bigquery/docs/dataframes-data-types?hl=zh-tw)。
+* 瞭解如何[管理工作階段和 I/O](https://docs.cloud.google.com/bigquery/docs/dataframes-sessions-io?hl=zh-tw)。
+* 瞭解如何[提升效能](https://docs.cloud.google.com/bigquery/docs/dataframes-performance?hl=zh-tw)。
 
 
 
@@ -96,11 +120,11 @@ BigQuery DataFrames 也包含衍生自下列第三方套件的程式碼：
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-13 (世界標準時間)。
+上次更新時間：2026-10-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-13 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]

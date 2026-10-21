@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -139,7 +139,7 @@ Salesforce Marketing Cloud 資料移轉作業會受到下列限制：
 3. 在「Source type」(來源類型) 部分，「Source」(來源) 請選取「Salesforce Marketing Cloud」。
 4. 在「Data source details」(資料來源詳細資料) 部分執行下列操作：
 
-   * 在「Network attachment」(網路連結) 部分，從選單中選取網路連結。如要透過網路連結進行資料移轉，請務必先[定義靜態 IP 位址，再建立網路連結](https://docs.cloud.google.com/bigquery/docs/connections-with-network-attachment?hl=zh-tw)。
+   * 在「Network attachment」(網路連結) 部分，從選單中選取網路連結。如要透過網路連結進行資料移轉，請務必先[定義靜態 IP 位址，再建立網路連結](https://docs.cloud.google.com/bigquery/docs/connect-to-sap-datasphere?hl=zh-tw#create-network-attachment)。
    * 在「API Subdomain」(API 子網域) 部分，輸入[驗證基本 URI 的子網域](https://docs.cloud.google.com/bigquery/docs/sfmc-transfer?hl=zh-tw#sfmc-prereqs)。
    * 在「API instance」(API 執行個體) 部分，輸入[網址中的 API 執行個體](https://docs.cloud.google.com/bigquery/docs/sfmc-transfer?hl=zh-tw#sfmc-prereqs)，這在登入 Marketing Cloud 應用程式後即可查看。
    * 在「Client ID」(用戶端 ID) 部分，輸入 [API 整合套件中的用戶端 ID](https://docs.cloud.google.com/bigquery/docs/sfmc-transfer?hl=zh-tw#sfmc-prereqs)。
@@ -270,7 +270,7 @@ bq mk
 :   **解決方法：**您必須同時擁有「檔案位置」的 `Read` 和 `Write` 權限，才能讀取資料擴充功能的內容。確認 Salesforce Marketing Cloud 範圍包含 `File Locations: Read, Write`。
 
 發生錯誤：`FAILED_PRECONDITION: There was an issue connecting to API.`
-:   **解決方法：**如果您在轉移作業中加入網路附件，但未設定 Public NAT 並設定 IP 允許清單，就可能發生這個錯誤。如要解決這項錯誤，請按照「[建立網路連結](https://docs.cloud.google.com/bigquery/docs/connections-with-network-attachment?hl=zh-tw#create_a_network_attachment)」一文中的步驟操作，定義靜態 IP 位址並建立網路連結。
+:   **解決方法：**如果您在轉移作業中加入網路附件，但未設定 Public NAT 並設定 IP 允許清單，就可能發生這個錯誤。如要解決這項錯誤，請按照「[建立網路連結](https://docs.cloud.google.com/bigquery/docs/connect-to-sap-datasphere?hl=zh-tw#create-network-attachment)」一文中的步驟操作，定義靜態 IP 位址並建立網路連結。
 
 ## 定價
 
@@ -290,11 +290,4 @@ bq mk
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-12 (世界標準時間)。
-
-
-
-
-想進一步說明嗎？
-
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-12 (世界標準時間)。"],[],[]]
+上次更新時間：2026-10-15 (世界標準時間)。

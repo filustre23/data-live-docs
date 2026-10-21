@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -16,24 +16,24 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 將 Facebook 廣告資料載入 BigQuery
 
-如要排定從 Facebook Ads 到 BigQuery 的週期性資料移轉作業，請建立移轉設定，指定要移轉的資料物件，以及排定資料移轉作業的頻率。您可以使用 Google Cloud 控制台、`bq` 指令列工具或 BigQuery 資料移轉服務 API，建立移轉設定。設定移轉設定後，[BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)會按照指定時間表，將最新資料移轉至 BigQuery 資料表。
+如要排定從 Facebook Ads 到 BigQuery 的週期性資料移轉作業，請建立移轉設定，指定要移轉的資料物件，以及排定資料移轉作業的頻率。您可以使用 Google Cloud 控制台、`bq` 指令列工具或 BigQuery 資料移轉服務 API，建立資料移轉設定。設定完移轉設定後，[BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)就會按照指定時間表，將最新資料移轉至 BigQuery 資料表。
 
-如要瞭解 Facebook 廣告移轉作業的運作方式，請參閱「[Facebook 廣告移轉作業簡介](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer-intro?hl=zh-tw)」。
+如要瞭解 Facebook 廣告移轉作業的運作方式，請參閱「[Facebook 廣告資料移轉簡介](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer-intro?hl=zh-tw)」。
 
 ## 限制
 
 Facebook 廣告資料移轉作業會受到下列限制：
 
-* 自 2026 年 7 月 6 日起，系統將暫時停用`AdInsightsMMM`報表。詳情請參閱[2026 年 7 月 6 日](https://docs.cloud.google.com/bigquery/docs/transfer-changes?hl=zh-tw#Jul06-fb-ads)。
-* Facebook 廣告資料轉移作業之間的最短時間間隔為 24 小時。週期性資料移轉的預設間隔為 24 小時。
+* 自 2026 年 7 月 6 日起，系統將暫時停用`AdInsightsMMM`報表。詳情請參閱「[2026 年 7 月 6 日](https://docs.cloud.google.com/bigquery/docs/transfer-changes?hl=zh-tw#Jul06-fb-ads)」一節。
+* 定期轉移 Facebook 廣告資料的最短時間間隔為 24 小時。週期性資料移轉的預設間隔為 24 小時。
 * Facebook 廣告專用的 BigQuery 資料移轉服務僅支援一組固定的資料表。不支援自訂報表。
 * Facebook 廣告資料轉移作業最多需要六小時。如果轉移作業超過這個時間上限，就會失敗。
-* 增量轉移作業不支援 `AdInsights`、`AdInsightsActions`、`Ads`、`Campaigns` 和 `AdSets` 表格。建立資料轉移作業時，如果包含 `AdInsights`、`AdInsightsActions`、`Ads`、`Campaigns` 和 `AdSets` 資料表，且您在「排程選項」中指定日期，系統就會轉移該日期可用的所有資料。
+* 增量轉移作業不支援 `AdInsights`、`AdInsightsActions`、`Ads`、`Campaigns` 和 `AdSets` 資料表。建立資料轉移作業時，如果包含 `AdInsights`、`AdInsightsActions`、`Ads`、`Campaigns` 和 `AdSets` 資料表，且您在「排程選項」中指定日期，系統會轉移該日期可用的所有資料。
 * BigQuery 資料移轉服務支援最多 30 天的重新整理時間範圍，可重新整理 `AdInsights`、`AdInsightsActions`、`Ads`、`Campaigns` 和 `AdSets` 資料表。更新期是指資料移轉作業從來源資料擷取資料的天數。首次執行資料移轉作業時，資料移轉作業會擷取重新整理視窗內的所有可用來源資料。
 * Facebook 廣告轉移作業需要長期有效的使用者存取權杖，但這類權杖會在 60 天後失效。
 
-  如果長期有效的使用者存取權杖已過期，請前往資料轉移詳細資料頁面，然後按一下「編輯」，即可取得新的權杖。在編輯轉移頁面中，按照「[Facebook 廣告事前準備](#fb_ads_prereqs)」中的步驟，產生新的長期有效使用者存取權杖。
-* 如要透過網路連結進行資料移轉，請務必先[定義靜態 IP 位址，再建立網路連結](https://docs.cloud.google.com/bigquery/docs/connections-with-network-attachment?hl=zh-tw)。
+  如果長期有效的使用者存取權權杖已過期，請前往資料轉移詳細資料頁面，然後按一下「編輯」，即可取得新的權杖。在編輯轉移頁面中，按照「[Facebook 廣告事前準備](#fb_ads_prereqs)」中的步驟，產生新的長期有效使用者存取權杖。
+* 如要透過網路連結進行資料移轉，請務必先[定義靜態 IP 位址，再建立網路連結](https://docs.cloud.google.com/bigquery/docs/connect-to-sap-datasphere?hl=zh-tw#create-network-attachment)。
 * 如果設定的網路連結和虛擬機器 (VM) 執行個體位於不同區域，從 Facebook Ads 轉移資料時，可能會發生跨區域資料移動。
 
 ## 事前準備
@@ -74,7 +74,7 @@ Facebook 廣告資料移轉作業會受到下列限制：
 * [使用 Graph API 產生長期有效的使用者存取權杖](https://developers.facebook.com/docs/facebook-login/guides/access-tokens/get-long-lived)。
   您必須具備 `ads_management`、`ads_read` 和 `business_management` 權限，才能取得資料移轉作業的有效權杖。
 * [產生系統使用者權杖](https://developers.facebook.com/docs/facebook-login/guides/access-tokens)。
-  系統使用者權杖可讓您手動新增資產 (例如廣告帳戶)，以便納入資料轉移作業。如果系統使用者權杖過期，您必須手動使用新憑證更新轉移設定。建立系統使用者權杖時，您也可以選擇建立不會過期的權杖。詳情請參閱「[支援的存取權杖](https://developers.facebook.com/docs/facebook-login/facebook-login-for-business#supported-access-tokens)」。
+  系統使用者權杖可讓您手動新增資產 (例如廣告帳戶)，以便納入資料轉移作業。如果系統使用者權杖過期，您必須手動使用新憑證更新移轉設定。建立系統使用者權杖時，您也可以選擇建立不會過期的權杖。詳情請參閱「[支援的存取權杖](https://developers.facebook.com/docs/facebook-login/facebook-login-for-business#supported-access-tokens)」。
 
 ### BigQuery 必要條件
 
@@ -115,11 +115,11 @@ Facebook 廣告資料移轉作業會受到下列限制：
 1. 前往 Google Cloud 控制台的「資料移轉」頁面。
 
    [前往「資料轉移」頁面](https://console.cloud.google.com/bigquery/transfers?hl=zh-tw)
-2. 按一下 add「建立轉移作業」。
+2. 按一下「建立轉移作業」add。
 3. 在「Source type」(來源類型) 專區中，針對「Source」(來源)，選取「Facebook Ads」(Facebook 廣告)。
 4. 在「Data source details」(資料來源詳細資料) 部分執行下列操作：
 
-   * 在「Network attachment」(網路連結) 部分，從選單中選取網路連結。如要透過網路連結進行資料移轉，請務必先[定義靜態 IP 位址，再建立網路連結](https://docs.cloud.google.com/bigquery/docs/connections-with-network-attachment?hl=zh-tw)。
+   * 在「Network attachment」(網路連結) 部分，從選單中選取網路連結。如要透過網路連結進行資料移轉，請務必先[定義靜態 IP 位址，再建立網路連結](https://docs.cloud.google.com/bigquery/docs/connect-to-sap-datasphere?hl=zh-tw#create-network-attachment)。
    * 在「Client ID」(用戶端 ID) 中輸入應用程式 ID。
    * 在「Client secret」(用戶端密鑰) 部分，輸入應用程式密鑰。
    * 在「Refresh token」(更新權杖) 部分，按一下「Authorize」(授權)，然後輸入長期有效的使用者存取權杖 ID。如果[已有更新權杖或系統使用者權杖](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer?hl=zh-tw#refresh_token_alternatives)，也可以直接在這個欄位輸入更新權杖。如要瞭解如何擷取長期有效的使用者存取權杖，請參閱 [Facebook 廣告事前準備](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer?hl=zh-tw#fb_ads_prereqs)的相關說明。
@@ -148,21 +148,19 @@ Facebook 廣告資料移轉作業會受到下列限制：
 | `AdAccounts` | 使用者可用的廣告帳戶。 |
 | `AdInsights` | 所有廣告帳戶的廣告洞察報表。 |
 | `AdInsightsActions` | 所有廣告帳戶的廣告洞察動作報表。 |
-| `AdInsightsMMM`  **注意：**這份報表暫時無法使用。詳情請參閱 [2026 年 7 月 6 日](https://docs.cloud.google.com/bigquery/docs/transfer-changes?hl=zh-tw#Jul06-fb-ads) | 所有廣告帳戶的廣告洞察行銷組合模式分析 (MMM) 報表。 |
+| `AdInsightsMMM`  **注意：**這份報表暫時無法使用。詳情請參閱「[2026 年 7 月 6 日](https://docs.cloud.google.com/bigquery/docs/transfer-changes?hl=zh-tw#Jul06-fb-ads)」 | 所有廣告帳戶的廣告洞察行銷組合模式分析 (MMM) 報表。 |
 | `Ads` | 所有廣告帳戶的廣告報表。 |
 | `AdCreatives` | 所有廣告帳戶的廣告素材報表。 |
 | `AdSets` | 所有廣告帳戶的廣告組合報表。 |
 | `Campaigns` | 所有廣告帳戶的廣告活動報表。 |
 | `AdImages` | 所有廣告帳戶的廣告圖片報表。 |
 | `AdLabels` | 所有廣告帳戶的廣告標籤報表。 |
-| `Businesses` | 與使用者相關聯的 Meta 商家帳戶。 |
+| `Businesses` | 與使用者相關聯的 Meta 企業帳戶。 |
 | `CustomAudiences` | 所有廣告帳戶的自訂目標對象報表。 |
 
 ### bq
 
-輸入 [`bq mk` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_mk)
-並加上移轉建立作業旗標
-`--transfer_config`：
+輸入 [`bq mk` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_mk)並加上移轉建立標記 `--transfer_config`：
 
 ```
 bq mk
@@ -184,7 +182,7 @@ bq mk
 * PARAMETERS：已建立資料移轉設定的 JSON 格式參數。例如：`--params='{"param":"param_value"}'`。以下是 Facebook 廣告轉移作業的參數：
   + `connector.authentication.oauth.clientId`：OAuth 2.0 用戶端的應用程式 ID 名稱。
   + `connector.authentication.oauth.clientSecret`：OAuth 2.0 用戶端的應用程式密鑰。
-  + `connector.authentication.oauth.refreshToken`：長期有效權杖 ID。
+  + `connector.authentication.oauth.refreshToken`：長期有效的詞元 ID。
   + `connector.authorizedAdAccountsOnly`：如果設為 `true`，連結器只會從授權給您 Facebook 應用程式的廣告帳戶擷取資料。您可以在「App Settings」(應用程式設定) >「Advanced」(進階) 的「Advanced accounts」(進階帳戶) 部分中，找到授權的廣告帳戶。
   + `connector.actionCollections`：動作集合是物件，可指定使用者對廣告採取的不同動作類型。如需 `actionCollections` 值的完整清單，請參閱「[動作集合](#action_collections)」。
     - 詳情請參閱「[廣告洞察](https://developers.facebook.com/docs/marketing-api/reference/adgroup/insights)」一文。
@@ -215,7 +213,7 @@ bq mk
 
 請使用 [`projects.locations.transferConfigs.create`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create?hl=zh-tw) 方法，並提供 [`TransferConfig`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs?hl=zh-tw#TransferConfig) 資源的執行個體。
 
-儲存轉移設定後，Facebook Ads 連接器會根據排程選項，自動觸發轉移作業。每次執行移轉作業時，Facebook 廣告連接器都會將 Facebook 廣告中的所有可用資料移轉至 BigQuery。
+儲存移轉設定後，Facebook Ads 連接器會根據排程選項自動觸發移轉作業。每次執行移轉作業時，Facebook 廣告連接器都會將 Facebook 廣告中的所有可用資料移轉至 BigQuery。
 
 如要手動執行資料轉移 (不在排程內)，可以啟動[回填作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)。
 
@@ -223,9 +221,11 @@ bq mk
 
 ## 動作集合
 
-動作集合是物件，可指定使用者對廣告採取的不同動作類型。您可以在[設定轉移設定](#fb_ads_transfer_setup)時指定動作集合。
+動作集合是物件，可指定使用者對廣告採取的不同動作類型。[設定移轉設定](#fb_ads_transfer_setup)時，您可以指定動作集合。
 
-動作集合代表 [`Ad Account, Insights` 端點回應中存在的 [`list<AdsActionStats>` 類型](https://developers.facebook.com/docs/marketing-api/reference/ads-action-stats/)欄位](https://developers.facebook.com/docs/marketing-api/reference/ad-account/insights/)。
+動作集合代表
+[`Ad Account, Insights` 端點回應中存在的 [`list<AdsActionStats>` 類型](https://developers.facebook.com/docs/marketing-api/reference/ads-action-stats/)欄位](https://developers.facebook.com/docs/marketing-api/reference/ad-account/insights/)
+。
 
 轉移完成後，這些動作集合會填入[`AdInsightsActions`表格](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transformation?hl=zh-tw#adinsightsactions_report)。
 
@@ -266,84 +266,4 @@ bq mk
 * `UniqueConversions`
 * `UniqueOutboundClicks`
 * `UniqueOutboundClicksCtr`
-* `UniqueVideoView15_sec`
-* `Video15_secWatchedActions`
-* `Video30_secWatchedActions`
-* `VideoAvgTimeWatchedActions`
-* `VideoContinuous2SecWatchedActions`
-* `VideoP100_watchedActions`
-* `VideoP25WatchedActions`
-* `VideoP50WatchedActions`
-* `VideoP75WatchedActions`
-* `VideoP95WatchedActions`
-* `VideoPlayActions`
-* `VideoPlayCurveActions`
-* `VideoPlayRetentionGraphActions`
-* `VideoTimeWatchedActions`
-* `WebsiteCtr`
-* `WebsitePurchaseRoas`
-
-## 合併細目
-
-Facebook Ads 對可一併選取的欄設有限制。使用這些受限組合會導致資料移轉失敗。
-
-如要進一步瞭解可合併的細目，請參閱「[合併細目](https://developers.facebook.com/docs/marketing-api/insights/breakdowns/#combiningbreakdowns)」。
-
-## 排解轉移設定問題
-
-如果無法順利設定 Facebook 廣告資料移轉作業，請嘗試下列疑難排解步驟：
-
-* 使用 [Facebook 存取權杖偵錯工具](https://developers.facebook.com/tools/debug/accesstoken/)，確認使用者存取權杖是否已過期。長期有效的使用者存取權杖會在 60 天後失效。如果長期有效的使用者存取權杖已過期，請前往轉移詳細資料，然後按一下「編輯」修改轉移設定。在編輯轉移頁面中，按照「[Facebook 廣告先決條件](#fb_ads_prereqs)」中的步驟產生新的代碼。
-* 確認長期有效的使用者存取權杖是使用必要權限 (`ads_management`、`ads_read` 和 `business_management`) 產生。如要檢查長期使用者存取權杖的權限，請在瀏覽器中輸入下列連結：
-
-  ```
-  https://graph.facebook.com/me/permissions?access_token=TOKEN
-  ```
-
-  其中 TOKEN 是長期使用者存取權杖的值。
-
-  如果沒有必要權限，請按照「[Facebook 廣告事前準備](#fb_ads_prereqs)」一文中的步驟，產生新的長期有效使用者存取權杖。
-* 在 [Facebook 應用程式資訊主頁](https://developers.facebook.com/apps)的「必要動作」分頁中，查看是否有需要處理的項目。
-
-您可能會看到下列與 Meta API 頻率限制錯誤相關的錯誤訊息：
-
-發生錯誤：`There have been too many calls from this ad-account. Wait a bit and try again.`
-:   **解決方法**：確認沒有使用相同應用程式或憑證的平行工作流程。如果這些錯誤仍未解決，請嘗試將權限升級為**進階存取權**，取得更多速率限制配額。詳情請參閱「[行銷 API 使用頻率限制](https://developers.facebook.com/docs/marketing-apis/rate-limiting/)」。
-
-### 常見的監控指標訊息
-
-您也可以查看 [BigQuery 資料移轉服務監控指標](https://docs.cloud.google.com/bigquery/docs/dts-monitor?hl=zh-tw#monitor)，判斷資料移轉失敗的原因。下表列出 Facebook 廣告資料轉移的一些常見 `ERROR_CODE` 訊息。
-
-| 錯誤 | 說明 |
-| --- | --- |
-| `INVALID_ARGUMENT` | 提供的設定無效。您也可能會遇到這個錯誤，並看到「如要瞭解有效的細目組合，請參閱『[合併細目](#combining_breakdowns)』」訊息。`This combination of action and generic breakdowns is not allowed.` |
-| `PERMISSION_DENIED` | 憑證無效 |
-| `UNAUTHENTICATED` | 必須驗證 |
-| `SERVICE_UNAVAILABLE` | 這項服務暫時無法處理這項資料轉移作業 |
-| `DEADLINE_EXCEEDED` | 資料移轉未在六小時內完成 |
-| `NOT_FOUND` | 找不到要求的資源 |
-| `INTERNAL` | 其他原因導致連接器失敗 |
-| `FAILED_PRECONDITION` | 這個錯誤可能會連帶顯示「This error can occur when you include a network attachment with your transfer but have not configured your public network address translation (NAT) correctly.」訊息。如果傳輸作業包含網路附件，但您未正確設定公用網路位址轉譯 (NAT)，就會發生這個錯誤。`There was an issue connecting to Facebook Ads API.`如要解決這項錯誤，請按照[定義靜態 IP 位址來建立網路連結](https://docs.cloud.google.com/bigquery/docs/connections-with-network-attachment?hl=zh-tw#create_a_network_attachment)的步驟操作。   如果受到速率限制調節，也可能出現這項錯誤。在這種情況下，請採取下列行動：  * 使用相同的 Facebook 廣告使用者或應用程式憑證，以平行工作流程執行作業，可能會導致您更常達到速率限制。請務必在轉移設定以外的地方，使用不同的使用者或應用程式憑證。 * 將資料移轉作業分成多個較小的作業，並分別執行，讓速率限制有時間恢復。 * 確認資料轉移作業未包含高成本的細目運算、過多細目或過多動作集合。 |
-| `RESOURCE_EXHAUSTED` | 資料來源配額或限制已用盡 |
-
-## 後續步驟
-
-* 進一步瞭解 [BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)。
-* 進一步瞭解如何[處理移轉作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw)，例如查看設定和執行記錄。
-* 瞭解如何[使用 BigQuery Omni 作業載入資料](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer?hl=zh-tw)。
-
-
-
-
-提供意見
-
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
-
-上次更新時間：2026-07-12 (世界標準時間)。
-
-
-
-
-想進一步說明嗎？
-
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-12 (世界標準時間)。"],[],[]]
+<

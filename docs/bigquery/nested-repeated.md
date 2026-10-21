@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -16,11 +16,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 在資料表結構定義中指定巢狀與重複的資料欄
 
-本頁說明如何在 BigQuery 中定義具有巢狀和重複欄的資料表結構定義。如要瞭解資料表結構定義的總覽，請參閱[指定結構定義](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw)。
+本頁說明如何在 BigQuery 中定義具有巢狀和重複欄的資料表結構定義。如需資料表結構定義的總覽，請參閱[指定結構定義](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw)。
 
 ## 定義巢狀與重複的資料欄
 
-如要建立含有巢狀資料的資料欄，請在結構定義中將資料欄的資料類型設為 `RECORD`。在 GoogleSQL 中，`RECORD` 可以做為 [`STRUCT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#struct_type) 型別存取。`STRUCT` 是已排序欄位的容器。
+如要建立含有巢狀資料的資料欄，請在結構定義中將資料欄的資料類型設為 `RECORD`。在 GoogleSQL 中，`RECORD` 可以做為 [`STRUCT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#struct_type) 類型存取。`STRUCT` 是已排序欄位的容器。
 
 如要建立含有重複資料的資料欄，請在結構定義中將資料欄的 [mode](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#modes) 設為 `REPEATED`。在 GoogleSQL 中，重複欄位可做為 [`ARRAY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#array_type) 類型存取。
 
@@ -31,7 +31,8 @@ Google uses AI technology to translate content into your preferred language. AI 
 巢狀與重複結構定義有下列限制：
 
 **結構定義無法包含超過 15 層的巢狀 `RECORD` 類型。**
-:   類型的資料欄可以包含巢狀 `RECORD` 類型，也稱為*子*記錄。`RECORD`巢狀結構深度上限為 15 層。此限制與 `RECORD` 是否為純量或陣列形式 (重複) 無關。
+:   類型的資料欄可以包含巢狀 `RECORD` 類型，也稱為
+    *子*記錄。`RECORD`巢狀結構深度上限為 15 層。此限制與 `RECORD` 是否為純量或陣列形式 (重複) 無關。
 
 **`RECORD` 類型與 `UNION`、`INTERSECT`、`EXCEPT DISTINCT` 和 `SELECT DISTINCT` 不相容。**
 
@@ -145,9 +146,9 @@ JSON 資料檔案會與以下內容類似。請注意，地址資料欄含有值
 
      + 在「Dataset」(資料集) 部分，選取要建立資料表的資料集。
      + 在「Table」(資料表) 中，輸入要建立的資料表名稱。
-   * 在「結構定義」部分，按一下
+   * 針對「Schema」(結構定義)，請按一下
      add\_box
-     「新增欄位」，然後輸入下列資料表結構定義：
+     「Add field」(新增欄位)，然後輸入下列資料表結構定義：
 
      + 在「欄位名稱」部分，輸入 `addresses`。
      + 在「Type」(類型) 部分選取「RECORD」(記錄)。
@@ -155,7 +156,7 @@ JSON 資料檔案會與以下內容類似。請注意，地址資料欄含有值
      + 為巢狀欄位指定下列欄位：
 
        - 在「Field name」(欄位名稱) 欄位中輸入 `status`。
-       - 在「Type」(類型) 部分，選擇「STRING」(字串)。
+       - 在「Type」(類型) 部分，選擇「STRING」。
        - 在「Mode」部分，將值保持為「NULLABLE」。
        - 按一下「新增欄位」add\_box，然後新增下列欄位：
 
@@ -202,7 +203,7 @@ JSON 資料檔案會與以下內容類似。請注意，地址資料欄含有值
 
 ### bq
 
-如要在 JSON 結構定義檔中指定巢狀且重複的 `addresses` 資料欄，請使用文字編輯器建立新檔案。貼上如上所示的結構定義範例。
+如要在 JSON 結構定義檔中指定巢狀且重複的 `addresses` 資料欄，請使用文字編輯器建立新檔案。貼上上方顯示的結構定義範例。
 
 建立 JSON 結構定義檔後，您可以透過 bq 指令列工具提供檔案。詳情請參閱「[使用 JSON 結構定義檔](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#using_a_json_schema_file)」。
 
@@ -423,7 +424,7 @@ print(f"Created table {table.project}.{table.dataset_id}.{table.table_id}.")
 
 ## 在範例中插入巢狀資料欄中的資料
 
-請使用下列查詢，將巢狀資料記錄插入含有 `RECORD` 資料類型資料欄的資料表。
+使用下列查詢，將巢狀資料記錄插入含有 `RECORD` 資料類型資料欄的資料表。
 
 **範例 1**
 
@@ -527,7 +528,7 @@ BigQuery 在資料去標準化時執行效能最佳。其中不保留星狀或�
 +------------------+------------+-----------+
 ```
 
-您也可以使用下表 `mydataset.authors`，查看每個作者 ID 的完整資訊：
+您也可以參考下表 `mydataset.authors`，其中列出每個作者 ID 的完整資訊：
 
 ```
 +-----------+-------------+---------------+
@@ -540,7 +541,7 @@ BigQuery 在資料去標準化時執行效能最佳。其中不保留星狀或�
 ```
 
 如果資料表很大，定期聯結可能會耗用大量資源。
-視情況而定，建立包含所有資訊的單一表格可能會有幫助：
+視情況而定，建立包含所有資訊的單一資料表可能會有好處：
 
 ```
 CREATE TABLE mydataset.denormalized_books(
@@ -608,11 +609,11 @@ CREATE OR REPLACE TABLE mydataset.mytable AS (
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-12 (世界標準時間)。
+上次更新時間：2026-10-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-12 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]

@@ -173,7 +173,7 @@ following:
   bounds and the `is_anomaly` value is `TRUE`.
 * `lower_bound`: a `FLOAT64` value that contains the lower bound of the
   prediction result.
-* `upper_bound`: a `FLOAT64` value that that contains the upper bound of the
+* `upper_bound`: a `FLOAT64` value that contains the upper bound of the
   prediction result.
 * `anomaly_probability`: a `FLOAT64` value that contains the probability that
   this point is an anomaly. For example, an
@@ -412,80 +412,5 @@ The following example detects anomalies using a k-means model and a
 SELECT
   *
 FROM
-  ML.DETECT_ANOMALIES(MODEL `mydataset.my_kmeans_model`,
-    STRUCT(0.2 AS contamination),
-    (
-      SELECT
-        f1,
-        f2
-      FROM
-        `mydataset.mytable`))
+  ML.DETECT_ANOMALIES(MODEL
 ```
-
-This query returns results similar to the following:
-
-```
-+------------+---------------------+-------------+--------+--------+
-| is_anomaly | normalized_distance | centroid_id |   f1   |   f2   |
-+------------+---------------------+-------------+--------+--------+
-|   FALSE    |     0.63456         |     1       |  120   |  "a"   |
-|   TRUE     |     6.3243          |     2       | 15000  |  "b"   |
-+------------+---------------------+-------------+--------+--------+
-```
-
-### PCA model
-
-The following example detects anomalies using a PCA model and a
-`contamination` value of `0.1`.
-
-```
-SELECT
-  *
-FROM
-  ML.DETECT_ANOMALIES(MODEL `mydataset.my_pca_model`,
-    STRUCT(0.1 AS contamination),
-    TABLE `mydataset.mytable`)
-```
-
-If the feature column names are `f1`, `f2` and `f3`, then this query returns
-results similar to the following:
-
-```
-+------------+--------------------+---------+--------+------+
-| is_anomaly | mean_squared_error |    f1   |   f2   |  f3  |
-+------------+--------------------+---------+--------+------+
-|   FALSE    |     0.63456        |   120   |  "a"   |  0.9 |
-|   TRUE     |     11.342         |  15000  |  "b"   |  25  |
-+------------+--------------------+---------+--------+------+
-```
-
-## Pricing
-
-All queries that use the `ML.DETECT_ANOMALIES` function are billable, regardless
-of the pricing model.
-
-## What's next
-
-* For more information about model inference, see
-  [Model inference overview](/bigquery/docs/inference-overview).
-* For more information about supported SQL statements and functions for models
-  that work with `ML.DETECT_ANOMALIES`, see the following documents:
-
-  + [End-to-end user journeys for time series forecasting models](/bigquery/docs/e2e-journey-forecast)
-  + [End-to-end user journeys for ML models](/bigquery/docs/e2e-journey)
-
-
-
-
-Send feedback
-
-Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
-
-Last updated 2026-07-17 UTC.
-
-
-
-
-Need to tell us more?
-
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-07-17 UTC."],[],[]]

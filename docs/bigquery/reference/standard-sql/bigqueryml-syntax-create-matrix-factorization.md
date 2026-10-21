@@ -369,24 +369,23 @@ You can see the model's data split information in the following ways:
 
 This option accepts the following values:
 
-\* `AUTO_SPLIT`: This option splits the data as
-follows:
+* `AUTO_SPLIT`: This option splits the data as follows:
 
-* If there are fewer than 500 rows in the input data, then all rows are used
-  as training data.
-* If you aren't running hyperparameter tuning, then data is randomized and
-  split as follows:
+  + If there are fewer than 500 rows in the input data, then all rows are used
+    as training data.
+  + If you aren't running hyperparameter tuning, then data is randomized and
+    split as follows:
 
-  + If there are between 500 and 50,000 rows in the input data, then 20% of
-    the data is used as evaluation data and 80% is used as training data.
-  + If there are more than 50,000 rows, then 10,000 rows are used as
-    evaluation data and the remaining rows are used as training data.
-* If you are running hyperparameter tuning and there are more than 500 rows in
-  the input data, then the data is randomized and split as follows:
+    - If there are between 500 and 50,000 rows in the input data, then 20% of
+      the data is used as evaluation data and 80% is used as training data.
+    - If there are more than 50,000 rows, then 10,000 rows are used as
+      evaluation data and the remaining rows are used as training data.
+  + If you are running hyperparameter tuning and there are more than 500 rows in
+    the input data, then the data is randomized and split as follows:
 
-  + 10% of the data is used as evaluation data
-  + 10% is used as test data
-  + 80% is used as training data
+    - 10% of the data is used as evaluation data
+    - 10% is used as test data
+    - 80% is used as training data
 
     For more information, see
     [Data split](/bigquery/docs/hp-tuning-overview#data_split).
@@ -427,19 +426,18 @@ follows:
 
   The data is sorted smallest to largest based on the specified column.
 
-  When you aren't running hyperparameter tuning, the first n rows
+  When you aren't running hyperparameter tuning, the last n rows
   are used as evaluation data, where n is the value specified for
   `DATA_SPLIT_EVAL_FRACTION`. The remaining rows are used as training data.
 
-  When you are running hyperparameter tuning, the first n rows
-  are used as evaluation data, where n is the value specified for
-  `DATA_SPLIT_EVAL_FRACTION`. The next m rows are used as test
-  data, where m is the value specified for
-  `DATA_SPLIT_TEST_FRACTION`. The remaining rows are used as training data.
+  When you are running hyperparameter tuning, the last m rows
+  are used as test data, where m is the value specified for
+  `DATA_SPLIT_TEST_FRACTION`. The second last n rows are used as
+  evaluation data, where n is the value specified for
+  `DATA_SPLIT_EVAL_FRACTION`. The remaining rows are used as training data.
 
-  All rows with split values smaller than the threshold are used as
-  training data. The remaining rows, including `NULLs`, are used as evaluation
-  data.
+  All rows with split values smaller than the threshold, including `NULL`s,
+  are used as training data. The remaining rows are used as evaluation data.
 
   Use the `DATA_SPLIT_COL` option to identify the column that contains the
   data split information.
@@ -530,11 +528,11 @@ value for the [`DATA_SPLIT_METHOD` option](#data_split_method):
   data.
 * If you are running hyperparameter tuning and you are specifying `SEQ` as the
   value for `DATA_SPLIT_METHOD`, then the data is first sorted smallest to
-  largest based on the specified column. The last n rows are used
-  as evaluation data, where n is the value specified for
-  [`DATA_SPLIT_EVAL_FRACTION`](#data_split_eval_fraction). The next
-  m rows are used as test data, where m is the value
-  specified for [`DATA_SPLIT_TEST_FRACTION`](#data_split_test_fraction).
+  largest based on the specified column. The last m rows are used
+  as test data, where m is the value specified for
+  [`DATA_SPLIT_TEST_FRACTION`](#data_split_test_fraction). The second last
+  n rows are used as evaluation data, where n is the value
+  specified for [`DATA_SPLIT_EVAL_FRACTION`](#data_split_eval_fraction).
   The remaining rows are used as training data.
 * If you are running hyperparameter tuning and you are specifying `CUSTOM` as
   the value for `DATA_SPLIT_METHOD`, then you must provide the name of a column
@@ -560,6 +558,8 @@ A `STRING` value.
 The maximum number of submodels to train. The tuning stops when `NUM_TRIALS`
 submodels are trained, or when the hyperparameter search space is exhausted.
 You must specify this option in order to use hyperparameter tuning.
+For matrix factorization models, increasing `NUM_TRIALS` is the
+recommended way to reduce model output variance.
 
 **Arguments**
 
@@ -596,303 +596,5 @@ training results.
 **Syntax**
 
 ```
-HPARAM_TUNING_ALGORITHM = { 'VIZIER_DEFAULT' | 'RANDOM_SEARCH' | 'GRID_SEARCH' }
+HPARAM_TUNING_ALGORITHM = { 'VIZIER_DEFAULT' | 'RANDOM_SEARCH
 ```
-
-**Description**
-
-The algorithm used to tune the hyperparameters. If you specify a value
-for this option, you must also specify a value for [`NUM_TRIALS`](#num_trials).
-
-**Arguments**
-
-Specify one of the following values:
-
-* `VIZIER_DEFAULT`: Use the default algorithm in
-  Vertex AI Vizier to tune hyperparameters. This algorithm is the most
-  powerful algorithm of those offered. It performs a mixture of advanced
-  search algorithms, including
-  [Bayesian optimization](https://en.wikipedia.org/wiki/Bayesian_optimization)
-  with [Gaussian processes](https://en.wikipedia.org/wiki/Gaussian_process). It
-  also uses
-  [transfer learning](/bigquery/docs/reference/standard-sql/bigqueryml-hyperparameter-tuning#transfer_learning)
-  to take advantage of previously tuned models. This is the default, and also
-  the recommended approach.
-* `RANDOM_SEARCH`: Use
-  [random search](https://en.wikipedia.org/wiki/Hyperparameter_optimization#Random_search)
-  to explore the search space.
-* `GRID_SEARCH`: Use
-  [grid search](https://en.wikipedia.org/wiki/Hyperparameter_optimization#Grid_search)
-  to explore the search space. You can only use this algorithm when every
-  hyperparameter's search space is discrete.
-
-### `HPARAM_TUNING_OBJECTIVES`
-
-**Syntax**
-
-For explicit `MATRIX_FACTORIZATION` models:
-
-```
-HPARAM_TUNING_OBJECTIVES = 'MEAN_SQUARED_ERROR'
-```
-
-For implicit `MATRIX_FACTORIZATION` models:
-
-```
-HPARAM_TUNING_OBJECTIVES = { 'MEAN_AVERAGE_PRECISION' | 'MEAN_SQUARED_ERROR' | 'NORMALIZED_DISCOUNTED_CUMULATIVE_GAIN' | 'AVERAGE_RANK' }
-```
-
-**Description**
-
-The hyperparameter tuning objective for the model; only one objective is
-supported. If you specify a value for this option, you must also specify a
-value for [`NUM_TRIALS`](#num_trials).
-
-**Arguments**
-
-The possible objectives are a subset of the
-[model evaluation metrics](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate#output)
-for the model type. If you aren't running hyperparameter tuning, or if you are
-and you don't specify an objective, the default objective
-is used. For explicit `MATRIX_FACTORIZATION` models, the default is `MEAN_SQUARED_ERROR'`. For implicit `MATRIX_FACTORIZATION` models , the
-default is `MEAN_AVERAGE_PRECISION`.
-
-### `MODEL_REGISTRY`
-
-The `MODEL_REGISTRY` option specifies the model registry destination.
-`VERTEX_AI` is the only supported model registry destination. To learn more, see
-[Register a BigQuery ML model](/bigquery/docs/create_vertex#register-model).
-
-### `VERTEX_AI_MODEL_ID`
-
-The `VERTEX_AI_MODEL_ID` option specifies an Gemini Enterprise Agent Platform model ID
-to register the model with. The model ID is associated with your
-BigQuery ML model, and is visible from the
-Model Registry. If you don't specify an
-Agent Platform model ID, the BigQuery ML
-model name is used.
-
-The `VERTEX_AI_MODEL_ID` value can have up to 63 characters, and valid
-characters are `[a-z0-9_-]`. The first character cannot be a number or hyphen.
-If you don't specify an Agent Platform model ID, the
-BigQuery ML model name must meet these requirements.
-
-You can only set the `VERTEX_AI_MODEL_ID` option when the `MODEL_REGISTRY`
-option is set to `VERTEX_AI`.
-
-### `VERTEX_AI_MODEL_VERSION_ALIASES`
-
-The `VERTEX_AI_MODEL_VERSION_ALIASES` option specifies an Agent Platform model alias to use when registering a model. Model
-aliases are helpful for fetching or deploying a particular model version by
-reference without needing to know the specific version ID. To learn more about
-how Model Registry aliases work, see
-[How to use model version aliases](/vertex-ai/docs/model-registry/model-alias).
-
-You can only set the `VERTEX_AI_MODEL_VERSION_ALIASES` option when the
-`MODEL_REGISTRY` option is set to `VERTEX_AI`.
-
-### `KMS_KEY_NAME`
-
-**Syntax**
-
-`KMS_KEY_NAME = string_value`
-
-**Description**
-
-The Cloud Key Management Service [customer-managed encryption key (CMEK)](/kms/docs/cmek) to
-use to encrypt the model.
-
-**Arguments**
-
-A `STRING` value containing the fully-qualified name of the CMEK. For example,
-
-```
-'projects/my_project/locations/my_location/keyRings/my_ring/cryptoKeys/my_key'
-```
-
-### `query_statement`
-
-The `AS query_statement` clause specifies the
-GoogleSQL query used to generate the training data. See the
-[GoogleSQL query syntax](/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax)
-page for the supported SQL syntax of the `query_statement` clause.
-
-The query\_statement is expected to contain exactly 3 columns
-(user, item, and rating) unless you specify a `DATA_SPLIT_METHOD` value that
-requires use of a `DATA_SPLIT_COL` value.
-
-## Supported inputs
-
-BigQuery supports different GoogleSQL data types for the input
-columns for matrix factorization. Supported data types for each respective
-column include:
-
-| `Matrix factorization input column` | `Supported types` |
-| --- | --- |
-| `user` | Any [groupable](/bigquery/docs/reference/standard-sql/data-types#data_type_properties) data type |
-| `item` | Any [groupable](/bigquery/docs/reference/standard-sql/data-types#data_type_properties) data type |
-| `rating` | [`INT64`](/bigquery/docs/reference/standard-sql/data-types#integer_types)  [`NUMERIC`](/bigquery/docs/reference/standard-sql/data-types#numeric_type)  [`BIGNUMERIC`](/bigquery/docs/reference/standard-sql/data-types#bignumeric_type)  [`FLOAT64`](/bigquery/docs/reference/standard-sql/data-types#floating_point_types) |
-
-## Feedback types
-
-An important part of creating a good matrix factorization model for
-recommendations is to make sure that data is trained on the algorithm that is
-best suited for it. For matrix factorization models, there are two different
-ways to get a rating for a user-item pair.
-
-Ratings provided by the user are considered to be explicit
-feedback. A low explicit rating tends to imply the user felt very negatively
-about an item while a high explicit rating tends to imply that the use liked the
-item. Movie streaming sites where users give ratings are examples of explicitly
-labeled datasets. For explicit feedback problems, BigQuery ML
-uses the alternating least squares algorithm (ALS). ALS seeks to minimize the following loss function:
-
-\( Loss = \sum\_{u, i \in \text{observed ratings}} (r\_{ui} - x^T\_uy\_i)^2 +
-\lambda(\sum\_u||x\_u||^2 + \sum\_i||y\_i||^2)\)
-
-Where
-
-\(r\_{ui} = \) rating that user \(u\) gave to item \(i\)   
-\(x\_u = \) latent factor weights vector for user \(u\). Is length
-[`NUM_FACTORS`](#num_factors).   
-\(y\_i = \) latent factor weights vector for item \(i\). Is length
-[`NUM_FACTORS`](#num_factors).   
-\(\lambda = \) [`L2_REG`](#l2_reg)
-
-However, most of the time data isn't labeled by users. Often, the only
-metrics that you have as to whether a user liked an item or movie is
-by the click rate or engagement time. You can use this as a proxy rating,
-but it is not necessarily a definitive indication as to whether a user
-likes or dislikes something. The data in these datasets is considered to be
-implicit feedback. For implicit feedback problems, BigQuery ML
-uses a variant of the ALS algorithm called weighted-alternating least squares
-(WALS), which is described in
-<http://yifanhu.net/PUB/cf.pdf>. This approach
-uses these proxy ratings and treats them as an indicator of the interest that
-a user has in an item. WALS seeks to minimize the following loss function:
-
-$$ Loss = \sum\_{u, i} c\_{ui}(p\_{ui} - x^T\_uy\_i)^2 + \lambda(\sum\_u||x\_u||^2 +
-\sum\_i||y\_i||^2) $$
-
-Where, in addition to the variables defined previously, the function also
-introduces the following variables:
-
-\(p\_{ui} = 1\) when \(r\_{ui} > 0\) and \(p\_{ui} = 0\) when \(r\_{ui} < 0\)   
-\(c\_{ui} = 1 + \alpha r\_{ui}\)   
-\(\alpha = \) [`WALS_ALPHA`](#wals_alpha)
-
-For explicit matrix factorization, the input is typically integers within a
-known fixed range. For implicit matrix factorization, the input ratings can
-be doubles or integers that span a wider range. We recommend that you make sure
-there aren't any outliers in the input ratings, and that you scale the input
-ratings if the model is performing poorly.
-
-## Hyperparameter tuning
-
-Matrix factorization models support
-[hyperparameter tuning](/bigquery/docs/hp-tuning-overview), which you can use
-to improve model performance for your data. To use
-hyperparameter tuning, set the [`NUM_TRIALs` option](#num_trials) to the
-number of trials that you want to run. BigQuery ML then trains the
-model the number of times that you specify, using different hyperparameter
-values, and returns the model that performs the best.
-
-Hyperparameter tuning defaults to improving the key performance metric for the
-given model type. You can use the
-[`HPARAM_TUNING_OBJECTIVES` option](#hparam_tuning_objectives) to tune for
-a different metric if you need to.
-
-For more information about the training objectives and hyperparameters
-supported for explicit matrix factorization models, see
-[`MATRIX_FACTORIZATION` (explicit)](/bigquery/docs/hp-tuning-overview#matrix_factorization_explicit).
-For more information about the training objectives and hyperparameters
-supported for implicit matrix factorization models, see
-[`MATRIX_FACTORIZATION` (implicit)](/bigquery/docs/hp-tuning-overview#matrix_factorization_implicit).
-To try a tutorial that walks you through hyperparameter tuning, see
-[Improve model performance with hyperparameter tuning](/bigquery/docs/hyperparameter-tuning-tutorial).
-
-## Locations
-
-For information about supported locations, see
-[Locations for non-remote models](/bigquery/docs/locations#locations-for-non-remote-models).
-
-## Limitations
-
-If you get the "Model is too large (>100 MB)" error, check the input
-data. This error is caused by having too many ratings for a single user or a
-single item. Hashing the user or item columns into an `INT64` value or
-reducing the data size can help. You can use the following formula to determine whether this error might occur:
-
-```
-max(num_rated_user, num_rated_item) < 100 million
-```
-
-Where `num_rated_user` is the maximum item ratings that a single user has
-entered and `num_rated_items` is the maximum user ratings for a given item.
-
-## Pricing
-
-To create a matrix factorization model you must
-[create a reservation](/bigquery/docs/reservations-tasks#create_reservations)
-that uses the BigQuery
-[Enterprise or Enterprise Plus edition](/bigquery/docs/editions-intro),
-and then
-[create a reservation assignment](/bigquery/docs/reservations-assignments#create_reservation_assignments)
-that uses the `QUERY` job type.
-
-## Examples
-
-The following example creates models named `mymodel` in dataset `mydataset` in
-your default project.
-
-### Train a matrix factorization model with explicit feedback
-
-This example creates an explicit feedback matrix factorization model.
-
-```
-CREATE MODEL `project_id.mydataset.mymodel`
- OPTIONS(MODEL_TYPE='MATRIX_FACTORIZATION') AS
-SELECT
-  user,
-  item,
-  rating
-FROM
-  `mydataset.mytable`
-```
-
-### Train a matrix factorization model with implicit feedback
-
-This example creates an implicit feedback matrix factorization model.
-
-```
-CREATE MODEL `project_id.mydataset.mymodel`
- OPTIONS(MODEL_TYPE='MATRIX_FACTORIZATION',
-         FEEDBACK_TYPE='IMPLICIT') AS
-SELECT
-  user,
-  item,
-  rating
-FROM
-  `mydataset.mytable`
-```
-
-## What's next
-
-* [Use BigQuery ML to make recommendations from Google Analytics data](/bigquery/docs/bigqueryml-mf-implicit-tutorial) (implicit feedback)
-* [Use BigQuery ML to make recommendations from movie ratings](/bigquery/docs/bigqueryml-mf-explicit-tutorial) (explicit feedback)
-
-
-
-
-Send feedback
-
-Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
-
-Last updated 2026-07-17 UTC.
-
-
-
-
-Need to tell us more?
-
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-07-17 UTC."],[],[]]

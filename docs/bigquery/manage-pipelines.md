@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -16,40 +16,90 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 管理管道
 
-本文說明如何管理 [BigQuery 管道](https://docs.cloud.google.com/bigquery/docs/pipelines-introduction?hl=zh-tw)，包括如何排定管道的執行時間和刪除管道。
+本文說明如何管理 [BigQuery 管道](https://docs.cloud.google.com/bigquery/docs/pipelines-introduction?hl=zh-tw)，包括如何查看、排定、部署及刪除管道。
 
-本文也說明如何在 [Knowledge Catalog](https://docs.cloud.google.com/dataplex/docs/introduction?hl=zh-tw) 中查看及管理管道中繼資料。
+本文也說明如何在 [Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/introduction?hl=zh-tw) 中查看及管理管道中繼資料。
 
-管道由 [Dataform](https://docs.cloud.google.com/dataform/docs/overview?hl=zh-tw) 提供支援。
+管道是由 [Dataform](https://docs.cloud.google.com/dataform/docs/overview?hl=zh-tw) 驅動。
+您可以整理及管理儲存在「檔案和資料夾」 (使用者資料夾和團隊資料夾) 或「BigQuery Studio Git 存放區」(Git 資料夾) ([預先發布版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages)) 中的管道。
 
 ## 事前準備
 
 1. [建立 BigQuery 管道](https://docs.cloud.google.com/bigquery/docs/create-pipelines?hl=zh-tw)。
-2. 如要在 Knowledge Catalog 中管理管道中繼資料，請確保專案已啟用 [Dataplex API](https://docs.cloud.google.com/dataplex/docs/enable-api?hl=zh-tw)。 Google Cloud
+2. 如要在 Knowledge Catalog 中管理管道中繼資料，請確保專案已啟用 [Dataplex API](https://docs.cloud.google.com/knowledge-catalog/docs/enable-api?hl=zh-tw)。 Google Cloud
 
 ### 必要的角色
 
 如要取得管理管道所需的權限，請要求管理員授予您下列 IAM 角色：
 
+* 如要查看及執行管道，請按照下列步驟操作：
+  + 專案的 [Dataform 檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform?hl=zh-tw#dataform.Viewer)  (`roles/dataform.Viewer`)
+  + 專案的 [BigQuery 工作使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.jobUser)  (`roles/bigquery.jobUser`)
+* 如要使用 Google 帳戶的使用者憑證執行管道，請在專案或特定 BigQuery 資料集上授予「BigQuery 資料編輯者」 (`roles/bigquery.dataEditor`) 角色。
 * 如要刪除管道：
   [Dataform 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform?hl=zh-tw#dataform.Admin)  (`roles/dataform.Admin`)
   管道
-* 如要查看及執行管道：
-  專案的「Dataform 檢視者」 (`roles/dataform.Viewer`)
+* 如要管理使用者資料夾中的管道：
+  + [程式碼擁有者](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform?hl=zh-tw#dataform.codeOwner)  (`roles/dataform.codeOwner`)
+    資料夾
+  + [程式碼編輯器](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform?hl=zh-tw#dataform.codeEditor)  (`roles/dataform.codeEditor`)
+    資料夾
+  + 資料夾上的[程式碼檢視器](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform?hl=zh-tw#dataform.codeViewer)  (`roles/dataform.codeViewer`)
+* 如要在團隊資料夾中管理管道：
+  + 團隊資料夾擁有者  (`roles/dataform.teamFolderOwner`)
+    團隊資料夾
+  + [團隊資料夾投稿人](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform?hl=zh-tw#dataform.teamFolderContributor)  (`roles/dataform.teamFolderContributor`)
+    團隊資料夾
+  + 團隊資料夾檢視者 (`roles/dataform.teamFolderViewer`)
+    團隊資料夾
+* 如要在 Git 存放區中管理管道，您必須是專案的 [Developer Connect OAuth 使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/developerconnect?hl=zh-tw#developerconnect.oauthUser)  (`roles/developerconnect.oauthUser`)。
+* 如要在 Knowledge Catalog 中查看及管理中繼資料：專案或 `@bigquery` 項目群組的 [Dataplex Catalog 編輯者](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex?hl=zh-tw#dataplex.catalogEditor)  (`roles/dataplex.catalogEditor`)
 
 如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
 您或許也能透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)，取得必要權限。
 
-如要在 Knowledge Catalog 中管理管道中繼資料，請確認您具備必要的 [Knowledge Catalog 角色](https://docs.cloud.google.com/dataplex/docs/iam-roles?hl=zh-tw)。
+如要進一步瞭解 Dataform IAM，請參閱「[使用 IAM 控管存取權](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw)」。如要進一步瞭解資料夾的角色，請參閱「[建立及管理資料夾](https://docs.cloud.google.com/bigquery/docs/create-manage-folders?hl=zh-tw#required_roles)」。如要進一步瞭解 Git 存放區的角色，請參閱「[使用 BigQuery Studio Git 存放區管理程式碼](https://docs.cloud.google.com/bigquery/docs/git-repositories?hl=zh-tw#required_roles)」。
 
-如要進一步瞭解 Dataform IAM，請參閱「[使用 IAM 控管存取權](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw)」。
+**注意：** 建立管道時，BigQuery 會授予您該管道的 [Dataform 管理員角色](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#dataform.admin) (`roles/dataform.admin`)。在 Google Cloud 專案中獲派 Dataform 管理員角色的所有使用者，都能以擁有者身分存取專案中建立的所有管道。
 
-**注意：** 建立管道時，BigQuery 會授予您該管道的 [Dataform 管理員角色](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#dataform.admin) (`roles/dataform.admin`)。在 Google Cloud 專案中獲派 Dataform 管理員角色的所有使用者，都擁有專案中所有管道的存取權。
+如果您使用自訂服務帳戶執行管道，請務必將下列角色授予該服務帳戶：
 
-## 查看所有管道
+* 專案的 [BigQuery 工作使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.jobUser)
+  (`roles/bigquery.jobUser`)
+* 專案或特定 BigQuery 資料集的「BigQuery 資料編輯者」(`roles/bigquery.dataEditor`)
+* 專案或 `@bigquery` 項目群組的 [Dataplex Catalog 編輯者](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex?hl=zh-tw#dataplex.catalogEditor) (`roles/dataplex.catalogEditor`)
 
-如要查看專案中的所有管道清單，請按照下列步驟操作：
+## 查看管道
+
+您可以在「檔案」窗格中，查看並檢查儲存在資料夾或 Git 資料夾中的管道。您可以在「Explorer」(探索) 窗格中，查看獨立管道和儲存在資料夾中的管道。儲存在 Git 資料夾中的管道不會顯示在「Explorer」窗格中。
+
+### 在「檔案」窗格中查看處理管線
+
+儲存在資料夾或 Git 資料夾中的管道會直接顯示在「檔案」窗格中。
+
+如要查看儲存在資料夾或 Git 資料夾中的管道，請按照下列步驟操作：
+
+1. 前往 Google Cloud 控制台的「BigQuery」**BigQuery**頁面。
+
+   [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
+2. 在左側窗格中，按一下「檔案」folder 開啟檔案瀏覽器。
+
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
+3. 展開「使用者」資料夾、「團隊資料夾」或已連結的 Git 存放區資料夾。
+
+   管道會顯示 **管道**圖示，而非標準資料夾圖示。
+4. 按一下管道資料夾，開啟「管道檢視器」。
+
+   「管道檢視器」會顯示管道工作的已編譯有向無環圖 (DAG)、執行狀態和設定分頁。
+5. 在檔案瀏覽器中展開管道目錄，即可瀏覽巢狀目錄 (例如 `definitions/`) 和個別工作檔案。
+
+**注意：** 如果連結的 Git 存放區在根目錄中包含 `workflow_settings.yaml`，BigQuery Studio 會將其視為根層級管道。Git 存放區資料夾本身會顯示「管道」圖示。
+點選 Git 存放區資料夾後，系統會開啟「Pipeline Viewer」，顯示整個存放區的已編譯 DAG。
+
+### 在「Explorer」窗格中查看管道
+
+如要查看獨立管道和儲存在資料夾中的管道清單，請執行下列操作：
 
 1. 前往 Google Cloud 控制台的「BigQuery」**BigQuery**頁面。
 
@@ -58,6 +108,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Explorer」窗格中展開專案，然後按一下「Pipelines」。
+4. 選取管道，在「管道檢視器」中開啟。
 
 ## 查看過去的手動執行作業
 
@@ -74,7 +125,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 ## 設定管道執行作業失敗的快訊
 
 每個管道都有對應的 Dataform 存放區 ID。
-系統會使用對應的 Dataform 存放區 ID，在 [Cloud Logging](https://docs.cloud.google.com/logging/docs?hl=zh-tw) 中記錄每次 BigQuery 管道執行作業。您可以使用 Cloud Monitoring 觀察 BigQuery 管道執行作業的 Cloud Logging 記錄趨勢，並在發生您描述的情況時收到通知。
+每個 BigQuery 管道執行作業都會使用對應的 Dataform 存放區 ID，記錄在 [Cloud Logging](https://docs.cloud.google.com/logging/docs?hl=zh-tw) 中。您可以使用 Cloud Monitoring 觀察 BigQuery 管道執行作業的 Cloud Logging 記錄趨勢，並在發生您描述的情況時收到通知。
 
 如要在 BigQuery 管道執行失敗時收到警告，可以為對應的 Dataform 存放區 ID 建立以記錄為準的警告政策。如需操作說明，請參閱「[設定工作流程叫用失敗的快訊](https://docs.cloud.google.com/dataform/docs/monitor-runs?hl=zh-tw#configure-alerts-failed-workflow-invocations)」。
 
@@ -93,20 +144,29 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 如要永久刪除管道，請按照下列步驟操作：
 
-1. 前往 Google Cloud 控制台的「BigQuery」**BigQuery**頁面。
+1. 前往 Google Cloud 控制台的「BigQuery」**BigQuery**頁面。[前往 BigQuery](https://console.cloud.google.com/bigquery?hl=zh-tw)
 
-   [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 點選左側窗格中的 explore「Explorer」。
-3. 在「Explorer」窗格中展開專案，然後按一下「Pipelines」。
-4. 找出要刪除的管道。
-5. 按一下管道旁的 more\_vert「View actions」(查看動作)，然後按一下「Delete」(刪除)。
-6. 點選「刪除」。
+* 如要刪除儲存在資料夾或 Git 資料夾中的管道，請按照下列步驟操作：
+
+  1. 在左側窗格中，按一下「檔案」folder。
+  2. 在檔案樹狀結構中，找出要刪除的管道資料夾。
+  3. 按一下管道資料夾旁的 more\_vert「View actions」(查看動作)，然後按一下「Delete」(刪除)。
+  4. 在確認對話方塊中點按「刪除」。
+
+     系統會從工作區中刪除管道資料夾，以及其中包含的所有工作和檔案。
+* 如要刪除「Explorer」窗格中列出的管道，請按照下列步驟操作：
+
+  1. 點選左側窗格中的 explore「Explorer」。
+  2. 在「Explorer」窗格中展開專案，然後按一下「Pipelines」。
+  3. 找出要刪除的管道。
+  4. 按一下管道旁的 more\_vert「View actions」(查看動作)，然後按一下「Delete」(刪除)。
+  5. 點選「刪除」。
 
 ## 管理 Knowledge Catalog 中的中繼資料
 
 您可以使用 Knowledge Catalog 儲存及管理管道的中繼資料。根據預設，管道會顯示在 Knowledge Catalog 中，不需額外設定。
 
-您可以使用 Knowledge Catalog 管理所有[管道位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)的管道。在 Knowledge Catalog 中管理管道時，須遵守 [Knowledge Catalog 配額和限制](https://docs.cloud.google.com/dataplex/docs/quotas?hl=zh-tw)，以及 [Knowledge Catalog 定價](https://cloud.google.com/dataplex/pricing?hl=zh-tw)。
+您可以使用 Knowledge Catalog 管理所有[管道位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)的管道。在 Knowledge Catalog 中管理管道時，須遵守 [Knowledge Catalog 配額和限制](https://docs.cloud.google.com/knowledge-catalog/docs/quotas?hl=zh-tw)，以及 [Knowledge Catalog 定價](https://cloud.google.com/dataplex/pricing?hl=zh-tw)。
 
 Knowledge Catalog 會自動從管道擷取下列中繼資料：
 
@@ -116,29 +176,52 @@ Knowledge Catalog 會自動從管道擷取下列中繼資料：
 * 資料資產類型
 * 對應 Google Cloud 專案
 
-Knowledge Catalog 會將管道記錄為[項目](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources?hl=zh-tw#entries)，並提供下列項目值：
+Knowledge Catalog 會將管道記錄為「項目」，並提供下列項目值：
 
 系統項目群組
-:   管道的[系統項目群組](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources?hl=zh-tw#entry-groups)為 `@dataform`。如要查看 Knowledge Catalog 中管道項目的詳細資料，請查看 `dataform` 系統項目群組。如需查看項目群組中所有項目的清單，請參閱 Knowledge Catalog 說明文件中的「[查看項目群組的詳細資料](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources?hl=zh-tw#entry-group-details)」。�
+:   管道的[系統項目群組](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources?hl=zh-tw#entry-groups)為 `@dataform`。如要查看 Knowledge Catalog 中管道項目的詳細資料，請查看 `dataform` 系統項目群組。如要瞭解如何查看項目群組中的所有項目清單，請參閱 Knowledge Catalog 說明文件中的「[查看項目群組的詳細資料](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources?hl=zh-tw#entry-group-details)」�。
 
 系統項目類型
-:   管道的[系統項目類型](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources?hl=zh-tw#entry-types)為 `dataform-code-asset`。如要查看管道詳細資料，您必須查看 `dataform-code-asset` 系統項目類型、使用切面篩選器篩選結果，並將 `dataform-code-asset` 切面內的 `type` 欄位設為 `WORKFLOW`。[然後選取所選管道的項目。
-    如要瞭解如何查看所選項目類型的詳細資料，請參閱 Knowledge Catalog 說明文件中的「[查看項目類型的詳細資料](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources?hl=zh-tw#entry-type-details)」。如需查看所選項目詳細資料的操作說明，請參閱 Knowledge Catalog 說明文件中的「[查看項目的詳細資料](https://docs.cloud.google.com/dataplex/docs/search-assets?hl=zh-tw#view-entry-details)」一節。](https://docs.cloud.google.com/dataplex/docs/search-syntax?hl=zh-tw#aspect-search)
+:   管道的[系統項目類型](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources?hl=zh-tw#entry-types)為 `dataform-code-asset`。如要查看管道詳細資料，您需要查看 `dataform-code-asset` 系統項目類型、使用切面式篩選器篩選結果，並[將 `dataform-code-asset` 切面內的 `type` 欄位設為 `WORKFLOW`](https://docs.cloud.google.com/knowledge-catalog/docs/search-syntax?hl=zh-tw#aspect-search)。然後選取所選管道的項目。
+    如要瞭解如何查看所選項目類型的詳細資料，請參閱 Knowledge Catalog 說明文件中的「[查看項目類型的詳細資料](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources?hl=zh-tw#entry-type-details)」。如要瞭解如何查看所選項目的詳細資料，請參閱 Knowledge Catalog 說明文件中的「[查看項目的詳細資料](https://docs.cloud.google.com/knowledge-catalog/docs/search-assets?hl=zh-tw#view-entry-details)」
+。
 
 系統切面類型
-:   管道的[系統切面類型](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata?hl=zh-tw#aspect-types)為 `dataform-code-asset`。如要透過[切面](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata?hl=zh-tw#aspects)註解資料管道項目，為 Knowledge Catalog 中的管道提供額外背景資訊，請查看 `dataform-code-asset` 切面類型、使用切面篩選器篩選結果，並[將 `dataform-code-asset` 切面內的 `type` 欄位設為 `WORKFLOW`](https://docs.cloud.google.com/dataplex/docs/search-syntax?hl=zh-tw#aspect-search)。如需如何使用切面註解項目的操作說明，請參閱 Knowledge Catalog 說明文件中的「[管理切面及豐富中繼資料](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata?hl=zh-tw)」一文。
+:   管道的[系統切面類型](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata?hl=zh-tw#aspect-types)為 `dataform-code-asset`。如要透過[切面](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata?hl=zh-tw#aspects)註解資料管道項目，為 Knowledge Catalog 中的管道提供額外背景資訊，請查看 `dataform-code-asset` 切面類型、使用以切面為準的篩選器篩選結果，並[將 `dataform-code-asset` 切面內的 `type` 欄位設為 `WORKFLOW`](https://docs.cloud.google.com/knowledge-catalog/docs/search-syntax?hl=zh-tw#aspect-search)。如需如何使用切面註解項目的操作說明，請參閱 Knowledge Catalog 說明文件中的「[管理切面及豐富中繼資料](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata?hl=zh-tw)」一文。
 
 類型
 :   資料畫布的類型為 `WORKFLOW`。
-    這類篩選器可讓您在 `dataform-code-asset` 系統項目類型和 `dataform-code-asset` 切面類型中，使用`aspect:dataplex-types.global.dataform-code-asset.type=WORKFLOW`[以切面為準的篩選器](https://docs.cloud.google.com/dataplex/docs/search-syntax?hl=zh-tw#aspect-search)查詢，篩選管道。
+    這類篩選器可讓您在`dataform-code-asset`
+    系統項目類型和`dataform-code-asset`切面類型中，使用
+    [以切面為準的篩選器](https://docs.cloud.google.com/knowledge-catalog/docs/search-syntax?hl=zh-tw#aspect-search)`aspect:dataplex-types.global.dataform-code-asset.type=WORKFLOW`
+    查詢，篩選管道。
 
-如需在 Knowledge Catalog 中搜尋資產的操作說明，請參閱 Knowledge Catalog 說明文件中的「[在 Knowledge Catalog 中搜尋資料資產](https://docs.cloud.google.com/dataplex/docs/search-assets?hl=zh-tw)」。
+如需在 Knowledge Catalog 中搜尋資產的操作說明，請參閱 Knowledge Catalog 說明文件中的「[在 Knowledge Catalog 中搜尋資料資產](https://docs.cloud.google.com/knowledge-catalog/docs/search-assets?hl=zh-tw)」。
+
+### 整合中繼資料擴充功能和資料品質評量表
+
+Dataform 可以將下列中繼資料發布至 Knowledge Catalog：
+
+* 總覽切面類型
+* 一般切面類型
+* 資料品質評量表切面類型
+
+Dataform 斷言會自動整合至 [Knowledge Catalog 資料品質評分表](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata?hl=zh-tw#data-quality-scorecard)。在 pipeline 執行期間，系統會自動將任何 Dataform 斷言的結果發布至 Knowledge Catalog。這些結果會填入 Knowledge Catalog 資料品質評分表，並顯示通過或失敗狀態。
+
+**注意：** 每次執行作業時，系統都會覆寫先前 Dataform 執行作業發布的現有資料品質評量表，但不會影響 Knowledge Catalog 資料掃描作業建立的評量表。
+
+如要查看中繼資料更新狀態，請按照「[查看過去的手動執行作業](#view-manual-runs)」一文的說明操作。
+
+中繼資料同步完成後，您就可以在 Knowledge Catalog 中搜尋及查看項目。詳情請參閱「[搜尋資源](https://docs.cloud.google.com/knowledge-catalog/docs/search-assets?hl=zh-tw#search-data-assets)」。
 
 ## 後續步驟
 
 * 進一步瞭解 [BigQuery 管道](https://docs.cloud.google.com/bigquery/docs/pipelines-introduction?hl=zh-tw)。
 * 瞭解如何[建立管道](https://docs.cloud.google.com/bigquery/docs/create-pipelines?hl=zh-tw)。
 * 瞭解如何[排定管道](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines?hl=zh-tw)。
+* 瞭解如何[使用 BigQuery Studio Git 存放區管理程式碼](https://docs.cloud.google.com/bigquery/docs/git-repositories?hl=zh-tw)。
+* 瞭解如何[使用資料夾整理程式碼資產](https://docs.cloud.google.com/bigquery/docs/code-asset-folders?hl=zh-tw)。
+* 進一步瞭解 [Dataform 部署作業](https://docs.cloud.google.com/dataform/docs/deployments?hl=zh-tw)。
 
 
 
@@ -147,11 +230,11 @@ Knowledge Catalog 會將管道記錄為[項目](https://docs.cloud.google.com/da
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-12 (世界標準時間)。
+上次更新時間：2026-10-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-12 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]

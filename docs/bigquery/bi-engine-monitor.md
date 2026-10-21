@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -41,7 +41,7 @@ BigQuery BI Engine 提供下列指標：
 |  |  |
 | --- | --- |
 | ``` BI_ENGINE_DISABLED ``` | BI Engine 已停用加速功能。 `biEngineReasons` 會指定更詳細的原因。查詢是使用 BigQuery 執行引擎執行的。 |
-| ``` PARTIAL_INPUT ``` | 查詢輸入的部分內容已使用 BI Engine 加速處理。如「[查詢最佳化和加速](https://docs.cloud.google.com/bigquery/docs/bi-engine-query?hl=zh-tw#query_optimization_and_acceleration)」一文所述，查詢計畫通常會細分為多個輸入階段。BI Engine 支援一般類型的子查詢模式，通常用於資訊主頁。如果查詢包含多個輸入階段，但只有少數階段屬於支援的用途，BI Engine 會使用一般 BigQuery 引擎執行不支援的階段，不會加速處理。在這種情況下，BI Engine 會傳回 `PARTIAL` 加速代碼，並使用 `biEngineReasons` 填入未加速其他輸入階段的原因。 |
+| ``` PARTIAL_INPUT ``` | 查詢輸入的部分內容已使用 BI Engine 加速處理。如「[查詢最佳化和加速](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro?hl=zh-tw#query_optimization_and_acceleration)」一文所述，查詢計畫通常會細分為多個輸入階段。BI Engine 支援一般類型的子查詢模式，通常用於資訊主頁。如果查詢包含多個輸入階段，但只有少數階段屬於支援的用途，BI Engine 會使用一般 BigQuery 引擎執行不支援的階段，不會加速處理。在這種情況下，BI Engine 會傳回 `PARTIAL` 加速代碼，並使用 `biEngineReasons` 填入未加速其他輸入階段的原因。 |
 | ```  FULL_INPUT ``` | 查詢的所有輸入階段都使用 BI Engine 加速處理。快取資料會在查詢中重複使用，且讀取資料後立即進行的運算作業會加速。 |
 | ```  FULL_QUERY ``` | 整個查詢都使用 BI Engine 加速。 |
 
@@ -191,11 +191,11 @@ BI Engine 加速是 BigQuery 工作處理程序的一部分。如要檢查特定
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-13 (世界標準時間)。
+上次更新時間：2026-10-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-13 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]

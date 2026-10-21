@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -8,7 +8,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 取得資料表屬性 透過集合功能整理內容 你可以依據偏好儲存及分類內容。
 
-針對指定資料表 ID 擷取資料表屬性。
+針對指定資料表 ID 擷取資料表的屬性。
 
 ## 深入探索
 
@@ -116,6 +116,32 @@ $bigQuery = new BigQueryClient([
 ]);
 $dataset = $bigQuery->dataset($datasetId);
 $table = $dataset->table($tableId);
+```
+
+### Python
+
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+
+```
+from google.cloud import bigquery
+
+# Construct a BigQuery client object.
+client = bigquery.Client()
+
+# TODO(developer): Set table_id to the ID of the model to fetch.
+# table_id = 'your-project.your_dataset.your_table'
+
+table = client.get_table(table_id)  # Make an API request.
+
+# View table properties
+print(
+    "Got table '{}.{}.{}'.".format(table.project, table.dataset_id, table.table_id)
+)
+print("Table schema: {}".format(table.schema))
+print("Table description: {}".format(table.description))
+print("Table has {} rows".format(table.num_rows))
 ```
 
 ## 後續步驟

@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -35,7 +35,7 @@ BigQuery 遠端函式可讓您以 SQL 和 JavaScript 以外的語言實作函式
 * 遠端函式僅支援下列其中一種[資料類型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw)做為引數類型或傳回類型：
 
   + 布林值
-  + 位元組
+  + 位元組數
   + 數字
   + 字串
   + 日期
@@ -48,18 +48,18 @@ BigQuery 遠端函式可讓您以 SQL 和 JavaScript 以外的語言實作函式
 * 您無法建立資料表值遠端函式。
 * 建立具體化檢視表時，無法使用遠端函式。
 * 系統一律會假設遠端函式的傳回值具有不確定性，因此不會快取呼叫遠端函式的查詢結果。
-* 即使收到成功的回應，由於暫時性網路錯誤或 BigQuery 內部錯誤，您可能會看到對端點發出相同資料的重複要求。
-* 如果由於短路而略過部分資料列的遠端函式評估 (例如在[條件運算式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conditional_expressions?hl=zh-tw)或含有 `WHEN [NOT] MATCHED` 的 [`MERGE` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax?hl=zh-tw#merge_statement)中)，系統不會對遠端函式使用批次處理。在本例中，[HTTP 要求主體](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/remote-functions?hl=zh-tw#input_format)中的 `calls` 欄位只有一個元素。
+* 即使收到成功的回應，您也可能會看到系統重複將相同資料傳送至端點，這是因為發生暫時性網路錯誤或 BigQuery 內部錯誤。
+* 如果因短路而略過某些資料列的遠端函式評估 (例如在[條件式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conditional_expressions?hl=zh-tw)或含有 `WHEN [NOT] MATCHED` 的 [`MERGE` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax?hl=zh-tw#merge_statement)中)，系統不會對遠端函式使用批次處理。在本例中，[HTTP 要求主體](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/remote-functions?hl=zh-tw#input_format)中的 `calls` 欄位只有一個元素。
 * 如果透過[跨區域資料集複製](https://docs.cloud.google.com/bigquery/docs/data-replication?hl=zh-tw)，將與遠端函式相關聯的資料集複製到目的地區域，則只能在建立遠端函式的區域中查詢該函式。
-* 遠端函式支援端點網址中的自訂路徑。自訂路徑有以下限制：
+* 遠端函式支援端點網址中的自訂路徑。自訂路徑有下列限制：
 
   + 路徑只能包含大寫字母 (A-Z)、小寫字母 (a-z)、數字 (0-9)、連字號 (`-`) 和底線 (`_`)。
   + 不允許使用片段 ID (`#`)、查詢參數 (`?`) 和波浪號 (`~`)。
-  + 路徑不得以 `/_ah/` 開頭、為特定路徑 `/eventlog`，或以字母 `z` 結尾。
+  + 路徑開頭為 `/_ah/`、特定路徑 `/eventlog`，以及結尾為字母 `z` 的任何路徑，都不允許使用。
 
 ## 建立端點
 
-如要建立可實作業務邏輯的遠端函式，您必須使用 Cloud Run 函式或 Cloud Run 建立 HTTP 端點。端點必須能夠在單一 HTTP POST 要求中處理一批資料列，並以 HTTP 回應的形式傳回該批資料的結果。遠端函式支援端點網址中的自訂路徑 (請參閱[限制](#custom-path-limitations))。
+如要建立可實作商業邏輯的遠端函式，您必須使用 Cloud Run 函式或 Cloud Run 建立 HTTP 端點。端點必須能夠在單一 HTTP POST 要求中處理一批資料列，並以 HTTP 回應的形式傳回該批資料的結果。遠端函式支援端點網址中的自訂路徑 (請參閱[限制](#custom-path-limitations))。
 
 如果您使用 [BigQuery DataFrame](https://dataframes.bigquery.dev/) 建立遠端函式，則不必手動建立 HTTP 端點，服務會自動為您建立。
 
@@ -107,7 +107,7 @@ BigQuery 預期端點會傳回下列格式的 HTTP 回應，否則 BigQuery 無�
 | --- | --- | --- |
 | 欄位名稱 | 說明 | 值範圍 |
 | 回覆 | 一批傳回值。 | 這是成功回應的必要條件。JSON 陣列。 每個元素都對應至外部函式的 JSON 編碼回傳值。  陣列大小必須與 HTTP 要求中 `calls` 的 JSON 陣列大小相符。舉例來說，如果 `calls` 中的 JSON 陣列有 4 個元素，這個 JSON 陣列也必須有 4 個元素。 |
-| errorMessage | 傳回 HTTP 回應代碼 (非 200) 時的錯誤訊息。對於無法重試的錯誤，我們會將此錯誤做為 BigQuery 工作錯誤訊息的一部分，傳回給使用者。 | 選用。字串。大小不得超過 1 KB。 |
+| errorMessage | 傳回 HTTP 回應代碼 (非 200) 時的錯誤訊息。對於無法重試的錯誤，我們會將這項資訊納入 BigQuery 作業的錯誤訊息，傳回給使用者。 | 選用。字串。大小不得超過 1 KB。 |
 
 成功回應範例如下：
 
@@ -130,7 +130,8 @@ BigQuery 預期端點會傳回下列格式的 HTTP 回應，否則 BigQuery 無�
 
 #### HTTP 回應代碼
 
-如果回應成功，端點應傳回 HTTP 回應代碼 200。如果 BigQuery 收到任何其他值，就會將回應視為失敗，並在 HTTP 回應代碼為 408、429、500、503 或 504 時重試，直到達到內部限制為止。
+如果回應成功，端點應傳回 HTTP 回應代碼 200。
+如果 BigQuery 收到任何其他值，就會將回應視為失敗，並在 HTTP 回應代碼為 408、429、500、503 或 504 時重試，直到達到內部限制為止。
 
 ### SQL 資料類型的 JSON 編碼
 
@@ -138,7 +139,7 @@ HTTP 要求/回應中的 JSON 編碼會遵循 [TO\_JSON\_STRING 函式](https://
 
 ### Cloud Run 函式程式碼範例
 
-下列 Python 程式碼範例會實作遠端函式的所有整數引數加法。這個函式會處理要求，並使用批次呼叫的引數，然後在回應中傳回所有結果。
+下列 Python 程式碼範例會實作遠端函式的所有整數引數加法。這個函式會處理要求，其中包含批次呼叫的引數，並在回應中傳回所有結果。
 
 ```
 import functions_framework
@@ -147,7 +148,7 @@ from flask import jsonify
 
 # Max INT64 value encoded as a number in JSON by TO_JSON_STRING. Larger values are encoded as
 # strings.
-# See https://cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#json_encodings
+# See https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#json_encodings
 _MAX_LOSSLESS=9007199254740992
 
 @functions_framework.http
@@ -178,7 +179,7 @@ from flask import Flask, request, jsonify
 
 # Max INT64 value encoded as a number in JSON by TO_JSON_STRING. Larger values are encoded as
 # strings.
-# See https://cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#json_encodings
+# See https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#json_encodings
 _MAX_LOSSLESS=9007199254740992
 
 app = Flask(__name__)
@@ -233,13 +234,13 @@ def batch_subtract():
 
 ## 建立遠端函式
 
-BigQuery 會使用 `CLOUD_RESOURCE` 連線與 Cloud Run 函式互動。如要建立遠端函式，請務必建立 `CLOUD_RESOURCE` 連線。如果您使用 [BigQuery DataFrames](https://dataframes.bigquery.dev/) 建立遠端函式，且已獲授專案 IAM 管理員 (`roles/resourcemanager.projectIamAdmin`) 角色，則不必手動建立連線並授予存取權，服務會自動為您完成這些作業。
+BigQuery 會使用 `CLOUD_RESOURCE` 連線與 Cloud Run 函式互動。如要建立遠端函式，請務必建立 `CLOUD_RESOURCE` 連線。如果您使用 [BigQuery DataFrames](https://dataframes.bigquery.dev/) 建立遠端函式，且已獲派專案 IAM 管理員 (`roles/resourcemanager.projectIamAdmin`) 角色，則不必手動建立連線並授予存取權，服務會自動為您完成這些作業。
 
 ### 建立連線
 
 您必須有 Cloud 資源連結，才能連線至 Cloud Run 函式和 Cloud Run。
 
-如果已設定預設連線，或您具備 BigQuery 管理員角色，可以略過這個步驟。
+如果已設定預設連線，或具備 BigQuery 管理員角色，可以略過這個步驟。
 
 選取下列選項之一：
 
@@ -255,7 +256,7 @@ BigQuery 會使用 `CLOUD_RESOURCE` 連線與 Cloud Run 函式互動。如要建
 4. 在「Connections」(連線) 頁面中，按一下「Create connection」(建立連線)。
 5. 在「連線類型」中，選擇「Vertex AI 遠端模型、遠端函式、BigLake 和 Spanner (Cloud 資源)」。
 6. 在「連線 ID」欄位中，輸入連線名稱。
-7. 針對「位置類型」，選取連線位置。連線應與其他資源 (例如資料集) 位於同一位置。
+7. 在「位置類型」中，選取連線位置。連線應與資料集等其他資源位於同一位置。
 8. 點選「建立連線」。
 9. 點選「前往連線」。
 10. 在「連線資訊」窗格中，複製服務帳戶 ID，以便在後續步驟中使用。
@@ -282,7 +283,7 @@ BigQuery 會使用 `CLOUD_RESOURCE` 連線與 Cloud Run 函式互動。如要建
 
    * `CONNECTION_NAME`：連線名稱，格式為 `PROJECT_ID.LOCATION.CONNECTION_ID`、`LOCATION.CONNECTION_ID` 或 `CONNECTION_ID`。如果省略專案或位置，系統會從執行陳述式的專案和位置推斷。
    * `FRIENDLY_NAME` (選用)：連線的描述性名稱。
-   * `DESCRIPTION` (選用)：連線說明。
+   * `DESCRIPTION` (選用)：連線的說明。
 3. 按一下「執行」play\_circle。
 
 如要進一步瞭解如何執行查詢，請參閱「[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)」。
@@ -439,7 +440,7 @@ async function createConnection(projectId, location, connectionId) {
 
 請使用 [`google_bigquery_connection`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_connection) 資源。
 
-**注意：** 如要使用 Terraform 建立 BigQuery 物件，請務必啟用 [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest?hl=zh-tw)。
+**注意：** 如要使用 Terraform 建立 BigQuery 物件，必須啟用 [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -467,7 +468,7 @@ resource "google_bigquery_connection" "default" {
 2. 設定要套用 Terraform 設定的預設 Google Cloud 專案
    。
 
-   每項專案只需要執行一次這個指令，而且可以在任何目錄中執行。
+   每個專案只需要執行一次這個指令，且可以在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
@@ -486,9 +487,9 @@ resource "google_bigquery_connection" "default" {
    ```
 2. 如果您正在學習教學課程，可以複製每個章節或步驟中的程式碼範例。
 
-   將程式碼範例複製到新建立的 `main.tf`。
+   將程式碼範例複製到新建立的 `main.tf` 中。
 
-   視需要從 GitHub 複製程式碼。如果 Terraform 程式碼片段是端對端解決方案的一部分，建議您使用這個方法。
+   視需要從 GitHub 複製程式碼。如果 Terraform 程式碼片段是端對端解決方案的一部分，建議您使用這個選項。
 3. 查看並修改範例參數，套用至您的環境。
 4. 儲存變更。
 5. 初始化 Terraform。每個目錄只需執行一次這項操作。
@@ -512,20 +513,20 @@ resource "google_bigquery_connection" "default" {
    ```
 
    視需要修正設定。
-2. 執行下列指令並在提示中輸入 `yes`，套用 Terraform 設定：
+2. 執行下列指令，並在提示中輸入 `yes`，套用 Terraform 設定：
 
    ```
    terraform apply
    ```
 
    等待 Terraform 顯示「Apply complete!」訊息。
-3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)，查看結果。在 Google Cloud 控制台中，前往 UI 中的資源，確認 Terraform 已建立或更新這些資源。
+3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)即可查看結果。在 Google Cloud 控制台中，前往 UI 中的資源，確認 Terraform 已建立或更新這些資源。
 
-**注意：**Terraform 範例通常會假設 Google Cloud 專案已啟用必要的 API。
+**注意：**Terraform 範例通常會假設專案已啟用必要的 API。 Google Cloud
 
 ### 設定存取權
 
-您必須授予新連線對 Cloud Run 函式或 Cloud Run 服務的唯讀存取權。不建議允許對 Cloud Run 函式或 Cloud Run 服務進行未經驗證的叫用。
+您必須授予新連線 Cloud Run 函式或 Cloud Run 服務的唯讀權限。不建議允許未經身分驗證的人員叫用 Cloud Run 函式或 Cloud Run 服務。
 
 如要授予角色，請按照下列步驟操作：
 
@@ -569,14 +570,14 @@ resource "google_bigquery_connection" "default" {
    請替換下列項目：
 
    * `DATASET_ID`：BigQuery 資料集的 ID。
-   * `ENDPOINT_URL`：Cloud Run 函式或 Cloud Run 遠端函式端點的網址。遠端函式支援端點網址中的自訂路徑 (請參閱[限制](#custom-path-limitations))。您可以在同一應用程式的每個路徑中建立不同的遠端函式。`CREATE FUNCTION` 陳述式中的 `endpoint` 選項可以包含緊接在 Cloud Run 網址後方的路徑 (例如 `https://service_name-project_number.region.run.app/subtract_list`)。
+   * `ENDPOINT_URL`：Cloud Run 函式或 Cloud Run 遠端函式端點的網址。遠端函式支援端點網址中的自訂路徑 (請參閱[限制](#custom-path-limitations))。您可以在同一應用程式的每個路徑中建立不同的遠端函式。`CREATE FUNCTION` 陳述式中的 `endpoint` 選項可包含緊接在 Cloud Run 網址後方的路徑 (例如 `https://service_name-project_number.region.run.app/subtract_list`)。
    * 按一下「執行」play\_circle。
 
 如要進一步瞭解如何執行查詢，請參閱「[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)」。
 
 ### BigQuery DataFrames
 
-1. 啟用必要 API，並確認您已獲得必要角色，詳情請參閱[遠端函式](https://docs.cloud.google.com/bigquery/docs/dataframes-custom-python-functions?hl=zh-tw#remote-function-requirements)的「**需求條件**」一節。
+1. 啟用必要 API，並確認您已獲派必要角色，詳情請參閱「[遠端函式](https://docs.cloud.google.com/bigquery/docs/dataframes-custom-python-functions?hl=zh-tw#remote-function-requirements)」的「**需求條件**」一節。
 2. 使用 [`remote_function` 修飾符](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.remote_function.html#bigframes.pandas.remote_function)：
 
    ```
@@ -674,7 +675,7 @@ resource "google_bigquery_connection" "default" {
    df_redacted.head(10)
    ```
 
-您必須對建立遠端函式的資料集擁有 `bigquery.routines.create` 權限，並對遠端函式使用的連線擁有 `bigquery.connections.delegate` 權限 (可透過 BigQuery 連線管理員角色取得)。
+您必須在建立遠端函式的資料集上擁有 `bigquery.routines.create` 權限，並在遠端函式使用的連線上擁有 `bigquery.connections.delegate` 權限 (可透過 BigQuery 連線管理員角色取得)。
 
 #### 提供使用者定義的情境
 
@@ -702,7 +703,7 @@ OPTIONS (
 
 #### 限制批次要求中的資料列數
 
-您可以在 `OPTIONS` 中指定 `max_batching_rows`，做為每個 HTTP 要求中的最大資料列數，避免 [Cloud Run 函式逾時](https://docs.cloud.google.com/functions/docs/concepts/exec?hl=zh-tw#timeout)。如果指定 `max_batching_rows`，BigQuery 會判斷批次中的資料列數量，上限為 `max_batching_rows`。如未指定，BigQuery 會自動決定要批次處理的資料列數量。
+您可以在 `OPTIONS` 中指定 `max_batching_rows`，做為每個 HTTP 要求中的最大資料列數，避免 [Cloud Run 函式逾時](https://docs.cloud.google.com/functions/docs/concepts/exec?hl=zh-tw#timeout)。如果指定 `max_batching_rows`，BigQuery 會判斷批次中的資料列數量，上限為 `max_batching_rows`。如未指定，BigQuery 會自動判斷要批次處理的資料列數量。
 
 ## 在查詢中使用遠端函式
 
@@ -748,7 +749,7 @@ BigQuery 中的位置類型有兩種：
 
 ### 單一地區
 
-在 BigQuery 單一地區資料集中，您只能建立使用部署在相同地區的 Cloud Run 函式的遠端函式。例如：
+在 BigQuery 單一區域資料集中，您只能建立使用部署在相同區域的 Cloud Run 函式的遠端函式。例如：
 
 * BigQuery 單一區域 `us-east4` 中的遠端函式只能使用 `us-east4` 中的 Cloud Run 函式。
 
@@ -770,11 +771,11 @@ BigQuery 中的位置類型有兩種：
 ## 定價
 
 * 適用標準 [BigQuery 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw)。
-* 此外，使用這項功能可能會產生 Cloud Run 函式和 Cloud Run 的費用。詳情請參閱 [Cloud Run functions](https://cloud.google.com/functions/pricing?hl=zh-tw) 和 [Cloud Run](https://cloud.google.com/run/pricing?hl=zh-tw) 定價頁面。
+* 此外，使用這項功能可能會產生 Cloud Run 函式和 Cloud Run 的費用。詳情請參閱 [Cloud Run functions](https://cloud.google.com/functions/pricing-overview?hl=zh-tw) 和 [Cloud Run](https://cloud.google.com/run/pricing?hl=zh-tw) 定價頁面。
 
 ## 使用 VPC Service Controls
 
-[VPC Service Controls](https://docs.cloud.google.com/vpc-service-controls?hl=zh-tw) 是一項 Google Cloud 功能，可讓您設定安全 perimeter，防範資料遭竊。如要搭配使用 VPC Service Controls 與遠端函式來提升安全性，或使用具有`internal traffic`
+[VPC Service Controls](https://docs.cloud.google.com/vpc-service-controls?hl=zh-tw) 是一項 Google Cloud 功能，可用來設定安全 perimeter 以防範資料遭竊。如要搭配使用 VPC Service Controls 與遠端函式來加強安全性，或使用具有`internal traffic`
 [輸入設定](https://docs.cloud.google.com/functions/docs/networking/network-settings?hl=zh-tw#ingress_settings)的端點，請按照 [VPC Service Controls 指南](https://docs.cloud.google.com/vpc-service-controls/docs/create-service-perimeters?hl=zh-tw#create_a_service_perimeter)操作：
 
 1. 建立 service perimeter。
@@ -784,14 +785,14 @@ BigQuery 中的位置類型有兩種：
 ## 遠端函式的最佳做法
 
 * 預先篩選輸入內容：如果輸入內容在傳遞到遠端函式之前，能夠輕易地進行篩選，您查詢的執行速度可能會更快，費用也可能會更便宜。
-* 確保 Cloud Run 函式可調度資源。可調度資源是[執行個體數量下限](https://docs.cloud.google.com/functions/docs/configuring/min-instances?hl=zh-tw)、[執行個體數量上限](https://docs.cloud.google.com/functions/docs/configuring/max-instances?hl=zh-tw)和[並行](https://docs.cloud.google.com/functions/docs/configuring/concurrency?hl=zh-tw)的函式。
+* 確保 Cloud Run 函式可擴充。可擴充性取決於[執行個體數量下限](https://docs.cloud.google.com/functions/docs/configuring/min-instances?hl=zh-tw)、[執行個體數量上限](https://docs.cloud.google.com/functions/docs/configuring/max-instances?hl=zh-tw)和[並行](https://docs.cloud.google.com/functions/docs/configuring/concurrency?hl=zh-tw)。
 
   + 盡可能為 Cloud Run 函式的執行個體數量上限使用預設值。
   + 請注意，第 1 代 HTTP Cloud Run 函式沒有預設限制。為避免第 1 代 HTTP Cloud Run 函式在測試或正式環境中無限制擴充，建議[設定限制](https://docs.cloud.google.com/functions/docs/configuring/max-instances?hl=zh-tw#setting_maximum_instances_limits)，例如 3000。
 * 請按照其他 [Cloud Run 函式提示](https://docs.cloud.google.com/functions/docs/bestpractices/tips?hl=zh-tw)操作，以提升效能。與高延遲 Cloud Run 函式互動的遠端函式查詢可能會因逾時而失敗。
 * 實作端點，針對失敗的回應傳回正確的 HTTP 回應代碼和酬載。
 
-  + 如要盡量減少 BigQuery 的重試次數，請針對失敗的回應使用 408、429、500、503 和 504 以外的 HTTP 回應碼，並確保在函式程式碼中擷取所有例外狀況。否則，HTTP 服務框架可能會針對任何未擷取的例外狀況自動傳回 500。當 BigQuery 重試失敗的資料分區或查詢時，您可能仍會看到重試的 HTTP 要求。
+  + 如要盡量減少 BigQuery 的重試次數，請針對失敗的回應使用 408、429、500、503 和 504 以外的 HTTP 回應碼，並確保在函式程式碼中擷取所有例外狀況。否則，HTTP 服務架構可能會針對任何未接收的例外狀況自動傳回 500。如果 BigQuery 重試失敗的資料分區或查詢，您可能仍會看到重試的 HTTP 要求。
   + 端點應以定義的格式傳回 JSON 酬載，表示回應失敗。雖然並非必要，但這有助於 BigQuery 區分失敗的回應是來自函式實作，還是 Cloud Run functions/Cloud Run 的基礎架構。如果是後者，BigQuery 可能會使用不同的內部限制重試。
 
 ## 配額
@@ -811,16 +812,16 @@ Exceeded rate limits: too many concurrent queries with remote functions for
 this project
 ```
 
-這項限制可以提高。請先嘗試解決方法和最佳做法。
+這項上限可以提高。請先嘗試解決方法和最佳做法。
 
 #### 診斷
 
-如要瞭解含有[遠端函式](https://docs.cloud.google.com/bigquery/docs/remote-functions?hl=zh-tw)的並行查詢限制，請參閱「[遠端函式限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#remote_function_limits)」。
+如要瞭解包含[遠端函式](https://docs.cloud.google.com/bigquery/docs/remote-functions?hl=zh-tw)的並行查詢限制，請參閱「[遠端函式限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#remote_function_limits)」。
 
 #### 解析度
 
 * 使用遠端函式時，請遵循[遠端函式的最佳做法](https://docs.cloud.google.com/bigquery/docs/remote-functions?hl=zh-tw#best_practices_for_remote_functions)。
-* 如要要求增加配額，請與[支援團隊](https://docs.cloud.google.com/bigquery/docs/getting-support?hl=zh-tw)或[銷售團隊](https://cloud.google.com/contact?hl=zh-tw)聯絡。審查及處理要求可能需要幾天的時間。建議在要求中說明優先順序、用途和專案 ID。
+* 如要申請提高配額，請與[支援團隊](https://docs.cloud.google.com/bigquery/docs/getting-support?hl=zh-tw)或[銷售人員](https://cloud.google.com/contact?hl=zh-tw)聯絡。審查及處理要求可能需要幾天的時間。建議在要求中說明優先順序、用途和專案 ID。
 
 
 
@@ -829,11 +830,11 @@ this project
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-12 (世界標準時間)。
+上次更新時間：2026-10-13 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-12 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-13 (世界標準時間)。"],[],[]]

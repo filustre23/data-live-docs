@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -10,28 +10,28 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 使用增強型樹狀模型執行分類 透過集合功能整理內容 你可以依據偏好儲存及分類內容。
 
-本教學課程說明如何使用[提升樹狀結構分類器模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree?hl=zh-tw)，根據個人的人口統計資料預測收入範圍。模型會預測值是否屬於其中一個類別，在本例中，模型會預測個人年收入是否超過或低於 $50,000 美元。
+本教學課程說明如何使用[提升樹狀結構分類器模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree?hl=zh-tw)，根據個人的人口統計資料預測收入範圍。模型會預測值是否屬於其中一個類別，在本例中，即個人年收入是否高於或低於 $50,000 美元。
 
-本教學課程使用 [`bigquery-public-data.ml_datasets.census_adult_income`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&%3Bd=ml_datasets&%3Bt=census_adult_income&%3Bpage=table&hl=zh-tw) 資料集。這個資料集包含從 2000 年到 2010 年美國居民的人口和收入資訊。
+本教學課程使用 [`bigquery-public-data.ml_datasets.census_adult_income`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&%3Bd=ml_datasets&%3Bt=census_adult_income&%3Bpage=table&hl=zh-tw) 資料集。這個資料集包含 2000 年和 2010 年美國居民的客層和收入資訊。
 
 ## 目標
 
 本教學課程會逐步引導您完成下列工作：
 
-* 使用 [`CREATE MODEL` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree?hl=zh-tw)建立升壓樹模型，預測人口普查受訪者的收入級距。
-* 使用 [`ML.EVALUATE` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate?hl=zh-tw)評估模型。
-* 使用 [`ML.PREDICT` 函式從模型取得預測結果](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict?hl=zh-tw)。
+* 使用 [`CREATE MODEL` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree?hl=zh-tw)建立提升樹模型，預測人口普查受訪者的收入級距。
+* 使用 [`ML.EVALUATE` 函式評估模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate?hl=zh-tw)。
+* 使用 [`ML.PREDICT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict?hl=zh-tw)從模型取得預測結果。
 
 ## 費用
 
-本教學課程使用 Google Cloud的計費元件，包括：
+本教學課程使用的 Google Cloud計費元件包括：
 
 * BigQuery
 * BigQuery ML
 
 如要進一步瞭解 BigQuery 費用，請參閱 [BigQuery 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw)頁面。
 
-如要進一步瞭解 BigQuery ML 費用，請參閱 [BigQuery ML 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#bqml)。
+如要進一步瞭解 BigQuery ML 費用，請參閱「[BigQuery ML 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#bqml)」一文。
 
 ## 事前準備
 
@@ -76,13 +76,13 @@ Google uses AI technology to translate content into your preferred language. AI 
   [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
 - [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project).
 
-1. 新專案會自動啟用 BigQuery。如要在現有專案中啟用 BigQuery，請前往
+1. 新專案會自動啟用 BigQuery。如要在現有的專案中啟用 BigQuery，請前往
 
-   啟用 BigQuery API。
+   如果尚未啟用 BigQuery API，請啟用。
 
    **啟用 API 時所需的角色**
 
-   您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用情形管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   如要啟用 API，您必須具備 `serviceusage.services.enable` 權限。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用情形管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
    [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery&hl=zh-tw)
 
@@ -104,26 +104,31 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 建立資料集
 
-建立 BigQuery 資料集來儲存機器學習模型。
+如要建立 BigQuery 資料集，請選取下列任一選項：
 
 ### 控制台
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
-   [前往 BigQuery 頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在「Explorer」窗格中，按一下專案名稱。
-3. 依序點按 more\_vert「View actions」(查看動作) >「Create dataset」(建立資料集)。
-4. 在「建立資料集」頁面中，執行下列操作：
+   [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
+2. 點選左側窗格中的 explore「Explorer」。
+
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
+3. 在「Explorer」中展開專案，然後按一下「Datasets」。
+4. 在「資料集」頁面，按一下 add「建立資料集」。
+5. 在「建立資料集」窗格中，執行下列操作：
 
    * 在「Dataset ID」(資料集 ID) 中輸入 `bqml_tutorial`。
-   * 針對「Location type」(位置類型) 選取「Multi-region」(多區域)，然後選取「US」(美國)。
-   * 其餘設定請保留預設狀態，然後按一下「建立資料集」。
+   * 選取「資料位置」的「美國」。
+
+   其餘預設設定均保留原樣。
+6. 點選「建立資料集」。
 
 ### bq
 
 如要建立新的資料集，請使用 [`bq mk --dataset` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#mk-dataset)。
 
-1. 建立名為 `bqml_tutorial` 的資料集，並將資料位置設為 `US`。
+1. 建立名為 `bqml_tutorial` 的資料集，並將資料位置設為 `US`：
 
    ```
    bq mk --dataset \
@@ -139,7 +144,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### API
 
-請呼叫 [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert?hl=zh-tw) 方法，搭配已定義的[資料集資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets?hl=zh-tw)。
+使用已定義的[資料集資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets?hl=zh-tw)呼叫 [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert?hl=zh-tw) 方法：
 
 ```
 {
@@ -151,7 +156,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### BigQuery DataFrames
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -174,13 +179,13 @@ bqclient.create_dataset("bqml_tutorial", exists_ok=True)
 * 職業
 * 每週工作時數
 
-訓練資料中不包含 `education` 資料欄，因為 `education` 和 `education_num` 資料欄都以不同格式表示受訪者的教育程度。
+訓練資料不包含 `education` 欄，因為 `education` 和 `education_num` 欄都以不同格式表示受訪者的教育程度。
 
-您要建立衍生自 `functional_weight` 資料欄的新 `dataframe` 資料欄，將資料分成訓練、評估和預測集。80% 的資料用於訓練模型，其餘 20% 的資料則用於評估和預測。
+您可建立衍生自 `functional_weight` 欄的新 `dataframe` 欄，將資料分成訓練、評估和預測集。80% 的資料用於訓練模型，其餘 20% 的資料則用於評估和預測。
 
 ### SQL
 
-如要準備範例資料，請建立[檢視區塊](https://docs.cloud.google.com/bigquery/docs/views-intro?hl=zh-tw)來加入訓練資料。本教學課程稍後會使用 `CREATE MODEL` 陳述式存取這個檢視區塊。
+如要準備範例資料，請建立包含訓練資料的[檢視區塊](https://docs.cloud.google.com/bigquery/docs/views-intro?hl=zh-tw)。本教學課程稍後會使用 `CREATE MODEL` 陳述式。
 
 執行查詢，準備範例資料：
 
@@ -213,19 +218,24 @@ bqclient.create_dataset("bqml_tutorial", exists_ok=True)
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 4. 在「Explorer」窗格，搜尋 `bqml_tutorial` 資料集。
 5. 按一下資料集，然後依序點選「總覽」**>「資料表」**。
-6. 按一下「檢視」`input_data`，開啟資訊窗格。檢視區塊結構定義會顯示在「結構定義」分頁中。
+6. 按一下「`input_data`」檢視畫面，開啟資訊窗格。「結構定義」分頁會顯示檢視區塊結構定義。
 
 ### BigQuery DataFrames
 
-建立名為 `input_data` 的 DataFrame。您會在後續的教學課程中使用 `input_data` 訓練模型、評估模型及進行預測。
+建立名為 `input_data` 的 DataFrame。在本教學課程中，您稍後會使用 `input_data` 訓練模型、評估模型及進行預測。
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
 
 ```
 import bigframes.pandas as bpd
+
+# Set partial ordering mode for BigQuery DataFrames.
+# For more information, see the BigQuery DataFrames performance documentation:
+# https://cloud.google.com/bigquery/docs/dataframes-performance#partial-ordering-mode
+bpd.options.bigquery.ordering_mode = "partial"
 
 input_data = bpd.read_gbq(
     "bigquery-public-data.ml_datasets.census_adult_income",
@@ -240,18 +250,19 @@ input_data = bpd.read_gbq(
         "functional_weight",
     ),
 )
-input_data["dataframe"] = bpd.Series("training", index=input_data.index,).case_when(
+input_data["dataframe"] = input_data["functional_weight"].case_when(
     [
         (((input_data["functional_weight"] % 10) == 8), "evaluation"),
         (((input_data["functional_weight"] % 10) == 9), "prediction"),
+        (True, "training"),
     ]
 )
 del input_data["functional_weight"]
 ```
 
-## 建立強化型樹狀結構模型
+## 建立提升樹模型
 
-建立提升樹狀結構模型，預測人口普查受訪者的收入級距，並使用人口普查資料訓練模型。查詢大約需要 30 分鐘才能完成。
+建立提升樹模型，預測人口普查受訪者的收入級距，並根據人口普查資料訓練模型。查詢作業約需 30 分鐘才能完成。
 
 ### SQL
 
@@ -277,35 +288,44 @@ del input_data["functional_weight"]
    WHERE dataframe = 'training';
    ```
 
-   查詢完成後，即可透過「Explorer」窗格存取 `tree_model` 模型。由於查詢是使用 `CREATE MODEL` 陳述式建立模型，因此您不會看到查詢結果。
+   查詢完成後，即可透過「Explorer」(探索工具) 窗格存取 `tree_model` 模型。由於查詢使用 `CREATE MODEL` 陳述式建立模型，因此您不會看到查詢結果。
 
 ### BigQuery DataFrames
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
 
 ```
-from bigframes.ml import ensemble
+import bigframes.pandas as bpd
+from bigframes.bigquery import ml
+
+# Set partial ordering mode for BigQuery DataFrames.
+# For more information, see the BigQuery DataFrames performance documentation:
+# https://cloud.google.com/bigquery/docs/dataframes-performance#partial-ordering-mode
+bpd.options.bigquery.ordering_mode = "partial"
 
 # input_data is defined in an earlier step.
-training_data = input_data[input_data["dataframe"] == "training"]
-X = training_data.drop(columns=["income_bracket", "dataframe"])
-y = training_data["income_bracket"]
-
-# create and train the model
-tree_model = ensemble.XGBClassifier(
-    n_estimators=1,
-    booster="gbtree",
-    tree_method="hist",
-    max_iterations=1,  # For a more accurate model, try 50 iterations.
-    subsample=0.85,
+training_data = input_data[input_data["dataframe"] == "training"].drop(
+    columns=["dataframe"]
 )
-tree_model.fit(X, y)
 
-tree_model.to_gbq(
+# For more information, see the BigQuery DataFrames API reference documentation:
+# https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.create_model.html#bigframes.bigquery.ml.create_model
+ml.create_model(
     your_model_id,  # For example: "your-project.bqml_tutorial.tree_model"
+    options={
+        "model_type": "BOOSTED_TREE_CLASSIFIER",
+        "booster_type": "GBTREE",
+        "num_parallel_tree": 1,
+        "max_iterations": 1,  # For a more accurate model, try 50 iterations.
+        "tree_method": "HIST",
+        "early_stop": False,
+        "subsample": 0.85,
+        "input_label_cols": ["income_bracket"],
+    },
+    training_data=training_data,
     replace=True,
 )
 ```
@@ -314,7 +334,7 @@ tree_model.to_gbq(
 
 ### SQL
 
-請按照下列步驟評估模型：
+如要評估模型，請按照下列步驟操作：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -349,36 +369,37 @@ tree_model.to_gbq(
 
 ### BigQuery DataFrames
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
 
 ```
-# Select model you'll use for predictions. `read_gbq_model` loads model
-# data from BigQuery, but you could also use the `tree_model` object
-# from the previous step.
-tree_model = bpd.read_gbq_model(
-    your_model_id,  # For example: "your-project.bqml_tutorial.tree_model"
-)
+import bigframes.pandas as bpd
+from bigframes.bigquery import ml
+
+# Set partial ordering mode for BigQuery DataFrames.
+# For more information, see the BigQuery DataFrames performance documentation:
+# https://cloud.google.com/bigquery/docs/dataframes-performance#partial-ordering-mode
+bpd.options.bigquery.ordering_mode = "partial"
 
 # input_data is defined in an earlier step.
 evaluation_data = input_data[input_data["dataframe"] == "evaluation"]
-X = evaluation_data.drop(columns=["income_bracket", "dataframe"])
-y = evaluation_data["income_bracket"]
 
-# The score() method evaluates how the model performs compared to the
-# actual data. Output DataFrame matches that of ML.EVALUATE().
-score = tree_model.score(X, y)
-score.peek()
+# For more information, see the BigQuery DataFrames API reference documentation:
+# https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.evaluate.html#bigframes.bigquery.ml.evaluate
+ml.evaluate(
+    your_model_id,  # For example: "your-project.bqml_tutorial.tree_model"
+    input_=evaluation_data,
+)
 # Output:
 #    precision    recall  accuracy  f1_score  log_loss   roc_auc
 # 0   0.671924  0.578804  0.839429  0.621897  0.344054  0.887335
 ```
 
-評估指標顯示模型效能良好，尤其是 [`roc_auc` 分數](https://developers.google.com/machine-learning/crash-course/classification/roc-and-auc?hl=zh-tw)大於 `0.8`。
+評估指標顯示模型效能良好，尤其是[`roc_auc` 分數](https://developers.google.com/machine-learning/crash-course/classification/roc-and-auc?hl=zh-tw)大於 `0.8`。
 
-如要進一步瞭解評估指標，請參閱「[輸出內容](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate?hl=zh-tw#output)」。
+如要進一步瞭解評估指標，請參閱「[輸出](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate?hl=zh-tw#output)」。
 
 ## 使用模型預測分類
 
@@ -429,24 +450,29 @@ score.peek()
 
 ### BigQuery DataFrames
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
 
 ```
-# Select model you'll use for predictions. `read_gbq_model` loads model
-# data from BigQuery, but you could also use the `tree_model` object
-# from previous steps.
-tree_model = bpd.read_gbq_model(
-    your_model_id,  # For example: "your-project.bqml_tutorial.tree_model"
-)
+import bigframes.pandas as bpd
+from bigframes.bigquery import ml
+
+# Set partial ordering mode for BigQuery DataFrames.
+# For more information, see the BigQuery DataFrames performance documentation:
+# https://cloud.google.com/bigquery/docs/dataframes-performance#partial-ordering-mode
+bpd.options.bigquery.ordering_mode = "partial"
 
 # input_data is defined in an earlier step.
 prediction_data = input_data[input_data["dataframe"] == "prediction"]
 
-predictions = tree_model.predict(prediction_data)
-predictions.peek()
+# For more information, see the BigQuery DataFrames API reference documentation:
+# https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.predict.html#bigframes.bigquery.ml.predict
+ml.predict(
+    your_model_id,  # For example: "your-project.bqml_tutorial.tree_model"
+    input_=prediction_data,
+)
 # Output:
 # predicted_income_bracket   predicted_income_bracket_probs.label  predicted_income_bracket_probs.prob
 #                   <=50K                                   >50K                   0.05183430016040802
@@ -458,9 +484,9 @@ predictions.peek()
 ```
 
 `predicted_income_bracket` 包含模型預測值。
-「`predicted_income_bracket_probs.label`」會顯示模型必須從中選擇的兩個標籤，「`predicted_income_bracket_probs.prob`」欄則會顯示特定標籤是正確標籤的機率。
+`predicted_income_bracket_probs.label` 會顯示模型必須從中選擇的兩個標籤，而 `predicted_income_bracket_probs.prob` 欄則會顯示指定標籤是正確標籤的機率。
 
-如要進一步瞭解輸出資料欄，請參閱[分類模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict?hl=zh-tw#classification_models)。
+如要進一步瞭解輸出資料欄，請參閱「[分類模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict?hl=zh-tw#classification_models)」。
 
 ## 清除所用資源
 
@@ -473,7 +499,7 @@ predictions.peek()
 
 刪除專案將移除專案中所有的資料集與資料表。若您希望重新使用專案，您可以刪除本教學課程中所建立的資料集。
 
-1. 如有必要，請在Google Cloud 控制台中開啟 BigQuery 頁面。
+1. 如有需要，請在Google Cloud 控制台中開啟 BigQuery 頁面。
 
    [前往 BigQuery 頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 在導覽窗格中，按一下您建立的 **bqml\_tutorial** 資料集。
@@ -501,7 +527,7 @@ predictions.peek()
 ## 後續步驟
 
 * 瞭解如何[建立邏輯迴歸分類模型](https://docs.cloud.google.com/bigquery/docs/logistic-regression-prediction?hl=zh-tw)。
-* 如需 BigQuery ML 的總覽，請參閱 [BigQuery 中的 AI 和 ML 簡介](https://docs.cloud.google.com/bigquery/docs/bqml-introduction?hl=zh-tw)。
+* 如需 BigQuery ML 的總覽，請參閱「[BigQuery 中的 AI 和 ML 簡介](https://docs.cloud.google.com/bigquery/docs/bqml-introduction?hl=zh-tw)」。
 
 
 
@@ -510,11 +536,11 @@ predictions.peek()
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-16 (世界標準時間)。
+上次更新時間：2026-10-17 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-16 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-17 (世界標準時間)。"],[],[]]

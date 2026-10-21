@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -188,6 +188,76 @@ function create_table(
     $table = $dataset->createTable($tableId, ['schema' => $schema]);
     printf('Created table %s' . PHP_EOL, $tableId);
 }
+```
+
+### Python
+
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+
+```
+import bigframes.pandas as bpd
+from google.cloud import bigquery
+import pandas as pd
+import pandas_gbq
+
+# Set partial ordering mode for BigQuery DataFrames.
+bpd.options.bigquery.ordering_mode = "partial"
+
+
+def create_table_bigframes(
+    table_id: str = "your-project.your_dataset.your_table_name",
+) -> None:
+    """Creates and populates a BigQuery table using BigQuery DataFrames."""
+    df_bigframes = bpd.DataFrame(
+        {
+            "full_name": ["Barney Rubble", "Betty Rubble"],
+            "age": [30, 28],
+        }
+    )
+    df_bigframes.to_gbq(table_id, if_exists="replace")
+    print(f"Created/populated table {table_id} using BigQuery DataFrames.")
+
+
+def create_table_client(
+    table_id: str = "your-project.your_dataset.your_table_name",
+) -> None:
+    """Creates an empty table with an explicit schema using google-cloud-bigquery."""
+    client = bigquery.Client()
+    schema = [
+        bigquery.SchemaField("full_name", "STRING", mode="REQUIRED"),
+        bigquery.SchemaField("age", "INTEGER", mode="REQUIRED"),
+    ]
+    table = bigquery.Table(table_id, schema=schema)
+    table = client.create_table(table)
+    print(
+        f"Created table {table.project}.{table.dataset_id}.{table.table_id} with schema."
+    )
+
+
+def create_table_pandas_gbq(
+    table_id: str = "your-project.your_dataset.your_table_name",
+) -> None:
+    """Ingests an in-memory pandas DataFrame into a BigQuery table using pandas-gbq."""
+    df_pandas = pd.DataFrame(
+        {
+            "full_name": ["Phred Phlyntstone", "Wylma Phlyntstone"],
+            "age": [32, 29],
+        }
+    )
+    pandas_gbq.to_gbq(df_pandas, table_id, if_exists="replace")
+    print(f"Created/populated table {table_id} using pandas-gbq.")
+
+
+# [Preferred] Run using BigQuery DataFrames:
+# create_table_bigframes("your-project.your_dataset.your_table_name")
+
+# Alternatively, run using google-cloud-bigquery client library:
+# create_table_client("your-project.your_dataset.your_table_name")
+
+# Alternatively, run using pandas-gbq:
+# create_table_pandas_gbq("your-project.your_dataset.your_table_name")
 ```
 
 ### Ruby

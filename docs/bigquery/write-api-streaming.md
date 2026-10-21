@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -14,16 +14,16 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 你可以依據偏好儲存及分類內容。
 
-# 使用 Storage Write API 串流資料
+# 使用 Storage Write API (gRPC) 串流資料
 
-本文說明如何使用 [BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api?hl=zh-tw)，將資料串流至 BigQuery。
+本文說明如何使用 [BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api?hl=zh-tw)，將資料串流至 BigQuery。
 
-在串流情境中，資料會持續傳入，且應以最短延遲時間供讀取。使用 BigQuery Storage Write API 處理串流工作負載時，請考量您需要哪些保證：
+在串流情境中，資料會持續傳入，且應以最低延遲時間供讀取。使用 BigQuery Storage Write API (gRPC) 處理串流工作負載時，請考量您需要哪些保證：
 
 * 如果應用程式只需要「至少一次」語意，請使用**預設串流**。
 * 如需僅一次語意，請在**已提交類型**中建立一或多個串流，並使用串流偏移保證僅寫入一次。
 
-在已提交類型中，伺服器確認寫入要求後，即可查詢寫入串流的資料。預設串流也會使用已提交類型，但無法保證只傳送一次。
+在已提交類型中，伺服器確認寫入要求後，即可查詢寫入串流的資料。預設串流也會使用已提交類型，但不保證僅傳送一次。
 
 ## 針對至少一次語意使用預設串流
 
@@ -33,9 +33,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### Java
 
-如要瞭解如何安裝及使用 BigQuery 的用戶端程式庫，請參閱「[BigQuery 用戶端程式庫](https://docs.cloud.google.com/bigquery/docs/reference/storage/libraries?hl=zh-tw)」。詳情請參閱 [BigQuery Java API 參考說明文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquerystorage/latest/com.google.cloud.bigquery.storage.v1?hl=zh-tw)。
+如要瞭解如何安裝及使用 BigQuery 的用戶端程式庫，請參閱「[BigQuery 用戶端程式庫](https://docs.cloud.google.com/bigquery/docs/reference/storage/libraries?hl=zh-tw)」。詳情請參閱 [BigQuery Java API 參考文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquerystorage/latest/com.google.cloud.bigquery.storage.v1?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 import com.google.api.core.ApiFuture;
@@ -362,7 +362,7 @@ public class WriteToDefaultStream {
 
 如要瞭解如何安裝及使用 BigQuery 的用戶端程式庫，請參閱「[BigQuery 用戶端程式庫](https://docs.cloud.google.com/bigquery/docs/reference/storage/libraries?hl=zh-tw)」。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 const {adapt, managedwriter} = require('@google-cloud/bigquery-storage');
@@ -539,7 +539,7 @@ if __name__ == "__main__":
     BigQueryStorageWriteAppend.append_rows_proto2("PROJECT_ID","DATASET_ID", "TABLE_ID ",data=data)
 ```
 
-這個程式碼範例依附於已編譯的通訊協定模組 `sample_data_pb2.py`。如要建立已編譯的模組，請執行 `protoc --python_out=. sample_data.proto` 指令，其中 `protoc` 是通訊協定緩衝區編譯器。`sample_data.proto` 檔案定義 Python 範例中使用的訊息格式。如要安裝 `protoc` 編譯器，請按照「[通訊協定緩衝區 - Google 的資料交換格式](https://github.com/protocolbuffers/protobuf)」中的操作說明進行。
+這個程式碼範例依附於已編譯的通訊協定模組 `sample_data_pb2.py`。如要建立已編譯的模組，請執行 `protoc --python_out=. sample_data.proto` 指令，其中 `protoc` 是通訊協定緩衝區編譯器。`sample_data.proto` 檔案會定義 Python 範例中使用的訊息格式。如要安裝 `protoc` 編譯器，請按照「[通訊協定緩衝區 - Google 的資料交換格式](https://github.com/protocolbuffers/protobuf)」中的操作說明進行。
 
 以下是 `sample_data.proto` 檔案的內容：
 
@@ -557,11 +557,77 @@ message SampleData {
 {"name": "Jane", "age": 27}
 ```
 
+### Rust
+
+```
+use anyhow::Result;
+use arrow::datatypes::{DataType, Field, Schema};
+use arrow::ipc::writer::StreamWriter;
+use arrow_json::ReaderBuilder;
+use google_cloud_bigquery::client::Write;
+use google_cloud_bigquery::model::{ArrowRecordBatch, ArrowSchema};
+use std::sync::Arc;
+use tokio::task::JoinSet;
+
+// The client library doesn't support a built-in JSON API surface.
+//
+// This example demonstrates how to write JSON data to BigQuery by first
+// converting it to Arrow record batches using the `arrow-json` crate.
+
+pub async fn sample(project_id: &str, dataset_id: &str, table_id: &str) -> anyhow::Result<()> {
+    let client = Write::builder().build().await?;
+
+    // Define the table schema
+    let schema = Arc::new(Schema::new(vec![
+        Field::new("string", DataType::Utf8, false),
+        Field::new("int", DataType::Int64, false),
+    ]));
+
+    // Initialize an IPC stream writer and extract the serialized schema
+    let mut ipc_writer = StreamWriter::try_new(Vec::new(), &schema)?;
+    let schema_buf = std::mem::take(ipc_writer.get_mut());
+
+    let table = format!("projects/{project_id}/datasets/{dataset_id}/tables/{table_id}");
+    // Create a writer for the default stream
+    let writer = client
+        .open_default_stream(table)
+        .build_arrow(ArrowSchema::new().set_serialized_schema(schema_buf))
+        .await?;
+
+    // Create a decoder to convert JSON to Arrow
+    let mut decoder = ReaderBuilder::new(schema).build_decoder()?;
+
+    let mut writes = JoinSet::new();
+    for i in 0..100 {
+        for j in 0..10 {
+            // Generate example data (JSON bytes).
+            let json = format!(r#"{{"string": "batch {i}", "int": {}}}"#, 10 * i + j);
+            let _ = decoder.decode(json.as_bytes())?;
+        }
+        if let Some(batch) = decoder.flush()? {
+            // Serialize the batch
+            let batch = {
+                ipc_writer.write(&batch)?;
+                let batch_bytes = std::mem::take(ipc_writer.get_mut());
+                ArrowRecordBatch::new().set_serialized_record_batch(batch_bytes)
+            };
+            // Write the batch to BigQuery
+            writes.spawn(writer.append(batch).send());
+        }
+    }
+    let results: Result<Vec<_>, _> = writes.join_all().await.into_iter().collect();
+    let _ = results?;
+    println!("Successfully wrote 100 record batches of 10 rows each.");
+
+    Ok(())
+}
+```
+
 ### 使用多工處理
 
-您只能為預設串流在串流寫入器層級啟用[多工](https://docs.cloud.google.com/bigquery/docs/write-api-best-practices?hl=zh-tw#connection_pool_management)。如要在 Java 中啟用多工，請在建構 `StreamWriter` 或 `JsonStreamWriter` 物件時呼叫 `setEnableConnectionPool` 方法。
+您只能在預設串流的串流寫入器層級啟用[多工](https://docs.cloud.google.com/bigquery/docs/write-api-best-practices?hl=zh-tw#connection_pool_management)。如要在 Java 中啟用多工處理，請在建構 `StreamWriter` 或 `JsonStreamWriter` 物件時呼叫 `setEnableConnectionPool` 方法。
 
-啟用連線集區後，Java 用戶端程式庫會在背景管理連線，並在現有連線過於忙碌時擴充連線。如要讓自動調整資源配置功能更有效，建議調低 `maxInflightRequests` 限制。
+啟用連線集區後，Java 用戶端程式庫會在背景管理連線，並在現有連線過於忙碌時擴充連線。如要更有效率地自動調高上限，建議調低上限。`maxInflightRequests`
 
 ```
 // One possible way for constructing StreamWriter
@@ -579,40 +645,56 @@ JsonStreamWriter.newBuilder(tableName, bigqueryClient)
 
 如要在 Go 中啟用多工處理，請參閱「[連線共用 (多工處理)](https://pkg.go.dev/cloud.google.com/go/bigquery/storage/managedwriter#hdr-Connection_Sharing__Multiplexing_)」。
 
-## 使用已提交的型別，確保「僅限一次」語意
+如要在 Rust 中啟用多工處理，請在建構預設串流寫入器時呼叫 `with_multiplexing(true)` 方法：
 
-如需「僅限一次」寫入語意，請建立已提交類型的寫入串流。在已提交類型中，用戶端收到後端確認後，即可查詢記錄。
+```
+let writer = client
+    .open_default_stream(table_name)
+    .with_multiplexing(true)
+    .build_arrow(schema)
+    .await?;
+```
 
-「已提交」類型會使用記錄偏移，在串流中提供「僅傳送一次」的傳遞機制。應用程式會使用記錄偏移值，在每次呼叫 [`AppendRows`](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1?hl=zh-tw#google.cloud.bigquery.storage.v1.BigQueryWrite.AppendRows) 時指定下一個附加偏移值。只有在偏移值與下一個附加偏移值相符時，系統才會執行寫入作業。詳情請參閱「[管理串流偏移，實現精確一次語意](https://docs.cloud.google.com/bigquery/docs/write-api-best-practices?hl=zh-tw#manage_stream_offsets_to_achieve_exactly-once_semantics)」。
+## 使用已提交類型，確保「僅一次」語意
 
-如未提供偏移量，記錄會附加至串流目前的結尾。在這種情況下，如果附加要求傳回錯誤，重試要求可能會導致記錄在串流中出現多次。
+如需僅一次寫入語意，請在已提交的型別中建立寫入串流。在已提交類型中，用戶端收到後端的確認後，即可查詢記錄。
 
-如要使用已提交類型，請按照下列步驟操作：
+承諾類型會使用記錄偏移，在串流中提供「僅傳送一次」的傳遞機制。應用程式會在每次呼叫 [`AppendRows`](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1?hl=zh-tw#google.cloud.bigquery.storage.v1.BigQueryWrite.AppendRows) 時，使用記錄偏移指定下一個附加偏移。只有在偏移值與下一個附加偏移值相符時，系統才會執行寫入作業。詳情請參閱「[管理串流偏移，實現僅一次語意](https://docs.cloud.google.com/bigquery/docs/write-api-best-practices?hl=zh-tw#manage_stream_offsets_to_achieve_exactly-once_semantics)」。
+
+如未提供偏移量，系統會將記錄附加至串流目前的結尾。在這種情況下，如果附加要求傳回錯誤，重試要求可能會導致記錄在串流中出現多次。
+
+如要使用已提交的型別，請按照下列步驟操作：
 
 ### Java
 
-1. 呼叫 `CreateWriteStream`，在已提交的類型中建立一或多個串流。
+1. 呼叫 `CreateWriteStream`，在已提交的型別中建立一或多個串流。
 2. 針對每個串流，在迴圈中呼叫 `AppendRows`，即可寫入批次記錄。
-3. 針對每個串流呼叫 `FinalizeWriteStream`，即可釋放串流。呼叫這個方法後，您就無法再將任何資料列寫入串流。如果是已承諾方案，這個步驟為選用步驟，但有助於避免超出有效串流的限制。詳情請參閱「[限制串流建立速率](https://docs.cloud.google.com/bigquery/docs/write-api-best-practices?hl=zh-tw#limit_the_rate_of_stream_creation)」。
+3. 針對每個串流呼叫 `FinalizeWriteStream`，釋放串流。呼叫這個方法後，您就無法再將任何資料列寫入串流。如果是已承諾方案，這個步驟為選用，但有助於避免超出有效串流的限制。詳情請參閱「[限制串流建立速率](https://docs.cloud.google.com/bigquery/docs/write-api-best-practices?hl=zh-tw#limit_the_rate_of_stream_creation)」。
 
 ### Node.js
 
-1. 呼叫 `createWriteStreamFullResponse`，在已提交的類型中建立一或多個串流。
+1. 呼叫 `createWriteStreamFullResponse`，在已提交的型別中建立一或多個串流。
 2. 針對每個串流，在迴圈中呼叫 `appendRows`，即可寫入批次記錄。
-3. 針對每個串流呼叫 `finalize`，即可釋放串流。呼叫這個方法後，您就無法再將任何資料列寫入串流。如果是已承諾方案，這個步驟為選用步驟，但有助於避免超出有效串流的限制。詳情請參閱「[限制串流建立速率](https://docs.cloud.google.com/bigquery/docs/write-api-best-practices?hl=zh-tw#limit_the_rate_of_stream_creation)」。
+3. 針對每個串流呼叫 `finalize`，釋放串流。呼叫這個方法後，您就無法再將任何資料列寫入串流。如果是已承諾方案，這個步驟為選用，但有助於避免超出有效串流的限制。詳情請參閱「[限制串流建立速率](https://docs.cloud.google.com/bigquery/docs/write-api-best-practices?hl=zh-tw#limit_the_rate_of_stream_creation)」。
+
+### Rust
+
+1. 在 `Write` 用戶端上呼叫 `create_stream`，並建構 `CommittedWriter`，以建立一或多個已提交型別的串流。
+2. 針對每個串流，在迴圈中呼叫 `append`，即可寫入批次記錄。
+3. 針對每個串流呼叫 `finalize`，釋放串流。呼叫這個方法後，您就無法再將任何資料列寫入串流。如果是已承諾方案，這個步驟為選用，但有助於避免超出有效串流的限制。詳情請參閱「[限制串流建立速率](https://docs.cloud.google.com/bigquery/docs/write-api-best-practices?hl=zh-tw#limit_the_rate_of_stream_creation)」。
 
 您無法明確刪除串流。串流會遵循系統定義的存留時間 (TTL)：
 
-* 如果串流沒有任何流量，承諾串流的 TTL 為三天。
-* 如果緩衝串流沒有任何流量，預設存留時間為七天。
+* 如果沒有任何流量，已提交的串流 TTL 為三天。
+* 如果緩衝串流沒有流量，預設存留時間為七天。
 
-以下程式碼顯示如何使用已提交的型別：
+以下程式碼說明如何使用已提交型別：
 
 ### Java
 
-如要瞭解如何安裝及使用 BigQuery 的用戶端程式庫，請參閱「[BigQuery 用戶端程式庫](https://docs.cloud.google.com/bigquery/docs/reference/storage/libraries?hl=zh-tw)」。詳情請參閱 [BigQuery Java API 參考說明文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquerystorage/latest/com.google.cloud.bigquery.storage.v1?hl=zh-tw)。
+如要瞭解如何安裝及使用 BigQuery 的用戶端程式庫，請參閱「[BigQuery 用戶端程式庫](https://docs.cloud.google.com/bigquery/docs/reference/storage/libraries?hl=zh-tw)」。詳情請參閱 [BigQuery Java API 參考文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquerystorage/latest/com.google.cloud.bigquery.storage.v1?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 import com.google.api.core.ApiFuture;
@@ -624,112 +706,5 @@ import com.google.cloud.bigquery.storage.v1.BigQueryWriteClient;
 import com.google.cloud.bigquery.storage.v1.CreateWriteStreamRequest;
 import com.google.cloud.bigquery.storage.v1.Exceptions;
 import com.google.cloud.bigquery.storage.v1.Exceptions.StorageException;
-import com.google.cloud.bigquery.storage.v1.FinalizeWriteStreamResponse;
-import com.google.cloud.bigquery.storage.v1.JsonStreamWriter;
-import com.google.cloud.bigquery.storage.v1.TableName;
-import com.google.cloud.bigquery.storage.v1.WriteStream;
-import com.google.common.util.concurrent.MoreExecutors;
-import com.google.protobuf.Descriptors.DescriptorValidationException;
-import java.io.IOException;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Phaser;
-import javax.annotation.concurrent.GuardedBy;
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.threeten.bp.Duration;
-
-public class WriteCommittedStream {
-
-  public static void runWriteCommittedStream()
-      throws DescriptorValidationException, InterruptedException, IOException {
-    // TODO(developer): Replace these variables before running the sample.
-    String projectId = "MY_PROJECT_ID";
-    String datasetName = "MY_DATASET_NAME";
-    String tableName = "MY_TABLE_NAME";
-
-    writeCommittedStream(projectId, datasetName, tableName);
-  }
-
-  public static void writeCommittedStream(String projectId, String datasetName, String tableName)
-      throws DescriptorValidationException, InterruptedException, IOException {
-    BigQueryWriteClient client = BigQueryWriteClient.create();
-    TableName parentTable = TableName.of(projectId, datasetName, tableName);
-
-    DataWriter writer = new DataWriter();
-    // One time initialization.
-    writer.initialize(parentTable, client);
-
-    try {
-      // Write two batches of fake data to the stream, each with 10 JSON records.  Data may be
-      // batched up to the maximum request size:
-      // https://cloud.google.com/bigquery/quotas#write-api-limits
-      long offset = 0;
-      for (int i = 0; i < 2; i++) {
-        // Create a JSON object that is compatible with the table schema.
-        JSONArray jsonArr = new JSONArray();
-        for (int j = 0; j < 10; j++) {
-          JSONObject record = new JSONObject();
-          record.put("col1", String.format("batch-record %03d-%03d", i, j));
-          jsonArr.put(record);
-        }
-        writer.append(jsonArr, offset);
-        offset += jsonArr.length();
-      }
-    } catch (ExecutionException e) {
-      // If the wrapped exception is a StatusRuntimeException, check the state of the operation.
-      // If the state is INTERNAL, CANCELLED, or ABORTED, you can retry. For more information, see:
-      // https://grpc.github.io/grpc-java/javadoc/io/grpc/StatusRuntimeException.html
-      System.out.println("Failed to append records. \n" + e);
-    }
-
-    // Final cleanup for the stream.
-    writer.cleanup(client);
-    System.out.println("Appended records successfully.");
-  }
-
-  // A simple wrapper object showing how the stateful stream writer should be used.
-  private static class DataWriter {
-
-    private JsonStreamWriter streamWriter;
-    // Track the number of in-flight requests to wait for all responses before shutting down.
-    private final Phaser inflightRequestCount = new Phaser(1);
-
-    private final Object lock = new Object();
-
-    @GuardedBy("lock")
-    private RuntimeException error = null;
-
-    void initialize(TableName parentTable, BigQueryWriteClient client)
-        throws IOException, DescriptorValidationException, InterruptedException {
-      // Initialize a write stream for the specified table.
-      // For more information on WriteStream.Type, see:
-      // https://googleapis.dev/java/google-cloud-bigquerystorage/latest/com/google/cloud/bigquery/storage/v1/WriteStream.Type.html
-      WriteStream stream = WriteStream.newBuilder().setType(WriteStream.Type.COMMITTED).build();
-
-      CreateWriteStreamRequest createWriteStreamRequest =
-          CreateWriteStreamRequest.newBuilder()
-              .setParent(parentTable.toString())
-              .setWriteStream(stream)
-              .build();
-      WriteStream writeStream = client.createWriteStream(createWriteStreamRequest);
-
-      // Configure in-stream automatic retry settings.
-      // Error codes that are immediately retried:
-      // * ABORTED, UNAVAILABLE, CANCELLED, INTERNAL, DEADLINE_EXCEEDED
-      // Error codes that are retried with exponential backoff:
-      // * RESOURCE_EXHAUSTED
-      RetrySettings retrySettings =
-          RetrySettings.newBuilder()
-              .setInitialRetryDelay(Duration.ofMillis(500))
-              .setRetryDelayMultiplier(1.1)
-              .setMaxAttempts(5)
-              .setMaxRetryDelay(Duration.ofMinutes(1))
-              .build();
-
-      // Use the JSON stream writer to send records in JSON format.
-      // For more information about JsonStreamWriter, see:
-      // https://googleapis.dev/java/google-cloud-bigquerystorage/latest/com/google/cloud/bigquery/storage/v1/JsonStreamWriter.html
-      streamWriter =
-          JsonStreamWriter.newBuilder(writeStream.getName(), writeStream.getTableSchema(), client)
-              .
+import com.google.cloud.bigquery.storage.v1.
 ```

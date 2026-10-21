@@ -1,8 +1,9 @@
+Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
+
 * [Home](https://docs.cloud.google.com/?hl=zh-cn)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-cn)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-cn)
 * [BigQuery](https://docs.cloud.google.com/bigquery/docs?hl=zh-cn)
-* [指南](https://docs.cloud.google.com/bigquery/docs/introduction?hl=zh-cn)
 
 发送反馈
 
@@ -164,7 +165,7 @@ Storage Write API 是使用双向连接的 gRPC API。`AppendRows` 方法会创�
 
 Storage Write API 的客户端库支持多种编程语言，并公开基于 gRPC 的底层 API 构造。此 API 利用了双向流式传输等高级功能，可能需要额外的开发工作才能支持。为此，此 API 提供了一些更高级别的抽象，可简化这些交互并减少开发者的顾虑。我们建议您尽可能利用这些其他库抽象。
 
-本部分详细介绍了除生成的 API 之外还为开发者提供了其他功能的语言和库。
+本部分详细介绍了语言和库，这些语言和库为开发者提供了超出生成的 API 的额外功能。
 
 如需查看与 Storage Write API 相关的代码示例，请参阅[所有 BigQuery 代码示例](https://docs.cloud.google.com/bigquery/docs/samples?api=bigquerystorage&hl=zh-cn)。
 
@@ -306,11 +307,11 @@ Storage Write API 支持将数据流式插入到[分区表](https://docs.cloud.g
 
 如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-最后更新时间 (UTC)：2026-03-17。
+最后更新时间 (UTC)：2026-09-16。
 
 
 
 
 需要向我们提供更多信息？
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["很难理解","hardToUnderstand","thumb-down"],["信息或示例代码不正确","incorrectInformationOrSampleCode","thumb-down"],["没有我需要的信息/示例","missingTheInformationSamplesINeed","thumb-down"],["翻译问题","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-03-17。"],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["很难理解","hardToUnderstand","thumb-down"],["信息或示例代码不正确","incorrectInformationOrSampleCode","thumb-down"],["没有我需要的信息/示例","missingTheInformationSamplesINeed","thumb-down"],["翻译问题","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-09-16。"],[],[]]

@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -25,25 +25,25 @@ YouTube 內容擁有者連結器的 BigQuery 資料移轉服務支援下列資�
 | 資料轉移方式 | 支援 |
 | --- | --- |
 | 受支援的報表 | YouTube 內容擁有者連結器支援從下列報表移轉資料：    * [內容擁有者報告](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw) * 系統代管報表：   + [總覽](https://developers.google.com/youtube/reporting/v1/reports/system_managed/reports?hl=zh-tw)   + [報告](https://developers.google.com/youtube/reporting/v1/reports/system_managed/reports?hl=zh-tw)   + [欄位](https://developers.google.com/youtube/reporting/v1/reports/system_managed/fields?hl=zh-tw)   YouTube 內容擁有者連接器支援 [2018 年 6 月 18 日](https://developers.google.com/youtube/reporting/revision_history?hl=zh-tw#june-18,-2018)的 API 版本。  如要瞭解 YouTube 內容擁有者報表如何轉換成 BigQuery 資料表和檢視表，請參閱「[YouTube 內容擁有者報表轉換](https://docs.cloud.google.com/bigquery/docs/youtube-content-owner-transformation?hl=zh-tw)」。 |
-| 重複頻率 | YouTube 內容擁有者連接器支援每日資料轉移。    根據預設，資料移轉作業會在建立時排定時間。[設定資料移轉作業](#set_up_a_youtube_content_owner_transfer)時，你可以設定資料移轉時間。 |
-| 重新整理時間範圍 | YouTube 內容擁有者連接器會在資料移轉作業執行時，擷取最多 1 天的 YouTube 內容擁有者資料。   詳情請參閱「[重新整理時間範圍](#refresh)」。 |
-| 資料補充作業的可用性 | [執行資料補充作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)，擷取排定資料移轉時間以外的資料。您可以擷取資料來源資料保留政策允許的最早資料。    包含歷來資料的 YouTube 報表在產生後可保留 30 天 (不含歷來資料的報表可保留 60 天)。詳情請參閱「[歷來資料](https://developers.google.com/youtube/reporting/v1/reports/?hl=zh-tw#historical-data)」。 |
+| 重複頻率 | YouTube 內容擁有者連接器支援每日資料轉移。    根據預設，資料移轉作業會在建立時排定時間。[設定資料移轉](#set_up_a_youtube_content_owner_transfer)時，可以指定資料移轉時間。 |
+| 重新整理時間範圍 | YouTube 內容擁有者連接器會在資料轉移作業執行時，擷取最多 1 天的 YouTube 內容擁有者資料。    詳情請參閱「[重新整理時間範圍](#refresh)」。 |
+| 資料補充作業 | [執行資料補充作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)，擷取排定資料移轉時間以外的資料。您可以擷取資料來源資料保留政策允許的資料。    包含歷來資料的 YouTube 報表在產生後可保留 30 天 (不含歷來資料的報表可保留 60 天)。詳情請參閱「[歷史資料](https://developers.google.com/youtube/reporting/v1/reports/?hl=zh-tw#historical-data)」。 |
 
 ## 從 YouTube 內容擁有者轉移作業擷取資料
 
-將 YouTube 內容擁有者報表中的資料移轉至 BigQuery 時，資料會載入按日期分區的 BigQuery 資料表。資料載入的資料表分區會對應至資料來源的日期。如果為同一天排定多項移轉作業，BigQuery 資料移轉服務會以最新資料覆寫該特定日期的資料分割。同一天內進行多次轉移或執行回填作業，不會導致資料重複，也不會影響其他日期的分區。
+將 YouTube 內容擁有者報表中的資料移轉至 BigQuery 時，資料會載入以日期分區的 BigQuery 資料表。資料載入的資料表分區會對應資料來源的日期。如果為同一天排定多項移轉作業，BigQuery 資料移轉服務會以最新資料覆寫該特定日期的資料分割。同一天內多次轉移資料或執行回填作業，不會導致資料重複，也不會影響其他日期的分區。
 
 ### 重新整理視窗
 
-*更新期*是指資料移轉作業在進行時，擷取資料的天數。舉例來說，如果重新整理時間範圍為三天，且每天都會進行移轉，BigQuery 資料移轉服務就會從來源資料表擷取過去三天的所有資料。在這個範例中，每天進行移轉時，BigQuery 資料移轉服務會建立新的 BigQuery 目的地資料表分割區，並複製當天的來源資料表資料，然後自動觸發補充作業執行作業，以更新過去兩天的來源資料表資料。系統自動觸發的回填作業會覆寫或增量更新 BigQuery 目的地資料表，具體做法取決於 BigQuery 資料移轉服務連接器是否支援增量更新。
+*更新期*是指資料移轉作業在執行時，擷取資料的天數。舉例來說，如果重新整理時間範圍為三天，且每天都會進行移轉，BigQuery 資料移轉服務就會從來源資料表擷取過去三天的所有資料。在本例中，每天進行移轉時，BigQuery 資料移轉服務會建立新的 BigQuery 目的地資料表分割區，並複製當天的來源資料表資料，然後自動觸發回填執行作業，以更新過去兩天的來源資料表資料。系統自動觸發的回填作業會覆寫或增量更新 BigQuery 目的地資料表，具體做法取決於 BigQuery 資料移轉服務連接器是否支援增量更新。
 
 首次執行資料移轉時，資料移轉作業會擷取重新整理視窗內的所有可用來源資料。舉例來說，如果重新整理時間範圍為三天，而您是第一次執行資料移轉作業，BigQuery 資料移轉服務會擷取三天內的所有來源資料。
 
-如要擷取重新整理時間範圍外的資料 (例如歷來資料)，或從任何轉移中斷或缺漏中復原資料，可以啟動或排定[補充作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)。
+如要擷取重新整理時間範圍外的資料 (例如歷來資料)，或從任何轉移中斷或缺漏中復原資料，可以啟動或排定[資料補充作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)。
 
 ## 限制
 
-* 資料移轉作業的最低排程頻率為每 24 小時一次。根據預設，資料移轉作業會在您建立資料移轉作業時啟動。不過，您可以在[設定轉移作業](https://docs.cloud.google.com/bigquery/docs/youtube-content-owner-transfer?hl=zh-tw#set_up_a_youtube_content_owner_transfer)時，設定轉移開始時間。
+* 資料轉移的最低排程頻率為每 24 小時一次。根據預設，資料移轉作業會在您建立資料移轉作業時啟動。不過，您可以在[設定轉移作業](https://docs.cloud.google.com/bigquery/docs/youtube-content-owner-transfer?hl=zh-tw#set_up_a_youtube_content_owner_transfer)時，設定轉移作業的開始時間。
 * 在 YouTube 內容擁有者移轉期間，BigQuery 資料移轉服務不支援增量資料移轉。指定資料移轉日期後，系統會移轉該日期可用的所有資料。
 
 ## 事前準備
@@ -62,7 +62,7 @@ YouTube 內容擁有者連結器的 BigQuery 資料移轉服務支援下列資�
 
 ### 必要的 BigQuery 角色
 
-如要取得建立 BigQuery 資料移轉服務資料移轉作業所需的權限，請要求系統管理員在專案中授予您 [BigQuery 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.admin)  (`roles/bigquery.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得建立 BigQuery 資料移轉服務資料移轉作業所需的權限，請要求管理員在專案中授予您 [BigQuery 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.admin)  (`roles/bigquery.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
 這個預先定義的角色具備建立 BigQuery 資料移轉服務資料移轉作業所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
@@ -102,11 +102,11 @@ YouTube 內容擁有者連結器的 BigQuery 資料移轉服務支援下列資�
 
 如果您使用 [YouTube Reporting API](https://developers.google.com/youtube/reporting/v1/reference/rest/?hl=zh-tw)，並且已經有一些報表工作，BigQuery 資料移轉服務會載入您的報表資料。如果沒有現有的報表工作，設定資料移轉時，系統會自動啟用 YouTube 報表工作。
 
-如要設定 YouTube 內容擁有者資料移轉作業：
+如要設定 YouTube 內容擁有者資料轉移作業：
 
 ### 控制台
 
-1. 前往 Google Cloud 控制台的「BigQuery」頁面。確認你已登入帳戶，且身分是內容擁有者或內容管理員。
+1. 前往 Google Cloud 控制台的「BigQuery」頁面。確認你已登入帳戶，且身分為內容擁有者或內容管理員。
 
    [前往 BigQuery 頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 按一下 [Transfers] (傳輸作業)。
@@ -163,7 +163,7 @@ bq mk \
 * project\_id 是您的專案 ID。
 * dataset 是移轉設定的目標資料集。
 * name 是移轉設定的顯示名稱。資料移轉作業名稱可以是任意值，日後需要修改移轉作業時，能夠據此識別即可。
-* parameters 含有已建立移轉設定的 JSON 格式參數，例如：`--params='{"param":"param_value"}'`。進行 YouTube 內容擁有者資料移轉時，您必須提供 `content_owner_id` 和 `table_suffix` 參數。您可以選擇將 `configure_jobs` 參數設為 `true`，讓 BigQuery 資料移轉服務為您管理 YouTube 報表工作。如果有些 YouTube 報告不存在您的帳戶中，您必須建立新的報告工作才能啟用移轉功能。
+* parameters 含有已建立移轉設定的 JSON 格式參數，例如：`--params='{"param":"param_value"}'`。如要轉移 YouTube 內容擁有者資料，您必須提供 `content_owner_id` 和 `table_suffix` 參數。您可以選擇將 `configure_jobs` 參數設為 `true`，讓 BigQuery 資料移轉服務為您管理 YouTube 報表工作。如果您的帳戶沒有特定 YouTube 報表，必須建立新的報表工作才能移轉。
 * data\_source 是資料來源：`youtube_content_owner`。
 * service\_account\_name 是用於驗證資料移轉作業的服務帳戶名稱。服務帳戶應由用於建立轉移作業的 `project_id` 擁有，且應具備所有[必要權限](#required_permissions)。
 
@@ -198,44 +198,5 @@ bq mk \
 import com.google.api.gax.rpc.ApiException;
 import com.google.cloud.bigquery.datatransfer.v1.CreateTransferConfigRequest;
 import com.google.cloud.bigquery.datatransfer.v1.DataTransferServiceClient;
-import com.google.cloud.bigquery.datatransfer.v1.ProjectName;
-import com.google.cloud.bigquery.datatransfer.v1.TransferConfig;
-import com.google.protobuf.Struct;
-import com.google.protobuf.Value;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
-// Sample to create youtube content owner channel transfer config
-public class CreateYoutubeContentOwnerTransfer {
-
-  public static void main(String[] args) throws IOException {
-    // TODO(developer): Replace these variables before running the sample.
-    final String projectId = "MY_PROJECT_ID";
-    String datasetId = "MY_DATASET_ID";
-    String contentOwnerId = "MY_CONTENT_OWNER_ID";
-    String tableSuffix = "_test";
-    Map<String, Value> params = new HashMap<>();
-    params.put("content_owner_id", Value.newBuilder().setStringValue(contentOwnerId).build());
-    params.put("table_suffix", Value.newBuilder().setStringValue(tableSuffix).build());
-    TransferConfig transferConfig =
-        TransferConfig.newBuilder()
-            .setDestinationDatasetId(datasetId)
-            .setDisplayName("Your Youtube Owner Channel Config Name")
-            .setDataSourceId("youtube_content_owner")
-            .setParams(Struct.newBuilder().putAllFields(params).build())
-            .build();
-    createYoutubeContentOwnerTransfer(projectId, transferConfig);
-  }
-
-  public static void createYoutubeContentOwnerTransfer(
-      String projectId, TransferConfig transferConfig) throws IOException {
-    try (DataTransferServiceClient client = DataTransferServiceClient.create()) {
-      ProjectName parent = ProjectName.of(projectId);
-      CreateTransferConfigRequest request =
-          CreateTransferConfigRequest.newBuilder()
-              .setParent(parent.toString())
-              .setTransferConfig(transferConfig)
-              .build();
-      TransferConfig config = client.createTransferConfig(
+import com.google
 ```

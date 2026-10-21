@@ -49,6 +49,7 @@ for a Cloud Storage object.
 | [`OBJ.FETCH_METADATA`](/bigquery/docs/reference/standard-sql/objectref_functions#objfetch_metadata) | Fetches Cloud Storage metadata for a partially populated `ObjectRef` value. |
 | [`OBJ.GET_ACCESS_URL`](/bigquery/docs/reference/standard-sql/objectref_functions#objget_access_url) | Returns access URLs for a Cloud Storage object. |
 | [`OBJ.GET_READ_URL`](/bigquery/docs/reference/standard-sql/objectref_functions#objget_read_url) | Returns a read URL and status for a Cloud Storage object. |
+| [`OBJ.LIST`](/bigquery/docs/reference/standard-sql/objectref_functions#objlist) | Returns a table of metadata and `ObjectRef` values for files stored in Cloud Storage. |
 | [`OBJ.MAKE_REF`](/bigquery/docs/reference/standard-sql/objectref_functions#objmake_ref) | Creates an `ObjectRef` value that contains reference information for a Cloud Storage object. |
 
 ## `OBJ.FETCH_METADATA`
@@ -337,154 +338,67 @@ URLs, select the **JSON** tab in the **Query results** pane.
 You can't have more than 20 connections in the project and region in which
 your query accesses object data as `ObjectRef` values.
 
-## `OBJ.MAKE_REF`
-
-This function supports the following syntaxes:
+## `OBJ.LIST`
 
 ```
-OBJ.MAKE_REF(
+OBJ.LIST(
   uri
   [, authorizer ]
-  [, version => version_value ]
-  [, details => gcs_metadata_json ]
-)
-```
-
-```
-OBJ.MAKE_REF(
-  objectref_json
-)
-```
-
-When you use this syntax, the top-level `authorizer` argument overwrites
-any `authorizer` that you specify in the `objectref` argument.
-
-```
-OBJ.MAKE_REF(
-  objectref,
-  authorizer
 )
 ```
 
 **Description**
 
-Use the `OBJ.MAKE_REF` function to create an
-[`ObjectRef` value](/bigquery/docs/work-with-objectref)
-that contains reference information for a Cloud Storage object.
-You can use this function in workflows similar to the following:
+The `OBJ.LIST` function returns a table of metadata and `ObjectRef` values for
+files stored in Cloud Storage. `OBJ.LIST` lets you perform ad-hoc discovery
+and analysis of unstructured data. The Cloud Storage data can include documents,
+images, and audio. The `OBJ.LIST` function can discover objects across all
+[Cloud Storage classes](/storage/docs/storage-classes).
 
-1. Transform an object.
-2. Save it to Cloud Storage using a writable signed URL that you created by
-   using the
-   [`OBJ.GET_ACCESS_URL` function](/bigquery/docs/reference/standard-sql/objectref_functions#objget_access_url).
-3. Create an `ObjectRef` value for the transformation output by using the
-   `OBJ.MAKE_REF` function.
-4. Save the `ObjectRef` value by writing it to a table column.
+Using `OBJ.LIST` replaces the need to manually construct `ObjectRef` values.
+You can quickly add Cloud Storage objects into AI functions to build ETL
+pipelines that handle converting unstructured data to structured data. If you
+require a persistent, self-updating table that continuously tracks new objects
+that arrive in a bucket over time, you should create a standard
+[BigQuery object table](/bigquery/docs/object-table-introduction)
+instead.
+
+For more information, see [Work with `ObjectRef` values](/bigquery/docs/work-with-objectref).
 
 **Definitions**
 
-* `uri`: A `STRING` value that contains the URI for the Cloud Storage
-  object, for example, `gs://mybucket/flowers/12345.jpg`. You can also
-  specify a column name in place of a string literal. For example, if you
-  have URI data in a `uri` field, you can specify
-  `OBJ.MAKE_REF(uri, "myproject.us.conn")`.
-* `authorizer`: A `STRING` value that contains the
+* `uri`: a `STRING` value that contains the URI for the Cloud Storage
+  object, for example, `gs://mybucket/flowers/12345.jpg`. Scalar subqueries
+  and string manipulation functions such as `CONCAT` aren't supported.
+
+  You can use one asterisk (`*`) wildcard character in each path to limit the
+  objects included in the results. For example, if the bucket contains
+  several types of unstructured data, you could list only PDF objects by
+  specifying `gs://bucket_name/*.pdf`. For more information, see
+  [Wildcard support for URIs](/bigquery/docs/external-data-cloud-storage#wildcard-support).
+
+  **Note:** The `OBJ.LIST` function doesn't support uris that end in a slash or
+  uris that contain consecutive slashes. For example, uris such as
+  `gs://mybucket/flowers/` and `gs://mybucket/flowers//12345.jpg` return an
+  error.
+* `authorizer`: a `STRING` value that contains the
   [Cloud Resource connection](/bigquery/docs/create-cloud-resource-connection)
   used for [delegated access](/bigquery/docs/work-with-objectref#delegated-access)
-  to the Cloud Storage object. Your data
-  administrator needs to set up the permissions to use this connection. If
-  omitted, the returned ObjectRef uses
+  to the Cloud Storage object. Your data administrator needs to set up the
+  permissions to use this connection. If omitted, the returned ObjectRef uses
   [direct access](/bigquery/docs/work-with-objectref#direct-access).
-* `version_value`: A `STRING` value that represents the Cloud Storage object
-  version.
-* `gcs_metadata_json`: A `JSON` value that represents Cloud Storage metadata,
-  using the following schema:
-
-  ```
-  gcs_metadata JSON {
-      "content_type": string,
-      "md5_hash": string,
-      "size": number,
-      "updated": number
-  }
-  ```
-* `objectref_json`: A `JSON` value that represents a Cloud Storage object,
-  using the following schema:
-
-  ```
-  obj_ref json {
-    uri string,
-    [, authorizer string ]
-    [, version string]
-    [, details gcs_metadata_json ]
-  }
-  ```
-
-Validation is performed on the formatting of the input, but not the content.
 
 **Output**
 
-An `ObjectRef` value.
+A table with metadata that represents the objects found in
+Cloud Storage. The table includes the following columns:
 
-* If you provide a URI as input, then the output is a reference to the Cloud
-  Storage object identified by the URI.
-* If you provide an ObjectRef JSON value, then the output contains all of the
-  input information formatted as an ObjectRef value.
-* If you provide an ObjectRef value and authorizer, then the output contains
-  the input ObjectRef value with an updated authorizer.
-
-**Examples**
-
-The following example creates an `ObjectRef` value using a URI and a Cloud
-resource connection as input:
-
-```
-CREATE OR REPLACE TABLE `mydataset.movies` AS (
-  SELECT
-    f.title,
-    f.director
-    OBJ.MAKE_REF(p.uri, 'asia-south2.storage_connection') AS movie_poster
-  FROM mydataset.movie_posters p
-  join mydataset.films f
-  using(title)
-  where region = 'US'
-  and release_year = 2024
-);
-```
-
-The following example creates an `ObjectRef` value using JSON input:
-
-```
-OBJ.MAKE_REF(JSON '{"uri": "gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/images/aquaclear-aquarium-background-poster.png", "authorizer": "asia-south2.storage_connection"}');
-```
-
-The following example creates a new `ObjectRef` value with an updated
-authorizer:
-
-```
-SELECT
-  OBJ.MAKE_REF(movie_poster,
-               authorizer=>'asia-south2.new_connection') AS movie_poster_updated
-FROM mydataset.movies
-```
-
-**Limitations**
-
-You can't have more than 20 Cloud resource connections in the project and
-region where your query accesses object data as `ObjectRef` values.
-
-
-
-
-Send feedback
-
-Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
-
-Last updated 2026-07-17 UTC.
-
-
-
-
-Need to tell us more?
-
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-07-17 UTC."],[],[]]
+* `uri`: a `STRING` value that contains the Cloud Storage URI of the
+  object.
+* `content_type`: a `STRING` value that contains the MIME type of the object,
+  for example, `image/jpeg` or `application/pdf`.
+* `size`: an `INT64` value that contains the object size in bytes.
+* `md5_hash`: a `STRING` value that contains the MD5 hash of the object.
+* `updated`: a `TIMESTAMP` value that contains the time the object was last
+  updated.
+* `metadata`: an

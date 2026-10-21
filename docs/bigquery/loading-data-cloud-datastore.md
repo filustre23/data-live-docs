@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -27,8 +27,6 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 如果您想略過載入程序，可以將匯出檔案設為外部資料來源，直接查詢匯出檔案。詳情請參閱[外部資料來源](https://docs.cloud.google.com/bigquery/external-data-sources?hl=zh-tw)。
 
-將資料從 Cloud Storage 載入 BigQuery 資料表時，該資料表所屬的資料集必須位於和 Cloud Storage bucket 相同的區域或多區域。
-
 ## 限制
 
 當您在 BigQuery 中載入 Datastore 匯出檔案中的資料時，請注意下列幾點限制：
@@ -46,7 +44,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### 所需權限
 
-如要將資料載入 BigQuery，您需要具備執行載入工作，以及將資料載入 BigQuery 資料表和分區的 IAM 權限。如要從 Cloud Storage 載入資料，您也需要 IAM 權限，才能存取包含資料的值區。
+如要將資料載入 BigQuery，您需要具備 IAM 權限，才能執行載入工作，並將資料載入 BigQuery 資料表和分區。如要從 Cloud Storage 載入資料，您也需要 IAM 權限，才能存取包含資料的值區。
 
 #### 將資料載入 BigQuery 的權限
 
@@ -57,7 +55,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 * `bigquery.tables.update`
 * `bigquery.jobs.create`
 
-以下每個預先定義的 IAM 角色都包含將資料載入 BigQuery 資料表或分區所需的權限：
+下列每個預先定義的 IAM 角色都包含將資料載入 BigQuery 資料表或分區所需的權限：
 
 * `roles/bigquery.dataEditor`
 * `roles/bigquery.dataOwner`
@@ -73,7 +71,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 如要取得從 Cloud Storage bucket 載入資料所需的權限，請要求管理員授予您 bucket 的「[Storage 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/storage?hl=zh-tw#storage.admin) 」(`roles/storage.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
-這個預先定義的角色具備從 Cloud Storage 值區載入資料所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
+這個預先定義的角色具備從 Cloud Storage bucket 載入資料所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
 #### 所需權限
 
@@ -95,26 +93,27 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    [前往 BigQuery](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
-3. 在「Explorer」窗格中展開專案，按一下「Datasets」(資料集)，然後選取資料集。
+3. 在「Explorer」窗格中展開專案，按一下「Datasets」，然後選取資料集。
 4. 在「資料集資訊」部分，按一下 add\_box「建立資料表」。
 5. 在「建立資料表」窗格中，指定下列詳細資料：
 
 1. 在「來源」部分中，從「建立資料表來源」清單中選取「Google Cloud Storage」。
    接著，按照下列步驟操作：
    1. 從 Cloud Storage bucket 選取檔案，或輸入 [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#gcs-uri)。
-      您無法在 Google Cloud 控制台中加入多個 URI，但支援使用[萬用字元](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#load-wildcards)。Cloud Storage 值區的位置必須與包含要建立、附加或覆寫之資料表的資料集位置相同。  
+      您無法在 Google Cloud 控制台中加入多個 URI，但支援使用[萬用字元](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#load-wildcards)。Cloud Storage 值區的位置必須與要建立、附加或覆寫的表格所在的資料集位置相同。
+        
        Datastore 匯出檔案的 URI 結尾必須為 `KIND_NAME.export_metadata` 或 `export[NUM].export_metadata`。舉例來說，在 `default_namespace_kind_Book.export_metadata` 中，`Book` 是種類名稱，而 `default_namespace_kind_Book` 是 Datastore 產生的檔案名稱。
    2. 在「File format」(檔案格式) 部分，選取「Cloud Datastore Backup」(Cloud Datastore 備份)。
 2. 在「目的地」部分，指定下列詳細資料：
    1. 在「Dataset」(資料集) 部分，選取要建立資料表的資料集。
    2. 在「Table」(資料表) 欄位中，輸入要建立的資料表名稱。
-   3. 確認「資料表類型」欄位已設為「原生資料表」。
+   3. 確認「Table type」(資料表類型) 欄位已設為「Native table」(原生資料表)。
 3. 在「Schema」(結構定義) 區段中，無需採取任何行動。系統會推測 Datastore 匯出檔案的結構定義。
 4. 選用：指定「分區與叢集設定」。詳情請參閱「[建立分區資料表](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables?hl=zh-tw)」和「[建立及使用叢集資料表](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables?hl=zh-tw)」。
 5. 按一下「進階選項」，然後執行下列操作：
    * 讓「Write preference」(寫入偏好設定) 的 [Write if empty] (空白時寫入) 選項維持在已選取狀態。這個選項能建立新的資料表，並將您的資料載入其中。
    * 如要忽略不在資料表結構定義中的資料列值，請選取「Unknown values」(不明的值)。
-   * 針對 **Encryption**，請按一下 **Customer-managed key**，以使用 [Cloud Key Management Service key](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw)。如果您保留 **Google-managed key** 設定，BigQuery 會[加密靜態資料](https://docs.cloud.google.com/docs/security/encryption/default-encryption?hl=zh-tw)。
+   * 針對「Encryption」(加密)，請按一下「Customer-managed key」(客戶管理的金鑰)，以使用 [Cloud Key Management Service 金鑰](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw)。如果您保留 **Google-managed key** 設定，BigQuery 會[加密靜態資料](https://docs.cloud.google.com/docs/security/encryption/default-encryption?hl=zh-tw)。
    如要瞭解可用的選項，請參閱「[Datastore 選項](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-datastore?hl=zh-tw#cloud_datastore_options)」。
 6. 點選「建立資料表」。
 
@@ -153,7 +152,7 @@ gs://mybucket/20180228T1256/default_namespace/kind_Book/default_namespace_kind_B
 1. 建立指向 Cloud Storage 中來源資料的[載入工作](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#jobconfigurationload)。
 2. 在[工作資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs?hl=zh-tw)的 `jobReference` 區段中，在 `location` 屬性指定您的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
 3. [來源 URI](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#JobConfigurationLoad.FIELDS.source_uris) 必須完整且符合下列格式：gs://[BUCKET]/[OBJECT]。檔案 (物件) 名稱的結尾必須是 `[KIND_NAME].export_metadata`。您只能為 Datastore 匯出檔案指定一個 URI，且不得使用萬用字元。
-4. 將 [`JobConfigurationLoad.sourceFormat` 屬性設為 `DATASTORE_BACKUP`，以指定資料格式。](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#JobConfigurationLoad.FIELDS.source_format)
+4. 將 [`JobConfigurationLoad.sourceFormat` 屬性](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#JobConfigurationLoad.FIELDS.source_format)設為 `DATASTORE_BACKUP`，以指定資料格式。
 
 ## 將 Datastore 資料附加或覆寫至資料表
 
@@ -163,7 +162,7 @@ gs://mybucket/20180228T1256/default_namespace/kind_Book/default_namespace_kind_B
 that already has a schema. Try using the WRITE_TRUNCATE write disposition to
 replace the existing table`。
 
-如何使用 Datastore 匯出資料覆寫現有資料表：
+如要使用 Datastore 匯出資料覆寫現有資料表，請按照下列步驟操作：
 
 ### 控制台
 
@@ -171,27 +170,28 @@ replace the existing table`。
 
    [前往 BigQuery](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
-3. 在「Explorer」窗格中展開專案，按一下「Datasets」(資料集)，然後選取資料集。
+3. 在「Explorer」窗格中展開專案，按一下「Datasets」，然後選取資料集。
 4. 在「資料集資訊」部分，按一下 add\_box「建立資料表」。
 5. 在「建立資料表」窗格中，指定下列詳細資料：
 
 1. 在「來源」部分中，從「建立資料表來源」清單中選取「Google Cloud Storage」。
    接著，按照下列步驟操作：
    1. 從 Cloud Storage bucket 選取檔案，或輸入 [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#gcs-uri)。
-      您無法在 Google Cloud 控制台中加入多個 URI，但支援使用[萬用字元](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#load-wildcards)。Cloud Storage 值區的位置必須與包含要建立、附加或覆寫之資料表的資料集位置相同。  
+      您無法在 Google Cloud 控制台中加入多個 URI，但支援使用[萬用字元](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#load-wildcards)。Cloud Storage 值區的位置必須與要建立、附加或覆寫的表格所在的資料集位置相同。
+        
        Datastore 匯出檔案的 URI 結尾必須為 `KIND_NAME.export_metadata` 或 `export[NUM].export_metadata`。舉例來說，在 `default_namespace_kind_Book.export_metadata` 中，`Book` 是種類名稱，而 `default_namespace_kind_Book` 是 Datastore 產生的檔案名稱。
    2. 在「File format」(檔案格式) 部分，選取「Cloud Datastore Backup」(Cloud Datastore 備份)。
 **注意：**您可以在附加或覆寫資料表時修改資料表的結構定義。如要進一步瞭解載入作業期間支援的結構定義變更，請參閱「[修改資料表結構定義](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas?hl=zh-tw)」一文。
 2. 在「目的地」部分，指定下列詳細資料：
    1. 在「Dataset」(資料集) 部分，選取要建立資料表的資料集。
    2. 在「Table」(資料表) 欄位中，輸入要建立的資料表名稱。
-   3. 確認「資料表類型」欄位已設為「原生資料表」。
+   3. 確認「Table type」(資料表類型) 欄位已設為「Native table」(原生資料表)。
 3. 在「Schema」(結構定義) 區段中，無需採取任何行動。系統會推測 Datastore 匯出檔案的結構定義。
-**注意：**您可以在附加或覆寫資料表時修改資料表的結構定義。如要進一步瞭解載入作業期間支援的結構定義變更，請參閱[修改資料表結構定義](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas?hl=zh-tw)。4. 選用：指定「分區與叢集設定」。詳情請參閱「[建立分區資料表](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables?hl=zh-tw)」和「[建立及使用叢集資料表](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables?hl=zh-tw)」。您無法藉由附加或覆寫的方式，將資料表轉換為分區資料表或分群資料表。 Google Cloud 控制台不支援在載入工作中附加資料到分區或叢集資料表，也不支援覆寫分區或叢集資料表。
+**注意：**您可以在附加或覆寫資料表時修改資料表的結構定義。如要進一步瞭解載入作業期間支援的結構定義變更，請參閱「[修改資料表結構定義](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas?hl=zh-tw)」一文。4. 選用：指定「分區與叢集設定」。詳情請參閱「[建立分區資料表](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables?hl=zh-tw)」和「[建立及使用叢集資料表](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables?hl=zh-tw)」。您無法藉由附加或覆寫的方式，將資料表轉換為分區資料表或分群資料表。 Google Cloud 控制台不支援在載入工作中附加資料到分區或叢集資料表，也不支援覆寫分區或叢集資料表。
 5. 按一下「進階選項」，然後執行下列操作：
    * 針對「Write preference」(寫入偏好設定)，請選擇「Append to table」(附加到資料表中) 或「Overwrite table」(覆寫資料表)。
    * 如要忽略不在資料表結構定義中的資料列值，請選取「Unknown values」(不明的值)。
-   * 針對 **Encryption**，請按一下 **Customer-managed key**，以使用 [Cloud Key Management Service key](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw)。如果您保留 **Google-managed key** 設定，BigQuery 會[加密靜態資料](https://docs.cloud.google.com/docs/security/encryption/default-encryption?hl=zh-tw)。
+   * 針對「Encryption」(加密)，請按一下「Customer-managed key」(客戶管理的金鑰)，以使用 [Cloud Key Management Service 金鑰](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw)。如果您保留 **Google-managed key** 設定，BigQuery 會[加密靜態資料](https://docs.cloud.google.com/docs/security/encryption/default-encryption?hl=zh-tw)。
    如要瞭解可用的選項，請參閱「[Datastore 選項](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-datastore?hl=zh-tw#cloud_datastore_options)」。
 6. 點選「建立資料表」。
 
@@ -231,14 +231,14 @@ gs://mybucket/20180228T1256/default_namespace/kind_Book/default_namespace_kind_B
 1. 建立指向 Cloud Storage 中來源資料的[載入工作](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#jobconfigurationload)。
 2. 在[工作資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs?hl=zh-tw)的 `jobReference` 區段中，在 `location` 屬性指定您的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
 3. [來源 URI](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#JobConfigurationLoad.FIELDS.source_uris) 必須完整且符合下列格式：gs://[BUCKET]/[OBJECT]。檔案 (物件) 名稱的結尾必須是 `[KIND_NAME].export_metadata`。您只能為 Datastore 匯出檔案指定一個 URI，且不得使用萬用字元。
-4. 將 [`JobConfigurationLoad.sourceFormat` 屬性設為 `DATASTORE_BACKUP`，以指定資料格式。](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#JobConfigurationLoad.FIELDS.source_format)
+4. 將 [`JobConfigurationLoad.sourceFormat` 屬性](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#JobConfigurationLoad.FIELDS.source_format)設為 `DATASTORE_BACKUP`，以指定資料格式。
 5. 將 [`JobConfigurationLoad.writeDisposition` 屬性](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#JobConfigurationLoad.FIELDS.write_disposition)設為 `WRITE_TRUNCATE`，藉此指定寫入配置。
 
 ## Datastore 選項
 
 如要變更 BigQuery 剖析 Datastore 匯出資料的方式，請指定下列選項：
 
-| 主控台選項 | bq 工具旗標 | BigQuery API 屬性 | 說明 |
+| 主控台選項 | bq 工具標記 | BigQuery API 屬性 | 說明 |
 | --- | --- | --- | --- |
 | 無法使用 | `--projection_fields` | [projectionFields](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#JobConfigurationLoad.FIELDS.projection_fields) | 逗號分隔的清單，用來指定要從 Datastore 匯出檔案載入至 BigQuery 的實體屬性。屬性名稱有大小寫之分，且必須為頂層屬性。如果不指定屬性，BigQuery 會載入所有屬性。如果系統在 Datastore 匯出資料中找不到任一指定屬性，工作結果中就會出現無效錯誤。預設值為 ''。 |
 
@@ -280,11 +280,11 @@ Datastore 中每個實體都有專屬金鑰，當中包含命名空間和路徑�
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-12 (世界標準時間)。
+上次更新時間：2026-10-19 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-12 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-19 (世界標準時間)。"],[],[]]

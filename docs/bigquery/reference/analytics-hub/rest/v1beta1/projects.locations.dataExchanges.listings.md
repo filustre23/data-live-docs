@@ -28,7 +28,7 @@ A listing is what gets published into a data exchange that a subscriber can subs
 
 | JSON representation |
 | --- |
-| ``` {   "name": string,   "displayName": string,   "description": string,   "primaryContact": string,   "documentation": string,   "state": enum (State),   "icon": string,   "dataProvider": {     object (DataProvider)   },   "categories": [     enum (Category)   ],   "publisher": {     object (Publisher)   },   "requestAccess": string,   "restrictedExportConfig": {     object (RestrictedExportConfig)   },   "allowOnlyMetadataSharing": boolean,    // Union field source can be only one of the following:   "bigqueryDataset": {     object (BigQueryDatasetSource)   }   // End of list of possible types for union field source. } ``` |
+| ``` {   "name": string,   "displayName": string,   "description": string,   "primaryContact": string,   "documentation": string,   "state": enum (State),   "icon": string,   "dataProvider": {     object (DataProvider)   },   "categories": [     enum (Category)   ],   "publisher": {     object (Publisher)   },   "requestAccess": string,   "restrictedExportConfig": {     object (RestrictedExportConfig)   },   "allowOnlyMetadataSharing": boolean,    // The following is a list of mutually exclusive fields. At most one of the   // fields will be set in a response:   "bigqueryDataset": {     object (BigQueryDatasetSource)   }   // End of mutually exclusive fields. } ``` |
 
 | Fields | |
 | --- | --- |
@@ -45,8 +45,9 @@ A listing is what gets published into a data exchange that a subscriber can subs
 | `requestAccess` | `string`  Optional. Email or URL of the request access of the listing. Subscribers can use this reference to request access. Max Length: 1000 bytes. |
 | `restrictedExportConfig` | `object (RestrictedExportConfig)`  Optional. If set, restricted export configuration will be propagated and enforced on the linked dataset. This is a required field for data clean room exchanges. |
 | `allowOnlyMetadataSharing` | `boolean`  Optional. If true, the listing is only available to get the resource metadata. Listing is non subscribable. |
-| Union field `source`. Listing source. `source` can be only one of the following: | |
+| Listing source. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response: | |
 | `bigqueryDataset` | `object (BigQueryDatasetSource)`  Required. Shared dataset i.e. BigQuery dataset source. |
+| End of mutually exclusive fields. | |
 
 ## BigQueryDatasetSource
 
@@ -156,11 +157,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2025-11-12 UTC.
+Last updated 2026-08-28 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2025-11-12 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-08-28 UTC."],[],[]]

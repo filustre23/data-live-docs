@@ -49,7 +49,7 @@ BOMs, see [The Google Cloud Platform Libraries BOM](https://cloud.google.com/jav
     <dependency>
       <groupId>com.google.cloud</groupId>
       <artifactId>libraries-bom</artifactId>
-      <version>26.83.0</version>
+      <version>26.90.0</version>
       <type>pom</type>
       <scope>import</scope>
     </dependency>
@@ -68,7 +68,7 @@ If you are using [Gradle](https://gradle.org/),
 add the following to your dependencies:
 
 ```
-implementation platform('com.google.cloud:libraries-bom:26.83.0')
+implementation platform('com.google.cloud:libraries-bom:26.90.0')
 
 implementation 'com.google.cloud:google-cloud-analyticshub'
 ```
@@ -77,7 +77,7 @@ If you are using [sbt](https://www.scala-sbt.org/), add
 the following to your dependencies:
 
 ```
-libraryDependencies += "com.google.cloud" % "google-cloud-analyticshub" % "0.91.0"
+libraryDependencies += "com.google.cloud" % "google-cloud-analyticshub" % "0.96.0"
 ```
 
 If you're using Visual Studio Code or IntelliJ, you can add client libraries to your
@@ -240,69 +240,5 @@ func main() {
 	}
 	fmt.Printf("\nData Exchange Information\n")
 	fmt.Printf("Exchange Name: %s\n", exchange.GetName())
-	if desc := exchange.GetDescription(); desc != "" {
-		fmt.Printf("Exchange Description: %s", desc)
-	}
-
-	// Finally, create a listing within the data exchange and print information about it.
-	listing, err := createListing(ctx, ahubClient, *projectID, *location, *exchangeID, *listingID, *exampleDatasetSource)
-	if err != nil {
-		log.Fatalf("failed to create the listing within the exchange: %v", err)
-	}
-	fmt.Printf("\n\nListing Information\n")
-	fmt.Printf("Listing Name: %s\n", listing.GetName())
-	if desc := listing.GetDescription(); desc != "" {
-		fmt.Printf("Listing Description: %s\n", desc)
-	}
-	fmt.Printf("Listing State: %s\n", listing.GetState().String())
-	if source := listing.GetSource(); source != nil {
-		if dsSource, ok := source.(*analyticshubpb.Listing_BigqueryDataset); ok && dsSource.BigqueryDataset != nil {
-			if dataset := dsSource.BigqueryDataset.GetDataset(); dataset != "" {
-				fmt.Printf("Source is a bigquery dataset: %s", dataset)
-			}
-		}
-	}
-	// Optionally, delete the data exchange at the end of the quickstart to clean up the resources used.
-	if *delete {
-		fmt.Printf("\n\n")
-		if err := deleteDataExchange(ctx, ahubClient, *projectID, *location, *exchangeID); err != nil {
-			log.Fatalf("failed to delete exchange: %v", err)
-		}
-		fmt.Printf("Exchange projects/%s/locations/%s/dataExchanges/%s was deleted.\n", *projectID, *location, *exchangeID)
-	}
-	fmt.Printf("\nQuickstart completed.\n")
-}
-
-// createOrGetDataExchange creates an example data exchange, or returns information about the exchange already bearing
-// the example identifier.
-func createOrGetDataExchange(ctx context.Context, client *analyticshub.Client, projectID, location, exchangeID string) (*analyticshubpb.DataExchange, error) {
-	req := &analyticshubpb.CreateDataExchangeRequest{
-		Parent:         fmt.Sprintf("projects/%s/locations/%s", projectID, location),
-		DataExchangeId: exchangeID,
-		DataExchange: &analyticshubpb.DataExchange{
-			DisplayName:    "Example Data Exchange",
-			Description:    "Exchange created as part of an API quickstart",
-			PrimaryContact: "",
-			Documentation:  "https://link.to.optional.documentation/",
-		},
-	}
-
-	resp, err := client.CreateDataExchange(ctx, req)
-	if err != nil {
-		// We'll handle one specific error case specially, the case of the exchange already existing.  In this instance,
-		// we'll issue a second request to fetch the exchange information for the already present exchange and return it.
-		if code := status.Code(err); code == codes.AlreadyExists {
-			getReq := &analyticshubpb.GetDataExchangeRequest{
-				Name: fmt.Sprintf("projects/%s/locations/%s/dataExchanges/%s", projectID, location, exchangeID),
-			}
-			resp, err = client.GetDataExchange(ctx, getReq)
-			if err != nil {
-				return nil, fmt.Errorf("error getting dataExchange: %w", err)
-			}
-			return resp, nil
-		}
-		// For all other cases, return the error from creation request.
-		return nil, err
-	}
-	return resp,
+	if desc := exchange
 ```

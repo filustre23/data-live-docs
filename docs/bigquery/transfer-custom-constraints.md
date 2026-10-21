@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -14,7 +14,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 你可以依據偏好儲存及分類內容。
 
-# 使用自訂機構政策
+# 使用自訂組織政策
 
 本頁面說明如何使用「組織政策服務」自訂限制條件，限制對下列 Google Cloud 資源執行的特定作業：
 
@@ -34,15 +34,15 @@ Google Cloud 組織政策服務可讓您透過程式輔助，集中控管組織�
 
 ### 優點
 
-您可以透過自訂機構政策，允許或拒絕在 BigQuery 資料移轉服務移轉作業設定中執行特定作業，以符合貴機構的法規遵循和安全性需求。如果建立或更新移轉設定的要求，未通過機構政策設定的自訂限制，要求就會失敗，並向呼叫端傳回錯誤。
+您可以使用自訂組織政策，允許或拒絕對 BigQuery 資料移轉服務移轉設定執行特定作業，以符合組織的法規遵循和安全性要求。如果建立或更新移轉設定的要求，未通過機構政策設定的自訂限制，要求就會失敗，並向呼叫端傳回錯誤。
 
 ## 限制
 
-* 如要在自訂限制條件中指定資料來源，請使用 `resource.dataSourceId` 欄位和資料來源的值。如需 `resource.dataSourceId` 支援的值清單，請呼叫 [`dataSources.list` 方法](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.dataSources/list?hl=zh-tw)。
+* 如要在自訂限制中指定資料來源，請使用 `resource.dataSourceId` 欄位和資料來源的值。如需 `resource.dataSourceId` 支援的值清單，請呼叫 [`dataSources.list` 方法](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.dataSources/list?hl=zh-tw)。
 
 ## 事前準備
 
-- 登入 Google Cloud 帳戶。如果您是 Google Cloud新手，歡迎[建立帳戶](https://console.cloud.google.com/freetrial?hl=zh-tw)，親自評估產品在實際工作環境中的成效。新客戶還能獲得價值 $300 美元的免費抵免額，可用於執行、測試及部署工作負載。
+- 登入 Google Cloud 帳戶。如果您是 Google Cloud新手，歡迎[建立帳戶](https://console.cloud.google.com/freetrial?hl=zh-tw)，親自體驗產品的實際應用成效。新客戶還能獲得價值 $300 美元的免費抵免額，能用於執行、測試及部署工作負載。
 - In the Google Cloud console, on the project selector page,
   select or create a Google Cloud project.
 
@@ -62,9 +62,10 @@ Google Cloud 組織政策服務可讓您透過程式輔助，集中控管組織�
 
   [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
 - [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project).
-- [安裝](https://docs.cloud.google.com/sdk/docs/install?hl=zh-tw) Google Cloud CLI。
-- 若您採用的是外部識別資訊提供者 (IdP)，請先[使用聯合身分登入 gcloud CLI](https://docs.cloud.google.com/iam/docs/workforce-log-in-gcloud?hl=zh-tw)。
-- 執行下列指令，[初始化](https://docs.cloud.google.com/sdk/docs/initializing?hl=zh-tw) gcloud CLI：
+- [Install](https://docs.cloud.google.com/sdk/docs/install?hl=zh-tw) the Google Cloud CLI.
+- If you're using an external identity provider (IdP), you must first
+  [sign in to the gcloud CLI with your federated identity](https://docs.cloud.google.com/iam/docs/workforce-log-in-gcloud?hl=zh-tw).
+- To [initialize](https://docs.cloud.google.com/sdk/docs/initializing?hl=zh-tw) the gcloud CLI, run the following command:
 
   ```
   gcloud init
@@ -89,9 +90,10 @@ Google Cloud 組織政策服務可讓您透過程式輔助，集中控管組織�
 
   [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
 - [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project).
-- [安裝](https://docs.cloud.google.com/sdk/docs/install?hl=zh-tw) Google Cloud CLI。
-- 若您採用的是外部識別資訊提供者 (IdP)，請先[使用聯合身分登入 gcloud CLI](https://docs.cloud.google.com/iam/docs/workforce-log-in-gcloud?hl=zh-tw)。
-- 執行下列指令，[初始化](https://docs.cloud.google.com/sdk/docs/initializing?hl=zh-tw) gcloud CLI：
+- [Install](https://docs.cloud.google.com/sdk/docs/install?hl=zh-tw) the Google Cloud CLI.
+- If you're using an external identity provider (IdP), you must first
+  [sign in to the gcloud CLI with your federated identity](https://docs.cloud.google.com/iam/docs/workforce-log-in-gcloud?hl=zh-tw).
+- To [initialize](https://docs.cloud.google.com/sdk/docs/initializing?hl=zh-tw) the gcloud CLI, run the following command:
 
   ```
   gcloud init
@@ -104,8 +106,7 @@ Google Cloud 組織政策服務可讓您透過程式輔助，集中控管組織�
 如要取得管理組織政策所需的權限，請要求管理員授予您下列 IAM 角色：
 
 * 機構資源的[機構政策管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/orgpolicy?hl=zh-tw#orgpolicy.policyAdmin)  (`roles/orgpolicy.policyAdmin`)
-* 建立或更新 BigQuery 資料移轉服務移轉設定：
-  專案資源的 [BigQuery 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.admin)  (`roles/bigquery.admin`)
+* 建立或更新 BigQuery 資料移轉服務移轉設定：專案資源的 [BigQuery 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.admin)  (`roles/bigquery.admin`)
 
 如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
@@ -115,8 +116,7 @@ Google Cloud 組織政策服務可讓您透過程式輔助，集中控管組織�
 
 必須具備下列權限，才能管理組織政策：。
 
-* `orgpolicy.*`
-  機構資源
+* 組織資源的 `orgpolicy.*`
 * 建立或更新 BigQuery 資料移轉服務移轉設定：
   + 專案資源的 `bigquery.transfers.get`
   + 專案資源的 `bigquery.transfers.update`
@@ -125,7 +125,7 @@ Google Cloud 組織政策服務可讓您透過程式輔助，集中控管組織�
 
 ## BigQuery 資料移轉服務支援的資源
 
-下表列出可在自訂限制中參照的 BigQuery 資料移轉服務資源。
+下表列出自訂限制中可參照的 BigQuery 資料移轉服務資源。
 
 | 資源 | 欄位 |
 | --- | --- |
@@ -154,35 +154,35 @@ Google Cloud 組織政策服務可讓您透過程式輔助，集中控管組織�
 
 ### 控制台
 
-如要建立自訂限制條件，請按照下列步驟操作：
+如要建立自訂限制，請按照下列步驟操作：
 
 1. 前往 Google Cloud 控制台的「Organization policies」(組織政策) 頁面。
 
    [前往「Organization policies」(組織政策)](https://console.cloud.google.com/iam-admin/orgpolicies?hl=zh-tw)
 2. 在專案挑選器中，選取要設定組織政策的專案。
-3. 按一下「自訂限制」add。
-4. 在「顯示名稱」方塊中，輸入容易理解的限制名稱。這個名稱會顯示在錯誤訊息中，可用於識別和偵錯。請勿在顯示名稱中使用個人識別資訊 (PII) 或私密資料，因為錯誤訊息可能會顯示這類名稱。這個欄位最多可包含 200 個字元。
-5. 在「Constraint ID」(限制 ID) 方塊中，輸入新自訂限制的 ID。自訂限制只能包含字母 (包括大寫和小寫) 或數字，例如 `custom.dtsEnableEmailNotification`。這個欄位最多可包含 70 個字元，不含前置字元 (`custom.`)，例如 `organizations/123456789/customConstraints/custom`。請勿在限制 ID 中輸入 PII 或私密資料，因為錯誤訊息可能會顯示上述資訊。
-6. 在「Description」(說明) 方塊中，輸入使用者可理解的限制說明。違反政策時，系統會顯示這項說明做為錯誤訊息。請提供違反政策的詳細原因，以及如何解決問題。請勿在說明中輸入 PII 或機密資料，因為錯誤訊息可能會顯示上述資訊。這個欄位最多可輸入 2000 個字元。
-7. 在「Resource type」方塊中，選取包含要限制物件和欄位的 Google Cloud REST 資源名稱，例如 `container.googleapis.com/NodePool`。大多數資源類型最多支援 20 項自訂限制。如果您嘗試建立更多自訂限制，作業會失敗。
-8. 在「強制執行方式」下方，選取要對 REST `CREATE` 方法強制執行限制，還是同時對 `CREATE` 和 `UPDATE` 方法強制執行限制。如果您在違反限制的資源上，使用 `UPDATE` 方法強制執行限制，除非變更可解決違規問題，否則組織政策會封鎖對該資源的變更。
+3. 按一下「add Custom constraint」(自訂限制)。
+4. 在「Display name」(顯示名稱) 方塊中，輸入人類可讀的限制名稱。這個名稱會用於錯誤訊息，可用於識別和偵錯。請勿在顯示名稱中使用個人識別資訊 (PII) 或機密資料，因為這類名稱可能會在錯誤訊息中曝光。這個欄位最多可包含 200 個字元。
+5. 在「Constraint ID」(限制 ID) 方塊中，輸入新自訂限制的 ID。自訂限制只能包含字母 (包括大寫和小寫) 或數字，例如 `custom.dtsEnableEmailNotification`。這個欄位最多可包含 70 個字元，不含前置字元 (`custom.`)，例如 `organizations/123456789/customConstraints/custom`。請勿在限制 ID 中輸入 PII 或機密資料，因為錯誤訊息可能會顯示上述資訊。
+6. 在「說明」方塊中，輸入人類可讀的限制說明。違反政策時，系統會將這段說明做為錯誤訊息顯示。請詳細說明違反政策的原因，以及如何解決違規問題。請勿在說明中輸入 PII 或機密資料，因為錯誤訊息可能會顯示上述資訊。這個欄位最多可輸入 2000 個半形字元。
+7. 在「Resource type」(資源類型) 方塊中，選取要限制的物件和欄位所屬的 Google Cloud REST 資源名稱，例如 `container.googleapis.com/NodePool`。大多數資源類型最多支援 20 項自訂限制。如果嘗試建立更多自訂限制，作業會失敗。
+8. 在「Enforcement method」(強制執行方法) 下方，選取要對 REST `CREATE` 方法強制執行限制，還是同時對 `CREATE` 和 `UPDATE` 方法強制執行限制。如果您使用 `UPDATE` 方法對違反限制的資源強制執行限制，組織政策會禁止對該資源進行變更，除非變更可解決違規問題。
 
-如要查看各項服務支援的方法，請在「[支援自訂限制的服務](https://docs.cloud.google.com/organization-policy/reference/custom-constraint-supported-services?hl=zh-tw)」中找出該服務。
+如要查看各項服務支援的方法，請在「[支援自訂限制的服務](https://docs.cloud.google.com/organization-policy/reference/custom-constraint-supported-services?hl=zh-tw)」中找到該服務。
 
-9. 如要定義條件，請按一下「編輯條件」edit。
+9. 如要定義條件，請按一下「edit 編輯條件」。
 
-1. 在「Add condition」(新增條件) 面板中，建立參照支援服務資源的 CEL 條件，例如 `resource.management.autoUpgrade == false`。這個欄位最多可輸入 1000 個字元。如要進一步瞭解如何使用 CEL，請參閱[一般運算語言](https://docs.cloud.google.com/resource-manager/docs/organization-policy/creating-managing-custom-constraints?hl=zh-tw#common_expression_language)。如要進一步瞭解自訂限制中可使用的服務資源，請參閱「[自訂限制支援的服務](https://docs.cloud.google.com/resource-manager/docs/organization-policy/custom-constraint-supported-services?hl=zh-tw)」。
+1. 在「Add condition」(新增條件) 面板中，建立參照支援服務資源的 CEL 條件，例如 `resource.management.autoUpgrade == false`。這個欄位最多可包含 1000 個字元。如要進一步瞭解 CEL 的用法，請參閱「[一般運算語言](https://docs.cloud.google.com/resource-manager/docs/organization-policy/creating-managing-custom-constraints?hl=zh-tw#common_expression_language)」。如要進一步瞭解可在自訂限制中使用的服務資源，請參閱「[自訂限制支援的服務](https://docs.cloud.google.com/resource-manager/docs/organization-policy/custom-constraint-supported-services?hl=zh-tw)」。
 2. 按一下 [儲存]。
 
-10. 在「動作」下方，選取符合條件時要允許或拒絕評估的方法。
+10. 在「Action」下方，選取在符合條件時，要允許或拒絕評估的方法。
 
-如果條件評估結果為 true，系統會禁止建立或更新資源。
+如果條件評估結果為 true，系統會封鎖建立或更新資源的作業。
 
-允許動作是指只有在條件評估為 true 時，才允許建立或更新資源的作業。除了條件中明確列出的情況外，其他所有情況都會遭到封鎖。
+「允許」動作代表只有在條件評估為 true 時，才允許建立或更新資源。除了條件中明確列出的情況外，其他所有情況都會遭到封鎖。
 
-11. 按一下「建立限制」。
+11. 按一下「Create constraint」(建立限制)。
 
-在每個欄位中輸入值後，右側會顯示這個自訂限制的對等 YAML 設定。
+在每個欄位中輸入值後，右側會顯示這項自訂限制的對等 YAML 設定。
 
 ### gcloud
 
@@ -200,47 +200,46 @@ displayName: DISPLAY_NAME
 description: DESCRIPTION
 ```
 
-請替換下列項目：
+更改下列內容：
 
-* `ORGANIZATION_ID`：您的機構 ID，例如 `123456789`。
-* `CONSTRAINT_NAME`：新自訂限制的名稱。自訂限制只能包含字母 (包括大寫和小寫) 或數字，例如 `custom.dtsEnableEmailNotification`。這個欄位最多可包含 70 個字元，不含前置字元 (`custom.`)，例如 `organizations/123456789/customConstraints/custom`。請勿在限制 ID 中輸入 PII 或機密資料，因為錯誤訊息可能會顯示上述資訊。
-* `RESOURCE_NAME`：內含要限制的物件和欄位的 Google Cloud
-  資源完整名稱，例如：`bigquerydatatransfer.googleapis.com/TransferConfig`。大多數資源類型最多支援 20 項自訂限制。如果您嘗試建立更多自訂限制，作業會失敗。
-* `methodTypes`：強制執行限制的 REST 方法。可以是 `CREATE`，也可以是 `CREATE` 和 `UPDATE`。如果您在違反限制的資源上使用 `UPDATE` 方法強制執行限制，除非變更可解決違規問題，否則組織政策會封鎖對該資源的變更。
+* `ORGANIZATION_ID`：您的組織 ID，例如 `123456789`。
+* `CONSTRAINT_NAME`：新自訂限制的名稱。自訂限制只能包含字母 (包括大小寫) 或數字，例如 `custom.dtsEnableEmailNotification`。這個欄位最多可包含 70 個字元，不含前置字元 (`custom.`)，例如 `organizations/123456789/customConstraints/custom`。請勿在限制 ID 中輸入 PII 或機密資料，因為錯誤訊息可能會顯示上述資訊。
+* `RESOURCE_NAME`：內含要限制的物件和欄位的 Google Cloud資源完整名稱，例如：`bigquerydatatransfer.googleapis.com/TransferConfig`。大多數資源類型最多支援 20 項自訂限制。如果您嘗試建立更多自訂限制，作業就會失敗。
+* `methodTypes`：強制執行限制的 REST 方法。可以是 `CREATE`，也可以是 `CREATE` 和 `UPDATE`。如果您使用 `UPDATE` 方法對違反限制的資源強制執行限制，組織政策會禁止對該資源進行變更，除非變更可解決違規問題。
 
 如要查看各項服務支援的方法，請在「[支援自訂限制的服務](https://docs.cloud.google.com/organization-policy/reference/custom-constraint-supported-services?hl=zh-tw)」中找出該服務。
 
-* `CONDITION`：針對支援服務資源表示法所撰寫的 [CEL 條件](https://docs.cloud.google.com/resource-manager/docs/organization-policy/creating-managing-custom-constraints?hl=zh-tw#common_expression_language)。這個欄位最多可輸入 1000 個半形字元。例如：
+* `CONDITION`：針對支援服務資源表示法所撰寫的 [CEL 條件](https://docs.cloud.google.com/resource-manager/docs/organization-policy/creating-managing-custom-constraints?hl=zh-tw#common_expression_language)。這個欄位最多可輸入 1000 個字元。例如：
   `resource.emailPreferences.enableFailureEmail == true`。
 
 如要進一步瞭解可編寫條件的資源，請參閱「[支援的資源](#supported_resources)」。
 
-* `ACTION`：符合 `condition` 時採取的動作。可能的值為 `ALLOW` 和 `DENY`。
+* `ACTION`：符合 `condition` 時採取動作。可能的值為 `ALLOW` 和 `DENY`。
 
-允許動作是指如果條件評估結果為 true，系統就會允許建立或更新資源的作業。這也表示系統會封鎖條件中明確列出的案例以外的所有其他案例。
+「允許」動作代表如果條件評估為 true，系統就會允許建立或更新資源。這也表示除了條件中明確列出的情況外，其他所有情況都會遭到封鎖。
 
-拒絕動作表示如果條件評估結果為 true，系統會封鎖建立或更新資源的作業。
+「拒絕」動作是指如果條件評估結果為 true，系統就會禁止建立或更新資源。
 
-* `DISPLAY_NAME`：人類可讀的限制條件名稱。這個名稱會顯示在錯誤訊息中，可用於識別和偵錯。請勿在顯示名稱中使用 PII 或機密資料，因為錯誤訊息可能會顯示這類名稱。這個欄位最多可包含 200 個字元。
-* `DESCRIPTION`：違反政策時，會以錯誤訊息形式顯示且易於理解的限制說明。這個欄位最多可輸入 2000 個字元。
+* `DISPLAY_NAME`：人類可讀的限制名稱。這個名稱會顯示在錯誤訊息中，可用於識別和偵錯。請勿在顯示名稱中使用 PII 或機密資料，因為錯誤訊息可能會顯示這類資訊。這個欄位最多可包含 200 個字元。
+* `DESCRIPTION`：違反政策時，會以錯誤訊息形式顯示且易於理解的限制說明。這個欄位最多可包含 2000 個字元。
 
-2. 為新的自訂限制建立 YAML 檔案後，您必須加以設定，才能用於組織的組織政策。如要設定自訂限制條件，請使用 [`gcloud org-policies set-custom-constraint`](https://docs.cloud.google.com/sdk/gcloud/reference/org-policies/set-custom-constraint?hl=zh-tw) 指令：
+2. 為新的自訂限制建立 YAML 檔案後，您必須加以設定，才能用於組織的組織政策。如要設定自訂限制，請使用 [`gcloud org-policies set-custom-constraint`](https://docs.cloud.google.com/sdk/gcloud/reference/org-policies/set-custom-constraint?hl=zh-tw) 指令：
 
 ```
 gcloud org-policies set-custom-constraint CONSTRAINT_PATH
 ```
 
-請將 `CONSTRAINT_PATH` 替換為自訂限制檔案的完整路徑，例如：`/home/user/customconstraint.yaml`。
+請將 `CONSTRAINT_PATH` 替換成自訂限制檔案的完整路徑，例如 `/home/user/customconstraint.yaml`。
 
 這項作業完成後，自訂限制會顯示在 Google Cloud 組織政策清單中，供組織政策使用。
 
-3. 如要驗證是否存在自訂限制條件，請使用 [`gcloud org-policies list-custom-constraints`](https://docs.cloud.google.com/sdk/gcloud/reference/org-policies/list-custom-constraints?hl=zh-tw) 指令：
+3. 如要確認是否存在自訂限制，請使用 [`gcloud org-policies list-custom-constraints`](https://docs.cloud.google.com/sdk/gcloud/reference/org-policies/list-custom-constraints?hl=zh-tw) 指令：
 
 ```
 gcloud org-policies list-custom-constraints --organization=ORGANIZATION_ID
 ```
 
-請將 `ORGANIZATION_ID` 替換成組織資源的 ID。
+將 `ORGANIZATION_ID` 替換為組織資源的 ID。
 
 詳情請參閱「[查看組織政策](https://docs.cloud.google.com/resource-manager/docs/organization-policy/creating-managing-policies?hl=zh-tw#viewing_organization_policies)」。
 
@@ -258,11 +257,11 @@ gcloud org-policies list-custom-constraints --organization=ORGANIZATION_ID
 4. 如要為這項資源設定組織政策，請按一下「Manage policy」(管理政策)。
 5. 在「Edit policy」(編輯政策) 頁面，選取「Override parent's policy」(覆寫上層政策)。
 6. 按一下「Add a rule」(新增規則)。
-7. 在「Enforcement」(強制執行) 部分，選取是否要強制執行這項組織政策。
+7. 在「強制執行」部分，選取是否要強制執行這項組織政策。
 8. 選用：如要根據標記設定組織政策的條件，請按一下「Add condition」(新增條件)。請注意，如果為組織政策新增條件式規則，您必須至少新增一項無條件規則，否則無法儲存政策。詳情請參閱「[使用標記設定組織政策範圍](https://docs.cloud.google.com/organization-policy/scope-policies?hl=zh-tw)」。
 9. 按一下「Test changes」(測試變更)，模擬組織政策的影響。詳情請參閱「[使用 Policy Simulator 測試組織政策變更](https://docs.cloud.google.com/policy-intelligence/docs/test-organization-policies?hl=zh-tw)」。
 10. 如要在模擬測試模式下強制執行組織政策，請按一下「設定模擬測試政策」。詳情請參閱「[測試組織政策](https://docs.cloud.google.com/organization-policy/test-policies?hl=zh-tw)」。
-11. 確認機構政策在試營運模式中運作正常後，請按一下「設定政策」，設定正式政策。
+11. 確認試營運模式中的組織政策運作正常後，請按一下「設定政策」，設定正式政策。
 
 ### gcloud
 
@@ -282,7 +281,7 @@ dryRunSpec:
 請替換下列項目：
 
 * `PROJECT_ID`：要強制執行限制的專案。
-* `CONSTRAINT_NAME`：要為自訂限制定義的名稱，例如 `custom.dtsEnableEmailNotification`。
+* `CONSTRAINT_NAME`：要為自訂限制定義的名稱，例如：`custom.dtsEnableEmailNotification`。
 
 2. 如要以[模擬測試模式](https://docs.cloud.google.com/organization-policy/test-policies?hl=zh-tw)強制執行組織政策，請執行下列指令並加上 `dryRunSpec` 旗標：
 
@@ -292,7 +291,7 @@ gcloud org-policies set-policy POLICY_PATH --update-mask=dryRunSpec
 
 請將 `POLICY_PATH` 替換為組織政策 YAML 檔案的完整路徑。政策最多需要 15 分鐘才會生效。
 
-3. 確認模擬測試模式中的機構政策能發揮預期效果後，請使用 `org-policies set-policy` 指令和 `spec` 旗標設定正式政策：
+3. 確認模擬測試模式中的組織政策運作正常後，請使用 `org-policies set-policy` 指令和 `spec` 旗標設定正式政策：
 
 ```
 gcloud org-policies set-policy POLICY_PATH --update-mask=spec
@@ -302,14 +301,14 @@ gcloud org-policies set-policy POLICY_PATH --update-mask=spec
 
 ## 測試自訂組織政策
 
-下列範例會建立自訂限制和政策，要求特定專案中所有新的轉移設定都必須啟用電子郵件通知。
+下列範例會建立自訂限制和政策，要求特定專案中所有新的移轉設定都必須啟用電子郵件通知。
 
 開始之前，請先確認您知曉下列資訊：
 
 * 組織 ID
 * 專案 ID
 
-### 建立限制條件
+### 建立限制
 
 1. 將下列檔案儲存為 `constraint-dts-enable-email.yaml`：
 
@@ -325,9 +324,9 @@ gcloud org-policies set-policy POLICY_PATH --update-mask=spec
    description: The BigQuery Data Transfer Service always enables email notications on data transfer failures.
    ```
 
-   將 `ORGANIZATION_ID` 替換為[機構 ID](https://docs.cloud.google.com/resource-manager/docs/creating-managing-organization?hl=zh-tw#retrieving_your_organization_id)。
+   將 `ORGANIZATION_ID` 替換為[組織 ID](https://docs.cloud.google.com/resource-manager/docs/creating-managing-organization?hl=zh-tw#retrieving_your_organization_id)。
 
-   這項限制會檢查新轉移設定是否已啟用電子郵件通知。如果未啟用，系統會拒絕執行作業。
+   這項限制會檢查新轉移設定是否已啟用電子郵件通知。如果未啟用，系統會拒絕作業。
 2. 套用限制：
 
    ```
@@ -396,8 +395,8 @@ Operation denied by custom org policy: ["customConstraints/custom.dtsEnableEmail
 | 說明 | 限制語法 |
 | --- | --- |
 | 禁止從 Azure Blob 儲存體移轉資料 | ```     name: organizations/ORGANIZATION_ID/customConstraints/custom.denyDtsAzureTransfers     resourceTypes:     - bigquerydatatransfer.googleapis.com/TransferConfig     methodTypes:     - CREATE     condition: resource.dataSourceId == "azure_blob_storage"     actionType: DENY     displayName: Deny data transfers from Azure Blob Storage to BigQuery     description: Disallow creating data transfer configurations from Azure Blob Storage. ``` |
-| 一律啟用自動排程功能 | ```     name: organizations/ORGANIZATION_ID/customConstraints/custom.dtsNoManualSchedule     resourceTypes:     - bigquerydatatransfer.googleapis.com/TransferConfig     methodTypes:     - CREATE     - UPDATE     condition: resource.scheduleOptions.disableAutoScheduling == false     actionType: ALLOW     displayName: Transfer configurations always enable auto-scheduling     description: Always enable auto-scheduling for BigQuery Data Transfer Service transfer configurations. ``` |
-| Google Ads 轉移作業的資料更新回溯期必須超過三天 | ```     name: organizations/ORGANIZATION_ID/customConstraints/custom.dtsGoogleAdsConstraint     resourceTypes:     - bigquerydatatransfer.googleapis.com/TransferConfig     methodTypes:     - CREATE     - UPDATE     condition: resource.dataSourceId == "google_ads" && resource.dataRefreshWindowDays < 3     actionType: DENY     displayName: Google Ads transfers data refresh window must be greater than three days     description: Disallow creating Google Ads data transfer configurations whose data refresh window is less than three days. ``` |
+| 一律啟用自動排程 | ```     name: organizations/ORGANIZATION_ID/customConstraints/custom.dtsNoManualSchedule     resourceTypes:     - bigquerydatatransfer.googleapis.com/TransferConfig     methodTypes:     - CREATE     - UPDATE     condition: resource.scheduleOptions.disableAutoScheduling == false     actionType: ALLOW     displayName: Transfer configurations always enable auto-scheduling     description: Always enable auto-scheduling for BigQuery Data Transfer Service transfer configurations. ``` |
+| Google Ads 轉移作業的資料重新整理回溯期必須超過三天 | ```     name: organizations/ORGANIZATION_ID/customConstraints/custom.dtsGoogleAdsConstraint     resourceTypes:     - bigquerydatatransfer.googleapis.com/TransferConfig     methodTypes:     - CREATE     - UPDATE     condition: resource.dataSourceId == "google_ads" && resource.dataRefreshWindowDays < 3     actionType: DENY     displayName: Google Ads transfers data refresh window must be greater than three days     description: Disallow creating Google Ads data transfer configurations whose data refresh window is less than three days. ``` |
 
 ## 後續步驟
 
@@ -412,11 +411,11 @@ Operation denied by custom org policy: ["customConstraints/custom.dtsEnableEmail
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-25 (世界標準時間)。
+上次更新時間：2026-10-17 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-25 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-17 (世界標準時間)。"],[],[]]

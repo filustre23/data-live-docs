@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -16,13 +16,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 在 BigQuery 中使用政策標記的最佳做法
 
-本頁說明在 BigQuery 中使用政策標記的最佳做法。使用政策標記定義資料的存取權，適用於[資料欄層級存取控管](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro?hl=zh-tw)或[動態資料遮蓋](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro?hl=zh-tw)。
+您可以在 BigQuery 中使用政策標記，對機密資料表資料強制執行[資料欄層級存取控管](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro?hl=zh-tw)和[動態資料遮蓋](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro?hl=zh-tw)。將政策標記歸類為階層式分類，有助於您使用最少的分類，管理多個資料欄的權限。政策標記是[資料治理標記](https://docs.cloud.google.com/bigquery/docs/tags?hl=zh-tw#data-governance-tags)的替代方案。如要直接在資料欄上套用政策標記，請參閱「[在資料欄上設定政策標記](https://docs.cloud.google.com/bigquery/docs/column-level-security?hl=zh-tw#set_policy)」。
 
-如要瞭解如何為資料欄設定政策標記，請參閱「[為資料欄設定政策標記](https://docs.cloud.google.com/bigquery/docs/column-level-security?hl=zh-tw#set_policy)」。
-
-政策標記是[資料治理標記](https://docs.cloud.google.com/bigquery/docs/tags?hl=zh-tw#data-governance-tags)的替代方案，這類標記屬於 Resource Manager 標記，可用於資料欄層級的存取控管和資料遮蓋。
-
-## 建構資料類別的階層
+## 建構資料類別階層
 
 建立符合業務需求的資料類別階層。
 
@@ -32,7 +28,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 * 財務資料
 * 查看客戶訂單記錄
 
-您可以使用政策標記，將單一資料類別套用至多個資料欄。您應使用這個抽象層級，以少數政策標記有效管理多個資料欄。
+您可以使用政策標記，將單一資料類別套用至多個資料欄。您應使用這個抽象層級，只用少數政策標記，就能有效管理多個資料欄。
 
 其次，請考慮是否有需要不同資料類別存取權的群組。舉例來說，某個群組需要存取業務機密資料，例如收益和顧客記錄。另一個群組需要存取電話號碼和地址等個人識別資料 (PII)。
 
@@ -40,7 +36,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 下圖為分類範例。這個階層會將所有資料類型歸入三個頂層政策標記：**高**、**中**和**低**。
 
-每個頂層政策標記都包含葉節點政策標記。舉例來說，「高」政策標籤包含「信用卡」、「政府核發的身分證件」和「生物特徵辨識」政策標籤。「中」和「低」也同樣有葉子政策標記。
+每個頂層政策標記都包含葉政策標記。舉例來說，「高」政策標籤包含「信用卡」、「政府核發的身分證件」和「生物特徵辨識」政策標籤。**中**和**低**也同樣有葉子政策標記。
 
 這種結構有幾個優點：
 
@@ -64,11 +60,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-16 (世界標準時間)。
+上次更新時間：2026-10-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-16 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]

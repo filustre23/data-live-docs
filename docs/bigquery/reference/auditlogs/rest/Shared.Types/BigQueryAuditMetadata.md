@@ -21,6 +21,8 @@ Send feedback
   + [JSON representation](#BigQueryAuditMetadata.TableDefinition.SCHEMA_REPRESENTATION)
 * [BigQueryAuditMetadata.EncryptionInfo](#BigQueryAuditMetadata.EncryptionInfo)
   + [JSON representation](#BigQueryAuditMetadata.EncryptionInfo.SCHEMA_REPRESENTATION)
+* [BigQueryAuditMetadata.SecureContextValue](#BigQueryAuditMetadata.SecureContextValue)
+  + [JSON representation](#BigQueryAuditMetadata.SecureContextValue.SCHEMA_REPRESENTATION)
 * [BigQueryAuditMetadata.JobConfig.Load](#BigQueryAuditMetadata.JobConfig.Load)
   + [JSON representation](#BigQueryAuditMetadata.JobConfig.Load.SCHEMA_REPRESENTATION)
 * [BigQueryAuditMetadata.JobConfig.Extract](#BigQueryAuditMetadata.JobConfig.Extract)
@@ -45,6 +47,8 @@ Send feedback
   + [JSON representation](#BigQueryAuditMetadata.JobChange.SCHEMA_REPRESENTATION)
 * [BigQueryAuditMetadata.JobDeletion](#BigQueryAuditMetadata.JobDeletion)
   + [JSON representation](#BigQueryAuditMetadata.JobDeletion.SCHEMA_REPRESENTATION)
+* [BigQueryAuditMetadata.JobCancel](#BigQueryAuditMetadata.JobCancel)
+  + [JSON representation](#BigQueryAuditMetadata.JobCancel.SCHEMA_REPRESENTATION)
 * [BigQueryAuditMetadata.DatasetCreation](#BigQueryAuditMetadata.DatasetCreation)
   + [JSON representation](#BigQueryAuditMetadata.DatasetCreation.SCHEMA_REPRESENTATION)
 * [BigQueryAuditMetadata.Dataset](#BigQueryAuditMetadata.Dataset)
@@ -151,6 +155,26 @@ Send feedback
   + [JSON representation](#BigQueryAuditMetadata.ConnectionChange.SCHEMA_REPRESENTATION)
 * [BigQueryAuditMetadata.AnalyticsHubSubscribeListing](#BigQueryAuditMetadata.AnalyticsHubSubscribeListing)
   + [JSON representation](#BigQueryAuditMetadata.AnalyticsHubSubscribeListing.SCHEMA_REPRESENTATION)
+* [BigQueryAuditMetadata.IcebergTableSetIamPolicyAuditMetadata](#BigQueryAuditMetadata.IcebergTableSetIamPolicyAuditMetadata)
+  + [JSON representation](#BigQueryAuditMetadata.IcebergTableSetIamPolicyAuditMetadata.SCHEMA_REPRESENTATION)
+* [BigQueryAuditMetadata.IcebergTableSetIamPolicyAuditMetadata.Detail](#BigQueryAuditMetadata.IcebergTableSetIamPolicyAuditMetadata.Detail)
+  + [JSON representation](#BigQueryAuditMetadata.IcebergTableSetIamPolicyAuditMetadata.Detail.SCHEMA_REPRESENTATION)
+* [BigQueryAuditMetadata.DeltaSharingCatalogCreationAuditMetadata](#BigQueryAuditMetadata.DeltaSharingCatalogCreationAuditMetadata)
+  + [JSON representation](#BigQueryAuditMetadata.DeltaSharingCatalogCreationAuditMetadata.SCHEMA_REPRESENTATION)
+* [BigQueryAuditMetadata.DeltaSharingCatalogUpdateAuditMetadata](#BigQueryAuditMetadata.DeltaSharingCatalogUpdateAuditMetadata)
+  + [JSON representation](#BigQueryAuditMetadata.DeltaSharingCatalogUpdateAuditMetadata.SCHEMA_REPRESENTATION)
+* [BigQueryAuditMetadata.DeltaSharingCatalogDeletionAuditMetadata](#BigQueryAuditMetadata.DeltaSharingCatalogDeletionAuditMetadata)
+  + [JSON representation](#BigQueryAuditMetadata.DeltaSharingCatalogDeletionAuditMetadata.SCHEMA_REPRESENTATION)
+* [BigQueryAuditMetadata.DeltaSharingCatalogDeletionAuditMetadata.Detail](#BigQueryAuditMetadata.DeltaSharingCatalogDeletionAuditMetadata.Detail)
+  + [JSON representation](#BigQueryAuditMetadata.DeltaSharingCatalogDeletionAuditMetadata.Detail.SCHEMA_REPRESENTATION)
+* [BigQueryAuditMetadata.PropertyGraphCreation](#BigQueryAuditMetadata.PropertyGraphCreation)
+  + [JSON representation](#BigQueryAuditMetadata.PropertyGraphCreation.SCHEMA_REPRESENTATION)
+* [BigQueryAuditMetadata.PropertyGraph](#BigQueryAuditMetadata.PropertyGraph)
+  + [JSON representation](#BigQueryAuditMetadata.PropertyGraph.SCHEMA_REPRESENTATION)
+* [BigQueryAuditMetadata.PropertyGraphChange](#BigQueryAuditMetadata.PropertyGraphChange)
+  + [JSON representation](#BigQueryAuditMetadata.PropertyGraphChange.SCHEMA_REPRESENTATION)
+* [BigQueryAuditMetadata.PropertyGraphDeletion](#BigQueryAuditMetadata.PropertyGraphDeletion)
+  + [JSON representation](#BigQueryAuditMetadata.PropertyGraphDeletion.SCHEMA_REPRESENTATION)
 * [BigQueryAuditMetadata.FirstPartyAppMetadata](#BigQueryAuditMetadata.FirstPartyAppMetadata)
   + [JSON representation](#BigQueryAuditMetadata.FirstPartyAppMetadata.SCHEMA_REPRESENTATION)
 * [BigQueryAuditMetadata.SheetsMetadata](#BigQueryAuditMetadata.SheetsMetadata)
@@ -160,85 +184,4 @@ BigQueryAuditMetaData is exposed as part of the new AuditData.metadata messages.
 
 | JSON representation |
 | --- |
-| ``` {   "firstPartyAppMetadata": {     object (BigQueryAuditMetadata.FirstPartyAppMetadata)   },    // Union field event can be only one of the following:   "jobInsertion": {     object (BigQueryAuditMetadata.JobInsertion)   },   "jobChange": {     object (BigQueryAuditMetadata.JobChange)   },   "jobDeletion": {     object (BigQueryAuditMetadata.JobDeletion)   },   "datasetCreation": {     object (BigQueryAuditMetadata.DatasetCreation)   },   "datasetChange": {     object (BigQueryAuditMetadata.DatasetChange)   },   "datasetDeletion": {     object (BigQueryAuditMetadata.DatasetDeletion)   },   "tableCreation": {     object (BigQueryAuditMetadata.TableCreation)   },   "tableChange": {     object (BigQueryAuditMetadata.TableChange)   },   "tableDeletion": {     object (BigQueryAuditMetadata.TableDeletion)   },   "tableDataRead": {     object (BigQueryAuditMetadata.TableDataRead)   },   "tableDataChange": {     object (BigQueryAuditMetadata.TableDataChange)   },   "modelDeletion": {     object (BigQueryAuditMetadata.ModelDeletion)   },   "modelCreation": {     object (BigQueryAuditMetadata.ModelCreation)   },   "modelMetadataChange": {     object (BigQueryAuditMetadata.ModelMetadataChange)   },   "modelDataChange": {     object (BigQueryAuditMetadata.ModelDataChange)   },   "modelDataRead": {     object (BigQueryAuditMetadata.ModelDataRead)   },   "routineCreation": {     object (BigQueryAuditMetadata.RoutineCreation)   },   "routineChange": {     object (BigQueryAuditMetadata.RoutineChange)   },   "routineDeletion": {     object (BigQueryAuditMetadata.RoutineDeletion)   },   "rowAccessPolicyCreation": {     object (BigQueryAuditMetadata.RowAccessPolicyCreation)   },   "rowAccessPolicyChange": {     object (BigQueryAuditMetadata.RowAccessPolicyChange)   },   "rowAccessPolicyDeletion": {     object (BigQueryAuditMetadata.RowAccessPolicyDeletion)   },   "unlinkDataset": {     object (BigQueryAuditMetadata.UnlinkDataset)   },   "searchIndexCreation": {     object (BigQueryAuditMetadata.SearchIndexCreation)   },   "searchIndexChange": {     object (BigQueryAuditMetadata.SearchIndexChange)   },   "searchIndexDeletion": {     object (BigQueryAuditMetadata.SearchIndexDeletion)   },   "vectorIndexCreation": {     object (BigQueryAuditMetadata.VectorIndexCreation)   },   "vectorIndexChange": {     object (BigQueryAuditMetadata.VectorIndexChange)   },   "vectorIndexDeletion": {     object (BigQueryAuditMetadata.VectorIndexDeletion)   },   "connectionChange": {     object (BigQueryAuditMetadata.ConnectionChange)   },   "analyticsHubSubscribeListing": {     object (BigQueryAuditMetadata.AnalyticsHubSubscribeListing)   }   // End of list of possible types for union field event. } ``` |
-
-| Fields | |
-| --- | --- |
-| `firstPartyAppMetadata` | `object (BigQueryAuditMetadata.FirstPartyAppMetadata)`  First party (Google) application specific metadata. |
-| Union field `event`. BigQuery event information. `event` can be only one of the following: | |
-| `jobInsertion` | `object (BigQueryAuditMetadata.JobInsertion)`  Job insertion event. |
-| `jobChange` | `object (BigQueryAuditMetadata.JobChange)`  Job state change event. |
-| `jobDeletion` | `object (BigQueryAuditMetadata.JobDeletion)`  Job deletion event. |
-| `datasetCreation` | `object (BigQueryAuditMetadata.DatasetCreation)`  Dataset creation event. |
-| `datasetChange` | `object (BigQueryAuditMetadata.DatasetChange)`  Dataset change event. |
-| `datasetDeletion` | `object (BigQueryAuditMetadata.DatasetDeletion)`  Dataset deletion event. |
-| `tableCreation` | `object (BigQueryAuditMetadata.TableCreation)`  Table creation event. |
-| `tableChange` | `object (BigQueryAuditMetadata.TableChange)`  Table metadata change event. |
-| `tableDeletion` | `object (BigQueryAuditMetadata.TableDeletion)`  Table deletion event. |
-| `tableDataRead` | `object (BigQueryAuditMetadata.TableDataRead)`  Table data read event. |
-| `tableDataChange` | `object (BigQueryAuditMetadata.TableDataChange)`  Table data change event. |
-| `modelDeletion` | `object (BigQueryAuditMetadata.ModelDeletion)`  Model deletion event. |
-| `modelCreation` | `object (BigQueryAuditMetadata.ModelCreation)`  Model creation event. |
-| `modelMetadataChange` | `object (BigQueryAuditMetadata.ModelMetadataChange)`  Model metadata change event. |
-| `modelDataChange` | `object (BigQueryAuditMetadata.ModelDataChange)`  Model data change event. |
-| `modelDataRead` | `object (BigQueryAuditMetadata.ModelDataRead)`  Model data read event. |
-| `routineCreation` | `object (BigQueryAuditMetadata.RoutineCreation)`  Routine creation event. |
-| `routineChange` | `object (BigQueryAuditMetadata.RoutineChange)`  Routine change event. |
-| `routineDeletion` | `object (BigQueryAuditMetadata.RoutineDeletion)`  Routine deletion event. |
-| `rowAccessPolicyCreation` | `object (BigQueryAuditMetadata.RowAccessPolicyCreation)`  Row access policy create event. |
-| `rowAccessPolicyChange` | `object (BigQueryAuditMetadata.RowAccessPolicyChange)`  Row access policy change event. |
-| `rowAccessPolicyDeletion` | `object (BigQueryAuditMetadata.RowAccessPolicyDeletion)`  Row access policy deletion event. |
-| `unlinkDataset` | `object (BigQueryAuditMetadata.UnlinkDataset)`  Unlink linked dataset from its source dataset event |
-| `searchIndexCreation` | `object (BigQueryAuditMetadata.SearchIndexCreation)`  Search index creation event. |
-| `searchIndexChange` | `object (BigQueryAuditMetadata.SearchIndexChange)`  Search index change event. |
-| `searchIndexDeletion` | `object (BigQueryAuditMetadata.SearchIndexDeletion)`  Search index deletion event. |
-| `vectorIndexCreation` | `object (BigQueryAuditMetadata.VectorIndexCreation)`  Vector index creation event. |
-| `vectorIndexChange` | `object (BigQueryAuditMetadata.VectorIndexChange)`  Vector index change event. |
-| `vectorIndexDeletion` | `object (BigQueryAuditMetadata.VectorIndexDeletion)`  Vector index deletion event. |
-| `connectionChange` | `object (BigQueryAuditMetadata.ConnectionChange)`  Connection change event. |
-| `analyticsHubSubscribeListing` | `object (BigQueryAuditMetadata.AnalyticsHubSubscribeListing)`  Subscribe listing event. |
-
-## BigQueryAuditMetadata.JobInsertion
-
-Job insertion event.
-
-| JSON representation |
-| --- |
-| ``` {   "job": {     object (BigQueryAuditMetadata.Job)   },   "reason": enum (BigQueryAuditMetadata.JobInsertion.Reason) } ``` |
-
-| Fields | |
-| --- | --- |
-| `job` | `object (BigQueryAuditMetadata.Job)`  Job metadata. |
-| `reason` | `enum (BigQueryAuditMetadata.JobInsertion.Reason)`  Describes how the job was inserted. |
-
-## BigQueryAuditMetadata.Job
-
-BigQuery job.
-
-| JSON representation |
-| --- |
-| ``` {   "jobName": string,   "jobConfig": {     object (BigQueryAuditMetadata.JobConfig)   },   "jobStatus": {     object (BigQueryAuditMetadata.JobStatus)   },   "jobStats": {     object (BigQueryAuditMetadata.JobStats)   } } ``` |
-
-| Fields | |
-| --- | --- |
-| `jobName` | `string`  Job URI.  Format: `projects/<projectId>/jobs/<jobId>`. |
-| `jobConfig` | `object (BigQueryAuditMetadata.JobConfig)`  Job configuration. |
-| `jobStatus` | `object (BigQueryAuditMetadata.JobStatus)`  Job status. |
-| `jobStats` | `object (BigQueryAuditMetadata.JobStats)`  Job statistics. |
-
-## BigQueryAuditMetadata.JobConfig
-
-Job configuration. See the [Jobs](https://cloud.google.com/bigquery/docs/reference/v2/jobs) API resource for more details on individual fields.
-
-| JSON representation |
-| --- |
-| ``` {   "type": enum (BigQueryAuditMetadata.JobConfig.Type),   "labels": {     string: string,     ...   },   "reservation": string,    // Union field config can be only one of the following:   "queryConfig": {     object (BigQueryAuditMetadata.JobConfig.Query)   },   "loadConfig": {     object (BigQueryAuditMetadata.JobConfig.Load)   },   "extractConfig": {     object (BigQueryAuditMetadata.JobConfig.Extract)   },   "tableCopyConfig": {     object (BigQueryAuditMetadata.JobConfig.TableCopy)   }   // End of list of possible types for union field config. } ``` |
-
-| Fields | |
-| --- | --- |
-| `type` | `enum (BigQueryAuditMetadata.JobConfig.Type)`  Job type. |
-| `labels` | `map (key: string, value: string)`  Labels provided for the job.  An object containing a list of `"key": value` pairs. Example: `{ "name": "wrench", "mass": "1.3kg", "count": "3" }`. |
-| `reservation` | `string`  User specified reservation for the job. |
-| Union field `config`. Job configuration information. `config` can be only one of the following: | |
-| `queryConfig` | `object (BigQueryAuditMetadata.JobConfig.Query)`  Query job information. |
-| `loadConfig` |
+| ``` {   "firstPartyAppMetadata": {     object (BigQueryAuditMetadata.FirstPartyAppMetadata)   },    // The following is a list of mutually exclusive fields. At most one of the   // fields will be set in a response:   "jobInsertion": {     object (BigQueryAuditMetadata.JobInsertion)   },   "jobChange": {     object (BigQueryAuditMetadata.JobChange)   },   "jobDeletion": {     object (BigQueryAuditMetadata.JobDeletion)   },   "jobCancel": {     object (BigQueryAuditMetadata.JobCancel)   },   "datasetCreation": {     object (BigQueryAuditMetadata.DatasetCreation)   },   "datasetChange": {     object (BigQueryAuditMetadata.DatasetChange)   },   "datasetDeletion": {     object (BigQueryAuditMetadata.DatasetDeletion)   },   "tableCreation": {     object (BigQueryAuditMetadata.TableCreation)   },   "tableChange": {     object (BigQueryAuditMetadata.TableChange)   },   "tableDeletion": {     object (BigQueryAuditMetadata.TableDeletion)   },   "tableDataRead": {     object (BigQueryAuditMetadata.TableDataRead)   },   "tableDataChange": {     object (BigQueryAuditMetadata.TableDataChange)   },   "modelDeletion": {     object (BigQueryAuditMetadata.ModelDeletion)   },   "modelCreation": {     object (BigQueryAuditMetadata.ModelCreation)   },   "modelMetadataChange": {     object (BigQueryAuditMetadata.ModelMetadataChange)   },   "modelDataChange": {     object (BigQueryAuditMetadata.ModelDataChange)   },   "modelDataRead": {     object (BigQueryAuditMetadata.ModelDataRead)   },   "routineCreation": {     object (BigQueryAuditMetadata.RoutineCreation)   },   "routineChange": {     object (BigQueryAuditMetadata.RoutineChange)   },   "routineDeletion": {     object (BigQueryAuditMetadata.RoutineDeletion)   },   "rowAccessPolicyCreation": {     object (BigQueryAuditMetadata.RowAccessPolicyCreation)   },   "rowAccessPolicyChange": {     object (BigQueryAuditMetadata.RowAccessPolicyChange)   },   "rowAccessPolicyDeletion": {     object (BigQueryAuditMetadata.RowAccessPolicyDeletion)   },   "unlinkDataset": {     object (BigQueryAuditMetadata.UnlinkDataset)   },   "searchIndexCreation": {     object (BigQueryAuditMetadata.SearchIndexCreation)   },   "searchIndexChange": {     object (BigQueryAuditMetadata.SearchIndexChange)   },   "searchIndexDeletion": {     object (BigQueryAuditMetadata.SearchIndexDeletion)   },   "vectorIndexCreation": {     object (BigQueryAuditMetadata.VectorIndexCreation)   },   "vectorIndexChange": {     object (BigQueryAuditMetadata.VectorIndexChange)   },   "vectorIndexDeletion": {     object (BigQueryAuditMetadata.VectorIndexDeletion)   },   "connectionChange": {     object (BigQueryAuditMetadata.ConnectionChange)   },   "analyticsHubSubscribeListing": {     object (BigQueryAuditMetadata.AnalyticsHubSubscribeListing)   },   "icebergTableSetIamPolicy": {     object (BigQueryAuditMetadata.IcebergTableSetIamPolicyAuditMetadata)   },   "deltaSharingCatalogCreation": {     object (BigQueryAuditMetadata.DeltaSharingCatalogCreationAuditMetadata)   },   "deltaSharingCatalogUpdate": {     object (BigQueryAuditMetadata.DeltaSharingCatalogUpdateAuditMetadata)   },   "deltaSharingCatalogDeletion": {     object (BigQueryAuditMetadata.DeltaSharingCatalogDeletionAuditMetad ``` |

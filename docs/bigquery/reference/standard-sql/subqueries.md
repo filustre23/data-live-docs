@@ -16,6 +16,69 @@ A subquery is a [query](/bigquery/docs/reference/standard-sql/query-syntax) that
 query statement. Subqueries are also referred to as sub-`SELECT`s or
 nested `SELECT`s. The full `SELECT` syntax is valid in subqueries.
 
+## Common tables used in examples
+
+Some examples reference a table called `Players`:
+
+```
+/*-----------------------------+
+ | username  | level   | team  |
+ +-----------------------------+
+ | gorbie    | 29      | red   |
+ | junelyn   | 2       | blue  |
+ | corba     | 43      | green |
+ +-----------------------------*/
+```
+
+Some examples reference a table called `NPCs`:
+
+```
+/*-------------------+
+ | username  | team  |
+ +-------------------+
+ | niles     | red   |
+ | jujul     | red   |
+ | effren    | blue  |
+ +-------------------*/
+```
+
+Some examples reference a table called `Mascots`:
+
+```
+/*-------------------+
+ | mascot   | team   |
+ +-------------------+
+ | cardinal | red    |
+ | parrot   | green  |
+ | finch    | blue   |
+ | sparrow  | yellow |
+ +-------------------*/
+```
+
+You can use this `WITH` clause to emulate temporary table names for
+`Players` and `NPCs`
+in subqueries that support the `WITH` clause.:
+
+```
+WITH
+  Players AS (
+    SELECT 'gorbie' AS username, 29 AS level, 'red' AS team UNION ALL
+    SELECT 'junelyn', 2 , 'blue' UNION ALL
+    SELECT 'corba', 43, 'green'),
+  NPCs AS (
+    SELECT 'niles' AS username, 'red' AS team UNION ALL
+    SELECT 'jujul', 'red' UNION ALL
+    SELECT 'effren', 'blue'),
+  Mascots AS (
+    SELECT 'cardinal' AS mascot , 'red' AS team UNION ALL
+    SELECT 'parrot', 'green' UNION ALL
+    SELECT 'finch', 'blue' UNION ALL
+    SELECT 'sparrow', 'yellow')
+SELECT * FROM (
+  SELECT username, team FROM Players UNION ALL
+  SELECT username, team FROM NPCs);
+```
+
 ## Expression subqueries
 
 Expression subqueries are used in
@@ -39,9 +102,9 @@ columns will result in an analysis error. A `SELECT` list with a single
 expression is the simplest way to select a single column. The result type
 of the scalar subquery is the type of that expression.
 
-Another possibility is to use `SELECT AS STRUCT` to define a subquery that
-selects a single `STRUCT` type value whose fields are defined by one or more
-expressions.
+Another possibility is to use `SELECT AS STRUCT` to define
+a subquery that selects a single `STRUCT` type value whose fields are defined by
+one or more expressions.
 
 If the subquery returns exactly one row, that single value is the
 scalar subquery result. If the subquery returns zero rows, the result is `NULL`.
@@ -105,8 +168,8 @@ Never returns a `NULL` ARRAY.
 
 The `SELECT` list in an ARRAY subquery must have exactly one column of
 any type, which defines the element type of the array returned by the
-array subquery. If not, an error is returned. When the subquery is written with
-`SELECT AS STRUCT`,
+array subquery. If not, an error is returned.
+When the subquery is written with`SELECT AS STRUCT`,
 the `SELECT` list can include multiple columns, and the value returned by
 the array subquery is an ARRAY of the constructed
 STRUCTs.
@@ -315,98 +378,4 @@ FROM
 -- the preceding query, but will look similar to this:
 /*----------+
  | username |
- +----------+
- | gorbie   |
- | junelyn  |
- +----------*/
 ```
-
-## Evaluation rules for subqueries
-
-Some subqueries are evaluated once, others more often.
-
-* A non-correlated, volatile subquery may be re-evaluated once per
-  row, depending on your [query plan](https://en.wikipedia.org/wiki/Query_plan).
-* A correlated subquery must be logically re-evaluated for every distinct set
-  of parameter values. Depending on your query plan, a correlated
-  subquery may be re-evaluated once per row, even if multiple
-  rows have the same parameter values.
-
-## Common tables used in examples
-
-Some examples reference a table called `Players`:
-
-```
-/*-----------------------------+
- | username  | level   | team  |
- +-----------------------------+
- | gorbie    | 29      | red   |
- | junelyn   | 2       | blue  |
- | corba     | 43      | green |
- +-----------------------------*/
-```
-
-Some examples reference a table called `NPCs`:
-
-```
-/*-------------------+
- | username  | team  |
- +-------------------+
- | niles     | red   |
- | jujul     | red   |
- | effren    | blue  |
- +-------------------*/
-```
-
-Some examples reference a table called `Mascots`:
-
-```
-/*-------------------+
- | mascot   | team   |
- +-------------------+
- | cardinal | red    |
- | parrot   | green  |
- | finch    | blue   |
- | sparrow  | yellow |
- +-------------------*/
-```
-
-You can use this `WITH` clause to emulate temporary table names for
-`Players` and `NPCs`
-in subqueries that support the `WITH` clause.:
-
-```
-WITH
-  Players AS (
-    SELECT 'gorbie' AS username, 29 AS level, 'red' AS team UNION ALL
-    SELECT 'junelyn', 2 , 'blue' UNION ALL
-    SELECT 'corba', 43, 'green'),
-  NPCs AS (
-    SELECT 'niles' AS username, 'red' AS team UNION ALL
-    SELECT 'jujul', 'red' UNION ALL
-    SELECT 'effren', 'blue'),
-  Mascots AS (
-    SELECT 'cardinal' AS mascot , 'red' AS team UNION ALL
-    SELECT 'parrot', 'green' UNION ALL
-    SELECT 'finch', 'blue' UNION ALL
-    SELECT 'sparrow', 'yellow')
-SELECT * FROM (
-  SELECT username, team FROM Players UNION ALL
-  SELECT username, team FROM NPCs);
-```
-
-
-
-
-Send feedback
-
-Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
-
-Last updated 2026-07-17 UTC.
-
-
-
-
-Need to tell us more?
-
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-07-17 UTC."],[],[]]

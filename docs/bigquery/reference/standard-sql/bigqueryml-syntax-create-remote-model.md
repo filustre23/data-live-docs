@@ -148,9 +148,9 @@ ENDPOINT = 'vertex_ai_llm_endpoint'
 
 The Agent Platform endpoint for the remote model to use. You can
 specify the name of the Agent Platform model, for example
-`gemini-2.5-pro`, or you can specify the Agent Platform model's
+`gemini-3.5-flash-lite`, or you can specify the Agent Platform model's
 endpoint URL, for example
-`https://europe-west6-aiplatform.googleapis.com/v1/projects/myproject/locations/europe-west6/publishers/google/models/gemini-2.5-pro`. If you specify the model name, BigQuery ML
+`https://europe-west6-aiplatform.googleapis.com/v1/projects/myproject/locations/europe-west6/publishers/google/models/gemini-3.5-flash-lite`. If you specify the model name, BigQuery ML
 automatically identifies and uses the full endpoint of the
 Agent Platform model based on the location of the dataset in which
 you create the model.
@@ -198,20 +198,50 @@ Gemini 2.5 Flash and Gemini 2.5 Flash-Lite models. You can't
 set a budget for Gemini 2.5 Pro models. See the documentation for
 a given function for details.
 
+BigQuery supports the following models:
+
+* `gemini-4-argon`
+* `gemini-3.8-flash`
+* `gemini-3.7-flash`
+* `gemini-3.6-flash`
+* `gemini-3.5-flash-lite`
+* `gemini-3.5-flash`
+* `gemini-3.1-flash-lite`
+
+Agent Platform only supports multi-regional endpoints for
+these models. Regional endpoints aren't supported.
+If you specify a short endpoint name that omits the region, such as `gemini-3.5-flash`,
+then BigQuery selects an endpoint according to the following rules:
+
+* If your query is run in the `us` region, or any single region in the US, then
+  BigQuery uses the `us` endpoint.
+* If your query is run in the `eu` region, or any single region in the EU other than
+  `europe-west2` or `europe-west6`, then BigQuery
+  uses the `eu` endpoint.
+* For all other locations, including `europe-west2` and
+  `europe-west6`, BigQuery uses the `global` endpoint.
+
+To specify a specific endpoint, use a fully qualified multi-regional endpoint name in one of the
+following formats:
+
+* `https://aiplatform.us.rep.googleapis.com/v1/projects/PROJECT_ID/locations/us/publishers/google/models/MODEL_ID`
+* `https://aiplatform.eu.rep.googleapis.com/v1/projects/PROJECT_ID/locations/eu/publishers/google/models/MODEL_ID`
+* `https://aiplatform.googleapis.com/v1/projects/PROJECT_ID/locations/global/publishers/google/models/MODEL_ID`
+
+If your query runs in the `asia-south1` region, then you must use the fully qualified
+global endpoint name.
+
 ### Claude models
 
 The following
 [Anthropic Claude models](/vertex-ai/generative-ai/docs/partner-models/use-claude)
 are supported:
 
+* `claude-opus-4-6`
+* `claude-sonnet-4-6`
+* `claude-opus-4-5`
 * `claude-haiku-4-5`
 * `claude-sonnet-4-5`
-* `claude-opus-4-1`
-* `claude-opus-4`
-* `claude-sonnet-4`
-* `claude-3-7-sonnet`
-* `claude-3-5-haiku`
-* `claude-3-haiku`
 
 You must enable Claude models in Gemini Enterprise Agent Platform before you can use
 them. For more information, see
@@ -329,11 +359,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-07-21 UTC.
+Last updated 2026-10-20 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-07-21 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-10-20 UTC."],[],[]]

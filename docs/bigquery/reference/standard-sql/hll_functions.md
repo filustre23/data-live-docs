@@ -12,15 +12,17 @@ The [HyperLogLog++ algorithm (HLL++)](https://en.wikipedia.org/wiki/HyperLogLog)
 [cardinality](https://en.wikipedia.org/wiki/Cardinality) from sketches.
 
 HLL++ functions are approximate aggregate functions.
-Approximate aggregation typically requires less
-memory than exact aggregation functions,
+Approximate aggregation typically uses fewer
+resources than exact aggregation functions,
 like [`COUNT(DISTINCT)`](/bigquery/docs/reference/standard-sql/aggregate_functions#count), but also introduces statistical error.
 This makes HLL++ functions appropriate for large data streams for
 which linear memory usage is impractical, as well as for data that is
 already approximate.
 
-A data sketch is a compact summary of a data aggregation. If you don't need
-materialized sketches, you can alternatively use an
+A data sketch is a compact summary of a data
+aggregation. For more information, see
+[Sketches](/bigquery/docs/sketches). If you don't need to
+store sketches, you can alternatively use an
 [approximate aggregate function with system-defined precision](/bigquery/docs/reference/standard-sql/approximate_aggregate_functions),
 such as [`APPROX_COUNT_DISTINCT`](/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_count_distinct). However,
 `APPROX_COUNT_DISTINCT` doesn't allow partial aggregations, re-aggregations,
@@ -117,8 +119,9 @@ a State of The Art Cardinality Estimation Algorithm](https://static.googleuserco
 
 * `precision`: Defines the accuracy of the estimate at the cost of additional
   memory required to process the sketches or store them on disk. The range for
-  this value is `10` to `24`. The default value is `15`. For more information
-  about precision, see [Precision for sketches](/bigquery/docs/sketches#precision_hll).
+  this value is `10` to `24`, where larger values indicate higher accuracy, with
+  `24` being the most accurate. The default value is `15`. For more
+  information about precision, see [Precision for sketches](/bigquery/docs/sketches#precision_hll).
 
 **Supported input types**
 
@@ -193,7 +196,9 @@ over zero rows or only over `NULL` values, the function returns `0`.
 **Example**
 
 The following query counts the number of distinct users across all countries
-who have at least one invoice.
+who have at least one invoice. The inner query produces one sketch per country
+by grouping on `country`, and the outer query merges those sketches into a
+single distinct count.
 
 ```
 SELECT HLL_COUNT.MERGE(hll_sketch) AS distinct_customers_with_open_invoice
@@ -255,7 +260,9 @@ This function returns `NULL` if there is no input or all inputs are `NULL`.
 **Example**
 
 The following query returns an HLL++ sketch that counts the number of distinct
-users who have at least one invoice across all countries.
+users who have at least one invoice across all countries. The inner query
+produces one sketch per country by grouping on `country`, and the outer query
+merges those sketches into a new sketch.
 
 ```
 SELECT HLL_COUNT.MERGE_PARTIAL(HLL_sketch) AS distinct_customers_with_open_invoice
@@ -290,11 +297,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-07-17 UTC.
+Last updated 2026-10-15 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-07-17 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-10-15 UTC."],[],[]]

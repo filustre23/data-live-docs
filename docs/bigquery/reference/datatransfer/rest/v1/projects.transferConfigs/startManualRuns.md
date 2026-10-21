@@ -27,7 +27,7 @@ If scheduling a single run, it is set to execute immediately (scheduleTime equal
 
 ### HTTP request
 
-Choose a location:
+Choose an endpoint:
 
 global asia-south1 asia-south2 europe-west1 europe-west2 europe-west3 europe-west4 europe-west6 europe-west8 europe-west9 me-central2 northamerica-northeast1 northamerica-northeast2 us-central1 us-central2 us-east1 us-east4 us-east5 us-east7 us-south1 us-west1 us-west2 us-west3 us-west4 us-west8
 
@@ -47,13 +47,14 @@ The request body contains data with the following structure:
 
 | JSON representation |
 | --- |
-| ``` {    // Union field time can be only one of the following:   "requestedTimeRange": {     object (TimeRange)   },   "requestedRunTime": string   // End of list of possible types for union field time. } ``` |
+| ``` {    // The following is a list of mutually exclusive fields. At most one of the   // fields will be set in a response:   "requestedTimeRange": {     object (TimeRange)   },   "requestedRunTime": string   // End of mutually exclusive fields. } ``` |
 
 | Fields | |
 | --- | --- |
-| Union field `time`. The requested time specification - this can be a time range or a specific run\_time. `time` can be only one of the following: | |
+| The requested time specification - this can be a time range or a specific run\_time. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response: | |
 | `requestedTimeRange` | `object (TimeRange)`  A time\_range start and end timestamp for historical data files or reports that are scheduled to be transferred by the scheduled transfer run. requestedTimeRange must be a past time and cannot include future time values. |
 | `requestedRunTime` | `string (Timestamp format)`  A runTime timestamp for historical data files or reports that are scheduled to be transferred by the scheduled transfer run. requestedRunTime must be a past time and cannot include future time values. |
+| End of mutually exclusive fields. | |
 
 ### Response body
 
@@ -74,11 +75,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-05-12 UTC.
+Last updated 2026-09-11 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-12 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-09-11 UTC."],[],[]]

@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -107,6 +107,74 @@ public class ListJobs {
       System.out.println("Jobs not listed in dataset due to error: \n" + e.toString());
     }
   }
+}
+```
+
+### Python
+
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+
+```
+from google.cloud import bigquery
+
+import datetime
+
+# Construct a BigQuery client object.
+client = bigquery.Client()
+
+# List the 10 most recent jobs in reverse chronological order.
+# Omit the max_results parameter to list jobs from the past 6 months.
+print("Last 10 jobs:")
+for job in client.list_jobs(max_results=10):  # API request(s)
+    print("{}".format(job.job_id))
+
+# The following are examples of additional optional parameters:
+
+# Use min_creation_time and/or max_creation_time to specify a time window.
+print("Jobs from the last ten minutes:")
+ten_mins_ago = datetime.datetime.utcnow() - datetime.timedelta(minutes=10)
+for job in client.list_jobs(min_creation_time=ten_mins_ago):
+    print("{}".format(job.job_id))
+
+# Use all_users to include jobs run by all users in the project.
+print("Last 10 jobs run by all users:")
+for job in client.list_jobs(max_results=10, all_users=True):
+    print("{} run by user: {}".format(job.job_id, job.user_email))
+
+# Use state_filter to filter by job state.
+print("Last 10 jobs done:")
+for job in client.list_jobs(max_results=10, state_filter="DONE"):
+    print("{}".format(job.job_id))
+```
+
+### Rust
+
+```
+use futures::stream::StreamExt;
+use google_cloud_bigquery_v2::client::JobService;
+use google_cloud_gax::paginator::ItemPaginator;
+
+pub async fn sample(project_id: &str) -> anyhow::Result<()> {
+    let job_service = JobService::builder().build().await?;
+
+    // Cut off at 20 jobs to avoid paginating through the entire project history.
+    let mut jobs = job_service
+        .list_jobs()
+        .set_project_id(project_id)
+        .set_max_results(20)
+        .by_item()
+        .into_stream()
+        .take(20);
+
+    while let Some(job) = jobs.next().await.transpose()? {
+        if let Some(job_ref) = job.job_reference {
+            println!("Job ID: {}", job_ref.job_id);
+        }
+    }
+
+    Ok(())
 }
 ```
 

@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -16,21 +16,21 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 生成及搜尋多模態嵌入項目
 
-本教學課程說明如何使用 BigQuery 和 Gemini Enterprise Agent Platform，為圖片和文字生成多模態嵌入，然後使用這些嵌入執行文字轉圖像語意搜尋。
+本教學課程說明如何使用 BigQuery 和 Gemini Enterprise Agent Platform，為圖片和文字生成多模態嵌入項目，然後使用這些嵌入項目執行文字轉圖像語意搜尋。
 
-本教學課程涵蓋下列工作：
+本教學課程涵蓋下列作業：
 
 * 在 Cloud Storage bucket 中的圖片資料上建立 [BigQuery 物件資料表](https://docs.cloud.google.com/bigquery/docs/object-table-introduction?hl=zh-tw)。
-* 使用 [BigQuery 中的 Colab Enterprise 筆記本](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction?hl=zh-tw)探索圖片資料。
-* 建立以 [Gemini Enterprise Agent Platform `multimodalembedding` 基礎模型](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models?hl=zh-tw#foundation_model_apis)為目標的 BigQuery ML[遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw)。
-* 使用遠端模型和 [`AI.GENERATE_EMBEDDING` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding?hl=zh-tw)，從物件資料表中的圖片產生嵌入。
+* 在 [BigQuery 中使用 Colab Enterprise 筆記本](https://docs.cloud.google.com/bigquery/docs/programmatic-analysis?hl=zh-tw)探索圖片資料。
+* 建立以 [Gemini Enterprise Agent Platform `multimodalembedding` 基礎模型](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models?hl=zh-tw#foundation_model_apis)為目標的 BigQuery ML [遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw)。
+* 使用 [`AI.GENERATE_EMBEDDING` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding?hl=zh-tw)搭配遠端模型，從物件資料表中的圖片生成嵌入。
 * 修正任何嵌入生成錯誤。
-* 選擇性步驟：建立[向量索引](https://docs.cloud.google.com/bigquery/docs/vector-index?hl=zh-tw)，為圖片嵌入項目建立索引。
+* 視需要建立[向量索引](https://docs.cloud.google.com/bigquery/docs/vector-index?hl=zh-tw)，為圖片嵌入項目建立索引。
 * 為指定搜尋字串建立文字嵌入。
-* 使用 [`VECTOR_SEARCH` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions?hl=zh-tw#vector_search)，對與文字嵌入類似的圖片嵌入執行語意搜尋。
+* 使用 [`VECTOR_SEARCH` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions?hl=zh-tw#vector_search)，對與文字嵌入相似的圖片嵌入執行語意搜尋。
 * 使用筆記本將結果製成圖表。
 
-本教學課程使用[大都會藝術博物館](https://www.metmuseum.org/)的公共領域藝術圖像，這些圖像位於公開的 Cloud Storage [`gcs-public-data--met` bucket](https://console.cloud.google.com/storage/browser/gcs-public-data--met;tab=objects?amp%3BforceOnObjectsSortingFiltering=false&hl=zh-tw)。
+本教學課程使用[大都會藝術博物館](https://www.metmuseum.org/)的公共領域藝術圖片，這些圖片位於公開的 Cloud Storage [`gcs-public-data--met` bucket](https://console.cloud.google.com/storage/browser/gcs-public-data--met;tab=objects?amp%3BforceOnObjectsSortingFiltering=false&hl=zh-tw)。
 
 ## 必要的角色
 
@@ -72,7 +72,7 @@ Google uses AI technology to translate content into your preferred language. AI 
   + `dataform.locations.list`
   + `dataform.repositories.create`  
       
-    擁有 `dataform.repositories.create` 權限的使用者，可以使用預設的 Dataform 服務帳戶和授予該服務帳戶的所有權限執行程式碼。詳情請參閱「[Dataform 權限的安全考量](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#security-considerations-permissions)」。
+    擁有 `dataform.repositories.create` 權限的使用者，可以使用預設的 Dataform 服務帳戶執行程式碼，並取得授予該服務帳戶的所有權限。詳情請參閱「[Dataform 權限的安全性考量](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#security-considerations-permissions)」。
   + `dataform.repositories.list`
   + `dataform.collections.create`
   + `dataform.collections.list`
@@ -101,9 +101,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 初次使用 Google Cloud 的使用者可能符合[免費試用期](https://docs.cloud.google.com/free?hl=zh-tw)資格。
 
-如要進一步瞭解 BigQuery 定價，請參閱 BigQuery 說明文件中的「[BigQuery 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw)」一文。
+如要進一步瞭解 BigQuery 定價，請參閱 BigQuery 說明文件中的「[BigQuery 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw)」。
 
-如要進一步瞭解 Agent Platform 計價方式，請參閱[這個頁面](https://cloud.google.com/vertex-ai/pricing?hl=zh-tw#generative_ai_models)。
+如要進一步瞭解 Agent Platform 計價方式，請參閱「[Agent Platform 計價方式](https://cloud.google.com/vertex-ai/pricing?hl=zh-tw#generative_ai_models)」頁面。
 
 ## 事前準備
 
@@ -112,41 +112,46 @@ Google uses AI technology to translate content into your preferred language. AI 
    **選取或建立專案所需的角色**
 
    * **選取專案**：選取專案時，不需要具備特定 IAM 角色，只要您在專案中獲派角色，即可選取該專案。
-   * **建立專案**：如要建立專案，您需要專案建立者角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   * **建立專案**：如要建立專案，您需要「專案建立者」角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
    **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，而不要選取現有專案。完成這些步驟後，您就可以刪除專案，並移除與該專案相關聯的所有資源。
 
    [前往專案選取器](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
 2. [確認專案已啟用計費功能 Google Cloud](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project) 。
-3. 啟用 BigQuery、BigQuery Connection 和 Agent Platform API。
+3. 啟用 BigQuery、BigQuery Connection 和 Agent Platform API (如果尚未啟用)。
 
    **啟用 API 時所需的角色**
 
-   您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用情形管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   如要啟用 API，您必須具備 `serviceusage.services.enable` 權限。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用情形管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
    [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery.googleapis.com%2Cbigqueryconnection.googleapis.com%2Caiplatform.googleapis.com&hl=zh-tw)
 
 ## 建立資料集
 
-建立 BigQuery 資料集來儲存機器學習模型。
+如要建立 BigQuery 資料集，請選取下列任一選項：
 
 ### 控制台
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
-   [前往 BigQuery 頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在「Explorer」窗格中，按一下專案名稱。
-3. 依序點按 more\_vert「View actions」(查看動作) >「Create dataset」(建立資料集)。
-4. 在「建立資料集」頁面中，執行下列操作：
+   [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
+2. 點選左側窗格中的 explore「Explorer」。
+
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
+3. 在「Explorer」中展開專案，然後按一下「Datasets」。
+4. 在「資料集」頁面，按一下 add「建立資料集」。
+5. 在「建立資料集」窗格中，執行下列操作：
 
    * 在「Dataset ID」(資料集 ID) 中輸入 `bqml_tutorial`。
-   * 針對「Location type」(位置類型) 選取「Multi-region」(多區域)，然後選取「US」(美國)。
-   * 其餘設定請保留預設狀態，然後按一下「建立資料集」。
+   * 選取「資料位置」的「美國」。
+
+   其餘預設設定均保留原樣。
+6. 點選「建立資料集」。
 
 ### bq
 
 如要建立新的資料集，請使用 [`bq mk --dataset` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#mk-dataset)。
 
-1. 建立名為 `bqml_tutorial` 的資料集，並將資料位置設為 `US`。
+1. 建立名為 `bqml_tutorial` 的資料集，並將資料位置設為 `US`：
 
    ```
    bq mk --dataset \
@@ -162,7 +167,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### API
 
-請呼叫 [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert?hl=zh-tw) 方法，搭配已定義的[資料集資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets?hl=zh-tw)。
+使用已定義的[資料集資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets?hl=zh-tw)呼叫 [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert?hl=zh-tw) 方法：
 
 ```
 {
@@ -174,7 +179,8 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 建立物件資料表
 
-在公開的 Cloud Storage [`gcs-public-data--met` bucket](https://console.cloud.google.com/storage/browser/gcs-public-data--met;tab=objects?amp%3BforceOnObjectsSortingFiltering=false&hl=zh-tw) 中，針對藝術圖片建立物件資料表。有了物件資料表，您就能分析圖片，不必將圖片從 Cloud Storage 移出。
+在公開的 Cloud Storage [`gcs-public-data--met` bucket](https://console.cloud.google.com/storage/browser/gcs-public-data--met;tab=objects?amp%3BforceOnObjectsSortingFiltering=false&hl=zh-tw) 中，針對藝術圖片建立物件資料表。
+有了物件表格，您就能分析圖片，不必將圖片從 Cloud Storage 移出。
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -202,7 +208,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 4. 設定筆記本：
 
    1. 在筆記本中新增程式碼儲存格。
-   2. 複製下列程式碼，並貼到程式碼儲存格：
+   2. 複製下列程式碼並貼到程式碼儲存格：
 
       ```
       #@title Set up credentials
@@ -218,10 +224,10 @@ Google uses AI technology to translate content into your preferred language. AI 
 
       將 `PROJECT_ID` 替換為您在本教學課程中使用的專案名稱。
    3. 執行程式碼儲存格。
-5. 啟用表格顯示功能：
+5. 啟用表格顯示：
 
    1. 在筆記本中新增程式碼儲存格。
-   2. 複製下列程式碼，並貼到程式碼儲存格：
+   2. 複製下列程式碼並貼到程式碼儲存格：
 
       ```
       #@title Enable data table display
@@ -231,7 +237,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 6. 建立函式來顯示圖片：
 
    1. 在筆記本中新增程式碼儲存格。
-   2. 複製下列程式碼，並貼到程式碼儲存格：
+   2. 複製下列程式碼並貼到程式碼儲存格：
 
       ```
       #@title Util function to display images
@@ -263,7 +269,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 7. 顯示圖片：
 
    1. 在筆記本中新增程式碼儲存格。
-   2. 複製下列程式碼，並貼到程式碼儲存格：
+   2. 複製下列程式碼並貼到程式碼儲存格：
 
       ```
       #@title Display Met images
@@ -284,7 +290,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 建立遠端模型
 
-建立遠端模型，代表託管的 Agent Platform 多模態嵌入模型：
+建立遠端模型，代表代管的 Agent Platform 多模態嵌入模型：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -297,11 +303,11 @@ Google uses AI technology to translate content into your preferred language. AI 
      OPTIONS (ENDPOINT = 'gemini-embedding-2-preview');
    ```
 
-   查詢會在幾秒內完成，之後您就能存取 `bqml_tutorial` 資料集中顯示的 `multimodal_embedding_model` 模型。由於查詢是使用 `CREATE MODEL` 陳述式建立模型，因此不會有查詢結果。
+   查詢會在幾秒內完成，之後您就能存取 `bqml_tutorial` 資料集中顯示的 `multimodal_embedding_model` 模型。由於查詢使用 `CREATE MODEL` 陳述式建立模型，因此沒有查詢結果。
 
 ## 生成圖片嵌入
 
-使用 [`AI.GENERATE_EMBEDDING` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding?hl=zh-tw)從物件資料表中的圖片產生嵌入內容，然後將這些內容寫入資料表，以供後續步驟使用。產生嵌入內容的作業成本高昂，因此查詢會使用包含 `LIMIT` 子句的子查詢，將嵌入內容的產生限制為 10,000 張圖片，而不是嵌入 601,294 張圖片的完整資料集。這也有助於將圖片數量控制在 `AI.GENERATE_EMBEDDING` 函式的 25,000 張上限內。這項查詢大約需要 40 分鐘才能執行完畢。
+使用 [`AI.GENERATE_EMBEDDING` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding?hl=zh-tw)，從物件資料表中的圖片產生嵌入，然後將這些嵌入寫入資料表，以供後續步驟使用。產生嵌入內容的作業成本高昂，因此查詢會使用包含 `LIMIT` 子句的子查詢，將嵌入內容的產生限制為 10,000 張圖片，而不是嵌入 601,294 張圖片的完整資料集。這也有助於將圖片數量控制在 `AI.GENERATE_EMBEDDING` 函式的 25,000 張上限內。這項查詢大約需要 40 分鐘才能執行完畢。
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -320,14 +326,14 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 修正任何嵌入生成錯誤
 
-檢查並修正任何嵌入生成錯誤。由於 [Agent Platform 生成式 AI 配額](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/quotas?hl=zh-tw)或服務無法使用，因此可能無法生成嵌入內容。
+檢查並修正任何嵌入生成錯誤。由於 [Agent Platform 生成式 AI 配額](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/quotas?hl=zh-tw)或服務無法使用，導致無法生成嵌入內容。
 
 `AI.GENERATE_EMBEDDING` 函式會在 `status` 欄中傳回錯誤詳細資料。如果成功產生嵌入內容，這個資料欄會是空白；如果產生失敗，則會顯示錯誤訊息。
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在查詢編輯器中執行下列查詢，查看是否有任何嵌入生成失敗：
+2. 在查詢編輯器中執行下列查詢，查看是否有任何嵌入生成失敗的情況：
 
    ```
    SELECT DISTINCT(status),
@@ -335,7 +341,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    FROM bqml_tutorial.met_image_embeddings
    GROUP BY 1;
    ```
-3. 如果傳回含有錯誤的資料列，請捨棄任何無法產生嵌入內容的資料列：
+3. 如果傳回含有錯誤的資料列，請捨棄任何產生嵌入失敗的資料列：
 
    ```
    DELETE FROM `bqml_tutorial.met_image_embeddings`
@@ -344,7 +350,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 建立向量索引
 
-您可以視需要使用 [`CREATE VECTOR INDEX` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#create_vector_index_statement)，在 `met_images_embeddings` 資料表的 `embedding` 資料欄上建立 `met_images_index` 向量索引。向量索引可加快向量搜尋速度，但會降低召回率，因此傳回的結果會更近似。
+您可以視需要使用 [`CREATE VECTOR INDEX` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#create_vector_index_statement)，在 `met_images_embeddings` 資料表的 `embedding` 欄上建立 `met_images_index` 向量索引。向量索引可加快向量搜尋速度，但會降低召回率，因此傳回的結果會更近似。
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -389,7 +395,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    );
    ```
 
-## 執行文字轉圖像語意搜尋
+## 執行文字轉圖像的語意搜尋
 
 使用 [`VECTOR_SEARCH` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions?hl=zh-tw#vector_search)，根據文字嵌入所代表的搜尋字串，執行語意搜尋，找出最相符的圖片。
 
@@ -410,18 +416,18 @@ Google uses AI technology to translate content into your preferred language. AI 
        top_k => 3);
    ```
 
-## 以視覺化方式呈現語意搜尋結果
+## 以圖表呈現語意搜尋結果
 
-使用筆記本以視覺化的方式顯示語意搜尋結果。
+使用筆記本以視覺化的方式呈現語意搜尋結果。
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 開啟先前建立的 `met-image-analysis` 筆記本。
-3. 以視覺化方式呈現向量搜尋結果：
+2. 開啟您先前建立的 `met-image-analysis` 筆記本。
+3. 以圖表呈現向量搜尋結果：
 
    1. 在筆記本中新增程式碼儲存格。
-   2. 複製下列程式碼，並貼到程式碼儲存格：
+   2. 複製下列程式碼並貼到程式碼儲存格：
 
       ```
       query = """
@@ -457,11 +463,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-16 (世界標準時間)。
+上次更新時間：2026-10-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-16 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]

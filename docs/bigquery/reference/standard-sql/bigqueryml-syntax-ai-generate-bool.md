@@ -127,8 +127,8 @@ AI.GENERATE_BOOL(
   BigQuery ML automatically identifies and uses the full endpoint
   of the model. If you don't specify an `ENDPOINT` value,
   BigQuery ML selects a recent stable version of
-  Gemini to use. Currently, the default endpoint is
-  `gemini-2.5-flash`.
+  Gemini to use. The default endpoint is
+  `gemini-3.5-flash-lite`.
   You can also specify the
   [global endpoint](/vertex-ai/generative-ai/docs/learn/locations#use_the_global_endpoint).
   For example, specify the following endpoint:
@@ -141,9 +141,29 @@ AI.GENERATE_BOOL(
   processing location, because when you use the global endpoint, you can't
   control or know the region where your processing requests are handled.
 
-  Agent Platform doesn't support regional endpoints for
-  Gemini 3 models. For these models, use `global`, `us`, or
-  `eu` as the location.
+  BigQuery supports the following models:
+  + `gemini-4-argon`
+  + `gemini-3.8-flash`
+  + `gemini-3.7-flash`
+  + `gemini-3.6-flash`
+  + `gemini-3.5-flash-lite`
+  + `gemini-3.5-flash`
+  + `gemini-3.1-flash-lite`Agent Platform only supports multi-regional endpoints for
+  these models. Regional endpoints aren't supported.
+  If you specify a short endpoint name that omits the region, such as `gemini-3.5-flash`,
+  then BigQuery selects an endpoint according to the following rules:
+  + If your query is run in the `us` region, or any single region in the US, then
+    BigQuery uses the `us` endpoint.
+  + If your query is run in the `eu` region, or any single region in the EU other than
+    `europe-west2` or `europe-west6`, then BigQuery
+    uses the `eu` endpoint.
+  + For all other locations, including `europe-west2` and
+    `europe-west6`, BigQuery uses the `global` endpoint.To specify a specific endpoint, use a fully qualified multi-regional endpoint name in one of the
+  following formats:
+  + `https://aiplatform.us.rep.googleapis.com/v1/projects/PROJECT_ID/locations/us/publishers/google/models/MODEL_ID`
+  + `https://aiplatform.eu.rep.googleapis.com/v1/projects/PROJECT_ID/locations/eu/publishers/google/models/MODEL_ID`
+  + `https://aiplatform.googleapis.com/v1/projects/PROJECT_ID/locations/global/publishers/google/models/MODEL_ID`If your query runs in the `asia-south1` region, then you must use the fully qualified
+  global endpoint name.
 
   Using Gemini 2.5 and later models incurs charges for the
   [thinking process](/vertex-ai/generative-ai/docs/thinking).
@@ -225,7 +245,7 @@ by running the following query:
 ```
 SELECT
   city,
-  AI.GENERATE_BOOL(('Is ', city, ' a US city?'), endpoint => 'gemini-2.5-pro').result
+  AI.GENERATE_BOOL(('Is ', city, ' a US city?')).result
 FROM UNNEST(["Seattle", "Beijing", "Paris", "London"]) city;
 ```
 
@@ -253,11 +273,11 @@ to summarize the filtered articles:
 ```
 SELECT
   title,
-  AI.GENERATE((body, "Summarize the article in a single sentence."), endpoint => 'gemini-2.5-pro').result
+  AI.GENERATE((body, "Summarize the article in a single sentence.")).result
 FROM `bigquery-public-data.bbc_news.fulltext`
 WHERE
   AI.GENERATE_BOOL(
-    (body, "Is this news article focused on US technology? "), endpoint => 'gemini-2.5-pro').result
+    (body, "Is this news article focused on US technology? ")).result
   AND category = "tech"
 LIMIT 3;
 ```
@@ -295,7 +315,7 @@ and select the `result` field in the output by running the following query:
 SELECT
   uri,
   OBJ.GET_READ_URL(ref).url AS signed_url,
-  AI.GENERATE_BOOL(("Is this cat food?", ref), endpoint => 'gemini-2.5-pro').result
+  AI.GENERATE_BOOL(("Is this cat food?", ref)).result
 FROM bqml_tutorial.product_images
 WHERE uri LIKE '%cat%';
 ```
@@ -317,7 +337,6 @@ model's thinking budget to `0` for the request:
 SELECT
   city,
   AI.GENERATE_BOOL(('Is ', city, ' a US city?'),
-    endpoint => 'gemini-2.5-pro',
     model_params => JSON '{"generation_config":{"thinking_config": {"thinking_budget": 0}}}')
 FROM mydataset.cities;
 ```
@@ -343,96 +362,4 @@ the token count of text input, use the
 You can use
 [Agent Platform Provisioned Throughput](/vertex-ai/generative-ai/docs/provisioned-throughput/overview)
 with the `AI.GENERATE_BOOL` function to provide consistent high throughput for
-requests. The remote model that you reference in the `AI.GENERATE_BOOL` function
-must use a
-[supported Gemini model](/vertex-ai/generative-ai/docs/provisioned-throughput/supported-models)
-in order for you to use Provisioned Throughput.
-
-To use Provisioned Throughput,
-[calculate your Provisioned Throughput requirements](/vertex-ai/generative-ai/docs/provisioned-throughput/measure-provisioned-throughput)
-and then
-[purchase Provisioned Throughput](/vertex-ai/generative-ai/docs/provisioned-throughput/purchase-provisioned-throughput)
-quota before running the `AI.GENERATE_BOOL` function. When you purchase
-Provisioned Throughput, do the following:
-
-* For **Model**, select the same Gemini model as the one used
-  by the remote model that you reference in the `AI.GENERATE_BOOL` function.
-* For **Region**, select the same region as the dataset that contains
-  the remote model that you reference in the `AI.GENERATE_BOOL` function, with
-  the following exceptions:
-
-  + If the dataset is in the `US` multi-region, select the `us-central1`
-    region.
-  + If the dataset is in the `EU` multi-region, select the `europe-west4`
-    region.
-
-After you submit the order, wait for the order to be approved and appear on the
-[**Orders**](https://console.cloud.google.com/vertex-ai/provisioned-throughput) page.
-
-After you have purchased Provisioned Throughput quota, use the
-`REQUEST_TYPE` argument to determine how the `AI.GENERATE_BOOL` function uses
-the quota.
-
-## Related functions
-
-The [`AI.IF`](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-if) and
-[`AI.GENERATE_BOOL`](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-bool)
-functions both use models to generate a
-boolean value in response to a prompt. The following differences can help you
-choose which function to use:
-
-* **Optimized mode**: `AI.IF` supports [optimized mode](/bigquery/docs/optimize-ai-functions),
-  which lets you process large-scale datasets with reduced cost and latency by
-  training a distilled model. `AI.GENERATE_BOOL` doesn't support optimized mode.
-* **Prompt Optimization**: `AI.IF` automatically
-  [structures](/vertex-ai/generative-ai/docs/learn/prompts/structure-prompts)
-  your prompts to improve the quality of the output.
-* **Input**: `AI.GENERATE_BOOL` lets you specify model parameters to use.
-* **Output**: `AI.IF` returns a `BOOL` value, which makes it easier to work with
-  in queries. `AI.GENERATE_BOOL` returns a `STRUCT` value that contains a `BOOL`
-  value, as well as additional information about the model call, which is useful
-  if you need to view details such as the [safety rating](/vertex-ai/generative-ai/docs/multimodal/configure-safety-filters)
-  or API response status.
-* **Error handling**: If `AI.IF` produces an error for any input, then the
-  function returns `NULL`. `AI.GENERATE_BOOL` records details about the
-  errors in its output.
-
-## Locations
-
-You can run `AI.GENERATE_BOOL` in all of the
-[regions](/vertex-ai/generative-ai/docs/learn/locations#google_model_endpoint_locations)
-that support Gemini models, and also in the `US` and `EU`
-multi-regions.
-
-## Quotas and limits
-
-For quota and limit information, see
-[Generative AI functions](/bigquery/quotas#generative_ai_functions) in the
-BigQuery quotas and limits reference.
-
-## What's next
-
-* For more information about using Agent Platform models to
-  generate text and embeddings, see
-  [Generative AI overview](/bigquery/docs/generative-ai-overview).
-* For more information about using Cloud AI APIs to perform AI tasks, see
-  [AI application overview](/bigquery/docs/ai-application-overview).
-* For more information about supported SQL statements and functions for
-  generative AI models, see
-  [End-to-end user journeys for generative AI models](/bigquery/docs/e2e-journey-genai).
-
-
-
-
-Send feedback
-
-Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
-
-Last updated 2026-07-17 UTC.
-
-
-
-
-Need to tell us more?
-
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-07-17 UTC."],[],[]]
+requests. The remote model that you reference in the

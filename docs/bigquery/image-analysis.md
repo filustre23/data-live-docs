@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -16,7 +16,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 分析圖片
 
-本教學課程說明如何整合 BigQuery ML 與 Gemini，從非結構化圖片資料取得洞察資訊。在本教學課程中，您將根據 [gemini-2.5-flash](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models?hl=zh-tw#gemini-models) 建立[遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw)，並使用 [`AI.GENERATE_TEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text?hl=zh-tw) 函式，從一系列電影海報中自動擷取中繼資料，例如片名和上映年份。
+本教學課程將說明如何整合 BigQuery ML 與 Gemini，從非結構化圖片資料取得洞察資訊。在本教學課程中，您將根據 [gemini-2.5-flash](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models?hl=zh-tw#gemini-models) 建立[遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw)，並使用 [`AI.GENERATE_TEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text?hl=zh-tw) 函式，從一系列電影海報中自動擷取中繼資料，例如片名和上映年份。
 
 ## 目標
 
@@ -42,16 +42,16 @@ Google uses AI technology to translate content into your preferred language. AI 
    **選取或建立專案所需的角色**
 
    * **選取專案**：選取專案時，不需要具備特定 IAM 角色，只要您在專案中獲派角色，即可選取該專案。
-   * **建立專案**：如要建立專案，您需要專案建立者角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   * **建立專案**：如要建立專案，您需要「專案建立者」角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
    **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，而不要選取現有專案。完成這些步驟後，您就可以刪除專案，並移除與該專案相關聯的所有資源。
 
    [前往專案選取器](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
 2. [確認專案已啟用計費功能 Google Cloud](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project) 。
-3. 啟用 BigQuery、BigQuery Connection 和 Agent Platform API。
+3. 啟用 BigQuery、BigQuery Connection 和 Agent Platform API (如果尚未啟用)。
 
    **啟用 API 時所需的角色**
 
-   您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用情形管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   如要啟用 API，您必須具備 `serviceusage.services.enable` 權限。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用情形管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
    [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery.googleapis.com%2Cbigqueryconnection.googleapis.com%2Caiplatform.googleapis.com&hl=zh-tw)
 
@@ -59,7 +59,8 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 如要執行本教學課程，您需要下列 Identity and Access Management (IAM) 角色：
 
-* 建立及使用 BigQuery 資料集、連線和模型：BigQuery 管理員 (`roles/bigquery.admin`)。
+* 建立及使用 BigQuery 資料集、連線和模型：
+  BigQuery 管理員 (`roles/bigquery.admin`)。
 * 將權限授予連線的服務帳戶：專案 IAM 管理員 (`roles/resourcemanager.projectIamAdmin`)。
 
 這些預先定義的角色具備執行本文中工作所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
@@ -87,7 +88,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 準備環境
 
-如要使用 [gemini-2.5-flash](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models?hl=zh-tw#gemini-models) 對物件資料表執行 BigQuery ML 推論，請將 BigQuery 預留項目指派給專案。如果專案已指派預留項目，可以略過這個步驟。
+如要使用 [gemini-2.5-flash](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models?hl=zh-tw#gemini-models) 對物件資料表執行 BigQuery ML 推論作業，請將 BigQuery 預留項目指派給專案。如果專案已指派預留項目，可以略過這個步驟。
 
 ### 建立預留項目
 
@@ -109,33 +110,38 @@ Google uses AI technology to translate content into your preferred language. AI 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 按一下導覽選單中的「工作負載管理」。
 3. 在「運算單元預留項目」表格中，找出要指派給專案的預留項目。
-4. 依序點按 more\_vert「查看動作」**>「建立指派項目」**。
-5. 在「Create an assignment」(建立指派作業) 中，按一下「Browse」(瀏覽)，然後選取您的專案。
-6. 在「Job type」(工作類型) 區段選取「QUERY」(查詢)。選取這個選項，即可確保 SQL 查詢使用這個預留項目的運算單元。
+4. 依序點選 more\_vert「查看動作」**>「建立作業」**。
+5. 在「建立指派作業」中，按一下「瀏覽」並選取專案。
+6. 在「Job type」(工作類型) 區段選取「QUERY」(查詢)。選取這個選項可確保 SQL 查詢使用此預留項目的運算單元。
 7. 點選「建立」。
 
 ## 建立資料集
 
-建立 BigQuery 資料集來儲存機器學習模型。
+如要建立 BigQuery 資料集，請選取下列任一選項：
 
 ### 控制台
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
-   [前往 BigQuery 頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在「Explorer」窗格中，按一下專案名稱。
-3. 依序點按 more\_vert「View actions」(查看動作) >「Create dataset」(建立資料集)。
-4. 在「建立資料集」頁面中，執行下列操作：
+   [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
+2. 點選左側窗格中的 explore「Explorer」。
+
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
+3. 在「Explorer」中展開專案，然後按一下「Datasets」。
+4. 在「資料集」頁面，按一下 add「建立資料集」。
+5. 在「建立資料集」窗格中，執行下列操作：
 
    * 在「Dataset ID」(資料集 ID) 中輸入 `bqml_tutorial`。
-   * 針對「Location type」(位置類型) 選取「Multi-region」(多區域)，然後選取「US」(美國)。
-   * 其餘設定請保留預設狀態，然後按一下「建立資料集」。
+   * 選取「資料位置」的「美國」。
+
+   其餘預設設定均保留原樣。
+6. 點選「建立資料集」。
 
 ### bq
 
 如要建立新的資料集，請使用 [`bq mk --dataset` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#mk-dataset)。
 
-1. 建立名為 `bqml_tutorial` 的資料集，並將資料位置設為 `US`。
+1. 建立名為 `bqml_tutorial` 的資料集，並將資料位置設為 `US`：
 
    ```
    bq mk --dataset \
@@ -151,7 +157,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### API
 
-請呼叫 [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert?hl=zh-tw) 方法，搭配已定義的[資料集資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets?hl=zh-tw)。
+使用已定義的[資料集資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets?hl=zh-tw)呼叫 [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert?hl=zh-tw) 方法：
 
 ```
 {
@@ -163,7 +169,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 建立物件資料表
 
-在公開的 Cloud Storage [bucket](https://console.cloud.google.com/storage/browser/cloud-samples-data/vertex-ai/dataset-management/datasets/classic-movie-posters;tab=objects?amp%3BforceOnObjectsSortingFiltering=false&hl=zh-tw) 中，為電影海報圖片建立物件資料表。
+在公開 Cloud Storage [bucket](https://console.cloud.google.com/storage/browser/cloud-samples-data/vertex-ai/dataset-management/datasets/classic-movie-posters;tab=objects?amp%3BforceOnObjectsSortingFiltering=false&hl=zh-tw) 中，為電影海報圖片建立物件資料表。
 您可以使用物件表格分析圖片，不必將圖片從 Cloud Storage 移出。
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
@@ -182,7 +188,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 建立遠端模型
 
-建立遠端模型，代表 Agent Platform 模型：`gemini-2.5-flash`
+建立代表 Agent Platform `gemini-2.5-flash` 模型的遠端模型：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -195,8 +201,7 @@ Google uses AI technology to translate content into your preferred language. AI 
      OPTIONS (ENDPOINT = 'gemini-2.5-flash');
    ```
 
-   查詢作業可能需要幾分鐘才能完成，完成後，`gemini-vision` 模型會顯示在「Explorer」 窗格的 `bqml_tutorial` 資料集中。
-   由於查詢使用 `CREATE MODEL` 陳述式建立模型，因此不會有查詢結果。
+   查詢可能需要幾分鐘才能完成，完成後，`gemini-vision` 模型會顯示在「Explorer」窗格的 `bqml_tutorial` 資料集中。由於查詢使用 `CREATE MODEL` 陳述式建立模型，因此沒有查詢結果。
 
 ## 分析電影海報
 
@@ -316,7 +321,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### 刪除個別資源
 
-如要重複使用專案，請刪除您在教學課程中建立的資源。
+如要重複使用專案，請刪除您為本教學課程建立的資源。
 
 #### 刪除資料集
 
@@ -340,7 +345,7 @@ bq rm -r bqml_tutorial
 
 ### 控制台
 
-如果您在本教學課程中建立了 BigQuery 預留項目，請移除該項目，以免繼續產生運算單元費用。
+如果您在本教學課程中建立了 BigQuery 預留項目，請移除該項目，以免持續產生運算單元費用。
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -366,7 +371,7 @@ bq rm --reservation --location=us bqml-tutorial-reservation
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 在左側窗格中，依序點選 explore「Explorer」、專案和「Connections」。
 3. 在表格中找出連線。
-4. 依序點選 more\_vert「查看動作」**> 刪除**。
+4. 依序點選 more\_vert「查看動作」**>「刪除」**。
 
 ### bq
 
@@ -381,7 +386,7 @@ bq rm --connection --location=us CONNECTION_ID
 ## 後續步驟
 
 * 進一步瞭解 [BigQuery 中的生成式 AI 函式](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview?hl=zh-tw)。
-* 瞭解如何[使用資料調整模型](https://docs.cloud.google.com/bigquery/docs/generate-text-tuning?hl=zh-tw)。
+* 瞭解如何[調整及評估模型](https://docs.cloud.google.com/bigquery/docs/tune-evaluate?hl=zh-tw)。
 * 查看 Google Cloud 的參考架構、圖表和最佳做法。
   歡迎瀏覽我們的 [Cloud Architecture Center](https://docs.cloud.google.com/architecture?hl=zh-tw)。
 
@@ -392,11 +397,11 @@ bq rm --connection --location=us CONNECTION_ID
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-16 (世界標準時間)。
+上次更新時間：2026-10-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-16 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]

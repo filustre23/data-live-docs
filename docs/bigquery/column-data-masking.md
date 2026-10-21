@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -16,29 +16,29 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 遮蓋資料欄資料
 
-本文說明如何實作資料遮蓋，有選擇性地遮蓋敏感資料。實作資料遮蓋功能後，您就能為不同使用者群組提供不同層級的資料檢視權限。如需一般資訊，請參閱「[資料遮蓋簡介](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro?hl=zh-tw)」。
+本文說明如何實作資料遮蓋，有選擇性地遮蓋機密資料。實作資料遮蓋功能後，您就能為不同使用者群組提供不同程度的資料檢視權限。如需一般資訊，請參閱「[資料遮蓋簡介](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro?hl=zh-tw)」。
 
 如要導入資料遮蓋功能，請在資料欄中新增資料政策。如要為資料欄新增資料遮蓋政策，請完成下列步驟：
 
 1. 建立至少包含一個政策標記的分類。
-2. 選用：在您建立的一或多個政策標記上，將 Data Catalog 精細讀取者角色授予一或多個主體。
+2. 選用：對您建立的一或多個政策標記，將 Data Catalog 精細讀取者角色授予一或多個主體。
 3. 為政策標記建立最多三項資料政策，將遮蓋規則和主體 (代表使用者或群組) 對應至該標記。
 4. 在資料欄上設定政策標記。將與政策標記相關聯的資料政策對應至所選資料欄。
-5. 將 BigQuery「經過遮蓋的讀取者」角色指派給應有權存取遮蓋資料的使用者。最佳做法是在資料政策層級指派 BigQuery 遮蓋讀取者角色。在專案層級以上指派角色，會授予使用者專案下所有資料政策的權限，可能導致權限過多而引發問題。
+5. 將 BigQuery 遮蓋讀取者角色指派給應有權存取遮蓋資料的使用者。最佳做法是在資料政策層級指派 BigQuery 遮蓋讀取者角色。在專案層級或更高等級指派角色，會授予使用者專案中所有資料政策的權限，這可能會導致權限過多而引發問題。
 
 您可以使用 Google Cloud 控制台或 BigQuery Data Policy API 來處理資料政策。
 
-完成上述步驟後，使用者對資料欄執行查詢時，會根據所屬群組和獲派角色，取得未遮蓋的資料、遮蓋的資料或存取遭拒錯誤。詳情請參閱「[遮蓋讀者和精細讀者角色如何互動](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro?hl=zh-tw#role-interaction)」。
+完成上述步驟後，使用者對資料欄執行查詢時，會根據所屬群組和獲派的角色，取得未遮蓋的資料、遮蓋的資料或存取遭拒錯誤。詳情請參閱「[受遮蓋讀取者和精細讀取者角色如何互動](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro?hl=zh-tw#role-interaction)」。
 
 或者，您也可以直接在資料欄上套用資料政策。詳情請參閱「[直接在資料欄上使用資料政策遮蓋資料](#data-policies-on-column)」。
 
 ## 使用政策標記遮蓋資料
 
-使用政策標記選擇性遮蓋機密資料。
+使用政策標記選擇性遮蓋私密/機密資料。
 
 ### 事前準備
 
-- 登入 Google Cloud 帳戶。如果您是 Google Cloud新手，歡迎[建立帳戶](https://console.cloud.google.com/freetrial?hl=zh-tw)，親自評估產品在實際工作環境中的成效。新客戶還能獲得價值 $300 美元的免費抵免額，可用於執行、測試及部署工作負載。
+- 登入 Google Cloud 帳戶。如果您是 Google Cloud新手，歡迎[建立帳戶](https://console.cloud.google.com/freetrial?hl=zh-tw)，親自體驗產品的實際應用成效。新客戶還能獲得價值 $300 美元的免費抵免額，能用於執行、測試及部署工作負載。
 - In the Google Cloud console, on the project selector page,
   select or create a Google Cloud project.
 
@@ -58,7 +58,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
   [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
 - [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project).
-- Enable the Data Catalog and BigQuery Data Policy APIs.
+- Enable the Data Catalog and BigQuery Data Policy APIs, if any are not already enabled.
 
   **Roles required to enable APIs**
 
@@ -89,7 +89,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
   [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
 - [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project).
-- Enable the Data Catalog and BigQuery Data Policy APIs.
+- Enable the Data Catalog and BigQuery Data Policy APIs, if any are not already enabled.
 
   **Roles required to enable APIs**
 
@@ -103,25 +103,27 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 1. 新專案會自動啟用 BigQuery，但您可能需要在現有專案中啟用這項服務。
 
-   啟用 BigQuery API。
+   如果尚未啟用 BigQuery API，請啟用。
 
    **啟用 API 時所需的角色**
 
-   您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用情形管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   如要啟用 API，您必須具備 `serviceusage.services.enable` 權限。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
    [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery.googleapis.com&%3Bredirect=https%3A%2F%2Fconsole.cloud.google.com&hl=zh-tw)
 2. 如果您要建立的資料政策參照[自訂遮蓋常式](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro?hl=zh-tw#custom_mask)，請建立相關聯的遮蓋 UDF，以便在後續步驟中使用。
 
+**注意：** 如要建立及管理用於資料遮蓋和資料欄層級安全防護的 Data Catalog 政策標記和分類，必須保持啟用 `datacatalog.googleapis.com` API。雖然 Data Catalog 中繼資料搜尋和分類功能已淘汰，並改用 Knowledge Catalog，但政策標記的特定 Data Catalog API 功能並未淘汰。
+
 ### 可建立分類
 
-建立分類架構的使用者或服務帳戶必須獲派「Data Catalog 政策代碼管理員」角色。
+建立分類的使用者或服務帳戶必須獲派「Data Catalog 政策標記管理員」角色。
 
 ### 控制台
 
-1. 在Google Cloud 控制台中開啟「Policy tag taxonomies」(政策標記分類) 頁面。
+1. 前往 Google Cloud 控制台的「Policy tag taxonomies」(政策標記分類) 頁面。
 
-   [開啟「政策標記分類」頁面](https://console.cloud.google.com/bigquery/policy-tags?hl=zh-tw)
-2. 按一下「建立分類」。
+   [前往「政策標記分類」](https://console.cloud.google.com/bigquery/security/secure/policy-tags?hl=zh-tw)
+2. 按一下「建立分類法」。
 3. 在「New taxonomy」(新增分類) 頁面中：
 
    1. 在「分類名稱」部分，輸入要建立的分類名稱。
@@ -129,10 +131,10 @@ Google uses AI technology to translate content into your preferred language. AI 
    3. 如有需要，請變更「專案」下方列出的專案。
    4. 如有需要，請變更「位置」下方列出的位置。
    5. 在「政策標記」下方，輸入政策標記名稱和說明。
-   6. 如要為政策標記新增子項政策標記，請按一下「新增子項標記」。
-   7. 如要新增與其他政策標記同層級的政策標記，請點選「+ 新增政策標記」。
-   8. 視需要繼續為分類新增政策標記和子項政策標記。
-   9. 為階層建立完政策標記後，請按一下「建立」。
+   6. 如要為政策標記新增子政策標記，請點選「新增子標記」。
+   7. 如要在與其他政策標記相同的層級新增政策標記，請點選「+ 新增政策標記」。
+   8. 視需要繼續為分類架構新增政策標記和子項政策標記。
+   9. 為階層建立政策標記後，請按一下「建立」。
 
 ### API
 
@@ -140,8 +142,10 @@ Google uses AI technology to translate content into your preferred language. AI 
 [`taxonomies.import`](https://docs.cloud.google.com/data-catalog/docs/reference/rest/v1/projects.locations.taxonomies/import?hl=zh-tw)
 ，取代下列程序的前兩個步驟。
 
-1. 呼叫 [`taxonomies.create`](https://docs.cloud.google.com/data-catalog/docs/reference/rest/v1/projects.locations.taxonomies/create?hl=zh-tw) 建立分類。
-2. 呼叫 [`taxonomies.policytag.create`](https://docs.cloud.google.com/data-catalog/docs/reference/rest/v1/projects.locations.taxonomies.policyTags/create?hl=zh-tw) 建立政策標記。
+1. 呼叫 [`taxonomies.create`](https://docs.cloud.google.com/data-catalog/docs/reference/rest/v1/projects.locations.taxonomies/create?hl=zh-tw) 建立分類架構。
+2. 呼叫
+   [`taxonomies.policyTags.create`](https://docs.cloud.google.com/data-catalog/docs/reference/rest/v1/projects.locations.taxonomies.policyTags/create?hl=zh-tw)
+   建立政策標記。
 
 ### 使用政策標記
 
@@ -151,9 +155,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 建立資料政策的使用者或服務帳戶必須具備 `bigquery.dataPolicies.create`、`bigquery.dataPolicies.setIamPolicy` 和 `datacatalog.taxonomies.get` 權限。
 
-「BigQuery 資料政策管理員」、「BigQuery 管理員」和「BigQuery 資料擁有者」角色都具備 `bigquery.dataPolicies.create` 和 `bigquery.dataPolicies.setIamPolicy` 權限。「`datacatalog.taxonomies.get`」權限包含在 Data Catalog 管理員和 Data Catalog 檢視者角色中。
+「BigQuery 資料政策管理員」、「BigQuery 管理員」和「BigQuery 資料擁有者」角色都包含 `bigquery.dataPolicies.create` 和 `bigquery.dataPolicies.setIamPolicy` 權限。「Data Catalog 管理員」和「Data Catalog 檢視者」角色都包含 `datacatalog.taxonomies.get` 權限。
 
-如果您要建立的資料政策參照[自訂遮蓋常式](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro?hl=zh-tw#custom_mask)，則也需要[常式權限](https://docs.cloud.google.com/bigquery/docs/routines?hl=zh-tw#permissions)。
+如要建立參照[自訂遮蓋常式](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro?hl=zh-tw#custom_mask)的資料政策，您也需要[常式權限](https://docs.cloud.google.com/bigquery/docs/routines?hl=zh-tw#permissions)。
 
 如果是自訂遮蓋，請授予使用者 BigQuery 管理員或 BigQuery 資料擁有者角色，確保他們具備常式和資料政策的必要權限。
 
@@ -161,31 +165,31 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### 控制台
 
-1. 在Google Cloud 控制台中開啟「Policy tag taxonomies」(政策標記分類) 頁面。
+1. 前往 Google Cloud 控制台的「Policy tag taxonomies」(政策標記分類) 頁面。
 
-   [開啟「政策標記分類」頁面](https://console.cloud.google.com/bigquery/policy-tags?hl=zh-tw)
+   [前往「政策標記分類」](https://console.cloud.google.com/bigquery/security/secure/policy-tags?hl=zh-tw)
 2. 按一下分類名稱即可開啟。
 3. 選取政策標記。
 4. 按一下「管理資料政策」。
-5. 在「資料政策名稱」中，輸入資料政策的名稱。資料政策名稱在資料政策所屬專案中不得重複。
-6. 在「遮蓋規則」中，選擇預先定義的遮蓋規則或自訂遮蓋常式。如果您選取自訂遮蓋常式，請務必在專案層級同時具備 `bigquery.routines.get` 和 `bigquery.routines.list` 權限。
-7. 在「主體」中，輸入一或多個使用者或群組的名稱，授予他們資料欄的遮蓋存取權。請注意，您在此輸入的所有使用者和群組都會獲派 BigQuery 經過遮蓋的讀取者角色。
+5. 在「資料政策名稱」部分，輸入資料政策的名稱。資料政策名稱在資料政策所屬專案中不得重複。
+6. 在「遮蓋規則」部分，選擇預先定義的遮蓋規則或自訂遮蓋常式。如果您選取自訂遮蓋常式，請確保您在專案層級同時擁有 `bigquery.routines.get` 和 `bigquery.routines.list` 權限。
+7. 在「主體」中，輸入要授予欄位遮蓋存取權的一或多個使用者或群組名稱。請注意，您在此輸入的所有使用者和群組都會獲派 BigQuery 經過遮蓋的讀取者角色。
 8. 按一下「提交」。
 
 ### API
 
-1. 呼叫 [`create`](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies/create?hl=zh-tw) 方法。傳遞符合下列需求的 [`DataPolicy`](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies?hl=zh-tw#resource:-datapolicy) 資源：
+1. 呼叫 [`create`](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies/create?hl=zh-tw) 方法。傳遞符合下列需求的[`DataPolicy`](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies?hl=zh-tw#resource:-datapolicy)資源：
 
    * `dataPolicyType` 欄位設為 `DATA_MASKING_POLICY`。
    * `dataMaskingPolicy` 欄位會識別要使用的資料遮蓋規則或常式。
-   * `dataPolicyId` 欄位會提供資料政策的名稱，該名稱在資料政策所屬專案中不得重複。
-2. 呼叫 [`setIamPolicy`](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies/setIamPolicy?hl=zh-tw) 方法，並傳入 [`Policy`](https://docs.cloud.google.com/iam/docs/reference/rest/v1/Policy?hl=zh-tw)。`Policy` 必須識別獲准存取遮蓋資料的主體，並為 `role` 欄位指定 `roles/bigquerydatapolicy.maskedReader`。
+   * `dataPolicyId` 欄位會提供資料政策的名稱，該名稱在資料政策所屬的專案中不得重複。
+2. 呼叫 [`setIamPolicy`](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies/setIamPolicy?hl=zh-tw) 方法，並傳入 [`Policy`](https://docs.cloud.google.com/iam/docs/reference/rest/v1/Policy?hl=zh-tw)。`Policy`必須識別獲准存取遮蓋資料的主體，並為 `role` 欄位指定 `roles/bigquerydatapolicy.maskedReader`。
 
 ### Node.js
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 const datapolicy = require('@google-cloud/bigquery-datapolicies');
@@ -247,9 +251,9 @@ async function createDataPolicy(projectId, location, dataPolicyId) {
 
 ### Python
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 from google.api_core import exceptions
@@ -317,24 +321,24 @@ def create_data_policy(project_id: str, location: str, data_policy_id: str) -> N
 
 ### 在資料欄上設定政策標記
 
-將與資料政策相關聯的政策標記附加至資料欄，即可為該資料欄設定資料政策。
+將與資料政策相關聯的政策標記附加至資料欄，即可在資料欄上設定資料政策。
 
 設定政策標記的使用者或服務帳戶需要 `datacatalog.taxonomies.get` 和 `bigquery.tables.setCategory` 權限。`datacatalog.taxonomies.get` 包含在 Data Catalog 政策標記管理員和專案檢視者角色中。`bigquery.tables.setCategory` 包含在 BigQuery 管理員 (`roles/bigquery.admin`) 和 BigQuery 資料擁有者 (`roles/bigquery.dataOwner`) 角色中。
 
-如要在Google Cloud 控制台中查看機構內所有專案的分類和政策標記，使用者必須具備 `resourcemanager.organizations.get` 權限 (機構檢視者角色內含這項權限)。使用 API 或 `bq` 指令列工具時**不**需要這項權限。
+如要在Google Cloud 控制台中查看機構內所有專案的分類和政策標記，使用者必須具備 `resourcemanager.organizations.get` 權限 (機構檢視者角色內含這項權限)。使用 API 或 `bq` 指令列工具時，**不需要**這項權限。
 
 **注意：** 每個資料欄只能指派一個政策標記。
 
 ### 控制台
 
-使用Google Cloud 控制台[修改結構定義](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas?hl=zh-tw)，設定政策標記。
+使用Google Cloud 控制台[修改結構定義](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas?hl=zh-tw)，設定政策代碼。
 
 1. 在 Google Cloud 控制台開啟 BigQuery 頁面。
 
    [前往 BigQuery 頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在 BigQuery 探索器中，找出並選取要更新的資料表。系統會開啟該資料表的結構定義。
+2. 在 BigQuery 探索器中，找出並選取要更新的資料表。系統會開啟該資料表的資料表結構定義。
 3. 點選「編輯結構定義」。
-4. 在「目前的架構」畫面上，選取目標資料欄，然後按一下「新增政策標記」。
+4. 在「目前結構定義」畫面上，選取目標欄，然後點選「新增政策標記」。
 5. 在「新增政策標記」畫面中，找出並選取要套用至資料欄的政策標記。
 6. 按一下「選取」。畫面應會出現如下所示的內容：
 7. 按一下 [儲存]。
@@ -351,9 +355,9 @@ def create_data_policy(project_id: str, location: str, data_policy_id: str) -> N
    其中：
 
    * project-id 是您的專案 ID。
-   * dataset 是含有您要更新資料表的資料集名稱。
+   * dataset 是包含要更新資料表的資料集名稱。
    * table 是您要更新之資料表的名稱。
-2. 修改 schema.json，為資料欄設定政策標記。如要取得 的 欄位值，請使用[政策標記資源名稱](#retrieve_policy_tag_name)。`names``policyTags`
+2. 修改 schema.json，在資料欄上設定政策標記。如要取得 `policyTags` 的 `names` 欄位值，請使用[政策標記資源名稱](#retrieve_policy_tag_name)。
 
    ```
    [
@@ -378,15 +382,15 @@ def create_data_policy(project_id: str, location: str, data_policy_id: str) -> N
 
 ### API
 
-如為現有資料表，請呼叫 [`tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch?hl=zh-tw)；如為新資料表，請呼叫 [`tables.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/insert?hl=zh-tw)。使用您傳入的 `Table` 物件的 `schema` 屬性，在結構定義中設定政策標記。如要瞭解如何設定政策標記，請參閱指令列範例結構定義。
+如為現有資料表，請呼叫 [`tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch?hl=zh-tw)；如為新資料表，請呼叫 [`tables.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/insert?hl=zh-tw)。使用您傳入的 `Table` 物件的 `schema` 屬性，在結構定義中設定政策標記。請參閱指令列範例結構定義，瞭解如何設定政策標記。
 
-處理現有資料表時，建議使用 `tables.patch` 方法，因為 `tables.update` 方法會取代整個資料表資源。
+使用現有資料表時，建議使用 `tables.patch` 方法，因為 `tables.update` 方法會取代整個資料表資源。
 
 ### 強制執行存取控管
 
 為政策標記建立資料政策時，系統會自動強制執行存取控管。如果使用者具備「經過遮蓋的讀取者」角色，系統會在回應查詢時，針對套用該政策標記的所有資料欄傳回遮蓋資料。
 
-如要停止強制執行存取權控管，您必須先刪除分類中與政策標記相關聯的所有資料政策。詳情請參閱[強制執行存取控管](https://docs.cloud.google.com/bigquery/docs/column-level-security?hl=zh-tw#enforce_access_control)。
+如要停止強制執行存取權控管，請先刪除分類架構中與政策標記相關聯的所有資料政策。詳情請參閱「[強制執行存取權控管](https://docs.cloud.google.com/bigquery/docs/column-level-security?hl=zh-tw#enforce_access_control)」。
 
 ### 取得資料政策
 
@@ -394,9 +398,9 @@ def create_data_policy(project_id: str, location: str, data_policy_id: str) -> N
 
 ### Node.js
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 const {DataPolicyServiceClient} =
@@ -457,9 +461,9 @@ async function getDataPolicy(
 
 ### Python
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 from google.api_core import exceptions
@@ -525,9 +529,9 @@ def get_data_policy(
 
 ### Node.js
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 const {DataPolicyServiceClient} =
@@ -577,9 +581,9 @@ async function getIamPolicy(projectId, location, dataPolicyId) {
 
 ### Python
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 from google.api_core import exceptions
@@ -637,13 +641,13 @@ def get_data_policy_iam_policy(
 
 ### 列出資料政策
 
-如要列出資料政策，請按照下列步驟操作：
+請按照下列步驟列出資料政策：
 
 ### Node.js
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 const {DataPolicyServiceClient} =
@@ -725,9 +729,9 @@ async function listDataPolicies(projectId, location) {
 
 ### Python
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 import google.api_core.exceptions
@@ -785,31 +789,31 @@ def list_data_policies(project_id: str, location: str) -> None:
 
 如要更新與資料政策相關聯的主體，您必須具備 `bigquery.dataPolicies.setIamPolicy` 權限。
 
-「BigQuery 資料政策管理員」、「BigQuery 管理員」和「BigQuery 資料擁有者」角色都具備 `bigquery.dataPolicies.update` 和 `bigquery.dataPolicies.setIamPolicy` 權限。「`datacatalog.taxonomies.get`」權限包含在 Data Catalog 管理員和 Data Catalog 檢視者角色中。
+「BigQuery 資料政策管理員」、「BigQuery 管理員」和「BigQuery 資料擁有者」角色都包含 `bigquery.dataPolicies.update` 和 `bigquery.dataPolicies.setIamPolicy` 權限。「Data Catalog 管理員」和「Data Catalog 檢視者」角色都包含 `datacatalog.taxonomies.get` 權限。
 
 ### 控制台
 
-1. 在Google Cloud 控制台中開啟「Policy tag taxonomies」(政策標記分類) 頁面。
+1. 前往 Google Cloud 控制台的「Policy tag taxonomies」(政策標記分類) 頁面。
 
-   [開啟「政策標記分類」頁面](https://console.cloud.google.com/bigquery/policy-tags?hl=zh-tw)
+   [前往「政策標記分類」](https://console.cloud.google.com/bigquery/security/secure/policy-tags?hl=zh-tw)
 2. 按一下分類名稱即可開啟。
 3. 選取政策標記。
 4. 按一下「管理資料政策」。
 5. 視需要變更遮蓋規則。
-6. 選用：新增或移除主體。
+6. 選用：新增或移除負責人。
 7. 按一下「提交」。
 
 ### API
 
-如要變更資料遮蓋規則，請呼叫 [`patch`](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies/patch?hl=zh-tw) 方法，並傳遞 [`DataPolicy`](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies?hl=zh-tw#resource:-datapolicy) 資源，其中包含更新後的 `dataMaskingPolicy` 欄位。
+如要變更資料遮蓋規則，請呼叫 [`patch`](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies/patch?hl=zh-tw) 方法，並傳遞具有更新 `dataMaskingPolicy` 欄位的 [`DataPolicy`](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies?hl=zh-tw#resource:-datapolicy) 資源。
 
-如要變更與資料政策相關聯的主體，請呼叫 [`setIamPolicy`](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies/setIamPolicy?hl=zh-tw) 方法，並傳入 [`Policy`](https://docs.cloud.google.com/iam/docs/reference/rest/v1/Policy?hl=zh-tw)，更新獲准存取遮蓋資料的主體。
+如要變更與資料政策相關聯的主體，請呼叫 [`setIamPolicy`](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies/setIamPolicy?hl=zh-tw) 方法，並傳遞 [`Policy`](https://docs.cloud.google.com/iam/docs/reference/rest/v1/Policy?hl=zh-tw)，更新獲准存取遮蓋資料的主體。
 
 ### Node.js
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 const datapolicy = require('@google-cloud/bigquery-datapolicies');
@@ -881,9 +885,9 @@ async function updateDataPolicy(projectId, location, dataPolicyId) {
 
 ### Python
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 from google.api_core import exceptions
@@ -948,13 +952,13 @@ def update_data_policy(project_id: str, location: str, data_policy_id: str) -> N
 
 ### 刪除資料政策
 
-建立資料政策的使用者或服務帳戶必須具備 `bigquery.dataPolicies.delete` 權限。BigQuery 資料政策管理員、BigQuery 管理員和 BigQuery 資料擁有者角色都具備此權限。
+建立資料政策的使用者或服務帳戶必須具備 `bigquery.dataPolicies.delete` 權限。BigQuery 資料政策管理員、BigQuery 管理員和 BigQuery 資料擁有者角色都具有此權限。
 
 ### 控制台
 
-1. 在Google Cloud 控制台中開啟「Policy tag taxonomies」(政策標記分類) 頁面。
+1. 前往 Google Cloud 控制台的「Policy tag taxonomies」(政策標記分類) 頁面。
 
-   [開啟「政策標記分類」頁面](https://console.cloud.google.com/bigquery/policy-tags?hl=zh-tw)
+   [前往「政策標記分類」](https://console.cloud.google.com/bigquery/security/secure/policy-tags?hl=zh-tw)
 2. 按一下分類名稱即可開啟。
 3. 選取政策標記。
 4. 按一下「管理資料政策」。
@@ -968,9 +972,9 @@ def update_data_policy(project_id: str, location: str, data_policy_id: str) -> N
 
 ### Node.js
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 const {DataPolicyServiceClient} =
@@ -1010,9 +1014,9 @@ async function deleteDataPolicy(projectId, location, dataPolicyId) {
 
 ### Python
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 from google.api_core import exceptions as core_exceptions
@@ -1054,164 +1058,3 @@ def delete_data_policy(project_id: str, location: str, data_policy_id: str) -> N
 您可以使用 [BigQuery Data Policy API](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest?hl=zh-tw) 建立、更新及刪除資料政策。如要直接在資料欄上套用資料政策，請勿使用 Google Cloud 控制台的「政策標記分類」頁面。
 
 如要使用資料政策，請使用 [`v2.projects.locations.datapolicies`](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest?hl=zh-tw#rest-resource:-v2.projects.locations.datapolicies) 資源。
-
-#### 建立資料政策
-
-建立資料政策的使用者或服務帳戶必須具備 `bigquery.dataPolicies.create` 權限。
-
-「`bigquery.dataPolicies.create`」權限包含在 BigQuery 資料政策管理員、BigQuery 管理員和 BigQuery 資料擁有者角色中。「`datacatalog.taxonomies.get`」權限包含在 Data Catalog 管理員和 Data Catalog 檢視者角色中。
-
-如果您要建立的資料政策參照[自訂遮蓋常式](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro?hl=zh-tw#custom_mask)，則也需要[常式權限](https://docs.cloud.google.com/bigquery/docs/routines?hl=zh-tw#permissions)。
-
-如果您使用自訂遮蓋，請授予使用者 BigQuery 資料擁有者角色，確保他們擁有常式和資料政策的必要權限。
-
-### API
-
-如要建立資料政策，請呼叫 [`create`](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies/create?hl=zh-tw) 方法。傳遞符合下列需求的 [`DataPolicy`](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies?hl=zh-tw#resource:-datapolicy) 資源：
-
-* `dataPolicyType` 欄位設為 `DATA_MASKING_POLICY` 或 `RAW_DATA_ACCESS_POLICY`。
-* `dataMaskingPolicy` 欄位會識別要使用的資料遮蓋規則或常式。
-* `dataPolicyId` 欄位會提供資料政策的名稱，該名稱在資料政策所在的專案中不得重複。
-
-### SQL
-
-如要建立具有遮蓋存取權的資料政策，請使用 `CREATE DATA_POLICY` 陳述式，並將 `data_policy_type` 的值設為 `DATA_MASKING_POLICY`：
-
-```
-    CREATE[ OR REPLACE] DATA_POLICY [IF NOT EXISTS] `myproject.region-us.data_policy_name`
-    OPTIONS (
-      data_policy_type="DATA_MASKING_POLICY",
-      masking_expression="ALWAYS_NULL"
-    );
-```
-
-如要建立具有原始存取權的資料政策，請使用 `CREATE DATA_POLICY` 陳述式，並將 `data_policy_type` 的值設為 `RAW_DATA_ACCESS_POLICY`：
-
-```
-    CREATE[ OR REPLACE] DATA_POLICY [IF NOT EXISTS] `myproject.region-us.data_policy_name`
-    OPTIONS (data_policy_type="RAW_DATA_ACCESS_POLICY");
-```
-
-如未指定 `data_policy_type` 的值，預設值為 `RAW_DATA_ACCESS_POLICY`。
-
-```
-    CREATE[ OR REPLACE] DATA_POLICY [IF NOT EXISTS] myproject.region-us.data_policy_name;
-```
-
-* `data_policy_type` 欄位設為 `DATA_MASKING_POLICY` 或 `RAW_DATA_ACCESS_POLICY`。資料政策建立後，您就無法更新這個欄位。
-* `masking_expression` 欄位會識別要使用的資料遮蓋規則或常式。
-
-#### 更新資料政策
-
-更新資料政策的使用者或服務帳戶必須具備 `bigquery.dataPolicies.update` 權限。
-
-BigQuery 資料政策管理員、BigQuery 管理員和 BigQuery 資料擁有者角色都具備 `bigquery.dataPolicies.update` 權限。
-
-### API
-
-如要變更資料遮蓋規則，請呼叫 [`patch`](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies/patch?hl=zh-tw) 方法，並傳遞更新 `dataMaskingPolicy` 欄位的 [`DataPolicy`](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies?hl=zh-tw#resource:-datapolicy) 資源。
-
-### SQL
-
-如要更新資料遮蓋規則，請使用 `ALTER DATA_POLICY` 陳述式。例如：
-
-```
-    ALTER DATA_POLICY `myproject.region-us.data_policy_name`
-    SET OPTIONS (
-      data_policy_type="DATA_MASKING_POLICY",
-      masking_expression="SHA256"
-    );
-```
-
-您也可以授予資料政策精細的存取控管機制存取權。
-
-授予資料政策精細存取權控管權限，以及管理資料政策的權限不同。如要控管精細的存取控管權限，請更新資料政策的 `grantees` 欄位。如要控管資料政策的存取權，請使用 [`setIamPolicy`](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies/setIamPolicy?hl=zh-tw) 方法設定 IAM 角色。
-
-如要在資料政策中設定受讓人，請使用 [v2 `patch`](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies/patch?hl=zh-tw)
-方法。如要管理資料政策權限，請使用 [v1
-`setIamPolicy`](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v1/projects.locations.dataPolicies/setIamPolicy?hl=zh-tw)
-方法。
-
-### API
-
-如要授予資料政策精細的存取權控管存取權，請呼叫 [`patch`](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies/patch?hl=zh-tw) 方法，然後傳遞更新 `grantees` 欄位的 [`DataPolicy`](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies?hl=zh-tw#resource:-datapolicy) 資源。
-
-### SQL
-
-如要授予資料政策的精細存取控管權限，請使用 `GRANT FINE_GRAINED_READ` 陳述式新增 `grantees`。例如：
-
-```
-    GRANT FINE_GRAINED_READ ON DATA_POLICY `myproject.region-us.data_policy_name`
-    TO "principal://goog/subject/user1@example.com","principal://goog/subject/user2@example.com"
-```
-
-如要從資料政策撤銷精細存取控管存取權，請使用 `REVOKE FINE_GRAINED_READ` 陳述式移除 `grantees`。例如：
-
-```
-    REVOKE FINE_GRAINED_READ ON DATA_POLICY `myproject.region-us.data_policy_name`
-    FROM "principal://goog/subject/user1@example.com","principal://goog/subject/user2@example.com"
-```
-
-#### 刪除資料政策
-
-建立資料政策的使用者或服務帳戶必須具備 `bigquery.dataPolicies.delete` 權限。BigQuery 資料政策管理員、BigQuery 管理員和 BigQuery 資料擁有者角色都具備此權限。
-
-### API
-
-如要刪除資料政策，請呼叫 [`delete`](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies/delete?hl=zh-tw) 方法。
-
-### SQL
-
-使用 `DROP DATA_POLICY` 陳述式刪除資料政策：
-
-```
-    DROP DATA_POLICY `myproject.region-us.data_policy_name`;
-```
-
-### 直接在資料欄上指派資料政策
-
-您可以直接在資料欄上指派資料政策，不必使用政策標記。
-
-#### 事前準備
-
-如要取得直接在資料欄指派資料政策所需的權限，請要求管理員授予您資料表的「BigQuery 資料政策管理員」 (`roles/bigquerydatapolicy.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
-
-這個預先定義的角色具備直接在資料欄上指派資料政策所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
-
-#### 所需權限
-
-如要直接在資料欄上指派資料政策，必須具備下列權限：
-
-* `bigquery.tables.update`
-* `bigquery.tables.setColumnDataPolicy`
-* `bigquery.dataPolicies.attach`
-
-您或許還可透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)取得這些權限。
-
-#### 指派資料政策
-
-如要直接在資料欄上指派資料政策，請採取下列任一做法：
-
-### SQL
-
-如要將資料政策附加至資料欄，請使用 [`CREATE
-TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#create_table_statement)、[`ALTER TABLE ADD
-COLUMN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_table_add_column_statement) 或 [`ALTER COLUMN SET
-OPTIONS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_column_set_options_statement) DDL 陳述式。
-
-以下範例使用 `CREATE TABLE` 陳述式，並在資料欄中設定資料政策：
-
-```
-    CREATE TABLE myproject.table1 (
-    name INT64 OPTIONS (data_policies=["{'name':'myproject.region-us.data_policy_name1'}",
-                                      "{'name':'myproject.region-us.data_policy_name2'}"])
-    );
-```
-
-以下範例使用 `ALTER COLUMN SET OPTIONS`，在資料表的現有資料欄中新增資料政策：
-
-```
-ALTER TABLE myproject.table1
-ALTER COLUMN column_name SET OPTIONS (
-  data_policies +=
-```

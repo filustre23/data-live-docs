@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -23,7 +23,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 BigQuery 提供多種內建函式，可格式化所選資料。其中一個做法是將多個資料欄值合併為單一 Protobuf 值，這麼做有以下優點：
 
 * 物件類型安全。
-* 與 JSON 相比，壓縮率更高，資料傳輸時間和成本也更低。
+* 與 JSON 相比，壓縮率更高、資料傳輸時間更短，且成本更低。
 * 彈性，因為大多數程式設計語言都有處理 Protobuf 的程式庫。
 * 從多個資料欄讀取及建構單一物件時，負擔較小。
 
@@ -31,17 +31,17 @@ BigQuery 提供多種內建函式，可格式化所選資料。其中一個做�
 
 不過，以 Protobuf 欄匯出 BigQuery 資料時，有以下限制：
 
-* 系統無法妥善建立 Protobuf 資料欄的索引或篩選資料。依據 Protobuf 欄的內容搜尋可能效果不佳。
+* 系統無法妥善建立 Protobuf 資料欄的索引或篩選資料。依據 Protobuf 欄的內容搜尋可能效果不彰。
 * 以 Protobuf 格式排序資料可能很困難。
 
-如果匯出工作流程受到這些限制，建議您考慮使用其他方法匯出 BigQuery 資料：
+如果這些限制適用於匯出工作流程，建議您考慮使用其他方法匯出 BigQuery 資料：
 
 * 使用[排程查詢](https://docs.cloud.google.com/bigquery/docs/scheduling-queries?hl=zh-tw)搭配 [`EXPORT DATA` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/other-statements?hl=zh-tw#export_data_statement)，即可依日期或時間排序匯出的 BigQuery 資料，並排定定期匯出作業。BigQuery 支援將資料匯出為 Avro、CSV、JSON 和 Parquet 格式。
 * 使用 [Dataflow](https://docs.cloud.google.com/dataflow/docs/overview?hl=zh-tw) 以 Avro 或 CSV 檔案格式匯出 BigQuery 資料。
 
 ## 必要的角色
 
-如要取得將 BigQuery 資料匯出為 Protobuf 欄所需的權限，請要求系統管理員在專案中授予您下列 IAM 角色：
+如要取得將 BigQuery 資料匯出為 Protobuf 欄所需的權限，請要求管理員在專案中授予您下列 IAM 角色：
 
 * 建立使用者定義函式：
   [BigQuery 資料編輯器](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataEditor)  (`roles/bigquery.dataEditor`)
@@ -58,7 +58,7 @@ BigQuery 提供多種內建函式，可格式化所選資料。其中一個做�
 
 建立 UDF，將 BigQuery `STRUCT` 資料類型轉換為 Protobuf 欄：
 
-1. 在指令列中，複製 `bigquery-utils.git` 存放區：
+1. 在指令列中複製 `bigquery-utils.git` 存放區：
 
    ```
    git clone https://github.com/GoogleCloudPlatform/bigquery-utils.git
@@ -85,7 +85,7 @@ BigQuery 提供多種內建函式，可格式化所選資料。其中一個做�
 7. 前往「BigQuery」頁面
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-8. 使用查詢編輯器建立名為 `toMyProtoMessage` 的 UDF，從現有的 BigQuery 資料表資料欄建構 Protobuf 資料欄：
+8. 使用查詢編輯器建立名為 `toMyProtoMessage` 的 UDF，從現有的 BigQuery 資料表欄位建構 Protobuf 欄：
 
    ```
    CREATE FUNCTION
@@ -101,7 +101,7 @@ BigQuery 提供多種內建函式，可格式化所選資料。其中一個做�
    更改下列內容：
 
    * `DATASET_ID`：要包含 UDF 的資料集 ID。
-   * `INPUT_FIELDS`：用於 proto 檔案的 [proto 訊息類型](https://protobuf.dev/programming-guides/proto3/#simple)中的欄位，格式為 `field_name_1 field_type_1 [, field_name_2 field_type_2, ...]`。
+   * `INPUT_FIELDS`：用於 proto 檔案的 [proto 訊息類型](https://protobuf.dev/programming-guides/proto3/#simple)，格式為 `field_name_1 field_type_1 [, field_name_2 field_type_2, ...]`。
 
      您必須將使用底線的任何訊息類型欄位，改為使用[駝峰式大小寫](https://en.wikipedia.org/wiki/Camel_case)。舉例來說，如果訊息類型如下所示，則輸入欄位值必須為 `itemId int64, itemDescription string`：
 
@@ -361,11 +361,11 @@ def main():
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-12 (世界標準時間)。
+上次更新時間：2026-10-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-12 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]

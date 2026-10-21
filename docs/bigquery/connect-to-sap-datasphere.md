@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -23,7 +23,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 **注意：** 如要取得支援或針對這項預先發布版功能提供意見回饋，請傳送電子郵件至 [bq-sap-federation-support@google.com](mailto:bq-sap-federation-support@google.com)。
 
-BigQuery 管理員可以建立[連線](https://docs.cloud.google.com/bigquery/docs/connections-api-intro?hl=zh-tw)，存取 SAP Datasphere 資料。建立連線後，資料分析師就能[查詢 SAP Datasphere 中的資料](https://docs.cloud.google.com/bigquery/docs/sap-datasphere-federated-queries?hl=zh-tw)。
+BigQuery 管理員可以建立[連線](https://docs.cloud.google.com/bigquery/docs/connections-api-intro?hl=zh-tw)，存取 SAP Datasphere 資料。資料分析師可透過這個連線[查詢 SAP Datasphere 中的資料](https://docs.cloud.google.com/bigquery/docs/sap-datasphere-federated-queries?hl=zh-tw)。
 
 ## 事前準備
 
@@ -31,57 +31,98 @@ BigQuery 管理員可以建立[連線](https://docs.cloud.google.com/bigquery/do
 
    [啟用 API](https://console.cloud.google.com/apis/library/bigqueryconnection.googleapis.com?hl=zh-tw)
 2. [建立 SAP Datasphere 資料庫使用者](https://help.sap.com/docs/SAP_DATASPHERE/be5967d099974c69b77f4549425ca4c0/798e3fd6707940c3bd2219b2d1ebaac2.html?locale=en-US)。
-   請記下 BigQuery 的使用者名稱、密碼、主機名稱和連接埠。
+   記下要連線的 BigQuery 使用者名稱、密碼、主機名稱和通訊埠。
 3. 設定 SAP Datasphere 租戶，接受來自所選 IP 位址的流量，方法如下：
 
    * 將所有 [Google IP 位址範圍](https://www.gstatic.com/ipranges/goog.json)新增至 SAP Datasphere 的「信任的 IP」許可清單。
    * 將 `0.0.0.0/0` 新增至允許清單，開放所有 IP 位址連線至 SAP Datasphere 租戶。
-   * [使用網路附件設定連線](https://docs.cloud.google.com/bigquery/docs/connections-with-network-attachment?hl=zh-tw)，讓 BigQuery 從靜態 IP 位址開啟連線。
+   * [使用網路附件設定連線](#configure-network-attachment)，讓 BigQuery 從靜態 IP 位址開啟連線。
 
      **注意：** 如果設定的網路連結和 VM 位於不同區域，使用這個連線查詢 SAP Datasphere 資料時，可能會發生跨區域資料移動。
 
-   如要進一步瞭解如何設定 SAP Datasphere 租戶，請參閱「[將 IP 位址新增至 IP 許可清單](https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/a3c214514ef94e899459f68f4c1e2a23.html?locale=en-US)」。
+   如要進一步瞭解如何設定 SAP Datasphere 租戶，請參閱「[將 IP 位址加入 IP 許可清單](https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/a3c214514ef94e899459f68f4c1e2a23.html?locale=en-US)」。
 
 ### 必要的角色
 
-如要取得連線至 SAP Datasphere 所需的權限，請要求系統管理員授予您專案的「[BigQuery 連線管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.connectionAdmin) 」(`roles/bigquery.connectionAdmin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得連線至 SAP Datasphere 所需的權限，請要求管理員授予您下列 IAM 角色：
+
+* 如要建立連線，請在專案中指派 [BigQuery 連線管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.connectionAdmin)  (`roles/bigquery.connectionAdmin`) 角色。
+* 如要設定網路附件：專案的 [Compute 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/compute?hl=zh-tw#compute.admin)  (`roles/compute.admin`)
+
+如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
 您或許也能透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)，取得必要權限。
 
-### 將 BigQuery 連結至 SAP Datasphere
+## 設定網路連結
 
-您可以在 Google Cloud 控制台或 bq 指令列工具中，將 BigQuery 連線至 SAP Datasphere。
+**附註：** 這個部分為選用。只有在透過靜態 IP 位址或 VPN 轉送流量時，才需要完成這些步驟。
+
+由於聯合查詢會使用 BigQuery Connection API 直接連線至資料庫，因此您必須允許從 Google Cloud 到資料庫引擎的流量。為提高安全性，您應只允許來自 BigQuery 查詢的流量。您可以透過下列兩種方式限制流量：
+
+* 定義 BigQuery 連線使用的靜態 IP 位址，並將其新增至外部資料來源的防火牆規則。
+* 在 BigQuery 和內部基礎架構之間建立 VPN，並用於查詢。
+
+使用網路附件即可支援這兩種技術。
+
+### 限制
+
+使用網路附件的連線有下列限制：
+
+* 如果是標準區域，網路連結必須與連線位於相同區域。如為 `US` 多區域的連線，網路連結必須位於 `us-central1` 區域。如為「`EU`」多區域的連線，網路連結必須位於「`europe-west4`」區域。
+* 網路連結建立後即無法編輯。如要變更設定，請重新建立網路連結。
+* 除非 BigQuery 刪除已分配的資源，否則無法刪除網路附件。如要啟動刪除程序，請與 BigQuery 支援團隊聯絡。
+
+### 建立網路連結
+
+建立查詢聯邦的連線時，您可以指定選用的網路附件，提供資料庫網路的連線能力。您可以定義靜態 IP 位址或建立 VPN，藉此建立網路連結。無論選擇哪種做法，請按照下列步驟操作：
+
+1. 如果沒有，請[建立虛擬私有雲網路和子網路](https://docs.cloud.google.com/vpc/docs/create-modify-vpc-networks?hl=zh-tw#create-custom-network)。
+2. 視所選路徑方法而定，請執行下列其中一項操作：
+
+   * 靜態 IP 位址：[建立 Cloud NAT 閘道並使用靜態 IP 位址](https://docs.cloud.google.com/nat/docs/set-up-manage-network-address-translation?hl=zh-tw#create-nat-gateway)，並使用您建立的網路、區域和子網路。
+   * VPN：[建立連線至私人網路的 VPN](https://docs.cloud.google.com/network-connectivity/docs/vpn?hl=zh-tw)。
+3. 使用您建立的網路、區域和子網路[建立網路連結](https://docs.cloud.google.com/vpc/docs/create-manage-network-attachments?hl=zh-tw#create-manual-accept)。
+4. 選用：視貴機構的安全性政策而定，您可能需要設定 Google Cloud 防火牆，以[建立防火牆規則](https://docs.cloud.google.com/firewall/docs/using-firewalls?hl=zh-tw#creating_firewall_rules)來允許輸出，並使用下列設定：
+
+   * 將「目標」設為「網路中的所有執行個體」。
+   * 將「Destination IPv4 ranges」(目的地 IPv4 範圍) 設為整個 IP 位址範圍。
+   * 將「指定的通訊協定和通訊埠」設為資料庫使用的通訊埠。
+5. 設定內部防火牆，允許從您建立的靜態 IP 位址輸入。這項程序會因資料來源而異。
+
+## 將 BigQuery 連結至 SAP Datasphere
+
+您可以在 Google Cloud 控制台或 bq 指令列工具中，將 BigQuery 連結至 SAP Datasphere。
 
 ### 控制台
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在「Explorer」窗格中，點選「新增資料」add。
+2. 在「Explorer」窗格中，按一下「新增資料」add。
 
    「新增資料」對話方塊隨即開啟。
-3. 在「Filter By」(依據篩選) 窗格的「Data Source Type」(資料來源類型) 專區中，選取「Databases」(資料庫)。
+3. 在「依條件篩選」窗格的「資料來源類型」部分，選取「資料庫」。
 
    或者，您也可以在「Search for data sources」(搜尋資料來源) 欄位中輸入 `SAP HANA`。
 4. 在「精選資料來源」部分，按一下「SAP HANA」。
-5. 按一下「SAP HANA：BigQuery Federation」解決方案資訊卡。
+5. 按一下「SAP HANA：BigQuery 聯盟」解決方案資訊卡。
 6. 在「外部資料來源」對話方塊中，執行下列操作：
 
    * 在「連線類型」部分，選取 `SAP HANA`。
-   * 在「Connection ID」(連線 ID) 專區中輸入連線 ID，以識別這項連線。
+   * 在「連線 ID」部分，輸入連線 ID 來識別這個連線。
    * 在「Location type」(位置類型) 中，指定要與 SAP Datasphere 資料合併的 BigQuery 資料集區域。使用這個連線的查詢必須從這個區域執行。
-   * 選用：在「Friendly name」(好記名稱) 中輸入使用者容易記得的連線名稱，例如 `My connection resource`。好記名稱可以是任何資料值，只要您日後需要修改時可以輕鬆識別連線資源即可。
-   * 選用：在「Description」(說明) 中輸入這項連線資源的說明。
-   * 在「Encryption」(加密) 部分，選取「**Google-managed encryption key**」或「Customer-managed encryption key (CMEK)」(客戶自行管理的加密金鑰 (CMEK))。您可以選擇是否使用 CMEK。
+   * 選用：在「好記名稱」輸入使用者容易記得的連線名稱，例如 `My connection resource`。這可以是任何值，只要日後需修改時能輕鬆識別即可。
+   * 選用：在「Description」(說明)，輸入這項連線資源的說明。
+   * 在「Encryption」(加密) 部分中，選取 **Google-managed encryption key** 或「Customer-managed encryption key (CMEK)」(客戶自行管理的加密金鑰 (CMEK))。您可以選擇是否使用 CMEK。
    * 在「Host:port」(主機: 通訊埠) 部分，輸入 SAP 資料庫執行個體的主機和通訊埠，格式為 `HOST:PORT`，如 SAP Datasphere 網頁控制台的「Database User Details」(資料庫使用者詳細資料) 所示。
-   * 選用：在「網路連結」中，輸入[網路連結](https://docs.cloud.google.com/bigquery/docs/connections-with-network-attachment?hl=zh-tw)的路徑，該連結會定義用於建立與 SAP Datasphere 連線的網路設定。
-   * 在「Username」(使用者名稱) 中，輸入 SAP Datasphere 網頁版控制台「Database User Details」(資料庫使用者詳細資料) 中的資料庫使用者名稱。例如：`MY_SPACE#BIGQUERY`。
-   * 在「Password」(密碼) 中輸入資料庫使用者的密碼。
+   * 選用：在「Network attachment」(網路連結) 部分，輸入[網路連結](#configure-network-attachment)的路徑，定義用於建立與 SAP Datasphere 連線的網路設定。
+   * 在「Username」(使用者名稱) 部分，輸入 SAP Datasphere 網頁控制台「Database User Details」(資料庫使用者詳細資料) 中的資料庫使用者名稱。例如：`MY_SPACE#BIGQUERY`。
+   * 在「Password」(密碼) 中，輸入資料庫使用者的密碼。
 7. 點選「建立連線」。
 
 ### bq
 
-使用加上以下旗標的 [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_mk) 指令：
+輸入 [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_mk) 指令，並加上下列標記：
 
 ```
   bq mk \
@@ -114,22 +155,24 @@ BigQuery 管理員可以建立[連線](https://docs.cloud.google.com/bigquery/do
 
 * `LOCATION`：指定要與 SAP Datasphere 資料合併的 BigQuery 資料集區域。使用這個連線的查詢必須從這個區域執行。
 * `PROJECT_ID`：輸入 Google Cloud 專案 ID。
-* `HOST_PORT`：輸入 SAP 資料庫執行個體的主機和連接埠，格式為 `HOST:PORT`，如 SAP Datasphere 網頁控制台的「Database User Details」(資料庫使用者詳細資料) 所示。
-* `NETWORK_ATTACHMENT` (選用)：以 `projects/{project}/regions/{region}/networkAttachments/{networkattachment}` 格式輸入[網路連結](https://docs.cloud.google.com/bigquery/docs/connections-with-network-attachment?hl=zh-tw)。您可以使用這個欄位設定 SAP Datasphere 連線，讓 BigQuery 從靜態 IP 位址開啟連線。
-* `USERNAME`：在 SAP Datasphere 網頁版控制台的「Database User Details」(資料庫使用者詳細資料) 中，輸入資料庫使用者名稱。例如：`MY_SPACE#BIGQUERY`。
+* `HOST_PORT`：輸入 SAP 資料庫執行個體的主機和通訊埠，如 SAP Datasphere 網頁控制台的「Database User Details」(資料庫使用者詳細資料) 所示，格式為 `HOST:PORT`。
+* `NETWORK_ATTACHMENT` (選用)：以 `projects/{project}/regions/{region}/networkAttachments/{networkattachment}` 格式輸入[網路連結](#configure-network-attachment)。您可以使用這個欄位設定 SAP Datasphere 連線，讓 BigQuery 從靜態 IP 位址開啟連線。
+* `USERNAME`：在 SAP Datasphere 網頁控制台的「Database User Details」(資料庫使用者詳細資料) 中，輸入資料庫使用者名稱。例如：`MY_SPACE#BIGQUERY`。
 * `PASSWORD`：輸入資料庫使用者的密碼。
 * `CONNECTION_ID`：輸入連線 ID，識別這個連線。
 
 選用旗標：
 
-* `--kms_key_name`：客戶自行管理的加密金鑰。如果省略此屬性，系統會以預設的 Google-owned and Google-managed encryption key保護憑證。
+* `--kms_key_name`：客戶自行管理的加密金鑰。如果省略此值，系統會使用預設的 Google-owned and Google-managed encryption key保護憑證。
 
-## 與使用者共用連線
+**注意：**如果設定連線時使用網路附件，您必須先執行初始[聯合查詢](https://docs.cloud.google.com/bigquery/docs/federated-queries-intro?hl=zh-tw)，將專案與網路附件同步處理，才能完全啟用網路附件。
+
+## 與使用者分享連線
 
 您可以授予下列角色，讓使用者查詢資料及管理連線：
 
 * `roles/bigquery.connectionUser`：可讓使用者透過連線功能連結外部資料來源，並對其執行查詢。
-* `roles/bigquery.connectionAdmin`：允許使用者管理連線。
+* `roles/bigquery.connectionAdmin`：可讓使用者管理連線。
 
 如要進一步瞭解 BigQuery 中的 IAM 角色和權限，請參閱[預先定義的角色和權限](https://docs.cloud.google.com/bigquery/access-control?hl=zh-tw)一文。
 
@@ -141,7 +184,7 @@ BigQuery 管理員可以建立[連線](https://docs.cloud.google.com/bigquery/do
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 
-   連線會列在專案中，位於「Connections」(連線) 群組。
+   連線會列在專案中，並歸類在「連線」群組。
 2. 點選左側窗格中的 explore「Explorer」。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
@@ -154,12 +197,12 @@ BigQuery 管理員可以建立[連線](https://docs.cloud.google.com/bigquery/do
 
 ### bq
 
-您無法使用 bq 指令列工具共用連線。
+您無法透過 bq 指令列工具共用連線。
 如要共用連線，請使用 Google Cloud 控制台或 BigQuery Connections API 方法共用連線。
 
 ### API
 
-請使用 BigQuery Connections REST API 參考資料部分中的 [`projects.locations.connections.setIAM` 方法](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections?hl=zh-tw#methods)，並提供 `policy` 資源的執行個體。
+在 BigQuery Connections REST API 參考資料專區中，使用 [`projects.locations.connections.setIAM` 方法](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections?hl=zh-tw#methods)，並提供 `policy` 資源的例項。
 
 ### Java
 
@@ -209,10 +252,17 @@ public class ShareConnection {
 }
 ```
 
+## 定價
+
+* 適用標準[聯邦查詢定價](https://docs.cloud.google.com/bigquery/docs/federated-queries-intro?hl=zh-tw#pricing)。
+* 使用 VPC 時，須遵守[虛擬私有雲定價](https://docs.cloud.google.com/vpc/pricing?hl=zh-tw)。
+* 使用 Cloud VPN 須遵守 [Cloud VPN 定價](https://docs.cloud.google.com/network-connectivity/docs/vpn/pricing?hl=zh-tw)。
+* 使用 Cloud NAT 時，須遵守 [Cloud NAT 定價](https://docs.cloud.google.com/nat/pricing?hl=zh-tw)。
+
 ## 後續步驟
 
 * 瞭解不同[連線類型](https://docs.cloud.google.com/bigquery/docs/connections-api-intro?hl=zh-tw)。
-* 瞭解如何[管理連線](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw)。
+* 瞭解如何[管理連結](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw)。
 * 瞭解[聯合查詢](https://docs.cloud.google.com/bigquery/docs/federated-queries-intro?hl=zh-tw)。
 * 瞭解如何[查詢 SAP Datasphere 資料](https://docs.cloud.google.com/bigquery/docs/sap-datasphere-federated-queries?hl=zh-tw)。
 
@@ -223,11 +273,11 @@ public class ShareConnection {
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-18 (世界標準時間)。
+上次更新時間：2026-10-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-18 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]

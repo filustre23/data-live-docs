@@ -14,11 +14,11 @@ GoogleSQL for BigQuery supports the following hash functions.
 
 | Name | Summary |
 | --- | --- |
-| [`FARM_FINGERPRINT`](/bigquery/docs/reference/standard-sql/hash_functions#farm_fingerprint) | Computes the fingerprint of a `STRING` or `BYTES` value, using the FarmHash Fingerprint64 algorithm. |
-| [`MD5`](/bigquery/docs/reference/standard-sql/hash_functions#md5) | Computes the hash of a `STRING` or `BYTES` value, using the MD5 algorithm. |
-| [`SHA1`](/bigquery/docs/reference/standard-sql/hash_functions#sha1) | Computes the hash of a `STRING` or `BYTES` value, using the SHA-1 algorithm. |
-| [`SHA256`](/bigquery/docs/reference/standard-sql/hash_functions#sha256) | Computes the hash of a `STRING` or `BYTES` value, using the SHA-256 algorithm. |
-| [`SHA512`](/bigquery/docs/reference/standard-sql/hash_functions#sha512) | Computes the hash of a `STRING` or `BYTES` value, using the SHA-512 algorithm. |
+| [`FARM_FINGERPRINT`](/bigquery/docs/reference/standard-sql/hash_functions#farm_fingerprint) | Computes the fingerprint of a `STRING` or `BYTES` value using the FarmHash Fingerprint64 algorithm. |
+| [`MD5`](/bigquery/docs/reference/standard-sql/hash_functions#md5) | Computes the hash of a `STRING` or `BYTES` value using the MD5 algorithm. |
+| [`SHA1`](/bigquery/docs/reference/standard-sql/hash_functions#sha1) | Computes the hash of a `STRING` or `BYTES` value using the SHA-1 algorithm. |
+| [`SHA256`](/bigquery/docs/reference/standard-sql/hash_functions#sha256) | Computes the hash of a `STRING` or `BYTES` value using the SHA-256 algorithm. |
+| [`SHA512`](/bigquery/docs/reference/standard-sql/hash_functions#sha512) | Computes the hash of a `STRING` or `BYTES` value using the SHA-512 algorithm. |
 
 ## `FARM_FINGERPRINT`
 
@@ -29,9 +29,28 @@ FARM_FINGERPRINT(value)
 **Description**
 
 Computes the fingerprint of the `STRING` or `BYTES` input using the
-`Fingerprint64` function from the
-[open-source FarmHash library](https://github.com/google/farmhash). The output
-of this function for a particular input will never change.
+`Fingerprint64` function from the [open-source FarmHash
+library](https://github.com/google/farmhash). The output is a signed
+INT64 value, uniformly distributed in the
+`[-2^63, 2^63 - 1]` range. The output of this function for a particular input
+never changes across runs or query engine implementations.
+
+Use `FARM_FINGERPRINT` when you need a fast, deterministic 64-bit signed
+integer (`INT64`) for non-cryptographic use cases, such as
+the following:
+
+* Sharding, partitioning, or bucketing large datasets consistently across
+  distributed pipelines.
+* Generating stable integer identifiers or grouping keys from strings.
+* Sampling rows deterministically (`ABS(FARM_FINGERPRINT(id)) % 10 = 0`).
+
+`FARM_FINGERPRINT` isn't a cryptographic hash function, so don't use it for
+security verification or adversarial inputs. Because it outputs
+64 bits, collision probability increases as the number of distinct elements
+exceeds four billion (`~2^32` items).
+
+For cryptographic verification or lower collision probability, use
+[`SHA256`](#sha256).
 
 **Return type**
 
@@ -68,19 +87,25 @@ MD5(input)
 **Description**
 
 Computes the hash of the input using the
-[MD5 algorithm](https://en.wikipedia.org/wiki/MD5). The input can either be
+[MD5 algorithm](https://en.wikipedia.org/wiki/MD5). The input can be either
 `STRING` or `BYTES`. The string version treats the input as an array of bytes.
 
-This function returns 16 bytes.
+Use `MD5` only for backward compatibility with legacy databases, historic
+checksums, or external communication protocols and deduplication workflows that
+strictly mandate an MD5 digest.
 
-**Warning:** MD5 is no longer considered secure.
-For increased security use another hashing function.
+**Warning:** `MD5` uses a vulnerable 128-bit algorithm and isn't secure against
+cryptographic collision attacks. Don't use `MD5` for new implementations,
+digital signatures, passwords, or security verification.
+
+For cryptographic security, use
+[`SHA256`](#sha256) or [`SHA512`](#sha512).
 
 **Return type**
 
-`BYTES`
+BYTES
 
-**Example**
+**Examples**
 
 ```
 SELECT MD5("Hello World") as md5;
@@ -102,19 +127,27 @@ SHA1(input)
 **Description**
 
 Computes the hash of the input using the
-[SHA-1 algorithm](https://en.wikipedia.org/wiki/SHA-1). The input can either be
+[SHA-1 algorithm](https://en.wikipedia.org/wiki/SHA-1). The input can be either
 `STRING` or `BYTES`. The string version treats the input as an array of bytes.
 
-This function returns 20 bytes.
+Use `SHA1` only when backward compatibility with legacy datasets, external
+APIs, or historical cryptographic identifiers (such as git commit hashes or
+legacy verification records) is strictly required.
 
-**Warning:** SHA1 is no longer considered secure.
-For increased security, use another hashing function.
+**Warning:** `SHA-1` has known cryptographic vulnerabilities and isn't secure
+against collision attacks. Don't use `SHA1` for new cryptographic designs,
+digital signatures, or security verification.
+
+For cryptographic verification, use
+
+[`SHA256`](#sha256) or [`SHA512`](#sha512)
+.
 
 **Return type**
 
-`BYTES`
+BYTES
 
-**Example**
+**Examples**
 
 ```
 SELECT SHA1("Hello World") as sha1;
@@ -136,16 +169,31 @@ SHA256(input)
 **Description**
 
 Computes the hash of the input using the
-[SHA-256 algorithm](https://en.wikipedia.org/wiki/SHA-2). The input can either be
+[SHA-256 algorithm](https://en.wikipedia.org/wiki/SHA-2). The input can be either
 `STRING` or `BYTES`. The string version treats the input as an array of bytes.
 
-This function returns 32 bytes.
+Use `SHA256` when you require a cryptographically secure hash function, such
+as the following use cases:
+
+* Verifying string or binary data integrity and generating tamper-evident
+  checksums.
+* Creating secure cryptographic digests or globally unique content identifiers
+  (256-bit hash space provides effectively zero collision probability).
+* Interoperating with authentication workflows, digital signatures, and
+  security protocols requiring standard SHA-2 digests.
+
+Computing `SHA256` is computationally more expensive than non-cryptographic
+fingerprinting
+(for example,
+[`FARM_FINGERPRINT`](#farm_fingerprint)).
+Avoid using `SHA256` solely for simple data sharding, bucketing, or indexing
+where high throughput and compact integer output are required.
 
 **Return type**
 
-`BYTES`
+BYTES
 
-**Example**
+**Examples**
 
 ```
 SELECT SHA256("Hello World") as sha256;
@@ -160,16 +208,31 @@ SHA512(input)
 **Description**
 
 Computes the hash of the input using the
-[SHA-512 algorithm](https://en.wikipedia.org/wiki/SHA-2). The input can either be
+[SHA-512 algorithm](https://en.wikipedia.org/wiki/SHA-2). The input can be either
 `STRING` or `BYTES`. The string version treats the input as an array of bytes.
 
-This function returns 64 bytes.
+Use `SHA512` when you require maximum cryptographic security (512-bit output),
+such as the following use cases:
+
+* High-security data verification, digital signatures, and cryptographic
+  protocols where SHA-512 digests are mandated by compliance standards.
+* Applications requiring ultra-low collision probability or resistance to
+  future-proofing attacks with hash outputs larger than 256 bits.
+* Processing platforms on 64-bit hardware architectures where SHA-512
+  operates with high efficiency.
+
+`SHA512` produces a 64-byte digest, double the size of
+[`SHA256`](#sha256) (32 bytes).
+When storing digests in tables or transmitting over the network where storage
+and bandwidth efficiency are essential, use
+[`SHA256`](#sha256) unless 512-bit
+security is specifically required.
 
 **Return type**
 
-`BYTES`
+BYTES
 
-**Example**
+**Examples**
 
 ```
 SELECT SHA512("Hello World") as sha512;
@@ -182,11 +245,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-07-17 UTC.
+Last updated 2026-10-15 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-07-17 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-10-15 UTC."],[],[]]

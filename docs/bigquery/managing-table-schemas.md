@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -18,13 +18,13 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 本文說明如何修改現有 BigQuery 資料表的結構定義。
 
-您可以使用 SQL [資料定義語言 (DDL) 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw)，進行本文所述的大部分結構定義修改作業。這些陳述式不會產生費用。
+您可以使用 SQL [資料定義語言 (DDL) 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw)，進行本文所述的大部分結構定義修改作業。這些對帳單不會產生費用。
 
-如要以本頁所述的所有方式修改資料表結構，請將資料表資料[匯出](https://docs.cloud.google.com/bigquery/docs/exporting-data?hl=zh-tw)至 Cloud Storage，然後將結構定義經過修改的資料[載入](https://docs.cloud.google.com/bigquery/docs/loading-data?hl=zh-tw)至新的資料表。BigQuery 載入和擷取作業免費，但將匯出的資料儲存在 Cloud Storage 中會產生費用。以下各節將說明執行各類型結構修改作業的其他方式。
+如要以本頁所述的所有方式修改資料表結構，請先將資料表資料[匯出](https://docs.cloud.google.com/bigquery/docs/exporting-data?hl=zh-tw)至 Cloud Storage，再將資料[載入](https://docs.cloud.google.com/bigquery/docs/loading-data?hl=zh-tw)至結構定義經過修改的新資料表。BigQuery 載入和擷取工作免費，但您必須付費才能將匯出的資料儲存在 Cloud Storage 中。以下各節說明如何以其他方式執行各種結構定義修改。
 
 BigQuery 中的結構定義更新不會導致資料遺失。
 
-**注意：** 更新結構定義後，變更內容可能不會立即反映在 [`INFORMATION_SCHEMA.TABLES`](https://docs.cloud.google.com/bigquery/docs/information-schema-tables?hl=zh-tw) 和 [`INFORMATION_SCHEMA.COLUMNS`](https://docs.cloud.google.com/bigquery/docs/information-schema-columns?hl=zh-tw) 檢視畫面中。如要查看即時結構定義變更，請呼叫 [`tables.get` 方法](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get?hl=zh-tw)。
+**注意：** 更新結構定義後，變更內容可能不會立即反映在 [`INFORMATION_SCHEMA.TABLES`](https://docs.cloud.google.com/bigquery/docs/information-schema-tables?hl=zh-tw) 和 [`INFORMATION_SCHEMA.COLUMNS`](https://docs.cloud.google.com/bigquery/docs/information-schema-columns?hl=zh-tw) 檢視畫面中。如要查看立即結構定義異動，請呼叫 [`tables.get` 方法](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get?hl=zh-tw)。
 
 ## 新增資料欄
 
@@ -34,9 +34,9 @@ BigQuery 中的結構定義更新不會導致資料遺失。
 * 使用載入或查詢工作覆寫資料表。
 * 使用載入或查詢工作將資料附加至資料表。
 
-您新增的任何資料欄都必須遵守 BigQuery 的[資料欄名稱](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#column_names)規則。如要進一步瞭解如何建立結構定義元件，請參閱[指定結構定義](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw)。
+您新增的任何資料欄都必須遵守 BigQuery 的[資料欄名稱](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#column_names)規則。如要進一步瞭解如何建立結構定義元件，請參閱「[指定結構定義](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw)」。
 
-您無法在資料表結構定義中間新增資料欄。系統一律會在資料表或欄位的結尾新增資料欄和巢狀欄位。如要在資料表結構定義中間建立新資料欄，唯一的方法是建立所選結構定義的新資料表，然後從原始資料表複製資料。
+您無法在資料表結構定義中間新增資料欄。系統一律會在表格或欄位的結尾處新增資料欄和巢狀欄位。如要在表格結構定義中間建立新資料欄，唯一方法是建立具有所選結構定義的新表格，然後從原始表格複製資料。
 
 ### 新增空白資料欄
 
@@ -187,7 +187,7 @@ from REPEATED to NULLABLE.`
    ```
 
    如要進一步瞭解如何使用 JSON 結構定義檔，請參閱[指定 JSON 結構定義檔](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#specifying_a_json_schema_file)一節。
-4. 更新結構定義檔後，請發出下列指令來更新資料表的結構定義。如果您要更新的資料表位於預設專案以外的專案中，請依照下列格式將該專案的專案 ID 加到資料集名稱中：`PROJECT_ID:DATASET`。
+4. 更新結構定義檔後，請發出下列指令來更新資料表的結構定義。如果您要更新的資料表位於預設專案以外的專案中，請依照下列格式將該專案的 ID 加到資料集名稱中：`PROJECT_ID:DATASET`。
 
    ```
    bq update PROJECT_ID:DATASET.TABLE SCHEMA
@@ -414,7 +414,7 @@ bq update PROJECT_ID:DATASET.TABLE SCHEMA
 
 若要使用 JSON 結構檔案將巢狀欄位新增至 `RECORD`，請進行以下操作：
 
-1. 首先，請發出 `bq show` 指令並加上 `--schema` 旗標，並將現有的資料表結構定義寫入檔案。如果您要更新的資料表位於非預設專案中，請依照下列格式將該專案的 ID 加到資料集名稱中：`PROJECT_ID:DATASET.TABLE`。
+1. 首先，請發出 `bq show` 指令並加上 `--schema` 旗標，並將現有的資料表結構定義寫入檔案。如果您要更新的資料表位於非預設專案中，請依照下列格式將該專案的專案 ID 加到資料集名稱中：`PROJECT_ID:DATASET.TABLE`。
 
    ```
    bq show \
@@ -546,7 +546,7 @@ bq update PROJECT_ID:DATASET.TABLE SCHEMA
 
 #### 在載入附加工作中新增資料欄
 
-您可以在載入工作期間將資料附加至資料表時一併新增資料欄。新結構定義的決定方式如下：
+您可以在載入工作期間將資料附加至資料表時一併新增資料欄。新結構定義取決於下列其中一項：
 
 * 自動偵測 (適用於 CSV 和 JSON 檔案)
 * 可在 JSON 結構定義檔中指定 (適用於 CSV 和 JSON 檔)
@@ -930,7 +930,7 @@ print("Table {} now contains {} columns.".format(table_id, len(table.schema)))
 
 指定 `use_legacy_sql=false` 旗標，以在查詢中使用 GoogleSQL 語法。
 
-如果您要附加的資料表位於非預設專案中的資料集裡，請依照下列格式將該專案的 ID 加到資料集名稱中：`PROJECT_ID:DATASET`。請注意，您要查詢的資料表和目的地資料表必須位於相同位置。
+如果您要附加的資料表位於非預設專案中的資料集裡，請依照下列格式將該專案的專案 ID 加到資料集名稱中：`PROJECT_ID:DATASET`。請注意，您要查詢的資料表和目的地資料表必須位於同一位置。
 
 (選用) 提供 `--location` 旗標，並將值設為您的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
 
@@ -1032,56 +1032,5 @@ func createTableAndWidenQuery(projectID, datasetID, tableID string) error {
 	// Our table has two columns.  We'll introduce a new favorite_color column via
 	// a subsequent query that appends to the table.
 	q := client.Query("SELECT \"Timmy\" as full_name, 85 as age, \"Blue\" as favorite_color")
-	q.SchemaUpdateOptions = []string{"ALLOW_FIELD_ADDITION"}
-	q.QueryConfig.Dst = client.Dataset(datasetID).Table(tableID)
-	q.WriteDisposition = bigquery.WriteAppend
-	q.Location = "US"
-	job, err := q.Run(ctx)
-	if err != nil {
-		return err
-	}
-	_, err = job.Wait(ctx)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-```
-
-### Java
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定說明操作。詳情請參閱 [BigQuery Java API 參考說明文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-import com.google.cloud.bigquery.BigQuery;
-import com.google.cloud.bigquery.BigQueryException;
-import com.google.cloud.bigquery.BigQueryOptions;
-import com.google.cloud.bigquery.Job;
-import com.google.cloud.bigquery.JobInfo;
-import com.google.cloud.bigquery.JobInfo.SchemaUpdateOption;
-import com.google.cloud.bigquery.JobInfo.WriteDisposition;
-import com.google.cloud.bigquery.QueryJobConfiguration;
-import com.google.cloud.bigquery.TableId;
-import com.google.cloud.bigquery.TableResult;
-import com.google.common.collect.ImmutableList;
-
-public class RelaxTableQuery {
-
-  public static void runRelaxTableQuery() throws Exception {
-    // TODO(developer): Replace these variables before running the sample.
-    String projectId = "MY_PROJECT_ID";
-    String datasetName = "MY_DATASET_NAME";
-    String tableName = "MY_TABLE_NAME";
-    relaxTableQuery(projectId, datasetName, tableName);
-  }
-
-  // To relax all columns in a destination table when you append data to it during a query job
-  public static void relaxTableQuery(String projectId, String datasetName, String tableName)
-      throws Exception {
-    try {
-      // Initialize client that will be used to send requests. This client only needs to be created
-      // once, and can be reused for multiple requests.
-      BigQuery bigquery =
+	q.SchemaUpdateOptions = []string{
 ```

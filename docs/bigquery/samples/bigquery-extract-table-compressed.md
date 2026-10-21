@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -8,7 +8,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 將資料表匯出為壓縮檔 透過集合功能整理內容 你可以依據偏好儲存及分類內容。
 
-將資料表匯出為 Cloud Storage 值區中的壓縮檔。
+將資料表匯出至 Cloud Storage 值區中的壓縮檔。
 
 ## 深入探索
 

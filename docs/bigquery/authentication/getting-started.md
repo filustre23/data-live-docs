@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -14,20 +14,20 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 你可以依據偏好儲存及分類內容。
 
-# 開始使用驗證功能
+# 開始使用驗證
 
-如要驗證應用程式對 BigQuery 資源的存取權，可以使用應用程式預設憑證 (ADC)。ADC 會使用服務帳戶憑證，為本機開發和已部署的環境提供一致的驗證方法。這樣一來，您從開發環境移至正式環境時，就不必修改驗證程式碼。BigQuery 不支援使用 [API 金鑰](https://docs.cloud.google.com/docs/authentication/api-keys-use?hl=zh-tw)進行驗證。
+如要向 BigQuery 資源驗證應用程式，可以使用應用程式預設憑證 (ADC)。ADC 會使用服務帳戶憑證，為本機開發和已部署的環境提供一致的驗證方式。這樣一來，從開發環境移至正式環境時，就不必修改驗證碼。BigQuery 不支援使用 [API 金鑰](https://docs.cloud.google.com/docs/authentication/api-keys-use?hl=zh-tw)進行驗證。
 
 ## 事前準備
 
-選取這個頁面上您打算如何使用範例的分頁：
+選取這個頁面上範例的預計用途分頁：
 
 ### C#
 
 如要在本機開發環境中使用本頁的 .NET 範例，請安裝並初始化 gcloud CLI，然後使用使用者憑證設定應用程式預設憑證。
 
 1. [安裝](https://docs.cloud.google.com/sdk/docs/install?hl=zh-tw) Google Cloud CLI。
-2. 若您採用的是外部識別資訊提供者 (IdP)，請先[使用聯合身分登入 gcloud CLI](https://docs.cloud.google.com/iam/docs/workforce-log-in-gcloud?hl=zh-tw)。
+2. 如果您使用外部識別資訊提供者 (IdP)，請先[使用聯合身分登入 gcloud CLI](https://docs.cloud.google.com/iam/docs/workforce-log-in-gcloud?hl=zh-tw)。
 3. 如果您使用本機殼層，請為使用者帳戶建立本機驗證憑證：
 
    ```
@@ -38,14 +38,14 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    如果系統傳回驗證錯誤，且您使用外部識別資訊提供者 (IdP)，請確認您已[使用聯合身分登入 gcloud CLI](https://docs.cloud.google.com/iam/docs/workforce-log-in-gcloud?hl=zh-tw)。
 
-詳情請參閱[這篇文章](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#local-development)，瞭解如何設定本機開發環境的驗證機制。
+詳情請參閱「[設定本機開發環境的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#local-development)」。
 
 ### Go
 
-如要在本機開發環境中使用本頁的 Go 範例，請安裝並初始化 gcloud CLI，然後使用您的使用者憑證設定應用程式預設憑證。
+如要在本機開發環境中使用本頁的 Go 範例，請安裝並初始化 gcloud CLI，然後使用使用者憑證設定應用程式預設憑證。
 
 1. [安裝](https://docs.cloud.google.com/sdk/docs/install?hl=zh-tw) Google Cloud CLI。
-2. 若您採用的是外部識別資訊提供者 (IdP)，請先[使用聯合身分登入 gcloud CLI](https://docs.cloud.google.com/iam/docs/workforce-log-in-gcloud?hl=zh-tw)。
+2. 如果您使用外部識別資訊提供者 (IdP)，請先[使用聯合身分登入 gcloud CLI](https://docs.cloud.google.com/iam/docs/workforce-log-in-gcloud?hl=zh-tw)。
 3. 如果您使用本機殼層，請為使用者帳戶建立本機驗證憑證：
 
    ```
@@ -56,14 +56,14 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    如果系統傳回驗證錯誤，且您使用外部識別資訊提供者 (IdP)，請確認您已[使用聯合身分登入 gcloud CLI](https://docs.cloud.google.com/iam/docs/workforce-log-in-gcloud?hl=zh-tw)。
 
-詳情請參閱[這篇文章](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#local-development)，瞭解如何設定本機開發環境的驗證機制。
+詳情請參閱「[設定本機開發環境的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#local-development)」。
 
 ### Java
 
-如要在本機開發環境中使用本頁面的 Java 範例，請安裝並初始化 gcloud CLI，然後使用使用者憑證設定應用程式預設憑證。
+如要在本機開發環境中使用本頁的 Java 範例，請安裝並初始化 gcloud CLI，然後使用使用者憑證設定應用程式預設憑證。
 
 1. [安裝](https://docs.cloud.google.com/sdk/docs/install?hl=zh-tw) Google Cloud CLI。
-2. 若您採用的是外部識別資訊提供者 (IdP)，請先[使用聯合身分登入 gcloud CLI](https://docs.cloud.google.com/iam/docs/workforce-log-in-gcloud?hl=zh-tw)。
+2. 如果您使用外部識別資訊提供者 (IdP)，請先[使用聯合身分登入 gcloud CLI](https://docs.cloud.google.com/iam/docs/workforce-log-in-gcloud?hl=zh-tw)。
 3. 如果您使用本機殼層，請為使用者帳戶建立本機驗證憑證：
 
    ```
@@ -74,14 +74,14 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    如果系統傳回驗證錯誤，且您使用外部識別資訊提供者 (IdP)，請確認您已[使用聯合身分登入 gcloud CLI](https://docs.cloud.google.com/iam/docs/workforce-log-in-gcloud?hl=zh-tw)。
 
-詳情請參閱[這篇文章](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#local-development)，瞭解如何設定本機開發環境的驗證機制。
+詳情請參閱「[設定本機開發環境的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#local-development)」。
 
 ### Node.js
 
-如要在本機開發環境中使用本頁的 Node.js 範例，請安裝並初始化 gcloud CLI，然後使用使用者憑證設定應用程式預設憑證。
+如要在本機開發環境中使用本頁的 Node.js 範例，請安裝並初始化 gcloud CLI，然後使用您的使用者憑證設定應用程式預設憑證。
 
 1. [安裝](https://docs.cloud.google.com/sdk/docs/install?hl=zh-tw) Google Cloud CLI。
-2. 若您採用的是外部識別資訊提供者 (IdP)，請先[使用聯合身分登入 gcloud CLI](https://docs.cloud.google.com/iam/docs/workforce-log-in-gcloud?hl=zh-tw)。
+2. 如果您使用外部識別資訊提供者 (IdP)，請先[使用聯合身分登入 gcloud CLI](https://docs.cloud.google.com/iam/docs/workforce-log-in-gcloud?hl=zh-tw)。
 3. 如果您使用本機殼層，請為使用者帳戶建立本機驗證憑證：
 
    ```
@@ -92,14 +92,14 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    如果系統傳回驗證錯誤，且您使用外部識別資訊提供者 (IdP)，請確認您已[使用聯合身分登入 gcloud CLI](https://docs.cloud.google.com/iam/docs/workforce-log-in-gcloud?hl=zh-tw)。
 
-詳情請參閱[這篇文章](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#local-development)，瞭解如何設定本機開發環境的驗證機制。
+詳情請參閱「[設定本機開發環境的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#local-development)」。
 
 ### PHP
 
 如要在本機開發環境中使用本頁的 PHP 範例，請安裝並初始化 gcloud CLI，然後使用使用者憑證設定應用程式預設憑證。
 
 1. [安裝](https://docs.cloud.google.com/sdk/docs/install?hl=zh-tw) Google Cloud CLI。
-2. 若您採用的是外部識別資訊提供者 (IdP)，請先[使用聯合身分登入 gcloud CLI](https://docs.cloud.google.com/iam/docs/workforce-log-in-gcloud?hl=zh-tw)。
+2. 如果您使用外部識別資訊提供者 (IdP)，請先[使用聯合身分登入 gcloud CLI](https://docs.cloud.google.com/iam/docs/workforce-log-in-gcloud?hl=zh-tw)。
 3. 如果您使用本機殼層，請為使用者帳戶建立本機驗證憑證：
 
    ```
@@ -110,14 +110,14 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    如果系統傳回驗證錯誤，且您使用外部識別資訊提供者 (IdP)，請確認您已[使用聯合身分登入 gcloud CLI](https://docs.cloud.google.com/iam/docs/workforce-log-in-gcloud?hl=zh-tw)。
 
-詳情請參閱[這篇文章](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#local-development)，瞭解如何設定本機開發環境的驗證機制。
+詳情請參閱「[設定本機開發環境的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#local-development)」。
 
 ### Python
 
-如要在本機開發環境中使用本頁的 Python 範例，請安裝並初始化 gcloud CLI，然後使用您的使用者憑證設定應用程式預設憑證。
+如要在本機開發環境中使用本頁的 Python 範例，請安裝並初始化 gcloud CLI，然後使用使用者憑證設定應用程式預設憑證。
 
 1. [安裝](https://docs.cloud.google.com/sdk/docs/install?hl=zh-tw) Google Cloud CLI。
-2. 若您採用的是外部識別資訊提供者 (IdP)，請先[使用聯合身分登入 gcloud CLI](https://docs.cloud.google.com/iam/docs/workforce-log-in-gcloud?hl=zh-tw)。
+2. 如果您使用外部識別資訊提供者 (IdP)，請先[使用聯合身分登入 gcloud CLI](https://docs.cloud.google.com/iam/docs/workforce-log-in-gcloud?hl=zh-tw)。
 3. 如果您使用本機殼層，請為使用者帳戶建立本機驗證憑證：
 
    ```
@@ -128,14 +128,14 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    如果系統傳回驗證錯誤，且您使用外部識別資訊提供者 (IdP)，請確認您已[使用聯合身分登入 gcloud CLI](https://docs.cloud.google.com/iam/docs/workforce-log-in-gcloud?hl=zh-tw)。
 
-詳情請參閱[這篇文章](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#local-development)，瞭解如何設定本機開發環境的驗證機制。
+詳情請參閱「[設定本機開發環境的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#local-development)」。
 
-### Ruby
+### 小茹
 
 如要在本機開發環境中使用本頁的 Ruby 範例，請安裝並初始化 gcloud CLI，然後使用使用者憑證設定應用程式預設憑證。
 
 1. [安裝](https://docs.cloud.google.com/sdk/docs/install?hl=zh-tw) Google Cloud CLI。
-2. 若您採用的是外部識別資訊提供者 (IdP)，請先[使用聯合身分登入 gcloud CLI](https://docs.cloud.google.com/iam/docs/workforce-log-in-gcloud?hl=zh-tw)。
+2. 如果您使用外部識別資訊提供者 (IdP)，請先[使用聯合身分登入 gcloud CLI](https://docs.cloud.google.com/iam/docs/workforce-log-in-gcloud?hl=zh-tw)。
 3. 如果您使用本機殼層，請為使用者帳戶建立本機驗證憑證：
 
    ```
@@ -146,19 +146,19 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    如果系統傳回驗證錯誤，且您使用外部識別資訊提供者 (IdP)，請確認您已[使用聯合身分登入 gcloud CLI](https://docs.cloud.google.com/iam/docs/workforce-log-in-gcloud?hl=zh-tw)。
 
-詳情請參閱[這篇文章](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#local-development)，瞭解如何設定本機開發環境的驗證機制。
+詳情請參閱「[設定本機開發環境的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#local-development)」。
 
-如要瞭解如何設定正式環境的驗證機制，請參閱[為在 Google Cloud上執行的程式碼設定應用程式預設憑證](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#on-gcp)。
+如要瞭解如何為正式環境設定驗證機制，請參閱「[為在 Google Cloud上執行的程式碼設定應用程式預設憑證](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#on-gcp)」。
 
 ## 應用程式預設憑證
 
-用戶端程式庫可以使用[應用程式預設憑證](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=zh-tw)，輕鬆向 Google API 進行驗證，然後傳送要求給這些 API。有了應用程式預設憑證，您就能在本機測試應用程式，然後再部署，過程中無須變更基礎程式碼。詳情請參閱「[進行驗證以使用用戶端程式庫](https://docs.cloud.google.com/docs/authentication/client-libraries?hl=zh-tw)」一文。
+用戶端程式庫可以使用[應用程式預設憑證](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=zh-tw)，輕鬆向 Google API 進行驗證，並向這些 API 傳送要求。有了應用程式預設憑證，您可以在本機測試及部署應用程式，不必變更基礎程式碼。詳情請參閱「[進行驗證以使用用戶端程式庫](https://docs.cloud.google.com/docs/authentication/client-libraries?hl=zh-tw)」一文。
 
-當您使用 [BigQuery API 用戶端程式庫](https://docs.cloud.google.com/bigquery/docs/reference/libraries?hl=zh-tw)建立服務物件時，如果未傳遞明確憑證，您的應用程式將會使用應用程式預設憑證進行驗證。下列範例說明如何使用 ADC 向 BigQuery 進行驗證。
+使用 [BigQuery API 用戶端程式庫](https://docs.cloud.google.com/bigquery/docs/reference/libraries?hl=zh-tw)建立服務物件時，如果未傳遞明確的憑證，應用程式會使用應用程式預設憑證進行驗證。下列範例說明如何使用 ADC 向 BigQuery 進行驗證。
 
 ### C#
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 C# 設定說明操作。詳情請參閱 [BigQuery C# API 參考說明文件](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 C# 設定說明操作。詳情請參閱 [BigQuery C# API 參考文件](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[事前準備](#byb)」。
 
@@ -188,7 +188,7 @@ public class BigQueryCreateDataset
 
 ### Go
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Go 設定說明操作。詳情請參閱 [BigQuery Go API 參考說明文件](https://godoc.org/cloud.google.com/go/bigquery)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Go 設定說明操作。詳情請參閱 [BigQuery Go API 參考文件](https://godoc.org/cloud.google.com/go/bigquery)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[事前準備](#byb)」。
 
@@ -231,7 +231,7 @@ func main() {
 
 ### Java
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定說明操作。詳情請參閱 [BigQuery Java API 參考說明文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定說明操作。詳情請參閱 [BigQuery Java API 參考文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[事前準備](#byb)」。
 
@@ -252,7 +252,7 @@ public static void implicit() {
 
 ### Node.js
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[事前準備](#byb)」。
 
@@ -264,7 +264,7 @@ const bigquery = new BigQuery();
 
 ### PHP
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 PHP 設定說明操作。詳情請參閱 [BigQuery PHP API 參考說明文件](https://docs.cloud.google.com/php/docs/reference/cloud-bigquery/latest/BigQueryClient?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 PHP 設定說明操作。詳情請參閱 [BigQuery PHP API 參考文件](https://docs.cloud.google.com/php/docs/reference/cloud-bigquery/latest/BigQueryClient?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[事前準備](#byb)」。
 
@@ -281,7 +281,7 @@ $bigQuery = new BigQueryClient([
 
 ### Python
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[事前準備](#byb)」。
 
@@ -293,9 +293,9 @@ from google.cloud import bigquery
 client = bigquery.Client()
 ```
 
-### Ruby
+### 小茹
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Ruby 設定說明操作。詳情請參閱 [BigQuery Ruby API 參考說明文件](https://googleapis.dev/ruby/google-cloud-bigquery/latest/Google/Cloud/Bigquery.html)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Ruby 設定說明操作。詳情請參閱 [BigQuery Ruby API 參考文件](https://googleapis.dev/ruby/google-cloud-bigquery/latest/Google/Cloud/Bigquery.html)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[事前準備](#byb)」。
 
@@ -321,7 +321,7 @@ end
 ## 後續步驟
 
 * 進一步瞭解 [BigQuery 驗證](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw)。
-* 瞭解如何[以使用者憑證進行驗證](https://docs.cloud.google.com/bigquery/docs/authentication/end-user-installed?hl=zh-tw)。
+* 瞭解如何[使用使用者憑證進行驗證](https://docs.cloud.google.com/bigquery/docs/authentication/end-user-installed?hl=zh-tw)。
 
 
 
@@ -330,11 +330,11 @@ end
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-21 (世界標準時間)。
+上次更新時間：2026-10-19 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-21 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-19 (世界標準時間)。"],[],[]]

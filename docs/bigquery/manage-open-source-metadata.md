@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -19,7 +19,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 BigLake metastore (傳統版) 是統一的實體中繼資料服務，適用於 Google Cloud上的資料分析產品。BigLake 中繼存放區 (傳統版) 提供單一中繼資料來源，方便您管理及存取多個來源的資料。資料分析師和工程師可透過 BigQuery 和 Managed Service for Apache Spark 上的各種開放資料處理引擎存取 BigLake metastore (傳統版)，因此這項服務是實用的工具。
 
-如要管理商務中繼資料，請參閱「[Knowledge Catalog](https://docs.cloud.google.com/dataplex?hl=zh-tw)」。
+如要管理商務中繼資料，請參閱「[Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog?hl=zh-tw)」。
 
 ## BigLake metastore (傳統版) 的運作方式
 
@@ -300,7 +300,7 @@ hive_options {
 
 ### 端對端 Terraform 範例
 
-這個 [GitHub 範例](https://github.com/terraform-google-modules/terraform-docs-samples/blob/main/bigquery/biglake/biglake_metastore_create_table/main.tf)提供可執行的端對端範例，會建立 BigLake 中繼存放區 (傳統版) 的目錄、資料庫和資料表。如要進一步瞭解如何使用這個範例，請參閱「[基本 Terraform 指令](https://cloud.google.com/docs/terraform/basic-commands?hl=zh-tw)」。
+這個 [GitHub 範例](https://github.com/terraform-google-modules/terraform-docs-samples/blob/main/bigquery/biglake/biglake_metastore_create_table/main.tf)提供可執行的端對端範例，會建立 BigLake 中繼存放區 (傳統版) 的目錄、資料庫和資料表。如要進一步瞭解如何使用這個範例，請參閱「[基本 Terraform 指令](https://docs.cloud.google.com/docs/terraform/basic-commands?hl=zh-tw)」。
 
 #### 將 Iceberg 資料表從 Hive Metastore 複製到 BigLake metastore (傳統版)
 
@@ -515,11 +515,11 @@ DROP TABLE SPARK_CATALOG.BLMS_DB.BLMS_TABLE PURGE;
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-12 (世界標準時間)。
+上次更新時間：2026-10-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-12 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]

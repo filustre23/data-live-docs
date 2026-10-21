@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -14,15 +14,15 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 你可以依據偏好儲存及分類內容。
 
-# 使用 Storage Write API 批次載入資料
+# 使用 Storage Write API (gRPC) 批次載入資料
 
-本文說明如何使用 [BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api?hl=zh-tw)，將資料批次載入 BigQuery。
+本文說明如何使用 [BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api?hl=zh-tw)，將資料批次載入 BigQuery。
 
-在批次載入情境中，應用程式會寫入資料，並以單一不可分割的交易提交資料。使用 Storage Write API 批次載入資料時，請在*待處理類型*中建立一或多個串流。待處理類型支援串流層級交易。記錄會緩衝處理，直到您提交串流為止。
+在批次載入情境中，應用程式會寫入資料，並以單一不可分割的交易提交資料。使用 Storage Write API (gRPC) 批次載入資料時，請建立一或多個*待處理類型*的串流。待處理類型支援串流層級交易。記錄會緩衝處理，直到您提交串流為止。
 
-對於批次工作負載，也請考慮透過 [Apache Spark SQL 連接器 for BigQuery](https://github.com/GoogleCloudDataproc/spark-bigquery-connector#writing-data-to-bigquery)，使用 Managed Service for Apache Spark 搭配 Storage Write API，而非編寫自訂的 Storage Write API 程式碼。
+如果是批次工作負載，也請考慮透過 [Apache Spark SQL 連接器 for BigQuery](https://github.com/GoogleCloudDataproc/spark-bigquery-connector#writing-data-to-bigquery)，使用 Managed Service for Apache Spark 執行 Storage Write API (gRPC)，而非編寫自訂的 Storage Write API (gRPC) 程式碼。
 
-Storage Write API 非常適合*資料管道*架構。主程序會建立多個串流。針對每個串流，系統會指派背景工作執行緒或個別程序，寫入部分批次資料。每個工作站都會建立與串流的連線、寫入資料，並在完成時終止串流。所有工作站向主要程序發出信號，表示成功完成作業後，主要程序就會提交資料。如果工作站發生故障，最終結果就不會顯示該工作站負責的資料部分，且可以安全地重試整個工作站。在更複雜的管道中，工作站會回報寫入主要程序的最後一個偏移量，藉此檢查進度。這種做法可建立強大的管道，即使發生故障也能正常運作。
+Storage Write API (gRPC) 非常適合*資料管道*架構。主程序會建立多個串流。系統會為每個串流指派背景工作執行緒或個別程序，以寫入部分批次資料。每個工作站都會建立與串流的連線、寫入資料，並在完成時終止串流。所有工作人員向主要程序發出成功完成的信號後，主要程序就會提交資料。如果 worker 失敗，最終結果就不會顯示其分配到的資料部分，且可以安全地重試整個 worker。在更複雜的管道中，工作人員會回報寫入主要程序的最後一個偏移，藉此檢查進度。這種做法可建立穩健的管道，即使發生故障也能正常運作。
 
 ## 使用待處理類型批次載入資料
 
@@ -30,22 +30,22 @@ Storage Write API 非常適合*資料管道*架構。主程序會建立多個串
 
 1. 呼叫 `CreateWriteStream`，在待處理型別中建立一或多個串流。
 2. 針對每個串流，在迴圈中呼叫 `AppendRows`，即可寫入批次記錄。
-3. 針對每個串流呼叫 `FinalizeWriteStream`。呼叫這個方法後，您就無法再將任何資料列寫入串流。如果您在呼叫 `FinalizeWriteStream` 後呼叫 `AppendRows`，系統會傳回 [`StorageError`](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1?hl=zh-tw#google.cloud.bigquery.storage.v1.StorageError)，且 `google.rpc.Status` 錯誤中會包含 `StorageErrorCode.STREAM_FINALIZED`。如要進一步瞭解 `google.rpc.Status` 錯誤模型，請參閱「[錯誤](https://docs.cloud.google.com/apis/design/errors?hl=zh-tw)」。
-4. 呼叫 `BatchCommitWriteStreams` 提交串流。呼叫這個方法後，資料即可供讀取。如果提交任何串流時發生錯誤，系統會在 [`BatchCommitWriteStreamsResponse`](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1?hl=zh-tw#batchcommitwritestreamsresponse) 的 `stream_errors` 欄位中傳回錯誤。
+3. 針對每個串流呼叫 `FinalizeWriteStream`。呼叫這個方法後，您就無法再將任何資料列寫入串流。如果在呼叫 `FinalizeWriteStream` 後呼叫 `AppendRows`，系統會傳回 [`StorageError`](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1?hl=zh-tw#google.cloud.bigquery.storage.v1.StorageError)，且 `google.rpc.Status` 錯誤中會包含 `StorageErrorCode.STREAM_FINALIZED`。如要進一步瞭解 `google.rpc.Status` 錯誤模型，請參閱「[錯誤](https://docs.cloud.google.com/apis/design/errors?hl=zh-tw)」。
+4. 呼叫 `BatchCommitWriteStreams` 來提交串流。呼叫這個方法後，資料即可供讀取。如果提交任何串流時發生錯誤，系統會在 [`BatchCommitWriteStreamsResponse`](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1?hl=zh-tw#batchcommitwritestreamsresponse) 的 `stream_errors` 欄位中傳回錯誤。
 
 提交是不可分割的作業，您可以一次提交多個串流。
-串流只能提交一次，因此如果提交作業失敗，可以安全地重試。在您提交串流前，資料會處於待處理狀態，且無法讀取。
+串流只能提交一次，因此如果提交作業失敗，可以安全地重試。在您提交串流之前，資料會處於待處理狀態，且無法讀取。
 
-資料最多可在緩衝區保留 4 小時，待處理的串流必須在 24 小時內提交。
+串流完成後，資料最多可在緩衝區保留 4 小時，然後才會提交。待處理的串流必須在 24 小時內提交。
 [待處理串流緩衝區的總大小](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#writeapi_pending_stream)設有配額限制。
 
-以下程式碼顯示如何以待處理類型寫入資料：
+下列程式碼顯示如何以待處理類型寫入資料：
 
 ### C#
 
-如要瞭解如何安裝及使用 BigQuery 的用戶端程式庫，請參閱「[BigQuery 用戶端程式庫](https://docs.cloud.google.com/bigquery/docs/reference/storage/libraries?hl=zh-tw)」。詳情請參閱 [BigQuery C# API 參考說明文件](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.Storage.V1/latest?hl=zh-tw)。
+如要瞭解如何安裝及使用 BigQuery 的用戶端程式庫，請參閱「[BigQuery 用戶端程式庫](https://docs.cloud.google.com/bigquery/docs/reference/storage/libraries?hl=zh-tw)」。詳情請參閱 [BigQuery C# API 參考文件](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.Storage.V1/latest?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 using Google.Api.Gax.Grpc;
@@ -184,9 +184,9 @@ public class AppendRowsPendingSample
 
 ### Go
 
-如要瞭解如何安裝及使用 BigQuery 的用戶端程式庫，請參閱「[BigQuery 用戶端程式庫](https://docs.cloud.google.com/bigquery/docs/reference/storage/libraries?hl=zh-tw)」。詳情請參閱 [BigQuery Go API 參考說明文件](https://pkg.go.dev/cloud.google.com/go/bigquery/storage?tab=doc)。
+如要瞭解如何安裝及使用 BigQuery 的用戶端程式庫，請參閱「[BigQuery 用戶端程式庫](https://docs.cloud.google.com/bigquery/docs/reference/storage/libraries?hl=zh-tw)」。詳情請參閱 [BigQuery Go API 參考文件](https://pkg.go.dev/cloud.google.com/go/bigquery/storage?tab=doc)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 import (
@@ -408,9 +408,9 @@ func appendToPendingStream(w io.Writer, projectID, datasetID, tableID string) er
 
 ### Java
 
-如要瞭解如何安裝及使用 BigQuery 的用戶端程式庫，請參閱「[BigQuery 用戶端程式庫](https://docs.cloud.google.com/bigquery/docs/reference/storage/libraries?hl=zh-tw)」。詳情請參閱 [BigQuery Java API 參考說明文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquerystorage/latest/com.google.cloud.bigquery.storage.v1?hl=zh-tw)。
+如要瞭解如何安裝及使用 BigQuery 的用戶端程式庫，請參閱「[BigQuery 用戶端程式庫](https://docs.cloud.google.com/bigquery/docs/reference/storage/libraries?hl=zh-tw)」。詳情請參閱 [BigQuery Java API 參考文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquerystorage/latest/com.google.cloud.bigquery.storage.v1?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 import com.google.api.core.ApiFuture;
@@ -609,74 +609,5 @@ public class WritePendingStream {
       }
 
       public void onFailure(Throwable throwable) {
-        synchronized (this.parent.lock) {
-          if (this.parent.error == null) {
-            StorageException storageException = Exceptions.toStorageException(throwable);
-            this.parent.error =
-                (storageException != null) ? storageException : new RuntimeException(throwable);
-          }
-        }
-        System.out.format("Error: %s\n", throwable.toString());
-        done();
-      }
-
-      private void done() {
-        // Reduce the count of in-flight requests.
-        this.parent.inflightRequestCount.arriveAndDeregister();
-      }
-    }
-  }
-}
-```
-
-### Node.js
-
-如要瞭解如何安裝及使用 BigQuery 的用戶端程式庫，請參閱「[BigQuery 用戶端程式庫](https://docs.cloud.google.com/bigquery/docs/reference/storage/libraries?hl=zh-tw)」。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-const {adapt, managedwriter} = require('@google-cloud/bigquery-storage');
-const {WriterClient, Writer} = managedwriter;
-
-const customer_record_pb = require('./customer_record_pb.js');
-const {CustomerRecord} = customer_record_pb;
-
-const protobufjs = require('protobufjs');
-require('protobufjs/ext/descriptor');
-
-async function appendRowsPending() {
-  /**
-   * If you make updates to the customer_record.proto protocol buffers definition,
-   * run:
-   *   pbjs customer_record.proto -t static-module -w commonjs -o customer_record.js
-   *   pbjs customer_record.proto -t json --keep-case -o customer_record.json
-   * from the /samples directory to generate the customer_record module.
-   */
-
-  // So that BigQuery knows how to parse the serialized_rows, create a
-  // protocol buffer representation of your message descriptor.
-  const root = protobufjs.loadSync('./customer_record.json');
-  const descriptor = root.lookupType('CustomerRecord').toDescriptor('proto2');
-  const protoDescriptor = adapt.normalizeDescriptor(descriptor).toJSON();
-
-  /**
-   * TODO(developer): Uncomment the following lines before running the sample.
-   */
-  // projectId = 'my_project';
-  // datasetId = 'my_dataset';
-  // tableId = 'my_table';
-
-  const destinationTable = `projects/${projectId}/datasets/${datasetId}/tables/${tableId}`;
-  const streamType = managedwriter.PendingStream;
-  const writeClient = new WriterClient({projectId});
-  try {
-    const writeStream = await writeClient.createWriteStreamFullResponse({
-      streamType,
-      destinationTable,
-    });
-    const streamId = writeStream.name;
-    console.log(`Stream created: ${streamId}`);
-
-    const connection = await writeCli
+        synchroni
 ```

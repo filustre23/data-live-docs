@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -32,10 +32,11 @@ BigQuery 具體化檢視表管理作業包括：
 * [建立具體化檢視表](https://docs.cloud.google.com/bigquery/docs/materialized-views-create?hl=zh-tw)
 * [使用具體化檢視表](https://docs.cloud.google.com/bigquery/docs/materialized-views-use?hl=zh-tw)
 * [監控具體化檢視表](https://docs.cloud.google.com/bigquery/docs/materialized-views-monitor?hl=zh-tw)
+* [排解具體化檢視表問題](https://docs.cloud.google.com/bigquery/docs/materialized-views-troubleshoot?hl=zh-tw)
 
 ## 事前準備
 
-授予身分與存取權管理 (IAM) 角色，讓使用者取得執行本文各項工作所需的權限。執行工作所需的權限 (如有) 會列在工作的「必要權限」部分。
+授予身分與存取權管理 (IAM) 角色，讓使用者取得執行本文各項工作所需的權限。如要執行工作，必須具備的權限 (如有) 會列在工作的「必要權限」部分。
 
 ## 修改具體化檢視表
 
@@ -46,7 +47,7 @@ VIEW` 和 `SET OPTIONS`，透過 Google Cloud 控制台或 bq 指令列工具變
 
 ### 所需權限
 
-如要變更具體化檢視表，您需要 `bigquery.tables.get` 和 `bigquery.tables.update` IAM 權限。
+如要變更具體化檢視，您需要 `bigquery.tables.get` 和 `bigquery.tables.update` IAM 權限。
 
 下列預先定義的 IAM 角色都包含變更 materialized view 所需的權限：
 
@@ -54,7 +55,7 @@ VIEW` 和 `SET OPTIONS`，透過 Google Cloud 控制台或 bq 指令列工具變
 * `bigquery.dataOwner`
 * `bigquery.admin`
 
-如要進一步瞭解 BigQuery Identity and Access Management (IAM)，請參閱「[預先定義的角色與權限](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)」。
+如要進一步瞭解 BigQuery Identity and Access Management (IAM)，請參閱「[預先定義的角色和權限](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)」。
 
 ### SQL
 
@@ -72,7 +73,7 @@ VIEW` 和 `SET OPTIONS`，透過 Google Cloud 控制台或 bq 指令列工具變
 
    請替換下列項目：
 
-   * `PROJECT`：包含具體化檢視的專案名稱
+   * `PROJECT`：包含具體化檢視區塊的專案名稱
    * `DATASET`：包含具體化檢視區塊的資料集名稱
    * `MATERIALIZED_VIEW`：要變更的具體化檢視名稱
 3. 按一下「執行」play\_circle。
@@ -167,7 +168,7 @@ public class UpdateMaterializedView {
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 2. 在「Explorer」窗格中展開專案，按一下「Datasets」(資料集)，然後按一下資料集。
-3. 依序點選「總覽」**>「表格」**。捲動清單來檢視該資料集中的資料表，資料表、檢視表和具體化檢視表會分別以「類型」欄中的不同值呈現。具體化檢視表副本的值與具體化檢視表相同。
+3. 依序點選「總覽」**>「表格」**。捲動清單來檢視該資料集中的資料表，資料表、檢視區塊和具體化檢視區塊會以「類型」欄中的不同值表示。具體化檢視表副本的值與具體化檢視表相同。
 
 ### bq
 
@@ -182,8 +183,7 @@ bq ls --format=pretty project_id:dataset
 * project\_id 是您的專案 ID。
 * dataset 是資料集名稱。
 
-執行指令時，`Type` 欄位會顯示資料表類型。
-例如：
+執行指令時，`Type` 欄位會顯示資料表類型。例如：
 
 ```
 +-------------------------+--------------------+----------------------+-------------------+
@@ -202,7 +202,7 @@ bq ls --format=pretty project_id:dataset
 bq ls --format=pretty mydataset
 ```
 
-輸入下列指令，列出 `myotherproject` 中資料集 `mydataset` 的具體化檢視區塊。
+輸入下列指令，列出 `myotherproject` 中資料集 `mydataset` 的具體化檢視表。
 
 ```
 bq ls --format=pretty myotherproject:mydataset
@@ -278,7 +278,7 @@ for table in tables:
     print("{}.{}.{}".format(table.project, table.dataset_id, table.table_id))
 ```
 
-## 取得具體化檢視表的相關資訊
+## 取得具體化檢視的相關資訊
 
 您可以使用 SQL、bq 指令列工具或 BigQuery API，取得具體化檢視區塊的相關資訊。
 
@@ -297,7 +297,7 @@ for table in tables:
 * `roles/bigquery.dataViewer`
 * `roles/bigquery.admin`
 
-如要進一步瞭解 BigQuery 權限，請參閱「[使用 IAM 控管存取權](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)」。
+如要進一步瞭解 BigQuery 權限，請參閱[使用 IAM 控管存取權](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)。
 
 如要取得具體化檢視表的相關資訊，包括任何依附的[具體化檢視表副本](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer?hl=zh-tw#materialized_view_replicas)，請按照下列步驟操作：
 
@@ -325,7 +325,7 @@ for table in tables:
 
 ### bq
 
-使用 [`bq show`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_show) 指令：
+使用 [`bq show` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_show)：
 
 ```
 bq show --project=project_id --format=prettyjson dataset.materialized_view
@@ -334,12 +334,12 @@ bq show --project=project_id --format=prettyjson dataset.materialized_view
 更改下列內容：
 
 * project\_id：專案 ID。如要取得預設專案以外的專案具體化檢視表相關資訊，只需加入這個旗標。
-* dataset：包含具體化檢視的資料集名稱。
+* dataset：包含具體化檢視區塊的資料集名稱。
 * materialized\_view：要取得資訊的具體化檢視區塊名稱。
 
 範例：
 
-輸入下列指令，顯示 `myproject` 專案中 `report_views` 資料集的具體化檢視表 `my_mv` 相關資訊。
+輸入下列指令，顯示 `myproject` 專案中 `report_views` 資料集的實體化檢視表 `my_mv` 相關資訊。
 
 ```
 bq show --project=myproject --format=prettyjson report_views.my_mv
@@ -353,22 +353,22 @@ bq show --project=myproject --format=prettyjson report_views.my_mv
 
 您可以透過 Google Cloud 主控台、bq 指令列工具或 API 刪除具體化檢視區塊。
 
-**注意：** 一經刪除 materialized view 即無法復原。
+**注意：** 實體化檢視表一經刪除即無法復原。
 
-刪除具體化檢視表時，系統也會一併刪除與該具體化檢視表相關聯的權限。重新建立已刪除的具體化檢視區塊時，您也必須手動[重新設定先前與該檢視區塊相關聯的存取權](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam?hl=zh-tw)。
+刪除具體化檢視表時，系統也會一併刪除與該檢視表相關聯的所有權限。重新建立已刪除的具體化檢視區塊時，您也必須手動[重新設定先前與該檢視區塊相關聯的存取權](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam?hl=zh-tw)。
 
 ### 所需權限
 
 如要刪除具體化檢視，您需要 `bigquery.tables.delete`
 IAM 權限。
 
-下列每個預先定義的 IAM 角色都包含刪除具體化檢視所需的權限：
+下列每個預先定義的 IAM 角色都包含刪除具體化檢視區塊所需的權限：
 
 * `bigquery.dataEditor`
 * `bigquery.dataOwner`
 * `bigquery.admin`
 
-如要進一步瞭解 BigQuery Identity and Access Management (IAM)，請參閱「[預先定義的角色與權限](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)」。
+如要進一步瞭解 BigQuery Identity and Access Management (IAM)，請參閱「[預先定義的角色和權限](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)」。
 
 ### SQL
 
@@ -385,7 +385,7 @@ IAM 權限。
 
    請替換下列項目：
 
-   * `PROJECT`：包含具體化檢視的專案名稱
+   * `PROJECT`：包含具體化檢視區塊的專案名稱
    * `DATASET`：包含具體化檢視區塊的資料集名稱
    * `MATERIALIZED_VIEW`：要刪除的具體化檢視名稱
 3. 按一下「執行」play\_circle。
@@ -401,7 +401,7 @@ IAM 權限。
 呼叫 [`tables.delete`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/delete?hl=zh-tw) 方法，並為 `projectId`、`datasetId` 和 `tableId`
 [參數](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/delete?hl=zh-tw#path-parameters)指定值：
 
-* 將 `projectId` 參數指派給專案 ID。
+* 將 `projectId` 參數指派給您的專案 ID。
 * 將 `datasetId` 參數指派給資料集 ID。
 * 將 `tableId` 參數指派給要刪除的具體化檢視表資料表 ID。
 
@@ -448,28 +448,28 @@ public class DeleteMaterializedView {
 }
 ```
 
-**注意：** 如果未先刪除具體化檢視表，就刪除該檢視表的基礎資料表，則任何重新整理或查詢具體化檢視表的作業都會失敗。如果決定重新建立基本資料表，也必須重新建立具體化檢視區塊。
+**注意：** 如果刪除 materialized view 的基礎資料表，但未先刪除 materialized view，則任何重新整理或查詢 materialized view 的作業都會失敗。如果您決定重新建立基本資料表，也必須重新建立具體化檢視區塊。
 
 ## 重新整理具體化檢視表
 
 重新整理具體化檢視區塊會更新檢視區塊的快取資料，以反映基礎資料表的目前狀態。
 
-查詢具體化檢視表時，BigQuery 會傳回快取具體化檢視表資料和從基本資料表擷取的資料。如果可以，BigQuery 只會讀取上次重新整理檢視區塊後發生的變更。雖然在具體化檢視區塊重新整理期間，可能不會納入最近串流的資料，但無論是否使用具體化檢視區塊，查詢一律會讀取串流資料。
+查詢 materialized view 時，BigQuery 會傳回快取 materialized view 資料和從基礎資料表擷取的資料。如果可以，BigQuery 只會讀取上次重新整理檢視畫面後發生的變更。雖然具體化檢視表重新整理時可能不會納入最近串流的資料，但無論是否使用具體化檢視表，查詢一律會讀取串流資料。
 
-直接從基本資料表傳回查詢結果，比從快取具體化檢視表資料傳回結果，會產生更高的運算費用。定期重新整理具體化檢視區塊快取資料，可減少直接從基本資料表傳回的資料量，進而降低運算費用。
+直接從基礎資料表傳回查詢結果，比從快取具體化檢視表資料傳回結果，需要更高的運算成本。定期重新整理具體化檢視區塊的快取資料，可減少直接從基本資料表傳回的資料量，進而降低運算成本。
 
 本節將說明如何執行下列操作：
 
 * [設定自動重新整理](#automatic-refresh)
 * [手動重新整理具體化檢視表](#manual-refresh)
 
-**注意：** 如果未先刪除具體化檢視表就刪除基礎資料表，具體化檢視表就會無法重新整理。如要重新建立基礎資料表，也必須重新建立具體化檢視區塊。
+**注意：** 如果未先刪除具體化檢視表就刪除基本資料表，具體化檢視表就會無法重新整理。如要重新建立基底資料表，也必須重新建立具體化檢視區塊。
 
 ### 自動重新整理
 
 你隨時可以啟用或停用自動重新整理功能。自動重新整理工作是由 `bigquery-adminbot@system.gserviceaccount.com` 服務帳戶執行，並顯示在 materialized view 專案的工作記錄中。
 
-根據預設，實體化檢視中的快取資料會在基本資料表變更後 5 到 30 分鐘內，自動從基本資料表重新整理，例如插入或刪除資料列。
+根據預設，materialized view 中的快取資料會在基礎資料表變更後 5 到 30 分鐘內，自動從基礎資料表重新整理，例如插入或刪除資料列。
 
 您可以設定[重新整理頻率上限](#frequency_cap)，管理快取資料的自動重新整理頻率，進而管理具體化檢視區塊的費用和查詢效能。
 
@@ -484,14 +484,14 @@ OPTIONS (enable_refresh = false)
 AS SELECT ...
 ```
 
-如要修改現有實體化檢視區塊的 `enable_refresh` 值，請使用 `ALTER MATERIALIZED VIEW`。
+如為現有的具體化檢視區塊，您可以使用 `ALTER MATERIALIZED VIEW` 修改 `enable_refresh` 值。
 
 ```
 ALTER MATERIALIZED VIEW PROJECT.DATASET.MATERIALIZED_VIEW
 SET OPTIONS (enable_refresh = true);
 ```
 
-**注意：** 啟用自動重新整理功能後，系統會立即自動重新整理 materialized view。
+**注意：** 啟用自動重新整理功能後，系統會立即自動重新整理具體化檢視區塊。
 
 #### 設定展示頻率上限
 
@@ -507,7 +507,8 @@ OPTIONS (enable_refresh = true, refresh_interval_minutes = 60)
 AS SELECT ...
 ```
 
-同樣地，您可以在修改具體化檢視時設定展示頻率上限。這個範例假設您已啟用自動重新整理功能，現在只想變更展示頻率上限：
+同樣地，您可以在修改具體化檢視區塊時設定展示頻率上限。
+這個範例假設您已啟用自動重新整理功能，現在只想變更展示頻率上限：
 
 ```
 ALTER MATERIALIZED VIEW PROJECT.DATASET.MATERIALIZED_VIEW
@@ -516,16 +517,16 @@ SET OPTIONS (refresh_interval_minutes = 60);
 
 重新整理頻率上限下限為 1 分鐘。重新整理頻率上限為 7 天。
 
-您可以隨時手動重新整理具體化檢視表，且時間不受展示頻率上限限制。
+您可以隨時手動重新整理具體化檢視表，且時間不受頻率上限限制。
 
 #### 盡可能提供最佳服務
 
 系統會盡可能自動重新整理。
 如果基礎資料表在 30 分鐘內發生變更，BigQuery 會嘗試在 5 分鐘內啟動重新整理作業，但無法保證會在該時間啟動，也無法保證何時完成。
 
-**注意：** 查詢 materialized view 會反映基礎資料表的最新狀態，但如果檢視區最近未重新整理，查詢費用或延遲時間可能會高於預期。
+**注意：** 查詢 materialized view 時，會反映基礎資料表的最新狀態，但如果檢視區塊最近未重新整理，查詢費用或延遲時間可能會高於預期。
 
-自動重新整理的處理方式與[批次](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#batch)優先順序的查詢類似。如果具體化檢視區塊的專案目前沒有容量，系統會延後重新整理。如果專案包含許多重新整理成本很高的檢視區塊，每個檢視區塊相對於其基礎資料表，可能會大幅延遲。
+自動重新整理的處理方式與[批次](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#batch)優先順序的查詢類似。如果具體化檢視區塊的專案目前沒有容量，系統會延後重新整理。如果專案包含許多重新整理成本很高的檢視區塊，每個檢視區塊相對於其基本資料表，可能會大幅延遲。
 
 ### 手動重新整理
 
@@ -541,15 +542,16 @@ SET OPTIONS (refresh_interval_minutes = 60);
 * `bigquery.dataOwner`
 * `bigquery.admin`
 
-如要進一步瞭解 BigQuery Identity and Access Management (IAM)，請參閱「[預先定義的角色與權限](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)」。
+如要進一步瞭解 BigQuery Identity and Access Management (IAM)，請參閱「[預先定義的角色和權限](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)」。
 
-如要更新具體化檢視區塊中的資料，請呼叫 [`BQ.REFRESH_MATERIALIZED_VIEW`](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures?hl=zh-tw#bqrefresh_materialized_view) 系統程序。呼叫這個程序時，BigQuery 會找出基礎資料表發生的變更，並將這些變更套用至具體化檢視。查詢會在重新整理完成時結束。`BQ.REFRESH_MATERIALIZED_VIEW`
+如要更新具體化檢視區塊中的資料，請呼叫 [`BQ.REFRESH_MATERIALIZED_VIEW`](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures?hl=zh-tw#bqrefresh_materialized_view) 系統程序。呼叫這個程序時，BigQuery 會找出基礎資料表中的變更，並將這些變更套用至具體化檢視區塊。查詢
+`BQ.REFRESH_MATERIALIZED_VIEW`會在重新整理完成時結束。
 
 ```
 CALL BQ.REFRESH_MATERIALIZED_VIEW('PROJECT.DATASET.MATERIALIZED_VIEW');
 ```
 
-**注意：** 請勿一次執行多項重新整理作業。如果為同一個具體化檢視同時執行多項重新整理作業，只有第一個完成的重新整理作業會成功。
+**注意：** 請勿一次執行多項重新整理作業。如果對同一個 materialized view 同時執行多項重新整理作業，只有第一個完成的重新整理作業會成功。
 
 ## 監控具體化檢視表
 
@@ -562,11 +564,11 @@ CALL BQ.REFRESH_MATERIALIZED_VIEW('PROJECT.DATASET.MATERIALIZED_VIEW');
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-12 (世界標準時間)。
+上次更新時間：2026-10-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-12 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]

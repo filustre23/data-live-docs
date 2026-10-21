@@ -61,16 +61,17 @@ A single strongly-typed value.
 
 | JSON representation |
 | --- |
-| ``` {    // Union field value can be only one of the following:   "boolValue": boolean,   "int64Value": string,   "doubleValue": number,   "stringValue": string,   "distributionValue": {     object (Distribution)   }   // End of list of possible types for union field value. } ``` |
+| ``` {    // The following is a list of mutually exclusive fields. At most one of the   // fields will be set in a response:   "boolValue": boolean,   "int64Value": string,   "doubleValue": number,   "stringValue": string,   "distributionValue": {     object (Distribution)   }   // End of mutually exclusive fields. } ``` |
 
 | Fields | |
 | --- | --- |
-| Union field `value`. The typed value field. `value` can be only one of the following: | |
+| The typed value field. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response: | |
 | `boolValue` | `boolean`  A Boolean value: `true` or `false`. |
 | `int64Value` | `string (int64 format)`  A 64-bit integer. Its range is approximately `+/-9.2x10^18`. |
 | `doubleValue` | `number`  A 64-bit double-precision floating-point number. Its magnitude is approximately `+/-10^(+/-300)` and it has 16 significant digits of precision. |
 | `stringValue` | `string`  A variable-length string value. |
 | `distributionValue` | `object (Distribution)`  A distribution value. |
+| End of mutually exclusive fields. | |
 
 
 
@@ -79,11 +80,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2025-07-02 UTC.
+Last updated 2026-08-27 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2025-07-02 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-08-27 UTC."],[],[]]

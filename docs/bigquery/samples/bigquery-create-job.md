@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -169,6 +169,95 @@ public class CreateJob {
       System.out.print("Job was not created. \n" + e.toString());
     }
   }
+}
+```
+
+### Python
+
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+
+```
+from google.cloud import bigquery
+
+# Construct a BigQuery client object.
+client = bigquery.Client()
+
+query_job = client.create_job(
+    # Specify a job configuration, providing a query
+    # and/or optional job resource properties, as needed.
+    # The job instance can be a LoadJob, CopyJob, ExtractJob, QueryJob
+    # Here, we demonstrate a "query" job.
+    # References:
+    #     https://googleapis.dev/python/bigquery/latest/generated/google.cloud.bigquery.client.Client.html#google.cloud.bigquery.client.Client.create_job
+    #     https://cloud.google.com/bigquery/docs/reference/rest/v2/Job
+    #
+    # Example use cases for .create_job() include:
+    #    * to retry failed jobs
+    #    * to generate jobs with an experimental API property that hasn't
+    #      been added to one of the manually written job configuration
+    #      classes yet
+    #
+    # NOTE: unless it is necessary to create a job in this way, the
+    # preferred approach is to use one of the dedicated API calls:
+    #   client.query()
+    #   client.extract_table()
+    #   client.copy_table()
+    #   client.load_table_file(), client.load_table_from_dataframe(), etc
+    job_config={
+        "query": {
+            "query": """
+                     SELECT country_name
+                     FROM `bigquery-public-data.utility_us.country_code_iso`
+                     LIMIT 5
+                     """,
+        },
+        "labels": {"example-label": "example-value"},
+        "maximum_bytes_billed": 10000000,
+    }
+)  # Make an API request.
+
+print(f"Started job: {query_job.job_id}")
+```
+
+### Rust
+
+```
+use google_cloud_bigquery_v2::client::JobService;
+use google_cloud_bigquery_v2::model::{Job, JobConfiguration, JobConfigurationQuery, JobReference};
+
+pub async fn sample(project_id: &str) -> anyhow::Result<String> {
+    let job_service = JobService::builder().build().await?;
+    let job = Job::new()
+        .set_job_reference(
+            JobReference::new()
+                .set_project_id(project_id)
+                .set_job_id(format!("my_job_prefix_{}", rand::random::<u64>()))
+                .set_location("US"),
+        )
+        .set_configuration(
+            JobConfiguration::new()
+                .set_labels([("example-label", "example-value")])
+                .set_query(
+                    JobConfigurationQuery::new()
+                        .set_query("SELECT 1")
+                        .set_use_legacy_sql(false)
+                        .set_maximum_bytes_billed(10000000_i64),
+                ),
+        );
+
+    let job = job_service
+        .insert_job()
+        .set_project_id(project_id)
+        .set_job(job)
+        .into_job_poller()
+        .until_done()
+        .await?;
+    let job_id = job.job_reference.unwrap().job_id;
+    println!("Job completed successfully: {}", job_id);
+
+    Ok(job_id)
 }
 ```
 

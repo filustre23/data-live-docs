@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -52,6 +52,11 @@ CALL BQ.JOBS.CANCEL(job);
 
 ## BQ.CANCEL\_INDEX\_ALTERATION
 
+**預覽**
+
+這項功能適用《[服務專屬條款](https://docs.cloud.google.com/terms/service-terms?hl=zh-tw#1)》中「一般服務條款」一節的《正式發布前產品條款》。正式發布前功能是依「原樣」提供，支援服務可能受限。
+詳情請參閱[推出階段說明](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
+
 **語法**
 
 ```
@@ -60,7 +65,7 @@ CALL BQ.CANCEL_INDEX_ALTERATION(table_name, index_name);
 
 **說明**
 
-取消使用者啟動的[向量索引重建作業](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_vector_index_rebuild_statement)。
+取消使用者發起的[搜尋索引變更](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_search_index_statement)或[重建向量索引](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_vector_index_rebuild_statement)。
 
 以字串形式指定資料表名稱，格式為 `'[project_id.]dataset.table'`，並以字串形式指定索引名稱。如果您從與資料表不同的專案執行這項系統程序，則必須加入專案 ID。
 
@@ -82,14 +87,14 @@ CALL BQ.REFRESH_EXTERNAL_METADATA_CACHE(table_name [, [subdirectory_uri, …]]);
 
 **說明**
 
-重新整理 Google Cloud Lakehouse 資料表或物件資料表的中繼資料快取。
+重新整理 BigLake 資料表或物件資料表的中繼資料快取。
 如果對中繼資料快取模式設為 `AUTOMATIC` 的資料表執行這項程序，就會失敗。
 
 如要執行這項系統程序，您需要 `bigquery.tables.update` 和 `bigquery.tables.updateData` 權限。
 
 以字串形式指定資料表名稱，格式為 `'[project_id.]dataset.table'`。如果您從與資料表不同的專案執行這項系統程序，則必須加入專案 ID。
 
-如果是 Lakehouse 資料表，您可以選擇在 Cloud Storage 中，以 `'gs://table_data_directory/subdirectory/.../'` 格式指定資料表資料目錄的一或多個子目錄。這樣一來，您就能只重新整理這些子目錄中的資料表中繼資料，避免不必要的中繼資料處理作業。
+如果是 BigLake 資料表，您也可以選擇在 Cloud Storage 中，以 `'gs://table_data_directory/subdirectory/.../'` 格式指定資料表資料目錄的一或多個子目錄。如要讓選擇性重新整理功能正常運作，Cloud Storage 路徑參數必須包含特定路徑或萬用字元。詳情請參閱「[Cloud Storage URI 的萬用字元支援](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage?hl=zh-tw#wildcard-support)」。這樣一來，您就能只重新整理這些子目錄中的資料表的中繼資料，避免不必要的中繼資料處理作業。
 
 **範例**
 
@@ -99,7 +104,7 @@ CALL BQ.REFRESH_EXTERNAL_METADATA_CACHE(table_name [, [subdirectory_uri, …]]);
 CALL BQ.REFRESH_EXTERNAL_METADATA_CACHE('myproject.test_db.test_table')
 ```
 
-如要選擇性重新整理 Lakehouse 資料表的中繼資料，請按照下列步驟操作：
+如要選擇性重新整理 BigLake 資料表的中繼資料，請按照下列步驟操作：
 
 ```
 CALL BQ.REFRESH_EXTERNAL_METADATA_CACHE('myproject.test_db.test_table', ['gs://source/uri/sub/path/d1/*', 'gs://source/uri/sub/path/d2/*'])
@@ -122,7 +127,7 @@ CALL BQ.REFRESH_MATERIALIZED_VIEW(view_name);
 
 重新整理具體化檢視表。
 
-以字串形式指定 materialized view 的名稱，格式為 `'[project_id.]dataset.table'`。如果您從具體化檢視以外的專案執行這項系統程序，則必須加入專案 ID。
+以字串形式指定 materialized view 的名稱，格式為 `'[project_id.]dataset.table'`。如果您從具體化檢視區塊以外的專案執行這項系統程序，則必須加入專案 ID。
 
 詳情請參閱「[手動重新整理](https://docs.cloud.google.com/bigquery/docs/materialized-views?hl=zh-tw#manual_refresh)」。
 
@@ -136,9 +141,9 @@ CALL BQ.SHOW_GRAPH_EXPAND_SCHEMA(graph_name, output_schema);
 
 **說明**
 
-使用透過在 `graph_name` 上呼叫 [`GRAPH_EXPAND` TVF](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-sql-queries?hl=zh-tw#graph_expand)傳回的資料表結構定義，填入您提供的 `output_schema` 變數。
+使用透過在 `graph_name` 上呼叫 [`GRAPH_EXPAND` TVF](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-sql-queries?hl=zh-tw#graph_expand) 傳回的資料表結構定義，填入您提供的 `output_schema` 變數。
 
-以字串形式指定[圖表](https://docs.cloud.google.com/bigquery/docs/graph-overview?hl=zh-tw)名稱，格式為 `'[project_id.]dataset.graph'`。TVF 傳回的每個資料欄都會在圖表中顯示為屬性。`GRAPH_EXPAND`輸出內容包含每個資料欄的名稱、類型和模式。如果屬性有定義說明或同義字，這些內容會顯示在資料欄的 `description` 欄位中。如果屬性定義了指標，輸出內容就會包含該欄位的 `"is_measure":true`。
+以字串形式指定[圖表](https://docs.cloud.google.com/bigquery/docs/graph-overview?hl=zh-tw)名稱，格式為 `'[project_id.]dataset.graph'`。TVF 傳回的每個資料欄都代表圖中的屬性。`GRAPH_EXPAND`輸出內容包含每個資料欄的名稱、類型和模式。如果屬性有定義說明或同義字，這些內容會顯示在資料欄的 `description` 欄位中。如果屬性定義了測量值，輸出內容會包含該欄位的 `"is_measure":true`。
 
 **範例**
 
@@ -183,11 +188,11 @@ SELECT schema;
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-04-22 (世界標準時間)。
+上次更新時間：2026-10-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-04-22 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]

@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -16,7 +16,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 指定預設資料欄值
 
-本頁說明如何為 BigQuery 資料表中的資料欄設定預設值。如果將資料列新增至不含預設值資料欄資料的表格，系統會改為將預設值寫入該資料欄。
+本頁說明如何為 BigQuery 資料表中的資料欄設定預設值。如果新增至資料表的資料列不含預設值資料欄的資料，系統會改為將預設值寫入該資料欄。
 
 ## 預設值運算式
 
@@ -33,7 +33,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 您可以使用這些函式撰寫 STRUCT 或 ARRAY 預設值，例如 `[CURRENT_DATE(), DATE '2020-01-01']`。
 
-在作業處理期間，系統會在資料寫入資料表之前評估函式。預設值的類型必須與所套用資料欄的類型相符或[強制轉型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_rules?hl=zh-tw#comparison_chart)為該類型。如未設定預設值，預設值為 `NULL`。
+在作業處理期間，系統會在資料寫入資料表之前評估函式。預設值的類型必須與所套用資料欄的類型相符，或[強制轉型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_rules?hl=zh-tw#comparison_chart)為該類型。如未設定預設值，預設值為 `NULL`。
 
 ## 設定預設值
 
@@ -45,7 +45,7 @@ CREATE TABLE mydataset.simple_table (
   b STRING DEFAULT 'hello');
 ```
 
-將資料插入 `simple_table` 時，如果省略資料欄 `b`，系統會改用預設值 `'hello'`，例如：
+如果您將資料插入 `simple_table` 時省略資料欄 `b`，系統會改用預設值 `'hello'`，例如：
 
 ```
 INSERT mydataset.simple_table (a) VALUES ('val1'), ('val2');
@@ -62,7 +62,7 @@ INSERT mydataset.simple_table (a) VALUES ('val1'), ('val2');
 +------+-------+
 ```
 
-如果資料欄的類型為 `STRUCT`，則必須為整個 `STRUCT` 欄位設定預設值。您無法為部分欄位設定預設值。陣列的預設值不得為 `NULL` 或包含任何 `NULL` 元素。以下範例會建立名為 `complex_table` 的資料表，並為包含巢狀欄位的 `struct_col` 資料欄設定預設值，包括 `ARRAY` 型別：
+如果資料欄的類型為 `STRUCT`，則必須為整個 `STRUCT` 欄位設定預設值。您無法為部分欄位設定預設值。陣列的預設值不得為 `NULL` 或包含任何 `NULL` 元素。以下範例會建立名為 `complex_table` 的資料表，並為包含巢狀欄位 (包括 `ARRAY` 型別) 的 `struct_col` 資料欄設定預設值：
 
 ```
 CREATE TABLE mydataset.complex_table (
@@ -87,16 +87,16 @@ CREATE TABLE mydataset.complex_table (
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Explorer」窗格中展開專案，按一下「Datasets」，然後選取資料集。
-4. 依序點選「總覽」**>「資料表」**，然後按一下資料表。
+4. 依序點選「總覽」**>「資料表」**，然後點選所需資料表。
 5. 按一下「結構定義」分頁標籤。
-6. 點選「編輯結構定義」。你可能需要捲動頁面才能看到這個按鈕。
+6. 點選「編輯結構定義」。你可能需要捲動畫面才能看到這個按鈕。
 7. 在「目前的結構定義」頁面中，找出要變更的頂層欄位。
 8. 輸入該欄位的預設值。
 9. 按一下 [儲存]。
 
 ### SQL
 
-使用 [`ALTER COLUMN SET DEFAULT`DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_column_set_default_statement)。
+使用 [`ALTER COLUMN SET DEFAULT` DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_column_set_default_statement)。
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -151,14 +151,14 @@ INSERT mydataset.simple_table (b) VALUES ('goodbye');
 3. 在「Explorer」窗格中展開專案，按一下「Datasets」(資料集)，然後選取資料集。
 4. 依序點選「總覽」**>「表格」**，然後選取所需表格。
 5. 在詳細資料窗格中，按一下「結構定義」分頁標籤。
-6. 點選「編輯結構定義」。你可能需要捲動頁面才能看到這個按鈕。
+6. 點選「編輯結構定義」。你可能需要捲動畫面才能看到這個按鈕。
 7. 在「目前的結構定義」頁面中，找出要變更的頂層欄位。
 8. 輸入 `NULL` 做為預設值。
 9. 按一下 [儲存]。
 
 ### SQL
 
-使用 [`ALTER COLUMN DROP DEFAULT`DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_column_drop_default_statement)。
+使用 [`ALTER COLUMN DROP DEFAULT` DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_column_drop_default_statement)。
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -214,7 +214,7 @@ INSERT mydataset.mytable (z) VALUES (TRUE);
 +-----------------+---+------+
 ```
 
-您可以使用 [`MERGE` DML 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax?hl=zh-tw#merge_statement)，以預設值更新資料表。以下範例會建立兩個資料表，並使用 `MERGE` 陳述式更新其中一個資料表：
+您可以使用 [`MERGE` DML 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax?hl=zh-tw#merge_statement)，以預設值更新資料表。下列範例會建立兩個資料表，並使用 `MERGE` 陳述式更新其中一個資料表：
 
 ```
 CREATE TABLE mydataset.target_table (
@@ -259,7 +259,7 @@ WHEN NOT MATCHED THEN
 +------+-----------+--------------------+
 ```
 
-您可以使用 [`UPDATE` DML 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax?hl=zh-tw#update_statement)，以預設值更新資料表。以下範例會更新 `source_table` 資料表，使資料欄 `b` 的每個資料列都等於預設值：
+您可以使用 [`UPDATE` DML 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax?hl=zh-tw#update_statement)，以預設值更新資料表。以下範例會更新 `source_table` 資料表，使 `b` 資料欄的每個資料列都等於預設值：
 
 ```
 UPDATE mydataset.source_table
@@ -307,7 +307,7 @@ bq query \
 
 您可以使用 [`bq load` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_load)或 [`LOAD DATA` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/other-statements?hl=zh-tw#load_data_statement)，將資料[載入](https://docs.cloud.google.com/bigquery/docs/loading-data?hl=zh-tw)含有預設值的資料表。如果載入的資料欄數少於目的地資料表，系統會套用預設值。載入資料中的 `NULL` 值不會轉換為預設值。
 
-二進位格式 (例如 AVRO、Parquet 或 ORC) 具有編碼的檔案結構定義。如果檔案結構定義省略部分資料欄，系統會套用預設值。
+二進位格式 (例如 AVRO、Parquet 或 ORC) 具有編碼的檔案結構定義。如果檔案結構缺少某些資料欄，系統會套用預設值。
 
 JSON 和 CSV 等文字格式沒有編碼的檔案結構定義。如要使用 bq 指令列工具指定結構定義，可以使用 `--autodetect` 旗標或提供 [JSON 結構定義](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#specifying_a_json_schema_file)。如要使用 `LOAD DATA` 陳述式指定結構定義，您必須提供資料欄清單。以下範例只會從 CSV 檔案載入 `a` 欄：
 
@@ -318,9 +318,9 @@ FROM FILES(
   format = 'CSV');
 ```
 
-## Write API
+## 使用 Storage Write API (gRPC)
 
-只有在[寫入串流](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1?hl=zh-tw#google.cloud.bigquery.storage.v1.WriteStream)結構定義缺少目的地資料表結構定義中的欄位時，Storage Write API 才會填入預設值。在這種情況下，系統會在每次寫入時，為欄位填入預設值。如果欄位存在於寫入串流結構定義中，但資料本身缺少該欄位，系統會以 `NULL` 填入缺少的欄位。舉例來說，假設您要將資料寫入具有下列結構定義的 BigQuery 資料表：
+只有在[寫入串流](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1?hl=zh-tw#google.cloud.bigquery.storage.v1.WriteStream)結構定義缺少目的地資料表結構定義中的欄位時，Storage Write API (gRPC) 才會填入預設值。在這種情況下，系統會在每次寫入時，為欄位填入預設值。如果寫入串流結構定義中存在該欄位，但資料本身缺少該欄位，系統會以 `NULL` 填入缺少的欄位。舉例來說，假設您要將資料寫入具有下列結構定義的 BigQuery 資料表：
 
 ```
 [
@@ -416,9 +416,9 @@ FROM FILES(
 +-------+-------+------+
 ```
 
-您可以在 [`AppendRowsRequest` 訊息](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1?hl=zh-tw#google.cloud.bigquery.storage.v1.AppendRowsRequest)的 `default_missing_value_interpretation` 中指定連線層級的預設值設定。如果值設為 `DEFAULT_VALUE`，即使資料欄出現在使用者結構定義中，遺漏的值也會採用預設值。
+您可以在 [`AppendRowsRequest` 訊息的 `default_missing_value_interpretation` 中指定連線層級的預設值設定。](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1?hl=zh-tw#google.cloud.bigquery.storage.v1.AppendRowsRequest)如果值設為 `DEFAULT_VALUE`，即使資料欄出現在使用者結構定義中，遺漏的值仍會採用預設值。
 
-您也可以在 [`AppendRowsRequest` 訊息](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1?hl=zh-tw#google.cloud.bigquery.storage.v1.AppendRowsRequest)的 `missing_value_interpretations` 對應中指定要求層級的預設值。每個鍵都是資料欄的名稱，而其[值](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1?hl=zh-tw#missingvalueinterpretation)則表示如何解讀遺漏值。
+您也可以在 [`AppendRowsRequest` 訊息的 `missing_value_interpretations` 對應中指定要求層級的預設值](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1?hl=zh-tw#google.cloud.bigquery.storage.v1.AppendRowsRequest)。每個鍵都是資料欄的名稱，而其[值](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1?hl=zh-tw#missingvalueinterpretation)則表示如何解讀遺漏值。
 
 舉例來說，地圖 `{'col1': NULL_VALUE, 'col2': DEFAULT_VALUE}` 表示 `col1` 中的所有遺漏值都會解讀為 `NULL`，而 `col2` 中的所有遺漏值都會解讀為資料表結構定義中為 `col2` 設定的預設值。
 
@@ -426,9 +426,9 @@ FROM FILES(
 
 鍵只能是頂層資料欄名稱。索引鍵不得為結構體子欄位，例如 `col1.subfield1`。
 
-## 使用 `insertAll` API 方法
+## 使用 BigQuery Storage Write API (REST)
 
-當資料寫入資料表時，[`tabledata.insertAll` API 方法](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/insertAll?hl=zh-tw)會在資料列層級填入預設值。如果資料列缺少具有預設值的資料欄，系統會將預設值套用至這些資料欄。
+使用 [Storage Write API (REST)](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery?hl=zh-tw) 將資料寫入資料表時，系統會在資料列層級填入預設值。如果資料列缺少具有預設值的資料欄，系統會將預設值套用至這些資料欄。
 
 舉例來說，假設您有下列資料表結構定義：
 
@@ -520,11 +520,11 @@ WHERE
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-12 (世界標準時間)。
+上次更新時間：2026-10-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-12 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]

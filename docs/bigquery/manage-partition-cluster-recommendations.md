@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -18,7 +18,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 本文說明分割區和叢集建議工具的運作方式、如何查看建議和洞察資料，以及如何套用分割區和叢集建議。
 
-## 推薦工具的運作方式
+## 建議工具的運作方式
 
 BigQuery 分區和分群建議工具會產生[分區](https://docs.cloud.google.com/bigquery/docs/partitioned-tables?hl=zh-tw)或[分群](https://docs.cloud.google.com/bigquery/docs/clustered-tables?hl=zh-tw)建議，協助您最佳化 BigQuery 資料表。建議工具會分析 BigQuery 資料表的工作流程，並提供建議，協助您使用資料表分區或資料表分群進一步改善工作流程並降低查詢費用。
 
@@ -29,13 +29,13 @@ BigQuery 分區和分群建議工具會產生[分區](https://docs.cloud.google.
 | 現有資料表類型 | 建議子類型 | 建議範例 |
 | --- | --- | --- |
 | 未分區、未叢集 | 分區 | 「根據 column\_C 按照 DAY 分區，每個月約可省下 64 個運算單元時數」 |
-| 未分區、未叢集 | 叢集 | 「將 column\_C 分群，每月約可省下 64 個運算單元小時」 |
-| 已分區，未叢集 | 叢集 | 「將 column\_C 分群，每月約可省下 64 個運算單元小時」 |
+| 未分區、未叢集 | 叢集 | 「根據 column\_C 分群，每月約可省下 64 個運算單元小時」 |
+| 已分區，未叢集 | 叢集 | 「根據 column\_C 分群，每月約可省下 64 個運算單元小時」 |
 
 每項建議都包含三個部分：
 
 * 分區或叢集特定資料表的指引
-* 要分區或叢集化的資料表中的特定資料欄
+* 要分區或叢集資料表的特定資料欄
 * 套用建議後預估每月可省下的費用
 
 為計算潛在工作負載節省量，建議工具會假設過去 30 天的歷來執行工作負載資料代表未來的工作負載。
@@ -43,7 +43,7 @@ BigQuery 分區和分群建議工具會產生[分區](https://docs.cloud.google.
 **注意：** 在某些情況下，預估節省金額可能會過高。詳情請參閱「[高估節省金額](#overestimation)」一文。
 
 建議事項 API 也會以*洞察*的形式傳回資料表工作負載資訊。
-[洞察](https://docs.cloud.google.com/recommender/docs/insights/using-insights?hl=zh-tw)是可協助您瞭解專案工作負載的發現，提供更多背景資訊，說明分割區或叢集建議如何降低工作負載成本。
+[洞察](https://docs.cloud.google.com/recommender/docs/insights/using-insights?hl=zh-tw)是可協助您瞭解專案工作負載的發現，可提供更多背景資訊，說明分割區或叢集建議如何改善工作負載成本。
 
 ## 限制
 
@@ -126,10 +126,10 @@ BigQuery 分區和分群建議工具會產生[分區](https://docs.cloud.google.
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 在導覽選單中，按一下「建議」。
 
-   「最佳化建議」分頁會列出專案可用的所有最佳化建議。
-3. 在「盡可能降低 BigQuery 工作負載成本」面板中，按一下「查看全部」。
+   「建議」分頁會列出專案可用的所有建議。
+3. 在「最佳化 BigQuery 工作負載成本」面板中，按一下「查看全部」。
 
-   費用建議表格會列出為目前專案產生的所有建議。舉例來說，下列螢幕截圖顯示建議工具分析了 `example_table` 資料表，然後建議分群 `example_column` 欄，以節省大約位元組和運算單元的數量。
+   費用建議表格會列出為目前專案產生的所有建議。舉例來說，下列螢幕截圖顯示建議工具分析 `example_table` 資料表後，建議分群 `example_column` 欄，以節省大約位元組和運算單元數量。
 4. 如要進一步瞭解表格洞察資料和建議，請按一下建議。
 
 ### gcloud
@@ -156,10 +156,10 @@ gcloud recommender recommendations list \
 | --- | --- | --- |
 | `recommenderSubtype` | 分區或叢集 | 指出建議類型。 |
 | `content.overview.partitionColumn` | 分區 | 建議的分區資料欄名稱。 |
-| `content.overview.partitionTimeUnit` | 分區 | 建議的分區時間單位。舉例來說，`DAY` 表示建議在建議的資料欄中建立每日分區。 |
+| `content.overview.partitionTimeUnit` | 分區 | 建議的分區時間單位。舉例來說，`DAY` 表示建議在建議的資料欄中加入每日分區。 |
 | `content.overview.clusterColumns` | 叢集 | 建議的叢集資料欄名稱。 |
 
-* 如要進一步瞭解建議回應中的其他欄位，請參閱「[REST 資源：`projects.locations.recommendersrecommendation`](https://docs.cloud.google.com/recommender/docs/reference/rest/v1/projects.locations.recommenders.recommendations?hl=zh-tw#resource:-recommendation)」。
+* 如要進一步瞭解建議工具回應中的其他欄位，請參閱「[REST 資源：`projects.locations.recommendersrecommendation`](https://docs.cloud.google.com/recommender/docs/reference/rest/v1/projects.locations.recommenders.recommendations?hl=zh-tw#resource:-recommendation)」。
 * 如要進一步瞭解如何使用 Recommender API，請參閱「[使用 API - 建議](https://docs.cloud.google.com/recommender/docs/using-api?hl=zh-tw)」。
 
 如要使用 gcloud CLI 查看表格洞察，請使用 [`gcloud recommender insights list` 指令](https://docs.cloud.google.com/sdk/gcloud/reference/recommender/insights/list?hl=zh-tw)：
@@ -193,7 +193,7 @@ gcloud recommender insights list \
 
 ### REST API
 
-如要查看特定專案的分區或叢集建議，請使用 REST API。執行每個指令時，您都必須提供驗證權杖，這類權杖可使用 gcloud CLI 取得。如要進一步瞭解如何取得驗證權杖，請參閱「[取得 ID 權杖的方法](https://docs.cloud.google.com/docs/authentication/get-id-token?hl=zh-tw)」。
+如要查看特定專案的分區或叢集建議，請使用 REST API。您必須為每個指令提供驗證權杖，這類權杖可透過 gcloud CLI 取得。如要進一步瞭解如何取得驗證權杖，請參閱「[取得 ID 權杖的方法](https://docs.cloud.google.com/docs/authentication/get-id-token?hl=zh-tw)」。
 
 您可以透過 `curl list` 要求，查看特定專案的所有最佳化建議：
 
@@ -208,16 +208,16 @@ curl
 * `GCLOUD_AUTH_TOKEN`：有效的 gcloud CLI 存取權杖名稱
 * `PROJECT_NAME`：包含 BigQuery 資料表的專案名稱
 
-下表說明 Recommender API 回應中的重要欄位：
+下表說明推薦工具 API 回應中的重要欄位：
 
 | 屬性 | 適用於子類型 | 說明 |
 | --- | --- | --- |
 | `recommenderSubtype` | 分區或叢集 | 指出建議類型。 |
 | `content.overview.partitionColumn` | 分區 | 建議的分區資料欄名稱。 |
-| `content.overview.partitionTimeUnit` | 分區 | 建議的分區時間單位。舉例來說，`DAY` 表示建議在建議的資料欄中建立每日分區。 |
+| `content.overview.partitionTimeUnit` | 分區 | 建議的分區時間單位。舉例來說，`DAY` 表示建議在建議的資料欄中加入每日分區。 |
 | `content.overview.clusterColumns` | 叢集 | 建議的叢集資料欄名稱。 |
 
-* 如要進一步瞭解建議回應中的其他欄位，請參閱「[REST 資源：`projects.locations.recommendersrecommendation`](https://docs.cloud.google.com/recommender/docs/reference/rest/v1/projects.locations.recommenders.recommendations?hl=zh-tw#resource:-recommendation)」。
+* 如要進一步瞭解建議工具回應中的其他欄位，請參閱「[REST 資源：`projects.locations.recommendersrecommendation`](https://docs.cloud.google.com/recommender/docs/reference/rest/v1/projects.locations.recommenders.recommendations?hl=zh-tw#resource:-recommendation)」。
 * 如要進一步瞭解如何使用 Recommender API，請參閱「[使用 API - 建議](https://docs.cloud.google.com/recommender/docs/using-api?hl=zh-tw)」。
 
 如要使用 REST API 查看資料表洞察，請執行下列指令：
@@ -246,7 +246,7 @@ curl
 * 如要進一步瞭解洞察回應中的其他欄位，請參閱 [REST 資源：`projects.locations.insightTypes.insights`](https://docs.cloud.google.com/recommender/docs/reference/rest/v1/projects.locations.insightTypes.insights?hl=zh-tw#resource:-insight)。
 * 如要進一步瞭解如何使用洞察資料，請參閱「[使用 API - 洞察](https://docs.cloud.google.com/recommender/docs/insights/using-api?hl=zh-tw)」。
 
-### 查看 `INFORMATION_SCHEMA` 建議
+### 使用 `INFORMATION_SCHEMA` 查看建議
 
 **預覽**
 
@@ -298,7 +298,7 @@ LIMIT 3;
 如要套用叢集建議，請採取下列其中一種做法：
 
 * [直接將叢集套用至原始資料表](#apply_clusters_directly_to_the_original_table)
-* [將叢集套用至複製的資料表](#apply_clusters_to_a_copied_table)
+* [將叢集套用至複製的表格](#apply_clusters_to_a_copied_table)
 * [在具體化檢視表中套用叢集](#apply_clusters_in_a_materialized_view)
 
 ### 直接將叢集套用至原始表格
@@ -352,7 +352,7 @@ LIMIT 3;
 3. 在 Google Cloud 控制台中開啟 Cloud Shell 編輯器。
 
    [啟用 Cloud Shell](https://console.cloud.google.com/bigquery?cloudshell=true&hl=zh-tw)
-4. 在 Cloud Shell 編輯器中，使用 `bq update` 指令更新所複製資料表的分群規格，以符合建議的分群：
+4. 在 Cloud Shell 編輯器中，使用 `bq update` 指令，更新所複製資料表的分群規格，使其符合建議的分群方式：
 
    ```
     bq update --clustering_fields=CLUSTER_COLUMN DATASET.COPIED_TABLE
@@ -361,7 +361,7 @@ LIMIT 3;
    將 `CLUSTER_COLUMN` 替換為要用於叢集化的資料欄，例如 `mycolumn`。
 
    您也可以呼叫 `tables.update` 或 `tables.patch` API 方法來[修改叢集規格](https://docs.cloud.google.com/bigquery/docs/manage-clustered-tables?hl=zh-tw#modifying-cluster-spec)。
-5. 在查詢編輯器中，擷取原始資料表的資料表結構定義，以及分區和分群設定 (如有)。如要擷取結構定義，請查看原始資料表的 `INFORMATION_SCHEMA.TABLES` 檢視畫面：
+5. 在查詢編輯器中，擷取原始資料表的分區和分群設定 (如有)。您可以查看原始資料表的 `INFORMATION_SCHEMA.TABLES` 檢視畫面，擷取結構定義：
 
    ```
    SELECT
@@ -419,7 +419,7 @@ LIMIT 3;
 
         將 `COLUMN_NAMES` 替換為上一個步驟的輸出內容 (以逗號分隔的資料欄清單)，例如 `col1, col2, col3`。
 
-   您現在已擁有分群複製資料表，其中包含與原始資料表相同的資料。
+   您現在已擁有分群複製資料表，內含與原始資料表相同的資料。
    在後續步驟中，您會以新建立的分群資料表取代原始資料表。
 7. 將原始資料表重新命名為備份資料表：
 
@@ -461,13 +461,13 @@ LIMIT 3;
 
 ## 套用分區建議
 
-如要套用分區建議，請務必將建議套用至原始資料表的副本。BigQuery 不支援就地變更資料表的分區架構，例如將未分區的資料表變更為分區資料表、變更資料表的分區架構，或是建立與基礎資料表分區架構不同的具體化檢視區塊。您只能在資料表副本上變更資料表的分區。
+如要套用分區建議，請務必將建議套用至原始表格的副本。BigQuery 不支援就地變更資料表的分區架構，例如將未分區的資料表變更為分區資料表、變更資料表的分區架構，或是建立與基礎資料表分區架構不同的具體化檢視區塊。您只能在資料表副本上變更資料表的分區。
 
 **注意：** 請先將舊版 SQL 工作流程遷移至 GoogleSQL，再套用分割區建議。詳情請參閱「[限制](https://docs.cloud.google.com/bigquery/docs/manage-partition-cluster-recommendations?hl=zh-tw#limitations)」一節。
 
 ### 將分區建議套用至複製的資料表
 
-將分區建議套用至 BigQuery 資料表時，您必須先複製原始資料表，然後將建議套用至複製的資料表。這樣一來，如果需要復原分割區，就能保留原始資料。
+將分區建議套用至 BigQuery 資料表時，您必須先複製原始資料表，然後將建議套用至複製的資料表。這樣一來，如果需要復原分割區，原始資料就能保留下來。
 
 下列程序會使用範例建議，依分區時間單位 `DAY` 將資料表分區。
 
@@ -541,7 +541,7 @@ BigQuery 執行計畫通常會將複雜查詢拆分成多個不同的「階段�
 
 如要驗證特定叢集建議，可以在 Google Cloud 控制台中執行下列查詢，找出可能導致高估的工作。
 
-這項查詢會在工作記錄中，搜尋單一工作在超過 10 個不同的執行階段掃描相同資料表的例項。
+這項查詢會在工作記錄中搜尋單一工作掃描相同資料表，且執行階段超過 10 個的例項。
 
 ```
 SELECT
@@ -580,7 +580,7 @@ LIMIT 100;
 
 將 `REGION_NAME` 替換為專案所在的區域。
 
-如果建議中的資料表有高 `scan_count` (例如大於 20) 的工作，該資料表的預估節省金額可能就會膨脹。雖然叢集仍可能帶來效能優勢，但實際節省的費用不會達到建議的程度。
+如果建議中的資料表有高 `scan_count` (例如大於 20) 的工作，該資料表的預估節省金額可能就會膨脹。雖然叢集仍可能帶來效能優勢，但實際節省的費用不會達到建議所指的程度。
 
 ## 定價
 
@@ -589,7 +589,7 @@ LIMIT 100;
 * **處理成本。**套用建議時，您會對 BigQuery 專案執行資料定義語言 (DDL) 或資料操縱語言 (DML) 查詢。
 * **儲存空間費用**。如果使用複製資料表的方法，複製 (或備份) 的資料表會佔用額外儲存空間。
 
-系統會根據與專案相關聯的帳單帳戶，收取標準處理和儲存費用。詳情請參閱 [BigQuery 計價方式](https://cloud.google.com/bigquery/pricing?hl=zh-tw)一文。
+系統會根據與專案相關聯的帳單帳戶，收取標準處理和儲存費用。詳情請參閱 [BigQuery 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw)。
 
 ## 疑難排解
 
@@ -613,7 +613,7 @@ LIMIT 100;
 
 **問題：**預估節省金額過高。
 
-如果工作負載涉及複雜查詢，且在多個不同的執行階段中多次參照相同資料表，系統可能會高估每月預估節省金額。詳情請參閱「[高估節省金額](#overestimation)」一文。
+如果您的工作負載涉及複雜查詢，且在許多不同的執行階段中多次參照相同資料表，系統可能會高估每月預估節省金額。詳情請參閱「[高估節省金額](#overestimation)」一文。
 
 
 
@@ -622,11 +622,11 @@ LIMIT 100;
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-22 (世界標準時間)。
+上次更新時間：2026-10-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-22 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]

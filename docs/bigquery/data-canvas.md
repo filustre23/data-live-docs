@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -16,15 +16,15 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 透過 BigQuery 資料畫布分析資料
 
-本文說明如何使用資料畫布進行資料分析。您也可以使用 [Knowledge Catalog](https://docs.cloud.google.com/dataplex/docs/introduction?hl=zh-tw) 管理資料畫布中繼資料。
+本文說明如何使用資料畫布進行資料分析。您也可以使用 [Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/introduction?hl=zh-tw) 管理資料畫布中繼資料。
 
-BigQuery 資料畫布是 [Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/gemini-overview?hl=zh-tw) 的功能，可讓您透過自然語言提示和圖形介面，尋找、轉換、查詢資料並以圖表呈現，進行分析工作流程。
+BigQuery 資料畫布是 [Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/gemini-overview?hl=zh-tw) 的功能，可讓您使用自然語言提示和圖形介面，尋找、轉換、查詢資料，並以圖表呈現，用於分析工作流程。
 
-在分析工作流程中，BigQuery 資料畫布會使用[有向無環圖](https://en.wikipedia.org/wiki/Directed_acyclic_graph) (DAG)，以圖形檢視工作流程。在 BigQuery 資料畫布中，您可以反覆查詢結果，並在單一位置處理多個查詢分支。
+BigQuery 資料畫布會使用[有向無環圖](https://en.wikipedia.org/wiki/Directed_acyclic_graph) (DAG) 處理分析工作流程，以圖形方式呈現工作流程。在 BigQuery 資料畫布中，您可以反覆查詢結果，並在單一位置處理多個查詢分支。
 
-BigQuery 資料畫布旨在加速分析工作，協助資料專業人員 (例如資料分析師、資料工程師等) 進行資料到洞察的歷程。您不必具備特定工具的技術知識，只要基本熟悉如何讀取及撰寫 SQL 即可。BigQuery 資料畫布會搭配 [Knowledge Catalog](https://docs.cloud.google.com/dataplex/docs/introduction?hl=zh-tw) 中繼資料，根據自然語言找出合適的資料表。
+BigQuery 資料畫布旨在加速分析工作，並協助資料分析師、資料工程師等資料專業人員，完成從資料到洞察的過程。您不需要具備特定工具的技術知識，只要熟悉 SQL 的基本讀寫操作即可。BigQuery 資料畫布會搭配 [Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/introduction?hl=zh-tw) 中繼資料，根據自然語言找出合適的資料表。
 
-BigQuery 資料畫布不適合由業務使用者直接使用。
+BigQuery 資料畫布不適合業務使用者直接使用。
 
 BigQuery 資料畫布會使用 Gemini in BigQuery 尋找資料、建立 SQL、生成圖表及建立資料摘要。
 
@@ -34,13 +34,13 @@ BigQuery 資料畫布會使用 Gemini in BigQuery 尋找資料、建立 SQL、�
 
 BigQuery 資料畫布可讓您執行下列操作：
 
-* 使用自然語言查詢或[關鍵字搜尋語法](https://docs.cloud.google.com/data-catalog/docs/how-to/search-reference?hl=zh-tw)，搭配 Knowledge Catalog 中繼資料，找出資料表、檢視區塊或具體化檢視區塊等資產。
-* 使用自然語言執行基本 SQL 查詢，例如：
+* 使用[自然語言搜尋](https://docs.cloud.google.com/knowledge-catalog/docs/about-search?hl=zh-tw)功能和 Knowledge Catalog 中繼資料，尋找資料表、檢視表或 materialized view 等資產。
+* 使用自然語言進行基本 SQL 查詢，例如：
 
   + 包含 `FROM` 子句、數學函式、陣列和結構體的查詢。
   + 兩個資料表的 `JOIN` 作業。
-* 使用自然語言描述所需內容，即可建立自訂視覺化效果。
-* 自動取得資料洞察。
+* 使用自然語言描述所需內容，即可建立自訂圖表。
+* 自動生成資料洞察結果。
 
 ## 限制
 
@@ -54,32 +54,32 @@ BigQuery 資料畫布可讓您執行下列操作：
   + JSON
   + 巢狀和重複欄位
   + 複雜函式和資料類型，例如 `DATETIME` 和 `TIMEZONE`
-* 資料視覺化功能不適用於地理地圖圖表。
+* 資料視覺化不適用於地理區域圖表。
 
 ## 提示最佳做法
 
-只要使用適當的提示技巧，就能生成複雜的 SQL 查詢。BigQuery 資料畫布會根據下列建議修正自然語言提示，提高查詢準確度：
+只要使用適當的提示技巧，就能生成複雜的 SQL 查詢。下列建議可協助 BigQuery 資料畫布修正自然語言提示，提高查詢準確度：
 
 * **清楚表達。**清楚說明要求，避免含糊不清。
-* **直接提問。**如要獲得最精確的答案，請一次只問一個問題，並簡潔明瞭地提供提示。如果一開始的提示包含多個問題，請將問題的各個部分列出來，讓 Gemini 清楚瞭解。
+* **直接提問。**為取得最精確的答案，請一次提出一個問題，並保持提示簡潔。如果一開始的提示包含多個問題，請將問題的各個部分分項列出，讓 Gemini 清楚瞭解。
 * **提供明確的指示。**在提示中強調關鍵字詞。
-* **指定運算順序。**提供清楚且有條理的指示。將任務分成專注的小步驟。
-* **反覆修正測試。**嘗試使用不同詞組和方法，找出最佳結果。
+* **指定運算順序。**請以清楚且有條理的方式提供操作說明。將任務分成專注於特定目標的小步驟。
+* **修正與疊代。**嘗試不同的詞組和方法，看看哪種效果最好。
 
-詳情請參閱 [BigQuery 資料畫布的提示最佳做法](https://cloud.google.com/blog/products/data-analytics/how-to-write-prompts-for-bigquery-data-canvas?hl=zh-tw)。
+詳情請參閱「[BigQuery 資料畫布的提示最佳做法](https://cloud.google.com/blog/products/data-analytics/how-to-write-prompts-for-bigquery-data-canvas?hl=zh-tw)」。
 
 ## 事前準備
 
-1. [確認已為 Google Cloud 專案啟用 Gemini in BigQuery。](https://docs.cloud.google.com/bigquery/docs/gemini-set-up?hl=zh-tw)管理員通常會執行這個步驟。
-2. 請確認您具備[必要的身分與存取權管理 (IAM) 權限](#required-roles)，可使用 BigQuery 資料畫布。
-3. 如要在 Knowledge Catalog 中管理資料畫布中繼資料，請確保專案已啟用 [Dataplex API](https://docs.cloud.google.com/dataplex/docs/enable-api?hl=zh-tw)。 Google Cloud
+1. [確認已為 Google Cloud 專案啟用 Gemini in BigQuery。](https://docs.cloud.google.com/bigquery/docs/gemini-set-up?hl=zh-tw)這個步驟通常由管理員執行。
+2. 請確認您具備[必要的 Identity and Access Management (IAM) 權限](#required-roles)，才能使用 BigQuery 資料畫布。
+3. 如要在 Knowledge Catalog 管理資料畫布中繼資料，請確認 Google Cloud 專案已啟用 [Dataplex API](https://docs.cloud.google.com/knowledge-catalog/docs/enable-api?hl=zh-tw)。
 
 ### 必要的角色
 
-如要取得使用 BigQuery 資料畫布所需的權限，請要求管理員在專案中授予下列 IAM 角色：
+如要取得使用 BigQuery 資料畫布所需的權限，請要求管理員授予您下列專案 IAM 角色：
 
 * [BigQuery Studio 使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.studioUser)  (`roles/bigquery.studioUser`)
-* [Gemini for Google Cloud User](https://docs.cloud.google.com/iam/docs/roles-permissions/cloudaicompanion?hl=zh-tw#cloudaicompanion.user)  (`roles/cloudaicompanion.user`)
+* Gemini for Google Cloud 使用者 (`roles/cloudaicompanion.user`)
 
 如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
@@ -87,82 +87,79 @@ BigQuery 資料畫布可讓您執行下列操作：
 
 如要進一步瞭解 BigQuery 中的 IAM 角色和權限，請參閱「[IAM 簡介](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)」。
 
-如要在 Knowledge Catalog 中管理資料畫布中繼資料，請確認您具備必要的 [Knowledge Catalog 角色](https://docs.cloud.google.com/dataplex/docs/iam-roles?hl=zh-tw)和 [`dataform.repositories.get`](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#predefined-roles) 權限。
+如要在 Knowledge Catalog 中管理資料畫布中繼資料，請確認您具備必要的 [Knowledge Catalog 角色](https://docs.cloud.google.com/knowledge-catalog/docs/iam-roles?hl=zh-tw)和 [`dataform.repositories.get`](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#predefined-roles) 權限。
 
-**附註：** 建立資料畫布時，BigQuery 會授予您該資料畫布的
-[Dataform 管理員角色](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#dataform.admin)
-(`roles/dataform.admin`)。如果使用者在 Google Cloud 專案中獲派 Dataform 管理員角色，就能以擁有者身分存取專案中建立的所有資料畫布。如要覆寫這項行為，請參閱[在建立資源時授予特定角色](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#grant-specific-role)。
+**注意：** 建立資料畫布時，BigQuery 會授予您該資料畫布的[Dataform 管理員角色](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#dataform.admin) (`roles/dataform.admin`)。如果使用者在 Google Cloud 專案中獲派 Dataform 管理員角色，就能以擁有者身分存取專案中建立的所有資料畫布。如要覆寫這項行為，請參閱「[在建立資源時授予特定角色](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#grant-specific-role)」。
 
-### 資料畫布的安全注意事項
+### 資料畫布的安全考量
 
-由於 BigQuery 中的程式碼資產是由 Dataform 支援，因此請考慮以下安全影響，以確保使用者能存取這些資產：
+BigQuery 中的程式碼資產是由 Dataform 提供，因此請考量下列安全性影響，再授予使用者這些資產的存取權：
 
-* 程式碼資產的可見度取決於專案層級的 Dataform 權限。擁有 `dataform.repositories.list` 權限的使用者 (包含在標準 BigQuery 角色中，例如「BigQuery Job User」、「BigQuery Studio User」和「BigQuery User」)，可以在專案的 Google Cloud 「Explorer」面板中查看所有程式碼資產，無論這些資產是由他們建立，還是與他們共用。如要限制瀏覽權限，可以建立排除 `dataform.repositories.list` 權限的[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)。
-* 與 Dataform 服務代理程式共用的任何密鑰，都可能遭到可編輯這些資產的使用者存取。為確保憑證安全，請限制只有信任的使用者可以建立及編輯憑證，並限制 Dataform 服務代理程式可存取的密鑰。詳情請參閱「[在套件安裝期間存取密鑰](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#secret-access-risk)」。
+* 程式碼資產的瀏覽權限由專案層級的 Dataform 權限控管。使用者只要具備 `dataform.repositories.list` 權限 (包含在標準 BigQuery 角色中，例如 [BigQuery 工作使用者](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.jobUser)、[BigQuery Studio 使用者](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.studioUser)和 [BigQuery 使用者](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.user))，就能在 Google Cloud 專案的「Explorer」面板中查看所有程式碼資產，無論這些資產是否由他們建立或與他們共用。如要限制瀏覽權限，可以建立不含 `dataform.repositories.list` 權限的[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)。
+* 凡是與 Dataform 服務代理共用的 Secret，可編輯這些資產的使用者都有可能存取。為確保憑證安全，請限制只有信任的使用者可以建立及編輯憑證，並限制 Dataform 服務代理程式可存取的密鑰。詳情請參閱「[在套件安裝期間存取密鑰](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#secret-access-risk)」。
 
-詳情請參閱「[Dataform 權限的安全考量](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#security-considerations-permissions)」。
+詳情請參閱「[Dataform 權限的安全性考量](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#security-considerations-permissions)」。
 
 ## 節點類型
 
-畫布是節點的集合，節點可按任意順序連接。BigQuery 資料畫布包含下列節點類型：
+畫布是由一或多個節點組成的集合。節點可以任何順序連結。BigQuery 資料畫布有下列節點類型：
 
 * 文字
 * 搜尋
 * 資料表
 * SQL
 * 目的地節點
-* 視覺化
+* 圖表
 * 深入分析
 
 ### 文字節點
 
-在 BigQuery 資料畫布中，文字節點可讓您在畫布中新增 RTF 格式內容。您可以在畫布中加入說明、附註或指示，方便自己和其他人瞭解分析的脈絡和目的。您可以在文字節點編輯器中輸入任何文字內容，包括用於設定格式的 Markdown。這項功能可讓您建立吸睛且資訊豐富的文字區塊。
+在 BigQuery 資料畫布中，文字節點可讓您在畫布中新增 RTF 格式內容。您可以在畫布中加入說明、附註或指示，方便自己和他人瞭解分析的背景資訊和目的。您可以在文字節點編輯器中輸入任何文字內容，包括用於設定格式的 Markdown。這項功能可讓您建立吸睛且資訊豐富的文字區塊。
 
-您可以在文字節點中執行下列操作：
+在文字節點中，您可以執行下列操作：
 
 * 刪除節點。
-* 偵錯節點。
+* 對節點進行偵錯。
 * 複製節點。
 
 ### 搜尋節點
 
-在 BigQuery 資料畫布中，搜尋節點可讓您尋找資料資產並納入畫布。這項功能就像橋樑，可連結自然語言查詢或關鍵字搜尋與您想使用的實際資料。
+在 BigQuery 資料畫布中，搜尋節點可讓您尋找資料資產並納入畫布。這項功能可做為橋梁，連結自然語言查詢或關鍵字搜尋，以及您要處理的實際資料。
 
-您可以使用自然語言或關鍵字提供搜尋查詢。搜尋節點會搜尋資料資產。這項功能會運用 Knowledge Catalog 中繼資料，強化內容認知能力。BigQuery 資料畫布也會建議最近使用的資料表、查詢和已儲存的查詢。
+您可以使用自然語言或關鍵字提供搜尋查詢。搜尋節點會搜尋資料資產。這項功能會運用 Knowledge Catalog 中繼資料，強化內容感知能力。BigQuery 資料畫布也會建議最近使用的資料表、查詢和已儲存的查詢。
 
-搜尋節點會傳回符合查詢條件的相關資料資產清單。系統會考量資料欄名稱和資料表說明。接著，您可以選取要新增至資料畫布的資產做為表格節點，進一步分析及視覺化呈現資料。
+搜尋節點會傳回與查詢相符的相關資料資產清單。並考量資料欄名稱和資料表說明。接著，您可以選取要新增至資料畫布的資產做為表格節點，進一步分析及視覺化呈現資料。
 
-您可以在搜尋節點中執行下列操作：
+在搜尋節點中，您可以執行下列操作：
 
 * 刪除節點。
-* 偵錯節點。
+* 對節點進行偵錯。
 * 複製節點。
 
 ### 資料表節點
 
 在 BigQuery 資料畫布中，資料表節點代表您已納入分析工作流程的特定資料表。代表您正在處理的資料，並可直接與資料互動。
 
-資料表節點會顯示資料表相關資訊，例如名稱、結構定義和資料預覽畫面。您可以查看資料表結構定義、資料表詳細資料和資料表預覽畫面等詳細資料，與資料表互動。
+資料表節點會顯示資料表資訊，例如名稱、結構定義和資料預覽畫面。您可以查看資料表結構定義、資料表詳細資料和資料表預覽畫面等詳細資料，與資料表互動。
 
 在表格節點中，您可以執行下列操作：
 
 * 刪除節點。
-* 偵錯節點。
+* 對節點進行偵錯。
 * 複製節點。
 * 執行節點。
 * 執行節點和下一個節點。
 
 在資料畫布中，您可以執行下列操作：
 
-* 在新 SQL 節點中查詢結果。
-* 將結果聯結至其他資料表。
+* 在新的 SQL 節點中查詢結果。
+* 將結果彙整至其他資料表。
 
 ### SQL 節點
 
 在 BigQuery 資料畫布中，SQL 節點可讓您直接在畫布中執行自訂 SQL 查詢。您可以直接在 SQL 節點編輯器中撰寫 SQL 程式碼，也可以使用自然語言提示生成 SQL。
 
-SQL 節點會針對指定的資料來源執行提供的 SQL 查詢。
-SQL 節點會產生結果表格，然後可連結至畫布中的其他節點，以進行進一步的分析或視覺化作業。SQL 節點執行作業的輸出內容 (又稱「查詢結果」) 也可以透過*目的地節點*保留在自己的資料表中。
+SQL 節點會對指定的資料來源執行提供的 SQL 查詢。SQL 節點會產生結果資料表，可連結至畫布中的其他節點，以便進一步分析或視覺化。執行 SQL 節點的輸出內容稱為「查詢結果」，也可以透過「目的地節點」保留至專屬資料表。
 
 查詢執行完畢後，您可以將查詢匯出為[排程查詢](https://docs.cloud.google.com/bigquery/docs/scheduling-queries?hl=zh-tw)、[匯出查詢結果](https://docs.cloud.google.com/bigquery/docs/export-file?hl=zh-tw)，或[共用](https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries?hl=zh-tw#share-saved-query)畫布，與[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)類似。
 
@@ -170,40 +167,40 @@ SQL 節點會產生結果表格，然後可連結至畫布中的其他節點，�
 
 * 將 SQL 陳述式匯出為排定的查詢。
 * 刪除節點。
-* 偵錯節點。
+* 對節點進行偵錯。
 * 複製節點。
 * 執行節點。
 * 執行節點和下一個節點。
 
 在資料畫布中，您可以執行下列操作：
 
-* 在新 SQL 節點中查詢結果。
+* 在新的 SQL 節點中查詢結果。
 * 將結果儲存至資料表。
 * 在視覺化節點中以視覺化方式呈現結果。
-* 在洞察節點中生成結果的洞察資料。
-* 將結果聯結至其他資料表。
+* 在洞察節點中生成結果的洞察。
+* 將結果與其他資料表彙整。
 
 ### 目的地節點
 
-在 BigQuery 資料畫布中，目的地節點是 SQL 節點的子項，可將 SQL 執行結果保留在專用資料表中。您可以將資料表儲存至新的或現有資料集，也可以儲存為資料集中的新資料表或現有資料表。建立目的地資料表後，使用 SQL 切換按鈕，在重新執行父項 SQL 節點時，即時更新資料表。
+在 BigQuery 資料畫布中，目的地節點是 SQL 節點的子項，會將 SQL 執行結果保留至專屬資料表。您可以將資料表儲存在新的或現有資料集，或儲存為資料集內新的或現有資料表。建立目的地資料表後，請使用 SQL 切換鈕，在重新執行上層 SQL 節點時，即時更新資料表。
 
-如果目的地節點與父項節點分離，且資料表內容不受父項 SQL 節點的任何上游變更影響，目的地節點就會變成資料表節點。
+當目的地節點與父項分離，且資料表的內容不受父項 SQL 節點的任何上游變更影響時，目的地節點就會變成資料表節點。
 
-在目的地節點中，您可以執行下列操作：
+在目的地節點，您可以執行下列操作：
 
-* 將節點從父項節點分離，使其成為獨立的資料表節點。
+* 將節點從上層節點分離，使其成為獨立的資料表節點。
 * 在新 SQL 節點中查詢資料表。
-* 將結果聯結至其他資料表。
+* 將結果彙整至其他資料表。
 
 ### 圖表節點
 
-在 BigQuery 資料畫布中，您可以透過視覺化節點以圖像方式呈現資料，輕鬆瞭解趨勢、模式和洞察資訊。並提供多種圖表類型供您選擇，讓您選取及自訂最適合資料的圖表。
+在 BigQuery 資料畫布中，圖表節點可讓您以視覺化方式呈現資料，更輕鬆地瞭解趨勢、模式和洞察資訊。提供多種圖表類型，可供您選擇及自訂最適合呈現資料的圖表。
 
-視覺化節點會將表格做為輸入內容，這可以是 SQL 查詢的結果或表格節點。根據所選圖表類型和輸入表格中的資料，視覺化節點會產生圖表。您可以選取「自動圖表」，讓 BigQuery 為您的資料選取最佳圖表類型。視覺化節點隨即會顯示產生的圖表。
+視覺化節點會將資料表做為輸入內容，這可能是 SQL 查詢或資料表節點的結果。根據所選圖表類型和輸入表格中的資料，視覺化節點會產生圖表。您可以選取「Auto-Chart」(自動圖表)，讓 BigQuery 為資料選取最合適的圖表類型。圖表節點會顯示生成的圖表。
 
-您可以透過視覺化節點自訂圖表，包括變更顏色、標籤和資料來源。您也可以將圖表匯出為 PNG 檔案。
+您可以使用視覺化節點自訂圖表，包括變更顏色、標籤和資料來源。您也可以將圖表匯出為 PNG 檔案。
 
-使用下列圖表類型將資料視覺化：
+使用下列圖表類型呈現資料：
 
 * 長條圖
 * 熱視圖
@@ -214,23 +211,23 @@ SQL 節點會產生結果表格，然後可連結至畫布中的其他節點，�
 在視覺化節點中，您可以執行下列操作：
 
 * 將圖表匯出為 PNG 檔案。
-* 偵錯節點。
+* 對節點進行偵錯。
 * 複製節點。
 * 執行節點。
 * 執行節點和下一個節點。
 
 在資料畫布中，您可以執行下列操作：
 
-* 在洞察節點中生成結果的洞察資料。
-* 編輯視覺化內容。
+* 在洞察節點中生成結果的洞察。
+* 編輯圖表。
 
 ### 洞察節點
 
-在 BigQuery 資料畫布中，洞察節點可讓您從資料畫布中的資料生成洞察和摘要。協助您發掘模式、評估資料品質，以及在畫布上執行統計分析。這項工具可找出資料中的趨勢、模式、異常狀況和關聯性，並生成簡潔明瞭的資料分析結果摘要。
+在 BigQuery 資料畫布中，洞察節點可讓您從資料畫布中的資料生成洞察和摘要。協助您發掘模式、評估資料品質，以及在畫布上執行統計分析。這項功能可找出資料中的趨勢、模式、異常狀況和關聯，並生成簡潔明瞭的資料分析結果摘要。
 
-如要進一步瞭解資料洞察，請參閱「[在 BigQuery 中產生資料洞察](https://docs.cloud.google.com/bigquery/docs/data-insights?hl=zh-tw)」一文。
+如要進一步瞭解資料洞察，請參閱「[在 BigQuery 中生成資料洞察](https://docs.cloud.google.com/bigquery/docs/data-insights?hl=zh-tw)」。
 
-您可以在洞察節點執行下列操作：
+在洞察節點中，您可以執行下列操作：
 
 * 刪除節點。
 * 複製節點。
@@ -243,58 +240,102 @@ SQL 節點會產生結果表格，然後可連結至畫布中的其他節點，�
 1. 前往「BigQuery」頁面
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在查詢編輯器中，按一下「SQL 查詢」add\_box旁邊的「建立新查詢」arrow\_drop\_down，選取「AI 和知識」，然後按一下「資料畫布」。
+2. 在查詢編輯器中，按一下「SQL 查詢」add\_box旁的「建立新查詢」arrow\_drop\_down，選取「AI 和知識」，然後點選「資料畫布」。
 3. 在「自然語言」提示欄位中，輸入自然語言提示。
 
-   舉例來說，如果您輸入 `Find me tables related to trees`，BigQuery 資料畫布會傳回可能的資料表清單，包括 `bigquery-public-data.usfs_fia.plot_tree` 或 `bigquery-public-data.new_york_trees.tree_species` 等公開資料集。
+   舉例來說，如果輸入 `Find me tables related to trees`，BigQuery 資料畫布會傳回可能的資料表清單，包括 `bigquery-public-data.usfs_fia.plot_tree` 或 `bigquery-public-data.new_york_trees.tree_species` 等公開資料集。
 4. 請選取資料表。
 
    所選資料表的資料表節點會新增至 BigQuery 資料畫布。如要查看結構定義資訊、資料表詳細資料，或是預覽資料，請選取資料表節點中的相應分頁。
-5. 選用：儲存資料畫布後，您可以使用下列工具列查看資料畫布詳細資料或[版本記錄](#view_and_compare_data_canvas_versions)、新增註解、回覆現有註解或取得註解連結：
+5. 選用：儲存資料畫布後，使用下列工具列查看資料畫布詳細資料或[版本記錄](#view_and_compare_data_canvas_versions)、新增註解、回覆或取得現有註解的連結：
 
-   「註解」工具列功能為[預先發布版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages)。如要提供意見回饋或尋求這項功能的支援，請傳送電子郵件至 [bqui-workspace-pod@google.com](mailto:bqui-workspace-pod@google.com)。
+   「註解」工具列功能目前為[預先發布版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages)。如要提供意見或尋求支援，請傳送電子郵件至 [bqui-workspace-pod@google.com](mailto:bqui-workspace-pod@google.com)。
 
 ### 畫布控制項
 
-資料畫布工具列提供下列控制項，可新增節點及管理畫布檢視畫面：
+資料畫布工具列提供下列控制項，可用於新增節點及管理畫布檢視畫面：
 
 * **搜尋**：在畫布中新增搜尋節點。
-* **SQL**：在畫布上新增 SQL 節點。
-* **文字**：為註解新增 Markdown 或文字節點。
+* **SQL**：在畫布中新增 SQL 節點。
+* **文字**：新增 Markdown 或文字節點，用於註解。
 * **縮放控制項**：可設定特定縮放等級。
-* **縮放以符合畫面**：自動調整縮放比例，在畫布上顯示所有內容。
-* **縮放至選取項目**：自動調整縮放比例，聚焦於所選節點。
+* **縮放至符合大小**：自動調整縮放比例，顯示畫布上的所有內容。
+* 「Zoom to Selection」(縮放至所選項目)：自動調整縮放比例，聚焦於所選節點。
 * **放大**：放大畫布檢視畫面。你也可以按住 `Control` 鍵，並使用滑鼠滾輪捲動來放大畫面。
-* **縮小**：縮小畫布檢視畫面。按住 `Control` 鍵並使用滑鼠滾輪捲動，即可縮小畫面。
+* **縮小**：縮小畫布檢視畫面。按住 `Control` 鍵並使用滑鼠滾輪捲動，也可以縮小畫面。
 * **全螢幕**：進入畫布的全螢幕模式。
 * **整理畫布**：自動排列畫布上的節點。
-* **重新整理畫布**：按一下按鈕即可執行所有可執行的節點。
+* **重新整理畫布**：按一下按鈕，即可執行所有可執行的節點。
 * **更多動作**：開啟其他選項，例如清除畫布。
 
-下列範例說明如何在分析工作流程中使用 BigQuery 資料畫布。
+以下範例說明在分析工作流程中，使用 BigQuery 資料畫布的不同方式。
 
-### 工作流程範例：尋找、查詢及視覺化呈現資料
+### 畫布設定
 
-在這個範例中，您會在 BigQuery 資料畫布中使用自然語言提示尋找資料、生成查詢，並編輯查詢。接著建立圖表。
+「Canvas settings」(畫布設定) 窗格提供下列選項：
+
+* **位置**：資料畫布的處理[位置](#supported-locations)。詳情請參閱「[指定位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#specify_locations)」。
+* **查詢參數**：新增[參數](https://docs.cloud.google.com/bigquery/docs/parameterized-queries?hl=zh-tw)，以便在資料畫布的 SQL 查詢中使用。
+* **資源管理**：管理[查詢作業優先順序](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#interactive-batch)、[快取](https://docs.cloud.google.com/bigquery/docs/cached-results?hl=zh-tw)和[作業設定](https://docs.cloud.google.com/bigquery/docs/default-configuration?hl=zh-tw#query_and_job_execution_settings)。
+* **畫布管理**：控管資料畫布上的查詢輸出內容顯示方式。
+* 「Advanced options」(進階選項)：選取 Google-owned and Google-managed encryption key 或「Customer-managed encryption key (CMEK)」(客戶自行管理的加密金鑰 (CMEK))，並設定查詢的[計費位元組上限](https://docs.cloud.google.com/bigquery/docs/best-practices-costs?hl=zh-tw#restrict-bytes-billed)。
+
+如要變更資料畫布設定，請按照下列步驟操作：
+
+1. 前往「BigQuery」頁面
+
+   [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
+2. 點選左側窗格中的 explore「Explorer」。
+3. 展開專案名稱，然後按一下「資料畫布」。
+4. 在「Data canvases」(資料畫布) 頁面，按一下要更新的畫布連結。
+5. 按一下 settings「Canvas settings」(Canvas 設定)。
+6. 在「位置」部分，選擇下列其中一個選項：
+
+   1. 選取「Automatic location selection」(自動選取位置)，允許 BigQuery 根據您查詢的資源自動決定處理位置。
+   2. 或者，如要手動轉送工作，請按照下列步驟操作：
+
+      1. 取消選取「Automatic location selection」(自動選取位置)，然後選取「Location type」(位置類型)，例如「Region」(區域) 或「Multi-region」(多區域)。
+      2. 在「region」(區域) 欄位中指定區域，或在「multi-region」(多區域) 欄位中指定多區域。
+      3. (選用) 選擇要用於畫布作業的**預留項目**。
+7. 在「查詢參數」部分，選擇下列其中一個選項：
+
+   1. 按一下「新增參數」，定義要在畫布中 SQL 查詢使用的標準參數。
+   2. 輸入參數的名稱、類型和值。**注意：** Google Cloud 控制台中的查詢參數只支援原始類型。
+   如要處理 `ARRAY`、`STRUCT` 和 `JSON` 等複雜型別，請使用 `bq` 指令列工具或 BigQuery API。
+8. 在「資源管理」部分，選擇下列任一選項：
+
+   1. 在「Job priority」(工作優先順序) 部分，選擇要以「Interactive」(互動式) 或「Batch」(批次) 優先順序執行 Canvas 查詢。
+   2. 在「快取偏好設定」中選取「使用快取結果」，允許 BigQuery 傳回先前快取的查詢結果。使用快取結果可降低費用並提升效能。
+   3. 在「Job timeout」(工作逾時) 部分，輸入工作執行時間上限 (以毫秒為單位)。如果超過這個時間限制，BigQuery 會嘗試停止工作。
+9. 在「Canvas management」(Canvas 管理) 區段中，取消選取「Omit node output when saving this canvas」(儲存這個畫布時，省略節點輸出內容)，即可快取查詢結果和畫布狀態。這只會儲存畫布結構和查詢。
+10. 展開「Advanced options」(進階選項) 區段，然後選擇下列選項：
+
+    1. 在「Encryption」(加密) 部分，選擇「Google-managed keys」(Google 代管金鑰) 或「Cloud KMS key」(Cloud KMS 金鑰)，然後輸入客戶自行管理金鑰的類型和值。
+    2. 在「計費位元組上限」中，輸入查詢的計費位元組上限。如果查詢超出這個上限，就會失敗，不會產生費用。如未指定這個選項，計費位元組數上限會設為專案預設值。
+11. 完成變更後，按一下「儲存」，將設定套用至資料畫布。
+
+### 工作流程範例：尋找、查詢及視覺化資料
+
+在本範例中，您會在 BigQuery 資料畫布使用自然語言提示，尋找資料、生成查詢，以及編輯查詢。接著，您會建立圖表。
 
 #### 提示 1：尋找資料
 
-1. 前往 Google Cloud 控制台的「BigQuery」**BigQuery**頁面。
+1. 前往 Google Cloud 控制台的「BigQuery」頁面。**BigQuery**
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在查詢編輯器中，按一下「SQL 查詢」add\_box旁邊的「建立新查詢」arrow\_drop\_down，選取「AI 和知識」，然後按一下「資料畫布」。
+2. 在查詢編輯器中，按一下「SQL 查詢」add\_box旁的「建立新查詢」arrow\_drop\_down，選取「AI 和知識」，然後點選「資料畫布」。
 3. 按一下「搜尋資料」。
-4. 按一下「filter\_list」filter\_list「Edit search filters」(編輯搜尋篩選器)，然後在「Filter search」(篩選搜尋) 窗格中，將「BigQuery public datasets」(BigQuery 公開資料集) 切換鈕設為開啟。
+4. 按一下「filter\_list」filter\_list**編輯搜尋篩選器**，然後在「篩選搜尋」窗格中，將「BigQuery 公開資料集」切換鈕設為開啟。
 5. 在「自然語言」提示詞欄位中，輸入下列自然語言提示：
 
    ```
    Chicago taxi trips
    ```
 
-   BigQuery 資料畫布會根據 Knowledge Catalog 中繼資料，產生潛在資料表清單。您可以選取多個表格。
-6. 選取「`bigquery-public-data.chicago_taxi_trips.taxi_trips`」表格，然後按一下「新增至畫布」。
+   BigQuery 資料畫布會根據 Knowledge Catalog 中繼資料，生成潛在資料表清單。您可以選取多個資料表。
+6. 選取 `bigquery-public-data.chicago_taxi_trips.taxi_trips` 資料表，然後按一下「Add to canvas」(新增至畫布)。
 
-   BigQuery 資料畫布會新增 `taxi_trips` 的資料表節點。如要查看結構定義資訊、資料表詳細資料，或是預覽資料，請選取資料表節點中的相應分頁。
+   `taxi_trips` 的資料表節點會新增至 BigQuery 資料畫布。如要查看結構定義資訊、資料表詳細資料，或是預覽資料，請選取資料表節點中的相應分頁。
 
 #### 提示 2：在所選資料表中生成 SQL 查詢
 
@@ -302,14 +343,14 @@ Gemini for Google Cloud產品仍處於早期技術階段，因此可能會生成
 
 如要為 `bigquery-public-data.chicago_taxi_trips.taxi_trips` 資料表生成 SQL 查詢，請按照下列步驟操作：
 
-1. 在資料畫布中，按一下「查詢」。
+1. 在資料畫布中，點選「查詢」。
 2. 在「自然語言」提示欄位中輸入下列內容：
 
    ```
    Get me the 100 longest trips
    ```
 
-   BigQuery 資料畫布會產生類似下列的 SQL 查詢：
+   BigQuery 資料畫布會生成類似下列的 SQL 查詢：
 
    ```
    SELECT
@@ -327,15 +368,15 @@ Gemini for Google Cloud產品仍處於早期技術階段，因此可能會生成
 
 #### 提示 3：編輯查詢
 
-如要編輯生成的查詢，您可以手動編輯查詢，也可以變更自然語言提示並重新生成查詢。在本範例中，您使用自然語言提示編輯查詢，只選取顧客以現金付款的行程。
+如要編輯生成的查詢，可以手動編輯，也可以變更自然語言提示，然後重新生成查詢。在本範例中，您會使用自然語言提示編輯查詢，只選取顧客以現金付款的行程。
 
-1. 在「自然語言」提示欄位中輸入下列內容：
+1. 在「自然語言」提示詞欄位輸入下列內容：
 
    ```
    Get me the 100 longest trips where the payment type is cash
    ```
 
-   BigQuery 資料畫布會產生類似下列的 SQL 查詢：
+   BigQuery 資料畫布會生成類似下列的 SQL 查詢：
 
    ```
    SELECT
@@ -354,61 +395,60 @@ Gemini for Google Cloud產品仍處於早期技術階段，因此可能會生成
    ```
 
    在上述範例中，`PROJECT_ID` 是 Google Cloud 專案的 ID。
-2. 如要查看查詢結果，請按一下「執行」。
+2. 如要查看查詢結果，請點選「執行」。
 
 #### 建立圖表
 
-1. 在資料畫布中，按一下「視覺化」。
+1. 在資料畫布中，點選「視覺化」。
 2. 按一下「建立長條圖」。
 
-   BigQuery 資料畫布會建立長條圖，顯示各趟行程的里程數。除了提供圖表，BigQuery 資料畫布也會摘要顯示支援視覺化效果的資料重要詳細資料。
+   BigQuery 資料畫布會建立長條圖，顯示行程 ID 行程里程數最多的行程。除了提供圖表，BigQuery 資料畫布也會摘要說明支援視覺化效果的資料中，部分重要的詳細資料。
 3. 選用：執行下列一或多項操作：
 
    * 如要修改圖表，請按一下「編輯」，然後在「編輯圖表」窗格中編輯圖表。
-   * 如要共用資料畫布，請按一下「共用」，然後按一下「共用連結」，複製 BigQuery 資料畫布連結。
-   * 如要清除資料畫布，請選取「更多動作」more\_vert，然後選取「清除畫布」gavel。
-     這個步驟會產生空白畫布。
+   * 如要共用資料畫布，請按一下「共用」，然後按一下「共用連結」，即可複製 BigQuery 資料畫布連結。
+   * 如要清理資料畫布，請依序選取 more\_vert「More actions」(更多動作) 和 gavel「Clear canvas」(清除畫布)。這個步驟會產生空白畫布。
 
-### 工作流程範例：聯結資料表
+### 工作流程範例：彙整資料表
 
-在本範例中，您將在 BigQuery 資料畫布中使用自然語言提示尋找資料並聯結資料表。然後將查詢匯出為筆記本。
+在本範例中，您會在 BigQuery 資料畫布中使用自然語言提示，尋找資料並彙整資料表。然後將查詢匯出為筆記本。
 
 #### 提示 1：尋找資料
 
-1. 在「自然語言」提示欄位中，輸入下列提示：
+1. 在「自然語言」提示詞欄位輸入下列提示詞：
 
    ```
    Information about trees
    ```
 
    BigQuery 資料畫布會建議多個含有樹木資訊的資料表。
-2. 在本範例中，請選取 `bigquery-public-data.new_york_trees.tree_census_1995` 表格，然後按一下「新增至畫布」。
+2. 在本範例中，請選取 `bigquery-public-data.new_york_trees.tree_census_1995` 資料表，然後按一下「Add to canvas」(新增至畫布)。
 
    畫布上會顯示表格。
 
-#### 提示 2：根據地址聯結表格
+#### 提示 2：依地址彙整資料表
 
-1. 在資料畫布上，按一下「合併」。
+1. 在資料畫布上，按一下「加入」。
 
-   BigQuery 資料畫布會建議要聯結的資料表。
-2. 如要開啟新的**自然語言**提示欄位，請按一下「搜尋表格」。
-3. 在「自然語言」提示欄位中，輸入下列提示：
+   BigQuery 資料畫布會建議要彙整的資料表。
+2. 如要開啟新的「Natural language」(自然語言) 提示欄位，請按一下「Search for tables」(搜尋資料表)。
+3. 在「自然語言」提示詞欄位輸入下列提示詞：
 
    ```
    Information about trees
    ```
-4. 選取 `bigquery-public-data.new_york_trees.tree_census_2005` 表格，然後按一下「新增至畫布」。
+4. 選取 `bigquery-public-data.new_york_trees.tree_census_2005` 資料表，然後點選「Add to canvas」(新增至畫布)。
 
-   畫布上會顯示表格。
-5. 在資料畫布上，按一下「合併」。
-6. 在「On this canvas」(在這個畫布上) 區段中，選取「Table cell」(表格儲存格) 核取方塊，然後按一下「OK」(確定)。
-7. 在「自然語言」提示欄位中，輸入下列提示：
+   表格會顯示在畫布上。
+5. 在資料畫布上，按一下「加入」。
+6. 在「On this canvas」(在這個畫布上) 區段中，勾選「Table cell」(表格儲存格) 核取方塊，然後按一下「OK」(確定)。
+7. 在「自然語言」提示詞欄位輸入下列提示詞：
 
    ```
    Join on address
    ```
 
-   BigQuery 資料畫布會建議 SQL 查詢，根據地址聯結這兩個資料表：
+   BigQuery 資料畫布會建議 SQL 查詢，依地址彙整這兩個資料表：
 
    ```
    SELECT
@@ -420,7 +460,7 @@ Gemini for Google Cloud產品仍處於早期技術階段，因此可能會生成
    ON
      t2015.address = t1995.address;
    ```
-8. 如要執行查詢並查看結果，請按一下「執行」。
+8. 如要執行查詢並查看結果，請點選「執行」。
 
 #### 將查詢匯出為筆記本
 
@@ -443,12 +483,12 @@ BigQuery 資料畫布能將查詢匯出為筆記本。
    Find data about USA names
    ```
 
-   BigQuery 資料畫布會產生資料表清單。
-2. 在本範例中，請選取 `bigquery-public-data.usa_names.usa_1910_current` 表格，然後按一下「新增至畫布」。
+   BigQuery 資料畫布會生成資料表清單。
+2. 在本範例中，請選取 `bigquery-public-data.usa_names.usa_1910_current` 資料表，然後點選「Add to canvas」(新增至畫布)。
 
 #### 提示 2：查詢資料
 
-1. 如要查詢資料，請在資料畫布中按一下「查詢」，然後輸入下列提示：
+1. 如要查詢資料，請在資料畫布中按一下「Query」(查詢)，然後輸入下列提示：
 
    ```
    Summarize this data
@@ -477,7 +517,7 @@ BigQuery 資料畫布能將查詢匯出為筆記本。
    Get me the top 10 most popular names in 1980
    ```
 
-   BigQuery 資料畫布會產生類似下列的查詢：
+   BigQuery 資料畫布會生成類似下列內容的查詢：
 
    ```
    SELECT
@@ -495,18 +535,18 @@ BigQuery 資料畫布能將查詢匯出為筆記本。
      10;
    ```
 
-   執行查詢後，您會看到 1980 年出生的兒童最常見的十個名字。
+   執行查詢後，您會看到一份資料表，其中列出 1980 年出生的兒童最常見的十個名字。
 
 #### 建立及編輯圖表
 
-1. 在資料畫布中，按一下「視覺化」。
+1. 在資料畫布中，點選「視覺化」。
 
-   BigQuery 資料畫布會建議多種視覺化選項，包括長條圖、圓餅圖、折線圖和自訂視覺化。
-2. 在本範例中，請按一下「建立長條圖」。
+   BigQuery 資料畫布會建議多種圖表選項，包括長條圖、圓餅圖、折線圖和自訂圖表。
+2. 在本範例中，請點選「建立長條圖」。
 
    BigQuery 資料畫布會建立類似下方的長條圖：
 
-除了提供圖表外，BigQuery 資料畫布還會摘要顯示支援視覺化效果的資料重要詳細資料。如要修改圖表，請按一下「視覺化詳細資料」，然後在側邊面板中編輯圖表。
+除了提供圖表外，BigQuery 資料畫布也會摘要說明視覺化圖表資料的一些重要詳細資料。如要修改圖表，請按一下「Visualization details」(圖表詳細資料)，然後在側邊面板中編輯圖表。
 
 #### 提示 4：編輯視覺化詳細資料
 
@@ -519,116 +559,116 @@ BigQuery 資料畫布能將查詢匯出為筆記本。
    BigQuery 資料畫布會建立類似下方的長條圖：
 2. 選用：如要進一步變更，請按一下「編輯」。
 
-   系統會顯示「編輯視覺化」窗格。您可以編輯詳細資料，例如圖表標題、X 軸名稱和 Y 軸名稱。此外，如果您按一下「JSON 編輯器」分頁，可以直接根據 JSON 值編輯圖表。
+   系統會顯示「編輯視覺化效果」窗格。您可以編輯詳細資料，例如圖表標題、X 軸名稱和 Y 軸名稱。此外，如果按一下「JSON Editor」(JSON 編輯器) 分頁標籤，即可根據 JSON 值直接編輯圖表。
 
-## 與 Gemini 助理合作
+## 與 Gemini 助理互動
 
 **預覽**
 
 這項產品或功能適用《[服務專屬條款](https://docs.cloud.google.com/terms/service-terms?hl=zh-tw#1)》中「一般服務條款」一節的《正式發布前產品條款》。正式發布前的產品和功能是按照「原樣」提供，支援範圍可能有限。
 詳情請參閱[推出階段說明](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
 
-**附註：** 如要提供意見回饋或尋求這項功能支援，請傳送電子郵件至 [datacanvas-feedback@google.com](mailto:datacanvas-feedback@google.com)。
+**注意：** 如要提供意見回饋或尋求這項功能的支援，請傳送電子郵件至 [datacanvas-feedback@google.com](mailto:datacanvas-feedback@google.com)。
 
-你可以透過 Gemini 支援的對話體驗，使用 BigQuery 資料畫布。對話式助理可根據要求建立節點、執行查詢，以及建立視覺化內容。您可以選擇要讓 AI 助理處理的表格，並新增指令來引導 AI 助理的行為。助理可處理新的或現有的資料畫布。
+您可以使用 Gemini 支援的對話功能，操作 BigQuery 資料畫布。對話助理可根據您的要求建立節點、執行查詢及建立圖表。您可以選擇要讓助理處理的資料表，並新增操作說明來引導助理。助理可處理新資料畫布或現有資料畫布。
 
 如要使用 Gemini 助理，請按照下列步驟操作：
 
-1. 如要開啟助理，請在資料畫布上依序點選 spark「開啟資料畫布助理」。
-2. 在「詢問資料問題」欄位中，輸入自然語言提示，例如下列任一項：
+1. 如要開啟助理，請在資料畫布上按一下「spark」圖示，然後點選「開啟資料畫布助理」。
+2. 在「Ask a data question」(提出資料問題) 欄位中，輸入自然語言提示，例如：
 
    * `Show me interesting statistics of my data.`
    * `Make a chart based on my data, sorted high to low.`
    * `I want to see sample data from my table.`
 
-   回覆會根據要求包含一或多個節點。舉例來說，如果您要求助理建立資料圖表，助理會在資料畫布上建立視覺化節點。
+   回應會根據要求包含一或多個節點。舉例來說，如果您要求助理建立資料圖表，助理會在資料畫布上建立圖表節點。
 
-   按一下「詢問資料問題」欄位時，您也可以執行下列操作：
+   按一下「提出資料問題」欄位，也可以執行下列操作：
 
    * 如要新增資料，請按一下「設定」。
-   * 如要新增指示，請按一下「設定」。
+   * 如要新增指令，請按一下「設定」。
 3. 如要繼續使用助理，請新增其他自然語言提示。
 
-在處理資料畫布時，您可以繼續使用自然語言提示。
+使用資料畫布時，您可以繼續輸入自然語言提示。
 
 ### 新增資料
 
-使用 Gemini 對話介面時，您可以新增資料，讓助理知道要參照哪個資料集。助理會要求你選取資料表，再執行任何提示。在助理中搜尋資料時，您可以將可搜尋的資料範圍限制為所有專案、已加星號的專案或目前專案。您也可以決定是否要在搜尋中納入公開資料集。
+使用 Gemini 對話介面時，您可以新增資料，讓助理知道要參考哪個資料集。助理會要求你選取資料表，再執行任何提示。在助理中搜尋資料時，您可以將可搜尋的資料範圍限制為所有專案、已加星號的專案或目前專案。您也可以決定是否要在搜尋中加入公開資料集。
 
 如要將資料新增至 Gemini 助理，請按照下列步驟操作：
 
 1. 如要開啟助理，請在資料畫布上依序點選 spark「開啟資料畫布助理」。
 2. 依序點選「設定」和「新增資料」。
-3. 選用：如要擴大搜尋結果範圍，納入公開資料集，請按一下「公開資料集」切換按鈕，將其設為開啟。
-4. 選用：如要將搜尋結果的範圍變更為其他專案，請從「範圍」選單中選取適當的專案選項。
-5. 勾選要新增至助理的每個表格。
-   1. 如要搜尋助理未建議的表格，請按一下「搜尋表格」。
-   2. 在「自然語言」提示欄位中，輸入描述您要尋找的表格的提示，然後按 `Enter` 鍵。
-   3. 找出要新增至助理的各個表格，勾選對應的核取方塊，然後按一下「確定」。
-6. 關閉「畫布助理設定」窗格。
+3. 選用：如要將搜尋結果範圍擴大至公開資料集，請將「Public datasets」(公開資料集) 切換鈕設為開啟。
+4. 選用：如要將搜尋結果範圍變更為其他專案，請從「Scope」(範圍) 選單中選取適當的專案選項。
+5. 找出要新增至助理的資料表，然後勾選對應的核取方塊。
+   1. 如要搜尋助理未建議的資料表，請按一下「Search for tables」(搜尋資料表)。
+   2. 在「自然語言」提示詞欄位中，輸入描述要尋找的表格，然後按 `Enter` 鍵。
+   3. 找出要加入助理的各個表格，勾選對應的核取方塊，然後按一下「確定」。
+6. 關閉「Canvas assistant settings」窗格。
 
 助理會根據您選擇的資料進行分析。
 
 ### 新增指示
 
-使用 Gemini 對話介面時，可以新增指令，讓助理瞭解該如何運作。這些指示會套用至資料畫布中的所有提示。潛在指令的例子包括：
+使用 Gemini 對話介面時，可以新增指令，讓助理瞭解該如何運作。這些指示會套用至資料畫布中的所有提示。潛在指令範例如下：
 
 * `Visualize trends over time.`
 * `Chart colors: Red (negative), Green (positive)`
 * `Domain: USA`
 
-如要為助理新增指令，請按照下列步驟操作：
+如要新增助理的操作說明，請按照下列步驟操作：
 
 1. 如要開啟助理，請在資料畫布上依序點選 spark「開啟資料畫布助理」。
 2. 按一下「設定」。
 3. 在「Instructions」(指令) 欄位中，新增給助理的指令清單，然後關閉「Canvas assistant settings」(Canvas 助理設定) 窗格。
 
-助理會記住這些指示，並套用至日後的提示。
+助理會記住這些指令，並套用至日後的提示。
 
 ### Gemini 助理最佳做法
 
-使用 BigQuery 資料畫布助理時，請遵循下列最佳做法，以獲得最佳結果：
+如要充分發揮 BigQuery 資料畫布助理的效用，請遵循下列最佳做法：
 
-* **具體明確。**清楚說明要計算、分析或以視覺化方式呈現的內容。舉例來說，與其說「`Analyze trip data`」，不如說「`Calculate the average trip duration for trips starting in council district
-  eight`」。
-* **確保資料情境正確無誤。**助理只能處理您提供的資料。確認所有相關資料表和資料欄都已新增至畫布。
-* **先從簡單的內容開始，然後逐步調整。**請先提出簡單的問題，確保助理瞭解基本結構和資料。例如，先說「Ok Google」`Show total trips by subscriber_type`，再說「播放音樂」`Show total trips by subscriber_type and break down the result by
+* **具體明確。**清楚說明要計算、分析或以視覺化方式呈現的內容。例如，請說 `Calculate the average trip duration for trips starting in council district
+  eight`，而不是 `Analyze trip data`。
+* **確保資料情境準確無誤。**助理只能處理您提供的資料。確認所有相關資料表和資料欄都已新增至畫布。
+* **先從簡單的內容開始，然後逐步調整。**先提出簡單的問題，確保助理瞭解基本結構和資料。例如，先說 `Show total trips by subscriber_type`，再說 `Show total trips by subscriber_type and break down the result by
   council_district`。
 * **拆解複雜問題。**如果是多步驟程序，請考慮清楚明確地撰寫提示，並將提示分成不同部分，或為每個主要步驟使用個別提示。例如說出「`First, find the top five busiest stations by
   trip count. Second, calculate the average trip duration for trips starting
   from only those top five stations`」。
-* **清楚說明計算方式。**指定所選計算，例如 `SUM`、`MAX` 或 `AVERAGE`。例如說出「`Find the MAX trip duration per
+* **清楚說明計算方式。**指定所選的計算方式，例如 `SUM`、`MAX` 或 `AVERAGE`。例如，說出「`Find the MAX trip duration per
   bike_id`」。
-* **使用系統指令，讓系統記住背景資訊和偏好設定。**使用[系統指令](#add_instructions)陳述適用於所有提示的資訊規則和偏好設定。
+* **使用系統指令，保留背景資訊和偏好設定。**使用[系統指令](#add_instructions)陳述適用於所有提示的資訊規則和偏好設定。
 * **查看畫布。**請務必檢查生成的節點，確認邏輯符合要求，且結果準確無誤。
-* **實驗。**嘗試使用不同的措辭、詳細程度和提示結構，瞭解助理如何回應您的特定資料和分析需求。
-* **參照資料欄名稱。**請盡可能使用所選資料的實際欄名。例如，說「`Show the count of trips grouped by
-  subscriber_type and start_station_name`」而不是「`Show trips by
+* **實驗。**嘗試不同的措辭、詳細程度和提示結構，瞭解助理如何回應您的特定資料和分析需求。
+* **參照資料欄名稱。**請盡可能使用所選資料的實際欄名。例如，請說「`Show the count of trips grouped by
+  subscriber_type and start_station_name`」，而不是「`Show trips by
   subscriber type`」。
 
-### 工作流程範例：使用 Gemini 助理
+### 工作流程範例：與 Gemini 助理合作
 
-在本範例中，您會使用自然語言提示和 Gemini 助理，尋找、查詢及以圖表呈現資料。
+在這個範例中，您會使用自然語言提示和 Gemini 助理，尋找、查詢資料並以圖表呈現。
 
-1. 前往 Google Cloud 控制台的「BigQuery」**BigQuery**頁面。
+1. 前往 Google Cloud 控制台的「BigQuery」頁面。**BigQuery**
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在查詢編輯器中，按一下「SQL 查詢」add\_box旁邊的「建立新查詢」arrow\_drop\_down，選取「AI 和知識」，然後按一下「資料畫布」。
+2. 在查詢編輯器中，按一下「SQL 查詢」add\_box旁的「建立新查詢」arrow\_drop\_down，選取「AI 和知識」，然後點選「資料畫布」。
 3. 按一下「搜尋資料」。
-4. 按一下「filter\_list」filter\_list「Edit search filters」(編輯搜尋篩選器)，然後在「Filter search」(篩選搜尋) 窗格中，將「BigQuery public datasets」(BigQuery 公開資料集) 切換鈕設為開啟。
+4. 按一下「filter\_list」filter\_list**編輯搜尋篩選器**，然後在「篩選搜尋」窗格中，將「BigQuery 公開資料集」切換鈕設為開啟。
 5. 在「自然語言」提示詞欄位中，輸入下列自然語言提示：
 
    ```
    bikeshare
    ```
 
-   BigQuery 資料畫布會根據 Knowledge Catalog 中繼資料，產生潛在資料表清單。您可以選取多個表格。
+   BigQuery 資料畫布會根據 Knowledge Catalog 中繼資料，產生潛在資料表清單。您可以選取多個資料表。
 6. 選取 `bigquery-public-data.austin_bikeshare.bikeshare_stations` 表格和 `bigquery-public-data.austin_bikeshare.bikeshare_trips`，然後按一下「新增至畫布」。
 
-   系統會將所選資料表的資料表節點新增至 BigQuery 資料畫布。如要查看結構定義資訊、資料表詳細資料，或是預覽資料，請選取資料表節點中的相應分頁。
-7. 如要開啟助理，請在資料畫布上依序點選 spark「開啟資料畫布助理」。
+   BigQuery 資料畫布會為每個所選資料表新增資料表節點。如要查看結構定義資訊、資料表詳細資料，或是預覽資料，請選取資料表節點中的相應分頁。
+7. 如要開啟助理，請在資料畫布上按一下「spark」圖示，然後點選「開啟資料畫布助理」。
 8. 按一下「設定」。
-9. 在「指令」欄位中，為助理新增下列指令：
+9. 在「Instructions」(指示) 欄位中，為助理新增下列指示：
 
    ```
    Tasks:
@@ -636,28 +676,28 @@ BigQuery 資料畫布能將查詢匯出為筆記本。
      - Show many charts per question
      - Make sure to cover each part via a separate line of reasoning
    ```
-10. 關閉「畫布助理設定」窗格。
-11. 在「詢問資料問題」欄位中，輸入下列自然語言提示：
+10. 關閉「Canvas assistant settings」窗格。
+11. 在「Ask a data question」(提出資料問題) 欄位中，輸入下列自然語言提示：
 
     ```
     Show the number of trips by council district and subscriber type
     ```
-12. 你可以在「詢問資料問題」欄位中繼續輸入提示。輸入下列自然語言提示：
+12. 您可以繼續在「提出資料問題」欄位中輸入提示。輸入下列自然語言提示：
 
     ```
     What are most popular stations among the top 5 subscriber types
     ```
-13. 輸入最終提示：
+13. 輸入最後一個提示詞：
 
     ```
     What station is least used to start and end a trip
     ```
 
-    詢問所有相關提示後，畫布會根據您提供給助理的提示和指令，填入相關查詢和視覺化節點。繼續輸入提示或修改現有提示，取得所需結果。
+    輸入所有相關提示後，畫布會根據您提供給助理的提示和指示，填入相關查詢和視覺化節點。繼續輸入提示或修改現有提示，取得所需結果。
 
 ## 查看所有資料畫布
 
-如要查看專案中的所有資料畫布清單，請按照下列步驟操作：
+如要查看專案中所有資料畫布的清單，請按照下列步驟操作：
 
 1. 前往 Google Cloud 控制台的「BigQuery」**BigQuery**頁面。
 
@@ -668,8 +708,8 @@ BigQuery 資料畫布能將查詢匯出為筆記本。
 3. 在「Explorer」窗格中，點選「資料畫布」旁邊的「查看動作」圖示 more\_vert，然後執行下列其中一項操作：
 
 * 如要在目前的分頁中開啟清單，請按一下「顯示全部」。
-* 如要在新分頁中開啟清單，請依序點選「顯示全部」**>「新分頁」**。
-* 如要在分割分頁中開啟清單，請按一下「在『<**』分割分頁中顯示全部」**。
+* 如要在新分頁中開啟清單，請依序按一下「在新分頁中顯示所有項目」**>「新分頁」**。
+* 如要在分割分頁中開啟清單，請依序點選**「全部顯示」>「分割分頁」**。
 
 ## 查看資料畫布中繼資料
 
@@ -679,21 +719,21 @@ BigQuery 資料畫布能將查詢匯出為筆記本。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
-3. 在「Explorer」窗格中展開專案，然後按一下「資料畫布」。
+3. 在「Explorer」窗格中展開專案，然後點選「資料畫布」。
 4. 按一下要查看中繼資料的資料畫布名稱。
 5. 按一下「詳細資料」info\_outline，即可查看資料畫布的相關資訊，例如使用的[區域](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction?hl=zh-tw#supported_regions)和上次修改日期。
 
 ## 使用資料畫布版本
 
-您可以選擇在[存放區](https://docs.cloud.google.com/bigquery/docs/repository-intro?hl=zh-tw)內或外部建立資料畫布。資料畫布的版本管理方式會因資料畫布所在位置而異。
+您可以選擇在[存放區](https://docs.cloud.google.com/bigquery/docs/repository-intro?hl=zh-tw)內或外部建立資料畫布。資料畫布版本管理方式會因資料畫布的位置而異。
 
 ### 存放區中的資料畫布版本管理
 
-存放區是位於 BigQuery 或第三方供應商的 Git 存放區。您可以在存放區中使用「工作區」，對資料畫布執行版本控管。詳情請參閱「[使用檔案的版本管控功能](https://docs.cloud.google.com/bigquery/docs/workspaces?hl=zh-tw#use_version_control_with_a_file)」。
+存放區是位於 BigQuery 或第三方供應商的 Git 存放區。您可以在存放區中使用「工作區」，對資料畫布執行版本控管。詳情請參閱「[使用檔案版本管控功能](https://docs.cloud.google.com/bigquery/docs/workspaces?hl=zh-tw#use_version_control_with_a_file)」。
 
-### 存放區外的資料畫布版本控管
+### 在存放區外建立資料畫布版本
 
-您可以查看、比較及還原資料畫布版本。
+您可以查看、比較及還原資料畫布的版本。
 
 #### 查看及比較資料畫布版本
 
@@ -703,33 +743,32 @@ BigQuery 資料畫布能將查詢匯出為筆記本。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
-3. 在「Explorer」窗格中展開專案，然後按一下「資料畫布」。
+3. 在「Explorer」窗格中展開專案，然後點選「資料畫布」。
 4. 按一下要查看版本記錄的資料畫布名稱。
-5. 按一下「版本記錄」schedule，即可查看資料畫布版本清單，並依日期降序排列。
+5. 按一下「schedule 版本記錄」，即可依日期遞減順序查看資料畫布版本清單。
 6. 按一下資料畫布版本旁的 more\_vert「查看動作」，然後點選「比較」。
    比較窗格隨即開啟，比較您選取的資料畫布版本與目前的資料畫布版本。
-7. 選用：如要改為在同一窗格中比較版本，請依序點按「比較」和「內嵌」。
+7. 選用：如要並排比較版本，而非在不同窗格中比較，請依序按一下「Compare」(比較) 和「Inline」(並排)。
 
 #### 還原資料畫布版本
 
-從比較窗格還原資料畫布時，您可以先比較先前版本與目前版本，再選擇是否要還原。
+從比較窗格還原，可讓您先比較資料畫布的先前版本和目前版本，再選擇是否還原。
 
 1. 點選左側窗格中的 explore「Explorer」。
-2. 在「Explorer」窗格中展開專案，然後按一下「資料畫布」。
-3. 按一下要還原先前版本的資料畫布名稱。
+2. 在「Explorer」窗格中展開專案，然後點選「資料畫布」。
+3. 按一下要還原舊版本的資料畫布名稱。
 4. 按一下 schedule「版本記錄」。
-5. 找到要還原的資料畫布版本，然後依序點選旁邊的 more\_vert「查看動作」和「比較」。
+5. 在要還原的資料畫布版本旁，按一下 more\_vert「查看動作」，然後按一下「比較」。
 
-   比較窗格隨即開啟，比較您選取的資料畫布版本與最新版本。
+   比較窗格隨即開啟，比較您選取的資料畫布版本與最新資料畫布版本。
 6. 比較後如要還原先前的資料畫布版本，請按一下「還原」。
 7. 按一下「確認」。
 
-## 管理 Knowledge Catalog 中的中繼資料
+## 在 Knowledge Catalog 管理中繼資料
 
-[Knowledge Catalog](https://docs.cloud.google.com/dataplex/docs/introduction?hl=zh-tw) 可讓您查看及管理資料畫布的中繼資料。根據預設，Knowledge Catalog 會提供資料畫布，不需額外設定。
+[Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/introduction?hl=zh-tw) 可讓您查看及管理資料畫布的中繼資料。Knowledge Catalog 預設提供資料畫布，不需額外設定。
 
-您可以使用 Knowledge Catalog 管理所有 [BigQuery 位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)的資料畫布。
-在 Knowledge Catalog 中管理資料畫布時，須遵守[配額和限制](https://docs.cloud.google.com/dataplex/docs/quotas?hl=zh-tw)，並適用 [Knowledge Catalog 定價](https://cloud.google.com/dataplex/pricing?hl=zh-tw)。
+您可以使用 Knowledge Catalog 管理所有 [BigQuery 位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)的資料畫布。在 Knowledge Catalog 中管理資料畫布時，須遵守 [Knowledge Catalog 配額和限制](https://docs.cloud.google.com/knowledge-catalog/docs/quotas?hl=zh-tw)，以及 [Knowledge Catalog 定價](https://cloud.google.com/dataplex/pricing?hl=zh-tw)。
 
 Knowledge Catalog 會自動從資料畫布擷取下列中繼資料：
 
@@ -737,43 +776,44 @@ Knowledge Catalog 會自動從資料畫布擷取下列中繼資料：
 * 資料資產父項
 * 資料資產位置
 * 資料資產類型
-* 對應 Google Cloud 專案
+* 對應的 Google Cloud 專案
 
-Knowledge Catalog 會將資料畫布記錄為[項目](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources?hl=zh-tw#entries)，並提供下列項目值：
+Knowledge Catalog 會將資料畫布記錄為「項目」，並提供下列項目值：
 
 系統項目群組
-:   資料畫布的[系統項目群組](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources?hl=zh-tw#entry-groups)為 `@dataform`。如要在 Knowledge Catalog 中查看資料畫布項目的詳細資料，請查看 `dataform` 系統項目群組。如需查看項目群組中所有項目的清單，請參閱 Knowledge Catalog 說明文件中的「[查看項目群組詳細資料](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources?hl=zh-tw#entry-group-details)」一節。
+:   資料畫布的[系統項目群組](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources?hl=zh-tw#entry-groups)為 `@dataform`。如要在 Knowledge Catalog 中查看資料畫布項目的詳細資料，請查看 `dataform` 系統項目群組。如要瞭解如何查看項目群組中所有項目的清單，請參閱 Knowledge Catalog 說明文件中的「[查看項目群組的詳細資料](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources?hl=zh-tw#entry-group-details)」。
 
 系統項目類型
-:   資料畫布的[系統項目類型](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources?hl=zh-tw#entry-types)為 `dataform-code-asset`。如要查看資料畫布的詳細資料，請查看 `dataform-code-asset` 系統項目類型、使用切面篩選器篩選結果，並[將 `dataform-code-asset` 切面內的 `type` 欄位設為 `DATA_CANVAS`](https://docs.cloud.google.com/dataplex/docs/search-syntax?hl=zh-tw#aspect-search)。然後選取所選資料畫布的項目。
-    如要瞭解如何查看所選項目類型的詳細資料，請參閱 Knowledge Catalog 說明文件中的「[查看項目類型的詳細資料](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources?hl=zh-tw#entry-type-details)」。如要瞭解如何查看所選項目的詳細資料，請參閱 Knowledge Catalog 說明文件中的「[查看項目的詳細資料](https://docs.cloud.google.com/dataplex/docs/search-assets?hl=zh-tw#view-entry-details)」一節。
+:   資料畫布的[系統項目類型](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources?hl=zh-tw#entry-types)為 `dataform-code-asset`。如要查看資料畫布的詳細資料，請查看 `dataform-code-asset` 系統項目類型，使用切面篩選器篩選結果，並[將 `dataform-code-asset` 切面中的 `type` 欄位設為 `DATA_CANVAS`](https://docs.cloud.google.com/knowledge-catalog/docs/search-syntax?hl=zh-tw#aspect-search)。然後選取所選資料畫布的項目。如要瞭解如何查看所選項目類型的詳細資料，請參閱 Knowledge Catalog 說明文件中的「[查看項目類型的詳細資料](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources?hl=zh-tw#entry-type-details)」。如要瞭解如何查看所選項目的詳細資料，請參閱 Knowledge Catalog 說明文件中的「[查看項目的詳細資料](https://docs.cloud.google.com/knowledge-catalog/docs/search-assets?hl=zh-tw#view-entry-details)」
+。
 
 系統切面類型
-:   資料畫布的[系統切面類型](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata?hl=zh-tw#aspect-types)為 `dataform-code-asset`。如要透過[切面](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata?hl=zh-tw#aspects)註解資料畫布項目，為 Knowledge Catalog 中的資料畫布提供額外背景資訊，請查看 `dataform-code-asset` 切面類型、使用以切面為準的篩選器篩選結果，並[將 `dataform-code-asset` 切面內的 `type` 欄位設為 `DATA_CANVAS`](https://docs.cloud.google.com/dataplex/docs/search-syntax?hl=zh-tw#aspect-search)。如需如何使用切面註解項目的操作說明，請參閱 Knowledge Catalog 說明文件中的「[管理切面及豐富中繼資料](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata?hl=zh-tw)」一文。
+:   資料畫布的[系統切面類型](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata?hl=zh-tw#aspect-types)為 `dataform-code-asset`。如要使用[切面](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata?hl=zh-tw#aspects)為資料畫布項目加上註解，為 Knowledge Catalog 中的資料畫布提供額外背景資訊，請查看 `dataform-code-asset` 切面類型，使用切面篩選器篩選結果，並[將 `dataform-code-asset` 切面中的 `type` 欄位設為 `DATA_CANVAS`](https://docs.cloud.google.com/knowledge-catalog/docs/search-syntax?hl=zh-tw#aspect-search)。如需如何使用切面註解項目的操作說明，請參閱 Knowledge Catalog 說明文件中的「[管理切面及豐富中繼資料](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata?hl=zh-tw)」一文。
 
 類型
 :   資料畫布的類型為 `DATA_CANVAS`。
-    您可以使用`aspect:dataplex-types.global.dataform-code-asset.type=DATA_CANVAS`
-    [以切面為準的篩選器](https://docs.cloud.google.com/dataplex/docs/search-syntax?hl=zh-tw#aspect-search)，依`dataform-code-asset`系統項目類型和`dataform-code-asset`切面類型篩選資料畫布。
+    您可以使用`dataform-code-asset`
+    系統項目類型和`dataform-code-asset`切面類型中的`aspect:dataplex-types.global.dataform-code-asset.type=DATA_CANVAS`
+    查詢，透過[切面式篩選器](https://docs.cloud.google.com/knowledge-catalog/docs/search-syntax?hl=zh-tw#aspect-search)篩選資料畫布。
 
-如需在 Knowledge Catalog 中搜尋資產的操作說明，請參閱 Knowledge Catalog 說明文件中的「[在 Knowledge Catalog 中搜尋資料資產](https://docs.cloud.google.com/dataplex/docs/search-assets?hl=zh-tw)」。
+如要瞭解如何在 Knowledge Catalog 搜尋資產，請參閱 Knowledge Catalog 說明文件中的「[在 Knowledge Catalog 搜尋資料資產](https://docs.cloud.google.com/knowledge-catalog/docs/search-assets?hl=zh-tw)」。
 
 ## 定價
 
-如要瞭解這項功能的價格詳情，請參閱 [Gemini in BigQuery 定價總覽](https://cloud.google.com/products/gemini/pricing?hl=zh-tw#gemini-in-bigquery-pricing)。
+如要瞭解這項功能的定價，請參閱「[Gemini in BigQuery 定價總覽](https://cloud.google.com/products/gemini/pricing?hl=zh-tw#gemini-in-bigquery-pricing)」。
 
 ## 位置
 
-您可以在所有 [BigQuery 位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)使用 BigQuery 資料畫布。如要瞭解 Gemini in BigQuery 在何處處理資料，請參閱「[Gemini in BigQuery 在何處處理資料](https://docs.cloud.google.com/bigquery/docs/gemini-locations?hl=zh-tw)」。
+您可以在所有 [BigQuery 位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)使用 BigQuery 資料畫布。如要瞭解 Gemini in BigQuery 處理資料的位置，請參閱「[Gemini in BigQuery 處理資料的位置](https://docs.cloud.google.com/bigquery/docs/gemini-locations?hl=zh-tw)」。
 
 ## 提供意見回饋
 
-您可以向 Google 提交意見回饋，協助我們提升 BigQuery 資料畫布建議的品質。如要提供意見，請按照下列步驟操作：
+您可以向 Google 提交意見回饋，協助我們改良 BigQuery 資料畫布建議。如要提供意見，請按照下列步驟操作：
 
-1. 在 BigQuery 資料畫布工具列中，依序點選「更多動作」圖示 more\_vert 和「提交意見回饋」。
+1. 在 BigQuery 資料畫布工具列中，依序點選 more\_vert「More actions」(更多動作) 和「Submit feedback」(提交意見回饋)。
 2. 按一下意見回饋適用的類別。
 3. 在「請提供詳細意見 (必填)」欄位中輸入意見。
-4. 選用：如要提供資料畫布的螢幕截圖給 BigQuery，請按一下「screenshot\_monitor」圖示 screenshot\_monitor「擷取螢幕截圖」。
+4. 選用：如要提供資料畫布的螢幕截圖給 BigQuery，請按一下「screenshot\_monitor」screenshot\_monitor。
 5. 選用：如要提供生成記錄，請選取「允許 Google 收集我的生成記錄，並與意見回饋一同提交」。
 6. 按一下 [傳送]。
 
@@ -783,7 +823,7 @@ Knowledge Catalog 會將資料畫布記錄為[項目](https://docs.cloud.google.
 
 ## 後續步驟
 
-* 瞭解如何[使用 Gemini 輔助功能撰寫查詢](https://docs.cloud.google.com/bigquery/docs/write-sql-gemini?hl=zh-tw)。
+* 瞭解如何[在 Gemini 協助下撰寫查詢](https://docs.cloud.google.com/bigquery/docs/write-sql-gemini?hl=zh-tw)。
 * 瞭解如何[建立筆記本](https://docs.cloud.google.com/bigquery/docs/create-notebooks?hl=zh-tw)。
 * 瞭解如何使用[資料洞察](https://docs.cloud.google.com/bigquery/docs/data-insights?hl=zh-tw)，生成有關資料的自然語言查詢。
 
@@ -794,11 +834,11 @@ Knowledge Catalog 會將資料畫布記錄為[項目](https://docs.cloud.google.
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-18 (世界標準時間)。
+上次更新時間：2026-10-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-18 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]

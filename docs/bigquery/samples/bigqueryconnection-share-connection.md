@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -16,11 +16,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 * [連線至 Amazon S3](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-connection?hl=zh-tw)
 * [連線至 Apache Spark](https://docs.cloud.google.com/bigquery/docs/connect-to-spark?hl=zh-tw)
-* [連線至 Blob 儲存體](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-connection?hl=zh-tw)
+* [連結至 Blob 儲存體](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-connection?hl=zh-tw)
 * [連線至 Cloud SQL](https://docs.cloud.google.com/bigquery/docs/connect-to-sql?hl=zh-tw)
 * [連線至 SAP Datasphere](https://docs.cloud.google.com/bigquery/docs/connect-to-sap-datasphere?hl=zh-tw)
 * [連線至 Spanner](https://docs.cloud.google.com/bigquery/docs/connect-to-spanner?hl=zh-tw)
-* [建立及設定 Cloud 資源連線](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection?hl=zh-tw)
+* [建立及設定 Cloud 資源連結](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection?hl=zh-tw)
 * [管理連結](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw)
 
 ## 程式碼範例
@@ -75,7 +75,7 @@ public class ShareConnection {
 
 ## 後續步驟
 
-如要搜尋及篩選其他 Google Cloud 產品的程式碼範例，請參閱[Google Cloud 瀏覽器範例](https://docs.cloud.google.com/docs/samples?product=bigquery&hl=zh-tw)。
+如要搜尋及篩選其他 Google Cloud 產品的程式碼範例，請參閱[Google Cloud 範例瀏覽工具](https://docs.cloud.google.com/docs/samples?product=bigquery&hl=zh-tw)。
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 

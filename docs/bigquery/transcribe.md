@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -16,11 +16,13 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 使用 ML.TRANSCRIBE 函式轉錄音訊檔案
 
-本文說明如何搭配[遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service?hl=zh-tw)使用 [`ML.TRANSCRIBE` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-transcribe?hl=zh-tw)，轉錄[物件資料表](https://docs.cloud.google.com/bigquery/docs/object-table-introduction?hl=zh-tw)中的音訊檔案。
+本教學課程說明如何轉錄音訊檔案 (例如客服電話、Podcast 或錄製的會議)，並擷取文字以供後續分析、關鍵字搜尋或情緒分析。
+
+您將使用 [`ML.TRANSCRIBE` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-transcribe?hl=zh-tw)和[遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service?hl=zh-tw)，轉錄儲存在[物件資料表](https://docs.cloud.google.com/bigquery/docs/object-table-introduction?hl=zh-tw)中的音訊檔案。
 
 ## 支援的地區
 
-您必須在下列[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)之一，建立這個程序中使用的遠端模型：
+您必須在下列[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)之一，建立本程序中使用的遠端模型：
 
 * `asia-northeast1`
 * `asia-south1`
@@ -44,13 +46,13 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 如要建立遠端模型及轉錄音訊檔案，您需要在專案層級具備下列 Identity and Access Management (IAM) 角色：
 
-* 建立語音辨識器：Cloud Speech 編輯者 (`roles/speech.editor`)
+* 建立語音辨識器：Cloud Speech 編輯器 (`roles/speech.editor`)
 * 建立及使用 BigQuery 資料集、資料表和模型：
-  BigQuery 資料編輯者 (`roles/bigquery.dataEditor`)
+  BigQuery 資料編輯器 (`roles/bigquery.dataEditor`)
 * 建立、委派及使用 BigQuery 連線：
   BigQuery 連線管理員 (`roles/bigquery.connectionsAdmin`)
 
-  如果沒有設定[預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw)，您可以在執行 `CREATE MODEL` 陳述式時建立並設定連線。如要執行這項操作，您必須具備專案的 BigQuery 管理員角色 (`roles/bigquery.admin`)。詳情請參閱「[設定預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw#configure_the_default_connection)」。
+  如果沒有設定[預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw)，可以在執行 `CREATE MODEL` 陳述式時建立並設定連線。如要這麼做，您必須具備專案的 BigQuery 管理員角色 (`roles/bigquery.admin`)。詳情請參閱「[設定預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw#configure_the_default_connection)」。
 * 將權限授予連線的服務帳戶：專案 IAM 管理員 (`roles/resourcemanager.projectIamAdmin`)
 * 建立 BigQuery 工作：BigQuery 工作使用者 (`roles/bigquery.jobUser`)
 
@@ -83,7 +85,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 事前準備
 
-- 登入 Google Cloud 帳戶。如果您是 Google Cloud新手，歡迎[建立帳戶](https://console.cloud.google.com/freetrial?hl=zh-tw)，親自評估產品在實際工作環境中的成效。新客戶還能獲得價值 $300 美元的免費抵免額，可用於執行、測試及部署工作負載。
+- 登入 Google Cloud 帳戶。如果您是 Google Cloud新手，歡迎[建立帳戶](https://console.cloud.google.com/freetrial?hl=zh-tw)，親自體驗產品的實際應用成效。新客戶還能獲得價值 $300 美元的免費抵免額，能用於執行、測試及部署工作負載。
 - In the Google Cloud console, on the project selector page,
   select or create a Google Cloud project.
 
@@ -103,7 +105,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
   [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
 - [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project).
-- Enable the BigQuery, BigQuery Connection API, and Speech-to-Text APIs.
+- Enable the BigQuery, BigQuery Connection API, and Speech-to-Text APIs, if any are not already enabled.
 
   **Roles required to enable APIs**
 
@@ -134,7 +136,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
   [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
 - [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project).
-- Enable the BigQuery, BigQuery Connection API, and Speech-to-Text APIs.
+- Enable the BigQuery, BigQuery Connection API, and Speech-to-Text APIs, if any are not already enabled.
 
   **Roles required to enable APIs**
 
@@ -145,14 +147,25 @@ Google uses AI technology to translate content into your preferred language. AI 
   [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw).
 
   [Enable the APIs](https://console.cloud.google.com/apis/enableflow?apiid=bigquery.googleapis.com%2Cbigqueryconnection.googleapis.com%2Cspeech.googleapis.com&hl=zh-tw)
+
+## 費用
+
+在本文件中，您將使用下列 Google Cloud計費元件：
+
+* [BigQuery](https://cloud.google.com/bigquery/pricing?hl=zh-tw)
+* [Speech-to-Text](https://cloud.google.com/speech-to-text/pricing?hl=zh-tw)
+
+如要根據預測用量估算費用，請使用 [Pricing Calculator](https://docs.cloud.google.com/products/calculator?hl=zh-tw)。
+
+初次使用 Google Cloud 的使用者可能符合[免費試用期](https://docs.cloud.google.com/free?hl=zh-tw)資格。
 
 ## 建立辨識器
 
-Speech-to-Text 支援名為辨識工具的資源。辨識器代表儲存及可重複使用的辨識設定。您可以[建立辨識器](https://docs.cloud.google.com/speech-to-text/v2/docs/recognizers?hl=zh-tw)，將應用程式的轉錄內容或流量依邏輯分組。
+Speech-to-Text 支援名為辨識工具的資源。辨識器代表預存且可重複使用的辨識設定。您可以[建立辨識器](https://docs.cloud.google.com/speech-to-text/v2/docs/recognizers?hl=zh-tw)，將應用程式的轉錄內容或流量依邏輯分組。
 
-建立語音辨識工具是選用步驟。如果選擇建立語音辨識器，請記下辨識器的專案 ID、位置和辨識器 ID，以便在 `CREATE MODEL` 陳述式中使用，如[`SPEECH_RECOGNIZER`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service?hl=zh-tw#speech_recognizer)所述。如果選擇不建立語音辨識器，則必須為 `ML.TRANSCRIBE` 函式的 [`recognition_config` 引數](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-transcribe?hl=zh-tw#arguments)指定值。
+您可以選擇是否要建立語音辨識器。如果選擇建立語音辨識器，請記下辨識器的專案 ID、位置和辨識器 ID，以便在 `CREATE MODEL` 陳述式中使用，如 [`SPEECH_RECOGNIZER`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service?hl=zh-tw#speech_recognizer) 所述。如果選擇不建立語音辨識器，則必須為 `ML.TRANSCRIBE` 函式的 [`recognition_config` 引數](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-transcribe?hl=zh-tw#arguments)指定值。
 
-您只能在提供的語音辨識器或 `recognition_config` 值中使用 `chirp`
+您只能在語音辨識器或您提供的 `recognition_config` 值中使用 `chirp`
 [轉錄模型](https://docs.cloud.google.com/speech-to-text/v2/docs/transcription-model?hl=zh-tw#transcription_models)。
 
 ## 建立資料集
@@ -168,10 +181,10 @@ Speech-to-Text 支援名為辨識工具的資源。辨識器代表儲存及可�
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Explorer」窗格中，按一下專案名稱。
-4. 依序點按 more\_vert「View actions」(查看動作)「>」(大於符號)「Create dataset」(建立資料集)。
+4. 依序點按 more\_vert **「View actions」(查看動作) > 「Create dataset」(建立資料集)**。
 5. 在「建立資料集」頁面中，執行下列操作：
 
-   1. 在「Dataset ID」(資料集 ID) 部分，輸入資料集的名稱。
+   1. 在「Dataset ID」(資料集 ID) 中，輸入資料集名稱。
    2. 在「位置類型」部分，選取「區域」或「多區域」。
 
       * 如果選取「區域」，請從「區域」清單中選取位置。
@@ -189,7 +202,7 @@ Speech-to-Text 支援名為辨識工具的資源。辨識器代表儲存及可�
    更改下列內容：
 
    * `LOCATION`：資料集的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
-   * `DATASET_ID`：您要建立的資料集 ID。
+   * `DATASET_ID`：要建立的資料集 ID。
 2. 確認資料集已建立完成：
 
    ```
@@ -287,9 +300,9 @@ Speech-to-Text 支援名為辨識工具的資源。辨識器代表儲存及可�
 
 ### Python
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 import google.api_core.exceptions
@@ -341,9 +354,9 @@ def create_connection(
 
 ### Node.js
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 const {ConnectionServiceClient} =
@@ -398,11 +411,11 @@ async function createConnection(projectId, location, connectionId) {
 
 ### Terraform
 
-請使用 [`google_bigquery_connection`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_connection) 資源。
+使用 [`google_bigquery_connection`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_connection) 資源。
 
-**注意：** 如要使用 Terraform 建立 BigQuery 物件，必須啟用 [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest?hl=zh-tw)。
+**注意：** 如要使用 Terraform 建立 BigQuery 物件，請務必啟用 [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 下列範例會在 `US` 區域中建立名為 `my_cloud_resource_connection` 的 Cloud 資源連結：
 
@@ -427,7 +440,7 @@ resource "google_bigquery_connection" "default" {
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
 2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
 
-   每項專案只需要執行一次這個指令，且可以在任何目錄中執行。
+   每個專案只需要執行一次這個指令，而且可以在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
@@ -439,7 +452,7 @@ resource "google_bigquery_connection" "default" {
 
 每個 Terraform 設定檔都必須有自己的目錄 (也稱為*根模組*)。
 
-1. 在 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw) 中建立目錄，並在該目錄中建立新檔案。檔案名稱的副檔名必須是 `.tf`，例如 `main.tf`。在本教學課程中，這個檔案稱為 `main.tf`。
+1. 在 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw) 中建立目錄，並在該目錄中建立新檔案。檔案名稱的副檔名必須為 `.tf`，例如 `main.tf`。在本教學課程中，這個檔案稱為 `main.tf`。
 
    ```
    mkdir DIRECTORY && cd DIRECTORY && touch main.tf
@@ -448,16 +461,16 @@ resource "google_bigquery_connection" "default" {
 
    將程式碼範例複製到新建立的 `main.tf` 中。
 
-   視需要從 GitHub 複製程式碼。如果 Terraform 代码片段是端對端解決方案的一部分，建議您使用這個方法。
-3. 查看並修改範例參數，套用至您的環境。
+   (選用) 從 GitHub 複製程式碼。如果 Terraform 程式碼片段是端對端解決方案的一部分，建議使用這個方法。
+3. 請檢查並修改範例參數，然後套用至您的環境。
 4. 儲存變更。
-5. 初始化 Terraform。每個目錄只需執行一次這項操作。
+5. 初始化 Terraform。每個目錄只需執行一次。
 
    ```
    terraform init
    ```
 
-   如要使用最新版 Google 供應商，請加入 `-upgrade` 選項：
+   如要使用最新版 Google 供應商，請視需要加入 `-upgrade` 選項：
 
    ```
    terraform init -upgrade
@@ -472,7 +485,7 @@ resource "google_bigquery_connection" "default" {
    ```
 
    視需要修正設定。
-2. 執行下列指令並在提示中輸入 `yes`，套用 Terraform 設定：
+2. 執行下列指令，並在提示中輸入 `yes`，套用 Terraform 設定：
 
    ```
    terraform apply
@@ -481,7 +494,7 @@ resource "google_bigquery_connection" "default" {
    等待 Terraform 顯示「Apply complete!」訊息。
 3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)即可查看結果。在 Google Cloud 控制台中，前往 UI 中的資源，確認 Terraform 已建立或更新這些資源。
 
-**注意：**Terraform 範例通常會假設 Google Cloud 專案已啟用必要的 API。
+**注意：**Terraform 範例通常會假設專案已啟用必要的 API。 Google Cloud
 
 ### 將存取權授予服務帳戶
 
@@ -489,21 +502,21 @@ resource "google_bigquery_connection" "default" {
 
 ### 控制台
 
-1. 前往「IAM & Admin」(IAM 與管理) 頁面。
+1. 前往「IAM 與管理」頁面。
 
    [前往「IAM & Admin」(IAM 與管理)](https://console.cloud.google.com/project/_/iam-admin?hl=zh-tw)
 2. 按一下 person\_add「授予存取權」。
 
    「新增主體」對話方塊隨即開啟。
 3. 在「新增主體」欄位，輸入先前複製的服務帳戶 ID。
-4. 按一下「Select a role」(選取角色) 欄位，然後在「Filter」(篩選器) 中輸入 `Cloud Speech Client`。
+4. 按一下「選取角色」欄位，然後在「篩選器」中輸入 `Cloud Speech Client`。
 5. 按一下 [Add another role] (新增其他角色)。
 6. 在「Select a role」(請選擇角色) 欄位中，依序選取「Cloud Storage」和「Storage Object Viewer」(Storage 物件檢視者)。
 7. 按一下 [儲存]。
 
 ### gcloud
 
-使用 [`gcloud projects add-iam-policy-binding` 指令](https://docs.cloud.google.com/sdk/gcloud/reference/projects/add-iam-policy-binding?hl=zh-tw)：
+使用 [`gcloud projects add-iam-policy-binding`](https://docs.cloud.google.com/sdk/gcloud/reference/projects/add-iam-policy-binding?hl=zh-tw) 指令：
 
 ```
 gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount:MEMBER' --role='roles/speech.client' --condition=None
@@ -517,26 +530,27 @@ gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount
 
 如未授予權限，就會發生 `Permission denied` 錯誤。
 
-**注意：**如果在與物件資料表所用 Cloud Storage 值區不同的專案中建立辨識器，請按照下列方式授予服務帳戶 Identity and Access Management (IAM) 角色：
+**注意：**如果您在與物件表格使用的 Cloud Storage bucket 不同的專案中建立辨識器，請按照下列方式授予服務帳戶 Identity and Access Management (IAM) 角色：
 
 * 在含有辨識器的專案中，將 Cloud Speech Client 角色授予服務帳戶。
-* 在包含 Cloud Storage bucket 的專案中，授予服務帳戶「Storage 物件檢視者」角色。
+* 在含有 Cloud Storage bucket 的專案中，將 Storage 物件檢視者角色授予服務帳戶。
 * 在包含 Cloud Storage bucket 的專案中，將「Storage 物件檢視者」角色授予 Speech-to-Text 服務代理 (`service-my_project_number@gcp-sa-speech.iam.gserviceaccount.com`)。
 
 ## 建立物件資料表
 
-在 Cloud Storage 中的一組音訊檔案上[建立物件資料表](https://docs.cloud.google.com/bigquery/docs/object-tables?hl=zh-tw)。物件表格中的音訊檔案必須為[支援的類型](https://docs.cloud.google.com/speech-to-text/docs/encoding?hl=zh-tw#audio-encodings)。
+在 Cloud Storage 中的一組音訊檔案上[建立物件資料表](https://docs.cloud.google.com/bigquery/docs/object-tables?hl=zh-tw)。物件表格中的音訊檔案必須是[支援的類型](https://docs.cloud.google.com/speech-to-text/docs/encoding?hl=zh-tw#audio-encodings)。
 
-物件資料表使用的 Cloud Storage bucket 應位於您打算建立模型並呼叫 `ML.TRANSCRIBE` 函式的專案中。如要從與物件資料表所用 Cloud Storage bucket 不同的專案中呼叫 `ML.TRANSCRIBE` 函式，您必須[在 bucket 層級將 Storage Admin 角色授予](https://docs.cloud.google.com/storage/docs/access-control/using-iam-permissions?hl=zh-tw#bucket-add) `service-A@gcp-sa-aiplatform.iam.gserviceaccount.com` 服務帳戶。
+物件表格使用的 Cloud Storage bucket 應與您打算建立模型並呼叫 `ML.TRANSCRIBE` 函式的專案位於相同位置。如要在與物件資料表所用 Cloud Storage bucket 不同的專案中呼叫 `ML.TRANSCRIBE` 函式，您必須[在 bucket 層級將 Storage Admin 角色授予](https://docs.cloud.google.com/storage/docs/access-control/using-iam-permissions?hl=zh-tw#bucket-add) `service-A@gcp-sa-aiplatform.iam.gserviceaccount.com` 服務帳戶。
 
 ## 建立模型
 
-使用 [`REMOTE_SERVICE_TYPE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service?hl=zh-tw#remote_service_type) 建立遠端模型：`CLOUD_AI_SPEECH_TO_TEXT_V2`
+使用
+[`REMOTE_SERVICE_TYPE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service?hl=zh-tw#remote_service_type) `CLOUD_AI_SPEECH_TO_TEXT_V2` 建立遠端模型：
 
 ```
 CREATE OR REPLACE MODEL
 `PROJECT_ID.DATASET_ID.MODEL_NAME`
-REMOTE WITH CONNECTION {DEFAULT | `PROJECT_ID.REGION.CONNECTION_ID`}
+REMOTE WITH CONNECTION {`PROJECT_ID.REGION.CONNECTION_ID`}
 OPTIONS (
   REMOTE_SERVICE_TYPE = 'CLOUD_AI_SPEECH_TO_TEXT_V2',
   SPEECH_RECOGNIZER = 'projects/PROJECT_NUMBER/locations/LOCATION/recognizers/RECOGNIZER_ID'
@@ -551,17 +565,16 @@ OPTIONS (
 * `REGION`：連線使用的區域。
 * `CONNECTION_ID`：連線 ID，例如 `myconnection`。
 
-  在 Google Cloud 控制台中[查看連線詳細資料](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw#view-connections)時，連線 ID 是「連線 ID」中顯示的完整連線 ID 最後一個區段的值，例如 `projects/myproject/locations/connection_location/connections/myconnection`。
-* `PROJECT_NUMBER`：含有語音辨識器的專案編號。您可以在 Google Cloud 控制台的「資訊主頁」頁面中，找到「專案資訊」卡片上的這個值。
-* `LOCATION`：語音辨識器使用的位置。您可以在 Google Cloud 控制台的「List recognizers」(列出辨識器) [頁面](https://console.cloud.google.com/speech/recognizers/list?hl=zh-tw)上，找到「Location」(位置) 欄位中的這個值。
+  在 Google Cloud 控制台中[查看連線詳細資料](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw#view-connections)時，連線 ID 是「連線 ID」中顯示的完整連線 ID 最後一個部分的值，例如 `projects/myproject/locations/connection_location/connections/myconnection`。
+* `PROJECT_NUMBER`：包含語音辨識器的專案編號。您可以在 Google Cloud 控制台的「資訊主頁」頁面中，找到「專案資訊」資訊卡，其中會顯示這個值。
+* `LOCATION`：語音辨識器使用的位置。您可以在 Google Cloud 控制台的「List recognizers」[頁面](https://console.cloud.google.com/speech/recognizers/list?hl=zh-tw)中，找到「Location」欄位的值。
 * `RECOGNIZER_ID`：語音辨識器 ID。
   您可以在 Google Cloud 控制台的「List recognizers」[頁面](https://console.cloud.google.com/speech/recognizers/list?hl=zh-tw)上，找到「ID」欄位中的值。
 
   這個選項並非必要。如未指定值，系統會使用預設辨識器。在這種情況下，您必須為 `ML.TRANSCRIBE` 函式的 `recognition_config` 參數指定值，才能提供預設辨識器的設定。
 
   您只能在提供的 `recognition_config` 值中使用 `chirp`
-  [轉錄模型](https://docs.cloud.google.com/speech-to-text/v2/docs/transcription-model?hl=zh-tw#transcription_models)
-  。
+  [轉錄模型](https://docs.cloud.google.com/speech-to-text/v2/docs/transcription-model?hl=zh-tw#transcription_models)。
 
 **重要事項：** 即使連線位於預設專案中，您也必須指定連線的專案 ID。
 
@@ -583,8 +596,8 @@ FROM ML.TRANSCRIBE(
 * `PROJECT_ID`：您的專案 ID。
 * `DATASET_ID`：包含模型的資料集 ID。
 * `MODEL_NAME`：模型名稱。
-* `OBJECT_TABLE_NAME`：包含要處理音訊檔案 URI 的物件表格名稱。
-* `recognition_config`：JSON 格式的[`RecognitionConfig` 資源](https://docs.cloud.google.com/speech-to-text/v2/docs/reference/rest/v2/projects.locations.recognizers?hl=zh-tw#recognitionconfig)。
+* `OBJECT_TABLE_NAME`：物件資料表的名稱，其中包含要處理的音訊檔案 URI。
+* `recognition_config`：JSON 格式的[`RecognitionConfig`資源](https://docs.cloud.google.com/speech-to-text/v2/docs/reference/rest/v2/projects.locations.recognizers?hl=zh-tw#recognitionconfig)。
 
   如果已使用 [`SPEECH_RECOGNIZER` 選項](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service?hl=zh-tw#speech_recognizer)為遠端模型指定辨識器，則無法指定 `recognition_config` 值。
 
@@ -607,7 +620,7 @@ FROM ML.TRANSCRIBE(
 );
 ```
 
-以下範例會轉錄 `audio` 資料表代表的音訊檔案，並提供預設辨識器的設定：
+以下範例會轉錄 `audio` 表格代表的音訊檔案，並提供預設辨識器的設定：
 
 ```
 SELECT *
@@ -618,11 +631,67 @@ FROM ML.TRANSCRIBE(
 );
 ```
 
+## 清除所用資源
+
+如要避免系統向您的 Google Cloud 帳戶收取本教學課程所用資源的費用，請刪除含有相關資源的專案，或者保留專案但刪除個別資源。
+
+### 刪除專案
+
+### 控制台
+
+**警告**：刪除專案會出現以下結果：
+
+* **專案中的所有內容都會遭到刪除。**如果使用現有專案來進行本文中的任務，刪除專案將一併移除當中已完成的其他任務'。
+* **自訂專案 ID 會消失。**當您之前建立這個專案時，可能建立了想要在日後使用的自訂專案 ID。如要保留使用該專案 ID 的網址 (例如 `appspot.com` 網址)，請刪除在該專案中選取的資源，而不是刪除整個專案。
+
+如果打算探索多種架構、教學課程或快速入門導覽課程，重複使用專案可避免超出專案配額限制。
+
+1. 前往 Google Cloud 控制台的「Manage resources」(管理資源) 頁面。
+
+   [前往「Manage resources」(管理資源)](https://console.cloud.google.com/iam-admin/projects?hl=zh-tw)
+2. 在專案清單中選取要刪除的專案，然後點選「Delete」(刪除)。
+3. 在對話方塊中輸入專案 ID，然後按一下 [Shut down] (關閉) 以刪除專案。
+
+### gcloud
+
+**警告**：刪除專案會出現以下結果：
+
+* **專案中的所有內容都會遭到刪除。**如果使用現有專案來進行本文中的任務，刪除專案將一併移除當中已完成的其他任務'。
+* **自訂專案 ID 會消失。**當您之前建立這個專案時，可能建立了想要在日後使用的自訂專案 ID。如要保留使用該專案 ID 的網址 (例如 `appspot.com` 網址)，請刪除在該專案中選取的資源，而不是刪除整個專案。
+
+如果打算探索多種架構、教學課程或快速入門導覽課程，重複使用專案可避免超出專案配額限制。
+
+刪除 Google Cloud 專案：
+
+```
+gcloud projects delete PROJECT_ID
+```
+
+### 刪除個別資源
+
+如果您打算保留用於本教學課程的專案，可以刪除您建立的個別資源，以免產生額外費用：
+
+1. **刪除資料集：**刪除資料集也會移除遠端模型，以及您在其中建立的物件資料表。
+
+   * 前往 Google Cloud 控制台的「BigQuery」頁面。
+   * 在「Explorer」窗格中展開專案，然後選取您建立的資料集。
+   * 按一下 more\_vert「View actions」(查看動作)，然後按一下「Delete」(刪除)。
+   * 在對話方塊中輸入 `delete`，然後按一下「刪除」。
+2. **刪除連結：**
+
+   * 在「Explorer」窗格中展開專案名稱，然後按一下「Connections」。
+   * 點選所建立連結旁的「查看動作」more\_vert 圖示，然後選取「刪除」。
+   * 在對話方塊中，按一下「刪除」確認。
+3. **刪除 Speech-to-Text 辨識器 (如已建立)：**
+
+   * 前往 [Speech-to-Text Recognizers 頁面](https://console.cloud.google.com/speech/recognizers/list?hl=zh-tw)。
+   * 勾選您建立的辨識器旁的方塊，然後按一下「刪除」。
+
 ## 後續步驟
 
 * 如要進一步瞭解 BigQuery ML 中的模型推論，請參閱「[模型推論總覽](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/inference-overview?hl=zh-tw)」。
 * 如要進一步瞭解如何使用 Cloud AI API 執行 AI 工作，請參閱「[AI 應用程式總覽](https://docs.cloud.google.com/bigquery/docs/ai-application-overview?hl=zh-tw)」。
-* 如要進一步瞭解生成式 AI 模型支援的 SQL 陳述式和函式，請參閱[生成式 AI 模型端對端使用者歷程](https://docs.cloud.google.com/bigquery/docs/e2e-journey-genai?hl=zh-tw)。
+* 如要進一步瞭解生成式 AI 模型支援的 SQL 陳述式和函式，請參閱「[生成式 AI 模型的端對端使用者歷程](https://docs.cloud.google.com/bigquery/docs/e2e-journey-genai?hl=zh-tw)」。
 
 
 
@@ -631,11 +700,11 @@ FROM ML.TRANSCRIBE(
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-23 (世界標準時間)。
+上次更新時間：2026-10-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-23 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]

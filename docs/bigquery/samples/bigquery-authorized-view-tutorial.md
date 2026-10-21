@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -15,7 +15,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 如需包含這個程式碼範例的詳細說明文件，請參閱下列文章：
 
 * [授權 view](https://docs.cloud.google.com/bigquery/docs/authorized-views?hl=zh-tw)
-* [建立授權 view](https://docs.cloud.google.com/bigquery/docs/create-authorized-views?hl=zh-tw)
+* [建立授權檢視表](https://docs.cloud.google.com/bigquery/docs/create-authorized-views?hl=zh-tw)
 
 ## 程式碼範例
 
@@ -57,6 +57,90 @@ sharedDataset.toBuilder().setAcl(viewAcl).build().update();
 List<Acl> srcAcl = new ArrayList<>(sourceDataset.getAcl());
 srcAcl.add(Acl.of(new Acl.View(view.getTableId())));
 sourceDataset.toBuilder().setAcl(srcAcl).build().update();
+```
+
+### Python
+
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+
+```
+# Create a source dataset
+from google.cloud import bigquery
+from google.cloud.bigquery.enums import EntityTypes
+
+client = bigquery.Client()
+source_dataset_id = "github_source_data"
+source_dataset_id_full = "{}.{}".format(client.project, source_dataset_id)
+
+
+source_dataset = bigquery.Dataset(source_dataset_id_full)
+# Specify the geographic location where the dataset should reside.
+source_dataset.location = "US"
+source_dataset = client.create_dataset(source_dataset)  # API request
+
+# Populate a source table
+source_table_id = "github_contributors"
+job_config = bigquery.QueryJobConfig()
+job_config.destination = source_dataset.table(source_table_id)
+sql = """
+    SELECT commit, author, committer, repo_name
+    FROM `bigquery-public-data.github_repos.commits`
+    LIMIT 1000
+"""
+client.query_and_wait(
+    sql,
+    # Location must match that of the dataset(s) referenced in the query
+    # and of the destination table.
+    location="US",
+    job_config=job_config,
+)  # API request - starts the query and waits for query to finish
+
+# Create a separate dataset to store your view
+shared_dataset_id = "shared_views"
+shared_dataset_id_full = "{}.{}".format(client.project, shared_dataset_id)
+
+
+shared_dataset = bigquery.Dataset(shared_dataset_id_full)
+shared_dataset.location = "US"
+shared_dataset = client.create_dataset(shared_dataset)  # API request
+
+# Create the view in the new dataset
+shared_view_id = "github_analyst_view"
+view = bigquery.Table(shared_dataset.table(shared_view_id))
+sql_template = """
+    SELECT
+        commit, author.name as author,
+        committer.name as committer, repo_name
+    FROM
+        `{}.{}.{}`
+"""
+view.view_query = sql_template.format(
+    client.project, source_dataset_id, source_table_id
+)
+view = client.create_table(view)  # API request
+
+# Assign access controls to the dataset containing the view
+# analyst_group_email = 'data_analysts@example.com'
+access_entries = shared_dataset.access_entries
+access_entries.append(
+    bigquery.AccessEntry("READER", EntityTypes.GROUP_BY_EMAIL, analyst_group_email)
+)
+shared_dataset.access_entries = access_entries
+shared_dataset = client.update_dataset(
+    shared_dataset, ["access_entries"]
+)  # API request
+
+# Authorize the view to access the source dataset
+access_entries = source_dataset.access_entries
+access_entries.append(
+    bigquery.AccessEntry(None, EntityTypes.VIEW, view.reference.to_api_repr())
+)
+source_dataset.access_entries = access_entries
+source_dataset = client.update_dataset(
+    source_dataset, ["access_entries"]
+)  # API request
 ```
 
 ### Terraform

@@ -60,18 +60,6 @@ To learn about the syntax for aggregate function calls, see
 
 ## `AGG`
 
-**Preview**
-
-This product or feature is subject to the "Pre-GA Offerings Terms"
-in the General Service Terms section of the
-[Service Specific Terms](https://cloud.google.com/terms/service-terms).
-Pre-GA products and features are available "as is" and might have
-limited support. For more information, see the
-[launch stage descriptions](https://cloud.google.com/products#product-launch-stages).
-
-**Note:** To provide feedback or request support for this feature, send an email to
-[bq-graph-preview-support@google.com](mailto:bq-graph-preview-support@google.com).
-
 ```
 AGG(measure_expression)
 ```
@@ -84,6 +72,16 @@ a key. The `AGG` function invokes the calculation exactly once per key
 with the guarantee of avoiding overcounting. Measures are useful for defining
 business metrics. You can perform aggregation using the `AGG`
 function instead of complex aggregation queries.
+
+The `AGG` function is used in two contexts:
+
+* In SQL queries to aggregate measure columns or sub-fields
+  of a `STRUCT` column returned by the `GRAPH_EXPAND`
+  TVF.
+* In `CREATE PROPERTY GRAPH` statements to define derived measures that compose
+  multiple measures within the same element table, such as
+  `MEASURE(AGG(total_revenue) - AGG(total_cost)) AS gross_profit`.
+
 For more information about
 overcounting with aggregations, see
 [multi-level aggregation](/bigquery/docs/reference/standard-sql/aggregate-function-calls#multi_level_aggregation_overcounting).
@@ -186,6 +184,7 @@ GROUP BY S_location_id;
 ```
 ANY_VALUE(
   expression
+  [ WHERE where_expression ]
   [ HAVING { MAX | MIN } having_expression ]
 )
 [ OVER over_clause ]
@@ -196,168 +195,5 @@ over_clause:
 window_specification:
   [ named_window ]
   [ PARTITION BY partition_expression [, ...] ]
-  [ ORDER BY expression [ { ASC | DESC }  ] [, ...] ]
-  [ window_frame_clause ]
-```
-
-**Description**
-
-Returns `expression` for some row chosen from the group. Which row is chosen is
-nondeterministic, not random. Returns `NULL` when the input produces no
-rows. Returns `NULL` when `expression`
-or `having_expression` is
-`NULL` for all rows in the group.
-
-If `expression` contains any non-NULL values, then `ANY_VALUE` behaves as if
-`IGNORE NULLS` is specified;
-rows for which `expression` is `NULL` aren't considered and won't be
-selected.
-
-If the `HAVING` clause is included in the `ANY_VALUE` function, the
-`OVER` clause can't be used with this function.
-
-To learn more about the optional aggregate clauses that you can pass
-into this function, see
-[Aggregate function calls](/bigquery/docs/reference/standard-sql/aggregate-function-calls).
-
-
-
-To learn more about the `OVER` clause and how to use it, see
-[Window function calls](/bigquery/docs/reference/standard-sql/window-function-calls).
-
-
-
-**Supported Argument Types**
-
-Any
-
-**Returned Data Types**
-
-Matches the input data type.
-
-**Examples**
-
-```
-SELECT ANY_VALUE(fruit) as any_value
-FROM UNNEST(["apple", "banana", "pear"]) as fruit;
-
-/*-----------+
- | any_value |
- +-----------+
- | apple     |
- +-----------*/
-```
-
-```
-SELECT
-  fruit,
-  ANY_VALUE(fruit) OVER (ORDER BY LENGTH(fruit) ROWS BETWEEN 1 PRECEDING AND CURRENT ROW) AS any_value
-FROM UNNEST(["apple", "banana", "pear"]) as fruit;
-
-/*--------+-----------+
- | fruit  | any_value |
- +--------+-----------+
- | pear   | pear      |
- | apple  | pear      |
- | banana | apple     |
- +--------+-----------*/
-```
-
-```
-WITH
-  Store AS (
-    SELECT 20 AS sold, "apples" AS fruit
-    UNION ALL
-    SELECT 30 AS sold, "pears" AS fruit
-    UNION ALL
-    SELECT 30 AS sold, "bananas" AS fruit
-    UNION ALL
-    SELECT 10 AS sold, "oranges" AS fruit
-  )
-SELECT ANY_VALUE(fruit HAVING MAX sold) AS a_highest_selling_fruit FROM Store;
-
-/*-------------------------+
- | a_highest_selling_fruit |
- +-------------------------+
- | pears                   |
- +-------------------------*/
-```
-
-```
-WITH
-  Store AS (
-    SELECT 20 AS sold, "apples" AS fruit
-    UNION ALL
-    SELECT 30 AS sold, "pears" AS fruit
-    UNION ALL
-    SELECT 30 AS sold, "bananas" AS fruit
-    UNION ALL
-    SELECT 10 AS sold, "oranges" AS fruit
-  )
-SELECT ANY_VALUE(fruit HAVING MIN sold) AS a_lowest_selling_fruit FROM Store;
-
-/*-------------------------+
- | a_lowest_selling_fruit  |
- +-------------------------+
- | oranges                 |
- +-------------------------*/
-```
-
-## `ARRAY_AGG`
-
-```
-ARRAY_AGG(
-  [ DISTINCT ]
-  expression
-  [ { IGNORE | RESPECT } NULLS ]
-  [ ORDER BY key [ { ASC | DESC } ] [, ... ] ]
-  [ LIMIT n ]
-)
-[ OVER over_clause ]
-
-over_clause:
-  { named_window | ( [ window_specification ] ) }
-
-window_specification:
-  [ named_window ]
-  [ PARTITION BY partition_expression [, ...] ]
-  [ ORDER BY expression [ { ASC | DESC }  ] [, ...] ]
-  [ window_frame_clause ]
-```
-
-**Description**
-
-Returns an ARRAY of `expression` values.
-
-To learn more about the optional aggregate clauses that you can pass
-into this function, see
-[Aggregate function calls](/bigquery/docs/reference/standard-sql/aggregate-function-calls).
-
-
-
-If this function is used with the `OVER` clause, it's part of a
-window function call. In a window function call,
-aggregate function clauses can't be used.
-To learn more about the `OVER` clause and how to use it, see
-[Window function calls](/bigquery/docs/reference/standard-sql/window-function-calls).
-
-
-
-An error is raised if an array in the final query result contains a `NULL`
-element.
-
-**Supported Argument Types**
-
-All data types except ARRAY.
-
-**Returned Data Types**
-
-ARRAY
-
-If there are zero input rows, this function returns `NULL`.
-
-**Examples**
-
-```
-SELECT ARRAY_AGG(x) AS array_agg FROM UNNEST([2, 1,-2, 3, -2,<
+  [ ORDER BY expression [ { ASC
 ```

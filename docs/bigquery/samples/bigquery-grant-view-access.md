@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -136,6 +136,56 @@ public class GrantViewAccess {
     }
   }
 }
+```
+
+### Python
+
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+
+```
+from google.cloud import bigquery
+
+client = bigquery.Client()
+
+# To use a view, the analyst requires ACLs to both the view and the source
+# table. Create an authorized view to allow an analyst to use a view
+# without direct access permissions to the source table.
+view_dataset_id = "my-project.my_view_dataset"
+# Make an API request to get the view dataset ACLs.
+view_dataset = client.get_dataset(view_dataset_id)
+
+analyst_group_email = "example-analyst-group@google.com"
+access_entries = view_dataset.access_entries
+access_entries.append(
+    bigquery.AccessEntry("READER", "groupByEmail", analyst_group_email)
+)
+view_dataset.access_entries = access_entries
+
+# Make an API request to update the ACLs property of the view dataset.
+view_dataset = client.update_dataset(view_dataset, ["access_entries"])
+print(f"Access to view: {view_dataset.access_entries}")
+
+# Group members of "data_analysts@example.com" now have access to the view,
+# but they require access to the source table to use it. To remove this
+# restriction, authorize the view to access the source dataset.
+source_dataset_id = "my-project.my_source_dataset"
+# Make an API request to set the source dataset ACLs.
+source_dataset = client.get_dataset(source_dataset_id)
+
+view_reference = {
+    "projectId": "my-project",
+    "datasetId": "my_view_dataset",
+    "tableId": "my_authorized_view",
+}
+access_entries = source_dataset.access_entries
+access_entries.append(bigquery.AccessEntry(None, "view", view_reference))
+source_dataset.access_entries = access_entries
+
+# Make an API request to update the ACLs property of the source dataset.
+source_dataset = client.update_dataset(source_dataset, ["access_entries"])
+print(f"Access to source: {source_dataset.access_entries}")
 ```
 
 ## 後續步驟

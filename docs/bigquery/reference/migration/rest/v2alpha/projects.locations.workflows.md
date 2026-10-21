@@ -73,6 +73,9 @@ Send feedback
   + [JSON representation](#SourceLocation.SCHEMA_REPRESENTATION)
 * [TargetLocation](#TargetLocation)
   + [JSON representation](#TargetLocation.SCHEMA_REPRESENTATION)
+* [DialectDetectionConfig](#DialectDetectionConfig)
+  + [JSON representation](#DialectDetectionConfig.SCHEMA_REPRESENTATION)
+* [DetectionMode](#DetectionMode)
 * [TranslationDetails](#TranslationDetails)
   + [JSON representation](#TranslationDetails.SCHEMA_REPRESENTATION)
 * [SourceTargetMapping](#SourceTargetMapping)
@@ -102,9 +105,23 @@ Send feedback
   + [JSON representation](#TranslationTaskResult.SCHEMA_REPRESENTATION)
 * [GcsReportLogMessage](#GcsReportLogMessage)
   + [JSON representation](#GcsReportLogMessage.SCHEMA_REPRESENTATION)
+* [TaskOutput](#TaskOutput)
+  + [JSON representation](#TaskOutput.SCHEMA_REPRESENTATION)
+* [LineageOutput](#LineageOutput)
+  + [JSON representation](#LineageOutput.SCHEMA_REPRESENTATION)
+* [RecognizedInput](#RecognizedInput)
+  + [JSON representation](#RecognizedInput.SCHEMA_REPRESENTATION)
+* [Type](#Type_1)
+* [ProgressReport](#ProgressReport)
+  + [JSON representation](#ProgressReport.SCHEMA_REPRESENTATION)
+* [ProcessingStage](#ProcessingStage)
+* [WorkSummary](#WorkSummary)
+  + [JSON representation](#WorkSummary.SCHEMA_REPRESENTATION)
+* [State](#State_1)
+* [State](#State_2)
 * [MigrationTaskResult](#MigrationTaskResult)
   + [JSON representation](#MigrationTaskResult.SCHEMA_REPRESENTATION)
-* [State](#State_1)
+* [State](#State_3)
 * [Methods](#METHODS_SUMMARY)
 
 ## Resource: MigrationWorkflow
@@ -130,12 +147,12 @@ A single task for a migration which has details about the configuration of the t
 
 | JSON representation |
 | --- |
-| ``` {   "id": string,   "type": string,   "details": {     "@type": string,     field1: ...,     ...   },   "state": enum (State),   "processingError": {     object (ErrorInfo)   },   "createTime": string,   "lastUpdateTime": string,   "orchestrationResult": {     object (MigrationTaskOrchestrationResult)   },   "resourceErrorDetails": [     {       object (ResourceErrorDetail)     }   ],   "resourceErrorCount": integer,   "metrics": [     {       object (TimeSeries)     }   ],   "taskResult": {     object (MigrationTaskResult)   },   "totalProcessingErrorCount": integer,   "totalResourceErrorCount": integer,    // Union field task_details can be only one of the following:   "assessmentTaskDetails": {     object (AssessmentTaskDetails)   },   "translationTaskDetails": {     object (TranslationTaskDetails)   },   "translationConfigDetails": {     object (TranslationConfigDetails)   },   "translationDetails": {     object (TranslationDetails)   }   // End of list of possible types for union field task_details. } ``` |
+| ``` {   "id": string,   "type": string,   "details": {     "@type": string,     field1: ...,     ...   },   "state": enum (State),   "processingError": {     object (ErrorInfo)   },   "createTime": string,   "lastUpdateTime": string,   "orchestrationResult": {     object (MigrationTaskOrchestrationResult)   },   "resourceErrorDetails": [     {       object (ResourceErrorDetail)     }   ],   "resourceErrorCount": integer,   "metrics": [     {       object (TimeSeries)     }   ],   "taskResult": {     object (MigrationTaskResult)   },   "totalProcessingErrorCount": integer,   "totalResourceErrorCount": integer,    // The following is a list of mutually exclusive fields. At most one of the   // fields will be set in a response:   "assessmentTaskDetails": {     object (AssessmentTaskDetails)   },   "translationTaskDetails": {     object (TranslationTaskDetails)   },   "translationConfigDetails": {     object (TranslationConfigDetails)   },   "translationDetails": {     object (TranslationDetails)   }   // End of mutually exclusive fields. } ``` |
 
 | Fields | |
 | --- | --- |
 | `id` | `string`  Output only. Immutable. The unique identifier for the migration task. The ID is server-generated. |
-| `type` | `string`  The type of the task. This must be one of the supported task types.  Assessment:   * `Assessment_Hive` - Assessment for Hive. * `Assessment_Redshift` - Assessment for Redshift. * `Assessment_Snowflake` - Assessment for Snowflake. * `Assessment_Teradata_v2` - Assessment for Teradata. * `Assessment_Oracle` - Assessment for Oracle. * `Assessment_Hadoop` - Assessment for Hadoop. * `Assessment_Informatica` - Assessment for Informatica.   Translation: See [Supported Task Types](https://docs.cloud.google.com/bigquery/docs/api-sql-translator#supported_task_types) for a list of supported task types. |
+| `type` | `string`  The type of the task. This must be one of the supported task types.  Assessment:   * `Assessment_Hive` - Assessment for Hive. * `Assessment_Redshift` - Assessment for Redshift. * `Assessment_Snowflake` - Assessment for Snowflake. * `Assessment_Teradata_v2` - Assessment for Teradata. * `Assessment_Oracle` - Assessment for Oracle. * `Assessment_Hadoop` - Assessment for Hadoop. * `Assessment_Informatica` - Assessment for Informatica.   Translation: See [Supported SQL dialects](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#supported_sql_dialects) for a list of supported task types. |
 | `details` | `object`  DEPRECATED! Use one of the task\_details below. The details of the task. The type URL must be one of the supported task details messages and correspond to the Task's type. |
 | `state` | `enum (State)`  Output only. The current state of the task. |
 | `processingError` | `object (ErrorInfo)`  Output only. An explanation that may be populated when the task is in FAILED state. |
@@ -148,11 +165,12 @@ A single task for a migration which has details about the configuration of the t
 | `taskResult` | `object (MigrationTaskResult)`  Output only. The result of the task. |
 | `totalProcessingErrorCount` | `integer`  Output only. Count of all the processing errors in this task and its subtasks. |
 | `totalResourceErrorCount` | `integer`  Output only. Count of all the resource errors in this task and its subtasks. |
-| Union field `task_details`. The details of the task. `task_details` can be only one of the following: | |
+| The details of the task. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response: | |
 | `assessmentTaskDetails` | `object (AssessmentTaskDetails)`  Task configuration for Assessment. |
 | `translationTaskDetails` | `object (TranslationTaskDetails)`  Task configuration for Batch SQL Translation. |
 | `translationConfigDetails` | `object (TranslationConfigDetails)`  Task configuration for CW Batch/Offline SQL Translation. |
 | `translationDetails` | `object (TranslationDetails)`  Task details for unified SQL Translation. |
+| End of mutually exclusive fields. | |
 
 ## AssessmentTaskDetails
 
@@ -174,109 +192,5 @@ Assessment task config.
 
 User-definable feature flags for assessment tasks.
 
-| JSON representation |
-| --- |
-| ``` {   "addShareableDataset": boolean } ``` |
-
-| Fields | |
-| --- | --- |
-| `addShareableDataset` | `boolean`  Optional. Whether to create a dataset containing non-PII data in addition to the output dataset. |
-
-## TranslationTaskDetails
-
-The translation task config to capture necessary settings for a translation task and subtask.
-
-| JSON representation |
-| --- |
-| ``` {   "inputPath": string,   "outputPath": string,   "filePaths": [     {       object (TranslationFileMapping)     }   ],   "schemaPath": string,   "fileEncoding": enum (FileEncoding),   "identifierSettings": {     object (IdentifierSettings)   },   "specialTokenMap": {     string: enum (TokenType),     ...   },   "filter": {     object (Filter)   },   "translationExceptionTable": string,    // Union field language_options can be only one of the following:   "teradataOptions": {     object (TeradataOptions)   },   "bteqOptions": {     object (BteqOptions)   }   // End of list of possible types for union field language_options. } ``` |
-
-| Fields | |
-| --- | --- |
-| `inputPath` | `string`  The Cloud Storage path for translation input files. |
-| `outputPath` | `string`  The Cloud Storage path for translation output files. |
-| `filePaths[]` | `object (TranslationFileMapping)`  Cloud Storage files to be processed for translation. |
-| `schemaPath` | `string`  The Cloud Storage path to DDL files as table schema to assist semantic translation. |
-| `fileEncoding` | `enum (FileEncoding)`  The file encoding type. |
-| `identifierSettings` | `object (IdentifierSettings)`  The settings for SQL identifiers. |
-| `specialTokenMap` | `map (key: string, value: enum (TokenType))`  The map capturing special tokens to be replaced during translation. The key is special token in string. The value is the token data type. This is used to translate SQL query template which contains special token as place holder. The special token makes a query invalid to parse. This map will be applied to annotate those special token with types to let parser understand how to parse them into proper structure with type information. |
-| `filter` | `object (Filter)`  The filter applied to translation details. |
-| `translationExceptionTable` | `string`  Specifies the exact name of the bigquery table ("dataset.table") to be used for surfacing raw translation errors. If the table does not exist, we will create it. If it already exists and the schema is the same, we will re-use. If the table exists and the schema is different, we will throw an error. |
-| Union field `language_options`. The language specific settings for the translation task. `language_options` can be only one of the following: | |
-| `teradataOptions` | `object (TeradataOptions)`  The Teradata SQL specific settings for the translation task. |
-| `bteqOptions` | `object (BteqOptions)`  The BTEQ specific settings for the translation task. |
-
-## TeradataOptions
-
-This type has no fields.
-
-Teradata SQL specific translation task related settings.
-
-## BteqOptions
-
-BTEQ translation task related settings.
-
-| JSON representation |
-| --- |
-| ``` {   "projectDataset": {     object (DatasetReference)   },   "defaultPathUri": string,   "fileReplacementMap": {     string: string,     ...   } } ``` |
-
-| Fields | |
-| --- | --- |
-| `projectDataset` | `object (DatasetReference)`  Specifies the project and dataset in BigQuery that will be used for external table creation during the translation. |
-| `defaultPathUri` | `string`  The Cloud Storage location to be used as the default path for files that are not otherwise specified in the file replacement map. |
-| `fileReplacementMap` | `map (key: string, value: string)`  Maps the local paths that are used in BTEQ scripts (the keys) to the paths in Cloud Storage that should be used in their stead in the translation (the value). |
-
-## DatasetReference
-
-Reference to a BigQuery dataset.
-
-| JSON representation |
-| --- |
-| ``` {   "datasetId": string,   "projectId": string,   "datasetIdAlternative": [     string   ],   "projectIdAlternative": [     string   ] } ``` |
-
-| Fields | |
-| --- | --- |
-| `datasetId` | `string`  A unique ID for this dataset, without the project name. The ID must contain only letters (a-z, A-Z), numbers (0-9), or underscores (\_). The maximum length is 1,024 characters. |
-| `projectId` | `string`  The ID of the project containing this dataset. |
-| `datasetIdAlternative[]` | `string`  The alternative field that will be used when the service is not able to translate the received data to the datasetId field. |
-| `projectIdAlternative[]` | `string`  The alternative field that will be used when the service is not able to translate the received data to the projectId field. |
-
-## TranslationFileMapping
-
-Mapping between an input and output file to be translated in a subtask.
-
-| JSON representation |
-| --- |
-| ``` {   "inputPath": string,   "outputPath": string } ``` |
-
-| Fields | |
-| --- | --- |
-| `inputPath` | `string`  The Cloud Storage path for a file to translation in a subtask. |
-| `outputPath` | `string`  The Cloud Storage path to write back the corresponding input file to. |
-
-## FileEncoding
-
-The file encoding types.
-
-| Enums | |
-| --- | --- |
-| `FILE_ENCODING_UNSPECIFIED` | File encoding setting is not specified. |
-| `UTF_8` | File encoding is UTF\_8. |
-| `ISO_8859_1` | File encoding is ISO\_8859\_1. |
-| `US_ASCII` | File encoding is US\_ASCII. |
-| `UTF_16` | File encoding is UTF\_16. |
-| `UTF_16LE` | File encoding is UTF\_16LE. |
-| `UTF_16BE` | File encoding is UTF\_16BE. |
-
-## IdentifierSettings
-
-Settings related to SQL identifiers.
-
-| JSON representation |
-| --- |
-| ``` {   "outputIdentifierCase": enum (IdentifierCase),   "identifierRewriteMode": enum (IdentifierRewriteMode) } ``` |
-
-| Fields | |
-| --- | --- |
-| `outputIdentifierCase` | `enum (IdentifierCase)`  The setting to control output queries' identifier case. |
-| `identifierRewriteMode` | `enum (IdentifierRewriteMode)`  Specifies the rewrite mode for SQL identifiers. |
-<
+|
+|  |

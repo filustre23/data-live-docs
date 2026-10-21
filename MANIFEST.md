@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-10-20T21:06+00:00_
+_Generated 2026-10-21T08:20+00:00_
 
-**9 sources, 4704 topics total**
+**9 sources, 4739 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_785 topics_
+_808 topics_
 
 - `anthropic-sdk/about-claude/additional-resources`
 - `anthropic-sdk/about-claude/api-credits-for-subscribers`
@@ -313,6 +313,13 @@ _785 topics_
 - `anthropic-sdk/api/beta/organization/users/remove`
 - `anthropic-sdk/api/beta/organization/users/retrieve`
 - `anthropic-sdk/api/beta/organization/users/update`
+- `anthropic-sdk/api/beta/organization/webhooks`
+- `anthropic-sdk/api/beta/organization/webhooks/create`
+- `anthropic-sdk/api/beta/organization/webhooks/delete`
+- `anthropic-sdk/api/beta/organization/webhooks/list`
+- `anthropic-sdk/api/beta/organization/webhooks/regenerate_signing_secret`
+- `anthropic-sdk/api/beta/organization/webhooks/retrieve`
+- `anthropic-sdk/api/beta/organization/webhooks/update`
 - `anthropic-sdk/api/beta/organization/workspaces`
 - `anthropic-sdk/api/beta/organization/workspaces/archive`
 - `anthropic-sdk/api/beta/organization/workspaces/create`
@@ -325,6 +332,7 @@ _785 topics_
 - `anthropic-sdk/api/beta/organization/workspaces/members/update`
 - `anthropic-sdk/api/beta/organization/workspaces/rate_limits`
 - `anthropic-sdk/api/beta/organization/workspaces/rate_limits/list`
+- `anthropic-sdk/api/beta/organization/workspaces/rate_limits/update`
 - `anthropic-sdk/api/beta/organization/workspaces/retrieve`
 - `anthropic-sdk/api/beta/organization/workspaces/service_accounts`
 - `anthropic-sdk/api/beta/organization/workspaces/service_accounts/add`
@@ -381,8 +389,11 @@ _785 topics_
 - `anthropic-sdk/api/beta/tunnels/reveal_token`
 - `anthropic-sdk/api/beta/tunnels/rotate_token`
 - `anthropic-sdk/api/beta/user_profiles`
+- `anthropic-sdk/api/beta/user_profiles/action_urls`
+- `anthropic-sdk/api/beta/user_profiles/action_urls/create`
 - `anthropic-sdk/api/beta/user_profiles/create`
 - `anthropic-sdk/api/beta/user_profiles/create_enrollment_url`
+- `anthropic-sdk/api/beta/user_profiles/delete`
 - `anthropic-sdk/api/beta/user_profiles/list`
 - `anthropic-sdk/api/beta/user_profiles/retrieve`
 - `anthropic-sdk/api/beta/user_profiles/update`
@@ -560,6 +571,7 @@ _785 topics_
 - `anthropic-sdk/api/organization/workspaces/members/update`
 - `anthropic-sdk/api/organization/workspaces/rate_limits`
 - `anthropic-sdk/api/organization/workspaces/rate_limits/list`
+- `anthropic-sdk/api/organization/workspaces/rate_limits/update`
 - `anthropic-sdk/api/organization/workspaces/retrieve`
 - `anthropic-sdk/api/organization/workspaces/service_accounts`
 - `anthropic-sdk/api/organization/workspaces/service_accounts/add`
@@ -582,6 +594,14 @@ _785 topics_
 - `anthropic-sdk/api/skills/versions/list`
 - `anthropic-sdk/api/skills/versions/retrieve`
 - `anthropic-sdk/api/supported-regions`
+- `anthropic-sdk/api/user_profiles`
+- `anthropic-sdk/api/user_profiles/action_urls`
+- `anthropic-sdk/api/user_profiles/action_urls/create`
+- `anthropic-sdk/api/user_profiles/create`
+- `anthropic-sdk/api/user_profiles/delete`
+- `anthropic-sdk/api/user_profiles/list`
+- `anthropic-sdk/api/user_profiles/retrieve`
+- `anthropic-sdk/api/user_profiles/update`
 - `anthropic-sdk/api/versioning`
 - `anthropic-sdk/build-with-claude/batch-processing`
 - `anthropic-sdk/build-with-claude/cache-diagnostics`
@@ -689,11 +709,14 @@ _785 topics_
 - `anthropic-sdk/manage-claude/opentelemetry`
 - `anthropic-sdk/manage-claude/opentelemetry/api`
 - `anthropic-sdk/manage-claude/opentelemetry/sdk`
+- `anthropic-sdk/manage-claude/organization-webhooks`
 - `anthropic-sdk/manage-claude/plugins-api`
 - `anthropic-sdk/manage-claude/rate-limits-api`
 - `anthropic-sdk/manage-claude/spend-limits-api`
 - `anthropic-sdk/manage-claude/usage-cost-api`
 - `anthropic-sdk/manage-claude/user-management`
+- `anthropic-sdk/manage-claude/user-profiles`
+- `anthropic-sdk/manage-claude/user-profiles-verification-portal`
 - `anthropic-sdk/manage-claude/wif-admin-api`
 - `anthropic-sdk/manage-claude/wif-providers/aws`
 - `anthropic-sdk/manage-claude/wif-providers/azure`
@@ -808,7 +831,7 @@ _785 topics_
 
 Upstream: <https://cloud.google.com/bigquery/docs/>
 
-_1488 topics_
+_1500 topics_
 
 - `bigquery/access-control`
 - `bigquery/access-control-basic-roles`
@@ -1463,10 +1486,6 @@ _1488 topics_
 - `bigquery/reference/auditlogs/rest/Shared.Types/Status`
 - `bigquery/reference/auditlogs/rest/Shared.Types/TableReference`
 - `bigquery/reference/biglake/rest`
-- `bigquery/reference/biglake/rest/Shared.Types/AttributeContext`
-- `bigquery/reference/biglake/rest/Shared.Types/GetResourceInfoRequest`
-- `bigquery/reference/biglake/rest/Shared.Types/MonitoredResource`
-- `bigquery/reference/biglake/rest/Shared.Types/ResourceInfo`
 - `bigquery/reference/biglake/rest/v1/projects.locations.catalogs`
 - `bigquery/reference/biglake/rest/v1/projects.locations.catalogs.databases`
 - `bigquery/reference/biglake/rest/v1/projects.locations.catalogs.databases.tables`
@@ -2033,7 +2052,15 @@ _1488 topics_
 - `bigquery/samples/bigquery-create-table-from-template`
 - `bigquery/samples/bigquery-create-table-partitioned`
 - `bigquery/samples/bigquery-create-table-range-partitioned`
+- `bigquery/samples/bigquery-create-table-snapshot`
 - `bigquery/samples/bigquery-create-view`
+- `bigquery/samples/bigquery-dataframes-clustering-model`
+- `bigquery/samples/bigquery-dataframes-load-data-from-bigquery`
+- `bigquery/samples/bigquery-dataframes-load-data-from-bigquery-job`
+- `bigquery/samples/bigquery-dataframes-load-data-from-csv`
+- `bigquery/samples/bigquery-dataframes-pandas-methods`
+- `bigquery/samples/bigquery-dataframes-regression-model`
+- `bigquery/samples/bigquery-dataframes-remote-function`
 - `bigquery/samples/bigquery-dataset-exists`
 - `bigquery/samples/bigquery-ddl-create-view`
 - `bigquery/samples/bigquery-delete-dataset`
@@ -2060,6 +2087,7 @@ _1488 topics_
 - `bigquery/samples/bigquery-insert-geography-wkt`
 - `bigquery/samples/bigquery-insert-geojson`
 - `bigquery/samples/bigquery-inserting-data-types`
+- `bigquery/samples/bigquery-jupyter-magic-gender-by-year`
 - `bigquery/samples/bigquery-label-dataset`
 - `bigquery/samples/bigquery-label-table`
 - `bigquery/samples/bigquery-list-datasets`
@@ -2071,6 +2099,7 @@ _1488 topics_
 - `bigquery/samples/bigquery-list-tables`
 - `bigquery/samples/bigquery-load-from-file`
 - `bigquery/samples/bigquery-load-table-clustered`
+- `bigquery/samples/bigquery-load-table-dataframe`
 - `bigquery/samples/bigquery-load-table-gcs-avro`
 - `bigquery/samples/bigquery-load-table-gcs-avro-truncate`
 - `bigquery/samples/bigquery-load-table-gcs-csv`
@@ -2088,6 +2117,10 @@ _1488 topics_
 - `bigquery/samples/bigquery-migration-pandas-gbq-query`
 - `bigquery/samples/bigquery-migration-pandas-gbq-query-legacy`
 - `bigquery/samples/bigquery-nested-repeated-schema`
+- `bigquery/samples/bigquery-pandas-gbq-read-gbq-simple`
+- `bigquery/samples/bigquery-pandas-gbq-to-gbq-simple`
+- `bigquery/samples/bigquery-pandas-public-data`
+- `bigquery/samples/bigquery-pandas-public-data-sandbox`
 - `bigquery/samples/bigquery-query`
 - `bigquery/samples/bigquery-query-batch`
 - `bigquery/samples/bigquery-query-clustered-table`
@@ -2103,6 +2136,7 @@ _1488 topics_
 - `bigquery/samples/bigquery-query-legacy`
 - `bigquery/samples/bigquery-query-legacy-large-results`
 - `bigquery/samples/bigquery-query-materialized-view`
+- `bigquery/samples/bigquery-query-natality-tutorial`
 - `bigquery/samples/bigquery-query-no-cache`
 - `bigquery/samples/bigquery-query-pagination`
 - `bigquery/samples/bigquery-query-params-arrays`
@@ -2113,6 +2147,7 @@ _1488 topics_
 - `bigquery/samples/bigquery-query-params-structs`
 - `bigquery/samples/bigquery-query-params-timestamps`
 - `bigquery/samples/bigquery-query-partitioned-table`
+- `bigquery/samples/bigquery-query-results-geodataframe`
 - `bigquery/samples/bigquery-query-script`
 - `bigquery/samples/bigquery-query-total-rows`
 - `bigquery/samples/bigquery-relax-column`

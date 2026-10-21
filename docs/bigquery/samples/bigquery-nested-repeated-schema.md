@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -142,6 +142,45 @@ public class NestedRepeatedSchema {
     }
   }
 }
+```
+
+### Python
+
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+
+```
+from google.cloud import bigquery
+
+client = bigquery.Client()
+
+# TODO(dev): Change table_id to the full name of the table you want to create.
+table_id = "your-project.your_dataset.your_table_name"
+
+schema = [
+    bigquery.SchemaField("id", "STRING", mode="NULLABLE"),
+    bigquery.SchemaField("first_name", "STRING", mode="NULLABLE"),
+    bigquery.SchemaField("last_name", "STRING", mode="NULLABLE"),
+    bigquery.SchemaField("dob", "DATE", mode="NULLABLE"),
+    bigquery.SchemaField(
+        "addresses",
+        "RECORD",
+        mode="REPEATED",
+        fields=[
+            bigquery.SchemaField("status", "STRING", mode="NULLABLE"),
+            bigquery.SchemaField("address", "STRING", mode="NULLABLE"),
+            bigquery.SchemaField("city", "STRING", mode="NULLABLE"),
+            bigquery.SchemaField("state", "STRING", mode="NULLABLE"),
+            bigquery.SchemaField("zip", "STRING", mode="NULLABLE"),
+            bigquery.SchemaField("numberOfYears", "STRING", mode="NULLABLE"),
+        ],
+    ),
+]
+table = bigquery.Table(table_id, schema=schema)
+table = client.create_table(table)  # API request
+
+print(f"Created table {table.project}.{table.dataset_id}.{table.table_id}.")
 ```
 
 ## 後續步驟

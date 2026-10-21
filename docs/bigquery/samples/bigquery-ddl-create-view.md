@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -152,8 +152,6 @@ pub async fn sample(project_id: &str, dataset_id: &str, view_id: &str) -> anyhow
         .query(ddl_sql)
         .with_project_id(project_id)
         .set_location("US")
-        .run()
-        .await?
         .until_done()
         .await?;
 

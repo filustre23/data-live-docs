@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -8,7 +8,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 叢集資料表 透過集合功能整理內容 你可以依據偏好儲存及分類內容。
 
-從 Cloud Storage 的 CSV 檔案將資料載入叢集資料表。
+從 Cloud Storage 的 CSV 檔案將資料載入分群資料表。
 
 ## 深入探索
 
@@ -163,6 +163,50 @@ public class LoadTableClustered {
     }
   }
 }
+```
+
+### Python
+
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+
+```
+from google.cloud import bigquery
+
+# Construct a BigQuery client object.
+client = bigquery.Client()
+
+# TODO(developer): Set table_id to the ID of the table to create.
+# table_id = "your-project.your_dataset.your_table_name"
+
+job_config = bigquery.LoadJobConfig(
+    skip_leading_rows=1,
+    source_format=bigquery.SourceFormat.CSV,
+    schema=[
+        bigquery.SchemaField("timestamp", bigquery.SqlTypeNames.TIMESTAMP),
+        bigquery.SchemaField("origin", bigquery.SqlTypeNames.STRING),
+        bigquery.SchemaField("destination", bigquery.SqlTypeNames.STRING),
+        bigquery.SchemaField("amount", bigquery.SqlTypeNames.NUMERIC),
+    ],
+    time_partitioning=bigquery.TimePartitioning(field="timestamp"),
+    clustering_fields=["origin", "destination"],
+)
+
+job = client.load_table_from_uri(
+    ["gs://cloud-samples-data/bigquery/sample-transactions/transactions.csv"],
+    table_id,
+    job_config=job_config,
+)
+
+job.result()  # Waits for the job to complete.
+
+table = client.get_table(table_id)  # Make an API request.
+print(
+    "Loaded {} rows and {} columns to {}".format(
+        table.num_rows, len(table.schema), table_id
+    )
+)
 ```
 
 ## 後續步驟

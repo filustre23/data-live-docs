@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -28,7 +28,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### 撰寫多重陳述式查詢
 
-您可以在 BigQuery 中撰寫多個陳述式查詢。下列多重陳述式查詢會宣告變數，並在 [`IF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language?hl=zh-tw#if) 陳述式中使用該變數：
+您可以在 BigQuery 中編寫多個陳述式查詢。下列多重陳述式查詢會宣告變數，並在 [`IF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language?hl=zh-tw#if) 陳述式中使用該變數：
 
 ```
 DECLARE day INT64;
@@ -40,7 +40,7 @@ ELSE
 END IF
 ```
 
-BigQuery 會將任何含有多個陳述式的請求解讀為多重陳述式查詢，除非該陳述式完全由 `CREATE TEMP FUNCTION` 陳述式組成，且後面接著單一 `SELECT` 陳述式。舉例來說，下列查詢不屬於多重陳述式查詢：
+BigQuery 會將任何含有多個陳述式的請求解讀為多陳述式查詢，除非該陳述式完全由 `CREATE TEMP FUNCTION` 陳述式組成，且後面接著單一 `SELECT` 陳述式。舉例來說，下列查詢不屬於多重陳述式查詢：
 
 ```
 CREATE TEMP FUNCTION Add(x INT64, y INT64) AS (x + y);
@@ -51,28 +51,31 @@ SELECT Add(3, 4);
 
 您可以執行多重陳述式查詢，方式與執行任何其他查詢相同，例如在 Google Cloud 控制台中或使用 bq 指令列工具。
 
+### 查看多個陳述式查詢的結果
+
+在 BigQuery Studio 中執行多重陳述式查詢時，「查詢結果」窗格會以階層式執行記錄樹狀結構，顯示每個陳述式的結果。多重陳述式查詢執行作業會顯示為歷記錄樹狀結構中的父項節點，而多重陳述式查詢中的每個個別陳述式 (子項工作) 則會顯示為子節點。您可以點選個別子節點，查看多重陳述式查詢中該部分傳回的特定資料，不必離開編輯器。
+
 ### 模擬測試多陳述式查詢
 
 如要估算多重陳述式查詢讀取的位元組數，請考慮執行[模擬測試](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#dry-run)。如果查詢只包含 `SELECT` 陳述式，對多重陳述式查詢執行模擬測試時，結果最為準確。
 
 模擬執行會特別處理下列查詢和陳述式類型：
 
-* `CALL` 陳述式：模擬測試會驗證所呼叫的程序是否存在，以及是否具有與所提供引數相符的簽章。系統不會驗證所呼叫程序中的內容，以及 `CALL` 陳述式後的所有陳述式。
+* `CALL` 陳述式：模擬測試會驗證所呼叫的程序是否存在，以及簽章是否與提供的引數相符。系統不會驗證所呼叫程序中的內容，以及 `CALL` 陳述式後的所有陳述式。
 * [DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw)：
-  模擬測試會驗證第一個 DDL 陳述式，然後停止。後續所有陳述式都會略過。不支援模擬測試 `CREATE TEMP TABLE` 陳述式。
-* [DML 陳述式](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language?hl=zh-tw)：模擬測試會驗證 DML 陳述式，然後繼續驗證後續陳述式。在這種情況下，位元組估算值會以原始表格大小為準，不會將 DML 陳述式的結果納入考量。
+  模擬測試會驗證第一個 DDL 陳述式，然後停止。系統會略過所有後續陳述式。不支援模擬測試 `CREATE TEMP TABLE` 陳述式。
+* [DML 陳述式](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language?hl=zh-tw)：模擬測試會驗證 DML 陳述式，然後繼續驗證後續陳述式。在這種情況下，位元組估算值會以原始表格大小為準，不會考量 DML 陳述式的結果。
 * `EXECUTE IMMEDIATE` 陳述式：模擬測試會驗證查詢運算式，但不會評估動態查詢本身。系統會略過 `EXECUTE IMMEDIATE` 陳述式後的所有陳述式。
-* 在分區篩選器中使用變數的查詢：試算會驗證初始查詢和後續陳述式。不過，模擬執行無法計算分區篩選器中變數的執行階段值。這會影響讀取的位元組數估算值。
-* 在 `FOR SYSTEM TIME AS OF` 子句的時間戳記運算式中使用變數的查詢：試算表會使用資料表的目前內容，並忽略 `FOR SYSTEM TIME AS OF` 子句。如果目前資料表與先前疊代版本的大小不同，這會影響讀取的位元組估計值。
+* 在分區篩選器中使用變數的查詢：模擬測試會驗證初始查詢和後續陳述式。不過，模擬測試無法計算分區篩選器中變數的執行階段值。這會影響讀取的位元組數估算值。
+* 在 `FOR SYSTEM TIME AS OF` 子句的時間戳記運算式中使用變數的查詢：試算會使用資料表的目前內容，並忽略 `FOR SYSTEM TIME AS OF` 子句。如果目前資料表與先前疊代版本的大小不同，這會影響讀取的位元組估計值。
 * `FOR`、`IF` 和 `WHILE` 控制陳述式：模擬測試會立即停止。條件運算式、控制陳述式主體和所有後續陳述式都不會經過驗證。
 
-系統會盡力執行試運轉，但基礎程序可能會變更。模擬測試須符合下列規定：
+系統會盡力執行試運算，但基礎程序可能會變更。模擬測試須符合下列規定：
 
-* 成功完成模擬執行的查詢可能無法順利執行。
-  舉例來說，查詢可能會在執行階段失敗，但模擬測試不會偵測到這些原因。
+* 成功完成模擬測試的查詢可能無法順利執行。舉例來說，查詢可能會在執行階段失敗，但模擬測試不會偵測到這些原因。
 * 成功執行的查詢可能無法順利完成模擬測試。
-  舉例來說，查詢可能會因執行時發現的原因，導致模擬測試失敗。
-* 成功執行的模擬測試不保證日後也能順利執行。舉例來說，如果對模擬執行實作項目進行變更，可能會偵測到先前未偵測到的查詢錯誤。
+  舉例來說，查詢可能因執行時發現的原因，而無法通過模擬測試。
+* 即使模擬測試今天順利執行，也不保證日後都能順利執行。舉例來說，模擬測試實作的變更可能會偵測到先前未偵測到的查詢錯誤。
 
 ### 儲存多重陳述式查詢
 
@@ -87,7 +90,7 @@ SELECT Add(3, 4);
 
 ### 宣告使用者建立的變數
 
-您必須在多重陳述式查詢的開頭，或 [`BEGIN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language?hl=zh-tw#begin) 區塊的開頭，宣告使用者建立的變數。在多重陳述式查詢開頭宣告的變數，適用於整個查詢。在 `BEGIN` 區塊中宣告的變數，其範圍為該區塊。在對應的 `END` 陳述式之後，這些變數就會超出範圍。變數的大小上限為 1 MB，而多重陳述式查詢中使用的所有變數的總和上限為 10 MB。
+您必須在多重陳述式查詢的開頭，或 [`BEGIN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language?hl=zh-tw#begin) 區塊的開頭，宣告使用者建立的變數。在多重陳述式查詢開頭宣告的變數，適用於整個查詢。在 `BEGIN` 區塊內宣告的變數具有區塊的範圍。在對應的 `END` 陳述式之後，這些變數就會超出範圍。變數大小上限為 1 MB，多重陳述式查詢中使用的所有變數大小上限為 10 MB。
 
 您可以使用下列程序陳述式宣告變數：
 [`DECLARE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language?hl=zh-tw#declare)
@@ -114,7 +117,7 @@ SET x = 10;
 
 ### 設定系統變數
 
-您無法建立系統變數，但可以覆寫部分變數的預設值，做法如下：
+您無法建立系統變數，但可以覆寫部分變數的預設值，方法如下：
 
 ```
 SET @@dataset_project_id = 'MyProject';
@@ -129,7 +132,7 @@ BEGIN
 END;
 ```
 
-如果不想多次將專案新增至資料表路徑，可以在多重陳述式查詢中，將資料集專案 ID `MyProject` 指派給 `@@dataset_project_id` 系統變數。這項指派作業會將 `MyProject` 設為其餘查詢的預設專案。
+如不想多次將專案新增至資料表路徑，您可以在多重陳述式查詢中，將資料集專案 ID `MyProject` 指派給 `@@dataset_project_id` 系統變數。這項指派作業會將 `MyProject` 設為其餘查詢的預設專案。
 
 ```
 SET @@dataset_project_id = 'MyProject';
@@ -152,7 +155,7 @@ BEGIN
 END;
 ```
 
-您也可以在多重陳述式查詢的許多部分，明確參照 `@@dataset_id` 等系統變數。詳情請參閱[系統變數範例](https://docs.cloud.google.com/bigquery/docs/reference/system-variables?hl=zh-tw#examples)。
+您也可以在多重陳述式查詢的許多部分，明確參照系統變數 (例如 `@@dataset_id`)。詳情請參閱[系統變數範例](https://docs.cloud.google.com/bigquery/docs/reference/system-variables?hl=zh-tw#examples)。
 
 ### 參照使用者建立的變數
 
@@ -198,7 +201,7 @@ SELECT (y+x) AS result FROM Numbers;
 
 暫存資料表可讓您將中繼結果儲存至資料表。臨時資料表由 BigQuery 管理，因此您不必在資料集中儲存或維護這些資料表。系統會根據臨時資料表的儲存空間計費。
 
-您可以在多重陳述式查詢中建立及參照臨時資料表。臨時資料表使用完畢後，您可以手動刪除，盡量減少儲存空間費用，也可以等待 BigQuery 在 24 小時後刪除。
+您可以在多重陳述式查詢中建立及參照臨時資料表。使用完畢後，您可以手動刪除臨時資料表，盡量減少儲存空間費用，也可以等待 BigQuery 在 24 小時後刪除。
 
 ### 建立臨時資料表
 
@@ -229,7 +232,7 @@ WHERE name IN (
 
 ### 參照臨時資料表
 
-在目前的多重陳述式查詢期間，您可以依名稱參照臨時資料表。包括多重陳述式查詢中程序建立的臨時資料表。您無法共用臨時資料表。臨時資料表位於隱藏的 `_script%` 資料集中，名稱是隨機產生。如要瞭解如何列出隱藏的資料集，請參閱[列出資料集](https://docs.cloud.google.com/bigquery/docs/listing-datasets?hl=zh-tw#bq)一文。
+在目前的多重陳述式查詢期間，您可以依名稱參照臨時資料表。這包括多重陳述式查詢中程序建立的暫時性資料表。您無法共用臨時資料表。臨時資料表位於隱藏的 `_script%` 資料集中，名稱是隨機產生。如要瞭解如何列出隱藏的資料集，請參閱「[列出資料集](https://docs.cloud.google.com/bigquery/docs/listing-datasets?hl=zh-tw#bq)」一文。
 
 ### 刪除臨時資料表
 
@@ -253,18 +256,18 @@ SELECT * FROM table1;  -- Results in an error
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
 
-   如果沒有看到左側窗格，請按一下「展開左側窗格」圖示 last\_page 開啟窗格。
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Explorer」窗格中，按一下「Job history」。
 4. 在「Personal history」(個人記錄) 或「Project history」(專案記錄) 分頁中，按一下建立暫存資料表的查詢。
-5. 在「目標資料表」列中，按一下「暫時性資料表」。
+5. 在「目的地資料表」列中，按一下「Temporary table」(暫時性資料表)。
 
-   **注意：** 多重陳述式查詢中使用的暫時性資料表名稱不會保留。在 Google Cloud 控制台中，該服務會隨機命名。
+   **注意：** 多重陳述式查詢中使用的暫時資料表名稱不會保留。 Google Cloud 控制台會隨機指派名稱。
 
 ### 使用 `_SESSION` 限定臨時資料表
 
-當臨時資料表與預設資料集一起使用時，非限定的資料表名稱指的是臨時資料表 (如果有的話)，或是預設資料集中的資料表。例外情況是 `CREATE TABLE` 陳述式，在這種陳述式中，只有在 `TEMP` 或 `TEMPORARY` 關鍵字存在時，系統才會將目標資料表視為臨時資料表。
+如果臨時資料表與預設資料集一起使用，不合格的資料表名稱會參照臨時資料表 (如果存在)，或預設資料集中的資料表。但 `CREATE TABLE` 陳述式是例外狀況，只有在出現 `TEMP` 或 `TEMPORARY` 關鍵字時，目標資料表才會視為臨時資料表。
 
-舉例來說，請看下列多重陳述式查詢：
+舉例來說，請考量下列多重陳述式查詢：
 
 ```
 -- Create table t1 in the default dataset
@@ -311,29 +314,31 @@ CREATE TABLE _SESSION.t4 (x INT64);  -- Fails
 
 ### 傳回上次執行的陳述式
 
-[`jobs.getQueryResults`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/getQueryResults?hl=zh-tw) 方法會傳回多重陳述式查詢中，最後一個執行的陳述式查詢結果。如果沒有執行任何陳述式，系統就不會傳回任何結果。
+[`jobs.getQueryResults`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/getQueryResults?hl=zh-tw) 方法會傳回多重陳述式查詢中，最後一個要執行的陳述式查詢結果。如果沒有執行任何陳述式，系統就不會傳回任何結果。
 
 ### 傳回所有執行的陳述式
 
-如要取得多重陳述式查詢中所有陳述式的結果，請[列舉子工作](#enumerate_child_jobs_of_a_multi-statement_query)，並對每個子工作呼叫 [`jobs.getQueryResults`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/getQueryResults?hl=zh-tw)。
+如要取得多重陳述式查詢中所有陳述式的結果，請[列舉子項工作](#enumerate_child_jobs_of_a_multi-statement_query)，並在每個子項工作上呼叫 [`jobs.getQueryResults`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/getQueryResults?hl=zh-tw)。
 
 ### 列舉子項工作
 
-多重陳述式查詢會使用 [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert?hl=zh-tw) 在 BigQuery 中執行，與任何其他查詢類似，只是多重陳述式查詢會指定為查詢文字。執行多重陳述式查詢時，系統會為多重陳述式查詢中的每個陳述式建立額外的工作，也就是子項工作。您可以呼叫 [`jobs.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/list?hl=zh-tw)，並將多重陳述式查詢工作 ID 做為 `parentJobId` 參數傳入，列舉多重陳述式查詢的子項工作。
+多重陳述式查詢會使用 [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert?hl=zh-tw) 在 BigQuery 中執行，與任何其他查詢類似，只是多重陳述式查詢會指定為查詢文字。執行多重陳述式查詢時，系統會為多重陳述式查詢中的每個陳述式建立額外工作，也就是子項工作。您可以呼叫 [`jobs.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/list?hl=zh-tw)，並傳入多重陳述式查詢工作 ID 做為 `parentJobId` 參數，列舉多重陳述式查詢的子項工作。
+
+子項工作也會產生自己的稽核記錄項目。資料存取事件 (例如 `TableDataRead` 和 `TableDataChange`) 會針對執行陳述式的子項作業記錄，而不是針對父項作業。詳情請參閱「[BigQuery 稽核記錄總覽](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs?hl=zh-tw#data_access)」一文。
 
 ## 偵錯多陳述式查詢
 
-以下是偵錯多重陳述式查詢的訣竅：
+以下是偵錯多陳述式查詢的幾個訣竅：
 
-* 使用 [`ASSERT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/debugging-statements?hl=zh-tw#assert) 陳述式，確認布林值條件為 true。
-* 使用 [`BEGIN...EXCEPTION...END`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language?hl=zh-tw#beginexceptionend) 擷取錯誤，並顯示錯誤訊息和堆疊追蹤。
+* 使用 [`ASSERT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/debugging-statements?hl=zh-tw#assert) 陳述式，確認布林條件為 true。
+* 使用 [`BEGIN...EXCEPTION...END`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language?hl=zh-tw#beginexceptionend) 擷取錯誤，並顯示錯誤訊息和堆疊追蹤記錄。
 * 使用 `SELECT FORMAT("....")` 顯示中間結果。
-* 在 Google Cloud 控制台中執行多重陳述式查詢時，您可以查看多重陳述式查詢中每個陳述式的輸出內容。執行多重陳述式查詢時，bq 指令列工具的 `bq query` 指令也會顯示每個步驟的結果。
+* 在 Google Cloud 控制台中執行多重陳述式查詢時，您可以查看多重陳述式查詢中每個陳述式的輸出內容。執行多個陳述式查詢時，bq 指令列工具的 `bq query` 指令也會顯示每個步驟的結果。
 * 在 Google Cloud 控制台中，您可以在查詢編輯器內選取個別陳述式並執行。
 
 ## 權限
 
-系統會在執行時檢查存取資料表、模型或其他資源的權限。如果陳述式未執行或運算式未評估，BigQuery 就不會檢查執行多重陳述式查詢的使用者是否具有存取權，可存取該查詢參照的任何資源。
+系統會在執行時檢查存取資料表、模型或其他資源的權限。如果陳述式未執行或運算式未評估，BigQuery 就不會檢查執行多重陳述式查詢的使用者，是否具有查詢參照的任何資源存取權。
 
 在多陳述式查詢中，系統會分別驗證每個運算式或陳述式的權限。例如：
 
@@ -346,14 +351,14 @@ SELECT * FROM dataset_without_access.table2;
 
 ## 安全限制
 
-在多重陳述式查詢中，您可以使用[動態 SQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language?hl=zh-tw#execute_immediate) 在執行階段建構 SQL 陳述式。這項功能很方便，但可能遭到濫用。舉例來說，執行下列查詢可能會造成 [SQL 注入](https://en.wikipedia.org/wiki/SQL_injection)安全威脅，因為系統可能無法正確篩選資料表參數，導致使用者存取非預期的資料表並執行查詢。
+在多重陳述式查詢中，您可以使用[動態 SQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language?hl=zh-tw#execute_immediate) 在執行階段建構 SQL 陳述式。這項功能很方便，但可能提供新的濫用機會。舉例來說，執行下列查詢可能會造成 [SQL 注入](https://en.wikipedia.org/wiki/SQL_injection)安全威脅，因為系統可能無法正確篩選資料表參數，導致使用者存取非預期的資料表並執行查詢。
 
 ```
 -- Risky query vulnerable to SQL injection attack.
 EXECUTE IMMEDIATE CONCAT('SELECT * FROM SensitiveTable WHERE id = ', @id);
 ```
 
-為避免資料表中的機密資料外洩，或執行 `DROP TABLE` 等指令來刪除資料表中的資料，BigQuery 的動態程序陳述式支援多種安全措施，可減少 SQL 注入攻擊的風險，包括：
+為避免資料表中的機密資料外洩，或執行 `DROP TABLE` 等指令刪除資料表中的資料，BigQuery 的動態程序陳述式支援多種安全措施，可減少 SQL 注入攻擊的風險，包括：
 
 * `EXECUTE IMMEDIATE` 陳述式不允許其查詢 (以查詢參數和變數擴充) 嵌入多個 SQL 陳述式。
 * 下列指令無法動態執行：`BEGIN`/`END`、`CALL`、`CASE`、`IF`、`LOOP`、`WHILE` 和 `EXECUTE IMMEDIATE`。
@@ -374,15 +379,15 @@ EXECUTE IMMEDIATE CONCAT('SELECT * FROM SensitiveTable WHERE id = ', @id);
 
 ## 定價
 
-多重陳述式查詢的價格包括查詢費用 (使用[以量計價模式](https://cloud.google.com/bigquery/pricing?hl=zh-tw#on_demand_pricing)時) 和[暫時資料表](#temporary_tables)的儲存空間費用。使用[預留項目](https://docs.cloud.google.com/bigquery/docs/reservations-intro?hl=zh-tw)時，查詢用量會計入預留項目費用。
+多重陳述式查詢的價格包括查詢費用 (使用[以量計價模式](https://cloud.google.com/bigquery/pricing?hl=zh-tw#on_demand_pricing)時) 和[暫時性資料表](#temporary_tables)的儲存空間費用。使用[預留項目](https://docs.cloud.google.com/bigquery/docs/reservations-intro?hl=zh-tw)時，查詢用量會計入預留項目費用。
 
 ### 以量計價查詢大小計算
 
-如果您採用以量計價方案，BigQuery 會根據執行多重陳述式查詢期間處理的位元組數，收取多重陳述式查詢的費用。
+如果您採用以量計價方案，BigQuery 會根據執行多重陳述式查詢時處理的位元組數，收取多重陳述式查詢的費用。
 
 如要估算多重陳述式查詢可能處理的位元組數，可以執行[模擬測試](#dryrun_multi_statement_queries)。
 
-**注意：** 系統通常無法確認多重陳述式查詢在執行之前所掃描的位元組數。為避免產生非預期的查詢費用，建議使用[以容量為準的定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#capacity_compute_analysis_pricing)。此外，您也可以使用 BigQuery [沙箱](https://docs.cloud.google.com/bigquery/docs/sandbox?hl=zh-tw)免費執行有限的查詢。
+**注意：** 執行多重陳述式查詢前，系統通常無法確認查詢掃描的位元組數。為避免產生非預期的查詢費用，建議使用[以容量為準的定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#capacity_compute_analysis_pricing)。此外，您也可以使用 BigQuery [沙箱](https://docs.cloud.google.com/bigquery/docs/sandbox?hl=zh-tw)免費執行有限的查詢。
 
 下列價格適用於這些多重陳述式查詢：
 
@@ -396,7 +401,7 @@ EXECUTE IMMEDIATE CONCAT('SELECT * FROM SensitiveTable WHERE id = ', @id);
 
 如果多重陳述式查詢失敗，陳述式啟動後直到失敗的期間仍會計費。失敗的陳述式則不會產生任何費用。
 
-舉例來說，在下列範例程式碼中，每個陳述式前都有註解，說明各個陳述式會產生的費用 (如有)：
+舉例來說，下列程式碼範例的每個陳述式上方都有註解，說明各個陳述式會產生的費用 (如有)：
 
 ```
 -- No cost, since no tables are referenced.
@@ -437,7 +442,7 @@ WHILE x < (SELECT MIN(date_col) FROM dataset.table) DO
 END WHILE;
 ```
 
-詳情請參閱[查詢大小計算方式](https://docs.cloud.google.com/bigquery/docs/estimate-costs?hl=zh-tw#query_size_calculation)。
+詳情請參閱「[查詢大小計算](https://docs.cloud.google.com/bigquery/docs/estimate-costs?hl=zh-tw#query_size_calculation)」。
 
 ### 儲存空間定價
 
@@ -449,7 +454,7 @@ END WHILE;
 
 ### 查看多重陳述式查詢的數量
 
-您可以使用 [`INFORMATION_SCHEMA.JOBS_BY_PROJECT` 檢視畫面](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw)，查看多重陳述式查詢的數量。以下範例使用 `INFORMATION_SCHEMA.JOBS_BY_PROJECT` 檢視表，顯示前一天的多重陳述式查詢數量：
+您可以使用 [`INFORMATION_SCHEMA.JOBS_BY_PROJECT` 檢視畫面](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw)，查看多重陳述式查詢的數量。以下範例使用 `INFORMATION_SCHEMA.JOBS_BY_PROJECT` 檢視畫面，顯示前一天的多重陳述式查詢數量：
 
 ```
 SELECT
@@ -463,7 +468,7 @@ AND state = 'RUNNING'
 AND statement_type = 'SCRIPT'
 ```
 
-如要進一步瞭解如何查詢多重陳述式查詢，請參閱[多重陳述式查詢工作](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw#multi-statement_query_jobs)。`INFORMATION_SCHEMA.JOBS`
+如要進一步瞭解如何查詢多重陳述式查詢的 `INFORMATION_SCHEMA.JOBS`，請參閱[多重陳述式查詢工作](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw#multi-statement_query_jobs)。
 
 
 
@@ -472,11 +477,11 @@ AND statement_type = 'SCRIPT'
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-12 (世界標準時間)。
+上次更新時間：2026-10-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-12 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]

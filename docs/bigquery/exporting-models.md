@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -52,7 +52,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 | --- | --- | --- |
 | AUTOML\_CLASSIFIER | [TensorFlow SavedModel](https://www.tensorflow.org/guide/saved_model?hl=zh-tw) (TF 2.1.0) | `gcs_bucket/    assets/      f1.txt      f2.txt    saved_model.pb    variables/      variables.data-00-of-01      variables.index` |
 | AUTOML\_REGRESSOR |
-| 自動編碼器 | [TensorFlow SavedModel](https://www.tensorflow.org/guide/saved_model?hl=zh-tw) (TF 1.15 以上版本) |
+| AUTOENCODER | [TensorFlow SavedModel](https://www.tensorflow.org/guide/saved_model?hl=zh-tw) (TF 1.15 以上版本) |
 | DNN\_CLASSIFIER |
 | DNN\_REGRESSOR |
 | DNN\_LINEAR\_COMBINED\_CLASSIFIER |
@@ -63,18 +63,18 @@ Google uses AI technology to translate content into your preferred language. AI 
 | MATRIX\_FACTORIZATION |
 | PCA |
 | TRANSFORM\_ONLY |
-| BOOSTED\_TREE\_CLASSIFIER | 追加劑 (XGBoost 0.82) | `gcs_bucket/    assets/      0.txt      1.txt      model_metadata.json    main.py    model.bst    xgboost_predictor-0.1.tar.gz      ....       predictor.py      ....`    `main.py` 適用於在本機執行。詳情請參閱「[模型部署](#model-deployment)」。 |
+| BOOSTED\_TREE\_CLASSIFIER | 輔助工具 (XGBoost 0.82) | `gcs_bucket/    assets/      0.txt      1.txt      model_metadata.json    main.py    model.bst    xgboost_predictor-0.1.tar.gz      ....       predictor.py      ....`    `main.py` 適用於在本機執行。詳情請參閱「[模型部署](#model-deployment)」。 |
 | BOOSTED\_TREE\_REGRESSOR |
 | RANDOM\_FOREST\_REGRESSOR |
 | RANDOM\_FOREST\_REGRESSOR |
 | TENSORFLOW (已匯入) | [TensorFlow SavedModel](https://www.tensorflow.org/guide/saved_model?hl=zh-tw) | 與匯入模型時完全相同的檔案 |
 
-**注意：** 模型建立期間執行的[自動資料前處理](https://docs.cloud.google.com/bigquery/docs/auto-preprocessing?hl=zh-tw) (例如標準化和標籤編碼)，會儲存在匯出檔案中，做為 TensorFlow SavedModel 圖的一部分，並儲存在 Booster 的外部檔案中。將資料傳遞給模型進行預測前，不需要進行明確的預先處理。輸入內容通常應與 BigQuery ML [`ML.PREDICT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict?hl=zh-tw) 使用的內容相符。匯出模型簽章中的所有數值都會轉換為 `FLOAT64` 資料型別。
-此外，所有 `STRUCT` 欄位都必須展開為個別欄位。舉例來說，`STRUCT f2` 中的 `f1` 欄位應重新命名為 `f2_f1`，並以獨立資料欄的形式傳遞。
+**注意：** 模型建立期間執行的[自動資料前處理](https://docs.cloud.google.com/bigquery/docs/auto-preprocessing?hl=zh-tw) (例如標準化和標籤編碼)，會儲存在匯出的檔案中，做為 TensorFlow SavedModel 圖表的一部分，並儲存在 Booster 的外部檔案中。在傳遞資料以進行預測之前，不需要進行明確的預先處理。輸入內容通常應與 BigQuery ML [`ML.PREDICT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict?hl=zh-tw) 所用的內容相符。匯出模型簽章中的所有數值都會轉換為 `FLOAT64` 資料型別。
+此外，所有 `STRUCT` 欄位都必須展開為個別欄位。舉例來說，`STRUCT f2` 中的欄位 `f1` 應重新命名為 `f2_f1`，並以獨立資料欄的形式傳遞。
 
 ## 匯出使用「`TRANSFORM`」訓練的模型
 
-如果模型是使用 [`TRANSFORM` 子句](https://docs.cloud.google.com/bigquery/docs/bigqueryml-transform?hl=zh-tw)訓練，則額外的預先處理模型會執行 [`TRANSFORM` 子句](https://docs.cloud.google.com/bigquery/docs/bigqueryml-transform?hl=zh-tw)中的相同邏輯，並以 TensorFlow SavedModel 格式儲存於 `transform` 子目錄下。您也可以將使用 [`TRANSFORM` 子句](https://docs.cloud.google.com/bigquery/docs/bigqueryml-transform?hl=zh-tw)訓練的模型部署到 Gemini Enterprise Agent Platform 和本機。詳情請參閱[模型部署](https://docs.cloud.google.com/bigquery/docs/exporting-models?hl=zh-tw#model-deployment)。
+如果模型是使用 [`TRANSFORM` 子句](https://docs.cloud.google.com/bigquery/docs/bigqueryml-transform?hl=zh-tw)訓練，則額外的預先處理模型會執行 [`TRANSFORM` 子句](https://docs.cloud.google.com/bigquery/docs/bigqueryml-transform?hl=zh-tw)中的相同邏輯，並以 TensorFlow SavedModel 格式儲存在 `transform` 子目錄下。您也可以將使用 [`TRANSFORM` 子句](https://docs.cloud.google.com/bigquery/docs/bigqueryml-transform?hl=zh-tw)訓練的模型部署至 Gemini Enterprise Agent Platform 和本機。詳情請參閱[模型部署](https://docs.cloud.google.com/bigquery/docs/exporting-models?hl=zh-tw#model-deployment)。
 
 | 匯出模型格式 | 匯出檔案範例 |
 | --- | --- |
@@ -86,7 +86,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 匯出以 [`TRANSFORM` 子句](https://docs.cloud.google.com/bigquery/docs/bigqueryml-transform?hl=zh-tw)訓練的模型時，系統支援下列資料類型，可饋送至 [`TRANSFORM` 子句](https://docs.cloud.google.com/bigquery/docs/bigqueryml-transform?hl=zh-tw)。
 
-| TRANSFORM 輸入類型 | TRANSFORM 輸入內容範例 | 匯出的前處理模型輸入樣本 |
+| TRANSFORM 輸入類型 | TRANSFORM 輸入範例 | 匯出的前處理模型輸入樣本 |
 | --- | --- | --- |
 | INT64 | `10,  11` | `tf.constant(    [10, 11],    dtype=tf.int64)` |
 | NUMERIC | `NUMERIC 10,  NUMERIC 11` | `tf.constant(    [10, 11],    dtype=tf.float64)` |
@@ -94,8 +94,8 @@ Google uses AI technology to translate content into your preferred language. AI 
 | FLOAT64 | `10.0,  11.0` | `tf.constant(    [10, 11],    dtype=tf.float64)` |
 | BOOL | `TRUE,  FALSE` | `tf.constant(    [True, False],    dtype=tf.bool)` |
 | STRING | `'abc',  'def'` | `tf.constant(    ['abc', 'def'],    dtype=tf.string)` |
-| 位元組 | `b'abc',  b'def'` | `tf.constant(    ['abc', 'def'],    dtype=tf.string)` |
-| 日期 | `DATE '2020-09-27',  DATE '2020-09-28'` | `tf.constant(    [      '2020-09-27',      '2020-09-28'    ],    dtype=tf.string)    "%F" format` |
+| BYTES | `b'abc',  b'def'` | `tf.constant(    ['abc', 'def'],    dtype=tf.string)` |
+| DATE | `DATE '2020-09-27',  DATE '2020-09-28'` | `tf.constant(    [      '2020-09-27',      '2020-09-28'    ],    dtype=tf.string)    "%F" format` |
 | DATETIME | `DATETIME '2023-02-02 02:02:01.152903',  DATETIME '2023-02-03 02:02:01.152903'` | `tf.constant(    [      '2023-02-02 02:02:01.152903',      '2023-02-03 02:02:01.152903'    ],    dtype=tf.string)    "%F %H:%M:%E6S" format` |
 | 時間 | `TIME '16:32:36.152903',  TIME '17:32:36.152903'` | `tf.constant(    [      '16:32:36.152903',      '17:32:36.152903'    ],    dtype=tf.string)    "%H:%M:%E6S" format` |
 | 時間戳記 | `TIMESTAMP '2017-02-28 12:30:30.45-08',  TIMESTAMP '2018-02-28 12:30:30.45-08'` | `tf.constant(    [      '2017-02-28 20:30:30.4 +0000',      '2018-02-28 20:30:30.4 +0000'    ],    dtype=tf.string)    "%F %H:%M:%E1S %z" format` |
@@ -105,7 +105,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### 支援的 SQL 函式
 
-匯出使用 [`TRANSFORM` 子句](https://docs.cloud.google.com/bigquery/docs/bigqueryml-transform?hl=zh-tw)訓練的模型時，可以在 [`TRANSFORM` 子句](https://docs.cloud.google.com/bigquery/docs/bigqueryml-transform?hl=zh-tw)中使用下列 SQL 函式。
+匯出以 [`TRANSFORM` 子句](https://docs.cloud.google.com/bigquery/docs/bigqueryml-transform?hl=zh-tw)訓練的模型時，可以在 [`TRANSFORM` 子句](https://docs.cloud.google.com/bigquery/docs/bigqueryml-transform?hl=zh-tw)中使用下列 SQL 函式。
 
 * [運算子](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators?hl=zh-tw)
   + `+`、`-`、`*`、`/`、`=`、`<`、`>`、`<=`、`>=`、`!=`、`<>`、
@@ -123,13 +123,17 @@ Google uses AI technology to translate content into your preferred language. AI 
     `CAST AS BIGNUMERIC`、`CAST AS STRING`、`SAFE_CAST AS INT64`、
     `SAFE_CAST AS FLOAT64`
 * [字串函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions?hl=zh-tw)
-  + `CONCAT`、`LEFT`、`LENGTH`、`LOWER`、`REGEXP_REPLACE`、`RIGHT`、`SPLIT`、`SUBSTR`、`SUBSTRING`、`TRIM`、`UPPER`。
+  + `CONCAT`、`LEFT`、`LENGTH`、`LOWER`、`REGEXP_REPLACE`、`RIGHT`、`SPLIT`、
+    `SUBSTR`、`SUBSTRING`、`TRIM`、`UPPER`。
 * [日期函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions?hl=zh-tw)
-  + `Date`、`DATE_ADD`、`DATE_SUB`、`DATE_DIFF`、`DATE_TRUNC`、`EXTRACT`、`FORMAT_DATE`、`PARSE_DATE`、`SAFE.PARSE_DATE`。
+  + `Date`、`DATE_ADD`、`DATE_SUB`、`DATE_DIFF`、`DATE_TRUNC`、`EXTRACT`、
+    `FORMAT_DATE`、`PARSE_DATE`、`SAFE.PARSE_DATE`。
 * [日期時間函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/datetime_functions?hl=zh-tw)
-  + `DATETIME`、`DATETIME_ADD`、`DATETIME_SUB`、`DATETIME_DIFF`、`DATETIME_TRUNC`、`EXTRACT`、`PARSE_DATETIME`、`SAFE.PARSE_DATETIME`。
+  + `DATETIME`、`DATETIME_ADD`、`DATETIME_SUB`、`DATETIME_DIFF`、
+    `DATETIME_TRUNC`、`EXTRACT`、`PARSE_DATETIME`、`SAFE.PARSE_DATETIME`。
 * [時間函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time_functions?hl=zh-tw)
-  + `TIME`、`TIME_ADD`、`TIME_SUB`、`TIME_DIFF`、`TIME_TRUNC`、`EXTRACT`、`FORMAT_TIME`、`PARSE_TIME`、`SAFE.PARSE_TIME`。
+  + `TIME`、`TIME_ADD`、`TIME_SUB`、`TIME_DIFF`、`TIME_TRUNC`、`EXTRACT`、
+    `FORMAT_TIME`、`PARSE_TIME`、`SAFE.PARSE_TIME`。
 * [時間戳記函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions?hl=zh-tw)
   + `TIMESTAMP`、`TIMESTAMP_ADD`、`TIMESTAMP_SUB`、`TIMESTAMP_DIFF`、
     `TIMESTAMP_TRUNC`、`FORMAT_TIMESTAMP`、`PARSE_TIMESTAMP`、
@@ -149,10 +153,10 @@ Google uses AI technology to translate content into your preferred language. AI 
 * 如果訓練期間使用下列任何功能，系統就不支援匯出模型：
 
   + 輸入資料中含有 `ARRAY`、`TIMESTAMP` 或 `GEOGRAPHY` 特徵類型。
-* 模型類型 `AUTOML_REGRESSOR` 和 `AUTOML_CLASSIFIER` 的匯出模型不支援部署至 Agent Platform，以進行線上預測。
+* 模型類型 `AUTOML_REGRESSOR` 和 `AUTOML_CLASSIFIER` 的匯出模型不支援 Agent Platform 部署，無法用於線上預測。
 * 矩陣分解模型匯出大小上限為 1 GB。
   模型大小與 `num_factors` 大致成正比，因此如果達到上限，可以在訓練期間減少 `num_factors`，縮減模型大小。
-* 如要瞭解使用 [BigQuery ML `TRANSFORM` 子句](https://docs.cloud.google.com/bigquery/docs/bigqueryml-transform?hl=zh-tw)訓練的模型 (用於[手動前處理特徵](https://docs.cloud.google.com/bigquery/docs/manual-preprocessing?hl=zh-tw))，請參閱支援匯出的[資料類型](https://docs.cloud.google.com/bigquery/docs/exporting-models?hl=zh-tw#export-transform-types)和[函式](https://docs.cloud.google.com/bigquery/docs/exporting-models?hl=zh-tw#export-transform-functions)。
+* 如要瞭解使用 [BigQuery ML `TRANSFORM` 子句](https://docs.cloud.google.com/bigquery/docs/bigqueryml-transform?hl=zh-tw)訓練的模型 (用於[手動預先處理特徵](https://docs.cloud.google.com/bigquery/docs/manual-preprocessing?hl=zh-tw))，請參閱支援匯出的[資料類型](https://docs.cloud.google.com/bigquery/docs/exporting-models?hl=zh-tw#export-transform-types)和[函式](https://docs.cloud.google.com/bigquery/docs/exporting-models?hl=zh-tw#export-transform-functions)。
 * 使用 [BigQuery ML `TRANSFORM` 子句](https://docs.cloud.google.com/bigquery/docs/bigqueryml-transform?hl=zh-tw)在 2023 年 9 月 18 日前訓練的模型，必須重新訓練，才能[透過 Model Registry 部署](https://docs.cloud.google.com/bigquery/docs/managing-models-vertex?hl=zh-tw)，以進行線上預測。
 * 匯出模型時，系統支援 `ARRAY<STRUCT<INT64, FLOAT64>>`、`ARRAY` 和 `TIMESTAMP` 做為預先轉換的資料，但不支援做為轉換後的資料。
 
@@ -169,8 +173,8 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Explorer」窗格中展開專案，按一下「Datasets」(資料集)，然後按一下資料集。
-4. 依序點選「總覽」**>「模型」**，然後點選要匯出的模型名稱。
-5. 依序按一下「更多」**>「匯出」**：
+4. 依序點選「總覽」**>「模型」**，然後按一下要匯出的模型名稱。
+5. 依序按一下「**更多」> 「匯出」**：
 6. 在「Export model to Google Cloud Storage」(將模型匯出至 Google Cloud Storage) 對話方塊中：
 
    * 在「選取 GCS 位置」中，瀏覽至要匯出模型的值區或資料夾位置，然後按一下「選取」。
@@ -180,7 +184,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### SQL
 
-您可以使用 `EXPORT MODEL` 陳述式，透過 [GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql?hl=zh-tw) 查詢語法，將 BigQuery ML 模型匯出至 [Cloud Storage](https://docs.cloud.google.com/storage/docs?hl=zh-tw)。
+`EXPORT MODEL` 陳述式可讓您使用 [GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql?hl=zh-tw) 查詢語法，將 BigQuery ML 模型匯出至 [Cloud Storage](https://docs.cloud.google.com/storage/docs?hl=zh-tw)。
 
 如要在 Google Cloud 控制台中使用 `EXPORT MODEL` 陳述式匯出 BigQuery ML 模型，請按照下列步驟操作：
 
@@ -188,9 +192,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 按一下 [Compose new query] (撰寫新查詢)。
-3. 在「Query editor」(查詢編輯器) 欄位中，輸入 [`EXPORT MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-export-model?hl=zh-tw) 陳述式。
+3. 在「Query editor」(查詢編輯器) 欄位中，輸入您的 [`EXPORT MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-export-model?hl=zh-tw) 陳述式。
 
-   [URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#gcs-uri) 為 `gs://bucket/path/to/saved_model/` 的 Cloud Storage 值區。
+   以下查詢會將名為 `myproject.mydataset.mymodel`
+   的模型匯出至 [URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#gcs-uri)
+   為 `gs://bucket/path/to/saved_model/` 的 Cloud Storage 值區。
 
    ```
     EXPORT MODEL `myproject.mydataset.mymodel`
@@ -248,12 +254,12 @@ gs://example-bucket/mymodel_folder
 
 如要匯出模型，請建立 `extract` 工作，並填入工作設定。
 
-(選用) 在[工作資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs?hl=zh-tw)的 `jobReference` 區段中，於 `location` 屬性內指定您的位置。
+(選用) 在[工作資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs?hl=zh-tw)的 `jobReference` 區段中，於 `location` 屬性指定您的位置。
 
 1. 建立指向 BigQuery ML 模型和 Cloud Storage 目的地的擷取工作。
 2. 指定來源模型，方法是使用包含專案 ID、資料集 ID 和模型 ID 的 `sourceModel` 設定物件。
 3. `destination URI(s)` 屬性必須是完整的，且必須符合下列格式：gs://bucket/model\_folder。
-4. 設定 `configuration.extract.destinationFormat` 屬性以指定目的地格式。舉例來說，如要匯出升級樹狀結構模型，請將此屬性值設為 `ML_XGBOOST_BOOSTER`。
+4. 設定 `configuration.extract.destinationFormat` 屬性以指定目的地格式。舉例來說，如要匯出提升樹模型，請將此屬性值設為 `ML_XGBOOST_BOOSTER`。
 5. 如要查看工作狀態，請利用初始要求所傳回的工作 ID 來呼叫 [jobs.get(job\_id)](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/get?hl=zh-tw)。
 
    * 如果是 `status.state = DONE`，代表工作已順利完成。
@@ -330,13 +336,13 @@ public class ExtractModel {
 
 匯出的模型可以部署至 Agent Platform，也可以在本機部署。如果模型的 [`TRANSFORM` 子句](https://docs.cloud.google.com/bigquery/docs/bigqueryml-transform?hl=zh-tw)包含日期函式、日期時間函式、時間函式或時間戳記函式，您必須在容器中使用 [bigquery-ml-utils 程式庫](https://pypi.org/project/bigquery-ml-utils/)。但如果您是[透過 Model Registry 部署](https://docs.cloud.google.com/bigquery/docs/managing-models-vertex?hl=zh-tw)，則不需要匯出模型或提供模型的容器。
 
-### Agent Platform 部署
+### Agent Platform 部署作業
 
 | 匯出模型格式 | 部署作業 |
 | --- | --- |
 | TensorFlow SavedModel (非 AutoML 模型) | [部署 TensorFlow SavedModel](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/general/deployment?hl=zh-tw)。 您必須使用 [支援的 TensorFlow 版本](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/supported-frameworks?hl=zh-tw#tensorflow_1)建立 SavedModel 檔案。 |
 | TensorFlow SavedModel (AutoML 模型) | 不支援。 |
-| XGBoost Booster | 使用[自訂預測處理常式](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/predictions/custom-prediction-routines?hl=zh-tw)。如果是 XGBoost Booster 模型，前處理和後處理資訊會儲存在匯出的檔案中，而自訂預測處理常式可讓您部署模型和額外匯出的檔案。   您必須使用[支援的 XGBoost 版本](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/supported-frameworks?hl=zh-tw#xgboost_2)建立模型檔案。 |
+| XGBoost Booster | 使用[自訂預測處理常式](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/predictions/custom-prediction-routines?hl=zh-tw)。如果是 XGBoost Booster 模型，預先處理和後續處理資訊會儲存在匯出的檔案中，而自訂預測處理常式可讓您部署模型和額外匯出的檔案。   您必須使用[支援的 XGBoost 版本](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/supported-frameworks?hl=zh-tw#xgboost_2)建立模型檔案。 |
 
 ### 地端部署作業
 
@@ -348,9 +354,9 @@ public class ExtractModel {
 
 ## 預測輸出格式
 
-本節提供匯出模型的預測輸出格式，適用於各模型類型。所有匯出的模型都支援批次預測，可一次處理多個輸入資料列。舉例來說，在下列輸出格式範例中，每個範例都有兩個輸入列。
+本節提供各模型類型的匯出模型預測輸出格式。所有匯出的模型都支援批次預測，可一次處理多個輸入資料列。舉例來說，在下列輸出格式範例中，每個範例都有兩個輸入列。
 
-### 自動編碼器
+### AUTOENCODER
 
 | 預測輸出格式 | 輸出範例 |
 | --- | --- |
@@ -451,9 +457,9 @@ public class ExtractModel {
 
 ## XGBoost 模型視覺化
 
-模型匯出後，您可以使用 [plot\_tree](https://xgboost.readthedocs.io/en/latest/python/python_api.html#xgboost.plot_tree) Python API，以視覺化方式呈現提升樹狀結構。舉例來說，您可以在不安裝依附元件的情況下使用 [Colab](https://colab.research.google.com/?hl=zh-tw)：
+模型匯出後，您可以使用 [plot\_tree](https://xgboost.readthedocs.io/en/latest/python/python_api.html#xgboost.plot_tree) Python API，以視覺化方式呈現提升樹。舉例來說，您可以在不安裝依附元件的情況下，運用 [Colab](https://colab.research.google.com/?hl=zh-tw)：
 
-1. 將升級樹狀結構模型匯出至 Cloud Storage bucket。
+1. 將經過提升的樹狀結構模型匯出至 Cloud Storage bucket。
 2. 從 Cloud Storage bucket 下載 `model.bst` 檔案。
 3. 在 [Colab 筆記本](https://colab.sandbox.google.com/notebooks/welcome.ipynb?hl=zh-tw)中，將 `model.bst` 檔案上傳至 `Files`。
 4. 在筆記本中執行下列程式碼：
@@ -471,7 +477,7 @@ public class ExtractModel {
 
 這個範例會繪製多個樹狀結構 (每次疊代一個樹狀結構)：
 
-**注意：** 我們會使用標籤編碼器編碼類別特徵，因此您可以從模型匯出 Cloud Storage bucket 內「assets/」目錄中的詞彙檔案，取得分割值的對應類別。舉例來說，如果節點中顯示「f0 < 2.95」，您可以尋找第 3 個項目，在詞彙檔案中找出對應的類別。
+**注意：** 我們會使用標籤編碼器編碼類別特徵，因此您可以從模型匯出 Cloud Storage bucket 內「assets/」目錄中的詞彙檔案，取得分割值的對應類別。舉例來說，如果在節點中看到「f0 < 2.95」，可以尋找第 3 個項目，在詞彙檔案中找出對應的類別。
 
 我們不會在模型中儲存特徵名稱，因此您會看到「f0」、「f1」等名稱。您可以使用這些名稱 (例如「f0」) 做為索引，在`assets/model_metadata.json`匯出檔案中找到對應的特徵名稱。
 
@@ -501,7 +507,7 @@ public class ExtractModel {
   + `storage.objectAdmin`
   + `storage.admin`
 
-如要進一步瞭解 BigQuery ML 中的 IAM 角色和權限，請參閱[存取權控管](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)。
+如要進一步瞭解 BigQuery ML 中的身分與存取權管理角色和權限，請參閱[存取權控管](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)。
 
 ## 在不同位置之間移動 BigQuery 資料
 
@@ -528,11 +534,11 @@ public class ExtractModel {
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-12 (世界標準時間)。
+上次更新時間：2026-10-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-12 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]

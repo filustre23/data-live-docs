@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -16,11 +16,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 資料表函式
 
-資料表函式 (也稱為資料表值函式 (TVF)) 是使用者定義的函式，會傳回資料表。您可以在任何可使用資料表的地方使用資料表函式。資料表函式的行為與檢視類似，但資料表函式可以採用參數。
+資料表函式也稱為資料表值函式 (TVF)，是傳回資料表的使用者定義函式。您可以在任何可使用資料表的地方使用資料表函式。資料表函式的行為與檢視區塊類似，但資料表函式可以接受參數。
 
 ## 建立資料表函式
 
-如要建立資料表函式，請使用 [`CREATE TABLE FUNCTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#create_table_function_statement) 陳述式。資料表函式包含產生資料表的查詢。函式會傳回查詢結果。下列資料表函式會採用 `INT64` 參數，並在查詢的 `WHERE` 子句中使用這個值，查詢名為 `bigquery-public-data.usa_names.usa_1910_current` 的[公開資料集](https://docs.cloud.google.com/bigquery/public-data?hl=zh-tw)：
+如要建立資料表函式，請使用 [`CREATE TABLE FUNCTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#create_table_function_statement) 陳述式。資料表函式包含產生資料表的查詢。函式會傳回查詢結果。下列資料表函式會採用`INT64`參數，並在查詢的 `WHERE` 子句中使用這個值，查詢名為 `bigquery-public-data.usa_names.usa_1910_current` 的[公開資料集](https://docs.cloud.google.com/bigquery/public-data?hl=zh-tw)：
 
 ```
 CREATE OR REPLACE TABLE FUNCTION mydataset.names_by_year(y INT64)
@@ -50,14 +50,7 @@ AS (
 
 ### 表格參數
 
-**預覽**
-
-這項功能適用《[服務專屬條款](https://docs.cloud.google.com/terms/service-terms?hl=zh-tw#1)》中「一般服務條款」一節的《正式發布前產品條款》。正式發布前功能是依「原樣」提供，支援服務可能受限。
-詳情請參閱[推出階段說明](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
-
-注意：如要尋求支援或針對這項功能提供意見回饋，請傳送電子郵件至 [bq-dcr-eng@google.com](mailto:bq-dcr-eng@google.com)。
-
-您可以將 TVF 參數設為資料表。在資料表參數名稱後方，您必須明確指定必要的資料表結構，指定方式與結構體的欄位相同。傳遞至 TVF 的表格引數可包含參數結構定義中指定的資料欄以外的資料欄，且資料欄可依任意順序顯示。
+您可以將 TVF 參數設為資料表。在資料表參數名稱後，您必須明確指定必要的資料表結構定義，指定方式與結構體的欄位相同。傳遞至 TVF 的表格引數可包含參數結構定義中指定的資料欄以外的資料欄，且資料欄可依任意順序顯示。
 
 下列資料表函式會傳回包含 `item_name` 資料表總銷售額的資料表 (來自 `orders` 資料表)：
 
@@ -72,9 +65,24 @@ AS (
 );
 ```
 
+在 TVF 中使用 `ANY TABLE` 型別，可建立接受任何結構表格的一般函式。與固定資料表不同 (您必須定義每個資料欄和資料類型)，`ANY TABLE` 類型會做為預留位置，讓函式可重複用於不同資料集。不過，您傳入的資料表仍須包含函式中使用的特定資料欄。舉例來說，如果函式依 `created_date` 篩選，輸入表格就必須有該資料欄，否則查詢會失敗。
+
+```
+-- Simple pass-through (accepts any table, as used in your devstack)
+CREATE OR REPLACE TABLE FUNCTION dataset_test.MyTVF(input_table ANY TABLE)
+AS
+SELECT * FROM input_table;
+
+-- Generic filter (accepts any table, but implicitly requires a 'status' column)
+CREATE TEMP TABLE FUNCTION FilterByStatus(input_table ANY TABLE, status_val STRING)
+AS
+SELECT * FROM input_table
+WHERE status = status_val;
+```
+
 ### 參數名稱
 
-如果資料表函式參數與資料表欄的名稱相符，可能會建立不明確的參照。在這種情況下，BigQuery 會將名稱解讀為資料表欄的參照，而非參數。建議您使用與任何參照資料表欄名稱不同的參數名稱。
+如果資料表函式參數與資料表資料欄的名稱相符，可能會建立不明確的參照。在這種情況下，BigQuery 會將名稱解讀為資料表欄的參照，而非參數。建議您使用與任何參照資料表欄名稱不同的參數名稱。
 
 ## 使用資料表函式
 
@@ -118,7 +126,7 @@ SELECT ARRAY(
   LIMIT 5)
 ```
 
-呼叫含有資料表參數的資料表函式時，您必須在資料表引數名稱前使用 `TABLE` 關鍵字。資料表引數可以有資料表參數結構定義中未列出的資料欄：
+呼叫具有資料表參數的資料表函式時，您必須在資料表引數名稱前使用 `TABLE` 關鍵字。資料表引數可以有資料表參數結構定義中未列出的資料欄：
 
 ```
 CREATE TABLE FUNCTION mydataset.compute_sales (
@@ -149,7 +157,7 @@ FROM mydataset.compute_sales(TABLE my_orders, "apple");
 ### 搭配 TVF 使用系統變數
 
 TVF 支援 `@@session_id` 和 `@@location`
-[系統變數](https://docs.cloud.google.com/bigquery/docs/reference/system-variables?hl=zh-tw)。您可以在函式建立陳述式中的任何位置加入這些系統變數，傳回目前查詢的工作階段 ID 或位置。系統不支援其他系統變數。
+[系統變數](https://docs.cloud.google.com/bigquery/docs/reference/system-variables?hl=zh-tw)。您可以在函式建立陳述式中的任何位置加入這些系統變數，傳回目前查詢的會期 ID 或位置。系統不支援所有其他系統變數。
 
 ## 列出資料表函式
 
@@ -167,7 +175,8 @@ DROP TABLE FUNCTION mydataset.names_by_year
 
 ## 授權處理常式
 
-您可以將資料表函式授權為*常式*。授權常式可讓您與特定使用者或群組分享查詢結果，而不授予他們產生結果的基礎資料表存取權。舉例來說，授權常式可以計算資料的匯總值，或查閱資料表值並用於計算。詳情請參閱「[已授權的日常安排](https://docs.cloud.google.com/bigquery/docs/authorized-routines?hl=zh-tw)」。
+您可以將資料表函式授權為*常式*。
+授權常式可讓您與特定使用者或群組分享查詢結果，而不授予他們產生結果的基礎資料表存取權。舉例來說，授權常式可以計算資料的匯總值，或查閱資料表值並用於計算。詳情請參閱「[已授權的日常安排](https://docs.cloud.google.com/bigquery/docs/authorized-routines?hl=zh-tw)」。
 
 ## 限制
 
@@ -176,7 +185,7 @@ DROP TABLE FUNCTION mydataset.names_by_year
 
 ## 配額
 
-如要進一步瞭解表格函式配額和限制，請參閱[配額和限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#table_function_limits)。
+如要進一步瞭解資料表函式配額和限制，請參閱[配額和限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#table_function_limits)。
 
 
 
@@ -185,11 +194,11 @@ DROP TABLE FUNCTION mydataset.names_by_year
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-12 (世界標準時間)。
+上次更新時間：2026-10-20 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-12 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-20 (世界標準時間)。"],[],[]]

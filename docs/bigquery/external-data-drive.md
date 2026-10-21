@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -16,11 +16,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 建立 Google 雲端硬碟外部資料表
 
-本文說明如何針對儲存在 Google 雲端硬碟中的資料建立外部資料表。
+本文說明如何為儲存在 Google 雲端硬碟中的資料建立外部資料表。
 
 BigQuery 支援個人雲端硬碟檔案和共用檔案的外部資料表。如要進一步瞭解雲端硬碟，請參閱「[雲端硬碟訓練課程和相關說明](https://support.google.com/a/users/answer/9282958?hl=zh-tw)」。
 
-您可以針對雲端硬碟中下列格式的檔案建立外部資料表：
+您可以針對 Google 雲端硬碟中具有下列格式的檔案建立外部資料表：
 
 * 逗號分隔值 (CSV)
 * 換行符號分隔的 JSON
@@ -33,7 +33,7 @@ BigQuery 支援個人雲端硬碟檔案和共用檔案的外部資料表。如�
 
 ### 擷取雲端硬碟 URI
 
-如要建立 Google 雲端硬碟資料來源的外部資料表，您必須提供[雲端硬碟 URI](#drive-uri)。您可以直接從雲端硬碟資料的網址取得雲端硬碟 URI：
+如要為 Google 雲端硬碟資料來源建立外部資料表，請提供 [Google 雲端硬碟 URI](#drive-uri)。您可以直接從雲端硬碟資料的網址擷取雲端硬碟 URI：
 
 **URI 格式**
 
@@ -42,15 +42,15 @@ BigQuery 支援個人雲端硬碟檔案和共用檔案的外部資料表。如�
   或
 * `https://drive.google.com/open?id=FILE_ID`
 
-其中 `FILE_ID` 是雲端硬碟檔案的英數字元 ID。
+其中的 `FILE_ID` 是雲端硬碟檔案的英數字元 ID。
 
 ### 驗證並啟用雲端硬碟存取權
 
-存取雲端硬碟中代管的資料需要額外的 OAuth 範圍。如要驗證 BigQuery 存取權並啟用雲端硬碟存取權，請執行下列操作：
+如要存取雲端硬碟中代管的資料，需要額外的 OAuth 範圍。如要驗證 BigQuery 並啟用雲端硬碟存取權，請執行下列操作：
 
 ### 控制台
 
-在 Google Cloud 控制台中建立[外部資料表](#create_external_tables)時，請按照網頁驗證步驟操作。當系統提示時，按一下「允許」，將 Google 雲端硬碟的存取權授予 BigQuery 用戶端工具。
+在 Google Cloud 控制台中建立[外部資料表](#create_external_tables)時，請按照網頁式驗證步驟操作。系統提示時，請按一下「允許」，授予 BigQuery Client Tools 雲端硬碟存取權。
 
 ### gcloud
 
@@ -58,31 +58,31 @@ BigQuery 支援個人雲端硬碟檔案和共用檔案的外部資料表。如�
 
    [啟用 Cloud Shell](https://console.cloud.google.com/?cloudshell=true&hl=zh-tw)
 
-   Google Cloud 主控台底部會開啟一個 [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works?hl=zh-tw) 工作階段，並顯示指令列提示。Cloud Shell 是已安裝 Google Cloud CLI 的殼層環境，並已針對您目前的專案設定好相關值。工作階段可能要幾秒鐘的時間才能初始化。
-2. 輸入以下指令，確認您擁有最新版本的 Google Cloud CLI。
+   Google Cloud 控制台底部會開啟 [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works?hl=zh-tw) 工作階段，並顯示指令列提示。Cloud Shell 是已安裝 Google Cloud CLI 的殼層環境，並已設定適用於您目前專案的值。工作階段可能要幾秒鐘的時間才能初始化。
+2. 輸入下列指令，確保您使用的是最新版 Google Cloud CLI。
 
    ```
    gcloud components update
    ```
-3. 輸入下列指令，進行 Google 雲端硬碟驗證。
+3. 輸入下列指令，向雲端硬碟進行驗證。
 
    ```
    gcloud auth login --enable-gdrive-access
    ```
 
-**注意：** 如果您是使用 Cloud Shell 存取雲端硬碟資料，就不需要更新 Google Cloud CLI 或進行雲端硬碟驗證。
+**注意：** 如果使用 Cloud Shell 存取 Google 雲端硬碟資料，則不需要更新 Google Cloud CLI 或向 Google 雲端硬碟驗證。
 
 ### API
 
-除了 BigQuery 的範圍，您還必須要求適當的 [Google 雲端硬碟 OAuth 範圍](https://developers.google.com/identity/protocols/googlescopes?hl=zh-tw#drive)：
+除了 BigQuery 的範圍外，請一併要求適當的[雲端硬碟 OAuth 範圍](https://developers.google.com/identity/protocols/googlescopes?hl=zh-tw#drive)：
 
-1. 執行 [`gcloud auth login --enable-gdrive-access` 指令](https://docs.cloud.google.com/sdk/gcloud/reference/auth/login?hl=zh-tw)登入。
+1. 執行 [`gcloud auth login --enable-gdrive-access` 指令](https://docs.cloud.google.com/sdk/gcloud/reference/auth/login?hl=zh-tw)來登入。
 2. 執行 [`gcloud auth print-access-token` 指令](https://docs.cloud.google.com/sdk/gcloud/reference/auth/print-access-token?hl=zh-tw)，取得用於 API 的雲端硬碟範圍 OAuth 存取權杖。
 
 ### Python
 
 1. [建立 OAuth 用戶端 ID](https://support.google.com/cloud/answer/6158849?hl=zh-tw)。
-2. 在本機環境中設定[應用程式預設憑證 (ADC)](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=zh-tw)，並執行下列步驟，取得必要範圍：
+2. 在本機環境中設定[應用程式預設憑證 (ADC)](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=zh-tw)，並執行下列操作，取得必要範圍：
 
    1. [安裝](https://docs.cloud.google.com/sdk/docs/install?hl=zh-tw) Google Cloud CLI，然後執行下列指令[初始化](https://docs.cloud.google.com/sdk/docs/initialize?hl=zh-tw)：
 
@@ -126,9 +126,9 @@ BigQuery 支援個人雲端硬碟檔案和共用檔案的外部資料表。如�
 ### 必要的角色
 
 如要建立外部資料表，您需要 `bigquery.tables.create`
-BigQuery 身分與存取權管理 (IAM) 權限。
+BigQuery Identity and Access Management (IAM) 權限。
 
-下列預先定義的 Identity and Access Management 角色都具備這項權限：
+下列每個預先定義的 Identity and Access Management 角色都包含這項權限：
 
 * BigQuery 資料編輯者 (`roles/bigquery.dataEditor`)
 * BigQuery 資料擁有者 (`roles/bigquery.dataOwner`)
@@ -163,40 +163,42 @@ BigQuery 身分與存取權管理 (IAM) 權限。
 5. 在「Create table」(建立資料表) 頁面的「Source」(來源) 區段中：
 
    * 在「Create table from」(使用下列資料建立資料表) 部分，選取 [Drive] (雲端硬碟)。
-   * 在「Select Drive URI」(選取雲端硬碟 URI) 欄位中，輸入 [Google 雲端硬碟 URI](#drive-uri)。請注意，雲端硬碟 URI 不支援萬用字元。
+   * 在「選取雲端硬碟 URI」欄位中，輸入[雲端硬碟 URI](#drive-uri)。
+     請注意，雲端硬碟 URI 不支援萬用字元。
    * 在「File format」(檔案格式) 部分選取您所使用的資料格式。雲端硬碟資料的有效格式包括：
 
      + 逗號分隔值 (CSV)
      + 換行符號分隔的 JSON
      + Avro
-     + 試算表**注意：** 在 Google Cloud 控制台中，選擇 Avro 或 Datastore 備份，系統就會隱藏「自動偵測」選項，因為這些檔案屬於自述式類型。
-6. (選用) 如果選擇 Google 試算表，請在「Sheet range (Optional)」(工作表範圍 (選用)) 方塊中指定要查詢的工作表和儲存格範圍。您可以指定工作表名稱，也可以指定 `sheet_name!top_left_cell_id:bottom_right_cell_id` 當做儲存格範圍；例如「Sheet1！A1：B20」。如果未指定**工作表範圍**，系統則會使用檔案中的第一個工作表。
+     + 試算表**注意：** 在 Google Cloud 控制台中，選擇 Avro 或 Datastore 備份會隱藏「自動偵測」選項，因為這些檔案類型會自行說明。
+6. (選用) 如果選擇 Google 試算表，請在「工作表範圍 (選用)」
+   方塊中，指定要查詢的工作表和儲存格範圍。您可以指定工作表名稱，也可以指定 `sheet_name!top_left_cell_id:bottom_right_cell_id` 當做儲存格範圍；例如「Sheet1！A1：B20」。如果未指定**工作表範圍**，系統則會使用檔案中的第一個工作表。
 7. 在「Create table」(建立資料表) 頁面的「Destination」(目的地) 區段中：
 
    * 針對「Dataset name」(資料集名稱) 選擇適當的資料集，然後在「Table name」(資料表名稱) 欄位中，輸入您在 BigQuery 建立資料表時使用的名稱。
    * 確認「Table type」(資料表類型) 已設為 [External table] (外部資料表)。
 8. 在「Schema」(結構定義) 區段中，輸入[結構定義](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw)。
 
-   * 如果是 JSON 或 CSV 檔案，您可以勾選 [Auto-detect] (自動偵測) 選項，啟用結構定義[自動偵測](https://docs.cloud.google.com/bigquery/docs/schema-detect?hl=zh-tw)功能。[Auto-detect] (自動偵測)  不適用於 Datastore 匯出項目、Firestore 匯出項目和 Avro 檔案。系統會自動從自述來源資料中擷取這些檔案類型的結構定義資訊。
+   * 如果是 JSON 或 CSV 檔案，您可以勾選 [Auto-detect] (自動偵測) 選項，啟用結構定義[自動偵測](https://docs.cloud.google.com/bigquery/docs/schema-detect?hl=zh-tw)功能。**自動偵測**不適用於 Datastore 匯出檔、Firestore 匯出檔和 Avro 檔案。系統會自動從自述來源資料中擷取這些檔案類型的結構定義資訊。
    * 透過以下方式，手動輸入結構定義資訊：
-     + 啟用 [Edit as text] (以文字形式編輯)，然後以 JSON 陣列的形式輸入資料表結構定義。注意：您可以在 bq 指令列工具中輸入下列指令，查看現有資料表的 JSON 格式結構定義：`bq show --format=prettyjson DATASET.TABLE`。
+     + 啟用 [Edit as text] (以文字形式編輯)，然後以 JSON 陣列的形式輸入資料表結構定義。注意：如要以 JSON 格式查看現有資料表的結構定義，請在 bq 指令列工具中輸入下列指令：`bq show --format=prettyjson DATASET.TABLE`。
      + 使用 [Add Field] (新增欄位) 手動輸入結構定義。
 9. 點選「建立資料表」。
-10. 必要的話，選取帳戶然後按一下「Allow」(允許)，將 Google 雲端硬碟的存取權授予 BigQuery 用戶端工具。
+10. 如有需要，請選取帳戶，然後按一下「允許」，授予 BigQuery 用戶端工具存取雲端硬碟的權限。
 
-接著，您就可以對資料表執行查詢，就像是標準 BigQuery 資料表一樣，但外部資料來源的[限制](https://docs.cloud.google.com/bigquery/external-data-sources?hl=zh-tw#external_data_source_limitations)仍適用。
+然後，您可以對資料表執行查詢，就像查詢標準 BigQuery 資料表一樣，但須遵守外部資料來源的[限制](https://docs.cloud.google.com/bigquery/external-data-sources?hl=zh-tw#external_data_source_limitations)。
 
-查詢完成後，可以將結果下載為 CSV 或 JSON、將結果儲存為資料表，或將結果儲存至 Google 試算表。詳情請參閱[下載、儲存及匯出資料](https://docs.cloud.google.com/bigquery/bigquery-web-ui?hl=zh-tw#exportdata)一文。
+查詢完成後，您可以將結果下載為 CSV 或 JSON 檔案、將結果儲存為資料表，或將結果儲存至 Google 試算表。詳情請參閱[下載、儲存及匯出資料](https://docs.cloud.google.com/bigquery/bigquery-web-ui?hl=zh-tw#exportdata)一文。
 
 ### bq
 
-您可以使用 `bq mk` 指令在 bq 指令列工具中建立資料表。使用 bq 指令列工具建立連結至外部資料來源的資料表時，可以透過以下項目識別資料表的結構定義：
+您可以使用 `bq mk` 指令，在 bq 指令列工具中建立資料表。使用 bq 指令列工具建立連結至外部資料來源的資料表時，可以透過下列方式識別資料表的結構定義：
 
 * [資料表定義檔](https://docs.cloud.google.com/bigquery/external-table-definition?hl=zh-tw) (儲存在本機)
 * 內嵌結構定義
 * JSON 結構定義檔 (儲存在本機)
 
-如要使用資料表定義檔建立連結至雲端硬碟資料來源的永久資料表，請輸入以下指令。
+如要使用資料表定義檔建立連結至雲端硬碟資料來源的永久資料表，請輸入下列指令。
 
 ```
 bq mk \
@@ -206,7 +208,7 @@ DATASET.TABLE
 
 其中：
 
-* `DEFINITION_FILE` 是本機電腦上[資料表定義檔](https://docs.cloud.google.com/bigquery/external-table-definition?hl=zh-tw)的路徑。
+* `DEFINITION_FILE` 是本機電腦上[資料表定義檔案](https://docs.cloud.google.com/bigquery/external-table-definition?hl=zh-tw)的路徑。
 * `DATASET` 是包含該資料表之資料集的名稱。
 * `TABLE` 是您所建立的資料表名稱。
 
@@ -226,13 +228,13 @@ DATASET.TABLE
 
 其中：
 
-* `SCHEMA` 是結構定義，格式為 `FIELD:DATA_TYPE,FIELD:DATA_TYPE`。
+* `SCHEMA` 是 `FIELD:DATA_TYPE,FIELD:DATA_TYPE` 格式的結構定義。
 * `SOURCE_FORMAT` 為 `CSV`、`NEWLINE_DELIMITED_JSON`、`AVRO` 或 `GOOGLE_SHEETS`。
-* `DRIVE_URI` 是您的 [雲端硬碟 URI](#drive-uri)。
+* `DRIVE_URI` 是您的[雲端硬碟 URI](#drive-uri)。
 * `DATASET` 是包含該資料表之資料集的名稱。
 * `TABLE` 是您所建立的資料表名稱。
 
-舉例來說，下列指令會使用 `Region:STRING,Quarter:STRING,Total_sales:INTEGER` 結構定義，建立名為 `sales` 的永久資料表，且此表會連結至儲存在雲端硬碟中的試算表檔案。
+舉例來說，下列指令會建立名為 `sales` 的永久資料表，並連結至儲存在雲端硬碟中的試算表檔案，且具有下列結構定義：`Region:STRING,Quarter:STRING,Total_sales:INTEGER`。
 
 ```
 bq mk \
@@ -250,15 +252,15 @@ DATASET.TABLE
 
 其中：
 
-* `SCHEMA_FILE` 是您本機上的 JSON 結構定義檔路徑。
+* `SCHEMA_FILE` 是本機上 JSON 結構定義檔案的路徑。
 * `SOURCE_FORMAT` 為 `CSV`、`NEWLINE_DELIMITED_JSON`、`AVRO` 或 `GOOGLE_SHEETS`。
-* `DRIVE_URI` 是您的 [雲端硬碟 URI](#drive-uri)。
+* `DRIVE_URI` 是您的[雲端硬碟 URI](#drive-uri)。
 * `DATASET` 是包含該資料表之資料集的名稱。
 * `TABLE` 是您所建立的資料表名稱。
 
-如果您的[表格定義檔](https://docs.cloud.google.com/bigquery/external-table-definition?hl=zh-tw)包含[試算表專屬設定](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables?hl=zh-tw#GoogleSheetsOptions)，則可略過開頭的資料列，並指定定義的試算表範圍。
+如果[資料表定義檔案](https://docs.cloud.google.com/bigquery/external-table-definition?hl=zh-tw)包含[Google 試算表專屬設定](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables?hl=zh-tw#GoogleSheetsOptions)，則可略過開頭的資料列，並指定定義的試算表範圍。
 
-以下範例會使用 `/tmp/sales_schema.json` 結構定義檔，建立名為 `sales` 的資料表，且此表會連結至儲存在雲端硬碟中的 CSV 檔案。
+下例會建立名為 `sales` 的資料表，並使用 `/tmp/sales_schema.json` 結構定義檔案，將該資料表連結至儲存在雲端硬碟中的 CSV 檔案。
 
 ```
 bq mk \
@@ -266,13 +268,13 @@ bq mk \
 mydataset.sales
 ```
 
-永久資料表建立完成後，您就可以對資料表執行查詢，就像是標準 BigQuery 資料表一樣，但外部資料來源的[限制](https://docs.cloud.google.com/bigquery/external-data-sources?hl=zh-tw#external_data_source_limitations)仍適用。
+永久資料表建立完成後，您就能對該資料表執行查詢，就像對標準 BigQuery 資料表執行查詢一樣，但須遵守外部資料來源的[限制](https://docs.cloud.google.com/bigquery/external-data-sources?hl=zh-tw#external_data_source_limitations)。
 
-查詢完成後，可以將結果下載為 CSV 或 JSON、將結果儲存為資料表，或將結果儲存至 Google 試算表。詳情請參閱[下載、儲存及匯出資料](https://docs.cloud.google.com/bigquery/bigquery-web-ui?hl=zh-tw#exportdata)一文。
+查詢完成後，您可以將結果下載為 CSV 或 JSON 檔案、將結果儲存為資料表，或將結果儲存至 Google 試算表。詳情請參閱[下載、儲存及匯出資料](https://docs.cloud.google.com/bigquery/bigquery-web-ui?hl=zh-tw#exportdata)一文。
 
 ### API
 
-在使用 API 方法 [`tables.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/insert?hl=zh-tw) 時建立 [`ExternalDataConfiguration`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables?hl=zh-tw#externaldataconfiguration)。指定 `schema` 屬性，或將 `autodetect` 屬性設為 `true`，為支援的資料來源啟用結構定義自動偵測功能。
+在使用 API 方法 [`tables.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/insert?hl=zh-tw) 時建立 [`ExternalDataConfiguration`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables?hl=zh-tw#externaldataconfiguration)。指定 `schema` 屬性或將 `autodetect` 屬性設為 `true`，即可為支援的資料來源啟用結構定義自動偵測功能。
 
 ### Python
 
@@ -415,7 +417,7 @@ public class QueryExternalSheetsPerm {
 
 以外部資料來源為基礎的資料表可提供名為 `_FILE_NAME` 的虛擬資料欄。這個資料欄含有該列所屬檔案的完整路徑。此資料欄僅適用於參照儲存在 **Cloud Storage** 和 **Google 雲端硬碟**中的外部資料的資料表。
 
-系統會保留 `_FILE_NAME` 資料欄名稱，這表示您無法在任何資料表中使用該名稱建立資料欄。
+「`_FILE_NAME`」是預留的資料欄名稱，因此您無法在任何資料表中建立這個名稱的資料欄。
 
 
 
@@ -424,11 +426,11 @@ public class QueryExternalSheetsPerm {
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-12 (世界標準時間)。
+上次更新時間：2026-10-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-12 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]

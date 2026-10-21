@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -20,7 +20,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ---
 
-如要直接在Google Cloud 控制台中，按照這項工作的逐步指南操作，請選取偏好的程式設計語言：
+如要直接在Google Cloud 控制台按照這項工作的逐步指南操作，請選取偏好的程式設計語言：
 
 ### C#
 
@@ -58,9 +58,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    **選取或建立專案所需的角色**
 
-   * **選取專案**：選取專案時，不需要具備特定 IAM 角色，只要您在專案中獲派角色，即可選取該專案。
-   * **建立專案**：如要建立專案，您需要專案建立者角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
-   **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，而不要選取現有專案。因此您在完成這些步驟之後，就可以刪除專案，並移除與該專案相關聯的所有資源。
+   * **選取專案**：選取專案時，不需具備特定 IAM 角色，只要您在專案中獲派角色，即可選取該專案。
+   * **建立專案**：如要建立專案，您必須具備專案建立者角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，不要選取現有專案。如果採用這種做法，當您完成這些步驟後，就可以直接刪除該專案，並移除相關聯的所有資源。
    * 建立 Google Cloud 專案：
 
      ```
@@ -75,7 +75,7 @@ Google uses AI technology to translate content into your preferred language. AI 
      ```
 
      將 `PROJECT_ID` 替換為 Google Cloud 專案名稱。
-2. 選擇[免付費使用 BigQuery 沙箱](https://docs.cloud.google.com/bigquery/docs/sandbox?hl=zh-tw)，或[為專案啟用計費功能](https://docs.cloud.google.com/billing/docs/how-to/modify-project?hl=zh-tw)。 Google Cloud
+2. 選擇[免費使用 BigQuery 沙箱](https://docs.cloud.google.com/bigquery/docs/sandbox?hl=zh-tw)，或[為專案啟用計費功能](https://docs.cloud.google.com/billing/docs/how-to/modify-project?hl=zh-tw)。 Google Cloud
 
    如果專案未啟用計費功能，會自動前往 BigQuery 沙箱讓您執行操作。沙箱可供您免付費使用部分 BigQuery 功能，協助熟悉 BigQuery。如果您只打算將專案用於本文練習，建議使用 BigQuery 沙箱。
 3. 將角色授予使用者帳戶。針對下列每個 IAM 角色，執行一次下列指令：
@@ -90,11 +90,11 @@ Google uses AI technology to translate content into your preferred language. AI 
    * `PROJECT_ID`：專案 ID。
    * `USER_IDENTIFIER`：使用者帳戶的 ID。 例如：`myemail@example.com`。
    * `ROLE`：授予使用者帳戶的 IAM 角色。
-4. 啟用 BigQuery API：
+4. 如果尚未啟用 BigQuery API，請啟用：
 
-   **啟用 API 時所需的角色**
+   **啟用 API 所需的角色**
 
-   您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用情形管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   如要啟用 API，您必須具備 `serviceusage.services.enable` 權限。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
    ```
    gcloud services enable bigquery
@@ -110,7 +110,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    gcloud config set project PROJECT_ID
    ```
 
-   將 PROJECT\_ID 替換成您為本逐步導覽選取的專案。
+   將 PROJECT\_ID 替換為您為這個逐步操作說明選取的專案。
 
    輸出結果會與下列內容相似：
 
@@ -208,7 +208,7 @@ Google uses AI technology to translate content into your preferred language. AI 
         }
     }
     ```
-11. 點選「Open Terminal」(開啟終端機)。
+11. 按一下「Open terminal」(開啟終端機)。
 12. 在終端機中執行 `Program.cs` 指令碼。如果系統提示您授權 Cloud Shell 並同意條款，請按一下「Authorize」(授權)。
 
     ```
@@ -366,7 +366,7 @@ Google uses AI technology to translate content into your preferred language. AI 
     	}
     }
     ```
-11. 點選「Open Terminal」(開啟終端機)。
+11. 按一下「Open terminal」(開啟終端機)。
 12. 在終端機中執行 `app.go` 指令碼。如果系統提示您授權 Cloud Shell 並同意條款，請按一下「Authorize」(授權)。
 
     ```
@@ -431,7 +431,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    若在本逐步操作說明課程中，未看到提示或未發生類別路徑相關錯誤，請按照下列步驟操作：
 
-   1. 依序點選「File」>「Preferences」>「Open Settings (UI)」。
+   1. 依序點選**「File」>「Preferences」>「Settings (UI)」**。
    2. 依序點選「Extensions」>「Java」。
    3. 捲動至「Configuration: Update Build Configuration」，然後選取「automatic」。
 5. 在「Explorer」窗格中，找出 `BIGQUERY-JAVA-QUICKSTART` 專案。
@@ -459,7 +459,9 @@ Google uses AI technology to translate content into your preferred language. AI 
      </dependencies>
    </dependencyManagement>
    ```
-9. 在「Explorer」窗格中，找到 `BIGQUERY-JAVA-QUICKSTART` 專案，然後依序點選「src」>「main/java/com/google/app」>「SimpleApp.java」。檔案會隨即開啟。
+9. 在「**Explorer**」窗格中，找到 `BIGQUERY-JAVA-QUICKSTART` 專案，
+   然後依序點選**「src」>「main/java/com/google/app」>「SimpleApp.java」**。
+   檔案會隨即開啟。
 10. 如要針對 `bigquery-public-data.stackoverflow` 資料集建立查詢，請保留檔案的第一行 `package com.google.app;`，然後將其他內容改成下列程式碼：
 
     ```
@@ -629,7 +631,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    }
    queryStackOverflow();
    ```
-10. 點選「Open Terminal」(開啟終端機)。
+10. 按一下「Open terminal」(開啟終端機)。
 11. 在終端機中執行 `app.js` 指令碼。如果系統提示您授權 Cloud Shell 並同意條款，請按一下「Authorize」(授權)。
 
     ```
@@ -733,7 +735,7 @@ Google uses AI technology to translate content into your preferred language. AI 
        throw new Exception('The query failed to complete');
    }
    ```
-10. 點選「Open Terminal」(開啟終端機)。
+10. 按一下「Open terminal」(開啟終端機)。
 11. 在終端機中執行 `app.php` 指令碼。如果系統提示您授權 Cloud Shell 並同意條款，請按一下「Authorize」(授權)。
 
     ```
@@ -836,7 +838,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    if __name__ == "__main__":
        query_stackoverflow()
    ```
-10. 點選「Open Terminal」(開啟終端機)。
+10. 按一下「Open terminal」(開啟終端機)。
 11. 在終端機中執行 `app.py` 指令碼。如果系統提示您授權 Cloud Shell 並同意條款，請按一下「Authorize」(授權)。
 
     ```
@@ -916,8 +918,8 @@ Google uses AI technology to translate content into your preferred language. AI 
      puts "#{row[:url]}: #{row[:view_count]} views"
    end
    ```
-10. 點選「Open Terminal」(開啟終端機)。
-11. 在終端機中執行 `app.rb` 指令碼。如果系統提示您授權 Cloud Shell 並同意條款，請按一下「Authorize」(授權)。
+10. 按一下「Open terminal」(開啟終端機)。
+11. 在終端機中執行 `app.rb` 指令碼。如果系統提示您授權 Cloud Shell 並同意條款，請點選「Authorize」(授權)。
 
     ```
     ruby app.rb
@@ -940,6 +942,100 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 您已成功使用 BigQuery Ruby 用戶端程式庫查詢公開資料集。
 
+### Rust
+
+1. 在 Cloud Shell 中建立新的 Rust 專案：
+
+   ```
+   cargo new bigquery-rust-quickstart --bin
+   ```
+
+   這個指令會建立名為 `bigquery-rust-quickstart` 的 Rust 專案，以及包含 `src/main.rs` 的目錄結構。
+2. 開啟 Cloud Shell 編輯器：
+
+   ```
+   cloudshell workspace bigquery-rust-quickstart
+   ```
+3. 接著要在 Cloud Shell 編輯器中開啟終端機，請點選「Open Terminal」(開啟終端機)。
+4. 開啟專案目錄：
+
+   ```
+   cd bigquery-rust-quickstart
+   ```
+5. 安裝 Rust 專用的 BigQuery 用戶端程式庫和 Tokio 執行階段：
+
+   ```
+   cargo add google-cloud-bigquery
+   cargo add tokio --features macros
+   ```
+6. 點選「Open Editor」(開啟編輯器)。
+7. 在「Explorer」窗格中，找出 `BIGQUERY-RUST-QUICKSTART` 專案。
+8. 點開 `src/main.rs` 檔案。
+9. 如要依據 `bigquery-public-data.stackoverflow` 資料集建立查詢，讓系統傳回瀏覽量最高的前 10 個 Stack Overflow 頁面和相應觀看次數，請將 `src/main.rs` 檔案內容改成下列程式碼：
+
+   ```
+   use google_cloud_bigquery::client::BigQuery;
+   use google_cloud_bigquery::query::FromRow;
+
+   pub async fn sample(project_id: &str) -> anyhow::Result<()> {
+       let client = BigQuery::builder().build().await?;
+
+       let query = r#"
+   SELECT
+       CONCAT('https://stackoverflow.com/questions/', CAST(id as STRING)) as url,
+       view_count
+   FROM `bigquery-public-data.stackoverflow.posts_questions`
+   WHERE tags like '%google-bigquery%'
+   ORDER BY view_count DESC
+   LIMIT 10;
+   "#;
+       let mut rows = client
+           .query(query)
+           .with_project_id(project_id)
+           .until_done()
+           .await?
+           .read();
+
+       #[derive(FromRow, Debug)]
+       struct StackOverflowRow {
+           url: String,
+           view_count: i64,
+       }
+
+       while let Some(row) = rows.next().await.transpose()? {
+           let row: StackOverflowRow = row.try_into()?;
+           println!("url: {} views: {}", row.url, row.view_count);
+       }
+
+       Ok(())
+   }
+   ```
+10. 按一下「Open terminal」(開啟終端機)。
+11. 在終端機中執行程式。如果系統提示您授權 Cloud Shell 並同意條款，請按一下「Authorize」(授權)。
+
+    ```
+    cargo run
+    ```
+
+    結果大致如下：
+
+    ```
+    Query Results:
+    ------------
+    https://stackoverflow.com/questions/35159967: 170023 views
+    https://stackoverflow.com/questions/22879669: 142581 views
+    https://stackoverflow.com/questions/10604135: 132406 views
+    https://stackoverflow.com/questions/44564887: 128781 views
+    https://stackoverflow.com/questions/27060396: 127008 views
+    https://stackoverflow.com/questions/12482637: 120766 views
+    https://stackoverflow.com/questions/20673986: 115720 views
+    https://stackoverflow.com/questions/39109817: 108368 views
+    https://stackoverflow.com/questions/11057219: 105175 views
+    https://stackoverflow.com/questions/43195143: 101878 views
+    ```
+
+您已成功使用 BigQuery Rust 用戶端程式庫查詢公開資料集。
+
 ## 清除所用資源
 
 如要避免系統向您的 Google Cloud 帳戶收費，請刪除 Google Cloud 專案，或刪除您在本逐步操作說明課程中建立的資源。
@@ -950,7 +1046,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 刪除專案的方法如下：
 
-**注意**：刪除專案會造成以下結果：
+**警告**：刪除專案會造成以下影響：
 
 * **專案中的所有內容都會遭到刪除。**如果使用現有專案來進行本文中的任務，刪除專案將一併移除當中已完成的其他任務'。
 * **自訂專案 ID 會消失。**當您之前建立這個專案時，可能建立了想要在日後使用的自訂專案 ID。如要保留使用該專案 ID 的網址 (例如 `appspot.com` 網址)，請刪除在該專案中選取的資源，而不是刪除整個專案。
@@ -1072,6 +1168,21 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    `-R` 旗標會刪除資料夾中的所有資產。
 
+### Rust
+
+1. 在 Cloud Shell 中，移至上一層目錄：
+
+   ```
+   cd ..
+   ```
+2. 刪除您建立的 `bigquery-rust-quickstart` 資料夾：
+
+   ```
+   rm -R bigquery-rust-quickstart
+   ```
+
+   `-R` 旗標會刪除資料夾中的所有資產。
+
 ## 後續步驟
 
 * 進一步瞭解如何使用 [BigQuery 用戶端程式庫](https://docs.cloud.google.com/bigquery/docs/reference/libraries?hl=zh-tw)。
@@ -1089,11 +1200,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-21 (世界標準時間)。
+上次更新時間：2026-10-19 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-21 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-19 (世界標準時間)。"],[],[]]

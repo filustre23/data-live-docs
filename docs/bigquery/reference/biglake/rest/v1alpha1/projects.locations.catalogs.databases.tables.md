@@ -1,8 +1,7 @@
-As of April 20th, 2026, BigLake is now called Lakehouse for Apache Iceberg. BigLake metastore is now called the Lakehouse runtime catalog. Lakehouse APIs, client libraries, CLI commands, and IAM names remain unchanged and still reference BigLake.
+As of April 20th, 2026, BigLake is now called Lakehouse. BigLake metastore is now called the Lakehouse runtime catalog. Lakehouse APIs, client libraries, CLI commands, and IAM names remain unchanged and still reference BigLake.
 
 * [Home](https://docs.cloud.google.com/)
 * [BigLake API](https://docs.cloud.google.com/lakehouse/docs)
-* [Technology areas](https://docs.cloud.google.com/docs)
 * [Reference](https://docs.cloud.google.com/lakehouse/docs/quotas)
 
 # REST Resource: projects.locations.catalogs.databases.tables Stay organized with collections Save and categorize content based on your preferences.
@@ -24,7 +23,7 @@ Represents a table.
 
 | JSON representation |
 | --- |
-| ``` {   "name": string,   "createTime": string,   "updateTime": string,   "deleteTime": string,   "expireTime": string,   "type": enum (Type),   "etag": string,    // Union field options can be only one of the following:   "hiveOptions": {     object (HiveTableOptions)   }   // End of list of possible types for union field options. } ``` |
+| ``` {   "name": string,   "createTime": string,   "updateTime": string,   "deleteTime": string,   "expireTime": string,   "type": enum (Type),   "etag": string,    // The following is a list of mutually exclusive fields. At most one of the   // fields will be set in a response:   "hiveOptions": {     object (HiveTableOptions)   }   // End of mutually exclusive fields. } ``` |
 
 | Fields | |
 | --- | --- |
@@ -35,8 +34,9 @@ Represents a table.
 | `expireTime` | `string (Timestamp format)`  Output only. The time when this table is considered expired. Only set after the table is deleted.  Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"`, `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"`. |
 | `type` | `enum (Type)`  The table type. |
 | `etag` | `string`  The checksum of a table object computed by the server based on the value of other fields. It may be sent on update requests to ensure the client has an up-to-date value before proceeding. It is only checked for update table operations. |
-| Union field `options`. Options specified for the table type. `options` can be only one of the following: | |
+| Options specified for the table type. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response: | |
 | `hiveOptions` | `object (HiveTableOptions)`  Options of a Hive table. |
+| End of mutually exclusive fields. | |
 
 ## HiveTableOptions
 
@@ -99,9 +99,9 @@ The table type.
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-04-21 UTC.
+Last updated 2026-10-07 UTC.
 
 
 
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-04-21 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-10-07 UTC."],[],[]]

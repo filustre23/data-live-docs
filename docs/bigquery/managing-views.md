@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -25,7 +25,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 事前準備
 
-授予身分與存取權管理 (IAM) 角色，讓使用者擁有執行本文件各項工作所需的權限。如要執行工作，必須具備的權限 (如有) 會列在工作的「必要權限」部分。
+授予身分與存取權管理 (IAM) 角色，讓使用者擁有執行本文件各項工作所需的權限。執行工作所需的權限 (如有) 會列在工作「必要權限」部分。
 
 ## 更新檢視畫面
 
@@ -49,25 +49,25 @@ Google uses AI technology to translate content into your preferred language. AI 
 * `roles/bigquery.dataOwner`
 * `roles/bigquery.admin`
 
-此外，如果您具備 `bigquery.datasets.create` 權限，即可更新所建立資料集中的資料表和檢視表。
+此外，如果您具備 `bigquery.datasets.create` 權限，即可更新您所建立資料集中的資料表和檢視表。
 
 如要更新檢視表的 SQL 查詢，還需擁有檢視表 SQL 查詢所參照的資料表查詢權限。
 
-**注意：** 如要更新[授權檢視表](https://docs.cloud.google.com/bigquery/docs/authorized-views?hl=zh-tw)的 SQL，或[授權資料集](https://docs.cloud.google.com/bigquery/docs/authorized-datasets?hl=zh-tw)中的檢視表，您必須具備包含該檢視表的資料集 `bigquery.datasets.update` 權限。您不需要具備檢視表讀取的資料集權限，也不需要具備含有參照 UDF 的資料集權限。更新資源數據的方法 (例如 `CREATE OR REPLACE VIEW`) 對標準和授權資源數據都相同。更新檢視畫面時，系統會保留其授權狀態。也就是說，如果檢視畫面已獲得授權，更新後仍會維持授權狀態；如果檢視畫面未獲得授權，更新後會變成標準檢視畫面。詳情請參閱[授權檢視表所需權限](https://docs.cloud.google.com/bigquery/docs/authorized-views?hl=zh-tw#required_permissions)，以及[授權資料集中的檢視表所需權限](https://docs.cloud.google.com/bigquery/docs/authorized-datasets?hl=zh-tw#permissions_datasets)。
+**注意：** 如要更新[授權檢視表](https://docs.cloud.google.com/bigquery/docs/authorized-views?hl=zh-tw)或[授權資料集](https://docs.cloud.google.com/bigquery/docs/authorized-datasets?hl=zh-tw)中檢視表的 SQL，您必須具備包含該檢視表的資料集 `bigquery.datasets.update` 權限。您不需要具備檢視表讀取資料的資料集權限，也不需要具備含有參照 UDF 的資料集權限。更新資源數據的方法 (例如 `CREATE OR REPLACE VIEW`) 對標準和授權資源數據都相同。更新檢視畫面時，系統會保留授權狀態。也就是說，如果檢視畫面已獲得授權，更新後仍會維持授權狀態；如果檢視畫面未獲得授權，更新後會變成標準檢視畫面。詳情請參閱「[授權檢視表所需權限](https://docs.cloud.google.com/bigquery/docs/authorized-views?hl=zh-tw#required_permissions)」和「[授權資料集中的檢視表所需權限](https://docs.cloud.google.com/bigquery/docs/authorized-datasets?hl=zh-tw#permissions_datasets)」。
 
 如要進一步瞭解 BigQuery 中的 IAM 角色和權限，請參閱[預先定義的角色和權限](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)。
 
 #### 範例：參照跨專案 UDF 和資料集的檢視區塊
 
-假設您要更新「專案 A」(`authorized_dataset`) 中的檢視區塊。這個檢視區塊查詢會聯結「專案 B」(`shared_dataset`) 中的資料表，並呼叫「專案 C」(`udf_dataset`) 中的 UDF。
+假設您要更新*專案 A* (`authorized_dataset`) 中的檢視區塊。這個檢視區塊查詢會聯結*專案 B* (`shared_dataset`) 中的資料表，並呼叫*專案 C* (`udf_dataset`) 中的 UDF。
 
 必須具備下列權限：
 
 * *專案 A*：`bigquery.tables.update` 針對您更新的特定檢視畫面資源。
-* *專案 B*：對參照的共用資源具備 `bigquery.datasets.get` 和 `bigquery.tables.getData` 權限。
-* *專案 C*：您呼叫的特定 UDF 上的 `bigquery.routines.get`。
+* *專案 B*：參照的共用資源上的 `bigquery.datasets.get` 和 `bigquery.tables.getData`。
+* *專案 C*：針對您呼叫的特定 UDF 執行 `bigquery.routines.get`。
 
-請注意，您的身分不需要具備`bigquery.datasets.update`權限，即可在*專案 B* 或*專案 C* 中執行這項更新。
+請注意，您的身分不需要*專案 B* 或*專案 C* 的 `bigquery.datasets.update` 權限，即可執行這項更新。
 
 ### 更新檢視表的 SQL 查詢
 
@@ -91,7 +91,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 3. 依序點按「總覽」**>「表格」**，然後選取檢視畫面。
 4. 點按「Details」(詳細資料) 分頁標籤。
 5. 在「Query」(查詢) 方塊上方，按一下「Edit query」(編輯查詢)。系統會在查詢編輯器中開啟查詢。
-6. 編輯 SQL 查詢，然後依序點按「儲存 view」**>「儲存 view」**：
+6. 編輯 SQL 查詢，然後依序點按「儲存 view」**>**「儲存 view」：
 
 ### bq
 
@@ -348,7 +348,7 @@ print(f"Updated {view.table_type}: {str(view.reference)}")
 3. 依序點按「總覽」**>「表格」**，然後選取檢視畫面。
 4. 按一下「詳細資料」分頁標籤，然後點選「編輯詳細資料」。
 5. 在「編輯詳細資料」對話方塊的「到期時間」選單中，選取「指定日期」。
-6. 在「到期時間」欄位中，使用日期挑選器工具選取日期和時間。
+6. 在「到期時間」欄位中，使用日期挑選工具選取日期和時間。
 7. 按一下 [儲存]。已更新的到期時間會顯示在「View info」(檢視表資訊) 區段的「View expiration」(查看到期時間) 列。
 
 ### SQL
@@ -389,7 +389,7 @@ bq update \
 
 * integer：資料表的預設生命週期 (以秒為單位)。最小值是 3600 秒 (1 小時)。到期時間為目前時間加整數值。
 * project\_id：專案 ID
-* dataset：包含您要更新的檢視區塊的資料集名稱
+* dataset：包含您要更新之檢視區塊的資料集名稱
 * view：要更新的檢視區塊名稱
 
 **範例**
@@ -549,7 +549,7 @@ print(f"Updated {table_id}, expires {table.expires}.")
 
 ### 控制台
 
-使用 Google Cloud 控制台建立檢視區塊時，無法新增說明。檢視表建立完成後，您可以在「Details」(詳細資料) 頁面上新增檢視表的說明。
+使用 Google Cloud 控制台建立檢視區塊時，無法新增說明。檢視區塊建立完成後，您可以在「詳細資料」頁面上新增說明。
 
 1. 點選左側窗格中的 explore「Explorer」。
 2. 在「Explorer」窗格中展開專案，按一下「Datasets」(資料集)，然後按一下資料集。
@@ -597,7 +597,7 @@ bq update \
 
 * description：描述檢視區塊的文字 (以引號表示)
 * project\_id：您的專案 ID。
-* dataset：包含您要更新的檢視區塊的資料集名稱
+* dataset：包含您要更新之檢視區塊的資料集名稱
 * view：要更新的檢視區塊名稱
 
 **範例**
@@ -751,7 +751,7 @@ assert table.description == "Updated description."
   + `bigquery.tables.getData` (存取檢視表 SQL 查詢所參照的資料表時需要這項權限)
 * 在目的地資料集上，您需要：
 
-  + `bigquery.tables.create` (可讓您在目的地資料集中建立檢視表副本)
+  + `bigquery.tables.create` (可讓您在目的地資料集建立檢視表副本)
 
 下列預先定義的 IAM 角色都包含複製資料檢視所需的權限：
 
@@ -775,7 +775,7 @@ assert table.description == "Updated description."
 4. 在詳細資料窗格中，按一下「複製」。
 5. 在「Copy view」(複製檢視表) 對話方塊中，執行下列操作：
 
-   1. 在「Source」(來源) 區段中，驗證您的專案名稱、資料集名稱和資料表名稱是否正確。
+   1. 在「Source」(來源) 區段中，驗證專案名稱、資料集名稱和資料表名稱是否正確。
    2. 在「目的地」部分，執行下列操作：
 
       * 在「Project」(專案) 部分，選擇要複製檢視表的專案。
@@ -783,11 +783,11 @@ assert table.description == "Updated description."
       * 在「Table」(資料表) 部分，輸入檢視表的名稱。您可以在方塊中輸入新的檢視表名稱，以重新命名檢視表。您輸入的新名稱必須遵循[檢視表命名](https://docs.cloud.google.com/bigquery/docs/views?hl=zh-tw#view_naming)規則。
    3. 按一下「複製」：
 
-複製作業有相關限制。詳情請參閱「[配額與限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#copy_jobs)」。
+複製工作有相關限制。詳情請參閱「[配額與限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#copy_jobs)」。
 
 ## 重新命名檢視表
 
-您只能在使用 Google Cloud 主控台複製檢視表時才能重新命名檢視表。如需在複製檢視表時重新命名的操作說明，請參閱「[複製檢視表](#copy)」一節。
+您只能在使用 Google Cloud 主控台複製檢視區塊時，才能重新命名檢視區塊。如需在複製檢視表時重新命名的操作說明，請參閱[複製檢視表](#copy)一節。
 
 您無法使用 bq 指令列工具、API 或用戶端程式庫變更現有檢視表的名稱。因此，您必須以新名稱[重新建立檢視表](https://docs.cloud.google.com/bigquery/docs/views?hl=zh-tw)。
 
@@ -807,7 +807,7 @@ assert table.description == "Updated description."
 
 **注意：** 檢視區塊一經刪除即無法復原。如果重新建立授權檢視區，並使用與已刪除檢視區相同的名稱，則必須將新的檢視畫面新增至來源資料集的*授權 view*清單。
 
-刪除檢視區也會一併刪除與該檢視區相關聯的權限。重新建立已刪除的資料檢視時，您也必須手動[重新設定先前與該資料檢視相關聯的存取權](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam?hl=zh-tw)。
+刪除檢視區也會一併刪除與該檢視區相關聯的權限。重新建立已刪除的檢視區時，您也必須手動[重新設定先前與該檢視區相關聯的存取權限](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam?hl=zh-tw)。
 
 **注意：**您無法直接復原檢視區塊，但可以搜尋對應的[稽核記錄活動](https://docs.cloud.google.com/bigquery/docs/introduction-audit-workloads?hl=zh-tw)，復原檢視區塊建立陳述式。
 
@@ -820,7 +820,7 @@ assert table.description == "Updated description."
 
 * `bigquery.tables.delete`
 
-下列每個預先定義的 IAM 角色都包含刪除檢視區塊所需的權限：
+下列預先定義的 IAM 角色都包含刪除檢視區塊所需的權限：
 
 * `roles/bigquery.dataOwner`
 * `roles/bigquery.dataEditor`
@@ -1111,11 +1111,11 @@ end
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-20 (世界標準時間)。
+上次更新時間：2026-10-19 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-20 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-19 (世界標準時間)。"],[],[]]

@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -46,7 +46,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
   [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
 - [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project).
-- Enable the BigQuery and BigQuery Data Transfer Service APIs.
+- Enable the BigQuery and BigQuery Data Transfer Service APIs, if any are not already enabled.
 
   **Roles required to enable APIs**
 
@@ -77,7 +77,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
   [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
 - [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project).
-- Enable the BigQuery and BigQuery Data Transfer Service APIs.
+- Enable the BigQuery and BigQuery Data Transfer Service APIs, if any are not already enabled.
 
   **Roles required to enable APIs**
 
@@ -98,7 +98,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    * 用於建立移轉作業的 `bigquery.transfers.update` 權限
    * 目標資料集的 `bigquery.datasets.get` 和 `bigquery.datasets.update` 權限
 
-   `roles/bigquery.admin` 這個預先定義的 Identity and Access Management (IAM) 角色具備 `bigquery.transfers.update`、`bigquery.datasets.update` 和 `bigquery.datasets.get` 權限。如要進一步瞭解 BigQuery 資料移轉服務中的 IAM 角色，請參閱[存取權控管](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)。
+   `roles/bigquery.admin` 這個預先定義的 Identity and Access Management (IAM) 角色具備 `bigquery.transfers.update`、`bigquery.datasets.update` 和 `bigquery.datasets.get` 權限。如要進一步瞭解 BigQuery 資料移轉服務中的身分與存取權管理角色，請參閱[存取權控管](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)。
 2. 參閱 Amazon S3 的說明文件，以確保您已設定啟用移轉所需的任何權限。Amazon S3 來源資料至少必須套用 AWS 代管政策 [`AmazonS3ReadOnlyAccess`](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage.html#attach-managed-policy-console)。
 
 ### 建立資料集
@@ -107,9 +107,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### 授予 Amazon Redshift 叢集的存取權
 
-[設定安全性群組規則](https://docs.aws.amazon.com/vpc/latest/userguide/working-with-security-group-rules.html)，將私人 Amazon Redshift 叢集的下列 IP 範圍新增至許可清單。您可以將與資料集位置相對應的 IP 位址加入許可清單，也可以將下表中的所有 IP 位址加入許可清單。這些 Google 擁有的 IP 位址會保留給 Amazon Redshift 資料遷移作業使用。
+如要允許來自 Amazon Redshift 叢集的連線，請設定輸入安全群組規則，允許透過叢集使用的通訊埠，在 TCP 上建立連線。根據預設，Amazon Redshift 會使用通訊埠 `5439`。如要檢查或驗證叢集的連接埠，請在 Amazon Redshift 主控台中查看叢集屬性的「端點」欄位。
 
-**注意：** BigQuery 與 Amazon Redshift 之間的通訊會透過下列 Google 擁有的 IP 位址進行。不過，從 Amazon S3 移轉至 BigQuery 的資料會透過公用網際網路傳輸。
+請[設定安全群組規則](https://docs.aws.amazon.com/vpc/latest/userguide/working-with-security-group-rules.html)，將下列 Google 擁有的 IP 範圍新增至叢集安全群組的連入規則。您可以新增與資料集位置相對應的 IP 位址，也可以新增下表中的所有 IP 位址。這些 Google 擁有的 IP 位址會保留給 Amazon Redshift 資料遷移作業使用。
+
+**注意：** BigQuery 與 Amazon Redshift 之間的通訊會透過下列 Google 擁有的 IP 位址進行。不過，從 Amazon S3 移至 BigQuery 的資料會透過公用網際網路傳輸。
 
 #### 地區位置
 
@@ -124,7 +126,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 |  | 墨西哥 | `northamerica-south1` | 34.51.6.35  34.51.7.113  34.51.12.83  34.51.10.94  34.51.11.219  34.51.11.52  34.51.2.114  34.51.15.251 |
 |  | 蒙特婁 | `northamerica-northeast1` | 34.95.20.253  35.203.31.219  34.95.22.233  34.95.27.99  35.203.12.23  35.203.39.46  35.203.116.49  35.203.104.223 |
 |  | 北維吉尼亞州 | `us-east4` | 35.245.95.250  35.245.126.228  35.236.225.172  35.245.86.140  35.199.31.35  35.199.19.115  35.230.167.48  35.245.128.132  35.245.111.126  35.236.209.21 |
-|  | 俄勒岡州 | `us-west1` | 35.197.117.207  35.199.178.12  35.197.86.233  34.82.155.140  35.247.28.48  35.247.31.246  35.247.106.13  34.105.85.54 |
+|  | 奧勒岡州 | `us-west1` | 35.197.117.207  35.199.178.12  35.197.86.233  34.82.155.140  35.247.28.48  35.247.31.246  35.247.106.13  34.105.85.54 |
 |  | 鹽湖城 | `us-west3` | 34.106.37.58  34.106.85.113  34.106.28.153  34.106.64.121  34.106.246.131  34.106.56.150  34.106.41.31  34.106.182.92 |
 |  | 聖保羅 | `southamerica-east1` | 35.199.88.228  34.95.169.140  35.198.53.30  34.95.144.215  35.247.250.120  35.247.255.158  34.95.231.121  35.198.8.157 |
 |  | 聖地亞哥 | `southamerica-west1` | 34.176.188.48  34.176.38.192  34.176.205.134  34.176.102.161  34.176.197.198  34.176.223.236  34.176.47.188  34.176.14.80 |
@@ -160,7 +162,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 | **中東地區** | | | |
 |  | 達曼 | `me-central2` | 34.166.20.177  34.166.10.104  34.166.21.128  34.166.19.184  34.166.20.83  34.166.18.138  34.166.18.48  34.166.23.171 |
 |  | 杜哈 | `me-central1` | 34.18.48.121  34.18.25.208  34.18.38.183  34.18.33.25  34.18.21.203  34.18.21.80  34.18.36.126  34.18.23.252 |
-|  | 特拉維夫市 | `me-west1` | 34.165.184.115  34.165.110.74  34.165.174.16  34.165.28.235  34.165.170.172  34.165.187.98  34.165.85.64  34.165.245.97 |
+|  | 特拉維夫 | `me-west1` | 34.165.184.115  34.165.110.74  34.165.174.16  34.165.28.235  34.165.170.172  34.165.187.98  34.165.85.64  34.165.245.97 |
 | **非洲** | | | |
 |  | 約翰尼斯堡 | `africa-south1` | 34.35.11.24  34.35.10.66  34.35.8.32  34.35.3.248  34.35.2.113  34.35.5.61  34.35.7.53  34.35.3.17 |
 
@@ -177,8 +179,8 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 您必須具備 Amazon S3 值區，做為將 Amazon Redshift 資料移轉至 BigQuery 的暫存區域。如需詳細操作說明，請參閱 [Amazon 說明文件](https://aws.amazon.com/premiumsupport/knowledge-center/create-access-key/)。
 
-1. 建議您建立專用的 Amazon IAM 使用者，並授予該使用者 Amazon Redshift 的唯讀權限，以及 Amazon S3 的讀取與寫入權限。如要完成這個步驟，可以套用下列政策：
-2. 建立 Amazon [IAM 使用者存取金鑰組](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html)。
+1. 建議您建立專用的 AWS IAM 使用者，並授予該使用者 Amazon Redshift 的唯讀權限，以及 Amazon S3 的讀取與寫入權限。如要完成這個步驟，可以套用下列政策：
+2. 建立 AWS [IAM 使用者存取金鑰組](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html)。
 
 ### 使用獨立遷移佇列設定工作負載控制
 
@@ -186,17 +188,17 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### 收集轉移資訊
 
-收集使用 BigQuery 資料移轉服務設定遷移作業所需的資訊：
+收集所需資訊，以便使用 BigQuery 資料移轉服務設定遷移作業：
 
 * 請按照[這些操作說明](https://docs.aws.amazon.com/redshift/latest/mgmt/configure-jdbc-connection.html#obtain-jdbc-url) 取得 JDBC 網址。
 * 取得具備適當權限的 Amazon Redshift 資料庫使用者名稱和密碼。
-* 按照「[授予 Amazon S3 值區的存取權](#grant_access_to_your_amazon_s3_bucket)」一文中的操作說明，取得 AWS 存取金鑰組。
+* 按照「[授予 Amazon S3 值區的存取權](#grant_access_to_your_S3_bucket)」一文中的操作說明，取得 AWS 存取金鑰組。
 * 取得要用於移轉作業的 Amazon S3 值區 URI。
   建議您為這個 bucket 設定[生命週期](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-lifecycle.html)政策，避免產生不必要的費用。建議的到期時間為 24 小時，以便有足夠的時間將所有資料移轉到 BigQuery。
 
 ### 評估資料
 
-在資料移轉過程中，BigQuery 資料移轉服務會將 Amazon Redshift 的資料以 CSV 檔案的形式寫入 Cloud Storage。如果這些檔案含有 ASCII 0 字元，就無法載入至 BigQuery。建議您評估資料，判斷這是否會造成問題。如果是，您可以將資料匯出至 Amazon S3 做為 Parquet 檔案，然後使用 BigQuery 資料移轉服務匯入這些檔案，藉此解決問題。詳情請參閱「[Amazon S3 移轉作業總覽](https://docs.cloud.google.com/bigquery/docs/s3-transfer-intro?hl=zh-tw)」。
+在資料移轉過程中，BigQuery 資料移轉服務會將 Amazon Redshift 中的資料寫入 Cloud Storage，並儲存為 CSV 檔案。如果這些檔案包含 ASCII 0 字元，就無法載入至 BigQuery。建議您評估資料，判斷這是否會造成問題。如果是，您可以將資料匯出至 Amazon S3 做為 Parquet 檔案，然後使用 BigQuery 資料移轉服務匯入這些檔案，藉此解決問題。詳情請參閱 [Amazon S3 資料移轉簡介](https://docs.cloud.google.com/bigquery/docs/s3-transfer-intro?hl=zh-tw)。
 
 ## 設定 Amazon Redshift 移轉作業
 
@@ -214,125 +216,4 @@ Google uses AI technology to translate content into your preferred language. AI 
 6. 在「Destination settings」(目的地設定) 部分，從「Dataset」(資料集) 清單中選擇[您建立的資料集](#create_a_dataset)。
 7. 在「Data source details」(資料來源詳細資料) 部分執行下列操作：
 
-   1. 在「JDBC connection url for Amazon Redshift」(Amazon Redshift 的 JDBC 連線網址) 部分，提供 [JDBC 網址](#jdbc_url)以存取 Amazon Redshift 叢集。
-   2. 在「Username of your database」(資料庫的使用者名稱) 部分，輸入您要遷移的 Amazon Redshift 資料庫使用者名稱。
-   3. 在「Password of your database」(資料庫密碼) 部分，輸入資料庫密碼。
-
-      **注意：** 提供 Amazon 憑證，即表示您瞭解 BigQuery 資料移轉服務是您的代理程式，僅用於存取移轉資料。
-   4. 在「Access key ID」(存取金鑰 ID) 和「Secret access key」(存取密鑰) 部分，輸入您在[授予 S3 值區的存取權](#grant_access_to_your_S3_bucket)步驟所取得的存取金鑰組。
-   5. 在「Amazon S3 URI」部分，輸入將做為暫存區使用的 [S3 值區的 URI](#s3_uri)。
-   6. 在「Amazon Redshift Schema」(Amazon Redshift 結構定義) 部分，輸入您正在遷移的 Amazon Redshift 結構定義。
-   7. 在「Table name patterns」(資料表名稱格式) 部分，指定符合結構定義中資料表名稱的名稱或格式。您可以使用規則運算式，在下列表單中指定格式：`<table1Regex>;<table2Regex>`。此格式必須遵循 Java 規則運算式語法。例如：
-
-      * `lineitem;ordertb` 會比對名為 `lineitem` 和 `ordertb` 的資料表。
-      * `.*` 會比對所有資料表。
-
-      將這個欄位留白，用以遷移所有來自指定結構定義的資料表。
-
-      **注意：** 針對非常大型的資料表，我們建議一次移轉一個資料表。[每個載入工作的 BigQuery 載入配額為 15 TB](#quotas_and_limits)。
-   8. 將「虛擬私有雲和保留的 IP 範圍」欄位留空。
-8. 在「Service Account」(服務帳戶) 選單，選取與貴機構Google Cloud 專案相關聯的[服務帳戶](https://docs.cloud.google.com/iam/docs/service-account-overview?hl=zh-tw)。您可以將服務帳戶與移轉作業建立關聯，這樣就不需要使用者憑證。如要進一步瞭解如何搭配使用服務帳戶與資料移轉作業，請參閱[使用服務帳戶](https://docs.cloud.google.com/bigquery/docs/use-service-accounts?hl=zh-tw)的相關說明。
-
-   * 如果使用[聯合身分](https://docs.cloud.google.com/iam/docs/workforce-identity-federation?hl=zh-tw)登入，您必須擁有服務帳戶才能建立移轉作業。如果是以 [Google 帳戶](https://docs.cloud.google.com/iam/docs/principals-overview?hl=zh-tw#google-account)登入，則不一定要透過服務帳戶建立移轉作業。
-   * 服務帳戶必須具備[必要權限](#set_required_permissions)。
-9. 選用：在「Notification options」(通知選項) 專區，執行下列操作：
-
-   1. 按一下啟用電子郵件通知的切換開關。啟用這個選項之後，若移轉失敗，移轉作業管理員就會收到電子郵件通知。
-   2. 在「Select a Pub/Sub topic」(選取 Pub/Sub 主題) 選取[主題](https://docs.cloud.google.com/pubsub/docs/overview?hl=zh-tw#types)名稱，或是點選「Create a topic」(建立主題)。這個選項會針對移轉作業設定 Pub/Sub 執行[通知](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications?hl=zh-tw)。
-10. 按一下 [儲存]。
-11. Google Cloud 控制台會顯示移轉設定的所有詳細資料，包括此移轉作業的「Resource name」(資源名稱)。
-
-### bq
-
-輸入 `bq mk` 指令並加上移轉建立作業旗標 `--transfer_config`。還需加上以下旗標：
-
-* `--project_id`
-* `--data_source`
-* `--target_dataset`
-* `--display_name`
-* `--params`
-
-```
-bq mk \
-    --transfer_config \
-    --project_id=project_id \
-    --data_source=data_source \
-    --target_dataset=dataset \
-    --display_name=name \
-    --service_account_name=service_account \
-    --params='parameters'
-```
-
-其中：
-
-* project\_id 是您的 Google Cloud 專案 ID。如果未指定 `--project_id`，系統會使用預設專案。
-* data\_source 是資料來源：`redshift`。
-* dataset 是移轉作業設定的 BigQuery 目標資料集。
-* name 是移轉設定的顯示名稱。移轉作業名稱可以是任意值，日後需要修改移轉作業時，能夠據此識別即可。
-* service\_account：用於驗證轉移作業的服務帳戶名稱。服務帳戶應由用於建立轉移作業的 `project_id` 擁有，且應具備所有[必要權限](#set_required_permissions)。
-* parameters 含有已建立移轉設定的 JSON 格式參數，例如：`--params='{"param":"param_value"}'`。
-
-Amazon Redshift 移轉設定所需的參數如下：
-
-* `jdbc_url`：JDBC 連線網址可用來找出 Amazon Redshift 叢集的位置。
-* `database_username`：用來存取資料庫以卸載指定資料表的使用者名稱。
-* `database_password`：與使用者名稱搭配使用的密碼，可存取資料庫以卸載指定資料表。
-* `access_key_id`：簽署向 AWS 發出要求的存取金鑰 ID。
-* `secret_access_key`：與存取金鑰 ID 搭配使用的存取密鑰，密鑰可簽署向 AWS 發出的要求。
-* `s3_bucket`：以「s3://」開頭的 Amazon S3 URI，並且可指定用於暫存檔案的前置字串。
-* `redshift_schema`：包含所有要遷移之資料表的 Amazon Redshift 結構定義。
-* `table_name_patterns`：以分號 (;) 分隔的資料表名稱格式。資料表格式是要遷移之資料表的規則運算式。如未提供，則系統會遷移資料庫結構定義下的所有資料表。
-
-舉例來說，下列指令會建立名為 `My Transfer` 的 Amazon Redshift 移轉作業，其中目標資料集的名稱為 `mydataset`，專案的 ID 為 `google.com:myproject`。
-
-```
-bq mk \
-    --transfer_config \
-    --project_id=myproject \
-    --data_source=redshift \
-    --target_dataset=mydataset \
-    --display_name='My Transfer' \
-    --params='{"jdbc_url":"jdbc:postgresql://test-example-instance.sample.us-west-1.redshift.amazonaws.com:5439/dbname","database_username":"my_username","database_password":"1234567890","access_key_id":"A1B2C3D4E5F6G7H8I9J0","secret_access_key":"1234567890123456789012345678901234567890","s3_bucket":"s3://bucket/prefix","redshift_schema":"public","table_name_patterns":"table_name"}'
-```
-
-**注意：** 您無法使用指令列工具設定通知。
-
-### API
-
-請使用 [`projects.locations.transferConfigs.create`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create?hl=zh-tw) 方法，並提供 [`TransferConfig`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs?hl=zh-tw#TransferConfig) 資源的執行個體。
-
-### Java
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定說明操作。詳情請參閱 [BigQuery Java API 參考說明文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-import com.google.api.gax.rpc.ApiException;
-import com.google.cloud.bigquery.datatransfer.v1.CreateTransferConfigRequest;
-import com.google.cloud.bigquery.datatransfer.v1.DataTransferServiceClient;
-import com.google.cloud.bigquery.datatransfer.v1.ProjectName;
-import com.google.cloud.bigquery.datatransfer.v1.TransferConfig;
-import com.google.protobuf.Struct;
-import com.google.protobuf.Value;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
-// Sample to create redshift transfer config
-public class CreateRedshiftTransfer {
-
-  public static void main(String[] args) throws IOException {
-    // TODO(developer): Replace these variables before running the sample.
-    final String projectId = "MY_PROJECT_ID";
-    String datasetId = "MY_DATASET_ID";
-    String datasetRegion = "US";
-    String jdbcUrl = "MY_JDBC_URL_CONNECTION_REDSHIFT";
-    String dbUserName = "MY_USERNAME";
-    String dbPassword = "MY_PASSWORD";
-    String accessKeyId = "MY_AWS_ACCESS_KEY_ID";
-    String secretAccessId = "MY_AWS_SECRET_ACCESS_ID";
-    String s3Bucket = "MY_S3_BUCKET_URI";
-    String redShiftSchema = "MY_REDSHIFT_SCHEMA";
-    String tableNamePatterns = "*"
-```
+   1. 在「JDBC connection url for Amazon Redshift」(Amazon Redshift 的 JDBC 連線網址) 部分，提

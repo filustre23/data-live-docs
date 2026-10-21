@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -34,7 +34,7 @@ go get cloud.google.com/go/bigquery
 
 ### Java
 
-如果您使用 [Maven](https://maven.apache.org/)，請將下列指令新增到 `pom.xml` 檔案中。如要進一步瞭解 BOM，請參閱 [Google Cloud Platform 程式庫 BOM](https://cloud.google.com/java/docs/bom?hl=zh-tw)。
+如果您使用 [Maven](https://maven.apache.org/)，請將下列指令新增至 `pom.xml` 檔案。如要進一步瞭解 BOM，請參閱「[Google Cloud Platform 程式庫 BOM](https://cloud.google.com/java/docs/bom?hl=zh-tw)」。
 
 ```
 <!--  Using libraries-bom to manage versions.
@@ -59,7 +59,7 @@ See https://github.com/GoogleCloudPlatform/cloud-opensource-java/wiki/The-Google
 </dependencies>
 ```
 
-如果您使用 [Gradle](https://gradle.org/)，請將下列指令新增到依附元件中：
+如果您使用 [Gradle](https://gradle.org/)，請在依附元件中加入下列項目：
 
 ```
 implementation platform('com.google.cloud:libraries-bom:26.45.0')
@@ -73,14 +73,14 @@ implementation 'com.google.cloud:google-cloud-bigquery'
 libraryDependencies += "com.google.cloud" % "google-cloud-bigquery" % "2.42.2"
 ```
 
-如果您使用 Visual Studio Code 或 IntelliJ，可以利用下列 IDE 外掛程式，將用戶端程式庫新增到專案中：
+如果您使用 Visual Studio Code 或 IntelliJ，可以透過下列 IDE 外掛程式，將用戶端程式庫新增至專案：
 
 * [Cloud Code for VS Code](https://docs.cloud.google.com/code/docs/vscode/client-libraries?hl=zh-tw)
 * [Cloud Code for IntelliJ](https://docs.cloud.google.com/code/docs/intellij/client-libraries?hl=zh-tw)
 
 這些外掛程式會提供其他功能，例如服務帳戶的金鑰管理功能。詳情請參閱各外掛程式的說明文件。
 
-**注意：**Cloud Java 用戶端程式庫目前並不支援 Android。
+**注意：**Cloud Java 用戶端程式庫目前不支援 Android。
 
 詳情請參閱「[設定 Java 開發環境](https://docs.cloud.google.com/java/docs/setup?hl=zh-tw)」。
 
@@ -116,6 +116,14 @@ gem install google-cloud-bigquery
 
 詳情請參閱「[設定 Ruby 開發環境](https://docs.cloud.google.com/ruby/docs/setup?hl=zh-tw)」。
 
+### Rust
+
+```
+cargo add google-cloud-bigquery
+```
+
+詳情請參閱「[開始使用 Rust](https://docs.cloud.google.com/rust/docs/quickstart?hl=zh-tw)」。
+
 ## 設定驗證方法
 
 為驗證向 Google Cloud API 發出的呼叫，用戶端程式庫支援[應用程式預設憑證 (ADC)](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=zh-tw)；程式庫會在定義的一組位置中尋找憑證，並使用這些憑證驗證向 API 發出的要求。有了 ADC，無需修改應用程式程式碼，就能在各種環境 (例如本機開發環境或正式環境)，為應用程式提供憑證。
@@ -131,7 +139,7 @@ gem install google-cloud-bigquery
    gcloud init
    ```
 
-   若您採用的是外部識別資訊提供者 (IdP)，請先[使用聯合身分登入 gcloud CLI](https://docs.cloud.google.com/iam/docs/workforce-log-in-gcloud?hl=zh-tw)。
+   如果您使用外部識別資訊提供者 (IdP)，請先[使用聯合身分登入 gcloud CLI](https://docs.cloud.google.com/iam/docs/workforce-log-in-gcloud?hl=zh-tw)。
 2. 如果您使用本機殼層，請為使用者帳戶建立本機驗證憑證：
 
    ```
@@ -146,7 +154,7 @@ gem install google-cloud-bigquery
 
 ## 使用用戶端程式庫
 
-以下範例說明如何初始化用戶端，並對 BigQuery API 公開資料集執行查詢。
+以下範例說明如何初始化用戶端，以及對 BigQuery API 公開資料集執行查詢。
 
 **注意：**系統不支援 JRuby。
 
@@ -174,80 +182,5 @@ public class BigQueryQuery
         // Wait for the job to complete.
         job = job.PollUntilCompleted().ThrowOnAnyError();
         // Display the results
-        foreach (BigQueryRow row in client.GetQueryResults(job.Reference))
-        {
-            Console.WriteLine($"{row["name"]}");
-        }
-    }
-}
-```
-
-### Go
-
-```
-import (
-	"context"
-	"fmt"
-	"io"
-
-	"cloud.google.com/go/bigquery"
-	"google.golang.org/api/iterator"
-)
-
-// queryBasic demonstrates issuing a query and reading results.
-func queryBasic(w io.Writer, projectID string) error {
-	// projectID := "my-project-id"
-	ctx := context.Background()
-	client, err := bigquery.NewClient(ctx, projectID)
-	if err != nil {
-		return fmt.Errorf("bigquery.NewClient: %v", err)
-	}
-	defer client.Close()
-
-	q := client.Query(
-		"SELECT name FROM `bigquery-public-data.usa_names.usa_1910_2013` " +
-			"WHERE state = \"TX\" " +
-			"LIMIT 100")
-	// Location must match that of the dataset(s) referenced in the query.
-	q.Location = "US"
-	// Run the query and print results when the query job is completed.
-	job, err := q.Run(ctx)
-	if err != nil {
-		return err
-	}
-	status, err := job.Wait(ctx)
-	if err != nil {
-		return err
-	}
-	if err := status.Err(); err != nil {
-		return err
-	}
-	it, err := job.Read(ctx)
-	for {
-		var row []bigquery.Value
-		err := it.Next(&row)
-		if err == iterator.Done {
-			break
-		}
-		if err != nil {
-			return err
-		}
-		fmt.Fprintln(w, row)
-	}
-	return nil
-}
-```
-
-### Java
-
-```
-import com.google.cloud.bigquery.BigQuery;
-import com.google.cloud.bigquery.BigQueryException;
-import com.google.cloud.bigquery.BigQueryOptions;
-import com.google.cloud.bigquery.FieldValueList;
-import com.google.cloud.bigquery.Job;
-import com.google.cloud.bigquery.JobId;
-import com.google.cloud.bigquery.JobInfo;
-import com.google.cloud.bigquery.QueryJobConfiguration;
-import com.google.cloud.bigquery.
+        foreach (
 ```

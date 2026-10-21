@@ -265,14 +265,14 @@ SELECT TIME(DATETIME "2008-12-25 15:30:00.000000") AS time_dt;
 ## `TIME_ADD`
 
 ```
-TIME_ADD(time_expression, INTERVAL int64_expression part)
+TIME_ADD(time_expression, INTERVAL step_size step_unit)
 ```
 
 **Description**
 
-Adds `int64_expression` units of `part` to the `TIME` object.
+Adds `step_size` units of `step_unit` to the `TIME` object.
 
-`TIME_ADD` supports the following values for `part`:
+`TIME_ADD` supports the following values for `step_unit`:
 
 * `MICROSECOND`
 * `MILLISECOND`
@@ -329,7 +329,10 @@ Gets the number of unit boundaries between two `TIME` values (`end_time` -
 
 **Details**
 
-If `end_time` is earlier than `start_time`, the output is negative.
+If `end_time` is earlier than `start_time`, the output is 0 or negative.
+Decimals are always truncated rather than rounded. For example, both 3.9 and 3.1
+become 3, while -3.9 and -3.1 become -3 (instead of -4).
+
 Produces an error if the computation overflows, such as if the difference
 in microseconds
 between the two `TIME` values overflows.
@@ -342,7 +345,7 @@ behaves like `TIMESTAMP_DIFF(TIMESTAMP, TIMESTAMP, PART)`.
 
 `INT64`
 
-**Example**
+**Examples**
 
 ```
 SELECT
@@ -357,17 +360,36 @@ SELECT
  +----------------------------+------------------------+------------------------*/
 ```
 
+In the following example, `TIME_DIFF` truncates the output rather than
+rounding it. Both 3 hours 54 minutes (3.9 hours) and 3 hours 6 minutes (3.1
+hours) truncate to 3 hours, and their negative counterparts truncate to -3
+hours:
+
+```
+SELECT
+  TIME_DIFF(TIME '04:54:00', TIME '01:00:00', HOUR) AS diff_3_9,
+  TIME_DIFF(TIME '04:06:00', TIME '01:00:00', HOUR) AS diff_3_1,
+  TIME_DIFF(TIME '01:00:00', TIME '04:54:00', HOUR) AS diff_negative_3_9,
+  TIME_DIFF(TIME '01:00:00', TIME '04:06:00', HOUR) AS diff_negative_3_1;
+
+/*----------+----------+-------------------+-------------------+
+ | diff_3_9 | diff_3_1 | diff_negative_3_9 | diff_negative_3_1 |
+ +----------+----------+-------------------+-------------------+
+ | 3        | 3        | -3                | -3                |
+ +----------+----------+-------------------+-------------------*/
+```
+
 ## `TIME_SUB`
 
 ```
-TIME_SUB(time_expression, INTERVAL int64_expression part)
+TIME_SUB(time_expression, INTERVAL step_size step_unit)
 ```
 
 **Description**
 
-Subtracts `int64_expression` units of `part` from the `TIME` object.
+Subtracts `step_size` units of `step_unit` from the `TIME` object.
 
-`TIME_SUB` supports the following values for `part`:
+`TIME_SUB` supports the following values for `step_unit`:
 
 * `MICROSECOND`
 * `MILLISECOND`
@@ -387,74 +409,4 @@ returned value is `23:30:00`.
 
 ```
 SELECT
-  TIME "15:30:00" as original_date,
-  TIME_SUB(TIME "15:30:00", INTERVAL 10 MINUTE) as earlier;
-
-/*-----------------------------+------------------------+
- | original_date               | earlier                |
- +-----------------------------+------------------------+
- | 15:30:00                    | 15:20:00               |
- +-----------------------------+------------------------*/
 ```
-
-## `TIME_TRUNC`
-
-```
-TIME_TRUNC(time_value, time_granularity)
-```
-
-**Description**
-
-Truncates a `TIME` value at a particular granularity.
-
-**Definitions**
-
-* `time_value`: The `TIME` value to truncate.
-* `time_granularity`: The truncation granularity for a `TIME` value.
-  [Time granularities](#time_trunc_granularity_time) can be used.
-
-**Time granularity definitions**
-
-* `MICROSECOND`: If used, nothing is truncated from the value.
-* `MILLISECOND`: The nearest lesser than or equal millisecond.
-* `SECOND`: The nearest lesser than or equal second.
-* `MINUTE`: The nearest lesser than or equal minute.
-* `HOUR`: The nearest lesser than or equal hour.
-
-**Details**
-
-The resulting value is always rounded to the beginning of `granularity`.
-
-**Return Data Type**
-
-`TIME`
-
-**Example**
-
-```
-SELECT
-  TIME "15:30:00" as original,
-  TIME_TRUNC(TIME "15:30:00", HOUR) as truncated;
-
-/*----------------------------+------------------------+
- | original                   | truncated              |
- +----------------------------+------------------------+
- | 15:30:00                   | 15:00:00               |
- +----------------------------+------------------------*/
-```
-
-
-
-
-Send feedback
-
-Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
-
-Last updated 2026-07-17 UTC.
-
-
-
-
-Need to tell us more?
-
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-07-17 UTC."],[],[]]

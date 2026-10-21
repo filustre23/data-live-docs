@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -43,14 +43,15 @@ Google uses AI technology to translate content into your preferred language. AI 
      delete the project, removing all resources associated with the project.
 
      [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
-   - Enable the Managed Service for Apache Spark, BigQuery, and Cloud Storage APIs.
+   - Enable the Managed Service for Apache Spark, BigQuery, and Cloud Storage APIs, if any are not already enabled.
 
      **Roles required to enable APIs**
 
-     To enable APIs, you need the Service Usage Admin IAM
-     role (`roles/serviceusage.serviceUsageAdmin`), which
-     contains the `serviceusage.services.enable` permission. [Learn how to grant
-     roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw).
+     To enable APIs, you need the `serviceusage.services.enable` permission. If you
+     created the project, then you likely already have this permission through the
+     Owner role (`roles/owner`). Otherwise, you can get this permission through the
+     Service Usage Admin role (`roles/serviceusage.serviceUsageAdmin`).
+     [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw).
 
      [Enable the APIs](https://console.cloud.google.com/apis/enableflow?apiid=dataproc.googleapis.com%2Cbigquery.googleapis.com%2Cstorage-component.googleapis.com&hl=zh-tw)
 
@@ -72,14 +73,15 @@ Google uses AI technology to translate content into your preferred language. AI 
      delete the project, removing all resources associated with the project.
 
      [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
-   - Enable the Managed Service for Apache Spark, BigQuery, and Cloud Storage APIs.
+   - Enable the Managed Service for Apache Spark, BigQuery, and Cloud Storage APIs, if any are not already enabled.
 
      **Roles required to enable APIs**
 
-     To enable APIs, you need the Service Usage Admin IAM
-     role (`roles/serviceusage.serviceUsageAdmin`), which
-     contains the `serviceusage.services.enable` permission. [Learn how to grant
-     roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw).
+     To enable APIs, you need the `serviceusage.services.enable` permission. If you
+     created the project, then you likely already have this permission through the
+     Owner role (`roles/owner`). Otherwise, you can get this permission through the
+     Service Usage Admin role (`roles/serviceusage.serviceUsageAdmin`).
+     [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw).
 
      [Enable the APIs](https://console.cloud.google.com/apis/enableflow?apiid=dataproc.googleapis.com%2Cbigquery.googleapis.com%2Cstorage-component.googleapis.com&hl=zh-tw)
 2. 如果沒有可用的 Cloud Storage 值區，請在專案中**[建立一個](https://docs.cloud.google.com/storage/docs/creating-buckets?hl=zh-tw)**。
@@ -589,11 +591,11 @@ sdf = spark.read.format('bigquery') \
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-14 (世界標準時間)。
+上次更新時間：2026-10-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-14 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]

@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -18,38 +18,37 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 結構定義自動偵測
 
-BigQuery 可透過結構定義自動偵測功能，推斷 CSV、JSON 或 Google 試算表資料的結構定義。無論是要將資料[載入](https://docs.cloud.google.com/bigquery/docs/loading-data?hl=zh-tw) BigQuery 或是查詢[外部資料來源](https://docs.cloud.google.com/bigquery/external-data-sources?hl=zh-tw)，您都可以使用結構定義自動偵測功能。
+結構定義自動偵測功能可讓 BigQuery 推論 CSV、JSON 或 Google 試算表資料的結構定義。將資料[載入](https://docs.cloud.google.com/bigquery/docs/loading-data?hl=zh-tw) BigQuery，以及查詢[外部資料來源](https://docs.cloud.google.com/bigquery/external-data-sources?hl=zh-tw)時，可以使用結構定義自動偵測功能。
 
-啟用自動偵測功能後，BigQuery 會推斷每一欄的資料類型。BigQuery 會隨機選擇資料來源中的檔案，並掃描最多前 500 個資料列來當做代表性樣本。BigQuery 接著會檢查每個欄位，並嘗試根據樣本中的值為各欄位指派資料類型。如果資料欄中的所有資料列都是空白，自動偵測功能會將該資料欄的資料類型設為 `STRING`。
+啟用自動偵測功能後，BigQuery 會推論每個資料欄的資料類型。BigQuery 會從資料來源隨機選取一個檔案，並掃描前 500 個資料列做為代表性樣本。接著，BigQuery 會檢查每個欄位，並嘗試根據樣本中的值，為該欄位指派資料類型。如果資料欄中的所有資料列都是空白，自動偵測功能會將該資料欄預設為 `STRING` 資料類型。
 
-如果未針對 CSV、JSON 或 Google 試算表資料啟用結構定義自動偵測功能，則建立資料表時必須手動提供結構定義。
+如未啟用 CSV、JSON 或 Google 試算表資料的結構定義自動偵測功能，則必須在建立資料表時手動提供結構定義。
 
-Avro、Parquet、ORC、Firestore 匯出檔或 Datastore 匯出檔案都屬於自述式檔案，這些檔案格式是自述式，因此 BigQuery 會自動根據來源資料推論出資料表結構定義。對於 Parquet、Avro 和 Orc 檔案，您可以選擇提供明確的結構定義，覆寫推斷的結構定義。
+您不需要為 Avro、Parquet、ORC、Firestore 匯出檔或 Datastore 匯出檔啟用結構定義自動偵測功能。這些檔案格式為自述式，因此 BigQuery 會自動根據來源資料推論資料表結構定義。如果是 Parquet、Avro 和 ORC 檔案，您可以選擇提供明確的結構定義，覆寫推論出的結構定義。
 
-您可以透過下列方式查看資料表的結構定義偵測結果：
+您可以透過下列方式，查看系統為資料表偵測到的結構定義：
 
 * 使用 Google Cloud 控制台。
 * 使用 bq 指令列工具的 [`bq show`](https://docs.cloud.google.com/bigquery/bq-command-line-tool?hl=zh-tw#tables) 指令。
 
-當 BigQuery 偵測到結構定義時，可能會在極少數情況下更改欄位名稱，這是為了要配合 GoogleSQL 的語法。
+BigQuery 偵測到結構定義時，在極少數情況下，可能會變更欄位名稱，使其與 GoogleSQL 語法相容。
 
-如要進一步瞭解資料類型轉換，請參閱以下資訊：
+如要瞭解資料類型轉換，請參閱下列文章：
 
 * 在從 Datastore 載入資料時進行[資料類型轉換](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-datastore?hl=zh-tw#data_type_conversion)
-* 在從 Firestore 載入資料時進行[資料類型轉換](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-firestore?hl=zh-tw#data_type_conversion)
+* 從 Firestore 載入資料時的[資料類型轉換](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-firestore?hl=zh-tw#data_type_conversion)
 * [Avro 轉換](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-avro?hl=zh-tw#avro_conversions)
 * [Parquet 轉換](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet?hl=zh-tw#parquet_conversions)
 * [ORC 轉換](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc?hl=zh-tw#orc_conversions)
 
 ## 使用結構定義自動偵測功能載入資料
 
-如要在載入資料時啟用結構定義自動偵測功能，請使用下列任一方法：
+如要在載入資料時啟用結構定義自動偵測功能，請採用下列任一方法：
 
-* 在 Google Cloud 控制台的「Schema」(結構定義) 區段中，針對「Auto detect」(自動偵測) 勾選「Schema and input parameters」(結構定義和輸入參數) 選項。
-* 在 bq 指令列工具中，使用 `bq load` 指令搭配 `--autodetect` 參數。
+* 在 Google Cloud 控制台的「結構定義」部分，勾選「自動偵測」下方的「結構定義和輸入參數」選項。
+* 在 bq 指令列工具中，使用 `bq load` 指令並加上 `--autodetect` 參數。
 
-啟用結構定義自動偵測功能後，BigQuery 會盡可能嘗試自動推導 CSV 和 JSON 檔案的結構定義。自動偵測邏輯會讀取最多前 500 個資料列，推斷結構定義欄位類型。如果存在 `--skip_leading_rows` 標記，系統會略過前導行。欄位類型會根據欄位最多的資料列而定。
-因此只要至少有一列資料包含所有欄位的值，自動偵測功能就會正常運作。
+啟用結構定義自動偵測功能後，BigQuery 會盡可能自動推論 CSV 和 JSON 檔案的結構定義。自動偵測邏輯會讀取最多前 500 列資料，推論結構定義欄位類型。如果出現 `--skip_leading_rows` 旗標，系統會略過前置行。欄位類型取決於欄位最多的資料列。因此，只要至少有一列資料在每個資料欄/欄位中都有值，自動偵測功能就會正常運作。
 
 結構定義自動偵測功能不適用於 Avro 檔案、Parquet 檔案、ORC 檔案、Firestore 匯出檔案或 Datastore 匯出檔案。您將這些檔案載入至 BigQuery 時，系統會透過自述式來源資料自動擷取資料表結構定義。
 
@@ -63,12 +62,12 @@ Avro、Parquet、ORC、Firestore 匯出檔或 Datastore 匯出檔案都屬於自
 2. 點選左側窗格中的 explore「Explorer」。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
-3. 在「Explorer」窗格中展開專案，按一下「Datasets」(資料集)，然後按一下資料集。
-4. 在詳細資料窗格中，按一下 add\_box「建立資料表」。
+3. 在「Explorer」窗格中展開專案，依序點選「Datasets」(資料集) 和資料集。
+4. 在詳細資料窗格中，按一下「add\_box 建立資料表」。
 5. 在「Create table」(建立資料表) 頁面的「Source」(來源) 區段中：
 
-   * 在「Create table from」(使用下列資料建立資料表) 部分，選取來源類型。
-   * 在「Source」(來源) 欄位中，瀏覽檔案/Cloud Storage 值區，或輸入 [Cloud Storage URI](#gcs-uri)。請注意， Google Cloud 控制台中無法加入多個 URI，但支援使用[萬用字元](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#load-wildcards)。Cloud Storage 值區的位置必須與要建立之資料表所屬的資料集位置相同。
+   * 在「Create table from」(建立資料表來源) 部分，選取來源類型。
+   * 在來源欄位中，瀏覽檔案/Cloud Storage bucket，或輸入 [Cloud Storage URI](#gcs-uri)。請注意，您無法在 Google Cloud 控制台中加入多個 URI，但可以使用[萬用字元](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#load-wildcards)。Cloud Storage bucket 必須與資料集位於相同位置，且資料集須包含您要建立的資料表。
    * 在「File format」(檔案格式) 部分，選取 [CSV]  或 [JSON]。
 6. 在「Create table」(建立資料表) 頁面的「Destination」(目的地) 區段中：
 
@@ -95,21 +94,21 @@ PATH_TO_SOURCE
 
 更改下列內容：
 
-* `LOCATION`：位置名稱。`--location` 是選用旗標。舉例來說，如果您在東京區域使用 BigQuery，請將該旗標的值設定為 `asia-northeast1`。您可以使用 [.bigqueryrc 檔案](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool?hl=zh-tw#setting_default_values_for_command-line_flags)設定位置的預設值。
+* `LOCATION`：位置名稱。`--location` 旗標為選用。舉例來說，如果您在東京區域使用 BigQuery，請將旗標值設為 `asia-northeast1`。您可以使用 [.bigqueryrc 檔案](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool?hl=zh-tw#setting_default_values_for_command-line_flags)設定位置的預設值。
 * `FORMAT`：`NEWLINE_DELIMITED_JSON` 或 `CSV`。
-* `DATASET`：特定資料集，該資料集包含您要在當中載入資料的資料表。
-* `TABLE`：您要載入資料的資料表名稱。
-* `PATH_TO_SOURCE`：是 CSV 或 JSON 檔案的位置。
+* `DATASET`：資料集，其中包含您要載入資料的資料表。
+* `TABLE`：要載入資料的資料表名稱。
+* `PATH_TO_SOURCE`：CSV 或 JSON 檔案的位置。
 
 範例：
 
-輸入下列指令，可將 `myfile.csv` 從您的本機載入至儲存於 `mydataset` 資料集內名稱為 `mytable` 的資料表。
+輸入下列指令，將本機電腦中的 `myfile.csv` 載入資料表 `mytable`，並儲存在資料集 `mydataset`。
 
 ```
 bq load --autodetect --source_format=CSV mydataset.mytable ./myfile.csv
 ```
 
-輸入下列指令，可將 `myfile.json` 從您的本機載入至儲存於 `mydataset` 資料集內名稱為 `mytable` 的資料表。
+輸入下列指令，將本機電腦中的 `myfile.json` 載入資料表 `mytable`，並儲存在資料集 `mydataset`。
 
 ```
 bq load --autodetect --source_format=NEWLINE_DELIMITED_JSON \
@@ -118,15 +117,15 @@ mydataset.mytable ./myfile.json
 
 ### API
 
-1. 建立指向來源資料的 `load` 工作。如要瞭解如何建立工作，請參閱「[透過程式執行 BigQuery 工作](https://docs.cloud.google.com/bigquery/docs/running-jobs?hl=zh-tw)」。在 `jobReference` 區段的 `location` 屬性中指定您的位置。
+1. 建立指向來源資料的 `load` 工作。如要瞭解如何建立工作，請參閱「[透過程式輔助方式執行 BigQuery 工作](https://docs.cloud.google.com/bigquery/docs/running-jobs?hl=zh-tw)」。在 `jobReference` 區段的 `location` 屬性中指定您的位置。
 2. 設定 `sourceFormat` 屬性來指定資料格式。如要使用結構定義自動偵測功能，這個值必須設為 `NEWLINE_DELIMITED_JSON` 或 `CSV`。
-3. 使用 `autodetect` 屬性將結構定義自動偵測功能設為 `true`。
+3. 使用 `autodetect` 屬性，將結構定義自動偵測功能設為 `true`。
 
 ### Go
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Go 設定說明操作。詳情請參閱 [BigQuery Go API 參考說明文件](https://godoc.org/cloud.google.com/go/bigquery)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Go 設定操作說明進行操作。詳情請參閱 [BigQuery Go API 參考文件](https://godoc.org/cloud.google.com/go/bigquery)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 import (
@@ -173,9 +172,9 @@ func importJSONAutodetectSchema(projectID, datasetID, tableID string) error {
 
 ### Java
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定說明操作。詳情請參閱 [BigQuery Java API 參考說明文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定操作說明進行操作。詳情請參閱 [BigQuery Java API 參考文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 import com.google.cloud.bigquery.BigQuery;
@@ -289,9 +288,9 @@ public class LoadCsvFromGcsAutodetect {
 
 ### Node.js
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定操作說明進行操作。詳情請參閱 [BigQuery Node.js API 參考文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 // Import the Google Cloud client libraries
@@ -347,9 +346,9 @@ loadJSONFromGCSAutodetect();
 
 ### PHP
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 PHP 設定說明操作。詳情請參閱 [BigQuery PHP API 參考說明文件](https://docs.cloud.google.com/php/docs/reference/cloud-bigquery/latest/BigQueryClient?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 PHP 設定操作說明進行操作。詳情請參閱 [BigQuery PHP API 參考文件](https://docs.cloud.google.com/php/docs/reference/cloud-bigquery/latest/BigQueryClient?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 use Google\Cloud\BigQuery\BigQueryClient;
@@ -398,9 +397,9 @@ function import_from_storage_json_autodetect(
 
 如要啟用結構定義自動偵測功能，請將 [LoadJobConfig.autodetect](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.LoadJobConfig?hl=zh-tw#google_cloud_bigquery_job_LoadJobConfig_autodetect) 屬性設為 `True`。
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定操作說明進行操作。詳情請參閱 [BigQuery Python API 參考文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 from google.cloud import bigquery
@@ -430,9 +429,9 @@ print("Loaded {} rows.".format(destination_table.num_rows))
 
 ### Ruby
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Ruby 設定說明操作。詳情請參閱 [BigQuery Ruby API 參考說明文件](https://googleapis.dev/ruby/google-cloud-bigquery/latest/Google/Cloud/Bigquery.html)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Ruby 設定操作說明進行操作。詳情請參閱 [BigQuery Ruby API 參考文件](https://googleapis.dev/ruby/google-cloud-bigquery/latest/Google/Cloud/Bigquery.html)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 require "google/cloud/bigquery"
@@ -459,15 +458,15 @@ end
 
 ## 自動偵測外部資料來源的結構定義
 
-結構定義自動偵測功能適用於 CSV、JSON 和 Google 試算表外部資料來源。啟用結構定義自動偵測功能後，BigQuery 會盡可能嘗試從來源資料自動推斷結構定義。如果未為這些來源啟用結構定義自動偵測功能，就必須提供明確的結構定義。
+結構定義自動偵測功能適用於 CSV、JSON 和 Google 試算表外部資料來源。啟用結構定義自動偵測功能後，BigQuery 會盡可能自動從來源資料推論結構定義。如未啟用這些來源的結構定義自動偵測功能，則必須提供明確的結構定義。
 
-查詢外部 Avro、Parquet、ORC、Firestore 匯出或 Datastore 匯出檔案時，不需要啟用結構定義自動偵測功能。這些檔案格式為自述式，因此 BigQuery 會自動根據來源資料推論出資料表結構定義。對於 Parquet、Avro 和 ORC 檔案，您可以選擇提供明確的結構定義，覆寫推斷的結構定義。
+查詢外部 Avro、Parquet、ORC、Firestore 匯出檔或 Datastore 匯出檔時，不必啟用結構定義自動偵測功能。這些檔案格式為自述式，因此 BigQuery 會自動根據來源資料推論出資料表結構定義。如果是 Parquet、Avro 和 ORC 檔案，您可以選擇提供明確的結構定義，覆寫推論出的結構定義。
 
-使用 Google Cloud 控制台時，只要勾選「Auto detect」(自動偵測) 的「Schema and input parameters」(結構定義和輸入參數) 選項，即可啟用結構定義自動偵測功能。
+使用 Google Cloud 控制台時，您可以勾選「結構定義和輸入參數」中的「自動偵測」選項，啟用結構定義自動偵測功能。
 
-使用 bq 指令列工具時，您可以在為 CSV、JSON 或 Google 試算表資料建立[資料表定義檔](https://docs.cloud.google.com/bigquery/external-table-definition?hl=zh-tw)時，啟用結構定義自動偵測功能。使用 bq 工具建立資料表定義檔時，請將 `--autodetect` 標記傳送至 `mkdef` 指令，啟用結構定義自動偵測功能，或傳送 `--noautodetect` 標記停用自動偵測。
+使用 bq 指令列工具，為 CSV、JSON 或 Google 試算表資料建立[資料表定義檔案](https://docs.cloud.google.com/bigquery/external-table-definition?hl=zh-tw)時，可以啟用結構定義自動偵測功能。使用 bq 工具建立資料表定義檔案時，請將 `--autodetect` 旗標傳遞至 `mkdef` 指令，啟用結構定義自動偵測功能，或傳遞 `--noautodetect` 旗標停用自動偵測功能。
 
-當您使用 `--autodetect` 旗標時，資料表定義檔中的 `autodetect` 設定會設為 `true`。當您使用 `--noautodetect` 旗標時，資料表定義檔中的 `autodetect` 設定會設為 `false`。如果您在建立資料表定義時，沒有提供外部資料來源的結構定義，而且未使用 `--noautodetect` 或 `--autodetect` 旗標，則 `autodetect` 設定會預設為 `true`。
+當您使用 `--autodetect` 旗標時，資料表定義檔中的 `autodetect` 設定會設為 `true`。當您使用 `--noautodetect` 旗標時，資料表定義檔中的 `autodetect` 設定會設為 `false`。如果您在建立資料表定義時，未提供外部資料來源的結構定義定義，且未使用 `--noautodetect` 或 `--autodetect` 旗標，則 `autodetect` 設定會預設為 `true`。
 
 當您使用 API 建立資料表定義檔時，請將 `autodetect` 屬性值設為 `true` 或 `false`。將 `autodetect` 設為 `true` 可啟用自動偵測功能；將 `autodetect` 設為 `false` 即可停用自動偵測功能。
 
@@ -483,31 +482,31 @@ BigQuery 在開啟檔案時，可識別與 gzip 相容的檔案壓縮格式。
 
 BigQuery 會根據來源資料的格式偵測日期和時間值。
 
-`DATE` 欄中的值必須採用 `YYYY-MM-DD` 格式。
+`DATE` 欄中的值必須採用以下格式：`YYYY-MM-DD`。
 
-`TIME` 欄中的值必須採用下列格式：`HH:MM:SS[.SSSSSS]` (秒數的小數部分為選填)。
+`TIME` 欄中的值必須採用以下格式：`HH:MM:SS[.SSSSSS]` (秒數的小數部分可省略)。
 
-對於 `TIMESTAMP` 欄，BigQuery 可偵測多種時間戳記格式，包括但不限於以下格式：
+對於 `TIMESTAMP` 資料欄，BigQuery 會偵測多種時間戳記格式，包括但不限於：
 
 * `YYYY-MM-DD HH:MM`
 * `YYYY-MM-DD HH:MM:SS`
 * `YYYY-MM-DD HH:MM:SS.SSSSSS`
 * `YYYY/MM/DD HH:MM`
 
-時間戳記也可包含 UTC 偏移或 UTC 區域指定元 (「Z」)。
+時間戳記也可以包含世界標準時間偏移或世界標準時間時區指定碼 (「Z」)。
 
-以下是 BigQuery 會自動偵測為時間戳記值的範例：
+以下是 BigQuery 會自動偵測為時間戳記值的一些範例：
 
 * 2018-08-19 12:11
 * 2018-08-19 12:11:35.22
 * 2018/08/19 12:11
 * 2018-08-19 07:11:35.220 -05:00
 
-如果未啟用自動偵測功能，且值採用上述範例未列出的格式，則 BigQuery 只能將資料欄載入為 `STRING` 資料類型。您可以啟用自動偵測功能，讓 BigQuery 將這些資料欄辨識為時間戳記。舉例來說，如果啟用自動偵測功能，BigQuery 只會將 `2025-06-16T16:55:22Z` 載入為時間戳記。
+如果未啟用自動偵測功能，且值的格式不在上述範例中，BigQuery 只能將資料欄載入為 `STRING` 資料類型。您可以啟用自動偵測功能，讓 BigQuery 將這些資料欄辨識為時間戳記。舉例來說，只有在啟用自動偵測功能時，BigQuery 才會將 `2025-06-16T16:55:22Z` 載入為時間戳記。
 
-或者，您也可以先預先處理來源資料，再載入資料。舉例來說，如果您要從試算表匯出 CSV 資料，請將日期格式設為與這裡顯示的範例相符。您也可以在將資料載入 BigQuery 後進行轉換。
+或者，您也可以在載入來源資料前，先預先處理資料。舉例來說，如果您從試算表匯出 CSV 資料，請將日期格式設為符合此處顯示的其中一個範例。您也可以在將資料載入 BigQuery 後進行轉換。
 
-### 自動偵測 CSV 資料的結構定義
+### CSV 資料的結構定義自動偵測功能
 
 #### CSV 分隔符號
 
@@ -519,15 +518,15 @@ BigQuery 可偵測以下分隔符號：
 
 #### CSV 標頭
 
-BigQuery 會將檔案的第一個資料列與檔案中的其他資料列做比較，藉此推測出標題。如果第一行只包含字串，但其他行包含其他資料類型，BigQuery 會假設第一個資料列是標題資料列。BigQuery 會根據標題列中的欄位名稱指派資料欄名稱。系統可能會修改名稱，以符合 BigQuery 資料欄的[命名規則](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#column_names)。例如，空格會替換為底線。
+BigQuery 會比較檔案的第一列與其他列，藉此推論標頭。如果第一行只包含字串，其他行包含其他資料類型，BigQuery 會假設第一列是標頭列。BigQuery 會根據標頭列中的欄位名稱指派資料欄名稱。系統可能會修改名稱，以符合 BigQuery 資料欄的[命名規則](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#column_names)。例如，空格會替換為底線。
 
-否則，BigQuery 會將第一列視為資料列，並指派一般資料欄名稱，例如 `string_field_1`。請注意，資料表建立完成後，您無法在結構定義中更新資料欄名稱，但可以[手動變更名稱](https://docs.cloud.google.com/bigquery/docs/manually-changing-schemas?hl=zh-tw#changing_a_columns_name)。您也可以提供明確的結構定義，而非使用自動偵測功能。
+否則，BigQuery 會假設第一列是資料列，並指派一般資料欄名稱，例如 `string_field_1`。請注意，資料表建立後，您無法在結構定義中更新資料欄名稱，但可以[手動變更名稱](https://docs.cloud.google.com/bigquery/docs/manually-changing-schemas?hl=zh-tw#changing_a_columns_name)。另一個選項是提供明確的結構定義，而非使用自動偵測功能。
 
-您可能會有包含標題列的 CSV 檔案，其中所有資料欄位都是字串。在這種情況下，BigQuery 不會自動偵測到第一列是標題。使用 `--skip_leading_rows` 選項可略過標題列。否則系統會將標頭匯入為資料。此外，也請考慮在此情況下提供明確的結構定義，以便指派資料欄名稱。
+您可能有一個包含標頭列的 CSV 檔案，其中所有資料欄位都是字串。在這種情況下，BigQuery 不會自動偵測第一列是否為標頭。使用 `--skip_leading_rows` 選項略過標頭列。否則，標頭會以資料形式匯入。在這種情況下，也建議您提供明確的結構定義，以便指派資料欄名稱。
 
 #### CSV 引用的新行
 
-BigQuery 會偵測 CSV 欄位內引用的新行字元，但不會將引用的新行字元解讀為資料列邊界。
+BigQuery 會偵測 CSV 欄位中以引號括住的換行字元，且不會將該字元解讀為資料列邊界。
 
 #### 疑難排解
 
@@ -536,17 +535,17 @@ BigQuery 會偵測 CSV 欄位內引用的新行字元，但不會將引用的新
 **錯誤：**`Error while reading data, error message: CSV processing encountered
 too many errors, giving up.`
 
-如果 CSV 檔案的標題列含有字串值，但 BigQuery 未偵測到標題列，就可能發生這個錯誤。您可以使用 `--skip_leading_rows` 選項略過標題列。
+如果 CSV 檔案含有字串值的標頭列，且 BigQuery 未偵測到該列為標頭，就可能發生這項錯誤。您可以使用 `--skip_leading_rows` 選項略過標題列。
 
-### 自動偵測 JSON 資料的結構定義
+### JSON 資料的結構定義自動偵測
 
 #### JSON 巢狀和重複欄位
 
-BigQuery 會推斷 JSON 檔案中的巢狀和重複欄位。如果欄位值是 JSON 物件，BigQuery 會將該資料欄載入為 `RECORD` 型別。如果欄位值是陣列，BigQuery 會將該欄位載入為重複欄位。如需包含巢狀和重複資料的 JSON 資料範例，請參閱「[載入巢狀和重複的 JSON 資料](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json?hl=zh-tw#loading_nested_and_repeated_json_data)」。
+BigQuery 會推論 JSON 檔案中的巢狀和重複欄位。如果欄位值是 JSON 物件，BigQuery 會將資料欄載入為 `RECORD` 類型。如果欄位值是陣列，BigQuery 會將資料欄載入為重複資料欄。如需含有巢狀和重複資料的 JSON 資料範例，請參閱「[載入巢狀和重複的 JSON 資料](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json?hl=zh-tw#loading_nested_and_repeated_json_data)」。
 
 #### 字串轉換
 
-如果啟用結構定義自動偵測功能，BigQuery 會盡可能將字串轉換為布林值、數值或日期/時間類型。舉例來說，使用下列 JSON 資料時，結構定義自動偵測功能會將 `id` 欄位轉換為 `INTEGER` 資料欄：
+如果啟用結構定義自動偵測功能，BigQuery 會盡可能將字串轉換為布林值、數值或日期/時間類型。舉例來說，使用下列 JSON 資料時，結構定義自動偵測功能會將 `id` 欄位轉換為 `INTEGER` 欄：
 
 ```
 { "name":"Alice","id":"12"}
@@ -554,11 +553,11 @@ BigQuery 會推斷 JSON 檔案中的巢狀和重複欄位。如果欄位值是 J
 { "name":"Charles","id":"45"}
 ```
 
-詳情請參閱[從 Cloud Storage 載入 JSON 資料](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json?hl=zh-tw)。
+詳情請參閱「[從 Cloud Storage 載入 JSON 資料](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json?hl=zh-tw)」。
 
-### 自動偵測 Google 試算表的結構定義
+### Google 試算表的結構定義自動偵測功能
 
-如果是試算表，BigQuery 會自動偵測第一列是否為標題列，與 CSV 檔案的自動偵測功能類似。如果第一行是標題，BigQuery 會根據標題列中的欄位名稱指派資料欄名稱，並略過該列。系統可能會修改名稱，以符合 BigQuery 中資料欄的[命名規則](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#column_names)。例如，空格會替換為底線。
+如果是 Google 試算表，BigQuery 會自動偵測第一列是否為標題列，類似於 CSV 檔案的自動偵測功能。如果第一行判定為標頭，BigQuery 會根據標頭列中的欄位名稱指派資料欄名稱，並略過該列。系統可能會修改名稱，以符合 BigQuery 資料欄的[命名規則](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#column_names)。例如，空格會替換為底線。
 
 ## 資料表安全性
 
@@ -571,11 +570,11 @@ BigQuery 會推斷 JSON 檔案中的巢狀和重複欄位。如果欄位值是 J
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-20 (世界標準時間)。
+上次更新時間：2026-10-19 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-20 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-19 (世界標準時間)。"],[],[]]

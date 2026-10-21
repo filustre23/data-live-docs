@@ -27,7 +27,7 @@ For example, the following query generates summaries of BBC news articles:
 ```
 SELECT
   title,
-  AI.GENERATE(CONCAT("Summarize in one sentence: ", body), endpoint => 'gemini-2.5-pro').result AS article_summary
+  AI.GENERATE(CONCAT("Summarize in one sentence: ", body)).result AS article_summary
 FROM `bigquery-public-data.bbc_news.fulltext`
 LIMIT 3;
 ```
@@ -39,7 +39,6 @@ name, age, and phone number from an unstructured description:
 ```
 SELECT
   AI.GENERATE(patient_description,
-    endpoint => 'gemini-2.5-pro',
     output_schema => 'name STRING, age INT64, phone_number STRING')
 FROM mydataset.patient_data;
 ```
@@ -58,6 +57,20 @@ of input:
 * Combinations of unstructured data, including text, images, audio, video, and
   PDFs, represented by a `STRUCT` that contains
   `STRING`, `ARRAY<STRING>`, `ObjectRef`, and `ARRAY<ObjectRef>` values.
+
+Inside a [VPC Service Controls](/bigquery/docs/vpc-sc) perimeter, `AI.GENERATE`
+can't process `ObjectRef` values that use
+[delegated access](/bigquery/docs/work-with-objectref#delegated-access), such as
+the `ref` column of an
+[object table](/bigquery/docs/object-table-introduction). Delegated access
+generates a signed HTTPS URL for the object, and
+Agent Platform blocks HTTP and HTTPS fetches
+for projects inside a perimeter, so the function returns the error
+`INVALID_ARGUMENT: HTTP links are not supported for requests restricted by VPCSC.`
+in the `status` field of its output. To analyze the object, pass a
+single-argument `OBJ.MAKE_REF(uri)` value instead, which uses
+[direct access](/bigquery/docs/work-with-objectref#direct-access) and sends the
+Cloud Storage URI to the model without generating a signed URL.
 
 When you analyze unstructured data, that data must meet the following
 requirements:
@@ -126,8 +139,8 @@ AI.GENERATE(
   BigQuery ML automatically identifies and uses the full endpoint
   of the model. If you don't specify an `ENDPOINT` value,
   BigQuery ML selects a recent stable version of
-  Gemini to use. Currently, the default endpoint is
-  `gemini-2.5-flash`.
+  Gemini to use. The default endpoint is
+  `gemini-3.5-flash-lite`.
   You can also specify the
   [global endpoint](/vertex-ai/generative-ai/docs/learn/locations#use_the_global_endpoint).
   For example, specify the following endpoint:
@@ -140,9 +153,29 @@ AI.GENERATE(
   processing location, because when you use the global endpoint, you can't
   control or know the region where your processing requests are handled.
 
-  Agent Platform doesn't support regional endpoints for
-  Gemini 3 models. For these models, use `global`, `us`, or
-  `eu` as the location.
+  BigQuery supports the following models:
+  + `gemini-4-argon`
+  + `gemini-3.8-flash`
+  + `gemini-3.7-flash`
+  + `gemini-3.6-flash`
+  + `gemini-3.5-flash-lite`
+  + `gemini-3.5-flash`
+  + `gemini-3.1-flash-lite`Agent Platform only supports multi-regional endpoints for
+  these models. Regional endpoints aren't supported.
+  If you specify a short endpoint name that omits the region, such as `gemini-3.5-flash`,
+  then BigQuery selects an endpoint according to the following rules:
+  + If your query is run in the `us` region, or any single region in the US, then
+    BigQuery uses the `us` endpoint.
+  + If your query is run in the `eu` region, or any single region in the EU other than
+    `europe-west2` or `europe-west6`, then BigQuery
+    uses the `eu` endpoint.
+  + For all other locations, including `europe-west2` and
+    `europe-west6`, BigQuery uses the `global` endpoint.To specify a specific endpoint, use a fully qualified multi-regional endpoint name in one of the
+  following formats:
+  + `https://aiplatform.us.rep.googleapis.com/v1/projects/PROJECT_ID/locations/us/publishers/google/models/MODEL_ID`
+  + `https://aiplatform.eu.rep.googleapis.com/v1/projects/PROJECT_ID/locations/eu/publishers/google/models/MODEL_ID`
+  + `https://aiplatform.googleapis.com/v1/projects/PROJECT_ID/locations/global/publishers/google/models/MODEL_ID`If your query runs in the `asia-south1` region, then you must use the fully qualified
+  global endpoint name.
 
   Using Gemini 2.5 and later models incurs charges for the
   [thinking process](/vertex-ai/generative-ai/docs/thinking).
@@ -166,17 +199,25 @@ AI.GENERATE(
   argument value.
 * `OUTPUT_SCHEMA`: a `STRING` value that specifies the
   schema of the output as a comma-separated list of fields. Each field consists
-  of a name, a data type, and an optional `OPTIONS` clause in which you can
-  specify a description of the field.
+  of a name, a data type, an optional `NOT NULL` specification, and an optional
+  `OPTIONS` clause in which you can specify a description of the field or an
+  allowable set of enum values. When a
+  field is missing from the input data, the output field might be `NULL`. To
+  ensure that a field always contains a value for missing data,
+  such as `unknown` or an inferred value, specify `NOT NULL`.
+
   The following example shows how to specify an output schema that contains
-  two string fields, `name` and `state`, with a description for the `state`
-  field:
+  two string fields, `name` and `state`. The `name` field is never `NULL` and
+  the `state` field has a description and set of allowable enum values. Since
+  `enum` is a reserved keyword, it must be enclosed in backticks.
 
   ```
-  OUTPUT_SCHEMA => '''
-  name STRING,
-  state STRING OPTIONS(description = 'The 2-letter abbreviation of the state name')
   '''
+  name NOT NULL STRING,
+  state STRING OPTIONS(
+    description = 'The 2-letter abbreviation of the state name',
+    `enum` = ['CA', 'NY', 'WA'])
+  ''' AS output_schema
   ```
 
   Supported data types include `STRING`, `INT64`, `FLOAT64`, `BOOL`, `ARRAY`,
@@ -253,8 +294,7 @@ into French:
 SELECT
   body,
   AI.GENERATE(
-    CONCAT("Translate into French ", body),
-    endpoint => 'gemini-2.5-pro').result AS translation
+    CONCAT("Translate into French ", body)).result AS translation
 FROM
   `bigquery-public-data.bbc_news.fulltext`
 WHERE
@@ -274,7 +314,6 @@ the output:
 SELECT
   AI.GENERATE(
     input,
-    endpoint => 'gemini-2.5-pro',
     output_schema => '''name STRING,
                         age INT64,
                         address STRUCT<street_address STRING, city STRING, state STRING, zip_code STRING>,
@@ -308,7 +347,6 @@ SELECT
   complaint_id,
   AI.GENERATE(
     CONCAT('Analyze the following complaint: ', consumer_complaint_narrative),
-    endpoint => 'gemini-2.5-pro',
     output_schema => """
     grievance_subject ARRAY<STRING> OPTIONS(description = 'a list of grievance subjects'),
     complaint_type STRING OPTIONS(description = 'classify the complaint type as Billing Dispute, Service Issue, or Reporting Error')
@@ -336,202 +374,4 @@ The result is similar to the following:
 
 ### Process images in a Cloud Storage bucket
 
-The following query creates an external table from images of pet products
-stored in a publicly available Cloud Storage bucket:
-
-```
-CREATE SCHEMA IF NOT EXISTS bqml_tutorial;
-
-CREATE OR REPLACE EXTERNAL TABLE bqml_tutorial.product_images
-  WITH CONNECTION DEFAULT OPTIONS (
-    object_metadata = 'SIMPLE',
-    uris = ['gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/images/*.png']);
-```
-
-You can use `AI.GENERATE` to describe images and what's in them.
-To do that, construct your prompt from a natural language instruction
-and an `ObjectRef` of the image. The following query asks
-Gemini what each image is. It specifies an
-`output_schema` to structure the results with one column to
-name the items in the image and another column to provide
-a description of the image.
-
-```
-SELECT
-  uri,
-  OBJ.GET_READ_URL(ref).url AS signed_url,
-  AI.GENERATE(
-    ("What is this: ", ref),
-    endpoint => 'gemini-2.5-pro',
-    output_schema =>
-      "image_description STRING, entities_in_the_image ARRAY<STRING>").*
-FROM bqml_tutorial.product_images
-WHERE uri LIKE "%aquarium%";
-```
-
-This result is similar to the following:
-
-### Use grounding
-
-The following queries shows how to set the `model_params` argument to use
-Google Search or Google Maps grounding for the request.
-You can only use grounding with Gemini 2.0 or later models.
-
-Set Google Search grounding:
-
-```
-SELECT
-  name,
-  AI.GENERATE(
-    ('Please check the weather of ', name, ' for today.'),
-    endpoint => 'gemini-2.5-pro',
-    model_params => JSON '{"tools": [{"googleSearch": {}}]}'
-  )
-FROM UNNEST(['Seattle', 'NYC', 'Austin']) AS name;
-```
-
-Set Google Maps grounding:
-
-```
-SELECT
-  name,
-  AI.GENERATE(
-    ('Please find some tourist attractions in ', name),
-    endpoint => 'gemini-2.5-pro',
-    model_params => JSON '{"tools": [{"googleMaps": {}}]}'
-  )
-FROM UNNEST(['Seattle', 'NYC', 'Austin']) AS name;
-```
-
-### Disable the thinking budget
-
-Disabling the thinking budget is useful for tasks that don't require
-complex reasoning. By setting the `thinking_budget` to `0`, you can reduce the
-model's response latency and lower the cost of the request by avoiding
-additional "thinking" tokens. For more information, see
-[Thinking budgets](https://ai.google.dev/gemini-api/docs/thinking#set-budget).
-
-The following query shows how to use the `model_params` argument to set the
-model's thinking budget to `0` for the request:
-
-```
-SELECT
-  AI.GENERATE(
-    ('What is the capital of Monaco?'),
-    endpoint => 'gemini-2.5-flash',
-    model_params => JSON '{"generation_config":{"thinking_config": {"thinking_budget": 0}}}');
-```
-
-### Use a context cache and low thinking level
-
-For Gemini 3.0 and later models, the `thinking_level` parameter replaces
-the `thinking_budget` parameter. Setting a lower thinking level prioritizes
-latency and cost savings for the instruction following. For more
-information, see [Thinking levels](https://ai.google.dev/gemini-api/docs/thinking#thinking-levels).
-
-The following query shows how to use the `model_params` argument to specify
-a [context cache](/vertex-ai/generative-ai/docs/context-cache/context-cache-overview)
-and use a low thinking level:
-
-```
-SELECT
-  AI.GENERATE(
-    "Give me a summary of the document in context.",
-    endpoint =>
-      "projects/PROJECT_NUMBER/locations/global/publishers/google/models/GEMINI_ENDPOINT",
-    model_params =>
-      JSON
-        '''{"cachedContent": "projects/PROJECT_NUMBER/locations/LOCATION/cachedContents/CACHED_CONTENT_ID",
-           "generation_config": {"thinking_config":{"thinking_level": "LOW"}}}''')
-```
-
-## Manage inference costs
-
-Inference using the Vertex AI Gemini model can be a
-relatively expensive operation. Due to the nature of query processing in
-BigQuery, the actual number of rows processed by the model might differ
-from what you expect, particularly when running complex queries, such as
-`JOIN` or `ORDER BY ... LIMIT` clauses. To strictly control the number of rows
-processed by your complex queries, we
-recommended that you write the results of your query
-to a separate table beforehand, and then
-perform the Gemini inference directly on that materialized table.
-For information about how to view inference charges that you incur in Agent Platform, see
-[Track costs](/bigquery/docs/generative-ai-overview#track_costs). To estimate
-the token count of text input, use the
-[`AI.COUNT_TOKENS` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-count-tokens).
-
-## Use Agent Platform Provisioned Throughput
-
-You can use
-[Agent Platform Provisioned Throughput](/vertex-ai/generative-ai/docs/provisioned-throughput/overview)
-with the `AI.GENERATE` function to provide consistent high throughput for
-requests. The remote model that you reference in the `AI.GENERATE` function
-must use a
-[supported Gemini model](/vertex-ai/generative-ai/docs/provisioned-throughput/supported-models)
-in order for you to use Provisioned Throughput.
-
-To use Provisioned Throughput,
-[calculate your Provisioned Throughput requirements](/vertex-ai/generative-ai/docs/provisioned-throughput/measure-provisioned-throughput)
-and then
-[purchase Provisioned Throughput](/vertex-ai/generative-ai/docs/provisioned-throughput/purchase-provisioned-throughput)
-quota before running the `AI.GENERATE` function. When you purchase
-Provisioned Throughput, do the following:
-
-* For **Model**, select the same Gemini model as the one used
-  by the remote model that you reference in the `AI.GENERATE` function.
-* For **Region**, select the same region as the dataset that contains
-  the remote model that you reference in the `AI.GENERATE` function, with
-  the following exceptions:
-
-  + If the dataset is in the `US` multi-region, select the `us-central1`
-    region.
-  + If the dataset is in the `EU` multi-region, select the `europe-west4`
-    region.
-
-After you submit the order, wait for the order to be approved and appear on the
-[**Orders**](https://console.cloud.google.com/vertex-ai/provisioned-throughput) page.
-
-After you have purchased Provisioned Throughput quota, use the
-`REQUEST_TYPE` argument to determine how the `AI.GENERATE` function uses
-the quota.
-
-## Locations
-
-You can run `AI.GENERATE` in all of the
-[regions](/vertex-ai/generative-ai/docs/learn/locations#google_model_endpoint_locations)
-that support Gemini models, and also in the `US` and `EU`
-multi-regions.
-
-## Quotas and limits
-
-For quota and limit information, see
-[Generative AI functions](/bigquery/quotas#generative_ai_functions) in the
-BigQuery quotas and limits reference.
-
-## What's next
-
-* For more information about using Agent Platform models to
-  generate text and embeddings, see
-  [Generative AI overview](/bigquery/docs/generative-ai-overview).
-* For more information about using Cloud AI APIs to perform AI tasks, see
-  [AI application overview](/bigquery/docs/ai-application-overview).
-* For more information about supported SQL statements and functions for
-  generative AI models, see
-  [End-to-end user journeys for generative AI models](/bigquery/docs/e2e-journey-genai).
-
-
-
-
-Send feedback
-
-Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
-
-Last updated 2026-07-17 UTC.
-
-
-
-
-Need to tell us more?
-
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-07-17 UTC."],[],[]]
+The following query creates an external table from images of pet produ

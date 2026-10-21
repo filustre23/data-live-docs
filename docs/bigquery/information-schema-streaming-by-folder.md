@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -18,7 +18,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 `INFORMATION_SCHEMA.STREAMING_TIMELINE_BY_FOLDER` 檢視畫面會顯示目前專案上層資料夾 (包括子資料夾) 的每分鐘匯總串流統計資料。
 
-您可以查詢`INFORMATION_SCHEMA`串流檢視畫面，擷取使用舊版 [`tabledata.insertAll` 方法](https://docs.cloud.google.com/bigquery/docs/reference/v2/tabledata/insertAll?hl=zh-tw) (而非 [BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api?hl=zh-tw)) 將資料串流至 BigQuery 的歷史和即時資訊。如要進一步瞭解如何以串流方式將資料傳入 BigQuery，請參閱[以串流方式將資料傳入 BigQuery](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery?hl=zh-tw) 一文。
+您可以查詢`INFORMATION_SCHEMA`串流檢視畫面，擷取使用 [BigQuery Storage Write API (REST)](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery?hl=zh-tw) 將資料串流至 BigQuery 的歷史和即時資訊。如要進一步瞭解如何以串流方式將資料傳入 BigQuery，請參閱[以串流方式將資料傳入 BigQuery](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery?hl=zh-tw)。
 
 ## 必要權限
 
@@ -34,19 +34,19 @@ Google uses AI technology to translate content into your preferred language. AI 
 * `roles/bigquery.metadataViewer`
 * `roles/bigquery.resourceAdmin`
 
-**注意：**「擁有者」或「編輯者」這些[基本角色](https://docs.cloud.google.com/bigquery/docs/access-control-basic-roles?hl=zh-tw)*不*包含必要的 `bigquery.tables.list` 權限。
+**注意：**「擁有者」或「編輯者」[基本角色](https://docs.cloud.google.com/bigquery/docs/access-control-basic-roles?hl=zh-tw)*不*包含必要的 `bigquery.tables.list` 權限。
 
-如要進一步瞭解 BigQuery 權限，請參閱「[使用 IAM 控管存取權](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)」。
+如要進一步瞭解 BigQuery 權限，請參閱[使用 IAM 控管存取權](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)。
 
 ## 結構定義
 
-查詢 `INFORMATION_SCHEMA` 串流檢視區時，查詢結果會包含以串流方式將資料傳入 BigQuery 的歷史和即時資訊。下列檢視表中的每個資料列，都代表串流至特定資料表的統計資料，並以 `start_timestamp` 為起始時間，每隔一分鐘匯總一次。統計資料會依錯誤代碼分組，因此每個時間戳記和表格組合，在每分鐘間隔內遇到的每個錯誤代碼都會有一列。如果要求成功，錯誤代碼會設為 `NULL`。如果特定時間範圍內沒有任何資料串流至資料表，該資料表就不會顯示相應時間戳記的資料列。`INFORMATION_SCHEMA.STREAMING_TIMELINE_BY_FOLDER` 檢視表具有下列結構定義：
+查詢 `INFORMATION_SCHEMA` 串流檢視區塊時，查詢結果會包含將資料串流至 BigQuery 的歷史和即時資訊。下列檢視表中的每個資料列，都代表串流至特定資料表的統計資料，並以 `start_timestamp` 為起始時間，每隔一分鐘匯總一次。統計資料會依錯誤代碼分組，因此每個時間戳記和表格組合，在每分鐘間隔期間遇到的每個錯誤代碼都會有一列。如果要求成功，錯誤代碼會設為 `NULL`。如果在特定時間範圍內，沒有任何資料串流至資料表，則該資料表不會顯示相應時間戳記的資料列。`INFORMATION_SCHEMA.STREAMING_TIMELINE_BY_FOLDER` 檢視表具有下列結構定義：
 
 | 資料欄名稱 | 資料類型 | 值 |
 | --- | --- | --- |
 | `start_timestamp` | `TIMESTAMP` | *(分區資料欄)* 匯總統計資料的 1 分鐘間隔開始時間戳記。 |
-| `folder_numbers` | `REPEATED INTEGER` | 含有專案的資料夾 ID 編號，從直接含有專案的資料夾開始，接著是含有子資料夾的資料夾，依此類推。舉例來說，如果 `folder_numbers` 是 `[1, 2, 3]`，則資料夾 `1` 會立即包含專案，資料夾 `2` 包含 `1`，而資料夾 `3` 包含 `2`。這個欄位只會在 `STREAMING_TIMELINE_BY_FOLDER` 中填入資料。 |
-| `project_id` | `STRING` | *(叢集資料欄)* 專案 ID。 |
+| `folder_numbers` | `REPEATED INTEGER` | 含有專案的資料夾 ID 編號，從直接含有專案的資料夾開始，接著是含有子資料夾的資料夾，依此類推。舉例來說，如果 `folder_numbers` 是 `[1, 2, 3]`，則資料夾 `1` 會立即包含專案，資料夾 `2` 包含 `1`，資料夾 `3` 包含 `2`。這個資料欄只會在 `STREAMING_TIMELINE_BY_FOLDER` 中填入資料。 |
+| `project_id` | `STRING` | *(叢集資料欄)* 專案的 ID。 |
 | `project_number` | `INTEGER` | 專案編號。 |
 | `dataset_id` | `STRING` | *(叢集資料欄)* 資料集 ID。 |
 | `table_id` | `STRING` | *(叢集欄)* 資料表的 ID。 |
@@ -71,16 +71,16 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 取代下列項目：
 
-* 選用：`PROJECT_ID`：您的 Google Cloud 專案 ID。如未指定，系統會使用預設專案。
+* 選用：`PROJECT_ID`： Google Cloud 專案 ID。如未指定，系統會使用預設專案。
 * `REGION`：任何[資料集區域名稱](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
-  例如：`` `region-us` ``。**注意：**您必須使用[區域限定詞](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw#region_qualifier)查詢 `INFORMATION_SCHEMA` 檢視畫面。查詢執行位置必須與 `INFORMATION_SCHEMA` 檢視區塊的區域相符。
+  例如：`` `region-us` ``。**注意：**您必須使用[區域限定詞](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw#region_qualifier)查詢 `INFORMATION_SCHEMA` 檢視畫面。查詢執行位置必須與`INFORMATION_SCHEMA`檢視區塊的區域相符。
 
-**示例**
+**範例**
 
 * 如要查詢美國多區域的資料，請使用
   `region-us.INFORMATION_SCHEMA.STREAMING_TIMELINE_BY_FOLDER`
 * 如要查詢歐盟多區域的資料，請使用 `region-eu.INFORMATION_SCHEMA.STREAMING_TIMELINE_BY_FOLDER`
-* 如要查詢 asia-northeast1 地區的資料，請使用
+* 如要查詢 asia-northeast1 區域的資料，請使用
   `region-asia-northeast1.INFORMATION_SCHEMA.STREAMING_TIMELINE_BY_FOLDER`
 
 如需可用地區清單，請參閱「[資料集位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)」。
@@ -89,7 +89,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ##### 示例 1：最近的串流失敗
 
-以下範例會計算專案資料夾中所有資料表在過去 30 分鐘內，每分鐘的失敗要求總數，並依錯誤代碼細分：
+以下範例會計算專案資料夾中所有資料表在過去 30 分鐘內每分鐘的失敗要求總數，並依錯誤代碼細分：
 
 ```
 SELECT
@@ -224,11 +224,11 @@ LIMIT 10;
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-13 (世界標準時間)。
+上次更新時間：2026-10-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-13 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]

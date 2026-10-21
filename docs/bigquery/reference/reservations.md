@@ -49,7 +49,7 @@ BOMs, see [The Google Cloud Platform Libraries BOM](https://cloud.google.com/jav
     <dependency>
       <groupId>com.google.cloud</groupId>
       <artifactId>libraries-bom</artifactId>
-      <version>26.83.0</version>
+      <version>26.90.0</version>
       <type>pom</type>
       <scope>import</scope>
     </dependency>
@@ -68,7 +68,7 @@ If you are using [Gradle](https://gradle.org/),
 add the following to your dependencies:
 
 ```
-implementation platform('com.google.cloud:libraries-bom:26.83.0')
+implementation platform('com.google.cloud:libraries-bom:26.90.0')
 
 implementation 'com.google.cloud:google-cloud-bigqueryreservation'
 ```
@@ -77,7 +77,7 @@ If you are using [sbt](https://www.scala-sbt.org/), add
 the following to your dependencies:
 
 ```
-libraryDependencies += "com.google.cloud" % "google-cloud-bigqueryreservation" % "2.95.0"
+libraryDependencies += "com.google.cloud" % "google-cloud-bigqueryreservation" % "2.100.0"
 ```
 
 If you're using Visual Studio Code or IntelliJ, you can add client libraries to your
@@ -230,69 +230,5 @@ func main() {
 // printCapacityCommitments iterates through the capacity commitments and returns a byte buffer with details.
 func reportCapacityCommitments(ctx context.Context, client *reservation.Client, projectID, location string) (string, error) {
 	var buf bytes.Buffer
-	fmt.Fprintf(&buf, "Capacity commitments in project %s in location %s:\n", projectID, location)
-
-	req := &reservationpb.ListCapacityCommitmentsRequest{
-		Parent: fmt.Sprintf("projects/%s/locations/%s", projectID, location),
-	}
-	totalCommitments := 0
-	it := client.ListCapacityCommitments(ctx, req)
-	for {
-		commitment, err := it.Next()
-		if err == iterator.Done {
-			break
-		}
-		if err != nil {
-			return "", err
-		}
-		fmt.Fprintf(&buf, "\tCommitment %s in state %s\n", commitment.GetName(), commitment.GetState().String())
-		totalCommitments++
-	}
-	fmt.Fprintf(&buf, "\n%d commitments processed.\n", totalCommitments)
-	return buf.String(), nil
-}
-
-// printReservations iterates through reservations defined in an admin project.
-func reportReservations(ctx context.Context, client *reservation.Client, projectID, location string) (string, error) {
-	var buf bytes.Buffer
-	fmt.Fprintf(&buf, "Reservations in project %s in location %s:\n", projectID, location)
-
-	req := &reservationpb.ListReservationsRequest{
-		Parent: fmt.Sprintf("projects/%s/locations/%s", projectID, location),
-	}
-	totalReservations := 0
-	it := client.ListReservations(ctx, req)
-	for {
-		reservation, err := it.Next()
-		if err == iterator.Done {
-			break
-		}
-		if err != nil {
-			return "", err
-		}
-		fmt.Fprintf(&buf, "\tReservation %s has %d slot capacity.\n", reservation.GetName(), reservation.GetSlotCapacity())
-		totalReservations++
-	}
-	fmt.Fprintf(&buf, "\n%d reservations processed.\n", totalReservations)
-	return buf.String(), nil
-}
-```
-
-### Java
-
-```
-import com.google.cloud.bigquery.reservation.v1.ReservationServiceClient;
-import java.io.IOException;
-
-public class QuickstartSample {
-
-  public static void main(String... args) throws Exception {
-    // TODO(developer): Replace these variables before running the sample.
-    String projectId = "YOUR_PROJECT_ID";
-    String location = "LOCATION";
-    quickStartSample(projectId, location);
-  }
-
-  public static void quickStartSample(String projectId, String location) throws IOException {
-    try (ReservationServic
+	
 ```

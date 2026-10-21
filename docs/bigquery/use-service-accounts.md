@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -77,7 +77,7 @@ BigQuery 資料移轉服務可使用服務帳戶憑證，透過下列項目進�
 
 ### 控制台
 
-下列程序會更新資料移轉設定，改為以服務帳戶 (而非個別使用者帳戶) 進行驗證。
+下列程序會更新資料移轉設定，以服務帳戶 (而非個別使用者帳戶) 進行驗證。
 
 1. 前往 Google Cloud 控制台的「資料移轉」頁面。
 
@@ -89,7 +89,7 @@ BigQuery 資料移轉服務可使用服務帳戶憑證，透過下列項目進�
 
 ### bq
 
-如要更新資料移轉作業的憑證，可以使用 bq 指令列工具更新移轉作業設定。
+如要更新資料移轉作業的憑證，可以使用 bq 指令列工具更新移轉設定。
 
 請使用 `bq update` 指令，並加上 `--transfer_config`、`--update_credentials` 和 `--service_account_name` 旗標。
 
@@ -185,11 +185,11 @@ print("Updated config: '{}'".format(transfer_config.name))
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-13 (世界標準時間)。
+上次更新時間：2026-10-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-13 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]

@@ -1,8 +1,9 @@
+Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
+
 * [Home](https://docs.cloud.google.com/?hl=zh-cn)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-cn)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-cn)
 * [BigQuery](https://docs.cloud.google.com/bigquery/docs?hl=zh-cn)
-* [参考文档](https://docs.cloud.google.com/bigquery/quotas?hl=zh-cn)
 
 发送反馈
 
@@ -14,14 +15,14 @@
 
 # 迁移价格竞争力报告
 
-**预览版**
+**预览**
 
-此产品 受[服务专用条款](https://docs.cloud.google.com/terms/service-terms?hl=zh-cn#1)的约束。 非正式版产品“按原样”提供，且可能仅提供有限支持。
+此产品受[服务专用条款](https://docs.cloud.google.com/terms/service-terms?hl=zh-cn#1)的“通用服务条款”部分中的“非正式版产品条款”的约束。非正式版产品“按原样”提供，可能只能获得有限的支持。
 如需了解详情，请参阅[发布阶段说明](https://cloud.google.com/products/?hl=zh-cn#product-launch-stages)。
 
-**注意**：如需获得有关使用 BigQuery Data Transfer Service 执行 Google Merchant Center 转移作业方面的支持，或提供相关反馈，请联系 [gmc-transfer-preview@google.com](mailto:gmc-transfer-preview@google.com)。
+**注意**： 如需获得有关使用 BigQuery Data Transfer Service 执行 Google Merchant Center 转移作业方面的支持，或提供相关反馈，请联系 [gmc-transfer-preview@google.com](mailto:gmc-transfer-preview@google.com)。
 
-本文档可帮助您从将于 2025 年 9 月 1 日弃用的[价格基准](https://docs.cloud.google.com/bigquery/docs/merchant-center-price-benchmarks-schema?hl=zh-cn)报告迁移到新的[价格竞争力](https://docs.cloud.google.com/bigquery/docs/merchant-center-price-competitiveness-schema?hl=zh-cn)报告。
+本文档可帮助您从将于 2025 年 9 月 1 日弃用的价格基准报告迁移到新的[价格竞争力](https://docs.cloud.google.com/bigquery/docs/merchant-center-price-competitiveness-schema?hl=zh-cn)报告。
 
 新版价格竞争力报告提供以下信息：
 
@@ -30,7 +31,7 @@
 
 ## 比较价格基准表架构和价格竞争力表架构
 
-下表可帮助您确定 [`Products_PriceBenchmarks` 表](https://docs.cloud.google.com/bigquery/docs/merchant-center-price-benchmarks-schema?hl=zh-cn#schema)中在 [`PriceCompetitiveness_` 表](https://docs.cloud.google.com/bigquery/docs/merchant-center-price-competitiveness-schema?hl=zh-cn#schema)中有等效替代项的字段：
+下表可帮助您确定 `Products_PriceBenchmarks` 表中在 [`PriceCompetitiveness_` 表](https://docs.cloud.google.com/bigquery/docs/merchant-center-price-competitiveness-schema?hl=zh-cn#schema)中有等效替代项的字段：
 
 | 价格基准（旧版） | 价格竞争力（新版） |
 | --- | --- |
@@ -187,11 +188,11 @@ WHERE
 
 如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-最后更新时间 (UTC)：2026-03-17。
+最后更新时间 (UTC)：2026-09-16。
 
 
 
 
 需要向我们提供更多信息？
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["很难理解","hardToUnderstand","thumb-down"],["信息或示例代码不正确","incorrectInformationOrSampleCode","thumb-down"],["没有我需要的信息/示例","missingTheInformationSamplesINeed","thumb-down"],["翻译问题","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-03-17。"],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["很难理解","hardToUnderstand","thumb-down"],["信息或示例代码不正确","incorrectInformationOrSampleCode","thumb-down"],["没有我需要的信息/示例","missingTheInformationSamplesINeed","thumb-down"],["翻译问题","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-09-16。"],[],[]]

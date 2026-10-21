@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -235,6 +235,61 @@ function import_from_storage_csv(
         print('Data imported successfully' . PHP_EOL);
     }
 }
+```
+
+### Python
+
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+
+```
+import bigframes.pandas as bpd
+from google.cloud import bigquery
+
+# Set partial ordering mode for BigQuery DataFrames.
+bpd.options.bigquery.ordering_mode = "partial"
+
+
+def load_table_gcs_csv_bigframes(
+    table_id: str = "your-project.your_dataset.your_table_name",
+) -> None:
+    """Loads a CSV file from Cloud Storage into a BigQuery table using BigQuery DataFrames."""
+    uri = "gs://cloud-samples-data/bigquery/us-states/us-states.csv"
+
+    df = bpd.read_csv(uri)
+    df.to_gbq(table_id, if_exists="replace")
+    print(f"Loaded {len(df)} rows using BigQuery DataFrames.")
+
+
+def load_table_gcs_csv_client(
+    table_id: str = "your-project.your_dataset.your_table_name",
+) -> None:
+    """Loads a CSV file from Cloud Storage into a BigQuery table using google-cloud-bigquery."""
+    uri = "gs://cloud-samples-data/bigquery/us-states/us-states.csv"
+
+    client = bigquery.Client()
+    job_config = bigquery.LoadJobConfig(
+        schema=[
+            bigquery.SchemaField("name", "STRING"),
+            bigquery.SchemaField("post_abbr", "STRING"),
+        ],
+        skip_leading_rows=1,
+        source_format=bigquery.SourceFormat.CSV,
+    )
+
+    load_job = client.load_table_from_uri(uri, table_id, job_config=job_config)
+    load_job.result()  # Waits for the job to complete.
+
+    destination_table = client.get_table(table_id)
+    print(f"Loaded {destination_table.num_rows} rows using client library.")
+
+
+# [Preferred] Run using BigQuery DataFrames:
+# load_table_gcs_csv_bigframes("your-project.your_dataset.your_table_name")
+
+# Alternatively, run using google-cloud-bigquery client library:
+# load_table_gcs_csv_client("your-project.your_dataset.your_table_name")
 ```
 
 ### Ruby

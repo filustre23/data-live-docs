@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -20,7 +20,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 事前準備
 
-授予身分與存取權管理 (IAM) 角色，讓使用者取得執行本文各項工作所需的權限。
+授予身分與存取權管理 (IAM) 角色，讓使用者擁有執行本文各項工作所需的權限。
 
 ## 清單檢視表
 
@@ -51,7 +51,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 2. 在「Explorer」窗格中展開專案，按一下「Datasets」(資料集)，然後選取資料集。
-3. 依序點選「總覽」**>「表格」**。捲動清單，即可查看資料集中的檢視區塊。資料表和檢視表會分別以**類型**資料欄中的值呈現。
+3. 依序點選「總覽」**>「表格」**。捲動清單來檢視該資料集中的檢視區塊，資料表和檢視表會分別以**類型**資料欄中的值呈現。
 
 ### SQL
 
@@ -207,13 +207,13 @@ for table in tables:
 
 1. 點選左側窗格中的 explore「Explorer」。
 2. 在「Explorer」窗格中展開專案，按一下「Datasets」(資料集)，然後選取資料集。
-3. 依序點選「總覽」**>「表格」**。捲動清單，即可查看資料集中的檢視區塊。資料表和檢視表會分別以**類型**資料欄中的值呈現。
+3. 依序點選「總覽」**>「表格」**。捲動清單來檢視該資料集中的檢視區塊，資料表和檢視表會分別以**類型**資料欄中的值呈現。
 4. 按一下「Details」(詳細資料) 分頁標籤，查看檢視表的說明、相關資訊，以及定義該檢視表的 SQL 查詢。
 
 ### SQL
 
 查詢
-[`INFORMATION_SCHEMA.VIEWS` 檢視區塊](https://docs.cloud.google.com/bigquery/docs/information-schema-views?hl=zh-tw)。
+[`INFORMATION_SCHEMA.VIEWS`檢視區塊](https://docs.cloud.google.com/bigquery/docs/information-schema-views?hl=zh-tw)。
 下列範例擷取了所有資料欄，但保留 `check_option` 以供未來使用。系統傳回的是預設專案中 DATASET\_ID 內所有檢視表的中繼資料：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
@@ -415,11 +415,11 @@ print(f"View Query:\n{view.view_query}")
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-12 (世界標準時間)。
+上次更新時間：2026-10-20 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-12 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-20 (世界標準時間)。"],[],[]]

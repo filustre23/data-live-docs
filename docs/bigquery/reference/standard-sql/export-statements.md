@@ -73,6 +73,14 @@ following limitations apply:
 * If you export data in JSON format, `INT64` data types are encoded as JSON
   strings to preserve 64-bit precision.
 * If your `query_statement` includes an `ORDER BY` clause and you export to multiple files using a wildcard, the globally sorted result set is distributed sequentially across the generated files.
+* You can only export data to Amazon S3 or Blob Storage
+  from queries that run against
+  [BigLake tables](/bigquery/docs/biglake-intro) in a supported
+  [BigQuery Omni location](/bigquery/docs/omni-introduction#locations).
+  For more information, see
+  [Export query results to Amazon S3](/bigquery/docs/omni-aws-export-results-to-s3)
+  and
+  [Export query results to Blob Storage](/bigquery/docs/omni-azure-export-results-to-azure-storage).
 
 You are not billed for the export operation, but you are billed for running the
 query and for storing data in Cloud Storage, Amazon S3, or
@@ -144,13 +152,20 @@ SELECT field1, field2 FROM mydataset.table1 ORDER BY field1 LIMIT 10
 
 #### Export data to Amazon S3 in JSON format
 
-The following example [exports query results](/bigquery/docs/omni-aws-export-results-to-s3)
-that run against a BigLake table based on Amazon S3 to
-your Amazon S3 bucket:
+You can only export data to Amazon S3 from queries that run against
+BigLake tables based on Amazon S3. The connection and the
+dataset for the BigLake table must be in the same supported
+[BigQuery Omni location](/bigquery/docs/omni-introduction#locations)
+as the target Amazon S3 bucket. For more information about export
+requirements and limitations, see [Export query results to Amazon S3](/bigquery/docs/omni-aws-export-results-to-s3).
+
+The following example exports query results from the BigLake
+table `mydataset.table1` to an Amazon S3 bucket using a connection in
+the `aws-us-east-1` location:
 
 ```
 EXPORT DATA
-  WITH CONNECTION myproject.us.myconnection
+  WITH CONNECTION `myproject.aws-us-east-1.myconnection`
   OPTIONS(
   uri='s3://bucket/folder/*',
   format='JSON',
@@ -285,85 +300,5 @@ EXPORT DATA OPTIONS (
   format="CLOUD_SPANNER",
   spanner_options="""{ "table": "my_table" }"""
 )
-AS SELECT * FROM `bigquery_table`
+AS SELECT *
 ```
-
-For more Spanner export examples and configuration options, see
-[Export data to Spanner](/bigquery/docs/export-to-spanner).
-
-## Export to AlloyDB
-
-**Preview**
-
-This feature is
-subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the
-[Service Specific
-Terms](/terms/service-terms#1).
-Pre-GA features are available "as is" and might have limited support.
-For more information, see the
-[launch stage descriptions](https://cloud.google.com/products/#product-launch-stages).
-
-**Note:** To request access to this preview feature, complete the
-[BigQuery to AlloyDB Batch Exports - Preview
-Sign-Up](https://forms.gle/nTbRPvmMQLDGRsYr8) interest form. To provide
-feedback or request support for this feature, send email to [bq-alloydb-export-feedback@google.com](mailto:bq-alloydb-export-feedback@google.com).
-
-You can export BigQuery data to an AlloyDB table
-by using the `EXPORT DATA` statement. For AlloyDB export
-examples and configuration options, see
-[Export data to AlloyDB](/bigquery/docs/export-to-alloydb).
-
-You aren't billed for the export operation, but you are billed for
-running the query and for storing data in AlloyDB. For more
-information, see [AlloyDB for PostgreSQL pricing](https://cloud.google.com/alloydb/pricing).
-
-### AlloyDB export option list
-
-The option list specifies options for exporting to AlloyDB.
-
-| Options | |
-| --- | --- |
-| `format` | `STRING`  Required. When exporting to AlloyDB, the value must always be `ALLOYDB`. |
-| `uri` | `STRING`  Required. The destination URI for the export. For AlloyDB, the URI must be provided in the following format: `https://alloydb.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/clusters/CLUSTER_ID/instances/INSTANCE_ID` |
-| `alloydb_options` | `STRING`  Required. A JSON string containing configurations related to mapping exported fields to AlloyDB columns. For more information, see [Configure exports with `alloydb_options`.](/bigquery/docs/export-to-alloydb#configure_exports_with_alloydb_options) |
-
-### Example
-
-#### Export data to AlloyDB
-
-The following example exports data to an AlloyDB table:
-
-```
-EXPORT DATA
-  WITH CONNECTION `myproject.us-central1.my-alloydb-conn`
-  OPTIONS (
-    format='ALLOYDB',
-    uri="https://alloydb.googleapis.com/v1/projects/myproject/locations/us-central1/clusters/my-cluster/instances/my-instance",
-    alloydb_options="""{
-      "schema": "public",
-      "table": "my_target_table"
-    }"""
-  )
-AS SELECT
-  col1 AS id,
-  col2 AS name,
-  col3 AS value
-FROM
-  `mydataset.table1`;
-```
-
-
-
-
-Send feedback
-
-Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
-
-Last updated 2026-07-17 UTC.
-
-
-
-
-Need to tell us more?
-
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-07-17 UTC."],[],[]]

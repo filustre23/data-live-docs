@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -21,9 +21,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 * 建立僅使用內建節慶的[`ARIMA_PLUS`時間序列預測模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series?hl=zh-tw)。
 * 建立 `ARIMA_PLUS` 時間序列預測模型，除了內建節慶外，還使用自訂節慶。
 * 以視覺化方式呈現這些模型的預測結果。
-* 檢查模型，瞭解模型模擬的節慶。
+* 檢查模型，瞭解模型會模擬哪些節慶。
 * 評估自訂節日對預測結果的影響。
-* 比較只使用內建節慶的模型成效，以及除了內建節慶外還使用自訂節慶的模型成效。
+* 比較只使用內建節慶的模型，與同時使用內建和自訂節慶的模型，兩者的成效差異。
 
 本教學課程使用 `bigquery-public-data.wikipedia.pageviews_*` 公開資料表。
 
@@ -78,14 +78,15 @@ Google uses AI technology to translate content into your preferred language. AI 
 
   [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
 - [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project).
-- Enable the BigQuery API.
+- Enable the BigQuery API, if it is not already enabled.
 
   **Roles required to enable APIs**
 
-  To enable APIs, you need the Service Usage Admin IAM
-  role (`roles/serviceusage.serviceUsageAdmin`), which
-  contains the `serviceusage.services.enable` permission. [Learn how to grant
-  roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw).
+  To enable APIs, you need the `serviceusage.services.enable` permission. If you
+  created the project, then you likely already have this permission through the
+  Owner role (`roles/owner`). Otherwise, you can get this permission through the
+  Service Usage Admin role (`roles/serviceusage.serviceUsageAdmin`).
+  [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw).
 
   [Enable the API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery.googleapis.com&hl=zh-tw)
 
@@ -108,39 +109,45 @@ Google uses AI technology to translate content into your preferred language. AI 
 
   [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
 - [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project).
-- Enable the BigQuery API.
+- Enable the BigQuery API, if it is not already enabled.
 
   **Roles required to enable APIs**
 
-  To enable APIs, you need the Service Usage Admin IAM
-  role (`roles/serviceusage.serviceUsageAdmin`), which
-  contains the `serviceusage.services.enable` permission. [Learn how to grant
-  roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw).
+  To enable APIs, you need the `serviceusage.services.enable` permission. If you
+  created the project, then you likely already have this permission through the
+  Owner role (`roles/owner`). Otherwise, you can get this permission through the
+  Service Usage Admin role (`roles/serviceusage.serviceUsageAdmin`).
+  [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw).
 
   [Enable the API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery.googleapis.com&hl=zh-tw)
 
 ## 建立資料集
 
-建立 BigQuery 資料集來儲存機器學習模型。
+如要建立 BigQuery 資料集，請選取下列任一選項：
 
 ### 控制台
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
-   [前往 BigQuery 頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在「Explorer」窗格中，按一下專案名稱。
-3. 依序點按 more\_vert「View actions」(查看動作) >「Create dataset」(建立資料集)
-4. 在「建立資料集」頁面中，執行下列操作：
+   [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
+2. 點選左側窗格中的 explore「Explorer」。
+
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
+3. 在「Explorer」中展開專案，然後按一下「Datasets」。
+4. 在「資料集」頁面，按一下 add「建立資料集」。
+5. 在「建立資料集」窗格中，執行下列操作：
 
    * 在「Dataset ID」(資料集 ID) 中輸入 `bqml_tutorial`。
-   * 針對「位置類型」選取「多區域」，然後選取「美國」。
-   * 其餘設定請保留預設狀態，然後按一下「建立資料集」。
+   * 選取「資料位置」的「美國」。
+
+   其餘預設設定均保留原樣。
+6. 點選「建立資料集」。
 
 ### bq
 
 如要建立新的資料集，請使用 [`bq mk --dataset` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#mk-dataset)。
 
-1. 建立名為 `bqml_tutorial` 的資料集，並將資料位置設為 `US`。
+1. 建立名為 `bqml_tutorial` 的資料集，並將資料位置設為 `US`：
 
    ```
    bq mk --dataset \
@@ -156,7 +163,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### API
 
-請呼叫 [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert?hl=zh-tw) 方法，搭配已定義的[資料集資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets?hl=zh-tw)。
+使用已定義的[資料集資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets?hl=zh-tw)呼叫 [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert?hl=zh-tw) 方法：
 
 ```
 {
@@ -168,7 +175,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 準備時間序列資料
 
-將「Google I/O」網頁的維基百科網頁瀏覽資料匯總到單一表格中，並依日期分組：
+將「Google I/O」網頁的維基百科網頁瀏覽資料匯總到單一表格，並依日期分組：
 
 1. 前往「BigQuery」頁面
 
@@ -193,7 +200,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 建立使用內建節慶的預測模型
 
-根據 2022 年前的網頁瀏覽資料，並考量內建的節慶假日，建立模型來預測 Wikipedia「Google I/O」網頁的每日瀏覽量：
+根據 2022 年前的網頁瀏覽資料，並考量內建的節慶假日，建立模型來預測 Wikipedia「Google I/O」網頁的每日網頁瀏覽量：
 
 1. 前往「BigQuery」頁面
 
@@ -220,7 +227,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 以圖表呈現預測結果
 
-使用內建節慶建立模型後，請將 `bqml_tutorial.googleio_page_views` 資料表中的原始資料與 [`ML.EXPLAIN_FORECAST` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast?hl=zh-tw)的預測值合併，然後[使用數據分析](https://docs.cloud.google.com/bigquery/docs/visualize-looker-studio?hl=zh-tw)以視覺化方式呈現：
+使用內建節慶建立模型後，請將 `bqml_tutorial.googleio_page_views` 表格中的原始資料與 [`ML.EXPLAIN_FORECAST` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast?hl=zh-tw)的預測值合併，然後[使用數據分析](https://docs.cloud.google.com/bigquery/docs/visualize-looker-studio?hl=zh-tw)以視覺化方式呈現：
 
 1. 前往「BigQuery」頁面
 
@@ -251,10 +258,10 @@ Google uses AI technology to translate content into your preferred language. AI 
      original.date;
    ```
 3. 在「查詢結果」窗格中，依序點選「開啟方式」>「數據分析」。系統會在新的分頁中開啟 數據分析。
-4. 在數據分析分頁中，按一下 **新增圖表**，然後點選時間序列圖表：
+4. 在數據分析分頁中，按一下「新增圖表」，然後點選時間序列圖表：
 
    將圖表放到報表上。
-5. ****在「圖表」窗格的「設定」分頁中，按一下「新增指標」並選取「adjusted\_views\_without\_custom\_holiday」：****
+5. 在「圖表」窗格的「設定」分頁中，依序點按「新增指標」和「adjusted\_views\_without\_custom\_holiday」：
 
    圖表看起來類似如下：
 
@@ -264,7 +271,8 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 建立使用內建和自訂節慶假日的時間序列預測模型
 
-如[Google I/O 歷史記錄](https://en.wikipedia.org/wiki/Google_I/O#History)所示，2017 年至 2022 年的 Google I/O 大會舉辦日期不盡相同。如要將這項變異納入考量，請根據 2022 年前的網頁瀏覽資料建立模型，預測 Wikipedia「Google\_I/O」網頁在 2022 年的網頁瀏覽次數，並使用自訂節慶代表每年的 Google I/O 活動。在這個模型中，您也會調整節慶效應時間範圍，涵蓋活動日期前後三天，以便更完整地擷取活動前後的潛在網頁流量。
+如您在
+[Google I/O 歷史記錄](https://en.wikipedia.org/wiki/Google_I/O#History)中看到的，2017 年至 2022 年間，Google I/O 大會的舉辦日期不盡相同。如要將這項差異納入考量，請根據 2022 年前的網頁瀏覽資料建立模型，預測 2022 年的 Wikipedia「Google\_I/O」網頁瀏覽量，並使用自訂節慶代表每年的 Google I/O 活動。在這個模型中，您也會調整節慶效應時間範圍，涵蓋活動日期前後三天，以便更準確地擷取活動前後的潛在網頁流量。
 
 1. 前往「BigQuery」頁面
 
@@ -312,7 +320,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 以圖表呈現預測結果
 
-使用自訂節慶建立模型後，請將 `bqml_tutorial.googleio_page_views` 資料表中的原始資料與 [`ML.EXPLAIN_FORECAST` 函式中的預測值合併](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast?hl=zh-tw)，然後[使用數據分析](https://docs.cloud.google.com/bigquery/docs/visualize-looker-studio?hl=zh-tw)以視覺化方式呈現：
+使用自訂節慶建立模型後，請將 `bqml_tutorial.googleio_page_views` 資料表中的原始資料與 [`ML.EXPLAIN_FORECAST` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast?hl=zh-tw)的預測值合併，然後[使用數據分析](https://docs.cloud.google.com/bigquery/docs/visualize-looker-studio?hl=zh-tw)以視覺化方式呈現：
 
 1. 前往「BigQuery」頁面
 
@@ -344,7 +352,7 @@ Google uses AI technology to translate content into your preferred language. AI 
      original.date;
    ```
 3. 在「查詢結果」窗格中，依序點按「探索資料」和「透過數據分析探索」。系統會在新的分頁中開啟 數據分析。
-4. 在數據分析分頁中，依序點選「新增圖表」和時間序列圖表，然後將圖表放在報表上。
+4. 在數據分析分頁中，按一下「新增圖表」，然後按一下時間序列圖，並將圖表放在報表上。
 5. 在「圖表」窗格的「設定」分頁中，按一下「新增指標」，然後選取「adjusted\_views\_with\_custom\_holiday」。
 
    圖表看起來類似如下：
@@ -353,7 +361,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 檢查節慶資訊
 
-使用 [`ML.HOLIDAY_INFO` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-holiday-info?hl=zh-tw)，檢查在模型建構期間考量的節日清單：
+使用 [`ML.HOLIDAY_INFO` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-holiday-info?hl=zh-tw)檢查在模型化期間考量的節日清單：
 
 1. 前往「BigQuery」頁面
 
@@ -371,7 +379,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 評估自訂節日的影響
 
-使用 [`ML.EXPLAIN_FORECAST` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast?hl=zh-tw)，評估自訂節慶對預測結果的影響：
+使用 [`ML.EXPLAIN_FORECAST` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast?hl=zh-tw)評估自訂節日對預測結果的影響：
 
 1. 前往「BigQuery」頁面
 
@@ -445,7 +453,7 @@ Google uses AI technology to translate content into your preferred language. AI 
          TRUE AS perform_aggregation));
    ```
 
-   結果顯示，第二個模型可大幅提升效能：
+   結果顯示，第二個模型的效能顯著提升：
 
 ## 清除所用資源
 
@@ -469,11 +477,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-12 (世界標準時間)。
+上次更新時間：2026-10-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-12 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]

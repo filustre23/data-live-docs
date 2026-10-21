@@ -104,6 +104,18 @@ Send feedback
 * [TableMetadataCacheUsage](#TableMetadataCacheUsage)
   + [JSON representation](#TableMetadataCacheUsage.SCHEMA_REPRESENTATION)
 * [UnusedReason](#UnusedReason)
+* [GenAiStats](#GenAiStats)
+  + [JSON representation](#GenAiStats.SCHEMA_REPRESENTATION)
+* [GenAiErrorStats](#GenAiErrorStats)
+  + [JSON representation](#GenAiErrorStats.SCHEMA_REPRESENTATION)
+* [GenAiFunctionStats](#GenAiFunctionStats)
+  + [JSON representation](#GenAiFunctionStats.SCHEMA_REPRESENTATION)
+* [GenAiFunctionErrorStats](#GenAiFunctionErrorStats)
+  + [JSON representation](#GenAiFunctionErrorStats.SCHEMA_REPRESENTATION)
+* [GenAiFunctionCostOptimizationStats](#GenAiFunctionCostOptimizationStats)
+  + [JSON representation](#GenAiFunctionCostOptimizationStats.SCHEMA_REPRESENTATION)
+* [GenAiFunctionCacheStats](#GenAiFunctionCacheStats)
+  + [JSON representation](#GenAiFunctionCacheStats.SCHEMA_REPRESENTATION)
 * [JobStatistics3](#JobStatistics3)
   + [JSON representation](#JobStatistics3.SCHEMA_REPRESENTATION)
 * [JobStatistics4](#JobStatistics4)
@@ -174,71 +186,4 @@ JobConfigurationQuery configures a BigQuery query job.
 | `query` | `string`  [Required] SQL query text to execute. The useLegacySql field can be used to indicate whether the query uses legacy SQL or GoogleSQL. |
 | `destinationTable` | `object (TableReference)`  Optional. Describes the table where the query results should be stored. This property must be set for large results that exceed the maximum response size. For queries that produce anonymous (cached) results, this field will be populated by BigQuery. |
 | `tableDefinitions` | `map (key: string, value: object (ExternalDataConfiguration))`  Optional. You can specify external table definitions, which operate as ephemeral tables that can be queried. These definitions are configured using a JSON map, where the string key represents the table identifier, and the value is the corresponding external data configuration object. |
-| `userDefinedFunctionResources[]` | `object (UserDefinedFunctionResource)`  Describes user-defined function resources used in the query. |
-| `createDisposition` | `string`  Optional. Specifies whether the job is allowed to create new tables. The following values are supported:   * CREATE\_IF\_NEEDED: If the table does not exist, BigQuery creates the table. * CREATE\_NEVER: The table must already exist. If it does not, a 'notFound' error is returned in the job result.   The default value is CREATE\_IF\_NEEDED. Creation, truncation and append actions occur as one atomic update upon job completion. |
-| `writeDisposition` | `string`  Optional. Specifies the action that occurs if the destination table already exists. The following values are supported:   * WRITE\_TRUNCATE: If the table already exists, BigQuery overwrites the data, removes the constraints, and uses the schema from the query result. * WRITE\_TRUNCATE\_DATA: If the table already exists, BigQuery overwrites the data, but keeps the constraints and schema of the existing table. * WRITE\_APPEND: If the table already exists, BigQuery appends the data to the table. * WRITE\_EMPTY: If the table already exists and contains data, a 'duplicate' error is returned in the job result.   The default value is WRITE\_EMPTY. Each action is atomic and only occurs if BigQuery is able to complete the job successfully. Creation, truncation and append actions occur as one atomic update upon job completion. |
-| `defaultDataset` | `object (DatasetReference)`  Optional. Specifies the default dataset to use for unqualified table names in the query. This setting does not alter behavior of unqualified dataset names. Setting the system variable `@@dataset_id` achieves the same behavior. See <https://cloud.google.com/bigquery/docs/reference/system-variables> for more information on system variables. |
-| `priority` | `string`  Optional. Specifies a priority for the query. Possible values include INTERACTIVE and BATCH. The default value is INTERACTIVE. |
-| `preserveNulls` | `boolean`  [Deprecated] This property is deprecated. |
-| `allowLargeResults` | `boolean`  Optional. If true and query uses legacy SQL dialect, allows the query to produce arbitrarily large result tables at a slight cost in performance. Requires destinationTable to be set. For GoogleSQL queries, this flag is ignored and large results are always allowed. However, you must still set destinationTable when result size exceeds the allowed maximum response size. |
-| `useQueryCache` | `boolean`  Optional. Whether to look for the result in the query cache. The query cache is a best-effort cache that will be flushed whenever tables in the query are modified. Moreover, the query cache is only available when a query does not have a destination table specified. The default value is true. |
-| `flattenResults` | `boolean`  Optional. If true and query uses legacy SQL dialect, flattens all nested and repeated fields in the query results. allowLargeResults must be true if this is set to false. For GoogleSQL queries, this flag is ignored and results are never flattened. |
-| `maximumBillingTier` | `integer`  Optional. [Deprecated] Maximum billing tier allowed for this query. The billing tier controls the amount of compute resources allotted to the query, and multiplies the on-demand cost of the query accordingly. A query that runs within its allotted resources will succeed and indicate its billing tier in statistics.query.billingTier, but if the query exceeds its allotted resources, it will fail with billingTierLimitExceeded. WARNING: The billed byte amount can be multiplied by an amount up to this number! Most users should not need to alter this setting, and we recommend that you avoid introducing new uses of it. |
-| `maximumBytesBilled` | `string (Int64Value format)`  Limits the bytes billed for this job. Queries that will have bytes billed beyond this limit will fail (without incurring a charge). If unspecified, this will be set to your project default. |
-| `useLegacySql` | `boolean`  Optional. Specifies whether to use BigQuery's legacy SQL dialect for this query. The default value is true. If set to false, the query uses BigQuery's [GoogleSQL](https://docs.cloud.google.com/bigquery/docs/introduction-sql).  When useLegacySql is set to false, the value of flattenResults is ignored; query will be run as if flattenResults is false. |
-| `parameterMode` | `string`  GoogleSQL only. Set to POSITIONAL to use positional (?) query parameters or to NAMED to use named (@myparam) query parameters in this query. |
-| `queryParameters[]` | `object (QueryParameter)`  jobs.query parameters for GoogleSQL queries. |
-| `schemaUpdateOptions[]` | `string`  Allows the schema of the destination table to be updated as a side effect of the query job. Schema update options are supported in three cases: when writeDisposition is WRITE\_APPEND; when writeDisposition is WRITE\_TRUNCATE\_DATA; when writeDisposition is WRITE\_TRUNCATE and the destination table is a partition of a table, specified by partition decorators. For normal tables, WRITE\_TRUNCATE will always overwrite the schema. One or more of the following values are specified:   * ALLOW\_FIELD\_ADDITION: allow adding a nullable field to the schema. * ALLOW\_FIELD\_RELAXATION: allow relaxing a required field in the original schema to nullable. |
-| `timePartitioning` | `object (TimePartitioning)`  Time-based partitioning specification for the destination table. Only one of timePartitioning and rangePartitioning should be specified. |
-| `rangePartitioning` | `object (RangePartitioning)`  Range partitioning specification for the destination table. Only one of timePartitioning and rangePartitioning should be specified. |
-| `clustering` | `object (Clustering)`  Clustering specification for the destination table. |
-| `destinationEncryptionConfiguration` | `object (EncryptionConfiguration)`  Custom encryption configuration (e.g., Cloud KMS keys) |
-| `scriptOptions` | `object (ScriptOptions)`  Options controlling the execution of scripts. |
-| `connectionProperties[]` | `object (ConnectionProperty)`  Connection properties which can modify the query behavior. |
-| `createSession` | `boolean`  If this property is true, the job creates a new session using a randomly generated sessionId. To continue using a created session with subsequent queries, pass the existing session identifier as a `ConnectionProperty` value. The session identifier is returned as part of the `SessionInfo` message within the query statistics.  The new session's location will be set to `Job.JobReference.location` if it is present, otherwise it's set to the default location based on existing routing logic. |
-| `systemVariables` | `object (SystemVariables)`  Output only. System variables for GoogleSQL queries. A system variable is output if the variable is settable and its value differs from the system default. "@@" prefix is not included in the name of the System variables. |
-
-## SystemVariables
-
-System variables given to a query.
-
-| JSON representation |
-| --- |
-| ``` {   "types": {     string: {       object (StandardSqlDataType)     },     ...   },   "values": {     object   } } ``` |
-
-| Fields | |
-| --- | --- |
-| `types` | `map (key: string, value: object (StandardSqlDataType))`  Output only. Data type for each system variable. |
-| `values` | `object (Struct format)`  Output only. Value for each system variable. |
-
-## ScriptOptions
-
-Options related to script execution.
-
-| JSON representation |
-| --- |
-| ``` {   "statementTimeoutMs": string,   "statementByteBudget": string,   "keyResultStatement": enum (KeyResultStatementKind) } ``` |
-
-| Fields | |
-| --- | --- |
-| `statementTimeoutMs` | `string (Int64Value format)`  Timeout period for each statement in a script. |
-| `statementByteBudget` | `string (Int64Value format)`  Limit on the number of bytes billed per statement. Exceeding this budget results in an error. |
-| `keyResultStatement` | `enum (KeyResultStatementKind)`  Determines which statement in the script represents the "key result", used to populate the schema and query results of the script job. Default is LAST. |
-
-## KeyResultStatementKind
-
-KeyResultStatementKind controls how the key result is determined.
-
-| Enums | |
-| --- | --- |
-| `KEY_RESULT_STATEMENT_KIND_UNSPECIFIED` | Default value. |
-| `LAST` | The last result determines the key result. |
-| `FIRST_SELECT` | The first SELECT statement determines the key result. |
-
-## JobConfigurationLoad
-
-JobConfigurationLoad contains the configuration properties for loading data into a destination table.
-
-| JSON representation |
-| --- |
-| ``` {   "sourceUris": [     string   ],   "fileSetSpecType": enum (FileSetSpecType),   "schema": {     object (TableSchema)   },   "destinationTable": {     object (TableReference)   },   "destinationTableProperties": {     object (DestinationTableProperties)   },   "createDisposition": string,   "writeDisposition": string,   "nullMarker": string,   "fieldDelimiter": string,   "skipLeadingRows": integer,   "encoding": string,   "quote": string,   "maxBadRecords": integer,   "schemaInlineFormat": string,   "schemaInline": string,   "allowQuotedNewlines": boolean,   "sourceFormat": string,   "allowJaggedRows": boolean,   "ignoreUnknownValues": boolean,   "projectionFields": [     string   ],   "autodetect": boolean,   "schemaUpdateOptions": [     string ``` |
+| `userDefinedFunctionResources[]` | `object (UserDefinedFunctionResource)`  Describes user-defined function resources used in the q |

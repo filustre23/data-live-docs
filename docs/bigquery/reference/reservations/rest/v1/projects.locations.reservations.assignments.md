@@ -20,7 +20,7 @@ An assignment allows a project to submit jobs of a certain type using slots from
 
 | JSON representation |
 | --- |
-| ``` {   "name": string,   "assignee": string,   "jobType": enum (JobType),   "state": enum (State) } ``` |
+| ``` {   "name": string,   "assignee": string,   "jobType": enum (JobType),   "state": enum (State),   "schedulingPolicy": {     object (SchedulingPolicy)   },   "principal": string } ``` |
 
 | Fields | |
 | --- | --- |
@@ -28,6 +28,8 @@ An assignment allows a project to submit jobs of a certain type using slots from
 | `assignee` | `string`  Optional. The resource which will use the reservation. E.g. `projects/myproject`, `folders/123`, or `organizations/456`. |
 | `jobType` | `enum (JobType)`  Optional. Which type of jobs will use the reservation. |
 | `state` | `enum (State)`  Output only. State of the assignment. |
+| `schedulingPolicy` | `object (SchedulingPolicy)`  Optional. The scheduling policy to use for jobs and queries of this assignee when running under the associated reservation. The scheduling policy controls how the reservation's resources are distributed. This overrides the default scheduling policy specified on the reservation.  This feature is not yet generally available. |
+| `principal` | `string`  Optional. Represents the principal for this assignment. If not empty, jobs run by this principal utilize the associated reservation. Otherwise, jobs fall back to using the reservation assigned to the project, folder, or organization, in that order. If no reservation is assigned at any of these levels, on-demand capacity is used.  The supported formats are:   * `principal://goog/subject/USER_EMAIL_ADDRESS` for users, * `principal://iam.googleapis.com/projects/-/serviceAccounts/SA_EMAIL_ADDRESS` for service accounts, * `principal://iam.googleapis.com/projects/PROJECT_NUMBER/locations/global/workloadIdentityPools/POOL_ID/subject/SUBJECT_ID` for workload identity pool identities. * The special value `unknown_or_deleted_user` represents principals which cannot be read from the user info service, for example, deleted users. |
 
 ## JobType
 
@@ -44,6 +46,7 @@ Types of job, which could be specified when using the reservation.
 | `BACKGROUND_CHANGE_DATA_CAPTURE` | Finer granularity background jobs for capturing changes in a source database and streaming them into BigQuery. Reservations with this job type take priority over a default BACKGROUND reservation assignment (if it exists). |
 | `BACKGROUND_COLUMN_METADATA_INDEX` | Finer granularity background jobs for refreshing cached metadata for BigQuery tables. Reservations with this job type take priority over a default BACKGROUND reservation assignment (if it exists). |
 | `BACKGROUND_SEARCH_INDEX_REFRESH` | Finer granularity background jobs for refreshing search indexes upon BigQuery table columns. Reservations with this job type take priority over a default BACKGROUND reservation assignment (if it exists). |
+| `AUTOMATIC_MATERIALIZED_VIEW_REFRESH` | Automated materialized view refresh jobs will use the reservation. Reservations with this job type will take priority over a default QUERY reservation assignment (if it exists). |
 
 ## State
 
@@ -73,11 +76,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2025-12-22 UTC.
+Last updated 2026-09-22 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2025-12-22 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-09-22 UTC."],[],[]]

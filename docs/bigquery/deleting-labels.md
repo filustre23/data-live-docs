@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -26,11 +26,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 事前準備
 
-授予身分與存取權管理 (IAM) 角色，讓使用者擁有執行本文件各項工作所需的權限。執行工作所需的權限 (如有) 會列在工作「必要權限」部分。
+授予身分與存取權管理 (IAM) 角色，讓使用者擁有執行本文件各項工作所需的權限。如要執行工作，必須具備的權限會列在工作「必要權限」部分。
 
 ## 刪除資料集標籤
 
-以下各節將說明刪除資料集標籤的權限和步驟。
+以下各節說明刪除資料集標籤的權限和步驟。
 
 ### 所需權限
 
@@ -63,7 +63,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### SQL
 
-使用 [`ALTER SCHEMA SET OPTIONS` DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_schema_set_options_statement)，在現有資料集上設定標籤。設定標籤會覆寫資料集上的所有現有標籤。以下範例會刪除資料集 `mydataset` 的所有標籤：
+使用 [`ALTER SCHEMA SET OPTIONS` DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_schema_set_options_statement)，在現有資料集上設定標籤。設定標籤會覆寫資料集上的所有現有標籤。以下範例會刪除資料集 `mydataset` 中的所有標籤：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -80,7 +80,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### bq
 
-如要刪除資料集標籤，請發出 `bq update` 指令並搭配使用 `clear_label` 旗標。重複該標記即可刪除多個標籤。
+如要刪除資料集標籤，請發出 `bq update` 指令並搭配使用 `clear_label` 標記。重複該標記即可刪除多個標籤。
 
 如果資料集位於預設專案以外的專案中，請使用下列格式將專案 ID 新增至資料集：`project_id:dataset`。
 
@@ -92,7 +92,7 @@ project_id:dataset
 
 其中：
 
-* key 是要刪除的標籤鍵。
+* key 是指您要刪除的標籤的鍵。
 * project\_id 是您的專案 ID。
 * dataset 是您要更新的資料集。
 
@@ -287,7 +287,7 @@ print("Labels deleted from {}".format(dataset_id))
 
 ### 所需權限
 
-如要刪除資料表或檢視表標籤，您必須具備下列 IAM 權限：
+如要刪除資料表或檢視區塊標籤，您必須具備下列 IAM 權限：
 
 * `bigquery.tables.get`
 * `bigquery.tables.update`
@@ -304,7 +304,7 @@ print("Labels deleted from {}".format(dataset_id))
 
 ### 刪除資料表或檢視表標籤
 
-如要刪除資料表或檢視表中的標籤，請選擇下列其中一個選項：
+如要從資料表或檢視表中刪除標籤，請選擇下列其中一個選項：
 
 ### 控制台
 
@@ -346,7 +346,7 @@ project_id:dataset.table_or_view
 
 其中：
 
-* key 是要刪除的標籤鍵。
+* key 是指您要刪除的標籤的鍵。
 * project\_id 是您的專案 ID。
 * dataset 是您要更新的資料集。
 * table\_or\_view 是您要更新之資料表或視圖的名稱。
@@ -535,21 +535,21 @@ table = client.update_table(table, ["labels"])  # API request
 print(f"Deleted label '{label_key}' from {table_id}.")
 ```
 
-## 刪除預留標籤
+## 刪除預訂標籤
 
 你可以刪除預訂標籤。
 
 ### 必要的 IAM 角色
 
-如要取得刪除預留標籤所需的權限，請要求系統管理員授予管理專案的 [BigQuery 資源編輯者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.resourceEditor)  (`roles/bigquery.resourceEditor`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得刪除預訂標籤所需的權限，請要求管理員授予管理專案的 [BigQuery 資源編輯者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.resourceEditor)  (`roles/bigquery.resourceEditor`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
 這個預先定義的角色具備 `bigquery.reservations.delete` 權限，可刪除預訂標籤。
 
 您或許還可透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)取得這項權限。
 
-### 刪除預留標籤
+### 刪除預訂標籤
 
-如要從預訂項目中刪除標籤，請選擇下列其中一個選項：
+如要從預訂項目刪除標籤，請選擇下列其中一個選項：
 
 ### SQL
 
@@ -602,11 +602,11 @@ bq update --clear_label KEY  --reservation RESERVATION_NAME
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-12 (世界標準時間)。
+上次更新時間：2026-10-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-12 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]

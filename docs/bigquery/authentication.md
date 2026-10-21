@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -12,13 +12,13 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 本文說明如何以程式輔助方式向 BigQuery 進行驗證。向 BigQuery 進行驗證的方法，取決於您用來存取 API 的介面，以及執行程式碼的環境。
 
-如需驗證 BigQuery 的簡短範例，請參閱「[開始使用驗證](https://docs.cloud.google.com/bigquery/docs/authentication/getting-started?hl=zh-tw)」。
+如需 BigQuery 驗證的簡短範例，請參閱「[開始使用驗證](https://docs.cloud.google.com/bigquery/docs/authentication/getting-started?hl=zh-tw)」。
 
 如要進一步瞭解 Google Cloud 驗證，請參閱「[驗證方式](https://docs.cloud.google.com/docs/authentication?hl=zh-tw)」。
 
 ## API 存取權
 
-BigQuery 支援透過程式輔助方式存取。您可以透過下列方式存取 API：
+BigQuery 支援程式輔助存取。您可以透過下列方式存取 API：
 
 * [用戶端程式庫](#client-libraries)
 * [Google Cloud CLI](#gcloud)
@@ -30,15 +30,15 @@ BigQuery 支援透過程式輔助方式存取。您可以透過下列方式存�
 
 ### Google Cloud CLI
 
-使用 [gcloud CLI](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw) 存取 BigQuery 時，使用使用者帳戶[登入 gcloud CLI](https://docs.cloud.google.com/sdk/docs/authorizing?hl=zh-tw)，可提供 gcloud CLI 指令所使用的憑證。
+使用 [gcloud CLI](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw) 存取 BigQuery 時，您會以主體身分進行驗證 Google Cloud ，這會提供 gcloud CLI 指令所用的憑證。
 
 如果組織的安全政策禁止使用者帳戶具備必要權限，可以採用[服務帳戶模擬](#sa-impersonation)。
 
-詳情請參閱「[使用 gcloud CLI 進行驗證](https://docs.cloud.google.com/docs/authentication/gcloud?hl=zh-tw)」。如要進一步瞭解如何透過 gcloud CLI 使用 BigQuery，請參閱「[安裝 gcloud CLI](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw)」。
+詳情請參閱「[gcloud CLI 驗證](https://docs.cloud.google.com/sdk/docs/authenticate?hl=zh-tw)」。如要進一步瞭解如何透過 gcloud CLI 使用 BigQuery，請參閱「[安裝 gcloud CLI](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw)」。
 
 ### REST
 
-您可以使用 gcloud CLI 憑證或[應用程式預設憑證](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=zh-tw)，向 [BigQuery API](https://docs.cloud.google.com/bigquery/docs/reference/rest?hl=zh-tw) 進行驗證。如要進一步瞭解 REST 要求的驗證機制，請參閱「[使用 REST 進行驗證](https://docs.cloud.google.com/docs/authentication/rest?hl=zh-tw)」。如要瞭解憑證類型，請參閱「[gcloud CLI 憑證和 ADC 憑證](https://docs.cloud.google.com/docs/authentication/gcloud?hl=zh-tw#gcloud-credentials)」。
+您可以使用 [gcloud CLI 憑證](https://docs.cloud.google.com/sdk/docs/authenticate?hl=zh-tw)或[應用程式預設憑證](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=zh-tw)，向 [BigQuery API](https://docs.cloud.google.com/bigquery/docs/reference/rest?hl=zh-tw) 進行驗證。如要進一步瞭解 REST 要求的驗證機制，請參閱「[使用 REST 進行驗證](https://docs.cloud.google.com/docs/authentication/rest?hl=zh-tw)」一文。
 
 ## 設定 BigQuery 的驗證機制
 
@@ -65,7 +65,7 @@ BigQuery 支援透過程式輔助方式存取。您可以透過下列方式存�
    gcloud init
    ```
 
-   若您採用的是外部識別資訊提供者 (IdP)，請先[使用聯合身分登入 gcloud CLI](https://docs.cloud.google.com/iam/docs/workforce-log-in-gcloud?hl=zh-tw)。
+   如果您使用外部識別資訊提供者 (IdP)，請先[使用聯合身分登入 gcloud CLI](https://docs.cloud.google.com/iam/docs/workforce-log-in-gcloud?hl=zh-tw)。
 2. 如果您使用本機殼層，請為使用者帳戶建立本機驗證憑證：
 
    ```
@@ -116,7 +116,7 @@ Invoke-WebRequest `
     -Uri "https://iam.googleapis.com/v1/projects/PROJECT_ID/serviceAccounts" | Select-Object -Expand Content
 ```
 
-如要進一步瞭解如何使用 REST 和 gRPC 進行驗證，請參閱「[使用 REST 進行驗證](https://docs.cloud.google.com/docs/authentication/rest?hl=zh-tw)」。如要瞭解本機 ADC 憑證與 gcloud CLI 憑證的差異，請參閱「[gcloud CLI 驗證設定和 ADC 設定](https://docs.cloud.google.com/docs/authentication/gcloud?hl=zh-tw#gcloud-credentials)」。
+如要進一步瞭解如何使用 REST 和 gRPC 進行驗證，請參閱「[使用 REST 進行驗證](https://docs.cloud.google.com/docs/authentication/rest?hl=zh-tw)」。如要瞭解本機 ADC 憑證與 gcloud CLI 憑證的差異，請參閱「[gcloud CLI 驗證設定和 ADC 設定](https://docs.cloud.google.com/docs/authentication/provide-credentials-adc?hl=zh-tw#gcloud-credentials)」。
 
 #### 服務帳戶模擬
 
@@ -151,17 +151,17 @@ gcloud auth application-default login --impersonate-service-account=SERVICE_ACCT
    gcloud init
    ```
 
-   若您採用的是外部識別資訊提供者 (IdP)，請先[使用聯合身分登入 gcloud CLI](https://docs.cloud.google.com/iam/docs/workforce-log-in-gcloud?hl=zh-tw)。
+   如果您使用外部識別資訊提供者 (IdP)，請先[使用聯合身分登入 gcloud CLI](https://docs.cloud.google.com/iam/docs/workforce-log-in-gcloud?hl=zh-tw)。
 2. 設定驗證方法：
 
-   1. 確認您具備「建立服務帳戶」身分與存取權管理角色 (`roles/iam.serviceAccountCreator`) 和「專案 IAM 管理員」角色 (`roles/resourcemanager.projectIamAdmin`)。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   1. 請確認您具備「建立服務帳戶」IAM 角色 (`roles/iam.serviceAccountCreator`) 和「專案 IAM 管理員」角色 (`roles/resourcemanager.projectIamAdmin`)。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
    2. 建立服務帳戶：
 
       ```
       gcloud iam service-accounts create SERVICE_ACCOUNT_NAME
       ```
 
-      將 `SERVICE_ACCOUNT_NAME` 換成服務帳戶的名稱。
+      將 `SERVICE_ACCOUNT_NAME` 替換為服務帳戶的名稱。
    3. 如要授予服務帳戶專案和資源的存取權，請將角色授予該帳戶：
 
       ```
@@ -174,8 +174,8 @@ gcloud auth application-default login --impersonate-service-account=SERVICE_ACCT
       * `PROJECT_ID`：您建立服務帳戶的專案 ID
       * `ROLE`：要授予的角色
       **注意**：`--role` 旗標會影響服務帳戶在專案中可存取的資源。您之後可以撤銷這些角色或授予其他角色。
-      在正式環境中，請勿授予「擁有者」、「編輯者」或「檢視者」角色。請改為授予符合需求的[預先定義角色](https://docs.cloud.google.com/iam/docs/understanding-roles?hl=zh-tw#predefined_roles)或[自訂角色](https://docs.cloud.google.com/iam/docs/understanding-custom-roles?hl=zh-tw)。
-   4. 如要將其他角色授予服務帳戶，請執行上一個步驟中的指令。
+      在正式環境中，請勿授予擁有者、編輯者或檢視者角色，請改為授予符合需求的[預先定義角色](https://docs.cloud.google.com/iam/docs/understanding-roles?hl=zh-tw#predefined_roles)或[自訂角色](https://docs.cloud.google.com/iam/docs/understanding-custom-roles?hl=zh-tw)。
+   4. 如要將其他角色授予服務帳戶，請執行與上一個步驟相同的指令。
    5. 將必要角色指派給要將服務帳戶附加至其他資源的主體。
 
       ```
@@ -189,9 +189,9 @@ gcloud auth application-default login --impersonate-service-account=SERVICE_ACCT
       * `USER_EMAIL`：Google 帳戶的電子郵件地址
 3. 建立要執行程式碼的資源，並將服務帳戶附加至該資源。例如，如果您使用 Compute Engine：
 
-   建立 Compute Engine 執行個體。請依照下列步驟來設定執行個體：
+   建立 Compute Engine 執行個體。按照下列步驟設定執行個體：
    * 將 `INSTANCE_NAME` 替換成您偏好的執行個體名稱。
-   * 將 `--zone` 標記設定為您要在其中建立執行個體的[區域](https://docs.cloud.google.com/compute/docs/zones?hl=zh-tw#available)。
+   * 將 `--zone` 旗標設為您要在其中建立執行個體的[區域](https://docs.cloud.google.com/compute/docs/zones?hl=zh-tw#available)。
    * 將 `--service-account` 旗標設為您建立的服務帳戶電子郵件地址。
 
    ```
@@ -204,16 +204,16 @@ gcloud auth application-default login --impersonate-service-account=SERVICE_ACCT
 
 如要從 Google Cloud 外部設定驗證，建議使用 workload identity federation。詳情請參閱驗證說明文件中的「[為地端部署或其他雲端服務供應商設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-on-premises?hl=zh-tw)」。
 
-## BigQuery 存取權控管
+## BigQuery 的存取控管
 
-向 BigQuery 進行驗證後，您必須獲得授權才能存取 Google Cloud 資源。BigQuery 會使用 Identity and Access Management (IAM) 進行授權。
+向 BigQuery 進行驗證後，您必須獲得授權才能存取 Google Cloud 資源。BigQuery 使用 Identity and Access Management (IAM) 進行授權。
 
 如要進一步瞭解 BigQuery 的角色，請參閱「[BigQuery 中的 IAM 簡介](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)」。如要進一步瞭解 IAM 和授權，請參閱「[IAM 總覽](https://docs.cloud.google.com/iam/docs/overview?hl=zh-tw)」一文。
 
 ## 後續步驟
 
-* [開始使用驗證功能](https://docs.cloud.google.com/bigquery/docs/authentication/getting-started?hl=zh-tw)。
-* [透過使用者帳戶驗證已安裝的應用程式](https://docs.cloud.google.com/bigquery/docs/authentication/end-user-installed?hl=zh-tw)。
+* [開始使用驗證](https://docs.cloud.google.com/bigquery/docs/authentication/getting-started?hl=zh-tw)。
+* [使用使用者帳戶驗證已安裝的應用程式](https://docs.cloud.google.com/bigquery/docs/authentication/end-user-installed?hl=zh-tw)。
 * [使用 JSON Web Token 進行驗證](https://docs.cloud.google.com/bigquery/docs/json-web-tokens?hl=zh-tw)。
 * 瞭解[Google Cloud 驗證方式](https://docs.cloud.google.com/docs/authentication?hl=zh-tw#auth-decision-tree)。
 * 查看[驗證用途](https://docs.cloud.google.com/docs/authentication/use-cases?hl=zh-tw)清單。
@@ -225,11 +225,11 @@ gcloud auth application-default login --impersonate-service-account=SERVICE_ACCT
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-13 (世界標準時間)。
+上次更新時間：2026-10-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-13 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]

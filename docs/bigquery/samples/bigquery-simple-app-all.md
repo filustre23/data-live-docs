@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -260,6 +260,40 @@ if ($queryResults->isComplete()) {
 }
 ```
 
+### Python
+
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+
+```
+from google.cloud import bigquery
+
+
+
+def query_stackoverflow() -> None:
+    client = bigquery.Client()
+    results = client.query_and_wait(
+        """
+        SELECT
+          CONCAT(
+            'https://stackoverflow.com/questions/',
+            CAST(id as STRING)) as url,
+          view_count
+        FROM `bigquery-public-data.stackoverflow.posts_questions`
+        WHERE tags like '%google-bigquery%'
+        ORDER BY view_count DESC
+        LIMIT 10"""
+    )  # Waits for job to complete.
+
+    for row in results:
+        print("{} : {} views".format(row.url, row.view_count))
+
+
+if __name__ == "__main__":
+    query_stackoverflow()
+```
+
 ### Ruby
 
 在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Ruby 設定說明操作。詳情請參閱 [BigQuery Ruby API 參考說明文件](https://googleapis.dev/ruby/google-cloud-bigquery/latest/Google/Cloud/Bigquery.html)。
@@ -283,6 +317,46 @@ results = bigquery.query sql
 results.each do |row|
   puts "#{row[:url]}: #{row[:view_count]} views"
 end
+```
+
+### Rust
+
+```
+use google_cloud_bigquery::client::BigQuery;
+use google_cloud_bigquery::query::FromRow;
+
+pub async fn sample(project_id: &str) -> anyhow::Result<()> {
+    let client = BigQuery::builder().build().await?;
+
+    let query = r#"
+SELECT
+    CONCAT('https://stackoverflow.com/questions/', CAST(id as STRING)) as url,
+    view_count
+FROM `bigquery-public-data.stackoverflow.posts_questions`
+WHERE tags like '%google-bigquery%'
+ORDER BY view_count DESC
+LIMIT 10;
+"#;
+    let mut rows = client
+        .query(query)
+        .with_project_id(project_id)
+        .until_done()
+        .await?
+        .read();
+
+    #[derive(FromRow, Debug)]
+    struct StackOverflowRow {
+        url: String,
+        view_count: i64,
+    }
+
+    while let Some(row) = rows.next().await.transpose()? {
+        let row: StackOverflowRow = row.try_into()?;
+        println!("url: {} views: {}", row.url, row.view_count);
+    }
+
+    Ok(())
+}
 ```
 
 ## 後續步驟

@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -20,18 +20,18 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 BigQuery 原生支援使用 [`JSON`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#json_type) 資料類型的 JSON 資料。
 
-JSON 是一種廣為使用的格式，可處理半結構化資料，因為不需要結構定義。應用程式可使用「讀取時結構定義」方法，也就是應用程式會擷取資料，然後根據對該資料結構定義的假設進行查詢。這與 BigQuery 中的 `STRUCT` 類型不同，後者需要固定結構定義，且會對儲存在 `STRUCT` 類型資料欄中的所有值強制執行。
+JSON 是一種廣泛使用的格式，可支援半結構化資料，因為不需要結構定義。應用程式可以採用「讀取時定義結構定義」的方法，也就是先擷取資料，然後根據對資料結構定義的假設進行查詢。這種方法與 BigQuery 中的 `STRUCT` 類型不同，後者需要固定的結構定義，並強制套用至儲存在 `STRUCT` 類型資料欄中的所有值。
 
-使用 `JSON` 資料類型，您就能將半結構化 JSON 載入 BigQuery，不必預先提供 JSON 資料的結構定義。您可以儲存及查詢不一定符合固定結構定義和資料類型的資料。將 JSON 資料擷取為 `JSON` 資料類型後，BigQuery 就能個別編碼及處理每個 JSON 欄位。然後，您可以使用欄位存取運算子，查詢 JSON 資料中的欄位值和陣列元素，讓 JSON 查詢直覺易懂且經濟實惠。
+使用 `JSON` 資料類型，即可將半結構化 JSON 載入 BigQuery，不必預先提供 JSON 資料的結構定義。這樣一來，您就能儲存及查詢不一定符合固定結構定義和資料類型的資料。將 JSON 資料擷取為 `JSON` 資料類型後，BigQuery 就能個別編碼及處理每個 JSON 欄位。接著，您可以使用欄位存取運算子，查詢 JSON 資料中的欄位值和陣列元素，讓 JSON 查詢變得直覺且符合成本效益。
 
 ## 限制
 
-* 如果您使用[批次載入作業](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw)將 JSON 資料擷取至資料表，來源資料必須是 CSV、Avro 或 JSON 格式。系統不支援其他批次載入格式。
-* `JSON` 資料類型的巢狀結構限制為 500。
-* 您無法使用[舊版 SQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql?hl=zh-tw) 查詢含有 `JSON` 型別的資料表。
-* 資料列層級存取政策無法套用至 `JSON` 欄。
+* 如果您使用[批次載入工作](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw)將 JSON 資料擷取至資料表，來源資料必須採用 CSV、Avro 或 JSON 格式。不支援其他批次載入格式。
+* `JSON` 資料類型的巢狀結構上限為 500。
+* 您無法使用[舊版 SQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql?hl=zh-tw) 查詢含有 `JSON` 類型的資料表。
+* 資料列層級存取權政策無法套用至 `JSON` 資料欄。
 
-如要瞭解 `JSON` 資料類型的屬性，請參閱 [`JSON` 類型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#json_type)。
+如要瞭解 `JSON` 資料類型的屬性，請參閱「[`JSON` 類型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#json_type)」。
 
 ## 建立含有 `JSON` 資料欄的資料表
 
@@ -39,7 +39,7 @@ JSON 是一種廣為使用的格式，可處理半結構化資料，因為不需
 
 ### SQL
 
-使用 [`CREATE TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#create_table_statement) 陳述式，並宣告 `JSON` 型別的資料欄。
+使用 [`CREATE TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#create_table_statement) 陳述式，並宣告 `JSON` 類型的資料欄。
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -52,19 +52,19 @@ JSON 是一種廣為使用的格式，可處理半結構化資料，因為不需
      cart JSON
    );
    ```
-3. 按一下「執行」play\_circle。
+3. 按一下「play\_circle 執行」。
 
 如要進一步瞭解如何執行查詢，請參閱「[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)」。
 
 ### bq
 
-使用 [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#mk-table) 指令，並提供具有 `JSON` 資料類型的資料表結構。
+使用 [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#mk-table) 指令，並提供具有 `JSON` 資料類型的資料表結構定義。
 
 ```
 bq mk --table mydataset.table1 id:INT64,cart:JSON
 ```
 
-您無法根據 `JSON` 資料欄對資料表分區或叢集，因為等號和比較運算子未在 `JSON` 型別中定義。
+您無法依 `JSON` 資料欄對資料表進行分區或分群，因為 `JSON` 類型未定義等式和比較運算子。
 
 ## 建立 `JSON` 值
 
@@ -73,10 +73,10 @@ bq mk --table mydataset.table1 id:INT64,cart:JSON
 * 使用 SQL 建立 [`JSON` 常值](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#json_literals)。
 * 使用 [`PARSE_JSON`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions?hl=zh-tw#parse_json) 函式將 `STRING` 值轉換為 [`JSON` 值](https://www.json.org/json-en.html)。
 * 使用 [`TO_JSON`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions?hl=zh-tw#to_json) 函式將 SQL 值轉換為 [`JSON` 值](https://www.json.org/json-en.html)。
-* 使用 [`JSON_ARRAY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions?hl=zh-tw#json_array) 函式從 SQL 值建立 JSON 陣列。
+* 使用 [`JSON_ARRAY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions?hl=zh-tw#json_array) 函式，從 SQL 值建立 JSON 陣列。
 * 使用 [`JSON_OBJECT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions?hl=zh-tw#json_object) 函式，從鍵/值組合建立 JSON 物件。
 
-### 建立`JSON`值
+### 建立 `JSON` 值
 
 以下範例會將 `JSON` 值插入資料表：
 
@@ -87,9 +87,9 @@ INSERT INTO mydataset.table1 VALUES
 (3, JSON_OBJECT('foo', 10, 'bar', ['a', 'b']));
 ```
 
-### 將 `STRING` 型別轉換為 `JSON` 型別
+### 將 `STRING` 類型轉換為 `JSON` 類型
 
-下列範例使用 [`PARSE_JSON`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions?hl=zh-tw#parse_json) 函式，轉換 JSON 格式的 `STRING` 值。這個範例會將現有資料表的資料欄轉換為 `JSON` 型別，並將結果儲存到新資料表。
+以下範例使用 [`PARSE_JSON`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions?hl=zh-tw#parse_json) 函式轉換 JSON 格式的 `STRING` 值。這個範例會將現有資料表中的資料欄轉換為 `JSON` 類型，並將結果儲存至新資料表。
 
 ```
 CREATE OR REPLACE TABLE mydataset.table_new
@@ -101,9 +101,9 @@ AS (
 );
 ```
 
-本例中使用的 [`SAFE` 前置字元](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/functions-reference?hl=zh-tw#safe_prefix)可確保所有轉換錯誤都會以 `NULL` 值傳回。
+本例中使用的 [`SAFE` 前置字元](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/functions-reference?hl=zh-tw#safe_prefix)可確保任何轉換錯誤都會以 `NULL` 值傳回。
 
-### 將結構定義資料轉換為 JSON
+### 將結構化資料轉換為 JSON
 
 以下範例使用 [`JSON_OBJECT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions?hl=zh-tw#json_object) 函式，將鍵/值組合轉換為 JSON。
 
@@ -131,7 +131,7 @@ GROUP BY id
 +----------------------------------+
 ```
 
-### 將 SQL 型別轉換為 `JSON` 型別
+### 將 SQL 類型轉換為 `JSON` 類型
 
 以下範例使用 [`TO_JSON`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions?hl=zh-tw#to_json) 函式，將 SQL `STRUCT` 值轉換為 `JSON` 值：
 
@@ -151,19 +151,18 @@ SELECT TO_JSON(STRUCT(1 AS id, [10,20] AS coordinates)) AS pt;
 
 ## 擷取 JSON 資料
 
-您可以透過下列方式將 JSON 資料擷取至 BigQuery 資料表：
+您可以透過下列方式，將 JSON 資料擷取至 BigQuery 資料表：
 
 * 使用批次載入工作，從下列格式載入 `JSON` 欄。
   + [CSV](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv?hl=zh-tw)
   + [Avro](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-avro?hl=zh-tw#extract_json_data_from_avro_data)
   + [JSON](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json?hl=zh-tw#loading_semi-structured_json_data)
-* 使用 [BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api?hl=zh-tw)。
-* 使用舊版
-  [`tabledata.insertAll` 串流 API](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery?hl=zh-tw)
+* 使用 [BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api?hl=zh-tw)。
+* 使用 [BigQuery Storage Write API (REST)](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery?hl=zh-tw)。
 
 ### 從 CSV 檔案載入
 
-以下範例假設您有名為 `file1.csv` 的 CSV 檔案，其中包含下列記錄：
+以下範例假設您有一個名為 `file1.csv` 的 CSV 檔案，其中包含下列記錄：
 
 ```
 1,20
@@ -171,7 +170,7 @@ SELECT TO_JSON(STRUCT(1 AS id, [10,20] AS coordinates)) AS pt;
 3,"{""id"": 10, ""name"": ""Alice""}"
 ```
 
-請注意，第二欄包含以字串編碼的 JSON 資料。這包括正確逸出 CSV 格式的引號。在 CSV 格式中，引號會使用 `""` 雙字元序列逸出。
+請注意，第二欄包含編碼為字串的 JSON 資料。這包括正確逸出 CSV 格式的引號。在 CSV 格式中，引號會使用雙字元序列 `""` 逸出。
 
 如要使用 bq 指令列工具載入這個檔案，請使用 [`bq load`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_load) 指令：
 
@@ -209,11 +208,11 @@ Last modified          Schema         Total Rows   Total Bytes
                    |- json_data: json
 ```
 
-### 使用 Storage Write API
+### 使用 Storage Write API (gRPC)
 
-您可以使用 [Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api?hl=zh-tw) 擷取 JSON 資料。以下範例使用 Storage Write API [Python 用戶端](https://docs.cloud.google.com/bigquery/docs/write-api?hl=zh-tw#python_client)，將資料寫入含有 JSON 資料類型資料欄的資料表。
+您可以使用 [Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api?hl=zh-tw) 擷取 JSON 資料。下列範例使用 Storage Write API (gRPC) [Python 用戶端](https://docs.cloud.google.com/bigquery/docs/write-api?hl=zh-tw#python_client)，將資料寫入含有 JSON 資料類型資料欄的資料表。
 
-定義通訊協定緩衝區，用來保存序列化的串流資料。JSON 資料會編碼為字串。在下列範例中，`json_col` 欄位會保留 JSON 資料。
+定義通訊協定緩衝區，用於保存序列化串流資料。JSON 資料會編碼為字串。在下列範例中，`json_col` 欄位包含 JSON 資料。
 
 ```
 message SampleData {
@@ -223,7 +222,7 @@ message SampleData {
 }
 ```
 
-將每一列的 JSON 資料格式設為 `STRING` 值：
+將每列的 JSON 資料格式設為 `STRING` 值：
 
 ```
 row.json_col = '{"a": 10, "b": "bar"}'
@@ -231,10 +230,9 @@ row.json_col = '"This is a string"' # The double-quoted string is the JSON value
 row.json_col = '10'
 ```
 
-如[程式碼範例](https://docs.cloud.google.com/bigquery/docs/write-api-streaming?hl=zh-tw#at-least-once)所示，將資料列附加至寫入串流。
-用戶端程式庫會處理序列化為通訊協定緩衝區格式的作業。
+如[程式碼範例](https://docs.cloud.google.com/bigquery/docs/write-api-streaming?hl=zh-tw#at-least-once)所示，將資料列附加至寫入串流。用戶端程式庫會處理序列化為通訊協定緩衝區格式。
 
-如果無法格式化傳入的 JSON 資料，您需要在程式碼中使用 `json.dumps()` 方法。範例如下：
+如果您無法設定傳入 JSON 資料的格式，則必須在程式碼中使用 `json.dumps()` 方法。範例如下：
 
 ```
 import json
@@ -248,9 +246,9 @@ row.json_col = json.dumps(10)
 ...
 ```
 
-### 使用舊版串流 API
+### 使用 Storage Write API (REST)
 
-以下範例會從本機檔案載入 JSON 資料，並使用[舊版串流 API](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery?hl=zh-tw) 將資料串流至 BigQuery 資料表，該資料表含有名為 `json_data` 的 JSON 資料類型資料欄。
+下列範例會從本機檔案載入 JSON 資料，並使用 [Storage Write API (REST)](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery?hl=zh-tw)，將資料串流至 BigQuery 資料表，其中包含名為 `json_data` 的 JSON 資料類型已指定類型和格式的欄。
 
 ```
 from google.cloud import bigquery
@@ -278,7 +276,7 @@ rows_to_insert = [
 #]
 
 # Throw errors if encountered.
-# https://cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.client.Client#google_cloud_bigquery_client_Client_insert_rows
+# https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.client.Client#google_cloud_bigquery_client_Client_insert_rows
 
 errors = client.insert_rows(table=table_obj, rows=rows_to_insert)
 if errors == []:
@@ -287,13 +285,13 @@ else:
     print("Encountered errors while inserting rows: {}".format(errors))
 ```
 
-詳情請參閱[以串流方式將資料傳入 BigQuery](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery?hl=zh-tw#streaminginsertexamples)。
+詳情請參閱「[將資料串流至 BigQuery](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery?hl=zh-tw#streaminginsertexamples)」。
 
 ## 查詢 JSON 資料
 
 本節說明如何使用 GoogleSQL 從 JSON 擷取值。JSON 區分大小寫，且欄位和值都支援 UTF-8。
 
-本節範例使用下表：
+本節範例使用下列資料表：
 
 ```
 CREATE OR REPLACE TABLE mydataset.table1(id INT64, cart JSON);
@@ -316,7 +314,7 @@ INSERT INTO mydataset.table1 VALUES
 
 ### 以 JSON 格式擷取值
 
-在 BigQuery 中，如果類型為 `JSON`，您可以使用[欄位存取運算子](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators?hl=zh-tw#field_access_operator)，存取 JSON 運算式中的欄位。以下範例會傳回 `cart` 資料欄的 `name` 欄位。
+在 BigQuery 中，您可以使用[欄位存取運算子](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators?hl=zh-tw#field_access_operator)，存取 JSON 運算式中的 `JSON` 類型欄位。以下範例會傳回 `cart` 欄的 `name` 欄位。
 
 ```
 SELECT cart.name
@@ -365,7 +363,7 @@ FROM mydataset.table1;
 +---------+
 ```
 
-如果是下標作業，方括號內的運算式可以是任意字串或整數運算式，包括非常數運算式：
+對於下標作業，括號內的運算式可以是任何任意字串或整數運算式，包括非常數運算式：
 
 ```
 DECLARE int_val INT64 DEFAULT 0;
@@ -384,11 +382,11 @@ FROM mydataset.table1;
 +--------+
 ```
 
-欄位存取和下標運算子都會傳回 `JSON` 型別，因此您可以串連使用這些運算子的運算式，或將結果傳遞至採用 `JSON` 型別的其他函式。
+欄位存取和下標運算子都會傳回 `JSON` 類型，因此您可以鏈結使用這些運算子的運算式，或將結果傳遞至其他採用 `JSON` 類型的函式。
 
-這些運算子可提升[`JSON_QUERY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions?hl=zh-tw#json_query)函式基本功能的可讀性。舉例來說，運算式 `cart.name` 等同於 `JSON_QUERY(cart, "$.name")`。
+這些運算子可提高 [`JSON_QUERY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions?hl=zh-tw#json_query) 函式基本功能的可讀性。例如，運算式 `cart.name` 等同於 `JSON_QUERY(cart, "$.name")`。
 
-如果在 JSON 物件中找不到具有指定名稱的成員，或 JSON 陣列沒有指定位置的元素，這些運算子就會傳回 SQL `NULL`。
+如果在 JSON 物件中找不到指定名稱的成員，或 JSON 陣列沒有指定位置的元素，這些運算子會傳回 SQL `NULL`。
 
 ```
 SELECT
@@ -407,8 +405,7 @@ FROM
 +---------+-------------+
 ```
 
-等號和比較運算子未在 `JSON` 資料類型中定義。
-因此，您無法直接在 `GROUP BY` 或 `ORDER BY` 等子句中使用 `JSON` 值。請改用 `JSON_VALUE` 函式，以 SQL 字串形式擷取欄位值，如下一節所述。
+`JSON` 資料類型未定義等式和比較運算子。因此，您無法直接在 `GROUP BY` 或 `ORDER BY` 等子句中使用 `JSON` 值。請改用 `JSON_VALUE` 函式，將欄位值擷取為 SQL 字串，詳情請參閱下一節。
 
 ### 以字串形式擷取值
 
@@ -427,7 +424,7 @@ FROM mydataset.table1;
 +-------+
 ```
 
-您可以在需要相等或比較的環境中使用 `JSON_VALUE` 函式，例如 `WHERE` 子句和 `GROUP BY` 子句。以下範例顯示根據 `JSON` 值篩選的 `WHERE` 子句：
+您可以在需要相等或比較的情境中使用 `JSON_VALUE` 函式，例如 `WHERE` 子句和 `GROUP BY` 子句。以下範例顯示 `WHERE` 子句，可篩選 `JSON` 值：
 
 ```
 SELECT
@@ -446,7 +443,7 @@ WHERE
 +-------------------------------+
 ```
 
-或者，您也可以使用 [`STRING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions?hl=zh-tw#string_for_json) 函式擷取 JSON 字串，然後以 SQL `STRING` 形式傳回該值。例如：
+或者，您也可以使用 [`STRING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions?hl=zh-tw#string_for_json) 函式，擷取 JSON 字串並以 SQL `STRING` 形式傳回該值。例如：
 
 ```
 SELECT STRING(JSON '"purple"') AS color;
@@ -460,20 +457,20 @@ SELECT STRING(JSON '"purple"') AS color;
 +--------+
 ```
 
-除了 [`STRING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions?hl=zh-tw#string_for_json)，您可能還需要擷取 `JSON` 值，並以其他 SQL 資料類型傳回。以下是可用的值擷取函式：
+除了 [`STRING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions?hl=zh-tw#string_for_json) 之外，您可能還需要擷取 `JSON` 值，並以其他 SQL 資料類型傳回。可用的值擷取函式如下：
 
 * [`STRING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions?hl=zh-tw#string_for_json)
 * [`BOOL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions?hl=zh-tw#bool_for_json)
 * [`INT64`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions?hl=zh-tw#int64_for_json)
 * [`FLOAT64`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions?hl=zh-tw#double_for_json)
 
-如要取得 `JSON` 值的型別，可以使用 [`JSON_TYPE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions?hl=zh-tw#json_type) 函式。
+如要取得 `JSON` 值的類型，可以使用 [`JSON_TYPE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions?hl=zh-tw#json_type) 函式。
 
-### 彈性轉換 JSON
+### 靈活轉換 JSON
 
-您可以使用 [`LAX conversion`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions?hl=zh-tw#lax_converters) 函式，彈性地將 `JSON` 值轉換為純量 SQL 值。
+您可以使用 [`LAX conversion`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions?hl=zh-tw#lax_converters) 函式，靈活地將 `JSON` 值轉換為純量 SQL 值。
 
-以下範例使用 [`LAX_INT64` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions?hl=zh-tw#lax_int64)，從 `JSON` 值擷取 `INT64` 值。
+以下範例使用 [`LAX_INT64` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions?hl=zh-tw#lax_int64)，從 `JSON` 值中擷取 `INT64` 值。
 
 ```
 SELECT LAX_INT64(JSON '"10"') AS id;
@@ -487,7 +484,7 @@ SELECT LAX_INT64(JSON '"10"') AS id;
 +----+
 ```
 
-除了 [`LAX_INT64`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions?hl=zh-tw#lax_int64)，您也可以使用下列函式，彈性地將其他 SQL 型別轉換為 JSON：
+除了 [`LAX_INT64`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions?hl=zh-tw#lax_int64) 之外，您也可以使用下列函式，彈性地將其他 SQL 類型轉換為 JSON：
 
 * [`LAX_STRING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions?hl=zh-tw#lax_string)
 * [`LAX_BOOL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions?hl=zh-tw#lax_bool)
@@ -496,14 +493,12 @@ SELECT LAX_INT64(JSON '"10"') AS id;
 
 ### 從 JSON 擷取陣列
 
-JSON 可以包含 JSON 陣列，但這類陣列與 BigQuery 中的 `ARRAY<JSON>` 型別並不完全相同。您可以使用下列函式，從 JSON 擷取 BigQuery `ARRAY`：
+JSON 可包含 JSON 陣列，但這與 BigQuery 中的 `ARRAY<JSON>` 類型不完全相同。您可以使用下列函式，從 JSON 擷取 BigQuery `ARRAY`：
 
-* [`JSON_QUERY_ARRAY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions?hl=zh-tw#json_query_array)：
-  擷取陣列並以 JSON 形式的 `ARRAY<JSON>` 傳回。
-* [`JSON_VALUE_ARRAY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions?hl=zh-tw#json_value_array)：
-  擷取純量值陣列，並以純量值 `ARRAY<STRING>` 形式傳回。
+* [`JSON_QUERY_ARRAY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions?hl=zh-tw#json_query_array)：擷取陣列，並以 JSON `ARRAY<JSON>` 形式傳回。
+* [`JSON_VALUE_ARRAY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions?hl=zh-tw#json_value_array)：擷取純量值陣列，並以純量值的 `ARRAY<STRING>` 形式傳回。
 
-下列範例使用 `JSON_QUERY_ARRAY` 擷取 JSON 陣列：
+以下範例使用 `JSON_QUERY_ARRAY` 擷取 JSON 陣列：
 
 ```
 SELECT JSON_QUERY_ARRAY(cart.items) AS items
@@ -519,7 +514,7 @@ FROM mydataset.table1;
 +----------------------------------------------------------------+
 ```
 
-如要將陣列分割為個別元素，請使用 [`UNNEST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw#unnest_operator) 運算子，這個運算子會傳回一個資料表，當中陣列的每項元素都會顯示為一個資料列。下列範例會從 `items` 陣列的每個成員選取 `product` 成員：
+如要將陣列分割成個別元素，請使用 [`UNNEST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw#unnest_operator) 運算子，這會傳回一個資料表，其中陣列中的每個元素都有一列。以下範例會從 `items` 陣列的每個成員中選取 `product` 成員：
 
 ```
 SELECT
@@ -540,7 +535,7 @@ ORDER BY id;
 +----+---------+
 ```
 
-下一個範例與上述範例類似，但使用 [`ARRAY_AGG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions?hl=zh-tw#array_agg) 函式將值匯總回 SQL 陣列。
+下一個範例與上一個類似，但使用 [`ARRAY_AGG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions?hl=zh-tw#array_agg) 函式將值匯總回 SQL 陣列。
 
 ```
 SELECT
@@ -565,7 +560,7 @@ ORDER BY id;
 
 ## JSON 空值
 
-`JSON` 型別具有與 SQL `NULL` 不同的特殊 `null` 值。JSON `null` 不會視為 SQL `NULL` 值，如下列範例所示。
+`JSON` 類型具有特殊的 `null` 值，與 SQL `NULL` 不同。JSON `null` 不會視為 SQL `NULL` 值，如下例所示。
 
 ```
 SELECT JSON 'null' IS NULL;
@@ -579,12 +574,12 @@ SELECT JSON 'null' IS NULL;
 +-------+
 ```
 
-使用 `null` 值擷取 JSON 欄位時，行為會因函式而異：
+擷取含有 `null` 值的 JSON 欄位時，行為會因函式而異：
 
 * `JSON_QUERY` 函式會傳回 JSON `null`，因為這是有效的 `JSON` 值。
 * `JSON_VALUE` 函式會傳回 SQL `NULL`，因為 JSON `null` 不是純量值。
 
-以下範例顯示不同的行為：
+以下範例說明不同行為：
 
 ```
 SELECT
@@ -601,8 +596,7 @@ FROM (SELECT JSON '{"a": null}' AS json);
 +------------+------------+
 ```
 
-**注意：** 這項行為不適用於儲存在 `STRING` 類型中的 JSON 值。
-如果傳遞 `STRING` 值，`JSON_QUERY` 函式會傳回 SQL `NULL` 值，取代 JSON `null` 值。
+**注意：** 這項行為不適用於儲存在 `STRING` 類型中的 JSON 值。傳遞 `STRING` 值時，`JSON_QUERY` 函式會傳回 SQL `NULL` 值，而非 JSON `null` 值。
 
 
 
@@ -611,11 +605,11 @@ FROM (SELECT JSON '{"a": null}' AS json);
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-12 (世界標準時間)。
+上次更新時間：2026-10-16 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-12 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-16 (世界標準時間)。"],[],[]]

@@ -28,6 +28,9 @@ Send feedback
 * `AvroSerializationOptions.PicosTimestampPrecision` (enum)
 * `BatchCommitWriteStreamsRequest` (message)
 * `BatchCommitWriteStreamsResponse` (message)
+* `ClientStats` (message)
+* `ClientStats.RequestStats` (message)
+* `ClientStats.WindowStats` (message)
 * `CreateReadSessionRequest` (message)
 * `CreateWriteStreamRequest` (message)
 * `DataFormat` (enum)
@@ -125,6 +128,7 @@ The size of a single AppendRowsRequest must be less than 20 MB in size. Requests
 | `offset` | `Int64Value`  If present, the write is only performed if the next append offset is same as the provided value. If not present, the write is performed at the current end of stream. Specifying a value for this field is not allowed when calling AppendRows for the '\_default' stream. |
 | `trace_id` | `string`  Id set by client to annotate its identity. Only initial request setting is respected. |
 | `missing_value_interpretations` | `map<string, MissingValueInterpretation>`  A map to indicate how to interpret missing value for some fields. Missing values are fields present in user schema but missing in rows. The key is the field name. The value is the interpretation of missing values for the field.  For example, a map {'foo': NULL\_VALUE, 'bar': DEFAULT\_VALUE} means all missing values in field foo are interpreted as NULL, all missing values in field bar are interpreted as the default value of field bar in table schema.  If a field is not in this map and has missing values, the missing values in this field are interpreted as NULL.  This field only applies to the current request, it won't affect other requests on the connection.  Currently, field name can only be top-level column name, can't be a struct field path like 'foo.bar'. |
+| `client_stats` | `ClientStats`  Optional. Stats and telemetry data gathered on the client side. |
 | Union field `rows`. Input rows. The `writer_schema` field must be specified at the initial request and currently, it will be ignored if specified in following requests. Following requests must have data in the same format as the initial request. `rows` can be only one of the following: | |
 | `proto_rows` | `ProtoData`  Rows in proto format. |
 
@@ -136,111 +140,4 @@ An enum to indicate how to interpret missing values of fields that are present i
 | --- | --- |
 | `MISSING_VALUE_INTERPRETATION_UNSPECIFIED` | Invalid missing value interpretation. Requests with this value will be rejected. |
 | `NULL_VALUE` | Missing value is interpreted as NULL. |
-| `DEFAULT_VALUE` | Missing value is interpreted as column default value if declared in the table schema, NULL otherwise. |
-
-## ProtoData
-
-ProtoData contains the data rows and schema when constructing append requests.
-
-| Fields | |
-| --- | --- |
-| `writer_schema` | `ProtoSchema`  Optional. The protocol buffer schema used to serialize the data. Provide this value whenever:   * You send the first request of an RPC connection. * You change the input schema. * You specify a new destination table. |
-| `rows` | `ProtoRows`  Required. Serialized row data in protobuf message format. Currently, the backend expects the serialized rows to adhere to proto2 semantics when appending rows, particularly with respect to how default values are encoded. |
-
-## AppendRowsResponse
-
-Response message for `AppendRows`.
-
-| Fields | |
-| --- | --- |
-| `updated_schema` | `TableSchema`  If backend detects a schema update, pass it to user so that user can use it to input new type of message. It will be empty when no schema updates have occurred. |
-| `row_errors[]` | `RowError`  If a request failed due to corrupted rows, no rows in the batch will be appended. The API will return row level error info, so that the caller can remove the bad rows and retry the request. |
-| `write_stream` | `string`  The target of the append operation. Matches the write\_stream in the corresponding request. |
-| Union field `response`.  `response` can be only one of the following: | |
-| `append_result` | `AppendResult`  Result if the append is successful. |
-| `error` | `Status`  Error returned when problems were encountered. If present, it indicates rows were not accepted into the system. Users can retry or continue with other append requests within the same connection.  Additional information about error signalling:  ALREADY\_EXISTS: Happens when an append specified an offset, and the backend already has received data at this offset. Typically encountered in retry scenarios, and can be ignored.  OUT\_OF\_RANGE: Returned when the specified offset in the stream is beyond the current end of the stream.  INVALID\_ARGUMENT: Indicates a malformed request or data.  ABORTED: Request processing is aborted because of prior failures. The request can be retried if previous failure is addressed.  INTERNAL: Indicates server side error(s) that can be retried. |
-
-## AppendResult
-
-AppendResult is returned for successful append requests.
-
-| Fields | |
-| --- | --- |
-| `offset` | `Int64Value`  The row offset at which the last append occurred. The offset will not be set if appending using default streams. |
-
-## ArrowRecordBatch
-
-Arrow RecordBatch.
-
-| Fields | |
-| --- | --- |
-| `serialized_record_batch` | `bytes`  IPC-serialized Arrow RecordBatch. |
-| `row_count (deprecated)` | `int64`  This item is deprecated!  [Deprecated] The count of rows in `serialized_record_batch`. Please use the format-independent ReadRowsResponse.row\_count instead. |
-
-## ArrowSchema
-
-Arrow schema as specified in <https://arrow.apache.org/docs/python/api/datatypes.html> and serialized to bytes using IPC: <https://arrow.apache.org/docs/format/Columnar.html#serialization-and-interprocess-communication-ipc>
-
-See code samples on how this message can be deserialized.
-
-| Fields | |
-| --- | --- |
-| `serialized_schema` | `bytes`  IPC serialized Arrow schema. |
-
-## ArrowSerializationOptions
-
-Contains options specific to Arrow Serialization.
-
-| Fields | |
-| --- | --- |
-| `buffer_compression` | `CompressionCodec`  The compression codec to use for Arrow buffers in serialized record batches. |
-| `picos_timestamp_precision` | `PicosTimestampPrecision`  Optional. Set timestamp precision option. If not set, the default precision is microseconds. |
-
-## CompressionCodec
-
-Compression codec's supported by Arrow.
-
-| Enums | |
-| --- | --- |
-| `COMPRESSION_UNSPECIFIED` | If unspecified no compression will be used. |
-| `LZ4_FRAME` | LZ4 Frame (<https://github.com/lz4/lz4/blob/dev/doc/lz4_Frame_format.md>) |
-| `ZSTD` | Zstandard compression. |
-
-## PicosTimestampPrecision
-
-The precision of the timestamp value in the Avro message. This precision will **only** be applied to the column(s) with the `TIMESTAMP_PICOS` type.
-
-| Enums | |
-| --- | --- |
-| `PICOS_TIMESTAMP_PRECISION_UNSPECIFIED` | Unspecified timestamp precision. The default precision is microseconds. |
-| `TIMESTAMP_PRECISION_MICROS` | Timestamp values returned by Read API will be truncated to microsecond level precision. The value will be encoded as Arrow TIMESTAMP type in a 64 bit integer. |
-| `TIMESTAMP_PRECISION_NANOS` | Timestamp values returned by Read API will be truncated to nanosecond level precision. The value will be encoded as Arrow TIMESTAMP type in a 64 bit integer. |
-| `TIMESTAMP_PRECISION_PICOS` | Read API will return full precision picosecond value. The value will be encoded as a string which conforms to ISO 8601 format. |
-
-## AvroRows
-
-Avro rows.
-
-| Fields | |
-| --- | --- |
-| `serialized_binary_rows` | `bytes`  Binary serialized rows in a block. |
-| `row_count (deprecated)` | `int64`  This item is deprecated!  [Deprecated] The count of rows in the returning block. Please use the format-independent ReadRowsResponse.row\_count instead. |
-
-## AvroSchema
-
-Avro schema.
-
-| Fields | |
-| --- | --- |
-| `schema` | `string`  Json serialized schema, as described at <https://avro.apache.org/docs/1.8.1/spec.html>. |
-
-## AvroSerializationOptions
-
-Contains options specific to Avro Serialization.
-
-| Fields | |
-| --- | --- |
-| `enable_display_name_attribute` | `bool`  Enable displayName attribute in Avro schema.  The Avro specification requires field names to be alphanumeric. By default, in cases when column names do not conform to these requirements (e.g. non-ascii unicode codepoints) and Avro is requested as an output format, the CreateReadSession call will fail.  Setting this field to true, populates avro field names with a placeholder value and populates a "displayName" attribute for every avro field with the original column name. |
-| `picos_timestamp_precision` | `PicosTimestampPrecision`  Optional. Set timestamp precision option. If not set, the default precision is microseconds. |
-
-## PicosTimestampPrecision
+| `DEFAULT_VALU` |

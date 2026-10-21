@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -18,12 +18,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 本文說明如何排定及部署 BigQuery 中的 Colab Enterprise 筆記本，自動執行各種工作。舉例來說，您可以指定時間和頻率執行筆記本，自動訓練機器學習模型、呼叫外部 API 或執行 BigQuery DataFrames 程式碼。
 
-系統會自動儲存您對筆記本所做的變更，但只有您和[有權存取筆記本](https://docs.cloud.google.com/bigquery/docs/manage-notebooks?hl=zh-tw#grant_access_to_notebooks)的使用者可以查看。如要使用新版筆記本更新排程，請[部署筆記本](#deploy)。
-部署筆記本時，系統會使用目前版本的筆記本更新排程。排程會執行最新部署的筆記本版本。
+系統會自動儲存您對筆記本所做的變更，但只有您和[有權存取筆記本](https://docs.cloud.google.com/bigquery/docs/manage-notebooks?hl=zh-tw#grant_access_to_notebooks)的使用者才能查看。如要使用新版筆記本更新排程，請[部署筆記本](#deploy)。部署筆記本時，系統會使用目前版本的筆記本更新排程。排程會執行最新部署的筆記本版本。
 
 系統會使用您的 Google 帳戶使用者憑證或[自訂服務帳戶](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#about-service-accounts)，執行每個筆記本排程。您可以在設定排程時選取要使用的帳戶。
 
-筆記本是由 [Dataform](https://docs.cloud.google.com/dataform/docs/overview?hl=zh-tw) 支援的程式碼資產。不過，筆記本不會顯示在 Dataform 中。
+筆記本是採用 [Dataform](https://docs.cloud.google.com/dataform/docs/overview?hl=zh-tw) 的程式碼資產。不過，筆記本不會顯示在 Dataform 中。
 Dataform 會將排定執行的筆記本輸出內容，寫入排程建立期間選取的 [Cloud Storage 值區](https://docs.cloud.google.com/storage/docs/buckets?hl=zh-tw)。
 
 筆記本排程使用[標準 E2 執行階段](https://docs.cloud.google.com/colab/docs/runtimes?hl=zh-tw)。
@@ -35,13 +34,13 @@ Dataform 會將排定執行的筆記本輸出內容，寫入排程建立期間�
 
 ### 啟用筆記本排程
 
-如要安排筆記本的執行時間，請務必將下列角色授予您打算用於筆記本排程的自訂服務帳戶：
+如要安排筆記本的執行時間，請將下列角色授予您打算用於筆記本排程的自訂服務帳戶：
 
 [筆記本執行程式使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform?hl=zh-tw#aiplatform.notebookExecutorUser) (`roles/aiplatform.notebookExecutorUser`)
 :   按照「[授予專案的單一角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw#grant-single-role)」一文的說明，在所選專案中，將 Notebook Executor User 角色授予服務帳戶。
 
 [儲存空間管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/storage?hl=zh-tw#storage.admin) (`roles/storage.admin`)
-:   按照「[在 bucket 層級政策中新增主體](https://docs.cloud.google.com/storage/docs/access-control/using-iam-permissions?hl=zh-tw#bucket-add)」一文的說明，將服務帳戶新增為主體，並指派 Storage 管理員角色。這個 Cloud Storage bucket 之後會用於儲存排定執行的筆記本輸出內容。
+:   按照「[在 bucket 層級政策中新增主體](https://docs.cloud.google.com/storage/docs/access-control/using-iam-permissions?hl=zh-tw#bucket-add)」一文的說明，將服務帳戶新增為主體，加入您打算用來儲存排定筆記本執行作業輸出內容的 Cloud Storage bucket，並將 Storage 管理員角色授予這個主體。
 
 [服務帳戶使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/iam?hl=zh-tw#iam.serviceAccountUser) (`roles/iam.serviceAccountUser`)
 :   按照「[為服務帳戶授予單一角色](https://docs.cloud.google.com/iam/docs/manage-access-service-accounts?hl=zh-tw#grant-single-role)」一文中的步驟，將服務帳戶新增為自己的主體。換句話說，請將服務帳戶新增為同一個服務帳戶的主體。然後將服務帳戶使用者角色授予這個主體。
@@ -49,7 +48,7 @@ Dataform 會將排定執行的筆記本輸出內容，寫入排程建立期間�
 此外，您必須將下列角色授予預設的 Dataform 服務代理：
 
 [服務帳戶憑證建立者](https://docs.cloud.google.com/iam/docs/service-account-permissions?hl=zh-tw#token-creator-role) (`roles/iam.serviceAccountTokenCreator`)
-:   按照「[授予自訂 Dataform 服務帳戶權杖建立存取權](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#grant-token-creation-access)」一文的說明，將預設 Dataform 服務代理程式新增為服務帳戶的主體，並將服務帳戶權杖建立者角色授予這個主體。
+:   按照「[授予自訂 Dataform 服務帳戶權杖建立存取權](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#grant-token-creation-access)」一文的說明，將預設 Dataform 服務代理新增為服務帳戶的主體，並將服務帳戶權杖建立者角色授予這個主體。
 
 [服務帳戶使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/iam?hl=zh-tw#iam.serviceAccountUser) (`roles/iam.serviceAccountUser`)
 :   按照「[使用 Google Cloud console 授予或撤銷多個 IAM 角色](https://docs.cloud.google.com/iam/docs/manage-access-service-accounts?hl=zh-tw#multiple-roles-console)」一文的說明，在自訂服務帳戶中，將服務帳戶使用者角色授予預設的 Dataform 服務代理程式。
@@ -58,9 +57,9 @@ Dataform 會將排定執行的筆記本輸出內容，寫入排程建立期間�
 
 ### VPC Service Controls 規定
 
-如果您使用 VPC Service Controls 保護筆記本，請注意排定執行的作業是由 Dataform 支援。為排定執行的作業設定 VPC Service Controls 時，請確保符合下列規定：
+如果您使用 VPC Service Controls 保護筆記本，請注意排定執行的作業是由 Dataform 支援。為排定執行時間設定 VPC Service Controls 時，請確保符合下列規定：
 
-* 您必須設定[`dataform.restrictGitRemotes`機構政策服務](https://docs.cloud.google.com/dataform/docs/restrict-git-remotes?hl=zh-tw)。
+* 您必須設定[`dataform.restrictGitRemotes`組織政策服務](https://docs.cloud.google.com/dataform/docs/restrict-git-remotes?hl=zh-tw)。
 * Dataform 和 BigQuery 必須受限於相同的 VPC Service Controls 服務範圍。
 * 如要允許使用者在排定或手動觸發執行作業時，使用 Google 帳戶的使用者憑證進行驗證，請將使用者身分新增至連入規則。詳情請參閱「[更新 service perimeter 的輸入和輸出政策](https://docs.cloud.google.com/vpc-service-controls/docs/configuring-ingress-egress-policies?hl=zh-tw#updating)」和「[輸入規則參考資料](https://docs.cloud.google.com/vpc-service-controls/docs/ingress-egress-rules?hl=zh-tw#ingress-rules-reference)」。
 
@@ -77,13 +76,15 @@ Dataform 會將排定執行的筆記本輸出內容，寫入排程建立期間�
 * [筆記本執行階段使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform?hl=zh-tw#aiplatform.notebookRuntimeUser) (`roles/aiplatform.notebookRuntimeUser`)
 * 自訂服務帳戶的[服務帳戶使用者角色](https://docs.cloud.google.com/iam/docs/roles-permissions/iam?hl=zh-tw#iam.serviceAccountUser) (`roles/iam.serviceAccountUser`)
 
-如要在排定筆記本執行時間時使用筆記本執行階段範本，您需要「筆記本執行階段使用者 (`roles/aiplatform.notebookRuntimeUser`)」角色。
+如要在排定筆記本執行時間時使用筆記本執行階段範本，您需要「
+[筆記本執行階段使用者 (`roles/aiplatform.notebookRuntimeUser`)](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform?hl=zh-tw#aiplatform.notebookRuntimeUser)
+」角色。
 
-如要編輯及刪除筆記本排程，您必須具備[Dataform 編輯者 (`roles/dataform.editor`)](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#dataform.editor) 角色。
+如要編輯及刪除筆記本排程，您必須具備 [Dataform 編輯者 (`roles/dataform.editor`)](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#dataform.editor) 角色。
 
 如要查看筆記本排程，您需要「Dataform 檢視者」([`roles/dataform.viewer`](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#dataform.viewer)) 角色。
 
-如要提升排程安全性，請參閱「[實作進階排程權限](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#enhanced-scheduling-permissions)」。
+如要提升排程安全性，請參閱「[實作強化排程權限](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#enhanced-scheduling-permissions)」。
 
 如要進一步瞭解 BigQuery IAM，請參閱「[BigQuery IAM 角色和權限](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)」。
 
@@ -109,22 +110,24 @@ Dataform 會將排定執行的筆記本輸出內容，寫入排程建立期間�
 
    或者，按一下 calendar\_month「時間表」，然後按一下「建立時間表」。
 6. 在「排程筆記本」窗格的「排程名稱」欄位中，輸入排程名稱。
-7. 在「驗證」部分，使用 Google 帳戶使用者憑證或服務帳戶授權筆記本。
+7. 在「Authentication」(驗證) 區段中，使用 Google 帳戶使用者憑證或服務帳戶授權筆記本。
 
-   * 如要使用 Google 帳戶使用者憑證 ([預覽](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))，請選取「以我的使用者憑證執行」。
+   * 如要使用 Google 帳戶使用者憑證，請選取「以我的使用者憑證執行」。
    * 如要使用服務帳戶，請選取「以所選服務帳戶執行」，然後選取服務帳戶。
-8. 在「筆記本選項」部分，於「執行階段範本」欄位中，選取 Colab 筆記本執行階段範本或預設執行階段規格。如要進一步瞭解如何建立 Colab 筆記本執行階段範本，請參閱「[建立執行階段範本](https://docs.cloud.google.com/colab/docs/create-runtime-template?hl=zh-tw)」。
+8. 在「Notebook options」(筆記本選項) 區段的「Runtime template」(執行階段範本) 欄位中，選取 Colab 筆記本執行階段範本或預設執行階段規格。如要進一步瞭解如何建立 Colab 筆記本執行階段範本，請參閱「[建立執行階段範本](https://docs.cloud.google.com/colab/docs/create-runtime-template?hl=zh-tw)」。
 
-   **注意：**筆記本執行階段範本必須與筆記本位於同一個區域。**注意：**如果沒有使用筆記本執行階段範本的[必要角色](#required_permissions)，您仍可使用預設執行階段規格執行及排定筆記本。
+   **注意：**筆記本執行階段範本必須與筆記本位於相同區域。**注意：**如果沒有使用筆記本執行階段範本的[必要角色](#required_permissions)，您仍可使用預設執行階段規格執行及排定筆記本。
 9. 在「Cloud Storage bucket」欄位中，按一下「Browse」(瀏覽)，然後選取或建立 Cloud Storage bucket。
 
-   所選服務帳戶必須獲得所選值區的「Storage 管理員 (`roles/storage.admin`)」IAM 角色。詳情請參閱「[啟用筆記本排程](#enable-scheduling)」。
+   所選服務帳戶必須獲得所選值區的
+   [「Storage 管理員 (`roles/storage.admin`)」](https://docs.cloud.google.com/iam/docs/roles-permissions/storage?hl=zh-tw#storage.admin)
+   IAM 角色。詳情請參閱「[啟用筆記本排程](#enable-scheduling)」。
 10. 在「排程頻率」部分，執行下列操作：
 
     1. 在「重複」選單中，選取筆記本排程的執行頻率。
-    2. 在「At time」(時間) 欄位中，輸入排定筆記本執行作業的時間。
+    2. 在「At time」(時間) 欄位中，輸入排定筆記本執行的時間。
     3. 在「時區」選單中，選取時間表的時區。
-11. 按一下「建立時間表」。如果選取「使用我的使用者憑證執行」做為驗證方法，您必須[授權 Google 帳戶](#authorize-google-account) ([預覽](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))。
+11. 按一下「建立時間表」。如果選取「使用我的使用者憑證執行」做為驗證方法，請務必[授權您的 Google 帳戶](#authorize-google-account)。
 
 建立時間表時，系統會自動部署目前版本的筆記本。如要使用新版筆記本更新時間表，請[部署筆記本](#deploy)。
 
@@ -140,20 +143,22 @@ Dataform 會將排定執行的筆記本輸出內容，寫入排程建立期間�
 4. 在「排程名稱」欄位中，輸入排程名稱。
 5. 在「驗證」部分，使用 Google 帳戶使用者憑證或服務帳戶授權筆記本。
 
-   * 如要使用 Google 帳戶使用者憑證 ([預覽](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))，請選取「以我的使用者憑證執行」。
+   * 如要使用 Google 帳戶使用者憑證，請選取「以我的使用者憑證執行」。
    * 如要使用服務帳戶，請選取「以所選服務帳戶執行」，然後選取服務帳戶。
-6. 在「筆記本選項」部分，於「執行階段範本」欄位中，選取 Colab 筆記本執行階段範本或預設執行階段規格。如要進一步瞭解如何建立 Colab 筆記本執行階段範本，請參閱「[建立執行階段範本](https://docs.cloud.google.com/colab/docs/create-runtime-template?hl=zh-tw)」。
+6. 在「Notebook options」(筆記本選項) 區段的「Runtime template」(執行階段範本) 欄位中，選取 Colab 筆記本執行階段範本或預設執行階段規格。如要進一步瞭解如何建立 Colab 筆記本執行階段範本，請參閱「[建立執行階段範本](https://docs.cloud.google.com/colab/docs/create-runtime-template?hl=zh-tw)」。
 
-   **注意：**筆記本執行階段範本必須與筆記本位於同一個區域。**注意：**如果沒有使用筆記本執行階段範本的[必要角色](#required_permissions)，您仍可使用預設執行階段規格執行及排定筆記本。
+   **注意：**筆記本執行階段範本必須與筆記本位於相同區域。**注意：**如果沒有使用筆記本執行階段範本的[必要角色](#required_permissions)，您仍可使用預設執行階段規格執行及排定筆記本。
 7. 在「Cloud Storage bucket」欄位中，按一下「Browse」(瀏覽)，然後選取或建立 Cloud Storage bucket。
 
-   所選服務帳戶必須獲得所選值區的「Storage 管理員 (`roles/storage.admin`)」IAM 角色。詳情請參閱「[啟用筆記本排程](#enable-scheduling)」。
+   所選服務帳戶必須獲得所選值區的「
+   [Storage 管理員 (`roles/storage.admin`)](https://docs.cloud.google.com/iam/docs/roles-permissions/storage?hl=zh-tw#storage.admin)
+   」IAM 角色。詳情請參閱「[啟用筆記本排程](#enable-scheduling)」。
 8. 在「排程頻率」部分，執行下列操作：
 
    1. 在「重複」選單中，選取筆記本排程的執行頻率。
-   2. 在「At time」(時間) 欄位中，輸入排定筆記本執行作業的時間。
+   2. 在「At time」(時間) 欄位中，輸入排定筆記本執行的時間。
    3. 在「時區」選單中，選取時間表的時區。
-9. 按一下「建立時間表」。如果選取「使用我的使用者憑證執行」做為驗證方法，您必須[授權 Google 帳戶](#authorize-google-account) ([預覽](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))。
+9. 按一下「建立時間表」。如果您選取「使用我的使用者憑證執行」做為驗證方法，則必須[授權 Google 帳戶](#authorize-google-account)。
 
 建立時間表時，系統會自動部署目前版本的筆記本。如要使用新版筆記本更新時間表，請[部署筆記本](#deploy)。
 
@@ -161,14 +166,7 @@ Dataform 會將排定執行的筆記本輸出內容，寫入排程建立期間�
 
 ### 授權給您的 Google 帳戶
 
-**預覽**
-
-這項產品或功能適用《[服務專屬條款](https://docs.cloud.google.com/terms/service-terms?hl=zh-tw#1)》中「一般服務條款」一節的《正式發布前產品條款》。正式發布前的產品和功能是按照「原樣」提供，支援範圍可能有限。
-詳情請參閱[推出階段說明](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
-
-**注意：** 如要尋求支援或針對這項功能提供意見回饋，請傳送電子郵件至 [dataform-preview-support@google.com](mailto:dataform-preview-support@google.com)。
-
-如要使用[Google 帳戶](https://docs.cloud.google.com/iam/docs/principals-overview?hl=zh-tw#google-account)使用者憑證驗證資源，您必須手動授予 BigQuery 管道權限，才能取得 Google 帳戶的存取權杖，並代表您存取來源資料。您可以使用 OAuth 對話方塊介面手動授予核准。如果您選取任何**擴充存取權選項**，就必須授予這些服務的存取權，例如 Google 雲端硬碟或知識目錄。
+如要使用[Google 帳戶](https://docs.cloud.google.com/iam/docs/principals-overview?hl=zh-tw#google-account)使用者憑證驗證資源，您必須手動授予 BigQuery 管道權限，讓管道取得 Google 帳戶的存取權杖，並代表您存取來源資料。您可以使用 OAuth 對話方塊介面手動授予核准。如果您選取任何**擴充存取權選項**，就必須授予這些服務的存取權，例如 Google 雲端硬碟或知識目錄。
 
 **注意：** 使用 Google 帳戶的使用者憑證執行或排定 BigQuery 管道時，系統不支援情境感知存取權 (CAA) 政策，包括以 IP 為準、以地理位置為準和裝置合規政策，因為權杖要求來自 Google 基礎架構。除非[豁免 Dataform OAuth 用戶端 ID 遵守政策](https://docs.cloud.google.com/dataform/docs/troubleshooting?hl=zh-tw#euc-permission-denied)，否則 CAA 政策會封鎖這些執行作業。
 
@@ -182,11 +180,11 @@ Dataform 會將排定執行的筆記本輸出內容，寫入排程建立期間�
 
 **警告：** 撤銷存取權後，這個 Google 帳戶在所有區域擁有的管道日後都無法執行。
 
-如果新的 Google 帳戶擁有者從未建立時間表，更新憑證以變更筆記本時間表擁有者時，也需要手動核准。
+如果新的 Google 帳戶擁有者從未建立過時間表，更新憑證以變更筆記本時間表擁有者時，也需要手動核准。
 
 ## 部署筆記本
 
-部署筆記本時，系統會使用目前版本的筆記本更新排程。
+部署筆記本會使用目前版本的筆記本更新排程。
 排程會執行最新部署的筆記本版本。
 
 如果這個筆記本有排程，當您編輯筆記本時，BigQuery 會提示您部署變更，以更新排程。
@@ -227,7 +225,7 @@ Dataform 會將排定執行的筆記本輸出內容，寫入排程建立期間�
 
 ## 查看排程詳細資料
 
-您可以在「Explorer」窗格或「排程」頁面中，查看所選排程的詳細資料。
+您可以在「Explorer」窗格或「Scheduling」頁面中，查看所選排程的詳細資料。
 
 如要查看所選筆記本的排程詳細資料，請按照下列步驟操作：
 
@@ -264,7 +262,7 @@ Dataform 會將排定執行的筆記本輸出內容，寫入排程建立期間�
 2. 點選左側窗格中的 explore「Explorer」。
 3. 在「Explorer」窗格中展開專案，然後按一下「Notebooks」。
 4. 按一下所選筆記本的名稱。
-5. 按一下「排程」，然後按一下「查看過去的執行作業」。
+5. 按一下「時間表」，然後點選「查看過去的執行作業」。
 
 ### 「排定時間」頁面
 
@@ -352,7 +350,7 @@ Dataform 會將排定執行的筆記本輸出內容，寫入排程建立期間�
 2. 按一下所選筆記本排程的名稱。
 3. 在「排程詳細資料」頁面中，按一下「編輯」。
 4. 按一下「查看時間表」，然後按一下「編輯」。
-5. 在「排定筆記本時間」對話方塊中編輯排程，然後按一下「更新排程」。
+5. 在「排定筆記本時間」對話方塊中編輯時間表，然後按一下「更新時間表」。
 
 ## 刪除時間表
 
@@ -364,12 +362,12 @@ Dataform 會將排定執行的筆記本輸出內容，寫入排程建立期間�
 2. 執行下列任一操作：
 
    * 按一下所選時間表的名稱，然後在「時間表詳細資料」頁面中，按一下「刪除」。
-   * 在包含所選時間表的資料列中，按一下「動作」欄中的 more\_vert「查看動作」，然後按一下「刪除」。
+   * 在包含所選時間表的資料列中，按一下「動作」欄中的「查看動作」more\_vert，然後按一下「刪除」。
 3. 在隨即出現的對話方塊中，按一下「刪除」。
 
 ## 後續步驟
 
-* 進一步瞭解 [BigQuery 中的 Colab Enterprise 筆記本](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction?hl=zh-tw)。
+* 進一步瞭解 [BigQuery 中的 Colab Enterprise 筆記本](https://docs.cloud.google.com/bigquery/docs/programmatic-analysis?hl=zh-tw)。
 * 瞭解如何[建立筆記本](https://docs.cloud.google.com/bigquery/docs/create-notebooks?hl=zh-tw)。
 
 
@@ -379,11 +377,11 @@ Dataform 會將排定執行的筆記本輸出內容，寫入排程建立期間�
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-12 (世界標準時間)。
+上次更新時間：2026-10-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-12 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]

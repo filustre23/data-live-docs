@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -22,13 +22,13 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 事前準備
 
-請先[建立資料準備](https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions?hl=zh-tw)。
+開始之前，請先[建立資料準備](https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions?hl=zh-tw)。
 
 ### VPC Service Controls 規定
 
-如果您使用 VPC Service Controls 保護資料準備作業，請注意，排定執行的作業是由 Dataform 支援。為排定執行的作業設定 VPC Service Controls 時，請確保符合下列規定：
+如果您使用 VPC Service Controls 保護資料準備作業，請注意，排定執行的作業是由 Dataform 支援。為排定執行時間設定 VPC Service Controls 時，請確保符合下列規定：
 
-* 您必須設定[`dataform.restrictGitRemotes`機構政策服務](https://docs.cloud.google.com/dataform/docs/restrict-git-remotes?hl=zh-tw)。
+* 您必須設定[`dataform.restrictGitRemotes`組織政策服務](https://docs.cloud.google.com/dataform/docs/restrict-git-remotes?hl=zh-tw)。
 * Dataform 和 BigQuery 必須受限於相同的 VPC Service Controls 服務範圍。
 * 如要允許使用者在排定或手動觸發執行作業時，使用 Google 帳戶的使用者憑證進行驗證，請將使用者身分新增至連入規則。詳情請參閱「[更新 service perimeter 的輸入和輸出政策](https://docs.cloud.google.com/vpc-service-controls/docs/configuring-ingress-egress-policies?hl=zh-tw#updating)」和「[輸入規則參考資料](https://docs.cloud.google.com/vpc-service-controls/docs/ingress-egress-rules?hl=zh-tw#ingress-rules-reference)」。
 
@@ -36,14 +36,16 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### 必要的角色
 
-如要[在開發環境中手動執行資料準備作業](#run-undeployed-manually)，或[排定資料準備作業的執行時間](#create-schedule)，請務必將角色授予您打算用來執行資料準備作業的服務帳戶。詳情請參閱「[授予 Dataform 服務帳戶存取權](https://docs.cloud.google.com/bigquery/docs/manage-data-preparations?hl=zh-tw#dataform-service-account-iam)」。
+如要使用服務帳戶授權資料準備作業，請[手動在開發環境中執行資料準備作業](#run-undeployed-manually)，或[排定資料準備作業的執行時間](#create-schedule)，並將角色授予您打算用於執行資料準備作業的服務帳戶。詳情請參閱「[授予 Dataform 服務帳戶存取權](https://docs.cloud.google.com/bigquery/docs/manage-data-preparations?hl=zh-tw#dataform-service-account-iam)」。
 
 如要排定資料準備作業，請按照下列步驟操作：
 
-* 請管理員授予您自訂服務帳戶的[服務帳戶使用者角色 (`roles/iam.serviceAccountUser`)。](https://docs.cloud.google.com/iam/docs/roles-permissions/iam?hl=zh-tw#iam.serviceAccountUser)
+* 請管理員授予您自訂服務帳戶的
+  [服務帳戶使用者角色](https://docs.cloud.google.com/iam/docs/roles-permissions/iam?hl=zh-tw#iam.serviceAccountUser)
+  (`roles/iam.serviceAccountUser`)。
 * 將[服務帳戶使用者角色](https://docs.cloud.google.com/iam/docs/roles-permissions/iam?hl=zh-tw#iam.serviceAccountUser) (`roles/iam.serviceAccountUser`) 和[服務帳戶權杖建立者角色](https://docs.cloud.google.com/iam/docs/roles-permissions/iam?hl=zh-tw#iam.serviceAccountTokenCreator) (`roles/iam.serviceAccountTokenCreator`) 授予自訂服務帳戶的預設 Dataform 服務代理程式。
 
-如要提升排程安全性，請參閱「[實作進階排程權限](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#enhanced-scheduling-permissions)」。
+如要提升排程安全性，請參閱「[實作強化排程權限](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#enhanced-scheduling-permissions)」。
 
 ## 開發資料準備作業
 
@@ -64,19 +66,19 @@ Google uses AI technology to translate content into your preferred language. AI 
 5. 在資料準備編輯器工具列中，依序點選「更多」**>「設定『立即執行』體驗」**。
 6. 在「驗證」部分，使用 Google 帳戶使用者憑證或服務帳戶授權資料準備作業。
 
-   * 如要使用 Google 帳戶使用者憑證 ([預覽](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))，請選取「以我的使用者憑證執行」。這是預設選項。
+   * 如要使用 Google 帳戶使用者憑證，請選取「以我的使用者憑證執行」。這是預設選項。
 
      選用：在「Extended access options」(擴充存取權選項) 部分，選取資料準備作業所需的其他服務：
 
      + **Google 雲端硬碟**：允許唯讀存取 Google 雲端硬碟檔案。
-   * 如要使用服務帳戶，請選取「以所選服務帳戶執行」，然後選取服務帳戶。如果服務帳戶需要其他權限，請按一下「全部授予」，將必要角色授予該帳戶。**注意：** 如要使用 Google 帳戶使用者憑證驗證以 Google 雲端硬碟做為資料來源的資料準備作業，請在「Extended access options」(擴充存取權選項) 部分選取「Google Drive」(Google 雲端硬碟) 服務。
+   * 如要使用服務帳戶，請選取「以所選服務帳戶執行」，然後選取服務帳戶。如果服務帳戶需要其他權限，請按一下「全部授予」，將必要角色授予該帳戶。**注意：** 如要使用 Google 帳戶使用者憑證驗證以 Google 雲端硬碟做為資料來源的資料準備作業，請在「Extended access options」(擴充存取選項) 部分選取「Google Drive」(Google 雲端硬碟) 服務。
    如要使用服務帳戶驗證資料準備作業，請與該服務帳戶共用 Google 雲端硬碟檔案。
 7. 按一下 [儲存]。
 8. 修正顯示的所有驗證錯誤。
 9. 在資料準備編輯器工具列中，按一下「執行」。
 10. 在「立即執行」對話方塊中，按一下「確認」，確認這項手動執行作業會將資料寫入目的地資料表，而您可能也會使用該資料表執行排程作業。
 
-    如果選取「使用我的使用者憑證執行」做為驗證方法，您必須[授權 Google 帳戶](#authorize-google-account) ([預覽](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))。
+    如果您選取「使用我的使用者憑證執行」做為驗證方法，則必須[授權 Google 帳戶](#authorize-google-account)。
 
     接著，執行作業會執行步驟，並將輸出內容載入目的地。
 11. 選用步驟：執行完成後，您可以在「Executions」(執行作業) 窗格中查看執行詳細資料。
@@ -117,14 +119,14 @@ Google uses AI technology to translate content into your preferred language. AI 
 6. 輸入排程名稱。
 7. 在「驗證」部分，使用 Google 帳戶使用者憑證或服務帳戶授權資料準備作業。
 
-   * 如要使用 Google 帳戶使用者憑證 ([預覽](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))，請選取「以我的使用者憑證執行」。
+   * 如要使用 Google 帳戶使用者憑證，請選取「以我的使用者憑證執行」。
 
      選用：在「Extended access options」(擴充存取權選項) 部分，選取資料準備作業所需的其他服務：
 
      + **Google 雲端硬碟**：允許唯讀存取 Google 雲端硬碟檔案。
    * 如要使用服務帳戶，請選取「以所選服務帳戶執行」，然後選取服務帳戶。**附註：** 如要使用 Google 帳戶使用者憑證，驗證以 Google 雲端硬碟做為資料來源的資料準備作業，請在「Extended access options」(擴充存取權選項) 部分選取「Google Drive」(Google 雲端硬碟) 服務。如要使用服務帳戶驗證資料準備作業，請與該服務帳戶共用 Google 雲端硬碟檔案。
 8. 排定頻率。
-9. 按一下「建立時間表」。如果選取「使用我的使用者憑證執行」做為驗證方法，您必須[授權 Google 帳戶](#authorize-google-account) ([預覽](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))。
+9. 按一下「建立時間表」。如果您選取「使用我的使用者憑證執行」做為驗證方法，則必須[授權 Google 帳戶](#authorize-google-account)。
 
 ### 「排定時間」頁面
 
@@ -132,33 +134,26 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    [前往「排程」](https://console.cloud.google.com/bigquery/orchestration?hl=zh-tw)
 2. 按一下「建立」，然後從選單中選取「資料準備時間表」。
-3. 在「Schedule data preparation」(排定資料準備作業) 窗格的「Data preparation」(資料準備) 欄位中，選取要排定的資料準備作業。
+3. 在「排定資料準備作業」窗格的「資料準備」欄位中，選取要排定的資料準備作業。
 4. 在「排程名稱」欄位中，輸入排程名稱。
 5. 在「驗證」部分，使用 Google 帳戶使用者憑證或服務帳戶授權資料準備作業。
 
-   * 如要使用 Google 帳戶使用者憑證 ([預覽](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))，請選取「以我的使用者憑證執行」。
+   * 如要使用 Google 帳戶使用者憑證，請選取「以我的使用者憑證執行」。
 
      選用：在「Extended access options」(擴充存取權選項) 部分，選取資料準備作業所需的其他服務：
 
      + **Google 雲端硬碟**：允許唯讀存取 Google 雲端硬碟檔案。
-   * 如要使用服務帳戶，請選取「以所選服務帳戶執行」，然後選取服務帳戶。**附註：** 如要使用 Google 帳戶使用者憑證，驗證以 Google 雲端硬碟做為資料來源的資料準備作業，請在「Extended access options」(擴充存取權選項) 部分選取「Google Drive」(Google 雲端硬碟) 服務。如要使用服務帳戶驗證資料準備作業，請與該服務帳戶共用 Google 雲端硬碟檔案。
+   * 如要使用服務帳戶，請選取「以所選服務帳戶執行」，然後選取服務帳戶。**附註：** 如要使用 Google 帳戶使用者憑證驗證以 Google 雲端硬碟做為資料來源的資料準備作業，請在「Extended access options」(擴充存取選項) 部分選取「Google Drive」(Google 雲端硬碟) 服務。如要使用服務帳戶驗證資料準備作業，請與該服務帳戶共用 Google 雲端硬碟檔案。
 6. 在「排程頻率」部分，執行下列操作：
 
-   1. 在「Repeats」(重複頻率) 選單中，選取資料準備作業的執行頻率。
+   1. 在「重複頻率」選單中，選取資料準備作業的執行頻率。
    2. 在「At time」(時間) 欄位中，輸入預定資料準備作業的執行時間。
    3. 在「時區」選單中，選取時間表的時區。
-7. 按一下「建立時間表」。如果選取「使用我的使用者憑證執行」做為驗證方法，您必須[授權 Google 帳戶](#authorize-google-account) ([預覽](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))。
+7. 按一下「建立時間表」。如果選取「使用我的使用者憑證執行」做為驗證方法，請務必[授權您的 Google 帳戶](#authorize-google-account)。
 
 ## 授權給您的 Google 帳戶
 
-**預覽**
-
-這項產品或功能適用《[服務專屬條款](https://docs.cloud.google.com/terms/service-terms?hl=zh-tw#1)》中「一般服務條款」一節的《正式發布前產品條款》。正式發布前的產品和功能是按照「原樣」提供，支援範圍可能有限。
-詳情請參閱[推出階段說明](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
-
-**注意：** 如要尋求支援或針對這項功能提供意見回饋，請傳送電子郵件至 [dataform-preview-support@google.com](mailto:dataform-preview-support@google.com)。
-
-如要使用[Google 帳戶](https://docs.cloud.google.com/iam/docs/principals-overview?hl=zh-tw#google-account)使用者憑證驗證資源，您必須手動授予 BigQuery 管道權限，才能取得 Google 帳戶的存取權杖，並代表您存取來源資料。您可以使用 OAuth 對話方塊介面手動授予核准。如果您選取任何**擴充存取權選項**，就必須授予這些服務的存取權，例如 Google 雲端硬碟或知識目錄。
+如要使用[Google 帳戶](https://docs.cloud.google.com/iam/docs/principals-overview?hl=zh-tw#google-account)使用者憑證驗證資源，您必須手動授予 BigQuery 管道權限，讓管道取得 Google 帳戶的存取權杖，並代表您存取來源資料。您可以使用 OAuth 對話方塊介面手動授予核准。如果您選取任何**擴充存取權選項**，就必須授予這些服務的存取權，例如 Google 雲端硬碟或知識目錄。
 
 **注意：** 使用 Google 帳戶的使用者憑證執行或排定 BigQuery 管道時，系統不支援情境感知存取權 (CAA) 政策，包括以 IP 為準、以地理位置為準和裝置合規政策，因為權杖要求來自 Google 基礎架構。除非[豁免 Dataform OAuth 用戶端 ID 遵守政策](https://docs.cloud.google.com/dataform/docs/troubleshooting?hl=zh-tw#euc-permission-denied)，否則 CAA 政策會封鎖這些執行作業。
 
@@ -252,11 +247,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-12 (世界標準時間)。
+上次更新時間：2026-10-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-12 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]

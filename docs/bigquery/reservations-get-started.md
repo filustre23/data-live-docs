@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -18,13 +18,13 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 瞭解如何在 BigQuery 中建立及指派預留項目。
 
-您可以透過 BigQuery 預訂功能購買專用處理容量 (以運算單元為單位)，而不必根據處理的每個位元組資料支付*以量計價*費用。預訂可讓您更準確地預測費用，工作負載效能通常也更穩定。預訂項目會與版本建立關聯，提供分級定價，並符合不同機構的需求。
+您可以透過 BigQuery 預留項目購買專屬處理容量 (以運算單元為單位)，不必再根據處理的每個位元組資料支付*以量計價*費用。預訂可讓您更準確地預測費用，工作負載效能通常也更穩定。預訂項目會與版本相關聯，這些版本提供不同規模的定價，並符合不同機構的需求。
 
-使用預留項目時，您可以建立指派作業，將特定專案、資料夾或整個機構連結至特定預留項目。Google Cloud 這樣一來，您就能隔離工作負載、確保重要工作有足夠的資源，並更有效率地管理 BigQuery 支出。
+使用預留項目時，您可以建立指派作業，將特定Google Cloud 專案、資料夾或整個機構連結至特定預留項目。這樣一來，您就能隔離工作負載、確保重要工作有足夠的資源，並更有效管理 BigQuery 支出。
 
-在本教學課程中，您將建立具有 100 個自動調度運算單元的標準版預留項目，並將專案指派給該預留項目。然後選擇刪除預留項目，以免產生費用。
+在本教學課程中，您將建立 100 個自動調度運算單元的標準版預留項目，並將專案指派給該預留項目。然後選擇刪除預留項目，以免產生費用。
 
-**注意：** 本教學課程會產生費用。購買運算單元前，請先瞭解[預訂價格](https://cloud.google.com/bigquery/pricing?hl=zh-tw#capacity_compute_analysis_pricing)。如要避免在完成本教學課程後產生費用，請務必按照「[清除](#clean-up)」一節所述刪除預訂。
+**注意：** 這個教學課程會產生費用。購買運算單元之前，請先瞭解[預訂定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#capacity_compute_analysis_pricing)。為避免在本教學課程完成後產生費用，請務必按照「[清除](#clean-up)」一節的說明刪除預訂。
 
 
 ---
@@ -47,13 +47,13 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    [前往專案選取器](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
 
-   您可以建立個別 Google Cloud 專案來管理預訂，並為專案提供描述性名稱，例如 `bq-COMPANY_NAME-admin`。
+   您可以建立個別的 Google Cloud 專案來管理預留項目，並為該專案命名，例如 `bq-COMPANY_NAME-admin`。
 2. [確認專案已啟用計費功能 Google Cloud](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project) 。
-3. 啟用 BigQuery Reservation API。
+3. 啟用 BigQuery Reservation API (如果尚未啟用)。
 
    **啟用 API 時所需的角色**
 
-   如要啟用 API，您需要具備服務使用情形管理員 IAM 角色 (`roles/serviceusage.serviceUsageAdmin`)，其中包含 `serviceusage.services.enable` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   如要啟用 API，您必須具備 `serviceusage.services.enable` 權限。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用情形管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
    [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=bigqueryreservation.googleapis.com&hl=zh-tw)
 
@@ -74,7 +74,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 建立自動調度資源預留項目
 
-在 `US` 多區域中建立名為 `test` 的預留項目，並為其分配最多 100 個自動調度資源運算單元。自動調度資源程序會根據工作負載需求，擴充或縮減自動調度資源程序配額。
+在 `US` 多區域中建立名為 `test` 的預留項目，並為其分配最多 100 個自動調度資源運算單元。自動調度功能會根據工作負載需求，擴充或縮減自動調度配額。
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -106,9 +106,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 7. 瀏覽或搜尋專案，並選取所需項目。
 8. 點選「建立」。
 
-建立預訂指派項目後，請等待至少 5 分鐘再執行查詢。否則系統可能會按照以量計價的定價模式計費。
+建立預訂指派項目後，請至少等待 5 分鐘再執行查詢。否則系統可能會以隨選價格計費。
 
-如要瞭解如何使用 SQL 或 bq 工具將專案指派給保留項目，請參閱「[將專案或資料夾指派給保留項目](https://docs.cloud.google.com/bigquery/docs/reservations-assignments?hl=zh-tw#assign_my_prod_project_to_prod_reservation)」。
+如要瞭解如何使用 SQL 或 bq 工具將專案指派給預訂項目，請參閱「[將專案或資料夾指派給預訂項目](https://docs.cloud.google.com/bigquery/docs/reservations-assignments?hl=zh-tw#assign_my_prod_project_to_prod_reservation)」。
 
 ## 清除所用資源
 
@@ -120,7 +120,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 刪除專案的方法如下：
 
-**注意**：刪除專案會造成以下結果：
+**警告**：刪除專案會有以下後果：
 
 * **專案中的所有內容都會遭到刪除。**如果使用現有專案來進行本文中的任務，刪除專案將一併移除當中已完成的其他任務'。
 * **自訂專案 ID 會消失。**當您之前建立這個專案時，可能建立了想要在日後使用的自訂專案 ID。如要保留使用該專案 ID 的網址 (例如 `appspot.com` 網址)，請刪除在該專案中選取的資源，而不是刪除整個專案。
@@ -152,7 +152,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 ## 後續步驟
 
 * 如要瞭解如何使用 BigQuery 預留項目管理工作負載，請參閱「[瞭解預留項目](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw)」。
-* 如要進一步瞭解運算單元，請參閱「[瞭解運算單元](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw)」一文。
+* 如要進一步瞭解插槽，請參閱「[瞭解插槽](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw)」。
 * 如要瞭解如何使用 BigQuery 指派項目來整理工作負載，請參閱「[管理工作負載指派項目](https://docs.cloud.google.com/bigquery/docs/reservations-assignments?hl=zh-tw)」。
 * 如要瞭解如何購買承諾使用合約，請參閱「[運算單元承諾使用合約](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#slot_commitments)」。
 
@@ -163,11 +163,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-12 (世界標準時間)。
+上次更新時間：2026-10-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-12 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]

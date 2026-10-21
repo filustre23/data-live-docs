@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -29,9 +29,10 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### 必要的角色
 
-如要取得建立資料表所需的權限，請要求管理員授予您下列 IAM 角色：
+如要取得建立表格所需的權限，請要求管理員授予您下列 IAM 角色：
 
-* 如果您要透過載入資料或將查詢結果儲存至資料表來建立資料表，請在專案中指派 [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.jobUser)  (`roles/bigquery.jobUser`)。
+* [BigQuery 作業使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.jobUser)  (`roles/bigquery.jobUser`)
+  (如果您要透過載入資料或將查詢結果儲存至資料表的方式建立資料表，則需要專案的這項權限)。
 * 資料集的「BigQuery 資料編輯者」 (`roles/bigquery.dataEditor`)，您要在該資料集建立資料表。
 
 如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
@@ -45,11 +46,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 * `bigquery.tables.create`
   在要建立資料表的資料集上。
 * `bigquery.tables.getData`
-  如果您要將查詢結果儲存為資料表，則必須擁有查詢參照的所有資料表和檢視區塊的存取權。
+  如果您要將查詢結果儲存為資料表，請在查詢參照的所有資料表和檢視區塊上執行這項操作。
 * `bigquery.jobs.create`
-  專案，如果您是透過載入資料或將查詢結果儲存至資料表來建立資料表。
+  專案，前提是您要透過載入資料或將查詢結果儲存至資料表的方式建立資料表。
 * `bigquery.tables.updateData`
-  資料表，如果您要使用查詢結果附加或覆寫資料表，就需要這個權限。
+  如果您要使用查詢結果附加或覆寫資料表，就需要這個權限。
 
 您或許還可透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)取得這些權限。
 
@@ -74,11 +75,11 @@ Google uses AI technology to translate content into your preferred language. AI 
   變成這樣：
   `project_name.dataset_name.table_name`
 
-### 分群資料欄需求
+### 分群資料欄規定
 
-在 BigQuery 中建立資料表時，您可以指定用於建立分群資料表的欄。資料表建立完成後，您可以修改用於建立分群資料表的資料欄。詳情請參閱「[修改叢集規格](https://docs.cloud.google.com/bigquery/docs/manage-clustered-tables?hl=zh-tw#modifying-cluster-spec)」。
+在 BigQuery 中建立資料表時，您可以指定用於建立分群資料表的資料欄。資料表建立完成後，您將無法修改用於建立分群資料表的資料欄。詳情請參閱「[修改叢集規格](https://docs.cloud.google.com/bigquery/docs/manage-clustered-tables?hl=zh-tw#modifying-cluster-spec)」。
 
-叢集欄位必須是高層級、非重複欄位，且屬於下列任一項資料類型：
+叢集資料欄必須是頂層的非重複資料欄，且屬於下列任一資料類型：
 
 * `BIGNUMERIC`
 * `BOOL`
@@ -93,7 +94,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 您最多可指定四個叢集資料欄，當您指定多個叢集資料欄時，資料欄的順序將決定資料的排序方式。舉例來說，如果資料表是依資料欄 a、b、c 來進行叢集，則資料也會按照相同順序排序，即第一順位是資料欄 a、第二順位是資料欄 b、第三順位是資料欄 c。按照最佳做法，最常用以進行資料篩選或匯總的資料欄應排在第一順位。
 
-叢集資料欄順序亦會影響資料查詢的效能與定價。如要瞭解查詢叢集資料表的最佳做法，請參閱[查詢叢集資料表](https://docs.cloud.google.com/bigquery/docs/querying-clustered-tables?hl=zh-tw)一文。
+叢集資料欄順序亦會影響資料查詢的效能與定價。如要進一步瞭解查詢叢集資料表的最佳做法，請參閱[查詢叢集資料表](https://docs.cloud.google.com/bigquery/docs/querying-clustered-tables?hl=zh-tw)。
 
 ## 透過結構定義建立空白分群資料表
 
@@ -109,13 +110,12 @@ Google uses AI technology to translate content into your preferred language. AI 
 4. 在「資料集資訊」部分，按一下 add\_box「建立資料表」。
 5. 在「建立資料表」窗格中，指定下列詳細資料：
 
-1. 在「來源」部分，從「建立資料表來源」清單中選取「空白資料表」。
+1. 在「來源」部分，從「使用下列資料建立資料表」清單中選取「空白資料表」。
 2. 在「目的地」部分，指定下列詳細資料：
    1. 在「Dataset」(資料集) 部分，選取要建立資料表的資料集。
    2. 在「Table」(資料表) 欄位中，輸入要建立的資料表名稱。
-   3. 確認「資料表類型」欄位已設為「原生資料表」。
-3. 在「Schema」(結構定義) 區段中，輸入[結構定義](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw)。
-   你可以使用下列任一方法手動輸入結構定義資訊：
+   3. 確認「Table type」(資料表類型) 欄位已設為「Native table」(原生資料表)。
+3. 在「Schema」(結構定義) 部分輸入[結構定義](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw)。你可以使用下列任一方法手動輸入結構定義資訊：
    * 選項 1：按一下「以文字形式編輯」，然後以 JSON 陣列的形式貼上結構定義。如果您使用 JSON 陣列，可透過與[建立 JSON 結構定義檔](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#specifying_a_json_schema_file)一樣的程序產生結構定義。您可以輸入下列指令，查看現有資料表的 JSON 格式結構定義：
 
      ```
@@ -123,8 +123,8 @@ Google uses AI technology to translate content into your preferred language. AI 
      ```
    * 選項 2：按一下 add\_box
      「新增欄位」，然後輸入表格結構定義。指定每個欄位的「Name」(名稱)、「[Type](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#standard_sql_data_types)」(類型) 和「[Mode](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#modes)」(模式)。
-4. 針對「Clustering order」(叢集處理順序)，輸入一到四個以半形逗號分隔的資料欄名稱。
-5. 選用步驟：如要使用客戶自行管理的加密金鑰，請在「Advanced options」(進階選項) 部分選取「Use a customer-managed encryption key (CMEK)」(使用客戶自行管理的加密金鑰 (CMEK)) 選項。根據預設，BigQuery 會使用 Google-owned and Google-managed encryption key[加密靜態儲存的客戶內容](https://docs.cloud.google.com/docs/security/encryption/default-encryption?hl=zh-tw)。
+4. 針對「Clustering order」(分群順序)，輸入一到四個以半形逗號分隔的欄位名稱。
+5. 選用步驟：如要在「Advanced options」(進階選項) 部分使用客戶自行管理的加密金鑰，請選取「Use a customer-managed encryption key (CMEK)」(使用客戶自行管理的加密金鑰 (CMEK)) 選項。根據預設，BigQuery 會使用 Google-owned and Google-managed encryption key[加密靜態儲存的客戶內容](https://docs.cloud.google.com/docs/security/encryption/default-encryption?hl=zh-tw)。
 6. 點選「建立資料表」。
 
 ### SQL
@@ -159,7 +159,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 * `--schema`。您可利用內嵌方式或以 JSON 結構定義檔提供資料表結構定義。
 * `--clustering_fields`。您最多可指定四個叢集資料欄。
 
-可選用的參數包括 `--expiration`、`--description`、`--time_partitioning_type`、`--time_partitioning_field`、`--time_partitioning_expiration`、`--destination_kms_key` 和 `--label`。
+可選擇性使用的參數包括 `--expiration`、`--description`、`--time_partitioning_type`、`--time_partitioning_field`、`--time_partitioning_expiration`、`--destination_kms_key` 和 `--label`。
 
 如要建立非預設專案中的資料表，請使用下列格式將專案 ID 新增至資料集：`project_id:dataset`。
 
@@ -208,7 +208,7 @@ bq mk \
     mydataset.myclusteredtable
 ```
 
-輸入下列指令，在 `myotherproject` (而非預設專案) 中建立名為 `myclusteredtable` 的分群資料表，說明設為 `This is my clustered table`，標籤則設為 `organization:development`。此指令使用 `-t` 捷徑，而非 `--table`。這個指令不會指定資料表到期時間。如果資料集有預設資料表到期時間，系統會直接套用這個時間。如果資料集沒有預設資料表到期時間，資料表將永不過期。
+輸入下列指令，在 `myotherproject` (而非預設專案) 中建立名為 `myclusteredtable` 的分群資料表。說明設為 `This is my clustered table`，標籤則設為 `organization:development`。此指令使用 `-t` 捷徑，而非 `--table`。這個指令不會指定資料表到期時間。如果資料集有預設資料表到期時間，系統會直接套用這個時間。如果資料集沒有預設資料表到期時間，資料表將永不過期。
 
 結構定義在本機 JSON 檔案 `/tmp/myschema.json` 中指定。`customer_id` 欄位用於叢集資料表。
 
@@ -285,7 +285,7 @@ EOF
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
 2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
 
-   您只需要為每項專案執行一次這個指令，且可以在任何目錄中執行。
+   每項專案只需要執行一次這個指令，且可以在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
@@ -304,9 +304,9 @@ EOF
    ```
 2. 如果您正在學習教學課程，可以複製每個章節或步驟中的程式碼範例。
 
-   將程式碼範例複製到新建立的 `main.tf`。
+   將程式碼範例複製到新建立的 `main.tf` 中。
 
-   視需要從 GitHub 複製程式碼。如果 Terraform 代码片段是端對端解決方案的一部分，建議您使用這個方法。
+   視需要從 GitHub 複製程式碼。如果 Terraform 程式碼片段是端對端解決方案的一部分，建議您使用這個方法。
 3. 查看並修改範例參數，套用至您的環境。
 4. 儲存變更。
 5. 初始化 Terraform。每個目錄只需執行一次這項操作。
@@ -330,7 +330,7 @@ EOF
    ```
 
    視需要修正設定。
-2. 執行下列指令，並在提示中輸入 `yes`，套用 Terraform 設定：
+2. 執行下列指令並在提示中輸入 `yes`，套用 Terraform 設定：
 
    ```
    terraform apply
@@ -339,7 +339,7 @@ EOF
    等待 Terraform 顯示「Apply complete!」訊息。
 3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)即可查看結果。在 Google Cloud 控制台中，前往 UI 中的資源，確認 Terraform 已建立或更新這些資源。
 
-**注意：**Terraform 範例通常會假設 Google Cloud 專案已啟用必要的 API。
+**注意：**Terraform 範例通常會假設專案已啟用必要的 API。 Google Cloud
 
 ### API
 
@@ -500,13 +500,13 @@ public class CreateClusteredTable {
 * 將結果寫入新的目的地資料表並指定叢集資料欄，
 * 使用 DDL `CREATE TABLE AS SELECT` 陳述式。如要進一步瞭解此做法，請參閱「使用資料定義語言陳述式」頁面中的[從查詢結果建立分群資料表](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#creating_a_clustered_table_from_the_result_of_a_query)一節。
 
-您可以藉由查詢分區資料表或非分區資料表的方式建立分群資料表。但不能利用查詢結果將現有的資料表變更為叢集資料表。
+您可以藉由查詢分區資料表或非分區資料表的方式建立分群資料表。但不能利用查詢結果將現有的資料表變更為分群資料表。
 
 從查詢結果建立分群資料表時，必須使用標準 SQL。系統不支援使用舊版 SQL 查詢叢集資料表，或將查詢結果寫入叢集資料表。
 
 ### SQL
 
-如要從查詢結果建立分群資料表，請使用 [`CREATE TABLE` DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#create_table_statement)搭配 `CLUSTER BY` 選項。下列範例會查詢現有的非叢集資料表，建立依 `customer_id` 叢集的新資料表：
+如要從查詢結果建立分群資料表，請使用 [`CREATE TABLE` DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#create_table_statement)和 `CLUSTER BY` 選項。下列範例會查詢現有的非叢集資料表，建立依 `customer_id` 叢集的新資料表：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -570,7 +570,7 @@ bq query --use_legacy_sql=false \
 
 在[工作資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs?hl=zh-tw)的 `jobReference` 區段中，利用 `location` 屬性指定您的位置。
 
-## 在載入資料時建立叢集資料表
+## 載入資料時建立分群資料表
 
 載入資料到新資料表時，您可以指定分群資料欄來建立分群資料表。您不必在資料載入資料表之前，事先建立空白的資料表，因為您可以同時建立分群資料表並載入資料。
 
@@ -580,7 +580,7 @@ bq query --use_legacy_sql=false \
 
 ### SQL
 
-使用 [`LOAD DATA` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements?hl=zh-tw)。以下範例會載入 AVRO 資料，建立依 `transaction_date` 欄位分區，並依 `customer_id` 欄位分群的資料表。同時設定分區在三天後過期。
+使用 [`LOAD DATA` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements?hl=zh-tw)。以下範例會載入 AVRO 資料，建立依 `transaction_date` 欄位分區，並依 `customer_id` 欄位分群的資料表。並將分區設定為三天後失效。
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -796,10 +796,10 @@ print(
 ## 後續步驟
 
 * 如要瞭解如何使用叢集資料表，請參閱[管理叢集資料表](https://docs.cloud.google.com/bigquery/docs/manage-clustered-tables?hl=zh-tw)。
-* 關於如何查詢叢集資料表，請參閱[查詢叢集資料表](https://docs.cloud.google.com/bigquery/docs/querying-clustered-tables?hl=zh-tw)一文。
+* 如要瞭解如何查詢叢集資料表，請參閱[查詢叢集資料表](https://docs.cloud.google.com/bigquery/docs/querying-clustered-tables?hl=zh-tw)。
 * 如需 BigQuery 中的分區資料表支援總覽，請參閱[分區資料表簡介](https://docs.cloud.google.com/bigquery/docs/partitioned-tables?hl=zh-tw)一文。
 * 如要瞭解如何建立分區資料表，請參閱[建立分區資料表](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables?hl=zh-tw)。
-* 如要查看 `INFORMATION_SCHEMA` 的總覽，請參閱「[BigQuery `INFORMATION_SCHEMA` 簡介](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw)」。
+* 如要查看 `INFORMATION_SCHEMA` 的總覽，請參閱 [BigQuery `INFORMATION_SCHEMA` 簡介](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw)。
 
 
 
@@ -808,11 +808,11 @@ print(
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-18 (世界標準時間)。
+上次更新時間：2026-10-19 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-18 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-19 (世界標準時間)。"],[],[]]

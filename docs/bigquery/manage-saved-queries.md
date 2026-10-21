@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -16,7 +16,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 管理已儲存的查詢
 
-本文說明如何管理[已儲存的查詢和傳統已儲存的查詢](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction?hl=zh-tw)，以及如何在 [Knowledge Catalog](https://docs.cloud.google.com/dataplex/docs/introduction?hl=zh-tw) 中管理已儲存查詢的中繼資料。
+本文說明如何管理[已儲存的查詢和傳統已儲存的查詢](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction?hl=zh-tw)，以及如何在 [Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/introduction?hl=zh-tw) 中管理已儲存查詢的中繼資料。
 
 儲存的查詢是 [Dataform](https://docs.cloud.google.com/dataform/docs/overview?hl=zh-tw) 支援的 [BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/query-overview?hl=zh-tw#bigquery-studio) 程式碼資產。
 
@@ -62,7 +62,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 如要進一步瞭解 BigQuery IAM，請參閱「[使用身分與存取權管理功能控管存取權](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)」一文。
 
-如要在 Knowledge Catalog 中管理已儲存的查詢中繼資料，請確認您具備必要的 [Knowledge Catalog 角色](https://docs.cloud.google.com/dataplex/docs/iam-roles?hl=zh-tw)和 [`dataform.repositories.get`](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#predefined-roles) 權限。
+如要在 Knowledge Catalog 中管理已儲存的查詢中繼資料，請確認您具備必要的 [Knowledge Catalog 角色](https://docs.cloud.google.com/knowledge-catalog/docs/iam-roles?hl=zh-tw)和 [`dataform.repositories.get`](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#predefined-roles) 權限。
 
 ## 共用已儲存的查詢
 
@@ -426,7 +426,7 @@ BigQuery 會使用 Dataform API，將遷移的 BigQuery Studio 已儲存查詢�
 
 您可以透過 Knowledge Catalog 儲存及管理已儲存查詢的中繼資料。根據預設，Knowledge Catalog 會提供已儲存的查詢，不需額外設定。
 
-您可以使用 Knowledge Catalog 管理所有[已儲存查詢位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)的已儲存的查詢。在 Knowledge Catalog 中管理已儲存的查詢時，須遵守 [Knowledge Catalog 配額和限制](https://docs.cloud.google.com/dataplex/docs/quotas?hl=zh-tw)，並適用 [Knowledge Catalog 定價](https://cloud.google.com/dataplex/pricing?hl=zh-tw)。
+您可以使用 Knowledge Catalog 管理所有[已儲存查詢位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)的已儲存的查詢。在 Knowledge Catalog 中管理已儲存的查詢時，須遵守 [Knowledge Catalog 配額和限制](https://docs.cloud.google.com/knowledge-catalog/docs/quotas?hl=zh-tw)，並適用 [Knowledge Catalog 定價](https://cloud.google.com/dataplex/pricing?hl=zh-tw)。
 
 Knowledge Catalog 會自動從已儲存的查詢中擷取下列中繼資料：
 
@@ -436,21 +436,21 @@ Knowledge Catalog 會自動從已儲存的查詢中擷取下列中繼資料：
 * 資料資產類型
 * 對應 Google Cloud 專案
 
-Knowledge Catalog 會將儲存的查詢記錄為[項目](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources?hl=zh-tw#entries)，並包含下列項目值：
+Knowledge Catalog 會將儲存的查詢記錄為[項目](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources?hl=zh-tw#entries)，並包含下列項目值：
 
 系統項目群組
-:   已儲存的查詢的[系統項目群組](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources?hl=zh-tw#entry-groups)為 `@dataform`。如要在 Knowledge Catalog 中查看已儲存的查詢項目的詳細資料，您需要查看 `dataform` 系統項目群組。如要瞭解如何查看項目群組中的所有項目清單，請參閱 Knowledge Catalog 說明文件中的「[查看項目群組的詳細資料](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources?hl=zh-tw#entry-group-details)」。�
+:   已儲存的查詢的[系統項目群組](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources?hl=zh-tw#entry-groups)為 `@dataform`。如要在 Knowledge Catalog 中查看已儲存的查詢項目的詳細資料，您需要查看 `dataform` 系統項目群組。如要瞭解如何查看項目群組中的所有項目清單，請參閱 Knowledge Catalog 說明文件中的「[查看項目群組的詳細資料](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources?hl=zh-tw#entry-group-details)」。�
 
 系統項目類型
-:   已儲存的查詢的[系統項目類型](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources?hl=zh-tw#entry-types)為 `dataform-code-asset`。如要查看已儲存的查詢的詳細資料，請查看 `dataform-code-asset` 系統項目類型、使用切面篩選器篩選結果，並[將 `dataform-code-asset` 切面內的 `type` 欄位設為 `SQL_QUERY`](https://docs.cloud.google.com/dataplex/docs/search-syntax?hl=zh-tw#aspect-search)。接著，選取所選已儲存的查詢的項目。如要瞭解如何查看所選項目類型的詳細資料，請參閱 Knowledge Catalog 文件中的「[查看項目類型的詳細資料](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources?hl=zh-tw#entry-type-details)」。如要瞭解如何查看所選項目的詳細資料，請參閱 Knowledge Catalog 文件中的「[查看項目的詳細資料](https://docs.cloud.google.com/dataplex/docs/search-assets?hl=zh-tw#view-entry-details)」。
+:   已儲存的查詢的[系統項目類型](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources?hl=zh-tw#entry-types)為 `dataform-code-asset`。如要查看已儲存的查詢的詳細資料，請查看 `dataform-code-asset` 系統項目類型、使用切面篩選器篩選結果，並[將 `dataform-code-asset` 切面內的 `type` 欄位設為 `SQL_QUERY`](https://docs.cloud.google.com/knowledge-catalog/docs/search-syntax?hl=zh-tw#aspect-search)。接著，選取所選已儲存的查詢的項目。如要瞭解如何查看所選項目類型的詳細資料，請參閱 Knowledge Catalog 文件中的「[查看項目類型的詳細資料](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources?hl=zh-tw#entry-type-details)」。如要瞭解如何查看所選項目的詳細資料，請參閱 Knowledge Catalog 文件中的「[查看項目的詳細資料](https://docs.cloud.google.com/knowledge-catalog/docs/search-assets?hl=zh-tw#view-entry-details)」。
 
 系統切面類型
-:   已儲存查詢的[系統切面類型](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata?hl=zh-tw#aspect-types)為 `dataform-code-asset`。如要透過註解資料已儲存的查詢項目[切面](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata?hl=zh-tw#aspects)，在 Knowledge Catalog 中為已儲存的查詢提供額外背景資訊，請查看 `dataform-code-asset` 切面類型、使用切面篩選器篩選結果，並[將 `dataform-code-asset` 切面內的 `type` 欄位設為 `SQL_QUERY`](https://docs.cloud.google.com/dataplex/docs/search-syntax?hl=zh-tw#aspect-search)。如需如何使用切面註解項目的操作說明，請參閱 Knowledge Catalog 說明文件中的「[管理切面及豐富中繼資料](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata?hl=zh-tw)」一文。
+:   已儲存查詢的[系統切面類型](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata?hl=zh-tw#aspect-types)為 `dataform-code-asset`。如要透過註解資料已儲存的查詢項目[切面](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata?hl=zh-tw#aspects)，在 Knowledge Catalog 中為已儲存的查詢提供額外背景資訊，請查看 `dataform-code-asset` 切面類型、使用切面篩選器篩選結果，並[將 `dataform-code-asset` 切面內的 `type` 欄位設為 `SQL_QUERY`](https://docs.cloud.google.com/knowledge-catalog/docs/search-syntax?hl=zh-tw#aspect-search)。如需如何使用切面註解項目的操作說明，請參閱 Knowledge Catalog 說明文件中的「[管理切面及豐富中繼資料](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata?hl=zh-tw)」一文。
 
 類型
-:   已儲存查詢的類型為 `SQL_QUERY`。您可以使用`aspect:dataplex-types.global.dataform-code-asset.type=SQL_QUERY`[以切面為準的篩選器](https://docs.cloud.google.com/dataplex/docs/search-syntax?hl=zh-tw#aspect-search)，依`dataform-code-asset`系統項目類型和`dataform-code-asset`切面類型篩選已儲存的查詢。
+:   已儲存查詢的類型為 `SQL_QUERY`。您可以使用`aspect:dataplex-types.global.dataform-code-asset.type=SQL_QUERY`[以切面為準的篩選器](https://docs.cloud.google.com/knowledge-catalog/docs/search-syntax?hl=zh-tw#aspect-search)，依`dataform-code-asset`系統項目類型和`dataform-code-asset`切面類型篩選已儲存的查詢。
 
-如需在 Knowledge Catalog 中搜尋資產的操作說明，請參閱 Knowledge Catalog 說明文件中的「[在 Knowledge Catalog 中搜尋資料資產](https://docs.cloud.google.com/dataplex/docs/search-assets?hl=zh-tw)」。
+如需在 Knowledge Catalog 中搜尋資產的操作說明，請參閱 Knowledge Catalog 說明文件中的「[在 Knowledge Catalog 中搜尋資料資產](https://docs.cloud.google.com/knowledge-catalog/docs/search-assets?hl=zh-tw)」。
 
 ## 後續步驟
 
@@ -464,11 +464,11 @@ Knowledge Catalog 會將儲存的查詢記錄為[項目](https://docs.cloud.goog
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-12 (世界標準時間)。
+上次更新時間：2026-10-20 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-12 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-20 (世界標準時間)。"],[],[]]

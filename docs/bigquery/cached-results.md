@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -24,14 +24,14 @@ BigQuery 會將所有查詢結果寫入資料表。這份資料表可以由使�
 
 使用查詢快取會受到下列限制：
 
-* 當您執行重複的查詢時，BigQuery 會嘗試重複使用快取查詢結果。重複的查詢字詞必須與先前的查詢完全相同，系統才能從快取結果中擷取資料。
+* 當您執行重複的查詢時，BigQuery 會嘗試重複使用快取查詢結果。重複的查詢字詞必須與先前的查詢相同，系統才能從快取結果中擷取資料。
 * 如要將查詢結果保留在快取結果資料表中，結果集必須小於回應大小上限。如要進一步瞭解如何管理大型結果集，請參閱[傳回大量查詢結果](https://docs.cloud.google.com/bigquery/docs/writing-results?hl=zh-tw#large-results)。
 * 您無法使用 [DML](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language?hl=zh-tw) 陳述式指定快取結果資料表。
 * 雖然目前的語意允許這類操作，但建議您不要將快取結果做為相依工作的輸入內容。舉例來說，請不要提交會從快取資料表擷取結果的查詢工作，而是改將您的結果寫入已命名的目標資料表。如要簡化清除作業，資料集層級 `defaultTableExpirationMs` 屬性等功能可能會在指定期限過後使資料自動過期。
 
 ## 定價與配額
 
-系統會將快取查詢結果儲存為臨時資料表，您無須支付臨時資料表中的快取查詢結果儲存費用。如果查詢結果是擷取自快取結果資料表，系統傳回的工作統計資料屬性 `statistics.query.cacheHit` 值為 `true`，您就無須為這項查詢作業支付費用。雖然使用快取結果的查詢作業不收費，但仍適用 BigQuery [配額政策](https://docs.cloud.google.com/bigquery/quota-policy?hl=zh-tw)。
+快取的查詢結果會儲存為暫時性資料表。您不需要為儲存至暫時性資料表的快取查詢結果支付費用。如果查詢結果是擷取自快取結果資料表，系統傳回的工作統計資料屬性 `statistics.query.cacheHit` 值為 `true`，您就無須為這項查詢作業支付費用。雖然使用快取結果的查詢作業不收費，但仍適用 BigQuery [配額政策](https://docs.cloud.google.com/bigquery/quota-policy?hl=zh-tw)。
 
 除了降低成本以外，使用快取結果的查詢作業因為 BigQuery 不需計算結果集，可大幅加快執行速度。
 
@@ -52,21 +52,23 @@ BigQuery 會將所有查詢結果寫入資料表。這份資料表可以由使�
 
 ## 快取結果的儲存方式
 
-*執行查詢時，系統會在稱為「匿名資料集」的特殊[隱藏資料集](https://docs.cloud.google.com/bigquery/docs/datasets?hl=zh-tw#hidden_datasets)*中建立暫時性的快取結果資料表。一般資料集是從身分與存取權管理資源階層模型繼承權限 (專案與機構權限)，但匿名資料集的存取權僅限於擁有者。匿名資料集的擁有者是執行查詢的使用者，查詢會產生快取結果。此外，系統會檢查專案的 `bigquery.jobs.create` 權限，確認使用者有權存取專案。
+執行查詢時，系統會在稱為「匿名資料集」的特殊[隱藏資料集](https://docs.cloud.google.com/bigquery/docs/datasets?hl=zh-tw#hidden_datasets)中建立暫時性的快取結果資料表。一般資料集是從身分與存取權管理資源階層模型繼承權限 (專案與機構權限)，但匿名資料集的存取權僅限於擁有者。匿名資料集的擁有者是執行產生快取結果的查詢使用者。此外，系統也會檢查專案的 `bigquery.jobs.create` 權限，確認使用者有權存取專案。
 
 BigQuery 不支援共用匿名資料集。如果您打算共用查詢結果，請勿使用儲存在匿名資料集裡的快取結果，而是改將結果寫入已命名的目標資料表。
 
 雖然執行查詢的使用者具備資料集和快取結果資料表的完整存取權，但建議您不要將這些資料做為相依工作的輸入內容。
 
-匿名資料集的名稱會以底線開頭。因此， Google Cloud 控制台會隱藏這類名稱，而不顯示於資料集清單之中。您可以使用 bq 指令列工具或 API 列出匿名資料集，並稽核匿名資料集存取權控制。
+匿名資料集的名稱會以底線開頭。
+因此，控制台 Google Cloud 中的資料集清單會隱藏這類名稱。
+您可以使用 bq 指令列工具或 API 列出匿名資料集，並稽核這類資料集的存取權控制。
 
-如要進一步瞭解如何列出及取得資料集 (包括匿名資料集) 的相關資訊，請參閱[列出資料集](https://docs.cloud.google.com/bigquery/docs/listing-datasets?hl=zh-tw)。
+如要進一步瞭解如何列出及取得資料集 (包括匿名資料集) 的相關資訊，請參閱「[列出資料集](https://docs.cloud.google.com/bigquery/docs/listing-datasets?hl=zh-tw)」。
 
 ## 跨使用者快取
 
-如果您有執行查詢的必要權限，且查詢結果已在專案中為其他使用者快取，BigQuery 就會從快取傳回結果。快取結果會複製到您的個人匿名資料集，並在您執行查詢後保留 24 小時。
+如果您具備執行查詢的必要權限，且查詢結果已快取在專案中供其他使用者使用，BigQuery 就會從快取傳回結果。快取結果會複製到您的個人匿名資料集，並在您執行查詢後的 24 小時內保留在該處。
 
-如果您使用 Enterprise 或 Enterprise Plus [版本](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)，即可使用跨使用者快取功能。單一使用者快取適用的[限制和例外狀況](#cache-exceptions)，也適用於跨使用者快取。
+如果您使用 Enterprise 或 Enterprise Plus [版本](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)，即可使用跨使用者快取功能。單一使用者快取適用的[限制和例外狀況](#cache-exceptions)，同樣適用於跨使用者快取。
 
 ## 停用快取結果擷取作業
 
@@ -327,7 +329,7 @@ for row in query_job:
 
 ### bq
 
-使用 `--require_cache` 旗標，要求從查詢快取取得結果。以下範例會強制 BigQuery 處理查詢 (如果查詢結果存在於快取中)：
+使用 `--require_cache` 旗標要求查詢快取的結果。下列範例顯示如何強制 BigQuery 在結果存在於快取的情況下處理查詢：
 
 ```
  bq query \
@@ -354,19 +356,19 @@ for row in query_job:
 
 使用下列任一方法，判斷 BigQuery 傳回的結果是否使用快取：
 
-* **使用 Google Cloud 控制台**。前往「查詢結果」，然後點選「工作資訊」。「處理的位元組數」會顯示「0 B (結果已快取)」。
+* **使用 Google Cloud 控制台**。前往「查詢結果」，然後按一下「工作資訊」。「已處理的位元組數」顯示「0 B (已快取結果)」。
 * **使用 [BigQuery API](https://docs.cloud.google.com/bigquery/docs/reference/v2?hl=zh-tw)。**
-  查詢結果中的 `cacheHit` 屬性會設為 `true`。
+  查詢結果中的 `cacheHit` 屬性已設為 `true`。
 
 ## 資料欄層級安全防護機制的影響
 
-根據預設，BigQuery 會快取查詢結果 24 小時，但有[例外狀況](#cache-exceptions)。如果查詢的資料表受到[資料欄層級安全防護機制](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro?hl=zh-tw)保護，系統可能不會快取查詢結果。如果 BigQuery 快取了結果，快取生命週期為 24 小時。
+根據預設，BigQuery 會將查詢結果快取 24 小時，但[例外狀況](#cache-exceptions)如先前所述。針對受[資料欄層級安全防護機制](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro?hl=zh-tw)保護的資料表執行的查詢，可能不會快取。如果 BigQuery 快取了結果，則適用 24 小時的快取生命週期。
 
-從用於政策標記的 Data Catalog 細部讀者角色中移除群組或使用者等變更，不會使 24 小時快取失效。Data Catalog 細部讀者存取控管群組本身的變更會立即傳播，但這類變更不會使快取失效。
+如果變更政策標記所用的 Data Catalog 精細讀取者角色，例如從該角色移除群組或使用者，24 小時快取不會失效。對 Data Catalog 細部讀者存取控管群組所做的變更會立即傳播，但不會使快取失效。
 
 影響：使用者執行查詢後，查詢結果仍會顯示給使用者。即使使用者在過去 24 小時內無法存取資料，仍可從快取中擷取這些結果。
 
-從政策標記的 Data Catalog 精細讀取者角色移除使用者後，使用者在 24 小時內只能存取先前允許查看的快取資料。如果資料表中新增了資料列，使用者就無法查看新增的資料列，即使結果已快取也一樣。
+從政策標記的 Data Catalog 精細讀取者角色移除使用者後，使用者在 24 小時內只能存取先前獲准查看的快取資料。如果資料表新增了資料列，即使結果已快取，使用者也無法看到新增的資料列。
 
 
 
@@ -375,11 +377,11 @@ for row in query_job:
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-13 (世界標準時間)。
+上次更新時間：2026-10-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-13 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]

@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -196,7 +196,7 @@ if table.clustering_fields == cluster_fields:
 
 ## 所需權限
 
-如要執行查詢[作業](https://docs.cloud.google.com/bigquery/docs/managing-jobs?hl=zh-tw)，您需要對執行查詢作業的專案具備 `bigquery.jobs.create` Identity and Access Management (IAM) 權限。
+如要執行查詢[作業](https://docs.cloud.google.com/bigquery/docs/managing-jobs?hl=zh-tw)，您必須在執行查詢作業的專案中，具備 `bigquery.jobs.create` Identity and Access Management (IAM) 權限。
 
 下列每個預先定義的 IAM 角色都包含執行查詢作業所需的權限：
 
@@ -204,7 +204,7 @@ if table.clustering_fields == cluster_fields:
 * `roles/bigquery.jobUser`
 * `roles/bigquery.user`
 
-此外，您還需要查詢參照的所有資料表和檢視畫面的 `bigquery.tables.getData` 權限。此外，查詢檢視區塊時，您需要所有基礎資料表和檢視區塊的這項權限。不過，如果您使用[授權檢視區塊](https://docs.cloud.google.com/bigquery/docs/authorized-views?hl=zh-tw)或[授權資料集](https://docs.cloud.google.com/bigquery/docs/authorized-datasets?hl=zh-tw)，就不需要存取基礎來源資料。
+此外，您還需要查詢參照的所有資料表和檢視的 `bigquery.tables.getData` 權限。此外，查詢檢視區塊時，您需要所有基礎資料表和檢視區塊的這項權限。不過，如果您使用[授權檢視畫面](https://docs.cloud.google.com/bigquery/docs/authorized-views?hl=zh-tw)或[授權資料集](https://docs.cloud.google.com/bigquery/docs/authorized-datasets?hl=zh-tw)，就不需要存取基礎來源資料。
 
 下列每個預先定義的 IAM 角色都包含查詢參照的所有資料表和檢視區塊所需權限：
 
@@ -238,8 +238,8 @@ FROM
 
 ### 依排序順序篩選叢集資料欄
 
-指定篩選條件時，使用的運算式要能依照排序順序，對叢集資料欄進行篩選。排序順序是 `CLUSTER BY` 子句中指定的資料欄順序。
-如要享有分群功能帶來的優勢，請在從左到右的排列順序中，納入一或多個分群資料欄，並從第一個資料欄開始。在大多數情況下，第一個分群資料欄在區塊修剪方面最有效，其次是第二個資料欄，然後是第三個。您仍可在查詢中單獨使用第二或第三個資料欄，但區塊修剪可能不會那麼有效。篩選器運算式中的資料欄名稱順序不會影響效能。
+指定篩選條件時，使用的運算式要能依照排序順序，對叢集資料欄進行篩選。排序順序是 `CLUSTER BY` 子句中指定的欄順序。
+如要享有叢集功能帶來的優勢，請在從左到右的排序順序中，納入一或多個叢集資料欄，並從第一個資料欄開始。在大多數情況下，第一個分群資料欄在區塊修剪方面最有效，其次是第二個資料欄，然後是第三個。您仍可在查詢中單獨使用第二或第三個資料欄，但區塊修剪可能不會那麼有效。篩選器運算式中的資料欄名稱順序不會影響效能。
 
 下列範例會查詢在上一個範例中建立的 `ClusteredSalesData` 分群資料表。查詢內含的篩選運算式可先依 `customer_id` 進行篩選，再依 `product_id` 進行篩選。這項查詢依照*排序順序* (`CLUSTER BY` 子句中指定的資料欄順序)，對叢集資料欄進行篩選，因此可達到最佳效能。
 
@@ -267,7 +267,7 @@ WHERE
 
 ### 請勿在複合篩選運算式中使用叢集資料欄
 
-如果在複合篩選運算式中使用分群資料欄，就無法套用區塊修剪，從而無法達到最佳查詢效能。
+如果在複合篩選運算式中使用叢集資料欄，就無法套用區塊修剪，從而無法達到最佳查詢效能。
 
 舉例來說，下列查詢不會修剪區塊，原因在於篩選運算式當中的一個函式使用了叢集資料欄 `customer_id`。
 
@@ -293,7 +293,7 @@ WHERE
 
 ### 不要比對叢集資料欄和其他資料欄
 
-如果篩選運算式把分群資料欄跟另一個資料欄 (分群資料欄或非分群資料欄) 進行比對，就無法套用區塊修剪，因此無法達到最佳查詢效能。
+如果篩選運算式把叢集資料欄跟另一個資料欄 (叢集資料欄或非叢集資料欄) 進行比對，就無法套用區塊修剪，因此無法達到最佳查詢效能。
 
 下列查詢沒有修剪區塊的原因是，篩選運算式把 `customer_id` 分群資料欄跟另一個 `order_id` 資料欄進行比對。
 
@@ -324,11 +324,11 @@ WHERE
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-12 (世界標準時間)。
+上次更新時間：2026-10-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-12 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]

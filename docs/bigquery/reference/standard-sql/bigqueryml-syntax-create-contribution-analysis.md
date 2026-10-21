@@ -471,35 +471,5 @@ summable by category metric:
 CREATE (OR REPLACE) MODEL `myproject.mydataset.ca_model`
   OPTIONS(
     MODEL_TYPE = 'CONTRIBUTION_ANALYSIS',
-    CONTRIBUTION_METRIC = 'SUM(concessions_sold)/COUNT(DISTINCT sales_date)',
-    DIMENSION_ID_COLS = ['venue_ID','event_date', 'attendee_count', 'concession_type'],
-    IS_TEST_COL = 'test_col',
-    TOP_K_INSIGHTS_BY_APRIORI_SUPPORT = 25,
-    PRUNING_METHOD = 'PRUNE_REDUNDANT_INSIGHTS'
-) AS
-SELECT concessions_sold, attendee_count, venue_ID,
-  event_date, concession_type, test_col, sales_date
-FROM mydataset.regional_sales;
+    CONTRIBUTION_METRIC =
 ```
-
-## What's next
-
-* Learn how to call the [`ML.GET_INSIGHTS` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-get-insights)
-  to get insights from your contribution analysis model.
-* Try a tutorial on how to [Get data insights from a contribution analysis model using a summable metric](/bigquery/docs/get-contribution-analysis-insights).
-
-
-
-
-Send feedback
-
-Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
-
-Last updated 2026-07-17 UTC.
-
-
-
-
-Need to tell us more?
-
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-07-17 UTC."],[],[]]

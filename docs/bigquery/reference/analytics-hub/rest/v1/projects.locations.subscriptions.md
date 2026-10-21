@@ -18,7 +18,7 @@ A subscription represents a subscribers' access to a particular set of published
 
 | JSON representation |
 | --- |
-| ``` {   "name": string,   "creationTime": string,   "lastModifyTime": string,   "organizationId": string,   "organizationDisplayName": string,   "state": enum (State),   "linkedDatasetMap": {     string: {       object (LinkedResource)     },     ...   },   "subscriberContact": string,   "linkedResources": [     {       object (LinkedResource)     }   ],   "resourceType": enum (SharedResourceType),   "commercialInfo": {     object (CommercialInfo)   },   "destinationDataset": {     object (DestinationDataset)   },    // Union field resource_name can be only one of the following:   "listing": string,   "dataExchange": string   // End of list of possible types for union field resource_name.   "logLinkedDatasetQueryUserEmail": boolean } ``` |
+| ``` {   "name": string,   "creationTime": string,   "lastModifyTime": string,   "organizationId": string,   "organizationDisplayName": string,   "state": enum (State),   "linkedDatasetMap": {     string: {       object (LinkedResource)     },     ...   },   "subscriberContact": string,   "linkedResources": [     {       object (LinkedResource)     }   ],   "resourceType": enum (SharedResourceType),   "commercialInfo": {     object (CommercialInfo)   },   "destinationDataset": {     object (DestinationDataset)   },    // The following is a list of mutually exclusive fields. At most one of the   // fields will be set in a response:   "listing": string,   "dataExchange": string   // End of mutually exclusive fields.   "logLinkedDatasetQueryUserEmail": boolean } ``` |
 
 | Fields | |
 | --- | --- |
@@ -34,9 +34,10 @@ A subscription represents a subscribers' access to a particular set of published
 | `resourceType` | `enum (SharedResourceType)`  Output only. Listing shared asset type. |
 | `commercialInfo` | `object (CommercialInfo)`  Output only. This is set if this is a commercial subscription i.e. if this subscription was created from subscribing to a commercial listing. |
 | `destinationDataset` | `object (DestinationDataset)`  Optional. BigQuery destination dataset to create for the subscriber. |
-| Union field `resource_name`.  `resource_name` can be only one of the following: | |
+| The following is a list of mutually exclusive fields. At most one of the fields will be set in a response: | |
 | `listing` | `string`  Output only. Resource name of the source Listing. e.g. projects/123/locations/us/dataExchanges/456/listings/789 |
 | `dataExchange` | `string`  Output only. Resource name of the source Data Exchange. e.g. projects/123/locations/us/dataExchanges/456 |
+| End of mutually exclusive fields. | |
 | `logLinkedDatasetQueryUserEmail` | `boolean`  Output only. By default, false. If true, the Subscriber agreed to the email sharing mandate that is enabled for DataExchange/Listing. |
 
 | Methods | |
@@ -56,11 +57,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2025-11-12 UTC.
+Last updated 2026-08-28 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2025-11-12 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-08-28 UTC."],[],[]]

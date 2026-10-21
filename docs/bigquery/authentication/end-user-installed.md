@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -22,7 +22,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 事前準備
 
-1. [建立](https://console.cloud.google.com/projectcreate?hl=zh-tw)一個代表已安裝應用程式的 Google Cloud 專案。
+1. [建立 Google Cloud 一個代表已安裝應用程式的](https://console.cloud.google.com/projectcreate?hl=zh-tw)專案。
 2. 安裝 [BigQuery 用戶端程式庫](https://docs.cloud.google.com/bigquery/docs/reference/libraries?hl=zh-tw)。
 3. 安裝驗證程式庫。
 
@@ -45,7 +45,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    ### Python
 
-   安裝 [Google Auth 的 oauthlib 整合](https://github.com/googleapis/google-cloud-python/tree/main/packages/google-auth-oauthlib)。
+   安裝[適用於 Google Auth 的 oauthlib 整合項目](https://github.com/googleapis/google-cloud-python/tree/main/packages/google-auth-oauthlib)。
 
    ```
    pip install --upgrade google-auth-oauthlib
@@ -53,7 +53,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    ### Node.js
 
-   安裝 [Google Auth 的 oauthlib 整合](https://github.com/googleapis/google-auth-library-nodejs)。
+   安裝[適用於 Google Auth 的 oauthlib 整合項目](https://github.com/googleapis/google-auth-library-nodejs)。
 
    ```
    npm install google-auth-library  
@@ -506,11 +506,11 @@ Get Credentials (取得憑證)
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-12 (世界標準時間)。
+上次更新時間：2026-10-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-12 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]

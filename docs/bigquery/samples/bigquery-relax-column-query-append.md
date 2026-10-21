@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -157,6 +157,50 @@ public class RelaxTableQuery {
     }
   }
 }
+```
+
+### Python
+
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+
+```
+from google.cloud import bigquery
+
+# Construct a BigQuery client object.
+client = bigquery.Client()
+
+# TODO(developer): Set table_id to the ID of the destination table.
+# table_id = "your-project.your_dataset.your_table_name"
+
+# Retrieves the destination table and checks the number of required fields.
+table = client.get_table(table_id)  # Make an API request.
+original_required_fields = sum(field.mode == "REQUIRED" for field in table.schema)
+
+# In this example, the existing table has 2 required fields.
+print("{} fields in the schema are required.".format(original_required_fields))
+
+# Configures the query to append the results to a destination table,
+# allowing field relaxation.
+job_config = bigquery.QueryJobConfig(
+    destination=table_id,
+    schema_update_options=[bigquery.SchemaUpdateOption.ALLOW_FIELD_RELAXATION],
+    write_disposition=bigquery.WriteDisposition.WRITE_APPEND,
+)
+
+# Start the query, passing in the extra configuration.
+client.query_and_wait(
+    # In this example, the existing table contains 'full_name' and 'age' as
+    # required columns, but the query results will omit the second column.
+    'SELECT "Beyonce" as full_name;',
+    job_config=job_config,
+)  # Make an API request and wait for job to complete
+
+# Checks the updated number of required fields.
+table = client.get_table(table_id)  # Make an API request.
+current_required_fields = sum(field.mode == "REQUIRED" for field in table.schema)
+print("{} fields in the schema are now required.".format(current_required_fields))
 ```
 
 ## 後續步驟

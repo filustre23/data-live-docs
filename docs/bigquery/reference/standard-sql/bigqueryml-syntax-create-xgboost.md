@@ -175,7 +175,7 @@ Imported XGBoost models have the following limitations:
 * The XGBoost model must already exist before it can be imported into
   BigQuery.
 * Models must be stored in Cloud Storage.
-* XGBoost models must be in `BST` or `JSON` format.
+* XGBoost models must be in `BST`, `UBJ` or `JSON` format.
 * You can only use XGBoost models with the
   [`ML.PREDICT`](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict)
   and
@@ -185,9 +185,9 @@ Imported XGBoost models have the following limitations:
 * The memory limit to load and run the XGBoost model is 840 MB. You can reduce the model
   size by using fewer trees or shallower tree depth, or by using the XGBoost
   library's default `save_model` method to save the models.
-* BigQuery ML uses the [XGBoost 1.5.1](https://xgboost.readthedocs.io/en/release_1.5.0/index.html)
+* BigQuery ML uses the [XGBoost 3.1.0](https://xgboost.readthedocs.io/en/release_3.1.0/index.html)
   library to load and make predictions on XGBoost models. Forward compatibility
-  for models saved with XGBoost version 1.6.0 or newer is not guaranteed.
+  for models saved with XGBoost version 3.2.0 or newer is not guaranteed.
 * BigQuery XGBoost models only support
   [numeric types](/bigquery/docs/reference/standard-sql/data-types#numeric_types)
   as input data types and
@@ -216,7 +216,7 @@ BigQuery model. The example assumes the following:
 
 * There is an existing XGBoost model located at
   `gs://bucket-name/xgboost-model/*`.
-* The model file is in `BST format or in`JSON` format.
+* The model file is in `BST`, `JSON` or `UBJ` format.
 * The model file doesn't contain information about input `feature_names` and
   `feature_types`.
 
@@ -238,7 +238,7 @@ BigQuery model. The example assumes the following:
 
 * There is an existing XGBoost model located at
   `gs://bucket-name/xgboost-model/*`.
-* The model file is in `BST` format or in `JSON` format.
+* The model file is in `BST`, `JSON` or `UBJ` format.
 * The model file contains information about input `feature_names` and
   `feature_types`.
 
@@ -258,11 +258,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-07-17 UTC.
+Last updated 2026-10-13 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-07-17 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-10-13 UTC."],[],[]]

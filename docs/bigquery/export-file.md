@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -101,7 +101,7 @@ bq 指令列工具或 API 都不支援將查詢結果儲存到 Google 試算表�
 
    將查詢結果儲存至 Google 試算表時，檔案名稱以 `results-[DATE]` 開頭，其中 `[DATE]` 是今天的日期，格式為 `YYYYMMDD`。
 
-   **注意：** bq 指令列工具或 API 均不支援將結果儲存至 Google 試算表。詳情請參閱「[使用連結試算表](https://docs.cloud.google.com/bigquery/docs/connected-sheets?hl=zh-tw)」。
+   **附註：** bq 指令列工具或 API 均不支援將結果儲存至 Google 試算表。詳情請參閱「[使用連結試算表](https://docs.cloud.google.com/bigquery/docs/connected-sheets?hl=zh-tw)」。
 
 ### 排解無法將結果儲存到 Google 試算表的問題
 
@@ -122,7 +122,7 @@ bq 指令列工具或 API 都不支援將查詢結果儲存到 Google 試算表�
 
    * 針對「GCS Location」(GCS 位置)，請瀏覽至您要匯出資料的值區、資料夾或檔案。
    * 為「Export format」(匯出格式) 選擇以下其中一種匯出資料格式：[CSV]、[JSON (Newline Delimited)] (JSON (以換行符號分隔))、[Avro] 或 [Parquet]。
-   * 針對「Compression」(壓縮選項)，請選取壓縮格式，或選取 `None` 表示不壓縮。
+   * 針對「Compression」(壓縮選項)，請選取壓縮格式，或是選取 `None` 表示不壓縮。
 7. 按一下「儲存」即可匯出查詢結果。
 
 如要查看工作進度，請展開「Job history」(工作記錄) 窗格，然後尋找 `EXTRACT` 類型的工作。
@@ -132,7 +132,7 @@ bq 指令列工具或 API 都不支援將查詢結果儲存到 Google 試算表�
 如要禁止使用者從 Google Cloud 控制台下載查詢結果，請使用下列任一方法：
 
 * 設定 [VPC Service Controls](https://docs.cloud.google.com/vpc-service-controls/docs/overview?hl=zh-tw) perimeter，防止資料遭竊。這樣一來，使用者就無法在已建立的範圍邊界外下載及匯出資料。
-* 請與 [Cloud Customer Care](https://docs.cloud.google.com/support?hl=zh-tw) 團隊聯絡，要求將您的專案或機構加入限制清單。 Google Cloud 這會直接在 Google Cloud 控制台中停用資料下載和匯出選項。
+* 請與 [Cloud Customer Care](https://docs.cloud.google.com/support?hl=zh-tw) 團隊聯絡，要求將您的 Google Cloud 專案或機構加入限制清單。這會直接在 Google Cloud 控制台中停用資料下載和匯出選項。
 
 ## 後續步驟
 
@@ -147,11 +147,11 @@ bq 指令列工具或 API 都不支援將查詢結果儲存到 Google 試算表�
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-12 (世界標準時間)。
+上次更新時間：2026-10-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-12 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]

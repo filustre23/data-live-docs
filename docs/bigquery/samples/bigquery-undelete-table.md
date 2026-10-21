@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -211,6 +211,54 @@ function undelete_table(
         print('Snapshot restored successfully' . PHP_EOL);
     }
 }
+```
+
+### Python
+
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+
+```
+import time
+
+from google.cloud import bigquery
+
+# Construct a BigQuery client object.
+client = bigquery.Client()
+
+# TODO(developer): Choose a table to recover.
+# table_id = "your-project.your_dataset.your_table"
+
+# TODO(developer): Choose a new table ID for the recovered table data.
+# recovered_table_id = "your-project.your_dataset.your_table_recovered"
+
+# TODO(developer): Choose an appropriate snapshot point as epoch
+# milliseconds. For this example, we choose the current time as we're about
+# to delete the table immediately afterwards.
+snapshot_epoch = int(time.time() * 1000)
+
+# ...
+
+# "Accidentally" delete the table.
+client.delete_table(table_id)  # Make an API request.
+
+# Construct the restore-from table ID using a snapshot decorator.
+snapshot_table_id = "{}@{}".format(table_id, snapshot_epoch)
+
+# Construct and run a copy job.
+job = client.copy_table(
+    snapshot_table_id,
+    recovered_table_id,
+    # Must match the source and destination tables location.
+    location="US",
+)  # Make an API request.
+
+job.result()  # Wait for the job to complete.
+
+print(
+    "Copied data from deleted table {} to {}".format(table_id, recovered_table_id)
+)
 ```
 
 ## 後續步驟

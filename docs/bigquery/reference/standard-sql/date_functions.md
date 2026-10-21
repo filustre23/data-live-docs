@@ -167,14 +167,14 @@ SELECT
 ## `DATE_ADD`
 
 ```
-DATE_ADD(date_expression, INTERVAL int64_expression date_part)
+DATE_ADD(date_expression, INTERVAL step_size step_unit)
 ```
 
 **Description**
 
-Adds a specified time interval to a DATE.
+Adds a specified time interval to a `DATE` object.
 
-`DATE_ADD` supports the following `date_part` values:
+`DATE_ADD` supports the following `step_unit` values:
 
 * `DAY`
 * `WEEK`. Equivalent to 7 `DAY`s.
@@ -184,7 +184,7 @@ Adds a specified time interval to a DATE.
 
 Special handling is required for MONTH, QUARTER, and YEAR parts when
 the date is at (or near) the last day of the month. If the resulting
-month has fewer days than the original date's day, then the resulting
+month has fewer days than the original `DATE` object's day, then the resulting
 date is the last date of that month.
 
 **Return Data Type**
@@ -238,7 +238,9 @@ Gets the number of unit boundaries between two `DATE` values (`end_date` -
 
 **Details**
 
-If `end_date` is earlier than `start_date`, the output is negative.
+If `end_date` is earlier than `start_date`, the output is 0 or negative.
+Decimals are always truncated rather than rounded. For example, both 3.9 and 3.1
+become 3, while -3.9 and -3.1 become -3 (instead of -4).
 
 **Note:** The behavior of the this function follows the type of arguments passed in.
 For example, `DATE_DIFF(TIMESTAMP, TIMESTAMP, PART)`
@@ -248,7 +250,7 @@ behaves like `TIMESTAMP_DIFF(TIMESTAMP, TIMESTAMP, PART)`.
 
 `INT64`
 
-**Example**
+**Examples**
 
 ```
 SELECT DATE_DIFF(DATE '2010-07-07', DATE '2008-12-25', DAY) AS days_diff;
@@ -258,6 +260,24 @@ SELECT DATE_DIFF(DATE '2010-07-07', DATE '2008-12-25', DAY) AS days_diff;
  +-----------+
  | 559       |
  +-----------*/
+```
+
+In the following example, `DATE_DIFF` truncates the output rather than rounding
+it. Both 3 years 11 months (3.9 years) and 3 years 1 month (3.1 years)
+truncate to 3 years, and their negative counterparts truncate to -3 years:
+
+```
+SELECT
+  DATE_DIFF(DATE '2023-11-30', DATE '2020-01-01', YEAR) AS diff_3_9,
+  DATE_DIFF(DATE '2023-02-01', DATE '2020-01-01', YEAR) AS diff_3_1,
+  DATE_DIFF(DATE '2020-01-01', DATE '2023-11-30', YEAR) AS diff_negative_3_9,
+  DATE_DIFF(DATE '2020-01-01', DATE '2023-02-01', YEAR) AS diff_negative_3_1;
+
+/*----------+----------+-------------------+-------------------+
+ | diff_3_9 | diff_3_1 | diff_negative_3_9 | diff_negative_3_1 |
+ +----------+----------+-------------------+-------------------+
+ | 3        | 3        | -3                | -3                |
+ +----------+----------+-------------------+-------------------*/
 ```
 
 ```
@@ -338,306 +358,5 @@ SELECT DATE_FROM_UNIX_DATE(14238) AS date_from_epoch;
 
 /*-----------------+
  | date_from_epoch |
- +-----------------+
- | 2008-12-25      |
- +-----------------+*/
+ +----------------
 ```
-
-## `DATE_SUB`
-
-```
-DATE_SUB(date_expression, INTERVAL int64_expression date_part)
-```
-
-**Description**
-
-Subtracts a specified time interval from a DATE.
-
-`DATE_SUB` supports the following `date_part` values:
-
-* `DAY`
-* `WEEK`. Equivalent to 7 `DAY`s.
-* `MONTH`
-* `QUARTER`
-* `YEAR`
-
-Special handling is required for MONTH, QUARTER, and YEAR parts when
-the date is at (or near) the last day of the month. If the resulting
-month has fewer days than the original date's day, then the resulting
-date is the last date of that month.
-
-**Return Data Type**
-
-DATE
-
-**Example**
-
-```
-SELECT DATE_SUB(DATE '2008-12-25', INTERVAL 5 DAY) AS five_days_ago;
-
-/*---------------+
- | five_days_ago |
- +---------------+
- | 2008-12-20    |
- +---------------*/
-```
-
-## `DATE_TRUNC`
-
-```
-DATE_TRUNC(date_value, date_granularity)
-```
-
-```
-DATE_TRUNC(datetime_value, datetime_granularity)
-```
-
-```
-DATE_TRUNC(timestamp_value, timestamp_granularity[, time_zone])
-```
-
-**Description**
-
-Truncates a `DATE`, `DATETIME`, or `TIMESTAMP` value at a particular
-granularity.
-
-**Definitions**
-
-* `date_value`: A `DATE` value to truncate.
-* `date_granularity`: The truncation granularity for a `DATE` value.
-  [Date granularities](#date_trunc_granularity_date) can be used.
-* `datetime_value`: A `DATETIME` value to truncate.
-* `datetime_granularity`: The truncation granularity for a `DATETIME` value.
-  [Date granularities](#date_trunc_granularity_date) and
-  [time granularities](#date_trunc_granularity_time) can be used.
-* `timestamp_value`: A `TIMESTAMP` value to truncate.
-* `timestamp_granularity`: The truncation granularity for a `TIMESTAMP` value.
-  [Date granularities](#date_trunc_granularity_date) and
-  [time granularities](#date_trunc_granularity_time) can be used.
-* `time_zone`: A time zone to use with the `TIMESTAMP` value.
-  [Time zone parts](#date_time_zone_parts) can be used.
-  Use this argument if you want to use a time zone other than
-  the default time zone, UTC, as part of the
-  truncate operation.
-
-  **Note:** When truncating a timestamp to `MINUTE`
-  or `HOUR` parts, this function determines the civil time of the
-  timestamp in the specified (or default) time zone
-  and subtracts the minutes and seconds (when truncating to `HOUR`) or the
-  seconds (when truncating to `MINUTE`) from that timestamp.
-  While this provides intuitive results in most cases, the result is
-  non-intuitive near daylight savings transitions that aren't hour-aligned.
-
-**Date granularity definitions**
-
-* `DAY`: The day in the Gregorian calendar year that contains the
-  value to truncate.
-* `WEEK`: The first day in the week that contains the
-  value to truncate. Weeks begin on Sundays. `WEEK` is equivalent to
-  `WEEK(SUNDAY)`.
-* `WEEK(WEEKDAY)`: The first day in the week that contains the
-  value to truncate. Weeks begin on `WEEKDAY`. `WEEKDAY` must be one of the
-  following: `SUNDAY`, `MONDAY`, `TUESDAY`, `WEDNESDAY`, `THURSDAY`, `FRIDAY`,
-  or `SATURDAY`.
-* `ISOWEEK`: The first day in the [ISO 8601 week](https://en.wikipedia.org/wiki/ISO_week_date) that contains
-  the value to truncate. The ISO week begins on
-  Monday. The first ISO week of each ISO year contains the first Thursday of the
-  corresponding Gregorian calendar year.
-* `MONTH`: The first day in the month that contains the
-  value to truncate.
-* `QUARTER`: The first day in the quarter that contains the
-  value to truncate.
-* `YEAR`: The first day in the year that contains the
-  value to truncate.
-* `ISOYEAR`: The first day in the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) week-numbering year
-  that contains the value to truncate. The ISO year is the
-  Monday of the first week where Thursday belongs to the corresponding
-  Gregorian calendar year.
-
-
-
-**Time granularity definitions**
-
-* `MICROSECOND`: If used, nothing is truncated from the value.
-* `MILLISECOND`: The nearest lesser than or equal millisecond.
-* `SECOND`: The nearest lesser than or equal second.
-* `MINUTE`: The nearest lesser than or equal minute.
-* `HOUR`: The nearest lesser than or equal hour.
-
-**Time zone part definitions**
-
-* `MINUTE`
-* `HOUR`
-* `DAY`
-* `WEEK`
-* `WEEK(<WEEKDAY>)`
-* `ISOWEEK`
-* `MONTH`
-* `QUARTER`
-* `YEAR`
-* `ISOYEAR`
-
-**Details**
-
-The resulting value is always rounded to the beginning of `granularity`.
-
-**Return Data Type**
-
-The same data type as the first argument passed into this function.
-
-**Examples**
-
-```
-SELECT DATE_TRUNC(DATE '2008-12-25', MONTH) AS month;
-
-/*------------+
- | month      |
- +------------+
- | 2008-12-01 |
- +------------*/
-```
-
-In the following example, the original date falls on a Sunday. Because
-the `date_part` is `WEEK(MONDAY)`, `DATE_TRUNC` returns the `DATE` for the
-preceding Monday.
-
-```
-SELECT date AS original, DATE_TRUNC(date, WEEK(MONDAY)) AS truncated
-FROM (SELECT DATE('2017-11-05') AS date);
-
-/*------------+------------+
- | original   | truncated  |
- +------------+------------+
- | 2017-11-05 | 2017-10-30 |
- +------------+------------*/
-```
-
-In the following example, the original `date_expression` is in the Gregorian
-calendar year 2015. However, `DATE_TRUNC` with the `ISOYEAR` date part
-truncates the `date_expression` to the beginning of the ISO year, not the
-Gregorian calendar year. The first Thursday of the 2015 calendar year was
-2015-01-01, so the ISO year 2015 begins on the preceding Monday, 2014-12-29.
-Therefore the ISO year boundary preceding the `date_expression` 2015-06-15 is
-2014-12-29.
-
-```
-SELECT
-  DATE_TRUNC('2015-06-15', ISOYEAR) AS isoyear_boundary,
-  EXTRACT(ISOYEAR FROM DATE '2015-06-15') AS isoyear_number;
-
-/*------------------+----------------+
- | isoyear_boundary | isoyear_number |
- +------------------+----------------+
- | 2014-12-29       | 2015           |
- +------------------+----------------*/
-```
-
-## `EXTRACT`
-
-```
-EXTRACT(part FROM date_expression)
-```
-
-**Description**
-
-Returns the value corresponding to the specified date part. The `part` must
-be one of:
-
-* `DAYOFWEEK`: Returns values in the range [1,7] with Sunday as the first day
-  of the week.
-* `DAY`
-* `DAYOFYEAR`
-* `WEEK`: Returns the week number of the date in the range [0, 53]. Weeks begin
-  with Sunday, and dates prior to the first Sunday of the year are in week
-  0.
-* `WEEK(<WEEKDAY>)`: Returns the week number of the date in the range [0, 53].
-  Weeks begin on `WEEKDAY`. Dates prior to
-  the first `WEEKDAY` of the year are in week 0. Valid values for `WEEKDAY` are
-  `SUNDAY`, `MONDAY`, `TUESDAY`, `WEDNESDAY`, `THURSDAY`, `FRIDAY`, and
-  `SATURDAY`.
-* `ISOWEEK`: Returns the [ISO 8601 week](https://en.wikipedia.org/wiki/ISO_week_date)
-  number of the `date_expression`. `ISOWEEK`s begin on Monday. Return values
-  are in the range [1, 53]. The first `ISOWEEK` of each ISO year begins on the
-  Monday before the first Thursday of the Gregorian calendar year.
-* `MONTH`
-* `QUARTER`: Returns values in the range [1,4].
-* `YEAR`
-* `ISOYEAR`: Returns the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)
-  week-numbering year, which is the Gregorian calendar year containing the
-  Thursday of the week to which `date_expression` belongs.
-
-**Return Data Type**
-
-INT64
-
-**Examples**
-
-In the following example, `EXTRACT` returns a value corresponding to the `DAY`
-date part.
-
-```
-SELECT EXTRACT(DAY FROM DATE '2013-12-25') AS the_day;
-
-/*---------+
- | the_day |
- +---------+
- | 25      |
- +---------*/
-```
-
-In the following example, `EXTRACT` returns values corresponding to different
-date parts from a column of dates near the end of the year.
-
-```
-SELECT
-  date,
-  EXTRACT(ISOYEAR FROM date) AS isoyear,
-  EXTRACT(ISOWEEK FROM date) AS isoweek,
-  EXTRACT(YEAR FROM date) AS year,
-  EXTRACT(WEEK FROM date) AS week
-FROM UNNEST(GENERATE_DATE_ARRAY('2015-12-23', '2016-01-09')) AS date
-ORDER BY date;
-
-/*------------+---------+---------+------+------+
- | date       | isoyear | isoweek | year | week |
- +------------+---------+---------+------+------+
- | 2015-12-23 | 2015    | 52      | 2015 | 51   |
- | 2015-12-24 | 2015    | 52      | 2015 | 51   |
- | 2015-12-25 | 2015    | 52      | 2015 | 51   |
- | 2015-12-26 | 2015    | 52      | 2015 | 51   |
- | 2015-12-27 | 2015    | 52      | 2015 | 52   |
- | 2015-12-28 | 2015    | 53      | 2015 | 52   |
- | 2015-12-29 | 2015    | 53      | 2015 | 52   |
- | 2015-12-30 | 2015    | 53      | 2015 | 52   |
- | 2015-12-31 | 2015    | 53      | 2015 | 52   |
- | 2016-01-01 | 2015    | 53      | 2016 | 0    |
- | 2016-01-02 | 2015    | 53      | 2016 | 0    |
- | 2016-01-03 | 2015    | 53      | 2016 | 1    |
- | 2016-01-04 | 2016    | 1       | 2016 | 1    |
- | 2016-01-05 | 2016    | 1       | 2016 | 1    |
- | 2016-01-06 | 2016    | 1       | 2016 | 1    |
- | 2016-01-07 | 2016    | 1       | 2016 | 1    |
- | 2016-01-08 | 2016    | 1       | 2016 | 1    |
- | 2016-01-09 | 2016    | 1       | 2016 | 1    |
- +------------+---------+---------+------+------*/
-```
-
-In the following example, `date_expression` falls on a Sunday. `EXTRACT`
-calculates the first column using weeks that begin on Sunday, and it calculates
-the second column using weeks that begin on Monday.
-
-```
-WITH table AS (SELECT DATE('2017-11-05') AS date)
-SELECT
-  date,
-  EXTRACT(WEEK(SUNDAY) FROM date) AS week_sunday,
-  EXTRACT(WEEK(MONDAY) FROM date) AS week_monday FROM table;
-
-/*------------+-------------+-------------+
- | date       | week_sunday | week_monday |
- +------------+-------------+-------------+
- | 2017-11-05 | 45          | 44          |
- +------------+-------------+-------------*/
-```
-
-## `FORMAT_DATE`

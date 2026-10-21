@@ -50,7 +50,6 @@ MODEL_TYPE = { 'AUTOENCODER' } ]
     [, BATCH_SIZE = { int64_value | HPARAM_RANGE(range) | HPARAM_CANDIDATES([candidates]) } ]
     [, DROPOUT = { float64_value | HPARAM_RANGE(range) | HPARAM_CANDIDATES([candidates]) } ]
     [, HIDDEN_UNITS = { int_array | HPARAM_RANGE(range) | HPARAM_CANDIDATES([candidates]) } ]
-    [, TF_VERSION = { '1.15' | '2.8.0' } ]
     [, EARLY_STOP = { TRUE | FALSE } ]
     [, MIN_REL_PROGRESS = float64_value ]
     [, MAX_ITERATIONS = int64_value ]
@@ -117,7 +116,7 @@ The model type. This option is required.
 **Description**
 
 The L1 regularizer to apply a penalty on the activations at the latent space.
-This is a common approach to to achieve high sparsity of data representations
+This is a common approach to achieve high sparsity of data representations
 after dimensionality reduction.
 
 **Arguments**
@@ -320,21 +319,6 @@ hidden_units=hparam_candidates([struct([8]), struct([8, 16]), struct([16, 32, 64
 ```
 
 The valid range for the `INT64` arrays is `[1, ∞)`.
-
-### `TF_VERSION`
-
-**Syntax**
-
-```
-TF_VERSION = { '1.15' | '2.8.0' }
-```
-
-**Description**
-
-Specifies the TensorFlow version for model training. The default
-value is `1.15`.
-
-Set `TF_VERSION` to `2.8.0` to use TensorFlow2 with the Keras API.
 
 ### `EARLY_STOP`
 
@@ -576,49 +560,3 @@ The following machine learning functions are supported for the Autoencoder model
 
 * `ML.EVALUATE` for evaluating model metrics.
 * `ML.FEATURE_INFO` for reviewing information about the input features used to train a model.
-* `ML.PREDICT` for dimensionality reduction.
-* `ML.RECONSTRUCTION_LOSS` for anomaly detection and data sanitation purposes.
-* `ML.TRAINING_INFO` for tracking information about the training iterations of a model.
-
-## Locations
-
-For information about supported locations, see
-[Locations for non-remote models](/bigquery/docs/locations#locations-for-non-remote-models).
-
-## Example
-
-The following example trains an autoencoder model against the table `mytable`.
-
-```
-CREATE MODEL `project_id.mydataset.mymodel`
-OPTIONS(MODEL_TYPE='AUTOENCODER',
-        ACTIVATION_FN = 'RELU',
-        BATCH_SIZE = 16,
-        DROPOUT = 0.1,
-        EARLY_STOP = FALSE,
-        HIDDEN_UNITS = [128, 64, 8, 64, 128],
-        LEARN_RATE=0.001,
-        MAX_ITERATIONS = 50,
-        OPTIMIZER = 'ADAGRAD')
-AS SELECT * FROM `project_id.mydataset.mytable`;
-```
-
-## Pricing
-
-Model training does not incur any charges if you are using on-demand pricing. If you are using capacity-based pricing, model training will use reserved slots. All prediction queries are billable, regardless of the pricing model.
-
-
-
-
-Send feedback
-
-Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
-
-Last updated 2026-07-17 UTC.
-
-
-
-
-Need to tell us more?
-
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-07-17 UTC."],[],[]]

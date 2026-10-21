@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -14,7 +14,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 如需包含這個程式碼範例的詳細說明文件，請參閱下列文章：
 
-* [共用用戶端程式庫](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub?hl=zh-tw)
+* [Sharing 用戶端程式庫](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub?hl=zh-tw)
 
 ## 程式碼範例
 
@@ -182,14 +182,11 @@ func deleteDataExchange(ctx context.Context, client *analyticshub.Client, projec
 
 ```
 /**
- * This snippet has been automatically generated and should be regarded as a code template only.
- * It will require modifications to work.
- * It may require correct/in-range values for request initialization.
  * TODO(developer): Uncomment these variables before running the sample.
  */
 /**
- *  Required. The parent resource path of the listing.
- *  e.g. `projects/myproject/locations/US/dataExchanges/123`.
+ *  Required. The parent resource path of the DataExchanges.
+ *  e.g. `projects/myproject/locations/US`.
  */
 // const parent = 'abc123'
 /**
@@ -203,27 +200,27 @@ func deleteDataExchange(ctx context.Context, client *analyticshub.Client, projec
  */
 // const pageToken = 'abc123'
 
-// Imports the Analyticshub library
+// Imports the Dataexchange library
 const {AnalyticsHubServiceClient} =
-  require('@google-cloud/bigquery-analyticshub').v1;
+  require('@google-cloud/bigquery-data-exchange').v1beta1;
 
 // Instantiates a client
-const analyticshubClient = new AnalyticsHubServiceClient();
+const dataexchangeClient = new AnalyticsHubServiceClient();
 
-async function callListListings() {
+async function callListDataExchanges() {
   // Construct request
   const request = {
     parent,
   };
 
   // Run request
-  const iterable = await analyticshubClient.listListingsAsync(request);
+  const iterable = await dataexchangeClient.listDataExchangesAsync(request);
   for await (const response of iterable) {
     console.log(response);
   }
 }
 
-callListListings();
+callListDataExchanges();
 ```
 
 ## 後續步驟

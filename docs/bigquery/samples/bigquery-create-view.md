@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -8,7 +8,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 建立檢視表 透過集合功能整理內容 你可以依據偏好儲存及分類內容。
 
-在資料集中建立檢視表。
+在資料集中建立檢視區塊。
 
 ## 深入探索
 
@@ -106,14 +106,41 @@ public class CreateView {
 }
 ```
 
+### Python
+
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+
+```
+from google.cloud import bigquery
+
+client = bigquery.Client()
+
+view_id = "my-project.my_dataset.my_view"
+source_id = "my-project.my_dataset.my_table"
+view = bigquery.Table(view_id)
+
+# The source table in this example is created from a CSV file in Google
+# Cloud Storage located at
+# `gs://cloud-samples-data/bigquery/us-states/us-states.csv`. It contains
+# 50 US states, while the view returns only those states with names
+# starting with the letter 'W'.
+view.view_query = f"SELECT name, post_abbr FROM `{source_id}` WHERE name LIKE 'W%'"
+
+# Make an API request to create the view.
+view = client.create_table(view)
+print(f"Created {view.table_type}: {str(view.reference)}")
+```
+
 ### Terraform
 
 如要瞭解如何套用或移除 Terraform 設定，請參閱「[基本 Terraform 指令](https://docs.cloud.google.com/docs/terraform/basic-commands?hl=zh-tw)」。詳情請參閱 [Terraform 供應商參考文件](https://registry.terraform.io/providers/hashicorp/google/latest/docs)。
 
 ```
 resource "google_bigquery_dataset" "default" {
-  dataset_id                      = var.dataset_id
-  default_partition_expiration_ms = var.expr
+  dataset_id                      = "mydataset"
+  default_partition_expiration_ms = 2592000000  # 30 days
   default_table_expiration_ms     = 31536000000 # 365 days
   description                     = "dataset description"
   location                        = "US"
@@ -125,39 +152,15 @@ resource "google_bigquery_dataset" "default" {
   }
 }
 
-output "creation_time" {
-  value = google_bigquery_dataset.default.creation_time
-}
+resource "google_bigquery_table" "default" {
+  dataset_id = google_bigquery_dataset.default.dataset_id
+  table_id   = "myview"
 
-module "bigquery" {
-  source  = "terraform-google-modules/bigquery/google"
-  version = "~> 7.0"
-
-  dataset_id                 = "foo"
-  dataset_name               = "foo"
-  description                = "some description"
-  project_id                 = var.project_id
-  location                   = "US"
-  delete_contents_on_destroy = true
-  tables = [
-    {
-      table_id           = "bar",
-      time_partitioning  = null,
-      range_partitioning = null,
-      expiration_time    = 2524604400000, # 2050/01/01
-      clustering         = [],
-      labels = {
-        env      = "devops"
-        billable = "true"
-        owner    = "joedoe"
-      },
-    }
-  ]
-  dataset_labels = {
-    env      = "dev"
-    billable = "true"
-    owner    = "janesmith"
+  view {
+    query          = "SELECT global_id, faa_identifier, name, latitude, longitude FROM `bigquery-public-data.faa.us_airports`"
+    use_legacy_sql = false
   }
+
 }
 ```
 

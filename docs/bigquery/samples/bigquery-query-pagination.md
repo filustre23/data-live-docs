@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -8,7 +8,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 查詢分頁 透過集合功能整理內容 你可以依據偏好儲存及分類內容。
 
-執行查詢並使用自動分頁取得資料列。
+執行查詢並使用自動分頁功能取得資料列。
 
 ## 深入探索
 
@@ -86,6 +86,48 @@ public class QueryPagination {
 }
 ```
 
+### Python
+
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+
+```
+from google.cloud import bigquery
+
+# Construct a BigQuery client object.
+client = bigquery.Client()
+
+query = """
+    SELECT name, SUM(number) as total_people
+    FROM `bigquery-public-data.usa_names.usa_1910_2013`
+    GROUP BY name
+    ORDER BY total_people DESC
+"""
+query_job = client.query(query)  # Make an API request.
+query_job.result()  # Wait for the query to complete.
+
+# Get the destination table for the query results.
+#
+# All queries write to a destination table. If a destination table is not
+# specified, the BigQuery populates it with a reference to a temporary
+# anonymous table after the query completes.
+destination = query_job.destination
+
+# Get the schema (and other properties) for the destination table.
+#
+# A schema is useful for converting from BigQuery types to Python types.
+destination = client.get_table(destination)
+
+# Download rows.
+#
+# The client library automatically handles pagination.
+print("The query data:")
+rows = client.list_rows(destination, max_results=20)
+for row in rows:
+    print("name={}, count={}".format(row["name"], row["total_people"]))
+```
+
 ### Rust
 
 ```
@@ -104,18 +146,16 @@ LIMIT 2500
 "#,
         )
         .with_project_id(project_id)
-        .set_max_results(1000_u32)
+        .set_page_size(1000_u32)
         .set_location("US")
-        .run()
-        .await?
         .until_done()
         .await?
         .read()
-        .set_max_rows_buffered(1000);
+        .set_page_size(1000);
 
     let mut count = 0;
     while let Some(row) = rows.next().await.transpose()? {
-        let _name: String = row.get("name");
+        let _name: String = row.get("name")?;
         count += 1;
     }
     println!("Total rows fetched via pagination: {count}");

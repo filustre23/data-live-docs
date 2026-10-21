@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -18,9 +18,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 BigQuery 管理員可以建立[連線](https://docs.cloud.google.com/bigquery/docs/connections-api-intro?hl=zh-tw)，讓資料分析師存取儲存在 Amazon Simple Storage Service (Amazon S3) 值區中的資料。
 
-[BigQuery Omni](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw) 會透過連線存取 Amazon S3 資料。每個連線都有專屬的 Amazon Web Services (AWS) 身分與存取權管理 (IAM) 使用者。您可以透過 AWS IAM 角色授予使用者權限。AWS IAM 角色中的政策會決定 BigQuery 可存取哪些資料 (每個連線)。
+[BigQuery Omni](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw) 會透過連線存取 Amazon S3 資料。每個連線都有專屬的 Amazon Web Services (AWS) Identity and Access Management (IAM) 使用者。您可以透過 AWS IAM 角色將權限授予使用者。AWS IAM 角色中的政策，會決定 BigQuery 可透過各連線存取的資料。
 
-您必須建立連線，才能[查詢 Amazon S3 資料](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-external-table?hl=zh-tw)，以及[將查詢結果從 BigQuery 匯出至 Amazon S3 值區](https://docs.cloud.google.com/bigquery/docs/omni-aws-export-results-to-s3?hl=zh-tw)。
+您必須建立連線，才能[查詢 Amazon S3 資料](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-external-table?hl=zh-tw)，以及[將 BigQuery 的查詢結果匯出至 Amazon S3 值區](https://docs.cloud.google.com/bigquery/docs/omni-aws-export-results-to-s3?hl=zh-tw)。
 
 ## 事前準備
 
@@ -32,7 +32,7 @@ BigQuery 管理員可以建立[連線](https://docs.cloud.google.com/bigquery/do
 
 ## 必要的角色
 
-如要取得建立連結以存取 Amazon S3 資料所需的權限，請要求管理員授予您專案的「BigQuery 連線管理員」 (`roles/bigquery.connectionAdmin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得建立連線以存取 Amazon S3 資料所需的權限，請要求管理員授予您專案的「BigQuery 連線管理員」 (`roles/bigquery.connectionAdmin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
 您或許也能透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)，取得必要權限。
 
@@ -41,7 +41,7 @@ BigQuery 管理員可以建立[連線](https://docs.cloud.google.com/bigquery/do
 請務必遵循 [Amazon S3 的安全性最佳做法](https://docs.aws.amazon.com/AmazonS3/latest/dev/security-best-practices.html)。建議您採取下列做法：
 
 * 設定 AWS 政策，禁止透過 HTTP 存取 Amazon S3 bucket。
-* 設定 AWS 政策，禁止公開存取 Amazon S3 儲存貯體。
+* 設定 AWS 政策，禁止公開存取 Amazon S3 儲存空間。
 * 使用 Amazon S3 伺服器端加密。
 * 將授予 Google 帳戶的權限限制在最低需求。
 * 設定 CloudTrail 並啟用 Amazon S3 資料事件。
@@ -52,9 +52,9 @@ BigQuery 管理員可以建立[連線](https://docs.cloud.google.com/bigquery/do
 
 1. 前往 AWS IAM 主控台。確認您目前使用的帳戶擁有要存取的 Amazon S3 bucket。
 
-   [前往 AWS IAM 控制台](https://console.aws.amazon.com/iam/home)
+   [前往 AWS IAM 主控台](https://console.aws.amazon.com/iam/home)
 2. 選取「政策」**> 建立政策** (在新分頁中開啟)。
-3. 按一下「JSON」，然後將下列內容貼到編輯器中：
+3. 點選「JSON」，然後將下列內容貼到編輯器中：
 
    ```
    {
@@ -87,8 +87,7 @@ BigQuery 管理員可以建立[連線](https://docs.cloud.google.com/bigquery/do
    更改下列內容：
 
    * `BUCKET_NAME`：您希望 BigQuery 存取的 Amazon S3 儲存空間。
-   * `EXPORT_PERM` (選用)：如要[將資料匯出至 Amazon S3 儲存空間](https://docs.cloud.google.com/bigquery/docs/omni-aws-export-results-to-s3?hl=zh-tw)，請提供額外權限。
-     以「`"s3:PutObject"`」取代
+   * `EXPORT_PERM` (選用)：如要[將資料匯出至 Amazon S3 bucket](https://docs.cloud.google.com/bigquery/docs/omni-aws-export-results-to-s3?hl=zh-tw)，請授予額外權限。以 `"s3:PutObject"` 取代
      + 如要分開控管匯出存取權，建議您使用不同的 AWS IAM 角色建立另一個連線，並授予該角色僅限寫入的存取權。如要進一步控管存取權，您也可以限制角色只能存取值區的特定路徑。**注意：** 如果將 JSON 貼到編輯器後發生錯誤，請使用 JSON 編輯器格式化 JSON 文字。
 4. 在「Name」欄位中輸入政策名稱，例如 `bq_omni_read_only`。
 5. 點選「建立政策」。
@@ -142,7 +141,7 @@ arn:aws:iam::AWS_ACCOUNT_ID:policy/POLICY_NAME
 
 * `POLICY_NAME`：您要建立的政策名稱。
 * `BUCKET_NAME`：您希望 BigQuery 存取的 Amazon S3 值區。
-* `EXPORT_PERM` (選用)：如要[將資料匯出至 Amazon S3 儲存空間](https://docs.cloud.google.com/bigquery/docs/omni-aws-export-results-to-s3?hl=zh-tw)，請提供額外權限。以「`"s3:PutObject"`」取代
+* `EXPORT_PERM` (選用)：如要[將資料匯出至 Amazon S3 bucket](https://docs.cloud.google.com/bigquery/docs/omni-aws-export-results-to-s3?hl=zh-tw)，請提供額外權限。以 `"s3:PutObject"` 取代
   + 如要分開控管匯出存取權，建議您使用不同的 AWS IAM 角色建立另一個連線，並授予該角色僅限寫入的存取權。如要進一步控管存取權，您也可以限制角色只能存取值區的特定路徑。
 
 系統會建立政策，並以以下格式提供 Amazon Resource Name (ARN)：
@@ -158,7 +157,7 @@ arn:aws:iam::AWS_ACCOUNT_ID:policy/POLICY_NAME
 
 ### Terraform
 
-在 Terraform 設定中新增下列項目，即可將政策附加至 Amazon S3 儲存貯體資源：
+在 Terraform 設定中新增下列項目，將政策附加至 Amazon S3 儲存貯體資源：
 
 ```
   resource "aws_iam_policy" "bigquery-omni-connection-policy" {
@@ -192,8 +191,7 @@ arn:aws:iam::AWS_ACCOUNT_ID:policy/POLICY_NAME
 更改下列內容：
 
 * `BUCKET_NAME`：您希望 BigQuery 存取的 Amazon S3 儲存空間。
-* `EXPORT_PERM` (選用)：如要[將資料匯出至 Amazon S3 儲存空間](https://docs.cloud.google.com/bigquery/docs/omni-aws-export-results-to-s3?hl=zh-tw)，請提供額外權限。
-  以「`"s3:PutObject"`」取代
+* `EXPORT_PERM` (選用)：如要[將資料匯出至 Amazon S3 bucket](https://docs.cloud.google.com/bigquery/docs/omni-aws-export-results-to-s3?hl=zh-tw)，請授予額外權限。以 `"s3:PutObject"` 取代
   + 如要分開管理匯出存取權，建議您使用不同的 AWS IAM 角色建立另一個連線，並授予該角色僅限寫入的存取權。如要進一步控管存取權，您也可以限制角色只能存取 bucket 的特定路徑。
 
 ## 為 BigQuery 建立 AWS IAM 角色
@@ -206,8 +204,8 @@ arn:aws:iam::AWS_ACCOUNT_ID:policy/POLICY_NAME
 
 1. 前往 AWS IAM 主控台。確認您目前使用的帳戶擁有要存取的 Amazon S3 bucket。
 
-   [前往 AWS IAM 控制台](https://console.aws.amazon.com/iam/home)
-2. 依序選取「角色」>「建立角色」。
+   [前往 AWS IAM 主控台](https://console.aws.amazon.com/iam/home)
+2. 依序選取**「角色」>「建立角色」**。
 3. 在「Select type of trusted entity」部分，選取「Web Identity」。
 4. 在「識別資訊提供者」部分，選取「Google」。
 5. 在「目標對象」中，輸入 `00000` 做為預留位置值。
@@ -215,7 +213,7 @@ arn:aws:iam::AWS_ACCOUNT_ID:policy/POLICY_NAME
 6. 點選 [Next: Permissions] (下一步：權限)。
 7. 如要授予角色 Amazon S3 資料的存取權，請將 IAM 政策附加至該角色。搜尋您在前一節中建立的政策，然後點選切換按鈕。
 8. 按一下「下一步：代碼」。
-9. 點選「下一步：檢閱」。輸入角色名稱，例如
+9. 按一下「下一步：檢閱」。輸入角色名稱，例如
    `BQ_Read_Only`。
 10. 按一下「建立角色」。
 
@@ -248,7 +246,7 @@ arn:aws:iam::AWS_ACCOUNT_ID:policy/POLICY_NAME
 
 ### Terraform
 
-在 Terraform 設定中新增下列項目，建立 IAM 角色並將政策指派給建立的角色：
+在 Terraform 設定中新增下列內容，建立 IAM 角色並將政策指派給建立的角色：
 
 ```
   resource "aws_iam_role" "bigquery-omni-connection-role" {
@@ -310,7 +308,7 @@ arn:aws:iam::AWS_ACCOUNT_ID:policy/POLICY_NAME
 1. 前往「BigQuery」頁面
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在「Explorer」窗格中，點選「新增資料」add。
+2. 在「Explorer」窗格中，按一下「新增資料」add。
 
    「新增資料」對話方塊隨即開啟。
 3. 在「Filter By」(依據篩選) 窗格的「Data Source Type」(資料來源類型) 區段中，選取「Storage/Data Lakes」(儲存空間/資料湖泊)。
@@ -318,23 +316,22 @@ arn:aws:iam::AWS_ACCOUNT_ID:policy/POLICY_NAME
    或者，您也可以在「Search for data sources」(搜尋資料來源) 欄位中輸入 `aws` 或 `Amazon S3`。
 4. 在「精選資料來源」部分，按一下「Amazon S3」。
 5. 按一下「Amazon S3 Omni：BigQuery 聯盟」解決方案資訊卡。
-6. 在「外部資料來源」窗格中，輸入下列資訊：
+6. 在「外部資料來源」窗格，輸入下列資訊：
 
-   * 在「連線類型」中，選取「AWS 中的 BigLake (透過 BigQuery Omni)」。
+   * 「連線類型」請選取「AWS 中的 BigLake (透過 BigQuery Omni)」。
    * 在「Connection ID」(連線 ID) 專區中輸入連線資源的 ID。可以使用英文字母、數字、破折號和底線。
    * 在「Region」(區域) 中，選取要建立連線的位置。
-   * 選用：在「Friendly name」(好記名稱) 中輸入使用者容易記得的連線名稱，例如 `My connection resource`。好記名稱可以是任何資料值，只要您日後需要修改時可以輕鬆識別連線資源即可。
+   * 選用：在「Friendly name」(好記名稱) 中輸入使用者容易記得的連線名稱，例如 `My connection resource`。這可以是任何值，只要日後需修改時能輕鬆識別即可。
    * 選用：在「Description」(說明) 中輸入這項連線資源的說明。
-   * 在「AWS 角色 ID」部分，輸入您建立的完整 IAM 角色 ID，格式如下：
+   * 在「AWS 角色 ID」部分，請輸入您建立的完整 IAM 角色 ID，格式如下：
 
      ```
      arn:aws:iam::AWS_ACCOUNT_ID:role/ROLE_NAME
      ```
 7. 點選「建立連線」。
 8. 點選「前往連線」。
-9. 在「連線資訊」窗格中，複製「BigQuery Google 身分」。
-   這是 Google 主體，
-   每個連線都有專屬主體。範例：
+9. 在「連線資訊」窗格中，複製「BigQuery Google 身分識別」。
+   這是 Google 針對每個連線採取的原則。範例：
 
    ```
      BigQuery Google identity: IDENTITY_ID
@@ -362,9 +359,9 @@ arn:aws:iam::AWS_ACCOUNT_ID:policy/POLICY_NAME
 
 更改下列內容：
 
-* `AWS_LOCATION`：[Amazon S3 位置](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw#locations)，位於 Google Cloud
+* `AWS_LOCATION`：[Amazon S3 位置](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw#locations) Google Cloud
 * `AWS_ACCOUNT`：您的 AWS 帳戶 ID。
-* `IAM_ROLE_NAME`：可從 BigQuery 存取 Amazon S3 值區的角色。使用「[為 BigQuery 建立 AWS 身分與存取權管理角色](#creating-aws-iam-role)」中 `aws_iam_role` 資源的 `name` 引數值。
+* `IAM_ROLE_NAME`：可從 BigQuery 存取 Amazon S3 值區的角色。使用「[為 BigQuery 建立 AWS 身分與存取權管理角色](#creating-aws-iam-role)」中的 `aws_iam_role` 資源，取得 `name` 引數的值。
 
 ### bq
 
@@ -379,7 +376,7 @@ CONNECTION_ID
 
 * `AWS_ACCOUNT_ID`：連線的 AWS IAM 使用者 ID 編號
 * `ROLE_NAME`：您選擇的角色政策名稱
-* `AWS_LOCATION`：[Amazon S3 位置](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw#locations)，位於 Google Cloud
+* `AWS_LOCATION`：[Amazon S3 位置](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw#locations) Google Cloud
 * `CONNECTION_ID`：您為這個連線資源指定的 ID。
 
 指令列會顯示下列輸出內容：
@@ -390,8 +387,7 @@ CONNECTION_ID
 
 輸出內容包含下列項目：
 
-* `IDENTITY_ID`：控制項的 Google 主體， Google Cloud
-  專屬於每個連線。
+* `IDENTITY_ID`：Google 主體，可控管每個連線。 Google Cloud
 
 請記下 `IDENTITY_ID` 的值。
 
@@ -461,7 +457,7 @@ BigQuery Omni 提供兩種方法，可安全地存取 Amazon S3 中的資料。�
 
 ### 為 AWS 角色新增信任政策
 
-信任關係可讓連線擔任角色，並根據角色政策存取 Amazon S3 資料。
+信任關係可讓連線擔任該角色，並根據角色政策存取 Amazon S3 資料。
 
 如要新增信任關係，請使用 AWS 控制台或 Terraform：
 
@@ -469,15 +465,15 @@ BigQuery Omni 提供兩種方法，可安全地存取 Amazon S3 中的資料。�
 
 1. 前往 AWS IAM 主控台。確認您目前使用的帳戶擁有要存取的 Amazon S3 bucket。
 
-   [前往 AWS IAM 控制台](https://console.aws.amazon.com/iam/home)
+   [前往 AWS IAM 主控台](https://console.aws.amazon.com/iam/home)
 2. 選取「角色」。
 3. 選取您建立的 `ROLE_NAME`。
 4. 按一下「編輯」，然後執行下列操作：
 
-   1. 將「工作階段持續時間上限」設為「12 小時」。由於每項查詢最多可執行六小時，因此這段時間允許一次額外的重試。將工作階段時間延長至 12 小時以上，不會增加重試次數。詳情請參閱「[查詢/多重陳述式查詢執行時間限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#query_script_execution_time_limit)」。
+   1. 將「Maximum session duration」設為「12 hours」。每項查詢最多可執行六小時，這段時間可讓系統再重試一次。即使將工作階段持續時間延長至超過 12 小時，也不會增加重試次數。詳情請參閱「[查詢/多重陳述式查詢執行時間限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#query_script_execution_time_limit)」。
    2. 按一下 [儲存變更]。
-5. 選取「信任關係」，然後按一下「編輯信任關係」。
-   將政策內容替換為下列內容：
+5. 選取「Trust Relationships」，然後點選「Edit trust relationship」。
+   將政策內容換成下列內容：
 
    ```
    {
@@ -499,7 +495,7 @@ BigQuery Omni 提供兩種方法，可安全地存取 Amazon S3 中的資料。�
    }
    ```
 
-   將 `IDENTITY_ID` 替換為 **BigQuery Google 身分識別**值，您可以在 Google Cloud 控制台[中找到您建立的連線](#creating-aws-connection)。
+   將 `IDENTITY_ID` 換成 **BigQuery Google 身分識別**值，您可以在 Google Cloud 控制台中找到[您建立的連線](#creating-aws-connection)。
 6. 按一下「更新信任政策」。
 
 ### AWS CLI
@@ -582,9 +578,9 @@ BigQuery Omni 提供兩種方法，可安全地存取 Amazon S3 中的資料。�
     }
 ```
 
-**注意：** 在 AWS 中指派角色時，變更可能需要一段時間才會全面生效。如果使用新連線時收到這類錯誤訊息，請稍後再試，或許就能解決問題。
+**注意：** 在 AWS 中指派角色後，可能需要一段時間才會全面生效。如果使用新連線時收到這類錯誤，請稍候再試，或許就能解決問題。
 
-現在可以使用連線了。
+連線已可供使用。
 
 ### 設定自訂 AWS 識別資訊提供者
 
@@ -592,12 +588,12 @@ BigQuery Omni 提供兩種方法，可安全地存取 Amazon S3 中的資料。�
 
 1. 前往 AWS IAM 主控台。確認您目前使用的帳戶擁有要存取的 Amazon S3 bucket。
 
-   [前往 AWS IAM 控制台](https://console.aws.amazon.com/iam/home)
+   [前往 AWS IAM 主控台](https://console.aws.amazon.com/iam/home)
 2. 依序前往「IAM」>「身分識別提供者」。
 3. 選取 *accounts.google.com* 的識別資訊提供者。
 4. 按一下「新增目標對象」，然後新增 IDENTITY\_ID 做為目標對象。
 
-現在可以使用連線了。
+連線已可供使用。
 
 ## 與使用者共用連線
 
@@ -616,7 +612,7 @@ BigQuery Omni 提供兩種方法，可安全地存取 Amazon S3 中的資料。�
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 
-   連線會列在專案中，位於「Connections」(連線) 群組。
+   連線會列在專案中，並歸類在「連線」群組。
 2. 點選左側窗格中的 explore「Explorer」。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
@@ -687,12 +683,12 @@ public class ShareConnection {
 ## 後續步驟
 
 * 瞭解不同[連線類型](https://docs.cloud.google.com/bigquery/docs/connections-api-intro?hl=zh-tw)。
-* 瞭解如何[管理連線](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw)。
+* 瞭解如何[管理連結](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw)。
 * 瞭解 [BigQuery Omni](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw)。
-* 使用 [BigQuery Omni with AWS 實驗室](https://www.cloudskillsboost.google/catalog_lab/5345?hl=zh-tw)。
+* 參加「[搭配 AWS 使用 BigQuery Omni](https://www.cloudskillsboost.google/catalog_lab/5345?hl=zh-tw)」實驗室。
 * 瞭解 [BigLake 資料表](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw)。
 * 瞭解如何[查詢 Amazon S3 資料](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-external-table?hl=zh-tw)。
-* 瞭解如何[將查詢結果匯出至 Amazon S3 值區](https://docs.cloud.google.com/bigquery/docs/omni-aws-export-results-to-s3?hl=zh-tw)。
+* 瞭解如何[將查詢結果匯出至 Amazon S3 bucket](https://docs.cloud.google.com/bigquery/docs/omni-aws-export-results-to-s3?hl=zh-tw)。
 
 
 
@@ -701,11 +697,11 @@ public class ShareConnection {
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-12 (世界標準時間)。
+上次更新時間：2026-10-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-12 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]

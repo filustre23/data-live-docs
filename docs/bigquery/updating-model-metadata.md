@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -36,7 +36,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 * `bigquery.dataOwner`
 * `bigquery.admin`
 
-如要進一步瞭解 BigQuery ML 中的 IAM 角色和權限，請參閱[存取權控管](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)。
+如要進一步瞭解 BigQuery ML 中的身分與存取權管理角色和權限，請參閱[存取權控管](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)。
 
 ## 更新模型的說明
 
@@ -53,14 +53,14 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Explorer」窗格中展開專案，按一下「Datasets」(資料集)，然後按一下資料集。
-4. 按一下「模型」分頁標籤，然後按一下模型名稱選取模型。
+4. 按一下「模型」分頁標籤，然後點選模型名稱選取模型。
 5. 點按「Details」(詳細資料) 分頁標籤。
-6. 如要更新模型的說明，請按一下「編輯」edit。
+6. 如要更新模型的說明，請按一下「編輯」圖示 edit。
 7. 在「編輯詳細資料」對話方塊中更新說明，然後按一下「儲存」。
 
 ### bq
 
-如要更新模型的說明，請發出 `bq update` 指令並搭配使用 `--model` 或 `-m` 標記和 `--description` 標記。
+如要更新模型的說明，請發出具有 `--model` 或 `-m` 標記以及 `--description` 標記的 `bq update` 指令。
 
 如要更新非預設專案中的模型，請以下列格式將專案 ID 新增至資料集：`[PROJECT_ID]:[DATASET]`。
 
@@ -255,14 +255,14 @@ print(
 
 1. 點選左側窗格中的 explore「Explorer」。
 2. 在「Explorer」窗格中展開專案，按一下「Datasets」(資料集)，然後按一下資料集。
-3. 按一下「模型」分頁標籤，然後按一下模型名稱選取模型。
+3. 按一下「模型」分頁標籤，然後點選模型名稱選取模型。
 4. 點按「Details」(詳細資料) 分頁標籤。
-5. 如要更新模型的標籤，請按一下「編輯」edit。
+5. 如要更新模型的標籤，請按一下「編輯」圖示 edit。
 6. 在「編輯詳細資料」對話方塊中，新增、刪除或修改標籤，然後按一下「儲存」。
 
 ### bq
 
-如要更新模型的標籤，請發出具有 `--model` 或 `-m` 標記以及 `--set_label` 標記的 `bq update` 指令。重複使用 `--set_label` 標記即可加入或更新多個標籤。
+如要更新模型的標籤，請發出具有 `--model` 或 `-m` 標記以及 `--set_label` 標記的 `bq update` 指令。重複 `--set_label` 標記即可加入或更新多個標籤。
 
 如要更新非預設專案中的模型，請以下列格式將專案 ID 新增至資料集：`[PROJECT_ID]:[DATASET]`。
 
@@ -284,7 +284,7 @@ PROJECT_ID:DATASET.MODEL
 Model 'myproject.mydataset.mymodel' successfully updated.
 ```
 
-您可以發出 `bq show` 指令來確認變更。詳情請參閱「[取得模型中繼資料](https://docs.cloud.google.com/bigquery/docs/getting-model-metadata?hl=zh-tw)」。
+您可發出 `bq show` 指令來確認變更。詳情請參閱「[取得模型中繼資料](https://docs.cloud.google.com/bigquery/docs/getting-model-metadata?hl=zh-tw)」。
 
 範例：
 
@@ -379,11 +379,11 @@ bq update --model --expiration 432000 myotherproject:mydataset.mymodel
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-12 (世界標準時間)。
+上次更新時間：2026-10-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-12 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]

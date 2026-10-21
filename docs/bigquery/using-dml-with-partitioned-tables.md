@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -144,7 +144,7 @@ WHERE
 
 ## 使用 DML DELETE 刪除分區
 
-如果符合條件的 `DELETE` 陳述式涵蓋分區中的所有資料列，BigQuery 就會移除整個分區。系統會移除這些資料，不會掃描位元組或耗用配額。以下 `DELETE` 陳述式範例涵蓋 `_PARTITIONDATE` 虛擬資料欄的篩選器整個分區：
+如果符合條件的 `DELETE` 陳述式涵蓋分區中的所有資料列，BigQuery 就會移除整個分區。系統會移除這些檔案，不會掃描位元組或耗用配額。以下 `DELETE` 陳述式範例涵蓋 `_PARTITIONDATE` 虛擬資料欄的篩選器整個分區：
 
 ```
 DELETE mydataset.mytable
@@ -157,10 +157,10 @@ WHERE _PARTITIONDATE IN ('2076-10-07', '2076-03-06');
 
 * 部分分區涵蓋範圍
 * 參照非分區資料欄
-* 透過 BigQuery [Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api?hl=zh-tw) 或[舊版串流 API](https://docs.cloud.google.com/bigquery/streaming-data-into-bigquery?hl=zh-tw) [最近擷取的資料](https://docs.cloud.google.com/bigquery/docs/write-api?hl=zh-tw#stream_into_partitioned_tables)
+* [最近透過 [BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api?hl=zh-tw) 或 [BigQuery Storage Write API (REST)](https://docs.cloud.google.com/bigquery/streaming-data-into-bigquery?hl=zh-tw) 擷取的資料](https://docs.cloud.google.com/bigquery/docs/write-api?hl=zh-tw#stream_into_partitioned_tables)
 * 含有子查詢或不支援述詞的篩選器
 
-如果分區資料表是使用分區資料欄以外的資料欄叢集，這項最佳化功能可能也不適用。
+如果分區資料表是使用分區資料欄以外的資料欄叢集，可能也不適用這項最佳化功能。
 
 最佳做法是執行模擬測試，確認查詢結果處理的位元組數為 0。
 
@@ -246,7 +246,7 @@ WHERE
 
 #### 使用子查詢篩選來源資料
 
-在下列 `MERGE` 陳述式中，`USING` 子句中的子查詢會依據來源資料表中的 `_PARTITIONTIME` 虛擬資料欄進行篩選。
+在下列 `MERGE` 陳述式中，`USING` 子句中的子查詢會根據來源資料表中的 `_PARTITIONTIME` 虛擬資料欄進行篩選。
 
 ```
 MERGE dataset.target T
@@ -281,7 +281,7 @@ WHEN NOT MATCHED BY SOURCE AND T._PARTITIONTIME = '2018-01-03' THEN
   DELETE
 ```
 
-在彙整階段，系統只會掃描目標資料表中下列分區：`'2018-01-01'`、`'2018-01-02'` 和 `'2018-01-03'`，也就是所有 `search_condition` 篩選條件的聯集。
+在彙整階段，系統只會掃描目標資料表中下列分區的資料：`'2018-01-01'`、`'2018-01-02'` 和 `'2018-01-03'`，也就是所有 `search_condition` 篩選條件的聯集。
 
 查詢執行計畫：
 
@@ -339,7 +339,7 @@ WHEN MATCHED THEN
   UPDATE SET COLUMN_ID = NEW_VALUE
 ```
 
-在下一個範例中，`merge_condition` 不含來源資料表的述詞，因此無法對來源資料表執行分區修剪作業。陳述式確實包含目標資料表的述詞，但陳述式使用 `WHEN NOT MATCHED BY SOURCE` 子句，而非 `WHEN MATCHED` 子句。也就是說，查詢必須掃描整個目標資料表，找出不相符的資料列。
+在下一個範例中，`merge_condition` 不包含來源資料表的述詞，因此無法對來源資料表執行分區修剪作業。陳述式確實包含目標資料表的述詞，但陳述式使用 `WHEN NOT MATCHED BY SOURCE` 子句，而非 `WHEN MATCHED` 子句。也就是說，查詢必須掃描整個目標資料表，找出不相符的資料列。
 
 ```
 MERGE dataset.target T
@@ -379,11 +379,11 @@ WHEN NOT MATCHED BY SOURCE THEN
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-12 (世界標準時間)。
+上次更新時間：2026-10-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-12 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]

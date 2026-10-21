@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -26,7 +26,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 * 儲存在 Cloud Storage 中的 [Datastore](https://docs.cloud.google.com/datastore?hl=zh-tw) 匯出資料
 * 儲存在 Cloud Storage 中的 [Firestore](https://docs.cloud.google.com/firestore?hl=zh-tw) 匯出資料
 
-您也可以使用 [BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer?hl=zh-tw)，設定從 Cloud Storage 到 BigQuery 的週期性載入作業。
+您也可以使用 [BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer?hl=zh-tw)，設定從 Cloud Storage 週期性載入資料至 BigQuery。
 
 ## 歡迎試用
 
@@ -36,11 +36,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 事前準備
 
-授予 Identity and Access Management (IAM) 角色，讓使用者具備執行本文中各項工作所需的權限，並建立資料集來儲存資料。
+授予 Identity and Access Management (IAM) 角色，讓使用者擁有執行本文中各項工作所需的權限，並建立資料集來儲存資料。
 
 ### 所需權限
 
-如要將資料載入 BigQuery，您需要具備執行載入工作，以及將資料載入 BigQuery 資料表和分區的 IAM 權限。如要從 Cloud Storage 載入資料，您也需要 IAM 權限，才能存取包含資料的值區。
+如要將資料載入 BigQuery，您需要具備 IAM 權限，才能執行載入工作，並將資料載入 BigQuery 資料表和分區。如要從 Cloud Storage 載入資料，您也需要 IAM 權限，才能存取包含資料的值區。
 
 #### 將資料載入 BigQuery 的權限
 
@@ -51,7 +51,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 * `bigquery.tables.update`
 * `bigquery.jobs.create`
 
-以下每個預先定義的 IAM 角色都包含將資料載入 BigQuery 資料表或分區所需的權限：
+下列每個預先定義的 IAM 角色都包含將資料載入 BigQuery 資料表或分區所需的權限：
 
 * `roles/bigquery.dataEditor`
 * `roles/bigquery.dataOwner`
@@ -67,7 +67,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 如要取得從 Cloud Storage bucket 載入資料所需的權限，請要求管理員授予您 bucket 的「[Storage 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/storage?hl=zh-tw#storage.admin) 」(`roles/storage.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
-這個預先定義的角色具備從 Cloud Storage 值區載入資料所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
+這個預先定義的角色具備從 Cloud Storage bucket 載入資料所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
 #### 所需權限
 
@@ -102,7 +102,7 @@ BigQuery 支援從以下任何一種 Cloud Storage [儲存空間級別](https://
 * [Datastore 匯出檔案](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-datastore?hl=zh-tw)
 * [Firestore 匯出檔案](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-firestore?hl=zh-tw)
 
-如要瞭解如何設定從 Cloud Storage 週期性載入資料至 BigQuery，請參閱「[Cloud Storage 移轉作業](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer?hl=zh-tw)」一文。
+如要瞭解如何設定從 Cloud Storage 週期性載入至 BigQuery，請參閱「[Cloud Storage 移轉作業](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer?hl=zh-tw)」一文。
 
 ### 位置注意事項
 
@@ -130,7 +130,7 @@ BigQuery 不支援 Cloud Storage 資源路徑在初始雙斜線後還有多個�
    「物件詳細資料」頁面隨即開啟。
 4. 複製「gsutil URI」欄位中提供的值，開頭為 `gs://`。
 
-**附註：** 您也可以使用 [`gcloud storage ls`](https://docs.cloud.google.com/sdk/gcloud/reference/storage/ls?hl=zh-tw) 指令列出值區或物件。
+**注意：** 您也可以使用 [`gcloud storage ls`](https://docs.cloud.google.com/sdk/gcloud/reference/storage/ls?hl=zh-tw) 指令列出值區或物件。
 
 Google Datastore 匯出檔案只能指定一個 URI，而且必須以 `.backup_info` 或 `.export_metadata` 結尾。
 
@@ -139,12 +139,12 @@ Google Datastore 匯出檔案只能指定一個 URI，而且必須以 `.backup_i
 如果資料分成多個檔案，可以使用星號 (\*) 萬用字元選取多個檔案。使用星號萬用字元時，必須遵守下列規則：
 
 * 星號可以出現在物件名稱內或物件名稱的末端。
-* 系統不支援使用多個星號。舉例來說，路徑 `gs://mybucket/fed-*/temp/*.csv` 無效。
+* 系統不支援使用多個星號。例如，路徑「`gs://mybucket/fed-*/temp/*.csv`」無效。
 * 系統不支援在 bucket 名稱中使用星號。
 
 範例：
 
-* 以下範例說明如何選取所有資料夾中，開頭為前置字元 `gs://mybucket/fed-samples/fed-sample` 的所有檔案：
+* 以下範例說明如何選取所有資料夾中，開頭為 `gs://mybucket/fed-samples/fed-sample` 前置字元的所有檔案：
 
   ```
   gs://mybucket/fed-samples/fed-sample*
@@ -194,7 +194,7 @@ Google Datastore 匯出檔案只能指定一個 URI，而且必須以 `.backup_i
 
 ### 控制台
 
-1. 在 Google Cloud 控制台中開啟 BigQuery 頁面。
+1. 在 Google Cloud 控制台開啟 BigQuery 頁面。
 
    [前往 BigQuery 頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
@@ -211,7 +211,7 @@ Google Datastore 匯出檔案只能指定一個 URI，而且必須以 `.backup_i
 6. 在「Create table」(建立資料表) 頁面的「Destination」(目的地) 區段中：
 
    * 在「Project」(專案) 部分，選擇適當的專案。
-   * 在「Dataset」(資料集) 中選擇適當的資料集。
+   * 在「Dataset」(資料集) 部分，選擇適當的資料集。
    * 在「Table」(資料表) 欄位中，輸入要在 BigQuery 中建立之資料表的名稱。
    * 確認「Table type」(資料表類型) 設為「Native table」(原生資料表)。
 7. 在「Schema」(結構定義) 部分輸入[結構定義](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw)。
@@ -281,7 +281,7 @@ SCHEMA
     qtr:STRING,sales:FLOAT,year:STRING
 ```
 
-**注意：** 當您在指令列中指定結構定義時，無法加入 `RECORD` ([`STRUCT`](#struct-type)) 類型、欄位說明，也無法指定欄位模式。所有欄位模式都會預設為 `NULLABLE`。如要納入欄位說明、模式和 `RECORD` 類型，請改為提供 [JSON 結構定義檔](#specifying_a_schema_file)。
+**注意：** 在指令列中指定結構定義時，無法加入 `RECORD` ([`STRUCT`](#struct-type)) 類型和欄位說明，也不能指定欄位模式。所有欄位模式都會預設為 `NULLABLE`。如要納入欄位說明、模式和 `RECORD` 類型，請改為提供 [JSON 結構定義檔](#specifying_a_schema_file)。
 
 下列指令會將本機 CSV 檔案 (`mydata.csv`) 載入預設專案的 `mydataset` 中名為 `mytable` 的資料表。結構定義是以[結構定義自動偵測](https://docs.cloud.google.com/bigquery/docs/schema-detect?hl=zh-tw)功能定義。
 
@@ -578,17 +578,17 @@ end
 
 與查詢的隨選模式類似，載入工作預設會使用共用的運算單元集區。如果載入工作使用共用集區，工作詳細資料中會顯示預留項目 `default-pipeline`。BigQuery 不保證這個共用集區的可用容量或載入工作總處理量。
 
-如要提高處理量或可預測地控管負載工作的容量，您可以建立[運算單元預留項目](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw)，並指派專屬 `PIPELINE` 運算單元來執行負載工作。詳情請參閱「[預留項目指派](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#assignments)」。
+如要提高處理量或預測性地控管負載工作的容量，您可以建立[運算單元預留項目](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw)，並指派專屬 `PIPELINE` 運算單元來執行負載工作。詳情請參閱「[預留項目指派](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#assignments)」。
 
 ## 載入壓縮與未壓縮資料
 
 如果是 Avro、Parquet 和 ORC 格式，BigQuery 支援載入檔案資料已使用支援的轉碼器壓縮的檔案。不過，BigQuery 不支援載入這些格式的檔案 (檔案本身已壓縮)，例如使用 `gzip` 公用程式壓縮的檔案。
 
-Avro 二進位格式是載入壓縮資料的建議格式。即便資料區塊經過壓縮，系統仍能並行讀取 Avro 資料，因此載入速度還是比較快。如需支援的壓縮編解碼器清單，請參閱「[Avro 壓縮](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-avro?hl=zh-tw#avro_compression)」。
+Avro 二進位格式是載入壓縮資料的建議格式。即使資料區塊經過壓縮，系統仍能並行讀取 Avro 資料，因此載入速度還是比較快。如需支援的壓縮編解碼器清單，請參閱「[Avro 壓縮](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-avro?hl=zh-tw#avro_compression)」。
 
 Parquet 二進位格式也是不錯的選擇，因為 Parquet 會對每個資料欄進行編碼，這種高效率的處理方式通常可產生較佳的壓縮比率與較小的檔案。Parquet 檔案也會運用壓縮技術來並行載入資料。如需支援的壓縮編解碼器清單，請參閱「[Parquet 壓縮](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet?hl=zh-tw#parquet_compression)」。
 
-ORC 二進位制格式提供類似於 Parquet 格式的優點。ORC 檔案中的資料能夠快速載入，是因為系統可以平行讀取資料條。每個資料條中的資料列都會按順序載入。如要最佳化載入時間，請使用大小為 256 MB 以下的資料條。如需支援的壓縮轉碼器清單，請參閱「[ORC 壓縮](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc?hl=zh-tw#orc_compression)」。
+ORC 二進位制格式提供類似於 Parquet 格式的優點。ORC 檔案中的資料能夠快速載入，是因為系統可以平行讀取資料條。每個資料條中的資料列都會按順序載入。如要最佳化載入時間，請使用大小為 256 MB 以下的資料條。如需支援的壓縮編解碼器清單，請參閱「[ORC 壓縮](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc?hl=zh-tw#orc_compression)」。
 
 對於其他資料格式 (CSV 以及 JSON) 而言，BigQuery 可以快速載入未壓縮的檔案，甚至比壓縮檔還快，這是因為可以平行讀取未壓縮的檔案。由於未壓縮檔案比較大，使用這種檔案可能會超出頻寬限制，在載入到 BigQuery 之前暫存在 Cloud Storage 的資料成本也比較高。請注意，無論是已壓縮還是未壓縮的檔案，都無法保證行的排序。建議您先評估自己的使用情況，再決定要採行哪一種做法。
 
@@ -607,10 +607,10 @@ ORC 二進位制格式提供類似於 Parquet 格式的優點。ORC 檔案中的
 
 在 Google Cloud 主控台中，使用「寫入偏好設定」選項，指定從來源檔案或查詢結果載入資料時採取的動作。bq 指令列工具和 API 提供下列選項：
 
-| 主控台選項 | bq 工具旗標 | BigQuery API 屬性 | 說明 |
+| 主控台選項 | bq 工具標記 | BigQuery API 屬性 | 說明 |
 | --- | --- | --- | --- |
 | Write if empty | 無 | WRITE\_EMPTY | 資料表空白時才會寫入資料。 |
-| 附加到資料表中 | `--noreplace` 或 `--replace=false`。如果您沒有指定 `--replace`，預設值就是附加 | WRITE\_APPEND | (預設值) 將資料附加至資料表尾端。 |
+| 附加到資料表 | `--noreplace` 或 `--replace=false`。如果您沒有指定 `--replace`，預設值就是附加 | WRITE\_APPEND | (預設值) 將資料附加至資料表尾端。 |
 | 覆寫資料表 | `--replace` 或 `--replace=true` | WRITE\_TRUNCATE | 清除資料表中所有現有的資料後再寫入新資料。 |
 
 ## 配額政策
@@ -639,13 +639,13 @@ WHERE date(creation_time)= CURRENT_DATE()
 
 ## 用途範例
 
-假設有夜間批次處理管道必須在固定期限前完成，資料必須在期限前提供，才能由其他批次程序進一步處理，產生要傳送給監管機構的報表。這個應用範例在金融等受監管產業中很常見。
+假設有夜間批次處理管道必須在固定期限前完成，資料必須在這個期限前提供，才能由其他批次程序進一步處理，產生要傳送給監管機構的報表。這個應用情境在金融等受監管產業中很常見。
 
 [使用載入工作批次載入資料](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw)是這個用途的合適做法，因為只要能在期限內完成，延遲並非問題。確保 Cloud Storage bucket [符合位置規定](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#data-locations)，以便將資料載入 BigQuery 資料集。
 
-BigQuery 載入工作的結果是不可分割的，也就是說，所有記錄都會插入，或是一筆也不會插入。最佳做法是，在單一載入工作中插入所有資料時，使用 [`JobConfigurationLoad`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#jobconfigurationquery) 資源的 `WRITE_TRUNCATE` 處置方式建立新資料表。重試失敗的載入作業時，這項功能非常重要，因為用戶端可能無法區分作業失敗，以及因與用戶端通訊成功狀態而導致的失敗。
+BigQuery 載入工作的結果是不可分割的，也就是說，所有記錄都會插入，或是一筆也不會插入。最佳做法是，在單一載入工作中插入所有資料時，使用 [`JobConfigurationLoad`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#jobconfigurationquery) 資源的 `WRITE_TRUNCATE` 處置方式建立新資料表。如果重試失敗的載入作業，這項資訊就非常重要，因為用戶端可能無法區分作業失敗，以及因與用戶端通訊成功狀態而導致的失敗。
 
-假設要擷取的資料已成功複製到 Cloud Storage，只要使用指數輪詢重試，就能解決擷取失敗的問題。
+假設要擷取的資料已成功複製到 Cloud Storage，只要使用指數輪詢重試，就足以解決擷取失敗的問題。
 
 建議您讓每晚的批次工作不要達到[預設配額](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#load_jobs)，也就是每個資料表每天 1,500 個載入工作 (即使有重試)。以遞增方式載入資料時，預設配額足以每 5 分鐘執行一次載入工作，且平均每個工作至少有一次重試的未用配額。
 
@@ -656,11 +656,11 @@ BigQuery 載入工作的結果是不可分割的，也就是說，所有記錄�
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-21 (世界標準時間)。
+上次更新時間：2026-10-19 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-21 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-19 (世界標準時間)。"],[],[]]

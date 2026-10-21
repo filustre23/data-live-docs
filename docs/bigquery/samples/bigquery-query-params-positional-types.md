@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -82,7 +82,7 @@ public class QueryWithPositionalTypesParameters {
 
 ```
 use google_cloud_bigquery::client::BigQuery;
-use google_cloud_bigquery::model::{QueryParameter, QueryParameterType, QueryParameterValue};
+use google_cloud_bigquery_v2::model::{QueryParameter, QueryParameterType, QueryParameterValue};
 
 pub async fn sample(project_id: &str) -> anyhow::Result<()> {
     let client = BigQuery::builder().build().await?;
@@ -103,16 +103,14 @@ pub async fn sample(project_id: &str) -> anyhow::Result<()> {
                 .set_parameter_value(QueryParameterValue::new().set_value("3.14159")),
         ])
         .set_location("US")
-        .run()
-        .await?
         .until_done()
         .await?
         .read();
 
     while let Some(row) = rows.next().await.transpose()? {
-        let str_col: String = row.get("str_col");
-        let int_col: i64 = row.get("int_col");
-        let float_col: f64 = row.get("float_col");
+        let str_col: String = row.get("str_col")?;
+        let int_col: i64 = row.get("int_col")?;
+        let float_col: f64 = row.get("float_col")?;
         println!("String: {str_col}, Int: {int_col}, Float: {float_col}");
     }
     Ok(())

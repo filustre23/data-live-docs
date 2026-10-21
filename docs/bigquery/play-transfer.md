@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -25,41 +25,41 @@ Google Play 連接器的 BigQuery 資料移轉服務支援下列資料移轉選�
 | 資料轉移方式 | 支援 |
 | --- | --- |
 | 受支援的報表 | * 詳細報表：   + [評論](https://support.google.com/googleplay/android-developer/answer/6135870?hl=zh-tw#reviews)   + [財務報表](https://support.google.com/googleplay/android-developer/answer/6135870?hl=zh-tw#financial) * 匯總報表：   + [統計資料](https://support.google.com/googleplay/android-developer/answer/6135870?hl=zh-tw#statistics)   + [獲取新客](https://support.google.com/googleplay/android-developer/answer/6135870?hl=zh-tw#acquisition)   如要瞭解 Google Play 報表如何轉換成 BigQuery 表格和檢視畫面，請參閱「[Google Play 報表轉換](https://docs.cloud.google.com/bigquery/docs/play-transformation?hl=zh-tw)」一文。 |
-| 重複頻率 | Google Play 連接器支援每日資料轉移。    根據預設，資料移轉作業會在建立時排定時間。[設定資料移轉作業](#setup-transfer)時，你可以設定資料移轉時間。 |
-| 重新整理時間範圍 | 資料移轉作業執行時，Google Play 連接器會擷取最多 7 天的 Google Play 資料。   詳情請參閱「[重新整理時間範圍](#refresh)」。 |
-| 資料補充作業的可用性 | [執行資料補充作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)，擷取排定資料移轉時間以外的資料。您可以擷取資料來源資料保留政策允許的最早資料。 |
+| 重複頻率 | Google Play 連接器支援每日資料轉移。    根據預設，資料移轉作業會在建立時排定時間。[設定資料移轉](#setup-transfer)時，可以指定資料移轉時間。 |
+| 重新整理時間範圍 | Google Play 連接器會在執行資料轉移時，擷取最多 7 天的 Google Play 資料。    詳情請參閱「[重新整理時間範圍](#refresh)」。 |
+| 資料補充作業 | [執行資料補充作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)，擷取排定資料移轉時間以外的資料。您可以擷取資料來源資料保留政策允許的資料。 |
 
 ## 從 Google Play 轉移作業擷取資料
 
-從 Google Play 移轉資料至 BigQuery 時，系統會將資料載入依日期分區的 BigQuery 資料表。資料載入的資料表分區會對應至資料來源的日期。如果為同一天排定多項移轉作業，BigQuery 資料移轉服務會以最新資料覆寫該特定日期的資料分割。同一天內進行多次轉移或執行回填作業，不會導致資料重複，也不會影響其他日期的分區。
+從 Google Play 移轉資料至 BigQuery 時，系統會將資料載入依日期分區的 BigQuery 資料表。資料載入的資料表分區會對應資料來源的日期。如果為同一天排定多項移轉作業，BigQuery 資料移轉服務會以最新資料覆寫該特定日期的資料分割。同一天內多次轉移資料或執行回填作業，不會導致資料重複，也不會影響其他日期的分區。
 
 ### 重新整理視窗
 
-*更新期*是指資料移轉作業在進行時，擷取資料的天數。舉例來說，如果重新整理時間範圍為三天，且每天都會進行移轉，BigQuery 資料移轉服務就會從來源資料表擷取過去三天的所有資料。在這個範例中，每天進行移轉時，BigQuery 資料移轉服務會建立新的 BigQuery 目的地資料表分割區，並複製當天的來源資料表資料，然後自動觸發補充作業執行作業，以更新過去兩天的來源資料表資料。系統自動觸發的回填作業會覆寫或增量更新 BigQuery 目的地資料表，具體做法取決於 BigQuery 資料移轉服務連接器是否支援增量更新。
+*更新期*是指資料移轉作業在執行時，擷取資料的天數。舉例來說，如果重新整理時間範圍為三天，且每天都會進行移轉，BigQuery 資料移轉服務就會從來源資料表擷取過去三天的所有資料。在本例中，每天進行移轉時，BigQuery 資料移轉服務會建立新的 BigQuery 目的地資料表分割區，並複製當天的來源資料表資料，然後自動觸發回填執行作業，以更新過去兩天的來源資料表資料。系統自動觸發的回填作業會覆寫或增量更新 BigQuery 目的地資料表，具體做法取決於 BigQuery 資料移轉服務連接器是否支援增量更新。
 
 首次執行資料移轉時，資料移轉作業會擷取重新整理視窗內的所有可用來源資料。舉例來說，如果重新整理時間範圍為三天，而您是第一次執行資料移轉作業，BigQuery 資料移轉服務會擷取三天內的所有來源資料。
 
-如要擷取重新整理時間範圍外的資料 (例如歷來資料)，或從任何轉移中斷或缺漏中復原資料，可以啟動或排定[補充作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)。
+如要擷取重新整理時間範圍外的資料 (例如歷來資料)，或從任何轉移中斷或缺漏中復原資料，可以啟動或排定[資料補充作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)。
 
 ## 限制
 
-* 資料移轉作業的最低排程頻率為每 24 小時一次。預設情況下，移轉作業會在您建立移轉作業時啟動。不過，您可以在[設定轉移作業](https://docs.cloud.google.com/bigquery/docs/play-transfer?hl=zh-tw#setup-transfer)時，設定轉移開始時間。
+* 資料轉移的最低排程頻率為每 24 小時一次。預設情況下，移轉作業會在您建立移轉作業時啟動。不過，您可以在[設定轉移作業](https://docs.cloud.google.com/bigquery/docs/play-transfer?hl=zh-tw#setup-transfer)時，設定轉移作業的開始時間。
 * 在 Google Play 移轉期間，BigQuery 資料移轉服務不支援增量資料移轉。指定資料移轉日期後，系統會移轉該日期可用的所有資料。
 
 ## 事前準備
 
-建立 Google Play 資料移轉作業前，請先：
+建立 Google Play 資料移轉作業前，請先完成下列事項：
 
 * 確認您已完成[啟用 BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service?hl=zh-tw)的一切必要動作。
 * [建立 BigQuery 資料集](https://docs.cloud.google.com/bigquery/docs/datasets?hl=zh-tw)以儲存 Google Play 資料。
 * 尋找您的 Cloud Storage bucket：
-  1. 在 [Google Play 管理中心](https://play.google.com/apps/publish/?hl=zh-tw)，按一下 file\_download「下載報表」，然後選取「評論」、「統計資料」或「財務」。
-  2. 如要複製 Cloud Storage bucket 的 ID，請按一下「複製 Cloud Storage URI」content\_copy。您的值區 ID 開頭為 `gs://`。舉例來說，如果是評論報表，您的 ID 類似於以下內容：
+  1. 在 [Google Play 管理中心](https://play.google.com/apps/publish/?hl=zh-tw)，按一下「下載報表」圖示 file\_download，然後選取「評論」、「統計資料」或「財務」。
+  2. 如要複製 Cloud Storage bucket 的 ID，請按一下 content\_copy「複製 Cloud Storage URI」。值區 ID 的開頭是 `gs://`。舉例來說，如果是評論報表，您的 ID 類似於：
 
      ```
      gs://pubsite_prod_rev_01234567890987654321/reviews
      ```
-  3. 如要轉移 Google Play 資料，只需複製 `gs://` 與 `/reviews` 之間的專屬 ID：
+  3. 如要轉移 Google Play 資料，只需複製 `gs://` 和 `/reviews` 之間的唯一 ID：
 
      ```
      pubsite_prod_rev_01234567890987654321
@@ -72,7 +72,7 @@ Google Play 連接器的 BigQuery 資料移轉服務支援下列資料移轉選�
 
 ### 必要的 BigQuery 角色
 
-如要取得建立 BigQuery 資料移轉服務資料移轉作業所需的權限，請要求系統管理員在專案中授予您 [BigQuery 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.admin)  (`roles/bigquery.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得建立 BigQuery 資料移轉服務資料移轉作業所需的權限，請要求管理員在專案中授予您 [BigQuery 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.admin)  (`roles/bigquery.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
 這個預先定義的角色具備建立 BigQuery 資料移轉服務資料移轉作業所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
@@ -116,7 +116,7 @@ Google Play 連接器的 BigQuery 資料移轉服務支援下列資料移轉選�
 1. 前往 Google Cloud 控制台的「資料移轉」頁面。
 
    [前往「資料轉移」頁面](https://console.cloud.google.com/bigquery/transfers?hl=zh-tw)
-2. 按一下 add「建立轉移作業」。
+2. 按一下「建立轉移作業」add。
 3. 在「Create Transfer」(建立轉移作業) 頁面：
 
    * 在「Source type」(來源類型) 部分，「Source」(來源) 請選取「Google Play」。
@@ -209,47 +209,5 @@ import com.google.cloud.bigquery.datatransfer.v1.DataTransferServiceClient;
 import com.google.cloud.bigquery.datatransfer.v1.ProjectName;
 import com.google.cloud.bigquery.datatransfer.v1.TransferConfig;
 import com.google.protobuf.Struct;
-import com.google.protobuf.Value;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
-// Sample to create a play transfer config.
-public class CreatePlayTransfer {
-
-  public static void main(String[] args) throws IOException {
-    // TODO(developer): Replace these variables before running the sample.
-    final String projectId = "MY_PROJECT_ID";
-    String datasetId = "MY_DATASET_ID";
-    String bucket = "gs://cloud-sample-data";
-    String tableSuffix = "_test";
-    Map<String, Value> params = new HashMap<>();
-    params.put("bucket", Value.newBuilder().setStringValue(bucket).build());
-    params.put("table_suffix", Value.newBuilder().setStringValue(tableSuffix).build());
-    TransferConfig transferConfig =
-        TransferConfig.newBuilder()
-            .setDestinationDatasetId(datasetId)
-            .setDisplayName("Your Play Config Name")
-            .setDataSourceId("play")
-            .setParams(Struct.newBuilder().putAllFields(params).build())
-            .build();
-    createPlayTransfer(projectId, transferConfig);
-  }
-
-  public static void createPlayTransfer(String projectId, TransferConfig transferConfig)
-      throws IOException {
-    try (DataTransferServiceClient client = DataTransferServiceClient.create()) {
-      ProjectName parent = ProjectName.of(projectId);
-      CreateTransferConfigRequest request =
-          CreateTransferConfigRequest.newBuilder()
-              .setParent(parent.toString())
-              .setTransferConfig(transferConfig)
-              .build();
-      TransferConfig config = client.createTransferConfig(request);
-      System.out.println("play transfer created successfully :" + config.getName());
-    } catch (ApiException ex) {
-      System.out.print("play transfer was not created." + ex.toString());
-    }
-  }
-}
+import com.google.protobuf.
 ```

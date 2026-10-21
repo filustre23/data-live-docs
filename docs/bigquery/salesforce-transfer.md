@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -16,9 +16,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 將 Salesforce 資料載入 BigQuery
 
-如要安排從 Salesforce Sales Cloud 到 BigQuery 的週期性資料移轉作業，請建立移轉設定，指定要移轉的資料物件，以及安排資料移轉作業的頻率。您可以使用 Google Cloud 控制台、`bq` 指令列工具或 BigQuery 資料移轉服務 API，建立移轉設定。設定完移轉設定後，[BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)就會按照指定時間表，將最新資料移轉至 BigQuery 資料表。
+如要安排從 Salesforce Sales Cloud 到 BigQuery 的週期性資料移轉作業，請建立移轉設定，指定要移轉的資料物件，以及安排資料移轉作業的頻率。您可以使用 Google Cloud 控制台、`bq` 指令列工具或 BigQuery 資料移轉服務 API，建立資料移轉設定。設定完移轉設定後，[BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)就會按照指定時間表，將最新資料移轉至 BigQuery 資料表。
 
-如要瞭解 Salesforce 轉移作業的運作方式，請參閱「[Salesforce 轉移作業簡介](https://docs.cloud.google.com/bigquery/docs/salesforce-transfer-intro?hl=zh-tw)」。
+如要瞭解 Salesforce 轉移作業的運作方式，請參閱「[Salesforce 資料轉移簡介](https://docs.cloud.google.com/bigquery/docs/salesforce-transfer-intro?hl=zh-tw)」。
 
 ## 限制
 
@@ -38,7 +38,7 @@ Salesforce 資料移轉作業有下列限制：
   + `Scontrol`
   + `EmailCapture`
   + `MailMergeTemplate`
-* 週期性資料轉移作業之間的最短時間間隔為 15 分鐘。重複轉移的預設間隔為 24 小時。
+* 週期性資料轉移作業之間的最短時間間隔為 15 分鐘。週期性轉移的預設間隔為 24 小時。
 * 由於 Salesforce 處理限制，一次排定過多資料轉移作業可能會導致延遲或失敗。建議您將 Salesforce 資料傳輸限制為下列項目：
 
   + 每個移轉設定最多只能有 10 項資產。
@@ -47,7 +47,7 @@ Salesforce 資料移轉作業有下列限制：
 
   + 為避免在單一轉移設定中略過轉移作業，建議您設定「重複頻率」，增加大型資料轉移作業之間的時間間隔。
 * 如果透過網路連結進行資料移轉，請務必[設定 Public NAT](https://docs.cloud.google.com/nat/docs/set-up-manage-network-address-translation?hl=zh-tw)，並使用靜態 IP 位址。詳情請參閱「[為 Salesforce 移轉作業設定 IP 許可清單](https://docs.cloud.google.com/bigquery/docs/salesforce-transfer?hl=zh-tw#salesforce-allowlist)」一文。
-* 如果設定的網路附件和虛擬機器 (VM) 執行個體位於不同區域，從 Salesforce 轉移資料時，可能會發生跨區域資料移動。
+* 如果設定的網路連結和虛擬機器 (VM) 執行個體位於不同區域，從 Salesforce 轉移資料時，可能會發生跨區域資料移動。
 
 ### 增量移轉限制
 
@@ -56,13 +56,13 @@ Salesforce 資料移轉作業有下列限制：
 * 浮水印資料欄只能選擇 `TIMESTAMP` 個資料欄。
 * 只有含有有效浮水印欄的資產，才支援增量擷取。
 * 浮水印資料欄中的值必須單調遞增。
-* 增量轉移作業無法同步處理來源資料表中的刪除作業。
-* 單一轉移設定只能支援增量或完整擷取。
+* 增量移轉無法同步處理來源資料表中的刪除作業。
+* 單一移轉設定只能支援增量或完整擷取。
 * 第一次執行增量擷取後，就無法更新 `asset` 清單中的物件。
-* 首次執行增量擷取後，就無法在轉移設定中變更寫入模式。
+* 首次執行增量擷取後，就無法在移轉設定中變更寫入模式。
 * 第一次執行遞增式擷取作業後，就無法變更時間戳記欄或主鍵。
-* 目的地 BigQuery 資料表會使用您提供的主鍵進行叢集，並受[叢集資料表限制](https://docs.cloud.google.com/bigquery/docs/clustered-tables?hl=zh-tw#limitations)約束。
-* 首次將現有轉移設定更新為增量擷取模式時，更新後的第一次資料轉移會從資料來源轉移所有可用資料。後續的增量資料轉移作業只會轉移資料來源中的新資料列和更新資料列。
+* 目的地 BigQuery 資料表會使用您提供的主鍵進行分群，並受[分群資料表限制](https://docs.cloud.google.com/bigquery/docs/clustered-tables?hl=zh-tw#limitations)約束。
+* 首次將現有移轉設定更新為增量擷取模式時，更新後的第一次資料移轉作業會移轉資料來源中的所有可用資料。後續的任何增量資料轉移作業，都只會轉移資料來源中的新資料列和更新資料列。
 
 如要瞭解增量轉移的運作方式，請參閱「[完整或增量轉移](https://docs.cloud.google.com/bigquery/docs/salesforce-transfer-intro?hl=zh-tw#full-incremental-transfers)」。
 
@@ -85,10 +85,10 @@ Salesforce 資料移轉作業有下列限制：
       `https://test.salesforce.com/services/oauth2/token`。
   + 確認未選取「Issue JSON Web Token (JWT)-based access tokens for named users」(為具名使用者核發以 JSON Web Token 為基礎的存取權杖) 核取方塊。
 * 在「Selected OAuth Scopes」部分，選取「Manage user data via APIs (api)」。
-* 取消勾選「Required Proof Key for Code Exchange (PKCE) Extension for Supported Authorization Flows」(支援的授權流程必須使用 Proof Key for Code Exchange (PKCE) 擴充功能) 核取方塊。
+* 取消勾選「Required Proof Key for Code Exchange (PKCE) Extension for Supported Authorization Flows」(支援的授權流程必須使用程式碼交換金鑰證明 (PKCE) 擴充功能) 核取方塊。
 * 選取「Enable Client Credentials Flow」，然後按一下顯示通知中的「OK」。
 
-設定連結的應用程式並完成必要設定後，請按一下「儲存」。系統會將您重新導向至新建立的「已連結的應用程式」詳細資料頁面。
+設定連結的應用程式並完成必要設定後，請按一下「儲存」。系統會將您重新導向至新建立的「已連線應用程式」詳細資料頁面。
 
 建立連結的應用程式後，您也必須設定用戶端憑證流程，方法如下：
 
@@ -124,7 +124,7 @@ Salesforce 資料移轉作業有下列限制：
 
 在「我的網域詳細資料」部分中，`myDomain` 會顯示為「目前的我的網域 URL」的前置字元。舉例來說，如果「我的網域」網址為 `example.my.salesforce.com`，則要使用的 `myDomain` 值為 `example`。
 
-### 擷取「`ClientId`」和「`ClientSecret`」詳細資料
+### 擷取 `ClientId` 和 `ClientSecret` 詳細資料
 
 如要找出 `ClientId` 和 `ClientSecret` 值，請按照下列步驟操作：
 
@@ -132,7 +132,7 @@ Salesforce 資料移轉作業有下列限制：
 2. 點選 [設定]。
 3. 在搜尋列中搜尋「應用程式」。
 4. 在搜尋結果的「建構」部分，依序點選「建立」>「應用程式」。
-5. 按一下「已連結的應用程式名稱」。
+5. 按一下「連結的應用程式名稱」。
 6. 在「連結的應用程式」詳細資料頁面，按一下「管理取用者詳細資料」。
 7. 使用其中一種已註冊的方法驗證身分。您最多可以查看消費者詳細資料頁面五分鐘，之後系統會提示您再次驗證身分。
 8. 在「消費者詳細資料」頁面中，「消費者金鑰」就是你的 `ClientId`
@@ -151,7 +151,7 @@ Salesforce 資料移轉作業有下列限制：
 
 在「我的網域詳細資料」部分中，`myDomain` 會顯示為「目前的我的網域 URL」的前置字元。舉例來說，如果「我的網域」網址為 `example.my.salesforce.com`，則要使用的 `myDomain` 值為 `example`。
 
-### 擷取「`ClientId`」和「`ClientSecret`」詳細資料
+### 擷取 `ClientId` 和 `ClientSecret` 詳細資料
 
 1. 登入 Salesforce 平台。
 2. 點選 [設定]。
@@ -177,7 +177,7 @@ Salesforce 資料移轉作業有下列限制：
 
 **注意：** 如要更精細地控管，可以在設定檔層級或每次 API 呼叫時套用 IP 限制。詳情請參閱「[限制設定檔中的登入 IP 位址](https://help.salesforce.com/s/articleView?id=platform.login_ip_ranges.htm&type=5)」一文。
 
-設定 IP 範圍後，您現在可以在[設定轉移設定](https://docs.cloud.google.com/bigquery/docs/salesforce-transfer?hl=zh-tw#sf-transfer-setup)時指定靜態 IP，方法是在「網路附件」欄位中選取網路附件。
+設定 IP 範圍後，您現在可以在[設定移轉設定](https://docs.cloud.google.com/bigquery/docs/salesforce-transfer?hl=zh-tw#sf-transfer-setup)時，透過在「網路連結」欄位中選取網路連結，指定靜態 IP。
 
 ### BigQuery 必要條件
 
@@ -211,18 +211,18 @@ Salesforce 資料移轉作業有下列限制：
 
 ## 設定 Salesforce 資料轉移作業
 
-如要將 Salesforce 資料新增至 BigQuery，請使用下列任一方法設定移轉作業：
+如要將 Salesforce 資料新增至 BigQuery，請使用下列任一方法設定移轉設定：
 
 ### 控制台
 
 1. 前往 Google Cloud 控制台的「資料移轉」頁面。
 
    [前往「資料轉移」頁面](https://console.cloud.google.com/bigquery/transfers?hl=zh-tw)
-2. 按一下 add「建立轉移作業」。
+2. 按一下「建立轉移作業」add。
 3. 在「Source type」(來源類型) 部分，「Source」(來源) 請選取「Salesforce」。
 4. 在「Data source details」(資料來源詳細資料) 部分執行下列操作：
 
-   * 在「Network attachment」(網路連結) 部分，從清單中選取網路連結。您必須[設定 Public NAT 並設定 IP 允許清單](https://docs.cloud.google.com/bigquery/docs/salesforce-transfer?hl=zh-tw#salesforce-allowlist)，才能使用網路附件進行這項資料轉移作業。
+   * 在「Network attachment」(網路連結) 部分，從清單中選取網路連結。您必須[設定 Public NAT 並設定 IP 允許清單](https://docs.cloud.google.com/bigquery/docs/salesforce-transfer?hl=zh-tw#salesforce-allowlist)，才能使用網路連結進行這項資料轉移作業。
    * 在「My Domain」(我的網域)，輸入您的 Salesforce [My Domain](https://help.salesforce.com/s/articleView?id=sf.domain_name_overview.htm)。
    * 在「Client ID」(用戶端 ID)，輸入與 Salesforce 連結的應用程式用戶端金鑰。
    * 在「Client secret」(用戶端密鑰)，輸入與 Salesforce 連結的應用程式用戶端密鑰。
@@ -246,9 +246,7 @@ Salesforce 資料移轉作業有下列限制：
 
 ### bq
 
-輸入 [`bq mk` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_mk)
-並加上移轉建立作業旗標
-`--transfer_config`：
+輸入 [`bq mk` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_mk)並加上移轉建立標記 `--transfer_config`：
 
 ```
 bq mk
@@ -289,54 +287,5 @@ bq mk
 下列指令會在預設專案中建立 Salesforce 增量資料移轉作業，並使用 `APPEND` 寫入模式。
 
 ```
-bq mk
-    --transfer_config
-    --target_dataset=mydataset
-    --data_source=salesforce
-    --display_name='My Transfer'
-    --params='{"assets": ["Account", "CaseHistory"]
-        "connector.authentication.oauth.clientId": "1234567890",
-        "connector.authentication.oauth.clientSecret":"ABC12345",
-        "connector.authentication.oauth.myDomain":"MyDomainName",
-        "connector.authentication.username":"user1@force.com",
-        "connector.authentication.password":"abcdef1234",
-        "ingestionType":"incremental",
-        "writeMode":"WRITE_MODE_UPSERT",
-        "watermarkColumns":["SystemModstamp","CreatedDate"]
-        "primaryKeys":[['Id'], ['master_label','type']]}'
+bq
 ```
-
-### API
-
-請使用 [`projects.locations.transferConfigs.create`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create?hl=zh-tw) 方法，並提供 [`TransferConfig`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs?hl=zh-tw#TransferConfig) 資源的執行個體。
-
-儲存移轉設定後，Salesforce 連接器會根據排程選項自動觸發移轉作業。每次執行移轉作業時，Salesforce 連接器都會將 Salesforce 中的所有可用資料移轉至 BigQuery。
-
-如要手動執行資料轉移 (不在排程內)，可以啟動[回填作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)。
-
-## 排解轉移設定問題
-
-如果您無法順利設定資料移轉作業，請參閱「[Salesforce 移轉問題](https://docs.cloud.google.com/bigquery/docs/transfer-troubleshooting?hl=zh-tw#salesforce-issues)」。
-
-## 後續步驟
-
-* 如需 BigQuery 資料移轉服務的總覽，請參閱
-  [BigQuery 資料移轉服務簡介](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)。
-* 如要瞭解如何使用移轉作業，包括取得移轉設定、列出移轉設定以及查看移轉設定的執行記錄，請參閱[使用移轉功能](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw)一文。
-* 瞭解如何[使用 BigQuery Omni 作業載入資料](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer?hl=zh-tw)。
-
-
-
-
-提供意見
-
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
-
-上次更新時間：2026-07-13 (世界標準時間)。
-
-
-
-
-想進一步說明嗎？
-
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-13 (世界標準時間)。"],[],[]]

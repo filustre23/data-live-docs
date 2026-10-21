@@ -26,6 +26,13 @@ Send feedback
 * `GetMigrationWorkflowRequest` (message)
 * `GreenplumDialect` (message)
 * `HiveQLDialect` (message)
+* `LineageOutput` (message)
+* `LineageOutput.ProgressReport` (message)
+* `LineageOutput.ProgressReport.ProcessingStage` (enum)
+* `LineageOutput.ProgressReport.WorkSummary` (message)
+* `LineageOutput.ProgressReport.WorkSummary.State` (enum)
+* `LineageOutput.RecognizedInput` (message)
+* `LineageOutput.RecognizedInput.Type` (enum)
 * `ListMigrationSubtasksRequest` (message)
 * `ListMigrationSubtasksResponse` (message)
 * `ListMigrationWorkflowsRequest` (message)
@@ -65,6 +72,8 @@ Send feedback
 * `SuggestionStep.RewriteTarget` (enum)
 * `SuggestionStep.SuggestionType` (enum)
 * `TargetSpec` (message)
+* `TaskOutput` (message)
+* `TaskOutput.State` (enum)
 * `TeradataDialect` (message)
 * `TeradataDialect.Mode` (enum)
 * `TimeInterval` (message)
@@ -114,6 +123,7 @@ User-definable feature flags for assessment tasks.
 | Fields | |
 | --- | --- |
 | `add_shareable_dataset` | `bool`  Optional. Whether to create a dataset containing non-PII data in addition to the output dataset. |
+| `generate_tco_report` | `bool`  Optional. Whether the TCO report Google Doc generation is allowlisted for the project. |
 
 ## AssessmentTaskDetails
 
@@ -136,105 +146,3 @@ The dialect definition for Azure Synapse.
 ## BigQueryDialect
 
 This type has no fields.
-
-The dialect definition for BigQuery.
-
-## CreateMigrationWorkflowRequest
-
-Request to create a migration workflow resource.
-
-| Fields | |
-| --- | --- |
-| `parent` | `string`  Required. The name of the project to which this migration workflow belongs. Example: `projects/foo/locations/bar` |
-| `migration_workflow` | `MigrationWorkflow`  Required. The migration workflow to create. |
-
-## DB2Dialect
-
-This type has no fields.
-
-The dialect definition for DB2.
-
-## DeleteMigrationWorkflowRequest
-
-A request to delete a previously created migration workflow.
-
-| Fields | |
-| --- | --- |
-| `name` | `string`  Required. The unique identifier for the migration workflow. Example: `projects/123/locations/us/workflows/1234` |
-
-## Dialect
-
-The possible dialect options for translation.
-
-| Fields | |
-| --- | --- |
-| Union field `dialect_value`. The possible dialect options that this message represents. `dialect_value` can be only one of the following: | |
-| `bigquery_dialect` | `BigQueryDialect`  The BigQuery dialect |
-| `hiveql_dialect` | `HiveQLDialect`  The HiveQL dialect |
-| `redshift_dialect` | `RedshiftDialect`  The Redshift dialect |
-| `teradata_dialect` | `TeradataDialect`  The Teradata dialect |
-| `oracle_dialect` | `OracleDialect`  The Oracle dialect |
-| `sparksql_dialect` | `SparkSQLDialect`  The SparkSQL dialect |
-| `snowflake_dialect` | `SnowflakeDialect`  The Snowflake dialect |
-| `netezza_dialect` | `NetezzaDialect`  The Netezza dialect |
-| `azure_synapse_dialect` | `AzureSynapseDialect`  The Azure Synapse dialect |
-| `vertica_dialect` | `VerticaDialect`  The Vertica dialect |
-| `sql_server_dialect` | `SQLServerDialect`  The SQL Server dialect |
-| `postgresql_dialect` | `PostgresqlDialect`  The Postgresql dialect |
-| `presto_dialect` | `PrestoDialect`  The Presto dialect |
-| `mysql_dialect` | `MySQLDialect`  The MySQL dialect |
-| `db2_dialect` | `DB2Dialect`  DB2 dialect |
-| `sqlite_dialect` | `SQLiteDialect`  SQLite dialect |
-| `greenplum_dialect` | `GreenplumDialect`  Greenplum dialect |
-
-## ErrorDetail
-
-Provides details for errors, e.g. issues that where encountered when processing a subtask.
-
-| Fields | |
-| --- | --- |
-| `location` | `ErrorLocation`  Optional. The exact location within the resource (if applicable). |
-| `error_info` | `ErrorInfo`  Required. Describes the cause of the error with structured detail. |
-
-## ErrorLocation
-
-Holds information about where the error is located.
-
-| Fields | |
-| --- | --- |
-| `line` | `int32`  Optional. If applicable, denotes the line where the error occurred. A zero value means that there is no line information. |
-| `column` | `int32`  Optional. If applicable, denotes the column where the error occurred. A zero value means that there is no columns information. |
-
-## GcsReportLogMessage
-
-A record in the aggregate CSV report for a migration workflow
-
-| Fields | |
-| --- | --- |
-| `severity` | `string`  Severity of the translation record. |
-| `category` | `string`  Category of the error/warning. Example: SyntaxError |
-| `file_path` | `string`  The file path in which the error occurred |
-| `filename` | `string`  The file name in which the error occurred |
-| `source_script_line` | `int32`  Specifies the row from the source text where the error occurred (0 based, -1 for messages without line location). Example: 2 |
-| `source_script_column` | `int32`  Specifies the column from the source texts where the error occurred. (0 based, -1 for messages without column location) example: 6 |
-| `message` | `string`  Detailed message of the record. |
-| `script_context` | `string`  The script context (obfuscated) in which the error occurred |
-| `action` | `string`  Category of the error/warning. Example: SyntaxError |
-| `effect` | `string`  Effect of the error/warning. Example: COMPATIBILITY |
-| `object_name` | `string`  Name of the affected object in the log message. |
-
-## GetMigrationSubtaskRequest
-
-A request to get a previously created migration subtasks.
-
-| Fields | |
-| --- | --- |
-| `name` | `string`  Required. The unique identifier for the migration subtask. Example: `projects/123/locations/us/workflows/1234/subtasks/543` |
-| `read_mask` | `FieldMask`  Optional. The list of fields to be retrieved. |
-
-## GetMigrationWorkflowRequest
-
-A request to get a previously created migration workflow.
-
-| Fields | |
-| --- | --- |

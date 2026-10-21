@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -106,6 +106,68 @@ public class CancelJob {
       System.out.println("Job was not canceled.\n" + e.toString());
     }
   }
+}
+```
+
+### Python
+
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+
+```
+from google.cloud import bigquery
+
+
+def cancel_job(
+    client: bigquery.Client,
+    location: str = "us",
+    job_id: str = "abcd-efgh-ijkl-mnop",
+) -> None:
+    job = client.cancel_job(job_id, location=location)
+    print(f"{job.location}:{job.job_id} cancelled")
+```
+
+### Rust
+
+```
+use google_cloud_bigquery_v2::client::JobService;
+use google_cloud_bigquery_v2::model::{Job, JobConfiguration, JobConfigurationQuery};
+
+pub async fn sample(project_id: &str) -> anyhow::Result<()> {
+    let job_service = JobService::builder().build().await?;
+
+    // Start a long-running analytical query job
+    let job = Job::new().set_configuration(
+        JobConfiguration::new().set_query(
+            JobConfigurationQuery::new()
+                .set_query("SELECT * FROM UNNEST(GENERATE_ARRAY(1, 10000000));")
+                .set_use_legacy_sql(false),
+        ),
+    );
+
+    let inserted = job_service
+        .insert_job()
+        .set_project_id(project_id)
+        .set_job(job)
+        .send()
+        .await?;
+
+    let job_id = inserted.job_reference.unwrap().job_id;
+    println!("Created long-running job: {}", job_id);
+
+    // Call the job cancellation API abruptly to abort its execution
+    let cancelled = job_service
+        .cancel_job()
+        .set_project_id(project_id)
+        .set_job_id(&job_id)
+        .set_location("US")
+        .send()
+        .await?;
+
+    println!("Successfully cancelled job: {cancelled:?}");
+
+    Ok(())
 }
 ```
 

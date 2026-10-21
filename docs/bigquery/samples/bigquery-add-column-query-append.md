@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -127,11 +127,52 @@ function add_column_query_append(
 }
 ```
 
+### Python
+
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+
+```
+from google.cloud import bigquery
+
+# Construct a BigQuery client object.
+client = bigquery.Client()
+
+# TODO(developer): Set table_id to the ID of the destination table.
+# table_id = "your-project.your_dataset.your_table_name"
+
+# Retrieves the destination table and checks the length of the schema.
+table = client.get_table(table_id)  # Make an API request.
+print("Table {} contains {} columns".format(table_id, len(table.schema)))
+
+# Configures the query to append the results to a destination table,
+# allowing field addition.
+job_config = bigquery.QueryJobConfig(
+    destination=table_id,
+    schema_update_options=[bigquery.SchemaUpdateOption.ALLOW_FIELD_ADDITION],
+    write_disposition=bigquery.WriteDisposition.WRITE_APPEND,
+)
+
+# Start the query, passing in the extra configuration.
+client.query_and_wait(
+    # In this example, the existing table contains only the 'full_name' and
+    # 'age' columns, while the results of this query will contain an
+    # additional 'favorite_color' column.
+    'SELECT "Timmy" as full_name, 85 as age, "Blue" as favorite_color;',
+    job_config=job_config,
+)  # Make an API request and wait for job to complete.
+
+# Checks the updated length of the schema.
+table = client.get_table(table_id)  # Make an API request.
+print("Table {} now contains {} columns".format(table_id, len(table.schema)))
+```
+
 ### Rust
 
 ```
 use google_cloud_bigquery::client::BigQuery;
-use google_cloud_bigquery::model::TableReference;
+use google_cloud_bigquery_v2::model::TableReference;
 
 pub async fn sample(project_id: &str, dataset_id: &str, table_id: &str) -> anyhow::Result<()> {
     let client = BigQuery::builder().build().await?;
@@ -151,8 +192,6 @@ pub async fn sample(project_id: &str, dataset_id: &str, table_id: &str) -> anyho
         .query(create_sql)
         .with_project_id(project_id)
         .set_location("US")
-        .run()
-        .await?
         .until_done()
         .await?;
 
@@ -171,8 +210,6 @@ pub async fn sample(project_id: &str, dataset_id: &str, table_id: &str) -> anyho
         .set_write_disposition("WRITE_APPEND")
         .set_schema_update_options(["ALLOW_FIELD_ADDITION"])
         .set_location("US")
-        .run()
-        .await?
         .until_done()
         .await?;
 

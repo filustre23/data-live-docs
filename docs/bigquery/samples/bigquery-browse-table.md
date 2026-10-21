@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -204,6 +204,52 @@ function browse_table(
 }
 ```
 
+### Python
+
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+
+```
+from google.cloud import bigquery
+
+# Construct a BigQuery client object.
+client = bigquery.Client()
+
+# TODO(developer): Set table_id to the ID of the table to browse data rows.
+# table_id = "your-project.your_dataset.your_table_name"
+
+# Download all rows from a table.
+rows_iter = client.list_rows(table_id)  # Make an API request.
+
+# Iterate over rows to make the API requests to fetch row data.
+rows = list(rows_iter)
+print("Downloaded {} rows from table {}".format(len(rows), table_id))
+
+# Download at most 10 rows.
+rows_iter = client.list_rows(table_id, max_results=10)
+rows = list(rows_iter)
+print("Downloaded {} rows from table {}".format(len(rows), table_id))
+
+# Specify selected fields to limit the results to certain columns.
+table = client.get_table(table_id)  # Make an API request.
+fields = table.schema[:2]  # First two columns.
+rows_iter = client.list_rows(table_id, selected_fields=fields, max_results=10)
+print("Selected {} columns from table {}.".format(len(rows_iter.schema), table_id))
+
+rows = list(rows_iter)
+print("Downloaded {} rows from table {}".format(len(rows), table_id))
+
+# Print row data in tabular format.
+rows_iter = client.list_rows(table_id, max_results=10)
+format_string = "{!s:<16} " * len(rows_iter.schema)
+field_names = [field.name for field in rows_iter.schema]
+print(format_string.format(*field_names))  # Prints column headers.
+
+for row in rows_iter:
+    print(format_string.format(*row))  # Prints row data.
+```
+
 ### Ruby
 
 在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Ruby 設定說明操作。詳情請參閱 [BigQuery Ruby API 參考說明文件](https://googleapis.dev/ruby/google-cloud-bigquery/latest/Google/Cloud/Bigquery.html)。
@@ -246,19 +292,16 @@ LIMIT 10
 "#,
         )
         .with_project_id(project_id)
-        .set_max_results(5_u32)
+        .set_page_size(5_u32)
         .set_location("US")
-        .run()
-        .await?
         .until_done()
         .await?
-        .read()
-        .set_max_rows_buffered(5);
+        .read();
 
     while let Some(row) = rows.next().await.transpose()? {
-        let name: String = row.get("name");
-        let gender: String = row.get("gender");
-        let number: i64 = row.get("number");
+        let name: String = row.get("name")?;
+        let gender: String = row.get("gender")?;
+        let number: i64 = row.get("number")?;
         println!("Name: {name}, Gender: {gender}, Number: {number}");
     }
     Ok(())

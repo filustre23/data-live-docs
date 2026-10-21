@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -16,36 +16,32 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 建立 Apache Iceberg 外部資料表
 
-透過 Apache Iceberg 外部資料表，您可以使用更精細的存取控管機制，以唯讀格式存取 [Apache Iceberg](https://iceberg.apache.org/docs/latest/) 資料表。
+您可以使用 Apache Iceberg 外部資料表，以唯讀格式存取 Apache Iceberg 資料表，並導入精細的存取控管機制。在大多數情況下，我們不再建議使用這些資料表。
+請改為參閱「[建議的替代方案](#recommended-alternatives)」。
 
-Iceberg 是開放原始碼資料表格式，支援 PB 級資料表。Iceberg 開放規格可讓您在物件儲存空間中儲存的單一資料副本上，執行多個查詢引擎。Apache Iceberg 外部資料表 (以下簡稱「Iceberg 外部資料表」) 支援 [Iceberg 第 2 版](https://iceberg.apache.org/spec/#version-2-row-level-deletes)，包括讀取時合併。支援
-[Iceberg 第 3 版](https://iceberg.apache.org/spec/#version-3-extended-types-and-capabilities)，
-包括二進位刪除向量，目前為[預先發布版](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
-如要提供意見回饋或提出與這項預先發布版功能相關的問題，請傳送電子郵件至 [biglake-help@google.com](mailto:biglake-help@google.com)。
+Iceberg 是開放原始碼資料表格式，支援 PB 級資料表。Iceberg 開放規格可讓您在物件儲存空間中儲存的單一資料副本上，執行多個查詢引擎。Apache Iceberg 外部資料表 (以下簡稱「Iceberg 外部資料表」) 支援 [Iceberg 第 2 版](https://iceberg.apache.org/spec/#version-2-row-level-deletes)，包括讀取時合併。支援 [Iceberg 第 3 版](https://iceberg.apache.org/spec/#version-3-extended-types-and-capabilities) (包括二進位刪除向量) 的功能目前為[預先發布版](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。如要提供意見回饋或提出與這項預先發布版功能相關的問題，請傳送電子郵件至 [biglake-help@google.com](mailto:biglake-help@google.com)。
 
-BigQuery 管理員可以強制執行列層級和欄層級的存取控管，包括資料表上的資料遮蓋。如要瞭解如何在資料表層級設定存取控管，請參閱「[設定存取控管政策](#set-access-control)」。當您使用 BigQuery Storage API 做為 Managed Service for Apache Spark 和 Serverless Spark 中資料表的資料來源時，系統也會強制執行資料表存取政策。
+BigQuery 管理員可以強制執行資料列和資料欄層級的存取控管，包括資料表上的資料遮蓋。如要瞭解如何在資料表層級設定存取控管機制，請參閱「[設定存取控管政策](#set-access-control)」。在 Managed Service for Apache Spark 和 Serverless Spark 中，將 BigQuery Storage API 做為資料表資料來源時，系統也會強制執行資料表存取政策。
 
-您可以透過下列方式建立 Iceberg 外部資料表：
+## 建議的替代方案
 
-* **[使用 Lakehouse 執行階段目錄 (建議用於 Google Cloud)](https://docs.cloud.google.com/biglake/docs/about-blms?hl=zh-tw)。**
-  Lakehouse 執行階段目錄是可擴充的統合式無伺服器代管 metastore，可將儲存於 Google Cloud 的湖倉資料連結至多個執行階段，包括開放原始碼引擎 (例如 Apache Spark) 和 BigQuery。
-* **[使用 AWS Glue Data Catalog (建議用於 AWS)](https://docs.cloud.google.com/bigquery/docs/glue-federated-datasets?hl=zh-tw)。**AWS Glue 是 AWS 的建議方法，因為這是集中式中繼資料存放區，您可以在其中定義儲存在各種 AWS 服務中的資料結構和位置，並提供自動結構定義探索和與 AWS 數據分析工具整合等功能。
-* **[使用 Iceberg JSON 中繼資料檔案](#create-using-metadata-file) (建議用於 Azure)。**
-  如果您使用 Iceberg JSON 中繼資料檔案，則每當有任何表格更新時，都必須手動更新最新的中繼資料檔案。您可以使用 Apache Spark 的 BigQuery 預存程序，建立參照 Iceberg 中繼資料檔案的 Iceberg 外部資料表。
+視資料儲存位置而定，我們建議使用下列替代方案，存取中繼資料並非由Google Cloud管理的 Iceberg 資料表：
 
-如需限制的完整清單，請參閱「[限制](#limitations)」一節。
+* **由遠端目錄 (例如 AWS Glue、Databricks Unity Catalog 和 Snowflake Horizon Catalog) 管理的 Cloud Storage 或 Amazon Simple Storage Service (Amazon S3) 資料**。使用[Lakehouse 執行階段目錄存取跨雲端資料](https://docs.cloud.google.com/lakehouse/docs/about-cross-cloud-data-access?hl=zh-tw)。Lakehouse 執行階段目錄的跨雲端資料存取功能可讓您直接從 Google Cloud 查詢其他雲端供應商的資料，不必遷移檔案或建構複雜的 ETL 管道。
+* **Azure Blob 儲存體或 Apache Iceberg 資料表並非由支援的遠端目錄管理，適用於 Lakehouse 執行階段目錄，可跨雲端存取資料**。繼續使用
+  [Iceberg JSON 中繼資料檔案建立 Apache Iceberg 外部資料表](#create-using-metadata-file)。
 
 ## 事前準備
 
-啟用 BigQuery Connection 和 BigQuery Reservation API。
+如果尚未啟用 BigQuery Connection 和 BigQuery Reservation API，請啟用這些 API。
 
 **啟用 API 時所需的角色**
 
-您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用情形管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+如要啟用 API，您必須具備 `serviceusage.services.enable` 權限。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
 [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=bigqueryconnection.googleapis.com%2C%5Cnbigqueryreservation.googleapis.com&%3Bredirect=https%3A%2F%2Fconsole.cloud.google.com&hl=zh-tw)
 
-* 如果您在 BigQuery 中使用 Spark 的預存程序建立 Iceberg 外部資料表，請務必按照下列步驟操作：
+* 如果您使用 BigQuery 中的 Spark 預存程序建立 Iceberg 外部資料表，請務必按照下列步驟操作：
 
   1. [建立 Spark 連線](https://docs.cloud.google.com/bigquery/docs/connect-to-spark?hl=zh-tw#create-spark-connection)。
   2. [為該連線設定存取控管機制](https://docs.cloud.google.com/bigquery/docs/connect-to-spark?hl=zh-tw#grant-access)。
@@ -67,7 +63,7 @@ BigQuery 管理員可以強制執行列層級和欄層級的存取控管，包�
 
 #### 所需權限
 
-如要建立 Iceberg 外部資料表，您必須具備下列權限：
+如要建立 Iceberg 外部資料表，必須具備下列權限：
 
 * `bigquery.tables.create`
 * `bigquery.connections.delegate`
@@ -75,13 +71,9 @@ BigQuery 管理員可以強制執行列層級和欄層級的存取控管，包�
 
 您或許還可透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)取得這些權限。
 
-## 使用 Lakehouse 執行階段目錄建立資料表
-
-建議使用 [Lakehouse 執行階段目錄](https://docs.cloud.google.com/biglake/docs/about-blms?hl=zh-tw)建立 Iceberg 外部資料表。
-
 ## 使用中繼資料檔案建立資料表
 
-您可以使用 [JSON 中繼資料檔案](https://iceberg.apache.org/spec/#table-metadata)建立 Iceberg 外部資料表。不過，我們不建議使用這種方法，因為您必須手動[更新 JSON 中繼資料檔案的 URI](#update-table-metadata)，才能讓 Iceberg 外部資料表保持最新狀態。如果 URI 未保持最新狀態，BigQuery 中的查詢可能會失敗，或提供與直接使用 Iceberg 目錄的其他查詢引擎不同的結果。
+您可以使用 [JSON 中繼資料檔案](https://iceberg.apache.org/spec/#table-metadata)建立 Iceberg 外部資料表。不過，您必須手動[更新 JSON 中繼資料檔案的 URI](#update-table-metadata)，才能讓 Iceberg 外部資料表保持在最新狀態。如果 URI 未保持最新狀態，BigQuery 中的查詢可能會失敗，或提供與直接使用 Iceberg 目錄的其他查詢引擎不同的結果。
 
 使用 [Spark 建立 Iceberg 資料表](https://docs.cloud.google.com/dataproc-metastore/docs/apache-iceberg?hl=zh-tw#iceberg-table-with-spark)時，系統會在您指定的 Cloud Storage bucket 中建立 Iceberg 資料表的中繼資料檔案。
 
@@ -102,12 +94,12 @@ BigQuery 管理員可以強制執行列層級和欄層級的存取控管，包�
 
 將 `uris` 值替換為特定資料表快照的最新 [JSON 中繼資料檔案](https://iceberg.apache.org/spec/#table-metadata)。
 
-您可以設定 `require_partition_filter` 旗標，啟用「必須使用分區篩選器」。
+您可以設定 `require_partition_filter` 標記，啟用「必須使用分區篩選器」。
 
 ### bq
 
-在指令列環境中，使用 [`bq mk --table` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#mk-table)和 `@connection` 修飾符，在 `--external_table_definition` 參數結尾指定要使用的連線。
-如要啟用必要分區篩選器，請使用 `--require_partition_filter`。
+在指令列環境中，使用 [`bq mk --table` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#mk-table)搭配 `@connection` 裝飾器，在 `--external_table_definition` 參數結尾指定要使用的連線。
+如要啟用「必須使用分區篩選器」，請使用 `--require_partition_filter`。
 
 ```
 bq mk   
@@ -121,7 +113,7 @@ bq mk
 
 更改下列內容：
 
-* `TABLE_FORMAT`：要建立的資料表格式
+* `TABLE_FORMAT`：要建立的表格格式
 
   在本例中為 `ICEBERG`。
 * `URI`：特定資料表快照的最新 [JSON 中繼資料檔案](https://iceberg.apache.org/spec/#table-metadata)。
@@ -132,11 +124,11 @@ bq mk
 
   + AWS 範例：`s3://mybucket/iceberg/metadata/1234.metadata.json`。
   + Azure 範例：`azure://mystorageaccount.blob.core.windows.net/mycontainer/iceberg/metadata/1234.metadata.json`。
-* `CONNECTION_PROJECT_ID`：包含[連線](https://docs.cloud.google.com/bigquery/docs/connect-to-spark?hl=zh-tw)的專案，用於建立 Iceberg 外部資料表，例如 `myproject`
+* `CONNECTION_PROJECT_ID`：包含要建立 Iceberg 外部資料表的[連線](https://docs.cloud.google.com/bigquery/docs/connect-to-spark?hl=zh-tw)的專案，例如 `myproject`
 * `CONNECTION_REGION`：包含要建立 Iceberg 外部資料表連線的區域，例如 `us`
 * `CONNECTION_ID`：資料表連線 ID，例如 `myconnection`
 
-  在 Google Cloud 控制台中[查看連線詳細資料](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw#view-connections)時，連線 ID 是「連線 ID」中顯示的完整連線 ID 最後一個部分的值，例如：`projects/myproject/locations/connection_location/connections/myconnection`
+  在 Google Cloud 控制台中[查看連線詳細資料](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw#view-connections)時，連線 ID 是「連線 ID」中顯示的完整連線 ID 最後一部分的值，例如：`projects/myproject/locations/connection_location/connections/myconnection`
 * `DATASET`：您要在其中建立資料表的 BigQuery 資料集名稱
 
   例如 `mydataset`。
@@ -156,7 +148,7 @@ bq mk
    bq mkdef --source_format=ICEBERG \
    "URI" > TABLE_DEFINITION_FILE
    ```
-2. 使用 [`bq update` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_update)並加上 `--autodetect_schema` 旗標：
+2. 使用 [`bq update` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_update)，並加上 `--autodetect_schema` 旗標：
 
    ```
    bq update --autodetect_schema --external_table_definition=TABLE_DEFINITION_FILE
@@ -165,7 +157,7 @@ bq mk
 
    更改下列內容：
 
-   * `URI`：您的 Cloud Storage URI，其中包含最新的 [JSON 中繼資料檔案](https://iceberg.apache.org/spec/#table-metadata)
+   * `URI`：Cloud Storage URI，內含最新的 [JSON 中繼資料檔案](https://iceberg.apache.org/spec/#table-metadata)
 
      例如 `gs://mybucket/us/iceberg/mytable/metadata/1234.metadata.json`。
    * `TABLE_DEFINITION_FILE`：包含資料表結構定義的檔案名稱
@@ -213,7 +205,7 @@ PATCH https://bigquery.googleapis.com/bigquery/v2/projects/PROJECT_ID/datasets/D
 
 ### 查詢歷來資料
 
-您可以使用 [`FOR SYSTEM_TIME AS OF` 子句](https://docs.cloud.google.com/bigquery/docs/access-historical-data?hl=zh-tw#query_data_at_a_point_in_time)，存取 Iceberg 中繼資料中保留的 Iceberg 外部資料表快照。
+您可以使用 [`FOR SYSTEM_TIME AS OF` 子句](https://docs.cloud.google.com/bigquery/docs/access-historical-data?hl=zh-tw#query_data_at_a_point_in_time)，存取保留在 Iceberg 中繼資料中的 Iceberg 外部資料表快照。
 
 任何外部資料表都不支援[時空旅行和容錯資料保留期限](https://docs.cloud.google.com/bigquery/docs/time-travel?hl=zh-tw)。
 
@@ -221,7 +213,7 @@ PATCH https://bigquery.googleapis.com/bigquery/v2/projects/PROJECT_ID/datasets/D
 
 BigQuery 會將 Iceberg 資料類型轉換為 BigQuery 資料類型，如下表所示：
 
-| **Iceberg 資料類型** | **BigQuery 資料類型** |
+| **Iceberg 資料類型** | **BigQuery 資料型別** |
 | --- | --- |
 | `boolean` | `BOOL` |
 | `int` | `INT64` |
@@ -248,27 +240,32 @@ BigQuery 會將 Iceberg 資料類型轉換為 BigQuery 資料類型，如下表�
 * 系統不支援使用 VPC Service Controls 的查詢，因此會產生 `NO_MATCHING_ACCESS_LEVEL` 等錯誤。
 * 使用讀取時合併的資料表有下列限制：
 
+  + 查詢最多可處理表格中總共 100,000 個刪除向量項目。如果是使用二進位刪除向量的 Iceberg 第 3 版資料表，與刪除向量相關聯的每個資料檔案都會計為一個刪除項目，並計入這個限制。
   + 每個資料檔案最多可與 10,000 個刪除檔案建立關聯。
   + 每個資料檔案最多可套用 10 萬次等值刪除作業。
-  + 如要解決這些限制，可以經常壓縮刪除的檔案、在 Iceberg 資料表上建立檢視區塊，避免經常變動的分區，或是使用位置刪除而非等值刪除。
-* BigQuery 支援使用所有 [Iceberg 分區轉換函式](https://iceberg.apache.org/spec/#partition-transforms)修剪資訊清單。如要瞭解如何修剪分區，請參閱「[查詢分區資料表](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables?hl=zh-tw)」。參照 Iceberg 外部資料表的查詢，必須在與分區資料欄比較的述詞中包含常值。
+  + 您可以經常壓縮刪除檔案和刪除向量，在 Iceberg 表格上建立檢視畫面，避免經常變動的分區，或篩選分區欄的查詢，減少掃描的資料檔案和刪除向量數量，藉此解決這些限制。
+* BigQuery 支援使用所有 [Iceberg 分區轉換函式](https://iceberg.apache.org/spec/#partition-transforms)修剪資訊清單。如要瞭解如何剪除分區，請參閱「[查詢分區資料表](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables?hl=zh-tw)」。參照 Iceberg 外部資料表的查詢，必須在與分區資料欄比較的述詞中包含常值。
 * 系統僅支援 Apache Parquet 資料檔案。
-* 系統不支援下列 [Iceberg 3 版](https://iceberg.apache.org/spec/#version-3-extended-types-and-capabilities)功能：
+* [彈性設定資料欄名稱](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#flexible-column-names)：
 
-  + 新資料類型：奈秒時間戳記(時區)、不明、變體、幾何、地理位置
+  + 如果 Iceberg 外部資料表是根據含有非英數字元的資料欄分區，BigQuery 可能無法從資訊清單中擷取分區中繼資料，導致系統掃描整個資料表。
+  + BigQuery 無法直接查詢含有結構字元 (例如點 `.`、錢號 `$`、方括號 `[]`、圓括號 `()` 或斜線 `/`) 的 Iceberg 資料表。如果工作流程需要將這類資料表登錄至 Lakehouse 執行階段目錄或目錄服務，以便專門搭配外部引擎 (例如 Spark 或 Trino) 使用，請與 [Cloud Customer Care](https://docs.cloud.google.com/bigquery/docs/getting-support?hl=zh-tw)聯絡，要求啟用專案層級功能。
+* 系統不支援下列 [Iceberg 第 3 版](https://iceberg.apache.org/spec/#version-3-extended-types-and-capabilities)功能：
+
+  + 新資料類型：奈秒時間戳記(時區)、不明、變數、幾何、地理
   + 初始預設值
-  + 表格加密金鑰
+  + 資料表加密金鑰
 
 ## 讀取時合併的費用
 
-以量計價的讀取時合併資料費用，是下列資料掃描量的總和：
+讀取時合併資料的隨選計費方式，是以下資料掃描量的總和：
 
-* 資料檔案中讀取的所有邏輯位元組 (包括標示為依位置刪除和等值刪除的資料列)。
+* 資料檔案中讀取的所有邏輯位元組 (包括標示為依位置刪除和依等式刪除的資料列)。
 * 載入等式刪除、位置刪除和刪除向量檔案時讀取的邏輯位元組，用於尋找資料檔案中已刪除的資料列。
 
 ## 必須使用分區篩選器
 
-您可以為 Iceberg 資料表啟用「require partition filter」(需要分區篩選器) 選項，要求使用述詞篩選器。啟用此選項後，如嘗試在未指定與每個資訊清單檔案一致的 `WHERE` 子句的情況下查詢資料表，將會產生下列錯誤：
+您可以為 Iceberg 資料表啟用「必須使用分區篩選器」選項，要求使用述詞篩選器。啟用這個選項後，如果嘗試查詢資料表時，未指定與每個資訊清單檔案一致的 `WHERE` 子句，系統會產生下列錯誤：
 
 ```
 Cannot query over table project_id.dataset.table without a
@@ -277,11 +274,11 @@ filter that can be used for partition elimination.
 
 每個資訊清單檔案至少需要一個適合用於分區排除的述詞。
 
-建立 Iceberg 資料表時，可以透過下列方式啟用 `require_partition_filter`：
+建立 Iceberg 表格時，您可以透過下列方式啟用 `require_partition_filter`：
 
 ### SQL
 
-使用 [`CREATE EXTERNAL TABLE` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#create_external_table_statement)。下列範例會建立名為 `TABLE` 的 Iceberg 外部資料表，並啟用必要的分區篩選器：
+使用 [`CREATE EXTERNAL TABLE` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#create_external_table_statement)。以下範例會建立名為 `TABLE` 的 Iceberg 外部資料表，並啟用「必須使用分區篩選器」：
 
 ```
   CREATE EXTERNAL TABLE TABLE
@@ -299,7 +296,7 @@ filter that can be used for partition elimination.
 * `PROJECT_ID`：包含要建立資料表的專案 ID。
 * `REGION`：要建立 Iceberg 資料表的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
 * `CONNECTION_ID`：[連線 ID](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw#view-connections)。例如：`myconnection`。
-* `URI`：包含最新 [JSON 中繼資料檔案](https://iceberg.apache.org/spec/#table-metadata)的 Cloud Storage URI。
+* `URI`：Cloud Storage URI，內含最新的 [JSON 中繼資料檔案](https://iceberg.apache.org/spec/#table-metadata)。
 
   例如 `gs://mybucket/us/iceberg/mytable/metadata/1234.metadata.json`。
 
@@ -310,9 +307,9 @@ filter that can be used for partition elimination.
 
 ### bq
 
-使用 `@connection` 裝飾器搭配 [`bq mk --table` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#mk-table)，在 `--external_table_definition` 參數結尾指定要使用的連線。
-使用 `--require_partition_filter` 啟用必要分區篩選器。
-下列範例會建立名為 `TABLE` 的 Iceberg 外部資料表，並啟用「需要分區篩選器」：
+使用 [`bq mk --table` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#mk-table)和 `@connection` 裝飾器，在 `--external_table_definition` 參數結尾指定要使用的連線。
+使用 `--require_partition_filter` 啟用「必須使用分區篩選器」。
+以下範例會建立名為 `TABLE` 的 Iceberg 外部資料表，並啟用「必須使用分區篩選器」：
 
 ```
 bq mk \
@@ -333,24 +330,24 @@ bq mk \
   + AWS 範例：`s3://mybucket/iceberg/metadata/1234.metadata.json`。
   + Azure 範例：`azure://mystorageaccount.blob.core.windows.net/mycontainer/iceberg/metadata/1234.metadata.json`。
 * `CONNECTION_PROJECT_ID`：包含要建立 Iceberg 外部資料表之[連線](https://docs.cloud.google.com/bigquery/docs/connect-to-spark?hl=zh-tw)的專案，例如 `myproject`
-* `CONNECTION_REGION`：包含要建立 Iceberg 外部資料表連線的[區域](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。例如：`us`。
+* `CONNECTION_REGION`：包含連線的[區域](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)，用於建立 Iceberg 外部資料表。例如：`us`。
 * `CONNECTION_ID`：[連線 ID](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw#view-connections)。例如：`myconnection`。
 
-  在 Google Cloud 控制台中[查看連線詳細資料](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw#view-connections)時，連線 ID 是「連線 ID」中顯示的完整連線 ID 最後一個部分的值，例如：`projects/myproject/locations/connection_location/connections/myconnection`
+  在 Google Cloud 控制台中[查看連線詳細資料](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw#view-connections)時，連線 ID 是「連線 ID」中顯示的完整連線 ID 最後一部分的值，例如：`projects/myproject/locations/connection_location/connections/myconnection`
 * `DATASET`：BigQuery 的名稱
 
-  包含要更新資料表的資料集。例如 `mydataset`。
+  包含要更新表格的資料集。例如 `mydataset`。
 * `EXTERNAL_TABLE`：要建立的資料表名稱
 
   例如 `mytable`。
 
-您也可以更新 Iceberg 資料表，啟用必要分區篩選器。
+您也可以更新 Iceberg 資料表，啟用「必須使用分區篩選器」。
 
-如果您在建立分區資料表時未啟用「需要分區篩選器」選項，可以更新該資料表以新增選項。
+建立分區資料表時，如果未啟用「必須使用分區篩選器」選項，可以更新資料表來新增該選項。
 
 ### bq
 
-使用 `bq update` 指令並加上 `--require_partition_filter` 旗標。
+使用 `bq update` 指令並提供 `--require_partition_filter` 旗標。
 
 例如：
 
@@ -374,11 +371,11 @@ bq update --require_partition_filter PROJECT_ID:DATASET.TABLE
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-16 (世界標準時間)。
+上次更新時間：2026-10-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-16 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]

@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -16,43 +16,43 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 共用 VPC Service Controls 規則
 
-本文說明輸入和輸出規則，讓 BigQuery sharing (原為 Analytics Hub) 中的發布者和訂閱者，存取具有 VPC Service Controls 邊界的專案資料。本文假設您已熟悉 [VPC Service Controls 範圍](https://docs.cloud.google.com/vpc-service-controls/docs/service-perimeters?hl=zh-tw)、[共用資料集](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction?hl=zh-tw#shared_datasets)、[資料交換](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction?hl=zh-tw#data_exchanges)、[資訊主頁](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction?hl=zh-tw#listings)和[連結資料集](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction?hl=zh-tw#linked_datasets)。
+透過輸入和輸出規則，BigQuery sharing (舊稱 Analytics Hub) 的發布者和訂閱者，可以存取受 VPC Service Controls 範圍保護的專案資料。設定這些規則前，請先熟悉 [VPC Service Controls perimeter](https://docs.cloud.google.com/vpc-service-controls/docs/service-perimeters?hl=zh-tw)、[共用資料集](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction?hl=zh-tw#shared_datasets)、[資料交換](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction?hl=zh-tw#data_exchanges)、[清單](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction?hl=zh-tw#listings)和[連結資料集](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction?hl=zh-tw#linked_datasets)。
 
-*呼叫端專案*是指啟動要求的網路或用戶端 Google Cloud 專案，例如 SQL 查詢或 Google Cloud CLI 指令。
+「*呼叫端專案*」 Google Cloud 是發出要求的網路或用戶端專案，例如 SQL 查詢或 Google Cloud CLI 指令。
 
-## 建立資料交換庫
+## 建立資料交換
 
-在下圖中，包含資料交換和共用資料集的專案位於不同的服務安全防護範圍：
+在下圖中，包含資料交換和共用資料集的專案位於不同的 service perimeter：
 
-**圖 1.** 建立資料交換的 VPC Service Controls 規則。
+**圖 1.**建立資料交換作業的 VPC Service Controls 規則。
 
 圖 1 標示了下列元件：
 
 * **呼叫端**：BigQuery 共用管理員。
 * **專案 R**：呼叫端專案。
-* **專案 E**：主機代管資料交換庫和清單。
+* **專案 E**：託管資料交換和清單。
 
-身為 BigQuery sharing 管理員，如果您在與呼叫端專案不同的專案中[建立資料交換](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges?hl=zh-tw#create-exchange)，則必須新增下列輸入和輸出規則：
+如果您是 BigQuery sharing 管理員，在呼叫端專案以外的專案中[建立資料交換](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges?hl=zh-tw#create-exchange)時，必須新增下列輸入和輸出規則：
 
 | **專案** | **規則** |
 | --- | --- |
 | Project R | 專案 E 的輸出規則 |
 | 專案 E (資料交換) | 專案 R 的輸入規則 |
 
-## 建立商家資訊
+## 建立產品資訊
 
-在下圖中，包含資料交換和共用資料集的專案位於不同的服務安全防護範圍：
+在下圖中，包含資料交換和共用資料集的專案位於不同的 service perimeter：
 
-**圖 2**：建立房源資訊的 VPC Service Controls 規則。
+**圖 2**：建立產品資訊的 VPC Service Controls 規則。
 
 圖 2 標示了下列元件：
 
-* **呼叫端**：BigQuery 共用管理員或發布者。
+* **呼叫端**：BigQuery sharing 管理員或發布者。
 * **專案 R**：呼叫端專案。
-* **專案 E**：主機代管資料交換庫和清單。
-* **專案 S**：代管共用資料集。
+* **專案 E**：託管資料交換和清單。
+* **專案 S**：託管共用資料集。
 
-如果您在資料交易所建立的資訊公開項目與共用資料集位於不同專案，則必須新增下列輸入和輸出規則，允許 BigQuery 共用發布者建立資訊公開項目：
+在資料交換作業中建立資訊清單時，如果資料交換作業與共用資料集位於不同專案，您必須新增下列輸入和輸出規則，讓 BigQuery sharing 發布端建立資訊清單：
 
 | **專案** | **規則** |
 | --- | --- |
@@ -62,64 +62,110 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 訂閱產品資訊
 
-在下圖中，包含商家資訊和該商家資訊連結資料集的專案位於不同的服務範圍：
+在下圖中，包含清單和連結資料集的專案位於不同的 service perimeter：
 
-**圖 3**：訂閱資訊的 VPC Service Controls 規則。
+**圖 3**：訂閱清單的 VPC Service Controls 規則。
 
 圖 3 標示了下列元件：
 
-* **呼叫端**：BigQuery 共用訂閱者。
+* **呼叫端**：BigQuery sharing 訂閱者。
 * **專案 R**：呼叫端專案。
-* **專案 E**：主機代管資料交換庫和清單。
-* **專案 L**：代管連結的資料集。
+* **專案 E**：託管資料交換和清單。
+* **專案 L**：託管連結的資料集。
 
-如果您是 BigQuery 共用訂閱者，且訂閱的資料交易所屬專案與您的專案不同，則必須新增下列輸入和輸出規則：
+如果您是 BigQuery sharing 訂閱者，且訂閱的資料交換項目位於其他專案，則必須新增下列輸入和輸出規則：
 
 | **專案** | **規則** |
 | --- | --- |
 | Project R | 專案 E 的輸出規則  專案 L 的輸出規則 |
-| 專案 E (房源) | 專案 L 的輸出規則  專案 R 的輸入規則 |
+| 專案 E (產品資訊) | 專案 L 的輸出規則  專案 R 的輸入規則 |
 | 專案 L (連結的資料集) | 專案 E 的輸出規則  專案 R 的輸入規則 |
+
+## 更新商店資訊
+
+更新清單時 (例如修改受限匯出政策)，BigQuery 共用功能會使用背景工作站，將這些變更套用至相關聯的連結資料集。如果 Google Cloud 專案受到 VPC Service Controls 範圍保護，且設有 IP 限制，源自 Google 基礎架構的背景工作站可能會遭到封鎖，導致連結的資料集無法成功同步。
+
+如要讓背景 worker 更新連結的資料集，您必須明確設定輸入或輸出規則，讓執行 API 呼叫的主體使用者或主體服務帳戶略過 IP 限制。
+
+如要修改訂閱者專案 perimeter 的輸入政策，請新增輸入規則，允許呼叫主體從任何來源 IP 位址 (`*`) 存取 `bigquery.googleapis.com` 服務：
+
+```
+ingressFrom:
+  sources:
+    - accessLevel: "*"
+  identities:
+    - "user:CALLING_USER_EMAIL"
+    - "serviceAccount:AUTOMATION_SA_EMAIL"
+ingressTo:
+  resources:
+    - "projects/SUBSCRIBER_PROJECT_NUMBER"
+  operations:
+    - serviceName: "bigquery.googleapis.com"
+      methodSelectors:
+        - method: "*"
+```
+
+或者，如要修改發布者 perimeter 的輸出政策，請確認呼叫身分已明確新增至輸出規則的 `identities` 清單中，並導向訂閱者專案：
+
+```
+egressFrom:
+  identities:
+    - "user:CALLING_USER_EMAIL"
+    - "serviceAccount:AUTOMATION_SA_EMAIL"
+egressTo:
+  resources:
+    - "projects/SUBSCRIBER_PROJECT_NUMBER"
+  operations:
+    - serviceName: "bigquery.googleapis.com"
+      methodSelectors:
+        - method: "*"
+```
+
+更改下列內容：
+
+* `CALLING_USER_EMAIL`：執行 API 呼叫來更新產品資訊的使用者電子郵件地址。如果是由真人使用者進行更新，請加入這個身分。
+* `AUTOMATION_SA_EMAIL`：服務帳戶的電子郵件地址，該帳戶會執行 API 呼叫來更新產品資訊。如果是由自動化程序或指令碼進行更新，請加入這個身分。
+* `SUBSCRIBER_PROJECT_NUMBER`：訂閱者專案的專案編號，該專案包含連結的資料集。
 
 ## 查詢連結資料集中的資料表
 
-在下圖中，呼叫端專案和包含連結資料集的專案位於不同的服務範圍：
+在下圖中，呼叫端專案和包含連結資料集的專案位於不同的 service perimeter：
 
 **圖 4**：查詢連結資料集的 VPC Service Controls 規則。
 
 圖 4 標示了下列元件：
 
-* **呼叫端**：BigQuery 共用訂閱者或連結資料集的任何 BigQuery 工作使用者。
+* **呼叫端**：BigQuery sharing 訂閱者，或連結資料集的任何 BigQuery 工作使用者。
 * **專案 R**：呼叫端專案。
-* **專案 L**：代管連結的資料集。
-* **專案 V**：代管含有資料表的共用資料集。
+* **專案 L**：託管連結的資料集。
+* **專案 V**：託管含有資料表的共用資料集。
 
-如果您是 BigQuery 共用訂閱者，在連結的資料集中查詢資料表時，必須新增下列輸入和輸出規則：
+當您以 BigQuery sharing 訂閱者的身分，查詢連結資料集中的資料表時，必須新增下列輸入和輸出規則：
 
 | **專案** | **規則** |
 | --- | --- |
 | Project R | 專案 L 的輸出規則 |
 | 專案 L (連結的資料集) | 專案 R 的輸入規則 |
 
-## 查詢連結資料集中的檢視區塊
+## 查詢連結資料集中的檢視表
 
-本節說明查詢連結資料集中的檢視區塊時，所需的 VPC Service Controls 規則。規則會因檢視區塊及其基礎資料表是否位於同一專案或不同專案而異。
+本節說明查詢連結資料集中的檢視表時，必須遵守的 VPC Service Controls 規則。規則會因檢視表及其基礎資料表是否位於相同專案而異。
 
 ### 情境 1
 
-在下圖中，包含連結資料集的專案，以及與檢視區塊相關聯的基礎資料表，位於不同的服務安全防護範圍。檢視區塊 (專案 S) 和與檢視區塊相關聯的基礎資料表 (專案 V) 位於不同專案中：
+在下圖中，包含連結資料集的專案，以及與檢視表相關聯的基礎資料表，位於不同的 service perimeter。檢視表 (專案 S) 和與檢視表相關聯的基礎資料表 (專案 V) 位於不同專案：
 
-**圖 5.** 查詢連結資料集中的檢視區塊時，適用的 VPC Service Controls 規則。
+**圖 5.** 查詢連結資料集內檢視表的 VPC Service Controls 規則。
 
 圖 5 標示了下列元件：
 
-* **呼叫端**：BigQuery 共用訂閱者或連結資料集的任何 BigQuery 工作使用者。
+* **呼叫端**：BigQuery sharing 訂閱者，或連結資料集的任何 BigQuery 工作使用者。
 * **專案 R**：呼叫端專案。
-* **專案 L**：代管連結的資料集。
-* **專案 S**：代管共用資料集。
-* **專案 V**：代管包含與檢視區塊相關聯基本資料表的資料集。
+* **專案 L**：託管連結的資料集。
+* **專案 S**：託管共用資料集。
+* **專案 V**：託管資料集，其中包含與檢視表相關聯的基礎資料表。
 
-如果您是 BigQuery 共用訂閱者，在連結的資料集中查詢檢視區塊時，必須新增下列輸入和輸出規則：
+如果您是 BigQuery sharing 訂閱者，在連結的資料集中查詢檢視表時，必須新增下列輸入和輸出規則：
 
 | **專案** | **規則** |
 | --- | --- |
@@ -129,18 +175,18 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### 情境 2
 
-在下圖中，檢視區塊 (專案 V) 和與檢視區塊 (專案 V) 相關聯的基礎資料表位於同一個專案中：
+在下圖中，檢視表 (Project V) 和與檢視表 (Project V) 相關聯的基礎資料表位於同一個專案中：
 
-**圖 6**：查詢連結資料集中的檢視區塊時，適用的 VPC Service Controls 規則。
+**圖 6**：查詢連結資料集內檢視表的 VPC Service Controls 規則。
 
 圖 6 標示了下列元件：
 
-* **呼叫端**：BigQuery 共用訂閱者或連結資料集的任何 BigQuery 工作使用者。
+* **呼叫端**：BigQuery sharing 訂閱者，或連結資料集的任何 BigQuery 工作使用者。
 * **專案 R**：呼叫端專案。
-* **專案 L**：代管連結的資料集。
-* **專案 V**：同時代管檢視區塊和與檢視區塊相關聯的基礎資料表。
+* **專案 L**：託管連結的資料集。
+* **專案 V**：同時託管檢視表和與檢視表相關聯的基礎資料表。
 
-如果您是 BigQuery 共用訂閱者，在連結的資料集中查詢檢視區塊時，必須新增下列輸入和輸出規則：
+如果您是 BigQuery sharing 訂閱者，在連結的資料集中查詢檢視表時，必須新增下列輸入和輸出規則：
 
 | **專案** | **規則** |
 | --- | --- |
@@ -149,20 +195,20 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 查詢連結資料集中的授權檢視表
 
-在下圖中，授權檢視區塊和與授權檢視區塊 (專案 V) 相關聯的基礎資料表位於同一個專案中：
+在下圖中，授權檢視表和與授權檢視表 (專案 V) 相關聯的基礎資料表位於同一個專案中：
 
-**圖 7.** 查詢連結資料集中的檢視區塊時，適用的 VPC Service Controls 規則。
+**圖 7.**查詢連結資料集內檢視表的 VPC Service Controls 規則。
 
 圖 7 標示了下列元件：
 
-* **呼叫端**：BigQuery 共用訂閱者或連結資料集的任何 BigQuery 工作使用者。
+* **呼叫端**：BigQuery sharing 訂閱者，或連結資料集的任何 BigQuery 工作使用者。
 * **專案 R**：呼叫端專案。
-* **專案 L**：代管連結的資料集。
-* **專案 V**：同時代管已授權的檢視區塊，以及與該檢視區塊相關聯的基礎資料表。
+* **專案 L**：託管連結的資料集。
+* **專案 V**：託管授權檢視表和與檢視表相關聯的基礎資料表。
 
-**注意：** 如果共用資料集和授權檢視區塊相關聯的基礎資料表不在同一個專案和 VPC Service Controls 範圍內，服務範圍會拒絕訂閱者的查詢。如要解決這個問題，請確認共用資料集和與授權檢視畫面相關聯的基底資料表位於同一個專案中。
+**注意：** 如果共用資料集和與授權檢視表相關聯的基礎資料表不在同一個專案和 VPC Service Controls service perimeter，VPC Service Controls service perimeter 會拒絕訂閱者的查詢。如要解決這個問題，請確認共用資料集和與授權檢視表相關聯的基礎資料表位於同一個專案。
 
-如果您是 BigQuery 共用訂閱者，在連結的資料集中查詢檢視區塊時，必須新增下列輸入和輸出規則：
+如果您是 BigQuery sharing 訂閱者，在連結的資料集中查詢檢視表時，必須新增下列輸入和輸出規則：
 
 | **專案** | **規則** |
 | --- | --- |
@@ -171,7 +217,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 限制
 
-BigQuery 共用功能不支援[以方法為準的規則](https://docs.cloud.google.com/vpc-service-controls/docs/ingress-egress-rules?hl=zh-tw)。如要啟用方法規則，必須允許所有方法。例如：
+BigQuery 共用功能不支援[以方法為基礎的規則](https://docs.cloud.google.com/vpc-service-controls/docs/ingress-egress-rules?hl=zh-tw)。您必須允許所有方法，才能啟用以方法為依據的規則。例如：
 
 ```
           ingressTo:
@@ -183,7 +229,7 @@ BigQuery 共用功能不支援[以方法為準的規則](https://docs.cloud.goog
             - projects/PROJECT_ID
 ```
 
-如果 BigQuery 資源也受到服務範圍保護，您必須允許 BigQuery 服務的輸入和輸出規則。建立資料交換時，不一定要允許輸入和輸出規則。BigQuery 的進入和退出規則與 BigQuery 共用規則類似。例如：
+如果 BigQuery 資源也受到 service perimeter 保護，您必須允許 BigQuery 服務的輸入和輸出規則。建立資料交換時，不一定要允許輸入和輸出規則。BigQuery 的輸入和輸出規則與 BigQuery sharing 類似。例如：
 
 ```
           ingressTo:
@@ -200,8 +246,8 @@ BigQuery 共用功能不支援[以方法為準的規則](https://docs.cloud.goog
 * 瞭解如何[排解 VPC Service Controls 問題](https://docs.cloud.google.com/vpc-service-controls/docs/troubleshooting?hl=zh-tw)。
 * 瞭解[輸入和輸出規則](https://docs.cloud.google.com/vpc-service-controls/docs/ingress-egress-rules?hl=zh-tw)。
 * 瞭解如何[設定輸入和輸出政策](https://docs.cloud.google.com/vpc-service-controls/docs/configuring-ingress-egress-policies?hl=zh-tw)。
-* 瞭解如何[建立房源資訊](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-listings?hl=zh-tw#create_a_listing)。
-* 瞭解如何[訂閱房源](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings?hl=zh-tw#subscribe-listings)。
+* 瞭解如何[建立產品資訊](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-listings?hl=zh-tw#create_a_listing)。
+* 瞭解如何[訂閱產品資訊](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings?hl=zh-tw#subscribe-listings)。
 * 瞭解[共用稽核記錄](https://docs.cloud.google.com/bigquery/docs/analytics-hub-audit-logging?hl=zh-tw)。
 
 
@@ -211,11 +257,11 @@ BigQuery 共用功能不支援[以方法為準的規則](https://docs.cloud.goog
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-13 (世界標準時間)。
+上次更新時間：2026-10-20 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-13 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-20 (世界標準時間)。"],[],[]]

@@ -1,6 +1,6 @@
-自 2026 年 4 月 20 日起，BigLake 现在称为 Lakehouse for Apache Iceberg。BigLake metastore 现已更名为 Lakehouse 运行时目录。Lakehouse API、客户端库、CLI 命令和 IAM 名称保持不变，仍引用 BigLake。
+自 2026 年 4 月 20 日起，BigLake 现已更名为 Lakehouse。BigLake metastore 现已更名为 Lakehouse 运行时目录。Lakehouse API、客户端库、CLI 命令和 IAM 名称保持不变，仍引用 BigLake。
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-cn)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-cn)
@@ -30,7 +30,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    **启用 API 所需的角色**
 
-   如需启用 API，您需要拥有 `serviceusage.services.enable` 权限。如果您创建了项目，则可能已经通过 Owner 角色 (`roles/owner`) 获得了此权限。否则，您可以通过 Service Usage Admin 角色 (`roles/serviceusage.serviceUsageAdmin`) 获得此权限。[了解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-cn)。
+   如需启用 API，您需要拥有 Service Usage Admin IAM 角色 (`roles/serviceusage.serviceUsageAdmin`)，该角色包含 `serviceusage.services.enable` 权限。[了解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-cn)。
 
    [启用 API](https://console.cloud.google.com/apis/enableflow?apiid=biglake.googleapis.com&hl=zh-cn)
 
@@ -41,7 +41,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 * 执行管理任务，例如管理目录用户访问权限、存储访问权限和目录的凭证自动售卖模式：
   + 针对项目的 [BigLake Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake?hl=zh-cn#biglake.admin)  (`roles/biglake.admin`) 角色
   + 针对所有关联的 Cloud Storage 存储分区的 [Storage Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/storage?hl=zh-cn#storage.admin)  (`roles/storage.admin`) 角色。
-* 在 Lakehouse 目录中注册表：项目的 [BigLake Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake?hl=zh-cn#biglake.admin)  (`roles/biglake.admin`) 角色。
+* 在 BigLake 目录中注册表：项目的 [BigLake Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake?hl=zh-cn#biglake.admin)  (`roles/biglake.admin`) 角色。
 * 在凭据自动售卖模式下读取表数据：
   项目的 [BigLake Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake?hl=zh-cn#biglake.viewer)  (`roles/biglake.viewer`) 角色。如果您使用 Managed Service for Apache Spark、Managed Service for Apache Spark 或 Dataflow 等查询引擎读取表数据，请向您用于在该引擎中运行作业的服务账号授予此角色。
 * 以凭据自动售卖模式写入表数据：项目的 [BigLake Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake?hl=zh-cn#biglake.editor)  (`roles/biglake.editor`) 角色。如果您使用 Managed Service for Apache Spark、Managed Service for Apache Spark 或 Dataflow 等查询引擎来写入表数据，请向您用于在该引擎中运行作业的服务账号授予此角色。
@@ -65,6 +65,7 @@ Apache Iceberg REST 目录端点受以下限制：
 **一般限制**
 
 * 支持 Apache Iceberg V2 表（正式版）和 V3 表（预览版）。不支持 Iceberg V1 表。在使用 Apache Iceberg REST 目录端点处理现有 V1 表之前，您必须将这些表升级到受支持的版本。
+* 使用 Compute Engine 2.3 映像版本 2.3.16 及更高版本的 Managed Service for Apache Spark 时，只有在搭配 BigQuery 目录联合使用的情况下才支持 Trino。
 * 使用凭据贩售模式时，如果查询引擎允许您为目录连接设置 `io-impl` 属性，则必须将其设置为 `org.apache.iceberg.gcp.gcs.GCSFileIO`。
 * 目前，凭据贩售模式不支持[分层命名空间](https://docs.cloud.google.com/storage/docs/hns-overview?hl=zh-cn)存储分区。
 
@@ -73,7 +74,7 @@ Apache Iceberg REST 目录端点受以下限制：
 * 您无法使用 BigQuery 数据定义语言 (DDL) 或数据操纵语言 (DML) 语句在 Apache Iceberg REST 目录端点中创建或修改表。您可以使用 BigQuery API（通过 bq 命令行工具或客户端库）修改这些表，但这样做可能会导致更改与外部引擎不兼容。
 * 通过 Apache Iceberg REST 目录端点管理的表不支持精细访问权限控制 (FGAC)，例如行级和列级安全性。
 * 禁止将 Iceberg 表属性 `write.data.path` 或 `write.metadata.path` 设置为非默认值。
-* 表路径必须嵌套在父命名空间路径（例如 `gs://{namespace_path}/.../{table_name}`）内。为防止冲突并提高安全性，系统会自动在生成的位置附加随机字符串后缀（例如 `gs://{namespace_path}/{table_name}/{random_suffix}`）。
+* 表路径必须嵌套在父命名空间路径（例如 `gs://{namespace_path}/.../{table_name}`）中。为防止冲突并提高安全性，系统会自动在生成的位置附加随机字符串后缀（例如 `gs://{namespace_path}/{table_name}/{random_suffix}`）。
 
 **数据限制**
 
@@ -84,29 +85,35 @@ Apache Iceberg REST 目录端点受以下限制：
 
 * 在 BigQuery 中，无法使用五部分名称标识符查询 Apache Iceberg 元数据表（例如 `.snapshots` 或 `.files`）；您可以使用 Spark 查询这些表。
 
-## 注意事项
+## 设置 Iceberg REST Catalog 端点
 
-创建目录时，请考虑以下配置。
+在设置目录之前，建议您先阅读 [Apache Iceberg REST 目录端点概览](https://docs.cloud.google.com/lakehouse/docs/understand-catalog-types?hl=zh-cn)，了解其资源层次结构、目录类型和命名结构。
+
+在 Lakehouse 运行时目录中使用 Apache Iceberg REST 目录端点时，应遵循以下一般步骤：
+
+1. 根据 Iceberg REST 目录端点概览，选择目录类型。这可以配置[*多存储桶 (`bl://`)*](https://docs.cloud.google.com/lakehouse/docs/understand-catalog-types?hl=zh-cn#storage-multiple-buckets) 目录（推荐）或[*单存储桶 (`gs://`)*](https://docs.cloud.google.com/lakehouse/docs/understand-catalog-types?hl=zh-cn#storage-single-bucket) 目录。
+2. 创建指向仓库位置的目录。
+3. 将客户端应用配置为使用 Apache Iceberg REST 目录端点。
+4. 创建命名空间或架构来整理表。
+5. 使用配置的客户端创建和查询表。
+
+### 注意事项
+
+请考虑以下凭据模式和存储配置选项。
+
+#### 凭据模式（范围）
+
+您可以创建使用最终用户凭据或凭据贩售模式的目录。
+
+* **最终用户凭据**：目录会将访问它的最终用户的身份传递给 Cloud Storage 以进行授权检查。
+* **凭据自动售卖模式**：一种存储访问权限委托机制，可让 Lakehouse 运行时目录管理员直接控制 Lakehouse 运行时目录资源的权限，从而无需目录用户直接访问 Cloud Storage 存储分区。借助此功能，Google Cloud 的*Lakehouse*管理员可以向用户授予对特定数据文件的权限。
 
 #### 存储桶类型
 
 您可以选择创建单存储桶目录或多存储桶目录。
 
-* **多存储桶 (`bl://`) 目录（推荐）**：此配置可让您的目录关联多个存储桶，并让您独立于任何存储桶名称来命名目录。
+* **多存储桶 (`bl://`)（推荐）**：此配置可让您的目录关联多个存储桶，并让您独立于任何存储桶名称来命名目录。 Google Cloud 控制台不支持多存储桶目录。
 * **单存储桶 (`gs://`)**：此配置会将目录限制为单个存储桶，并将目录名称锁定为存储桶名称。不建议用于新项目。
-
-#### 凭据模式（范围）
-
-您可以创建使用最终用户凭据或[凭据贩售模式](https://docs.cloud.google.com/lakehouse/docs/understand-catalog-types?hl=zh-cn#storage-single-bucket)的目录。
-
-* **最终用户凭据**：目录会将访问它的最终用户的身份传递给 Cloud Storage 以进行授权检查。
-* **凭据自动售卖模式**：一种存储访问权限委托机制，可让 Lakehouse 运行时目录管理员直接控制 Lakehouse 运行时目录资源的权限，从而无需目录用户直接访问 Cloud Storage 存储分区。借助此功能，Google Cloud 的*Lakehouse*管理员可以向用户授予对特定数据文件的权限。
-
-  自动预配的 Lakehouse 运行时目录服务账号需要对所有关联的 Cloud Storage 存储分区具有明确的 Storage Object User 角色 (`roles/storage.objectUser`)。默认情况下，它没有任何访问权限。
-  如果没有此角色，出售的凭据将没有足够的范围来执行存储写入操作。如果您使用 `gcloud` 或 Terraform 等工具，则必须手动授予此角色。
-
-  自动配置的目录服务账号的创建是[最终一致的](https://wikipedia.org/wiki/Eventual_consistency)。
-  这意味着服务账号需要一段时间才能在整个系统中生效。如果您尝试在创建服务账号后立即向其授予角色，则请求可能会失败。如需了解访问权限更改传播的平均时间，请参阅[访问权限更改传播](https://docs.cloud.google.com/iam/docs/access-change-propagation?hl=zh-cn)。
 
 #### 位置
 
@@ -115,63 +122,24 @@ Apache Iceberg REST 目录端点受以下限制：
 * 创建命名空间时，系统会自动使用与目录相同的区域。
 * 如果您的目录使用多区域存储桶，并且您想将其与 BigQuery 多区域（`US` 或 `EU`）搭配使用，则必须删除并重新创建目录，以指定主要位置。
 
-## 设置 Iceberg REST Catalog 端点
-
-在设置目录之前，建议您先阅读 [Apache Iceberg REST 目录端点概览](https://docs.cloud.google.com/lakehouse/docs/understand-catalog-types?hl=zh-cn)，了解其资源层次结构、目录类型和命名结构。
-
-在 Lakehouse 运行时目录中使用 Apache Iceberg REST 目录端点时，一般需要遵循以下步骤：
-
-1. 选择目录类型 - [多存储桶 (`bl://`)](https://docs.cloud.google.com/lakehouse/docs/understand-catalog-types?hl=zh-cn#storage-multiple-buckets) 目录（推荐）或[单存储桶 (`gs://`)](https://docs.cloud.google.com/lakehouse/docs/understand-catalog-types?hl=zh-cn#storage-single-bucket) 目录。
-2. 创建指向仓库位置的目录。
-3. 将客户端应用配置为使用 Apache Iceberg REST 目录端点。
-4. 创建命名空间或架构来整理表。
-5. 使用配置的客户端创建和查询表。
-
 ### 创建目录
 
 请按照以下步骤根据您的首选凭据模式和存储桶类型创建目录。
 
+### 最终用户凭据
+
 ### 控制台
 
-**创建多存储桶 (`bl://`) 目录（推荐）**
-
-通过此配置，您的目录可以关联多个存储桶，并且您可以独立于任何存储桶名称来命名目录。
+**注意**： Google Cloud 控制台不支持多存储桶 (`bl://`) 目录（推荐）。如需创建多存储桶 (`bl://`) 商品目录（推荐），请使用 **`gcloud`** 或 REST API。
 
 1. 在 Google Cloud 控制台中打开 **Lakehouse** 页面。
 
    [前往 Lakehouse](https://console.cloud.google.com/biglake?hl=zh-cn)
 2. 点击**创建目录**。
-3. 对于**目录类型**，选择 **Iceberg Rest 目录**。
-4. 对于 **Lakehouse 目录存储桶选项**，选择**多存储桶目录**。
-5. 对于**默认目录 Cloud Storage 路径**，请输入或浏览要与目录搭配使用的 Cloud Storage 路径。
-6. 在**目录 ID** 字段中，输入目录的自定义名称。
-7. 对于**主要位置**，选择一个位置。位置必须靠近主存储桶的区域。
-8. 点击**继续**。
-9. 在**数据路径**这一步中，根据需要添加其他 Cloud Storage 路径。
-10. 点击**继续**。
-11. 对于**身份验证方法**，请选择**最终用户凭证**或**凭证分发模式**。
-12. 点击**创建**。
-
-    系统会创建您的目录，并打开**目录详情**页面。
-13. 如果您选择了**凭据自动售卖模式**，请执行以下额外步骤：
-
-    1. 在**身份验证方法**下，点击**设置存储桶权限**。
-    2. 在对话框中，点击**确认**。
-
-#### 创建单存储桶 (`gs://`) 目录
-
-**注意**：强烈建议新项目不要使用单存储桶配置。此配置会将目录限制为单个存储桶，并将目录名称锁定为存储桶名称。
-
-1. 对于**目录类型**，选择 **Iceberg Rest 目录**。
-2. 对于 **Lakehouse 目录存储桶选项**，选择**单个存储桶目录**。
-3. 对于**默认目录 Cloud Storage 路径**，请输入或浏览要与目录搭配使用的 Cloud Storage 路径。
-   （对于单存储桶 (`gs://`) 目录，每个存储桶只能有一个目录，且目录名称与存储桶名称一致）。
-4. 点击**继续**。
-5. 对于**身份验证方法**，请选择**最终用户凭证**或**凭证分发模式**。
+3. 在**目录类型**部分，选择 **Cloud Storage 存储桶**。
+4. 输入或浏览要与目录搭配使用的 Cloud Storage 存储桶（对于单存储桶 [`gs://`] 目录，每个存储桶只能有一个目录，且目录名称与存储桶名称一致）。
+5. 对于**身份验证方法**，选择**最终用户凭据**。
 6. 点击**创建**。
-7. 如果您选择了**凭据自动售卖模式**，请执行以下额外步骤：
-   1. 在**身份验证方法**下，点击**设置存储桶权限**。
-   2. 在对话框中，点击**确认**。
 
 ### gcloud
 
@@ -187,27 +155,14 @@ gcloud biglake iceberg catalogs create \
     --project PROJECT_ID \
     --catalog-type biglake \
     --default-location DEFAULT_LOCATION \
-    --credential-mode CREDENTIAL_MODE \
     [--restricted-locations RESTRICTED_LOCATIONS] \
+    --credential-mode end-user \
     [--primary-location LOCATION]
 ```
 
-替换以下内容：
+**创建单存储桶 (`gs://`) 目录**
 
-* `CATALOG_NAME`：目录的名称。对于多存储桶 (`bl://`) 目录（推荐），这是您的自定义目录名称。对于单存储桶 (`gs://`) 目录，此值与 REST 目录使用的 Cloud Storage 存储桶 ID 相匹配。
-* `PROJECT_ID`： Google Cloud项目 ID。
-* `DEFAULT_LOCATION`：指定目录的默认存储位置。您可以指定存储桶 (`gs://my-bucket`) 或子路径 (`gs://my-bucket/path`)。目录中的所有命名空间和表都必须位于指定路径下。例如，如果您指定 `gs://my-bucket/path`，则无法在 `gs://my-bucket/another/path` 下创建命名空间或表。
-* `CREDENTIAL_MODE`：身份验证方法。使用 `end-user` 获取*最终用户凭证*，或使用 `vended-credentials` 获取*凭证分发模式*。
-
-  **注意**：如果您使用*凭据自动售卖模式*，则必须向目录的自动预配 Lakehouse 运行时目录服务账号明确授予所有关联存储分区的*存储对象用户*角色 (`roles/storage.objectUser`)。
-* `RESTRICTED_LOCATIONS`：（可选）以英文逗号分隔的其他允许的存储位置列表，格式为 `gs://my-bucket-1/...,gs://my-bucket-2/...`。如果您指定了路径（例如 `gs://my-bucket/path`），则相应存储桶中的任何命名空间或表都必须位于该路径下。默认位置和受限位置的所有已配置的 Cloud Storage 位置都必须位于同一地理区域组或管辖区（例如美国、欧洲、加拿大或亚洲）。例如，您不能将美国境内的存储桶与欧洲境内的存储桶混用。如需查看受支持位置的列表，请参阅 [Lakehouse 位置](https://docs.cloud.google.com/lakehouse/docs/locations?hl=zh-cn)。
-
-  **警告**：请避免配置与其他目录重叠的路径，以防止未经授权的凭据泄露。如需了解详情，请参阅[跨多个存储分区的存储](https://docs.cloud.google.com/lakehouse/docs/understand-catalog-types?hl=zh-cn#storage-multiple-buckets)。
-* `LOCATION`：（可选）目录的主区域，用于确保与 BigQuery 的互操作性。对于美国区域（例如 `US` 或 `us-central1`）或欧盟区域（例如 `EU` 或 `europe-west4`）中的 Cloud Storage 存储分区，请分别指定 `US` 或 `EU`，以确保目录可供相应 BigQuery 多区域位置查询。如需了解详情，请参阅[存储分区和目录区域](https://docs.cloud.google.com/lakehouse/docs/understand-catalog-types?hl=zh-cn#bucket_and_catalog_regions)。
-
-#### 创建单存储桶 (`gs://`) 目录
-
-**注意**：强烈建议新项目不要使用单存储桶配置。此配置会将目录限制为单个存储桶，并将目录名称锁定为存储桶名称。
+**警告**： 强烈建议新项目不要使用单存储桶配置。此配置会将目录限制为单个存储桶，并将目录名称锁定为存储桶名称。
 
 如需创建单存储桶 (`gs://`) 目录，请运行以下命令：
 
@@ -216,14 +171,89 @@ gcloud biglake iceberg catalogs create \
     CATALOG_NAME \
     --project PROJECT_ID \
     --catalog-type gcs-bucket \
-    --credential-mode CREDENTIAL_MODE
+    --credential-mode end-user
 ```
 
 替换以下内容：
 
 * `CATALOG_NAME`：目录的名称。对于多存储桶 (`bl://`) 目录（推荐），这是您的自定义目录名称。对于单存储桶 (`gs://`) 目录，此值与 REST 目录使用的 Cloud Storage 存储桶 ID 相匹配。
-* `PROJECT_ID`：您的 Google Cloud项目 ID。
-* `CREDENTIAL_MODE`：身份验证方法。使用 `end-user` 获取*最终用户凭证*，或使用 `vended-credentials` 获取*凭证分发模式*。
+  从 BigQuery [查询这些表](https://docs.cloud.google.com/lakehouse/docs/use-catalog-federation?hl=zh-cn)时，此名称也用作目录标识符。
+* `PROJECT_ID`：您的 Google Cloud 项目 ID。
+* `DEFAULT_LOCATION`：指定目录的默认存储位置。您可以指定存储桶 (`gs://my-bucket`) 或子路径 (`gs://my-bucket/path`)。目录中的所有命名空间和表都必须位于指定路径下。例如，如果您指定 `gs://my-bucket/path`，则无法在 `gs://my-bucket/another/path` 下创建命名空间或表。
+* `RESTRICTED_LOCATIONS`：（可选）以英文逗号分隔的其他允许的存储位置列表，格式为 `gs://my-bucket-1/...,gs://my-bucket-2/...`。如果您指定了路径（例如 `gs://my-bucket/path`），则相应存储桶中的任何命名空间或表都必须位于该路径下。默认位置和受限位置的所有已配置 Cloud Storage 位置都必须位于同一地理区域组或管辖区（例如美国、欧洲、加拿大或亚洲）。例如，您无法将美国境内的存储桶与欧洲境内的存储桶混合使用。如需查看受支持位置的列表，请参阅 [Lakehouse 位置](https://docs.cloud.google.com/lakehouse/docs/locations?hl=zh-cn)。**安全警告**：避免与其他目录配置重叠的路径，以防凭据未经授权而泄露。如需了解详情，请参阅[跨多个存储分区的存储](https://docs.cloud.google.com/lakehouse/docs/understand-catalog-types?hl=zh-cn#storage-multiple-buckets)。
+* `LOCATION`：（可选）目录的主区域，用于确保与 BigQuery 的互操作性。对于美国区域（例如 `US` 或 `us-central1`）或欧盟区域（例如 `EU` 或 `europe-west4`）中的 Cloud Storage 存储分区，请分别指定 `US` 或 `EU`，以确保目录可供相应 BigQuery 多区域位置查询。如需了解详情，请参阅[存储分区和目录区域](https://docs.cloud.google.com/lakehouse/docs/understand-catalog-types?hl=zh-cn#bucket_and_catalog_regions)。
+
+### 凭证分发模式
+
+目录管理员可以在创建或更新目录时启用凭据自动发放功能。作为目录用户，您可以在[配置 Apache Iceberg REST 目录端点](#configure-catalog)时指定访问权限委托，从而指示 Apache Iceberg REST 目录端点返回降级后的存储凭据。
+
+自动预配的 Lakehouse 运行时目录服务账号需要对所有关联的 Cloud Storage 存储分区具有明确的 Storage Object User 角色 (`roles/storage.objectUser`)。默认情况下，它没有任何访问权限。
+如果没有此角色，出售的凭据将没有足够的范围来执行存储写入操作。如果您使用 `gcloud` 或 Terraform 等工具，则必须手动授予此角色。
+
+**注意**： 自动预配的目录服务账号的创建是[最终一致](https://wikipedia.org/wiki/Eventual_consistency)的。这意味着，服务账号需要一段时间才能在整个系统中生效。如果您在创建服务账号后立即尝试向其授予角色，则请求可能会失败。如需了解访问权限更改传播的平均时间，请参阅[访问权限更改传播](https://docs.cloud.google.com/iam/docs/access-change-propagation?hl=zh-cn)。
+
+### 控制台
+
+**注意**： Google Cloud 控制台不支持多存储桶 (`bl://`) 目录（推荐）。如需创建多存储桶 (`bl://`) 商品目录（推荐），请使用 **`gcloud`** 或 REST API。
+
+1. 在 Google Cloud 控制台中，打开 **Lakehouse** 页面。
+
+   [前往 Lakehouse](https://console.cloud.google.com/biglake?hl=zh-cn)
+2. 点击 add\_box
+   **创建目录**。系统会打开**创建目录**页面。
+3. 在**目录类型**部分，选择 **Cloud Storage 存储桶**。
+4. 输入或浏览要与目录搭配使用的 Cloud Storage 存储桶（对于单存储桶 [`gs://`] 目录，每个存储桶只能有一个目录，且目录名称与存储桶名称一致）。
+5. 对于**身份验证方法**，请选择**凭证分发模式**。
+6. 点击**创建**。
+
+   系统会创建您的目录，并打开**目录详细信息**页面。
+7. 在**身份验证方法**下，点击**设置存储桶权限**。
+8. 在对话框中，点击**确认**。
+
+   此命令会验证目录的服务账号是否对所有关联的存储分区具有 Storage Object User 角色。
+
+### gcloud
+
+**创建多存储桶 (`bl://`) 目录（推荐）**
+
+通过此配置，您的目录可以关联多个存储桶，并且您可以独立于任何存储桶名称来命名目录。
+
+如需创建多存储桶 (`bl://`) 目录（推荐），请运行 [`gcloud biglake iceberg catalogs create`](https://docs.cloud.google.com/sdk/gcloud/reference/biglake/iceberg/catalogs/create?hl=zh-cn) 命令。
+
+```
+gcloud biglake iceberg catalogs create \
+    CATALOG_NAME \
+    --project PROJECT_ID \
+    --catalog-type biglake \
+    --default-location DEFAULT_LOCATION \
+    [--restricted-locations RESTRICTED_LOCATIONS] \
+    --credential-mode vended-credentials \
+    [--primary-location LOCATION]
+```
+
+**创建单存储桶 (`gs://`) 目录**
+
+**警告**： 强烈建议不要在新项目中使用旧版单存储桶配置。此配置会将目录限制为单个存储桶，并将目录名称锁定为存储桶名称。
+
+如需创建单存储桶 (`gs://`) 目录，请运行以下命令：
+
+```
+gcloud biglake iceberg catalogs create \
+    CATALOG_NAME \
+    --project PROJECT_ID \
+    --catalog-type gcs-bucket \
+    --credential-mode vended-credentials
+```
+
+替换以下内容：
+
+* `CATALOG_NAME`：目录的名称。对于多存储桶 (`bl://`) 目录（推荐），这是您的自定义目录名称。对于单存储桶 (`gs://`) 目录，此值与 REST 目录使用的 Cloud Storage 存储桶 ID 相匹配。从 BigQuery [查询这些表](https://docs.cloud.google.com/lakehouse/docs/use-catalog-federation?hl=zh-cn)时，此名称也用作目录标识符。
+* `PROJECT_ID`：您的 Google Cloud 项目 ID。
+* `DEFAULT_LOCATION`：指定目录的默认存储位置。您可以指定存储桶 (`gs://my-bucket`) 或子路径 (`gs://my-bucket/path`)。目录中的所有命名空间和表都必须位于指定路径下。例如，如果您指定 `gs://my-bucket/path`，则无法在 `gs://my-bucket/another/path` 下创建命名空间或表。
+* `RESTRICTED_LOCATIONS`：（可选）以英文逗号分隔的其他允许的存储位置列表，格式为 `gs://my-bucket-1/...,gs://my-bucket-2/...`。如果您指定了路径（例如 `gs://my-bucket/path`），则相应存储桶中的任何命名空间或表都必须位于该路径下。默认位置和受限位置的所有已配置 Cloud Storage 位置都必须位于同一地理区域组或管辖区（例如美国、欧洲、加拿大或亚洲）。例如，您无法将美国境内的存储桶与欧洲境内的存储桶混合使用。如需查看受支持位置的列表，请参阅 [Lakehouse 位置](https://docs.cloud.google.com/lakehouse/docs/locations?hl=zh-cn)。**安全警告**：避免与其他目录配置重叠的路径，以防凭据未经授权而泄露。如需了解详情，请参阅[跨多个存储分区的存储](https://docs.cloud.google.com/lakehouse/docs/understand-catalog-types?hl=zh-cn#storage-multiple-buckets)。
+* `LOCATION`：（可选）目录的主区域，用于确保与 BigQuery 的互操作性。对于美国区域（例如 `US` 或 `us-central1`）或欧盟区域（例如 `EU` 或 `europe-west4`）中的 Cloud Storage 存储分区，请分别指定 `US` 或 `EU`，以确保目录可供相应 BigQuery 多区域位置查询。如需了解详情，请参阅[存储分区和目录区域](https://docs.cloud.google.com/lakehouse/docs/understand-catalog-types?hl=zh-cn#bucket_and_catalog_regions)。
+
+  创建目录后，请向目录自动预配的 Lakehouse 运行时目录服务账号明确授予所有关联存储分区的 **Storage Object User** 角色 (`roles/storage.objectUser`)。
 
 ### 配置客户端应用
 
@@ -235,7 +265,7 @@ gcloud biglake iceberg catalogs create \
 
 #### 使用属性简化配置（推荐）
 
-创建具有目录资源的集群：
+创建具有目录属性的集群：
 
 ```
 gcloud dataproc clusters create CLUSTER_NAME \
@@ -296,8 +326,8 @@ spark = SparkSession.builder.appName("APP_NAME") \
 * `APP_NAME`：Spark 会话的名称。
 * `REST_API_VERSION`：对于稳定的 API 版本，设置为 `v1`。
 * `WAREHOUSE_PATH`：仓库的路径。对于 BigLake 目录，请使用 `bl://projects/PROJECT_ID/catalogs/CATALOG_ID`。
-  对于 Cloud Storage 存储桶目录，请使用 `gs://CLOUD_STORAGE_BUCKET_NAME`。
-* `PROJECT_ID`：使用 Apache Iceberg REST 目录端点所产生的费用将计入该项目，该项目可能与拥有 Cloud Storage 存储桶的项目不同。如需详细了解使用 REST API 时的项目配置，请参阅[系统参数](https://docs.cloud.google.com/apis/docs/system-parameters?hl=zh-cn)。
+  对于 Cloud Storage 存储桶目录，请使用 `gs://CLOUD_STORAGE_BUCKET_NAME`。如需使用 [BigQuery 目录联合](https://docs.cloud.google.com/lakehouse/docs/understand-catalog-types?hl=zh-cn#catalog-federation)，请参阅[将目录联合与 BigQuery 搭配使用](https://docs.cloud.google.com/lakehouse/docs/use-catalog-federation?hl=zh-cn#federation)。
+* `PROJECT_ID`：使用 Apache Iceberg REST Catalog 端点所产生的费用将计入该项目，该项目可能与拥有 Cloud Storage 存储桶的项目不同。如需详细了解使用 REST API 时的项目配置，请参阅[系统参数](https://docs.cloud.google.com/apis/docs/system-parameters?hl=zh-cn)。
 
 ### 通过凭证分发进行配置
 
@@ -344,7 +374,7 @@ Managed Service for Apache Spark 集群在以下版本中支持 Apache Iceberg �
 
 #### 使用属性简化配置（推荐）
 
-提交包含目录资源的批量作业：
+提交包含目录属性的批量作业：
 
 ```
 gcloud dataproc batches submit pyspark PYSPARK_FILE \
@@ -403,8 +433,8 @@ gcloud dataproc batches submit pyspark PYSPARK_FILE \
 * `CATALOG_NAME`：本地 Spark 目录的名称（例如 `my_catalog`）。
 * `REST_API_VERSION`：对于稳定的 API 版本，设置为 `v1`。
 * `WAREHOUSE_PATH`：仓库的路径。对于 BigLake 目录，请使用 `bl://projects/PROJECT_ID/catalogs/CATALOG_ID`。
-  对于 Cloud Storage 存储桶目录，请使用 `gs://CLOUD_STORAGE_BUCKET_NAME`。
-* `PROJECT_ID`：使用 Apache Iceberg REST 目录端点所产生的费用将计入该项目，该项目可能与拥有 Cloud Storage 存储桶的项目不同。如需详细了解使用 REST API 时的项目配置，请参阅[系统参数](https://docs.cloud.google.com/apis/docs/system-parameters?hl=zh-cn)。
+  对于 Cloud Storage 存储桶目录，请使用 `gs://CLOUD_STORAGE_BUCKET_NAME`。如需使用 [BigQuery 目录联合](https://docs.cloud.google.com/lakehouse/docs/understand-catalog-types?hl=zh-cn#catalog-federation)，请参阅[将目录联合与 BigQuery 搭配使用](https://docs.cloud.google.com/lakehouse/docs/use-catalog-federation?hl=zh-cn#federation)。
+* `PROJECT_ID`：使用 Apache Iceberg REST Catalog 端点所产生的费用将计入该项目，该项目可能与拥有 Cloud Storage 存储桶的项目不同。如需详细了解使用 REST API 时的项目配置，请参阅[系统参数](https://docs.cloud.google.com/apis/docs/system-parameters?hl=zh-cn)。
 
 ### 通过凭证分发进行配置
 
@@ -520,7 +550,7 @@ spark = SparkSession.builder.appName("APP_NAME") \
 * `APP_NAME`：Spark 会话的名称。
 * `REST_API_VERSION`：对于稳定的 API 版本，设置为 `v1`。
 * `WAREHOUSE_PATH`：仓库的路径。对于 BigLake 目录，请使用 `bl://projects/PROJECT_ID/catalogs/CATALOG_ID`。
-  对于 Cloud Storage 存储桶目录，请使用 `gs://CLOUD_STORAGE_BUCKET_NAME`。
+  对于 Cloud Storage 存储桶目录，请使用 `gs://CLOUD_STORAGE_BUCKET_NAME`。如需使用 [BigQuery 目录联合](https://docs.cloud.google.com/lakehouse/docs/understand-catalog-types?hl=zh-cn#catalog-federation)，请参阅[将目录联合与 BigQuery 搭配使用](https://docs.cloud.google.com/lakehouse/docs/use-catalog-federation?hl=zh-cn#federation)。
 * `PROJECT_ID`：使用 Apache Iceberg REST 目录端点所产生的费用将计入该项目，该项目可能与拥有 Cloud Storage 存储桶的项目不同。如需详细了解使用 REST API 时的项目配置，请参阅[系统参数](https://docs.cloud.google.com/apis/docs/system-parameters?hl=zh-cn)。
 
 ### 通过凭证分发进行配置
@@ -588,7 +618,7 @@ spark = SparkSession.builder.appName("APP_NAME") \
 * `APP_NAME`：Spark 会话的名称。
 * `REST_API_VERSION`：对于稳定的 API 版本，设置为 `v1`。
 * `WAREHOUSE_PATH`：仓库的路径。对于 BigLake 目录，请使用 `bl://projects/PROJECT_ID/catalogs/CATALOG_ID`。
-  对于 Cloud Storage 存储桶目录，请使用 `gs://CLOUD_STORAGE_BUCKET_NAME`。
+  对于 Cloud Storage 存储桶目录，请使用 `gs://CLOUD_STORAGE_BUCKET_NAME`。如需使用 [BigQuery 目录联合](https://docs.cloud.google.com/lakehouse/docs/understand-catalog-types?hl=zh-cn#catalog-federation)，请参阅[将目录联合与 BigQuery 搭配使用](https://docs.cloud.google.com/lakehouse/docs/use-catalog-federation?hl=zh-cn#federation)。
 * `PROJECT_ID`：使用 Apache Iceberg REST 目录端点所产生的费用将计入该项目，该项目可能与拥有 Cloud Storage 存储桶的项目不同。如需详细了解使用 REST API 时的项目配置，请参阅[系统参数](https://docs.cloud.google.com/apis/docs/system-parameters?hl=zh-cn)。
 * `TOKEN`：您的身份验证令牌，有效期为一小时，例如使用 `gcloud auth application-default print-access-token` 生成的令牌。
 
@@ -643,7 +673,7 @@ spark = SparkSession.builder.appName("APP_NAME") \
 4. 对于**命名空间名称**，为您的命名空间输入一个唯一的名称。
 5. 对于**位置**，指定要与您的命名空间关联的路径：
 
-   * **多存储桶 (`bl://`)**（推荐）：您可以设置任何自定义位置，只要该位置位于目录允许的位置（`default_location` 或 `restricted_locations`）下即可。如果您未指定位置，系统会在目录的默认位置（例如 `gs://{path-to-default-location}/{namespace_name}`）下创建命名空间。
+   * **多存储桶 (`bl://`)**（推荐）：您可以设置任何自定义位置，只要该位置位于目录允许的位置（`default_location` 或 `restricted_locations`）下即可。如果您未指定位置，系统会在目录的默认位置（例如 `gs://{path-to-default-location}/{namespace_name}`）下创建命名空间。请注意，多存储桶 (`bl://`) 目录（推荐）无法在控制台中进行管理。
    * **单存储桶 (`gs://`)**：命名空间位置会自动从目录的单个存储桶继承。
 6. 点击**创建**。
 
@@ -680,8 +710,9 @@ USE CATALOG_NAME.SCHEMA_NAME;
 
 ## 后续步骤
 
+* 了解如何[使用 BigQuery 查询表和使用目录联合](https://docs.cloud.google.com/lakehouse/docs/use-catalog-federation?hl=zh-cn)。
 * 了解如何[在 Google Cloud 控制台中管理目录](https://docs.cloud.google.com/lakehouse/docs/lakehouse-console?hl=zh-cn)。
-* 了解 [Lakehouse REST 目录表（适用于 Apache Iceberg）](https://docs.cloud.google.com/lakehouse/docs/lakehouse-iceberg-tables?hl=zh-cn)。
+* 了解 [Lakehouse REST 目录中的 Apache Iceberg 表](https://docs.cloud.google.com/lakehouse/docs/lakehouse-iceberg-tables?hl=zh-cn)。
 
 
 
@@ -690,11 +721,11 @@ USE CATALOG_NAME.SCHEMA_NAME;
 
 如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-最后更新时间 (UTC)：2026-07-18。
+最后更新时间 (UTC)：2026-09-15。
 
 
 
 
 需要向我们提供更多信息？
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["很难理解","hardToUnderstand","thumb-down"],["信息或示例代码不正确","incorrectInformationOrSampleCode","thumb-down"],["没有我需要的信息/示例","missingTheInformationSamplesINeed","thumb-down"],["翻译问题","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-07-18。"],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["很难理解","hardToUnderstand","thumb-down"],["信息或示例代码不正确","incorrectInformationOrSampleCode","thumb-down"],["没有我需要的信息/示例","missingTheInformationSamplesINeed","thumb-down"],["翻译问题","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-09-15。"],[],[]]

@@ -48,6 +48,7 @@ Send feedback
 * `Reservation.ReplicationStatus` (message)
 * `Reservation.ScalingMode` (enum)
 * `ReservationGroup` (message)
+* `SchedulingPolicy` (message)
 * `SearchAllAssignmentsRequest` (message)
 * `SearchAllAssignmentsResponse` (message)
 * `SearchAssignmentsRequest` (message)
@@ -118,56 +119,4 @@ A capacity commitment is a way to purchase compute capacity for BigQuery jobs (i
 
 | GetReservation |
 | --- |
-| `rpc GetReservation(GetReservationRequest) returns (Reservation)`  Returns information about the reservation.  Authorization scopes  Requires one of the following OAuth scopes:   * `https://www.googleapis.com/auth/bigquery` * `https://www.googleapis.com/auth/cloud-platform`   For more information, see the [Authentication Overview](/docs/authentication#authorization-gcp). |
-
-| GetReservationGroup |
-| --- |
-| `rpc GetReservationGroup(GetReservationGroupRequest) returns (ReservationGroup)`  Returns information about the reservation group.  Authorization scopes  Requires one of the following OAuth scopes:   * `https://www.googleapis.com/auth/bigquery` * `https://www.googleapis.com/auth/cloud-platform`   For more information, see the [Authentication Overview](/docs/authentication#authorization-gcp). |
-
-| ListAssignments |
-| --- |
-| `rpc ListAssignments(ListAssignmentsRequest) returns (ListAssignmentsResponse)`  Lists assignments.  Only explicitly created assignments will be returned.  Example:   * Organization `organizationA` contains two projects, `project1` and `project2`. * Reservation `res1` exists and was created previously. * CreateAssignment was used previously to define the following associations between entities and reservations: `<organizationA, res1>` and `<project1, res1>`   In this example, ListAssignments will just return the above two assignments for reservation `res1`, and no expansion/merge will happen.  The wildcard "-" can be used for reservations in the request. In that case all assignments belongs to the specified project and location will be listed.  **Note** "-" cannot be used for projects nor locations.  Authorization scopes  Requires one of the following OAuth scopes:   * `https://www.googleapis.com/auth/bigquery` * `https://www.googleapis.com/auth/cloud-platform`   For more information, see the [Authentication Overview](/docs/authentication#authorization-gcp). |
-
-| ListCapacityCommitments |
-| --- |
-| `rpc ListCapacityCommitments(ListCapacityCommitmentsRequest) returns (ListCapacityCommitmentsResponse)`  Lists all the capacity commitments for the admin project.  Authorization scopes  Requires one of the following OAuth scopes:   * `https://www.googleapis.com/auth/bigquery` * `https://www.googleapis.com/auth/cloud-platform`   For more information, see the [Authentication Overview](/docs/authentication#authorization-gcp). |
-
-| ListReservationGroups |
-| --- |
-| `rpc ListReservationGroups(ListReservationGroupsRequest) returns (ListReservationGroupsResponse)`  Lists all the reservation groups for the project in the specified location.  Authorization scopes  Requires one of the following OAuth scopes:   * `https://www.googleapis.com/auth/bigquery` * `https://www.googleapis.com/auth/cloud-platform`   For more information, see the [Authentication Overview](/docs/authentication#authorization-gcp). |
-
-| ListReservations |
-| --- |
-| `rpc ListReservations(ListReservationsRequest) returns (ListReservationsResponse)`  Lists all the reservations for the project in the specified location.  Authorization scopes  Requires one of the following OAuth scopes:   * `https://www.googleapis.com/auth/bigquery` * `https://www.googleapis.com/auth/cloud-platform`   For more information, see the [Authentication Overview](/docs/authentication#authorization-gcp). |
-
-| MergeCapacityCommitments |
-| --- |
-| `rpc MergeCapacityCommitments(MergeCapacityCommitmentsRequest) returns (CapacityCommitment)`  Merges capacity commitments of the same plan into a single commitment.  The resulting capacity commitment has the greater commitment\_end\_time out of the to-be-merged capacity commitments.  Attempting to merge capacity commitments of different plan will fail with the error code `google.rpc.Code.FAILED_PRECONDITION`.  Authorization scopes  Requires one of the following OAuth scopes:   * `https://www.googleapis.com/auth/bigquery` * `https://www.googleapis.com/auth/cloud-platform`   For more information, see the [Authentication Overview](/docs/authentication#authorization-gcp). |
-
-| MoveAssignment |
-| --- |
-| `rpc MoveAssignment(MoveAssignmentRequest) returns (Assignment)`  Moves an assignment under a new reservation.  This differs from removing an existing assignment and recreating a new one by providing a transactional change that ensures an assignee always has an associated reservation.  Authorization scopes  Requires one of the following OAuth scopes:   * `https://www.googleapis.com/auth/bigquery` * `https://www.googleapis.com/auth/cloud-platform`   For more information, see the [Authentication Overview](/docs/authentication#authorization-gcp). |
-
-| SearchAllAssignments |
-| --- |
-| `rpc SearchAllAssignments(SearchAllAssignmentsRequest) returns (SearchAllAssignmentsResponse)`  Looks up assignments for a specified resource for a particular region. If the request is about a project:   1. Assignments created on the project will be returned if they exist. 2. Otherwise assignments created on the closest ancestor will be returned. 3. Assignments for different JobTypes will all be returned.   The same logic applies if the request is about a folder.  If the request is about an organization, then assignments created on the organization will be returned (organization doesn't have ancestors).  Comparing to ListAssignments, there are some behavior differences:   1. permission on the assignee will be verified in this API. 2. Hierarchy lookup (project->folder->organization) happens in this API. 3. Parent here is `projects/*/locations/*`, instead of `projects/*/locations/*reservations/*`.   Authorization scopes  Requires one of the following OAuth scopes:   * `https://www.googleapis.com/auth/bigquery` * `https://www.googleapis.com/auth/cloud-platform`   For more information, see the [Authentication Overview](/docs/authentication#authorization-gcp). |
-
-| SearchAssignments |
-| --- |
-| This item is deprecated!  `rpc SearchAssignments(SearchAssignmentsRequest) returns (SearchAssignmentsResponse)`  Deprecated: Looks up assignments for a specified resource for a particular region. If the request is about a project:   1. Assignments created on the project will be returned if they exist. 2. Otherwise assignments created on the closest ancestor will be returned. 3. Assignments for different JobTypes will all be returned.   The same logic applies if the request is about a folder.  If the request is about an organization, then assignments created on the organization will be returned (organization doesn't have ancestors).  Comparing to ListAssignments, there are some behavior differences:   1. permission on the assignee will be verified in this API. 2. Hierarchy lookup (project->folder->organization) happens in this API. 3. Parent here is `projects/*/locations/*`, instead of `projects/*/locations/*reservations/*`.   **Note** "-" cannot be used for projects nor locations.  Authorization scopes  Requires one of the following OAuth scopes:   * `https://www.googleapis.com/auth/bigquery` * `https://www.googleapis.com/auth/cloud-platform`   For more information, see the [Authentication Overview](/docs/authentication#authorization-gcp). |
-
-| SetIamPolicy |
-| --- |
-| `rpc SetIamPolicy(SetIamPolicyRequest) returns (Policy)`  Sets an access control policy for a resource. Replaces any existing policy.  Supported resources are: - Reservations  To call this method, you must have the following Google IAM permissions:   * `bigqueryreservation.reservations.setIamPolicy` to set policies on reservations.   Authorization scopes  Requires one of the following OAuth scopes:   * `https://www.googleapis.com/auth/bigquery` * `https://www.googleapis.com/auth/cloud-platform`   For more information, see the [Authentication Overview](/docs/authentication#authorization-gcp). |
-
-| SplitCapacityCommitment |
-| --- |
-| `rpc SplitCapacityCommitment(SplitCapacityCommitmentRequest) returns (SplitCapacityCommitmentResponse)`  Splits capacity commitment to two commitments of the same plan and `commitment_end_time`.  A common use case is to enable downgrading commitments.  For example, in order to downgrade from 10000 slots to 8000, you might split a 10000 capacity commitment into commitments of 2000 and 8000. Then, you delete the first one after the commitment end time passes.  Authorization scopes  Requires one of the following OAuth scopes:   * `https://www.googleapis.com/auth/bigquery` * `https://www.googleapis.com/auth/cloud-platform`   For more information, see the [Authentication Overview](/docs/authentication#authorization-gcp). |
-
-| TestIamPermissions |
-| --- |
-| `rpc TestIamPermissions(TestIamPermissionsRequest) returns (TestIamPermissionsResponse)`  Gets your permissions on a resource. Returns an empty set of permissions if the resource doesn't exist.  Supported resources are: - Reservations  No Google IAM permissions are required to call this method.  Authorization scopes  Requires one of the following OAuth scopes:   * `https://www.googleapis.com/auth/bigquery` * `https://www.googleapis.com/auth/cloud-platform`   For more information, see the [Authentication Overview](/docs/authentication#authorization-gcp). |
-
-| UpdateAssignment |
-| --- |
-| `rpc UpdateAssignment(` |
+| `rpc GetReservation(` |

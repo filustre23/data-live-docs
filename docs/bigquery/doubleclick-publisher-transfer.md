@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -25,23 +25,23 @@ Google Ad Manager 連接器的 BigQuery 資料移轉服務支援下列資料移�
 | 資料轉移方式 | 支援 |
 | --- | --- |
 | 受支援的報表 | Google Ad Manager 連接器支援從下列報表移轉資料：    * [資料移轉 (Google Ad Manager DT) 檔案](https://support.google.com/admanager/answer/1733124?hl=zh-tw) * [區域資料存取檔案](https://support.google.com/admanager/answer/14260907?hl=zh-tw) * [資料移轉欄位](https://support.google.com/admanager/table/7401123?hl=zh-tw) * [比對 BigQuery 資料移轉服務提供的資料表](https://docs.cloud.google.com/bigquery/docs/doubleclick-publisher-transformation?hl=zh-tw)。系統會自動建立及更新這些素材資源。 * [比對以 PQL 擷取的資料表](https://developers.google.com/doubleclick-publishers/docs/pqlreference?hl=zh-tw#matchtables) * [來自 CompanyService (v201908) 的對照表](https://developers.google.com/doubleclick-publishers/docs/reference/v201908/CompanyService?hl=zh-tw) * [來自 OrderService (v201908) 的對照表](https://developers.google.com/doubleclick-publishers/docs/reference/v201908/OrderService?hl=zh-tw) * [來自 PlacementService (v201908) 的對照表](https://developers.google.com/doubleclick-publishers/docs/reference/v201908/PlacementService?hl=zh-tw)   如要瞭解 Google Ad Manager 報表如何轉換成 BigQuery 資料表和檢視表，請參閱「[Google Ad Manager 報表轉換](https://docs.cloud.google.com/bigquery/docs/doubleclick-publisher-transformation?hl=zh-tw)」一文。 |
-| 重複頻率 | Google Ad Manager 連接器每 4 小時會轉移一次資料。根據預設，Google Ad Manager 資料轉移每 8 小時會重複一次。    [設定資料移轉](#set_up_a_google_ad_manager_transfer)時，可以設定資料移轉時間。 |
-| 重新整理時間範圍 | Google Ad Manager 連接器會在執行資料轉移時，擷取最多 2 天前的 Google Ad Manager 資料。您無法為這個連接器設定重新整理時間範圍。    詳情請參閱「[重新整理時間範圍](#refresh)」。 |
-| 資料補充作業 | [執行資料補充作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)，擷取排定資料移轉時間以外的資料。您可以擷取資料來源資料保留政策允許的最早資料。    如要瞭解 Google Ad Manager 的資料保留政策，請參閱「[Ad Manager 資料移轉報表](https://support.google.com/admanager/answer/1733124?hl=zh-tw)」。 |
+| 重複頻率 | Google Ad Manager 連接器支援每 4 小時轉移一次資料。根據預設，Google Ad Manager 資料移轉作業每 8 小時會重複執行一次。    [設定資料移轉](#set_up_a_google_ad_manager_transfer)時，可以指定資料移轉時間。 |
+| 重新整理時間範圍 | Google Ad Manager 連接器會在執行資料移轉時，擷取最多 2 天的 Google Ad Manager 資料。您無法設定這個連結器的重新整理間隔。    詳情請參閱「[重新整理時間範圍](#refresh)」。 |
+| 資料補充作業 | [執行資料補充作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)，擷取排定資料移轉時間以外的資料。您可以擷取資料來源資料保留政策允許的資料。    如要瞭解 Google Ad Manager 的資料保留政策，請參閱「[Google Ad Manager 資料移轉報表](https://support.google.com/admanager/answer/1733124?hl=zh-tw)」。 |
 
 **注意：** BigQuery 資料移轉服務支援 Google Ad Manager DT 檔案使用下列分隔符號：定位點分隔符號 ( \t )、直立線符號 ( | )、脫字符號 ( ^ ) 和逗號 ( , )。
 
 ## 從 Google Ad Manager 移轉作業擷取資料
 
-從 Google Ad Manager 移轉資料至 BigQuery 時，資料會載入至按日期分區的 BigQuery 資料表。資料載入的資料表分區會對應資料來源的日期。如果為同一天排定多項移轉作業，BigQuery 資料移轉服務會以最新資料覆寫該特定日期的資料分割。同一天內進行多次轉移或執行回填作業，不會導致資料重複，也不會影響其他日期的分區。
+從 Google Ad Manager 移轉資料至 BigQuery 時，資料會載入至按日期分區的 BigQuery 資料表。資料載入的資料表分區會對應資料來源的日期。如果為同一天排定多項移轉作業，BigQuery 資料移轉服務會以最新資料覆寫該特定日期的資料分割。同一天內多次轉移資料或執行回填作業，不會導致資料重複，也不會影響其他日期的分區。
 
 ### 重新整理視窗
 
-*重新整理時間範圍*是指資料移轉服務在執行資料移轉時，擷取資料的天數。舉例來說，如果重新整理時間範圍為三天，且每天都會執行移轉作業，BigQuery 資料移轉服務就會擷取來源資料表過去三天的所有資料。在這個例子中，每天執行移轉作業時，BigQuery 資料移轉服務會建立新的 BigQuery 目的地資料表分割區，並複製來源資料表當天的資料，然後自動觸發回填執行作業，更新 BigQuery 目的地資料表分割區，填入來源資料表過去兩天的資料。自動觸發的回填執行作業會覆寫或增量更新 BigQuery 目的地資料表，視 BigQuery 資料移轉服務連接器是否支援增量更新而定。
+*更新期*是指資料移轉作業在執行時，擷取資料的天數。舉例來說，如果重新整理時間範圍為三天，且每天都會進行移轉，BigQuery 資料移轉服務就會從來源資料表擷取過去三天的所有資料。在本例中，每天進行移轉時，BigQuery 資料移轉服務會建立新的 BigQuery 目的地資料表分割區，並複製當天的來源資料表資料，然後自動觸發回填執行作業，以更新過去兩天的來源資料表資料。系統自動觸發的回填作業會覆寫或增量更新 BigQuery 目的地資料表，具體做法取決於 BigQuery 資料移轉服務連接器是否支援增量更新。
 
 首次執行資料移轉時，資料移轉作業會擷取重新整理視窗內的所有可用來源資料。舉例來說，如果重新整理時間範圍為三天，而您是第一次執行資料移轉作業，BigQuery 資料移轉服務會擷取三天內的所有來源資料。
 
-如要擷取重新整理時間範圍外的資料 (例如歷來資料)，或從任何轉移中斷或缺漏中復原資料，可以啟動或排定[補充作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)。
+如要擷取重新整理時間範圍外的資料 (例如歷來資料)，或從任何轉移中斷或缺漏中復原資料，可以啟動或排定[資料補充作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)。
 
 ### 資料移轉 (DT) 檔案更新
 
@@ -51,14 +51,14 @@ Google Ad Manager 連接器的 BigQuery 資料移轉服務支援下列資料移�
 
 ### 更新對照表
 
-對照表提供查詢機制，可查詢資料移轉檔案中的原始值。如需對照表清單，請參閱「[Google Ad Manager 報表轉換](https://docs.cloud.google.com/bigquery/docs/doubleclick-publisher-transformation?hl=zh-tw)」。
-系統會使用不同的擷取方法更新不同的對照表。對照表及其擷取方法如下表所示：
+對照表可為資料移轉檔案中的原始值提供查詢機制。如需對照表清單，請參閱「[Google Ad Manager 報表轉換](https://docs.cloud.google.com/bigquery/docs/doubleclick-publisher-transformation?hl=zh-tw)」一文。
+不同的比對資料表會以不同的擷取方法更新。下表列出比對表及其擷取方法：
 
 | 擷取方式 | 說明 | 對照表 |
 | --- | --- | --- |
-| 分批更新 | 每次執行都會附加增量更新。舉例來說，當天第一次執行移轉作業時，系統會載入移轉作業前修改的所有資料；當天第二次執行移轉作業時，系統會載入前次執行後和本次執行前修改的資料。 | `Company`、`Order`、`Placement`、`LineItem`、`AdUnit` |
+| 分批更新 | 每次執行時，都會附加增量更新。舉例來說，當天第一次執行轉移作業時，系統會載入轉移作業前修改的所有資料；當天第二次執行轉移作業時，系統會載入前一次執行作業後，以及本次執行作業前修改的資料。 | `Company`、`Order`、`Placement`、`LineItem`、`AdUnit` |
 | 更新整個表格 | 全表更新每天會載入整個表格一次。舉例來說，當天第一次執行轉移作業時，系統會載入資料表的所有可用資料。當天第二次執行轉移作業時，系統會略過載入這些資料表。 | `AdCategory`、`AudienceSegmentCategory`、`BandwidthGroup`、`Browser`、`BrowserLanguage`、 `DeviceCapability`、`DeviceCategory`、`DeviceManufacturer`、`GeoTarget`、`MobileCarrier`、 `MobileDevice`、`MobileDeviceSubmodel`、`OperatingSystem`、`OperatingSystemVersion`、 `ThirdPartyCompany`、`TimeZone`、`User`、`ProgrammaticBuyer` |
-| 覆寫整個資料表 | 每次執行移轉作業時，系統都會覆寫整個資料表。 | `AudienceSegment` |
+| 覆寫整個表格 | 每次執行移轉作業時，系統都會覆寫整個資料表。 | `AudienceSegment` |
 
 ## 事前準備
 
@@ -76,7 +76,7 @@ Google Ad Manager 連接器的 BigQuery 資料移轉服務支援下列資料移�
 
   Google Cloud 團隊「無法」代表您產生或授予 Google Ad Manager DT 檔案的存取權。請與 Google Ad Manager [支援小組](https://support.google.com/admanager/answer/3059042?ref_topic=7519191&hl=zh-tw)聯絡，詢問有關 Google Ad Manager DT 檔案存取權的事宜。
 * 為 Google Ad Manager 網路[啟用 API 存取權](https://support.google.com/admanager/answer/3088588?hl=zh-tw)。
-* 如要設定資料移轉通知，您必須擁有 Pub/Sub 的 `pubsub.topics.setIamPolicy` 權限。如果您只是要設定電子郵件通知，就不需要 Pub/Sub 權限。詳情請參閱「[BigQuery 資料移轉服務執行通知](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications?hl=zh-tw)」。
+* 如要設定資料移轉通知，您必須擁有 Pub/Sub 的 `pubsub.topics.setIamPolicy` 權限。如果您只想設定電子郵件通知，則不需要擁有 Pub/Sub 權限。詳情請參閱 [BigQuery 資料移轉服務執行通知](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications?hl=zh-tw)。
 
 ## 所需權限
 
@@ -108,18 +108,19 @@ Google Ad Manager 連接器的 BigQuery 資料移轉服務支援下列資料移�
 
 ### 必要的 Google Ad Manager 角色
 
-授予儲存在 Cloud Storage 中 Google Ad Manager DT 檔案的讀取權限。Google Ad Manager DT 檔案的權限是由 Google Ad Manager 團隊管理。除了 Google Ad Manager DT 檔案，建立資料移轉作業的人員也必須加入 Google Ad Manager 聯播網，並擁有建立各種[對照表](https://docs.cloud.google.com/bigquery/docs/doubleclick-publisher-transformation?hl=zh-tw) (委刊項、訂單、廣告單元等) 所需的所有實體讀取權限。如要達成這個目標，請將驗證資料移轉作業的 Ad Manager 使用者新增至 Ad Manager 中的「所有實體」團隊。
+授予儲存在 Cloud Storage 中 Google Ad Manager DT 檔案的讀取權限。Google Ad Manager DT 檔案的權限是由 Google Ad Manager 團隊管理。除了 Google Ad Manager DT 檔案，建立資料移轉作業的人員也必須加入 Google Ad Manager 聯播網，並擁有建立各種[比對表](https://docs.cloud.google.com/bigquery/docs/doubleclick-publisher-transformation?hl=zh-tw) (委刊項、訂單、廣告單元等) 所需的所有實體讀取權。如要完成這項操作，請將驗證資料移轉的 Ad Manager 使用者新增至 Ad Manager 中的「所有實體」小組。
 
 ## 設定 Google Ad Manager 移轉作業
 
 針對 Google Ad Manager 設定 BigQuery 資料移轉作業需要下列項目：
 
-* **Cloud Storage 值區**：Google Ad Manager DT 檔案的 Cloud Storage 值區 URI，如[事前準備](https://docs.cloud.google.com/bigquery/docs/doubleclick-publisher-transfer?hl=zh-tw#before_you_begin)一節所述。值區名稱應如下所示：
+* **Cloud Storage bucket**：Google Ad Manager DT 檔案的 Cloud Storage bucket URI，如「[事前準備](https://docs.cloud.google.com/bigquery/docs/doubleclick-publisher-transfer?hl=zh-tw#before_you_begin)」一節所述。
+  值區名稱應如下所示：
 
   ```
   gdfp-12345678
   ```
-* **網路代碼**：您可以在登入網路時的網址中找出 Google Ad Manager 網路代碼。舉例來說，在網址 `https://admanager.google.com/2032576#delivery` 中，`2032576` 是您的聯播網代碼。詳情請參閱「[開始使用 Google Ad Manager](https://developers.google.com/doubleclick-publishers/docs/start?hl=zh-tw)」一文。
+* **網路代碼**：您可以在登入網路時的網址中找出 Google Ad Manager 網路代碼。舉例來說，在網址 `https://admanager.google.com/2032576#delivery` 中，`2032576` 是您的網路代碼。詳情請參閱「[開始使用 Google Ad Manager](https://developers.google.com/doubleclick-publishers/docs/start?hl=zh-tw)」一文。
 
 如要為 Google Ad Manager 建立 BigQuery 資料移轉服務資料移轉作業，請進行下列操作：
 
@@ -178,7 +179,7 @@ bq mk --transfer_config \
 * parameters 含有已建立移轉設定的 JSON 格式參數，例如：`--params='{"param":"param_value"}'`。針對 Google Ad Manager，您必須提供 `bucket` 和 `network_code` 參數。
   + `bucket`：包含 Google Ad Manager DT 檔案的 Cloud Storage bucket。
   + `network_code`：聯播網代碼
-  + `load_match_tables`：是否載入比對表。預設為 `True`
+  + `load_match_tables`：是否要載入比對資料表。預設為 `True`
 * data\_source 是資料來源：`dfp_dt` (Google Ad Manager)。
 * service\_account\_name 是用於驗證資料移轉作業的服務帳戶名稱。服務帳戶應由用於建立轉移作業的 `project_id` 擁有，且應具備所有[必要權限](#required_permissions)。
 
@@ -214,45 +215,5 @@ follow the instructions to retrieve an authentication code.`
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
-import com.google.api.gax.rpc.ApiException;
-import com.google.cloud.bigquery.datatransfer.v1.CreateTransferConfigRequest;
-import com.google.cloud.bigquery.datatransfer.v1.DataTransferServiceClient;
-import com.google.cloud.bigquery.datatransfer.v1.ProjectName;
-import com.google.cloud.bigquery.datatransfer.v1.TransferConfig;
-import com.google.protobuf.Struct;
-import com.google.protobuf.Value;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
-// Sample to create a ad manager(formerly DFP) transfer config
-public class CreateAdManagerTransfer {
-
-  public static void main(String[] args) throws IOException {
-    // TODO(developer): Replace these variables before running the sample.
-    final String projectId = "MY_PROJECT_ID";
-    String datasetId = "MY_DATASET_ID";
-    String bucket = "gs://cloud-sample-data";
-    // the network_code can only be digits with length 1 to 15
-    String networkCode = "12345678";
-    Map<String, Value> params = new HashMap<>();
-    params.put("bucket", Value.newBuilder().setStringValue(bucket).build());
-    params.put("network_code", Value.newBuilder().setStringValue(networkCode).build());
-    TransferConfig transferConfig =
-        TransferConfig.newBuilder()
-            .setDestinationDatasetId(datasetId)
-            .setDisplayName("Your Ad Manager Config Name")
-            .setDataSourceId("dfp_dt")
-            .setParams(Struct.newBuilder().putAllFields(params).build())
-            .build();
-    createAdManagerTransfer(projectId, transferConfig);
-  }
-
-  public static void createAdManagerTransfer(String projectId, TransferConfig transferConfig)
-      throws IOException {
-    try (DataTransferServiceClient client = DataTransferServiceClient.create()) {
-      ProjectName parent = ProjectName.of(projectId);
-      CreateTransferConfigRequest request =
-          CreateTransferConfigRequest.newBuilder()
-              .setParent(parent.
+import com.google.api.gax.rpc.ApiException
 ```

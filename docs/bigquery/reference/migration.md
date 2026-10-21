@@ -41,7 +41,7 @@ BOMs, see [The Google Cloud Platform Libraries BOM](https://cloud.google.com/jav
     <dependency>
       <groupId>com.google.cloud</groupId>
       <artifactId>libraries-bom</artifactId>
-      <version>26.83.0</version>
+      <version>26.90.0</version>
       <type>pom</type>
       <scope>import</scope>
     </dependency>
@@ -60,7 +60,7 @@ If you are using [Gradle](https://gradle.org/),
 add the following to your dependencies:
 
 ```
-implementation platform('com.google.cloud:libraries-bom:26.83.0')
+implementation platform('com.google.cloud:libraries-bom:26.90.0')
 
 implementation 'com.google.cloud:google-cloud-bigquerymigration'
 ```
@@ -69,7 +69,7 @@ If you are using [sbt](https://www.scala-sbt.org/), add
 the following to your dependencies:
 
 ```
-libraryDependencies += "com.google.cloud" % "google-cloud-bigquerymigration" % "0.97.0"
+libraryDependencies += "com.google.cloud" % "google-cloud-bigquerymigration" % "0.102.0"
 ```
 
 If you're using Visual Studio Code or IntelliJ, you can add client libraries to your
@@ -217,101 +217,5 @@ func executeTranslationWorkflow(ctx context.Context, client *migration.Client, p
 					Type: "Translation_Teradata2BQ",
 					TaskDetails: &migrationpb.MigrationTask_TranslationConfigDetails{
 						TranslationConfigDetails: &migrationpb.TranslationConfigDetails{
-							SourceLocation: &migrationpb.TranslationConfigDetails_GcsSourcePath{
-								GcsSourcePath: "gs://cloud-samples-data/bigquery/migration/translation/input/",
-							},
-							TargetLocation: &migrationpb.TranslationConfigDetails_GcsTargetPath{
-								GcsTargetPath: outPath,
-							},
-							SourceDialect: &migrationpb.Dialect{
-								DialectValue: &migrationpb.Dialect_TeradataDialect{
-									TeradataDialect: &migrationpb.TeradataDialect{
-										Mode: migrationpb.TeradataDialect_SQL,
-									},
-								},
-							},
-							TargetDialect: &migrationpb.Dialect{
-								DialectValue: &migrationpb.Dialect_BigqueryDialect{},
-							},
-						},
-					},
-				},
-			},
-		},
-	}
-
-	// Create the workflow using the request.
-	workflow, err := client.CreateMigrationWorkflow(ctx, req)
-	if err != nil {
-		return nil, fmt.Errorf("CreateMigrationWorkflow: %w", err)
-	}
-	fmt.Printf("workflow created: %s", workflow.GetName())
-
-	// This is an asyncronous process, so we now poll the workflow
-	// until completion or a suitable timeout has elapsed.
-	timeoutCtx, cancel := context.WithTimeout(ctx, 5*time.Minute)
-	defer cancel()
-	for {
-		select {
-		case <-timeoutCtx.Done():
-			return nil, fmt.Errorf("task %s didn't complete due to context expiring", workflow.GetName())
-		default:
-			polledWorkflow, err := client.GetMigrationWorkflow(timeoutCtx, &migrationpb.GetMigrationWorkflowRequest{
-				Name: workflow.GetName(),
-			})
-			if err != nil {
-				return nil, fmt.Errorf("polling ended in error: %w", err)
-			}
-			if polledWorkflow.GetState() == migrationpb.MigrationWorkflow_COMPLETED {
-				// polledWorkflow contains the most recent metadata about the workflow, so we return that.
-				return polledWorkflow, nil
-			}
-			// workflow still isn't complete, so sleep briefly before polling again.
-			time.Sleep(5 * time.Second)
-		}
-	}
-}
-
-// reportWorkflowStatus prints information about the workflow execution in a more human readable format.
-func reportWorkflowStatus(workflow *migrationpb.MigrationWorkflow) {
-	fmt.Printf("Migration workflow %s ended in state %s.\n", workflow.GetName(), workflow.GetState().String())
-	for k, task := range workflow.GetTasks() {
-		fmt.Printf(" - Task %s had id %s", k, task.GetId())
-		if task.GetProcessingError() != nil {
-			fmt.Printf(" with processing error: %s", task.GetProcessingError().GetReason())
-		}
-		fmt.Println()
-	}
-}
-```
-
-### Python
-
-```
-# Copyright 2022 Google LLC
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     https://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
-
-def create_migration_workflow(
-    gcs_input_path: str, gcs_output_path: str, project_id: str
-) -> None:
-    """Creates a migration workflow of a Batch SQL Translation and prints the response."""
-
-    from google.cloud import bigquery_migration_v2
-
-    parent = f"projects/{project_id}/locations/us"
-
-    # Construct a BigQuery Migration client object.
-    client = bigquery_migration_v2.
+							
 ```

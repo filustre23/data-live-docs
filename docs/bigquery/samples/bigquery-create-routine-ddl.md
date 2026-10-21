@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -124,6 +124,36 @@ public class CreateRoutineDdl {
 }
 ```
 
+### Python
+
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+
+```
+from google.cloud import bigquery
+
+# Construct a BigQuery client object.
+client = bigquery.Client()
+
+# TODO(developer): Choose a fully-qualified ID for the routine.
+# routine_id = "my-project.my_dataset.my_routine"
+
+sql = """
+CREATE FUNCTION `{}`(
+    arr ARRAY<STRUCT<name STRING, val INT64>>
+) AS (
+    (SELECT SUM(IF(elem.name = "foo",elem.val,null)) FROM UNNEST(arr) AS elem)
+)
+""".format(
+    routine_id
+)
+query_job = client.query(sql)  # Make an API request.
+query_job.result()  # Wait for the job to complete.
+
+print("Created routine {}".format(query_job.ddl_target_routine))
+```
+
 ### Rust
 
 ```
@@ -148,8 +178,6 @@ pub async fn sample(project_id: &str, dataset_id: &str, routine_id: &str) -> any
         .query(ddl_sql)
         .with_project_id(project_id)
         .set_location("US")
-        .run()
-        .await?
         .until_done()
         .await?;
 

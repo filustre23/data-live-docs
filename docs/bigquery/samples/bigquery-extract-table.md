@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -223,28 +223,55 @@ function extract_table(
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
-# from google.cloud import bigquery
-# client = bigquery.Client()
-# bucket_name = 'my-bucket'
-project = "bigquery-public-data"
-dataset_id = "samples"
-table_id = "shakespeare"
+import bigframes.pandas as bpd
+from google.cloud import bigquery
 
-destination_uri = "gs://{}/{}".format(bucket_name, "shakespeare.csv")
-dataset_ref = bigquery.DatasetReference(project, dataset_id)
-table_ref = dataset_ref.table(table_id)
+# Set partial ordering mode for BigQuery DataFrames.
+bpd.options.bigquery.ordering_mode = "partial"
 
-extract_job = client.extract_table(
-    table_ref,
-    destination_uri,
-    # Location must match that of the source table.
-    location="US",
-)  # API request
-extract_job.result()  # Waits for job to complete.
 
-print(
-    "Exported {}:{}.{} to {}".format(project, dataset_id, table_id, destination_uri)
-)
+def extract_table_bigframes(bucket_name: str = "my-bucket") -> None:
+    """Exports a BigQuery table to Cloud Storage in CSV format using BigQuery DataFrames."""
+    project = "bigquery-public-data"
+    dataset_id = "samples"
+    table_id = "shakespeare"
+    destination_uri = f"gs://{bucket_name}/shakespeare-*.csv"
+
+    full_table_id = f"{project}.{dataset_id}.{table_id}"
+    df = bpd.read_gbq(full_table_id)
+    df.to_csv(destination_uri)
+    print(f"Exported {full_table_id} to {destination_uri} using BigQuery DataFrames.")
+
+
+def extract_table_client(bucket_name: str = "my-bucket") -> None:
+    """Exports a BigQuery table to Cloud Storage in CSV format using google-cloud-bigquery."""
+    project = "bigquery-public-data"
+    dataset_id = "samples"
+    table_id = "shakespeare"
+    destination_uri = f"gs://{bucket_name}/shakespeare-*.csv"
+
+    client = bigquery.Client()
+    dataset_ref = bigquery.DatasetReference(project, dataset_id)
+    table_ref = dataset_ref.table(table_id)
+
+    extract_job = client.extract_table(
+        table_ref,
+        destination_uri,
+        # Location must match that of the source table.
+        location="US",
+    )  # API request
+    extract_job.result()  # Waits for job to complete.
+
+    print(
+        f"Exported {project}:{dataset_id}.{table_id} to {destination_uri} using client library."
+    )
+
+
+# [Preferred] Run using BigQuery DataFrames:
+# extract_table_bigframes("my-bucket")
+
+# Alternatively, run using google-cloud-bigquery client library:
+# extract_table_client("my-bucket")
 ```
 
 ### Ruby

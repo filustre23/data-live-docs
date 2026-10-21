@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -20,7 +20,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 所需權限
 
-如要查看[搜尋索引](https://docs.cloud.google.com/bigquery/docs/search-index?hl=zh-tw)中繼資料，您必須具備索引所在資料表的 `bigquery.tables.get` 或 `bigquery.tables.list` Identity and Access Management (IAM) 權限。下列每個預先定義的 IAM 角色都至少包含其中一項權限：
+如要查看[搜尋索引](https://docs.cloud.google.com/bigquery/docs/search-index?hl=zh-tw)中繼資料，您必須具備索引資料表的 `bigquery.tables.get` 或 `bigquery.tables.list` Identity and Access Management (IAM) 權限。下列每個預先定義的 IAM 角色都至少包含其中一項權限：
 
 * `roles/bigquery.admin`
 * `roles/bigquery.dataEditor`
@@ -29,7 +29,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 * `roles/bigquery.metadataViewer`
 * `roles/bigquery.user`
 
-如要進一步瞭解 BigQuery 權限，請參閱「[使用 IAM 控管存取權](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)」。
+如要進一步瞭解 BigQuery 權限，請參閱[使用 IAM 控管存取權](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)。
 
 ## 結構定義
 
@@ -43,18 +43,19 @@ Google uses AI technology to translate content into your preferred language. AI 
 | `index_schema` | `STRING` | 包含索引的資料集名稱。 |
 | `table_name` | `STRING` | 建立索引的基礎資料表名稱。 |
 | `index_name` | `STRING` | 索引的名稱。 |
-| `index_status` | `STRING` | 索引的狀態：`ACTIVE`、`PENDING DISABLEMENT`、`TEMPORARILY DISABLED` 或 `PERMANENTLY DISABLED`。  * `ACTIVE` 表示索引可用或正在建立中。請參閱 `coverage_percentage`，查看索引建立進度。 * `PENDING DISABLEMENT` 表示建立索引的基礎資料表總大小超出貴機構的[限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#index_limits)，因此系統已將索引排入刪除佇列。處於這個狀態時，索引可用於搜尋查詢，且系統會向您收取搜尋索引儲存空間費用。 * `TEMPORARILY DISABLED` 表示建立索引的基礎資料表總大小超出貴機構的[限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#index_limits)，或是基礎索引資料表小於 10 GB。處於這個狀態時，索引不會用於搜尋查詢，您也不會因搜尋索引儲存空間而產生費用。 * `PERMANENTLY DISABLED` 表示基本資料表有不相容的結構定義變更，例如將索引資料欄的類型從 `STRING` 變更為 `INT64`。 |
+| `index_status` | `STRING` | 索引的狀態：`ACTIVE`、`PENDING DISABLEMENT`、`TEMPORARILY DISABLED` 或 `PERMANENTLY DISABLED`。  * `ACTIVE` 代表索引可用或正在建立中。請參閱 `coverage_percentage`，查看索引建立進度。 * `PENDING DISABLEMENT` 表示索引基本資料表的總大小超過貴機構的[限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#index_limits)，因此系統已將索引排入刪除佇列。處於這個狀態時，索引可用於搜尋查詢，且您需要支付搜尋索引儲存空間的費用。 * `TEMPORARILY DISABLED` 表示索引基本資料表的總大小超出貴機構的[限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#index_limits)，或是索引基本資料表小於 10 GB。處於這個狀態時，索引不會用於搜尋查詢，且您不會因搜尋索引儲存空間而產生費用。 * `PERMANENTLY DISABLED` 表示基本資料表有不相容的結構定義變更，例如將索引資料欄的類型從 `STRING` 變更為 `INT64`。 |
 | `creation_time` | `TIMESTAMP` | 索引的建立時間。 |
 | `last_modification_time` | `TIMESTAMP` | 上次修改索引設定的時間。例如刪除已建立索引的資料欄。 |
-| `last_refresh_time` | `TIMESTAMP` | 上次為表格資料建立索引的時間。`NULL` 值表示索引尚未提供。 |
-| `disable_time` | `TIMESTAMP` | 索引狀態設為「`DISABLED`」的時間。如果索引狀態不是 `DISABLED`，值為 `NULL`。 |
-| `disable_reason` | `STRING` | 索引停用的原因。如果索引狀態不是 `DISABLED`，請使用 `NULL`。 |
+| `last_refresh_time` | `TIMESTAMP` | 上次為資料表資料建立索引的時間。`NULL` 值表示索引尚未提供。 |
+| `disable_time` | `TIMESTAMP` | 索引狀態設為 `DISABLED` 的時間。如果索引狀態不是 `DISABLED`，值為 `NULL`。 |
+| `disable_reason` | `STRING` | 索引停用的原因。如果索引狀態不是 `DISABLED`，請改用 `NULL`。 |
 | `DDL` | `STRING` | 用於建立索引的 DDL 陳述式。 |
 | `coverage_percentage` | `INTEGER` | 已建立索引的資料表資料約略百分比。0% 表示索引無法用於 `SEARCH` 查詢，即使部分資料已建立索引也一樣。 |
-| `unindexed_row_count` | `INTEGER` | 尚未建立索引的基本資料表列數。 |
+| `unindexed_row_count` | `INTEGER` | 尚未建立索引的基本資料表資料列數。 |
 | `total_logical_bytes` | `INTEGER` | 索引的可計費邏輯位元組數。 |
 | `total_storage_bytes` | `INTEGER` | 索引的可計費儲存空間位元組數。 |
-| `analyzer` | `STRING` | 用於為搜尋索引產生權杖的[文字分析器](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis?hl=zh-tw)。 |
+| `analyzer` | `STRING` | 用於為搜尋索引產生符記的[文字分析器](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis?hl=zh-tw)。 |
+| `last_index_alteration_info` | `STRUCT` | 最近一次使用者觸發的索引變更詳細資料，包含下列欄位：  * `status`：表示變更狀態的 `STRING` 值。可能的值為 `IN_PROGRESS` 和 `FAILED`。 * `message`：`FAILED`狀態的詳細資料，以 [ErrorProto](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/ErrorProto?hl=zh-tw) 形式呈現。其他狀態的值為 `NULL`。 * `new_coverage_percentage`：`INT64` 值，其中包含已為變更建立索引的資料表資料概略百分比。 * `start_time`：啟動變更的時間戳記。 * `end_time`：變更進入 `FAILED` 狀態的時間戳記。 * `ddl`：用於變更索引的資料定義語言 (DDL) 陳述式。 |
 
 為確保穩定性，建議您在資訊結構定義查詢中明確列出資料欄，而非使用萬用字元 (`SELECT *`)。明確列出資料欄可避免基礎結構定義變更時，查詢中斷。
 
@@ -68,8 +69,8 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 取代下列項目：
 
-* 選用：`PROJECT_ID`：您的 Google Cloud 專案 ID。如未指定，系統會使用預設專案。
-* `DATASET_ID`：資料集 ID。詳情請參閱「[資料集限定符](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw#dataset_qualifier)」。
+* 選用：`PROJECT_ID`：專案 ID。 Google Cloud 如未指定，系統會使用預設專案。
+* `DATASET_ID`：資料集的 ID。詳情請參閱「[資料集限定符](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw#dataset_qualifier)」。
 
 **範例**
 
@@ -80,7 +81,7 @@ SELECT * FROM myDataset.INFORMATION_SCHEMA.SEARCH_INDEXES;
 
 ## 範例
 
-以下範例會顯示專案 `my_project` 中，資料集 `my_dataset` 內資料表的所有有效搜尋索引。包括名稱、用於建立這些項目的 DDL 陳述式、涵蓋率百分比和文字分析器。如果編入索引的基礎資料表小於 10 GB，系統就不會填入索引，此時 `coverage_percentage` 為 0。
+以下範例會顯示專案 `my_project` 中，資料集 `my_dataset` 內資料表的所有有效搜尋索引。包括名稱、用於建立這些物件的 DDL 陳述式、涵蓋範圍百分比，以及文字分析器。如果編入索引的基礎資料表小於 10 GB，系統就不會填入索引，此時 `coverage_percentage` 為 0。
 
 ```
 SELECT table_name, index_name, ddl, coverage_percentage, analyzer
@@ -128,11 +129,11 @@ become available.
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-13 (世界標準時間)。
+上次更新時間：2026-10-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-13 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]

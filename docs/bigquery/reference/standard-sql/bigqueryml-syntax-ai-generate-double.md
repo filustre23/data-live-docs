@@ -43,8 +43,7 @@ For example, the following query rates the sentiment of BBC news article titles:
 SELECT
   title,
   AI.GENERATE_DOUBLE(
-    ("Rate the sentiment of this article title on a scale of 0 to 1, where 1 is very positive: ", title),
-    endpoint => 'gemini-2.5-pro'
+    ("Rate the sentiment of this article title on a scale of 0 to 1, where 1 is very positive: ", title)
   ).result AS sentiment_score
 FROM `bigquery-public-data.bbc_news.fulltext`
 LIMIT 3;
@@ -131,8 +130,8 @@ AI.GENERATE_DOUBLE(
   BigQuery ML automatically identifies and uses the full endpoint
   of the model. If you don't specify an `ENDPOINT` value,
   BigQuery ML selects a recent stable version of
-  Gemini to use. Currently, the default endpoint is
-  `gemini-2.5-flash`.
+  Gemini to use. The default endpoint is
+  `gemini-3.5-flash-lite`.
   You can also specify the
   [global endpoint](/vertex-ai/generative-ai/docs/learn/locations#use_the_global_endpoint).
   For example, specify the following endpoint:
@@ -145,9 +144,29 @@ AI.GENERATE_DOUBLE(
   processing location, because when you use the global endpoint, you can't
   control or know the region where your processing requests are handled.
 
-  Agent Platform doesn't support regional endpoints for
-  Gemini 3 models. For these models, use `global`, `us`, or
-  `eu` as the location.
+  BigQuery supports the following models:
+  + `gemini-4-argon`
+  + `gemini-3.8-flash`
+  + `gemini-3.7-flash`
+  + `gemini-3.6-flash`
+  + `gemini-3.5-flash-lite`
+  + `gemini-3.5-flash`
+  + `gemini-3.1-flash-lite`Agent Platform only supports multi-regional endpoints for
+  these models. Regional endpoints aren't supported.
+  If you specify a short endpoint name that omits the region, such as `gemini-3.5-flash`,
+  then BigQuery selects an endpoint according to the following rules:
+  + If your query is run in the `us` region, or any single region in the US, then
+    BigQuery uses the `us` endpoint.
+  + If your query is run in the `eu` region, or any single region in the EU other than
+    `europe-west2` or `europe-west6`, then BigQuery
+    uses the `eu` endpoint.
+  + For all other locations, including `europe-west2` and
+    `europe-west6`, BigQuery uses the `global` endpoint.To specify a specific endpoint, use a fully qualified multi-regional endpoint name in one of the
+  following formats:
+  + `https://aiplatform.us.rep.googleapis.com/v1/projects/PROJECT_ID/locations/us/publishers/google/models/MODEL_ID`
+  + `https://aiplatform.eu.rep.googleapis.com/v1/projects/PROJECT_ID/locations/eu/publishers/google/models/MODEL_ID`
+  + `https://aiplatform.googleapis.com/v1/projects/PROJECT_ID/locations/global/publishers/google/models/MODEL_ID`If your query runs in the `asia-south1` region, then you must use the fully qualified
+  global endpoint name.
 
   Using Gemini 2.5 and later models incurs charges for the
   [thinking process](/vertex-ai/generative-ai/docs/thinking).
@@ -229,7 +248,7 @@ by running the following query:
 ```
 SELECT
   city,
-  AI.GENERATE_DOUBLE(('What is the population of ', city, ' in millions?'), endpoint => 'gemini-2.5-pro').result
+  AI.GENERATE_DOUBLE(('What is the population of ', city, ' in millions?')).result
 FROM UNNEST(["Seattle", "Beijing", "Paris", "London"]) city;
 ```
 
@@ -261,7 +280,6 @@ model's thinking budget to `0` for the request:
 SELECT
   city,
   AI.GENERATE_DOUBLE(('What is the population of ', city, ' in millions?'),
-    endpoint => 'gemini-2.5-pro',
     model_params => JSON '{"generation_config":{"thinking_config": {"thinking_budget": 0}}}')
 FROM mydataset.cities;
 ```
@@ -329,6 +347,8 @@ multi-regions.
 For quota and limit information, see
 [Generative AI functions](/bigquery/quotas#generative_ai_functions) in the
 BigQuery quotas and limits reference.
+For information about managing the cost of this function, see
+[Control costs with token quotas](/bigquery/docs/control-genai-costs).
 
 ## What's next
 
@@ -348,11 +368,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-07-17 UTC.
+Last updated 2026-10-13 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-07-17 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-10-13 UTC."],[],[]]

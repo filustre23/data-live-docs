@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -227,44 +227,5 @@ AS (
       AND EXTRACT(DAY FROM DATE_ADD(date_2, INTERVAL 1 DAY)) = 1
       THEN date_diff(date_1,date_2, MONTH)
     WHEN EXTRACT(DAY FROM date_1) = 1
-      AND EXTRACT(DAY FROM DATE_ADD(date_2, INTERVAL 1 DAY)) = 1
-      THEN date_diff(DATE_ADD(date_1, INTERVAL -1 DAY), date_2, MONTH) + 1/31
-    ELSE date_diff(date_1, date_2, MONTH) - 1 + ((EXTRACT(DAY FROM date_1) + (31 - EXTRACT(DAY FROM date_2))) / 31)
-    END
-);
+      AND EXTRACT(DAY FROM DATE_ADD(date_2, INTERVAL
 ```
-
-#### 遷移 Netezza 預存程序
-
-如果您在 ETL 工作負載中使用 Netezza 儲存程序建構事實資料表，就必須將這些儲存程序遷移至與 BigQuery 相容的 SQL 查詢。Netezza 會使用 NZPLSQL 指令碼語言處理預存程序。NZPLSQL 是以 Postgres PL/pgSQL 語言為基礎。詳情請參閱 [IBM Netezza SQL 翻譯指南](https://docs.cloud.google.com/bigquery/docs/migration/netezza-sql?hl=zh-tw)。
-
-#### 自訂 UDF，模擬 Netezza ASCII
-
-下列 BigQuery 自訂 UDF 可修正資料欄中的編碼錯誤：
-
-```
-CREATE TEMP FUNCTION ascii(X STRING)
-AS (TO_CODE_POINTS(x)[ OFFSET (0)]);
-```
-
-## 後續步驟
-
-* 瞭解如何[最佳化工作負載](https://docs.cloud.google.com/bigquery/docs/admin-intro?hl=zh-tw#optimize_workloads)，全面提升效能並降低成本。
-* 瞭解如何[在 BigQuery 中最佳化儲存空間](https://docs.cloud.google.com/bigquery/docs/best-practices-storage?hl=zh-tw)。
-* 請參閱 [IBM Netezza SQL 翻譯指南](https://docs.cloud.google.com/bigquery/docs/migration/netezza-sql?hl=zh-tw)。
-
-
-
-
-提供意見
-
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
-
-上次更新時間：2026-07-15 (世界標準時間)。
-
-
-
-
-想進一步說明嗎？
-
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-15 (世界標準時間)。"],[],[]]

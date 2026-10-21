@@ -131,16 +131,24 @@ STRUCT(
 
 * `OUTPUT_SCHEMA`: a `STRING` value that specifies the
   schema of the output as a comma-separated list of fields. Each field consists
-  of a name, a data type, and an optional `OPTIONS` clause in which you can
-  specify a description of the field.
+  of a name, a data type, an optional `NOT NULL` specification, and an optional
+  `OPTIONS` clause in which you can specify a description of the field or an
+  allowable set of enum values. When a
+  field is missing from the input data, the output field might be `NULL`. To
+  ensure that a field always contains a value for missing data,
+  such as `unknown` or an inferred value, specify `NOT NULL`.
+
   The following example shows how to specify an output schema that contains
-  two string fields, `name` and `state`, with a description for the `state`
-  field:
+  two string fields, `name` and `state`. The `name` field is never `NULL` and
+  the `state` field has a description and set of allowable enum values. Since
+  `enum` is a reserved keyword, it must be enclosed in backticks.
 
   ```
   '''
-  name STRING,
-  state STRING OPTIONS(description = 'The 2-letter abbreviation of the state name')
+  name NOT NULL STRING,
+  state STRING OPTIONS(
+    description = 'The 2-letter abbreviation of the state name',
+    `enum` = ['CA', 'NY', 'WA'])
   ''' AS output_schema
   ```
 
@@ -286,7 +294,7 @@ The results look similar to the following:
 
 ### Create a column based on image data
 
-The following example shows how to to create and populate an
+The following example shows how to create and populate an
 `image_description` column by analyzing a product image that is stored as
 an `ObjectRef` value in a standard table:
 
@@ -387,11 +395,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-07-17 UTC.
+Last updated 2026-10-16 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-07-17 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-10-16 UTC."],[],[]]

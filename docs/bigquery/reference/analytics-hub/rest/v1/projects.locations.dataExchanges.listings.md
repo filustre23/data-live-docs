@@ -46,7 +46,7 @@ A listing is what gets published into a data exchange that a subscriber can subs
 
 | JSON representation |
 | --- |
-| ``` {   "name": string,   "displayName": string,   "description": string,   "primaryContact": string,   "documentation": string,   "state": enum (State),   "icon": string,   "dataProvider": {     object (DataProvider)   },   "categories": [     enum (Category)   ],   "publisher": {     object (Publisher)   },   "requestAccess": string,   "restrictedExportConfig": {     object (RestrictedExportConfig)   },   "storedProcedureConfig": {     object (StoredProcedureConfig)   },   "resourceType": enum (SharedResourceType),    // Union field source can be only one of the following:   "bigqueryDataset": {     object (BigQueryDatasetSource)   },   "pubsubTopic": {     object (PubSubTopicSource)   }   // End of list of possible types for union field source.   "discoveryType": enum (DiscoveryType),   "commercialInfo": {     object (CommercialInfo)   },   "logLinkedDatasetQueryUserEmail": boolean,   "allowOnlyMetadataSharing": boolean } ``` |
+| ``` {   "name": string,   "displayName": string,   "description": string,   "primaryContact": string,   "documentation": string,   "state": enum (State),   "icon": string,   "dataProvider": {     object (DataProvider)   },   "categories": [     enum (Category)   ],   "publisher": {     object (Publisher)   },   "requestAccess": string,   "restrictedExportConfig": {     object (RestrictedExportConfig)   },   "storedProcedureConfig": {     object (StoredProcedureConfig)   },   "resourceType": enum (SharedResourceType),    // The following is a list of mutually exclusive fields. At most one of the   // fields will be set in a response:   "bigqueryDataset": {     object (BigQueryDatasetSource)   },   "pubsubTopic": {     object (PubSubTopicSource)   }   // End of mutually exclusive fields.   "discoveryType": enum (DiscoveryType),   "commercialInfo": {     object (CommercialInfo)   },   "logLinkedDatasetQueryUserEmail": boolean,   "allowOnlyMetadataSharing": boolean } ``` |
 
 | Fields | |
 | --- | --- |
@@ -64,9 +64,10 @@ A listing is what gets published into a data exchange that a subscriber can subs
 | `restrictedExportConfig` | `object (RestrictedExportConfig)`  Optional. If set, restricted export configuration will be propagated and enforced on the linked dataset. |
 | `storedProcedureConfig` | `object (StoredProcedureConfig)`  Optional. If set, stored procedure configuration will be propagated and enforced on the linked dataset. |
 | `resourceType` | `enum (SharedResourceType)`  Output only. Listing shared asset type. |
-| Union field `source`. Listing source. `source` can be only one of the following: | |
+| Listing source. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response: | |
 | `bigqueryDataset` | `object (BigQueryDatasetSource)`  Shared dataset i.e. BigQuery dataset source. |
 | `pubsubTopic` | `object (PubSubTopicSource)`  Pub/Sub topic source. |
+| End of mutually exclusive fields. | |
 | `discoveryType` | `enum (DiscoveryType)`  Optional. Type of discovery of the listing on the discovery page. |
 | `commercialInfo` | `object (CommercialInfo)`  Output only. Commercial info contains the information about the commercial data products associated with the listing. |
 | `logLinkedDatasetQueryUserEmail` | `boolean`  Optional. By default, false. If true, the Listing has an email sharing mandate enabled. |
@@ -94,13 +95,14 @@ Resource in this dataset that is selectively shared.
 
 | JSON representation |
 | --- |
-| ``` {    // Union field resource can be only one of the following:   "table": string,   "routine": string   // End of list of possible types for union field resource. } ``` |
+| ``` {    // The following is a list of mutually exclusive fields. At most one of the   // fields will be set in a response:   "table": string,   "routine": string   // End of mutually exclusive fields. } ``` |
 
 | Fields | |
 | --- | --- |
-| Union field `resource`.  `resource` can be only one of the following: | |
+| The following is a list of mutually exclusive fields. At most one of the fields will be set in a response: | |
 | `table` | `string`  Optional. Format: For table: `projects/{projectId}/datasets/{datasetId}/tables/{tableId}` Example:"projects/test\_project/datasets/test\_dataset/tables/test\_table" |
 | `routine` | `string`  Optional. Format: For routine: `projects/{projectId}/datasets/{datasetId}/routines/{routineId}` Example:"projects/test\_project/datasets/test\_dataset/routines/test\_routine" |
+| End of mutually exclusive fields. | |
 
 ## RestrictedExportPolicy
 
@@ -143,145 +145,3 @@ Replica state of the shared dataset.
 ## PrimaryState
 
 Primary state of the replica. Set only for the primary replica.
-
-| Enums | |
-| --- | --- |
-| `PRIMARY_STATE_UNSPECIFIED` | Default value. This value is unused. |
-| `PRIMARY_REPLICA` | The replica is the primary replica. |
-
-## PubSubTopicSource
-
-Pub/Sub topic source.
-
-| JSON representation |
-| --- |
-| ``` {   "topic": string,   "dataAffinityRegions": [     string   ] } ``` |
-
-| Fields | |
-| --- | --- |
-| `topic` | `string`  Required. Resource name of the Pub/Sub topic source for this listing. e.g. projects/myproject/topics/topicId |
-| `dataAffinityRegions[]` | `string`  Optional. Region hint on where the data might be published. Data affinity regions are modifiable. See <https://cloud.google.com/about/locations> for full listing of possible Cloud regions. |
-
-## State
-
-State of the listing.
-
-| Enums | |
-| --- | --- |
-| `STATE_UNSPECIFIED` | Default value. This value is unused. |
-| `ACTIVE` | Subscribable state. Users with dataexchange.listings.subscribe permission can subscribe to this listing. |
-
-## DataProvider
-
-Contains details of the data provider.
-
-| JSON representation |
-| --- |
-| ``` {   "name": string,   "primaryContact": string } ``` |
-
-| Fields | |
-| --- | --- |
-| `name` | `string`  Optional. Name of the data provider. |
-| `primaryContact` | `string`  Optional. Email or URL of the data provider. Max Length: 1000 bytes. |
-
-## Category
-
-Listing categories.
-
-| Enums | |
-| --- | --- |
-| `CATEGORY_UNSPECIFIED` |  |
-| `CATEGORY_OTHERS` |  |
-| `CATEGORY_ADVERTISING_AND_MARKETING` |  |
-| `CATEGORY_COMMERCE` |  |
-| `CATEGORY_CLIMATE_AND_ENVIRONMENT` |  |
-| `CATEGORY_DEMOGRAPHICS` |  |
-| `CATEGORY_ECONOMICS` |  |
-| `CATEGORY_EDUCATION` |  |
-| `CATEGORY_ENERGY` |  |
-| `CATEGORY_FINANCIAL` |  |
-| `CATEGORY_GAMING` |  |
-| `CATEGORY_GEOSPATIAL` |  |
-| `CATEGORY_HEALTHCARE_AND_LIFE_SCIENCE` |  |
-| `CATEGORY_MEDIA` |  |
-| `CATEGORY_PUBLIC_SECTOR` |  |
-| `CATEGORY_RETAIL` |  |
-| `CATEGORY_SPORTS` |  |
-| `CATEGORY_SCIENCE_AND_RESEARCH` |  |
-| `CATEGORY_TRANSPORTATION_AND_LOGISTICS` |  |
-| `CATEGORY_TRAVEL_AND_TOURISM` |  |
-| `CATEGORY_GOOGLE_EARTH_ENGINE` |  |
-
-## Publisher
-
-Contains details of the listing publisher.
-
-| JSON representation |
-| --- |
-| ``` {   "name": string,   "primaryContact": string } ``` |
-
-| Fields | |
-| --- | --- |
-| `name` | `string`  Optional. Name of the listing publisher. |
-| `primaryContact` | `string`  Optional. Email or URL of the listing publisher. Max Length: 1000 bytes. |
-
-## RestrictedExportConfig
-
-Restricted export config, used to configure restricted export on linked dataset.
-
-| JSON representation |
-| --- |
-| ``` {   "enabled": boolean,   "restrictDirectTableAccess": boolean,   "restrictQueryResult": boolean } ``` |
-
-| Fields | |
-| --- | --- |
-| `enabled` | `boolean`  Optional. If true, enable restricted export. |
-| `restrictDirectTableAccess` | `boolean`  Output only. If true, restrict direct table access(read api/tabledata.list) on linked table. |
-| `restrictQueryResult` | `boolean`  Optional. If true, restrict export of query result derived from restricted linked dataset table. |
-
-## StoredProcedureConfig
-
-Stored procedure configuration, used to configure stored procedure sharing on linked dataset.
-
-| JSON representation |
-| --- |
-| ``` {   "enabled": boolean,   "allowedStoredProcedureTypes": [     enum (StoredProcedureType)   ] } ``` |
-
-| Fields | |
-| --- | --- |
-| `enabled` | `boolean`  Optional. If true, enable sharing of stored procedure. |
-| `allowedStoredProcedureTypes[]` | `enum (StoredProcedureType)`  Output only. Types of stored procedure supported to share. |
-
-## StoredProcedureType
-
-Enum to specify the type of stored procedure to share.
-
-| Enums | |
-| --- | --- |
-| `STORED_PROCEDURE_TYPE_UNSPECIFIED` | Default value. This value is unused. |
-| `SQL_PROCEDURE` | SQL stored procedure. |
-
-## CommercialInfo
-
-Commercial info contains the information about the commercial data products associated with the listing.
-
-| JSON representation |
-| --- |
-| ``` {   "cloudMarketplace": {     object (GoogleCloudMarketplaceInfo)   } } ``` |
-
-| Fields | |
-| --- | --- |
-| `cloudMarketplace` | `object (GoogleCloudMarketplaceInfo)`  Output only. Details of the Marketplace Data Product associated with the Listing. |
-
-## GoogleCloudMarketplaceInfo
-
-Specifies the details of the Marketplace Data Product associated with the Listing.
-
-| JSON representation |
-| --- |
-| ``` {   "service": string,   "commercialState": enum (CommercialState) } ``` |
-
-| Fields | |
-| --- | --- |
-| `service` | `string`  Output only. Resource name of the commercial service associated with the Marketplace Data Product. e.g. example.com |
-| `commercialState` | `enum (CommercialState)` |

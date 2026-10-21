@@ -23,18 +23,6 @@ GoogleSQL for BigQuery supports the following time series functions.
 
 ## `APPENDS`
 
-**Preview**
-
-This product or feature is subject to the "Pre-GA Offerings Terms"
-in the General Service Terms section of the
-[Service Specific Terms](https://cloud.google.com/terms/service-terms).
-Pre-GA products and features are available "as is" and might have
-limited support. For more information, see the
-[launch stage descriptions](https://cloud.google.com/products#product-launch-stages).
-
-**Note:** To provide feedback or request support for this feature, send an email to
-[bq-change-history-feedback@google.com](mailto:bq-change-history-feedback@google.com).
-
 ```
 APPENDS(
   TABLE table,
@@ -65,11 +53,15 @@ The following operations add rows to the `APPENDS` change history:
   table creation are returned. If the table was created after the
   `start_timestamp` value, the actual table creation time is used instead. An error
   is returned if the time specified is earlier than allowed by
-  [time travel](/bigquery/docs/time-travel), or
-  if the table was created earlier than allowed by time travel if the
-  `start_timestamp` value is `NULL`. For standard tables, this window is seven days,
-  but you can [configure the time travel window](/bigquery/docs/time-travel#configure_the_time_travel_window) to be less than
-  that.
+  [time travel](/bigquery/docs/time-travel).
+
+  **Note:** An error is returned if the `start_timestamp` is older than
+  allowed by [time travel](/bigquery/docs/time-travel). An error is also returned if the
+  `start_timestamp` value is `NULL` and the table was created earlier than
+  allowed by time travel. To get all available appended records,
+  specify a `start_timestamp` within your time travel window instead of
+  `NULL`. For standard tables, the time travel window is seven days, but you can
+  [configure the time travel window](/bigquery/docs/time-travel#configure_the_time_travel_window) to be less than that.
 * `end_timestamp`: a `TIMESTAMP` value indicating the latest time at
   which a change is included in the output. `end_timestamp` is exclusive; for
   example, if you specify `2023-12-31 08:00:00` for `start_timestamp` and
@@ -117,6 +109,18 @@ The `APPENDS` function returns a table with the following columns:
 * Partition pseudo-columns for ingestion-time partitioned tables, such as
   `_PARTITIONTIME` and `_PARTITIONDATE`, aren't included in the function's
   output.
+* Rows inserted through the
+  [Storage Write API (gRPC) pending stream](/bigquery/docs/write-api#pending_type)
+  or
+  [Storage Write API (gRPC) buffered stream](/bigquery/docs/write-api#buffered_type)
+  can have inconsistent timestamps, so repeatable reads aren't guaranteed. If
+  you require repeatable reads for streaming ingestion workloads, use either
+  the
+  [Storage Write API (gRPC) default stream](/bigquery/docs/write-api#default_stream)
+  or the
+  [Storage Write API (gRPC) committed stream](/bigquery/docs/write-api#committed_type).
+  If you require repeatable reads for batch ingestion workloads, use
+  [BigQuery load jobs](/bigquery/docs/loading-data) instead.
 
 **Example**
 
@@ -223,18 +227,6 @@ the `APPENDS` function only captures additions to tables, not deletions.
 
 ## `CHANGES`
 
-**Preview**
-
-This product or feature is subject to the "Pre-GA Offerings Terms"
-in the General Service Terms section of the
-[Service Specific Terms](https://cloud.google.com/terms/service-terms).
-Pre-GA products and features are available "as is" and might have
-limited support. For more information, see the
-[launch stage descriptions](https://cloud.google.com/products#product-launch-stages).
-
-**Note:** To provide feedback or request support for this feature, send an email to
-[bq-change-history-feedback@google.com](mailto:bq-change-history-feedback@google.com).
-
 ```
 CHANGES(
   TABLE table,
@@ -276,11 +268,15 @@ The following operations add rows to the `CHANGES` change history:
   `enable_change_history` option after setting the `start_timestamp` option,
   the history before the enablement time might be incomplete. If the table was
   created after the `start_timestamp` value, the actual table creation time is
-  used instead. An error is returned if the time specified is earlier than
-  allowed by [time travel](/bigquery/docs/time-travel), or if the table was created earlier
-  than allowed by time travel if the `start_timestamp` value is `NULL`. For
-  standard tables, this window is seven days, but you can [configure the time
-  travel window](/bigquery/docs/time-travel#configure_the_time_travel_window) to be less than that.
+  used instead.
+
+  **Note:** An error is returned if the `start_timestamp` is older than
+  allowed by [time travel](/bigquery/docs/time-travel). An error is also returned if the
+  `start_timestamp` value is `NULL` and the table was created earlier than
+  allowed by time travel. To get all available changes,
+  specify a `start_timestamp` within your time travel window instead of
+  `NULL`. For standard tables, the time travel window is seven days, but you
+  can [configure the time travel window](/bigquery/docs/time-travel#configure_the_time_travel_window) to be less than that.
 * `end_timestamp`: a `TIMESTAMP` value indicating the latest time at which a
   change is included in the output. `end_timestamp` is exclusive; for example,
   if you specify `2023-12-31 08:00:00` for `start_timestamp` and `2023-12-31
@@ -339,9 +335,30 @@ The `CHANGES` function returns a table with the following columns:
   carried over to the new table, clone, or snapshot.
 * You can't use the `CHANGES` function with a table that has
   [change data capture](/bigquery/docs/change-data-capture) enabled.
+* If a table is enabled with
+  [fine-grained DML](/bigquery/docs/data-manipulation-language#fine-grained_dml),
+  and data deletion occurs using either a
+  [`TRUNCATE TABLE` statement](/bigquery/docs/reference/standard-sql/dml-syntax#truncate_table_statement),
+  [`WRITE_TRUNCATE` write disposition](/bigquery/docs/reference/rest/v2/Job#jobconfigurationquery),
+  or a
+  [qualifying `DELETE` statement](/bigquery/docs/using-dml-with-partitioned-tables#using_dml_delete_to_delete_partitions)
+  that covers all rows in a partition, the `CHANGES` function might return
+  additional deleted events.
 * Partition pseudo-columns for ingestion-time partitioned tables, such as
   `_PARTITIONTIME` and `_PARTITIONDATE`, aren't included in the function's
   output.
+* Rows inserted through the
+  [Storage Write API (gRPC) pending stream](/bigquery/docs/write-api#pending_type)
+  or
+  [Storage Write API (gRPC) buffered stream](/bigquery/docs/write-api#buffered_type)
+  can have inconsistent timestamps, so repeatable reads aren't guaranteed. If
+  you require repeatable reads for streaming ingestion workloads, use either
+  the
+  [Storage Write API (gRPC) default stream](/bigquery/docs/write-api#default_stream)
+  or the
+  [Storage Write API (gRPC) committed stream](/bigquery/docs/write-api#committed_type).
+  If you require repeatable reads for batch ingestion workloads, use
+  [BigQuery load jobs](/bigquery/docs/loading-data) instead.
 * Change history isn't captured for table deletions made due to table partition
   expiration.
 * Performing
@@ -374,228 +391,4 @@ Delete one row from the table:
 ```
 DELETE mydataset.Produce
 WHERE product = 'bananas';
-```
-
-Update one row of the table:
-
-```
-UPDATE mydataset.Produce
-SET inventory = inventory - 10
-WHERE product = 'carrots';
-```
-
-View the full change history of the changes made to the table:
-
-```
-SELECT
-  product,
-  inventory,
-  _CHANGE_TYPE AS change_type,
-  _CHANGE_TIMESTAMP AS change_time,
-  _CHANGE_IS_FOR_UPDATE as change_is_for_update
-FROM
-  CHANGES(TABLE mydataset.Produce, NULL, NULL)
-ORDER BY change_time, product;
-```
-
-The output is similar to the following:
-
-```
-+---------+-----------+-------------+---------------------+----------------------+
-| product | inventory | change_type |     change_time     | change_is_for_update |
-+---------+-----------+-------------+---------------------+----------------------+
-| bananas |        20 | INSERT      | 2024-01-09 17:13:58 | false                |
-| carrots |        30 | INSERT      | 2024-01-09 17:13:58 | false                |
-| bananas |        20 | DELETE      | 2024-01-09 17:14:30 | false                |
-| carrots |        30 | DELETE      | 2024-01-09 17:15:24 | true                 |
-| carrots |        20 | UPDATE      | 2024-01-09 17:15:24 | false                |
-+---------+-----------+-------------+---------------------+----------------------+
-```
-
-**Enabling change history for an existing table**
-
-To set the
-[`enable_change_history` option](/bigquery/docs/reference/standard-sql/data-definition-language#table_option_list)
-to `TRUE` for an existing table, use the
-[`ALTER TABLE SET OPTIONS` DDL statement](/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_set_options_statement).
-The following example updates the change history option for `my_table` to
-`TRUE`:
-
-```
-ALTER TABLE `my_dataset.my_table`
-SET OPTIONS (enable_change_history = TRUE);
-```
-
-## `DATE_BUCKET`
-
-```
-DATE_BUCKET(date_in_bucket, bucket_width)
-```
-
-```
-DATE_BUCKET(date_in_bucket, bucket_width, bucket_origin_date)
-```
-
-**Description**
-
-Gets the lower bound of the date bucket that contains a date.
-
-**Definitions**
-
-* `date_in_bucket`: A `DATE` value that you can use to look up a date bucket.
-* `bucket_width`: An `INTERVAL` value that represents the width of
-  a date bucket. A [single interval](/bigquery/docs/reference/standard-sql/data-types#single_datetime_part_interval) with
-  [date parts](/bigquery/docs/reference/standard-sql/data-types#interval_datetime_parts) is supported.
-* `bucket_origin_date`: A `DATE` value that represents a point in time. All
-  buckets expand left and right from this point. If this argument isn't set,
-  `1950-01-01` is used by default.
-
-**Return type**
-
-`DATE`
-
-**Examples**
-
-In the following example, the origin is omitted and the default origin,
-`1950-01-01` is used. All buckets expand in both directions from the origin,
-and the size of each bucket is two days. The lower bound of the bucket in
-which `my_date` belongs is returned.
-
-```
-WITH some_dates AS (
-  SELECT DATE '1949-12-29' AS my_date UNION ALL
-  SELECT DATE '1949-12-30' UNION ALL
-  SELECT DATE '1949-12-31' UNION ALL
-  SELECT DATE '1950-01-01' UNION ALL
-  SELECT DATE '1950-01-02' UNION ALL
-  SELECT DATE '1950-01-03'
-)
-SELECT DATE_BUCKET(my_date, INTERVAL 2 DAY) AS bucket_lower_bound
-FROM some_dates;
-
-/*--------------------+
- | bucket_lower_bound |
- +--------------------+
- | 1949-12-28         |
- | 1949-12-30         |
- | 1949-12-30         |
- | 1950-01-01         |
- | 1950-01-01         |
- | 1950-01-03         |
- +--------------------*/
-
--- Some date buckets that originate from 1950-01-01:
--- + Bucket: ...
--- + Bucket: [1949-12-28, 1949-12-30)
--- + Bucket: [1949-12-30, 1950-01-01)
--- + Origin: [1950-01-01]
--- + Bucket: [1950-01-01, 1950-01-03)
--- + Bucket: [1950-01-03, 1950-01-05)
--- + Bucket: ...
-```
-
-In the following example, the origin has been changed to `2000-12-24`,
-and all buckets expand in both directions from this point. The size of each
-bucket is seven days. The lower bound of the bucket in which `my_date` belongs
-is returned:
-
-```
-WITH some_dates AS (
-  SELECT DATE '2000-12-20' AS my_date UNION ALL
-  SELECT DATE '2000-12-21' UNION ALL
-  SELECT DATE '2000-12-22' UNION ALL
-  SELECT DATE '2000-12-23' UNION ALL
-  SELECT DATE '2000-12-24' UNION ALL
-  SELECT DATE '2000-12-25'
-)
-SELECT DATE_BUCKET(
-  my_date,
-  INTERVAL 7 DAY,
-  DATE '2000-12-24') AS bucket_lower_bound
-FROM some_dates;
-
-/*--------------------+
- | bucket_lower_bound |
- +--------------------+
- | 2000-12-17         |
- | 2000-12-17         |
- | 2000-12-17         |
- | 2000-12-17         |
- | 2000-12-24         |
- | 2000-12-24         |
- +--------------------*/
-
--- Some date buckets that originate from 2000-12-24:
--- + Bucket: ...
--- + Bucket: [2000-12-10, 2000-12-17)
--- + Bucket: [2000-12-17, 2000-12-24)
--- + Origin: [2000-12-24]
--- + Bucket: [2000-12-24, 2000-12-31)
--- + Bucket: [2000-12-31, 2000-01-07)
--- + Bucket: ...
-```
-
-## `DATETIME_BUCKET`
-
-```
-DATETIME_BUCKET(datetime_in_bucket, bucket_width)
-```
-
-```
-DATETIME_BUCKET(datetime_in_bucket, bucket_width, bucket_origin_datetime)
-```
-
-**Description**
-
-Gets the lower bound of the datetime bucket that contains a datetime.
-
-**Definitions**
-
-* `datetime_in_bucket`: A `DATETIME` value that you can use to look up a
-  datetime bucket.
-* `bucket_width`: An `INTERVAL` value that represents the width of
-  a datetime bucket. A [single interval](/bigquery/docs/reference/standard-sql/data-types#single_datetime_part_interval) with
-  [date and time parts](/bigquery/docs/reference/standard-sql/data-types#interval_datetime_parts) is supported.
-* `bucket_origin_datetime`: A `DATETIME` value that represents a point in
-  time. All buckets expand left and right from this point. If this argument
-  isn't set, `1950-01-01 00:00:00` is used by default.
-
-**Return type**
-
-`DATETIME`
-
-**Examples**
-
-In the following example, the origin is omitted and the default origin,
-`1950-01-01 00:00:00` is used. All buckets expand in both directions from the
-origin, and the size of each bucket is 12 hours. The lower bound of the bucket
-in which `my_datetime` belongs is returned:
-
-```
-WITH some_datetimes AS (
-  SELECT DATETIME '1949-12-30 13:00:00' AS my_datetime UNION ALL
-  SELECT DATETIME '1949-12-31 00:00:00' UNION ALL
-  SELECT DATETIME '1949-12-31 13:00:00' UNION ALL
-  SELECT DATETIME '1950-01-01 00:00:00' UNION ALL
-  SELECT DATETIME '1950-01-01 13:00:00' UNION ALL
-  SELECT DATETIME '1950-01-02 00:00:00'
-)
-SELECT DATETIME_BUCKET(my_datetime, INTERVAL 12 HOUR) AS bucket_lower_bound
-FROM some_datetimes;
-
-/*---------------------+
- | bucket_lower_bound  |
- +---------------------+
- | 1949-12-30T12:00:00 |
- | 1949-12-31T00:00:00 |
- | 1949-12-31T12:00:00 |
- | 1950-01-01T00:00:00 |
- | 1950-01-01T12:00:00 |
- | 1950-01-02T00:00:00 |
- +---------------------*/
-
--- Some datetime buckets that originate from 1950-01-01 00:00:00:
--- + Bucket: ...
--- + Bucket: [1949-12-30 00:00:00, 1949-12-30 12:00:00)
--- + Bucket: [1949-12-30 12:00:00, 1950-01-01 00:00:00)
 ```

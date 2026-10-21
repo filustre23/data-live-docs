@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -82,7 +82,7 @@ public class QueryWithNamedTypesParameters {
 
 ```
 use google_cloud_bigquery::client::BigQuery;
-use google_cloud_bigquery::model::{QueryParameter, QueryParameterType, QueryParameterValue};
+use google_cloud_bigquery_v2::model::{QueryParameter, QueryParameterType, QueryParameterValue};
 
 pub async fn sample(project_id: &str) -> anyhow::Result<()> {
     let client = BigQuery::builder().build().await?;
@@ -111,16 +111,14 @@ pub async fn sample(project_id: &str) -> anyhow::Result<()> {
                 .set_parameter_value(QueryParameterValue::new().set_value("true")),
         ])
         .set_location("US")
-        .run()
-        .await?
         .until_done()
         .await?
         .read();
 
     while let Some(row) = rows.next().await.transpose()? {
-        let date_col: String = row.get("date_col");
-        let num_col: String = row.get("num_col");
-        let bool_col: bool = row.get("bool_col");
+        let date_col: String = row.get("date_col")?;
+        let num_col: String = row.get("num_col")?;
+        let bool_col: bool = row.get("bool_col")?;
         println!("Date: {date_col}, Numeric: {num_col}, Bool: {bool_col}");
     }
     Ok(())

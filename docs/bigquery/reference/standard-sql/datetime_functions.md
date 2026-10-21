@@ -108,14 +108,14 @@ SELECT
 ## `DATETIME_ADD`
 
 ```
-DATETIME_ADD(datetime_expression, INTERVAL int64_expression part)
+DATETIME_ADD(datetime_expression, INTERVAL step_size step_unit)
 ```
 
 **Description**
 
-Adds `int64_expression` units of `part` to the `DATETIME` object.
+Adds `step_size` units of `step_unit` to the `DATETIME` object.
 
-`DATETIME_ADD` supports the following values for `part`:
+`DATETIME_ADD` supports the following values for `step_unit`:
 
 * `MICROSECOND`
 * `MILLISECOND`
@@ -130,7 +130,7 @@ Adds `int64_expression` units of `part` to the `DATETIME` object.
 
 Special handling is required for MONTH, QUARTER, and YEAR parts when the
 date is at (or near) the last day of the month. If the resulting month has fewer
-days than the original DATETIME's day, then the result day is the last day of
+days than the original `DATETIME` object's day, then the result day is the last day of
 the new month.
 
 **Return Data Type**
@@ -192,7 +192,10 @@ Gets the number of unit boundaries between two `DATETIME` values
 
 **Details**
 
-If `end_datetime` is earlier than `start_datetime`, the output is negative.
+If `end_datetime` is earlier than `start_datetime`, the output is 0 or negative.
+Decimals are always truncated rather than rounded. For example, both 3.9 and 3.1
+become 3, while -3.9 and -3.1 become -3 (instead of -4).
+
 Produces an error if the computation overflows, such as if the difference
 in microseconds
 between the two `DATETIME` values overflows.
@@ -205,7 +208,7 @@ behaves like `TIMESTAMP_DIFF(TIMESTAMP, TIMESTAMP, PART)`.
 
 `INT64`
 
-**Example**
+**Examples**
 
 ```
 SELECT
@@ -219,6 +222,29 @@ SELECT
  +----------------------------+------------------------+------------------------+
  | 2010-07-07T10:20:00        | 2008-12-25T15:30:00    | 559                    |
  +----------------------------+------------------------+------------------------*/
+```
+
+In the following example, `DATETIME_DIFF` truncates the output rather than
+rounding it. Both 3 hours 54 minutes (3.9 hours) and 3 hours 6 minutes (3.1
+hours) truncate to 3 hours, and their negative counterparts truncate to -3
+hours:
+
+```
+SELECT
+  DATETIME_DIFF(DATETIME '2021-05-01 04:54:00',
+    DATETIME '2021-05-01 01:00:00', HOUR) AS diff_3_9,
+  DATETIME_DIFF(DATETIME '2021-05-01 04:06:00',
+    DATETIME '2021-05-01 01:00:00', HOUR) AS diff_3_1,
+  DATETIME_DIFF(DATETIME '2021-05-01 01:00:00',
+    DATETIME '2021-05-01 04:54:00', HOUR) AS diff_negative_3_9,
+  DATETIME_DIFF(DATETIME '2021-05-01 01:00:00',
+    DATETIME '2021-05-01 04:06:00', HOUR) AS diff_negative_3_1;
+
+/*----------+----------+-------------------+-------------------+
+ | diff_3_9 | diff_3_1 | diff_negative_3_9 | diff_negative_3_1 |
+ +----------+----------+-------------------+-------------------+
+ | 3        | 3        | -3                | -3                |
+ +----------+----------+-------------------+-------------------*/
 ```
 
 ```
@@ -286,14 +312,14 @@ SELECT
 ## `DATETIME_SUB`
 
 ```
-DATETIME_SUB(datetime_expression, INTERVAL int64_expression part)
+DATETIME_SUB(datetime_expression, INTERVAL step_size step_unit)
 ```
 
 **Description**
 
-Subtracts `int64_expression` units of `part` from the `DATETIME`.
+Subtracts `step_size` units of `step_unit` from the `DATETIME` object.
 
-`DATETIME_SUB` supports the following values for `part`:
+`DATETIME_SUB` supports the following values for `step_unit`:
 
 * `MICROSECOND`
 * `MILLISECOND`
@@ -308,7 +334,7 @@ Subtracts `int64_expression` units of `part` from the `DATETIME`.
 
 Special handling is required for `MONTH`, `QUARTER`, and `YEAR` parts when the
 date is at (or near) the last day of the month. If the resulting month has fewer
-days than the original `DATETIME`'s day, then the result day is the last day of
+days than the original `DATETIME` object's day, then the result day is the last day of
 the new month.
 
 **Return Data Type**
@@ -316,272 +342,3 @@ the new month.
 `DATETIME`
 
 **Example**
-
-```
-SELECT
-  DATETIME "2008-12-25 15:30:00" as original_date,
-  DATETIME_SUB(DATETIME "2008-12-25 15:30:00", INTERVAL 10 MINUTE) as earlier;
-
-/*-----------------------------+------------------------+
- | original_date               | earlier                |
- +-----------------------------+------------------------+
- | 2008-12-25T15:30:00         | 2008-12-25T15:20:00    |
- +-----------------------------+------------------------*/
-```
-
-## `DATETIME_TRUNC`
-
-```
-DATETIME_TRUNC(datetime_value, datetime_granularity)
-```
-
-```
-DATETIME_TRUNC(timestamp_value, timestamp_granularity[, time_zone])
-```
-
-**Description**
-
-Truncates a `DATETIME` or `TIMESTAMP` value at a particular granularity.
-
-**Definitions**
-
-* `datetime_value`: A `DATETIME` value to truncate.
-* `datetime_granularity`: The truncation granularity for a `DATETIME` value.
-  [Date granularities](#datetime_trunc_granularity_date) and
-  [time granularities](#datetime_trunc_granularity_time) can be used.
-* `timestamp_value`: A `TIMESTAMP` value to truncate.
-* `timestamp_granularity`: The truncation granularity for a `TIMESTAMP` value.
-  [Date granularities](#datetime_trunc_granularity_date) and
-  [time granularities](#datetime_trunc_granularity_time) can be used.
-* `time_zone`: A time zone to use with the `TIMESTAMP` value.
-  [Time zone parts](#datetime_time_zone_parts) can be used.
-  Use this argument if you want to use a time zone other than
-  the default time zone, UTC, as part of the
-  truncate operation.
-
-  **Note:** When truncating a timestamp to `MINUTE`
-  or `HOUR` parts, this function determines the civil time of the
-  timestamp in the specified (or default) time zone
-  and subtracts the minutes and seconds (when truncating to `HOUR`) or the
-  seconds (when truncating to `MINUTE`) from that timestamp.
-  While this provides intuitive results in most cases, the result is
-  non-intuitive near daylight savings transitions that aren't hour-aligned.
-
-**Date granularity definitions**
-
-* `DAY`: The day in the Gregorian calendar year that contains the
-  value to truncate.
-* `WEEK`: The first day in the week that contains the
-  value to truncate. Weeks begin on Sundays. `WEEK` is equivalent to
-  `WEEK(SUNDAY)`.
-* `WEEK(WEEKDAY)`: The first day in the week that contains the
-  value to truncate. Weeks begin on `WEEKDAY`. `WEEKDAY` must be one of the
-  following: `SUNDAY`, `MONDAY`, `TUESDAY`, `WEDNESDAY`, `THURSDAY`, `FRIDAY`,
-  or `SATURDAY`.
-* `ISOWEEK`: The first day in the [ISO 8601 week](https://en.wikipedia.org/wiki/ISO_week_date) that contains
-  the value to truncate. The ISO week begins on
-  Monday. The first ISO week of each ISO year contains the first Thursday of the
-  corresponding Gregorian calendar year.
-* `MONTH`: The first day in the month that contains the
-  value to truncate.
-* `QUARTER`: The first day in the quarter that contains the
-  value to truncate.
-* `YEAR`: The first day in the year that contains the
-  value to truncate.
-* `ISOYEAR`: The first day in the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) week-numbering year
-  that contains the value to truncate. The ISO year is the
-  Monday of the first week where Thursday belongs to the corresponding
-  Gregorian calendar year.
-
-
-
-**Time granularity definitions**
-
-* `MICROSECOND`: If used, nothing is truncated from the value.
-* `MILLISECOND`: The nearest lesser than or equal millisecond.
-* `SECOND`: The nearest lesser than or equal second.
-* `MINUTE`: The nearest lesser than or equal minute.
-* `HOUR`: The nearest lesser than or equal hour.
-
-**Time zone part definitions**
-
-* `MINUTE`
-* `HOUR`
-* `DAY`
-* `WEEK`
-* `WEEK(<WEEKDAY>)`
-* `ISOWEEK`
-* `MONTH`
-* `QUARTER`
-* `YEAR`
-* `ISOYEAR`
-
-**Details**
-
-The resulting value is always rounded to the beginning of `granularity`.
-
-**Return Data Type**
-
-The same data type as the first argument passed into this function.
-
-**Examples**
-
-```
-SELECT
-  DATETIME "2008-12-25 15:30:00" as original,
-  DATETIME_TRUNC(DATETIME "2008-12-25 15:30:00", DAY) as truncated;
-
-/*----------------------------+------------------------+
- | original                   | truncated              |
- +----------------------------+------------------------+
- | 2008-12-25T15:30:00        | 2008-12-25T00:00:00    |
- +----------------------------+------------------------*/
-```
-
-In the following example, the original `DATETIME` falls on a Sunday. Because the
-`part` is `WEEK(MONDAY)`, `DATE_TRUNC` returns the `DATETIME` for the
-preceding Monday.
-
-```
-SELECT
- datetime AS original,
- DATETIME_TRUNC(datetime, WEEK(MONDAY)) AS truncated
-FROM (SELECT DATETIME(TIMESTAMP "2017-11-05 00:00:00+00", "UTC") AS datetime);
-
-/*---------------------+---------------------+
- | original            | truncated           |
- +---------------------+---------------------+
- | 2017-11-05T00:00:00 | 2017-10-30T00:00:00 |
- +---------------------+---------------------*/
-```
-
-In the following example, the original `datetime_expression` is in the Gregorian
-calendar year 2015. However, `DATETIME_TRUNC` with the `ISOYEAR` date part
-truncates the `datetime_expression` to the beginning of the ISO year, not the
-Gregorian calendar year. The first Thursday of the 2015 calendar year was
-2015-01-01, so the ISO year 2015 begins on the preceding Monday, 2014-12-29.
-Therefore the ISO year boundary preceding the `datetime_expression`
-2015-06-15 00:00:00 is 2014-12-29.
-
-```
-SELECT
-  DATETIME_TRUNC('2015-06-15 00:00:00', ISOYEAR) AS isoyear_boundary,
-  EXTRACT(ISOYEAR FROM DATETIME '2015-06-15 00:00:00') AS isoyear_number;
-
-/*---------------------+----------------+
- | isoyear_boundary    | isoyear_number |
- +---------------------+----------------+
- | 2014-12-29T00:00:00 | 2015           |
- +---------------------+----------------*/
-```
-
-## `EXTRACT`
-
-```
-EXTRACT(part FROM datetime_expression)
-```
-
-**Description**
-
-Returns a value that corresponds to the
-specified `part` from a supplied `datetime_expression`.
-
-Allowed `part` values are:
-
-* `MICROSECOND`
-* `MILLISECOND`
-* `SECOND`
-* `MINUTE`
-* `HOUR`
-* `DAYOFWEEK`: Returns values in the range [1,7] with Sunday as the first day of
-  of the week.
-* `DAY`
-* `DAYOFYEAR`
-* `WEEK`: Returns the week number of the date in the range [0, 53]. Weeks begin
-  with Sunday, and dates prior to the first Sunday of the year are in week
-  0.
-* `WEEK(<WEEKDAY>)`: Returns the week number of `datetime_expression` in the
-  range [0, 53]. Weeks begin on `WEEKDAY`.
-  `datetime`s prior to the first `WEEKDAY` of the year are in week 0. Valid
-  values for `WEEKDAY` are `SUNDAY`, `MONDAY`, `TUESDAY`, `WEDNESDAY`,
-  `THURSDAY`, `FRIDAY`, and `SATURDAY`.
-* `ISOWEEK`: Returns the [ISO 8601 week](https://en.wikipedia.org/wiki/ISO_week_date)
-  number of the `datetime_expression`. `ISOWEEK`s begin on Monday. Return values
-  are in the range [1, 53]. The first `ISOWEEK` of each ISO year begins on the
-  Monday before the first Thursday of the Gregorian calendar year.
-* `MONTH`
-* `QUARTER`
-* `YEAR`
-* `ISOYEAR`: Returns the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)
-  week-numbering year, which is the Gregorian calendar year containing the
-  Thursday of the week to which `date_expression` belongs.
-* `DATE`
-* `TIME`
-
-Returned values truncate lower order time periods. For example, when extracting
-seconds, `EXTRACT` truncates the millisecond and microsecond values.
-
-**Return Data Type**
-
-`INT64`, except in the following cases:
-
-* If `part` is `DATE`, returns a `DATE` object.
-* If `part` is `TIME`, returns a `TIME` object.
-
-**Examples**
-
-In the following example, `EXTRACT` returns a value corresponding to the `HOUR`
-time part.
-
-```
-SELECT EXTRACT(HOUR FROM DATETIME(2008, 12, 25, 15, 30, 00)) as hour;
-
-/*------------------+
- | hour             |
- +------------------+
- | 15               |
- +------------------*/
-```
-
-In the following example, `EXTRACT` returns values corresponding to different
-time parts from a column of datetimes.
-
-```
-WITH Datetimes AS (
-  SELECT DATETIME '2005-01-03 12:34:56' AS datetime UNION ALL
-  SELECT DATETIME '2007-12-31' UNION ALL
-  SELECT DATETIME '2009-01-01' UNION ALL
-  SELECT DATETIME '2009-12-31' UNION ALL
-  SELECT DATETIME '2017-01-02' UNION ALL
-  SELECT DATETIME '2017-05-26'
-)
-SELECT
-  datetime,
-  EXTRACT(ISOYEAR FROM datetime) AS isoyear,
-  EXTRACT(ISOWEEK FROM datetime) AS isoweek,
-  EXTRACT(YEAR FROM datetime) AS year,
-  EXTRACT(WEEK FROM datetime) AS week
-FROM Datetimes
-ORDER BY datetime;
-
-/*---------------------+---------+---------+------+------+
- | datetime            | isoyear | isoweek | year | week |
- +---------------------+---------+---------+------+------+
- | 2005-01-03T12:34:56 | 2005    | 1       | 2005 | 1    |
- | 2007-12-31T00:00:00 | 2008    | 1       | 2007 | 52   |
- | 2009-01-01T00:00:00 | 2009    | 1       | 2009 | 0    |
- | 2009-12-31T00:00:00 | 2009    | 53      | 2009 | 52   |
- | 2017-01-02T00:00:00 | 2017    | 1       | 2017 | 1    |
- | 2017-05-26T00:00:00 | 2017    | 21      | 2017 | 21   |
- +---------------------+---------+---------+------+------*/
-```
-
-In the following example, `datetime_expression` falls on a Sunday. `EXTRACT`
-calculates the first column using weeks that begin on Sunday, and it calculates
-the second column using weeks that begin on Monday.
-
-```
-WITH table AS (SELECT DATETIME(TIMESTAMP "2017-11-05 00:00:00+00", "UTC") AS datetime)
-SELECT
-  datetime,
-```

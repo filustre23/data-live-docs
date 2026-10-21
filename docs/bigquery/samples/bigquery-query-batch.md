@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -145,6 +145,74 @@ public class QueryBatch {
       System.out.println("Query batch not performed \n" + e.toString());
     }
   }
+}
+```
+
+### Python
+
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+
+```
+from google.cloud import bigquery
+
+# Construct a BigQuery client object.
+client = bigquery.Client()
+
+job_config = bigquery.QueryJobConfig(
+    # Run at batch priority, which won't count toward concurrent rate limit.
+    priority=bigquery.QueryPriority.BATCH
+)
+
+sql = """
+    SELECT corpus
+    FROM `bigquery-public-data.samples.shakespeare`
+    GROUP BY corpus;
+"""
+
+# Start the query, passing in the extra configuration.
+query_job = client.query(sql, job_config=job_config)  # Make an API request.
+
+# Check on the progress by getting the job's updated state. Once the state
+# is `DONE`, the results are ready.
+query_job = typing.cast(
+    "bigquery.QueryJob",
+    client.get_job(
+        query_job.job_id, location=query_job.location
+    ),  # Make an API request.
+)
+
+print("Job {} is currently in state {}".format(query_job.job_id, query_job.state))
+```
+
+### Rust
+
+```
+use google_cloud_bigquery::client::BigQuery;
+
+pub async fn sample(project_id: &str) -> anyhow::Result<()> {
+    let client = BigQuery::builder().build().await?;
+
+    let mut rows = client
+        .query(
+            "SELECT \
+        name FROM `bigquery-public-data.usa_names.usa_1910_2013` \
+        WHERE state = 'TX' \
+        LIMIT 100",
+        )
+        .with_project_id(project_id)
+        .set_priority("BATCH")
+        .set_location("US")
+        .until_done()
+        .await?
+        .read();
+
+    while let Some(row) = rows.next().await.transpose()? {
+        let name: String = row.get("name")?;
+        println!("Name: {name}");
+    }
+    Ok(())
 }
 ```
 

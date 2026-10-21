@@ -145,7 +145,7 @@ assigned to each input item using the [`AS alias` clause](/bigquery/docs/referen
 A query with only a `FROM` clause, like `FROM table_name`, is allowed in pipe
 syntax and returns all rows from the table. For tables with columns,
 `FROM table_name` in pipe syntax is similar to
-[`SELECT * FROM table_name`](/bigquery/docs/reference/standard-sql/query-syntax#select_) in standard syntax.
+[`SELECT * FROM table_name`](/bigquery/docs/reference/standard-sql/query-syntax#select_star) in standard syntax.
 
 **Examples**
 
@@ -224,9 +224,9 @@ documentation on the corresponding syntax.
 
 Produces a new table with the listed columns, similar to the outermost
 [`SELECT` clause](/bigquery/docs/reference/standard-sql/query-syntax#select_list) in a table subquery in standard syntax. The
-`SELECT` operator supports standard output modifiers like `SELECT AS STRUCT` and
-`SELECT DISTINCT`. The `SELECT` operator
-also supports [window functions](/bigquery/docs/reference/standard-sql/window-function-calls),
+`SELECT` operator supports standard output modifiers like
+`SELECT AS STRUCT` and `SELECT DISTINCT`.
+The `SELECT` operator also supports [window functions](/bigquery/docs/reference/standard-sql/window-function-calls),
 including [named windows](/bigquery/docs/reference/standard-sql/window-function-calls#def_use_named_window). Named windows are defined using the
 `WINDOW` keyword and are only visible to the current pipe `SELECT` operator.
 The `SELECT` operator doesn't support aggregations or anonymization.
@@ -236,7 +236,7 @@ operator can be used near the end of a query to specify the list of output
 columns. The final query result contains the columns returned from the last pipe
 operator. If the `SELECT` operator isn't used to select specific columns, the
 output includes the full row, similar to what the
-[`SELECT *` statement](/bigquery/docs/reference/standard-sql/query-syntax#select_) in standard syntax produces.
+[`SELECT *` statement](/bigquery/docs/reference/standard-sql/query-syntax#select_star) in standard syntax produces.
 
 In pipe syntax, the `SELECT` clause doesn't perform aggregation. Use the
 [`AGGREGATE` operator](#aggregate_pipe_operator) instead.
@@ -289,7 +289,7 @@ FROM Produce
 **Description**
 
 Propagates the existing table and adds computed columns, similar to
-[`SELECT *, new_column`](/bigquery/docs/reference/standard-sql/query-syntax#select_) in standard syntax. The `EXTEND` operator supports
+[`SELECT *, new_column`](/bigquery/docs/reference/standard-sql/query-syntax#select_star) in standard syntax. The `EXTEND` operator supports
 [window functions](/bigquery/docs/reference/standard-sql/window-function-calls)
 , including [named windows](/bigquery/docs/reference/standard-sql/window-function-calls#def_use_named_window). Named windows are defined using the
 `WINDOW` keyword and are only visible to the current `EXTEND` operator.
@@ -302,194 +302,5 @@ Propagates the existing table and adds computed columns, similar to
   UNION ALL
   SELECT 'bananas' AS item, 8 AS sales
 )
-|> EXTEND item IN ('bananas', 'lemons') AS is_yellow;
-
-/*---------+-------+------------+
- | item    | sales | is_yellow  |
- +---------+-------+------------+
- | apples  | 2     | FALSE      |
- | bananas | 8     | TRUE       |
- +---------+-------+------------*/
-```
-
-```
--- Window function, with `OVER`
-(
-  SELECT 'apples' AS item, 2 AS sales
-  UNION ALL
-  SELECT 'bananas' AS item, 5 AS sales
-  UNION ALL
-  SELECT 'carrots' AS item, 8 AS sales
-)
-|> EXTEND SUM(sales) OVER() AS total_sales;
-
-/*---------+-------+-------------+
- | item    | sales | total_sales |
- +---------+-------+-------------+
- | apples  | 2     | 15          |
- | bananas | 5     | 15          |
- | carrots | 8     | 15          |
- +---------+-------+-------------*/
-```
-
-```
--- Window function with a named window
-FROM Produce
-|> EXTEND SUM(sales) OVER item_window AS category_total
-   WINDOW item_window AS (PARTITION BY category);
-
-/*-----------+-----------+----------------+
- | item      | category  | category_total |
- +----------------------------------------+
- | apples    | fruit     | 14             |
- | apples    | fruit     | 14             |
- | bananas   | fruit     | 14             |
- | carrots   | vegetable | 8              |
- +----------------------------------------*/
-```
-
-### `SET` pipe operator
-
-```
-|> SET column = expression [, ...]
-```
-
-**Description**
-
-Replaces the value of a column in the input table, similar to
-[`SELECT * REPLACE (expression AS column)`](/bigquery/docs/reference/standard-sql/query-syntax#select_replace) in standard syntax.
-Each referenced column must exist exactly once in the input table.
-
-After a `SET` operation, the referenced top-level columns (like `x`) are
-updated, but table aliases (like `t`) still refer to the original row values.
-Therefore, `t.x` will still refer to the original value.
-
-**Example**
-
-```
-(
-  SELECT 1 AS x, 11 AS y
-  UNION ALL
-  SELECT 2 AS x, 22 AS y
-)
-|> SET x = x * x, y = 3;
-
-/*---+---+
- | x | y |
- +---+---+
- | 1 | 3 |
- | 4 | 3 |
- +---+---*/
-```
-
-```
-FROM (SELECT 2 AS x, 3 AS y) AS t
-|> SET x = x * x, y = 8
-|> SELECT t.x AS original_x, x, y;
-
-/*------------+---+---+
- | original_x | x | y |
- +------------+---+---+
- | 2          | 4 | 8 |
- +------------+---+---*/
-```
-
-### `DROP` pipe operator
-
-```
-|> DROP column [, ...]
-```
-
-**Description**
-
-Removes listed columns from the input table, similar to
-[`SELECT * EXCEPT (column)`](/bigquery/docs/reference/standard-sql/query-syntax#select_except) in standard syntax. Each
-referenced column must exist at least once in the input table.
-
-After a `DROP` operation, the referenced top-level columns (like `x`) are
-removed, but table aliases (like `t`) still refer to the original row values.
-Therefore, `t.x` will still refer to the original value.
-
-**Example**
-
-```
-SELECT 'apples' AS item, 2 AS sales, 'fruit' AS category
-|> DROP sales, category;
-
-/*--------+
- | item   |
- +--------+
- | apples |
- +--------*/
-```
-
-```
-FROM (SELECT 1 AS x, 2 AS y) AS t
-|> DROP x
-|> SELECT t.x AS original_x, y;
-
-/*------------+---+
- | original_x | y |
- +------------+---+
- | 1          | 2 |
- +------------+---*/
-```
-
-### `RENAME` pipe operator
-
-```
-|> RENAME old_column_name [AS] new_column_name [, ...]
-```
-
-**Description**
-
-Renames specified columns. Each column to be renamed must exist exactly once in
-the input table. The `RENAME` operator can't rename value table fields,
-pseudo-columns, range variables, or objects that aren't columns in the input
-table.
-
-After a `RENAME` operation, the referenced top-level columns (like `x`) are
-renamed, but table aliases (like `t`) still refer to the original row
-values. Therefore, `t.x` will still refer to the original value.
-
-**Example**
-
-```
-SELECT 1 AS x, 2 AS y, 3 AS z
-|> AS t
-|> RENAME y AS renamed_y
-|> SELECT *, t.y AS t_y;
-
-/*---+-----------+---+-----+
- | x | renamed_y | z | t_y |
- +---+-----------+---+-----+
- | 1 | 2         | 3 | 2   |
- +---+-----------+---+-----*/
-```
-
-### `AS` pipe operator
-
-```
-|> AS alias
-```
-
-**Description**
-
-Introduces a table alias for the input table, similar to applying the
-[`AS alias` clause](/bigquery/docs/reference/standard-sql/query-syntax#using_aliases) on a table subquery in standard syntax. Any
-existing table aliases are removed and the new alias becomes the table alias for
-all columns in the row.
-
-The `AS` operator can be useful after operators like
-[`SELECT`](#select_pipe_operator), [`EXTEND`](#extend_pipe_operator), or
-[`AGGREGATE`](#aggregate_pipe_operator) that add columns but can't give table
-aliases to them. You can use the table alias
-to disambiguate columns after the `JOIN` operator.
-
-**Example**
-
-```
-(
-  SELECT "000123" AS id, "apples" AS item, 2 AS sales
-  UNION ALL
+|> EXTEND item IN ('bananas',
 ```

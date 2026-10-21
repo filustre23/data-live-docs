@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -22,9 +22,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 * 使用 [`CREATE MODEL` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm?hl=zh-tw)建立基準線性迴歸模型。
 * 使用 [`ML.EVALUATE` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate?hl=zh-tw)評估基準模型。
-* 使用 `CREATE MODEL` 陳述式搭配超參數調整選項，訓練線性迴歸模型二十次。
-* 使用 [`ML.TRIAL_INFO` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-trial-info?hl=zh-tw)查看測試。
-* 使用 `ML.EVALUATE` 函式評估試驗。
+* 使用 `CREATE MODEL` 陳述式和超參數調整選項，訓練線性迴歸模型二十次。
+* 使用 [`ML.TRIAL_INFO` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-trial-info?hl=zh-tw)查看試用情形。
+* 使用 `ML.EVALUATE` 函式評估試用期。
 * 使用 [`ML.PREDICT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict?hl=zh-tw)，從試驗中找出最佳模型，並取得計程車行程的預測結果。
 
 ## 費用
@@ -79,13 +79,13 @@ Google uses AI technology to translate content into your preferred language. AI 
   [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
 - [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project).
 
-1. 新專案會自動啟用 BigQuery。如要在現有專案中啟用 BigQuery，請前往
+1. 新專案會自動啟用 BigQuery。如要在現有的專案中啟用 BigQuery，請前往
 
-   啟用 BigQuery API。
+   如果尚未啟用 BigQuery API，請啟用。
 
    **啟用 API 時所需的角色**
 
-   您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用情形管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   如要啟用 API，您必須具備 `serviceusage.services.enable` 權限。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用情形管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
    [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery&hl=zh-tw)
 
@@ -107,26 +107,31 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 建立資料集
 
-建立 BigQuery 資料集來儲存機器學習模型。
+如要建立 BigQuery 資料集，請選取下列任一選項：
 
 ### 控制台
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
-   [前往 BigQuery 頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在「Explorer」窗格中，按一下專案名稱。
-3. 依序點按 more\_vert「View actions」(查看動作) >「Create dataset」(建立資料集)。
-4. 在「建立資料集」頁面中，執行下列操作：
+   [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
+2. 點選左側窗格中的 explore「Explorer」。
+
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
+3. 在「Explorer」中展開專案，然後按一下「Datasets」。
+4. 在「資料集」頁面，按一下 add「建立資料集」。
+5. 在「建立資料集」窗格中，執行下列操作：
 
    * 在「Dataset ID」(資料集 ID) 中輸入 `bqml_tutorial`。
-   * 針對「Location type」(位置類型) 選取「Multi-region」(多區域)，然後選取「US」(美國)。
-   * 其餘設定請保留預設狀態，然後按一下「建立資料集」。
+   * 選取「資料位置」的「美國」。
+
+   其餘預設設定均保留原樣。
+6. 點選「建立資料集」。
 
 ### bq
 
 如要建立新的資料集，請使用 [`bq mk --dataset` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#mk-dataset)。
 
-1. 建立名為 `bqml_tutorial` 的資料集，並將資料位置設為 `US`。
+1. 建立名為 `bqml_tutorial` 的資料集，並將資料位置設為 `US`：
 
    ```
    bq mk --dataset \
@@ -142,7 +147,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### API
 
-請呼叫 [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert?hl=zh-tw) 方法，搭配已定義的[資料集資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets?hl=zh-tw)。
+使用已定義的[資料集資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets?hl=zh-tw)呼叫 [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert?hl=zh-tw) 方法：
 
 ```
 {
@@ -154,7 +159,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 建立訓練資料表
 
-根據`tlc_yellow_trips_2018`資料表資料的子集，建立訓練資料表。
+根據 `tlc_yellow_trips_2018` 資料表資料的子集，建立訓練資料表。
 
 請按照下列步驟建立資料表：
 
@@ -176,7 +181,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 建立基準線性迴歸模型
 
-建立線性迴歸模型，但不進行超參數調整，並在 `taxi_tip_input` 資料表資料上訓練模型。
+建立線性迴歸模型，不調整超參數，並在 `taxi_tip_input` 資料表資料上訓練模型。
 
 請按照下列步驟建立模型：
 
@@ -197,14 +202,14 @@ Google uses AI technology to translate content into your preferred language. AI 
      `bqml_tutorial.taxi_tip_input`;
    ```
 
-   查詢大約需要 2 分鐘才能完成。
+   查詢作業大約需要 2 分鐘才能完成。
 
 ## 評估基準模型
 
 使用 `ML.EVALUATE` 函式評估模型效能。
 `ML.EVALUATE` 函式會根據模型訓練期間計算的評估指標，評估模型傳回的預測內容分級。
 
-請按照下列步驟評估模型：
+如要評估模型，請按照下列步驟操作：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -227,7 +232,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    +---------------------+--------------------+------------------------+-----------------------+---------------------+---------------------+
    ```
 
-基準模型的 `r2_score` 值為負數，表示資料適配度不佳；[R2 分數](https://en.wikipedia.org/wiki/Coefficient_of_determination)越接近 1，模型適配度就越好。
+基準模型的 `r2_score` 值為負數，表示資料適配度不佳；[R2 分數](https://en.wikipedia.org/wiki/Coefficient_of_determination)越接近 1，表示模型適配度越好。
 
 ## 建立線性迴歸模型並調整超參數
 
@@ -235,9 +240,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 您可以在 `CREATE MODEL` 陳述式中使用下列超參數調整選項：
 
-* [`NUM_TRIALS` 選項](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm?hl=zh-tw#num_trials)，將試驗次數設為 20 次。
-* [`MAX_PARALLEL_TRIALS`選項](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm?hl=zh-tw#max_parallel_trials)：在每個訓練工作中執行兩項試驗，總共執行十項工作和二十項試驗。這可減少所需的訓練時間。不過，這兩項並行試驗不會互相參考訓練結果。
-* [`L1_REG`選項](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm?hl=zh-tw#l1_reg)，在不同試驗中嘗試不同的 L1 正則化值。L1 正則化會從模型中移除不相關的特徵，有助於避免[過度配適](https://developers.google.com/machine-learning/glossary/?hl=zh-tw#overfitting)。
+* 將測試次數設為 20 的[`NUM_TRIALS`選項](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm?hl=zh-tw#num_trials)。
+* [`MAX_PARALLEL_TRIALS` 選項](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm?hl=zh-tw#max_parallel_trials)：在每個訓練工作中執行兩項試驗，總共十項工作和二十項試驗。這可縮短訓練所需時間。不過，這兩項並行試驗不會互相參考訓練結果。
+* [`L1_REG`選項](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm?hl=zh-tw#l1_reg)：在不同試驗中嘗試不同的 L1 正規化值。L1 正規化會從模型中移除不相關的特徵，有助於防止[過度擬合](https://developers.google.com/machine-learning/glossary/?hl=zh-tw#overfitting)。
 
 模型支援的其他超參數調整選項會使用預設值，如下所示：
 
@@ -268,9 +273,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    查詢大約需要 20 分鐘才能完成。
 
-## 取得訓練試用資訊
+## 取得訓練試用版資訊
 
-使用 `ML.TRIAL_INFO` 函式，取得所有試驗的相關資訊，包括超參數值、目標和狀態。這個函式也會根據這項資訊，傳回效能最佳的試驗。
+使用 `ML.TRIAL_INFO` 函式，取得所有試驗的相關資訊，包括超參數值、目標和狀態。這個函式也會根據這項資訊，傳回效能最佳的試驗相關資訊。
 
 如要查看試用資訊，請按照下列步驟操作：
 
@@ -300,14 +305,14 @@ Google uses AI technology to translate content into your preferred language. AI 
    +----------+-------------------------------------+-----------------------------------+--------------------+--------------------+-----------+---------------+------------+
    ```
 
-   「最佳模型」資料欄值 `is_optimal` 表示微調作業傳回的最佳模型是試驗 7。
+   `is_optimal` 欄值表示微調作業傳回的最佳模型是試驗 7。
 
 ## 評估微調模型試驗
 
 使用 `ML.EVALUATE` 函式評估試驗成效。
 `ML.EVALUATE` 函式會根據訓練期間計算出的評估指標，評估模型傳回的預測內容分級。
 
-請按照下列步驟評估模型試驗：
+請按照下列步驟評估模型試用版：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -335,11 +340,11 @@ Google uses AI technology to translate content into your preferred language. AI 
    +----------+---------------------+--------------------+------------------------+-----------------------+--------------------+--------------------+
    ```
 
-   最佳模型 (試驗 7) 的 `r2_score` 值為 `0.66521103056591446`，相較於基準模型有顯著改善。
+   最佳模型 (試驗 7) 的 `r2_score` 值為 `0.66521103056591446`，與基準模型相比，有顯著改善。
 
 您可以在 `ML.EVALUATE` 函式中指定 `TRIAL_ID` 引數，評估特定試驗。
 
-如要進一步瞭解`ML.TRIAL_INFO`目標`ML.EVALUATE`與評估指標的差異，請參閱「[提供模型函式](https://docs.cloud.google.com/bigquery/docs/hp-tuning-overview?hl=zh-tw#model_serving_functions)」。
+如要進一步瞭解`ML.TRIAL_INFO`目標和`ML.EVALUATE`評估指標之間的差異，請參閱「[提供模型函式](https://docs.cloud.google.com/bigquery/docs/hp-tuning-overview?hl=zh-tw#model_serving_functions)」。
 
 ## 使用微調後的模型預測計程車小費
 
@@ -391,11 +396,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 刪除專案將移除專案中所有的資料集與資料表。若您希望重新使用專案，您可以刪除本教學課程中所建立的資料集。
 
-1. 如有必要，請在Google Cloud 控制台中開啟 BigQuery 頁面。
+1. 如有需要，請在Google Cloud 控制台中開啟 BigQuery 頁面。
 
    [前往 BigQuery 頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 在導覽面板中，按一下您建立的 **bqml\_tutorial** 資料集。
-3. 在視窗右側，按一下「刪除資料集」。這項操作會刪除資料集、資料表和所有資料。
+3. 在視窗右側，按一下「刪除資料集」，這個動作會刪除資料集、資料表和所有資料。
 4. 在「Delete dataset」(刪除資料集) 對話方塊中，輸入資料集的名稱 (`bqml_tutorial`)，然後按一下「Delete」(刪除) 來確認刪除指令。
 
 ### 刪除專案
@@ -428,11 +433,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-16 (世界標準時間)。
+上次更新時間：2026-10-17 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-16 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-17 (世界標準時間)。"],[],[]]

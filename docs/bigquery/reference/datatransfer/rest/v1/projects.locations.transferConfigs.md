@@ -36,7 +36,7 @@ Represents a data transfer configuration. A transfer configuration contains all 
 
 | JSON representation |
 | --- |
-| ``` {   "name": string,   "displayName": string,   "dataSourceId": string,   "params": {     object   },   "schedule": string,   "scheduleOptions": {     object (ScheduleOptions)   },   "scheduleOptionsV2": {     object (ScheduleOptionsV2)   },   "dataRefreshWindowDays": integer,   "disabled": boolean,   "updateTime": string,   "nextRunTime": string,   "state": enum (TransferState),   "userId": string,   "datasetRegion": string,   "notificationPubsubTopic": string,   "emailPreferences": {     object (EmailPreferences)   },   "encryptionConfiguration": {     object (EncryptionConfiguration)   },   "error": {     object (Status)   },   "managedTableType": enum (ManagedTableType),   "metadataDestination": {     object (MetadataDestination)   },    // Union field destination can be only one of the following:   "destinationDatasetId": string   // End of list of possible types for union field destination.   "ownerInfo": {     object (UserInfo)   } } ``` |
+| ``` {   "name": string,   "displayName": string,   "dataSourceId": string,   "params": {     object   },   "schedule": string,   "scheduleOptions": {     object (ScheduleOptions)   },   "scheduleOptionsV2": {     object (ScheduleOptionsV2)   },   "dataRefreshWindowDays": integer,   "disabled": boolean,   "updateTime": string,   "nextRunTime": string,   "state": enum (TransferState),   "userId": string,   "datasetRegion": string,   "notificationPubsubTopic": string,   "emailPreferences": {     object (EmailPreferences)   },   "encryptionConfiguration": {     object (EncryptionConfiguration)   },   "error": {     object (Status)   },   "managedTableType": enum (ManagedTableType),   "metadataDestination": {     object (MetadataDestination)   },   "paramConfig": {     object (ParameterConfig)   },    // The following is a list of mutually exclusive fields. At most one of the   // fields will be set in a response:   "destinationDatasetId": string   // End of mutually exclusive fields.   "ownerInfo": {     object (UserInfo)   } } ``` |
 
 | Fields | |
 | --- | --- |
@@ -60,8 +60,10 @@ Represents a data transfer configuration. A transfer configuration contains all 
 | `error` | `object (Status)`  Output only. Error code with detailed information about reason of the latest config failure. |
 | `managedTableType` | `enum (ManagedTableType)`  The classification of the destination table. |
 | `metadataDestination` | `object (MetadataDestination)`  The metadata destination of the transfer config. |
-| Union field `destination`. The destination of the transfer config. `destination` can be only one of the following: | |
+| `paramConfig` | `object (ParameterConfig)`  Optional. The config for values in `params`. |
+| The destination of the transfer config. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response: | |
 | `destinationDatasetId` | `string`  The BigQuery target dataset id. |
+| End of mutually exclusive fields. | |
 | `ownerInfo` | `object (UserInfo)`  Output only. Information about the user whose credentials are used to transfer data. Populated only for `transferConfigs.get` requests. In case the user information is not available, this field will not be populated. |
 
 ### ScheduleOptions
@@ -84,14 +86,15 @@ V2 options customizing different types of data transfer schedule. This field sup
 
 | JSON representation |
 | --- |
-| ``` {    // Union field schedule can be only one of the following:   "timeBasedSchedule": {     object (TimeBasedSchedule)   },   "manualSchedule": {     object (ManualSchedule)   },   "eventDrivenSchedule": {     object (EventDrivenSchedule)   }   // End of list of possible types for union field schedule. } ``` |
+| ``` {    // The following is a list of mutually exclusive fields. At most one of the   // fields will be set in a response:   "timeBasedSchedule": {     object (TimeBasedSchedule)   },   "manualSchedule": {     object (ManualSchedule)   },   "eventDrivenSchedule": {     object (EventDrivenSchedule)   }   // End of mutually exclusive fields. } ``` |
 
 | Fields | |
 | --- | --- |
-| Union field `schedule`. Data transfer schedules. `schedule` can be only one of the following: | |
+| Data transfer schedules. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response: | |
 | `timeBasedSchedule` | `object (TimeBasedSchedule)`  Time based transfer schedule options. This is the default schedule option. |
 | `manualSchedule` | `object (ManualSchedule)`  Manual transfer schedule. If set, the transfer run will not be auto-scheduled by the system, unless the client invokes transferConfigs.startManualRuns. This is equivalent to disableAutoScheduling = true. |
 | `eventDrivenSchedule` | `object (EventDrivenSchedule)`  Event driven transfer schedule options. If set, the transfer will be scheduled upon events arrial. |
+| End of mutually exclusive fields. | |
 
 ### TimeBasedSchedule
 
@@ -115,98 +118,4 @@ Options customizing manual transfers schedule.
 
 ### EventDrivenSchedule
 
-Options customizing EventDriven transfers schedule.
-
-| JSON representation |
-| --- |
-| ``` {    // Union field eventStream can be only one of the following:   "pubsubSubscription": string   // End of list of possible types for union field eventStream. } ``` |
-
-| Fields | |
-| --- | --- |
-| Union field `eventStream`. The event stream which specifies the Event-driven transfer options. Event-driven transfers listen to an event stream to transfer data. `eventStream` can be only one of the following: | |
-| `pubsubSubscription` | `string`  Pub/Sub subscription name used to receive events. Only Google Cloud Storage data source support this option. Format: projects/{project}/subscriptions/{subscription} |
-
-### UserInfo
-
-Information about a user.
-
-| JSON representation |
-| --- |
-| ``` {   "email": string } ``` |
-
-| Fields | |
-| --- | --- |
-| `email` | `string`  E-mail address of the user. |
-
-### EncryptionConfiguration
-
-Represents the encryption configuration for a transfer.
-
-| JSON representation |
-| --- |
-| ``` {   "kmsKeyName": string } ``` |
-
-| Fields | |
-| --- | --- |
-| `kmsKeyName` | `string`  The name of the KMS key used for encrypting BigQuery data. |
-
-### ManagedTableType
-
-The classifications of managed tables that can be created, native or BigLake.
-
-| Enums | |
-| --- | --- |
-| `MANAGED_TABLE_TYPE_UNSPECIFIED` | Type unspecified. This defaults to `NATIVE` table. |
-| `NATIVE` | The managed table is a native BigQuery table. This is the default value. |
-| `BIGLAKE` | The managed table is a BigQuery table for Apache Iceberg (formerly BigLake managed tables), with a BigLake configuration. |
-
-### MetadataDestination
-
-The metadata destination of the transfer config.
-
-| JSON representation |
-| --- |
-| ``` {    // Union field destination can be only one of the following:   "dataplexConfiguration": {     object (DataplexConfiguration)   }   // End of list of possible types for union field destination. } ``` |
-
-| Fields | |
-| --- | --- |
-| Union field `destination`. The metadata destination of the transfer config can be one of the following: `destination` can be only one of the following: | |
-| `dataplexConfiguration` | `object (DataplexConfiguration)`  The Dataplex Universal Catalog configuration. |
-
-### DataplexConfiguration
-
-Configuration for Dataplex destination.
-
-| JSON representation |
-| --- |
-| ``` {   "entryGroup": string } ``` |
-
-| Fields | |
-| --- | --- |
-| `entryGroup` | `string`  Required. The Dataplex Universal Catalog entry group for importing the metadata. entryGroup has the format of `projects/{projectId}/locations/{region}/entryGroups/{entry_group_id}`. |
-
-| Methods | |
-| --- | --- |
-| `create` | Creates a new data transfer configuration. |
-| `delete` | Deletes a data transfer configuration, including any associated transfer runs and logs. |
-| `get` | Returns information about a data transfer config. |
-| `list` | Returns information about all transfer configs owned by a project in the specified location. |
-| `patch` | Updates a data transfer configuration. |
-| `scheduleRuns  (deprecated)` | Creates transfer runs for a time range [start\_time, end\_time]. |
-| `startManualRuns` | Manually initiates transfer runs. |
-
-
-
-
-Send feedback
-
-Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
-
-Last updated 2026-06-23 UTC.
-
-
-
-
-Need to tell us more?
-
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-06-23 UTC."],[],[]]
+Options customizing EventDriven

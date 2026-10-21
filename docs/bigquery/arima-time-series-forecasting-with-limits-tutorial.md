@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -16,11 +16,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 限制 ARIMA\_PLUS 時間序列模型的預測值
 
-本教學課程說明如何使用限制，縮小 `ARIMA_PLUS` 時間序列模型傳回的預測結果範圍。在本教學課程中，您將針對相同資料建立兩個時間序列模型，一個模型使用限制，另一個模型則不使用限制。您可以比較模型傳回的結果，瞭解指定限制帶來的差異。
+本教學課程說明如何使用限制，縮小`ARIMA_PLUS`時間序列模型傳回的預測結果範圍。在本教學課程中，您將針對相同資料建立兩個時間序列模型，一個模型使用限制，另一個模型則不使用限制。您可以比較模型傳回的結果，瞭解指定限制帶來的差異。
 
 您會使用 [`new_york.citibike_trips`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&%3Bd=new_york&%3Bt=citibike_trips&%3Bpage=table&hl=zh-tw) 資料訓練本教學課程中的模型。這個資料集包含紐約市 Citi Bike 行程的相關資訊。
 
-按照本教學課程操作前，您應熟悉單一時間序列預測。如要瞭解這個主題，請完成「[Google Analytics 資料的單一時間序列預測](https://docs.cloud.google.com/bigquery/docs/arima-single-time-series-forecasting-tutorial?hl=zh-tw)」教學課程。
+按照本教學課程操作前，請先熟悉單一時間序列預測。如要瞭解這個主題，請完成「[Google Analytics 資料的單一時間序列預測](https://docs.cloud.google.com/bigquery/docs/arima-single-time-series-forecasting-tutorial?hl=zh-tw)」教學課程。
 
 ## 所需權限
 
@@ -78,7 +78,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
   [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
 - [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project).
-- Enable the BigQuery API.
+- Enable the BigQuery API, if it is not already enabled.
 
   **Roles required to enable APIs**
 
@@ -109,7 +109,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
   [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
 - [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project).
-- Enable the BigQuery API.
+- Enable the BigQuery API, if it is not already enabled.
 
   **Roles required to enable APIs**
 
@@ -123,26 +123,31 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 建立資料集
 
-建立 BigQuery 資料集來儲存機器學習模型。
+如要建立 BigQuery 資料集，請選取下列任一選項：
 
 ### 控制台
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
-   [前往 BigQuery 頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在「Explorer」窗格中，按一下專案名稱。
-3. 依序點按 more\_vert「View actions」(查看動作) >「Create dataset」(建立資料集)
-4. 在「建立資料集」頁面中，執行下列操作：
+   [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
+2. 點選左側窗格中的 explore「Explorer」。
+
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
+3. 在「Explorer」中展開專案，然後按一下「Datasets」。
+4. 在「資料集」頁面，按一下 add「建立資料集」。
+5. 在「建立資料集」窗格中，執行下列操作：
 
    * 在「Dataset ID」(資料集 ID) 中輸入 `bqml_tutorial`。
-   * 針對「位置類型」選取「多區域」，然後選取「美國」。
-   * 其餘設定請保留預設狀態，然後按一下「建立資料集」。
+   * 選取「資料位置」的「美國」。
+
+   其餘預設設定均保留原樣。
+6. 點選「建立資料集」。
 
 ### bq
 
 如要建立新的資料集，請使用 [`bq mk --dataset` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#mk-dataset)。
 
-1. 建立名為 `bqml_tutorial` 的資料集，並將資料位置設為 `US`。
+1. 建立名為 `bqml_tutorial` 的資料集，並將資料位置設為 `US`：
 
    ```
    bq mk --dataset \
@@ -158,7 +163,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### API
 
-請呼叫 [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert?hl=zh-tw) 方法，搭配已定義的[資料集資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets?hl=zh-tw)。
+使用已定義的[資料集資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets?hl=zh-tw)呼叫 [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert?hl=zh-tw) 方法：
 
 ```
 {
@@ -170,8 +175,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### BigQuery DataFrames
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定說明操作。
-詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -189,9 +193,9 @@ bqclient.create_dataset("bqml_tutorial", exists_ok=True)
 
 ### SQL
 
-在下列查詢中，`FROM bigquery-public-data.new_york.citibike_trips` 子句表示您要查詢 `new_york` 資料集中的 `citibike_trips` 資料表。
+在下列查詢中，`FROM bigquery-public-data.new_york.citibike_trips` 子句表示您正在查詢 `new_york` 資料集中的 `citibike_trips` 資料表。
 
-在 `SELECT` 陳述式中，查詢會使用 [`EXTRACT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions?hl=zh-tw#extract)從 `starttime` 資料欄擷取日期資訊。這項查詢會使用 `COUNT(*)` 子句，取得每日的 Citi Bike 總行程數。
+在 `SELECT` 陳述式中，查詢會使用 [`EXTRACT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions?hl=zh-tw#extract)從 `starttime` 資料欄擷取日期資訊。這項查詢會使用 `COUNT(*)` 子句，取得每日的 Citi Bike 總趟次數。
 
 ```
 #standardSQL
@@ -218,12 +222,11 @@ GROUP BY date
    GROUP BY date
    ```
 3. 按一下「執行」。查詢結果類似下方。
-4. 使用 Google Cloud 控制台繪製時間序列資料圖表。在「查詢結果」窗格中，按一下「圖表」分頁標籤。在「圖表設定」窗格中，為「圖表類型」選擇「長條圖」：
+4. 使用 Google Cloud 控制台繪製時序資料圖表。在「查詢結果」窗格中，按一下「圖表」分頁標籤。在「圖表設定」窗格中，為「圖表類型」選擇「長條圖」：
 
 ### BigQuery DataFrames
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定說明操作。
-詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -300,13 +303,13 @@ GROUP BY date, start_station_id;
    ```
 3. 按一下「執行」。
 
-   查詢作業約需 80 秒才能完成，完成後您就能存取 (`nyc_citibike_arima_model`) 模型。由於查詢是使用 `CREATE MODEL` 建立模型，因此不會有查詢結果。
+   查詢作業約需 80 秒才能完成，完成後您就能存取 (`nyc_citibike_arima_model`) 模型。由於查詢是使用 `CREATE MODEL` 陳述式建立模型，因此不會有查詢結果。
 
 **附註：** 您可能會想知道美國節慶是否會影響時間序列。您可以嘗試在查詢的 `OPTIONS` 清單中加入 [holiday\_region='US'](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series?hl=zh-tw#holiday_region)。如果時間序列中確實有美國節慶模式，這項功能就能更準確地模擬這些美國節慶時間點。
 
 ## 預測時間序列並以視覺化方式呈現結果
 
-如要說明時間序列的預測方式，請使用 [`ML.FORECAST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-forecast?hl=zh-tw) 函式，將所有子時間序列元件 (例如季節性和趨勢) 視覺化。
+如要說明時間序列的預測方式，請使用 [`ML.FORECAST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-forecast?hl=zh-tw) 函式，將所有子時間序列元件 (例如季節性和趨勢) 可視化。
 
 詳細步驟如下：
 
@@ -362,16 +365,16 @@ GROUP BY date, start_station_id;
    ORDER BY
    forecast_timestamp, start_station_id
    ```
-3. 按一下「執行」。查詢結果大致如下：
-4. 使用 Google Cloud 控制台繪製時間序列資料圖表。在「查詢結果」窗格中，按一下「視覺呈現」分頁標籤：
+3. 按一下「執行」。查詢結果類似於下列內容：
+4. 使用 Google Cloud 控制台繪製時序資料圖表。在「查詢結果」窗格中，按一下「圖表」分頁標籤：
 
-圖表顯示，Citi Bike 每日總趟次數的預測值 `start_station_id=79` 為負數，這並無參考價值。改用設有限制的模型，可提升預測資料的準確度。
+圖表顯示，Citi Bike 每日總行程數的預測值 `start_station_id=79` 為負數，這沒有意義。改用設有上限的模型，可提升預測資料的準確度。
 
 ## 建立設有上限的時間序列模型
 
 使用紐約市 Citi Bike 行程資料，建立設有上限的時間序列模型。
 
-以下 GoogleSQL 查詢會建立模型，預測每日單車行程總數。[`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series?hl=zh-tw) 陳述式會建立並訓練名為 `bqml_tutorial.nyc_citibike_arima_model_with_limits` 的模型。這個模型與[先前建立的模型](#forecast_the_time_series_and_visualize_the_results)的主要差異在於新增了 `forecast_limit_lower_bound=0` 選項。這個選項會讓模型只根據 `time_series_data_col` 引數 (在本例中為 `num_trips`) 指定的資料欄值，預測大於 0 的值。
+以下 GoogleSQL 查詢會建立模型，預測每日單車行程總數。[`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series?hl=zh-tw) 陳述式會建立並訓練名為 `bqml_tutorial.nyc_citibike_arima_model_with_limits` 的模型。這個模型與[先前建立的模型](#forecast_the_time_series_and_visualize_the_results)的主要差異在於新增了 `forecast_limit_lower_bound=0` 選項。這個選項會讓模型根據 `time_series_data_col` 引數 (在本例中為 `num_trips`) 指定的資料欄值，只預測大於 0 的值。
 
 ```
 #standardSQL
@@ -477,9 +480,10 @@ CREATE OR REPLACE MODEL bqml_tutorial.nyc_citibike_arima_model
    ORDER BY forecast_timestamp, start_station_id
    ```
 3. 按一下「執行」。
-4. 使用 Google Cloud 控制台繪製時間序列資料圖表。在「查詢結果」窗格中，按一下「視覺呈現」分頁標籤：
+4. 使用 Google Cloud 控制台繪製時序資料圖表。在「查詢結果」窗格中，按一下「圖表」分頁標籤：
 
-ARIMA PLUS 模型偵測到 Citi Bike 的每日總行程數正在減少。`start_station_id=79`未來的預測值會遵循這項趨勢，而且預測時間越長，預測值就越小。圖表顯示，Citi Bike 每日總行程數的預測值為正數，這更有參考價值。`start_station_id=79`設有限制的模型會偵測到 `start_station_id=79` 的 Citi Bike 每日總趟次數正在減少，但仍會提供有意義的預測值。
+ARIMA PLUS 模型偵測到 Citi Bike 的每日總行程數`start_station_id=79`正在減少。未來的預測值會遵循這項趨勢，而且預測時間越長，預測值就越小。圖表顯示，Citi
+Bike 每日總行程數的預測值`start_station_id=79`為正數，這更有參考價值。設有限制的模型會偵測到 Citi Bike 每日總趟次數正在減少，但仍會提供有意義的預測值。`start_station_id=79`
 
 如本教學課程所示，`forecast_limit_lower_bound` 和 `forecast_limit_upper_bound` 選項可協助您在類似情境中取得更有意義的預測值，例如預測股價或未來銷售量時。
 
@@ -527,11 +531,11 @@ ARIMA PLUS 模型偵測到 Citi Bike 的每日總行程數正在減少。`start_
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-16 (世界標準時間)。
+上次更新時間：2026-10-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-16 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]

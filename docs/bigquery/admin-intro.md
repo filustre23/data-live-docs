@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -16,18 +16,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # BigQuery 管理簡介
 
-本文將介紹 BigQuery 管理工作，以及協助您完成這些工作的 BigQuery 功能。
-
-BigQuery 管理員通常會執行下列類型的工作：
-
-* 管理專案、資料集和資料表等資源。
-* 保護資源，僅允許必要主體存取。
-* 管理工作負載，例如作業、查詢和運算容量 (保留項目)。
-* 監控資源，包括配額、工作和運算用量。
-* 盡可能提高工作負載的效能，同時控管成本。
-* 排解錯誤訊息、帳單問題和配額。
-
-本文將概述 BigQuery 提供的功能，協助您完成這些工作。
+BigQuery 管理功能可讓您在整個機構中設定、保護及監控資料資源和運算工作負載。您可以運用這些功能分配運算容量、提升查詢效能、控管成本，以及強制執行存取政策。
 
 如要直接在 Google Cloud 控制台中導覽 BigQuery 資料管理功能，請按一下「Take the tour」(參加導覽)。
 
@@ -47,7 +36,7 @@ BigQuery 提供多種介面，可用於執行管理工作。通常特定工作�
 
 BigQuery 資源包括機構、資料夾、專案、資料集和資料表。本節說明如何管理機構的資源。
 
-如要瞭解 BigQuery 資源階層，請參閱「[整理 BigQuery 資源](https://docs.cloud.google.com/bigquery/docs/resource-hierarchy?hl=zh-tw)」。具體來說，您可以建立機構資源，在機構層級執行設定存取權控管等工作。
+如要瞭解如何整理 BigQuery 資源，請參閱「[資源階層結構簡介](https://docs.cloud.google.com/bigquery/docs/resource-hierarchy?hl=zh-tw)」。具體來說，您可以建立機構資源，在機構層級執行設定存取權控管等工作。
 
 ### 管理資料集
 
@@ -56,7 +45,7 @@ BigQuery 資源包括機構、資料夾、專案、資料集和資料表。本�
 如要進一步瞭解資料集管理，請參閱下列文件：
 
 * 如要進一步瞭解如何建立、複製、移動及更新資料集，請參閱「[資料集簡介](https://docs.cloud.google.com/bigquery/docs/datasets-intro?hl=zh-tw)」。
-* 如要進一步瞭解資料集層級的存取權控管，請參閱「[控管資料集存取權](https://docs.cloud.google.com/bigquery/docs/dataset-access-controls?hl=zh-tw)」和「[已授權的資料集](https://docs.cloud.google.com/bigquery/docs/authorized-datasets?hl=zh-tw)」。
+* 如要進一步瞭解資料集層級的存取控管，請參閱「[控管資料集存取權](https://docs.cloud.google.com/bigquery/docs/dataset-access-controls?hl=zh-tw)」和「[已授權的資料集](https://docs.cloud.google.com/bigquery/docs/authorized-datasets?hl=zh-tw)」。
 
 ### 管理資料表
 
@@ -89,27 +78,28 @@ BigQuery 會將資料儲存在資料表中，方便您查詢。您可以建立�
 * 找出資料表的分區和叢集資料欄。
 * 取得專案的已指派預留項目及其運算單元容量。
 
-詳情請參閱 [BigQuery 簡介](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw)。`INFORMATION_SCHEMA`
+詳情請參閱 [BigQuery 簡介
+`INFORMATION_SCHEMA`](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw)。
 
 ### 複製資料
 
 您可能基於各種原因需要建立資料副本，例如避免人為錯誤，或保留資料以供日後比較。BigQuery 提供多種選項，可從特定時間點複製資料表資料。
 
-* **時間回溯。**您可能需要存取過去一週內某個時間點的資料表狀態，例如資料因人為錯誤而損毀。BigQuery 會將資料表的歷史資料保留七天。您可以使用時空旅行功能，存取表格的近期歷來資料。
+* **時間回溯。**您可能需要存取過去一週內某個時間點的資料表狀態，例如資料因人為錯誤而損毀時。BigQuery 會將資料表的歷史資料保留七天。您可以使用時空旅行功能，存取資料表的近期歷來資料。
 
   詳情請參閱「[使用時間旅行功能存取歷史資料](https://docs.cloud.google.com/bigquery/docs/time-travel?hl=zh-tw)」。
 * **資料表快照。**
-  如要存取資料表在過去一週前的狀態，請考慮定期建立[資料表快照](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro?hl=zh-tw)。資料表快照是輕量型的唯讀副本，可無限期保留資料表狀態。舉例來說，您可以使用資料表快照比較資料表目前的資料與年初的資料，但這無法透過時間旅行功能達成。您只需要為基本資料表與資料表快照之間的差異資料支付儲存費用。
+  如要存取資料表在過去一週前的狀態，請考慮定期建立[資料表快照](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro?hl=zh-tw)。資料表快照是輕量型的唯讀副本，可讓您無限期保留資料表狀態。舉例來說，您可以使用資料表快照比較資料表目前的資料與年初的資料，但這無法透過時間旅行功能達成。您只需要為基本資料表與資料表快照之間的差異資料支付儲存費用。
 
   詳情請參閱「[資料表快照簡介](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro?hl=zh-tw)」。
 * **資料表本機副本**。
-  如要建立資料表的輕量型可寫入副本，可以使用資料表副本。您只需支付基本資料表與資料表副本之間差異資料的儲存空間費用。舉例來說，您可以在測試環境中建立資料表副本，以便使用正式環境資料副本進行實驗，不會影響正式環境資料，也不必為完整副本的儲存空間付費。
+  如要建立資料表的輕量型可寫入副本，可以使用資料表副本。您只需支付基礎資料表與資料表副本之間差異資料的儲存空間費用。舉例來說，您可以在測試環境中建立資料表副本，以便使用正式環境資料副本進行實驗，不會影響正式環境資料，也不必為完整副本的儲存空間付費。
 
   詳情請參閱「[資料表副本簡介](https://docs.cloud.google.com/bigquery/docs/table-clones-intro?hl=zh-tw)」。
 
 ### 追蹤資料歷程
 
-資料歷程是 [Knowledge Catalog](https://docs.cloud.google.com/dataplex/docs/introduction?hl=zh-tw) 的功能，可追蹤資料在系統中的移動情形，包括來源、傳遞目的地和採用的轉換作業。如要進一步瞭解資料歷程如何協助您追蹤專案中的資料移動情形，請參閱 Knowledge Catalog 的「[關於資料歷程](https://docs.cloud.google.com/dataplex/docs/about-data-lineage?hl=zh-tw)」。
+資料歷程是 [Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/introduction?hl=zh-tw) 的功能，可追蹤資料在系統中的移動情形，包括來源、傳遞目的地和採用的轉換作業。如要進一步瞭解資料歷程如何協助您追蹤專案中的資料移動情形，請參閱 Knowledge Catalog 的「[關於資料歷程](https://docs.cloud.google.com/knowledge-catalog/docs/about-data-lineage?hl=zh-tw)」。
 
 ### 安全資源
 
@@ -125,7 +115,7 @@ BigQuery 會代表使用者執行許多工作，包括擷取、查詢及匯出�
 
 「工作」是指 BigQuery 代表使用者執行的動作，包括載入、匯出、查詢或複製資料。使用者透過 [Google Cloud 主控台](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui?hl=zh-tw)、[bq 指令列工具](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool?hl=zh-tw)、[SQL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw)或 [API 呼叫](https://docs.cloud.google.com/bigquery/docs/running-jobs?hl=zh-tw)啟動其中一項工作時，BigQuery 會自動建立工作來執行該工作。
 
-BigQuery 管理員可以監控、管理及排解機構作業的問題，確保作業順利執行。
+BigQuery 管理員可以監控、管理及排解機構作業問題，確保作業順利執行。
 
 詳情請參閱「[管理工作](https://docs.cloud.google.com/bigquery/docs/managing-jobs?hl=zh-tw)」。
 
@@ -136,21 +126,21 @@ BigQuery 執行查詢時，會使用稱為*運算單元*的運算單位。BigQue
 BigQuery 提供兩種計費模式，可針對執行查詢的運算單元收費：
 
 * **以量計價。**您的查詢會使用共用的運算單元集區，系統會根據查詢處理的位元組數向您收費。如要進一步瞭解隨選計費限制，請參閱「[查詢工作](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#query_jobs)」。
-* **根據容量計費**：您可以將預訂或容量承諾指派給版本，每個版本都有自己的功能組合和價格，為您提供最佳工作環境。
+* **根據容量計費**：您可以將預留項目或承諾使用指派給版本，每個版本都有自己的特徵集和價位，可為您提供最佳工作環境。
 
 這些計費模式適用於各個專案，因此您可以讓部分專案採用以量計價，部分專案採用以容量計費。
 
-採用以量計價模式時，每月[免費用量](https://cloud.google.com/bigquery/pricing?hl=zh-tw#free-tier)用完後，系統會根據各項查詢處理的位元組數向您收費。輸送量會受到預先定義的運算單元配額限制，專案中執行的查詢會共用配額。
+採用以量計價模式時，每月[免費用量](https://cloud.google.com/bigquery/pricing?hl=zh-tw#free-tier)用完後，系統會根據各項查詢處理的位元組數向您收費。處理量會受到預先定義的運算單元配額限制，專案中執行的查詢會共用配額。
 
-使用 BigQuery 版本計費時，您可以透過自動調度預留項目，以及選用但較便宜的容量承諾，為機構分配運算單元。每個版本的價格不同，提供的功能也不同。如要進一步瞭解 BigQuery 版本和相關功能，請參閱「[BigQuery 版本簡介](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)」。
+採用 BigQuery 版本計費時，您可以透過自動調度預留項目，以及選用但較便宜的容量承諾，為貴機構分配運算單元。每個版本的價格不同，提供的功能也不同。如要進一步瞭解 BigQuery 版本和相關功能，請參閱「[BigQuery 版本簡介](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)」。
 
 如要進一步瞭解如何管理運算容量來處理查詢，請參閱下列文件：
 
-* 如要瞭解配額，以及隨選帳單和以容量為準的帳單之間的取捨，請參閱「[預訂簡介](https://docs.cloud.google.com/bigquery/docs/reservations-intro?hl=zh-tw)」。
+* 如要瞭解配額，以及隨選計費和以容量為準計費之間的取捨，請參閱「[預留項目簡介](https://docs.cloud.google.com/bigquery/docs/reservations-intro?hl=zh-tw)」。
 * 如要瞭解以容量為準的計費方式 (月約或年約) 的不同選項，請參閱[配額承諾](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#slot_commitments)。
 * 如要建立以容量為準的運算單元集區 (稱為「運算單元預留」)，請參閱「[使用運算單元預留功能](https://docs.cloud.google.com/bigquery/docs/reservations-tasks?hl=zh-tw)」。
 * 如要將運算單元保留項目分配給特定專案，請參閱「[處理保留項目指派作業](https://docs.cloud.google.com/bigquery/docs/reservations-assignments?hl=zh-tw)」。
-* 如要估算要為工作負載分配的適當運算單元數量，請參閱「[估算運算單元容量需求](https://docs.cloud.google.com/bigquery/docs/slot-estimator?hl=zh-tw)」。
+* 如要估算要為工作負載分配的運算單元數量，請參閱「[估算運算單元容量需求](https://docs.cloud.google.com/bigquery/docs/slot-estimator?hl=zh-tw)」。
 
 ## 監控資源
 
@@ -166,7 +156,7 @@ Cloud Monitoring 提供資訊主頁，可監控 BigQuery。您可以使用這個
 
 ### 管理圖表和快訊
 
-您可以使用 Cloud Monitoring，根據指定的資源、指標和任何彙整方式建立自訂圖表。
+您可以使用 Cloud Monitoring，根據您指定的資源、指標和任何彙整方式，建立自訂圖表。
 
 詳情請參閱「[資訊主頁和圖表](https://docs.cloud.google.com/monitoring/dashboards?hl=zh-tw)」。
 
@@ -176,19 +166,19 @@ Cloud Monitoring 提供資訊主頁，可監控 BigQuery。您可以使用這個
 
 ### 監控保留項目
 
-您可以在Google Cloud 控制台的「工作負載管理」頁面中，監控時段用量。您可以查看容量承諾，以及運算單元預訂的指派位置。您也可以使用**運算單元估算工具** ([搶先版](https://cloud.google.com/products?hl=zh-tw#section-22))，根據過往成效指標估算貴機構的容量需求。
+您可以在Google Cloud 控制台的「工作負載管理」頁面中，監控時段用量。您可以查看容量承諾，以及運算單元預訂的指派位置。您也可以使用**運算單元估算工具** ([搶先版](https://cloud.google.com/products?hl=zh-tw#section-22))，根據歷來成效指標估算貴機構的容量需求。
 
 詳情請參閱「[監控 BigQuery 預留項目](https://docs.cloud.google.com/bigquery/docs/reservations-monitoring?hl=zh-tw)」一文。
 
 ### 配額
 
-Google Cloud 會限制資源用量 (包括 BigQuery 資源)，確保共用資源的用量公平合理，並避免費用暴增。您可以使用 Google Cloud 控制台查看有[配額](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw)的 BigQuery 資源用量，並視需要[申請更多配額](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#requesting_a_quota_increase)。
+Google Cloud 設定資源用量限制，包括 BigQuery 資源，確保共用資源的用量公平，並避免費用暴增。您可以使用 Google Cloud 控制台查看 BigQuery 資源的[配額](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw)用量，並視需要[申請更多配額](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#requesting_a_quota_increase)。
 
 詳情請參閱「[BigQuery 配額與限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw)」。
 
 ### 稽核記錄
 
-Cloud 稽核記錄會維護 Google Cloud 事件記錄，包括 BigQuery 事件。您可以使用**記錄檢視器**，查詢與 BigQuery 工作、資料集、移轉作業等相關事件的記錄。**記錄資訊主頁**會顯示近期錯誤的相關資訊，您也可以使用**記錄指標**，計算符合特定篩選條件的記錄項目數量。
+Cloud 稽核記錄會維護 Google Cloud 事件記錄，包括 BigQuery 事件。您可以使用**Logs Explorer**，查詢與 BigQuery 工作、資料集、移轉作業等相關事件的記錄。**記錄資訊主頁**會顯示近期錯誤的相關資訊，您也可以使用**記錄指標**，計算符合特定篩選條件的記錄項目數量。
 
 詳情請參閱[Google Cloud 記錄說明文件](https://docs.cloud.google.com/logging/docs?hl=zh-tw)。
 
@@ -207,7 +197,7 @@ Cloud 稽核記錄會維護 Google Cloud 事件記錄，包括 BigQuery 事件�
 
 ## 疑難排解
 
-除了本文所述的監控與管理貴機構 BigQuery 系統功能外，您也可以參考下列資源，排解可能發生的問題：
+除了本文所述的監控和管理貴機構 BigQuery 系統功能外，您也可以參考下列資源，排解可能發生的問題：
 
 * [BigQuery 錯誤訊息](https://docs.cloud.google.com/bigquery/docs/error-messages?hl=zh-tw)
 * [BigQuery 帳單問題](https://docs.cloud.google.com/bigquery/docs/billing-questions?hl=zh-tw)
@@ -217,7 +207,7 @@ Cloud 稽核記錄會維護 Google Cloud 事件記錄，包括 BigQuery 事件�
 
 ## 後續步驟
 
-* 如要觀看有關 BigQuery 管理的各種主題影片，請參閱 [BigQuery 管理參考指南：回顧](https://cloud.google.com/blog/topics/developers-practitioners/bigquery-admin-reference-guide-recap?hl=zh-tw)。
+* [BigQuery 管理員參考指南：回顧](https://cloud.google.com/blog/topics/developers-practitioners/bigquery-admin-reference-guide-recap?hl=zh-tw)
 
 
 
@@ -226,11 +216,11 @@ Cloud 稽核記錄會維護 Google Cloud 事件記錄，包括 BigQuery 事件�
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-13 (世界標準時間)。
+上次更新時間：2026-10-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-13 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]

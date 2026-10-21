@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -14,7 +14,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 如需包含這個程式碼範例的詳細說明文件，請參閱下列文章：
 
-* [使用 Storage Write API 串流資料](https://docs.cloud.google.com/bigquery/docs/write-api-streaming?hl=zh-tw)
+* [使用 Storage Write API (gRPC) 串流資料](https://docs.cloud.google.com/bigquery/docs/write-api-streaming?hl=zh-tw)
 
 ## 程式碼範例
 
@@ -216,6 +216,80 @@ public class WriteCommittedStream {
       }
     }
   }
+}
+```
+
+### Rust
+
+```
+use anyhow::Result;
+use arrow::datatypes::{DataType, Field, Schema};
+use arrow::ipc::writer::StreamWriter;
+use arrow_json::ReaderBuilder;
+use google_cloud_bigquery::client::Write;
+use google_cloud_bigquery::model::{ArrowRecordBatch, ArrowSchema};
+use google_cloud_bigquery::write::CommittedWriter;
+use google_cloud_bigquery::write::format::Arrow;
+use std::sync::Arc;
+use tokio::task::JoinSet;
+
+// The client library doesn't support a built-in JSON API surface.
+//
+// This example demonstrates how to write JSON data to BigQuery by first
+// converting it to Arrow record batches using the `arrow-json` crate.
+
+pub async fn sample(project_id: &str, dataset_id: &str, table_id: &str) -> anyhow::Result<()> {
+    let client = Write::builder().build().await?;
+
+    // Define the table schema
+    let schema = Arc::new(Schema::new(vec![
+        Field::new("string", DataType::Utf8, false),
+        Field::new("int", DataType::Int64, false),
+    ]));
+
+    // Initialize an IPC stream writer and extract the serialized schema
+    let mut ipc_writer = StreamWriter::try_new(Vec::new(), &schema)?;
+    let schema_buf = std::mem::take(ipc_writer.get_mut());
+
+    let table = format!("projects/{project_id}/datasets/{dataset_id}/tables/{table_id}");
+    // Create a writer for a committed stream
+    let writer: CommittedWriter<Arrow> = client
+        .create_stream(table)
+        .build_arrow(ArrowSchema::new().set_serialized_schema(schema_buf))
+        .await?;
+
+    // Create a decoder to convert JSON to Arrow
+    let mut decoder = ReaderBuilder::new(schema).build_decoder()?;
+
+    let mut writes = JoinSet::new();
+    for i in 0..100 {
+        for j in 0..10 {
+            // Generate example data (JSON bytes)
+            let json = format!(r#"{{"string": "batch {i}", "int": {}}}"#, 10 * i + j);
+            let _ = decoder.decode(json.as_bytes())?;
+        }
+        if let Some(batch) = decoder.flush()? {
+            // Serialize the batch
+            let batch = {
+                ipc_writer.write(&batch)?;
+                let batch_bytes = std::mem::take(ipc_writer.get_mut());
+                ArrowRecordBatch::new().set_serialized_record_batch(batch_bytes)
+            };
+            // Write the batch to the committed stream
+            writes.spawn(writer.append(batch).set_offset(10 * i).send());
+        }
+    }
+    let results: Result<Vec<_>, _> = writes.join_all().await.into_iter().collect();
+    let _ = results?;
+
+    // Finalize the stream, preventing further writes
+    let resp = writer.finalize().await?;
+    println!(
+        "Successfully finalized the stream with {} rows",
+        resp.row_count
+    );
+
+    Ok(())
 }
 ```
 

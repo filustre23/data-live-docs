@@ -12,21 +12,26 @@ GoogleSQL for BigQuery supports approximate aggregate functions.
 To learn about the syntax for aggregate function calls, see
 [Aggregate function calls](/bigquery/docs/reference/standard-sql/aggregate-function-calls).
 
-Approximate aggregate functions are scalable in terms of memory usage and time,
-but produce approximate results instead of exact results. These functions
-typically require less memory than [exact aggregation functions](/bigquery/docs/reference/standard-sql/aggregate_functions)
+Approximate aggregate functions are scalable in terms of time and resource
+usage, but produce approximate results instead of exact results. These functions
+typically use fewer resources than [exact aggregation functions](/bigquery/docs/reference/standard-sql/aggregate_functions)
 like `COUNT(DISTINCT ...)`, but also introduce statistical uncertainty.
 This makes approximate aggregation appropriate for large data streams for
-which linear memory usage is impractical, as well as for data that is
+which linear memory usage is impractical, as well as for data that's
 already approximate.
 
-The approximate aggregate functions in this section work directly on the
-input data, rather than an intermediate estimation of the data. These functions
-*don't allow* users to specify the precision for the estimation with
-sketches. If you would like to specify precision with sketches, see:
+The approximate aggregate functions in this section compute an estimate
+directly from the input data. These functions don't return a
+[*sketch*](/bigquery/docs/sketches), which is a compact
+summary of the data that you can store and merge later, and they don't let you
+specify the precision of the estimate.
 
-* [HyperLogLog++ functions](/bigquery/docs/reference/standard-sql/hll_functions) to estimate cardinality.
-* [KLL functions](/bigquery/docs/reference/standard-sql/kll_functions) to estimate quantile values.
+To specify precision with sketches,
+use the following
+functions:
+
+* [HyperLogLog++ functions](/bigquery/docs/reference/standard-sql/hll_functions) to estimate cardinality
+* [KLL functions](/bigquery/docs/reference/standard-sql/kll_functions) to estimate quantile values
 
 ## Function list
 
@@ -42,6 +47,7 @@ sketches. If you would like to specify precision with sketches, see:
 ```
 APPROX_COUNT_DISTINCT(
   expression
+  [ WHERE where_expression ]
 )
 ```
 
@@ -51,7 +57,7 @@ Returns the approximate result for `COUNT(DISTINCT expression)`. The value
 returned is a statistical estimate, not necessarily the actual value.
 
 This function is less accurate than `COUNT(DISTINCT expression)`, but performs
-better on huge input.
+better on very large input.
 
 **Supported Argument Types**
 
@@ -85,6 +91,7 @@ APPROX_QUANTILES(
   [ DISTINCT ]
   expression, number
   [ { IGNORE | RESPECT } NULLS ]
+  [ WHERE where_expression ]
 )
 ```
 
@@ -97,7 +104,9 @@ first element is the approximate minimum and the last element is the approximate
 maximum.
 
 Returns `NULL` if there are zero input rows or `expression` evaluates to
-`NULL` for all rows.
+`NULL` for all rows. If you
+specify a `WHERE` clause expression, then the `IGNORE NULLS` clause is
+required.
 
 To learn more about the optional aggregate clauses that you can pass
 into this function, see
@@ -178,9 +187,7 @@ FROM UNNEST([NULL, NULL, 1, 1, 1, 4, 5, 6, 7, 8, 9, 10]) AS x;
 ## `APPROX_TOP_COUNT`
 
 ```
-APPROX_TOP_COUNT(
-  expression, number
-)
+APPROX_TOP_COUNT(expression, number)
 ```
 
 **Description**
@@ -240,9 +247,7 @@ FROM UNNEST([NULL, "pear", "pear", "pear", "apple", NULL]) as x;
 ## `APPROX_TOP_SUM`
 
 ```
-APPROX_TOP_SUM(
-  expression, weight, number
-)
+APPROX_TOP_SUM(expression, weight, number)
 ```
 
 **Description**
@@ -300,57 +305,3 @@ UNNEST([
  | [{pear, 6}, {banana, 5}] |
  +--------------------------*/
 ```
-
-**NULL handling**
-
-`APPROX_TOP_SUM` doesn't ignore `NULL` values for the `expression` and `weight`
-parameters.
-
-```
-SELECT APPROX_TOP_SUM(x, weight, 2) AS approx_top_sum FROM
-UNNEST([STRUCT("apple" AS x, NULL AS weight), ("pear", 0), ("pear", NULL)]);
-
-/*----------------------------+
- | approx_top_sum             |
- +----------------------------+
- | [{pear, 0}, {apple, NULL}] |
- +----------------------------*/
-```
-
-```
-SELECT APPROX_TOP_SUM(x, weight, 2) AS approx_top_sum FROM
-UNNEST([STRUCT("apple" AS x, 0 AS weight), (NULL, 2)]);
-
-/*-------------------------+
- | approx_top_sum          |
- +-------------------------+
- | [{NULL, 2}, {apple, 0}] |
- +-------------------------*/
-```
-
-```
-SELECT APPROX_TOP_SUM(x, weight, 2) AS approx_top_sum FROM
-UNNEST([STRUCT("apple" AS x, 0 AS weight), (NULL, NULL)]);
-
-/*----------------------------+
- | approx_top_sum             |
- +----------------------------+
- | [{apple, 0}, {NULL, NULL}] |
- +----------------------------*/
-```
-
-
-
-
-Send feedback
-
-Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
-
-Last updated 2026-07-17 UTC.
-
-
-
-
-Need to tell us more?
-
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-07-17 UTC."],[],[]]

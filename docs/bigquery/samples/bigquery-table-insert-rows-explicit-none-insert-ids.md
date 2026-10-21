@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -14,7 +14,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 如需包含這個程式碼範例的詳細說明文件，請參閱下列文章：
 
-* [使用舊版串流 API](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery?hl=zh-tw)
+* [使用 Storage Write API (REST)](https://docs.cloud.google.com/bigquery/docs/write-api-rest?hl=zh-tw)
 
 ## 程式碼範例
 
@@ -142,6 +142,35 @@ function table_insert_rows_explicit_none_insert_ids(
         }
     }
 }
+```
+
+### Python
+
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+
+```
+from google.cloud import bigquery
+
+# Construct a BigQuery client object.
+client = bigquery.Client()
+
+# TODO(developer): Set table_id to the ID of table to append to.
+# table_id = "your-project.your_dataset.your_table"
+
+rows_to_insert = [
+    {"full_name": "Phred Phlyntstone", "age": 32},
+    {"full_name": "Wylma Phlyntstone", "age": 29},
+]
+
+errors = client.insert_rows_json(
+    table_id, rows_to_insert, row_ids=[None] * len(rows_to_insert)
+)  # Make an API request.
+if errors == []:
+    print("New rows have been added.")
+else:
+    print("Encountered errors while inserting rows: {}".format(errors))
 ```
 
 ## 後續步驟

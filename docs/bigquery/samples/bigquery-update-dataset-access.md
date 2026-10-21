@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -109,6 +109,65 @@ public class UpdateDatasetAccess {
     }
   }
 }
+```
+
+### Python
+
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+
+```
+# TODO(developer): Set dataset_id to the ID of the dataset to fetch.
+dataset_id = "your-project.your_dataset"
+
+# TODO(developer): Set entity_id to the ID of the email or group from whom
+# you are adding access. Alternatively, to the JSON REST API representation
+# of the entity, such as a view's table reference.
+entity_id = "user-or-group-to-add@example.com"
+
+from google.cloud.bigquery.enums import EntityTypes
+
+# TODO(developer): Set entity_type to the type of entity you are granting access to.
+# Common types include:
+#
+# * "userByEmail" -- A single user or service account. For example "fred@example.com"
+# * "groupByEmail" -- A group of users. For example "example@googlegroups.com"
+# * "view" -- An authorized view. For example
+#       {"projectId": "p", "datasetId": "d", "tableId": "v"}
+#
+# For a complete reference, see the REST API reference documentation:
+# https://cloud.google.com/bigquery/docs/reference/rest/v2/datasets#Dataset.FIELDS.access
+entity_type = EntityTypes.GROUP_BY_EMAIL
+
+# TODO(developer): Set role to a one of the "Basic roles for datasets"
+# described here:
+# https://cloud.google.com/bigquery/docs/access-control-basic-roles#dataset-basic-roles
+role = "READER"
+
+from google.cloud import bigquery
+
+# Construct a BigQuery client object.
+client = bigquery.Client()
+
+dataset = client.get_dataset(dataset_id)  # Make an API request.
+
+entries = list(dataset.access_entries)
+entries.append(
+    bigquery.AccessEntry(
+        role=role,
+        entity_type=entity_type,
+        entity_id=entity_id,
+    )
+)
+dataset.access_entries = entries
+
+dataset = client.update_dataset(dataset, ["access_entries"])  # Make an API request.
+
+full_dataset_id = "{}.{}".format(dataset.project, dataset.dataset_id)
+print(
+    "Updated dataset '{}' with modified user permissions.".format(full_dataset_id)
+)
 ```
 
 ## 後續步驟

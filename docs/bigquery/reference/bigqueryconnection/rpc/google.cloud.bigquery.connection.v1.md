@@ -25,6 +25,7 @@ Send feedback
 * `ConnectorConfiguration.Authentication` (message)
 * `ConnectorConfiguration.Endpoint` (message)
 * `ConnectorConfiguration.Network` (message)
+* `ConnectorConfiguration.ParameterValue` (message)
 * `ConnectorConfiguration.PrivateServiceConnect` (message)
 * `ConnectorConfiguration.Secret` (message)
 * `ConnectorConfiguration.Secret.SecretType` (enum)
@@ -139,84 +140,4 @@ Credential info for the Cloud SQL.
 
 ## CloudSqlProperties
 
-Connection properties specific to the Cloud SQL.
-
-| Fields | |
-| --- | --- |
-| `instance_id` | `string`  Cloud SQL instance ID in the form `project:location:instance`. |
-| `database` | `string`  Database name. |
-| `type` | `DatabaseType`  Type of the Cloud SQL database. |
-| `credential` | `CloudSqlCredential`  Input only. Cloud SQL credential. |
-| `service_account_id` | `string`  Output only. The account ID of the service used for the purpose of this connection.  When the connection is used in the context of an operation in BigQuery, this service account will serve as the identity being used for connecting to the CloudSQL instance specified in this connection. |
-
-## DatabaseType
-
-Supported Cloud SQL database types.
-
-| Enums | |
-| --- | --- |
-| `DATABASE_TYPE_UNSPECIFIED` | Unspecified database type. |
-| `POSTGRES` | Cloud SQL for PostgreSQL. |
-| `MYSQL` | Cloud SQL for MySQL. |
-
-## Connection
-
-Configuration parameters to establish connection with an external data source, except the credential attributes.
-
-| Fields | |
-| --- | --- |
-| `name` | `string`  Output only. The resource name of the connection in the form of: `projects/{project_id}/locations/{location_id}/connections/{connection_id}` |
-| `friendly_name` | `string`  User provided display name for the connection. |
-| `description` | `string`  User provided description. |
-| `configuration` | `ConnectorConfiguration`  Optional. Connector configuration. |
-| `creation_time` | `int64`  Output only. The creation timestamp of the connection. |
-| `last_modified_time` | `int64`  Output only. The last update timestamp of the connection. |
-| `has_credential` | `bool`  Output only. True, if credential is configured for this connection. |
-| `kms_key_name` | `string`  Optional. The Cloud KMS key that is used for credentials encryption.  If omitted, internal Google owned encryption keys are used.  Example: `projects/[kms_project_id]/locations/[region]/keyRings/[key_region]/cryptoKeys/[key]` |
-| Union field `properties`. Properties specific to the underlying data source. `properties` can be only one of the following: | |
-| `cloud_sql` | `CloudSqlProperties`  Cloud SQL properties. |
-| `aws` | `AwsProperties`  Amazon Web Services (AWS) properties. |
-| `azure` | `AzureProperties`  Azure properties. |
-| `cloud_spanner` | `CloudSpannerProperties`  Cloud Spanner properties. |
-| `cloud_resource` | `CloudResourceProperties`  Cloud Resource properties. |
-| `spark` | `SparkProperties`  Spark properties. |
-| `salesforce_data_cloud` | `SalesforceDataCloudProperties`  Optional. Salesforce DataCloud properties. This field is intended for use only by Salesforce partner projects. This field contains properties for your Salesforce DataCloud connection. |
-
-## ConnectorConfiguration
-
-Represents concrete parameter values for Connector Configuration.
-
-| Fields | |
-| --- | --- |
-| `connector_id` | `string`  Required. Immutable. The ID of the Connector these parameters are configured for. |
-| `endpoint` | `Endpoint`  Specifies how to reach the remote system this connection is pointing to. |
-| `authentication` | `Authentication`  Client authentication. |
-| `network` | `Network`  Networking configuration. |
-| `asset` | `Asset`  Data asset. |
-
-## Asset
-
-Data Asset - a resource within instance of the system, reachable under specified endpoint. For example a database name in a SQL DB.
-
-| Fields | |
-| --- | --- |
-| `database` | `string`  Name of the database. |
-| `google_cloud_resource` | `string`  Full Google Cloud resource name - <https://cloud.google.com/apis/design/resource_names#full_resource_name>. Example: `//library.googleapis.com/shelves/shelf1/books/book2` |
-
-## Authentication
-
-Client authentication.
-
-| Fields | |
-| --- | --- |
-| `username_password` | `UsernamePassword`  Username/password authentication. |
-| `service_account` | `string`  Output only. Google-managed service account associated with this connection, e.g., `service-{project_number}@gcp-sa-bigqueryconnection.iam.gserviceaccount.com`. BigQuery jobs using this connection will act as `service_account` identity while connecting to the datasource. |
-
-## Endpoint
-
-Remote endpoint specification.
-
-| Fields | |
-| --- | --- |
-| Union field `endpoint`.  `endpoint` can be only one of the following: | |
-| `host_port` | `string`  Host and port in a format of `hostname:port` as defined in <https://www.ietf.org/rfc/rfc3986.html#section-3.2.2> and <https://www.ietf.org/rfc/rfc3986.html#section-3.2.3>. |
+Connection

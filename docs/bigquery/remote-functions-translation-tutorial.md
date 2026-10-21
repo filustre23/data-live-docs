@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -18,10 +18,10 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 本教學課程說明如何建立 [BigQuery 遠端函式](https://docs.cloud.google.com/bigquery/docs/remote-functions?hl=zh-tw)、叫用 [Cloud Translation API](https://docs.cloud.google.com/translate/docs/reference/api-overview?hl=zh-tw)，以及使用 SQL 和 Python 將任何語言的內容翻譯成西班牙文。
 
-這項功能的用途包括：
+這項函式的用途包括：
 
 * 將網站上的使用者留言翻譯成當地語言
-* 將多種語言的支援要求翻譯成客服案件工作人員可理解的語言
+* 將多種語言的支援要求翻譯成支援案件工作人員可理解的語言
 
 ## 目標
 
@@ -75,14 +75,15 @@ Google uses AI technology to translate content into your preferred language. AI 
 - [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project).
 - Enable the BigQuery, BigQuery Connection,
   Cloud Translation, Cloud Run functions, Cloud Build, Cloud Logging,
-  Cloud Pub/Sub, Artifact Registry, and Cloud Run Admin APIs.
+  Cloud Pub/Sub, Artifact Registry, and Cloud Run Admin APIs, if any are not already enabled.
 
   **Roles required to enable APIs**
 
-  To enable APIs, you need the Service Usage Admin IAM
-  role (`roles/serviceusage.serviceUsageAdmin`), which
-  contains the `serviceusage.services.enable` permission. [Learn how to grant
-  roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw).
+  To enable APIs, you need the `serviceusage.services.enable` permission. If you
+  created the project, then you likely already have this permission through the
+  Owner role (`roles/owner`). Otherwise, you can get this permission through the
+  Service Usage Admin role (`roles/serviceusage.serviceUsageAdmin`).
+  [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw).
 
   [Enable the APIs](https://console.cloud.google.com/apis/enableflow?apiid=bigquery%2Cbigqueryconnection.googleapis.com%2Ctranslate.googleapis.com%2Ccloudfunctions%2Ccloudbuild.googleapis.com%2Clogging.googleapis.com%2Cpubsub.googleapis.com%2Cartifactregistry.googleapis.com%2Crun.googleapis.com&hl=zh-tw)
 
@@ -107,14 +108,15 @@ Google uses AI technology to translate content into your preferred language. AI 
 - [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project).
 - Enable the BigQuery, BigQuery Connection,
   Cloud Translation, Cloud Run functions, Cloud Build, Cloud Logging,
-  Cloud Pub/Sub, Artifact Registry, and Cloud Run Admin APIs.
+  Cloud Pub/Sub, Artifact Registry, and Cloud Run Admin APIs, if any are not already enabled.
 
   **Roles required to enable APIs**
 
-  To enable APIs, you need the Service Usage Admin IAM
-  role (`roles/serviceusage.serviceUsageAdmin`), which
-  contains the `serviceusage.services.enable` permission. [Learn how to grant
-  roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw).
+  To enable APIs, you need the `serviceusage.services.enable` permission. If you
+  created the project, then you likely already have this permission through the
+  Owner role (`roles/owner`). Otherwise, you can get this permission through the
+  Service Usage Admin role (`roles/serviceusage.serviceUsageAdmin`).
+  [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw).
 
   [Enable the APIs](https://console.cloud.google.com/apis/enableflow?apiid=bigquery%2Cbigqueryconnection.googleapis.com%2Ctranslate.googleapis.com%2Ccloudfunctions%2Ccloudbuild.googleapis.com%2Clogging.googleapis.com%2Cpubsub.googleapis.com%2Cartifactregistry.googleapis.com%2Crun.googleapis.com&hl=zh-tw)
 
@@ -132,7 +134,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 #### 所需權限
 
-如要執行本教學課程中的工作，必須具備下列權限：
+如要執行本教學課程中的工作，您必須具備下列權限：
 
 * `bigquery.datasets.create`
 * `bigquery.connections.create`
@@ -158,7 +160,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    [前往 IAM](https://console.cloud.google.com/projectselector/iam-admin/iam?supportedpurview=project%2Cfolder%2CorganizationId&hl=zh-tw)
 4. 選取專案。
 5. 按一下「授予存取權」person\_add，然後在「新增主體」欄位中，貼上先前複製的 Compute Engine 預設服務帳戶。
-6. 在「指派角色」清單中，搜尋並選取「Cloud Translation API User」。
+6. 在「指派角色」清單中，搜尋並選取「Cloud Translation API User」(Cloud Translation API 使用者)。
 7. 按一下 [儲存]。
 
 ## 建立 Cloud Run 函式
@@ -175,7 +177,7 @@ Google uses AI technology to translate content into your preferred language. AI 
      這項設定位於「執行階段、建構作業、連線和安全性設定」專區。
 
      在本教學課程中，我們會使用低於預設值的值，控制傳送至 Translation 的要求比率。
-   * 選取「Runtime」(執行階段) 底下的「Python 3.10」。
+   * 選取「執行階段」底下的「Python 3.10」。
    * 在「Entry point」(進入點) 中輸入 `handle_translation`。
 2. 在檔案清單中選取 **main.py**，然後貼上下列程式碼。
 
@@ -288,13 +290,13 @@ Google uses AI technology to translate content into your preferred language. AI 
    ```
 
    使用 `us-central1` 更新 `<your location>`。
-3. 在檔案清單中選取 **requirements.txt**，然後貼上下列文字：
+3. 在檔案清單中選取「requirements.txt」**requirements.txt**，然後貼上下列文字：
 
    ```
    Flask==3.1.3; python_version >= '3.9'
    functions-framework==3.9.2
    google-cloud-translate==3.18.0
-   Werkzeug==3.1.8; python_version >= '3.9'
+   Werkzeug==3.1.9; python_version >= '3.10'
    ```
 4. 按一下「部署」，然後等待函式部署完成。
 5. 按一下「觸發條件」分頁標籤。
@@ -302,10 +304,10 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 建立 BigQuery 資料集
 
-[建立 BigQuery 資料集](https://docs.cloud.google.com/bigquery/docs/datasets?hl=zh-tw#create-dataset)，其中會包含遠端函式。建立資料集時，請加入下列規格：
+[建立 BigQuery 資料集](https://docs.cloud.google.com/bigquery/docs/datasets?hl=zh-tw#create-dataset)，其中將包含遠端函式。建立資料集時，請加入下列規格：
 
 * 在「Dataset ID」(資料集 ID) 中輸入 `remote_function_test`。
-* 「位置類型」請選取「多區域」。
+* 在「位置類型」中，選取「多區域」。
 * 在「多區域」部分，選取「美國 (多個美國地區)」。
 
 ## 建立 BigQuery 連線和服務帳戶
@@ -316,20 +318,20 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    * 在「連線類型」中，選取「BigLake 與遠端函式 (Cloud 資源)」
    * 在「Connection ID」(連線 ID) 中輸入 `remote-function-connection`。
-   * 「位置類型」請選取「多區域」。
+   * 在「位置類型」中，選取「多區域」。
    * 在「多區域」部分，選取「美國 (多個美國地區)」。
 2. [開啟「連線」清單](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw#list-connections)，然後選取 **`us.remote-function-connection`**。
 3. 複製服務帳戶 ID 並儲存，以供日後使用。您必須在下一個步驟中授予這個 ID 權限。
 
 ## 將權限授予 BigQuery 服務帳戶
 
-您在上一個步驟中建立的服務帳戶必須具備使用 Cloud Run 的權限，BigQuery 遠端函式才能使用 Cloud Run 函式。如要授予服務帳戶權限，請完成下列步驟：
+您在上一個步驟中建立的服務帳戶必須具備使用 Cloud Run 的權限，BigQuery 遠端函式才能使用 Cloud Run functions 函式。如要授予服務帳戶權限，請完成下列步驟：
 
 1. 前往「Cloud Run」頁面。
 
    [前往 Cloud Run](https://console.cloud.google.com/project/_/run?hl=zh-tw)。
 2. 選取專案。
-3. 勾選「`translation-handler`」旁的核取方塊。
+3. 勾選「**`translation-handler`**」旁的核取方塊。
 4. 在「Permissions」(權限) 面板中，按一下「Add principal」(新增主體)。
 5. 在「新增主體」欄位，輸入先前複製的服務帳戶 ID。
 6. 在「指派角色」清單中，搜尋並選取「Cloud Run Invoker」。
@@ -368,7 +370,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 呼叫 BigQuery 遠端函式
 
-建立遠端函式後，請進行測試，確認函式已連結至 Cloud Run 函式，並以西班牙文產生預期結果。
+建立遠端函式後，請進行測試，確認函式已連結至 Cloud Run functions 函式，並以西班牙文產生預期結果。
 
 1. 在 BigQuery 查詢編輯器中輸入下列查詢，然後點選「Run」(執行)。
 
@@ -378,7 +380,7 @@ Google uses AI technology to translate content into your preferred language. AI 
        AS translated_text;
    ```
 
-   結果大致如下：
+   結果類似下列畫面：
 
    ```
    +-------------------------------------------+
@@ -387,7 +389,7 @@ Google uses AI technology to translate content into your preferred language. AI 
    | ¡Esta nueva característica es fantástica! |
    +-------------------------------------------+
    ```
-2. 選用：如要測試公開資料集的遠端函式，請輸入下列查詢，然後按一下「執行」。如要限制傳回的結果，請使用 `LIMIT` 子句。
+2. 選用：如要在公開資料集上測試遠端函式，請輸入下列查詢，然後按一下「執行」。如要限制傳回的結果，請使用 `LIMIT` 子句。
 
    ```
    SELECT
@@ -397,7 +399,7 @@ Google uses AI technology to translate content into your preferred language. AI 
        (SELECT text FROM `bigquery-public-data.hacker_news.full` LIMIT 3);
    ```
 
-   結果大致如下：
+   結果類似下列畫面：
 
    ```
    +---------------------------------------------------------------------------+
@@ -440,11 +442,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-12 (世界標準時間)。
+上次更新時間：2026-10-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-12 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]

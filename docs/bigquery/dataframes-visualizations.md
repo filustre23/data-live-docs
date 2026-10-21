@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -16,13 +16,13 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 使用 BigQuery DataFrames 繪製圖表
 
-本文將示範如何使用 BigQuery DataFrames 視覺化程式庫，繪製各種圖表。
+本文說明如何使用 BigQuery DataFrames 視覺化程式庫，繪製各種圖表。
 
 [`bigframes.pandas` API](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.html) 提供完整的 Python 工具生態系統。這項 API 支援進階統計作業，您可以將 BigQuery DataFrame 產生的匯總資料以視覺化方式呈現。您也可以從 BigQuery DataFrame 切換至 `pandas` DataFrame，並使用內建的取樣作業。
 
 ## 直方圖
 
-下列範例會從 `bigquery-public-data.ml_datasets.penguins` 資料表讀取資料，繪製企鵝鳥喙深度的分布直方圖：
+下列範例會從 `bigquery-public-data.ml_datasets.penguins` 資料表讀取資料，繪製企鵝喙深分布的直方圖：
 
 ```
 import bigframes.pandas as bpd
@@ -33,7 +33,7 @@ penguins["culmen_depth_mm"].plot.hist(bins=40)
 
 ## 折線圖
 
-以下範例使用 `bigquery-public-data.noaa_gsod.gsod2021` 表格中的資料，繪製一年內中位數溫度變化的折線圖：
+以下範例使用 `bigquery-public-data.noaa_gsod.gsod2021` 資料表中的資料，繪製一年內中位數溫度變化的折線圖：
 
 ```
 import bigframes.pandas as bpd
@@ -48,7 +48,7 @@ noaa_surface_median_temps.plot.line()
 
 ## 面積圖
 
-以下範例使用 `bigquery-public-data.usa_names.usa_1910_2013` 資料表追蹤美國歷史上名字的熱門程度，並著重於 `Mary`、`Emily` 和 `Lisa` 這幾個名字：
+以下範例使用 `bigquery-public-data.usa_names.usa_1910_2013` 資料表追蹤美國歷史上的名字熱門程度，並著重於 `Mary`、`Emily` 和 `Lisa` 這幾個名字：
 
 ```
 import bigframes.pandas as bpd
@@ -130,7 +130,7 @@ noaa_surface_median_temps.plot.line(sampling_n=40)
 
 ## 使用 pandas 和 Matplotlib 參數繪製進階圖表
 
-由於 BigQuery DataFrames 的繪圖程式庫是由 pandas 和 Matplotlib 提供支援，因此您可以傳入更多參數來微調圖表，就像使用 pandas 一樣。以下各節說明相關範例。
+由於 BigQuery DataFrames 的繪圖程式庫採用 pandas 和 Matplotlib，因此您可以傳入更多參數來微調圖表，就像使用 pandas 一樣。以下各節說明相關範例。
 
 ### 附有子圖的姓名熱門趨勢
 
@@ -154,7 +154,7 @@ name_counts = name_counts.unstack(level=1).fillna(0)
 name_counts.plot.area(subplots=True, alpha=0.5)
 ```
 
-### 計程車行程的散佈圖，包含多個維度
+### 計程車行程的散布圖，包含多個維度
 
 使用[散布圖範例](#scatter-plot)中的資料，以下範例會重新命名 X 軸和 Y 軸的標籤、使用 `passenger_count` 參數設定點大小、使用 `tip_amount` 參數設定點顏色，以及調整圖表大小：
 
@@ -207,11 +207,11 @@ taxi_trips.plot.scatter(
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-12 (世界標準時間)。
+上次更新時間：2026-10-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-12 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]

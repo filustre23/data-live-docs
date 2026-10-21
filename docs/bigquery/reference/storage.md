@@ -234,7 +234,8 @@ be used with any version of Arrow and don't obstruct its updates.
   support this workflow natively.
 * Reading [external tables](/bigquery/docs/external-tables) is not supported. To
   use the Storage Read API with external data sources, use
-  [BigLake tables](/bigquery/docs/biglake-intro).
+  [Apache Iceberg](/lakehouse/docs/manage-tables) tables, managed by the
+  Lakehouse runtime catalog.
 
 ## Supported regions
 
@@ -256,22 +257,23 @@ see [BigQuery locations](/bigquery/docs/locations).
 
 ## Troubleshoot errors
 
-The following are common errors encountered when using the
+The following are common errors encountered when you use the
 Storage Read API:
 
 Error: `Stream removed`
 :   **Resolution:** Retry the Storage Read API request. This is likely
-    a transient error that can be resolved by retrying the request. If the problem
-    persists, [contact support](/bigquery/docs/getting-support).
+    a transient error that you can resolve by retrying the request. If the problem
+    persists, [contact Cloud Customer Care](/bigquery/docs/getting-support).
 
 Error: `Stream expired`
 :   **Cause:** This error occurs when the Storage Read API session
-    reaches the [6 hour timeout](#create_a_session).
+    reaches the
+    [6-hour timeout](/bigquery/docs/reference/storage#create_a_session).
 :   **Resolution:**
 
 1. Increase the parallelism of the job.
 2. If the CPU utilization of the worker nodes is relatively consistent and
-   doesn't spike above 85%, consider running the job on a larger machine type.
+   doesn't exceed 85%, consider running the job on a larger machine type.
 3. Split the job into multiple jobs or smaller queries.
 
 ## Quotas and limits
@@ -295,10 +297,31 @@ The relevant API method for these logs is
 | `serialized_response_bytes` | INT64 | The total number of bytes sent to the client over the network, after serialization. This field helps you track data egress. |
 | `scanned_bytes` | INT64 | The total number of bytes scanned from BigQuery storage to fulfill the request. This value is used to calculate the analysis cost of the read operation. |
 
+### Monitoring `ReadRows` latency
+
+To monitor the latency of `ReadRows` requests, use the [**Metrics Explorer**](/monitoring/charts/metrics-explorer) in Cloud Monitoring. Select `Consumed API - Request latencies` in the **Metric** field and filter by the `method` in the **Filter** field by selecting the corresponding `ReadRows` method.
+
 ## Pricing
 
 For information on Storage Read API pricing, see the
 [Pricing](https://cloud.google.com/bigquery/pricing#data-extraction-pricing-details) page.
+
+### Serverless Apache Spark workloads
+
+Storage Read API streaming reads usage incurs no additional charges
+when requests originate from the following serverless environments:
+
+* [Managed Service for Apache Spark serverless](/managed-spark/docs/serverless-overview)
+* [BigQuery stored procedures for Apache Spark](/bigquery/docs/spark-procedures)
+
+In these serverless environments, data read costs are delegated to the streaming
+engine at no additional charge. Standard network egress charges still apply if
+data is read across regions.
+
+For cluster-based Apache Spark workloads (such as
+[Managed Service for Apache Spark on clusters](/managed-spark/docs/concepts/clusters-overview)
+or Apache Spark running on Google Kubernetes Engine (GKE)), standard
+Storage Read API rates apply.
 
 
 
@@ -307,11 +330,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-07-17 UTC.
+Last updated 2026-10-13 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-07-17 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-10-13 UTC."],[],[]]

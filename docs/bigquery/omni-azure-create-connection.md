@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -27,18 +27,18 @@ BigQuery 管理員可以建立[連線](https://docs.cloud.google.com/bigquery/do
 * 請確認您已建立下列資源：
 
   + 已啟用 [BigQuery Connection API](https://console.cloud.google.com/apis/library/bigqueryconnection.googleapis.com?hl=zh-tw) 的[Google Cloud 專案](https://docs.cloud.google.com/docs/overview?hl=zh-tw#projects)。
-  + 如果您採用以容量計價的收費模式，請務必為專案啟用 [BigQuery Reservation API](https://console.cloud.google.com/apis/library/bigqueryreservation.googleapis.com?hl=zh-tw)。如要瞭解定價資訊，請參閱 [BigQuery Omni 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#bqomni)。
+  + 如果您採用以量計價的收費模式，請務必為專案啟用 [BigQuery Reservation API](https://console.cloud.google.com/apis/library/bigqueryreservation.googleapis.com?hl=zh-tw)。如要瞭解定價資訊，請參閱 [BigQuery Omni 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#bqomni)。
   + 具有 Azure 訂用帳戶的 Azure 租用戶。
   + 符合下列規格的 Azure 儲存體帳戶：
 
     - 一般用途 V2 帳戶或 Blob 儲存體帳戶。
-    - 它使用階層式命名空間。詳情請參閱「[建立要搭配 Azure Data Lake Storage Gen2 使用的儲存空間帳戶](https://docs.microsoft.com/en-us/azure/storage/blobs/create-data-lake-storage-account)」。
+    - 並使用階層式命名空間。詳情請參閱「[建立要搭配 Azure Data Lake Storage Gen2 使用的儲存空間帳戶](https://docs.microsoft.com/en-us/azure/storage/blobs/create-data-lake-storage-account)」。
     - 資料採用[支援的格式](https://docs.cloud.google.com/bigquery/external-table-definition?hl=zh-tw#table-definition)。
     - 資料位於 `azure-eastus2` 區域。
 
 ## 必要的角色
 
-* 如要取得建立連線以存取 Azure Blob 儲存空間資料所需的權限，請要求系統管理員授予您專案的 [BigQuery 連線管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.connectionAdmin)  (`roles/bigquery.connectionAdmin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+* 如要取得建立連線來存取 Azure Blob 儲存空間資料所需的權限，請要求管理員授予您專案的 [BigQuery 連線管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.connectionAdmin)  (`roles/bigquery.connectionAdmin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
   您或許也能透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)，取得必要權限。
 * 請確認您在租戶中擁有下列 Azure IAM 權限：
@@ -53,7 +53,7 @@ BigQuery 管理員可以建立[連線](https://docs.cloud.google.com/bigquery/do
 
 如要建立 Azure 連線，請按照下列步驟操作：
 
-1. [在 Azure 租用戶中建立應用程式](#create-azure-tenant)。
+1. [在 Azure 用戶群中建立應用程式](#create-azure-tenant)。
 2. [建立 BigQuery Azure 連線](#create-azure-connection)。
 3. [新增聯合憑證](#add-a-federated-credential)。
 4. [將角色指派給 BigQuery Azure AD 應用程式](#assigning-a-role)。
@@ -70,7 +70,7 @@ BigQuery 管理員可以建立[連線](https://docs.cloud.google.com/bigquery/do
 2. 在「Name」部分，輸入應用程式名稱。
 3. 在「Supported account types」中，選取「Accounts in this organizational directory only」。
 4. 如要註冊新應用程式，請按一下「Register」。
-5. 記下「應用程式 (用戶端) ID」。您必須在[建立連線](#create-azure-connection)時提供這個 ID。
+5. 記下**應用程式 (用戶端) ID**，您必須在[建立連線](#create-azure-connection)時提供這個 ID。
 
 ### Terraform
 
@@ -100,29 +100,29 @@ BigQuery 管理員可以建立[連線](https://docs.cloud.google.com/bigquery/do
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在「Explorer」窗格中，點選「新增資料」add。
+2. 在「Explorer」窗格中，按一下「新增資料」add。
 
    「新增資料」對話方塊隨即開啟。
-3. 在「Filter By」(依據篩選) 窗格的「Data Source Type」(資料來源類型) 專區中，選取「Databases」(資料庫)。
+3. 在「依條件篩選」窗格的「資料來源類型」部分，選取「資料庫」。
 
    或者，您也可以在「Search for data sources」(搜尋資料來源) 欄位中輸入 `Azure`。
 4. 在「精選資料來源」部分，按一下「Azure Blob 儲存體」。
-5. 按一下「Azure Blob Storage Omni：BigQuery Federation」解決方案資訊卡。
+5. 按一下「Azure Blob Storage Omni: BigQuery Federation」解決方案資訊卡。
 6. 在「建立表格」對話方塊的「連線 ID」欄位中，選取「建立新的 ABS 連線」。
-7. 在「外部資料來源」窗格中，輸入下列資訊：
+7. 在「外部資料來源」窗格，輸入下列資訊：
 
-   * 在「連線類型」中，選取「Azure 中的 BigLake (透過 BigQuery Omni)」。
+   * 「連線類型」請選取「Azure 中的 BigLake (透過 BigQuery Omni)」。
    * 在「Connection ID」(連線 ID) 專區中輸入連線資源的 ID。可以使用英文字母、數字、破折號和底線。
    * 選取要建立連結的位置。
-   * 選用：在「Friendly name」(好記名稱) 中輸入使用者容易記得的連線名稱，例如 `My connection resource`。好記名稱可以是任何資料值，只要您日後需要修改時可以輕鬆識別連線資源即可。
-   * 選用：在「Description」(說明) 中輸入連線資源的說明。
+   * 選用：在「Friendly name」(好記名稱) 中輸入使用者容易記得的連線名稱，例如 `My connection resource`。這可以是任何值，只要日後需修改時能輕鬆識別即可。
+   * 選用：在「Description」(說明)，輸入連線資源的說明。
    * 輸入 **Azure 租戶 ID**，也就是目錄 (租戶) ID。
-   * 勾選「使用聯合身分」核取方塊，然後輸入 Azure 聯盟應用程式 (用戶端) ID。
+   * 勾選「使用聯合身分識別」核取方塊，然後輸入 Azure 聯盟應用程式 (用戶端) ID。
 
      如要瞭解如何取得 Azure ID，請參閱[在 Azure 租戶中建立應用程式](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-connection?hl=zh-tw#create-azure-tenant)。
 8. 點選「建立連線」。
 9. 點選「前往連線」。
-10. 在「連線資訊」部分，記下「BigQuery Google 身分」的值，也就是服務帳戶 ID。這個 ID 是指Google Cloud 您授權存取應用程式的[服務帳戶](#assigning-a-role)。
+10. 在「連線資訊」部分，記下「BigQuery Google 身分識別」的值，也就是服務帳戶 ID。這個 ID 是指Google Cloud 您授權存取應用程式的[服務帳戶](#assigning-a-role)。
 
 ### Terraform
 
@@ -157,7 +157,7 @@ bq mk --connection --connection_type='Azure' \
 更改下列內容：
 
 * `TENANT_ID`：Azure 目錄的租用戶 ID，其中包含 Azure 儲存體帳戶。
-* `AZURE_LOCATION`：Azure 儲存體資料所在的 Azure 區域。BigQuery Omni 支援 `azure-eastus2` 區域。
+* `AZURE_LOCATION`：Azure 儲存空間資料所在的 Azure 區域。BigQuery Omni 支援 `azure-eastus2` 區域。
 * `APP_ID`：Azure 應用程式 (用戶端) ID。如要瞭解如何取得這個 ID，請參閱「[在 Azure 租戶中建立應用程式](#create-azure-tenant)」。
 * `CONNECTION_ID`：連線名稱。
 
@@ -178,7 +178,7 @@ Identity: SUBJECT_ID
 
 **注意：** 如要覆寫預設專案，請使用 `--project_id=PROJECT_ID` 參數。將 `PROJECT_ID` 替換為Google Cloud 專案 ID。
 
-接著，為應用程式新增聯盟憑證。
+接著，為應用程式新增聯合憑證。
 
 ### 新增聯合憑證
 
@@ -186,10 +186,10 @@ Identity: SUBJECT_ID
 
 ### Azure 入口網站
 
-1. 在 Azure 入口網站中前往「應用程式註冊」，然後按一下您的應用程式。
-2. **依序選取「憑證和密鑰」>「聯合憑證」>「新增憑證」**。然後執行下列操作：
+1. 在 Azure 入口網站中，前往「應用程式註冊」，然後按一下您的應用程式。
+2. 依序選取**「憑證和密鑰」>「聯合憑證」>「新增憑證」**。然後執行下列操作：
 
-   1. 從「聯合憑證情境」清單中，選取「其他核發者」。
+   1. 從「聯合憑證情境」清單中選取「其他核發者」。
    2. 在「Issuer」中輸入 `https://accounts.google.com`。
    3. 在「主體 ID」中，輸入 Google Cloud 您[建立連結](#create-azure-connection)時取得的 **BigQuery Google 身分**。
    4. 在「Name」(名稱) 中輸入憑證名稱。
@@ -210,7 +210,7 @@ Identity: SUBJECT_ID
   }
 ```
 
-詳情請參閱「[設定應用程式以信任外部識別資訊提供者](https://docs.microsoft.com/en-us/azure/active-directory/develop/workload-identity-federation-create-trust?tabs=azure-portal)」。
+詳情請參閱「[設定應用程式以信任外部身分識別提供者](https://docs.microsoft.com/en-us/azure/active-directory/develop/workload-identity-federation-create-trust?tabs=azure-portal)」。
 
 ### 將角色指派給 BigQuery 的 Azure 應用程式
 
@@ -218,7 +218,7 @@ Identity: SUBJECT_ID
 
 ### Azure 入口網站
 
-如要執行角色指派，請以具備 `Microsoft.Authorization/roleAssignments/write` 權限的使用者身分登入 Azure 入口網站。角色指派作業可讓 BigQuery Azure 連線存取角色政策中指定的 Azure 儲存空間資料。
+如要指派角色，請以具備 `Microsoft.Authorization/roleAssignments/write` 權限的使用者身分登入 Azure 入口網站。角色指派可讓 BigQuery Azure 連線根據角色政策存取 Azure 儲存空間資料。
 
 如要使用 Azure 入口網站新增角色指派，請按照下列步驟操作：
 
@@ -248,7 +248,7 @@ Identity: SUBJECT_ID
 
 ### Azure PowerShell
 
-如要在資源範圍為服務主體新增角色指派，可以使用 [`New-AzRoleAssignment` 指令](https://docs.microsoft.com/en-us/powershell/module/az.resources/new-azroleassignment?view=azps-7.5.0)：
+如要為資源範圍的服務主體新增角色指派，可以使用 [`New-AzRoleAssignment` 指令](https://docs.microsoft.com/en-us/powershell/module/az.resources/new-azroleassignment?view=azps-7.5.0)：
 
 ```
   New-AzRoleAssignment`
@@ -298,7 +298,7 @@ Identity: SUBJECT_ID
 
 如要為服務主體新增角色指派，可以將 HTTP 要求傳送至 Microsoft Management。
 
-如要呼叫 Microsoft Graph REST API，請先擷取應用程式的 OAuth 權杖。詳情請參閱「[在沒有使用者帳戶的情況下取得存取權](https://docs.microsoft.com/graph/auth-v2-service)」。呼叫 Microsoft Graph REST API 的應用程式必須具備 `Application.ReadWrite.All` 應用程式權限。
+如要呼叫 Microsoft Graph REST API，請為應用程式擷取 OAuth 權杖。詳情請參閱「[在沒有使用者帳戶的情況下取得存取權](https://docs.microsoft.com/graph/auth-v2-service)」。呼叫 Microsoft Graph REST API 的應用程式必須具備 `Application.ReadWrite.All` 應用程式權限。
 
 如要產生 OAuth 權杖，請執行下列指令：
 
@@ -318,7 +318,7 @@ Identity: SUBJECT_ID
 
 * `TENANT_ID`：與包含 Azure 儲存體帳戶的 Azure 目錄 ID 相符的租戶 ID。
 * `CLIENT_ID`：Azure 用戶端 ID。
-* `CLIENT_SECRET`：Azure 用戶端密鑰。
+* `CLIENT_SECRET`：Azure 用戶端密碼。
 
 取得要指派給服務主體的 [Azure 內建角色](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles) ID。
 
@@ -350,22 +350,22 @@ Identity: SUBJECT_ID
 
 * `ROLE_ASSIGNMENT_ID`：角色 ID。
 * `SP_ID`：服務主體 ID。
-  這個服務主體適用於[您建立的應用程式](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-connection?hl=zh-tw#create-azure-tenant)。如要取得聯邦連線的服務主體，請參閱「[服務主體物件](https://docs.microsoft.com/en-us/azure/active-directory/develop/app-objects-and-service-principals#service-principal-object)」。
+  這個服務主體適用於[您建立的應用程式](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-connection?hl=zh-tw#create-azure-tenant)。如要取得同盟連線的服務主體，請參閱「[服務主體物件](https://docs.microsoft.com/en-us/azure/active-directory/develop/app-objects-and-service-principals#service-principal-object)」。
 * `SUBSCRIPTION_ID`：訂閱 ID。
 * `RESOURCE_GROUP_NAME`：資源群組名稱。
 * `STORAGE_ACCOUNT_NAME`：儲存空間帳戶名稱。
 * `SUBSCRIPTION_ID`：訂閱 ID。
 
-現在可以使用連線了。不過，Azure 中的角色指派可能會有傳播延遲。如果因為權限問題而無法使用連線，請稍後再試。
+連線已可供使用。不過，在 Azure 中指派角色後，可能需要一段時間才會全面生效。如果因權限問題而無法使用連線，請稍後再試。
 
-**注意：** 刪除連結後，用於存取 Azure 應用程式的 Google 身分識別就會遭到刪除。Azure 租戶中的應用程式不會遭到刪除。
+**注意：** 刪除連結後，系統會刪除用於存取 Azure 應用程式的 Google 身分。Azure 租用戶中的應用程式不會遭到刪除。
 
 ## 與使用者共用連線
 
 您可以授予下列角色，讓使用者查詢資料及管理連線：
 
-* `roles/bigquery.connectionUser`：可讓使用者透過連線功能連結外部資料來源，並對其執行查詢。
-* `roles/bigquery.connectionAdmin`：允許使用者管理連線。
+* `roles/bigquery.connectionUser`：可讓使用者透過連線功能連結外部資料來源，並對這些來源執行查詢。
+* `roles/bigquery.connectionAdmin`：讓使用者管理連線。
 
 如要進一步瞭解 BigQuery 中的 IAM 角色和權限，請參閱[預先定義的角色和權限](https://docs.cloud.google.com/bigquery/access-control?hl=zh-tw)一文。
 
@@ -377,7 +377,7 @@ Identity: SUBJECT_ID
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 
-   連線會列在專案中，位於「Connections」(連線) 群組。
+   連線會列在專案中，並歸類在「連線」群組。
 2. 點選左側窗格中的 explore「Explorer」。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
@@ -395,7 +395,7 @@ Identity: SUBJECT_ID
 
 ### API
 
-請使用 BigQuery Connections REST API 參考資料部分中的 [`projects.locations.connections.setIAM` 方法](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections?hl=zh-tw#methods)，並提供 `policy` 資源的執行個體。
+請使用 BigQuery Connections REST API 參考資料中的 [`projects.locations.connections.setIAM` 方法](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections?hl=zh-tw#methods)，並提供 `policy` 資源的執行個體。
 
 ### Java
 
@@ -448,7 +448,7 @@ public class ShareConnection {
 ## 後續步驟
 
 * 瞭解不同[連線類型](https://docs.cloud.google.com/bigquery/docs/connections-api-intro?hl=zh-tw)。
-* 瞭解如何[管理連線](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw)。
+* 瞭解如何[管理連結](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw)。
 * 進一步瞭解 [BigQuery Omni](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw)。
 * 瞭解 [BigLake 資料表](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw)。
 * 瞭解如何[查詢 Blob 儲存體資料](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-external-table?hl=zh-tw)。
@@ -461,11 +461,11 @@ public class ShareConnection {
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-13 (世界標準時間)。
+上次更新時間：2026-10-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-13 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]

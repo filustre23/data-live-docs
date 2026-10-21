@@ -1,8 +1,9 @@
+Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
+
 * [Home](https://docs.cloud.google.com/?hl=zh-cn)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-cn)
 * [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-cn)
 * [BigQuery](https://docs.cloud.google.com/bigquery/docs?hl=zh-cn)
-* [参考文档](https://docs.cloud.google.com/bigquery/quotas?hl=zh-cn)
 
 发送反馈
 
@@ -14,14 +15,18 @@
 
 # 迁移畅销商品报告
 
-**预览版**
+**预览**
 
-此产品 受[服务专用条款](https://docs.cloud.google.com/terms/service-terms?hl=zh-cn#1)的约束。 非正式版产品“按原样”提供，且可能仅提供有限支持。
-如需了解详情，请参阅[发布阶段说明](https://cloud.google.com/products/?hl=zh-cn#product-launch-stages)。
+此产品需遵守服务专用条款的
+[通用服务条款
+部分中的“非正式版产品条款”](https://docs.cloud.google.com/terms/service-terms?hl=zh-cn#1)。非正式版产品“按原样”提供，可能只能获得有限的支持。
+如需了解详情，请参阅
+[发布阶段说明](https://cloud.google.com/products/?hl=zh-cn#product-launch-stages)。
 
-**注意：**如需获得有关使用 BigQuery Data Transfer Service 执行 Google Merchant Center 转移作业方面的支持，或提供相关反馈，请联系 [gmc-transfer-preview@google.com](mailto:gmc-transfer-preview@google.com)。
+**注意** ：如需获得有关使用 BigQuery Data Transfer Service 执行 Google Merchant Center
+转移作业方面的支持，或提供相关反馈，请联系 [gmc-transfer-preview@google.com](mailto:gmc-transfer-preview@google.com)。
 
-本文档可帮助您从旧版畅销商品报告迁移到[新版](https://docs.cloud.google.com/bigquery/docs/merchant-center-best-sellers-schema?hl=zh-cn)。导出 [`BestSellers_TopBrands_`](https://docs.cloud.google.com/bigquery/docs/merchant-center-top-brands-schema?hl=zh-cn)、[`BestSellers_TopProducts_`](https://docs.cloud.google.com/bigquery/docs/merchant-center-top-products-schema?hl=zh-cn) 和 [`BestSellers_TopProducts_Inventory_`](https://docs.cloud.google.com/bigquery/docs/merchant-center-product-inventory-schema?hl=zh-cn) 表的旧版报告将于 2025 年 9 月 1 日弃用。
+本文档可帮助您从旧版畅销商品报告迁移到其[新版](https://docs.cloud.google.com/bigquery/docs/merchant-center-best-sellers-schema?hl=zh-cn)。导出 `BestSellers_TopBrands_`、`BestSellers_TopProducts_` 和 `BestSellers_TopProducts_Inventory_` 表的旧版报告将于 2025 年 9 月 1 日弃用。
 
 新版畅销商品报告提供以下功能：
 
@@ -43,7 +48,7 @@
 
 ### 比较 `BestSellers_TopBrands` 与 `BestSellersBrandWeekly` 和 `BestSellersBrandMonthly`
 
-下表可帮助您确定 [`BestSellers_TopBrands` 表](https://docs.cloud.google.com/bigquery/docs/merchant-center-top-brands-schema?hl=zh-cn#schema)中在 [`BestSellersBrandWeekly`](https://docs.cloud.google.com/bigquery/docs/merchant-center-best-sellers-schema?hl=zh-cn#best-sellers-brand) 和 [`BestSellersBrandMonthly`](https://docs.cloud.google.com/bigquery/docs/merchant-center-best-sellers-schema?hl=zh-cn#best-sellers-brand) 表中有等效替代项的字段。旧版表中的某些字段没有替代项。
+下表可帮助您确定 `BestSellers_TopBrands` 表中在 [`BestSellersBrandWeekly`](https://docs.cloud.google.com/bigquery/docs/merchant-center-best-sellers-schema?hl=zh-cn#best-sellers-brand) 和 [`BestSellersBrandMonthly`](https://docs.cloud.google.com/bigquery/docs/merchant-center-best-sellers-schema?hl=zh-cn#best-sellers-brand) 表中有等效替代项的字段。旧版表中的某些字段没有替代项。
 
 | `BestSellers_TopBrands`（旧版） | `BestSellersBrandWeekly` 和 `BestSellersBrandMonthly`（新版） |
 | --- | --- |
@@ -67,7 +72,7 @@
 
 ### 比较 `BestSellers_TopProducts` 与 `BestSellersProductClusterWeekly` 和 `BestSellersProductClusterMonthly`
 
-下表可帮助您确定 [`BestSellers_TopProducts` 表](https://docs.cloud.google.com/bigquery/docs/merchant-center-top-products-schema?hl=zh-cn#schema)中在 [`BestSellersProductClusterWeekly`](https://docs.cloud.google.com/bigquery/docs/merchant-center-best-sellers-schema?hl=zh-cn#best-sellers-product-cluster) 和 [`BestSellersProductClusterMonthly`](https://docs.cloud.google.com/bigquery/docs/merchant-center-best-sellers-schema?hl=zh-cn#best-sellers-product-cluster) 表中有等效替代项的字段。旧版表中的某些字段没有替代项。
+下表可帮助您确定 `BestSellers_TopProducts` 表中在 [`BestSellersProductClusterWeekly`](https://docs.cloud.google.com/bigquery/docs/merchant-center-best-sellers-schema?hl=zh-cn#best-sellers-product-cluster) 和 [`BestSellersProductClusterMonthly`](https://docs.cloud.google.com/bigquery/docs/merchant-center-best-sellers-schema?hl=zh-cn#best-sellers-product-cluster) 表中有等效替代项的字段。旧版表中的某些字段没有替代项。
 
 | `BestSellers_TopProducts`（旧版） | `BestSellersProductClusterWeekly` 和 `BestSellersProductClusterMonthly`（新版） |
 | --- | --- |
@@ -103,7 +108,7 @@
 
 ### 畅销商品数据的商品目录映射
 
-在旧版畅销商品报告中，畅销商品数据会使用 [`TopProducts` 表](https://docs.cloud.google.com/bigquery/docs/merchant-center-top-products-schema?hl=zh-cn#schema)中的 `rank_id` 列，映射到[新生成的表](https://docs.cloud.google.com/bigquery/docs/merchant-center-product-inventory-schema?hl=zh-cn#schema)中的商家商品目录数据。
+在旧版畅销商品报告中，畅销商品数据会使用 `TopProducts` 表中的 `rank_id` 列，映射到新生成的表中的商家商品目录数据。
 
 在新版畅销商品报告中，`entity_id` 列会导出到 `BestSellersProductCluster` 表中，并映射到 [`BestSellersEntityProductMapping`](https://docs.cloud.google.com/bigquery/docs/merchant-center-best-sellers-schema?hl=zh-cn#best-sellers-mapping) 表中商家商品目录中的所有商品 ID。
 
@@ -395,11 +400,11 @@ ON top_brands.brand = products.brand AND
 
 如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-最后更新时间 (UTC)：2026-03-17。
+最后更新时间 (UTC)：2026-09-16。
 
 
 
 
 需要向我们提供更多信息？
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["很难理解","hardToUnderstand","thumb-down"],["信息或示例代码不正确","incorrectInformationOrSampleCode","thumb-down"],["没有我需要的信息/示例","missingTheInformationSamplesINeed","thumb-down"],["翻译问题","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-03-17。"],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["很难理解","hardToUnderstand","thumb-down"],["信息或示例代码不正确","incorrectInformationOrSampleCode","thumb-down"],["没有我需要的信息/示例","missingTheInformationSamplesINeed","thumb-down"],["翻译问题","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-09-16。"],[],[]]

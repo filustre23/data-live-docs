@@ -242,7 +242,7 @@ The `CREATE MODEL` statement fails if any of the following are true:
 This option identifies the
 [speech recognizer](/speech-to-text/v2/docs/recognizers) to optionally use when
 the `REMOTE_SERVICE_TYPE` value is `CLOUD_AI_SPEECH_TO_TEXT_V2`. If you don't
-specify this option, a default recogniser is used. In that case, you must
+specify this option, a default recognizer is used. In that case, you must
 specify a value for the
 [`recognition_config` argument](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-transcribe#arguments)
 of the `ML.TRANSCRIBE` function when you reference the remote model. The
@@ -301,11 +301,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-07-21 UTC.
+Last updated 2026-10-16 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-07-21 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-10-16 UTC."],[],[]]

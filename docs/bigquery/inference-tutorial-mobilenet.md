@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -97,7 +97,7 @@ MobileNet V3 模型輸入內容會採用 [`DType`](https://www.tensorflow.org/ap
 
   [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
 - [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project).
-- Enable the BigQuery and BigQuery Connection API APIs.
+- Enable the BigQuery and BigQuery Connection API APIs, if any are not already enabled.
 
   **Roles required to enable APIs**
 
@@ -128,7 +128,7 @@ MobileNet V3 模型輸入內容會採用 [`DType`](https://www.tensorflow.org/ap
 
   [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
 - [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project).
-- Enable the BigQuery and BigQuery Connection API APIs.
+- Enable the BigQuery and BigQuery Connection API APIs, if any are not already enabled.
 
   **Roles required to enable APIs**
 
@@ -220,7 +220,7 @@ MobileNet V3 模型輸入內容會採用 [`DType`](https://www.tensorflow.org/ap
 ## 建立 Cloud Storage bucket
 
 1. [建立 Cloud Storage bucket](https://docs.cloud.google.com/storage/docs/creating-buckets?hl=zh-tw)。
-2. 在儲存區中[建立兩個資料夾](https://cloud.google.com/storage/docs/folders?hl=zh-tw#tools)，一個命名為 `mobilenet` (用於存放模型檔案)，另一個命名為 `flowers` (用於存放資料集)。
+2. 在儲存區中[建立兩個資料夾](https://docs.cloud.google.com/storage/docs/objects?hl=zh-tw#namespace)，一個命名為 `mobilenet` (用於存放模型檔案)，另一個命名為 `flowers` (用於存放資料集)。
 
 ## 將權限授予連線的服務帳戶
 
@@ -392,11 +392,11 @@ mobilenet_inference_test.sample_images
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-16 (世界標準時間)。
+上次更新時間：2026-10-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-16 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]

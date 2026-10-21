@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -182,6 +182,76 @@ public class QueryWithNamedParameters {
       System.out.println("Query not performed \n" + e.toString());
     }
   }
+}
+```
+
+### Python
+
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+
+```
+from google.cloud import bigquery
+
+# Construct a BigQuery client object.
+client = bigquery.Client()
+
+query = """
+    SELECT word, word_count
+    FROM `bigquery-public-data.samples.shakespeare`
+    WHERE corpus = @corpus
+    AND word_count >= @min_word_count
+    ORDER BY word_count DESC;
+"""
+job_config = bigquery.QueryJobConfig(
+    query_parameters=[
+        bigquery.ScalarQueryParameter("corpus", "STRING", "romeoandjuliet"),
+        bigquery.ScalarQueryParameter("min_word_count", "INT64", 250),
+    ]
+)
+results = client.query_and_wait(
+    query, job_config=job_config
+)  # Make an API request.
+
+for row in results:
+    print("{}: \t{}".format(row.word, row.word_count))
+```
+
+### Rust
+
+```
+use google_cloud_bigquery::client::BigQuery;
+use google_cloud_bigquery_v2::model::{QueryParameter, QueryParameterType, QueryParameterValue};
+
+pub async fn sample(project_id: &str) -> anyhow::Result<()> {
+    let client = BigQuery::builder().build().await?;
+
+    let param = QueryParameter::new()
+        .set_name("state")
+        .set_parameter_type(QueryParameterType::new().set_type("STRING"))
+        .set_parameter_value(QueryParameterValue::new().set_value("TX"));
+
+    let mut rows = client
+        .query(
+            "SELECT \
+        name FROM `bigquery-public-data.usa_names.usa_1910_2013` \
+        WHERE state = @state \
+        LIMIT 100",
+        )
+        .with_project_id(project_id)
+        .set_parameter_mode("NAMED")
+        .set_query_parameters(vec![param])
+        .set_location("US")
+        .until_done()
+        .await?
+        .read();
+
+    while let Some(row) = rows.next().await.transpose()? {
+        let name: String = row.get("name")?;
+        println!("Name: {name}");
+    }
+    Ok(())
 }
 ```
 

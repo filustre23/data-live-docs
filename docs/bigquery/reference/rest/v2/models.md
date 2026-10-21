@@ -203,33 +203,5 @@ Indicates the type of the Model.
 
 Information about a single training query run for the model.
 
-| JSON representation |
-| --- |
-| ``` {   "trainingOptions": {     object (TrainingOptions)   },   "trainingStartTime": string,   "startTime": string,   "results": [     {       object (IterationResult)     }   ],   "evaluationMetrics": {     object (EvaluationMetrics)   },   "dataSplitResult": {     object (DataSplitResult)   },   "modelLevelGlobalExplanation": {     object (GlobalExplanation)   },   "classLevelGlobalExplanations": [     {       object (GlobalExplanation)     }   ],   "vertexAiModelId": string,   "vertexAiModelVersion": string } ``` |
-
-| Fields | |
-| --- | --- |
-| `trainingOptions` | `object (TrainingOptions)`  Output only. Options that were used for this training run, includes user specified and default options that were used. |
-| `trainingStartTime (deprecated)` | `string (int64 format)`  This item is deprecated!  Output only. The start time of this training run, in milliseconds since epoch. |
-| `startTime` | `string (Timestamp format)`  Output only. The start time of this training run. |
-| `results[]` | `object (IterationResult)`  Output only. Output of each iteration run, results.size() <= maxIterations. |
-| `evaluationMetrics` | `object (EvaluationMetrics)`  Output only. The evaluation metrics over training/eval data that were computed at the end of training. |
-| `dataSplitResult` | `object (DataSplitResult)`  Output only. Data split result of the training run. Only set when the input data is actually split. |
-| `modelLevelGlobalExplanation` | `object (GlobalExplanation)`  Output only. Global explanation contains the explanation of top features on the model level. Applies to both regression and classification models. |
-| `classLevelGlobalExplanations[]` | `object (GlobalExplanation)`  Output only. Global explanation contains the explanation of top features on the class level. Applies to classification models only. |
-| `vertexAiModelId` | `string`  The model id in the [Vertex AI Model Registry](https://cloud.google.com/vertex-ai/docs/model-registry/introduction) for this training run. |
-| `vertexAiModelVersion` | `string`  Output only. The model version in the [Vertex AI Model Registry](https://cloud.google.com/vertex-ai/docs/model-registry/introduction) for this training run. |
-
-## TrainingOptions
-
-Options used in model training.
-
-| JSON representation |
-| --- |
-| ``` {   "maxIterations": string,   "lossType": enum (LossType),   "learnRate": number,   "l1Regularization": number,   "l2Regularization": number,   "minRelativeProgress": number,   "warmStart": boolean,   "earlyStop": boolean,   "inputLabelColumns": [     string   ],   "dataSplitMethod": enum (DataSplitMethod),   "dataSplitEvalFraction": number,   "dataSplitColumn": string,   "learnRateStrategy": enum (LearnRateStrategy),   "initialLearnRate": number,   "labelClassWeights": {     string: number,     ...   },   "userColumn": string,   "itemColumn": string,   "distanceType": enum (DistanceType),   "numClusters": string,   "modelUri": string,   "optimizationStrategy": enum (OptimizationStrategy),   "hiddenUnits": [     string   ],   "batchSize": string,   "dropout": number,   "maxTreeDepth": string,   "subsample": number,   "minSplitLoss": number,   "boosterType": enum (BoosterType),   "numParallelTree": string,   "dartNormalizeType": enum (DartNormalizeType),   "treeMethod": enum (TreeMethod),   "minTreeChildWeight": string,   "colsampleBytree": number,   "colsampleBylevel": number,   "colsampleBynode": number,   "numFactors": string,   "feedbackType": enum (FeedbackType),   "walsAlpha": number,   "kmeansInitializationMethod": enum (KmeansInitializationMethod),   "kmeansInitializationColumn": string,   "timeSeriesTimestampColumn": string,   "timeSeriesDataColumn": string,   "autoArima": boolean,   "nonSeasonalOrder": {     object (ArimaOrder)   },   "dataFrequency": enum (DataFrequency),   "calculatePValues": boolean,   "includeDrift": boolean,   "holidayRegion": enum (HolidayRegion),   "holidayRegions": [     enum (HolidayRegion)   ],   "timeSeriesIdColumn": string,   "timeSeriesIdColumns": [     string   ],   "forecastLimitLowerBound": number,   "forecastLimitUpperBound": number,   "horizon": string,   "autoArimaMaxOrder": string,   "autoArimaMinOrder": string,   "numTrials": string,   "maxParallelTrials": string,   "hparamTuningObjectives": [     enum (HparamTuningObjective)   ],   "decomposeTimeSeries": boolean,   "cleanSpikesAndDips": boolean,   "adjustStepChanges": boolean,   "enableGlobalExplain": boolean,   "sampledShapleyNumPaths": string,   "integratedGradientsNumSteps": string,   "categoryEncodingMethod": enum (EncodingMethod),   "tfVersion": string,   "instanceWeightColumn": string,   "trendSmoothingWindowSize": string,   "timeSeriesLengthFraction": number,   "minTimeSeriesLength": string,   "maxTimeSeriesLength": string,   "xgboostVersion": string,   "approxGlobalFeatureContrib": boolean,   "fitIntercept": boolean,   "numPrincipalComponents": string,   "pcaExplainedVarianceRatio": number,   "scaleFeatures": boolean,   "pcaSolver": enum (PcaSolver),   "autoClassWeights": boolean,   "activationFn": string,   "optimizer": string,   "budgetHours": number,   "standardizeFeatures": boolean,   "l1RegActivation": number,   "modelRegistry": enum (ModelRegistry),   "vertexAiModelVersionAliases": [     string   ],   "dimensionIdColumns": [     string   ],   "contributionMetric": string,   "isTestColumn": string,   "minAprioriSupport": number } ``` |
-
-| Fields | |
-| --- | --- |
-| `maxIterations` | `string (int64 format)`  The maximum number of iterations in training. Used only for iterative training algorithms. |
-| `lossType` | `enum (LossType)`  Type of loss function used during training run. |
-| `learnRate` | `number`  Learning rate in training. Used only for iterative traini |
+|
+|  |

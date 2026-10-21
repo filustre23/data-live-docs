@@ -295,45 +295,5 @@ WITH ExampleTable AS (
   SELECT 1 AS id, ['I', 'like', 'pie', 'pie', 'pie', NULL] AS f UNION ALL
   SELECT 2 AS id, ['yum', 'yum', 'pie', NULL] AS f UNION ALL
   SELECT 3 AS id, ['I', 'yum', 'pie', NULL] AS f UNION ALL
-  SELECT 4 AS id, ['you', 'like', 'pie', 'too', NULL] AS f
-)
-SELECT id, TF_IDF(f, 3, 2) OVER() AS results
-FROM ExampleTable
-ORDER BY id;
-
-/*----+-------------------------------------------------+
- | id | results                                         |
- +----+-------------------------------------------------+
- | 1  | [{"index":null,"value":"0.12679902142647365"},  |
- |    |  {"index":"I","value":"0.1412163100645339"},    |
- |    |  {"index":"like","value":"0.1412163100645339"}, |
- |    |  {"index":"pie","value":"0.29389333245105953"}] |
- +----+-------------------------------------------------+
- | 2  | [{"index":null,"value":"0.5705955964191315"},   |
- |    |  {"index":"pie","value":"0.14694666622552977"}] |
- +----+-------------------------------------------------+
- | 3  | [{"index":null,"value":"0.380397064279421"},    |
- |    |  {"index":"I","value":"0.21182446509680086"},   |
- |    |  {"index":"pie","value":"0.14694666622552977"}] |
- +----+-------------------------------------------------+
- | 4  | [{"index":null,"value":"0.45647647713530515"},  |
- |    |  {"index":"like","value":"0.1694595720774407"}, |
- |    |  {"index":"pie","value":"0.11755733298042381"}] |
- +----+-------------------------------------------------*/
+  SELECT 4 AS id, ['you'
 ```
-
-
-
-
-Send feedback
-
-Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
-
-Last updated 2026-07-17 UTC.
-
-
-
-
-Need to tell us more?
-
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-07-17 UTC."],[],[]]

@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -20,8 +20,6 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 從 Cloud Storage 載入 Avro 資料時，可將資料載入至新的資料表或分區，或將資料附加到現有資料表或分區，或覆寫現有資料表或分區。將資料載入至 BigQuery 時，資料會轉換為 [Capacitor 列表型格式](https://cloud.google.com/blog/products/bigquery/inside-capacitor-bigquerys-next-generation-columnar-storage-format?hl=zh-tw)
 (BigQuery 的儲存格式)。
-
-將資料從 Cloud Storage 載入 BigQuery 資料表時，該資料表所屬的資料集必須位於和 Cloud Storage bucket 相同的地區或多地區位置。
 
 如需從本機檔案載入 Avro 資料的相關資訊，請參閱[將資料從本機資料來源載入至 BigQuery](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#loading_data_from_local_files)。
 
@@ -45,7 +43,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 如要避免將 Avro 檔案載入 BigQuery 時發生 `resourcesExceeded` 錯誤，請遵守下列規範：
 
 * 資料列大小不得超過 50 MB。
-* 如果資料列包含許多陣列欄位，或任何非常長的陣列欄位，請將陣列值分成多個欄位。
+* 如果資料列包含許多陣列欄位，或任何非常長的陣列欄位，請將陣列值分成不同的欄位。
 
 ## 事前準備
 
@@ -53,7 +51,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### 所需權限
 
-如要將資料載入 BigQuery，您需要具備執行載入工作，以及將資料載入 BigQuery 資料表和分區的 IAM 權限。如要從 Cloud Storage 載入資料，您也需要 IAM 權限，才能存取包含資料的值區。
+如要將資料載入 BigQuery，您需要具備 IAM 權限，才能執行載入工作，並將資料載入 BigQuery 資料表和分區。如要從 Cloud Storage 載入資料，您也需要 IAM 權限，才能存取包含資料的值區。
 
 #### 將資料載入 BigQuery 的權限
 
@@ -64,7 +62,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 * `bigquery.tables.update`
 * `bigquery.jobs.create`
 
-以下每個預先定義的 IAM 角色都包含將資料載入 BigQuery 資料表或分區所需的權限：
+下列每個預先定義的 IAM 角色都包含將資料載入 BigQuery 資料表或分區所需的權限：
 
 * `roles/bigquery.dataEditor`
 * `roles/bigquery.dataOwner`
@@ -80,7 +78,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 如要取得從 Cloud Storage bucket 載入資料所需的權限，請要求管理員授予您 bucket 的「[Storage 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/storage?hl=zh-tw#storage.admin) 」(`roles/storage.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
-這個預先定義的角色具備從 Cloud Storage 值區載入資料所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
+這個預先定義的角色具備從 Cloud Storage bucket 載入資料所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
 #### 所需權限
 
@@ -134,11 +132,11 @@ dataset.table \
 當 BigQuery 偵測到結構定義時，部分 Avro 資料類型會轉換為 BigQuery 資料類型，確保與 GoogleSQL 語法相容。如需更多資訊，請參閱 [Avro 轉換](#avro_conversions)。
 
 如要提供資料表結構定義來建立外部資料表，請在 BigQuery API 中設定 `referenceFileSchemaUri` 屬性，或在 bq 指令列工具中設定   
-`--reference_file_schema_uri` 參數，指向參照檔案的網址。
+`--reference_file_schema_uri` 參數，指向參考檔案的網址。
 
 例如 `--reference_file_schema_uri="gs://mybucket/schema.avro"`。
 
-您也可以[指定 JSON 結構定義檔](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#specifying_a_json_schema_file)，將結構定義匯入 BigQuery。
+您也可以[指定 JSON 結構定義檔案](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#specifying_a_json_schema_file)，將結構定義匯入 BigQuery。
 
 ## Avro 壓縮
 
@@ -160,7 +158,7 @@ BigQuery 支援下列 Avro 檔案內容的壓縮轉碼器：
 2. 點選左側窗格中的 explore「Explorer」。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
-3. 在「Explorer」窗格中展開專案，按一下「Datasets」(資料集)，然後點選資料集名稱。
+3. 在「Explorer」窗格中展開專案，點選「Datasets」(資料集)，然後點選資料集名稱。
 4. 在詳細資料窗格中，按一下「建立資料表」
    add\_box。
 5. 在「Create table」(建立資料表) 頁面的「Source」(來源) 區段中：
@@ -174,17 +172,17 @@ BigQuery 支援下列 Avro 檔案內容的壓縮轉碼器：
    * 確認「Table type」(資料表類型) 已設為「Native table」(原生資料表)。
    * 在「Table name」(資料表名稱) 欄位中，輸入您在 BigQuery 中建立資料表時使用的資料表名稱。
 7. 在「Schema」(結構定義) 區段中，不必執行任何操作。結構定義自述於 Avro 檔案中。
-8. (選用) 如要對資料表進行分區，請在「Partition and cluster settings」(分區與叢集設定) 區段中選擇您要使用的選項。詳情請參閱[建立分區資料表](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables?hl=zh-tw)。
-9. (選擇性操作) 針對「Partitioning filter」(分區篩選器)，請勾選「Require partition filter」(需要分區篩選器) 的方塊，藉此要求使用者加入 `WHERE` 子句來指定要查詢的分區。使用分區篩選器可以降低成本並提升效能。詳情請參閱[在查詢中加入必要的分區篩選器](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables?hl=zh-tw#require_a_partition_filter_in_queries)。如果選取 [No partitioning] (無分區)，就無法使用這個選項。
+8. (選用) 如要對資料表進行分區，請在「Partition and cluster settings」(分區與叢集設定) 區段中選擇您要使用的選項。詳情請參閱「[建立分區資料表](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables?hl=zh-tw)」。
+9. (選擇性操作) 針對「Partitioning filter」(分區篩選器)，請勾選「Require partition filter」(需要分區篩選器) 的方塊，藉此要求使用者加入 `WHERE` 子句來指定要查詢的分區。使用分區篩選器可以降低成本並提升效能。詳情請參閱[在查詢中加入分區篩選器](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables?hl=zh-tw#require_a_partition_filter_in_queries)。如果選取 [No partitioning] (無分區)，就無法使用這個選項。
 10. (選用) 如要將資料表[分群](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables?hl=zh-tw)，請在「Clustering order」(分群順序) 方塊中輸入一到四個欄位名稱。
 11. (選擇性操作) 按一下 [Advanced options] (進階選項)。
 
     * 讓「Write preference」(寫入偏好設定) 的 [Write if empty] (空白時寫入) 選項維持在已選取狀態。這個選項能建立新的資料表，並將您的資料載入其中。
-    * 針對「Unknown values」(不明的值)，請讓「Ignore unknown values」(略過不明的值) 保持未勾選狀態。這個選項僅適用於 CSV 和 JSON 檔案。
+    * 針對「Unknown values」(不明的值)，請讓「Ignore unknown values」(略過不明的值) 保持取消勾選狀態。這個選項僅適用於 CSV 和 JSON 檔案。
     * 針對「Encryption」(加密)，請按一下「Customer-managed key」(客戶管理的金鑰)，以使用 [Cloud Key Management Service 金鑰](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw)。如果您保留 **Google-managed key** 設定，BigQuery 會[加密靜態資料](https://docs.cloud.google.com/docs/security/encryption/default-encryption?hl=zh-tw)。
 12. 點選「建立資料表」。
 
-**注意：** 使用Google Cloud 控制台 將資料載入空白資料表時，您無法新增標籤、說明、資料表到期時間或分區到期時間。  
+**注意：** 使用Google Cloud console 將資料載入空白資料表時，您無法新增標籤、說明、資料表到期時間或分區到期時間。  
   
 資料表建立完成之後，您就能更新資料表的到期時間、說明和標籤，但您無法在使用 Google Cloud 控制台建立資料表之後，新增分區到期時間。詳情請參閱[管理資料表](https://docs.cloud.google.com/bigquery/docs/managing-tables?hl=zh-tw)。
 
@@ -218,8 +216,8 @@ BigQuery 支援下列 Avro 檔案內容的壓縮轉碼器：
 * `--time_partitioning_type`：針對資料表啟用時間分區並設定分區類型。可能的值為 `HOUR`、`DAY`、`MONTH` 和 `YEAR`。如果您在 `DATE`、`DATETIME` 或 `TIMESTAMP` 資料欄建立分區資料表，則不一定要使用這個旗標。時間分區的預設分區類型為 `DAY`。您無法變更現有資料表的分區規格。
 * `--time_partitioning_expiration`：這是一個整數，用來指定系統應在何時刪除時間分區 (以秒為單位)。到期時間為分區的世界標準時間日期加上整數值。
 * `--time_partitioning_field`：用於建立分區資料表的 `DATE` 或 `TIMESTAMP` 資料欄。如果啟用時間分區時沒有這個值，系統就會建立擷取時間分區資料表。
-* `--require_partition_filter`：這個選項啟用後，系統會要求使用者加入 `WHERE` 子句，以指定要查詢的分區。使用分區篩選器可以降低成本並提升效能。詳情請參閱「[在查詢中要求使用分區篩選器](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables?hl=zh-tw#require_a_partition_filter_in_queries)」。
-* `--clustering_fields`：以半形逗號分隔的資料欄名稱清單 (最多四個名稱)，可用來建立[分群資料表](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables?hl=zh-tw)。
+* `--require_partition_filter`：這個選項啟用後，系統會要求使用者加入 `WHERE` 子句，以指定要查詢的分區。使用分區篩選器可以降低成本並提升效能。詳情請參閱「[在查詢中加入分區篩選器](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables?hl=zh-tw#require_a_partition_filter_in_queries)」。
+* `--clustering_fields`：以半形逗號分隔的資料欄名稱清單 (最多四個名稱)，可用來建立[叢集資料表](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables?hl=zh-tw)。
 * `--destination_kms_key`：用來加密資料表資料的 Cloud KMS 金鑰。
 
   如要進一步瞭解分區資料表，請參閱：
@@ -315,7 +313,7 @@ path_to_source
 **API 附註：**
 
 * 載入工作不可部分完成，且資料狀態具一致性。如果載入工作失敗，所有資料都無法使用；如果載入工作成功，則所有資料都可以使用。
-* 最佳做法是產生唯一 ID，並在呼叫 `jobs.insert` 建立載入工作時，將該 ID 當做 `jobReference.jobId` 傳送。這個方法較不受網路故障問題的影響，因為用戶端可使用已知的工作 ID 進行輪詢或重試。
+* 最佳做法是產生唯一 ID，並在呼叫 `jobs.insert` 建立載入工作時，將該唯一 ID 當做 `jobReference.jobId` 傳送。這個方法較不受網路故障問題的影響，因為用戶端可使用已知的工作 ID 進行輪詢或重試。
 * 對指定的工作 ID 呼叫 `jobs.insert` 是一種冪等作業。也就是說，您可以對同一個工作 ID 重試無數次，最多會有一個作業成功。
 
 ### Go
@@ -515,7 +513,7 @@ print("Loaded {} rows.".format(destination_table.num_rows))
        "name": "json_field"
    }
    ```
-2. 明確指定 BigQuery 目的地資料表結構定義，並將資料欄類型設為 `JSON`。詳情請參閱[指定結構定義](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw)。
+2. 明確指定 BigQuery 目的地資料表結構定義，並將資料欄類型設為 `JSON`。詳情請參閱「[指定結構定義](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw)」。
 
 如果您未在 Avro 結構定義或 BigQuery 資料表結構定義中將類型指定為 JSON，系統就會將資料讀取為 `STRING`。
 
@@ -527,10 +525,10 @@ print("Loaded {} rows.".format(destination_table.num_rows))
 
 將額外資料載入資料表時，可以選擇下列選項：
 
-| 主控台選項 | bq 工具旗標 | BigQuery API 屬性 | 說明 |
+| 主控台選項 | bq 工具標記 | BigQuery API 屬性 | 說明 |
 | --- | --- | --- | --- |
 | 空白時寫入 | 不支援 | `WRITE_EMPTY` | 資料表空白時才會寫入資料。 |
-| 附加到資料表中 | `--noreplace` 或 `--replace=false`；如果未指定 `--[no]replace`，則預設動作為附加 | `WRITE_APPEND` | ([預設](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#JobConfigurationLoad.FIELDS.write_disposition)) 將資料附加至資料表尾端。 |
+| 附加到資料表 | `--noreplace` 或 `--replace=false`；如果未指定 `--[no]replace`，則預設動作為附加 | `WRITE_APPEND` | ([預設](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#JobConfigurationLoad.FIELDS.write_disposition)) 將資料附加至資料表尾端。 |
 | 覆寫資料表 | `--replace`或`--replace=true` | `WRITE_TRUNCATE` | 先清除資料表中所有現有資料，再寫入新的資料。 這項操作也會刪除資料表結構定義、資料列層級安全性，並移除所有 Cloud KMS 金鑰。 |
 
 如果您將資料載入現有資料表，該載入工作可附加資料，或覆寫資料表。
@@ -545,7 +543,7 @@ print("Loaded {} rows.".format(destination_table.num_rows))
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
-3. 在「Explorer」窗格中展開專案，按一下「Datasets」(資料集)，然後點選資料集名稱。
+3. 在「Explorer」窗格中展開專案，點選「Datasets」(資料集)，然後點選資料集名稱。
 4. 在詳細資料窗格中，按一下「建立資料表」
    add\_box。
 5. 在「Create table」(建立資料表) 頁面的「Source」(來源) 區段中：
@@ -565,7 +563,7 @@ print("Loaded {} rows.".format(destination_table.num_rows))
 9. 點選「進階選項」。
 
    * 針對「Write preference」(寫入偏好設定)，選擇 [Append to table] (附加到資料表中) 或 [Overwrite table] (覆寫資料表)。
-   * 針對「Unknown values」(不明的值)，請讓「Ignore unknown values」(略過不明的值) 保持未勾選狀態。這個選項僅適用於 CSV 和 JSON 檔案。
+   * 針對「Unknown values」(不明的值)，請讓「Ignore unknown values」(略過不明的值) 保持取消勾選狀態。這個選項僅適用於 CSV 和 JSON 檔案。
    * 針對「Encryption」(加密)，請按一下「Customer-managed key」(客戶管理的金鑰)，以使用 [Cloud Key Management Service 金鑰](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw)。如果您保留 **Google-owned and managed key** 設定，BigQuery 會[加密靜態資料](https://docs.cloud.google.com/docs/security/encryption/default-encryption?hl=zh-tw)。
 10. 點選「建立資料表」。
 
@@ -867,7 +865,7 @@ print("Loaded {} rows.".format(destination_table.num_rows))
 
 ## 正在載入 Hive 分區的 Avro 資料
 
-BigQuery 支援載入儲存在 Cloud Storage 的 Hive 分區 Avro 資料，並且將會在目的地 BigQuery 代管資料表中的資料欄，填入 Hive 分區的資料欄。詳情請參閱[從 Cloud Storage 載入外部分區資料](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs?hl=zh-tw)。
+BigQuery 支援載入儲存在 Cloud Storage 的 Hive 分區 Avro 資料，並且將會在目的地 BigQuery 代管資料表中的資料欄，填入 Hive 分區的資料欄。詳情請參閱[載入外部分區資料](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs?hl=zh-tw)。
 
 ## Avro 轉換
 
@@ -888,7 +886,7 @@ BigQuery 會將 Avro 資料類型轉換為下列 BigQuery 資料類型：
 
 ### 邏輯類型
 
-預設情況下，BigQuery 會忽略多數類型的 `logicalType` 屬性，並改用基本 Avro 類型。如要將 Avro 邏輯型別轉換為對應的 BigQuery 資料型別，請使用 bq 指令列工具將 `--use_avro_logical_types` 旗標設為 `true`，或在呼叫 [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert?hl=zh-tw) 方法以建立載入工作時，於[工作資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs?hl=zh-tw)中設定 `useAvroLogicalTypes` 屬性。
+預設情況下，BigQuery 會忽略多數類型的 `logicalType` 屬性，並改用基本 Avro 類型。如要將 Avro 邏輯類型轉換為對應的 BigQuery 資料類型，請使用 bq 指令列工具將 `--use_avro_logical_types` 旗標設為 `true`，或在呼叫 [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert?hl=zh-tw) 方法以建立載入工作時，於[工作資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs?hl=zh-tw)中設定 `useAvroLogicalTypes` 屬性。
 
 下表顯示 Avro 邏輯類型到 BigQuery 資料類型的轉換。
 
@@ -902,15 +900,15 @@ BigQuery 會將 Avro 資料類型轉換為下列 BigQuery 資料類型：
 | local-timestamp-millis | INTEGER (從 LONG 轉換) | DATETIME |
 | local-timestamp-micros | INTEGER (從 LONG 轉換) | DATETIME |
 | 持續時間 | BYTES (從大小為 12 的 `fixed` 類型轉換) | BYTES (從大小為 12 的 `fixed` 類型轉換) |
-| decimal | NUMERIC、BIGNUMERIC 或 STRING (請參閱「[Decimal 邏輯類型](#decimal_logical_type)」) | NUMERIC、BIGNUMERIC 或 STRING (請參閱「[Decimal 邏輯類型](#decimal_logical_type)」) |
+| decimal | NUMERIC、BIGNUMERIC 或 STRING (請參閱[Decimal 邏輯類型](#decimal_logical_type)) | NUMERIC、BIGNUMERIC 或 STRING (請參閱[Decimal 邏輯類型](#decimal_logical_type)) |
 
 如需進一步瞭解 Avro 資料類型，請參閱 [Apache Avro™ 1.8.2 規格](https://avro.apache.org/docs/1.8.2/spec.html)。
 
-**注意：** 從 BigQuery 匯出至 Avro 時，`DATETIME` 會匯出為 `STRING`，並使用自訂邏輯時間，因此匯入回 BigQuery 時不會識別為 `DATETIME`。
+**注意：** 從 BigQuery 匯出至 Avro 時，`DATETIME` 會匯出為 `STRING`，並使用自訂邏輯時間，因此匯回 BigQuery 時不會被視為 `DATETIME`。
 
 #### Date 邏輯類型
 
-在您打算載入的任何 Avro 檔案中，您必須以以下格式指定日期邏輯類型：
+在您要載入的任何 Avro 檔案中，都必須以以下格式指定日期邏輯類型：
 
 ```
 {
@@ -926,7 +924,8 @@ BigQuery 會將 Avro 資料類型轉換為下列 BigQuery 資料類型：
 * 如要使用 [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert?hl=zh-tw) API 進行[載入作業](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw)，請使用 [`JobConfigurationLoad.decimalTargetTypes`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#JobConfigurationLoad.FIELDS.decimal_target_types) 欄位。
 * 如要使用 bq 指令列工具中的 [`bq load`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_load) 指令執行[載入工作](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw)，請使用 [`--decimal_target_types`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#flags_and_arguments_9) 旗標。
 * 如要查詢[含有外部來源的資料表](https://docs.cloud.google.com/bigquery/external-data-sources?hl=zh-tw)：
-  請使用 [`ExternalDataConfiguration.decimalTargetTypes`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables?hl=zh-tw#ExternalDataConfiguration.FIELDS.decimal_target_types) 欄位。
+  請使用 [`ExternalDataConfiguration.decimalTargetTypes`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables?hl=zh-tw#ExternalDataConfiguration.FIELDS.decimal_target_types)
+  欄位。
 * 如果是[使用 DDL 建立的永久外部資料表](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw)：
   請使用 [`decimal_target_types`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#external_table_option_list) 選項。
 
@@ -934,7 +933,7 @@ BigQuery 會將 Avro 資料類型轉換為下列 BigQuery 資料類型：
 
 如要進一步瞭解 Avro `decimal`邏輯類型，請參閱 [Apache Avro™ 1.8.2 規格](https://avro.apache.org/docs/1.8.2/spec.html#Decimal)。
 
-#### 時間邏輯類型
+#### Time 邏輯類型
 
 在您要載入的任何 Avro 檔案中，都必須以下列其中一種格式指定時間邏輯類型。
 
@@ -947,7 +946,7 @@ BigQuery 會將 Avro 資料類型轉換為下列 BigQuery 資料類型：
 }
 ```
 
-微秒精確度：
+如要達到微秒精確度：
 
 ```
 {
@@ -969,7 +968,7 @@ BigQuery 會將 Avro 資料類型轉換為下列 BigQuery 資料類型：
 }
 ```
 
-微秒精確度：
+如要達到微秒精確度：
 
 ```
 {
@@ -980,7 +979,7 @@ BigQuery 會將 Avro 資料類型轉換為下列 BigQuery 資料類型：
 
 #### Local-Timestamp 邏輯類型
 
-在您打算載入的任何 Avro 檔案中，您必須以下列其中一種格式指定本機時間戳記邏輯型別。
+在您要載入的任何 Avro 檔案中，都必須以下列其中一種格式指定 local-timestamp 邏輯型別。
 
 如要精確到毫秒：
 
@@ -991,7 +990,7 @@ BigQuery 會將 Avro 資料類型轉換為下列 BigQuery 資料類型：
 }
 ```
 
-微秒精確度：
+如要達到微秒精確度：
 
 ```
 {
@@ -1018,11 +1017,11 @@ BigQuery 會將 Avro 資料類型轉換為下列 BigQuery 資料類型：
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-12 (世界標準時間)。
+上次更新時間：2026-10-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-12 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]

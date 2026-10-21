@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -52,7 +52,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 | `is_generated` | `STRING` | 如果資料欄是[自動產生的嵌入資料欄](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation?hl=zh-tw)，值為 `ALWAYS`；否則值為 `NEVER`。 |
 | `generation_expression` | `STRING` | 如果資料欄是自動產生的嵌入資料欄，這個值就是用於定義資料欄的產生運算式；否則這個值為 `NULL`。 |
 | `is_stored` | `STRING` | 如果資料欄是自動產生的嵌入資料欄，值為 `YES`；否則值為 `NULL`。 |
-| `async_generation_status` | `STRUCT` | 如果資料欄是自動產生的嵌入資料欄，則包含背景嵌入生成作業的封鎖錯誤；否則值為 `NULL`。如要瞭解封鎖錯誤，請參閱 `async_generation_status.blocking_error.message` 欄位。封鎖錯誤可能包括：  * 權限遭拒錯誤 * 找不到錯誤 * 不支援的嵌入模型端點錯誤 * Vertex AI API 未啟用錯誤  下一個嵌入生成工作成功後，系統會清除 `async_generation_status` 欄。 |
+| `async_generation_status` | `STRUCT` | 如果資料欄是自動產生的嵌入資料欄，則包含背景嵌入生成作業的封鎖錯誤；否則值為 `NULL`。如要瞭解封鎖錯誤，請參閱 `async_generation_status.blocking_error.message` 欄位。封鎖錯誤可能包括：  * 權限遭拒錯誤 * 找不到錯誤 * 不支援的嵌入模型端點錯誤 * Vertex AI API 未啟用錯誤  下一個嵌入生成工作成功後，`async_generation_status` 欄會清除。 |
 | `is_hidden` | `STRING` | `YES` 或 `NO`，視資料欄是否為虛擬資料欄 (例如 \_PARTITIONTIME 或 \_PARTITIONDATE) 而定。 |
 | `is_updatable` | `STRING` | 此值一律為 `NULL`。 |
 | `is_system_defined` | `STRING` | `YES` 或 `NO`，視資料欄是否為虛擬資料欄 (例如 \_PARTITIONTIME 或 \_PARTITIONDATE) 而定。 |
@@ -63,12 +63,19 @@ Google uses AI technology to translate content into your preferred language. AI 
 | `rounding_mode` | `STRING` | 如果欄位類型是參數化 `NUMERIC` 或 `BIGNUMERIC`，則寫入欄位的值會使用此捨入模式；否則值為 `NULL`。 |
 | `data_policies.name` | `STRING` | 附加至資料欄的資料政策清單，用於控管存取權和遮蓋。這個欄位為 ([預先發布版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))。 |
 | `policy_tags` | `ARRAY<STRING>` | 附加至資料欄的政策標記清單。 |
+| `is_identity` | `STRING` | `YES` 或 `NO`，視資料欄是否為 ID 資料欄而定。 |
+| `identity_generation` | `STRING` | 視身分資料欄的產生模式而定，顯示 `ALWAYS` 或 `BY DEFAULT`。如果資料欄不是身分識別資料欄，則值為 `NULL`。 |
+| `identity_start` | `INT64` | 身分識別資料欄產生的第一個值，或 `NULL` (如果資料欄不是身分識別資料欄)。 |
+| `identity_increment` | `INT64` | 身分欄連續產生的 ID 之間的最小差異，如果該欄不是身分欄，則為 `NULL`。 |
+| `identity_maximum` | `INT64` | 可為 ID 資料欄產生的最大值，或 `NULL` (如果資料欄不是 ID 資料欄)。 |
+| `identity_minimum` | `INT64` | 可為 ID 欄產生的最小值，或 `NULL` (如果資料欄不是 ID 欄)。 |
+| `identity_cycle` | `STRING` | 如果該欄是 ID 欄，則這個值為 `NEVER`；否則，這個值為 `NULL`。 |
 
 為確保穩定性，建議您在資訊結構定義查詢中明確列出資料欄，而非使用萬用字元 (`SELECT *`)。明確列出資料欄可避免基礎結構定義變更時，查詢中斷。
 
 ## 範圍和語法
 
-對這個檢視表執行的查詢必須包含資料集或區域限定詞。如果是含有資料集限定符的查詢，您必須具備該資料集的權限。如要查詢含有區域限定符的資料，您必須具備專案權限。詳情請參閱「[語法](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw#syntax)」。下表說明這個檢視畫面的區域和資源範圍：
+對這個檢視表執行的查詢必須包含資料集或區域限定詞。如果是含有資料集限定符的查詢，您必須具備資料集權限。如要查詢含有區域限定符的資料，您必須具備專案權限。詳情請參閱「[語法](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw#syntax)」。下表說明這個檢視畫面的區域和資源範圍：
 
 | 檢視表名稱 | 資源範圍 | 區域範圍 |
 | --- | --- | --- |
@@ -77,10 +84,10 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 取代下列項目：
 
-* 選用：`PROJECT_ID`：專案 ID。 Google Cloud 如未指定，系統會使用預設專案。
+* 選用：`PROJECT_ID`： Google Cloud 專案 ID。如未指定，系統會使用預設專案。
 * `REGION`：任何[資料集區域名稱](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
   例如：`` `region-us` ``。
-* `DATASET_ID`：資料集的 ID。詳情請參閱「[資料集限定符](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw#dataset_qualifier)」。**注意：**您必須使用[區域限定詞](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw#region_qualifier)查詢 `INFORMATION_SCHEMA` 檢視畫面。查詢執行位置必須與 `INFORMATION_SCHEMA` 檢視區塊的區域相符。
+* `DATASET_ID`：資料集的 ID。詳情請參閱「[資料集限定符](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw#dataset_qualifier)」。**注意：**您必須使用[區域限定詞](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw#region_qualifier)查詢 `INFORMATION_SCHEMA` 檢視畫面。查詢執行位置必須與`INFORMATION_SCHEMA`檢視區塊的區域相符。
 
 ## 範例
 
@@ -103,7 +110,7 @@ Google uses AI technology to translate content into your preferred language. AI 
     table_name = 'population_by_zip_2010';
 ```
 
-結果大致如下。為了方便閱讀，部分資料欄已從結果中排除。
+結果大致如下。為了方便閱讀，我們已從結果中排除部分資料欄。
 
 ```
 +------------------------+-------------+------------------+-------------+-----------+-----------+-------------------+------------------------+-----------------------------+-------------+
@@ -125,11 +132,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-13 (世界標準時間)。
+上次更新時間：2026-10-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-13 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]

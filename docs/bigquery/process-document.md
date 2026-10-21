@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -84,7 +84,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
   [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
 - [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project).
-- Enable the BigQuery, BigQuery Connection API, and Document AI APIs.
+- Enable the BigQuery, BigQuery Connection API, and Document AI APIs, if any are not already enabled.
 
   **Roles required to enable APIs**
 
@@ -115,7 +115,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
   [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
 - [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project).
-- Enable the BigQuery, BigQuery Connection API, and Document AI APIs.
+- Enable the BigQuery, BigQuery Connection API, and Document AI APIs, if any are not already enabled.
 
   **Roles required to enable APIs**
 
@@ -146,7 +146,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Explorer」窗格中，按一下專案名稱。
-4. 依序點按 more\_vert「View actions」(查看動作)「>」(大於符號)「Create dataset」(建立資料集)。
+4. 依序點按 more\_vert **「View actions」(查看動作)「>」(大於符號)「Create dataset」(建立資料集)**。
 5. 在「建立資料集」頁面中，執行下列操作：
 
    1. 在「Dataset ID」(資料集 ID) 部分，輸入資料集的名稱。
@@ -221,7 +221,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    * `CONNECTION_NAME`：連線名稱，格式為 `PROJECT_ID.LOCATION.CONNECTION_ID`、`LOCATION.CONNECTION_ID` 或 `CONNECTION_ID`。如果省略專案或位置，系統會從執行陳述式的專案和位置推斷。
    * `FRIENDLY_NAME` (選用)：連線的描述性名稱。
-   * `DESCRIPTION` (選用)：連線說明。
+   * `DESCRIPTION` (選用)：連線的說明。
 3. 按一下「執行」play\_circle。
 
 如要進一步瞭解如何執行查詢，請參閱「[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)」。
@@ -403,9 +403,10 @@ resource "google_bigquery_connection" "default" {
 ## 準備 Cloud Shell
 
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
-2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
+2. 設定要套用 Terraform 設定的預設 Google Cloud 專案
+   。
 
-   每項專案只需要執行一次這個指令，且可以在任何目錄中執行。
+   每個專案只需要執行一次這個指令，且可以在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
@@ -426,7 +427,7 @@ resource "google_bigquery_connection" "default" {
 
    將程式碼範例複製到新建立的 `main.tf` 中。
 
-   視需要從 GitHub 複製程式碼。如果 Terraform 代码片段是端對端解決方案的一部分，建議您使用這個方法。
+   視需要從 GitHub 複製程式碼。如果 Terraform 程式碼片段是端對端解決方案的一部分，建議您使用這個選項。
 3. 查看並修改範例參數，套用至您的環境。
 4. 儲存變更。
 5. 初始化 Terraform。每個目錄只需執行一次這項操作。
@@ -450,7 +451,7 @@ resource "google_bigquery_connection" "default" {
    ```
 
    視需要修正設定。
-2. 執行下列指令並在提示中輸入 `yes`，套用 Terraform 設定：
+2. 執行下列指令，並在提示中輸入 `yes`，套用 Terraform 設定：
 
    ```
    terraform apply
@@ -459,7 +460,7 @@ resource "google_bigquery_connection" "default" {
    等待 Terraform 顯示「Apply complete!」訊息。
 3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)即可查看結果。在 Google Cloud 控制台中，前往 UI 中的資源，確認 Terraform 已建立或更新這些資源。
 
-**注意：**Terraform 範例通常會假設 Google Cloud 專案已啟用必要的 API。
+**注意：**Terraform 範例通常會假設專案已啟用必要的 API。 Google Cloud
 
 ### 將存取權授予服務帳戶
 
@@ -498,11 +499,11 @@ gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount
 **注意：**如果您在與物件表格所用 Cloud Storage 值區不同的專案中建立處理器，請按照下列方式授予服務帳戶 Identity and Access Management (IAM) 角色：
 
 * 在含有處理器的專案中，將 Document AI 檢視者角色授予服務帳戶。
-* 在包含 Cloud Storage bucket 的專案中，授予服務帳戶「Storage 物件檢視者」角色。
+* 在包含 Cloud Storage bucket 的專案中，將「Storage 物件檢視者」角色授予服務帳戶。
 
 ## 建立模型
 
-使用 [`REMOTE_SERVICE_TYPE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service?hl=zh-tw#remote_service_type) 建立遠端模型：`CLOUD_AI_DOCUMENT_V1`
+使用 [`REMOTE_SERVICE_TYPE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service?hl=zh-tw#remote_service_type) 建立遠端模型`CLOUD_AI_DOCUMENT_V1`：
 
 ```
 CREATE OR REPLACE MODEL
@@ -552,7 +553,7 @@ FROM ML.PROCESS_DOCUMENT(
 * `DATASET_ID`：包含模型的資料集 ID。
 * `MODEL_NAME`：模型名稱。
 * `OBJECT_TABLE_NAME`：包含要處理文件 URI 的物件資料表名稱。
-* `PROCESS_OPTIONS`：JSON 設定，用於指定如何處理文件。舉例來說，您可以使用這項功能，為版面配置剖析器指定文件分塊
+* `PROCESS_OPTIONS`：指定如何處理文件的 JSON 設定。舉例來說，您可以使用這項功能，為版面配置剖析器指定文件分塊
 
 或者，使用 `ML.PROCESS_DOCUMENT` 處理部分文件：
 
@@ -623,11 +624,11 @@ FROM
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-23 (世界標準時間)。
+上次更新時間：2026-10-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-23 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]

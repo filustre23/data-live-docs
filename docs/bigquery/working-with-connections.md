@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -14,7 +14,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 你可以依據偏好儲存及分類內容。
 
-# 管理連線
+# 管理連結
 
 本文說明如何查看、列出、共用、編輯、刪除及排解 BigQuery 連線問題。
 
@@ -30,18 +30,18 @@ BigQuery 管理員可以建立及管理連線，用於連線至服務和外部�
 
 如要為專案建立預設連線，請參閱「[預設連線總覽](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw)」。
 
-**提示：** 您也可以使用「管道和連線」頁面，透過[簡化且專為 BigQuery 設計的工作流程](https://docs.cloud.google.com/bigquery/docs/pipeline-connection-page?hl=zh-tw)建立及管理連線。這項功能為[預先發布版](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
+**提示：** 您也可以使用「管道和連線」頁面，透過[簡化的 BigQuery 專屬工作流程](https://docs.cloud.google.com/bigquery/docs/pipeline-connection-page?hl=zh-tw)建立及管理連線。這項功能為[預先發布版](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
 
 ## 事前準備
 
 * 確認[連線](https://docs.cloud.google.com/bigquery/docs/connections-api-intro?hl=zh-tw)正常。
   連線是[類型專屬](https://docs.cloud.google.com/bigquery/docs/connections-api-intro?hl=zh-tw#connection_types)，
-  取決於已連結的外部資料來源。
+  取決於連結的外部資料來源。
 * 啟用 BigQuery Connection API。
 
   [啟用 API](https://console.cloud.google.com/apis/library/bigqueryconnection.googleapis.com?hl=zh-tw)
 * 確認您可以在[專案中查看服務帳戶清單](https://docs.cloud.google.com/iam/docs/service-accounts-list-edit?hl=zh-tw#listing)。
-  BigQuery 會建立並使用[服務帳戶](https://docs.cloud.google.com/iam/docs/service-agents?hl=zh-tw)，連線至外部資料來源。建立連線時，系統會代您建立 [Google Cloud代管的身分與存取權管理 (IAM) 服務帳戶](https://docs.cloud.google.com/iam/docs/service-account-types?hl=zh-tw#google-managed)。如要查看附加至特定連線的服務帳戶，請[查看連線詳細資料](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw#view-connections)。
+  BigQuery 會建立並使用[服務帳戶](https://docs.cloud.google.com/iam/docs/service-agents?hl=zh-tw)，連線至外部資料來源。建立連線時，系統會代表您建立 [Google Cloud管理的身分與存取權管理 (IAM) 服務帳戶](https://docs.cloud.google.com/iam/docs/service-account-types?hl=zh-tw#google-managed)。如要查看附加至特定連線的服務帳戶，請[查看連線詳細資料](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw#view-connections)。
 
 ### 必要的角色
 
@@ -50,8 +50,7 @@ BigQuery 管理員可以建立及管理連線，用於連線至服務和外部�
 * [查看連線詳細資料](#view-connections)：
   資料集上的 [BigQuery 連線使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.connectionUser)  (`roles/bigquery.connectionUser`)
 * [列出所有連線](#list-connections)：
-  [BigQuery 連線使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.connectionUser)  (`roles/bigquery.connectionUser`)
-  在資料集上
+  資料集上的 [BigQuery 連線使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.connectionUser)  (`roles/bigquery.connectionUser`)
 * [共用連線](#share-connections)：
   連線的 [BigQuery 連線管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.connectionAdmin)  (`roles/bigquery.connectionAdmin`)
 * [編輯連線](#edit-connections)：
@@ -66,7 +65,7 @@ BigQuery 管理員可以建立及管理連線，用於連線至服務和外部�
 
 如要瞭解建立及使用預設連結所需的角色，請參閱「[必要角色和權限](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw#required_roles_and_permissions)」。
 
-這些預先定義的角色具備執行本文所述工作所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
+這些預先定義的角色具備執行本文中工作所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
 #### 所需權限
 
@@ -85,11 +84,11 @@ BigQuery 管理員可以建立及管理連線，用於連線至服務和外部�
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 
-   連線會列在專案中，位於「Connections」(連線) 群組。
+   連線會列在專案中，並歸類在「連線」群組。
 2. 點選左側窗格中的 explore「Explorer」。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
-3. 在「Explorer」窗格中，按一下專案名稱，然後點選「Connections」，即可查看所有連線的清單。
+3. 在「Explorer」窗格中，按一下專案名稱，然後點選「連線」，即可查看所有連線的清單。
 
 ### bq
 
@@ -259,9 +258,9 @@ public class ListConnections {
 1. 前往「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 連線會列在專案中，位於「Connections」(連線) 群組。
+2. 連線會列在專案中，並歸類在「連線」群組。
 3. 點選左側窗格中的 explore「Explorer」。
-4. 在「Explorer」窗格中，按一下專案名稱，然後點選「Connections」，即可查看所有連線的清單。
+4. 在「Explorer」窗格中，按一下專案名稱，然後點選「連線」，即可查看所有連線的清單。
 5. 按一下連線即可查看詳細資料。
 
 ### bq
@@ -522,8 +521,8 @@ async function getIamPolicy(projectId, location, connectionId) {
 
 您可以授予下列角色，讓使用者查詢資料及管理連線：
 
-* `roles/bigquery.connectionUser`：可讓使用者透過連線功能連結外部資料來源，並對其執行查詢。
-* `roles/bigquery.connectionAdmin`：允許使用者管理連線。
+* `roles/bigquery.connectionUser`：可讓使用者透過連線功能連結外部資料來源，並對這些來源執行查詢。
+* `roles/bigquery.connectionAdmin`：讓使用者管理連線。
 
 如要進一步瞭解 BigQuery 中的 IAM 角色和權限，請參閱[預先定義的角色和權限](https://docs.cloud.google.com/bigquery/access-control?hl=zh-tw)一文。
 
@@ -535,7 +534,7 @@ async function getIamPolicy(projectId, location, connectionId) {
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 
-   連線會列在專案中，位於「Connections」(連線) 群組。
+   連線會列在專案中，並歸類在「連線」群組。
 2. 點選左側窗格中的 explore「Explorer」。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
@@ -553,7 +552,7 @@ async function getIamPolicy(projectId, location, connectionId) {
 
 ### API
 
-請使用 BigQuery Connections REST API 參考資料部分中的 [`projects.locations.connections.setIAM` 方法](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections?hl=zh-tw#methods)，並提供 `policy` 資源的執行個體。
+請使用 BigQuery Connections REST API 參考資料中的 [`projects.locations.connections.setIAM` 方法](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections?hl=zh-tw#methods)，並提供 `policy` 資源的執行個體。
 
 ### Java
 
@@ -605,7 +604,7 @@ public class ShareConnection {
 
 ## 編輯連結
 
-連線會使用建立者的憑證。如要變更與連線相關聯的使用者，可以更新使用者的憑證。當建立連結的使用者已不在您的機構時，這個方法十分實用。
+連線會使用建立者的憑證。如要變更連結所屬的使用者，可以更新使用者的憑證。當建立連結的使用者已不在您的機構時，這個方法十分實用。
 
 您無法編輯連線的下列元素：
 
@@ -623,7 +622,7 @@ public class ShareConnection {
 
    連線會列在專案的「Connections」(連線) 群組中。
 2. 點選左側窗格中的 explore「Explorer」。
-3. 在「Explorer」窗格中，按一下專案名稱，然後點選「Connections」，即可查看所有連線的清單。
+3. 在「Explorer」窗格中，按一下專案名稱，然後點選「連線」，即可查看所有連線的清單。
 4. 如要查看詳細資料，請按一下連線。
 5. 在「連線資訊」部分中，按一下「編輯詳細資料」圖示 mode\_edit。接著，按照下列步驟操作：
 
@@ -632,7 +631,7 @@ public class ShareConnection {
 
 ### bq
 
-輸入 `bq update` 指令並提供連線旗標 `--connection`。必須提供完整的 `connection_id`。
+輸入 `bq update` 指令並提供連線旗標 `--connection`。必須提供完整 `connection_id`。
 
 ```
   bq update --connection --connection_type='CLOUD_SQL'
@@ -652,7 +651,7 @@ public class ShareConnection {
 * `REGION`：[連線區域](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#supported_locations)
 * `CONNECTION_ID`：連線 ID
 
-舉例來說，下列指令會更新 ID 為 `federation-test` 的專案，以及連線 ID 為 `test-mysql` 的連線。
+舉例來說，下列指令會更新 ID 為 `federation-test` 的專案和連線 ID 為 `test-mysql` 的連線。
 
 ```
 bq update --connection --connection_type='CLOUD_SQL'
@@ -811,86 +810,4 @@ public class UpdateConnection {
       ConnectionName name = ConnectionName.of(projectId, location, connectionId);
       FieldMask updateMask = FieldMaskUtil.fromString("description");
       UpdateConnectionRequest request =
-          UpdateConnectionRequest.newBuilder()
-              .setName(name.toString())
-              .setConnection(connection)
-              .setUpdateMask(updateMask)
-              .build();
-      Connection response = client.updateConnection(request);
-      System.out.println("Connection updated successfully :" + response.getDescription());
-    }
-  }
-}
 ```
-
-## 刪除連線
-
-選取下列選項之一：
-
-### 控制台
-
-1. 前往「BigQuery」頁面。
-
-   [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-
-   連線會列在專案的「Connections」(連線) 群組中。
-2. 點選左側窗格中的 explore「Explorer」。
-3. 在「Explorer」窗格中，按一下專案名稱，然後點選「Connections」，即可查看所有連線的清單。
-4. 按一下連線即可查看詳細資料。
-5. 在詳細資料窗格中，按一下「刪除」delete即可刪除連線。
-6. 在「刪除連結？」對話方塊中輸入 `delete`，確認要刪除連結。
-7. 點選「刪除」。
-
-### bq
-
-輸入 `bq rm` 指令並提供連線旗標 `--connection`。必須提供完整的 `connection_id`。
-
-```
-bq rm --connection PROJECT_ID.REGION.CONNECTION_ID
-```
-
-更改下列內容：
-
-* `PROJECT_ID`：您的 Google Cloud 專案 ID
-* `REGION`：[連線區域](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#supported_locations)
-* `CONNECTION_ID`：連線 ID
-
-### API
-
-請參閱 REST API 參考資料章節中的 [`projects.locations.connections.delete` 方法](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections?hl=zh-tw#methods)。
-
-### Python
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-import google.api_core.exceptions
-from google.cloud import bigquery_connection_v1
-
-client = bigquery_connection_v1.ConnectionServiceClient()
-
-
-def delete_connection(project_id: str, location: str, connection_id: str):
-    """Deletes a BigQuery connection.
-
-    Args:
-        project_id: The Google Cloud project ID.
-        location: Location of the connection (for example, "us-central1").
-        connection_id: ID of the connection to delete.
-    """
-    name = client.connection_path(project_id, location, connection_id)
-
-    try:
-        client.delete_connection(name=name)
-        print(f"Connection '{connection_id}' was deleted.")
-    except google.api_core.exceptions.NotFound:
-        print(f"Connection '{connection_id}' not found.")
-```
-
-### Node.js
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。

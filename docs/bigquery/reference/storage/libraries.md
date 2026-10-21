@@ -182,8 +182,8 @@ that are associated with your Google Account:
 The following example shows basic interactions with the
 [BigQuery Storage Read API](/bigquery/docs/reference/storage).
 
-For examples of how to use the BigQuery Storage Write API, see
-[Perform batch and streaming using the Storage Write API](/bigquery/docs/write-api).
+For examples of how to use the BigQuery Storage Write API (gRPC), see
+[Perform batch and streaming using the Storage Write API (gRPC)](/bigquery/docs/write-api).
 
 ### C++
 
@@ -232,123 +232,5 @@ int main(int argc, char* argv[]) try {
   auto read_rows = client.ReadRows(session->streams(0).name(), kRowOffset);
 
   std::int64_t num_rows = 0;
-  for (auto const& row : read_rows) {
-    if (row.ok()) {
-      num_rows += row->row_count();
-      ProcessRowsInAvroFormat(session->avro_schema(), row->avro_rows());
-    }
-  }
-
-  std::cout << num_rows << " rows read from table: " << table_name << "\n";
-  return 0;
-} catch (google::cloud::Status const& status) {
-  std::cerr << "google::cloud::Status thrown: " << status << "\n";
-  return 1;
-}
-```
-
-### Go
-
-```
-// The bigquery_storage_quickstart application demonstrates usage of the
-// BigQuery Storage read API.  It demonstrates API features such as column
-// projection (limiting the output to a subset of a table's columns),
-// column filtering (using simple predicates to filter records on the server
-// side), establishing the snapshot time (reading data from the table at a
-// specific point in time), decoding Avro row blocks using the third party
-// "github.com/linkedin/goavro" library, and decoding Arrow row blocks using
-// the third party "github.com/apache/arrow/go" library.
-package main
-
-import (
-	"bytes"
-	"context"
-	"encoding/json"
-	"flag"
-	"fmt"
-	"io"
-	"log"
-	"sort"
-	"strings"
-	"sync"
-	"time"
-
-	bqStorage "cloud.google.com/go/bigquery/storage/apiv1"
-	"cloud.google.com/go/bigquery/storage/apiv1/storagepb"
-	"github.com/apache/arrow/go/v10/arrow"
-	"github.com/apache/arrow/go/v10/arrow/ipc"
-	"github.com/apache/arrow/go/v10/arrow/memory"
-	gax "github.com/googleapis/gax-go/v2"
-	goavro "github.com/linkedin/goavro/v2"
-	"google.golang.org/genproto/googleapis/rpc/errdetails"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/status"
-	"google.golang.org/protobuf/types/known/timestamppb"
-)
-
-// rpcOpts is used to configure the underlying gRPC client to accept large
-// messages.  The BigQuery Storage API may send message blocks up to 128MB
-// in size.
-var rpcOpts = gax.WithGRPCOptions(
-	grpc.MaxCallRecvMsgSize(1024 * 1024 * 129),
-)
-
-// Available formats
-const (
-	AVRO_FORMAT  = "avro"
-	ARROW_FORMAT = "arrow"
-)
-
-// Command-line flags.
-var (
-	projectID = flag.String("project_id", "",
-		"Cloud Project ID, used for session creation.")
-	snapshotMillis = flag.Int64("snapshot_millis", 0,
-		"Snapshot time to use for reads, represented in epoch milliseconds format.  Default behavior reads current data.")
-	format = flag.String("format", AVRO_FORMAT, "format to read data from storage API. Default is avro.")
-)
-
-func main() {
-	flag.Parse()
-	ctx := context.Background()
-	bqReadClient, err := bqStorage.NewBigQueryReadClient(ctx)
-	if err != nil {
-		log.Fatalf("NewBigQueryStorageClient: %v", err)
-	}
-	defer bqReadClient.Close()
-
-	// Verify we've been provided a parent project which will contain the read session.  The
-	// session may exist in a different project than the table being read.
-	if *projectID == "" {
-		log.Fatalf("No parent project ID specified, please supply using the --project_id flag.")
-	}
-
-	// This example uses baby name data from the public datasets.
-	srcProjectID := "bigquery-public-data"
-	srcDatasetID := "usa_names"
-	srcTableID := "usa_1910_current"
-	readTable := fmt.Sprintf("projects/%s/datasets/%s/tables/%s",
-		srcProjectID,
-		srcDatasetID,
-		srcTableID,
-	)
-
-	// We limit the output columns to a subset of those allowed in the table,
-	// and set a simple filter to only report names from the state of
-	// Washington (WA).
-	tableReadOptions := &storagepb.ReadSession_TableReadOptions{
-		SelectedFields: []string{"name", "number", "state"},
-		RowRestriction: `state = "WA"`,
-	}
-
-	dataFormat := storagepb.DataFormat_AVRO
-	if *format == ARROW_FORMAT {
-		dataFormat = storagepb.DataFormat_ARROW
-	}
-	createReadSessionRequest := &storagepb.CreateReadSessionRequest{
-		Parent: fmt.Sprintf("projects/%s", *projectID),
-		ReadSession: &storagepb.ReadSession{
-			Table:       readTable,
-			DataFormat:
+  for (auto const& row : read_rows)
 ```

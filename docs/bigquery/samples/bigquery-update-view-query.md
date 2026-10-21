@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -111,6 +111,33 @@ public class UpdateViewQuery {
     }
   }
 }
+```
+
+### Python
+
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+
+```
+from google.cloud import bigquery
+
+client = bigquery.Client()
+
+view_id = "my-project.my_dataset.my_view"
+source_id = "my-project.my_dataset.my_table"
+view = bigquery.Table(view_id)
+
+# The source table in this example is created from a CSV file in Google
+# Cloud Storage located at
+# `gs://cloud-samples-data/bigquery/us-states/us-states.csv`. It contains
+# 50 US states, while the view returns only those states with names
+# starting with the letter 'M'.
+view.view_query = f"SELECT name, post_abbr FROM `{source_id}` WHERE name LIKE 'M%'"
+
+# Make an API request to update the query property of the view.
+view = client.update_table(view, ["view_query"])
+print(f"Updated {view.table_type}: {str(view.reference)}")
 ```
 
 ## 後續步驟

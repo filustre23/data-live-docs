@@ -123,7 +123,7 @@ This topic contains all functions supported by GoogleSQL for BigQuery.
 | [`EXTRACT`](/bigquery/docs/reference/standard-sql/time_functions#extract) | Extracts part of a `TIME` value. |
 | [`EXTRACT`](/bigquery/docs/reference/standard-sql/timestamp_functions#extract) | Extracts part of a `TIMESTAMP` value. |
 | [`EUCLIDEAN_DISTANCE`](/bigquery/docs/reference/standard-sql/mathematical_functions#euclidean_distance) | Computes the Euclidean distance between two vectors. |
-| [`FARM_FINGERPRINT`](/bigquery/docs/reference/standard-sql/hash_functions#farm_fingerprint) | Computes the fingerprint of a `STRING` or `BYTES` value, using the FarmHash Fingerprint64 algorithm. |
+| [`FARM_FINGERPRINT`](/bigquery/docs/reference/standard-sql/hash_functions#farm_fingerprint) | Computes the fingerprint of a `STRING` or `BYTES` value using the FarmHash Fingerprint64 algorithm. |
 | [`FIRST_VALUE`](/bigquery/docs/reference/standard-sql/navigation_functions#first_value) | Gets a value for the first row in the current window frame. |
 | [`FLOOR`](/bigquery/docs/reference/standard-sql/mathematical_functions#floor) | Gets the largest integral value that isn't greater than `X`. |
 | [`FORMAT_DATE`](/bigquery/docs/reference/standard-sql/date_functions#format_date) | Formats a `DATE` value according to a specified format string. |
@@ -150,100 +150,10 @@ This topic contains all functions supported by GoogleSQL for BigQuery.
 | [`INITCAP`](/bigquery/docs/reference/standard-sql/string_functions#initcap) | Formats a `STRING` as proper case, which means that the first character in each word is uppercase and all other characters are lowercase. |
 | [`INSTR`](/bigquery/docs/reference/standard-sql/string_functions#instr) | Finds the position of a subvalue inside another value, optionally starting the search at a given offset or occurrence. |
 | [`INT64`](/bigquery/docs/reference/standard-sql/json_functions#int64_for_json) | Converts a JSON number to a SQL `INT64` value. |
+| [`IS_ACYCLIC`](/bigquery/docs/reference/standard-sql/graph-sql-functions#is_acyclic) | Checks if a graph path has a repeating node. |
 | [`IS_INF`](/bigquery/docs/reference/standard-sql/mathematical_functions#is_inf) | Checks if `X` is positive or negative infinity. |
 | [`IS_NAN`](/bigquery/docs/reference/standard-sql/mathematical_functions#is_nan) | Checks if `X` is a `NaN` value. |
+| [`IS_SIMPLE`](/bigquery/docs/reference/standard-sql/graph-sql-functions#is_simple) | Checks if a graph path is simple. |
+| [`IS_TRAIL`](/bigquery/docs/reference/standard-sql/graph-sql-functions#is_trail) | Checks if a graph path has a repeating edge. |
 | [`JSON_ARRAY`](/bigquery/docs/reference/standard-sql/json_functions#json_array) | Creates a JSON array. |
-| [`JSON_ARRAY_APPEND`](/bigquery/docs/reference/standard-sql/json_functions#json_array_append) | Appends JSON data to the end of a JSON array. |
-| [`JSON_ARRAY_INSERT`](/bigquery/docs/reference/standard-sql/json_functions#json_array_insert) | Inserts JSON data into a JSON array. |
-| [`JSON_EXTRACT`](/bigquery/docs/reference/standard-sql/json_functions#json_extract) | (Deprecated) Extracts a JSON value and converts it to a SQL JSON-formatted `STRING` or `JSON` value. |
-| [`JSON_EXTRACT_ARRAY`](/bigquery/docs/reference/standard-sql/json_functions#json_extract_array) | (Deprecated) Extracts a JSON array and converts it to a SQL `ARRAY<JSON-formatted STRING>` or `ARRAY<JSON>` value. |
-| [`JSON_EXTRACT_SCALAR`](/bigquery/docs/reference/standard-sql/json_functions#json_extract_scalar) | (Deprecated) Extracts a JSON scalar value and converts it to a SQL `STRING` value. |
-| [`JSON_EXTRACT_STRING_ARRAY`](/bigquery/docs/reference/standard-sql/json_functions#json_extract_string_array) | (Deprecated) Extracts a JSON array of scalar values and converts it to a SQL `ARRAY<STRING>` value. |
-| [`JSON_FLATTEN`](/bigquery/docs/reference/standard-sql/json_functions#json_flatten) | Produces a new SQL `ARRAY<JSON>` value containing all non-array values that are either directly in the input JSON value or children of one or more consecutively nested arrays in the input JSON value. |
-| [`JSON_KEYS`](/bigquery/docs/reference/standard-sql/json_functions#json_keys) | Extracts unique JSON keys from a JSON expression. |
-| [`JSON_OBJECT`](/bigquery/docs/reference/standard-sql/json_functions#json_object) | Creates a JSON object. |
-| [`JSON_QUERY`](/bigquery/docs/reference/standard-sql/json_functions#json_query) | Extracts a JSON value and converts it to a SQL JSON-formatted `STRING` or `JSON` value. |
-| [`JSON_QUERY_ARRAY`](/bigquery/docs/reference/standard-sql/json_functions#json_query_array) | Extracts a JSON array and converts it to a SQL `ARRAY<JSON-formatted STRING>` or `ARRAY<JSON>` value. |
-| [`JSON_REMOVE`](/bigquery/docs/reference/standard-sql/json_functions#json_remove) | Produces JSON with the specified JSON data removed. |
-| [`JSON_SET`](/bigquery/docs/reference/standard-sql/json_functions#json_set) | Inserts or replaces JSON data. |
-| [`JSON_STRIP_NULLS`](/bigquery/docs/reference/standard-sql/json_functions#json_strip_nulls) | Removes JSON nulls from JSON objects and JSON arrays. |
-| [`JSON_TYPE`](/bigquery/docs/reference/standard-sql/json_functions#json_type) | Gets the JSON type of the outermost JSON value and converts the name of this type to a SQL `STRING` value. |
-| [`JSON_VALUE`](/bigquery/docs/reference/standard-sql/json_functions#json_value) | Extracts a JSON scalar value and converts it to a SQL `STRING` value. |
-| [`JSON_VALUE_ARRAY`](/bigquery/docs/reference/standard-sql/json_functions#json_value_array) | Extracts a JSON array of scalar values and converts it to a SQL `ARRAY<STRING>` value. |
-| [`JUSTIFY_DAYS`](/bigquery/docs/reference/standard-sql/interval_functions#justify_days) | Normalizes the day part of an `INTERVAL` value. |
-| [`JUSTIFY_HOURS`](/bigquery/docs/reference/standard-sql/interval_functions#justify_hours) | Normalizes the time part of an `INTERVAL` value. |
-| [`JUSTIFY_INTERVAL`](/bigquery/docs/reference/standard-sql/interval_functions#justify_interval) | Normalizes the day and time parts of an `INTERVAL` value. |
-| [`KEYS.ADD_KEY_FROM_RAW_BYTES`](/bigquery/docs/reference/standard-sql/aead_encryption_functions#keysadd_key_from_raw_bytes) | Adds a key to a keyset, and return the new keyset as a serialized `BYTES` value. |
-| [`KEYS.KEYSET_CHAIN`](/bigquery/docs/reference/standard-sql/aead_encryption_functions#keyskeyset_chain) | Produces a Tink keyset that's encrypted with a Cloud KMS key. |
-| [`KEYS.KEYSET_FROM_JSON`](/bigquery/docs/reference/standard-sql/aead_encryption_functions#keyskeyset_from_json) | Converts a `STRING` JSON keyset to a serialized `BYTES` value. |
-| [`KEYS.KEYSET_LENGTH`](/bigquery/docs/reference/standard-sql/aead_encryption_functions#keyskeyset_length) | Gets the number of keys in the provided keyset. |
-| [`KEYS.KEYSET_TO_JSON`](/bigquery/docs/reference/standard-sql/aead_encryption_functions#keyskeyset_to_json) | Gets a JSON `STRING` representation of a keyset. |
-| [`KEYS.NEW_KEYSET`](/bigquery/docs/reference/standard-sql/aead_encryption_functions#keysnew_keyset) | Gets a serialized keyset containing a new key based on the key type. |
-| [`KEYS.NEW_WRAPPED_KEYSET`](/bigquery/docs/reference/standard-sql/aead_encryption_functions#keysnew_wrapped_keyset) | Creates a new keyset and encrypts it with a Cloud KMS key. |
-| [`KEYS.REWRAP_KEYSET`](/bigquery/docs/reference/standard-sql/aead_encryption_functions#keysrewrap_keyset) | Re-encrypts a wrapped keyset with a new Cloud KMS key. |
-| [`KEYS.ROTATE_KEYSET`](/bigquery/docs/reference/standard-sql/aead_encryption_functions#keysrotate_keyset) | Adds a new primary cryptographic key to a keyset, based on the key type. |
-| [`KEYS.ROTATE_WRAPPED_KEYSET`](/bigquery/docs/reference/standard-sql/aead_encryption_functions#keysrotate_wrapped_keyset) | Rewraps a keyset and rotates it. |
-| [`KLL_QUANTILES.EXTRACT_INT64`](/bigquery/docs/reference/standard-sql/kll_functions#kll_quantilesextract_int64) | Gets a selected number of quantiles from an `INT64`-initialized KLL sketch. |
-| [`KLL_QUANTILES.EXTRACT_FLOAT64`](/bigquery/docs/reference/standard-sql/kll_functions#kll_quantilesextract_double) | Gets a selected number of quantiles from a `FLOAT64`-initialized KLL sketch. |
-| [`KLL_QUANTILES.EXTRACT_POINT_INT64`](/bigquery/docs/reference/standard-sql/kll_functions#kll_quantilesextract_point_int64) | Gets a specific quantile from an `INT64`-initialized KLL sketch. |
-| [`KLL_QUANTILES.EXTRACT_POINT_FLOAT64`](/bigquery/docs/reference/standard-sql/kll_functions#kll_quantilesextract_point_double) | Gets a specific quantile from a `FLOAT64`-initialized KLL sketch. |
-| [`KLL_QUANTILES.INIT_INT64`](/bigquery/docs/reference/standard-sql/kll_functions#kll_quantilesinit_int64) | Aggregates values into an `INT64`-initialized KLL sketch. |
-| [`KLL_QUANTILES.INIT_FLOAT64`](/bigquery/docs/reference/standard-sql/kll_functions#kll_quantilesinit_double) | Aggregates values into a `FLOAT64`-initialized KLL sketch. |
-| [`KLL_QUANTILES.MERGE_INT64`](/bigquery/docs/reference/standard-sql/kll_functions#kll_quantilesmerge_int64) | Merges `INT64`-initialized KLL sketches into a new sketch, and then gets the quantiles from the new sketch. |
-| [`KLL_QUANTILES.MERGE_FLOAT64`](/bigquery/docs/reference/standard-sql/kll_functions#kll_quantilesmerge_double) | Merges `FLOAT64`-initialized KLL sketches into a new sketch, and then gets the quantiles from the new sketch. |
-| [`KLL_QUANTILES.MERGE_PARTIAL`](/bigquery/docs/reference/standard-sql/kll_functions#kll_quantilesmerge_partial) | Merges KLL sketches of the same underlying type into a new sketch. |
-| [`KLL_QUANTILES.MERGE_POINT_INT64`](/bigquery/docs/reference/standard-sql/kll_functions#kll_quantilesmerge_point_int64) | Merges `INT64`-initialized KLL sketches into a new sketch, and then gets a specific quantile from the new sketch. |
-| [`KLL_QUANTILES.MERGE_POINT_FLOAT64`](/bigquery/docs/reference/standard-sql/kll_functions#kll_quantilesmerge_point_double) | Merges `FLOAT64`-initialized KLL sketches into a new sketch, and then gets a specific quantile from the new sketch. |
-| [`LABELS`](/bigquery/docs/reference/standard-sql/graph-sql-functions#labels) | Gets the labels associated with a graph element. |
-| [`LAG`](/bigquery/docs/reference/standard-sql/navigation_functions#lag) | Gets a value for a preceding row. |
-| [`LAST_DAY`](/bigquery/docs/reference/standard-sql/date_functions#last_day) | Gets the last day in a specified time period that contains a `DATE` value. |
-| [`LAST_DAY`](/bigquery/docs/reference/standard-sql/datetime_functions#last_day) | Gets the last day in a specified time period that contains a `DATETIME` value. |
-| [`LAST_VALUE`](/bigquery/docs/reference/standard-sql/navigation_functions#last_value) | Gets a value for the last row in the current window frame. |
-| [`LAX_BOOL`](/bigquery/docs/reference/standard-sql/json_functions#lax_bool) | Attempts to convert a JSON value to a SQL `BOOL` value. |
-| [`LAX_FLOAT64`](/bigquery/docs/reference/standard-sql/json_functions#lax_double) | Attempts to convert a JSON value to a SQL `FLOAT64` value. |
-| [`LAX_INT64`](/bigquery/docs/reference/standard-sql/json_functions#lax_int64) | Attempts to convert a JSON value to a SQL `INT64` value. |
-| [`LAX_STRING`](/bigquery/docs/reference/standard-sql/json_functions#lax_string) | Attempts to convert a JSON value to a SQL `STRING` value. |
-| [`LEAD`](/bigquery/docs/reference/standard-sql/navigation_functions#lead) | Gets a value for a subsequent row. |
-| [`LEAST`](/bigquery/docs/reference/standard-sql/mathematical_functions#least) | Gets the least value among `X1,...,XN`. |
-| [`LEFT`](/bigquery/docs/reference/standard-sql/string_functions#left) | Gets the specified leftmost portion from a `STRING` or `BYTES` value. |
-| [`LENGTH`](/bigquery/docs/reference/standard-sql/string_functions#length) | Gets the length of a `STRING` or `BYTES` value. |
-| [`LN`](/bigquery/docs/reference/standard-sql/mathematical_functions#ln) | Computes the natural logarithm of `X`. |
-| [`LOG`](/bigquery/docs/reference/standard-sql/mathematical_functions#log) | Computes the natural logarithm of `X` or the logarithm of `X` to base `Y`. |
-| [`LOG10`](/bigquery/docs/reference/standard-sql/mathematical_functions#log10) | Computes the natural logarithm of `X` to base 10. |
-| [`LOGICAL_AND`](/bigquery/docs/reference/standard-sql/aggregate_functions#logical_and) | Gets the logical AND of all non-`NULL` expressions. |
-| [`LOGICAL_OR`](/bigquery/docs/reference/standard-sql/aggregate_functions#logical_or) | Gets the logical OR of all non-`NULL` expressions. |
-| [`LOWER`](/bigquery/docs/reference/standard-sql/string_functions#lower) | Formats alphabetic characters in a `STRING` value as lowercase.    Formats ASCII characters in a `BYTES` value as lowercase. |
-| [`LPAD`](/bigquery/docs/reference/standard-sql/string_functions#lpad) | Prepends a `STRING` or `BYTES` value with a pattern. |
-| [`LTRIM`](/bigquery/docs/reference/standard-sql/string_functions#ltrim) | Identical to the `TRIM` function, but only removes leading characters. |
-| [`MAKE_INTERVAL`](/bigquery/docs/reference/standard-sql/interval_functions#make_interval) | Constructs an `INTERVAL` value. |
-| [`MAX`](/bigquery/docs/reference/standard-sql/aggregate_functions#max) | Gets the maximum non-`NULL` value. |
-| [`MAX_BY`](/bigquery/docs/reference/standard-sql/aggregate_functions#max_by) | Synonym for `ANY_VALUE(x HAVING MAX y)`. |
-| [`MD5`](/bigquery/docs/reference/standard-sql/hash_functions#md5) | Computes the hash of a `STRING` or `BYTES` value, using the MD5 algorithm. |
-| [`MIN`](/bigquery/docs/reference/standard-sql/aggregate_functions#min) | Gets the minimum non-`NULL` value. |
-| [`MIN_BY`](/bigquery/docs/reference/standard-sql/aggregate_functions#min_by) | Synonym for `ANY_VALUE(x HAVING MIN y)`. |
-| [`MOD`](/bigquery/docs/reference/standard-sql/mathematical_functions#mod) | Gets the remainder of the division of `X` by `Y`. |
-| [`NET.HOST`](/bigquery/docs/reference/standard-sql/net_functions#nethost) | Gets the hostname from a URL. |
-| [`NET.IP_FROM_STRING`](/bigquery/docs/reference/standard-sql/net_functions#netip_from_string) | Converts an IPv4 or IPv6 address from a `STRING` value to a `BYTES` value in network byte order. |
-| [`NET.IP_NET_MASK`](/bigquery/docs/reference/standard-sql/net_functions#netip_net_mask) | Gets a network mask. |
-| [`NET.IP_TO_STRING`](/bigquery/docs/reference/standard-sql/net_functions#netip_to_string) | Converts an IPv4 or IPv6 address from a `BYTES` value in network byte order to a `STRING` value. |
-| [`NET.IP_TRUNC`](/bigquery/docs/reference/standard-sql/net_functions#netip_trunc) | Converts a `BYTES` IPv4 or IPv6 address in network byte order to a `BYTES` subnet address. |
-| [`NET.IPV4_FROM_INT64`](/bigquery/docs/reference/standard-sql/net_functions#netipv4_from_int64) | Converts an IPv4 address from an `INT64` value to a `BYTES` value in network byte order. |
-| [`NET.IPV4_TO_INT64`](/bigquery/docs/reference/standard-sql/net_functions#netipv4_to_int64) | Converts an IPv4 address from a `BYTES` value in network byte order to an `INT64` value. |
-| [`NET.PUBLIC_SUFFIX`](/bigquery/docs/reference/standard-sql/net_functions#netpublic_suffix) | Gets the public suffix from a URL. |
-| [`NET.REG_DOMAIN`](/bigquery/docs/reference/standard-sql/net_functions#netreg_domain) | Gets the registered or registrable domain from a URL. |
-| [`NET.SAFE_IP_FROM_STRING`](/bigquery/docs/reference/standard-sql/net_functions#netsafe_ip_from_string) | Similar to the `NET.IP_FROM_STRING`, but returns `NULL` instead of producing an error if the input is invalid. |
-| [`NODES`](/bigquery/docs/reference/standard-sql/graph-sql-functions#nodes) | Gets the nodes in a graph path. The resulting array retains the original order in the graph path. |
-| [`NORMALIZE`](/bigquery/docs/reference/standard-sql/string_functions#normalize) | Case-sensitively normalizes the characters in a `STRING` value. |
-| [`NORMALIZE_AND_CASEFOLD`](/bigquery/docs/reference/standard-sql/string_functions#normalize_and_casefold) | Case-insensitively normalizes the characters in a `STRING` value. |
-| [`NTH_VALUE`](/bigquery/docs/reference/standard-sql/navigation_functions#nth_value) | Gets a value for the Nth row of the current window frame. |
-| [`NTILE`](/bigquery/docs/reference/standard-sql/numbering_functions#ntile) | Gets the quantile bucket number (1-based) of each row within a window. |
-| [`OBJ.FETCH_METADATA`](/bigquery/docs/reference/standard-sql/objectref_functions#objfetch_metadata) | Fetches Cloud Storage metadata for a partially populated `ObjectRef` value. |
-| [`OBJ.GET_ACCESS_URL`](/bigquery/docs/reference/standard-sql/objectref_functions#objget_access_url) | Returns access URLs for a Cloud Storage object. |
-| [`OBJ.GET_READ_URL`](/bigquery/docs/reference/standard-sql/objectref_functions#objget_read_url) | Returns a read URL and status for a Cloud Storage object. |
-| [`OBJ.MAKE_REF`](/bigquery/docs/reference/standard-sql/objectref_functions#objmake_ref) | Creates an `ObjectRef` value that contains reference information for a Cloud Storage object. |
-| [`OCTET_LENGTH`](/bigquery/docs/reference/standard-sql/string_functions#octet_length) | Alias for `BYTE_LENGTH`. |
-| [`PARSE_BIGNUMERIC`](/bigquery/docs/reference/standard-sql/conversion_functions#parse_bignumeric) | Converts a `STRING` value to a `BIGNUMERIC` value. |
-| [`PARSE_DATE`](/bigquery/docs/reference/standard-sql/date_functions#parse_date) | Converts a `STRING` value to a `DATE` value. |
-| [`PARSE_DATETIME`](/bigquery/docs/reference/standard-sql/datetime_functions#parse_datetime) | Converts a `STRING` value to a `DATETIME` value. |
-| [`PARSE_JSON`](/bigquery/docs/reference/standard-sql/json_functions#parse_json) | Converts a JSON-formatted `STRING` value to a `JSON` value. |
-| [`PARSE_NUMERIC<`](/bigquery/docs/reference/standard-sql/conversion_functions#parse_numeric) |
+|  |

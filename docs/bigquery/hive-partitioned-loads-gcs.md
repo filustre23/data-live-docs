@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -16,7 +16,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 載入外部分區資料
 
-BigQuery 可以使用 Hive 分區配置，載入儲存在 Cloud Storage 中的資料。*Hive 分區*是指外部資料會整理成多個檔案，並採用命名慣例將檔案分成不同分區。詳情請參閱「[支援的資料版面配置](#supported_data_layouts)」。
+BigQuery 可以使用 Hive 分割配置載入儲存在 Cloud Storage 中的資料。*Hive 分區*是指外部資料會整理成多個檔案，並採用命名慣例將檔案分成不同分區。詳情請參閱「[支援的資料版面配置](#supported_data_layouts)」。
 
 根據預設，資料載入 BigQuery 後不會分區，除非您明確建立[分區資料表](https://docs.cloud.google.com/bigquery/docs/partitioned-tables?hl=zh-tw)。
 
@@ -35,14 +35,14 @@ BigQuery 可以使用 Hive 分區配置，載入儲存在 Cloud Storage 中的�
 5. 在「來源」部分，指定下列詳細資料：
 
 1. 在「Create table from」(使用下列資料建立資料表) 部分，選取「Google Cloud Storage」。
-2. 在「Select file from Cloud Storage bucket」(從 Cloud Storage 值區選取檔案)  中，使用[萬用字元](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#load-wildcards)輸入 Cloud Storage 資料夾的路徑。例如：`my_bucket/my_files*`。Cloud Storage 值區的位置必須與要建立、附加或覆寫的資料表所在的資料集位置相同。
+2. 在「Select file from Cloud Storage bucket」(從 Cloud Storage 值區選取檔案)  中，使用[萬用字元](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#load-wildcards)輸入 Cloud Storage 資料夾的路徑。例如：`my_bucket/my_files*`。Cloud Storage 值區的位置必須與要建立、附加或覆寫的表格所在的資料集位置相同。
 3. 從「檔案格式」清單中選取檔案類型。
 4. 選取「來源資料分割」核取方塊，然後在「選取來源 URI 前置字元」中輸入 Cloud Storage URI 前置字元。例如：`gs://my_bucket/my_files`。
-5. 在「Partition inference mode」(分割區推論模式) 部分中，選取下列其中一個選項：
+5. 在「分割區推論模式」部分中，選取下列其中一個選項：
    * **自動推斷類型**：將分區結構定義偵測模式設為 `AUTO`。
    * **將所有資料欄視為字串**：將分區結構定義偵測模式設為 `STRINGS`。
    * **提供我自己的**：將分區結構定義偵測模式設為 `CUSTOM`，然後手動輸入分區鍵的結構定義資訊。詳情請參閱「[提供自訂分區索引鍵結構定義](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs?hl=zh-tw#custom_partition_key_schema)」。
-6. 選用：如要要求所有查詢都必須使用分區篩選器，請選取「Require partition filter」(需要分區篩選器) 核取方塊。使用分區篩選器可以降低成本並提升效能。詳情請參閱「[在查詢中對分區鍵強制使用述詞篩選器](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-queries-gcs?hl=zh-tw#requiring_predicate_filters_on_partition_keys_in_queries)」。
+6. 選用：如要要求所有查詢都必須使用分區篩選器，請選取「需要分區篩選器」核取方塊。使用分區篩選器可以降低成本並提升效能。詳情請參閱「[在查詢中對分區鍵強制使用述詞篩選器](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-queries-gcs?hl=zh-tw#requiring_predicate_filters_on_partition_keys_in_queries)」。
 
 6. 在「目的地」部分，指定下列詳細資料：
    1. 在「Project」(專案) 部分，選取要在其中建立資料表的專案。
@@ -137,7 +137,7 @@ gs://my_bucket/my_table/dt=2019-10-31/lang=en/my_filename
 gs://my_bucket/my_table/dt=2018-10-31/lang=fr/my_filename
 ```
 
-在本例中，常見的來源 URI 前置字串為 `gs://my_bucket/my_table`。
+在本範例中，常見的來源 URI 前置字串為 `gs://my_bucket/my_table`。
 
 ### 不支援的資料配置
 
@@ -158,7 +158,7 @@ gs://my_bucket/my_table/lang=fr/dt=2018-10-31/my_filename
 
 BigQuery 支援三種 Hive 分區結構定義偵測模式：
 
-* `AUTO`：系統會自動偵測索引鍵名稱與類型。系統可偵測下列類型：
+* `AUTO`：系統會自動偵測索引鍵名稱與類型。可偵測到的類型如下：
 
   + [STRING](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#string_type)
   + [INTEGER](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#integer_types)
@@ -173,9 +173,9 @@ BigQuery 支援三種 Hive 分區結構定義偵測模式：
 
 #### 自訂分區索引鍵結構定義
 
-如要使用 `CUSTOM` 結構定義，必須在來源 URI 前置字串欄位中指定結構定義。使用 `CUSTOM` 結構定義可指定每個分區索引鍵的類型。這些值必須有效地剖析為指定類型，否則查詢作業會失敗。
+如要使用 `CUSTOM` 結構定義，請在來源 URI 前置字串欄位中指定結構定義。使用 `CUSTOM` 結構定義可指定每個分區索引鍵的類型。這些值必須有效地剖析為指定類型，否則查詢作業會失敗。
 
-舉例來說，如果將 `source_uri_prefix` 旗標設為 `gs://my_bucket/my_table/{dt:DATE}/{val:STRING}`，BigQuery 會將 `val` 視為 STRING、將 `dt` 視為 DATE，並將 `gs://my_bucket/my_table` 做為相符檔案的來源 URI 前置字串。
+舉例來說，如果您將 `source_uri_prefix` 旗標設為 `gs://my_bucket/my_table/{dt:DATE}/{val:STRING}`，BigQuery 會將 `val` 視為 STRING、將 `dt` 視為 DATE，並將 `gs://my_bucket/my_table` 做為相符檔案的來源 URI 前置字串。
 
 ## 限制
 
@@ -198,11 +198,11 @@ BigQuery 支援三種 Hive 分區結構定義偵測模式：
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-13 (世界標準時間)。
+上次更新時間：2026-10-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-13 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]

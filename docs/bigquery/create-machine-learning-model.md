@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -18,15 +18,15 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 本教學課程說明如何使用 BigQuery ML SQL 查詢建立邏輯迴歸模型。
 
-BigQuery ML 可讓您使用 SQL 查詢，在 BigQuery 中建立及訓練機器學習模型。這項功能可讓您使用 BigQuery SQL 編輯器等熟悉工具，使機器學習更容易上手，並免除將資料移至獨立機器學習環境的需求，進而加快開發速度。
+BigQuery ML 可讓您使用 SQL 查詢，在 BigQuery 中建立及訓練機器學習模型。這樣一來，您就能使用 BigQuery SQL 編輯器等熟悉工具，更輕鬆地運用機器學習技術，並省去將資料移至獨立機器學習環境的麻煩，進而加快開發速度。
 
-在本教學課程中，不論網站訪客是否確實完成交易，都可以使用 [BigQuery 專用的 Google Analytics 樣本資料集](https://support.google.com/analytics/answer/7586738?ref_topic=3416089&hl=zh-tw)來建立一個預測模型。如要瞭解 Analytics 資料集的結構定義，請參閱 Analytics 說明中心內的「[BigQuery 匯出結構定義](https://support.google.com/analytics/answer/3437719?hl=zh-tw)」。
+在本教學課程中，不論網站訪客是否確實完成交易，都可以使用 [BigQuery 專用的 Google Analytics 樣本資料集](https://support.google.com/analytics/answer/7586738?ref_topic=3416089&hl=zh-tw)來建立一個預測模型。如要瞭解 Analytics 資料集的結構定義，請參閱 Analytics 說明中心的「[BigQuery Export 結構定義](https://support.google.com/analytics/answer/3437719?hl=zh-tw)」一文。
 
-如要瞭解如何使用 Google Cloud 控制台使用者介面建立模型，請參閱[使用使用者介面處理模型](https://docs.cloud.google.com/bigquery/docs/create-machine-learning-model-console?hl=zh-tw)。
+如要瞭解如何使用 Google Cloud 控制台使用者介面建立模型，請參閱「[使用 UI 處理模型](https://docs.cloud.google.com/bigquery/docs/create-machine-learning-model-console?hl=zh-tw)」。
 
 ## 目標
 
-本教學課程說明如何執行下列工作：
+本教學課程將說明如何執行下列工作：
 
 * 使用 [`CREATE MODEL` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create?hl=zh-tw)建立二元邏輯迴歸模型。
 * 使用 [`ML.EVALUATE` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate?hl=zh-tw)評估模型。
@@ -41,7 +41,7 @@ BigQuery ML 可讓您使用 SQL 查詢，在 BigQuery 中建立及訓練機器�
 
 如要進一步瞭解 BigQuery 費用，請參閱 [BigQuery 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw)頁面。
 
-如要進一步瞭解 BigQuery ML 費用，請參閱 [BigQuery ML 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#bigquery-ml-pricing)。
+如要進一步瞭解 BigQuery ML 費用，請參閱「[BigQuery ML 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#bigquery-ml-pricing)」一文。
 
 ## 必要的角色
 
@@ -149,38 +149,43 @@ BigQuery ML 可讓您使用 SQL 查詢，在 BigQuery 中建立及訓練機器�
        another role** and add each additional role.
      - Click **Save**.
 
-1. 新專案會自動啟用 BigQuery。如要在現有專案中啟用 BigQuery，請前往
+1. 新專案會自動啟用 BigQuery。如要在現有的專案中啟用 BigQuery，請前往
 
-   啟用 BigQuery API。
+   如果尚未啟用 BigQuery API，請啟用。
 
    **啟用 API 時所需的角色**
 
-   您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用情形管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   如要啟用 API，您必須具備 `serviceusage.services.enable` 權限。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用情形管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
    [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery&hl=zh-tw)
 
 ## 建立資料集
 
-建立 BigQuery 資料集來儲存機器學習模型。
+如要建立 BigQuery 資料集，請選取下列任一選項：
 
 ### 控制台
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
-   [前往 BigQuery 頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在「Explorer」窗格中，按一下專案名稱。
-3. 依序點按 more\_vert「View actions」(查看動作) >「Create dataset」(建立資料集)。
-4. 在「建立資料集」頁面中，執行下列操作：
+   [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
+2. 點選左側窗格中的 explore「Explorer」。
+
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
+3. 在「Explorer」中展開專案，然後按一下「Datasets」。
+4. 在「資料集」頁面，按一下 add「建立資料集」。
+5. 在「建立資料集」窗格中，執行下列操作：
 
    * 在「Dataset ID」(資料集 ID) 中輸入 `bqml_tutorial`。
-   * 針對「Location type」(位置類型) 選取「Multi-region」(多區域)，然後選取「US」(美國)。
-   * 其餘設定請保留預設狀態，然後按一下「建立資料集」。
+   * 選取「資料位置」的「美國」。
+
+   其餘預設設定均保留原樣。
+6. 點選「建立資料集」。
 
 ### bq
 
 如要建立新的資料集，請使用 [`bq mk --dataset` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#mk-dataset)。
 
-1. 建立名為 `bqml_tutorial` 的資料集，並將資料位置設為 `US`。
+1. 建立名為 `bqml_tutorial` 的資料集，並將資料位置設為 `US`：
 
    ```
    bq mk --dataset \
@@ -196,7 +201,7 @@ BigQuery ML 可讓您使用 SQL 查詢，在 BigQuery 中建立及訓練機器�
 
 ### API
 
-請呼叫 [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert?hl=zh-tw) 方法，搭配已定義的[資料集資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets?hl=zh-tw)。
+使用已定義的[資料集資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets?hl=zh-tw)呼叫 [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert?hl=zh-tw) 方法：
 
 ```
 {
@@ -208,7 +213,7 @@ BigQuery ML 可讓您使用 SQL 查詢，在 BigQuery 中建立及訓練機器�
 
 ### BigQuery DataFrames
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -229,7 +234,7 @@ bqclient.create_dataset("bqml_tutorial", exists_ok=True)
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在查詢編輯器中執行下列陳述式：
+2. 在查詢編輯器執行下列陳述式：
 
    ```
    CREATE OR REPLACE MODEL `bqml_tutorial.sample_model`
@@ -246,42 +251,44 @@ bqclient.create_dataset("bqml_tutorial", exists_ok=True)
    _TABLE_SUFFIX BETWEEN '20160801' AND '20170630'
    ```
 
-   查詢需要幾分鐘才會完成。初次迭代作業完成後，您的模型 (`sample_model`) 會出現在導覽面板中。由於查詢是使用 `CREATE MODEL` 陳述式建立模型，因此您不會看到查詢結果。
+   查詢需要幾分鐘才會完成。第一次疊代完成後，模型 (`sample_model`) 會顯示在導覽面板中。由於查詢使用 `CREATE MODEL` 陳述式建立模型，因此您不會看到查詢結果。
 
 **查詢詳細資料**
 
 `CREATE MODEL` 陳述式會建立模型，然後使用查詢的 `SELECT` 陳述式擷取的資料訓練模型。
 
-`OPTIONS(model_type='logistic_reg')` 子句會建立[邏輯迴歸](https://en.wikipedia.org/wiki/Logistic_regression)模型。邏輯迴歸模型會將輸入資料分成兩個類別，然後估算資料屬於其中一個類別的機率。您要偵測的內容 (例如電子郵件是否為垃圾內容) 以 1 表示，其他值則以 0 表示。介於 0 到 1 之間的值，表示指定值屬於您嘗試偵測的類別的可能性。舉例來說，如果電子郵件的機率估計值為 0.9，則該郵件有 90% 的機率是垃圾郵件。
+`OPTIONS(model_type='logistic_reg')` 子句會建立[邏輯迴歸](https://en.wikipedia.org/wiki/Logistic_regression)模型。邏輯迴歸模型會將輸入資料分成兩類，然後估算資料屬於其中一類的機率。您要偵測的內容 (例如電子郵件是否為垃圾郵件) 以 1 表示，其他值則以 0 表示。介於 0 和 1 之間的值，表示指定值屬於您要偵測的類別的可能性。舉例來說，如果電子郵件的機率估計值為 0.9，則該郵件有 90% 的機率是垃圾郵件。
 
-這個查詢的 `SELECT` 語法會擷取下列欄位，模型會使用這些欄位預測顧客完成交易的機率：
+這個查詢的 `SELECT` 陳述式會擷取下列欄位，而這些欄位可被模型用來預測顧客完成交易的機率：
 
-* `totals.transactions`：訪客於當次工作階段內所達成的電子商務交易總數，若交易次數是 `NULL`，`label` 欄位的值就會被設為 `0`，否則該欄位就會被設定為 `1`，這些值皆可用來表示可能的結果。若要在 `CREATE MODEL` 陳述式中設定 `input_label_cols=` 選項，那麼建立一個名為 `label` 的別名是可行的替代方案。
+* `totals.transactions`：工作階段內發生的電子商務交易總數。如果交易次數為 `NULL`，則 `label` 欄中的值會設為 `0`。否則會設為 `1`。這些值皆可用來表示可能的結果。若要在 `CREATE MODEL` 陳述式中設定 `input_label_cols=` 選項，那麼建立一個名為 `label` 的別名是可行的替代方案。
 * `device.operatingSystem`：訪客裝置的作業系統。
-* `device.isMobile`：用來表示訪客的裝置是否為行動裝置。
-* `geoNetwork.country`：以 IP 位址為依據，顯示工作階段的來源國家/地區。
-* `totals.pageviews`：當次工作階段的總檢視頁數。
+* `device.isMobile`：指出訪客的裝置是否為行動裝置。
+* `geoNetwork.country`：工作階段來源國家/地區 (以 IP 位址為依據)。
+* `totals.pageviews`：工作階段內的網頁瀏覽總數。
 
-`FROM` 子句：導致查詢使用 `bigquery-public-data.google_analytics_sample.ga_sessions` 範例資料表訓練模型。這些資料表會依日期進行分片，因此您可以在資料表名稱中使用萬用字元來匯總資料表：`google_analytics_sample.ga_sessions_*`。
+`FROM` 子句：導致查詢使用 `bigquery-public-data.google_analytics_sample.ga_sessions` 範例資料表訓練模型。這些資料表會依日期分片，因此您可以在資料表名稱中使用萬用字元來匯總資料表：`google_analytics_sample.ga_sessions_*`。
 
 `WHERE` 子句 (`_TABLE_SUFFIX BETWEEN '20160801' AND '20170630'`) 會限制查詢掃描的資料表數量。而所掃描的日期區間則是從 2016 年 8 月 1 日到 2017 年 6 月 30 日。
 
 ### BigQuery DataFrames
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
 
 ```
-from bigframes.ml.linear_model import LogisticRegression
 import bigframes.pandas as bpd
+from bigframes.bigquery import ml
 
-# Start by selecting the data you'll use for training. `read_gbq` accepts
-# either a SQL query or a table ID. Since this example selects from multiple
-# tables via a wildcard, use SQL to define this data. Watch issue
-# https://github.com/googleapis/python-bigquery-dataframes/issues/169
-# for updates to `read_gbq` to support wildcard tables.
+# Set partial ordering mode for BigQuery DataFrames.
+# For more information, see the BigQuery DataFrames performance documentation:
+# https://cloud.google.com/bigquery/docs/dataframes-performance#partial-ordering-mode
+bpd.options.bigquery.ordering_mode = "partial"
+
+# Start by selecting the data you'll use for training.
+# The filters parameter limits the number of tables scanned by the query.
 
 df = bpd.read_gbq_table(
     "bigquery-public-data.google_analytics_sample.ga_sessions_*",
@@ -320,10 +327,11 @@ country = df["geoNetwork"].struct.field("country").fillna("")
 # Extract the total number of page views within the session.
 pageviews = df["totals"].struct.field("pageviews").fillna(0)
 
-# Combine all the feature columns into a single DataFrame
+# Combine all the feature columns and the label column into a single DataFrame
 # to use as training data.
-features = bpd.DataFrame(
+training_data = bpd.DataFrame(
     {
+        "label": label,
         "os": operating_system,
         "is_mobile": is_mobile,
         "country": country,
@@ -331,15 +339,20 @@ features = bpd.DataFrame(
     }
 )
 
-# Logistic Regression model splits data into two classes, giving the
-# a confidence score that the data is in one of the classes.
-model = LogisticRegression()
-model.fit(features, label)
-
-# The model.fit() call above created a temporary model.
-# Use the to_gbq() method to write to a permanent location.
-model.to_gbq(
+# A Logistic Regression model splits data into two classes, giving a
+# confidence score that the data is in one of the classes.
+#
+# Use ml.create_model to create and train the model in BigQuery.
+# The options parameter specifies the model type and the label column.
+# For more information, see the BigQuery DataFrames API reference documentation:
+# https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.create_model.html#bigframes.bigquery.ml.create_model
+ml.create_model(
     your_model_id,  # For example: "bqml_tutorial.sample_model",
+    options={
+        "model_type": "LOGISTIC_REG",
+        "input_label_cols": ["label"],
+    },
+    training_data=training_data,
     replace=True,
 )
 ```
@@ -350,9 +363,9 @@ model.to_gbq(
 
 機器學習演算法會採用多個已知預測結果的範例 (例如使用者購物記錄)，並反覆調整模型中的各種權重，使模型的預測結果與實際值相符。能達到這個目標，是因為機器學習演算法透過「遺失」指標降低模型的錯誤預測。
 
-預期每次疊代時，損失應會減少，最好是降至零。遺失值 0，代表模型具有 100% 的正確率。
+預期每次疊代時，損失都會減少，最好是降至零。遺失值 0，代表模型具有 100% 的正確率。
 
-訓練模型時，BigQuery ML 會自動將輸入資料拆分為[訓練集和評估集](https://en.wikipedia.org/wiki/Training,_validation,_and_test_data_sets)，避免模型[過度配適](https://en.wikipedia.org/wiki/Overfitting)。這是必要步驟，因為訓練演算法不能過度配合訓練資料，否則就無法歸納新樣本。
+訓練模型時，BigQuery ML 會自動將輸入資料分割為[訓練和評估集](https://en.wikipedia.org/wiki/Training,_validation,_and_test_data_sets)，避免模型[過度配適](https://en.wikipedia.org/wiki/Overfitting)。這是必要步驟，因為訓練演算法不能過度配合訓練資料，否則就無法歸納新樣本。
 
 使用 Google Cloud 控制台，查看模型在訓練疊代期間的損失變化：
 
@@ -362,24 +375,24 @@ model.to_gbq(
 2. 點選左側窗格中的 explore「Explorer」。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
-3. 在「Explorer」窗格中展開專案，按一下「Datasets」，然後按一下 `bqml_tutorial` 資料集。
+3. 在「Explorer」窗格中展開專案，按一下「Datasets」，然後點選 `bqml_tutorial` 資料集。
 4. 按一下「模型」分頁標籤，然後點選 `sample_model` 模型。
-5. 按一下「訓練」分頁標籤，然後查看「損失」圖表。「損失」圖表顯示訓練資料集疊代期間損失指標的變化。將游標懸停在圖表上，您會看到「訓練損失」和「評估損失」的線條。由於您執行的是邏輯迴歸，因此訓練損失值是使用訓練資料計算出的[對數損失](https://en.wikipedia.org/wiki/Cross-entropy#Cross-entropy_loss_function_and_logistic_regression)。評估損失是在評估資料上計算的對數損失。這兩種損失類型都代表平均損失值，是針對每次疊代中各資料集的所有範例計算平均值。
+5. 按一下「訓練」分頁標籤，然後查看「損失」圖表。「損失」圖表會顯示訓練資料集疊代期間損失指標的變化。將游標懸停在圖表上，您會看到「訓練損失」和「評估損失」的線條。由於您執行了邏輯迴歸，因此訓練損失值是使用訓練資料計算而來的[對數損失](https://en.wikipedia.org/wiki/Cross-entropy#Cross-entropy_loss_function_and_logistic_regression)。評估損失是根據評估資料計算出的對數損失。這兩種損失類型都代表平均損失值，是針對每次疊代中各資料集的全部範例計算平均值。
 
 您也可以使用 [`ML.TRAINING_INFO` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-train?hl=zh-tw)查看模型訓練結果。
 
 ## 評估模型
 
-使用 `ML.EVALUATE` 函式評估模型效能。`ML.EVALUATE` 函式會根據實際資料來評估模型產生的預測值，如要計算邏輯迴歸專用的指標，可以使用 [`ML.ROC_CURVE` SQL 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-roc?hl=zh-tw)或 [`bigframes.ml.metrics.roc_curve` BigQuery DataFrames 函式](https://dataframes.bigquery.dev/reference/api/bigframes.ml.metrics.roc_curve.html#bigframes.ml.metrics.roc_curve)。
+使用 [`ML.EVALUATE` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate?hl=zh-tw)或 [`bigframes.bigquery.ml.evaluate` BigQuery DataFrames 函式](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.evaluate.html#bigframes.bigquery.ml.evaluate)評估模型效能。`ML.EVALUATE` 和 `bigframes.bigquery.ml.evaluate` 函式會根據實際資料，評估模型產生的預測值。如要計算邏輯迴歸專用指標，可以使用 [`ML.ROC_CURVE` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-roc?hl=zh-tw)。
 
-在本教學課程中，您會使用偵測交易的二元分類模型。「`label`」欄中的值是模型產生的兩個類別：`0` (無交易) 和 `1` (已交易)。
+在本教學課程中，您會使用偵測交易的二元分類模型。`label` 欄中的值是模型產生的兩個類別：`0` (無交易) 和 `1` (已完成交易)。
 
 ### SQL
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在查詢編輯器中執行下列陳述式：
+2. 在查詢編輯器執行下列陳述式：
 
    ```
    SELECT
@@ -408,22 +421,22 @@ model.to_gbq(
      +--------------------+---------------------+---------------------+---------------------+---------------------+--------------------+
    ```
 
-   由於您執行了邏輯迴歸，因此結果包含以下資料欄：
+   由於您執行了邏輯迴歸，因此結果會包含下列資料欄：
 
    * [`precision`](https://developers.google.com/machine-learning/glossary/?hl=zh-tw#precision)：分類模型的指標，該指標可確認當模型預測到正向類別時的正確發生頻率。
    * [`recall`](https://developers.google.com/machine-learning/glossary/?hl=zh-tw#recall)：分類模型的指標，可用來回答下列問題：在所有可能的正向標籤中，模型可以正確辨識出多少個標籤？
-   * [`accuracy`](https://developers.google.com/machine-learning/glossary/?hl=zh-tw#accuracy)：準確率就是分類模型預測成功的比例。
+   * [`accuracy`](https://developers.google.com/machine-learning/glossary/?hl=zh-tw#accuracy)：
+     準確率為分類模型預測成功的比例。
    * [`f1_score`](https://en.wikipedia.org/wiki/F1_score)：
-     衡量模型準確率的指標，f1 分數是精確度與召回率的調和平均數，f1 分數的最佳值為 1，最差值為 0。
+     衡量模型準確率的指標，F1 分數是精確度與召回率的調和平均數，f1 分數的最佳值為 1，最差值為 0。
    * [`log_loss`](https://en.wikipedia.org/wiki/Cross_entropy#Cross-entropy_error_function_and_logistic_regression)：用於邏輯迴歸中的損失函式，可衡量模型預測結果與正確標籤之間的差距。
-   * [`roc_auc`](https://developers.google.com/machine-learning/glossary/?hl=zh-tw#AUC)：
-     [ROC](https://developers.google.com/machine-learning/glossary/?hl=zh-tw#ROC) 曲線下的面積。也就是分類器對於隨機挑選的正向樣本確實是正向的信心，高於隨機挑選的負向樣本其實是正向的情況發生機率。詳情請參閱機器學習密集課程中的「[分類](https://developers.google.com/machine-learning/crash-course/classification/video-lecture?hl=zh-tw)」一文。
+   * [`roc_auc`](https://developers.google.com/machine-learning/glossary/?hl=zh-tw#AUC)：[ROC](https://developers.google.com/machine-learning/glossary/?hl=zh-tw#ROC) 曲線下方的面積。也就是分類器對於隨機挑選的正向樣本確實是正向的信心，高於隨機挑選的負向樣本其實是正向的情況發生機率。詳情請參閱機器學習密集課程的「[分類](https://developers.google.com/machine-learning/crash-course/classification/video-lecture?hl=zh-tw)」。
 
 **查詢詳細資料**
 
 初始 `SELECT` 陳述式會擷取模型中的資料欄。
 
-`FROM` 子句會對模型使用 `ML.EVALUATE` 函式。
+`FROM` 子句會針對模型使用 `ML.EVALUATE` 函式。
 
 巢狀 `SELECT` 陳述式和 `FROM` 子句與 `CREATE MODEL` 查詢中的相同。
 
@@ -431,19 +444,19 @@ model.to_gbq(
 
 ### BigQuery DataFrames
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
 
 ```
 import bigframes.pandas as bpd
+from bigframes.bigquery import ml
 
-# Select model you'll use for evaluating. `read_gbq_model` loads model data from a
-# BigQuery, but you could also use the `model` object from the previous steps.
-model = bpd.read_gbq_model(
-    your_model_id,  # For example: "bqml_tutorial.sample_model",
-)
+# Set partial ordering mode for BigQuery DataFrames.
+# For more information, see the BigQuery DataFrames performance documentation:
+# https://cloud.google.com/bigquery/docs/dataframes-performance#partial-ordering-mode
+bpd.options.bigquery.ordering_mode = "partial"
 
 # The filters parameter limits the number of tables scanned by the query.
 # The date range scanned is July 1, 2017 to August 1, 2017. This is the
@@ -465,8 +478,9 @@ operating_system = operating_system.fillna("")
 is_mobile = df["device"].struct.field("isMobile")
 country = df["geoNetwork"].struct.field("country").fillna("")
 pageviews = df["totals"].struct.field("pageviews").fillna(0)
-features = bpd.DataFrame(
+eval_data = bpd.DataFrame(
     {
+        "label": label,
         "os": operating_system,
         "is_mobile": is_mobile,
         "country": country,
@@ -474,8 +488,10 @@ features = bpd.DataFrame(
     }
 )
 
-# Some models include a convenient .score(X, y) method for evaluation with a preset accuracy metric:
-
+# Use the ml.evaluate method to evaluate the model with test data.
+# For more information, see the BigQuery DataFrames API reference documentation:
+# https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.evaluate.html#bigframes.bigquery.ml.evaluate
+#
 # Because you performed a logistic regression, the results include the following columns:
 
 # - precision — A metric for classification models. Precision identifies the frequency with
@@ -494,26 +510,29 @@ features = bpd.DataFrame(
 
 # - roc_auc — The area under the ROC curve. This is the probability that a classifier is more confident that
 # a randomly chosen positive example
-# is actually positive than that a randomly chosen negative example is positive. For more information,
-# see ['Classification']('https://developers.google.com/machine-learning/crash-course/classification/video-lecture')
-# in the Machine Learning Crash Course.
+# is actually positive than that a randomly chosen negative example is positive.
+# For more information, see Classification in the Machine Learning Crash Course:
+# https://developers.google.com/machine-learning/crash-course/classification/video-lecture
 
-model.score(features, label)
+ml.evaluate(
+  evaluateodel_id,  # For example: "bqml_tutorial.sample_model",
+    input_=eval_data,
+)
 #    precision    recall  accuracy  f1_score  log_loss   roc_auc
-# 0   0.412621  0.079143  0.985074  0.132812  0.049764  0.974285
+# 0   0.451613  0.078212  0.985316  0.133333  0.046824  0.980537
 # [1 rows x 6 columns]
 ```
 
 ## 使用模型預測結果
 
-使用模型預測各國家/地區網站訪客的交易次數。
+使用模型預測各國家/地區的網站訪客交易量。
 
 ### SQL
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在查詢編輯器中執行下列陳述式：
+2. 在查詢編輯器執行下列陳述式：
 
    ```
    SELECT
@@ -556,7 +575,7 @@ model.score(features, label)
 
 **查詢詳細資料**
 
-初始 `SELECT` 陳述式會擷取 `country` 資料欄，並加總 `predicted_label` 資料欄。`predicted_label` 資料欄是由 `ML.PREDICT` 函式產生。使用 `ML.PREDICT` 函式時，模型的輸出資料欄名稱為 `predicted_<label_column_name>`。對線性迴歸模型來說，`predicted_label` 是 `label` 的估計值。對於邏輯迴歸模型，`predicted_label` 是最能描述指定輸入資料值的標籤，也就是 `0` 或 `1`。
+初始 `SELECT` 陳述式會擷取 `country` 欄，並加總 `predicted_label` 欄。`predicted_label` 欄是由 `ML.PREDICT` 函式產生。使用 `ML.PREDICT` 函式時，模型的輸出資料欄名稱為 `predicted_<label_column_name>`。針對線性迴歸模型，`predicted_label` 是 `label` 的預估值。如果是邏輯迴歸模型，`predicted_label` 是最能描述指定輸入資料值的標籤，可以是 `0` 或 `1`。
 
 `ML.PREDICT` 函式用於透過模型預測結果。
 
@@ -570,21 +589,19 @@ model.score(features, label)
 
 ### BigQuery DataFrames
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
 
 ```
 import bigframes.pandas as bpd
+from bigframes.bigquery import ml
 
-# Select model you'll use for predicting.
-# `read_gbq_model` loads model data from
-# BigQuery, but you could also use the `model`
-# object from the previous steps.
-model = bpd.read_gbq_model(
-    your_model_id,  # For example: "bqml_tutorial.sample_model",
-)
+# Set partial ordering mode for BigQuery DataFrames.
+# For more information, see the BigQuery DataFrames performance documentation:
+# https://cloud.google.com/bigquery/docs/dataframes-performance#partial-ordering-mode
+bpd.options.bigquery.ordering_mode = "partial"
 
 # The filters parameter limits the number of tables scanned by the query.
 # The date range scanned is July 1, 2017 to August 1, 2017. This is the
@@ -612,15 +629,18 @@ features = bpd.DataFrame(
         "pageviews": pageviews,
     }
 )
-# Use Logistic Regression predict method to predict results
-# using your model.
-# Find more information here in
-# [BigFrames](https://cloud.google.com/python/docs/reference/bigframes/latest/bigframes.ml.linear_model.LogisticRegression#bigframes_ml_linear_model_LogisticRegression_predict)
 
-predictions = model.predict(features)
+# Use the ml.predict method to predict results using your model.
+# For more information, see the BigQuery DataFrames API reference documentation:
+# https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.predict.html#bigframes.bigquery.ml.predict
+
+predictions = ml.predict(
+    your_model_id,  # For example: "bqml_tutorial.sample_model",
+    input_=features,
+)
 
 # Call groupby method to group predicted_label by country.
-# Call sum method to get the total_predicted_label by country.
+# Call sum method to get the total_predicted_purchases by country.
 total_predicted_purchases = predictions.groupby(["country"])[
     ["predicted_label"]
 ].sum()
@@ -631,9 +651,9 @@ total_predicted_purchases = predictions.groupby(["country"])[
 total_predicted_purchases.sort_values(ascending=False).head(10)
 
 # country
-# United States    220
-# Taiwan             8
-# Canada             7
+# United States    162
+# Taiwan             5
+# Canada             3
 # India              2
 # Japan              2
 # Turkey             2
@@ -646,16 +666,17 @@ total_predicted_purchases.sort_values(ascending=False).head(10)
 
 ## 預測各使用者的購買量
 
-預測每一位網站訪客的交易次數。
+預測每位網站訪客的交易量。
 
 ### SQL
 
-這項查詢與前一節的查詢相同，只有 `GROUP BY` 子句不同。這裡的 `GROUP BY` 子句 (`GROUP BY fullVisitorId`) 用於依訪客 ID 分組結果。
+這項查詢與上一節的查詢相同，只有 `GROUP BY` 子句不同。這裡的 `GROUP BY` 子句 (`GROUP BY fullVisitorId`
+) 用於依訪客 ID 分組結果。
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在查詢編輯器中執行下列陳述式：
+2. 在查詢編輯器執行下列陳述式：
 
    ```
    SELECT
@@ -699,21 +720,19 @@ total_predicted_purchases.sort_values(ascending=False).head(10)
 
 ### BigQuery DataFrames
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
 
 ```
 import bigframes.pandas as bpd
+from bigframes.bigquery import ml
 
-# Select model you'll use for predicting.
-# `read_gbq_model` loads model data from
-# BigQuery, but you could also use the `model`
-# object from the previous steps.
-model = bpd.read_gbq_model(
-    your_model_id,  # For example: "bqml_tutorial.sample_model",
-)
+# Set partial ordering mode for BigQuery DataFrames.
+# For more information, see the BigQuery DataFrames performance documentation:
+# https://cloud.google.com/bigquery/docs/dataframes-performance#partial-ordering-mode
+bpd.options.bigquery.ordering_mode = "partial"
 
 # The filters parameter limits the number of tables scanned by the query.
 # The date range scanned is July 1, 2017 to August 1, 2017. This is the
@@ -745,10 +764,17 @@ features = bpd.DataFrame(
     }
 )
 
-predictions = model.predict(features)
+# Use the ml.predict method to predict results using your model.
+# For more information, see the BigQuery DataFrames API reference documentation:
+# https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.predict.html#bigframes.bigquery.ml.predict
+
+predictions = ml.predict(
+    your_model_id,  # For example: "bqml_tutorial.sample_model",
+    input_=features,
+)
 
 # Call groupby method to group predicted_label by visitor.
-# Call sum method to get the total_predicted_label by visitor.
+# Call sum method to get the total_predicted_purchases by visitor.
 total_predicted_purchases = predictions.groupby(["fullVisitorId"])[
     ["predicted_label"]
 ].sum()
@@ -759,16 +785,16 @@ total_predicted_purchases = predictions.groupby(["fullVisitorId"])[
 total_predicted_purchases.sort_values(ascending=False).head(10)
 
 # fullVisitorId
-# 9417857471295131045    4
+# 9417857471295131045    3
 # 0376394056092189113    2
-# 0456807427403774085    2
 # 057693500927581077     2
 # 112288330928895942     2
 # 1280993661204347450    2
-# 2105122376016897629    2
-# 2158257269735455737    2
 # 2969418676126258798    2
-# 489038402765684003     2
+# 7420300501523012460    2
+# 806992249032686650     2
+# 8388931032955052746    2
+# 0082806901961150595    1
 # Name: predicted_label, dtype: Int64
 ```
 
@@ -776,7 +802,7 @@ total_predicted_purchases.sort_values(ascending=False).head(10)
 
 為了避免系統向您的 Google Cloud 帳戶收取本頁面所用資源的費用，請按照下列步驟操作。
 
-您可以刪除建立的專案，或保留專案並刪除資料集。
+您可以刪除自己建立的專案，或保留專案並刪除資料集。
 
 ### 刪除資料集
 
@@ -821,11 +847,11 @@ total_predicted_purchases.sort_values(ascending=False).head(10)
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-18 (世界標準時間)。
+上次更新時間：2026-10-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-18 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]

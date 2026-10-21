@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -25,12 +25,13 @@ Google uses AI technology to translate content into your preferred language. AI 
 * 使用資料操縱語言 (DML) 修改資料表資料
 * 複製資料表資料
 * 匯出資料表資料
+* 稽核資料表資料
 
 如需管理資料表結構定義的相關資訊，請參閱[修改資料表結構定義](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas?hl=zh-tw)一文。
 
 ## 事前準備
 
-授予角色，讓需要執行本文件各項工作的使用者取得必要權限。執行工作所需的權限 (如有) 會列在工作「必要權限」部分。
+授予角色，將必要權限授予需要執行本文件各項工作的使用者。執行工作所需的權限 (如有) 會列在工作「必要權限」部分。
 
 ## 將資料載入至資料表
 
@@ -38,16 +39,16 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 如要深入瞭解如何載入資料，請參閱說明文件以瞭解來源資料的格式與位置：
 
-* 如要深入瞭解如何從 Cloud Storage 載入資料，請參閱：
+* 關於如何從 Cloud Storage 載入資料，請參閱以下說明：
 
   + [載入 Avro 資料](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-avro?hl=zh-tw)
   + [載入 CSV 資料](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv?hl=zh-tw)
   + [載入 JSON 資料](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json?hl=zh-tw)
   + [載入 Parquet 資料](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet?hl=zh-tw)
   + [載入 ORC 資料](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc?hl=zh-tw)
-  + [從 Datastore 匯出內容載入資料](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-datastore?hl=zh-tw)
+  + [從 Datastore 匯出檔案載入資料](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-datastore?hl=zh-tw)
   + [從 Firestore 匯出檔案載入資料](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-firestore?hl=zh-tw)
-* 如要進一步瞭解如何從本機來源載入資料，請參閱[從本機檔案載入資料](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw)。
+* 如要進一步瞭解如何從本機來源載入資料，請參閱「[從本機檔案載入資料](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw)」。
 
 ## 附加與覆寫資料表資料
 
@@ -75,7 +76,7 @@ Google uses AI technology to translate content into your preferred language. AI 
     <column3>) (SELECT * FROM <projectID>.<datasetID>.<table2>)
 ```
 
-如需使用查詢結果來附加或覆寫資料的詳細資訊，請參閱[寫入查詢結果](https://docs.cloud.google.com/bigquery/docs/writing-results?hl=zh-tw#writing_query_results)一文。
+如要進一步瞭解如何使用查詢結果附加或覆寫資料，請參閱「[寫入查詢結果](https://docs.cloud.google.com/bigquery/docs/writing-results?hl=zh-tw#writing_query_results)」一文。
 
 ## 瀏覽資料表中的資料
 
@@ -112,10 +113,10 @@ Google uses AI technology to translate content into your preferred language. AI 
 1. 在 Google Cloud 控制台開啟「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 點選左側窗格中的 explore「Explorer」：
+2. 點選左側窗格中的 explore「Explorer」。
 
-   如果沒有看到左側窗格，請按一下「展開左側窗格」圖示 last\_page 開啟窗格。
-3. 在「Explorer」窗格中展開專案，點選「Datasets」(資料集)，然後選取資料集。
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
+3. 在「Explorer」窗格中展開專案，按一下「Datasets」(資料集)，然後選取資料集。
 4. 依序點選「總覽」**>「表格」**，然後選取所需表格。
 5. 按一下「詳細資料」，並記下「列數」中的值。使用 bq 指令列工具或 API 時，您可能需要這個值來控管結果的起點。
 6. 按一下 [Preview] (預覽)。畫面上會顯示一組資料範例。
@@ -142,7 +143,7 @@ project_id:dataset.table
 
 * integer1 是要顯示的列數。
 * integer2 是顯示資料前略過的列數。
-* columns 是以逗號分隔的資料欄清單。
+* columns 是以逗號分隔的清單。
 * project\_id 是您的專案 ID。
 * dataset 是包含此資料表的資料集名稱。
 * table 是要瀏覽的資料表名稱。
@@ -181,13 +182,13 @@ bq head --start_row 100 --selected_fields "field1,field2" mydataset.mytable
 
 **附註：**如果您要求的 `startIndex` 超過最後一列，則這個方法雖然仍會成功傳回結果，但不會包含 `rows` 屬性。您可以呼叫 [`tables.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get?hl=zh-tw) 方法並檢查 `numRows` 屬性，藉此查看資料表的列數。
 
-傳回的值會以 JSON 物件包裝，而您必須剖析這個物件，如 [`tabledata.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list?hl=zh-tw) 參考說明文件所述。
+傳回的值會以 JSON 物件包裝，而您必須剖析這個物件，如 [`tabledata.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list?hl=zh-tw) 參考文件所述。
 
 ### C#
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 C# 設定操作說明進行操作。詳情請參閱 [BigQuery C# API 參考說明文件](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 C# 設定說明操作。詳情請參閱 [BigQuery C# API 參考說明文件](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 using Google.Api.Gax;
@@ -225,9 +226,9 @@ public class BigQueryBrowseTable
 
 ### Go
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Go 設定操作說明進行操作。詳情請參閱 [BigQuery Go API 參考說明文件](https://godoc.org/cloud.google.com/go/bigquery)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Go 設定說明操作。詳情請參閱 [BigQuery Go API 參考說明文件](https://godoc.org/cloud.google.com/go/bigquery)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 根據預設，[Go 專用的 Cloud 用戶端程式庫](https://docs.cloud.google.com/bigquery/docs/reference/libraries?hl=zh-tw)會自動進行分頁，因此您無須自行實作分頁程序，例如：
 
@@ -273,9 +274,9 @@ func browseTable(w io.Writer, projectID, datasetID, tableID string) error {
 
 ### Java
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定操作說明進行操作。詳情請參閱 [BigQuery Java API 參考說明文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定說明操作。詳情請參閱 [BigQuery Java API 參考說明文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 import com.google.cloud.bigquery.BigQuery;
@@ -326,9 +327,9 @@ public class BrowseTable {
 
 ### Node.js
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定操作說明進行操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 根據預設，[Node.js 適用的 Cloud 用戶端程式庫](https://docs.cloud.google.com/bigquery/docs/reference/libraries?hl=zh-tw)會自動進行分頁，因此您無須自行實作分頁程序，例如：
 
@@ -359,9 +360,9 @@ async function browseRows() {
 
 ### PHP
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 PHP 設定操作說明進行操作。詳情請參閱 [BigQuery PHP API 參考說明文件](https://docs.cloud.google.com/php/docs/reference/cloud-bigquery/latest/BigQueryClient?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 PHP 設定說明操作。詳情請參閱 [BigQuery PHP API 參考說明文件](https://docs.cloud.google.com/php/docs/reference/cloud-bigquery/latest/BigQueryClient?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 [PHP 適用的 Cloud 用戶端程式庫](https://docs.cloud.google.com/bigquery/docs/reference/libraries?hl=zh-tw)會透過產生器函式 `rows` 在疊代作業期間擷取下一頁的結果，藉此自動進行分頁。
 
@@ -398,9 +399,9 @@ foreach ($table->rows($options) as $row) {
 
 ### Python
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定操作說明進行操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 from google.cloud import bigquery
@@ -442,9 +443,9 @@ for row in rows:
 
 ### Ruby
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Ruby 設定操作說明進行操作。詳情請參閱 [BigQuery Ruby API 參考說明文件](https://googleapis.dev/ruby/google-cloud-bigquery/latest/Google/Cloud/Bigquery.html)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Ruby 設定說明操作。詳情請參閱 [BigQuery Ruby API 參考說明文件](https://googleapis.dev/ruby/google-cloud-bigquery/latest/Google/Cloud/Bigquery.html)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 [Ruby 適用的 Cloud 用戶端程式庫](https://docs.cloud.google.com/bigquery/docs/reference/libraries?hl=zh-tw)會透過 `Table#data` 和 `Data#next` 自動進行分頁。
 
@@ -474,7 +475,7 @@ end
 * **[互動式查詢作業](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)**。根據預設，BigQuery 會以互動式查詢工作執行查詢，這類工作會盡快開始執行。
 * **[批次查詢工作](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#batch)**。批次查詢的優先順序低於互動式查詢。如果專案或預訂項目已用盡所有可用的運算資源，批次查詢就更有可能排入佇列，並留在佇列中。批次查詢開始執行後，運作方式與互動式查詢相同。詳情請參閱「[查詢佇列](https://docs.cloud.google.com/bigquery/docs/query-queues?hl=zh-tw)」。
 * **[持續查詢工作](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction?hl=zh-tw)**。
-  這些工作會持續執行查詢，讓您即時分析 BigQuery 中的輸入資料，然後將結果寫入 BigQuery 資料表，或將結果匯出至 Bigtable 或 Pub/Sub。這項功能可用於執行時間敏感型工作，例如建立洞察資料並立即採取行動、套用即時機器學習 (ML) 推論，以及建構事件導向資料管道。
+  透過這些工作，查詢會持續執行，讓您即時分析傳入 BigQuery 的資料，然後將結果寫入 BigQuery 資料表，或將結果匯出至 Bigtable 或 Pub/Sub。您可以使用這項功能執行具時效性的工作，例如建立洞察資料並立即採取行動、套用即時機器學習 (ML) 推論，以及建構事件導向資料管道。
 
 您可以使用下列方法執行查詢工作：
 
@@ -506,11 +507,18 @@ end
 
 ## 匯出資料表資料
 
-您可以將資料表資料匯出到 Cloud Storage 值區，格式為 CSV、JSON、Avro 或 Parquet ([預覽版](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages))。系統不支援將資料匯出至本機電腦，但您可使用 Google Cloud 控制台[下載和儲存查詢結果](https://docs.cloud.google.com/bigquery/docs/writing-results?hl=zh-tw#downloading-saving-results-console)。
+您可以將資料表資料匯出至 Cloud Storage bucket，格式為 CSV、JSON、Avro 或 Parquet ([預覽版](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages))。系統不支援將資料匯出至本機電腦，但您可使用 Google Cloud 控制台[下載和儲存查詢結果](https://docs.cloud.google.com/bigquery/docs/writing-results?hl=zh-tw#downloading-saving-results-console)。
 
 詳情請參閱[匯出資料表資料](https://docs.cloud.google.com/bigquery/docs/exporting-data?hl=zh-tw)一文。
 
-## 表格安全性
+## 稽核資料表資料
+
+如要稽核活動及追蹤資料表中的資料修改，請執行下列其中一項操作：
+
+* 如要追蹤特定時間範圍內對資料表所做的變更記錄，請使用 [BigQuery 變更記錄](https://docs.cloud.google.com/bigquery/docs/change-history?hl=zh-tw)。您可以使用 GoogleSQL 資料表函式查看特定類型的變更，例如附加或突變。
+* 如要判斷特定時間範圍內是否修改過資料表資料，請查詢 [`INFORMATION_SCHEMA.TABLE_STORAGE`](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage?hl=zh-tw) 檢視區塊中的 `storage_last_modified_time` 欄位。這個欄位會傳回資料寫入資料表的最新時間。
+
+## 資料表安全性
 
 如要控管 BigQuery 資料表的存取權，請參閱「[使用 IAM 控管資源存取權](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam?hl=zh-tw)」。
 
@@ -519,8 +527,9 @@ end
 * 如要深入瞭解如何載入資料，請參閱[載入資料簡介](https://docs.cloud.google.com/bigquery/docs/loading-data?hl=zh-tw)。
 * 如要深入瞭解如何查詢資料，請參閱[查詢 BigQuery 資料簡介](https://docs.cloud.google.com/bigquery/docs/query-overview?hl=zh-tw)。
 * 如要深入瞭解如何修改資料表結構定義，請參閱[修改資料表結構定義](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas?hl=zh-tw)。
-* 關於如何建立及使用資料表，請參閱[建立及使用資料表](https://docs.cloud.google.com/bigquery/docs/tables?hl=zh-tw)一文。
-* 關於如何管理資料表，請參閱[管理資料表](https://docs.cloud.google.com/bigquery/docs/managing-tables?hl=zh-tw)一文。
+* 如要深入瞭解如何建立與使用資料表，請參閱[建立與使用資料表](https://docs.cloud.google.com/bigquery/docs/tables?hl=zh-tw)一文。
+* 如要深入瞭解如何管理資料表，請參閱[管理資料表](https://docs.cloud.google.com/bigquery/docs/managing-tables?hl=zh-tw)。
+* 如要進一步瞭解變更記錄，請參閱「[使用變更記錄](https://docs.cloud.google.com/bigquery/docs/change-history?hl=zh-tw)」。
 
 
 
@@ -529,11 +538,11 @@ end
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-20 (世界標準時間)。
+上次更新時間：2026-10-19 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-20 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-19 (世界標準時間)。"],[],[]]

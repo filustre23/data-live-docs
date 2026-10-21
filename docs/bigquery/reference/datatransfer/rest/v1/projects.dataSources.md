@@ -65,7 +65,7 @@ A parameter used to define custom fields in a data source definition.
 
 | JSON representation |
 | --- |
-| ``` {   "paramId": string,   "displayName": string,   "description": string,   "type": enum (Type),   "required": boolean,   "repeated": boolean,   "validationRegex": string,   "allowedValues": [     string   ],   "minValue": number,   "maxValue": number,   "fields": [     {       object (DataSourceParameter)     }   ],   "validationDescription": string,   "validationHelpUrl": string,   "immutable": boolean,   "recurse": boolean,   "deprecated": boolean,   "maxListSize": string } ``` |
+| ``` {   "paramId": string,   "displayName": string,   "description": string,   "type": enum (Type),   "required": boolean,   "repeated": boolean,   "validationRegex": string,   "allowedValues": [     string   ],   "minValue": number,   "maxValue": number,   "fields": [     {       object (DataSourceParameter)     }   ],   "validationDescription": string,   "validationHelpUrl": string,   "immutable": boolean,   "recurse": boolean,   "deprecated": boolean,   "secretManagerAllowed": boolean,   "maxListSize": string } ``` |
 
 | Fields | |
 | --- | --- |
@@ -85,6 +85,7 @@ A parameter used to define custom fields in a data source definition.
 | `immutable` | `boolean`  Cannot be changed after initial creation. |
 | `recurse` | `boolean`  Deprecated. This field has no effect. |
 | `deprecated` | `boolean`  If true, it should not be used in new transfers, and it should not be visible to users. |
+| `secretManagerAllowed` | `boolean`  Output only. If true, the parameter value can be provided through Secret Manager. |
 | `maxListSize` | `string (int64 format)`  For list parameters, the max size of the list. |
 
 ### Type
@@ -136,11 +137,9 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2025-08-13 UTC.
+Last updated 2026-09-03 UTC.
 
 
 
 
 Need to tell us more?
-
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2025-08-13 UTC."],[],[]]

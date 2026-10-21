@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -478,7 +478,7 @@ queryPagination();
 
 [`QueryJob.result`](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.QueryJob?hl=zh-tw#google_cloud_bigquery_job_QueryJob_result) 方法會傳回查詢結果的可疊代項目。或者
 
-1. 讀取 [`QueryJob.destination`](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.QueryJob?hl=zh-tw#google_cloud_bigquery_job_QueryJob_destination) 屬性。如果未設定這項屬性，API 會將其設為[臨時匿名資料表](https://docs.cloud.google.com/bigquery/docs/writing-results?hl=zh-tw#temporary_and_permanent_tables)的參照。
+1. 請參閱 [`QueryJob.destination`](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.QueryJob?hl=zh-tw#google_cloud_bigquery_job_QueryJob_destination) 屬性。如果未設定這項屬性，API 會將其設為[臨時匿名資料表](https://docs.cloud.google.com/bigquery/docs/writing-results?hl=zh-tw#temporary_and_permanent_tables)的參照。
 2. 使用 [`Client.get_table`](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.client.Client?hl=zh-tw#google_cloud_bigquery_client_Client_get_table) 方法取得資料表結構定義。
 3. 使用 [`Client.list_rows`](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.client.Client?hl=zh-tw#google_cloud_bigquery_client_Client_list_rows) 方法，在目的地資料表中的所有資料列上建立可疊代物件。
 
@@ -526,9 +526,9 @@ for row in rows:
 
 當您使用快取的 `pageToken` 值往前翻頁或跳到任意頁面時，頁面內的資料就有可能會因為最近瀏覽過而變更，為避免發生這種情況，您可以使用 `etag` 屬性。
 
-每個 `collection.list` 方法 (`Tabledata` 除外) 都會在結果中傳回 `etag` 屬性。這個屬性是頁面結果的雜湊值，可用於驗證頁面自上次要求後是否有所變更。當您使用 ETag 值對 BigQuery 進行要求時，BigQuery 會將這個 ETag 值和 API 傳回的 ETag 值進行比較，並依這兩個 ETag 值是否相符來進行回應。您可以按照下列方式使用 ETag，避免多餘的清單呼叫：
+每個 `collection.list` 方法 (`Tabledata` 除外) 都會在結果中傳回 `etag` 屬性。這個屬性是頁面結果的雜湊值，可用來驗證網頁在上次要求過後是否有變更。當您使用 ETag 值對 BigQuery 提出要求時，BigQuery 會將這個 ETag 值和 API 傳回的 ETag 值進行比較，並依這兩個 ETag 值是否相符來進行回應。您可以透過下列方式使用 ETag，避免進行多餘的清單呼叫：
 
-* 如要只在值有變更時傳回值，請使用 [HTTP `If-None-Match` 標頭](https://www.rfc-editor.org/rfc/rfc9110.html#name-if-none-match)，藉由先前儲存的 ETag 進行清單呼叫。如果 ETag 相符，BigQuery 會傳回 `HTTP 304 Not Modified` 狀態碼，且不會傳回任何資料，節省頻寬。
+* 如要只在值有變更時傳回值，請使用 [HTTP `If-None-Match` 標頭](https://www.rfc-editor.org/rfc/rfc9110.html#name-if-none-match)，藉由先前儲存的 ETag 進行清單呼叫。如果 ETag 相符，BigQuery 會傳回 `HTTP 304 Not Modified` 狀態碼，且不會傳回任何資料，藉此節省頻寬。
 * 如要只在值**未**變更時傳回值，請使用 [HTTP `If-Match` 標頭](https://www.rfc-editor.org/rfc/rfc9110.html#name-if-match)。如果頁面已變更，BigQuery 會傳回 `412 Precondition Failed`。
 
 **備註：**雖然 ETag 是避免進行多餘清單呼叫的好方法，不過您可以採用同樣方式來確定是否有任何已變更的物件。例如，您可以針對特定資料表執行 `GET` 要求，並使用 ETag 判斷資料表在傳回完整回應前是否變更過。
@@ -542,7 +542,7 @@ for row in rows:
 | `tabledata.list` | 如果回應大小超過 10 MB1 的資料或超過 `maxResults` 個資料列，就會傳回分成數頁的結果。 | 無限制 | 無限制 | 無限制 |
 | 所有其他 `*collection*.list` 方法 | 如果回應超過 `maxResults` 個資料列，但未達上限，就會傳回分成數頁的結果。 | 10,000 | 無限制 | 300,000 |
 
-如果結果超出位元組或欄位限制，系統會將結果截斷，以符合限制。如果單一資料列超出位元組或欄位限制，`tabledata.list` 方法最多可傳回 100 MB 的資料1，這與查詢結果的資料列大小上限一致。每個頁面沒有大小下限，因此部分頁面可能會傳回的資料列比其他頁面多。
+如果結果大於位元組或欄位限制，系統會將結果修剪至符合限制。如果某個資料列超過位元組或欄位限制，`tabledata.list` 方法最多可傳回 100 MB 的資料1，這與查詢結果的資料列大小上限一致。每頁的大小沒有下限，有些頁面可能會傳回的資料列比其他頁面多。
 
 除非您透過支援服務明確要求更多資料，否則 `jobs.getQueryResults` REST API 方法最多只會傳回 20 MB 的資料。
 
@@ -555,11 +555,11 @@ for row in rows:
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-20 (世界標準時間)。
+上次更新時間：2026-10-19 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-20 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-19 (世界標準時間)。"],[],[]]

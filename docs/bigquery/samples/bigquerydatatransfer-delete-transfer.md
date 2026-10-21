@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -8,7 +8,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 刪除資料移轉設定 透過集合功能整理內容 你可以依據偏好儲存及分類內容。
 
-刪除 BigQuery 資料移轉服務中的資料移轉設定。刪除設定後，系統會停止日後的移轉作業，但不會移除已移轉至 BigQuery 的資料。
+刪除 BigQuery 資料移轉服務中的資料移轉設定。刪除設定會停止日後的移轉作業，但不會移除已移轉至 BigQuery 的資料。
 
 ## 深入探索
 

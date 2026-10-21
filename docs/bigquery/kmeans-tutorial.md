@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -12,11 +12,11 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 本教學課程將說明如何使用 BigQuery ML 中的 [k-means 模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans?hl=zh-tw)，找出資料集中的叢集。
 
-將資料分組到叢集的 [k-means](https://en.wikipedia.org/wiki/K-means_clustering) 演算法，是一種非監督式機器學習。監督式機器學習是關於預測性分析，而非監督式機器學習著重在敘述性分析。非監督式機器學習可協助您瞭解資料，進而做出資料導向的決策。
+將資料分組到叢集的 [k-means](https://en.wikipedia.org/wiki/K-means_clustering) 演算法，是一種非監督式機器學習。監督式機器學習是預測分析，非監督式機器學習則是描述性分析。非監督式機器學習可協助您瞭解資料，進而做出資料導向的決策。
 
-本教學課程中的查詢使用地理空間分析服務提供的[地理位置函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions?hl=zh-tw)。詳情請參閱「[地理空間分析簡介](https://docs.cloud.google.com/bigquery/docs/gis-intro?hl=zh-tw)」。
+本教學課程中的查詢會使用地理空間分析功能提供的[地理函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions?hl=zh-tw)。詳情請參閱「[地理空間分析簡介](https://docs.cloud.google.com/bigquery/docs/gis-intro?hl=zh-tw)」。
 
-本教學課程使用[倫敦自行車租用公開資料集](https://console.cloud.google.com/marketplace/details/greater-london-authority/london-bicycles?filter=solution-type%3Adataset&%3Bid=95374cac-2834-4fa2-a71f-fc033ccb5ce4&hl=zh-tw)。資料包括租用開始和結束的時間戳記、車站名稱，以及騎乘時間。
+本教學課程使用[倫敦自行車租用公開資料集](https://console.cloud.google.com/marketplace/details/greater-london-authority/london-bicycles?filter=solution-type%3Adataset&%3Bid=95374cac-2834-4fa2-a71f-fc033ccb5ce4&hl=zh-tw)。資料包括開始和停止時間戳記、車站名稱和騎乘時間。
 
 ## 目標
 
@@ -24,19 +24,19 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 * 檢查用於訓練模型的資料。
 * 建立 k-means 分群模型。
-* 解讀產生的資料叢集，並使用 BigQuery ML 的叢集視覺化功能。
+* 使用 BigQuery ML 的叢集視覺化功能，解讀產生的資料叢集。
 * 在 k-means 模型上執行 [`ML.PREDICT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict?hl=zh-tw)，預測一組自行車租借站可能屬於的叢集。
 
 ## 費用
 
-本教學課程使用 Google Cloud的計費元件，包括：
+本教學課程使用的 Google Cloud計費元件包括：
 
 * BigQuery
 * BigQuery ML
 
 如要瞭解 BigQuery 費用，請參閱 [BigQuery 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw)頁面。
 
-如要瞭解 BigQuery ML 費用，請參閱 [BigQuery ML 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#bqml)。
+如要瞭解 BigQuery ML 費用，請參閱「[BigQuery ML 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#bqml)」一文。
 
 ## 事前準備
 
@@ -81,13 +81,13 @@ Google uses AI technology to translate content into your preferred language. AI 
   [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
 - [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project).
 
-1. 新專案會自動啟用 BigQuery。如要在現有專案中啟用 BigQuery，請前往
+1. 新專案會自動啟用 BigQuery。如要在現有的專案中啟用 BigQuery，請前往
 
-   啟用 BigQuery API。
+   如果尚未啟用 BigQuery API，請啟用。
 
    **啟用 API 時所需的角色**
 
-   如要啟用 API，您需要服務使用情形管理員 IAM 角色 (`roles/serviceusage.serviceUsageAdmin`)，其中包含 `serviceusage.services.enable` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   如要啟用 API，您必須具備 `serviceusage.services.enable` 權限。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用情形管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
    [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery&hl=zh-tw)
 
@@ -124,13 +124,13 @@ Google uses AI technology to translate content into your preferred language. AI 
    * 在「Dataset ID」(資料集 ID) 中輸入 `bqml_tutorial`。
    * 針對「Location type」(位置類型) 選取「Multi-region」(多區域)，然後選取「EU (multiple regions in European Union)」(歐盟 (多個歐盟區域))。
 
-     倫敦自行車租用公開資料集存放在 `EU`
+     London Bicycle Hires 公開資料集儲存在`EU`
      [多區域](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#multi-regions)。資料集必須位於相同位置。
    * 其餘設定請保留預設狀態，然後按一下「建立資料集」。
 
 ## 檢查訓練資料
 
-檢查要用來訓練 k-means 模型的資料。在本教學課程中，您將根據下列屬性來將自行車站分群：
+檢查用於訓練 k-means 模型的資料。在本教學課程中，您會根據下列屬性將自行車站分群：
 
 * 租用時間
 * 每日租用次數
@@ -138,7 +138,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### SQL
 
-這項查詢會擷取自行車租用資料，包括 `start_station_name` 和 `duration` 資料欄，並將這項資料與車站資訊結合。包括建立計算結果欄，其中包含車站與市中心的距離。然後，查詢會計算 `stationstats` 資料欄中的車站屬性 (包括平均騎乘時間和租用次數)，以及計算出的 `distance_from_city_center` 資料欄。
+這項查詢會擷取週期聘用資料，包括 `start_station_name` 和 `duration` 欄，並將這些資料與電台資訊合併。包括建立計算結果欄，內含車站與市中心的距離。接著，系統會計算 `stationstats` 欄中車站的屬性，包括平均騎乘時間和行程數量，以及計算出的 `distance_from_city_center` 欄。
 
 請按照下列步驟檢查訓練資料：
 
@@ -194,8 +194,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### BigQuery DataFrames
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定說明操作。
-詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -215,6 +214,11 @@ import bigframes.pandas as bpd
 bigframes.options.bigquery.project = your_gcp_project_id
 # Compute in the EU multi-region to query the London bicycles dataset.
 bigframes.options.bigquery.location = "EU"
+
+# Set partial ordering mode for BigQuery DataFrames.
+# For more information, see the BigQuery DataFrames performance documentation:
+# https://cloud.google.com/bigquery/docs/dataframes-performance#partial-ordering-mode
+bpd.options.bigquery.ordering_mode = "partial"
 
 # Extract the information you'll need to train the k-means model in this
 # tutorial. Use the read_gbq function to represent cycle hires
@@ -249,21 +253,17 @@ s = bpd.DataFrame({"id": s["id"], "distance_from_city_center": s_distance})
 sample_time = datetime.datetime(2015, 1, 1, 0, 0, 0, tzinfo=datetime.timezone.utc)
 sample_time2 = datetime.datetime(2016, 1, 1, 0, 0, 0, tzinfo=datetime.timezone.utc)
 
-h = h.loc[(h["start_date"] >= sample_time) & (h["start_date"] <= sample_time2)]
+h = h[(h["start_date"] >= sample_time) & (h["start_date"] <= sample_time2)]
 
 # Replace each day-of-the-week number with the corresponding "weekday" or
-# "weekend" label by using the Series.map method.
+# "weekend" label by using the Series.case_when method.
+dayofweek = h["start_date"].dt.dayofweek
 h = h.assign(
-    isweekday=h.start_date.dt.dayofweek.map(
-        {
-            0: "weekday",
-            1: "weekday",
-            2: "weekday",
-            3: "weekday",
-            4: "weekday",
-            5: "weekend",
-            6: "weekend",
-        }
+    isweekday=dayofweek.case_when(
+        [
+            (dayofweek.isin([5, 6]), "weekend"),
+            (True, "weekday"),
+        ]
     )
 )
 
@@ -305,9 +305,9 @@ stationstats = stationstats.sort_values(
 
 ### SQL
 
-在下列查詢中，`CREATE MODEL` 陳述式會指定要使用的叢集數量 (四個)。在 `SELECT` 陳述式中，`EXCEPT` 子句會排除 `station_name` 資料欄，因為這個資料欄不含特徵。該查詢會為每個 station\_name 建立專屬的資料列，至於 `SELECT` 陳述式中則僅會納入特徵。
+在下列查詢中，`CREATE MODEL` 陳述式會指定要使用的叢集數量 (四個)。在 `SELECT` 陳述式中，`EXCEPT` 子句會排除 `station_name` 欄，因為這個資料欄不含特徵。這項查詢會為每個 station\_name 建立不重複的資料列，且 `SELECT` 陳述式中只會提及特徵。
 
-請按照下列步驟建立 k-means 模型：
+如要建立 k-means 模型，請按照下列步驟操作：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -363,23 +363,33 @@ stationstats = stationstats.sort_values(
 
 ### BigQuery DataFrames
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定說明操作。
-詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
 
 ```
-from bigframes.ml.cluster import KMeans
+from bigframes.bigquery import ml
 
-# To determine an optimal number of clusters, construct and fit several
-# K-Means objects with different values of num_clusters, find the error
-# measure, and pick the point at which the error measure is at its minimum
-# value.
-cluster_model = KMeans(n_clusters=4)
-cluster_model.fit(stationstats)
-cluster_model.to_gbq(
-    your_model_id,  # For example: "bqml_tutorial.london_station_clusters"
+# A k-means model groups data into clusters, which is useful for
+# descriptive analytics.
+#
+# Extract only the numerical feature columns for model training.
+# 'station_name' and 'isweekday' are excluded so clustering is based on
+# bicycle usage patterns rather than station identity or day of week.
+features = stationstats[["duration", "num_trips", "distance_from_city_center"]]
+
+# Use ml.create_model to create and train the model in BigQuery.
+# The options parameter specifies the model type and the number of clusters.
+# For more information, see the BigQuery DataFrames API reference documentation:
+# https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.create_model.html#bigframes.bigquery.ml.create_model
+ml.create_model(
+    your_model_id,  # For example: "bqml_tutorial.london_station_clusters",
+    options={
+        "model_type": "KMEANS",
+        "num_clusters": 4,
+    },
+    training_data=features,
     replace=True,
 )
 ```
@@ -397,29 +407,29 @@ cluster_model.to_gbq(
 3. 在「Explorer」窗格中展開專案，然後按一下「Datasets」(資料集)。
 4. 按一下「`bqml_tutorial`」資料集，然後前往「模型」分頁。
 5. 選取「`london_station_clusters`」模型。
-6. 選取「評估」分頁標籤。這個分頁會顯示 k-means 模型識別出的叢集。在「數值特徵」部分，長條圖會顯示每個群集中心最重要的數值特徵值。每個群集中心代表一組資料叢集。您可以從下拉式選單中選取要顯示的特徵。
+6. 選取「評估」分頁標籤。這個分頁會顯示 k-means 模型識別出的叢集圖表。在「數值特徵」部分，長條圖會顯示每個群集中心的最重要數值特徵值。每個群集中心代表一組資料。您可以從下拉式選單中選取要顯示的特徵。
 
    這個模型會建立下列質心：
 
-   * 重心 1 顯示較不繁忙的市區車站，租借時間較短。
-   * 重心 2 顯示第二個城市車站，該車站較不繁忙，且租用時間較長。
-   * 中心點 3 顯示繁忙的市區車站，靠近市中心。
-   * 重心 4 顯示郊區車站，騎乘時間較長。
+   * Centroid 1 顯示的城市車站較不繁忙，租借時間較短。
+   * Centroid 2 顯示第二個城市車站，這個車站較不繁忙，且租借時間較長。
+   * 中心點 3 顯示靠近市中心的繁忙城市車站。
+   * 中心點 4 顯示郊區車站，行程較長。
 
    如果您經營自行車租賃業務，可以根據這項資訊制定業務決策。例如：
 
-   * 假設您需要實驗某個新的鎖，您應該要選擇哪個車站叢集來做為實驗對象呢？重心 1、重心 2 或重心 4 中的車站似乎是合乎邏輯的選擇，因為這些車站並非最繁忙的車站。
-   * 假設您想要在某些車站擺放競速自行車，您應該要選擇哪些車站呢？Centroid 4 是距市中心最遠的車站群組，且騎乘距離最長。因此這些可以成為擺放競速自行車的候選車站。
+   * 假設您需要實驗某個新的鎖，您應該要選擇哪個車站叢集來做為實驗對象呢？重心 1、重心 2 或重心 4 的車站似乎是合理的選擇，因為這些車站並非最繁忙的車站。
+   * 假設您想要在某些車站擺放競速自行車，您應該要選擇哪些車站呢？Centroid 4 是距離市中心最遠的車站群組，行程也最長。這些人很可能就是賽車自行車的目標客群。
 
 ## 使用 `ML.PREDICT` 函式預測車站的叢集
 
-使用 `ML.PREDICT` SQL 函式或 [`predict` BigQuery DataFrames 函式](https://dataframes.bigquery.dev/reference/api/bigframes.ml.cluster.KMeans.html#bigframes.ml.cluster.KMeans.predict)，找出特定車站所屬的叢集。
+使用 `ML.PREDICT`SQL 函式或 [`bigframes.bigquery.ml.predict`BigQuery DataFrames 函式](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.predict.html#bigframes.bigquery.ml.predict)，找出特定電台所屬的叢集。
 
 ### SQL
 
-下列查詢會使用 [`REGEXP_CONTAINS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions?hl=zh-tw#regexp_contains) 函式，找出 `station_name` 資料欄中包含字串 `Kennington` 的所有項目。`ML.PREDICT` 函式會使用這些值，來預測哪些叢集可能包含這些車站。
+下列查詢會使用 [`REGEXP_CONTAINS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions?hl=zh-tw#regexp_contains) 函式，找出 `station_name` 資料欄中包含字串 `Kennington` 的所有項目。`ML.PREDICT` 函式會使用這些值，預測哪些叢集可能包含這些電台。
 
-如要預測每個名稱有「`Kennington`」字串的車站所屬的叢集，請按照下列步驟操作：
+請按照下列步驟，預測名稱包含 `Kennington` 字串的每個車站所屬的叢集：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -480,30 +490,27 @@ cluster_model.to_gbq(
 
 ### BigQuery DataFrames
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定說明操作。
-詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
 
 ```
-# Select model you'll use for predictions. `read_gbq_model` loads model
-# data from BigQuery, but you could also use the `cluster_model` object
-# from previous steps.
-cluster_model = bpd.read_gbq_model(
-    your_model_id,
-    # For example: "bqml_tutorial.london_station_clusters",
-)
+from bigframes.bigquery import ml
 
 # Use 'contains' function to filter by stations containing the string
 # "Kennington".
-stationstats = stationstats.loc[
-    stationstats["station_name"].str.contains("Kennington")
-]
+stationstats = stationstats[stationstats["station_name"].str.contains("Kennington")]
 
-result = cluster_model.predict(stationstats)
+# Use the ml.predict method to predict results using your model.
+# For more information, see the BigQuery DataFrames API reference documentation:
+# https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.predict.html#bigframes.bigquery.ml.predict
+ml.predict(
+    your_model_id,  # For example: "bqml_tutorial.london_station_clusters",
+    input_=stationstats,
+)
 
-# Expected output results:   >>>results.peek(3)
+# Expected output results:
 # CENTROID...	NEAREST...	station_name  isweekday	 duration num_trips dist...
 # 	1	[{'CENTROID_ID'...	Borough...	  weekday	  1110	    5749	0.13
 # 	2	[{'CENTROID_ID'...	Borough...	  weekend	  2125      1774	0.13
@@ -522,7 +529,7 @@ result = cluster_model.predict(stationstats)
 
 刪除專案將移除專案中所有的資料集與資料表。若您希望重新使用專案，您可以刪除本教學課程中所建立的資料集。
 
-1. 如有必要，請在Google Cloud 控制台中開啟 BigQuery 頁面。
+1. 如有需要，請在Google Cloud 控制台中開啟 BigQuery 頁面。
 
    [前往 BigQuery 頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 在導覽窗格中，按一下您建立的 **bqml\_tutorial** 資料集。
@@ -559,11 +566,11 @@ result = cluster_model.predict(stationstats)
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-12 (世界標準時間)。
+上次更新時間：2026-10-17 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-12 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-17 (世界標準時間)。"],[],[]]

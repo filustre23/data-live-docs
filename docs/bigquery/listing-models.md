@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -24,7 +24,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 所需權限
 
-如要列出資料集中的模型，您必須取得資料集的 [`READER`](https://docs.cloud.google.com/bigquery/docs/access-control-basic-roles?hl=zh-tw#dataset-basic-roles) 角色，或取得包含 `bigquery.models.list` 權限的專案層級身分與存取權管理 (IAM) 角色。如果您取得專案層級的 `bigquery.models.list` 權限，就能列出專案中任何資料集的模型。下列預先定義的專案層級身分與存取權管理角色包含 `bigquery.models.list` 權限：
+如要列出資料集中的模型，您必須取得資料集的 [`READER`](https://docs.cloud.google.com/bigquery/docs/access-control-basic-roles?hl=zh-tw#dataset-basic-roles) 角色，或取得包含 `bigquery.models.list` 權限的專案層級身分與存取權管理 (IAM) 角色。如您已獲指派專案層級的 `bigquery.models.list` 權限，則可列出專案內任何資料集中的模型。下列預先定義的專案層級身分與存取權管理角色包含 `bigquery.models.list` 權限：
 
 * `bigquery.dataViewer`
 * `bigquery.dataEditor`
@@ -33,7 +33,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 * `bigquery.user`
 * `bigquery.admin`
 
-如要進一步瞭解 BigQuery ML 中的 IAM 角色和權限，請參閱[存取權控管](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)。如要進一步瞭解資料集層級角色，請參閱[資料集的基本角色](https://docs.cloud.google.com/bigquery/docs/access-control-basic-roles?hl=zh-tw#dataset-basic-roles)。
+如要進一步瞭解 BigQuery ML 中的身分與存取權管理角色和權限，請參閱[存取權控管](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)。如要進一步瞭解資料集層級角色，請參閱[資料集的基本角色](https://docs.cloud.google.com/bigquery/docs/access-control-basic-roles?hl=zh-tw#dataset-basic-roles)。
 
 ## 列出模型
 
@@ -64,8 +64,7 @@ bq ls -m --format=pretty PROJECT_ID:DATASET
 * `PROJECT_ID` 是您的專案 ID。
 * `DATASET` 是資料集名稱。
 
-使用 `--format=pretty` 標記時，指令輸出內容如下所示。`--format=pretty` 會產生格式化表格輸出內容。`Model Type`
-欄會顯示模型類型，例如 `KMEANS`。
+使用 `--format=pretty` 標記時，指令輸出內容如下所示。`--format=pretty` 會產生格式設定完成的表格輸出內容。`Model Type` 欄會顯示模型類型，例如 `KMEANS`。
 
 ```
 +-------------------------+------------+--------+-----------------+
@@ -254,11 +253,11 @@ for model in models:
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-12 (世界標準時間)。
+上次更新時間：2026-10-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-12 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]

@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -10,35 +10,30 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 使用 ONNX 格式的 Transformer 模型生成嵌入 透過集合功能整理內容 你可以依據偏好儲存及分類內容。
 
-**預覽**
+在本教學課程中，您將使用 [Hugging Face Optimum CLI](https://huggingface.co/docs/optimum-onnx/onnx/overview)，將 `sentence-transformers/all-MiniLM-L6-v2` 模型匯出為 [Open Neural Network Exchange (ONNX)](https://onnx.ai) 格式。您可以使用 [`CREATE MODEL`
+陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-onnx?hl=zh-tw)
+將 ONNX 模型匯入 BigQuery。最後，您可以使用 [`ML.PREDICT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict?hl=zh-tw)，透過匯入的 ONNX 模型產生嵌入。
 
-這項功能適用《[服務專屬條款](https://docs.cloud.google.com/terms/service-terms?hl=zh-tw#1)》中「一般服務條款」一節的《正式發布前產品條款》。正式發布前功能是依「原樣」提供，支援服務可能受限。
-詳情請參閱[推出階段說明](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
-
-**注意：** 如要提供意見回饋或尋求這項功能的支援，請傳送電子郵件至 [bqml-feedback@google.com](mailto:bqml-feedback@google.com)。
-
-本教學課程說明如何將 Transformer 模型匯出為[開放式神經網路交換 (ONNX)](https://onnx.ai) 格式、將 ONNX 模型匯入 BigQuery 資料集，然後使用該模型透過 SQL 查詢產生嵌入。
-
-本教學課程使用 [`sentence-transformers/all-MiniLM-L6-v2` 模型](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2)。這個句子轉換器模型以快速且有效率地生成句子嵌入而聞名。句子嵌入可擷取文字的深層含義，因此能執行語意搜尋、叢集和句子相似度等工作。
+本教學課程使用 [`sentence-transformers/all-MiniLM-L6-v2`模型](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2)。這個句子 Transformer 模型以快速且有效率地生成句子嵌入而聞名。句子嵌入可擷取文字的深層含義，因此能執行語意搜尋、分群和句子相似度等工作。
 
 ONNX 提供統一格式，可用於表示任何機器學習 (ML) 架構。BigQuery ML 支援 ONNX，因此您可以執行下列操作：
 
-* 使用您喜愛的架構訓練模型。
+* 使用偏好的架構訓練模型。
 * 將模型轉換為 ONNX 模型格式。
 * 將 ONNX 模型匯入 BigQuery，並使用 BigQuery ML 進行預測。
 
 ## 目標
 
-* 使用 [Hugging Face Optimum CLI](https://huggingface.co/docs/optimum-onnx/onnx/overview) 將 `sentence-transformers/all-MiniLM-L6-v2` 模型匯出至 ONNX。
-* 使用 [`CREATE MODEL` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-onnx?hl=zh-tw)將 ONNX 模型匯入 BigQuery。
-* 使用 [`ML.PREDICT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict?hl=zh-tw)，透過匯入的 ONNX 模型生成嵌入。
+* 將 `sentence-transformers/all-MiniLM-L6-v2` 模型匯出至 ONNX。
+* 將 ONNX 模型匯入 BigQuery。
+* 使用 `ML.PREDICT` 函式，透過匯入的 ONNX 模型生成嵌入。
 
 ## 費用
 
 在本文件中，您會使用下列 Google Cloud的計費元件：
 
 * [BigQuery](https://cloud.google.com/bigquery/pricing?hl=zh-tw)
-* [BigQuery ML](https://cloud.google.com/bigquery/pricing?hl=zh-tw#bqml)
+* [BigQuery ML](https://cloud.google.com/bigquery/pricing?hl=zh-tw#bigquery-ml-pricing)
 * [Cloud Storage](https://cloud.google.com/storage/pricing?hl=zh-tw)
 
 如要根據預測用量估算費用，請使用 [Pricing Calculator](https://docs.cloud.google.com/products/calculator?hl=zh-tw)。
@@ -89,55 +84,37 @@ ONNX 提供統一格式，可用於表示任何機器學習 (ML) 架構。BigQue
   [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
 
 1. [確認專案已啟用計費功能 Google Cloud](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project) 。
-2. 啟用 BigQuery 和 Cloud Storage API。
+2. 啟用 BigQuery 和 Cloud Storage API (如果尚未啟用)。
 
    **啟用 API 時所需的角色**
 
-   您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用情形管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   如要啟用 API，您必須具備 `serviceusage.services.enable` 權限。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用情形管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
    [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery.googleapis.com%2Cstorage-component.googleapis.com&hl=zh-tw)
-3. 請確認您具備[必要權限](#required_permissions)，可執行本文件中的工作。
+3. 請確認您具備[必要權限](#required_permissions)，可執行本文中的工作。
 
 ### 必要的角色
 
+如要取得完成本教學課程所需的權限，請要求管理員在專案中授予您下列 IAM 角色：
+
+* 建立資料集、資料表和模型，並執行 BigQuery 工作：
+  [BigQuery Studio 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.studioAdmin)  (`roles/bigquery.studioAdmin`)
+* 建立 Cloud Storage bucket，並建立儲存空間物件 (如果您要手動將 Transformer 模型檔案轉換為 ONNX)：
+  [Storage Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/storage?hl=zh-tw#storage.admin)  (`roles/storage.admin`)
+
+如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+
+您或許也能透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)，取得必要權限。
+
 如果您建立新專案，您就是專案擁有者，並已獲得完成本教學課程所需的所有 Identity and Access Management (IAM) 權限。
-
-如果您使用現有專案，請執行下列操作。
-
-請確認您在專案中具備下列角色：
-
-* [BigQuery Studio 管理員](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.studioUser) (`roles/bigquery.studioAdmin`)
-* [Storage 物件建立者](https://docs.cloud.google.com/storage/docs/access-control/iam-roles?hl=zh-tw#standard-roles) (`roles/storage.objectCreator`)
-
-#### 檢查角色
-
-1. 前往 Google Cloud 控制台的「IAM」頁面。
-
-   [前往「IAM」頁面](https://console.cloud.google.com/projectselector/iam-admin/iam?supportedpurview=project&hl=zh-tw)
-2. 選取專案。
-3. 在「主體」欄中，找出所有識別您或您所屬群組的資料列。如要瞭解自己所屬的群組，請與管理員聯絡。
-4. 針對指定或包含您的所有列，請檢查「角色」欄，確認角色清單是否包含必要角色。
-
-
-#### 授予角色
-
-1. 前往 Google Cloud 控制台的「IAM」頁面。
-
-   [前往「IAM」頁面](https://console.cloud.google.com/projectselector/iam-admin/iam?supportedpurview=project&hl=zh-tw)
-2. 選取專案。
-3. 按一下person\_add「Grant access」(授予存取權)。
-4. 在「New principals」(新增主體) 欄位中，輸入您的使用者 ID。 這通常是指 Google 帳戶的電子郵件地址。
-5. 按一下「Select a role」(選取角色)，然後搜尋角色。
-6. 如要授予其他角色，請按一下add「Add another role」(新增其他角色)，然後新增其他角色。
-7. 按一下「Save」(儲存)。
 
 如要進一步瞭解 BigQuery 中的 IAM 權限，請參閱 [IAM 權限](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bq-permissions)。
 
-## 將 Transformer 模型檔案轉換為 ONNX
+## 選用：手動將 Transformer 模型檔案轉換為 ONNX
 
-您也可以選擇按照本節的步驟，手動將 `sentence-transformers/all-MiniLM-L6-v2` 模型和權杖化工具轉換為 ONNX。否則，您可以使用公開 `gs://cloud-samples-data`Cloud Storage bucket 中已轉換的範例檔案。
+如要手動將 `sentence-transformers/all-MiniLM-L6-v2` 模型和權杖化工具轉換為 ONNX，請按照下列各節的步驟操作。或者，您也可以使用 `gs://cloud-samples-data` Cloud Storage bucket 中的範例檔案。這個 bucket 中的檔案已轉換完畢。如果使用範例檔案，請跳至「[建立資料集](#create_a_dataset)」。
 
-如果選擇手動轉換檔案，您必須具備已安裝 Python 的本機指令列環境。如要進一步瞭解如何安裝 Python，請參閱 [Python 下載頁面](https://www.python.org/downloads/)。
+如要手動轉換檔案，您必須具備已安裝 Python 的本機指令列環境。如要進一步瞭解如何安裝 Python，請參閱 [Python 下載頁面](https://www.python.org/downloads/)。
 
 ### 將 Transformer 模型匯出為 ONNX
 
@@ -150,28 +127,29 @@ ONNX 提供統一格式，可用於表示任何機器學習 (ML) 架構。BigQue
    ```
    pip install optimum[onnx]
    ```
-2. 匯出模型。`--model` 引數會指定 Hugging Face 模型 ID。
-   `--opset` 引數會指定 ONNXRuntime 程式庫版本，並設為 `17`，以維持與 BigQuery 支援的 ONNXRuntime 程式庫相容。
+2. 匯出模型：
 
    ```
    optimum-cli export onnx \
-     --model sentence-transformers/all-MiniLM-L6-v2 \
-     --task sentence-similarity \
-     --opset 17 all-MiniLM-L6-v2/
+       --model sentence-transformers/all-MiniLM-L6-v2 \
+       --task sentence-similarity \
+       --opset 17 all-MiniLM-L6-v2/
    ```
+
+   `--model` 引數會指定 Hugging Face 模型 ID。`--opset` 引數會指定 ONNXRuntime 程式庫版本，並設為 `17`，以維持與 BigQuery 支援的 ONNXRuntime 程式庫相容。
 
 模型檔案會匯出至 `all-MiniLM-L6-v2` 目錄，並命名為 `model.onnx`。
 
 ### 對 Transformer 模型套用量化
 
-使用 Optimum CLI 將量化套用至匯出的 Transformer 模型，以縮減模型大小並加快推論速度。詳情請參閱「[量化](https://huggingface.co/docs/optimum-onnx/onnxruntime/usage_guides/quantization)」一節。
+使用 Optimum CLI 將量子化套用至匯出的 Transformer 模型，以縮減模型大小並加快推論速度。詳情請參閱「[量化](https://huggingface.co/docs/optimum-onnx/onnxruntime/usage_guides/quantization)」一節。
 
-如要對模型套用量化，請在指令列執行下列指令：
+如要對模型套用量化，請執行下列指令：
 
 ```
 optimum-cli onnxruntime quantize \
-  --onnx_model all-MiniLM-L6-v2/ \
-  --avx512_vnni -o all-MiniLM-L6-v2_quantized
+    --onnx_model all-MiniLM-L6-v2/ \
+    --avx512_vnni -o all-MiniLM-L6-v2_quantized
 ```
 
 量化模型檔案會匯出至 `all-MiniLM-L6-v2_quantized` 目錄，並命名為 `model_quantized.onnx`。
@@ -218,7 +196,7 @@ optimum-cli onnxruntime quantize \
      f.write(tokenizer_onnx_model.SerializeToString())
    ```
 4. 儲存 `convert-tokenizer.py` 檔案。
-5. 執行 Python 指令碼來轉換權杖化工具：
+5. 如要轉換權杖化工具，請執行 Python 指令碼：
 
    ```
    python convert-tokenizer.py
@@ -230,31 +208,36 @@ optimum-cli onnxruntime quantize \
 
 轉換 Transformer 模型和權杖化工具後，請執行下列操作：
 
-* [建立 Cloud Storage bucket](https://docs.cloud.google.com/storage/docs/creating-buckets?hl=zh-tw) 來儲存轉換後的檔案。
+* [建立 Cloud Storage bucket](https://docs.cloud.google.com/storage/docs/creating-buckets?hl=zh-tw)，用來儲存轉換後的檔案。
 * [將轉換後的 Transformer 模型和權杖化工具檔案上傳至 Cloud Storage bucket](https://docs.cloud.google.com/storage/docs/uploading-objects?hl=zh-tw)。
 
 ## 建立資料集
 
-建立 BigQuery 資料集來儲存機器學習模型。
+如要建立 BigQuery 資料集，請選取下列任一選項：
 
 ### 控制台
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
-   [前往 BigQuery 頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在「Explorer」窗格中，按一下專案名稱。
-3. 依序點按 more\_vert「View actions」(查看動作) >「Create dataset」(建立資料集)。
-4. 在「建立資料集」頁面中，執行下列操作：
+   [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
+2. 點選左側窗格中的 explore「Explorer」。
+
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
+3. 在「Explorer」中展開專案，然後按一下「Datasets」。
+4. 在「資料集」頁面，按一下 add「建立資料集」。
+5. 在「建立資料集」窗格中，執行下列操作：
 
    * 在「Dataset ID」(資料集 ID) 中輸入 `bqml_tutorial`。
-   * 針對「Location type」(位置類型) 選取「Multi-region」(多區域)，然後選取「US」(美國)。
-   * 其餘設定請保留預設狀態，然後按一下「建立資料集」。
+   * 選取「資料位置」的「美國」。
+
+   其餘預設設定均保留原樣。
+6. 點選「建立資料集」。
 
 ### bq
 
 如要建立新的資料集，請使用 [`bq mk --dataset` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#mk-dataset)。
 
-1. 建立名為 `bqml_tutorial` 的資料集，並將資料位置設為 `US`。
+1. 建立名為 `bqml_tutorial` 的資料集，並將資料位置設為 `US`：
 
    ```
    bq mk --dataset \
@@ -270,7 +253,7 @@ optimum-cli onnxruntime quantize \
 
 ### API
 
-請呼叫 [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert?hl=zh-tw) 方法，搭配已定義的[資料集資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets?hl=zh-tw)。
+使用已定義的[資料集資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets?hl=zh-tw)呼叫 [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert?hl=zh-tw) 方法：
 
 ```
 {
@@ -282,7 +265,7 @@ optimum-cli onnxruntime quantize \
 
 ### BigQuery DataFrames
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -302,41 +285,41 @@ bqclient.create_dataset("bqml_tutorial", exists_ok=True)
 
 ### 控制台
 
-1. 在 Google Cloud 控制台開啟 BigQuery Studio。
+1. 前往 Google Cloud 控制台的「BigQuery Studio」頁面。
 
-   [前往 BigQuery Studio](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在查詢編輯器中，執行下列 `CREATE MODEL` 陳述式，建立 `tokenizer` 模型。
+   [前往 Studio](https://console.cloud.google.com/bigquery?hl=zh-tw)
+2. 在查詢編輯器中執行下列 `CREATE MODEL` 陳述式，建立 `tokenizer` 模型：
 
    ```
     CREATE OR REPLACE MODEL `bqml_tutorial.tokenizer`
      OPTIONS (MODEL_TYPE='ONNX',
-      MODEL_PATH='TOKENIZER_BUCKET_PATH')
+      MODEL_PATH='TOKENIZER_BUCKET_PATH');
    ```
 
    請將 `TOKENIZER_BUCKET_PATH` 改成您上傳至 Cloud Storage 的模型路徑。如果您使用範例模型，請將 `TOKENIZER_BUCKET_PATH` 替換為下列值：`gs://cloud-samples-data/bigquery/ml/onnx/all-MiniLM-L6-v2/tokenizer.onnx`。
 
    作業完成後，「查詢結果」窗格中會顯示類似以下的訊息：`Successfully created model named tokenizer`。
-3. 點選「前往模型」，開啟「詳細資料」窗格。
-4. 查看「特徵欄」部分，瞭解模型輸入內容，並查看「標籤欄」部分，瞭解模型輸出內容。
-5. 在查詢編輯器中，執行下列 `CREATE MODEL` 陳述式，建立 `all-MiniLM-L6-v2` 模型。
+3. 如要開啟「詳細資料」窗格，請按一下「前往模型」。
+4. 如要在「標籤資料欄」中查看模型輸入和模型輸出，請查看「特徵資料欄」部分：
+5. 如要建立 `all-MiniLM-L6-v2` 模型，請在查詢編輯器中執行下列 `CREATE MODEL` 陳述式：
 
    ```
     CREATE OR REPLACE MODEL `bqml_tutorial.all-MiniLM-L6-v2`
      OPTIONS (MODEL_TYPE='ONNX',
-      MODEL_PATH='TRANSFORMER_BUCKET_PATH')
+      MODEL_PATH='TRANSFORMER_BUCKET_PATH');
    ```
 
-   請將 `TRANSFORMER_BUCKET_PATH` 改成您上傳至 Cloud Storage 的模型路徑。如果您使用範例模型，請將 `TRANSFORMER_BUCKET_PATH` 替換為下列值：`gs://cloud-samples-data/bigquery/ml/onnx/all-MiniLM-L6-v2/model_quantized.onnx`。
+   將 `TRANSFORMER_BUCKET_PATH` 替換為您上傳至 Cloud Storage 的模型路徑。如果您使用範例模型，請將 `TRANSFORMER_BUCKET_PATH` 替換為下列值：`gs://cloud-samples-data/bigquery/ml/onnx/all-MiniLM-L6-v2/model_quantized.onnx`。
 
    作業完成後，「查詢結果」窗格中會顯示類似以下的訊息：`Successfully created model named all-MiniLM-L6-v2`。
-6. 點選「前往模型」，開啟「詳細資料」窗格。
-7. 查看「特徵欄」部分，瞭解模型輸入內容，並查看「標籤欄」部分，瞭解模型輸出內容。
+6. 如要開啟「詳細資料」窗格，請按一下「前往模型」。
+7. 如要在「標籤資料欄」中查看模型輸入和模型輸出，請查看「特徵資料欄」部分：
 
 ### bq
 
-使用 bq 指令列工具的 [`query` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_query)執行 `CREATE MODEL` 陳述式。
+使用 bq 指令列工具 [`query` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_query)執行 `CREATE MODEL` 陳述式。
 
-1. 在指令列中，執行下列指令來建立 `tokenizer` 模型。
+1. 建立 `tokenizer` 模型：
 
    ```
    bq query --use_legacy_sql=false \
@@ -344,26 +327,26 @@ bqclient.create_dataset("bqml_tutorial", exists_ok=True)
    `bqml_tutorial.tokenizer`
    OPTIONS
    (MODEL_TYPE='ONNX',
-   MODEL_PATH='TOKENIZER_BUCKET_PATH')"
+     MODEL_PATH='TOKENIZER_BUCKET_PATH')"
    ```
 
    請將 `TOKENIZER_BUCKET_PATH` 改成您上傳至 Cloud Storage 的模型路徑。如果您使用範例模型，請將 `TOKENIZER_BUCKET_PATH` 替換為下列值：`gs://cloud-samples-data/bigquery/ml/onnx/all-MiniLM-L6-v2/tokenizer.onnx`。
 
-   作業完成後，您會看到類似以下的訊息：`Successfully created model named tokenizer`。
-2. 在指令列中，執行下列指令來建立 `all-MiniLM-L6-v2` 模型。
+   作業完成後，畫面會顯示類似如下的訊息：`Successfully created model named tokenizer`。
+2. 建立 `all-MiniLM-L6-v2` 模型：
 
    ```
    bq query --use_legacy_sql=false \
    "CREATE OR REPLACE MODEL
-   `bqml_tutorial.all-MiniLM-L6-v2`
+     `bqml_tutorial.all-MiniLM-L6-v2`
    OPTIONS
-   (MODEL_TYPE='ONNX',
-     MODEL_PATH='TRANSFORMER_BUCKET_PATH')"
+     (MODEL_TYPE='ONNX',
+       MODEL_PATH='TRANSFORMER_BUCKET_PATH')"
    ```
 
    請將 `TRANSFORMER_BUCKET_PATH` 改成您上傳至 Cloud Storage 的模型路徑。如果您使用範例模型，請將 `TRANSFORMER_BUCKET_PATH` 替換為下列值：`gs://cloud-samples-data/bigquery/ml/onnx/all-MiniLM-L6-v2/model_quantized.onnx`。
 
-   作業完成後，您會看到類似以下的訊息：`Successfully created model named all-MiniLM-L6-v2`。
+   作業完成後，畫面上會顯示類似如下的訊息：`Successfully created model named all-MiniLM-L6-v2`。
 3. 匯入模型後，請確認模型是否顯示在資料集中。
 
    ```
@@ -383,34 +366,34 @@ bqclient.create_dataset("bqml_tutorial", exists_ok=True)
 
 使用 [`jobs.insert` 方法](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert?hl=zh-tw)匯入模型。在要求主體中，使用 `CREATE MODEL` 陳述式填入 [`QueryRequest` 資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query?hl=zh-tw#QueryRequest)的 `query` 參數。
 
-1. 請使用下列 `query` 參數值建立 `tokenizer` 模型。
+1. 如要建立 `tokenizer` 模型，請使用下列 `query` 參數：
 
    ```
    {
-   "query": "CREATE MODEL `PROJECT_ID :bqml_tutorial.tokenizer` OPTIONS(MODEL_TYPE='ONNX' MODEL_PATH='TOKENIZER_BUCKET_PATH')"
+     "query": "CREATE MODEL `PROJECT_ID :bqml_tutorial.tokenizer` OPTIONS(MODEL_TYPE='ONNX' MODEL_PATH='TOKENIZER_BUCKET_PATH')"
    }
    ```
 
    更改下列內容：
 
-   * `PROJECT_ID` 為您的專案 ID。
-   * `TOKENIZER_BUCKET_PATH`，並將其替換為您上傳至 Cloud Storage 的模型路徑。如果您使用範例模型，請將 `TOKENIZER_BUCKET_PATH` 替換為下列值：`gs://cloud-samples-data/bigquery/ml/onnx/all-MiniLM-L6-v2/tokenizer.onnx`。
-2. 請使用下列 `query` 參數值建立 `all-MiniLM-L6-v2` 模型。
+   * `PROJECT_ID`：您的專案 ID。
+   * `TOKENIZER_BUCKET_PATH`：您上傳至 Cloud Storage 的模型路徑。如果您使用範例模型，請將 `TOKENIZER_BUCKET_PATH` 替換為下列值：`gs://cloud-samples-data/bigquery/ml/onnx/all-MiniLM-L6-v2/tokenizer.onnx`。
+2. 如要建立 `all-MiniLM-L6-v2` 模型，請使用下列 `query` 參數值：
 
    ```
    {
-   "query": "CREATE MODEL `PROJECT_ID :bqml_tutorial.all-MiniLM-L6-v2` OPTIONS(MODEL_TYPE='ONNX' MODEL_PATH='TRANSFORMER_BUCKET_PATH')"
+     "query": "CREATE MODEL `PROJECT_ID :bqml_tutorial.all-MiniLM-L6-v2` OPTIONS(MODEL_TYPE='ONNX' MODEL_PATH='TRANSFORMER_BUCKET_PATH')"
    }
    ```
 
    更改下列內容：
 
-   * `PROJECT_ID` 為您的專案 ID。
-   * `TRANSFORMER_BUCKET_PATH`，並提供您上傳至 Cloud Storage 的模型路徑。如果您使用範例模型，請將 `TRANSFORMER_BUCKET_PATH` 替換為下列值：`gs://cloud-samples-data/bigquery/ml/onnx/all-MiniLM-L6-v2/model_quantized.onnx`。
+   * `PROJECT_ID`：您的專案 ID。
+   * `TRANSFORMER_BUCKET_PATH`：您上傳至 Cloud Storage 的模型路徑。如果您使用範例模型，請將 `TRANSFORMER_BUCKET_PATH` 替換為下列值：`gs://cloud-samples-data/bigquery/ml/onnx/all-MiniLM-L6-v2/model_quantized.onnx`。
 
 ### BigQuery DataFrames
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -435,9 +418,9 @@ imported_onnx_model = ONNXModel(
 
 更改下列內容：
 
-* `PROJECT_ID` 為您的專案 ID。
-* `TOKENIZER_BUCKET_PATH`，並將其替換為您上傳至 Cloud Storage 的模型路徑。如果您使用範例模型，請將 `TOKENIZER_BUCKET_PATH` 替換為下列值：`gs://cloud-samples-data/bigquery/ml/onnx/all-MiniLM-L6-v2/tokenizer.onnx`。
-* `TRANSFORMER_BUCKET_PATH`，並提供您上傳至 Cloud Storage 的模型路徑。如果您使用範例模型，請將 `TRANSFORMER_BUCKET_PATH` 替換為下列值：`gs://cloud-samples-data/bigquery/ml/onnx/all-MiniLM-L6-v2/model_quantized.onnx`。
+* `PROJECT_ID`：您的專案 ID。
+* `TOKENIZER_BUCKET_PATH`：您上傳至 Cloud Storage 的模型路徑。如果您使用範例模型，請將 `TOKENIZER_BUCKET_PATH` 替換為下列值：`gs://cloud-samples-data/bigquery/ml/onnx/all-MiniLM-L6-v2/tokenizer.onnx`。
+* `TRANSFORMER_BUCKET_PATH`：您上傳至 Cloud Storage 的模型路徑。如果您使用範例模型，請將 `TRANSFORMER_BUCKET_PATH` 替換為下列值：`gs://cloud-samples-data/bigquery/ml/onnx/all-MiniLM-L6-v2/model_quantized.onnx`。
 
 ## 使用匯入的 ONNX 模型生成嵌入
 
@@ -449,16 +432,18 @@ imported_onnx_model = ONNXModel(
 
 使用 [`ML.PREDICT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict?hl=zh-tw)，透過模型生成嵌入。
 
-查詢會使用巢狀 `ML.PREDICT` 呼叫，直接透過權杖化工具和嵌入模型處理原始文字，如下所示：
+這項查詢會使用巢狀 `ML.PREDICT` 呼叫，直接透過權杖化工具和嵌入模型處理原始文字，如下所示：
 
 * **權杖化 (內部查詢)：**內部 `ML.PREDICT` 呼叫會使用 `bqml_tutorial.tokenizer` 模型。並以 `bigquery-public-data.imdb.reviews` 公開資料集的 `title` 欄做為 `text` 輸入內容。`tokenizer` 模型會將原始文字字串轉換為主要模型所需的數值權杖輸入內容，包括 `input_ids` 和 `attention_mask` 輸入內容。
 * **生成嵌入 (外部查詢)：**外部 `ML.PREDICT` 呼叫會使用 `bqml_tutorial.all-MiniLM-L6-v2` 模型。這項查詢會將內部查詢輸出內容中的 `input_ids` 和 `attention_mask` 資料欄做為輸入內容。
 
 `SELECT` 陳述式會擷取 `sentence_embedding` 資料欄，這是代表文字語意嵌入的 `FLOAT` 值陣列。
 
-1. 在 Google Cloud 控制台開啟 BigQuery Studio。
+如要生成嵌入內容，請按照下列步驟操作：
 
-   [前往 BigQuery Studio](https://console.cloud.google.com/bigquery?hl=zh-tw)
+1. 前往 Google Cloud 控制台的「BigQuery Studio」頁面。
+
+   [前往 Studio](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 在查詢編輯器中執行下列查詢。
 
    ```
@@ -475,7 +460,7 @@ imported_onnx_model = ONNXModel(
          SELECT
            title AS text
          FROM
-           `bigquery-public-data.imdb.reviews` limit 10))))
+           `bigquery-public-data.imdb.reviews` limit 10))));
    ```
 
    結果大致如下：
@@ -495,9 +480,9 @@ imported_onnx_model = ONNXModel(
 
 ### bq
 
-使用 bq 指令列工具的 [`query` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_query)執行查詢。這項查詢會使用 [`ML.PREDICT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict?hl=zh-tw)，透過模型產生嵌入。
+使用 bq 指令列工具的 [`query` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_query)執行查詢。這項查詢會使用 [`ML.PREDICT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict?hl=zh-tw)，透過模型生成嵌入。
 
-查詢會使用巢狀 `ML.PREDICT` 呼叫，直接透過權杖化工具和嵌入模型處理原始文字，如下所示：
+這項查詢會使用巢狀 `ML.PREDICT` 呼叫，直接透過權杖化工具和嵌入模型處理原始文字，如下所示：
 
 * **權杖化 (內部查詢)：**內部 `ML.PREDICT` 呼叫會使用 `bqml_tutorial.tokenizer` 模型。並以 `bigquery-public-data.imdb.reviews` 公開資料集的 `title` 欄做為 `text` 輸入內容。`tokenizer` 模型會將原始文字字串轉換為主要模型所需的數值權杖輸入內容，包括 `input_ids` 和 `attention_mask` 輸入內容。
 * **生成嵌入 (外部查詢)：**外部 `ML.PREDICT` 呼叫會使用 `bqml_tutorial.all-MiniLM-L6-v2` 模型。這項查詢會將內部查詢輸出內容中的 `input_ids` 和 `attention_mask` 資料欄做為輸入內容。
@@ -541,7 +526,7 @@ ML.PREDICT (MODEL `bqml_tutorial.all-MiniLM-L6-v2`,
 
 ### BigQuery DataFrames
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -598,10 +583,16 @@ gcloud projects delete PROJECT_ID
 
 ### 刪除個別資源
 
-或者，如要移除本教學課程中使用的個別資源，請執行下列操作：
+如要保留專案，但刪除本教學課程中使用的資源，請按照下列步驟操作：
 
-1. [刪除匯入的模型](https://docs.cloud.google.com/bigquery/docs/deleting-models?hl=zh-tw)。
-2. 選用：[刪除資料集](https://docs.cloud.google.com/bigquery/docs/managing-datasets?hl=zh-tw#delete-datasets)。
+1. 前往 Google Cloud 控制台的「BigQuery Studio」頁面。
+
+   [前往 Studio](https://console.cloud.google.com/bigquery?hl=zh-tw)
+2. 在左側窗格中展開專案，然後按一下「資料集」。
+3. 針對 `bqml_tutorial` 資料集，依序點按 more\_vert
+   **「Open actions」(開啟動作) >「Delete」(刪除)**。
+4. 在「Delete dataset」(刪除資料集) 對話方塊中，按一下「Delete」(刪除) 進行確認。
+5. 如果您按照步驟手動將 Transformer 模型檔案轉換為 ONNX，請[刪除 Cloud Storage bucket](https://docs.cloud.google.com/storage/docs/deleting-buckets?hl=zh-tw#delete-bucket)。
 
 ## 後續步驟
 
@@ -619,11 +610,11 @@ gcloud projects delete PROJECT_ID
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-16 (世界標準時間)。
+上次更新時間：2026-10-17 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-16 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-17 (世界標準時間)。"],[],[]]

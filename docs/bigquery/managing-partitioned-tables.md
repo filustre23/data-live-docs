@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -58,7 +58,7 @@ FROM
   [DATASET_ID.TABLE_NAME$__PARTITIONS_SUMMARY__]
 ```
 
-**注意：** 如要遷移至 GoogleSQL，請參閱[舊版 SQL 遷移說明文件](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql?hl=zh-tw#migrating_partition_meta_table_decorator)。
+**注意：** 如要遷移至 GoogleSQL，請參閱[舊版 SQL 遷移文件](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql?hl=zh-tw#migrating_partition_meta_table_decorator)。
 
 `__PARTITIONS_SUMMARY__` 中繼資料表包含下列資料欄：
 
@@ -91,7 +91,7 @@ FROM
 
 分區到期時，BigQuery 會將分區標示為待刪除，但不會立即刪除。背景程序會以非同步方式處理實際刪除作業，可能需要幾天才能完成。在背景程序刪除分區前，該分區仍會計入[資料表配額](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#partitioned_tables)。如要立即刪除分區，可以[手動刪除分區](#delete_a_partition)。
 
-刪除資料分割後，系統會根據[時間旅行](https://docs.cloud.google.com/bigquery/docs/time-travel?hl=zh-tw)和[安全防護](https://docs.cloud.google.com/bigquery/docs/time-travel?hl=zh-tw#fail-safe)政策保留資料分割資料，並視您的帳單模型收取費用。
+刪除資料分割後，系統會根據[時間旅行](https://docs.cloud.google.com/bigquery/docs/time-travel?hl=zh-tw)和[安全防護](https://docs.cloud.google.com/bigquery/docs/time-travel?hl=zh-tw#fail-safe)政策保留資料分割資料，並可能根據您的帳單模型產生費用。
 
 **注意：** 系統不會在 BigQuery 稽核記錄中記錄過期分區的自動刪除作業。
 
@@ -163,9 +163,9 @@ myotherproject:mydataset.mytable
 
 ## 設定分區篩選器必要條件
 
-建立分區資料表時，您可以要求對該資料表的所有查詢都必須包含述詞篩選器 (`WHERE` 子句)，以篩選分區資料欄。這項設定可以提升效能並降低成本，因為 BigQuery 可以使用篩選器，修剪不符合述詞的分區。這項規定也適用於參照分區資料表的檢視區塊和具體化檢視區塊查詢。
+建立分區資料表時，您可以要求對該資料表的所有查詢，都必須包含根據分區資料欄篩選的述詞篩選器 (`WHERE` 子句)。這項設定可以提升效能並降低成本，因為 BigQuery 可以使用篩選器，修剪不符合述詞的分區。這項規定也適用於參照分區資料表的檢視區塊和具體化檢視區塊查詢。
 
-如要瞭解如何在建立分區資料表時新增「Require partition filter」(需要分區篩選器) 選項，請參閱[建立分區資料表](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables?hl=zh-tw)一節。
+如要瞭解如何在建立分區資料表時新增「需要分區篩選器」選項，請參閱「[建立分區資料表](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables?hl=zh-tw)」一文。
 
 如果分區資料表設有「需要分區篩選器」，則對該資料表執行的每項查詢都必須至少包含一個述詞，且該述詞只會參照分區欄。如果查詢沒有這類述詞，系統會傳回下列錯誤：
 
@@ -391,7 +391,7 @@ myotherproject:mydataset2.mytable2
 
 **注意：** 含分區修飾符的 `bq cp` 指令適用於以資料欄為基礎的分區，其中來源分區和目的地分區相同。`bq cp` 指令也適用於以擷取時間為準的分區，其中分區代表相同的時間單位，或包含來源分區的較粗略時間單位。舉例來說，如果 `$20180130` 是來源分區修飾符，有效目的地分區修飾符包括 `$20180130`、`$201801` 和 `$2018`。如要將以資料欄為準的分區複製到完全不同的分區修飾符，或複製到更精細的時間單位分區，請使用 [`INSERT SELECT` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax?hl=zh-tw#insert_statement)。
 
-如要複製多個分區，請以逗號分隔清單的形式指定分區：
+如要複製多個分區，請以逗號分隔的清單形式指定分區：
 
 ```
 bq cp \
@@ -413,7 +413,7 @@ myotherproject:mydataset.mytable2
 
 ## 刪除分區
 
-您可以從分區資料表刪除個別分區。但無法刪除特殊 `__NULL__` 或 `__UNPARTITIONED__` 分區。
+您可以從分區資料表刪除個別分區。不過，您無法刪除特殊 `__NULL__` 或 `__UNPARTITIONED__` 分區。
 
 一次只能刪除一個分區。
 
@@ -429,7 +429,7 @@ Google Cloud 主控台不支援刪除分區。
 
 ### SQL
 
-如果[符合條件的 `DELETE` 陳述式](https://docs.cloud.google.com/bigquery/docs/using-dml-with-partitioned-tables?hl=zh-tw#using_dml_delete_to_delete_partitions)涵蓋分區中的所有資料列，BigQuery 就會移除整個分區。系統會移除這些資料，不會掃描位元組或耗用配額。以下 `DELETE` 陳述式範例涵蓋 `_PARTITIONDATE` 虛擬資料欄篩選器的整個分區：
+如果[符合條件的 `DELETE` 陳述式](https://docs.cloud.google.com/bigquery/docs/using-dml-with-partitioned-tables?hl=zh-tw#using_dml_delete_to_delete_partitions)涵蓋分區中的所有資料列，BigQuery 就會移除整個分區。系統會移除這些檔案，不會掃描位元組或耗用配額。以下 `DELETE` 陳述式範例涵蓋 `_PARTITIONDATE` 虛擬資料欄篩選器的整個分區：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -461,9 +461,9 @@ bq rm --table project_id:dataset.table$partition
 
 分區裝飾器格式如下，視分區類型而定：
 
-* 每小時分區：`yyyymmddhh`。範例：`$2016030100`。
+* 每小時分割：`yyyymmddhh`。範例：`$2016030100`。
 * 每日分割：`yyyymmdd`。範例：`$20160301`。
-* 每月分區：`yyyymm`。範例：`$201603`。
+* 每月分割：`yyyymm`。範例：`$201603`。
 * 年度分區：`yyyy`。範例：`$2016`。
 * 整數範圍分區：分區範圍的起始值。範例：`$20`。
 
@@ -479,7 +479,7 @@ bq 指令列工具會提示您確認這項動作。如要略過確認程序，�
 bq rm --table 'mydataset.mytable$20160301'
 ```
 
-在按月分區的資料表中，刪除 2016 年 3 月的分區：
+刪除按月分區資料表中的 2016 年 3 月分區：
 
 ```
 bq rm --table 'mydataset.mytable$201603'
@@ -497,7 +497,7 @@ bq rm --table 'mydataset.mytable$20'
 
 ## 分區資料表安全性
 
-分區資料表的存取權控管方式與標準資料表相同。詳情請參閱[資料表存取權控管簡介](https://docs.cloud.google.com/bigquery/docs/table-access-controls-intro?hl=zh-tw)。
+分區資料表的存取控管方式與標準資料表相同。詳情請參閱[資料表存取權控管簡介](https://docs.cloud.google.com/bigquery/docs/table-access-controls-intro?hl=zh-tw)。
 
 
 
@@ -506,11 +506,11 @@ bq rm --table 'mydataset.mytable$20'
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-10 (世界標準時間)。
+上次更新時間：2026-10-20 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-10 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-20 (世界標準時間)。"],[],[]]

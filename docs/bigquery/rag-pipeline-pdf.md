@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -10,28 +10,23 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 在檢索增強生成管道中剖析 PDF 透過集合功能整理內容 你可以依據偏好儲存及分類內容。
 
-本教學課程會逐步說明如何根據已剖析的 PDF 內容，建立檢索增強生成 (RAG) 管道。
+本教學課程將引導您根據剖析的 PDF 內容，建立檢索增強生成 (RAG) 管道。
 
-由於 PDF 檔案 (例如財務文件) 結構複雜，且包含文字、圖表和表格，因此在 RAG 管道中使用這類檔案可能會有困難。本教學課程說明如何搭配使用 [`ML.PROCESS_DOCUMENT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-process-document?hl=zh-tw)和 Document AI 的版面配置剖析器，根據從 PDF 檔案擷取的關鍵資訊，建構 RAG pipeline。
+PDF 檔案 (例如財務文件) 結構複雜，且包含文字、圖表和表格，因此在 RAG 管道中可能難以使用。本教學課程說明如何使用 [`AI.CHUNK_DOCUMENT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-chunk-document?hl=zh-tw)，根據從 PDF 檔案擷取的重要資訊建構 RAG 管道。
 
 ## 目標
 
 本教學課程涵蓋下列工作：
 
-* 建立[雲端資源連線](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection?hl=zh-tw)，以便從 BigQuery 連線至 Cloud Storage 和 Vertex AI。
 * 建立 Cloud Storage bucket 並上傳範例 PDF 檔案。
-* 在 PDF 檔案上建立[物件資料表](https://docs.cloud.google.com/bigquery/docs/object-table-introduction?hl=zh-tw)，讓 PDF 檔案可在 BigQuery 中使用。
-* [建立 Document AI 處理器](https://docs.cloud.google.com/document-ai/docs/create-processor?hl=zh-tw#create-processor)，用於剖析 PDF 檔案。
-* 建立[遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service?hl=zh-tw)，讓您透過 BigQuery 使用 Document AI API 存取文件處理器。
-* 使用 [`ML.PROCESS_DOCUMENT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-process-document?hl=zh-tw)搭配遠端模型，將 PDF 內容剖析為區塊，然後將該內容寫入 BigQuery 資料表。
-* 從 `ML.PROCESS_DOCUMENT` 函式傳回的 JSON 資料中擷取 PDF 內容，然後將該內容寫入 BigQuery 資料表。
-* 從剖析的 PDF 內容生成嵌入項目，然後將這些嵌入項目寫入 BigQuery 資料表。嵌入是 PDF 內容的數值表示法，可讓您對 PDF 內容執行語意搜尋和擷取作業。
-* 使用嵌入的 [`VECTOR_SEARCH` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions?hl=zh-tw#vector_search)，找出語意相似的 PDF 內容。
-* 使用 [`AI.GENERATE` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate?hl=zh-tw)生成文字，並運用向量搜尋結果增強提示輸入內容，進而提升結果品質，執行檢索增強生成 (RAG) 作業。
+* 使用 [`AI.CHUNK_DOCUMENT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-chunk-document?hl=zh-tw)將 PDF 內容剖析為區塊，然後將內容寫入 BigQuery 資料表。
+* 從分塊的 PDF 內容生成嵌入，然後將這些嵌入寫入 BigQuery 資料表。嵌入是 PDF 內容的數值表示法，可讓您對 PDF 內容執行語意搜尋和檢索。
+* 對嵌入項目使用 [`VECTOR_SEARCH` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions?hl=zh-tw#vector_search)，找出語意相似的 PDF 內容。
+* 使用 [`AI.GENERATE` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate?hl=zh-tw)執行檢索增強生成 (RAG) 來生成文字，並使用向量搜尋結果來增強提示輸入內容，進而改善結果。
 
 ## 費用
 
-在本文件中，您會使用下列 Google Cloud的計費元件：
+在本文件中，您會使用下列 Google Cloud計費元件：
 
 * [BigQuery](https://cloud.google.com/bigquery/pricing?hl=zh-tw): You incur costs for the data that you
   process in BigQuery.
@@ -42,7 +37,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 * [Cloud Storage](https://cloud.google.com/storage/pricing?hl=zh-tw): You incur costs for object storage in
   Cloud Storage.
 
-如要根據預測用量估算費用，請使用 [Pricing Calculator](https://docs.cloud.google.com/products/calculator?hl=zh-tw)。
+您可以使用 [Pricing Calculator](https://docs.cloud.google.com/products/calculator?hl=zh-tw)，根據預測用量估算費用。
 
 初次使用 Google Cloud 的使用者可能符合[免費試用期](https://docs.cloud.google.com/free?hl=zh-tw)資格。
 
@@ -52,7 +47,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### 控制台
 
-- 登入 Google Cloud 帳戶。如果您是 Google Cloud新手，歡迎[建立帳戶](https://console.cloud.google.com/freetrial?hl=zh-tw)，親自評估產品在實際工作環境中的成效。新客戶還能獲得價值 $300 美元的免費抵免額，可用於執行、測試及部署工作負載。
+- 登入 Google Cloud 帳戶。如果您未曾使用過 Google Cloud，歡迎[建立帳戶](https://console.cloud.google.com/freetrial?hl=zh-tw)，親自體驗實際使用我們產品的成效。新客戶還能獲得價值 $300 美元的免費抵免額，用於執行、測試及部署工作負載。
 - In the Google Cloud console, on the project selector page,
   select or create a Google Cloud project.
 
@@ -72,7 +67,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
   [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
 - [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project).
-- Enable the BigQuery, BigQuery Connection, Vertex AI, Document AI, and Cloud Storage APIs.
+- Enable the BigQuery, BigQuery Connection, Vertex AI, Document AI, and Cloud Storage APIs, if any are not already enabled.
 
   **Roles required to enable APIs**
 
@@ -103,7 +98,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
   [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
 - [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project).
-- Enable the BigQuery, BigQuery Connection, Vertex AI, Document AI, and Cloud Storage APIs.
+- Enable the BigQuery, BigQuery Connection, Vertex AI, Document AI, and Cloud Storage APIs, if any are not already enabled.
 
   **Roles required to enable APIs**
 
@@ -115,11 +110,8 @@ Google uses AI technology to translate content into your preferred language. AI 
 
   [Enable the APIs](https://console.cloud.google.com/apis/enableflow?apiid=bigquery.googleapis.com%2Cbigqueryconnection.googleapis.com%2Caiplatform.googleapis.com%2Cdocumentai.googleapis.com%2Cstorage.googleapis.com&hl=zh-tw)
 
-1. 請確認您在專案中具備下列一或多個角色：
-   **Storage 管理員**、
-   **Document AI 編輯者**、
-   **BigQuery 管理員**、
-   **專案 IAM 管理員**
+1. 確認您在專案中具備下列角色：
+   **Storage 管理員**、**Document AI 編輯者**、**BigQuery 管理員**、**專案 IAM 管理員**
 
    #### 檢查角色
 
@@ -127,8 +119,8 @@ Google uses AI technology to translate content into your preferred language. AI 
 
       [前往「IAM」頁面](https://console.cloud.google.com/projectselector/iam-admin/iam?supportedpurview=project&hl=zh-tw)
    2. 選取專案。
-   3. 在「主體」欄中，找出所有識別您或您所屬群組的資料列。如要瞭解自己所屬的群組，請與管理員聯絡。
-   4. 針對指定或包含您的所有列，請檢查「角色」欄，確認角色清單是否包含必要角色。
+   3. 在「Principal」(主體) 欄中，找出所有代表您或您所屬群組的資料列。如要瞭解您所屬的群組，請與管理員聯絡。
+   4. 在指定或包含您的所有資料列中，查看「Role」(角色) 欄，確認角色清單是否包含必要角色。
 
 
    #### 授予角色
@@ -145,7 +137,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### gcloud
 
-- 登入 Google Cloud 帳戶。如果您是 Google Cloud新手，歡迎[建立帳戶](https://console.cloud.google.com/freetrial?hl=zh-tw)，親自評估產品在實際工作環境中的成效。新客戶還能獲得價值 $300 美元的免費抵免額，可用於執行、測試及部署工作負載。
+- 登入 Google Cloud 帳戶。如果您未曾使用過 Google Cloud，歡迎[建立帳戶](https://console.cloud.google.com/freetrial?hl=zh-tw)，親自體驗實際使用我們產品的成效。新客戶還能獲得價值 $300 美元的免費抵免額，用於執行、測試及部署工作負載。
 - [安裝](https://docs.cloud.google.com/sdk/docs/install?hl=zh-tw) Google Cloud CLI。
 - 若您採用的是外部識別資訊提供者 (IdP)，請先[使用聯合身分登入 gcloud CLI](https://docs.cloud.google.com/iam/docs/workforce-log-in-gcloud?hl=zh-tw)。
 - 執行下列指令，[初始化](https://docs.cloud.google.com/sdk/docs/initializing?hl=zh-tw) gcloud CLI：
@@ -157,9 +149,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 
   **選取或建立專案所需的角色**
 
-  * **選取專案**：選取專案時，不需要具備特定 IAM 角色，只要您在專案中獲派角色，即可選取該專案。
-  * **建立專案**：如要建立專案，您需要專案建立者角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
-  **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，而不要選取現有專案。因此您在完成這些步驟之後，就可以刪除專案，並移除與該專案相關聯的所有資源。
+  * **選取專案**：選取專案時不需要特定 IAM 角色，只要您獲派某個專案的角色，即可選取該專案。
+  * **建立專案**：如要建立專案，您必須具備專案建立者角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+  **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，不要選取現有專案。如果採用這種做法，當您完成這些步驟後，就可以直接刪除該專案，並移除相關聯的所有資源。
   * 建立 Google Cloud 專案：
 
     ```
@@ -174,12 +166,12 @@ Google uses AI technology to translate content into your preferred language. AI 
     ```
 
     將 `PROJECT_ID` 替換為 Google Cloud 專案名稱。
-- [確認專案已啟用計費功能 Google Cloud](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project) 。
-- 啟用 BigQuery、BigQuery Connection、Vertex AI、Document AI 和 Cloud Storage API：
+- [確認 Google Cloud 專案已啟用計費功能](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project)。
+- 啟用 BigQuery、BigQuery Connection、Vertex AI、Document AI 和 Cloud Storage API (如有尚未啟用的 API)：
 
-  **啟用 API 時所需的角色**
+  **啟用 API 所需的角色**
 
-  您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用情形管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+  您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過擁有者角色 (`roles/owner`) 取得這項權限。否則，您可以透過服務使用情形管理員角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
   ```
   gcloud services enable bigquery.googleapis.com bigqueryconnection.googleapis.com aiplatform.googleapis.com documentai.googleapis.com storage.googleapis.com
@@ -196,9 +188,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 
   **選取或建立專案所需的角色**
 
-  * **選取專案**：選取專案時，不需要具備特定 IAM 角色，只要您在專案中獲派角色，即可選取該專案。
-  * **建立專案**：如要建立專案，您需要專案建立者角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
-  **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，而不要選取現有專案。因此您在完成這些步驟之後，就可以刪除專案，並移除與該專案相關聯的所有資源。
+  * **選取專案**：選取專案時不需要特定 IAM 角色，只要您獲派某個專案的角色，即可選取該專案。
+  * **建立專案**：如要建立專案，您必須具備專案建立者角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+  **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，不要選取現有專案。如果採用這種做法，當您完成這些步驟後，就可以直接刪除該專案，並移除相關聯的所有資源。
   * 建立 Google Cloud 專案：
 
     ```
@@ -213,19 +205,18 @@ Google uses AI technology to translate content into your preferred language. AI 
     ```
 
     將 `PROJECT_ID` 替換為 Google Cloud 專案名稱。
-- [確認專案已啟用計費功能 Google Cloud](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project) 。
-- 啟用 BigQuery、BigQuery Connection、Vertex AI、Document AI 和 Cloud Storage API：
+- [確認 Google Cloud 專案已啟用計費功能](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project)。
+- 啟用 BigQuery、BigQuery Connection、Vertex AI、Document AI 和 Cloud Storage API (如有尚未啟用的 API)：
 
-  **啟用 API 時所需的角色**
+  **啟用 API 所需的角色**
 
-  您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用情形管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+  您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過擁有者角色 (`roles/owner`) 取得這項權限。否則，您可以透過服務使用情形管理員角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
   ```
   gcloud services enable bigquery.googleapis.com bigqueryconnection.googleapis.com aiplatform.googleapis.com documentai.googleapis.com storage.googleapis.com
   ```
 
-1. 將角色授予使用者帳戶。針對下列每個 IAM 角色，執行一次下列指令：
-   `roles/storage.admin,
+1. 將角色授予使用者帳戶。針對下列各個 IAM 角色執行下列指令一次：`roles/storage.admin,
    roles/documentai.editor,
    roles/bigquery.admin,
    roles/resourcemanager.projectIamAdmin`
@@ -237,31 +228,36 @@ Google uses AI technology to translate content into your preferred language. AI 
    更改下列內容：
 
    * `PROJECT_ID`：專案 ID。
-   * `USER_IDENTIFIER`：使用者帳戶的 ID。 例如：`myemail@example.com`。
+   * `USER_IDENTIFIER`：使用者帳戶 ID。 例如：`myemail@example.com`。
    * `ROLE`：授予使用者帳戶的 IAM 角色。
 
 ## 建立資料集
 
-建立 BigQuery 資料集來儲存機器學習模型。
+如要建立 BigQuery 資料集，請選取下列其中一個選項：
 
 ### 控制台
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
-   [前往 BigQuery 頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在「Explorer」窗格中，按一下專案名稱。
-3. 依序點按 more\_vert「View actions」(查看動作) >「Create dataset」(建立資料集)。
-4. 在「建立資料集」頁面中，執行下列操作：
+   [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
+2. 點選左側窗格中的 explore「Explorer」。
+
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
+3. 在「Explorer」中展開專案，然後按一下「資料集」。
+4. 在「Datasets」(資料集) 頁面，按一下「Create dataset」(建立資料集)add。
+5. 在「建立資料集」窗格中，執行下列操作：
 
    * 在「Dataset ID」(資料集 ID) 中輸入 `bqml_tutorial`。
-   * 針對「Location type」(位置類型) 選取「Multi-region」(多區域)，然後選取「US」(美國)。
-   * 其餘設定請保留預設狀態，然後按一下「建立資料集」。
+   * 在「資料位置」部分，選取「US」。
+
+   其餘設定均保留預設值。
+6. 點選「建立資料集」。
 
 ### bq
 
 如要建立新的資料集，請使用 [`bq mk --dataset` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#mk-dataset)。
 
-1. 建立名為 `bqml_tutorial` 的資料集，並將資料位置設為 `US`。
+1. 建立名為 `bqml_tutorial` 的資料集，並將資料位置設為 `US`：
 
    ```
    bq mk --dataset \
@@ -269,7 +265,7 @@ Google uses AI technology to translate content into your preferred language. AI 
      --description "BigQuery ML tutorial dataset." \
      bqml_tutorial
    ```
-2. 確認資料集已建立完成：
+2. 確認資料集已建立：
 
    ```
    bq ls
@@ -277,7 +273,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### API
 
-請呼叫 [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert?hl=zh-tw) 方法，搭配已定義的[資料集資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets?hl=zh-tw)。
+使用定義的[資料集資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets?hl=zh-tw)呼叫 [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert?hl=zh-tw) 方法：
 
 ```
 {
@@ -287,391 +283,17 @@ Google uses AI technology to translate content into your preferred language. AI 
 }
 ```
 
-## 建立連線
-
-建立[Cloud 資源連線](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection?hl=zh-tw)，並取得連線的服務帳戶。在相同[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)建立連線。
-
-如果已設定預設連線，或具備 BigQuery 管理員角色，可以略過這個步驟。
-
-選取下列選項之一：
-
-### 控制台
-
-1. 前往「BigQuery」頁面。
-
-   [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 點選左側窗格中的 explore「Explorer」。
-
-   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
-3. 在「Explorer」窗格中展開專案名稱，然後按一下「Connections」。
-4. 在「Connections」(連線) 頁面中，按一下「Create connection」(建立連線)。
-5. 在「連線類型」中，選擇「Vertex AI 遠端模型、遠端函式、BigLake 和 Spanner (Cloud 資源)」。
-6. 在「連線 ID」欄位中，輸入連線名稱。
-7. 在「位置類型」中，選取連線位置。連線應與資料集等其他資源位於同一位置。
-8. 點選「建立連線」。
-9. 點選「前往連線」。
-10. 在「連線資訊」窗格中，複製服務帳戶 ID，以便在後續步驟中使用。
-
-### SQL
-
-使用 [`CREATE CONNECTION` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#create_connection_statement)：
-
-1. 前往 Google Cloud 控制台的「BigQuery」頁面。
-
-   [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在查詢編輯器中輸入下列陳述式：
-
-   ```
-   CREATE CONNECTION [IF NOT EXISTS] `CONNECTION_NAME`
-   OPTIONS (
-     connection_type = "CLOUD_RESOURCE",
-     friendly_name = "FRIENDLY_NAME",
-     description = "DESCRIPTION"
-     );
-   ```
-
-   請替換下列項目：
-
-   * `CONNECTION_NAME`：連線名稱，格式為 `PROJECT_ID.LOCATION.CONNECTION_ID`、`LOCATION.CONNECTION_ID` 或 `CONNECTION_ID`。如果省略專案或位置，系統會從執行陳述式的專案和位置推斷。
-   * `FRIENDLY_NAME` (選用)：連線的描述性名稱。
-   * `DESCRIPTION` (選用)：連線說明。
-3. 按一下「執行」play\_circle。
-
-如要進一步瞭解如何執行查詢，請參閱「[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)」。
-
-### bq
-
-1. 在指令列環境中建立連線：
-
-   ```
-   bq mk --connection --location=REGION --project_id=PROJECT_ID \
-       --connection_type=CLOUD_RESOURCE CONNECTION_ID
-   ```
-
-   `--project_id` 參數會覆寫預設專案。
-
-   更改下列內容：
-
-   * `REGION`：您的[連線區域](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#supported_locations)
-   * `PROJECT_ID`：您的 Google Cloud 專案 ID
-   * `CONNECTION_ID`：連線的 ID
-
-   建立連線資源時，BigQuery 會建立專屬的系統服務帳戶，並將其與連線建立關聯。
-
-   **疑難排解**：如果收到下列連線錯誤訊息，請[更新 Google Cloud SDK](https://docs.cloud.google.com/sdk/docs/quickstart?hl=zh-tw)：
-
-   ```
-   Flags parsing error: flag --connection_type=CLOUD_RESOURCE: value should be one of...
-   ```
-2. 擷取並複製服務帳戶 ID，以供後續步驟使用：
-
-   ```
-   bq show --connection PROJECT_ID.REGION.CONNECTION_ID
-   ```
-
-   輸出結果會與下列內容相似：
-
-   ```
-   name                          properties
-   1234.REGION.CONNECTION_ID     {"serviceAccountId": "connection-1234-9u56h9@gcp-sa-bigquery-condel.iam.gserviceaccount.com"}
-   ```
-
-### Python
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-import google.api_core.exceptions
-from google.cloud import bigquery_connection_v1
-
-client = bigquery_connection_v1.ConnectionServiceClient()
-
-
-def create_connection(
-    project_id: str,
-    location: str,
-    connection_id: str,
-):
-    """Creates a BigQuery connection to a Cloud Resource.
-
-    Cloud Resource connection creates a service account which can then be
-    granted access to other Google Cloud resources for federated queries.
-
-    Args:
-        project_id: The Google Cloud project ID.
-        location: The location of the connection (for example, "us-central1").
-        connection_id: The ID of the connection to create.
-    """
-
-    parent = client.common_location_path(project_id, location)
-
-    connection = bigquery_connection_v1.Connection(
-        friendly_name="Example Connection",
-        description="A sample connection for a Cloud Resource.",
-        cloud_resource=bigquery_connection_v1.CloudResourceProperties(),
-    )
-
-    try:
-        created_connection = client.create_connection(
-            parent=parent, connection_id=connection_id, connection=connection
-        )
-        print(f"Successfully created connection: {created_connection.name}")
-        print(f"Friendly name: {created_connection.friendly_name}")
-        print(
-            f"Service Account: {created_connection.cloud_resource.service_account_id}"
-        )
-
-    except google.api_core.exceptions.AlreadyExists:
-        print(f"Connection with ID '{connection_id}' already exists.")
-        print("Please use a different connection ID.")
-    except Exception as e:
-        print(f"An unexpected error occurred while creating the connection: {e}")
-```
-
-### Node.js
-
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-const {ConnectionServiceClient} =
-  require('@google-cloud/bigquery-connection').v1;
-const {status} = require('@grpc/grpc-js');
-
-const client = new ConnectionServiceClient();
-
-/**
- * Creates a new BigQuery connection to a Cloud Resource.
- *
- * A Cloud Resource connection creates a service account that can be granted access
- * to other Google Cloud resources.
- *
- * @param {string} projectId The Google Cloud project ID. for example, 'example-project-id'
- * @param {string} location The location of the project to create the connection in. for example, 'us-central1'
- * @param {string} connectionId The ID of the connection to create. for example, 'example-connection-id'
- */
-async function createConnection(projectId, location, connectionId) {
-  const parent = client.locationPath(projectId, location);
-
-  const connection = {
-    friendlyName: 'Example Connection',
-    description: 'A sample connection for a Cloud Resource',
-    // The service account for this cloudResource will be created by the API.
-    // Its ID will be available in the response.
-    cloudResource: {},
-  };
-
-  const request = {
-    parent,
-    connectionId,
-    connection,
-  };
-
-  try {
-    const [response] = await client.createConnection(request);
-
-    console.log(`Successfully created connection: ${response.name}`);
-    console.log(`Friendly name: ${response.friendlyName}`);
-
-    console.log(`Service Account: ${response.cloudResource.serviceAccountId}`);
-  } catch (err) {
-    if (err.code === status.ALREADY_EXISTS) {
-      console.log(`Connection '${connectionId}' already exists.`);
-    } else {
-      console.error(`Error creating connection: ${err.message}`);
-    }
-  }
-}
-```
-
-### Terraform
-
-請使用 [`google_bigquery_connection`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_connection) 資源。
-
-**注意：** 如要使用 Terraform 建立 BigQuery 物件，必須啟用 [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest?hl=zh-tw)。
-
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-下列範例會在 `US` 區域中建立名為 `my_cloud_resource_connection` 的 Cloud 資源連結：
-
-```
-# This queries the provider for project information.
-data "google_project" "default" {}
-
-# This creates a cloud resource connection in the US region named my_cloud_resource_connection.
-# Note: The cloud resource nested object has only one output field - serviceAccountId.
-resource "google_bigquery_connection" "default" {
-  connection_id = "my_cloud_resource_connection"
-  project       = data.google_project.default.project_id
-  location      = "US"
-  cloud_resource {}
-}
-```
-
-如要在 Google Cloud 專案中套用 Terraform 設定，請完成下列各節的步驟。
-
-## 準備 Cloud Shell
-
-1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
-2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
-
-   每項專案只需要執行一次這個指令，且可以在任何目錄中執行。
-
-   ```
-   export GOOGLE_CLOUD_PROJECT=PROJECT_ID
-   ```
-
-   如果您在 Terraform 設定檔中設定明確值，環境變數就會遭到覆寫。
-
-## 準備目錄
-
-每個 Terraform 設定檔都必須有自己的目錄 (也稱為*根模組*)。
-
-1. 在 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw) 中建立目錄，並在該目錄中建立新檔案。檔案名稱的副檔名必須是 `.tf`，例如 `main.tf`。在本教學課程中，這個檔案稱為 `main.tf`。
-
-   ```
-   mkdir DIRECTORY && cd DIRECTORY && touch main.tf
-   ```
-2. 如果您正在學習教學課程，可以複製每個章節或步驟中的程式碼範例。
-
-   將範例程式碼複製到新建立的 `main.tf` 中。
-
-   視需要從 GitHub 複製程式碼。如果 Terraform 程式碼片段是端對端解決方案的一部分，建議您使用這種做法。
-3. 查看並修改範例參數，套用至您的環境。
-4. 儲存變更。
-5. 初始化 Terraform。每個目錄只需執行一次這項操作。
-
-   ```
-   terraform init
-   ```
-
-   如要使用最新版 Google 供應商，請加入 `-upgrade` 選項：
-
-   ```
-   terraform init -upgrade
-   ```
-
-## 套用變更
-
-1. 查看設定，確認 Terraform 即將建立或更新的資源符合您的預期：
-
-   ```
-   terraform plan
-   ```
-
-   視需要修正設定。
-2. 執行下列指令並在提示中輸入 `yes`，套用 Terraform 設定：
-
-   ```
-   terraform apply
-   ```
-
-   等待 Terraform 顯示「Apply complete!」訊息。
-3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)即可查看結果。在 Google Cloud 控制台中，前往 UI 中的資源，確認 Terraform 已建立或更新這些資源。
-
-**注意：**Terraform 範例通常會假設 Google Cloud 專案已啟用必要的 API。
-
-## 將存取權授予服務帳戶
-
-選取下列選項之一：
-
-### 控制台
-
-1. 前往「IAM & Admin」(IAM 與管理) 頁面。
-
-   [前往「IAM & Admin」(IAM 與管理)](https://console.cloud.google.com/project/_/iam-admin?hl=zh-tw)
-2. 按一下 person\_add「授予存取權」。
-
-   「新增主體」對話方塊隨即開啟。
-3. 在「新增主體」欄位，輸入先前複製的服務帳戶 ID。
-4. 在「Select a role」(選取角色) 欄位中，依序選取「Document AI」和「Document AI Viewer」(Document AI 檢視者)。
-5. 按一下 [Add another role] (新增其他角色)。
-6. 在「Select a role」(請選擇角色) 欄位中，依序選取「Cloud Storage」和「Storage Object Viewer」(Storage 物件檢視者)。
-7. 按一下 [Add another role] (新增其他角色)。
-8. 在「Select a role」(請選擇角色) 欄位中，搜尋「Agent Platform User」(Agent Platform 使用者)。
-9. 按一下 [儲存]。
-
-### gcloud
-
-使用 [`gcloud projects add-iam-policy-binding` 指令](https://docs.cloud.google.com/sdk/gcloud/reference/projects/add-iam-policy-binding?hl=zh-tw)：
-
-```
-gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount:MEMBER' --role='roles/documentai.viewer' --condition=None
-gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount:MEMBER' --role='roles/storage.objectViewer' --condition=None
-gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount:MEMBER' --role='roles/aiplatform.user' --condition=None
-```
-
-請替換下列項目：
-
-* `PROJECT_NUMBER`：您的專案編號。
-* `MEMBER`：您先前複製的服務帳戶 ID。
-
 ## 將範例 PDF 上傳至 Cloud Storage
 
 如要將範例 PDF 上傳至 Cloud Storage，請按照下列步驟操作：
 
-1. 前往 <https://www.federalreserve.gov/publications/files/scf23.pdf>，然後按一下下載圖示 download，即可下載 `scf23.pdf` 範例 PDF。
+1. 前往 <https://www.federalreserve.gov/publications/files/scf23.pdf>，然後點選「下載」圖示 download，下載 `scf23.pdf` 範例 PDF。
 2. [建立 Cloud Storage bucket](https://docs.cloud.google.com/storage/docs/creating-buckets?hl=zh-tw)。
-3. [上傳](https://docs.cloud.google.com/storage/docs/uploading-objects?hl=zh-tw) `scf23.pdf` 檔案至 bucket。
+3. 將 `scf23.pdf` 檔案[上傳](https://docs.cloud.google.com/storage/docs/uploading-objects?hl=zh-tw)至 bucket。
 
-## 建立物件資料表
+## 將 PDF 檔案剖析成多個區塊
 
-在 Cloud Storage 中的 PDF 檔案上建立物件資料表：
-
-1. 前往 Google Cloud 控制台的「BigQuery」頁面。
-
-   [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在查詢編輯器中執行下列陳述式：
-
-   ```
-   CREATE OR REPLACE EXTERNAL TABLE `bqml_tutorial.pdf`
-   WITH CONNECTION `LOCATION.CONNECTION_ID`
-   OPTIONS(
-     object_metadata = 'SIMPLE',
-     uris = ['gs://BUCKET/scf23.pdf']);
-   ```
-
-   更改下列內容：
-
-   * `LOCATION`：連線位置。
-   * `CONNECTION_ID`：BigQuery 連線的 ID。
-
-     在 Google Cloud 控制台中[查看連線詳細資料](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw#view-connections)時，`CONNECTION_ID` 是「連線 ID」中顯示的完整連線 ID 最後一個區段的值，例如 `projects/myproject/locations/connection_location/connections/myconnection`。
-   * `BUCKET`：包含 `scf23.pdf` 檔案的 Cloud Storage bucket。完整的 `uri` 選項值應與 `['gs://mybucket/scf23.pdf']` 類似。
-
-## 建立文件處理器
-
-[建立文件處理器](https://docs.cloud.google.com/document-ai/docs/create-processor?hl=zh-tw#create-processor)，以 `us` 多區域的[版面配置剖析器處理器](https://docs.cloud.google.com/document-ai/docs/layout-parse-chunk?hl=zh-tw)為基礎。從「處理器詳細資料」頁面複製預測端點，供下一節使用。
-
-## 為文件處理器建立遠端模型
-
-建立遠端模型，存取 Document AI 處理器：
-
-1. 前往 Google Cloud 控制台的「BigQuery」頁面。
-
-   [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在查詢編輯器中執行下列陳述式：
-
-   ```
-   CREATE OR REPLACE MODEL `bqml_tutorial.parser_model`
-   REMOTE WITH CONNECTION `LOCATION.CONNECTION_ID`
-     OPTIONS(remote_service_type = 'CLOUD_AI_DOCUMENT_V1', document_processor = 'PROCESSOR_ID');
-   ```
-
-   更改下列內容：
-
-   * `LOCATION`：連線位置。
-   * `CONNECTION_ID`：BigQuery 連線的 ID。
-
-     在 Google Cloud 控制台中[查看連線詳細資料](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw#view-connections)時，`CONNECTION_ID` 是「連線 ID」中顯示的完整連線 ID 最後一個區段的值，例如 `projects/myproject/locations/connection_location/connections/myconnection`。
-   * `PROCESSOR_ID`：文件處理器 ID。如要找出這個值，請[查看處理器詳細資料](https://docs.cloud.google.com/document-ai/docs/create-processor?hl=zh-tw#get-processor)，然後查看「基本資訊」部分中的「ID」列。
-
-## 將 PDF 檔案剖析為區塊
-
-使用 `ML.PROCESS_DOCUMENT` 函式搭配文件處理器，將 PDF 檔案剖析為多個區塊，然後將內容寫入表格。`ML.PROCESS_DOCUMENT` 函式會以 JSON 格式傳回 PDF 區塊。
+使用文件處理器和 `AI.CHUNK_DOCUMENT` 函式，將 PDF 檔案剖析為區塊，然後將內容寫入資料表：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -680,61 +302,45 @@ gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount
 
    ```
    CREATE or REPLACE TABLE bqml_tutorial.chunked_pdf AS (
-     SELECT * FROM ML.PROCESS_DOCUMENT(
-     MODEL bqml_tutorial.parser_model,
-     TABLE bqml_tutorial.pdf,
-     PROCESS_OPTIONS => (JSON '{"layout_config": {"chunking_config": {"chunk_size": 250}}}')
-     )
+     SELECT *
+     FROM AI.CHUNK_DOCUMENT('gs://BUCKET_NAME/scf23.pdf', chunk_size => 250)
    );
    ```
-
-## 將 PDF 區塊資料剖析為不同的資料欄
-
-從 `ML.PROCESS_DOCUMENT` 函式傳回的 JSON 資料中擷取 PDF 內容和中繼資料資訊，然後將該內容寫入表格：
-
-1. 前往 Google Cloud 控制台的「BigQuery」頁面。
-
-   [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在查詢編輯器中執行下列陳述式，剖析 PDF 內容：
+3. 在查詢編輯器中執行下列查詢，查看剖析後的 PDF 內容子集：
 
    ```
-   CREATE OR REPLACE TABLE bqml_tutorial.parsed_pdf AS (
    SELECT
-     uri,
-     JSON_EXTRACT_SCALAR(json , '$.chunkId') AS id,
-     JSON_EXTRACT_SCALAR(json , '$.content') AS content,
-     JSON_EXTRACT_SCALAR(json , '$.pageFooters[0].text') AS page_footers_text,
-     JSON_EXTRACT_SCALAR(json , '$.pageSpan.pageStart') AS page_span_start,
-     JSON_EXTRACT_SCALAR(json , '$.pageSpan.pageEnd') AS page_span_end
-   FROM bqml_tutorial.chunked_pdf, UNNEST(JSON_EXTRACT_ARRAY(ml_process_document_result.chunkedDocument.chunks, '$')) json
-   );
-   ```
-3. 在查詢編輯器中執行下列陳述式，即可查看已剖析 PDF 內容的子集：
-
-   ```
-   SELECT *
-   FROM `bqml_tutorial.parsed_pdf`
-   ORDER BY id
-   LIMIT 5;
+     chunk_id,
+     start_page,
+     end_page,
+     content
+   FROM `bqml_tutorial.chunked_pdf`
+   ORDER BY chunk_id
+   LIMIT 3;
    ```
 
    輸出結果會與下列內容相似：
 
    ```
-   +-----------------------------------+------+------------------------------------------------------------------------------------------------------+-------------------+-----------------+---------------+
-   |                uri                |  id  |                                                 content                                              | page_footers_text | page_span_start | page_span_end |
-   +-----------------------------------+------+------------------------------------------------------------------------------------------------------+-------------------+-----------------+---------------+
-   | gs://mybucket/scf23.pdf           | c1   | •BOARD OF OF FEDERAL GOVERN NOR RESERVE SYSTEM RESEARCH & ANALYSIS                                   | NULL              | 1               | 1             |
-   | gs://mybucket/scf23.pdf           | c10  | • In 2022, 20 percent of all families, 14 percent of families in the bottom half of the usual ...    | NULL              | 8               | 9             |
-   | gs://mybucket/scf23.pdf           | c100 | The SCF asks multiple questions intended to capture whether families are credit constrained, ...     | NULL              | 48              | 48            |
-   | gs://mybucket/scf23.pdf           | c101 | Bankruptcy behavior over the past five years is based on a series of retrospective questions ...     | NULL              | 48              | 48            |
-   | gs://mybucket/scf23.pdf           | c102 | # Percentiles of the Distributions of Income and Net Worth                                           | NULL              | 48              | 49            |
-   +-----------------------------------+------+------------------------------------------------------------------------------------------------------+-------------------+-----------------+---------------+
+   +----------+------------+----------+-------------------------------------------+
+   | chunk_id | start_page | end_page | content                                   |
+   +----------+------------+----------+-------------------------------------------+
+   | 1        | 1          | 1        | OF NORS. • BOARD OF GOVERNO FEDERAL       |
+   |          |            |          | RESERVE SYSTEM RESEARCH & ANALYSIS        |
+   | 2        | 1          | 7        | # Changes in U.S. Family Finances from    |
+   |          |            |          | 2019 to 2022                              |
+   |          |            |          |                                           |
+   |          |            |          | Evidence from the Survey of Consumer...   |
+   | 3        | 3          | 5        | # Changes in U.S. Family Finances from    |
+   |          |            |          | 2019 to 2022                              |
+   |          |            |          |                                           |
+   |          |            |          | ## Contents...                            |
+   +----------+------------+----------+-------------------------------------------+
    ```
 
 ## 生成嵌入項目
 
-為剖析的 PDF 內容生成嵌入項目，然後寫入資料表：
+為剖析後的 PDF 內容生成嵌入項目，然後寫入資料表：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -744,15 +350,15 @@ gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount
    ```
    CREATE OR REPLACE TABLE `bqml_tutorial.embeddings` AS (
      SELECT *, AI.EMBED(content, endpoint => 'text-embedding-005').result AS embedding
-     FROM bqml_tutorial.parsed_pdf
+     FROM bqml_tutorial.chunked_pdf
    );
    ```
 
 ## 執行向量搜尋
 
-對剖析的 PDF 內容執行向量搜尋。
+對剖析後的 PDF 內容執行向量搜尋。
 
-下列查詢會接收文字輸入內容、使用 `AI.EMBED` 函式為該輸入內容建立嵌入，然後使用 `VECTOR_SEARCH` 函式，將輸入嵌入與最相似的 PDF 內容嵌入進行比對。結果會顯示與家庭淨值變動最相關的十個 PDF 區塊。
+下列查詢會接收文字輸入內容，使用 `AI.EMBED` 函式為該輸入內容建立嵌入，然後使用 `VECTOR_SEARCH` 函式，將輸入嵌入與最相似的 PDF 內容嵌入進行比對。結果會顯示與家庭淨資產變化最相關的前十個 PDF 區塊。
 
 1. 前往「BigQuery」頁面
 
@@ -762,9 +368,9 @@ gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount
    ```
    SELECT
      distance,
-     base.id AS chunk_id,
-     base.page_span_start AS start_page,
-     base.page_span_end AS end_page,
+     base.chunk_id AS chunk_id,
+     base.start_page AS start_page,
+     base.end_page AS end_page,
      base.content
    FROM
      VECTOR_SEARCH(
@@ -785,20 +391,25 @@ gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount
    +----------+----------+------------+----------+-----------------------------------+
    | distance | chunk_id | start_page | end_page | content                           |
    +----------+----------+------------+----------+-----------------------------------+
-   | 0.645685 | 26       | 17         | 18       | 18 Between the first quarter of   |
+   | 0.608587 | 25       | 17         | 18       | # Net Worth                       |
+   |          |          |            |          |                                   |
+   |          |          |            |          | 18 Between the first quarter of   |
    |          |          |            |          | 2019 and the first quarter of...  |
    +----------+----------+------------+----------+-----------------------------------+
-   | 0.602665 | 30       | 19         | 21       | ## Net Worth by Family            |
+   | 0.606387 | 29       | 19         | 21       | ## Net Worth                      |
+   |          |          |            |          |                                   |
+   |          |          |            |          | ## Net Worth by Family            |
    |          |          |            |          | Characteristics...                |
    +----------+----------+------------+----------+-----------------------------------+
-   | 0.599438 | 24       | 17         | 21       | # Net Worth                       |
+   | 0.599438 | 23       | 17         | 21       | # Net Worth                       |
+   |          |          |            |          |                                   |
    |          |          |            |          | The net improvements in...        |
    +----------+----------+------------+----------+-----------------------------------+
    ```
 
-## 根據向量搜尋結果生成文字
+## 生成文字，並以向量搜尋結果強化
 
-對嵌入執行向量搜尋，找出語意相似的 PDF 內容，然後搭配向量搜尋結果使用 `AI.GENERATE` 函式，擴增提示輸入內容並提升文字生成結果。在本例中，查詢會使用 PDF 區塊中的資訊，回答有關過去十年家庭淨值變化的問題。
+對嵌入執行向量搜尋，找出語意相似的 PDF 內容，然後搭配向量搜尋結果使用 `AI.GENERATE` 函式，擴充提示詞輸入內容並改善文字生成結果。在這個例子中，查詢會使用 PDF 區塊中的資訊，回答過去十年家庭淨資產變化的問題。
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -810,8 +421,7 @@ gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount
      AI.GENERATE(
        CONCAT('Did the typical family net worth change? How does this compare the SCF survey a decade earlier? Be concise and use the following context:',
                STRING_AGG(FORMAT("context: %s", base.content), ',\n')
-       ),
-       endpoint => 'gemini-2.5-pro'
+       )
      ).result AS response
    FROM
      VECTOR_SEARCH(
@@ -831,11 +441,12 @@ gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount
    +-------------------------------------------------------------------------+
    | response                                                                |
    +-------------------------------------------------------------------------+
-   | Yes, the typical family net worth changed significantly.                |
+   | Yes, the typical family net worth changed significantly. Between 2019   |
+   | and 2022, real median net worth surged by 37% to $192,900.              |
    |                                                                         |
-   | Real median net worth surged 37% between the 2019 and 2022 SCF surveys. |
-   | This contrasts sharply with a decade earlier (2010-2013), when real     |
-   | median net worth decreased 2%.                                          |
+   | This growth contrasts sharply with the period a decade earlier. Between |
+   | the 2010 and 2013 SCF surveys, real median net worth actually decreased |
+   | by 2%.                                                                  |
    +-------------------------------------------------------------------------+
    ```
 
@@ -845,7 +456,7 @@ gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount
 
 ### 刪除專案
 
-**注意**：刪除專案會造成以下結果：
+**注意**：刪除專案會造成以下影響：
 
 * **專案中的所有內容都會遭到刪除。**如果使用現有專案來進行本文中的任務，刪除專案將一併移除當中已完成的其他任務'。
 * **自訂專案 ID 會消失。**當您之前建立這個專案時，可能建立了想要在日後使用的自訂專案 ID。如要保留使用該專案 ID 的網址 (例如 `appspot.com` 網址)，請刪除在該專案中選取的資源，而不是刪除整個專案。
@@ -860,7 +471,7 @@ gcloud projects delete PROJECT_ID
 
 ## 後續步驟
 
-* 進一步瞭解 [`ML.PROCESS_DOCUMENT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-process-document?hl=zh-tw)。
+* 進一步瞭解[嵌入和向量搜尋](https://docs.cloud.google.com/bigquery/docs/vector-search-intro?hl=zh-tw)。
 * 進一步瞭解如何執行[語意搜尋和 RAG](https://docs.cloud.google.com/bigquery/docs/vector-index-text-search-tutorial?hl=zh-tw)。
 
 
@@ -870,11 +481,11 @@ gcloud projects delete PROJECT_ID
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-21 (世界標準時間)。
+上次更新時間：2026-10-21 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-21 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-21 (世界標準時間)。"],[],[]]

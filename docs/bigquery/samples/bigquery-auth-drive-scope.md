@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -60,6 +60,35 @@ public class AuthDriveScope {
     }
   }
 }
+```
+
+### Python
+
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+
+```
+from google.cloud import bigquery
+import google.auth
+
+# Create credentials with Drive & BigQuery API scopes.
+# Both APIs must be enabled for your project before running this code.
+#
+# If you are using credentials from gcloud, you must authorize the
+# application first with the following command:
+#
+# gcloud auth application-default login \
+#   --scopes=https://www.googleapis.com/auth/drive,https://www.googleapis.com/auth/cloud-platform
+credentials, project = google.auth.default(
+    scopes=[
+        "https://www.googleapis.com/auth/drive",
+        "https://www.googleapis.com/auth/cloud-platform",
+    ]
+)
+
+# Construct a BigQuery client object.
+client = bigquery.Client(credentials=credentials, project=project)
 ```
 
 ## 後續步驟

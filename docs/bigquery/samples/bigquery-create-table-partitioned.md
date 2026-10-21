@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -127,6 +127,39 @@ public class CreatePartitionedTable {
     }
   }
 }
+```
+
+### Python
+
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+
+```
+from google.cloud import bigquery
+
+client = bigquery.Client()
+
+# Use format "your-project.your_dataset.your_table_name" for table_id
+table_id = your_fully_qualified_table_id
+schema = [
+    bigquery.SchemaField("name", "STRING"),
+    bigquery.SchemaField("post_abbr", "STRING"),
+    bigquery.SchemaField("date", "DATE"),
+]
+table = bigquery.Table(table_id, schema=schema)
+table.time_partitioning = bigquery.TimePartitioning(
+    type_=bigquery.TimePartitioningType.DAY,
+    field="date",  # name of column to use for partitioning
+    expiration_ms=1000 * 60 * 60 * 24 * 90,
+)  # 90 days
+
+table = client.create_table(table)
+
+print(
+    f"Created table {table.project}.{table.dataset_id}.{table.table_id}, "
+    f"partitioned on column {table.time_partitioning.field}."
+)
 ```
 
 ### Terraform

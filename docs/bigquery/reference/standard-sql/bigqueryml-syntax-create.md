@@ -171,7 +171,6 @@ model_option_list:
     [, HIERARCHICAL_TIME_SERIES_COLS = { string_array } ]
     [, ENABLE_GLOBAL_EXPLAIN = { TRUE | FALSE } ]
     [, APPROX_GLOBAL_FEATURE_CONTRIB = { TRUE | FALSE }]
-    [, INTEGRATED_GRADIENTS_NUM_STEPS = int64_value ]
     [, CALCULATE_P_VALUES = { TRUE | FALSE } ]
     [, FIT_INTERCEPT = { TRUE | FALSE } ]
     [, CATEGORY_ENCODING_METHOD = { 'ONE_HOT_ENCODING' | 'DUMMY_ENCODING' |
@@ -189,8 +188,6 @@ model_option_list:
     [, ENDPOINT_IDLE_TTL = interval_value ]
     [, REMOTE_SERVICE_TYPE = { 'CLOUD_AI_VISION_V1' | 'CLOUD_AI_NATURAL_LANGUAGE_V1' |
       'CLOUD_AI_TRANSLATE_V3' } ]
-    [, XGBOOST_VERSION = { '0.9' | '1.1' } ]
-    [, TF_VERSION = { '1.15' | '2.8.0' | '2.17.0' } ]
     [, NUM_TRIALS = int64_value, ]
     [, MAX_PARALLEL_TRIALS = int64_value ]
     [, HPARAM_TUNING_ALGORITHM = { 'VIZIER_DEFAULT' | 'RANDOM_SEARCH' | 'GRID_SEARCH' } ]
@@ -383,7 +380,7 @@ to interact with your Gemini Enterprise Agent Platform endpoint. You need to gra
 See examples in [remote model `CONNECTION` statement](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model#connection).
 
 To use a [default connection](/bigquery/docs/default-connections), specify
-specify `DEFAULT` instead of the connection name.
+`DEFAULT` instead of the connection name.
 
 ### `model_option_list`
 
@@ -396,85 +393,5 @@ specify `DEFAULT` instead of the connection name.
 ```
 MODEL_TYPE = { 'LINEAR_REG' | 'LOGISTIC_REG' | 'KMEANS' | 'PCA' |
 'MATRIX_FACTORIZATION' | 'AUTOENCODER' | 'AUTOML_REGRESSOR' |
-'AUTOML_CLASSIFIER' | 'BOOSTED_TREE_CLASSIFIER' | 'BOOSTED_TREE_REGRESSOR' |
-'RANDOM_FOREST_CLASSIFIER' | 'RANDOM_FOREST_REGRESSOR' |
-'DNN_CLASSIFIER' | 'DNN_REGRESSOR' | 'DNN_LINEAR_COMBINED_CLASSIFIER' |
-'DNN_LINEAR_COMBINED_REGRESSOR' | 'ARIMA_PLUS' | 'ARIMA_PLUS_XREG' |
-'TENSORFLOW' | 'TENSORFLOW_LITE' | 'ONNX' | 'XGBOOST' | 'CONTRIBUTION_ANALYSIS'}
+'AUTOML_CLASSIFIER' | 'BOOSTED_TREE_CLASSIFIER'
 ```
-
-**Description**
-
-Specify the model type. This argument is required.
-
-**Arguments**
-
-The argument is in the model type column.
-
-| Model category | Model type | Description | Model specific CREATE MODEL statement |
-| --- | --- | --- | --- |
-| Regression | `'LINEAR_REG'` | Linear regression for real-valued label prediction; for example, the sales of an item on a given day. | [CREATE MODEL statement for generalized linear models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm) |
-| `'BOOSTED_TREE_REGRESSOR'` | Create a boosted tree regressor model using the XGBoost library. | [CREATE MODEL statement for boosted tree models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree) |
-| `'RANDOM_FOREST_REGRESSOR'` | Create a random forest regressor model using the XGBoost library. | [CREATE MODEL statement for random forest models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-random-forest) |
-| `'DNN_REGRESSOR'` | Create a Deep Neural Network Regressor model. | [CREATE MODEL statement for DNN models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models) |
-| `'DNN_LINEAR_COMBINED_REGRESSOR'` | Create a Wide-and-Deep Regressor model. | [CREATE MODEL statement for Wide-and-Deep models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-wnd-models) |
-| `'AUTOML_REGRESSOR'` | Create a regression model using AutoML. | [CREATE MODEL statement for AutoML models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-automl) |
-| Classification | `'LOGISTIC_REG'` | Logistic regression for binary-class or multi-class classification; for example, determining whether a customer will make a purchase. | [CREATE MODEL statement for generalized linear models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm) |
-| `'BOOSTED_TREE_CLASSIFIER'` | Create a boosted tree classifier model using the XGBoost library. | [CREATE MODEL statement for boosted tree models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree) |
-| `'RANDOM_FOREST_CLASSIFIER'` | Create a random forest classifier model using the XGBoost library. | [CREATE MODEL statement for random forest models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-random-forest) |
-| `'DNN_CLASSIFIER'` | Create a Deep Neural Network Classifier model. | [CREATE MODEL statement for DNN models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models) |
-| `'DNN_LINEAR_COMBINED_CLASSIFIER'` | Create a Wide-and-Deep Classifier model. | [CREATE MODEL statement for Wide-and-Deep models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-wnd-models) |
-| `'AUTOML_CLASSIFIER'` | Create a classification model using AutoML. | [CREATE MODEL statement for AutoML models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-automl) |
-| Clustering | `'KMEANS'` | K-means clustering for data segmentation; for example, identifying customer segments. | [CREATE MODEL statement for K-means models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans) |
-| Collaborative Filtering | `'MATRIX_FACTORIZATION'` | Matrix factorization for recommendation systems. For example, given a set of users, items, and some ratings for a subset of the items, creates a model to predict a user's rating for items they have not rated. | [CREATE MODEL statement for matrix factorization models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization) |
-| Dimensionality Reduction | `'PCA'` | Principal component analysis for dimensionality reduction. | [CREATE MODEL statement for PCA models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-pca) |
-| `'AUTOENCODER'` | Create an Autoencoder model for anomaly detection, dimensionality reduction, and embedding purposes. | [CREATE MODEL statement for Autoencoder model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder) |
-| Time series forecasting | `'ARIMA_PLUS'` (previously `'ARIMA'`) | Univariate time-series forecasting with many modeling components under the hood such as ARIMA model for the trend, STL and ETS for seasonality, and holiday effects. | [CREATE MODEL statement for time series models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series) |
-| `'ARIMA_PLUS_XREG'` | Multivariate time-series forecasting using linear regression and ARIMA\_PLUS as the underlying techniques. | [CREATE MODEL statement for time series models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series) |
-| Augmented analytics | `'CONTRIBUTION_ANALYSIS'` | Create a contribution analysis model to find key drivers of a change. | [CREATE MODEL statement for Contribution Analysis](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis) |
-| Importing models | `'TENSORFLOW'` | Create a model by importing a TensorFlow model into BigQuery. | [CREATE MODEL statement for TensorFlow models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow) |
-| `'TENSORFLOW_LITE'` | Create a model by importing a TensorFlow Lite model into BigQuery. | [CREATE MODEL statement for TensorFlow Lite models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tflite) |
-| `'ONNX'` | Create a model by importing an ONNX model into BigQuery. | [CREATE MODEL statement for ONNX models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-onnx) |
-| `'XGBOOST'` | Create a model by importing a XGBoost model into BigQuery. | [CREATE MODEL statement for XGBoost models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-xgboost) |
-| Remote models | N/A | Create a model by specifying a Cloud AI service, or the endpoint for a Gemini Enterprise Agent Platform model. | [CREATE MODEL statement for remote models over Google models in Agent Platform](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model)   [CREATE MODEL statement for remote models over hosted models in Agent Platform](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https)   [CREATE MODEL statement for remote models over Cloud AI services](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service) |
-
-**Note:** We are deprecating `ARIMA` as the model type. While the model training
-pipelines of `ARIMA` and `ARIMA_PLUS` are the same, `ARIMA_PLUS` supports more
-capabilities, including support for a new training option,
-[`DECOMPOSE_TIME_SERIES`](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#decompose_time_series),
-and table-valued functions including [`ML.ARIMA_EVALUATE`](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-arima-evaluate)
-and [`ML.EXPLAIN_FORECAST`](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast).
-
-#### Other model options
-
-The following table provides a comprehensive list of model options, with a brief
-descriptions and their applicable model types. You can find detailed description
-in the model specific `CREATE MODEL` statement by clicking the model type in the
-"Applied model types" column.
-
-When the applied model types are supervised learning models, unless "regressor"
-or "classifier" is explicitly listed, it means that model options apply to both
-the regressor and the classifier. For example, the "boosted tree" means that
-model option applies to both boosted tree regressor and boosted tree classifier,
-while the "boosted tree classifier" only applies to the classifier.
-
-| Name | Description | Applied model types |
-| --- | --- | --- |
-| MODEL\_REGISTRY | The MODEL\_REGISTRY option specifies the Model Registry destination. | All model types are supported. |
-| VERTEX\_AI\_MODEL\_ID | The Agent Platform model ID to register the model with. | All model types are supported. |
-| VERTEX\_AI\_MODEL\_VERSION\_ALIASES | The Agent Platform model alias to register the model with. | All model types are supported. |
-| INPUT\_LABEL\_COLS | The label column names in the training data. | [Linear & logistic regression](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#input_label_cols),  [Boosted trees](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree#input_label_cols),  [Random forest](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-random-forest#input_label_cols),  [DNN](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models#input_label_cols),  [Wide & Deep](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-wnd-models#input_label_cols),  [AutoML](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-automl#input_label_cols) |
-| MAX\_ITERATIONS | The maximum number of training iterations or steps. | [Linear & logistic regression](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#max_iterations),  [Boosted trees](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree#max_iterations),  [DNN](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models#max_iterations),  [Wide & Deep](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-wnd-models#max_iterations),  [Kmeans](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans#max_iterations),  [Matrix factorization](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization#max_iterations),  [Autoencoder](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder#max_iterations) |
-| EARLY\_STOP | Whether training should stop after the first iteration in which the relative loss improvement is less than the value specified for `MIN\_REL\_PROGRESS`. | [Linear & logistic regression](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#early_stop),  [Boosted trees](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree#early_stop),  [Random forest](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-random-forest#early_stop),  [DNN](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models#early_stop),  [Wide & Deep](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-wnd-models#early_stop),  [Kmeans](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans#early_stop),  [Matrix factorization](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization#early_stop),  [Autoencoder](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder#early_stop) |
-| MIN\_REL\_PROGRESS | The minimum relative loss improvement that is necessary to continue training when `EARLY\_STOP` is set to true. | [Linear & logistic regression](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#min_rel_progress),  [Boosted trees](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree#min_rel_progress),  [Random forest](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-random-forest#min_rel_progress),  [DNN](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models#min_rel_progress),  [Wide & Deep](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-wnd-models#min_rel_progress),  [Kmeans](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans#min_rel_progress),  [Matrix factorization](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization#min_rel_progress),  [Autoencoder](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder#min_rel_progress) |
-| DATA\_SPLIT\_METHOD | The method to split input data into training and evaluation sets when not running hyperparameter tuning, or into training, evaluation, and test sets when running hyperparameter tuning. | [Linear & logistic regression](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#data_split_method),  [Boosted trees](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree#data_split_method),  [Random forest](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-random-forest#data_split_method),  [DNN](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models#data_split_method),  [Wide & Deep](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-wnd-models#data_split_method)  [Matrix factorization](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization#data_split_method) |
-| DATA\_SPLIT\_EVAL\_FRACTION | Specifies the fraction of the data used for evaluation. Accurate to two decimal places. | [Linear & logistic regression](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#data_split_eval_fraction),  [Boosted trees](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree#data_split_eval_fraction),  [Random forest](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-random-forest#data_split_eval_fraction),  [DNN](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models#data_split_eval_fraction),  [Wide & Deep](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-wnd-models#data_split_eval_fraction)  [Matrix factorization](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization#data_split_eval_fraction) |
-| DATA\_SPLIT\_TEST\_FRACTION | Specifies the fraction of the data used for testing when you are running hyperparameter tuning. Accurate to two decimal places. | [Linear & logistic regression](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#data_split_test_fraction),  [Boosted trees](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree#data_split_test_fraction),  [Random forest](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-random-forest#data_split_test_fraction),  [DNN](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models#data_split_test_fraction),  [Wide & Deep](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-wnd-models#data_split_test_fraction)  [Matrix factorization](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization#data_split_test_fraction) |
-| DATA\_SPLIT\_COL | Identifies the column used to split the data. | [Linear & logistic regression](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#data_split_col),  [Boosted trees](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree#data_split_col),  [Random forest](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-random-forest#data_split_col),  [DNN](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models#data_split_col),  [Wide & Deep](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-wnd-models#data_split_col)  [Matrix factorization](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization#data_split_col) |
-| OPTIMIZE\_STRATEGY | The strategy to train linear regression models. | [Linear regression](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#optimize_strategy) |
-| L1\_REG | The amount of [L1 regularization](https://developers.google.com/machine-learning/glossary/#L1_regularization) applied. | [Linear & logistic regression](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#l1_reg),  [Boosted trees](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree#l1_reg)  [Random forest](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-random-forest#l1_reg) |
-| L2\_REG | The amount of [L2 regularization](https://developers.google.com/machine-learning/glossary/#L2_regularization) applied. | [Linear & logistic regression](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#l2_reg),  [Boosted trees](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree#l2_reg),  [Random forest](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-random-forest#l2_reg),  [Matrix factorization](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization#l2_reg),  [ARIMA\_PLUS\_XREG](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series#l2_reg) |
-| LEARN\_RATE\_STRATEGY | The strategy for specifying the [learning rate](https://developers.google.com/machine-learning/glossary/#learning_rate) during training. | [Linear & logistic regression](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#learn_rate_strategy) |
-| LEARN\_RATE | The learn rate for [gradient descent](https://developers.google.com/machine-learning/glossary/#gradient_descent) when LEARN\_RATE\_STRATEGY is set to CONSTANT. | [Linear & logistic regression](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#learn_rate) |
-| LS\_INIT\_LEARN\_RATE | Sets the initial learning rate that LEARN\_RATE\_STRATEGY=LINE\_SEARCH uses. | [Linear & logistic regression](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#ls_init_learn_rate) |
-| WARM\_START | Retrain a model with new training data, new model options, |

@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -14,42 +14,42 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 你可以依據偏好儲存及分類內容。
 
-# 監控房源
+# 監控產品資訊
 
-本文說明如何在 BigQuery sharing (舊稱 Analytics Hub) 中監控項目。資料供應商可以追蹤房源的使用量指標。如要取得共用資料的使用情況指標，有以下兩種方法：
+本文說明如何在 BigQuery sharing (舊稱 Analytics Hub) 監控清單。資料供應商可以追蹤產品資訊的使用指標。取得共用資料用量指標的方法有兩種：
 
-* [使用 BigQuery sharing](#use-analytics-hub)。你可以使用「分享」查看房源的使用指標資訊主頁。這個資訊主頁包含每日訂閱數、每日執行的工作數、每個機構的訂閱者人數，以及每個資料表的工作頻率。您可以查詢 `INFORMATION_SCHEMA.SHARED_DATASET_USAGE` 檢視表，擷取共用資料的用量指標。
-* [使用 `INFORMATION_SCHEMA` 檢視畫面](#use-information-schema)。您可以查詢 `INFORMATION_SCHEMA.SHARED_DATASET_USAGE` 檢視畫面，追蹤訂閱者使用資料集的方式。
+* [使用 BigQuery sharing](#use-analytics-hub)。您可以使用「Sharing」(共用) 頁面，查看清單的使用指標資訊主頁。這個資訊主頁包含每日訂閱、每日執行工作、各組織的訂閱者數量，以及各資料表的工作頻率。您可以查詢 `INFORMATION_SCHEMA.SHARED_DATASET_USAGE` 檢視表，擷取共用資料的用量指標。
+* [使用 `INFORMATION_SCHEMA` 檢視畫面](#use-information-schema)。您可以查詢 `INFORMATION_SCHEMA.SHARED_DATASET_USAGE` 檢視表，追蹤訂閱者如何使用資料集。
 
-## 使用分享功能
+## 使用共用功能
 
-如要使用「分享」功能取得共用資料的用量指標，請按照下列步驟操作：
+如要使用「共用」功能取得共用資料的用量指標，請按照下列步驟操作：
 
-1. 前往 Google Cloud 控制台的「Sharing (Analytics Hub)」頁面。
+1. 前往 Google Cloud 控制台的「Sharing (Analytics Hub)」(共用 (Analytics Hub)) 頁面。
 
-   [前往「共用」(Analytics Hub)](https://console.cloud.google.com/bigquery/analytics-hub?hl=zh-tw)
-2. 按一下含有資源的[資料交換](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction?hl=zh-tw#data_exchanges)名稱，即可查看使用指標。
+   [前往「共用 (Analytics Hub)」](https://console.cloud.google.com/bigquery/analytics-hub?hl=zh-tw)
+2. 按一下[資料交換](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction?hl=zh-tw#data_exchanges)名稱，查看其中項目的用量指標。
 3. 按一下「用量指標」，然後執行下列操作：
 
-   1. 從「房源」選單中選取房源。
-   2. 設定時間範圍。
+   1. 從「Listings」(商家資訊) 選單中選取商家資訊。
+   2. 設定日期範圍。
 
 這個頁面會顯示下列用量指標：
 
-* **訂閱總數**：所選商品目前的訂閱數。最多可查看 60 天的總訂閱數。
-* **訂閱總人數**：所選應用程式的所有訂閱方案不重複訂閱人數。最多可查看 60 天內的總訂閱人數。
-* **執行的工作總數**：在所選項目各個資料表上執行的不重複工作數。
-* **掃描的位元組總數**：從所選項目所有資料表掃描的位元組總數。
-* **每日訂閱次數**：這張圖表會追蹤指定時間範圍內，所選房源的訂閱次數。最多可查看 60 天的每日訂閱資料。
-* **每個機構的訂閱者人數**：列出機構和訂閱者人數，這些訂閱者會使用您選取的項目。
-* **每日執行的工作**：這張圖表會顯示所選項目消耗的工作數。
-* **資料表的工作頻率**：在所選商家資訊中存取資料表的頻率。
+* **訂閱總數**：所選產品資訊目前的訂閱數。最多可查看 60 天內的訂閱總數。
+* **訂閱者總數**：所選產品資訊中所有訂閱項目的不重複訂閱者人數。最多可查看 60 天內的總訂閱人數。
+* **執行的工作總數**：在所選產品資訊的各個資料表上執行的不重複工作數量。
+* **掃描的位元組總數**：從所選產品資訊的所有資料表掃描的位元組總數。
+* **每日訂閱數**：這張圖表會追蹤所選產品資訊在一段時間範圍內的訂閱數。最多可查看 60 天的每日訂閱資料。
+* **每個組織的訂閱者**：列出組織和使用所選清單的訂閱者數量。
+* **每日執行的工作**：這張圖表會顯示所選產品資訊的工作用量。
+* **資料表的工作頻率**：所選產品資訊中資料表的存取頻率。
 
-**注意：** 您也可以使用 [BigQuery sharing subscriber APIs](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.subscriptions/list?hl=zh-tw) 擷取「總訂閱數」、「總訂閱者人數」和「每日訂閱數」欄位。
+**注意：** 您也可以使用 [BigQuery sharing subscriber API](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.subscriptions/list?hl=zh-tw) 擷取「Total Subscriptions」(訂閱總數)、「Total Subscribers」(訂閱者總數) 和「Daily Subscriptions」(每日訂閱數) 欄位。
 
-## 使用 `INFORMATION_SCHEMA` 檢視畫面
+## 使用`INFORMATION_SCHEMA`檢視畫面
 
-資料供應商可以查詢 [`INFORMATION_SCHEMA.SHARED_DATASET_USAGE` 檢視區塊](https://docs.cloud.google.com/bigquery/docs/information-schema-shared-dataset-usage?hl=zh-tw)，追蹤訂閱者使用資料集的情形。請確認您具備查詢這個檢視畫面的必要角色。
+資料供應商可以查詢 [`INFORMATION_SCHEMA.SHARED_DATASET_USAGE` 檢視表](https://docs.cloud.google.com/bigquery/docs/information-schema-shared-dataset-usage?hl=zh-tw)，追蹤訂閱者如何使用資料集。請確認您具備查詢這個檢視表的必要角色。
 
 如要對預設專案以外的 Google Cloud 專案執行查詢，請使用下列格式：
 
@@ -60,14 +60,13 @@ PROJECT_ID.region-REGION_NAME.INFORMATION_SCHEMA.SHARED_DATASET_USAGE
 更改下列內容：
 
 * `PROJECT_ID`： Google Cloud 專案 ID
-* `REGION_NAME`：BigQuery 資料集
-  區域名稱
+* `REGION_NAME`：BigQuery 資料集區域名稱
 
 例如 `myproject.region-us.INFORMATION_SCHEMA.SHARED_DATASET_USAGE`。
 
-下列範例說明如何查詢 `INFORMATION_SCHEMA` 檢視區塊，查看使用量指標。
+以下範例說明如何查詢 `INFORMATION_SCHEMA` 檢視表，查看用量指標。
 
-### 取得所有共用資料表上執行的工作總數
+### 取得所有共用資料表執行的工作總數
 
 以下範例會計算專案中[訂閱者](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings?hl=zh-tw)執行的工作總數：
 
@@ -88,14 +87,14 @@ FROM
 +------------+
 ```
 
-如要檢查訂閱者執行的工作總數，請使用 `WHERE` 子句：
+如要查看訂閱者執行的工作總數，請使用 `WHERE` 子句：
 
 * 如果是資料集，請使用 `WHERE dataset_id = "..."`。
-* 表格請使用 `WHERE dataset_id = "..." AND table_id = "..."`。
+* 如果是資料表，請使用 `WHERE dataset_id = "..." AND table_id = "..."`。
 
-### 根據處理的列數取得最常使用的資料表
+### 根據處理的資料列數，取得最常用的資料表
 
-下列查詢會根據訂閱者處理的資料列數，計算最常使用的資料表。
+下列查詢會根據訂閱者處理的資料列數量，計算最常使用的資料表。
 
 ```
 SELECT
@@ -123,9 +122,9 @@ LIMIT
 +---------------+-------------+----------------+
 ```
 
-### 找出最常使用資料表的機構
+### 找出使用資料表最多的機構
 
-下列查詢會根據資料表處理的位元組數，計算出最常使用的訂閱者。您也可以將 `num_rows_processed` 資料欄做為指標。
+下列查詢會根據資料表處理的位元組數，計算出用量最高的訂閱者。您也可以將 `num_rows_processed` 欄當做指標。
 
 ```
 SELECT
@@ -148,16 +147,15 @@ GROUP BY
 +--------------------------+--------------------------------+----------------+
 ```
 
-如果訂閱者沒有機構，可以使用 `job_project_number`，
-而非 `subscriber_org_number`。
+如果訂閱者沒有組織，您可以使用 `job_project_number`，而非 `subscriber_org_number`。
 
-### 取得資料交換的使用情況指標
+### 取得資料交換的使用指標
 
-如果[資料交換庫](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction?hl=zh-tw#data_exchanges)和來源資料集位於不同專案，請按照下列步驟查看資料交換庫的使用情況指標：
+如果[資料交換](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction?hl=zh-tw#data_exchanges)和來源資料集位於不同專案，請按照下列步驟查看資料交換的使用指標：
 
-1. 找出資料交換庫的所有[刊登資訊](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction?hl=zh-tw#listings)。
-2. 擷取附加至房源資訊的來源資料集。
-3. 如要查看資料交換庫的用量指標，請使用下列查詢：
+1. 找出屬於資料交換作業的所有[清單](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction?hl=zh-tw#listings)。
+2. 擷取附加至產品資訊的來源資料集。
+3. 如要查看資料交換的用量指標，請使用下列查詢：
 
 ```
 SELECT
@@ -179,7 +177,7 @@ AND data_exchange_id="projects/4/locations/us/dataExchanges/x1"
 
 ### 取得共用檢視畫面的用量指標
 
-下列查詢會顯示專案中所有共用檢視區塊的用量指標：
+下列查詢會顯示專案中所有共用檢視表的用量指標：
 
 ```
 SELECT
@@ -237,8 +235,8 @@ WHERE shared_resource_type = 'TABLE_VALUED_FUNCTION'
 
 ## 後續步驟
 
-* 瞭解如何[管理 BigQuery sharing 清單](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-listings?hl=zh-tw)。
-* 瞭解 [BigQuery 計價方式](https://cloud.google.com/bigquery/pricing?hl=zh-tw)。
+* 瞭解如何[管理 BigQuery sharing 項目](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-listings?hl=zh-tw)。
+* 瞭解 [BigQuery 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw)。
 
 
 
@@ -247,11 +245,11 @@ WHERE shared_resource_type = 'TABLE_VALUED_FUNCTION'
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-13 (世界標準時間)。
+上次更新時間：2026-10-20 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-13 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-20 (世界標準時間)。"],[],[]]

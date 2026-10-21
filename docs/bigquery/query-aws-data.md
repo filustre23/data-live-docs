@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -46,9 +46,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ## 查詢 Amazon S3 BigLake 資料表
 
-建立 Amazon S3 BigLake 資料表後，您可以使用 [GoogleSQL 語法查詢該資料表](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw)，就像查詢標準 BigQuery 資料表一樣。
+建立 Amazon S3 BigLake 資料表後，您可以使用 [GoogleSQL 語法查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw)，方法與標準 BigQuery 資料表相同。
 
-[快取的查詢結果](https://docs.cloud.google.com/bigquery/docs/cached-results?hl=zh-tw)會儲存在 BigQuery 暫存資料表中。如要查詢臨時 BigLake 資料表，請參閱「[查詢臨時 BigLake 資料表](#query-temp-biglake-table)」。如要進一步瞭解 BigQuery Omni 的限制和配額，請參閱[限制](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw#limitations)和[配額](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw#quotas_and_limits)。
+[快取的查詢結果](https://docs.cloud.google.com/bigquery/docs/cached-results?hl=zh-tw)會儲存在 BigQuery 臨時資料表中。如要查詢臨時 BigLake 資料表，請參閱「[查詢臨時 BigLake 資料表](#query-temp-biglake-table)」。如要進一步瞭解 BigQuery Omni 的限制和配額，請參閱[限制](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw#limitations)和[配額](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw#quotas_and_limits)。
 
 在 BigQuery Omni 區域建立預留項目時，請使用 Enterprise 版。如要瞭解如何使用版本建立預留項目，請參閱「[建立預留項目](https://docs.cloud.google.com/bigquery/docs/reservations-tasks?hl=zh-tw#create_reservations)」。
 
@@ -134,7 +134,8 @@ public class QueryExternalTableAws {
 
 ## 查詢臨時資料表
 
-BigQuery 會建立臨時資料表來儲存查詢結果。如要從暫時性資料表擷取查詢結果，可以使用 Google Cloud 主控台或 [BigQuery API](https://docs.cloud.google.com/bigquery/docs/reliability-read?hl=zh-tw#read_with_api)。
+BigQuery 會建立臨時資料表來儲存查詢結果。
+如要從臨時資料表擷取查詢結果，可以使用 Google Cloud 控制台或 [BigQuery API](https://docs.cloud.google.com/bigquery/docs/reliability-read?hl=zh-tw#read_with_api)。
 
 選取下列選項之一：
 
@@ -148,7 +149,7 @@ BigQuery 會建立臨時資料表來儲存查詢結果。如要從暫時性資�
 
 1. 建立[職缺物件](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw)。
 2. 呼叫 [`jobs.insert` 方法](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/insert?hl=zh-tw)，以非同步方式執行查詢，或呼叫 [`jobs.query` 方法](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query?hl=zh-tw)，以同步方式執行查詢，並傳入 `Job` 物件。
-3. 傳遞指定的工作參考資料，使用 [`jobs.getQueryResults`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/getQueryResults?hl=zh-tw) 讀取資料列，並傳遞查詢結果的指定資料表參考資料，使用 [`tabledata.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list?hl=zh-tw) 方法。
+3. 傳遞指定的工作參考資料，並傳遞查詢結果的指定資料表參考資料，即可使用 [`jobs.getQueryResults`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/getQueryResults?hl=zh-tw) 和 [`tabledata.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list?hl=zh-tw) 方法讀取資料列。
 
 ## 查詢 `_FILE_NAME` 虛擬資料欄
 
@@ -175,7 +176,7 @@ BigQuery 會建立臨時資料表來儲存查詢結果。如要從暫時性資�
 * `DATASET` 是儲存永久外部資料表的資料集名稱
 * `TABLE_NAME` 是永久外部資料表的名稱
 
-如果查詢在 `_FILE_NAME` 虛擬資料欄上設有篩選述詞，BigQuery 會嘗試略過不符合篩選條件的檔案。使用 `_FILE_NAME` 虛擬資料欄建構查詢述詞時，請套用[使用虛擬資料欄查詢擷取時間分區資料表](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables?hl=zh-tw#query_an_ingestion-time_partitioned_table)的類似建議。
+如果查詢在 `_FILE_NAME` 虛擬資料欄上設有篩選述詞，BigQuery 會嘗試略過不符合篩選條件的檔案。使用 `_FILE_NAME` 虛擬資料欄建構查詢述詞時，適用與[使用虛擬資料欄查詢擷取時間分區資料表](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables?hl=zh-tw#query_an_ingestion-time_partitioned_table)類似的建議。
 
 ## 後續步驟
 
@@ -190,11 +191,11 @@ BigQuery 會建立臨時資料表來儲存查詢結果。如要從暫時性資�
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-12 (世界標準時間)。
+上次更新時間：2026-10-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-12 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]

@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -14,58 +14,58 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 你可以依據偏好儲存及分類內容。
 
-# 將 Google Ads 資料載入 BigQuery
+# 將 Google Ads 廣告資料載入 BigQuery
 
-您可以使用 Google Ads 連接器專用的 [BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)，將 Google Ads (舊稱 Google AdWords) 的資料載入至 BigQuery。您可以使用 BigQuery 資料移轉服務，安排週期性移轉工作，將 Google Ads 的最新資料新增至 BigQuery。
+您可以使用 Google Ads 適用的 [BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)連接器，將 Google Ads (舊稱 Google AdWords) 的資料載入 BigQuery。您可以使用 BigQuery 資料移轉服務，安排週期性移轉工作，將 Google Ads 的最新資料新增至 BigQuery。
 
-如要瞭解最近的資料來源變更，請參閱 [BigQuery 資料移轉服務資料來源變更記錄](https://docs.cloud.google.com/bigquery/docs/transfer-changes?hl=zh-tw)。
+如要瞭解最近的資料來源變更，請參閱「[BigQuery 資料移轉服務資料來源變更記錄](https://docs.cloud.google.com/bigquery/docs/transfer-changes?hl=zh-tw)」。
 
 ## 連接器總覽
 
-Google Ads 連接器的 BigQuery 資料移轉服務支援下列資料移轉選項。
+Google Ads 連接器適用的 BigQuery 資料移轉服務，支援下列資料移轉選項。
 
-| 資料轉移方式 | 支援 |
+| 資料移轉選項 | 支援 |
 | --- | --- |
-| 受支援的報表 | Google Ads 連接器支援從 [Google Ads API 第 23 版](https://developers.google.com/google-ads/api/fields/v23/overview?hl=zh-tw)的報表傳輸資料。 如要瞭解 Google Ads 報表如何轉換成 BigQuery 表格和視圖，請參閱「[Google Ads 報表轉換](https://docs.cloud.google.com/bigquery/docs/google-ads-transformation?hl=zh-tw)」一文。 |
-| 重複頻率 | Google Ads 連接器支援每日資料轉移。    根據預設，資料移轉作業會在建立時排定時間。[設定資料移轉作業](#setup-data-transfer)時，可以設定資料移轉時間。 |
-| 重新整理時間範圍 | 您可以排定資料轉移作業，在執行作業時擷取最多 30 天的 Google Ads 資料。[設定資料移轉](#setup-data-transfer)時，可以設定重新整理視窗的持續時間。    根據預設，Google Ads 連接器的更新期為 7 天。    詳情請參閱「[重新整理時間範圍](#refresh)」。 系統每天會為[比對資料表](https://docs.cloud.google.com/bigquery/docs/google-ads-transformation?hl=zh-tw#google_ads_match_tables)建立快照，並儲存在上次執行日期的分區中。系統不會更新回填或使用重新整理視窗載入天數的對照表快照。 |
-| 資料補充作業 | [執行資料補充作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)，擷取排定資料移轉時間以外的資料。您可以擷取資料來源資料保留政策允許的資料。    如要瞭解 Google Ads 的資料保留政策，請參閱「[Google Ads 資料保留政策](https://support.google.com/google-ads/answer/15188209?hl=zh-tw)」。 |
-| 每個管理員帳戶的客戶 ID 數 | 8,000  BigQuery 資料移轉服務對每個 Google Ads [管理員帳戶](https://support.google.com/adwords/answer/6139186?hl=zh-tw) (MCC) 最多支援 **8000 個客戶 ID**。 |
+| 受支援的報表 | Google Ads 連接器支援從 [Google Ads API 25 版](https://developers.google.com/google-ads/api/fields/v25/overview?hl=zh-tw)的報表轉移資料。 如要瞭解 Google Ads 報表如何轉換為 BigQuery 資料表和檢視表，請參閱「[Google Ads 報表轉換](https://docs.cloud.google.com/bigquery/docs/google-ads-transformation?hl=zh-tw)」。 |
+| 重複頻率 | Google Ads 連接器支援每日資料移轉。    根據預設，資料移轉作業會在建立時排定時間。您可以在[設定資料移轉作業](#setup-data-transfer)時，設定資料移轉時間。 |
+| 重新整理時間範圍 | 您可以排定資料移轉作業，在執行資料移轉作業時擷取最多 30 天的 Google Ads 廣告資料。[設定資料移轉作業](#setup-data-transfer)時，您可以設定重新整理回溯期的時間長度。    根據預設，Google Ads 連接器的重新整理時間範圍為 7 天。    詳情請參閱「[重新整理時間範圍](#refresh)」。 系統每天會擷取一次[比對資料表](https://docs.cloud.google.com/bigquery/docs/google-ads-transformation?hl=zh-tw#google_ads_match_tables)快照，並儲存在上次執行日期的分區中。系統不會更新回填或使用重新整理視窗載入的日期之比對表快照。 |
+| 補充資料可用性 | [執行資料補充作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)，擷取排定資料移轉作業以外的資料。只要在資料來源的資料保留政策允許範圍內，即可擷取資料。    如要瞭解 Google Ads 的資料保留政策，請參閱「[Google Ads 資料保留政策](https://support.google.com/google-ads/answer/15188209?hl=zh-tw)」。 |
+| 每個管理員帳戶的客戶 ID 數 | 8,000  BigQuery 資料移轉服務最多支援每個 Google Ads [管理員帳戶](https://support.google.com/adwords/answer/6139186?hl=zh-tw) (我的客戶中心) 有 **8,000 個客戶 ID**。 |
 
 如要將 Google Ads 報表對應到 Google Ads UI 中顯示的項目，請參閱[將報表對應至 Google Ads UI](https://developers.google.com/google-ads/api/docs/conversions/ui-mapping?hl=zh-tw) 一文。
 
 ## 從 Google Ads 移轉作業擷取資料
 
-從 Google Ads 轉移資料至 BigQuery 時，系統會將資料載入以日期為分區的 BigQuery 資料表。資料載入的資料表分區會對應資料來源的日期。如果為同一天排定多項移轉作業，BigQuery 資料移轉服務會以最新資料覆寫該特定日期的資料分割。同一天內多次轉移資料或執行回填作業，不會導致資料重複，也不會影響其他日期的分區。
+將資料從 Google Ads 移轉至 BigQuery 時，資料會載入依日期分區的 BigQuery 資料表。資料載入的資料表分區會對應資料來源中的日期。如果為同一天安排多筆移轉作業，BigQuery 資料移轉服務會以最新資料覆寫該特定日期的資料分割區。同一天進行多次轉移或執行回填作業，不會導致資料重複，其他日期的分區也不會受到影響。
 
 ### 重新整理視窗
 
-*更新期*是指資料移轉作業在執行時，擷取資料的天數。舉例來說，如果重新整理時間範圍為三天，且每天都會進行移轉，BigQuery 資料移轉服務就會從來源資料表擷取過去三天的所有資料。在本例中，每天進行移轉時，BigQuery 資料移轉服務會建立新的 BigQuery 目的地資料表分割區，並複製當天的來源資料表資料，然後自動觸發回填執行作業，以更新過去兩天的來源資料表資料。系統自動觸發的回填作業會覆寫或增量更新 BigQuery 目的地資料表，具體做法取決於 BigQuery 資料移轉服務連接器是否支援增量更新。
+「更新回溯期」是指資料移轉作業發生時，資料移轉作業擷取資料的天數。舉例來說，如果重新整理時間範圍為三天，且每天進行移轉，BigQuery 資料移轉服務會從來源資料表擷取過去三天的所有資料。在本例中，每日移轉作業執行時，BigQuery 資料移轉服務會建立新的 BigQuery 目的地資料表分區，並複製當天的來源資料表資料，然後自動觸發補充執行作業，使用過去兩天的來源資料表資料更新 BigQuery 目的地資料表分區。系統會自動觸發回填作業，並視 BigQuery 資料移轉服務連接器是否支援增量更新，覆寫或增量更新 BigQuery 目的地資料表。
 
-首次執行資料移轉時，資料移轉作業會擷取重新整理視窗內的所有可用來源資料。舉例來說，如果重新整理時間範圍為三天，而您是第一次執行資料移轉作業，BigQuery 資料移轉服務會擷取三天內的所有來源資料。
+首次執行資料移轉作業時，系統會擷取重新整理時間範圍內的所有可用來源資料。舉例來說，如果更新時間範圍為三天，且您首次執行資料移轉作業，BigQuery 資料移轉服務會擷取三天內的所有來源資料。
 
-如要擷取重新整理時間範圍外的資料 (例如歷來資料)，或從任何轉移中斷或缺漏中復原資料，可以啟動或排定[資料補充作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)。
+如要擷取重新整理時間範圍以外的資料 (例如歷來資料)，或從任何移轉中斷或缺漏中復原資料，您可以啟動或排定[補充執行作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)。
 
 ## 限制
 
-* Google Ads 資料轉移的最高頻率為每 24 小時一次。預設情況下，移轉作業會在您建立移轉作業時啟動。不過，您可以在[建立轉移作業](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer?hl=zh-tw#setup-data-transfer)時設定轉移開始時間。
-* 在 Google Ads 移轉期間，BigQuery 資料移轉服務不支援增量資料移轉。指定資料移轉日期後，系統會移轉該日期可用的所有資料。
+* Google Ads 資料移轉作業的頻率上限為每 24 小時一次。根據預設，移轉作業會在您建立移轉作業時開始。不過，您可以在[建立轉移作業](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer?hl=zh-tw#setup-data-transfer)時設定轉移開始時間。
+* BigQuery 資料移轉服務不支援在 Google Ads 移轉期間，進行增量資料移轉。指定資料移轉日期後，系統會移轉該日期可用的所有資料。
 
 ## 事前準備
 
-建立 Google Ads 資料移轉作業前，請先完成下列事項：
+建立 Google Ads 資料移轉前，請先完成下列事項：
 
-* 確認您已完成[啟用 BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service?hl=zh-tw)的一切必要動作。
-* [建立 BigQuery 資料移轉服務資料集](https://docs.cloud.google.com/bigquery/docs/datasets?hl=zh-tw)，以儲存 Google Ads 資料。
-* 如要為 Pub/Sub 設定移轉作業執行通知，請確認您擁有 `pubsub.topics.setIamPolicy` 權限。如果您設定電子郵件通知，就不需要 Pub/Sub 權限。詳情請參閱 [BigQuery 資料移轉服務執行通知](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications?hl=zh-tw)。
+* 確認您已完成[啟用 BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service?hl=zh-tw)的所有必要動作。
+* [建立 BigQuery 資料移轉服務資料集](https://docs.cloud.google.com/bigquery/docs/datasets?hl=zh-tw)，用於儲存 Google Ads 廣告資料。
+* 如要設定 Pub/Sub 的移轉作業執行通知，請確認您具備 `pubsub.topics.setIamPolicy` 權限。如果您設定電子郵件通知，則不需要 Pub/Sub 權限。詳情請參閱「[BigQuery 資料移轉服務執行通知](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications?hl=zh-tw)」。
 
 ## 所需權限
 
-確認您已授予下列權限。
+請確認您已授予下列權限。
 
 ### 必要的 BigQuery 角色
 
-如要取得建立 BigQuery 資料移轉服務資料移轉作業所需的權限，請要求管理員在專案中授予您 [BigQuery 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.admin)  (`roles/bigquery.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得建立 BigQuery 資料移轉服務資料移轉作業所需的權限，請要求管理員授予您專案的 [BigQuery 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.admin)  (`roles/bigquery.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
 這個預先定義的角色具備建立 BigQuery 資料移轉服務資料移轉作業所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
@@ -89,13 +89,13 @@ Google Ads 連接器的 BigQuery 資料移轉服務支援下列資料移轉選�
 
 ### 必要的 Google Ads 角色
 
-您必須授予移轉設定所使用的 Google Ads 客戶 ID 或[管理員帳戶](https://support.google.com/google-ads/answer/6139186?hl=zh-tw) (MCC) 讀取權限。建立新的轉移設定時，如果授權方式是使用個別使用者憑證，則必須[啟用兩步驟驗證](https://support.google.com/accounts/answer/185839?hl=zh-tw)。
+您必須為移轉設定中使用的 Google Ads 客戶 ID 或[管理員帳戶](https://support.google.com/google-ads/answer/6139186?hl=zh-tw) (MCC) 授予讀取權限。建立以個別使用者憑證授權的新移轉設定時，必須[啟用兩步驟驗證](https://support.google.com/accounts/answer/185839?hl=zh-tw)。
 
-如要授權服務帳戶轉移 Google Ads 資料，建議您授予服務帳戶 Google Ads 的直接帳戶存取權。詳情請參閱「[透過直接帳戶存取授權](https://developers.google.com/google-ads/api/docs/oauth/service-accounts?hl=zh-tw#direct)」。如果轉移設定是透過服務帳戶授權，則不需要多重驗證 (MFA) 規定，例如兩步驟驗證。
+如要授權服務帳戶轉移 Google Ads 資料，建議您授予服務帳戶 Google Ads 的直接帳戶存取權。詳情請參閱「[直接存取帳戶的授權](https://developers.google.com/google-ads/api/docs/oauth/service-accounts?hl=zh-tw#direct)」。如果移轉設定是透過服務帳戶授權，則不須符合多重驗證 (MFA) 規定，例如兩步驟驗證。
 
-## 建立 Google Ads 資料移轉作業
+## 建立 Google Ads 廣告資料移轉作業
 
-如要為 Google Ads 報表建立資料移轉作業，您需要 Google Ads 客戶 ID 或管理員帳戶 (我的客戶中心)。如要瞭解如何擷取 Google Ads 客戶 ID，請參閱[尋找客戶 ID](https://support.google.com/google-ads/answer/1704344?hl=zh-tw) 一文。
+如要建立 Google Ads 報表的資料移轉作業，您需要 Google Ads 客戶 ID 或管理員帳戶 (MCC)。如要瞭解如何擷取 Google Ads 客戶 ID，請參閱「[查看客戶 ID](https://support.google.com/google-ads/answer/1704344?hl=zh-tw)」。
 
 如要為 Google Ads 報表建立資料移轉作業，請選取下列其中一個選項：
 
@@ -104,7 +104,7 @@ Google Ads 連接器的 BigQuery 資料移轉服務支援下列資料移轉選�
 1. 前往 Google Cloud 控制台的「資料移轉」頁面。
 
    [前往「資料轉移」頁面](https://console.cloud.google.com/bigquery/transfers?hl=zh-tw)
-2. 按一下 add「建立轉移作業」。
+2. 按一下「add 建立移轉作業」。
 3. 在「Source type」(來源類型) 區段中，針對「Source」(來源)，選擇 [Google Ads]。
 4. 在「Data source details」(資料來源詳細資料) 區段：
 
@@ -127,7 +127,7 @@ Google Ads 連接器的 BigQuery 資料移轉服務支援下列資料移轉選�
      + 天
      + 隨選
    * 視情況選取「Start now」(立即開始) 或「Start at set time」(在所設時間開始執行)，並提供開始日期和執行時間。
-8. 在「Service Account」(服務帳戶) 選單，選取與貴機構 Google Cloud 專案相關聯的[服務帳戶](https://docs.cloud.google.com/iam/docs/service-account-overview?hl=zh-tw)。您可以將服務帳戶與資料移轉作業建立關聯，這樣就不需要使用者憑證。如要進一步瞭解如何搭配使用服務帳戶與資料移轉作業，請參閱[使用服務帳戶](https://docs.cloud.google.com/bigquery/docs/use-service-accounts?hl=zh-tw)。
+8. 在「Service Account」(服務帳戶) 選單，選取與貴組織 Google Cloud 專案相關聯的[服務帳戶](https://docs.cloud.google.com/iam/docs/service-account-overview?hl=zh-tw)。您可以將服務帳戶與資料移轉作業建立關聯，這樣就不需要使用者憑證。如要進一步瞭解如何搭配使用服務帳戶與資料移轉作業，請參閱[使用服務帳戶](https://docs.cloud.google.com/bigquery/docs/use-service-accounts?hl=zh-tw)的相關說明。
 
    * 如果使用[聯合身分](https://docs.cloud.google.com/iam/docs/workforce-identity-federation?hl=zh-tw)登入，就必須有服務帳戶才能建立移轉作業。如果是以 [Google 帳戶](https://docs.cloud.google.com/iam/docs/principals-overview?hl=zh-tw#google-account)登入，則不一定要透過服務帳戶建立移轉作業。
    * 服務帳戶必須具備[必要權限](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer?hl=zh-tw#required_permissions)。
@@ -146,14 +146,14 @@ Google Ads 連接器的 BigQuery 資料移轉服務支援下列資料移轉選�
 * `--display_name`
 * `--params`
 
-以下旗標為選用項目：
+以下為選用旗標：
 
-* `--project_id`：指定要使用的專案。如果未指定旗標，系統會使用預設專案。
-* `--table_filter`：指定要納入資料轉移作業的資料表。如果未指定旗標，系統會納入所有資料表。如要只納入特定資料表，請使用以半形逗號分隔的值清單 (例如 `Ad`、`Campaign`、`AdGroup`)。如要排除特定資料表，請在值前面加上連字號 (`-`) (例如 `-Ad`、`Campaign`、`AdGroup`)。
-* `--schedule`：指定查詢的執行頻率。如未指定 `--schedule`，預設值會設為 `every 24 hours`。如要瞭解排程語法，請參閱「[排程格式](https://docs.cloud.google.com/appengine/docs/flexible/scheduling-jobs-with-cron-yaml?hl=zh-tw#formatting_the_schedule)」。
-* `--refresh_window_days`：指定移轉設定的更新期 (以天為單位)。預設值為 `7`。
-* `--service_account_name`：指定要用於 Google Ads 轉移驗證的服務帳戶，而非使用者帳戶。
-* `--include_pmax`：指定 `true`，加入最高成效廣告報表專屬的資料表。預設值為 `false`。如要進一步瞭解最高成效廣告的支援情形，請參閱[最高成效廣告支援情形](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer?hl=zh-tw#pmax-support)
+* `--project_id`：指定要使用的專案。如未指定旗標，系統會使用預設專案。
+* `--table_filter`：指定要納入資料移轉作業的資料表。如未指定旗標，則會納入所有資料表。如要僅納入特定資料表，請使用以逗號分隔的清單 (例如 `Ad`、`Campaign`、`AdGroup`)。如要排除特定資料表，請在值前面加上連字號 (`-`) (例如 `-Ad`、`Campaign`、`AdGroup`)。
+* `--schedule`：指定查詢執行頻率。如未指定 `--schedule`，預設值會設為 `every 24 hours`。如要瞭解排程語法，請參閱「[設定排程格式](https://docs.cloud.google.com/appengine/docs/flexible/scheduling-jobs-with-cron-yaml?hl=zh-tw#formatting_the_schedule)」。
+* `--refresh_window_days`：指定移轉設定的重新整理時間範圍 (以天為單位)。預設值為 `7`。
+* `--service_account_name`：指定要用於 Google Ads 移轉驗證的服務帳戶，而非使用者帳戶。
+* `--include_pmax`：指定 `true`，加入最高成效廣告報表專屬的資料表。預設值為 `false`。如要進一步瞭解最高成效廣告活動的支援情形，請參閱[最高成效廣告活動支援情形](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer?hl=zh-tw#pmax-support)。
 
 ```
 bq mk \
@@ -175,19 +175,19 @@ bq mk \
 * PROJECT\_ID 是您的專案 ID。
 * DATASET 是資料移轉設定的目標資料集。
 * NAME 是資料移轉設定的顯示名稱。移轉作業名稱可以是任意值，日後需要修改移轉作業時，能夠據此識別即可。
-* PARAMETERS 包含移轉設定的下列 JSON 參數：`--params='{"param":"param_value"}'`。
-  + `customer_id`：輸入您的 Google Ads 客戶 ID。這是必填欄位。
-  + `custom_report_table_names`：這項轉移作業中包含的[自訂報表](#custom_reports)資料表名稱清單。這份清單對應至 `custom_report_queries` 中的查詢。這個清單的長度必須與 `custom_report_queries` 中的清單長度相符。
-  + `custom_report_queries`：自訂報表的 [Google Ads 查詢語言 (GAQL) 查詢](#custom_reports)清單，包含在此轉移作業中。這份清單對應至 `custom_report_table_names` 中的名稱。這個清單的長度必須與 `custom_report_table_names` 中的清單長度相符。
-  + 選用：將 `exclude_removed_items` 參數設為 `true`，以免移轉已移除或停用的實體和指標。
-* DATA\_SOURCE 是資料來源：`google_ads`。
-* TABLES 是以半形逗號分隔的資料表清單，可指定要納入或排除在資料移轉作業之外的資料表。
-* SCHEDULE 是您希望查詢執行的頻率。如未指定 `--schedule`，預設為每 24 小時執行一次，時間從建立移轉作業時開始計算。
-* REFRESH\_DAYS 是一個整數，用來指定移轉設定的更新期 (以天為單位)。預設值為 `7`。
-* SERVICE\_ACCOUNT\_NAME 是用於驗證移轉作業的服務帳戶名稱。服務帳戶必須屬於用來建立轉移作業的 `project_id`，且必須具備所有[必要權限](#required_permissions)。
-* PMAX\_ENABLE：指定 `true`，加入最高成效廣告報表專屬的資料表。預設值為 `false`。如要進一步瞭解最高成效廣告的支援情形，請參閱[最高成效廣告支援情形](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer?hl=zh-tw#pmax-support)
+* PARAMETERS 包含下列移轉設定的 JSON 參數：`--params='{"param":"param_value"}'`。
+  + `customer_id`：輸入 Google Ads 客戶 ID，格式為 `1231231234` 或 `123-123-1234`。這是必填欄位。
+  + `custom_report_table_names` (選用)：這項移轉作業所含[自訂報表](#custom_reports)的資料表名稱清單。這份清單對應於 `custom_report_queries` 中的查詢。這份清單的長度必須與 `custom_report_queries` 中的清單長度相同。
+  + `custom_report_queries` (選用)：這項轉移作業中包含的自訂報表[Google Ads 查詢語言 (GAQL) 查詢](#custom_reports)清單。這份清單對應 `custom_report_table_names` 中的名稱。這個清單的長度必須與 `custom_report_table_names` 中的清單長度相符。
+  + `exclude_removed_items` (選用)：將這個參數設為 `true`，可避免轉移已移除或停用的實體和指標。
+* DATA\_SOURCE 是資料來源 - `google_ads`。
+* TABLES 是逗號分隔的清單，其中包含要納入或排除在資料移轉作業之外的資料表。
+* SCHEDULE 是您希望查詢執行的頻率。如未指定 `--schedule`，系統預設會從建立轉移作業的時間開始，每 24 小時執行一次。
+* REFRESH\_DAYS 是整數，用於指定移轉設定的重新整理時間範圍 (以天為單位)。預設值為 `7`。
+* SERVICE\_ACCOUNT\_NAME 是用於驗證移轉作業的服務帳戶名稱。服務帳戶必須由建立轉移作業的 `project_id` 所擁有，且必須具備所有[必要權限](#required_permissions)。
+* PMAX\_ENABLE：指定 `true`，納入最高成效廣告活動報表專屬的資料表。預設值為 `false`。如要進一步瞭解最高成效廣告活動的支援情形，請參閱[最高成效廣告活動支援情形](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer?hl=zh-tw#pmax-support)。
 
-**注意：** 您無法使用指令列工具設定通知。
+**注意：** 無法使用指令列工具設定通知。
 
 舉例來說，下列指令會使用客戶 ID `123-123-1234` 和目標資料集 `mydataset`，建立名為 `My Transfer` 的 Google Ads 資料移轉作業。資料移轉作業會在預設專案中建立：
 
@@ -213,51 +213,10 @@ follow the instructions to retrieve an authentication code.`
 
 ### Java
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定說明操作。詳情請參閱 [BigQuery Java API 參考說明文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定說明操作。詳情請參閱 [BigQuery Java API 參考文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
-import com.google.api.gax.rpc.ApiException;
-import com.google.cloud.bigquery.datatransfer.v1.CreateTransferConfigRequest;
-import com.google.cloud.bigquery.datatransfer.v1.DataTransferServiceClient;
-import com.google.cloud.bigquery.datatransfer.v1.ProjectName;
-import com.google.cloud.bigquery.datatransfer.v1.TransferConfig;
-import com.google.protobuf.Struct;
-import com.google.protobuf.Value;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
-// Sample to create ads(formerly AdWords) transfer config
-public class CreateAdsTransfer {
-
-  public static void main(String[] args) throws IOException {
-    // TODO(developer): Replace these variables before running the sample.
-    final String projectId = "MY_PROJECT_ID";
-    String datasetId = "MY_DATASET_ID";
-    // the customer_id only allows digits and hyphen ('-').
-    String customerId = "012-345-6789";
-    String refreshWindow = "100";
-    Map<String, Value> params = new HashMap<>();
-    params.put("customer_id", Value.newBuilder().setStringValue(customerId).build());
-    params.put("refreshWindow", Value.newBuilder().setStringValue(refreshWindow).build());
-    TransferConfig transferConfig =
-        TransferConfig.newBuilder()
-            .setDestinationDatasetId(datasetId)
-            .setDisplayName("Your Ads Transfer Config Name")
-            .setDataSourceId("adwords")
-            .setParams(Struct.newBuilder().putAllFields(params).build())
-            .build();
-    createAdsTransfer(projectId, transferConfig);
-  }
-
-  public static void createAdsTransfer(String projectId, TransferConfig transferConfig)
-      throws IOException {
-    try (DataTransferServiceClient client = DataTransferServiceClient.create()) {
-      ProjectName parent = ProjectName.of(projectId);
-      CreateTransferConfigRequest request =
-          CreateTransferConfigRequest.newBuilder()
-              .setParent(parent.toString())
-              .setTransferConfig(transferConfig)
+import com.google.api.gax.rpc.
 ```

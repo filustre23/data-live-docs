@@ -44,13 +44,14 @@ Sharing environment is a behavior model for sharing data within a data exchange.
 
 | JSON representation |
 | --- |
-| ``` {    // Union field environment can be only one of the following:   "defaultExchangeConfig": {     object (DefaultExchangeConfig)   },   "dcrExchangeConfig": {     object (DcrExchangeConfig)   }   // End of list of possible types for union field environment. } ``` |
+| ``` {    // The following is a list of mutually exclusive fields. At most one of the   // fields will be set in a response:   "defaultExchangeConfig": {     object (DefaultExchangeConfig)   },   "dcrExchangeConfig": {     object (DcrExchangeConfig)   }   // End of mutually exclusive fields. } ``` |
 
 | Fields | |
 | --- | --- |
-| Union field `environment`.  `environment` can be only one of the following: | |
+| The following is a list of mutually exclusive fields. At most one of the fields will be set in a response: | |
 | `defaultExchangeConfig` | `object (DefaultExchangeConfig)`  Default Analytics Hub data exchange, used for secured data sharing. |
 | `dcrExchangeConfig` | `object (DcrExchangeConfig)`  Data Clean Room (DCR), used for privacy-safe and secured data sharing. |
+| End of mutually exclusive fields. | |
 
 ## DefaultExchangeConfig
 
@@ -91,11 +92,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2025-07-02 UTC.
+Last updated 2026-08-28 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2025-07-02 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-08-28 UTC."],[],[]]

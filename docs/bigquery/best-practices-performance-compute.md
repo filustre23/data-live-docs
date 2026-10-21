@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -18,20 +18,20 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 本文提供最佳做法，協助您提升查詢效能。
 
-執行查詢時，您可以在 Google Cloud 控制台中[查看查詢計畫](https://docs.cloud.google.com/bigquery/docs/query-insights?hl=zh-tw)。您也可以使用 [`INFORMATION_SCHEMA.JOBS*` 檢視畫面](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw)或 [`jobs.get` REST API 方法](https://docs.cloud.google.com/bigquery/docs/query-plan-explanation?hl=zh-tw#api_sample_representation)，要求執行詳細資料。
+執行查詢時，您可以在 Google Cloud 控制台[查看查詢計畫](https://docs.cloud.google.com/bigquery/docs/query-insights?hl=zh-tw)。您也可以使用 [`INFORMATION_SCHEMA.JOBS*` 檢視畫面](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw)或 [`jobs.get` REST API 方法](https://docs.cloud.google.com/bigquery/docs/query-plan-explanation?hl=zh-tw#api_sample_representation)，要求執行詳細資料。
 
-查詢計畫包含查詢階段和步驟的詳細資料。這些詳細資料可協助您找出提升查詢效能的方法。舉例來說，如果您發現某個階段寫入的輸出內容遠多於其他階段，可能表示您需要在查詢中更早進行篩選。
+查詢計畫包含查詢階段和步驟的詳細資料。這些詳細資料可協助您找出改善查詢效能的方法。舉例來說，如果您發現某個階段寫入的輸出內容比其他階段多很多，可能表示您需要在查詢中更早進行篩選。
 
-如要進一步瞭解查詢計畫，並查看查詢計畫資訊如何協助您提升查詢效能的範例，請參閱「[取得查詢效能洞察](https://docs.cloud.google.com/bigquery/docs/query-insights?hl=zh-tw)」。解決查詢效能洞察資訊的問題後，您可以執行下列作業，進一步最佳化查詢：
+如要進一步瞭解查詢計畫，並查看查詢計畫資訊如何協助您提升查詢效能的範例，請參閱「[取得查詢效能洞察](https://docs.cloud.google.com/bigquery/docs/query-insights?hl=zh-tw)」。解決查詢效能洞察後，您可以執行下列工作，進一步最佳化查詢：
 
-* [減少要處理的資料](#reduce-data-processed)
+* [減少待處理的資料](#reduce-data-processed)
 * [最佳化查詢作業](#optimize-query-operations)
 * [減少查詢的輸出內容](#reduce-query-output)
 * [避免 SQL 反模式](#avoid-anti-sql-patterns)
 
 ## 減少處理的資料量
 
-您可以運用下列各節所述的選項，減少需要處理的資料量。
+您可以使用下列章節說明的選項，減少需要處理的資料。
 
 ### 建議不要使用 `SELECT *`
 
@@ -42,12 +42,13 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 * **使用資料預覽選項。**如要進行資料實驗或是探索資料，請使用其中一個[資料預覽選項](https://docs.cloud.google.com/bigquery/docs/best-practices-costs?hl=zh-tw#preview-data)，不要使用 `SELECT *`。
 * **查詢特定欄。**將 `LIMIT` 子句套用至 `SELECT *` 查詢不會影響讀取的資料量。系統不僅會收取您讀取整個資料表中所有位元組的費用，也會收取超過免費版配額的查詢數費用。相反地，只要查詢需要的資料欄即可。例如，使用 `SELECT * EXCEPT` 將一或多個資料欄排除在結果之外。
-* **使用分區資料表**。如果您確實需要查詢資料表中的每個資料欄，但範圍限定在資料子集，請考慮：
-  + 在目的地資料表中將結果具體化並改為查詢該資料表。
+* **使用分區資料表。**如果您確實需要查詢資料表中的每個資料欄，但範圍限定在資料子集，請考慮：
+  + 在目的地資料表中將結果具體化，並改為查詢該資料表。
   + [將資料表分區](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables?hl=zh-tw)，然後[查詢相關分區](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables?hl=zh-tw)。
-    舉例來說，使用 `WHERE _PARTITIONDATE="2017-01-01"` 只會查詢 2017 年 1 月 1 日的分區。
+    舉例來說，使用 `WHERE _PARTITIONDATE="2017-01-01"`
+    只會查詢 2017 年 1 月 1 日的分區。
 
-* **使用 `SELECT * EXCEPT`**。查詢資料子集或使用 `SELECT * EXCEPT`，可大幅減少查詢讀取的資料量。除了節省成本，減少資料 I/O 量和查詢結果所需的具體化量，也能提升效能。
+* **使用 `SELECT * EXCEPT`**。查詢部分資料或使用 `SELECT * EXCEPT` 可大幅減少查詢讀取的資料量。除了節省成本，減少資料 I/O 量和查詢結果所需的具體化量，也能提升效能。
 
   ```
   SELECT * EXCEPT (col1, col2, col5)
@@ -63,9 +64,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 * 多個具備相容結構定義且命名類似的資料表
 * 資料分區資料表
 
-**注意：** 如果您的資料允許，請使用時間分區資料表，而非資料分割資料表。詳情請參閱[避免過度分片資料表](#avoid-oversharding-tables)。
+**注意：** 如果您的資料允許，請使用時間分區資料表，而非資料分割資料表。詳情請參閱「[避免過度分片資料表](#avoid-oversharding-tables)」一文。
 
-查詢萬用字元資料表時，請在通用資料表前置字串後指定萬用字元 (`*`)。例如，`FROM bigquery-public-data.noaa_gsod.gsod194*` 會查詢自 1940 年代以來的所有資料表。
+查詢 Wildcard 資料表時，請在通用資料表前置字串後指定萬用字元 (`*`)。例如，`FROM bigquery-public-data.noaa_gsod.gsod194*` 會查詢自 1940 年代以來的所有資料表。
 
 相較於較短的前置字串，較詳細的前置字串查詢效果較好。舉例來說，`FROM bigquery-public-data.noaa_gsod.gsod194*` 的執行效果比 `FROM bigquery-public-data.noaa_gsod.*` 好，因為符合萬用字元的資料表較少。
 
@@ -92,9 +93,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 **最佳做法：**查詢[分區資料表](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables?hl=zh-tw)時，如要依分區篩選分區資料表，請使用下列資料欄：
 
 * 如果是擷取時間分區資料表，請使用虛擬資料欄 `_PARTITIONTIME`
-* 如果是分區資料表 (例如以時間單位資料欄為基礎和整數範圍)，請使用*分區資料欄*。
+* 如果是以時間單位資料欄為基礎的分區資料表和整數範圍分區資料表，請使用*分區資料欄*。
 
-如果是時間單位分區資料表，使用 `_PARTITIONTIME` 或*分區資料欄*篩選資料時，您可以指定日期或日期範圍。舉例來說，下列 `WHERE` 子句使用 `_PARTITIONTIME` 虛擬欄位指定 2016 年 1 月 1 日至 2016 年 1 月 31 日之間的分區：
+如果是時間單位分區資料表，使用 `_PARTITIONTIME` 或*分區資料欄*篩選資料時，您可以指定日期或日期範圍。舉例來說，下列 `WHERE` 子句使用 `_PARTITIONTIME` 虛擬欄位，指定 2016 年 1 月 1 日至 2016 年 1 月 31 日之間的分區：
 
 ```
 WHERE _PARTITIONTIME
@@ -109,7 +110,8 @@ AND TIMESTAMP("20160131")
 **最佳做法：**執行彙整作業，減少在 `JOIN` 子句之前處理的資料量。
 
 使用 [`GROUP BY` 子句](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw#group_by_clause)搭配[匯總函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions?hl=zh-tw)需要大量運算資源，因為這類查詢會使用[隨機排序](https://cloud.google.com/blog/products/bigquery/in-memory-query-execution-in-google-bigquery?hl=zh-tw)。
-由於這些查詢需要大量運算資源，因此只有在必要時才使用 `GROUP BY` 子句。
+由於這些查詢需要大量運算資源，因此只有在必要時才使用 `GROUP BY`
+子句。
 
 對於含有 `GROUP BY` 和 `JOIN` 的查詢，請在查詢中較早執行匯總，以減少處理的資料量。舉例來說，下列查詢會在兩個大型資料表上執行 `JOIN`，且事先未進行任何篩選：
 
@@ -135,7 +137,7 @@ ORDER BY comments_count DESC
 LIMIT 20;
 ```
 
-這項查詢會預先彙整留言數，減少 `JOIN` 讀取的資料量：
+這項查詢會預先彙整留言計數，減少 `JOIN` 讀取的資料量：
 
 ```
 WITH
@@ -176,35 +178,35 @@ ORDER BY comments_count DESC;
 
 **最佳做法：**使用具體化檢視區塊預先計算查詢結果，提升效能和效率。
 
-[具體化檢視表](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro?hl=zh-tw)是預先運算的檢視表，會定期快取查詢結果，以提升效能和效率。BigQuery 會運用具體化檢視區塊的預先計算結果，並[盡可能](https://docs.cloud.google.com/bigquery/docs/materialized-views-use?hl=zh-tw#incremental_updates)只讀取基礎資料表的變更內容，以計算最新結果。您可以直接查詢具體化檢視區塊，也可以讓 BigQuery 最佳化工具處理對基本資料表的查詢。
+[具體化檢視表](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro?hl=zh-tw)是預先運算的檢視表，會定期快取查詢結果，以提升效能和效率。BigQuery 會運用具體化檢視區塊的預先計算結果，並[盡可能](https://docs.cloud.google.com/bigquery/docs/materialized-views-use?hl=zh-tw#incremental_updates)只讀取基本資料表的變更內容，以計算最新結果。您可以直接查詢具體化檢視區塊，也可以讓 BigQuery 最佳化工具處理對基本資料表的查詢。
 
 ### 使用 BI Engine
 
 **最佳做法：**使用 BigQuery BI Engine 快取最常使用的資料，加快查詢速度。
 
-建議在計算查詢的專案中新增 [BI Engine](https://docs.cloud.google.com/bigquery/docs/bi-engine-query?hl=zh-tw) 保留項目。BigQuery BI Engine 使用向量化查詢引擎，加快`SELECT`查詢效能。
+建議在計算查詢的專案中新增 [BI Engine](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro?hl=zh-tw) 預留項目。BigQuery BI Engine 使用向量化查詢引擎，加快`SELECT`查詢效能。
 
 ### 使用搜尋索引
 
-**最佳做法：**如要在大型資料表中尋找個別資料列，請使用搜尋索引，有效率地查詢資料列。
+**最佳做法：**如要在大型資料表中尋找個別資料列，請使用搜尋索引，有效率地查閱資料列。
 
-[搜尋索引](https://docs.cloud.google.com/bigquery/docs/search-intro?hl=zh-tw)是一種資料結構，可透過 [`SEARCH` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions?hl=zh-tw#search)進行非常有效率的搜尋，但也能使用[其他運算子和函式](https://docs.cloud.google.com/bigquery/docs/search?hl=zh-tw#operator_and_function_optimization)加快查詢速度，例如等號 (`=`)、`IN` 或 `LIKE` 運算子，以及特定字串和 JSON 函式。
+[搜尋索引](https://docs.cloud.google.com/bigquery/docs/search-intro?hl=zh-tw)是一種資料結構，可透過 [`SEARCH` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions?hl=zh-tw#search)進行非常有效率的搜尋，但也能使用[其他運算子和函式](https://docs.cloud.google.com/bigquery/docs/search?hl=zh-tw#operator_and_function_optimization) (例如等號 (`=`)、`IN` 或 `LIKE` 運算子，以及特定字串和 JSON 函式) 加速查詢。
 
 ## 最佳化查詢作業
 
-您可以運用下列章節所述的選項，將查詢作業最佳化。
+您可以透過下列章節說明的選項，最佳化查詢作業。
 
 ### 避免重複轉換資料
 
 **最佳做法：**如果您使用 SQL 執行 ETL 作業，請避免重複轉換相同資料。
 
-例如，如果您是使用 SQL 來刪減字串或使用規則運算式擷取資料，則在目標資料表中將轉換的結果具體化的效能更高。規則運算式之類的函式需要額外的計算。在不增加轉換負擔的情況下查詢目標資料表會更有效率。
+例如，如果您是使用 SQL 來刪減字串或使用規則運算式擷取資料，則在目標資料表中將轉換的結果具體化的效能更高。規則運算式之類的函式需要額外的計算。在不增加轉換負擔的情況下查詢目的地資料表會更有效率。
 
-### 避免多次評估相同的 CTE
+### 避免對相同 CTE 進行多次評估
 
 **最佳做法**：使用[程序語言](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language?hl=zh-tw)、變數、[暫時性資料表](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries?hl=zh-tw#temporary_tables)和自動到期資料表，保留計算結果，以便稍後在查詢中使用。
 
-如果查詢包含[通用資料表運算式 (CTE)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw#with_clause)，且這些運算式在查詢中多次使用，每次參照時都可能會經過評估。查詢最佳化工具會嘗試偵測只能執行一次的查詢部分，但這可能並非總是可行。因此，使用 CTE 可能無法降低內部查詢複雜度和資源消耗量。
+如果查詢包含[一般資料表運算式 (CTE)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw#with_clause)，且查詢中有多處使用這些運算式，系統每次參照時都可能會評估這些運算式。查詢最佳化工具會嘗試偵測查詢中只能執行一次的部分，但這項作業不一定每次都能成功。因此，使用 CTE 可能無法降低內部查詢複雜度和資源用量。
 
 您可以根據 CTE 傳回的資料，將 CTE 的結果儲存在純量變數或臨時資料表中。
 
@@ -220,19 +222,17 @@ ORDER BY comments_count DESC;
 
 ### 將結合模式最佳化
 
-**最佳做法：**對於會聯結多個資料表資料的查詢，請從最大的資料表開始，藉此最佳化聯結模式。
+**最佳做法：**對於彙整多個資料表資料的查詢，請從最大的資料表開始，藉此最佳化彙整模式。
 
 使用 `JOIN` 子句建立查詢時，請考量合併資料的順序。GoogleSQL 查詢最佳化工具會判斷應將哪個資料表放在聯結的哪一側。最佳做法是先放置列數最多的表格，接著放置列數最少的表格，然後依遞減大小放置其餘表格。
 
-將大型資料表放在 `JOIN`
-的左邊，並將小型資料表放在
-`JOIN` 的右邊時，便建立了傳播結合。傳播結合會將較小資料表中的所有資料傳送至處理較大資料表的每個運算單元。建議您先執行傳播結合。
+如果 `JOIN` 左側是大型資料表，右側是小型資料表 `JOIN`，系統就會建立廣播聯結。廣播聯結會將較小資料表中的所有資料，傳送至處理較大資料表的每個運算單元。建議您先執行傳播結合。
 
 如要查看 `JOIN` 中的資料表大小，請參閱「[取得資料表相關資訊](https://docs.cloud.google.com/bigquery/docs/tables?hl=zh-tw#get_information_about_tables)」。
 
 ### 指定主鍵和外鍵限制
 
-**最佳做法：**如果資料表資料符合[主鍵或外鍵限制](https://docs.cloud.google.com/bigquery/docs/primary-foreign-keys?hl=zh-tw)的資料完整性規定，請在資料表結構定義中指定鍵限制。查詢引擎可使用鍵限制條件，將查詢計畫最佳化。
+**最佳做法：**當資料表資料符合[主鍵或外鍵限制](https://docs.cloud.google.com/bigquery/docs/primary-foreign-keys?hl=zh-tw)的資料完整性需求時，請在資料表結構定義中指定鍵限制。查詢引擎可以使用鍵限制條件來最佳化查詢計畫。
 
 BigQuery 不會自動檢查資料完整性，因此您必須確保資料符合資料表結構定義中指定的限制。如果未在指定限制的資料表中維持資料完整性，查詢結果可能會不準確。
 
@@ -242,7 +242,7 @@ BigQuery 不會自動檢查資料完整性，因此您必須確保資料符合�
 
 * **在最外側查詢或[視窗子句](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls?hl=zh-tw)中使用 `ORDER BY`。**
   將複雜的作業排至查詢的尾端。
-  除非是在窗型函式中使用 `ORDER BY` 子句，否則在查詢期間放入這類子句會大幅影響成效。
+  除非是在 window 函式中使用 `ORDER BY` 子句，否則在查詢期間放入這類子句會大幅影響效能。
 
   為查詢進行排序的另一種技巧是將複雜的作業 (例如規則運算式和數學函式) 排至查詢的尾端。這項技術可減少複雜作業執行前要處理的資料量。
 * **使用 `LIMIT` 子句。**如果要排序大量值，但不需要傳回所有值，請使用 `LIMIT` 子句。例如，下列查詢會排序非常大型的結果集，並擲回 `Resources exceeded` 錯誤。查詢會依 `mytable` 中的 `title` 資料欄排序。`title` 資料欄中包含數百萬個值。
@@ -268,7 +268,7 @@ BigQuery 不會自動檢查資料完整性，因此您必須確保資料符合�
   LIMIT
   1000;
   ```
-* **使用窗型函式。**如果要排序大量值，請使用視窗函式，並在呼叫視窗函式前限制資料。舉例來說，下列查詢會列出前十名最資深的 Stack Overflow 使用者及其排名，最資深的帳戶排名最低：
+* **使用窗型函式**。如果要排序大量值，請使用視窗函式，並在呼叫視窗函式前限制資料。舉例來說，下列查詢會列出前 10 位最資深的 Stack Overflow 使用者及其排名，最資深的帳戶排名最低：
 
   ```
   SELECT
@@ -281,9 +281,9 @@ BigQuery 不會自動檢查資料完整性，因此您必須確保資料符合�
   LIMIT 10;
   ```
 
-  這項查詢大約需要 15 秒才能執行完畢。這項查詢在查詢結尾使用 `LIMIT`，但不在 `DENSE_RANK() OVER` 視窗函式中。因此，查詢需要單一工作站節點排序所有資料。
+  這項查詢大約需要 15 秒才能執行完畢。這項查詢會在查詢結尾使用 `LIMIT`，但不會在 `DENSE_RANK() OVER` window 函式中使用。因此，查詢需要單一工作節點上的所有資料經過排序。
 
-  為提升效能，您應先限制資料集，再計算視窗函式：
+  為提升效能，您應先限制資料集，再計算 window 函式：
 
   ```
   WITH users AS (
@@ -307,47 +307,47 @@ BigQuery 不會自動檢查資料完整性，因此您必須確保資料符合�
 
   但請注意，`DENSE_RANK()` 函式會依年份對資料進行排名，因此如果資料跨越多個年度，這些查詢不會產生相同的結果。
 
-### 將複雜查詢拆分成較小的查詢
+### 將複雜查詢分割成較小的查詢
 
-**最佳做法**：善用[多重陳述式查詢](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries?hl=zh-tw)功能和[預存程序](https://docs.cloud.google.com/bigquery/docs/procedures?hl=zh-tw)，將原本設計為一個複雜查詢的運算作業，改為多個較小且較簡單的查詢。
+**最佳做法**：運用[多重陳述式查詢](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries?hl=zh-tw)功能和[預存程序](https://docs.cloud.google.com/bigquery/docs/procedures?hl=zh-tw)，將原本設計為一個複雜查詢的運算作業，改為多個較小且較簡單的查詢。
 
-複雜的查詢、`REGEX`函式，以及分層子查詢或聯結，執行速度可能較慢，且會耗用大量資源。舉例來說，嘗試將所有運算塞進一個巨大的 `SELECT` 陳述式 (例如設為檢視區塊)，有時會造成反模式，並導致查詢速度緩慢且耗用大量資源。在極少數的情況下，內部查詢計畫會變得非常複雜，導致 BigQuery 無法執行。
+複雜的查詢、`REGEX`函式，以及分層子查詢或聯結，執行時可能會耗用大量資源，而且速度緩慢。舉例來說，如果嘗試將所有運算都納入一個巨大的 `SELECT` 陳述式 (例如設為檢視區塊)，有時會造成反模式，並導致查詢速度緩慢且耗用大量資源。在極少數的情況下，內部查詢計畫會變得非常複雜，導致 BigQuery 無法執行。
 
-分割複雜查詢可將中繼結果具體化為變數或[臨時資料表](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries?hl=zh-tw#temporary_tables)。然後在查詢的其他部分使用這些中繼結果。如果查詢中有多個位置需要這些結果，這項功能就越發實用。
+分割複雜查詢時，可將中繼結果具體化為變數或[臨時資料表](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries?hl=zh-tw#temporary_tables)。然後在查詢的其他部分使用這些中繼結果。如果查詢中有多個位置需要這些結果，這項功能就越發實用。
 
-通常，您可以使用暫時性資料表做為資料具體化點，更清楚表達查詢中各部分的真正意圖。
+通常，您可以使用暫時性資料表做為資料具體化點，更清楚地表達查詢中各部分的真正意圖。
 
 ### 使用巢狀和重複的欄位
 
-如要瞭解如何使用巢狀和重複欄位，對資料儲存空間進行反正規化，請參閱「[使用巢狀和重複欄位](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-nested?hl=zh-tw)」。
+如要瞭解如何使用巢狀和重複的欄位，對資料儲存空間進行反正規化，請參閱「[使用巢狀和重複的欄位](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-nested?hl=zh-tw)」。
 
 ### 在彙整程序中使用 `INT64` 資料類型
 
-**最佳做法：**在聯結中使用 `INT64` 資料型別，而非 `STRING` 資料型別，以降低成本並提升比較成效。
+**最佳做法：**在聯結中使用 `INT64` 資料型別，而非 `STRING` 資料型別，以降低成本並提升比較效能。
 
-BigQuery 不會像傳統資料庫一樣為主鍵建立索引，因此聯結欄越寬，比較時間就越長。因此，在聯結中使用 `INT64` 資料類型，比使用 `STRING` 資料類型更便宜且更有效率。
+BigQuery 不會為主鍵建立索引，因此聯結資料欄越寬，比較所需的時間就越長。因此，在聯結中使用 `INT64` 資料類型，會比使用 `STRING` 資料類型更便宜且更有效率。
 
 ## 減少查詢輸出
 
-如要減少查詢輸出內容，請使用下列各節所述的選項。
+您可以運用下列章節說明的選項，減少查詢輸出內容。
 
 ### 將大型結果集具體化
 
-**最佳做法：**請考慮[將大型結果集具體化](https://docs.cloud.google.com/bigquery/docs/writing-results?hl=zh-tw#large-results)並寫入目標資料表。寫入大型結果集會對效能與成本造成影響。
+**最佳做法：**請考慮[將大型結果集具體化](https://docs.cloud.google.com/bigquery/docs/writing-results?hl=zh-tw#large-results)並寫入目的地資料表。寫入大型結果集會對效能與成本造成影響。
 
 BigQuery 將快取結果限制在壓縮後約 10 GB。傳回較大結果的查詢會超過這個限制，而經常導致下列錯誤：[`Response too large`](https://docs.cloud.google.com/bigquery/troubleshooting-errors?hl=zh-tw#responseTooLarge)。
 
 如果您從含有可觀資料量的資料表中選取大量欄位，就很可能產生這個錯誤。若執行將資料正規化而未進行縮減或匯總的 ETL 查詢，則寫入快取結果時也可能會發生問題。
 
-您可以透過下列方式克服快取結果的限制：
+您可以透過下列選項克服快取結果的限制：
 
 * 使用篩選器限制結果集
-* 使用 `LIMIT` 子句減少結果集，尤其是使用 `ORDER BY` 子句時
+* 使用 `LIMIT` 子句縮減結果集，尤其是使用 `ORDER BY` 子句時
 * 將輸出資料寫入目的地資料表
 
 您可以使用 BigQuery REST API 逐頁瀏覽結果。詳情請參閱[逐頁瀏覽資料表資料](https://docs.cloud.google.com/bigquery/docs/paging-results?hl=zh-tw)。
 
-**注意：** 將非常大的結果集寫入目的地資料表，會影響查詢效能 (I/O)。此外，儲存目的地資料表也會產生一小筆費用。您可以使用資料集的[預設資料表到期時間](https://docs.cloud.google.com/bigquery/docs/datasets?hl=zh-tw#create-dataset)，自動刪除大型目的地資料表。詳情請參閱儲存空間最佳做法中的「[使用到期設定](https://docs.cloud.google.com/bigquery/docs/best-practices-storage?hl=zh-tw#use-expiration-settings)」一節。
+**注意：** 將非常大的結果集寫入目的地資料表，會影響查詢效能 (I/O)。此外，儲存目的地資料表也會產生一小筆費用。您可以使用資料集的[預設資料表到期時間](https://docs.cloud.google.com/bigquery/docs/datasets?hl=zh-tw#create-dataset)，自動刪除大型目的地資料表。詳情請參閱「[使用儲存空間最佳做法中的到期設定](https://docs.cloud.google.com/bigquery/docs/best-practices-storage?hl=zh-tw#use-expiration-settings)」。
 
 ## 避免 SQL 反模式
 
@@ -357,7 +357,7 @@ BigQuery 將快取結果限制在壓縮後約 10 GB。傳回較大結果的查�
 
 **最佳做法：**不使用自連接，改為使用[窗型 (分析) 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/analytic-function-concepts?hl=zh-tw)或 [`PIVOT` 運算子](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw#pivot_operator)。
 
-通常自我聯結是用來計算列相依關係，結果可能會使輸出列數平方，此輸出量增加可能會導致效能低落。
+通常自我聯結是用來計算列相依關係，使用 self-join 的結果可能會使輸出列數平方，此輸出量增加可能會導致效能低落。
 
 ### 避免交叉聯結
 
@@ -370,7 +370,7 @@ BigQuery 將快取結果限制在壓縮後約 10 GB。傳回較大結果的查�
 如何避免聯結產生的輸出多於輸入造成的效能問題：
 
 * 使用 `GROUP BY` 子句[預先匯總資料](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-compute?hl=zh-tw#reduce_data_before_using_a_join)。
-* 使用窗型函式。窗型函式通常比使用交叉聯結更有效率。詳情請參閱[窗型函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls?hl=zh-tw)。
+* 使用 window 函式。窗型函式通常比使用 cross join 更有效率。詳情請參閱[窗型函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls?hl=zh-tw)。
 
 ### 避免使用更新或插入單列的 DML 陳述式
 
@@ -399,7 +399,7 @@ WHERE
 
 **最佳做法：**處理查詢 (包括子查詢) 中名稱相似的資料欄時，請使用資料欄和資料表別名。
 
-別名有助於識別所參照的資料欄和資料表，以及資料欄的初始參照。使用別名有助於瞭解及解決 SQL 查詢中的問題，包括找出子查詢中使用的資料欄。
+別名有助於識別參照的資料欄和資料表，以及資料欄的初始參照。使用別名有助於瞭解及解決 SQL 查詢中的問題，包括找出子查詢中使用的資料欄。
 
 ## 後續步驟
 
@@ -414,11 +414,11 @@ WHERE
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-13 (世界標準時間)。
+上次更新時間：2026-10-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-13 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]

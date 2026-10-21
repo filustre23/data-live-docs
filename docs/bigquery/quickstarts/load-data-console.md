@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -16,7 +16,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # 載入及查詢資料
 
-如要開始使用 BigQuery，請建立資料集、將資料載入資料表，並查詢資料表。
+如要開始使用 BigQuery，請建立資料集、將資料載入資料表，以及查詢資料表。
 
 ---
 
@@ -75,18 +75,18 @@ Google uses AI technology to translate content into your preferred language. AI 
   the permissions required to complete this guide](#required_roles). If you created a new
   project, then you already have the required permissions.
 
-1. 啟用 BigQuery API。
+1. 如果尚未啟用 BigQuery API，請啟用。
 
    **啟用 API 時所需的角色**
 
-   您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用情形管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   如要啟用 API，您必須具備 `serviceusage.services.enable` 權限。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用情形管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
    [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery&hl=zh-tw)
 
    新專案會自動啟用 BigQuery API。
 2. 選用：
-   [啟用專案的計費功能](https://docs.cloud.google.com/billing/docs/how-to/modify-project?hl=zh-tw)。即使不想啟用帳單或提供信用卡，本文的步驟仍適用。BigQuery 提供沙箱，方便您執行這些步驟。詳情請參閱「[啟用 BigQuery 沙箱](https://docs.cloud.google.com/bigquery/docs/sandbox?hl=zh-tw#setup)」一文。
-   **注意：**如果專案有帳單帳戶，且您想使用 BigQuery 沙箱，請[停用專案的帳單](https://docs.cloud.google.com/billing/docs/how-to/modify-project?hl=zh-tw#disable_billing_for_a_project)。
+   [啟用專案的計費功能](https://docs.cloud.google.com/billing/docs/how-to/modify-project?hl=zh-tw)。如果您不想啟用帳單或提供信用卡，仍可按照本文步驟操作。BigQuery 提供沙箱，方便您執行這些步驟。詳情請參閱「[啟用 BigQuery 沙箱](https://docs.cloud.google.com/bigquery/docs/sandbox?hl=zh-tw#setup)」一文。
+   **注意：**如果專案有帳單帳戶，且您想使用 BigQuery 沙箱，請[停用專案的帳單功能](https://docs.cloud.google.com/billing/docs/how-to/modify-project?hl=zh-tw#disable_billing_for_a_project)。
 
 ### 必要的角色
 
@@ -114,7 +114,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 6. 在「建立資料集」頁面中，執行下列操作：
 
 1. 在「Dataset ID」(資料集 ID) 中輸入 `babynames`。
-2. 針對「Location type」(位置類型) 選取「Multi-region」(多區域)，然後選擇「US (multiple regions in United States)」(us (多個美國區域))。公開資料集儲存在 `us` 多區域位置。為簡單起見，請將資料集儲存在相同位置。
+2. 針對「Location type」(位置類型) 選取「Multi-region」(多區域)，然後選擇「US (multiple regions in United States)」(us (多個美國區域))。公開資料集儲存在 `us` 多區域位置。為簡單起見，請將資料集儲存在同一個位置。
 3. 其餘設定請保留預設狀態，然後按一下「Create dataset」(建立資料集)。
 
 ## 下載含有來源資料的檔案
@@ -141,9 +141,9 @@ Google uses AI technology to translate content into your preferred language. AI 
 1. 點選左側窗格中的 explore「Explorer」。
 2. 在「Explorer」窗格，展開專案名稱。
 3. 按一下「資料集」，然後在「babynames」資料集旁邊，依序點按 more\_vert「查看動作」和「開啟」。
-4. 按一下「建立資料表」add\_box。
+4. 按一下 add\_box「建立資料表」。
 
-   除非另有指示，否則請保留所有設定的預設值。
+   除非另有指示，否則所有設定皆使用預設值。
 5. 在「建立資料表」頁面中，執行下列操作：
 
 1. 在「Source」(來源) 專區中，從「Create table from」(建立資料表來源) 的清單中選擇「Upload」(上傳)。
@@ -170,7 +170,7 @@ name:string,assigned_sex_at_birth:string,count:integer
 3. 按一下「`babynames`」資料集，然後選取「`names_2024`」資料表。
 4. 點按「Preview」(預覽) 分頁標籤，BigQuery 會顯示資料表的前幾個資料列。
 
-並非所有資料表類型都能使用「預覽」分頁。舉例來說，外部資料表或檢視區塊不會顯示「預覽」分頁。
+並非所有資料表類型都能使用「預覽」分頁。舉例來說，外部資料表或檢視畫面不會顯示「預覽」分頁。
 
 ## 查詢資料表資料
 
@@ -212,7 +212,7 @@ name:string,assigned_sex_at_birth:string,count:integer
 * 如要進一步瞭解如何將資料載入至 BigQuery，請參閱「[載入資料簡介](https://docs.cloud.google.com/bigquery/docs/loading-data?hl=zh-tw)」一文。
 * 如要進一步瞭解如何查詢資料，請參閱「[BigQuery 數據分析總覽](https://docs.cloud.google.com/bigquery/docs/query-overview?hl=zh-tw)」一文。
 * 如要瞭解如何使用巢狀和重複的資料載入 JSON 檔案，請參閱[載入巢狀和重複的 JSON 資料](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json?hl=zh-tw#loading_nested_and_repeated_json_data)。
-* 如要進一步瞭解如何透過程式存取 BigQuery，請參閱 [REST API](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2?hl=zh-tw) 參考資料，或前往 [BigQuery 用戶端程式庫](https://docs.cloud.google.com/bigquery/docs/reference/libraries?hl=zh-tw)頁面。
+* 如要進一步瞭解如何以程式輔助方式存取 BigQuery，請參閱 [REST API](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2?hl=zh-tw) 參考資料或 [BigQuery 用戶端程式庫](https://docs.cloud.google.com/bigquery/docs/reference/libraries?hl=zh-tw)頁面。
 
 
 
@@ -221,11 +221,11 @@ name:string,assigned_sex_at_birth:string,count:integer
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-16 (世界標準時間)。
+上次更新時間：2026-10-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-16 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]

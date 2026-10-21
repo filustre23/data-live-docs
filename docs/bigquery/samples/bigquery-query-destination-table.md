@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -122,11 +122,42 @@ public class SaveQueryToTable {
 }
 ```
 
+### Python
+
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+
+```
+from google.cloud import bigquery
+
+# Construct a BigQuery client object.
+client = bigquery.Client()
+
+# TODO(developer): Set table_id to the ID of the destination table.
+# table_id = "your-project.your_dataset.your_table_name"
+
+job_config = bigquery.QueryJobConfig(destination=table_id)
+
+sql = """
+    SELECT corpus
+    FROM `bigquery-public-data.samples.shakespeare`
+    GROUP BY corpus;
+"""
+
+# Start the query, passing in the extra configuration.
+client.query_and_wait(
+    sql, job_config=job_config
+)  # Make an API request and wait for the query to finish.
+
+print("Query results loaded to the table {}".format(table_id))
+```
+
 ### Rust
 
 ```
 use google_cloud_bigquery::client::BigQuery;
-use google_cloud_bigquery::model::TableReference;
+use google_cloud_bigquery_v2::model::TableReference;
 
 pub async fn sample(project_id: &str, dataset_id: &str, table_id: &str) -> anyhow::Result<()> {
     let client = BigQuery::builder().build().await?;
@@ -146,14 +177,12 @@ pub async fn sample(project_id: &str, dataset_id: &str, table_id: &str) -> anyho
         .with_project_id(project_id)
         .set_destination_table(destination)
         .set_location("US")
-        .run()
-        .await?
         .until_done()
         .await?
         .read();
 
     while let Some(row) = rows.next().await.transpose()? {
-        let name: String = row.get("name");
+        let name: String = row.get("name")?;
         println!("Name: {name}");
     }
     Ok(())

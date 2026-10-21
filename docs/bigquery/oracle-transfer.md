@@ -1,4 +1,4 @@
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
 * [Home](https://docs.cloud.google.com/?hl=zh-tw)
 * [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
@@ -18,7 +18,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 如要安排從 Oracle 資料庫到 BigQuery 的週期性資料移轉作業，請建立移轉設定，指定要移轉的資料物件，以及安排資料移轉作業的頻率。設定移轉設定後，[BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)會按照指定時間表，將最新資料移轉至 BigQuery 資料表。
 
-如要瞭解 Oracle 轉移作業的一般資訊，包括設定選項，請參閱「[Oracle 資料轉移作業簡介](https://docs.cloud.google.com/bigquery/docs/oracle-transfer-intro?hl=zh-tw)」。
+如要瞭解 Oracle 轉移作業的運作方式，請參閱[Oracle 資料轉移簡介](https://docs.cloud.google.com/bigquery/docs/oracle-transfer-intro?hl=zh-tw)。
 
 ## 限制
 
@@ -30,10 +30,10 @@ Oracle 移轉作業有以下限制：
   + 網路連結不得位於 `240.0.0.0/24` 範圍內的子網路中。
   + 如果網路連結有運作中的連線，就無法刪除。如要刪除網路連結，請[與 Cloud Customer Care 團隊聯絡](https://docs.cloud.google.com/bigquery/docs/getting-support?hl=zh-tw)。
   + 如果是 `us` 多區域，網路連結必須位於 `us-central1` 區域。如果是 `eu` 多區域，網路連結必須位於 `europe-west4` 區域。
-* Oracle 轉移作業的間隔時間下限為 15 分鐘。預設的週期性轉移間隔為 24 小時。
+* Oracle 週期性轉移作業之間的最短時間間隔為 15 分鐘。預設的週期性轉移間隔為 24 小時。
 * 單一移轉設定在特定時間只能支援一次資料移轉作業。如果排定在第一次資料轉移完成前執行第二次資料轉移，則只有第一次資料轉移會完成，任何與第一次轉移重疊的資料轉移都會略過。
   + 為避免在單一轉移設定中略過轉移作業，建議您設定「重複頻率」，增加大型資料轉移作業之間的時間間隔。
-* 在資料轉移期間，Oracle 連接器會識別已建立索引和已分割的鍵資料欄，以便平行轉移批次資料。因此，我們建議您在資料表中指定主鍵資料欄或使用索引資料欄，以提升資料轉移效能並降低錯誤率。
+* 資料轉移期間，Oracle 連接器會識別已建立索引和已分割的鍵資料欄，以便平行轉移批次資料。因此，我們建議您在資料表中指定主鍵資料欄或使用已建立索引的資料欄，以提升資料轉移的效能並降低錯誤率。
   + 如果您有索引或主鍵限制，建立平行批次時，系統僅支援下列資料欄類型：
     - `INTEGER`
     - `TINYINT`
@@ -45,8 +45,8 @@ Oracle 移轉作業有以下限制：
     - `BIGINT`
     - `DECIMAL`
     - `DATE`
-  + 如果 Oracle 資料轉移作業未使用主鍵或索引資料欄，則每個資料表最多只能支援 2,000,000 筆記錄。
-* 如果設定的網路附件和虛擬機器 (VM) 執行個體位於不同區域，從 Oracle 轉移資料時，可能會發生跨區域資料移動。
+  + 如果 Oracle 資料轉移作業未使用主鍵或索引資料欄，每個資料表最多只能支援 2,000,000 筆記錄。
+* 如果設定的網路連結和虛擬機器 (VM) 執行個體位於不同區域，從 Oracle 轉移資料時，可能會發生跨區域資料移動。
 
 ### 增量移轉限制
 
@@ -55,13 +55,13 @@ Oracle 增量轉移作業有下列限制：
 * 浮水印資料欄只能選擇 `TIMESTAMP` 個資料欄。
 * 只有含有有效浮水印欄的資產，才支援增量擷取。
 * 浮水印資料欄中的值必須單調遞增。
-* 增量轉移作業無法同步處理來源資料表中的刪除作業。
-* 單一轉移設定只能支援增量或完整擷取。
+* 增量移轉無法同步處理來源資料表中的刪除作業。
+* 單一移轉設定只能支援增量或完整擷取。
 * 第一次執行增量擷取後，就無法更新 `asset` 清單中的物件。
-* 首次執行增量擷取後，就無法在轉移設定中變更寫入模式。
+* 首次執行增量擷取後，就無法在移轉設定中變更寫入模式。
 * 第一次執行遞增式擷取作業後，就無法變更時間戳記欄或主鍵。
-* 目的地 BigQuery 資料表會使用您提供的主鍵進行叢集，並受[叢集資料表限制](https://docs.cloud.google.com/bigquery/docs/clustered-tables?hl=zh-tw#limitations)約束。
-* 首次將現有轉移設定更新為增量擷取模式時，更新後的第一次資料轉移會從資料來源轉移所有可用資料。後續的增量資料轉移作業只會轉移資料來源中的新資料列和更新資料列。
+* 目的地 BigQuery 資料表會使用您提供的主鍵進行分群，並受[分群資料表限制](https://docs.cloud.google.com/bigquery/docs/clustered-tables?hl=zh-tw#limitations)約束。
+* 首次將現有移轉設定更新為增量擷取模式時，更新後的第一次資料移轉作業會移轉資料來源中的所有可用資料。後續的任何增量資料轉移作業，都只會轉移資料來源中的新資料列和更新資料列。
 
 如要瞭解增量轉移的運作方式，請參閱「[完整或增量轉移](https://docs.cloud.google.com/bigquery/docs/oracle-transfer-intro?hl=zh-tw#full-incremental-transfers)」。
 
@@ -124,7 +124,7 @@ Oracle 增量轉移作業有下列限制：
 1. 前往 Google Cloud 控制台的「資料移轉」頁面。
 
    [前往「資料轉移」頁面](https://console.cloud.google.com/bigquery/transfers?hl=zh-tw)
-2. 按一下 add「建立轉移作業」。
+2. 按一下「建立轉移作業」add。
 3. 在「Source type」(來源類型) 部分，「Source」(來源) 請選取「Oracle」。
 4. 在「Data source details」(資料來源詳細資料) 部分執行下列操作：
 
@@ -157,9 +157,7 @@ Oracle 增量轉移作業有下列限制：
 
 ### bq
 
-輸入 [`bq mk` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_mk)
-並加上移轉建立作業旗標
-`--transfer_config`：
+輸入 [`bq mk` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_mk)並加上移轉建立標記 `--transfer_config`：
 
 ```
 bq mk
@@ -180,7 +178,7 @@ bq mk
 * DATASET：移轉設定的目標資料集。
 * PARAMETERS：已建立移轉設定的 JSON 格式參數。例如：`--params='{"param":"param_value"}'`。以下是 Oracle 資料移轉的參數：
 
-  + `connector.networkAttachment` (選用)：要連線至 Oracle 資料庫的網路附件名稱。
+  + `connector.networkAttachment` (選用)：要連線至 Oracle 資料庫的網路連結名稱。
   + `connector.authentication.Username`：Oracle 帳戶的使用者名稱。
   + `connector.authentication.Password`：Oracle 帳戶的密碼。
   + `connector.database`：Oracle 資料庫的名稱。
@@ -188,11 +186,11 @@ bq mk
   + `connector.endpoint.port`：Oracle 資料庫用來接收傳入連線的通訊埠編號，例如 `1520`。
   + `connector.connectionType`：連線網址類型，例如 `SERVICE`、`SID` 或 `TNS`。
   + `connector.tls.mode`：指定要用於這項轉移作業的 [TLS 設定](https://docs.cloud.google.com/bigquery/docs/oracle-transfer-intro?hl=zh-tw#tls-configuration)：
-    - `ENCRYPT_VERIFY_CA_AND_HOST` 加密資料，並驗證 CA 和主機名稱
-    - `ENCRYPT_VERIFY_CA` 加密資料，且僅驗證 CA
+    - `ENCRYPT_VERIFY_CA_AND_HOST` 加密資料，並驗證憑證授權單位和主機名稱
+    - `ENCRYPT_VERIFY_CA` 加密資料，且僅驗證憑證授權單位
     - `ENCRYPT_VERIFY_NONE` 僅適用於資料加密
     - `DISABLE`，不加密或驗證
-  + `connector.tls.trustedServerCertificate`：(選用) 提供一或多個 [PEM 編碼的憑證](https://docs.cloud.google.com/bigquery/docs/oracle-transfer-intro?hl=zh-tw#trusted_server_certificate_pem)。只有在 `connector.tls.mode` 為 `ENCRYPT_VERIFY_CA_AND_HOST` 或 `ENCRYPT_VERIFY_CA` 時才需要提供。
+  + `connector.tls.trustedServerCertificate`：(選用) 提供一或多個 [PEM 編碼憑證](https://docs.cloud.google.com/bigquery/docs/oracle-transfer-intro?hl=zh-tw#trusted_server_certificate_pem)。只有在 `connector.tls.mode` 為 `ENCRYPT_VERIFY_CA_AND_HOST` 或 `ENCRYPT_VERIFY_CA` 時才需要提供。
   + `ingestionType`：指定 `full` 或 `incremental`。[預先發布版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages)支援增量轉移。詳情請參閱「[完整或增量移轉](https://docs.cloud.google.com/bigquery/docs/oracle-transfer-intro?hl=zh-tw#full-incremental-transfers)」。
   + `writeMode`：指定 `WRITE_MODE_APPEND` 或 `WRITE_MODE_UPSERT`。
   + `watermarkColumns`：將資料表中的資料欄指定為浮水印資料欄。如要進行增量轉移，這個欄位為必填。
@@ -258,11 +256,11 @@ bq mk
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-07-12 (世界標準時間)。
+上次更新時間：2026-10-15 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-12 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformat
