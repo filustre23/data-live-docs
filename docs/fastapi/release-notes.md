@@ -7,6 +7,39 @@ hide:
 
 ## Latest Changes
 
+### Docs
+
+* 📝 Clarify boolean query parameter parsing. PR [#16569](https://github.com/fastapi/fastapi/pull/16569) by [@tiangolo](https://github.com/tiangolo).
+* 📝 Clarify nullable query parameters and path parameter defaults. PR [#16568](https://github.com/fastapi/fastapi/pull/16568) by [@tiangolo](https://github.com/tiangolo).
+
+### Internal
+
+* 👷 Remove translation notifications and approval labeling. PR [#16570](https://github.com/fastapi/fastapi/pull/16570) by [@tiangolo](https://github.com/tiangolo).
+
+## 0.156.8 (2026-10-21)
+
+### Fixes
+
+* 🐛 Preserve uploaded file positions when converting to `bytes`. PR [#16566](https://github.com/fastapi/fastapi/pull/16566) by [@tiangolo](https://github.com/tiangolo).
+
+## 0.156.7 (2026-10-21)
+
+### Fixes
+
+* 🐛 Fix validation error locations for form and file `AliasChoices`. PR [#16564](https://github.com/fastapi/fastapi/pull/16564) by [@tiangolo](https://github.com/tiangolo).
+
+## 0.156.6 (2026-10-21)
+
+### Fixes
+
+* 🐛 Respect model alias settings for query, header, and cookie parameters. PR [#16562](https://github.com/fastapi/fastapi/pull/16562) by [@tiangolo](https://github.com/tiangolo).
+
+## 0.156.5 (2026-10-21)
+
+### Fixes
+
+* 🐛 Fix `AliasChoices` for path parameters. PR [#16560](https://github.com/fastapi/fastapi/pull/16560) by [@tiangolo](https://github.com/tiangolo).
+
 ## 0.156.4 (2026-10-21)
 
 ### Fixes
