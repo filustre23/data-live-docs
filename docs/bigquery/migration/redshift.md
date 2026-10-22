@@ -216,4 +216,4 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 6. 在「Destination settings」(目的地設定) 部分，從「Dataset」(資料集) 清單中選擇[您建立的資料集](#create_a_dataset)。
 7. 在「Data source details」(資料來源詳細資料) 部分執行下列操作：
 
-   1. 在「JDBC connection url for Amazon Redshift」(Amazon Redshift 的 JDBC 連線網址) 部分，提
+   1. 在「JDBC connection url for Amazon Redshift」(Amazon Redshift 的 JDBC 連線網址)

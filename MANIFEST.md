@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-10-21T16:26+00:00_
+_Generated 2026-10-22T02:49+00:00_
 
-**9 sources, 4739 topics total**
+**9 sources, 4741 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_808 topics_
+_809 topics_
 
 - `anthropic-sdk/about-claude/additional-resources`
 - `anthropic-sdk/about-claude/api-credits-for-subscribers`
@@ -500,6 +500,7 @@ _808 topics_
 - `anthropic-sdk/api/messages/batches/retrieve`
 - `anthropic-sdk/api/messages/count_tokens`
 - `anthropic-sdk/api/messages/create`
+- `anthropic-sdk/api/migration-2026-10-21`
 - `anthropic-sdk/api/models`
 - `anthropic-sdk/api/models/list`
 - `anthropic-sdk/api/models/retrieve`
@@ -2572,7 +2573,7 @@ _227 topics_
 
 Upstream: <https://docs.getdbt.com/docs/>
 
-_1169 topics_
+_1170 topics_
 
 - `dbt-core/best-practices/best-practice-workflows`
 - `dbt-core/best-practices/clone-incremental-models`
@@ -2919,6 +2920,7 @@ _1169 topics_
 - `dbt-core/docs/local/connect-data-platform/extrica-setup`
 - `dbt-core/docs/local/connect-data-platform/fabric-setup`
 - `dbt-core/docs/local/connect-data-platform/fabricspark-setup`
+- `dbt-core/docs/local/connect-data-platform/firebird-setup`
 - `dbt-core/docs/local/connect-data-platform/firebolt-setup`
 - `dbt-core/docs/local/connect-data-platform/glue-setup`
 - `dbt-core/docs/local/connect-data-platform/greenplum-setup`

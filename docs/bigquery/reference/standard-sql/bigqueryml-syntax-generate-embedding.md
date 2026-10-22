@@ -362,4 +362,4 @@ ML.GENERATE_EMBEDDING(
   then the video is split into twelve 10 second segments (`[0, 10), [10,
   20), [20, 30)...`) and embeddings are generated for each segment. This
   value must be greater than
-  or equal to `4` and less than `120`. The defau
+  or equal to `4` and less than

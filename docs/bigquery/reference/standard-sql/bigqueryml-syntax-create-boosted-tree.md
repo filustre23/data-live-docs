@@ -569,4 +569,4 @@ If you are running hyperparameter tuning, use one of the following options:
   that provide discrete values to use for the hyperparameter. For example,
   `MIN_SPLIT_LOSS = HPARAM_CANDIDATES([0, 0.5, 1.5, 2.5])`.
 
-When running hyperparameter tuning, the valid range is
+When running hyperparameter t

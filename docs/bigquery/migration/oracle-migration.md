@@ -181,4 +181,4 @@ BigQuery 是全代管服務，您不需要進行任何維護或升級。BigQuery
 
 Oracle 和 Exadata 需要您執行資料庫和基礎架構層級的修補、升級和維護作業。Oracle 有許多版本，且預計每年都會發布新的主要版本。雖然新版本回溯相容，但查詢效能、情境和功能可能會有所變動。
 
-有些應用程式可能需要特定版本，例如 10g、[11g](https://docs.oracle.com/cd/B28359_01/server.111/b28279/chapter1.htm#NEWFTCH1) 或 [12c](https://docs.oracle.com/database/121/NEWFT/chapter12102.htm#NEWFT003)。進行重大資料庫升級時，
+有些應用程式可能需要特定版本，例如 10g、[11g](https://docs.oracle.com/cd/B28359_01/server.111/b28279/chapter1.htm#NEWFTCH1) 或 [12c](https://docs.oracle.com/database/121/NEWFT/chapter12102.htm#NEWFT003)。進行重大資料庫

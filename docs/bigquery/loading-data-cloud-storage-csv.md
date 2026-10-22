@@ -16,9 +16,9 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 從 Cloud Storage 載入 CSV 資料
 
-從 Cloud Storage 載入 CSV 資料時，可將資料載入至新的資料表或分區、將資料附加到現有資料表或分區或覆寫現有資料表或分區。將資料載入 BigQuery 時，資料會轉換為 [Capacitor](https://cloud.google.com/blog/products/bigquery/inside-capacitor-bigquerys-next-generation-columnar-storage-format?hl=zh-tw) 資料欄格式 (BigQuery 的儲存格式)。
+BigQuery 可讓您將 Cloud Storage 中的 CSV 資料載入新的資料表或分區，或附加至現有資料表或分區，或覆寫現有資料表或分區。在擷取期間，BigQuery 會將資料轉換為 [Capacitor](https://cloud.google.com/blog/products/bigquery/inside-capacitor-bigquerys-next-generation-columnar-storage-format?hl=zh-tw) (BigQuery 的儲存格式) 的欄格式，以便查詢和分析。
 
-如需從本機檔案載入 CSV 資料的相關資訊，請參閱[將資料從本機資料來源載入至 BigQuery](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#loading_data_from_local_files)。
+如要瞭解如何從本機檔案載入 CSV 資料，請參閱「[從店面資料來源將資料載入 BigQuery](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#loading_data_from_local_files)」。
 
 ## 歡迎試用
 
@@ -184,7 +184,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ### bq
 
-請使用 `bq load` 指令，然後使用 `--source_format` 旗標指定 `CSV`，並加入 [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#gcs-uri)。您可以加入單一 URI、以逗號分隔的 URI 清單，或包含[萬用字元](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#load-wildcards)的 URI。您可以在結構定義定義檔案中內嵌提供結構定義，或使用[結構定義自動偵測](https://docs.cloud.google.com/bigquery/docs/schema-detect?hl=zh-tw)功能。如未指定結構定義，且 `--autodetect` 為 `false`，且目的地資料表存在，則會使用目的地資料表的結構定義。
+請使用 `bq load` 指令，然後使用 `--source_format` 旗標指定 `CSV`，並加入 [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#gcs-uri)。您可以加入單一 URI、以逗號分隔的 URI 清單，或包含[萬用字元](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#load-wildcards)的 URI。您可以在結構定義定義檔案中內嵌結構定義，或使用[結構定義自動偵測](https://docs.cloud.google.com/bigquery/docs/schema-detect?hl=zh-tw)功能。如未指定結構定義，且 `--autodetect` 為 `false`，且目的地資料表存在，則會使用目的地資料表的結構定義。
 
 (選用) 提供 `--location` 旗標，並將值設為您的[位置](https://docs.cloud.google.com/bigquery/docs/dataset-locations?hl=zh-tw)。
 
@@ -212,7 +212,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 * `--require_partition_filter`：這個選項啟用後，系統會要求使用者加入 `WHERE` 子句，以指定要查詢的分區。使用分區篩選器可以降低成本並提升效能。詳情請參閱[查詢分區資料表](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables?hl=zh-tw)一文。
 * `--clustering_fields`：以半形逗號分隔的清單，最多列出四個用於建立[分群資料表](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables?hl=zh-tw)的資料欄名稱。
 * `--destination_kms_key`：用於加密資料表資料的 Cloud KMS 金鑰。
-* `--column_name_character_map`：定義資料欄名稱字元的範圍和處理方式，並可選擇啟用[彈性資料欄名稱](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet?hl=zh-tw#flexible-column-names)。CSV 檔案需要 `--autodetect` 選項。詳情請參閱「[`load_option_list`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements?hl=zh-tw#load_option_list)」。
+* `--column_name_character_map`：定義資料欄名稱字元的範圍和處理方式，並可選擇啟用[彈性資料欄名稱](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet?hl=zh-tw#flexible-column-names)。CSV 檔案需要 `--autodetect` 選項。詳情請參閱 [`load_option_list`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements?hl=zh-tw#load_option_list)。
 
   如要進一步瞭解 `bq load` 指令，請參閱：
 

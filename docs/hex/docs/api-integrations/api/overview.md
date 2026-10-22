@@ -999,6 +999,204 @@ tip
 
 The `GetProjectRuns` endpoint will only return information on API-triggered project runs. To cancel ongoing Scheduled Runs, you'll need the relevant `runId`, which can be found as the final argument in the URL when you view a given run from the [Run Log](/docs/share-insights/scheduled-runs#accessing-past-scheduled-runs).
 
+### Get total credits charged per user[​](#get-total-credits-charged-per-user "Direct link to Get total credits charged per user")
+
+The [`AgentUsage`](/docs/api-integrations/api/reference#operation/ListAgentUsage) endpoint can be used by admins in combination with the [`ListUsers`](/docs/api-integrations/api/reference#operation/ListUsers) endpoint to list out the total credits charged per user by joining the data from these two endpoints on `userId`.
+
+#### Step 1: Set up pagination of endpoints function[​](#step-1-set-up-pagination-of-endpoints-function "Direct link to Step 1: Set up pagination of endpoints function")
+
+Defining this pagination function helps return all available rows from this endpoint as the API can only return 500 rows at a time (or 100 rows for `/threads` endpoints).
+
+```
+def fetch_all(endpoint, row_key, params=None, limit=100, max_retries=5):
+
+
+
+"""Page through a workspace API endpoint and return every row.
+
+
+
+endpoint: path after /v1, e.g. "agent-usage"
+
+
+
+row_key:  array key in the response ("runs", "credit_grants",
+
+
+
+"threads", or "values")
+
+
+
+params:   optional dict of query filters
+
+
+
+limit:    page size (max 500 for agent-usage/credit-grants/users/groups,
+
+
+
+max 100 for threads)
+
+
+
+"""
+
+
+
+rows, after = [], None
+
+
+
+while True:
+
+
+
+for attempt in range(max_retries):
+
+
+
+resp = requests.get(
+
+
+
+f"{BASE_URL}/{endpoint}",
+
+
+
+headers={"Authorization": f"Bearer {TOKEN}"},
+
+
+
+params={**(params or {}), "limit": limit, "after": after},
+
+
+
+)
+
+
+
+if resp.status_code != 429:
+
+
+
+break
+
+
+
+if attempt < max_retries - 1:
+
+
+
+# Rate limited: honor Retry-After if sent, else back off
+
+
+
+# exponentially (2, 4, 8, ...) capped at the 60s reset window.
+
+
+
+retry_after = resp.headers.get("Retry-After")
+
+
+
+wait = float(retry_after) if retry_after else min(2 ** (attempt + 1), 60)
+
+
+
+time.sleep(wait)
+
+
+
+resp.raise_for_status()
+
+
+
+page = resp.json()
+
+
+
+rows.extend(page[row_key])
+
+
+
+after = page["pagination"]["after"]
+
+
+
+if after is None:
+
+
+
+return rows
+```
+
+#### Step 2: Get all workspace users and agent usage per user[​](#step-2-get-all-workspace-users-and-agent-usage-per-user "Direct link to Step 2: Get all workspace users and agent usage per user")
+
+```
+# GET /v1/users — active workspace users.
+
+
+
+users = fetch_all("users", "values", params={"sortBy": "NAME", "sortDirection": "ASC"}, limit=500)
+
+
+
+users_df = pd.json_normalize(users)
+
+
+
+print(f"{len(users_df)} users")
+
+
+
+# GET /v1/agent-usage — one row per agent run (workspace admin; last 90 days).
+
+
+
+# Optional filters: startingAt, endingAt (ISO 8601), userIds, threadIds (CSV).
+
+
+
+runs = fetch_all("agent-usage", "runs", limit=500)
+
+
+
+agent_usage_df = pd.json_normalize(runs)
+
+
+
+print(f"{len(agent_usage_df)} runs")
+```
+
+#### Step 3: Join workspace users and agent usage per user[​](#step-3-join-workspace-users-and-agent-usage-per-user "Direct link to Step 3: Join workspace users and agent usage per user")
+
+```
+usage_with_users = agent_usage_df.merge(
+
+
+
+users_df[["id", "name", "email", "role"]].rename(columns={"id": "userId"}),
+
+
+
+on="userId",
+
+
+
+how="left",
+
+
+
+)
+
+
+
+usage_with_users
+```
+
+From here, you can query `usage_with_users` in a SQL cell below (via dataframe SQL) and group by `userId` to retrieve total credits charged per user!
+
 ### Kernel and rate limits[​](#kernel-and-rate-limits "Direct link to Kernel and rate limits")
 
 Users are limited to 60 API requests per minute. If a user exceeds 60 requests in a minute, subsequent requests will be denied and return a 429 status until the rate limit is reset, 60 seconds after the first request. Request response headers contain metadata about the remaining number of requests allowed, and when the rate limit will be reset. Some Hex API endpoints may have additional rate limits which can be found in the [API reference docs](/docs/api-integrations/api/reference).
@@ -1218,6 +1416,7 @@ A 503 status code indicates that the user has reached the maximum number of conc
   + [Change Collection permissions](#change-collection-permissions)
   + [Rotate data connection credentials](#rotate-data-connection-credentials)
   + [Cancel active runs for a project](#cancel-active-runs-for-a-project)
+  + [Get total credits charged per user](#get-total-credits-charged-per-user)
   + [Kernel and rate limits](#kernel-and-rate-limits)
 * [The API and hextoolkit](#the-api-and-hextoolkit)
   + [Create the client](#create-the-client)

@@ -7,6 +7,42 @@ hide:
 
 ## Latest Changes
 
+## 0.159.1 (2026-10-21)
+
+### Features
+
+* ✨ Add support for optional unions of form models. PR [#16586](https://github.com/fastapi/fastapi/pull/16586) by [@tiangolo](https://github.com/tiangolo).
+
+## 0.159.0 (2026-10-21)
+
+### Features
+
+* ✨ Add support for optional query, header, and cookie parameter models. PR [#16584](https://github.com/fastapi/fastapi/pull/16584) by [@tiangolo](https://github.com/tiangolo).
+
+## 0.158.2 (2026-10-21)
+
+### Features
+
+* ✨ Add support for optional form models. PR [#16582](https://github.com/fastapi/fastapi/pull/16582) by [@tiangolo](https://github.com/tiangolo).
+
+## 0.158.1 (2026-10-21)
+
+### Fixes
+
+* 🐛 Preserve form media types in OpenAPI. PR [#16579](https://github.com/fastapi/fastapi/pull/16579) by [@tiangolo](https://github.com/tiangolo).
+
+## 0.158.0 (2026-10-21)
+
+### Features
+
+* ✨ Add support for combining form models. PR [#16577](https://github.com/fastapi/fastapi/pull/16577) by [@tiangolo](https://github.com/tiangolo).
+
+## 0.157.0 (2026-10-21)
+
+### Features
+
+* ✨ Add support for combining query, header, and cookie parameter models. PR [#16573](https://github.com/fastapi/fastapi/pull/16573) by [@tiangolo](https://github.com/tiangolo).
+
 ### Docs
 
 * 📝 Clarify boolean query parameter parsing. PR [#16569](https://github.com/fastapi/fastapi/pull/16569) by [@tiangolo](https://github.com/tiangolo).

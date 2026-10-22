@@ -278,4 +278,4 @@ bq mk \
 * project\_id：您的 Google Cloud 專案 ID。如未指定 `--project_id`，系統會使用預設專案。
 * data\_source：資料來源，`snowflake_migration`。
 * dataset：移轉設定的 BigQuery 目標資料集。
-* name：移轉設定的顯示名稱。移轉作業名稱可以是任意值
+* name：移轉設定的顯示名稱。移轉作業名稱可以

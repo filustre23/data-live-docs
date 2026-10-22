@@ -54,6 +54,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 | `collation_name` | `STRING` | [定序規格](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts?hl=zh-tw)的名稱 (如有)，否則為 `NULL`。   如果傳入 `STRUCT` 中的 `STRING`、`ARRAY<STRING>` 或 `STRING` 欄位，系統會傳回定序規格 (如有)；否則會傳回 `NULL`。 |
 | `rounding_mode` | `STRING` | 將精確度和比例套用至參數化 `NUMERIC` 或 `BIGNUMERIC` 值時，所使用的四捨五入模式；否則，值為 `NULL`。 |
 | `data_policies.name` | `STRING` | 附加至資料欄的資料政策清單，用於控管存取權和遮蓋。這個欄位為[預先發布版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages)。 |
+| `data_governance_tags` | `ARRAY<STRUCT>` | 附加至資料欄或巢狀欄位的[資料治理標記](https://docs.cloud.google.com/bigquery/docs/tags?hl=zh-tw#data-governance-tags)清單，用於控管存取權和遮蓋。每個 `STRUCT` 都包含下列 `STRING` 欄位：  * `key`：命名空間標記鍵，格式為 `PROJECT_ID/TAG_KEY` 或 `ORGANIZATION_ID/TAG_KEY`。 * `value`：標記值的簡稱。 |
 | `policy_tags` | `ARRAY<STRING>` | 附加至資料欄的政策標記清單。 |
 
 為確保穩定性，建議您在資訊結構定義查詢中明確列出資料欄，而非使用萬用字元 (`SELECT *`)。明確列出資料欄可避免查詢因基礎結構定義變更而中斷。
@@ -131,11 +132,11 @@ WHERE
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-19 (世界標準時間)。
+上次更新時間：2026-10-21 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-19 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-21 (世界標準時間)。"],[],[]]

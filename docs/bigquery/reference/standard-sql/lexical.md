@@ -473,4 +473,4 @@ DATE '2014-09-27'
 ```
 
 String literals in canonical date format also implicitly coerce to DATE type
-when used where a DATE-type expression is expected. For example, in the query
+when used where a DATE-type expression is expected. For example, i

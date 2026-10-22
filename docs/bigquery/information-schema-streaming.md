@@ -251,6 +251,5 @@ ORDER BY
 |         day         |  project_id | dataset_id | table_id |   error_code   | num_rows | num_bytes | num_requests |
 +---------------------+-------------+------------+----------+----------------+----------+-----------+--------------+
 | 2020-04-21 00:00:00 | my_project  | my_dataset | my_table | NULL           |       41 |    252893 |           41 |
-| 2020-04-20 00:00:00 | my_project  | my_dataset | my_table | NULL           |     2798 |  10688286 |         2798 |
-| 2020-04-19 00:00:00 | my_project  | my_dataset | my_
+| 2020-04-20 00:00:00 | my_project  | my_dataset | my_table | NULL           |     2798 |  10688286 |         2
 ```

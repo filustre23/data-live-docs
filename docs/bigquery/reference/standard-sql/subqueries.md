@@ -377,5 +377,4 @@ FROM
 -- The results aren't always the same when you execute
 -- the preceding query, but will look similar to this:
 /*----------+
- | username |
 ```

@@ -525,5 +525,5 @@ A `BOOL` value. The default value is `FALSE`.
 **Syntax**
 
 ```
-DATA_SPLIT_METHOD = { 'AUTO_SPLIT' | 'RANDOM' | 'CUSTOM' | 'SEQ' |
+DATA_SPLIT_METHOD = {
 ```

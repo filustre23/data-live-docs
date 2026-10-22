@@ -278,37 +278,30 @@ model with the
 to generate text based on a prompt you provide in a query or from a column in a
 [standard table](/bigquery/docs/tables-intro#standard-tables).
 
-### Llama models as MaaS
+### Open models as MaaS
 
-To create a Llama model in BigQuery ML, you must specify it as
+To create an open model in BigQuery ML, you must specify it as
 an [OpenAI API](https://platform.openai.com/docs/api-reference/introduction)
 endpoint in the format `openapi/<publisher_name>/<model_name>`.
 
-The following
-[Llama models](/vertex-ai/generative-ai/docs/partner-models/llama)
-are supported:
+The following open models are supported:
 
-* Llama 4 Scout 17B-16E, endpoint `meta/llama-4-scout-17b-16e-instruct-maas`
-* Llama 4 Maverick 17B-128E, endpoint `meta/llama-4-maverick-17b-128e-instruct-maas`
-* Llama 3.3 70B (Preview), endpoint `openapi/meta/llama-3.3-70b-instruct-maas`
-* Llama 3.2 90B (Preview), endpoint `openapi/meta/llama-3.2-90b-vision-instruct-maas`
-* Llama 3.1 405B (GA), endpoint `openapi/meta/llama-3.1-405b-instruct-maas`
-* Llama 3.1 70B (Preview), endpoint `openapi/meta/llama-3.1-70b-instruct-maas`
-* Llama 3.1 8B (Preview), endpoint `openapi/meta/llama-3.1-8b-instruct-maas`
+* Llama 4 Scout 17B-16E, endpoint `openapi/meta/llama-4-scout-17b-16e-instruct-maas`, in `us-east5`
+* Llama 4 Maverick 17B-128E, endpoint `openapi/meta/llama-4-maverick-17b-128e-instruct-maas`, in `us-east5`
+* OpenAI gpt-oss 120B, endpoint `openapi/openai/gpt-oss-120b-maas`, in `us-central1`
 
-**Important:** For Llama 4.0 and greater models, you must create the dataset and
-connection for the remote model in the same region as the Llama model
+**Important:** For these open MaaS models, you must create the dataset and
+connection for the remote model in the same region as the model
 endpoint.
 
 You must enable Llama models in Gemini Enterprise Agent Platform before you can use
 them. For more information, see
 [Enable a partner model](/bigquery/docs/generate-text#enable-model).
 
-After you create a remote model based on a Llama model, you can use the
-model with the
+After you create a remote model, you can use the model with the
 [`AI.GENERATE_TEXT` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text)
-to generate text based on a prompt you provide in a query or from a column in a
-[standard table](/bigquery/docs/tables-intro#standard-tables).
+to generate text based on a prompt you provide in a query or from a column
+in a [standard table](/bigquery/docs/tables-intro#standard-tables).
 
 For information that can help you choose between the supported models, see
 [Model information](/gemini-enterprise-agent-platform/models/google-models).
@@ -359,11 +352,11 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-10-20 UTC.
+Last updated 2026-10-21 UTC.
 
 
 
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-10-20 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-10-21 UTC."],[],[]]

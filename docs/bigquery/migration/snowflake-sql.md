@@ -157,4 +157,4 @@ between Snowflake and BigQuery.
 | --- | --- |
 | `CREATE [OR REPLACE] PROCEDURE`  `procedure_name`  `([arg_name arg_data_type[,..]])`  `RETURNS data_type`  `AS procedure_definition;`   Note: Snowflake requires that stored procedures return a single value. Hence, return data type is a required option. | `CREATE [OR REPLACE] PROCEDURE`  `procedure_name`  `([arg_mode arg_name arg_data_type[,..]])`  `BEGIN`  `procedure_definition`  `END;`   `arg_mode: IN | OUT | INOUT`   Note: BigQuery doesn't support a return type for stored procedures. Also, it requires specifying argument mode for each argument passed. |
 | `CREATE [OR REPLACE] PROCEDURE`  `procedure_name`  `([arg_name arg_data_type[,..]])`  `RETURNS data_type`  `AS`  `$$`  `javascript_code`  `$$;` | `CREATE [OR REPLACE] PROCEDURE`  `procedure_name`  `([arg_name arg_data_type[,..]])`  `BEGIN`  `statement_list`  `END;` |
-| `CREATE [OR RE` |
+| `C` |

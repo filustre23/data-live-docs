@@ -220,6 +220,5 @@ import com.google.api.gax.rpc.ApiException;
 import com.google.cloud.bigquery.datatransfer.v1.CreateTransferConfigRequest;
 import com.google.cloud.bigquery.datatransfer.v1.DataTransferServiceClient;
 import com.google.cloud.bigquery.datatransfer.v1.ProjectName;
-import com.google.cloud.bigquery.datatransfer.v1.TransferConfig;
-import
+import com.google.cloud.bigquery.datatransfer.v1.
 ```

@@ -27,6 +27,21 @@ To get the latest product updates delivered to you, add the URL of this page to 
 reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators), or add the
 [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## October 21, 2026
+
+Feature
+
+The
+[`AI.CHUNK_DOCUMENT` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-chunk-document)
+is a table-valued function that splits
+unstructured documents into semantically coherent text chunks
+optimized for vector embeddings and Retrieval-Augmented Generation (RAG)
+workflows.
+
+This function is
+[generally available](https://cloud.google.com/products#product-launch-stages)
+(GA).
+
 ## October 16, 2026
 
 Feature
@@ -4784,11 +4799,3 @@ Feature
 You can select multiple columns and perform data preparation tasks on them, including dropping columns. For more information, see [Prepare data with Gemini](/bigquery/docs/data-prep-get-suggestions). This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## May 21, 2025
-
-Change
-
-You can now perform [supervised tuning](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model#supervised_tuning) on a BigQuery ML [remote model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) based on a Vertex AI `gemini-2.0-flash-001` or `gemini-2.0-flash-lite-001` model.
-
-Feature
-
-You are now able to

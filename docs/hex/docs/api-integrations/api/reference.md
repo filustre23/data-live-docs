@@ -51,6 +51,8 @@
 * getGetThread
 * getGetThreadMessages
 * postContinueThread
+* getListAgentUsage
+* getListCreditGrants
 * getMe
 * getListUsers
 * postDeactivateUser
@@ -2584,7 +2586,4 @@ Copy
   + "email": "string",
   + "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08"},
 * "sharing": {
-  + "users": [
-    - {
-      * "access": "string",
-      * "id": "497f6eca-6276-4993-bfeb-53cbbbba6`
+  + "users":`

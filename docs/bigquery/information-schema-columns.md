@@ -14,13 +14,13 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 你可以依據偏好儲存及分類內容。
 
-# 「COLUMNS」檢視畫面
+# COLUMNS 檢視表
 
-`INFORMATION_SCHEMA.COLUMNS` 檢視表會針對資料表中的每個資料欄 (欄位)，分別列出一個相對應的資料列。
+`INFORMATION_SCHEMA.COLUMNS` 檢視畫面中，資料表的每個資料欄 (欄位) 都會有一列。
 
 ## 所需權限
 
-如要查詢 `INFORMATION_SCHEMA.COLUMNS` 檢視畫面，您必須具備下列 Identity and Access Management (IAM) 權限：
+如要查詢 `INFORMATION_SCHEMA.COLUMNS` 檢視表，您必須具備下列 Identity and Access Management (IAM) 權限：
 
 * `bigquery.tables.get`
 * `bigquery.tables.list`
@@ -32,62 +32,62 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 * `roles/bigquery.dataEditor`
 * `roles/bigquery.metadataViewer`
 
-如要進一步瞭解 BigQuery 權限，請參閱[使用 IAM 控管存取權](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)。
+如要進一步瞭解 BigQuery 權限，請參閱「[使用 IAM 控管存取權](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)」。
 
 ## 結構定義
 
-當您查詢 `INFORMATION_SCHEMA.COLUMNS` 檢視表時，系統會在查詢結果中，針對資料表中的每個資料欄 (欄位)，分別列出一個相對應的資料列。
+當您查詢 `INFORMATION_SCHEMA.COLUMNS` 檢視表時，系統會在查詢結果中，針對資料集中的每個資料欄 (欄位)，分別列出一個相對應的資料列。
 
 `INFORMATION_SCHEMA.COLUMNS` 檢視表具有下列結構定義：
 
 | 資料欄名稱 | 資料類型 | 值 |
 | --- | --- | --- |
-| `table_catalog` | `STRING` | 資料集所屬專案的專案 ID。 |
-| `table_schema` | `STRING` | 資料表所屬資料集的名稱 (又稱為 `datasetId`)。 |
-| `table_name` | `STRING` | 資料表或檢視表的名稱 (又稱為 `tableId`)。 |
+| `table_catalog` | `STRING` | 資料集所屬專案的 ID。 |
+| `table_schema` | `STRING` | 資料表所在資料集的名稱，也稱為 `datasetId`。 |
+| `table_name` | `STRING` | 資料表或檢視表的名稱，也稱為 `tableId`。 |
 | `column_name` | `STRING` | 資料欄的名稱。 |
-| `ordinal_position` | `INT64` | 資料表中資料欄的 1 索引偏移；如果是虛擬資料欄 (例如 \_PARTITIONTIME 或 \_PARTITIONDATE)，則值為 `NULL`。 |
-| `is_nullable` | `STRING` | `YES` 或 `NO`，視資料欄的模式是否允許使用 `NULL` 值而定。 |
+| `ordinal_position` | `INT64` | 資料表內資料欄的 1 索引偏移量；如果是虛擬資料欄 (例如 \_PARTITIONTIME 或 \_PARTITIONDATE)，則值為 `NULL`。 |
+| `is_nullable` | `STRING` | `YES` 或 `NO`，取決於資料欄的模式是否允許 `NULL` 值。 |
 | `data_type` | `STRING` | 資料欄的 GoogleSQL [資料類型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw)。 |
-| `is_generated` | `STRING` | 如果資料欄是[自動產生的嵌入資料欄](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation?hl=zh-tw)，值為 `ALWAYS`；否則值為 `NEVER`。 |
-| `generation_expression` | `STRING` | 如果資料欄是自動產生的嵌入資料欄，這個值就是用於定義資料欄的產生運算式；否則這個值為 `NULL`。 |
-| `is_stored` | `STRING` | 如果資料欄是自動產生的嵌入資料欄，值為 `YES`；否則值為 `NULL`。 |
-| `async_generation_status` | `STRUCT` | 如果資料欄是自動產生的嵌入資料欄，則包含背景嵌入生成作業的封鎖錯誤；否則值為 `NULL`。如要瞭解封鎖錯誤，請參閱 `async_generation_status.blocking_error.message` 欄位。封鎖錯誤可能包括：  * 權限遭拒錯誤 * 找不到錯誤 * 不支援的嵌入模型端點錯誤 * Vertex AI API 未啟用錯誤  下一個嵌入生成工作成功後，`async_generation_status` 欄會清除。 |
-| `is_hidden` | `STRING` | `YES` 或 `NO`，視資料欄是否為虛擬資料欄 (例如 \_PARTITIONTIME 或 \_PARTITIONDATE) 而定。 |
-| `is_updatable` | `STRING` | 此值一律為 `NULL`。 |
-| `is_system_defined` | `STRING` | `YES` 或 `NO`，視資料欄是否為虛擬資料欄 (例如 \_PARTITIONTIME 或 \_PARTITIONDATE) 而定。 |
-| `is_partitioning_column` | `STRING` | `YES` 或 `NO`，視資料欄是否為[分區資料欄](https://docs.cloud.google.com/bigquery/docs/partitioned-tables?hl=zh-tw)而定。 |
-| `clustering_ordinal_position` | `INT64` | 在資料表的叢集資料欄中，資料欄的 1 索引偏移。如果資料表不是叢集資料表，則此值為 `NULL`。 |
-| `collation_name` | `STRING` | [排序規則規格](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts?hl=zh-tw)的名稱 (如有)，否則為 `NULL`。   如果傳入 `STRING` 或 `ARRAY<STRING>`，則會傳回排序規則規格 (如有)，否則會傳回 `NULL`。 |
-| `column_default` | `STRING` | 如果資料欄存在，則為該資料欄的[預設值](https://docs.cloud.google.com/bigquery/docs/default-values?hl=zh-tw)；否則值為 `NULL`。 |
-| `rounding_mode` | `STRING` | 如果欄位類型是參數化 `NUMERIC` 或 `BIGNUMERIC`，則寫入欄位的值會使用此捨入模式；否則值為 `NULL`。 |
-| `data_policies.name` | `STRING` | 附加至資料欄的資料政策清單，用於控管存取權和遮蓋。這個欄位為 ([預先發布版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))。 |
+| `is_generated` | `STRING` | 如果資料欄是[自動產生的嵌入資料欄](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation?hl=zh-tw)，則值為 `ALWAYS`，否則為 `NEVER`。 |
+| `generation_expression` | `STRING` | 如果資料欄是自動產生的嵌入資料欄，則值為用於定義資料欄的生成運算式；否則值為 `NULL`。 |
+| `is_stored` | `STRING` | 如果資料欄是自動產生的嵌入資料欄，則值為 `YES`，否則為 `NULL`。 |
+| `async_generation_status` | `STRUCT` | 如果資料欄是自動產生的嵌入資料欄，則包含背景嵌入生成工作的封鎖錯誤；否則值為 `NULL`。如要瞭解封鎖錯誤，請參閱 `async_generation_status.blocking_error.message` 欄位。封鎖錯誤可能包括：  * 權限遭拒錯誤 * 找不到錯誤 * 不支援的嵌入模型端點錯誤 * Vertex AI API 未啟用錯誤  下一個嵌入生成工作成功後，系統會清除 `async_generation_status` 欄。 |
+| `is_hidden` | `STRING` | `YES` 或 `NO`，取決於資料欄是否為虛擬資料欄，例如 \_PARTITIONTIME 或 \_PARTITIONDATE。 |
+| `is_updatable` | `STRING` | 這個值一律為 `NULL`。 |
+| `is_system_defined` | `STRING` | `YES` 或 `NO`，取決於資料欄是否為虛擬資料欄，例如 \_PARTITIONTIME 或 \_PARTITIONDATE。 |
+| `is_partitioning_column` | `STRING` | `YES` 或 `NO`，取決於資料欄是否為[分區資料欄](https://docs.cloud.google.com/bigquery/docs/partitioned-tables?hl=zh-tw)。 |
+| `clustering_ordinal_position` | `INT64` | 資料表分群資料欄中，資料欄的 1 索引偏移值；如果資料表不是分群資料表，則值為 `NULL`。 |
+| `collation_name` | `STRING` | [定序規格](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts?hl=zh-tw)的名稱 (如有)，否則為 `NULL`。   如果傳入 `STRING` 或 `ARRAY<STRING>`，系統會傳回定序規格 (如有)；否則會傳回 `NULL`。 |
+| `column_default` | `STRING` | 資料欄的[預設值](https://docs.cloud.google.com/bigquery/docs/default-values?hl=zh-tw) (如有)，否則值為 `NULL`。 |
+| `rounding_mode` | `STRING` | 如果欄位類型是參數化 `NUMERIC` 或 `BIGNUMERIC`，則為寫入欄位的值所使用的四捨五入模式；否則值為 `NULL`。 |
+| `data_policies.name` | `STRING` | 附加至資料欄的資料政策清單，用於控管存取權和遮蓋。這個欄位為[預先發布版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages)。 |
+| `data_governance_tags` | `ARRAY<STRUCT>` | 附加至資料欄的[資料治理標記](https://docs.cloud.google.com/bigquery/docs/tags?hl=zh-tw#data-governance-tags)清單，用於控管存取權和遮蓋。每個 `STRUCT` 都包含下列 `STRING` 欄位：  * `key`：命名空間標記鍵，格式為 `PROJECT_ID/TAG_KEY` 或 `ORGANIZATION_ID/TAG_KEY`。 * `value`：標記值的簡稱。  如果是 `STRUCT` (或 `RECORD`) 欄，附加至巢狀欄位的資料治理標記會顯示在 [`INFORMATION_SCHEMA.COLUMN_FIELD_PATHS`](https://docs.cloud.google.com/bigquery/docs/information-schema-column-field-paths?hl=zh-tw) 檢視畫面中。 |
 | `policy_tags` | `ARRAY<STRING>` | 附加至資料欄的政策標記清單。 |
-| `is_identity` | `STRING` | `YES` 或 `NO`，視資料欄是否為 ID 資料欄而定。 |
-| `identity_generation` | `STRING` | 視身分資料欄的產生模式而定，顯示 `ALWAYS` 或 `BY DEFAULT`。如果資料欄不是身分識別資料欄，則值為 `NULL`。 |
-| `identity_start` | `INT64` | 身分識別資料欄產生的第一個值，或 `NULL` (如果資料欄不是身分識別資料欄)。 |
-| `identity_increment` | `INT64` | 身分欄連續產生的 ID 之間的最小差異，如果該欄不是身分欄，則為 `NULL`。 |
-| `identity_maximum` | `INT64` | 可為 ID 資料欄產生的最大值，或 `NULL` (如果資料欄不是 ID 資料欄)。 |
-| `identity_minimum` | `INT64` | 可為 ID 欄產生的最小值，或 `NULL` (如果資料欄不是 ID 欄)。 |
-| `identity_cycle` | `STRING` | 如果該欄是 ID 欄，則這個值為 `NEVER`；否則，這個值為 `NULL`。 |
+| `is_identity` | `STRING` | `YES` 或 `NO`，取決於資料欄是否為識別欄。 |
+| `identity_generation` | `STRING` | `ALWAYS` 或 `BY DEFAULT`，視識別欄的產生模式而定。如果資料欄不是識別欄，則值為 `NULL`。 |
+| `identity_start` | `INT64` | 識別欄產生的第一個值，如果該欄不是識別欄，則為 `NULL`。 |
+| `identity_increment` | `INT64` | 識別欄連續產生的 ID 之間的最小差異，如果該欄不是識別欄，則為 `NULL`。 |
+| `identity_maximum` | `INT64` | 可為識別欄產生的最大值，如果該欄不是識別欄，則為 `NULL`。 |
+| `identity_minimum` | `INT64` | 可為識別欄產生的最小值，如果該欄不是識別欄，則為 `NULL`。 |
+| `identity_cycle` | `STRING` | 如果資料欄是識別欄，則這個值為 `NEVER`；否則，值為 `NULL`。 |
 
-為確保穩定性，建議您在資訊結構定義查詢中明確列出資料欄，而非使用萬用字元 (`SELECT *`)。明確列出資料欄可避免基礎結構定義變更時，查詢中斷。
+為確保穩定性，建議您在資訊結構定義查詢中明確列出資料欄，而非使用萬用字元 (`SELECT *`)。明確列出資料欄可避免查詢因基礎結構定義變更而中斷。
 
 ## 範圍和語法
 
-對這個檢視表執行的查詢必須包含資料集或區域限定詞。如果是含有資料集限定符的查詢，您必須具備資料集權限。如要查詢含有區域限定符的資料，您必須具備專案權限。詳情請參閱「[語法](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw#syntax)」。下表說明這個檢視畫面的區域和資源範圍：
+對這個檢視表執行查詢時，必須包含資料集或區域限定詞。如要查詢含有資料集限定詞的資料，您必須具備資料集的權限。如要查詢含有區域限定詞的資料，您必須具備專案權限。詳情請參閱「[語法](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw#syntax)」。下表說明這個檢視畫面的區域和資源範圍：
 
 | 檢視表名稱 | 資源範圍 | 區域範圍 |
 | --- | --- | --- |
 | `` [PROJECT_ID.]`region-REGION`.INFORMATION_SCHEMA.COLUMNS `` | 專案層級 | `REGION` |
 | `[PROJECT_ID.]DATASET_ID.INFORMATION_SCHEMA.COLUMNS` | 資料集層級 | 資料集位置 |
 
-取代下列項目：
+請更改下列內容：
 
-* 選用：`PROJECT_ID`： Google Cloud 專案 ID。如未指定，系統會使用預設專案。
-* `REGION`：任何[資料集區域名稱](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
-  例如：`` `region-us` ``。
-* `DATASET_ID`：資料集的 ID。詳情請參閱「[資料集限定符](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw#dataset_qualifier)」。**注意：**您必須使用[區域限定詞](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw#region_qualifier)查詢 `INFORMATION_SCHEMA` 檢視畫面。查詢執行位置必須與`INFORMATION_SCHEMA`檢視區塊的區域相符。
+* 選用：`PROJECT_ID`： Google Cloud 專案的 ID。如未指定，則會使用預設專案。
+* `REGION`：任何[資料集區域名稱](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。例如：`` `region-us` ``。
+* `DATASET_ID`：資料集 ID。詳情請參閱「[資料集限定詞](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw#dataset_qualifier)」。**注意：**您必須使用[區域限定詞](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw#region_qualifier)，才能查詢 `INFORMATION_SCHEMA` 檢視表。查詢執行位置必須與 `INFORMATION_SCHEMA` 檢視表的區域相符。
 
 ## 範例
 
@@ -99,7 +99,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 * `IS_UPDATABLE`
 
-**附註：** `INFORMATION_SCHEMA` 檢視表名稱會區分大小寫。
+**注意：** `INFORMATION_SCHEMA` 檢視表名稱會區分大小寫。
 
 ```
   SELECT
@@ -110,7 +110,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
     table_name = 'population_by_zip_2010';
 ```
 
-結果大致如下。為了方便閱讀，我們已從結果中排除部分資料欄。
+結果大致如下。為方便閱讀，結果會排除部分資料欄。
 
 ```
 +------------------------+-------------+------------------+-------------+-----------+-----------+-------------------+------------------------+-----------------------------+-------------+
@@ -132,11 +132,11 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-15 (世界標準時間)。
+上次更新時間：2026-10-21 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-21 (世界標準時間)。"],[],[]]

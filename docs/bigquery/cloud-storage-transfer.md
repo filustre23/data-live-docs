@@ -213,6 +213,4 @@ bq mk \
   + `parquet_enum_as_string`：針對 `PARQUET` `file_format` 值，請設為 `TRUE`，將 `PARQUET` `ENUM` 邏輯型別推斷為 `STRING`，而非預設的 `BYTES`。
   + `parquet_enable_list_inference`：如為 `PARQUET` `file_format` 值，請設為 `TRUE`，以便專門針對 `PARQUET` `LIST` 邏輯型別使用結構定義推論。
   + `reference_file_schema_uri`：參考檔案的 URI 路徑，其中包含讀取器結構定義。
-  + `field_delimiter`：如果是 `CSV` `file_format` 值，則為分隔欄位的字元。預設值為半形逗號。
-  + `quote`：適用於 `CSV` `file_format` 值，CSV 檔案中用來引用資料區段的字元。預設值為英文雙引號 (`"`)。
-  + `skip_leading_rows`：如果是 `CSV` `file_format` 值
+  + `field_delimiter`：如果

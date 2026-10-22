@@ -256,14 +256,4 @@ bq mk
 * `CostPerThruplay`
 * `CostPerUniqueActionType`
 * `CostPerUniqueConversion`
-* `CostPerUniqueOutboundClick`
-* `InteractiveComponentTap`
-* `MobileAppPurchaseRoas`
-* `OutboundClicks`
-* `OutboundClicksCtr`
-* `PurchaseRoas`
-* `UniqueActions`
-* `UniqueConversions`
-* `UniqueOutboundClicks`
-* `UniqueOutboundClicksCtr`
-<
+* `CostPerUn`

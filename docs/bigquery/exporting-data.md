@@ -16,47 +16,41 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 將資料表資料匯出至 Cloud Storage
 
-本頁面說明如何將 BigQuery 資料表中的資料匯出或擷取至 Cloud Storage。
-
-[將資料載入 BigQuery](https://docs.cloud.google.com/bigquery/docs/loading-data?hl=zh-tw) 後，您就可以匯出數種格式的資料。BigQuery 對每個檔案最多可匯出 1 GB 的邏輯資料大小。如果要匯出的資料超過 1 GB，就必須將資料分別匯出成[多個檔案](#exporting_data_into_one_or_more_files)。將資料匯出至多個檔案時，各檔案的大小會有所差異。如要進一步瞭解如何匯出大型資料表，請參閱[匯出大型資料表注意事項](https://docs.cloud.google.com/bigquery/docs/export-intro?hl=zh-tw#large_table_export_considerations)。
-
-您也可以使用 [`EXPORT DATA`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements?hl=zh-tw#export_data_statement) 陳述式匯出查詢結果。您可以使用 [`EXPORT DATA OPTIONS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements?hl=zh-tw#gcs_s3_export_option) 指定匯出資料的格式。
-
-最後，您可以使用 [Dataflow](https://docs.cloud.google.com/dataflow/what-is-google-cloud-dataflow?hl=zh-tw) 等服務來讀取 BigQuery 中的資料，不必從 BigLake 匯出資料。如要進一步瞭解如何使用 Dataflow 讀取 BigQuery 的資料及將資料寫入 BigQuery，請參閱 [BigQuery I/O 說明文件](https://beam.apache.org/documentation/io/built-in/google-bigquery)。
+您可以將 BigQuery 資料表資料匯出至 Cloud Storage，格式為 CSV、JSON、Avro 或 Parquet，以便備份、封存或在其他工具中處理。[將資料載入 BigQuery](https://docs.cloud.google.com/bigquery/docs/loading-data?hl=zh-tw) 後，您可以使用 Google Cloud 控制台、bq 指令列工具、API、用戶端程式庫或[其他匯出方法](#other_export_options)匯出資料。
 
 ## 匯出限制
 
 當您從 BigQuery 匯出資料時，請注意以下幾點：
 
-**注意：** 如果將資料匯出至 Cloud Storage 值區，強烈建議您停用值區的「值區鎖定」和「軟刪除」保留政策。如果匯出至設有這些保留政策的 bucket，BigQuery 會嘗試將檔案重新寫入 bucket，但如果 bucket 的保留政策禁止覆寫檔案，這項作業就會失敗，導致產生額外費用。匯出完成後，即可重新啟用這些政策。
+**注意：** 如要將資料匯出至 Cloud Storage bucket，強烈建議您停用 bucket 的 [bucket 鎖定](https://docs.cloud.google.com/storage/docs/using-bucket-lock?hl=zh-tw#set-policy)和[虛刪除](https://docs.cloud.google.com/storage/docs/use-soft-delete?hl=zh-tw)資料保留政策。如果匯出至設有這類資料保留政策的值區，BigQuery 會嘗試將檔案重新寫入值區，但如果值區的資料保留政策禁止覆寫檔案，這項作業可能會失敗，並產生額外費用。匯出完成後，您可以重新啟用這些政策。
 
-* 您無法將資料表資料匯出至本機檔案、Google 試算表或 Google 雲端硬碟。唯一支援的匯出位置是 Cloud Storage。如需儲存查詢結果的相關資訊，請查看[下載並儲存查詢結果](https://docs.cloud.google.com/bigquery/docs/writing-results?hl=zh-tw#downloading-saving-results-console)一節。
-* 您最多可將 1 GB 的邏輯資料表資料匯出至單一檔案。如果您匯出的資料超過 1 GB，請使用[萬用字元](https://docs.cloud.google.com/bigquery/docs/exporting-data?hl=zh-tw#exporting_data_into_one_or_more_files)將資料匯出到多個檔案。當您將資料匯出成多個檔案時，各個檔案的大小會有所差異。如要[限制匯出檔案大小](#limit_the_exported_file_size)，可以分割資料並匯出每個分割區。
-* 使用 `EXPORT DATA` 陳述式時，系統不保證產生的檔案大小。
-* 擷取作業產生的檔案數量可能有所不同。
-* 您無法將巢狀與重複資料匯出成 CSV 格式。巢狀與重複資料適用於 Avro、JSON 和 Parquet 匯出。
-* 匯出 [JSON](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#json_type) 格式的資料時，系統會將 [INT64](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#integer_types) (整數) 資料類型編碼為 JSON 字串，以便該資料讓其他系統讀取時能保留 64 位元精確度。
-* 您無法在單一擷取工作中，從多個資料表匯出資料。
-* 使用 Google Cloud 控制台匯出資料時，無法選擇 `GZIP` 以外的其他壓縮類型。
-* 以 JSON 格式匯出資料表時，系統會使用 Unicode 標記 `\uNNNN` 轉換符號 `<`、`>` 和 `&`，其中 `N` 是十六進位數字。舉例來說，`profit&loss` 會變為 `profit\u0026loss`。進行這項 Unicode 轉換是為了避免安全漏洞。
-* 除非使用 [`EXPORT DATA`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements?hl=zh-tw#export_data_statement) 陳述式，並在 `query_statement` 中指定 `ORDER BY` 子句，否則無法保證匯出資料表的資料順序。匯出至多個檔案時，系統會保留所有產生檔案的排序順序。
-* BigQuery 不支援 Cloud Storage 資源路徑在初始雙斜線後還有多個連續斜線。Cloud Storage 物件名稱可以包含多個連續的斜線 (「/」) 字元，但 BigQuery 會將多個連續斜線轉換為一個斜線。舉例來說，下列資源路徑在 Cloud Storage 中有效，但在 BigQuery 中則無效：`gs://bucket/my//object//name`。
-* 如果擷取工作正在執行，期間載入 BigQuery 的任何新資料都不會納入該擷取工作。您必須建立新的擷取工作，才能匯出新資料。
-* 匯出程序期間，Cloud Storage [版本編號](https://docs.cloud.google.com/storage/docs/metadata?hl=zh-tw#generation-number)可能會變更一次以上。如果您在匯出後立即對新的 Cloud Storage 物件執行工作，請勿指定版本編號。
+* 您無法將資料表資料匯出至本機檔案、Google 試算表或 Google 雲端硬碟。唯一支援的匯出位置是 Cloud Storage。如要瞭解如何儲存查詢結果，請參閱「[下載及儲存查詢結果](https://docs.cloud.google.com/bigquery/docs/writing-results?hl=zh-tw#downloading-saving-results-console)」。
+* 最多可將 1 GB 的邏輯資料表資料匯出至單一檔案。如果您匯出的資料超過 1 GB，請使用[萬用字元](https://docs.cloud.google.com/bigquery/docs/exporting-data?hl=zh-tw#exporting_data_into_one_or_more_files)將資料匯出到多個檔案。將資料匯出至多個檔案時，檔案大小會有所不同。如要[限制匯出檔案的大小](#limit_the_exported_file_size)，可以將資料分區，並匯出各個分區。如要進一步瞭解匯出大型資料表的相關資訊和建議，請參閱「[大型資料表匯出注意事項](https://docs.cloud.google.com/bigquery/docs/export-intro?hl=zh-tw#large_table_export_considerations)」。
+* 使用 `EXPORT DATA` 陳述式時，無法保證產生的檔案大小。
+* 擷取工作產生的檔案數量可能不盡相同。
+* 您無法將巢狀與重複資料匯出成 CSV 格式。Avro、JSON 和 Parquet 匯出作業支援巢狀和重複資料。
+* 以 [JSON](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#json_type) 格式匯出資料時，[INT64](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#integer_types) (整數) 資料類型會編碼為 JSON 字串，以便在其他系統讀取資料時保留 64 位元精確度。
+* 您無法在單一擷取工作中匯出多個資料表的資料。
+* 使用 Google Cloud 控制台匯出資料時，只能選擇 `GZIP` 壓縮類型。
+* 以 JSON 格式匯出資料表時，系統會使用 Unicode 標記 `\uNNNN` 轉換符號 `<`、`>` 和 `&`，其中 `N` 是十六進位數字。舉例來說，`profit&loss` 會變為 `profit\u0026loss`。這項 Unicode 轉換作業是為了避免安全漏洞。
+* 除非您使用 [`EXPORT DATA`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements?hl=zh-tw#export_data_statement) 陳述式，並在 `query_statement` 中指定 `ORDER BY` 子句，否則無法保證匯出的資料表資料順序。匯出至多個檔案時，所有產生的檔案都會保留排序序列。
+* BigQuery 不支援在初始雙斜線後方包含多個連續斜線的 Cloud Storage 資源路徑。Cloud Storage 物件名稱可以包含多個連續斜線 (「/」) 字元。不過，BigQuery 會將多個連續斜線轉換為單一斜線。舉例來說，下列資源路徑雖然在 Cloud Storage 中有效，但在 BigQuery 中無法運作：`gs://bucket/my//object//name`。
+* 擷取工作執行期間，載入 BigQuery 的任何新資料都不會納入該擷取工作。您必須建立新的擷取工作，才能匯出新資料。
+* 在匯出過程中，Cloud Storage [世代編號](https://docs.cloud.google.com/storage/docs/metadata?hl=zh-tw#generation-number)可能會變更一或多次。如果要在匯出後立即對新的 Cloud Storage 物件執行工作，請勿指定世代編號。
 
 ## 事前準備
 
-授予 [Identity and Access Management (IAM)](https://docs.cloud.google.com/iam/docs?hl=zh-tw) 角色，讓使用者擁有執行本文各項工作所需的權限。
+授予 [Identity and Access Management (IAM)](https://docs.cloud.google.com/iam/docs?hl=zh-tw) 角色，讓使用者具備執行本文件中各項工作所需的權限。
 
 ### 所需權限
 
-如要執行本文中的工作，您需要下列權限。
+如要執行本文件中的工作，您必須具備下列權限。
 
 #### 從 BigQuery 資料表匯出資料的權限
 
-如要從 BigQuery 資料表匯出資料，您需要 `bigquery.tables.export`IAM 權限。
+如要從 BigQuery 資料表匯出資料，您必須具備 `bigquery.tables.export` IAM 權限。
 
-下列預先定義的 IAM 角色都具有 `bigquery.tables.export` 權限：
+下列各項預先定義的 IAM 角色都包含 `bigquery.tables.export` 權限：
 
 * `roles/bigquery.dataViewer`
 * `roles/bigquery.dataOwner`
@@ -65,9 +59,9 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 #### 執行擷取工作的權限
 
-如要執行擷取[工作](https://docs.cloud.google.com/bigquery/docs/managing-jobs?hl=zh-tw)，您需要 `bigquery.jobs.create` IAM 權限。
+如要執行擷取[工作](https://docs.cloud.google.com/bigquery/docs/managing-jobs?hl=zh-tw)，您必須具備 `bigquery.jobs.create` IAM 權限。
 
-下列每個預先定義的 IAM 角色都包含執行擷取作業所需的權限：
+下列各項預先定義的 IAM 角色，都包含執行擷取工作所需的權限：
 
 * `roles/bigquery.user`
 * `roles/bigquery.jobUser`
@@ -75,17 +69,17 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 #### 將資料寫入 Cloud Storage bucket 的權限
 
-如要將資料寫入現有的 Cloud Storage 值區，您需要下列 IAM 權限：
+如要將資料寫入現有的 Cloud Storage bucket，您必須具備下列 IAM 權限：
 
 * `storage.objects.create`
 * `storage.objects.delete`
 
-下列每個預先定義的 IAM 角色都包含將資料寫入現有 Cloud Storage 值區所需的權限：
+下列各項預先定義的 IAM 角色，都包含將資料寫入現有 Cloud Storage bucket 所需的權限：
 
 * `roles/storage.objectAdmin`
 * `roles/storage.admin`
 
-如要進一步瞭解 BigQuery 中的 IAM 角色和權限，請參閱[預先定義的角色和權限](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)一文。
+如要進一步瞭解 BigQuery 的 IAM 角色和權限，請參閱「[預先定義的角色和權限](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)」。
 
 ## 匯出格式與壓縮類型
 
@@ -93,50 +87,50 @@ BigQuery 支援下列匯出資料用的資料格式與壓縮類型：
 
 | 資料格式 | 支援的壓縮類型 | 說明 |
 | --- | --- | --- |
-| CSV | GZIP | 您可以控制已匯出資料中的 CSV 分隔符號，方法是使用 [`--field_delimiter`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_extract) bq 指令列工具旗標，或是使用 [`configuration.extract.fieldDelimiter`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#jobconfigurationextract) 擷取工作屬性。  不支援巢狀與重複資料。 |
-| JSON | GZIP | 支援巢狀與重複資料。 |
-| Avro | DEFLATE、SNAPPY | Avro 不支援以 GZIP 格式匯出項目。  支援巢狀與重複資料。請參閱「[Avro 匯出詳細資料](#avro_export_details)」。 |
-| Parquet | SNAPPY、GZIP、ZSTD | 支援巢狀與重複資料。詳情請參閱 [Parquet 匯出詳細資料](#parquet_export_details)。 |
+| CSV | GZIP | 您可以使用 [`--field_delimiter`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_extract) bq 指令列工具旗標或 [`configuration.extract.fieldDelimiter`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#jobconfigurationextract) 擷取工作屬性，控制匯出資料中的 CSV 分隔符號。  不支援巢狀與重複資料。 |
+| JSON | GZIP | 支援巢狀和重複資料。 |
+| Avro | DEFLATE、SNAPPY | Avro 不支援以 GZIP 格式匯出項目。  支援巢狀和重複資料。請參閱 [Avro 匯出詳細資料](#avro_export_details)。 |
+| Parquet | SNAPPY、GZIP、ZSTD | 支援巢狀和重複資料。請參閱 [Parquet 匯出詳細資料](#parquet_export_details)。 |
 
 ## 匯出資料
 
-以下各節說明如何將資料表資料、資料表的中繼資料和查詢結果匯出至 Cloud Storage。
+以下各節將說明如何將資料表資料、資料表中繼資料和查詢結果匯出至 Cloud Storage。
 
 ### 匯出資料表資料
 
 請透過下列方式匯出資料表的資料：
 
 * 使用 Google Cloud 控制台
-* 使用 bq 指令列工具中的 [`bq extract`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_extract) 指令
+* 在 bq 指令列工具中使用 [`bq extract`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_extract) 指令
 * 使用 API 或用戶端程式庫提交 `extract` 工作
 
 請選取下列其中一個選項：
 
 ### 控制台
 
-1. 在 Google Cloud 控制台開啟 BigQuery 頁面。
+1. 在 Google Cloud 控制台開啟「BigQuery」頁面。
 
-   [前往 BigQuery 頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
+   [前往「BigQuery」頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
-3. 在「Explorer」窗格中展開專案，按一下「Datasets」(資料集)，然後按一下資料集。
-4. 依序按一下「總覽」**>「表格」**，然後選取表格。
-5. 在詳細資料窗格中，依序點選「上傳」**匯出 / 同步** >「Cloud Storage」。
+3. 在「Explorer」窗格中展開專案，依序點選「Datasets」(資料集) 和資料集。
+4. 依序點選**「總覽」>「資料表」**，然後選取資料表。
+5. 在詳細資料窗格中，依序點選「上傳」圖示 **「匯出 / 同步」****「Cloud Storage」**。
 6. 在「Export to Google Storage」(匯出至 Google Cloud Storage) 對話方塊中：
 
-   * 針對「GCS Location」(GCS 位置)，請瀏覽至您要匯出資料的值區、資料夾或檔案。
-   * 為「Export format」(匯出格式) 選擇以下其中一種匯出資料格式：[CSV]、[JSON (Newline Delimited)] (JSON (以換行符號分隔))、[Avro] 或 [Parquet]。
-   * 針對「Compression」(壓縮選項)，請選取壓縮格式，或是選取 `None` 表示不壓縮。
-7. 按一下「儲存」即可匯出資料表。
+   * 在「GCS Location」(GCS 位置)，瀏覽要匯出資料的值區、資料夾或檔案。
+   * 在「Export format」(匯出格式)，選擇匯出資料的格式：CSV、JSON (以換行符號分隔)、Avro 或 Parquet。
+   * 在「Compression」(壓縮) 部分，選取壓縮格式，或選取 `None` 表示不壓縮。
+7. 按一下「儲存」即可匯出表格。
 
-如要查看工作進度，請在「Explorer」窗格中按一下「Job history」，然後尋找「EXTRACT」類型的工作。
+如要查看工作進度，請在「Explorer」窗格中點選「Job history」(工作記錄)，然後尋找「EXTRACT」類型的工作。
 
-如要將檢視區塊匯出至 Cloud Storage，請使用 [`EXPORT DATA OPTIONS` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements?hl=zh-tw)。
+如要將檢視表匯出至 Cloud Storage，請使用 [`EXPORT DATA OPTIONS` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements?hl=zh-tw)。
 
 ### SQL
 
-使用 [`EXPORT DATA` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements?hl=zh-tw#export_data_statement)。以下範例會從名為 `mydataset.table1` 的資料表匯出所選欄位：
+使用 [`EXPORT DATA` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements?hl=zh-tw#export_data_statement)。下列範例會從名為 `mydataset.table1` 的資料表匯出所選欄位：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -157,15 +151,15 @@ BigQuery 支援下列匯出資料用的資料格式與壓縮類型：
      ORDER BY field1
    );
    ```
-3. 按一下「執行」play\_circle。
+3. 按一下「play\_circle 執行」。
 
 如要進一步瞭解如何執行查詢，請參閱「[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)」。
 
-**注意：** `LIMIT` 子句中的 `EXPORT DATA` 陳述式通常會導致匯出作業執行緩慢。因此，我們不建議在 `EXPORT DATA` 陳述式中使用 `LIMIT` 子句。
+**注意：** `EXPORT DATA` 陳述式中的 `LIMIT` 子句通常會導致匯出工作執行速度緩慢。因此，我們不建議在 `EXPORT DATA` 陳述式中使用 `LIMIT` 子句。
 
 ### bq
 
-使用 [`bq extract`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_extract) 指令並加上 `--destination_format` 旗標。
+使用 [`bq extract`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_extract) 指令，並加上 `--destination_format` 旗標。
 
 (選用) 提供 `--location` 旗標，並將值設為您的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
 
@@ -188,19 +182,19 @@ gs://bucket/filename.ext
 其中：
 
 * location 是您的位置名稱。`--location` 是選用旗標。舉例來說，如果您在東京地區使用 BigQuery，就可以將旗標的值設為 `asia-northeast1`。您可以使用 [.bigqueryrc 檔案](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool?hl=zh-tw#setting_default_values_for_command-line_flags)設定位置的預設值。
-* format 是資料匯出格式：`CSV`、`NEWLINE_DELIMITED_JSON`、`AVRO` 或 `PARQUET`。
-* compression\_type：所選擇資料格式支援的壓縮類型。請參閱「[匯出格式與壓縮類型](#export_formats_and_compression_types)」。
-* delimiter：在 CSV 格式的匯出檔案中，用來指定不同資料欄之間界線的字元。`\t` 和 `tab` 都是可接受的 Tab 分隔名稱。
+* format 是匯出資料的格式：`CSV`、`NEWLINE_DELIMITED_JSON`、`AVRO` 或 `PARQUET`。
+* compression\_type 是資料格式支援的壓縮類型。請參閱「[匯出格式和壓縮類型](#export_formats_and_compression_types)」。
+* delimiter 是表示 CSV 匯出檔案中資料欄之間界線的字元。`\t` 和 `tab` 都是可接受的 Tab 分隔名稱。
 * boolean 為 `true` 或 `false`。設定為 `true` 時，如果資料格式支援標頭，系統在列印匯出的資料時就會列印標頭列。預設值為 `true`。
 * project\_id 是您的專案 ID。
 * dataset 是來源資料集的名稱。
-* table 是您要匯出的資料表。如果您使用[分區裝飾器](https://docs.cloud.google.com/bigquery/docs/partitioned-tables?hl=zh-tw#partition_decorators)，則必須在資料表路徑前後加上半形單引號，或是逸出 `$` 字元。
-* bucket 是匯出資料的目標 Cloud Storage 值區名稱。BigQuery 資料集與 Cloud Storage 值區必須位於相同的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
-* filename.ext 是匯出的資料檔案名稱和副檔名。您可以使用[萬用字元](#exporting_data_into_one_or_more_files)，將資料匯出至多個檔案。
+* table 是要匯出的資料表。如果使用[分區裝飾器](https://docs.cloud.google.com/bigquery/docs/partitioned-tables?hl=zh-tw#partition_decorators)，則必須在資料表路徑前後加上單引號，或逸出 `$` 字元。
+* bucket 是要匯出資料的 Cloud Storage bucket 名稱。BigQuery 資料集和 Cloud Storage bucket 必須位於相同[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
+* filename.ext 是匯出資料檔案的名稱和副檔名。您可以使用[萬用字元](#exporting_data_into_one_or_more_files)，將資料匯出至多個檔案。
 
 範例：
 
-舉例來說，下列指令會把 `mydataset.mytable` 匯出成名為 `myfile.csv` 的 gzip 壓縮檔，而 `myfile.csv` 會儲存在名為 `example-bucket` 的 Cloud Storage 值區中。
+舉例來說，下列指令會把 `mydataset.mytable` 匯出成名為 `myfile.csv` 的 gzip 壓縮檔，`myfile.csv` 儲存在名為 `example-bucket` 的 Cloud Storage bucket。
 
 ```
 bq extract \
@@ -218,7 +212,7 @@ bq extract \
 gs://example-bucket/myfile.json
 ```
 
-下列指令會把 `mydataset.mytable` 匯出成採用 Snappy 壓縮類型的 Avro 格式檔案，檔案名稱為 `myfile.avro`。而系統會把 `myfile.avro` 匯出到名為 `example-bucket` 的 Cloud Storage bucket。
+下列指令會把 `mydataset.mytable` 匯出成採用 Snappy 壓縮類型的 Avro 格式檔案，檔案名稱為 `myfile.avro`。`myfile.avro` 會匯出至名為 `example-bucket` 的 Cloud Storage bucket。
 
 ```
 bq extract \
@@ -241,30 +235,30 @@ gs://example-bucket/single_partition.csv
 
 如要匯出資料，請建立 `extract` 工作，並填入工作設定。
 
-**注意：** 如要將資料匯出為 Parquet 格式，建議使用 [BigQuery 匯出至 Parquet (透過 BigQuery Storage API) 範本](https://docs.cloud.google.com/dataflow/docs/guides/templates/provided/bigquery-to-parquet?hl=zh-tw)，而非編寫自訂解決方案，這樣可能更快。
+**注意：** 如要將資料匯出為 Parquet 格式，使用[「BigQuery export to Parquet (via BigQuery Storage API)」(將 BigQuery 資料匯出為 Parquet (透過 BigQuery Storage API)) 範本](https://docs.cloud.google.com/dataflow/docs/guides/templates/provided/bigquery-to-parquet?hl=zh-tw)，可能比編寫自訂解決方案更快。
 
 (選擇性操作) 在[工作資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs?hl=zh-tw)的 `jobReference` 區段中，於 `location` 屬性內指定您的位置。
 
 1. 建立指向 BigQuery 來源資料與 Cloud Storage 目的地的擷取工作。
 2. 指定來源資料表，方法是使用包含專案 ID、資料集 ID 和資料表 ID 的 `sourceTable` 設定物件。
-3. `destination URI(s)` 屬性必須完整且符合下列格式：`gs://bucket/filename.ext`。每個 URI 都可以包含一個「\*」萬用字元，而且它必須出現在值區名稱之後。
+3. `destination URI(s)` 屬性必須完整，格式為 `gs://bucket/filename.ext`。每個 URI 都可以包含一個「\*」萬用字元，且必須位於 bucket 名稱之後。
 4. 設定 `configuration.extract.destinationFormat` 屬性以指定資料格式。舉例來說，如要匯出 JSON 檔案，請將此屬性值設為 `NEWLINE_DELIMITED_JSON`。
-5. 如要查看工作狀態，請利用初始要求所傳回的工作 ID 來呼叫 [jobs.get(job\_id)](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/get?hl=zh-tw)。
+5. 如要檢查工作狀態，請呼叫 [jobs.get(job\_id)](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/get?hl=zh-tw)，並提供初始要求傳回的工作 ID。
 
    * 如果是 `status.state = DONE`，代表工作已順利完成。
    * 如果出現 `status.errorResult` 屬性，代表要求執行失敗，且該物件將包含所發生錯誤的相關訊息。
-   * 如果沒有出現 `status.errorResult`，代表工作已順利完成，但過程中可能發生了幾個不嚴重的錯誤。不嚴重的錯誤都會列在已傳回工作物件的 `status.errors` 屬性中。
+   * 如果沒有 `status.errorResult`，表示工作已順利完成，但可能發生一些非致命錯誤。非致命錯誤會列在傳回的工作物件 `status.errors` 屬性中。
 
 **API 附註：**
 
-* 最佳做法是產生唯一 ID，並在呼叫 `jobs.insert` 建立工作時，將該 ID 當做 `jobReference.jobId` 傳送。這個方法較不受網路故障問題的影響，因為用戶端可對已知的工作 ID 進行輪詢或重試。
+* 最佳做法是產生專屬 ID，並在呼叫 `jobs.insert` 建立工作時，將該 ID 做為 `jobReference.jobId` 傳遞。這個方法較不受網路故障問題的影響，因為用戶端可對已知的工作 ID 進行輪詢或重試。
 * 針對指定的工作 ID 呼叫 `jobs.insert` 算是種冪等運算；換句話說，您可以針對同一個工作 ID 重試作業無數次，但在這些作業中最多只會有一個成功。
 
 ### C#
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 C# 設定說明操作。詳情請參閱 [BigQuery C# API 參考說明文件](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 C# 設定操作說明進行操作。詳情請參閱 [BigQuery C# API 參考文件](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 using Google.Cloud.BigQuery.V2;
@@ -294,9 +288,9 @@ public class BigQueryExtractTable
 
 ### Go
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Go 設定說明操作。詳情請參閱 [BigQuery Go API 參考說明文件](https://godoc.org/cloud.google.com/go/bigquery)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Go 設定操作說明進行操作。詳情請參閱 [BigQuery Go API 參考文件](https://godoc.org/cloud.google.com/go/bigquery)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 import (
@@ -348,9 +342,9 @@ func exportTableAsCSV(projectID, gcsURI string) error {
 
 ### Java
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定說明操作。詳情請參閱 [BigQuery Java API 參考說明文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定操作說明進行操作。詳情請參閱 [BigQuery Java API 參考文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 import com.google.cloud.RetryOption;
@@ -421,9 +415,9 @@ public class ExtractTableToCsv {
 
 ### Node.js
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定操作說明進行操作。詳情請參閱 [BigQuery Node.js API 參考文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 // Import the Google Cloud client libraries
@@ -467,9 +461,9 @@ async function extractTableToGCS() {
 
 ### PHP
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 PHP 設定說明操作。詳情請參閱 [BigQuery PHP API 參考說明文件](https://docs.cloud.google.com/php/docs/reference/cloud-bigquery/latest/BigQueryClient?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 PHP 設定操作說明進行操作。詳情請參閱 [BigQuery PHP API 參考文件](https://docs.cloud.google.com/php/docs/reference/cloud-bigquery/latest/BigQueryClient?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 use Google\Cloud\BigQuery\BigQueryClient;
@@ -506,9 +500,9 @@ function extract_table(
 
 ### Python
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定操作說明進行操作。詳情請參閱 [BigQuery Python API 參考文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 # from google.cloud import bigquery
@@ -537,9 +531,9 @@ print(
 
 ### Ruby
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Ruby 設定說明操作。詳情請參閱 [BigQuery Ruby API 參考說明文件](https://googleapis.dev/ruby/google-cloud-bigquery/latest/Google/Cloud/Bigquery.html)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Ruby 設定操作說明進行操作。詳情請參閱 [BigQuery Ruby API 參考文件](https://googleapis.dev/ruby/google-cloud-bigquery/latest/Google/Cloud/Bigquery.html)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 require "google/cloud/bigquery"
@@ -567,7 +561,7 @@ end
 
 ### 匯出資料表中繼資料
 
-如要從 [Iceberg 資料表](https://docs.cloud.google.com/bigquery/docs/iceberg-tables?hl=zh-tw)匯出資料表的中繼資料，請使用下列 SQL 陳述式：
+如要從 [Iceberg 資料表](https://docs.cloud.google.com/bigquery/docs/iceberg-tables?hl=zh-tw)匯出資料表中繼資料，請使用下列 SQL 陳述式：
 
 ```
 EXPORT TABLE METADATA FROM `[[PROJECT_NAME.]DATASET_NAME.]TABLE_NAME`;
@@ -575,31 +569,37 @@ EXPORT TABLE METADATA FROM `[[PROJECT_NAME.]DATASET_NAME.]TABLE_NAME`;
 
 更改下列內容：
 
-* PROJECT\_NAME：資料表的專案名稱。預設值為執行這項查詢的專案。
+* PROJECT\_NAME：資料表所屬專案的名稱。預設值為執行這項查詢的專案。
 * DATASET\_NAME：資料表的資料集名稱。
 * TABLE\_NAME：資料表名稱。
 
-匯出的中繼資料位於 STORAGE\_URI`/metadata` 資料夾中，其中 STORAGE\_URI 是在選項中設定的表格儲存位置。
+匯出的中繼資料位於 STORAGE\_URI`/metadata` 資料夾，其中 STORAGE\_URI 是在選項中設定的資料表儲存位置。
 
 ### 匯出查詢結果
 
-如要將查詢結果匯出至 Cloud Storage，請按照下列步驟操作： Google Cloud
+您可以按照下列步驟，在 Google Cloud 控制台中將查詢結果匯出至 Cloud Storage：
 
-1. 在 Google Cloud 控制台開啟 BigQuery 頁面。
+1. 在 Google Cloud 控制台開啟「BigQuery」頁面。
 
-   [前往 BigQuery 頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 按一下 add\_box「SQL 查詢」。
-3. 在「Query editor」(查詢編輯器) 文字區域中輸入有效的 GoogleSQL 查詢。
+   [前往「BigQuery」頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
+2. 按一下「add\_box SQL 查詢」。
+3. 在「查詢編輯器」文字區域中，輸入有效的 GoogleSQL 查詢。
 4. 按一下「執行」。
-5. 傳回結果時，依序點按「儲存結果」>「Cloud Storage」。
+5. 傳回結果後，依序點選「儲存結果」>「Cloud Storage」。
 6. 在「Export to Google Storage」(匯出至 Google Cloud Storage) 對話方塊中：
 
-   * 針對「GCS Location」(GCS 位置)，請瀏覽至您要匯出資料的值區、資料夾或檔案。
-   * 為「Export format」(匯出格式) 選擇以下其中一種匯出資料格式：[CSV]、[JSON (Newline Delimited)] (JSON (以換行符號分隔))、[Avro] 或 [Parquet]。
-   * 針對「Compression」(壓縮選項)，請選取壓縮格式，或是選取 `None` 表示不壓縮。
-7. 按一下「儲存」即可匯出查詢結果。
+   * 在「GCS Location」(GCS 位置)，瀏覽要匯出資料的值區、資料夾或檔案。
+   * 在「Export format」(匯出格式)，選擇匯出資料的格式：CSV、JSON (以換行符號分隔)、Avro 或 Parquet。
+   * 在「Compression」(壓縮) 部分，選取壓縮格式，或選取 `None` 表示不壓縮。
+7. 按一下「儲存」，匯出查詢結果。
 
-如要查看工作進度，請展開「Job history」(工作記錄) 窗格，然後尋找 `EXTRACT` 類型的工作。
+如要查看工作進度，請展開「Job history」(工作記錄) 窗格，然後尋找類型為 `EXTRACT` 的工作。
+
+## 其他匯出資料的方式
+
+您也可以使用 [`EXPORT DATA`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements?hl=zh-tw#export_data_statement) 陳述式匯出查詢結果。您可以使用 [`EXPORT DATA OPTIONS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements?hl=zh-tw#gcs_s3_export_option) 指定匯出資料的格式。
+
+最後，您可以使用 [Dataflow](https://docs.cloud.google.com/dataflow/what-is-google-cloud-dataflow?hl=zh-tw) 等服務從 BigQuery 讀取資料，而非從 BigLake 匯出資料。如要進一步瞭解如何使用 Dataflow 讀取及寫入 BigQuery，請參閱 [BigQuery I/O 說明文件](https://beam.apache.org/documentation/io/built-in/google-bigquery)。
 
 ## Avro 匯出詳細資料
 
@@ -610,23 +610,24 @@ BigQuery 可以透過以下方式表示 Avro 格式的資料：
 * `REQUIRED` 欄位會表示為對應 Avro 類型。舉例來說，BigQuery 的 `INTEGER` 類型就會對應到 Avro 的 `LONG` 類型。
 * `NULLABLE` 欄位會表示為對應類型的 Avro Union 與「空值」。
 * `REPEATED` 欄位會表示為 Avro 陣列。
-* 在「擷取工作」和「匯出資料 SQL」中，`TIMESTAMP` 資料類型預設會表示為 `timestamp-micros` 邏輯類型 (會註解 Avro `LONG` 類型)。(注意：您可以將 `use_avro_logical_types=False` 新增至 `Export Data Options`，停用邏輯型別，以便在時間戳記資料欄上改用 `string` 型別，但在擷取工作中，系統一律會使用 Avro 邏輯型別)。
-* 在「匯出資料 SQL」中，`DATE` 資料類型預設會表示為 `date` 邏輯類型 (會註解 Avro `INT` 類型)，但在「擷取工作」中，預設會表示為 `string` 類型。(注意：您可以在 `Export Data Options` 中加入 `use_avro_logical_types=False`，停用邏輯型別，或使用 `--use_avro_logical_types=True` 旗標，在擷取工作中啟用邏輯型別)。
-* 在「匯出資料」SQL 中，`TIME` 資料類型預設會表示為 `timestamp-micro` 邏輯類型 (會註解 Avro `LONG` 類型)，但在「擷取」工作中，預設會表示為 `string` 類型。(注意：您可以在 `Export Data Options` 中加入 `use_avro_logical_types=False` 來停用邏輯型別，或使用 `--use_avro_logical_types=True` 旗標在擷取工作中啟用邏輯型別)。
-* 在「匯出資料」SQL 中，`DATETIME` 資料類型預設會表示為 Avro `STRING` 類型 (具有自訂命名邏輯類型 `datetime` 的字串類型)，但在「擷取」工作中，預設會表示為 `string` 類型。(注意：您可以在 `Export Data Options` 中加入 `use_avro_logical_types=False`，停用邏輯型別，或使用 `--use_avro_logical_types=True` 旗標在擷取工作中啟用邏輯型別)。
+* 在擷取工作和匯出資料 SQL 中，`TIMESTAMP` 資料類型預設會以 `timestamp-micros` 邏輯類型表示 (會為 Avro `LONG` 類型加上註解)。(注意：您可以將 `use_avro_logical_types=False` 新增至 `Export Data Options`，停用邏輯類型，改為在時間戳記資料欄使用 `string` 類型，但在擷取工作中，一律會使用 Avro 邏輯類型)。
+* 在匯出資料 SQL 中，`DATE` 資料類型預設會以 `date` 邏輯類型表示 (會為 Avro `INT` 類型加上註解)，但在擷取工作中，預設會以 `string` 類型表示。(注意：您可以在 `Export Data Options` 中加入 `use_avro_logical_types=False` 來停用邏輯類型，或使用 `--use_avro_logical_types=True` 旗標在擷取工作中啟用邏輯類型)。
+* 在匯出資料 SQL 中，`TIME` 資料類型預設會以 `timestamp-micro` 邏輯類型表示 (會為 Avro `LONG` 類型加上註解)，但在擷取工作中，預設會以 `string` 類型表示。(注意：您可以將 `use_avro_logical_types=False` 新增至 `Export Data Options` 來停用邏輯類型，或使用 `--use_avro_logical_types=True` 旗標在擷取工作中啟用邏輯類型)。
+* 在匯出資料 SQL 中，`DATETIME` 資料類型預設會以 Avro `STRING` 類型 (具有自訂命名邏輯類型 `datetime` 的字串類型) 表示，但在擷取工作中，預設會以 `string` 類型表示。(注意：您可以將 `use_avro_logical_types=False` 新增至 `Export Data Options`，停用邏輯類型，或使用 `--use_avro_logical_types=True` 旗標，在擷取工作中啟用邏輯類型)。
 * Avro 匯出作業不支援 [RANGE 類型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#range_type)。
 
-**注意：** 字串類型的編碼方式遵循網際網路工程任務組 (IETF) 的 [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) 規格。
+**注意：** 字串類型的編碼遵循網際網路工程任務組 [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) 規格。
 
-參數化 `NUMERIC(P[, S])` 和 `BIGNUMERIC(P[, S])` 資料類型會將精確度和比例類型參數移轉至 Avro 十進位邏輯類型。
+參數化 `NUMERIC(P[, S])` 和 `BIGNUMERIC(P[, S])` 資料類型會將其有效位數和小數位數類型參數，轉移至 Avro 十進位邏輯類型。
 
-**注意：**
+**注意事項：**
 
-* 如果將 `DATETIME` 類型匯出為 Avro，您無法直接將 Avro 檔案載回相同的資料表結構定義，因為轉換後的 `STRING` 不符合結構定義。如要解決這個問題，請將檔案載入暫存資料表。
-  然後使用 SQL 查詢將欄位轉換為 `DATETIME` 型別，並將結果儲存至新資料表。詳情請參閱「[變更資料欄的資料類型](https://docs.cloud.google.com/bigquery/docs/manually-changing-schemas?hl=zh-tw#changing_a_columns_data_type) 」。
-* 指定「匯出資料選項」`use_avro_logical_types`和「擷取工作」旗標 `--use_avro_logical_types`後，系統會同時套用至所有邏輯類型。
+* 如果將 `DATETIME` 類型匯出至 Avro，則無法將 Avro
+  檔案直接載入回相同的資料表結構定義，因為轉換後的 `STRING`
+  與結構定義不符。如要解決這個問題，請將檔案載入暫存資料表。接著，使用 SQL 查詢將欄位轉換為 `DATETIME` 類型，並將結果儲存至新資料表。詳情請參閱「[變更資料欄的資料類型](https://docs.cloud.google.com/bigquery/docs/manually-changing-schemas?hl=zh-tw#changing_a_columns_data_type) 」。
+* 指定資料匯出選項 `use_avro_logical_types` 和擷取工作旗標 `--use_avro_logical_types` 後，系統會同時將這些設定套用至所有邏輯類型。
 
-Avro 格式無法與 GZIP 壓縮搭配使用。如要壓縮 Avro 資料，請使用 bq 指令列工具或 API，然後指定支援壓縮 Avro 資料的類型之一：`DEFLATE` 或 `SNAPPY`。
+Avro 格式無法與 GZIP 壓縮搭配使用。如要壓縮 Avro 資料，請使用 bq 指令列工具或 API，並指定 Avro 資料支援的壓縮類型：`DEFLATE` 或 `SNAPPY`。
 
 ## Parquet 匯出詳細資料
 
@@ -650,38 +651,38 @@ BigQuery 會將 GoogleSQL 資料類型轉換為下列 Parquet 資料類型：
 | 時間戳記 | `INT64` | `TIMESTAMP (isAdjustedToUTC = false, unit = MICROS)` |
 | 地理位置 | `BYTE_ARRAY` | `GEOGRAPHY (edges = spherical)` |
 
-Parquet 結構定義會將巢狀資料表示為群組，並將重複記錄表示為重複群組。如要進一步瞭解如何在 BigQuery 中使用巢狀和重複的資料，請參閱[指定巢狀和重複的欄位](https://docs.cloud.google.com/bigquery/docs/nested-repeated?hl=zh-tw)。
+Parquet 結構定義會將巢狀資料表示為群組，並將重複記錄表示為重複群組。如要進一步瞭解如何在 BigQuery 中使用巢狀和重複資料，請參閱「[指定巢狀和重複資料欄](https://docs.cloud.google.com/bigquery/docs/nested-repeated?hl=zh-tw)」。
 
-將 `JSON` 欄匯出為 Parquet 格式時，系統會將其匯出為 `STRING` 欄位。如要將這個 Parquet 檔案載回 BigQuery 的 `JSON` 資料欄，您必須在載入工作中指定結構定義 (例如使用 `--schema` 旗標)。使用 Parquet 自動偵測結構定義時，系統會將資料欄推斷為 `STRING` 型別。
+將 `JSON` 資料欄匯出為 Parquet 格式時，系統會將其匯出為 `STRING` 欄位。如要將這個 Parquet 檔案載回 BigQuery 的 `JSON` 資料欄，您必須在載入工作中指定結構定義 (例如使用 `--schema` 旗標)。使用 Parquet 自動偵測結構定義時，系統會將資料欄推論為 `STRING` 類型。
 
-**注意：** 如果將 `DATETIME` 類型匯出至 Parquet，您無法直接將 Parquet 檔案載回相同的資料表結構定義，因為轉換後的值與結構定義不符。
+**注意：** 如果將 `DATETIME` 類型匯出至 Parquet，就無法將 Parquet 檔案直接載回相同的資料表結構定義，因為轉換後的值與結構定義不符。
 
-您可以對 `DATETIME` 類型使用下列解決方法：
+您可以針對 `DATETIME` 類型使用下列解決方法：
 
-* 將檔案載入暫存資料表。然後使用 SQL 查詢將欄位轉換為 `DATETIME`，並將結果儲存至新資料表。詳情請參閱「[變更資料欄的資料類型](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas?hl=zh-tw#change_a_columns_data_type)」一節。
-* 在載入工作中，使用 `--schema` 旗標提供資料表結構定義。將日期時間資料欄定義為 `col:DATETIME`。
+* 將檔案載入暫存資料表。接著使用 SQL 查詢將欄位轉換為 `DATETIME`，並將結果儲存至新資料表。詳情請參閱「[變更資料欄的資料類型](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas?hl=zh-tw#change_a_columns_data_type)」。
+* 在載入工作中，使用 `--schema` 旗標提供資料表的結構定義。將日期時間欄定義為 `col:DATETIME`。
 
-`GEOGRAPHY` 邏輯型別會以新增至匯出檔案的 [GeoParquet](https://geoparquet.org) 中繼資料表示。
+`GEOGRAPHY` 邏輯類型會以新增至匯出檔案的 [GeoParquet](https://geoparquet.org) 中繼資料表示。
 
 ## 將資料匯出為一或多個檔案
 
-`destinationUris` 屬性會指出 BigQuery 所匯出檔案的一或多個目標位置和檔案名稱。
+`destinationUris` 屬性會指出 BigQuery 應將檔案匯出至一或多個位置和檔案名稱。
 
-BigQuery 支援在每個 URI 中使用一個萬用字元運算子 (\*)。該萬用字元可出現在檔案名稱元件中的任何位置，使用萬用字元運算子就會指示 BigQuery 根據提供的模式建立多個資料分割檔案。萬用字元運算子會以數字取代 (從 0 開始)，向左填補到到 12 位數。例如，在檔案名稱結尾處使用萬用字元的 URI 建立的檔案，會在第一個檔案結尾附加 `000000000000`，在第二個檔案結尾附加 `000000000001`，依此類推。
+BigQuery 支援在每個 URI 中使用一個萬用字元運算子 (\*)。萬用字元可以出現在檔案名稱元件中的任何位置。使用萬用字元運算子就會指示 BigQuery 根據提供的模式建立多個資料分割檔案。萬用字元運算子會以數字取代 (從 0 開始)，向左填補到到 12 位數。舉例來說，如果 URI 的檔案名稱結尾有萬用字元，系統會建立檔案，並在第一個檔案附加 `000000000000`，在第二個檔案附加 `000000000001`，依此類推。
 
 下表說明 `destinationUris` 屬性的幾個可能選項：
 
-| `destinationUris` 個選項 | |
+| 「`destinationUris`」選項 | |
 | --- | --- |
-| 單一 URI | 如果要匯出的資料表資料大小沒有超過 1 GB，請使用單一 URI。這個選項是最常用的情況，因為匯出的資料一般會小於 1 GB 的上限值。[`EXPORT DATA` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements?hl=zh-tw#export_data_statement)不支援這個選項，您必須使用單一萬用字元 URI。  **屬性定義：**  `['gs://my-bucket/file-name.json']`  **建立：**     ``` gs://my-bucket/file-name.json ``` |
-| 單一萬用字元 URI | 單一萬用字元只能用於 URI 的檔案名稱元件。  如果您認為要匯出的資料會超過 1 GB 的上限值，請使用單一萬用字元 URI。BigQuery 會根據您提供的模式，將資料分割為多個檔案。匯出檔案的大小會有所差異。如果查詢包含 `ORDER BY` 子句，系統會將全域排序的結果集依序分配到產生的檔案中。  **屬性定義：**  `['gs://my-bucket/file-name-*.json']`  **建立：**     ``` gs://my-bucket/file-name-000000000000.json gs://my-bucket/file-name-000000000001.json gs://my-bucket/file-name-000000000002.json ... ```   `['gs://my-bucket/*']`  **建立：**     ``` gs://my-bucket/000000000000 gs://my-bucket/000000000001 gs://my-bucket/000000000002 ... ``` |
+| 單一 URI | 如要匯出的資料表資料不超過 1 GB，請使用單一 URI。這個選項是最常見的使用案例，因為匯出的資料通常小於 1 GB 的上限值。[`EXPORT DATA` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements?hl=zh-tw#export_data_statement)不支援這個選項，您必須使用單一萬用字元 URI。  **屬性定義：**  `['gs://my-bucket/file-name.json']`  **建立：**     ``` gs://my-bucket/file-name.json ``` |
+| 單一萬用字元 URI | 萬用字元只能用於 URI 的檔案名稱元件。  如果您認為匯出的資料會超過 1 GB 的上限值，請使用單一萬用字元 URI。BigQuery 會根據您提供的模式，將資料分割為多個檔案。匯出檔案的大小不一。如果查詢包含 `ORDER BY` 子句，系統會將全域排序的結果集依序分配到產生的檔案中。  **屬性定義：**  `['gs://my-bucket/file-name-*.json']`  **建立：**     ``` gs://my-bucket/file-name-000000000000.json gs://my-bucket/file-name-000000000001.json gs://my-bucket/file-name-000000000002.json ... ```   `['gs://my-bucket/*']`  **建立：**     ``` gs://my-bucket/000000000000 gs://my-bucket/000000000001 gs://my-bucket/000000000002 ... ``` |
 
 ### 限制匯出檔案大小
 
-如果單次匯出的資料超過 1 GB，請使用萬用字元將資料匯出到多個檔案，各個檔案的大小會有所差異。如要限制每個匯出檔案的大小上限，其中一個方法是隨機分割資料，然後將每個分割區匯出至檔案：
+單次匯出超過 1 GB 的資料時，必須使用萬用字元將資料匯出至多個檔案，檔案大小不一。如需限制每個匯出檔案的大小上限，可以隨機分割資料，然後將每個分區匯出至檔案：
 
-1. 決定所需的分區數量，這等於資料總大小除以所選匯出檔案大小。舉例來說，如果您有 8,000 MB 的資料，且希望每個匯出檔案約為 20 MB，則需要 400 個分割區。
-2. 建立新的資料表，並依據名為 `export_id` 的新隨機產生資料欄進行分區和叢集處理。以下範例說明如何從現有資料表 (名為 `source_table`) 建立新的 `processed_table`，這需要 `n` 個分區才能達到所選檔案大小：
+1. 決定所需的分區數量，也就是資料總大小除以所選匯出檔案大小。舉例來說，如果您有 8,000 MB 的資料，且希望每個匯出的檔案約為 20 MB，則需要 400 個分區。
+2. 建立新的資料表，並依隨機產生的新資料欄 `export_id` 進行分區和分群。以下範例說明如何從名為 `source_table` 的現有資料表建立新的 `processed_table`，該資料表需要 `n` 個分區才能達到所選檔案大小：
 
    ```
    CREATE TABLE my_dataset.processed_table
@@ -700,13 +701,13 @@ BigQuery 支援在每個 URI 中使用一個萬用字元運算子 (\*)。該萬�
    WHERE export_id = i;
    ```
 
-### 擷取壓縮資料表
+### 擷取壓縮表格
 
 ### Go
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Go 設定說明操作。詳情請參閱 [BigQuery Go API 參考說明文件](https://godoc.org/cloud.google.com/go/bigquery)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Go 設定操作說明進行操作。詳情請參閱 [BigQuery Go API 參考文件](https://godoc.org/cloud.google.com/go/bigquery)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 import (
@@ -758,9 +759,9 @@ func exportTableAsCompressedCSV(projectID, gcsURI string) error {
 
 ### Java
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定說明操作。詳情請參閱 [BigQuery Java API 參考說明文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定操作說明進行操作。詳情請參閱 [BigQuery Java API 參考文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 import com.google.cloud.bigquery.BigQuery;
@@ -834,9 +835,9 @@ public class ExtractTableCompressed {
 
 ### Node.js
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定操作說明進行操作。詳情請參閱 [BigQuery Node.js API 參考文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 // Import the Google Cloud client libraries
@@ -881,9 +882,9 @@ async function extractTableCompressed() {
 
 ### Python
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定操作說明進行操作。詳情請參閱 [BigQuery Python API 參考文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 # from google.cloud import bigquery
@@ -910,28 +911,25 @@ extract_job.result()  # Waits for job to complete.
 
 這個範例說明如何將資料匯出至 Cloud Storage。
 
-假設您要從端點記錄持續將資料串流至 Cloud Storage，每天匯出快照到 Cloud Storage，以進行備份和封存。最佳選擇是[擷取作業](#export-data-in-bigquery)，但須遵守特定[配額](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#export_jobs)和[限制](#export_limitations)。
+假設您持續將端點記錄中的資料串流至 Cloud Storage。每日快照會匯出至 Cloud Storage，用於備份和封存。最佳選擇是[擷取工作](#export-data-in-bigquery)，但須遵守特定[配額](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#export_jobs)和[限制](#export_limitations)。
 
-使用 [API](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert?hl=zh-tw) 或[用戶端程式庫](https://docs.cloud.google.com/bigquery/docs/reference/libraries?hl=zh-tw)提交擷取工作，並將專屬 ID 做為 **`jobReference.jobId`** 傳遞。擷取工作是
-非同步。
-[使用建立工作時的專屬工作 ID 檢查工作狀態](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/get?hl=zh-tw)。如果 **`status.status`** 是 **`DONE`**，代表工作已順利完成。如果存在 **`status.errorResult`**，表示工作失敗，需要重試。
+使用 [API](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert?hl=zh-tw) 或[用戶端程式庫](https://docs.cloud.google.com/bigquery/docs/reference/libraries?hl=zh-tw)提交擷取工作，並傳入專屬 ID 做為 **`jobReference.jobId`**。擷取工作是非同步的。使用建立工作時所用的不重複工作 ID [檢查工作狀態](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/get?hl=zh-tw)。如果 **`status.status`** 為 **`DONE`**，代表工作已順利完成。如果出現 **`status.errorResult`**，表示工作失敗，需要重試。
 
 **批次資料處理**
 
-假設您使用夜間批次工作，在固定期限前載入資料。這項載入工作完成後，系統會從查詢中具體化統計資料表，如上一節所述。系統會從這個資料表擷取資料，並彙整成 PDF 報表，然後傳送給監管機構。
+假設您使用夜間批次工作，在固定期限前載入資料。這項載入工作完成後，系統會根據查詢具體化含有統計資料的資料表，如上一節所述。系統會擷取這個資料表中的資料，並彙整成 PDF 報表，然後傳送給監管機構。
 
-由於需要讀取的資料量不大，請使用 [`tabledata.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list?hl=zh-tw) API，以 JSON 字典格式擷取資料表的所有資料列。如果資料超過一頁，結果會設定 **`pageToken`** 屬性。如要擷取下一頁的結果，請再次發出 `tabledata.list` 呼叫，並透過 **`pageToken`** 參數提供代碼值。如果 API 呼叫失敗並顯示 [5xx 錯誤](https://docs.cloud.google.com/bigquery/docs/error-messages?hl=zh-tw)，請使用指數輪詢重試。大多數 4xx 錯誤都無法重試。為進一步分離 BigQuery 匯出作業和報表產生作業，結果應保留在磁碟中。
+由於需要讀取的資料量很小，請使用 [`tabledata.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list?hl=zh-tw) API，以 JSON 字典格式擷取資料表的所有資料列。如果資料不只一頁，結果會設定 **`pageToken`** 屬性。如要擷取下一頁結果，請再次發出 `tabledata.list` 呼叫，並將權杖值做為 **`pageToken`** 參數。如果 API 呼叫失敗並傳回 [5xx 錯誤](https://docs.cloud.google.com/bigquery/docs/error-messages?hl=zh-tw)，請以指數輪詢方式重試。大多數 4xx 錯誤都無法重試。為進一步分離 BigQuery Export 和報表產生作業，應將結果保存至磁碟。
 
 ## 配額政策
 
-如要瞭解擷取工作配額，請參閱「配額與限制」頁面的[擷取工作](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#export_jobs)一節。
+如要瞭解擷取工作的配額，請參閱「配額與限制」頁面的「[擷取工作](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#export_jobs)」一節。
 
-擷取工作的使用量可在 `INFORMATION_SCHEMA` 中查看。
-擷取工作的 `JOBS_BY_*` 系統資料表中的工作項目包含 `total_bytes_processed` 值，可用於監控總用量，確保每天用量低於 50 TiB。如要瞭解如何查詢 `INFORMATION_SCHEMA.JOBS` 檢視區塊以取得 `total_bytes_processed` 值，請參閱 [`INFORMATION_SCHEMA.JOBS` 結構定義](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw#schema)
+`INFORMATION_SCHEMA`提供擷取工作的用量。擷取工作的 `JOBS_BY_*` 系統資料表中的工作項目包含 `total_bytes_processed` 值，可用於監控匯總用量，確保用量維持在每天 50 TiB 以下。如要瞭解如何查詢 `INFORMATION_SCHEMA.JOBS` 檢視表來取得 `total_bytes_processed` 值，請參閱「[`INFORMATION_SCHEMA.JOBS` 結構定義](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw#schema)」
 
 ### 查看目前的配額用量
 
-您可以執行 `INFORMATION_SCHEMA` 查詢，查看指定時間範圍內執行的工作相關中繼資料，瞭解目前查詢、載入、擷取或複製工作的使用情形。您可以將目前用量與[配額限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#copy_jobs)進行比較，判斷特定類型作業的配額用量。下列查詢範例會使用 `INFORMATION_SCHEMA.JOBS` 檢視表，依專案列出查詢、載入、擷取和複製工作的數量：
+您可以執行 `INFORMATION_SCHEMA` 查詢，查看指定時間範圍內執行的工作相關中繼資料，瞭解目前查詢、載入、擷取或複製工作的用量。您可以比較目前用量與[配額限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#copy_jobs)，判斷特定類型工作的配額用量。以下查詢範例使用 `INFORMATION_SCHEMA.JOBS` 檢視表，依專案列出查詢、載入、擷取和複製工作的數量：
 
 ```
 SELECT
@@ -943,7 +941,7 @@ FROM `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
 WHERE date(creation_time)= CURRENT_DATE()
 ```
 
-您可以設定 [Cloud Monitoring](https://docs.cloud.google.com/bigquery/docs/monitoring?hl=zh-tw) 快訊政策，監控匯出的位元組數。
+您可以設定 [Cloud Monitoring](https://docs.cloud.google.com/bigquery/docs/monitoring?hl=zh-tw) 警告政策，監控匯出的位元組數。
 
 1. 前往 Google Cloud 控制台的 *notifications*「Alerting」(警告) 頁面：
 
@@ -951,8 +949,8 @@ WHERE date(creation_time)= CURRENT_DATE()
 
    如果您是使用搜尋列尋找這個頁面，請選取子標題為「Monitoring」的結果。
 2. 在「Alerting」(快訊) 頁面中，按一下「Create Policy」(建立政策)。
-3. 在「政策設定模式」下方，選取「程式碼編輯器 (MQL 或 PromQL)」。
-4. 在 **PromQL** 查詢編輯器中，輸入下列查詢：
+3. 在「Policy configuration mode」(政策設定模式) 下方，選取「Code editor (MQL or PromQL)」(程式碼編輯器 (MQL 或 PromQL))。
+4. 在「PromQL」**PromQL**查詢編輯器中，輸入下列查詢：
 
    ```
    (
@@ -962,18 +960,18 @@ WHERE date(creation_time)= CURRENT_DATE()
    ) > 0.01
    ```
 
-   如果「自動執行」未啟用，請點選「執行查詢」。
-5. 設定其餘警告，然後按一下「建立政策」。
+   如果未啟用「自動執行」，請點選「執行查詢」。
+5. 設定其餘警告，然後點選「建立政策」。
 
-如需建立以 PromQL 為基礎的快訊政策的詳細步驟，請參閱「[建立以 PromQL 為基礎的快訊政策 (主控台)](https://docs.cloud.google.com/monitoring/promql/create-promql-alerts-console?hl=zh-tw)」。
+如需建立 PromQL 警告政策的詳細步驟，請參閱「[建立 PromQL 警告政策 (控制台)](https://docs.cloud.google.com/monitoring/promql/create-promql-alerts-console?hl=zh-tw)」。
 
 ## 疑難排解
 
-診斷及排解擷取工作問題。
+診斷及排解擷取工作的問題。
 
 ### 使用 Logs Explorer 診斷問題
 
-如要診斷擷取作業的問題，可以使用 [Logs Explorer](https://docs.cloud.google.com/logging/docs/view/logs-explorer-interface?hl=zh-tw) 查看特定擷取作業的記錄，找出可能的錯誤。下列 Logs Explorer 篩選器會傳回擷取工作的相關資訊：
+如要診斷擷取工作的問題，您可以使用 [Logs Explorer](https://docs.cloud.google.com/logging/docs/view/logs-explorer-interface?hl=zh-tw) 查看特定擷取工作的記錄，並找出可能發生的錯誤。下列 Logs Explorer 篩選器會傳回擷取工作的相關資訊：
 
 ```
 resource.type="bigquery_resource"
@@ -985,7 +983,7 @@ protoPayload.serviceData.jobCompletedEvent.job.jobConfiguration.query.query=~"EX
 
 ### 超出每日擷取位元組配額錯誤
 
-如果專案的擷取作業超過預設的每日 50 TiB 限制，BigQuery 就會傳回這項錯誤。如要進一步瞭解擷取工作限制，請參閱「[擷取工作](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#export_jobs)」。
+如果擷取作業超出專案預設的每日 50 TiB 上限，BigQuery 就會傳回這項錯誤。如要進一步瞭解擷取工作的限制，請參閱「[擷取工作](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#export_jobs)」。
 
 **錯誤訊息**
 
@@ -995,4 +993,4 @@ Your usage exceeded quota for ExtractBytesPerDay
 
 #### 診斷
 
-如果匯出的資料
+如果匯出的資料表大於 50 TiB，匯出作業會因[超過擷取限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#export_jobs)而失敗。如要

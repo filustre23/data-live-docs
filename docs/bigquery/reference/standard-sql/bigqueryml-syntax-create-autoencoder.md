@@ -553,10 +553,3 @@ supported for autoencoder models, see
 [`AUTOENCODER`](/bigquery/docs/hp-tuning-overview#autoencoder).
 To try a tutorial that walks you through hyperparameter tuning, see
 [Improve model performance with hyperparameter tuning](/bigquery/docs/hyperparameter-tuning-tutorial).
-
-## Supported machine learning functions
-
-The following machine learning functions are supported for the Autoencoder model, including:
-
-* `ML.EVALUATE` for evaluating model metrics.
-* `ML.FEATURE_INFO` for reviewing information about the input features used to train a model.

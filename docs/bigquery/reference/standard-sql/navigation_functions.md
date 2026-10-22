@@ -196,5 +196,4 @@ FROM finishers;
  | Meghan Lederer  | 03:07:41    | F30-34   | Jen Edwards      |
  | Lauren Reasoner | 03:10:14    | F30-34   | Meghan Lederer   |
  | Lisa Stelzner   | 02:54:11    | F35-39   | NULL             |
- | Lauren Matthews | 03:01:17    | F35-39
 ```

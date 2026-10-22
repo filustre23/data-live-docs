@@ -14,41 +14,38 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 你可以依據偏好儲存及分類內容。
 
-# 將資料匯出為 Protobuf 欄
+# 將資料匯出為 Protobuf 資料欄
 
-本文說明如何使用 BigQuery 使用者定義函式 (UDF)，將 BigQuery 資料匯出為通訊協定緩衝區 (Protobuf) 資料欄。
+BigQuery 中的 user-defined function (UDF) 可讓您將資料匯出為通訊協定緩衝區 (Protobuf) 資料欄。Protobuf 資料欄可為應用程式提供完整類型的物件，與 JSON 相比，可減少資料大小、傳輸時間和成本。
 
-## 使用 Protobuf 資料欄的時機
+## Protobuf 資料欄的使用時機
 
-BigQuery 提供多種內建函式，可格式化所選資料。其中一個做法是將多個資料欄值合併為單一 Protobuf 值，這麼做有以下優點：
+BigQuery 提供多項內建函式，可設定所選資料的格式。其中一個選項是將多個資料欄值合併為單一 Protobuf 值，這有以下優點：
 
 * 物件類型安全。
-* 與 JSON 相比，壓縮率更高、資料傳輸時間更短，且成本更低。
-* 彈性，因為大多數程式設計語言都有處理 Protobuf 的程式庫。
-* 從多個資料欄讀取及建構單一物件時，負擔較小。
+* 與 JSON 相比，壓縮、資料移轉時間和成本都有所改善。
+* 靈活度，因為大多數程式設計語言都有處理 Protobuf 的程式庫。
+* 從多個資料欄讀取資料並建構單一物件時，負擔較少。
 
-雖然其他欄類型也能提供類型安全，但使用 Protobuf 欄可提供完整型別的物件，減少應用程式層或管道其他部分的工作量。
+雖然其他資料欄類型也能提供類型安全，但使用 Protobuf 資料欄可提供完整類型的物件，減少應用程式層或管道其他部分所需的工作量。
 
-不過，以 Protobuf 欄匯出 BigQuery 資料時，有以下限制：
+不過，將 BigQuery 資料匯出為 Protobuf 資料欄時，有一些限制：
 
-* 系統無法妥善建立 Protobuf 資料欄的索引或篩選資料。依據 Protobuf 欄的內容搜尋可能效果不彰。
-* 以 Protobuf 格式排序資料可能很困難。
+* Protobuf 資料欄未妥善建立索引或篩選。依 Protobuf 資料欄的內容搜尋，可能較不有效。
+* Protobuf 格式的資料可能難以排序。
 
-如果這些限制適用於匯出工作流程，建議您考慮使用其他方法匯出 BigQuery 資料：
+如果這些限制適用於匯出工作流程，建議您考慮其他匯出 BigQuery 資料的方法：
 
-* 使用[排程查詢](https://docs.cloud.google.com/bigquery/docs/scheduling-queries?hl=zh-tw)搭配 [`EXPORT DATA` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/other-statements?hl=zh-tw#export_data_statement)，即可依日期或時間排序匯出的 BigQuery 資料，並排定定期匯出作業。BigQuery 支援將資料匯出為 Avro、CSV、JSON 和 Parquet 格式。
-* 使用 [Dataflow](https://docs.cloud.google.com/dataflow/docs/overview?hl=zh-tw) 以 Avro 或 CSV 檔案格式匯出 BigQuery 資料。
+* 使用[排定的查詢](https://docs.cloud.google.com/bigquery/docs/scheduling-queries?hl=zh-tw)和 [`EXPORT DATA` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/other-statements?hl=zh-tw#export_data_statement)，依日期或時間排序匯出的 BigQuery 資料，並排定定期匯出作業。BigQuery 支援將資料匯出為 Avro、CSV、JSON 和 Parquet 格式。
+* 使用 [Dataflow](https://docs.cloud.google.com/dataflow/docs/overview?hl=zh-tw)，以 Avro 或 CSV 檔案格式匯出 BigQuery 資料。
 
 ## 必要的角色
 
-如要取得將 BigQuery 資料匯出為 Protobuf 欄所需的權限，請要求管理員在專案中授予您下列 IAM 角色：
+如要取得將 BigQuery 資料匯出為 Protobuf 資料欄所需的權限，請要求管理員授予您專案的下列 IAM 角色：
 
-* 建立使用者定義函式：
-  [BigQuery 資料編輯器](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataEditor)  (`roles/bigquery.dataEditor`)
-* 從 BigQuery 資料表匯出資料：
-  [BigQuery 資料檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataViewer)  (`roles/bigquery.dataViewer`)
-* 讀取及上傳檔案至 Cloud Storage：
-  [Storage Object Creator](https://docs.cloud.google.com/iam/docs/roles-permissions/storage?hl=zh-tw#storage.objectCreator)  (`roles/storage.objectCreator`)
+* 建立 user-defined function：[BigQuery 資料編輯者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataEditor)  (`roles/bigquery.dataEditor`)
+* 從 BigQuery 資料表匯出資料：[BigQuery 資料檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataViewer)  (`roles/bigquery.dataViewer`)
+* 讀取檔案並上傳至 Cloud Storage：[Storage 物件建立者](https://docs.cloud.google.com/iam/docs/roles-permissions/storage?hl=zh-tw#storage.objectCreator)  (`roles/storage.objectCreator`)
 
 如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
@@ -56,7 +53,7 @@ BigQuery 提供多種內建函式，可格式化所選資料。其中一個做�
 
 ## 建立 UDF
 
-建立 UDF，將 BigQuery `STRUCT` 資料類型轉換為 Protobuf 欄：
+建立 UDF，將 BigQuery `STRUCT` 資料類型轉換為 Protobuf 資料欄：
 
 1. 在指令列中複製 `bigquery-utils.git` 存放區：
 
@@ -70,22 +67,22 @@ BigQuery 提供多種內建函式，可格式化所選資料。其中一個做�
    ```
 3. 使用 [`cp` 指令](https://man7.org/linux/man-pages/man1/cp.1.html)或作業系統的檔案瀏覽器，將 proto 檔案複製到 `./protos` 子資料夾。
 
-   「`./protos`」資料夾中已有一個名為「`dummy.proto`」的範例 proto 檔案。
+   `./protos` 資料夾中已有一個名為 `dummy.proto` 的範例 proto 檔案。
 4. 從 GitHub 存放區安裝必要套件：
 
    ```
    npm install
    ```
-5. 使用 webpack 組合套件：
+5. 使用 webpack 建立套件組合：
 
    ```
    npx webpack --config webpack.config.js --stats-error-details
    ```
-6. 在 `./dist` 子資料夾中找出 `pbwrapper.js` 檔案，然後[將檔案上傳至 Cloud Storage bucket](https://docs.cloud.google.com/storage/docs/uploading-objects?hl=zh-tw)。
+6. 在 `./dist` 子資料夾中找到 `pbwrapper.js` 檔案，然後[將檔案上傳至 Cloud Storage bucket](https://docs.cloud.google.com/storage/docs/uploading-objects?hl=zh-tw)。
 7. 前往「BigQuery」頁面
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-8. 使用查詢編輯器建立名為 `toMyProtoMessage` 的 UDF，從現有的 BigQuery 資料表欄位建構 Protobuf 欄：
+8. 使用查詢編輯器建立名為 `toMyProtoMessage` 的 UDF，從現有的 BigQuery 資料表資料欄建構 Protobuf 資料欄：
 
    ```
    CREATE FUNCTION
@@ -101,9 +98,9 @@ BigQuery 提供多種內建函式，可格式化所選資料。其中一個做�
    更改下列內容：
 
    * `DATASET_ID`：要包含 UDF 的資料集 ID。
-   * `INPUT_FIELDS`：用於 proto 檔案的 [proto 訊息類型](https://protobuf.dev/programming-guides/proto3/#simple)，格式為 `field_name_1 field_type_1 [, field_name_2 field_type_2, ...]`。
+   * `INPUT_FIELDS`：proto 檔案的 [proto 訊息類型](https://protobuf.dev/programming-guides/proto3/#simple)中使用的欄位，格式為 `field_name_1 field_type_1 [, field_name_2 field_type_2, ...]`。
 
-     您必須將使用底線的任何訊息類型欄位，改為使用[駝峰式大小寫](https://en.wikipedia.org/wiki/Camel_case)。舉例來說，如果訊息類型如下所示，則輸入欄位值必須為 `itemId int64, itemDescription string`：
+     您必須將使用底線的所有訊息類型欄位，改為使用[駝峰式大小寫](https://en.wikipedia.org/wiki/Camel_case)。舉例來說，如果訊息類型如下所示，則輸入欄位值必須為 `itemId int64, itemDescription string`：
 
      ```
      message ThisMessage {
@@ -130,7 +127,7 @@ BigQuery 提供多種內建函式，可格式化所選資料。其中一個做�
 
 ## 將資料欄格式設為 Protobuf 值
 
-執行 `toMyProtoMessage` UDF，將 BigQuery 資料表欄格式化為 Protobuf 值：
+執行 `toMyProtoMessage` UDF，將 BigQuery 資料表資料欄格式設為 Protobuf 值：
 
 ```
   SELECT
@@ -144,13 +141,12 @@ BigQuery 提供多種內建函式，可格式化所選資料。其中一個做�
 更改下列內容：
 
 * `UDF_DATASET_ID`：包含 UDF 的資料集 ID。
-* `INPUT_COLUMNS`：要格式化為 Protobuf 值的資料欄名稱，格式為 `column_name_1 [, column_name_2, ...]`。
-  資料欄可以是任何支援的[純量值型別](https://protobuf.dev/programming-guides/proto3/#scalar)或非純量型別，包括 `ARRAY` 和 `STRUCT`。輸入資料欄必須與 proto 訊息類型欄位的類型和數量相符。
-* `PROJECT_ID`：包含表格的專案 ID。如果資料集位於目前專案中，您可以略過識別專案的步驟。
-* `DATASET_ID`：包含表格的資料集 ID。
-* `TABLE_NAME`：包含要格式化資料欄的資料表名稱。
+* `INPUT_COLUMNS`：要格式化為 Protobuf 值的資料欄名稱，格式為 `column_name_1 [, column_name_2, ...]`。資料欄可以是任何支援的[純量值類型](https://protobuf.dev/programming-guides/proto3/#scalar)或非純量類型，包括 `ARRAY` 和 `STRUCT`。輸入資料欄必須與 proto 訊息類型欄位的類型和數量相符。
+* `PROJECT_ID`：資料表所在專案的 ID。如果資料集位於目前的專案中，則可略過識別專案的步驟。
+* `DATASET_ID`：資料表所在資料集的 ID。
+* `TABLE_NAME`：資料表名稱，其中包含要設定格式的資料欄。
 
-舉例來說，如果您使用以 `dummy.proto` 為基礎的 `toMyProtoMessage` UDF，下列 `SELECT` 陳述式會正常運作：
+舉例來說，如果您使用以 `dummy.proto` 為基礎的 `toMyProtoMessage` UDF，下列 `SELECT` 陳述式會運作：
 
 ```
 SELECT
@@ -162,9 +158,9 @@ LIMIT 100;
 
 ## 使用 Protobuf 值
 
-以 Protobuf 格式匯出 BigQuery 資料後，您現在可以將資料做為完全型別的物件或結構體使用。
+以 Protobuf 格式匯出 BigQuery 資料後，您現在可以將資料做為完整類型的物件或結構體使用。
 
-下列程式碼範例提供幾種處理或使用匯出資料的方式：
+下列程式碼範例提供幾種處理或使用匯出資料的方法：
 
 ### Go
 
@@ -361,11 +357,11 @@ def main():
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-15 (世界標準時間)。
+上次更新時間：2026-10-21 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-21 (世界標準時間)。"],[],[]]

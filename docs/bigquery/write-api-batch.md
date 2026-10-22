@@ -609,5 +609,5 @@ public class WritePendingStream {
       }
 
       public void onFailure(Throwable throwable) {
-        synchroni
+        synchronized
 ```

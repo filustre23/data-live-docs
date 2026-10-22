@@ -447,8 +447,5 @@ FROM
     TABLE citibike_trips,
     data_col => 'num_trips',
     timestamp_col => 'date',
-    id_cols => ['usertype'],
-    horizon => 30);
+    id_cols =>
 ```
-
-The result is similar to the following:

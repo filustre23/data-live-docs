@@ -175,8 +175,4 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 | **動作細目** | | | |
 |  | ActionType | *字串* | 使用者看到廣告後，即使沒有點擊，也會對廣告採取動作。 |
 |  | ActionCanvasComponentName | *字串* | 畫布廣告中的元件名稱。 |
-|  | ActionCarouselCardId | *字串* | 使用者看到廣告時互動的特定輪播資訊卡 ID。 |
-|  | ActionCarouselCardName | *字串* | 使用者看到廣告時與之互動的特定輪播資訊卡。資訊卡會依標題分類。 |
-|  | ActionDestination | *字串* | 使用者點按廣告後前往的到達網頁。 |
-|  | ActionDevice | *字串* | 您追蹤的轉換事件發生所在的裝置。 |
-|  |
+|  | ActionCarouselCardId | *字串* | 使用者 |

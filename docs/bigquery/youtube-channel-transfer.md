@@ -192,5 +192,5 @@ import java.util.Map;
 public class CreateYoutubeChannelTransfer {
 
   public static void main(String[] args) throws IOException {
-    // TODO(developer): Replace these variables before running the sam
+    // TODO(developer): Replace these variables before run
 ```

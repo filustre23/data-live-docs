@@ -16,60 +16,55 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 從 Cloud Storage 載入 ORC 資料
 
-本頁面提供將 ORC 資料從 Cloud Storage 載入至 BigQuery 的總覽。
+BigQuery 可讓您將 Cloud Storage 中的 [ORC](http://orc.apache.org) 資料載入新的資料表或分區，或附加至現有資料表或分區，或覆寫現有資料表或分區。ORC 是開放原始碼的欄導向資料格式，廣泛用於 Hadoop 生態系統。在擷取期間，BigQuery 會將資料轉換為 [Capacitor](https://cloud.google.com/blog/products/bigquery/inside-capacitor-bigquerys-next-generation-columnar-storage-format?hl=zh-tw) (BigQuery 的儲存格式) 的資料欄格式，以便查詢和分析。
 
-[ORC](http://orc.apache.org) 是一種開放原始碼資料欄導向的資料格式，在 Apache Hadoop 生態系統中被廣泛使用。
-
-從 Cloud Storage 載入 ORC 資料時，可將資料載入至新的資料表或分區，或將資料附加到現有資料表或分區，或覆寫現有資料表或分區。將資料載入 BigQuery 時，資料會轉換為 [Capacitor](https://cloud.google.com/blog/products/bigquery/inside-capacitor-bigquerys-next-generation-columnar-storage-format?hl=zh-tw) 資料欄格式 (BigQuery 的儲存格式)。
-
-如需從本機檔案載入 ORC 資料的相關資訊，請參閱
-[將資料從本機資料來源載入至 BigQuery](https://docs.cloud.google.com/bigquery/docs/loading-data-local?hl=zh-tw)。
+如要瞭解如何從本機檔案載入 ORC 資料，請參閱「[從本機資料來源將資料載入 BigQuery](https://docs.cloud.google.com/bigquery/docs/loading-data-local?hl=zh-tw)」。
 
 ## 限制
 
-從 Cloud Storage bucket 將資料載入 BigQuery 時，您必須遵守下列限制：
+從 Cloud Storage bucket 將資料載入 BigQuery 時，須遵守下列限制：
 
 * BigQuery 不保證外部資料來源的資料一致性。如果基礎資料在查詢執行期間遭到變更，可能會導致非預期的行為。
-* BigQuery 不支援 [Cloud Storage 物件版本控管](https://docs.cloud.google.com/storage/docs/object-versioning?hl=zh-tw)。如果 Cloud Storage URI 中包含版本編號，載入工作就會失敗。
+* BigQuery 不支援 [Cloud Storage 物件版本管理](https://docs.cloud.google.com/storage/docs/object-versioning?hl=zh-tw)。如果您在 Cloud Storage URI 中加入世代編號，載入工作就會失敗。
 
 ## 事前準備
 
-授予 Identity and Access Management (IAM) 角色，讓使用者具備執行本文件各項工作所需的權限，並建立資料集來儲存資料。
+授予 Identity and Access Management (IAM) 角色，讓使用者具備必要權限，可執行本文件中的各項工作，並建立資料集來儲存資料。
 
 ### 所需權限
 
-如要將資料載入 BigQuery，您需要 IAM 權限才能執行載入工作，並將資料載入 BigQuery 資料表和資料分割。如要從 Cloud Storage 載入資料，您也需要 IAM 權限，才能存取含有資料的 bucket。
+如要將資料載入 BigQuery，您必須具備 IAM 權限，才能執行載入工作，並將資料載入 BigQuery 資料表和分區。如果您是從 Cloud Storage 載入資料，也需要 IAM 權限，才能存取含有資料的 bucket。
 
 #### 將資料載入 BigQuery 的權限
 
-如要將資料載入新的 BigQuery 資料表或資料分割區，或是附加或覆寫現有資料表或資料分割區，您需要下列 IAM 權限：
+如要將資料載入新的 BigQuery 資料表或分區，或附加或覆寫現有資料表或分區，您必須具備下列 IAM 權限：
 
 * `bigquery.tables.create`
 * `bigquery.tables.updateData`
 * `bigquery.tables.update`
 * `bigquery.jobs.create`
 
-下列每個預先定義的 IAM 角色都包含將資料載入 BigQuery 資料表或資料分割區所需的權限：
+下列各項預先定義的 IAM 角色，都包含將資料載入 BigQuery 資料表或分區所需的權限：
 
 * `roles/bigquery.dataEditor`
 * `roles/bigquery.dataOwner`
-* `roles/bigquery.admin` (包括 `bigquery.jobs.create` 權限)
-* `bigquery.user` (包括 `bigquery.jobs.create` 權限)
-* `bigquery.jobUser` (包括 `bigquery.jobs.create` 權限)
+* `roles/bigquery.admin` (包含 `bigquery.jobs.create` 權限)
+* `bigquery.user` (包含 `bigquery.jobs.create` 權限)
+* `bigquery.jobUser` (包含 `bigquery.jobs.create` 權限)
 
-此外，如果您有 `bigquery.datasets.create` 權限，可以使用您建立的資料集中的載入作業，建立及更新資料表。
+此外，如果您具備 `bigquery.datasets.create` 權限，則可在建立的資料集中，使用載入工作建立及更新資料表。
 
-如要進一步瞭解 BigQuery 中的 IAM 角色和權限，請參閱「[預先定義的角色和權限](https://docs.cloud.google.com/bigquery/access-control?hl=zh-tw)」。
+如要進一步瞭解 BigQuery 的 IAM 角色和權限，請參閱「[預先定義的角色和權限](https://docs.cloud.google.com/bigquery/access-control?hl=zh-tw)」。
 
 ### 從 Cloud Storage 載入資料的權限
 
-如要取得從 Cloud Storage bucket 載入資料所需的權限，請要求管理員授予 bucket 的「[Storage 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/storage?hl=zh-tw#storage.admin) 」(`roles/storage.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得從 Cloud Storage bucket 載入資料所需的權限，請要求管理員授予您 bucket 的[儲存空間管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/storage?hl=zh-tw#storage.admin)  (`roles/storage.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
 這個預先定義的角色具備從 Cloud Storage bucket 載入資料所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
 #### 所需權限
 
-如要從 Cloud Storage bucket 載入資料，必須具備下列權限：
+您必須具備下列權限，才能從 Cloud Storage bucket 載入資料：
 
 * `storage.buckets.get`
 * `storage.objects.get`
@@ -95,7 +90,7 @@ gs://mybucket/01/
   b.orc
 ```
 
-在 bq 指令列工具中執行這項指令，會載入所有檔案 (以半形逗號分隔的清單)，並從 `mybucket/01/b.orc` 衍生結構定義：
+在 bq 指令列工具中執行這項指令，會載入所有檔案 (以逗號分隔的清單)，並從 `mybucket/01/b.orc` 衍生結構定義：
 
 ```
 bq load \
@@ -108,14 +103,14 @@ BigQuery 偵測到結構定義時，會將部分 ORC 資料類型轉換為 BigQu
 
 載入具有不同結構定義的多個 ORC 檔案時，多個結構定義中所指定的相同欄位 (具有相同名稱與相同巢狀層級) 必須對應至各個結構定義中相同的已轉換 BigQuery 資料類型。
 
-如要提供資料表結構定義來建立外部資料表，請在 BigQuery API 中設定 `referenceFileSchemaUri` 屬性，或在 bq 指令列工具中設定   
-`--reference_file_schema_uri` 參數，指向參考檔案的網址。
+如要提供資料表結構定義來建立外部資料表，請將 BigQuery API 中的 `referenceFileSchemaUri` 屬性或 bq 指令列工具中的   
+`--reference_file_schema_uri` 參數設為參考檔案的網址。
 
 例如 `--reference_file_schema_uri="gs://mybucket/schema.orc"`。
 
 ## ORC 壓縮
 
-BigQuery 支援下列 ORC 檔案內容的壓縮編碼解碼器：
+BigQuery 支援下列 ORC 檔案內容壓縮轉碼器：
 
 * `Zlib`
 * `Snappy`
@@ -123,8 +118,7 @@ BigQuery 支援下列 ORC 檔案內容的壓縮編碼解碼器：
 * `LZ4`
 * `ZSTD`
 
-上傳至 BigQuery 後，ORC 檔案中的資料不會保持壓縮狀態。系統會根據[資料集儲存空間計費模式](https://docs.cloud.google.com/bigquery/docs/datasets-intro?hl=zh-tw#dataset_storage_billing_models)，以邏輯位元組或實際位元組回報資料儲存空間。
-如要取得儲存空間用量資訊，請查詢 [`INFORMATION_SCHEMA.TABLE_STORAGE` 檢視畫面](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage?hl=zh-tw)。
+ORC 檔案中的資料上傳至 BigQuery 後，不會保持壓縮狀態。資料儲存空間會以邏輯位元組或實體位元組回報，具體取決於[資料集儲存空間計費模式](https://docs.cloud.google.com/bigquery/docs/datasets-intro?hl=zh-tw#dataset_storage_billing_models)。如要取得儲存空間用量資訊，請查詢 [`INFORMATION_SCHEMA.TABLE_STORAGE` 檢視表](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage?hl=zh-tw)。
 
 ## 將 ORC 資料載入至新的資料表
 
@@ -143,30 +137,28 @@ BigQuery 支援下列 ORC 檔案內容的壓縮編碼解碼器：
 
    [前往 BigQuery](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
-3. 在「Explorer」窗格中展開專案，點選「Datasets」(資料集)，然後選取資料集。
-4. 在「資料集資訊」部分，按一下 add\_box「建立資料表」。
+3. 在「Explorer」窗格中展開專案，點選「資料集」，然後選取資料集。
+4. 在「資料集資訊」部分，點選 add\_box「建立資料表」。
 5. 在「建立資料表」窗格中，指定下列詳細資料：
 
-1. 在「來源」部分中，從「建立資料表來源」清單中選取「Google Cloud Storage」。
-   接著，按照下列步驟操作：
-   1. 從 Cloud Storage bucket 選取檔案，或輸入 [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#gcs-uri)。
-      您無法在 Google Cloud 控制台中加入多個 URI，但支援[萬用字元](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#load-wildcards)。Cloud Storage bucket 必須與包含要建立、附加或覆寫資料表的資料集位於相同位置。
-   2. 在「檔案格式」中選取「ORC」。
-2. 在「目的地」部分，指定下列詳細資料：
-   1. 在「Dataset」(資料集) 部分，選取要建立資料表的資料集。
+1. 在「Source」(來源) 部分，從「Create table from」(建立資料表來源) 清單中選取「Google Cloud Storage」。接著，按照下列步驟操作：
+   1. 從 Cloud Storage bucket 選取檔案，或輸入 [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#gcs-uri)。您無法在 Google Cloud 控制台中加入多個 URI，但可以使用[萬用字元](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#load-wildcards)。Cloud Storage bucket 必須與資料集位於相同位置，且該資料集包含您要建立、附加或覆寫的資料表。
+   2. 在「File format」(檔案格式) 選取「ORC」。
+2. 在「Destination」(目的地) 部分，指定下列詳細資料：
+   1. 在「Dataset」(資料集) 部分，選取要在其中建立資料表的資料集。
    2. 在「Table」(資料表) 欄位中，輸入要建立的資料表名稱。
-   3. 確認「資料表類型」欄位已設為「原生資料表」。
-3. 在「Schema」(結構定義) 區段中，無需採取任何行動。結構定義會在 ORC 檔案中自行說明。
-4. 選用：指定「分區與叢集設定」。詳情請參閱「[建立分區資料表](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables?hl=zh-tw)」和「[建立及使用叢集資料表](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables?hl=zh-tw)」。
+   3. 確認「資料表類型」欄位設為「原生資料表」。
+3. 在「Schema」(結構定義) 區段中，無需採取任何行動。結構定義在 ORC 檔案中會自行描述。
+4. 選用：指定**分區和叢集設定**。詳情請參閱「[建立分區資料表](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables?hl=zh-tw)」和「[建立及使用分群資料表](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables?hl=zh-tw)」。
 5. 按一下「進階選項」，然後執行下列操作：
    * 讓「Write preference」(寫入偏好設定) 的 [Write if empty] (空白時寫入) 選項維持在已選取狀態。這個選項會建立新資料表，並將資料載入其中。
-   * 如要忽略資料列中不屬於資料表結構定義的值，請選取「Unknown values」(不明的值)。
-   * 如要**加密**，請點選「客戶管理的金鑰」，使用 [Cloud Key Management Service 金鑰](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw)。如果保留 **Google-managed key** 設定，BigQuery 會[加密靜態資料](https://docs.cloud.google.com/docs/security/encryption/default-encryption?hl=zh-tw)。
+   * 如要忽略資料列中未出現在資料表結構定義的值，請選取「Unknown values」(不明的值)。
+   * 在「Encryption」(加密) 部分，按一下「Customer-managed key」(客戶自行管理的金鑰)，即可使用 [Cloud Key Management Service 金鑰](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw)。如果保留 **Google-managed key** 設定，BigQuery 會[加密靜態資料](https://docs.cloud.google.com/docs/security/encryption/default-encryption?hl=zh-tw)。
 6. 點選「建立資料表」。
 
-**注意：** 使用Google Cloud 控制台將資料載入空白資料表時，無法新增標籤、說明、資料表到期日或分區到期日。  
+**注意：** 使用Google Cloud 控制台將資料載入空白資料表時，您無法新增標籤、說明、資料表到期時間或分區到期時間。  
   
-資料表建立完成後，您可以更新資料表的到期時間、說明和標籤，但使用 Google Cloud 控制台建立資料表後，就無法新增分區到期時間。詳情請參閱「[管理資料表](https://docs.cloud.google.com/bigquery/docs/managing-tables?hl=zh-tw)」。
+資料表建立後，您可以更新資料表的到期時間、說明和標籤，但無法在使用 Google Cloud 控制台建立資料表後新增分區到期時間。詳情請參閱「[管理資料表](https://docs.cloud.google.com/bigquery/docs/managing-tables?hl=zh-tw)」。
 
 ### SQL
 
@@ -183,7 +175,7 @@ BigQuery 支援下列 ORC 檔案內容的壓縮編碼解碼器：
      format = 'ORC',
      uris = ['gs://bucket/path/file.orc']);
    ```
-3. 按一下「執行」play\_circle。
+3. 按一下「play\_circle 執行」。
 
 如要進一步瞭解如何執行查詢，請參閱「[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)」。
 
@@ -196,12 +188,12 @@ BigQuery 支援下列 ORC 檔案內容的壓縮編碼解碼器：
 
 其他選用標記包括：
 
-* `--time_partitioning_type`：針對資料表啟用時間分區並設定分區類型。可能的值為 `HOUR`、`DAY`、`MONTH` 和 `YEAR`。建立以 `DATE`、`DATETIME` 或 `TIMESTAMP` 欄為依據的資料表時，這個旗標為選用項目。時間分區的預設分區類型為 `DAY`。您無法變更現有資料表的分割規格。
+* `--time_partitioning_type`：針對資料表啟用時間分區並設定分區類型。可能的值為 `HOUR`、`DAY`、`MONTH` 和 `YEAR`。建立依 `DATE`、`DATETIME` 或 `TIMESTAMP` 資料欄分區的資料表時，可以選擇是否使用這個旗標。時間分區的預設分區類型為 `DAY`。您無法變更現有資料表的分區規格。
 * `--time_partitioning_expiration`：這是一個整數，用來指定系統應在何時刪除時間分區 (以秒為單位)。到期時間為分區的世界標準時間日期加上整數值。
-* `--time_partitioning_field`：用於建立分區資料表的 `DATE` 或 `TIMESTAMP` 資料欄。如果啟用時間分區功能，但未提供這個值，系統會建立擷取時間分區資料表。
-* `--require_partition_filter`：這個選項啟用後，系統會要求使用者加入 `WHERE` 子句，以指定要查詢的分區。使用分區篩選器可以降低成本並提升效能。詳情請參閱「[在查詢中要求使用分割區篩選器](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables?hl=zh-tw)」。
-* `--clustering_fields`：以半形逗號分隔的清單，最多可列出四個用於建立[分群資料表](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables?hl=zh-tw)的欄名。
-* `--destination_kms_key`：用於加密表格資料的 Cloud KMS 金鑰。
+* `--time_partitioning_field`：用於建立分區資料表的 `DATE` 或 `TIMESTAMP` 欄。如果啟用時間分區，但未提供這個值，系統會建立擷取時間分區資料表。
+* `--require_partition_filter`：這個選項啟用後，系統會要求使用者加入 `WHERE` 子句，以指定要查詢的分區。使用分區篩選器可以降低成本並提升效能。詳情請參閱「[在查詢中要求分區篩選器](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables?hl=zh-tw)」。
+* `--clustering_fields`：以半形逗號分隔的清單，最多列出四個用於建立[分群資料表](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables?hl=zh-tw)的資料欄名稱。
+* `--destination_kms_key`：用於加密資料表資料的 Cloud KMS 金鑰。
 
   如要進一步瞭解分區資料表，請參閱：
 
@@ -226,11 +218,11 @@ path_to_source
 
 其中：
 
-* location 是您的位置。`--location` 是選用旗標。舉例來說，如果您在東京區域使用 BigQuery，可以將旗標值設為 `asia-northeast1`。您可以使用 [.bigqueryrc 檔案](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool?hl=zh-tw#setting_default_values_for_command-line_flags)，為位置設定預設值。
+* location 是您的位置。`--location` 是選用旗標。舉例來說，如果您在東京地區使用 BigQuery，就可以將該旗標的值設定為 `asia-northeast1`。您可以使用 [.bigqueryrc 檔案](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool?hl=zh-tw#setting_default_values_for_command-line_flags)設定位置的預設值。
 * format為 `ORC`。
 * dataset 是現有資料集。
 * table 是您正在載入資料的資料表名稱。
-* path\_to\_source 是完整的 [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#gcs-uri)，或是以半形逗號分隔的 URI 清單。您也可以使用[萬用字元](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#load-wildcards)。
+* path\_to\_source 是完整的 [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#gcs-uri)，或以半形逗號分隔的 URI 清單。您也可以使用[萬用字元](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#load-wildcards)。
 
 範例：
 
@@ -243,7 +235,7 @@ path_to_source
     gs://mybucket/mydata.orc
 ```
 
-下列指令會將 `gs://mybucket/mydata.orc` 中的資料載入 `mydataset` 中名為 `mytable` 的新擷取時間分區資料表。
+下列指令會將 `gs://mybucket/mydata.orc` 中的資料，載入 `mydataset` 中名為 `mytable` 的新擷取時間分區資料表。
 
 ```
     bq load \
@@ -285,23 +277,23 @@ path_to_source
 
 1. 建立指向 Cloud Storage 中來源資料的 `load` 工作。
 2. (選用) 在[工作資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs?hl=zh-tw)的 `jobReference` 區段中，於 `location` 屬性指定[位置](https://docs.cloud.google.com/bigquery/docs/dataset-locations?hl=zh-tw)。
-3. `source URIs` 屬性必須是完整的，且必須符合下列格式：`gs://bucket/object`。每個 URI 最多可包含一個「\*」[萬用字元](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#load-wildcards)。
+3. `source URIs` 屬性必須是完整的，且必須符合下列格式：`gs://bucket/object`。每個 URI 都可以包含一個「\*」[萬用字元](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#load-wildcards)。
 4. 將 `sourceFormat` 屬性設為 `ORC`，以指定 ORC 資料格式。
 5. 如要檢查工作狀態，請呼叫 [`jobs.get(job_id*)`](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/get?hl=zh-tw)，其中 job\_id 是初始要求傳回的工作 ID。
 
    * 如果是 `status.state = DONE`，代表工作已順利完成。
-   * 如果存在 `status.errorResult` 屬性，表示要求失敗，且該物件包含說明錯誤原因的資訊。如果要求執行失敗，系統就不會建立任何資料表，也不會載入任何資料。
-   * 如果沒有 `status.errorResult`，表示工作順利完成，但可能發生一些非致命錯誤，例如匯入部分資料列時發生問題。不嚴重的錯誤都會列在已傳回工作物件的 `status.errors` 屬性中。
+   * 如果出現 `status.errorResult` 屬性，表示要求失敗，且該物件會包含說明錯誤原因的資訊。如果要求執行失敗，系統就不會建立任何資料表，也不會載入任何資料。
+   * 如果未出現 `status.errorResult`，代表工作順利完成，但可能有一些不嚴重的錯誤，例如少數資料列在匯入時發生問題。不嚴重的錯誤都會列在已傳回工作物件的 `status.errors` 屬性中。
 
 **API 附註：**
 
 * 載入工作不可部分完成，且資料狀態具一致性。如果載入工作失敗，所有資料都無法使用；如果載入工作成功，則所有資料都可以使用。
 * 最佳做法是產生專屬 ID，並在呼叫 `jobs.insert` 建立載入工作時，將該 ID 做為 `jobReference.jobId` 傳遞。這個方法較不受網路故障問題的影響，因為用戶端可使用已知的工作 ID 進行輪詢或重試。
-* 對指定的工作 ID 呼叫 `jobs.insert` 是一種冪等作業。您可以對相同工作 ID 視需要重試多次，但最多只能成功執行一次作業。
+* 對指定的工作 ID 呼叫 `jobs.insert` 是一種冪等作業。您可以對同一個工作 ID 重試任意次數，但最多只有一項作業會成功。
 
 ### C#
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 C# 設定說明操作。詳情請參閱 [BigQuery C# API 參考文件](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 C# 設定操作說明進行操作。詳情請參閱 [BigQuery C# API 參考文件](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -347,7 +339,7 @@ public class BigQueryLoadTableGcsOrc
 
 ### Go
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Go 設定說明操作。詳情請參閱 [BigQuery Go API 參考文件](https://godoc.org/cloud.google.com/go/bigquery)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Go 設定操作說明進行操作。詳情請參閱 [BigQuery Go API 參考文件](https://godoc.org/cloud.google.com/go/bigquery)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -454,7 +446,7 @@ public class LoadOrcFromGCS {
 
 ### Node.js
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定操作說明進行操作。詳情請參閱 [BigQuery Node.js API 參考文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -511,7 +503,7 @@ async function loadTableGCSORC() {
 
 ### PHP
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 PHP 設定說明操作。詳情請參閱 [BigQuery PHP API 參考文件](https://docs.cloud.google.com/php/docs/reference/cloud-bigquery/latest/BigQueryClient?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 PHP 設定操作說明進行操作。詳情請參閱 [BigQuery PHP API 參考文件](https://docs.cloud.google.com/php/docs/reference/cloud-bigquery/latest/BigQueryClient?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -554,7 +546,7 @@ if (isset($job->info()['status']['errorResult'])) {
 
 ### Python
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定操作說明進行操作。詳情請參閱 [BigQuery Python API 參考文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -582,7 +574,7 @@ print("Loaded {} rows.".format(destination_table.num_rows))
 
 ### Ruby
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Ruby 設定說明操作。詳情請參閱 [BigQuery Ruby API 參考文件](https://googleapis.dev/ruby/google-cloud-bigquery/latest/Google/Cloud/Bigquery.html)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Ruby 設定操作說明進行操作。詳情請參閱 [BigQuery Ruby API 參考文件](https://googleapis.dev/ruby/google-cloud-bigquery/latest/Google/Cloud/Bigquery.html)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -606,11 +598,11 @@ def load_table_gcs_orc dataset_id = "your_dataset_id"
 end
 ```
 
-## 將 ORC 資料附加至資料表或覆寫資料表
+## 使用 ORC 資料附加或覆寫資料表
 
 如要將其他資料載入資料表，您可以指定來源檔案或附加查詢結果。
 
-在 Google Cloud 控制台中，使用「寫入偏好設定」選項，指定從來源檔案或查詢結果載入資料時要採取的動作。
+在 Google Cloud 控制台中，使用「Write preference」(寫入偏好設定) 選項，指定從來源檔案或查詢結果載入資料時要採取的動作。
 
 將額外資料載入資料表時，可以選擇下列選項：
 
@@ -639,30 +631,28 @@ end
 
    [前往 BigQuery](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
-3. 在「Explorer」窗格中展開專案，點選「Datasets」(資料集)，然後選取資料集。
-4. 在「資料集資訊」部分，按一下 add\_box「建立資料表」。
+3. 在「Explorer」窗格中展開專案，點選「資料集」，然後選取資料集。
+4. 在「資料集資訊」部分，點選 add\_box「建立資料表」。
 5. 在「建立資料表」窗格中，指定下列詳細資料：
 
-1. 在「來源」部分中，從「建立資料表來源」清單中選取「Google Cloud Storage」。
-   接著，按照下列步驟操作：
-   1. 從 Cloud Storage bucket 選取檔案，或輸入 [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#gcs-uri)。
-      您無法在 Google Cloud 控制台中加入多個 URI，但支援[萬用字元](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#load-wildcards)。Cloud Storage bucket 必須與包含要建立、附加或覆寫資料表的資料集位於相同位置。
-   2. 在「檔案格式」中選取「ORC」。
-**注意：**附加或覆寫表格時，可以修改表格的結構定義。如要進一步瞭解載入作業期間支援的結構定義變更，請參閱「[修改表格結構定義](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas?hl=zh-tw)」。2. 在「目的地」部分，指定下列詳細資料：
-   1. 在「Dataset」(資料集) 部分，選取要建立資料表的資料集。
+1. 在「Source」(來源) 部分，從「Create table from」(建立資料表來源) 清單中選取「Google Cloud Storage」。接著，按照下列步驟操作：
+   1. 從 Cloud Storage bucket 選取檔案，或輸入 [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#gcs-uri)。您無法在 Google Cloud 控制台中加入多個 URI，但可以使用[萬用字元](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#load-wildcards)。Cloud Storage bucket 必須與資料集位於相同位置，且該資料集包含您要建立、附加或覆寫的資料表。
+   2. 在「File format」(檔案格式) 選取「ORC」。
+**注意：**附加或覆寫資料表時，可以修改資料表的結構定義。如要進一步瞭解載入作業期間支援的結構定義變更，請參閱「[修改資料表結構定義](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas?hl=zh-tw)」。2. 在「Destination」(目的地) 部分，指定下列詳細資料：
+   1. 在「Dataset」(資料集) 部分，選取要在其中建立資料表的資料集。
    2. 在「Table」(資料表) 欄位中，輸入要建立的資料表名稱。
-   3. 確認「資料表類型」欄位已設為「原生資料表」。
-3. 在「Schema」(結構定義) 區段中，無需採取任何行動。結構定義會在 ORC 檔案中自行說明。
-**注意：**附加或覆寫表格時，可以修改表格的結構定義。如要進一步瞭解載入作業期間支援的結構定義變更，請參閱「[修改表格結構定義](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas?hl=zh-tw)」。4. 選用：指定「分區與叢集設定」。詳情請參閱「[建立分區資料表](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables?hl=zh-tw)」和「[建立及使用叢集資料表](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables?hl=zh-tw)」。您無法透過附加或覆寫資料表，將資料表轉換為已分區或分群資料表。 Google Cloud 控制台不支援在載入工作中，附加至或覆寫已分割或叢集化的資料表。
+   3. 確認「資料表類型」欄位設為「原生資料表」。
+3. 在「Schema」(結構定義) 區段中，無需採取任何行動。結構定義在 ORC 檔案中會自行描述。
+**注意：**附加或覆寫資料表時，可以修改資料表的結構定義。如要進一步瞭解載入作業期間支援的結構定義變更，請參閱「[修改資料表結構定義](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas?hl=zh-tw)」。4. 選用：指定**分區和叢集設定**。詳情請參閱「[建立分區資料表](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables?hl=zh-tw)」和「[建立及使用分群資料表](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables?hl=zh-tw)」。您無法透過附加或覆寫資料表，將資料表轉換為分區或分群資料表。 Google Cloud 控制台不支援在載入工作中附加或覆寫分區或分群資料表。
 5. 按一下「進階選項」，然後執行下列操作：
-   * 在「寫入偏好設定」部分，選擇「附加到資料表」或「覆寫資料表」。
-   * 如要忽略資料列中不屬於資料表結構定義的值，請選取「Unknown values」(不明的值)。
-   * 如要**加密**，請點選「客戶管理的金鑰」，使用 [Cloud Key Management Service 金鑰](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw)。如果保留 **Google-managed key** 設定，BigQuery 會[加密靜態資料](https://docs.cloud.google.com/docs/security/encryption/default-encryption?hl=zh-tw)。
+   * 在「Write preference」(寫入偏好設定) 部分，選擇「Append to table」(附加至資料表) 或「Overwrite table」(覆寫資料表)。
+   * 如要忽略資料列中未出現在資料表結構定義的值，請選取「Unknown values」(不明的值)。
+   * 在「Encryption」(加密) 部分，按一下「Customer-managed key」(客戶自行管理的金鑰)，即可使用 [Cloud Key Management Service 金鑰](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw)。如果保留 **Google-managed key** 設定，BigQuery 會[加密靜態資料](https://docs.cloud.google.com/docs/security/encryption/default-encryption?hl=zh-tw)。
 6. 點選「建立資料表」。
 
 ### SQL
 
-使用 [`LOAD DATA` DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements?hl=zh-tw)。以下範例會將 ORC 檔案附加至 `mytable` 資料表：
+使用 [`LOAD DATA` DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements?hl=zh-tw)。以下範例會將 ORC 檔案附加至資料表 `mytable`：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -675,21 +665,21 @@ end
      format = 'ORC',
      uris = ['gs://bucket/path/file.orc']);
    ```
-3. 按一下「執行」play\_circle。
+3. 按一下「play\_circle 執行」。
 
 如要進一步瞭解如何執行查詢，請參閱「[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)」。
 
 ### bq
 
-如要覆寫資料表，請輸入 `bq load` 指令並加上 `--replace` 旗標。如要附加資料至資料表，使用 `--noreplace` 旗標。若未指定任何旗標，預設動作為附加資料。提供 `--source_format` 旗標，並將其設為 `ORC`。由於系統會從自述式來源資料自動擷取 ORC 結構定義，因此您不需要提供結構定義。
+如要覆寫資料表，請輸入 `bq load` 指令並加上 `--replace` 旗標。如要附加資料至資料表，使用 `--noreplace` 旗標。若未指定任何旗標，預設動作為附加資料。提供 `--source_format` 旗標，並將其設為 `ORC`。由於 ORC 結構定義會自動從自我描述來源資料中擷取，因此您不需要提供結構定義定義。
 
-**注意：**您可以在對資料表進行附加或覆寫作業時修改資料表的結構定義。如要進一步瞭解載入作業期間支援的結構定義變更，請參閱「[修改資料表結構定義](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas?hl=zh-tw)」一文。
+**注意：**您可以在對資料表進行附加或覆寫作業時修改資料表的結構定義。如要進一步瞭解載入作業期間支援的結構定義變更，請參閱「[修改資料表結構定義](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas?hl=zh-tw)」。
 
 (選用) 提供 `--location` 旗標，並將值設為您的[位置](https://docs.cloud.google.com/bigquery/docs/dataset-locations?hl=zh-tw)。
 
 其他選用標記包括：
 
-* `--destination_kms_key`：用於加密表格資料的 Cloud KMS 金鑰。
+* `--destination_kms_key`：用於加密資料表資料的 Cloud KMS 金鑰。
 
 ```
 bq --location=location load \
@@ -706,7 +696,7 @@ path_to_source
 * format為 `ORC`。
 * dataset 是現有資料集。
 * table 是您正在載入資料的資料表名稱。
-* path\_to\_source 是完整的 [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#gcs-uri)，或是以半形逗號分隔的 URI 清單。您也可以使用[萬用字元](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#load-wildcards)。
+* path\_to\_source 是完整的 [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#gcs-uri)，或以半形逗號分隔的 URI 清單。您也可以使用[萬用字元](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#load-wildcards)。
 
 範例：
 
@@ -730,19 +720,19 @@ path_to_source
     gs://mybucket/mydata.orc
 ```
 
-如要瞭解如何使用 bq 指令列工具附加及覆寫已分割資料表的資料，請參閱「[附加至及覆寫已分割資料表資料](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-table-data?hl=zh-tw#append-overwrite)」。
+如要瞭解如何使用 bq 指令列工具附加及覆寫分區資料表，請參閱「[附加及覆寫分區資料表資料](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-table-data?hl=zh-tw#append-overwrite)」。
 
 ### API
 
 1. 建立指向 Cloud Storage 中來源資料的 `load` 工作。
-2. (選用) 在[工作資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs?hl=zh-tw)的 `jobReference` 部分，於 `location` 屬性中指定[位置](https://docs.cloud.google.com/bigquery/docs/dataset-locations?hl=zh-tw)。
+2. (選用) 在[工作資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs?hl=zh-tw)的 `jobReference` 區段中，於 `location` 屬性指定[位置](https://docs.cloud.google.com/bigquery/docs/dataset-locations?hl=zh-tw)。
 3. `source URIs` 屬性必須是完整的，且必須符合下列格式：`gs://bucket/object`。您可以使用逗號分隔清單的形式加入多個 URI。請注意，系統也支援使用[萬用字元](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#load-wildcards)。
 4. 藉由將 `configuration.load.sourceFormat` 屬性設為 `ORC`，以指定資料格式。
 5. 藉由將 `configuration.load.writeDisposition` 屬性設為 `WRITE_TRUNCATE` 或 `WRITE_APPEND`，以指定寫入偏好設定。
 
 ### C#
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 C# 設定說明操作。詳情請參閱 [BigQuery C# API 參考文件](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 C# 設定操作說明進行操作。詳情請參閱 [BigQuery C# API 參考文件](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -788,7 +778,7 @@ public class BigQueryLoadTableGcsOrcTruncate
 
 ### Go
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Go 設定說明操作。詳情請參閱 [BigQuery Go API 參考文件](https://godoc.org/cloud.google.com/go/bigquery)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Go 設定操作說明進行操作。詳情請參閱 [BigQuery Go API 參考文件](https://godoc.org/cloud.google.com/go/bigquery)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -894,11 +884,6 @@ public class LoadOrcFromGcsTruncate {
 
 ### Node.js
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定操作說明進行操作。詳情請參閱 [BigQuery Node.js API 參考文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
-
-```
-// Import the Google Cloud client libraries
-const {
-```

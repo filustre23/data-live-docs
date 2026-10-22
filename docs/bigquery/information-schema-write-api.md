@@ -246,4 +246,4 @@ ORDER BY
   day, project_id, dataset_id DESC;
 ```
 
-**注意：** `INFORMATION_SCH`
+**注意：** `INF`

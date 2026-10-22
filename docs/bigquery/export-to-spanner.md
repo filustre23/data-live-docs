@@ -16,9 +16,9 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 將資料匯出至 Spanner (反向 ETL)
 
-本文說明如何設定從 BigQuery 到 Spanner 的反向擷取、轉換和載入 (反向 ETL) 工作流程。方法是使用 [`EXPORT DATA` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements?hl=zh-tw)，將 BigQuery 資料來源 (包括 [Iceberg 資料表](https://docs.cloud.google.com/bigquery/docs/iceberg-tables?hl=zh-tw)) 的資料匯出至 [Spanner](https://docs.cloud.google.com/spanner/docs/overview?hl=zh-tw) 資料表。
+從 BigQuery 到 Spanner 的反向擷取、轉換和載入 (反向 ETL) 工作流程，可讓您結合 BigQuery 的分析功能，以及 Spanner 的低延遲和高處理量。您可以將資料提供給應用程式使用者，同時避免耗盡 BigQuery 的配額和限制。
 
-這項反向 ETL 工作流程結合了 BigQuery 的分析功能，以及 Spanner 的低延遲時間和高處理量。這個工作流程可讓您將資料提供給應用程式使用者，同時避免耗盡 BigQuery 的配額和限制。
+如要設定這項工作流程，請使用 [`EXPORT DATA` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements?hl=zh-tw)，將 BigQuery 資料來源 (包括 [Iceberg 資料表](https://docs.cloud.google.com/bigquery/docs/iceberg-tables?hl=zh-tw)) 的資料匯出至 [Spanner](https://docs.cloud.google.com/spanner/docs/overview?hl=zh-tw) 資料表。
 
 ## 事前準備
 
@@ -561,11 +561,11 @@ AS SELECT * FROM my_bq_dataset.table1;
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-20 (世界標準時間)。
+上次更新時間：2026-10-21 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-20 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-21 (世界標準時間)。"],[],[]]

@@ -229,5 +229,5 @@ WITH TitlesAndScores AS (
   WHERE score IS NOT NULL AND title IS NOT NULL
   GROUP BY date)
 SELECT date,
-  ARRAY(SELECT AS STRUCT title,
+  ARRAY(SELECT AS STRUCT title, score
 ```

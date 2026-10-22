@@ -412,5 +412,6 @@ The following example detects anomalies using a k-means model and a
 SELECT
   *
 FROM
-  ML.DETECT_ANOMALIES(MODEL
+  ML.DETECT_ANOMALIES(MODEL `mydataset.my_kmeans_model`,
+    STRUCT(0.2 AS
 ```

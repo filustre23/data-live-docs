@@ -16,9 +16,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 從 Cloud Storage 載入 JSON 資料
 
-您可以將 Cloud Storage 中以換行符號分隔的 JSON (ndJSON) 資料載入新的資料表或分區，也可以附加或覆寫現有的資料表或分區。資料載入 BigQuery 時，會轉換為 [Capacitor](https://cloud.google.com/blog/products/bigquery/inside-capacitor-bigquerys-next-generation-columnar-storage-format?hl=zh-tw) (BigQuery 的儲存格式) 的欄式格式。
-
-ndJSON 格式與 [JSON Lines](http://jsonlines.org/) 格式相同。
+BigQuery 可讓您將 Cloud Storage 中以換行符號分隔的 JSON (ndJSON) 資料載入新的資料表或分區，或附加至現有資料表或分區，或覆寫現有資料表或分區。在擷取期間，BigQuery 會將資料轉換為 [Capacitor](https://cloud.google.com/blog/products/bigquery/inside-capacitor-bigquerys-next-generation-columnar-storage-format?hl=zh-tw) (BigQuery 的儲存格式) 的欄式格式，以便查詢和分析。ndJSON 格式與 [JSON Lines](http://jsonlines.org/) 格式相同。
 
 ## 限制
 
@@ -982,5 +980,5 @@ func importJSONTruncate(projectID, datasetID, tableID string) error {
 	gcsRef.SourceFormat = bigquery.JSON
 	gcsRef.AutoDetect = true
 	loader := client.Dataset(datasetID).Table(tableID).LoaderFrom(gcsRef)
-	loader
+	loader<
 ```

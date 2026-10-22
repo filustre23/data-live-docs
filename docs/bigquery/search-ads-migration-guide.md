@@ -139,5 +139,5 @@ WHERE
 GROUP BY
   1, 2, 3
 ORDER BY
-  Impressions
+  Impres
 ```

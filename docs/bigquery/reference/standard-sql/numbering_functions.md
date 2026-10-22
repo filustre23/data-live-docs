@@ -220,7 +220,5 @@ To learn more about the `OVER` clause and how to use it, see
 **Example**
 
 ```
-WITH finishers AS
- (SELECT 'Sophia Liu' as name,
-  TIMESTAMP
+WITH finishers
 ```

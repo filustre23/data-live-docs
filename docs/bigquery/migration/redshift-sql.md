@@ -180,4 +180,4 @@ Amazon Redshift [`ORDER BY`](https://docs.amazonaws.cn/en_us/redshift/latest/dg/
 | `APPROXIMATE PERCENTILE_DISC(   percentile   ) WITHIN GROUP (ORDER BY expression)` | `APPROX_QUANTILES(expression, 100)  [OFFSET(CAST(TRUNC(percentile * 100) as INT64))]` |
 | `AVG([DISTINCT] expression)` | `AVG([DISTINCT] expression)` |
 | `COUNT(expression)` | `COUNT(expression)` |
-| `LISTAGG(` |
+| `LISTAG` |

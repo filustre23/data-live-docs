@@ -488,4 +488,4 @@ Search Ads 360 API 資源：[ad\_group\_ad](https://developers.google.com/search
 | ad\_group\_ad\_ad\_final\_urls | 廣告完成所有跨網域重新導向後，可能連到的最終到達網址清單。 |
 | ad\_group\_ad\_ad\_id | 廣告的 ID。 |
 | ad\_group\_ad\_ad\_name | 廣告的名稱。這項資訊僅用於識別廣告。這個值不必是專屬值，也不會影響放送的廣告。名稱欄位僅支援 DisplayUploadAd、ImageAd、ShoppingComparisonListingAd 和 VideoAd。 |
-| ad\_group\_ad\_ad\_text\_ad\_description1 |
+| ad\_group\_ad\_ad\_text\_ad\_description1 | 廣告內容描述的第一行 |

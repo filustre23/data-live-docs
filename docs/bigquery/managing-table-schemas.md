@@ -1032,5 +1032,5 @@ func createTableAndWidenQuery(projectID, datasetID, tableID string) error {
 	// Our table has two columns.  We'll introduce a new favorite_color column via
 	// a subsequent query that appends to the table.
 	q := client.Query("SELECT \"Timmy\" as full_name, 85 as age, \"Blue\" as favorite_color")
-	q.SchemaUpdateOptions = []string{
+	q.SchemaUpdateOptions = []string{"ALLOW_FIELD_ADDITION"
 ```

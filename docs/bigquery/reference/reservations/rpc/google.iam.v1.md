@@ -229,7 +229,4 @@ Request message for `TestIamPermissions` method.
 
 ## TestIamPermissionsResponse
 
-Response message for `TestIamPermissions` method.
-
-| Fields | |
-| --- | --- |
+Response message

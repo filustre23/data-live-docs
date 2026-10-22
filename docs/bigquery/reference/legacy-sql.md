@@ -275,5 +275,4 @@ LIMIT 10;
 ```
 #legacySQL
 SELECT
-  mother_ag
 ```
