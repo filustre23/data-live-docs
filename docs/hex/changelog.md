@@ -1,9 +1,9 @@
-September 29, 2026
+October 22, 2026
 
-### See how your team uses the agent
+### Pull agent usage data and import Ossie models
 
-Understand agent activity by workflow in Context Studio and make faster targeted Generative App chart edits.
+Admins can pull agent usage and credit spend data through the API, MCP server, or CLI, and convert Apache Ossie models into Hex semantic projects.
 
-🗂️ Agent activity classifications
+📊 Access usage and credit grants data
 
-⚡ Fast chart edits in Generative Apps
+⬆️ Import Apache Ossie models

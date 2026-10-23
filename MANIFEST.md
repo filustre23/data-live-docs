@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-10-22T16:26+00:00_
+_Generated 2026-10-23T02:53+00:00_
 
-**9 sources, 4741 topics total**
+**9 sources, 4746 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_809 topics_
+_813 topics_
 
 - `anthropic-sdk/about-claude/additional-resources`
 - `anthropic-sdk/about-claude/api-credits-for-subscribers`
@@ -414,6 +414,7 @@ _809 topics_
 - `anthropic-sdk/api/beta/vaults/update`
 - `anthropic-sdk/api/beta/webhooks`
 - `anthropic-sdk/api/claude-code/routines-fire`
+- `anthropic-sdk/api/claude-models-on-google-cloud-anthropic-managed-iam-permissions`
 - `anthropic-sdk/api/claude-platform-on-aws-iam-actions`
 - `anthropic-sdk/api/completions`
 - `anthropic-sdk/api/completions/create`
@@ -609,6 +610,9 @@ _809 topics_
 - `anthropic-sdk/build-with-claude/citations`
 - `anthropic-sdk/build-with-claude/claude-in-amazon-bedrock`
 - `anthropic-sdk/build-with-claude/claude-in-microsoft-foundry`
+- `anthropic-sdk/build-with-claude/claude-models-on-google-cloud/anthropic-managed`
+- `anthropic-sdk/build-with-claude/claude-models-on-google-cloud/google-managed`
+- `anthropic-sdk/build-with-claude/claude-models-on-google-cloud/overview`
 - `anthropic-sdk/build-with-claude/claude-on-amazon-bedrock-legacy`
 - `anthropic-sdk/build-with-claude/claude-on-vertex-ai`
 - `anthropic-sdk/build-with-claude/claude-platform-on-aws`
@@ -3913,7 +3917,7 @@ _156 topics_
 
 Upstream: <https://learn.hex.tech/>
 
-_390 topics_
+_391 topics_
 
 - `hex/changelog`
 - `hex/changelog/2020-12-17`
@@ -4034,6 +4038,7 @@ _390 topics_
 - `hex/changelog/2026-09-15`
 - `hex/changelog/2026-09-22`
 - `hex/changelog/2026-09-29`
+- `hex/changelog/2026-10-22`
 - `hex/changelog/archive`
 - `hex/changelog/page/10`
 - `hex/changelog/page/11`

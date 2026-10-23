@@ -31,6 +31,7 @@
 * [September 15 - Publish eval suites, skip approvals, and build Hex projects from your chat agent](/changelog/2026-09-15)
 * [September 23 - Explore and share insights from Generative Apps](/changelog/2026-09-22)
 * [September 29 - See how your team uses the agent](/changelog/2026-09-29)
+* [October 22 - Pull agent usage data and import Ossie models](/changelog/2026-10-22)
 
 ### 2025[​](#2025 "Direct link to 2025")
 

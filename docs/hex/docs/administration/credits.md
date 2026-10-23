@@ -134,6 +134,8 @@ Admins can view workspace-wide credit usage from **Settings > Credits**
 
 **[Context Studio](/docs/agent-management/context-studio):** Admins and Managers can view total credit consumption for individual Threads
 
+**[API](/docs/api-integrations/api/overview#get-total-credits-charged-per-user):** Admins on Enterprise plans can programmatically pull credit usage and purchase event logs via the [`ListAgentUsage`](/docs/api-integrations/api/reference#operation/ListAgentUsage) and [`ListCreditGrants`](/docs/api-integrations/api/reference#operation/ListCreditGrants) endpoints.
+
 ## FAQs[​](#faqs "Direct link to FAQs")
 
 ### What happens when I run out of credits?[​](#what-happens-when-i-run-out-of-credits "Direct link to What happens when I run out of credits?")

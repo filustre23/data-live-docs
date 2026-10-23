@@ -140,7 +140,7 @@ The provided GitHub Action workflow is configured to trigger differently based o
 
 View the import results in the Actions tab in the GitHub repository. Click into your workflow run and navigate to the “Ingest Semantic Model" section.
 
-[](/assets/medias/sm-github-actions-2d2c0dba40305ae67b2dd6d7b1dd2353.mp4)
+[](/assets/medias/sm-github-actions-1ad5fa02edfcd2ab6d61fd5953c2170a.mp4)
 
 **Running the GitHub action when semantic model files change**
 
