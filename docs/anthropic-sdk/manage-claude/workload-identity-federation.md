@@ -188,6 +188,35 @@ You can construct the client with explicit credentials or with no arguments. Wit
   }
   ```
 
+  ```csharp C#
+  using Anthropic.Credentials;
+  // ...
+
+  var credentials = new WorkloadIdentityCredentials(new WorkloadIdentityOptions
+  {
+      FederationRuleId = "fdrl_...",
+      OrganizationId = "00000000-0000-0000-0000-000000000000",
+      ServiceAccountId = "svac_...",
+      WorkspaceId = "wrkspc_...",
+      IdentityTokenProvider = new FileIdentityTokenProvider("/var/run/secrets/anthropic.com/token"),
+  });
+  using var client = new AnthropicClient(new ClientOptions { Credentials = credentials });
+
+  var message = await client.Messages.Create(new()
+  {
+      Model = Model.ClaudeOpus5_5,
+      MaxTokens = 1024,
+      Messages = [new UserMessageParam { Content = "Hello, Claude" }],
+  });
+  foreach (var block in message.Content)
+  {
+      if (block.Value is TextBlock textBlock)
+      {
+          Console.WriteLine(textBlock.Text);
+      }
+  }
+  ```
+
   ```go Go
   client := anthropic.NewClient(
   	option.WithFederationTokenProvider(
@@ -232,58 +261,29 @@ You can construct the client with explicit credentials or with no arguments. Wit
 
   void main() {
       AnthropicClient client = AnthropicOkHttpClient.builder()
-              .fromEnv()
-              .configurationProvider(InMemoryProfileConfigProvider.of(ProfileConfig.builder()
-                      .organizationId("00000000-0000-0000-0000-000000000000")
-                      .workspaceId("wrkspc_...")
-                      .authentication(AuthenticationConfig.builder()
-                              .type(AuthenticationType.OIDC_FEDERATION)
-                              .federationRuleId("fdrl_...")
-                              .serviceAccountId("svac_...")
-                              .identityToken(IdentityTokenConfig.builder()
-                                      .source("file")
-                                      .path("/var/run/secrets/anthropic.com/token")
-                                      .build())
-                              .build())
-                      .build()))
-              .build();
+          .fromEnv()
+          .configurationProvider(InMemoryProfileConfigProvider.of(ProfileConfig.builder()
+              .organizationId("00000000-0000-0000-0000-000000000000")
+              .workspaceId("wrkspc_...")
+              .authentication(AuthenticationConfig.builder()
+                  .type(AuthenticationType.OIDC_FEDERATION)
+                  .federationRuleId("fdrl_...")
+                  .serviceAccountId("svac_...")
+                  .identityToken(IdentityTokenConfig.builder()
+                      .source("file")
+                      .path("/var/run/secrets/anthropic.com/token")
+                      .build())
+                  .build())
+              .build()))
+          .build();
 
       var message = client.messages().create(MessageCreateParams.builder()
-              .model(Model.CLAUDE_OPUS_5_5)
-              .maxTokens(1024)
-              .addUserMessage("Hello, Claude")
-              .build());
+          .model(Model.CLAUDE_OPUS_5_5)
+          .maxTokens(1024)
+          .addUserMessage("Hello, Claude")
+          .build());
 
       IO.println(message.content());
-  }
-  ```
-
-  ```csharp C#
-  using Anthropic.Credentials;
-  // ...
-
-  var credentials = new WorkloadIdentityCredentials(new WorkloadIdentityOptions
-  {
-      FederationRuleId = "fdrl_...",
-      OrganizationId = "00000000-0000-0000-0000-000000000000",
-      ServiceAccountId = "svac_...",
-      WorkspaceId = "wrkspc_...",
-      IdentityTokenProvider = new FileIdentityTokenProvider("/var/run/secrets/anthropic.com/token"),
-  });
-  using var client = new AnthropicClient(new ClientOptions { Credentials = credentials });
-
-  var message = await client.Messages.Create(new()
-  {
-      Model = Model.ClaudeOpus5_5,
-      MaxTokens = 1024,
-      Messages = [new UserMessageParam { Content = "Hello, Claude" }],
-  });
-  foreach (var block in message.Content)
-  {
-      if (block.Value is TextBlock textBlock)
-      {
-          Console.WriteLine(textBlock.Text);
-      }
   }
   ```
 
@@ -371,7 +371,7 @@ The SDK caches the token and refreshes it on a two-tier schedule modeled on `bot
 
 Because the SDK re-reads `ANTHROPIC_IDENTITY_TOKEN_FILE` on every exchange, it transparently picks up rotated projected tokens (Kubernetes service-account tokens, for example, rotate well before their `exp`).
 
-By default, identity tokens that carry a `jti` claim are single-use: each exchange must present a JWT that has not been exchanged before, and re-presenting one fails with the reason `jti_reused` on the [authentication history page](https://platform.claude.com/settings/workload-identity-federation?tab=history) in the Claude Console. If your workload fetches its own tokens from your identity provider, mint a fresh JWT for each exchange instead of reusing a cached one (retry loops are the usual cause of reuse). The same applies to a token read from `ANTHROPIC_IDENTITY_TOKEN_FILE`: the SDK re-reads the file on every exchange, so the file must hold a new token before each refresh. A refresh that re-reads an unrotated token, or a restarted process that re-presents a token it already exchanged, is rejected the same way. Rotating the token well within the minted token's lifetime keeps the file ahead of the refresh schedule; if your token source cannot rotate that often, you can disable `check_jti` for that issuer as a last resort (this removes replay protection for every rule on the issuer). See [JWT verification](https://platform.claude.com/docs/en/manage-claude/wif-reference#jwt-verification) for details.
+By default, identity tokens that carry a `jti` claim are single-use: each exchange must present a JWT that has not been exchanged before, and re-presenting one fails with the reason `jti_reused` on the [authentication history page](https://platform.claude.com/settings/workload-identity-federation?tab=history) in the Claude Console. If your workload fetches its own tokens from your identity provider, mint a fresh JWT for each exchange instead of reusing a cached one (retry loops are the usual cause of reuse). The same applies to a token read from `ANTHROPIC_IDENTITY_TOKEN_FILE`: the SDK re-reads the file on every exchange, so the file must hold a new token before each refresh. A refresh that re-reads an unrotated token, or a restarted process that re-presents a token it already exchanged, is rejected the same way. Rotating the token well within the minted token's lifetime keeps the file ahead of the refresh schedule. If your token source cannot rotate that often, you can disable `check_jti` for that issuer as a last resort. This removes replay protection for every rule on the issuer. See [JWT verification](https://platform.claude.com/docs/en/manage-claude/wif-reference#jwt-verification) for details.
 
 ## Identity providers
 

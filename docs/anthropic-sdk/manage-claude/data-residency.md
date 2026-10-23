@@ -149,16 +149,16 @@ The `inference_geo` parameter controls where model inference runs for a specific
   AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
   Message response = client.messages().create(
-          MessageCreateParams.builder()
-                  .model(Model.CLAUDE_OPUS_5_5)
-                  .maxTokens(1024L)
-                  .inferenceGeo("us")
-                  .addUserMessage("Summarize the key points of this document.")
-                  .build());
+      MessageCreateParams.builder()
+          .model(Model.CLAUDE_OPUS_5_5)
+          .maxTokens(1024L)
+          .inferenceGeo("us")
+          .addUserMessage("Summarize the key points of this document.")
+          .build());
 
   response.content().stream()
-          .flatMap(block -> block.text().stream())
-          .forEach(textBlock -> IO.println(textBlock.text()));
+      .flatMap(block -> block.text().stream())
+      .forEach(textBlock -> IO.println(textBlock.text()));
   // Check where inference actually ran
   IO.println("Inference geo: " + response.usage().inferenceGeo().get());
   ```
@@ -208,7 +208,7 @@ The `inference_geo` parameter controls where model inference runs for a specific
 
 The response `usage` object includes an `inference_geo` field indicating where inference ran:
 
-```text Output wrap
+```json Output
 {
   "usage": {
     "input_tokens": 25,

@@ -24,7 +24,7 @@ Whether Claude thinks on a given request, and how deeply, depends on your thinki
 
 Here is what up-front thinking looks like in a response: one or more `thinking` content blocks arrive before the `text` blocks. The thinking block is still generated content, like the `text` block that follows it, but it is separated from the canonical response. Each thinking block also carries a `signature` field, an encrypted copy of the full reasoning that you pass back unchanged in multi-turn and tool-use conversations (see [Thinking encryption](https://platform.claude.com/docs/en/build-with-claude/thinking#thinking-encryption)):
 
-```text
+```json
 {
   "content": [
     {
@@ -243,6 +243,7 @@ On Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6, thi
   ```
 
   ```php PHP
+  use Anthropic\Messages\Model;
   use Anthropic\Messages\TextBlock;
   use Anthropic\Messages\ThinkingBlock;
 
@@ -256,7 +257,7 @@ On Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6, thi
               'content' => 'What is the greatest common divisor of 1071 and 462?'
           ]
       ],
-      model: 'claude-opus-5-5',
+      model: Model::CLAUDE_OPUS_5_5,
       thinking: ['type' => 'adaptive', 'display' => 'summarized'],
   );
 
@@ -433,7 +434,7 @@ On Claude Sonnet 5, where thinking is on by default, you can turn it off:
               'content' => 'Summarize this article in one sentence.'
           ]
       ],
-      model: 'claude-sonnet-5',
+      model: Model::CLAUDE_SONNET_5,
       thinking: ['type' => 'disabled'],
   );
   ```
@@ -481,7 +482,7 @@ Set `display: "omitted"` when your application doesn't surface thinking content 
 
 With `display: "omitted"`, the response contains `thinking` blocks with an empty `thinking` field:
 
-```text Output wrap
+```json Output
 {
   "content": [
     {
@@ -532,7 +533,7 @@ To see the model's reasoning, read the `thinking` blocks rather than prompting f
 Thinking works with [streaming](https://platform.claude.com/docs/en/build-with-claude/streaming). Thinking blocks stream as `thinking_delta` events inside `content_block_delta` events, followed by a single `signature_delta` event just before the block's `content_block_stop`. Text blocks stream afterward as usual.
 
 <Frame>
-  ![Streaming with thinking: thinking deltas (text only if the display setting returns it), a signature delta, then text deltas](https://platform.claude.com/docs/images/how-thinking-streams.svg)
+  ![Thinking stream: the block opens, deltas carry text only if display returns text, one signature delta closes it, then text](https://platform.claude.com/docs/images/how-thinking-streams.svg)
 </Frame>
 
 The following examples stream a response with adaptive thinking, printing thinking and text deltas as they arrive:
@@ -720,11 +721,11 @@ The following examples stream a response with adaptive thinking, printing thinki
                   }
                   case CONTENT_BLOCK_DELTA -> {
                       var deltaEvent = event.asContentBlockDelta();
-                      deltaEvent.delta().thinking().ifPresent(td ->
-                          IO.print(td.thinking())
+                      deltaEvent.delta().thinking().ifPresent(thinkingDelta ->
+                          IO.print(thinkingDelta.thinking())
                       );
-                      deltaEvent.delta().text().ifPresent(td ->
-                          IO.print(td.text())
+                      deltaEvent.delta().text().ifPresent(textDelta ->
+                          IO.print(textDelta.text())
                       );
                   }
               }
@@ -734,6 +735,7 @@ The following examples stream a response with adaptive thinking, printing thinki
   ```
 
   ```php PHP
+  use Anthropic\Messages\Model;
   use Anthropic\Messages\RawContentBlockDeltaEvent;
   use Anthropic\Messages\RawContentBlockStartEvent;
   use Anthropic\Messages\TextDelta;
@@ -746,7 +748,7 @@ The following examples stream a response with adaptive thinking, printing thinki
       messages: [
           ['role' => 'user', 'content' => 'What is the greatest common divisor of 1071 and 462?']
       ],
-      model: 'claude-opus-5-5',
+      model: Model::CLAUDE_OPUS_5_5,
       thinking: ['type' => 'adaptive', 'display' => 'summarized'],
   );
 
@@ -798,7 +800,7 @@ The following examples stream a response with adaptive thinking, printing thinki
 To reassemble complete thinking blocks with their signatures after streaming, use your SDK's message-accumulation helper, `stream.get_final_message()` (typescript: `stream.finalMessage()`; ruby: `stream.accumulated_message`; csharp: `.Aggregate()`; go: `message.Accumulate(event)`; java, php: `MessageAccumulator`), instead of concatenating deltas yourself.
 
 <Accordion title="Full streaming event trace">
-  ```text Output
+  ```sse Output
   event: message_start
   data: {"type": "message_start", "message": {"id": "msg_01...", "type": "message", "role": "assistant", "content": [], "model": "claude-opus-5-5", "stop_reason": null, "stop_sequence": null}}
 
@@ -840,7 +842,7 @@ To reassemble complete thinking blocks with their signatures after streaming, us
 
 When `display: "omitted"` is set, the thinking block opens, a `thinking_delta` with an empty `thinking` string arrives, a single `signature_delta` follows, and the block closes. Text streaming starts immediately after:
 
-```text Output
+```sse Output
 event: content_block_start
 data: {"type":"content_block_start","index":0,"content_block":{"type":"thinking","thinking":"","signature":""}}
 
@@ -859,7 +861,7 @@ data: {"type":"content_block_start","index":1,"content_block":{"type":"text","te
 
 With `display: "updates"` (beta), reasoning blocks stream as they do under `"omitted"`. Each [progress-update block](https://platform.claude.com/docs/en/build-with-claude/thinking#progress-updates) streams its text as `thinking_delta` events before the `tool_use` block it introduces. A pause of several seconds before the progress-update block opens is normal:
 
-```text Output
+```sse Output
 event: content_block_start
 data: {"type":"content_block_start","index":1,"content_block":{"type":"thinking","thinking":"","signature":""}}
 
@@ -906,7 +908,7 @@ Thinking works alongside [tool use](https://platform.claude.com/docs/en/agents-a
 1. **Tool choice limitation (manual mode):** tool use with manual extended thinking (`thinking: {type: "enabled"}`) only supports `tool_choice: {"type": "auto"}` (the default) or `tool_choice: {"type": "none"}`. Using `tool_choice: {"type": "any"}` or `tool_choice: {"type": "tool", "name": "..."}` results in an error because these options force tool use, which is incompatible with manual extended thinking. Adaptive thinking, including on models where thinking is on by default, supports forced tool use, except on Claude Opus 5.5, Claude Sonnet 5.5, Claude Fable 5.1, and Claude Mythos 5.1 (see [Response prefill and forced tool use](https://platform.claude.com/docs/en/build-with-claude/thinking#limits-and-feature-compatibility)). Where forced tool use is accepted, the response starts with the tool call and has no `thinking` block.
 2. **Preserving thinking blocks:** when you return tool results, you must pass the thinking blocks from the assistant message back to the API, complete and unmodified. See [Preserving thinking blocks](https://platform.claude.com/docs/en/build-with-claude/thinking#preserving-thinking-blocks).
 
-**A tool-use loop is one assistant turn.** From the model's perspective, an assistant turn doesn't complete until Claude finishes its full response, which might include multiple tool calls and results. This whole sequence is a single assistant turn:
+**A tool-use loop is one assistant turn.** From the model's perspective, an assistant turn ends only when Claude completes its full response, which might include multiple tool calls and results. This whole sequence is a single assistant turn:
 
 ```text wrap
 User: "What's the weather in Paris?"
@@ -1019,7 +1021,7 @@ Use `display: "updates"` for an agent interface that keeps reasoning hidden and 
 
 Under `"updates"`, the start of the response that follows a `tool_result` looks like this. The first block is reasoning and stays empty, as it would under `"omitted"`. The second carries text, so it's a progress update. Under `"summarized"` both blocks carry text, and under `"omitted"` both are empty.
 
-```text Output
+```json Output
 {
   "content": [
     {
@@ -1166,7 +1168,7 @@ Keep the following in mind when working with signatures:
 
 In addition to regular `thinking` blocks, the API might return `redacted_thinking` blocks when portions of Claude's reasoning are safety-redacted. A `redacted_thinking` block contains encrypted thinking content in a `data` field, with no readable text:
 
-```text wrap
+```json
 {
   "type": "redacted_thinking",
   "data": "..."

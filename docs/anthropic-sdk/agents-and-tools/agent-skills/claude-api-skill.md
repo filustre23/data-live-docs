@@ -36,7 +36,7 @@ When triggered, the skill equips Claude with:
 * **Onboarding flow:** An interview-driven walkthrough for setting up a new Managed Agent, available through the `/claude-api managed-agents-onboard` subcommand
 * **Security guide check:** A read-only check of an agent's settings against [Secure your Managed Agents deployment](https://platform.claude.com/docs/en/managed-agents/secure-deployment), available through the `/claude-api managed-agents-secure` subcommand of the skill bundled with Claude Code
 * **Language-specific Managed Agents docs:** Creating persistent agents, starting sessions, streaming events, and handling tool confirmations for Python, TypeScript, C#, Go, Java, PHP, Ruby, and cURL
-* **Client patterns:** Lossless stream reconnect, `processed_at` queued/processed gate, interrupt handling, file-mount gotchas, and credential handling
+* **Client patterns:** Lossless stream reconnect, `processed_at` queued/processed gate, interrupt handling, file-mount pitfalls, and credential handling
 * **Deployment constraints:** Which platforms support Managed Agents, and the Messages API with tool use as the alternative on platforms that don't
 
 ## When the skill activates
@@ -183,7 +183,7 @@ Let Claude Code set up your agent for you
 /claude-api managed-agents-onboard
 ```
 
-The skill runs an interview that walks you through the Managed Agents mental model (Agent configs versus Sessions), templates an agent config, configures environments and tools, sets up the session loop, and emits runnable code for your language. The skill also covers the mandatory **Agent (once) → Session (every run)** flow: `model`, `system`, and `tools` live on the agent, never on the session, and agents should be created once and referenced by ID.
+The skill runs an interview that walks you through the Managed Agents mental model (Agent configs versus Sessions), templates an agent config, configures environments and tools, sets up the session loop, and emits runnable code for your language. The skill also covers the mandatory **Agent (once) → Session (every run)** flow: `model`, `system`, and `tools` live on the agent, never on the session, and you create each agent once and reference it by ID.
 
 Managed Agents requires the `managed-agents-2026-04-01` beta header, which the SDK sets automatically for all `client.beta.agents.*`, `client.beta.environments.*`, `client.beta.sessions.*`, and `client.beta.vaults.*` calls.
 

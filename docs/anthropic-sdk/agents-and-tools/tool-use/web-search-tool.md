@@ -236,10 +236,10 @@ The following examples use `web_search_20260318`:
 ## How to use web search
 
 <Note>
-  Web search is enabled for your organization unless an administrator has disabled it in the [Claude Console](https://platform.claude.com/settings/capabilities), where they can also restrict which domains it searches. If it's disabled, a Messages API request that includes the tool fails with a 400 `invalid_request_error` that says web search is not enabled, rather than an [error code](https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-search-tool#errors) inside a search result. With web search off, `web_search` calls in a [Claude Managed Agents](https://platform.claude.com/docs/en/managed-agents/overview) session return an error result to the agent, and the session continues.
+  Web search is enabled for your organization unless an administrator has disabled it in the [Claude Console](https://platform.claude.com/settings/capabilities), where they can also restrict which domains it searches. If it's disabled, a Messages API request that includes the tool fails with a 400 `invalid_request_error` that says web search is not enabled, rather than an [error code](https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-search-tool#errors) inside a search result.
 </Note>
 
-Your organization's web search settings in the Claude Console apply to Messages API requests and to Managed Agents sessions. In a session, the agent receives only the search results that both the organization's domain restrictions and the agent's per-tool lists allow; see [Restrict web search and web fetch domains](https://platform.claude.com/docs/en/managed-agents/tools-web-restrictions). For a session in a cloud environment with `limited` networking, the environment's `allowed_hosts` also applies to `web_search` and `web_fetch`; see [Networking](https://platform.claude.com/docs/en/managed-agents/environments#networking). The per-tool lists restrict these tools further, within the hosts that `allowed_hosts` allows.
+For how your organization's web search settings apply in Claude Managed Agents sessions, see [Restrict web search and web fetch domains](https://platform.claude.com/docs/en/managed-agents/tools-web-restrictions).
 
 Provide the web search tool in your API request:
 
@@ -415,7 +415,7 @@ The web search tool supports the following parameters:
   "type": "web_search_20250305",
   "name": "web_search",
 
-  // Optional: Limit the number of searches per request
+  // Optional: Limit the number of searches for each request
   "max_uses": 5,
 
   // Optional: Only include results from these domains.
@@ -462,7 +462,7 @@ The `user_location` parameter allows you to localize search results based on a u
 * `country`: The two-letter [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code (the API rejects an unsupported code with a 400 error)
 * `timezone`: The [IANA time zone ID](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
 
-On Claude Managed Agents, the `web_search` entry of the agent toolset accepts a `user_location` object with the same fields. The API rejects an unsupported `country` code with a 400 error when you create or update the agent, or when you create or update a session that supplies the setting. See the [web tool settings](https://platform.claude.com/docs/en/managed-agents/tools-web-restrictions#settings).
+On Claude Managed Agents, the `web_search` entry of the agent toolset also accepts `user_location`; see the [web tool settings](https://platform.claude.com/docs/en/managed-agents/tools-web-restrictions#settings).
 
 ### Response inclusion
 
@@ -488,7 +488,7 @@ The `response_inclusion` parameter controls how search result blocks appear in t
 
 Here's an example response structure:
 
-```text Output
+```json Output
 {
   "role": "assistant",
   "content": [
@@ -583,7 +583,7 @@ The web search citation fields `cited_text`, `title`, and `url` do not count tow
 
 When the web search tool encounters an error (such as hitting rate limits), the Claude API still returns a 200 (success) response. The error is represented within the response body using the following structure:
 
-```text Output wrap
+```json Output
 {
   "type": "web_search_tool_result",
   "tool_use_id": "srvtoolu_a93jad",
@@ -621,7 +621,7 @@ To cache tool definitions across turns, see [Tool use with prompt caching](https
 
 With streaming enabled, you'll receive search events as part of the stream. There is a pause while the search runs:
 
-```text Output
+```sse Output
 event: message_start
 data: {"type": "message_start", "message": {"id": "msg_abc123", "type": "message"}}
 
@@ -656,7 +656,7 @@ To protect shared capacity, the Batches API throttles web search requests for ea
 
 Web search usage is charged in addition to token usage:
 
-```text wrap
+```json
 {
   "usage": {
     "input_tokens": 105,

@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-10-23T02:53+00:00_
+_Generated 2026-10-23T16:14+00:00_
 
-**9 sources, 4746 topics total**
+**9 sources, 4753 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_813 topics_
+_820 topics_
 
 - `anthropic-sdk/about-claude/additional-resources`
 - `anthropic-sdk/about-claude/api-credits-for-subscribers`
@@ -614,7 +614,6 @@ _813 topics_
 - `anthropic-sdk/build-with-claude/claude-models-on-google-cloud/google-managed`
 - `anthropic-sdk/build-with-claude/claude-models-on-google-cloud/overview`
 - `anthropic-sdk/build-with-claude/claude-on-amazon-bedrock-legacy`
-- `anthropic-sdk/build-with-claude/claude-on-vertex-ai`
 - `anthropic-sdk/build-with-claude/claude-platform-on-aws`
 - `anthropic-sdk/build-with-claude/compaction`
 - `anthropic-sdk/build-with-claude/compaction-background`
@@ -694,10 +693,18 @@ _813 topics_
 - `anthropic-sdk/manage-claude/authentication`
 - `anthropic-sdk/manage-claude/claude-code-analytics-api`
 - `anthropic-sdk/manage-claude/cmek`
+- `anthropic-sdk/manage-claude/cmek-admin-api`
 - `anthropic-sdk/manage-claude/cmek-aws-kms`
+- `anthropic-sdk/manage-claude/cmek-aws-kms-workspaces`
 - `anthropic-sdk/manage-claude/cmek-azure-key-vault`
 - `anthropic-sdk/manage-claude/cmek-claude-platform-on-aws`
+- `anthropic-sdk/manage-claude/cmek-coverage-claude-enterprise`
+- `anthropic-sdk/manage-claude/cmek-coverage-claude-platform`
+- `anthropic-sdk/manage-claude/cmek-data-retention`
 - `anthropic-sdk/manage-claude/cmek-google-cloud-kms`
+- `anthropic-sdk/manage-claude/cmek-how-it-works`
+- `anthropic-sdk/manage-claude/cmek-key-lifecycle`
+- `anthropic-sdk/manage-claude/cmek-troubleshooting`
 - `anthropic-sdk/manage-claude/compliance-activity-feed`
 - `anthropic-sdk/manage-claude/compliance-api`
 - `anthropic-sdk/manage-claude/compliance-api-access`

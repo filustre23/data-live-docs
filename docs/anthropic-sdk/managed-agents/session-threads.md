@@ -256,7 +256,7 @@ Optionally archive a session thread when it has completed its work. Archiving a 
   ```
 </CodeGroup>
 
-Archive only succeeds if the thread is `idle`. A thread parked on `requires_action` counts as idle and can be archived directly; only a running thread must be interrupted first:
+Archive only succeeds if the thread is `idle`. A thread parked on `requires_action` counts as idle, so you can archive it directly. To archive a running thread, interrupt it first:
 
 <CodeGroup>
   ```bash cURL
@@ -503,7 +503,9 @@ A thread's stream doesn't replay earlier events. Right after `session.thread_cre
       ```java Java
       try (var streamResponse = client.beta().sessions().threads().events().streamStreaming(
           thread.id(),
-          EventStreamParams.builder().sessionId(session.id()).build()
+          EventStreamParams.builder()
+              .sessionId(session.id())
+              .build()
       )) {
           loop:
           for (var event : (Iterable<BetaManagedAgentsStreamSessionThreadEvents>) streamResponse.stream()::iterator) {
@@ -614,8 +616,10 @@ A thread's stream doesn't replay earlier events. Right after `session.thread_cre
       ```java Java
       for (var event : client.beta().sessions().threads().events().list(
               thread.id(),
-              EventListParams.builder().sessionId(session.id()).build()
-          ).autoPager()) {
+              EventListParams.builder()
+                  .sessionId(session.id())
+                  .build()
+      ).autoPager()) {
           var type = event._json().orElseThrow() instanceof JsonObject json
               ? json.values().get("type").asStringOrThrow()
               : "unknown";
@@ -651,7 +655,7 @@ A thread's stream doesn't replay earlier events. Right after `session.thread_cre
 
 If a subagent needs something from your client, such as [permission](https://platform.claude.com/docs/en/managed-agents/events-and-streaming#tool-confirmation) to run a tool call or the [result of a custom tool](https://platform.claude.com/docs/en/managed-agents/events-and-streaming#handling-custom-tool-calls), the event is cross-posted to the **primary thread** with `session_thread_id` identifying the originating session thread. A tool call needs your permission under `always_ask`, or under [`auto`](https://platform.claude.com/docs/en/managed-agents/permission-policies#let-the-server-evaluate-each-call-with-auto) when the server reaches no determination.
 
-```text wrap
+```json
 {
   "type": "session.thread_status_idle",
   "id": "sevt_01ABC...",

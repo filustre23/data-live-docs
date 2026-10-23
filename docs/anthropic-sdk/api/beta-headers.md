@@ -114,11 +114,11 @@ The following example sends a request with the [context editing](https://platfor
   AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
   MessageCreateParams params = MessageCreateParams.builder()
-    .model(Model.CLAUDE_OPUS_5_5)
-    .maxTokens(1024)
-    .addUserMessage("Hello, Claude")
-    .addBeta(AnthropicBeta.CONTEXT_MANAGEMENT_2025_06_27)
-    .build();
+      .model(Model.CLAUDE_OPUS_5_5)
+      .maxTokens(1024)
+      .addUserMessage("Hello, Claude")
+      .addBeta(AnthropicBeta.CONTEXT_MANAGEMENT_2025_06_27)
+      .build();
 
   BetaMessage message = client.beta().messages().create(params);
   System.out.println(message.content());
@@ -130,7 +130,7 @@ The following example sends a request with the [context editing](https://platfor
   $message = $client->beta->messages->create(
       maxTokens: 1024,
       messages: [['role' => 'user', 'content' => 'Hello, Claude']],
-      model: 'claude-opus-5-5',
+      model: Model::CLAUDE_OPUS_5_5,
       betas: ['context-management-2025-06-27'],
   );
 
@@ -209,7 +209,7 @@ Beta feature names typically follow the pattern `feature-name-YYYY-MM-DD`, where
 
 If you use an invalid beta name, or a beta your organization doesn't have access to, you'll receive a `400` error response:
 
-```text Output
+```json Output
 {
   "type": "error",
   "error": {

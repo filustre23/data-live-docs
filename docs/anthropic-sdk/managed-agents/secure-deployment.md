@@ -155,7 +155,6 @@ The examples on this page use a support agent. It reads a customer's ticket, loo
   if err != nil {
   	panic(err)
   }
-  _ = environment
   ```
 
   ```java Java
@@ -212,7 +211,7 @@ The `allow_package_managers` (java, php: `allowPackageManagers`; csharp, go: `Al
 Leave `allow_mcp_servers` (java: `allowMcpServers`; php: `allowMCPServers`; csharp: `AllowMcpServers`; go: `AllowMCPServers`) off, which is the default, and list the host of each MCP server you operate or trust in `allowed_hosts` (java, php: `allowedHosts`; csharp, go: `AllowedHosts`). Each host you list is also open to code in the sandbox. With `allow_mcp_servers` (java: `allowMcpServers`; php: `allowMCPServers`; csharp: `AllowMcpServers`; go: `AllowMCPServers`) off, a check at session creation rejects the request if an MCP server's host is not listed. See [Provide authentication at session creation](https://platform.claude.com/docs/en/managed-agents/mcp-connector#provide-authentication-at-session-creation). The same check runs when a session update changes `mcp_servers` (java, php: `mcpServers`; csharp: `McpServers`; go: `MCPServers`).
 
 <Warning>
-  Network access is granted for each host, not for each operation. The sandbox can send any request to an allowed host, including uploads such as `git push` and package publishing. It can also use any credential the command supplies, even one that someone hid in text the agent reads.
+  Network access is granted by host, not by operation. The sandbox can send any request to an allowed host, including uploads such as `git push` and package publishing. It can also use any credential the command supplies, even one that someone hid in text the agent reads.
 </Warning>
 
 When you choose hosts for `allowed_hosts` (java, php: `allowedHosts`; csharp, go: `AllowedHosts`), follow these two rules:
@@ -254,6 +253,8 @@ See [Authenticate with vaults](https://platform.claude.com/docs/en/managed-agent
 Set `allowed_domains` (java, php: `allowedDomains`; csharp, go: `AllowedDomains`) on `web_fetch` to the sites the agent needs. Any URL the agent fetches can carry data to the site it points to, so this list is a security control. On `web_search`, set `allowed_domains` (java, php: `allowedDomains`; csharp, go: `AllowedDomains`) to the sites you want results from, so that results come only from sites you trust to be accurate. The list does not stop the search query from reaching the search provider. Search results include text from pages, so the list also limits which sites' text reaches the agent. Set `allowed_domains` (java, php: `allowedDomains`; csharp, go: `AllowedDomains`) on both tools for every type of environment.
 
 A `blocked_domains` (java, php: `blockedDomains`; csharp, go: `BlockedDomains`) list blocks the hosts you list and their subdomains, and no other host. The same content can still reach the agent from web archives, caches, mirrors, or related domains you did not list. Do not rely on `blocked_domains` (java, php: `blockedDomains`; csharp, go: `BlockedDomains`) for security. Use `allowed_domains` (java, php: `allowedDomains`; csharp, go: `AllowedDomains`) and name the hosts you trust.
+
+An administrator can turn off web search or web fetch, or restrict their domains, on the [**Capabilities**](https://platform.claude.com/settings/capabilities) page of the Claude Console. These settings also apply in a session. With a tool turned off, its calls return an error result to the agent, and the session continues. With domain restrictions set, a search result or a fetched URL must pass both the organization's restrictions and the tool's own domain lists. See [Restrict web search and web fetch domains](https://platform.claude.com/docs/en/managed-agents/tools-web-restrictions).
 
 In a `limited` environment, the `allowed_hosts` (java, php: `allowedHosts`; csharp, go: `AllowedHosts`) list from [Limit the network](https://platform.claude.com/docs/en/managed-agents/secure-deployment#limit-the-network) also limits the web tools. An `unrestricted` environment or a self-hosted sandbox does not limit the web tools.
 
@@ -611,7 +612,6 @@ The following sample limits `web_fetch` to `help.example.com` with `allowed_doma
   		},
   	},
   }}
-  _ = tools
   ```
 
   ```java Java

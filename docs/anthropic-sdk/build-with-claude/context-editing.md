@@ -871,7 +871,7 @@ Use thinking block clearing to manage context and prompt caching in conversation
       messages: [
           ['role' => 'user', 'content' => 'Hello']
       ],
-      model: 'claude-opus-5-5',
+      model: Model::CLAUDE_OPUS_5_5,
       betas: ['context-management-2025-06-27'],
       contextManagement: [
           'edits' => [
@@ -1093,7 +1093,7 @@ Keep thinking blocks from the last 3 assistant turns:
       messages: [
           ['role' => 'user', 'content' => 'Hello']
       ],
-      model: 'claude-opus-5-5',
+      model: Model::CLAUDE_OPUS_5_5,
       betas: ['context-management-2025-06-27'],
       contextManagement: [
           'edits' => [
@@ -1293,7 +1293,7 @@ Keep all thinking blocks (maximizes cache hits):
       messages: [
           ['role' => 'user', 'content' => 'Hello']
       ],
-      model: 'claude-opus-5-5',
+      model: Model::CLAUDE_OPUS_5_5,
       betas: ['context-management-2025-06-27'],
       contextManagement: [
           'edits' => [
@@ -1334,7 +1334,7 @@ Keep all thinking blocks (maximizes cache hits):
 You can use both thinking block clearing and tool result clearing together:
 
 <Note>
-  When using multiple strategies, the `clear_thinking_20251015` strategy must be listed first in the `edits` array.
+  When using multiple strategies, you must list the `clear_thinking_20251015` strategy first in the `edits` array.
 </Note>
 
 <CodeGroup>
@@ -1735,7 +1735,7 @@ You can use both thinking block clearing and tool result clearing together:
 
 You can see which context edits were applied to your request using the `context_management` response field, along with helpful statistics about the content and input tokens cleared.
 
-```text Output wrap
+```json Output
 {
   "id": "msg_013Zva2CMHLNnXjNJJKqJ2EF",
   "type": "message",
@@ -1767,7 +1767,7 @@ You can see which context edits were applied to your request using the `context_
 
 For streaming responses, the context edits are included in the final `message_delta` event:
 
-```text Streaming Response wrap
+```json Streaming Response
 {
   "type": "message_delta",
   "delta": {
@@ -2032,9 +2032,9 @@ The [token counting](https://platform.claude.com/docs/en/build-with-claude/token
       ],
   );
 
-  echo "Original tokens: " . $response->contextManagement->originalInputTokens . "\n";
-  echo "After clearing: " . $response->inputTokens . "\n";
-  echo "Savings: " . ($response->contextManagement->originalInputTokens - $response->inputTokens) . " tokens\n";
+  echo 'Original tokens: ' . $response->contextManagement->originalInputTokens . "\n";
+  echo 'After clearing: ' . $response->inputTokens . "\n";
+  echo 'Savings: ' . ($response->contextManagement->originalInputTokens - $response->inputTokens) . " tokens\n";
   ```
 
   ```ruby Ruby
@@ -2069,7 +2069,7 @@ The [token counting](https://platform.claude.com/docs/en/build-with-claude/token
   ```
 </CodeGroup>
 
-```text Output wrap
+```json Output
 {
   "input_tokens": 25000,
   "context_management": {
@@ -2258,7 +2258,7 @@ To use both features together, enable them in your API request:
       messages: [
           ['role' => 'user', 'content' => 'Hello']
       ],
-      model: 'claude-opus-5-5',
+      model: Model::CLAUDE_OPUS_5_5,
       betas: ['context-management-2025-06-27'],
       tools: [
           [
@@ -2798,7 +2798,7 @@ When using server-side tools, the SDK might incorrectly calculate token usage, c
 
 For example, after a web search operation, the API response might show:
 
-```text Output wrap
+```json Output
 {
   "usage": {
     "input_tokens": 63000,

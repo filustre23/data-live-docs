@@ -26,7 +26,7 @@ Claude Sonnet 5.5 has the same prices as Claude Sonnet 5, except for prompt cach
 
 ## Send a request to Claude Sonnet 5.5
 
-This request works on Claude Sonnet 5.5 as written. The example sets an effort level and, in the SDK, reads the reply by block type. It leaves out five settings that return a 400 error: [thinking budgets](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#sonnet-46-breaking-changes), [sampling parameters](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#sonnet-46-breaking-changes), [assistant prefill](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#migrating-from-sonnet-45), [forced tool choice](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#forced-tool-use), and [`thinking: {"type": "disabled"}`](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#turn-off-up-front-thinking).
+This request works on Claude Sonnet 5.5 as written. It sets an effort level, and the SDK example reads the reply by block type. It leaves out five settings that return a 400 error: [thinking budgets](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#sonnet-46-breaking-changes), [sampling parameters](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#sonnet-46-breaking-changes), [assistant prefill](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#migrating-from-sonnet-45), [forced tool choice](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#forced-tool-use), and [`thinking: {"type": "disabled"}`](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#turn-off-up-front-thinking).
 
 <CodeGroup>
   ```bash cURL
@@ -106,7 +106,8 @@ This request works on Claude Sonnet 5.5 as written. The example sets an effort l
       Model = Model.ClaudeSonnet5_5,
       MaxTokens = 4096,
       Messages = [
-          new UserMessageParam {
+          new UserMessageParam
+          {
               Content = "Analyze the trade-offs between microservices and monolithic architectures"
           }
       ],
@@ -476,7 +477,7 @@ Work down the groups and stop after the one that names your model. On Claude Hai
 * Replace [forced tool use](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#forced-tool-use) with `auto` and strict tools.
 * Keep conversations [append-only](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#thinking-blocks).
 * On the Claude API and Claude Models on Google Cloud (Google managed), move computer use to the [toolset](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#computer-use-toolset), without the `fine-grained-tool-streaming-2025-05-14` beta header.
-* Pair the [advisor tool](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#advisor-tool) with a supported advisor, and expect encrypted advice.
+* [Pair the advisor tool](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#advisor-tool) with a supported advisor, and expect encrypted advice.
 * Read [text between tool calls](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#text-between-tool-calls) from `thinking` blocks.
 * [Handle refusals](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#safety-classifiers-and-fallback), and configure fallback.
 * [Re-run your effort sweep](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#recommended-changes), and re-baseline cost.
@@ -797,7 +798,9 @@ After (Claude Sonnet 5.5):
       // strict tool use: every call matches the tool's input_schema
       .tools(tools.stream()
           .map(tool -> tool.tool()
-              .map(customTool -> customTool.toBuilder().strict(true).build())
+              .map(customTool -> customTool.toBuilder()
+                  .strict(true)
+                  .build())
               .map(ToolUnion::ofTool)
               .orElse(tool))
           .toList())
@@ -1164,7 +1167,7 @@ After (Claude Sonnet 5.5):
   $message = $client->messages->create(
       maxTokens: 16000,
       messages: [['role' => 'user', 'content' => '...']],
-      model: 'claude-sonnet-5-5',
+      model: Model::CLAUDE_SONNET_5_5,
       thinking: ['type' => 'adaptive'],
       outputConfig: ['effort' => 'high'], // or 'max', 'xhigh', 'medium', 'low'
   );
@@ -1197,7 +1200,7 @@ After (Claude Sonnet 5.5):
 
 * **About 30 percent more tokens:** Claude Sonnet 5.5 uses Claude Sonnet 5's tokenizer. Against Claude Sonnet 4.6, Claude Sonnet 4.5, and Claude Haiku 4.5, the same text produces about 30 percent more tokens, depending on the content. Recount with [token counting](https://platform.claude.com/docs/en/build-with-claude/token-counting), and revisit `max_tokens` and cost.
 * **Effort:** `xhigh` is new, and the levels are recalibrated. See [Recommended changes](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#recommended-changes).
-* **Images:** Claude Sonnet 5.5 uses the high-resolution image tier, up to 2,576 pixels on the long edge and 4,784 visual tokens per image. Claude Sonnet 4.6, Claude Sonnet 4.5, and Claude Haiku 4.5 stop at 1,568 pixels and 1,568 tokens. A 2000×1500 image costs about 2.5 times as many tokens on Claude Sonnet 5.5. See [Resolution and token cost](https://platform.claude.com/docs/en/build-with-claude/vision#evaluate-image-size).
+* **Images:** Claude Sonnet 5.5 uses the high-resolution image tier, up to 2,576 pixels on the long edge and up to 4,784 visual tokens for an image. Claude Sonnet 4.6, Claude Sonnet 4.5, and Claude Haiku 4.5 stop at 1,568 pixels and 1,568 tokens. A 2000×1500 image costs about 2.5 times as many tokens on Claude Sonnet 5.5. See [Resolution and token cost](https://platform.claude.com/docs/en/build-with-claude/vision#evaluate-image-size).
 
 ### Migrating from Claude Sonnet 4.5 or earlier
 

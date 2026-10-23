@@ -80,6 +80,14 @@ Store API keys in a secrets manager, rotate them periodically, and disable or de
   // const client = new Anthropic();
   ```
 
+  ```csharp C#
+  using Anthropic;
+
+  AnthropicClient client = new() { ApiKey = "my-anthropic-api-key" };
+  // Or, with ANTHROPIC_API_KEY set in the environment:
+  // AnthropicClient client = new();
+  ```
+
   ```go Go
   client := anthropic.NewClient(
   	option.WithAPIKey("sk-ant-api03-..."), // defaults to os.LookupEnv("ANTHROPIC_API_KEY")
@@ -92,19 +100,11 @@ Store API keys in a secrets manager, rotate them periodically, and disable or de
 
   // Explicit
   AnthropicClient client = AnthropicOkHttpClient.builder()
-    .apiKey("my-anthropic-api-key")
-    .build();
+      .apiKey("my-anthropic-api-key")
+      .build();
 
   // From ANTHROPIC_API_KEY (or anthropic.apiKey system property)
   AnthropicClient clientFromEnv = AnthropicOkHttpClient.fromEnv();
-  ```
-
-  ```csharp C#
-  using Anthropic;
-
-  AnthropicClient client = new() { ApiKey = "my-anthropic-api-key" };
-  // Or, with ANTHROPIC_API_KEY set in the environment:
-  // AnthropicClient client = new();
   ```
 
   ```php PHP
@@ -133,8 +133,8 @@ You can find a workspace's ID in the **ID** column on the [Workspaces](https://p
 
 <CodeGroup>
   ```bash cURL
-  # Required on every request for a multi-workspace key.
-  # Omit the anthropic-workspace-id header for a single-workspace key.
+  # Required on every request for a key that isn't scoped to a workspace.
+  # Omit the anthropic-workspace-id header for a key scoped to one workspace.
   curl https://api.anthropic.com/v1/messages \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
@@ -148,8 +148,8 @@ You can find a workspace's ID in the **ID** column on the [Workspaces](https://p
   ```
 
   ```bash CLI
-  # Required on every command for a multi-workspace key.
-  # Omit --workspace-id for a single-workspace key.
+  # Required on every command for a key that isn't scoped to a workspace.
+  # Omit --workspace-id for a key scoped to one workspace.
   ant messages create \
     --workspace-id wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ \
     --model claude-opus-5-5 \
@@ -160,8 +160,8 @@ You can find a workspace's ID in the **ID** column on the [Workspaces](https://p
   ```python Python
   client = Anthropic()  # reads ANTHROPIC_API_KEY
 
-  # Required on every request for a multi-workspace key.
-  # Omit extra_headers for a single-workspace key.
+  # Required on every request for a key that isn't scoped to a workspace.
+  # Omit extra_headers for a key scoped to one workspace.
   message = client.messages.create(
       model="claude-opus-5-5",
       max_tokens=1024,
@@ -179,8 +179,8 @@ You can find a workspace's ID in the **ID** column on the [Workspaces](https://p
   ```typescript TypeScript
   const client = new Anthropic(); // reads ANTHROPIC_API_KEY
 
-  // Required on every request for a multi-workspace key.
-  // Omit the second argument for a single-workspace key.
+  // Required on every request for a key that isn't scoped to a workspace.
+  // Omit the second argument for a key scoped to one workspace.
   const message = await client.messages.create(
     {
       model: "claude-opus-5-5",
@@ -207,8 +207,8 @@ You can find a workspace's ID in the **ID** column on the [Workspaces](https://p
       Messages = [new UserMessageParam { Content = "Hello, Claude" }],
   };
 
-  // Required on every request for a multi-workspace key.
-  // Call client.Messages.Create(parameters) directly for a single-workspace key.
+  // Required on every request for a key that isn't scoped to a workspace.
+  // Call client.Messages.Create(parameters) directly for a key scoped to one workspace.
   var message = await client
       .WithOptions(options =>
           options with
@@ -235,8 +235,8 @@ You can find a workspace's ID in the **ID** column on the [Workspaces](https://p
   ```go Go
   client := anthropic.NewClient() // reads ANTHROPIC_API_KEY
 
-  // Required on every request for a multi-workspace key.
-  // Omit the option for a single-workspace key.
+  // Required on every request for a key that isn't scoped to a workspace.
+  // Omit the option for a key scoped to one workspace.
   message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
   	Model:     anthropic.ModelClaudeOpus5_5,
   	MaxTokens: 1024,
@@ -258,8 +258,8 @@ You can find a workspace's ID in the **ID** column on the [Workspaces](https://p
   ```java Java
   AnthropicClient client = AnthropicOkHttpClient.fromEnv(); // reads ANTHROPIC_API_KEY
 
-  // Required on every request for a multi-workspace key.
-  // Omit putAdditionalHeader for a single-workspace key.
+  // Required on every request for a key that isn't scoped to a workspace.
+  // Omit putAdditionalHeader for a key scoped to one workspace.
   Message message = client.messages().create(MessageCreateParams.builder()
       .model(Model.CLAUDE_OPUS_5_5)
       .maxTokens(1024)
@@ -279,8 +279,8 @@ You can find a workspace's ID in the **ID** column on the [Workspaces](https://p
   ```php PHP
   $client = new Client(); // reads ANTHROPIC_API_KEY
 
-  // Required on every request for a multi-workspace key.
-  // Omit requestOptions for a single-workspace key.
+  // Required on every request for a key that isn't scoped to a workspace.
+  // Omit requestOptions for a key scoped to one workspace.
   $message = $client->messages->create(
       model: Model::CLAUDE_OPUS_5_5,
       maxTokens: 1024,
@@ -296,8 +296,8 @@ You can find a workspace's ID in the **ID** column on the [Workspaces](https://p
   ```ruby Ruby
   client = Anthropic::Client.new # reads ANTHROPIC_API_KEY
 
-  # Required on every request for a multi-workspace key.
-  # Omit request_options for a single-workspace key.
+  # Required on every request for a key that isn't scoped to a workspace.
+  # Omit request_options for a key scoped to one workspace.
   message = client.messages.create(
     model: Anthropic::Model::CLAUDE_OPUS_5_5,
     max_tokens: 1024,
@@ -311,7 +311,7 @@ You can find a workspace's ID in the **ID** column on the [Workspaces](https://p
 
 If a request made with a key that isn't scoped to a workspace omits the header, the API returns a 400 `invalid_request_error`:
 
-```text JSON
+```json JSON
 {
   "type": "error",
   "error": {
@@ -354,7 +354,7 @@ To replace a workspace key with a personal or service account key:
 
 ## Workload Identity Federation
 
-Workload Identity Federation (WIF) lets a workload authenticate with a short-lived identity token issued by an identity provider (IdP) you already trust, such as AWS IAM, Google Cloud, or any standards-compliant OIDC issuer (such as GitHub Actions, Kubernetes service accounts, SPIFFE, Microsoft Entra ID, or Okta). The workload exchanges its IdP-issued JWT at `POST /v1/oauth/token` for a short-lived Claude API access token, and the SDK refreshes that token automatically before it expires. There is no `sk-ant-api...` string to mint, distribute, or rotate.
+Workload Identity Federation (WIF) lets a workload authenticate with a short-lived identity token issued by an identity provider (IdP) you already trust. Such IdPs include AWS IAM, Google Cloud, and any standards-compliant OIDC issuer (such as GitHub Actions, Kubernetes service accounts, SPIFFE, Microsoft Entra ID, or Okta). The workload exchanges its IdP-issued JWT at `POST /v1/oauth/token` for a short-lived Claude API access token, and the SDK refreshes that token automatically before it expires. There is no `sk-ant-api...` string to mint, distribute, or rotate.
 
 Federation removes long-lived Claude API keys from your environment, which limits the damage that a leaked credential can cause and lets you manage access with the same IdP controls you already use for cloud resources. It does not, on its own, guarantee end-to-end security: the trust chain is only as strong as your identity provider's configuration, and a long-lived secret one step earlier in that chain (for example, a static cloud credential that can mint IdP tokens) can still undermine it. Pair federation with your provider's controls, such as IP allowlists, MFA, and audit logging.
 
