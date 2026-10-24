@@ -16,11 +16,11 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 管理 BigQuery DataFrames 工作階段和 I/O
 
-本文說明如何在使用 BigQuery DataFrames 時管理工作階段，以及執行輸入和輸出 (I/O) 作業。您將瞭解如何建立及使用工作階段、處理記憶體內資料，以及從檔案和 BigQuery 資料表讀取及寫入資料。
+在 BigQuery DataFrames 中管理工作階段和 I/O 作業，可讓您控管執行環境，以及在工作流程中移入及移出資料。您可以設定工作階段，控管查詢執行位置，並執行 I/O 作業，讀取及寫入記憶體內資料、Cloud Storage 檔案和 BigQuery 資料表。
 
 ## BigQuery 工作階段
 
-BigQuery DataFrames 會在內部使用本機工作階段物件管理中繼資料。每個 [`DataFrame`](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.DataFrame.html) 和 [`Series`](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.Series.html) 物件都會連線至工作階段，每個工作階段都會連線至[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)，且工作階段中的每項查詢都會在您建立工作階段的位置執行。請使用下列程式碼範例手動建立工作階段，並用於載入資料：
+BigQuery DataFrames 會在內部使用本機工作階段物件來管理中繼資料。每個 [`DataFrame`](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.DataFrame.html) 和 [`Series`](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.Series.html) 物件都會連線至工作階段，每個工作階段都會連線至[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)，而工作階段中的每個查詢都會在您建立工作階段的位置執行。請使用下列程式碼範例手動建立工作階段，並用於載入資料：
 
 ```
 import bigframes
@@ -40,7 +40,7 @@ df1 = session.read_gbq("bigquery-public-data.ml_datasets.penguins")
 df2 = bpd.DataFrame({"my_col": [1, 2, 3]}, session=session)
 ```
 
-您無法合併多個工作階段例項的資料，即使您使用相同設定初始化這些例項也一樣。下列程式碼範例顯示，嘗試合併不同工作階段例項的資料會導致錯誤：
+即使使用相同設定初始化多個工作階段例項，也無法合併這些例項的資料。下列程式碼範例顯示，嘗試合併不同工作階段例項的資料會導致錯誤：
 
 ```
 import bigframes
@@ -62,7 +62,7 @@ except ValueError as e:
 
 ### 全域工作階段
 
-BigQuery DataFrames 提供預設全域工作階段，您可以使用 [`bigframes.pandas.get_global_session()`](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.get_global_session.html) 方法存取。在 Colab 中，您必須先為 [`bigframes.pandas.options.bigquery.project`](https://dataframes.bigquery.dev/reference/api/bigframes._config.BigQueryOptions.html#bigframes._config.BigQueryOptions.project) 屬性提供專案 ID，才能使用該屬性。您也可以使用 [`bigframes.pandas.options.bigquery.location`](https://dataframes.bigquery.dev/reference/api/bigframes._config.BigQueryOptions.html#bigframes._config.BigQueryOptions.location) 屬性設定位置，預設為 `US` 多區域。
+BigQuery DataFrames 提供預設的全域工作階段，您可以使用 [`bigframes.pandas.get_global_session()`](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.get_global_session.html) 方法存取。在 Colab 中，您必須先為 [`bigframes.pandas.options.bigquery.project`](https://dataframes.bigquery.dev/reference/api/bigframes._config.BigQueryOptions.html#bigframes._config.BigQueryOptions.project) 屬性提供專案 ID，才能使用該屬性。您也可以使用 [`bigframes.pandas.options.bigquery.location`](https://dataframes.bigquery.dev/reference/api/bigframes._config.BigQueryOptions.html#bigframes._config.BigQueryOptions.location) 屬性設定位置，預設值為 `US` 多區域。
 
 下列程式碼範例說明如何設定全域工作階段的選項：
 
@@ -75,7 +75,7 @@ bpd.options.bigquery.project = YOUR_PROJECT_ID
 bpd.options.bigquery.location = YOUR_LOCATION
 ```
 
-如要重設全域工作階段的位置或專案，請執行 [`bigframes.pandas.close_session()`](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.close_session.html) 方法來關閉目前的工作階段。
+如要重設全域工作階段的位置或專案，請執行 [`bigframes.pandas.close_session()`](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.close_session.html) 方法，關閉目前的工作階段。
 
 許多 BigQuery DataFrames 內建函式預設會使用全域工作階段。以下程式碼範例說明內建函式如何使用全域工作階段：
 
@@ -87,7 +87,7 @@ df = bpd.get_global_session().read_gbq("bigquery-public-data.ml_datasets.penguin
 
 ## 記憶體內資料
 
-您可以使用內建的 Python 或 NumPy 資料結構建立 [`DataFrames`](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.DataFrame.html) 和 [`Series`](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.Series.html) 物件，與使用 pandas 建立物件的方式類似。使用下列程式碼範例建立物件：
+您可以使用內建的 Python 或 NumPy 資料結構建立 [`DataFrames`](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.DataFrame.html) 和 [`Series`](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.Series.html) 物件，方法與使用 pandas 建立物件類似。請使用下列程式碼範例建立物件：
 
 ```
 import numpy as np
@@ -140,7 +140,7 @@ bf_s.to_pandas()
 
 ### 使用 `dry_run` 參數估算費用
 
-載入大量資料可能需要耗費大量時間和資源。如要查看處理的資料量，請在 [`to_pandas()`](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.DataFrame.to_pandas.html) 呼叫中使用 `dry_run=True` 參數。使用下列程式碼範例執行模擬測試：
+載入大量資料可能需要耗費許多時間和資源。如要查看處理的資料量，請在 [`to_pandas()`](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.DataFrame.to_pandas.html) 呼叫中使用 `dry_run=True` 參數。使用下列程式碼範例執行模擬測試：
 
 ```
 import bigframes.pandas as bpd
@@ -153,7 +153,7 @@ df.to_pandas(dry_run=True)
 
 ## 讀取及寫入檔案
 
-您可以將相容檔案中的資料讀取至 BigQuery DataFrames。這些檔案可以位於本機或 Cloud Storage 中。使用下列程式碼範例，從 CSV 檔案讀取資料：
+您可以將相容檔案中的資料讀取至 BigQuery DataFrame。這些檔案可以位於本機電腦或 Cloud Storage。請使用下列程式碼範例，從 CSV 檔案讀取資料：
 
 ```
 import bigframes.pandas as bpd
@@ -182,7 +182,7 @@ import bigframes.pandas as bpd
 df = bpd.read_gbq("bigquery-public-data.ml_datasets.penguins")
 ```
 
-如要使用 [`read_gbq()`](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.read_gbq.html) 函式搭配 SQL 字串，將資料讀取至 BigQuery DataFrames，請使用下列程式碼範例：
+如要搭配使用 SQL 字串和 [`read_gbq()`](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.read_gbq.html) 函式，將資料讀取至 BigQuery DataFrames，請使用下列程式碼範例：
 
 ```
 import bigframes.pandas as bpd
@@ -196,7 +196,7 @@ WHERE sex = 'MALE'
 df = bpd.read_gbq(sql)
 ```
 
-**注意：** 如果您在呼叫 [`read_gbq()`](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.read_gbq.html)、[`read_gbq_table()`](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.read_gbq_table.html) 或 [`read_gbq_query()`](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.read_gbq_query.html) 函式時指定資料表，且未在函式呼叫前設定 [`bigframes.pandas.options.bigquery.location`](https://dataframes.bigquery.dev/reference/api/bigframes._config.BigQueryOptions.html#bigframes._config.BigQueryOptions.location) 屬性，BigQuery DataFrames 會自動將 [`bigframes.pandas.options.bigquery.location`](https://dataframes.bigquery.dev/reference/api/bigframes._config.BigQueryOptions.html#bigframes._config.BigQueryOptions.location) 屬性設為資料表的位置。如要瞭解如何手動指定位置，請參閱「[全域工作階段](#global-session)」一文。
+**注意：** 如果在呼叫 [`read_gbq()`](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.read_gbq.html)、[`read_gbq_table()`](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.read_gbq_table.html) 或 [`read_gbq_query()`](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.read_gbq_query.html) 函式時指定資料表，且在呼叫函式前未設定 [`bigframes.pandas.options.bigquery.location`](https://dataframes.bigquery.dev/reference/api/bigframes._config.BigQueryOptions.html#bigframes._config.BigQueryOptions.location) 屬性，BigQuery DataFrames 會自動將 [`bigframes.pandas.options.bigquery.location`](https://dataframes.bigquery.dev/reference/api/bigframes._config.BigQueryOptions.html#bigframes._config.BigQueryOptions.location) 屬性設為資料表的位置。如要瞭解如何手動指定位置，請參閱「[全域工作階段](#global-session)」。
 
 如要將 [`DataFrame`](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.DataFrame.html) 物件儲存至 BigQuery 資料表，請使用 [`DataFrame`](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.DataFrame.html) 物件的 [`to_gbq()`](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.DataFrame.to_gbq.html) 方法。以下程式碼範例說明如何執行這項操作：
 
@@ -212,8 +212,8 @@ df.to_gbq(f"{YOUR_PROJECT_ID}.{YOUR_DATASET_ID}.{YOUR_TABLE_NAME}")
 
 * 瞭解 [BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/bigquery-dataframes-introduction?hl=zh-tw)。
 * 瞭解如何[在 BigQuery DataFrames 中使用資料類型](https://docs.cloud.google.com/bigquery/docs/dataframes-data-types?hl=zh-tw)。
-* 瞭解如何[使用 BigQuery DataFrame 呈現圖表](https://docs.cloud.google.com/bigquery/docs/dataframes-visualizations?hl=zh-tw)。
-* 請參閱 [BigQuery DataFrames API 參考資料](https://dataframes.bigquery.dev/reference/index.html)。
+* 瞭解如何[使用 BigQuery DataFrames 建立圖表](https://docs.cloud.google.com/bigquery/docs/dataframes-visualizations?hl=zh-tw)。
+* 探索 [BigQuery DataFrames API 參考資料](https://dataframes.bigquery.dev/reference/index.html)。
 
 
 
@@ -222,11 +222,11 @@ df.to_gbq(f"{YOUR_PROJECT_ID}.{YOUR_DATASET_ID}.{YOUR_TABLE_NAME}")
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-15 (世界標準時間)。
+上次更新時間：2026-10-23 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-23 (世界標準時間)。"],[],[]]

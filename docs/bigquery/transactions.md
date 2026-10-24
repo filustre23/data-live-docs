@@ -149,7 +149,11 @@ COMMIT TRANSACTION;
 
 ## 交易並行
 
-如果交易會變更 (更新或刪除) 資料表中的資料列，則其他會變更相同資料表中資料列的交易或 DML 陳述式就無法同時執行。系統會取消衝突的交易。在交易外執行的衝突 DML 陳述式會排入佇列，稍後再執行，但須遵守[佇列限制](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language?hl=zh-tw#update_delete_merge_dml_concurrency)。
+如果交易更新或刪除資料表中的資料列，則交易會取得資料表層級鎖定，而非鎖定個別分區。其他會變更同一資料表中資料列的交易或 DML 陳述式無法同時執行，即使這些陳述式指定分區資料表的不同分區也一樣。BigQuery 會取消衝突的交易。不過，BigQuery 會將在交易外執行的衝突 DML 陳述式排入佇列，稍後再執行，但須遵守[佇列限制](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language?hl=zh-tw#update_delete_merge_dml_concurrency)。
+
+**警告：** BigQuery 會自動將每個資料表最多 20 個獨立變動 DML 陳述式排入佇列。不過，多陳述式交易的並行限制為每個資料表 1 筆變動交易，且 BigQuery 不會將這些交易排入佇列。如果並行多重陳述式交易嘗試修改鎖定的資料表，則交易會略過佇列並立即失敗，並顯示下列錯誤訊息：`Transaction is aborted due to concurrent update against table`。
+
+在多陳述式交易中執行變動 DML 陳述式時，BigQuery 會保留目標資料表的寫入鎖定，直到交易提交或復原，或父項多陳述式查詢或工作階段結束為止。這項行為適用於[多陳述式查詢](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries?hl=zh-tw)、[預存程序](https://docs.cloud.google.com/bigquery/docs/procedures?hl=zh-tw)或有效[工作階段](https://docs.cloud.google.com/bigquery/docs/sessions-intro?hl=zh-tw) (例如 ODBC 或 JDBC 連線) 中的交易。個別 DML 陳述式完成時，BigQuery 不會釋出鎖定。在同一個開啟的交易中，長時間執行的運算會使資料表保持鎖定狀態，導致該資料表上的並行變動交易失敗。
 
 讀取或附加新資料列的作業可以與交易同時執行。舉例來說，當交易在資料表中變更資料時，可以同時對該資料表執行下列任一作業：
 
@@ -160,7 +164,14 @@ COMMIT TRANSACTION;
 * 使用 `WRITE_APPEND` 處置方式附加資料列的載入工作
 * 串流寫入
 
-如果交易只讀取資料表或將新資料列附加至資料表，則可在該資料表上同時執行任何作業。
+如果交易只讀取資料表或在資料表中附加新資料列，則可在該資料表上同時執行任何作業，因為 `INSERT` 陳述式不會互相衝突。如要避免多個交易同時在資料表上執行，而這些交易只會插入資料列，請在每個交易開頭加上不修改任何資料列的 `DELETE` 陳述式，例如 `DELETE FROM TABLE_NAME WHERE FALSE;`。加入這個陳述式會導致 BigQuery 取得 `DELETE` 陳述式的資料表層級鎖定，因此任何其他在該資料表上執行變動陳述式的並行交易都會發生衝突並取消。
+
+### 避免及解決並行衝突
+
+如要減少交易並行衝突，請採取下列做法：
+
+* **移除不必要的交易包裝函式**：如果預存程序或多陳述式查詢只執行單一變動 DML 陳述式 (例如 `MERGE` 陳述式)，請勿將陳述式包裝在 `BEGIN TRANSACTION` 和 `COMMIT TRANSACTION` 陳述式中。單一 DML 陳述式本身就具備不可分割性。在多陳述式交易外執行陳述式，可讓 BigQuery 套用 [DML 佇列](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language?hl=zh-tw#update_delete_merge_dml_concurrency)。
+* **使用指數輪詢重試失敗的交易**：如果多陳述式交易因並行更新而失敗，BigQuery 會復原交易並解除資料表鎖定。BigQuery 可能需要幾秒鐘的時間才能釋放中繼資料層中的鎖定，因此請使用指數輪詢策略重試失敗的交易。至少等待 60 秒，再進行第一次重試。
 
 ## 查看交易資訊
 
@@ -268,6 +279,61 @@ WHERE
        OR statement_type = 'ROLLBACK_TRANSACTION');
 ```
 
+### 找出失敗交易的重疊工作
+
+如果交易或 DML 陳述式因並行更新錯誤而失敗，檢查個別 DML 陳述式的查詢記錄時，可能不會顯示失敗時有效的 DML 陳述式。如果父項多重陳述式查詢或工作階段在交易中執行較早的 DML 陳述式，並在保留資料表鎖定時繼續執行其他陳述式，就會發生這種情況。
+
+如果是跨專案工作負載，您可以查詢 [`INFORMATION_SCHEMA.JOBS_BY_ORGANIZATION`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-by-organization?hl=zh-tw) 檢視表，而非 `INFORMATION_SCHEMA.JOBS_BY_PROJECT`。下列查詢會將子 DML 工作與 `INFORMATION_SCHEMA.JOBS_BY_PROJECT` 中的父項工作彙整，找出與失敗工作重疊的變動工作、指令碼或工作階段：
+
+```
+SELECT
+  child_jobs.job_id,
+  child_jobs.parent_job_id,
+  child_jobs.transaction_id,
+  child_jobs.session_info.session_id,
+  child_jobs.statement_type,
+  child_jobs.start_time AS statement_start_time,
+  child_jobs.end_time AS statement_end_time,
+  parent_jobs.start_time AS parent_start_time,
+  parent_jobs.end_time AS parent_end_time,
+  COALESCE(parent_jobs.start_time, child_jobs.start_time) AS lock_window_start,
+  COALESCE(
+    parent_jobs.end_time, child_jobs.end_time, CURRENT_TIMESTAMP()
+  ) AS lock_window_end,
+  child_jobs.error_result.message AS error_message,
+  child_jobs.query
+FROM
+  `region-REGION`.INFORMATION_SCHEMA.JOBS_BY_PROJECT AS child_jobs
+LEFT JOIN
+  `region-REGION`.INFORMATION_SCHEMA.JOBS_BY_PROJECT AS parent_jobs
+  ON child_jobs.parent_job_id = parent_jobs.job_id
+WHERE
+  child_jobs.creation_time
+    BETWEEN TIMESTAMP_SUB(TIMESTAMP 'START_TIME', INTERVAL 6 HOUR)
+    AND TIMESTAMP_ADD(TIMESTAMP 'END_TIME', INTERVAL 1 HOUR)
+  AND child_jobs.destination_table.project_id = 'PROJECT_ID'
+  AND child_jobs.destination_table.dataset_id = 'DATASET_NAME'
+  AND child_jobs.destination_table.table_id = 'TABLE_NAME'
+  AND child_jobs.statement_type IN (
+    'UPDATE', 'DELETE', 'MERGE', 'TRUNCATE_TABLE'
+  )
+  AND COALESCE(parent_jobs.start_time, child_jobs.start_time)
+    <= TIMESTAMP 'END_TIME'
+  AND COALESCE(parent_jobs.end_time, child_jobs.end_time, CURRENT_TIMESTAMP())
+    >= TIMESTAMP 'START_TIME'
+ORDER BY
+  lock_window_start;
+```
+
+更改下列內容：
+
+* `REGION`：資料集區域 (例如 `us`)。
+* `START_TIME`：失敗工作的 `start_time` 時間戳記 (例如 `2026-06-15 10:00:00 UTC`)。
+* `END_TIME`：失敗工作的 `end_time` 時間戳記 (例如 `2026-06-15 10:05:00 UTC`)。
+* `PROJECT_ID`：目標資料表所在專案的 ID。
+* `DATASET_NAME`：包含目標資料表的資料集名稱。
+* `TABLE_NAME`：目標資料表的名稱。
+
 ## 限制
 
 * 交易無法使用會影響永久實體的 DDL 陳述式。
@@ -284,11 +350,11 @@ WHERE
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-16 (世界標準時間)。
+上次更新時間：2026-10-22 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-16 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-22 (世界標準時間)。"],[],[]]

@@ -16,7 +16,9 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 透過 Pub/Sub 共用串流
 
-您可以透過 BigQuery sharing (舊稱 Analytics Hub) 共用 Pub/Sub 主題，在多個內部和外部組織界限之間，收錄及發布串流資料庫。即時串流資料會透過 BigQuery sharing 交換和資訊清單共用，讓您以邏輯方式分類及分組大量 Pub/Sub 主題，並大規模佈建存取權。
+BigQuery 共用功能 (舊稱 Analytics Hub) 可讓您共用 Pub/Sub 主題，在內部和外部組織之間管理及發布即時串流資料。您可以使用資料交換和資訊清單，將大量 Pub/Sub 主題分類及分組，並大規模佈建存取權。
+
+## 用途
 
 你可以分享串流資料，以便執行下列操作：
 
@@ -33,7 +35,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 * **醫療照護**：
   + 運用預測演算法，即時監控病患並分析風險。
   + 使用穿戴式醫療器材監控生命徵象。
-  + 自動擷取、建構、儲存及處理病患、專業醫護人員和機構管理部門的資料。
+  + 自動取得、建構、儲存及處理病患、專業醫護人員和機構管理部門的資料。
 * **電信**：
   + 監控網路健康狀態並預測故障。
   + 探索使用者行為模式，更準確地定位裝置和天線。
@@ -400,11 +402,11 @@ Pub/Sub 主題發布者透過 BigQuery sharing 列出及共用主題，不需支
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-21 (世界標準時間)。
+上次更新時間：2026-10-22 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-21 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-22 (世界標準時間)。"],[],[]]

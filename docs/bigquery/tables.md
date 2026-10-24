@@ -16,19 +16,9 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 建立及使用資料表
 
-本文說明如何[在 BigQuery 中建立及使用標準 (內建) 資料表](https://docs.cloud.google.com/bigquery/docs/tables-intro?hl=zh-tw#standard-tables)。如要瞭解如何建立其他資料表類型，請參閱下列內容：
+標準資料表可讓您將資料儲存在 BigQuery 儲存空間，並在該處查詢資料、控管存取權限，以及稽核資料記錄。本文說明如何建立[標準 (內建) 資料表](https://docs.cloud.google.com/bigquery/docs/tables-intro?hl=zh-tw#standard-tables)、控管資料表存取權，以及取得資料表相關資訊，例如資料表中繼資料和資料集中的資料表。
 
-* [建立分區資料表](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables?hl=zh-tw)
-* [建立及使用分群資料表](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables?hl=zh-tw)
-
-建立資料表後，您可以執行下列操作：
-
-* 控管資料表資料的存取權。
-* 取得資料表相關資訊。
-* 列出資料集內的資料表。
-* 取得資料表中繼資料。
-
-如要進一步瞭解如何管理資料表，包括更新資料表屬性、複製資料表和刪除資料表，請參閱「[管理資料表](https://docs.cloud.google.com/bigquery/docs/managing-tables?hl=zh-tw)」。
+如要建立其他資料表類型，請參閱「[建立分區資料表](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables?hl=zh-tw)」和「[建立分群資料表](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables?hl=zh-tw)」。如要更新表格屬性、複製表格或刪除表格，請參閱「[管理表格](https://docs.cloud.google.com/bigquery/docs/managing-tables?hl=zh-tw)」。
 
 ## 事前準備
 
@@ -187,32 +177,32 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
    * 如要進一步瞭解 `--clustering_fields`，請參閱「[分群資料表](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables?hl=zh-tw)」。
    * 如要進一步瞭解 `--destination_kms_key`，請參閱「[客戶自行管理的加密金鑰](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw)」。
 
-   如要建立非預設專案中的資料表，請使用下列格式將專案 ID 新增至資料集：`project_id:dataset`。
+   如要建立非預設專案中的資料表，請使用下列格式將專案 ID 新增至資料集：`PROJECT_ID:DATASET`。
 
    如要在現有資料集中建立具有結構定義定義的空白資料表，請輸入下列指令：
 
    ```
    bq mk \
    --table \
-   --expiration=integer \
-   --description=description \
-   --label=key_1:value_1 \
-   --label=key_2:value_2 \
-   --add_tags=key_3:value_3[,...] \
-   project_id:dataset.table \
-   schema
+   --expiration=INTEGER \
+   --description=DESCRIPTION \
+   --label=KEY_1:VALUE_1 \
+   --label=KEY_2:VALUE_2 \
+   --add_tags=KEY_3:VALUE_3[,...] \
+   PROJECT_ID:DATASET.TABLE \
+   SCHEMA
    ```
 
    更改下列內容：
 
-   * integer 是資料表的預設生命週期 (以秒為單位)，最小值是 3600 秒 (1 小時)。到期時間為目前世界標準時間加上 [INTEGER] 中的整數值。如果您在建立資料表時設定了資料表的到期時間，則系統會忽略資料集的預設資料表到期時間設定。
-   * description 是置於括號中的資料表說明。
-   * key\_1:value\_1 和 key\_2:value\_2 是指定[標籤](https://docs.cloud.google.com/bigquery/docs/labels?hl=zh-tw)的鍵/值組合。
-   * key\_3：value\_3 是指定[標記](https://docs.cloud.google.com/bigquery/docs/tags?hl=zh-tw)的鍵/值組合。在同一個旗標下新增多個標記，並在鍵/值組合之間加上半形逗號。
-   * project\_id 是您的專案 ID。
-   * dataset 是專案中的資料集。
-   * table 是您所建立的資料表名稱。
-   * schema 是內嵌結構定義定義，格式為 field:data\_type,field:data\_type，或本機電腦上的 JSON 結構定義檔案路徑。
+   * `INTEGER` 是資料表的預設生命週期 (以秒為單位)，最小值是 3600 秒 (1 小時)。到期時間為目前世界標準時間加上 [INTEGER] 中的整數值。如果您在建立資料表時設定了資料表的到期時間，則系統會忽略資料集的預設資料表到期時間設定。
+   * `DESCRIPTION` 是置於括號中的資料表說明。
+   * `KEY_1:VALUE_1` 和 `KEY_2:VALUE_2` 是指定[標籤](https://docs.cloud.google.com/bigquery/docs/labels?hl=zh-tw)的鍵/值組合。
+   * `KEY_3:VALUE_3` 是指定[標記](https://docs.cloud.google.com/bigquery/docs/tags?hl=zh-tw)的鍵/值組合。在同一個旗標下新增多個標記，並在鍵/值組合之間加上半形逗號。
+   * `PROJECT_ID` 是您的專案 ID。
+   * `DATASET` 是專案中的資料集。
+   * `TABLE` 是您所建立的資料表名稱。
+   * `SCHEMA` 是內嵌結構定義定義，格式為 `FIELD:DATA_TYPE,FIELD:DATA_TYPE`，或本機電腦上的 JSON 結構定義檔案路徑。
 
    在指令列中指定結構定義時，您無法加入 `RECORD` ([`STRUCT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#struct_type)) 類型、資料欄說明，也無法指定資料欄模式。所有模式均會使用預設設定 `NULLABLE`。如要加入說明、模式和 `RECORD` 類型，請改為提供 [JSON 結構定義檔](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#specifying_a_json_schema_file)。
 
@@ -1125,5 +1115,5 @@ async function queryDestinationTable() {
 將工作設定傳遞至 [query 方法](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.client.Client?hl=zh-tw#google_cloud_bigquery_client_Client_query)。
 
 ```
-from google.cloud import
+from google.cloud
 ```

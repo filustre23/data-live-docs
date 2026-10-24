@@ -161,4 +161,3 @@ Configuration for a push delivery endpoint.
 
 | JSON representation |
 | --- |
-|  |

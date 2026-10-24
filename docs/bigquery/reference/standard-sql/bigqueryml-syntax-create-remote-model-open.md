@@ -620,5 +620,3 @@ To find supported Hugging Face models, do the following:
 
    A green check circle is shown if the model can be deployed in
    Agent Platform Model Garden:
-
-## D

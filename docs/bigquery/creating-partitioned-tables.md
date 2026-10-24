@@ -16,48 +16,49 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 建立分區資料表
 
-本頁說明如何在 BigQuery 中建立分區資料表。
-如需分區資料表的總覽，請參閱[分區資料表簡介](https://docs.cloud.google.com/bigquery/docs/partitioned-tables?hl=zh-tw)一文。
+對 BigQuery 資料表進行分區，可提升查詢效能並控管費用，因為篩選分區資料欄的查詢只會讀取相關分區。本文說明如何建立空白分區資料表、依據查詢結果建立分區資料表，以及將日期資料分割資料表轉換為擷取時間分區資料表。
+
+如需總覽，請參閱「[分區資料表簡介](https://docs.cloud.google.com/bigquery/docs/partitioned-tables?hl=zh-tw)」。
 
 ## 事前準備
 
-授予身分與存取權管理 (IAM) 角色，讓使用者擁有執行本文各項工作所需的權限。
+授予 Identity and Access Management (IAM) 角色，讓使用者具備必要權限，可執行本文件中的各項工作。
 
 ### 所需權限
 
 ### 必要的角色
 
-如要取得建立表格所需的權限，請要求管理員授予您下列 IAM 角色：
+如要取得建立資料表所需的權限，請要求管理員授予您下列 IAM 角色：
 
-* 如果您要透過載入資料或將查詢結果儲存至資料表來建立資料表，則需要專案的 [BigQuery 作業使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.jobUser)  (`roles/bigquery.jobUser`) 角色。
-* 資料集的「BigQuery 資料編輯者」 (`roles/bigquery.dataEditor`)，您要在該資料集建立資料表。
+* 如要透過載入資料或將已儲存的查詢結果儲存至資料表的方式建立資料表，則須具備專案的 [BigQuery 工作使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.jobUser)  (`roles/bigquery.jobUser`) 角色。
+* 在您要建立資料表的資料集，具備 [BigQuery 資料編輯者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataEditor)  (`roles/bigquery.dataEditor`) 角色。
 
 如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
-這些預先定義的角色具備建立表格所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
+這些預先定義的角色具備建立資料表所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
 #### 所需權限
 
-如要建立資料表，必須具備下列權限：
+您必須具備下列權限，才能建立資料表：
 
 * `bigquery.tables.create`
-  在要建立資料表的資料集上。
+  ，用於建立資料表的資料集。
 * `bigquery.tables.getData`
-  如果您要將查詢結果儲存為資料表，請在查詢參照的所有資料表和檢視畫面中執行這項操作。
+  (如果您將查詢結果儲存為資料表，則須具備查詢參照的所有資料表和檢視表的 權限)。
 * `bigquery.jobs.create`
-  專案，前提是您要透過載入資料或將查詢結果儲存至資料表來建立資料表。
+  ：如要透過載入資料或將查詢結果儲存至資料表的方式建立資料表，則須具備這項權限。
 * `bigquery.tables.updateData`
-  ，將查詢結果附加至資料表或覆寫資料表。
+  ，如果使用查詢結果附加或覆寫資料表，則需要資料表的
 
 您或許還可透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)取得這些權限。
 
 ## 建立空白分區資料表
 
-在 BigQuery 中建立分區資料表的步驟，與建立[標準資料表](https://docs.cloud.google.com/bigquery/docs/tables?hl=zh-tw)的步驟類似，但您要指定分區選項，以及任何其他資料表選項。
+在 BigQuery 建立分區資料表的步驟與建立[標準資料表](https://docs.cloud.google.com/bigquery/docs/tables?hl=zh-tw)類似，差別在於您需要指定分區選項和其他資料表選項。
 
-### 建立時間單位欄分區資料表
+### 建立時間單位資料欄分區資料表
 
-如要建立具有結構定義的空白時間單位資料欄分區資料表，請執行下列步驟：
+如要建立空白的時間單位資料欄分區資料表，並定義結構定義，請按照下列步驟操作：
 
 ### 控制台
 
@@ -65,39 +66,35 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
    [前往 BigQuery](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
-3. 在「Explorer」窗格中展開專案，點選「Datasets」(資料集)，然後選取資料集。
-4. 在「資料集資訊」部分，按一下 add\_box「建立資料表」。
+3. 在「Explorer」窗格中展開專案，點選「資料集」，然後選取資料集。
+4. 在「資料集資訊」部分，點選 add\_box「建立資料表」。
 5. 在「建立資料表」窗格中，指定下列詳細資料：
 
-1. 在「來源」部分，從「建立資料表來源」清單中選取「空白資料表」。
-2. 在「目的地」部分，指定下列詳細資料：
-   1. 在「Dataset」(資料集) 部分，選取要建立資料表的資料集。
+1. 在「Source」(來源) 部分，從「Create table from」(建立資料表來源) 清單中選取「Empty table」(空白資料表)。
+2. 在「Destination」(目的地) 部分，指定下列詳細資料：
+   1. 在「Dataset」(資料集) 部分，選取要在其中建立資料表的資料集。
    2. 在「Table」(資料表) 欄位中，輸入要建立的資料表名稱。
-   3. 確認「資料表類型」欄位已設為「原生資料表」。
-3. 在「Schema」(結構定義) 專區，輸入[結構定義](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw)。
-   結構定義必須包含 `DATE`、`TIMESTAMP` 或 `DATETIME` 資料欄，做為分區欄。詳情請參閱「[指定結構定義](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw)」。
-   你可以使用下列任一方法手動輸入結構定義資訊：
-   * 方法 1：點按「以文字形式編輯」，然後以 JSON 陣列形式貼上結構定義。使用 JSON 陣列時，產生結構定義的程序與[建立 JSON 結構定義檔](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#specifying_a_json_schema_file)相同。如要以 JSON 格式查看現有資料表的結構定義，請輸入下列指令：
+   3. 確認「資料表類型」欄位設為「原生資料表」。
+3. 在「Schema」(結構定義) 部分，輸入[結構定義](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw)。結構定義必須包含 `DATE`、`TIMESTAMP` 或 `DATETIME` 資料欄，做為分區欄。詳情請參閱「[指定結構定義](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw)」。您可以透過下列任一方法手動輸入結構定義資訊：
+   * 方法 1：按一下「Edit as text」(以文字形式編輯)，然後以 JSON 陣列的形式貼上結構定義。使用 JSON 陣列時，您會按照[建立 JSON 結構定義檔案](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#specifying_a_json_schema_file)的相同程序產生結構定義。輸入下列指令，即可查看現有資料表的 JSON 格式結構定義：
 
      ```
          bq show --format=prettyjson dataset.table
      ```
-   * 方法 2：按一下 add\_box
-     「新增欄位」，然後輸入表格結構定義。指定每個欄位的**名稱**、[**類型**](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#standard_sql_data_types)和[**模式**](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#modes)。
-4. 在「Partition and cluster settings」(分區與叢集設定) 區段的「Partitioning」(分區) 清單中，選取「Partition by field」(依欄位分區)，然後選擇分區欄。只有當結構定義包含 `DATE`、`TIMESTAMP` 或 `DATETIME` 欄時，才能使用這個選項。
-5. 選用：如要規定所有查詢都必須使用分區篩選器，請選取「必須使用分區篩選器」核取方塊。分區篩選器可降低費用並提升效能。詳情請參閱「[設定分割區篩選器規定](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#require-filter)」。
-6. 選取「Partitioning type」。
-7. 選用步驟：如要在「Advanced options」(進階選項) 部分使用客戶自行管理的加密金鑰，請選取「Use a customer-managed encryption key (CMEK)」(使用客戶自行管理的加密金鑰 (CMEK)) 選項。根據預設，BigQuery 會使用 Google-owned and Google-managed encryption key[加密靜態儲存的客戶內容](https://docs.cloud.google.com/docs/security/encryption/default-encryption?hl=zh-tw)。
+   * 方法 2：按一下「Add field」(新增欄位)add\_box，然後輸入資料表結構定義。指定每個欄位的「Name」(名稱)、「Type」(類型) 和「Mode」(模式)。
+4. 在「Partition and cluster settings」(分區與叢集設定) 區段的「Partitioning」(分區) 清單中，選取「Partition by field」(依欄位分區)，然後選擇分區欄。只有在結構定義包含 `DATE`、`TIMESTAMP` 或 `DATETIME` 資料欄時，才能使用這個選項。
+5. 選用：如要對這個資料表的所有查詢要求分區篩選器，請勾選「Require partition filter」(必須使用分區篩選器) 核取方塊。分區篩選器可以降低費用及提高成效。詳情請參閱「[設定分區篩選器規定](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#require-filter)」。
+6. 選取「Partitioning type」(分區類型)。
+7. 選用步驟：在「Advanced options」(進階選項) 部分，如要使用客戶自行管理的加密金鑰，請選取「Use a customer-managed encryption key (CMEK)」(使用客戶自行管理的加密金鑰 (CMEK)) 選項。根據預設，BigQuery 會使用 Google-owned and Google-managed encryption key[加密靜態儲存的客戶內容](https://docs.cloud.google.com/docs/security/encryption/default-encryption?hl=zh-tw)。
 8. 點選「建立資料表」。
 
-**注意：** 您無法在 Google Cloud 控制台中設定分區效期。
-如要在建立資料表後設定分區，請參閱「[更新分區到期時間](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#partition-expiration)」。
+**注意：** 您無法在 Google Cloud 控制台中設定分區到期時間。如要在建立資料表後設定分區，請參閱「[更新分區到期時間](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#partition-expiration)」。
 
 ### SQL
 
-如要建立按時間單位資料欄分區的資料表，請使用 [`CREATE TABLE` DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#create_table_statement)和 [`PARTITION BY` 子句](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#partition_expression)。
+如要建立時間單位資料欄分區資料表，請使用 [`CREATE TABLE` DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#create_table_statement)和 [`PARTITION BY` 子句](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#partition_expression)。
 
-以下範例會根據 `transaction_date` 欄建立每日分區的資料表：
+下列範例會根據 `transaction_date` 欄建立每日分區資料表：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -114,12 +111,12 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
        require_partition_filter = TRUE);
    ```
 
-   使用 [`OPTIONS` 子句](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#table_option_list)設定表格選項，例如[分區到期時間](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#partition-expiration)和[分區篩選器規定](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#require-filter)。
-3. 按一下「執行」play\_circle。
+   使用 [`OPTIONS` 子句](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#table_option_list)設定資料表選項，例如[分區到期時間](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#partition-expiration)和[分區篩選器需求](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#require-filter)。
+3. 按一下「play\_circle 執行」。
 
 如要進一步瞭解如何執行查詢，請參閱「[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)」。
 
-`DATE` 欄的預設分區類型為每日分區。如要指定其他分割類型，請在 `PARTITION BY` 子句中加入 [`DATE_TRUNC`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions?hl=zh-tw#date_trunc) 函式。舉例來說，下列查詢會建立含有每月分區的資料表：
+`DATE` 欄的預設分區類型為每日分區。如要指定其他分區類型，請在 `PARTITION BY` 子句中加入 [`DATE_TRUNC`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions?hl=zh-tw#date_trunc) 函式。舉例來說，下列查詢會建立每月分區的資料表：
 
 ```
 CREATE TABLE
@@ -131,7 +128,7 @@ PARTITION BY
     require_partition_filter = TRUE);
 ```
 
-您也可以將 `TIMESTAMP` 或 `DATETIME` 資料欄指定為分割資料欄。在這種情況下，請在 `PARTITION BY` 子句中加入 `TIMESTAMP_TRUNC` 或 `DATETIME_TRUNC` 函式，指定分割區類型。舉例來說，下列陳述式會根據 `TIMESTAMP` 欄建立每日分區的資料表：
+您也可以指定 `TIMESTAMP` 或 `DATETIME` 資料欄做為分區欄。在這種情況下，請在 `PARTITION BY` 子句中加入 `TIMESTAMP_TRUNC` 或 `DATETIME_TRUNC` 函式，指定分區類型。舉例來說，下列陳述式會根據 `TIMESTAMP` 欄建立每日分區的資料表：
 
 ```
 CREATE TABLE
@@ -145,12 +142,12 @@ PARTITION BY
 
 ### bq
 
-1. 在 Google Cloud 控制台中啟用 Cloud Shell。
+1. 在 Google Cloud 控制台啟用 Cloud Shell。
 
    [啟用 Cloud Shell](https://console.cloud.google.com/?cloudshell=true&hl=zh-tw)
 
    Google Cloud 控制台底部會開啟 [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works?hl=zh-tw) 工作階段，並顯示指令列提示。Cloud Shell 是已安裝 Google Cloud CLI 的殼層環境，並已設定適用於您目前專案的值。工作階段可能要幾秒鐘的時間才能初始化。
-2. 使用 [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#mk-table) 指令，並加上 `--table` 旗標 (或 `-t` 快速鍵)：
+2. 使用 [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#mk-table) 指令，並加上 `--table` 旗標 (或 `-t` 捷徑)：
 
    ```
    bq mk \
@@ -165,19 +162,18 @@ PARTITION BY
 
    更改下列內容：
 
-   * SCHEMA：格式為 `column:data_type,column:data_type` 的結構定義，或是本機電腦上 JSON 結構定義檔案的路徑。詳情請參閱「[指定結構定義](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw)」。
+   * SCHEMA：格式為 `column:data_type,column:data_type` 的結構定義定義，或本機電腦上的 JSON 結構定義檔案路徑。詳情請參閱「[指定結構定義](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw)」。
    * COLUMN：分區資料欄的名稱。在資料表結構定義中，這個資料欄必須是 `TIMESTAMP`、`DATETIME` 或 `DATE` 類型。
    * UNIT\_TIME：分區類型。支援的值包括 `DAY`、`HOUR`、`MONTH` 或 `YEAR`。
-   * EXPIRATION\_TIME：資料表分割區的到期時間 (以秒為單位)。`--time_partitioning_expiration` 是選用旗標。詳情請參閱「[設定分區期限](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#partition-expiration)」。
-   * BOOLEAN：如果 `true`，則對這個資料表進行的查詢必須包含分割區篩選器。`--require_partition_filter` 標記為選用項目。
-     詳情請參閱「[設定分割區篩選器規定](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#require-filter)」。
-   * PROJECT\_ID：專案 ID。如果省略此金鑰，系統會使用預設專案。
-   * DATASET：專案中的資料集名稱。
+   * EXPIRATION\_TIME：資料表分區的到期時間，以秒為單位。`--time_partitioning_expiration` 是選用旗標。詳情請參閱「[設定分區到期時間](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#partition-expiration)」。
+   * BOOLEAN：如果為 `true`，則這個資料表的查詢必須包含分區篩選器。`--require_partition_filter` 旗標為選用。詳情請參閱「[設定分區篩選器需求條件](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#require-filter)」。
+   * PROJECT\_ID：專案 ID。如果省略，系統會使用預設專案。
+   * DATASET：：專案中的資料集名稱。
    * TABLE：要建立的資料表名稱。
 
-   如需其他指令列選項，請參閱「[`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#mk-table)」。
+   如需其他指令列選項，請參閱 [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#mk-table)。
 
-   以下範例會建立名為 `mytable` 的資料表，並使用每小時分區，以 `ts` 資料欄做為分區依據。分區有效期限為 259,200 秒 (3 天)。
+   以下範例會建立名為 `mytable` 的資料表，並使用每小時分區，在 `ts` 資料欄上進行分區。分區到期時間為 259,200 秒 (3 天)。
 
    ```
    bq mk \
@@ -197,7 +193,7 @@ PARTITION BY
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
-以下範例會建立名為 `mytable` 的資料表，並依天數劃分：
+以下範例會建立名為 `mytable` 的資料表，並依日期分區：
 
 ```
 resource "google_bigquery_dataset" "default" {
@@ -254,34 +250,33 @@ EOF
 ## 準備 Cloud Shell
 
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
-2. 設定要套用 Terraform 設定的預設 Google Cloud 專案
-   。
+2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
 
-   每個專案只需執行一次這個指令，且可以在任何目錄中執行。
+   每個專案只需執行這個指令一次，而且可以在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
    ```
 
-   如果您在 Terraform 設定檔中設定明確值，環境變數就會遭到覆寫。
+   如果您在 Terraform 設定檔中設定明確的值，環境變數就會遭到覆寫。
 
 ## 準備目錄
 
 每個 Terraform 設定檔都必須有自己的目錄 (也稱為*根模組*)。
 
-1. 在 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw) 中建立目錄，並在該目錄中建立新檔案。檔案名稱的副檔名必須為 `.tf`，例如 `main.tf`。在本教學課程中，這個檔案稱為 `main.tf`。
+1. 在 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw) 中建立目錄，並在該目錄中建立新檔案。檔案名稱必須有 `.tf` 副檔名，例如 `main.tf`。在本教學課程中，這個檔案稱為 `main.tf`。
 
    ```
    mkdir DIRECTORY && cd DIRECTORY && touch main.tf
    ```
-2. 如果您正在按照教學課程操作，可以複製每個章節或步驟中的程式碼範例。
+2. 如果您正在進行教學課程，可以複製每個章節或步驟中的程式碼範例。
 
-   將程式碼範例複製到新建立的 `main.tf` 中。
+   將程式碼範例複製到新建立的 `main.tf`。
 
-   (選用) 從 GitHub 複製程式碼。如果 Terraform 程式碼片段是端對端解決方案的一部分，建議使用這個方法。
-3. 請檢查並修改範例參數，然後套用至您的環境。
+   您也可以從 GitHub 複製程式碼。如果 Terraform 程式碼片段是端對端解決方案的一部分，建議您採用這種做法。
+3. 請查看並修改範例參數，以便套用至您的環境。
 4. 儲存變更。
-5. 初始化 Terraform。每個目錄只需執行一次。
+5. 初始化 Terraform。每個目錄只需執行一次這項操作。
 
    ```
    terraform init
@@ -295,7 +290,7 @@ EOF
 
 ## 套用變更
 
-1. 查看設定，並確認 Terraform 即將建立或更新的資源符合您的預期：
+1. 查看設定，確認 Terraform 要建立或更新的資源符合預期：
 
    ```
    terraform plan
@@ -309,7 +304,7 @@ EOF
    ```
 
    等待 Terraform 顯示「Apply complete!」訊息。
-3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)即可查看結果。在 Google Cloud 控制台中，前往 UI 中的資源，確認 Terraform 已建立或更新這些資源。
+3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)即可查看結果。在 Google Cloud 控制台的使用者介面中，前往資源頁面，確認 Terraform 已建立或更新資源。
 
 **注意：**Terraform 範例通常會假設 Google Cloud 專案已啟用必要的 API。
 
@@ -319,7 +314,7 @@ EOF
 
 ### Go
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Go 設定說明操作。詳情請參閱 [BigQuery Go API 參考文件](https://godoc.org/cloud.google.com/go/bigquery)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Go 設定操作說明進行操作。詳情請參閱 [BigQuery Go API 參考文件](https://godoc.org/cloud.google.com/go/bigquery)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -367,7 +362,7 @@ func createTablePartitioned(projectID, datasetID, tableID string) error {
 
 ### Java
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定說明操作。詳情請參閱 [BigQuery Java API 參考文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定操作說明進行操作。詳情請參閱 [BigQuery Java API 參考文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -430,7 +425,7 @@ public class CreatePartitionedTable {
 
 ### Node.js
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定操作說明進行操作。詳情請參閱 [BigQuery Node.js API 參考文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -471,7 +466,7 @@ async function createTablePartitioned() {
 
 ### Python
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定操作說明進行操作。詳情請參閱 [BigQuery Python API 參考文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -504,17 +499,16 @@ print(
 
 ### 建立擷取時間分區資料表
 
-如要建立具有結構定義的空白擷取時間分區資料表，請執行下列步驟：
+如要建立含有結構定義定義的空白擷取時間分區資料表，請按照下列步驟操作：
 
 ### 控制台
 
-1. 在 Google Cloud 控制台開啟 BigQuery 頁面。
+1. 在 Google Cloud 控制台開啟「BigQuery」頁面。
 
-   [前往 BigQuery 頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
+   [前往「BigQuery」頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 在「Explorer」面板中展開專案並選取資料集。
-3. 展開「動作」選項，然後點按「開啟」。more\_vert
-4. 在詳細資料面板中，按一下「建立資料表」
-   add\_box。
+3. 展開 more\_vert「Actions」(動作) 選項，然後點選「Open」(開啟)。
+4. 在詳細資料面板中，按一下「Create table」(建立資料表) add\_box。
 5. 在「Create table」(建立資料表) 頁面的「Source」(來源) 區段中，選取 [Empty table] (空白資料表)。
 6. 在「Destination」(目的地) 區段中：
 
@@ -522,18 +516,17 @@ print(
    * 在「Table name」(資料表名稱) 欄位中，輸入資料表名稱。
    * 確認「Table type」(資料表類型) 設為「Native table」(原生資料表)。
 7. 在「Schema」(結構定義) 部分輸入[結構定義](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw)。
-8. 在「Partition and cluster settings」(分區與叢集設定) 區段的「Partitioning」(分區) 中，按一下「Partition by ingestion time」(依擷取時間分區)。
-9. (選用) 如要規定所有查詢都必須使用這個資料表的分區篩選器，請選取「必須使用分區篩選器」核取方塊。規定必須使用分區篩選器，有助於降低費用及提高成效。詳情請參閱「[設定分割區篩選器規定](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#require-filter)」。
+8. 在「Partition and cluster settings」(分區與叢集設定) 區段的「Partitioning」(分區) 中，點選「Partition by ingestion time」(依擷取時間分區)。
+9. (選用) 如要對這個資料表的所有查詢要求分區篩選器，請勾選「Require partition filter」(必須使用分區篩選器) 核取方塊。規定必須使用分區篩選器，可降低費用並提高效能。詳情請參閱「[設定分區篩選器需求條件](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#require-filter)」。
 10. 點選「建立資料表」。
 
-**注意：** 您無法在 Google Cloud 控制台中設定分區效期。
-如要在建立資料表後設定分區，請參閱「[更新分區到期時間](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#partition-expiration)」。
+**注意：** 您無法在 Google Cloud 控制台中設定分區到期時間。如要在建立資料表後設定分區，請參閱「[更新分區到期時間](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#partition-expiration)」。
 
 ### SQL
 
 如要建立擷取時間分區資料表，請使用 [`CREATE TABLE` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#create_table_statement)，並搭配 [`PARTITION BY` 子句](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#partition_expression)，依 `_PARTITIONDATE` 分區。
 
-以下範例會建立每日分區的資料表：
+以下範例會建立依日期分區的資料表：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -550,12 +543,12 @@ print(
        require_partition_filter = TRUE);
    ```
 
-   使用 [`OPTIONS` 子句](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#table_option_list)設定表格選項，例如[分區到期時間](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#partition-expiration)和[分區篩選器規定](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#require-filter)。
-3. 按一下「執行」play\_circle。
+   使用 [`OPTIONS` 子句](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#table_option_list)設定資料表選項，例如[分區到期時間](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#partition-expiration)和[分區篩選器需求](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#require-filter)。
+3. 按一下「play\_circle 執行」。
 
 如要進一步瞭解如何執行查詢，請參閱「[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)」。
 
-擷取時間分區的預設分區類型為每日分區。如要指定其他分割類型，請在 `PARTITION BY` 子句中加入 [`DATE_TRUNC`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions?hl=zh-tw#date_trunc) 函式。舉例來說，下列查詢會建立含有每月分區的資料表：
+擷取時間分區的預設分區類型為每日分區。如要指定其他分區類型，請在 `PARTITION BY` 子句中加入 [`DATE_TRUNC`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions?hl=zh-tw#date_trunc) 函式。舉例來說，下列查詢會建立每月分區的資料表：
 
 ```
 CREATE TABLE
@@ -569,12 +562,12 @@ PARTITION BY
 
 ### bq
 
-1. 在 Google Cloud 控制台中啟用 Cloud Shell。
+1. 在 Google Cloud 控制台啟用 Cloud Shell。
 
    [啟用 Cloud Shell](https://console.cloud.google.com/?cloudshell=true&hl=zh-tw)
 
    Google Cloud 控制台底部會開啟 [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works?hl=zh-tw) 工作階段，並顯示指令列提示。Cloud Shell 是已安裝 Google Cloud CLI 的殼層環境，並已設定適用於您目前專案的值。工作階段可能要幾秒鐘的時間才能初始化。
-2. 使用 [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#mk-table) 指令，並加上 `--table` 旗標 (或 `-t` 快速鍵)：
+2. 使用 [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#mk-table) 指令，並加上 `--table` 旗標 (或 `-t` 捷徑)：
 
    ```
    bq mk \
@@ -588,18 +581,17 @@ PARTITION BY
 
    更改下列內容：
 
-   * SCHEMA：格式為 `column:data_type,column:data_type` 的定義，或是本機電腦上 JSON 結構定義檔案的路徑。詳情請參閱「[指定結構定義](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw)」。
+   * SCHEMA：格式為 `column:data_type,column:data_type` 的定義，或本機電腦上的 JSON 結構定義檔案路徑。詳情請參閱「[指定結構定義](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw)」。
    * UNIT\_TIME：分區類型。支援的值包括 `DAY`、`HOUR`、`MONTH` 或 `YEAR`。
-   * EXPIRATION\_TIME：資料表分區的到期時間 (以秒為單位)。`--time_partitioning_expiration` 是選用旗標。詳情請參閱「[設定分區期限](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#partition-expiration)」。
-   * BOOLEAN：如果 `true`，則對這個資料表進行的查詢必須包含分割區篩選器。`--require_partition_filter` 標記為選用項目。
-     詳情請參閱「[設定分割區篩選器規定](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#require-filter)」。
-   * PROJECT\_ID：專案 ID。如果省略此金鑰，系統會使用預設專案。
-   * DATASET：專案中的資料集名稱。
+   * EXPIRATION\_TIME：資料表分區的到期時間，以秒為單位。`--time_partitioning_expiration` 是選用旗標。詳情請參閱「[設定分區到期時間](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#partition-expiration)」。
+   * BOOLEAN：如果為 `true`，則這個資料表的查詢必須包含分區篩選器。`--require_partition_filter` 旗標為選用。詳情請參閱「[設定分區篩選器需求條件](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#require-filter)」。
+   * PROJECT\_ID：專案 ID。如果省略，系統會使用預設專案。
+   * DATASET：：專案中的資料集名稱。
    * TABLE：要建立的資料表名稱。
 
-   如需其他指令列選項，請參閱「[`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#mk-table)」。
+   如需其他指令列選項，請參閱 [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#mk-table)。
 
-   以下範例會建立名為 `mytable` 的擷取時間分區資料表。資料表會每日分區，分區會在 259,200 秒 (3 天) 後過期。
+   下列範例會建立名為 `mytable` 的擷取時間分區資料表。資料表會每日分區，分區到期時間為 259,200 秒 (3 天)。
 
    ```
    bq mk \
@@ -669,34 +661,33 @@ EOF
 ## 準備 Cloud Shell
 
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
-2. 設定要套用 Terraform 設定的預設 Google Cloud 專案
-   。
+2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
 
-   每個專案只需執行一次這個指令，且可以在任何目錄中執行。
+   每個專案只需執行這個指令一次，而且可以在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
    ```
 
-   如果您在 Terraform 設定檔中設定明確值，環境變數就會遭到覆寫。
+   如果您在 Terraform 設定檔中設定明確的值，環境變數就會遭到覆寫。
 
 ## 準備目錄
 
 每個 Terraform 設定檔都必須有自己的目錄 (也稱為*根模組*)。
 
-1. 在 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw) 中建立目錄，並在該目錄中建立新檔案。檔案名稱的副檔名必須為 `.tf`，例如 `main.tf`。在本教學課程中，這個檔案稱為 `main.tf`。
+1. 在 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw) 中建立目錄，並在該目錄中建立新檔案。檔案名稱必須有 `.tf` 副檔名，例如 `main.tf`。在本教學課程中，這個檔案稱為 `main.tf`。
 
    ```
    mkdir DIRECTORY && cd DIRECTORY && touch main.tf
    ```
-2. 如果您正在按照教學課程操作，可以複製每個章節或步驟中的程式碼範例。
+2. 如果您正在進行教學課程，可以複製每個章節或步驟中的程式碼範例。
 
-   將程式碼範例複製到新建立的 `main.tf` 中。
+   將程式碼範例複製到新建立的 `main.tf`。
 
-   (選用) 從 GitHub 複製程式碼。如果 Terraform 程式碼片段是端對端解決方案的一部分，建議使用這個方法。
-3. 請檢查並修改範例參數，然後套用至您的環境。
+   您也可以從 GitHub 複製程式碼。如果 Terraform 程式碼片段是端對端解決方案的一部分，建議您採用這種做法。
+3. 請查看並修改範例參數，以便套用至您的環境。
 4. 儲存變更。
-5. 初始化 Terraform。每個目錄只需執行一次。
+5. 初始化 Terraform。每個目錄只需執行一次這項操作。
 
    ```
    terraform init
@@ -710,7 +701,7 @@ EOF
 
 ## 套用變更
 
-1. 查看設定，並確認 Terraform 即將建立或更新的資源符合您的預期：
+1. 查看設定，確認 Terraform 要建立或更新的資源符合預期：
 
    ```
    terraform plan
@@ -724,7 +715,7 @@ EOF
    ```
 
    等待 Terraform 顯示「Apply complete!」訊息。
-3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)即可查看結果。在 Google Cloud 控制台中，前往 UI 中的資源，確認 Terraform 已建立或更新這些資源。
+3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)即可查看結果。在 Google Cloud 控制台的使用者介面中，前往資源頁面，確認 Terraform 已建立或更新資源。
 
 **注意：**Terraform 範例通常會假設 Google Cloud 專案已啟用必要的 API。
 
@@ -734,43 +725,41 @@ EOF
 
 ### 建立整數範圍分區資料表
 
-如要建立含有結構定義的空白整數範圍分區資料表，請執行下列操作：
+如要建立含有結構定義定義的空白整數範圍分區資料表，請按照下列步驟操作：
 
 ### 控制台
 
-1. 在 Google Cloud 控制台開啟 BigQuery 頁面。
+1. 在 Google Cloud 控制台開啟「BigQuery」頁面。
 
-   [前往 BigQuery 頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
+   [前往「BigQuery」頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 在「Explorer」面板中展開專案並選取資料集。
-3. 展開「動作」選項，然後點按「開啟」。more\_vert
-4. 在詳細資料面板中，按一下「建立資料表」
-   add\_box。
+3. 展開 more\_vert「Actions」(動作) 選項，然後點選「Open」(開啟)。
+4. 在詳細資料面板中，按一下「Create table」(建立資料表) add\_box。
 5. 在「Create table」(建立資料表) 頁面的「Source」(來源) 區段中，選取 [Empty table] (空白資料表)。
 6. 在「Destination」(目的地) 區段中：
 
    * 在「Dataset name」(資料集名稱) 部分選擇適當的資料集。
    * 在「Table name」(資料表名稱) 欄位中，輸入資料表名稱。
    * 確認「Table type」(資料表類型) 設為「Native table」(原生資料表)。
-7. 在「Schema」(結構定義) 部分，輸入結構定義。確認結構定義包含分割欄的 `INTEGER` 欄。詳情請參閱「[指定結構定義](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw)」。
-8. 在「分區與叢集設定」專區的「分區」下拉式選單中，選取「依欄位分區」，然後選擇分區欄。只有當結構包含 `INTEGER` 欄時，才能使用這個選項。
-9. 提供「開始」、「結束」和「間隔」的值：
+7. 在「Schema」(結構定義) 部分，輸入結構定義。請確認結構定義包含分區欄的 `INTEGER` 欄。詳情請參閱「[指定結構定義](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw)」。
+8. 在「Partition and cluster settings」(分區與叢集設定) 區段的「Partitioning」(分區) 下拉式選單中，選取「Partition by field」(依欄位分區)，然後選擇分區資料欄。只有在結構定義包含 `INTEGER` 欄時，才能使用這個選項。
+9. 提供「Start」、「End」和「Interval」的值：
 
-   * **開始**：第一個分區範圍的起點 (含)。
+   * **Start** 是第一個分區範圍的起點 (含)。
    * **End** 是最後一個分區範圍的終點 (不含)。
-   * 「間隔」是每個分區範圍涵蓋的整數值數量。
+   * **Interval** 代表每個分區範圍涵蓋的整數值數量。
 
    超出這些範圍的值會進入特殊的 `__UNPARTITIONED__` 分區。
-10. (選用) 如要規定所有查詢都必須使用這個資料表的分區篩選器，請選取「必須使用分區篩選器」核取方塊。規定必須使用分區篩選器，有助於降低費用及提高成效。詳情請參閱「[設定分割區篩選器規定](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#require-filter)」。
+10. (選用) 如要對這個資料表的所有查詢要求分區篩選器，請勾選「Require partition filter」(必須使用分區篩選器) 核取方塊。規定必須使用分區篩選器，可降低費用並提高效能。詳情請參閱「[設定分區篩選器需求條件](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#require-filter)」。
 11. 點選「建立資料表」。
 
-**注意：** 您無法在 Google Cloud 控制台中設定分區效期。
-如要在建立資料表後設定分區，請參閱「[更新分區到期時間](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#partition-expiration)」。
+**注意：** 您無法在 Google Cloud 控制台中設定分區到期時間。如要在建立資料表後設定分區，請參閱「[更新分區到期時間](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#partition-expiration)」。
 
 ### SQL
 
-如要建立按整數範圍分區的資料表，請使用 [`CREATE TABLE` DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#create_table_statement)搭配 [`PARTITION BY` 子句](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#partition_expression)。
+如要建立整數範圍分區資料表，請使用 [`CREATE TABLE` DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#create_table_statement)和 [`PARTITION BY` 子句](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#partition_expression)。
 
-以下範例會建立按 `customer_id` 資料欄分區的資料表，起點為 0，終點為 100，間隔為 10：
+以下範例建立的資料表會依 `customer_id` 資料欄分區，起點為 0、終點為 100，間隔為 10：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -786,18 +775,18 @@ EOF
    ```
 
    使用 [`OPTIONS` 子句](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#table_option_list)設定資料表選項，例如[分區篩選器需求](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#require-filter)。
-3. 按一下「執行」play\_circle。
+3. 按一下「play\_circle 執行」。
 
 如要進一步瞭解如何執行查詢，請參閱「[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)」。
 
 ### bq
 
-1. 在 Google Cloud 控制台中啟用 Cloud Shell。
+1. 在 Google Cloud 控制台啟用 Cloud Shell。
 
    [啟用 Cloud Shell](https://console.cloud.google.com/?cloudshell=true&hl=zh-tw)
 
    Google Cloud 控制台底部會開啟 [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works?hl=zh-tw) 工作階段，並顯示指令列提示。Cloud Shell 是已安裝 Google Cloud CLI 的殼層環境，並已設定適用於您目前專案的值。工作階段可能要幾秒鐘的時間才能初始化。
-2. 使用 [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#mk-table) 指令，並加上 `--table` 旗標 (或 `-t` 快速鍵)：
+2. 使用 [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#mk-table) 指令，並加上 `--table` 旗標 (或 `-t` 捷徑)：
 
    ```
    bq mk \
@@ -809,23 +798,21 @@ EOF
 
    更改下列內容：
 
-   * SCHEMA：格式為 `column:data_type,column:data_type` 的內嵌結構定義，或是本機電腦上 JSON 結構定義檔案的路徑。詳情請參閱「[指定結構定義](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw)」。
-   * COLUMN\_NAME：分區資料欄的名稱。在表格結構定義中，這個資料欄必須是 `INTEGER` 類型。
-   * START：第一個分割區範圍的開頭 (含)。
-   * END：最後一個分區範圍的結尾 (不含)。
-   * INTERVAL：每個分割範圍的寬度。
-   * BOOLEAN：如果 `true`，則對這個資料表進行的查詢必須包含分割區篩選器。`--require_partition_filter` 標記為選用項目。
-     詳情請參閱「[設定分割區篩選器規定](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#require-filter)」。
-   * PROJECT\_ID：專案 ID。如果省略此金鑰，系統會使用預設專案。
-   * DATASET：專案中的資料集名稱。
+   * SCHEMA：格式為 `column:data_type,column:data_type` 的內嵌結構定義定義，或本機電腦上的 JSON 結構定義檔案路徑。詳情請參閱「[指定結構定義](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw)」。
+   * COLUMN\_NAME：分區資料欄的名稱。在資料表架構中，這個資料欄必須是 `INTEGER` 類型。
+   * START：第一個分區範圍的起點 (含)。
+   * END：最後一個分區範圍的結束位置 (不含)。
+   * INTERVAL：每個分區範圍的寬度。
+   * BOOLEAN：如果為 `true`，則這個資料表的查詢必須包含分區篩選器。`--require_partition_filter` 旗標為選用。詳情請參閱「[設定分區篩選器需求條件](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#require-filter)」。
+   * PROJECT\_ID：專案 ID。如果省略，系統會使用預設專案。
+   * DATASET：：專案中的資料集名稱。
    * TABLE：要建立的資料表名稱。
 
-   超出分區範圍的值會進入特殊`__UNPARTITIONED__`
-   分區。
+   超出分區範圍的值會進入特殊 `__UNPARTITIONED__` 分區。
 
-   如需其他指令列選項，請參閱「[`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#mk-table)」。
+   如需其他指令列選項，請參閱 [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#mk-table)。
 
-   以下範例會建立名為 `mytable` 的資料表，並依 `customer_id` 資料欄進行分割。
+   以下範例會建立名為 `mytable` 的資料表，並依 `customer_id` 資料欄進行分區。
 
    ```
    bq mk \
@@ -843,7 +830,7 @@ EOF
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
-以下範例會建立名為 `mytable` 的資料表，並依整數範圍進行分區：
+以下範例會建立名為 `mytable` 的資料表，並依整數範圍分區：
 
 ```
 resource "google_bigquery_dataset" "default" {
@@ -897,34 +884,33 @@ EOF
 ## 準備 Cloud Shell
 
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
-2. 設定要套用 Terraform 設定的預設 Google Cloud 專案
-   。
+2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
 
-   每個專案只需執行一次這個指令，且可以在任何目錄中執行。
+   每個專案只需執行這個指令一次，而且可以在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
    ```
 
-   如果您在 Terraform 設定檔中設定明確值，環境變數就會遭到覆寫。
+   如果您在 Terraform 設定檔中設定明確的值，環境變數就會遭到覆寫。
 
 ## 準備目錄
 
 每個 Terraform 設定檔都必須有自己的目錄 (也稱為*根模組*)。
 
-1. 在 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw) 中建立目錄，並在該目錄中建立新檔案。檔案名稱的副檔名必須為 `.tf`，例如 `main.tf`。在本教學課程中，這個檔案稱為 `main.tf`。
+1. 在 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw) 中建立目錄，並在該目錄中建立新檔案。檔案名稱必須有 `.tf` 副檔名，例如 `main.tf`。在本教學課程中，這個檔案稱為 `main.tf`。
 
    ```
    mkdir DIRECTORY && cd DIRECTORY && touch main.tf
    ```
-2. 如果您正在按照教學課程操作，可以複製每個章節或步驟中的程式碼範例。
+2. 如果您正在進行教學課程，可以複製每個章節或步驟中的程式碼範例。
 
-   將程式碼範例複製到新建立的 `main.tf` 中。
+   將程式碼範例複製到新建立的 `main.tf`。
 
-   (選用) 從 GitHub 複製程式碼。如果 Terraform 程式碼片段是端對端解決方案的一部分，建議使用這個方法。
-3. 請檢查並修改範例參數，然後套用至您的環境。
+   您也可以從 GitHub 複製程式碼。如果 Terraform 程式碼片段是端對端解決方案的一部分，建議您採用這種做法。
+3. 請查看並修改範例參數，以便套用至您的環境。
 4. 儲存變更。
-5. 初始化 Terraform。每個目錄只需執行一次。
+5. 初始化 Terraform。每個目錄只需執行一次這項操作。
 
    ```
    terraform init
@@ -938,7 +924,7 @@ EOF
 
 ## 套用變更
 
-1. 查看設定，並確認 Terraform 即將建立或更新的資源符合您的預期：
+1. 查看設定，確認 Terraform 要建立或更新的資源符合預期：
 
    ```
    terraform plan
@@ -952,7 +938,7 @@ EOF
    ```
 
    等待 Terraform 顯示「Apply complete!」訊息。
-3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)即可查看結果。在 Google Cloud 控制台中，前往 UI 中的資源，確認 Terraform 已建立或更新這些資源。
+3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)即可查看結果。在 Google Cloud 控制台的使用者介面中，前往資源頁面，確認 Terraform 已建立或更新資源。
 
 **注意：**Terraform 範例通常會假設 Google Cloud 專案已啟用必要的 API。
 
@@ -962,7 +948,7 @@ EOF
 
 ### Java
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定說明操作。詳情請參閱 [BigQuery Java API 參考文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定操作說明進行操作。詳情請參閱 [BigQuery Java API 參考文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -1034,7 +1020,7 @@ public class CreateRangePartitionedTable {
 
 ### Node.js
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定操作說明進行操作。詳情請參閱 [BigQuery Node.js API 參考文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -1090,7 +1076,7 @@ async function createTableRangePartitioned() {
 
 ### Python
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定操作說明進行操作。詳情請參閱 [BigQuery Python API 參考文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -1126,15 +1112,15 @@ print(
 
 您可以透過下列方式，從查詢結果建立分區資料表：
 
-* 在 SQL 中，請使用 `CREATE TABLE ... AS SELECT` 陳述式。您可以使用這種方法建立依時間單位欄或整數範圍分區的資料表，但無法依擷取時間分區。
-* 使用 bq 指令列工具或 BigQuery API，為查詢設定目的地資料表。查詢執行時，BigQuery 會將結果寫入目的地資料表。您可以將這個方法用於任何分割類型。
-* 呼叫 `jobs.insert` API 方法，並在 `timePartitioning` 屬性或 `rangePartitioning` 屬性中指定分割區。
+* 在 SQL 中，請使用 `CREATE TABLE ... AS SELECT` 陳述式。您可以透過這種方法，建立依時間單位欄或整數範圍分區的資料表，但無法依擷取時間分區。
+* 使用 bq 指令列工具或 BigQuery API，為查詢設定目的地資料表。查詢執行時，BigQuery 會將結果寫入目的地資料表。您可以將這種方法用於任何分區類型。
+* 呼叫 `jobs.insert` API 方法，並在 `timePartitioning` 屬性或 `rangePartitioning` 屬性中指定分區。
 
 ### SQL
 
-請使用 [`CREATE TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#create_table_statement) 陳述式。加入 [`PARTITION BY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#partition_expression) 子句來設定分割。
+使用 [`CREATE TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#create_table_statement) 陳述式。加入 [`PARTITION BY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#partition_expression) 子句來設定分區。
 
-以下範例會建立以 `transaction_date` 資料欄為依據分區的資料表：
+以下範例會建立依 `transaction_date` 資料欄分區的資料表：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -1154,24 +1140,18 @@ print(
    );
    ```
 
-   使用 [`OPTIONS` 子句](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#table_option_list)設定資料表選項，例如[分區篩選器需求](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#require-filter)。
-3. 按一下「執行」play\_circle。
+   使用 [`OPTIONS` 子句](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#table_option_list)設定資料表選項，例如[分區篩選器需求條件](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#require-filter)。
+3. 按一下「play\_circle 執行」。
 
 如要進一步瞭解如何執行查詢，請參閱「[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)」。
 
 ### bq
 
-1. 在 Google Cloud 控制台中啟用 Cloud Shell。
+1. 在 Google Cloud 控制台啟用 Cloud Shell。
 
    [啟用 Cloud Shell](https://console.cloud.google.com/?cloudshell=true&hl=zh-tw)
 
    Google Cloud 控制台底部會開啟 [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works?hl=zh-tw) 工作階段，並顯示指令列提示。Cloud Shell 是已安裝 Google Cloud CLI 的殼層環境，並已設定適用於您目前專案的值。工作階段可能要幾秒鐘的時間才能初始化。
-2. 如要從查詢建立分區資料表，請使用 [`bq query`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_query) 指令，並搭配 `--destination_table` 旗標和 `--time_partitioning_type` 旗標。
+2. 如要透過查詢建立分區資料表，請使用 [`bq query`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_query) 指令，並加上 `--destination_table` 旗標和 `--time_partitioning_type` 旗標。
 
-   按時間單位資料欄分區：
-
-   ```
-   bq query \
-      --use_legacy_sql=false \
-      --destination_table TABLE_NAME \
-   ```
+   按時間單位

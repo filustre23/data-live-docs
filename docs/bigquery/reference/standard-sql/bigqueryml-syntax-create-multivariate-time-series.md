@@ -583,7 +583,3 @@ replaced with local linear interpolated values when they're detected.
 **Arguments**
 
 A `BOOL` value. The default value is `TRUE`.
-
-### `ADJUST_STEP_CHANGES`
-
-**Syntax**

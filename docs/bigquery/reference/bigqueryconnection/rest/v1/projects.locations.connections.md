@@ -174,6 +174,5 @@ Connection properties specific to Cloud Spanner.
 | --- |
 | ``` {   "database": string,   "useParallelism": boolean,   "maxParallelism": integer,   "useDataBoost": boolean,   "databaseRole": string } ``` |
 
-| Fields | |
-| --- | --- |
-| `database` |
+|
+|  |

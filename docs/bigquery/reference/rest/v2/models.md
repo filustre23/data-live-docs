@@ -203,5 +203,4 @@ Indicates the type of the Model.
 
 Information about a single training query run for the model.
 
-|
-|  |
+<

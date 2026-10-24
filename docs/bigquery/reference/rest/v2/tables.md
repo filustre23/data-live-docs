@@ -143,4 +143,3 @@ Send feedback
 | `cloneDefinition` | `object (CloneDefinition)`  Output only. Contains information about the clone. This value is set via the clone operation. |
 | `numTimeTravelPhysicalBytes` | `string (Int64Value format)`  Output only. Number of physical bytes used by time travel storage (deleted or changed data). This data is not kept in real time, and might be delayed by a few seconds to a few minutes. |
 | `numTotalLogicalBytes` | `string (Int64Value format)`  Output only. Total number of logical bytes in the table or materialized view. |
-| `numActiveLogicalBytes` | `string (` |

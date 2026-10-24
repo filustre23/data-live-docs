@@ -354,9 +354,5 @@ DATE
 **Example**
 
 ```
-SELECT DATE_FROM_UNIX_DATE(14238) AS date_from_epoch;
-
-/*-----------------+
- | date_from_epoch |
- +----------------
+SELECT DATE_FROM_UNIX_DATE(14238) AS date_from_epoch</
 ```

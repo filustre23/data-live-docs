@@ -993,4 +993,4 @@ Your usage exceeded quota for ExtractBytesPerDay
 
 #### 診斷
 
-如果匯出的資料表大於 50 TiB，匯出作業會因[超過擷取限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#export_jobs)而失敗。如要
+如果匯

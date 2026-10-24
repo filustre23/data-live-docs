@@ -390,5 +390,5 @@ Delete one row from the table:
 
 ```
 DELETE mydataset.Produce
-WHERE product = 'bananas';
+WHERE product
 ```

@@ -16,6 +16,12 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 管理外部 Hive 分區資料
 
+Hive 分區支援功能可讓您使用 BigLake 資料表或 BigQuery 外部資料表，查詢 Cloud Storage、Amazon Simple Storage Service (Amazon S3) 和 Azure Blob Storage 中的外部資料。當查詢依分區索引鍵篩選時，BigQuery 可以剪除分區並讀取較少資料。
+
+本文說明支援的 Hive 分區版面配置和格式、分區剪除和限制。建議使用 BigLake 資料表，因為這類資料表可讓您在資料表層級強制執行精細的安全防護機制。
+
+## 支援的資料儲存庫和格式
+
 您可以使用 BigQuery 外部資料表，查詢下列資料儲存庫中的分區資料：
 
 * [Cloud Storage](https://docs.cloud.google.com/bigquery/docs/create-cloud-storage-table-biglake?hl=zh-tw#create-biglake-partitioned-data)
@@ -30,7 +36,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 * ORC
 * Parquet
 
-如要查詢外部分區資料，您必須建立 [BigLake 資料表](https://docs.cloud.google.com/bigquery/docs/create-cloud-storage-table-biglake?hl=zh-tw)或[外部資料表](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage?hl=zh-tw#create-external-table-partitioned)。建議使用 BigLake 資料表，因為這類資料表可讓您在資料表層級強制執行精細的安全防護機制。如要瞭解 BigLake 和外部資料表，請參閱「[BigLake 資料表簡介](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw)」和「[外部資料表簡介](https://docs.cloud.google.com/bigquery/docs/external-tables?hl=zh-tw)」。
+如要查詢外部分區資料，您必須建立 [BigLake 資料表](https://docs.cloud.google.com/bigquery/docs/create-cloud-storage-table-biglake?hl=zh-tw)或[外部資料表](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage?hl=zh-tw#create-external-table-partitioned)。如要瞭解 BigLake 和外部資料表，請參閱「[BigLake 資料表簡介](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw)」和「[外部資料表簡介](https://docs.cloud.google.com/bigquery/docs/external-tables?hl=zh-tw)」。
 
 如要啟用 Hive 分區支援，請在[資料表定義檔案](https://docs.cloud.google.com/bigquery/docs/external-table-definition?hl=zh-tw#create_a_definition_file_for_hive-partitioned_data)中設定適當選項。如需查詢代管分區資料表的操作說明，請參閱「[分區資料表簡介](https://docs.cloud.google.com/bigquery/docs/partitioned-tables?hl=zh-tw)」。
 
@@ -129,11 +135,11 @@ BigQuery 會盡可能使用分區索引鍵上的查詢述詞，來剪除分區�
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-16 (世界標準時間)。
+上次更新時間：2026-10-22 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-16 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-22 (世界標準時間)。"],[],[]]

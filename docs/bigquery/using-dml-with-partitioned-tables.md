@@ -16,13 +16,13 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 使用 DML 更新分區資料表資料
 
-本頁提供分區資料表的資料操縱語言 (DML) 支援總覽。
+本頁面提供分區資料表支援的 data manipulation language (DML) 總覽。
 
 如需有關 DML 的詳細資訊，請參閱：
 
 * [DML 簡介](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language?hl=zh-tw)
 * [DML 語法](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax?hl=zh-tw)
-* [使用資料操縱語言更新資料表資料](https://docs.cloud.google.com/bigquery/docs/updating-data?hl=zh-tw)
+* [使用 data manipulation language 更新資料表資料](https://docs.cloud.google.com/bigquery/docs/updating-data?hl=zh-tw)
 
 ## 範例中使用的資料表
 
@@ -57,7 +57,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
     ]
 ```
 
-在出現 COLUMN\_ID 的範例中，請將其替換為要執行的資料欄名稱。
+在出現 `COLUMN_ID` 的範例中，請將其替換為要操作的資料欄名稱。
 
 ## 插入資料
 
@@ -65,7 +65,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ### 將資料插入至擷取時間分區資料表
 
-使用 DML 陳述式新增資料列至擷取時間分區資料表時，可指定資料列應新增至哪個分區。您可以使用 [`_PARTITIONTIME` 虛擬資料欄](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables?hl=zh-tw#query_an_ingestion-time_partitioned_table)來參照分區。
+使用 DML 陳述式新增資料列至擷取時間分區資料表時，可指定資料列應新增至哪個分區。您可以使用 [`_PARTITIONTIME` 虛擬資料欄](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables?hl=zh-tw#query_an_ingestion-time_partitioned_table)參照分區。
 
 例如，以下 `INSERT` 陳述式會新增資料列至 `mytable` 的 2017 年 5 月 1 日分區，也就是 `“2017-05-01”`。
 
@@ -93,7 +93,7 @@ SELECT
   "one"
 ```
 
-**注意：** `_PARTITIONTIME` 虛擬資料欄位亦可透過 [`UPDATE` 陳述式](#updating_data)來修改。
+**注意：** `_PARTITIONTIME` 虛擬資料欄也可以使用 [`UPDATE` 陳述式](#updating_data)修改。
 
 ### 將資料插入至分區資料表
 
@@ -118,7 +118,7 @@ FROM
 
 ### 刪除擷取時間分區資料表中的資料
 
-下列 `DELETE` 陳述式會刪除 `mytable` 的 2017 年 6 月 1 日分區 (`"2017-06-01"`) 中，`field1` 等於`21` 的所有資料列。請使用 [`_PARTITIONTIME` 虛擬資料欄](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables?hl=zh-tw#query_an_ingestion-time_partitioned_table)來參照分區。
+下列 `DELETE` 陳述式會刪除 `mytable` 的 2017 年 6 月 1 日分區 (`"2017-06-01"`) 中，`field1` 等於`21` 的所有資料列。您可以使用 [`_PARTITIONTIME` 偽列](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables?hl=zh-tw#query_an_ingestion-time_partitioned_table)參照分區。
 
 ```
 DELETE
@@ -144,29 +144,29 @@ WHERE
 
 ## 使用 DML DELETE 刪除分區
 
-如果符合條件的 `DELETE` 陳述式涵蓋分區中的所有資料列，BigQuery 就會移除整個分區。系統會移除這些檔案，不會掃描位元組或耗用配額。以下 `DELETE` 陳述式範例涵蓋 `_PARTITIONDATE` 虛擬資料欄的篩選器整個分區：
+如果符合條件的 `DELETE` 陳述式涵蓋分區中的所有資料列，BigQuery 會移除整個分區。這項移除作業不會掃描位元組或耗用運算單元。以下 `DELETE` 陳述式範例涵蓋 `_PARTITIONDATE` 虛擬資料欄篩選器的整個分區：
 
 ```
 DELETE mydataset.mytable
 WHERE _PARTITIONDATE IN ('2076-10-07', '2076-03-06');
 ```
 
-### 常見的資格不符情形
+### 常見的失格原因
 
-最佳化資格可能因分區類型、基礎儲存空間中繼資料和篩選器述詞而異。舉例來說，如果查詢具有下列特徵，使用 `DML DELETE` 進行最佳化可能無法帶來效益：
+最佳化資格可能因分區類型、基礎儲存空間中繼資料和篩選器述詞而異。舉例來說，如果查詢具有下列特性，使用 `DML DELETE` 進行最佳化可能不會帶來好處：
 
 * 部分分區涵蓋範圍
 * 參照非分區資料欄
-* [最近透過 [BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api?hl=zh-tw) 或 [BigQuery Storage Write API (REST)](https://docs.cloud.google.com/bigquery/streaming-data-into-bigquery?hl=zh-tw) 擷取的資料](https://docs.cloud.google.com/bigquery/docs/write-api?hl=zh-tw#stream_into_partitioned_tables)
+* 透過 [BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api?hl=zh-tw) 或 [BigQuery Storage Write API (REST)](https://docs.cloud.google.com/bigquery/streaming-data-into-bigquery?hl=zh-tw)[最近擷取的資料](https://docs.cloud.google.com/bigquery/docs/write-api?hl=zh-tw#stream_into_partitioned_tables)
 * 含有子查詢或不支援述詞的篩選器
 
-如果分區資料表是使用分區資料欄以外的資料欄叢集，可能也不適用這項最佳化功能。
+如果分區資料表是使用分區資料欄以外的資料欄分群，這項最佳化功能可能也不適用。
 
-最佳做法是執行模擬測試，確認查詢結果處理的位元組數為 0。
+最佳做法是執行模擬測試，確認查詢結果為 0 個位元組。
 
 ### 多陳述式交易
 
-這項最佳化功能適用於[多陳述式交易](https://docs.cloud.google.com/bigquery/docs/transactions?hl=zh-tw)。以下查詢範例會在單一交易中，將分區資料替換成另一個資料表中的資料，且不會掃描 `DELETE` 陳述式的分區。
+這項最佳化功能適用於[多陳述式交易](https://docs.cloud.google.com/bigquery/docs/transactions?hl=zh-tw)。下列查詢範例會在單一交易中，以其他資料表的資料取代分區，而不會掃描 `DELETE` 陳述式的分區。
 
 ```
 DECLARE REPLACE_DAY DATE;
@@ -217,16 +217,16 @@ WHERE
   AND field1 = 21
 ```
 
-## 按小時、月和年分區資料表的 DML
+## 每小時、每月和每年分區資料表中的 DML
 
-您可以使用 DML 陳述式修改按小時、月或年分區的資料表。提供相關日期/時間戳記/日期時間的小時、月份或年份範圍，如下列按月分區資料表的範例所示：
+您可以使用 DML 陳述式，修改按小時、月或年分區的資料表。提供相關日期/時間戳記/日期時間的小時、月份或年份範圍，如下列每月分區資料表範例所示：
 
 ```
     bq query --nouse_legacy_sql 'DELETE FROM my_dataset.my_table WHERE
     TIMESTAMP_TRUNC(ts_column, MONTH) = "2020-01-01 00:00:00";'
 ```
 
-或者，以下是另一個分區資料表的範例，其中包含 `DATETIME` 資料欄：
+另一個範例是含有 `DATETIME` 資料欄的分區資料表：
 
 ```
     bq query --nouse_legacy_sql 'DELETE FROM my_dataset.my_table WHERE
@@ -240,13 +240,13 @@ WHERE
 
 ### 在使用 `MERGE` 陳述式時縮減分區
 
-對分區資料表執行 `MERGE` 陳述式時，可以在子查詢篩選器、`search_condition` 篩選器或 `merge_condition` 篩選器中加入分區資料欄，限制掃描的分區。掃描來源資料表、目標資料表或兩者時，都可能發生修剪作業。
+對分區資料表執行 `MERGE` 陳述式時，您可以在子查詢篩選器、`search_condition` 篩選器或 `merge_condition` 篩選器中加入分區資料欄，藉此限制要掃描的分區。掃描來源資料表、目標資料表或兩者時，都可能發生剪除。
 
-下面每一個範例均使用 `_PARTITIONTIME` 虛擬資料欄做為篩選條件，查詢擷取時間分區資料表。
+下列各範例會使用 `_PARTITIONTIME` 虛擬資料欄做為篩選條件，查詢擷取時間分區資料表。
 
 #### 使用子查詢篩選來源資料
 
-在下列 `MERGE` 陳述式中，`USING` 子句中的子查詢會根據來源資料表中的 `_PARTITIONTIME` 虛擬資料欄進行篩選。
+在下列 `MERGE` 陳述式中，`USING` 子句中的子查詢會篩選來源資料表中的 `_PARTITIONTIME` 虛擬資料欄。
 
 ```
 MERGE dataset.target T
@@ -266,8 +266,8 @@ WHERE equal($11, 1514764800.000000000)
 
 #### 在 `when_clause` 的 `search_condition` 中使用篩選器
 
-如果 `search_condition` 包含篩選器，查詢最佳化工具會嘗試縮減分區。舉例來說，在下列 `MERGE` 陳述式中，每個 `WHEN
-MATCHED` 和 `WHEN NOT MATCHED` 子句都包含 `_PARTITIONTIME` 虛擬資料欄的篩選條件。
+如果 `search_condition` 包含篩選器，查詢最佳化工具會嘗試剪除分區。舉例來說，在下列 `MERGE` 陳述式中，每個 `WHEN
+MATCHED` 和 `WHEN NOT MATCHED` 子句都包含 `_PARTITIONTIME` 虛擬資料欄的篩選器。
 
 ```
 MERGE dataset.target T
@@ -281,9 +281,9 @@ WHEN NOT MATCHED BY SOURCE AND T._PARTITIONTIME = '2018-01-03' THEN
   DELETE
 ```
 
-在彙整階段，系統只會掃描目標資料表中下列分區的資料：`'2018-01-01'`、`'2018-01-02'` 和 `'2018-01-03'`，也就是所有 `search_condition` 篩選條件的聯集。
+在彙整階段，系統只會掃描目標資料表中的下列分區：`'2018-01-01'`、`'2018-01-02'` 和 `'2018-01-03'`，也就是所有 `search_condition` 篩選條件的聯集。
 
-查詢執行計畫：
+從查詢執行計畫：
 
 ```
 READ
@@ -292,7 +292,7 @@ FROM temp.target
 WHERE or(equal($2, 1514764800.000000000), equal($2, 1514851200.000000000), equal($2, 1514937600.000000000))
 ```
 
-不過，在下列範例中，`WHEN NOT MATCHED BY SOURCE` 子句沒有篩選運算式：
+不過，在以下範例中，`WHEN NOT MATCHED BY SOURCE` 子句沒有篩選運算式：
 
 ```
 MERGE dataset.target T
@@ -305,13 +305,13 @@ WHEN NOT MATCHED BY SOURCE THEN
 ```
 
 這項查詢必須掃描整個目標資料表，才能計算 `WHEN NOT MATCHED BY
-SOURCE` 子句。因此不會修剪任何分區。
+SOURCE` 子句。因此不會剪除任何分區。
 
 #### 在 `merge_condition` 中使用常數 false 述詞
 
-如果同時使用 `WHEN NOT MATCHED` 和 `WHEN NOT MATCHED BY SOURCE` 子句，BigQuery 通常會執行完整外部聯結，這無法修剪。不過，如果合併條件使用常數假述詞，BigQuery 就能使用篩選條件來縮減分區。如要進一步瞭解如何使用常數 false 述詞，請參閱[`MERGE` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax?hl=zh-tw#merge_statement)說明文件中的 `merge_condition` 子句說明。
+如果同時使用 `WHEN NOT MATCHED` 和 `WHEN NOT MATCHED BY SOURCE` 子句，BigQuery 通常會執行完整外部彙整，而這無法剪除。不過，如果合併條件使用常數 false 述詞，BigQuery 就能使用篩選條件進行分區剪除。如要進一步瞭解如何使用常數 false 述詞，請參閱 [`MERGE` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax?hl=zh-tw#merge_statement)說明文件中的 `merge_condition` 子句說明。
 
-下列範例只會掃描目標和來源資料表中的 `'2018-01-01'` 分區。
+以下範例只會掃描目標和來源資料表中的 `'2018-01-01'` 分區。
 
 ```
 MERGE dataset.target T
@@ -325,9 +325,9 @@ WHEN NOT MATCHED BY SOURCE AND _PARTITIONTIME = '2018-01-01' THEN
 
 #### 在 `merge_condition` 中使用篩選器
 
-查詢最佳化工具會嘗試在 `merge_condition` 中使用篩選器來縮減分區。查詢最佳化工具不一定能將述詞下推至資料表掃描階段，視彙整類型而定。
+查詢最佳化工具會嘗試在 `merge_condition` 中使用篩選器來縮減分區。查詢最佳化工具不一定能將述詞下推至資料表掃描階段，具體取決於彙整類型。
 
-在下列範例中，`merge_condition` 會做為述詞，用來彙整來源和目標資料表。查詢最佳化工具掃描這兩個資料表時，可以將這個述詞向下推送。因此，查詢只會掃描目標和來源資料表中的 `'2018-01-01'` 分區。
+在以下範例中，`merge_condition` 做為述詞，用於彙整來源和目標資料表。查詢最佳化工具在掃描這兩個資料表時，可以向下推送這個述詞。因此，查詢只會掃描目標和來源資料表中的 `'2018-01-01'` 分區。
 
 ```
 MERGE dataset.target T
@@ -339,7 +339,7 @@ WHEN MATCHED THEN
   UPDATE SET COLUMN_ID = NEW_VALUE
 ```
 
-在下一個範例中，`merge_condition` 不包含來源資料表的述詞，因此無法對來源資料表執行分區修剪作業。陳述式確實包含目標資料表的述詞，但陳述式使用 `WHEN NOT MATCHED BY SOURCE` 子句，而非 `WHEN MATCHED` 子句。也就是說，查詢必須掃描整個目標資料表，找出不相符的資料列。
+在下一個範例中，`merge_condition` 不含來源資料表的述詞，因此無法對來源資料表執行分區剪除。陳述式確實包含目標資料表的述詞，但陳述式使用的是 `WHEN NOT MATCHED BY SOURCE` 子句，而非 `WHEN MATCHED` 子句。這表示查詢必須掃描整個目標資料表，找出不相符的資料列。
 
 ```
 MERGE dataset.target T
@@ -351,15 +351,15 @@ WHEN NOT MATCHED BY SOURCE THEN
 
 ## 限制
 
-如要瞭解 DML 的限制，請參閱[DML 參考資料](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language?hl=zh-tw)頁面上的[限制](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language?hl=zh-tw#dml-limitations)一節。
+如要瞭解 DML 限制，請參閱「[DML 參考資料](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language?hl=zh-tw)」頁面的「[限制](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language?hl=zh-tw#dml-limitations)」一節。
 
 ## 配額
 
-如要瞭解 DML 配額資訊，請參閱「[配額與限制](https://docs.cloud.google.com/bigquery/quota-policy?hl=zh-tw)」頁面上的「[DML 陳述式](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#data-manipulation-language-statements)」一節。
+如要瞭解 DML 配額，請參閱「[配額與限制](https://docs.cloud.google.com/bigquery/quota-policy?hl=zh-tw)」頁面的「[DML 陳述式](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#data-manipulation-language-statements)」一節。
 
 ## 定價
 
-如要瞭解 DML 定價，請參閱[分區資料表](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax?hl=zh-tw#partitioned_tables)上執行的 DML 陳述式查詢大小計算方式。
+如要瞭解 DML 定價，請參閱如何計算在[分區資料表](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax?hl=zh-tw#partitioned_tables)上執行的 DML 陳述式查詢大小。
 
 ## 資料表安全性
 
@@ -379,11 +379,11 @@ WHEN NOT MATCHED BY SOURCE THEN
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-15 (世界標準時間)。
+上次更新時間：2026-10-23 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-23 (世界標準時間)。"],[],[]]

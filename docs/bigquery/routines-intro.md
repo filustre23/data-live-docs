@@ -16,13 +16,13 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 日常安排簡介
 
-本文說明如何選擇常式，這是一種資源類型，可用於在 BigQuery 中建立函式或預存程序。
+在 BigQuery 建立常式，即可使用可重複使用的函式和預存程序，封裝複雜的邏輯。為工作負載選擇合適的常式，即可有效匯總資料、自動執行管理工作，並直接從查詢整合外部服務。
 
 ## 支援的日常安排
 
 BigQuery 支援下列常式：
 
-* [使用者定義函式](https://docs.cloud.google.com/bigquery/docs/user-defined-functions?hl=zh-tw) (UDF)
+* [User-defined functions](https://docs.cloud.google.com/bigquery/docs/user-defined-functions?hl=zh-tw) (UDF)
 * [使用者定義的匯總函式](https://docs.cloud.google.com/bigquery/docs/user-defined-aggregates?hl=zh-tw) (UDAF)
 * [資料表函式](https://docs.cloud.google.com/bigquery/docs/table-functions?hl=zh-tw)
 * [遠端函式](https://docs.cloud.google.com/bigquery/docs/remote-functions?hl=zh-tw)
@@ -36,7 +36,7 @@ BigQuery 支援下列常式：
 
 選擇常式時，請考量下列因素，各類常式的相關章節會說明這些因素：
 
-* 要實作的工作類型。
+* 要執行的工作類型。
 * 要使用的程式設計語言。
 * 要為常式實作的持續性類型：暫時或持續。
 * 常式所需的重複使用類型：跨單一或多個查詢。
@@ -51,32 +51,32 @@ BigQuery 支援下列常式：
 | **工作** | **常式資源類型** |
 | --- | --- |
 | 建立函式，在 BigQuery 中執行一般用途工作。 | SQL 或 JavaScript UDF  SQL 或 JavaScript UDAF |
-| 在 BigQuery 中建立執行一般用途工作的函式，並使用 [Cloud 資源連結](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection?hl=zh-tw)與外部系統通訊。 Google Cloud | Python UDF |
+| 建立函式，在 BigQuery 中執行一般用途工作，並使用 [Cloud 資源連結](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection?hl=zh-tw)與外部 Google Cloud 系統通訊。 | Python UDF |
 | 建立匯總資料的函式。 | UDAF |
-| 使用參數建立表格。 | 資料表函式 |
+| 使用參數建立資料表。 | 資料表函式 |
 | 建立使用 BigQuery 不支援的語言、程式庫或服務的函式。這些函式會直接與 [Cloud Run functions](https://docs.cloud.google.com/functions/docs/concepts/overview?hl=zh-tw) 和 [Cloud Run](https://docs.cloud.google.com/run/docs/overview/what-is-cloud-run?hl=zh-tw) 整合。 | 遠端函式 |
-| 使用[程序語言](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language?hl=zh-tw)，在單一查詢中執行多個陳述式，做為多陳述式查詢。您可以使用多重陳述式查詢執行下列操作：   * 按照共用狀態的序列，執行多個陳述式。 * 自動執行管理工作，例如建立或捨棄資料表。 * 使用 `IF` 和 `WHILE` 等程式設計建構項目，實作複雜邏輯。   在 BigQuery 中建立及呼叫 Apache Spark 適用的預存程序。 | 預存程序 |
+| 使用[程序語言](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language?hl=zh-tw)，在單一查詢中執行多個陳述式，做為多陳述式查詢。您可以使用多陳述式查詢執行下列操作：   * 按照順序執行多個陳述式，並共用狀態。 * 自動執行管理工作，例如建立或捨棄資料表。 * 使用 `IF` 和 `WHILE` 等程式設計建構項目，實作複雜邏輯。   在 BigQuery 中建立及呼叫 Apache Spark 預存程序。 | 預存程序 |
 
 ## User-defined function (UDF)
 
-使用者定義函式可讓您使用 SQL 運算式、JavaScript 程式碼或 Python 程式碼建立函式。UDF 可接受輸入資料欄、對輸入內容執行動作，並將執行結果以值的形式傳回。
+UDF 可讓您使用 SQL 運算式、JavaScript 程式碼或 Python 程式碼建立函式。UDF 可接受輸入資料欄、對輸入內容執行動作，並將執行結果以值的形式傳回。
 
 您可以定義永久或暫時的 UDF。您可以在多項查詢中重複使用永久 UDF，而單項查詢的範圍內只能有一個 temporary UDF。
 
-您可以建立 UDF，與[自訂遮蓋常式](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro?hl=zh-tw#custom_mask)搭配使用，在資料欄套用 UDF 後傳回資料欄的值。建立自訂遮蓋常式後，您可以在「[Create data policies](https://docs.cloud.google.com/bigquery/docs/column-data-masking?hl=zh-tw#create_data_policies)」(建立資料政策) 中，將該常式設為遮蓋規則。
+您可以建立 UDF，與[自訂遮蓋常式](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro?hl=zh-tw#custom_mask)搭配使用，在將 UDF 套用至資料欄後，傳回資料欄的值。建立自訂遮蓋常式後，您可以在「[Create data policies](https://docs.cloud.google.com/bigquery/docs/column-data-masking?hl=zh-tw#create_data_policies)」(建立資料政策) 中，將該常式設為遮蓋規則。
 
 如要進一步瞭解 UDF，請參閱下列資源：
 
-* [使用者定義函式](https://docs.cloud.google.com/bigquery/docs/user-defined-functions?hl=zh-tw)
-* [舊版 SQL 中的使用者定義函式](https://docs.cloud.google.com/bigquery/docs/user-defined-functions-legacy?hl=zh-tw)
+* [user-defined function](https://docs.cloud.google.com/bigquery/docs/user-defined-functions?hl=zh-tw)
+* [舊版 SQL 中的 user-defined function](https://docs.cloud.google.com/bigquery/docs/user-defined-functions-legacy?hl=zh-tw)
 * [比較 UDF 和 UDAF](#compare-udfs)
 
-### 語言型 UDF
+### 語言 UDF
 
 * *SQL UDF* 支援[範本化 UDF 參數](https://docs.cloud.google.com/bigquery/docs/user-defined-functions?hl=zh-tw#templated-sql-udf-parameters)，可在呼叫 UDF 時比對多個引數類型。SQL UDF 也可以傳回[純量子查詢](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries?hl=zh-tw#scalar_subquery_concepts)的值。
 * *JavaScript UDF* 可讓您從 SQL 查詢呼叫以 JavaScript 編寫的程式碼。
   + 與標準 SQL 查詢相比，JavaScript UDF 通常會耗用更多運算單元資源，導致工作效能降低。
-  + 如果函式可以用 SQL 表示，通常最好以標準 SQL 查詢工作的形式執行程式碼。
+  + 如果函式可以用 SQL 表示，通常以標準 SQL 查詢工作的形式執行程式碼會更有效率。
 * *Python UDF* 是在 BigQuery 代管資源上建構及執行。這些 UDF 可讓您在 Python 中實作函式，並在 SQL 查詢中使用。
   + 您可以使用 [Cloud 資源連結](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection?hl=zh-tw)服務帳戶，從 Python UDF [存取 Google Cloud 服務或外部服務](https://docs.cloud.google.com/bigquery/docs/user-defined-functions-python?hl=zh-tw#use-online-service)。
   + 您也可以從 [Python Package Index (PyPI)](https://pypi.org/) 安裝第三方程式庫。
@@ -99,54 +99,53 @@ UDAF 無法變更資料、與外部系統通訊，或將記錄傳送至 Google C
 
 ### SQL UDAF
 
-SQL UDAF 通常會匯總[群組](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw#group_by_clause)中所有資料列的函式參數。不過，您可以使用 `NOT AGGREGATE` 關鍵字，將函式參數指定為非匯總。非匯總函式參數是純量函式參數，在群組中的所有資料列都具有常數值。SQL UDAF 可同時包含匯總和非匯總參數。
+SQL UDAF 通常會匯總[群組](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw#group_by_clause)中所有資料列的函式參數。不過，您可以使用 `NOT AGGREGATE` 關鍵字，將函式參數指定為非匯總。非匯總函式參數是純量函式參數，群組中所有資料列的值都相同。SQL UDAF 可同時包含匯總和非匯總參數。
 
 ### JavaScript UDAF
 
 JavaScript UDAF 可包含 JavaScript 程式庫。JavaScript 函式主體可以包含自訂 JavaScript 程式碼，例如 JavaScript 全域變數和自訂函式。
 
-JavaScript 函式通常會使用較多資源，因此建議您參考這些[效能提示](https://docs.cloud.google.com/bigquery/docs/user-defined-aggregates?hl=zh-tw#performance-tips)。
+由於 JavaScript 函式通常會使用更多資源，建議您參考這些[效能提示](https://docs.cloud.google.com/bigquery/docs/user-defined-aggregates?hl=zh-tw#performance-tips)。
 
-JavaScript UDAF 有一些限制。[只能使用特定類型的編碼](https://docs.cloud.google.com/bigquery/docs/user-defined-aggregates?hl=zh-tw#javascript-type-encodings)，且序列化和反序列化有[相關規定](https://docs.cloud.google.com/bigquery/docs/user-defined-aggregates?hl=zh-tw#serialize-javascript-udaf)。
+JavaScript UDAF 有一些限制。[只能使用特定類型的編碼](https://docs.cloud.google.com/bigquery/docs/user-defined-aggregates?hl=zh-tw#javascript-type-encodings)，且序列化和反序列化作業必須符合[相關規定](https://docs.cloud.google.com/bigquery/docs/user-defined-aggregates?hl=zh-tw#serialize-javascript-udaf)。
 
 ## 比較 UDF 和 UDAF
 
-選擇 UDF 而非 UDAF，取決於您嘗試執行的特定工作。
+選擇 UDF 還是 UDAF，取決於您要執行的特定工作。
 
 * 如要對個別資料值執行計算或轉換，請使用 UDF。
 * 如要對一組資料值執行相同操作，請使用 UDAF。
 
 舉例來說，如要計算一欄數字的平均值，請使用 UDAF。如要將一欄字串轉換為大寫，請使用 UDF。
 
-UDF 和 UDAF 有下列相似之處：
+UDF 和 UDAF 有以下相似之處：
 
-* UDF 和 UDAF 無法變更資料、與外部系統通訊，或將記錄傳送至 Google Cloud Observability 或類似應用程式。但 Python UDF 例外，可透過 Cloud 資源連結存取外部服務。不過，Python UDF 不支援 [VPC Service Controls](https://docs.cloud.google.com/vpc-service-controls/docs/overview?hl=zh-tw) 或[客戶自行管理的加密金鑰 (CMEK)](https://docs.cloud.google.com/kms/docs/cmek?hl=zh-tw)。
+* UDF 和 UDAF 無法變更資料、與外部系統通訊，或將記錄傳送至 Google Cloud Observability 或類似應用程式。Python UDF 是例外，可使用 Cloud 資源連結存取外部服務。不過，Python UDF 不支援 [VPC Service Controls](https://docs.cloud.google.com/vpc-service-controls/docs/overview?hl=zh-tw) 或[客戶自行管理的加密金鑰 (CMEK)](https://docs.cloud.google.com/kms/docs/cmek?hl=zh-tw)。
 * UDAF 的限制與 UDF 相同，但[多了一些限制](https://docs.cloud.google.com/bigquery/docs/user-defined-aggregates?hl=zh-tw#limitations)。
-* UDF 和 UDAF 具有相同的[配額和限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#udf_limits)。
+* UDF 和 UDAF 的[配額和限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#udf_limits)相同。
 
 UDF 和 UDAF 的差異如下：
 
 | **屬性** | **UDF** | **UDAF** |
 | --- | --- | --- |
-| 定義 | 使用者定義函式 (UDF) 可接受輸入資料欄、對輸入內容執行動作，並將執行結果以值的形式傳回。 | 使用者定義的匯總函式 (UDAF) 可接受輸入資料欄、一次對一組資料列執行計算，然後將計算結果以單一值的形式傳回。 |
+| 定義 | 使用者定義函式 (UDF) 可接受輸入資料欄、對輸入內容執行動作，並將執行結果以值的形式傳回。 | 使用者定義匯總函式 (UDAF) 可接受輸入資料欄、一次對一組資料列執行計算，然後將計算結果以單一值的形式傳回。 |
 | 支援的語言 | SQL、JavaScript 和 Python | SQL 和 JavaScript |
-| 保留設定 | * 可以是暫時或永久。 * 您可以在多項查詢中使用 persistent UDF。 * 暫時性 UDF 只能用於單一查詢。 * Python UDF 只能是永久性質，不能是暫時性質。 | * 可以是暫時性或永久性。 * 您可以在多項查詢中重複使用永久 UDAF。 * 暫時性 UDAF 只能用於單一查詢、指令碼、工作階段或程序。 * 在擁有者之間共用永久 UDAF 時，可以安全呼叫。 |
-| 引數和資料類型 | UDF 接受符合 GoogleSQL for BigQuery [資料類型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw)的參數值。部分 SQL 類型可直接對應至 JavaScript 類型，但其他類型則無法。請參閱 [JavaScript 支援的類型](https://docs.cloud.google.com/bigquery/docs/user-defined-functions?hl=zh-tw#supported-javascript-udf-data-types)。  如果是 SQL UDF，參數值可以是 `ANY TYPE`，函式呼叫時可比對多個引數型別。  只有 JavaScript UDF 具有決定性指定符，可向 BigQuery 提供查詢結果是否可快取的提示。 | SQL 和 JavaScript UDAF 接受符合 BigQuery [資料類型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw) GoogleSQL 的參數值。  函式參數可以是匯總或非匯總。 |
+| 保留設定 | * 可以是暫時或永久。 * 您可以在多項查詢中使用 persistent UDF。 * 暫時性 UDF 只能用於單一查詢。 * Python UDF 只能是永久性質，不能是暫時性質。 | * 可以是暫時或永久。 * 您可以在多項查詢中重複使用永久 UDAF。 * 暫時性 UDAF 只能用於單一查詢、指令碼、工作階段或程序。 * 在擁有者之間共用時，可安全呼叫永久 UDAF。 |
+| 引數和資料類型 | UDF 接受符合 GoogleSQL for BigQuery [資料類型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw)的參數值。部分 SQL 類型可直接對應至 JavaScript 類型，但其他類型則無法。請參閱 [JavaScript 支援的類型](https://docs.cloud.google.com/bigquery/docs/user-defined-functions?hl=zh-tw#supported-javascript-udf-data-types)。  如果是 SQL UDF，參數值可以是 `ANY TYPE`，在呼叫函式時可比對多個引數類型。  只有 JavaScript UDF 具有確定性指定碼，可向 BigQuery 提示是否能快取查詢結果。 | SQL 和 JavaScript UDAF 接受符合 BigQuery [資料類型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw) GoogleSQL 的參數值。  函式參數可以是匯總或非匯總。 |
 | 用量 | UDF 通常用於資料清理、轉換和驗證。 | UDAF 通常用於計算摘要統計資料，例如平均值、總和及計數。 |
 
 ## 資料表函式
 
-資料表函式 (也稱為資料表值函式 (TVF)) 是傳回資料表的 UDF。您可以在任何可使用表格的地方使用表格函式。
-資料表函式的行為與檢視表類似，但資料表函式可以接受參數。
+資料表函式也稱為資料表值函式 (TVF)，是一種會傳回資料表的使用者定義函式。只要是可以使用資料表的地方，都可以使用資料表函式。資料表函式的行為與檢視表類似，但資料表函式可以接受參數。
 
 您可以對資料表函式執行下列操作：
 
 * 傳入多個參數。
-* 在表格有效的任何內容中呼叫表格函式。
+* 在任何可使用資料表的內容中呼叫資料表函式。
 * 將資料表函式的輸出內容與其他資料表彙整。
 * 在[子查詢](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries?hl=zh-tw#array_subquery_concepts)中使用資料表函式。
 
-如要進一步瞭解表格函式，請參閱「[表格函式](https://docs.cloud.google.com/bigquery/docs/table-functions?hl=zh-tw)」、「[限制](https://docs.cloud.google.com/bigquery/docs/table-functions?hl=zh-tw#limitations)」和「[配額與限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#table_function_limits)」。
+如要進一步瞭解資料表函式，請參閱「[資料表函式](https://docs.cloud.google.com/bigquery/docs/table-functions?hl=zh-tw)」、「[限制](https://docs.cloud.google.com/bigquery/docs/table-functions?hl=zh-tw#limitations)」和「[配額與限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#table_function_limits)」。
 
 ## 遠端函式
 
@@ -161,9 +160,9 @@ BigQuery 遠端函式會使用任何支援的語言，將 Google SQL 函式與 [
 
 建立遠端函式的步驟如下：
 
-1. 在 Cloud Run 函式或 Cloud Run 中建立 HTTP 端點。
+1. 在 Cloud Run functions 或 Cloud Run 中建立 HTTP 端點。
 2. 使用 `CLOUD_RESOURCE` 連線類型，在 BigQuery 中建立遠端函式。
-3. 在查詢中使用遠端函式，就像使用任何其他 BigQuery 的 UDF 一樣。
+3. 在查詢中使用遠端函式，就像使用 BigQuery 的其他 UDF 一樣。
 
 如要進一步瞭解遠端函式，請參閱「[遠端函式](https://docs.cloud.google.com/bigquery/docs/remote-functions?hl=zh-tw)」、「[限制](https://docs.cloud.google.com/bigquery/docs/remote-functions?hl=zh-tw#limitations)」和「[配額與限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#remote_function_limits)」。
 
@@ -179,7 +178,7 @@ SQL 預存程序是一組陳述式，可從其他查詢或其他預存程序呼�
 * 多位使用者可存取或修改多個資料集中的資料。
 * 包含[多陳述式查詢](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries?hl=zh-tw)。
 
-BigQuery 內建部分預存程序，不需建立。這些程序稱為系統程序，如要進一步瞭解，請參閱「[系統程序參考資料](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures?hl=zh-tw)」。
+部分預存程序內建於 BigQuery，不需建立。這些程序稱為系統程序，詳情請參閱「[系統程序參考資料](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures?hl=zh-tw)」。
 
 也支援 [BigQuery 中的 Spark](https://docs.cloud.google.com/bigquery/docs/spark-procedures?hl=zh-tw) 預存程序。這些程序有[配額和限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#spark-procedure)。
 
@@ -187,7 +186,7 @@ BigQuery 內建部分預存程序，不需建立。這些程序稱為系統程�
 
 ## 搭配 AI 代理使用日常安排
 
-如果您建構的 AI 代理會處理 BigQuery 資料，代理可以從 Knowledge Catalog 擷取常式中繼資料，包括常式的引數、傳回類型和原始碼，瞭解常式的功能和呼叫方式。詳情請參閱「[擷取日常安排的情境](https://docs.cloud.google.com/knowledge-catalog/docs/retrieve-data-context?hl=zh-tw#retrieve-routine-context)」。
+如果您建構的 AI 代理會處理 BigQuery 資料，代理可以從 Knowledge Catalog 擷取常式中繼資料，包括常式的引數、傳回類型和原始碼，瞭解常式的作用和呼叫方式。詳情請參閱「[擷取日常安排的情境](https://docs.cloud.google.com/knowledge-catalog/docs/retrieve-data-context?hl=zh-tw#retrieve-routine-context)」。
 
 
 
@@ -196,11 +195,11 @@ BigQuery 內建部分預存程序，不需建立。這些程序稱為系統程�
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-15 (世界標準時間)。
+上次更新時間：2026-10-23 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-23 (世界標準時間)。"],[],[]]

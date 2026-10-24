@@ -216,6 +216,5 @@ func executeTranslationWorkflow(ctx context.Context, client *migration.Client, p
 				"example_conversion": {
 					Type: "Translation_Teradata2BQ",
 					TaskDetails: &migrationpb.MigrationTask_TranslationConfigDetails{
-						TranslationConfigDetails: &migrationpb.TranslationConfigDetails{
-							
+						TranslationConfigDetails:
 ```

@@ -153,4 +153,4 @@ A table type
 
 | Fields | |
 | --- | --- |
-| `columns[]` | `object (StandardSqlField)`  The columns in this table type |
+| `columns[]` | `object (` |

@@ -133,4 +133,4 @@ This API allows users to manage their data transfers into BigQuery.
 
 | ListTransferRuns |
 | --- |
-| `rpc ListTransferRuns(ListTransferRunsRequest) returns (ListTransferRunsResponse)`  Returns information about running and completed transfer runs.  Authorization scopes  Requires the following OAuth scope: |
+| `rpc ListTransferRuns(ListTransferRunsRequest) returns (ListTransferRunsResponse)`  Returns information about running and completed |

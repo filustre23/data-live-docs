@@ -186,4 +186,4 @@ JobConfigurationQuery configures a BigQuery query job.
 | `query` | `string`  [Required] SQL query text to execute. The useLegacySql field can be used to indicate whether the query uses legacy SQL or GoogleSQL. |
 | `destinationTable` | `object (TableReference)`  Optional. Describes the table where the query results should be stored. This property must be set for large results that exceed the maximum response size. For queries that produce anonymous (cached) results, this field will be populated by BigQuery. |
 | `tableDefinitions` | `map (key: string, value: object (ExternalDataConfiguration))`  Optional. You can specify external table definitions, which operate as ephemeral tables that can be queried. These definitions are configured using a JSON map, where the string key represents the table identifier, and the value is the corresponding external data configuration object. |
-| `userDefinedFunctionResources[]` | `object (UserDefinedFunctionResource)`  Describes user-defined function resources used in the q |
+| `userDefinedFunctionResources[]` | `object (` |

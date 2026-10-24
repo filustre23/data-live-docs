@@ -18,7 +18,9 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 **注意：** 如果預留項目是以特定 BigQuery 版本建立，可能無法使用這項功能。如要進一步瞭解各版本啟用的功能，請參閱「[BigQuery 版本簡介](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)」。
 
-本文說明如何在 BigQuery 建立 materialized view。閱讀本文前，請先熟悉[具體化檢視表簡介](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro?hl=zh-tw)。
+materialized view 可預先運算及快取 BigQuery 中經常執行的查詢結果，提高查詢效能並降低成本。本文說明如何建立 materialized view，包括分區和叢集 materialized view、非增量 materialized view，以及使用 `max_staleness` 選項的 materialized view。
+
+如要進一步瞭解 materialized view，請參閱「[materialized view 簡介](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro?hl=zh-tw)」。
 
 ## 事前準備
 
@@ -145,7 +147,7 @@ resource "google_bigquery_table" "default" {
    ```
    mkdir DIRECTORY && cd DIRECTORY && touch main.tf
    ```
-2. 如果您正在按照教學課程操作，可以複製每個章節或步驟中的程式碼範例。
+2. 如果您正在進行教學課程，可以複製每個章節或步驟中的程式碼範例。
 
    將程式碼範例複製到新建立的 `main.tf`。
 
@@ -970,11 +972,11 @@ SELECT * FROM  my_project.my_dataset.my_mv_table
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-16 (世界標準時間)。
+上次更新時間：2026-10-22 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-16 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-22 (世界標準時間)。"],[],[]]

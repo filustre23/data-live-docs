@@ -176,4 +176,4 @@ The translation config to capture necessary settings for a translation task and 
 
 | Fields | |
 | --- | --- |
-| `sourceDialect` | `object (Dialect<` |
+| `sourceDialect` |

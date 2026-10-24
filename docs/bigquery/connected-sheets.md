@@ -128,7 +128,7 @@ protoPayload.metadata.firstPartyAppMetadata.sheetsMetadata.docId != NULL_VALUE
 
    **啟用 API 所需的角色**
 
-   如要啟用 API，您必須具備 `serviceusage.services.enable` 權限。如果您建立了專案，可能已透過擁有者角色 (`roles/owner`) 取得這項權限。否則，您可以透過服務使用情形管理員角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「Service Usage 管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
    [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery&hl=zh-tw)
 
@@ -206,7 +206,7 @@ BigQuery 管理員可以監控及稽核連結試算表的資源消耗量，瞭�
 
 ### 在組織層級依使用者匯總連結試算表用量
 
-下列查詢會提供過去 30 天內，貴組織中連結試算表用量最高的使用者摘要，並依計費資料總量排序。這項查詢會匯總每位使用者的查詢總數、計費位元組總數和運算單元毫秒總數。這項資訊有助於瞭解採用情形，以及找出資源的主要使用者。
+下列查詢會提供過去 30 天內，貴組織中熱門連結試算表使用者的摘要，並依計費資料總量排序。這項查詢會匯總每位使用者的查詢總數、計費位元組總數和運算單元毫秒總數。這項資訊有助於瞭解採用情形，以及找出資源的主要使用者。
 
 ```
 SELECT
@@ -269,7 +269,7 @@ ORDER BY
   creation_time DESC;
 ```
 
-將 `REGION_NAME` 替換為專案區域。例如：`region-us`。
+將 `REGION_NAME` 替換為專案的區域。例如：`region-us`。
 
 **注意：** 您必須使用區域限定詞來查詢 `INFORMATION_SCHEMA` 檢視表。查詢執行位置必須與 `INFORMATION_SCHEMA` 檢視表的區域相符。
 
@@ -285,7 +285,7 @@ ORDER BY
 +---------------------------------+---------------------------------+-----------------+------------+--------------------+---------------+
 ```
 
-### 在專案層級，依使用者匯總連結試算表用量
+### 依使用者匯總專案層級的連結試算表用量
 
 如果您沒有組織層級權限，或只需要監控特定專案，請執行下列查詢，找出過去 30 天內專案中連結試算表用量最高的使用者。查詢會匯總每位使用者的查詢總數、計費位元組總數和運算單元毫秒總數。這項資訊有助於瞭解採用情形，以及找出資源的主要使用者。
 
@@ -314,7 +314,7 @@ LIMIT
   10;
 ```
 
-將 `REGION_NAME` 替換為專案區域。例如：`region-us`。
+將 `REGION_NAME` 替換為專案的區域。例如：`region-us`。
 
 **注意：** 您必須使用區域限定詞來查詢 `INFORMATION_SCHEMA` 檢視表。查詢執行位置必須與 `INFORMATION_SCHEMA` 檢視表的區域相符。
 
@@ -330,7 +330,7 @@ LIMIT
 +---------------------+---------------+--------------------+-----------------+
 ```
 
-### 在專案層級尋找連結試算表查詢的工作記錄
+### 尋找專案層級的連結試算表查詢工作記錄
 
 如果您沒有組織層級權限，或只需要監控特定專案，請執行下列查詢，查看目前專案所有連結試算表查詢的詳細記錄：
 
@@ -404,11 +404,11 @@ ORDER BY
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-16 (世界標準時間)。
+上次更新時間：2026-10-23 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-16 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-23 (世界標準時間)。"],[],[]]

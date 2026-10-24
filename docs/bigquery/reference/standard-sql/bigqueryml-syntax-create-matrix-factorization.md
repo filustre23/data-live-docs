@@ -596,5 +596,5 @@ training results.
 **Syntax**
 
 ```
-HPARAM_TUNING_ALGORITHM = { 'VIZIER_DEFAULT' | 'RANDOM_SEARCH
+HPARAM_TUNING_ALGORITHM = {
 ```

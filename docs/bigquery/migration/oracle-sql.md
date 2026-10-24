@@ -125,8 +125,4 @@ BigQuery 和 Oracle 的資料表運算子相同。
 | `FETCH NEXT>` | `LIMIT` |
 | `NULLIF` | [`NULLIF(expression, expression_to_match)`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conditional_expressions?hl=zh-tw#nullif) |
 | `NVL` | `IFNULL(expr, 0), COALESCE(exp, 0)` |
-| `NVL2` | `IF(expr, true_result, else_result)` |
-
-### 匯總函式
-
-下表列出常見的 Oracle 匯總、
+| `NVL2` |  |

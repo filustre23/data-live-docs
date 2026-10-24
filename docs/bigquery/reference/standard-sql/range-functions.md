@@ -411,8 +411,5 @@ In the following query, the upper bound of the range is unbounded, so
 `NULL` is returned:
 
 ```
-SELECT RANGE_END(RANGE<DATE> '[2022-12-01, UNBOUNDED)') AS results;
-
-/*------------+
- | results    |
+SELECT RANGE_END(RANGE<DATE> '[2022-12-01, UNBOUNDED)') AS
 ```

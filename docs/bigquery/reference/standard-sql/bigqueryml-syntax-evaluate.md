@@ -526,7 +526,4 @@ ML.EVALUATE(
   `TEMPERATURE` values are good for prompts that require a more deterministic
   and less open-ended or creative response, while higher `TEMPERATURE` values
   can lead to more diverse or creative results. A `TEMPERATURE` value of `0` is
-  deterministic, meaning that the highest probability response is always
-  selected.
-
-  The `TEMPERATURE` value must be in the range
+  deterministic, meaning that the high

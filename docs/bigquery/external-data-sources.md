@@ -16,9 +16,11 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 外部資料來源簡介
 
-本頁面將概要說明如何查詢儲存在 BigQuery 外部的資料。
+外部資料來源可讓您直接從 BigQuery 查詢資料，即使資料並未儲存在 BigQuery 儲存空間中也一樣。例如，您可以分析其他 Google Cloud 資料庫、Cloud Storage 檔案或其他雲端產品中的資料，而不必先遷移資料。
 
-「外部資料來源」是指可以直接透過 BigQuery 查詢的資料來源，即使資料未儲存在 BigQuery 儲存空間中也一樣。例如，您可能有資料在其他 Google Cloud 資料庫、Cloud Storage 的檔案或其他雲端產品中，而且想在不遷移資料的狀況下，在 BigQuery 中進行分析。
+本文概略說明查詢外部資料的方法，包括 BigLake 資料表、物件資料表、外部資料表和聯合查詢，並說明常見用途。
+
+## 用途
 
 外部資料來源的用途包括：
 
@@ -103,11 +105,11 @@ BigLake 資料表可讓您透過存取權委派功能，查詢外部資料儲存
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-20 (世界標準時間)。
+上次更新時間：2026-10-22 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-20 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-22 (世界標準時間)。"],[],[]]

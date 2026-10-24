@@ -16,15 +16,14 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 寫入查詢結果
 
-本文說明如何將查詢結果寫入臨時或永久資料表。
+將 BigQuery 查詢結果寫入永久資料表，即可安全地儲存、共用及下載分析資料。雖然 BigQuery 會自動將所有查詢結果快取至臨時資料表，但將輸出內容儲存至目的地資料表，可保留大型結果集，並整合至下游工作流程。
 
 ## 暫時性與永久性資料表
 
 BigQuery 會將所有查詢結果儲存至永久或臨時資料表：
 
-* BigQuery 會使用臨時資料表[快取查詢結果](https://docs.cloud.google.com/bigquery/docs/cached-results?hl=zh-tw)，這些結果不會寫入永久資料表。系統會在特殊資料集中建立資料表，並隨機命名。您也可以在[多重陳述式查詢](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries?hl=zh-tw#temporary_tables)和[工作階段](https://docs.cloud.google.com/bigquery/docs/sessions-write-queries?hl=zh-tw#use_temporary_tables_in_sessions)中，建立供自己使用的暫時性資料表。[暫時快取的查詢結果資料表](https://docs.cloud.google.com/bigquery/docs/cached-results?hl=zh-tw)不會產生費用。
-  系統會針對非快取查詢結果的暫存資料表收費。
-* 查詢完成後，暫時性資料表最多會存在 24 小時。如要查看資料表結構和資料，請按照下列步驟操作：
+* BigQuery 會使用臨時資料表[快取查詢結果](https://docs.cloud.google.com/bigquery/docs/cached-results?hl=zh-tw)，這些結果不會寫入永久資料表。資料表會建立在特殊資料集中，並隨機命名。您也可以在[多重陳述式查詢](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries?hl=zh-tw#temporary_tables)和[工作階段](https://docs.cloud.google.com/bigquery/docs/sessions-write-queries?hl=zh-tw#use_temporary_tables_in_sessions)中建立臨時資料表，供自己使用。[暫時快取的查詢結果資料表](https://docs.cloud.google.com/bigquery/docs/cached-results?hl=zh-tw)不會產生費用。如果暫存資料表並非快取查詢結果，則須付費。
+* 查詢完成後，暫存資料表最多會保留 24 小時。如要查看資料表結構和資料，請按照下列步驟操作：
 
   1. 前往「BigQuery」頁面
 
@@ -32,20 +31,20 @@ BigQuery 會將所有查詢結果儲存至永久或臨時資料表：
   2. 點選左側窗格中的 explore「Explorer」。
 
      如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
-  3. 在「Explorer」窗格中，按一下「Job history」(工作記錄)。
+  3. 在「Explorer」窗格中，點選「工作記錄」。
   4. 按一下「個人記錄」。
-  5. 選擇建立暫存資料表的查詢。接著，在「目的地資料表」列中，按一下「暫時表格」。
-* 只有建立查詢作業的使用者或服務帳戶，才能存取臨時資料表資料。
-* 您無法共用臨時資料表，且無法使用任何標準清單或其他資料表操控方法查看臨時資料表。如要分享查詢結果，請將結果寫入永久資料表、下載結果，或透過 Google 試算表或 Google 雲端硬碟分享結果。
+  5. 選取建立暫存資料表的查詢。接著，在「Destination table」(目的地資料表) 列中，按一下「Temporary table」(臨時資料表)。
+* 只有建立查詢工作的使用者或服務帳戶，才能存取臨時資料表資料。
+* 您無法共用臨時資料表，也無法使用任何標準清單或其他資料表操作方法查看。如需共用查詢結果，請將結果寫入永久資料表、下載結果，或透過 Google 試算表或 Google 雲端硬碟共用。
 * 暫存資料表會建立在與查詢資料表相同的區域。
 * 永久資料表可以是您有權存取的任何資料集中之新資料表或現有資料表。如果您將查詢結果寫入新資料表，就必須支付資料的[儲存](https://cloud.google.com/bigquery/pricing?hl=zh-tw#storage)費用。當您將查詢結果寫入永久資料表時，所查詢的資料表必須與包含目標資料表的資料集位於相同位置。
-* 啟用[網域限制機構政策](https://docs.cloud.google.com/resource-manager/docs/organization-policy/restricting-domains?hl=zh-tw)後，您就無法將查詢結果儲存至暫存資料表。如要解決這個問題，請暫時停用網域受限的組織政策，執行查詢，然後再次啟用政策。或者，您也可以將查詢結果儲存至目的地資料表。
+* 啟用[網域限制組織政策](https://docs.cloud.google.com/resource-manager/docs/organization-policy/restricting-domains?hl=zh-tw)時，無法將查詢結果儲存至暫存資料表。如要解決這個問題，請暫時停用網域受限的組織政策，執行查詢，然後再次啟用政策。或者，您也可以將查詢結果儲存至目的地資料表。
 
-**注意：** 如果您從某個專案查詢儲存在其他專案中的資料，查詢專案會支付查詢工作的費用，而儲存資料的專案則會支付 BigQuery 中儲存的資料量費用。
+**注意：** 如果您從某項專案查詢儲存在其他專案的資料，系統會向執行查詢的專案收取查詢工作費用，並向儲存資料的專案收取 BigQuery 資料儲存量費用。
 
 ## 所需權限
 
-如要將查詢結果寫入資料表，您至少須具備下列權限：
+如要將查詢結果寫入資料表，您至少必須具備下列權限：
 
 * `bigquery.tables.create`：建立新資料表的權限
 * `bigquery.tables.updateData`：將資料寫入新資料表、覆寫資料表或將資料附加至資料表
@@ -67,40 +66,39 @@ BigQuery 會將所有查詢結果儲存至永久或臨時資料表：
 
 此外，當具備 `bigquery.datasets.create` 權限的使用者建立資料集時，會獲得該資料集的 `bigquery.dataOwner` 存取權。`bigquery.dataOwner` 存取權可讓使用者在資料集裡建立及更新資料表。
 
-如要進一步瞭解 BigQuery 中的 IAM 角色和權限，請參閱「[預先定義的角色和權限](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)」。
+如要進一步瞭解 BigQuery 的 IAM 角色和權限，請參閱「[預先定義的角色和權限](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)」。
 
 ## 將查詢結果寫入永久資料表
 
-將查詢結果寫入永久資料表時，您可以建立新資料表、將結果附加到現有資料表，或覆寫現有資料表。
+將查詢結果寫入永久資料表時，您可以建立新資料表、將結果附加至現有資料表，或覆寫現有資料表。
 
 ### 寫入查詢結果
 
-請按照下列程序，將查詢結果寫入永久資料表。
-為控管費用，您可以在執行查詢前[預覽資料](https://docs.cloud.google.com/bigquery/docs/best-practices-costs?hl=zh-tw#preview-data)。
+請按照下列程序，將查詢結果寫入永久資料表。為控管費用，您可以在執行查詢前[預覽資料](https://docs.cloud.google.com/bigquery/docs/best-practices-costs?hl=zh-tw#preview-data)。
 
 ### 控制台
 
-1. 在 Google Cloud 控制台開啟 BigQuery 頁面。
+1. 在 Google Cloud 控制台開啟「BigQuery」頁面。
 
-   [前往 BigQuery 頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
+   [前往「BigQuery」頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Explorer」窗格中展開專案，點選「Datasets」(資料集)，然後選取資料集。
-4. 在查詢編輯器中輸入有效的 SQL 查詢。
+4. 在查詢編輯器中，輸入有效的 SQL 查詢。
 5. 依序點選「編輯」>「查詢設定」。
 6. 選取「為查詢結果設定目的地資料表」選項。
-7. 在「目的地」部分，選取要建立資料表的「資料集」，然後選擇「資料表 ID」。
+7. 在「Destination」(目的地) 部分，選取要建立資料表的**資料集**，然後選擇**資料表 ID**。
 8. 在「Destination table write preference」(目標資料表寫入偏好設定) 區段，選擇下列其中一項：
 
    * [Write if empty] (空白時寫入)：僅在資料表空白時將查詢結果寫入資料表。
    * [Append to table] (附加到資料表中)：將查詢結果附加到現有的資料表。
    * [Overwrite table] (覆寫資料表)：使用查詢結果覆寫名稱相同的現有資料表。
-9. 選用：在「資料位置」部分，選擇[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
+9. 選用：在「Data location」(資料位置) 部分，選擇[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
 10. 如要更新查詢設定，請按一下「儲存」。
-11. 按一下「執行」。這會建立查詢工作，將查詢結果寫入您指定的資料表。
+11. 按一下「執行」。這會建立查詢工作，將查詢結果寫入指定的資料表。
 
-或者，如果您忘記在執行查詢前指定目的地資料表，可以點選編輯器上方的「儲存結果」按鈕，將快取結果資料表複製到永久資料表。
+或者，如果您在執行查詢前忘記指定目的地資料表，可以按一下編輯器上方的「[**Save Results**](#save-query-results)」(儲存結果) 按鈕，將快取結果資料表複製到永久資料表。
 
 ### SQL
 
@@ -121,7 +119,7 @@ BigQuery 會將所有查詢結果儲存至永久或臨時資料表：
        bigquery-public-data.austin_bikeshare.bikeshare_trips
    );
    ```
-3. 按一下「執行」play\_circle。
+3. 按一下「play\_circle 執行」。
 
 如要進一步瞭解如何執行查詢，請參閱「[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)」。
 
@@ -129,19 +127,19 @@ BigQuery 會將所有查詢結果儲存至永久或臨時資料表：
 
 ### bq
 
-1. 在 Google Cloud 控制台中啟用 Cloud Shell。
+1. 在 Google Cloud 控制台啟用 Cloud Shell。
 
    [啟用 Cloud Shell](https://console.cloud.google.com/?cloudshell=true&hl=zh-tw)
 
    Google Cloud 控制台底部會開啟 [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works?hl=zh-tw) 工作階段，並顯示指令列提示。Cloud Shell 是已安裝 Google Cloud CLI 的殼層環境，並已設定適用於您目前專案的值。工作階段可能要幾秒鐘的時間才能初始化。
-2. 輸入 [`bq query`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_query) 指令並指定 `--destination_table` 旗標，根據查詢結果建立永久資料表。指定 `use_legacy_sql=false` 旗標，使用 GoogleSQL 語法。如要將查詢結果寫入非預設專案的資料表，請按照下列格式，在資料集名稱中加入專案 ID：`project_id:dataset`。
+2. 輸入 [`bq query`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_query) 指令，並指定 `--destination_table` 旗標，根據查詢結果建立永久資料表。指定 `use_legacy_sql=false` 旗標，即可使用 GoogleSQL 語法。如要將查詢結果寫入非預設專案中的資料表，請按照下列格式，將專案 ID 新增至資料集名稱：`project_id:dataset`。
 
    選用：提供 `--location` 旗標，並將值設為[位置](https://docs.cloud.google.com/bigquery/docs/dataset-locations?hl=zh-tw)。
 
    如要控管現有目的地資料表的寫入配置，請指定下列其中一個選用旗標：
 
    * `--append_table`：如果目的地資料表存在，查詢結果會附加至該資料表。
-   * `--replace`：如果目的地資料表存在，系統會以查詢結果覆寫該資料表。
+   * `--replace`：如果目的地資料表已存在，系統會以查詢結果覆寫該資料表。
 
      ```
      bq --location=location query \
@@ -150,13 +148,13 @@ BigQuery 會將所有查詢結果儲存至永久或臨時資料表：
      ```
 
      更改下列內容：
-   * `location` 是用來處理查詢的位置名稱。`--location` 是選用旗標。舉例來說，如果您在東京區域使用 BigQuery，可以將旗標的值設為 `asia-northeast1`。如要設定位置的預設值，請使用 [`.bigqueryrc` 檔案](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool?hl=zh-tw#setting_default_values_for_command-line_flags)。
+   * `location` 是用於處理查詢的位置名稱。`--location` 是選用旗標。舉例來說，如果您在東京區域使用 BigQuery，可以將旗標值設為 `asia-northeast1`。您可以使用 [`.bigqueryrc` 檔案](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool?hl=zh-tw#setting_default_values_for_command-line_flags)設定位置的預設值。
    * `project_id` 是您的專案 ID。
    * `dataset` 是資料集的名稱，其中包含您要寫入查詢結果的資料表。
    * `table` 是要寫入查詢結果的資料表名稱。
    * `query` 是 GoogleSQL 語法的查詢。
 
-     如未指定寫入處置旗標，預設行為是僅在資料表空白時，將結果寫入資料表。如果資料表存在且不為空白，系統會傳回下列錯誤：`BigQuery error in query operation: Error processing job
+     如未指定寫入處置旗標，預設行為是僅在資料表空白時，才將結果寫入資料表。如果資料表存在且並非空白，系統會傳回下列錯誤：`BigQuery error in query operation: Error processing job
      project_id:bqjob_123abc456789_00000e1234f_1: Already
      Exists: Table project_id:dataset.table`。
 
@@ -164,7 +162,7 @@ BigQuery 會將所有查詢結果儲存至永久或臨時資料表：
 
      **注意：**這些範例會查詢位於美國的公開資料集。由於該公開資料集儲存在美國的多地區位置，因此您目的地資料表所屬的資料集也必須位於美國。您無法查詢位於某個位置的資料集，然後將結果寫入位於另一個位置的目的地資料表。 
 
-     輸入下列指令，將查詢結果寫入 `mydataset` 中名為 `mytable` 的目標資料表。該資料集位於預設專案中。由於您未在指令中指定任何寫入配置旗標，因此資料表必須為新資料表或空白資料表。否則，系統會傳回 `Already exists` 錯誤。這項查詢會從[美國姓名資料公開資料集](https://console.cloud.google.com/marketplace/product/social-security-administration/us-names?hl=zh-tw)擷取資料。
+     輸入下列指令，將查詢結果寫入 `mydataset` 中名為 `mytable` 的目標資料表。該資料集位於預設專案中。由於您未在指令中指定任何寫入配置旗標，因此資料表必須為新資料表或空白資料表。否則，系統會傳回 `Already exists` 錯誤。查詢會從[美國姓名資料公開資料集](https://console.cloud.google.com/marketplace/product/social-security-administration/us-names?hl=zh-tw)擷取資料。
 
      ```
      bq query \
@@ -233,13 +231,13 @@ BigQuery 會將所有查詢結果儲存至永久或臨時資料表：
 
 ### API
 
-如要將查詢結果儲存至永久資料表，請呼叫 [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert?hl=zh-tw) 方法、設定 `query` 工作，並為 `destinationTable` 屬性加入值。如要控管現有目標資料表的寫入配置，請設定 `writeDisposition` 屬性。
+如要將查詢結果儲存至永久資料表，請呼叫 [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert?hl=zh-tw) 方法、設定 `query` 工作，並加入 `destinationTable` 屬性的值。如要控管現有目標資料表的寫入配置，請設定 `writeDisposition` 屬性。
 
 如要控管查詢工作的處理位置，請在[工作資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs?hl=zh-tw)的 `jobReference` 區段中指定 `location` 屬性。
 
 ### Go
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Go 設定說明操作。詳情請參閱 [BigQuery Go API 參考文件](https://godoc.org/cloud.google.com/go/bigquery)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Go 設定操作說明進行操作。詳情請參閱 [BigQuery Go API 參考文件](https://godoc.org/cloud.google.com/go/bigquery)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -299,7 +297,7 @@ func queryWithDestination(w io.Writer, projectID, destDatasetID, destTableID str
 
 ### Java
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定說明操作。詳情請參閱 [BigQuery Java API 參考文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定操作說明進行操作。詳情請參閱 [BigQuery Java API 參考文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -352,7 +350,7 @@ public class SaveQueryToTable {
 
 ### Node.js
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定操作說明進行操作。詳情請參閱 [BigQuery Node.js API 參考文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -398,11 +396,12 @@ async function queryDestinationTable() {
 
 ### Python
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定操作說明進行操作。詳情請參閱 [BigQuery Python API 參考文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
-如要將查詢結果儲存至永久資料表，請建立 [QueryJobConfig](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.QueryJob?hl=zh-tw#google_cloud_bigquery_job_QueryJob)，並將[目的地](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.QueryJob?hl=zh-tw#google_cloud_bigquery_job_QueryJob_destination)設為所需的 [TableReference](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.table.TableReference?hl=zh-tw)。將工作設定傳遞至 [query 方法](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.client.Client?hl=zh-tw#google_cloud_bigquery_client_Client_query)。
+如要將查詢結果儲存至永久資料表，請建立 [QueryJobConfig](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.QueryJob?hl=zh-tw#google_cloud_bigquery_job_QueryJob)，並將 [destination](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.QueryJob?hl=zh-tw#google_cloud_bigquery_job_QueryJob_destination) 設為所需的 [TableReference](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.table.TableReference?hl=zh-tw)。
+將工作設定傳遞至 [query 方法](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.client.Client?hl=zh-tw#google_cloud_bigquery_client_Client_query)。
 
 ```
 from google.cloud import bigquery
@@ -430,7 +429,7 @@ print("Query results loaded to the table {}".format(table_id))
 
 ## 寫入大型查詢結果
 
-通常，查詢都有[回應大小上限](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#query_jobs)。如果您打算執行的查詢可能會傳回較大的結果，可以採取下列其中一種做法：
+通常，查詢都有[回應大小上限](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#query_jobs)。如果您打算執行的查詢可能會傳回較大的結果，可以採取下列任一做法：
 
 * 在 GoogleSQL 中，指定查詢結果的目的地資料表。
 * 在舊版 SQL 中，指定目標資料表並設定 `allowLargeResults` 選項。
@@ -442,7 +441,7 @@ print("Query results loaded to the table {}".format(table_id))
 在舊版 SQL 中，寫入大型結果受到下列限制：
 
 * 您必須指定目標資料表。
-* 不能指定頂層 `ORDER BY`、`TOP` 或 `LIMIT` 子句。這麼做會抵銷使用 `allowLargeResults` 的好處，因為再也無法平行計算查詢輸出。
+* 您無法指定頂層 `ORDER BY`、`TOP` 或 `LIMIT` 子句。這麼做會抵銷使用 `allowLargeResults` 的好處，因為再也無法平行計算查詢輸出。
 * [窗型函式](https://docs.cloud.google.com/bigquery/query-reference?hl=zh-tw#windowfunctions)只有在合併使用 `PARTITION BY` 子句時才能傳回大型查詢結果。
 
 ### 使用舊版 SQL 寫入大型結果
@@ -464,9 +463,9 @@ print("Query results loaded to the table {}".format(table_id))
 
    * **空白時寫入：**只有在資料表空白時，才會將查詢結果寫入資料表。
    * **附加至資料表：**將查詢結果附加至現有資料表。
-   * **覆寫資料表：**使用查詢結果覆寫同名的現有資料表。
+   * **覆寫資料表：**使用查詢結果覆寫名稱相同的現有資料表。
 9. 在「結果大小」部分，勾選「允許大型結果 (無大小上限)」。
-10. 選用：在「資料位置」中，選擇資料的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
+10. 選用：在「Data location」(資料位置) 部分，選擇資料的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
 11. 按一下 [Save] (儲存) 以更新查詢設定。
 12. 按一下 [Run] (執行)。這會建立一個查詢工作，將大型結果集寫入您指定的資料表。
 
@@ -477,7 +476,7 @@ print("Query results loaded to the table {}".format(table_id))
 如要控管現有目標資料表的寫入配置，請指定以下其中一種選用旗標：
 
 * `--append_table`：如果目的地資料表存在，查詢結果會附加至該資料表。
-* `--replace`：如果目的地資料表存在，系統會以查詢結果覆寫該資料表。
+* `--replace`：如果目的地資料表已存在，系統會以查詢結果覆寫該資料表。
 
 ```
 bq --location=location query \
@@ -488,17 +487,17 @@ bq --location=location query \
 
 更改下列內容：
 
-* `LOCATION` 是用於處理查詢的位置名稱。`--location` 是選用旗標。舉例來說，如果您在東京區域使用 BigQuery，可以將旗標值設為 `asia-northeast1`。您可以使用 [`.bigqueryrc` 檔案](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool?hl=zh-tw#setting_default_values_for_command-line_flags)，為位置資訊設定預設值。
+* `LOCATION` 是用於處理查詢的位置名稱。`--location` 是選用旗標。舉例來說，如果您在東京區域使用 BigQuery，可以將旗標值設為 `asia-northeast1`。您可以使用 [`.bigqueryrc` 檔案](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool?hl=zh-tw#setting_default_values_for_command-line_flags)設定位置的預設值。
 * `PROJECT_ID` 是您的專案 ID。
-* `DATASET` 是資料集名稱，其中包含要寫入查詢結果的資料表。
-* `TABLE` 是要將查詢結果寫入的資料表名稱。
+* `DATASET` 是資料集的名稱，其中包含您要寫入查詢結果的資料表。
+* `TABLE` 是要寫入查詢結果的資料表名稱。
 * `QUERY` 是舊版 SQL 語法中的查詢。
 
 範例：
 
-**附註：**些範例查詢的是公開資料集。由於資料集儲存在 `US` 多區域位置，因此目的地資料集也必須位於美國。您無法將公開資料查詢結果寫入其他區域的資料表。
+**附註：**些範例查詢的是公開資料集。由於資料集儲存在 `US` 多區域位置，因此目的地資料集也必須位於美國。您無法將公開資料查詢結果寫入不同地區的資料表。
 
-輸入下列指令，將大型查詢結果寫入 `mydataset` 中名為 `mytable` 的目標資料表。該資料集位於預設專案中。由於您未在指令中指定任何寫入配置旗標，因此資料表必須為新資料表或空白資料表。否則，系統會傳回 `Already exists` 錯誤。這項查詢會從[美國姓名資料公開資料集](https://console.cloud.google.com/bigquery?p=bigquery-public-data&%3Bd=usa_names&%3Bpage=dataset&hl=zh-tw)擷取資料。這項查詢僅供示範參考，傳回的結果集不會超過回應大小上限。
+輸入下列指令，將大型查詢結果寫入 `mydataset` 中名為 `mytable` 的目標資料表。該資料集位於預設專案中。由於您未在指令中指定任何寫入配置旗標，因此資料表必須為新資料表或空白資料表。否則，系統會傳回 `Already exists` 錯誤。這項查詢會從[美國姓名資料公開資料集](https://console.cloud.google.com/bigquery?p=bigquery-public-data&%3Bd=usa_names&%3Bpage=dataset&hl=zh-tw)擷取資料。這項查詢僅供示範參考。傳回的結果集不會超過回應大小上限。
 
 ```
 bq query \
@@ -562,7 +561,7 @@ ORDER BY
 
 ### Go
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Go 設定說明操作。詳情請參閱 [BigQuery Go API 參考文件](https://godoc.org/cloud.google.com/go/bigquery)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Go 設定操作說明進行操作。詳情請參閱 [BigQuery Go API 參考文件](https://godoc.org/cloud.google.com/go/bigquery)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -683,7 +682,7 @@ public class QueryLargeResults {
 
 ### Node.js
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定操作說明進行操作。詳情請參閱 [BigQuery Node.js API 參考文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -732,7 +731,7 @@ async function queryLegacyLargeResults() {
 
 ### Python
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定操作說明進行操作。詳情請參閱 [BigQuery Python API 參考文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -766,22 +765,22 @@ print("Query results loaded to the table {}".format(table_id))
 
 ## 從 Google Cloud 控制台下載及儲存查詢結果
 
-使用 Google Cloud 控制台執行 SQL 查詢後，您可以將結果儲存到其他位置。您可以使用 Google Cloud 控制台，將查詢結果下載至本機檔案、Google 試算表或 Google 雲端硬碟。如果您先依資料欄排序查詢結果，下載的資料就會保留排序順序。bq 指令列工具或 API 不支援將結果儲存至本機檔案、Google 試算表或 Google 雲端硬碟。
+使用 Google Cloud 控制台執行 SQL 查詢後，您可以將結果儲存到其他位置。您可以使用 Google Cloud 控制台，將查詢結果下載到本機檔案、Google 試算表或 Google 雲端硬碟。如果先依資料欄排序查詢結果，下載的資料就會保留該順序。bq 指令列工具或 API 不支援將結果儲存至本機檔案、Google 試算表或 Google 雲端硬碟。
 
 ### 限制
 
-下載及儲存查詢結果時，請注意下列限制：
+下載及儲存查詢結果時，須遵守下列限制：
 
 * 您只能以 CSV 或以換行符號分隔的 JSON 格式將查詢結果下載到本機檔案。
 * 您無法將含有巢狀和重複資料的查詢結果儲存至 Google 試算表。
-* 如要使用 Google Cloud 控制台將查詢結果儲存至 Google 雲端硬碟，結果集的大小不得超過 1 GB。如果結果較大，可以改為儲存至資料表。
-* 將查詢結果儲存至本機 CSV 檔案時，下載大小上限為 10 MB。下載大小上限取決於 [`tabledata.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list?hl=zh-tw) 方法回應中傳回的各列大小，並可能因查詢結果的結構定義而異。因此，下載的 CSV 檔案大小可能不盡相同，且可能小於下載大小上限。
-* 您只能將查詢結果儲存至 Google 雲端硬碟，且格式必須為 CSV 或以換行符號分隔的 JSON。
+* 如要使用 Google Cloud 控制台將查詢結果儲存至 Google 雲端硬碟，結果集不得超過 1 GB。如果結果較大，可以改為儲存至資料表。
+* 將查詢結果儲存至本機 CSV 檔案時，下載大小上限為 10 MB。下載大小上限取決於 [`tabledata.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list?hl=zh-tw) 方法回應中傳回的各列大小，且可能因查詢結果的結構定義而異。因此，下載的 CSV 檔案大小可能不盡相同，且可能小於下載大小上限。
+* 查詢結果只能以 CSV 或以換行符號分隔的 JSON 格式儲存至 Google 雲端硬碟。
 
 ## 後續步驟
 
 * 瞭解如何透過程式輔助方式[將資料表匯出為 JSON 檔案](https://docs.cloud.google.com/bigquery/docs/samples/bigquery-extract-table-json?hl=zh-tw)。
-* 瞭解[查詢作業的配額](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#query_jobs)。
+* 瞭解[查詢工作的配額](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#query_jobs)。
 * 瞭解 [BigQuery 儲存空間定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#storage)。
 
 
@@ -791,11 +790,11 @@ print("Query results loaded to the table {}".format(table_id))
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-15 (世界標準時間)。
+上次更新時間：2026-10-22 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-22 (世界標準時間)。"],[],[]]

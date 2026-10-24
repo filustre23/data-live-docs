@@ -156,6 +156,3 @@ Request information for invoking `FinalizeStream`.
 ## ReadRowsRequest
 
 Requesting row data via `ReadRows` must provide Stream position information.
-
-| Fields | |
-| --- | --- |

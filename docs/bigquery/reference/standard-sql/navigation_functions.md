@@ -194,6 +194,4 @@ FROM finishers;
  | Nikki Leith     | 02:59:01    | F30-34   | Sophia Liu       |
  | Jen Edwards     | 03:06:36    | F30-34   | Nikki Leith      |
  | Meghan Lederer  | 03:07:41    | F30-34   | Jen Edwards      |
- | Lauren Reasoner | 03:10:14    | F30-34   | Meghan Lederer   |
- | Lisa Stelzner   | 02:54:11    | F35-39   | NULL             |
 ```

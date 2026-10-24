@@ -356,9 +356,9 @@ BigQuery 共用功能適用下列一般資源限制：
 
 如果您是發布商，則適用下列 BigQuery 互通性限制：
 
-* 您必須明確授予訂閱者讀取來源資料集的權限，才能查詢連結資料集中的檢視表。最佳做法是建立[授權 view](https://docs.cloud.google.com/bigquery/docs/share-access-views?hl=zh-tw)，授予訂閱者查看資料的權限，但不授予基礎來源資料的存取權。
+* 您必須明確授予訂閱者讀取來源資料集的權限，才能查詢連結資料集中的檢視表。最佳做法是建立[授權 view](https://docs.cloud.google.com/bigquery/docs/authorized-views?hl=zh-tw)，授予訂閱者查看資料的權限，但不授予基礎來源資料的存取權。
 * [查詢計畫](https://docs.cloud.google.com/bigquery/docs/query-plan-explanation?hl=zh-tw)會顯示共用 view 查詢和常式查詢定義，包括專案 ID 和授權 view 涉及的其他資料集。請勿在共用檢視表或例行查詢中加入加密金鑰等機密資訊。
-* 共用資料集會編入 [Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/catalog-overview?hl=zh-tw) 索引。共用資料集的結構定義更新會立即提供給訂閱者。不過，如果共用資料集中的訂閱者或資料表超過 100 個，更新作業可能需要最多 18 小時才能建立索引。由於索引作業延遲，訂閱者無法立即在 Google Cloud 控制台搜尋更新後的資源。
+* 共用資料集會編入 [Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/metadata-overview?hl=zh-tw) 索引。共用資料集的結構定義更新會立即提供給訂閱者。不過，如果共用資料集中的訂閱者或資料表超過 100 個，更新作業可能需要最多 18 小時才能建立索引。由於索引作業延遲，訂閱者無法立即在 Google Cloud 控制台搜尋更新後的資源。
 * 共用主題會在 Knowledge Catalog 中建立索引，但您無法依資源類型篩選。
 * 如果您在列出的資料表上設定[資料列層級安全性](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro?hl=zh-tw)或[資料遮蓋](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro?hl=zh-tw)政策，訂閱者必須使用 Enterprise 或 Enterprise Plus 版本，才能在連結的資料集上執行查詢工作。如要瞭解版本，請參閱「[BigQuery 版本簡介](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)」。
 
@@ -414,11 +414,11 @@ VPC Service Controls 和 Salesforce Data 360 適用下列限制：
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-21 (世界標準時間)。
+上次更新時間：2026-10-22 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-21 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-22 (世界標準時間)。"],[],[]]

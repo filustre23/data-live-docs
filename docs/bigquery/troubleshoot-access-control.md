@@ -244,6 +244,68 @@ Cloud 管理員已設定[組織政策限制](https://docs.cloud.google.com/organ
 1. 請查看錯誤訊息中提供的確切 `CONSTRAINT_NAME`，瞭解哪些動作遭到封鎖。
 2. 請為資料選取其他未封鎖的區域，或與Google Cloud 組織管理員合作，在資料夾或組織層級查看組織政策。詳情請參閱「[建構及定義資源位置](https://docs.cloud.google.com/organization-policy/restrict-locations?hl=zh-tw)」。
 
+## 排解未經驗證錯誤
+
+當您在 BigQuery 中收到 HTTP `401 Unauthorized` (gRPC `UNAUTHENTICATED`) 錯誤，且錯誤原因為 `unauthenticated` 時，表示要求缺少有效的驗證憑證、OAuth 2.0 存取權杖已過期，或呼叫端無法以指定身分進行驗證。
+
+以下各節說明最常見的 `unauthenticated` 情境、原因和解決方法。
+
+### 憑證無效或已過期
+
+錯誤字串：
+
+* `Invalid credential`
+* `User credential was invalid.`
+* `Credentials expired`
+* `Credentials missing required scope.`
+* `Request had invalid authentication credentials. Expected OAuth 2 access
+  token, login cookie or other valid authentication credential.`
+
+#### 診斷
+
+要求提供的存取權杖、服務帳戶金鑰或應用程式預設憑證 (ADC) 已過期、撤銷或缺少必要的 OAuth 2.0 範圍。如果要求的簽署系統時鐘與網路時間通訊協定 (NTP) 時間不一致，也會發生這個錯誤。
+
+#### 解析度
+
+* **重新整理憑證。**如果您是從本機開發環境進行驗證，請執行 `gcloud auth application-default login` (適用於 ADC) 或 `gcloud auth login`，取得新的權杖。
+* **驗證服務帳戶金鑰和 OAuth 範圍。**如果應用程式使用 `GOOGLE_APPLICATION_CREDENTIALS`，請確認變數指向有效且未撤銷的 JSON 金鑰檔案、服務帳戶已在Google Cloud 控制台啟用，且憑證包含必要的 `https://www.googleapis.com/auth/bigquery` 或 `https://www.googleapis.com/auth/cloud-platform` 範圍。
+* **使用目前的用戶端程式庫，並同步處理系統時鐘。**請將 [BigQuery 用戶端程式庫](https://docs.cloud.google.com/bigquery/docs/reference/libraries?hl=zh-tw)或 [ODBC](https://docs.cloud.google.com/bigquery/docs/odbc-for-bigquery?hl=zh-tw) 或 [JDBC](https://docs.cloud.google.com/bigquery/docs/jdbc-for-bigquery?hl=zh-tw) 驅動程式更新至最新版本，以便自動處理 OAuth 2.0 權杖更新和聯合憑證。此外，請確認主機的系統時鐘已使用 NTP 同步。
+
+### 缺少使用者憑證或服務帳戶模擬權限
+
+錯誤字串：
+
+* `Current user can not act as user for service account
+  SERVICE_ACCOUNT_EMAIL`
+* `No end user credentials found when accessing
+  PROJECT_ID:DATASET_ID.TABLE_ID. Please use
+  end user credentials to call BigQuery APIs.`
+
+#### 診斷
+
+工作或持續查詢設為以自訂服務帳戶的身分執行，但呼叫端沒有權限以該帳戶的身分執行，或者目標資料表或安全性政策需要使用者憑證 (EUC)，BigQuery 才能根據互動式使用者身分評估存取權。
+
+#### 解析度
+
+* **授予服務帳戶模擬權限。**執行[持續查詢](https://docs.cloud.google.com/bigquery/docs/continuous-queries?hl=zh-tw)或設定了自訂服務帳戶的工作時，請將該服務帳戶的服務帳戶使用者角色 (`roles/iam.serviceAccountUser`，包含 `iam.serviceAccounts.actAs` 權限) 授予呼叫端。模擬服務帳戶或將聯合憑證換成短期權杖時，請將目標服務帳戶的服務帳戶權杖建立者角色 (`roles/iam.serviceAccountTokenCreator`) 授予呼叫端。
+* **使用使用者憑證進行驗證。**如果目標資源需要使用者憑證，請使用互動式使用者的 OAuth 2.0 憑證 (例如執行 `gcloud auth application-default login`，或在商業智慧工具中設定使用者 OAuth)，而非獨立服務帳戶憑證，驗證要求。
+* **驗證 VPC Service Controls 輸入和輸出規則。**如果要求跨越 VPC Service Controls 邊界，請確認 perimeter 的輸入和輸出規則允許呼叫端身分和目標資源。
+
+### 帳戶受限、停權或刪除
+
+錯誤字串：
+
+* `The account was restricted due to REASON`
+* `Account deleted`
+
+#### 診斷
+
+發出要求的 Google 帳戶或 Google Workspace 帳戶，已遭管理員或帳戶安全性政策停權、停用、限制或刪除。
+
+#### 解析度
+
+請與 Google Workspace 或 Cloud Identity 管理員聯絡，在 Google 管理控制台中查看帳戶狀態，並還原或取消停權使用者帳戶，或更新工作負載，以便使用有效的服務帳戶進行驗證。
+
 ## 排解資料欄層級存取控管問題
 
 以下各節說明如何排解[資料欄層級存取控管](https://docs.cloud.google.com/bigquery/docs/column-level-security?hl=zh-tw)和 Data Catalog 政策標記的問題。
@@ -322,11 +384,11 @@ Cloud 管理員已設定[組織政策限制](https://docs.cloud.google.com/organ
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-16 (世界標準時間)。
+上次更新時間：2026-10-22 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-16 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-22 (世界標準時間)。"],[],[]]

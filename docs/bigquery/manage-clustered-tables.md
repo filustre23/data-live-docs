@@ -14,18 +14,15 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 你可以依據偏好儲存及分類內容。
 
-# 管理叢集資料表
+# 管理分群資料表
 
-本文說明如何取得 BigQuery 中叢集資料表的相關資訊，以及如何控管叢集資料表的存取權。
+在 BigQuery 建立分群資料表後，您可以控管存取權限、查看屬性，並隨著查詢模式變化調整分群資料欄。本文說明如何控管分群資料表的存取權、取得相關資訊、列出資料集中的分群資料表，以及修改分群規格。
 
-如要瞭解詳情，請參考下列資源：
-
-* 如要瞭解 BigQuery 中的叢集資料表支援，請參閱[叢集資料表簡介](https://docs.cloud.google.com/bigquery/docs/clustered-tables?hl=zh-tw)。
-* 如要瞭解如何建立叢集資料表，請參閱[建立叢集資料表](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables?hl=zh-tw)。
+如要瞭解分群資料表，請參閱「[分群資料表簡介](https://docs.cloud.google.com/bigquery/docs/clustered-tables?hl=zh-tw)」。如要建立分群資料表，請參閱「[建立分群資料表](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables?hl=zh-tw)」。
 
 ## 事前準備
 
-如要取得資料表相關資訊，您必須具備 `bigquery.tables.get` 權限。以下是具有 `bigquery.tables.get` 權限的預先定義 IAM 角色：
+如要取得資料表相關資訊，您必須具備 `bigquery.tables.get` 權限。下列預先定義的 IAM 角色包含 `bigquery.tables.get` 權限：
 
 * `roles/bigquery.metadataViewer`
 * `roles/bigquery.dataViewer`
@@ -33,53 +30,53 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 * `roles/bigquery.dataEditor`
 * `roles/bigquery.admin`
 
-此外，當具備 `bigquery.datasets.create` 權限的使用者建立資料集時，該使用者會獲得該資料集的 `bigquery.dataOwner` 存取權。`bigquery.dataOwner` 存取權可讓使用者取得資料集裡的資料表相關資訊。
+此外，如果使用者具備 `bigquery.datasets.create` 權限，則在建立資料集時，會獲得該資料集的 `bigquery.dataOwner` 存取權。`bigquery.dataOwner` 存取權可讓使用者取得資料集裡的資料表相關資訊。
 
-如要進一步瞭解 BigQuery 中的 IAM 角色和權限，請參閱[預先定義的角色和權限](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)一文。
+如要進一步瞭解 BigQuery 的 IAM 角色和權限，請參閱「[預先定義的角色和權限](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)」。
 
-## 控管叢集資料表的存取權
+## 控管分群資料表的存取權
 
-如要設定資料表和檢視表的存取權，請在下列層級為實體授予 IAM 角色。這些層級會依允許的資源範圍列出 (從最大到最小)：
+如要設定資料表和檢視表的存取權，您可以將 IAM 角色授予下列層級的實體，這些層級依允許的資源範圍 (由大到小) 排序：
 
-* [Google Cloud 資源階層](https://docs.cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy?hl=zh-tw)中的較高層級，例如專案、資料夾或機構層級
+* [Google Cloud 資源階層](https://docs.cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy?hl=zh-tw)中的高層級，例如專案、資料夾或組織層級
 * 資料集層級
-* 資料表或檢視畫面層級
+* 資料表或檢視表層級
 
-您也可以使用下列方法，限制資料表中的資料存取權：
+您也可以使用下列方法，限制資料表內的資料存取權：
 
 * [資料欄層級安全防護機制](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro?hl=zh-tw)
 * [資料欄遮蓋](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro?hl=zh-tw)
 * [資料列層級安全性](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro?hl=zh-tw)
 
-存取受 IAM 保護的資源時，存取權是累加的。舉例來說，如果實體沒有專案等高層級的存取權，您可以在資料集層級授予實體存取權，這樣實體就能存取資料集中的資料表和檢視區塊。同樣地，如果實體沒有高層級或資料集層級的存取權，您可以在資料表或檢視區塊層級授予實體存取權。
+受 IAM 保護的資源存取權屬於外加規則。舉例來說，如果實體沒有專案等高層級的存取權，您可以在資料集層級授予實體存取權，這樣實體就能存取資料集中的資料表和檢視表。同樣地，如果實體沒有高層級或資料集層級的存取權，您可以在資料表或檢視表層級授予實體存取權。
 
-在[Google Cloud資源階層](https://docs.cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy?hl=zh-tw)中的較高層級 (例如專案、資料夾或機構層級) 授予 IAM 角色，可讓實體存取更多資源。舉例來說，在專案層級將特定角色授予實體，可讓該實體擁有適用於專案中所有資料集的權限。
+在 [Google Cloud資源階層](https://docs.cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy?hl=zh-tw)中較高層級 (例如專案、資料夾或組織層級) 授予 IAM 角色，可讓實體存取廣泛的資源。舉例來說，在專案層級將角色授予實體，該實體就會獲得適用於整個專案中所有資料集的權限。
 
-在資料集層級授予角色，即可讓實體對特定資料集裡的資料表和檢視表執行指定作業，即使實體不具備更高層級的存取權也是如此。如要瞭解如何設定資料集層級的存取權控管設定，請參閱[控管資料集存取權](https://docs.cloud.google.com/bigquery/docs/dataset-access-controls?hl=zh-tw)一文。
+在資料集層級授予角色，可指定實體在該特定資料集的資料表和檢視表上可執行的作業，即使實體沒有較高層級的存取權也一樣。如要瞭解如何設定資料集層級存取控管，請參閱「[控管資料集的存取權](https://docs.cloud.google.com/bigquery/docs/dataset-access-controls?hl=zh-tw)」。
 
-在資料表或檢視表層級授予角色，即可讓實體對特定資料表和檢視表執行指定作業，即使實體沒有較高層級的存取權也一樣。如要瞭解如何設定資料表層級的存取權控管設定，請參閱[控管資料表和檢視區塊的存取權](https://docs.cloud.google.com/bigquery/docs/table-access-controls?hl=zh-tw)一文。
+在資料表或檢視表層級授予角色，可指定實體在特定資料表和檢視表上可執行的作業，即使實體沒有較高層級的存取權也一樣。如要瞭解如何設定資料表層級存取控管機制，請參閱「[控管資料表和檢視表的存取權](https://docs.cloud.google.com/bigquery/docs/table-access-controls?hl=zh-tw)」。
 
 您也可以建立 [IAM 自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)。建立自訂角色之後，您就能依據要讓實體執行的特定作業授予權限。
 
 您無法對受 IAM 保護的任何資源設定「拒絕」權限。
 
-如要進一步瞭解角色和權限，請參閱 IAM 說明文件中的「[瞭解角色](https://docs.cloud.google.com/iam/docs/understanding-roles?hl=zh-tw)」和 BigQuery 的「[IAM 角色和權限](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)」。
+如要進一步瞭解角色和權限，請參閱 IAM 說明文件中的「[瞭解角色](https://docs.cloud.google.com/iam/docs/understanding-roles?hl=zh-tw)」和 BigQuery「[IAM 角色和權限](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)」。
 
-## 取得叢集資料表的相關資訊
+## 取得分群資料表的相關資訊
 
 選取下列選項之一：
 
 ### 控制台
 
 1. 前往 Google Cloud 控制台的「Resources」(資源) 窗格。
-2. 按一下資料集名稱，即可展開該資料集，然後點選您想要查看的資料表名稱。
+2. 按一下資料集名稱展開資料集，然後點選要查看的資料表名稱。
 3. 按一下「詳細資料」。
 
-   畫面會顯示資料表的詳細資料，包括叢集資料欄。
+   系統會顯示資料表的詳細資料，包括分群欄。
 
 ### SQL
 
-對於叢集資料表，您可以在 [`INFORMATION_SCHEMA.COLUMNS` 檢視表](https://docs.cloud.google.com/bigquery/docs/information-schema-columns?hl=zh-tw)中查詢 `CLUSTERING_ORDINAL_POSITION` 資料欄，找出資料表叢集資料欄中資料欄的 1 索引偏移：
+如果是分群資料表，您可以查詢 [`INFORMATION_SCHEMA.COLUMNS` 檢視表](https://docs.cloud.google.com/bigquery/docs/information-schema-columns?hl=zh-tw)中的 `CLUSTERING_ORDINAL_POSITION` 資料欄，找出資料表分群資料欄中資料欄的 1 索引偏移：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -94,12 +91,11 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
    FROM
      mydataset.INFORMATION_SCHEMA.COLUMNS;
    ```
-3. 按一下「執行」play\_circle。
+3. 按一下「play\_circle 執行」。
 
 如要進一步瞭解如何執行查詢，請參閱「[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)」。
 
-`column1` 的叢集序數位置為 1，`column2` 則為 2。
-您可以透過 [`INFORMATION_SCHEMA`](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw) 中的 `TABLES`、`TABLE_OPTIONS`、`COLUMNS` 和 `COLUMN_FIELD_PATH` 檢視表，查看更多資料表中繼資料。
+`column1` 的叢集序數位置為 1，`column2` 則為 2。如要查看更多資料表中繼資料，請前往 [`INFORMATION_SCHEMA`](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw) 的 `TABLES`、`TABLE_OPTIONS`、`COLUMNS` 和 `COLUMN_FIELD_PATH` 檢視畫面。
 
 ### bq
 
@@ -145,15 +141,15 @@ bq show --format=prettyjson mydataset.myclusteredtable
 
 呼叫 [`bigquery.tables.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get?hl=zh-tw) 方法，並提供所有相關參數。
 
-## 列出資料集中的叢集資料表
+## 列出資料集內的分群資料表
 
-列出叢集資料表所需具備的權限及步驟，與標準資料表相同。詳情請參閱「[列出資料集中的資料表](https://docs.cloud.google.com/bigquery/docs/tables?hl=zh-tw#list_tables_in_a_dataset)」。
+列出分群資料表所需的權限和步驟，與標準資料表相同。詳情請參閱「[列出資料集中的資料表](https://docs.cloud.google.com/bigquery/docs/tables?hl=zh-tw#list_tables_in_a_dataset)」。
 
 ## 修改叢集規格
 
-您可以變更或移除資料表的叢集規格，也可以變更叢集資料表中的叢集資料欄集。如果資料表使用連續串流插入，就無法輕易透過其他方法交換，因此這種更新叢集欄集的方法非常實用。
+您可以變更或移除資料表的分群規格，或變更分群資料表中的分群資料欄組合。如果資料表使用連續串流資料即時插入，則無法輕易透過其他方法替換，因此這種更新分群欄組合的方法非常實用。
 
-請按照下列步驟，將新的叢集規格套用至未分區或分區資料表。
+請按照下列步驟，將新的分群規格套用至未分區或分區資料表。
 
 1. 在 bq 工具中，更新資料表的叢集規格，以符合新的叢集：
 
@@ -163,24 +159,24 @@ bq show --format=prettyjson mydataset.myclusteredtable
 
    更改下列內容：
 
-   * `CLUSTER_COLUMN`：您要叢集化的資料欄，例如 `mycolumn`
-   * `DATASET`：包含資料表的資料集名稱，例如 `mydataset`
+   * `CLUSTER_COLUMN`：要分群的資料欄，例如 `mycolumn`
+   * `DATASET`：資料表所在資料集的名稱，例如 `mydataset`
    * `ORIGINAL_TABLE`：原始資料表的名稱，例如 `mytable`
 
-   您也可以呼叫 `tables.update` 或 `tables.patch` API 方法來[修改叢集規格](https://docs.cloud.google.com/bigquery/docs/manage-clustered-tables?hl=zh-tw#modifying-cluster-spec)。
-2. 如要根據新的叢集規格將所有資料列叢集化，請執行下列 `UPDATE` 陳述式：
+   您也可以呼叫 `tables.update` 或 `tables.patch` API 方法，[修改分群規格](https://docs.cloud.google.com/bigquery/docs/manage-clustered-tables?hl=zh-tw#modifying-cluster-spec)。
+2. 如要根據新的分群規格將所有資料列分群，請執行下列 `UPDATE` 陳述式：
 
    ```
    UPDATE DATASET.ORIGINAL_TABLE SET CLUSTER_COLUMN=CLUSTER_COLUMN WHERE true
    ```
 
-   **注意：** 如果將新的叢集規格套用至長期儲存空間中的資料表，該資料表就會恢復為有效儲存空間價格。詳情請參閱[儲存空間價格](https://cloud.google.com/bigquery/pricing?hl=zh-tw#storage)。
+   **注意：** 如果將新的分群規格套用至長期儲存空間中的資料表，則資料表會還原為使用中儲存空間定價。詳情請參閱[儲存空間定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#storage)。
 
 ## 後續步驟
 
-* 如要瞭解如何查詢叢集資料表，請參閱[查詢叢集資料表](https://docs.cloud.google.com/bigquery/docs/querying-clustered-tables?hl=zh-tw)。
+* 如要瞭解如何查詢分群資料表，請參閱「[查詢分群資料表](https://docs.cloud.google.com/bigquery/docs/querying-clustered-tables?hl=zh-tw)」。
 * 如需 BigQuery 中的分區資料表支援總覽，請參閱[分區資料表簡介](https://docs.cloud.google.com/bigquery/docs/partitioned-tables?hl=zh-tw)一文。
-* 如要瞭解如何建立分區資料表，請參閱[建立分區資料表](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables?hl=zh-tw)。
+* 如要瞭解如何建立分區資料表，請參閱「[建立分區資料表](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables?hl=zh-tw)」。
 
 
 
@@ -189,11 +185,11 @@ bq show --format=prettyjson mydataset.myclusteredtable
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-15 (世界標準時間)。
+上次更新時間：2026-10-23 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-23 (世界標準時間)。"],[],[]]

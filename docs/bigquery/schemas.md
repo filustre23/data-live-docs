@@ -16,20 +16,9 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 指定結構定義
 
-在 BigQuery 中，您可以在將資料載入資料表時，以及建立空白資料表時，指定資料表的結構定義。此外，您也可以針對支援的資料格式，使用結構定義[自動偵測](https://docs.cloud.google.com/bigquery/docs/schema-detect?hl=zh-tw#auto-detect)功能。
+結構定義會定義 BigQuery 資料表的資料欄名稱、資料類型和其他屬性，因此資料會以您預期的結構儲存及查詢。在 BigQuery 將資料載入資料表或建立空白資料表時，可以指定結構定義。或者，您也可以針對支援的資料格式使用結構定義[自動偵測](https://docs.cloud.google.com/bigquery/docs/schema-detect?hl=zh-tw#auto-detect)功能。
 
-載入 Avro、Parquet、ORC、Firestore 匯出檔或 Datastore 匯出檔時，系統會自動從自述式來源資料擷取結構定義。
-
-您可以透過下列方式指定資料表的結構定義：
-
-* 使用 Google Cloud 控制台。
-* 使用 `CREATE TABLE` SQL 陳述式。
-* 使用 bq 指令列工具內嵌。
-* 以 JSON 格式建立結構定義檔案。
-* 呼叫 [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert?hl=zh-tw) 方法，並設定 `load` 工作設定中的 `schema` 屬性。
-* 呼叫 [`tables.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/insert?hl=zh-tw) 方法，並使用 `schema` 屬性，設定[資料表資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables?hl=zh-tw)中的結構定義。
-
-載入資料或建立空白資料表之後，您可以[修改資料表結構定義](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas?hl=zh-tw)。
+如果是自述式格式，例如 Avro、Parquet、ORC、Firestore 匯出檔和 Datastore 匯出檔，BigQuery 會從來源資料擷取結構定義。載入資料或建立空白資料表後，您可以[修改結構定義](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas?hl=zh-tw)。
 
 ## 結構定義元件
 
@@ -37,7 +26,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ### 欄名稱
 
-欄名可包含英文字母 (a-z、A-Z)、數字 (0-9) 或底線 (\_)，且開頭必須為英文字母或底線。如果使用彈性資料欄名稱，BigQuery 支援以數字開頭的資料欄名稱。如果資料欄名稱開頭為數字，請務必謹慎，因為搭配使用 BigQuery Storage Read API 或 BigQuery Storage Write API (gRPC) 時，需要特別處理彈性資料欄名稱。如要進一步瞭解彈性資料欄名稱支援，請參閱「[彈性資料欄名稱](#flexible-column-names)」。
+資料欄名稱可以包含英文字母 (a-z、A-Z)、數字 (0-9) 或底線 (\_)，且開頭必須是英文字母或底線。如果使用彈性資料欄名稱，BigQuery 支援以數字開頭的資料欄名稱。如果資料欄名稱開頭為數字，請務必謹慎，因為搭配使用 BigQuery Storage Read API 或 BigQuery Storage Write API (gRPC) 時，需要特別處理彈性資料欄名稱。如要進一步瞭解彈性資料欄名稱支援，請參閱「[彈性資料欄名稱](#flexible-column-names)」。
 
 資料欄名稱長度上限為 300 個半形字元。資料欄名稱不得使用下列任何前置字元：
 
@@ -55,8 +44,8 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 如果資料表名稱 (例如 `test`) 與其中一個資料欄名稱 (例如 `test`) 相同，`SELECT` 運算式會將 `test` 資料欄解讀為包含所有其他資料表資料欄的 `STRUCT`。如要避免這種衝突，請使用下列其中一種方法：
 
-* 請勿為資料表及其資料欄使用相同名稱。
-* 請勿使用 `_field_` 做為資料欄名稱前置字串。系統保留的前置字串會在查詢期間自動重新命名。舉例來說，`SELECT _field_ FROM project1.dataset.test` 查詢會傳回名為 `_field_1` 的資料欄。如果必須查詢這個名稱的資料欄，請使用別名控制輸出內容。
+* 避免為資料表和資料欄使用相同名稱。
+* 請勿使用 `_field_` 做為資料欄名稱前置字串。系統保留的前置字串會在查詢期間自動重新命名。舉例來說，`SELECT _field_ FROM project1.dataset.test` 查詢會傳回名為 `_field_1` 的資料欄。如要查詢這個名稱的資料欄，請使用別名控制輸出內容。
 * 為資料表指派其他別名。舉例來說，下列查詢會將資料表別名 `t` 指派給資料表 `project1.dataset.test`：
 
   ```
@@ -70,25 +59,25 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ### 彈性設定資料欄名稱
 
-您可以更靈活地命名資料欄，包括擴充對英文以外語言的字元和額外符號的存取權。如果彈性資料欄名稱是[引號 ID](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#quoted_identifiers)，請務必使用倒引號 (`` ` ``) 字元括住。
+您可以更靈活地命名資料欄，包括使用更多非英文字元和其他符號。如果彈性資料欄名稱是[引號 ID](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#quoted_identifiers)，請務必使用倒引號 (`` ` ``) 字元括住。
 
-彈性設定資料欄名稱支援下列字元：
+彈性資料欄名稱支援下列字元：
 
 * 任何語言的任何字母，以 Unicode 規則運算式 [`\p{L}`](https://www.unicode.org/reports/tr44/#General_Category_Values) 表示。
-* 任何語言的任何數字字元，以 Unicode 正規運算式 [`\p{N}`](https://www.unicode.org/reports/tr44/#General_Category_Values) 表示。
+* 任何語言中的任何數字字元，以 Unicode 規則運算式 [`\p{N}`](https://www.unicode.org/reports/tr44/#General_Category_Values) 表示。
 * 任何連接標點符號字元，包括底線，以 Unicode 規則運算式 [`\p{Pc}`](https://www.unicode.org/reports/tr44/#General_Category_Values) 表示。
 * 以 Unicode 規則運算式 [`\p{Pd}`](https://www.unicode.org/reports/tr44/#General_Category_Values) 表示的連字號或破折號。
 * 任何用於搭配其他字元的標記，以 Unicode 規則運算式 [`\p{M}`](https://www.unicode.org/reports/tr44/#General_Category_Values) 表示。例如重音符號、變音符號或外框。
 * 下列特殊字元：
-  + 以 Unicode 規則運算式 `\u0026` 表示的連接符號 (`&`)。
+  + 以 Unicode 規則運算式 `\u0026` 表示的 & 符號 (`&`)。
   + 百分比符號 (`%`)，以 Unicode 規則運算式 `\u0025` 表示。
   + 等號 (`=`)，以 Unicode 規則運算式 `\u003D` 表示。
   + 加號 (`+`)，以 Unicode 規則運算式 `\u002B` 表示。
   + 冒號 (`:`)，以 Unicode 規則運算式 `\u003A` 表示。
   + 縮寫符號 (`'`)，以 Unicode 規則運算式 `\u0027` 表示。
-  + 小於符號 (`<`)，以 Unicode 正規運算式 `\u003C` 表示。
+  + 小於符號 (`<`)，以 Unicode 規則運算式 `\u003C` 表示。
   + 大於符號 (`>`)，以 Unicode 規則運算式 `\u003E` 表示。
-  + 以 Unicode 規則運算式 `\u0023` 表示的井號 (`#`)。
+  + 以 Unicode 規則運算式 `\u0023` 表示的數字符號 (`#`)。
   + 垂直線 (`|`)，以 Unicode 規則運算式 `\u007c` 表示。
   + 空格字元。
 
@@ -96,7 +85,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 * 驚嘆號 (`!`)，以 Unicode 規則運算式 `\u0021` 表示。
 * 引號 (`"`)，以 Unicode 規則運算式 `\u0022` 表示。
-* 以 Unicode 正則運算式 `\u0024` 表示的錢幣符號 (`$`)。
+* 錢幣符號 (`$`)，以 Unicode 規則運算式 `\u0024` 表示。
 * 左括號 (`(`)，以 Unicode 規則運算式 `\u0028` 表示。
 * 右括號 (`)`)，以 Unicode 規則運算式 `\u0029` 表示。
 * 星號 (`*`)，以 Unicode 規則運算式 `\u002A` 表示。
@@ -105,14 +94,14 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 * 斜線 (`/`)，以 Unicode 規則運算式 `\u002F` 表示。
 * 分號 (`;`)，以 Unicode 規則運算式 `\u003B` 表示。
 * 問號 (`?`)，以 Unicode 規則運算式 `\u003F` 表示。
-* Unicode 規則運算式 `\u0040` 代表的 at 符號 (`@`)。
-* 左方括號 (`[`)，以 Unicode 正則運算式 `\u005B` 表示。
+* 以 Unicode 規則運算式 `\u0040` 表示的小老鼠符號 (`@`)。
+* 左方括號 (`[`)，以 Unicode 規則運算式 `\u005B` 表示。
 * 反斜線 (`\`)，以 Unicode 規則運算式 `\u005C` 表示。
 * 右方括號 (`]`)，以 Unicode 規則運算式 `\u005D` 表示。
 * 揚抑符號 (`^`)，以 Unicode 規則運算式 `\u005E` 表示。
-* Unicode 規則運算式 `\u0060` 代表的重音符 (`` ` ``)。
+* 重音符號 (`` ` ``)，以 Unicode 規則運算式 `\u0060` 表示。
 * 左大括號 {`{`)，以 Unicode 規則運算式 `\u007B` 表示。
-* 右大括號 (`}`)，以 Unicode 正則運算式 `\u007D` 表示。
+* 右大括號 (`}`)，以 Unicode 規則運算式 `\u007D` 表示。
 * 波浪號 (`~`)，以 Unicode 規則運算式 `\u007E` 表示。
 
 如需其他規範，請參閱「[資料欄名稱](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#column_names)」。
@@ -145,11 +134,11 @@ message FlexibleSchema {
 }
 ```
 
-在本例中，`item_name_column` 和 `item_description_column` 是預留位置名稱，必須符合[通訊協定緩衝區](https://protobuf.dev/)命名慣例。請注意，`column_name` 註解一律優先於預留位置名稱。
+在這個範例中，`item_name_column` 和 `item_description_column` 是預留位置名稱，必須符合[通訊協定緩衝區](https://protobuf.dev/)命名慣例。請注意，`column_name` 註解一律優先於預留位置名稱。
 
 #### 限制
 
-* 系統預設支援彈性欄名，適用於 [Iceberg 代管資料表](https://docs.cloud.google.com/bigquery/docs/iceberg-tables?hl=zh-tw)、[Iceberg 外部資料表](https://docs.cloud.google.com/bigquery/docs/iceberg-external-tables?hl=zh-tw)，以及 [Lakehouse 執行階段目錄管理的 Apache Iceberg 資料表](https://docs.cloud.google.com/lakehouse/docs/manage-tables?hl=zh-tw)。其他[外部資料表](https://docs.cloud.google.com/bigquery/docs/external-tables?hl=zh-tw) (例如 Parquet、ORC、Avro、CSV 或 Delta Lake) 預設不會啟用彈性資料欄名稱。如要申請專案層級啟用，請與 [Cloud Customer Care](https://docs.cloud.google.com/bigquery/docs/getting-support?hl=zh-tw) 聯絡。
+* [Iceberg 代管資料表](https://docs.cloud.google.com/bigquery/docs/iceberg-tables?hl=zh-tw)、[Iceberg 外部資料表](https://docs.cloud.google.com/bigquery/docs/iceberg-external-tables?hl=zh-tw)，以及[由 Lakehouse 執行階段目錄代管的 Apache Iceberg 資料表](https://docs.cloud.google.com/lakehouse/docs/manage-tables?hl=zh-tw)，預設支援彈性資料欄名稱。其他[外部資料表](https://docs.cloud.google.com/bigquery/docs/external-tables?hl=zh-tw) (例如 Parquet、ORC、Avro、CSV 或 Delta Lake) 預設不會啟用彈性資料欄名稱。如要申請專案層級啟用，請與 [Cloud Customer Care](https://docs.cloud.google.com/bigquery/docs/getting-support?hl=zh-tw) 聯絡。
   + 如果是 Delta Lake 資料表，您也必須在 `id` 或 `name` 模式中啟用[資料欄對應](https://docs.delta.io/latest/delta-column-mapping.html)。
 * 將具有彈性資料欄名稱的外部資料表匯出為開放檔案格式 (例如使用 `EXPORT DATA` 或擷取工作的 Parquet 或 Avro) 時，系統會將不支援的資料欄名稱對應至產生的內部雜湊名稱 (`col_...`)，因為第三方格式不含 BigQuery 顯示名稱中繼資料。
 * 舊版 SQL 不支援彈性資料欄名稱。您必須使用 GoogleSQL。
@@ -173,7 +162,7 @@ message FlexibleSchema {
 
 ### GoogleSQL 資料類型
 
-您可以在結構定義中指定下列資料類型。資料類型為必要項目。
+GoogleSQL 可讓您在結構定義中指定下列資料類型。資料類型為必要項目。
 
 | 名稱 | 資料類型 | 說明 |
 | --- | --- | --- |
@@ -190,12 +179,12 @@ message FlexibleSchema {
 | [時間戳記](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#timestamp_type) | `TIMESTAMP` | 絕對時間點 (精確度高達微秒) |
 | [結構 (記錄)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#struct_type) | `STRUCT` | 已排序欄位的容器，每個容器都有一個類型 (必填) 和欄位名稱 (選填) |
 | [地理](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#geography_type) | `GEOGRAPHY` | 地表上的地理資訊點集合 ([WGS84](http://earth-info.nga.mil/GandG/update/index.php) 參考橢球體上的點、線與多邊形集合，含測地線) |
-| [JSON](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#json_type) | `JSON` | 代表 JSON，這是一種輕量型資料交換格式 |
-| [RANGE](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/range-functions?hl=zh-tw#range) | `RANGE` | `DATE`、`DATETIME` 或 `TIMESTAMP` 值範圍 |
+| [JSON](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#json_type) | `JSON` | 代表 JSON，這是一種輕量資料交換格式 |
+| [RANGE](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/range-functions?hl=zh-tw#range) | `RANGE` | `DATE`、`DATETIME` 或 `TIMESTAMP` 值的範圍 |
 
 如要進一步瞭解 GoogleSQL 中的資料類型，請參閱「[GoogleSQL 資料類型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw)」。
 
-您也可以在查詢資料時宣告陣列類型。詳情請參閱「[使用陣列](https://docs.cloud.google.com/bigquery/docs/arrays?hl=zh-tw)」。
+查詢資料時，您也可以聲明陣列類型。詳情請參閱「[使用陣列](https://docs.cloud.google.com/bigquery/docs/arrays?hl=zh-tw)」。
 
 ### 模式
 
@@ -211,14 +200,14 @@ BigQuery 支援下列資料欄模式；模式為選用項目。假如未指定�
 
 ### 捨入模式
 
-如果資料欄是 `NUMERIC` 或 `BIGNUMERIC` 類型，您可以設定 [`rounding_mode` 資料欄選項](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#column_option_list)，決定該資料欄中的值寫入資料表時的四捨五入方式。您可以在頂層資料欄或 `STRUCT` 欄位中設定 `rounding_mode` 選項。系統支援下列捨入模式：
+如果資料欄是 `NUMERIC` 或 `BIGNUMERIC` 類型，您可以設定 [`rounding_mode` 資料欄選項](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#column_option_list)，決定該資料欄中的值寫入資料表時的四捨五入方式。您可以在頂層資料欄或 `STRUCT` 欄位上設定 `rounding_mode` 選項。支援的捨入模式如下：
 
 * `"ROUND_HALF_AWAY_FROM_ZERO"`：這個模式 (預設) 會將中間值四捨五入，遠離零。
 * `"ROUND_HALF_EVEN"`：這個模式會將中間值四捨五入至最接近的偶數。
 
 您無法為非 `NUMERIC` 或 `BIGNUMERIC` 類型的資料欄設定 `rounding_mode` 選項。如要進一步瞭解這些類型，請參閱「[十進位類型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#decimal_types)」。
 
-以下範例會建立表格，並根據資料欄的捨入模式插入捨入的值：
+以下範例會建立資料表，並根據資料欄的四捨五入模式，插入四捨五入的值：
 
 ```
 CREATE TABLE mydataset.mytable (
@@ -249,6 +238,15 @@ VALUES (NUMERIC "1.025", NUMERIC "1.025"),
 
 ## 指定結構定義
 
+您可以透過下列方式指定資料表的結構定義：
+
+* 使用 Google Cloud 控制台。
+* 使用 `CREATE TABLE` SQL 陳述式。
+* 使用 bq 指令列工具內嵌。
+* 以 JSON 格式建立結構定義檔案。
+* 呼叫 [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert?hl=zh-tw) 方法，並設定 `load` 工作設定中的 `schema` 屬性。
+* 呼叫 [`tables.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/insert?hl=zh-tw) 方法，並使用 `schema` 屬性，設定[資料表資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables?hl=zh-tw)中的結構定義。
+
 載入資料或建立空白資料表時，您可以使用 Google Cloud 控制台或 bq 指令列工具指定資料表的結構定義。載入 CSV 和 JSON (以換行符號分隔) 檔案時，可以指定結構定義。載入 Avro、Parquet、ORC、Firestore 匯出資料或 Datastore 匯出資料時，系統會自動從自述式來源資料擷取結構定義。
 
 如要指定資料表結構定義，請按照下列步驟操作：
@@ -263,7 +261,7 @@ VALUES (NUMERIC "1.025", NUMERIC "1.025"),
 2. 點選左側窗格中的 explore「Explorer」。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
-3. 在「Explorer」窗格中，按一下「Datasets」(資料集)，然後點選您的資料集。
+3. 在「Explorer」窗格中，依序點選「資料集」和您的資料集。
 4. 在詳細資料窗格，點選「建立資料表」add\_box。
 5. 在「Create table」(建立資料表) 頁面的「Source」(來源) 區段中，選取 [Empty table] (空白資料表)。
 6. 在「Create table」(建立資料表) 頁面的「Destination」(目的地) 區段中：
@@ -318,7 +316,7 @@ schema
 
 更改下列內容：
 
-* `location`：位置名稱。`--location` 旗標為選用項目。舉例來說，如果您在東京區域使用 BigQuery，可以將旗標值設為 `asia-northeast1`。您可以使用 [.bigqueryrc 檔案](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool?hl=zh-tw#setting_default_values_for_command-line_flags)，設定該位置的預設值。
+* `location`：位置名稱。`--location` 旗標為選用。舉例來說，如果您在東京地區使用 BigQuery，就可以將旗標的值設為 `asia-northeast1`。您可以使用 [.bigqueryrc 檔案](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool?hl=zh-tw#setting_default_values_for_command-line_flags)，設定該位置的預設值。
 * `format`：`NEWLINE_DELIMITED_JSON` 或 `CSV`。
 * `project_id`：您的專案 ID。
 * `dataset`：資料集，其中包含您要載入資料的資料表。
@@ -351,7 +349,7 @@ bq mk --table project_id:dataset.table schema
 * `project_id`：您的專案 ID。
 * `dataset`：專案中的資料集。
 * `table`：要建立的資料表名稱。
-* `schema`：內嵌結構定義。
+* `schema`：內嵌結構定義定義。
 
 舉例來說，下列指令會在預設專案中建立名為 `mytable` 的空白資料表。結構定義是以內嵌方式指定。
 
@@ -707,21 +705,21 @@ print(
 
 ## 指定 JSON 結構定義檔
 
-如果您偏好使用 JSON 結構定義檔指定結構定義，而非使用內嵌結構定義，JSON 結構定義檔案包含 JSON 陣列，其中包含下列內容：
+您也可以使用 JSON 結構定義檔案指定結構定義，而非使用內嵌結構定義定義。JSON 結構定義檔案包含 JSON 陣列，其中包含下列內容：
 
 * 資料欄[名稱](#column_names)
 * 資料欄的[資料類型](#standard_sql_data_types)
 * 選用：資料欄的[模式](#modes) (如未指定，模式預設為 `NULLABLE`)
 * 選用：如果資料欄是 [`STRUCT` 類型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#struct_type)，則為資料欄的欄位
 * 選用：資料欄的[說明](#column_descriptions)
-* 選填：`STRING` 或 `BYTES` 類型的值長度上限
-* 選用：[精確度](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#decimal_types) (適用於 `NUMERIC` 或 `BIGNUMERIC` 類型)
-* 選用：[比例](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#decimal_types)，適用於 `NUMERIC` 或 `BIGNUMERIC` 類型
+* 選用：`STRING` 或 `BYTES` 類型資料欄的值長度上限
+* 選用：`NUMERIC` 或 `BIGNUMERIC` 類型的資料欄[精確度](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#decimal_types)
+* 選用：`NUMERIC` 或 `BIGNUMERIC` 類型的資料欄[小數位數](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#decimal_types)
 * 選用：`STRING` 類型的資料欄[定序](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts?hl=zh-tw)
 * 選用：資料欄的[預設值](https://docs.cloud.google.com/bigquery/docs/default-values?hl=zh-tw)
 * 選用：如果資料欄是 `NUMERIC` 或 `BIGNUMERIC` 類型，則為資料欄的[捨入模式](#rounding_mode)
 
-**注意：** 您也可以使用 Google Cloud 控制台的「以文字編輯」選項，指定在結構定義檔案中建立的 JSON 陣列。您也可以使用這項功能，做為在 API 中設定 [`schema`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables?hl=zh-tw#tableschema) 屬性的起點。
+**注意：** 您也可以使用 Google Cloud 控制台的「Edit as Text」(以文字形式編輯) 選項，指定在結構定義檔案中建立的 JSON 陣列。此外，您也可以將其做為起點，在 API 中設定 [`schema`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables?hl=zh-tw#tableschema) 屬性。
 
 ### 建立 JSON 結構定義檔
 
@@ -796,7 +794,7 @@ project_id:dataset.table > path_to_file
 
 ### Python
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定操作說明進行操作。詳情請參閱 [BigQuery Python API 參考文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -829,7 +827,7 @@ print(f"Table schema: {schema_contents}")
 
 您可以使用輸出檔案做為 JSON 結構定義檔的起點。假如您使用此方法，請確定該檔案僅包含代表資料表結構定義的 JSON 陣列。
 
-舉例來說，下列 JSON 陣列代表基本的資料表結構定義。這個結構有三個資料欄：`qtr` (`REQUIRED` `STRING`)、`rep` (`NULLABLE` `STRING`) 和 `sales` (`NULLABLE` `FLOAT`)。
+舉例來說，下列 JSON 陣列代表基本的資料表結構定義。這個結構定義有三個資料欄：`qtr` (`REQUIRED` `STRING`)、`rep` (`NULLABLE` `STRING`) 和 `sales` (`NULLABLE` `FLOAT`)。
 
 ```
 [
@@ -840,6 +838,4 @@ print(f"Table schema: {schema_contents}")
     "description": "quarter"
   },
   {
-    "name": "rep",
-    "type":
 ```

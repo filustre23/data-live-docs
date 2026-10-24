@@ -560,6 +560,4 @@ centroid. This column should only contain three rows with the value `TRUE`.
 ```
 CREATE MODEL
   `mydataset.mymodel`
-OPTIONS
-  ( MODEL_TYPE
 ```

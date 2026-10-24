@@ -563,8 +563,3 @@ DATA_SPLIT_METHOD = { 'AUTO_SPLIT' | 'RANDOM' | 'CUSTOM' | 'SEQ' | 'NO_SPLIT' }
 The method used to split input data into training, evaluation, and, if you are
 running hyperparameter tuning, test data sets. Training data is used to train
 the model. Evaluation data is used to avoid
-[overfitting](https://developers.google.com/machine-learning/glossary/#overfitting)
-by using early stopping. Test data is used to test the hyperparameter tuning
-trial and record its metrics in the model.
-
-The percentage sizes o

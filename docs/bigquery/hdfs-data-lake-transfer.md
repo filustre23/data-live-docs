@@ -262,6 +262,4 @@ JSON 檔案中的 `condition` 欄位支援下列值，每個值都有特定的 `
   --params='{
     "transfer_strategy":"TRANSFER_STRATEGY",
     "table_name_patterns":"LIST_OF_TABLES",
-    "table_metadata_path":"gs://DUMPER_BUCKET/hive-dumper-output.zip",
-    "target_gcs_file_path":"gs://MIGRATION_BUCKET",
 ```

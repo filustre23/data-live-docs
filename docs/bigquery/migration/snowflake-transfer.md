@@ -193,9 +193,9 @@ ALTER ACCOUNT SET PREVENT_UNLOAD_TO_INLINE_URL = false;
 
 ### 控制台
 
-1. 前往 Google Cloud 控制台的「Data transfers」(資料移轉) 頁面。
+1. 前往 Google Cloud 控制台的「資料移轉」頁面。
 
-   [前往「資料移轉」頁面](https://console.cloud.google.com/bigquery/transfers?hl=zh-tw)
+   [前往「資料移轉」](https://console.cloud.google.com/bigquery/transfers?hl=zh-tw)
 2. 按一下「add 建立移轉作業」。
 3. 在「Source type」(來源類型) 部分，從「Source」(來源) 清單選取「Snowflake Migration」(Snowflake 遷移)。
 4. 在「Transfer config name」(移轉設定名稱) 部分，於「Display name」(顯示名稱) 欄位輸入移轉作業名稱，例如 `My migration`。顯示名稱可以是任何值，只要日後需要修改時能識別移轉作業即可。
@@ -265,17 +265,15 @@ ALTER ACCOUNT SET PREVENT_UNLOAD_TO_INLINE_URL = false;
 ```
 bq mk \
     --transfer_config \
-    --project_id=project_id \
-    --data_source=data_source \
-    --target_dataset=dataset \
-    --display_name=name \
-    --service_account_name=service_account \
-    --params='parameters'
+    --project_id=PROJECT_ID \
+    --data_source=DATA_SOURCE \
+    --target_dataset=DATASET \
+    --display_name=NAME \
+    --service_account_name=SERVICE_ACCOUNT \
+    --params='PARAMETERS'
 ```
 
 更改下列內容：
 
-* project\_id：您的 Google Cloud 專案 ID。如未指定 `--project_id`，系統會使用預設專案。
-* data\_source：資料來源，`snowflake_migration`。
-* dataset：移轉設定的 BigQuery 目標資料集。
-* name：移轉設定的顯示名稱。移轉作業名稱可以
+* `PROJECT_ID`：您的 Google Cloud 專案 ID。如未指定 `--project_id`，系統會使用預設專案。
+* `DATA_SOURCE`

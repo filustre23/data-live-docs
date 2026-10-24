@@ -399,6 +399,3 @@ Cloud Storage. The table includes the following columns:
   for example, `image/jpeg` or `application/pdf`.
 * `size`: an `INT64` value that contains the object size in bytes.
 * `md5_hash`: a `STRING` value that contains the MD5 hash of the object.
-* `updated`: a `TIMESTAMP` value that contains the time the object was last
-  updated.
-* `metadata`: an

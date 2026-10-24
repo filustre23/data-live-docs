@@ -304,6 +304,4 @@ Returns the smallest integral value that isn't less than X.
 | 2.0 | 2.0 |
 | 2.3 | 3.0 |
 | 2.8 | 3.0 |
-| 2.5 | 3.0 |
-| -2.3 | -2.0 |
-| -2.8 | -2.0 |
+|

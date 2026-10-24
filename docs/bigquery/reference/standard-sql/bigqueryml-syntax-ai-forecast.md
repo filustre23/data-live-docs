@@ -447,5 +447,4 @@ FROM
     TABLE citibike_trips,
     data_col => 'num_trips',
     timestamp_col => 'date',
-    id_cols =>
 ```

@@ -16,11 +16,14 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 物件資料表簡介
 
-本文說明物件資料表，這類唯讀資料表用於儲存在 Cloud Storage 中的非結構化資料物件。
+物件資料表是 Cloud Storage 中非結構化資料物件的唯讀資料表。您可以使用遠端函式或 BigQuery ML 推論分析非結構化資料，然後將結果與 BigQuery 中的其他結構化資料彙整。
 
-物件資料表可讓您分析 Cloud Storage 中的非結構化資料。您可以使用遠端函式執行分析，或透過 BigQuery ML 執行推論，然後將這些作業的結果與 BigQuery 中的其他結構化資料彙整。
+與 BigLake 資料表一樣，物件資料表也使用存取權委派功能，因此您可授予使用者物件資料表的存取權，而非基礎 Cloud Storage 物件的存取權。這種設計可讓您強制執行資料列層級安全性，並管理使用者可存取的物件。
 
-與 BigLake 資料表一樣，物件資料表也使用存取權委派功能，將物件資料表的存取權與 Cloud Storage 物件的存取權分開。與服務帳戶相關聯的[外部連線](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw)會用於連線至 Cloud Storage，因此您只需授予使用者物件資料表的存取權。這可讓您強制執行[資料列層級](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro?hl=zh-tw)安全性，並管理使用者可存取的物件。
+**注意：**
+管理[外部身分識別資訊提供者](https://docs.cloud.google.com/iam/docs/workforce-identity-federation?hl=zh-tw)中的使用者存取權時，請將 Google 帳戶主體 ID 的例項 (例如 `user:kiran@example.com`、`group:support@example.com` 和 `domain:example.com`) 替換為適當的[員工身分聯盟主體 ID](https://docs.cloud.google.com/iam/docs/principal-identifiers?hl=zh-tw)。
+
+## 建立物件資料表
 
 您可以使用 [`CREATE EXTERNAL TABLE` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#create_external_table_statement)建立物件資料表，如以下範例所示：
 
@@ -31,9 +34,6 @@ OPTIONS ( object_metadata = 'SIMPLE', uris = ['gs://mybucket/*'] );
 ```
 
 如要進一步瞭解如何建立物件資料表，請參閱「[建立物件資料表](https://docs.cloud.google.com/bigquery/docs/object-tables?hl=zh-tw)」。
-
-**注意：**
-管理[外部身分識別資訊提供者](https://docs.cloud.google.com/iam/docs/workforce-identity-federation?hl=zh-tw)中的使用者存取權時，請將 Google 帳戶主體 ID 的例項 (例如 `user:kiran@example.com`、`group:support@example.com` 和 `domain:example.com`) 替換為適當的[員工身分聯盟主體 ID](https://docs.cloud.google.com/iam/docs/principal-identifiers?hl=zh-tw)。
 
 ## 物件資料表結構定義
 
@@ -320,11 +320,11 @@ BigQuery 與 Cloud Storage 互動時，可能會產生下列 Cloud Storage 費�
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-19 (世界標準時間)。
+上次更新時間：2026-10-22 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-19 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-22 (世界標準時間)。"],[],[]]

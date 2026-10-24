@@ -66,6 +66,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 | `period_shuffle_ram_usage_ratio` | `FLOAT` | 所選時間範圍內的重組用量比率。如果工作執行的預留項目使用自動調度資源，且基準運算單元為零，則值為 `0.0`。 |
 | `period_estimated_runnable_units` | `INTEGER` | 這段期間內可立即排定的工作單位。如果預留項目中沒有其他查詢需要額外運算單元，則這些工作單元的額外運算單元會加快查詢速度。 |
 | `global_query_info` | `RECORD` | [全域查詢](https://docs.cloud.google.com/bigquery/docs/global-queries?hl=zh-tw)的相關資訊。 包含下列欄位：  * `parent_job_id`：主要區域中父項全域查詢工作的 ID。 * `parent_job_location`：父項全域查詢工作的所在位置。 * `remote_regions`：全域查詢參照的遠端區域陣列。 |
+| `copy_job_statistics` | `RECORD` | [複製工作的統計資料。](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#CopyJobStatistics) |
 
 為確保穩定性，建議您在資訊結構定義查詢中明確列出資料欄，而非使用萬用字元 (`SELECT *`)。明確列出資料欄可避免查詢因基礎結構定義變更而中斷。
 
@@ -156,7 +157,4 @@ JOIN `region-us`.INFORMATION_SCHEMA.RESERVATIONS_TIMELINE res
   AND TIMESTAMP_TRUNC(jobs.period_start, MINUTE) = res.period_start
 LEFT JOIN UNNEST(res.per_second_details) s
   ON jobs.period_start = s.start_time
-WHERE
-  jobs.job_creation_time
-      BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(),
 ```

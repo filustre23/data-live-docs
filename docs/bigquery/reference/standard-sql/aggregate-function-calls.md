@@ -269,6 +269,4 @@ FROM
     SELECT 'apple' AS fruit
     UNION ALL
     SELECT 'pear' AS fruit
-    UNION ALL
-    SELECT
 ```

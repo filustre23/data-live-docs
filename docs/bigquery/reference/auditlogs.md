@@ -490,7 +490,4 @@ The following audit logs are associated with methods belonging to
 The following audit logs are associated with methods belonging to
 `tableservice`.
 
-#### `delete`
-
-* **Method**: `tableservice.delete`
-* **Audit log type**:
+#### `delete</`

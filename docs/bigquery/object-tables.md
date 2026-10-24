@@ -16,14 +16,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 建立物件資料表
 
-本文說明如何建立[物件資料表](https://docs.cloud.google.com/bigquery/docs/object-table-introduction?hl=zh-tw)，以便在 BigQuery 中存取 Cloud Storage 的非結構化資料。
-
-如要建立物件資料表，您必須完成下列工作：
-
-1. 建立[資料集](https://docs.cloud.google.com/bigquery/docs/datasets-intro?hl=zh-tw)，用於存放物件資料表。
-2. 建立[連線](https://docs.cloud.google.com/bigquery/docs/connections-api-intro?hl=zh-tw)，從 Cloud Storage 讀取物件資訊。
-3. 將 Storage 物件檢視者 (`roles/storage.objectViewer`) 角色授予與連線相關聯的服務帳戶。
-4. 使用 [`CREATE EXTERNAL TABLE` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#create_external_table_statement)建立物件資料表，並與連線建立關聯。
+[物件資料表](https://docs.cloud.google.com/bigquery/docs/object-table-introduction?hl=zh-tw)可讓您在 BigQuery 中存取 Cloud Storage 中的非結構化資料，以便與結構化資料一併分析。本文說明如何設定物件資料表所需的資料集、連線和 IAM 角色，以及如何建立及查詢資料表。
 
 ## 事前準備
 
@@ -135,7 +128,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ## 建立資料集
 
-建立 BigQuery 資料集，用於存放物件資料表：
+建立 BigQuery [資料集](https://docs.cloud.google.com/bigquery/docs/datasets-intro?hl=zh-tw)，用於存放物件資料表：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -252,7 +245,7 @@ gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount
      您可以提供多個路徑，為 `uris` 選項指定多個 bucket，例如 `['gs://mybucket1/*', 'gs://mybucket2/folder5/*']`。為達到最佳效能，每個物件資料表最多只能指定 10 個 URI。如果提供超過 10 個 bucket URI，物件資料表可支援的檔案總數會減少。
 
      如要進一步瞭解如何在 BigQuery 中使用 Cloud Storage URI，請參閱「[Cloud Storage 資源路徑](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage?hl=zh-tw#google-cloud-storage-uri)」。
-   * `STALENESS_INTERVAL`：指定對物件資料表執行的作業是否使用快取中繼資料，以及快取中繼資料必須有多新，作業才能使用。如要進一步瞭解中繼資料快取注意事項，請參閱「[中繼資料快取效能](https://docs.cloud.google.com/bigquery/docs/object-table-introduction?hl=zh-tw#metadata_caching_for_performance)」。
+   * `STALENESS_INTERVAL`：指定針對物件資料表執行的作業是否使用快取中繼資料，以及快取中繼資料必須有多新，作業才能使用。如要進一步瞭解中繼資料快取注意事項，請參閱「[中繼資料快取效能](https://docs.cloud.google.com/bigquery/docs/object-table-introduction?hl=zh-tw#metadata_caching_for_performance)」。
 
      如要停用中繼資料快取功能，請指定 0。這是目前的預設做法。
 
@@ -486,7 +479,7 @@ resource "google_bigquery_table" "default" {
    ```
    mkdir DIRECTORY && cd DIRECTORY && touch main.tf
    ```
-2. 如果您正在按照教學課程操作，可以複製每個章節或步驟中的程式碼範例。
+2. 如果您正在進行教學課程，可以複製每個章節或步驟中的程式碼範例。
 
    將程式碼範例複製到新建立的 `main.tf`。
 
@@ -548,11 +541,11 @@ FROM mydataset.myobjecttable;
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-16 (世界標準時間)。
+上次更新時間：2026-10-22 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-16 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-22 (世界標準時間)。"],[],[]]

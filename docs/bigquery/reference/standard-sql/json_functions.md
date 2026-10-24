@@ -279,5 +279,5 @@ The following examples show how invalid requests are handled:
 ```
 -- An error is thrown if JSON isn't a number or can't be converted to a 64-bit integer.
 SELECT INT64(JSON '10.1') AS result;  -- Throws an error
-SELECT INT64(JSON '"strawberry"')
+SELECT INT64(
 ```

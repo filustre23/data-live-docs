@@ -191,6 +191,3 @@ Assessment task config.
 ## AssessmentFeatureHandle
 
 User-definable feature flags for assessment tasks.
-
-|
-|  |

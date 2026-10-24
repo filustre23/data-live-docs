@@ -229,6 +229,5 @@ func reportConnections(ctx context.Context, client *connection.Client, projectID
 		if err == iterator.Done {
 			break
 		}
-		if err != nil {
-			
+		if err !=
 ```

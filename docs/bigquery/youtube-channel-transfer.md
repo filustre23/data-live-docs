@@ -191,6 +191,5 @@ import java.util.Map;
 // Sample to create youtube channel transfer config.
 public class CreateYoutubeChannelTransfer {
 
-  public static void main(String[] args) throws IOException {
-    // TODO(developer): Replace these variables before run
+  public static void main(String[] args) throws IOExcepti
 ```

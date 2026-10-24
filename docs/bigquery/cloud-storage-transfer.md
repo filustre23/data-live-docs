@@ -211,6 +211,4 @@ bq mk \
   + `ignore_unknown_values`：針對任何 `file_format` 值，設為 `TRUE` 即可接受含有與結構定義不符值的資料列。詳情請參閱[`JobConfigurationLoad`參考表格](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#JobConfigurationLoad.FIELDS.ignore_unknown_values)中的「`ignoreUnknownvalues`」欄位詳細資料。
   + `use_avro_logical_types`：如果是 `AVRO` `file_format` 值，請設為 `TRUE`，將邏輯類型解讀為對應類型 (例如 `TIMESTAMP`)，而非僅使用原始類型 (例如 `INTEGER`)。
   + `parquet_enum_as_string`：針對 `PARQUET` `file_format` 值，請設為 `TRUE`，將 `PARQUET` `ENUM` 邏輯型別推斷為 `STRING`，而非預設的 `BYTES`。
-  + `parquet_enable_list_inference`：如為 `PARQUET` `file_format` 值，請設為 `TRUE`，以便專門針對 `PARQUET` `LIST` 邏輯型別使用結構定義推論。
-  + `reference_file_schema_uri`：參考檔案的 URI 路徑，其中包含讀取器結構定義。
-  + `field_delimiter`：如果
+  + `parquet_enable_list_inference`：如為 `PARQUET` `file_format` 值，請設為 `TRUE`，以便專門針對 `PARQUET` `LIST` 邏輯型別使用結構定義推論

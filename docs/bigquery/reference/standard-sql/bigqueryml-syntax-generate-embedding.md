@@ -359,7 +359,4 @@ ML.GENERATE_EMBEDDING(
 * `INTERVAL_SECONDS`: a `FLOAT64` value that specifies
   the interval to use when creating embeddings. For example, if you set
   `START_SECOND` = `0`, `END_SECOND` = `120`, and `INTERVAL_SECONDS` = `10`,
-  then the video is split into twelve 10 second segments (`[0, 10), [10,
-  20), [20, 30)...`) and embeddings are generated for each segment. This
-  value must be greater than
-  or equal to `4` and less than
+  then the video is split into twelve 10 second segments (

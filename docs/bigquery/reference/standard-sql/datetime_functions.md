@@ -338,7 +338,3 @@ days than the original `DATETIME` object's day, then the result day is the last 
 the new month.
 
 **Return Data Type**
-
-`DATETIME`
-
-**Example**

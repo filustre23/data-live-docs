@@ -77,7 +77,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 #### 中繼資料快取統計資料
 
-如果查詢涉及 Amazon S3 BigLake 資料表或已啟用中繼資料快取的 Cloud Storage BigLake 資料表，請比較 [`MetadataCacheStatistics`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#metadatacachestatistics) 的輸出內容，檢查慢速和快速查詢之間的中繼資料快取用量是否有差異，以及相應的原因。例如，中繼資料快取可能超出資料表的 `maxStaleness` 視窗。
+如果查詢涉及 Amazon S3 BigLake 資料表或已啟用中繼資料快取的 Cloud Storage BigLake 資料表，請比較 [`MetadataCacheStatistics`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#metadatacachestatistics) 的輸出內容，檢查慢速和快速查詢之間的中繼資料快取用量是否有差異，以及相應的原因。例如，中繼資料快取可能超出為資料表設定的 `maxStaleness` 時間間隔。
 
 #### 比較 BigQuery BI Engine 統計資料
 
@@ -388,6 +388,66 @@ supported unless they can be de-correlated`
 
 嘗試使用服務帳戶設定排定查詢時，可能會出現這項錯誤。如要解決這項錯誤，請參閱「[授權和權限問題](https://docs.cloud.google.com/bigquery/docs/transfer-troubleshooting?hl=zh-tw#authorization_and_permission_issues)」中的疑難排解步驟。
 
+## 目的地資料表已刪除或過期
+
+錯誤字串：`Destination deleted/expired during operation: DETAILS`
+
+如果查詢、載入或複製工作嘗試寫入目的地資料表，但資料表在工作執行完畢前遭到移除，就會發生這個 HTTP `400 Bad Request` 錯誤 (`reason: invalid`)。
+
+### 診斷
+
+這項錯誤通常是以下兩個原因之一所致：
+
+1. **資料表或資料集已達存留時間 (TTL)。**目的地資料表 (或資料集的預設資料表到期時間) 已設定到期時間戳記。如果長時間執行的工作在資料表到期時間戳記過後仍繼續執行，BigQuery 會在工作仍在執行時刪除過期的資料表。
+2. **並行明確刪除。**在工作執行期間，另一個使用者、服務帳戶或自動化工作流程 (例如自動化調度管理 DAG 或清除指令碼) 對目的地資料表執行 `DROP TABLE` 陳述式或 `tables.delete` API 呼叫。
+
+如要判斷目的地資料表遭到刪除的原因，請查詢 [`INFORMATION_SCHEMA.TABLE_STORAGE`](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage?hl=zh-tw) 檢視表：
+
+```
+SELECT
+  table_name,
+  deleted,
+  table_deletion_time,
+  table_deletion_reason
+FROM
+  `PROJECT_ID`.`region-REGION`.INFORMATION_SCHEMA.TABLE_STORAGE
+WHERE
+  table_schema = "DATASET_ID"
+  AND table_name = "TABLE_ID"
+```
+
+更改下列內容：
+
+* `PROJECT_ID`：您的專案 ID。
+* `REGION`：
+  資料表所在資料集的區域。
+* `DATASET_ID`：資料表所在資料集的 ID。
+* `TABLE_ID`：目的地資料表的 ID。
+
+如果資料表已過期，`table_deletion_reason` 欄會包含 `TABLE_EXPIRATION`；如果使用者刪除了資料表，則會包含 `USER_DELETED`；如果使用者刪除了包含資料表的資料集，則會包含 `DATASET_DELETION`。詳情請參閱「[找出資料表刪除原因](https://docs.cloud.google.com/bigquery/docs/restore-deleted-tables?hl=zh-tw#identify-cause)」。
+
+如果原因是 `USER_DELETED`，請在 Logs Explorer 中查詢 Cloud 稽核記錄，找出刪除資料表的使用者。篩選工作失敗前後的項目：
+
+```
+resource.type=("bigquery_resource" OR "bigquery_dataset")
+protoPayload.methodName=("tableservice.delete" OR "google.cloud.bigquery.v2.TableService.DeleteTable")
+protoPayload.resourceName:"YOUR_TABLE_NAME"
+```
+
+將 `YOUR_TABLE_NAME` 替換為目的地資料表的 ID。
+
+檢查相符記錄項目中的 `protoPayload.authenticationInfo.principalEmail` 欄位，找出刪除資料表的使用者或服務帳戶。
+
+如果原因是 `DATASET_DELETION`，請使用「[找出資料表的刪除時間](https://docs.cloud.google.com/bigquery/docs/restore-deleted-tables?hl=zh-tw#identify_when_a_table_was_deleted)」中的資料集篩選器。
+
+### 解析度
+
+如要解決這項錯誤，請執行下列操作：
+
+* **延長資料表和資料集的到期時間。**檢查目的地資料表的到期時間，以及資料集的預設資料表到期時間設定。請確保設定的存留時間夠長，足以超過寫入該資料表的工作預期執行時間上限 (包括佇列時間和重試次數)。如需操作說明，請參閱「[更新資料表的到期時間](https://docs.cloud.google.com/bigquery/docs/managing-tables?hl=zh-tw#updating_a_tables_expiration_time)」。
+* **序列化管道工作。**如果自動化 ETL 管道 (例如 Managed Service for Apache Airflow、Apache Airflow 或 Dataform) 會重新建立或清理暫存資料表，請設定嚴格的工作依附關係，確保 `DROP TABLE` 或清理工作不會與針對相同資料表的有效寫入工作同時執行。
+* **使用不重複的中繼資料表名稱。**執行平行管道執行個體時，請將中繼結果寫入名稱不重複的臨時或暫存資料表 (例如在多陳述式查詢中使用 `CREATE TEMP TABLE`，或附加不重複的執行 ID)，而非在並行執行作業中共用單一可變動的暫存資料表。
+
 ## 快照時間無效
 
 錯誤字串：`Invalid snapshot time`
@@ -502,8 +562,13 @@ AND query = "my query string";
 
 如果查詢中的資料表不在指定的資料集或區域，就會發生這項錯誤。如要解決這項錯誤，請執行下列任一操作：
 
-* 請確認查詢包含正確的專案、資料集和資料表名稱。
-* 確認資料表位於您執行查詢的區域。
+* 請檢查查詢是否包含正確的專案、資料集和資料表名稱，並確認 ID 的大小寫完全正確 (請參閱「[區分大小寫](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#case_sensitivity)」)。如果查詢省略專案 ID，BigQuery 預設會使用執行工作的計費專案。查詢其他專案中的資料表時，請指定完整 `PROJECT_ID.DATASET_ID.TABLE_NAME`。
+* 請確認資料表存在於查詢執行位置。根據預設，查詢讀取或寫入的每個資料集，都必須與查詢工作位於相同位置。如果您自行設定工作位置 (例如使用 `--location` 旗標或工作參照中的 `location` 屬性)，請務必確保該位置與資料集的位置相符。單一區域 (例如 `us-central1`) 與多區域 (例如 `US`) 不相符。詳情請參閱「[指定位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#specify_locations)」。
+* 如要在單一查詢中查詢不同位置的資料表，請使用[全域查詢](https://docs.cloud.google.com/bigquery/docs/global-queries?hl=zh-tw)
+  [(預先發布版)](https://docs.cloud.google.com/products?hl=zh-tw#product-launch-stages)。執行查詢的專案和包含資料的專案都必須啟用全域查詢，且沙箱模式不支援全域查詢。
+* 請查詢 [`INFORMATION_SCHEMA.TABLE_STORAGE`](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage?hl=zh-tw)，或檢查 Cloud 稽核記錄中的 `DeleteTable` 或 `InternalTableExpired` 事件，確認資料表或資料集是否已過期或刪除。如果資料表是在[時間旅行期間](https://docs.cloud.google.com/bigquery/docs/time-travel?hl=zh-tw) (最多 7 天) 內刪除，您可以[還原刪除的資料表](https://docs.cloud.google.com/bigquery/docs/restore-deleted-tables?hl=zh-tw)。如果父項資料集也已刪除，請先重新建立名稱和位置完全相同的空白資料集，再複製歷來快照。
+* 如果您在以底線 (`_`) 開頭的隱藏資料集中，查詢匿名快取結果資料表，請注意，快取結果資料表會在約 24 小時後過期。請重新執行原始查詢，或將輸出內容寫入永久目的地資料表。
+* 如果您查詢的是由 Cloud Storage 或 Google 雲端硬碟支援的外部資料表，請確認基礎來源檔案仍存在於設定的 URI 路徑 (`Not found: URI`、`Not found: Uris` 或 `Not found: Files`)。
 * 請確認資料表在工作執行期間未遭到捨棄及重新建立。否則，中繼資料傳播不完整可能會導致這項錯誤。
 
 ## DML 陳述式過多
@@ -550,6 +615,27 @@ exceeded` 錯誤則適用於同時寫入資料表的所有 DML 工作 (`INSERT` 
 * *增加預留運算單元*：增加預留運算單元數量，加快工作完成速度，並減少工作並行。這可減少佇列中待處理工作的數量，避免達到上限。
 * *最佳化工作流程自動化調度管理*：限制自動化調度管理工具中的並行 DML 工作數量，避免超出資料表層級的並行限制 (包括針對相同資料表的高頻率 `INSERT` 查詢)。
 * *批次 DML 作業*：將多個較小的 DML 陳述式合併成較少、較大的陳述式，減少資料表排入佇列的工作總數。
+
+## 巢狀檢視表或 persistent user-defined function 過多
+
+錯誤字串：`Too many nested views/persistent user-defined functions or possible circular reference of views/persistent user-defined functions referenced in query. Only 16 levels of nested views/persistent user-defined functions are allowed.`
+
+如果查詢
+或檢視表建立作業參照的檢視表鏈結或永久使用者定義
+函式 (UDF) 超過支援的巢狀深度上限 (16 層)
+，或查詢參照的檢視表或 UDF 在循環
+相依迴圈中相互參照 (例如 `view_a` 查詢 `view_b`，而 查詢
+`view_a`)，就會發生這個 HTTP `400 Bad Request` 錯誤 (`reason: invalidQuery`)。如要進一步瞭解檢視表和常式限制，請參閱
+「[檢視表限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#view_limits)」和
+「[UDF 限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#udf_limits)」。如果錯誤是因為 `STRUCT` (`RECORD`) 欄、載入檔案或巢狀常式引數和傳回類型超過 15 層巢狀結構限制所造成，請參閱「[排解結構定義、檔案和常式巢狀結構限制錯誤](https://docs.cloud.google.com/bigquery/docs/troubleshoot-schemas?hl=zh-tw#ts-schema-nested-too-deeply)」。
+
+您最多可以建立 16 層巢狀結構的檢視表，但查詢只能參照最多 15 層巢狀結構的檢視表。
+
+此上限無法提高。如要解決這項錯誤，請執行下列操作：
+
+* **檢查是否有循環參照。**檢查查詢鏈結中的檢視表和 persistent UDF 定義，確認沒有任何檢視表或函式直接或間接參照自身。
+* **整合巢狀檢視畫面。**將中繼邏輯合併到單一檢視表或查詢中的通用資料表運算式 (`WITH` 子句)，藉此重構巢狀檢視表鏈結。
+* **具體化中繼層。**將深層檢視區塊階層中的中繼層，替換為寫入實體資料表的排定查詢，或使用支援的 [materialized view](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro?hl=zh-tw)。
 
 ## 並行更新導致交易中止
 
@@ -881,11 +967,11 @@ tcpdump -s 0 -w debug.pcap -K -n host bigquery.googleapis.com
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-20 (世界標準時間)。
+上次更新時間：2026-10-23 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-20 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-23 (世界標準時間)。"],[],[]]

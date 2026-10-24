@@ -115,7 +115,3 @@ Options customizing the time based transfer schedule. Options are migrated from 
 This type has no fields.
 
 Options customizing manual transfers schedule.
-
-### EventDrivenSchedule
-
-Options customizing EventDriven

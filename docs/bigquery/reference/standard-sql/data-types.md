@@ -393,6 +393,5 @@ You can also create arrays from any expressions that have compatible types. For
 example:
 
 ```
-SELECT [a, b, c]
-FROM
+SELECT [a, b
 ```

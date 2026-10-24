@@ -307,6 +307,5 @@ range.
 ```
 SELECT
   STRUCT<INT64, STRING, BOOL>(23, "tea", FALSE)[0] AS field_index,
-  STRUCT<INT64, STRING, BOOL>(23, "tea", FALSE)[OFFSET(0)] AS field_offset,
-  STRUCT<
+  STRUCT<INT64, STRING, BOOL>(23, "tea", FALSE)[OFFSET(0)] AS<
 ```

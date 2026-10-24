@@ -554,6 +554,5 @@ In the following query, normalization isn't applied to the results:
 
 ```
 SELECT TEXT_ANALYZE(
-  'I like ❶ ② pies, you like Ño PIEs',
-  analyzer=>
+  'I like ❶ ② pies, you
 ```

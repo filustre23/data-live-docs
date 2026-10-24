@@ -273,6 +273,5 @@ SELECT
   b'jaguar' AS favorite_animal
 UNION ALL
 SELECT
-  2 AS customer_id,
-  KEYS.NEW_KEYSET
+  2 AS
 ```

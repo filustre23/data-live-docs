@@ -155,5 +155,4 @@ This topic contains all functions supported by GoogleSQL for BigQuery.
 | [`IS_NAN`](/bigquery/docs/reference/standard-sql/mathematical_functions#is_nan) | Checks if `X` is a `NaN` value. |
 | [`IS_SIMPLE`](/bigquery/docs/reference/standard-sql/graph-sql-functions#is_simple) | Checks if a graph path is simple. |
 | [`IS_TRAIL`](/bigquery/docs/reference/standard-sql/graph-sql-functions#is_trail) | Checks if a graph path has a repeating edge. |
-| [`JSON_ARRAY`](/bigquery/docs/reference/standard-sql/json_functions#json_array) | Creates a JSON array. |
 |  |

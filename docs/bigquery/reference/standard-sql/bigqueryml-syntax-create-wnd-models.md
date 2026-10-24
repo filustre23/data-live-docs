@@ -505,8 +505,4 @@ a single pass of the entire training data.
 
 **Arguments**
 
-An `INT64` value. The default value is `20`.
-
-### `WARM_START`
-
-**Syntax**
+An `INT64`

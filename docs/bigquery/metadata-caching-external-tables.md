@@ -16,18 +16,19 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 對外部資料來源使用中繼資料快取
 
-本文說明如何使用中繼資料快取 (也稱為*資料欄中繼資料索引*)，提升物件資料表和某些類型 BigLake 資料表的查詢效能。
+中繼資料快取也稱為*資料欄中繼資料索引*，可提升物件資料表、Amazon S3 和 Cloud Storage BigLake 資料表的查詢效能。這些資料表可以快取外部資料儲存庫中檔案的中繼資料，例如檔案名稱、分區資訊和資料列數。
 
-物件資料表和某些類型的 BigLake 資料表，可以快取外部資料儲存庫 (例如 Cloud Storage) 中檔案的中繼資料資訊。下列類型的 BigLake 資料表支援中繼資料快取：
+啟用中繼資料快取功能後，查詢作業就不必列出外部資料來源中的檔案 (如果檔案數量達數百萬個，可能需要幾分鐘的時間)，而且可以更快地分割及修剪檔案。對大量檔案執行查詢，以及使用 Hive 分區篩選器執行查詢，可獲得最大效益。
 
+## 支援的資料表
+
+下列類型的資料表支援中繼資料快取：
+
+* 物件資料表
 * Amazon S3 BigLake 資料表
 * Cloud Storage BigLake 資料表
 
-中繼資料包括檔案名稱、分區資訊，以及檔案的中繼資料 (例如資料列數)。您可以選擇是否要啟用資料表的中繼資料快取功能。如果查詢含有大量檔案和 Hive 分區篩選器，中繼資料快取可帶來最大效益。
-
-如未啟用中繼資料快取功能，資料表查詢就必須讀取外部資料來源，才能取得物件中繼資料。讀取這類資料會增加查詢延遲時間；從外部資料來源列出數百萬個檔案可能需要幾分鐘的時間。啟用中繼資料快取功能後，查詢作業就不必列出外部資料來源中的檔案，而且能更快分區及剪除檔案。
-
-建立 BigLake 或物件資料表時，您可以啟用中繼資料快取功能。如要進一步瞭解如何建立物件資料表，請參閱「[建立物件資料表](https://docs.cloud.google.com/bigquery/docs/object-tables?hl=zh-tw)」。如要進一步瞭解如何建立 BigLake 資料表，請參閱下列任一主題：
+您可以選擇是否要啟用資料表的中繼資料快取功能。建立 BigLake 或物件資料表時，您可以啟用中繼資料快取功能。如要進一步瞭解如何建立物件資料表，請參閱「[建立物件資料表](https://docs.cloud.google.com/bigquery/docs/object-tables?hl=zh-tw)」。如要進一步瞭解如何建立 BigLake 資料表，請參閱下列任一主題：
 
 * [建立 Amazon S3 BigLake 外部資料表](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-external-table?hl=zh-tw)
 * [建立 Cloud Storage 的 BigLake 外部資料表](https://docs.cloud.google.com/bigquery/docs/create-cloud-storage-table-biglake?hl=zh-tw)
@@ -128,11 +129,11 @@ LIMIT 10;
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-16 (世界標準時間)。
+上次更新時間：2026-10-22 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-16 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-22 (世界標準時間)。"],[],[]]

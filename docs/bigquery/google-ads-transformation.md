@@ -140,4 +140,4 @@ as AssetGroup and CampaignAssetStats.
 | Google Ads tables | Google Ads API resources (v25.0.0) |
 | --- | --- |
 | Assets (available if [Pmax](https://developers.google.com/google-ads/api/docs/performance-max/overview) data is enabled) | [Assets](https://developers.google.com/google-ads/api/fields/v25/asset) |
-| AssetGroup (available if [Pmax](https://developers.google.com/google-ads/api/docs/performance-max/overview) data is enabled) |  |
+<

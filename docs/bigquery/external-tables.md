@@ -16,14 +16,9 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 外部資料表簡介
 
-本文說明如何使用外部資料表，處理儲存在 BigQuery 外部的資料。如要使用外部資料來源，您也可以使用[外部資料集](https://docs.cloud.google.com/bigquery/docs/datasets-intro?hl=zh-tw#external_datasets)。
+外部資料表可讓您查詢 Cloud Storage、Bigtable 和 Google 雲端硬碟等外部資料儲存庫中的結構化資料，而不必將資料載入 BigQuery 儲存空間。與 [BigLake 資料表](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw)不同，外部資料表不使用存取權委派，因此使用者需要同時具備外部資料表和外部資料來源的權限。
 
-外部資料表可讓您查詢外部資料儲存庫中的結構化資料。如要查詢外部資料表，您必須具備外部資料表和外部資料來源的權限。例如，如要查詢使用 Cloud Storage 資料來源的外部資料表，您必須具備下列權限：
-
-* `bigquery.tables.getData`
-* `bigquery.jobs.create`
-* `storage.buckets.get`
-* `storage.objects.get`
+如要在資料集層級使用外部資料，您也可以使用[外部資料集](https://docs.cloud.google.com/bigquery/docs/datasets-intro?hl=zh-tw#external_datasets)。
 
 ## 支援的資料儲存庫
 
@@ -182,11 +177,11 @@ BigQuery 是區域性服務，但其基礎運算資源可在可用區之間轉�
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-20 (世界標準時間)。
+上次更新時間：2026-10-22 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-20 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-22 (世界標準時間)。"],[],[]]

@@ -36,23 +36,24 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 | **資料欄名稱** | **資料類型** | **值** |
 | --- | --- | --- |
-| `bi_engine_statistics` | `RECORD` | 如果專案已設為使用 [BI Engine](https://cloud.google.com/bigquery/docs/bi-engine-intro?hl=zh-tw)，這個欄位會包含 [BiEngineStatistics](https://cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#bienginestatistics)。否則為 `NULL`。 |
+| `bi_engine_statistics` | `RECORD` | 如果專案已設為使用 [BI Engine](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro?hl=zh-tw)，這個欄位會包含 [BiEngineStatistics](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#bienginestatistics)。否則為 `NULL`。 |
 | `cache_hit` | `BOOLEAN` | 這項工作的查詢結果是否來自快取。如果您有[多查詢陳述式工作](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries?hl=zh-tw)，則父項查詢的 `cache_hit` 為 `NULL`。 |
+| `copy_job_statistics` | `RECORD` | [複製工作的統計資料。](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#CopyJobStatistics) |
 | `creation_time` | `TIMESTAMP` | (*分區資料欄*) 這項工作的建立時間。分區依據為這個時間戳記的世界標準時間。 |
-| `destination_table` | `RECORD` | 結果的目的地[資料表](https://cloud.google.com/bigquery/docs/reference/rest/v2/TableReference?hl=zh-tw) (如果有的話)。 |
+| `destination_table` | `RECORD` | 結果的目的地[資料表](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/TableReference?hl=zh-tw) (如果有的話)。 |
 | `dml_statistics` | `RECORD` | 如果工作是含有 DML 陳述式的查詢，則值為含有下列欄位的記錄：   * `inserted_row_count`：插入的資料列數。 * `deleted_row_count`：已刪除的資料列數量。 * `updated_row_count`：已更新的資料列數量。  所有其他工作的這個值為 `NULL`。  這個資料欄會顯示在 `INFORMATION_SCHEMA.JOBS_BY_USER` 和 `INFORMATION_SCHEMA.JOBS_BY_PROJECT` 檢視畫面中。 |
 | `end_time` | `TIMESTAMP` | 這項工作的結束時間，以毫秒為單位 (自 Epoch 起算)。這個欄位代表工作進入 `DONE` 狀態的時間。 |
-| `error_result` | `RECORD` | 任何錯誤的詳細資料，以 [ErrorProto](https://cloud.google.com/bigquery/docs/reference/rest/v2/ErrorProto?hl=zh-tw) 物件表示。 |
+| `error_result` | `RECORD` | 任何錯誤的詳細資料，以 [ErrorProto](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/ErrorProto?hl=zh-tw) 物件表示。 |
 | `global_query_info` | `RECORD` | [全域查詢](https://docs.cloud.google.com/bigquery/docs/global-queries?hl=zh-tw)的相關資訊。 包含下列欄位：  * `parent_job_id`：主要區域中父項全域查詢工作的 ID。 * `parent_job_location`：父項全域查詢工作的所在位置。 * `remote_regions`：全域查詢參照的遠端區域陣列。 |
 | `job_creation_reason.code` | `STRING` | 指定建立工作的主要原因。  可能的值包括：  * `REQUESTED`：已要求建立工作。 * `LONG_RUNNING`：查詢要求執行時間超過 `QueryRequest` 中 [timeoutMs   欄位指定的系統定義逾時時間。因此，系統會將這項作業視為長時間執行的作業，並建立工作。](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query?hl=zh-tw#queryrequest) * `LARGE_RESULTS`：查詢結果無法放入內嵌回應。 * `OTHER`：系統判定查詢必須以工作形式執行。 |
 | `job_id` | `STRING` | 如果已建立工作，則為工作 ID。否則，則為使用選擇性工作建立模式的查詢 ID。例如 `bquxjob_1234`。 |
-| `job_stages` | `RECORD REPEATED` | 工作的[查詢階段](https://cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#ExplainQueryStage)。 **注意**：如果查詢讀取的資料表設有資料列層級存取權政策，這個資料欄的值會是空白。詳情請參閱「[BigQuery 資料列層級安全性的最佳做法](https://docs.cloud.google.com/bigquery/docs/best-practices-row-level-security?hl=zh-tw)」。 |
+| `job_stages` | `RECORD REPEATED` | 工作的[查詢階段](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#ExplainQueryStage)。 **注意**：如果查詢讀取的資料表設有資料列層級存取權政策，這個資料欄的值會是空白。詳情請參閱「[BigQuery 資料列層級安全性的最佳做法](https://docs.cloud.google.com/bigquery/docs/best-practices-row-level-security?hl=zh-tw)」。 |
 | `job_type` | `STRING` | 工作類型。可以是 `QUERY`、`LOAD`、`EXTRACT`、`COPY` 或 `NULL`。`NULL` 值表示背景工作。 |
 | `labels` | `RECORD` | 套用至工作的標籤陣列，以鍵/值組合表示。 |
 | `object_storage_stats` | `RECORD REPEATED` | 查詢工作的物件儲存庫和快取用量統計資料。這個值是重複記錄，包含下列欄位：   * `cloud_provider`：託管物件儲存庫的雲端服務供應商 (例如 `AWS`)。 * `object_storage_bytes_read`：直接從物件儲存庫讀取的位元組總數。 * `cache_bytes_read`：從快取讀取的位元組總數。 |
 | `parent_job_id` | `STRING` | 父項工作的 ID (如有)。 |
 | `priority` | `STRING` | 這項工作的優先順序。有效值包括 `INTERACTIVE` 和 `BATCH`。 |
-| `project_id` | `STRING` | (*分群資料欄*) 專案 ID。 |
+| `project_id` | `STRING` | (*分群欄*) 專案 ID。 |
 | `project_number` | `INTEGER` | 專案編號。 |
 | `query` | `STRING` | SQL 查詢文字。 |
 | `referenced_tables` | `RECORD` | `STRUCT` 值陣列，其中包含查詢參照的每個資料表的下列 `STRING` 欄位：`project_id`、`dataset_id` 和 `table_id`。只有非快取命中的查詢工作會填入這項資料。 |
@@ -60,28 +61,28 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 | `reservation_id` | `STRING` | 指派給這項工作的主要預留項目名稱，格式為 `RESERVATION_ADMIN_PROJECT:RESERVATION_LOCATION.RESERVATION_NAME`。  在這項輸出內容中：  * `RESERVATION_ADMIN_PROJECT`：管理預留項目   的 Google Cloud 專案名稱 * `RESERVATION_LOCATION`：預留項目的位置 * `RESERVATION_NAME`：預留項目名稱 |
 | `reservation_group_path` | `ARRAY<STRING>` | 預留項目連結的預留項目群組。舉例來說，如果預留項目連結至群組 `my-group`，`reservation_group_path` 欄位會包含類似 `[my-group]` 的清單。 |
 | `edition` | `STRING` | 與指派給這項工作的預留項目相關聯的版本。如要進一步瞭解版本，請參閱「[BigQuery 版本簡介](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)」。 |
-| `session_info` | `RECORD` | 執行這項工作的[工作階段](https://cloud.google.com/bigquery/docs/sessions-intro?hl=zh-tw)詳細資料 (如有)。 |
+| `session_info` | `RECORD` | 執行這項工作的[工作階段](https://docs.cloud.google.com/bigquery/docs/sessions-intro?hl=zh-tw)詳細資料 (如有)。 |
 | `start_time` | `TIMESTAMP` | 這項工作的開始時間，以紀元時間起算的毫秒數表示。這個欄位代表工作從 `PENDING` 狀態轉換為 `RUNNING` 或 `DONE` 的時間。 |
 | `state` | `STRING` | 此工作的執行狀態。有效狀態包括 `PENDING`、`RUNNING` 和 `DONE`。 |
-| `statement_type` | `STRING` | 查詢陳述式的類型。例如：`DELETE`、`INSERT`、`SCRIPT`、`SELECT` 或 `UPDATE`。如需有效值清單，請參閱 [QueryStatementType](https://cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata.QueryStatementType?hl=zh-tw)。 |
-| `timeline` | `RECORD` | 工作的[查詢時間軸](https://cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#QueryTimelineSample)。包含查詢執行的快照。 |
-| `total_bytes_billed` | `INTEGER` | 如果專案設為使用[隨選計價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#analysis_pricing_models)，這個欄位會包含工作的計費位元組總數。如果專案設為使用[固定費率定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#analysis_pricing_models)，系統就不會向您收取位元組費用，這個欄位僅供參考。 **注意**：如果查詢讀取的資料表設有資料列層級存取權政策，這個資料欄的值會是空白。詳情請參閱「[BigQuery 資料列層級安全性的最佳做法](https://docs.cloud.google.com/bigquery/docs/best-practices-row-level-security?hl=zh-tw)」。 |
+| `statement_type` | `STRING` | 查詢陳述式的類型。例如：`DELETE`、`INSERT`、`SCRIPT`、`SELECT` 或 `UPDATE`。如需有效值清單，請參閱 [QueryStatementType](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata.QueryStatementType?hl=zh-tw)。 |
+| `timeline` | `RECORD` | 工作的[查詢時間軸](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#QueryTimelineSample)。包含查詢執行的快照。 |
+| `total_bytes_billed` | `INTEGER` | 如果專案設為使用[隨選計價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#analysis_pricing_models)，這個欄位會包含工作的計費位元組總數。如果專案設為使用[固定費率定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#analysis_pricing_models)，系統就不會向您收取位元組費用，而這個欄位僅供參考。 **注意**：如果查詢讀取的資料表設有資料列層級存取權政策，這個資料欄的值會是空白。詳情請參閱「[BigQuery 資料列層級安全性的最佳做法](https://docs.cloud.google.com/bigquery/docs/best-practices-row-level-security?hl=zh-tw)」。 |
 | `total_bytes_processed` | `INTEGER` | 工作處理的位元組總數。  **注意**：如果查詢讀取的資料表設有資料列層級存取權政策，這個資料欄的值會是空白。詳情請參閱「[BigQuery 資料列層級安全性的最佳做法](https://docs.cloud.google.com/bigquery/docs/best-practices-row-level-security?hl=zh-tw)」。 |
 | `total_modified_partitions` | `INTEGER` | 工作修改的分區總數。系統會為 `LOAD` 和 `QUERY` 工作填入這個欄位。 |
 | `total_slot_ms` | `INTEGER` | 工作在整個 `RUNNING` 狀態期間 (包括重試) 的運算單元毫秒數。 |
 | `total_services_sku_slot_ms` | `INTEGER` | 在外部服務上執行的工作，其總運算單元毫秒數，並依服務 SKU 計費。這個欄位只會填入有外部服務費用的工作，且是計費方式為 `"SERVICES_SKU"` 的費用總用量。 |
-| `transaction_id` | `STRING` | 執行這項工作的[交易](https://cloud.google.com/bigquery/docs/transactions?hl=zh-tw) ID (如果有的話)。 |
+| `transaction_id` | `STRING` | 執行這項工作的[交易](https://docs.cloud.google.com/bigquery/docs/transactions?hl=zh-tw) ID (如果有的話)。 |
 | `user_email` | `STRING` | (*分群欄*) 執行工作的使用者電子郵件地址或服務帳戶。 |
 | `principal_subject` | `STRING` | 執行工作的實體身分字串表示法。 |
 | `query_info.resource_warning` | `STRING` | 如果查詢處理期間的資源用量超過系統內部門檻，就會顯示警告訊息。 如果查詢工作成功，系統會填入 `resource_warning` 欄位。`resource_warning` 可提供額外的資料點，協助您最佳化查詢，並使用 `query_hashes` 設定監控功能，追蹤一組同等查詢的效能趨勢。 |
 | `query_info.query_hashes.normalized_literals` | `STRING` | 包含查詢的雜湊值。`normalized_literals` 是十六進位 `STRING` 雜湊，會忽略註解、參數值、UDF 和常值。如果基礎檢視表變更，或查詢隱含參照資料欄 (例如 `SELECT *`)，且資料表結構定義變更，雜湊值就會不同。  如果 [GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw) 查詢成功，但未命中快取，就會顯示這個欄位。 |
-| `query_info.performance_insights` | `RECORD` | 工作的[效能洞察](https://cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#PerformanceInsights)。 |
+| `query_info.performance_insights` | `RECORD` | 工作的[效能洞察](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#PerformanceInsights)。 |
 | `transferred_bytes` | `INTEGER` | BigQuery Omni 查詢 (例如 BigQuery Omni 移轉工作) 移轉的總位元組數。 |
 | `materialized_view_statistics` | `RECORD` | 查詢工作中考量的[materialized view 統計資料](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#MaterializedViewStatistics)。([預先發布版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages)) |
 | `metadata_cache_statistics` | `RECORD` | 查詢工作中參照的[資料表中繼資料欄索引使用情形統計資料](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#metadatacachestatistics)。 |
 | `search_statistics` | `RECORD` | [搜尋查詢的統計資料。](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#SearchStatistics) |
-| `query_dialect` | `STRING` | 這個欄位將於 2025 年 5 月推出。 工作使用的查詢方言。有效值包括：   * `GOOGLE_SQL`：工作要求使用 GoogleSQL。 * `LEGACY_SQL`：工作要求使用 LegacySQL。 * `DEFAULT_LEGACY_SQL`：工作要求中未指定查詢方言。BigQuery 使用 LegacySQL 的預設值。 * `DEFAULT_GOOGLE_SQL`：工作要求中未指定查詢方言。BigQuery 使用 GoogleSQL 的預設值。   如果是使用者提交的工作，這個欄位只會填入查詢工作。 您可以透過[設定](https://docs.cloud.google.com/bigquery/docs/default-configuration?hl=zh-tw#configuration-settings)控制查詢方言的預設選項。  如果是背景工作，這個欄位的值不受預設查詢方言設定控制，也不會影響使用者提交的工作。如果是某些背景工作，系統會省略這個值。 |
-| `continuous` | `BOOLEAN` | 工作是否為[持續查詢](https://cloud.google.com/bigquery/docs/continuous-queries-introduction?hl=zh-tw)。 |
+| `query_dialect` | `STRING` | 這個欄位將於 2025 年 5 月推出。 工作使用的查詢方言。有效值包括：   * `GOOGLE_SQL`：工作要求使用 GoogleSQL。 * `LEGACY_SQL`：工作要求使用 LegacySQL。 * `DEFAULT_LEGACY_SQL`：工作要求中未指定查詢方言。   BigQuery 使用 LegacySQL 的預設值。 * `DEFAULT_GOOGLE_SQL`：工作要求中未指定查詢方言。BigQuery 使用 GoogleSQL 的預設值。   如果是使用者提交的工作，這個欄位只會填入查詢工作。 您可以透過[設定](https://docs.cloud.google.com/bigquery/docs/default-configuration?hl=zh-tw#configuration-settings)控制查詢方言的預設選項。  如果是背景工作，這個欄位的值不受預設查詢方言設定控制，也不會影響使用者提交的工作。如果是某些背景工作，系統會省略這個值。 |
+| `continuous` | `BOOLEAN` | 工作是否為[持續查詢](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction?hl=zh-tw)。 |
 | `continuous_query_info.output_watermark` | `TIMESTAMP` | 代表持續查詢已成功處理資料的時間點。 |
 | `vector_search_statistics` | `RECORD` | [向量搜尋查詢的統計資料。](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#VectorSearchStatistics) |
 | `external_service_costs` | `RECORD` | 查詢工作的外部服務費用資訊陣列。 |
@@ -151,8 +152,3 @@ WHERE
 | bquxjob_3    |  2019-10-10 00:00:02 UTC  |  SELECT ... FROM dataset.table3 |
 +--------------+---------------------------+---------------------------------+
 ```
-
-
-
-
-提供意見

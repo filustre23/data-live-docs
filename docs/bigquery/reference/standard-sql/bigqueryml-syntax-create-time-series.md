@@ -589,6 +589,4 @@ This option accepts the following values:
 * `VN`: Vietnam
 * `ZA`: South Africa
 
-### `CLEAN_SPIKES_AND_DIPS`
-
-**Syntax**
+### `CLEAN_SPIKES_AND_DIPS</`

@@ -195,5 +195,5 @@ over_clause:
 window_specification:
   [ named_window ]
   [ PARTITION BY partition_expression [, ...] ]
-  [ ORDER BY expression [ { ASC
+  [ ORDER BY expression
 ```

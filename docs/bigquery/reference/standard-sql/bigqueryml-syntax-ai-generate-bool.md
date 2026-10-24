@@ -360,6 +360,4 @@ the token count of text input, use the
 ## Use Agent Platform Provisioned Throughput
 
 You can use
-[Agent Platform Provisioned Throughput](/vertex-ai/generative-ai/docs/provisioned-throughput/overview)
-with the `AI.GENERATE_BOOL` function to provide consistent high throughput for
-requests. The remote model that you reference in the
+[Agent Pl](/vertex-ai/generative-ai/docs/provisioned-throughput/overview)

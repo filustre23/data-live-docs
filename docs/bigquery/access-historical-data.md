@@ -16,13 +16,13 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 存取歷來資料
 
-BigQuery 可讓您查詢及還原儲存在 BigQuery 中的資料，這些資料是在[時空旅行](https://docs.cloud.google.com/bigquery/docs/time-travel?hl=zh-tw)時間範圍內變更或刪除。
+BigQuery 可讓您查詢及還原儲存在 BigQuery 資料儲存庫中，且在[時光旅行](https://docs.cloud.google.com/bigquery/docs/time-travel?hl=zh-tw)期間內變更或刪除的資料。存取這類歷來資料，即可從意外刪除事件中復原，或分析過去特定時間點的資料確切狀態，不必維護個別備份。
 
 ## 查詢特定時間點的資料
 
-您可以使用 [`FOR SYSTEM_TIME AS OF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw#for_system_time_as_of) 子句，在時間旅行視窗內查詢資料表在任何時間點的歷史資料。這個子句會採用常數時間戳記運算式，並參照該時間戳記當時的資料表版本。資料表必須儲存在 BigQuery 中，不能是外部資料表。使用 `SYSTEM_TIME AS OF` 時，表格大小沒有限制。
+您可以使用 [`FOR SYSTEM_TIME AS OF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw#for_system_time_as_of) 子句，查詢時光旅行期間內任何時間點的資料表歷來資料。這個子句會採用常數時間戳記運算式，並參照該時間戳記當時的資料表版本。資料表必須儲存在 BigQuery 中，不得為外部資料表。使用 `SYSTEM_TIME AS OF` 時，資料表大小沒有限制。
 
-舉例來說，下列查詢會傳回一小時前的資料表歷史版本：
+舉例來說，下列查詢會傳回一小時前的資料表歷來版本：
 
 ```
 SELECT *
@@ -30,44 +30,42 @@ FROM `mydataset.mytable`
   FOR SYSTEM_TIME AS OF TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 HOUR);
 ```
 
-**注意：** GoogleSQL 支援 `FOR SYSTEM_TIME AS OF` 子句。
-如果是舊版 SQL，[時間裝飾符](https://docs.cloud.google.com/bigquery/docs/table-decorators?hl=zh-tw#time_decorators)可提供同等功能。
+**注意：** GoogleSQL 支援 `FOR SYSTEM_TIME AS OF` 子句。如果是舊版 SQL，[時間修飾詞](https://docs.cloud.google.com/bigquery/docs/table-decorators?hl=zh-tw#time_decorators)可提供同等功能。
 
-如果時間戳記指定的時間早於時間旅行視窗，或早於資料表建立時間，查詢就會失敗，並傳回類似下列的錯誤：
+如果時間戳記指定的時間早於時光旅行時間範圍，或早於資料表建立時間，查詢就會失敗，並傳回類似下列的錯誤：
 
 ```
 Invalid snapshot time 1601168925462 for table
 myproject:mydataset.table1@1601168925462. Cannot read before 1601573410026.
 ```
 
-使用 `CREATE OR REPLACE TABLE` 陳述式取代現有資料表後，您可以使用 `FOR SYSTEM_TIME AS OF` 查詢資料表的舊版。
+使用 `CREATE OR REPLACE TABLE` 陳述式取代現有資料表後，您可以使用 `FOR SYSTEM_TIME AS OF` 查詢資料表的先前版本。
 
-如果資料表已刪除，您就無法使用 `FOR SYSTEM_TIME AS OF` 直接查詢歷來資料。查詢失敗，並傳回類似下列的錯誤：
+如果資料表已刪除，您就無法直接使用 `FOR SYSTEM_TIME AS OF` 查詢歷來資料。查詢失敗，並傳回類似下列的錯誤：
 
 ```
 Not found: Table myproject:mydataset.table was not found in location LOCATION
 ```
 
-如要存取已刪除資料表的歷來資料，請改為從[特定時間點](https://docs.cloud.google.com/bigquery/docs/access-historical-data?hl=zh-tw#restore-a-table)還原資料表。
+如要存取已刪除資料表的歷來資料，您必須從[時間點](https://docs.cloud.google.com/bigquery/docs/access-historical-data?hl=zh-tw#restore-a-table)還原資料表。
 
-## 從某個時間點還原表格
+## 還原特定時間點的資料表
 
-如要從歷來資料還原資料表，請將歷來資料複製到新資料表。即使資料表已刪除或過期，只要在時間回溯期內還原資料表，就能複製歷來資料。
+您可以將歷來資料複製到新資料表，藉此還原資料表。只要在時間回溯期內還原資料表，即使資料表已刪除或過期，仍可複製歷來資料。
 
-從歷來資料還原資料表時，來源資料表的[標記](https://docs.cloud.google.com/bigquery/docs/tags?hl=zh-tw)不會複製到目的地資料表。資料表分割資訊也不會複製到目的地資料表。如要重新建立原始資料表的分區架構，您可以在 [Cloud Logging](https://docs.cloud.google.com/logging/docs/view/logs-explorer-interface?hl=zh-tw) 中查看初始資料表建立要求，並使用該資訊為還原的資料表建立分區。
+從歷來資料還原資料表時，來源資料表的[標記](https://docs.cloud.google.com/bigquery/docs/tags?hl=zh-tw)不會複製到目的地資料表。資料表分區資訊也不會複製到目的地資料表。如要重新建立原始資料表的分區配置，您可以在 [Cloud Logging](https://docs.cloud.google.com/logging/docs/view/logs-explorer-interface?hl=zh-tw) 中查看初始資料表建立要求，並使用該資訊對還原的資料表進行分區。
 
-您只能還原整個資料表，您無法還原個別磁碟分割區。
-舉例來說，系統不支援使用分區裝飾器 (例如 `bq cp mydataset.mytable$20260712@1418864998000 mydataset.mytable_restored`) 複製分區。
+您只能還原整個資料表，無法還原個別分區。例如，不支援使用分區裝飾器 (例如 `bq cp mydataset.mytable$20260712@1418864998000 mydataset.mytable_restored`) 複製分區。
 
-如要還原已刪除但仍在時間旅行時間範圍內的表格，請使用 `@<time>` 時間裝飾符，將表格複製到新表格。即使使用時間修飾符，您也無法查詢已刪除的資料表。你必須先還原。
+如要還原已刪除但仍在時光旅行時間範圍內的資料表，可以使用 `@<time>` 時間修飾符，將資料表複製到新資料表。即使使用時間修飾符，也無法查詢已刪除的資料表。必須先還原。
 
-請使用下列語法和 `@<time>` 時間裝飾器：
+請使用下列語法搭配 `@<time>` 時間修飾符：
 
-* `tableid@TIME`，其中 `TIME` 是自 Unix Epoch 紀元時間起算的毫秒數。
-* `tableid@-TIME_OFFSET`，其中 `TIME_OFFSET` 是相對於目前時間的相對時差，單位為毫秒。
-* `tableid@0`：指定最舊的可用歷來資料。
+* `tableid@TIME`，其中 `TIME` 是自 Unix 紀元起算的毫秒數。
+* `tableid@-TIME_OFFSET`，其中 `TIME_OFFSET` 是與目前時間的相對偏移量，以毫秒為單位。
+* `tableid@0`：指定可用的最早歷來資料。
 
-如要還原表格，請選取下列任一選項：
+如要還原資料表，請選取下列其中一個選項：
 
 ### 控制台
 
@@ -75,19 +73,19 @@ Not found: Table myproject:mydataset.table was not found in location LOCATION
 
 ### bq
 
-1. 在 Google Cloud 控制台中啟用 Cloud Shell。
+1. 在 Google Cloud 控制台啟用 Cloud Shell。
 
    [啟用 Cloud Shell](https://console.cloud.google.com/?cloudshell=true&hl=zh-tw)
 
    Google Cloud 控制台底部會開啟 [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works?hl=zh-tw) 工作階段，並顯示指令列提示。Cloud Shell 是已安裝 Google Cloud CLI 的殼層環境，並已設定適用於您目前專案的值。工作階段可能要幾秒鐘的時間才能初始化。
-2. 如要還原表格，請先判斷表格存在時的 UNIX 時間戳記 (以毫秒為單位)。您可以使用 Linux `date` 指令，從一般時間戳記值產生 Unix 時間戳記：
+2. 如要還原資料表，請先判斷資料表存在的 UNIX 時間戳記 (以毫秒為單位)。您可以使用 Linux `date` 指令，從一般時間戳記值產生 Unix 時間戳記：
 
    ```
    date -d '2023-08-04 16:00:34.456789Z' +%s000
    ```
-3. 接著，使用 `bq copy` 指令和 `@<time>` 時間旅行裝飾器，執行表格複製作業。
+3. 接著，使用 `bq copy` 指令搭配 `@<time>` 時光旅行裝飾器，執行資料表複製作業。
 
-   舉例來說，輸入下列指令，即可將 `mydataset.mytable` 資料表在 `1418864998000` 時間點的狀態複製到新資料表 `mydataset.newtable`。
+   例如，輸入下列指令，將 `1418864998000` 時間點的 `mydataset.mytable` 資料表複製到新資料表 `mydataset.newtable`。
 
    ```
    bq cp mydataset.mytable@1418864998000 mydataset.newtable
@@ -95,17 +93,17 @@ Not found: Table myproject:mydataset.table was not found in location LOCATION
 
    (選用) 提供 `--location` 旗標，並將值設為您的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
 
-   您也可以指定相對偏移。以下範例會複製一小時前的資料表版本：
+   您也可以指定相對偏移量。以下範例會複製一小時前的資料表版本：
 
    ```
    bq cp mydataset.mytable@-3600000 mydataset.newtable
    ```
 
-   **注意：** 如果嘗試復原時間旅行視窗之前的資料，或是復原資料表建立前的資料，系統會顯示 `Invalid time travel timestamp` 錯誤。詳情請參閱「[排解資料表復原問題](https://docs.cloud.google.com/bigquery/docs/restore-deleted-tables?hl=zh-tw#troubleshoot_table_recovery)」。
+   **注意：** 如果您嘗試復原時歷窗口之前的資料，或資料表建立之前的資料，系統會顯示 `Invalid time travel timestamp` 錯誤。詳情請參閱「[排解資料表復原問題](https://docs.cloud.google.com/bigquery/docs/restore-deleted-tables?hl=zh-tw#troubleshoot_table_recovery)」。
 
 ### Go
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Go 設定說明操作。詳情請參閱 [BigQuery Go API 參考文件](https://godoc.org/cloud.google.com/go/bigquery)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Go 設定操作說明進行操作。詳情請參閱 [BigQuery Go API 參考文件](https://godoc.org/cloud.google.com/go/bigquery)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -171,7 +169,7 @@ func deleteAndUndeleteTable(projectID, datasetID, tableID string) error {
 
 ### Java
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定說明操作。詳情請參閱 [BigQuery Java API 參考文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定操作說明進行操作。詳情請參閱 [BigQuery Java API 參考文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -238,7 +236,7 @@ public class UndeleteTable {
 
 ### Node.js
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定操作說明進行操作。詳情請參閱 [BigQuery Node.js API 參考文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -289,7 +287,7 @@ async function undeleteTable() {
 
 ### Python
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定操作說明進行操作。詳情請參閱 [BigQuery Python API 參考文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -335,16 +333,16 @@ print(
 )
 ```
 
-如果您預期之後可能會還原資料表，但時間超出時空旅行時間範圍，請建立資料表的快照。詳情請參閱「[資料表快照簡介](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro?hl=zh-tw)」。
+如果您預期可能需要在時光旅行期間允許的時間之後還原資料表，請建立資料表的資料表快照。詳情請參閱「[資料表快照簡介](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro?hl=zh-tw)」。
 
-您無法直接還原邏輯檢視畫面。詳情請參閱「[還原檢視畫面](https://docs.cloud.google.com/bigquery/docs/managing-views?hl=zh-tw#restore_a_view)」。
+您無法直接還原邏輯檢視表。詳情請參閱「[還原檢視表](https://docs.cloud.google.com/bigquery/docs/managing-views?hl=zh-tw#restore_a_view)」。
 
-**注意：** 如果刪除資料表，然後建立同名的新資料表，可以使用[時間點還原](https://docs.cloud.google.com/bigquery/docs/restore-deleted-tables?hl=zh-tw#bq)功能，從原始刪除的資料表還原資料。時間戳記必須指定原始表格存在的時間。
+**注意：** 如果刪除資料表後，又建立同名的新資料表，您可以使用[時間點復原](https://docs.cloud.google.com/bigquery/docs/restore-deleted-tables?hl=zh-tw#bq)功能，還原原始已刪除資料表中的資料。時間戳記必須指定原始資料表存在的時間。
 
 ## 後續步驟
 
-* 進一步瞭解[表格快照](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro?hl=zh-tw)。
-* 進一步瞭解[時間旅行和容錯移轉的資料保留功能](https://docs.cloud.google.com/bigquery/docs/time-travel?hl=zh-tw)。
+* 進一步瞭解[資料表快照](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro?hl=zh-tw)。
+* 進一步瞭解[時間旅行和安全防護機制的資料保留功能](https://docs.cloud.google.com/bigquery/docs/time-travel?hl=zh-tw)。
 * 進一步瞭解如何[管理表格](https://docs.cloud.google.com/bigquery/docs/managing-tables?hl=zh-tw)。
 
 
@@ -354,11 +352,11 @@ print(
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-15 (世界標準時間)。
+上次更新時間：2026-10-23 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-23 (世界標準時間)。"],[],[]]

@@ -361,7 +361,5 @@ SELECT STARTS_WITH(col_a_expression, col_b_expression)
 FROM table_a;
 
 -- This works. Even though column 'a' and 'b' have different
--- collation specifications, column 'b' is updated to use the same
--- collation specification as column 'a'.
-SELECT
+-- colla
 ```

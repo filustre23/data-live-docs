@@ -259,5 +259,3 @@ BigQuery 的執行引擎與 Amazon Redshift 類似，都會將查詢分解為多
 BigQuery 提供下列工作負載管理 (WLM) 控制項：
 
 * [互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)：盡快執行查詢 (預設設定)。
-* [批次查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#batch)：系統會代表您將查詢排入佇列，等到 BigQuery 共用資源集區中出現閒置資源，就會開始進行查詢。
-* 透過

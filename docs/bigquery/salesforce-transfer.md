@@ -281,7 +281,5 @@ bq mk
 
 ```
       "primaryKeys":[['Id'], ['master_label','type']],
-      "assets":["Account","CaseHistory"],
+      "assets":
 ```
-
-下列指令會在預設專案中建立 Salesforce 增量資料移轉作業，並使用 `APPEND` 寫入模式。

@@ -64,12 +64,13 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 | `period_estimated_runnable_units` | `INTEGER` | 這段期間內可立即排定的工作單位。如果預留項目中沒有其他查詢需要額外運算單元，則這些工作單元的額外運算單元會加快查詢速度。 |
 | `transaction_id` | `STRING` | 執行這項工作的[交易](https://docs.cloud.google.com/bigquery/docs/transactions?hl=zh-tw) ID (如果有的話)。 |
 | `global_query_info` | `RECORD` | [全域查詢](https://docs.cloud.google.com/bigquery/docs/global-queries?hl=zh-tw)的相關資訊。 包含下列欄位：  * `parent_job_id`：主要區域中父項全域查詢工作的 ID。 * `parent_job_location`：父項全域查詢工作的所在位置。 * `remote_regions`：全域查詢參照的遠端區域陣列。 |
+| `copy_job_statistics` | `RECORD` | [複製工作的統計資料。](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#CopyJobStatistics) |
 
 為確保穩定性，建議您在資訊結構定義查詢中明確列出資料欄，而非使用萬用字元 (`SELECT *`)。明確列出資料欄可避免查詢因基礎結構定義變更而中斷。
 
 ## 資料保留
 
-這個檢視畫面會顯示執行中的工作，以及過去 180 天的工作記錄。如果專案遷移至某個組織 (無論是從無組織狀態或從其他組織遷移)，則無法透過 `INFORMATION_SCHEMA.JOBS_TIMELINE_BY_USER` 檢視畫面存取遷移日期之前的工作資訊，因為該檢視畫面只會保留遷移日期之後的資料。
+這個檢視畫面會顯示執行中的工作，以及過去 180 天的工作記錄。如果專案從無機構狀態或不同機構遷移至某個機構，則無法透過 `INFORMATION_SCHEMA.JOBS_TIMELINE_BY_USER` 檢視畫面存取遷移日期之前的作業資訊，因為該檢視畫面只會保留遷移日期之後的資料。
 
 ## 範圍和語法
 
@@ -123,11 +124,11 @@ ORDER BY
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-19 (世界標準時間)。
+上次更新時間：2026-10-22 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-19 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-22 (世界標準時間)。"],[],[]]

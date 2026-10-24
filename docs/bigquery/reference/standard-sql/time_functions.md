@@ -404,9 +404,3 @@ returned value is `23:30:00`.
 **Return Data Type**
 
 `TIME`
-
-**Example**
-
-```
-SELECT
-```

@@ -243,7 +243,5 @@ WHERE
 GROUP BY
   project_id, dataset_id, table_id, error_code, day
 ORDER BY
-  day, project_id, dataset_id DESC;
+  day, project_id, dataset_id
 ```
-
-**注意：** `INF`

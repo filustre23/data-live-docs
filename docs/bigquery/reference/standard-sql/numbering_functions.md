@@ -218,7 +218,3 @@ To learn more about the `OVER` clause and how to use it, see
 `INT64`
 
 **Example**
-
-```
-WITH finishers
-```

@@ -64,8 +64,4 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 | `PERIOD(TIME WITH TIME ZONE)` | `TIME`，`TIME` |  |
 | `UDT` | `STRING` |  |
 | `XML` | `STRING` |  |
-| `TD_ANYTYPE` | `STRING` |  |
-
-如要進一步瞭解類型轉換，請參閱下一節。
-
-### Teradata 類型格
+| `TD_ANYTYPE` |  |

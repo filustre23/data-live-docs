@@ -10,16 +10,14 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 開始使用地理空間分析 透過集合功能整理內容 你可以依據偏好儲存及分類內容。
 
-本教學課程將介紹地理空間分析。地理空間分析功能可讓您在 BigQuery 中分析地理空間資料，並以圖表呈現。
+BigQuery 的地理空間分析功能可讓您順暢分析及視覺化呈現位置資料。將原始經緯度座標轉換為地理點，即可直接從資料倉儲執行空間查詢及繪製互動式地圖。
 
 ## 目標
 
-在本教學課程中，您將執行下列作業：
-
-* 使用地理空間分析函式，將經緯度資料欄轉換為地理點
-* 執行查詢作業，搜尋有超過 30 輛可供出租自行車的 Citi Bike 站點。
-* 在 BigQuery 中將結果視覺化
-* 在 [BigQuery Geo Viz](https://docs.cloud.google.com/bigquery/docs/geospatial-visualize?hl=zh-tw) 中以視覺化的方式呈現結果
+* 使用地理空間分析函式，將經緯度資料欄轉換為地理位置點。
+* 執行查詢，找出所有可租借單車超過 30 輛的 Citi Bike 站點。
+* 在 BigQuery 中以圖表呈現結果。
+* 在 [BigQuery Geo Viz](https://docs.cloud.google.com/bigquery/docs/geospatial-visualize?hl=zh-tw) 中以視覺化的方式呈現結果。
 
 ## 費用
 
@@ -29,11 +27,11 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 * 在 BigQuery 的公開資料集裡[查詢資料](https://cloud.google.com/bigquery/pricing?hl=zh-tw#analysis_pricing_models)。
   + 每個月前 1TB 免費
-  + 如果您採用[以運算量為基礎的計價模式](https://cloud.google.com/bigquery/pricing?hl=zh-tw#capacity_compute_analysis_pricing)，查詢費用會包含在以運算量為基礎的價格中。
+  + 如果您採用[以運算資源為基礎的計價模式](https://cloud.google.com/bigquery/pricing?hl=zh-tw#capacity_compute_analysis_pricing)，查詢費用會包含在以運算資源為基礎的價格中。
 
 ## 事前準備
 
-- 登入 Google Cloud 帳戶。如果您是 Google Cloud新手，歡迎[建立帳戶](https://console.cloud.google.com/freetrial?hl=zh-tw)，親自評估產品在實際工作環境中的成效。新客戶還能獲得價值 $300 美元的免費抵免額，可用於執行、測試及部署工作負載。
+- 登入 Google Cloud 帳戶。如果您未曾使用過 Google Cloud，歡迎[建立帳戶](https://console.cloud.google.com/freetrial?hl=zh-tw)，親自體驗實際使用我們產品的成效。新客戶還能獲得價值 $300 美元的免費抵免額，用於執行、測試及部署工作負載。
 - In the Google Cloud console, on the project selector page,
   select or create a Google Cloud project.
 
@@ -76,23 +74,23 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 1. 新專案會自動啟用 BigQuery。如要在現有專案中啟用 BigQuery，請前往
 
-   如果尚未啟用 BigQuery API，請啟用。
+   啟用 BigQuery API (如果尚未啟用)。
 
-   **啟用 API 時所需的角色**
+   **啟用 API 所需的角色**
 
-   如要啟用 API，您必須具備 `serviceusage.services.enable` 權限。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用情形管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「Service Usage 管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
    [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery&hl=zh-tw)
 
 ## 匯出樣本資料
 
-本教學課程使用[Google Cloud 公開資料集計畫](https://cloud.google.com/datasets?hl=zh-tw)提供的資料集。公開資料集是儲存在 BigQuery 中且可供一般大眾使用的任何資料集。公共資料集是 BigQuery 託管的資料集，讓您能夠存取與整合到您的應用程式中。Google 會支付這些資料集的儲存費用，並使用[專案](https://docs.cloud.google.com/bigquery/docs/projects?hl=zh-tw)提供資料的公開存取權。您只需支付對資料執行的查詢費用 (每月前 1 TB 免費，詳情請參閱[查詢價格詳細資料](https://cloud.google.com/bigquery/pricing?hl=zh-tw#analysis_pricing_models))。
+本教學課程使用的資料集可透過[Google Cloud 公開資料集計畫](https://cloud.google.com/datasets?hl=zh-tw)取得。公開資料集是儲存在 BigQuery 中且可供一般大眾使用的任何資料集。公共資料集是 BigQuery 託管的資料集，讓您能夠存取與整合到您的應用程式中。Google 會支付這些資料集的儲存費用，並透過[專案](https://docs.cloud.google.com/bigquery/docs/projects?hl=zh-tw)提供資料的公開存取權。您只需支付對資料執行查詢的費用 (每月前 1 TB 免費，詳情請參閱[查詢定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#analysis_pricing_models))。
 
 ### 紐約市 Citi Bike 行程資料集
 
 [NYC Citi Bike Trips](https://console.cloud.google.com/bigquery?p=bigquery-public-data&%3Bd=new_york_citibike&%3Bpage=dataset&hl=zh-tw)
 
-Citi Bike 是美國最大的自行車共享計劃，在曼哈頓、布魯克林、皇后區和澤西市設有 10,000 輛自行車及 600 個站點。這個資料集包含 Citi Bike 自 2013 年 9 月推出以來所記錄的所有行程，並且每日更新。Citi Bike 會處理資料，移除員工為維修和檢查系統而進行的行程，以及時間少於 60 秒的行程 (視為誤啟)。
+Citi Bike 是美國最大的自行車共享計劃，在曼哈頓、布魯克林、皇后區和澤西市設有 10,000 輛自行車及 600 個站點。這個資料集包含 Citi Bike 自 2013 年 9 月推出以來所記錄的所有行程，並且每日更新。Citi Bike 會處理資料，移除工作人員為維護及檢查系統而進行的行程，以及任何持續時間少於 60 秒的行程 (視為錯誤啟動)。
 
 您可以在 BigQuery 主控台中查看 `citibike_stations` 資料表的詳細資料，開始探索這份資料：
 
@@ -102,15 +100,15 @@ Citi Bike 是美國最大的自行車共享計劃，在曼哈頓、布魯克林�
 
 * `bike_stations.longitude`：車站的經度。這個值是十進位制格式的有效 WGS 84 經度。
 * `bike_stations.latitude`：車站的緯度。這個值是十進位制格式的有效 WGS 84 緯度。
-* `num_bikes_available`：可供租用的自行車數量。
+* `num_bikes_available`：可租借的單車數量。
 
 ## 查詢可供出租超過 30 輛自行車的站點
 
-在本教學課程的這一節中，您將執行 GoogleSQL 查詢，找出紐約市所有可租借超過 30 輛自行車的 Citi Bike 站點。
+在本教學課程的這個部分，您將執行 GoogleSQL 查詢，找出紐約市所有可租借超過 30 輛自行車的 Citi Bike 站點。
 
 ### 查詢詳細資料
 
-下列 GoogleSQL 查詢用於尋找超過 30 輛單車的 Citi Bike 站點。
+下列 GoogleSQL 查詢用於找出單車數量超過 30 輛的 Citi Bike 站點。
 
 ```
 SELECT
@@ -136,8 +134,8 @@ WHERE num_bikes_available > 30
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
-   [前往 BigQuery 頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在「Query editor」(查詢編輯器) 文字區域中輸入以下 GoogleSQL 查詢。
+   [前往「BigQuery」頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
+2. 在「查詢編輯器」文字區域中，輸入下列 GoogleSQL 查詢。
 
    ```
    -- Finds Citi Bike stations with > 30 bikes
@@ -152,22 +150,21 @@ WHERE num_bikes_available > 30
 
    查詢需要一些時間才會完成。查詢執行完畢之後，您的結果會呈現於「Query results」(查詢結果) 窗格中。
 
-## 在 BigQuery 中以視覺化的方式呈現結果
+## 在 BigQuery 中以圖表呈現結果
 
-如要在互動式地圖中顯示結果，請按照下列步驟操作：
+如要在互動式地圖中以視覺化方式呈現結果，請按照下列步驟操作：
 
-1. 在「查詢結果」窗格中，按一下「圖表」。
+1. 在「查詢結果」窗格中，點選「圖表」。
 
-   地圖上的點代表各個自行車站的位置。
-2. 您可以對地圖套用統一或資料導向樣式。
-   如要以視覺化方式呈現每個車站的可用自行車數量，請在「資料欄」中選取 `num_bikes_available`。
-3. 如要提升可視性，請調整「不透明度」、「顏色」或「點大小」。如果資料包含離群值，可以調整「最小值」和「最大值」。地圖上仍會顯示超出這個範圍的值，但不會套用任何顏色。
-4. 如要查看地理位置的屬性，請按一下該位置。
+   地圖上的點代表各個單車站的位置。
+2. 您可以對地圖套用統一或資料導向樣式。如要以圖表呈現各站點可租借的單車數量，請在「Data column」(資料欄) 中選取「`num_bikes_available`」。
+3. 如要提高可見度，請嘗試調整「Opacity」(不透明度)、「Color」(顏色) 或「Point size」(點大小)。如果資料包含離群值，您可以調整「Min」(最小值) 和「Max」(最大值)。值超出這個範圍的地理區域仍會顯示在地圖上，但不會套用任何顏色。
+4. 如要查看地理位置的屬性，請按一下該地理位置。
 5. 如要以衛星模式查看地圖，請按一下「衛星」。
 
 ## 在 Geo Viz 中將查詢結果視覺化
 
-您也可以使用 BigQuery Geo Viz 呈現結果。這項網頁工具可使用 Google 地圖 API，以圖表呈現 BigQuery 中的地理空間資料。
+您也可以使用 BigQuery Geo Viz 以圖表呈現結果：這項網頁工具可使用 Google Maps API，以圖表呈現 BigQuery 中的地理空間資料。
 
 ### 啟用 Geo Viz 並進行身分驗證
 
@@ -214,22 +211,21 @@ WHERE num_bikes_available > 30
 
 * **fillColor**。多邊形或點的填滿顏色。例如，可以使用「linear」或「interval」函式以數值來對應顏色漸層。
 * **fillOpacity**。多邊形或點的填色不透明度。值必須介於 0 到 1 之間，其中 `0` = 透明，`1` = 不透明。
-* **strokeColor**。多邊形或線條的筆劃或輪廓顏色。
-* **strokeOpacity**。多邊形或線條的筆劃或外框不透明度。
-  值必須介於 0 到 1 之間，其中 `0` = 透明，`1` = 不透明。
-* **strokeWeight**。多邊形或線條的筆劃或外框寬度 (以像素為單位)。
+* **strokeColor**。多邊形或線條的筆劃或外框顏色。
+* **strokeOpacity**。多邊形或線條的筆劃或外框不透明度。值必須介於 0 到 1 之間，其中 `0` = 透明，`1` = 不透明。
+* **strokeWeight**。多邊形或線條的筆劃或外框寬度，以像素為單位。
 * **circleRadius**。代表點的圓形半徑，以像素為單位。例如，「linear」函式能夠以數值對應資料點的大小，以建立散佈圖的樣式。
 
-每個樣式都可以設為全域值 (套用至所有結果)，或設為資料驅動值 (根據每個結果列中的資料，以不同方式套用)。針對資料導向值，以下的項目皆會影響其結果：
+每種樣式都可以指定全域值 (套用至每個結果) 或資料導向值 (根據每個結果列中的資料，以不同方式套用)。針對資料導向值，以下的項目皆會影響其結果：
 
 * **函式**。用於根據欄位值計算樣式值的函式。
-* **身分**。每個欄位的資料值都會做為樣式值。
-* **類別**。將領域中列出的每個欄位的資料值以一對一的方式對應至範圍中的相應樣式。
-* **間隔**。每個欄位的資料值會向下捨入至領域中最接近的值，並採用範圍中對應的樣式。
-* **線性**。每個欄位的資料值會線性內插於領域的值之間，並混合採用範圍中對應的樣式。
-* **欄位**。資料中指定的欄位會做為樣式函式的輸入內容。
-* **網域**。來自欄位的範例輸入值的已排序清單。範例輸入 (領域) 會根據指定的函式與範例輸出 (範圍) 配對，並用於推測所有輸入 (包括未列於領域中的輸入) 的樣式值。領域中的值必須要有相同的類型 (文字或數字等)，做為您要進行視覺化之欄位的值。
-* **範圍**。樣式規則的範例輸出值清單。範圍中的值必須要有相同的類型 (顏色或數字)，做為您要控制的樣式屬性。例如，`fillColor` 屬性的範圍應該僅包含顏色。
+* **identity**。每個欄位的資料值會做為樣式值。
+* **categorical**。網域中列出的每個欄位資料值，都會與範圍中的對應樣式一對一對應。
+* **interval**。每個欄位的資料值都會無條件捨去至網域中最接近的值，然後使用範圍中對應的樣式。
+* **linear**。每個欄位的資料值會以線性方式在網域中的值之間插補，然後以範圍內對應樣式的混合樣式設定樣式。
+* **欄位**。資料中的指定欄位會做為樣式函式的輸入內容。
+* **網域**。欄位中樣本輸入值的排序清單。範例輸入 (領域) 會根據指定的函式與範例輸出 (範圍) 配對，並用於推測所有輸入 (包括未列於領域中的輸入) 的樣式值。領域中的值必須要有相同的類型 (文字或數字等)，做為您要進行視覺化之欄位的值。
+* **range**。樣式規則的輸出值範例清單。範圍中的值必須要有相同的類型 (顏色或數字)，做為您要控制的樣式屬性。例如，`fillColor` 屬性的範圍應該僅包含顏色。
 
 如要將您的地圖進行格式化，請進行以下操作：
 
@@ -237,9 +233,9 @@ WHERE num_bikes_available > 30
 2. 更換資料點的顏色。按一下 [fillColor]。
 3. 在「Value」(值) 欄位中，輸入 **`#0000FF`** (藍色的 HTML 顏色代碼)。
 4. 按一下「套用樣式」。
-5. 查看您的地圖。按一下任一點，即可查看值。
+5. 查看您的地圖。按一下其中一個點，就會顯示該點的值。
 6. 按一下 [fillOpacity]。
-7. 在「值」欄位中輸入 **`0.5`**，然後按一下「套用樣式」。
+7. 在「Value」(值) 欄位中輸入 **`0.5`**，然後按一下「Apply Style」(套用樣式)。
 8. 查看您的地圖。資料點的填充顏色目前為半透明。
 9. 依據可用自行車的數量改變資料點的大小。按一下 [circleRadius]。
 10. 在「circleRadius」面板中：
@@ -261,7 +257,7 @@ WHERE num_bikes_available > 30
 
 如要刪除專案，請進行以下操作：
 
-**注意**：刪除專案會造成以下結果：
+**注意**：刪除專案會造成以下影響：
 
 * **專案中的所有內容都會遭到刪除。**如果使用現有專案來進行本文中的任務，刪除專案將一併移除當中已完成的其他任務'。
 * **自訂專案 ID 會消失。**當您之前建立這個專案時，可能建立了想要在日後使用的自訂專案 ID。如要保留使用該專案 ID 的網址 (例如 `appspot.com` 網址)，請刪除在該專案中選取的資源，而不是刪除整個專案。
@@ -276,10 +272,10 @@ WHERE num_bikes_available > 30
 
 ## 後續步驟
 
-* 如要進一步瞭解地理空間分析的視覺化選項，請參閱「[將地理空間資料視覺化](https://docs.cloud.google.com/bigquery/docs/geospatial-visualize?hl=zh-tw)」。
+* 如要進一步瞭解地理空間分析的視覺化選項，請參閱「[以圖表呈現地理空間資料](https://docs.cloud.google.com/bigquery/docs/geospatial-visualize?hl=zh-tw)」。
 * 如要進一步瞭解如何使用地理空間分析資料，請參閱「[使用地理空間資料](https://docs.cloud.google.com/bigquery/docs/geospatial-data?hl=zh-tw)」。
-* 如需地理空間分析教學課程，請參閱[使用地理空間分析繪製颶風路徑](https://docs.cloud.google.com/bigquery/docs/geospatial-tutorial-hurricane?hl=zh-tw)。
-* 如要查看地理空間分析的 GoogleSQL 函式說明文件，請參閱[GoogleSQL 中的地理函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions?hl=zh-tw)一文。
+* 如需地理空間分析的使用教學課程，請參閱「[使用地理空間分析繪製颶風路徑](https://docs.cloud.google.com/bigquery/docs/geospatial-tutorial-hurricane?hl=zh-tw)」。
+* 如需地理空間分析中 GoogleSQL 函式的說明文件，請參閱「[GoogleSQL 中的地理函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions?hl=zh-tw)」。
 
 
 
@@ -288,11 +284,11 @@ WHERE num_bikes_available > 30
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-17 (世界標準時間)。
+上次更新時間：2026-10-23 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-17 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-23 (世界標準時間)。"],[],[]]

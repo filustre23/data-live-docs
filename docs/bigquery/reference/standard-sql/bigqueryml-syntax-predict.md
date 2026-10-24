@@ -428,5 +428,5 @@ field of `feature`:
 SELECT * FROM
   ML.PREDICT(
     MODEL `my_dataset.vision_model`,
-    (SELECT uri, ML.CONVERT_COLOR_SPACE(ML.RESIZE_IMAGE(ML.DECODE_IMAGE(data), 224, 280,
+    (SELECT uri, ML.CONVERT_COLOR_SPACE(ML.RESIZE_IMAGE(ML.DECODE_IMAGE(data),
 ```

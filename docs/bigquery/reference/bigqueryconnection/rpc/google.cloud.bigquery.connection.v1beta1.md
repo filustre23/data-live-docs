@@ -135,4 +135,3 @@ The request for [ConnectionService.DeleteConnectionRequest][].
 
 | Fields | |
 | --- | --- |
-|  |

@@ -552,4 +552,3 @@ For more information about the training objectives and hyperparameters
 supported for autoencoder models, see
 [`AUTOENCODER`](/bigquery/docs/hp-tuning-overview#autoencoder).
 To try a tutorial that walks you through hyperparameter tuning, see
-[Improve model performance with hyperparameter tuning](/bigquery/docs/hyperparameter-tuning-tutorial).

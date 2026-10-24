@@ -288,5 +288,5 @@ string.
 SELECT CODE_POINTS_TO_BYTES(ARRAY_AGG(
   (SELECT
       CASE
-        WHEN chr BETWEEN b'a' and b
+        WHEN chr BETWEEN b<
 ```

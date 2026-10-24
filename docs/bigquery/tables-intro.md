@@ -16,11 +16,9 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 資料表簡介
 
-BigQuery 資料表含有以資料列分組的個人記錄，每筆記錄是由資料欄所組成 (也稱為「欄位」)。
+BigQuery 資料表可讓您將資料儲存及查詢為以資料列整理的個別記錄，其中每筆記錄都由資料欄 (也稱為「欄位」) 組成。每個資料表都是由結構定義定義，其中描述資料欄名稱、資料類型和其他資訊。
 
-每份資料表都按包含資料欄名稱、資料類型和其他資訊的「結構定義」定義。建立資料表時，您可以指定資料表的結構定義，或者您也可以建立一份沒有結構定義的資料表，並在首次填入資料的查詢或載入工作中宣告結構定義。
-
-使用 GoogleSQL 時，請採用 `projectname.datasetname.tablename` 格式來指定完整的資料表名稱；使用 bq 指令列工具時，則請採用 `projectname:datasetname.tablename` 格式來指定完整的資料表名稱。
+本文說明 BigQuery 的資料表類型，以及相關限制、配額、定價和安全性。
 
 ## 資料表類型
 
@@ -29,6 +27,10 @@ BigQuery 資料表含有以資料列分組的個人記錄，每筆記錄是由�
 * [標準 BigQuery 資料表](#standard-tables)：儲存在 BigQuery 儲存空間中的結構化資料。
 * [外部資料表](#external_tables)：參照儲存在 BigQuery 外部資料的資料表。
 * [檢視表](#views)：使用 SQL 查詢建立的邏輯資料表。
+
+您可以在建立資料表時指定結構定義，也可以建立不含結構定義的資料表，並在首次填入資料的查詢工作或載入工作中宣告結構定義。
+
+使用 GoogleSQL 時，請採用 `projectname.datasetname.tablename` 格式來完整指定資料表名稱；使用 bq 指令列工具時，則請採用 `projectname:datasetname.tablename` 格式來完整指定資料表名稱。
 
 ### 標準 BigQuery 資料表
 
@@ -140,11 +142,11 @@ BigQuery 資料表有以下限制：
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-20 (世界標準時間)。
+上次更新時間：2026-10-22 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-20 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-22 (世界標準時間)。"],[],[]]

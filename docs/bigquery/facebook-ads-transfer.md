@@ -253,7 +253,3 @@ bq mk
 * `CostPerConversion`
 * `CostPerOneThousandAdImpression`
 * `CostPerOutboundClick`
-* `CostPerThruplay`
-* `CostPerUniqueActionType`
-* `CostPerUniqueConversion`
-* `CostPerUn`

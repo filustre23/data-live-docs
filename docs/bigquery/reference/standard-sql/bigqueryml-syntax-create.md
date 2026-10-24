@@ -393,5 +393,5 @@ To use a [default connection](/bigquery/docs/default-connections), specify
 ```
 MODEL_TYPE = { 'LINEAR_REG' | 'LOGISTIC_REG' | 'KMEANS' | 'PCA' |
 'MATRIX_FACTORIZATION' | 'AUTOENCODER' | 'AUTOML_REGRESSOR' |
-'AUTOML_CLASSIFIER' | 'BOOSTED_TREE_CLASSIFIER'
+'AUT
 ```

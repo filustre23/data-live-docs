@@ -292,5 +292,4 @@ bigquery.defineFunction(
 #legacySQL
 SELECT requests, title
 FROM
-  urlDecode(
 ```

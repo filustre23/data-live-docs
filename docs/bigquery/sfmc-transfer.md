@@ -16,59 +16,58 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 將 Salesforce Marketing Cloud 資料載入 BigQuery
 
-您可以使用 Salesforce Marketing Cloud 連接器的 [BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)，將資料從 Salesforce Marketing Cloud 載入至 BigQuery。透過 BigQuery 資料移轉服務，您可以排定週期性移轉工作，將 Salesforce Marketing Cloud 的最新資料新增至 BigQuery。
+您可以使用 Salesforce Marketing Cloud 連接器的 [BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)，將資料從 Salesforce Marketing Cloud 載入 BigQuery。您可以使用 BigQuery 資料移轉服務，排定週期性移轉工作，將 Salesforce Marketing Cloud 的最新資料新增至 BigQuery。
 
 ## 限制
 
-Salesforce Marketing Cloud 資料移轉作業會受到下列限制：
+Salesforce Marketing Cloud 資料移轉作業有下列限制：
 
-* 單一移轉設定在特定時間只能支援一次資料移轉作業。如果排定在第一次資料轉移完成前執行第二次資料轉移，則系統只會完成第一次資料轉移，並略過與第一次轉移重疊的任何其他資料轉移。
-  + 為避免在單一轉移設定中略過轉移作業，建議您設定「重複頻率」，增加大型資料轉移作業之間的時間間隔。
+* 單一移轉設定在特定時間只能支援一項資料移轉作業。如果第二項資料移轉作業排定在第一項移轉作業完成前執行，則只有第一項資料移轉作業會完成，而與第一項移轉作業重疊的其他資料移轉作業則會略過。
+  + 為避免單一移轉設定略過移轉作業，建議您設定「重複頻率」，增加大型資料移轉作業之間的時間長度。
 * 如要透過網路連結進行資料移轉，請務必先[定義靜態 IP 位址，再建立網路連結](https://docs.cloud.google.com/bigquery/docs/connections-with-network-attachment?hl=zh-tw)。
-* Salesforce Marketing Cloud 轉移作業不支援含有二進位或大型 Blob 欄位的資料延伸模組。
-* 如果設定的網路連結和虛擬機器 (VM) 執行個體位於不同區域，從 Salesforce Marketing Cloud 轉移資料時，可能會發生跨區域資料移動。
+* Salesforce Marketing Cloud 移轉作業不支援包含二進位或大型 blob 欄位的資料擴充。
+* 如果設定的網路連結和虛擬機器 (VM) 執行個體位於不同區域，從 Salesforce Marketing Cloud 移轉資料時，可能會發生跨區域資料移動。
 
 ## 事前準備
 
-下列各節說明建立 Salesforce Marketing Cloud 資料轉移作業前，您需要採取的步驟。
+以下各節說明建立 Salesforce Marketing Cloud 資料移轉作業前，必須採取的步驟。
 
-### Salesforce Marketing Cloud 必要條件
+### Salesforce Marketing Cloud 事前準備
 
-建立 Salesforce Marketing Cloud 資料轉移作業時，您必須提供下列資訊：
+建立 Salesforce Marketing Cloud 資料移轉作業時，您必須具備下列資訊：
 
 | 參數名稱 | 說明 |
 | --- | --- |
-| `subdomain` | API 子網域 (位於基本 URI 中)。舉例來說，在驗證基本 URI `https://SUBDOMAIN.auth.marketingcloudapis.com/` 中，SUBDOMAIN 是您的子網域值。 |
-| `instance` | API 伺服器執行個體，登入 Salesforce Marketing Cloud 應用程式後，即可在網址中找到。執行個體值包含 `s`，後面接著數值。舉例來說，在網址 `https://mc.s4.exacttarget.com/` 中，執行個體值為 `s4`。詳情請參閱「[尋找 Marketing Cloud 帳戶的堆疊位置](https://help.salesforce.com/s/articleView?id=000383566&type=1)」。 |
-| `clientId` | API 整合項目的用戶端 ID。依序前往「設定」>「應用程式」>「已安裝的套件」，然後點選套件名稱。用戶端 ID 會列在「元件」下方。 |
-| `clientSecret` | 應用程式整合項目的用戶端密鑰。依序前往「設定」>「應用程式」>「已安裝的套件」，然後點選套件名稱。用戶端密鑰會列在「元件」下方。 |
-| `Salesforce Marketing Cloud objects to transfer` | 編譯要納入這項轉移作業的 Salesforce Marketing Cloud 物件清單。[設定轉移設定](#sfmc-transfer-setup)時，您可以選取物件。 如需支援的物件清單，請參閱「[支援的表格](#supported-tables)」。 |
+| `subdomain` | API 子網域，位於基礎 URI。舉例來說，在驗證基本 URI `https://SUBDOMAIN.auth.marketingcloudapis.com/` 中，`SUBDOMAIN` 是子網域值。 |
+| `instance` | API 伺服器執行個體，登入 Salesforce Marketing Cloud 應用程式後，即可在網址中找到。執行個體值包含「s」和後續的數值。舉例來說，在網址 `https://mc.s4.exacttarget.com/` 中，執行個體值為 `s4`。詳情請參閱「[尋找 Marketing Cloud 帳戶的堆疊位置](https://help.salesforce.com/s/articleView?id=000383566&type=1)」。 |
+| `clientId` | API 整合項目的用戶端 ID。依序前往「Setup」>「Apps」>「Installed Packages」，然後按一下套件名稱。用戶端 ID 會列在「Components」下方。 |
+| `clientSecret` | 應用程式整合項目的用戶端密鑰。依序前往「Setup」>「Apps」>「Installed Packages」，然後按一下套件名稱。用戶端密鑰會列在「Components」(元件) 下方。 |
+| `Salesforce Marketing Cloud objects to transfer` | 列出要納入這項移轉作業的 Salesforce Marketing Cloud 物件。您可以在[設定移轉設定](#sfmc-transfer-setup)時選取物件。如需支援的物件清單，請參閱「[支援的資料表](#supported-tables)」。 |
 
 #### 為 Salesforce Marketing Cloud 移轉作業設定 IP 許可清單
 
-您必須設定 Google Cloud 環境和 Salesforce Marketing Cloud 帳戶，將特定 IP 位址加入資料傳輸的許可清單。這樣可確保 Salesforce Marketing Cloud 只接受來自受信任靜態 IP 位址的連線。
+您必須設定 Google Cloud 環境和 Salesforce Marketing Cloud 帳戶，將特定 IP 位址加入資料移轉許可清單。這可確保 Salesforce Marketing Cloud 只接受來自受信任靜態 IP 位址的連線。
 
-如要這麼做，您必須先設定 Google Cloud 網路，使其使用靜態 IP 位址：
+如要這麼做，您必須先設定 Google Cloud 網路，使用靜態 IP 位址：
 
-1. 在虛擬私有雲網路中，[設定具有靜態 IP 位址的公用網路位址轉譯 (NAT)](https://docs.cloud.google.com/nat/docs/set-up-manage-network-address-translation?hl=zh-tw)。Cloud NAT 必須在與資料移轉目的地資料集相同的區域內設定。
-2. [在同一個虛擬私有雲網路中設定網路連結](https://docs.cloud.google.com/vpc/docs/create-manage-network-attachments?hl=zh-tw)。BigQuery 資料移轉服務會使用這項資源存取私人服務。
+1. 在虛擬私有雲網路中，[設定公開網路位址轉譯 (NAT)](https://docs.cloud.google.com/nat/docs/set-up-manage-network-address-translation?hl=zh-tw)，並指定靜態 IP 位址。CloudNAT 必須與這項資料移轉作業的目的地資料集位於相同區域。
+2. 在同一個虛擬私有雲網路中[設定網路連結](https://docs.cloud.google.com/vpc/docs/create-manage-network-attachments?hl=zh-tw)。BigQuery 資料移轉服務會使用這項資源存取私人服務。
 
-接著，您必須[將靜態 IP 位址新增至 Salesforce Marketing Cloud 的許可清單](https://help.salesforce.com/s/articleView?id=mktg.mc_overview_allowlist_ip.htm&language=en_US&type=5)。
-新增 IP 位址範圍時，請使用Google Cloud 公開 NAT 的靜態 IP 位址，做為 IP 範圍的起始和結束 IP 位址。
+接著，您必須[將靜態 IP 位址新增至 Salesforce Marketing Cloud 的許可清單](https://help.salesforce.com/s/articleView?id=mktg.mc_overview_allowlist_ip.htm&language=en_US&type=5)。新增 IP 位址範圍時，請使用Google Cloud Public NAT 的靜態 IP 位址，做為 IP 範圍的起始和結束 IP 位址。
 
-設定 IP 範圍後，您現在可以在[設定轉移設定](https://docs.cloud.google.com/bigquery/docs/sfmc-transfer?hl=zh-tw#sfmc-transfer-setup)時，透過在「網路附件」欄位中選取網路附件，指定靜態 IP。
+設定 IP 範圍後，您可以在[設定移轉設定](https://docs.cloud.google.com/bigquery/docs/sfmc-transfer?hl=zh-tw#sfmc-transfer-setup)時，於「Network attachment」(網路連結) 欄位中選取網路連結，藉此指定靜態 IP。
 
-#### 資料延伸模組物件規定
+#### 資料擴充物件規定
 
-如要在資料轉移中加入資料擴充物件，該物件必須符合下列規定：
+如要在資料移轉作業中加入資料擴充物件，物件必須符合下列規定：
 
-* 資料擴充功能物件的名稱必須包含 `DataExtensionObject` 前置字元，後面接著物件名稱。例如：`DataExtensionObject_DATA_EXTENSION_NAME`。
+* 資料擴充物件的名稱必須包含 `DataExtensionObject` 前置字元，後面接著物件名稱。例如：`DataExtensionObject_DATA_EXTENSION_NAME`。
 * 您必須為資料擴充物件啟用 `Read` 範圍。
 * 資料擴充物件的檔案位置必須具有 `Read` 和 `Write` 範圍。
 
 ### 安裝及設定 Salesforce Marketing Cloud API 整合套件
 
-您必須在 Salesforce Marketing Cloud 中安裝伺服器對伺服器 API 整合套件。如要在 Salesforce Marketing Cloud 中執行這項操作，請安裝新的已安裝套件，並指定「API 整合」>「伺服器對伺服器」元件。詳情請參閱「[建立及安裝套件](https://developer.salesforce.com/docs/marketing/marketing-cloud/guide/install-packages.html)」。
+您必須在 Salesforce Marketing Cloud 中安裝伺服器對伺服器 API 整合套件。您可以在 Salesforce Marketing Cloud 中安裝新的已安裝套件，並指定元件「API 整合」>「伺服器對伺服器」。詳情請參閱「[建立及安裝套件](https://developer.salesforce.com/docs/marketing/marketing-cloud/guide/install-packages.html)」。
 
 安裝 API 整合套件後，您必須新增下列權限範圍：
 
@@ -82,35 +81,35 @@ Salesforce Marketing Cloud 資料移轉作業會受到下列限制：
 * 已儲存的內容：`Read`
 * 歷程：`Read`
 * 目標對象：`Read`
-* 名單和訂閱者：`Read`
+* 清單和訂閱者：`Read`
 * 日期擴充功能：`Read`
 * 檔案位置 `Read`
 * 追蹤事件：`Read`
 * 回呼：`Read`
 * 訂閱項目：`Read`
 * 廣告活動：`Read`
-* 資產：`Read`
+* 素材資源：`Read`
 * 帳戶：`Read`
 * OTT 頻道：`Read`
 * 使用者：`Read`
 
 詳情請參閱「[API 整合權限範圍](https://developer.salesforce.com/docs/marketing/marketing-cloud/guide/data-access-permissions.html)」。
 
-### BigQuery 必要條件
+### BigQuery 事前準備
 
-* 確認您已完成[啟用 BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service?hl=zh-tw)的一切必要動作。
+* 確認您已完成[啟用 BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service?hl=zh-tw)的所有必要動作。
 * 請[建立 BigQuery 資料集](https://docs.cloud.google.com/bigquery/docs/datasets?hl=zh-tw)來儲存您的資料。
-* 如要為 Pub/Sub 設定移轉作業執行通知，請確認您擁有 `pubsub.topics.setIamPolicy` 身分與存取權管理 (IAM) 權限。如果您只想設定電子郵件通知，則不需要擁有 Pub/Sub 權限。詳情請參閱 [BigQuery 資料移轉服務執行通知](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications?hl=zh-tw)一文。
+* 如要設定 Pub/Sub 的移轉作業執行通知，請確認您具備 `pubsub.topics.setIamPolicy` Identity and Access Management (IAM) 權限。如果只設定電子郵件通知，則不需要 Pub/Sub 權限。詳情請參閱 [BigQuery 資料移轉服務執行通知](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications?hl=zh-tw)一文。
 
 ### 必要的 BigQuery 角色
 
-如要取得建立 BigQuery 資料移轉服務資料移轉作業所需的權限，請要求管理員在專案中授予您 [BigQuery 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.admin)  (`roles/bigquery.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得建立 BigQuery 資料移轉服務資料移轉作業所需的權限，請要求管理員授予您專案的 [BigQuery 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.admin)  (`roles/bigquery.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
 這個預先定義的角色具備建立 BigQuery 資料移轉服務資料移轉作業所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
 #### 所需權限
 
-如要建立 BigQuery 資料移轉服務資料移轉作業，您必須具備下列權限：
+您必須具備下列權限，才能建立 BigQuery 資料移轉服務資料移轉作業：
 
 * BigQuery 資料移轉服務權限：
   + `bigquery.transfers.update`
@@ -126,16 +125,16 @@ Salesforce Marketing Cloud 資料移轉作業會受到下列限制：
 
 詳情請參閱「[授予 `bigquery.admin` 存取權](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service?hl=zh-tw#grant_bigqueryadmin_access)」。
 
-## 設定 Salesforce Marketing Cloud 資料轉移作業
+## 設定 Salesforce Marketing Cloud 資料移轉作業
 
-如要將 Salesforce Marketing Cloud 資料新增至 BigQuery，請使用下列任一方法設定移轉作業：
+如要將 Salesforce Marketing Cloud 資料新增至 BigQuery，請使用下列任一選項設定移轉設定：
 
 ### 控制台
 
 1. 前往 Google Cloud 控制台的「資料移轉」頁面。
 
-   [前往「資料轉移」頁面](https://console.cloud.google.com/bigquery/transfers?hl=zh-tw)
-2. 按一下 add「建立轉移作業」。
+   [前往「資料移轉」](https://console.cloud.google.com/bigquery/transfers?hl=zh-tw)
+2. 按一下「add 建立移轉作業」。
 3. 在「Source type」(來源類型) 部分，「Source」(來源) 請選取「Salesforce Marketing Cloud」。
 4. 在「Data source details」(資料來源詳細資料) 部分執行下列操作：
 
@@ -158,7 +157,7 @@ Salesforce Marketing Cloud 資料移轉作業會受到下列限制：
 
 ### bq
 
-輸入 [`bq mk` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#mk-transfer-config)，並提供移轉建立標記 `--transfer_config`。
+輸入 [`bq mk` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#mk-transfer-config)，並提供移轉作業建立旗標 `--transfer_config`。
 
 ```
 bq mk
@@ -172,12 +171,12 @@ bq mk
 
 更改下列內容：
 
-* PROJECT\_ID (選用)：您的 Google Cloud 專案 ID。
-  如未提供 `--project_id` 指定特定專案，系統會使用預設專案。
-* DATA\_SOURCE：資料來源 (例如 `saphana`)。
-* DISPLAY\_NAME：移轉設定的顯示名稱。資料移轉作業名稱可以是任意值，日後需要修改移轉作業時，能夠據此識別即可。
-* DATASET：移轉設定的目標資料集。
-* PARAMETERS：已建立移轉設定的 JSON 格式參數。例如：`--params='{"param":"param_value"}'`。以下是 Salesforce Marketing Cloud 轉移作業的參數：
+* `PROJECT_ID` (選用)：您的 Google Cloud 專案 ID。
+  如未提供 `--project_id` 來指定特定專案，系統會使用預設專案。
+* `DATA_SOURCE`：資料來源 (例如 `saphana`)。
+* `DISPLAY_NAME`：移轉設定的顯示名稱。資料移轉作業名稱可以是任何值，能讓您辨識移轉作業，方便您日後在必要時進行修改。
+* `DATASET`：移轉設定的目標資料集。
+* `PARAMETERS`：JSON 格式的已建立移轉設定參數。例如：`--params='{"param":"param_value"}'`。Salesforce Marketing Cloud 移轉作業的參數如下：
   + `connector.subdomain`：API 子網域。
   + `connector.instance`：API 執行個體值。
   + `connector.authentication.oauth.clientId`：OAuth 用戶端的應用程式 ID 名稱。
@@ -200,9 +199,9 @@ bq mk
 
 ### API
 
-請使用 [`projects.locations.transferConfigs.create` 方法](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create?hl=zh-tw)，並提供 [`TransferConfig` 資源的執行個體](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs?hl=zh-tw#TransferConfig)。
+使用 [`projects.locations.transferConfigs.create` 方法](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create?hl=zh-tw)，並提供 [`TransferConfig` 資源](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs?hl=zh-tw#TransferConfig)的例項。
 
-儲存轉移設定後，Salesforce Marketing Cloud 連接器會根據排程選項，自動觸發轉移作業。
+儲存移轉設定時，Salesforce Marketing Cloud 連接器會根據您的排程選項，自動觸發移轉作業。
 
 ### 支援的資料表
 
@@ -228,7 +227,7 @@ bq mk
 * `Subscriber`
 * `TriggeredSendDefinition`
 
-如要手動執行資料轉移 (不在排程內)，可以啟動[回填作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)。
+如要在排定的時間以外手動執行資料移轉作業，可以啟動[補充執行作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)。
 
 ## 資料類型對應
 
@@ -248,46 +247,43 @@ bq mk
 
 ## 排解轉移設定問題
 
-如果無法設定或執行 Salesforce Marketing Cloud 資料轉移作業，請嘗試下列疑難排解步驟：
+如果設定或執行 Salesforce Marketing Cloud 資料移轉作業時遇到問題，請嘗試下列疑難排解步驟：
 
-* 確認 Salesforce Marketing Cloud 中的 API 整合套件已[特別設定](#sfmc-package)為**伺服器對伺服器**驗證。
-* 確認驗證應用程式已在「範圍」下方設定所有[必要權限](https://developer.salesforce.com/docs/marketing/marketing-cloud/guide/data-access-permissions.html)，包括 `Data Extensions: Read`。
-* 為避免逾時和間歇性失敗，請將每個轉移設定限制為最多 **10 項資產**。
-* 確認您未轉移含有二進位或大型 Blob 欄位的資料擴充功能。
+* 確認 Salesforce Marketing Cloud 中的 API 整合套件已[專門設定](#sfmc-package)為**伺服器對伺服器**驗證。
+* 確認驗證器應用程式已在「Scope」下設定所有[必要權限](https://developer.salesforce.com/docs/marketing/marketing-cloud/guide/data-access-permissions.html)，包括 `Data Extensions: Read`。
+* 為避免逾時和間歇性失敗，請將每項移轉設定限制為不超過 **10 個資產**。
+* 確認您未移轉含有二進位或大型 blob 欄位的資料擴充。
 
 ### 錯誤訊息
 
-發生錯誤：`invalid_grant. The client's IP address is unauthorized for this account. Allowlist the client's IP address in Marketing Cloud Administration.`
+錯誤：`invalid_grant. The client's IP address is unauthorized for this account. Allowlist the client's IP address in Marketing Cloud Administration.`
 :   **解決方法：**請嘗試下列任一步驟：
 
-    * 為 Google Cloud 資源啟用[所有可用的 IP 位址](https://www.gstatic.com/ipranges/goog.json)。
-    * 設定 Google Cloud 環境和 Salesforce Marketing Cloud 帳戶，將靜態 IP 位址新增至許可清單。詳情請參閱「[為 Salesforce Marketing Cloud 移轉作業設定 IP 許可清單](#sfmc-allowlist)」一文。
+    * 啟用 [Google Cloud 資源的所有可用 IP 位址](https://www.gstatic.com/ipranges/goog.json)。
+    * 設定 Google Cloud 環境和 Salesforce Marketing Cloud 帳戶，將靜態 IP 位址加入許可清單。詳情請參閱「[為 Salesforce Marketing Cloud 移轉作業設定 IP 許可清單](#sfmc-allowlist)」一文。
 
-發生錯誤：`INVALID_ARGUMENT. Table tableName does not exist in asset TableName`
-:   **解決方法：**確認資產名稱與 Salesforce Marketing Cloud 帳戶中的名稱完全一致 (包括大小寫)，並`Data Extensions: Read`授予範圍。轉移資料延伸模組的資料列時，名稱必須完全符合以下模式：`DataExtensionObject_DATA_EXTENSION_NAME`。詳情請參閱 [Salesforce Marketing Cloud 先決條件](#sfmc-prereqs)。
+錯誤：`INVALID_ARGUMENT. Table tableName does not exist in asset TableName`
+:   **解決方法：**請確認素材資源名稱與 Salesforce Marketing Cloud 帳戶中的名稱完全一致 (區分大小寫)，且已授予 `Data Extensions: Read` 範圍。轉移資料擴充功能的資料列時，名稱必須完全符合以下模式：`DataExtensionObject_DATA_EXTENSION_NAME`。詳情請參閱「[Salesforce Marketing Cloud 必要條件](#sfmc-prereqs)」。
 
-問題：轉移成功，但載入的記錄為零
-:   **解決方法：**您必須同時擁有「檔案位置」的 `Read` 和 `Write` 權限，才能讀取資料擴充功能的內容。確認 Salesforce Marketing Cloud 範圍包含 `File Locations: Read, Write`。
+問題：移轉作業成功，但未載入任何記錄
+:   **解決方法：**您必須同時具備**檔案位置**的 `Read` 和 `Write` 權限，才能讀取資料擴充內容。確認 Salesforce Marketing Cloud 範圍包含 `File Locations: Read, Write`。
 
-發生錯誤：`FAILED_PRECONDITION: There was an issue connecting to API.`
-:   **解決方法：**如果您在轉移作業中加入網路附件，但未設定 Public NAT 並設定 IP 允許清單，就可能發生這個錯誤。如要解決這項錯誤，請按照「[建立網路連結](https://docs.cloud.google.com/bigquery/docs/connect-to-sap-datasphere?hl=zh-tw#create-network-attachment)」一文中的步驟操作，定義靜態 IP 位址並建立網路連結。
+錯誤：`FAILED_PRECONDITION: There was an issue connecting to API.`
+:   **解決方法：**如果轉移作業包含網路連結，但您未設定 Public NAT 和 IP 許可清單，就可能發生這項錯誤。如要解決這項錯誤，請按照「[建立網路連結](https://docs.cloud.google.com/bigquery/docs/connect-to-sap-datasphere?hl=zh-tw#create-network-attachment)」中的步驟操作，並定義靜態 IP 位址來建立網路連結。
 
 ## 定價
 
-如要瞭解 Salesforce Marketing Cloud 移轉作業的定價資訊，請參閱[資料移轉服務定價](https://docs.cloud.google.com/bigquery/pricing?hl=zh-tw#data-transfer-service-pricing)。
+如要瞭解 Salesforce Marketing Cloud 移轉作業的定價資訊，請參閱「[資料移轉服務定價](https://docs.cloud.google.com/bigquery/pricing?hl=zh-tw#data-transfer-service-pricing)」。
 
 ## 後續步驟
 
-* 如需 BigQuery 資料移轉服務的總覽，請參閱
-  [BigQuery 資料移轉服務簡介](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)。
-* 如要瞭解如何使用資料移轉作業，包括取得移轉設定、列出移轉設定以及查看移轉設定的執行記錄，請參閱「[管理移轉作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw)」一文。
-* 瞭解如何[使用 BigQuery Omni 作業載入資料](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer?hl=zh-tw)。
+* 如需 BigQuery 資料移轉服務的總覽，請參閱「[BigQuery 資料移轉服務簡介](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)」。
+* 如要瞭解如何使用資料移轉作業，包括取得移轉設定資訊、列出移轉設定，以及查看移轉作業的執行記錄，請參閱「[管理移轉作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw)」。
+* 瞭解如何[透過 BigQuery Omni 作業載入資料](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer?hl=zh-tw)。
 
 
 
 
 提供意見
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
-
-上次更新時間：2026-10-15 (世界標準時間)。
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示](https://creativecommons.org/licenses/by/4.0/)

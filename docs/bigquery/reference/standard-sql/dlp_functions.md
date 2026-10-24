@@ -219,4 +219,4 @@ without including `plaintext` keys in a query. To use DLP functions, you need a
 
 **Examples**
 
-In the following query, the wrapped key is presented in a `BYTES` literal format:
+In the following query, the wrapped key is presented in a `BYTES` literal fo

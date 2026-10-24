@@ -1022,4 +1022,4 @@ Parquet `UINT_8`、`UINT_16`、`UINT_32` 和 `UINT_64` 類型為無符號。
 * 如要使用 [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert?hl=zh-tw) API 進行[載入作業](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw)，請使用 [`JobConfigurationLoad.decimalTargetTypes`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#JobConfigurationLoad.FIELDS.decimal_target_types) 欄位。
 * 如要使用 bq 指令列工具中的 [`bq load`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_load) 指令執行[載入工作](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw)，請使用 [`--decimal_target_types`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#flags_and_arguments_9) 旗標。
 * 如要查詢[具有外部來源的資料表](https://docs.cloud.google.com/bigquery/external-data-sources?hl=zh-tw)：
-  請使用 [`ExternalDataCon`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables?hl=zh-tw#ExternalDataConfiguration.FIELDS.decimal_target_types)
+  請使用

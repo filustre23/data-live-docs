@@ -406,5 +406,5 @@ These queries compute values with the current row as a boundary:
 
 ```
 SELECT query_expr,
-  function_name ( [ argument_list
+  function_name (
 ```

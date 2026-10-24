@@ -137,7 +137,3 @@ Credential info for the Cloud SQL.
 | --- | --- |
 | `username` | `string`  The username for the credential. |
 | `password` | `string`  The password for the credential. |
-
-## CloudSqlProperties
-
-Connection

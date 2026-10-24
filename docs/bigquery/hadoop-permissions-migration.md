@@ -273,6 +273,5 @@ gcs:
 ```
 hdfs:
   user_rules:
-    # Skip user named 'example'
-    - when
+    # Skip user named
 ```

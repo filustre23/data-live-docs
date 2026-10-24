@@ -23,49 +23,51 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 **注意：** 如要提供意見回饋或提出與這項預先發布版功能相關的問題，請傳送電子郵件至 [bigquery-repositories-feedback@google.com](mailto:%20bigquery-repositories-feedback@google.com)。
 
-本文將說明 BigQuery 的工作區概念。您可以在[存放區](https://docs.cloud.google.com/bigquery/docs/repository-intro?hl=zh-tw)中使用工作區，編輯存放區中儲存的程式碼。存放區會使用 Git 記錄變更及管理檔案版本，對檔案執行版本管控。
+您可以在 BigQuery 的工作區編輯及管理儲存在[存放區](https://docs.cloud.google.com/bigquery/docs/repository-intro?hl=zh-tw)中的程式碼。您可以在工作區建立及修改檔案，而上層存放區會使用 Git 記錄變更及管理檔案版本。
+
+## 查看工作區
 
 在 BigQuery 頁面中，工作區會依字母順序顯示在相關聯的存放區下方。如要查看存放區，請按照下列步驟操作：
 
 1. 點選左側窗格中的 explore「Explorer」。
 
-   如果沒有看到左側窗格，請按一下「展開左側窗格」圖示 last\_page 開啟窗格。
-2. 在「Explorer」窗格中，點選「Repositories」。
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
+2. 在「Explorer」窗格中，點選「存放區」。
 
 ## 支援的檔案類型
 
-您可以建立或上傳下列類型的檔案至存放區：
+您可以在存放區中建立或上傳下列類型的檔案：
 
 * SQL 查詢
 * Python 筆記本
 * [資料畫布](https://docs.cloud.google.com/bigquery/docs/data-canvas?hl=zh-tw)
-* [準備資料](https://docs.cloud.google.com/bigquery/docs/data-prep-introduction?hl=zh-tw)
+* [資料準備](https://docs.cloud.google.com/bigquery/docs/data-prep-introduction?hl=zh-tw)
 * 任何其他類型的檔案
 
 詳情請參閱「[在工作區中處理檔案](https://docs.cloud.google.com/bigquery/docs/workspaces?hl=zh-tw#work_with_files_in_a_workspace)」。
 
 ## Git 整合
 
-在工作區中建立及修改檔案時，您可以執行 Git 動作，例如提交變更及將變更推送至存放區。詳情請參閱「[使用檔案進行版本管控](https://docs.cloud.google.com/bigquery/docs/workspaces?hl=zh-tw#use_version_control_with_a_file)」。
+在工作區中建立及修改檔案時，您可以執行 Git 動作，例如修訂變更及將變更推送至存放區。詳情請參閱「[使用檔案的版本管控功能](https://docs.cloud.google.com/bigquery/docs/workspaces?hl=zh-tw#use_version_control_with_a_file)」。
 
 ## 位置
 
-每個工作區都與包含該工作區的存放區使用相同的[位置](https://docs.cloud.google.com/bigquery/docs/repository-intro?hl=zh-tw#locations)。
+每個工作區使用的[位置](https://docs.cloud.google.com/bigquery/docs/repository-intro?hl=zh-tw#locations)，都與存放區相同。
 
 ## 配額
 
-使用 BigQuery 工作區時，適用 [Dataform 配額](https://docs.cloud.google.com/dataform/docs/quotas?hl=zh-tw#quotas)。
+使用 BigQuery 工作區時，須遵守 [Dataform 配額](https://docs.cloud.google.com/dataform/docs/quotas?hl=zh-tw#quotas)。
 
 ## 定價
 
-建立、更新或刪除工作區，以及在工作區中儲存檔案，都不會產生費用。
+建立、更新或刪除工作區，或儲存工作區中的檔案，都不會產生費用。
 
 若要深入瞭解 BigQuery 價格，請參閱[價格](https://cloud.google.com/bigquery/pricing?hl=zh-tw)。
 
 ## 後續步驟
 
-* 如要瞭解如何建立及使用存放區，請參閱「[建立存放區](https://docs.cloud.google.com/bigquery/docs/repositories?hl=zh-tw)」一文。
-* 如要瞭解如何建立及使用工作區，請參閱[建立工作區](https://docs.cloud.google.com/bigquery/docs/workspaces?hl=zh-tw)一文。
+* 如要瞭解如何建立及使用存放區，請參閱「[建立存放區](https://docs.cloud.google.com/bigquery/docs/repositories?hl=zh-tw)」。
+* 如要瞭解如何建立及使用工作區，請參閱「[建立工作區](https://docs.cloud.google.com/bigquery/docs/workspaces?hl=zh-tw)」。
 
 
 
@@ -74,11 +76,11 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-15 (世界標準時間)。
+上次更新時間：2026-10-22 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-22 (世界標準時間)。"],[],[]]

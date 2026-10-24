@@ -357,5 +357,4 @@ FROM
   (SELECT * EXCEPT(training) FROM prepared_data WHERE training),
   # Prediction data
   (SELECT * EXCEPT(training) FROM prepared_data WHERE NOT training),
-  label_col =>
 ```

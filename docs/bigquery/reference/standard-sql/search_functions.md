@@ -359,7 +359,4 @@ SELECT
 
   -- FALSE: The search query is equivalent to foobar\\=.
   SEARCH('foobar=', '`foobar\\=`') AS b,
-
-  -- FALSE: This is equivalent to the previous example.
-  SEARCH(
 ```

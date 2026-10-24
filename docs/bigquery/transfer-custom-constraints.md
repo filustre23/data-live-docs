@@ -178,7 +178,7 @@ Google Cloud 組織政策服務可讓您透過程式輔助，集中控管組織�
 
 「拒絕」動作表示如果條件評估為 true，系統會禁止建立或更新資源。
 
-「允許」動作代表只有在條件評估為 true 時，才允許建立或更新資源。除了條件中明確列出的情況外，其他所有情況都會遭到封鎖。
+「允許」動作表示只有在條件評估為 true 時，才允許建立或更新資源。除了條件中明確列出的情況外，其他所有情況都會遭到封鎖。
 
 11. 按一下「Create constraint」(建立限制)。
 
@@ -260,7 +260,7 @@ gcloud org-policies list-custom-constraints --organization=ORGANIZATION_ID
 8. 選用：如要根據標記設定組織政策的條件，請按一下「Add condition」(新增條件)。請注意，如果為組織政策新增條件式規則，您必須至少新增一項無條件規則，否則無法儲存政策。詳情請參閱「[使用標記設定組織政策範圍](https://docs.cloud.google.com/organization-policy/scope-policies?hl=zh-tw)」。
 9. 按一下「Test changes」(測試變更)，模擬組織政策的影響。詳情請參閱「[使用 Policy Simulator 測試組織政策變更](https://docs.cloud.google.com/policy-intelligence/docs/test-organization-policies?hl=zh-tw)」。
 10. 如要在模擬測試模式下強制執行組織政策，請按一下「Set dry run policy」(設定模擬測試政策)。詳情請參閱「[測試組織政策](https://docs.cloud.google.com/organization-policy/test-policies?hl=zh-tw)」。
-11. 確認空跑模式中的組織政策運作正常後，請按一下「Set policy」(設定政策)，設定正式政策。
+11. 確認組織政策在模擬測試模式下運作正常後，請按一下「Set policy」(設定政策)，設定正式政策。
 
 ### gcloud
 
@@ -410,11 +410,11 @@ Operation denied by custom org policy: ["customConstraints/custom.dtsEnableEmail
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-21 (世界標準時間)。
+上次更新時間：2026-10-22 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-21 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-22 (世界標準時間)。"],[],[]]

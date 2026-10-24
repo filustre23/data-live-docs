@@ -224,5 +224,5 @@ SELECT CAST(b'\x48\x65\x6c\x6c\x6f' AS STRING FORMAT 'ASCII') AS bytes_to_string
 ### Format string as bytes
 
 ```
-CAST(string_expression AS BYTES
+CAST(
 ```

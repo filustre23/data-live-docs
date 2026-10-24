@@ -137,7 +137,5 @@ ON
 WHERE
   c._DATA_DATE = c._LATEST_DATE
 GROUP BY
-  1, 2, 3
-ORDER BY
-  Impres
+  1, 2,
 ```

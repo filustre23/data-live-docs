@@ -14,13 +14,11 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 你可以依據偏好儲存及分類內容。
 
-# 在 Google Cloud Marketplace 中銷售產品
+# 在 Google Cloud Marketplace 銷售產品
 
-BigQuery sharing 發布者可以透過 BigQuery sharing (原為 Analytics Hub) 與 [Google Cloud Marketplace](https://docs.cloud.google.com/marketplace?hl=zh-tw) 的整合功能，在 Cloud Marketplace 上列出自己的資料產品，藉此創造收益。透過發布者-訂閱者模式，您可以大規模與客戶分享資料產品，不必管理每筆交易和訂閱。您可以設定資料產品的各個層面，例如提供的資料類型 (例如 BigQuery 資料集)、訂閱價格 (付費、免費或試用) 和效期。
+BigQuery sharing (舊稱 Analytics Hub) 可讓您透過 [Google Cloud Marketplace](https://docs.cloud.google.com/marketplace?hl=zh-tw) 提供及購買資料產品。發布者可以透過 Cloud Marketplace 大規模共用 BigQuery 資料集，並設定付費、免費或試用會員方案和效期，不必管理個別交易。
 
-如果您是 BigQuery sharing 訂閱者，可以透過這項整合功能，探索及使用各種 Google 和第三方資料產品，以及商業資料集。
-
-繼續操作前，請先熟悉 [BigQuery sharing 資料交換](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges?hl=zh-tw)。
+訂閱者可以透過 Cloud Marketplace 探索及使用 Google 和第三方商業資料集。繼續操作前，請先熟悉 [BigQuery sharing 資料交換](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges?hl=zh-tw)。
 
 ## 事前準備
 
@@ -29,7 +27,7 @@ BigQuery sharing 發布者可以透過 BigQuery sharing (原為 Analytics Hub) �
 
 ### 必要的角色
 
-如要取得使用 Cloud Marketplace 整合式產品資訊所需的權限，請要求管理員授予下列 IAM 角色：
+如要取得使用 Cloud Marketplace 整合式產品資訊所需的權限，請要求管理員授予您下列 IAM 角色：
 
 * 建立及管理 BigQuery sharing 項目：
   + [Analytics Hub 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub?hl=zh-tw#analyticshub.admin)  (`roles/analyticshub.admin`)
@@ -50,7 +48,7 @@ BigQuery sharing 發布者可以透過 BigQuery sharing (原為 Analytics Hub) �
 
 ### 控制台
 
-前往 **Analytics Hub API** 頁面，為 Google Cloud 專案啟用 Analytics Hub API。
+前往「**Analytics Hub API**」頁面，為 Google Cloud 專案啟用 Analytics Hub API。
 
 [啟用 API](https://console.cloud.google.com/apis/library/analyticshub.googleapis.com?hl=zh-tw)
 
@@ -62,15 +60,15 @@ BigQuery sharing 發布者可以透過 BigQuery sharing (原為 Analytics Hub) �
 gcloud services enable analyticshub.googleapis.com
 ```
 
-啟用 Analytics Hub API 後，您可以在Google Cloud 控制台中存取「Sharing (Analytics Hub)」[頁面](https://console.cloud.google.com/bigquery/analytics-hub?hl=zh-tw)。
+啟用 Analytics Hub API 後，您可以在Google Cloud 控制台存取[「Sharing (Analytics Hub)」(共用 (Analytics Hub)) 頁面](https://console.cloud.google.com/bigquery/analytics-hub?hl=zh-tw)。
 
 ## 限制
 
 與 Cloud Marketplace 整合的產品資訊有下列限制：
 
-* 所有[BigQuery 共用限制](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction?hl=zh-tw#limitations)均適用。
-* BigQuery 分享發布者和訂閱者必須位於[支援的 Cloud Marketplace 代理機構管轄範圍](https://cloud.google.com/terms/marketplace-agency-jurisdictions?hl=zh-tw)。
-* 整合 Cloud Marketplace 的產品資訊會編入 [Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/catalog-overview?hl=zh-tw) 索引，但您無法特別篩選這類產品資訊的資源類型。
+* 所有 [BigQuery 共用限制](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction?hl=zh-tw#limitations)皆適用。
+* BigQuery sharing 發布者和訂閱者必須位於支援的 [Cloud Marketplace 代理管轄區](https://cloud.google.com/terms/marketplace-agency-jurisdictions?hl=zh-tw)。
+* Cloud Marketplace 整合式產品資訊會編入 [Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/catalog-overview?hl=zh-tw) 索引，但您無法特別篩選其資源類型。
 * Cloud Marketplace 整合式產品項目的計費使用指標，不會擷取至供應商使用指標或 [`INFORMATION_SCHEMA` 檢視畫面](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw)。
 * Cloud Marketplace 整合不支援資料無塵室和 Pub/Sub 主題。
 
@@ -78,17 +76,17 @@ gcloud services enable analyticshub.googleapis.com
 
 下圖顯示 Cloud Marketplace 與 BigQuery sharing 之間的互動，用於商業項目：
 
-#### Cloud Marketplace 上的資料產品
+#### Cloud Marketplace 中的資料產品
 
 如要建立 Cloud Marketplace 資料產品資訊，請選取 BigQuery sharing 資訊、選擇定價模式，然後將產品提交至 Cloud Marketplace 審查。
 
-#### BigQuery sharing 上的 Cloud Marketplace 整合式項目
+#### BigQuery 共用功能中與 Cloud Marketplace 整合的項目
 
-Cloud Marketplace 資料產品項目通過核准並發布後，BigQuery sharing 項目就會成為 Cloud Marketplace 整合項目，在 sharing 和 Cloud Marketplace 之間建立整合連結，並開放購買。這類 BigQuery sharing 清單支援共用資料集。
+Cloud Marketplace 資料產品項目通過核准並發布後，BigQuery sharing 項目就會成為 Cloud Marketplace 整合項目，在 sharing 和 Cloud Marketplace 之間建立整合連結，並開放購買。這類 BigQuery 共用項目支援共用資料集。
 
 #### 連結的資源
 
-訂閱整合 Cloud Marketplace 的項目時，系統會在 BigQuery sharing 訂閱端專案中建立連結資源。連結資源的存取權是由有效的 Cloud Marketplace 訂單管理。與 Cloud Marketplace 整合的產品支援連結資料集。
+訂閱與 Cloud Marketplace 整合的清單時，系統會在 BigQuery sharing 訂閱端專案中建立連結資源。連結資源的存取權是由有效的 Cloud Marketplace 訂單管理。與 Cloud Marketplace 整合的產品支援連結資料集。
 
 ## 建立與 Cloud Marketplace 整合的產品資訊
 
@@ -96,17 +94,17 @@ Cloud Marketplace 資料產品項目通過核准並發布後，BigQuery sharing 
 
 1. 前往 Google Cloud 控制台的「Sharing (Analytics Hub)」(共用 (Analytics Hub)) 頁面。
 
-   [前往「共用」(Analytics Hub)](https://console.cloud.google.com/bigquery/analytics-hub?hl=zh-tw)
+   [前往「共用 (Analytics Hub)」](https://console.cloud.google.com/bigquery/analytics-hub?hl=zh-tw)
 2. 建立新的[共用資料交換作業](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges?hl=zh-tw#create-exchange)。或者，您也可以選擇現有的資料交換，保留現有訂閱項目。
 3. [在資料交換中建立清單](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-listings?hl=zh-tw#create_a_listing)。或者，您也可以選擇現有商店資訊，保留現有訂閱項目。
 
    **注意：** 單一 BigQuery sharing 清單同時支援要求存取權和 Cloud Marketplace 整合流程。也就是說，您可以從現有的 (離線) 商業產品資訊建立 Cloud Marketplace 整合產品資訊，而不會中斷現有訂閱項目。
-4. 在資料交易所的資料列中，依序按一下
+4. 在資料交換的資料列中，依序按一下
    more\_vert
-   **「More actions」(更多動作)>「List on Marketplace」(在 Marketplace 上架)**。
+   **「More actions」(更多動作) >「List on Marketplace」(在 Marketplace 上架)**。
    系統會將您重新導向至 Cloud Marketplace Producer Portal。
-5. 按照 Cloud Marketplace Producer Portal 上的操作說明，將 BigQuery sharing 清單加入[資料產品](https://docs.cloud.google.com/marketplace/docs/partners/data?hl=zh-tw)。
-6. 返回「Sharing (Analytics Hub)」頁面。在資料交換的列中，「市集」欄會顯示「未發布」，表示資料產品已建立並送交核准。點選「Not Published」(未發布)，系統會將您重新導向至 Cloud Marketplace Producer Portal，您可以在該處查看狀態。
+5. 按照 Cloud Marketplace Producer Portal 的操作說明，將 BigQuery sharing 刊登項目做為[資料產品](https://docs.cloud.google.com/marketplace/docs/partners/data?hl=zh-tw)上架。
+6. 返回「Sharing (Analytics Hub)」頁面。在資料交換作業的資料列中，「Marketplace」欄會顯示「Not Published」字樣，表示資料產品已建立並提交審核。點選「Not Published」(未發布)，系統會將您重新導向至 Cloud Marketplace Producer Portal，您可以在該處查看狀態。
 7. 通過核准後，「Marketplace」欄會顯示「已發布」。
    按一下「Published」(已發布)，即可重新導向至 Cloud Marketplace 中的產品資訊。
 
@@ -116,35 +114,35 @@ Cloud Marketplace 資料產品項目通過核准並發布後，BigQuery sharing 
 
 更新與 Cloud Marketplace 整合的產品資訊時，程序與[更新資料交換中的標準產品資訊](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-listings?hl=zh-tw#update_a_listing)相同。您可能也需要在 Cloud Marketplace Producer Portal 中更新資料產品資訊，這可能需要再次審查和核准。
 
-## 管理與 Cloud Marketplace 整合的產品資訊訂閱項目
+## 管理與 Cloud Marketplace 整合的產品訂閱項目
 
-與 Cloud Marketplace 整合的產品資訊商業訂閱項目，是由 Cloud Marketplace 訂單管理。您仍可按照[標準清單的相同程序](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges?hl=zh-tw#give_users_access_to_a_data_exchange)，手動新增及更新 BigQuery sharing 訂閱者，但不會發生相關的 Cloud Marketplace 交易。
+與 Cloud Marketplace 整合的商業訂閱項目，是由 Cloud Marketplace 訂單管理。您仍可按照[與標準產品資訊相同的程序](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges?hl=zh-tw#give_users_access_to_a_data_exchange)，手動新增及更新 BigQuery sharing 訂閱者，但不會進行相關的 Cloud Marketplace 交易。
 
-你也可以按照[標準應用程式的相同程序](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-subscriptions?hl=zh-tw#revoke-subscription)，手動撤銷訂閱項目，並輸入 Marketplace 服務 ID 來接受警告通知。不過請注意，撤銷商業訂閱項目可能會影響客戶，並違反《[Cloud Marketplace 服務條款](https://cloud.google.com/terms/marketplace/launcher?hl=zh-tw)》。此外，撤銷訂閱項目並不會從 BigQuery sharing 或 Cloud Marketplace 移除產品資訊。
+您也可以手動撤銷訂閱，方法是按照[標準產品資訊的相同程序](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-subscriptions?hl=zh-tw#revoke-subscription)，輸入 Marketplace 服務 ID，然後接受警告通知。不過請注意，撤銷商業訂閱項目可能會影響客戶，並違反《[Cloud Marketplace 服務條款](https://cloud.google.com/terms/marketplace/launcher?hl=zh-tw)》。此外，撤銷訂閱項目並不會從 BigQuery sharing 或 Cloud Marketplace 移除產品資訊。
 
 ## 停用與 Cloud Marketplace 整合的產品
 
-如要停用已整合商業 Cloud Marketplace 的產品資訊，請在 [Google Cloud Marketplace Producer Portal](https://docs.cloud.google.com/marketplace/docs/partners?hl=zh-tw) 中管理相關聯產品的生命週期。
+如要停用與 Cloud Marketplace 整合的商業產品，您必須在 [Google Cloud Marketplace Producer Portal](https://docs.cloud.google.com/marketplace/docs/partners?hl=zh-tw) 中管理相關產品的生命週期。
 
-停用會移除產品資訊的商業特性，並將其轉換為標準非商業用途產品資訊。這個程序有助於確保在商業化結束前，履行對訂閱者的現有合約義務。
+停用會移除產品資訊的商業特性，並將其轉換為標準非商業用途產品資訊。這項程序可確保在商業化結束前，履行對訂閱者的現有合約義務。
 
-如要停用與 Cloud Marketplace 整合的產品資訊，請按照下列步驟操作：
+如要將與 Cloud Marketplace 整合的產品資訊下架，請按照下列步驟操作：
 
 1. 在 Producer Portal 中，[要求淘汰產品資訊](https://docs.cloud.google.com/marketplace/docs/partners/deprecate-product?hl=zh-tw#product-deprecation)。
 
    **注意：** 標準產品淘汰作業必須至少提前 180 天通知現有客戶。
-2. 請等待淘汰日期到來。淘汰日期過後，Cloud Marketplace 產品資訊就會永久刪除。
+2. 等待淘汰日期過去。淘汰日期過後，Cloud Marketplace 產品資訊就會永久刪除。
 3. 從 Producer Portal 刪除產品。
 
 BigQuery sharing 項目完全停用後，就會變成標準的非商業用途項目。您可以選擇保留產品資訊，用於內部或免費共用，也可以[刪除產品資訊](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-listings?hl=zh-tw#delete_a_listing)。
 
 ### 刪除與 Cloud Marketplace 整合的產品資訊
 
-**警告：** 強烈建議您[停用與 Cloud Marketplace 整合的產品資訊](#offboard-listing)，而非刪除。刪除與 Cloud Marketplace 整合的產品資訊後，就無法復原。刪除與 Cloud Marketplace 整合的產品資訊可能會影響客戶，並違反《[Cloud Marketplace 服務條款](https://cloud.google.com/terms/marketplace/launcher?hl=zh-tw)》。
+**警告：** 強烈建議您[停用與 Cloud Marketplace 整合的產品資訊](#offboard-listing)，而非刪除。刪除與 Cloud Marketplace 整合的產品資訊後，即無法復原。刪除與 Cloud Marketplace 整合的產品資訊可能會影響客戶，並違反《[Cloud Marketplace 服務條款](https://cloud.google.com/terms/marketplace/launcher?hl=zh-tw)》。
 
 如要從 BigQuery sharing 和 Cloud Marketplace 刪除與 Cloud Marketplace 整合的產品資訊，請按照下列步驟操作：
 
-1. 如要撤銷 Cloud Marketplace 整合式產品資訊的所有商業訂閱項目，請按照[與資料交換相同的程序](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-subscriptions?hl=zh-tw#revoke-subscription)操作。如果商業訂閱方案仍有效，您就無法刪除與 Cloud Marketplace 整合的產品資訊。
+1. 如要撤銷與 Cloud Marketplace 整合的產品資訊的所有商業訂閱項目，請按照[資料交換的相同程序](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-subscriptions?hl=zh-tw#revoke-subscription)操作。如果與 Cloud Marketplace 整合的產品資訊有有效的商業訂閱項目，則無法刪除。
 2. 按照標準程序[刪除資料交換作業](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges?hl=zh-tw#delete_a_data_exchange)。
 3. 系統顯示警告通知時，請輸入 Marketplace 服務 ID 表示接受，然後按一下「Confirm」(確認)。
 
@@ -156,23 +154,24 @@ BigQuery sharing 項目完全停用後，就會變成標準的非商業用途項
 
    [前往「共用 (Analytics Hub)」](https://console.cloud.google.com/bigquery/analytics-hub?hl=zh-tw)
 2. 按一下「search 搜尋清單」。
-3. 搜尋要訂閱的產品資訊。如要快速探索 Cloud Marketplace 上的商業產品，請套用「產品」**> Marketplace** 篩選條件。
+3. 搜尋要訂閱的產品資訊。如要快速找出 Cloud Marketplace 上的商業產品，請套用 **「Listings」(產品)
+   >「Marketplace」**篩選器。
 4. 按一下該商店資訊。
-5. 如果貴機構已購買房源 (即顯示「訂閱」按鈕和購買日期)，請按照下列步驟操作：
+5. 如果貴組織已購買產品，也就是畫面上顯示「Subscribe」(訂閱) 按鈕和購買日期，請按照下列步驟操作：
 
    1. 點選「訂閱」。
    2. 指定專案和連結的資料集名稱。
    3. 按一下 [儲存]。
 
    如果您沒有訂閱清單的權限，請按一下「Request access」(要求存取權)，然後提交要求表單。
-6. 如果貴機構尚未購買該項目 (顯示「透過 Marketplace 購買」按鈕)，請按照下列步驟操作：
+6. 如果貴組織尚未購買產品 (畫面上顯示「Purchase via Marketplace」(透過 Marketplace 購買) 按鈕)，請按照下列步驟操作：
 
    1. 按一下「透過 Marketplace 購買」。
-   2. 按一下「訂閱」。
+   2. 點選「訂閱」。
    3. 在「Order summary」(訂單摘要) 頁面中，指定會員方案和購買詳細資料，並接受條款 (如果您同意)。
    4. 依序點選「訂閱」和「前往產品頁面」。
    5. 請稍等幾分鐘。訂單啟用後，請按一下「Manage on BigQuery sharing (Analytics Hub)」(前往 BigQuery sharing (Analytics Hub) 管理)。系統會將您重新導向回「Sharing (Analytics Hub)」頁面。
-   6. 在 BigQuery sharing 資訊頁面中，按一下「訂閱」。
+   6. 在 BigQuery sharing 資訊頁面，按一下「訂閱」。
    7. 指定專案和連結的資料集名稱。
    8. 按一下 [儲存]。
 
@@ -182,7 +181,7 @@ BigQuery sharing 項目完全停用後，就會變成標準的非商業用途項
 
 ## 定價
 
-適用標準 [BigQuery 共用定價](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction?hl=zh-tw#pricing)。此外，整合 Cloud Marketplace 的產品資訊也須遵守[收益分潤規定](https://docs.cloud.google.com/marketplace/docs/partners/get-started?hl=zh-tw)。如要進一步瞭解發布端如何向 BigQuery sharing 訂閱者收取資料產品使用費，請參閱「[管理 Cloud Marketplace 產品的帳單](https://docs.cloud.google.com/marketplace/docs/manage-billing?hl=zh-tw)」。
+適用標準 [BigQuery 共用定價](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction?hl=zh-tw#pricing)。此外，Cloud Marketplace 整合式產品資訊也須遵守 [Cloud Marketplace 收益分潤規定](https://docs.cloud.google.com/marketplace/docs/partners/get-started?hl=zh-tw)。如要進一步瞭解發布端如何向 BigQuery sharing 訂閱者收取資料產品使用費，請參閱「[管理 Cloud Marketplace 產品的帳單](https://docs.cloud.google.com/marketplace/docs/manage-billing?hl=zh-tw)」。
 
 ## 後續步驟
 
@@ -196,11 +195,11 @@ BigQuery sharing 項目完全停用後，就會變成標準的非商業用途項
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-20 (世界標準時間)。
+上次更新時間：2026-10-22 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-20 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-22 (世界標準時間)。"],[],[]]

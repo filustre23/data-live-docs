@@ -565,8 +565,4 @@ If you are running hyperparameter tuning, use one of the following options:
 * The `HPARAM_RANGE` keyword and two `FLOAT64` values that define
   the range of the hyperparameter. For example,
   `MIN_SPLIT_LOSS = HPARAM_RANGE(0, 5.5)`.
-* The `HPARAM_CANDIDATES` keyword and an array of `FLOAT64` values
-  that provide discrete values to use for the hyperparameter. For example,
-  `MIN_SPLIT_LOSS = HPARAM_CANDIDATES([0, 0.5, 1.5, 2.5])`.
-
-When running hyperparameter t
+* The `HPARAM_CANDIDATES` keyword and an array of `FLOAT64` va

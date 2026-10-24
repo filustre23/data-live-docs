@@ -374,7 +374,5 @@ SELECT
 FROM
   (SELECT * FROM Players WHERE RAND() < 0.5) AS results;
 
--- The results aren't always the same when you execute
--- the preceding query, but will look similar to this:
-/*----------+
+-
 ```

@@ -339,6 +339,4 @@ SELECT x;
 
 ```
 BEGIN
-  sql_statement_list
-EXCEPTION WHEN
 ```

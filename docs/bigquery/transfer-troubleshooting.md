@@ -828,6 +828,13 @@ resource.labels.config_id="CONFIG_ID"
 錯誤：`Quota exceeded: Your project exceeded quota for imports per project.`
 :   **解決方法：**確認專案中未排定過多轉入作業。如要瞭解如何計算移轉作業啟動的載入工作數量，請參閱「[配額與限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw)」。
 
+錯誤：`RESOURCE_EXHAUSTED: Rate limit exceeded.` (或從 ServiceNow、Facebook Ads、Confluence 或 PayPal 等第三方應用程式移轉資料時，發生類似的頻率限制錯誤)
+:   **解決方法：**使用 BigQuery 資料移轉服務從第三方應用程式擷取資料時，頻率限制錯誤可能是因為外部來源應用程式限制資料擷取，而非 BigQuery 擷取限制。如要解決這項錯誤，請執行下列操作：
+
+    * **確認錯誤來源：**檢查移轉作業執行記錄。如果錯誤訊息提及外部連接器或第三方資料來源，則表示頻率限制是由外部平台強制執行。
+    * **檢查第三方平台的 API 頻率限制：**登入外部平台，查看 API 用量和頻率限制 (例如將 Facebook 廣告應用程式升級至進階存取權，或查看 ServiceNow 的傳入 REST API 頻率限制)，並確保沒有平行工作流程共用相同憑證。
+    * **降低移轉頻率或錯開排程：**修改移轉設定排程，降低執行頻率，並避免同時對同一個外部帳戶執行平行移轉。
+
 
 
 
@@ -835,11 +842,11 @@ resource.labels.config_id="CONFIG_ID"
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-20 (世界標準時間)。
+上次更新時間：2026-10-22 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-20 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-22 (世界標準時間)。"],[],[]]

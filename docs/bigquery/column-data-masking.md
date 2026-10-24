@@ -1057,4 +1057,4 @@ def delete_data_policy(project_id: str, location: str, data_policy_id: str) -> N
 
 您可以使用 [BigQuery Data Policy API](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest?hl=zh-tw) 建立、更新及刪除資料政策。如要直接在資料欄上套用資料政策，請勿使用 Google Cloud 控制台的「政策標記分類」頁面。
 
-如要使用資料政策，請使用 [`v2.projects.locations.datapolicies`](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest?hl=zh-tw#rest-resource:-v2.projects.locations.datapolicies) 資源。
+如要使用資料政策，請使用

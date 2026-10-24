@@ -27,6 +27,19 @@ To get the latest product updates delivered to you, add the URL of this page to 
 reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators), or add the
 [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## October 22, 2026
+
+Feature
+
+The [`AI.TRANSLATE` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-translate)
+lets you translate text strings between languages. `AI.TRANSLATE` supports
+standard Neural Machine Translation (NMT) workloads and Translation LLM (TLLM)
+capabilities.
+
+This function is
+[generally available](https://cloud.google.com/products#product-launch-stages)
+(GA).
+
 ## October 21, 2026
 
 Feature
@@ -4792,10 +4805,4 @@ API](/bigquery/docs/dataset-access-control#changes_to_api_methods). For more inf
 
 Feature
 
-You can use [custom constraints](/bigquery/docs/custom-constraints) with Organization Policy to provide more granular control over specific fields for some BigQuery resources. This feature is available in [Preview](https://cloud.google.com/products#product-launch-stages).
-
-Feature
-
-You can select multiple columns and perform data preparation tasks on them, including dropping columns. For more information, see [Prepare data with Gemini](/bigquery/docs/data-prep-get-suggestions). This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
-
-## May 21, 2025
+You can use [custom constraints](/bigquery/docs/custom-constraints) with Organization Policy to provide more granular control over specific fields for some BigQuery reso

@@ -371,7 +371,3 @@ The result is similar to the following:
 | 6047403      | Reporting Error | ["Inaccurate derogatory collection on credit report","Disputed debt collection account","Lack of debt validation documentation","Refusal to remove incorrect collection from credit report"] |
 +--------------+-----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 ```
-
-### Process images in a Cloud Storage bucket
-
-The following query creates an external table from images of pet produ

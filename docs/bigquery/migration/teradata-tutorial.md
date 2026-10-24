@@ -363,7 +363,3 @@ ORDER BY
 
 1. 執行 BTEQ 並連線至 Teradata。詳情請參閱本文前段的「[建立 TPC-H 資料庫](#heading=h.gecocvk60w6h)」一節。
 2. 將輸出顯示寬度變更為 500 字元。
-
-   ```
-   .set width
-   ```
