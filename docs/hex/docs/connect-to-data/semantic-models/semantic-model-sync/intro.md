@@ -19,6 +19,7 @@ Currently, Hex can import models via Semantic Model Sync from the following sema
 * [dbt MetricFlow](https://docs.getdbt.com/docs/build/about-metricflow)
 * [Cube](https://cube.dev/docs/product/introduction)
 * [Snowflake Semantic Views](https://docs.snowflake.com/en/user-guide/views-semantic/overview)
+* [Apache Ossie](https://ossie.apache.org/) (Alpha, via [conversion with the Hex CLI](/docs/connect-to-data/semantic-models/semantic-model-sync/ossie))
 
 ## Concepts[​](#concepts "Direct link to Concepts")
 
@@ -64,6 +65,10 @@ You can read about Hex’s support coverage of Cube features [here](/docs/connec
 #### Snowflake Semantic Views[​](#snowflake-semantic-views "Direct link to Snowflake Semantic Views")
 
 You can read about Hex's support coverage of Snowflake Semantic Views [here](/docs/connect-to-data/semantic-models/semantic-model-sync/snowflake-semantic-views).
+
+#### Apache Ossie[​](#apache-ossie "Direct link to Apache Ossie")
+
+Ossie files are converted to Hex semantic project files with the Hex CLI, then synced with Context Sync. Read more [here](/docs/connect-to-data/semantic-models/semantic-model-sync/ossie), along with Hex's support coverage of Ossie features.
 
 ## Configuring a semantic project for import[​](#configuring-a-semantic-project-for-import "Direct link to Configuring a semantic project for import")
 

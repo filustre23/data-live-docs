@@ -51,9 +51,9 @@ If you use a firewall to restrict database access, you'll need to [add Hex's IP 
 info
 
 * Available on the **Enterprise** [plan](https://hex.tech/pricing).
-* Users need the **Admin** [workspace role](/docs/collaborate/sharing-and-permissions/roles) to configure OAuth data connections.
+* Users need the **Admin** [workspace role](/docs/collaborate/sharing-and-permissions/roles) to register OAuth apps and configure OAuth data connections.
 
-OAuth requires each Hex user to authenticate to Databricks with their own credentials. Create a custom OAuth application in Databricks, add the client credentials in Hex to create a workspace OAuth token, then set a data connection's authentication type to **OAuth Token**.
+OAuth requires each Hex user to authenticate to Databricks with their own credentials. Create a custom OAuth application in Databricks, register those client credentials in Hex as an OAuth app, then set a data connection's authentication type to **OAuth Token**. The host on the data connection must match the host on the app.
 
 Connections with OAuth enabled can affect product behavior — [learn more](/docs/connect-to-data/data-connections/oauth-data-connections).
 
@@ -66,15 +66,16 @@ Set the allowed redirect URL to:
 * Multi-tenant: `https://app.hex.tech/databricks-oauth-success`
 * Single-tenant, EU, or HIPAA: `https://<YOUR-HEX-DOMAIN-NAME>/databricks-oauth-success`
 
-### Step 2: Create the OAuth connection in Hex[​](#step-2-create-the-oauth-connection-in-hex "Direct link to Step 2: Create the OAuth connection in Hex")
+### Step 2: Register the OAuth app in Hex[​](#step-2-register-the-oauth-app-in-hex "Direct link to Step 2: Register the OAuth app in Hex")
 
-1. Go to **Workspace Settings → Data sources**.
-2. Find **Databricks OAuth Connections** and select **+ Connection**.
-3. Provide a connection name and host (`https://<your-databricks-instance>.cloud.databricks.com`), enter the Client ID and Client Secret, then select **Add connection**. You are redirected to the Databricks login screen. After you authenticate, setup is complete.
+1. Go to **Settings → Data sources → OAuth apps**.
+2. Select **App**, then **Databricks**.
+3. Enter an **App name**, the **Databricks host** (`https://<your-databricks-instance>.cloud.databricks.com`), the **OAuth Client ID**, and the **OAuth Client secret**.
+4. Select **Add app**. Hex opens the Databricks sign-in screen. After you sign in, the app is registered.
 
 ### Step 3: Update your data connection[​](#step-3-update-your-data-connection "Direct link to Step 3: Update your data connection")
 
-Edit your Databricks data connection and set **Authentication type** to **OAuth Token**. Configure [OAuth permissions](/docs/connect-to-data/data-connections/oauth-data-connections#credential-sharing) on the connection as needed.
+Edit your Databricks data connection and set **Authentication type** to **OAuth Token**. The host on the data connection must match the host on the OAuth app. Configure [OAuth permissions](/docs/connect-to-data/data-connections/oauth-data-connections#credential-sharing) on the connection as needed.
 
 #### On this page
 
@@ -83,5 +84,5 @@ Edit your Databricks data connection and set **Authentication type** to **OAuth 
 * [Additional settings](#additional-settings)
 * [OAuth setup](#databricks-oauth-setup)
   + [Step 1: Create a custom OAuth application in Databricks](#step-1-create-a-custom-oauth-application-in-databricks)
-  + [Step 2: Create the OAuth connection in Hex](#step-2-create-the-oauth-connection-in-hex)
+  + [Step 2: Register the OAuth app in Hex](#step-2-register-the-oauth-app-in-hex)
   + [Step 3: Update your data connection](#step-3-update-your-data-connection)

@@ -40,6 +40,10 @@ Connect Cube semantic layer definitions to Hex.
 
 Import semantic models from Snowflake Semantic Views.
 
+### Apache Ossie
+
+Convert and sync Apache Ossie semantic models into Hex.
+
 #### On this page
 
 * [Semantic Authoring](#semantic-authoring)

@@ -42,14 +42,14 @@ Your Hex Admins enable caching and a default cache timer at the workspace level.
 
 info
 
-If your data connections have OAuth enabled and token sharing disabled, caching works a bit differently than it for standard Hex data connections.
+If your OAuth data connections require personal credentials and set **Sharing results** to **Keep private to each user**, caching works differently than it does for standard Hex data connections. See [OAuth query caching](/docs/connect-to-data/data-connections/oauth-data-connections#query-caching).
 
 **Let’s start with the big takeaway:** SQL caching works in Hex with OAuth enabled!
 
 Once a user follows the authentication workflow from Hex to their warehouse and gets an access token, Hex stores that token behind the scenes. Each time a query is run, Hex and the warehouse do a quick check to make sure that you are who you say you are, and that the data being returned reflects only what you have permissions to see in warehouse.
 
 When a data connection that **doesn't** authenticate with OAuth is used, users can access cached SQL result sets from across the workspace, regardless of the user who initially ran the query. This means that if Editor A runs `select * from superstore` in Project 1 and Editor B runs the same query in Project 2, as long as the cache timer hasn’t expired for the query, the results will pull from the cache.
-However, when OAuth is enabled on a data source, users aren’t able to use cached SQL from across the workspace. This is because Editor A’s SQL query was run in the warehouse with their own authorization token. Editor B will need to run the query with their authorization token to verify they can access the same data. This prevents a situation where Editor B sees data they don't have permissions to because Editor A has different privileges than they do.
+However, when an OAuth data connection sets **Sharing results** to **Keep private to each user**, users aren’t able to use cached SQL from across the workspace. This is because Editor A’s SQL query was run in the warehouse with their own authorization token. Editor B will need to run the query with their authorization token to verify they can access the same data. This prevents a situation where Editor B sees data they don't have permissions to because Editor A has different privileges than they do.
 
 **With OAuth data connections, instead of thinking about caching across a workspace, think about caching on a user-level instead.** Once Editor A runs that `select * from superstore` query, its results are cached for Editor A. If they run that query again, or they run a chained query downstream against it, it will hit their cached version. **Each user needs to run a query once to create their own personal cached results.**
 

@@ -7,7 +7,7 @@ Require users to authenticate to your data warehouse with their own credentials 
 info
 
 * Available on the **Enterprise** [plan](https://hex.tech/pricing).
-* Users need the **Admin** [workspace role](/docs/collaborate/sharing-and-permissions/roles) to configure OAuth data connections.
+* Users need the **Admin** [workspace role](/docs/collaborate/sharing-and-permissions/roles) to register OAuth apps and configure OAuth data connections.
 
 OAuth data connections require each Hex user to authenticate to the warehouse with their own credentials on a regular basis. Hex stores an access token per user and uses it when that person runs queries, allowing data warehouse admins to understand who ran which query, and enforce warehouse permissions.
 
@@ -17,7 +17,9 @@ Supported warehouses:
 * [Databricks](/docs/connect-to-data/data-connections/setup-guides/connect-to-databricks#databricks-oauth-setup)
 * [BigQuery](/docs/connect-to-data/data-connections/setup-guides/connect-to-bigquery#bigquery-oauth-setup)
 
-Warehouse-specific setup instructions can be found in the above guides. This page covers how OAuth behaves in Hex: how Admins configure it, and how Editors and app viewers use it day to day.
+An **OAuth app** is the warehouse client you register in **Settings → Data sources → OAuth apps**: a name, client ID, client secret, and the warehouse account, host, or project. A data connection uses that app when its **Authentication type** is **OAuth Token**. [OAuth permissions](#credential-sharing) on the data connection control whose credentials run queries and whether outputs can be shared.
+
+Warehouse-specific setup is in the guides above. This page covers how OAuth data connections behave in Hex: how Admins configure them, and how Editors and app viewers use them.
 
 tip
 
@@ -29,7 +31,7 @@ If some Viewers do not have warehouse accounts, you can [allow embedding publish
 
 When OAuth is enabled for a connection, users will have to sign in to your data warehouse before running queries.
 
-OAuth connections can run each query under a user's warehouse identity, so warehouse permissions apply in Hex. Connections can also keep results private to each user, which prevents outputs leaking between users. This impacts collaboration, sharing, and performance.
+OAuth data connections can run each query under a user's warehouse identity, so warehouse permissions apply in Hex. Connections can also keep results private to each user, which prevents outputs leaking between users. This impacts collaboration, sharing, and performance.
 
 ## Configure OAuth permissions[​](#credential-sharing "Direct link to Configure OAuth permissions")
 
@@ -82,7 +84,7 @@ By default, Hex is a collaborative, multiplayer product. However, when users aut
 
 When personal credentials are required, you can set **Sharing results** to one of the following options:
 
-* **Shared across users** (default): Cell outputs, app runs, and agent responses can be shared, cached, and reused across users. Collaboration works the same as on projects that don't use an OAuth connection.
+* **Shared across users** (default): Cell outputs, app runs, and agent responses can be shared, cached, and reused across users. Collaboration works the same as on projects that don't use an OAuth data connection.
 * **Keep private to each user**: Cell outputs, app runs, and agent responses stay private to whoever generated them. Outputs are not shared, cached, or reused across users.
 
 This setting only applies when using personal credentials. If owner or publisher credentials are shared, results are shared across users regardless of this setting.
@@ -125,7 +127,7 @@ To enable collaboration and easier sharing in Hex, we recommend setting **Sharin
 
 If you are sensitive to results being shared between users that have varying access in the warehouse, we then recommend that:
 
-1. Each user authenticating to the data connection has access to the same set of tables in your warehouse. For Snowflake OAuth connections, you can often achieve this by setting a role as part of the connection details. **This will add a restriction such that only users who can authenticate with Snowflake using the specified role can use the data connection.** This will likely result in you configuring multiple data connections for a workspace.
+1. Each user authenticating to the data connection has access to the same set of tables in your warehouse. For Snowflake OAuth data connections, you can often achieve this by setting a **Snowflake role** on the data connection. **This will add a restriction such that only users who can authenticate with Snowflake using the specified role can use the data connection.** This will likely result in you configuring multiple data connections for a workspace.
 2. Leverage data connection permissions to limit the connection to users who have access to those tables. If you use a SCIM provider to configure your warehouse permissions, consider pulling that group through to Hex and using it for data connection permissions.
 
 With this setup:
@@ -146,22 +148,22 @@ After you choose OAuth permission settings, pick how to cut over:
 
 1. **Update an existing connection in place**  
    Projects keep using the same connection and pick up OAuth automatically. Expect temporary failures until users sign in for the first time. Scheduled runs may fail until the owner refreshes credentials. If published apps require personal credentials, app viewers must authenticate on their next visit.
-2. **Create a new OAuth connection**  
-   New projects can default to the OAuth connection while existing projects keep working on the old service account connection. Migrating older projects means updating SQL cell sources to the new connection. The old connection remains available unless you restrict or remove it.
+2. **Create a new data connection that uses OAuth**  
+   Register an OAuth app in **Settings → Data sources → OAuth apps**, then create a data connection with **Authentication type** set to **OAuth Token** that uses that app. New projects can default to that data connection while existing projects keep working on the service account connection. Migrating older projects means updating SQL cell sources to the new connection. The service account connection remains available unless you restrict or remove it.
 
 Use the **Usage** links on a data source in **Settings → Data sources** to see which projects use a connection.
 
-## Using an OAuth connection[​](#using-an-oauth-connection "Direct link to Using an OAuth connection")
+## Use an OAuth data connection[​](#using-an-oauth-connection "Direct link to Use an OAuth data connection")
 
 ### Sign in and refresh tokens[​](#sign-in-and-refresh-tokens "Direct link to Sign in and refresh tokens")
 
-The first time you use an OAuth connection, Hex prompts you to sign in to the warehouse and stores a token. This token is then used whenever you run queries with that data connection.
+The first time you use an OAuth data connection, Hex prompts you to sign in to the warehouse and stores a token. This token is then used whenever you run queries with that data connection.
 
-Admins set the token lifetime when they create the OAuth integration — you will need to sign back into your data warehouse if the token is expired.
+Admins set the token lifetime on the warehouse OAuth client. Sign in to the warehouse again if the token expires.
 
 Review, refresh, and revoke tokens in **Settings → Connected Apps**, including when each token was created and when it expires. For Snowflake connections with credentials embedded in a published app, Hex also sends email and/or Slack warnings before expiry (typically 72 hours and again 24 hours beforehand). See [Expired app credentials](#expired-app-credentials).
 
-### Checking OAuth settings for a notebook or app[​](#checking-oauth-settings-for-a-notebook-or-app "Direct link to Checking OAuth settings for a notebook or app")
+### Check OAuth settings for a notebook or app[​](#checking-oauth-settings-for-a-notebook-or-app "Direct link to Check OAuth settings for a notebook or app")
 
 Editors can open an OAuth summary in the notebook for connections in use. The summary shows whose warehouse credential is in use, who owns the token, and whether results are shared across users.
 
@@ -177,7 +179,7 @@ When the connection **requires personal credentials** for published apps, viewer
 
 When publisher credentials are embedded, viewers can run the app without signing in to the warehouse. If those credentials expire, users can hit an error state — see [expired app credentials](#expired-app-credentials).
 
-### Threads, and AI features[​](#threads-and-ai-features "Direct link to Threads, and AI features")
+### Threads and AI features[​](#threads-and-ai-features "Direct link to Threads and AI features")
 
 * **Threads** — Threads follow the connection's authoring setting. Sharing is restricted when personal credentials are required and **Sharing results** is **Keep private to each user**. See [OAuth and Threads](/docs/explore-data/threads#oauth-and-threads).
 * **Hex's AI features** — AI features do not filter schema suggestions to the user's permissions. They may propose a query that references a table the user cannot access; that query errors and returns no results. For highly sensitive schemas, use a private data connection instead.
@@ -200,9 +202,9 @@ When **Sharing results** is **Shared across users**, scheduled runs behave like 
 ## Known limitations[​](#known-limitations "Direct link to Known limitations")
 
 * **Data browser** — Without per-user schema filtering, schema metadata can be shared across users. Someone with more restrictive warehouse permissions may see table names they cannot query if another user with broader access refreshed the [Data browser](/docs/explore-data/data-browser#refresh-the-data-browser). They still cannot query that data. For Snowflake, [apply OAuth permissions to schema data](/docs/connect-to-data/data-connections/setup-guides/connect-to-snowflake#applying-oauth-permissions-to-schema-data) and [configure a service account](/docs/connect-to-data/data-connections/setup-guides/connect-to-snowflake#creating-a-service-account-for-snowflake-oauth-connections) so refreshes stay consistent.
-* **Notion embedded project previews** — Embedding a project that uses a restricted Snowflake OAuth connection can expose project results to anyone who opens the Notion page. See [Notion embed permissions](/docs/share-insights/embedding/public-and-private-embedding#how-do-permissions-work-for-notion-link-previews).
+* **Notion embedded project previews** — Embedding a project that uses a restricted Snowflake OAuth data connection can expose project results to anyone who opens the Notion page. See [Notion embed permissions](/docs/share-insights/embedding/public-and-private-embedding#how-do-permissions-work-for-notion-link-previews).
 * **Hex's AI features** — Schema suggestions are not filtered to the user's permissions. Queries still fail if the user cannot access the underlying tables. Prefer a private connection for highly sensitive schemas.
-* **Importing OAuth connections** — When authoring uses the owner's credentials, only the project owner can import OAuth connections. Editors need the owner to add the connection or transfer ownership first.
+* **Importing OAuth data connections** — When authoring uses the owner's credentials, only the project owner can import the connection. Editors need the owner to add the connection or transfer ownership first.
 
 ## Troubleshooting and FAQ[​](#troubleshooting-and-faq "Direct link to Troubleshooting and FAQ")
 
@@ -228,7 +230,7 @@ If users should not share results when their warehouse access differs, set [Shar
 
 ### Expired app credentials[​](#expired-app-credentials "Direct link to Expired app credentials")
 
-OAuth tokens expire after a set period (based on how the warehouse OAuth integration is configured).
+OAuth tokens expire after a set period (based on how the warehouse OAuth client is configured).
 
 If a publisher's credentials are embedded in an app and those credentials expire, the app stops working.
 
@@ -240,7 +242,7 @@ If the publisher is unavailable, ask another user with **Can Edit** permissions 
 
 ### No active warehouse error[​](#no-active-warehouse-error "Direct link to No active warehouse error")
 
-For Snowflake OAuth connections, see [No active warehouse error](/docs/connect-to-data/data-connections/setup-guides/connect-to-snowflake#no-active-warehouse-error).
+For Snowflake OAuth data connections, see [No active warehouse error](/docs/connect-to-data/data-connections/setup-guides/connect-to-snowflake#no-active-warehouse-error).
 
 #### On this page
 
@@ -252,12 +254,12 @@ For Snowflake OAuth connections, see [No active warehouse error](/docs/connect-t
   + [Recommended configuration](#recommended-configuration)
   + [Support access](#support-access)
   + [Roll out OAuth](#roll-out-oauth)
-* [Using an OAuth connection](#using-an-oauth-connection)
+* [Use an OAuth data connection](#using-an-oauth-connection)
   + [Sign in and refresh tokens](#sign-in-and-refresh-tokens)
-  + [Checking OAuth settings for a notebook or app](#checking-oauth-settings-for-a-notebook-or-app)
+  + [Check OAuth settings for a notebook or app](#checking-oauth-settings-for-a-notebook-or-app)
   + [Take over a notebook session](#take-over-a-notebook-session)
   + [Published apps: sign in vs embedded credentials](#published-apps-sign-in-vs-embedded-credentials)
-  + [Threads, and AI features](#threads-and-ai-features)
+  + [Threads and AI features](#threads-and-ai-features)
   + [Scheduled runs](#scheduled-runs)
   + [Query caching](#query-caching)
 * [Known limitations](#known-limitations)

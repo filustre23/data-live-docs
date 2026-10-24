@@ -105,7 +105,7 @@ The reserved path `hex.md` (with no preceding directories) is how Hex identifies
 
 Each entry in `semanticProjects` requires:
 
-* `id` - the ID of the semantic project in your Hex workspace. To find it, go to **Context Studio** > **Models** > **Semantic projects**, open the semantic project's row action menu, and select **Copy ID**.
+* `id` - the ID of the semantic project in your Hex workspace. To find it, go to **Context Studio** > **Semantic models**. In the **Semantic projects** table, open the semantic project's **⋯** menu and select **Copy ID**.
 * `path` - the path to the local directory containing that project's semantic model and view files.
 
 Before syncing a semantic project this way, make sure it's prepared correctly for import - see [Syncing Hex semantic models](/docs/connect-to-data/semantic-models/semantic-authoring/semantic-authoring-overview#sync-from-github-optional), [Syncing from Cube](/docs/connect-to-data/semantic-models/semantic-model-sync/cube), or [Syncing from dbt MetricFlow](/docs/connect-to-data/semantic-models/semantic-model-sync/dbt-metricflow) for details on required metadata and supported features.

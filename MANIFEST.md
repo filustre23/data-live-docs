@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-10-24T02:49+00:00_
+_Generated 2026-10-24T15:11+00:00_
 
-**9 sources, 4754 topics total**
+**9 sources, 4755 topics total**
 
 ## airflow
 
@@ -3925,7 +3925,7 @@ _156 topics_
 
 Upstream: <https://learn.hex.tech/>
 
-_391 topics_
+_392 topics_
 
 - `hex/changelog`
 - `hex/changelog/2020-12-17`
@@ -4155,6 +4155,7 @@ _391 topics_
 - `hex/docs/connect-to-data/semantic-models/semantic-model-sync/cube`
 - `hex/docs/connect-to-data/semantic-models/semantic-model-sync/dbt-metricflow`
 - `hex/docs/connect-to-data/semantic-models/semantic-model-sync/intro`
+- `hex/docs/connect-to-data/semantic-models/semantic-model-sync/ossie`
 - `hex/docs/connect-to-data/semantic-models/semantic-model-sync/snowflake-semantic-views`
 - `hex/docs/connect-to-data/semantic-models/semantic-model-sync/unity-catalog-metric-views`
 - `hex/docs/connect-to-data/semantic-models/viewing-and-using-semantic-models`

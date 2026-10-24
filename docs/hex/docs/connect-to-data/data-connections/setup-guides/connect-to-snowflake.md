@@ -59,9 +59,9 @@ If you use a firewall to restrict database access, you'll need to [add Hex's IP 
 info
 
 * Available on the **Enterprise** [plan](https://hex.tech/pricing).
-* Users need the **Admin** [workspace role](/docs/collaborate/sharing-and-permissions/roles) to configure OAuth data connections.
+* Users need the **Admin** [workspace role](/docs/collaborate/sharing-and-permissions/roles) to register OAuth apps and configure OAuth data connections.
 
-OAuth requires each Hex user to authenticate to Snowflake with their own credentials. Create the security integration in Snowflake, add the client credentials in Hex to create a workspace OAuth token, then set a data connection's authentication type to **OAuth Token**.
+OAuth requires each Hex user to authenticate to Snowflake with their own credentials. Create the security integration in Snowflake, register those client credentials in Hex as an OAuth app, then set a data connection's authentication type to **OAuth Token** and select that app.
 
 Connections with OAuth enabled can affect product behavior — [learn more](/docs/connect-to-data/data-connections/oauth-data-connections).
 
@@ -127,25 +127,30 @@ Notes:
 
 See [Snowflake's OAuth documentation](https://docs.snowflake.com/en/user-guide/oauth-custom.html) for more detail.
 
-### Step 2: Create the OAuth connection in Hex[​](#step-2-create-the-oauth-connection-in-hex "Direct link to Step 2: Create the OAuth connection in Hex")
+### Step 2: Register the OAuth app in Hex[​](#step-2-register-the-oauth-app-in-hex "Direct link to Step 2: Register the OAuth app in Hex")
 
-1. Go to **Workspace Settings → Data sources**.
-2. Find **Snowflake OAuth Connections** and select **+ Connection**.
-3. Enter the Client ID and Client Secret from step 1, then follow the prompts to authenticate. You are redirected to the Snowflake login screen. After you authenticate, setup is complete.
+1. Go to **Settings → Data sources → OAuth apps**.
+2. Select **App**, then **Snowflake**.
+3. Enter an **App name**, the Snowflake account name, and the **OAuth Client ID** and **OAuth Client secret** from step 1.
+4. Select **Add app**. Hex opens the Snowflake sign-in screen. After you sign in, the app is registered.
+
+**Workspace OAuth role** is optional. Hex uses it for connection tests and background metadata operations, such as schema refreshes and grants sync. Leave it blank to use the authorizing Snowflake user's default role. Role names are case-sensitive. This is separate from the [Snowflake role](#snowflake-roles) on the data connection, which limits who can query.
 
 caution
 
-When authenticating with Snowflake, use an account whose default role is not `ACCOUNTADMIN`, `SECURITYADMIN`, or `ORGADMIN`. Snowflake blocks those roles from security integrations such as OAuth. See [Snowflake's documentation](https://docs.snowflake.com/en/user-guide/oauth-custom#blocking-specific-roles-from-using-the-integration).
+When you sign in to Snowflake, use an account whose default role is not `ACCOUNTADMIN`, `SECURITYADMIN`, or `ORGADMIN`. Snowflake blocks those roles from security integrations such as OAuth. See [Snowflake's documentation](https://docs.snowflake.com/en/user-guide/oauth-custom#blocking-specific-roles-from-using-the-integration).
 
-### Step 3: Update a data connection[​](#step-3-update-a-data-connection "Direct link to Step 3: Update a data connection")
+### Step 3: Update your data connection[​](#step-3-update-your-data-connection "Direct link to Step 3: Update your data connection")
 
-Edit a Snowflake data connection and set **Authentication type** to **OAuth Token**. Configure [OAuth permissions](/docs/connect-to-data/data-connections/oauth-data-connections#credential-sharing) on the connection as needed.
+Edit your Snowflake data connection and set **Authentication type** to **OAuth Token**. Select the **OAuth app** from step 2. The app's Snowflake account must match the account on the data connection. Configure [OAuth permissions](/docs/connect-to-data/data-connections/oauth-data-connections#credential-sharing) on the connection as needed.
 
 ### Snowflake roles[​](#snowflake-roles "Direct link to Snowflake roles")
 
-For Snowflake OAuth connections, you can set a **Snowflake role** on the data connection so only users who can assume that role in Snowflake can use it. Role names are case-sensitive.
+For Snowflake OAuth data connections, set **Snowflake role** on the data connection so only users who can assume that role in Snowflake can use it. Role names are case-sensitive.
 
-In a project, the current role appears in the data connection details menu in the **Data sources** tab of the left sidebar. If no role is set in workspace settings, users can select **Switch Snowflake role...** to use a role they have already authenticated with, or authenticate with a new role.
+This is separate from the **Workspace OAuth role** on the OAuth app, which Hex uses for background operations. See [Step 2](#step-2-register-the-oauth-app-in-hex).
+
+In a project, the current role appears in the data connection details menu in the **Data sources** tab of the left sidebar. If no **Snowflake role** is set on the data connection, users can select **Switch Snowflake role...** to use a role they have already authenticated with, or authenticate with a new role.
 
 [](/assets/medias/switch-snowflake-role-2896c7b8a172f4220d9f2511bff91ea2.mp4)
 
@@ -171,7 +176,7 @@ See [Snowflake access control](https://docs.snowflake.com/en/user-guide/security
 
 ### Apply OAuth permissions to schema data[​](#applying-oauth-permissions-to-schema-data "Direct link to Apply OAuth permissions to schema data")
 
-For Snowflake OAuth connections, you can apply each user's OAuth permissions to schema metadata. In the Data browser, users then only see schemas they can access.
+For Snowflake OAuth data connections, you can apply each user's OAuth permissions to schema metadata. In the Data browser, users then only see schemas they can access.
 
 To enable this, Admins must:
 
@@ -186,14 +191,14 @@ If a user has multiple Snowflake roles, the Data browser shows the combined priv
 
 ### No active warehouse error[​](#no-active-warehouse-error "Direct link to No active warehouse error")
 
-When an Admin sets a warehouse on a Snowflake connection, every user who authenticates must have access to that warehouse. If a user's current Snowflake role cannot use that warehouse, SQL cells fail with a "no active warehouse" error.
+When an Admin sets a warehouse on a Snowflake data connection, every user who authenticates must have access to that warehouse. If a user's current Snowflake role cannot use that warehouse, SQL cells fail with a "no active warehouse" error.
 
 If the warehouse field is blank, each user needs a default warehouse assigned in Snowflake, or they see the same error.
 
 If the user lacks access to the warehouse on the data connection:
 
 1. Have them run `select current_role()` to confirm the role in use.
-2. Confirm which role is set on the Snowflake connection in **Settings → Data sources**.
+2. Confirm which **Snowflake role** is set on the data connection in **Settings → Data sources**.
 3. Have a Snowflake admin grant that role access to the warehouse ([Snowflake docs](https://docs.snowflake.com/en/sql-reference/sql/grant-privilege)).
 
 If the user has no default warehouse:
@@ -213,8 +218,8 @@ If the user has no default warehouse:
 * [Additional settings](#additional-settings)
 * [OAuth setup](#snowflake-oauth-setup)
   + [Step 1: Create the security integration in Snowflake](#step-1-create-the-security-integration-in-snowflake)
-  + [Step 2: Create the OAuth connection in Hex](#step-2-create-the-oauth-connection-in-hex)
-  + [Step 3: Update a data connection](#step-3-update-a-data-connection)
+  + [Step 2: Register the OAuth app in Hex](#step-2-register-the-oauth-app-in-hex)
+  + [Step 3: Update your data connection](#step-3-update-your-data-connection)
   + [Snowflake roles](#snowflake-roles)
   + [Configure a service account](#creating-a-service-account-for-snowflake-oauth-connections)
   + [Apply OAuth permissions to schema data](#applying-oauth-permissions-to-schema-data)
