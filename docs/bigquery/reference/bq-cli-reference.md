@@ -326,4 +326,3 @@ gcloud config unset auth/impersonate_service_account
 :   如果設為 `true`，系統會在 `jobs.query` 要求中傳送要求 ID。預設值為 `false`。
 
 **`--jobs_query_use_results_from_response={true|false}`**
-:   如果設為 `tru`

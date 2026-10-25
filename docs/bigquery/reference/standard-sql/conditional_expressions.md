@@ -353,5 +353,5 @@ SELECT IFNULL(10, 0) as result
 ```
 -- The first expression is non-NULL, so it's used. The division-by-zero error
 -- from the second expression isn't produced.
-SELECT IFNULL(10
+SELECT IFNULL(
 ```

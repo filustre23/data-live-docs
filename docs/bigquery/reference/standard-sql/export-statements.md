@@ -300,4 +300,5 @@ EXPORT DATA OPTIONS (
   format="CLOUD_SPANNER",
   spanner_options="""{ "table": "my_table" }"""
 )
+AS
 ```

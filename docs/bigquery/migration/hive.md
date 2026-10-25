@@ -327,5 +327,5 @@ partition_column=2018-11-01
 hive> SELECT MIN(int_identifier),MAX(int_identifier) FROM corp.employees WHERE partition_column="2018-10-01";
 1 1000
 
-hive> SELECT MIN(int_identifier),MAX(int_identifier) FROM corp.employees
+hive> SELECT MIN(int_identifier),MAX(int_identifier) FROM corp.employees WHERE
 ```

@@ -470,5 +470,5 @@ summable by category metric:
 ```
 CREATE (OR REPLACE) MODEL `myproject.mydataset.ca_model`
   OPTIONS(
-    MODEL_TYPE = 'CONTRIBUTION_ANALYSIS'
+    MODEL_TYPE = 'CONTRIBUTION_ANALYSIS',
 ```

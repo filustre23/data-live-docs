@@ -919,5 +919,5 @@ def update_transfer_config(
         print(f"Updated transfer config: {response.name}")
         print(f"New display name: {response.display_name}")
     except google.api_core.exceptions.NotFound:
-        print(f"Error: Transfer config '{transfer_config_name
+        print(f"Error: Transfer config '{transfer_config_name}
 ```

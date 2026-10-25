@@ -755,5 +755,5 @@ from google.protobuf import field_mask_pb2
 client = bigquery_connection_v1.ConnectionServiceClient()
 
 
-def update_connection(project_id
+def update_connection(
 ```

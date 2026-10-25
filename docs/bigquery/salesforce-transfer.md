@@ -281,5 +281,5 @@ bq mk
 
 ```
       "primaryKeys":[['Id'], ['master_label','type']],
-      "assets":
+      "assets":[
 ```

@@ -529,5 +529,5 @@ use them. For more information, see
 
 ```
 ML.GENERATE_TEXT(
-MODEL `PROJECT_ID.DATASET
+MODEL `
 ```

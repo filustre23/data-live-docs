@@ -4805,4 +4805,4 @@ API](/bigquery/docs/dataset-access-control#changes_to_api_methods). For more inf
 
 Feature
 
-You can use [custom constraints](/bigquery/docs/custom-constraints) with Organization Policy to provide more granular control over specific fields for some BigQuery resources. This feature is available in
+You can use [custom constraints](/bigquery/docs/custom-constraints) with Organization Policy to provide more granular control over specific fields for some BigQuery reso

@@ -174,4 +174,4 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 |  | ProductId | *字串* | 廣告中宣傳的產品 ID。 |
 | **動作細目** | | | |
 |  | ActionType | *字串* | 使用者看到廣告後，即使沒有點擊，也會對廣告採取動作。 |
-|  | ActionCanvasComp |
+|  | ActionCanvasComponentName | *字串* |

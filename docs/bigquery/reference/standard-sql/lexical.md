@@ -469,5 +469,5 @@ years 1 and 9999, inclusive. Dates outside of this range are invalid.
 For example, the following date literal represents September 27, 2014:
 
 ```
-DATE '2014-09-27'
+DATE
 ```
