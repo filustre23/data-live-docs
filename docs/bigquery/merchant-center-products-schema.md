@@ -153,5 +153,5 @@ SELECT
       AS num_distinct_products
 FROM
   dataset.Products_merchant_id,
-  UNNEST(issues)
+  UNNEST(issues)</
 ```

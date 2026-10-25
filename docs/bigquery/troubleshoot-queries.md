@@ -268,9 +268,20 @@ gcpdiag runbook bigquery/failed-query \
 
 ## 並行查詢衝突
 
-錯誤字串：`Concurrent jobs in the same session are not allowed`
+錯誤字串：
 
-如果工作階段同時執行多項查詢，就會發生這項錯誤，因為系統不支援這項操作。查看工作階段[限制](https://docs.cloud.google.com/bigquery/docs/sessions-intro?hl=zh-tw#limitations)。
+* `Resources exceeded during query execution: Another job JOB_ID
+  is currently running in the session SESSION_ID. Concurrent jobs in
+  the same session are not allowed.`
+* `Session SESSION_ID has expired and is no longer
+  available.`
+
+如果多個查詢在同一個[工作階段](https://docs.cloud.google.com/bigquery/docs/sessions-intro?hl=zh-tw)中同時執行 (不支援)，或工作階段在閒置 24 小時後或建立 7 天後自動終止，就會發生這項錯誤。請參閱工作階段[限制](https://docs.cloud.google.com/bigquery/docs/sessions-intro?hl=zh-tw#limitations)和[自動終止工作階段](https://docs.cloud.google.com/bigquery/docs/sessions?hl=zh-tw#auto-terminate_a_session)。
+
+如要解決這個問題，請採取下列任一做法：
+
+* 請錯開共用 `session_id` 的查詢，並在前一個工作 (`JOB_ID`) 完成後再啟動下一個查詢，或在不同的工作階段中執行並行查詢。
+* 如果工作階段已過期或終止，請建立新的工作階段 (並更新 `.bigqueryrc` 或 `connectionProperties` 中的 `--session_id`，如有設定)。請參閱「[建立工作階段](https://docs.cloud.google.com/bigquery/docs/sessions?hl=zh-tw#create-session)」。
 
 ## 衝突的 DML 陳述式
 
@@ -590,13 +601,14 @@ SELECT
 FROM
   `region-us`.INFORMATION_SCHEMA.JOBS
 WHERE
-  statement_type IN ('UPDATE', 'DELETE', 'MERGE')
+  statement_type IN ('UPDATE', 'DELETE', 'MERGE', 'TRUNCATE_TABLE')
   AND state IN ('RUNNING', 'PENDING')
 ORDER BY
   creation_time DESC;
 ```
 
-**注意：** `limit is 20` 佇列長度僅適用於變動 DML 陳述式 (`UPDATE`、`DELETE` 和 `MERGE`)。`INSERT` 陳述式會維護獨立佇列，上限為 100，而 `TRUNCATE TABLE` 是不使用變動 DML 佇列的 DML 作業。
+**注意：** `limit is 20` 佇列長度僅適用於變動 DML (`UPDATE`、`DELETE` 和 `MERGE`) 和 `TRUNCATE TABLE` 陳述式。`INSERT`
+陳述式會維護獨立佇列，上限為 100。
 
 其中一個可能的解決方案是將多個較小的 DML 作業分組，變成較大但數量較少的工作，例如批次更新和插入。將較小的工作分組為較大的工作時，執行較大工作的成本會分攤，且執行速度會更快。一般來說，合併會影響相同資料的 DML 陳述式，可提高 DML 工作的效率，且較不易超出佇列大小配額限制。如要進一步瞭解如何最佳化 DML 作業，請參閱「[避免使用更新或插入單一資料列的 DML 陳述式](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-compute?hl=zh-tw#avoid-dml-update-single-rows)」。
 
@@ -829,19 +841,25 @@ of memory`。
 
 ### 查詢過於複雜
 
-錯誤字串：`Resources exceeded during query execution: Not enough resources for query planning - too many subqueries or query is too complex`
+錯誤字串：
 
-如果查詢過於複雜，就會發生這項錯誤。造成複雜性的主要原因如下：
+* `Resources exceeded during query execution: Not enough resources for query planning - too many subqueries or query is too complex.`
+* `Resources exceeded during query execution: Not enough resources for query planning - too many fields accessed or query is too complex.`
+* `Resources exceeded during query execution: Not enough resources for query planning - query is too complex.`
+* `Resources exceeded during query execution: The query is too complex.`
+
+在查詢規劃期間展開檢視表、`WITH` 子句和 SQL user-defined function (UDF) 後，如果查詢過於複雜，就會發生這項錯誤。造成複雜性的主要原因如下：
 
 * `WITH` 子句深度巢狀或重複使用。
 * 深度巢狀或重複使用的檢視畫面。
 * 重複使用 [`UNION ALL` 運算子](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw#union_example)。
+* 複雜的 [SQL UDF](https://docs.cloud.google.com/bigquery/docs/user-defined-functions?hl=zh-tw#sql-udf-structure) 或新增多個資料欄的寬參照資料表。
 
 如要解決這項錯誤，請嘗試下列方法：
 
 * 將查詢分割成多個查詢，然後使用[程序語言](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language?hl=zh-tw)，以共用狀態依序執行這些查詢。
-* 使用暫存資料表，而非 `WITH` 子句。
-* 請改寫查詢，減少參照物件和比較次數。
+* 使用臨時資料表，而非 `WITH` 子句或深度巢狀檢視表。請參閱「[避免多次評估相同的 CTE](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-compute?hl=zh-tw#avoid_multiple_evaluations_of_the_same_ctes)」。
+* 改寫查詢，減少參照的物件、資料欄和比較項目數量。
 
 您可以使用 [`INFORMATION_SCHEMA.JOBS` 檢視表](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw)中的 `query_info.resource_warning` 欄位，主動監控複雜度接近上限的查詢。下列範例會傳回過去三天內資源用量偏高的查詢：
 
@@ -868,17 +886,38 @@ LIMIT
 
 如要最佳化查詢，請嘗試下列步驟：
 
-* 請嘗試移除 `ORDER BY` 子句。
-* 如果查詢使用 `JOIN`，請確認較大的資料表位於子句左側。此外，請確認資料不含重複的彙整鍵。
+* 請嘗試移除 `ORDER BY` 子句 (特別是子查詢或 `WITH` 子句中的子句)、新增 `LIMIT` 子句，或在回報 `Top memory consumer(s): ORDER BY
+  operations` 時使用 `ROW_NUMBER() OVER (ORDER BY
+  ...)` 而非大型 `OFFSET` 進行分頁。請參閱「[查詢超出記憶體資源](#query_not_executed)」。
+* 如果查詢失敗，並顯示 `Top memory consumer(s): sort operations used for
+  analytic OVER() clauses` 或 `analytic OVER() clauses`，請重寫查詢，減少每個視窗分區中的資料量 (新增或精簡 `PARTITION BY` 鍵)，或在適用情況下，將 `RANGE BETWEEN` 替換為有界限的 `ROWS BETWEEN` 視窗框架。
+* 如果查詢使用 `JOIN` (或因 `Top memory consumer(s): JOIN
+  operations` 失敗)，請確認較大的資料表位於子句左側，且資料不含重複的 join 鍵。如果 `CROSS JOIN` 後面接著 `GROUP BY` 超過記憶體，請先將 `CROSS JOIN` 的中繼結果儲存至暫存資料表，再執行 `GROUP BY`。
+* 如果變動 DML 陳述式失敗並顯示 `Top memory consumer(s): sort operation
+  used for table update (UPDATE/DELETE/MERGE)`，請分割 `UPDATE` 或 `MERGE` 陳述式，一次更新較少資料列或資料欄 (或將使用 `ON FALSE` 的 `MERGE` 替換為[多陳述式交易](https://docs.cloud.google.com/bigquery/docs/transactions?hl=zh-tw)中的 `INSERT` 和 `DELETE`)。
+* 如果查詢失敗並顯示 `Top memory consumer(s): query parsing and
+  optimization`，請將大型硬式編碼常值清單儲存在臨時資料表，而非內嵌在查詢文字中，或將查詢拆分為較小的查詢。
+* 如果查詢失敗並顯示 `UDF out of memory` 或 `Top memory consumer(s):
+  non-SQL user-defined functions`，請避免在 JavaScript UDF 中累積過多本機狀態、以較小的區塊處理輸入資料，或使用 [SQL UDF](https://docs.cloud.google.com/bigquery/docs/user-defined-functions?hl=zh-tw#sql-udf-structure) 或內建 GoogleSQL 函式重寫 UDF。請參閱「[JavaScript UDF 最佳做法](https://docs.cloud.google.com/bigquery/docs/user-defined-functions?hl=zh-tw#best-practices-for-javascript-udfs)」。
 * 如果查詢使用 `FLATTEN`，請判斷是否需要用於您的用途。詳情請參閱[巢狀與重複的資料](https://docs.cloud.google.com/bigquery/docs/data?hl=zh-tw#nested)。
-* 如果查詢使用 `EXACT_COUNT_DISTINCT`，建議改用 [`COUNT(DISTINCT)`](https://docs.cloud.google.com/bigquery/query-reference?hl=zh-tw#countdistinct)。
-* 如果查詢使用 `COUNT(DISTINCT <value>, <n>)` 且 `<n>` 值很大，建議改用 `GROUP BY`。詳情請參閱「[`COUNT(DISTINCT)`](https://docs.cloud.google.com/bigquery/query-reference?hl=zh-tw#countdistinct)」。
-* 如果查詢使用 `UNIQUE`，建議改用 `GROUP BY`，或在子選取項目中使用[視窗函式](https://docs.cloud.google.com/bigquery/query-reference?hl=zh-tw#windowfunctions)。
+* 如果查詢使用 `EXACT_COUNT_DISTINCT`，建議改用 [`COUNT(DISTINCT)`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions?hl=zh-tw#count)。
+* 如果查詢使用 `COUNT(DISTINCT <value>, <n>)` 且 `<n>` 值很大，建議改用 `GROUP BY`。詳情請參閱 [`COUNT(DISTINCT)`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions?hl=zh-tw#count)。
+* 如果查詢使用 `UNIQUE`，建議改用 `GROUP BY`，或在子選取項目中使用[視窗函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls?hl=zh-tw)。
 * 如果查詢使用 `LIMIT` 子句具體化許多資料列，請考慮篩選其他資料欄 (例如 `ROW_NUMBER()`)，或完全移除 `LIMIT` 子句，以允許寫入平行處理。
 * 如果查詢使用深度巢狀檢視表和 `WITH` 子句，複雜度可能會呈指數級成長，進而達到上限。
 * 使用暫存資料表，而非 `WITH` 子句。`WITH` 子句可能需要重新計算多次，導致查詢變得複雜，進而降低速度。將中繼結果保存在臨時資料表中，可降低複雜度。
 * 避免使用 `UNION ALL` 查詢。
 * 如果查詢使用 `MATCH_RECOGNIZE`，請修改 [`PARTITION BY` 子句](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw#match_recognize_partition_by)來縮減分區大小，或新增 `PARTITION BY` 子句 (如果沒有的話)。
+* 如果工作失敗並顯示 `Table TABLE_NAME will have
+  N partitions when the job finishes, exceeding limit 10000`，請在 [`INFORMATION_SCHEMA.PARTITIONS`](https://docs.cloud.google.com/bigquery/docs/information-schema-partitions?hl=zh-tw) 中檢查資料表的分區數量、設定[分區到期時間](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#partition-expiration)，或明確刪除不必要的分區 (因為最近到期的分區可能需要一段時間才會反映，除非明確刪除)。請參閱[分區資料表配額](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#partitioned_tables)。
+* 如果工作失敗並顯示 `Too many DML statements outstanding against table
+  TABLE_NAME, limit is 20`，請將多個較小的 `UPDATE`、`DELETE` 或 `MERGE` 陳述式分組為較少、較大的工作，或對目標資料表進行分區和分群。請參閱「[DML 陳述式過多](#too_many_DML)」和「[資料表有過多待處理的 DML 陳述式](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas?hl=zh-tw#ts-too-many-dml-statements-against-table-quota)」。
+* 如果工作失敗並顯示 `All our servers are busy processing data transferred
+  between regions. Please try again shortly.`，請重試查詢，或降低跨雲端 (`BigQuery Omni`) join、`CREATE TABLE AS SELECT`、`INSERT INTO SELECT` 或 `LOAD DATA` 查詢的並行率 (或[與支援團隊聯絡](https://docs.cloud.google.com/bigquery/docs/getting-support?hl=zh-tw)，要求提高跨區域移轉查詢頻率限制)。請參閱「[BigQuery Omni join 限制](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw#cross-cloud_join_limitations)」和「[使用跨雲端移轉功能載入資料](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer?hl=zh-tw)」。
+* 如果工作失敗並顯示 `Google Sheets service overloaded for spreadsheet
+  id: SPREADSHEET_ID`，請重試暫時性的 Google 試算表超載，或將試算表資料複製到永久 [BigQuery 資料表](https://docs.cloud.google.com/bigquery/docs/writing-results?hl=zh-tw#permanent-table) (並重構檢視表或錯開[排定的查詢](https://docs.cloud.google.com/bigquery/docs/scheduling-queries?hl=zh-tw)，減少對同一試算表的並行讀取)。
+* 如果 BigQuery Omni 查詢失敗並顯示 `Response too large. Query returned ACTUAL_MBMB, and limit is
+  LIMIT_MBMB.`，表示查詢輸出內容超出 [BigQuery Omni 查詢結果大小上限](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#max_result_size_query_omni)或[跨雲端移轉限制](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer?hl=zh-tw#filter-data)。篩選或匯總查詢，傳回較小的結果，或使用 [`EXPORT DATA` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements?hl=zh-tw)，將大型結果直接匯出至外部儲存空間，而非目的地資料表。
 
 詳情請參閱下列資源：
 
@@ -967,11 +1006,11 @@ tcpdump -s 0 -w debug.pcap -K -n host bigquery.googleapis.com
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-23 (世界標準時間)。
+上次更新時間：2026-10-24 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-23 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-24 (世界標準時間)。"],[],[]]

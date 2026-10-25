@@ -230,5 +230,5 @@ WITH
     FROM
       `PROJECT_ID.region-US`.INFORMATION_SCHEMA.JOBS_TIMELINE_BY_PROJECT
     WHERE
-      ((job_creation_time >= TIMESTAMP_SUB(start_time, INTERVAL 1200 MINUTE
+      ((job_creation_time >= TIMESTAMP_SUB(start_time, INTERVAL 1200 MINUTE)
 ```

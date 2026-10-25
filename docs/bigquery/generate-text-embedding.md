@@ -16,40 +16,33 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 使用 AI.GENERATE\_EMBEDDING 函式生成文字嵌入
 
-本文說明如何建立參照嵌入模型的 BigQuery ML [遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw)。接著，您將使用前面建立的模型和 [`AI.GENERATE_EMBEDDING` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding?hl=zh-tw)，透過 BigQuery[標準資料表](https://docs.cloud.google.com/bigquery/docs/tables-intro?hl=zh-tw#standard-tables)的資料建立文字嵌入。
+本文說明如何建立參照嵌入模型的 BigQuery ML [遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw)。接著，您將使用前面建立的模型和 [`AI.GENERATE_EMBEDDING` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding?hl=zh-tw)，透過 BigQuery [標準資料表](https://docs.cloud.google.com/bigquery/docs/tables-intro?hl=zh-tw#standard-tables)中的資料建立文字嵌入。
 
-支援的遠端模型類型如下：
+支援下列類型的遠端模型：
 
 * [遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw)
-  over
   [Agent Platform 嵌入模型](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models?hl=zh-tw#embeddings-models)。
-* [遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open?hl=zh-tw)
-  透過
-  [支援的開放式模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open?hl=zh-tw#supported_open_models)。
+* [支援的開放式模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open?hl=zh-tw#supported_open_models)上的[遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open?hl=zh-tw)。
 
 ## 必要的角色
 
-如要建立遠端模型並使用 `AI.GENERATE_EMBEDDING` 函式，您需要下列 Identity and Access Management (IAM) 角色：
+如要建立遠端模型並使用 `AI.GENERATE_EMBEDDING` 函式，您必須具備下列 Identity and Access Management (IAM) 角色：
 
-* 建立及使用 BigQuery 資料集、資料表和模型：
-  專案的 BigQuery 資料編輯器 (`roles/bigquery.dataEditor`)。
-* 建立、委派及使用 BigQuery 連線：
-  專案的 BigQuery 連線管理員 (`roles/bigquery.connectionsAdmin`)。
+* 建立及使用 BigQuery 資料集、資料表和模型：專案的 BigQuery 資料編輯者 (`roles/bigquery.dataEditor`)。
+* 建立、委派及使用 BigQuery 連線：專案的 BigQuery 連線管理員 (`roles/bigquery.connectionsAdmin`)。
 
-  如果沒有設定[預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw)，可以在執行 `CREATE MODEL` 陳述式時建立並設定連線。如要這麼做，您必須具備專案的 BigQuery 管理員角色 (`roles/bigquery.admin`)。詳情請參閱「[設定預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw#configure_the_default_connection)」。
-* 將權限授予連線的服務帳戶：在含有 Gemini Enterprise Agent Platform 端點的專案中，授予專案 IAM 管理員 (`roles/resourcemanager.projectIamAdmin`) 權限。這是您透過將模型名稱指定為端點所建立遠端模型的目前專案。這是您透過指定網址做為端點建立遠端模型時，網址中識別的專案。
+  如果您未設定[預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw)，可以在執行 `CREATE MODEL` 陳述式時建立並設定。如要執行這項操作，您必須具備專案的 BigQuery 管理員 (`roles/bigquery.admin`) 角色。詳情請參閱「[設定預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw#configure_the_default_connection)」。
+* 將權限授予連線的服務帳戶：在含有 Gemini Enterprise Agent Platform 端點的專案中，具備專案 IAM 管理員 (`roles/resourcemanager.projectIamAdmin`) 角色。這是您將模型名稱指定為端點，所建立遠端模型的目前專案。如果您指定網址做為端點，並建立遠端模型，這個專案就是網址中指定的專案。
 * 建立 BigQuery 工作：專案的 BigQuery 工作使用者 (`roles/bigquery.jobUser`)。
 
-這些預先定義的角色具備執行本文中工作所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
+這些預先定義的角色具備執行本文件所述工作所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
 #### 所需權限
 
 * 建立資料集：`bigquery.datasets.create`
 * 建立、委派及使用連線：
   `bigquery.connections.*`
-* 設定服務帳戶權限：
-  `resourcemanager.projects.getIamPolicy` 和
-  `resourcemanager.projects.setIamPolicy`
+* 設定服務帳戶權限：`resourcemanager.projects.getIamPolicy`和`resourcemanager.projects.setIamPolicy`
 * 建立模型並執行推論：
   + `bigquery.jobs.create`
   + `bigquery.models.create`
@@ -62,21 +55,21 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ## 事前準備
 
-1. 在 Google Cloud 控制台的專案選擇器頁面中，選取或建立 Google Cloud 專案。
+1. 在 Google Cloud 控制台的專案選取器頁面中，選取或建立 Google Cloud 專案。
 
    **選取或建立專案所需的角色**
 
-   * **選取專案**：選取專案時，不需要具備特定 IAM 角色，只要您在專案中獲派角色，即可選取該專案。
-   * **建立專案**：如要建立專案，您需要「專案建立者」角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
-   **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，而不要選取現有專案。完成這些步驟後，您就可以刪除專案，並移除與該專案相關聯的所有資源。
+   * **選取專案**：選取專案時不需要特定 IAM 角色，只要您獲派某個專案的角色，即可選取該專案。
+   * **建立專案**：如要建立專案，您必須具備專案建立者角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，不要選取現有專案。如果採用這種做法，當您完成這些步驟後，就可以直接刪除該專案，並移除相關聯的所有資源。
 
    [前往專案選取器](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
-2. [確認專案已啟用計費功能 Google Cloud](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project) 。
-3. 啟用 BigQuery、BigQuery Connection 和 Agent Platform API (如果尚未啟用)。
+2. [確認 Google Cloud 專案已啟用計費功能](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project)。
+3. 啟用 BigQuery、BigQuery Connection 和 Agent Platform API (如有尚未啟用的 API)。
 
-   **啟用 API 時所需的角色**
+   **啟用 API 所需的角色**
 
-   如要啟用 API，您必須具備 `serviceusage.services.enable` 權限。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用情形管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「Service Usage 管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
    [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery.googleapis.com%2Cbigqueryconnection.googleapis.com%2Caiplatform.googleapis.com&hl=zh-tw)
 
@@ -92,20 +85,20 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 2. 點選左側窗格中的 explore「Explorer」。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
-3. 在「Explorer」窗格中，按一下專案名稱。
-4. 依序點按 more\_vert **「View actions」(查看動作) > 「Create dataset」(建立資料集)**。
-5. 在「建立資料集」頁面中，執行下列操作：
+3. 在「Explorer」窗格中，點選專案名稱。
+4. 依序點選 more\_vert「View actions」(查看動作)**>「Create dataset」(建立資料集)**。
+5. 在「Create dataset」(建立資料集) 頁面執行下列操作：
 
-   1. 在「Dataset ID」(資料集 ID) 中，輸入資料集名稱。
+   1. 在「資料集 ID」部分，輸入資料集名稱。
    2. 在「位置類型」部分，選取「區域」或「多區域」。
 
-      * 如果選取「區域」，請從「區域」清單中選取位置。
-      * 如果選取「多區域」，請從「多區域」清單中選取「美國」或「歐洲」。
+      * 如果選取「Region」(區域)，請從「Region」(區域) 清單中選取位置。
+      * 如果選取「Multi-region」(多區域)，請從「Multi-region」(多區域) 清單中選取「US」(美國) 或「Europe」(歐洲)。
    3. 點選「建立資料集」。
 
 ### bq
 
-1. 如要建立新的資料集，請使用 [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#mk-dataset) 指令，並加上 `--location` 旗標：
+1. 如要建立新的資料集，請使用 [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#mk-dataset) 指令並加上 `--location` 旗標：
 
    ```
    bq --location=LOCATION mk -d DATASET_ID
@@ -115,7 +108,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
    * `LOCATION`：資料集的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
    * `DATASET_ID`：您要建立的資料集 ID。
-2. 確認資料集已建立完成：
+2. 確認資料集已建立：
 
    ```
    bq ls
@@ -123,9 +116,9 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ## 建立連線
 
-建立[Cloud 資源連線](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection?hl=zh-tw)，並取得連線的服務帳戶。在與上一步建立的資料集相同的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)中建立連線。
+建立 [Cloud 資源連結](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection?hl=zh-tw)，並取得連結的服務帳戶。建立連線時，請選擇與上一步建立的資料集相同的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
 
-如果已設定預設連線，或具備 BigQuery 管理員角色，可以略過這個步驟。
+如果您已設定預設連線，或具備 BigQuery 管理員角色，則可略過這個步驟。
 
 選取下列選項之一：
 
@@ -137,11 +130,11 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 2. 點選左側窗格中的 explore「Explorer」。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
-3. 在「Explorer」窗格中展開專案名稱，然後按一下「Connections」。
-4. 在「Connections」(連線) 頁面中，按一下「Create connection」(建立連線)。
-5. 在「連線類型」中，選擇「Vertex AI 遠端模型、遠端函式、BigLake 和 Spanner (Cloud 資源)」。
-6. 在「連線 ID」欄位中，輸入連線名稱。
-7. 在「位置類型」中，選取連線位置。連線應與資料集等其他資源位於同一位置。
+3. 在「Explorer」窗格中展開專案名稱，然後點選「Connections」(連線)。
+4. 在「Connections」(連線) 頁面，按一下「Create connection」(建立連線)。
+5. 在「連線類型」部分，選擇「Vertex AI 遠端模型、遠端函式、BigLake 和 Spanner (Cloud 資源)」。
+6. 在「連線 ID」欄位輸入連線名稱。
+7. 在「位置類型」部分，選取連線位置。連線應與資料集等其他資源位於相同位置。
 8. 點選「建立連線」。
 9. 點選「前往連線」。
 10. 在「連線資訊」窗格中，複製服務帳戶 ID，以便在後續步驟中使用。
@@ -164,12 +157,12 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
      );
    ```
 
-   請替換下列項目：
+   替換下列內容：
 
-   * `CONNECTION_NAME`：連線名稱，格式為 `PROJECT_ID.LOCATION.CONNECTION_ID`、`LOCATION.CONNECTION_ID` 或 `CONNECTION_ID`。如果省略專案或位置，系統會從執行陳述式的專案和位置推斷。
+   * `CONNECTION_NAME`：連線名稱，格式為 `PROJECT_ID.LOCATION.CONNECTION_ID`、`LOCATION.CONNECTION_ID` 或 `CONNECTION_ID`。如果省略專案或位置，系統會根據執行陳述式的專案和位置推論。
    * `FRIENDLY_NAME` (選用)：連線的描述性名稱。
    * `DESCRIPTION` (選用)：連線說明。
-3. 按一下「執行」play\_circle。
+3. 按一下「play\_circle 執行」。
 
 如要進一步瞭解如何執行查詢，請參閱「[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)」。
 
@@ -186,18 +179,18 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
    更改下列內容：
 
-   * `REGION`：您的[連線區域](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#supported_locations)
+   * `REGION`：[連線區域](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#supported_locations)
    * `PROJECT_ID`：您的 Google Cloud 專案 ID
-   * `CONNECTION_ID`：連線的 ID
+   * `CONNECTION_ID`：連線 ID
 
-   建立連線資源時，BigQuery 會建立專屬的系統服務帳戶，並將其與連線建立關聯。
+   建立連線資源時，BigQuery 會建立專屬的系統服務帳戶，並與連線建立關聯。
 
-   **疑難排解**：如果收到下列連線錯誤訊息，請[更新 Google Cloud SDK](https://docs.cloud.google.com/sdk/docs/quickstart?hl=zh-tw)：
+   **疑難排解**：如果收到下列連線錯誤，請[更新 Google Cloud SDK](https://docs.cloud.google.com/sdk/docs/quickstart?hl=zh-tw)：
 
    ```
    Flags parsing error: flag --connection_type=CLOUD_RESOURCE: value should be one of...
    ```
-2. 擷取並複製服務帳戶 ID，以供後續步驟使用：
+2. 擷取並複製服務帳戶 ID，以便在後續步驟中使用：
 
    ```
    bq show --connection PROJECT_ID.REGION.CONNECTION_ID
@@ -212,9 +205,9 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ### Python
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定操作說明進行操作。詳情請參閱 [BigQuery Python API 參考文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 import google.api_core.exceptions
@@ -266,9 +259,9 @@ def create_connection(
 
 ### Node.js
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定操作說明進行操作。詳情請參閱 [BigQuery Node.js API 參考文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 const {ConnectionServiceClient} =
@@ -321,15 +314,80 @@ async function createConnection(projectId, location, connectionId) {
 }
 ```
 
-### Terraform
+### Java
 
-請使用 [`google_bigquery_connection`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_connection) 資源。
-
-**注意：** 如要使用 Terraform 建立 BigQuery 物件，請務必啟用 [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定操作說明進行操作。詳情請參閱 [BigQuery Java API 參考文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
-下列範例會在 `US` 區域中建立名為 `my_cloud_resource_connection` 的 Cloud 資源連結：
+```
+import com.google.api.gax.rpc.AlreadyExistsException;
+import com.google.api.gax.rpc.ApiException;
+import com.google.cloud.bigquery.connection.v1.CloudResourceProperties;
+import com.google.cloud.bigquery.connection.v1.Connection;
+import com.google.cloud.bigquery.connection.v1.CreateConnectionRequest;
+import com.google.cloud.bigquery.connection.v1.LocationName;
+import com.google.cloud.bigqueryconnection.v1.ConnectionServiceClient;
+import java.io.IOException;
+
+public class CreateConnection {
+
+  /**
+   * Creates a BigQuery connection to a Cloud Resource. A Cloud Resource connection provisions a
+   * service account that can be granted access to other Google Cloud resources for federated
+   * queries.
+   *
+   * @param projectId The Google Cloud project ID (for example, "example-project-id").
+   * @param location The geographic location of the connection (for example, "us-central1").
+   * @param connectionId The ID of the connection to create (for example, "example-connection-id").
+   */
+  public static void createConnection(String projectId, String location, String connectionId) {
+    LocationName parent = LocationName.of(projectId, location);
+
+    // CloudResourceProperties provisions a managed Google Cloud service account on creation.
+    CloudResourceProperties cloudResourceProperties = CloudResourceProperties.newBuilder().build();
+    Connection connection =
+        Connection.newBuilder()
+            .setFriendlyName("Example Connection")
+            .setDescription("Cloud Resource connection for federated queries.")
+            .setCloudResource(cloudResourceProperties)
+            .build();
+
+    CreateConnectionRequest request =
+        CreateConnectionRequest.newBuilder()
+            .setParent(parent.toString())
+            .setConnectionId(connectionId)
+            .setConnection(connection)
+            .build();
+
+    try (ConnectionServiceClient client = ConnectionServiceClient.create()) {
+      Connection response = client.createConnection(request);
+
+      System.out.printf("Successfully created connection: %s%n", response.getName());
+      System.out.printf("Friendly name: %s%n", response.getFriendlyName());
+      System.out.printf(
+          "Service Account: %s%n", response.getCloudResource().getServiceAccountId());
+    } catch (AlreadyExistsException err) {
+      System.err.printf(
+          "error: connection '%s' already exists in location '%s' for project '%s': %s%n",
+          connectionId, location, projectId, err.getMessage());
+    } catch (ApiException | IOException err) {
+      System.err.printf(
+          "error: failed to create connection '%s' in location '%s' for project '%s': %s%n",
+          connectionId, location, projectId, err.getMessage());
+    }
+  }
+```
+
+### Terraform
+
+使用 [`google_bigquery_connection`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_connection) 資源。
+
+**注意：** 如要使用 Terraform 建立 BigQuery 物件，必須啟用 [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest?hl=zh-tw)。
+
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+
+下列範例會在 `US` 區域建立名為 `my_cloud_resource_connection` 的 Cloud 資源連結：
 
 ```
 # This queries the provider for project information.
@@ -352,29 +410,29 @@ resource "google_bigquery_connection" "default" {
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
 2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
 
-   每個專案只需要執行一次這個指令，而且可以在任何目錄中執行。
+   每個專案只需執行這個指令一次，而且可以在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
    ```
 
-   如果您在 Terraform 設定檔中設定明確值，環境變數就會遭到覆寫。
+   如果您在 Terraform 設定檔中設定明確的值，環境變數就會遭到覆寫。
 
 ## 準備目錄
 
 每個 Terraform 設定檔都必須有自己的目錄 (也稱為*根模組*)。
 
-1. 在 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw) 中建立目錄，並在該目錄中建立新檔案。檔案名稱的副檔名必須是 `.tf`，例如 `main.tf`。在本教學課程中，這個檔案稱為 `main.tf`。
+1. 在 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw) 中建立目錄，並在該目錄中建立新檔案。檔案名稱必須有 `.tf` 副檔名，例如 `main.tf`。在本教學課程中，這個檔案稱為 `main.tf`。
 
    ```
    mkdir DIRECTORY && cd DIRECTORY && touch main.tf
    ```
-2. 如果您正在學習教學課程，可以複製每個章節或步驟中的程式碼範例。
+2. 如果您正在進行教學課程，可以複製每個章節或步驟中的程式碼範例。
 
-   將程式碼範例複製到新建立的 `main.tf` 中。
+   將程式碼範例複製到新建立的 `main.tf`。
 
-   視需要從 GitHub 複製程式碼。如果 Terraform 片段是端對端解決方案的一部分，建議您使用這個方法。
-3. 查看並修改範例參數，套用至您的環境。
+   您也可以從 GitHub 複製程式碼。如果 Terraform 程式碼片段是端對端解決方案的一部分，建議您採用這種做法。
+3. 請查看並修改範例參數，以便套用至您的環境。
 4. 儲存變更。
 5. 初始化 Terraform。每個目錄只需執行一次這項操作。
 
@@ -382,7 +440,7 @@ resource "google_bigquery_connection" "default" {
    terraform init
    ```
 
-   如要使用最新版 Google 供應商，請加入 `-upgrade` 選項：
+   如要使用最新版 Google 供應商，請視需要加入 `-upgrade` 選項：
 
    ```
    terraform init -upgrade
@@ -390,7 +448,7 @@ resource "google_bigquery_connection" "default" {
 
 ## 套用變更
 
-1. 查看設定，確認 Terraform 即將建立或更新的資源符合您的預期：
+1. 查看設定，確認 Terraform 要建立或更新的資源符合預期：
 
    ```
    terraform plan
@@ -404,17 +462,17 @@ resource "google_bigquery_connection" "default" {
    ```
 
    等待 Terraform 顯示「Apply complete!」訊息。
-3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)即可查看結果。在 Google Cloud 控制台中，前往 UI 中的資源，確認 Terraform 已建立或更新這些資源。
+3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)即可查看結果。在 Google Cloud 控制台的使用者介面中，前往資源頁面，確認 Terraform 已建立或更新資源。
 
-**注意：**Terraform 範例通常會假設專案已啟用必要的 API。 Google Cloud
+**注意：**Terraform 範例通常會假設 Google Cloud 專案已啟用必要的 API。
 
-### 將角色指派給遠端模型連線的服務帳戶
+### 將角色授予遠端模型連線的服務帳戶
 
 您必須將 Agent Platform 使用者角色授予連線的服務帳戶。
 
-如果您打算在建立遠端模型時將端點指定為網址 (例如 `endpoint = 'https://us-central1-aiplatform.googleapis.com/v1/projects/myproject/locations/us-central1/publishers/google/models/text-embedding-005'`)，請在網址指定的相同專案中授予這個角色。
+如果您打算在建立遠端模型時，將端點指定為網址 (例如 `endpoint = 'https://us-central1-aiplatform.googleapis.com/v1/projects/myproject/locations/us-central1/publishers/google/models/text-embedding-005'`)，請在網址指定的專案中授予這個角色。
 
-如果您打算在建立遠端模型時使用模型名稱指定端點 (例如 `endpoint = 'text-embedding-005'`)，請在您打算建立遠端模型的專案中授予這個角色。
+如果您打算在建立遠端模型時，使用模型名稱 (例如 `endpoint = 'text-embedding-005'`) 指定端點，請在您打算建立遠端模型的專案中授予這個角色。
 
 在其他專案中授予角色會導致錯誤 `bqcx-1234567890-wxyz@gcp-sa-bigquery-condel.iam.gserviceaccount.com does not have the permission to access resource`。
 
@@ -424,10 +482,10 @@ resource "google_bigquery_connection" "default" {
 
 1. 前往「IAM & Admin」(IAM 與管理) 頁面。
 
-   [前往「IAM & Admin」(IAM 與管理)](https://console.cloud.google.com/project/_/iam-admin?hl=zh-tw)
-2. 按一下 person\_add「授予存取權」。
+   [前往「IAM & Admin」(IAM 與管理) 頁面](https://console.cloud.google.com/project/_/iam-admin?hl=zh-tw)
+2. 按一下person\_add「Grant access」(授予存取權)。
 
-   「新增主體」對話方塊隨即開啟。
+   「Add principals」(新增主體) 對話方塊隨即開啟。
 3. 在「新增主體」欄位，輸入先前複製的服務帳戶 ID。
 4. 在「選取角色」欄位中，搜尋「Agent Platform 使用者」。
 5. 按一下 [儲存]。
@@ -440,14 +498,14 @@ resource "google_bigquery_connection" "default" {
 gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount:MEMBER' --role='roles/aiplatform.user' --condition=None
 ```
 
-請替換下列項目：
+替換下列內容：
 
 * `PROJECT_NUMBER`：您的專案編號
 * `MEMBER`：您先前複製的服務帳戶 ID
 
-## 選擇開放模型部署方法
+## 選擇開放原始碼模型部署方法
 
-如果您要透過[支援的開放模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open?hl=zh-tw#supported_open_models)建立遠端模型，可以在 `CREATE MODEL` 陳述式中指定 Agent Platform Model Garden 或 Hugging Face 模型 ID，在建立遠端模型的同時自動部署開放模型。或者，您也可以先手動部署開放模型，然後在 `CREATE MODEL` 陳述式中指定模型端點，將該開放模型與遠端模型搭配使用。詳情請參閱「[部署開放模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open?hl=zh-tw#deploy_open_models)」。
+如果您是透過[支援的開放模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open?hl=zh-tw#supported_open_models)建立遠端模型，可以在 `CREATE MODEL` 陳述式中指定 Agent Platform Model Garden 或 Hugging Face 模型 ID，在建立遠端模型的同時自動部署開放模型。或者，您也可以先手動部署開放原始碼模型，然後在 `CREATE MODEL` 陳述式中指定模型端點，將該開放原始碼模型與遠端模型搭配使用。詳情請參閱「[部署開放原始碼模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open?hl=zh-tw#deploy_open_models)」。
 
 ## 建立 BigQuery ML 遠端模型
 
@@ -467,7 +525,7 @@ gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount
    OPTIONS (ENDPOINT = 'ENDPOINT');
    ```
 
-   請替換下列項目：
+   替換下列內容：
 
    * `PROJECT_ID`：您的專案 ID。
    * `DATASET_ID`：要包含模型的資料集 ID。這個資料集必須與您使用的連線位於相同[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
@@ -475,12 +533,12 @@ gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount
    * `REGION`：連線使用的區域。
    * `CONNECTION_ID`：BigQuery 連線的 ID。
 
-     如要取得這個值，請在 Google Cloud 控制台中[查看連線詳細資料](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw#view-connections)，然後複製「連線 ID」中顯示的完整連線 ID 最後一個部分的值。例如：`projects/myproject/locations/connection_location/connections/myconnection`。
+     如要取得這個值，請在 Google Cloud 控制台中[查看連線詳細資料](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw#view-connections)，然後複製「Connection ID」中顯示的完整連線 ID 最後一個部分的值。例如：`projects/myproject/locations/connection_location/connections/myconnection`。
    * `ENDPOINT`：要使用的嵌入模型名稱。詳情請參閱 [`ENDPOINT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw#endpoint)。
 
-     您指定的 Agent Platform 模型必須位於您建立遠端模型的位置。詳情請參閱「[位置](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw#locations)」。
+     您指定的 Agent Platform 模型必須位於您建立遠端模型的地區。詳情請參閱「[位置](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw#locations)」。
 
-### 全新開放式模型
+### 全新開放原始碼模型
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -505,7 +563,7 @@ gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount
    );
    ```
 
-   請替換下列項目：
+   替換下列內容：
 
    * `PROJECT_ID`：您的專案 ID。
    * `DATASET_ID`：要包含模型的資料集 ID。這個資料集必須與您使用的連線位於相同[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
@@ -513,37 +571,35 @@ gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount
    * `REGION`：連線使用的區域。
    * `CONNECTION_ID`：BigQuery 連線的 ID。
 
-     如要取得這個值，請在 Google Cloud 控制台中[查看連線詳細資料](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw#view-connections)，然後複製「連線 ID」中顯示的完整連線 ID 最後一個部分的值。例如：`projects/myproject/locations/connection_location/connections/myconnection`。
-   * `HUGGING_FACE_MODEL_ID`：`STRING` 值，指定[支援的 Hugging Face 模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open?hl=zh-tw#hugging-face-models)的模型 ID，格式為 `provider_name`/`model_name`，例如 `deepseek-ai/DeepSeek-R1`。如要取得模型 ID，請在 Hugging Face Model Hub 中按一下模型名稱，然後從模型資訊卡的頂端複製模型 ID。
-   * `MODEL_GARDEN_MODEL_NAME`：`STRING` 值，指定[支援的 Gemini Enterprise Agent Platform Model Garden 模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open?hl=zh-tw#model-garden-models)的模型 ID 和模型版本，格式為 `publishers/publisher`/models/`model_name`@`model_version`。
-     例如：`publishers/openai/models/gpt-oss@gpt-oss-120b`。如要取得模型 ID，請在 Agent Platform Model Garden 中按一下模型資訊卡，然後從「Model ID」欄位複製模型 ID。如要取得預設模型版本，請從模型資訊卡上的「版本」欄位複製。如要查看其他可用的模型版本，請按一下「部署模型」，然後點選「資源 ID」欄位。
-   * `HUGGING_FACE_TOKEN`：`STRING` 值，用於指定要使用的 Hugging Face [使用者存取權杖](https://huggingface.co/docs/hub/en/security-tokens)。只有在同時為 `HUGGING_FACE_MODEL_ID` 選項指定值時，才能為這個選項指定值。
+     如要取得這個值，請在 Google Cloud 控制台中[查看連線詳細資料](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw#view-connections)，然後複製「Connection ID」中顯示的完整連線 ID 最後一個部分的值。例如：`projects/myproject/locations/connection_location/connections/myconnection`。
+   * `HUGGING_FACE_MODEL_ID`：`STRING` 值，指定[支援的 Hugging Face 模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open?hl=zh-tw#hugging-face-models) ID，格式為 `provider_name`/`model_name`。例如 `deepseek-ai/DeepSeek-R1`。如要取得模型 ID，請在 Hugging Face Model Hub 中點選模型名稱，然後從模型資訊卡頂端複製模型 ID。
+   * `MODEL_GARDEN_MODEL_NAME`：`STRING` 值，指定[支援的 Gemini Enterprise Agent Platform Model Garden 模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open?hl=zh-tw#model-garden-models) ID 和版本，格式為 `publishers/publisher`/models/`model_name`@`model_version`。例如：`publishers/openai/models/gpt-oss@gpt-oss-120b`。如要取得模型 ID，請在 Agent Platform Model Garden 中點選模型資訊卡，然後複製「Model ID」(模型 ID) 欄位中的模型 ID。如要取得預設模型版本，請從模型資訊卡的「Version」(版本) 欄位複製。如要查看其他可用的模型版本，請按一下「Deploy model」(部署模型)，然後點選「Resource ID」(資源 ID) 欄位。
+   * `HUGGING_FACE_TOKEN`：`STRING` 值，指定要使用的 Hugging Face [使用者存取權杖](https://huggingface.co/docs/hub/en/security-tokens)。只有在指定 `HUGGING_FACE_MODEL_ID` 選項的值時，才能指定這個選項的值。
 
-     權杖至少須具備 `read` 角色，但範圍較廣的權杖也適用。如果 `HUGGING_FACE_MODEL_ID` 值所識別的模型是 Hugging Face [封閉式](https://huggingface.co/docs/hub/en/models-gated)或私人模型，則必須使用這個選項。
+     權杖至少須具備 `read` 角色，但範圍較廣的權杖也適用。如果 `HUGGING_FACE_MODEL_ID` 值識別的模型是 Hugging Face [封閉式](https://huggingface.co/docs/hub/en/models-gated)或私人模型，則必須使用這個選項。
 
-     部分設有存取限制的模型需要明確同意服務條款，才能授予存取權。如要同意這些條款，請按照下列步驟操作：
+     部分受限模型需要明確同意服務條款，才能授予存取權。如要同意這些條款，請按照下列步驟操作：
 
-     1. 前往 Hugging Face 網站上的模型頁面。
-     2. 找出並詳閱模型的服務條款。服務協議的連結通常會顯示在模型資訊卡上。
-     3. 按照頁面上的提示接受條款。
-   * `MACHINE_TYPE`：`STRING` 值，指定將模型部署至 Agent Platform 時要使用的機型。如要瞭解支援的機器類型，請參閱「[機器類型](https://docs.cloud.google.com/vertex-ai/docs/predictions/configure-compute?hl=zh-tw#machine-types)」。如未指定 `MACHINE_TYPE` 選項的值，系統會使用模型的 Agent Platform Model Garden 預設機型。
-   * `MIN_REPLICA_COUNT`：`INT64` 值，用於指定在 Agent Platform 端點上部署模型時使用的最少機器副本數。服務會視端點的推論負載，增加或減少副本數量。使用的副本數量絕不會低於 `MIN_REPLICA_COUNT` 值，也不會高於 `MAX_REPLICA_COUNT` 值。`MIN_REPLICA_COUNT` 值必須介於 `[1, 4096]` 之間。預設值為 `1`。
-   * `MAX_REPLICA_COUNT`：`INT64` 值，用於指定在 Agent Platform 端點上部署模型時使用的機器副本數量上限。服務會視端點的推論負載，增加或減少副本數量。使用的副本數量絕不會低於 `MIN_REPLICA_COUNT` 值，也不會高於 `MAX_REPLICA_COUNT` 值。`MAX_REPLICA_COUNT` 值必須介於 `[1, 4096]` 之間。預設值為 `MIN_REPLICA_COUNT` 值。
-   * `RESERVATION_AFFINITY_TYPE`：判斷已部署的模型是否使用 [Compute Engine 預留項目](https://docs.cloud.google.com/compute/docs/instances/reservations-overview?hl=zh-tw)，確保在提供預測時虛擬機器 (VM) 可用性，並指定模型是否使用所有可用預留項目的 VM，或僅使用特定預留項目的 VM。詳情請參閱「[Compute Engine 預留項目親和性](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open?hl=zh-tw#reservation-affinity)」。
+     1. 前往 Hugging Face 網站的模型頁面。
+     2. 找出並詳閱模型的服務條款。服務合約的連結通常位於模型資訊卡。
+     3. 按照頁面提示接受條款。
+   * `MACHINE_TYPE`：`STRING` 值，指定將模型部署至 Agent Platform 時要使用的機器類型。如要瞭解支援的機型，請參閱「[機型](https://docs.cloud.google.com/vertex-ai/docs/predictions/configure-compute?hl=zh-tw#machine-types)」。如未指定 `MACHINE_TYPE` 選項的值，系統會使用模型的 Agent Platform Model Garden 預設機器類型。
+   * `MIN_REPLICA_COUNT`：`INT64` 值，指定將模型部署至 Agent Platform 端點時，使用的機器副本數量下限。服務會根據端點的推論負載，視需要增加或減少副本數量。使用的副本數量一律不會低於 `MIN_REPLICA_COUNT` 值，也不會高於 `MAX_REPLICA_COUNT` 值。`MIN_REPLICA_COUNT` 值必須介於 `[1, 4096]` 之間。預設值為 `1`。
+   * `MAX_REPLICA_COUNT`：`INT64` 值，指定將模型部署至 Agent Platform 端點時，使用的機器副本數量上限。服務會根據端點的推論負載，視需要增加或減少副本數量。使用的副本數量一律不會低於 `MIN_REPLICA_COUNT` 值，也不會高於 `MAX_REPLICA_COUNT` 值。`MAX_REPLICA_COUNT` 值必須介於 `[1, 4096]` 之間。預設值為 `MIN_REPLICA_COUNT` 值。
+   * `RESERVATION_AFFINITY_TYPE`：決定部署的模型是否使用 [Compute Engine 預留項目](https://docs.cloud.google.com/compute/docs/instances/reservations-overview?hl=zh-tw)，在提供預測時確保虛擬機器 (VM) 可用性，並指定模型是否使用所有可用預留項目或僅使用一個特定預留項目的 VM。詳情請參閱「[Compute Engine 預留項目相似度](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open?hl=zh-tw#reservation-affinity)」。
 
      您只能使用與 Agent Platform 共用的 Compute Engine 預留項目。詳情請參閱「[允許使用預留項目](https://docs.cloud.google.com/vertex-ai/docs/predictions/use-reservations?hl=zh-tw#allow-consumption)」。
 
      支援的值如下：
 
-     + `NO_RESERVATION`：將模型部署至 Agent Platform 端點時，不會消耗預留項目。指定 `NO_RESERVATION` 的效果與未指定預留項目親和性相同。
-     + `ANY_RESERVATION`：Agent Platform 模型部署作業會從目前專案或[與專案共用](https://docs.cloud.google.com/compute/docs/instances/reservations-overview?hl=zh-tw#how-shared-reservations-work)的 Compute Engine 預留項目，取用虛擬機器 (VM)，且這些預留項目[已設定為自動取用](https://docs.cloud.google.com/compute/docs/instances/reservations-consume?hl=zh-tw#consuming_instances_from_any_matching_reservation)。系統只會使用符合下列資格的 VM：
+     + `NO_RESERVATION`：將模型部署至 Agent Platform 端點時，不會耗用預留項目。指定 `NO_RESERVATION` 的效果與不指定預留項目相似度相同。
+     + `ANY_RESERVATION`：代理平台模型部署作業會使用 Compute Engine 預留項目的虛擬機器 (VM)，這些預留項目位於目前專案或[與專案共用](https://docs.cloud.google.com/compute/docs/instances/reservations-overview?hl=zh-tw#how-shared-reservations-work)，且[設為自動使用](https://docs.cloud.google.com/compute/docs/instances/reservations-consume?hl=zh-tw#consuming_instances_from_any_matching_reservation)。只有符合下列條件的 VM 才會用於這項作業：
        - 這些節點會使用 `MACHINE_TYPE` 值指定的機型。
-       - 如果您要在單一區域的 BigQuery 資料集中建立遠端模型，保留項目必須位於相同區域。如果資料集位於 `US` 多區域，預留位置必須位於 `us-central1` 區域。如果資料集位於`EU`多區域，預留位置就必須位於`europe-west4`區域。
+       - 如果建立遠端模型的 BigQuery 資料集位於單一區域，則預留項目必須位於相同區域。如果資料集位於 `US` 多區域，則預留項目必須位於 `us-central1` 區域。如果資料集位於 `EU` 多區域，則預留項目必須位於 `europe-west4` 區域。
 
-       如果可用預訂項目容量不足，或找不到合適的預訂項目，系統會佈建隨選 Compute Engine VM，以滿足資源需求。
-     + `SPECIFIC_RESERVATION`：Agent Platform 模型部署項目只會使用您在 `RESERVATION_AFFINITY_VALUES` 值中指定的預留項目 VM。這項預留項目必須[設為明確指定的用量](https://docs.cloud.google.com/compute/docs/instances/reservations-consume?hl=zh-tw#consuming_instances_from_a_specific_reservation)。如果指定的預留項目容量不足，部署作業就會失敗。
-   * `RESERVATION_AFFINITY_KEY`：字串
-     `compute.googleapis.com/reservation-name`。當 `RESERVATION_AFFINITY_TYPE` 值為 `SPECIFIC_RESERVATION` 時，您必須指定這個選項。
+       如果可用預留項目的容量不足，或找不到合適的預留項目，系統會佈建隨需 Compute Engine VM，以滿足資源需求。
+     + `SPECIFIC_RESERVATION`：Agent Platform 模型部署作業只會使用您在 `RESERVATION_AFFINITY_VALUES` 值中指定的預留項目 VM。這項預留項目必須[設為明確指定的消耗模式](https://docs.cloud.google.com/compute/docs/instances/reservations-consume?hl=zh-tw#consuming_instances_from_a_specific_reservation)。如果指定的預留項目容量不足，部署作業就會失敗。
+   * `RESERVATION_AFFINITY_KEY`：字串 `compute.googleapis.com/reservation-name`。如果 `RESERVATION_AFFINITY_TYPE` 值為 `SPECIFIC_RESERVATION`，則必須指定這個選項。
    * `RESERVATION_AFFINITY_VALUES`：`ARRAY<STRING>` 值，指定 Compute Engine 預留項目的完整資源名稱，格式如下：  
        
      `projects/myproject/zones/reservation_zone/reservations/reservation_name`
@@ -553,19 +609,19 @@ gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount
      您可以前往 Google Cloud 控制台的「Reservations」(預留項目) 頁面，取得預留項目名稱和可用區。詳情請參閱「[查看預留項目](https://docs.cloud.google.com/compute/docs/instances/reservations-view?hl=zh-tw#view-reservations)」。
 
      當 `RESERVATION_AFFINITY_TYPE` 值為 `SPECIFIC_RESERVATION` 時，您必須指定這個選項。
-   * `ENDPOINT_IDLE_TTL`：`INTERVAL` 值，指定閒置時間長度，超過這個時間後，系統會自動從 Agent Platform 端點取消部署開放模型。
+   * `ENDPOINT_IDLE_TTL`：`INTERVAL` 值，指定閒置多久後，系統會自動從 Agent Platform 端點取消部署開放原始碼模型。
 
-     如要啟用自動取消部署功能，請指定介於 390 分鐘 (6.5 小時) 至 7 天之間的[間隔常值](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#interval_literals)。舉例來說，您可以指定 `INTERVAL 8 HOUR`，讓模型在閒置 8 小時後解除部署。預設值為 390 分鐘 (6.5 小時)。
+     如要啟用自動取消部署功能，請指定介於 390 分鐘 (6.5 小時) 至 7 天之間的[間隔常值](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#interval_literals)值。舉例來說，指定 `INTERVAL 8 HOUR` 即可在模型閒置 8 小時後取消部署。預設值為 390 分鐘 (6.5 小時)。
 
-     模型閒置時間是指自對模型執行下列任一作業後經過的時間：
+     模型閒置時間是指對模型執行下列任一作業後經過的時間：
 
      + 執行 [`CREATE MODEL` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open?hl=zh-tw)。
      + 執行 [`ALTER MODEL` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-alter-model?hl=zh-tw)，並將 `DEPLOY_MODEL` 引數設為 `TRUE`。
-     + 向模型端點傳送推論要求。舉例來說，您可以執行 [`AI.GENERATE_EMBEDDING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding?hl=zh-tw) 或 [`AI.GENERATE_TEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text?hl=zh-tw) 函式。
+     + 向模型端點傳送推論要求。例如，執行 [`AI.GENERATE_EMBEDDING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding?hl=zh-tw) 或 [`AI.GENERATE_TEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text?hl=zh-tw) 函式。
 
-     每項作業都會將閒置計時器重設為零。在執行作業的 BigQuery 工作開始時，系統會觸發重設作業。
+     每項操作都會將閒置計時器重設為零。重設作業會在執行作業的 BigQuery 工作開始時觸發。
 
-     模型解除部署後，傳送至模型的推論要求會傳回錯誤。BigQuery 模型物件維持不變，包括模型中繼資料。如要再次使用模型進行推論，請務必在模型上執行 `ALTER MODEL` 陳述式，並將 `DEPLOY_MODEL` 選項設為 `TRUE`，重新部署模型。
+     模型取消部署後，傳送至模型的推論要求會傳回錯誤。BigQuery 模型物件 (包括模型中繼資料) 則維持不變。如要再次使用模型進行推論，您必須對模型執行 `ALTER MODEL` 陳述式，並將 `DEPLOY_MODEL` 選項設為 `TRUE`，藉此重新部署模型。
 
 ### 已部署的開放式模型
 
@@ -583,7 +639,7 @@ gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount
    );
    ```
 
-   請替換下列項目：
+   替換下列內容：
 
    * `PROJECT_ID`：您的專案 ID。
    * `DATASET_ID`：要包含模型的資料集 ID。這個資料集必須與您使用的連線位於相同[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
@@ -591,16 +647,16 @@ gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount
    * `REGION`：連線使用的區域。
    * `CONNECTION_ID`：BigQuery 連線的 ID。
 
-     如要取得這個值，請在 Google Cloud 控制台中[查看連線詳細資料](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw#view-connections)，然後複製「連線 ID」中顯示的完整連線 ID 最後一個部分的值。例如：`projects/myproject/locations/connection_location/connections/myconnection`。
-   * `ENDPOINT_REGION`：部署開放模型的區域。
+     如要取得這個值，請在 Google Cloud 控制台中[查看連線詳細資料](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw#view-connections)，然後複製「Connection ID」中顯示的完整連線 ID 最後一個部分的值。例如：`projects/myproject/locations/connection_location/connections/myconnection`。
+   * `ENDPOINT_REGION`：部署開放原始碼模型的區域。
    * `ENDPOINT_PROJECT_ID`：部署開放式模型的專案。
-   * `ENDPOINT_ID`：開放式模型使用的 HTTPS 端點 ID。如要取得端點 ID，請在「線上預測」頁面中找到開啟的模型，然後複製「ID」欄位中的值。
+   * `ENDPOINT_ID`：開放原始碼模型使用的 HTTPS 端點 ID。如要取得端點 ID，請在「[線上預測](https://console.cloud.google.com/vertex-ai/online-prediction/endpoints?hl=zh-tw)」頁面找到開啟的模型，然後複製「ID」欄位中的值。
 
 ## 生成文字嵌入
 
-使用資料表欄或查詢中的文字資料，透過 [`AI.GENERATE_EMBEDDING` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding?hl=zh-tw)生成文字嵌入。
+使用資料表資料欄或查詢中的文字資料，透過 [`AI.GENERATE_EMBEDDING` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding?hl=zh-tw)生成文字嵌入。
 
-一般來說，您會針對僅限文字的應用情境使用文字嵌入模型，並針對跨模式搜尋應用情境使用多模態嵌入模型，在相同的語意空間中生成文字和視覺內容的嵌入項目。
+一般來說，文字嵌入模型適用於純文字用途，多模態嵌入模型則適用於跨模態搜尋用途，可在相同的語意空間中生成文字和視覺內容的嵌入。
 
 ### Agent Platform 文字
 
@@ -616,19 +672,18 @@ FROM AI.GENERATE_EMBEDDING(
 );
 ```
 
-請替換下列項目：
+替換下列內容：
 
 * `PROJECT_ID`：您的專案 ID。
-* `DATASET_ID`：包含模型的資料集 ID。
-* `MODEL_NAME`：遠端模型名稱，可透過嵌入模型取得。
-* `TABLE_NAME`：包含要嵌入文字的資料表名稱。這個資料表必須有名為 `content` 的資料欄，您也可以使用別名來使用名稱不同的資料欄。
-* `CONTENT_QUERY`：查詢，結果包含名為 `content` 的 `STRING` 資料欄。
-* `TASK_TYPE`：`STRING`常值，指定預期的下游應用程式，協助模型產生品質較佳的嵌入。`TASK_TYPE`
-  接受下列值：
-  + `RETRIEVAL_QUERY`：指定給定文字是搜尋或擷取設定中的查詢。
-  + `RETRIEVAL_DOCUMENT`：指定給定文字是搜尋或擷取設定中的文件。
+* `DATASET_ID`：模型所在資料集的 ID。
+* `MODEL_NAME`：遠端模型的名稱，優先於嵌入模型。
+* `TABLE_NAME`：包含要嵌入文字的資料表名稱。這個資料表必須有名為 `content` 的資料欄，或者您可以使用別名來使用名稱不同的資料欄。
+* `CONTENT_QUERY`：查詢結果包含名為 `content` 的 `STRING` 資料欄。
+* `TASK_TYPE`：`STRING` 常值，指定預期的下游應用程式，協助模型產生品質更佳的嵌入。`TASK_TYPE` 接受下列值：
+  + `RETRIEVAL_QUERY`：指定給定文字是搜尋或檢索設定中的查詢。
+  + `RETRIEVAL_DOCUMENT`：指定在搜尋或檢索設定中，指定文字是文件。
 
-    使用這類工作時，建議在查詢陳述式中加入文件標題，以提升嵌入品質。文件標題必須位於名為 `title` 的資料欄，或別名為 `title` 的資料欄，例如：
+    使用這類工作時，建議在查詢陳述式中加入文件標題，提高嵌入品質。文件標題必須位於名為 `title` 或別名為 `title` 的資料欄中，例如：
 
     ```
           SELECT *
@@ -641,21 +696,21 @@ FROM AI.GENERATE_EMBEDDING(
           );
     ```
 
-    在輸入查詢中指定標題資料欄，即可填入傳送至模型的要求主體中的 [`title` 欄位](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/model-reference/text-embeddings-api?hl=zh-tw#request_body)。如果使用任何其他工作類型時指定 `title` 值，系統會忽略該輸入內容，且不會影響嵌入結果。
-  + `SEMANTIC_SIMILARITY`：指定給定文字將用於語意文字相似度 (STS)。
-  + `CLASSIFICATION`：指定嵌入內容將用於分類。
-  + `CLUSTERING`：指定要將嵌入內容用於叢集。
-  + `QUESTION_ANSWERING`：指定嵌入內容將用於問答。
-  + `FACT_VERIFICATION`：指定嵌入內容將用於事實查證。
-  + `CODE_RETRIEVAL_QUERY`：指定嵌入內容將用於程式碼擷取。
-* `OUTPUT_DIMENSIONALITY`：`INT64` 值，用於指定產生嵌入時使用的維度數量。舉例來說，如果您指定 `256 AS
-  output_dimensionality`，則 `embedding` 輸出資料欄會包含每個輸入值的 256 維度嵌入。
+    在輸入查詢中指定標題欄，即可填入傳送至模型的要求主體 [`title` 欄位](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/model-reference/text-embeddings-api?hl=zh-tw#request_body)。如果在使用任何其他工作類型時指定 `title` 值，系統會忽略該輸入內容，且不會影響嵌入結果。
+  + `SEMANTIC_SIMILARITY`：指定將指定文字用於語意文字相似度 (STS)。
+  + `CLASSIFICATION`：指定嵌入項目將用於分類。
+  + `CLUSTERING`：指定嵌入將用於分群。
+  + `QUESTION_ANSWERING`：指定嵌入將用於回答問題。
+  + `FACT_VERIFICATION`：指定嵌入將用於事實查核。
+  + `CODE_RETRIEVAL_QUERY`：指定嵌入項目將用於程式碼檢索。
+* `OUTPUT_DIMENSIONALITY`：`INT64` 值，指定生成嵌入時要使用的維度數量。舉例來說，如果指定 `256 AS
+  output_dimensionality`，`embedding` 輸出資料欄就會包含每個輸入值的 256 維度嵌入。
 
-  如果是 `gemini-embedding-2-preview` 或 `gemini-embedding-001` 模型，`OUTPUT_DIMENSIONALITY` 值必須在 `[1, 3072]` 範圍內。預設值為 `3072`。如果是大於 `text-embedding` 的遠端模型，`OUTPUT_DIMENSIONALITY` 值必須介於 `[1, 768]` 之間。預設值為 `768`。
+  如果是 `gemini-embedding-2-preview` 或 `gemini-embedding-001` 模型以上的遠端模型，`OUTPUT_DIMENSIONALITY` 值必須介於 `[1, 3072]` 範圍內。預設值為 `3072`。如果是 `text-embedding` 模型以上的遠端模型，`OUTPUT_DIMENSIONALITY` 值必須介於 `[1, 768]` 之間。預設值為 `768`。
 
 **範例：在表格中嵌入文字**
 
-以下範例顯示要求，將 `text_data` 資料表的 `content` 資料欄嵌入：
+下列範例顯示嵌入 `text_data` 資料表 `content` 欄的要求：
 
 ```
 SELECT *
@@ -667,14 +722,14 @@ FROM
   );
 ```
 
-### 開放式文字
+### 簡答
 
 **預覽**
 
 這項產品或功能適用《[服務專屬條款](https://docs.cloud.google.com/terms/service-terms?hl=zh-tw#1)》中「一般服務條款」一節的《正式發布前產品條款》。正式發布前的產品和功能是按照「原樣」提供，支援範圍可能有限。
 詳情請參閱[推出階段說明](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
 
-注意：如要提供意見回饋或尋求這項功能支援，請傳送電子郵件至 [bqml-feedback@google.com](mailto:bqml-feedback@google.com)。
+注意：如要提供意見回饋或尋求這項功能的支援，請與 [bqml-feedback@google.com](mailto:bqml-feedback@google.com) 聯絡。
 
 透過開放式嵌入模型，使用遠端模型生成文字嵌入：
 
@@ -686,13 +741,13 @@ FROM AI.GENERATE_EMBEDDING(
 );
 ```
 
-請替換下列項目：
+替換下列內容：
 
 * `PROJECT_ID`：您的專案 ID。
-* `DATASET_ID`：包含模型的資料集 ID。
-* `MODEL_NAME`：遠端模型名稱，可透過嵌入模型取得。
-* `TABLE_NAME`：包含要嵌入文字的資料表名稱。這個資料表必須有名為 `content` 的資料欄，您也可以使用別名來使用名稱不同的資料欄。
-* `CONTENT_QUERY`：查詢，結果包含名為 `content` 的 `STRING` 資料欄。
+* `DATASET_ID`：模型所在資料集的 ID。
+* `MODEL_NAME`：遠端模型的名稱，優先於嵌入模型。
+* `TABLE_NAME`：包含要嵌入文字的資料表名稱。這個資料表必須有名為 `content` 的資料欄，或者您可以使用別名來使用名稱不同的資料欄。
+* `CONTENT_QUERY`：查詢結果包含名為 `content` 的 `STRING` 資料欄。
 
 ### Agent Platform 多模態
 
@@ -707,21 +762,18 @@ FROM AI.GENERATE_EMBEDDING(
 );
 ```
 
-請替換下列項目：
+替換下列內容：
 
 * `PROJECT_ID`：您的專案 ID。
-* `DATASET_ID`：包含模型的資料集 ID。
+* `DATASET_ID`：模型所在資料集的 ID。
 * `MODEL_NAME`：`multimodalembedding@001` 模型上的遠端模型名稱。
-* `TABLE_NAME`：包含要嵌入文字的資料表名稱。這個資料表必須有名為 `content` 的資料欄，您也可以使用別名來使用名稱不同的資料欄。
-* `CONTENT_QUERY`：查詢，其結果包含名為 `content` 的 `STRING` 資料欄。
-* `OUTPUT_DIMENSIONALITY`：`INT64` 值，指定產生嵌入時要使用的維度數量。有效值為 `128`、`256`、`512` 和 `1408`。預設值為 `1408`。舉例來說，如果您指定
-  `256 AS output_dimensionality`，則
-  `embedding`
-  輸出資料欄會包含每個輸入值的 256 維度嵌入。
+* `TABLE_NAME`：包含要嵌入文字的資料表名稱。這個資料表必須有名為 `content` 的資料欄，或者您可以使用別名來使用名稱不同的資料欄。
+* `CONTENT_QUERY`：查詢結果包含名為 `content` 的 `STRING` 資料欄。
+* `OUTPUT_DIMENSIONALITY`：`INT64` 值，指定生成嵌入時要使用的維度數量。有效值為 `128`、`256`、`512` 和 `1408`。預設值為 `1408`。舉例來說，如果指定 `256 AS output_dimensionality`，`embedding` 輸出資料欄就會包含每個輸入值的 256 維嵌入。
 
-**示例：使用嵌入內容依語意相似度排序**
+**範例：使用嵌入功能為語意相似度排名**
 
-以下範例會嵌入一系列電影評論，並使用 [`VECTOR_SEARCH` 函式，依餘弦距離排序，與「這部電影很普通」這則評論的距離。](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions?hl=zh-tw#vector_search)距離越小，表示語意相似度越高。
+下列範例會嵌入電影評論集合，並使用 [`VECTOR_SEARCH` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions?hl=zh-tw#vector_search)，依據與「這部電影很普通」評論的餘弦距離排序。距離越小，表示語意相似度越高。
 
 如要進一步瞭解向量搜尋和向量索引，請參閱「[向量搜尋簡介](https://docs.cloud.google.com/bigquery/docs/vector-search-intro?hl=zh-tw)」。
 
@@ -780,8 +832,8 @@ ORDER BY distance_to_average_review;
 
 ## 後續步驟
 
-* 瞭解如何[使用文字和圖像嵌入執行文字轉圖像的語意搜尋](https://docs.cloud.google.com/bigquery/docs/generate-multimodal-embeddings?hl=zh-tw)。
-* 瞭解如何[使用文字嵌入執行語意搜尋和檢索增強生成 (RAG)](https://docs.cloud.google.com/bigquery/docs/vector-index-text-search-tutorial?hl=zh-tw)。
+* 瞭解如何[使用文字和圖片嵌入執行文字轉圖像語意搜尋](https://docs.cloud.google.com/bigquery/docs/generate-multimodal-embeddings?hl=zh-tw)。
+* 瞭解如何[使用文字嵌入進行語意搜尋和檢索增強生成 (RAG)](https://docs.cloud.google.com/bigquery/docs/vector-index-text-search-tutorial?hl=zh-tw)。
 
 
 
@@ -790,11 +842,11 @@ ORDER BY distance_to_average_review;
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-22 (世界標準時間)。
+上次更新時間：2026-10-24 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-22 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-24 (世界標準時間)。"],[],[]]

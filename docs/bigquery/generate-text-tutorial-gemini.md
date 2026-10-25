@@ -10,20 +10,18 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 使用 Gemini 模型和 AI.GENERATE\_TEXT 函式生成文字 透過集合功能整理內容 你可以依據偏好儲存及分類內容。
 
-本教學課程說明如何建立以 [`gemini-3.5-flash-lite` 模型](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models?hl=zh-tw#gemini-models)為基礎的[遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw)，
-以及如何使用 [`AI.GENERATE_TEXT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text?hl=zh-tw)搭配該模型，
-擷取關鍵字並執行情緒分析。
+本教學課程說明如何建立以 [`gemini-3.5-flash-lite` 模型](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models?hl=zh-tw#gemini-models)為基礎的[遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw)，以及如何搭配使用該模型與 [`AI.GENERATE_TEXT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text?hl=zh-tw)，擷取關鍵字並執行情緒分析。
 
 ## 費用
 
-在本文件中，您將使用下列 Google Cloud計費元件：
+在本文件中，您會使用下列 Google Cloud計費元件：
 
 * [BigQuery ML](https://cloud.google.com/bigquery/pricing?hl=zh-tw#bigquery-ml-pricing). You incur costs for the data that you
   process in BigQuery.
 * [Gemini Enterprise Agent Platform](https://cloud.google.com/vertex-ai/pricing?hl=zh-tw#generative_ai_models). You incur costs for calls to the
   Agent Platform service that's represented by the remote model.
 
-如要根據預測用量估算費用，請使用 [Pricing Calculator](https://docs.cloud.google.com/products/calculator?hl=zh-tw)。
+您可以使用 [Pricing Calculator](https://docs.cloud.google.com/products/calculator?hl=zh-tw)，根據預測用量估算費用。
 
 初次使用 Google Cloud 的使用者可能符合[免費試用期](https://docs.cloud.google.com/free?hl=zh-tw)資格。
 
@@ -33,7 +31,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ### 控制台
 
-- 登入 Google Cloud 帳戶。如果您是 Google Cloud新手，歡迎[建立帳戶](https://console.cloud.google.com/freetrial?hl=zh-tw)，親自體驗產品的實際應用成效。新客戶還能獲得價值 $300 美元的免費抵免額，能用於執行、測試及部署工作負載。
+- 登入 Google Cloud 帳戶。如果您未曾使用過 Google Cloud，歡迎[建立帳戶](https://console.cloud.google.com/freetrial?hl=zh-tw)，親自體驗實際使用我們產品的成效。新客戶還能獲得價值 $300 美元的免費抵免額，用於執行、測試及部署工作負載。
 - In the Google Cloud console, on the project selector page,
   select or create a Google Cloud project.
 
@@ -96,9 +94,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
   [Enable the APIs](https://console.cloud.google.com/apis/enableflow?apiid=bigquery.googleapis.com%2Cbigqueryconnection.googleapis.com%2Caiplatform.googleapis.com&hl=zh-tw)
 
-1. 請確認您在專案中具備下列角色：
-   **BigQuery 管理員**、
-   **專案 IAM 管理員**
+1. 確認您具備下列專案角色：**BigQuery 管理員**、**專案 IAM 管理員**
 
    #### 檢查角色
 
@@ -106,8 +102,8 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
       [前往「IAM」頁面](https://console.cloud.google.com/projectselector/iam-admin/iam?supportedpurview=project&hl=zh-tw)
    2. 選取專案。
-   3. 在「主體」欄中，找出所有可識別您或您所屬群組的資料列。如要瞭解自己所屬的群組，請與管理員聯絡。
-   4. 針對指定或包含您的所有資料列，檢查「角色」欄，確認角色清單是否包含必要角色。
+   3. 在「Principal」(主體) 欄中，找出所有代表您或您所屬群組的資料列。如要瞭解您所屬的群組，請與管理員聯絡。
+   4. 在指定或包含您的所有資料列中，查看「Role」(角色) 欄，確認角色清單是否包含必要角色。
 
 
    #### 授予角色
@@ -124,9 +120,9 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ### gcloud
 
-- 登入 Google Cloud 帳戶。如果您是 Google Cloud新手，歡迎[建立帳戶](https://console.cloud.google.com/freetrial?hl=zh-tw)，親自體驗產品的實際應用成效。新客戶還能獲得價值 $300 美元的免費抵免額，能用於執行、測試及部署工作負載。
+- 登入 Google Cloud 帳戶。如果您未曾使用過 Google Cloud，歡迎[建立帳戶](https://console.cloud.google.com/freetrial?hl=zh-tw)，親自體驗實際使用我們產品的成效。新客戶還能獲得價值 $300 美元的免費抵免額，用於執行、測試及部署工作負載。
 - [安裝](https://docs.cloud.google.com/sdk/docs/install?hl=zh-tw) Google Cloud CLI。
-- 如果您使用外部識別資訊提供者 (IdP)，請先[使用聯合身分登入 gcloud CLI](https://docs.cloud.google.com/iam/docs/workforce-log-in-gcloud?hl=zh-tw)。
+- 若您採用的是外部識別資訊提供者 (IdP)，請先[使用聯合身分登入 gcloud CLI](https://docs.cloud.google.com/iam/docs/workforce-log-in-gcloud?hl=zh-tw)。
 - 執行下列指令，[初始化](https://docs.cloud.google.com/sdk/docs/initializing?hl=zh-tw) gcloud CLI：
 
   ```
@@ -136,16 +132,16 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
   **選取或建立專案所需的角色**
 
-  * **選取專案**：選取專案時，不需要具備特定 IAM 角色，只要您在專案中獲派角色，即可選取該專案。
-  * **建立專案**：如要建立專案，您需要專案建立者角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
-  **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，而不要選取現有專案。如果採用這種做法，當您完成這些步驟後，就可以直接刪除該專案，並移除相關聯的所有資源。
+  * **選取專案**：選取專案時不需要特定 IAM 角色，只要您獲派某個專案的角色，即可選取該專案。
+  * **建立專案**：如要建立專案，您必須具備專案建立者角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+  **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，不要選取現有專案。如果採用這種做法，當您完成這些步驟後，就可以直接刪除該專案，並移除相關聯的所有資源。
   * 建立 Google Cloud 專案：
 
     ```
     gcloud projects create PROJECT_ID
     ```
 
-    將 `PROJECT_ID` 替換為要建立的專案名稱。 Google Cloud
+    將 `PROJECT_ID` 替換為您要建立的 Google Cloud 專案名稱。
   * 選取您建立的 Google Cloud 專案：
 
     ```
@@ -154,18 +150,18 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
     將 `PROJECT_ID` 替換為 Google Cloud 專案名稱。
 - [確認 Google Cloud 專案已啟用計費功能](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project)。
-- 如果尚未啟用 BigQuery、BigQuery Connection 和 Agent Platform API，請啟用這些 API：
+- 啟用 BigQuery、BigQuery Connection 和 Agent Platform API (如有尚未啟用的 API)：
 
-  **啟用 API 時所需的角色**
+  **啟用 API 所需的角色**
 
-  如要啟用 API，您必須具備 `serviceusage.services.enable` 權限。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+  您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「Service Usage 管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
   ```
   gcloud services enable bigquery.googleapis.com bigqueryconnection.googleapis.com aiplatform.googleapis.com
   ```
 
 - [安裝](https://docs.cloud.google.com/sdk/docs/install?hl=zh-tw) Google Cloud CLI。
-- 如果您使用外部識別資訊提供者 (IdP)，請先[使用聯合身分登入 gcloud CLI](https://docs.cloud.google.com/iam/docs/workforce-log-in-gcloud?hl=zh-tw)。
+- 若您採用的是外部識別資訊提供者 (IdP)，請先[使用聯合身分登入 gcloud CLI](https://docs.cloud.google.com/iam/docs/workforce-log-in-gcloud?hl=zh-tw)。
 - 執行下列指令，[初始化](https://docs.cloud.google.com/sdk/docs/initializing?hl=zh-tw) gcloud CLI：
 
   ```
@@ -175,16 +171,16 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
   **選取或建立專案所需的角色**
 
-  * **選取專案**：選取專案時，不需要具備特定 IAM 角色，只要您在專案中獲派角色，即可選取該專案。
-  * **建立專案**：如要建立專案，您需要專案建立者角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
-  **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，而不要選取現有專案。如果採用這種做法，當您完成這些步驟後，就可以直接刪除該專案，並移除相關聯的所有資源。
+  * **選取專案**：選取專案時不需要特定 IAM 角色，只要您獲派某個專案的角色，即可選取該專案。
+  * **建立專案**：如要建立專案，您必須具備專案建立者角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+  **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，不要選取現有專案。如果採用這種做法，當您完成這些步驟後，就可以直接刪除該專案，並移除相關聯的所有資源。
   * 建立 Google Cloud 專案：
 
     ```
     gcloud projects create PROJECT_ID
     ```
 
-    將 `PROJECT_ID` 替換為要建立的專案名稱。 Google Cloud
+    將 `PROJECT_ID` 替換為您要建立的 Google Cloud 專案名稱。
   * 選取您建立的 Google Cloud 專案：
 
     ```
@@ -193,18 +189,17 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
     將 `PROJECT_ID` 替換為 Google Cloud 專案名稱。
 - [確認 Google Cloud 專案已啟用計費功能](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project)。
-- 如果尚未啟用 BigQuery、BigQuery Connection 和 Agent Platform API，請啟用這些 API：
+- 啟用 BigQuery、BigQuery Connection 和 Agent Platform API (如有尚未啟用的 API)：
 
-  **啟用 API 時所需的角色**
+  **啟用 API 所需的角色**
 
-  如要啟用 API，您必須具備 `serviceusage.services.enable` 權限。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+  您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「Service Usage 管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
   ```
   gcloud services enable bigquery.googleapis.com bigqueryconnection.googleapis.com aiplatform.googleapis.com
   ```
 
-1. 將角色授予使用者帳戶。針對下列每個 IAM 角色，執行一次下列指令：
-   `roles/bigquery.admin,
+1. 將角色授予使用者帳戶。針對下列各個 IAM 角色執行下列指令一次：`roles/bigquery.admin,
    roles/resourcemanager.projectIamAdmin`
 
    ```
@@ -214,12 +209,12 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
    更改下列內容：
 
    * `PROJECT_ID`：專案 ID。
-   * `USER_IDENTIFIER`：使用者帳戶的 ID。 例如：`myemail@example.com`。
+   * `USER_IDENTIFIER`：使用者帳戶 ID。 例如：`myemail@example.com`。
    * `ROLE`：授予使用者帳戶的 IAM 角色。
 
 ## 建立資料集
 
-如要建立 BigQuery 資料集，請選取下列任一選項：
+如要建立 BigQuery 資料集，請選取下列其中一個選項：
 
 ### 控制台
 
@@ -229,14 +224,14 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 2. 點選左側窗格中的 explore「Explorer」。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
-3. 在「Explorer」中展開專案，然後按一下「Datasets」。
-4. 在「資料集」頁面，按一下 add「建立資料集」。
+3. 在「Explorer」中展開專案，然後按一下「資料集」。
+4. 在「Datasets」(資料集) 頁面，按一下「Create dataset」(建立資料集)add。
 5. 在「建立資料集」窗格中，執行下列操作：
 
    * 在「Dataset ID」(資料集 ID) 中輸入 `bqml_tutorial`。
-   * 在「資料位置」部分，選取「美國」。
+   * 在「資料位置」部分，選取「US」。
 
-   其餘預設設定均保留原樣。
+   其餘設定均保留預設值。
 6. 點選「建立資料集」。
 
 ### bq
@@ -251,7 +246,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
      --description "BigQuery ML tutorial dataset." \
      bqml_tutorial
    ```
-2. 確認資料集已建立完成：
+2. 確認資料集已建立：
 
    ```
    bq ls
@@ -259,7 +254,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ### API
 
-使用已定義的[資料集資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets?hl=zh-tw)呼叫 [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert?hl=zh-tw) 方法：
+使用定義的[資料集資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets?hl=zh-tw)呼叫 [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert?hl=zh-tw) 方法：
 
 ```
 {
@@ -271,7 +266,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ## 建立連線
 
-在您建立資料集的 `US` 多區域中，建立 [Cloud 資源連結](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection?hl=zh-tw)。然後取得連線的服務帳戶。
+在建立資料集的 `US` 多區域中，建立 [Cloud 資源連結](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection?hl=zh-tw)。接著取得連線的服務帳戶。
 
 選取下列選項之一：
 
@@ -283,11 +278,11 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 2. 點選左側窗格中的 explore「Explorer」。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
-3. 在「Explorer」窗格中展開專案名稱，然後按一下「Connections」。
-4. 在「Connections」(連線) 頁面中，按一下「Create connection」(建立連線)。
-5. 在「連線類型」中，選擇「Vertex AI 遠端模型、遠端函式、BigLake 和 Spanner (Cloud 資源)」。
-6. 在「連線 ID」欄位中，輸入連線名稱。
-7. 在「位置類型」中，選取連線位置。連線應與資料集等其他資源位於同一位置。
+3. 在「Explorer」窗格中展開專案名稱，然後點選「Connections」(連線)。
+4. 在「Connections」(連線) 頁面，按一下「Create connection」(建立連線)。
+5. 在「連線類型」部分，選擇「Vertex AI 遠端模型、遠端函式、BigLake 和 Spanner (Cloud 資源)」。
+6. 在「連線 ID」欄位輸入連線名稱。
+7. 在「位置類型」部分，選取連線位置。連線應與資料集等其他資源位於相同位置。
 8. 點選「建立連線」。
 9. 點選「前往連線」。
 10. 在「連線資訊」窗格中，複製服務帳戶 ID，以便在後續步驟中使用。
@@ -310,12 +305,12 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
      );
    ```
 
-   請替換下列項目：
+   替換下列內容：
 
-   * `CONNECTION_NAME`：連線名稱，格式為 `PROJECT_ID.LOCATION.CONNECTION_ID`、`LOCATION.CONNECTION_ID` 或 `CONNECTION_ID`。如果省略專案或位置，系統會從執行陳述式的專案和位置推斷。
+   * `CONNECTION_NAME`：連線名稱，格式為 `PROJECT_ID.LOCATION.CONNECTION_ID`、`LOCATION.CONNECTION_ID` 或 `CONNECTION_ID`。如果省略專案或位置，系統會根據執行陳述式的專案和位置推論。
    * `FRIENDLY_NAME` (選用)：連線的描述性名稱。
    * `DESCRIPTION` (選用)：連線說明。
-3. 按一下「執行」play\_circle。
+3. 按一下「play\_circle 執行」。
 
 如要進一步瞭解如何執行查詢，請參閱「[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)」。
 
@@ -332,18 +327,18 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
    更改下列內容：
 
-   * `REGION`：您的[連線區域](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#supported_locations)
+   * `REGION`：[連線區域](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#supported_locations)
    * `PROJECT_ID`：您的 Google Cloud 專案 ID
-   * `CONNECTION_ID`：連線的 ID
+   * `CONNECTION_ID`：連線 ID
 
-   建立連線資源時，BigQuery 會建立專屬的系統服務帳戶，並將其與連線建立關聯。
+   建立連線資源時，BigQuery 會建立專屬的系統服務帳戶，並與連線建立關聯。
 
-   **疑難排解**：如果收到下列連線錯誤訊息，請[更新 Google Cloud SDK](https://docs.cloud.google.com/sdk/docs/quickstart?hl=zh-tw)：
+   **疑難排解**：如果收到下列連線錯誤，請[更新 Google Cloud SDK](https://docs.cloud.google.com/sdk/docs/quickstart?hl=zh-tw)：
 
    ```
    Flags parsing error: flag --connection_type=CLOUD_RESOURCE: value should be one of...
    ```
-2. 擷取並複製服務帳戶 ID，以供後續步驟使用：
+2. 擷取並複製服務帳戶 ID，以便在後續步驟中使用：
 
    ```
    bq show --connection PROJECT_ID.REGION.CONNECTION_ID
@@ -358,7 +353,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ### Python
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定操作說明進行操作。詳情請參閱 [BigQuery Python API 參考文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -412,7 +407,7 @@ def create_connection(
 
 ### Node.js
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定操作說明進行操作。詳情請參閱 [BigQuery Node.js API 參考文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -467,15 +462,80 @@ async function createConnection(projectId, location, connectionId) {
 }
 ```
 
+### Java
+
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定操作說明進行操作。詳情請參閱 [BigQuery Java API 參考文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
+
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+
+```
+import com.google.api.gax.rpc.AlreadyExistsException;
+import com.google.api.gax.rpc.ApiException;
+import com.google.cloud.bigquery.connection.v1.CloudResourceProperties;
+import com.google.cloud.bigquery.connection.v1.Connection;
+import com.google.cloud.bigquery.connection.v1.CreateConnectionRequest;
+import com.google.cloud.bigquery.connection.v1.LocationName;
+import com.google.cloud.bigqueryconnection.v1.ConnectionServiceClient;
+import java.io.IOException;
+
+public class CreateConnection {
+
+  /**
+   * Creates a BigQuery connection to a Cloud Resource. A Cloud Resource connection provisions a
+   * service account that can be granted access to other Google Cloud resources for federated
+   * queries.
+   *
+   * @param projectId The Google Cloud project ID (for example, "example-project-id").
+   * @param location The geographic location of the connection (for example, "us-central1").
+   * @param connectionId The ID of the connection to create (for example, "example-connection-id").
+   */
+  public static void createConnection(String projectId, String location, String connectionId) {
+    LocationName parent = LocationName.of(projectId, location);
+
+    // CloudResourceProperties provisions a managed Google Cloud service account on creation.
+    CloudResourceProperties cloudResourceProperties = CloudResourceProperties.newBuilder().build();
+    Connection connection =
+        Connection.newBuilder()
+            .setFriendlyName("Example Connection")
+            .setDescription("Cloud Resource connection for federated queries.")
+            .setCloudResource(cloudResourceProperties)
+            .build();
+
+    CreateConnectionRequest request =
+        CreateConnectionRequest.newBuilder()
+            .setParent(parent.toString())
+            .setConnectionId(connectionId)
+            .setConnection(connection)
+            .build();
+
+    try (ConnectionServiceClient client = ConnectionServiceClient.create()) {
+      Connection response = client.createConnection(request);
+
+      System.out.printf("Successfully created connection: %s%n", response.getName());
+      System.out.printf("Friendly name: %s%n", response.getFriendlyName());
+      System.out.printf(
+          "Service Account: %s%n", response.getCloudResource().getServiceAccountId());
+    } catch (AlreadyExistsException err) {
+      System.err.printf(
+          "error: connection '%s' already exists in location '%s' for project '%s': %s%n",
+          connectionId, location, projectId, err.getMessage());
+    } catch (ApiException | IOException err) {
+      System.err.printf(
+          "error: failed to create connection '%s' in location '%s' for project '%s': %s%n",
+          connectionId, location, projectId, err.getMessage());
+    }
+  }
+```
+
 ### Terraform
 
 使用 [`google_bigquery_connection`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_connection) 資源。
 
-**注意：** 如要使用 Terraform 建立 BigQuery 物件，請務必啟用 [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest?hl=zh-tw)。
+**注意：** 如要使用 Terraform 建立 BigQuery 物件，必須啟用 [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
-以下範例會在 `US` 區域中建立名為 `my_cloud_resource_connection` 的 Cloud 資源連結：
+下列範例會在 `US` 區域建立名為 `my_cloud_resource_connection` 的 Cloud 資源連結：
 
 ```
 # This queries the provider for project information.
@@ -496,34 +556,33 @@ resource "google_bigquery_connection" "default" {
 ## 準備 Cloud Shell
 
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
-2. 設定要套用 Terraform 設定的預設 Google Cloud 專案
-   。
+2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
 
-   每個專案只需執行一次這個指令，且可以在任何目錄中執行。
+   每個專案只需執行這個指令一次，而且可以在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
    ```
 
-   如果您在 Terraform 設定檔中設定明確值，環境變數就會遭到覆寫。
+   如果您在 Terraform 設定檔中設定明確的值，環境變數就會遭到覆寫。
 
 ## 準備目錄
 
 每個 Terraform 設定檔都必須有自己的目錄 (也稱為*根模組*)。
 
-1. 在 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw) 中建立目錄，並在該目錄中建立新檔案。檔案名稱的副檔名必須為 `.tf`，例如 `main.tf`。在本教學課程中，這個檔案稱為 `main.tf`。
+1. 在 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw) 中建立目錄，並在該目錄中建立新檔案。檔案名稱必須有 `.tf` 副檔名，例如 `main.tf`。在本教學課程中，這個檔案稱為 `main.tf`。
 
    ```
    mkdir DIRECTORY && cd DIRECTORY && touch main.tf
    ```
-2. 如果您正在按照教學課程操作，可以複製每個章節或步驟中的程式碼範例。
+2. 如果您正在進行教學課程，可以複製每個章節或步驟中的程式碼範例。
 
-   將程式碼範例複製到新建立的 `main.tf` 中。
+   將程式碼範例複製到新建立的 `main.tf`。
 
-   (選用) 從 GitHub 複製程式碼。如果 Terraform 程式碼片段是端對端解決方案的一部分，建議使用這個方法。
-3. 請檢查並修改範例參數，然後套用至您的環境。
+   您也可以從 GitHub 複製程式碼。如果 Terraform 程式碼片段是端對端解決方案的一部分，建議您採用這種做法。
+3. 請查看並修改範例參數，以便套用至您的環境。
 4. 儲存變更。
-5. 初始化 Terraform。每個目錄只需執行一次。
+5. 初始化 Terraform。每個目錄只需執行一次這項操作。
 
    ```
    terraform init
@@ -537,7 +596,7 @@ resource "google_bigquery_connection" "default" {
 
 ## 套用變更
 
-1. 查看設定，並確認 Terraform 即將建立或更新的資源符合您的預期：
+1. 查看設定，確認 Terraform 要建立或更新的資源符合預期：
 
    ```
    terraform plan
@@ -551,32 +610,32 @@ resource "google_bigquery_connection" "default" {
    ```
 
    等待 Terraform 顯示「Apply complete!」訊息。
-3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)即可查看結果。在 Google Cloud 控制台中，前往 UI 中的資源，確認 Terraform 已建立或更新這些資源。
+3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)即可查看結果。在 Google Cloud 控制台的使用者介面中，前往資源頁面，確認 Terraform 已建立或更新資源。
 
 **注意：**Terraform 範例通常會假設 Google Cloud 專案已啟用必要的 API。
 
 ## 將權限授予連線的服務帳戶
 
-將 Agent Platform 使用者 (`roles/aiplatform.user`) 角色授予連線的服務帳戶。您必須在「[開始前](#before_you_begin)」一節中建立或選取的專案中，授予這項角色。在其他專案中授予角色會導致 `bqcx-1234567890-xxxx@gcp-sa-bigquery-condel.iam.gserviceaccount.com does not have the permission to access resource` 錯誤。
+將 Agent Platform 使用者 (`roles/aiplatform.user`) 角色授予連線的服務帳戶。您必須在「[事前準備](#before_you_begin)」一節中建立或選取的專案中，授予這個角色。在其他專案中授予角色會導致錯誤 `bqcx-1234567890-xxxx@gcp-sa-bigquery-condel.iam.gserviceaccount.com does not have the permission to access resource`。
 
 如要授予角色，請按照下列步驟操作：
 
-1. 前往「IAM 與管理」頁面。
+1. 前往「IAM & Admin」(IAM 與管理) 頁面。
 
-   [前往「IAM & Admin」(IAM 與管理)](https://console.cloud.google.com/project/_/iam-admin?hl=zh-tw)
-2. 按一下 person\_add「授予存取權」。
+   [前往「IAM & Admin」(IAM 與管理) 頁面](https://console.cloud.google.com/project/_/iam-admin?hl=zh-tw)
+2. 按一下 person\_add「Grant Access」(授予存取權)。
 3. 在「新增主體」欄位，輸入先前複製的服務帳戶 ID。
-4. 在「選取角色」欄位中，搜尋「Agent Platform 使用者角色」。
+4. 在「選取角色」欄位中，搜尋「Agent Platform 使用者」角色。
 5. 按一下 [儲存]。
 
 ## 建立遠端模型
 
-使用 [`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw) 陳述式建立遠端模型，代表代管的 Agent Platform 模型：
+使用 [`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw) 陳述式建立遠端模型，代表託管的 Agent Platform 模型：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在查詢編輯器執行下列陳述式：
+2. 在查詢編輯器中執行下列陳述式：
 
 ```
 CREATE OR REPLACE MODEL `bqml_tutorial.gemini_model`
@@ -587,20 +646,20 @@ CREATE OR REPLACE MODEL `bqml_tutorial.gemini_model`
 更改下列內容：
 
 * `LOCATION`：連線位置
-* `CONNECTION_ID`：BigQuery 連線的 ID
+* `CONNECTION_ID`：BigQuery 連線 ID
 
-  在 Google Cloud 控制台中[查看連線詳細資料](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw#view-connections)時，這是「連線 ID」中顯示的完整連線 ID 最後一個部分的值，例如：`projects/myproject/locations/connection_location/connections/myconnection`
+  在 Google Cloud 控制台[查看連線詳細資料](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw#view-connections)時，這個值會顯示在「Connection ID」(連線 ID) 中完整連線 ID 的最後一個部分，例如 `projects/myproject/locations/connection_location/connections/myconnection`
 
-查詢會在幾秒內完成，模型 `gemini_model` 會顯示在 `bqml_tutorial` 資料集中。沒有查詢結果。
+查詢會在幾秒內完成，之後模型 `gemini_model` 就會顯示在 `bqml_tutorial` 資料集中。沒有查詢結果。
 
-## 執行關鍵字擷取作業
+## 擷取關鍵字
 
-使用遠端模型和 `AI.GENERATE_TEXT` 函式，對 [IMDB](https://www.imdb.com/) 電影評論執行關鍵字擷取作業：
+使用遠端模型和 `AI.GENERATE_TEXT` 函式，從 [IMDB](https://www.imdb.com/) 電影評論中擷取關鍵字：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在查詢編輯器中輸入下列陳述式，對五則電影評論執行關鍵字擷取作業：
+2. 在查詢編輯器中輸入下列陳述式，從五則電影評論中擷取關鍵字：
 
    ```
    SELECT
@@ -690,7 +749,7 @@ CREATE OR REPLACE MODEL `bqml_tutorial.gemini_model`
 
 ### 刪除專案
 
-**警告**：刪除專案會出現以下結果：
+**注意**：刪除專案會造成以下影響：
 
 * **專案中的所有內容都會遭到刪除。**如果使用現有專案來進行本文中的任務，刪除專案將一併移除當中已完成的其他任務'。
 * **自訂專案 ID 會消失。**當您之前建立這個專案時，可能建立了想要在日後使用的自訂專案 ID。如要保留使用該專案 ID 的網址 (例如 `appspot.com` 網址)，請刪除在該專案中選取的資源，而不是刪除整個專案。
@@ -705,7 +764,7 @@ gcloud projects delete PROJECT_ID
 
 ### 刪除個別資源
 
-如要重複使用專案，請刪除您為本教學課程建立的資源。
+如要重複使用專案，請刪除您為教學課程建立的資源。
 
 ### 控制台
 
@@ -714,16 +773,16 @@ gcloud projects delete PROJECT_ID
    [前往「BigQuery」頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 刪除 `bqml_tutorial` 資料集。刪除資料集也會一併刪除遠端模型。
 
-   1. 在「Explorer」窗格中展開專案，然後按一下「Datasets」(資料集)。
-   2. 在「資料集」清單中，按一下資料集。
-   3. 在詳細資料窗格中，按一下 delete「刪除」。
-   4. 在「Delete dataset」(刪除資料集) 對話方塊中，按一下「Delete」(刪除)。
+   1. 在「Explorer」窗格中展開專案，然後點選「資料集」。
+   2. 在「Datasets」(資料集) 清單中，按一下資料集。
+   3. 在詳細資料窗格中，按一下「delete 刪除」。
+   4. 在「Delete dataset」(刪除資料集) 對話方塊中，點選「Delete」(刪除)。
 3. 刪除連結。
 
-   1. 在「Explorer」窗格中展開專案，然後按一下「Connections」。
-   2. 在「資料集」清單中，按一下連線。
-   3. 在詳細資料窗格中，按一下 delete「刪除」。
-   4. 在「Delete connection」(刪除連線) 對話方塊中輸入 `delete`，確認刪除。
+   1. 在「Explorer」窗格中展開專案，然後點選「連線」。
+   2. 在「Datasets」(資料集) 清單中，按一下連線。
+   3. 在詳細資料窗格中，按一下「delete 刪除」。
+   4. 在「Delete connection」(刪除連線) 對話方塊中，輸入 `delete` 確認刪除。
    5. 點選「刪除」。
 
 ### gcloud
@@ -747,8 +806,8 @@ gcloud projects delete PROJECT_ID
 
 ## 後續步驟
 
-* [選擇文字生成功能](https://docs.cloud.google.com/bigquery/docs/choose-text-generation-function?hl=zh-tw)
-* [使用資料調整模型](https://docs.cloud.google.com/bigquery/docs/tune-evaluate?hl=zh-tw)
+* [選擇文字生成函式](https://docs.cloud.google.com/bigquery/docs/choose-text-generation-function?hl=zh-tw)
+* [使用自己的資料調整模型](https://docs.cloud.google.com/bigquery/docs/tune-evaluate?hl=zh-tw)
 
 
 
@@ -757,11 +816,11 @@ gcloud projects delete PROJECT_ID
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-22 (世界標準時間)。
+上次更新時間：2026-10-24 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-22 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-24 (世界標準時間)。"],[],[]]

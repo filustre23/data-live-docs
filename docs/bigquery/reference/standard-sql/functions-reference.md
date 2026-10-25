@@ -303,5 +303,5 @@ negative values. However, the `SAFE.` prefix causes the function to return
 output: the `SAFE.` prefix has no effect.
 
 ```
-SELECT SAFE.SUBSTR('foo', 0, -2)
+SELECT SAFE.SUBSTR('foo', 0, -2
 ```

@@ -16,20 +16,13 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 使用 Storage Write API (gRPC) 串流資料
 
-本文說明如何使用 [BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api?hl=zh-tw)，將資料串流至 BigQuery。
+[BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api?hl=zh-tw) 可讓您持續將資料串流至 BigQuery 資料表，以便以最低延遲時間查詢記錄。視工作負載需求而定，您可以使用預設串流進行至少一次寫入，或建立已提交類型的串流，並使用串流偏移量進行僅需處理一次的傳遞。
 
-在串流情境中，資料會持續傳入，且應以最低延遲時間供讀取。使用 BigQuery Storage Write API (gRPC) 處理串流工作負載時，請考量您需要哪些保證：
+## 使用預設串流，確保至少一次語意
 
-* 如果應用程式只需要「至少一次」語意，請使用**預設串流**。
-* 如需僅一次語意，請在**已提交類型**中建立一或多個串流，並使用串流偏移保證僅寫入一次。
+如果應用程式可以接受目的地資料表出現重複記錄，建議您在串流情境中使用[預設串流](https://docs.cloud.google.com/bigquery/docs/write-api?hl=zh-tw#default_stream)。預設串流會使用已提交類型，因此只要伺服器確認寫入要求，即可查詢記錄，不需僅限一次傳送。
 
-在已提交類型中，伺服器確認寫入要求後，即可查詢寫入串流的資料。預設串流也會使用已提交類型，但不保證僅傳送一次。
-
-## 針對至少一次語意使用預設串流
-
-如果應用程式可接受目的地資料表中出現重複記錄的可能性，建議您使用[預設串流](https://docs.cloud.google.com/bigquery/docs/write-api?hl=zh-tw#default_stream)進行串流作業。
-
-下列程式碼顯示如何將資料寫入預設串流：
+下列程式碼說明如何將資料寫入預設串流：
 
 ### Java
 
@@ -449,7 +442,7 @@ async function appendJSONRowsDefaultStream() {
 
 ### Python
 
-這個範例說明如何使用預設串流插入含有兩個欄位的記錄：
+以下範例說明如何使用預設串流，插入含有兩個欄位的記錄：
 
 ```
 from google.cloud import bigquery_storage_v1
@@ -539,9 +532,9 @@ if __name__ == "__main__":
     BigQueryStorageWriteAppend.append_rows_proto2("PROJECT_ID","DATASET_ID", "TABLE_ID ",data=data)
 ```
 
-這個程式碼範例依附於已編譯的通訊協定模組 `sample_data_pb2.py`。如要建立已編譯的模組，請執行 `protoc --python_out=. sample_data.proto` 指令，其中 `protoc` 是通訊協定緩衝區編譯器。`sample_data.proto` 檔案會定義 Python 範例中使用的訊息格式。如要安裝 `protoc` 編譯器，請按照「[通訊協定緩衝區 - Google 的資料交換格式](https://github.com/protocolbuffers/protobuf)」中的操作說明進行。
+這個程式碼範例依附於已編譯的通訊協定模組 `sample_data_pb2.py`。如要建立已編譯的模組，請執行 `protoc --python_out=. sample_data.proto` 指令，其中 `protoc` 是通訊協定緩衝區編譯器。`sample_data.proto` 檔案定義了 Python 範例中使用的訊息格式。如要安裝 `protoc` 編譯器，請按照「[通訊協定緩衝區 - Google 的資料交換格式](https://github.com/protocolbuffers/protobuf)」中的操作說明進行。
 
-以下是 `sample_data.proto` 檔案的內容：
+`sample_data.proto` 檔案的內容如下：
 
 ```
 message SampleData {
@@ -550,7 +543,7 @@ message SampleData {
 }
 ```
 
-這個指令碼會使用 `entries.json` 檔案，其中包含要插入 BigQuery 資料表的範例列資料：
+這個指令碼會使用 `entries.json` 檔案，其中包含要插入 BigQuery 資料表的範例資料列：
 
 ```
 {"name": "Jim", "age": 35}
@@ -625,9 +618,9 @@ pub async fn sample(project_id: &str, dataset_id: &str, table_id: &str) -> anyho
 
 ### 使用多工處理
 
-您只能在預設串流的串流寫入器層級啟用[多工](https://docs.cloud.google.com/bigquery/docs/write-api-best-practices?hl=zh-tw#connection_pool_management)。如要在 Java 中啟用多工處理，請在建構 `StreamWriter` 或 `JsonStreamWriter` 物件時呼叫 `setEnableConnectionPool` 方法。
+您只能在串流寫入器層級為預設串流啟用[多工處理](https://docs.cloud.google.com/bigquery/docs/write-api-best-practices?hl=zh-tw#connection_pool_management)。如要在 Java 中啟用多工處理，請在建構 `StreamWriter` 或 `JsonStreamWriter` 物件時呼叫 `setEnableConnectionPool` 方法。
 
-啟用連線集區後，Java 用戶端程式庫會在背景管理連線，並在現有連線過於忙碌時擴充連線。如要更有效率地自動調高上限，建議調低上限。`maxInflightRequests`
+啟用連線集區後，Java 用戶端程式庫會在背景管理連線，如果現有連線過於忙碌，就會擴充連線。如要提高自動調度資源的效率，建議您降低 `maxInflightRequests` 限制。
 
 ```
 // One possible way for constructing StreamWriter
@@ -655,40 +648,40 @@ let writer = client
     .await?;
 ```
 
-## 使用已提交類型，確保「僅一次」語意
+## 使用已提交類型，確保僅一次語意
 
-如需僅一次寫入語意，請在已提交的型別中建立寫入串流。在已提交類型中，用戶端收到後端的確認後，即可查詢記錄。
+如需僅一次寫入語意，請建立已提交類型的寫入串流。在已提交類型中，用戶端收到後端確認後，即可查詢記錄。
 
-承諾類型會使用記錄偏移，在串流中提供「僅傳送一次」的傳遞機制。應用程式會在每次呼叫 [`AppendRows`](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1?hl=zh-tw#google.cloud.bigquery.storage.v1.BigQueryWrite.AppendRows) 時，使用記錄偏移指定下一個附加偏移。只有在偏移值與下一個附加偏移值相符時，系統才會執行寫入作業。詳情請參閱「[管理串流偏移，實現僅一次語意](https://docs.cloud.google.com/bigquery/docs/write-api-best-practices?hl=zh-tw#manage_stream_offsets_to_achieve_exactly-once_semantics)」。
+「已提交」類型會使用記錄偏移，在串流中僅傳送一次訊息。應用程式會使用記錄偏移，在每次呼叫 [`AppendRows`](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1?hl=zh-tw#google.cloud.bigquery.storage.v1.BigQueryWrite.AppendRows) 時指定下一個附加偏移。只有在偏移值與下一個附加偏移值相符時，系統才會執行寫入作業。詳情請參閱「[管理串流偏移，實現僅一次語意](https://docs.cloud.google.com/bigquery/docs/write-api-best-practices?hl=zh-tw#manage_stream_offsets_to_achieve_exactly-once_semantics)」。
 
-如未提供偏移量，系統會將記錄附加至串流目前的結尾。在這種情況下，如果附加要求傳回錯誤，重試要求可能會導致記錄在串流中出現多次。
+如未提供偏移值，記錄會附加至串流目前的結尾。在這種情況下，如果附加要求傳回錯誤，重試可能會導致記錄在串流中出現多次。
 
-如要使用已提交的型別，請按照下列步驟操作：
+如要使用承諾類型，請按照下列步驟操作：
 
 ### Java
 
-1. 呼叫 `CreateWriteStream`，在已提交的型別中建立一或多個串流。
-2. 針對每個串流，在迴圈中呼叫 `AppendRows`，即可寫入批次記錄。
-3. 針對每個串流呼叫 `FinalizeWriteStream`，釋放串流。呼叫這個方法後，您就無法再將任何資料列寫入串流。如果是已承諾方案，這個步驟為選用，但有助於避免超出有效串流的限制。詳情請參閱「[限制串流建立速率](https://docs.cloud.google.com/bigquery/docs/write-api-best-practices?hl=zh-tw#limit_the_rate_of_stream_creation)」。
+1. 呼叫 `CreateWriteStream`，以已提交類型建立一或多個串流。
+2. 針對每個串流，在迴圈中呼叫 `AppendRows`，以批次寫入記錄。
+3. 為每個串流呼叫 `FinalizeWriteStream`，以釋出串流。呼叫這個方法後，您就無法再將任何資料列寫入串流。在 committed 類型中，這個步驟為選用，但有助於避免超過有效串流的限制。詳情請參閱「[限制串流建立速率](https://docs.cloud.google.com/bigquery/docs/write-api-best-practices?hl=zh-tw#limit_the_rate_of_stream_creation)」。
 
 ### Node.js
 
-1. 呼叫 `createWriteStreamFullResponse`，在已提交的型別中建立一或多個串流。
-2. 針對每個串流，在迴圈中呼叫 `appendRows`，即可寫入批次記錄。
-3. 針對每個串流呼叫 `finalize`，釋放串流。呼叫這個方法後，您就無法再將任何資料列寫入串流。如果是已承諾方案，這個步驟為選用，但有助於避免超出有效串流的限制。詳情請參閱「[限制串流建立速率](https://docs.cloud.google.com/bigquery/docs/write-api-best-practices?hl=zh-tw#limit_the_rate_of_stream_creation)」。
+1. 呼叫 `createWriteStreamFullResponse`，以已提交類型建立一或多個串流。
+2. 針對每個串流，在迴圈中呼叫 `appendRows`，以批次寫入記錄。
+3. 為每個串流呼叫 `finalize`，以釋出串流。呼叫這個方法後，您就無法再將任何資料列寫入串流。在 Committed 類型中，這個步驟為選用，但有助於避免超過有效串流的限制。詳情請參閱「[限制串流建立速率](https://docs.cloud.google.com/bigquery/docs/write-api-best-practices?hl=zh-tw#limit_the_rate_of_stream_creation)」。
 
 ### Rust
 
-1. 在 `Write` 用戶端上呼叫 `create_stream`，並建構 `CommittedWriter`，以建立一或多個已提交型別的串流。
-2. 針對每個串流，在迴圈中呼叫 `append`，即可寫入批次記錄。
-3. 針對每個串流呼叫 `finalize`，釋放串流。呼叫這個方法後，您就無法再將任何資料列寫入串流。如果是已承諾方案，這個步驟為選用，但有助於避免超出有效串流的限制。詳情請參閱「[限制串流建立速率](https://docs.cloud.google.com/bigquery/docs/write-api-best-practices?hl=zh-tw#limit_the_rate_of_stream_creation)」。
+1. 在 `Write` 用戶端上呼叫 `create_stream`，並建構 `CommittedWriter`，以建立一或多個已提交類型的串流。
+2. 針對每個串流，在迴圈中呼叫 `append`，以批次寫入記錄。
+3. 為每個串流呼叫 `finalize`，以釋出串流。呼叫這個方法後，您就無法再將任何資料列寫入串流。在 committed 類型中，這個步驟為選用，但有助於避免超過有效串流的限制。詳情請參閱「[限制串流建立速率](https://docs.cloud.google.com/bigquery/docs/write-api-best-practices?hl=zh-tw#limit_the_rate_of_stream_creation)」。
 
 您無法明確刪除串流。串流會遵循系統定義的存留時間 (TTL)：
 
-* 如果沒有任何流量，已提交的串流 TTL 為三天。
-* 如果緩衝串流沒有流量，預設存留時間為七天。
+* 如果串流沒有流量，已修訂串流的存留時間為三天。
+* 如果串流沒有流量，緩衝串流的預設存留時間為七天。
 
-以下程式碼說明如何使用已提交型別：
+下列程式碼說明如何使用承諾類型：
 
 ### Java
 
@@ -706,5 +699,6 @@ import com.google.cloud.bigquery.storage.v1.BigQueryWriteClient;
 import com.google.cloud.bigquery.storage.v1.CreateWriteStreamRequest;
 import com.google.cloud.bigquery.storage.v1.Exceptions;
 import com.google.cloud.bigquery.storage.v1.Exceptions.StorageException;
-import com.google.cloud.bigquery.storage.v1.
+import com.google.cloud.bigquery.storage.v1.FinalizeWriteStreamResponse;
+import
 ```

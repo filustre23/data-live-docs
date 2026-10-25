@@ -18,7 +18,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 BigQuery 設有各種[配額和限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw)，會限制不同要求和作業的頻率和數量。這些限制不僅能保護基礎架構，還能防範客戶意外使用。本文說明如何診斷及緩解因配額和限制而產生的特定錯誤。
 
-部分錯誤訊息會指出您可以提高的配額或限制，其他錯誤訊息則會指出無法提高的配額或限制。達到硬性限制時，您必須為工作負載實施暫時或永久的解決方法或最佳做法。即使配額或限制可以提高，也建議您這麼做。
+部分錯誤訊息會指出可提高的配額或限制，其他錯誤訊息則會指出無法提高的配額或限制。達到硬性限制時，您必須為工作負載實施暫時或永久的解決方法或最佳做法。即使配額或限制可以提高，也建議您這麼做。
 
 本文會根據這些類別整理錯誤訊息和解決方案，並在後續的「總覽」一節說明如何解讀錯誤訊息，以及如何針對問題套用正確的解決方案。
 
@@ -925,16 +925,24 @@ Quota exceeded for quota metric 'Authorized Views per dataset' and limit '2500'.
 #### 解析度
 
 資料集的存取控制清單最多可有 2,500 項授權資源，包括[授權檢視表](https://docs.cloud.google.com/bigquery/docs/authorized-views?hl=zh-tw)、[授權資料集](https://docs.cloud.google.com/bigquery/docs/authorized-datasets?hl=zh-tw)和[授權函式](https://docs.cloud.google.com/bigquery/docs/authorized-functions?hl=zh-tw)。
-如果因授權檢視表數量過多而超過這項限制，建議將檢視表分組為授權資料集。
+如果授權檢視表數量過多而超過這項限制，建議您將檢視表分組為授權資料集。
 最佳做法是在設計新的 BigQuery 架構 (尤其是多租戶架構) 時，將相關檢視表分組到授權資料集。
 
 ### 資料表有太多未執行的 DML 陳述式
 
-這項錯誤表示，針對同一資料表執行的[並行變動 DML 陳述式](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language?hl=zh-tw#update_delete_merge_dml_concurrency) (`UPDATE`、`DELETE`、`MERGE`) 數量已超過[資料操縱語言 (DML) 配額限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#data-manipulation-language-statements)。這項配額限制是以資料表為單位，且僅適用於變動 DML 陳述式，不包括 `INSERT`。
+錯誤字串：`Resources exceeded during query execution: Too many DML
+statements outstanding against table
+PROJECT_ID:DATASET.TABLE, limit is 20.`
+
+這項錯誤表示[並行變動 DML 陳述式](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language?hl=zh-tw#update_delete_merge_dml_concurrency) (`UPDATE`、`DELETE` 和 `MERGE`) 的數量，加上在 `PENDING` 狀態下針對單一資料表排入佇列的 `TRUNCATE TABLE` 陳述式，已超過 20 個[data manipulation language (DML) 配額限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#data-manipulation-language-statements)。`INSERT` 陳述式會使用獨立佇列，上限為 100。
 
 #### 解析度
 
-請按照「[DML 陳述式的最佳做法](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language?hl=zh-tw#best_practices)」批次處理 DML 工作。
+* 查詢 [`INFORMATION_SCHEMA.JOBS` 檢視表](https://docs.cloud.google.com/bigquery/docs/troubleshoot-queries?hl=zh-tw#too_many_DML)，找出 `RUNNING` 和 `PENDING` 工作，以及 `statement_type IN ('UPDATE', 'DELETE',
+  'MERGE', 'TRUNCATE_TABLE')`，找出填滿資料表 DML 佇列的工作。
+* 將多個較小的變動 DML 作業分組為較少、較大的工作，例如將個別的 `UPDATE` 陳述式合併為單一 `UPDATE ...
+  SET column = CASE WHEN ... END` 陳述式，或將頻繁更新暫存在個別資料表中，並使用單一 `MERGE` 陳述式定期套用至目標資料表。請參閱「[避免使用更新或插入單一資料列的 DML 陳述式](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-compute?hl=zh-tw#avoid-dml-update-single-rows)」和「[DML 陳述式過多](https://docs.cloud.google.com/bigquery/docs/troubleshoot-queries?hl=zh-tw#too_many_DML)」。
+* 將目標資料表分區或分群，提高 DML 執行速度，加快佇列工作的處理速度。詳情請參閱「[DML 陳述式的最佳做法](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language?hl=zh-tw#best_practices)」。
 
 ### 載入 CSV 檔案配額錯誤
 
@@ -1091,11 +1099,11 @@ DataHub 擷取作業的服務帳戶只需要讀取中繼資料，例如資料表
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-23 (世界標準時間)。
+上次更新時間：2026-10-24 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-23 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-24 (世界標準時間)。"],[],[]]

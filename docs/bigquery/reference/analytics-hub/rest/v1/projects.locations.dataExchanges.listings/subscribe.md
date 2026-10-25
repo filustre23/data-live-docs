@@ -159,5 +159,5 @@ Defines the destination Pub/Sub subscription. If none of `pushConfig`, `bigquery
 
 Configuration for a push delivery endpoint.
 
-| JSON representation |
-| --- |
+|
+|  |

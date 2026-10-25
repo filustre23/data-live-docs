@@ -161,7 +161,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
   **啟用 API 所需的角色**
 
-  您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過擁有者角色 (`roles/owner`) 取得這項權限。否則，您可以透過服務使用情形管理員角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+  您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「Service Usage 管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
   ```
   gcloud services enable bigquery.googleapis.com bigqueryconnection.googleapis.com aiplatform.googleapis.com
@@ -200,7 +200,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
   **啟用 API 所需的角色**
 
-  您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過擁有者角色 (`roles/owner`) 取得這項權限。否則，您可以透過服務使用情形管理員角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+  您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「Service Usage 管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
   ```
   gcloud services enable bigquery.googleapis.com bigqueryconnection.googleapis.com aiplatform.googleapis.com
@@ -469,6 +469,71 @@ async function createConnection(projectId, location, connectionId) {
 }
 ```
 
+### Java
+
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 Vertex AI 快速入門導覽課程](https://docs.cloud.google.com/vertex-ai/docs/start/client-libraries?hl=zh-tw)」中的 Java 設定說明操作。詳情請參閱 [Vertex AI Java API 參考文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-aiplatform/latest/com.google.cloud.aiplatform.v1?hl=zh-tw)。
+
+如要向 Vertex AI 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+
+```
+import com.google.api.gax.rpc.AlreadyExistsException;
+import com.google.api.gax.rpc.ApiException;
+import com.google.cloud.bigquery.connection.v1.CloudResourceProperties;
+import com.google.cloud.bigquery.connection.v1.Connection;
+import com.google.cloud.bigquery.connection.v1.CreateConnectionRequest;
+import com.google.cloud.bigquery.connection.v1.LocationName;
+import com.google.cloud.bigqueryconnection.v1.ConnectionServiceClient;
+import java.io.IOException;
+
+public class CreateConnection {
+
+  /**
+   * Creates a BigQuery connection to a Cloud Resource. A Cloud Resource connection provisions a
+   * service account that can be granted access to other Google Cloud resources for federated
+   * queries.
+   *
+   * @param projectId The Google Cloud project ID (for example, "example-project-id").
+   * @param location The geographic location of the connection (for example, "us-central1").
+   * @param connectionId The ID of the connection to create (for example, "example-connection-id").
+   */
+  public static void createConnection(String projectId, String location, String connectionId) {
+    LocationName parent = LocationName.of(projectId, location);
+
+    // CloudResourceProperties provisions a managed Google Cloud service account on creation.
+    CloudResourceProperties cloudResourceProperties = CloudResourceProperties.newBuilder().build();
+    Connection connection =
+        Connection.newBuilder()
+            .setFriendlyName("Example Connection")
+            .setDescription("Cloud Resource connection for federated queries.")
+            .setCloudResource(cloudResourceProperties)
+            .build();
+
+    CreateConnectionRequest request =
+        CreateConnectionRequest.newBuilder()
+            .setParent(parent.toString())
+            .setConnectionId(connectionId)
+            .setConnection(connection)
+            .build();
+
+    try (ConnectionServiceClient client = ConnectionServiceClient.create()) {
+      Connection response = client.createConnection(request);
+
+      System.out.printf("Successfully created connection: %s%n", response.getName());
+      System.out.printf("Friendly name: %s%n", response.getFriendlyName());
+      System.out.printf(
+          "Service Account: %s%n", response.getCloudResource().getServiceAccountId());
+    } catch (AlreadyExistsException err) {
+      System.err.printf(
+          "error: connection '%s' already exists in location '%s' for project '%s': %s%n",
+          connectionId, location, projectId, err.getMessage());
+    } catch (ApiException | IOException err) {
+      System.err.printf(
+          "error: failed to create connection '%s' in location '%s' for project '%s': %s%n",
+          connectionId, location, projectId, err.getMessage());
+    }
+  }
+```
+
 ### Terraform
 
 使用 [`google_bigquery_connection`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_connection) 資源。
@@ -565,7 +630,7 @@ resource "google_bigquery_connection" "default" {
 1. 前往「IAM & Admin」(IAM 與管理) 頁面。
 
    [前往「IAM & Admin」(IAM 與管理) 頁面](https://console.cloud.google.com/project/_/iam-admin?hl=zh-tw)
-2. 按一下person\_add「Grant Access」(授予存取權)。
+2. 按一下 person\_add「Grant Access」(授予存取權)。
 3. 在「新增主體」欄位，輸入先前複製的服務帳戶 ID。
 4. 在「選取角色」欄位中，搜尋「Agent Platform 使用者」角色。
 5. 按一下 [儲存]。
@@ -712,11 +777,11 @@ gcloud projects delete PROJECT_ID
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-22 (世界標準時間)。
+上次更新時間：2026-10-24 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-22 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-24 (世界標準時間)。"],[],[]]

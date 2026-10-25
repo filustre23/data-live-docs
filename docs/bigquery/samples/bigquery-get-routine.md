@@ -48,7 +48,7 @@ func getRoutine(w io.Writer, projectID, datasetID, routineID string) error {
 	fmt.Fprintf(w, "Routine %s:\n", routineID)
 	fmt.Fprintf(w, "\tType %s:\n", meta.Type)
 	fmt.Fprintf(w, "\tLanguage %s:\n", meta.Language)
-	fmt.Fprintln(w, "\tArguments:")
+	fmt.Fprintln(w, &quot;\tArguments:")
 	for _, v := range meta.Arguments {
 		fmt.Fprintf(w, "\t\tName: %s\tType: %v", v.Name, v.DataType)
 	}
@@ -118,7 +118,7 @@ print("\tLanguage: '{}'".format(routine.language))
 print("\tArguments:")
 
 for argument in routine.arguments:
-    print("\t\tName: '{}'".format(argument.name))
+    print("\t\tName: &#39;{}'".format(argument.name))
     print("\t\tType: '{}'".format(argument.data_type))
 ```
 

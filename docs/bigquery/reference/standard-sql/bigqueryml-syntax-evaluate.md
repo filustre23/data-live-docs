@@ -525,5 +525,4 @@ ML.EVALUATE(
   degree of randomness in token selection. Lower
   `TEMPERATURE` values are good for prompts that require a more deterministic
   and less open-ended or creative response, while higher `TEMPERATURE` values
-  can lead to more diverse or creative results. A `TEMPERATURE` value of `0` is
-  deterministic, meaning that the high
+  can lead to more diverse or creative results. A `TEMPERATURE` value of

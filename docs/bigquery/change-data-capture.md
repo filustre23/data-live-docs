@@ -16,7 +16,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 透過變更資料擷取擷取功能串流資料表更新
 
-BigQuery 變更資料擷取 (CDC) 擷取作業會處理串流變更，並套用至現有資料，藉此更新 BigQuery 資料表。這項同步處理作業是透過 upsert 和刪除資料列作業完成，這些作業由 [BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api?hl=zh-tw) 即時串流，您應先熟悉這項 API 再繼續操作。
+BigQuery 變更資料擷取 (CDC) 擷取功能可讓您串流即時 upsert 和刪除資料列作業，讓資料表與來源資料變更保持同步。您也可以設定資料表過時時間間隔和自訂序號，在查詢時效性、排序和運算成本之間取得平衡。本文假設您熟悉 [BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api?hl=zh-tw)。
 
 ## 事前準備
 
@@ -383,11 +383,11 @@ BigQuery CDC 擷取工作分為三類：
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-22 (世界標準時間)。
+上次更新時間：2026-10-24 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-22 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-24 (世界標準時間)。"],[],[]]

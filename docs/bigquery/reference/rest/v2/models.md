@@ -201,6 +201,4 @@ Indicates the type of the Model.
 
 ## TrainingRun
 
-Information about a single training query run for the model.
-
-<
+Information about a single

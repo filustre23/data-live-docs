@@ -240,5 +240,5 @@ func main() {
 	}
 	fmt.Printf("\nData Exchange Information\n")
 	fmt.Printf("Exchange Name: %s\n", exchange.GetName())
-	if <
+	if desc
 ```

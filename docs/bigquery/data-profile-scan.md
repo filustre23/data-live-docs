@@ -47,11 +47,11 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
   資料表的 [BigQuery 資料檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataViewer)  (`roles/bigquery.dataViewer`)
 * 執行資料剖析掃描：
   + 在執行掃描作業的專案 (所有資料表類型) 具備 [BigQuery 工作使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.jobUser)  (`roles/bigquery.jobUser`) 角色
-  + 對要掃描的 BigQuery 資料表具備 [BigQuery 資料檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataViewer)  (`roles/bigquery.dataViewer`) 角色
+  + 對要掃描的 BigQuery 資料表，具備 [BigQuery 資料檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataViewer)  (`roles/bigquery.dataViewer`) 角色
 * 對使用 Cloud Storage 資料的 BigQuery 外部資料表執行資料剖析掃描：
-  + Cloud Storage bucket (Cloud Storage、Apache Hive 和 Iceberg REST 目錄) 的 [Storage 物件檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/storage?hl=zh-tw#storage.objectViewer)  (`roles/storage.objectViewer`)
-  + Cloud Storage bucket 的[儲存空間舊版 bucket 讀取者](https://docs.cloud.google.com/iam/docs/roles-permissions/storage?hl=zh-tw#storage.legacyBucketReader)  (`roles/storage.legacyBucketReader`)
-* 在 Google Cloud Lakehouse 上，對 Iceberg REST 目錄、SAP BDC Delta Lake 和 Apache Hive 資料表執行資料剖析掃描：
+  + Cloud Storage bucket (Cloud Storage、Apache Hive 目錄端點和 Apache Iceberg REST 目錄端點) 的 [Storage 物件檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/storage?hl=zh-tw#storage.objectViewer)  (`roles/storage.objectViewer`)
+  + Cloud Storage bucket 的 [Storage 舊版 bucket 讀取者](https://docs.cloud.google.com/iam/docs/roles-permissions/storage?hl=zh-tw#storage.legacyBucketReader)  (`roles/storage.legacyBucketReader`)
+* 對 Google Cloud Lakehouse 管理的 Apache Iceberg、Apache Hive 和 SAP BDC Delta Lake 資料表執行資料剖析掃描：
   對要掃描的資料表具備 [BigLake 檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake?hl=zh-tw#biglake.viewer)  (`roles/biglake.viewer`) 角色
 * 將資料剖析掃描結果匯出至 BigQuery 資料表：資料表的 [BigQuery 資料編輯者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataEditor)  (`roles/bigquery.dataEditor`)
 
@@ -96,7 +96,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
   + `bigquery.tables.get`
     在資料表
   + `bigquery.tables.getData`
-    (在表格中)
+    在資料表
 
 您或許還可透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)取得這些權限。
 
@@ -116,7 +116,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 * 對使用 Cloud Storage 資料的 BigQuery 外部資料表執行資料剖析掃描：
   + Cloud Storage bucket 的 [Storage 物件檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/storage?hl=zh-tw#storage.objectViewer)  (`roles/storage.objectViewer`)
   + Cloud Storage bucket 的[儲存空間舊版 bucket 讀取者](https://docs.cloud.google.com/iam/docs/roles-permissions/storage?hl=zh-tw#storage.legacyBucketReader)  (`roles/storage.legacyBucketReader`)
-* 在 Google Cloud Lakehouse 執行 Iceberg REST 目錄、SAP BDC Delta Lake 和 Apache Hive 資料表的資料剖析掃描作業：
+* 對 Google Cloud Lakehouse 管理的 Apache Iceberg、Apache Hive 和 SAP BDC Delta Lake 資料表執行資料剖析掃描：
   對要掃描的資料表具備 [BigLake 檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake?hl=zh-tw#biglake.viewer)  (`roles/biglake.viewer`) 角色
 * 將資料剖析掃描結果匯出至 BigQuery 資料表：資料表的 [BigQuery 資料編輯者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataEditor)  (`roles/bigquery.dataEditor`)
 
@@ -133,7 +133,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
   + `bigquery.tables.get`
     在資料表
   + `bigquery.tables.getData`
-    (在表格中)
+    在資料表
 * 對使用 Cloud Storage 資料的 BigQuery 外部資料表執行資料剖析掃描：
   + `storage.buckets.get`
     (位於值區)
@@ -143,7 +143,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
   + `bigquery.tables.create`
     資料集
   + `bigquery.tables.updateData`
-    (在表格中)
+    在資料表
 
 管理員或許也能透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)，將這些權限授予執行身分。
 
@@ -203,7 +203,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 3. (選用) 輸入**顯示名稱**。
 4. 輸入 ID。請參閱[資源命名慣例](https://docs.cloud.google.com/compute/docs/naming-resources?hl=zh-tw#resource-name-format)。
 5. 選用：輸入**說明**。
-6. 在「Table」(資料表) 欄位中，按一下「Browse」(瀏覽)。選擇要掃描的資料表，然後按一下「Select」(選取)。僅支援標準 BigQuery、Iceberg REST Catalog、SAP BDC Delta Lake 和 Google CloudLakehouse 上的 Apache Hive 資料表。
+6. 在「Table」(資料表) 欄位中，按一下「Browse」(瀏覽)。選擇要掃描的資料表，然後按一下「Select」(選取)。僅支援標準 BigQuery 資料表，以及由Google Cloud Lakehouse 管理的 Apache Iceberg、Apache Hive 和 SAP BDC Delta Lake 資料表。
 
    如果是多區域資料集內的資料表，請選擇要建立資料掃描作業的區域。
 
@@ -232,7 +232,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
       * 如果是遞增資料掃描，資料剖析掃描會對最新增量套用取樣。
 9. 選用：在Google Cloud 控制台的 BigQuery 和 Knowledge Catalog 頁面中，發布來源資料表的資料剖析掃描結果。勾選「Publish results to Knowledge Catalog」(將結果發布至 Knowledge Catalog) 核取方塊。
 
-   您可以在來源資料表的 BigQuery 和 Knowledge Catalog 頁面中，透過「Data profile」(資料剖析檔) 分頁查看最新的掃描結果。如要讓使用者存取已發布的掃描結果，請參閱本文的「[授予資料剖析掃描結果的存取權](#share-results)」一節。
+   您可以在來源資料表的 BigQuery 和 Knowledge Catalog 頁面中，透過「Data profile」(資料剖析) 分頁查看最新的掃描結果。如要讓使用者存取已發布的掃描結果，請參閱本文的「[授予資料剖析掃描結果的存取權](#share-results)」一節。
 
    在下列情況下，可能無法使用發布選項：
 

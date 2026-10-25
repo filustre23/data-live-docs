@@ -523,3 +523,7 @@ A `BOOL` value. The default value is `FALSE`.
 ### `DATA_SPLIT_METHOD`
 
 **Syntax**
+
+```
+DATA_SPLIT_METHOD = { 'AUTO_SPLIT' | 'RANDOM' |
+```

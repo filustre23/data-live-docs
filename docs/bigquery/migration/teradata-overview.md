@@ -254,5 +254,5 @@ BigQuery Data Transfer Service 支持两种提取方法，使用这两种方法�
               "originalColumnLength": 15
             },
             {
-              "name":
+              "name"
 ```
