@@ -329,5 +329,5 @@ view called [`professors`](/bigquery/docs/reference/standard-sql/query-syntax#dp
 SELECT
   WITH DIFFERENTIAL_PRIVACY
     OPTIONS(epsilon=10, delta=.01, max_groups_contributed=1, privacy_unit_column=id)
-    it
+    item,
 ```

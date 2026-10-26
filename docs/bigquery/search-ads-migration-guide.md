@@ -137,5 +137,5 @@ ON
 WHERE
   c._DATA_DATE = c._LATEST_DATE
 GROUP BY
-  1, 2, 3
+  1, 2,
 ```

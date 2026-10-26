@@ -288,4 +288,4 @@ END IF;
     [Gemini Enterprise Agent Platform endpoints](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https)
   + Imported
     [Open Neural Network Exchange (ONNX)](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-onnx),
-    [Tens](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow)
+    [TensorFlow](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow),

@@ -302,5 +302,5 @@ Propagates the existing table and adds computed columns, similar to
   UNION ALL
   SELECT 'bananas' AS item, 8 AS sales
 )
-|> EXTEND item
+|> EXTEND item IN
 ```

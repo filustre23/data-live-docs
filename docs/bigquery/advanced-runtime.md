@@ -1066,5 +1066,4 @@ public class QueryBatch {
 
 ```
 // Import the Google Cloud client library and create a client
-const
 ```

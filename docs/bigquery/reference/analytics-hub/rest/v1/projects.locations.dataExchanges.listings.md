@@ -145,3 +145,7 @@ Replica state of the shared dataset.
 ## PrimaryState
 
 Primary state of the replica. Set only for the primary replica.
+
+| Enums | |
+| --- | --- |
+| `PRIMARY_STATE_UNSPECIFIED` | Default value. This value is unused. |

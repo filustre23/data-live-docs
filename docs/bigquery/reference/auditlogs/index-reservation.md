@@ -344,4 +344,4 @@ Last updated 2026-10-22 UTC.
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUn
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solv

@@ -557,5 +557,5 @@ CLASS_WEIGHTS = [STRUCT('example_label', .2)]
 **Syntax**
 
 ```
-ENABLE_GLOBAL_EXPLAIN = {
+ENABLE_GLOBAL_EXPLAIN =
 ```

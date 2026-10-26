@@ -142,3 +142,11 @@ Assessment task config.
 This type has no fields.
 
 The dialect definition for Azure Synapse.
+
+## BigQueryDialect
+
+This type has no fields.
+
+The dialect definition for BigQuery.
+
+## CreateMigrationWorkflowRequest

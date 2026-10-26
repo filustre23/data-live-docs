@@ -16,30 +16,26 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 使用 Storage Write API (gRPC) 批次載入資料
 
-本文說明如何使用 [BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api?hl=zh-tw)，將資料批次載入 BigQuery。
+[BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api?hl=zh-tw) 可讓您將記錄批次載入 BigQuery，並以單一原子交易的形式提交。將資料寫入*待處理類型*的串流，即可在平行 worker 之間緩衝記錄，並在所有串流成功後，才讓查詢顯示批次。如要執行批次載入作業，而不編寫自訂 API 程式碼，可以搭配使用 [BigQuery 的 Apache Spark SQL 連接器](https://github.com/GoogleCloudDataproc/spark-bigquery-connector#writing-data-to-bigquery)和 Managed Service for Apache Spark。
 
-在批次載入情境中，應用程式會寫入資料，並以單一不可分割的交易提交資料。使用 Storage Write API (gRPC) 批次載入資料時，請建立一或多個*待處理類型*的串流。待處理類型支援串流層級交易。記錄會緩衝處理，直到您提交串流為止。
+## 架構總覽
 
-如果是批次工作負載，也請考慮透過 [Apache Spark SQL 連接器 for BigQuery](https://github.com/GoogleCloudDataproc/spark-bigquery-connector#writing-data-to-bigquery)，使用 Managed Service for Apache Spark 執行 Storage Write API (gRPC)，而非編寫自訂的 Storage Write API (gRPC) 程式碼。
-
-Storage Write API (gRPC) 非常適合*資料管道*架構。主程序會建立多個串流。系統會為每個串流指派背景工作執行緒或個別程序，以寫入部分批次資料。每個工作站都會建立與串流的連線、寫入資料，並在完成時終止串流。所有工作人員向主要程序發出成功完成的信號後，主要程序就會提交資料。如果 worker 失敗，最終結果就不會顯示其分配到的資料部分，且可以安全地重試整個 worker。在更複雜的管道中，工作人員會回報寫入主要程序的最後一個偏移，藉此檢查進度。這種做法可建立穩健的管道，即使發生故障也能正常運作。
+Storage Write API (gRPC) 非常適合*資料管道*架構。主要程序會建立多個串流。針對每個串流，系統會指派背景工作執行緒或獨立程序，寫入部分批次資料。每個 worker 都會建立與其串流的連線、寫入資料，並在完成後完成其串流。所有 worker 向主要程序回報成功完成後，主要程序就會提交資料。如果 worker 失敗，其指派的資料部分不會顯示在最終結果中，且整個 worker 可以安全地重試。在更複雜的管道中，worker 會向主要程序回報最後寫入的偏移量，藉此檢查進度。這種做法可以建立強大的管道，能彈性因應故障。
 
 ## 使用待處理類型批次載入資料
 
 如要使用待處理類型，應用程式會執行下列操作：
 
-1. 呼叫 `CreateWriteStream`，在待處理型別中建立一或多個串流。
-2. 針對每個串流，在迴圈中呼叫 `AppendRows`，即可寫入批次記錄。
-3. 針對每個串流呼叫 `FinalizeWriteStream`。呼叫這個方法後，您就無法再將任何資料列寫入串流。如果在呼叫 `FinalizeWriteStream` 後呼叫 `AppendRows`，系統會傳回 [`StorageError`](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1?hl=zh-tw#google.cloud.bigquery.storage.v1.StorageError)，且 `google.rpc.Status` 錯誤中會包含 `StorageErrorCode.STREAM_FINALIZED`。如要進一步瞭解 `google.rpc.Status` 錯誤模型，請參閱「[錯誤](https://docs.cloud.google.com/apis/design/errors?hl=zh-tw)」。
-4. 呼叫 `BatchCommitWriteStreams` 來提交串流。呼叫這個方法後，資料即可供讀取。如果提交任何串流時發生錯誤，系統會在 [`BatchCommitWriteStreamsResponse`](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1?hl=zh-tw#batchcommitwritestreamsresponse) 的 `stream_errors` 欄位中傳回錯誤。
+1. 呼叫 `CreateWriteStream`，建立一或多個待處理類型的串流。
+2. 針對每個串流，在迴圈中呼叫 `AppendRows`，以批次寫入記錄。
+3. 針對每個串流呼叫 `FinalizeWriteStream`。呼叫這個方法後，您就無法再將任何資料列寫入串流。如果在呼叫 `FinalizeWriteStream` 後呼叫 `AppendRows`，系統會傳回 [`StorageError`](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1?hl=zh-tw#google.cloud.bigquery.storage.v1.StorageError)，並在 `google.rpc.Status` 錯誤中顯示 `StorageErrorCode.STREAM_FINALIZED`。如要進一步瞭解 `google.rpc.Status` 錯誤模型，請參閱「[錯誤](https://docs.cloud.google.com/apis/design/errors?hl=zh-tw)」。
+4. 呼叫 `BatchCommitWriteStreams` 提交串流。呼叫這個方法後，系統就會開放讀取資料。如果提交任何串流時發生錯誤，系統會在 [`BatchCommitWriteStreamsResponse`](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1?hl=zh-tw#batchcommitwritestreamsresponse) 的 `stream_errors` 欄位中傳回錯誤。
 
-提交是不可分割的作業，您可以一次提交多個串流。
-串流只能提交一次，因此如果提交作業失敗，可以安全地重試。在您提交串流之前，資料會處於待處理狀態，且無法讀取。
+提交是不可分割的作業，您可以一次提交多個串流。串流只能提交一次，因此如果提交作業失敗，可以放心重試。在您提交串流之前，資料會處於待處理狀態，且無法讀取。
 
-串流完成後，資料最多可在緩衝區保留 4 小時，然後才會提交。待處理的串流必須在 24 小時內提交。
-[待處理串流緩衝區的總大小](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#writeapi_pending_stream)設有配額限制。
+串流完成後，在提交之前，資料最多可在緩衝區中保留 4 小時。待處理的串流必須在 24 小時內提交。[待處理串流緩衝區的總大小](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#writeapi_pending_stream)有配額限制。
 
-下列程式碼顯示如何以待處理類型寫入資料：
+下列程式碼說明如何寫入待處理類型的資料：
 
 ### C#
 
@@ -608,5 +604,6 @@ public class WritePendingStream {
         done();
       }
 
-      public void onFailure(Throwable throwable
+      public void onFailure(Throwable throwable) {
+        synchroni
 ```
