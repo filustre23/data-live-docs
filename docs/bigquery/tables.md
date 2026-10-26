@@ -1115,5 +1115,5 @@ async function queryDestinationTable() {
 將工作設定傳遞至 [query 方法](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.client.Client?hl=zh-tw#google_cloud_bigquery_client_Client_query)。
 
 ```
-from google.cloud
+from google.cloud import
 ```

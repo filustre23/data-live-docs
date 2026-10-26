@@ -293,5 +293,5 @@ FROM
 WITH points AS (
   SELECT 1 AS x, 1 AS y UNION ALL
   SELECT 2 AS x, 3 AS y UNION ALL
-  SELECT 3 AS x, 1
+  SELECT 3 AS x, 1 AS
 ```

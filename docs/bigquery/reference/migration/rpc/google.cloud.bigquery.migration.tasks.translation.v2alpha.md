@@ -138,4 +138,4 @@ The special token data type.
 | `BOOL` | Token type as boolean. |
 | `FLOAT64` | Token type as float. |
 | `DATE` | Token type as date. |
-|
+|  |

@@ -993,4 +993,4 @@ Your usage exceeded quota for ExtractBytesPerDay
 
 #### 診斷
 
-如果匯出的資料表大於 50 TiB，匯出作業會因
+如果匯出的資料

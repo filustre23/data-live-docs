@@ -202,4 +202,5 @@ BigQuery 也會對下列常值執行隱含轉換：
 | `LAG` | `LAG` |
 | `LEAD` | `LEAD` |
 | `COLLECT_LIST, \ COLLECT_SET` | `ARRAY_AGG` `ARRAY_CONCAT_AGG` |
-| `MAX` | `M` |
+| `MAX` | `MAX` |
+|  |

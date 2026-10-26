@@ -978,5 +978,5 @@ func copyTableWithCMEK(projectID, datasetID, tableID string) error {
 	// projectID := "my-project-id"
 	// datasetID := "mydataset"
 	// tableID := "mytable"
-	ctx := context.Background()
+	ctx := context.Background</
 ```
