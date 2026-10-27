@@ -232,9 +232,61 @@ AI agents that can interact with your command line, such as Claude Code, Cursor,
 
 Agents that connect to Hex remotely rather than through your command line can create and edit projects through the [Hex MCP server](/docs/api-integrations/mcp-server#project-editing-tools) instead.
 
+## Troubleshooting[​](#troubleshooting "Direct link to Troubleshooting")
+
+### Certificate errors behind a corporate VPN or proxy[​](#certificate-errors-behind-a-corporate-vpn-or-proxy "Direct link to Certificate errors behind a corporate VPN or proxy")
+
+If `hex auth login` fails with an error such as `SELF_SIGNED_CERT_IN_CHAIN`, `UNABLE_TO_VERIFY_LEAF_SIGNATURE`, or `UNABLE_TO_GET_ISSUER_CERT_LOCALLY`, the CLI likely doesn't trust your organization's certificate authority (CA).
+
+Corporate security tools such as Cloudflare WARP inspect HTTPS traffic using certificates signed by your organization's CA. Your browser may trust this CA even when the CLI does not. These are certificate errors, not credential errors.
+
+The Hex CLI includes its own runtime, so updating Node.js on your computer won't fix these errors. The `NODE_` variables below still apply, because the CLI's runtime supports them.
+
+There are two ways to fix these errors, depending on how your organization provides its CA.
+
+#### Use your system's trust store[​](#use-your-systems-trust-store "Direct link to Use your system's trust store")
+
+If the CA is already installed and trusted in your operating system's certificate store, export the `NODE_USE_SYSTEM_CA` variable before running the CLI:
+
+```
+export NODE_USE_SYSTEM_CA=1
+
+
+
+hex auth login
+
+
+
+hex auth status
+```
+
+#### Use a certificate file[​](#use-a-certificate-file "Direct link to Use a certificate file")
+
+If your IT or security team provides a CA certificate file in PEM format, export the `NODE_EXTRA_CA_CERTS` variable with the file's absolute path before running the CLI:
+
+```
+export NODE_EXTRA_CA_CERTS="/absolute/path/to/company-ca-bundle.pem"
+
+
+
+hex auth login
+
+
+
+hex auth status
+```
+
+If needed, you can set both `NODE_USE_SYSTEM_CA` and `NODE_EXTRA_CA_CERTS` at the same time. Neither setting removes the CLI's default certificates or turns off certificate verification.
+
+tip
+
+If you've already configured your CA for npm using the `ca` or `cafile` settings in `.npmrc`, the Hex CLI doesn't read those settings. Set `NODE_EXTRA_CA_CERTS` to the same file instead.
+
+These settings only fix certificate errors. If the CLI still can't connect, the cause may be network connectivity, proxy routing, or an IP allowlist. [Contact support](#bugs--issues) for help.
+
 ## Bugs & issues[​](#bugs--issues "Direct link to Bugs & issues")
 
-Please contact [support@hex.tech](mailto:support@hex.tech) if you encounter any bugs, or other issues.
+Please contact [support@hex.tech](mailto:support@hex.tech) if you encounter any bugs or other issues. Include your CLI version (`hex --version`) and the full error message.
 
 #### On this page
 
@@ -244,4 +296,6 @@ Please contact [support@hex.tech](mailto:support@hex.tech) if you encounter any 
   + [Authenticating in CI](#authenticating-in-ci)
 * [Usage](#usage)
   + [Configuration for AI agents](#configuration-for-ai-agents)
+* [Troubleshooting](#troubleshooting)
+  + [Certificate errors behind a corporate VPN or proxy](#certificate-errors-behind-a-corporate-vpn-or-proxy)
 * [Bugs & issues](#bugs--issues)
