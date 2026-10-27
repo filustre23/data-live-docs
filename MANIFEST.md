@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-10-27T03:15+00:00_
+_Generated 2026-10-27T17:11+00:00_
 
-**9 sources, 4755 topics total**
+**9 sources, 4756 topics total**
 
 ## airflow
 
@@ -4324,7 +4324,7 @@ _392 topics_
 
 Upstream: <https://openai.github.io/openai-agents-python/>
 
-_397 topics_
+_398 topics_
 
 - `openai-agents/agents`
 - `openai-agents/config`
@@ -4669,6 +4669,7 @@ _397 topics_
 - `openai-agents/results`
 - `openai-agents/running_agents`
 - `openai-agents/sandbox/clients`
+- `openai-agents/sandbox/custom-providers`
 - `openai-agents/sandbox/guide`
 - `openai-agents/sandbox/memory`
 - `openai-agents/sandbox_agents`
