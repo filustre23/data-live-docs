@@ -2584,6 +2584,4 @@ Copy
 * "description": "string",
 * "creator": {
   + "email": "string",
-  + "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08"},
-* "sharing": {
-  + "users":`
+  + "id": "497f6eca-6276-4993-b`
