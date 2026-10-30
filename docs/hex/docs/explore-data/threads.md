@@ -18,7 +18,7 @@ info
 
 Threads allow users with the [Explorer role](/docs/collaborate/sharing-and-permissions/roles) or higher to interact with your data conversationally without thinking about code. Here’s a quick checklist for how to get things set up and ensure Threads generate high quality responses:
 
-1. **[Endorse workspace assets with statuses](/docs/organize-content/statuses-categories#using-statuses-and-categories):** Endorsed data & projects are prioritized by all agents to allow more fine-grained control over the self-serve experience and improve response quality from Threads. Admins and Editors can use Threads with endorsed assets prioritized. Enabling [Endorsed Mode](/docs/organize-content/statuses-categories#endorsed-mode) restricts the agent to using only endorsed assets, while turning this off allows the Agent to access all data (with endorsed assets prioritized). By default, Explorers can only use Threads in Endorsed Mode, but Admins can disable this enforcement in [**Settings > AI & agents**](/docs/administration/workspace_settings/enable-ai-and-agents). Start endorsing data and projects to make it easier for agents to know which data is prioritized when answering questions.
+1. **[Endorse workspace assets with statuses](/docs/organize-content/statuses-categories#using-statuses-and-categories):** Endorsed data and projects are prioritized by agents, steering it towards assets your team has reviewed to improve response quality. [Governed mode](/docs/agent-management/governed-mode) restricts the agent to the sources Admins choose, such as only endorsed data, [semantic models only](/docs/agent-management/governed-mode#semantic-models-only), or a custom policy. When Governed mode is off, the agent can access all data the user has permission to use, with endorsed assets still prioritized. Admins can require Explorers to stay in Governed mode and set it as the default for new conversations. Start endorsing data and projects to make it easier for agents to know which data is prioritized when answering questions.
 2. **[Contribute to Agent Workspace Rules](/docs/agent-management/context-management/guides):** If you want to guide agents with information about your organization or other high-level context about when to use which data, you can add to the Agent Workspace Rules.
 3. **[Curate context to improve AI results](/tutorials/ai-best-practices/setup-for-ai-agents):** Provide Hex agents with a focused view on relevant information, leading to more accurate suggestions. Limiting, excluding, or endorsing data helps agents more precisely find what they're looking for.
 
@@ -46,19 +46,17 @@ Hex's Command Line Interface ([CLI](/docs/api-integrations/cli)) can be used dir
 
 ## Data sources[​](#data-sources "Direct link to Data sources")
 
-To answer a user's question, the agent searches across all connections, databases, schemas, and tables that are [included for AI](/docs/explore-data/data-browser#exclusion-and-endorsement) and that the user has access to. It uses connection names, descriptions, and schema metadata to determine which connection contains the relevant data, and can query multiple connections within a single conversation if needed. If your workspace has a default data connection, the agent will search it first before looking at other available connections.
+To answer a user's question, the agent searches across all connections, databases, schemas, and tables that the user has access to and are [included for AI](/docs/explore-data/data-browser#exclusion-and-endorsement). It uses connection names, descriptions, and schema metadata to determine which connection contains the relevant data, and can query multiple connections within a single conversation if needed. If your workspace has a default data connection, the agent will search it first before looking at other available connections.
 
 Users can steer the agent toward a particular connection by selecting one via the + menu in the prompt bar. The agent will prioritize that connection first, but can switch to or add other connections in the same conversation when useful.
 
 To understand how to optimize your data connections for the agent, check out our [Optimizing your data connections for the Hex Agent](/tutorials/ai-best-practices/optimizing-data-connections-for-agents) tutorial.
 
-### Endorsed Mode on: Agent can access endorsed assets only[​](#endorsed-mode-on-agent-can-access-endorsed-assets-only "Direct link to Endorsed Mode on: Agent can access endorsed assets only")
+### Governed mode[​](#governed-mode "Direct link to Governed mode")
 
-When the agent is restricted to only use endorsed assets, Threads will only search for endorsed projects and data in your workspace as context to inform how it answers questions.
+When [Governed mode](/docs/agent-management/governed-mode) is on, Threads works from the sources your Admins have configured: endorsed data, [semantic models only](/docs/agent-management/governed-mode#semantic-models-only), or a custom set of warehouse data, semantic models, and projects. When it's off, Threads can access available assets, and still prioritizes endorsed data when relevant. Threads also uses metadata like column and table descriptions and [data endorsements](/docs/organize-content/statuses-categories#endorsed-statuses) as context.
 
-### Endorsed Mode off: Agent can access all data[​](#endorsed-mode-off-agent-can-access-all-data "Direct link to Endorsed Mode off: Agent can access all data")
-
-When the agent is not restricted to only use endorsed data, Threads will still prioritize endorsed data when relevant, but can access all data in the connection. Threads will also use metadata like column and table descriptions and [data endorsements](/docs/organize-content/statuses-categories#endorsed-statuses) as context to inform how it answers questions.
+You can turn Governed mode on or off for a single conversation from the prompt bar, unless your Admin requires Governed mode for your Explorer role.
 
 ## Threads behavior and exploring[​](#threads-behavior-and-exploring "Direct link to Threads behavior and exploring")
 
@@ -96,14 +94,14 @@ The Threads Agent can search the web and extract content from URLs—pulling in 
 
 ### Projects as context[​](#projects-as-context "Direct link to Projects as context")
 
-When answering questions, the agent will search across the workspace for relevant projects on its own, prioritizing [Endorsed](/docs/organize-content/statuses-categories#endorsed-statuses) projects - and if [Endorsed Mode](/docs/organize-content/statuses-categories#endorsed-mode) is enabled, surfacing only those. When the Agent uses a project, it will cite what it used (e.g. links to the project or specific cells) so you can see where the answer came from. Users can also @-mention or paste a URL from a specific project into their prompt to focus the agent's work.
+When answering questions, the agent will search across the workspace for relevant projects on its own, prioritizing [Endorsed](/docs/organize-content/statuses-categories#endorsed-statuses) projects. When [Governed mode](/docs/agent-management/governed-mode) is on, it surfaces only the projects included in your workspace's Governed mode configuration. When the Agent uses a project, it will cite what it used (e.g. links to the project or specific cells) so you can see where the answer came from. Users can also @-mention or paste a URL from a specific project into their prompt to focus the agent's work.
 
 To influence which projects the agent surfaces, optimize the following metadata on your projects:
 
 * **Title** — use clear, descriptive names that reflect the project's content
 * **Description** — summarize what the project covers and when it's useful
 * [**Category**](/docs/organize-content/statuses-categories#categories) — tag it appropriately so the agent can match it to relevant questions
-* [**Endorsed status**](/docs/organize-content/statuses-categories#endorsed-statuses) — mark high-quality projects as Endorsed to ensure the agent prioritizes them. This also allows them to be surfaced in [Endorsed Mode](/docs/organize-content/statuses-categories#endorsed-mode).
+* [**Endorsed status**](/docs/organize-content/statuses-categories#endorsed-statuses) — mark high-quality projects as Endorsed to ensure the agent prioritizes them. This also makes them available when Governed mode uses [**Endorsed data**](/docs/agent-management/governed-mode).
 
 info
 
@@ -207,8 +205,7 @@ Workspace Managers and Admins can curate context in the workspace to continually
   + [MCP Server](#mcp-server)
   + [CLI](#cli)
 * [Data sources](#data-sources)
-  + [Endorsed Mode on: Agent can access endorsed assets only](#endorsed-mode-on-agent-can-access-endorsed-assets-only)
-  + [Endorsed Mode off: Agent can access all data](#endorsed-mode-off-agent-can-access-all-data)
+  + [Governed mode](#governed-mode)
 * [Threads behavior and exploring](#threads-behavior-and-exploring)
   + [Viewing the project behind a Thread](#viewing-the-project-behind-a-thread)
   + [Web search](#web-search)

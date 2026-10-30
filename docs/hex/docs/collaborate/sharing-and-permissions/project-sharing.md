@@ -130,7 +130,7 @@ If you do not have access to a project because it uses a data connection you don
 
 If you require access to this project, follow the same debugging steps as above.
 
-### Unable to explore from a published app due to missing data connection permissions[​](#unable-to-explore-from-a-published-app-due-to-missing-data-connection-permissions "Direct link to Unable to explore from a published app due to missing data connection permissions")
+### Unable to explore from a published app due to missing data connection permissions[  ​](#unable-to-explore-from-a-published-app-due-to-missing-data-connection-permissions "Direct link to Unable to explore from a published app due to missing data connection permissions")
 
 The [**Can explore**](#can-explore) permission allows users to both view the project's notebook and [explore](/docs/share-insights/explore) from the published app. As mentioned [above](#unable-to-edit-due-to-missing-workspace-asset-permissions), users can see notebooks that use a given data connection without requiring [**Can query** access](/docs/connect-to-data/data-connections/data-connections-introduction#can-query) to that data connection. However, a user's ability to explore from a published app is dependent on the user having **Can query** access to the data connections used in the project.
 This means that if a user is granted **Can explore** access to a project that uses a data connection they do not have **Can query** access to, they will be able to view the project's notebook, but not explore from the published app. Users will see a tooltip that explains this lack of connection permissions if they attempt to explore from the app.

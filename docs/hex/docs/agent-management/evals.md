@@ -27,7 +27,7 @@ You can also [publish your eval suites](#publishing-your-eval-suites) to Hex and
 An **eval suite** holds one or more **cases**, each graded by one or more **rubrics**. When you **run** a suite, the agent answers each case's prompt in its own thread.
 
 * **Eval suite:** A group of cases and their rubrics, defined together in one YAML file.
-* **Case:** A single test that defines a prompt given to the agent and settings for how the thread should run (attempts, Endorsed Mode, etc.).
+* **Case:** A single test that defines a prompt given to the agent and settings for how the thread should run (attempts, Governed mode, etc.).
 * **Rubric:** A pass/fail check applied to a case. One case can have multiple rubrics — for example, one rubric might verify the agent used the correct guide, while another checks whether the final answer includes the expected value.
 * **Run:** One execution of a suite. Review run results from the [CLI](/docs/api-integrations/cli) or in [Context Studio](/docs/agent-management/context-studio).
 

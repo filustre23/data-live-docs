@@ -16,6 +16,10 @@ AI-recommended improvements to your workspace context, based on patterns in agen
 
 Define eval suites and rubrics to assess agent responses and track regressions and improvements over time.](/docs/agent-management/evals)
 
+[## 📄️Governed mode
+
+Choose which warehouse data, semantic models, and projects Hex agents use, including a semantic models only option.](/docs/agent-management/governed-mode)
+
 [## 🗃Context Management
 
 6 items](/docs/agent-management/context-management)

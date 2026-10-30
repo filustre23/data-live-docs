@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-10-29T18:08+00:00_
+_Generated 2026-10-30T03:54+00:00_
 
-**9 sources, 4758 topics total**
+**9 sources, 4764 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_821 topics_
+_826 topics_
 
 - `anthropic-sdk/about-claude/additional-resources`
 - `anthropic-sdk/about-claude/api-credits-for-subscribers`
@@ -166,6 +166,8 @@ _821 topics_
 - `anthropic-sdk/api/beta/organization/analytics/artifacts/list`
 - `anthropic-sdk/api/beta/organization/analytics/connectors`
 - `anthropic-sdk/api/beta/organization/analytics/connectors/list`
+- `anthropic-sdk/api/beta/organization/analytics/cost`
+- `anthropic-sdk/api/beta/organization/analytics/cost/list`
 - `anthropic-sdk/api/beta/organization/analytics/cost_report`
 - `anthropic-sdk/api/beta/organization/analytics/cost_report/list`
 - `anthropic-sdk/api/beta/organization/analytics/plugins`
@@ -174,6 +176,8 @@ _821 topics_
 - `anthropic-sdk/api/beta/organization/analytics/skills/list`
 - `anthropic-sdk/api/beta/organization/analytics/summaries`
 - `anthropic-sdk/api/beta/organization/analytics/summaries/list`
+- `anthropic-sdk/api/beta/organization/analytics/usage`
+- `anthropic-sdk/api/beta/organization/analytics/usage/list`
 - `anthropic-sdk/api/beta/organization/analytics/usage_report`
 - `anthropic-sdk/api/beta/organization/analytics/usage_report/list`
 - `anthropic-sdk/api/beta/organization/analytics/user_cost_report`
@@ -726,6 +730,7 @@ _821 topics_
 - `anthropic-sdk/manage-claude/plugins-api`
 - `anthropic-sdk/manage-claude/rate-limits-api`
 - `anthropic-sdk/manage-claude/spend-limits-api`
+- `anthropic-sdk/manage-claude/usage-cost-analytics-api`
 - `anthropic-sdk/manage-claude/usage-cost-api`
 - `anthropic-sdk/manage-claude/user-management`
 - `anthropic-sdk/manage-claude/user-profiles`
@@ -3925,7 +3930,7 @@ _156 topics_
 
 Upstream: <https://learn.hex.tech/>
 
-_394 topics_
+_395 topics_
 
 - `hex/changelog`
 - `hex/changelog/2020-12-17`
@@ -4094,6 +4099,7 @@ _394 topics_
 - `hex/docs/agent-management/context-management/reference-repositories`
 - `hex/docs/agent-management/context-studio`
 - `hex/docs/agent-management/evals`
+- `hex/docs/agent-management/governed-mode`
 - `hex/docs/agent-management/observability`
 - `hex/docs/agent-management/suggestions`
 - `hex/docs/api-integrations`

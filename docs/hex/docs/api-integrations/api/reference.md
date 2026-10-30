@@ -2583,5 +2583,4 @@ Copy
 * "name": "string",
 * "description": "string",
 * "creator": {
-  + "email": "string",
-  + "id": "497f6eca-6276-4993-b`
+  + "email":`
