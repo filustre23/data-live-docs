@@ -203,18 +203,4 @@ window_specification:
 This function divides the rows into `constant_integer_expression`
 buckets based on row ordering and returns the 1-based bucket number that is
 assigned to each row. The number of rows in the buckets can differ by at most 1.
-The remainder values (the remainder of number of rows divided by buckets) are
-distributed one for each bucket, starting with bucket 1. If
-`constant_integer_expression` evaluates to NULL, 0 or negative, an
-error is provided.
-
-To learn more about the `OVER` clause and how to use it, see
-[Window function calls](/bigquery/docs/reference/standard-sql/window-function-calls).
-
-
-
-**Return Type**
-
-`INT64`
-
-**Example**
+The remainder values (the remain

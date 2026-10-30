@@ -16,7 +16,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 運用 Gemini 準備資料
 
-本文說明如何在 BigQuery 資料準備作業中，使用 Gemini 的 SQL 程式碼建議清理及轉換資料。
+Gemini in BigQuery 可生成內容感知 SQL 程式碼建議，讓您在 BigQuery 資料準備中清理及轉換資料。使用這些建議，您就能建立資料準備步驟，並將資料表資料標準化，以便進行分析，而不必手動編寫複雜的 SQL 運算式。
 
 詳情請參閱「[BigQuery 資料準備總覽](https://docs.cloud.google.com/bigquery/docs/data-prep-introduction?hl=zh-tw)」。
 
@@ -145,13 +145,13 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 1. 在資料或結構定義檢視畫面中，選擇「轉換」選項。您也可以選擇資料欄或新增範例，協助 Gemini 瞭解資料轉換。
 2. 在「Description」(說明) 欄位輸入提示詞，例如 `Convert the state
    column to uppercase`。
-3. 按一下「傳送」。
+3. 按一下「傳送」圖示 。
 
    Gemini 會根據提示詞生成 SQL 運算式和新說明。
 
    **注意：** SQL 運算式在生成轉換時，會使用新的自然語言運算式體驗。
 4. 在「Target column」(目標欄) 清單中，選取或輸入資料欄名稱。
-5. 選用：如要更新 SQL 運算式，請修改提示，然後按一下「send」**「Send」(傳送)**，或手動輸入 SQL 運算式。
+5. 選用：如要更新 SQL 運算式，請修改提示，然後按一下「傳送」圖示 send，或手動輸入 SQL 運算式。
 6. (選用) 按一下「預覽」，查看步驟。
 7. 按一下「套用」。
 
@@ -189,7 +189,7 @@ Gemini for BigQuery 建議的操作，只會從 JSON 的頂層擷取欄位。如
 4. (選用) 按一下「預覽」，查看步驟。
 5. 按一下「套用」。
 
-**注意：** 簡化記錄不會展開記錄中的巢狀 JSON 物件或重複欄位 (陣列)。如要存取其內容，您必須在不同的步驟中簡維這些欄位。
+**注意：** 簡化記錄不會展開記錄中的巢狀 JSON 物件或重複欄位 (陣列)。如要存取這些欄位的內容，您必須在不同的步驟中將這些欄位扁平化。
 
 ### 解除巢狀陣列
 
@@ -210,7 +210,7 @@ Gemini for BigQuery 建議的操作，只會從 JSON 的頂層擷取欄位。如
 4. (選用) 按一下「預覽」，查看步驟。
 5. 按一下「套用」。
 
-**注意：** 取消巢狀結構時，如果原始資料表中的資料欄與取消巢狀結構的陣列資料欄同名，可能會發生錯誤。如要解決這個問題，請先重新命名原始資料表中發生衝突的資料欄，再執行取消巢狀結構作業。
+**注意：** 取消巢狀結構時，如果原始資料表中的資料欄與取消巢狀結構的陣列中的資料欄同名，可能會發生錯誤。如要解決這個問題，請先重新命名原始資料表中發生衝突的資料欄，再執行取消巢狀結構作業。
 
 ### 篩選表格列
 
@@ -223,7 +223,7 @@ Gemini for BigQuery 建議的操作，只會從 JSON 的頂層擷取欄位。如
    Gemini 會根據提示詞生成 SQL 運算式和新說明。
 
    **注意：** SQL 運算式在生成轉換時，會使用新的自然語言運算式體驗。
-4. 選用：如要更新 SQL 運算式，請修改提示，然後按一下「傳送」send，或手動輸入 SQL 運算式。
+4. 選用：如要更新 SQL 運算式，請修改提示，然後按一下「傳送」圖示 ，或手動輸入 SQL 運算式。
 5. (選用) 按一下「預覽」，查看步驟。
 6. 按一下「套用」。
 
@@ -245,9 +245,9 @@ Gemini for BigQuery 建議的操作，只會從 JSON 的頂層擷取欄位。如
    * 在「Record choosing」(記錄選擇) 清單中，選取下列其中一項策略：
      + **First**：對於具有相同簡化鍵值的每組資料列，這項策略會根據 `ORDER BY` 運算式選擇第一個資料列，並移除其餘資料列。
      + **Last**：對於具有相同簡化鍵值的每組資料列，這項策略會根據 `ORDER BY` 運算式選擇最後一個資料列，並移除其餘資料列。
-     + **任意**：對於具有相同簡化鍵值的每組資料列，這項策略會從該組中選擇任意資料列，並移除其餘資料列。
+     + **任意**：針對具有相同簡化鍵值的每組資料列，這項策略會從該組中選擇任意資料列，並移除其餘資料列。
      + **Distinct**：移除資料表中所有資料欄的所有重複資料列。
-   * 在「Deduplication keys」(簡化鍵) 欄位中，選擇一或多個資料欄或運算式，以識別重複的資料列。如果記錄選擇策略為「First」(第一個)、「Last」(最後一個) 或「Any」(任何)，則適用這個欄位。
+   * 在「Deduplication keys」(簡化鍵) 欄位中，選擇一或多個資料欄或運算式，以識別重複的資料列。如果記錄選擇策略是「First」(第一個)、「Last」(最後一個)或「Any」(任何)，則適用這個欄位。
    * 在「Order by expression」(排序依據運算式) 欄位中，輸入定義資料列順序的運算式。例如，如要選擇最近的資料列，請輸入 `datetime DESC`。如要依名稱字母順序選擇第一列，請輸入 `last_name` 等資料欄名稱。運算式遵循與 BigQuery 中標準 [`ORDER BY` 子句](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw#order_by_clause)相同的規則。只有在記錄選擇策略為「First」(第一個) 或「Last」(最後一個) 時，這個欄位才適用。
 4. (選用) 按一下「預覽」，查看步驟。
 5. 按一下「套用」。
@@ -268,7 +268,7 @@ Gemini for BigQuery 建議的操作，只會從 JSON 的頂層擷取欄位。如
 3. 選用：選取要執行的[彙整作業](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw#join_types)類型，例如「Inner join」(內部彙整)。
 4. 在下列欄位中，查看 Gemini 生成的彙整鍵資訊：
 
-   * **Join description**：以自然語言說明彙整作業的 SQL 運算式。編輯這段說明並按一下「傳送」圖示後，Gemini 會建議新的 SQL join 條件。
+   * **Join description**：以自然語言描述彙整作業的 SQL 運算式。編輯這段說明並按一下「傳送」圖示後，Gemini 會建議新的 SQL join 條件。
    * **join 條件**：join 作業 `ON` 子句中的 SQL 運算式。您可以使用 `L` 和 `R` 限定詞，分別參照左側和右側來源資料表。舉例來說，如要將左側資料表的 `customer_id` 欄與右側資料表的 `customer_id` 欄彙整，請輸入 `L.customerId = R.customerId`。這些限定詞不區分大小寫。
 
      **注意：** 如果「Join conditions」(彙整條件) 欄位留空，彙整作業類型會自動設為「Cross join」(交叉彙整)，即使您在上一個步驟中選取其他彙整類型也一樣。
@@ -386,11 +386,11 @@ Gemini for BigQuery 建議的操作，只會從 JSON 的頂層擷取欄位。如
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-24 (世界標準時間)。
+上次更新時間：2026-10-28 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-24 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-28 (世界標準時間)。"],[],[]]

@@ -372,7 +372,5 @@ In this example, a random number of usernames are returned from the
 SELECT
   results.username
 FROM
-  (SELECT * FROM Players WHERE RAND() < 0.5) AS results;
-
--
+  (SELECT *
 ```

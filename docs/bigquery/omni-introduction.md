@@ -18,11 +18,9 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 **注意：** 如果預留項目是以特定 BigQuery 版本建立，可能無法使用這項功能。如要進一步瞭解各版本啟用的功能，請參閱「[BigQuery 版本簡介](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)」。
 
-有了 BigQuery Omni，您就能使用 BigLake 資料表，對儲存在 Amazon Simple Storage Service (Amazon S3) 或 Azure Blob Storage 的資料執行 BigQuery 分析。
+BigQuery Omni 是多雲端數據分析解決方案，可讓您使用 [BigLake 資料表](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw)，對儲存在 Amazon Simple Storage Service (Amazon S3) 或 Azure Blob 儲存體中的資料執行 BigQuery 數據分析。有了 BigQuery Omni，您就能打破資料孤島，透過統一介面分析多個公有雲中的資料，不必複製資料或增加分散式資料治理負擔。
 
-許多機構會將資料儲存在多個公有雲中。通常這些資料最後會遭到孤立，因為難以取得所有資料的洞察。您希望使用多雲端資料工具分析資料，這項工具必須便宜、快速，且不會產生分散式資料治理的額外負擔。使用 BigQuery Omni，我們就能透過統一介面減少這些摩擦。
-
-如要對外部資料執行 BigQuery 分析，您必須先[連線至 Amazon S3](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-connection?hl=zh-tw) 或 [Blob 儲存體](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-connection?hl=zh-tw)。如要查詢外部資料，您必須建立參照 Amazon S3 或 Blob 儲存體資料的 [BigLake 資料表](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw)。
+如要對外部資料執行 BigQuery 分析，請先[連線至 Amazon S3](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-connection?hl=zh-tw) 或 [Blob 儲存體](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-connection?hl=zh-tw)，然後建立參照外部儲存空間的 BigLake 資料表。
 
 ## BigQuery Omni 工具
 
@@ -118,37 +116,37 @@ BigQuery Omni 會使用標準 AWS IAM 角色或 Azure Active Directory 主體，
 
 BigQuery 使用 CMETA 做為分散式中繼資料系統，有效率地處理大型資料表。CMETA 提供資料欄和區塊層級的精細中繼資料，可透過系統資料表存取。這個系統會最佳化資料存取和處理作業，進而提升查詢效能。為進一步提升大型資料表的查詢效能，BigQuery 會維護中繼資料快取。CMETA 重新整理工作會讓這個快取保持在最新狀態。
 
-中繼資料包括檔案名稱、分區資訊，以及檔案的實體中繼資料，例如資料列數。您可以選擇是否要啟用資料表的中繼資料快取功能。含有大量檔案和 Apache Hive 分區篩選器的查詢，最能發揮中繼資料快取的效益。
+中繼資料包括檔案名稱、分區資訊，以及檔案的實體中繼資料，例如資料列數。您可以選擇是否要啟用資料表的中繼資料快取功能。如果查詢包含大量檔案，且使用 Apache Hive 分區篩選器，則中繼資料快取功能可發揮最大效益。
 
-如未啟用中繼資料快取功能，資料表查詢就必須讀取外部資料來源，才能取得物件中繼資料。讀取這類資料會增加查詢延遲時間；從外部資料來源列出數百萬個檔案可能需要幾分鐘的時間。啟用中繼資料快取功能後，查詢作業就不必列出外部資料來源中的檔案，而且能更快分區及剪除檔案。
+如未啟用中繼資料快取功能，資料表查詢就必須讀取外部資料來源，才能取得物件中繼資料。讀取這類資料會增加查詢延遲時間；列出外部資料來源中的數百萬個檔案可能需要幾分鐘的時間。啟用中繼資料快取功能後，查詢作業就不必列出外部資料來源中的檔案，而且能更快分區及剪除檔案。
 
-中繼資料快取也與 Cloud Storage 物件版本管理功能整合。填入或重新整理快取時，系統會根據當時 Cloud Storage 物件的使用中版本擷取中繼資料。因此，啟用中繼資料快取的查詢會讀取與特定快取物件版本對應的資料，即使 Cloud Storage 中有較新的版本也一樣。如要存取 Cloud Storage 中後續更新的物件版本資料，必須重新整理中繼資料快取。
+中繼資料快取也與 Cloud Storage 物件版本管理功能整合。填入或重新整理快取時，系統會根據當時 Cloud Storage 物件的使用中版本擷取中繼資料。因此，啟用中繼資料快取的查詢會讀取特定快取物件版本對應的資料，即使 Cloud Storage 中有較新的版本也一樣。如要存取 Cloud Storage 中後續更新的物件版本資料，必須重新整理中繼資料快取。
 
 有兩個屬性可控制這項功能：
 
-* **最大過時時間**指定查詢使用快取中繼資料的時間。
+* **最大過時時間**指定查詢何時使用快取的中繼資料。
 * **中繼資料快取模式**會指定中繼資料的收集方式。
 
-啟用中繼資料快取功能後，您可以指定資料表作業可接受的中繼資料過時時間間隔上限。舉例來說，如果您指定 1 小時的間隔，則資料表作業會使用過去一小時內重新整理的快取中繼資料。如果快取的中繼資料超過這個時間，作業就會改為從 Amazon S3 擷取中繼資料。您可以指定 30 分鐘至 7 天的過時間隔。
+啟用中繼資料快取功能後，您可以指定資料表作業可接受的中繼資料過時時間間隔上限。舉例來說，如果您指定 1 小時的間隔，則資料表作業會使用過去一小時內重新整理過的快取中繼資料。如果快取的中繼資料超過這個時間，作業就會改為從 Amazon S3 擷取中繼資料。您可以指定 30 分鐘至 7 天的過時間隔。
 
-為 BigLake 或物件資料表啟用中繼資料快取時，BigQuery 會觸發中繼資料生成重新整理工作。您可以選擇自動或手動重新整理快取：
+為 BigLake 或物件資料表啟用中繼資料快取功能時，BigQuery 會觸發中繼資料生成重新整理工作。您可以選擇自動或手動重新整理快取：
 
-* 如果是自動重新整理，快取會按照系統定義的時間間隔重新整理，通常介於 30 到 60 分鐘之間。如果 Amazon S3 中的檔案會不定期新增、刪除或修改，自動重新整理快取是不錯的做法。如需控制重新整理的時間點 (例如在擷取、轉換和載入工作結束時觸發重新整理)，請使用手動重新整理。
-* 如要手動重新整理，請執行 [`BQ.REFRESH_EXTERNAL_METADATA_CACHE` 系統程序](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures?hl=zh-tw#bqrefresh_external_metadata_cache)，按照符合需求的時間表重新整理中繼資料快取。如果 Amazon S3 中的檔案是以已知間隔新增、刪除或修改 (例如管道的輸出內容)，手動重新整理快取是不錯的做法。
+* 如果是自動重新整理，快取會按照系統定義的時間間隔重新整理，通常介於 30 到 60 分鐘之間。如果 Amazon S3 中的檔案會不定期新增、刪除或修改，自動重新整理快取是不錯的做法。如需控制重新整理的時間點，例如在擷取、轉換及載入工作結束時觸發重新整理，請使用手動重新整理。
+* 如要手動重新整理，請執行 [`BQ.REFRESH_EXTERNAL_METADATA_CACHE` 系統程序](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures?hl=zh-tw#bqrefresh_external_metadata_cache)，按照符合需求的排程重新整理中繼資料快取。如果 Amazon S3 中的檔案是以已知間隔新增、刪除或修改 (例如管道的輸出內容)，手動重新整理快取是不錯的做法。
 
   如果同時發出多個手動重新整理要求，只有一個會成功。
 
 如果未重新整理，中繼資料快取會在 7 天後過期。
 
-手動和自動快取重新整理都會以 [`INTERACTIVE`](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw) 查詢優先順序執行。
+手動和自動快取重新整理作業都會以 [`INTERACTIVE`](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw) 查詢優先順序執行。
 
 ### 使用 `BACKGROUND` 預留項目
 
-如果您選擇使用自動重新整理功能，建議您建立[預留項目](https://docs.cloud.google.com/bigquery/docs/reservations-intro?hl=zh-tw)，然後為執行中繼資料快取重新整理工作的專案建立[具有 `BACKGROUND` 工作類型的指派作業](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#assignments)。使用 `BACKGROUND` 預留項目時，重新整理工作會使用專屬資源集區，因此不會與使用者查詢競爭資源，也不會因資源不足而失敗。
+如果選擇使用自動重新整理功能，建議您建立[預留項目](https://docs.cloud.google.com/bigquery/docs/reservations-intro?hl=zh-tw)，然後為執行中繼資料快取重新整理工作的專案，建立[`BACKGROUND` 工作類型的指派作業](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#assignments)。有了 `BACKGROUND` 預留項目，重新整理工作會使用專屬資源集區，避免與使用者查詢競爭，也避免因資源不足而可能失敗。
 
 雖然使用共用運算單元集區不會產生額外費用，但改用 `BACKGROUND` 預留項目可分配專屬資源集區，提供更穩定的效能，並提高 BigQuery 重新整理工作的可靠性和整體查詢效率。
 
-設定過時時間間隔和中繼資料快取模式值之前，請先考量兩者之間的互動方式。請見以下範例：
+設定過時時間間隔和中繼資料快取模式值之前，請先考量兩者之間的互動。請見以下範例：
 
 * 如果您手動重新整理資料表的中繼資料快取，並將過時時間間隔設為 2 天，則必須每 2 天 (或更短時間) 執行一次 `BQ.REFRESH_EXTERNAL_METADATA_CACHE` 系統程序，才能對資料表執行作業，使用快取的中繼資料。
 * 如果您自動重新整理資料表的詮釋資料快取，並將過時時間間隔設為 30 分鐘，則對資料表執行的部分作業可能會從 Amazon S3 讀取，前提是詮釋資料快取重新整理作業的時間超過一般的 30 到 60 分鐘。
@@ -166,7 +164,7 @@ LIMIT 10;
 
 詳情請參閱「[中繼資料快取](https://docs.cloud.google.com/bigquery/docs/metadata-caching?hl=zh-tw)」。
 
-### 啟用快取且含 materialized view 的資料表
+### 啟用快取的資料表，且含有 materialized view
 
 您可以[對已啟用 Amazon Simple Storage Service (Amazon S3) 中繼資料快取的資料表使用 materialized view](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro?hl=zh-tw#biglake)，提高查詢 Amazon S3 結構化資料的效能和效率。這些 materialized view 的運作方式與 BigQuery 代管儲存空間資料表的 materialized view 相同，包括[自動重新整理](https://docs.cloud.google.com/bigquery/docs/materialized-views-manage?hl=zh-tw#automatic-refresh)和[智慧微調](https://docs.cloud.google.com/bigquery/docs/materialized-views-use?hl=zh-tw#smart_tuning)等優點。
 
@@ -238,11 +236,11 @@ BigQuery Omni 處理查詢的位置，與包含查詢資料表的資料集相同
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-24 (世界標準時間)。
+上次更新時間：2026-10-29 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-24 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]

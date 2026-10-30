@@ -239,16 +239,5 @@ WHERE
 GROUP BY
   project_id, dataset_id, table_id, error_code, day
 ORDER BY
-  day, project_id, dataset_id DESC;
-```
-
-**注意：** `INFORMATION_SCHEMA` 檢視表名稱會區分大小寫。
-
-結果大致如下：
-
-```
-+---------------------+-------------+------------+----------+----------------+----------+-----------+--------------+
-|         day         |  project_id | dataset_id | table_id |   error_code   | num_rows | num_bytes | num_requests |
-+---------------------+-------------+------------+----------+----------------+----------+-----------+--------------+
-| 2020-04-21 00:00:00 | my_project  | my_dataset | my_table
+  day, project_id, dataset_id
 ```

@@ -240,9 +240,5 @@ SELECT
 FROM UNNEST([
   STRUCT(b"\xAA\xBB\xCC\xDD" as x, 0 as prefix_length),
   (b"\xAA\xBB\xCC\xDD", 11), (b"\xAA\xBB\xCC\xDD", 12),
-  (b"\xAA\xBB\xCC\xDD", 24), (b"\xAA\xBB\xCC\xDD", 32),
-  (b'0123456789@ABCDE', 80)
-]);
-
-/*--------
+  (b"\xAA\xBB\xCC\xDD", 24), (b"\xAA\xBB\
 ```

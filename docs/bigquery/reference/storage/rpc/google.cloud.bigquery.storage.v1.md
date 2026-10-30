@@ -138,5 +138,4 @@ An enum to indicate how to interpret missing values of fields that are present i
 
 | Enums | |
 | --- | --- |
-| `MISSING_VALUE_INTERPRETATION_UNSPECIFIED` | Invalid missing value interpretation. Requests with this value will be rejected. |
-| `NULL_VALUE` | Missing value is interpreted as NULL. |
+|  |

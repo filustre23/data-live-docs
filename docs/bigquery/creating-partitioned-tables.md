@@ -1148,12 +1148,3 @@ print(
 ### bq
 
 1. 在 Google Cloud 控制台啟用 Cloud Shell。
-
-   [啟用 Cloud Shell](https://console.cloud.google.com/?cloudshell=true&hl=zh-tw)
-
-   Google Cloud 控制台底部會開啟 [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works?hl=zh-tw) 工作階段，並顯示指令列提示。Cloud Shell 是已安裝 Google Cloud CLI 的殼層環境，並已設定適用於您目前專案的值。工作階段可能要幾秒鐘的時間才能初始化。
-2. 如要透過查詢建立分區資料表，請使用 [`bq query`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_query) 指令，並加上 `--destination_table` 旗標和 `--time_partitioning_type` 旗標。
-
-   按時間單位資料欄分區：
-
-   <

@@ -366,8 +366,5 @@ The result is similar to the following:
 +--------------+-----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | complaint_id | complaint_type  |                                                                                      grievance_subject                                                                                       |
 +--------------+-----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| 4767874      | Reporting Error | ["Inaccurate debt reporting on credit report","Enhanced Recovery Company reporting debt they no longer own","Failure to delete debt from credit report after recall"]                        |
-| 2091987      | Service Issue   | ["Unwanted calls to place of employment","Request for correspondence via mail"]                                                                                                              |
-| 6047403      | Reporting Error | ["Inaccurate derogatory collection on credit report","Disputed debt collection account","Lack of debt validation documentation","Refusal to remove incorrect collection from credit report"] |
-+--------------+-----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 4767874      | Reporting Error | ["Inaccurate debt reporting on credit report","Enhanced Recovery Company reporting debt they no longer own","Failure to delete debt from credit report after recall"]
 ```

@@ -16,16 +16,12 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 多陳述式交易
 
-BigQuery 支援在單一查詢中執行多陳述式交易，或在使用工作階段時跨多個查詢執行。多陳述式交易可讓您執行變動作業，例如在一或多個資料表中插入或刪除資料列，並以不可分割的方式提交或復原變更。
+在 BigQuery 中，多陳述式交易可讓您在多個資料表執行變動作業 (例如插入或刪除資料列)，並以不可分割的方式修訂或復原變更。將資料操作陳述式分組為單一交易，可讓您在複雜的多階段更新期間，透過快照隔離維持嚴格的 [ACID](https://en.wikipedia.org/wiki/ACID) 屬性，並確保資料完整性。
 
-多陳述式交易的用途包括：
+您可以使用多陳述式交易完成下列工作：
 
-* 在多個資料表上執行 DML 異動，並視為單一交易。資料表可以跨越多個資料集或專案。
+* 在多個資料表上執行 DML 異動，做為單一交易。資料表可以跨越多個資料集或專案。
 * 根據中繼運算，在多個階段對單一資料表執行異動。
-
-交易可保證 [ACID](https://en.wikipedia.org/wiki/ACID) 屬性，並支援快照隔離。在交易期間，所有讀取作業都會傳回交易中參照資料表的一致快照。如果交易中的陳述式修改了資料表，則同一交易中的後續陳述式會顯示這些變更。
-
-**注意：** 如果基礎資料來源在交易期間發生變更，則無法保證交易中從外部資料來源讀取的資料會保持一致。
 
 ## 交易範圍
 
@@ -39,7 +35,7 @@ BigQuery 支援在單一查詢中執行多陳述式交易，或在使用工作�
 
 如果交易期間發生錯誤，且查詢有[例外狀況處理常式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language?hl=zh-tw#beginexceptionend)，BigQuery 會將控制權轉移給例外狀況處理常式。在例外狀況區塊中，您可以選擇要修訂或復原交易。
 
-如果工作階段模式已停用，且交易期間發生錯誤，但沒有例外狀況處理常式，則查詢會失敗，BigQuery 會自動復原交易。
+停用工作階段模式時，如果交易期間發生錯誤，且沒有例外狀況處理常式，查詢就會失敗，BigQuery 會自動復原交易。
 
 啟用工作階段模式且沒有例外狀況處理常式時，交易會保持有效狀態，直到工作階段終止或明確復原為止。無論工作階段模式為何，建議您新增例外狀況處理常式，確保交易能盡快正確復原，避免不必要地保留鎖定和資源。
 
@@ -72,8 +68,8 @@ END;
 
   + `CREATE TEMP TABLE`
   + `CREATE TEMP FUNCTION`
-  + 臨時資料表上的 `DROP TABLE`
-  + `DROP FUNCTION` 臨時函式
+  + 在臨時資料表上執行 `DROP TABLE`
+  + 臨時函式上的 `DROP FUNCTION`
 
 交易中不支援建立或捨棄永久實體 (例如資料集、資料表和函式) 的 DDL 陳述式。
 
@@ -155,7 +151,7 @@ COMMIT TRANSACTION;
 
 在多陳述式交易中執行變動 DML 陳述式時，BigQuery 會保留目標資料表的寫入鎖定，直到交易提交或復原，或父項多陳述式查詢或工作階段結束為止。這項行為適用於[多陳述式查詢](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries?hl=zh-tw)、[預存程序](https://docs.cloud.google.com/bigquery/docs/procedures?hl=zh-tw)或有效[工作階段](https://docs.cloud.google.com/bigquery/docs/sessions-intro?hl=zh-tw) (例如 ODBC 或 JDBC 連線) 中的交易。個別 DML 陳述式完成時，BigQuery 不會釋出鎖定。在同一個開啟的交易中，長時間執行的運算會使資料表保持鎖定狀態，導致該資料表上的並行變動交易失敗。
 
-讀取或附加新資料列的作業可以與交易同時執行。舉例來說，當交易在資料表中變更資料時，可以同時對該資料表執行下列任一作業：
+讀取或附加新資料列的作業可與交易同時執行。舉例來說，當交易在資料表中變更資料時，可以同時對該資料表執行下列任一作業：
 
 * `SELECT` 個陳述式
 * BigQuery Storage Read API 讀取作業
@@ -175,15 +171,15 @@ COMMIT TRANSACTION;
 
 ## 查看交易資訊
 
-BigQuery 會為每筆多陳述式交易指派交易 ID。交易 ID 會附加至交易中執行的每項查詢。如要查看工作的交易 ID，請查詢 [`INFORMATION_SCHEMA.JOBS*`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw) 檢視表的 `transaction_id` 欄。
+BigQuery 會為每筆多陳述式交易指派交易 ID。交易 ID 會附加至在交易中執行的每項查詢。如要查看工作的交易 ID，請查詢 [`INFORMATION_SCHEMA.JOBS*`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw) 檢視表的 `transaction_id` 欄。
 
 執行多陳述式交易時，BigQuery 會為交易中的每個陳述式建立子工作。對於特定交易，與該交易相關聯的每個子項工作都具有相同的 `transaction_id` 值。
 
 以下範例說明如何查看交易資訊。
 
-### 找出所有已提交或復原的交易
+### 找出所有已修訂或復原的交易
 
-下列查詢會傳回所有成功提交的交易。
+下列查詢會傳回所有成功修訂的交易。
 
 ```
 SELECT transaction_id, parent_job_id, query
@@ -213,7 +209,7 @@ AND statement_type IN
 ORDER BY start_time;
 ```
 
-### 找出執行工作的交易
+### 找出正在執行工作的交易
 
 下列查詢會取得與指定工作 ID 相關聯的交易。如果工作並非在多陳述式交易中執行，則會傳回 `NULL`。
 
@@ -235,7 +231,7 @@ WHERE transaction_id = 'TRANSACTION_ID' AND state = RUNNING;
 
 ### 找出影響資料表的有效交易
 
-下列查詢會傳回影響指定資料表的有效交易。如果交易是以多重陳述式查詢的一部分執行 (例如在[預存程序](https://docs.cloud.google.com/bigquery/docs/procedures?hl=zh-tw)中)，則每筆進行中的交易也會傳回父項工作 ID。如果交易是在工作階段中執行，則也會傳回工作階段資訊。
+下列查詢會傳回影響指定資料表的有效交易。對於每項進行中的交易，如果交易是以多重陳述式查詢的一部分執行 (例如在[預存程序](https://docs.cloud.google.com/bigquery/docs/procedures?hl=zh-tw)中)，則也會傳回父項工作 ID。如果交易是在工作階段中執行，則也會傳回工作階段資訊。
 
 ```
 WITH running_transactions AS (
@@ -261,7 +257,7 @@ WHERE
 
 ### 找出在多陳述式交易中執行的有效交易
 
-下列查詢會傳回特定工作的有效交易，並以執行多陳述式交易的工作 ID 指定。
+下列查詢會傳回特定工作的有效交易，並以執行多重陳述式交易的工作 ID 指定。
 
 ```
 SELECT DISTINCT transaction_id
@@ -336,10 +332,11 @@ ORDER BY
 
 ## 限制
 
+* 如果基礎資料來源在交易期間有所變更，則無法保證交易中從外部資料來源讀取的資料會保持一致。
 * 交易無法使用會影響永久實體的 DDL 陳述式。
-* 在交易中，[materialized view](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro?hl=zh-tw) 會解讀為邏輯檢視表。您仍可在交易中查詢 materialized view，但與對等的邏輯檢視表相比，效能不會提升，成本也不會降低。
-* 如果多陳述式交易失敗，系統會觸發復原作業，復原所有待變更項目，並防止重試。
-* 一筆交易最多可變更 100 個資料表中的資料，且最多可執行 100,000 次分區修改。
+* 在交易中，[materialized view](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro?hl=zh-tw) 會解讀為邏輯 view。您仍可在交易中查詢 materialized view，但與對等的邏輯檢視表相比，這不會提升效能或降低成本。
+* 多陳述式交易失敗時，會觸發復原作業，撤銷所有待變更項目，並防止重試。
+* 一筆交易最多可變動 100 個資料表中的資料，且最多可執行 100,000 次分區修改。
 * [BI Engine](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro?hl=zh-tw) 不會加速交易中的查詢。
 * 無法使用[系統程序](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures?hl=zh-tw#bqrefresh_external_metadata_cache)在交易中重新整理外部資料來源的中繼資料。
 
@@ -350,11 +347,11 @@ ORDER BY
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-24 (世界標準時間)。
+上次更新時間：2026-10-30 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-24 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-30 (世界標準時間)。"],[],[]]

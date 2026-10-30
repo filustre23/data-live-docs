@@ -290,17 +290,3 @@ SELECT CBRT(27) AS cube_root;
 ```
 
 ## `CEIL`
-
-```
-CEIL(X)
-```
-
-**Description**
-
-Returns the smallest integral value that isn't less than X.
-
-| X | CEIL(X) |
-| --- | --- |
-| 2.0 | 2.0 |
-| 2.3 | 3.0 |
-| 2.8 |

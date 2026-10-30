@@ -16,13 +16,9 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 在 GoogleSQL 中使用 JSON 資料
 
-本文說明如何建立含有 `JSON` 欄的資料表、將 JSON 資料插入 BigQuery 資料表，以及查詢 JSON 資料。
+您可以使用 BigQuery 中的 [`JSON`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#json_type) 資料類型，分析不一定遵循固定結構定義的半結構化資料。直接將 JSON 資料載入資料表，即可個別處理每個欄位，並編寫符合成本效益的查詢，不必強制執行嚴格的 `STRUCT` 結構定義。
 
-BigQuery 原生支援使用 [`JSON`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#json_type) 資料類型的 JSON 資料。
-
-JSON 是一種廣泛使用的格式，可支援半結構化資料，因為不需要結構定義。應用程式可以採用「讀取時定義結構定義」的方法，也就是先擷取資料，然後根據對資料結構定義的假設進行查詢。這種方法與 BigQuery 中的 `STRUCT` 類型不同，後者需要固定的結構定義，並強制套用至儲存在 `STRUCT` 類型資料欄中的所有值。
-
-使用 `JSON` 資料類型，即可將半結構化 JSON 載入 BigQuery，不必預先提供 JSON 資料的結構定義。這樣一來，您就能儲存及查詢不一定符合固定結構定義和資料類型的資料。將 JSON 資料擷取為 `JSON` 資料類型後，BigQuery 就能個別編碼及處理每個 JSON 欄位。接著，您可以使用欄位存取運算子，查詢 JSON 資料中的欄位值和陣列元素，讓 JSON 查詢變得直覺且符合成本效益。
+`JSON` 資料類型可讓您使用「讀取時定義結構定義」方法，也就是應用程式擷取資料，然後根據資料結構定義的假設進行查詢。這種方法與 BigQuery 中的 `STRUCT` 類型不同，後者需要固定的結構定義，並強制套用至儲存在 `STRUCT` 類型資料欄中的所有值。
 
 ## 限制
 
@@ -33,7 +29,7 @@ JSON 是一種廣泛使用的格式，可支援半結構化資料，因為不需
 
 如要瞭解 `JSON` 資料類型的屬性，請參閱「[`JSON` 類型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#json_type)」。
 
-## 建立含有 `JSON` 資料欄的資料表
+## 建立含有 `JSON` 欄的資料表
 
 您可以使用 SQL 或 bq 指令列工具，建立含有 `JSON` 資料欄的空白資料表。
 
@@ -101,7 +97,7 @@ AS (
 );
 ```
 
-本例中使用的 [`SAFE` 前置字元](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/functions-reference?hl=zh-tw#safe_prefix)可確保任何轉換錯誤都會以 `NULL` 值傳回。
+本例使用的 [`SAFE` 前置字元](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/functions-reference?hl=zh-tw#safe_prefix)可確保任何轉換錯誤都會以 `NULL` 值傳回。
 
 ### 將結構化資料轉換為 JSON
 
@@ -210,7 +206,7 @@ Last modified          Schema         Total Rows   Total Bytes
 
 ### 使用 Storage Write API (gRPC)
 
-您可以使用 [Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api?hl=zh-tw) 擷取 JSON 資料。下列範例使用 Storage Write API (gRPC) [Python 用戶端](https://docs.cloud.google.com/bigquery/docs/write-api?hl=zh-tw#python_client)，將資料寫入含有 JSON 資料類型資料欄的資料表。
+您可以使用 [Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api?hl=zh-tw) 擷取 JSON 資料。以下範例使用 Storage Write API (gRPC) [Python 用戶端](https://docs.cloud.google.com/bigquery/docs/write-api?hl=zh-tw#python_client)，將資料寫入含有 JSON 資料類型資料欄的資料表。
 
 定義通訊協定緩衝區，用於保存序列化串流資料。JSON 資料會編碼為字串。在下列範例中，`json_col` 欄位包含 JSON 資料。
 
@@ -222,7 +218,7 @@ message SampleData {
 }
 ```
 
-將每列的 JSON 資料格式設為 `STRING` 值：
+將每個資料列的 JSON 資料格式設為 `STRING` 值：
 
 ```
 row.json_col = '{"a": 10, "b": "bar"}'
@@ -291,7 +287,7 @@ else:
 
 本節說明如何使用 GoogleSQL 從 JSON 擷取值。JSON 區分大小寫，且欄位和值都支援 UTF-8。
 
-本節範例使用下列資料表：
+本節中的範例使用下列資料表：
 
 ```
 CREATE OR REPLACE TABLE mydataset.table1(id INT64, cart JSON);
@@ -363,7 +359,7 @@ FROM mydataset.table1;
 +---------+
 ```
 
-對於下標作業，括號內的運算式可以是任何任意字串或整數運算式，包括非常數運算式：
+對於下標運算，括號內的運算式可以是任何任意字串或整數運算式，包括非常數運算式：
 
 ```
 DECLARE int_val INT64 DEFAULT 0;
@@ -407,7 +403,7 @@ FROM
 
 `JSON` 資料類型未定義等式和比較運算子。因此，您無法直接在 `GROUP BY` 或 `ORDER BY` 等子句中使用 `JSON` 值。請改用 `JSON_VALUE` 函式，將欄位值擷取為 SQL 字串，詳情請參閱下一節。
 
-### 以字串形式擷取值
+### 擷取值做為字串
 
 [`JSON_VALUE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions?hl=zh-tw#json_value) 函式會擷取純量值，並以 SQL 字串形式傳回。如果 `cart.name` 未指向 JSON 中的純量值，則會傳回 SQL `NULL`。
 
@@ -495,7 +491,7 @@ SELECT LAX_INT64(JSON '"10"') AS id;
 
 JSON 可包含 JSON 陣列，但這與 BigQuery 中的 `ARRAY<JSON>` 類型不完全相同。您可以使用下列函式，從 JSON 擷取 BigQuery `ARRAY`：
 
-* [`JSON_QUERY_ARRAY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions?hl=zh-tw#json_query_array)：擷取陣列，並以 JSON `ARRAY<JSON>` 形式傳回。
+* [`JSON_QUERY_ARRAY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions?hl=zh-tw#json_query_array)：擷取陣列，並以 JSON `ARRAY<JSON>` 的形式傳回。
 * [`JSON_VALUE_ARRAY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions?hl=zh-tw#json_value_array)：擷取純量值陣列，並以純量值的 `ARRAY<STRING>` 形式傳回。
 
 以下範例使用 `JSON_QUERY_ARRAY` 擷取 JSON 陣列：
@@ -605,11 +601,11 @@ FROM (SELECT JSON '{"a": null}' AS json);
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-24 (世界標準時間)。
+上次更新時間：2026-10-29 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-24 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]

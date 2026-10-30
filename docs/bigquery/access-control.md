@@ -25,11 +25,11 @@ Identity and Access Management (IAM) 可讓您使用預先定義的角色和精�
 * Apache Flink 適用的 BigQuery 引擎
 * BigQuery 遷移服務
 * BigQuery Omni
-* BigQuery 共用
+* BigQuery sharing
 
 ## BigQuery 預先定義的 IAM 角色
 
-下表列出預先定義的 BigQuery IAM 角色，以及各角色具備的所有[權限](#bq-permissions)對應清單。請注意，每項權限都適用於特定資源類型。
+下表列出預先定義的 BigQuery IAM 角色，以及各角色具備的所有[權限](#bq-permissions)對應清單。請注意，每項權限只適用於特定資源類型。
 
 **注意：** BigQuery 新增功能時，預先定義的 IAM 角色可能會新增權限，BigQuery 也可能會新增預先定義的 IAM 角色。如果貴組織要求角色定義保持不變，請建立[自訂 IAM 角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)。
 
@@ -172,4 +172,4 @@ Service agent roles should only be granted to [service agents](https://docs.clou
 
 ### BigQuery 共用角色
 
-下表列出 BigQuery 共用功能的預先定義 IAM 角色和權限。如要搜尋所有角色和權限，請參閱[角色和權限索引](https://docs.cloud.google.com/iam/docs/roles-permissions?hl=zh-tw)。
+下表列出 Bi

@@ -921,5 +921,5 @@ public class DisableTransferConfig {
 
   public static void disableTransferConfig(TransferConfig transferConfig, FieldMask updateMask)
       throws IOException {
-    try (DataTransferServiceClient dataTransferServiceClient =
+    try (
 ```

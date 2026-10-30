@@ -211,7 +211,4 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
    [前往 BigQuery](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 按一下「資料移轉」。
 3. 按一下「建立轉移作業」。
-4. 在「Source type」(來源類型) 區段中，從「Source」(來源) 清單選取「Migration: Amazon Redshift」(遷移：Amazon Redshift)。
-5. 在「Transfer config name」(轉移設定名稱) 區段中，於「Display name」(顯示名稱) 欄位輸入移轉作業的名稱，例如 `My migration`。顯示名稱可以是任何容易辨識的值，方便您日後在必要時進行修改。
-6. 在「Destination settings」(目的地設定) 部分，從「Dataset」(資料集) 清單中選擇[您建立的資料集](#create_a_dataset)。
-7. 在
+4. 在「Source type」(來源類型)

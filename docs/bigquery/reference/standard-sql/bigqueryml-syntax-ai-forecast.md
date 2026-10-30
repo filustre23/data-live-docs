@@ -444,7 +444,5 @@ WITH
 SELECT *
 FROM
   AI.FORECAST(
-    TABLE citibike_trips,
-    data_col => 'num_trips',
-    timestamp_col => 'date',
+    TABLE
 ```

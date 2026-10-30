@@ -226,5 +226,5 @@ func main() {
 	projectID := "YOUR_PROJECT_ID"
 
 	// Creates a client.
-	client, err := datatransfer.
+	client,
 ```

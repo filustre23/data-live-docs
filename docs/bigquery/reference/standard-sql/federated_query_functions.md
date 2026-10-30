@@ -372,10 +372,3 @@ types.
 | UUID | Universally unique identifier encoded as a 128-bit integer. | STRING |
 | hana.ST\_GEOMETRY | Spatial data in any form, including 0-dimensional points, lines, multi-lines, and polygons. | NOT SUPPORTED |
 | hana.ST\_POINT | Spatial data in the form of 0-dimensional points that represents a single location in coordinate space. | NOT SUPPORTED |
-
-
-
-
-Send feedback
-
-Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the

@@ -266,12 +266,4 @@ gcs:
 * 对于 `user_rules`，请使用变量 `user`
 * 对于 `group_rules`，请使用变量 `group`
 * 对于 `other_rules`，请使用变量 `other`
-* 对于 `role_rules`，请使用变量 `role`
-
-以下示例将 HDFS 中的用户映射到 Google Cloud中的用户，以用户名后跟 `@google.com` 作为其邮箱：
-
-```
-hdfs:
-  user_rules:
-    # Skip user named 'example'
-```
+* 对于 `role_rules`

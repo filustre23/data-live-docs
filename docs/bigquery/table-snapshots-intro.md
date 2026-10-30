@@ -70,7 +70,7 @@ BigQuery 資料表快照會保留特定時間點的資料表內容 (稱為「基
 * 您無法對檢視區塊或具體化檢視區塊建立快照。
 * 您無法對[外部資料表](https://docs.cloud.google.com/bigquery/docs/external-tables?hl=zh-tw)建立快照。
 * 建立資料表快照時，無法覆寫現有資料表或資料表快照。
-* 如果資料表在[寫入最佳化儲存空間 (串流緩衝區)](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery?hl=zh-tw#dataavailability) 中有資料，則建立快照時不會納入這些資料。
+* 如果資料表在[寫入最佳化儲存空間 (串流緩衝區)](https://docs.cloud.google.com/bigquery/docs/write-api-rest?hl=zh-tw#dataavailability) 中有資料，則建立快照時不會納入這些資料。
 * 如果您為含有[時空旅行](https://docs.cloud.google.com/bigquery/docs/time-travel?hl=zh-tw)資料的資料表建立快照，時空旅行中的資料不會納入資料表快照。
 * 如果為已設定[分區到期時間](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#partition-expiration)的分區資料表建立快照，快照不會保留分區到期時間資訊。快照資料表會改用目的地資料集的預設分區到期時間。如要保留分區到期資訊，請改為[複製資料表](https://docs.cloud.google.com/bigquery/docs/managing-tables?hl=zh-tw#copy-table)。
 
@@ -93,11 +93,11 @@ BigQuery 資料表快照會保留特定時間點的資料表內容 (稱為「基
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-24 (世界標準時間)。
+上次更新時間：2026-10-29 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-24 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]

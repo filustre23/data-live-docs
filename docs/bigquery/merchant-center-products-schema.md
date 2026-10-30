@@ -149,9 +149,5 @@ ORDER BY
 SELECT
   _PARTITIONDATE AS date,
   applicable_country,
-  COUNT(DISTINCT CONCAT(CAST(merchant_id AS STRING), ':', product_id))
-      AS num_distinct_products
-FROM
-  dataset.Products_merchant_id,
-  UNNEST(issues)</
+  COUNT(DISTINCT CONCAT(CAST(merchant_id AS STRING), ':', product_id
 ```

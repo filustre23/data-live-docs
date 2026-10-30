@@ -301,7 +301,3 @@ return an error, because the function doesn't support length arguments with
 negative values. However, the `SAFE.` prefix causes the function to return
 `NULL` instead. The second use of the `SUBSTR` function provides the expected
 output: the `SAFE.` prefix has no effect.
-
-```
-SELECT SAFE.SUBSTR('foo', 0, -2
-```

@@ -26,8 +26,8 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ## 用途
 
-* **開放式湖倉：**使用 Cloud Storage 做為儲存層，並透過 Google Cloud 的 Lakehouse 管理及控管 Apache Iceberg 資料。
-* **整合分析和交易：**直接在 AlloyDB for PostgreSQL ([預先發布版][4]) 中存取分析 Apache Iceberg 資料表，將分析資料與交易工作負載結合。
+* **開放式湖倉：**使用 Cloud Storage 做為儲存層，Google Cloud 的 Lakehouse 則提供 Apache Iceberg 資料的管理和控管介面。
+* **整合分析和交易：**直接在 AlloyDB for PostgreSQL ([預先發布版](https://docs.cloud.google.com/alloydb/docs/access-real-time-data-overview?hl=zh-tw)) 存取分析 Apache Iceberg 資料表，將分析資料與交易工作負載結合。
 * **統一存取：**讓不同引擎 (Apache Spark、Apache Flink、BigQuery) 透過一致的中繼資料，與相同的 Apache Iceberg 資料表互動。
 * **跨雲端數據分析和 AI：**存取跨雲端資料 ([預先發布版](https://docs.cloud.google.com/lakehouse/docs/about-cross-cloud-data-access?hl=zh-tw))，同步處理其他雲端服務供應商的中繼資料，透過 Apache Iceberg REST 目錄端點，使用 BigQuery 或外部開放原始碼引擎查詢資料，完全不必遷移資料。
 * **探索公開資料集：**使用 Apache Iceberg REST 目錄端點，輕鬆查詢高品質的公開資料集，不必管理基礎架構。
@@ -56,11 +56,11 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-24 (世界標準時間)。
+上次更新時間：2026-10-28 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-24 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-28 (世界標準時間)。"],[],[]]

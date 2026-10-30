@@ -31,7 +31,7 @@ BigQuery 會將所有查詢結果寫入資料表。這份資料表可以由使�
 
 ## 定價與配額
 
-快取的查詢結果會儲存為暫時性資料表。您不需要為儲存至暫時性資料表的快取查詢結果支付費用。如果查詢結果是擷取自快取結果資料表，系統傳回的工作統計資料屬性 `statistics.query.cacheHit` 值為 `true`，您就無須為這項查詢作業支付費用。雖然使用快取結果的查詢作業不收費，但仍適用 BigQuery [配額政策](https://docs.cloud.google.com/bigquery/quota-policy?hl=zh-tw)。
+快取的查詢結果會儲存為暫時性資料表。您不需要為儲存至暫時性資料表的快取查詢結果支付費用。如果查詢結果是擷取自快取結果資料表，系統傳回的工作統計資料屬性 `statistics.query.cacheHit` 值為 `true`，您就無須為這項查詢作業支付費用。雖然使用快取結果的查詢作業不收費，但仍適用 BigQuery [配額政策](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw)。
 
 除了降低成本以外，使用快取結果的查詢作業因為 BigQuery 不需計算結果集，可大幅加快執行速度。
 
@@ -45,7 +45,7 @@ BigQuery 會將所有查詢結果寫入資料表。這份資料表可以由使�
 * 如果查詢使用非確定性函式，比方日期和時間函式 (例如 `CURRENT_TIMESTAMP()` 和 `CURRENT_DATE`) 以及其他函式 (像是 `SESSION_USER()`)，系統會根據查詢執行時間傳回不同的值。
 * 使用[萬用字元](https://docs.cloud.google.com/bigquery/docs/querying-wildcard-tables?hl=zh-tw)查詢多個資料表。
 * 快取結果已過期。一般快取的生命週期為 24 小時，但系統會盡量擷取快取結果，因此快取可能會更快失效。
-* 針對 Cloud Storage 以外的[外部資料來源](https://docs.cloud.google.com/bigquery/external-data-sources?hl=zh-tw)執行查詢。(系統會快取查詢結果，因此支援對 Cloud Storage 執行 GoogleSQL 查詢)。
+* 針對 Cloud Storage 以外的[外部資料來源](https://docs.cloud.google.com/bigquery/docs/external-data-sources?hl=zh-tw)執行查詢。(系統會快取查詢結果，因此支援對 Cloud Storage 執行 GoogleSQL 查詢)。
 * 如果查詢是針對受[資料列層級安全防護機制](https://docs.cloud.google.com/bigquery/docs/using-row-level-security-with-features?hl=zh-tw)保護的資料表執行，結果就不會快取。
 * 如果查詢是針對受[資料欄層級安全性](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro?hl=zh-tw)保護的資料表執行 (包括資料遮蓋)，系統可能不會快取結果。
 * 如果查詢文字有任何變更，包括修改空白字元或註解。
@@ -377,11 +377,11 @@ for row in query_job:
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-24 (世界標準時間)。
+上次更新時間：2026-10-29 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-24 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]

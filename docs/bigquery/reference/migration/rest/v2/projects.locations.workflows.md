@@ -173,7 +173,3 @@ The translation config to capture necessary settings for a translation task and 
 | JSON representation |
 | --- |
 | ``` {   "sourceDialect": {     object (Dialect)   },   "targetDialect": {     object (Dialect)   },   "sourceEnv": {     object (SourceEnv)   },   "requestSource": string,   "targetTypes": [     string   ],    // The following is a list of mutually exclusive fields. At most one of the   // fields will be set in a response:   "gcsSourcePath": string   // End of mutually exclusive fields.    // The following is a list of mutually exclusive fields. At most one of the   // fields will be set in a response:   "gcsTargetPath": string   // End of mutually exclusive fields.    // The following is a list of mutually exclusive fields. At most one of the   // fields will be set in a response:   "nameMappingList": {     object (ObjectNameMappingList)   }   // End of mutually exclusive fields. } ``` |
-
-| Fields | |
-| --- | --- |
-| `sourceDialect` |

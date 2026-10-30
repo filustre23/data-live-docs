@@ -350,7 +350,7 @@ OBJ.LIST(
 **Description**
 
 The `OBJ.LIST` function returns a table of metadata and `ObjectRef` values for
-files stored in Cloud Storage. `OBJ.LIST` lets you perform ad-hoc discovery
+files stored in Cloud Storage. `OBJ.LIST` lets you perform ad hoc discovery
 and analysis of unstructured data. The Cloud Storage data can include documents,
 images, and audio. The `OBJ.LIST` function can discover objects across all
 [Cloud Storage classes](/storage/docs/storage-classes).
@@ -393,9 +393,4 @@ For more information, see [Work with `ObjectRef` values](/bigquery/docs/work-wit
 A table with metadata that represents the objects found in
 Cloud Storage. The table includes the following columns:
 
-* `uri`: a `STRING` value that contains the Cloud Storage URI of the
-  object.
-* `content_type`: a `STRING` value that contains the MIME type of the object,
-  for example, `image/jpeg` or `application/pdf`.
-* `size`: an `INT64` value that contains the object size in bytes.
-* `md5_hash`: a `STRING` value that contains the MD5 hash of the object.
+* `uri`: a

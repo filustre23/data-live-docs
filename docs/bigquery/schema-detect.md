@@ -16,9 +16,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 使用結構定義自動偵測功能
 
-## 結構定義自動偵測
-
-結構定義自動偵測功能可讓 BigQuery 推論 CSV、JSON 或 Google 試算表資料的結構定義。將資料[載入](https://docs.cloud.google.com/bigquery/docs/loading-data?hl=zh-tw) BigQuery，以及查詢[外部資料來源](https://docs.cloud.google.com/bigquery/external-data-sources?hl=zh-tw)時，可以使用結構定義自動偵測功能。
+BigQuery 結構定義自動偵測功能可自動推論 CSV、JSON 或 Google 試算表資料的結構定義，不必手動定義資料欄類型。將資料[載入](https://docs.cloud.google.com/bigquery/docs/loading-data?hl=zh-tw) BigQuery 或查詢[外部資料來源](https://docs.cloud.google.com/bigquery/external-data-sources?hl=zh-tw)時，可以使用結構定義自動偵測功能。
 
 啟用自動偵測功能後，BigQuery 會推論每個資料欄的資料類型。BigQuery 會從資料來源隨機選取一個檔案，並掃描前 500 個資料列做為代表性樣本。接著，BigQuery 會檢查每個欄位，並嘗試根據樣本中的值，為該欄位指派資料類型。如果資料欄中的所有資料列都是空白，自動偵測功能會將該資料欄預設為 `STRING` 資料類型。
 
@@ -570,11 +568,11 @@ BigQuery 會推論 JSON 檔案中的巢狀和重複欄位。如果欄位值是 J
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-26 (世界標準時間)。
+上次更新時間：2026-10-30 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-26 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-30 (世界標準時間)。"],[],[]]

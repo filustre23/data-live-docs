@@ -87,7 +87,7 @@ AEAD 加密函式可讓您建立包含加密和解密金鑰的金鑰組、使用
 
 * [`KEYS.NEW_WRAPPED_KEYSET`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions?hl=zh-tw#keysnew_wrapped_keyset)：建立新的包裝金鑰集。
 * [`KEYS.ROTATE_WRAPPED_KEYSET`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions?hl=zh-tw#keysrotate_wrapped_keyset)：輪替包裝的金鑰組。
-* [`KEYS.REWRAP_KEYSET`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions?hl=zh-tw#keysrewrap_keyset)：使用新資料重新包裝已包裝的金鑰組。
+* [`KEYS.REWRAP_KEYSET`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions?hl=zh-tw#keysrewrap_keyset)：使用新資料重新包裝已包裝的金鑰集。
 * [`KEYS.KEYSET_CHAIN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions?hl=zh-tw#keyskeyset_chain)：取得以 [Cloud KMS 金鑰](#cloud_kms_protection)加密的 [Tink](https://github.com/google/tink/blob/master/proto/tink.proto) 金鑰組。
 
 ### 高級加密標準 (AES)
@@ -120,7 +120,7 @@ AEAD 加密函式支援使用 `additional_data` 引數，也稱為關聯資料 (
 
 使用金鑰組進行解密時，系統會根據在密文中編碼的金鑰 ID 選擇適當的金鑰進行解密。
 
-`AEAD.DECRYPT_STRING` 的輸出內容是明文 STRING，`AEAD.DECRYPT_BYTES` 的輸出內容則是明文 `BYTES`。`AEAD.DECRYPT_STRING` 可解密編碼 STRING 值的密文；`AEAD.DECRYPT_BYTES` 可解密編碼 `BYTES` 值的密文。如果使用其中一個函式解密編碼錯誤資料類型的密文，例如使用 `AEAD.DECRYPT_STRING` 解密編碼 `BYTES` 值的密文，會導致未定義的行為，並可能發生錯誤。
+`AEAD.DECRYPT_STRING` 的輸出內容是純文字 STRING，而 `AEAD.DECRYPT_BYTES` 的輸出內容則是純文字 `BYTES`。`AEAD.DECRYPT_STRING` 可解密編碼 STRING 值的密文；`AEAD.DECRYPT_BYTES` 可解密編碼 `BYTES` 值的密文。如果使用其中一個函式解密編碼錯誤資料類型的密文，例如使用 `AEAD.DECRYPT_STRING` 解密編碼 `BYTES` 值的密文，會導致未定義的行為，並可能發生錯誤。
 
 ### 金鑰輪替
 
@@ -135,7 +135,7 @@ AEAD 加密函式支援使用 `additional_data` 引數，也稱為關聯資料 (
 
 ### Cloud KMS 金鑰
 
-GoogleSQL 支援 [AEAD 加密函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions?hl=zh-tw)和 [Cloud KMS 金鑰](https://docs.cloud.google.com/kms/docs/resource-hierarchy?hl=zh-tw)，可進一步保護資料。這層額外保護措施會使用金鑰加密金鑰 (KEK) 加密資料加密金鑰 (DEK)。KEK 是對稱加密金鑰組，安全地儲存在 Cloud Key Management Service 中，並使用 [Cloud KMS 權限和角色](https://docs.cloud.google.com/kms/docs/reference/permissions-and-roles?hl=zh-tw#predefined)管理。
+GoogleSQL 支援 [AEAD 加密函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions?hl=zh-tw)和 [Cloud KMS 金鑰](https://docs.cloud.google.com/kms/docs/resource-hierarchy?hl=zh-tw)，可進一步保護資料。這層額外保護措施會使用金鑰加密金鑰 (KEK) 加密資料加密金鑰 (DEK)。KEK 是對稱式加密金鑰組，安全地儲存在 Cloud Key Management Service 中，並使用 [Cloud KMS 權限和角色](https://docs.cloud.google.com/kms/docs/reference/permissions-and-roles?hl=zh-tw#predefined)管理。
 
 執行查詢時，請使用 [`KEYS.KEYSET_CHAIN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions?hl=zh-tw#keyskeyset_chain) 函式，提供 KEK 的 KMS 資源路徑，以及包裝 DEK 的密文。BigQuery 會呼叫 Cloud KMS 來解開 DEK，然後使用該金鑰解密查詢中的資料。未包裝的 DEK 版本只會在查詢期間儲存在記憶體中，之後就會刪除。
 
@@ -148,11 +148,11 @@ GoogleSQL 支援 [AEAD 加密函式](https://docs.cloud.google.com/bigquery/docs
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-24 (世界標準時間)。
+上次更新時間：2026-10-29 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-24 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]

@@ -16,13 +16,13 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 所有 BigQuery 程式碼範例
 
-本頁面包含 BigQuery 的程式碼範例。如要搜尋及篩選其他 Google Cloud 產品的程式碼範例，請參閱[Google Cloud 瀏覽器範例](https://docs.cloud.google.com/docs/samples?hl=zh-tw)。
+這個頁面包含 BigQuery 的程式碼範例。如要搜尋及篩選其他 Google Cloud 產品的程式碼範例，請參閱[Google Cloud 瀏覽器範例](https://docs.cloud.google.com/docs/samples?hl=zh-tw)。
 
 
 
 
-Python
 Java
+Python
 Go
 Node.js
 PHP

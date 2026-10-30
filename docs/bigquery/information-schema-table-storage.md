@@ -187,13 +187,4 @@ SELECT
 FROM
   `region-REGION`.INFORMATION_SCHEMA.TABLE_STORAGE
 WHERE
-  table_type ='BASE TABLE'
-GROUP BY
-  table_schema
-ORDER BY
-  dataset_name
 ```
-
-##### 範例 3：
-
-以下範例說明如何預測未

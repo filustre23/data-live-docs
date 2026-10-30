@@ -16,7 +16,9 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # BigQuery 資料移轉服務稽核記錄
 
-本文列出 BigQuery 資料移轉服務的稽核方法。 Google Cloud 服務會產生稽核記錄，用以記錄 Google Cloud 資源中的管理和存取活動。如要進一步瞭解 Cloud 稽核記錄，請參閱以下內容：
+BigQuery 資料移轉服務的 Cloud 稽核記錄可讓您追蹤資源的管理和資料存取作業，協助您監控存取權和設定變更。您可以在 Logs Explorer 中查詢這些記錄，並查看哪些 BigQuery 資料移轉服務 API 方法會產生 Cloud 稽核記錄。
+
+如要進一步瞭解 Cloud 稽核記錄，請參閱下列文件：
 
 * [稽核記錄類型](https://docs.cloud.google.com/logging/docs/audit?hl=zh-tw#types)
 * [稽核記錄項目結構](https://docs.cloud.google.com/logging/docs/audit?hl=zh-tw#audit_log_entry_structure)
@@ -31,7 +33,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 1. 前往 Google Cloud 控制台的「Logs Explorer」頁面：
 
    [前往 Logs Explorer](https://console.cloud.google.com/logs/query?hl=zh-tw)
-2. 複製下列查詢並貼到「Logs Explorer」的「Query」欄位，然後點選「Run query」。
+2. 複製下列查詢並貼到 Logs Explorer 的「Query」(查詢) 欄位，然後按一下「Run query」(執行查詢)。
 
    ```
        protoPayload.serviceName="bigquerydatatransfer.googleapis.com"
@@ -267,11 +269,11 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-24 (世界標準時間)。
+上次更新時間：2026-10-29 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-24 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]

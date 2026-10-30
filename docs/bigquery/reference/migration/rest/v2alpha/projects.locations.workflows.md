@@ -186,8 +186,4 @@ Assessment task config.
 | `outputDataset` | `string`  Required. The BigQuery dataset for output. |
 | `querylogsPath` | `string`  Optional. An optional Cloud Storage path to write the query logs (which is then used as an input path on the translation task) |
 | `dataSource` | `string`  Required. The data source or data warehouse type (eg: TERADATA/REDSHIFT) from which the input data is extracted. |
-| `featureHandle` | `object (AssessmentFeatureHandle)`  Optional. A collection of additional feature flags for this assessment. |
-
-## AssessmentFeatureHandle
-
-User-definable feature flags for a
+| `featureHandle` | `object (` |

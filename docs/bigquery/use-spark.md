@@ -89,7 +89,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
    * 筆記本憑證：根據預設，筆記本工作階段會使用您的[使用者憑證](https://docs.cloud.google.com/docs/authentication?hl=zh-tw#user-accounts)。或者，也可以使用[工作階段服務帳戶](https://docs.cloud.google.com/docs/authentication?hl=zh-tw#service-accounts)憑證。
      + 使用者憑證：您的使用者帳戶必須具備下列 Identity and Access Management 角色：
-       - [Managed Service for Apache Spark 編輯者 (`roles/dataproc.editor` 角色)](https://docs.cloud.google.com/iam/docs/roles-permissions/dataproc?hl=zh-tw#dataproc.editor)
+       - [Dataproc 編輯者 (`roles/dataproc.editor` 角色)](https://docs.cloud.google.com/iam/docs/roles-permissions/dataproc?hl=zh-tw#dataproc.editor)
        - [BigQuery Studio 使用者 (`roles/bigquery.studioUser` 角色)](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.studioUser)
        - [工作階段服務帳戶](https://docs.cloud.google.com/dataproc-serverless/docs/concepts/service-account?hl=zh-tw)的[服務帳戶使用者 (roles/iam.serviceAccountUser) 角色](https://docs.cloud.google.com/iam/docs/service-account-permissions?hl=zh-tw#user-role)。這個角色包含模擬服務帳戶所需的 `iam.serviceAccounts.actAs` 權限。
      + 服務帳戶憑證：如要為筆記本工作階段指定服務帳戶憑證，而非使用者憑證，[工作階段服務帳戶](https://docs.cloud.google.com/dataproc-serverless/docs/concepts/service-account?hl=zh-tw)必須具備下列角色：
@@ -203,7 +203,7 @@ spark = (
 
 **提示：** 您可以查看 [Spark SQL API 參考資料](https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/index.html)，瞭解 Spark Connect 是否支援某個 API。支援的 API 說明文件會包含「支援 Spark Connect」訊息：
 
-**Spark Connect 筆記本直接寫入**：BigQuery Studio 筆記本中的 Spark 工作階段會預先設定 [Spark BigQuery 連接器](https://docs.cloud.google.com/dataproc/docs/tutorials/bigquery-connector-spark-example?hl=zh-tw)，以直接寫入資料。DIRECT 寫入方法使用 [BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api?hl=zh-tw)，直接將資料寫入 BigQuery；INDIRECT 寫入方法是 Managed Service for Apache Spark 批次的預設方法，會將資料寫入中繼 Cloud Storage bucket，然後將資料寫入 BigQuery (如要進一步瞭解 INDIRECT 寫入，請參閱「[在 BigQuery 間讀寫資料](https://docs.cloud.google.com/dataproc/docs/tutorials/bigquery-connector-spark-example?hl=zh-tw#read-and-write-data-from-and-to-bigquery)」)。
+**Spark Connect 筆記本直接寫入**：BigQuery Studio 筆記本中的 Spark 工作階段會預先設定 [Spark BigQuery 連接器](https://docs.cloud.google.com/dataproc/docs/tutorials/bigquery-connector-spark-example?hl=zh-tw)，以直接寫入資料。DIRECT 寫入方法使用 [BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api-grpc?hl=zh-tw)，直接將資料寫入 BigQuery；INDIRECT 寫入方法是 Managed Service for Apache Spark 批次的預設方法，會將資料寫入中繼 Cloud Storage bucket，然後將資料寫入 BigQuery (如要進一步瞭解 INDIRECT 寫入，請參閱「[在 BigQuery 間讀寫資料](https://docs.cloud.google.com/dataproc/docs/tutorials/bigquery-connector-spark-example?hl=zh-tw#read-and-write-data-from-and-to-bigquery)」)。
 
 **Managed Service for Apache Spark 專屬 API：**Managed Service for Apache Spark 擴充 `addArtifacts` 方法，簡化將 `PyPI` 套件動態新增至 Spark 工作階段的程序。您可以使用 [`version-scheme`](https://packaging.python.org/en/latest/specifications/version-specifiers/#examples-of-compliant-version-schemes) 格式指定清單 (類似 `pip install`)，指示 Spark Connect 伺服器在所有叢集節點上安裝套件及其依附元件，讓 worker 可用於 UDF。
 
@@ -225,7 +225,7 @@ spark.addArtifacts("textdistance==4.6.1", "random2", pypi=True)
 本節提供 BigQuery Studio Python 筆記本範例，其中包含 PySpark 程式碼，可執行下列工作：
 
 * 對公開的莎士比亞資料集執行字詞計算。
-* 建立 Iceberg 資料表，並將中繼資料儲存在 [Lakehouse 執行階段目錄](https://docs.cloud.google.com/bigquery/docs/about-blms?hl=zh-tw)。
+* 建立 Iceberg 資料表，並將中繼資料儲存在 [Lakehouse 執行階段目錄](https://docs.cloud.google.com/biglake/docs/about-blms?hl=zh-tw)。
 
 ### Wordcount
 
@@ -254,7 +254,7 @@ word_counts_df.show()
 
 更改下列內容：
 
-* APP\_NAME：工作階段的名稱 (選用)。
+* APP\_NAME：工作階段的名稱 (選填)。
 
 **輸出內容：**
 
@@ -462,7 +462,7 @@ sdf = spark.read.format('bigquery') \
 您可以透過下列方式排定筆記本程式碼的執行時間：
 
 * [安排筆記本執行時間](https://docs.cloud.google.com/bigquery/docs/orchestrate-notebooks?hl=zh-tw)。
-* 如果筆記本執行程式碼是工作流程的一部分，請將筆記本排定為[管道](https://docs.cloud.google.com/bigquery/docs/orchestrate-workflows?hl=zh-tw)的一部分。
+* 如果筆記本執行程式碼是工作流程的一部分，請將筆記本排定為[管道](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines?hl=zh-tw)的一部分。
 
 ### 以批次工作負載的形式執行筆記本程式碼
 
@@ -578,8 +578,8 @@ sdf = spark.read.format('bigquery') \
 ## 後續步驟
 
 * YouTube 影片示範：[發揮 Apache Spark 與 BigQuery 整合的強大功能](https://www.youtube.com/watch?v=DIZn6Nuur7k&hl=zh-tw)。
-* [搭配使用 Lakehouse 執行階段目錄與 Managed Service for Apache Spark](https://docs.cloud.google.com/bigquery/docs/bqms-use-dataproc?hl=zh-tw)
-* [搭配使用 Lakehouse 執行階段目錄與 Managed Service for Apache Spark](https://docs.cloud.google.com/bigquery/docs/bqms-use-dataproc-serverless?hl=zh-tw)
+* [搭配使用 Lakehouse 執行階段目錄與 Managed Service for Apache Spark](https://docs.cloud.google.com/lakehouse/docs/configure-lakehouse-catalog-iceberg-1-10?hl=zh-tw)
+* [搭配使用 Lakehouse 執行階段目錄與 Managed Service for Apache Spark](https://docs.cloud.google.com/lakehouse/docs/configure-lakehouse-catalog-iceberg-1-10?hl=zh-tw)
 
 
 
@@ -588,11 +588,11 @@ sdf = spark.read.format('bigquery') \
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-23 (世界標準時間)。
+上次更新時間：2026-10-29 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-23 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]

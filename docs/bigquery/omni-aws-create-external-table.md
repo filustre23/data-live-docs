@@ -16,7 +16,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 建立 Amazon S3 BigLake 資料表
 
-Amazon Simple Storage Service (Amazon S3) BigLake 資料表可讓您使用存取權委派功能，從 BigQuery 查詢 Amazon S3 中的資料。這種做法可將 [BigLake 資料表](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw)的存取權與基礎資料儲存庫的存取權分開，因此使用者只需要資料表的權限。
+Amazon Simple Storage Service (Amazon S3) BigLake 資料表可讓您使用存取權委派功能，從 BigQuery 查詢 Amazon S3 中的資料。這種做法會將 [BigLake 資料表](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw)的存取權與基礎資料儲存庫的存取權分開，因此使用者只需要資料表的權限。
 
 本文說明如何建立 Amazon S3 BigLake 資料表。如要瞭解資料如何在 BigQuery 和 Amazon S3 之間流動，請參閱「[查詢資料時的資料流程](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw#query-data)」。
 
@@ -205,8 +205,8 @@ public class CreateDatasetAws {
 
      如要停用中繼資料快取功能，請指定 0。這是目前的預設做法。
 
-     如要啟用中繼資料快取功能，請指定介於 30 分鐘至 7 天之間的[間隔常值](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#interval_literals)。舉例來說，如要指定 4 小時的過時時間間隔，請指定 `INTERVAL 4 HOUR`。如果中繼資料在過去 4 小時內重新整理過，系統會使用快取的中繼資料，對資料表執行作業。如果快取的中繼資料早於該時間，作業會改為從 Amazon S3 擷取中繼資料。
-   * `CACHE_MODE`：指定中繼資料快取要自動或手動重新整理。如要進一步瞭解中繼資料快取的注意事項，請參閱「[中繼資料快取對效能的影響](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw#metadata_caching_for_performance)」。
+     如要啟用中繼資料快取功能，請指定介於 30 分鐘至 7 天之間的[間隔常值](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#interval_literals)。舉例來說，如要指定 4 小時的過時時間間隔，請指定 `INTERVAL 4 HOUR`。如果採用這個值，只要資料表的中繼資料在過去 4 小時內重新整理過，系統就會使用快取的中繼資料執行資料表作業。如果快取的中繼資料早於該時間，作業會改為從 Amazon S3 擷取中繼資料。
+   * `CACHE_MODE`：指定中繼資料快取要自動或手動重新整理。如要進一步瞭解中繼資料快取的注意事項，請參閱「[中繼資料快取效能](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw#metadata_caching_for_performance)」。
 
      設為 `AUTOMATIC`，中繼資料快取就會按照系統定義的間隔重新整理，通常介於 30 到 60 分鐘之間。
 
@@ -268,7 +268,7 @@ bq mk --max_staleness=STALENESS_INTERVAL --external_table_definition=table_def D
 
   如要停用中繼資料快取功能，請指定 0。這是目前的預設做法。
 
-  如要啟用中繼資料快取功能，請指定介於 30 分鐘至 7 天之間的[間隔常值](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#interval_literals)。舉例來說，如要指定 4 小時的過時時間間隔，請指定 `INTERVAL 4 HOUR`。如果中繼資料在過去 4 小時內重新整理過，則對資料表執行的作業會使用快取的中繼資料。如果快取的中繼資料超過這個時間，作業就會改為從 Amazon S3 擷取中繼資料。
+  如要啟用中繼資料快取功能，請指定介於 30 分鐘至 7 天之間的[間隔常值](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#interval_literals)。舉例來說，如要指定 4 小時的過時時間間隔，請指定 `INTERVAL 4 HOUR`。如果中繼資料在過去 4 小時內重新整理過，系統會使用快取的中繼資料，對資料表執行作業。如果快取的中繼資料超過這個時間，作業就會改為從 Amazon S3 擷取中繼資料。
 * `DATASET_NAME`：您建立的資料集名稱。
 * `TABLE_NAME`：要為這個資料表指定的名稱。
 
@@ -445,7 +445,7 @@ public class CreateExternalTableAws {
 
      如要停用中繼資料快取功能，請指定 0。這是目前的預設做法。
 
-     如要啟用中繼資料快取功能，請指定介於 30 分鐘至 7 天之間的[間隔常值](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#interval_literals)。舉例來說，如要指定 4 小時的過時時間間隔，請指定 `INTERVAL 4 HOUR`。如果中繼資料在過去 4 小時內重新整理過，系統會使用快取的中繼資料，對資料表執行作業。如果快取的中繼資料早於該時間，作業會改為從 Amazon S3 擷取中繼資料。
+     如要啟用中繼資料快取功能，請指定介於 30 分鐘至 7 天之間的[間隔常值](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#interval_literals)。舉例來說，如要指定 4 小時的過時時間間隔，請指定 `INTERVAL 4 HOUR`。如果設定這個值，只要快取中繼資料在過去 4 小時內重新整理過，針對資料表執行的作業就會使用快取中繼資料。如果快取的中繼資料早於該時間，作業會改為從 Amazon S3 擷取中繼資料。
    * `CACHE_MODE`：指定中繼資料快取要自動或手動重新整理。如要進一步瞭解中繼資料快取的注意事項，請參閱「[中繼資料快取效能](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw#metadata_caching_for_performance)」。
 
      設為 `AUTOMATIC`，中繼資料快取就會按照系統定義的間隔重新整理，通常介於 30 到 60 分鐘之間。
@@ -531,7 +531,7 @@ SCHEMA
 
   如要停用中繼資料快取功能，請指定 0。這是目前的預設做法。
 
-  如要啟用中繼資料快取功能，請指定介於 30 分鐘至 7 天之間的[間隔常值](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#interval_literals)。舉例來說，如要指定 4 小時的過時時間間隔，請指定 `INTERVAL 4 HOUR`。如果中繼資料在過去 4 小時內重新整理過，則對資料表執行的作業會使用快取的中繼資料。如果快取的中繼資料超過這個時間，作業就會改為從 Amazon S3 擷取中繼資料。
+  如要啟用中繼資料快取功能，請指定介於 30 分鐘至 7 天之間的[間隔常值](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#interval_literals)。舉例來說，如要指定 4 小時的過時時間間隔，請指定 `INTERVAL 4 HOUR`。如果中繼資料在過去 4 小時內重新整理過，系統會使用快取的中繼資料，對資料表執行作業。如果快取的中繼資料超過這個時間，作業就會改為從 Amazon S3 擷取中繼資料。
 * `DEFINITION_FILE`：資料表定義檔案的路徑。
 * `DATASET_NAME`：資料表所在資料集的名稱。
 * `TABLE_NAME`：要建立的資料表名稱。
@@ -1001,11 +1001,11 @@ BigQuery 管理員可以建立 S3 bucket 政策，授予 BigQuery Omni 存取 Am
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-24 (世界標準時間)。
+上次更新時間：2026-10-29 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-24 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]

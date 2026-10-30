@@ -16,7 +16,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 資料載入簡介
 
-本文說明如何將資料載入 BigQuery。資料整合的兩種常見方法是擷取、載入和轉換 (ELT) 資料，或擷取、轉換、載入 (ETL) 資料。
+BigQuery 可讓您從各種來源載入資料，以便在 BigQuery 儲存空間中儲存及分析資料集。資料整合有兩種常見方法：擷取、載入和轉換 (ELT)，或擷取、轉換、載入 (ETL) 資料。
 
 如要瞭解 ELT 和 ETL 方法，請參閱「[載入、轉換及匯出資料簡介](https://docs.cloud.google.com/bigquery/docs/load-transform-export-intro?hl=zh-tw)」。
 
@@ -26,7 +26,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 | 載入方法 | 說明 |
 | --- | --- |
-| **批次載入** | 這個方法適合從各種來源批次載入大量資料。   如要從 Cloud Storage 和其他支援的資料來源批次或遞增載入資料，建議使用 [BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)。   BigQuery 資料移轉服務可讓您排定載入工作，自動將資料載入 BigQuery。您可以安排一次性或批次資料移轉作業，並定期執行 (例如每天或每月)。為確保 BigQuery 資料一律為最新狀態，您可以監控及記錄移轉作業。   如要查看 BigQuery 資料移轉服務支援的資料來源清單，請參閱「[支援的資料來源](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw#supported_data_sources)」。 |
+| **批次載入** | 這個方法適合從各種來源批次載入大量資料。   如要從 Cloud Storage 和其他支援的資料來源批次或增量載入資料，建議使用 [BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)。   BigQuery 資料移轉服務可讓您排定載入工作，自動將資料載入 BigQuery。您可以安排一次性或批次資料移轉作業，並定期執行 (例如每天或每月)。為確保 BigQuery 資料一律為最新狀態，您可以監控及記錄移轉作業。   如要查看 BigQuery 資料移轉服務支援的資料來源清單，請參閱「[支援的資料來源](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw#supported_data_sources)」。 |
 | **串流載入** | 這個方法可讓您近乎即時地從訊息系統載入資料。   如要將資料串流至 BigQuery，您可以使用 [Pub/Sub](https://docs.cloud.google.com/pubsub/docs/overview?hl=zh-tw) 中的 BigQuery 訂閱項目。Pub/Sub 可處理載入 BigQuery 的高處理量資料。支援即時資料串流，可在資料產生時載入。詳情請參閱「[BigQuery 訂閱項目](https://docs.cloud.google.com/pubsub/docs/bigquery?hl=zh-tw)」。 |
 | **變更資料擷取 (CDC)** | 這個方法可讓您以近乎即時的方式，將資料從資料庫複製到 BigQuery。   [Datastream](https://docs.cloud.google.com/datastream/docs/overview?hl=zh-tw) 可將資料庫中的資料串流至 BigQuery 資料，並近乎即時地複製。Datastream 會運用 CDC 功能，追蹤及複製資料來源中的資料列層級變更。   如要查看 Datastream 支援的資料來源清單，請參閱「[來源](https://docs.cloud.google.com/datastream/docs/sources?hl=zh-tw)」。 |
 | **與外部資料來源整合** | 這個方法可讓您存取外部資料，而不必將資料載入 BigQuery。   BigQuery 支援透過 Cloud Storage 和聯合查詢存取特定[外部資料來源](https://docs.cloud.google.com/bigquery/docs/external-data-sources?hl=zh-tw)。這種方法的優點是，您不必先載入資料，再轉換資料以供後續使用。只要對外部資料執行 `SELECT` 陳述式，即可執行轉換。 |
@@ -54,11 +54,11 @@ BigQuery 可讓您建立外部連線，查詢儲存在 BigQuery 外部的資料�
 
 ### 對共用資料執行查詢
 
-如要對他人與您共用的 BigQuery 資料集執行查詢，請參閱「[BigQuery sharing (舊稱 Analytics Hub) 簡介](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction?hl=zh-tw)」。Sharing 是資料交換平台，可共用資料。
+如要對他人與您共用的 BigQuery 資料集執行查詢，請參閱「[BigQuery sharing (舊稱 Analytics Hub) 簡介](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction?hl=zh-tw)」。Sharing 是資料交換平台，可讓您共用資料。
 
 ### 使用記錄資料執行查詢
 
-您可以對記錄執行查詢，而不必建立額外的載入工作：
+您可以對記錄執行查詢，不必建立額外的載入工作：
 
 * **Cloud Logging** 可讓您[將記錄轉送至 BigQuery 目的地](https://docs.cloud.google.com/logging/docs/export/configure_export?hl=zh-tw)。
 * **Observability Analytics** 可讓您[執行查詢，分析記錄資料](https://docs.cloud.google.com/logging/docs/log-analytics?hl=zh-tw#analytics)。
@@ -76,11 +76,11 @@ BigQuery 可讓您建立外部連線，查詢儲存在 BigQuery 外部的資料�
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-24 (世界標準時間)。
+上次更新時間：2026-10-28 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-24 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-28 (世界標準時間)。"],[],[]]

@@ -130,13 +130,4 @@ label assignments, such as CampaignLabel, AdGroupLabel, and AdGroupBidModifier.
 | CampaignLabel | [Campaign Label](https://developers.google.com/google-ads/api/fields/v25/campaign_label) |
 | CampaignCriterion | [Campaign Criterion](https://developers.google.com/google-ads/api/fields/v25/campaign_criterion) |
 | AdGroupLabel | [Ad Group Label](https://developers.google.com/google-ads/api/fields/v25/ad_group_label) |
-| AdGroupAudience  AdGroupAudienceStats  AdGroupAudienceConversionStats  AdGroupAudienceNonClickStats  AdGroupAudienceBasicStats | [Ad Group Audience View](https://developers.google.com/google-ads/api/fields/v25/ad_group_audience_view) |
-
-### Performance Max (PMax) tables
-
-The following tables are dedicated to Performance Max assets and signals, such
-as AssetGroup and CampaignAssetStats.
-
-| Google Ads tables | Google Ads API resources (v25.0.0) |
-| --- | --- |
-| Assets (available if [Pmax](https://developers.google.com/google-ads/api/docs/performance-max/overview) data is enabled) | [Assets](https://developers.google.com/google-ads/api/fields/v25/asset) |
+| AdGroupAudience  AdGroupAudienceStats  AdGroupAudienceConversionStats  AdGroupAudienceNonClickStats  AdGroupAudienceBasicStats |  |

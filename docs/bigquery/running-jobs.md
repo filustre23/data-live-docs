@@ -16,53 +16,49 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 透過程式執行工作
 
-如何使用 REST API 或用戶端程式庫，透過程式執行 BigQuery 工作：
-
-1. 呼叫 [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert?hl=zh-tw) 方法。
-2. 定期要求工作資源並檢查狀態屬性，掌握工作完成時間。
-3. 確認工作是否順利完成。
+您可以使用 BigQuery REST API 和用戶端程式庫，建立及管理非同步工作，自動執行應用程式的載入、查詢、擷取和複製作業。呼叫 [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert?hl=zh-tw) 方法啟動工作後，您可以輪詢工作資源的狀態屬性，追蹤執行作業何時完成，並確認作業是否成功。
 
 ## 事前準備
 
-授予身分與存取權管理 (IAM) 角色，讓使用者擁有執行本文件各項工作所需的權限。
+授予 Identity and Access Management (IAM) 角色，讓使用者具備必要權限，可執行本文件中的各項工作。
 
 ### 所需權限
 
-如要執行 BigQuery 工作，您需要 `bigquery.jobs.create` IAM 權限。
+如要執行 BigQuery 工作，您必須具備 `bigquery.jobs.create` IAM 權限。
 
-下列每個預先定義的 IAM 角色都包含執行作業所需的權限：
+下列各項預先定義的 IAM 角色，都包含執行工作所需的權限：
 
 * `roles/bigquery.user`
 * `roles/bigquery.jobUser`
 * `roles/bigquery.admin`
 
-此外，建立工作時，系統會自動授予該工作的下列權限：
+此外，建立工作時，系統會自動授予您該工作的下列權限：
 
 * `bigquery.jobs.get`
 * `bigquery.jobs.update`
 
-如要進一步瞭解 BigQuery 中的 IAM 角色和權限，請參閱[預先定義的角色與權限](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)一文。
+如要進一步瞭解 BigQuery 的 IAM 角色和權限，請參閱「[預先定義的角色和權限](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)」。
 
 ## 執行中的工作
 
 如何透過程式執行工作：
 
-1. 呼叫 `jobs.insert` 方法啟動工作。呼叫 `jobs.insert` 方法時，請加入[工作資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs?hl=zh-tw)表示法。
-2. 在工作資源的 [`configuration`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#JobConfiguration) 區段中，加入會指定工作類型 (`load`、`query`、`extract` 或 `copy`) 的子屬性。
-3. 呼叫 `jobs.insert` 方法後，使用工作 ID 和位置呼叫 `jobs.get` 檢查工作狀態，然後透過 `status.state` 瞭解工作狀態。`status.state` 為 `DONE` 時表示工作已停止執行，不過 `DONE` 狀態並不代表工作順利完成，只代表工作已停止執行。
+1. 呼叫 `jobs.insert` 方法來啟動工作。呼叫 `jobs.insert` 方法時，請加入[工作資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs?hl=zh-tw)表示法。
+2. 在工作資源的 [`configuration`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#JobConfiguration) 區段中，加入指定工作類型的子項屬性：`load`、`query`、`extract` 或 `copy`。
+3. 呼叫 `jobs.insert` 方法後，請使用工作 ID 和位置呼叫 `jobs.get`，並檢查 `status.state` 值，確認工作狀態。當 `status.state` 為 `DONE` 時，表示工作已停止執行。不過，`DONE` 狀態不代表工作已成功完成，僅表示工作已不再執行。
 
-   **注意：** 有些包裝函式可用來管理工作狀態要求。舉例來說，執行 `jobs.query` 會建立工作，並且在指定的時間範圍內定期輪詢 `DONE` 狀態。
-4. 確認工作是否成功。如果工作有 `errorResult` 屬性，即表示工作失敗。`status.errorResult` 屬性所含的資訊會說明工作失敗原因。未出現 `status.errorResult` 表示工作成功完成，但可能有一些不嚴重的錯誤，例如匯入幾個資料列時發生問題。不嚴重的錯誤會在工作的 `status.errors` 清單中傳回。
+   **注意：** 部分包裝函式會為您管理工作狀態要求。舉例來說，執行 `jobs.query` 會建立工作，並在指定時間內定期輪詢 `DONE` 狀態。
+4. 確認工作是否成功。如果工作具有 `errorResult` 屬性，則表示工作失敗。`status.errorResult` 屬性會保留說明失敗工作發生錯誤的資訊。如果沒有 `status.errorResult`，代表工作已成功完成，但可能發生一些非嚴重錯誤，例如在載入工作中匯入幾列時發生問題。非嚴重錯誤會傳回至工作的 `status.errors` 清單。
 
 ## 使用用戶端程式庫執行工作
 
-如要使用 BigQuery 的 Cloud 用戶端程式庫建立及執行工作，請按照下列步驟操作：
+如要使用 BigQuery 適用的 Cloud 用戶端程式庫建立及執行工作，請按照下列步驟操作：
 
 ### C#
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 C# 設定說明操作。詳情請參閱 [BigQuery C# API 參考說明文件](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 C# 設定操作說明進行操作。詳情請參閱 [BigQuery C# API 參考文件](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 using Google.Cloud.BigQuery.V2;
@@ -103,9 +99,9 @@ public class BigQueryCreateJob
 
 ### Java
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定說明操作。詳情請參閱 [BigQuery Java API 參考說明文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定操作說明進行操作。詳情請參閱 [BigQuery Java API 參考文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 import com.google.cloud.bigquery.BigQuery;
@@ -163,9 +159,9 @@ public class CreateJob {
 
 ### Python
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定操作說明進行操作。詳情請參閱 [BigQuery Python API 參考文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 from google.cloud import bigquery
@@ -192,9 +188,9 @@ print("Started job: {}".format(query_job.job_id))
 
 ## 加入工作標籤
 
-您可以使用 bq 指令列工具的 `--label` 標記，透過指令列在查詢工作中加入標籤。bq 工具僅支援在查詢工作中加入標籤。
+您可以使用 bq 指令列工具的 `--label` 旗標，透過指令列將標籤新增至查詢工作。bq 工具僅支援為查詢工作新增標籤。
 
-如果某個工作是透過 API 提交，您也可以在其中加入標籤，方法是當您呼叫 [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert?hl=zh-tw) 方法時，在工作設定中指定 `labels` 屬性。API 可用於在任何工作類型中加入標籤。
+您也可以在透過 API 提交工作時，在呼叫 [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert?hl=zh-tw) 方法時指定工作設定中的 `labels` 屬性，為工作新增標籤。API 可用於在任何工作類型中加入標籤。
 
 您無法在待處理、執行中或已完成的工作中加入或更新標籤。
 
@@ -214,11 +210,11 @@ print("Started job: {}".format(query_job.job_id))
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-24 (世界標準時間)。
+上次更新時間：2026-10-29 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-24 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]

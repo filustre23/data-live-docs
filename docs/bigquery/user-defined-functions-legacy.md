@@ -283,12 +283,3 @@ bigquery.defineFunction(
   urlDecode  // The function reference
 );
 ```
-
-#### 建立查詢
-
-您也可以把查詢儲存在檔案中，好讓指令列不會變得太冗長。舉例來說，您可以建立名稱為 `query.sql` 的本機檔案，然後將下列 BigQuery 陳述式貼到該檔案中。
-
-```
-#legacySQL
-SELECT requests, title
-```

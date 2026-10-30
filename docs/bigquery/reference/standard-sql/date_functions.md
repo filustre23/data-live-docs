@@ -345,14 +345,4 @@ DATE_FROM_UNIX_DATE(int64_expression)
 
 **Description**
 
-Interprets `int64_expression` as the number of days since 1970-01-01.
-
-**Return Data Type**
-
-DATE
-
-**Example**
-
-```
-SELECT DATE_FROM_UNIX_DATE(14238) AS date_from_epoch;
-```
+Interprets `int64_expressio`

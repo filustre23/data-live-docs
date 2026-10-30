@@ -802,5 +802,5 @@ public class LoadPartitionedTable {
       // once, and can be reused for multiple requests.
       BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
 
-      TableId tableId = TableId.of(datasetName, tableName);
+      TableId tableId =
 ```

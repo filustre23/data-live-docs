@@ -16,15 +16,11 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 探索 Cloud Storage 資料並匯入目錄
 
-本文說明如何使用 Knowledge Catalog 自動探索功能。這項 BigQuery 功能可掃描 Cloud Storage bucket 中的資料，擷取中繼資料並編入目錄。在探索掃描作業中，自動探索功能會為結構化資料建立 BigLake 或外部資料表，並為非結構化資料建立物件資料表。BigLake 資料表和外部資料表可讓您查詢外部資料儲存庫中的結構化資料 (請參閱「[BigLake 資料表簡介](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw)」和「[外部資料表簡介](https://docs.cloud.google.com/bigquery/docs/external-tables?hl=zh-tw)」)，而物件資料表則提供 Cloud Storage 中非結構化資料的中繼資料索引 (請參閱「[物件資料表簡介](https://docs.cloud.google.com/bigquery/docs/object-table-introduction?hl=zh-tw)」)。這類集中式資料表資料可簡化 AI 輔助資料洞察、資料安全性和治理。
+BigQuery 的 Knowledge Catalog 自動探索功能 (也稱為*獨立探索*) 可讓您掃描 Cloud Storage bucket，擷取檔案中繼資料並編入目錄。探索掃描作業會將結構化資料註冊為 [BigLake 資料表](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw)或[外部資料表](https://docs.cloud.google.com/bigquery/docs/external-tables?hl=zh-tw)，並將非結構化資料編入索引為[物件資料表](https://docs.cloud.google.com/bigquery/docs/object-table-introduction?hl=zh-tw)。將這些資料表集中在 BigQuery，有助於查詢外部資料、套用安全性和管理政策，以及生成 AI 輔助洞察。
 
-如要使用 Cloud Storage 資料自動探索功能，請建立並執行探索掃描。
+## 探索掃描總覽
 
-自動探索也稱為獨立探索。
-
-## 探索掃描作業總覽
-
-探索掃描會執行下列操作：
+如要使用 Cloud Storage 資料自動探索功能，請建立並執行探索掃描作業。探索掃描會執行下列操作：
 
 * 掃描 Cloud Storage bucket 或路徑中的資料。
 * 將結構化和半結構化資料分組到資料表。
@@ -35,7 +31,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 結構化和半結構化資料包括 Avro、Parquet 和 CSV 等格式。探索掃描作業會將這些檔案群組註冊為 BigLake 外部資料表。掃描作業只會偵測資料格式相同且結構定義相容的資料夾中的檔案。
 
-* **用途**：將強型別結構化檔案集中到 BigQuery，執行分析 SQL 查詢，不需手動定義結構定義。
+* **用途**：將強型別的結構化檔案集中到 BigQuery，不必手動定義結構定義，即可執行分析 SQL 查詢。
 * **工作流程**：
   1. 將結構化檔案整理到資料夾中。請確認每個資料夾中的檔案都採用相同的資料格式，且結構定義相容。
   2. 建立探索掃描作業，並提供 Google Cloud 資源連線 ID。
@@ -48,11 +44,11 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 * Avro
 * ORC
 * JSON (僅限[以換行符號分隔的格式](https://github.com/ndjson/ndjson-spec))
-* CSV (但不含註解列)
+* CSV (不含註解列的 CSV 檔案)
 
 #### 壓縮格式
 
-探索掃描作業支援下列結構化和半結構化資料壓縮格式：
+針對結構化和半結構化資料，探索掃描作業支援下列壓縮格式：
 
 * 下列格式的內部壓縮：
 
@@ -69,7 +65,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ### 非結構化資料
 
-對於圖片和影片等非結構化資料，探索掃描作業會偵測並註冊共用相同資料檔案格式的檔案群組。檔案必須位於包含相同檔案格式的資料夾中。舉例來說，`gs://images/group1` 只能包含 GIF 圖片，`gs://images/group2` 只能包含 JPEG 圖片，探索掃描作業才能偵測並註冊兩個 BigLake 物件資料表。
+如果是圖片和影片等非結構化資料，探索掃描作業會偵測並註冊共用相同資料檔案格式的檔案群組。檔案必須位於包含相同檔案格式的資料夾中。舉例來說，`gs://images/group1` 只能包含 GIF 圖片，`gs://images/group2` 只能包含 JPEG 圖片，探索掃描作業才能偵測並註冊兩個 BigLake 物件資料表。
 
 * **用途**：將圖片或文件等非結構化檔案編入目錄，以便使用 BigQuery ML 或遠端函式執行機器學習推論。
 * **工作流程**：
@@ -104,7 +100,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 * **BigLake 外部資料表**。在掃描設定期間提供 Google Cloud 資源連線 ID 時，系統會為結構化和半結構化資料建立這類工作。
 * **外部資料表 (非 BigLake)**：如果未提供資源連線 ID，系統會為結構化和半結構化資料建立這類資料表。
 
-註冊後，即可在 BigQuery 中分析資料。BigLake 資料表和物件資料表的中繼資料快取功能也會啟用。所有 BigLake 資料表都會自動擷取至 Knowledge Catalog，方便搜尋及探索。
+註冊後，即可在 BigQuery 分析資料。BigLake 資料表和物件資料表的中繼資料快取功能也會啟用。所有 BigLake 資料表都會自動擷取至 Knowledge Catalog，方便搜尋及探索。
 
 如要開始使用新註冊的資料表，您可以：
 
@@ -123,11 +119,11 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 **啟用 API 所需的角色**
 
-如要啟用 API，您必須具備 `serviceusage.services.enable` 權限。如果您建立了專案，可能已透過擁有者角色 (`roles/owner`) 取得這項權限。否則，您可以透過服務使用情形管理員角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「Service Usage 管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
 [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=dataplex.googleapis.com&hl=zh-tw)
 
-**注意：** 下一節列出的角色適用於標準探索掃描作業。如要使用非結構化資料語意推論，從檔案中擷取 AI 輔助洞察資料，您也必須套用「[使用非結構化資料的資料洞察](https://docs.cloud.google.com/knowledge-catalog/docs/use-data-insights-unstructured-data?hl=zh-tw#roles-permissions)」中列出的其他角色。
+**注意：** 下一節列出的角色適用於標準探索掃描作業。如要使用非結構化資料語義推論，從檔案中擷取 AI 輔助洞察資料，您也必須套用「[使用非結構化資料的資料洞察](https://docs.cloud.google.com/knowledge-catalog/docs/use-data-insights-unstructured-data?hl=zh-tw#roles-permissions)」一節列出的其他角色。
 
 ### Knowledge Catalog 服務帳戶的必要角色
 
@@ -141,7 +137,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 為確保 Knowledge Catalog 服務帳戶具備建立及執行探索掃描作業所需的權限，請要求管理員將下列 IAM 角色授予 Knowledge Catalog 服務帳戶：
 
-**重要事項：**您必須將這些角色授予 Knowledge Catalog 服務帳戶，*而非*您的使用者帳戶。如果未將角色授予正確的主體，可能會發生權限錯誤。
+**重要事項：**請務必將這些角色授予 Knowledge Catalog 服務帳戶，*而非*您的使用者帳戶。如果未將角色授予正確的主體，可能會發生權限錯誤。
 
 * 儲存空間 bucket 的 [Dataplex Discovery 服務代理](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex?hl=zh-tw#dataplex.discoveryServiceAgent)  (`roles/dataplex.discoveryServiceAgent`)
 * 使用者專案的 [Dataplex Discovery 發布服務代理](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex?hl=zh-tw#dataplex.discoveryPublishingServiceAgent)  (`roles/dataplex.discoveryPublishingServiceAgent`)
@@ -202,16 +198,15 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
   + `bigquery.connections.use`
     BigQuery 連線
 
-管理員或許還可透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)，將這些權限授予 BigQuery 連線服務帳戶。
+管理員或許也能透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)，將這些權限授予 BigQuery 連線服務帳戶。
 
 ### 使用者必要角色
 
 如要取得建立及管理資料探索掃描作業所需的權限，請要求管理員授予您 Cloud Storage bucket 的下列 IAM 角色：
 
-* DataScan 資源的完整存取權：Dataplex DataScan 管理員 (`roles/dataplex.dataScanAdmin`) - 您的專案
+* 具備 DataScan 資源的完整存取權限：Dataplex DataScan 管理員 (`roles/dataplex.dataScanAdmin`) - 您的專案
 * DataScan 資源的寫入權限：Dataplex DataScan 編輯者 (`roles/dataplex.dataScanEditor`) - 您的專案
-* 具備 DataScan 資源的讀取權限，結果除外：
-  Dataplex DataScan 檢視者 (`roles/dataplex.dataScanViewer`) - 您的專案
+* 具備 DataScan 資源的讀取權限，結果除外：Dataplex DataScan 檢視者 (`roles/dataplex.dataScanViewer`) - 您的專案
 * 具備 DataScan 資源的讀取權限，包含結果：Dataplex DataScan 資料檢視者 (`roles/dataplex.dataScanDataViewer`) - 您的專案
 
 如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
@@ -224,17 +219,17 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 * 在專案 `dataplex.datascans.create` 建立 DataScan
 * 刪除專案或 DataScan 資源中的 DataScan：`dataplex.datascans.delete`
-* 查看 DataScan 詳細資料 (不含結果)：`dataplex.datascans.get`在專案或 DataScan 資源
+* 查看 DataScan 詳細資料 (不含結果)：
+  `dataplex.datascans.get`
+  在專案或 DataScan 資源中
 * 查看 DataScan 詳細資料，包括結果：
   `dataplex.datascans.getData`
   專案或 DataScan 資源
-* 列出 DataScan：
-  `dataplex.datascans.list`
-  專案或 DataScan 資源
+* 列出 DataScan：專案或 DataScan 資源的 `dataplex.datascans.list`
 * 執行 DataScan：專案或 DataScan 資源的 `dataplex.datascans.run`
 * 更新 DataScan 的說明：專案或 DataScan 資源的 `dataplex.datascans.update`
-* 查看專案或 DataScan 資源的 DataScan `dataplex.datascans.getIamPolicy` IAM 權限
-* 在專案或 DataScan 資源上設定 DataScan 的 IAM 權限：`dataplex.datascans.setIamPolicy`
+* 查看專案或 DataScan 資源的 DataScan IAM 權限：`dataplex.datascans.getIamPolicy`
+* 在專案或 DataScan 資源上，設定 DataScan 的 IAM 權限：`dataplex.datascans.setIamPolicy`
 
 您或許還可透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)取得這些權限。
 
@@ -252,26 +247,28 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 2. 在「Cloud Storage discovery」(Cloud Storage 探索) 分頁中，按一下「Create」(建立)。
 3. 在「Create discovery scan」(建立探索掃描) 窗格中，設定要掃描的資料詳細資料。
 4. 輸入掃描名稱。
-5. 在「Scan ID」(掃描 ID) 欄位中，輸入符合 [Google Cloud資源命名慣例](https://docs.cloud.google.com/compute/docs/naming-resources?hl=zh-tw#resource-name-format)的專屬 ID。如未提供 ID，探索掃描作業會產生掃描 ID。
+5. 在「**Scan ID**」(掃描 ID) 欄位中，輸入符合
+    [Google Cloud資源命名慣例](https://docs.cloud.google.com/compute/docs/naming-resources?hl=zh-tw#resource-name-format)的專屬 ID。
+   如未提供 ID，探索掃描作業會產生掃描 ID。
 6. 選用：提供掃描作業說明。
 7. 如要指定包含要掃描檔案的 Cloud Storage bucket，請在「Bucket」欄位中瀏覽並選取 bucket。
 8. 選用：提供用於篩選檔案的 glob 模式清單，定義要納入或排除探索掃描作業的資料。Knowledge Catalog 支援下列 glob 模式：
 
    * `*`：比對零或多個字元，不跨越目錄邊界。舉例來說，`*.csv` 符合 `file.csv`，但不符合 `folder/file.csv`。
    * `**`：比對零或多個字元，跨越目錄邊界。舉例來說，`**/*.csv` 符合 `file.csv` 和 `folder/subfolder/file.csv`。
-   * `?`：只比對一個字元。舉例來說，`file_?.csv` 符合 `file_1.csv` 和 `file_a.csv`，但不符合 `file_10.csv`。
-   * `[...]`：比對一組字元中的一個字元。舉例來說，`[abc]` 會比對 `a`、`b` 或 `c`，而 `[a-z]` 則會比對任何小寫字母。
-   * `{...}`：比對以逗號分隔的清單子模式。例如，`{sun,moon,stars}` 符合 `sun`、`moon` 或 `stars`。
+   * `?`：比對一個字元。舉例來說，`file_?.csv` 符合 `file_1.csv` 和 `file_a.csv`，但不符合 `file_10.csv`。
+   * `[...]`：比對一組字元中的一個字元。舉例來說，`[abc]` 與 `a`、`b` 或 `c` 相符，而 `[a-z]` 則與任何小寫字母相符。
+   * `{...}`：比對以逗號分隔的清單子模式。舉例來說，`{sun,moon,stars}` 與 `sun`、`moon` 或 `stars` 相符。
    * `\`：逸出字元 (`*`、`?` 或 `\`)。例如，`file\*.csv` 會比對常值檔案名稱 `file*.csv`。
 
    您可以指定下列類型的模式：
 
    * **Include**：如果只要掃描部分資料，請提供與要納入的物件相符的 glob 模式清單。
-   * **Exclude**：提供與要排除的物件相符的 glob 模式清單。
+   * **排除**：提供與要排除的物件相符的 glob 模式清單。
 
    舉例來說，如要從探索掃描作業中排除 `gs://test_bucket/foo/..`，請輸入 `**/foo/**` 做為排除路徑。引號會導致錯誤。請務必輸入 `**/foo/**`，而非 `"**/foo/**"`。
 
-   如果您同時提供納入模式和排除模式，系統會先套用排除模式。
+   如果同時提供納入模式和排除模式，系統會先套用排除模式。
 9. 在「非結構化資料選項」部分，選取「啟用語意推論」。
 
    如要在 Knowledge Catalog 查看非結構化資料的資料洞察，就必須選取這個選項。詳情請參閱「[關於非結構化資料洞察](https://docs.cloud.google.com/knowledge-catalog/docs/data-insights-unstructured-data?hl=zh-tw)」。
@@ -282,7 +279,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
     您可以在與 BigQuery 資料集相同的位置建立新的連線 ID，該位置[與 Cloud Storage bucket 位置相容](https://docs.cloud.google.com/bigquery/docs/external-tables?hl=zh-tw#storage-location-considerations)。
 
     如未提供資源連線 ID，探索掃描作業會建立[非 BigLake 外部資料表](https://docs.cloud.google.com/bigquery/docs/external-data-sources?hl=zh-tw#non-biglake-tables)。如要瞭解這些外部資料表類型之間的差異，以及探索服務為何會選擇其中一種，請參閱[行為差異比較](https://docs.cloud.google.com/bigquery/docs/external-data-sources?hl=zh-tw#external_data_source_feature_comparison)。
-13. 在「Discovery frequency」(探索頻率) 部分，設定探索掃描作業的執行時間：
+13. 在「Discovery frequency」(探索頻率) 部分，設定要執行探索掃描的時間：
 
     * **重複**：掃描作業會按照預先定義的時間表執行。提供開始時間、執行掃描的天數和頻率 (例如每小時)。
     * **隨需**：視需要執行掃描作業。
@@ -299,8 +296,8 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 15. 按一下「Create」(建立) (排定掃描作業)、「Run now」(立即執行) (隨選掃描作業) 或「Create and run」(建立並執行) (一次性掃描作業)。
 
     * **排定掃描**：按照您設定的時間表執行。
-    * **隨選掃描**：建立後會先執行一次，之後您隨時可以執行掃描。探索掃描可能需要幾分鐘才能執行完畢。
-    * **單次掃描**：自動執行。達到定義的存留時間 (TTL) 門檻時，系統會自動刪除。這個值決定探索掃描在執行後保持有效的時間長度。存留時間值可以介於 0 秒 (立即刪除) 到 365 天之間。如果未指定 TTL，探索掃描作業會在 24 小時後自動刪除。
+    * **隨選掃描**：建立後會先執行一次，之後可隨時執行。探索掃描可能需要幾分鐘才能執行完畢。
+    * **單次掃描**：自動執行。達到定義的存留時間 (TTL) 門檻時，系統會自動刪除。這個值決定探索掃描作業執行後保持有效的時間長度。存留時間值可以介於 0 秒 (立即刪除) 到 365 天之間。如果未指定存留時間，探索掃描作業會在 24 小時後自動刪除。
 
 ### gcloud
 
@@ -322,7 +319,7 @@ gcloud dataplex datascans create data-discovery --location=LOCATION
 
 ## 查詢已發布的 BigLake 資料表
 
-執行探索掃描作業後，BigLake 資料表會發布至 BigQuery 的新資料集。接著，您可以在 BigQuery 中使用 SQL 分析資料表，或在 Managed Service for Apache Spark 中使用 Apache Spark 或 HiveQL 分析資料表。
+執行探索掃描後，BigLake 資料表會發布至 BigQuery 的新資料集。接著，您可以在 BigQuery 中使用 SQL 分析資料表，或在 Managed Service for Apache Spark 中使用 Apache Spark 或 HiveQL 分析資料表。
 
 ### SQL
 
@@ -365,9 +362,9 @@ gcloud dataplex datascans create data-discovery --location=LOCATION
 
 ## 管理已發布的 BigLake 資料表
 
-探索掃描作業會在 BigQuery 中建立及管理已發布的 BigLake 資料表。根據預設，每次執行排定或隨選掃描時，探索掃描都會處理新資料探索、結構定義推論和結構定義演變。為表示中繼資料是由掃描作業管理，掃描作業會發布資料表，並將標籤 `metadata-managed-mode` 設為 `discovery-managed`。
+探索掃描作業會在 BigQuery 中建立及管理已發布的 BigLake 資料表。根據預設，每次執行排定或隨選掃描時，探索掃描作業都會處理新資料探索、結構定義推論和結構定義演變。為表示中繼資料是由掃描作業管理，掃描作業會發布標籤 `metadata-managed-mode` 設為 `discovery-managed` 的資料表。
 
-如要自行管理結構定義和其他中繼資料 (例如 CSV 或 JSON 選項)，請將 `metadata-managed-mode` 標籤設為 `user_managed`。這樣一來，下次執行探索掃描時，結構定義就不會變更。如果探索掃描推論出的結構定義不正確，或與特定資料表的預期結構定義不同，這種做法就很有用。將 `metadata-managed-mode` 標籤設為 `user_managed`，即可降低費用。
+如要自行管理結構定義和其他中繼資料 (例如 CSV 或 JSON 選項)，請將 `metadata-managed-mode` 標籤設為 `user_managed`。這樣一來，下次執行探索掃描時，結構定義就不會變更。如果探索掃描推論出的結構定義不正確，或與特定資料表的預期結構定義不同，這種做法就很有用。如果將 `metadata-managed-mode` 標籤設為 `user_managed`，則可降低費用。
 
 如要更新標籤，您可以[將標籤鍵的值編輯](https://docs.cloud.google.com/bigquery/docs/updating-labels?hl=zh-tw#updating_a_table_or_view_label)
 `metadata-managed-mode`為 `user_managed`，而非 `discovery-managed`。在這種情況下，只要資料表附加了 `user_managed` 標籤，探索掃描作業就不會更新資料表的結構定義。
@@ -376,7 +373,7 @@ gcloud dataplex datascans create data-discovery --location=LOCATION
 
 ### 更新已發布的 BigLake 資料表
 
-如果 BigLake 資料表是使用預設設定的探索掃描工作發布，系統會按照排定的頻率，在每次執行探索掃描工作時，自動更新結構定義和其他中繼資料。
+如果 BigLake 資料表是透過探索掃描工作發布，且採用預設設定，則每次按照排定頻率執行探索掃描工作時，系統都會自動更新結構定義和其他中繼資料。
 
 如要更新已發布的 BigLake 資料表，請按照下列步驟操作：
 
@@ -389,7 +386,7 @@ gcloud dataplex datascans create data-discovery --location=LOCATION
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 4. 在「Explorer」窗格中展開專案，點選「Datasets」(資料集)，然後選取資料集。
 5. 依序點選**「總覽」 > 「資料表」**，然後選取資料表。
-6. 在「Details」(詳細資料) 分頁的「Labels」(標籤) 區段中，確認 **metadata-managed-mode** 標籤設為 **user\_managed**。如果設為其他值，請按照下列步驟操作：
+6. 在「Details」(詳細資料) 分頁的「Labels」(標籤) 部分，確認 **metadata-managed-mode** 標籤已設為 **user\_managed**。如果設為其他值，請按照下列步驟操作：
 
    1. 按一下「edit 編輯詳細資訊」。
    2. 在「metadata-managed-mode」鍵旁邊的「value」欄位中，輸入 `user_managed`。
@@ -415,7 +412,7 @@ gcloud dataplex datascans create data-discovery --location=LOCATION
       **注意：** 如果 **metadata-managed-mode** 標籤設為 `user_managed`，探索掃描作業就不會覆寫資料表中繼資料，因此資料表不會遭到刪除。
 7. 按一下「執行」。探索掃描作業會視需要執行。
 
-探索掃描作業執行完畢後，BigLake 資料表會從 BigQuery 中刪除，無法透過 Spark 列出或查詢。
+探索掃描作業執行完畢後，BigLake 資料表會從 BigQuery 刪除，無法透過 Spark 列出或查詢。
 
 ## 視需要執行探索掃描
 
@@ -458,7 +455,7 @@ gcloud dataplex datascans run DATASCAN \
 
    [前往「BigQuery」頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 在導覽選單中，依序點選**「Governance」>「Metadata curation」**。
-3. 「Cloud Storage discovery」(Cloud Storage 探索) 窗格會列出在專案中建立的探索掃描作業。
+3. 「Cloud Storage discovery」(Cloud Storage 探索) 窗格會列出專案中建立的探索掃描作業。
 
 ### gcloud
 
@@ -509,7 +506,7 @@ gcloud dataplex datascans jobs describe JOB \
 
 如要查看資料探索掃描結果，請使用 Dataplex API 中的 [`dataScans.get` 方法](https://docs.cloud.google.com/knowledge-catalog/docs/reference/rest/v1/projects.locations.dataScans/get?hl=zh-tw)。
 
-### 查看歷來的探索掃描結果
+### 查看歷來探索掃描結果
 
 如要查看歷來的探索掃描結果，請選取下列其中一個選項。
 
@@ -518,7 +515,7 @@ gcloud dataplex datascans jobs describe JOB \
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在導覽選單中，依序點選**「Governance」 > 「Metadata curation」**。
+2. 在導覽選單中，依序點選**「Governance」>「Metadata curation」**。
 3. 在「Cloud Storage discovery」(Cloud Storage 探索) 窗格中，按一下要查看詳細資料的探索掃描作業。
 4. 按一下「Scan history」(掃描記錄) 窗格。「Scan history」(掃描記錄) 窗格會提供過去工作的相關資訊，包括每項工作掃描的記錄數量、每項工作的狀態，以及工作的執行時間。
 5. 如要查看工作的詳細資訊，請按一下「Job ID」(工作 ID) 欄中的工作。
@@ -538,11 +535,11 @@ gcloud dataplex datascans jobs list \
 
 ### REST
 
-如要查看探索掃描作業的所有工作，請使用 Dataproc API 中的 [`dataScans.jobs.list` 方法](https://docs.cloud.google.com/knowledge-catalog/docs/reference/rest/v1/projects.locations.dataScans.jobs/list?hl=zh-tw)。
+如要查看探索掃描作業的所有工作，請使用 Dataplex API 中的 [`dataScans.jobs.list` 方法](https://docs.cloud.google.com/knowledge-catalog/docs/reference/rest/v1/projects.locations.dataScans.jobs/list?hl=zh-tw)。
 
 ## 更新探索掃描作業
 
-如要變更探索掃描作業的時間表 (例如從隨選改為定期執行)，請更新探索掃描作業。
+如要變更探索掃描作業的時間表 (例如從隨選變更為週期性)，請更新探索掃描作業。
 
 **注意：** 一次性探索掃描作業無法更新。
 
@@ -552,7 +549,8 @@ gcloud dataplex datascans jobs list \
 
    [前往「BigQuery」頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 在導覽選單中，依序點選**「Governance」>「Metadata curation」**。
-3. 在「Cloud Storage discovery」(Cloud Storage 探索) 窗格中，找到要更新的探索掃描作業，然後依序點選「Actions」(動作) >「Edit」(編輯)。
+3. 在**「Cloud Storage discovery」(Cloud Storage 探索)** 窗格中，針對要
+   更新的探索掃描作業，依序點選**「Actions」(動作) >「Edit」(編輯)**。
 4. 編輯值。
 5. 按一下 [儲存]。
 
@@ -584,7 +582,7 @@ gcloud dataplex datascans update data-discovery SCAN_ID --location=LOCATION --de
 
    [前往「BigQuery」頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 在導覽選單中，依序點選**「Governance」>「Metadata curation」**。
-3. 在「**Cloud Storage discovery**」(Cloud Storage 探索) 窗格中，找到要刪除的探索掃描作業，然後依序點選**「Actions」(動作) >「Delete」(刪除)**。
+3. 在「Cloud Storage discovery」(Cloud Storage 探索) 窗格中，找到要刪除的探索掃描作業，然後依序點選「Actions」(動作) >「Delete」(刪除)。
 4. 點選「刪除」。
 
 ### gcloud
@@ -595,7 +593,7 @@ gcloud dataplex datascans delete SCAN_ID --location=LOCATION --async
 
 更改下列內容：
 
-* `SCAN_ID`：要刪除的探索掃描作業 ID。
+* `SCAN_ID`：要刪除的探索掃描 ID。
 * `LOCATION`：建立探索掃描作業的 Google Cloud 區域。
 
 ### REST
@@ -609,11 +607,11 @@ gcloud dataplex datascans delete SCAN_ID --location=LOCATION --async
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-24 (世界標準時間)。
+上次更新時間：2026-10-29 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-24 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]

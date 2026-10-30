@@ -197,5 +197,5 @@ bq mk \
 ```
 import com.google.api.gax.rpc.ApiException;
 import com.google.cloud.bigquery.datatransfer.v1.CreateTransferConfigRequest;
-import com.google.cloud.bigquery.datatransfer.v1.
+import com.google.cloud.bigquery.d
 ```

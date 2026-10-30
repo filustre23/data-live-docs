@@ -486,23 +486,4 @@ The name of the label column in the training data. The label column contains the
 expected machine learning result for the given record. For example, in a spam
 detection dataset, the label column value would probably be either `spam` or
 `not spam`. In a rainfall dataset, the label column value might be the amount
-of rain that fell during a certain period.
-
-**Arguments**
-
-A one-element `ARRAY` of string values. Defaults to `label`.
-
-### `MAX_ITERATIONS`
-
-**Syntax**
-
-`MAX_ITERATIONS = int64_value`
-
-**Description**
-
-The maximum number of training iterations, where one iteration represents
-a single pass of the entire training data.
-
-**Arguments**
-
-An `INT64`
+of rain that fe

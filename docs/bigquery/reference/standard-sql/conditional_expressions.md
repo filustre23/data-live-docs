@@ -344,14 +344,5 @@ SELECT IFNULL(NULL, 0) as result
 SELECT IFNULL(10, 0) as result
 
 /*--------+
- | result |
- +--------+
- | 10     |
- +--------*/
-```
-
-```
--- The first expression is non-NULL, so it's used. The division-by-zero error
--- from the second expression isn't produced.
-SELECT IFNULL(
+ | result
 ```

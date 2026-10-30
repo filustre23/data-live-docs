@@ -16,7 +16,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 指定結構定義
 
-結構定義會定義 BigQuery 資料表的資料欄名稱、資料類型和其他屬性，因此資料會以您預期的結構儲存及查詢。在 BigQuery 將資料載入資料表或建立空白資料表時，可以指定結構定義。或者，您也可以針對支援的資料格式使用結構定義[自動偵測](https://docs.cloud.google.com/bigquery/docs/schema-detect?hl=zh-tw#auto-detect)功能。
+結構定義會定義 BigQuery 資料表的資料欄名稱、資料類型和其他屬性，因此資料會以您預期的結構儲存及查詢。在 BigQuery 將資料載入資料表或建立空白資料表時，可以指定結構定義。或者，您也可以針對支援的資料格式使用結構定義[自動偵測](https://docs.cloud.google.com/bigquery/docs/schema-detect?hl=zh-tw)功能。
 
 如果是自述式格式，例如 Avro、Parquet、ORC、Firestore 匯出檔和 Datastore 匯出檔，BigQuery 會從來源資料擷取結構定義。載入資料或建立空白資料表後，您可以[修改結構定義](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas?hl=zh-tw)。
 
@@ -833,10 +833,5 @@ print(f"Table schema: {schema_contents}")
 [
   {
     "name": "qtr",
-    "type": "STRING",
-    "mode": "REQUIRED",
-    "description": "quarter"
-  },
-  {
-    "name":
+    "type"
 ```

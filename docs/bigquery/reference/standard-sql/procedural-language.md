@@ -328,15 +328,5 @@ DECLARE x INT64 DEFAULT 10;
 BEGIN
   DECLARE y INT64;
   SET y = x;
-  SELECT y;
-END;
-SELECT x;
-```
-
-## `BEGIN...EXCEPTION...END`
-
-**Syntax**
-
-```
-BEGIN
+  SELECT
 ```

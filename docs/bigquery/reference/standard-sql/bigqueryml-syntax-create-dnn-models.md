@@ -512,14 +512,4 @@ the training run or iteration information returned by the
 [`ML.TRAINING_INFO` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-train)
 to distinguish the warm start run from the original run.
 
-In a warm start, the values of the `MODEL_TYPE`, `LABELS`, and `HIDDEN_UNITS`
-options, and the training data schema, must remain the same as they were in
-previous training job.
-
-**Arguments**
-
-A `BOOL` value. The default value is `FALSE`.
-
-### `DATA_SPLIT_METHOD`
-
-**Syntax**
+In a warm start, the values of the

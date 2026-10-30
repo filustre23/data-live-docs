@@ -244,12 +244,3 @@ bq mk
 * `CatalogSegmentValueWebsitePurchaseRoas`
 * `ConversionValues`
 * `Conversions`
-* `ConvertedProductQuantity`
-* `ConvertedProductValue`
-* `CostPer15_secVideoView`
-* `CostPer2SecContinuousVideoView`
-* `CostPerActionType`
-* `CostPerAdClick`
-* `CostPerConversion`
-* `CostPerOneThousandAdImpression`
-* `CostPerOutboundClick`

@@ -354,9 +354,4 @@ ML.GENERATE_EMBEDDING(
   second in the video at which to end the embedding. The `END_SECOND` value
   can't be higher than `120`. The default value is `120`. If you specify
   this argument, you must also specify the `START_SECOND` argument. This
-  value must be positive and greater than the `START_SECOND` value. This
-  argument only applies to video content.
-* `INTERVAL_SECONDS`: a `FLOAT64` value that specifies
-  the interval to use when creating embeddings. For example, if you set
-  `START_SECOND` = `0`, `END_SECOND` = `120`, and `INTERVAL_SECONDS` = `10`,
-  then the video is split into twelve 10 second segments (
+  value must be pos

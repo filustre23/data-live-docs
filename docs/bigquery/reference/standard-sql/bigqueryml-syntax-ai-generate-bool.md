@@ -350,14 +350,4 @@ from what you expect, particularly when running complex queries, such as
 `JOIN` or `ORDER BY ... LIMIT` clauses. To strictly control the number of rows
 processed by your complex queries, we
 recommended that you write the results of your query
-to a separate table beforehand, and then
-perform the Gemini inference directly on that materialized table.
-For information about how to view inference charges that you incur in Agent Platform, see
-[Track costs](/bigquery/docs/generative-ai-overview#track_costs). To estimate
-the token count of text input, use the
-[`AI.COUNT_TOKENS` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-count-tokens).
-
-## Use Agent Platform Provisioned Throughput
-
-You can use
-[Agent Pl](/vertex-ai/generative-ai/docs/provisioned-throughput/overview)
+to a s

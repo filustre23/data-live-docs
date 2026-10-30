@@ -37,7 +37,7 @@ BigQuery 的運算定價有些微差異，會影響容量規劃和費用控管�
 
 運算資源定價模式提供多種[*版本*](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)，所有版本都提供即付即用選項，並以運算單元時數計費。Enterprise 和 Enterprise Plus 版本也提供一或三年期的運算單元承諾使用合約，可節省即付即用費率。
 
-您也可以使用即付即用選項設定[自動調度資源預留項目](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro?hl=zh-tw)。詳情請參閱下列資源：
+您也可以使用即付即用選項設定[自動調度資源預留項目](https://docs.cloud.google.com/bigquery/docs/slots?hl=zh-tw#slot-autoscaling)。詳情請參閱下列資源：
 
 * 如要比較定價模式，請參閱「[選擇模式](https://docs.cloud.google.com/bigquery/docs/reservations-intro?hl=zh-tw#choosing_a_model)」。
 * 如要瞭解定價詳情，請參閱「[隨選運算定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#on_demand_pricing)」和「[容量運算定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#capacity_compute_analysis_pricing)」。
@@ -346,7 +346,7 @@ print("This query will process {} bytes.".format(query_job.total_bytes_processed
 
 * **動態運算單元分配**：分配給查詢的運算單元數量取決於查詢複雜度、執行階段最佳化和資源可用性。
 * **並行**：多項查詢會動態共用預留項目中的可用運算單元。
-* **自動調度資源行為**：如果啟用[運算單元自動調度資源](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro?hl=zh-tw)功能，預留項目會根據匯總工作負載需求 (而非單一查詢執行作業) 向上和向下調度資源。
+* **自動調度資源行為**：如果啟用[運算單元自動調度資源](https://docs.cloud.google.com/bigquery/docs/slots?hl=zh-tw#slot-autoscaling)功能，預留項目會根據匯總工作負載需求 (而非單一查詢執行作業) 向上和向下調度資源。
 
 查詢執行完畢後，您可以檢查查詢執行詳細資料，或查詢 [`INFORMATION_SCHEMA.JOBS` 檢視表](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw)，查看查詢實際消耗的運算資源 (以運算單元毫秒為單位，`total_slot_ms`)。
 
@@ -431,7 +431,7 @@ required.`
 
 如果您要建立大型、多階段的查詢，每次執行查詢時，BigQuery 都會讀取查詢要求的所有資料。系統會針對您每次執行查詢時讀取的所有資料收取相關費用。
 
-因此，請改為分階段查詢，每個階段都會將查詢結果寫入[目的地資料表](https://docs.cloud.google.com/bigquery/querying-data?hl=zh-tw#permanent-table)來具體化查詢結果。查詢較小的目的地資料表會減少讀取的資料量並降低費用。儲存具體化結果的費用比處理大量資料的費用低很多。
+因此，請改為分階段查詢，每個階段都會將查詢結果寫入[目的地資料表](https://docs.cloud.google.com/bigquery/docs/writing-results?hl=zh-tw#permanent-table)來具體化查詢結果。查詢較小的目的地資料表會減少讀取的資料量並降低費用。儲存具體化結果的費用比處理大量資料的費用低很多。
 
 ### 使用 Rapid Cache 透過外部資料表查詢 Cloud Storage
 
@@ -543,7 +543,7 @@ BigQuery 支援使用邏輯 (未壓縮) 或實體 (壓縮) 位元組，或兩者
 
 覆寫資料表時 (例如在[批次載入工作](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#appending_to_or_overwriting_a_table)中使用 `--replace` 參數，或使用 [`TRUNCATE TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax?hl=zh-tw#truncate_table_statement) SQL 陳述式)，系統會在時間旅行和安全防護期間保留遭替換的資料。如果頻繁覆寫資料表，會產生額外的儲存空間費用。
 
-您可以使用載入工作中的 `WRITE_APPEND` 參數、`MERGE` SQL 陳述式，或使用 [Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api?hl=zh-tw)，將資料逐步載入資料表。
+您可以使用載入工作中的 `WRITE_APPEND` 參數、`MERGE` SQL 陳述式，或使用 [Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api-grpc?hl=zh-tw)，將資料逐步載入資料表。
 
 ### 縮短時間回溯期
 
@@ -604,11 +604,11 @@ Your project exceeded quota for free query bytes scanned
 
 * 如果隨選分析費用增加，可能是因為啟動的工作數量增加，或工作需要處理的資料量有所變動。請使用 [`INFORMATION_SCHEMA.JOBS`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw) 檢視畫面調查。
 * 如果承諾使用運算單元的費用增加，請查詢 [`INFORMATION_SCHEMA.CAPACITY_COMMITMENT_CHANGES`](https://docs.cloud.google.com/bigquery/docs/information-schema-capacity-commitment-changes?hl=zh-tw)，確認是否購買或修改了新的承諾使用合約。
-* 如要瞭解預留項目用量增加的原因，請查看 [`INFORMATION_SCHEMA.RESERVATION_CHANGES`](https://docs.cloud.google.com/bigquery/docs/information-schema-reservation-changes?hl=zh-tw) 中記錄的預留項目變更。如要將自動調度資源預留項目用量與帳單資料進行比對，請按照[自動調度資源範例](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro?hl=zh-tw#monitor_autoscaling_with_information_schema)操作。
+* 如要瞭解預留項目用量增加的原因，請查看 [`INFORMATION_SCHEMA.RESERVATION_CHANGES`](https://docs.cloud.google.com/bigquery/docs/information-schema-reservation-changes?hl=zh-tw) 中記錄的預留項目變更。如要將自動調度資源預留項目用量與帳單資料進行比對，請按照[自動調度資源範例](https://docs.cloud.google.com/bigquery/docs/slots?hl=zh-tw#slot-autoscaling)操作。
 
 #### 計費運算單元時數大於 INFORMATION\_SCHEMA.JOBS 檢視表計算的運算單元時數
 
-使用自動調度資源預留項目時，系統會根據調度後的運算單元數量計算費用，而非使用的運算單元數量。BigQuery 會以 50 個運算單元為單位自動調度資源，因此即使實際用量低於自動調度資源的數量，仍會按最接近的倍數計費。根據預設，自動配置器在縮減資源前至少會等待 1 分鐘，因此即使查詢使用運算單元的時間較短 (例如 1 分鐘內只用了 10 秒)，系統仍會收取至少 1 分鐘的費用。如要避免這些費用，您可以在預留項目層級選擇加入 BigQuery 流暢擴充功能，按秒計費，且沒有最短時間限制。如要瞭解如何正確估算自動調度資源預留項目的費用，請參閱「[Slots Autoscaling](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro?hl=zh-tw#monitor_autoscaling_with_information_schema)」(運算單元自動調度資源) 頁面。如要進一步瞭解如何有效率地使用自動調度資源功能，請參閱[自動調度資源最佳做法](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro?hl=zh-tw#autoscaling_best_practices)。
+使用自動調度資源預留項目時，系統會根據調度後的運算單元數量計算費用，而非使用的運算單元數量。BigQuery 會以 50 個運算單元為單位自動調度資源，因此即使實際用量低於自動調度資源的數量，仍會按最接近的倍數計費。根據預設，自動配置器在縮減資源前至少會等待 1 分鐘，因此即使查詢使用運算單元的時間較短 (例如 1 分鐘內只用了 10 秒)，系統仍會收取至少 1 分鐘的費用。如要避免這些費用，您可以在預留項目層級選擇加入 BigQuery 流暢擴充功能，按秒計費，且沒有最短時間限制。如要瞭解如何正確估算自動調度資源預留項目的費用，請參閱「[Slots Autoscaling](https://docs.cloud.google.com/bigquery/docs/slots?hl=zh-tw#slot-autoscaling)」(運算單元自動調度資源) 頁面。如要進一步瞭解如何有效率地使用自動調度資源功能，請參閱[自動調度資源最佳做法](https://docs.cloud.google.com/bigquery/docs/slots?hl=zh-tw#slot-autoscaling)。
 
 非自動調度資源的預留項目也會有類似情況，計費方式是根據佈建的運算單元數量，而非使用的運算單元數量。如要預估非自動調度資源預留項目的費用，可以直接查詢 [`RESERVATIONS_TIMELINE` 檢視表](https://docs.cloud.google.com/bigquery/docs/information-schema-reservation-timeline?hl=zh-tw#examples)。
 
@@ -642,7 +642,7 @@ Your project exceeded quota for free query bytes scanned
 
 #### 專案已指派給預留項目，但仍會產生 BigQuery Analysis 隨選費用
 
-請詳閱「[排解預訂問題](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#troubleshoot_issues_with_reservations)」一節，找出 `Analysis` 費用的可能來源。
+請詳閱「[排解預訂問題](https://docs.cloud.google.com/bigquery/docs/troubleshoot-workload-management?hl=zh-tw#troubleshoot_issues_with_reservations)」一節，找出 `Analysis` 費用的可能來源。
 
 #### BigQuery Standard 版本的即付即用 (PAYG) 運算單元產生不明費用
 
@@ -705,11 +705,11 @@ Your project exceeded quota for free query bytes scanned
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-24 (世界標準時間)。
+上次更新時間：2026-10-29 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-24 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]

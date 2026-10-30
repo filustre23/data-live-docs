@@ -69,7 +69,7 @@ If you are using [sbt](https://www.scala-sbt.org/), add
 the following to your dependencies:
 
 ```
-libraryDependencies += "com.google.cloud" % "google-cloud-bigquerymigration" % "0.102.0"
+libraryDependencies += "com.google.cloud" % "google-cloud-bigquerymigration" % "0.103.0"
 ```
 
 If you're using Visual Studio Code or IntelliJ, you can add client libraries to your
@@ -214,7 +214,5 @@ func executeTranslationWorkflow(ctx context.Context, client *migration.Client, p
 			DisplayName: "example SQL conversion",
 			Tasks: map[string]*migrationpb.MigrationTask{
 				"example_conversion": {
-					Type: "Translation_Teradata2BQ",
-					TaskDetails: &migrationpb.MigrationTask_TranslationConfigDetails{
-						TranslationConfigDetails:
+					Type
 ```

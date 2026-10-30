@@ -55,6 +55,7 @@ canonical equivalence.
 | [`OCTET_LENGTH`](/bigquery/docs/reference/standard-sql/string_functions#octet_length) | Alias for `BYTE_LENGTH`. |
 | [`REGEXP_CONTAINS`](/bigquery/docs/reference/standard-sql/string_functions#regexp_contains) | Checks if a value is a partial match for a regular expression. |
 | [`REGEXP_EXTRACT`](/bigquery/docs/reference/standard-sql/string_functions#regexp_extract) | Produces a substring that matches a regular expression. |
+| [`REGEXP_EXTRACT_GROUPS`](/bigquery/docs/reference/standard-sql/string_functions#regexp_extract_groups) | Produces substrings that match multiple capturing groups in a regular expression. |
 | [`REGEXP_EXTRACT_ALL`](/bigquery/docs/reference/standard-sql/string_functions#regexp_extract_all) | Produces an array of all substrings that match a regular expression. |
 | [`REGEXP_INSTR`](/bigquery/docs/reference/standard-sql/string_functions#regexp_instr) | Finds the position of a regular expression match in a value, optionally starting the search at a given offset or occurrence. |
 | [`REGEXP_REPLACE`](/bigquery/docs/reference/standard-sql/string_functions#regexp_replace) | Produces a `STRING` value where all substrings that match a regular expression are replaced with a specified value. |
@@ -281,12 +282,4 @@ SELECT CODE_POINTS_TO_BYTES([65, 98, 67, 100]) AS bytes;
  +----------*/
 ```
 
-The following example uses a rotate-by-13 places (ROT13) algorithm to encode a
-string.
-
-```
-SELECT CODE_POINTS_TO_BYTES(ARRAY_AGG(
-  (SELECT
-      CASE
-        WHEN chr BETWEEN b<
-```
+The following example uses a rotate-by-13 places (ROT13)

@@ -172,7 +172,4 @@ Connection properties specific to Cloud Spanner.
 
 | JSON representation |
 | --- |
-| ``` {   "database": string,   "useParallelism": boolean,   "maxParallelism": integer,   "useDataBoost": boolean,   "databaseRole": string } ``` |
-
-|
-|  |
+| ``` {   "database": string,   "useParallelism": boolean,   "maxParallelism": integer, ``` |

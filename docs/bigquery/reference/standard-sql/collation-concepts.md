@@ -356,10 +356,5 @@ FROM table_a;
 
 -- This runs. Even though column 'a' and 'b' have different
 -- collation specifications, column 'b' is considered the default collation
--- because it's assigned to an empty collation specification.
-SELECT STARTS_WITH(col_a_expression, col_b_expression)
-FROM table_a;
-
--- This works. Even though column 'a' and 'b' have different
--- colla
+-- because it's assigned to an empty collation specificat
 ```

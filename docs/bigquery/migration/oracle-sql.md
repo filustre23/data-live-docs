@@ -123,6 +123,4 @@ BigQuery 和 Oracle 的資料表運算子相同。
 | `DECODE` | `CASE.. WHEN.. END` |
 | `NANVL` | `IFNULL` |
 | `FETCH NEXT>` | `LIMIT` |
-| `NULLIF` | [`NULLIF(expression, expression_to_match)`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conditional_expressions?hl=zh-tw#nullif) |
-| `NVL` | `IFNULL(expr, 0), COALESCE(exp, 0)` |
-| `NVL2` | `IF(expr, true_result, else_result)` |
+| `NULLIF` | [`NULLIF(expression, expres`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conditional_expressions?hl=zh-tw#nullif) |

@@ -295,10 +295,5 @@ UNNEST([
   STRUCT("apple" AS x, 3 AS weight),
   ("pear", 2),
   ("apple", 0),
-  ("banana", 5),
-  ("pear", 4)
-]);
-
-/*--------------------------+
- | approx_top_sum           |
+  (
 ```

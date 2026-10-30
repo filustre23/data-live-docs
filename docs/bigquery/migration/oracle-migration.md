@@ -174,11 +174,3 @@ BigQuery 的資料存取記錄和稽核記錄均使用 [Cloud 稽核記錄](http
 稽核記錄包含所有 API 呼叫、查詢陳述式和工作狀態。您可以使用 [Cloud Monitoring](https://docs.cloud.google.com/bigquery/docs/monitoring?hl=zh-tw) 監控運算單元分配情形、查詢和儲存的掃描位元組數，以及其他 BigQuery [指標](https://docs.cloud.google.com/bigquery/docs/monitoring?hl=zh-tw#metrics)。BigQuery [查詢計畫和時間軸](https://docs.cloud.google.com/bigquery/query-plan-explanation?hl=zh-tw)可用於分析查詢階段和效能。
 
 您可以使用[錯誤訊息表格](https://docs.cloud.google.com/bigquery/troubleshooting-errors?hl=zh-tw)，排解查詢工作和 API 錯誤。如要區分每項查詢或工作的運算單元分配，可以使用這項[公用程式](https://github.com/GoogleCloudPlatform/professional-services/tree/master/examples/bigquery-cross-project-slot-monitoring)，這對採用用量計價模式，且有多個專案分散在多個團隊的客戶來說非常實用。
-
-#### 維護、升級和版本
-
-BigQuery 是全代管服務，您不需要進行任何維護或升級。BigQuery 不提供不同版本。升級作業會持續進行，不需要停機，也不會影響系統效能。詳情請參閱[版本資訊](https://docs.cloud.google.com/bigquery/docs/release-notes?hl=zh-tw)。
-
-Oracle 和 Exadata 需要您執行資料庫和基礎架構層級的修補、升級和維護作業。Oracle 有許多版本，且預計每年都會發布新的主要版本。雖然新版本回溯相容，但查詢效能、情境和功能可能會有所變動。
-
-有些應用程式可能需要特定版本，例如

@@ -280,12 +280,3 @@ END IF;
 
   + [AutoML](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-automl)
   + [Matrix factorization](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization)
-  + [`ARIMA_PLUS`](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series)
-  + Remote models over
-    [LLMs](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model),
-    [Cloud AI services](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service),
-    or
-    [Gemini Enterprise Agent Platform endpoints](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https)
-  + Imported
-    [Open Neural Network Exchange (ONNX)](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-onnx),
-    [TensorFlow](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow),

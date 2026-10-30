@@ -16,11 +16,9 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 查詢雲端硬碟外部資料表
 
-本文說明如何查詢儲存在 [Google 雲端硬碟外部資料表](https://docs.cloud.google.com/bigquery/docs/external-data-drive?hl=zh-tw)中的資料。
+BigQuery 可讓您對儲存在 [Google 雲端硬碟外部資料表](https://docs.cloud.google.com/bigquery/docs/external-data-drive?hl=zh-tw)中的資料執行 GoogleSQL 查詢，以便直接從雲端硬碟分析試算表和逗號分隔值 (CSV) 檔案。您可以使用[永久外部資料表](#permanent-tables)或執行查詢時建立的[暫時外部資料表](#temporary-tables)，查詢個人和共用雲端硬碟檔案。
 
-BigQuery 支援查詢個人雲端硬碟檔案和共用檔案。如要進一步瞭解雲端硬碟，請參閱「[Google 雲端硬碟訓練課程和相關說明](https://support.google.com/a/users/answer/9282958?hl=zh-tw)」。
-
-您可以從[永久外部資料表](#permanent-tables)或執行查詢時建立的[暫時外部資料表](#temporary-tables)查詢雲端硬碟資料。
+如要進一步瞭解雲端硬碟，請參閱「[Google 雲端硬碟訓練課程和相關說明](https://support.google.com/a/users/answer/9282958?hl=zh-tw)」。
 
 ## 限制
 
@@ -350,11 +348,11 @@ Drive credentials`
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-24 (世界標準時間)。
+上次更新時間：2026-10-29 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-24 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]

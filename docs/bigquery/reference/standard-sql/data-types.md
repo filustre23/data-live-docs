@@ -386,12 +386,5 @@ SELECT [1, 2, 3] AS numbers;
 
 SELECT ["apple", "pear", "orange"] AS fruit;
 
-SELECT [true, false, true] AS booleans;
-```
-
-You can also create arrays from any expressions that have compatible types. For
-example:
-
-```
-SELECT [a,
+SELECT [true, false, true]
 ```

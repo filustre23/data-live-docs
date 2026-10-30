@@ -383,12 +383,5 @@ Insert two rows into the table:
 INSERT INTO mydataset.Produce
 VALUES
   ('bananas', 20),
-  ('carrots', 30);
-```
-
-Delete one row from the table:
-
-```
-DELETE mydataset.Produce
-WHERE product
+  ('carrots'<
 ```

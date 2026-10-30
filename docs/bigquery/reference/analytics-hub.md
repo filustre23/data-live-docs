@@ -77,7 +77,7 @@ If you are using [sbt](https://www.scala-sbt.org/), add
 the following to your dependencies:
 
 ```
-libraryDependencies += "com.google.cloud" % "google-cloud-analyticshub" % "0.96.0"
+libraryDependencies += "com.google.cloud" % "google-cloud-analyticshub" % "0.97.0"
 ```
 
 If you're using Visual Studio Code or IntelliJ, you can add client libraries to your
@@ -238,7 +238,5 @@ func main() {
 	if err != nil {
 		log.Fatalf("failed to get information about the exchange: %v", err)
 	}
-	fmt.Printf("\nData Exchange Information\n")
-	fmt.Printf("Exchange Name: %s\n", exchange.GetName())
-	if <
+	fmt.Printf("\nData E
 ```

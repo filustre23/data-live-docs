@@ -60,6 +60,8 @@ Send feedback
 * `UpdateBiReservationRequest` (message)
 * `UpdateCapacityCommitmentRequest` (message)
 * `UpdateReservationRequest` (message)
+* `UpgradeEditionRequest` (message)
+* `UpgradeEditionResponse` (message)
 
 ## ReservationService
 
@@ -115,9 +117,4 @@ A capacity commitment is a way to purchase compute capacity for BigQuery jobs (i
 
 | GetIamPolicy |
 | --- |
-| `rpc GetIamPolicy(GetIamPolicyRequest) returns (Policy)`  Gets the access control policy for a resource. May return:   * A`NOT_FOUND` error if the resource doesn't exist or you don't have the permission to view it. * An empty policy if the resource exists but doesn't have a set policy.   Supported resources are: - Reservations - ReservationAssignments  To call this method, you must have the following Google IAM permissions:   * `bigqueryreservation.reservations.getIamPolicy` to get policies on reservations.   Authorization scopes  Requires one of the following OAuth scopes:   * `https://www.googleapis.com/auth/bigquery` * `https://www.googleapis.com/auth/cloud-platform`   For more information, see the [Authentication Overview](/docs/authentication#authorization-gcp). |
-
-| GetReservation |
-| --- |
-|
-|  |
+| `rpc GetIamPolicy(GetIamPolicyRequest) returns (Policy)`  Gets the access control policy for a resource. May return:   * A`NOT_FOUND` error if the resource doesn't exist or you don't have the permission to view it. * An empty policy if the resource exists but doesn't have a set policy.   Supported resources are: - Reservations - ReservationAssignments  To call this method, you must have the following Google IAM permissions:   * `bigquer` |

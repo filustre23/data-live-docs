@@ -299,12 +299,4 @@ FROM PlayerStats;
  |   first_name: "Jie",     |
  |   age: 19                |
  |  }                       |
- +---------------------------*/
 ```
-
-### `SELECT ALL`
-
-A `SELECT ALL` statement returns all rows, including duplicate rows.
-`SELECT ALL` is the default behavior of `SELECT`.
-
-### `SELECT AS STRUCT`

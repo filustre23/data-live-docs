@@ -554,15 +554,3 @@ no default range, and the scale type is `LINEAR`.
 The minimum loss reduction required to make a further partition on a leaf node of
 the tree. The larger the `MIN_SPLIT_LOSS` value is, the more conservative the
 algorithm is.
-
-**Arguments**
-
-If you aren't running hyperparameter tuning, then you can specify a `FLOAT64`
-value. The default value is `0`.
-
-If you are running hyperparameter tuning, use one of the following options:
-
-* The `HPARAM_RANGE` keyword and two `FLOAT64` values that define
-  the range of the hyperparameter. For example,
-  `MIN_SPLIT_LOSS = HPARAM_RANGE(0, 5.5)`.
-* The `HPARAM_CANDIDATES` keyword and an array of `FLOAT64` va

@@ -296,8 +296,5 @@ The following example exports data to a Spanner table:
 
 ```
 EXPORT DATA OPTIONS (
-  uri="https://spanner.googleapis.com/projects/my-project/instances/my-instance/databases/my-database",
-  format="CLOUD_SPANNER",
-  spanner_options="""{ "table": "my_table" }"""
-)
+  uri="https://spanner.googleapis.co
 ```

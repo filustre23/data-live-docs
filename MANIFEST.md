@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-10-30T03:54+00:00_
+_Generated 2026-10-30T17:47+00:00_
 
-**9 sources, 4764 topics total**
+**9 sources, 4761 topics total**
 
 ## airflow
 
@@ -849,7 +849,7 @@ _826 topics_
 
 Upstream: <https://cloud.google.com/bigquery/docs/>
 
-_1500 topics_
+_1497 topics_
 
 - `bigquery/access-control`
 - `bigquery/access-control-basic-roles`
@@ -2196,10 +2196,7 @@ _1500 topics_
 - `bigquery/samples/bigquery-update-with-dml`
 - `bigquery/samples/bigqueryconnection-create-aws-connection`
 - `bigquery/samples/bigqueryconnection-create-connection`
-- `bigquery/samples/bigqueryconnection-delete-connection`
-- `bigquery/samples/bigqueryconnection-get-connection`
 - `bigquery/samples/bigqueryconnection-share-connection`
-- `bigquery/samples/bigqueryconnection-update-connection`
 - `bigquery/samples/bigquerydatatransfer-copy-dataset`
 - `bigquery/samples/bigquerydatatransfer-create-admanager-transfer`
 - `bigquery/samples/bigquerydatatransfer-create-ads-transfer`

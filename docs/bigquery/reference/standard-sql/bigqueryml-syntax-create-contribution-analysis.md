@@ -468,7 +468,5 @@ The following example creates a contribution analysis model that uses a
 summable by category metric:
 
 ```
-CREATE (OR REPLACE) MODEL `myproject.mydataset.ca_model`
-  OPTIONS(
-    MODEL_TYPE = 'CONTRIBUTION_ANALYSIS',
+CREATE (OR
 ```

@@ -168,7 +168,4 @@ IBM Netezza 資料倉儲技術專為搭配 Netezza 專屬 SQL 語法而設計。
 | `DENSE_RANK` | [`DENSE_RANK`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/numbering_functions?hl=zh-tw#dense_rank) |
 | `FIRST_VALUE` | [`FIRST_VALUE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions?hl=zh-tw#first_value) |
 | `LAG` | [`LAG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions?hl=zh-tw#lag) |
-| `LAST_VALUE` | [`LAST_VALUE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions?hl=zh-tw#last_value) |
-| `LEAD` | [`LEAD`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions?hl=zh-tw#lead) |
-| `AND` | [`LOGICAL_AND`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions?hl=zh-tw#logical_and) |
-| `OR` |  |
+| `LAST_VALUE` |  |

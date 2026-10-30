@@ -265,13 +265,4 @@ WHERE
               second
             FROM
               [bigquery-public-data:samples.trigrams]
-            WHERE
-              third = "AND")
-LIMIT 10;
-```
-
-下列查詢使用半聯結，傳回在出生人數最多的 10 個州中，50 歲以上女性的生育人數。
-
-```
-#
 ```

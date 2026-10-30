@@ -211,7 +211,4 @@ bq mk \
 * SERVICE\_ACCOUNT\_NAME (選用)：用於驗證資料移轉的服務帳戶名稱。服務帳戶應由用於建立轉移作業的 `project_id` 擁有，且應具備所有[必要權限](#required_permissions)。
 * PARAMETERS：已建立移轉設定的 JSON 格式參數。例如：`--params='{"param":"param_value"}'`。您必須提供 `customer_id` 參數。
 
-  + `table_filter`：指定要納入資料轉移作業的資料表。如果未指定旗標，系統會納入所有資料表。如要只納入特定資料表，請使用以半形逗號分隔的值清單 (例如 `Ad, Campaign, AdGroup`)。如要排除特定資料表，請在排除的值前面加上連字號 (`-`) (例如使用 `-Ad, Campaign, AdGroup` 會排除所有三個值)。
-  + `custom_columns`：指定報表的自訂欄。這項參數會以 JSON 陣列格式接收輸入字串，並支援多個資料欄。在 JSON 陣列的個別項目，您必須提供下列參數：
-    - CC\_ID：自訂資料欄的數值 ID。[建立自訂欄](https://support.google.com/sa360/answer/9633916?amp%3Bref_topic=14138984&%3Bsjid=5858325799664893372-NC&hl=zh-tw)時，系統會指派這組 ID。
-    - CC\_DESTINATION\_TABLE：要涵蓋自訂欄的 BigQuery 資料表清單。BigQuery 資料移轉服務擷取這些資料表的內容時，資料移轉作業會在查詢加入自訂
+  + `table_filter`：指定要納入資料轉移作業的資料表。如果未指定旗標，系統會納入所有資料表。如要只納入特定資料表，請使用以半形逗號分隔的值清單 (例如 `Ad, Campaign, AdGroup`)。如要排除特定資料表，請在排除的值前面加上連字號 (`-`) (例如使用 `-Ad, Campaign, AdGroup` 會排除所有

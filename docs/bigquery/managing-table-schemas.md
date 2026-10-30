@@ -585,7 +585,7 @@ SCHEMA
 
 更改下列內容：
 
-* `LOCATION`：位置名稱。`--location` 是選用旗標。舉例來說，如果您在東京區域使用 BigQuery，就可將該旗標的值設為 `asia-northeast1`。您可以使用 [.bigqueryrc 檔](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool?hl=zh-tw#setting_default_values_for_command-line_flags)來設定位置的預設值。
+* `LOCATION`：位置名稱。`--location` 是選用旗標。舉例來說，如果您在東京區域使用 BigQuery，就可將該旗標的值設為 `asia-northeast1`。您可以使用 [.bigqueryrc 檔](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#set_default_values_for_command-line_flags)來設定位置的預設值。
 * `FORMAT`：結構定義的格式。`NEWLINE_DELIMITED_JSON`、`CSV`、`AVRO`、`PARQUET`、`ORC` 或 `DATASTORE_BACKUP`。
 * `PROJECT_ID`：您的專案 ID。
 * `DATASET`：含有您要更新之資料表的資料集名稱。
@@ -945,7 +945,7 @@ bq --location=LOCATION query \
 
 更改下列內容：
 
-* `LOCATION`：位置名稱。`--location` 是選用旗標。舉例來說，如果您在東京區域使用 BigQuery，就可將該旗標的值設為 `asia-northeast1`。您可以使用 [.bigqueryrc 檔](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool?hl=zh-tw#setting_default_values_for_command-line_flags)來設定位置的預設值。請注意，您無法將查詢結果附加至不同位置的資料表。
+* `LOCATION`：位置名稱。`--location` 是選用旗標。舉例來說，如果您在東京區域使用 BigQuery，就可將該旗標的值設為 `asia-northeast1`。您可以使用 [.bigqueryrc 檔](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#set_default_values_for_command-line_flags)來設定位置的預設值。請注意，您無法將查詢結果附加至不同位置的資料表。
 * `PROJECT_ID`：您的專案 ID。
 * `dataset`：含有您要附加之資料表的資料集名稱。
 * `TABLE`：要附加的資料表名稱。
@@ -1030,7 +1030,5 @@ func createTableAndWidenQuery(projectID, datasetID, tableID string) error {
 		return err
 	}
 	// Our table has two columns.  We'll introduce a new favorite_color column via
-	// a subsequent query that appends to the table.
-	q := client.Query("SELECT \"Timmy\" as full_name, 85 as age, \"Blue\" as favorite_color")
-	q.SchemaUpdateOptions =
+	
 ```

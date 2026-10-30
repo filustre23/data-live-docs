@@ -231,6 +231,5 @@ int main(int argc, char* argv[]) try {
   constexpr int kRowOffset = 0;
   auto read_rows = client.ReadRows(session->streams(0).name(), kRowOffset);
 
-  std::int64_t num_rows = 0;
-  for (auto const& row
+  std::
 ```

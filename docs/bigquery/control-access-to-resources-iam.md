@@ -16,14 +16,13 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 使用 IAM 控管資源的存取權
 
-本文說明如何查看、授予及撤銷 BigQuery 資料集和資料集內資源 (資料表、檢視區塊和常式) 的存取權控管。雖然模型也是資料集層級資源，但您無法使用 IAM 角色授予個別模型的存取權。
+為保護 BigQuery 資料集和基礎資源，您可以查看、授予及撤銷資料集、資料表、檢視表和常式的存取控管權限。雖然模型也是資料集層級資源，但您無法使用 Identity and Access Management (IAM) 角色授予個別模型的存取權。
 
-您可以透過*允許政策* (又稱為 *Identity and Access Management (IAM) 政策*)，授予 Google Cloud 資源的存取權。這類政策會附加於資源。每項資源只能附加一項允許政策。
-允許政策可控管資源本身的存取權，以及[沿用允許政策](https://docs.cloud.google.com/iam/docs/allow-policies?hl=zh-tw#inheritance)的資源後代。
+您可以透過*允許政策* (又稱為 *IAM 政策*) 授予 Google Cloud 資源的存取權，這類政策會附加於資源。每項資源只能附加一項允許政策。允許政策可控管資源本身的存取權，以及[沿用允許政策](https://docs.cloud.google.com/iam/docs/allow-policies?hl=zh-tw#inheritance)的資源後代。
 
 如要進一步瞭解允許政策，請參閱 IAM 說明文件中的「[政策結構](https://docs.cloud.google.com/iam/docs/allow-policies?hl=zh-tw#structure)」。
 
-本文假設您已熟悉 Google Cloud的[身分與存取權管理 (IAM)](https://docs.cloud.google.com/iam/docs/overview?hl=zh-tw)。
+本文假設您已熟悉 Google Cloud中的 [IAM](https://docs.cloud.google.com/iam/docs/overview?hl=zh-tw)。
 
 ## 限制
 
@@ -31,9 +30,9 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 * 外部或連結資料集內的常式不支援存取控管。
 * 外部或連結資料集內的資料表不支援存取控管。
 * 無法使用 Terraform 設定常式存取控管。
-* 您無法使用 Google Cloud SDK 設定日常安排存取控管機制。
+* 無法使用 Google Cloud SDK 設定日常安排存取控管。
 * 無法使用 [BigQuery 資料控管語言 (DCL)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language?hl=zh-tw) 設定常式存取控管。
-* 「[`INFORMATION_SCHEMA.OBJECT_PRIVILEGES`」檢視畫面](https://docs.cloud.google.com/bigquery/docs/information-schema-object-privileges?hl=zh-tw)不會顯示日常作業的存取權控管設定。
+* [`INFORMATION_SCHEMA.OBJECT_PRIVILEGES` 檢視畫面](https://docs.cloud.google.com/bigquery/docs/information-schema-object-privileges?hl=zh-tw)不會顯示日常安排的存取控管。
 
 ## 事前準備
 
@@ -47,13 +46,13 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 #### 所需權限
 
-如要修改資源的 IAM 政策，必須具備下列權限：
+必須具備下列權限，才能修改資源的 IAM 政策：
 
-* 如要取得資料集的存取權政策，請按照下列步驟操作：
+* 如要取得資料集的存取權政策，請執行下列指令：
   `bigquery.datasets.get`
-* 如要設定資料集的存取權政策，請執行下列步驟：
+* 如要設定資料集的存取權政策，請按照下列步驟操作：
   `bigquery.datasets.update`
-* 如要取得資料集的存取政策 (僅限Google Cloud 控制台)：
+* 如要取得資料集的存取權政策 (Google Cloud 僅限控制台)：
   `bigquery.datasets.getIamPolicy`
 * 如要設定資料集的存取權政策 (僅限控制台)，請按照下列步驟操作：
   `bigquery.datasets.setIamPolicy`
@@ -63,7 +62,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
   `bigquery.tables.setIamPolicy`
 * 如要取得常式的存取權政策，請執行下列操作：
   `bigquery.routines.getIamPolicy`
-* 如要設定常式的存取權政策，請執行下列操作：
+* 如要設定常式的存取權政策，請按照下列步驟操作：
   `bigquery.routines.setIamPolicy`
 * 如要建立 bq 工具或 [SQL BigQuery 工作](https://docs.cloud.google.com/bigquery/docs/managing-jobs?hl=zh-tw) (選用)：
   `bigquery.jobs.create`
@@ -72,20 +71,19 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ## 使用資料集存取控管
 
-您可以授予 [IAM 主體](https://docs.cloud.google.com/iam/docs/principal-identifiers?hl=zh-tw#allow)預先定義或自訂的角色，決定主體在資料集中的權限，藉此提供資料集存取權。這也稱為將[允許政策](https://docs.cloud.google.com/iam/docs/allow-policies?hl=zh-tw)附加至資源。授予存取權後，您就能查看資料集的存取控管機制，並撤銷資料集的存取權。
+您可以將預先定義或自訂角色授予 [IAM 主體](https://docs.cloud.google.com/iam/docs/principal-identifiers?hl=zh-tw#allow)，藉此提供資料集的存取權，決定主體可以對資料集執行的操作。這也稱為將[允許政策](https://docs.cloud.google.com/iam/docs/allow-policies?hl=zh-tw)附加至資源。授予存取權後，您可以查看資料集的存取控管機制，也可以撤銷資料集的存取權。
 
 ### 授予資料集存取權
 
-使用 BigQuery 網頁版 UI 或 bq 指令列工具建立資料集時，無法授予資料集存取權。您必須先建立資料集，然後授予存取權。
-API 可讓您在建立資料集時，透過呼叫 [`datasets.insert` 方法](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert?hl=zh-tw)並定義[資料集資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets?hl=zh-tw)來授予存取權。
+使用 BigQuery 網頁版 UI 或 bq 指令列工具建立資料集時，無法授予資料集存取權。您必須先建立資料集，再授予存取權。這個 API 可讓您在建立資料集時，透過呼叫 [`datasets.insert` 方法](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert?hl=zh-tw)並定義[資料集資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets?hl=zh-tw)來授予存取權。
 
-專案是資料集的父項資源，而資料集則是資料表、檢視區塊、常式和模型的父項資源。在專案層級授予角色時，資料集和資料集的資源會繼承該角色及其權限。同樣地，在資料集層級授予角色時，資料集內的資源會繼承該角色及其權限。
+專案是資料集的父項資源，資料集則是資料表和檢視表、常式和模型的父項資源。在專案層級授予角色時，資料集和資料集的資源會繼承該角色及其權限。同樣地，如果您在資料集層級授予角色，資料集內的資源也會繼承該角色及其權限。
 
-您可以授予 IAM 角色權限，或使用 IAM 條件有條件地授予存取權，讓使用者存取資料集。如要進一步瞭解如何授予條件式存取權，請參閱「[使用 IAM 條件控管存取權](https://docs.cloud.google.com/bigquery/docs/conditions?hl=zh-tw#add-conditions-to-datasets)」。
+您可以授予 IAM 角色權限，或使用 IAM 條件，有條件地授予資料集存取權。如要進一步瞭解如何授予條件式存取權，請參閱「[使用 IAM 條件控管存取權](https://docs.cloud.google.com/bigquery/docs/conditions?hl=zh-tw#add-conditions-to-datasets)」。
 
 **注意：** 授予資料集存取權後，系統不會自動將資料集列在「Explorer」(探索工具) 窗格中。
 
-如要授予 IAM 角色資料集存取權，但不想使用條件，請選取下列任一選項：
+如要將資料集的 IAM 角色存取權授予使用者，但不使用條件，請選取下列其中一個選項：
 
 ### 控制台
 
@@ -118,18 +116,18 @@ API 可讓您在建立資料集時，透過呼叫 [`datasets.insert` 方法](htt
    TO "USER_LIST"
    ```
 
-   請替換下列項目：
+   替換下列內容：
 
    * `ROLE_LIST`：要授予的角色或以半形逗號分隔的角色清單
    * `RESOURCE_NAME`：您要授予存取權的資料集名稱
-   * `USER_LIST`：以半形逗號分隔的使用者清單，這些使用者會獲得角色
+   * `USER_LIST`：以半形逗號分隔的使用者清單，列出獲派角色的使用者
 
      如需有效格式清單，請參閱 [`user_list`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language?hl=zh-tw#user_list)。
 3. 按一下「play\_circle 執行」。
 
 如要進一步瞭解如何執行查詢，請參閱「[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)」。
 
-以下範例會將 BigQuery 資料檢視者角色授予 `myDataset`：
+下列範例會將 BigQuery 資料檢視者角色授予 `myDataset`：
 
 ```
 GRANT `roles/bigquery.dataViewer`
@@ -139,7 +137,7 @@ TO "user:user@example.com", "user:user2@example.com"
 
 ### bq
 
-1. 在 Google Cloud 控制台中啟用 Cloud Shell。
+1. 在 Google Cloud 控制台啟用 Cloud Shell。
 
    [啟用 Cloud Shell](https://console.cloud.google.com/?cloudshell=true&hl=zh-tw)
 
@@ -157,9 +155,9 @@ TO "user:user@example.com", "user:user2@example.com"
    * PROJECT\_ID：專案 ID
    * DATASET：資料集名稱
    * PATH\_TO\_FILE：本機電腦上的 JSON 檔案路徑
-3. 變更 JSON 檔案的 `access` 區段。您可以新增至任何 `specialGroup` 項目：`projectOwners`、`projectWriters`、`projectReaders` 和 `allAuthenticatedUsers`。您也可以新增下列任一項目：`userByEmail`、`groupByEmail` 和 `domain`。
+3. 變更 JSON 檔案的 `access` 部分。您可以新增至任何 `specialGroup` 項目：`projectOwners`、`projectWriters`、`projectReaders` 和 `allAuthenticatedUsers`。您也可以新增下列任一項目：`userByEmail`、`groupByEmail` 和 `domain`。
 
-   舉例來說，資料集 JSON 檔案的 `access` 區段會如下所示：
+   舉例來說，資料集 JSON 檔案的 `access` 區段會像這樣：
 
    ```
    {
@@ -196,7 +194,7 @@ TO "user:user@example.com", "user:user2@example.com"
     ...
    }
    ```
-4. 編輯完成後，請使用 `bq update` 指令，並透過 `--source` 標記加入 JSON 檔案。如果資料集位於預設專案以外的專案，請按照「`PROJECT_ID:DATASET`」格式，在資料集名稱中加入專案 ID。
+4. 編輯完成後，請使用 `bq update` 指令，並透過 `--source` 旗標加入 JSON 檔案。如果資料集位於預設專案以外的專案，請按照下列格式，將專案 ID 新增至資料集名稱：`PROJECT_ID:DATASET`。
 
    **注意：**如果您套用了含有存取權控管設定的 JSON 檔案，現有的存取權控管設定會遭到覆寫。
 
@@ -217,11 +215,11 @@ TO "user:user@example.com", "user:user2@example.com"
 
 使用 [`google_bigquery_dataset_iam`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset_iam) 資源更新資料集的存取權。
 
-**重要事項：** `google_bigquery_dataset_iam` 提供的不同資源可能會彼此衝突，也可能與 [google\_bigquery\_dataset\_access](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset_access) 資源衝突。使用 Terraform 變更存取權控管設定前，請先詳閱[`google_bigquery_dataset_iam`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset_iam)說明文件。
+**重要事項：** `google_bigquery_dataset_iam` 提供的不同資源可能會彼此衝突，也可能與 [google\_bigquery\_dataset\_access](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset_access) 資源衝突。使用 Terraform 變更存取控管設定前，請詳閱 [`google_bigquery_dataset_iam`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset_iam) 說明文件。
 
-**設定資料集的存取政策**
+**設定資料集的存取權政策**
 
-以下範例說明如何使用 [`google_bigquery_dataset_iam_policy` 資源](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset_iam#google_bigquery_dataset_iam_policy)，設定 `mydataset` 資料集的 IAM 政策。這會取代資料集現有的政策：
+以下範例說明如何使用 [`google_bigquery_dataset_iam_policy` 資源](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset_iam#google_bigquery_dataset_iam_policy)，設定 `mydataset` 資料集的 IAM 政策。這會取代資料集現有的任何政策：
 
 ```
 # This file sets the IAM policy for the dataset created by
@@ -259,8 +257,7 @@ resource "google_bigquery_dataset_iam_policy" "dataset_iam_policy" {
 
 **設定資料集的角色成員資格**
 
-以下範例說明如何使用 [`google_bigquery_dataset_iam_binding` 資源](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset_iam#google_bigquery_dataset_iam_binding)，為 `mydataset` 資料集設定特定角色的成員資格。這會取代該角色現有的任何成員。
-資料集 IAM 政策中的其他角色會保留：
+以下範例說明如何使用 [`google_bigquery_dataset_iam_binding` 資源](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset_iam#google_bigquery_dataset_iam_binding)，為 `mydataset` 資料集設定特定角色的成員資格。這會取代該角色現有的任何成員。資料集 IAM 政策中的其他角色會保留：
 
 ```
 # This file sets membership in an IAM role for the dataset created by
@@ -282,7 +279,7 @@ resource "google_bigquery_dataset_iam_binding" "dataset_iam_binding" {
 
 **為單一主體設定角色成員資格**
 
-以下範例說明如何使用 [`google_bigquery_dataset_iam_member` 資源](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset_iam#google_bigquery_dataset_iam_member)更新 `mydataset` 資料集的 IAM 政策，將角色授予一個主體。更新這項 IAM 政策不會影響已獲資料集角色授權的其他主體存取權。
+以下範例說明如何使用 [`google_bigquery_dataset_iam_member` 資源](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset_iam#google_bigquery_dataset_iam_member)更新 `mydataset` 資料集的 IAM 政策，將角色授予一個主體。更新這項 IAM 政策，不會影響其他已獲派該資料集角色的主體存取權。
 
 ```
 # This file adds a member to an IAM role for the dataset created by
@@ -315,16 +312,16 @@ resource "google_bigquery_dataset_iam_member" "dataset_iam_member" {
 
 ## 準備目錄
 
-每個 Terraform 設定檔都必須有自己的目錄 (也稱為*根模組*)。
+每個 Terraform 設定檔都必須有自己的目錄 (也稱為「根模組」)。
 
-1. 在 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw) 中建立目錄，並在該目錄中建立新檔案。檔案名稱的副檔名必須為 `.tf`，例如 `main.tf`。在本教學課程中，這個檔案稱為 `main.tf`。
+1. 在 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw) 中建立目錄，並在該目錄中建立新檔案。檔案名稱必須有 `.tf` 副檔名，例如 `main.tf`。在本教學課程中，這個檔案稱為 `main.tf`。
 
    ```
    mkdir DIRECTORY && cd DIRECTORY && touch main.tf
    ```
-2. 如果您正在按照教學課程操作，可以複製每個章節或步驟中的程式碼範例。
+2. 如果您正在進行教學課程，可以複製每個章節或步驟中的程式碼範例。
 
-   將程式碼範例複製到新建立的 `main.tf` 中。
+   將程式碼範例複製到新建立的 `main.tf`。
 
    您也可以從 GitHub 複製程式碼。如果 Terraform 程式碼片段是端對端解決方案的一部分，建議您採用這種做法。
 3. 請查看並修改範例參數，以便套用至您的環境。
@@ -357,13 +354,13 @@ resource "google_bigquery_dataset_iam_member" "dataset_iam_member" {
    ```
 
    等待 Terraform 顯示「Apply complete!」訊息。
-3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)即可查看結果。在 Google Cloud 控制台中，前往 UI 中的資源，確認 Terraform 已建立或更新這些資源。
+3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)即可查看結果。在 Google Cloud 控制台的使用者介面中，前往資源頁面，確認 Terraform 已建立或更新資源。
 
 **注意：**Terraform 範例通常會假設 Google Cloud 專案已啟用必要的 API。
 
 ### API
 
-如要在建立資料集時套用存取控管機制，請使用已定義的[資料集資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets?hl=zh-tw)呼叫 [`datasets.insert` 方法](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert?hl=zh-tw)。如要更新存取控管，請呼叫 [`datasets.patch` 方法](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch?hl=zh-tw)，並使用 `Dataset` 資源中的 `access` 屬性。
+如要在建立資料集時套用存取控管機制，請使用已定義的[資料集資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets?hl=zh-tw)呼叫 [`datasets.insert` 方法](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert?hl=zh-tw)。如要更新存取控管設定，請呼叫 [`datasets.patch` 方法](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch?hl=zh-tw)，並使用 `Dataset` 資源中的 `access` 屬性。
 
 由於 `datasets.update` 方法會取代整個資料集的資源，因此建議您使用 `datasets.patch` 方法來更新存取權控管設定。
 
@@ -670,41 +667,41 @@ except PreconditionFailed:  # A read-modify-write error
 
 ### 可授予資料集存取權的預先定義角色
 
-您可以授予下列 IAM 預先定義的角色資料集存取權。
+您可以授予下列 IAM 預先定義的角色資料集的存取權。
 
-**注意：** 雖然可以對資料集授予 BigQuery 管理員或 BigQuery Studio 管理員權限，但不建議在資料集層級授予這些角色。BigQuery 資料擁有者也會授予資料集的所有權限，是權限較少的角色。BigQuery 管理員和 BigQuery Studio 管理員通常是在專案層級授予。
+**注意：** 雖然可以對資料集授予 BigQuery 管理員或 BigQuery Studio 管理員權限，但不建議在資料集層級授予這些角色。BigQuery 資料擁有者也會授予資料集的所有權限，但權限較少。BigQuery 管理員和 BigQuery Studio 管理員通常是在專案層級授予。
 
 | 角色 | 說明 |
 | --- | --- |
-| [BigQuery 資料擁有者](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.dataOwner) (`roles/bigquery.dataOwner`) | 如果授予資料集的角色，則會授予下列權限：   * 資料集和資料集內所有資源 (資料表和檢視表、模型和常式) 的所有權限。  **注意：**在專案層級獲派資料擁有者角色的主體，也可以在有權存取的專案中建立新資料集及列出資料集。 |
-| [BigQuery 資料編輯者](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.dataEditor) (`roles/bigquery.dataEditor`) | 在資料集授予這個角色，即可取得下列權限：   * 取得資料集的中繼資料和權限。 * 資料表和檢視畫面：  + 建立、更新、取得、列出及刪除資料集的資料表和檢視表。 + 讀取 (查詢)、匯出、複製及更新資料表資料。 + 建立、更新及刪除索引。 + 建立及還原快照。  * 具備資料集常式和模型的所有權限。  **注意：**在專案層級獲派資料編輯者角色的主體，也可以在有權存取的專案中建立新資料集及列出資料集。 |
-| [BigQuery 資料檢視者](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.dataViewer) (`roles/bigquery.dataViewer`) | 在資料集授予這個角色，即可取得下列權限：   * 取得資料集的中繼資料和權限。 * 列出資料集的資料表、檢視區塊和模型。 * 取得資料集中資料表和檢視表的中繼資料和存取控管機制。 * 讀取 (查詢)、複製及匯出資料表資料，以及建立快照。 * 列出及叫用資料集的處理常式。 |
-| [BigQuery 中繼資料檢視器](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.metadataViewer) (`roles/bigquery.metadataViewer`) | 在資料集上授予這個角色時，會授予下列權限：   * 取得資料集的中繼資料和存取控管機制。 * 取得資料表和檢視表的中繼資料和存取控管機制。 * 從資料集的模型和常式取得中繼資料。 * 列出資料集中的資料表、檢視區塊、模型和常式。 |
+| [BigQuery 資料擁有者](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.dataOwner) (`roles/bigquery.dataOwner`) | 在資料集授予這個角色，即可取得下列權限：   * 資料集和資料集內所有資源 (資料表和檢視表、模型和常式) 的所有權限。  **注意：**在專案層級獲派資料擁有者角色的主體，也可以建立新的資料集，並列出有權存取的專案資料集。 |
+| [BigQuery 資料編輯者](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.dataEditor) (`roles/bigquery.dataEditor`) | 在資料集授予這個角色，即可取得下列權限：   * 取得資料集的中繼資料和權限。 * 資料表和檢視表：  + 建立、更新、取得、列出及刪除資料集的資料表和檢視表。 + 讀取 (查詢)、匯出、複製及更新資料表資料。 + 建立、更新及刪除索引。 + 建立及還原快照。  * 具備資料集常式和模型的所有權限。  **注意：**在專案層級獲派資料編輯者角色的主體，也可以建立新的資料集，並列出有權存取的專案中的資料集。 |
+| [BigQuery 資料檢視者](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.dataViewer) (`roles/bigquery.dataViewer`) | 在資料集授予這個角色，即可取得下列權限：   * 取得資料集的中繼資料和權限。 * 列出資料集的資料表、檢視表和模型。 * 取得資料集中資料表和檢視表的中繼資料和存取控管機制。 * 讀取 (查詢)、複製及匯出資料表資料，以及建立快照。 * 列出及叫用資料集的常式。 |
+| [BigQuery 中繼資料檢視者](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.metadataViewer) (`roles/bigquery.metadataViewer`) | 在資料集授予這個角色，即可取得下列權限：   * 取得資料集的中繼資料和存取控管機制。 * 取得資料表和檢視表的中繼資料和存取控管機制。 * 從資料集的模型和常式取得中繼資料。 * 列出資料集內的資料表、檢視表、模型和常式。 |
 
 ### 資料集權限
 
-大多數以 `bigquery.datasets` 開頭的權限都適用於資料集層級。`bigquery.datasets.create` 不會。如要建立資料集，必須在父項容器 (專案) 中，將 `bigquery.datasets.create` 權限授予角色。
+大多數以 `bigquery.datasets` 開頭的權限都適用於資料集層級。`bigquery.datasets.create` 則不會。如要建立資料集，必須將 `bigquery.datasets.create` 權限授予上層容器 (即專案) 的角色。
 
 下表列出資料集的所有權限，以及可套用權限的最低層級資源。
 
 | 權限 | 資源 | 動作 |
 | --- | --- | --- |
 | `bigquery.datasets.create` | 專案 | 在專案中建立新的資料集。 |
-| `bigquery.datasets.get` | 資料集 | 取得資料集的 metadata 和存取控管機制。在控制台中查看權限也需要 `bigquery.datasets.getIamPolicy` 權限。 |
-| `bigquery.datasets.getIamPolicy` | 資料集 | 管理中心需要這項權限，才能授予使用者權限，取得資料集的存取控制項。失敗時維持開放狀態。控制台也需要 `bigquery.datasets.get` 權限，才能查看資料集。 |
-| `bigquery.datasets.update` | 資料集 | 更新資料集的中繼資料和存取權控管。如要在控制台中更新存取控管機制，也必須具備 `bigquery.datasets.setIamPolicy` 權限。 |
-| `bigquery.datasets.setIamPolicy` | 資料集 | 管理中心需要這項權限，才能授予使用者設定資料集存取控制項的權限。失敗時維持開放狀態。控制台也需要 `bigquery.datasets.update` 權限才能更新資料集。 |
+| `bigquery.datasets.get` | 資料集 | 取得資料集的中繼資料和存取控管機制。如要在控制台中查看權限，也必須具備 `bigquery.datasets.getIamPolicy` 權限。 |
+| `bigquery.datasets.getIamPolicy` | 資料集 | 控制台必須具備這項權限，才能授予使用者權限，以便取得資料集的存取控管機制。失敗時維持開放狀態。控制台也需要 `bigquery.datasets.get` 權限，才能查看資料集。 |
+| `bigquery.datasets.update` | 資料集 | 更新資料集的中繼資料和存取控管機制。如要在控制台中更新存取控管機制，也必須具備 `bigquery.datasets.setIamPolicy` 權限。 |
+| `bigquery.datasets.setIamPolicy` | 資料集 | 控制台必須具備這項權限，才能授予使用者設定資料集存取控管機制的權限。失敗時維持開放狀態。控制台也需要 `bigquery.datasets.update` 權限，才能更新資料集。 |
 | `bigquery.datasets.delete` | 資料集 | 刪除資料集。 |
 | `bigquery.datasets.createTagBinding` | 資料集 | 將標記附加至資料集。 |
-| `bigquery.datasets.deleteTagBinding` | 資料集 | 從資料集卸離標籤。 |
+| `bigquery.datasets.deleteTagBinding` | 資料集 | 從資料集卸離標記。 |
 | `bigquery.datasets.listTagBindings` | 資料集 | 列出資料集的標記。 |
-| `bigquery.datasets.listEffectiveTags` | 資料集 | 列出資料集的有效標記 (已套用和已沿用)。 |
+| `bigquery.datasets.listEffectiveTags` | 資料集 | 列出資料集的有效標記 (已套用和沿用)。 |
 | `bigquery.datasets.link` | 資料集 | 建立 [連結資料集](https://docs.cloud.google.com/logging/docs/analyze/query-linked-dataset?hl=zh-tw)。 |
-| `bigquery.datasets.listSharedDatasetUsage` | 專案 | 列出您在專案中可存取的資料集共用資料集使用統計資料。必須具備這項權限，才能查詢 `INFORMATION_SCHEMA.SHARED_DATASET_USAGE` 檢視表。 |
+| `bigquery.datasets.listSharedDatasetUsage` | 專案 | 列出您在專案中可存取的資料集，以及共用資料集的使用統計資料。必須具備這項權限，才能查詢 `INFORMATION_SCHEMA.SHARED_DATASET_USAGE` 檢視表。 |
 
-### 查看資料集的存取權控管
+### 查看資料集的存取控管
 
-您可以選擇下列任一選項，查看資料集明確設定的存取控管機制。如要[查看繼承的角色](#inherited-roles)，請使用 BigQuery 網頁介面。
+您可以選擇下列任一選項，查看資料集明確設定的存取控管機制。如要[查看資料集的繼承角色](#inherited-roles)，請使用 BigQuery 網頁 UI。
 
 ### 控制台
 
@@ -713,18 +710,18 @@ except PreconditionFailed:  # A read-modify-write error
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
 3. 在「Explorer」窗格中展開專案，點選「Datasets」(資料集)，然後選取資料集。
-4. 依序點選「person\_add 共用」**>「權限」**。
+4. 依序點選「person\_add **共用」>「權限」**。
 
    資料集的存取控管設定會顯示在「Dataset Permissions」(資料集權限) 窗格中。
 
 ### bq
 
-1. 在 Google Cloud 控制台中啟用 Cloud Shell。
+1. 在 Google Cloud 控制台啟用 Cloud Shell。
 
    [啟用 Cloud Shell](https://console.cloud.google.com/?cloudshell=true&hl=zh-tw)
 
    Google Cloud 控制台底部會開啟 [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works?hl=zh-tw) 工作階段，並顯示指令列提示。Cloud Shell 是已安裝 Google Cloud CLI 的殼層環境，並已設定適用於您目前專案的值。工作階段可能要幾秒鐘的時間才能初始化。
-2. 如要取得現有政策並以 JSON 格式輸出至本機檔案，請在 Cloud Shell 中使用 [`bq show` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_show)：
+2. 如要取得現有政策，並以 JSON 格式輸出至本機檔案，請在 Cloud Shell 中使用 [`bq show` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_show)：
 
    ```
    bq show \
@@ -766,8 +763,8 @@ except PreconditionFailed:  # A read-modify-write error
    * COLUMN\_LIST：[`INFORMATION_SCHEMA.OBJECT_PRIVILEGES` 檢視表](https://docs.cloud.google.com/bigquery/docs/information-schema-object-privileges?hl=zh-tw)中以半形逗號分隔的資料欄清單
    * PROJECT\_ID：專案 ID
    * REGION：[區域限定詞](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw#region_qualifier)
-   * DATASET：專案中資料集的名稱
-3. 按一下「執行」play\_circle。
+   * DATASET：專案中的資料集名稱
+3. 按一下「play\_circle 執行」。
 
 如要進一步瞭解如何執行查詢，請參閱「[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)」。
 
@@ -797,9 +794,9 @@ object_name = "mydataset";
 
 ### API
 
-如要查看資料集的存取控管，請使用已定義的 [`dataset` 資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets?hl=zh-tw)呼叫 [`datasets.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/get?hl=zh-tw) 方法。
+如要查看資料集的存取控管，請使用定義的 [`dataset` 資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets?hl=zh-tw)呼叫 [`datasets.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/get?hl=zh-tw) 方法。
 
-存取控管會顯示在 `dataset` 資源的 `access` 屬性中。
+存取控管設定會顯示在 `dataset` 資源的 `access` 屬性中。
 
 ### Go
 
@@ -856,7 +853,7 @@ func viewDatasetAccessPolicies(w io.Writer, projectID, datasetID string) error {
 
 ### Java
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定說明操作。詳情請參閱 [BigQuery Java API 參考文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定操作說明進行操作。詳情請參閱 [BigQuery Java API 參考文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -910,12 +907,12 @@ public class GetDatasetAccessPolicy {
 
 ### Node.js
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定操作說明進行操作。詳情請參閱 [BigQuery Node.js API 參考文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 使用 [`Dataset#getMetadata()` 函式](https://googleapis.dev/nodejs/bigquery/latest/Dataset.html#getMetadata)擷取資料集中繼資料。
-您可以在產生的中繼資料物件存取權屬性中，找到存取權政策。
+您可以在產生的中繼資料物件的存取屬性中，找到存取政策。
 
 ```
 /**
@@ -997,13 +994,13 @@ for access_entry in dataset.access_entries:
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
 3. 在「Explorer」窗格中展開專案，點選「Datasets」(資料集)，然後選取資料集。
-4. 在詳細資料面板中，依序點選「共用」**> 權限**。
-5. 在「資料集權限」對話方塊中，展開要撤銷存取權的主體。
-6. 按一下「移除主體」delete。
+4. 在詳細資料面板中，依序點選「共用」>「權限」。
+5. 在「Dataset Permissions」(資料集權限) 對話方塊中，展開要撤銷存取權的主體。
+6. 按一下 delete「Remove principal」(移除主體)。
 7. 在「Remove role from principal?」(要移除主體的角色嗎？) 對話方塊中，按一下「Remove」(移除)。
-8. 如要返回資料集詳細資料，請按一下「關閉」。
+8. 如要返回資料集詳細資料，請按一下「Close」(關閉)。
 
-**注意：** 如果無法撤銷資料集的存取權，主體可能是從[資源階層](#inherited-roles)中較高的層級[繼承存取權](https://docs.cloud.google.com/iam/docs/overview?hl=zh-tw#resource-hierarchy)。
+**注意：** 如果您無法撤銷資料集的存取權，主體可能已從[資源階層](https://docs.cloud.google.com/iam/docs/overview?hl=zh-tw#resource-hierarchy)中較高的層級[繼承存取權](#inherited-roles)。
 
 ### SQL
 
@@ -1020,11 +1017,11 @@ for access_entry in dataset.access_entries:
    FROM "USER_LIST"
    ```
 
-   請替換下列項目：
+   替換下列內容：
 
    * `ROLE_LIST`：要撤銷的角色或以半形逗號分隔的角色清單
    * `RESOURCE_NAME`：要撤銷權限的資源名稱
-   * `USER_LIST`：以半形逗號分隔的使用者清單，這些使用者的角色將遭到撤銷
+   * `USER_LIST`：以半形逗號分隔的使用者清單，列出要撤銷角色的使用者
 
      如需有效格式清單，請參閱 [`user_list`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language?hl=zh-tw#user_list)。
 3. 按一下「play\_circle 執行」。
@@ -1046,7 +1043,7 @@ FROM "group:group@example.com", "serviceAccount:user@test-project.iam.gserviceac
    [啟用 Cloud Shell](https://console.cloud.google.com/?cloudshell=true&hl=zh-tw)
 
    Google Cloud 控制台底部會開啟 [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works?hl=zh-tw) 工作階段，並顯示指令列提示。Cloud Shell 是已安裝 Google Cloud CLI 的殼層環境，並已設定適用於您目前專案的值。工作階段可能要幾秒鐘的時間才能初始化。
-2. 如要將現有資料集資訊 (包括存取控制項) 寫入 JSON 檔案，請使用 [`bq show` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_show)：
+2. 如要將現有資料集資訊 (包括存取控管) 寫入 JSON 檔案，請使用 [`bq show` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_show)：
 
    ```
    bq show \
@@ -1061,7 +1058,7 @@ FROM "group:group@example.com", "serviceAccount:user@test-project.iam.gserviceac
    * PATH\_TO\_FILE：本機電腦上的 JSON 檔案路徑
 3. 變更 JSON 檔案的 `access` 部分。您可以移除任何 `specialGroup` 項目：`projectOwners`、`projectWriters`、`projectReaders` 和 `allAuthenticatedUsers`。您也可以移除下列任一項目：`userByEmail`、`groupByEmail` 和 `domain`。
 
-   舉例來說，資料集 JSON 檔案的 `access` 區段會如下所示：
+   舉例來說，資料集 JSON 檔案的 `access` 區段會像這樣：
 
    ```
    {
@@ -1098,7 +1095,7 @@ FROM "group:group@example.com", "serviceAccount:user@test-project.iam.gserviceac
     ...
    }
    ```
-4. 編輯完成後，請使用 `bq update` 指令，並透過 `--source` 標記加入 JSON 檔案。如果資料集位於預設專案以外的專案，請按照「`PROJECT_ID:DATASET`」格式，在資料集名稱中加入專案 ID。
+4. 編輯完成後，請使用 `bq update` 指令，並透過 `--source` 旗標加入 JSON 檔案。如果資料集位於預設專案以外的專案，請按照下列格式，將專案 ID 新增至資料集名稱：`PROJECT_ID:DATASET`。
 
    **注意：**如果您套用了含有存取權控管設定的 JSON 檔案，現有的存取權控管設定會遭到覆寫。
 
@@ -1127,7 +1124,7 @@ FROM "group:group@example.com", "serviceAccount:user@test-project.iam.gserviceac
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
-從現有清單中移除項目，藉此設定新的存取清單 ([`DatasetMetadataToUpdate` 型別](https://pkg.go.dev/cloud.google.com/go/bigquery#DatasetMetadataToUpdate))。然後呼叫 [`dataset.Update()` 函式](https://pkg.go.dev/cloud.google.com/go/bigquery#Dataset.Update)來更新屬性。
+使用 [`DatasetMetadataToUpdate` 類型](https://pkg.go.dev/cloud.google.com/go/bigquery#DatasetMetadataToUpdate)，從現有清單中移除項目，藉此設定新的存取清單。然後呼叫 [`dataset.Update()` 函式](https://pkg.go.dev/cloud.google.com/go/bigquery#Dataset.Update)來更新屬性。
 
 ```
 import (
@@ -1171,10 +1168,4 @@ func revokeAccessToDataset(w io.Writer, projectID, datasetID, entity string) err
 		if entry.Entity != entity {
 			newAccessList = append(newAccessList, entry)
 		}
-	}
-
-	// Only proceed with update if something in the access list was removed.
-	// Additionally, we use the ETag from the initial metadata to ensure no
-	// other changes were made to the access list in the interim.
-	if len(newAccessList) < len(meta
 ```

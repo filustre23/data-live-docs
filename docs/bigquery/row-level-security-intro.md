@@ -238,7 +238,7 @@ BigQuery 內建資料列層級安全防護機制，不需額外付費。不過�
 
   + 包含[子查詢](#filter_row_data_based_on_lookup_table)的資料列存取政策與 [BigQuery Storage Read API](https://docs.cloud.google.com/bigquery/docs/reference/storage?hl=zh-tw) 不相容。BigQuery Storage Read API 僅支援簡單的篩選條件述詞。
 * 需要完整存取資料表資料的非查詢作業 (包括服務帳戶工作)，可以使用[`TRUE`篩選器](https://docs.cloud.google.com/bigquery/docs/using-row-level-security-with-features?hl=zh-tw#the_true_filter)搭配資料列層級安全性。例如[複製資料表](https://docs.cloud.google.com/bigquery/docs/using-row-level-security-with-features?hl=zh-tw#features_that_work_with_the_true_filter)、[Managed Service for Apache Spark 工作流程](https://docs.cloud.google.com/bigquery/docs/using-row-level-security-with-features?hl=zh-tw#tabledata-list)等。詳情請參閱「[使用資料列層級安全性](https://docs.cloud.google.com/bigquery/docs/using-row-level-security-with-features?hl=zh-tw)」。
-* 您可以使用 DDL 陳述式或[資料列存取政策 API](https://docs.cloud.google.com/bigquery/docs/reference/rest?hl=zh-tw#rest-resource:-v2.rowaccesspolicies)，建立、取代或刪除資料列層級的存取政策。您也可以在 [bq 指令列工具](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool?hl=zh-tw)中，對資料列存取權政策 API 執行所有可用動作。您可以在Google Cloud 控制台列出及查看資料列層級存取權政策。
+* 您可以使用 DDL 陳述式或[資料列存取政策 API](https://docs.cloud.google.com/bigquery/docs/reference/rest?hl=zh-tw#rest-resource:-v2.rowaccesspolicies)，建立、取代或刪除資料列層級的存取政策。您也可以在 [bq 指令列工具](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw)中，對資料列存取權政策 API 執行所有可用動作。您可以在Google Cloud 控制台列出及查看資料列層級存取權政策。
 * [預覽或瀏覽資料表](https://docs.cloud.google.com/bigquery/docs/managing-table-data?hl=zh-tw#browse-table)與資料列層級安全防護機制不相容。
 * [資料表取樣](https://docs.cloud.google.com/bigquery/docs/table-sampling?hl=zh-tw)與資料列層級安全防護機制不相容。
 * 資料列層級存取權政策會對頂層子查詢的結果設下 100 MB 的限制。
@@ -273,11 +273,11 @@ BigQuery 內建資料列層級安全防護機制，不需額外付費。不過�
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-24 (世界標準時間)。
+上次更新時間：2026-10-29 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-24 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]

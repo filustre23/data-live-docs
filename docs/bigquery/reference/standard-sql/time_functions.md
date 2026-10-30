@@ -389,18 +389,4 @@ TIME_SUB(time_expression, INTERVAL step_size step_unit)
 
 Subtracts `step_size` units of `step_unit` from the `TIME` object.
 
-`TIME_SUB` supports the following values for `step_unit`:
-
-* `MICROSECOND`
-* `MILLISECOND`
-* `SECOND`
-* `MINUTE`
-* `HOUR`
-
-This function automatically adjusts when values fall outside of the 00:00:00 to
-24:00:00 boundary. For example, if you subtract an hour from `00:30:00`, the
-returned value is `23:30:00`.
-
-**Return Data Type**
-
-`TIME`
+`TIME_SUB` supports the following v

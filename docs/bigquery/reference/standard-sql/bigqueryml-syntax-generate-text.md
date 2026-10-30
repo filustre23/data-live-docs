@@ -514,20 +514,4 @@ possible to the model.
   for the `contents[]` field. If you set this field, then you can't also
   specify any model parameters in the top-level struct argument to the
   `ML.GENERATE_TEXT` function. You must either specify every model parameter
-  in the `MODEL_PARAMS` field, or omit this field and specify each
-  parameter separately.
-
-### Details
-
-The model and input table must be in the same region.
-
-### Mistral AI
-
-You must enable Mistral AI models in Gemini Enterprise Agent Platform before you can
-use them. For more information, see
-[Enable a partner model](/bigquery/docs/generate-text#enable-model).
-
-```
-ML.GENERATE_TEXT(
-MODEL `
-```
+  in the `MODEL_PARAMS` field, or omit

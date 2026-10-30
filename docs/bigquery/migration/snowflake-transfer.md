@@ -269,11 +269,5 @@ bq mk \
     --data_source=DATA_SOURCE \
     --target_dataset=DATASET \
     --display_name=NAME \
-    --service_account_name=SERVICE_ACCOUNT \
-    --params='PARAMETERS'
+    --service_account_name
 ```
-
-更改下列內容：
-
-* `PROJECT_ID`：您的 Google Cloud 專案 ID。如未指定 `--project_id`，系統會使用預設專案。
-* `DATA_SOURCE`

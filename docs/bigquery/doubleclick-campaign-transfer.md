@@ -20,7 +20,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ## 連接器總覽
 
-Campaign Manager 連接器的 BigQuery 資料移轉服務支援下列資料移轉選項。
+Campaign Manager 連接器適用的 BigQuery 資料移轉服務，支援下列資料移轉選項。
 
 如要瞭解 Campaign Manager 報表如何轉換為 BigQuery 資料表和檢視表，請參閱「[Campaign Manager 報表轉換](https://docs.cloud.google.com/bigquery/docs/doubleclick-campaign-transformation?hl=zh-tw)」。
 
@@ -29,17 +29,17 @@ Campaign Manager 連接器的 BigQuery 資料移轉服務支援下列資料移�
 | 受支援的報表 | Campaign Manager 連接器支援從下列報表移轉資料：   * [資料移轉 2.0 版 (Campaign Manager DTv2) 檔案](https://developers.google.com/doubleclick-advertisers/dtv2/reference/file-format?hl=zh-tw) * [資料移轉 2.0 版 (Campaign Manager DTv2) 對照表](https://developers.google.com/doubleclick-advertisers/dtv2/reference/match-tables?hl=zh-tw) |
 | 重複頻率 | Campaign Manager 連接器支援每 8 小時移轉一次資料。    根據預設，Campaign Manager 資料移轉作業會排定在建立資料移轉作業時執行。 |
 | 重新整理時間範圍 | Campaign Manager 連接器會在執行資料移轉時，擷取最多 2 天前的 Campaign Manager 資料。您無法設定這個連接器的重新整理時間範圍。    詳情請參閱「[重新整理時間範圍](#refresh)」。 |
-| 補充資料可用性 | [執行資料補充作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)，擷取排定資料移轉作業以外的資料。只要在資料來源的資料保留政策允許範圍內，即可擷取資料。    如要瞭解 Display & Video 360 的資料保留政策，請參閱「[資料刪除和保留控制項](https://support.google.com/campaignmanager/answer/10769131?hl=zh-tw)」。 |
+| 補充資料可用性 | [執行資料補充作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)，擷取排定資料移轉作業以外的資料。只要在資料來源的資料保留政策允許範圍內，即可擷取歷來資料。    如要瞭解 Display & Video 360 的資料保留政策，請參閱「[資料刪除和保留控制項](https://support.google.com/campaignmanager/answer/10769131?hl=zh-tw)」。 |
 
 ## 從 Campaign Manager 移轉作業擷取資料
 
-將資料從 Campaign Manager 移轉至 BigQuery 時，系統會將資料載入依日期分區的 BigQuery 資料表。資料載入的資料表分區會對應資料來源的日期。如果您在同一天安排多項移轉作業，BigQuery 資料移轉服務會以最新資料覆寫該日期的分區。在同一天進行多次移轉或執行補充作業，不會產生重複資料，其他日期的分區也不會受到影響。
+將資料從 Campaign Manager 移轉至 BigQuery 時，系統會將資料載入依日期分區的 BigQuery 資料表。資料載入的資料表分區會對應至資料來源的日期。如果您在同一天安排多項移轉作業，BigQuery 資料移轉服務會以最新資料覆寫該日期的分區。在同一天進行多次移轉或執行補充作業，不會產生重複資料，其他日期的分區也不會受到影響。
 
 ### 重新整理時間範圍
 
-「更新回溯期」是指資料移轉作業發生時，資料移轉作業擷取資料的天數。舉例來說，如果重新整理時間範圍為三天，且每天進行移轉，BigQuery 資料移轉服務會從來源資料表擷取過去三天的所有資料。在本例中，每日移轉作業執行時，BigQuery 資料移轉服務會建立新的 BigQuery 目的地資料表分區，並複製當天的來源資料表資料，然後自動觸發補充執行作業，使用過去兩天的來源資料表資料更新 BigQuery 目的地資料表分區。自動觸發的回填執行作業會覆寫或增量更新 BigQuery 目的地資料表，具體取決於 BigQuery 資料移轉服務連接器是否支援增量更新。
+「更新回溯期」是指資料移轉作業發生時，資料移轉作業擷取資料的天數。舉例來說，如果更新時間範圍為三天，且每天都會進行移轉，BigQuery 資料移轉服務會從來源資料表擷取過去三天的所有資料。在本例中，每日移轉作業執行時，BigQuery 資料移轉服務會建立新的 BigQuery 目的地資料表分區，並複製當天的來源資料表資料，然後自動觸發補充執行作業，使用過去兩天的來源資料表資料更新 BigQuery 目的地資料表分區。自動觸發的回填執行作業會覆寫或增量更新 BigQuery 目的地資料表，具體取決於 BigQuery 資料移轉服務連接器是否支援增量更新。
 
-首次執行資料移轉作業時，系統會擷取重新整理時間範圍內的所有可用來源資料。舉例來說，如果更新時間範圍為三天，且您首次執行資料移轉作業，BigQuery 資料移轉服務會擷取三天內的所有來源資料。
+首次執行資料移轉作業時，系統會擷取重新整理期間內的所有可用來源資料。舉例來說，如果更新時間範圍為三天，且您首次執行資料移轉作業，BigQuery 資料移轉服務會擷取三天內的所有來源資料。
 
 如要擷取重新整理時間範圍以外的資料 (例如歷來資料)，或從任何移轉中斷或缺漏中復原資料，您可以啟動或排定[補充執行作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)。
 
@@ -59,7 +59,7 @@ Campaign Manager 連接器的 BigQuery 資料移轉服務支援下列資料移�
 
   `dcdt_-dcm_account123456`
 
-   Google Cloud 團隊無法代表您產生或授予 Campaign Manager DTv2 檔案的存取權。請與
+   Google Cloud 團隊無法代您產生或授予 Campaign Manager DTv2 檔案的存取權。請與
   Campaign Manager [支援團隊](https://support.google.com/campaignmanager/answer/9026876?ref_topic=2834087&visit_id=1-636444821343154346-869320595&rd=2&hl=zh-tw)、
   代理商或 Campaign Manager 經銷商聯絡，取得 Campaign
   Manager DTv2 檔案的存取權。
@@ -108,7 +108,7 @@ Campaign Manager 連接器的 BigQuery 資料移轉服務支援下列資料移�
 
 ### 查看 Campaign Manager ID
 
-如要擷取 Campaign Manager ID，您可以使用 Cloud Storage [控制台](https://console.cloud.google.com/storage?hl=zh-tw)，檢查 Campaign Manager 資料移轉 Cloud Storage bucket 中的檔案。Campaign Manager ID 用於比對所提供 Cloud Storage bucket 中的檔案。ID 內嵌在**檔案名稱**中，而非 Cloud Storage bucket 名稱。
+如要擷取 Campaign Manager ID，您可以使用 Cloud Storage [控制台](https://console.cloud.google.com/storage?hl=zh-tw)，檢查 Campaign Manager 資料移轉 Cloud Storage bucket 中的檔案。Campaign Manager ID 用於比對所提供 Cloud Storage bucket 中的檔案。ID 內嵌在**filename**中，而非 Cloud Storage bucket 名稱。
 
 例如：
 
@@ -130,9 +130,9 @@ Campaign Manager 連接器的 BigQuery 資料移轉服務支援下列資料移�
 
 ### 控制台
 
-1. 前往 Google Cloud 控制台的「Data transfers」(資料移轉) 頁面。
+1. 前往 Google Cloud 控制台的「資料移轉」頁面。
 
-   [前往「資料移轉」頁面](https://console.cloud.google.com/bigquery/transfers?hl=zh-tw)
+   [前往「資料移轉」](https://console.cloud.google.com/bigquery/transfers?hl=zh-tw)
 2. 按一下「add 建立移轉作業」。
 3. 在「Create Transfer」(建立轉移作業) 頁面：
 
@@ -145,7 +145,7 @@ Campaign Manager 連接器的 BigQuery 資料移轉服務支援下列資料移�
    * 在「Destination settings」(目的地設定) 部分，「Destination dataset」(目的地資料集) 請選取您為了儲存資料而建立的資料集。
    * 在「Data source details」(資料來源詳細資料) 區段：
 
-     + 在「Cloud Storage bucket」輸入或瀏覽用來儲存 Data Transfer 2.0 檔案的 Cloud Storage bucket 名稱。輸入 bucket 名稱時，請勿加入 `gs://`。
+     + 在「Cloud Storage bucket」輸入或瀏覽用來儲存 Data Transfer V2.0 檔案的 Cloud Storage bucket 名稱。輸入 bucket 名稱時，請勿加入 `gs://`。
      + 在「DoubleClick ID」輸入合適的 Campaign Manager ID。
      + (選用步驟) 如果檔案內含[類似這些範例的標準名稱](https://docs.cloud.google.com/bigquery/docs/doubleclick-campaign-transfer?hl=zh-tw#find-id)，請將 「File name prefix」(檔案名稱前置字串) 欄位留空。如果 Cloud Storage bucket 中的檔案有自訂檔案名稱，請指定[檔案名稱前置字串](https://docs.cloud.google.com/bigquery/docs/doubleclick-campaign-transfer?hl=zh-tw#filename-prefix)。
    * (選用) 在「Notification options」(通知選項) 區段中：
@@ -177,7 +177,7 @@ bq mk --transfer_config \
 * project\_id 是您的專案 ID。
 * dataset 是資料移轉設定的目標資料集。
 * name 是資料移轉設定的顯示名稱。移轉作業名稱可以是任意值，日後需要修改移轉作業時，能夠據此識別即可。
-* parameters 包含所建立資料移轉設定的參數，格式為 JSON。例如：`--params='{"param":"param_value"}'`。如果是 Campaign Manager，則必須提供 `bucket` 和 `network_id` 參數。`bucket` 是包含 Campaign Manager DTv2 檔案的 Cloud Storage bucket。`network_id` 是您的聯播網、Floodlight 或廣告主 ID。
+* parameters 包含已建立資料移轉設定的參數，格式為 JSON。例如：`--params='{"param":"param_value"}'`。如果是 Campaign Manager，則必須提供 `bucket` 和 `network_id` 參數。`bucket` 是包含 Campaign Manager DTv2 檔案的 Cloud Storage bucket。`network_id` 是您的聯播網、Floodlight 或廣告主 ID。
 * data\_source 是資料來源，`dcm_dt` (Campaign Manager)。
 
 **注意：** 您無法使用指令列工具設定通知。
@@ -219,6 +219,5 @@ follow the instructions to retrieve an authentication code.`
 import com.google.api.gax.rpc.ApiException;
 import com.google.cloud.bigquery.datatransfer.v1.CreateTransferConfigRequest;
 import com.google.cloud.bigquery.datatransfer.v1.DataTransferServiceClient;
-import com.google.cloud.bigquery.datatransfer.v1.ProjectName;
-import com.google.cloud.bigquery
+import com.google.cloud.bigquery.datatransfer.v1.
 ```

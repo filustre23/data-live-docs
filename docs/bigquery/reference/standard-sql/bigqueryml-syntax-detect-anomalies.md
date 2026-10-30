@@ -399,17 +399,5 @@ similar to the following:
 | is_anomaly | mean_squared_error |    f1   |   f2   |
 +------------+--------------------+---------+--------+
 |   FALSE    |     0.63456        |   120   |  "a"   |
-|   TRUE     |     11.342         |  15000  |  "b"   |
-+------------+--------------------+---------+--------+
-```
-
-### K-means model
-
-The following example detects anomalies using a k-means model and a
-`contamination` value of `0.2`.
-
-```
-SELECT
-  *
-FROM
+|   TRUE     |
 ```

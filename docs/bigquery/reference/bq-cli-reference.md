@@ -318,11 +318,3 @@ gcloud config unset auth/impersonate_service_account
 
 **`--job_id=JOB_ID`**
 :   指定新工作的 ID。這個旗標僅適用於建立工作的指令：`cp`、`extract`、`load` 和 `query`。如果不使用 `--job_id` 旗標，指令會產生專屬工作 ID。詳情請參閱「[透過程式輔助方式執行工作](https://docs.cloud.google.com/bigquery/docs/running-jobs?hl=zh-tw)」。
-
-**`--job_property=KEY:VALUE`**
-:   要納入工作設定 properties 欄位的鍵/值組合。重複使用這個旗標即可指定其他屬性。
-
-**`--jobs_query_use_request_id={true|false}`**
-:   如果設為 `true`，系統會在 `jobs.query` 要求中傳送要求 ID。預設值為 `false`。
-
-**`--jobs_query_use_results_from_response={true|false}`**

@@ -977,20 +977,5 @@ WHERE date(creation_time)= CURRENT_DATE()
 resource.type="bigquery_resource"
 protoPayload.methodName="jobservice.insert"
 (protoPayload.serviceData.jobInsertRequest.resource.jobConfiguration.query.query=~"EXPORT" OR
-protoPayload.serviceData.jobCompletedEvent.eventName="extract_job_completed" OR
-protoPayload.serviceData.jobCompletedEvent.job.jobConfiguration.query.query=~"EXPORT")
+protoPayload.serviceData.jobCompletedEvent.eventName="
 ```
-
-### 超出每日擷取位元組配額錯誤
-
-如果擷取作業超出專案預設的每日 50 TiB 上限，BigQuery 就會傳回這項錯誤。如要進一步瞭解擷取工作的限制，請參閱「[擷取工作](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#export_jobs)」。
-
-**錯誤訊息**
-
-```
-Your usage exceeded quota for ExtractBytesPerDay
-```
-
-#### 診斷
-
-如果匯出的資料表大於 50 TiB，匯出作業會因

@@ -295,10 +295,4 @@ The `expression` parameter can represent an expression for these data types:
 * `BOOL`
 * `STRING`
 
-**Conversion rules**
-
-| From | To | Rule(s) when casting `x` |
-| --- | --- | --- |
-| FLOAT64 | INT64 | Returns the closest integer value.  Halfway cases such as 1.5 or -0.5 round away from zero. |
-| `BOOL` | INT64 | Returns `1` if `x` is `TRUE`, `0` otherwise. |
-| `STR` |
+**Conversion rules<**

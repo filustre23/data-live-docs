@@ -130,8 +130,3 @@ The request for `ConnectionService.CreateConnection`.
 | `connection` | `Connection`  Required. Connection to create. |
 
 ## DeleteConnectionRequest
-
-The request for [ConnectionService.DeleteConnectionRequest][].
-
-| Fields | |
-| --- | --- |

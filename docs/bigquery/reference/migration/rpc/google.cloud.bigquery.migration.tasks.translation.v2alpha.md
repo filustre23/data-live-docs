@@ -136,6 +136,4 @@ The special token data type.
 | `INT64` | Token type as integer. |
 | `NUMERIC` | Token type as numeric. |
 | `BOOL` | Token type as boolean. |
-| `FLOAT64` | Token type as float. |
-| `DATE` | Token type as date. |
-|
+| `FLOAT64` |

@@ -16,22 +16,19 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 執行參數化查詢
 
-使用 GoogleSQL 語法查詢 BigQuery 資料時，您可以運用參數保護使用者輸入內容所做的查詢，避免[SQL 注入](https://en.wikipedia.org/wiki/SQL_injection)。參數會取代 GoogleSQL 查詢中的任意運算式。
+BigQuery 的參數化查詢可讓您直接將任意運算式替換為 GoogleSQL 陳述式。傳遞陣列、時間戳記、結構體和範圍等資料類型的參數，可讓您安全地執行使用者輸入內容產生的查詢，同時協助保護資料，防範 [SQL 注入](https://en.wikipedia.org/wiki/SQL_injection)攻擊。
 
-您可以傳遞各種資料類型的查詢參數，包括：
+## 限制
 
-* 陣列
-* 時間戳記
-* 結構體
-* 範圍
+* 查詢參數僅適用於 [GoogleSQL 語法](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql?hl=zh-tw)。
+* 參數無法用來替代 ID、資料欄名稱、資料表名稱或查詢的其他部分。
+* 查詢參數值不得為 `NULL`。
 
 ## 在查詢中傳遞參數
 
-查詢參數僅支援 [GoogleSQL 語法](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql?hl=zh-tw)。參數無法取代 ID、資料欄名稱、資料表名稱或查詢的其他部分。查詢參數值不得為 `NULL`。
+如要指定具名參數，請使用 `@` 字元，後接[ID](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#identifiers)，例如 `@param_name`。或者，您也可以使用預留位置值 `?` 指定位置參數。查詢可以使用位置參數或具名參數，但不能同時使用。
 
-如要指定具名參數，請使用 `@` 字元，後接[識別碼](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#identifiers)，例如 `@param_name`。或者，您也可以使用預留位置值 `?` 指定位置參數。查詢可使用位置或具名參數，但不能同時使用兩者。
-
-**注意：** 為保護可能含有私密資訊的資料，當您使用參數執行查詢時，BigQuery [記錄](https://docs.cloud.google.com/bigquery/docs/monitoring?hl=zh-tw#logs)不會記錄參數值。
+**注意：** 為保護可能屬於機密資訊的資訊，當您執行含有參數的查詢時，參數值不會記錄在 BigQuery [記錄](https://docs.cloud.google.com/bigquery/docs/monitoring?hl=zh-tw#logs)中。
 
 您可以在 BigQuery 中透過下列方式執行參數化查詢：
 
@@ -44,9 +41,9 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ### 控制台
 
-如要在 Google Cloud 控制台中執行參數化查詢，請在「查詢設定」中設定參數，然後在 SQL 查詢中參照這些參數，方法是在每個參數名稱前面加上 `@` 字元。
+如要在 Google Cloud 控制台執行參數化查詢，請在「Query settings」(查詢設定) 中設定參數，然後在 SQL 查詢中參照這些參數，方法是在每個參數名稱前加上 `@` 字元。
 
-**支援的資料類型**： Google Cloud 控制台僅支援原始資料類型的參數化查詢，例如 `BIGNUMERIC`、`BOOL`、`BYTES`、`DATE`、`DATETIME`、`FLOAT64`、`GEOGRAPHY`、`INT64`、`INTERVAL`、`NUMERIC`、`STRING`、`TIME` 或 `TIMESTAMP`。控制台不支援複雜資料類型，例如 `ARRAY` 和 `STRUCT`。 Google Cloud
+**支援的資料類型**： Google Cloud 控制台僅支援原始資料類型的參數化查詢，例如 `BIGNUMERIC`、`BOOL`、`BYTES`、`DATE`、`DATETIME`、`FLOAT64`、`GEOGRAPHY`、`INT64`、`INTERVAL`、`NUMERIC`、`STRING`、`TIME` 或 `TIMESTAMP`。 Google Cloud 控制台不支援複雜的資料類型，例如`ARRAY`和`STRUCT`。
 
 ## 在 Google Cloud 控制台中新增參數
 
@@ -54,17 +51,17 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 在查詢編輯器工具列中，依序點選「編輯」>「查詢設定」。
-3. 在「查詢設定」窗格中，找到「查詢參數」部分，然後按一下「新增參數」。
-4. 針對查詢中的每個參數，提供下列資訊：
+3. 在「Query settings」(查詢設定) 窗格中，找出「Query parameters」(查詢參數) 部分，然後按一下「Add parameter」(新增參數)。
+4. 請為查詢中的每個參數提供下列資訊：
 
    * **名稱**：輸入參數名稱 (請勿加入 `@` 字元)。
    * **類型**：選取參數的資料類型。
-   * **值**：輸入要用於這次執行的值。
+   * **值**：輸入要用於這項執行的值。
 5. 按一下 [儲存]。
 
-## 在 Google Cloud 控制台中將參數值傳送至查詢
+## 在 Google Cloud 控制台中將參數值傳遞至查詢
 
-1. 在查詢編輯器中，使用您在上一個步驟中設定的參數輸入 SQL 查詢。如要參照這些變數，請在變數名稱前加上 `@` 字元，如範例所示。
+1. 在查詢編輯器中，使用上一步設定的參數輸入 SQL 查詢。如要參照這些資源，請在名稱前加上 `@` 字元，如範例所示。
 
    **範例**：
 
@@ -82,20 +79,19 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
        word_count DESC;
    ```
 
-   以這個範例來說，您會將 `corpus` 參數新增為值為 `romeoandjuliet` 的 `STRING`，並將 `min_word_count` 參數新增為值為 `250` 的 `INT64`。
+   在本範例中，您會將 `corpus` 參數新增為 `STRING`，值為 `romeoandjuliet`，並將 `min_word_count` 參數新增為 `INT64`，值為 `250`。
 
-   如果查詢缺少參數或參數無效，系統會顯示錯誤訊息。按一下錯誤訊息中的「設定參數」，調整參數設定。
-2. 如要在查詢編輯器中執行參數化查詢，請按一下「執行」。
+   如果查詢缺少參數或參數無效，系統會顯示錯誤訊息。按一下錯誤訊息中的「Set parameter」(設定參數)，調整參數設定。
+2. 如要在查詢編輯器中執行參數化查詢，請按一下「Run」(執行)。
 
 ### bq
 
-1. 在 Google Cloud 控制台中啟用 Cloud Shell。
+1. 在 Google Cloud 控制台啟用 Cloud Shell。
 
    [啟用 Cloud Shell](https://console.cloud.google.com/?cloudshell=true&hl=zh-tw)
 
    Google Cloud 控制台底部會開啟 [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works?hl=zh-tw) 工作階段，並顯示指令列提示。Cloud Shell 是已安裝 Google Cloud CLI 的殼層環境，並已設定適用於您目前專案的值。工作階段可能要幾秒鐘的時間才能初始化。
-2. 請使用 `--parameter`，以 `name:type:value` 的格式來提供參數的值。空白名稱會產生位置參數。
-   類型可以省略，假設為 `STRING`。
+2. 請使用 `--parameter`，以 `name:type:value` 的格式來提供參數的值。如果名稱留空，則會產生位置參數。您可以省略類型，系統會假設為 `STRING`。
 
    `--parameter` 旗標必須與 `--use_legacy_sql=false` 旗標搭配使用，才能指定 GoogleSQL 語法。
 
@@ -121,7 +117,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ### API
 
-如要使用具名參數，請在 `query` 工作設定中，將 `parameterMode` 設為 `NAMED`。
+如要使用具名參數，請在 `query` 工作設定中將 `parameterMode` 設為 `NAMED`。
 
 請利用 `query` 工作設定中的參數清單填入 `queryParameters`。請利用查詢中所用的 `@param_name` 來設定每個參數的 `name`。
 
@@ -157,11 +153,11 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 [在 Google APIs Explorer 中嘗試這個範例](https://developers.google.com/apis-explorer/?hl=zh-tw#p/bigquery/v2/bigquery.jobs.query?projectId=my-project-id&_h=1&resource=%257B%250A++%2522query%2522%253A+%2522SELECT+word%252C+word_count%255CnFROM+%2560bigquery-public-data.samples.shakespeare%2560%255CnWHERE+corpus+%253D+%2540corpus%255CnAND+word_count+%253E%253D+%2540min_word_count%255CnORDER+BY+word_count+DESC%253B%2522%252C%250A++%2522queryParameters%2522%253A+%250A++%255B%250A++++%257B%250A++++++%2522parameterType%2522%253A+%250A++++++%257B%250A++++++++%2522type%2522%253A+%2522STRING%2522%250A++++++%257D%252C%250A++++++%2522parameterValue%2522%253A+%250A++++++%257B%250A++++++++%2522value%2522%253A+%2522romeoandjuliet%2522%250A++++++%257D%252C%250A++++++%2522name%2522%253A+%2522corpus%2522%250A++++%257D%252C%250A++++%257B%250A++++++%2522parameterType%2522%253A+%250A++++++%257B%250A++++++++%2522type%2522%253A+%2522INT64%2522%250A++++++%257D%252C%250A++++++%2522parameterValue%2522%253A+%250A++++++%257B%250A++++++++%2522value%2522%253A+%2522250%2522%250A++++++%257D%252C%250A++++++%2522name%2522%253A+%2522min_word_count%2522%250A++++%257D%250A++%255D%252C%250A++%2522useLegacySql%2522%253A+false%252C%250A++%2522parameterMode%2522%253A+%2522NAMED%2522%250A%257D&)。
 
-如要使用位置參數，請在 `query` 工作設定中，將 `parameterMode` 設為 `POSITIONAL`。
+如要使用位置參數，請在 `query` 工作設定中將 `parameterMode` 設為 `POSITIONAL`。
 
 ### C#
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 C# 設定說明操作。詳情請參閱 [BigQuery C# API 參考文件](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 C# 設定操作說明進行操作。詳情請參閱 [BigQuery C# API 參考文件](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -210,7 +206,7 @@ public class BigQueryQueryWithNamedParameters
 }
 ```
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 C# 設定說明操作。詳情請參閱 [BigQuery C# API 參考文件](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 C# 設定操作說明進行操作。詳情請參閱 [BigQuery C# API 參考文件](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -267,7 +263,7 @@ public class BigQueryQueryWithPositionalParameters
 
 ### Go
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Go 設定說明操作。詳情請參閱 [BigQuery Go API 參考文件](https://godoc.org/cloud.google.com/go/bigquery)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Go 設定操作說明進行操作。詳情請參閱 [BigQuery Go API 參考文件](https://godoc.org/cloud.google.com/go/bigquery)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -403,7 +399,7 @@ func queryWithPositionalParams(w io.Writer, projectID string) error {
 
 ### Java
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定說明操作。詳情請參閱 [BigQuery Java API 參考文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定操作說明進行操作。詳情請參閱 [BigQuery Java API 參考文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -504,7 +500,7 @@ public class QueryWithPositionalParameters {
 
 ### Node.js
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定操作說明進行操作。詳情請參閱 [BigQuery Node.js API 參考文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -574,7 +570,7 @@ async function queryParamsPositional() {
 
 ### Python
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定操作說明進行操作。詳情請參閱 [BigQuery Python API 參考文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -640,7 +636,7 @@ for row in results:
 
 ## 在參數化查詢中使用陣列
 
-如要在查詢參數中使用陣列型別，請將型別設為 `ARRAY<T>`，其中 `T` 是陣列中元素的型別。請將值建構為以方括號括住的元素清單，其中的元素以逗號分隔，例如 `[1, 2,
+如要在查詢參數中使用陣列類型，請將類型設為 `ARRAY<T>`，其中 `T` 是陣列中元素的類型。請將值建構為以方括號括住的元素清單，其中的元素以逗號分隔，例如 `[1, 2,
 3]`。
 
 如要進一步瞭解陣列類型，請參閱[資料類型參考資料](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#array_type)。
@@ -651,12 +647,12 @@ Google Cloud 控制台不支援參數化查詢中的陣列。
 
 ### bq
 
-1. 在 Google Cloud 控制台中啟用 Cloud Shell。
+1. 在 Google Cloud 控制台啟用 Cloud Shell。
 
    [啟用 Cloud Shell](https://console.cloud.google.com/?cloudshell=true&hl=zh-tw)
 
    Google Cloud 控制台底部會開啟 [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works?hl=zh-tw) 工作階段，並顯示指令列提示。Cloud Shell 是已安裝 Google Cloud CLI 的殼層環境，並已設定適用於您目前專案的值。工作階段可能要幾秒鐘的時間才能初始化。
-2. 這項查詢會選取美國各州 (開頭為字母 W) 最常見的男嬰名字：
+2. 這項查詢會選取美國各州最常見的男嬰名字，開頭為字母 W：
 
    **注意：**這個範例查詢的是以美國為基礎的公開資料集。由於該公開資料集儲存在美國的多地區位置，因此您目的地資料表所屬的資料集也必須位於美國。您無法查詢位於某個位置的資料集，然後將結果寫入位於另一個位置的目的地資料表。 
 
@@ -681,7 +677,7 @@ Google Cloud 控制台不支援參數化查詢中的陣列。
         10;'
    ```
 
-   請務必將陣列型別宣告放在單引號內，以免 `>` 字元意外將指令輸出內容重新導向至檔案。
+   請務必用單引號括住陣列類型宣告，以免指令輸出意外由 `>` 字元重新導向至檔案。
 
 ### API
 
@@ -689,7 +685,7 @@ Google Cloud 控制台不支援參數化查詢中的陣列。
 
 如果陣列值是純量，請將 [`parameterType`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/QueryParameter?hl=zh-tw) 設定為值的類型，例如 `STRING`。如果陣列值是結構，請將參數類型設定為 `STRUCT`，並將所需的欄位定義新增至 `structTypes`。
 
-舉例來說，這項查詢會選取美國各州 (開頭為字母 W) 最常見的男嬰名字。
+舉例來說，這項查詢會選取美國各州 (名稱開頭為字母 W) 最常見的男嬰名字。
 
 ```
 {
@@ -739,7 +735,7 @@ Google Cloud 控制台不支援參數化查詢中的陣列。
 
 ### C#
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 C# 設定說明操作。詳情請參閱 [BigQuery C# API 參考文件](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 C# 設定操作說明進行操作。詳情請參閱 [BigQuery C# API 參考文件](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -790,7 +786,7 @@ public class BigQueryQueryWithArrayParameters
 
 ### Go
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Go 設定說明操作。詳情請參閱 [BigQuery Go API 參考文件](https://godoc.org/cloud.google.com/go/bigquery)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Go 設定操作說明進行操作。詳情請參閱 [BigQuery Go API 參考文件](https://godoc.org/cloud.google.com/go/bigquery)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -850,7 +846,5 @@ func queryWithArrayParams(w io.Writer, projectID string) error {
 	if err := status.Err(); err != nil {
 		return err
 	}
-	it, err := job.Read(ctx)
-	for {
-		var row []bigquery.
+	it, err
 ```

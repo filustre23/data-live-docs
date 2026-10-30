@@ -18,7 +18,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 本文說明如何管理 [BigQuery 中的 Colab Enterprise 筆記本](https://docs.cloud.google.com/bigquery/docs/programmatic-analysis?hl=zh-tw)，包括如何查看、比較、還原及刪除筆記本。
 
-本文也說明如何在 [Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/introduction?hl=zh-tw) 查看及管理筆記本中繼資料。
+此外，本文也說明如何在 [Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/introduction?hl=zh-tw) 查看及管理筆記本中繼資料。
 
 Notebooks 是 [BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/query-overview?hl=zh-tw#bigquery-studio) 程式碼資產，採用 [Dataform](https://docs.cloud.google.com/dataform/docs/overview?hl=zh-tw) 技術。
 
@@ -59,7 +59,7 @@ Notebooks 是 [BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/quer
 
 如要授予其他使用者筆記本存取權，請將這些使用者新增至適當的 IAM 角色。
 
-**重要事項：** 只要使用者具備筆記本存取權，即可查看筆記本中程式碼產生的所有輸出內容，即便內含使用者無權存取的資料表內容也一樣。如要避免共用已儲存的輸出內容，請[停用筆記本輸出內容儲存功能](https://docs.cloud.google.com/bigquery/docs/create-notebooks?hl=zh-tw#disable_output_saving)。
+**重要事項：** 只要使用者具備筆記本存取權，即可查看筆記本中程式碼產生的所有輸出內容，即便內含使用者無權存取的資料表內容也一樣。如要避免共用已儲存的輸出內容，請[停用筆記本輸出內容儲存功能](https://docs.cloud.google.com/bigquery/docs/manage-notebooks?hl=zh-tw#disable_output_saving)。
 
 1. 前往 Google Cloud 控制台的「BigQuery」**BigQuery**頁面。
 
@@ -75,29 +75,29 @@ Notebooks 是 [BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/quer
 8. 在「Role」(角色) 清單中，選取下列其中一個角色：
 
    * [**程式碼擁有者**](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#dataform.codeOwner)：可對筆記本執行任何動作，包括刪除或共用。
-   * [**程式碼編輯器**](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#dataform.codeEditor)：可編輯筆記本。
-   * [**程式碼檢視者**](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#dataform.codeViewer)：可以查看筆記本。**注意：** 主體也必須具備[Notebook 執行階段使用者 (`roles/aiplatform.notebookRuntimeUser`)](https://docs.cloud.google.com/vertex-ai/docs/general/access-control?hl=zh-tw#aiplatform.notebookRuntimeUser) 和 [BigQuery 使用者 (`roles/bigquery.user`)](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.user) 角色，才能執行筆記本。
+   * [**程式碼編輯器**](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#dataform.codeEditor)：可以編輯筆記本。
+   * [**程式碼檢視者**](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#dataform.codeViewer)：可以查看筆記本。**注意：** 主體也必須具備[Notebook 執行階段使用者 (`roles/aiplatform.notebookRuntimeUser`)](https://docs.cloud.google.com/vertex-ai/docs/general/access-control?hl=zh-tw#aiplatform.notebookRuntimeUser) 和[BigQuery 使用者 (`roles/bigquery.user`)](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.user) 角色，才能執行筆記本。
 9. 選用：如要查看完整的角色清單和進階共用設定，請按一下「Advanced sharing」(進階共用)。
-10. 按一下 [儲存]。
+10. 按一下「儲存」。
 11. 如要返回筆記本資訊頁面，請按一下「Close」(關閉)。
 
 ## 共用筆記本
 
-如要與其他使用者共用筆記本，可以生成並分享筆記本連結。如要讓其他使用者查看您共用的筆記本，您必須先[授予筆記本存取權](https://docs.cloud.google.com/bigquery/docs/create-notebooks?hl=zh-tw#grant_access_to_notebooks)。
+如要與其他使用者共用筆記本，可以生成並分享筆記本連結。如要讓其他使用者查看您共用的筆記本，您必須先[授予筆記本存取權](https://docs.cloud.google.com/bigquery/docs/manage-notebooks?hl=zh-tw#grant_access_to_notebooks)。
 
 如要執行筆記本，使用者必須有權存取筆記本存取的資料。詳情請參閱「[授予資料集存取權](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam?hl=zh-tw#grant_access_to_a_dataset)」。
 
-**重要事項：** 只要使用者具備筆記本存取權，即可查看筆記本中程式碼產生的所有輸出內容，即便內含使用者無權存取的資料表內容也一樣。如要避免共用已儲存的輸出內容，請[停用筆記本輸出內容儲存功能](https://docs.cloud.google.com/bigquery/docs/create-notebooks?hl=zh-tw#disable_output_saving)。
+**重要事項：** 只要使用者具備筆記本存取權，即可查看筆記本中程式碼產生的所有輸出內容，即便內含使用者無權存取的資料表內容也一樣。如要避免共用已儲存的輸出內容，請[停用筆記本輸出內容儲存功能](https://docs.cloud.google.com/bigquery/docs/manage-notebooks?hl=zh-tw#disable_output_saving)。
 
-1. 前往 Google Cloud 控制台的「BigQuery」**BigQuery**頁面。
+1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Explorer」窗格中展開專案，然後點選「Notebooks」。
-4. 找出要共用的筆記本。您可以使用搜尋功能或篩選器尋找筆記本。
-5. 按一下筆記本旁的「查看動作」圖示 more\_vert，然後依序點選「共用」>「複製連結」。
+4. 找出要共用的筆記本。您可以使用搜尋功能或篩選器找出筆記本。
+5. 按一下筆記本旁的「查看動作」圖示 more\_vert，然後依序點選「分享」>「複製連結」。
 6. 與其他使用者分享連結。
 
 ## 停用筆記本輸出內容儲存功能
@@ -106,7 +106,7 @@ Notebooks 是 [BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/quer
 
 如果停用所選筆記本的輸出內容儲存功能，BigQuery 會刪除筆記本檔案中儲存的所有輸出內容，且不會儲存後續執行的輸出內容。
 
-不過，[有權存取筆記本](https://docs.cloud.google.com/bigquery/docs/create-notebooks?hl=zh-tw#grant_access_to_notebooks)的使用者仍可透過下列方式查看輸出內容：
+不過，[具備筆記本存取權](https://docs.cloud.google.com/bigquery/docs/manage-notebooks?hl=zh-tw#grant_access_to_notebooks)的使用者仍可透過下列方式查看輸出內容：
 
 * 執行筆記本，查看目前的輸出內容。系統不會儲存這項輸出內容。
 * 在修訂版本記錄中，查看筆記本的封存版本和輸出內容。
@@ -124,7 +124,7 @@ Notebooks 是 [BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/quer
 5. 如要展開選單列，請按一下 keyboard\_arrow\_down「切換標頭顯示設定」。
 6. 依序點選**「編輯」 > 「筆記本設定」**。
 7. 在「Notebook settings」(筆記本設定) 視窗中，選取「Omit code cell output when saving this notebook」(儲存這個筆記本時，忽略程式碼儲存格輸出內容)。
-8. 按一下 [儲存]。
+8. 按一下「儲存」。
 9. 按一下「重新載入」。
 
 ## 解決衝突
@@ -133,7 +133,7 @@ Notebooks 是 [BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/quer
 in another tab.` 錯誤，並提供 `Show diff` 連結。如要解決衝突，請按照下列步驟操作：
 
 1. 按一下「`Show diff`」連結。「Review remote changes」對話方塊隨即開啟。
-2. 選用：如要比較筆記本原始碼，請勾選「Raw source」(原始碼) 核取方塊。
+2. 選用：如要比較筆記本原始碼，請勾選「Raw source」(原始來源) 核取方塊。
 3. 選用：如要比較內嵌版本，而非在不同窗格中比較，請勾選「Inline diff」(內嵌差異) 核取方塊。
 4. 查看變更並決定要保留哪些內容，必要時可修改輸入內容。
 5. 按一下「儲存變更」。
@@ -199,7 +199,7 @@ in another tab.` 錯誤，並提供 `Show diff` 連結。如要解決衝突，�
 2. 點選左側窗格中的 explore「Explorer」。
 3. 在「Explorer」窗格中展開專案，然後點選「Notebooks」。
 4. 按一下要比較版本資訊的筆記本名稱。
-5. 按一下 schedule「版本記錄」。
+5. 按一下「schedule 版本記錄」。
 6. 按一下筆記本版本旁的 more\_vert「View actions」(查看動作)，然後點選「Compare」(比較)。比較窗格隨即開啟，比較您選取的筆記本版本與目前的筆記本版本。
 7. 選用：如要並排比較版本，而非在不同窗格中比較，請依序按一下「Compare」(比較) 和「Inline」(並排)。
 8. 選用：如要比較版本的原始碼，請依序按一下「Compare」(比較) 和「Show raw source」(顯示原始碼)。
@@ -231,7 +231,7 @@ in another tab.` 錯誤，並提供 `Show diff` 連結。如要解決衝突，�
 3. 在「Explorer」窗格中展開專案，然後點選「Notebooks」。
 4. 點選要重新命名的筆記本。
 5. 按一下 keyboard\_arrow\_down「Toggle header visibility」(切換標頭顯示設定)，展開選單列。
-6. 依序點選**「檔案」 > 「重新命名」**。
+6. 依序點選**「檔案」>「重新命名」**。
 7. 在「Rename notebook」(重新命名筆記本) 對話方塊中，輸入筆記本名稱，然後按一下「Rename」(重新命名)。
 
 ## 下載筆記本
@@ -243,7 +243,7 @@ in another tab.` 錯誤，並提供 `Show diff` 連結。如要解決衝突，�
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
 3. 在「Explorer」窗格中展開專案，然後點選「Notebooks」。
-4. 按一下要下載的筆記本名稱。您可以使用搜尋功能或篩選器尋找筆記本。
+4. 按一下要下載的筆記本名稱。您可以使用搜尋功能或篩選器找出筆記本。
 5. 展開選單列，然後前往「檔案」選單：
 6. 選取「下載」，然後選取要下載的檔案類型。
 
@@ -263,7 +263,7 @@ in another tab.` 錯誤，並提供 `Show diff` 連結。如要解決衝突，�
 
 ## 在 Knowledge Catalog 管理中繼資料
 
-[Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/introduction?hl=zh-tw) 可讓您儲存及管理 Notebook 的中繼資料。Notebooks 預設在 Knowledge Catalog 中提供，不需額外設定。
+[Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/introduction?hl=zh-tw) 可讓您儲存及管理 Notebook 的中繼資料。Knowledge Catalog 預設提供 Notebooks，不需額外設定。
 
 您可以使用 Knowledge Catalog，管理所有 [BigQuery 位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)中的筆記本。在 Knowledge Catalog 中管理筆記本時，須遵守 [Knowledge Catalog 配額和限制](https://docs.cloud.google.com/knowledge-catalog/docs/quotas?hl=zh-tw)，以及 [Knowledge Catalog 定價](https://cloud.google.com/dataplex/pricing?hl=zh-tw)。
 
@@ -275,13 +275,13 @@ Knowledge Catalog 會自動從筆記本擷取下列中繼資料：
 * 資料資產類型
 * 對應的 Google Cloud 專案
 
-Knowledge Catalog 會將筆記本記錄為[項目](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources?hl=zh-tw#entries)，並包含下列項目值：
+Knowledge Catalog 會將筆記本記錄為[項目](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources?hl=zh-tw#entries)，並使用下列項目值：
 
 系統項目群組
-:   筆記本的[系統項目群組](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources?hl=zh-tw#entry-groups)為 `@dataform`。如要在 Knowledge Catalog 中查看筆記本項目的詳細資料，您必須查看 `dataform` 系統項目群組。如要瞭解如何查看項目群組中所有項目的清單，請參閱 Knowledge Catalog 說明文件中的「[查看項目群組的詳細資料](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources?hl=zh-tw#entry-group-details)」。
+:   Notebook 的[系統項目群組](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources?hl=zh-tw#entry-groups)為 `@dataform`。如要在 Knowledge Catalog 中查看筆記本項目的詳細資料，請查看 `dataform` 系統項目群組。如要瞭解如何查看項目群組中所有項目的清單，請參閱 Knowledge Catalog 說明文件中的「[查看項目群組的詳細資料](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources?hl=zh-tw#entry-group-details)」。
 
 系統項目類型
-:   筆記本的[系統項目類型](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources?hl=zh-tw#entry-types)為 `dataform-code-asset`。如要查看筆記本詳細資料，請查看 `dataform-code-asset` 系統項目類型，使用切面篩選器篩選結果，並[將 `dataform-code-asset` 切面中的 `type` 欄位設為 `NOTEBOOK`](https://docs.cloud.google.com/knowledge-catalog/docs/search-syntax?hl=zh-tw#aspect-search)。然後選取該筆記本中的項目。
+:   筆記本的[系統項目類型](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources?hl=zh-tw#entry-types)為 `dataform-code-asset`。如要查看筆記本的詳細資料，您必須查看 `dataform-code-asset` 系統項目類型、使用切面篩選器篩選結果，並[將 `dataform-code-asset` 切面中的 `type` 欄位設為 `NOTEBOOK`](https://docs.cloud.google.com/knowledge-catalog/docs/search-syntax?hl=zh-tw#aspect-search)。然後選取該筆記本中的項目。
     如要瞭解如何查看所選項目類型的詳細資料，請參閱 Knowledge Catalog 說明文件中的「[查看項目類型的詳細資料](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources?hl=zh-tw#entry-type-details)」。如要瞭解如何查看所選項目的詳細資料，請參閱 Knowledge Catalog 說明文件中的「[查看項目詳細資料](https://docs.cloud.google.com/knowledge-catalog/docs/search-assets?hl=zh-tw#view-entry-details)」一節。
 
 系統切面類型
@@ -300,7 +300,7 @@ Knowledge Catalog 會將筆記本記錄為[項目](https://docs.cloud.google.com
 
 * 進一步瞭解 [BigQuery 中的 Colab Enterprise 筆記本](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction?hl=zh-tw)。
 * 瞭解如何[建立筆記本](https://docs.cloud.google.com/bigquery/docs/create-notebooks?hl=zh-tw)。
-* 瞭解如何[排定筆記本執行作業](https://docs.cloud.google.com/bigquery/docs/orchestrate-notebooks?hl=zh-tw)。
+* 瞭解如何[排定筆記本執行時間](https://docs.cloud.google.com/bigquery/docs/orchestrate-notebooks?hl=zh-tw)。
 
 
 
@@ -309,11 +309,11 @@ Knowledge Catalog 會將筆記本記錄為[項目](https://docs.cloud.google.com
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-24 (世界標準時間)。
+上次更新時間：2026-10-30 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-24 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-30 (世界標準時間)。"],[],[]]

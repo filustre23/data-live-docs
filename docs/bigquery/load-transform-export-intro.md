@@ -16,13 +16,13 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 載入、轉換及匯出資料簡介
 
-本文說明資料整合方法，說明如何使用擷取、載入和轉換 (ELT) 或擷取、轉換、載入 (ETL) 程序，在 BigQuery 中載入及轉換資料。此外，本課程也會說明如何從 BigQuery 匯出資料，以便在其他系統中套用洞察資訊，也就是*反向 ETL*。
+BigQuery 可讓您載入、轉換及匯出資料，整合資料來源和數據分析工作流程。您可以使用擷取、載入和轉換 (ELT) 或擷取、轉換、載入 (ETL) 程序，在 BigQuery 中載入及轉換資料。您也可以從 BigQuery 匯出資料，將洞察資訊套用至其他系統，這個程序稱為*反向 ETL*。
 
-## 決定要使用 ELT 或 ETL
+## 決定採用 ELT 或 ETL
 
 在將資料載入 BigQuery 之前或之後，通常會先轉換資料。基本決策是，在將資料載入 BigQuery 之前轉換資料 (擷取、轉換、載入或 ETL 方法)，或將原始資料載入 BigQuery 並使用 BigQuery 執行轉換 (擷取、載入、轉換或 ELT 方法)。
 
-下圖顯示使用 ELT 或 ETL 將資料整合至 BigQuery 的各種選項。
+下圖顯示將資料整合至 BigQuery 的各種選項，包括使用 ELT 或 ETL。
 
 一般來說，我們建議大多數客戶採用 ELT 方法。ELT 工作流程將複雜的資料整合拆分為兩個可管理的部分：擷取和載入，然後轉換。使用者可以根據需求，選擇各種資料載入方法。資料載入 BigQuery 後，熟悉 SQL 的使用者可以透過 Dataform 等工具開發轉換管道。
 
@@ -93,11 +93,11 @@ ELT 方法可透過下列方式簡化資料整合工作流程：
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-24 (世界標準時間)。
+上次更新時間：2026-10-28 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-24 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-28 (世界標準時間)。"],[],[]]

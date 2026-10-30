@@ -48,11 +48,11 @@ Google Cloud 組織政策服務可讓您透過程式輔助，集中控管組織�
 
 ### 優點
 
-您可以使用自訂組織政策，允許或拒絕對 BigQuery 資源執行特定作業，例如資料集、資料表、資料存取政策、資料列存取政策、常式和工作負載管理資源 (預留項目、指派項目、容量承諾和 BI 預留項目)。這可讓您控管成本及管理 Google Cloud資源的存取權，協助您符合組織的法規遵循和安全性要求。資源限制相當精細，可在專案、資料夾或組織層級套用。
+您可以使用自訂組織政策，允許或拒絕對 BigQuery 資源執行特定作業，例如資料集、資料表、資料存取政策、資料列存取政策、常式和 Workload Manager 資源 (預留項目、指派項目、容量承諾和 BI 預留項目)。這可讓您控管費用及管理 Google Cloud資源的存取權，協助您符合組織的法規遵循和安全性要求。資源限制非常精細，可在專案、資料夾或組織層級套用。
 
 ## 限制
 
-* 如果因資料集以外資源的自訂限制而拒絕存取，[`PolicyViolationInfo`](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.Audit/latest/Google.Cloud.Audit.PolicyViolationInfo?hl=zh-tw) 不會發布至 [BigQuery 稽核記錄](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs?hl=zh-tw)。錯誤訊息會提供拒絕作業的 `constraintId`。
+* 如果因資料集以外資源的自訂限制而遭拒存取，[`PolicyViolationInfo`](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.Audit/latest/Google.Cloud.Audit.PolicyViolationInfo?hl=zh-tw) 不會發布至 [BigQuery 稽核記錄](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs?hl=zh-tw)。錯誤訊息會提供拒絕作業的 `constraintId`。
 
 ## 事前準備
 
@@ -123,11 +123,11 @@ Google Cloud 組織政策服務可讓您透過程式輔助，集中控管組織�
 
 您或許還可透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)取得這項權限。
 
-必須具備其他權限，才能建立及管理 BigQuery 資源。詳情請參閱「[預先定義的角色和權限](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)」。
+您必須具備其他權限，才能建立及管理 BigQuery 資源。詳情請參閱「[預先定義的角色和權限](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)」。
 
 ## BigQuery 支援的資源
 
-下表列出可在自訂限制中參照的 BigQuery 資源。
+下表列出自訂限制中可參照的 BigQuery 資源。
 
 | 資源 | 欄位 |
 | --- | --- |
@@ -202,17 +202,17 @@ Google Cloud 組織政策服務可讓您透過程式輔助，集中控管組織�
 4. 在「Display name」(顯示名稱) 方塊中，輸入人類可讀的限制名稱。這個名稱會用於錯誤訊息，可用於識別和偵錯。請勿在顯示名稱中使用個人識別資訊 (PII) 或機密資料，因為這類名稱可能會在錯誤訊息中曝光。這個欄位最多可包含 200 個字元。
 5. 在「Constraint ID」(限制 ID) 方塊中，輸入新自訂限制的 ID。自訂限制只能包含英文字母 (包括大小寫) 或數字，例如 `custom.enforceDatasetId`。這個欄位最多可包含 70 個字元，不含前置字元 (`custom.`)，例如 `organizations/123456789/customConstraints/custom`。請勿在限制 ID 中輸入 PII 或機密資料，因為錯誤訊息可能會顯示上述資訊。
 6. 在「Description」(說明) 方塊中，輸入人類可讀的限制說明。違反政策時，系統會將這段說明做為錯誤訊息顯示。請詳細說明違反政策的原因，以及如何解決違規問題。請勿在說明中輸入 PII 或機密資料，因為錯誤訊息可能會顯示上述資訊。這個欄位最多可輸入 2000 個字元。
-7. 在「Resource type」(資源類型) 方塊中，選取包含要限制的物件和欄位的 Google Cloud REST 資源名稱，例如 `container.googleapis.com/NodePool`。大多數資源類型最多支援 20 項自訂限制。如果嘗試建立更多自訂限制，作業會失敗。
-8. 在「Enforcement method」(強制執行方法) 下方，選取要對 REST `CREATE` 方法強制執行限制，還是同時對 `CREATE` 和 `UPDATE` 方法強制執行限制。如果您使用 `UPDATE` 方法對違反限制的資源強制執行限制，組織政策會禁止對該資源進行變更，除非變更可解決違規問題。
+7. 在「Resource type」(資源類型) 方塊中，選取包含要限制的物件和欄位的 Google Cloud REST 資源名稱，例如 `container.googleapis.com/Cluster`。大多數資源類型最多支援 20 項自訂限制。如果嘗試建立更多自訂限制，作業會失敗。
+8. 在「Enforcement method」(強制執行方法) 下方，選取要對 REST `CREATE` 方法強制執行限制，還是同時對 `CREATE` 和 `UPDATE` 方法強制執行限制。如果使用 `UPDATE` 方法對違反限制的資源強制執行限制，組織政策會禁止對該資源進行變更，除非變更可解決違規問題。
 
 如要查看各項服務支援的方法，請在「[支援自訂限制的服務](https://docs.cloud.google.com/organization-policy/reference/custom-constraint-supported-services?hl=zh-tw)」中找到該服務。
 
 9. 如要定義條件，請按一下「編輯條件」圖示 edit。
 
-1. 在「Add condition」(新增條件) 面板中，建立參照支援服務資源的 CEL 條件，例如 `resource.management.autoUpgrade == false`。這個欄位最多可輸入 1000 個字元。如要進一步瞭解 CEL 的用法，請參閱「[一般運算語言](https://docs.cloud.google.com/resource-manager/docs/organization-policy/creating-managing-custom-constraints?hl=zh-tw#common_expression_language)」。如要進一步瞭解可在自訂限制中使用的服務資源，請參閱「[支援自訂限制的服務](https://docs.cloud.google.com/resource-manager/docs/organization-policy/custom-constraint-supported-services?hl=zh-tw)」。
+1. 在「Add condition」(新增條件) 面板中，建立參照支援服務資源的 CEL 條件，例如 `resource.management.autoUpgrade == false`。這個欄位最多可輸入 1000 個字元。如要進一步瞭解 CEL 的用法，請參閱[一般運算語言](https://docs.cloud.google.com/resource-manager/docs/organization-policy/creating-managing-custom-constraints?hl=zh-tw#common_expression_language)。如要進一步瞭解可在自訂限制中使用的服務資源，請參閱「[支援自訂限制的服務](https://docs.cloud.google.com/resource-manager/docs/organization-policy/custom-constraint-supported-services?hl=zh-tw)」。
 2. 按一下 [儲存]。
 
-10. 在「Action」下方，選取在符合條件時，要允許或拒絕評估的方法。
+10. 在「Action」下方，選取是否要在符合條件時允許或拒絕評估的方法。
 
 「拒絕」動作表示如果條件評估為 true，系統會禁止建立或更新資源。
 
@@ -243,7 +243,7 @@ description: DESCRIPTION
 * `ORGANIZATION_ID`：組織 ID，例如 `123456789`。
 * `CONSTRAINT_NAME`：新自訂限制的名稱。自訂限制只能包含英文字母 (包括大小寫) 或數字，例如 `custom.enforceDatasetId`。這個欄位最多可包含 70 個字元，不含前置字元 (`custom.`)，例如 `organizations/123456789/customConstraints/custom`。請勿在限制 ID 中輸入 PII 或機密資料，因為錯誤訊息可能會顯示上述資訊。
 * `RESOURCE_NAME`：內含要限制的物件和欄位的 Google Cloud資源完整名稱，例如：`bigquery.googleapis.com/Dataset`。大多數資源類型最多支援 20 項自訂限制。如果嘗試建立更多自訂限制，作業會失敗。
-* `methodTypes`：強制執行限制的 REST 方法。可以是 `CREATE`，或同時為 `CREATE` 和 `UPDATE`。如果您使用 `UPDATE` 方法對違反限制的資源強制執行限制，組織政策會禁止對該資源進行變更，除非變更可解決違規問題。
+* `methodTypes`：強制執行限制的 REST 方法。可以是 `CREATE`，或同時為 `CREATE` 和 `UPDATE`。如果使用 `UPDATE` 方法對違反限制的資源強制執行限制，組織政策會禁止變更該資源，除非變更可解決違規問題。
 
 如要查看各項服務支援的方法，請在「[支援自訂限制的服務](https://docs.cloud.google.com/organization-policy/reference/custom-constraint-supported-services?hl=zh-tw)」中找到該服務。
 
@@ -257,7 +257,7 @@ description: DESCRIPTION
 
 「拒絕」動作是指如果條件評估結果為 true，系統就會禁止建立或更新資源。
 
-* `DISPLAY_NAME`：人類可讀的限制名稱。這個名稱會用於錯誤訊息，可用於識別和偵錯。請勿在顯示名稱中使用 PII 或機密資料，因為錯誤訊息可能會顯示這類資訊。這個欄位最多可包含 200 個字元。
+* `DISPLAY_NAME`：人類可讀的限制名稱。這個名稱會用於錯誤訊息，可用於識別和偵錯。請勿在顯示名稱中使用 PII 或機密資料，因為這類名稱可能會在錯誤訊息中顯示。這個欄位最多可包含 200 個字元。
 * `DESCRIPTION`：違反政策時，會以錯誤訊息形式顯示且易於理解的限制說明。這個欄位最多可包含 2000 個字元。
 
 2. 為新的自訂限制建立 YAML 檔案後，您必須加以設定，才能用於組織的組織政策。如要設定自訂限制，請使用 [`gcloud org-policies set-custom-constraint`](https://docs.cloud.google.com/sdk/gcloud/reference/org-policies/set-custom-constraint?hl=zh-tw) 指令：
@@ -448,7 +448,7 @@ Operation denied by custom org policies: ["customConstraints/custom.enforceDatas
 | 拒絕名稱開頭為「test」的新常式。 | ```     name: organizations/ORGANIZATION_ID/customConstraints/custom.enforceRoutineId     resourceTypes:     - bigquery.googleapis.com/Routine     methodTypes:     - CREATE     condition: "resource.routineReference.routineId.startsWith('test')"     actionType: DENY     displayName: Reject test routines.     description: Deny new routines with names that begin with 'test'. ``` |
 | 拒絕超過 200 個運算單元的 BigQuery 預留項目 | ```     name: organizations/ORGANIZATION_ID/customConstraints/custom.bqReservationLimitSlots     resourceTypes:     - bigquery.googleapis.com/Reservation     methodTypes:     - CREATE     - UPDATE     condition: "resource.slotCapacity > 200"     actionType: DENY     displayName: Deny BigQuery reservations with more than 200     slots.     description: Deny BigQuery reservations with more than 200     slots. ``` |
 | 不允許管道工作使用預留項目 | ```     name: organizations/ORGANIZATION_ID/customConstraints/custom.bqAssignmentDenyPipelineJobs     resourceTypes:     - bigquery.googleapis.com/ReservationAssignment     methodTypes:     - CREATE     condition: "resource.jobType == 'PIPELINE'"     actionType: DENY     displayName: Deny jobs of type PIPELINE from using BigQuery     reservations.     description: Deny the creation of BigQuery reservation     assignments for jobs that are of type PIPELINE. ``` |
-| 僅允許年約容量承諾使用合約 | ```     name: organizations/ORGANIZATION_ID/customConstraints/custom.bqCapacityCommitmentAnnualOnly     resourceTypes:     - bigquery.googleapis.com/CapacityCommitment     methodTypes:     - CREATE     - UPDATE     condition: "resource.plan == 'ANNUAL' && resource.renewalPlan == 'ANNUAL'"     actionType: ALLOW     displayName: Only allow BigQuery capacity commitments with an     annual commitment plan and renewal cadence.     description: Only allow the creation of BigQuery capacity     commitments when there is an annual commitment plan and renewal cadence. ``` |
+| 僅允許年約承諾使用資源 | ```     name: organizations/ORGANIZATION_ID/customConstraints/custom.bqCapacityCommitmentAnnualOnly     resourceTypes:     - bigquery.googleapis.com/CapacityCommitment     methodTypes:     - CREATE     - UPDATE     condition: "resource.plan == 'ANNUAL' && resource.renewalPlan == 'ANNUAL'"     actionType: ALLOW     displayName: Only allow BigQuery capacity commitments with an     annual commitment plan and renewal cadence.     description: Only allow the creation of BigQuery capacity     commitments when there is an annual commitment plan and renewal cadence. ``` |
 | 將 BI 預留項目限制在 5 GB 以下 | ```     name: organizations/ORGANIZATION_ID/customConstraints/custom.bqBiReservationUnder5GB     resourceTypes:     - bigquery.googleapis.com/BiReservation     methodTypes:     - CREATE     - UPDATE     condition: "resource.size > 5368709120" # 5GB in Bytes     actionType: DENY     displayName: Limit BigQuery BI reservations to a maximum of     5 GB.     description: Limit BigQuery BI reservations to a maximum of     5 GB. ``` |
 
 ## 後續步驟
@@ -464,11 +464,11 @@ Operation denied by custom org policies: ["customConstraints/custom.enforceDatas
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-24 (世界標準時間)。
+上次更新時間：2026-10-29 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-24 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]

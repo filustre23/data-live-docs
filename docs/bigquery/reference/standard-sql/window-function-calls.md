@@ -399,12 +399,4 @@ These queries compute values with numeric boundaries:
 These queries compute values with the current row as a boundary:
 
 * [Compute a grand total](#compute_a_grand_total)
-* [Compute a subtotal](#compute_a_subtotal)
-* [Compute a cumulative sum](#compute_a_cumulative_sum)
-
-### Referencing a named window
-
-```
-SELECT query_expr,
-  function_name (
-```
+* [Compu](#compute_a_subtotal)

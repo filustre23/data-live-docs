@@ -1,104 +1,122 @@
-* [Home](https://docs.cloud.google.com/?hl=zh-cn)
-* [Documentation](https://docs.cloud.google.com/docs?hl=zh-cn)
-* [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-cn)
-* [BigQuery](https://docs.cloud.google.com/bigquery/docs?hl=zh-cn)
-* [指南](https://docs.cloud.google.com/bigquery/docs/introduction?hl=zh-cn)
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
-发送反馈
+* [Home](https://docs.cloud.google.com/?hl=zh-tw)
+* [Documentation](https://docs.cloud.google.com/docs?hl=zh-tw)
+* [Data analytics](https://docs.cloud.google.com/docs/data?hl=zh-tw)
+* [BigQuery](https://docs.cloud.google.com/bigquery/docs?hl=zh-tw)
+* [指南](https://docs.cloud.google.com/bigquery/docs/introduction?hl=zh-tw)
+
+提供意見
 
 
 
-使用集合让一切井井有条
+透過集合功能整理內容
 
-根据您的偏好保存内容并对其进行分类。
+你可以依據偏好儲存及分類內容。
 
-# 数据集简介
+# 資料集簡介
 
-此页面简要介绍 BigQuery 中的数据集。
+BigQuery 資料集可用來整理資料表和檢視表，並控管存取權。您也可以使用資料集指定儲存位置、管理保留政策，以及連結至外部資料來源。
 
-## 数据集
+## 資料集
 
-数据集包含在特定[项目](https://docs.cloud.google.com/docs/overview?hl=zh-cn#projects)中，数据集是用来组织和控制[表](https://docs.cloud.google.com/bigquery/docs/tables?hl=zh-cn)和[视图](https://docs.cloud.google.com/bigquery/docs/views?hl=zh-cn)访问权限的顶级容器。表或视图必须属于数据集，因此需要创建至少一个数据集，才能[将数据加载到 BigQuery](https://docs.cloud.google.com/bigquery/loading-data-into-bigquery?hl=zh-cn) 中。
-使用 GoogleSQL 时，请使用 `projectname.datasetname` 格式来完全限定数据集名称；使用 bq 命令行工具时，请使用 `projectname:datasetname` 格式来完全限定数据集名称。
+資料集包含在特定[專案](https://docs.cloud.google.com/docs/overview?hl=zh-tw#projects)中，是用來整理及控管[資料表](https://docs.cloud.google.com/bigquery/docs/tables?hl=zh-tw)與[檢視表](https://docs.cloud.google.com/bigquery/docs/views?hl=zh-tw)存取權的頂層容器。資料表或檢視表必須屬於某個資料集，因此您需要建立至少一個資料集，才能[將資料載入 BigQuery](https://docs.cloud.google.com/bigquery/loading-data-into-bigquery?hl=zh-tw)。使用 GoogleSQL 時，請採用 `projectname.datasetname` 格式來指定完整的資料集名稱；使用 bq 指令列工具時，請採用 `projectname:datasetname` 格式來指定完整的資料集名稱。
 
 ## 位置
 
-您在创建数据集时会指定一个位置用于存储 BigQuery 数据。如需查看 BigQuery 数据集位置的列表，请参阅 [BigQuery 位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-cn)。创建数据集后，该位置无法更改，但您可以[将数据集复制到其他位置](https://docs.cloud.google.com/bigquery/docs/copying-datasets?hl=zh-cn)，也可以手动[将数据集移动到其他位置（在其他位置重新创建数据集）](https://docs.cloud.google.com/bigquery/docs/managing-datasets?hl=zh-cn#recreate-dataset)。
+您可以在建立資料集時指定 BigQuery 資料的儲存位置。如需 BigQuery 資料集位置清單，請參閱「[BigQuery 位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)」。BigQuery 會依據《[服務專屬條款](https://cloud.google.com/terms/service-terms?hl=zh-tw)》將資料儲存在所選位置。舉例來說，如果您選擇 `EU` 或位於歐盟的區域做為資料集位置，核心 BigQuery 客戶資料就會存放在歐盟。
 
-BigQuery 在包含待查询表的数据集所在的位置处理查询。BigQuery根据[服务专用条款](https://cloud.google.com/terms/service-terms?hl=zh-cn)将您的数据存储在选定位置。
+資料集建立後，位置即無法變更，
+但您可以[將資料集複製到其他位置](https://docs.cloud.google.com/bigquery/docs/managing-datasets?hl=zh-tw#copy-datasets)，
+或手動[將資料集移動 (重新建立) 至其他位置](https://docs.cloud.google.com/bigquery/docs/managing-datasets?hl=zh-tw#recreate-dataset)。
 
-## 数据保留
+如果您未[明確指定位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#specify_locations)，系統會以下列其中一種方式決定位置：
 
-数据集将[时间旅行](https://docs.cloud.google.com/bigquery/docs/time-travel?hl=zh-cn#time_travel)与[故障安全期](https://docs.cloud.google.com/bigquery/docs/time-travel?hl=zh-cn#fail-safe)结合使用，以将已删除和修改的数据保留一小段时间，以防您需要恢复数据。如需了解详情，请参阅[使用时间旅行和故障安全功能保留数据](https://docs.cloud.google.com/bigquery/docs/time-travel?hl=zh-cn)。
+* 要求中參照的資料集位置。舉例來說，如果查詢參照了儲存在 `asia-northeast1` 區域的資料集中的資料表或檢視表，查詢工作就會在 `asia-northeast1` 執行。
+* 要求中參照的連線指定區域。
+* 目的地資料表的位置。
 
-## 存储空间结算模式
+如果未明確指定位置，且無法從要求中的資源判斷，則會使用預設位置。如未設定預設位置，工作會在 `US` 多區域執行。
 
-您可以按逻辑字节数或物理（压缩）字节数或者两者的组合来为 BigQuery 数据存储空间付费。您选择的存储结算模式决定了[存储价格](https://cloud.google.com/bigquery/pricing?hl=zh-cn#storage)。您选择的存储空间结算模式不会影响 BigQuery 性能。无论您选择哪种结算模式，您的数据都会以物理字节的形式存储。
+## 資料保留
 
-您可以在数据集级层设置存储结算模式。如果您在创建数据集时未指定存储结算模式，则系统默认为使用逻辑存储结算。不过，您可以在创建数据集后[更改数据集的存储结算模式](https://docs.cloud.google.com/bigquery/docs/updating-datasets?hl=zh-cn#update_storage_billing_models)。如果您更改了数据集的存储结算模式，则必须等待 14 天才能再次更改存储结算模式。
+資料集會搭配使用[時間旅行](https://docs.cloud.google.com/bigquery/docs/time-travel?hl=zh-tw#time_travel)和[安全防護期](https://docs.cloud.google.com/bigquery/docs/time-travel?hl=zh-tw#fail-safe)，在短時間內保留已刪除和修改的資料，以便您在需要時復原資料。詳情請參閱「[透過時間旅行和安全防護機制保留資料](https://docs.cloud.google.com/bigquery/docs/time-travel?hl=zh-tw)」。
 
-更改数据集的结算模式后，更改需要 24 小时才能生效。 更改数据集的结算模式时，长期存储中的任何表或表分区都不会重置为活跃存储。
-更改数据集的结算模式不会影响查询性能和查询延迟时间。
+## 儲存空間計費模式
 
-数据集使用[时间旅行](https://docs.cloud.google.com/bigquery/docs/time-travel?hl=zh-cn#time_travel)和[故障安全](https://docs.cloud.google.com/bigquery/docs/time-travel?hl=zh-cn#fail-safe)存储进行数据保留。如果您使用物理存储空间结算模式，系统会按活跃存储空间费率单独收取时间旅行和故障安全存储空间费用；但如果您使用逻辑存储空间结算模式，系统会将这两项费用计入基本费率中。您可以修改为数据集使用的时间旅行窗口，以在物理存储空间费用和数据保留之间实现平衡。您无法修改故障安全窗口。如需详细了解数据集数据保留，请参阅[使用时间旅行和故障安全功能保留数据](https://docs.cloud.google.com/bigquery/docs/time-travel?hl=zh-cn)。如需详细了解如何预测存储费用，请参阅[预测存储结算](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage?hl=zh-cn#forecast_storage_billing)。
+BigQuery 提供兩種儲存空間計費模式：**邏輯** (未壓縮) 和**實體** (壓縮)。
 
-如果组织的任何现有旧版[固定费率槽承诺](https://docs.cloud.google.com/bigquery/docs/reservations-commitments-legacy?hl=zh-cn)位于数据集所在的区域，则无法将数据集加入物理存储空间结算。这不适用于通过 [BigQuery 版本](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-cn)购买的承诺。
+變更儲存空間計費模式只會變更計量設定，不涉及資料遷移、檔案格式轉換或任何基礎架構變更。資料一律會以相同的壓縮實體格式儲存。變更這項設定不會影響查詢效能、延遲時間，或與其他應用程式 (例如 Looker) 的整合。
 
-## 外部数据集
+所選模式只會決定系統如何根據[儲存空間定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#storage)，衡量儲存位元組並計價：
 
-除了 BigQuery 数据集之外，您还可以创建外部数据集，即指向外部数据源的链接：
+* **邏輯計費：**根據未壓縮的資料大小計費。這是預設模型。
+* **實體計費：**根據磁碟資料的壓縮大小計費。
 
-* [Spanner 外部数据集](https://docs.cloud.google.com/bigquery/docs/spanner-external-datasets?hl=zh-cn)
-* [AWS Glue 联合数据集](https://docs.cloud.google.com/bigquery/docs/glue-federated-datasets?hl=zh-cn)
+無論選擇哪種計費模式，資料都會以實體位元組的形式儲存。
 
-外部数据集也称为联合数据集；这两个术语可互换使用。
+您可以在資料集層級設定儲存空間計費模式。如果您在建立資料集時未指定儲存空間計費模式，系統會預設使用邏輯儲存空間計費模式。不過，您可以在建立資料集後[變更其儲存空間計費模式](https://docs.cloud.google.com/bigquery/docs/updating-datasets?hl=zh-tw#update_storage_billing_models)。變更資料集的儲存空間計費模式後，必須等待 14 天才能再次變更。
 
-创建后，外部数据集将包含引用的外部数据源中的表。这些表中的数据不会复制到 BigQuery 中，而是在每次使用时进行查询。如需了解详情，请参阅 [Spanner 联合查询](https://docs.cloud.google.com/bigquery/docs/spanner-federated-queries?hl=zh-cn)。
+變更資料集的計費模式後，變更會在 24 小時後生效。變更資料集的計費模式時，長期儲存空間中的任何資料表或資料表分區都不會重設為使用中儲存空間。變更資料集的計費模式不會影響查詢效能和查詢延遲時間。
+
+資料集會使用[時間旅行](https://docs.cloud.google.com/bigquery/docs/time-travel?hl=zh-tw#time_travel)和[安全防護](https://docs.cloud.google.com/bigquery/docs/time-travel?hl=zh-tw#fail-safe)儲存空間來保留資料。如果採用實體儲存空間計費模式，系統會按照使用中儲存空間費率，另外收取時間旅行和防故障儲存空間的費用。如果採用邏輯儲存空間計費模式，則會按照基本費率收取費用。您可以修改資料集的時間回溯時間範圍，在實體儲存空間費用和資料保留之間取得平衡。您無法修改安全防護時間範圍。如要進一步瞭解資料集資料保留，請參閱「[使用時間旅行和防故障功能保留資料](https://docs.cloud.google.com/bigquery/docs/time-travel?hl=zh-tw)」。如要進一步瞭解如何預測儲存空間費用，請參閱「[預測儲存空間費用](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage?hl=zh-tw#forecast_storage_billing)」。
+
+如果貴組織在資料集所在區域有任何現有的舊版[固定費率運算單元承諾使用合約](https://docs.cloud.google.com/bigquery/docs/reservations-commitments-legacy?hl=zh-tw)，就無法將資料集註冊至實體儲存空間計費模式。這項規定不適用於透過 [BigQuery 版本](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)購買的承諾使用合約。
+
+## 外部資料集
+
+除了 BigQuery 資料集，您也可以建立外部資料集，也就是外部資料來源的連結：
+
+* [Spanner 外部資料集](https://docs.cloud.google.com/bigquery/docs/spanner-external-datasets?hl=zh-tw)
+* [AWS Glue 聯合資料集](https://docs.cloud.google.com/bigquery/docs/glue-federated-datasets?hl=zh-tw)
+
+*外部資料集*也稱為*聯合資料集*，這兩個詞彙可交替使用。
+
+建立後，外部資料集會包含參照外部資料來源的資料表。這些資料表中的資料不會複製到 BigQuery，但每次使用時都會查詢。詳情請參閱「[Spanner 聯合查詢](https://docs.cloud.google.com/bigquery/docs/spanner-federated-queries?hl=zh-tw)」。
 
 ## 限制
 
-BigQuery 数据集有以下限制：
+BigQuery 資料集有下列限制：
 
-* [数据集位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-cn)只能在创建时设置。创建数据集后，就无法再更改其位置。
-* 查询中引用的所有表必须存储在位于同一位置的数据集中。
-* 外部数据集不支持表到期、副本、时间旅行、默认排序规则、默认舍入模式，或用于启用或停用不区分大小写的表名称的选项。
-* [复制表](https://docs.cloud.google.com/bigquery/docs/managing-tables?hl=zh-cn#copy-table)时，包含源表和目标表的数据集必须位于同一位置。
-* 各个项目的数据集名称不得重复。
-* 如果您更改了数据集的[存储空间结算模式](#dataset_storage_billing_models)，则必须等待 14 天才能再次更改存储空间结算模式。
-* 如果您的任何现有旧版[固定费率槽承诺](https://docs.cloud.google.com/bigquery/docs/reservations-commitments-legacy?hl=zh-cn)位于数据集所在的区域，则无法将数据集加入物理存储空间结算。
+* [資料集位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)只能在建立時設定。資料集建立後即無法變更位置。
+* 查詢中參照的所有資料表，都必須儲存在相同位置的資料集中。
+* 外部資料集不支援資料表到期、副本、時間旅行、預設定序、預設捨入模式，或啟用/停用不區分大小寫資料表名稱的選項。
+* [複製資料表](https://docs.cloud.google.com/bigquery/docs/managing-tables?hl=zh-tw#copy-table)時，包含來源資料表和目的地資料表的資料集必須位於相同位置。
+* 每個專案的資料集名稱皆不得重複。
+* 變更資料集的[儲存空間計費模式](#dataset_storage_billing_models)後，必須等待 14 天才能再次變更。
+* 如果資料集所在區域有任何舊版[固定費率運算單元承諾使用合約](https://docs.cloud.google.com/bigquery/docs/reservations-commitments-legacy?hl=zh-tw)，就無法將資料集註冊至實體儲存空間計費模式。
 
-## 配额
+## 配額
 
-要详细了解数据集配额和限制，请参阅[配额和限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-cn#dataset_limits)。
+如要進一步瞭解資料集配額和限制，請參閱[配額和限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#dataset_limits)。
 
-## 价格
+## 定價
 
-您无需为创建、更新或删除数据集付费。
+您不需為建立、更新或刪除資料集付費。
 
-要详细了解 BigQuery 价格，请参阅[价格](https://cloud.google.com/bigquery/pricing?hl=zh-cn)。
+若要深入瞭解 BigQuery 價格，請參閱[價格](https://cloud.google.com/bigquery/pricing?hl=zh-tw)。
 
 ## 安全性
 
-如需控制对 BigQuery 中数据集的访问权限，请参阅[控制对数据集的访问权限](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam?hl=zh-cn)。
-如需了解数据加密，请参阅[静态加密](https://docs.cloud.google.com/bigquery/docs/encryption-at-rest?hl=zh-cn)。
+如要控管 BigQuery 資料集的存取權，請參閱「[控管資料集的存取權](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam?hl=zh-tw)」。如要瞭解資料加密，請參閱「[靜態資料加密](https://docs.cloud.google.com/bigquery/docs/encryption-at-rest?hl=zh-tw)」。
 
-## 后续步骤
+## 後續步驟
 
-* 如需详细了解如何创建数据集，请参阅[创建数据集](https://docs.cloud.google.com/bigquery/docs/datasets?hl=zh-cn)。
-* 如需详细了解如何向数据集分配访问权限控制，请参阅[控制数据集访问权限](https://docs.cloud.google.com/bigquery/docs/dataset-access-controls?hl=zh-cn)。
-
-
-
-
-发送反馈
-
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
-
-最后更新时间 (UTC)：2026-03-16。
+* 參閱[建立資料集](https://docs.cloud.google.com/bigquery/docs/datasets?hl=zh-tw)一文，進一步瞭解如何建立資料集。
+* 如要進一步瞭解如何為資料集指派存取控管機制，請參閱「[使用資料集存取控管機制](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam?hl=zh-tw#work_with_dataset_access_controls)」。
 
 
 
 
-需要向我们提供更多信息？
+提供意見
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["很难理解","hardToUnderstand","thumb-down"],["信息或示例代码不正确","incorrectInformationOrSampleCode","thumb-down"],["没有我需要的信息/示例","missingTheInformationSamplesINeed","thumb-down"],["翻译问题","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-03-16。"],[],[]]
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+
+上次更新時間：2026-10-29 (世界標準時間)。
+
+
+
+
+想進一步說明嗎？
+
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]

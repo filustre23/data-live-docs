@@ -482,9 +482,4 @@ Search Ads 360 API 資源：[ad\_group\_ad](https://developers.google.com/search
 | ad\_group\_ad\_ad\_expanded\_dynamic\_search\_ad\_description2 | 廣告說明的第二行。 |
 | ad\_group\_ad\_ad\_expanded\_text\_ad\_description1 | 廣告內容描述的第一行。 |
 | ad\_group\_ad\_ad\_expanded\_text\_ad\_description2 | 廣告說明的第二行。 |
-| ad\_group\_ad\_ad\_expanded\_text\_ad\_headline | 廣告標題。 |
-| ad\_group\_ad\_ad\_expanded\_text\_ad\_headline2 | 廣告的第二個標題。 |
-| ad\_group\_ad\_ad\_expanded\_text\_ad\_headline3 | 廣告的第三個標題。 |
-| ad\_group\_ad\_ad\_final\_urls | 廣告完成所有跨網域重新導向後，可能連到的最終到達網址清單。 |
-| ad\_group\_ad\_ad\_id | 廣告的 ID。 |
-| ad\_group\_ad\_ad\_name | 廣告的名稱。這項資訊僅用於識別廣告。這個值不必 |
+| ad\_group\_ad\_ad\_expa |

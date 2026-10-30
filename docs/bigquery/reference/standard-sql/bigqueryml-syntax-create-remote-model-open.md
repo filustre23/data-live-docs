@@ -609,14 +609,3 @@ To find supported Hugging Face models, do the following:
 1. On Hugging Face, open the list of
    [Text Embeddings Inference](https://huggingface.co/models?other=text-embeddings-inference)
    or
-   [Text Generation Inference](https://huggingface.co/models?other=text-generation-inference)
-   models, depending on the type of model that you want to create.
-2. Locate a model that you are interested in and copy the model ID.
-3. Open the [Agent Platform Model Garden](https://console.cloud.google.com/vertex-ai/model-garden).
-4. Click **Deploy from Hugging Face**.
-5. On the **Deploy from Hugging Face** pane, paste the model ID into the
-   **Hugging Face URL** field.
-6. Press `Enter`.
-
-   A green check circle is shown if the model can be deployed in
-   Agent Platform Model Garden:

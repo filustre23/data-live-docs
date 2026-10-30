@@ -554,10 +554,3 @@ FROM
 
 This example creates a k-means model with three clusters using the custom
 cluster initialization method. `init_col` identifies the column of type `BOOL`
-that contains the values which specify whether a given row is an initial
-centroid. This column should only contain three rows with the value `TRUE`.
-
-```
-CREATE MODEL
-  `mydataset.mymodel`
-```

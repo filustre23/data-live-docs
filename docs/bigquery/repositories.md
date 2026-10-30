@@ -25,8 +25,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 BigQuery 存放區可讓您控管程式碼檔案的版本，並與團隊協作。您可以建立、共用及刪除 BigQuery 存放區，或將其連結至第三方 Git 存放區。
 
-如要以更簡便、以資料夾為基礎的方式進行版本管控，建議使用 [BigQuery Studio Git 存放區](https://docs.cloud.google.com/bigquery/docs/git-repositories?hl=zh-tw)
-[(預先發布版)](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。這項整合功能可讓您直接在 BigQuery Studio 檔案瀏覽器中使用 Git 分支版本，並一次複製多個存放區，不必管理個別工作區。
+如要以資料夾為基礎，更流暢地管控版本，建議使用 [BigQuery Studio Git 存放區](https://docs.cloud.google.com/bigquery/docs/git-repositories?hl=zh-tw)。這項整合功能可讓您直接在 BigQuery Studio 檔案瀏覽器中使用 Git 分支，並一次複製多個存放區，不必管理個別工作區。
 
 ## 事前準備
 
@@ -116,7 +115,7 @@ BigQuery 存放區可讓您控管程式碼檔案的版本，並與團隊協作�
 BigQuery 中的程式碼資產是由 Dataform 提供，因此請考量下列安全性影響，再授予使用者這些資產的存取權：
 
 * 程式碼資產的瀏覽權限由專案層級的 Dataform 權限控管。使用者只要具備 `dataform.repositories.list` 權限 (包含在標準 BigQuery 角色中，例如 [BigQuery 工作使用者](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.jobUser)、[BigQuery Studio 使用者](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.studioUser)和 [BigQuery 使用者](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.user))，就能在 Google Cloud 專案的「Explorer」面板中查看所有程式碼資產，無論這些資產是否由他們建立或與他們共用。如要限制瀏覽權限，可以建立不含 `dataform.repositories.list` 權限的[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)。
-* 凡是與 Dataform 服務代理共用的 Secret，可編輯這些資產的使用者都有可能存取。為確保憑證安全，請限制只有信任的使用者才能建立及編輯權限，並限制 Dataform 服務代理可存取的密鑰。詳情請參閱「[在套件安裝期間存取 Secret](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#secret-access-risk)」。
+* 凡是與 Dataform 服務代理共用的 Secret，都有可能遭到可編輯這些資產的使用者存取。為確保憑證安全，請限制只有信任的使用者才能建立及編輯權限，並限制 Dataform 服務代理可存取的密鑰。詳情請參閱「[在套件安裝期間存取 Secret](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#secret-access-risk)」。
 
 詳情請參閱「[Dataform 權限的安全性考量](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#security-considerations-permissions)」。
 
@@ -171,12 +170,12 @@ BigQuery 會使用含有私密安全殼層金鑰的密鑰登入 Git 供應商，
 
    ### Azure DevOps Services
 
-   1. 在 Azure DevOps Services 中[建立私密安全殼層金鑰](https://learn.microsoft.com/en-us/azure/devops/repos/git/use-ssh-keys-to-authenticate?view=azure-devops#step-1-create-your-ssh-keys)。
+   1. 在 Azure DevOps Services 中[建立私人安全殼層金鑰](https://learn.microsoft.com/en-us/azure/devops/repos/git/use-ssh-keys-to-authenticate?view=azure-devops#step-1-create-your-ssh-keys)。
    2. [將公開安全殼層金鑰上傳](https://learn.microsoft.com/en-us/azure/devops/repos/git/use-ssh-keys-to-authenticate?view=azure-devops#step-2-add-the-public-key-to-azure-devops)至 Azure DevOps Services 存放區。
 
    ### Bitbucket
 
-   1. 在 Bitbucket 中[建立私密安全殼層金鑰](https://support.atlassian.com/bitbucket-cloud/docs/configure-ssh-and-two-step-verification/)。
+   1. 在 Bitbucket 中[建立私人安全殼層金鑰](https://support.atlassian.com/bitbucket-cloud/docs/configure-ssh-and-two-step-verification/)。
    2. 將[公開安全殼層金鑰上傳](https://support.atlassian.com/bitbucket-cloud/docs/configure-ssh-and-two-step-verification/)至 Bitbucket 存放區。
 
    ### GitHub
@@ -291,7 +290,7 @@ BigQuery 會使用含有私密安全殼層金鑰的密鑰登入 Git 供應商，
        ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAfuCHKVTjquxvt6CM6tdG4SLp1Btn/nOeHHE5UOzRdf
        ```
 
-       請確認這組金鑰仍與 GitLab 同步。
+       請確認這組金鑰仍與 GitLab 保持同步。
 16. 點選「連線」。
 
 ### 透過 HTTPS 連結遠端存放區
@@ -310,13 +309,13 @@ BigQuery 接著會使用存取權杖登入 Git 供應商，代表使用者提交
 
    1. 在 GitHub 中，建立[精細的個人存取權杖](https://github.blog/2022-10-18-introducing-fine-grained-personal-access-tokens-for-github/)或[傳統個人存取權杖](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token#about-personal-access-tokens)。
 
-      * 如要使用精細的 GitHub 個人存取權杖，請按照下列步驟操作：
+      * 如要建立精細的 GitHub 個人存取權杖，請按照下列步驟操作：
       1. 選取存放區存取權，僅限所選存放區，然後選取要連結的存放區。
       2. 授予存放區內容的讀取和寫入權限。
-      3. 請根據需求設定適當的權杖到期時間。
+      3. 根據需求設定適當的權杖到期時間。
       * 如要使用傳統 GitHub 個人存取權杖，請按照下列步驟操作：
       1. 將 `repo` 權限授予 BigQuery。
-      2. 請根據需求設定適當的權杖到期時間。
+      2. 根據需求設定適當的權杖到期時間。
    2. 如果貴組織使用 SAML 單一登入 (SSO)，請[授權權杖](https://docs.github.com/en/enterprise-cloud@latest/authentication/authenticating-with-saml-single-sign-on/authorizing-a-personal-access-token-for-use-with-saml-single-sign-on)。
 
    ### GitLab
@@ -324,7 +323,7 @@ BigQuery 接著會使用存取權杖登入 Git 供應商，代表使用者提交
    1. 在 GitLab 中建立 [GitLab 個人存取權杖](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html)。
    2. 將權杖命名為 `dataform` (必要)。
    3. 將 `api`、`read_repository` 和 `write_repository` 權限授予 BigQuery。
-   4. 請根據需求設定適當的權杖到期時間。
+   4. 根據需求設定適當的權杖到期時間。
 2. 在 Secret Manager 中，[建立包含遠端存放區個人存取權杖的 Secret](https://docs.cloud.google.com/secret-manager/docs/creating-and-accessing-secrets?hl=zh-tw#create)。
 3. [將 Secret 存取權授予 Dataform 服務代理](https://docs.cloud.google.com/secret-manager/docs/manage-access-to-secrets?hl=zh-tw)。
 
@@ -408,11 +407,11 @@ BigQuery 接著會使用存取權杖登入 Git 供應商，代表使用者提交
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-24 (世界標準時間)。
+上次更新時間：2026-10-29 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-24 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]

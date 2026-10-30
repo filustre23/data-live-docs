@@ -16,13 +16,11 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 排定管道執行時間
 
-本文說明如何排定 [BigQuery 管道](https://docs.cloud.google.com/bigquery/docs/pipelines-introduction?hl=zh-tw)，包括如何排定管道和檢查排定的管道執行作業。
+安排 [BigQuery 管道](https://docs.cloud.google.com/bigquery/docs/pipelines-introduction?hl=zh-tw)，即可定期或在資料表更新時，自動執行由 [Dataform](https://docs.cloud.google.com/dataform/docs/overview?hl=zh-tw) 支援的多步驟 SQL 和筆記本工作流程。您可以使用 Google 帳戶使用者憑證或[自訂服務帳戶](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#about-service-accounts)，驗證排定的執行作業，然後檢查執行記錄，監控工作流程健康狀態。
 
-管道由 [Dataform](https://docs.cloud.google.com/dataform/docs/overview?hl=zh-tw) 提供技術支援。每個管道排程都會使用您的 Google 帳戶使用者憑證，或您在設定排程時選取的[自訂服務帳戶](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#about-service-accounts)執行。
+BigQuery 會自動將變更儲存至管道，您和具備專案 Dataform 管理員角色的使用者都能查看這些變更。如要使用新版管道更新排程，請[部署管道](#deploy)。排程一律會執行最新部署的版本。
 
-您對管道所做的變更會自動儲存，但只有您和具備專案 Dataform 管理員角色的使用者可以查看。如要使用新版管道更新排程，請[部署管道](#deploy)。部署後，排程就會更新，改用目前的管道版本。排程一律會執行最新部署的版本。
-
-含有筆記本的管道排程會使用[預設執行階段規格](https://docs.cloud.google.com/colab/docs/runtimes?hl=zh-tw#default_runtime_specifications)。如果管道含有筆記本，BigQuery 會在排定的執行期間，將筆記本輸出內容寫入建立排程時選取的 [Cloud Storage bucket](https://docs.cloud.google.com/storage/docs/buckets?hl=zh-tw)。
+如果工作流程包含筆記本，排定的執行作業會使用[預設執行階段規格](https://docs.cloud.google.com/colab/docs/runtimes?hl=zh-tw#default_runtime_specifications)，並將輸出內容寫入您在設定期間選取的 [Cloud Storage bucket](https://docs.cloud.google.com/storage/docs/buckets?hl=zh-tw)。
 
 ## 事前準備
 
@@ -158,12 +156,12 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
     1. 在「Repeats」(重複) 選單中，選取排定管道執行的頻率。
     2. 在「At time」(時間) 欄位中，輸入排定的管道執行時間。
     3. 在「Timezone」(時區) 選單中，選取排程的時區。
-11. 使用「Execute as interactive job with high priority (default)」(以高優先順序執行互動式工作 (預設)) 選項，設定 BigQuery 查詢工作的優先順序。根據預設，BigQuery 會以[互動式查詢工作](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#interactive-batch)的形式執行查詢，這類工作會盡快開始執行。如果取消勾選這個選項，系統會以[批次查詢工作](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#interactive-batch)的形式執行查詢，優先順序較低。
+11. 使用「Execute as interactive job with high priority (default)」(以高優先順序執行互動式工作 (預設)) 選項，設定 BigQuery 查詢工作優先順序。根據預設，BigQuery 會以[互動式查詢工作](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#interactive-batch)的形式執行查詢，這類工作會盡快開始執行。如果取消勾選這個選項，系統會以[批次查詢工作](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#interactive-batch)的形式執行查詢，優先順序較低。
 12. 按一下「建立排程」。如果驗證方式選取「Execute with my user credentials」(使用我的使用者憑證執行)，則必須[授權 Google 帳戶](#authorize-google-account) ([預先發布版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))。
 
 建立排程時，系統會自動部署目前的管道版本。如要使用新版管道更新排程，請[部署管道](#deploy)。
 
-最新部署的管道版本會按照所選時間和頻率執行。
+管道的最新部署版本會按照所選時間和頻率執行。
 
 **注意：** 如果排定的管道執行作業未在下次排定的執行作業開始前完成，系統會略過下次排定的執行作業，並標示錯誤。
 
@@ -295,7 +293,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 在管道檢視器中開啟管道，方法如下：
 
-   * 在左側窗格中，按一下「檔案」folder，展開「使用者」資料夾或「團隊資料夾」，然後選取管道。
+   * 在左側窗格中，按一下「檔案」圖示 folder，展開「使用者」資料夾或「團隊資料夾」，然後選取管道。
    * 在左側窗格中，按一下「explore Explorer」，展開專案，按一下「Pipelines」，然後選取管道。
 3. 在 Pipeline Viewer 工具列中，按一下「Trigger」(觸發)。
 4. 在「Trigger」(觸發條件) 欄位中，輸入觸發條件的名稱。
@@ -421,7 +419,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 如要恢復已停用管道排程的排定執行作業，請按照下列步驟操作：
 
-### 「Files」窗格
+### 「Files」(檔案) 窗格
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -503,7 +501,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 如要查看所選管道排程的過往執行作業，請按照下列步驟操作：
 
-### **檔案**窗格
+### 「Files」(檔案) 窗格
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -595,11 +593,11 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-24 (世界標準時間)。
+上次更新時間：2026-10-29 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-24 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]

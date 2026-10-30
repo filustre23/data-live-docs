@@ -155,8 +155,5 @@ WITH data AS (
   SELECT 2 AS id, ST_GEOGFROMTEXT('POINT EMPTY') AS geo
   UNION ALL
   -- only points are supported
-  SELECT 3 AS id, ST_GEOGFROMTEXT('LINESTRING(1 2, 3 4)') AS geo
-)
-SELECT id,
-       SAFE.S2_CELLIDFROMPOINT(geo) cell3
+  SELECT 3 AS id, ST_GEOGFROMTEXT('LINESTRING(1 2, 3 4)'
 ```

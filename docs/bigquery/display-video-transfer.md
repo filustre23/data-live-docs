@@ -16,7 +16,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 將 Display & Video 360 資料載入 BigQuery
 
-您可以使用 Display & Video 360 連接器的 [BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)，將 Display & Video 360 的資料載入 BigQuery。您可以使用 BigQuery 資料移轉服務，安排週期性移轉工作，將 Display & Video 360 的最新資料新增至 BigQuery。
+您可以使用 Display & Video 360 連接器的 [BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)，將 Display & Video 360 的資料載入 BigQuery。透過 BigQuery 資料移轉服務，您可以安排週期性移轉工作，將 Display & Video 360 的最新資料新增至 BigQuery。
 
 ## 連接器總覽
 
@@ -25,13 +25,13 @@ Display & Video 360 連接器的 BigQuery 資料移轉服務支援下列資料�
 | 資料移轉選項 | 支援 |
 | --- | --- |
 | 受支援的報表 | Display & Video 360 連接器支援從[資料移轉第 2 版 (Display & Video DTv2) 檔案](https://developers.google.com/bid-manager/dtv2/reference/file-format?hl=zh-tw)中的報表移轉資料。 如要瞭解 Display & Video 360 報表如何轉換為 BigQuery 資料表和檢視表，請參閱「[Display & Video 360 報表轉換](https://docs.cloud.google.com/bigquery/docs/display-video-transformation?hl=zh-tw)」。 |
-| 重複頻率 | Display & Video 360 連接器支援每日資料移轉。    根據預設，資料移轉作業會安排在建立資料移轉作業時執行。您可以在[設定資料移轉作業](#set_up_dv_360_transfer)時，設定資料移轉時間。 |
+| 重複頻率 | Display & Video 360 連接器支援每日資料移轉。    根據預設，資料移轉作業會排定在建立資料移轉作業時執行。您可以在[設定資料移轉作業](#set_up_dv_360_transfer)時，設定資料移轉時間。 |
 | 重新整理時間範圍 | 執行資料移轉作業時，Display & Video 360 連接器會擷取最多 2 天前的 Display & Video 360 資料。您無法設定這個連接器的重新整理時間範圍。    詳情請參閱「[重新整理時間範圍](#refresh)」。 |
-| 補充資料可用性 | [執行資料補充作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)，擷取排定資料移轉作業以外的資料。只要在資料來源的資料保留政策允許範圍內，即可擷取資料。    如要瞭解 Display & Video 360 的資料保留政策，請參閱「[報表資料更新間隔和可用性](https://support.google.com/displayvideo/answer/6110224?hl=zh-tw)」。 |
+| 補充資料可用性 | [執行資料補充作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)，擷取排定資料移轉作業以外的資料。補充行為和資料保留期限取決於資料表類型：  * **報表資料表 (`Impression`、`Click` 和 `Activity`)：**回填作業會從 Cloud Storage bucket 載入與要求執行日期相符的 Data Transfer v2 (DTv2) 檔案。如果 bucket 中沒有與補登日期相符的 DTv2 檔案，移轉作業會以 `SUCCEEDED` 狀態完成，並載入 0 列。如要進一步瞭解 DTv2 檔案傳送和保留，請參閱「[資料移轉 2.0 版](https://developers.google.com/bid-manager/dtv2/overview?hl=zh-tw)」。 * **設定資料表：** [設定資料表](#supported_configuration_data)會擷取 Display & Video 360 API 的資源設定。只有在執行日期與排定移轉時間相差不到 24 小時，連接器才會更新這些資料表，且不會在歷來資料補充期間更新。   如要瞭解標準 Display & Video 360 報表的資料保留期限，請參閱「[報表資料更新間隔和保存期間](https://support.google.com/displayvideo/answer/6110224?hl=zh-tw)」。 |
 
 ## 支援的設定資料
 
-除了報表資料外，BigQuery 資料移轉服務也會從 Display & Video 360 移轉下列設定資料。設定資料是從 [Display & Video 360 API v3](https://developers.google.com/display-video/api/reference/rest/v3?hl=zh-tw) 擷取。
+除了報表資料外，BigQuery 資料移轉服務也會從 Display & Video 360 移轉下列設定資料。只有在移轉作業執行日期與排定的移轉時間相差不到 24 小時，系統才會從 [Display & Video 360 API v3](https://developers.google.com/display-video/api/reference/rest/v3?hl=zh-tw) 擷取設定資料。歷來資料補充期間，設定資料表不會更新。
 
 * [合作夥伴](https://developers.google.com/display-video/api/reference/rest/v3/partners?hl=zh-tw#resource:-partner)
 * [廣告主](https://developers.google.com/display-video/api/reference/rest/v3/advertisers?hl=zh-tw#resource:-advertiser)
@@ -48,7 +48,7 @@ Display & Video 360 連接器的 BigQuery 資料移轉服務支援下列資料�
 
 如要進一步瞭解各類設定資料，請參閱下列連結：
 
-* [關於合作夥伴](https://support.google.com/displayvideo/answer/7622449?hl=zh-tw)
+* [合作夥伴簡介](https://support.google.com/displayvideo/answer/7622449?hl=zh-tw)
 * [建立廣告主](https://support.google.com/displayvideo/answer/3424070?hl=zh-tw)
 * [建立委刊項](https://support.google.com/displayvideo/answer/2891312?hl=zh-tw)
 * [建立廣告活動](https://support.google.com/displayvideo/answer/7205081?hl=zh-tw)
@@ -58,13 +58,13 @@ Display & Video 360 連接器的 BigQuery 資料移轉服務支援下列資料�
 
 ## 從 Display & Video 360 移轉作業擷取資料
 
-將資料從 Display & Video 360 移轉至 BigQuery 時，資料會載入依日期分區的 BigQuery 資料表。資料載入的資料表分區會對應資料來源的日期。如果您在同一天安排多項移轉作業，BigQuery 資料移轉服務會以最新資料覆寫該日期的分區。在同一天進行多次移轉或執行補充作業，不會產生重複資料，其他日期的分區也不會受到影響。
+將資料從 Display & Video 360 移轉至 BigQuery 時，資料會載入依日期分區的 BigQuery 資料表。資料載入的資料表分區會對應至資料來源的日期。如果您在同一天安排多項移轉作業，BigQuery 資料移轉服務會以最新資料覆寫該日期的分區。在同一天進行多次移轉或執行補充作業，不會產生重複資料，其他日期的分區也不會受到影響。
 
 ### 重新整理時間範圍
 
-「更新回溯期」是指資料移轉作業發生時，資料移轉作業擷取資料的天數。舉例來說，如果重新整理時間範圍為三天，且每天進行移轉，BigQuery 資料移轉服務會從來源資料表擷取過去三天的所有資料。在本例中，每日移轉作業執行時，BigQuery 資料移轉服務會建立新的 BigQuery 目的地資料表分區，並複製當天的來源資料表資料，然後自動觸發補充執行作業，使用過去兩天的來源資料表資料更新 BigQuery 目的地資料表分區。自動觸發的回填執行作業會覆寫或增量更新 BigQuery 目的地資料表，具體取決於 BigQuery 資料移轉服務連接器是否支援增量更新。
+「更新回溯期」是指資料移轉作業發生時，資料移轉作業擷取資料的天數。舉例來說，如果更新時間範圍為三天，且每天都會進行移轉，BigQuery 資料移轉服務會從來源資料表擷取過去三天的所有資料。在本例中，每日移轉作業執行時，BigQuery 資料移轉服務會建立新的 BigQuery 目的地資料表分區，並複製當天的來源資料表資料，然後自動觸發補充執行作業，使用過去兩天的來源資料表資料更新 BigQuery 目的地資料表分區。自動觸發的回填執行作業會覆寫或增量更新 BigQuery 目的地資料表，具體取決於 BigQuery 資料移轉服務連接器是否支援增量更新。
 
-首次執行資料移轉作業時，系統會擷取重新整理時間範圍內的所有可用來源資料。舉例來說，如果更新時間範圍為三天，且您首次執行資料移轉作業，BigQuery 資料移轉服務會擷取三天內的所有來源資料。
+首次執行資料移轉作業時，系統會擷取重新整理期間內的所有可用來源資料。舉例來說，如果更新時間範圍為三天，且您首次執行資料移轉作業，BigQuery 資料移轉服務會擷取三天內的所有來源資料。
 
 如要擷取重新整理時間範圍以外的資料 (例如歷來資料)，或從任何移轉中斷或缺漏中復原資料，您可以啟動或排定[補充執行作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)。
 
@@ -78,10 +78,10 @@ Display & Video 360 連接器的 BigQuery 資料移轉服務支援下列資料�
 * [建立 BigQuery 資料集](https://docs.cloud.google.com/bigquery/docs/datasets?hl=zh-tw)，用於儲存 Display & Video 360 資料。
 * 請確認您有 Display & Video 360 [夥伴 ID](https://support.google.com/displayvideo/answer/7622449?hl=zh-tw) 或[廣告主 ID](https://support.google.com/displayvideo/answer/11415707?hl=zh-tw)。合作夥伴 ID 是階層中的父項。
 * 請確認您具備[讀取的權限](https://support.google.com/displayvideo/answer/2723011?hl=zh-tw)，可透過 Display and Video API 存取夥伴或廣告主資料。
-* 確認貴組織有權存取 Display & Video 360 資料移轉第 2 版 (Display & Video 360 DTv2) 檔案。這些檔案由 Display & Video 360 團隊在 Cloud Storage bucket 中提供。要求存取 Display & Video 360 DTv2 檔案，取決於您是否與 Display & Video 360 直接簽訂合約。無論是哪一種情況，都可能需要支付額外費用。
+* 確認貴組織有權存取 Display & Video 360 資料移轉第 2 版 (Display & Video 360 DTv2) 檔案。這些檔案由 Display & Video 360 團隊在 Cloud Storage bucket 中提供。您是否與 Display & Video 360 直接簽訂合約，會影響 Display & Video 360 DTv2 檔案的存取權要求方式。無論是哪一種情況，都可能需要支付額外費用。
 
   + 如果您與 Display & Video 360 簽訂合約，請[聯絡 Display & Video 360 支援團隊](https://support.google.com/displayvideo/answer/9026876?hl=zh-tw)，設定 Display & Video 360 DTv2 檔案。
-  + 如果您未與 Display & Video 360 簽訂合約，請與代理商聯絡，取得 Display & Video 360 DTv2 檔案的存取權。
+  + 如果您未與 Display & Video 360 簽訂合約，請與代理商聯絡，要求存取 Display & Video 360 DTv2 檔案。
   + 完成這個步驟後，您會收到下列其中一個 Cloud Storage bucket 名稱，具體取決於您是為合作夥伴或廣告主進行設定：
     - `gs://dcdt_-dbm_partnerPARTNER_ID`
     - `gs://dcdt_-dbm_advertiserADVERTISER_ID`**注意：** Google Cloud 團隊無法代您產生或授予 Display & Video 360 DTv2 檔案的存取權。如要存取 Display & Video 360 DTv2 檔案，請與 Display & Video 360 [支援團隊](https://support.google.com/displayvideo/answer/9026876?hl=zh-tw)或代理商聯絡。
@@ -108,9 +108,9 @@ Display & Video 360 連接器的 BigQuery 資料移轉服務支援下列資料�
 
 ### 控制台
 
-1. 前往 Google Cloud 控制台的「Data transfers」(資料移轉) 頁面。
+1. 前往 Google Cloud 控制台的「資料移轉」頁面。
 
-   [前往「資料移轉」頁面](https://console.cloud.google.com/bigquery/transfers?hl=zh-tw)
+   [前往「資料移轉」](https://console.cloud.google.com/bigquery/transfers?hl=zh-tw)
 2. 按一下「add 建立移轉作業」。
 3. 在「Create transfer」(建立轉移作業)頁面執行下列操作：
 
@@ -153,7 +153,7 @@ Display & Video 360 連接器的 BigQuery 資料移轉服務支援下列資料�
 * PROJECT\_ID：您的專案 ID。
 * DATASET：資料移轉設定的目標資料集。
 * NAME：資料移轉設定的顯示名稱。移轉作業名稱可以是任意值，日後需要修改移轉作業時，能夠據此識別即可。
-* PARAMETERS：所建立資料移轉設定的參數，格式為 JSON。例如 `--params='{"param":"param_value"}'`。如果是 Display & Video 360 移轉作業，則必須提供 `bucket` 和 `displayvideo_id` 參數。`file_name_prefix` 參數為選用，僅用於不常見的自訂檔案名稱。
+* PARAMETERS：JSON 格式的已建立資料移轉設定參數。例如 `--params='{"param":"param_value"}'`。如果是 Display & Video 360 移轉作業，則必須提供 `bucket` 和 `displayvideo_id` 參數。`file_name_prefix` 參數為選用，僅用於不常見的自訂檔案名稱。
 * DATA\_SOURCE：資料來源 - `displayvideo`。
 
 舉例來說，下列指令會使用 Display & Video 360 ID `123456`、Cloud Storage bucket `dcdt_-dbm_partner123456` 和目標資料集 `mydataset`，建立名為 `My Transfer` 的 Display & Video 360 資料移轉作業。
@@ -183,7 +183,7 @@ follow the instructions to retrieve an authentication code.`
 
 資料移轉至 BigQuery 時，系統會將資料寫入擷取時間分區資料表。詳情請參閱「[分區資料表簡介](https://docs.cloud.google.com/bigquery/docs/partitioned-tables?hl=zh-tw)」。
 
-建議您查詢自動產生的檢視表，而非直接查詢資料表。不過，如要直接查詢資料表，則必須在查詢中使用 `_PARTITIONTIME` 虛擬資料欄。詳情請參閱「[查詢分區資料表](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables?hl=zh-tw)」。
+建議您查詢自動生成的檢視表，而非直接查詢資料表。不過，如要直接查詢資料表，則必須在查詢中使用 `_PARTITIONTIME` 虛擬資料欄。詳情請參閱「[查詢分區資料表](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables?hl=zh-tw)」。
 
 
 
@@ -192,11 +192,11 @@ follow the instructions to retrieve an authentication code.`
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-24 (世界標準時間)。
+上次更新時間：2026-10-29 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-24 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]

@@ -250,12 +250,4 @@ bq mk
             "connector.authentication.username":"user1",
             "connector.authentication.password":"abcdef1234",
             "connector.instanceId":"dev-instance",
-            "ingestionType":"incremental",
-            "writeMode":"WRITE_MODE_UPSERT",
-            "watermarkColumns":["sys_updated_on","sys_updated_on"],
-            "primaryKeys":[["sys_id"], ["sys_id"]]}'
   ```
-
-### API
-
-請使用 [`projects.locations.transferConfigs.create`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create?hl=zh-tw) 方法，並提供

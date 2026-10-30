@@ -169,9 +169,4 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 |  | HStatsByAdvertiserTZ | *字串* | 廣告主取得統計資料的時間範圍。 |
 |  | HStatsByAudienceTZ | *字串* | 目標對象的統計資料時間範圍。 |
 |  | ImpressionDevice | *字串* | 用來觀看廣告的裝置。 |
-|  | PlatformPosition | *字串* | 平台上的位置。 |
-|  | PublisherPlatform | *字串* | 廣告發布的平台。 |
-|  | ProductId | *字串* | 廣告中宣傳的產品 ID。 |
-| **動作細目** | | | |
-|  | ActionType | *字串* | 使用者看到廣告後，即使沒有點擊，也會對廣告採取動作。 |
-|  | ActionCanvasComp |
+|  | PlatformPosition | *字串*< |

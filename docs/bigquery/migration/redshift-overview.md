@@ -252,10 +252,4 @@ BigQuery 和 Amazon Redshift 都使用欄式儲存空間，但 BigQuery 使用�
 
 #### 查詢執行
 
-BigQuery 的執行引擎與 Amazon Redshift 類似，都會將查詢分解為多個步驟 (查詢計畫)，然後執行這些步驟 (盡可能並行執行)，最後重新組合結果。Amazon Redshift 會產生靜態查詢計畫，但 BigQuery 不會，因為 BigQuery 會在查詢執行時動態最佳化查詢計畫。BigQuery 會使用遠端記憶體服務重組資料，而 Amazon Redshift 則會使用本機運算節點記憶體重組資料。如要進一步瞭解 BigQuery 如何儲存查詢計畫各階段的中繼資料，請參閱「[Google BigQuery 中的記憶體內查詢執行](https://cloud.google.com/blog/products/gcp/in-memory-query-execution-in-google-bigquery?hl=zh-tw)」。
-
-#### BigQuery 中的工作負載管理
-
-BigQuery 提供下列工作負載管理 (WLM) 控制項：
-
-* [互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)：盡快執行查詢 (預設設定)。
+BigQuery 的執行引擎與 Amazon Redshift 類似，都會將查詢分解為多個步驟 (查詢計畫)，然後執行這些步驟 (盡可能並行執行)，最後重新組合結果。Amazon Redshift 會產生靜態查詢計畫，但 BigQuery 不會，因為 BigQuery 會在查詢執行時動態最佳化查詢計畫。BigQuery 會使用遠端記憶體服務重組資料，而 Amazon Redshift 則會使用本機運算節點記憶體重組資料。如要進一步瞭解 BigQuery 如

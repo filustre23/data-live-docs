@@ -14,32 +14,31 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 你可以依據偏好儲存及分類內容。
 
-# 處理時間序列資料
+# 使用時間序列資料
 
-本文說明如何使用 SQL 函式支援時間序列分析。
+在 BigQuery 分析時間序列資料，可從一段時間內的資料點序列中，擷取有意義的趨勢。您可以使用專門的 SQL 函式匯總時間 bucket、填補缺少的資料，以及對齊未對齊的指標，為複雜的彙整和分析作業做好準備。
 
-## 簡介
+## 時間序列資料表
 
-時間序列是一連串的資料點，每個資料點都包含時間和與該時間相關聯的值。通常時間序列也會有 ID，
-用來為時間序列命名。
+時間序列是一連串資料點，每個資料點都包含時間和與該時間相關聯的值。時間序列通常也有專屬 ID。
 
-在關聯式資料庫中，時間序列會以資料表的形式建立模型，並包含下列資料欄群組：
+在關聯式資料庫中，時間序列會模擬為具有下列資料欄群組的資料表：
 
 * 時間欄
-* 可能含有分割資料欄，例如郵遞區號
-* 一或多個值資料欄，或結合多個值的 `STRUCT` 類型，例如溫度和空氣品質指數
+* 可能含有分區資料欄，例如郵遞區號
+* 一或多個值欄，或結合多個值的 `STRUCT` 類型，例如溫度和 AQI
 
-以下是時間序列資料的範例，以資料表形式呈現：
+以下範例是以資料表形式建立的時間序列資料模型：
 
 ## 匯總時間序列
 
-在時間序列分析中，時間匯總是指沿著時間軸執行的匯總作業。
+在時間序列分析中，時間匯總是沿著時間軸執行的匯總。
 
-您可以使用時間分組函式 ([`TIMESTAMP_BUCKET`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions?hl=zh-tw#timestamp_bucket)、[`DATE_BUCKET`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions?hl=zh-tw#date_bucket) 和 [`DATETIME_BUCKET`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions?hl=zh-tw#datetime_bucket))，在 BigQuery 中執行時間匯總作業。時間分組函式會將輸入的時間值對應至所屬的分組。
+您可以使用時間分桶函式 ([`TIMESTAMP_BUCKET`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions?hl=zh-tw#timestamp_bucket)、[`DATE_BUCKET`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions?hl=zh-tw#date_bucket) 和 [`DATETIME_BUCKET`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions?hl=zh-tw#datetime_bucket))，在 BigQuery 中執行時間匯總。時間分桶函式會將輸入時間值對應至所屬的分桶。
 
-通常會執行時間匯總，將時間範圍內的多個資料點合併為單一資料點，並使用匯總函式，例如 `AVG`、`MIN`、`MAX`、`COUNT` 或 `SUM`。例如 15 分鐘的平均要求延遲時間、每日最低和最高溫度，以及每日計程車行程數。
+一般來說，時間匯總會使用匯總函式 (例如 `AVG`、`MIN`、`MAX`、`COUNT` 或 `SUM`)，將時間範圍內的多個資料點合併為單一資料點。例如 15 分鐘平均要求延遲時間、每日最低和最高溫度，以及每日計程車行程數。
 
-如要執行本節中的查詢，請建立名為 `mydataset.environmental_data_hourly` 的資料表：
+請為本節中的查詢建立名為 `mydataset.environmental_data_hourly` 的資料表：
 
 ```
 CREATE OR REPLACE TABLE mydataset.environmental_data_hourly AS
@@ -96,11 +95,11 @@ SELECT * FROM UNNEST(
 ]);
 ```
 
-從上述資料中，我們發現一個有趣的現象：測量是在任意時間範圍進行，這稱為*未對齊的時間序列*。匯總功能是校正時間序列的方法之一。
+上述資料有一個有趣的觀察結果，那就是測量是在任意時間範圍內進行，稱為「未對齊的時間序列」。匯總是校正時間序列的方法之一。
 
 ### 取得 3 小時平均值
 
-下列查詢會計算每個郵遞區號的 3 小時平均空氣品質指數 (AQI) 和溫度。`TIMESTAMP_BUCKET` 函式會將每個時間值指派給特定日期，藉此執行時間彙整。
+下列查詢會計算每個郵遞區號的 3 小時平均空氣品質指數 (AQI) 和溫度。`TIMESTAMP_BUCKET` 函式會將每個時間值指派給特定日期，藉此執行時間匯總。
 
 ```
 SELECT
@@ -134,7 +133,7 @@ ORDER BY zip_code, time;
  +---------------------+----------+-----+-------------*/
 ```
 
-### 取得 3 小時的最低和最高值
+### 取得 3 小時內的最低和最高值
 
 在下列查詢中，您會計算每個郵遞區號的 3 小時最低和最高溫度：
 
@@ -170,11 +169,11 @@ ORDER BY zip_code, time;
  +---------------------+----------+-----------------+-----------------*/
 ```
 
-### 透過自訂對齊方式取得 3 小時平均值
+### 自訂對齊方式，平均 3 小時即可完成
 
-執行時間序列匯總時，您會隱性或顯性地使用特定時間序列視窗對齊方式。先前的查詢使用隱含對齊方式，因此產生的值區會從 `00:00:00`、`03:00:00` 和 `06:00:00` 等時間開始。如要在 `TIMESTAMP_BUCKET` 函式中明確設定這個對齊方式，請傳遞指定原點的選用引數。
+執行時間序列匯總時，您會隱含或明確地使用時間序列視窗的特定校正。上述查詢使用隱含對齊，產生的值區起始時間為 `00:00:00`、`03:00:00` 和 `06:00:00` 等。如要在 `TIMESTAMP_BUCKET` 函式中明確設定這個對齊方式，請傳遞指定原點的選用引數。
 
-在下列查詢中，來源設為 `2020-01-01 02:00:00`。這會變更對齊方式，並產生以 `02:00:00`、`05:00:00` 和 `08:00:00` 等時間為開頭的值區：
+在下列查詢中，起點設為 `2020-01-01 02:00:00`。這會變更對齊方式，並產生從 `02:00:00`、`05:00:00` 和 `08:00:00` 等時間開始的值區：
 
 ```
 SELECT
@@ -212,13 +211,13 @@ ORDER BY zip_code, time;
 
 ## 匯總時間序列並填補缺口
 
-有時在匯總時間序列後，資料可能會出現缺口，需要填入一些值，才能進一步分析或呈現資料。用來填補這些缺漏的技術稱為「缺漏填補」。在 BigQuery 中，您可以使用 [`GAP_FILL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions?hl=zh-tw#gap_fill) 資料表函式填補時間序列資料中的間隙，並使用下列其中一種填補間隙的方法：
+有時匯總時間序列後，資料可能會有缺口，需要填入一些值，才能進一步分析或呈現資料。填補這些缺漏的技術稱為「*填補缺漏*」。在 BigQuery 中，您可以使用 [`GAP_FILL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions?hl=zh-tw#gap_fill) 資料表函式，填補時間序列資料中的缺口，並使用下列其中一種缺口填補方法：
 
 * NULL，也稱為常數
-* LOCF (最後一次觀察結果延續)
-* 線性：兩個相鄰資料點之間的線性插值
+* LOCF (last observation carried forward)
+* 線性，兩個相鄰資料點之間的線性插值
 
-如要執行本節的查詢，請建立名為 `mydataset.environmental_data_hourly_with_gaps` 的資料表，該資料表會以先前使用的資料為基礎，但其中會有間隔。在實際情境中，資料可能會因短期氣象站故障而缺少資料點。
+針對本節中的查詢，請根據上一節使用的資料建立名為 `mydataset.environmental_data_hourly_with_gaps` 的資料表，但其中有缺漏。在實際情境中，資料可能會因為氣象站短暫故障而缺少資料點。
 
 ```
 CREATE OR REPLACE TABLE mydataset.environmental_data_hourly_with_gaps AS
@@ -269,9 +268,9 @@ SELECT * FROM UNNEST(
 ]);
 ```
 
-### 取得 3 小時的平均值 (包括間隔)
+### 取得 3 小時平均值 (包含間隔)
 
-下列查詢會計算每個郵遞區號的 3 小時平均空氣品質指數和溫度：
+下列查詢會計算每個郵遞區號的 3 小時平均 AQI 和溫度：
 
 ```
 SELECT
@@ -303,11 +302,11 @@ ORDER BY zip_code, time;
  +---------------------+----------+-----+-------------*/
 ```
 
-請注意，輸出內容在特定時間間隔會出現間隙。舉例來說，郵遞區號 `60606` 的時間序列在 `2020-09-08 12:00:00` 沒有資料點，郵遞區號 `94105` 的時間序列在 `2020-09-08 15:00:00` 沒有資料點。
+請注意，輸出內容在特定時間間隔內有缺漏。舉例來說，郵遞區號 `60606` 的時間序列在 `2020-09-08 12:00:00` 沒有資料點，而郵遞區號 `94105` 的時間序列在 `2020-09-08 15:00:00` 沒有資料點。
 
-### 取得 3 小時平均值 (填補缺口)
+### 取得 3 小時平均值 (填補空檔)
 
-使用上一節的查詢，並新增 `GAP_FILL` 函式來填補間隙：
+使用上一節的查詢，並新增 `GAP_FILL` 函式來填補缺口：
 
 ```
 WITH aggregated_3_hr AS (
@@ -350,11 +349,11 @@ ORDER BY zip_code, time;
  +---------------------+----------+------+-------------*/
 ```
 
-輸出資料表現在會在郵遞區號 `60606` 的 `2020-09-08 12:00:00` 和郵遞區號 `94105` 的 `2020-09-08 15:00:00` 遺漏資料列，並在對應的指標資料欄中顯示 `NULL` 值。由於您未指定任何填補間隙的方法，`GAP_FILL` 使用了預設的填補間隙方法 NULL。
+輸出表格現在包含 `2020-09-08 12:00:00` 處郵遞區號 `60606` 的遺漏資料列，以及 `2020-09-08 15:00:00` 處郵遞區號 `94105` 的遺漏資料列，且對應的指標欄中含有 `NULL` 值。由於您未指定任何填補方法，`GAP_FILL` 使用了預設填補方法 NULL。
 
-### 使用線性插補和 LOCF 插補填補缺漏資料
+### 使用線性填補和 LOCF 填補法填補缺口
 
-在下列查詢中，`GAP_FILL` 函式會搭配 LOCF 缺口填補方法，用於 `aqi` 資料欄，並搭配線性內插法，用於 `temperature` 資料欄：
+在下列查詢中，`GAP_FILL` 函式會與 `aqi` 欄的 LOCF 填補方法和 `temperature` 欄的線性內插法搭配使用：
 
 ```
 WITH aggregated_3_hr AS (
@@ -401,22 +400,21 @@ ORDER BY zip_code, time;
  +---------------------+----------+-----+-------------*/
 ```
 
-在這項查詢中，第一個填補間隙的資料列具有 `aqi` 值 `36`，這是取自這個時間序列 (郵遞區號 `60606`) 在 `2020-09-08 09:00:00` 的前一個資料點。`temperature` 值 `62` 是資料點 `2020-09-08 09:00:00` 和 `2020-09-08 15:00:00` 之間的線性插補結果。另一個遺漏的資料列也是以類似方式建立 - `aqi`
-值 `125` 是從這個時間序列的前一個資料點 (郵遞區號 `94105`) 延續而來，而溫度值 `65` 則是前一個和下一個可用資料點之間的線性插補結果。
+在這項查詢中，第一個填補缺口資料列的 `aqi` 值為 `36`，取自這個時間序列 (郵遞區號 `60606`) 在 `2020-09-08 09:00:00` 的前一個資料點。`temperature` 值 `62` 是資料點 `2020-09-08 09:00:00` 和 `2020-09-08 15:00:00` 之間線性內插的結果。另一個遺漏的資料列也是以類似方式建立：`aqi` 值 `125` 是從這個時間序列 (郵遞區號 `94105`) 的前一個資料點沿用而來，而溫度值 `65` 則是前一個和下一個可用資料點之間的線性內插結果。
 
-## 對齊時間序列並填補間隙
+## 使用缺口填補功能校正時間序列
 
-時間序列可以對齊或不對齊。只有在資料點以固定間隔出現時，時間序列才會對齊。
+時間序列可以對齊或不對齊。如果資料點只在固定時間間隔出現，時間序列就會對齊。
 
-在現實世界中，時間序列很少在收集時對齊，通常需要進一步處理才能對齊。
+在實際情況下，收集到的時間序列很少會對齊，通常需要進一步處理才能對齊。
 
-舉例來說，假設 IoT 裝置每分鐘都會將指標傳送至集中式收集器。要求裝置在完全相同的時間點傳送指標並不合理。通常每部裝置會以相同頻率 (週期) 傳送指標，但時間偏移 (對齊) 不同。下圖說明瞭這個範例。你可以看到每個裝置每隔一分鐘傳送資料，但有些資料會遺失 (裝置 3 位於 `9:36:39`)，有些資料則會延遲傳送 (裝置 1 位於 `9:37:28`)。
+舉例來說，假設 IoT 裝置每分鐘都會將指標傳送至集中式收集器。如果要求裝置在完全相同的時間點傳送指標，並不合理。通常，每部裝置都會以相同的頻率 (週期) 傳送指標，但時間偏移 (對齊) 不同。下圖說明這個範例。您可以看到每部裝置每隔一分鐘傳送資料，其中有些資料遺失 (裝置 3 於 `9:36:39`)，有些資料延遲 (裝置 1 於 `9:37:28`)。
 
-您可以對未對齊的資料執行*時間序列對齊*，方法是使用[時間匯總](#aggregate_a_time_series)。如果您想變更時間序列的取樣週期，例如從原始的 1 分鐘取樣週期變更為 15 分鐘週期，這項功能就非常實用。您可以對齊資料，以利後續的時間序列處理作業，例如合併時間序列資料，或用於顯示用途 (例如繪製圖表)。
+您可以使用[時間匯總](#aggregate_a_time_series)，對未對齊的資料執行*時間序列對齊*。如要變更時間序列的取樣週期，例如從原本的 1 分鐘取樣週期變更為 15 分鐘，這項功能就非常實用。您可以對齊資料，以便進一步處理時間序列 (例如彙整時間序列資料)，或用於顯示用途 (例如繪製圖表)。
 
-您可以使用 `GAP_FILL` 表格函式搭配 LOCF 或線性間隙填補方法，執行時間序列對齊作業。概念是搭配選取的輸出週期和對齊方式 (由選用的原點引數控制)，使用 `GAP_FILL`。這項作業的結果是含有校正時間序列的表格，其中每個資料點的值都是從輸入時間序列衍生而來，並採用適用於該特定值資料欄的填補間隙方法 (LOCF 或線性)。
+您可以使用 `GAP_FILL` 資料表函式，搭配 LOCF 或線性填補方法，執行時間序列對齊。這個做法是使用 `GAP_FILL`，並選取輸出週期和對齊方式 (由選用的原點引數控制)。作業結果會產生一個包含對齊時間序列的資料表，其中每個資料點的值都是從輸入時間序列衍生而來，並使用該特定值資料欄的缺口填補方法 (LOCF 或線性)。
 
-建立類似上圖的 `mydataset.device_data` 表格：
+建立資料表 `mydataset.device_data`，類似於上圖：
 
 ```
 CREATE OR REPLACE TABLE mydataset.device_data AS
@@ -458,12 +456,12 @@ SELECT * FROM mydataset.device_data ORDER BY time, device_id;
  +-----------+---------------------+--------+----------*/
 ```
 
-資料表包含每個裝置的時間序列，以及兩個指標資料欄：
+表格包含每部裝置的時間序列，並有兩個指標欄：
 
-* `signal` - 裝置在取樣時觀察到的信號強度，以介於 `0` 和 `100` 之間的整數值表示。
-* `state` - 取樣時的裝置狀態，以任意形式的字串表示。
+* `signal`：裝置在取樣時觀察到的信號等級，以 `0` 到 `100` 之間的整數值表示。
+* `state`：取樣時的裝置狀態，以任意形式的字串表示。
 
-在下列查詢中，`GAP_FILL` 函式用於以 1 分鐘間隔對齊時間序列。請注意，系統如何使用線性內插法計算 `signal` 資料欄的值，以及使用 LOCF 計算 `state` 資料欄的值。以這個範例資料來說，線性插補是計算輸出值的合適選擇。
+在下列查詢中，`GAP_FILL` 函式用於以 1 分鐘為間隔對齊時間序列。請注意，系統會使用線性內插法計算 `signal` 欄的值，並使用 LOCF 計算 `state` 欄的值。以這個範例資料來說，線性內插法是計算輸出值的合適選擇。
 
 ```
 SELECT *
@@ -494,18 +492,18 @@ ORDER BY time, device_id;
  +---------------------+-----------+--------+----------*/
 ```
 
-輸出表格會包含每個裝置和值資料欄 (`signal` 和 `state`) 的對齊時間序列，並使用函式呼叫中指定的間隙填補方法計算。
+輸出資料表包含每個裝置和值資料欄 (`signal` 和 `state`) 的對齊時間序列，這些資料欄是使用函式呼叫中指定的填補方法計算得出。
 
 ## 彙整時間序列資料
 
-您可以使用視窗化聯結或 `AS OF` 聯結，聯結時間序列資料。
+您可以使用視窗化彙整或 `AS OF` 彙整，彙整時間序列資料。
 
-### 視窗式聯結
+### 視窗化彙整
 
-有時您需要彙整兩個以上的資料表，並使用時間序列資料。請參考下列兩個資料表：
+有時您需要彙整兩個以上的時間序列資料表。請參考以下兩個表格：
 
-* ，內含每個感應器每 15 秒回報的溫度資料。`mydataset.sensor_temperatures`
-* `mydataset.sensor_fuel_rates`，內含每 15 秒由各感應器測量的燃料消耗率。
+* `mydataset.sensor_temperatures`，其中包含每個感應器每 15 秒回報的溫度資料。
+* `mydataset.sensor_fuel_rates`，其中包含每個感應器每 15 秒測得的燃料消耗率。
 
 如要建立這些資料表，請執行下列查詢：
 
@@ -563,11 +561,11 @@ SELECT * FROM mydataset.sensor_fuel_rates ORDER BY sensor_id, ts;
  +-----------+---------------------+------*/
 ```
 
-如要查看每個感應器回報溫度時的油耗率，可以彙整這兩個時間序列。
+如要查看各感應器回報溫度時的燃料消耗率，可以彙整兩個時間序列。
 
-雖然這兩個時間序列中的資料未對齊，但取樣間隔相同 (15 秒)，因此很適合用於時間區間聯結。使用[時間區間函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions?hl=zh-tw#datetime_bucket)，對齊做為聯結鍵的時間戳記。
+雖然兩個時間序列中的資料未對齊，但取樣間隔相同 (15 秒)，因此這類資料適合用於視窗化彙整。使用[時間分桶函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions?hl=zh-tw#datetime_bucket)，對齊做為彙整鍵的時間戳記。
 
-下列查詢說明如何使用 [`TIMESTAMP_BUCKET`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions?hl=zh-tw#timestamp_bucket) 函式，將每個時間戳記指派給 15 秒的視窗：
+下列查詢說明如何使用 [`TIMESTAMP_BUCKET`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions?hl=zh-tw#timestamp_bucket) 函式，將每個時間戳記指派給 15 秒的時間範圍：
 
 ```
 SELECT *, TIMESTAMP_BUCKET(ts, INTERVAL 15 SECOND) ts_window
@@ -601,7 +599,7 @@ ORDER BY sensor_id, ts;
  +-----------+---------------------+------+---------------------*/
 ```
 
-您可以運用這個概念，將燃料消耗率資料與每個感應器回報的溫度資料合併：
+您可以使用這個概念，將油耗率資料與各感應器回報的溫度彙整：
 
 ```
 SELECT
@@ -629,11 +627,11 @@ ORDER BY sensor_id, temp_ts;
  +-----------+---------------------+------+---------------------+------*/
 ```
 
-### `AS OF` 加入
+### `AS OF` join
 
-在本節中，請使用 `mydataset.sensor_temperatures` 資料表，並建立新資料表 `mydataset.sensor_location`。
+在本節中，請使用 `mydataset.sensor_temperatures` 資料表，並建立新的資料表 `mydataset.sensor_location`。
 
-`mydataset.sensor_temperatures` 資料表包含不同感應器每 15 秒回報一次的溫度資料：
+`mydataset.sensor_temperatures` 資料表包含不同感應器的溫度資料，每 15 秒回報一次：
 
 ```
 SELECT * FROM mydataset.sensor_temperatures ORDER BY sensor_id, ts;
@@ -672,13 +670,13 @@ SELECT * FROM UNNEST(
  +-----------+---------------------+------------------------*/
 ```
 
-現在，請將 `mydataset.sensor_temperatures` 的資料與 `mydataset.sensor_location` 的資料合併。
+現在，請將 `mydataset.sensor_temperatures` 的資料與 `mydataset.sensor_location` 的資料彙整。
 
-在這種情況下，由於溫度資料和位置資料並非以相同間隔回報，因此您無法使用視窗聯結。
+在這種情況下，您無法使用視窗化 join，因為溫度資料和位置資料的回報間隔不同。
 
-在 BigQuery 中，您可以將時間戳記資料轉換為範圍，並使用 [`RANGE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/range-functions?hl=zh-tw#range) 資料類型。這個範圍代表資料列的時間效期，提供資料列的有效開始和結束時間。
+在 BigQuery 中，其中一種做法是使用 [`RANGE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/range-functions?hl=zh-tw#range) 資料類型，將時間戳記資料轉換為範圍。這個範圍代表資料列的時間有效性，提供資料列有效的開始和結束時間。
 
-使用 [`LEAD`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions?hl=zh-tw#lead) window 函式，找出時間序列中相對於目前資料點的下一個資料點，也就是目前資料列時間有效性的結束界線。下列查詢會示範這項做法，將位置資料轉換為有效範圍：
+使用 [`LEAD`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions?hl=zh-tw#lead) 視窗函式，找出時間序列中相對於目前資料點的下一個資料點，這也是目前資料列時間有效性的結束邊界。下列查詢示範如何將位置資料轉換為有效範圍：
 
 ```
 WITH locations_ranges AS (
@@ -700,7 +698,7 @@ SELECT * FROM locations_ranges ORDER BY sensor_id, ts_range;
  +-----------+--------------------------------------------+------------------------*/
 ```
 
-現在您可以將溫度資料 (左側) 與位置資料 (右側) 彙整在一起：
+現在，您可以將溫度資料 (左) 與位置資料 (右) 彙整：
 
 ```
 WITH locations_ranges AS (
@@ -735,11 +733,11 @@ ORDER BY sensor_id, temp_ts;
 
 ## 合併及分割範圍資料
 
-在本節中，請合併範圍重疊的範圍資料，並將範圍資料分割成較小的範圍。
+在本節中，您將合併範圍重疊的範圍資料，並將範圍資料分割成較小的範圍。
 
 ### 合併範圍資料
 
-含有範圍值的表格可能會有重疊的範圍。在下列查詢中，時間範圍會以約 5 分鐘的間隔擷取感應器狀態：
+含有範圍值的資料表可能會有重疊的範圍。在下列查詢中，時間範圍會以大約 5 分鐘的間隔擷取感應器狀態：
 
 ```
 CREATE OR REPLACE TABLE mydataset.sensor_metrics AS
@@ -756,7 +754,7 @@ SELECT * FROM UNNEST(
 ]);
 ```
 
-下表中的查詢會顯示多個重疊範圍：
+對資料表執行下列查詢，會顯示多個重疊的範圍：
 
 ```
 SELECT * FROM mydataset.sensor_metrics;
@@ -775,8 +773,7 @@ SELECT * FROM mydataset.sensor_metrics;
  +-----------+--------------------------------------------+------+-------*/
 ```
 
-在部分重疊範圍中，`flow` 欄的值相同。
-舉例來說，第 1 列和第 2 列重疊，且讀數相同 (`flow`)。您可以合併這兩列，減少表格中的列數。您可以使用 `RANGE_SESSIONIZE` 資料表函式找出與每個資料列重疊的範圍，並提供額外的 `session_range` 資料欄，其中包含所有重疊範圍的聯集。如要顯示每列的會期範圍，請執行下列查詢：
+部分重疊範圍的 `flow` 欄值相同。舉例來說，第 1 列和第 2 列重疊，且 `flow` 讀數相同。您可以合併這兩列，減少表格中的列數。您可以使用 `RANGE_SESSIONIZE` 資料表函式，找出與每個資料列重疊的範圍，並提供額外的 `session_range` 資料欄，其中包含所有重疊範圍的聯集。如要顯示每個資料列的工作階段範圍，請執行下列查詢：
 
 ```
 SELECT sensor_id, session_range, flow
@@ -805,9 +802,9 @@ ORDER BY sensor_id, session_range;
  +-----------+--------------------------------------------+------*/
 ```
 
-請注意，如果 `sensor_id` 的值為 `2`，則第一列的結束邊界與第二列的開始邊界具有相同的日期時間值。不過，由於結束界線是互斥的，因此不會重疊 (只會相遇)，因此不在相同的工作階段範圍內。如要將這兩列放在相同的工作階段範圍，請使用 [`MEETS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/range-functions?hl=zh-tw#range_sessionize) 工作階段化模式。
+請注意，如果 `sensor_id` 的值為 `2`，則第一列的結束邊界與第二列的開始邊界具有相同的日期時間值。不過，由於結束邊界不包含在內，因此不會重疊 (僅相交)，因此不在相同的會話群組範圍內。如要將這兩列放在同一個工作階段範圍內，請使用 [`MEETS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/range-functions?hl=zh-tw#range_sessionize) 工作階段化模式。
 
-如要合併範圍，請依 `session_range` 和分割欄 (`sensor_id` 和 `flow`) 將結果分組：
+如要合併範圍，請依 `session_range` 和分區資料欄 (`sensor_id` 和 `flow`) 將結果分組：
 
 ```
 SELECT sensor_id, session_range, flow
@@ -830,7 +827,7 @@ ORDER BY sensor_id, session_range;
  +-----------+--------------------------------------------+------*/
 ```
 
-最後，使用 `SUM` 彙整工作階段資料，加入 `spins` 資料欄。
+最後，使用 `SUM` 匯總工作階段資料，新增 `spins` 資料欄。
 
 ```
 SELECT sensor_id, session_range, flow, SUM(spins) as spins
@@ -868,7 +865,7 @@ ORDER BY sensor_id, session_range;
  +-----------+--------------------------+------+-------*/
 ```
 
-現在，請將原始範圍分成 3 個月間隔：
+現在，請將原始範圍拆分為 3 個月的間隔：
 
 ```
 WITH sensor_data AS (
@@ -905,7 +902,7 @@ FROM sensor_data, UNNEST(GENERATE_RANGE_ARRAY(duration, INTERVAL 3 MONTH)) AS ex
  +-----------+--------------------------+------+-------*/
 ```
 
-在先前的查詢中，每個原始範圍都細分成較小的範圍，寬度設為 `INTERVAL 3 MONTH`。不過，這 3 個月的範圍並未對齊共同的起點。如要將這些範圍對齊至共同原點 `2020-01-01`，請執行下列查詢：
+在先前的查詢中，每個原始範圍都會細分為較小的範圍，寬度設為 `INTERVAL 3 MONTH`。不過，3 個月的範圍並未對齊共同原點。如要將這些範圍對齊共同原點 `2020-01-01`，請執行下列查詢：
 
 ```
 WITH sensor_data AS (
@@ -946,7 +943,7 @@ ON RANGE_OVERLAPS(duration, expanded_range);
  +-----------+--------------------------+------+-------*/
 ```
 
-在先前的查詢中，範圍為 `[2020-04-15, 2021-04-15)` 的資料列會分割成 5 個範圍，從 `[2020-04-01, 2020-07-01)` 範圍開始。請注意，為了與通用來源對齊，起始邊界現在會超出原始起始邊界。如果不想讓開始界線超出原始開始界線，可以限制 `JOIN` 條件：
+在先前的查詢中，範圍為 `[2020-04-15, 2021-04-15)` 的資料列會分割為 5 個範圍，從 `[2020-04-01, 2020-07-01)` 開始。請注意，起始邊界現在會延伸至原始起始邊界之外，以便與共同原點對齊。如果不想讓起始邊界超出原始起始邊界，可以限制 `JOIN` 條件：
 
 ```
 WITH sensor_data AS (
@@ -985,13 +982,13 @@ ON RANGE_CONTAINS(duration, RANGE_START(expanded_range));
  +-----------+--------------------------+------+-------*/
 ```
 
-您現在會看到範圍 `[2020-04-15, 2021-04-15)` 分割成 4 個範圍，從範圍 `[2020-07-01, 2020-10-01)` 開始。
+現在您會看到範圍 `[2020-04-15, 2021-04-15)` 已分割為 4 個範圍，從範圍 `[2020-07-01, 2020-10-01)` 開始。
 
 ## 儲存資料的最佳做法
 
-* 儲存時間序列資料時，請務必考量用於儲存資料的資料表查詢模式。一般來說，查詢時間序列資料時，您可以篩選特定時間範圍的資料。
-* 為最佳化這些使用模式，建議將時間序列資料儲存在[分區資料表](https://docs.cloud.google.com/bigquery/docs/partitioned-tables?hl=zh-tw)中，並依[時間資料欄](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables?hl=zh-tw#create_a_time-unit_column-partitioned_table)或[擷取時間](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables?hl=zh-tw#create_an_ingestion-time_partitioned_table)將資料分區。這項做法可讓 BigQuery 刪除不含查詢資料的分區，因此能大幅提升時間序列資料的查詢時間效能。
-* 您可以對時間、範圍或其中一個分割資料欄啟用[分群](https://docs.cloud.google.com/bigquery/docs/clustered-tables?hl=zh-tw)功能，進一步提升查詢時間效能。
+* 儲存時間序列資料時，請務必考量資料儲存資料表所使用的查詢模式。一般來說，查詢時間序列資料時，您可以篩選特定日期範圍的資料。
+* 如要最佳化這些使用模式，建議您將時間序列資料儲存在[分區資料表](https://docs.cloud.google.com/bigquery/docs/partitioned-tables?hl=zh-tw)中，並依[時間欄](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables?hl=zh-tw#create_a_time-unit_column-partitioned_table)或[擷取時間](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables?hl=zh-tw#create_an_ingestion-time_partitioned_table)分區資料。這項做法可讓 BigQuery 排除不含查詢資料的分區，大幅提升時間序列資料的查詢時間效能。
+* 您可以對時間、範圍或其中一個分區資料欄啟用[分群](https://docs.cloud.google.com/bigquery/docs/clustered-tables?hl=zh-tw)，進一步縮短查詢時間。
 
 
 
@@ -1000,11 +997,11 @@ ON RANGE_CONTAINS(duration, RANGE_START(expanded_range));
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-24 (世界標準時間)。
+上次更新時間：2026-10-30 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-24 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-30 (世界標準時間)。"],[],[]]

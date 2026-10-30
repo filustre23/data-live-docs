@@ -598,18 +598,3 @@ BigQuery 資料表：
 
 BigQuery 檢視畫面：
 :   content\_owner\_claim\_ad\_revenue\_summary\_weekly\_a1\_suffix
-
-#### 每月著作權聲明廣告收益
-
-YouTube 報表：
-[每月著作權聲明廣告收益](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#monthly-claim-ad-revenue)
-
-BigQuery 資料表：
-:   p\_content\_owner\_claim\_ad\_revenue\_raw\_a1\_suffix
-
-BigQuery 檢視畫面：
-:   content\_owner\_claim\_ad\_revenue\_raw\_a1\_suffix
-
-#### 每週著作權聲明廣告收益
-
-YouTube 報表：

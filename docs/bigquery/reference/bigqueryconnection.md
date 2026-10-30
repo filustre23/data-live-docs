@@ -226,8 +226,5 @@ func reportConnections(ctx context.Context, client *connection.Client, projectID
 	it := client.ListConnections(ctx, req)
 	for {
 		conn, err := it.Next()
-		if err == iterator.Done {
-			break
-		}
-		if err !=
+		if
 ```

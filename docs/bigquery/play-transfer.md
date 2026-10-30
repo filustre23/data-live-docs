@@ -208,6 +208,5 @@ import com.google.cloud.bigquery.datatransfer.v1.CreateTransferConfigRequest;
 import com.google.cloud.bigquery.datatransfer.v1.DataTransferServiceClient;
 import com.google.cloud.bigquery.datatransfer.v1.ProjectName;
 import com.google.cloud.bigquery.datatransfer.v1.TransferConfig;
-import com.google.protobuf.Struct;
-import
+import com.google.protobuf.
 ```

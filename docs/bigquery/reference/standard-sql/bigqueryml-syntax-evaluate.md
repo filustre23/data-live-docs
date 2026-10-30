@@ -519,10 +519,3 @@ ML.EVALUATE(
 
   The `MAX_OUTPUT_TOKENS` value must be in the range
   `[1,4096]`.
-
-* `TEMPERATURE`: a `FLOAT64` value that is used for
-  sampling during the response generation. It controls the
-  degree of randomness in token selection. Lower
-  `TEMPERATURE` values are good for prompts that require a more deterministic
-  and less open-ended or creative response, while higher `TEMPERATURE` values
-  can lead to more diverse or creative results. A `TEMPERATURE` value of

@@ -16,9 +16,11 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 預設連線總覽
 
-為簡化工作流程，您可以在 BigQuery 中設定預設的[Cloud 資源連結](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection?hl=zh-tw)，用於建立外部資料表和 BigQuery ML 遠端模型。管理員設定預設連線後，使用者在建立資源時即可參照該連線，不必指定連線詳細資料。
+BigQuery 中的預設 [Cloud 資源連結](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection?hl=zh-tw)可讓您建立外部資料表和 BigQuery ML 遠端模型，不必每次都指定個別連結詳細資料或管理服務帳戶權限。為專案設定預設連線後，使用者只要在 SQL 陳述式中指定 `DEFAULT` 關鍵字，即可參照該連線。
 
-BigQuery 支援下列資源中的預設連線：
+## 支援的資源和 SQL 子句
+
+BigQuery 支援下列資源的預設連線：
 
 * [Cloud Storage BigLake 資料表](https://docs.cloud.google.com/bigquery/docs/create-cloud-storage-table-biglake?hl=zh-tw)
 * [物件資料表](https://docs.cloud.google.com/bigquery/docs/object-tables?hl=zh-tw)
@@ -28,15 +30,15 @@ BigQuery 支援下列資源中的預設連線：
 如要使用預設連線，請在下列 SQL 子句中指定 `DEFAULT` 關鍵字：
 
 * [`CREATE EXTERNAL TABLE` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#create_external_table_statement)的 `WITH CONNECTION` 子句
-* 遠端模型的 [`CREATE MODEL` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw)的 `REMOTE WITH CONNECTION` 子句
+* 遠端模型的 [`CREATE MODEL` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw) `REMOTE WITH CONNECTION` 子句
 
 ## 事前準備
 
-如果尚未啟用 BigQuery Connection API，請啟用該 API。
+啟用 BigQuery Connection API (如果尚未啟用)。
 
-**啟用 API 時所需的角色**
+**啟用 API 所需的角色**
 
-如要啟用 API，您必須具備 `serviceusage.services.enable` 權限。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用情形管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「Service Usage 管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
 [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=bigqueryconnection.googleapis.com&hl=zh-tw)
 
@@ -46,21 +48,21 @@ BigQuery 支援下列資源中的預設連線：
 
 * 使用預設連線：專案的 BigQuery 連線使用者 (`roles/bigquery.connectionUser`)
 * 設定預設連線：專案的 BigQuery 連線管理員 (`roles/bigquery.connectionAdmin`)
-* 如有必要，請將權限授予預設連線的服務帳戶：
+* 如需為預設連線的服務帳戶授予權限，請按照下列步驟操作：
 
-  + 如果使用預設連線建立外部資料表：外部資料表使用的任何 Cloud Storage bucket 上的 Storage Admin (`roles/storage.admin`)。
-  + 如果使用預設連線建立遠端模型，您必須是含有 Gemini Enterprise Agent Platform 端點的專案的專案 IAM 管理員 (`roles/resourcemanager.projectIamAdmin`)。如果是下列類型的遠端模型，這就是目前的專案：
+  + 如果使用預設連線建立外部資料表：外部資料表使用的任何 Cloud Storage bucket 上的 Storage 管理員 (`roles/storage.admin`)。
+  + 如果使用預設連線建立遠端模型：在含有 Gemini Enterprise Agent Platform 端點的專案中，具備專案 IAM 管理員 (`roles/resourcemanager.projectIamAdmin`) 角色。下列類型的遠端模型，目前專案為：
 
-    - 透過 Cloud AI 服務使用遠端模型。
-    - 透過指定模型名稱做為端點，建立 Google 或合作夥伴模型。
+    - Cloud AI 服務的遠端模型。
+    - Google 或合作夥伴模型上的遠端模型，您透過指定模型名稱做為端點來建立。
 
-    如果是其他所有遠端模型，這個專案會包含目標模型部署到的 Agent Platform 端點。
+    對於所有其他遠端模型，這是包含 Agent Platform 端點的專案，目標模型會部署至該端點。
 
-    如果您使用遠端模型分析物件資料表中的非結構化資料，且物件資料表使用的 Cloud Storage bucket 與 Agent Platform 端點位於不同專案，您也必須在物件資料表使用的 Cloud Storage bucket 上擁有 Storage 管理員 (`roles/storage.admin`) 角色。
+    如果您使用遠端模型分析物件資料表中的非結構化資料，且物件資料表使用的 Cloud Storage bucket 與 Agent Platform 端點位於不同專案，則您也必須具備物件資料表所用 Cloud Storage bucket 的 Storage 管理員 (`roles/storage.admin`) 角色。
 
-  如果您是管理員，要設定連線做為預設連線，或是使用者要使用尚未授予服務帳戶適當角色的預設連線，才需要這些角色。詳情請參閱「[設定預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw#configure_the_default_connection)」。
+  只有在下列情況下，您才需要這些角色：您是管理員，正在設定要用作預設連線的連線；或者您是使用者，正在使用尚未將適當角色授予其服務帳戶的預設連線。詳情請參閱「[設定預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw#configure_the_default_connection)」。
 
-這些預先定義的角色具備執行本文中工作所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
+這些預先定義的角色具備執行本文件所述工作所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
 #### 所需權限
 
@@ -69,9 +71,8 @@ BigQuery 支援下列資源中的預設連線：
 * 設定預設連線：`bigquery.config.*`
 * 為用於建立外部資料表的預設連線設定服務帳戶權限：`storage.buckets.getIamPolicy` 和 `storage.buckets.setIamPolicy`
 * 為用於建立遠端模型的預設連線設定服務帳戶權限：
-  + `resourcemanager.projects.getIamPolicy` 和
-    `resourcemanager.projects.setIamPolicy`
-  + 如果預設連線搭配遠端模型使用，處理物件資料表中的非結構化資料，則 `storage.buckets.getIamPolicy` 和 `storage.buckets.setIamPolicy`
+  + `resourcemanager.projects.getIamPolicy`和`resourcemanager.projects.setIamPolicy`
+  + 如果預設連線與遠端模型搭配使用，而該模型會處理物件資料表中的非結構化資料，則 `storage.buckets.getIamPolicy` 和 `storage.buckets.setIamPolicy`
 
 您或許還可透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)取得這些權限。
 
@@ -79,28 +80,28 @@ BigQuery 支援下列資源中的預設連線：
 
 如要首次設定預設連線，請使用下列其中一種方法：
 
-* 建立連線，將適當的角色指派給連線的服務帳戶，然後將連線設為預設連線。
+* 建立連線，將適當的角色授予連線的服務帳戶，然後將連線設為預設連線。
 
-  建立及設定預設連線的使用者需要 BigQuery 管理員角色，以及適當的 Storage 管理員或專案 IAM 管理員角色。預設連線使用者需要 BigQuery 連線使用者角色。
-* 建立連線，然後設為預設連線。使用預設連線時，服務會[將適當角色授予](#permissions-provisioning)預設連線的服務帳戶。
+  建立及設定預設連線的使用者，必須具備 BigQuery 管理員角色，以及 Storage 管理員或專案 IAM 管理員角色 (視情況而定)。預設連線使用者必須具備 BigQuery 連線使用者角色。
+* 建立連線，然後設為預設連線。使用預設連線時，服務會[將適當的角色授予](#permissions-provisioning)預設連線的服務帳戶。
 
-  建立及設定預設連線的使用者必須具備 BigQuery 管理員角色。預設連線使用者需要 BigQuery 連線使用者角色，以及適用的 Storage 管理員或專案 IAM 管理員角色。
-* 在支援的陳述式中指定 `DEFAULT` 關鍵字。服務會建立連線、將適當的角色授予連線的服務帳戶，然後將連線設為預設連線。
+  建立及設定預設連線的使用者必須具備 BigQuery 管理員角色。預設連線使用者需要 BigQuery 連線使用者角色，以及 Storage 管理員或專案 IAM 管理員角色 (視情況而定)。
+* 在支援的陳述式中指定 `DEFAULT` 關鍵字。服務會建立連線、將適當角色授予連線的服務帳戶，然後將連線設為預設連線。
 
-  預設連線使用者需要 BigQuery 管理員角色，以及適用的 Storage 管理員或專案 IAM 管理員角色。
-* 如果缺少預設連線，BigQuery 會建立具有下列屬性的新連線：
+  預設連線使用者需要 BigQuery 管理員角色，以及 Storage 管理員或專案 IAM 管理員角色 (視情況而定)。
+* 如果沒有預設連線，BigQuery 會建立具有下列屬性的新連線：
 
   + **區域：**與資料集相同的區域。
   + **名稱：**`__default_cloudresource_connection__`
   + **類型：** `CLOUD_RESOURCE`
 
-**重要事項：** 使用預設連線可能會授予使用者額外權限。舉例來說，如果管理員使用預設連線建立物件資料表，系統會將適當 Cloud Storage bucket 的 Storage 舊版 Bucket 讀取者和 Storage 舊版物件讀取者角色，授予預設連線的服務帳戶。獲准使用連線的任何使用者，都能透過這些角色獲得的權限存取該 Cloud Storage bucket。
+**重要事項：** 使用預設連線可能會將額外權限授予使用者。舉例來說，如果管理員使用預設連線建立物件資料表，系統會將適當 Cloud Storage bucket 的「Storage 舊版 bucket 讀取者」和「Storage 舊版物件讀取者」角色，授予預設連線的服務帳戶。任何獲准使用連線的使用者，也能透過這些角色授予的權限，存取該 Cloud Storage bucket。
 
-## 為專案設定預設連線
+## 設定專案的預設連線
 
-使用 [`ALTER PROJECT SET OPTIONS` DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_project_set_options_statement)，為專案設定預設的 Cloud 資源連結。
+使用 [`ALTER PROJECT SET OPTIONS` DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_project_set_options_statement)，設定專案的預設 Cloud 資源連結。
 
-以下範例會為專案設定預設連線：
+以下範例會設定專案的預設連線：
 
 ```
   ALTER PROJECT PROJECT_ID
@@ -110,15 +111,15 @@ BigQuery 支援下列資源中的預設連線：
 
 更改下列內容：
 
-* `PROJECT_ID`：您要設定預設連線的專案 ID。
+* `PROJECT_ID`：要設定預設連線的專案 ID。
 * `REGION`：連線的區域。
-* `CONNECTION_ID`：要用做表格和模型預設值的連線 ID 或名稱。請只指定連線 ID 或名稱，並排除附加至名稱或 ID 的專案 ID 和區域前置字元。
+* `CONNECTION_ID`：要用做資料表和模型預設值的連線 ID 或名稱。請只指定連線 ID 或名稱，不要包含名稱或 ID 附加的專案 ID 和區域前置字元。
 
 如要進一步瞭解如何為專案設定預設連線，請參閱「[管理預設設定](https://docs.cloud.google.com/bigquery/docs/default-configuration?hl=zh-tw)」。
 
 ## 預設連線的權限佈建
 
-使用預設連線建立外部資料表或遠端模型時，如果預設連線的服務帳戶尚未具備適當角色，Google Cloud 會將這些角色授予該服務帳戶。如果您沒有外部資料表或遠端模型所用 Cloud Storage 或 Agent Platform 資源的管理權限，這項動作就會失敗。
+使用預設連線建立外部資料表或遠端模型時，如果預設連線的服務帳戶尚未具備適當角色，Google Cloud 會授予這些角色。如果您沒有 Cloud Storage 或 Agent Platform 資源的管理員權限，這項操作就會失敗。
 
 預設連線的服務帳戶會取得下列角色：
 
@@ -127,19 +128,19 @@ BigQuery 支援下列資源中的預設連線：
 | [Cloud Storage BigLake 資料表](https://docs.cloud.google.com/bigquery/docs/create-cloud-storage-table-biglake?hl=zh-tw) | Cloud Storage | `roles/storage.legacyBucketReader`  `roles/storage.legacyObjectReader` |
 | [物件資料表](https://docs.cloud.google.com/bigquery/docs/object-tables?hl=zh-tw) | Cloud Storage | `roles/storage.legacyBucketReader`  `roles/storage.legacyObjectReader` |
 | [Iceberg 代管資料表](https://docs.cloud.google.com/bigquery/docs/iceberg-tables?hl=zh-tw#create-iceberg-tables) | Cloud Storage | `roles/storage.legacyBucketWriter`  `roles/storage.legacyObjectOwner` |
-| [透過 Gemini Enterprise Agent Platform 模型使用 BigQuery ML 遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https?hl=zh-tw) | Google 自有模型 | `roles/aiplatform.user` |
+| [Gemini Enterprise Agent Platform 模型上的 BigQuery ML 遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https?hl=zh-tw) | Google 自有模型 | `roles/aiplatform.user` |
 | 可從 Model Garden 部署至端點 |
 | 使用者模型 |
 | 經過微調的模型 | `roles/aiplatform.serviceAgent` |
-| [透過 Cloud AI 服務使用 BigQuery ML 遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service?hl=zh-tw) | 文件處理器 | `roles/documentai.apiUser` |
-| 語音辨識器 | `roles/speech.serviceAgent` |
+| [透過 Cloud AI 服務建立 BigQuery ML 遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service?hl=zh-tw) | 文件處理器 | `roles/documentai.apiUser` |
+| 語音辨識工具 | `roles/speech.serviceAgent` |
 | Cloud NLP | `roles/serviceusage.serviceUsageConsumer` |
 | Cloud Vision | `roles/serviceusage.serviceUsageConsumer` |
 | Cloud Translation | `roles/cloudtranslate.user` |
 
 ## 使用 `CONNECTION DEFAULT` 建立外部資料表
 
-下列範例說明如何在 BigQuery 中指定 `WITH CONNECTION DEFAULT` 來建立外部資料表。
+以下範例說明如何在 BigQuery 中指定 `WITH CONNECTION DEFAULT`，建立外部資料表。
 
 ### 範例：建立 Cloud Storage BigLake 資料表
 
@@ -153,7 +154,7 @@ OPTIONS (
   uris = ['BUCKET_PATH']);
 ```
 
-### 範例：建立含有預設連線的物件資料表
+### 範例：使用預設連線建立物件資料表
 
 下列 SQL 運算式會建立具有預設連線的[物件資料表](https://docs.cloud.google.com/bigquery/docs/object-tables?hl=zh-tw)：
 
@@ -167,7 +168,7 @@ OPTIONS (
 
 ### 範例：使用預設連線建立 Iceberg 代管資料表
 
-下列 SQL 運算式會使用預設連線建立 [Iceberg 受管理資料表](https://docs.cloud.google.com/bigquery/docs/iceberg-tables?hl=zh-tw#create-iceberg-tables)：
+下列 SQL 運算式會使用預設連線建立 [Iceberg 代管資料表](https://docs.cloud.google.com/bigquery/docs/iceberg-tables?hl=zh-tw#create-iceberg-tables)：
 
 ```
 CREATE TABLE `myproject.tpch_clustered.nation` (
@@ -185,11 +186,11 @@ OPTIONS (
 
 ## 使用 `REMOTE WITH CONNECTION DEFAULT` 建立遠端模型
 
-下列範例說明如何在 BigQuery 中指定 `REMOTE WITH CONNECTION DEFAULT`，藉此建立遠端模型。
+下列範例說明如何在 BigQuery 中指定 `REMOTE WITH CONNECTION DEFAULT`，建立遠端模型。
 
-### 範例：在 Agent Platform 模型上建立遠端模型
+### 範例：依據 Agent Platform 模型建立遠端模型
 
-下列 SQL 運算式會建立具有預設連線的[遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw)：
+下列 SQL 運算式會使用預設連線建立[遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw)：
 
 ```
 CREATE OR REPLACE MODEL `mydataset.flash_model`
@@ -199,7 +200,7 @@ CREATE OR REPLACE MODEL `mydataset.flash_model`
 
 ### 範例：透過 Cloud AI 服務建立遠端模型
 
-下列 SQL 運算式會透過預設連線，在 Cloud AI 服務上建立遠端模型：
+下列 SQL 運算式會使用預設連線，[透過 Cloud AI 服務建立遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service?hl=zh-tw)：
 
 ```
 CREATE MODEL `project_id.mydataset.mymodel`
@@ -209,7 +210,7 @@ REMOTE WITH CONNECTION DEFAULT
 
 ### 範例：使用 HTTPS 端點建立遠端模型
 
-下列 SQL 運算式會[建立具有 HTTPS 端點的遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https?hl=zh-tw)和預設連線：
+下列 SQL 運算式會建立[具有 HTTPS 端點的遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https?hl=zh-tw)和預設連線：
 
 ```
 CREATE MODEL `project_id.mydataset.mymodel`
@@ -230,11 +231,11 @@ CREATE MODEL `project_id.mydataset.mymodel`
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-24 (世界標準時間)。
+上次更新時間：2026-10-29 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-24 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]

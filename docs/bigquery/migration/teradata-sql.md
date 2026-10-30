@@ -63,5 +63,4 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 | `PERIOD(TIME)` | `TIME`，`TIME` |  |
 | `PERIOD(TIME WITH TIME ZONE)` | `TIME`，`TIME` |  |
 | `UDT` | `STRING` |  |
-| `XML` | `STRING` |  |
-| `TD_ANYTYPE` |  |
+| `XML` |  |

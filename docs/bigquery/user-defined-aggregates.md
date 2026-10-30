@@ -16,21 +16,19 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 使用者定義的匯總函式
 
-本文說明如何在 BigQuery 中建立、呼叫及刪除使用者定義的匯總函式 (UDAF)。
-
-您可以使用含有程式碼的運算式，透過 UDAF 建立匯總函式。UDAF 可接受輸入資料欄、一次對一組資料列執行計算，然後將計算結果以單一值的形式傳回。
+BigQuery 的使用者定義匯總函式 (UDAF) 可讓您使用 SQL 或 JavaScript 程式碼，建構自訂匯總邏輯。您可以將輸入資料欄視為一個群組來處理，一次對多個資料列執行特殊計算，並以單一值的形式傳回結果。
 
 ## 建立 SQL UDAF
 
 本節說明在 BigQuery 中建立永久或暫時 SQL UDAF 的各種方法。
 
-### 建立永久性 SQL UDAF
+### 建立永久 SQL UDAF
 
-您可以建立永久性 SQL UDAF，也就是在多個查詢中重複使用 UDAF。如果擁有者之間共用持續性 UDAF，則可安全地呼叫這些 UDAF。UDAF 無法變更資料、與外部系統通訊，或將記錄傳送至 Google Cloud Observability 或類似應用程式。
+您可以建立永久 SQL UDAF，在多項查詢中重複使用。在擁有者之間共用時，呼叫永久 UDAF 是安全的。UDAF 無法變更資料、與外部系統通訊，或將記錄傳送至 Google Cloud Observability 或類似應用程式。
 
-如要建立永久性 UDAF，請使用[`CREATE AGGREGATE FUNCTION` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#sql-create-udaf-function)，但不要使用 `TEMP` 或 `TEMPORARY` 關鍵字。您必須在函式路徑中加入資料集。
+如要建立永久 UDAF，請使用[`CREATE AGGREGATE FUNCTION` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#sql-create-udaf-function)，但不使用 `TEMP` 或 `TEMPORARY` 關鍵字。您必須在函式路徑中加入資料集。
 
-舉例來說，下列查詢會建立名為 `ScaledAverage` 的永久性 UDAF：
+舉例來說，下列查詢會建立名為 `ScaledAverage` 的永久 UDAF：
 
 ```
 CREATE AGGREGATE FUNCTION myproject.mydataset.ScaledAverage(
@@ -42,11 +40,11 @@ AS (
 );
 ```
 
-### 建立暫時性 SQL UDAF
+### 建立臨時 SQL UDAF
 
-您可以建立暫時性 SQL UDAF，也就是說，UDAF 只存在於單一查詢、指令碼、工作階段或程序的範圍內。
+您可以建立暫時性的 SQL UDAF，也就是只存在於單一查詢、指令碼、工作階段或程序範圍內的 UDAF。
 
-如要建立暫時性 UDAF，請使用 [`CREATE AGGREGATE FUNCTION` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#sql-create-udaf-function)，並搭配 `TEMP` 或 `TEMPORARY` 關鍵字。
+如要建立暫時 UDAF，請使用 [`CREATE AGGREGATE FUNCTION` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#sql-create-udaf-function)和 `TEMP` 或 `TEMPORARY` 關鍵字。
 
 舉例來說，下列查詢會建立名為 `ScaledAverage` 的臨時 UDAF：
 
@@ -62,11 +60,11 @@ AS (
 
 ### 使用匯總和非匯總參數
 
-您可以建立同時具有匯總和非匯總參數的 SQL UDAF。
+您可以建立同時包含匯總和非匯總參數的 SQL UDAF。
 
 UDAF 通常會匯總[群組](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw#group_by_clause)中所有資料列的函式參數。不過，您可以使用 `NOT AGGREGATE` 關鍵字，將函式參數指定為非匯總。
 
-非匯總函式參數是純量函式參數，群組中所有資料列的值都相同。有效的非匯總函式參數必須是常值。在 UDAF 定義中，匯總函式參數只能做為匯總函式呼叫的函式引數。對非聚合函式參數的參照可出現在 UDAF 定義中的任何位置。
+非匯總函式參數是純量函式參數，群組中所有資料列的值都相同。有效的非匯總函式參數必須是常值。在 UDAF 定義中，匯總函式參數只能做為匯總函式呼叫的函式引數。非匯總函式參數的參照可以出現在 UDAF 定義中的任何位置。
 
 舉例來說，下列函式包含名為 `dividend` 的匯總參數，以及名為 `divisor` 的非匯總參數：
 
@@ -83,9 +81,9 @@ AS (
 
 ### 在函式主體中使用預設專案
 
-在 SQL UDAF 的主體中，凡是參照 BigQuery 實體 (例如資料表或檢視區塊)，都必須包含專案 ID，除非實體位於包含 UDAF 的專案中。
+在 SQL UDAF 的主體中，任何對 BigQuery 實體 (例如資料表或檢視表) 的參照都必須包含專案 ID，除非該實體與 UDAF 位於同一個專案。
 
-舉例來說，請看以下陳述：
+例如，請看以下陳述式：
 
 ```
 CREATE AGGREGATE FUNCTION project1.dataset_a.ScaledAverage(
@@ -97,7 +95,7 @@ AS (
 );
 ```
 
-如果您在 `project1` 專案中執行上述陳述式，該陳述式會成功，因為 `project1` 中存在 `my_table`。不過，如果您從其他專案執行上述陳述式，該陳述式就會失敗。如要修正錯誤，請在表格參照中加入專案 ID：
+如果您在 `project1` 專案中執行上述陳述式，陳述式會成功，因為 `my_table` 存在於 `project1` 中。不過，如果您從其他專案執行上述陳述式，陳述式會失敗。如要修正錯誤，請在資料表參照中加入專案 ID：
 
 ```
 CREATE AGGREGATE FUNCTION project1.dataset_a.ScaledAverage(
@@ -109,7 +107,7 @@ AS (
 );
 ```
 
-您也可以參照其他專案或資料集中的實體，不必與建立函式的專案或資料集相同：
+您也可以參照其他專案或資料集中的實體，而非建立函式的專案或資料集：
 
 ```
 CREATE AGGREGATE FUNCTION project1.dataset_a.ScaledAverage(
@@ -123,20 +121,20 @@ AS (
 
 ## 建立 JavaScript UDAF
 
-本節說明在 BigQuery 中建立 JavaScript UDAF 的各種方式。建立 JavaScript UDAF 時，請遵守下列幾項規則：
+本節說明在 BigQuery 中建立 JavaScript UDAF 的各種方式。建立 JavaScript UDAF 時，請遵守下列規則：
 
-* JavaScript UDAF 的主體必須是代表 JavaScript 程式碼的引號字串文字。如要進一步瞭解可使用的不同類型引號字串文字，請參閱「[引號文字格式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#quoted_literals)」。
-* 系統只允許特定類型的編碼。詳情請參閱「[JavaScript UDAF 中允許的 SQL 類型編碼](#javascript-type-encodings)」。
-* JavaScript 函式主體必須包含四個 JavaScript 函式，用於初始化、彙整、合併及完成 JavaScript UDAF 的結果 (`initialState`、`aggregate`、`merge` 和 `finalize`)。詳情請參閱[必要的 JavaScript 彙整函式](#required-javascript-aggregate-functions)。
-* `initialState` 函式傳回的任何值，或在呼叫 `aggregate` 或 `merge` 函式後留在 `state` 引數中的任何值，都必須可序列化。如要處理無法序列化的匯總資料 (例如函式或符號欄位)，請務必使用內含的 `serialize` 和 `deserialize` 函式。詳情請參閱「[在 JavaScript UDAF 中序列化及還原序列化資料](#serialize-javascript-udaf)」。
+* JavaScript UDAF 的主體必須是以引號括住的字串文字，代表 JavaScript 程式碼。如要進一步瞭解可使用的不同類型引號字串文字，請參閱「[引號文字格式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#quoted_literals)」。
+* 僅允許特定類型編碼。詳情請參閱「[JavaScript UDAF 允許的 SQL 類型編碼](#javascript-type-encodings)」。
+* JavaScript 函式主體必須包含四個 JavaScript 函式，用於初始化、匯總、合併及完成 JavaScript UDAF 的結果 (`initialState`、`aggregate`、`merge` 和 `finalize`)。詳情請參閱「[必要的 JavaScript 匯總函式](#required-javascript-aggregate-functions)」。
+* `initialState` 函式傳回的任何值，或在呼叫 `aggregate` 或 `merge` 函式後留在 `state` 引數中的任何值，都必須可序列化。如要使用不可序列化的匯總資料 (例如函式或符號欄位)，則必須使用內含的 `serialize` 和 `deserialize` 函式。詳情請參閱「[在 JavaScript UDAF 中序列化及反序列化資料](#serialize-javascript-udaf)」。
 
-### 建立永久性 JavaScript UDAF
+### 建立永久 JavaScript UDAF
 
-您可以建立永久性 JavaScript UDAF，也就是在多個查詢中重複使用 UDAF。如果擁有者之間共用持續性 UDAF，則可安全地呼叫這些 UDAF。UDAF 無法變更資料、與外部系統通訊，或將記錄傳送至 Google Cloud Observability 或類似應用程式。
+您可以建立永久 JavaScript UDAF，在多項查詢中重複使用。在擁有者之間共用時，呼叫永久 UDAF 是安全的。UDAF 無法變更資料、與外部系統通訊，或將記錄傳送至 Google Cloud Observability 或類似應用程式。
 
-如要建立永久性 UDAF，請使用[`CREATE AGGREGATE FUNCTION` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#javascript-create-udaf-function)，但不要使用 `TEMP` 或 `TEMPORARY` 關鍵字。您必須在函式路徑中加入資料集。
+如要建立永久 UDAF，請使用 [`CREATE AGGREGATE FUNCTION` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#javascript-create-udaf-function)，但不使用 `TEMP` 或 `TEMPORARY` 關鍵字。您必須在函式路徑中加入資料集。
 
-下列查詢會建立名為 `SumPositive` 的永久性 JavaScript UDAF：
+下列查詢會建立名為 `SumPositive` 的永久 JavaScript UDAF：
 
 ```
 CREATE OR REPLACE AGGREGATE FUNCTION my_project.my_dataset.SumPositive(x FLOAT64)
@@ -173,13 +171,13 @@ SELECT my_project.my_dataset.SumPositive(x) AS sum FROM numbers;
  *-----*/
 ```
 
-### 建立暫時性 JavaScript UDAF
+### 建立暫時 JavaScript UDAF
 
-您可以建立暫時性 JavaScript UDAF，也就是說，UDAF 只存在於單一查詢、指令碼、工作階段或程序的範圍內。
+您可以建立暫時性的 JavaScript UDAF，也就是說，UDAF 只存在於單一查詢、指令碼、工作階段或程序的範圍內。
 
-如要建立暫時性 UDAF，請使用 [`CREATE AGGREGATE FUNCTION` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#javascript-create-udaf-function)，並搭配 `TEMP` 或 `TEMPORARY` 關鍵字。
+如要建立暫時 UDAF，請使用 [`CREATE AGGREGATE FUNCTION` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#javascript-create-udaf-function)和 `TEMP` 或 `TEMPORARY` 關鍵字。
 
-下列查詢會建立名為 `SumPositive` 的暫時性 JavaScript UDAF：
+下列查詢會建立名為 `SumPositive` 的臨時 JavaScript UDAF：
 
 ```
 CREATE TEMP AGGREGATE FUNCTION SumPositive(x FLOAT64)
@@ -222,9 +220,9 @@ SELECT SumPositive(x) AS sum FROM numbers;
 
 UDAF 通常會匯總[群組](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw#group_by_clause)中所有資料列的函式參數。不過，您可以使用 `NOT AGGREGATE` 關鍵字，將函式參數指定為非匯總。
 
-非匯總函式參數是純量函式參數，群組中所有資料列的值都相同。有效的非匯總函式參數必須是常值。在 UDAF 定義中，匯總函式參數只能做為匯總函式呼叫的函式引數。對非聚合函式參數的參照可出現在 UDAF 定義中的任何位置。
+非匯總函式參數是純量函式參數，群組中所有資料列的值都相同。有效的非匯總函式參數必須是常值。在 UDAF 定義中，匯總函式參數只能做為匯總函式呼叫的函式引數。非匯總函式參數的參照可以出現在 UDAF 定義中的任何位置。
 
-在下列範例中，JavaScript UDAF 包含名為 `s` 的匯總參數，以及名為 `delimiter` 的非匯總參數：
+在以下範例中，JavaScript UDAF 包含名為 `s` 的匯總參數，以及名為 `delimiter` 的非匯總參數：
 
 ```
 CREATE TEMP AGGREGATE FUNCTION JsStringAgg(
@@ -261,9 +259,9 @@ SELECT JsStringAgg(values, '.') AS result FROM strings;
  *-----------------*/
 ```
 
-### 在 JavaScript UDAF 中序列化及還原序列化資料
+### 在 JavaScript UDAF 中序列化及反序列化資料
 
-BigQuery 必須序列化 `initialState` 函式傳回的任何物件，或在呼叫 `aggregate` 或 `merge` 函式後，留在 `state` 引數中的物件。如果物件的所有欄位都屬於下列其中一種，BigQuery 就支援序列化物件：
+BigQuery 必須序列化 `initialState` 函式傳回的任何物件，或在呼叫 `aggregate` 或 `merge` 函式後留在 `state` 引數中的任何物件。如果所有欄位都符合下列任一條件，BigQuery 支援序列化物件：
 
 * JavaScript 原始值 (例如：`2`、`"abc"`、`null`、`undefined`)。
 * BigQuery 支援序列化所有欄位值的 JavaScript 物件。
@@ -299,9 +297,9 @@ export function initialState() {
 }
 ```
 
-如要使用無法序列化的匯總狀態，JavaScript UDAF 必須包含 `serialize` 和 `deserialize` 函式。`serialize` 函式會將聚合狀態轉換為可序列化的物件；`deserialize` 函式則會將可序列化的物件轉換回聚合狀態。
+如要使用不可序列化的匯總狀態，JavaScript UDAF 必須包含 `serialize` 和 `deserialize` 函式。`serialize` 函式會將匯總狀態轉換為可序列化物件；`deserialize` 函式則會將可序列化物件轉換回匯總狀態。
 
-在下列範例中，外部程式庫會使用介面計算總和：
+在以下範例中，外部程式庫會使用介面計算總和：
 
 ```
 export class SumAggregator {
@@ -317,7 +315,7 @@ export class SumAggregator {
 }
 ```
 
-由於類別內有函式，因此 `SumAggregator` 類別物件無法進行 BigQuery 序列化，導致下列查詢無法執行。
+下列查詢不會執行，因為 `SumAggregator` 類別物件中含有函式，因此無法序列化為 BigQuery。
 
 ```
 CREATE TEMP AGGREGATE FUNCTION F(x FLOAT64)
@@ -361,7 +359,7 @@ AS r'''
 SELECT F(x) AS results FROM UNNEST([1,2,3,4]) AS x;
 ```
 
-如果您將 `serialize` 和 `deserialize` 函式新增至上述查詢，查詢就會執行，因為 `SumAggregator` 類別物件會轉換為可供 BigQuery 序列化的物件，然後再轉換回 `SumAggregator` 類別物件。
+如果您在上述查詢中加入 `serialize` 和 `deserialize` 函式，查詢就會執行，因為 `SumAggregator` 類別物件會轉換為可由 BigQuery 序列化的物件，然後再轉換回 `SumAggregator` 類別物件。
 
 ```
 CREATE TEMP AGGREGATE FUNCTION F(x FLOAT64)
@@ -420,15 +418,15 @@ SELECT F(x) AS results FROM UNNEST([1,2,3,4]) AS x;
  *-----------------*/
 ```
 
-如要進一步瞭解序列化函式，請參閱[選用的 JavaScript 序列化函式](#javascript-serialization-functions)。
+如要進一步瞭解序列化函式，請參閱「[選用的 JavaScript 序列化函式](#javascript-serialization-functions)」。
 
 ### 在 JavaScript UDAF 中加入全域變數和自訂函式
 
-JavaScript 函式主體可以包含自訂 JavaScript 程式碼，例如 JavaScript 全域變數和自訂函式。
+JavaScript 函式主體可包含自訂 JavaScript 程式碼，例如 JavaScript 全域變數和自訂函式。
 
-JavaScript 載入 BigQuery 時，系統會執行全域變數，然後再執行 `initialState` 函式。如果您需要執行一次性的初始化作業，且不應針對每個匯總群組重複執行，則全域變數可能很有用，就像 `initialState`、`aggregate`、`merge` 和 `finalize` 函式的情況一樣。
+JavaScript 載入 BigQuery 後，系統會先執行全域變數，再執行 `initialState` 函式。如果您需要執行一次性初始化工作，且不應為每個匯總群組重複執行，則全域變數可能會很有用，就像 `initialState`、`aggregate`、`merge` 和 `finalize` 函式一樣。
 
-請勿使用全域變數儲存匯總狀態。請改為將匯總狀態限制為傳遞至匯出函式的物件。請只使用全域變數，快取不屬於任何特定匯總作業的昂貴作業。
+請勿使用全域變數儲存匯總狀態。請改為將匯總狀態限制為傳遞至匯出函式的物件。請只使用全域變數來快取昂貴的作業，且這些作業不屬於任何特定匯總作業。
 
 在下列查詢中，`SumOfPrimes` 函式會計算總和，但只有質數會納入計算。在 JavaScript 函式主體中，有兩個全域變數 `primes` 和 `maxTested`，會先初始化。此外，還有一個名為 `isPrime` 的自訂函式，可檢查數字是否為質數。
 
@@ -497,9 +495,9 @@ SELECT SumOfPrimes(x) AS sum FROM numbers;
 
 ### 加入 JavaScript 程式庫
 
-您可以使用 `OPTIONS` 子句中的 `library` 選項，擴充 JavaScript UDAF。這個選項可讓您為 JavaScript UDAF 指定外部程式碼資料庫，然後使用 `import` 宣告匯入這些程式庫。
+您可以使用 `OPTIONS` 子句中的 `library` 選項，擴充 JavaScript UDAF。這個選項可讓您為 JavaScript UDAF 指定外部程式碼程式庫，然後使用 `import` 宣告匯入這些程式庫。
 
-在下列範例中，`bar.js` 中的程式碼可供 JavaScript UDAF 函式主體中的任何程式碼使用：
+在以下範例中，JavaScript UDAF 函式主體中的任何程式碼，都能使用 `bar.js` 中的程式碼：
 
 ```
 CREATE TEMP AGGREGATE FUNCTION JsAggFn(x FLOAT64)
@@ -529,35 +527,35 @@ AS r'''
 
 ### 必要的 JavaScript 結構
 
-與 JavaScript UDF 不同，JavaScript UDF 的函式主體是自由形式的 JavaScript，會針對每個資料列執行，而 JavaScript UDAF 的函式主體是 JavaScript 模組，內含一些內建的匯出函式，會在匯總程序的各個階段叫用。部分內建函式為必要函式，其餘則為選用函式。您也可以新增 JavaScript 函式。
+JavaScript UDF 的函式主體是任意形式的 JavaScript，會針對每個資料列執行。JavaScript UDAF 的函式主體則是 JavaScript 模組，包含一些內建的匯出函式，會在匯總程序的各個階段叫用。部分內建函式為必要，其餘則為選用。您也可以新增自己的 JavaScript 函式。
 
 #### 必要的 JavaScript 匯總函式
 
-您可以加入 JavaScript 函式，但 JavaScript 函式主體必須包含下列可匯出的 JavaScript 函式：
+您可以加入自己的 JavaScript 函式，但 JavaScript 函式主體必須包含下列可匯出的 JavaScript 函式：
 
 * `initialState([nonAggregateParam])`：傳回 JavaScript 物件，代表尚未匯總任何資料列的匯總狀態。
-* `aggregate(state, aggregateParam[, ...][, nonAggregateParam])`：匯總一列資料，更新狀態以儲存匯總結果。不會傳回值。
-* `merge(state, partialState, [nonAggregateParam])`：將匯總狀態 `partialState` 合併至匯總狀態 `state`。當引擎平行彙整不同部分的資料，且需要合併結果時，就會使用這個函式。不會傳回值。
-* `finalize(finalState, [nonAggregateParam])`：根據最終匯總狀態 `finalState`，傳回匯總函式的最終結果。
+* `aggregate(state, aggregateParam[, ...][, nonAggregateParam])`：匯總一列資料，並更新狀態來儲存匯總結果。不傳回值。
+* `merge(state, partialState, [nonAggregateParam])`：將匯總狀態 `partialState` 合併至匯總狀態 `state`。當引擎平行匯總不同資料區段，且需要合併結果時，就會使用這個函式。不會傳回值。
+* `finalize(finalState, [nonAggregateParam])`：在指定最終匯總狀態 `finalState` 的情況下，傳回匯總函式的最終結果。
 
 如要進一步瞭解必要函式，請參閱「[JavaScript UDAF 中的必要函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#javascript-interface-functions-udaf)」。
 
 #### 選用的 JavaScript 序列化函式
 
-如要使用無法序列化的匯總狀態，JavaScript UDAF 必須提供 `serialize` 和 `deserialize` 函式。`serialize` 函式會將匯總狀態轉換為可序列化為 BigQuery 的物件；`deserialize` 函式則會將可序列化為 BigQuery 的物件轉換回匯總狀態。
+如要使用不可序列化的匯總狀態，JavaScript UDAF 必須提供 `serialize` 和 `deserialize` 函式。`serialize` 函式會將匯總狀態轉換為 BigQuery 可序列化物件；`deserialize` 函式會將 BigQuery 可序列化物件轉換回匯總狀態。
 
-* `serialize(state)`：傳回可序列化的物件，其中包含匯總狀態的資訊，可透過 `deserialize` 函式還原序列化。
-* `deserialize(serializedState)`：將 `serializedState` (先前由 `serialize` 函式序列化) 還原序列化為可傳遞至 `serialize`、`aggregate`、`merge` 或 `finalize` 函式的匯總狀態。
+* `serialize(state)`：傳回可序列化的物件，其中包含匯總狀態的資訊，可透過 `deserialize` 函式反序列化。
+* `deserialize(serializedState)`：將 `serializedState` (先前由 `serialize` 函式序列化) 反序列化為可傳遞至 `serialize`、`aggregate`、`merge` 或 `finalize` 函式的匯總狀態。
 
 如要進一步瞭解內建的 JavaScript 序列化函式，請參閱「[JavaScript UDAF 的序列化函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#javascript-serialization-functions-udaf)」。
 
-如要瞭解如何使用 JavaScript UDAF 序列化及還原序列化資料，請參閱「[在 JavaScript UDAF 中序列化及還原序列化資料](#serialize-javascript-udaf)」。
+如要瞭解如何使用 JavaScript UDAF 序列化及反序列化資料，請參閱「[在 JavaScript UDAF 中序列化及反序列化資料](#serialize-javascript-udaf)」。
 
 ### JavaScript UDAF 中允許的 SQL 類型編碼
 
-在 JavaScript UDAF 中，下列支援的 [GoogleSQL 資料類型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw)會以如下方式表示 [JavaScript 資料類型](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects)：
+在 JavaScript UDAF 中，下列支援的 [GoogleSQL 資料類型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw)代表 [JavaScript 資料類型](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects)，如下所示：
 
-| GoogleSQL  資料類型 | JavaScript  資料類型 | 附註 |
+| GoogleSQL  資料類型 | JavaScript   資料類型 | 附註 |
 | --- | --- | --- |
 | `ARRAY` | `Array` | 不支援陣列的陣列。如要突破這項限制，請使用 `Array<Object<Array>>` (JavaScript) 和 `ARRAY<STRUCT<ARRAY>>` (GoogleSQL) 資料類型。 |
 | `BIGNUMERIC` | `Number` 或 `String` | 與 `NUMERIC` 相同。 |
@@ -566,25 +564,25 @@ AS r'''
 | `DATE` | `Date` |  |
 | `FLOAT64` | `Number` |  |
 | `INT64` | `BigInt` |  |
-| `JSON` | 各種類型 | GoogleSQL `JSON` 資料類型可以轉換為 JavaScript `Object`、`Array` 或其他 GoogleSQL 支援的 JavaScript 資料類型。 |
-| `NUMERIC` | `Number` 或 `String` | 如果 `NUMERIC` 值能夠以 [IEEE 754 浮點](https://en.wikipedia.org/wiki/Floating-point_arithmetic#IEEE_754:_floating_point_in_modern_computers)值準確表示 (範圍 `[-253, 253]`)，且沒有任何小數部分，則可以當成 `Number` 資料類型加以編碼，否則會編碼為 `String` 資料類型。 |
+| `JSON` | 多種類型 | GoogleSQL `JSON` 資料類型可轉換為 JavaScript `Object`、`Array` 或其他 GoogleSQL 支援的 JavaScript 資料類型。 |
+| `NUMERIC` | `Number` 或 `String` | 如果 `NUMERIC` 值可以完全表示為 [IEEE 754 浮點](https://en.wikipedia.org/wiki/Floating-point_arithmetic#IEEE_754:_floating_point_in_modern_computers)值 (範圍 `[-253, 253]`)，且沒有小數部分，則會編碼為 `Number` 資料類型，否則會編碼為 `String` 資料類型。 |
 | `STRING` | `String` |  |
-| `STRUCT` | `Object` | 每個 `STRUCT` 欄位都是 `Object` 資料類型中的具名屬性。系統不支援未命名的 `STRUCT` 欄位。 |
-| `TIMESTAMP` | `Date` | `Date` 包含微秒欄位，其中含有 `TIMESTAMP` 的微秒部分。 |
+| `STRUCT` | `Object` | 每個 `STRUCT` 欄位都是 `Object` 資料類型中的具名屬性。不支援未命名的 `STRUCT` 欄位。 |
+| `TIMESTAMP` | `Date` | `Date` 包含微秒欄位，微秒分數為 `TIMESTAMP`。 |
 
-**注意：** JavaScript UDAF 的 SQL 編碼與 JavaScript UDF 的不同。
+**注意：** JavaScript UDAF 的 SQL 編碼與 JavaScript UDF 的 SQL 編碼不同。
 
 ## 呼叫 UDAF
 
-本節說明在 BigQuery 中建立持續性或暫時性 UDAF 後，可以呼叫該 UDAF 的各種方式。
+本節說明在 BigQuery 建立永久或暫時 UDAF 後，呼叫 UDAF 的各種方式。
 
 **注意：** JavaScript UDAF 呼叫不支援 `ORDER BY` 子句。
 
 ### 呼叫永久 UDAF
 
-呼叫永久 UDAF 的方式與呼叫內建匯總函式相同。詳情請參閱「[匯總函式呼叫](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls?hl=zh-tw)」。您必須在函式路徑中加入資料集。
+您可以呼叫永久 UDAF，方法與呼叫內建匯總函式相同。詳情請參閱「[匯總函式呼叫](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls?hl=zh-tw)」。您必須在函式路徑中加入資料集。
 
-在下列範例中，查詢會呼叫名為 `WeightedAverage` 的永久 UDAF：
+在以下範例中，查詢會呼叫名為 `WeightedAverage` 的永久 UDAF：
 
 ```
 SELECT my_project.my_dataset.WeightedAverage(item, weight, 2) AS weighted_average
@@ -595,7 +593,7 @@ FROM (
 );
 ```
 
-系統會產生下表結果：
+系統會產生包含下列結果的表格：
 
 ```
 /*------------------*
@@ -607,11 +605,11 @@ FROM (
 
 ### 呼叫臨時 UDAF
 
-呼叫暫時性 UDAF 的方式與呼叫內建匯總函式相同。詳情請參閱「[匯總函式呼叫](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls?hl=zh-tw)」。
+您可以呼叫暫時 UDAF，方法與呼叫內建匯總函式相同。詳情請參閱「[匯總函式呼叫](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls?hl=zh-tw)」。
 
-臨時函式必須包含在含有 UDAF 函式呼叫的[多重陳述式查詢](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries?hl=zh-tw)或[程序](https://docs.cloud.google.com/bigquery/docs/procedures?hl=zh-tw)中。
+暫時函式必須包含在[多重陳述式查詢](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries?hl=zh-tw)或[程序](https://docs.cloud.google.com/bigquery/docs/procedures?hl=zh-tw)中，且該查詢或程序包含 UDAF 函式呼叫。
 
-在以下範例中，查詢會呼叫名為 `WeightedAverage` 的暫時性 UDAF：
+在以下範例中，查詢會呼叫名為 `WeightedAverage` 的臨時 UDAF：
 
 ```
 CREATE TEMP AGGREGATE FUNCTION WeightedAverage(...)
@@ -625,7 +623,7 @@ FROM (
 );
 ```
 
-系統會產生下表結果：
+系統會產生包含下列結果的表格：
 
 ```
 /*------------------*
@@ -637,9 +635,9 @@ FROM (
 
 ### 忽略或納入含有 `NULL` 值的資料列
 
-使用 `IGNORE NULLS` 引數呼叫 JavaScript UDAF 時，BigQuery 會自動略過任何匯總引數評估為 `NULL` 的資料列。這類資料列會完全排除在匯總作業之外，且不會傳遞至 JavaScript `aggregate` 函式。提供 `RESPECT NULLS` 引數時，系統會停用 `NULL` 篩選，並將每個資料列傳遞至 JavaScript UDAF，不論 `NULL` 值為何。
+使用 `IGNORE NULLS` 引數呼叫 JavaScript UDAF 時，BigQuery 會自動略過任何匯總引數評估為 `NULL` 的資料列。這類資料列會完全從匯總中排除，不會傳遞至 JavaScript `aggregate` 函式。如果提供 `RESPECT NULLS` 引數，系統會停用 `NULL` 篩選功能，並將每個資料列傳遞至 JavaScript UDAF，無論 `NULL` 值為何。
 
-如果未提供 `IGNORE NULLS` 和 `RESPECT NULLS` 引數，預設引數為 `IGNORE NULLS`。
+如果未提供 `IGNORE NULLS` 或 `RESPECT NULLS` 引數，預設引數為 `IGNORE NULLS`。
 
 以下範例說明預設的 `NULL` 行為、`IGNORE NULLS` 行為和 `RESPECT NULLS` 行為：
 
@@ -690,29 +688,29 @@ FROM numbers;
 
 ## 刪除 UDAF
 
-本節說明在 BigQuery 中建立永久或暫時 UDAF 後，可以透過哪些方式刪除。
+本節說明在 BigQuery 建立永久或暫時 UDAF 後，刪除 UDAF 的各種方式。
 
 ### 刪除永久 UDAF
 
-如要刪除永久性 UDAF，請使用 [`DROP FUNCTION` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#drop_function_statement)。您必須在函式路徑中加入資料集。
+如要刪除永久 UDAF，請使用 [`DROP FUNCTION` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#drop_function_statement)。您必須在函式路徑中加入資料集。
 
-在下列範例中，查詢會刪除名為 `WeightedAverage` 的永久性 UDAF：
+在以下範例中，查詢會刪除名為 `WeightedAverage` 的永久 UDAF：
 
 ```
 DROP FUNCTION IF EXISTS my_project.my_dataset.WeightedAverage;
 ```
 
-### 刪除暫時性 UDAF
+### 刪除暫時 UDAF
 
-如要刪除暫時性 UDAF，請使用 [`DROP FUNCTION` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#drop_function_statement)。
+如要刪除暫時 UDAF，請使用 [`DROP FUNCTION` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#drop_function_statement)。
 
-在下列範例中，查詢會刪除名為 `WeightedAverage` 的暫時性 UDAF：
+在以下範例中，查詢會刪除名為 `WeightedAverage` 的臨時 UDAF：
 
 ```
 DROP FUNCTION IF EXISTS WeightedAverage;
 ```
 
-暫時性 UDAF 會在查詢完成時立即失效。除非您想從[多重陳述式查詢](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries?hl=zh-tw)或[程序](https://docs.cloud.google.com/bigquery/docs/procedures?hl=zh-tw)中提早移除 UDAF，否則不需要刪除。
+暫時性 UDAF 會在查詢完成時立即失效。除非您想提早從[多重陳述式查詢](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries?hl=zh-tw)或[程序](https://docs.cloud.google.com/bigquery/docs/procedures?hl=zh-tw)中移除 UDAF，否則不需要刪除 UDAF。
 
 ## 列出 UDAF
 
@@ -722,36 +720,36 @@ UDAF 是一種常式。如要列出資料集中的所有常式，請參閱「[�
 
 如要提升查詢效能，請考慮下列事項：
 
-* 預先篩選您的輸入內容。以 JavaScript 處理資料的成本高於 SQL，因此最好先盡可能在 SQL 中篩選輸入內容。
+* 預先篩選輸入內容。在 JavaScript 中處理資料的成本高於 SQL，因此建議您盡可能先在 SQL 中篩選輸入內容。
 
-  下列查詢的效率較低，因為它會在 UDAF 呼叫中使用 `x > 0` 篩選輸入內容：
+  下列查詢的效率較低，因為它在 UDAF 呼叫中使用 `x > 0` 篩選輸入內容：
 
   ```
   SELECT JsFunc(x) FROM t;
   ```
 
-  下列查詢會先使用 `WHERE x > 0` 預先篩選輸入內容，再呼叫 UDAF，因此效率更高：
+  下列查詢在呼叫 UDAF 前，會先使用 `WHERE x > 0` 預先篩選輸入內容，因此效率較高：
 
   ```
   SELECT JsFunc(x) FROM t WHERE x > 0;
   ```
-* 盡量使用內建匯總函式，而非 JavaScript。以 JavaScript 重新實作內建匯總函式，會比呼叫執行相同作業的內建匯總函式慢。
+* 盡可能使用內建匯總函式，而非 JavaScript。在 JavaScript 中重新實作內建匯總函式，速度會比呼叫執行相同作業的內建匯總函式慢。
 
-  下列查詢實作了 UDAF，因此效率較低：
+  下列查詢會實作 UDAF，因此效率較低：
 
   ```
   SELECT SumSquare(x) FROM t;
   ```
 
-  下列查詢的效率較高，因為它會實作內建函式，產生與先前查詢相同的結果：
+  下列查詢更有效率，因為它實作了內建函式，可產生與先前查詢相同的結果：
 
   ```
   SELECT SUM(x*x) FROM t;
   ```
-* JavaScript UDAF 適用於較複雜的匯總作業，這類作業無法透過內建函式表示。
-* 有效率地使用記憶體。JavaScript 處理環境限制了每個查詢可用的記憶體。如果 JavaScript UDAF 查詢累積過多本機狀態，可能會因記憶體耗盡而失敗。請特別注意盡量縮小匯總狀態物件的大小，並避免匯總狀態累積大量資料列。
+* JavaScript UDAF 適用於無法透過內建函式表示的複雜匯總作業。
+* 有效率地使用記憶體。JavaScript 處理環境為每項查詢提供的記憶體有限。如果 JavaScript UDAF 查詢累積過多本機狀態，可能會因記憶體耗盡而失敗。請特別注意，盡可能縮減匯總狀態物件的大小，並避免匯總狀態累積大量資料列。
 
-  下列查詢效率不彰，因為當處理的資料列數量變多時，`aggregate` 函式會使用無上限的記憶體。
+  下列查詢效率不佳，因為處理的資料列數量變多時，`aggregate` 函式會使用無限量的記憶體。
 
   ```
   export function initialState() {
@@ -762,12 +760,12 @@ UDAF 是一種常式。如要列出資料集中的所有常式，請參閱「[�
   }
   ...
   ```
-* 盡可能使用分區資料表。與非分區資料表相比，查詢分區資料表時，JavaScript UDAF 通常會更有效率地執行，因為分區資料表儲存資料時會分成許多較小的檔案，因此可實現更高的平行處理能力。
+* 盡可能使用分區資料表。相較於非分區資料表，JavaScript UDAF 在查詢分區資料表時通常更有效率，因為分區資料表會將資料儲存在許多較小的檔案中，因此可提高平行處理能力。
 
 ## 限制
 
-* UDAF 適用與 UDF 相同的限制。詳情請參閱「[UDF 限制](https://docs.cloud.google.com/bigquery/docs/user-defined-functions?hl=zh-tw#limitations)」。
-* 只有常值、查詢參數和指令碼變數可以做為 UDAF 的非匯總引數傳入。
+* UDAF 的限制與 UDF 相同。詳情請參閱「[UDF 限制](https://docs.cloud.google.com/bigquery/docs/user-defined-functions?hl=zh-tw#limitations)」。
+* 只有常值、查詢參數和指令碼變數，可以做為 UDAF 的非匯總引數傳入。
 * JavaScript UDAF 函式呼叫不支援使用 `ORDER BY` 子句。
 
   ```
@@ -776,11 +774,11 @@ UDAF 是一種常式。如要列出資料集中的所有常式，請參閱「[�
 
 ## 定價
 
-系統會按照標準的 [BigQuery 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw)模式，針對 UDAF 收取費用。
+UDAF 採用標準 [BigQuery 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw)模式計費。
 
 ## 配額與限制
 
-UDAF 適用的配額和限制與 UDF 相同。如要瞭解 UDF 配額，請參閱「[配額與限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#udf_limits)」。
+UDAF 的配額和限制與 UDF 相同。如要瞭解 UDF 配額，請參閱「[配額與限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#udf_limits)」。
 
 
 
@@ -789,11 +787,11 @@ UDAF 適用的配額和限制與 UDF 相同。如要瞭解 UDF 配額，請參�
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-24 (世界標準時間)。
+上次更新時間：2026-10-30 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-24 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-30 (世界標準時間)。"],[],[]]

@@ -21,9 +21,13 @@ BigQuery specific log information, and it demonstrates how
 to use BigQuery to analyze logged activity. For more information, see
 [Introduction to audit logs in BigQuery](/bigquery/docs/introduction-audit-workloads).
 
-This document lists the audited methods for BigQuery. Google Cloud services
-generate audit logs that record administrative and access activities within your Google Cloud resources.
-For more information about Cloud Audit Logs, see the following:
+Cloud Audit Logs for BigQuery let you track administrative and
+data-access operations on your resources to help you monitor access and
+configuration changes. You can query these logs in the Logs Explorer and
+check which BigQuery API methods generate Cloud Audit Logs.
+
+For more information about Cloud Audit Logs,
+see the following documents:
 
 * [Types of audit logs](/logging/docs/audit#types)
 * [Audit log entry structure](/logging/docs/audit#audit_log_entry_structure)
@@ -65,7 +69,7 @@ another when it ends. For more information see [Audit logs for long-running oper
 
 | Permission type | Methods |
 | --- | --- |
-| `ADMIN_WRITE` | `datasetservice.delete` `datasetservice.insert` `datasetservice.update` `google.cloud.bigquery.v2.DatasetService.DeleteDataset` `google.cloud.bigquery.v2.DatasetService.InsertDataset` `google.cloud.bigquery.v2.DatasetService.PatchDataset` `google.cloud.bigquery.v2.DatasetService.UndeleteDataset` `google.cloud.bigquery.v2.DatasetService.UpdateDataset` `google.cloud.bigquery.v2.JobService.CancelJob` `google.cloud.bigquery.v2.JobService.InsertJob` (LRO) `google.cloud.bigquery.v2.JobService.Query` (LRO) `google.cloud.bigquery.v2.RoutineService.DeleteRoutine` `google.cloud.bigquery.v2.RoutineService.InsertRoutine` `google.cloud.bigquery.v2.RowAccessPolicyService.BatchDeleteRowAccessPolicies` `google.cloud.bigquery.v2.RowAccessPolicyService.CreateRowAccessPolicy` `google.cloud.bigquery.v2.RowAccessPolicyService.DeleteRowAccessPolicy` `google.cloud.bigquery.v2.RowAccessPolicyService.UpdateRowAccessPolicy` `google.cloud.bigquery.v2.TableService.DeleteTable` `google.cloud.bigquery.v2.TableService.InsertTable` `google.cloud.bigquery.v2.TableService.PatchTable` `google.cloud.bigquery.v2.TableService.UpdateTable` `google.iam.v1.IAMPolicy.SetIamPolicy` `jobservice.getqueryresults` `jobservice.insert` `jobservice.query` `tabledataservice.list` `tableservice.delete` `tableservice.insert` `tableservice.update` |
+| `ADMIN_WRITE` | `datasetservice.delete` `datasetservice.insert` `datasetservice.update` `google.cloud.bigquery.v2.DatasetService.DeleteDataset` `google.cloud.bigquery.v2.DatasetService.InsertDataset` `google.cloud.bigquery.v2.DatasetService.PatchDataset` `google.cloud.bigquery.v2.DatasetService.UndeleteDataset` `google.cloud.bigquery.v2.JobService.CancelJob` `google.cloud.bigquery.v2.JobService.InsertJob` (LRO) `google.cloud.bigquery.v2.JobService.Query` (LRO) `google.cloud.bigquery.v2.RoutineService.DeleteRoutine` `google.cloud.bigquery.v2.RoutineService.InsertRoutine` `google.cloud.bigquery.v2.RowAccessPolicyService.BatchDeleteRowAccessPolicies` `google.cloud.bigquery.v2.RowAccessPolicyService.CreateRowAccessPolicy` `google.cloud.bigquery.v2.RowAccessPolicyService.DeleteRowAccessPolicy` `google.cloud.bigquery.v2.RowAccessPolicyService.UpdateRowAccessPolicy` `google.cloud.bigquery.v2.TableService.DeleteTable` `google.cloud.bigquery.v2.TableService.InsertTable` `google.cloud.bigquery.v2.TableService.PatchTable` `google.cloud.bigquery.v2.TableService.UpdateTable` `google.iam.v1.IAMPolicy.SetIamPolicy` `jobservice.getqueryresults` `jobservice.insert` `jobservice.query` `tabledataservice.list` `tableservice.delete` `tableservice.insert` `tableservice.update` |
 | `DATA_READ` | `google.cloud.bigquery.v2.JobService.GetQueryResults` `google.cloud.bigquery.v2.TableDataService.List` |
 
 ## API interface audit logs
@@ -478,14 +482,3 @@ The following audit logs are associated with methods belonging to
 
 * **Method**: `tabledataservice.list`
 * **Audit log type**: [Data access](/logging/docs/audit#data-access)
-* **Permissions**:
-  + `bigquery.jobs.create - ADMIN_WRITE`
-  + `bigquery.tables.getData - DATA_READ`
-* **Method is a long-running or streaming operation**:
-  No.
-* **Filter for this method**: `protoPayload.methodName="tabledataservice.list"`
-
-### `tableservice`
-
-The following audit logs are associated with methods belonging to
-`tableservice`.

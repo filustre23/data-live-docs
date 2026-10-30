@@ -16,11 +16,11 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 資料表函式
 
-資料表函式也稱為資料表值函式 (TVF)，是傳回資料表的使用者定義函式。您可以在任何可使用資料表的地方使用資料表函式。資料表函式的行為與檢視區塊類似，但資料表函式可以接受參數。
+資料表函式也稱為資料表值函式 (TVF)，是會傳回資料表的使用者定義函式。只要是可以使用資料表的地方，都可以使用資料表函式。資料表函式的行為與檢視表類似，但資料表函式可以接受參數。
 
 ## 建立資料表函式
 
-如要建立資料表函式，請使用 [`CREATE TABLE FUNCTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#create_table_function_statement) 陳述式。資料表函式包含產生資料表的查詢。函式會傳回查詢結果。下列資料表函式會採用`INT64`參數，並在查詢的 `WHERE` 子句中使用這個值，查詢名為 `bigquery-public-data.usa_names.usa_1910_current` 的[公開資料集](https://docs.cloud.google.com/bigquery/public-data?hl=zh-tw)：
+如要建立資料表函式，請使用 [`CREATE TABLE FUNCTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#create_table_function_statement) 陳述式。資料表函式包含會產生資料表的查詢。函式會傳回查詢結果。下列資料表函式會採用 `INT64` 參數，並在查詢 `bigquery-public-data.usa_names.usa_1910_current` [公開資料集](https://docs.cloud.google.com/bigquery/public-data?hl=zh-tw)時，於 `WHERE` 子句中使用這個值：
 
 ```
 CREATE OR REPLACE TABLE FUNCTION mydataset.names_by_year(y INT64)
@@ -32,8 +32,7 @@ AS (
 );
 ```
 
-如要以其他方式篩選，可以將多個參數傳遞至表格函式。
-下列資料表函式會依年份和名稱前置字元篩選資料：
+如要以其他方式篩選，可以將多個參數傳遞至資料表函式。下列資料表函式會依年份和名稱前置字串篩選資料：
 
 ```
 CREATE OR REPLACE TABLE FUNCTION mydataset.names_by_year_and_prefix(
@@ -48,11 +47,11 @@ AS (
 );
 ```
 
-### 表格參數
+### 資料表參數
 
-您可以將 TVF 參數設為資料表。在資料表參數名稱後，您必須明確指定必要的資料表結構定義，指定方式與結構體的欄位相同。傳遞至 TVF 的表格引數可包含參數結構定義中指定的資料欄以外的資料欄，且資料欄可依任意順序顯示。
+您可以將 TVF 參數設為資料表。在資料表參數名稱後方，您必須明確指定必要的資料表結構定義，方法與指定結構體欄位相同。您傳遞至 TVF 的資料表引數可以包含參數結構定義中指定以外的其他資料欄，且資料欄可以任何順序顯示。
 
-下列資料表函式會傳回包含 `item_name` 資料表總銷售額的資料表 (來自 `orders` 資料表)：
+下列資料表函式會傳回一個資料表，其中包含 `orders` 資料表中 `item_name` 的總銷售額：
 
 ```
 CREATE TABLE FUNCTION mydataset.compute_sales (
@@ -65,7 +64,7 @@ AS (
 );
 ```
 
-在 TVF 中使用 `ANY TABLE` 型別，可建立接受任何結構表格的一般函式。與固定資料表不同 (您必須定義每個資料欄和資料類型)，`ANY TABLE` 類型會做為預留位置，讓函式可重複用於不同資料集。不過，您傳入的資料表仍須包含函式中使用的特定資料欄。舉例來說，如果函式依 `created_date` 篩選，輸入表格就必須有該資料欄，否則查詢會失敗。
+在 TVF 中使用 `ANY TABLE` 類型，即可建立接受任何結構資料表的通用函式。固定資料表必須定義每個資料欄和資料類型，但 `ANY TABLE` 類型則可做為預留位置，讓函式能與不同資料集重複使用。不過，您傳入的資料表仍須包含函式中使用的特定資料欄。舉例來說，如果函式依 `created_date` 篩選，輸入資料表必須有該資料欄，否則查詢會失敗。
 
 ```
 -- Simple pass-through (accepts any table, as used in your devstack)
@@ -82,11 +81,11 @@ WHERE status = status_val;
 
 ### 參數名稱
 
-如果資料表函式參數與資料表資料欄的名稱相符，可能會建立不明確的參照。在這種情況下，BigQuery 會將名稱解讀為資料表欄的參照，而非參數。建議您使用與任何參照資料表欄名稱不同的參數名稱。
+如果資料表函式參數與資料表資料欄名稱相符，可能會建立不明確的參照。在這種情況下，BigQuery 會將名稱解讀為資料表資料欄的參照，而非參數。建議做法是使用與任何參照資料表欄名稱不同的參數名稱。
 
 ## 使用資料表函式
 
-您可以在任何資料表有效的環境中呼叫資料表函式。下列範例會在 `SELECT` 陳述式的 `FROM` 子句中呼叫 `mydataset.names_by_year` 函式：
+您可以在任何資料表有效的內容中呼叫資料表函式。以下範例在 `SELECT` 陳述式的 `FROM` 子句中呼叫 `mydataset.names_by_year` 函式：
 
 ```
 SELECT * FROM mydataset.names_by_year(1950)
@@ -108,7 +107,7 @@ SELECT * FROM mydataset.names_by_year(1950)
 +------+--------+-------+
 ```
 
-您可以將資料表函式的輸出內容與另一個資料表彙整：
+您可以將資料表函式的輸出內容與其他資料表彙整：
 
 ```
 SELECT *
@@ -117,7 +116,7 @@ SELECT *
   ON n.name = s.word
 ```
 
-您也可以在[子查詢](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries?hl=zh-tw#array_subquery_concepts)中使用表格函式：
+您也可以在[子查詢](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries?hl=zh-tw#array_subquery_concepts)中使用資料表函式：
 
 ```
 SELECT ARRAY(
@@ -126,7 +125,7 @@ SELECT ARRAY(
   LIMIT 5)
 ```
 
-呼叫具有資料表參數的資料表函式時，您必須在資料表引數名稱前使用 `TABLE` 關鍵字。資料表引數可以有資料表參數結構定義中未列出的資料欄：
+呼叫具有資料表參數的資料表函式時，必須在資料表引數名稱前使用 `TABLE` 關鍵字。資料表引數可以包含資料表參數結構定義中未列出的資料欄：
 
 ```
 CREATE TABLE FUNCTION mydataset.compute_sales (
@@ -154,38 +153,35 @@ FROM mydataset.compute_sales(TABLE my_orders, "apple");
  +-------------+-------*/
 ```
 
-### 搭配 TVF 使用系統變數
+### 搭配使用系統變數與 TVF
 
-TVF 支援 `@@session_id` 和 `@@location`
-[系統變數](https://docs.cloud.google.com/bigquery/docs/reference/system-variables?hl=zh-tw)。您可以在函式建立陳述式中的任何位置加入這些系統變數，傳回目前查詢的會期 ID 或位置。系統不支援所有其他系統變數。
+`@@session_id` 和 `@@location`
+[系統變數](https://docs.cloud.google.com/bigquery/docs/reference/system-variables?hl=zh-tw)支援 TVF。您可以在函式建立陳述式的任何位置加入這些系統變數，傳回目前查詢的工作階段 ID 或位置。不支援所有其他系統變數。
 
 ## 列出資料表函式
 
-資料表函式是一種常式，如要列出資料集中的所有常式，請參閱「[列出常式](https://docs.cloud.google.com/bigquery/docs/routines?hl=zh-tw#list_routines)」。
+資料表函式是一種常式。如要列出資料集中的所有常式，請參閱「[列出常式](https://docs.cloud.google.com/bigquery/docs/routines?hl=zh-tw#list_routines)」。
 
 ## 刪除資料表函式
 
-如要刪除資料表函式，請使用
-[`DROP TABLE FUNCTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#drop_table_function)
-陳述式：
+如要刪除資料表函式，請使用 [`DROP TABLE FUNCTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#drop_table_function) 陳述式：
 
 ```
 DROP TABLE FUNCTION mydataset.names_by_year
 ```
 
-## 授權處理常式
+## 授權給處理常式
 
-您可以將資料表函式授權為*常式*。
-授權常式可讓您與特定使用者或群組分享查詢結果，而不授予他們產生結果的基礎資料表存取權。舉例來說，授權常式可以計算資料的匯總值，或查閱資料表值並用於計算。詳情請參閱「[已授權的日常安排](https://docs.cloud.google.com/bigquery/docs/authorized-routines?hl=zh-tw)」。
+您可以將資料表函式授權為*常式*。授權常式可讓您與特定使用者或群組分享查詢結果，而不必直接授予基礎資料表的存取權。舉例來說，常式可以計算匯總值或查詢資料表值，並在計算中使用該值。詳情請參閱「[授權常式](https://docs.cloud.google.com/bigquery/docs/authorized-routines?hl=zh-tw)」。
 
 ## 限制
 
-* 查詢主體必須是 `SELECT` 陳述式，且不得修改任何內容。舉例來說，資料定義語言 (DDL) 和資料操縱語言 (DML) 陳述式不允許用於資料表函式。如果需要副作用，建議改為編寫[程序](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#create_procedure)。
+* 查詢主體必須是 `SELECT` 陳述式，且不得修改任何內容。例如，資料表函式不允許使用資料定義語言 (DDL) 和資料操縱語言 (DML) 陳述式。如需副作用，建議改為編寫[程序](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#create_procedure)。
 * 資料表函式必須與參照的資料表儲存在相同位置。
 
 ## 配額
 
-如要進一步瞭解資料表函式配額和限制，請參閱[配額和限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#table_function_limits)。
+如要進一步瞭解資料表函式配額和限制，請參閱「[配額和限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#table_function_limits)」。
 
 
 
@@ -194,11 +190,11 @@ DROP TABLE FUNCTION mydataset.names_by_year
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-24 (世界標準時間)。
+上次更新時間：2026-10-28 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-24 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-28 (世界標準時間)。"],[],[]]

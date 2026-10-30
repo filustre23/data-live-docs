@@ -187,11 +187,4 @@ SELECT name,
 FROM finishers;
 
 /*-----------------+-------------+----------+------------------+
- | name            | finish_time | division | preceding_runner |
- +-----------------+-------------+----------+------------------+
- | Carly Forte     | 03:08:58    | F25-29   | NULL             |
- | Sophia Liu      | 02:51:45    | F30-34   | NULL             |
- | Nikki Leith     | 02:59:01    | F30-34   | Sophia Liu       |
- | Jen Edwards     | 03:06:36    | F30-34   | Nikki Leith      |
- | Meghan Lederer  | 03:07:41    | F30-34   | Jen Edwards      |
 ```

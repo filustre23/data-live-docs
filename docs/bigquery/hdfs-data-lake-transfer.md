@@ -258,8 +258,4 @@ JSON 檔案中的 `condition` 欄位支援下列值，每個值都有特定的 `
   bq mk --transfer_config
   --data_source=hadoop display_name='TRANSFER_NAME'
   --service_account_name='SERVICE_ACCOUNT'
-  --project_id='PROJECT_ID' location='REGION'
-  --params='{
-    "transfer_strategy":"TRANSFER_STRATEGY",
-    "table_name_patterns":"LIST_OF_TABLES",
 ```

@@ -27,7 +27,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 系統支援下列分析規則：
 
 * [匯總門檻分析規則](#agg_analysis_rules)：強制執行資料集須有的不重複實體數量下限。您可以使用 DDL 陳述式或資料無塵室，在檢視表上強制執行這項規則。這項規則支援匯總門檻政策和聯結限制政策。
-* [差異化隱私分析規則](#dp_analysis_rules)：強制執行隱私公開程度上限，如果資料套用了[差異化隱私](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/differential-privacy?hl=zh-tw)防護機制，訂閱者看見的資料就會受限。您可以使用 DDL 陳述式或資料無塵室，在檢視表上強制執行這項規則。這項規則支援差異化隱私權政策和聯結限制政策。
+* [差異化隱私分析規則](#dp_analysis_rules)：強制執行隱私公開程度上限，如果資料套用了[差異化隱私](https://docs.cloud.google.com/bigquery/docs/differential-privacy?hl=zh-tw)防護機制，訂閱者看見的資料就會受限。您可以使用 DDL 陳述式或資料無塵室，在檢視表上強制執行這項規則。這項規則支援差異化隱私權政策和聯結限制政策。
 * [清單重疊分析規則](#list_overlap_rules)：重疊的資料列只能在聯結作業後查詢，這符合規則。您可以使用 DDL 陳述式或資料無塵室，在檢視畫面中強制執行這項規則。這項規則支援加入限制政策。
 
 ## 匯總門檻分析規則
@@ -155,7 +155,7 @@ GROUP BY test_id;
 
 ## 差異化隱私分析規則
 
-差異化隱私分析規則會強制執行隱私公開程度上限，如果資料套用了[差異化隱私](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/differential-privacy?hl=zh-tw)防護機制，訂閱者看見的資料就會受限。
+差異化隱私分析規則會強制執行隱私公開程度上限，如果資料套用了[差異化隱私](https://docs.cloud.google.com/bigquery/docs/differential-privacy?hl=zh-tw)防護機制，訂閱者看見的資料就會受限。
 套用隱私公開程度上限之後，如果所有查詢的 Epsilon 或 Delta 總和達到 Epsilon 總值或 Delta 總值，所有訂閱者都無法查詢共用資料。您可以在檢視畫面中使用這項分析規則。
 
 包含這項分析規則的檢視區塊必須包含[差異隱私權政策](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#privacy_policy)，且可選擇性包含[聯結限制政策](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#privacy_policy)。
@@ -754,11 +754,11 @@ CREATE OR REPLACE TABLE mydataset.StudentTable AS (
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-24 (世界標準時間)。
+上次更新時間：2026-10-29 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-24 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]

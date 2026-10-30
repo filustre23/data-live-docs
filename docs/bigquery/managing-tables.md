@@ -31,7 +31,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 * [說明](#updating_a_tables_description)
 * [到期時間](#updating_a_tables_expiration_time)
 * [結構定義](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas?hl=zh-tw)
-* [標籤](https://docs.cloud.google.com/bigquery/docs/labels?hl=zh-tw#creating_or_updating_a_table_or_view_label)
+* [標籤](https://docs.cloud.google.com/bigquery/docs/adding-labels?hl=zh-tw#adding_table_and_view_labels)
 * [資料表名稱](#renaming-table)
 * [標記](https://docs.cloud.google.com/bigquery/docs/tags?hl=zh-tw)
 
@@ -800,7 +800,7 @@ Google Cloud 控制台和 `CREATE TABLE COPY` 陳述式在複製工作中，僅�
 
    更改下列內容：
 
-   * `location`：位置名稱。`--location` 是選用旗標。舉例來說，如果您在東京區域使用 BigQuery，可以將旗標值設為 `asia-northeast1`。您可以使用 [`.bigqueryrc` 檔案](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool?hl=zh-tw#setting_default_values_for_command-line_flags)設定位置的預設值。
+   * `location`：位置名稱。`--location` 是選用旗標。舉例來說，如果您在東京區域使用 BigQuery，可以將旗標值設為 `asia-northeast1`。您可以使用 [`.bigqueryrc` 檔案](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#set_default_values_for_command-line_flags)設定位置的預設值。
    * `project_id`：您的專案 ID。
    * `dataset`：來源或目的地資料集的名稱。
    * `source_table`：要複製的表格。
@@ -1022,4 +1022,4 @@ public class CopyTable {
 
 在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請

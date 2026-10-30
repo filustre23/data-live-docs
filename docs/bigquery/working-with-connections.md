@@ -16,9 +16,11 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 管理連結
 
-本文說明如何查看、列出、共用、編輯、刪除 BigQuery 連線，以及排解相關問題。
+在 BigQuery 中管理[連線](https://docs.cloud.google.com/bigquery/docs/connections-api-intro?hl=zh-tw)，即可控管 BigQuery 連至外部資料來源和服務的方式，讓分析師不必將外部資料移至或複製到 BigQuery，就能查詢這些資料。您可以查看、列出、共用、更新、刪除及排解專案中的連線問題。
 
-BigQuery 管理員可以建立及管理連線，用於連結服務和外部資料來源。BigQuery 分析師會使用這些連線，對外部資料來源提交查詢，不必將資料移至或複製到 BigQuery。您可以建立下列類型的連結：
+## 支援的連線類型
+
+您可以建立下列類型的連結：
 
 * [Amazon S3 連線](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-connection?hl=zh-tw)
 * [Apache Spark 連線](https://docs.cloud.google.com/bigquery/docs/connect-to-spark?hl=zh-tw)
@@ -752,8 +754,5 @@ import google.api_core.exceptions
 from google.cloud import bigquery_connection_v1
 from google.protobuf import field_mask_pb2
 
-client = bigquery_connection_v1.ConnectionServiceClient()
-
-
-def update_connection(
+client = bigquery_connection_v1
 ```

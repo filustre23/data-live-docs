@@ -152,7 +152,3 @@ Request information for invoking `FinalizeStream`.
 | --- | --- |
 | `at_response_start` | `float`  The fraction of rows assigned to the stream that have been processed by the server so far, not including the rows in the current response message.  This value, along with `at_response_end`, can be used to interpolate the progress made as the rows in the message are being processed using the following formula: `at_response_start + (at_response_end - at_response_start) * rows_processed_from_response / rows_in_response`.  Note that if a filter is provided, the `at_response_end` value of the previous response may not necessarily be equal to the `at_response_start` value of the current response. |
 | `at_response_end` | `float`  Similar to `at_response_start`, except that this value includes the rows in the current response. |
-
-## ReadRowsRequest
-
-Requesting row data via `ReadRows` must provide Stream position information.

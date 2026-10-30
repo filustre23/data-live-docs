@@ -16,17 +16,17 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 查詢 Apache Iceberg 外部資料表
 
-本文說明如何查詢儲存在 [Iceberg 外部資料表](https://docs.cloud.google.com/bigquery/docs/iceberg-external-tables?hl=zh-tw)中的資料。
+BigQuery 可讓您使用 GoogleSQL 查詢儲存在 [Iceberg 外部資料表](https://docs.cloud.google.com/bigquery/docs/iceberg-external-tables?hl=zh-tw)中的資料。查詢 Iceberg 外部資料表，即可分析儲存在 Cloud Storage 的 Apache Iceberg 資料表，不必將資料載入或複製到原生 BigQuery 儲存空間。
 
 ## 必要的角色
 
-如要查詢 Iceberg 外部資料表，請確保 BigQuery API 的呼叫端具有下列角色：
+如要查詢 Iceberg 外部資料表，請確認 BigQuery API 的呼叫端具備下列角色：
 
 * BigQuery 連線使用者 (`roles/bigquery.connectionUser`)
 * BigQuery 資料檢視者 (`roles/bigquery.dataViewer`)
 * BigQuery 使用者 (`roles/bigquery.user`)
 
-呼叫者可以是您的帳戶、[Spark 連線服務帳戶](https://docs.cloud.google.com/bigquery/docs/connect-to-spark?hl=zh-tw#create-spark-connection)或 [Cloud 資源連結服務帳戶](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection?hl=zh-tw#create-cloud-resource-connection)。視權限而定，您可以將這些角色授予自己，或請管理員授予您這些角色。如要進一步瞭解如何授予角色，請參閱「[查看可針對資源授予的角色](https://docs.cloud.google.com/iam/docs/viewing-grantable-roles?hl=zh-tw)」。
+呼叫端可以是您的帳戶、[Spark 連線服務帳戶](https://docs.cloud.google.com/bigquery/docs/connect-to-spark?hl=zh-tw#create-spark-connection)，或 [Cloud 資源連結服務帳戶](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection?hl=zh-tw#create-cloud-resource-connection)。視權限而定，您可以將這些角色授予自己，或要求管理員授予。如要進一步瞭解如何授予角色，請參閱「[查看可針對資源授予的角色](https://docs.cloud.google.com/iam/docs/viewing-grantable-roles?hl=zh-tw)」。
 
 如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
@@ -42,7 +42,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ## 查詢 Iceberg 外部資料表
 
-建立 Iceberg 外部資料表後，您可以使用 [GoogleSQL 語法查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw)，就像查詢標準 BigQuery 資料表一樣。例如：`SELECT field1, field2
+建立 Iceberg 外部資料表後，您可以[使用 GoogleSQL 語法查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw)，就像查詢標準 BigQuery 資料表一樣。例如：`SELECT field1, field2
 FROM mydataset.my_iceberg_table;`。
 
 ## 後續步驟
@@ -57,11 +57,11 @@ FROM mydataset.my_iceberg_table;`。
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-24 (世界標準時間)。
+上次更新時間：2026-10-29 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-24 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]

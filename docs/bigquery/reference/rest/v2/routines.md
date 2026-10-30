@@ -30,6 +30,8 @@ Send feedback
   + [JSON representation](#PythonOptions.SCHEMA_REPRESENTATION)
 * [ExternalRuntimeOptions](#ExternalRuntimeOptions)
   + [JSON representation](#ExternalRuntimeOptions.SCHEMA_REPRESENTATION)
+* [ExternalVolumeMount](#ExternalVolumeMount)
+  + [JSON representation](#ExternalVolumeMount.SCHEMA_REPRESENTATION)
 * [RoutineBuildStatus](#RoutineBuildStatus)
   + [JSON representation](#RoutineBuildStatus.SCHEMA_REPRESENTATION)
 * [BuildState](#BuildState)
@@ -149,8 +151,4 @@ A table type
 
 | JSON representation |
 | --- |
-| ``` {   "columns": [     {       object (StandardSqlField)     }   ] } ``` |
-
-| Fields | |
-| --- | --- |
-| `columns[]` | `object (` |
+| ``` {   "columns": [     {       object ( ``` |

@@ -20,7 +20,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 如要以專案[擁有者](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#legacy-basic)身分設定服務，請建立或選取專案、啟用 BigQuery API 和 BigQuery 資料移轉服務，並授予管理移轉作業所需的 Identity and Access Management (IAM) 角色。如要進一步瞭解 IAM 角色，請參閱「[角色和權限](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw)」。
 
-**注意：** 如果您透過程式輔助方式啟用 BigQuery 資料移轉服務，並在啟用後立即呼叫 BigQuery 資料移轉服務 API，請務必實作重試機制，在連續呼叫之間設定輪詢延遲。這是因為 API 啟用是非同步作業，且會因最終一致性而導致生效延遲。
+**注意：** 如果您在透過程式輔助方式啟用 BigQuery 資料移轉服務後，立即呼叫 BigQuery 資料移轉服務 API，請務必實作重試機制，在連續呼叫之間設定輪詢延遲時間。這是因為 API 啟用是非同步作業，且會因最終一致性而導致傳播延遲。
 
 ## 建立專案並啟用 BigQuery API
 
@@ -35,12 +35,12 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
    **選取或建立專案所需的角色**
 
-   * **選取專案**：選取專案時不需要特定 IAM 角色，只要您獲派某個專案的角色，即可選取該專案。
+   * **選取專案**：選取專案時，不需具備特定 IAM 角色，只要您已獲派某個專案的角色，即可選取該專案。
    * **建立專案**：如要建立專案，您必須具備專案建立者角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
    **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，不要選取現有專案。如果採用這種做法，當您完成這些步驟後，就可以直接刪除該專案，並移除相關聯的所有資源。
 3. 為專案啟用計費功能，即可進行所有移轉作業。免費轉移作業的費用為 $0 美元。
 
-   每個專案只需啟用計費功能一次，即使從多個來源移轉資料也一樣。資料移轉後，您也必須啟用計費功能，才能在 BigQuery 中查詢資料。
+   即使您從多個來源移轉資料，每項專案也只需要啟用計費功能一次。資料移轉後，您也必須啟用計費功能，才能在 BigQuery 中查詢資料。
 
    [瞭解如何確認專案已啟用計費功能](https://docs.cloud.google.com/billing/docs/how-to/modify-project?hl=zh-tw)。
 4. 新專案會自動啟用 BigQuery。如要在現有專案中啟用 BigQuery，請啟用 BigQuery API。  
@@ -59,7 +59,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
    [啟用 Data Transfer API](https://console.cloud.google.com/apis/library/bigquerydatatransfer.googleapis.com?hl=zh-tw)
 
-**注意：** 如果您透過程式輔助方式啟用 BigQuery 資料移轉服務後，立即呼叫 BigQuery 資料移轉服務 API，請務必實作重試機制，在連續呼叫之間設定輪詢延遲。這是因為 API 啟用是非同步作業，且會因最終一致性而導致生效延遲。
+**注意：** 如果您在透過程式輔助方式啟用 BigQuery 資料移轉服務後，立即呼叫 BigQuery 資料移轉服務 API，請務必實作重試機制，在連續呼叫之間設定輪詢延遲。這是因為 API 啟用是非同步作業，且會因最終一致性而導致傳播延遲。
 
 ## 服務代理
 
@@ -74,7 +74,7 @@ BigQuery 資料移轉服務會使用[服務代理](https://docs.cloud.google.com
 
 ### 跨專案服務帳戶授權
 
-如果您使用服務帳戶授權資料移轉，且該帳戶所屬專案與啟用 BigQuery 資料移轉服務的專案不同，則必須使用下列 Google Cloud CLI 指令，將 `roles/iam.serviceAccountTokenCreator` 角色授予服務代理：
+如果您使用專案中的服務帳戶授權資料移轉，但該專案與啟用 BigQuery 資料移轉服務的專案不同，則必須使用下列 Google Cloud CLI 指令，將 `roles/iam.serviceAccountTokenCreator` 角色授予服務代理：
 
 ```
 gcloud iam service-accounts add-iam-policy-binding service_account \
@@ -87,7 +87,7 @@ gcloud iam service-accounts add-iam-policy-binding service_account \
 * service\_account 是用於授權資料移轉的跨專案服務帳戶。
 * project\_number 是已啟用 BigQuery 資料移轉服務的專案編號。
 
-如要進一步瞭解跨專案資源設定，請參閱 Identity and Access Management 服務帳戶模擬說明文件中的「[設定其他專案中的資源](https://docs.cloud.google.com/iam/docs/attach-service-accounts?hl=zh-tw#attaching-different-project)」。
+如要進一步瞭解跨專案資源設定，請參閱 Identity and Access Management 服務帳戶模擬說明文件中的「[設定不同專案中的資源](https://docs.cloud.google.com/iam/docs/attach-service-accounts?hl=zh-tw#attaching-different-project)」。
 
 透過 Google Cloud 控制台啟用 BigQuery 資料移轉服務 API 時，Google 會自動嘗試授予必要權限。不過，如果您透過 Terraform、Google Cloud CLI 或其他程式輔助方法啟用 API 或建立移轉作業，則必須手動設定必要權限。如要使用其他專案的服務帳戶授權移轉作業，請考量下列事項：
 
@@ -214,57 +214,7 @@ gcloud projects add-iam-policy-binding myproject \
 
 ## 後續步驟
 
-啟用 BigQuery 資料移轉服務後，請建立資料來源的移轉作業。
-
-* SaaS 平台：
-
-+ [Salesforce](https://docs.cloud.google.com/bigquery/docs/salesforce-transfer?hl=zh-tw)
-+ [Salesforce Marketing Cloud](https://docs.cloud.google.com/bigquery/docs/sfmc-transfer?hl=zh-tw)
-+ [ServiceNow](https://docs.cloud.google.com/bigquery/docs/servicenow-transfer?hl=zh-tw)
-
-* 行銷平台：
-
-+ [Facebook 廣告](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer-intro?hl=zh-tw)
-+ [HubSpot](https://docs.cloud.google.com/bigquery/docs/hubspot-transfer?hl=zh-tw) ([預先發布版](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages))
-+ [Klaviyo](https://docs.cloud.google.com/bigquery/docs/klaviyo-transfer-intro?hl=zh-tw) ([預先發布版](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages))
-+ [Mailchimp](https://docs.cloud.google.com/bigquery/docs/mailchimp-transfer?hl=zh-tw) ([預先發布版](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages))
-
-* 付款平台：
-
-+ [PayPal](https://docs.cloud.google.com/bigquery/docs/paypal-transfer?hl=zh-tw) ([預先發布版](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages))
-+ [Stripe](https://docs.cloud.google.com/bigquery/docs/stripe-transfer?hl=zh-tw) ([預先發布版](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages))
-+ [Shopify](https://docs.cloud.google.com/bigquery/docs/shopify-transfer?hl=zh-tw) ([預先發布版](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages))
-
-* 資料庫和資料倉儲：
-
-+ [Amazon Redshift](https://docs.cloud.google.com/bigquery/docs/migration/redshift?hl=zh-tw)
-+ [Apache Hive metastore](https://docs.cloud.google.com/bigquery/docs/hdfs-data-lake-transfer?hl=zh-tw)
-+ [Microsoft SQL Server](https://docs.cloud.google.com/bigquery/docs/sqlserver-transfer?hl=zh-tw) ([預先發布版](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages))
-+ [MySQL](https://docs.cloud.google.com/bigquery/docs/mysql-transfer?hl=zh-tw)
-+ [Oracle](https://docs.cloud.google.com/bigquery/docs/oracle-transfer?hl=zh-tw)
-+ [PostgreSQL](https://docs.cloud.google.com/bigquery/docs/postgresql-transfer?hl=zh-tw)
-+ [Snowflake](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer?hl=zh-tw)
-+ [Teradata](https://docs.cloud.google.com/bigquery/docs/migration/teradata?hl=zh-tw)
-
-* 雲端儲存空間：
-
-+ [Cloud Storage](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer?hl=zh-tw)
-+ [Amazon Simple Storage Service (Amazon S3)](https://docs.cloud.google.com/bigquery/docs/s3-transfer?hl=zh-tw)
-+ [Azure Blob 儲存體](https://docs.cloud.google.com/bigquery/docs/blob-storage-transfer?hl=zh-tw)
-
-* Google 服務：
-
-+ [Campaign Manager](https://docs.cloud.google.com/bigquery/docs/doubleclick-campaign-transfer?hl=zh-tw)
-+ [購物比較服務 (CSS) 中心](https://docs.cloud.google.com/bigquery/docs/css-center-transfer-schedule-transfers?hl=zh-tw) ([預先發布版](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages))
-+ [Display & Video 360](https://docs.cloud.google.com/bigquery/docs/display-video-transfer?hl=zh-tw)
-+ [Google Ads](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer?hl=zh-tw)
-+ [Google Ad Manager](https://docs.cloud.google.com/bigquery/docs/doubleclick-publisher-transfer?hl=zh-tw)
-+ [Google Analytics 4](https://docs.cloud.google.com/bigquery/docs/google-analytics-4-transfer?hl=zh-tw)
-+ [Google Merchant Center](https://docs.cloud.google.com/bigquery/docs/merchant-center-transfer?hl=zh-tw) ([預先發布版](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages))
-+ [Search Ads 360](https://docs.cloud.google.com/bigquery/docs/search-ads-transfer?hl=zh-tw)
-+ [Google Play](https://docs.cloud.google.com/bigquery/docs/play-transfer?hl=zh-tw)
-+ [YouTube 頻道](https://docs.cloud.google.com/bigquery/docs/youtube-channel-transfer?hl=zh-tw)
-+ [YouTube 內容擁有者](https://docs.cloud.google.com/bigquery/docs/youtube-content-owner-transfer?hl=zh-tw)
+啟用 BigQuery 資料移轉服務後，請為[資料來源](https://docs.cloud.google.com/bigquery/docs/dts-data-sources-intro?hl=zh-tw)建立移轉作業。
 
 
 
@@ -273,11 +223,11 @@ gcloud projects add-iam-policy-binding myproject \
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-24 (世界標準時間)。
+上次更新時間：2026-10-30 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-24 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-30 (世界標準時間)。"],[],[]]

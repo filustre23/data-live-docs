@@ -207,16 +207,5 @@ without including `plaintext` keys in a query. To use DLP functions, you need a
   this:
 
   ```
-  gcp-kms://projects/my-project/locations/us/keyRings/my-key-ring/cryptoKeys/my-crypto-key
+  gcp-kms://projects/my-project/locations/us/keyRings/my-key-ring/cryptoKeys/my-
   ```
-* `wrapped_key`: A `BYTES` literal that represents a secret text chosen by the
-  user. This secret text can be 16, 24, or 32 bytes. For information about
-  how to generate a wrapped key, see [gcloud kms encrypt](https://cloud.google.com/sdk/gcloud/reference/kms/encrypt).
-
-**Return data type**
-
-`STRUCT`
-
-**Examples**
-
-In the following query, the wrapped key is presented in a

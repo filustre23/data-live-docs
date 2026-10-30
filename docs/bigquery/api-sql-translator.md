@@ -16,11 +16,9 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 使用 Translation API 翻譯 SQL 查詢
 
-本文說明如何在 BigQuery 中使用 BigQuery Migration API，將其他 SQL 方言編寫的指令碼翻譯成 GoogleSQL 查詢。
+BigQuery 的 BigQuery Migration API 可讓您透過程式輔助方式，將其他 SQL 方言編寫的指令碼翻譯成 GoogleSQL 查詢。建構自訂軟體整合、自動化 CI/CD 管道或其他程式輔助遷移工作流程時，可以使用 BigQuery Migration API。
 
-**注意：** 如要透過 Google Cloud 控制台或指令列執行翻譯工作，請參閱「[使用批次 SQL 翻譯器翻譯 SQL 查詢](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator?hl=zh-tw)」。只有在建構自訂軟體整合、自動化 CI/CD 管道或程式輔助工作流程時，才應使用本頁所述的 BigQuery Migration API。
-
-如要查看這項 SQL 翻譯工具支援的 SQL 方言和處理位置清單，請參閱「[支援的 SQL 方言](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations?hl=zh-tw#supported_sql_dialects)」和「[位置](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations?hl=zh-tw#locations)」。
+如要改為透過 Google Cloud 控制台或指令列執行翻譯工作，請參閱「[使用批次 SQL 翻譯器翻譯 SQL 查詢](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator?hl=zh-tw)」。如要瞭解支援的方言和處理位置，請參閱「[支援的 SQL 方言](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations?hl=zh-tw#supported_sql_dialects)」和「[位置](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations?hl=zh-tw#locations)」。
 
 ## 事前準備
 
@@ -109,7 +107,7 @@ curl -d "{
 更改下列內容：
 
 * `TYPE`：翻譯的[工作類型](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations?hl=zh-tw#supported_sql_dialects)，決定原文和譯文的方言。
-* `TARGET_BASE`：所有翻譯輸出的基本 URI。
+* `TARGET_BASE`：所有翻譯輸出的基礎 URI。
 * `BASE`：所有檔案的基本 URI，這些檔案會做為翻譯來源讀取。
 * `TARGET_TYPES` (選用)：生成的輸出類型。如未指定，系統會生成 SQL。
 
@@ -197,7 +195,7 @@ curl -d "{
 
 ### 建立互動式翻譯
 
-下列 `curl` 指令會建立互動式翻譯工作，並以字串文字輸入和輸出。`source_target_mapping` 欄位包含一份清單，可將來源 `literal` 項目對應至目標輸出的選用相對路徑。
+下列 `curl` 指令會建立互動式翻譯工作，並以字串常值輸入和輸出。`source_target_mapping` 欄位包含一份清單，可將來源 `literal` 項目對應至目標輸出的選用相對路徑。
 
 ```
 curl -d "{
@@ -339,7 +337,7 @@ curl \
 
 ## 擷取結果
 
-擷取結果的方式取決於您提交的是[批次翻譯還是互動式翻譯](#translation-modes)：
+擷取結果的方式取決於您提交的是[批次翻譯或互動式翻譯](#translation-modes)：
 
 * **批次翻譯**：翻譯檔案、摘要報告和任何 AI 建議，都會寫入您在 `target_base_uri` 中指定的 Cloud Storage 目的地目錄。您可以使用 gcloud CLI 儲存空間指令、Cloud Storage 用戶端程式庫或 REST API，直接從 Cloud Storage 讀取這些檔案：
 
@@ -377,11 +375,11 @@ curl \
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-24 (世界標準時間)。
+上次更新時間：2026-10-28 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-24 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-28 (世界標準時間)。"],[],[]]

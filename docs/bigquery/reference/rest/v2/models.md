@@ -196,9 +196,4 @@ Indicates the type of the Model.
 | `RANDOM_FOREST_CLASSIFIER` | Random forest classifier model. |
 | `TENSORFLOW_LITE` | An imported TensorFlow Lite model. |
 | `ONNX` | An imported ONNX model. |
-| `TRANSFORM_ONLY` | Model to capture the columns and logic in the TRANSFORM clause along with statistics useful for ML analytic functions. |
-| `CONTRIBUTION_ANALYSIS` | The contribution analysis model. |
-
-## TrainingRun
-
-Information about a single
+| `TRANSFORM_ONLY` | Model to captu |

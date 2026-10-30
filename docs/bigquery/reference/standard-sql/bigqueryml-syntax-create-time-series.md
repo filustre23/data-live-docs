@@ -578,15 +578,3 @@ This option accepts the following values:
 * `SA`: Saudi Arabia
 * `SE`: Sweden
 * `SG`: Singapore
-* `SI`: Slovenia
-* `SK`: Slovakia
-* `TH`: Thailand
-* `TR`: Turkey
-* `TW`: Taiwan
-* `UA`: Ukraine
-* `US`: United States
-* `VE`: Venezuela
-* `VN`: Vietnam
-* `ZA`: South Africa
-
-### `CLEAN_SPIKES_AND_DIPS</`

@@ -327,14 +327,3 @@ Subtracts `step_size` units of `step_unit` from the `DATETIME` object.
 * `MINUTE`
 * `HOUR`
 * `DAY`
-* `WEEK`. Equivalent to 7 `DAY`s.
-* `MONTH`
-* `QUARTER`
-* `YEAR`
-
-Special handling is required for `MONTH`, `QUARTER`, and `YEAR` parts when the
-date is at (or near) the last day of the month. If the resulting month has fewer
-days than the original `DATETIME` object's day, then the result day is the last day of
-the new month.
-
-**Return Data Type**

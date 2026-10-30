@@ -16,7 +16,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 建立 Cloud Storage BigLake 資料表
 
-Cloud Storage BigLake 資料表可讓您使用存取權委派功能，查詢 Cloud Storage 中的結構化資料。這種做法可將 [BigLake 資料表](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw)的存取權與基礎資料儲存庫的存取權分開，因此使用者只需要資料表的權限。
+Cloud Storage BigLake 資料表可讓您使用存取權委派功能，查詢 Cloud Storage 中的結構化資料。這種做法會將 [BigLake 資料表](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw)的存取權與基礎資料儲存庫的存取權分開，因此使用者只需要資料表的權限。
 
 本文說明如何建立 Cloud Storage BigLake 資料表。
 
@@ -229,7 +229,7 @@ bq mk --table \
 
   如要停用中繼資料快取功能，請指定 0。這是目前的預設做法。
 
-  如要啟用中繼資料快取功能，請使用[`INTERVAL`資料類型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#interval_type)說明文件中所述的 `Y-M D H:M:S` 格式，指定 30 分鐘到 7 天之間的間隔值。舉例來說，如要指定 4 小時的過時時間間隔，請指定 `0-0 0 4:0:0`。如果中繼資料在過去 4 小時內重新整理過，則對資料表執行的作業會使用快取的中繼資料。如果快取的中繼資料超過這個時間，作業就會改從 Cloud Storage 擷取中繼資料。
+  如要啟用中繼資料快取功能，請使用[`INTERVAL`資料類型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#interval_type)說明文件中所述的 `Y-M D H:M:S` 格式，指定 30 分鐘到 7 天之間的間隔值。舉例來說，如要指定 4 小時的過時時間間隔，請指定 `0-0 0 4:0:0`。如果中繼資料在過去 4 小時內重新整理過，系統會使用快取的中繼資料，對資料表執行作業。如果快取的中繼資料超過這個時間，作業就會改從 Cloud Storage 擷取中繼資料。
 * `DATASET`：要建立資料表的 BigQuery 資料集名稱，例如 `mydataset`
 * `EXTERNAL_TABLE_NAME`：要建立的資料表名稱，例如 `mytable`
 * `SCHEMA`：BigLake 資料表的結構定義
@@ -562,7 +562,7 @@ BigLake 支援結構定義自動偵測功能。不過，如果您未提供結構
    * `REGION`：連線所在的區域，例如 `us`
    * `CONNECTION_ID`：連線 ID，例如 `myconnection`
 
-     在 Google Cloud 控制台[查看連線詳細資料](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw#view-connections)時，連線 ID 是「Connection ID」(連線 ID) 中顯示的完整連線 ID 最後一個部分的值，例如 `projects/myproject/locations/connection_location/connections/myconnection`。
+     在 Google Cloud 控制台中[查看連線詳細資料](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw#view-connections)時，連線 ID 是「Connection ID」(連線 ID) 中顯示的完整連線 ID 最後一個部分的值，例如 `projects/myproject/locations/connection_location/connections/myconnection`。
 
      如要使用[預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw)，請指定 `DEFAULT`，而非包含 PROJECT\_ID.REGION.CONNECTION\_ID 的連線字串。
    * `HIVE_PARTITION_URI_PREFIX`：Hive 分區 URI 前置字串，例如 `gs://mybucket/`
@@ -696,7 +696,7 @@ SCHEMA
 
   如要停用中繼資料快取功能，請指定 0。這是目前的預設做法。
 
-  如要啟用中繼資料快取功能，請指定 30 分鐘到 7 天之間的間隔值，並使用[`INTERVAL` 資料類型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#interval_type)說明文件中所述的 `Y-M D H:M:S` 格式。舉例來說，如要指定 4 小時的過時時間間隔，請指定 `0-0 0 4:0:0`。如果中繼資料在過去 4 小時內重新整理過，系統會使用快取的中繼資料，對資料表執行作業。如果快取的中繼資料超過這個時間，作業就會改為從 Cloud Storage 擷取中繼資料。
+  如要啟用中繼資料快取功能，請指定 30 分鐘到 7 天之間的時間間隔值，並使用[`INTERVAL` 資料類型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#interval_type)說明文件中所述的 `Y-M D H:M:S` 格式。舉例來說，如要指定 4 小時的過時時間間隔，請輸入 `0-0 0 4:0:0`。如果中繼資料在過去 4 小時內重新整理過，系統會使用快取的中繼資料，對資料表執行作業。如果快取的中繼資料超過這個時間，作業就會改為從 Cloud Storage 擷取中繼資料。
 * `DATASET_NAME`：資料表所在資料集的名稱。
 * `TABLE_NAME`：要建立的資料表名稱。
 * `SCHEMA`：指定 [JSON 結構定義檔案](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#specifying_a_json_schema_file)的路徑，或以 `field:data_type,field:data_type,...` 形式指定結構定義。如要使用結構定義自動偵測功能，請省略這個引數。
@@ -1107,7 +1107,7 @@ SELECT * FROM projectid.mydataset.mytable;
 
      如要停用中繼資料快取功能，請指定 0。這是目前的預設做法。
 
-     如要啟用中繼資料快取功能，請使用[`INTERVAL`資料類型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#interval_type)說明文件中所述的 `Y-M D H:M:S` 格式，指定 30 分鐘到 7 天之間的間隔值。舉例來說，如要指定 4 小時的過時時間間隔，請指定 `0-0 0 4:0:0`。如果中繼資料在過去 4 小時內重新整理過，則對資料表執行的作業會使用快取的中繼資料。如果快取的中繼資料超過這個時間，作業就會改從 Cloud Storage 擷取中繼資料。
+     如要啟用中繼資料快取功能，請使用[`INTERVAL`資料類型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#interval_type)說明文件中所述的 `Y-M D H:M:S` 格式，指定 30 分鐘到 7 天之間的間隔值。舉例來說，如要指定 4 小時的過時時間間隔，請指定 `0-0 0 4:0:0`。如果中繼資料在過去 4 小時內重新整理過，系統會使用快取的中繼資料，對資料表執行作業。如果快取的中繼資料超過這個時間，作業就會改從 Cloud Storage 擷取中繼資料。
    * `DEFINITION_FILE`：您建立或更新的資料表定義檔案名稱。
    * `PROJECT_ID`：資料表所在專案的名稱
    * `DATASET`：資料表所在資料集的名稱
@@ -1146,11 +1146,11 @@ bq update --project_id=myproject --max_staleness='0-0 0 4:30:0' \
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-24 (世界標準時間)。
+上次更新時間：2026-10-29 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-24 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]

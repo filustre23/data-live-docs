@@ -59,7 +59,7 @@ See https://github.com/GoogleCloudPlatform/cloud-opensource-java/wiki/The-Google
 </dependencies>
 ```
 
-如果您使用 [Gradle](https://gradle.org/)，請在依附元件中加入下列項目：
+如果您使用 [Gradle](https://gradle.org/)，請在依附元件中加入以下指令：
 
 ```
 implementation platform('com.google.cloud:libraries-bom:26.45.0')
@@ -73,7 +73,7 @@ implementation 'com.google.cloud:google-cloud-bigquery'
 libraryDependencies += "com.google.cloud" % "google-cloud-bigquery" % "2.42.2"
 ```
 
-如果您使用 Visual Studio Code 或 IntelliJ，可以透過下列 IDE 外掛程式，將用戶端程式庫新增至專案：
+如果您使用的是 Visual Studio Code 或 IntelliJ，可以使用下列 IDE 外掛程式，將用戶端程式庫新增至專案：
 
 * [Cloud Code for VS Code](https://docs.cloud.google.com/code/docs/vscode/client-libraries?hl=zh-tw)
 * [Cloud Code for IntelliJ](https://docs.cloud.google.com/code/docs/intellij/client-libraries?hl=zh-tw)
@@ -133,30 +133,30 @@ cargo add google-cloud-bigquery
 在本機開發環境中，您可以使用與 Google 帳戶相關聯的憑證設定 ADC：
 
 1. [安裝](https://docs.cloud.google.com/sdk/docs/install?hl=zh-tw) Google Cloud CLI。
-   完成後，執行下列指令來[初始化](https://docs.cloud.google.com/sdk/docs/initializing?hl=zh-tw) Google Cloud CLI：
+   安裝完成後，請執行下列指令，[初始化](https://docs.cloud.google.com/sdk/docs/initializing?hl=zh-tw) Google Cloud CLI：
 
    ```
    gcloud init
    ```
 
-   如果您使用外部識別資訊提供者 (IdP)，請先[使用聯合身分登入 gcloud CLI](https://docs.cloud.google.com/iam/docs/workforce-log-in-gcloud?hl=zh-tw)。
-2. 如果您使用本機殼層，請為使用者帳戶建立本機驗證憑證：
+   若您採用的是外部識別資訊提供者 (IdP)，請先[使用聯合身分登入 gcloud CLI](https://docs.cloud.google.com/iam/docs/workforce-log-in-gcloud?hl=zh-tw)。
+2. 如果您使用的是本機殼層，請為使用者帳戶建立本機驗證憑證：
 
    ```
    gcloud auth application-default login
    ```
 
-   如果您使用 Cloud Shell，則不需要執行這項操作。
+   如果您使用的是 Cloud Shell，則不必執行這項操作。
 
-   如果系統傳回驗證錯誤，且您使用外部識別資訊提供者 (IdP)，請確認您已[使用聯合身分登入 gcloud CLI](https://docs.cloud.google.com/iam/docs/workforce-log-in-gcloud?hl=zh-tw)。
+   如果系統傳回驗證錯誤，且您使用的是外部識別資訊提供者 (IdP)，請確認您已[使用聯合身分登入 gcloud CLI](https://docs.cloud.google.com/iam/docs/workforce-log-in-gcloud?hl=zh-tw)。
 
    登入畫面會隨即顯示。登入後，您的憑證會儲存在 [ADC 使用的本機憑證檔案](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=zh-tw#personal)中。
 
 ## 使用用戶端程式庫
 
-以下範例說明如何初始化用戶端，以及對 BigQuery API 公開資料集執行查詢。
+以下範例說明如何初始化用戶端，並對 BigQuery API 公開資料集執行查詢。
 
-**注意：**系統不支援 JRuby。
+**注意：**不支援 JRuby。
 
 ### C#
 
@@ -180,7 +180,5 @@ public class BigQueryQuery
             parameters: null,
             options: new QueryOptions { UseQueryCache = false });
         // Wait for the job to complete.
-        job = job.PollUntilCompleted().ThrowOnAnyError();
-        // Display the results
-        foreach (
+        job = job.
 ```

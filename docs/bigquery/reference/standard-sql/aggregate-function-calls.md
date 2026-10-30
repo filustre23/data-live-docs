@@ -266,7 +266,5 @@ FROM
   (
     SELECT NULL AS fruit
     UNION ALL
-    SELECT 'apple' AS fruit
-    UNION ALL
-    SELECT 'pear' AS fruit
+    SELECT 'apple'
 ```

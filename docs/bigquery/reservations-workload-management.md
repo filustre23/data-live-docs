@@ -41,7 +41,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 * `QUERY`：將這項預留項目用於非持續查詢工作，包括 SQL、DDL、DML 和 BigQuery ML (內建模型) 查詢。
 * `AUTOMATIC_MATERIALIZED_VIEW_REFRESH`：將這個預留項目用於[自動具體化檢視表重新整理](https://docs.cloud.google.com/bigquery/docs/materialized-views-manage?hl=zh-tw#automatic-refresh)工作。
 * `BACKGROUND_CHANGE_DATA_CAPTURE`：選擇[使用自己的預留項目](https://docs.cloud.google.com/bigquery/docs/search-index?hl=zh-tw#use_your_own_reservation)執行 [BigQuery CDC 擷取](https://docs.cloud.google.com/bigquery/docs/change-data-capture?hl=zh-tw)背景工作時，請使用這個預留項目。Standard 版本不提供`BACKGROUND_CHANGE_DATA_CAPTURE`預留項目。
-* `BACKGROUND_COLUMN_METADATA_INDEX`：選擇[使用自己的預留項目](https://docs.cloud.google.com/bigquery/docs/search-index?hl=zh-tw#use_your_own_reservation)執行 [BigLake 中繼資料快取](https://docs.cloud.google.com/bigquery/docs/metadata-caching?hl=zh-tw)背景工作時，請使用這個預留項目。使用 Datastream 的背景套用作業，將來源資料庫複製到 BigQuery 時，也請使用這項預留項目。Standard 版本不提供`BACKGROUND_COLUMN_METADATA_INDEX`預留項目。
+* `BACKGROUND_COLUMN_METADATA_INDEX`：選擇[使用自己的預留項目](https://docs.cloud.google.com/bigquery/docs/search-index?hl=zh-tw#use_your_own_reservation)執行 [BigLake 中繼資料快取](https://docs.cloud.google.com/bigquery/docs/metadata-caching-external-tables?hl=zh-tw)背景工作時，請使用這個預留項目。使用 Datastream 的背景套用作業，將來源資料庫複製到 BigQuery 時，也請使用這項預留項目。Standard 版本不提供`BACKGROUND_COLUMN_METADATA_INDEX`預留項目。
 * `BACKGROUND_SEARCH_INDEX_REFRESH`：選擇[使用自己的預留項目](https://docs.cloud.google.com/bigquery/docs/search-index?hl=zh-tw#use_your_own_reservation)執行 [BigQuery 搜尋](https://docs.cloud.google.com/bigquery/docs/search-intro?hl=zh-tw)索引管理背景工作時，請使用這個預留項目。Standard 版本不提供`BACKGROUND_SEARCH_INDEX_REFRESH`預留項目。
 * `BACKGROUND`：選擇[使用自己的預留項目](https://docs.cloud.google.com/bigquery/docs/search-index?hl=zh-tw#use_your_own_reservation)，透過 Datastream 的背景套用作業，將來源資料庫複製到 BigQuery 時，請使用這個預留項目。如果沒有更明確的預留項目，這項預留項目也會做為備用，用於 `BACKGROUND_CHANGE_DATA_CAPTURE`、`BACKGROUND_COLUMN_METADATA_INDEX` 和 `BACKGROUND_SEARCH_INDEX_REFRESH` 描述的工作。Standard 版本不提供`BACKGROUND`預留項目。
 * `CONTINUOUS`：將這個預留項目用於[持續查詢](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction?hl=zh-tw)工作。
@@ -233,7 +233,7 @@ BigQuery 的預留項目可讓您進一步控管預留項目的使用方式，�
 * 在某個管理專案中購買的使用承諾，無法移至其他管理專案。
 * 以某個[版本](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)購買的使用承諾，無法用於其他版本的預留項目。
 * 不同[版本](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)的預留項目不會共用閒置運算單元。
-* [自動調度資源的運算單元](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro?hl=zh-tw)無法共用，因為不再需要時會縮減。
+* [自動調度資源的運算單元](https://docs.cloud.google.com/bigquery/docs/slots?hl=zh-tw#slot-autoscaling)無法共用，因為不再需要時會縮減。
 
 ## 預留項目的可預測性
 
@@ -378,11 +378,11 @@ BigQuery 擁有預留項目，代表 BigQuery 中特定作業的免費共用運�
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-24 (世界標準時間)。
+上次更新時間：2026-10-29 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-24 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]

@@ -135,18 +135,4 @@ Assessment task config.
 | `output_dataset` | `string`  Required. The BigQuery dataset for output. |
 | `querylogs_path` | `string`  Optional. An optional Cloud Storage path to write the query logs (which is then used as an input path on the translation task) |
 | `data_source` | `string`  Required. The data source or data warehouse type (eg: TERADATA/REDSHIFT) from which the input data is extracted. |
-| `feature_handle` | `AssessmentFeatureHandle`  Optional. A collection of additional feature flags for this assessment. |
-
-## AzureSynapseDialect
-
-This type has no fields.
-
-The dialect definition for Azure Synapse.
-
-## BigQueryDialect
-
-This type has no fields.
-
-The dialect definition for BigQuery.
-
-## CreateMigrationWorkflowRequest
+| `feature_handle` | `AssessmentFeatureHandle`  Optional. A coll |

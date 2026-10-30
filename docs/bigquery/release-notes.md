@@ -27,6 +27,75 @@ To get the latest product updates delivered to you, add the URL of this page to 
 reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators), or add the
 [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## October 27, 2026
+
+Feature
+
+You can manage and version control SQL scripts and notebooks with
+[BigQuery Studio Git repositories](/bigquery/docs/git-repositories),
+which provide a streamlined, folder-based integration with remote Git
+repositories. This feature is
+[generally available](https://cloud.google.com/products#product-launch-stages)
+(GA).
+
+Feature
+
+The [Data Engineering Agent now integrates with Google
+Drive](/gemini/data-agents/data-engineering-agent/agent-overview#google-drive-integration),
+letting you provide Google Sheets files, CSV, or JSONL files as input for
+your data engineering pipelines.
+
+This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
+Feature
+
+You can now use [conversational analytics in Connected Sheets](/bigquery/docs/connected-sheets#use-ca-in-connected-sheets)
+to ask questions and analyze your BigQuery data using natural
+language. The Gemini side panel can help you translate your questions into
+optimized SQL queries and execute them, summarize key trends, and
+insert live, refreshable database objects directly into your workbook.
+
+This feature is [generally available](https://cloud.google.com/products#product-launch-stages)
+(GA).
+
+Feature
+
+The
+[`AI.COUNT_TOKENS` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-count-tokens),
+which estimates the token count of a text string, is
+[generally available](https://cloud.google.com/products#product-launch-stages)
+(GA).
+
+## October 26, 2026
+
+Feature
+
+Conversation logging for [Conversational analytics in
+BigQuery](/bigquery/docs/conversational-analytics) is now
+[generally available](https://cloud.google.com/products#product-launch-stages)
+(GA). You can log data agent conversations to a BigQuery table in
+the agent's project. For more information, see [Conversation logging
+overview](/bigquery/docs/conversation-logging-overview) and [Configure
+settings](/bigquery/docs/create-data-agents#configure_settings).
+
+Feature
+
+Python user-defined functions now support
+[volume mounts](/bigquery/docs/user-defined-functions-python#volume-mounts),
+which let you access dependency files from Cloud Storage directly from your
+Python UDF code. This feature is in
+[Preview](https://cloud.google.com/products/#product-launch-stages).
+
+Feature
+
+The
+[`REGEXP_EXTRACT_GROUPS` function](/bigquery/docs/reference/standard-sql/string_functions#regexp_extract_groups)
+produces substrings that match multiple capturing groups in a regular
+expression.
+
+This function is in
+[Preview](https://cloud.google.com/products#product-launch-stages).
+
 ## October 22, 2026
 
 Feature
@@ -4768,41 +4837,3 @@ Libraries
 
 * Ensure AccessEntry equality and repr uses the correct `entity_type` ([#2182](https://github.com/googleapis/python-bigquery/issues/2182)) ([0217637](https://github.com/googleapis/python-bigquery/commit/02176377d5e2fc25b5cd4f46aa6ebfb1b6a960a6))
 * Ensure SchemaField.field\_dtype returns a string ([#2188](https://github.com/googleapis/python-bigquery/issues/2188)) ([7ec2848](https://github.com/googleapis/python-bigquery/commit/7ec2848379d5743bbcb36700a1153540c451e0e0))
-
-Libraries
-
-### Java
-
-#### [2.50.1](https://github.com/googleapis/java-bigquery/compare/v2.50.0...v2.50.1) (2025-05-16)
-
-##### Dependencies
-
-* Update dependency com.google.cloud:sdk-platform-java-config to v3.48.0 ([#3790](https://github.com/googleapis/java-bigquery/issues/3790)) ([206f06d](https://github.com/googleapis/java-bigquery/commit/206f06de115ead53b26f09a5f4781efd279b5a73))
-* Update netty.version to v4.2.1.final ([#3780](https://github.com/googleapis/java-bigquery/issues/3780)) ([6dcd858](https://github.com/googleapis/java-bigquery/commit/6dcd858eca788a8cb571368e12b4925993e380c4))
-
-##### Documentation
-
-* **bigquery:** Update TableResult.getTotalRows() docstring ([#3785](https://github.com/googleapis/java-bigquery/issues/3785)) ([6483588](https://github.com/googleapis/java-bigquery/commit/6483588a3c5785b95ea841f21aa38f50ecf4226d))
-
-## May 22, 2025
-
-Feature
-
-When you migrate Teradata data to BigQuery using the BigQuery Data Transfer Service, you can now [specify the outputs of the BigQuery translation engine to use as schema mapping](/bigquery/docs/migration/teradata-overview#using_translation_engine_output_for_schema). This feature is in [preview](https://cloud.google.com/products#product-launch-stages).
-
-Feature
-
-When you [Set up Gemini in BigQuery](/gemini/docs/bigquery/set-up-gemini) you are now prompted to grant the BigQuery Studio User and BigQuery Studio Admin roles. These roles now include permission to use Gemini in BigQuery features. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
-
-Change
-
-Starting March 17 2026, the `bigquery.datasets.getIamPolicy`
-IAM permission is required to view a dataset's access controls and to query the
-[`INFORMATION_SCHEMA.OBJECT_PRIVILEGES`](/bigquery/docs/information-schema-object-privileges)
-view. The `bigquery.datasets.setIamPolicy` permission is required to update a
-dataset's access controls or to [create a dataset with access controls using the
-API](/bigquery/docs/dataset-access-control#changes_to_api_methods). For more information on this change and how to opt into early enforcement, see [Changes to dataset-level access controls](/bigquery/docs/dataset-access-control).
-
-Feature
-
-You can use [custom constraints](/bigquery/docs/custom-constraints) with Organization Policy to provide more granular control over specific fields for some BigQuery reso

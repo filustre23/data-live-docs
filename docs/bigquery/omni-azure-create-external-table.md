@@ -164,7 +164,7 @@ PROJECT_ID:DATASET_NAME
    * `CONNECTION_NAME`：您建立的連線名稱
    * `DATA_FORMAT`：任何支援的 [BigQuery 聯合格式](https://docs.cloud.google.com/bigquery/external-data-sources?hl=zh-tw)，例如 `AVRO`、`CSV`、`DELTA_LAKE` 或 `ICEBERG` ([預先發布版](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages))
    * `AZURE_STORAGE_ACCOUNT_NAME`：Blob 儲存體帳戶名稱
-   * `CONTAINER_NAME`：Blob 儲存體容器名稱
+   * `CONTAINER_NAME`：Blob 儲存體容器的名稱
    * `FILE_PATH`：指向 Blob 儲存體資料的資料路徑
 3. 按一下「play\_circle 執行」。
 
@@ -579,7 +579,7 @@ WITH CONNECTION connection_name;
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 如果找不到「Editor」(編輯器) 分頁，請按一下 add\_box「Compose new query」(編寫新查詢)。
 3. 依序點選「編輯」>「查詢設定」。系統隨即會開啟「查詢設定」對話方塊。
-4. 在「Query settings」(查詢設定) 對話方塊中，依序點選「Additional settings」(其他設定) >「Data location」(資料位置)，然後選取與 BigQuery Omni 區域位於相同位置的 [BigQuery 區域](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#omni-loc)。舉例來說，如果 BigQuery Omni 區域是 `aws-us-east-1`，請指定 `us-east4`。
+4. 在「Query settings」(查詢設定) 對話方塊中，依序點選「Additional settings」(其他設定) >「Data location」(資料位置)，然後選取與 BigQuery Omni 區域位於相同位置的 [BigQuery 區域](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#omni-loc)。舉例來說，如果 BigQuery Omni 區域為 `aws-us-east-1`，請指定 `us-east4`。
 5. 選取其餘欄位，然後點按「儲存」。
 
 ### bq
@@ -823,11 +823,11 @@ BigQuery 管理員可以建立網路規則，授予 BigQuery Omni 存取 Blob �
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-24 (世界標準時間)。
+上次更新時間：2026-10-29 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-24 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]

@@ -571,15 +571,5 @@ This option accepts the following values:
 **Syntax**
 
 ```
-CLEAN_SPIKES_AND_DIPS = { TRUE | FALSE }
+CLEAN_SPIKES_AND_DIPS = { TRUE
 ```
-
-**Description**
-
-Determines whether or not to perform automatic spikes and dips detection and
-cleanup in the `ARIMA_PLUS` model training pipeline. The spikes and dips are
-replaced with local linear interpolated values when they're detected.
-
-**Arguments**
-
-A `BOOL` value. The default value is `TRUE`.

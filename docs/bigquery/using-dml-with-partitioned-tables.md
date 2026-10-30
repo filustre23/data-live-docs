@@ -16,13 +16,9 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 使用 DML 更新分區資料表資料
 
-本頁面提供分區資料表支援的 data manipulation language (DML) 總覽。
+BigQuery 的資料操縱語言 (DML) 可讓您在分區資料表中插入、更新及刪除資料，以便修改特定分區，同時盡可能減少掃描的資料量。
 
-如需有關 DML 的詳細資訊，請參閱：
-
-* [DML 簡介](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language?hl=zh-tw)
-* [DML 語法](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax?hl=zh-tw)
-* [使用 data manipulation language 更新資料表資料](https://docs.cloud.google.com/bigquery/docs/updating-data?hl=zh-tw)
+如要進一步瞭解 DML，請參閱「[DML 簡介](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language?hl=zh-tw)」、「[DML 語法](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax?hl=zh-tw)」和「[使用資料操縱語言更新資料表資料](https://docs.cloud.google.com/bigquery/docs/updating-data?hl=zh-tw)」。
 
 ## 範例中使用的資料表
 
@@ -379,11 +375,11 @@ WHEN NOT MATCHED BY SOURCE THEN
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-23 (世界標準時間)。
+上次更新時間：2026-10-28 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-23 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-28 (世界標準時間)。"],[],[]]

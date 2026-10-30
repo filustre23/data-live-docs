@@ -34,7 +34,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
   + `PROJECT_ID`：執行 BigQuery 的專案 ID
   + `PROJECT_NUMBER`：執行 BigQuery 的專案編號
-  + `KMS_PROJECT_ID`：執行 Cloud KMS 的專案 ID (即使與執行 BigQuery 的專案相同)如要瞭解 Google Cloud 專案 ID 和專案編號，請參閱「[尋找專案名稱、編號和 ID](https://docs.cloud.google.com/resource-manager/docs/view-update-projects?hl=zh-tw#identifying_projects)」。
+  + `KMS_PROJECT_ID`：執行 Cloud KMS 的專案 ID (即使與執行 BigQuery 的專案相同)如要瞭解 Google Cloud 專案 ID 和專案編號，請參閱「[尋找專案名稱、編號和 ID](https://docs.cloud.google.com/resource-manager/docs/view-update-projects?hl=zh-tw)」。
 * 新專案會自動啟用 BigQuery。如果您是使用現有專案來執行 BigQuery，請[啟用 BigQuery API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery&hl=zh-tw)。
 * 針對執行 Cloud KMS 的 Google Cloud 專案，[啟用 Cloud Key Management Service API](https://console.cloud.google.com/apis/enableflow?apiid=cloudkms.googleapis.com&hl=zh-tw)。
 
@@ -236,7 +236,7 @@ bq query --destination_table=DATASET_ID.TABLE_ID \
 "SELECT name,count FROM DATASET_ID.TABLE_ID WHERE gender = 'M' ORDER BY count DESC LIMIT 6"
 ```
 
-如要進一步瞭解 bq 指令列工具，請參閱「[使用 bq 指令列工具](https://docs.cloud.google.com/bigquery/bq-command-line-tool?hl=zh-tw)」。
+如要進一步瞭解 bq 指令列工具，請參閱「[使用 bq 指令列工具](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw)」。
 
 ### Terraform
 
@@ -547,7 +547,7 @@ bq query \
 "SELECT name,count FROM DATASET_ID.TABLE_ID WHERE gender = 'M' ORDER BY count DESC LIMIT 6"
 ```
 
-如要進一步瞭解 bq 指令列工具，請參閱「[使用 bq 指令列工具](https://docs.cloud.google.com/bigquery/bq-command-line-tool?hl=zh-tw)」。
+如要進一步瞭解 bq 指令列工具，請參閱「[使用 bq 指令列工具](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw)」。
 
 ### Go
 
@@ -930,7 +930,7 @@ if table.encryption_configuration.kms_key_name == kms_key_name:
 
 您可以直接以串流方式將資料傳入受 CMEK 保護的 BigQuery 資料表，而不必指定任何其他參數。請注意，系統會在緩衝區和最終位置中，使用您的 Cloud KMS 金鑰對這些資料進行加密。在搭配 CMEK 資料表使用串流功能前，請先瞭解要符合哪些條件才能確保[金鑰可供使用及存取](#key_access)。
 
-如要進一步瞭解串流，請參閱「[使用 BigQuery Storage Write API (gRPC) 串流資料](https://docs.cloud.google.com/bigquery/docs/write-api?hl=zh-tw)」。
+如要進一步瞭解串流，請參閱「[Storage Write API 簡介](https://docs.cloud.google.com/bigquery/docs/write-api-grpc?hl=zh-tw)」。
 
 ## 將資料表的保護機制從預設加密改成 Cloud KMS 防護
 
@@ -956,7 +956,7 @@ DATASET_ID.TABLE_ID DATASET_ID.TABLE_ID
 
 如要將資料表的保護機制從 Cloud KMS 改為預設加密，請執行 `bq cp`，但不使用 `--destination_kms_key` 旗標，將檔案複製到自身。
 
-如要進一步瞭解 bq 指令列工具，請參閱「[使用 bq 指令列工具](https://docs.cloud.google.com/bigquery/bq-command-line-tool?hl=zh-tw)」。
+如要進一步瞭解 bq 指令列工具，請參閱「[使用 bq 指令列工具](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw)」。
 
 ### Go
 
@@ -974,9 +974,5 @@ import (
 
 // copyTableWithCMEK demonstrates creating a copy of a table and ensuring the copied data is
 // protected with a customer managed encryption key.
-func copyTableWithCMEK(projectID, datasetID, tableID string) error {
-	// projectID := "my-project-id"
-	// datasetID := "mydataset"
-	// tableID := "mytable"
-	ctx := context.Background</
+func copyTableWithCMEK(projectID, datasetID, tableID string
 ```

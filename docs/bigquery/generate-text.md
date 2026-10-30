@@ -1342,10 +1342,3 @@ STRUCT(
 
   + `BLOCK_NONE`
     ([受限](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/multimodal/configure-safety-attributes?hl=zh-tw#how_to_remove_automated_response_blocking_for_select_safety_attributes))
-  + `BLOCK_LOW_AND_ABOVE`
-  + `BLOCK_MEDIUM_AND_ABOVE` (預設)
-  + `BLOCK_ONLY_HIGH`
-  + `HARM_BLOCK_THRESHOLD_UNSPECIFIED`
-
-  詳情請參閱[安全類別](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/multimodal/configure-safety-filters?hl=zh-tw#harm_categories)和[封鎖門檻](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/multimodal/configure-safety-filters?hl=zh-tw#how-to-configure-content-filters)的定義。
-* `MODEL_PARAMS`：JSON 格式的字串文字，可為模型提供額外參數

@@ -212,17 +212,5 @@ result is `NULL`. Format elements are case-insensitive.
 **Example**
 
 ```
-SELECT CAST(b'\x48\x65\x6c\x6c\x6f' AS STRING FORMAT 'ASCII') AS bytes_to_string;
-
-/*-----------------+
- | bytes_to_string |
- +-----------------+
- | Hello           |
- +-----------------*/
-```
-
-### Format string as bytes
-
-```
-CAST(
+SELECT CAST(b'\x48\x65\x6c\x6c\x6f' AS STRING FORMAT 'ASCII') AS bytes_to_string</
 ```

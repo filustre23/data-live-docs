@@ -460,14 +460,4 @@ Syntax:
 DATE 'date_canonical_format'
 ```
 
-Date literals contain the `DATE` keyword followed by
-[`date_canonical_format`](/bigquery/docs/reference/standard-sql/data-types#canonical_format_for_date_literals),
-a string literal that conforms to the canonical date format, enclosed in single
-quotation marks. Date literals support a range between the
-years 1 and 9999, inclusive. Dates outside of this range are invalid.
-
-For example, the following date literal represents September 27, 2014:
-
-```
-DATE
-```
+Date literals contain the `DATE</`

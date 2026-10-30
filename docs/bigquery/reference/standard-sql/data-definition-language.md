@@ -205,4 +205,3 @@ reference documentation](https://googleapis.dev/nodejs/bigquery/latest/index.htm
 
 To authenticate to BigQuery, set up Application Default Credentials.
 For more information, see
-[Set up authentication for client libraries](/bigquery/docs/authentication#client-libs).

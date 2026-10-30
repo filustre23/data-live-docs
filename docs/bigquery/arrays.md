@@ -10,16 +10,16 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 使用陣列 透過集合功能整理內容 你可以依據偏好儲存及分類內容。
 
-在 BigQuery 的 GoogleSQL 中，陣列是包含零或多個相同資料類型值的有序清單。您可以建構簡單資料類型 (例如 `INT64`) 或複雜資料類型 (例如 `STRUCT`) 的陣列。不過，系統不支援陣列的陣列。如要進一步瞭解 `ARRAY`
-資料類型 (包括`NULL`處理方式)，請參閱「[陣列型別](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#array_type)」。
+在 GoogleSQL for BigQuery 中，陣列是由零或多個相同資料類型的值組成的已排序清單。您可以建構簡單資料類型的陣列 (例如 `INT64`)，或複雜資料類型的陣列 (例如 `STRUCT`)。不過，不支援陣列的陣列。如要進一步瞭解 `ARRAY` 資料類型，包括 `NULL` 處理方式，請參閱「[陣列類型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#array_type)」。
 
-使用 GoogleSQL，您可以建構陣列常值、使用 [`ARRAY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions?hl=zh-tw) 函式從子查詢建構陣列，以及使用 [`ARRAY_AGG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions?hl=zh-tw#array_agg) 函式將值匯總至陣列。
+您可以使用 GoogleSQL 建構陣列常值、使用 [`ARRAY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions?hl=zh-tw) 函式從子查詢建構陣列，以及使用 [`ARRAY_AGG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions?hl=zh-tw#array_agg) 函式將值匯總至陣列。
 
 您可以使用如 `ARRAY_CONCAT()` 等函式來合併陣列，然後以 `ARRAY_TO_STRING()` 將陣列轉換為字串。
 
 ## 存取陣列元素
 
-請參考以下名為 `Sequences` 的表格。這個資料表包含 `some_numbers` 資料欄，資料類型為 `ARRAY`。
+請參考名為 `Sequences` 的資料表。這個資料表包含
+`ARRAY` 資料類型的 `some_numbers` 資料欄。
 
 ```
 WITH
@@ -39,7 +39,7 @@ SELECT * FROM Sequences;
  +---------------------*/
 ```
 
-如要存取 `some_numbers` 資料欄中的陣列元素，請指定要使用的索引類型：以零為基準的索引使用 [`index`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators?hl=zh-tw#array_subscript_operator) 或 [`OFFSET(index)`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators?hl=zh-tw#array_subscript_operator)，以一為基準的索引使用 [`ORDINAL(index)`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators?hl=zh-tw#array_subscript_operator)：
+如要存取 `some_numbers` 資料欄中的陣列元素，請指定要使用的索引類型：[`index`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators?hl=zh-tw#array_subscript_operator) 或 [`OFFSET(index)`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators?hl=zh-tw#array_subscript_operator) (用於以零為基準的索引)，或 [`ORDINAL(index)`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators?hl=zh-tw#array_subscript_operator) (用於以一為基準的索引)：
 
 ```
 SELECT
@@ -58,7 +58,7 @@ FROM Sequences;
  +--------------------+---------+----------+-----------*/
 ```
 
-**注意：** 如果索引超出範圍，`OFFSET` 和 `ORDINAL` 會引發錯誤。為避免這種情況，您可以改用 `SAFE_OFFSET` 或 `SAFE_ORDINAL` 傳回 `NULL`，而不是引發錯誤。
+**注意：** 如果索引超出範圍，`OFFSET` 和 `ORDINAL` 會引發錯誤。為避免這種情況，您可以使用 `SAFE_OFFSET` 或 `SAFE_ORDINAL` 傳回 `NULL`，而不是引發錯誤。
 
 如要存取陣列中的第一個或最後一個元素，請使用 [`ARRAY_FIRST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions?hl=zh-tw#array_first) 或 [`ARRAY_LAST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions?hl=zh-tw#array_last) 函式：
 
@@ -78,7 +78,7 @@ FROM Sequences;
  +--------------------+---------------+--------------*/
 ```
 
-使用 `ARRAY_FIRST` 和 `ARRAY_LAST` 函式時，如果陣列為空白，函式會產生錯誤：
+使用 `ARRAY_FIRST` 和 `ARRAY_LAST` 函式時，如果陣列空白，函式會產生錯誤：
 
 ```
 WITH
@@ -97,7 +97,7 @@ FROM Sequences;
 -- Error: ARRAY_LAST can't get the last element of an empty array.
 ```
 
-如要在存取第一個和最後一個元素時處理空白陣列，可以在 `SAFE_OFFSET` 的 `-1` 中使用 [`ARRAY_LENGTH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions?hl=zh-tw#array_length) 函式。查詢會針對任何空白陣列傳回 `NULL` 值，而不是錯誤：
+如要在存取第一個和最後一個元素時處理空白陣列，您可以在 `-1` 的 `SAFE_OFFSET` 中使用 [`ARRAY_LENGTH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions?hl=zh-tw#array_length) 函式。查詢會針對任何空白陣列傳回 `NULL` 值，而不是錯誤：
 
 ```
 SELECT
@@ -114,8 +114,7 @@ FROM Sequences;
  +--------------------+--------------*/
 ```
 
-`ARRAY_LENGTH(array)` 會傳回陣列中的元素數量。由於陣列位移是以 0 為基準，`ARRAY_LENGTH(array) - 1` 會提供最後一個元素的位移。如果陣列為空白，`ARRAY_LENGTH` 為 0，則位移會變成 -1。
-`SAFE_OFFSET(-1)` 會傳回 `NULL`，因此這個方法可安全地處理空陣列。
+`ARRAY_LENGTH(array)` 會傳回陣列中的元素數量。由於陣列偏移值是以 0 為基準，因此 `ARRAY_LENGTH(array) - 1` 會提供最後一個元素的偏移值。如果陣列為空，`ARRAY_LENGTH` 為 0，偏移量則會變成 -1。`SAFE_OFFSET(-1)` 會傳回 `NULL`，因此這個方法可以安全地處理空白陣列。
 
 ## 尋找長度
 
@@ -139,7 +138,7 @@ FROM Sequences;
  +--------------------+--------*/
 ```
 
-## 將陣列中的元素轉換為表格中的資料列
+## 將陣列中的元素轉換為資料表中的資料列
 
 如要將 `ARRAY` 轉換為一組資料列 (也稱為「整併」)，請使用 [`UNNEST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw#unnest_operator) 運算子。`UNNEST` 會採取 `ARRAY`，然後傳回包含 `ARRAY` 中每個元素的單列資料表。
 
@@ -168,13 +167,13 @@ ORDER BY offset;
  +----------+--------*/
 ```
 
-如要將整個 `ARRAY` 類型的資料欄攤平，同時保留每個資料列中其他資料欄的值，請使用相關的 [`INNER JOIN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw#inner_join)，將包含 `ARRAY` 資料欄的表格加入該 `ARRAY` 資料欄的 `UNNEST` 輸出內容。
+如要將 `ARRAY` 類型的整個資料欄扁平化，同時保留每列中其他資料欄的值，請使用關聯的 [`INNER JOIN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw#inner_join)，將包含 `ARRAY` 資料欄的資料表，彙整至該 `ARRAY` 資料欄的 `UNNEST` 輸出內容。
 
-使用[相關](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw#correlated_join)聯結時，`UNNEST` 運算子會參照來源資料表中每個資料列的 `ARRAY` 已指定類型和格式的欄，該資料欄先前出現在 `FROM` 子句中。針對來源資料表中的每個資料列 `N`，`UNNEST` 會將資料列 `N` 中的 `ARRAY` 整併為一組包含 `ARRAY` 元素的資料列，然後相關的 `INNER JOIN` 或 `CROSS JOIN` 會將這組新資料列與來源資料表中的單一資料列 `N` 合併。
+使用「關聯」彙整時，`UNNEST` 運算子會參照來源資料表中每個資料列的 `ARRAY` 已指定類型和格式的欄，該資料欄先前會出現在 `FROM` 子句中。對於來源資料表中的每個資料列 `N`，`UNNEST` 會將資料列 `N` 中的 `ARRAY` 扁平化為一組包含 `ARRAY` 元素的資料列，然後相關的 `INNER JOIN` 或 `CROSS JOIN` 會將這組新的資料列與來源資料表中的單一資料列 `N` 結合。
 
 **範例**
 
-以下範例使用 [`UNNEST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw#unnest_operator)，針對陣列欄中的每個元素傳回一列。由於有 `INNER JOIN`，`id` 欄會包含 `Sequences` 中每個數字所在資料列的 `id` 值。
+以下範例使用 [`UNNEST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw#unnest_operator) 傳回陣列欄中每個元素的資料列。由於 `INNER JOIN`，`id` 欄會包含 `Sequences` 中包含每個數字的資料列的 `id` 值。
 
 ```
 WITH
@@ -206,7 +205,7 @@ INNER JOIN UNNEST(Sequences.some_numbers) AS flattened_numbers;
  +------+-------------------*/
 ```
 
-請注意，如果是相關聯的聯結，`UNNEST` 運算子為選用，而 `INNER JOIN` 可以表示為 `CROSS JOIN` 或逗號交叉聯結。使用逗號交叉聯結簡寫標記，先前的範例會合併如下：
+請注意，對於關聯 join，`UNNEST` 運算子為選用，`INNER JOIN` 則可表示為 `CROSS JOIN` 或逗號 cross join。使用逗號 cross join 簡寫標記法，可將上述範例合併如下：
 
 ```
 WITH
@@ -239,11 +238,11 @@ FROM Sequences, Sequences.some_numbers AS flattened_numbers;
 
 ## 查詢巢狀陣列
 
-如果資料表包含 `ARRAY` 的 `STRUCT`，您可以[將 `ARRAY` 攤平](#flattening_arrays)，查詢 `STRUCT` 的欄位。您也可以將 `STRUCT` 值的 `ARRAY` 型別欄位攤平。
+如果資料表含有 `STRUCT` 的 `ARRAY`，您可以[整併 `ARRAY`](#flattening_arrays) 以查詢 `STRUCT` 的欄位，也可以整併 `STRUCT` 值的 `ARRAY` 類型欄位。
 
 ### 查詢陣列中的 `STRUCT` 元素
 
-以下範例使用 `UNNEST` 和 `INNER JOIN`，將 `ARRAY` 的 `STRUCT` 攤平。
+以下範例使用 `UNNEST` 搭配 `INNER JOIN` 來整併 `STRUCT` 的 `ARRAY`。
 
 ```
 WITH
@@ -283,7 +282,7 @@ INNER JOIN UNNEST(r.participants) AS participant;
 
 您可以在重複的欄位中發現特定資訊。舉例來說，以下查詢會傳回 800 公尺競賽中速度最快的跑者。
 
-**附註：** 這個範例不會涉及陣列攤平，但會呈現從重複欄位取得資訊的常見方式。
+**注意：** 這個範例不涉及扁平化陣列，但確實代表從重複欄位取得資訊的常見方式。
 
 **範例**
 
@@ -320,7 +319,7 @@ FROM Races;
  +------+---------------*/
 ```
 
-### 查詢結構體中的 `ARRAY` 類型欄位
+### 查詢 struct 中的 `ARRAY` 類型欄位
 
 您也可以從巢狀的重複欄位取得資訊。舉例來說，下列陳述式會傳回 800 公尺競賽中圈速最快的跑者。
 
@@ -357,7 +356,7 @@ FROM Races;
  +------+-------------------------*/
 ```
 
-請注意，上述查詢使用逗號運算子 (`,`) 執行交叉聯結，並將陣列扁平化。這等同於使用明確的 `CROSS JOIN`，或是下列使用明確 `INNER JOIN` 的範例：
+請注意，上述查詢使用逗號運算子 (`,`) 執行 cross join 並展開陣列。這相當於使用明確的 `CROSS JOIN`，或使用明確 `INNER JOIN` 的下列範例：
 
 ```
 WITH
@@ -391,8 +390,7 @@ FROM Races;
  +------+-------------------------*/
 ```
 
-使用 `INNER JOIN` 攤平陣列時，系統會排除空白或 `NULL`
-陣列的資料列。如要納入這些資料列，請使用 `LEFT JOIN`。
+使用 `INNER JOIN` 簡化陣列會排除含有空白或 `NULL` 陣列的資料列。如要納入這些資料列，請使用 `LEFT JOIN`。
 
 ```
 WITH
@@ -438,11 +436,11 @@ GROUP BY name;
 
 ## 建立陣列
 
-您可以使用陣列常值或陣列函式建構陣列。如要進一步瞭解如何建構陣列，請參閱「[陣列型別](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#constructing_an_array)」。
+您可以使用陣列常值或陣列函式建構陣列。如要進一步瞭解如何建構陣列，請參閱「[陣列類型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#constructing_an_array)」。
 
 ## 從子查詢建立陣列
 
-處理陣列的常見工作是將子查詢結果轉成陣列。在 GoogleSQL 中，您可以使用 [`ARRAY()`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions?hl=zh-tw) 函式達成此目的。
+處理陣列的常見工作是將子查詢結果轉成陣列。在 GoogleSQL 中，您可以使用 [`ARRAY()`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions?hl=zh-tw) 函式完成這項操作。
 
 舉例來說，請細想對 `Sequences` 資料表執行的下列作業：
 
@@ -465,15 +463,15 @@ FROM Sequences;
  +--------------------+---------------------*/
 ```
 
-這個範例從名為「Sequences」的資料表開始。這個資料表含有類型為 `ARRAY<INT64>` 的資料欄 `some_numbers`。
+這個範例一開始有一個名為「Sequences」的資料表。這個資料表含有類型為 `ARRAY<INT64>` 的資料欄 `some_numbers`。
 
-該查詢本身含有子查詢。這項子查詢會選取 `some_numbers` 資料欄中的每一個資料列，然後使用 [`UNNEST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw#unnest_operator) 以一組資料列的形式傳回陣列。接著，它會將每個值乘以 2，然後使用 `ARRAY()` 運算子將資料列重新合併為陣列。
+該查詢本身含有子查詢。這項子查詢會選取 `some_numbers` 資料欄中的每一個資料列，然後使用 [`UNNEST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw#unnest_operator) 以一組資料列的形式傳回陣列。接著，系統會將每個值乘以二，然後使用 `ARRAY()` 運算子將資料列重新組合成陣列。
 
 ## 篩選陣列
 
 以下範例在 `ARRAY()` 運算子的子查詢中使用 `WHERE` 子句來篩選傳回的資料列。
 
-**注意：** 在下列範例中，產生的資料列不會排序。
+**注意：** 在下列範例中，產生的資料列並未排序。
 
 ```
 WITH Sequences AS
@@ -495,7 +493,7 @@ FROM Sequences;
  +------------------------*/
 ```
 
-請注意，第三列包含空陣列，因為相應原始列 (`[5, 10]`) 中的元素不符合 `x < 5` 的篩選條件。
+請注意，第三列包含空白陣列，因為對應原始列 (`[5, 10]`) 中的元素不符合 `x < 5` 的篩選條件。
 
 您也可以使用 `SELECT DISTINCT`，只傳回陣列中非重複的元素，藉以篩選陣列。
 
@@ -535,11 +533,11 @@ FROM Sequences;
  +--------------------*/
 ```
 
-請注意，第三列包含空陣列，因為對應原始列 (`[5, 10]`) 中的陣列不含 `2`。
+請再次注意，第三列包含空陣列，因為對應原始列 (`[5, 10]`) 中的陣列不含 `2`。
 
 ## 掃描陣列
 
-如要檢查陣列是否包含特定值，請使用 [`IN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators?hl=zh-tw#in_operators) 運算子搭配 [`UNNEST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw#unnest_operator)。如要檢查陣列是否包含符合條件的值，請搭配 `UNNEST` 使用 [`EXISTS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators?hl=zh-tw#exists_operator) 運算子。
+如要檢查陣列是否包含特定值，請使用 [`IN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators?hl=zh-tw#in_operators) 運算子搭配 [`UNNEST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw#unnest_operator)。如要檢查陣列是否包含符合條件的值，請使用 [`EXISTS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators?hl=zh-tw#exists_operator) 運算子和 `UNNEST`。
 
 ### 掃描特定值
 
@@ -612,9 +610,9 @@ WHERE EXISTS(SELECT * FROM UNNEST(some_numbers) AS x WHERE x > 5);
  +---------------*/
 ```
 
-#### 掃描符合條件的「`STRUCT`」欄位值
+#### 掃描符合條件的 `STRUCT` 欄位值
 
-如要搜尋值符合條件的欄位陣列 `STRUCT` 值，請使用 `UNNEST` 傳回表格，其中每個 `STRUCT` 欄位各有一欄，然後使用 `WHERE EXISTS` 從表格中篩除不相符的資料列。
+如要搜尋 `STRUCT` 值陣列，找出值符合條件的欄位，請使用 `UNNEST` 傳回資料表，其中每個 `STRUCT` 欄位都有一欄，然後使用 `WHERE EXISTS` 篩除資料表中不符合條件的資料列。
 
 **範例**
 
@@ -643,7 +641,7 @@ WHERE EXISTS(SELECT 1 FROM UNNEST(some_numbers) WHERE b > 3);
 
 ## 陣列和匯總
 
-使用 GoogleSQL 時，您可以透過 `ARRAY_AGG()` 將值匯總至陣列。
+使用 GoogleSQL 時，您可以使用 `ARRAY_AGG()` 將值匯總至陣列。
 
 ```
 WITH Fruits AS
@@ -660,7 +658,7 @@ FROM Fruits;
  +-----------------------*/
 ```
 
-`ARRAY_AGG()` 傳回的陣列順序任意，因為函式串連值的順序不一定。如要排序陣列元素，請使用 `ORDER BY`：
+`ARRAY_AGG()` 傳回的陣列順序不固定，因為函式串連值的順序不一定。如要排序陣列元素，請使用 `ORDER BY`：
 
 ```
 WITH Fruits AS
@@ -698,7 +696,7 @@ FROM Sequences AS s;
  +--------------------+------*/
 ```
 
-GoogleSQL 也支援匯總函式 `ARRAY_CONCAT_AGG()`，可串連資料列中陣列資料欄的元素。
+GoogleSQL 也支援匯總函式 `ARRAY_CONCAT_AGG()`，可串連各列的陣列欄元素。
 
 ```
 WITH Aggregates AS
@@ -715,7 +713,7 @@ FROM Aggregates;
  +--------------------------------------------------*/
 ```
 
-**注意：** `ARRAY_CONCAT_AGG()` 傳回的陣列是不確定的，因為函式串連值的順序無法保證。
+**注意：** `ARRAY_CONCAT_AGG()` 傳回的陣列不具確定性，因為函式串連值的順序不一定。
 
 ## 將陣列轉換為字串
 
@@ -776,7 +774,7 @@ SELECT ARRAY_CONCAT([1, 2], [3, 4], [5, 6]) AS count_to_six;
 
 ## 更新陣列
 
-請參考以下名為 `arrays_table` 的表格。表格的第一欄是整數陣列，第二欄則包含兩個巢狀整數陣列。
+請參考名為 `arrays_table` 的資料表。資料表的第一欄是整數陣列，第二欄則包含兩個巢狀整數陣列。
 
 ```
 WITH arrays_table AS (
@@ -797,7 +795,7 @@ SELECT * FROM arrays_table;
  +---------------*---------------------------*----------------------------*/
 ```
 
-您可以使用 `UPDATE` 陳述式更新表格中的陣列。下列範例會在 `regular_array` 欄位中插入數字 5，並將 `nested_arrays` 欄位 `first_array` 欄位中的元素插入 `second_array` 欄位：
+您可以使用 `UPDATE` 陳述式更新資料表中的陣列。下列範例會將數字 5 插入 `regular_array` 欄，並將 `nested_arrays` 欄 `first_array` 欄位中的元素插入 `second_array` 欄位：
 
 ```
 UPDATE
@@ -819,9 +817,9 @@ SELECT * FROM arrays_table;
 
 ## 壓縮陣列
 
-假設有兩個大小相同的陣列，您可以將它們合併成單一陣列，其中包含輸入陣列的元素配對，取自對應位置。這項作業有時稱為「壓縮」。
+如果兩個陣列的大小相同，您可以將它們合併成一個陣列，其中包含來自輸入陣列對應位置的元素組合。這項作業有時稱為[壓縮](https://en.wikipedia.org/wiki/Convolution_(computer_science))。
 
-您可以使用 `UNNEST` 和 `WITH OFFSET` 壓縮陣列。在本範例中，每個值配對都會以陣列中的 `STRUCT` 形式儲存。
+您可以使用 `UNNEST` 和 `WITH OFFSET` 壓縮陣列。在這個範例中，每個值組合都會以 `STRUCT` 形式儲存在陣列中。
 
 ```
 WITH
@@ -852,9 +850,9 @@ SELECT
  +------------------------------*/
 ```
 
-只要第一個陣列的長度小於或等於第二個陣列的長度，您就可以使用不同長度的輸入陣列。壓縮後的陣列長度會與最短的輸入陣列相同。
+您可以使用不同長度的輸入陣列，只要第一個陣列等於或小於第二個陣列的長度即可。壓縮陣列的長度會是最短輸入陣列的長度。
 
-如要取得包含所有元素的壓縮陣列 (即使輸入陣列長度不同)，請將 `LEAST` 變更為 `GREATEST`。如果任一陣列的元素在另一個陣列中沒有相關聯的元素，則會與 `NULL` 配對。
+如要取得包含所有元素的壓縮陣列，即使輸入陣列長度不同，也請將 `LEAST` 變更為 `GREATEST`。如果任一陣列中的元素在另一個陣列中沒有相關聯的元素，則會與 `NULL` 配對。
 
 ```
 WITH
@@ -934,11 +932,11 @@ SELECT ARRAY(
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-24 (世界標準時間)。
+上次更新時間：2026-10-29 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-24 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]
