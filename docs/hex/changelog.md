@@ -1,9 +1,7 @@
-October 22, 2026
+October 30, 2026
 
-### Pull agent usage data and import Ossie models
+### Governed mode for the Hex Agent
 
-Admins can pull agent usage and credit spend data through the API, MCP server, or CLI, and convert Apache Ossie models into Hex semantic projects.
+Choose exactly which warehouse tables, semantic models, and projects the Hex Agent can use, and apply it to Explorers or your whole workspace.
 
-📊 Access usage and credit grants data
-
-⬆️ Import Apache Ossie models
+🔒 Governed mode

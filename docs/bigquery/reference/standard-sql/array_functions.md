@@ -333,5 +333,5 @@ SELECT ARRAY_SLICE(['a', 'b', 'c', 'd', 'e'], 1, 3) AS result
 ```
 
 ```
-SELECT ARRAY_SLICE(['a', 'b', 'c', 'd', 'e'], -1, 3)
+SELECT ARRAY_SLICE(['a', 'b', 'c', 'd', 'e'], -1, 3
 ```

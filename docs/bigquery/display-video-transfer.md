@@ -31,20 +31,18 @@ Display & Video 360 連接器的 BigQuery 資料移轉服務支援下列資料�
 
 ## 支援的設定資料
 
-除了報表資料外，BigQuery 資料移轉服務也會從 Display & Video 360 移轉下列設定資料。只有在移轉作業執行日期與排定的移轉時間相差不到 24 小時，系統才會從 [Display & Video 360 API v3](https://developers.google.com/display-video/api/reference/rest/v3?hl=zh-tw) 擷取設定資料。歷來資料補充期間，設定資料表不會更新。
+除了報表資料外，BigQuery 資料移轉服務也會從 Display & Video 360 移轉下列設定資料。只有在轉移作業執行日期與排定轉移時間相差不到 24 小時時，系統才會從 [Display & Video 360 API v4](https://developers.google.com/display-video/api/reference/rest/v4?hl=zh-tw) 擷取設定資料。歷來資料補充期間，設定資料表不會更新。
 
-* [合作夥伴](https://developers.google.com/display-video/api/reference/rest/v3/partners?hl=zh-tw#resource:-partner)
-* [廣告主](https://developers.google.com/display-video/api/reference/rest/v3/advertisers?hl=zh-tw#resource:-advertiser)
-* [LineItem](https://developers.google.com/display-video/api/reference/rest/v3/advertisers.lineItems?hl=zh-tw#LineItem)
-* [LineItemTargeting](https://developers.google.com/display-video/api/reference/rest/v3/advertisers.lineItems/bulkListAssignedTargetingOptions?hl=zh-tw#LineItemAssignedTargetingOption)
-* [Campaign](https://developers.google.com/display-video/api/reference/rest/v3/advertisers.campaigns?hl=zh-tw#Campaign)
-* [CampaignTargeting](https://developers.google.com/display-video/api/reference/rest/v3/advertisers.campaigns.targetingTypes.assignedTargetingOptions?hl=zh-tw#AssignedTargetingOption)
-* [InsertionOrder](https://developers.google.com/display-video/api/reference/rest/v3/advertisers.insertionOrders?hl=zh-tw#InsertionOrder)
-* [InsertionOrderTargeting](https://developers.google.com/display-video/api/reference/rest/v3/advertisers.insertionOrders.targetingTypes.assignedTargetingOptions?hl=zh-tw#AssignedTargetingOption)
-* [AdGroup](https://developers.google.com/display-video/api/reference/rest/v3/advertisers.adGroups?hl=zh-tw#AdGroup)
-* [AdGroupTargeting](https://developers.google.com/display-video/api/reference/rest/v3/advertisers.adGroups/bulkListAdGroupAssignedTargetingOptions?hl=zh-tw#AdGroupAssignedTargetingOption)
-* [AdGroupAd](https://developers.google.com/display-video/api/reference/rest/v3/advertisers.adGroupAds?hl=zh-tw#AdGroupAd)
-* [廣告素材](https://developers.google.com/display-video/api/reference/rest/v3/advertisers.creatives?hl=zh-tw#resource:-creative)
+* [合作夥伴](https://developers.google.com/display-video/api/reference/rest/v4/partners?hl=zh-tw#Partner)
+* [廣告主](https://developers.google.com/display-video/api/reference/rest/v4/advertisers?hl=zh-tw#Advertiser)
+* [LineItem](https://developers.google.com/display-video/api/reference/rest/v4/advertisers.lineItems?hl=zh-tw#LineItem)
+* [LineItemTargeting](https://developers.google.com/display-video/api/reference/rest/v4/advertisers.lineItems/bulkListAssignedTargetingOptions?hl=zh-tw#LineItemAssignedTargetingOption)
+* [Campaign](https://developers.google.com/display-video/api/reference/rest/v4/advertisers.campaigns?hl=zh-tw#Campaign)
+* [InsertionOrder](https://developers.google.com/display-video/api/reference/rest/v4/advertisers.insertionOrders?hl=zh-tw#InsertionOrder)
+* [AdGroup](https://developers.google.com/display-video/api/reference/rest/v4/advertisers.adGroups?hl=zh-tw#AdGroup)
+* [AdGroupTargeting](https://developers.google.com/display-video/api/reference/rest/v4/advertisers.adGroups/bulkListAssignedTargetingOptions?hl=zh-tw#AdGroupAssignedTargetingOption)
+* [AdGroupAd](https://developers.google.com/display-video/api/reference/rest/v4/advertisers.adGroupAds?hl=zh-tw#AdGroupAd)
+* [廣告素材](https://developers.google.com/display-video/api/reference/rest/v4/advertisers.creatives?hl=zh-tw#Creative)
 
 如要進一步瞭解各類設定資料，請參閱下列連結：
 
@@ -128,7 +126,7 @@ Display & Video 360 連接器的 BigQuery 資料移轉服務支援下列資料�
    * (選用) 在「Notification options」(通知選項) 專區：
      + 按一下啟用電子郵件通知的切換開關。當您啟用此選項時，移轉管理員會在移轉作業失敗時收到電子郵件通知。
      + 點選切換按鈕，啟用 Pub/Sub 通知。在「Select a Cloud Pub/Sub topic」(選取 Cloud Pub/Sub 主題) 選取[主題](https://docs.cloud.google.com/pubsub/docs/overview?hl=zh-tw#types)名稱，或是點選「Create a topic」(建立主題)。這個選項會針對移轉作業設定 Pub/Sub 執行[通知](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications?hl=zh-tw)。
-7. 按一下 [儲存]。
+7. 按一下「儲存」。
 
 ### bq
 
@@ -192,11 +190,11 @@ follow the instructions to retrieve an authentication code.`
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-29 (世界標準時間)。
+上次更新時間：2026-10-30 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-30 (世界標準時間)。"],[],[]]

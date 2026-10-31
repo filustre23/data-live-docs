@@ -32,6 +32,7 @@
 * [September 23 - Explore and share insights from Generative Apps](/changelog/2026-09-22)
 * [September 29 - See how your team uses the agent](/changelog/2026-09-29)
 * [October 22 - Pull agent usage data and import Ossie models](/changelog/2026-10-22)
+* [October 30 - Governed mode for the Hex Agent](/changelog/2026-10-30)
 
 ### 2025[​](#2025 "Direct link to 2025")
 

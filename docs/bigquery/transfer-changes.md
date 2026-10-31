@@ -22,7 +22,7 @@ BigQuery 資料移轉服務資料來源連接器會定期更新結構定義、�
 
 Campaign Manager 360 連接器的 BigQuery 資料移轉服務會定期更新，支援新增、淘汰或遷移的資料欄。Campaign Manager 360 連接器的 BigQuery 資料移轉服務會從 Campaign Manager 360 [資料移轉檔案](https://developers.google.com/doubleclick-advertisers/dtv2/reference/release-notes?hl=zh-tw)擷取資料。
 
-以下各節將概略說明異動內容。異動項目會依發布日期排序，每個項目都會提供相關資訊，說明您需要進行哪些變更，才能繼續接收 Campaign Manager 360 的資料。
+以下各節將概略說明相關異動。異動項目會依發布日期排序，每個項目都會提供相關資訊，說明您需要進行哪些變更，才能繼續接收 Campaign Manager 360 的資料。
 
 ### 2025 年 7 月 7 日
 
@@ -78,17 +78,17 @@ Display & Video 360 連接器預計於 2025 年 8 月 26 日更新。
 
 Facebook Ads 連接器的 BigQuery 資料移轉服務會定期更新，以因應 Facebook Ads 導入的新異動。
 
-以下各節將按照發布日期列出異動。
+以下各節會按照發布日期列出變更。
 
 ### 2026 年 7 月 6 日
 
 2026 年 7 月 6 日起，[Facebook Ads 連接器](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer?hl=zh-tw)會暫時停用 Facebook Ads 廣告資料移轉作業的 `AdInsightsMMM` 報表。Facebook Ads API 最近有所異動，指定行銷區域 (DMA) 欄已淘汰，因此查詢這項細目時會傳回空白結果。為避免資料移轉失敗，我們做出這項調整。
 
-包含 `AdInsightsMMM` 報表的 Facebook Ads 現有資料移轉作業會繼續執行，但移轉作業不會包含 `AdInsightsMMM` 報表的資料。
+從 Facebook Ads 移轉現有資料時，如果包含 `AdInsightsMMM` 報表，系統會繼續執行，但移轉作業不會包含 `AdInsightsMMM` 報表的資料。
 
 ### 2026 年 7 月 25 日
 
-2026 年 7 月 25 日，[Facebook Ads 連接器](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer?hl=zh-tw)預計將 `AdInsightsActions` 報表中 `ActionValue` 欄位的資料類型對應，從 `INT` 更新為 `FLOAT`。這項變更旨在更準確地反映來源資料，並確保資料完整性。
+[Facebook Ads 連接器](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer?hl=zh-tw)預計於 2026 年 7 月 25 日更新 `AdInsightsActions` 報表中 `ActionValue` 欄位的資料類型對應，從 `INT` 變更為 `FLOAT`。這項異動是為了更準確地反映來源資料，並確保資料完整性。
 
 ## Google Ads API
 
@@ -107,9 +107,9 @@ Google Ads 適用的 BigQuery 資料移轉服務會定期更新，以支援新�
 | `campaign_start_date` | `campaign_start_date_time` | `Campaign` |
 | `campaign_end_date` | `campaign_end_date_time` |
 
-2026 年 4 月 3 日前，Google Ads 連接器會在資料表架構中新增 `campaign_start_date_time` 和 `campaign_end_date_time` 欄，並填入 `null`。2026 年 6 月 15 日，Google Ads API 更新至第 23 版後，這些新資料欄將填入新值和新資料類型 [datetime](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#datetime_type)。`campaign_start_date` 和 `campaign_end_date` 將會淘汰，並填入 `null`，但仍會保留在資料表架構中。
+2026 年 4 月 3 日前，Google Ads 連接器會在資料表架構中新增 `campaign_start_date_time` 和 `campaign_end_date_time` 欄，並填入 `null`。2026 年 6 月 15 日 Google Ads API 更新至第 23 版後，這些新資料欄將填入新值和新資料類型 [datetime](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#datetime_type)。`campaign_start_date` 和 `campaign_end_date` 將會淘汰，並填入 `null`，但仍會保留在資料表架構中。
 
-每組資料欄中，只有一欄會填入 Google Ads API 的值，另一欄則會填入 `null`。為因應 Google Ads API v23 更新，請更新查詢，指定其中一欄。如果 SQL 查詢選取了已淘汰的資料欄，請更新查詢，指定正確的資料欄，例如：
+每組資料欄中，只有一欄會填入 Google Ads API 的值，另一欄則會填入 `null`。為因應 Google Ads API 23 版更新，請更新查詢，指定其中一欄。如果 SQL 查詢選取了已淘汰的資料欄，請更新查詢，指定正確的資料欄，例如：
 
 ```
 IFNULL(DATE(campaign_start_date_time), campaign_start_date)
@@ -127,7 +127,7 @@ IFNULL(DATE(campaign_start_date_time), campaign_start_date)
 
 2026 年 6 月 1 日起，Google Ads 連接器將限制每日資料補充作業，僅限最近 37 個月。如果嘗試回填 37 個月前的資料，系統會傳回錯誤。這項異動是為了因應 [2026 年 6 月 1 日起實施的 Google Ads 新版資料保留政策](https://ads-developers.googleblog.com/2026/05/new-data-retention-policy-for-google.html)。
 
-已移轉並儲存在 BigQuery 資料表中的資料則不受影響。
+已移轉並儲存在 BigQuery 資料表中的資料不會受到影響。
 
 ### 2026 年 5 月 7 日
 
@@ -144,16 +144,16 @@ IFNULL(DATE(campaign_start_date_time), campaign_start_date)
 | `metrics_video_view_rate` | `metrics_video_trueview_view_rate` | * `AccountNonClickStats` * `AdCrossDeviceStats` * `AdGroupAudienceNonClickStats` * `AdGroupCrossDeviceStats` * `AgeRangeNonClickStats` * `BudgetStats` * `CampaignAudienceNonClickStats` * `CampaignCrossDeviceStats` * `CampaignLocationTargetStats` * `DisplayVideoAutomaticPlacementsStats` * `GenderNonClickStats` * `GeoStats` * `KeywordCrossDeviceStats` * `ParentalStatusNonClickStats` * `PlacementNonClickStats` * `SearchQueryStats` * `VideoNonClickStats` |
 | `metrics_video_views` | `metrics_video_trueview_views` | * `AccountNonClickStats` * `AdCrossDeviceStats` * `AdGroupAudienceNonClickStats` * `AdGroupCrossDeviceStats` * `AgeRangeNonClickStats` * `BudgetStats` * `CampaignAudienceNonClickStats` * `CampaignCrossDeviceStats` * `CampaignLocationTargetStats` * `DisplayVideoAutomaticPlacementsStats` * `GenderNonClickStats` * `GeoStats` * `KeywordCrossDeviceStats` * `ParentalStatusNonClickStats` * `PlacementNonClickStats` * `SearchQueryStats` * `VideoNonClickStats` |
 
-2026 年 1 月 16 日前，Google Ads 連接器會將 `metrics_trueview_average_cpv`、`metrics_video_trueview_view_rate` 和 `metrics_video_trueview_views` 資料欄新增至資料表結構定義，並填入 `null`。2026 年 3 月 2 日 Google Ads API 更新至第 22 版後，這些新資料欄將填入新值。部分資料欄現已淘汰，例如 `metrics_average_cpv`、`metrics_video_view_rate` 和 `metrics_video_views`。已淘汰的資料欄現在會填入 `null`，但仍會保留在資料表結構定義中。
+2026 年 1 月 16 日前，Google Ads 連接器會在資料表架構中新增 `metrics_trueview_average_cpv`、`metrics_video_trueview_view_rate` 和 `metrics_video_trueview_views` 欄，並填入 `null`。2026 年 3 月 2 日，Google Ads API 更新至第 22 版後，這些新資料欄將填入新值。部分資料欄現已淘汰，例如 `metrics_average_cpv`、`metrics_video_view_rate` 和 `metrics_video_views`。已淘汰的資料欄現在會填入 `null`，但仍會保留在資料表結構定義中。
 
-每組資料欄中，只有一欄會填入 Google Ads API 的值，另一欄則會填入 `null`。為因應 Google Ads API v22 更新，請更新查詢，指定其中一個資料欄。舉例來說，如果 SQL 查詢選取 `metrics_average_cpv` 欄，請更新查詢，指定正確的欄：
+每組資料欄中，只有一欄會填入 Google Ads API 的值，另一欄則會填入 `null`。為因應 Google Ads API 第 22 版更新，請更新查詢，指定其中一欄。舉例來說，如果 SQL 查詢選取 `metrics_average_cpv` 欄，請更新查詢，指定正確的欄：
 
 ```
 IFNULL(metrics_average_cpv, metrics_trueview_average_cpv)
 ```
 
-如果您使用[自訂報表](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer?hl=zh-tw#custom_reports)，請參閱 [Google Ads API 第 22 版參考頁面](https://developers.google.com/google-ads/api/fields/v22/overview?hl=zh-tw)和 [Google Ads API 版本資訊](https://developers.google.com/google-ads/api/docs/release-notes?hl=zh-tw)，在 [Google Ads 連接器](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer?hl=zh-tw)升級至 Google Ads API 第 22 版後，更新受影響的 GAQL 查詢。
-如果您使用[自訂報表](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer?hl=zh-tw#custom_reports)，請參閱 [Google Ads API 第 22 版參考頁面](https://developers.google.com/google-ads/api/fields/v22/overview?hl=zh-tw)和 [Google Ads API 版本資訊](https://developers.google.com/google-ads/api/docs/release-notes?hl=zh-tw)，在 [Google Ads 連接器](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer?hl=zh-tw)升級至 Google Ads API 第 22 版後，更新受影響的 GAQL 查詢。
+如果您使用[自訂報表](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer?hl=zh-tw#custom_reports)，請參閱 [Google Ads API v22 參考頁面](https://developers.google.com/google-ads/api/fields/v22/overview?hl=zh-tw)和 [Google Ads API 版本資訊](https://developers.google.com/google-ads/api/docs/release-notes?hl=zh-tw)，在 [Google Ads 連接器](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer?hl=zh-tw)升級至 Google Ads v22 API 後，更新受影響的 GAQL 查詢。
+如果您使用[自訂報表](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer?hl=zh-tw#custom_reports)，請參閱 [Google Ads API v22 參考頁面](https://developers.google.com/google-ads/api/fields/v22/overview?hl=zh-tw)和 [Google Ads API 版本資訊](https://developers.google.com/google-ads/api/docs/release-notes?hl=zh-tw)，在 [Google Ads 連接器](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer?hl=zh-tw)升級至 Google Ads v22 API 後，更新受影響的 GAQL 查詢。
 
 ### 2025 年 8 月 1 日
 
@@ -180,7 +180,11 @@ IFNULL(metrics_average_cpv, metrics_trueview_average_cpv)
 
 ### 2025 年 1 月 20 日
 
-[Google Ads 移轉作業](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer?hl=zh-tw)計畫將 [Google Ads API 版本](https://developers.google.com/google-ads/api/docs/release-notes?hl=zh-tw)從 [v16](https://developers.google.com/google-ads/api/reference/rpc/v16/overview?hl=zh-tw) 更新至 [v18](https://developers.google.com/google-ads/api/reference/rpc/v18/overview?hl=zh-tw)。API 升級後，受影響資料表中新移轉資料的資料欄值會變更。詳情請參閱「[Google Ads API 升級](https://developers.google.com/google-ads/api/docs/upgrade?hl=zh-tw#v17-v18)」。
+[Google Ads 移轉作業](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer?hl=zh-tw)
+計畫將 [Google Ads API 版本](https://developers.google.com/google-ads/api/docs/release-notes?hl=zh-tw)
+從 [v16](https://developers.google.com/google-ads/api/reference/rpc/v16/overview?hl=zh-tw) 更新至
+[v18](https://developers.google.com/google-ads/api/reference/rpc/v18/overview?hl=zh-tw)。
+API 升級後，受影響資料表中新移轉資料的資料欄值會變更。詳情請參閱「[Google Ads API 升級](https://developers.google.com/google-ads/api/docs/upgrade?hl=zh-tw#v17-v18)」。
 
 Google Ads 連接器更新作業已於 2025 年 1 月 20 日開始，並於 2025 年 2 月 4 日完成。
 
@@ -235,15 +239,15 @@ Google Ads 連接器更新作業已於 2024 年 6 月 17 日開始，並於 2024
 | `asset_group_listing_group_filter_case_value_product_bidding_category_level` | `asset_group_listing_group_filter_case_value_product_category_level` |
 | `asset_group_listing_group_filter_vertical` | `asset_group_listing_group_filter_listing_source` |
 
-Google Ads API 14 版在 BigQuery 資料表結構定義中新增了 `segments_product_category_level1` 和 `segments_product_category_level2` 等資料欄，但填入的是 `null`。Google Ads API 更新至第 16 版後，這些新資料欄會填入新值。`segments_product_bidding_category_level1` 和 `segments_product_bidding_category_level2` 等已淘汰的資料欄會填入 `null`，但仍會保留在資料表結構定義中。
+Google Ads API 14 版在 BigQuery 資料表結構定義中新增了 `segments_product_category_level1` 和 `segments_product_category_level2` 等資料欄，但填入的是 `null`。Google Ads API 更新至第 16 版後，這些新資料欄會填入新值。已淘汰的資料欄 (例如 `segments_product_bidding_category_level1` 和 `segments_product_bidding_category_level2`) 會填入 `null`，但仍會保留在資料表結構定義中。
 
-每組資料欄中，只有一欄會填入 Google Ads API 的值，另一欄則會填入 `null`。為確保現有查詢在更新後仍能正常運作，請更新查詢，選擇其中一欄。舉例來說，如果 SQL 查詢中包含下列陳述式：
+每組資料欄中，只有一欄會填入 Google Ads API 的值，另一欄則會填入 `null`。為確保現有查詢在更新後仍能正常運作，請更新查詢，選擇其中一欄。舉例來說，如果 SQL 查詢中包含以下陳述式：
 
 ```
 segments_product_bidding_category_level1
 ```
 
-請改用下列陳述式，指定正確的資料欄：
+改用下列陳述式，指定正確的資料欄：
 
 ```
 IFNULL(segments_product_category_level1, segments_product_bidding_category_level1)
@@ -253,9 +257,31 @@ IFNULL(segments_product_category_level1, segments_product_bidding_category_level
 
 ## Google Analytics API
 
-Google Analytics 連接器的 BigQuery 資料移轉服務會定期更新，以支援新資料欄，並因應 [Google Analytics Data API](https://developers.google.com/analytics/devguides/reporting/data/v1/changelog?hl=zh-tw) 帶來的異動。Google Analytics 適用的 BigQuery 資料移轉服務連接器，會使用最新支援的 API 版本擷取報表資料。
+Google Analytics 適用的 BigQuery 資料移轉服務連接器會定期更新，以支援新資料欄，並因應 [Google Analytics Data API](https://developers.google.com/analytics/devguides/reporting/data/v1/changelog?hl=zh-tw) 帶來的異動。Google Analytics 適用的 BigQuery 資料移轉服務連接器，會使用最新支援的 API 版本擷取報表資料。
 
 以下各節將概略說明 Google Analytics Data API 導入的變更。異動項目會依發布日期排序，每個項目都會提供相關資訊，說明您需要進行哪些變更，才能繼續接收 Google Analytics 的資料。
+
+### 2027 年 2 月 28 日
+
+2027 年初 (不早於 2027 年 2 月 28 日)，Google Analytics Data API 將更新空白維度欄位的處理方式。API 更新生效後，如果 Google Analytics 未收到維度資料，[Google Analytics 連接器](https://docs.cloud.google.com/bigquery/docs/google-analytics-4-transfer?hl=zh-tw)會在新移轉的 BigQuery 資料表中，以 `null` (而非 `(not set)`) 填入對應欄位。
+
+這項異動會影響所有標準和自訂報表表格。已移轉至 BigQuery 資料表的現有資料，以及在 API 推出完成前移轉的任何資料，都會繼續使用 `(not set)`，除非您在更新生效後，對這些日期執行補充作業。
+
+為做好準備，請在 2027 年 2 月 28 日前，更新依 `(not set)` 篩選或分組依據的 SQL 查詢，以便同時處理 `(not set)` 和 `null` 值。舉例來說，如果 SQL 查詢包含下列 `WHERE` 子句：
+
+```
+WHERE DIMENSION_COLUMN = '(not set)'
+```
+
+更新查詢，同時檢查這兩個值：
+
+```
+WHERE
+  DIMENSION_COLUMN = '(not set)'
+  OR DIMENSION_COLUMN IS NULL
+```
+
+將 DIMENSION\_COLUMN 替換為 BigQuery 資料表中的維度資料欄名稱。
 
 ### 2026 年 6 月 1 日
 
@@ -267,13 +293,13 @@ Google Analytics 連接器的 BigQuery 資料移轉服務會定期更新，以�
 
 * 2026 年 6 月 1 日後，如果嘗試補充超過 37 個月以前的 Google Analytics 資料，可能會導致資料遺失。
 * 如果日期超出 37 個月的保留期限，Google Analytics Data API 可能會傳回部分或空白資料。
-* 如果觸發 37 個月前的補登作業，移轉作業會以 API 的不完整結果，覆寫 BigQuery 分區中的現有資料，可能導致完整的歷來資料被空白或部分資料取代。
+* 如果您觸發的補充作業日期早於 37 個月前，移轉作業會以 API 的不完整結果覆寫 BigQuery 分區中的現有資料，可能導致完整的歷來資料被空白或部分資料取代。
 
 為避免資料遺失，請確認 Google Analytics 的所有手動或自動回填程序，都不會指定排定日期前 37 個月以上的日期。
 
-在這項異動前，已移轉並儲存在 BigQuery 資料表中的資料不受影響。Google 不會刪除現有資料。
+在這項異動前，已移轉並儲存在 BigQuery 資料表的資料不會受到影響。Google 不會刪除現有資料。
 
-請在 2026 年 6 月 1 日前，檢查 Google Analytics 資料移轉設定和補充資料指令碼，確保符合新的 37 個月保留期限。
+請在 2026 年 6 月 1 日前，檢查 Google Analytics 資料移轉設定和回填指令碼，確保符合新的 37 個月保留期限。
 
 ### 2025 年 9 月 22 日
 
@@ -285,7 +311,7 @@ Google Analytics 連接器預計於 2025 年 9 月 22 日開始更新。
 
 #### 已淘汰的資料表
 
-下表列出即將淘汰的資料表，以及採用更新結構定義的新資料表。請注意，本次更新後，`p_ga4_conversions` 和 `p_ga4_inAppPurchases` 資料表將停止使用。在 2025 年 9 月 22 日前，系統會同時填入已淘汰和新的資料表，讓您有時間遷移。您可以在移轉設定中使用「Table Filter」(資料表篩選器) 選項，篩除已淘汰的資料表。
+下表列出即將淘汰的資料表，以及取代這些資料表的新資料表 (結構定義已更新)。請注意，本次更新後，`p_ga4_conversions` 和 `p_ga4_inAppPurchases` 資料表將停用。在 2025 年 9 月 22 日前，系統會同時填入已淘汰和新的資料表，讓您有時間遷移。您可以在移轉設定中使用「Table Filter」(資料表篩選器) 選項，篩除已淘汰的資料表。
 
 | 已淘汰的表格 | 新資料表 |
 | --- | --- |
@@ -310,21 +336,21 @@ Google Analytics 連接器預計於 2025 年 9 月 22 日開始更新。
 
 * **修正結構定義：**修正流量開發、獲取新客和到達網頁報表的結構定義。舉例來說，流量開發和獲客報表結構定義先前曾互換，且到達網頁報表缺少 `landingPage` 維度。
 * **欄位重新命名和停用：**為配合目前的 Google Analytics 術語，所有報表中的轉換欄位都已重新命名為 `keyEvents`。因此，「轉換」報表本身也已停用。
-* **資料類型變更：**BigQuery 中的收益欄位從 `INTEGER` 變更為 `FLOAT`，以準確呈現 API 傳回的浮點微值。
+* **資料類型異動：**BigQuery 中的收益欄位從 `INTEGER` 變更為 `FLOAT`，以準確呈現 API 傳回的浮點微值。
 * **新表格和欄位命名慣例：**為與 Google Analytics API 保持一致，新表格中的欄位名稱會使用 `camelCase` (例如 `eventCount`)，取代先前的 `snake_case` (例如 `event_count`)。
 
 ## Google Merchant Center
 
 Google Merchant Center 連接器的 BigQuery 資料移轉服務會定期更新，以支援新資料欄，並因應 Google Merchant Center 報表帶來的變更。
 
-以下各節將按照發布日期列出異動。
+以下各節會按照發布日期列出變更。
 
 ### 2026 年 10 月 28 日
 
 2026 年 10 月 28 日，[Google Merchant Center 連接器](https://docs.cloud.google.com/bigquery/docs/merchant-center-transfer?hl=zh-tw)將更新[產品成效表格](https://docs.cloud.google.com/bigquery/docs/merchant-center-performance-schema?hl=zh-tw)，以配合 Google Merchant Center 成效報表更新：
 
-* **新增「`network`」欄：**「`network`」欄現在會依適用的聯播網 (例如 `SEARCH`、`SEARCH_PARTNERS`、`CONTENT` 和 `YOUTUBE`)，區隔產品成效指標。
-* **新的 `destination` 值：**YouTube Shopping 聯盟計畫中精選產品的成效事件，現在會單獨列在 `destination` 值 `AFFILIATE` 下方，而非包含在 `FREE` 中。
+* **新增「`network`」欄：**「`network`」欄現在會依適用的聯播網 (例如 `SEARCH`、`SEARCH_PARTNERS`、`CONTENT` 和 `YOUTUBE`) 區隔產品成效指標。
+* **新的 `destination` 值：**YouTube Shopping 聯盟計畫中精選產品的成效事件，現在會單獨列在 `destination` 值 `AFFILIATE` 下方，而不是包含在 `FREE` 中。
 
 現有的資料移轉作業會繼續執行。在這個日期之後移轉的新資料列，將包含新的 `network` 資料欄和 `AFFILIATE` 目的地值。詳情請參閱商家說明中心文章「[Google Merchant Center 成效報表更新](https://support.google.com/merchants/answer/17103877?hl=zh-tw)」。
 
@@ -332,7 +358,7 @@ Google Merchant Center 連接器的 BigQuery 資料移轉服務會定期更新�
 
 Microsoft SQL Server 連接器的 BigQuery 資料移轉服務會定期更新，以因應 Microsoft SQL Server 導入的新變更。
 
-以下各節將按照發布日期列出異動。
+以下各節會按照發布日期列出變更。
 
 ### 2027 年 3 月 16 日
 
@@ -350,9 +376,9 @@ Microsoft SQL Server 連接器計劃更新資料類型對應，更準確地反�
 
 ## MySQL
 
-MySQL 連接器的 BigQuery 資料移轉服務會定期更新，以因應 MySQL 導入的新變更。
+MySQL 連接器適用的 BigQuery 資料移轉服務會定期更新，以因應 MySQL 的新異動。
 
-以下各節將按照發布日期列出異動。
+以下各節會按照發布日期列出變更。
 
 ### 2027 年 3 月 16 日
 
@@ -366,13 +392,13 @@ MySQL 連接器預計更新資料類型對應，更準確地反映來源資料�
 
 您可以將 `connector.legacyMapping` 參數設為 `true`，繼續在移轉設定中使用已淘汰的資料類型對應。只要將 `connector.legacyMapping` 參數設為 `false`，即可使用更新版資料類型對應。
 
-2026 年 9 月 16 日起，所有移轉設定都會預設使用更新版資料類型對應。2027 年 3 月 16 日起，系統將停止支援已淘汰的資料類型對應。
+2026 年 9 月 16 日起，所有移轉設定預設都會使用更新版資料類型對應。2027 年 3 月 16 日起，系統將停止支援已淘汰的資料類型對應。
 
 ## Google Play 管理中心
 
 Google Play 連接器的 BigQuery 資料移轉服務會定期更新，支援 Google Play 推出的新報表和現有報表異動。
 
-以下各節將按照發布日期列出異動。
+以下各節會按照發布日期列出變更。
 
 ### 2025 年 12 月 1 日
 
@@ -399,7 +425,7 @@ Google Play 計劃對[收益報表](https://support.google.com/googleplay/androi
 
 PostgreSQL 連接器的 BigQuery 資料移轉服務會定期更新，以因應 PostgreSQL 導入的新變更。
 
-以下各節將按照發布日期列出異動。
+以下各節會按照發布日期列出變更。
 
 ### 2027 年 3 月 16 日
 
@@ -413,7 +439,7 @@ PostgreSQL 連接器預計更新資料類型對應，更準確地反映來源資
 
 您可以將 `connector.legacyMapping` 參數設為 `true`，繼續在移轉設定中使用已淘汰的資料類型對應。只要將 `connector.legacyMapping` 參數設為 `false`，即可使用更新版資料類型對應。
 
-2026 年 9 月 16 日起，所有移轉設定都會預設使用更新版資料類型對應。2027 年 3 月 16 日起，系統將停止支援已淘汰的資料類型對應。
+2026 年 9 月 16 日起，所有移轉設定預設都會使用更新版資料類型對應。2027 年 3 月 16 日起，系統將停止支援已淘汰的資料類型對應。
 
 ## Salesforce Bulk API
 
@@ -423,7 +449,7 @@ Salesforce 連接器的 BigQuery 資料移轉服務會定期更新，以支援 S
 
 ### October 14, 2025
 
-Salesforce 連接器正式發布後，現在會使用 Salesforce Bulk API V1 64.0 版。Salesforce Bulk API V1 53.0 版支援的幾個欄位已不再支援。
+Salesforce 連接器正式發布後，現在會使用 Salesforce Bulk API V1 64.0 版。Salesforce Bulk API V1 53.0 版支援的部分欄位已不再支援。
 
 #### 已淘汰的欄位
 
@@ -458,13 +484,13 @@ Search Ads 360 連接器的 BigQuery 資料移轉服務會定期更新，以支�
 
 自 2026 年 6 月 1 日起，Search Ads 360 連接器將限制每日資料補充作業，僅限最近 37 個月。如果嘗試回填 37 個月前的資料，系統會傳回錯誤。這項異動是為了因應 [2026 年 6 月 1 日起實施的 Google Ads 新版資料保留政策](https://ads-developers.googleblog.com/2026/05/new-data-retention-policy-for-google.html)。
 
-已移轉並儲存在 BigQuery 資料表中的資料則不受影響。
+已移轉並儲存在 BigQuery 資料表中的資料不會受到影響。
 
 ## ServiceNow
 
 ServiceNow 連接器專用的 BigQuery 資料移轉服務會定期更新，以因應 ServiceNow 導入的新變更。
 
-以下各節將按照發布日期列出異動。
+以下各節會按照發布日期列出變更。
 
 ### 2027 年 3 月 16 日
 
@@ -477,13 +503,13 @@ ServiceNow 連接器計劃更新資料類型對應，更準確地反映來源資
 
 您可以將 `connector.legacyMapping` 參數設為 `true`，繼續在移轉設定中使用已淘汰的資料類型對應。只要將 `connector.legacyMapping` 參數設為 `false`，即可使用更新版資料類型對應。
 
-2026 年 9 月 16 日起，所有移轉設定都會預設使用更新版資料類型對應。2027 年 3 月 16 日起，系統將停止支援已淘汰的資料類型對應。
+2026 年 9 月 16 日起，所有移轉設定預設都會使用更新版資料類型對應。2027 年 3 月 16 日起，系統將停止支援已淘汰的資料類型對應。
 
 ## YouTube Reporting API
 
 YouTube 內容擁有者和 YouTube 頻道連接器的 BigQuery 資料移轉服務會定期更新，以支援 [YouTube Reporting API](https://developers.google.com/youtube/reporting?hl=zh-tw) 導入的新報表，並淘汰舊報表。
 
-以下各節將說明 YouTube Reporting API 推出新報表時的異動。變更項目會依發布日期排序，每個項目都會提供相關資訊，說明您需要進行哪些變更，才能繼續接收 YouTube 資料。
+以下各節將說明 YouTube Reporting API 推出新報表時的異動。變更項目會按照發布日期排序，每個項目都會提供相關資訊，說明您需要進行哪些變更，才能繼續接收 YouTube 資料。
 
 ### 2025 年 9 月 22 日
 
@@ -493,7 +519,7 @@ YouTube 內容擁有者和 YouTube 頻道連接器的 BigQuery 資料移轉服�
 
 #### YouTube 內容擁有者連接器 - 已淘汰的表格
 
-針對 YouTube 內容擁有者連接器，下表列出即將淘汰的 BigQuery 資料表，以及結構定義更新後的新資料表。在 2025 年 9 月 22 日前，系統會同時填入已淘汰和新的資料表，讓您有時間遷移。2025 年 9 月 22 日後，系統只會填入新資料表。suffix 的值是您在建立移轉作業時設定的資料表後置字串。
+下表列出 YouTube 內容擁有者連接器中，即將淘汰並替換為新資料表的 BigQuery 資料表，新資料表會採用更新後的結構定義。在 2025 年 9 月 22 日前，系統會同時填入已淘汰和新的資料表，讓您有時間遷移。2025 年 9 月 22 日後，系統只會填入新資料表。suffix 的值是您在建立移轉作業時設定的資料表後置字串。
 
 | 已淘汰的表格 | 新資料表 |
 | --- | --- |
@@ -521,9 +547,9 @@ YouTube 內容擁有者和 YouTube 頻道連接器的 BigQuery 資料移轉服�
 | `p_content_owner_shorts_day_ad_revenue_summary_a1_suffix` | `p_content_owner_shorts_day_ad_revenue_summary_a2_suffix` |
 | `p_content_owner_shorts_global_ad_revenue_summary_a1_suffix` | `p_content_owner_shorts_global_ad_revenue_summary_a2_suffix` |
 
-#### YouTube 頻道連接器 - 已淘汰的表格
+#### YouTube 頻道連接器 - 已淘汰的資料表
 
-YouTube 頻道連接器方面，下表列出即將淘汰的 BigQuery 資料表，以及採用更新後結構定義的新資料表。在 2025 年 9 月 22 日前，系統會同時填入已淘汰和新的資料表，讓您有時間遷移。2025 年 9 月 22 日後，系統只會填入新資料表。suffix 的值是您在建立移轉作業時設定的資料表後置字串。
+YouTube 頻道連接器：下表列出即將淘汰的 BigQuery 資料表，以及採用更新後結構定義的新資料表。在 2025 年 9 月 22 日前，系統會同時填入已淘汰和新的資料表，讓您有時間遷移。2025 年 9 月 22 日後，系統只會填入新資料表。suffix 的值是您在建立移轉作業時設定的資料表後置字串。
 
 | 已淘汰的表格 | 新資料表 |
 | --- | --- |
@@ -552,11 +578,11 @@ YouTube 頻道連接器方面，下表列出即將淘汰的 BigQuery 資料表�
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-29 (世界標準時間)。
+上次更新時間：2026-10-30 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-30 (世界標準時間)。"],[],[]]

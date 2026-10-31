@@ -169,7 +169,3 @@ Service agent roles should only be granted to [service agents](https://docs.clou
 | Role | Permissions |
 | --- | --- |
 | BigQuery Omni Service Agent (`roles/bigqueryomni.serviceAgent`)  Gives BigQuery Omni access to tables in user projects.   **Warning:** Do not grant service agent roles to any principals except [service agents](https://docs.cloud.google.com/iam/docs/service-agents?hl=zh-tw). | `bigquery.jobs.create`  `bigquery.tables.updateData` |
-
-### BigQuery 共用角色
-
-下表列出 Bi

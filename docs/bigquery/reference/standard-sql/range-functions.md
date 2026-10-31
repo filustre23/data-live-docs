@@ -177,7 +177,6 @@ Constructs a range of [`DATE`](/bigquery/docs/reference/standard-sql/data-types#
 `lower_bound` and `upper_bound` must be of the same data type.
 
 Produces an error if `lower_bound` is greater than or equal to `upper_bound`.
-To return `NULL` instead, add the `SAFE.` prefix to the function name.
 
 **Return type**
 
@@ -407,4 +406,5 @@ SELECT RANGE_END(RANGE<DATE> '[2022-12-01, 2022-12-31)') AS results;
  +------------*/
 ```
 
-In the following query, the upper bound of the
+In the following query, the upper bound of the range is unbounded, so
+`NULL` is returned:

@@ -294,5 +294,5 @@ least once in a set of tokenized documents:
 WITH ExampleTable AS (
   SELECT 1 AS id, ['I', 'like', 'pie', 'pie', 'pie', NULL] AS f UNION ALL
   SELECT 2 AS id, ['yum', 'yum', 'pie', NULL] AS f UNION ALL
-  SELECT 3 AS
+  SELECT 3 <
 ```

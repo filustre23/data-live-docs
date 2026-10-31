@@ -185,4 +185,4 @@ JobConfigurationQuery configures a BigQuery query job.
 | --- | --- |
 | `query` | `string`  [Required] SQL query text to execute. The useLegacySql field can be used to indicate whether the query uses legacy SQL or GoogleSQL. |
 | `destinationTable` | `object (TableReference)`  Optional. Describes the table where the query results should be stored. This property must be set for large results that exceed the maximum response size. For queries that produce anonymous (cached) results, this field will be populated by BigQuery. |
-| `tableDefinitions` |
+|  |

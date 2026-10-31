@@ -215,7 +215,7 @@ resource "google_bigquery_job" "my_query_job" {
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
 2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
 
-   每個專案只需執行這個指令一次，而且可以在任何目錄中執行。
+   這項指令在每個專案中只需執行一次，且可在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
@@ -225,7 +225,7 @@ resource "google_bigquery_job" "my_query_job" {
 
 ## 準備目錄
 
-每個 Terraform 設定檔都必須有自己的目錄 (也稱為*根模組*)。
+每個 Terraform 設定檔都必須有自己的目錄 (也稱為「根模組」)。
 
 1. 在 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw) 中建立目錄，並在該目錄中建立新檔案。檔案名稱必須有 `.tf` 副檔名，例如 `main.tf`。在本教學課程中，這個檔案稱為 `main.tf`。
 
@@ -852,7 +852,7 @@ print("This query will process {} bytes.".format(query_job.total_bytes_processed
 4. 依序點選「編輯」>「查詢設定」。
 5. 在「資源管理」部分，選取「Batch」。
 6. 選用：調整[查詢設定](#query-settings)。
-7. 按一下 [儲存]。
+7. 按一下「儲存」。
 8. 按一下「play\_circle 執行」。
 
    如未指定目的地資料表，查詢工作會將輸出內容寫入暫存 (快取) 資料表。

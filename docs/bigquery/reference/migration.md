@@ -214,5 +214,5 @@ func executeTranslationWorkflow(ctx context.Context, client *migration.Client, p
 			DisplayName: "example SQL conversion",
 			Tasks: map[string]*migrationpb.MigrationTask{
 				"example_conversion": {
-					Type
+					
 ```

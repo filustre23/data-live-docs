@@ -514,4 +514,4 @@ possible to the model.
   for the `contents[]` field. If you set this field, then you can't also
   specify any model parameters in the top-level struct argument to the
   `ML.GENERATE_TEXT` function. You must either specify every model parameter
-  in the `MODEL_PARAMS` field, or omit
+  in the

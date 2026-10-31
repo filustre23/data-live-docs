@@ -230,6 +230,4 @@ int main(int argc, char* argv[]) try {
   // Read rows from the ReadSession.
   constexpr int kRowOffset = 0;
   auto read_rows = client.ReadRows(session->streams(0).name(), kRowOffset);
-
-  std::
 ```

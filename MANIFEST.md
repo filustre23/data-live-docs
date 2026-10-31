@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-10-30T17:47+00:00_
+_Generated 2026-10-31T03:38+00:00_
 
-**9 sources, 4761 topics total**
+**9 sources, 4781 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_826 topics_
+_845 topics_
 
 - `anthropic-sdk/about-claude/additional-resources`
 - `anthropic-sdk/about-claude/api-credits-for-subscribers`
@@ -190,6 +190,25 @@ _826 topics_
 - `anthropic-sdk/api/beta/organization/api_keys/list`
 - `anthropic-sdk/api/beta/organization/api_keys/retrieve`
 - `anthropic-sdk/api/beta/organization/api_keys/update`
+- `anthropic-sdk/api/beta/organization/claude_tag`
+- `anthropic-sdk/api/beta/organization/claude_tag/bundles`
+- `anthropic-sdk/api/beta/organization/claude_tag/bundles/list`
+- `anthropic-sdk/api/beta/organization/claude_tag/bundles/retrieve`
+- `anthropic-sdk/api/beta/organization/claude_tag/bundles/targets`
+- `anthropic-sdk/api/beta/organization/claude_tag/bundles/targets/create`
+- `anthropic-sdk/api/beta/organization/claude_tag/bundles/targets/delete`
+- `anthropic-sdk/api/beta/organization/claude_tag/bundles/targets/list`
+- `anthropic-sdk/api/beta/organization/claude_tag/bundles/targets/retrieve`
+- `anthropic-sdk/api/beta/organization/claude_tag/slack_channels`
+- `anthropic-sdk/api/beta/organization/claude_tag/slack_channels/create`
+- `anthropic-sdk/api/beta/organization/claude_tag/slack_channels/delete`
+- `anthropic-sdk/api/beta/organization/claude_tag/slack_channels/list`
+- `anthropic-sdk/api/beta/organization/claude_tag/slack_channels/retrieve`
+- `anthropic-sdk/api/beta/organization/claude_tag/slack_channels/update`
+- `anthropic-sdk/api/beta/organization/claude_tag/slack_workspaces`
+- `anthropic-sdk/api/beta/organization/claude_tag/slack_workspaces/list`
+- `anthropic-sdk/api/beta/organization/claude_tag/slack_workspaces/retrieve`
+- `anthropic-sdk/api/beta/organization/claude_tag/slack_workspaces/update`
 - `anthropic-sdk/api/beta/organization/compliance_settings`
 - `anthropic-sdk/api/beta/organization/compliance_settings/retrieve`
 - `anthropic-sdk/api/beta/organization/compliance_settings/update`
@@ -3927,7 +3946,7 @@ _156 topics_
 
 Upstream: <https://learn.hex.tech/>
 
-_395 topics_
+_396 topics_
 
 - `hex/changelog`
 - `hex/changelog/2020-12-17`
@@ -4049,6 +4068,7 @@ _395 topics_
 - `hex/changelog/2026-09-22`
 - `hex/changelog/2026-09-29`
 - `hex/changelog/2026-10-22`
+- `hex/changelog/2026-10-30`
 - `hex/changelog/archive`
 - `hex/changelog/page/10`
 - `hex/changelog/page/11`

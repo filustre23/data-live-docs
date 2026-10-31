@@ -354,5 +354,5 @@ WHERE l_shipdate BETWEEN '1996-01-01' AND '1996-01-10'
 GROUP BY
  l_returnflag,
  l_linestatus
-ORDER
+ORDER<
 ```

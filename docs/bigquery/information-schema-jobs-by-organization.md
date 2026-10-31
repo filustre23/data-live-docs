@@ -142,5 +142,4 @@ FROM
 WHERE
   EXTRACT(DATE FROM  creation_time) = current_date()
 ORDER BY
-  tota
 ```

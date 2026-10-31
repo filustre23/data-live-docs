@@ -392,5 +392,3 @@ For more information, see [Work with `ObjectRef` values](/bigquery/docs/work-wit
 
 A table with metadata that represents the objects found in
 Cloud Storage. The table includes the following columns:
-
-* `uri`: a

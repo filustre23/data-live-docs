@@ -16,24 +16,26 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 使用地理空間資料
 
-地理空間分析功能可讓您在 BigQuery 中分析地理資料，地理資料也稱為*地理空間資料*。
+地理空間分析功能可讓您在 BigQuery 中載入、轉換及分析地理資料，也稱為*地理空間資料*。您可以使用 GeoJSON 和 WKT 等標準格式，執行最佳化的空間彙整，並直接從 BigQuery 擷取以位置為基礎的洞察資訊。
 
-使用地理空間資料時的常見物件類型包括以下項目：
+## 資料類型
 
-* *幾何*代表地球上的表面積，通常使用點、線、多邊形或點、線與多邊形的集合描述。*幾何集合*是一種幾何，代表集合中所有形狀的空間聯集。
-* *空間特徵*代表邏輯空間物件，結合幾何圖形與應用程式專用屬性。
+處理地理空間資料時，常見的物件類型包括：
+
+* *幾何圖形*代表地球上的表面區域。幾何圖形通常會以點、線、多邊形或點、線和多邊形的集合來描述。
+* *幾何圖形集合*是一種幾何圖形，代表集合中所有形狀的空間聯集。
+* *空間特徵*代表邏輯空間物件。它結合了幾何圖形和應用程式專屬的其他屬性。
 * *空間特徵集合*是一組空間特徵。
 
-在 BigQuery 中，[`GEOGRAPHY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#geography_type) 資料類型代表幾何值或幾何集合。如要表示空間特徵，請建立資料表，其中包含幾何圖形的 `GEOGRAPHY` 資料欄，以及屬性的額外資料欄。表格中的每一列都是空間特徵，整個表格則代表空間特徵集合。
+在 BigQuery 中，[`GEOGRAPHY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#geography_type) 資料類型代表幾何圖形值或幾何圖形集合。如要表示空間特徵，請建立一個資料表，其中包含幾何圖形的 `GEOGRAPHY` 資料欄，以及屬性的其他資料欄。表格中的每一列都是空間特徵，整個表格代表空間特徵集合。
 
-`GEOGRAPHY` 資料類型描述地球表面上的*點集合*。地理資訊點集合是 [WGS84](https://earth-info.nga.mil/GandG/update/index.php?action=home#tab_wgs84-data) 參考橢球體上的點、線和多邊形集合，含測地線。您可以透過呼叫其中一個 GoogleSQL [地理位置函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions?hl=zh-tw)來使用 `GEOGRAPHY` 資料類型。
+`GEOGRAPHY` 資料類型描述地球表面上的*點集*。點集是 [WGS84](https://earth-info.nga.mil/GandG/update/index.php?action=home#tab_wgs84-data) 參考橢球體上的一組點、線和多邊形，具有測地線邊緣。您可以呼叫其中一個 GoogleSQL [地理函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions?hl=zh-tw)，使用 `GEOGRAPHY` 資料類型。
 
-## 正在載入地理空間資料
+## 載入地理空間資料
 
-地球上的單一點可以只用一組經緯度表示。
-舉例來說，您可以載入含有經緯度值的 CSV 檔案，然後使用 [`ST_GEOGPOINT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions?hl=zh-tw#st_geogpoint) 函式將這些值轉換為 `GEOGRAPHY` 值。
+地球上的單一地點可以只用一組經緯度表示。舉例來說，您可以載入包含經度和緯度值的 CSV 檔案，然後使用 [`ST_GEOGPOINT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions?hl=zh-tw#st_geogpoint) 函式將這些值轉換為 `GEOGRAPHY` 值。
 
-如要載入更複雜的地理區域，可以將下列地理空間資料格式載入 `GEOGRAPHY` 欄：
+如果是較複雜的地理位置，您可以將下列地理空間資料格式載入 `GEOGRAPHY` 欄：
 
 * Well-known text (WKT)
 * Well-known binary (WKB)
@@ -42,19 +44,19 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ### 載入 WKT 或 WKB 資料
 
-[WKT](https://en.wikipedia.org/wiki/Well-known_text) 是一種文字格式，用來描述個別的幾何形狀，通常使用點、線、含選用孔的多邊形，或點、線或多邊形的集合描述。WKB 是 WKT 格式的二進位版本。WKB 可進行十六進位編碼，適用於不支援二進位資料的格式，例如 JSON。
+[WKT](https://en.wikipedia.org/wiki/Well-known_text) 是一種文字格式，用於描述個別幾何圖形，包括點、線、多邊形 (可含孔洞)，或點、線、多邊形的集合。WKB 是 WKT 格式的二進位版本。如果格式不支援二進位資料 (例如 JSON)，WKB 可以採用十六進位編碼。
 
-舉例來說，下列程式碼會定義 WKT 中的點：
+舉例來說，以下定義了 WKT 中的點：
 
 ```
 POINT(-121 41)
 ```
 
-如要描述空間特徵，WKT 通常會嵌入容器檔案格式 (例如 CSV 檔案) 或資料庫資料表中。檔案資料列或資料表資料列通常會對應於空間特徵。整個檔案或資料表會對應至特徵集合。如要將 WKT 資料載入 BigQuery，請提供[結構定義](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw)，指定地理空間資料的 `GEOGRAPHY` 資料欄。
+如要描述空間特徵，WKT 通常會嵌入容器檔案格式 (例如 CSV 檔案) 或資料庫資料表中。檔案資料列或資料表資料列通常會對應於空間特徵。整個檔案或整個表格會對應至特徵集合。如要將 WKT 資料載入 BigQuery，請提供[結構定義](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw)，為地理空間資料指定 `GEOGRAPHY` 資料欄。
 
 **注意：** 您無法使用結構定義自動偵測功能，將 WKT 資料載入為 `GEOGRAPHY` 值。如果啟用自動偵測功能，BigQuery 會將資料載入為 `STRING` 值。
 
-舉例來說，您可能有一個 CSV 檔案，其中包含下列資料：
+舉例來說，假設您有一個 CSV 檔案，其中包含下列資料：
 
 ```
 "POLYGON((-124.49 47.35,-124.49 40.73,-116.49 40.73,-116.49 47.35,-124.49 47.35))",poly1
@@ -62,7 +64,7 @@ POINT(-121 41)
 "POINT(1 2)",point1
 ```
 
-您可以執行 bq 指令列工具的 `load` 指令，載入這個檔案：
+您可以執行 bq 指令列工具 `load` 指令，載入這個檔案：
 
 ```
 bq load --source_format=CSV \
@@ -72,7 +74,7 @@ bq load --source_format=CSV \
 
 如要進一步瞭解如何在 BigQuery 中載入資料，請參閱「[載入資料簡介](https://docs.cloud.google.com/bigquery/docs/loading-data?hl=zh-tw)」。
 
-如要將 WKT 資料串流至現有的 BigQuery 資料表 (含有 `GEOGRAPHY` 欄)，請在 API 要求中將資料序列化為字串。
+如要將 WKT 資料串流至含有 `GEOGRAPHY` 欄的現有 BigQuery 資料表，請在 API 要求中將資料序列化為字串。
 
 ### bq
 
@@ -85,9 +87,9 @@ echo '{"geo": "LINESTRING (-118.4085 33.9416, -73.7781 40.6413)"}' \
 
 ### Python
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定操作說明進行操作。詳情請參閱 [BigQuery Python API 參考文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 from google.cloud import bigquery
@@ -119,13 +121,13 @@ else:
     print(f"wrote 1 row to {table_id}")
 ```
 
-如要進一步瞭解 BigQuery 中的串流資料，請參閱[以串流方式將資料傳入 BigQuery](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery?hl=zh-tw) 一文。
+如要進一步瞭解如何在 BigQuery 中串流資料，請參閱「[將資料串流至 BigQuery](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery?hl=zh-tw)」。
 
 您也可以使用 [`ST_GEOGFROMTEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions?hl=zh-tw#st_geogfromtext) 函式，將 WKT 文字字串轉換為 `GEOGRAPHY` 值。
 
 ### 載入 GeoJSON 資料
 
-[GeoJSON](https://geojson.org/) 是以 JSON 為基礎的幾何和空間特徵格式。舉例來說，下列定義了 GeoJSON 中的點：
+[GeoJSON](https://geojson.org/) 是以 JSON 為基礎的格式，用於幾何圖形和空間特徵。舉例來說，以下程式碼定義了 GeoJSON 中的點：
 
 ```
 { "type": "Point", "coordinates": [-121,41] }
@@ -133,30 +135,28 @@ else:
 
 GeoJSON 資料可包含下列任一物件類型：
 
-* *幾何圖形物件*：幾何圖形物件是一種空間形狀，描述為點、線及含有自選孔洞的多邊形聯集。
-* *地圖項目物件*：包含幾何圖形，以及額外的名稱/值組 (依個別應用程式而不同)。
+* *幾何圖形物件*：幾何圖形物件是空間形狀，由點、線和多邊形 (可有孔洞) 組合而成。
+* *地圖項目物件*：地圖項目物件包含幾何圖形，以及其他名稱/值組合，其意義取決於應用程式。
 * *地圖項目集合*：特徵集合是一組特徵物件。
 
 將 GeoJSON 資料載入 BigQuery 的方法有兩種：
 
 * [載入以換行符號分隔的 GeoJSON 檔案](#geojson-files)。
-* [載入內嵌於其他檔案類型中的個別 GeoJSON 幾何物件](#geojson-data)。
+* [載入內嵌在其他檔案類型中的個別 GeoJSON 幾何圖形物件](#geojson-data)。
 
 #### 載入以換行符號分隔的 GeoJSON 檔案
 
-以換行符號分隔的 GeoJSON 檔案包含 GeoJSON 地圖項目物件清單，檔案中的每一行代表一個物件。GeoJSON 特徵物件是具有下列成員的 JSON 物件：
+以換行符號分隔的 GeoJSON 檔案包含 GeoJSON 地圖項目物件清單，檔案中每行一個物件。GeoJSON 地圖項目物件是具有下列成員的 JSON 物件：
 
-* `type`。如果是地圖項目物件，值必須為 `Feature`。BigQuery 會驗證值，但不會將其納入資料表結構定義。
-* `geometry`。值為 GeoJSON `Geometry` 物件或 `null`。
-  BigQuery 會將這個成員轉換為 `GEOGRAPHY` 值。
-* `properties`。值可以是任何 JSON 物件或空值。如果值不是 `null`，BigQuery 會將 JSON 物件的每個成員載入為個別的資料表欄。如要進一步瞭解 BigQuery 如何剖析 JSON 資料類型，請參閱[載入 JSON 資料的詳細資料](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json?hl=zh-tw#details_of_loading_json_data)。
-* `id`。選用。如有提供，值可以是字串或數字。
-  BigQuery 會將這個值載入名為 `id` 的資料欄。
+* `type`。如果是地圖項目物件，值必須為 `Feature`。BigQuery 會驗證該值，但不會將其納入資料表結構定義。
+* `geometry`：值為 GeoJSON `Geometry` 物件或 `null`。BigQuery 會將這個成員轉換為 `GEOGRAPHY` 值。
+* `properties`。值可以是任何 JSON 物件或空值。如果值不是 `null`，BigQuery 會將 JSON 物件的每個成員載入為個別資料表資料欄。如要進一步瞭解 BigQuery 如何剖析 JSON 資料類型，請參閱「[載入 JSON 資料的詳細資料](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json?hl=zh-tw#details_of_loading_json_data)」。
+* `id`。選用。如果存在，值可以是字串或數字。BigQuery 會將這個值載入名為 `id` 的資料欄。
 
-如果特徵物件包含未列於此的其他成員，BigQuery 會直接將這些成員轉換為資料表欄。
+如果特徵物件包含此處未列出的其他成員，BigQuery 會直接將這些成員轉換為資料表資料欄。
 
 您可以使用 bq 指令列工具的 `bq
-load` 指令，載入以換行符分隔的 GeoJSON 檔案，如下所示：
+load` 指令，載入以換行符號分隔的 GeoJSON 檔案，如下所示：
 
 ```
 bq load \
@@ -173,9 +173,9 @@ bq load \
 * `TABLE` 是目的地資料表的名稱。
 * `FILE_PATH_OR_URI` 是本機檔案的路徑或 [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#gcs-uri)。
 
-上一個範例會啟用[結構定義自動偵測](https://docs.cloud.google.com/bigquery/docs/schema-detect?hl=zh-tw)功能。如要進一步控管 BigQuery 如何轉換 `properties` 物件中的值，可以改為提供明確的結構定義。詳情請參閱「[指定結構定義](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#specify_schemas)」。如果您提供明確的結構定義，請勿在結構定義中加入頂層 `type` 資料欄。針對 `properties` 成員的每個成員，定義個別資料欄，而非單一巢狀資料欄。
+上述範例會啟用[結構定義自動偵測](https://docs.cloud.google.com/bigquery/docs/schema-detect?hl=zh-tw)功能。如要進一步控管 BigQuery 轉換 `properties` 物件內值的方式，您可以改為提供明確的結構定義。詳情請參閱「[指定結構定義](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#specify_schemas)」。如果您提供明確的結構定義，請勿在結構定義定義中加入頂層 `type` 資料欄。請為 `properties` 成員的每個成員定義個別資料欄，而非單一巢狀資料欄。
 
-如 [RFC 7946](https://tools.ietf.org/html/rfc7946) 所定義，完整的 GeoJSON 資料結構是單一 JSON 物件。許多系統會將 GeoJSON 資料匯出為單一 `FeatureCollection` 物件，其中包含所有幾何圖形。如要將這個格式載入 BigQuery，您必須先轉換檔案，方法是移除根層級的 `FeatureCollection` 物件，並將個別特徵物件分割成不同的行。舉例來說，下列指令會使用 `jq` 指令列工具，將 GeoJSON 檔案分割為以換行符號分隔的格式：
+根據 [RFC 7946](https://tools.ietf.org/html/rfc7946) 的定義，完整的 GeoJSON 資料結構是單一 JSON 物件。許多系統會將 GeoJSON 資料匯出為單一 `FeatureCollection` 物件，其中包含所有幾何圖形。如要將這種格式載入 BigQuery，您必須轉換檔案，方法是移除根層級 `FeatureCollection` 物件，並將個別特徵物件分割成不同的行。舉例來說，下列指令會使用 `jq` 指令列工具，將 GeoJSON 檔案分割為以換行符號分隔的格式：
 
 ```
 cat ~/file1.json | jq -c '.features[]' > converted.json
@@ -183,7 +183,7 @@ cat ~/file1.json | jq -c '.features[]' > converted.json
 
 #### 從以換行符號分隔的 GeoJSON 檔案建立外部資料表
 
-您可以建立[外部資料表](https://docs.cloud.google.com/bigquery/docs/external-tables?hl=zh-tw)，查詢儲存在 Cloud Storage 中以換行符號分隔的 GeoJSON 檔案。如要建立外部資料表，請使用 [`CREATE EXTERNAL TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#create_external_table_statement) DDL 陳述式。在 `OPTIONS` 子句中，將 `format` 選項設為 `NEWLINE_DELIMITED_JSON`，並將 `json_extension` 選項設為 `GEOJSON`。
+您可以建立[外部資料表](https://docs.cloud.google.com/bigquery/docs/external-tables?hl=zh-tw)，查詢儲存在 Cloud Storage 中、以換行符號分隔的 GeoJSON 檔案。如要建立外部資料表，請使用 [`CREATE EXTERNAL TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#create_external_table_statement) DDL 陳述式。在 `OPTIONS` 子句中，將 `format` 選項設為 `NEWLINE_DELIMITED_JSON`，並將 `json_extension` 選項設為 `GEOJSON`。
 
 範例：
 
@@ -197,13 +197,13 @@ CREATE EXTERNAL TABLE mydataset.table1 OPTIONS (
 
 #### 載入 GeoJSON 幾何圖形資料
 
-地理空間分析支援載入以文字字串形式內嵌於其他檔案類型中的個別 GeoJSON 幾何物件。舉例來說，您可以載入 CSV 檔案，其中一個資料欄包含 GeoJSON 幾何圖形物件。
+地理空間分析支援載入個別 GeoJSON 幾何圖形物件，這些物件會以文字字串的形式嵌入其他檔案類型。舉例來說，您可以載入 CSV 檔案，其中一欄包含 GeoJSON 幾何圖形物件。
 
-如要將這類 GeoJSON 資料載入 BigQuery，請提供[結構定義](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw)，指定 GeoJSON 資料的 `GEOGRAPHY` 資料欄。您必須手動提供結構定義。否則，如果啟用自動偵測功能，BigQuery 會將資料載入為 `STRING` 值。
+如要將這類 GeoJSON 資料載入 BigQuery，請提供[結構定義](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw)，為 GeoJSON 資料指定 `GEOGRAPHY` 資料欄。您必須手動提供結構定義。否則，如果啟用自動偵測功能，BigQuery 會將資料載入為 `STRING` 值。
 
-地理空間分析不支援使用這種方法載入 GeoJSON 特徵物件或特徵集合。如要載入地圖項目物件，請考慮使用以換行符號分隔的 GeoJSON 檔案。
+地理空間分析不支援使用這種方法載入 GeoJSON 特徵物件或特徵集合。如需載入地圖項目物件，建議使用以換行符號分隔的 GeoJSON 檔案。
 
-如要將 GeoJSON 資料串流至現有的 BigQuery 資料表 (含有 `GEOGRAPHY` 資料欄)，請在 API 要求中將資料序列化為字串。
+如要將 GeoJSON 資料串流至含有 `GEOGRAPHY` 資料欄的現有 BigQuery 資料表，請在 API 要求中將資料序列化為字串。
 
 ### bq
 
@@ -216,9 +216,9 @@ echo '{"geo": "{\"type\": \"LineString\", \"coordinates\": [[-118.4085, 33.9416]
 
 ### Python
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定操作說明進行操作。詳情請參閱 [BigQuery Python API 參考文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 import geojson
@@ -248,17 +248,17 @@ else:
     print(f"wrote 1 row to {table_id}")
 ```
 
-您也可以使用 [`ST_GEOGFROMGEOJSON`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions?hl=zh-tw#st_geogfromgeojson) 函式，將 GeoJSON 幾何物件轉換為 `GEOGRAPHY` 值。舉例來說，您可以將幾何圖形儲存為 `STRING` 值，然後執行呼叫 `ST_GEOGFROMGEOJSON` 的查詢。
+您也可以使用 [`ST_GEOGFROMGEOJSON`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions?hl=zh-tw#st_geogfromgeojson) 函式，將 GeoJSON 幾何圖形物件轉換為 `GEOGRAPHY` 值。舉例來說，您可以將幾何圖形儲存為 `STRING` 值，然後執行呼叫 `ST_GEOGFROMGEOJSON` 的查詢。
 
 ### 載入 GeoParquet 檔案
 
-[GeoParquet](https://geoparquet.org) 規格會在 [Parquet](https://parquet.apache.org/) 檔案格式中加入地理空間類型。GeoParquet 包含中繼資料，可為所含的地理空間資料提供明確語意，避免發生其他地理空間資料格式的[解讀問題](#coordinate_systems_and_edges)。
+[GeoParquet](https://geoparquet.org) 是一種規格，可將地理空間類型新增至 [Parquet](https://parquet.apache.org/) 檔案格式。GeoParquet 包含中繼資料，可為內含的地理空間資料提供明確語意，避免其他地理空間資料格式會發生的[解讀問題](#coordinate_systems_and_edges)。
 
-載入 Parquet 檔案時，BigQuery 會檢查 GeoParquet 中繼資料。如果存在 GeoParquet 中繼資料，BigQuery 預設會將中繼資料描述的所有資料欄載入對應的 `GEOGRAPHY` 資料欄。如要進一步瞭解如何載入 Parquet 檔案，請參閱[載入 Parquet 資料](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet?hl=zh-tw)。
+載入 Parquet 檔案時，BigQuery 會檢查 GeoParquet 中繼資料。如果 GeoParquet 中繼資料存在，BigQuery 預設會將其描述的所有資料欄載入對應的 `GEOGRAPHY` 資料欄。如要進一步瞭解如何載入 Parquet 檔案，請參閱「[載入 Parquet 資料](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet?hl=zh-tw)」。
 
-**注意：** 為避免中斷現有工作流程，部分專案已停用 GeoParquet 支援。如果 GeoParquet 檔案未直接載入 `GEOGRAPHY` 欄，請[與支援團隊聯絡](https://docs.cloud.google.com/bigquery/docs/getting-support?hl=zh-tw)。
+**注意：** 部分專案已停用 GeoParquet 支援，以免中斷現有工作流程。如果 GeoParquet 檔案未直接載入 `GEOGRAPHY` 欄，請[聯絡支援團隊](https://docs.cloud.google.com/bigquery/docs/getting-support?hl=zh-tw)。
 
-#### 從 GeoParquet 資料建立外部資料表
+#### 根據 GeoParquet 資料建立外部資料表
 
 參照 GeoParquet 檔案的[外部資料表](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage?hl=zh-tw)會將相關資料欄對應至 `GEOGRAPHY` 類型。
 
@@ -266,40 +266,40 @@ GeoParquet 檔案 (`bbox`、`covering`) 中的統計資料不會用於加速外�
 
 ### 座標系與邊緣
 
-在地理空間分析中，點是指一個 WGS84 球體的表面位置，以經度和大地緯度的方式表示。至於邊緣 (edge) 則是指兩端點之間的球面測地線，(也就是球體表面上的最短路徑)。
+在地理空間分析中，點是 WGS84 橢球體表面的位置，以經度和大地緯度表示。至於邊緣 (edge) 則是指兩端點之間的球面測地線，(也就是說，邊緣是球體表面上的最短路徑)。
 
-WKT 格式並不提供座標系。載入 WKT 資料時，地理空間分析會假設資料使用 WGS84 座標，且邊緣為球形。除非地理區域夠小，可忽略球面和平面邊緣之間的差異，否則請確保來源資料符合該座標系統。
+WKT 格式不提供座標系統。載入 WKT 資料時，地理空間分析會假設資料使用 WGS84 座標，且邊緣為球形。請確認來源資料與該座標系統相符，除非地理區域夠小，可以忽略球形和平面邊緣之間的差異。
 
-GeoJSON 明確使用 WGS84 座標，並以平面邊緣表示。載入 GeoJSON 資料時，地理空間分析會將平面邊緣轉換為球面邊緣。地理空間分析會在必要時為線條加上額外的點，以便讓轉換後的邊緣序列維持在原始線條的 10 公尺範圍之內。這項程序稱為「細分」或「非均勻密集化」。您無法直接控制細分程序。
+GeoJSON 明確使用 WGS84 座標和平面邊緣。載入 GeoJSON 資料時，地理空間數據分析會將平面邊緣轉換為球形邊緣。地理空間分析會視需要為線條新增額外的點，讓轉換後的邊緣序列與原始線條保持在 10 公尺以內。這個程序稱為「鑲嵌」或「非均勻密集化」。您無法直接控制曲面細分程序。
 
-如要載入具有球形邊緣的地理位置，請使用 WKT。如要載入具有平面邊緣的地理位置 (通常稱為「幾何圖形」)，最簡單的方法就是使用 GeoJSON。不過，如果幾何資料已採用 WKT 格式，也可以將資料載入為 `STRING` 類型，然後使用 [`ST_GEOGFROMTEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions?hl=zh-tw#st_geogfromtext_signature2) 函式轉換為 `GEOGRAPHY` 值。將 `planar` 參數設為 `TRUE`，即可將資料解讀為平面。
+如要載入具有球形邊緣的地理位置，請使用 WKT。如要載入具有平面邊緣的地理位置 (通常稱為「幾何圖形」)，最簡單的方法是使用 GeoJSON。不過，如果幾何圖形資料已採用 WKT 格式，您也可以將資料載入為 `STRING` 類型，然後使用 [`ST_GEOGFROMTEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions?hl=zh-tw#st_geogfromtext_signature2) 函式轉換為 `GEOGRAPHY` 值。將 `planar` 參數設為 `TRUE`，將資料解讀為平面。
 
-GeoParquet 檔案包含用於建立資料的座標系統和邊緣相關中繼資料。讀取具有平面邊緣的 GeoParquet 檔案時，地理空間分析會將平面邊緣轉換為球面邊緣。如果 GeoParquet 檔案的座標系統不是 WGS84，系統會拒絕上傳。
+GeoParquet 檔案包含中繼資料，說明建立資料時使用的座標系統和邊緣。讀取具有平面邊緣的 GeoParquet 檔案時，地理空間分析會將平面邊緣轉換為球形邊緣。系統會拒絕座標系統不是 WGS84 的 GeoParquet 檔案。
 
-選擇交換格式時，請務必瞭解來源資料使用的座標系統。多數系統會明確支援從 WKT 解析地理資訊 (而非幾何圖形)，或是採用平面邊緣。
+選擇交換格式時，請務必瞭解來源資料使用的座標系統。大多數系統都明確支援從 WKT 剖析地理位置 (而非幾何圖形)，或假設平面邊緣。
 
-您的座標應該先列出經度，再列出緯度。如果地理位置具有任何長線段或邊緣，則它們必須經過曲面細分處理，否則地理空間分析會將其詮釋為球形測地線，因此可能會無法對應至原始資料來源的座標系。
+您的座標應該先列出經度，再列出緯度。如果地理位置有任何長線段或邊緣，則必須進行鑲嵌，因為地理空間分析會將其解讀為球形測地線，這可能與資料來源的座標系統不對應。
 
 ### 多邊形方向
 
-在球體上，每個多邊形都有一個互補的多邊形。舉例來說，描述地球各大洲的多邊形會有一個描述地球海洋的多邊形。由於兩個多邊形都使用相同的界線環形描述，因此需要規則來解決在兩個多邊形中的模糊性 (兩個多邊形中，哪一個由指定的 WKT 字串描述)。
+在球體上，每個多邊形都有一個互補多邊形。舉例來說，描述地球大陸的多邊形會有一個描述地球海洋的互補多邊形。由於兩個多邊形都使用相同的界線環形描述，因此需要規則來解決在兩個多邊形中的模糊性 (兩個多邊形中，哪一個由指定的 WKT 字串描述)。
 
-從檔案載入 WKT 和 WKB 字串，或使用串流擷取功能時，地理空間分析會假設輸入中的多邊形方向如下：如果按照輸入頂點的順序沿著多邊形界線前進，多邊形的內部會在左側。將地理位置物件匯出至 WKT 和 WKB 字串時，地理空間分析功能會使用相同的規則。
+從檔案載入 WKT 和 WKB 字串，或使用串流擷取功能時，地理空間數據分析會假設輸入的多邊形方向如下：如果按照輸入頂點的順序遍歷多邊形的邊界，多邊形的內部會位於左側。將地理物件匯出為 WKT 和 WKB 字串時，地理空間分析也會採用相同規則。
 
-如果您使用 [`ST_GEOGFROMTEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions?hl=zh-tw#st_geogfromtext) 函式將 WKT 字串轉換為 `GEOGRAPHY` 值，`oriented` 參數會指定函式判斷多邊形的方式：
+如果您使用 [`ST_GEOGFROMTEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions?hl=zh-tw#st_geogfromtext) 函式將 WKT 字串轉換為 `GEOGRAPHY` 值，`oriented` 參數會指定函式如何判斷多邊形：
 
-* `FALSE`：將輸入內容解譯為具有較小面積的多邊形。這是預設行為。
-* `TRUE`：使用先前說明的左側方向規則。這個選項可讓您載入面積大於半球的多邊形。
+* `FALSE`：：將輸入內容解讀為面積較小的多邊形。這是預設行為。
+* `TRUE`：使用前述的左手定向規則。這個選項可讓您載入面積大於半球的多邊形。
 
-由於 GeoJSON 字串是在平面地圖上定義，因此即使輸入內容未遵照 GeoJSON 格式規格 [RFC 7946](https://tools.ietf.org/html/rfc7946) 定義的方向規則，也可以明確地判定方向。
+由於 GeoJSON 字串是在平面地圖上定義，因此即使輸入內容不符合 GeoJSON 格式規格 [RFC 7946](https://tools.ietf.org/html/rfc7946) 中定義的方向規則，也能明確判斷方向。
 
 ### 處理格式不正確的空間資料
 
-從其他工具將空間資料載入 BigQuery 時，您可能會因為 WKT 或 GeoJSON 資料無效而發生轉換錯誤。舉例來說，`Edge K has duplicate vertex with edge N` 錯誤表示多邊形具有重複的頂點 (除第一個與最後一個以外)。
+將其他工具的空間資料載入 BigQuery 時，可能會因 WKT 或 GeoJSON 資料無效而發生轉換錯誤。舉例來說，如果出現 `Edge K has duplicate vertex with edge N` 等錯誤，表示多邊形含有重複頂點 (第一個和最後一個頂點除外)。
 
-為避免格式化問題，您可以建立一個函式讓輸出結果符合標準。舉例來說，從 PostGIS 匯出資料時，您可以使用 PostGIS `ST_MakeValid` 函式來標準化輸出內容。或者，您也可以匯入文字格式的資料，然後呼叫 [`ST_GEOGFROMTEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions?hl=zh-tw#st_geogfromtext_signature2) 或 [`ST_GEOGFROMGEOJSON`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions?hl=zh-tw#st_geogfromgeojson)，並搭配 `make_valid` 參數，將資料轉換為所需格式。如果 `make_valid` 為 `TRUE`，這些函式會嘗試修復無效的多邊形。
+為避免格式化問題，您可以建立一個函式讓輸出結果符合標準。舉例來說，從 PostGIS 匯出資料時，您可以使用 PostGIS `ST_MakeValid` 函式將輸出內容標準化。或者，您也可以將資料匯入為文字，然後使用 `make_valid` 參數呼叫 [`ST_GEOGFROMTEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions?hl=zh-tw#st_geogfromtext_signature2) 或 [`ST_GEOGFROMGEOJSON`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions?hl=zh-tw#st_geogfromgeojson) 進行轉換。當 `make_valid` 為 `TRUE` 時，這些函式會嘗試修復無效的多邊形。
 
-如要查找或忽略格式不正確的資料，請使用 `SAFE` 前綴函式輸出有問題的資料。例如，下列查詢使用 `SAFE` 前置字元來擷取格式不正確的空間資料。
+如要查找或忽略格式不正確的資料，請使用 `SAFE` 前綴函式輸出有問題的資料。舉例來說，下列查詢使用 `SAFE` 前置字元，擷取格式不正確的空間資料。
 
 ```
 SELECT
@@ -313,24 +313,23 @@ WHERE
 
 ### 限制
 
-地理空間分析不支援地理空間格式的下列功能：
+地理空間分析不支援下列地理空間格式功能：
 
-* 三維幾何圖形。包括 WKT 格式的「Z」字尾，以及 GeoJSON 格式的高度座標。
+* 3D 幾何圖形。包括 WKT 格式的「Z」字尾，以及 GeoJSON 格式的高度座標。
 * 線性參考系統。包括 WKT 格式的「M」字尾。
-* 幾何圖元或多部分幾何圖形以外的 WKT 幾何物件。
-  具體來說，地理空間分析僅支援 Point、MultiPoint、LineString、MultiLineString、Polygon、MultiPolygon 和 GeometryCollection。
+* 幾何圖形基元或多部分幾何圖形以外的 WKT 幾何圖形物件。具體來說，地理空間分析僅支援 Point、MultiPoint、LineString、MultiLineString、Polygon、MultiPolygon 和 GeometryCollection。
 
 如要瞭解 GeoJSON 和 WKT 輸入格式的特定限制，請參閱 [`ST_GEOGFROMGEOJSON`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions?hl=zh-tw#st_geogfromgeojson) 和 [`ST_GEOGFROMTEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions?hl=zh-tw#st_geogfromtext)。
 
-## 整合地理空間光柵資料與 Google Earth Engine
+## 將地理空間光柵資料與 Google Earth Engine 整合
 
-地理空間洞察通常會以格線或*點陣*資料呈現。Raster 資料會將區域連續資料 (例如衛星圖像、天氣預報和土地覆蓋物) 整理成像素格線。雖然 BigQuery 主要專門處理表格向量資料，代表具有界線和點的特徵，但您可以使用 [`ST_REGIONSTATS` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions?hl=zh-tw#st_regionstats)，將點陣資料整合到 BigQuery 分析中。這項函式會使用 Google 的光柵分析平台 Earth Engine，對光柵資料執行運算和彙整作業，以強化地理空間分析。詳情請參閱「[處理點陣資料](https://docs.cloud.google.com/bigquery/docs/raster-data?hl=zh-tw)」。
+地理空間洞察通常會以網格或*光柵*資料的形式呈現。光柵資料會將區域連續資料 (例如衛星圖像、天氣預報和土地覆蓋物) 整理成像素網格。雖然 BigQuery 主要專精於表格向量資料，以邊界和點表示特徵，但您可以使用 [`ST_REGIONSTATS` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions?hl=zh-tw#st_regionstats)，將光柵資料整合至 BigQuery 分析。這項函式會使用 Google 的光柵分析平台 Earth Engine，對光柵資料執行運算和匯總，強化地理空間分析。詳情請參閱「[使用光柵資料](https://docs.cloud.google.com/bigquery/docs/raster-data?hl=zh-tw)」。
 
-如要瞭解如何將 Earth Engine 資料匯出至 BigQuery，請參閱「[匯出至 BigQuery](https://developers.google.com/earth-engine/guides/exporting_to_bigquery?hl=zh-tw)」。如要進一步瞭解 Earth Engine 和 BigQuery 的整合功能，請參閱 Earth Engine 說明文件中的「[BigQuery 整合](https://developers.google.com/earth-engine/guides/bigquery_integrations?hl=zh-tw)」。
+如要瞭解如何將 Earth Engine 資料匯出至 BigQuery，請參閱「[匯出至 BigQuery](https://developers.google.com/earth-engine/guides/exporting_to_bigquery?hl=zh-tw)」。如要進一步瞭解 Earth Engine 與 BigQuery 之間的整合，請參閱 Earth Engine 說明文件中的「[BigQuery 整合](https://developers.google.com/earth-engine/guides/bigquery_integrations?hl=zh-tw)」。
 
 ## 轉換地理空間資料
 
-如果資料表包含獨立的經度和緯度資料欄，則可以透過 GoogleSQL [地理位置函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions?hl=zh-tw) (例如 [`ST_GEOGPOINT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions?hl=zh-tw#st_geogpoint))，將這些值轉換為地理位置。舉例來說，如果您有兩個 `DOUBLE` 欄位分別存放經度與緯度，則可以使用下列查詢建立一個地理位置欄位：
+如果資料表包含經度和緯度的個別資料欄，您可以使用 GoogleSQL [地理函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions?hl=zh-tw) (例如 [`ST_GEOGPOINT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions?hl=zh-tw#st_geogpoint))，將這些值轉換為地理位置。舉例來說，如果您有兩個經度和緯度的 `DOUBLE` 資料欄，可以使用下列查詢建立地理位置資料欄：
 
 ```
 SELECT
@@ -340,13 +339,13 @@ FROM
   mytable
 ```
 
-BigQuery 可以將 WKT 和 GeoJSON 字串轉換為地理位置類型。如果資料採用其他格式 (例如 Shapefile)，請使用外部工具將資料轉換為支援的輸入檔案格式，例如 CSV 檔案，並以 WKT 或 GeoJSON 字串編碼 `GEOGRAPHY` 欄。
+BigQuery 可將 WKT 和 GeoJSON 字串轉換為地理類型。如果資料採用其他格式 (例如 Shapefile)，請使用外部工具將資料轉換為支援的輸入檔案格式 (例如 CSV 檔案)，並將 `GEOGRAPHY` 欄編碼為 WKT 或 GeoJSON 字串。
 
-## 將地理空間資料分區及分群
+## 分區及分群地理空間資料
 
-您可以[分區](https://docs.cloud.google.com/bigquery/docs/partitioned-tables?hl=zh-tw)和[分群](https://docs.cloud.google.com/bigquery/docs/clustered-tables?hl=zh-tw)包含 `GEOGRAPHY` 資料欄的資料表。`GEOGRAPHY` 資料欄可做為分群資料欄使用，但 `GEOGRAPHY` 資料欄無法當成分區資料欄。
+您可以[分區](https://docs.cloud.google.com/bigquery/docs/partitioned-tables?hl=zh-tw)和[分群](https://docs.cloud.google.com/bigquery/docs/clustered-tables?hl=zh-tw)含有 `GEOGRAPHY` 資料欄的資料表。您可以使用 `GEOGRAPHY` 欄做為分群欄，但無法使用 `GEOGRAPHY` 欄做為分區欄。
 
-將 `GEOGRAPHY` 資料儲存至資料表時，如果您的查詢使用空間述詞篩選資料，請確認資料表是依 `GEOGRAPHY` 欄分群。這通常會提升查詢效能，並可能降低成本。空間述詞會呼叫布林地理位置函式，並且會將 `GEOGRAPHY` 欄做為引數使用。以下範例顯示使用 `ST_DWITHIN` 函式的空間述詞：
+如果您將 `GEOGRAPHY` 資料儲存在資料表中，且查詢會使用空間述詞篩選資料，請務必依 `GEOGRAPHY` 資料欄分群資料表。這通常能提升查詢效能，並降低成本。空間述詞會呼叫布林地理函式，並將 `GEOGRAPHY` 資料欄做為其中一個引數。以下範例顯示使用 `ST_DWITHIN` 函式的空間述詞：
 
 ```
 WHERE ST_DWITHIN(geo, ST_GeogPoint(longitude, latitude), 100)
@@ -373,7 +372,7 @@ GROUP BY zip
 ORDER BY bike_stations DESC
 ```
 
-當您的地理位置資料保持不變時，空間合併的效果會更好。上述範例在查詢中建立了地理位置值，但若將地理位置值存入 BigQuery 資料表的話將會有更加的效能表現。
+當您的地理位置資料保持不變時，空間合併的效果會更好。上述範例會在查詢中建立地理位置值。但若將地理位置值存入 BigQuery 資料表的話將會有更加的效能表現。
 
 舉例來說，下列查詢會擷取經度與緯度組合，並且將它們轉換成地理資料點。執行這項查詢時，您可以指定新的目的地資料表來儲存查詢結果。
 
@@ -385,7 +384,7 @@ FROM
   mytable
 ```
 
-BigQuery 可透過下列 GoogleSQL 述詞函式對 INNER JOIN 和 CROSS JOIN 運算子實作最佳化空間 JOIN：
+BigQuery 會使用下列 GoogleSQL 述詞函式，為 INNER JOIN 和 CROSS JOIN 運算子實作最佳化空間 JOIN：
 
 * [`ST_DWITHIN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions?hl=zh-tw#st_dwithin)
 * [`ST_INTERSECTS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions?hl=zh-tw#st_intersects)
@@ -398,19 +397,19 @@ BigQuery 可透過下列 GoogleSQL 述詞函式對 INNER JOIN 和 CROSS JOIN 運
 
 下列項目的空間合併並未進行最佳化：
 
-* 適用於 `LEFT`、`RIGHT` 或 `FULL OUTER` 聯結
-* 如果涉及反向聯結
+* `LEFT`、`RIGHT` 或 `FULL OUTER` 加入
+* 涉及反聯結的情況
 * 當空間述詞為否定時
 
-使用 `ST_DWITHIN` 述詞的 `JOIN` 只會在距離參數為常數運算式時最佳化。
+只有在距離參數為常數運算式時，使用 `ST_DWITHIN` 述詞的 `JOIN` 才會最佳化。
 
 ## 匯出空間資料
 
 當您從 BigQuery 匯出空間資料時，`GEOGRAPHY` 欄值將一律格式化成 WKT 字串。如要以 GeoJSON 格式匯出資料，請使用 [`ST_ASGEOJSON`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions?hl=zh-tw#st_asgeojson) 函式。
 
-如果您用來分析匯出資料的工具無法解讀 `GEOGRAPHY` 資料類型，可以使用地理函式 (例如 [`ST_ASTEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions?hl=zh-tw#st_astext) 或 [`ST_ASGEOJSON`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions?hl=zh-tw#st_asgeojson)) 將資料欄值轉換為字串。地理空間分析會在必要時為線條加上額外的點，以便讓轉換後的邊緣序列維持在原始測地線的 10 公尺範圍之內。
+如果您用來分析匯出資料的工具無法解讀 `GEOGRAPHY` 資料類型，可以使用 [`ST_ASTEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions?hl=zh-tw#st_astext) 或 [`ST_ASGEOJSON`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions?hl=zh-tw#st_asgeojson) 等地理函式，將資料欄值轉換為字串。地理空間分析會在必要時為線條新增額外的點，讓轉換後的邊緣序列與原始測地線保持在 10 公尺以內。
 
-例如，下列查詢使用 `ST_ASGEOJSON` 將 GeoJSON 值轉換為字串。
+舉例來說，下列查詢會使用 `ST_ASGEOJSON` 將 GeoJSON 值轉換為字串。
 
 ```
 SELECT
@@ -423,13 +422,13 @@ SELECT
 { "type": "LineString", "coordinates": [ [1, 1], [1.99977145571783, 1.50022838764041], [2.49981908082299, 1.75018082434274], [3, 2] ] }
 ```
 
-GeoJSON 線條擁有兩個額外的資料點。地理空間分析會新增這些資料點，這樣 GeoJSON 線條會和原始線條一樣貼近地面上的相同路徑。
+GeoJSON 線條擁有兩個額外的資料點。地理空間分析會新增這些點，讓 GeoJSON 線條緊貼原始線條在地面上的路徑。
 
 ## 後續步驟
 
-* 如要開始使用地理空間分析，請參閱[資料分析師專用的地理空間分析入門指南](https://docs.cloud.google.com/bigquery/docs/geospatial-get-started?hl=zh-tw)。
-* 如要進一步瞭解地理空間分析的視覺化選項，請參閱「[視覺化呈現地理空間資料](https://docs.cloud.google.com/bigquery/docs/geospatial-visualize?hl=zh-tw)」。
-* 如要查看地理空間分析的 GoogleSQL 函式說明文件，請參閱[GoogleSQL 中的地理函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions?hl=zh-tw)。
+* 如要開始使用地理空間分析，請參閱「[資料分析師專用的地理空間分析入門教學課程](https://docs.cloud.google.com/bigquery/docs/geospatial-get-started?hl=zh-tw)」。
+* 如要進一步瞭解地理空間分析的視覺化選項，請參閱「[以圖表呈現地理空間資料](https://docs.cloud.google.com/bigquery/docs/geospatial-visualize?hl=zh-tw)」。
+* 如需地理空間分析中 GoogleSQL 函式的說明文件，請參閱「[GoogleSQL 中的地理函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions?hl=zh-tw)」。
 
 
 
@@ -438,11 +437,11 @@ GeoJSON 線條擁有兩個額外的資料點。地理空間分析會新增這些
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-29 (世界標準時間)。
+上次更新時間：2026-10-30 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-30 (世界標準時間)。"],[],[]]

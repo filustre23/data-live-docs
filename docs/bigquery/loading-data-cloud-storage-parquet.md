@@ -1007,4 +1007,4 @@ Parquet `UINT_8`、`UINT_16`、`UINT_32` 和 `UINT_64` 類型不帶正負號。�
 
 `Decimal` 邏輯類型可轉換為 `NUMERIC`、`BIGNUMERIC` 或 `STRING` 類型。轉換後的類型取決於 `decimal` 邏輯類型的有效位數和小數位數參數，以及指定的小數目標類型。請按照下列方式指定十進位指定類型：
 
-* 如要使用 [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert?hl=zh-tw) API 執行
+* 如要使用

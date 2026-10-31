@@ -238,5 +238,5 @@ func main() {
 	if err != nil {
 		log.Fatalf("failed to get information about the exchange: %v", err)
 	}
-	fmt.Printf("\nData E
+	fmt.Printf
 ```

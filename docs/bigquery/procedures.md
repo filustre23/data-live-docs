@@ -16,11 +16,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 使用 SQL 預存程序
 
-「預存程序」是一組陳述式，可從其他查詢或其他預存程序呼叫。程序可以接受輸入引數，並傳回值做為輸出內容。您可以在 BigQuery 資料集中命名及儲存程序。預存程序可讓多位使用者存取或修改多個資料集的資料。也可以包含[多陳述式查詢](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries?hl=zh-tw)。
-
-部分預存程序內建於 BigQuery，不需建立。這些稱為「系統程序」，詳情請參閱「[系統程序參考資料](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures?hl=zh-tw)」。
-
-預存程序支援*程序語言陳述式*，可讓您執行定義變數和實作控制流程等操作。如要進一步瞭解程序語言陳述式，請參閱「[程序語言參考資料](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language?hl=zh-tw)」。
+您可以在 BigQuery 中使用 SQL 預存程序，封裝及重複使用多個查詢中的陳述式集合。在資料集中建立這些常式，即可接受輸入引數、傳回值，以及修改多個資料集和使用者的資料。預存程序也可以包含[多陳述式查詢](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries?hl=zh-tw)。您可以使用[程序語言](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language?hl=zh-tw)建立自己的程序，定義變數並實作控制流程，或使用 BigQuery 內建的[系統程序](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures?hl=zh-tw)。
 
 ## 建立預存程序
 
@@ -95,7 +91,7 @@ resource "google_bigquery_routine" "my_stored_procedure" {
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
 2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
 
-   每個專案只需執行這個指令一次，而且可以在任何目錄中執行。
+   這項指令在每個專案中只需執行一次，且可在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
@@ -231,11 +227,11 @@ CALL BQ.REFRESH_MATERIALIZED_VIEW;
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-28 (世界標準時間)。
+上次更新時間：2026-10-30 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-28 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-30 (世界標準時間)。"],[],[]]

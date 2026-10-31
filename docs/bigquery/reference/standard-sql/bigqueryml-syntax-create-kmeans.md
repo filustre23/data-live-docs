@@ -553,4 +553,4 @@ FROM
 ### Train a k-means model with custom cluster initialization method
 
 This example creates a k-means model with three clusters using the custom
-cluster initialization method. `init_col` identifies the column of type `BOOL`
+cluster initialization method. `init_col` identifies the column

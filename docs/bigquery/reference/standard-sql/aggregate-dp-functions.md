@@ -328,5 +328,5 @@ view called [`professors`](/bigquery/docs/reference/standard-sql/query-syntax#dp
 -- With noise, using the epsilon parameter.
 SELECT
   WITH DIFFERENTIAL_PRIVACY
-    OPTIONS(epsilon=10,
+    OPTIONS(epsilon=10,<
 ```

@@ -136,8 +136,7 @@ This is advanced functionality for interoperability with systems utilizing the
 * Can return negative cell IDs.
 * Valid S2 cell levels are 0 to 30.
 * `level` defaults to 30 if not explicitly specified.
-* The function only supports a single point GEOGRAPHY. Use the `SAFE` prefix if
-  the input can be multipoint, linestring, polygon, or an empty `GEOGRAPHY`.
+* The function only supports a single point GEOGRAPHY.
 * To compute the covering of a complex `GEOGRAPHY`, use
   [S2\_COVERINGCELLIDS](#s2_coveringcellids).
 
@@ -155,5 +154,5 @@ WITH data AS (
   SELECT 2 AS id, ST_GEOGFROMTEXT('POINT EMPTY') AS geo
   UNION ALL
   -- only points are supported
-  SELECT 3 AS id, ST_GEOGFROMTEXT('LINESTRING(1 2, 3 4)'
+  SELECT 3 AS id, ST_GEOGFROMTEXT('LINESTRING(1 2, 3 4)') AS
 ```

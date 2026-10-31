@@ -227,4 +227,7 @@ WITH TitlesAndScores AS (
     EXTRACT(DATE FROM time_ts) AS date
   FROM `bigquery-public-data.hacker_news.stories`
   WHERE score IS NOT NULL AND title IS NOT NULL
+  GROUP BY date)
+SELECT date,
+  ARRAY(SEL
 ```

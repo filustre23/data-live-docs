@@ -27,6 +27,16 @@ To get the latest product updates delivered to you, add the URL of this page to 
 reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators), or add the
 [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## October 30, 2026
+
+Feature
+
+You can now retrieve query results
+[directly in the Apache Arrow format](/bigquery/docs/running-queries#arrow-format)
+for faster retrieval speed and improved serialization efficiency. This feature
+is in
+[Preview](https://cloud.google.com/products#product-launch-stages).
+
 ## October 27, 2026
 
 Feature
@@ -4835,5 +4845,4 @@ Libraries
 
 ##### Bug Fixes
 
-* Ensure AccessEntry equality and repr uses the correct `entity_type` ([#2182](https://github.com/googleapis/python-bigquery/issues/2182)) ([0217637](https://github.com/googleapis/python-bigquery/commit/02176377d5e2fc25b5cd4f46aa6ebfb1b6a960a6))
-* Ensure SchemaField.field\_dtype returns a string ([#2188](https://github.com/googleapis/python-bigquery/issues/2188)) ([7ec2848](https://github.com/googleapis/python-bigquery/commit/7ec2848379d5743bbcb36700a1153540c451e0e0))
+* Ensure AccessEntry equality and repr uses the correct `entity_type` (

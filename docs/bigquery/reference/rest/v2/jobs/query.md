@@ -17,6 +17,15 @@ Send feedback
 * [QueryRequest](#QueryRequest)
   + [JSON representation](#QueryRequest.SCHEMA_REPRESENTATION)
 * [JobCreationMode](#JobCreationMode)
+* [QueryResultsFormat](#QueryResultsFormat)
+* [ArrowSerializationOptions](#ArrowSerializationOptions)
+  + [JSON representation](#ArrowSerializationOptions.SCHEMA_REPRESENTATION)
+* [CompressionCodec](#CompressionCodec)
+* [PicosTimestampPrecision](#PicosTimestampPrecision)
+* [ArrowSchema](#ArrowSchema)
+  + [JSON representation](#ArrowSchema.SCHEMA_REPRESENTATION)
+* [ArrowRecordBatch](#ArrowRecordBatch)
+  + [JSON representation](#ArrowRecordBatch.SCHEMA_REPRESENTATION)
 * [Try it!](#try-it)
 
 Runs a BigQuery SQL query synchronously and returns query results if the query completes within a specified timeout.
@@ -49,7 +58,7 @@ If successful, the response body contains data with the following structure:
 
 | JSON representation |
 | --- |
-| ``` {   "kind": string,   "schema": {     object (TableSchema)   },   "jobReference": {     object (JobReference)   },   "jobCreationReason": {     object (JobCreationReason)   },   "queryId": string,   "location": string,   "totalRows": string,   "pageToken": string,   "rows": [     {       object     }   ],   "totalBytesProcessed": string,   "jobComplete": boolean,   "errors": [     {       object (ErrorProto)     }   ],   "cacheHit": boolean,   "numDmlAffectedRows": string,   "sessionInfo": {     object (SessionInfo)   },   "dmlStats": {     object (DmlStats)   },   "totalBytesBilled": string,   "totalSlotMs": string,   "creationTime": string,   "startTime": string,   "endTime": string } ``` |
+| ``` {   "kind": string,   "schema": {     object (TableSchema)   },   "jobReference": {     object (JobReference)   },   "jobCreationReason": {     object (JobCreationReason)   },   "queryId": string,   "location": string,   "totalRows": string,   "pageToken": string,   "rows": [     {       object     }   ],   "totalBytesProcessed": string,   "jobComplete": boolean,   "errors": [     {       object (ErrorProto)     }   ],   "cacheHit": boolean,   "numDmlAffectedRows": string,   "sessionInfo": {     object (SessionInfo)   },   "dmlStats": {     object (DmlStats)   },   "pageRowCount": string,   "totalBytesBilled": string,   "totalSlotMs": string,   "creationTime": string,   "startTime": string,   "endTime": string,    // The following is a list of mutually exclusive fields. At most one of the   // fields will be set in a response:   "arrowSchema": {     object (ArrowSchema)   }   // End of mutually exclusive fields.    // The following is a list of mutually exclusive fields. At most one of the   // fields will be set in a response:   "arrowRecordBatch": {     object (ArrowRecordBatch)   }   // End of mutually exclusive fields. } ``` |
 
 | Fields | |
 | --- | --- |
@@ -69,11 +78,18 @@ If successful, the response body contains data with the following structure:
 | `numDmlAffectedRows` | `string (Int64Value format)`  Output only. The number of rows affected by a DML statement. Present only for DML statements INSERT, UPDATE or DELETE. |
 | `sessionInfo` | `object (SessionInfo)`  Output only. Information of the session if this job is part of one. |
 | `dmlStats` | `object (DmlStats)`  Output only. Detailed statistics for DML statements INSERT, UPDATE, DELETE, MERGE or TRUNCATE. |
+| `pageRowCount` | `string (int64 format)`  Output only. The number of rows out of `totalRows` returned in this response.  [Preview](https://cloud.google.com/products/#product-launch-stages) |
 | `totalBytesBilled` | `string (int64 format)`  Output only. If the project is configured to use on-demand pricing, then this field contains the total bytes billed for the job. If the project is configured to use flat-rate pricing, then you are not billed for bytes and this field is informational only. |
 | `totalSlotMs` | `string (int64 format)`  Output only. Number of slot ms the user is actually billed for. |
 | `creationTime` | `string (int64 format)`  Output only. Creation time of this query, in milliseconds since the epoch. This field will be present on all queries. |
 | `startTime` | `string (int64 format)`  Output only. Start time of this query, in milliseconds since the epoch. This field will be present when the query job transitions from the PENDING state to either RUNNING or DONE. |
 | `endTime` | `string (int64 format)`  Output only. End time of this query, in milliseconds since the epoch. This field will be present whenever a query job is in the DONE state. |
+| The schema if `query_results_format` has been specified with value other than default `STRUCT_ENCODING`.  [Preview](https://cloud.google.com/products/#product-launch-stages) The following is a list of mutually exclusive fields. At most one of the fields will be set in a response: | |
+| `arrowSchema` | `object (ArrowSchema)`  Output only. Arrow schema |
+| End of mutually exclusive fields. | |
+| Row data is returned in format when `query_results_format` has been specified with value other than default `STRUCT_ENCODING`.  [Preview](https://cloud.google.com/products/#product-launch-stages) The following is a list of mutually exclusive fields. At most one of the fields will be set in a response: | |
+| `arrowRecordBatch` | `object (ArrowRecordBatch)`  Output only. Serialized row data in Arrow RecordBatch format. |
+| End of mutually exclusive fields. | |
 
 ### Authorization scopes
 
@@ -92,7 +108,7 @@ Describes the format of the jobs.query request.
 
 | JSON representation |
 | --- |
-| ``` {   "kind": string,   "query": string,   "maxResults": integer,   "defaultDataset": {     object (DatasetReference)   },   "timeoutMs": integer,   "destinationEncryptionConfiguration": {     object (EncryptionConfiguration)   },   "dryRun": boolean,   "preserveNulls": boolean,   "useQueryCache": boolean,   "useLegacySql": boolean,   "parameterMode": string,   "queryParameters": [     {       object (QueryParameter)     }   ],   "location": string,   "formatOptions": {     object (DataFormatOptions)   },   "connectionProperties": [     {       object (ConnectionProperty)     }   ],   "labels": {     string: string,     ...   },   "maximumBytesBilled": string,   "requestId": string,   "createSession": boolean,   "jobCreationMode": enum (JobCreationMode),   "secureContext": {     object (SecureContext)   },   "jobTimeoutMs": string,   "reservation": string } ``` |
+| ``` {   "kind": string,   "query": string,   "maxResults": integer,   "defaultDataset": {     object (DatasetReference)   },   "timeoutMs": integer,   "destinationEncryptionConfiguration": {     object (EncryptionConfiguration)   },   "dryRun": boolean,   "preserveNulls": boolean,   "useQueryCache": boolean,   "useLegacySql": boolean,   "parameterMode": string,   "queryParameters": [     {       object (QueryParameter)     }   ],   "location": string,   "formatOptions": {     object (DataFormatOptions)   },   "connectionProperties": [     {       object (ConnectionProperty)     }   ],   "labels": {     string: string,     ...   },   "maximumBytesBilled": string,   "requestId": string,   "createSession": boolean,   "jobCreationMode": enum (JobCreationMode),   "queryResultsFormat": enum (QueryResultsFormat),   "secureContext": {     object (SecureContext)   },   "jobTimeoutMs": string,   "reservation": string,    // The following is a list of mutually exclusive fields. At most one of the   // fields will be set in a response:   "arrowSerializationOptions": {     object (ArrowSerializationOptions)   }   // End of mutually exclusive fields. } ``` |
 
 | Fields | |
 | --- | --- |
@@ -103,14 +119,4 @@ Describes the format of the jobs.query request.
 | `timeoutMs` | `integer`  Optional. Optional: Specifies the maximum amount of time, in milliseconds, that the client is willing to wait for the query to complete. By default, this limit is 10 seconds (10,000 milliseconds). If the query is complete, the jobComplete field in the response is true. If the query has not yet completed, jobComplete is false.  You can request a longer timeout period in the timeoutMs field. However, the call is not guaranteed to wait for the specified timeout; it typically returns after around 200 seconds (200,000 milliseconds), even if the query is not complete.  If jobComplete is false, you can continue to wait for the query to complete by calling the getQueryResults method until the jobComplete field in the getQueryResults response is true. |
 | `destinationEncryptionConfiguration` | `object (EncryptionConfiguration)`  Optional. Custom encryption configuration (e.g., Cloud KMS keys) |
 | `dryRun` | `boolean`  Optional. If set to true, BigQuery doesn't run the job. Instead, if the query is valid, BigQuery returns statistics about the job such as how many bytes would be processed. If the query is invalid, an error returns. The default value is false. |
-| `preserveNulls (deprecated)` | `boolean`  This item is deprecated!  This property is deprecated. |
-| `useQueryCache` | `boolean`  Optional. Whether to look for the result in the query cache. The query cache is a best-effort cache that will be flushed whenever tables in the query are modified. The default value is true. |
-| `useLegacySql` | `boolean`  Specifies whether to use BigQuery's legacy SQL dialect for this query. The default value is true. If set to false, the query uses BigQuery's [GoogleSQL](https://docs.cloud.google.com/bigquery/docs/introduction-sql). When useLegacySql is set to false, the value of flattenResults is ignored; query will be run as if flattenResults is false. |
-| `parameterMode` | `string`  GoogleSQL only. Set to POSITIONAL to use positional (?) query parameters or to NAMED to use named (@myparam) query parameters in this query. |
-| `queryParameters[]` | `object (QueryParameter)`  jobs.query parameters for GoogleSQL queries. |
-| `location` | `string`  The geographic location where the job should run. For more information, see how to [specify locations](https://cloud.google.com/bigquery/docs/locations#specify_locations). |
-| `formatOptions` | `object (DataFormatOptions)`  Optional. Output format adjustments. |
-| `connectionProperties[]` | `object (ConnectionProperty)`  Optional. Connection properties which can modify the query behavior. |
-| `labels` | `map (key: string, value: string)`  Optional. The labels associated with this query. Labels can be used to organize and group query jobs. Label keys and values can be no longer than 63 characters, can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. Label keys must start with a letter and each label in the list must have a different key. |
-| `maximumBytesBilled` | `string (Int64Value format)`  Optional. Limits the bytes billed for this query. Queries with bytes billed above this limit will fail (without incurring a charge). If unspecified, the project default is used. |
-| `requestId` | `string`  Optional. A unique user provided identifier to ensure idempotent behavior for queries. Note that this is different from the jobId. It has the following properties:   1. It is case-sensitive, limited to up to 36 ASCII characters. A UUID is recommended. 2. Read only queries can ignore this token since they are nullipotent by definition. 3. For the purposes of idempotency ensured by |
+| `preserveNull` |

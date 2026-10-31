@@ -155,5 +155,5 @@ FROM `region-us`.INFORMATION_SCHEMA.JOBS_TIMELINE_BY_ORGANIZATION jobs
 JOIN `region-us`.INFORMATION_SCHEMA.RESERVATIONS_TIMELINE res
   ON jobs.reservation_id = res.reservation_id
   AND TIMESTAMP_TRUNC(jobs.period_start, MINUTE) = res.period_start
-LEFT JOIN UNNEST(res.
+LEFT JOIN UNNEST(res
 ```

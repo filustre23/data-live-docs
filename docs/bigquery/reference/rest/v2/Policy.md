@@ -257,4 +257,4 @@ The list of valid permission types for which logging can be configured. Admin wr
 
 Send feedback
 
-Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 Licens](https://creativecommons.org/licenses/by/4.0/)
+Except as otherwise noted, the content of this page is licensed under the

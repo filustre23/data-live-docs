@@ -139,9 +139,4 @@ Replica state of the shared dataset.
 | Enums | |
 | --- | --- |
 | `REPLICA_STATE_UNSPECIFIED` | Default value. This value is unused. |
-| `READY_TO_USE` | The replica is backfilled and ready to use. |
-| `UNAVAILABLE` | The replica is unavailable, does not exist, or has not been backfilled yet. |
-
-## PrimaryState
-
-Primary state of the replica. Set only for the primary replica.
+| `READY_TO_USE` | The replica is |

@@ -535,5 +535,23 @@ SELECT TEXT_ANALYZE(
 ### No normalization
 
 ```
-'
+'{
+  "token_filters": [
+    "normalizer": {
+      "mode": "NONE"
+    }
+  ]
+}'
+```
+
+**Description**
+
+Normalization isn't applied to terms.
+
+**Example**
+
+In the following query, normalization isn't applied to the results:
+
+```
+SELECT
 ```
