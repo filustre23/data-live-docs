@@ -320,4 +320,4 @@ VALUES('top load washer', 10, FALSE, [(CURRENT_DATE, "comment1")], ("white","1 y
       ('front load washer', 20, FALSE, [(CURRENT_DATE, "comment1")], ("beige","1 year",(35,45,30)))
 ```
 
-Here is the `DetailedInventory` table after you run the query:
+Here is the `DetailedInventory` tab

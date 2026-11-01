@@ -151,4 +151,4 @@ A table type
 
 | JSON representation |
 | --- |
-| ``` {   "columns": [     {       object (StandardSqlField) ``` |
+| ``` {   "columns": [     {       object ( ``` |

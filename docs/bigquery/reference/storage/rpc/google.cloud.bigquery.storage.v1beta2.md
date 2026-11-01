@@ -141,4 +141,4 @@ Response message for `AppendRows`.
 | `row_errors[]` | `RowError`  If a request failed due to corrupted rows, no rows in the batch will be appended. The API will return row level error info, so that the caller can remove the bad rows and retry the request. |
 | Union field `response`.  `response` can be only one of the following: | |
 | `append_result` | `AppendResult`  Result if the append is successful. |
-| `error` | `Status`  Error returned when problems w |
+| `error` | `Status`  Error returned when problems were encountered. If present, it indicates rows w |

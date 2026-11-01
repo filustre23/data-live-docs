@@ -535,7 +535,5 @@ SELECT TEXT_ANALYZE(
 ### No normalization
 
 ```
-'{
-  "token_filters": [
-    "normalizer": {
+'
 ```

@@ -228,5 +228,5 @@ func main() {
 }
 
 // printCapacityCommitments iterates through the capacity commitments and returns a byte buffer with details.
-func reportCapacityCommitments(ctx context.Context, client *reservation.Client, projectID,
+func reportCapacityCommitments(ctx context.Context, client *reservation.Client, projectID
 ```

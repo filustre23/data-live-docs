@@ -148,6 +148,5 @@ WHERE
 | job_id       |  creation_time            |  query                          |
 +--------------+---------------------------+---------------------------------+
 | bquxjob_1    |  2019-10-10 00:00:00 UTC  |  SELECT ... FROM dataset.table1 |
-| bquxjob_2    |  2019-10-10 00:00:01 UTC  |  SELECT ... FROM dataset.table2 |
-| bquxjob
+| bquxjob_2    |  2019-10-10 00:00:01 UT
 ```

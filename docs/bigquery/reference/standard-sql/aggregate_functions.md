@@ -194,5 +194,5 @@ over_clause:
 
 window_specification:
   [ named_window ]
-  [ PARTITION BY
+  [ PARTITION BY partition_expression
 ```

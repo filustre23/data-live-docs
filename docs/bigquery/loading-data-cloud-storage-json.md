@@ -979,5 +979,5 @@ func importJSONTruncate(projectID, datasetID, tableID string) error {
 	gcsRef := bigquery.NewGCSReference("gs://cloud-samples-data/bigquery/us-states/us-states.json")
 	gcsRef.SourceFormat = bigquery.JSON
 	gcsRef.AutoDetect = true
-	loader := client.Dataset(datasetID).
+	loader := client.Dataset(datasetID).Table
 ```

@@ -250,4 +250,6 @@ bq mk
             "connector.authentication.username":"user1",
             "connector.authentication.password":"abcdef1234",
             "connector.instanceId":"dev-instance",
+            "ingestionType":"incremental",
+  <
   ```

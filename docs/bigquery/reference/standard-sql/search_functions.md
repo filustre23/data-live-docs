@@ -358,5 +358,4 @@ SELECT
   SEARCH(['foobar', 'example'], 'foobar example') AS a,
 
   -- FALSE: The search query is equivalent to foobar\\=.
-  SEARCH('foobar=', '`foobar\\=`') AS
 ```
