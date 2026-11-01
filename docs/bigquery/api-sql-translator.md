@@ -26,7 +26,7 @@ BigQuery 的 BigQuery Migration API 可讓您透過程式輔助方式，將其�
 
 ### 選擇翻譯模式
 
-BigQuery Migration API 支援兩種翻譯模式。這兩種模式使用相同的 API 方法，並以非同步工作的形式執行。這些模式的差異在於提供來源 SQL 和接收翻譯 SQL 的方式：
+BigQuery Migration API 支援兩種翻譯模式。這兩種模式都使用相同的 API 方法，並以非同步工作的形式執行。不同模式提供來源 SQL 和接收翻譯 SQL 的方式也不同：
 
 * **批次翻譯**：API 會從 Cloud Storage 讀取來源檔案，並將翻譯後的檔案和報告寫入 Cloud Storage。如要一次翻譯多個檔案 (例如遷移整個程式碼集)，請使用批次翻譯。
 * **互動式翻譯**：在要求主體中以字串常值形式傳遞 SQL，並從工作流程回應中讀取翻譯後的 SQL。您不必將 SQL 或翻譯輸出內容儲存在 Cloud Storage。使用互動式翻譯，視需要翻譯個別查詢，例如翻譯應用程式或開發人員工具的查詢。
@@ -63,9 +63,11 @@ BigQuery Migration API 支援兩種翻譯模式。這兩種模式使用相同的
 
 您或許還可透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)取得這些權限。
 
+如要限制組織中的特定翻譯工作流程設定，例如不允許 Gemini AI 建議或限制翻譯輸出類型，請[設定 BigQuery Migration Service 的自訂組織政策](https://docs.cloud.google.com/bigquery/docs/migration-custom-org-policies?hl=zh-tw#example_constraints)。
+
 ### 將輸入檔案上傳至 Cloud Storage
 
-如要執行批次翻譯工作，您必須將包含待翻譯查詢和指令碼的來源檔案上傳至 Cloud Storage。您也可以將[任何中繼資料檔案](https://docs.cloud.google.com/bigquery/docs/generate-metadata?hl=zh-tw)或[設定 YAML 檔案](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation?hl=zh-tw)上傳到含有來源檔案的同一個 Cloud Storage bucket。
+如要執行批次翻譯工作，您必須將來源檔案上傳至 Cloud Storage，其中包含要翻譯的查詢和指令碼。您也可以將[任何中繼資料檔案](https://docs.cloud.google.com/bigquery/docs/generate-metadata?hl=zh-tw)或[設定 YAML 檔案](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation?hl=zh-tw)，上傳至含有來源檔案的同一個 Cloud Storage bucket。
 
 如要進一步瞭解如何建立 bucket 及將檔案上傳至 Cloud Storage，請參閱「[建立 bucket](https://docs.cloud.google.com/storage/docs/creating-buckets?hl=zh-tw)」和「[從檔案系統上傳物件](https://docs.cloud.google.com/storage/docs/uploading-objects?hl=zh-tw)」。
 
@@ -108,7 +110,7 @@ curl -d "{
 
 * `TYPE`：翻譯的[工作類型](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations?hl=zh-tw#supported_sql_dialects)，決定原文和譯文的方言。
 * `TARGET_BASE`：所有翻譯輸出的基礎 URI。
-* `BASE`：所有檔案的基本 URI，這些檔案會做為翻譯來源讀取。
+* `BASE`：所有檔案的基本 URI，做為翻譯來源。
 * `TARGET_TYPES` (選用)：生成的輸出類型。如未指定，系統會生成 SQL。
 
   + `sql` (預設)：翻譯後的 SQL 查詢檔案。
@@ -166,9 +168,9 @@ curl -d "{
 這項產品或功能適用《[服務專屬條款](https://docs.cloud.google.com/terms/service-terms?hl=zh-tw#1)》中「一般服務條款」一節的《正式發布前產品條款》。正式發布前的產品和功能是按照「原樣」提供，支援範圍可能有限。
 詳情請參閱[推出階段說明](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
 
-**注意：** Translation API 可透過 BigQuery Agent Platform 整合功能呼叫 Gemini，根據 AI 設定 YAML 檔案，為翻譯後的 SQL 查詢生成建議。
+**注意：** 翻譯 API 可透過 BigQuery Agent Platform 整合功能呼叫 Gemini，根據 AI 設定 YAML 檔案，為翻譯後的 SQL 查詢生成建議。
 
-以下範例會翻譯位於 `gs://my_data_bucket/teradata/input/` Cloud Storage 目錄中的 Teradata SQL 指令碼，並將結果儲存在 Cloud Storage 目錄 `gs://my_data_bucket/teradata/output/`，同時提供額外的 AI 建議：
+以下範例會翻譯位於 `gs://my_data_bucket/teradata/input/` Cloud Storage 目錄中的 Teradata SQL 指令碼，並將結果儲存在 Cloud Storage 目錄 `gs://my_data_bucket/teradata/output/` 中，並提供額外的 AI 建議：
 
 ```
 {
@@ -225,7 +227,7 @@ curl -d "{
 * `TYPE`：翻譯的[工作類型](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations?hl=zh-tw#supported_sql_dialects)，決定原文和譯文的方言。
 * `PATH`：常值項目的 ID，類似於檔案名稱或路徑。
 * `STRING`：要翻譯的常值輸入資料字串 (例如 SQL)。
-* `TARGETS`：使用者希望直接在回應中傳回的預期目標，格式為 `literal`。這些項目應採用目標 URI 格式 (例如 GENERATED\_DIR + `target_spec.relative_path` + `source_spec.literal.relative_path`)。不在這份清單中的項目不會在回應中傳回。一般 SQL 翻譯產生的目錄 GENERATED\_DIR 為 `sql/`。
+* `TARGETS`：使用者希望直接在回覆中傳回的預期目標，格式為 `literal`。這些項目應採用目標 URI 格式 (例如 GENERATED\_DIR + `target_spec.relative_path` + `source_spec.literal.relative_path`)。不在這份清單中的項目不會在回應中傳回。一般 SQL 翻譯產生的目錄 GENERATED\_DIR 為 `sql/`。
 * `TOKEN`：驗證權杖。如要產生權杖，請使用 `gcloud auth print-access-token` 指令或 [OAuth 2.0 Playground](https://developers.google.com/oauthplayground/?hl=zh-tw) (使用範圍 `https://www.googleapis.com/auth/cloud-platform`)。
 * `PROJECT_ID`：處理翻譯的專案。
 * `LOCATION`：處理工作的[位置](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations?hl=zh-tw#locations)。
@@ -259,7 +261,7 @@ curl -d "{
 
 **注意：** 本例中的字串 `"task_name"` 是翻譯工作的 ID，可設為任何值。
 
-您可以在常值中使用任何 `relative_path`，但只有在 `target_return_literals` 中加入 `sql/$relative_path`，翻譯後的常值才會顯示在結果中。您也可以在單一查詢中加入多個常值，在這種情況下，每個常值的相對路徑都必須包含在 `target_return_literals` 中。
+您可以使用任何 `relative_path` 做為常值，但只有在 `target_return_literals` 中加入 `sql/$relative_path`，翻譯後的常值才會顯示在結果中。您也可以在單一查詢中加入多個文字，在這種情況下，每個文字的相對路徑都必須包含在 `target_return_literals` 中。
 
 這項呼叫會傳回一則訊息，其中 `"name"` 欄位包含建立的工作流程 ID：
 
@@ -307,7 +309,7 @@ curl -d "{
 
 ## 檢查工作狀態
 
-翻譯工作會以非同步方式執行。提交工作流程後，請傳送包含工作流程 ID 的 `GET` 要求，擷取工作流程狀態：
+翻譯工作會以非同步方式執行。提交工作流程後，請傳送包含工作流程 ID 的 `GET` 要求，擷取其狀態：
 
 ```
 curl \
@@ -339,7 +341,7 @@ curl \
 
 擷取結果的方式取決於您提交的是[批次翻譯或互動式翻譯](#translation-modes)：
 
-* **批次翻譯**：翻譯檔案、摘要報告和任何 AI 建議，都會寫入您在 `target_base_uri` 中指定的 Cloud Storage 目的地目錄。您可以使用 gcloud CLI 儲存空間指令、Cloud Storage 用戶端程式庫或 REST API，直接從 Cloud Storage 讀取這些檔案：
+* **批次翻譯**：翻譯檔案、摘要報告和任何 AI 建議，都會寫入您在 `target_base_uri` 指定的 Cloud Storage 目的地目錄。您可以使用 gcloud CLI 儲存空間指令、Cloud Storage 用戶端程式庫或 REST API，直接從 Cloud Storage 讀取這些檔案：
 
   ```
   gcloud storage cp --recursive TARGET_URI LOCAL_DIRECTORY
@@ -375,11 +377,11 @@ curl \
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-30 (世界標準時間)。
+上次更新時間：2026-11-01 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-30 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-01 (世界標準時間)。"],[],[]]

@@ -48,11 +48,11 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 * [資料欄遮蓋](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro?hl=zh-tw)
 * [資料列層級安全性](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro?hl=zh-tw)
 
-受 IAM 保護的資源存取權屬於外加規則。舉例來說，如果實體沒有專案等高層級的存取權，您可以在資料集層級授予實體存取權，這樣實體就能存取資料集中的資料表和檢視表。同樣地，如果實體沒有高層級或資料集層級的存取權，您可以在資料表或檢視表層級授予實體存取權。
+受 IAM 保護的資源存取權屬於外加性質。舉例來說，如果實體沒有專案等高層級的存取權，您可以在資料集層級授予實體存取權，實體就能存取資料集中的資料表和檢視表。同樣地，如果實體在較高層級或資料集層級沒有存取權，您可以在資料表或檢視表層級授予實體存取權。
 
 在 [Google Cloud資源階層](https://docs.cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy?hl=zh-tw)中較高層級 (例如專案、資料夾或組織層級) 授予 IAM 角色，可讓實體存取廣泛的資源。舉例來說，在專案層級將角色授予實體，該實體就會獲得適用於整個專案中所有資料集的權限。
 
-在資料集層級授予角色，可指定實體在該特定資料集的資料表和檢視表上可執行的作業，即使實體沒有較高層級的存取權也一樣。如要瞭解如何設定資料集層級存取控管，請參閱「[控管資料集的存取權](https://docs.cloud.google.com/bigquery/docs/dataset-access-controls?hl=zh-tw)」。
+在資料集層級授予角色，可指定實體在該特定資料集的資料表和檢視表上可執行的作業，即使實體沒有較高層級的存取權也一樣。如要瞭解如何設定資料集層級存取控管機制，請參閱「[控管資料集的存取權](https://docs.cloud.google.com/bigquery/docs/dataset-access-controls?hl=zh-tw)」。
 
 在資料表或檢視表層級授予角色，可指定實體在特定資料表和檢視表上可執行的作業，即使實體沒有較高層級的存取權也一樣。如要瞭解如何設定資料表層級存取控管機制，請參閱「[控管資料表和檢視表的存取權](https://docs.cloud.google.com/bigquery/docs/table-access-controls?hl=zh-tw)」。
 
@@ -68,15 +68,15 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ### 控制台
 
-1. 前往 Google Cloud 控制台的「Resources」(資源) 窗格。
-2. 按一下資料集名稱展開資料集，然後點選要查看的資料表名稱。
-3. 按一下「詳細資料」。
+1. 前往 Google Cloud 控制台的「Explorer」窗格。
+2. 展開專案和資料集，然後按一下要查看的資料表。
+3. 點按「Details」(詳細資料) 分頁標籤。
 
    系統會顯示資料表的詳細資料，包括分群欄。
 
 ### SQL
 
-如果是分群資料表，您可以查詢 [`INFORMATION_SCHEMA.COLUMNS` 檢視表](https://docs.cloud.google.com/bigquery/docs/information-schema-columns?hl=zh-tw)中的 `CLUSTERING_ORDINAL_POSITION` 資料欄，找出資料表分群資料欄中資料欄的 1 索引偏移：
+如果是分群資料表，您可以查詢 [`INFORMATION_SCHEMA.COLUMNS` 檢視表](https://docs.cloud.google.com/bigquery/docs/information-schema-columns?hl=zh-tw)中的 `CLUSTERING_ORDINAL_POSITION` 資料欄，找出資料表分群資料欄中，以 1 為索引的資料欄偏移量：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -95,7 +95,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 如要進一步瞭解如何執行查詢，請參閱「[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)」。
 
-`column1` 的叢集序數位置為 1，`column2` 則為 2。如要查看更多資料表中繼資料，請前往 [`INFORMATION_SCHEMA`](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw) 的 `TABLES`、`TABLE_OPTIONS`、`COLUMNS` 和 `COLUMN_FIELD_PATH` 檢視畫面。
+`column1` 的叢集序數位置為 1，`column2` 則為 2。如要查看更多資料表中繼資料，請前往 [`INFORMATION_SCHEMA`](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw) 的 `TABLES`、`TABLE_OPTIONS`、`COLUMNS` 和 `COLUMN_FIELD_PATH` 檢視表。
 
 ### bq
 
@@ -163,8 +163,8 @@ bq show --format=prettyjson mydataset.myclusteredtable
    * `DATASET`：資料表所在資料集的名稱，例如 `mydataset`
    * `ORIGINAL_TABLE`：原始資料表的名稱，例如 `mytable`
 
-   您也可以呼叫 `tables.update` 或 `tables.patch` API 方法，[修改分群規格](https://docs.cloud.google.com/bigquery/docs/manage-clustered-tables?hl=zh-tw#modifying-cluster-spec)。
-2. 如要根據新的分群規格將所有資料列分群，請執行下列 `UPDATE` 陳述式：
+   您也可以呼叫 `tables.update` 或 `tables.patch` API 方法，[修改叢集規格](https://docs.cloud.google.com/bigquery/docs/manage-clustered-tables?hl=zh-tw#modifying-cluster-spec)。
+2. 如要根據新的叢集規格，將所有資料列分入叢集，請執行下列 `UPDATE` 陳述式：
 
    ```
    UPDATE DATASET.ORIGINAL_TABLE SET CLUSTER_COLUMN=CLUSTER_COLUMN WHERE true
@@ -185,11 +185,11 @@ bq show --format=prettyjson mydataset.myclusteredtable
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-29 (世界標準時間)。
+上次更新時間：2026-11-01 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-01 (世界標準時間)。"],[],[]]

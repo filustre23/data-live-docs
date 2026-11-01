@@ -89,7 +89,7 @@ BigQuery 的 Knowledge Catalog 自動探索功能 (也稱為*獨立探索*) 可�
 物件資料表的壓縮作業主要透過 [Cloud Storage 物件中繼資料](https://docs.cloud.google.com/storage/docs/metadata?hl=zh-tw)管理，而非 BigQuery 內部設定。
 
 * 標準中繼資料壓縮：如果檔案使用標準 .gz 或 .bz2 副檔名，BigQuery 會自動辨識以 gzip 和 bzip2 壓縮的檔案。
-* Content-Encoding：您可以使用 Cloud Storage 中的 [Content-Encoding gzip](https://docs.cloud.google.com/storage/docs/metadata?hl=zh-tw#content-encoding) 中繼資料，提供壓縮檔案，同時保留原始內容類型。
+* Content-Encoding：您可以使用 Cloud Storage 中的 [Content-Encoding gzip](https://docs.cloud.google.com/storage/docs/metadata?hl=zh-tw#content-encoding) 中繼資料，在提供壓縮檔案的同時，保留原始內容類型。
 * 媒體內部壓縮：原生支援原本就經過壓縮的格式 (例如 JPEG 圖片、MP3 音訊、MP4 影片)。
 
 ### 資料表註冊和可用性
@@ -119,11 +119,11 @@ BigQuery 的 Knowledge Catalog 自動探索功能 (也稱為*獨立探索*) 可�
 
 **啟用 API 所需的角色**
 
-您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「Service Usage 管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過擁有者角色 (`roles/owner`) 取得這項權限。否則，您可以透過 Service Usage 管理員角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
 [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=dataplex.googleapis.com&hl=zh-tw)
 
-**注意：** 下一節列出的角色適用於標準探索掃描作業。如要使用非結構化資料語義推論，從檔案中擷取 AI 輔助洞察資料，您也必須套用「[使用非結構化資料的資料洞察](https://docs.cloud.google.com/knowledge-catalog/docs/use-data-insights-unstructured-data?hl=zh-tw#roles-permissions)」一節列出的其他角色。
+**注意：** 下一節列出的角色適用於標準探索掃描。如要使用非結構化資料語義推論，從檔案中擷取 AI 輔助洞察資料，您也必須套用「[使用非結構化資料的資料洞察](https://docs.cloud.google.com/knowledge-catalog/docs/use-data-insights-unstructured-data?hl=zh-tw#roles-permissions)」一節列出的其他角色。
 
 ### Knowledge Catalog 服務帳戶的必要角色
 
@@ -171,7 +171,7 @@ BigQuery 的 Knowledge Catalog 自動探索功能 (也稱為*獨立探索*) 可�
 
 ### BigQuery 連線服務帳戶的必要角色
 
-為確保 BigQuery 連線服務帳戶具備建立探索掃描作業的必要權限，請要求管理員將 Cloud Storage bucket 的 [Dataplex Discovery 服務代理](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex?hl=zh-tw#dataplex.discoveryServiceAgent)  (`roles/dataplex.discoveryServiceAgent`) IAM 角色授予 BigQuery 連線服務帳戶。
+為確保 BigQuery 連線服務帳戶具備建立探索掃描作業所需的權限，請要求管理員將 Cloud Storage bucket 的 [Dataplex 探索服務代理](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex?hl=zh-tw#dataplex.discoveryServiceAgent)  (`roles/dataplex.discoveryServiceAgent`) IAM 角色授予 BigQuery 連線服務帳戶。
 
 **重要事項：**您必須將這個角色授予 BigQuery 連線服務帳戶，*而非*使用者帳戶。如果未將角色授予正確的主體，可能會發生權限錯誤。
 如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
@@ -282,7 +282,7 @@ BigQuery 的 Knowledge Catalog 自動探索功能 (也稱為*獨立探索*) 可�
 13. 在「Discovery frequency」(探索頻率) 部分，設定要執行探索掃描的時間：
 
     * **重複**：掃描作業會按照預先定義的時間表執行。提供開始時間、執行掃描的天數和頻率 (例如每小時)。
-    * **隨需**：視需要執行掃描作業。
+    * **隨選**：視需求執行掃描作業。
 14. 選用：在「JSON or CSV specifications」(JSON 或 CSV 規格) 區段中，指定掃描作業應如何處理 JSON 和 CSV 檔案。按一下「JSON or CSV specifications」(JSON 或 CSV 規格)。
 
     1. 如要設定 JSON 選項，請選取「Enable JSON parsing options」(啟用 JSON 剖析選項)。
@@ -301,7 +301,7 @@ BigQuery 的 Knowledge Catalog 自動探索功能 (也稱為*獨立探索*) 可�
 
 ### gcloud
 
-如要建立探索掃描作業，請使用 [`gcloud dataplex datascans create data-discovery`](https://docs.cloud.google.com/sdk/gcloud/reference/dataplex/datascans/create/data-discovery?hl=zh-tw) 指令。
+如要建立探索掃描，請使用 [`gcloud dataplex datascans create data-discovery`](https://docs.cloud.google.com/sdk/gcloud/reference/dataplex/datascans/create/data-discovery?hl=zh-tw) 指令。
 
 ```
 gcloud dataplex datascans create data-discovery --location=LOCATION
@@ -386,10 +386,11 @@ gcloud dataplex datascans create data-discovery --location=LOCATION
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 4. 在「Explorer」窗格中展開專案，點選「Datasets」(資料集)，然後選取資料集。
 5. 依序點選**「總覽」 > 「資料表」**，然後選取資料表。
-6. 在「Details」(詳細資料) 分頁的「Labels」(標籤) 部分，確認 **metadata-managed-mode** 標籤已設為 **user\_managed**。如果設為其他值，請按照下列步驟操作：
+6. 在「詳細資料」分頁的「標籤」部分，檢查 **metadata-managed-mode** 標籤是否設為 `user_managed`。如果設為其他值，請按照下列步驟操作：
 
-   1. 按一下「edit 編輯詳細資訊」。
-   2. 在「metadata-managed-mode」鍵旁邊的「value」欄位中，輸入 `user_managed`。
+   1. 依序點選**「編輯」>「編輯詳細資料」**。
+   2. 在「Labels」(標籤) 區段中，找出 **metadata-managed-mode** 鍵，並在旁邊的「Value」(值) 欄位中輸入 `user_managed`。
+   3. 按一下「儲存」。
 
 **注意：** 結構定義更新後，資料表即可用於 SQL 和 Spark 查詢。下次執行探索掃描時，資料表中繼資料會維持不變。
 
@@ -404,12 +405,11 @@ gcloud dataplex datascans create data-discovery --location=LOCATION
 3. 點選左側窗格中的 explore「Explorer」。
 4. 在「Explorer」窗格中展開專案，點選「Datasets」(資料集)，然後選取資料集。
 5. 依序點選**「總覽」 > 「資料表」**，然後選取資料表。
-6. 在「Details」(詳細資料) 窗格的「Labels」(標籤) 部分，確認 **metadata-managed-mode** 標籤未設為 `user_managed`。如果設為 `user_managed`，請按照下列步驟操作：
+6. 在「Details」(詳細資料) 分頁的「Labels」(標籤) 區段中，確認 **metadata-managed-mode** 標籤未設為 `user_managed`。如果設為 `user_managed`，請按照下列步驟操作：
 
-   1. 按一下「編輯詳細資料」圖示 edit。
-   2. 在「metadata-managed-mode」鍵旁邊的「value」欄位中，輸入 `discovery-managed`。
-
-      **注意：** 如果 **metadata-managed-mode** 標籤設為 `user_managed`，探索掃描作業就不會覆寫資料表中繼資料，因此資料表不會遭到刪除。
+   1. 依序點選**「編輯」>「編輯詳細資料」**。
+   2. 在「Labels」(標籤) 區段中，找出 **metadata-managed-mode** 鍵，並在旁邊的「Value」(值) 欄位中輸入 `discovery_managed`。
+   3. 按一下「儲存」。**注意：** 如果 **metadata-managed-mode** 標籤設為 `user_managed`，探索掃描作業就不會覆寫資料表中繼資料，因此資料表不會遭到刪除。
 7. 按一下「執行」。探索掃描作業會視需要執行。
 
 探索掃描作業執行完畢後，BigLake 資料表會從 BigQuery 刪除，無法透過 Spark 列出或查詢。
@@ -552,7 +552,7 @@ gcloud dataplex datascans jobs list \
 3. 在**「Cloud Storage discovery」(Cloud Storage 探索)** 窗格中，針對要
    更新的探索掃描作業，依序點選**「Actions」(動作) >「Edit」(編輯)**。
 4. 編輯值。
-5. 按一下 [儲存]。
+5. 按一下「儲存」。
 
 ### gcloud
 
@@ -607,11 +607,11 @@ gcloud dataplex datascans delete SCAN_ID --location=LOCATION --async
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-29 (世界標準時間)。
+上次更新時間：2026-11-01 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-01 (世界標準時間)。"],[],[]]

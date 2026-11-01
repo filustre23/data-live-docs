@@ -56,6 +56,8 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 您或許還可透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)取得這些權限。
 
+如要限制組織中的特定翻譯工作流程設定，例如不允許 Gemini AI 建議或限制翻譯輸出類型，請[設定 BigQuery Migration Service 的自訂組織政策](https://docs.cloud.google.com/bigquery/docs/migration-custom-org-policies?hl=zh-tw#example_constraints)。
+
 ## 使用輔助 UDF 處理不支援的 SQL 函式
 
 將 SQL 從來源方言翻譯成 BigQuery 時，某些函式可能沒有直接對應的函式。為解決這個問題，BigQuery 遷移服務 (以及更廣泛的 BigQuery 社群) 提供輔助 user-defined function (UDF)，可複製這些不支援的來源方言函式行為。
@@ -95,7 +97,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 2. 在「編輯器」窗格中，依序點選「工具」>「翻譯設定」。
 3. 在「Source dialect」(來源方言) 部分，選取要翻譯的 SQL 方言。
 4. 選用。在「Processing location」(處理位置) 中，選取要執行翻譯工作的位置。舉例來說，如果您位於歐洲，且不希望資料跨越任何位置限制範圍，請選取 `eu` 區域。
-5. 按一下 [儲存]。
+5. 按一下「儲存」。
 6. 在「Editor」(編輯器) 窗格中，依序點選「Tools」(工具) >「Enable SQL translation」(啟用 SQL 翻譯)。
 
    「Editor」窗格會分割成兩個窗格。
@@ -195,7 +197,7 @@ echo 'SELECT 1;' | gcloud alpha bq translation translate \
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 在查詢編輯器中，依序點選「工具」>「翻譯設定」。
 3. 在「Translation Configuration Source Location」(翻譯設定來源位置) 欄位中，指定儲存在 Cloud Storage 資料夾中的 Gemini 型 YAML 檔案路徑。
-4. 按一下 [儲存]。
+4. 按一下「儲存」。
 
    儲存後，請執行互動式翻譯。互動式翻譯工具會根據設定 YAML 檔案 (如有) 中的規則，建議您變更翻譯。
 
@@ -240,7 +242,7 @@ echo 'SELECT 1;' | gcloud alpha bq translation translate \
 2. 在「Translation Configuration ID」(翻譯設定 ID) 欄位中，提供批次翻譯設定 ID，套用已完成 BigQuery 批次遷移工作的相同翻譯設定。
 
    如要找出工作的批次翻譯設定 ID，請在「SQL translation」(SQL 翻譯) 頁面中選取批次翻譯工作，然後按一下「Translation Configuration」(翻譯設定) 分頁標籤。批次翻譯設定 ID 會列為「Resource name」(資源名稱)。
-3. 按一下 [儲存]。
+3. 按一下「儲存」。
 
 ### 使用其他設定翻譯
 
@@ -252,7 +254,7 @@ echo 'SELECT 1;' | gcloud alpha bq translation translate \
 2. 在「Translation Configuration Source Location」(轉譯設定來源位置) 欄位中，指定 Cloud Storage 資料夾中儲存的轉譯設定檔路徑。
 
    BigQuery 互動式 SQL 翻譯器支援中繼資料 ZIP 檔案，其中包含[翻譯中繼資料](https://docs.cloud.google.com/bigquery/docs/generate-metadata?hl=zh-tw)和[物件名稱對應](https://docs.cloud.google.com/bigquery/docs/output-name-mapping?hl=zh-tw#json_file_format)。如要瞭解如何將檔案上傳至 Cloud Storage，請參閱「[從檔案系統上傳物件](https://docs.cloud.google.com/storage/docs/uploading-objects?hl=zh-tw)」。
-3. 按一下 [儲存]。
+3. 按一下「儲存」。
 
 ### 設定檔大小限制
 
@@ -324,11 +326,11 @@ where table1.id = table2.id;
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-30 (世界標準時間)。
+上次更新時間：2026-11-01 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-30 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-01 (世界標準時間)。"],[],[]]

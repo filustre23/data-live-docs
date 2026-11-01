@@ -54,12 +54,12 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 如要在 Google Cloud 控制台列出標記鍵和鍵值，您需要下列權限：
 
-* 如要列出與上層組織或專案相關聯的標記鍵，您必須具備標記鍵上層層級的 `resourcemanager.tagKeys.list` 權限，以及各個標記鍵的 `resourcemanager.tagKeys.get` 權限。如要在 BigQuery 控制台查看標記鍵清單，
-  請點選資料集名稱，然後點選 **「Edit details」(編輯詳細資料)**，或點選資料表或
-  檢視表名稱，然後依序點選 **「Details」(詳細資料) >「Edit details」(編輯詳細資料)**。
-* 如要列出與上層組織或專案相關聯的鍵標記值，您必須具備標記值上層層級的 `resourcemanager.tagValues.list` 權限，以及各個標記值的 `resourcemanager.tagValues.get` 權限。如要在 BigQuery 控制台查看標記鍵值清單，請點選資料集名稱，然後點選
-  「**Edit details**(編輯詳細資料)」，或點選資料表或檢視表名稱
-  ，然後依序點選**「Details」(詳細資料) >「Edit details」(編輯詳細資料)**。
+* 如要列出與上層組織或專案相關聯的標記鍵，您必須具備標記鍵上層層級的 `resourcemanager.tagKeys.list` 權限，以及各個標記鍵的 `resourcemanager.tagKeys.get` 權限。如要在 BigQuery 控制台中查看標記鍵清單，請按一下資料集名稱，然後按一下 mode\_edit「Edit details」(編輯詳細資料)，或按一下資料表或檢視表名稱，然後依序按一下「Edit」(編輯)**「Edit details」(編輯詳細資料)**。
+* 如要列出與上層組織或專案相關聯的鍵標記值，您必須具備標記值上層層級的 `resourcemanager.tagValues.list` 權限，以及各個標記值的 `resourcemanager.tagValues.get` 權限。如要在
+  BigQuery 控制台中查看標記鍵值清單，請按一下資料集名稱，然後按一下
+  mode\_edit
+  **「Edit details」(編輯詳細資料)**，或按一下資料表或檢視表名稱，然後依序按一下
+  **「Edit」(編輯)>「Edit details」(編輯詳細資料)**。
 
 如要在 Cloud Resource Manager API 或 gcloud 中使用標記，您必須具備下列權限：
 
@@ -210,7 +210,7 @@ resource "google_bigquery_dataset" "default" {
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
 2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
 
-   每個專案只需執行這個指令一次，而且可以在任何目錄中執行。
+   這項指令在每個專案中只需執行一次，且可在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
@@ -220,7 +220,7 @@ resource "google_bigquery_dataset" "default" {
 
 ## 準備目錄
 
-每個 Terraform 設定檔都必須有自己的目錄 (也稱為*根模組*)。
+每個 Terraform 設定檔都必須有自己的目錄 (也稱為「根模組」)。
 
 1. 在 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw) 中建立目錄，並在該目錄中建立新檔案。檔案名稱必須有 `.tf` 副檔名，例如 `main.tf`。在本教學課程中，這個檔案稱為 `main.tf`。
 
@@ -296,7 +296,7 @@ resource "google_bigquery_dataset" "default" {
       2. 如要為專案或組織建立標記，請在對話方塊中輸入 `PROJECT_ID` 或 `ORGANIZATION_ID`，然後按一下「Save」(儲存)。
       3. 在「Key 1」(鍵 1) 和「Value 1」(值 1) 中，從清單中選擇適當的值。
    3. 選用：如要為資料表新增其他標記，請按一下「Add tag」(新增標記)，然後按照上述步驟操作。
-6. 按一下 [儲存]。
+6. 按一下「儲存」。
 
 ### SQL
 
@@ -506,7 +506,7 @@ WHERE option_name='tags'
 3. 在「Explorer」窗格中展開專案，點選「資料集」，然後選取資料集。
 4. 在「Dataset info」(資料集資訊) 部分，按一下mode\_edit「Edit details」(編輯詳細資料)。
 5. 在「Tags」(標記) 區段中，按一下要刪除的標記旁邊的 delete「Delete item」(刪除項目)。
-6. 按一下 [儲存]。
+6. 按一下「儲存」。
 
 ### SQL
 
@@ -529,7 +529,7 @@ WHERE option_name='tags'
 
    * `PROJECT_ID`：您的專案 ID。
    * `DATASET_ID`：資料表的資料集 ID。
-   * `TABLE_ID`：`TABLE_ID`：要卸除標記的資料表名稱。
+   * `TABLE_ID`：要卸除標記的資料表名稱。
    * `TAG_KEY_1`：要卸載的第一個標記[命名空間索引鍵名稱](https://docs.cloud.google.com/iam/docs/tags-access-control?hl=zh-tw#definitions)，例如 `'my-project/env'` 或 `'556741164180/department'`。
    * `TAG_VALUE_1`：要卸載的標記值的[簡稱](https://docs.cloud.google.com/iam/docs/tags-access-control?hl=zh-tw#definitions)，例如 `'prod'` 或 `'sales'`。
    * `TAG_KEY_2`：要卸載的第二個標記命名空間鍵名稱。
@@ -732,7 +732,7 @@ resource "google_bigquery_table" "default" {
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
 2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
 
-   每個專案只需執行這個指令一次，而且可以在任何目錄中執行。
+   這項指令在每個專案中只需執行一次，且可在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
@@ -742,7 +742,7 @@ resource "google_bigquery_table" "default" {
 
 ## 準備目錄
 
-每個 Terraform 設定檔都必須有自己的目錄 (也稱為*根模組*)。
+每個 Terraform 設定檔都必須有自己的目錄 (也稱為「根模組」)。
 
 1. 在 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw) 中建立目錄，並在該目錄中建立新檔案。檔案名稱必須有 `.tf` 副檔名，例如 `main.tf`。在本教學課程中，這個檔案稱為 `main.tf`。
 
@@ -804,7 +804,7 @@ resource "google_bigquery_table" "default" {
 2. 點選左側窗格中的 explore「Explorer」。
 3. 在「Explorer」窗格中展開專案，然後點選「資料集」。
 4. 依序點選**「總覽」>「資料表」**，然後選取資料表。
-5. 按一下「Details」(詳細資料) 分頁標籤，然後點選 mode\_edit「Edit details」(編輯詳細資料)。
+5. 在詳細資料窗格中，依序點選**「編輯」>「編輯詳細資料」**。
 6. 展開「Tags」(標記) 專區。
 
    1. 如要套用現有標記，請按照下列步驟操作：
@@ -819,7 +819,7 @@ resource "google_bigquery_table" "default" {
       2. 如要為專案或組織建立標記，請在對話方塊中輸入 `PROJECT_ID` 或 `ORGANIZATION_ID`，然後按一下「Save」(儲存)。
       3. 在「Key 1」(鍵 1) 和「Value 1」(值 1) 中，從清單中選擇適當的值。
    3. 選用：如要為資料表新增其他標記，請按一下「Add tag」(新增標記)，然後按照上述步驟操作。
-7. 按一下 [儲存]。
+7. 按一下「儲存」。
 
 ### SQL
 
@@ -1031,9 +1031,9 @@ WHERE option_name='tags'
 2. 點選左側窗格中的 explore「Explorer」。
 3. 在「Explorer」窗格中展開專案，然後點選「資料集」。
 4. 依序點選**「總覽」>「資料表」**，然後選取資料表。
-5. 按一下「Details」(詳細資料) 分頁標籤，然後點選 mode\_edit「Edit details」(編輯詳細資料)。
+5. 在詳細資料窗格中，依序點選**「編輯」>「編輯詳細資料」**。
 6. 在「Tags」(標記) 區段中，按一下要刪除的標記旁邊的 delete「Delete item」(刪除項目)。
-7. 按一下 [儲存]。
+7. 按一下「儲存」。
 
 ### SQL
 
@@ -1267,7 +1267,7 @@ resource "google_tags_tag_key" "dg_key" {
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
 2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
 
-   每個專案只需執行這個指令一次，而且可以在任何目錄中執行。
+   這項指令在每個專案中只需執行一次，且可在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
@@ -1277,7 +1277,7 @@ resource "google_tags_tag_key" "dg_key" {
 
 ## 準備目錄
 
-每個 Terraform 設定檔都必須有自己的目錄 (也稱為*根模組*)。
+每個 Terraform 設定檔都必須有自己的目錄 (也稱為「根模組」)。
 
 1. 在 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw) 中建立目錄，並在該目錄中建立新檔案。檔案名稱必須有 `.tf` 副檔名，例如 `main.tf`。在本教學課程中，這個檔案稱為 `main.tf`。
 
@@ -1356,7 +1356,7 @@ resource "google_tags_tag_key" "dg_key" {
 4. 在標記鍵清單中，找出要新增值的標記鍵，按一下 more\_vert「Actions」(動作)，然後點選「Add tag values」(新增標記值)。
 5. 在「Add tag values」(新增標記值) 窗格中，輸入標記值的簡稱。
 6. 選用：在「Description」(說明) 欄位中輸入說明。
-7. 按一下 [儲存]。
+7. 按一下「儲存」。
 
 ### gcloud
 
@@ -1400,7 +1400,7 @@ resource "google_tags_tag_value" "dg_value" {
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
 2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
 
-   每個專案只需執行這個指令一次，而且可以在任何目錄中執行。
+   這項指令在每個專案中只需執行一次，且可在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
@@ -1410,7 +1410,7 @@ resource "google_tags_tag_value" "dg_value" {
 
 ## 準備目錄
 
-每個 Terraform 設定檔都必須有自己的目錄 (也稱為*根模組*)。
+每個 Terraform 設定檔都必須有自己的目錄 (也稱為「根模組」)。
 
 1. 在 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw) 中建立目錄，並在該目錄中建立新檔案。檔案名稱必須有 `.tf` 副檔名，例如 `main.tf`。在本教學課程中，這個檔案稱為 `main.tf`。
 
@@ -1678,7 +1678,7 @@ EOF
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
 2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
 
-   每個專案只需執行這個指令一次，而且可以在任何目錄中執行。
+   這項指令在每個專案中只需執行一次，且可在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
@@ -1688,7 +1688,7 @@ EOF
 
 ## 準備目錄
 
-每個 Terraform 設定檔都必須有自己的目錄 (也稱為*根模組*)。
+每個 Terraform 設定檔都必須有自己的目錄 (也稱為「根模組」)。
 
 1. 在 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw) 中建立目錄，並在該目錄中建立新檔案。檔案名稱必須有 `.tf` 副檔名，例如 `main.tf`。在本教學課程中，這個檔案稱為 `main.tf`。
 
@@ -1840,7 +1840,7 @@ resource "google_bigquery_datapolicyv2_data_policy" "raw_policy" {
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
 2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
 
-   每個專案只需執行這個指令一次，而且可以在任何目錄中執行。
+   這項指令在每個專案中只需執行一次，且可在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
@@ -1850,7 +1850,7 @@ resource "google_bigquery_datapolicyv2_data_policy" "raw_policy" {
 
 ## 準備目錄
 
-每個 Terraform 設定檔都必須有自己的目錄 (也稱為*根模組*)。
+每個 Terraform 設定檔都必須有自己的目錄 (也稱為「根模組」)。
 
 1. 在 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw) 中建立目錄，並在該目錄中建立新檔案。檔案名稱必須有 `.tf` 副檔名，例如 `main.tf`。在本教學課程中，這個檔案稱為 `main.tf`。
 
@@ -2077,11 +2077,11 @@ tagValue` 錯誤。
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-29 (世界標準時間)。
+上次更新時間：2026-11-01 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-01 (世界標準時間)。"],[],[]]

@@ -16,7 +16,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 還原資料表快照
 
-本文說明如何使用 Google Cloud 控制台、`CREATE TABLE CLONE`查詢、`bq cp`指令或 `jobs.insert` API，從資料表快照建立可寫入的資料表。適合熟悉[資料表快照](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro?hl=zh-tw)的使用者。
+本文說明如何使用 Google Cloud 控制台、`CREATE TABLE CLONE` 查詢、`bq cp` 指令或 `jobs.insert` API，從資料表快照建立可寫入的資料表。適合熟悉[資料表快照](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro?hl=zh-tw)的使用者。
 
 ## 權限與角色
 
@@ -56,11 +56,12 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 2. 點選左側窗格中的 explore「Explorer」。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
-3. 在「Explorer」窗格中展開專案，點選「Datasets」(資料集)，然後點選要還原的資料表快照所在的資料集。
-4. 依序點選**「Overview」(總覽) >「Tables」(資料表)**，然後按一下資料表快照的名稱。
-5. 在隨即顯示的資料表快照窗格中，按一下「update」(更新) 「Restore」(還原)。
+3. 在「Explorer」窗格中展開專案，依序點選「Datasets」(資料集) 和要還原的資料表快照所屬資料集。
+4. 依序點選**「Overview」(總覽) >「Tables」(資料表)**，然後按一下
+   資料表快照的名稱。
+5. 在資料表快照窗格中，依序點選**「More」(更多) >「Restore snapshot」(還原快照)**。
 6. 在顯示的「Restore snapshot」(還原快照) 窗格中，輸入新資料表的「Project」(專案)、「Dataset」(資料集) 和「Table」(資料表) 資訊。
-7. 按一下 [儲存]。
+7. 按一下「儲存」。
 
 ### SQL
 
@@ -111,7 +112,7 @@ TABLE_PROJECT_ID:TABLE_DATASET_NAME.NEW_TABLE_NAME
 * `TABLE_DATASET_NAME`：要在其中建立新資料表的資料集名稱。
 * `NEW_TABLE_NAME`：新資料表的名稱。
 
-如果目的地資料表已存在，`--no_clobber` 旗標會指示指令失敗。
+`--no_clobber` 旗標會指示指令在目的地資料表已存在時失敗。
 
 ### API
 
@@ -143,12 +144,13 @@ TABLE_PROJECT_ID:TABLE_DATASET_NAME.NEW_TABLE_NAME
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
-3. 在「Explorer」窗格中展開專案，點選「Datasets」(資料集)，然後點選要還原的資料表快照所在的資料集。
-4. 依序點選**「Overview」(總覽) >「Tables」(資料表)**，然後按一下資料表快照的名稱。
-5. 在隨即顯示的資料表快照窗格中，按一下「還原」。
+3. 在「Explorer」窗格中展開專案，依序點選「Datasets」(資料集) 和要還原的資料表快照所屬資料集。
+4. 依序點選**「Overview」(總覽) >「Tables」(資料表)**，然後按一下
+   資料表快照的名稱。
+5. 在資料表快照窗格中，依序點選**「More」(更多) >「Restore snapshot」(還原快照)**。
 6. 在顯示的「Restore snapshot」(還原快照) 窗格中，輸入現有資料表的「Project」(專案)、「Dataset」(資料集) 和「Table」(資料表) 資訊。
-7. 選取「覆寫資料表 (如有)」。
-8. 按一下 [儲存]。
+7. 選取「Overwrite table if it exists」(覆寫資料表 (如有))。
+8. 按一下「儲存」。
 
 ### SQL
 
@@ -168,8 +170,7 @@ TABLE_PROJECT_ID:TABLE_DATASET_NAME.NEW_TABLE_NAME
 
    * `TABLE_PROJECT_ID`：要建立新資料表的專案 ID。
    * `TABLE_DATASET_NAME`：資料集名稱，其中包含要覆寫的資料表。
-   * `TABLE_NAME`：：
-     要覆寫的資料表名稱。
+   * `TABLE_NAME`：要覆寫的資料表名稱。
    * `SNAPSHOT_PROJECT_ID`：專案 ID，用於存放您要還原的快照。
    * `SNAPSHOT_DATASET_NAME`：資料集名稱，其中包含要還原的快照。
    * `SNAPSHOT_NAME`：要還原的快照名稱。
@@ -198,8 +199,7 @@ TABLE_PROJECT_ID:TABLE_DATASET_NAME.TABLE_NAME
 * `SNAPSHOT_NAME`：要還原的快照名稱。
 * `TABLE_PROJECT_ID`：要建立新資料表的專案 ID。
 * `TABLE_DATASET_NAME`：資料集名稱，其中包含要覆寫的資料表。
-* `TABLE_NAME`：：
-  要覆寫的資料表名稱。
+* `TABLE_NAME`：要覆寫的資料表名稱。
 
 ### API
 
@@ -217,8 +217,7 @@ TABLE_PROJECT_ID:TABLE_DATASET_NAME.TABLE_NAME
 * `SNAPSHOT_NAME`：要還原的快照名稱。
 * `TABLE_PROJECT_ID`：要建立新資料表的專案 ID。
 * `TABLE_DATASET_NAME`：資料集名稱，其中包含要覆寫的資料表。
-* `TABLE_NAME`：：
-  要覆寫的資料表名稱。
+* `TABLE_NAME`：要覆寫的資料表名稱。
 
 如未指定到期時間，目的地資料表會在包含該資料表的資料集預設資料表到期時間後到期。
 
@@ -233,11 +232,11 @@ TABLE_PROJECT_ID:TABLE_DATASET_NAME.TABLE_NAME
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-29 (世界標準時間)。
+上次更新時間：2026-11-01 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-01 (世界標準時間)。"],[],[]]

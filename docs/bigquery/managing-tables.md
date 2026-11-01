@@ -16,17 +16,17 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 管理資料表
 
-您可以管理 BigQuery 資料表，控管其生命週期、盡可能降低儲存費用，並確保資料治理。資料表管理包括更新屬性、重新命名、複製及刪除資料表等工作。更新 BigQuery 資料表屬性時，您可以修改資料表的到期時間、說明、結構定義、標籤和預設捨入模式。
+您可以管理 BigQuery 資料表，控管其生命週期、最佳化儲存空間成本，並確保資料治理。資料表管理包括更新屬性、重新命名、複製及刪除資料表等工作。更新 BigQuery 資料表屬性時，您可以修改到期時間、說明、結構定義定義、標籤和預設捨入模式。
 
 如要還原已刪除的資料表，請參閱「[還原已刪除的資料表](https://docs.cloud.google.com/bigquery/docs/restore-deleted-tables?hl=zh-tw)」。如要進一步瞭解如何建立及使用資料表，包括取得資料表資訊、列出資料表，以及控管資料表資料的存取權，請參閱「[建立及使用資料表](https://docs.cloud.google.com/bigquery/docs/tables?hl=zh-tw)」。
 
 ## 事前準備
 
-授予身分與存取權管理 (IAM) 角色，讓使用者擁有執行本文各項工作所需的權限。如要執行工作，必須具備工作「必要權限」部分列出的權限。
+授予 Identity and Access Management (IAM) 角色，讓使用者具備執行本文件中各項工作所需的權限。執行工作所需的權限 (如有) 會列在工作的「必要權限」部分。
 
 ## 更新表格屬性
 
-您可以更新表格的下列元素：
+您可以更新資料表的下列元素：
 
 * [說明](#updating_a_tables_description)
 * [到期時間](#updating_a_tables_expiration_time)
@@ -37,13 +37,13 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ### 所需權限
 
-如要取得更新表格屬性所需的權限，請要求管理員授予您表格的「[資料編輯者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataEditor) 」(`roles/bigquery.dataEditor`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得更新資料表屬性所需的權限，請要求管理員授予您資料表的[資料編輯者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataEditor)  (`roles/bigquery.dataEditor`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
-這個預先定義的角色具備更新表格屬性所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
+這個預先定義的角色具備更新資料表屬性所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
 #### 所需權限
 
-如要更新表格屬性，必須具備下列權限：
+必須具備下列權限，才能更新資料表屬性：
 
 * `bigquery.tables.update`
 * `bigquery.tables.get`
@@ -73,10 +73,10 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 2. 在「Explorer」窗格中展開專案，點選「Datasets」(資料集)，然後選取資料集。
-3. 依序點按「總覽」**>「表格」**，然後選取表格。
-4. 依序點選「詳細資料」分頁標籤和「編輯詳細資料」。
-5. 在「說明」部分新增或編輯現有說明。
-6. 按一下 [儲存]。
+3. 依序點選**「總覽」>「資料表」**，然後選取資料表。
+4. 在詳細資料窗格中，依序點選**「編輯」>「編輯詳細資料」**。
+5. 在「Description」(說明) 部分，新增說明或編輯現有說明。
+6. 按一下「儲存」。
 
 ### SQL
 
@@ -115,7 +115,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
    * `description`：描述資料表的文字，以引號括住
    * `project_id`：專案 ID
-   * `dataset`：資料集名稱，該資料集包含您要更新的資料表
+   * `dataset`：資料集名稱，其中包含您要更新的資料表
    * `table`：要更新的資料表名稱
 
    範例：
@@ -140,7 +140,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ### Go
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Go 設定說明操作。詳情請參閱 [BigQuery Go API 參考文件](https://godoc.org/cloud.google.com/go/bigquery)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Go 設定操作說明進行操作。詳情請參閱 [BigQuery Go API 參考文件](https://godoc.org/cloud.google.com/go/bigquery)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -181,7 +181,7 @@ func updateTableDescription(projectID, datasetID, tableID string) error {
 
 ### Java
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定說明操作。詳情請參閱 [BigQuery Java API 參考文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定操作說明進行操作。詳情請參閱 [BigQuery Java API 參考文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -220,7 +220,7 @@ public class UpdateTableDescription {
 
 ### Python
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定操作說明進行操作。詳情請參閱 [BigQuery Python API 參考文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -244,29 +244,26 @@ assert table.description == "Updated description."
 
 ### Gemini
 
-您可以使用資料洞察，透過 Gemini in BigQuery 生成資料表說明。資料洞察功能可自動探索、瞭解及整理資料。
+您可以使用 Gemini in BigQuery，透過資料洞察生成資料表說明。資料洞察功能可自動探索、瞭解及整理資料。
 
-如要進一步瞭解資料洞察，包括設定步驟、必要 IAM 角色，以及提升所產生洞察資訊準確度的最佳做法，請參閱「[在 BigQuery 中產生資料洞察](https://docs.cloud.google.com/bigquery/docs/data-insights?hl=zh-tw)」。
+如要進一步瞭解資料洞察，包括設定步驟、必要的 IAM 角色，以及提高生成的洞察資料準確率的最佳做法，請參閱「[在 BigQuery 生成資料洞察](https://docs.cloud.google.com/bigquery/docs/data-insights?hl=zh-tw)」。
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
 3. 在「Explorer」窗格中，展開專案和資料集，然後選取資料表。
-4. 在詳細資料面板中，點選「結構定義」分頁標籤。
-5. 點按「生成」。
+4. 在詳細資料窗格中，按一下「Details」(詳細資料) 分頁標籤。
+5. 按一下「資料表資訊」旁的「描述資料」。
 
-   **注意：** 如果沒看到「生成」按鈕，請點選「描述資料」。
-   你可能需要捲動畫面才能看到這個按鈕。
+   Gemini 會生成資料表說明和相關洞察資訊。系統需要幾分鐘才能填入資訊。您可以在資料表的「Insights」(洞察) 分頁查看生成的洞察資料。
+6. 如要編輯並儲存生成的資料表說明，請按照下列步驟操作：
 
-   Gemini 會生成資料表說明和資料表洞察結果。系統需要幾分鐘才能填入資訊。您可以在資料表的「Insights」(洞察) 分頁中查看生成的洞察資料。
-6. 如要編輯及儲存產生的表格說明，請按照下列步驟操作：
-
-   1. 按一下「查看資料欄說明」。
+   1. 按一下「資料表資訊」旁的「查看說明」。
 
       系統會顯示目前的資料表說明和生成的說明。
    2. 在「資料表說明」部分，按一下「儲存至詳細資料」。
-   3. 如要以生成的說明取代目前的說明，請按一下「複製建議的說明」。
+   3. 如要將目前的說明替換為生成的說明，請按一下「複製建議的說明」。
    4. 視需要編輯資料表說明，然後按一下「Save to details」(儲存至詳細資料)。
 
       資料表說明會立即更新。
@@ -280,7 +277,7 @@ assert table.description == "Updated description."
 
 如果您在建立資料表時設定了到期時間，系統將會忽略資料集的資料表預設到期時間。如果您未在資料集層級設定資料表的預設到期時間，也未在建立資料表時設定到期時間，則資料表將永遠不會過期，您必須以手動方式才能[刪除](#deleting_a_table)。
 
-資料表建立後，您可以隨時透過下列方式更新資料表的到期時間：
+資料表建立後，您隨時可以透過下列方式更新資料表的到期時間：
 
 * 使用 Google Cloud 控制台。
 * 使用資料定義語言 (DDL) `ALTER TABLE` 陳述式。
@@ -297,10 +294,10 @@ assert table.description == "Updated description."
 使用Google Cloud 控制台建立資料表時，無法新增到期時間。資料表建立後，您可以在「Table Details」(資料表詳細資料) 頁面新增或更新資料表到期時間。
 
 1. 點選左側窗格中的 explore「Explorer」。
-2. 在「Explorer」窗格中展開專案，按一下「Datasets」(資料集)，然後選取資料集。
-3. 依序點選**「總覽」 >「資料表」**，然後選取資料表。
-4. 依序點選「詳細資料」分頁標籤和「編輯詳細資料」。
-5. 在「Expiration time」(到期時間) 部分，選取「Specify date」(指定日期)。然後使用日曆小工具選取到期日。
+2. 在「Explorer」窗格中展開專案，點選「Datasets」(資料集)，然後選取資料集。
+3. 依序點選**「總覽」>「資料表」**，然後選取資料表。
+4. 在詳細資料窗格中，依序點選**「編輯」>「編輯詳細資料」**。
+5. 在「Expiration time」(到期時間) 中，選取「Specify date」(指定日期)。然後使用日曆小工具選取到期日。
 6. 按一下 [儲存]。已更新的到期時間會顯示在「Table info」(資料表資訊) 區段。
 
 ### SQL
@@ -318,7 +315,7 @@ assert table.description == "Updated description."
        -- Sets table expiration to timestamp 2025-02-03 12:34:56
        expiration_timestamp = TIMESTAMP '2025-02-03 12:34:56');
    ```
-3. 按一下「執行」play\_circle。
+3. 按一下「play\_circle 執行」。
 
 如要進一步瞭解如何執行查詢，請參閱「[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)」。
 
@@ -339,20 +336,20 @@ assert table.description == "Updated description."
 
    更改下列內容：
 
-   * `integer`：資料表的預設生命週期 (以秒為單位)。最小值是 3600 秒 (1 小時)。到期時間為目前時間加整數值。如果指定 `0`，系統會移除資料表到期日，資料表永不過期。沒有到期日的資料表必須手動刪除。
+   * `integer`：資料表的預設生命週期 (以秒為單位)。最小值是 3600 秒 (1 小時)。到期時間為目前時間加整數值。如果指定 `0`，系統會移除資料表到期時間，資料表也永不失效。沒有到期日的資料表則必須手動刪除。
    * `project_id`：您的專案 ID。
-   * `dataset`：資料集名稱，其中包含您要更新的資料表。
+   * `dataset`：資料集名稱，其中包含要更新的資料表。
    * `table`：要更新的資料表名稱。
 
    範例：
 
-   如要將 `mydataset` 資料集中的 `mytable` 資料表到期時間更新為 5 天 (432000 秒)，請輸入下列指令。`mydataset` 資料集位於預設專案中。
+   如要將 `mydataset` 資料集中 `mytable` 資料表的到期時間更新為 5 天 (432000 秒)，請輸入下列指令。`mydataset` 資料集位於預設專案中。
 
    ```
    bq update --expiration 432000 mydataset.mytable
    ```
 
-   如要將 `mydataset` 資料集中 `mytable` 資料表的到期時間更新為 5 天 (432000 秒)，請輸入下列指令。`mydataset` 資料集位於 `myotherproject` 專案中，而非預設專案。
+   如要將 `mydataset` 資料集中 `mytable` 資料表的到期時間更新為 5 天 (432000 秒)，請輸入下列指令。`mydataset` 資料集位於 `myotherproject` 專案，而非預設專案。
 
    ```
    bq update --expiration 432000 myotherproject:mydataset.mytable
@@ -407,7 +404,7 @@ func updateTableExpiration(projectID, datasetID, tableID string) error {
 
 ### Java
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定說明操作。詳情請參閱 [BigQuery Java API 參考文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定操作說明進行操作。詳情請參閱 [BigQuery Java API 參考文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -484,7 +481,7 @@ async function updateTableExpiration() {
 
 ### Python
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定操作說明進行操作。詳情請參閱 [BigQuery Python API 參考文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -637,7 +634,7 @@ SET OPTIONS (
   default_rounding_mode = "ROUND_HALF_EVEN");
 ```
 
-在資料表中新增 `NUMERIC` 或 `BIGNUMERIC` 欄位，且未指定[捨入模式](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#rounding_mode)時，系統會自動將捨入模式設為資料表的預設捨入模式。變更資料表的預設捨入模式不會影響現有欄位的捨入模式。
+在資料表中新增 `NUMERIC` 或 `BIGNUMERIC` 欄位，但未指定[捨入模式](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#rounding_mode)時，系統會自動將捨入模式設為資料表的預設捨入模式。變更資料表的預設捨入模式，不會影響現有欄位的捨入模式。
 
 ### 更新資料表的結構定義
 
@@ -645,28 +642,28 @@ SET OPTIONS (
 
 ### 重新命名表格
 
-資料表建立後，可以使用 [`ALTER TABLE RENAME TO` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_table_rename_to_statement)重新命名。以下範例會將 `mytable` 重新命名為 `mynewtable`：
+資料表建立後，您可以使用 [`ALTER TABLE RENAME TO` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_table_rename_to_statement)重新命名。以下範例會將 `mytable` 重新命名為 `mynewtable`：
 
 ```
 ALTER TABLE mydataset.mytable
 RENAME TO mynewtable;
 ```
 
-`ALTER TABLE RENAME TO` 陳述式會使用原始資料表的建立時間戳記，在目的地資料集中重新建立資料表。如果您已設定[資料集層級的資料表到期日](https://docs.cloud.google.com/bigquery/docs/updating-datasets?hl=zh-tw#table-expiration)，如果原始建立時間戳記超出到期日範圍，系統可能會立即刪除重新命名的資料表。
+`ALTER TABLE RENAME TO` 陳述式會使用原始資料表的建立時間戳記，在目的地資料集中重新建立資料表。如果您已設定[資料集層級資料表到期時間](https://docs.cloud.google.com/bigquery/docs/updating-datasets?hl=zh-tw#table-expiration)，且重新命名的資料表原始建立時間戳記超出到期時間範圍，系統可能會立即刪除該資料表。
 
 #### 重新命名資料表的限制
 
-* 如要重新命名正在接收串流資料的資料表，請停止串流、提交所有待處理的串流，並等待 BigQuery 指出串流未在使用中。
+* 如要重新命名有資料串流至其中的資料表，您必須停止串流、提交任何待處理的串流，並等待 BigQuery 指出串流未在使用中。
 * 雖然資料表通常可以在上次串流作業後 5 小時重新命名，但可能需要更長時間。在某些情況下，等待時間可能長達 8 天。
-* 系統會保留現有的資料表 ACL 和資料列存取政策，但不會保留在資料表重新命名期間更新的資料表 ACL 和資料列存取政策。
+* 現有的資料表 ACL 和資料列存取政策會保留，但在重新命名資料表期間，對資料表 ACL 和資料列存取政策所做的更新則不會保留。
 * 您無法同時重新命名資料表，並對該資料表執行 DML 陳述式。
 * 重新命名資料表會移除資料表的所有 [Knowledge Catalog 方面](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata?hl=zh-tw#aspects)。
 * 重新命名資料表時，系統會捨棄在資料表上建立的所有搜尋索引或向量索引。
-* 外部資料表無法重新命名。
+* 無法重新命名外部資料表。
 
 ## 複製資料表
 
-本節說明如何建立資料表的完整副本。如要瞭解其他類型的資料表副本，請參閱「[資料表複製版本](https://docs.cloud.google.com/bigquery/docs/table-clones-intro?hl=zh-tw)」和「[資料表快照](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro?hl=zh-tw)」。
+本節說明如何建立資料表的完整副本。如要瞭解其他類型的資料表副本，請參閱「[資料表副本](https://docs.cloud.google.com/bigquery/docs/table-clones-intro?hl=zh-tw)」和「[資料表快照](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro?hl=zh-tw)」。
 
 複製表格的方式如下：
 
@@ -680,18 +677,18 @@ RENAME TO mynewtable;
 
 資料表複製工作有下列限制：
 
-* 表格複製作業開始後即無法停止。資料表複製作業會以非同步方式執行，即使您取消工作，作業也不會停止。您也需要為跨區域資料表副本的資料移轉，以及目標區域的儲存空間付費。
+* 資料表複製作業一旦開始就無法停止。資料表複製作業會以非同步方式執行，即使您取消工作，作業也不會停止。此外，您也需要支付跨區域資料表複製的資料移轉費用，以及目的地區域的儲存空間費用。
 * 當您複製資料表時，目的地資料表的名稱必須遵循您[建立資料表](https://docs.cloud.google.com/bigquery/docs/tables?hl=zh-tw#create-table)時所使用的命名慣例。
-* 資料表副本須遵守 BigQuery 的複製工作[限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#copy_jobs)。
-* Google Cloud 控制台一次只能複製一個資料表。您無法覆寫目的地資料集中的現有資料表。資料表在目的地資料集中必須有不重複的名稱。
-* 控制台不支援將多個來源資料表複製到目的地資料表。 Google Cloud
-* 使用 API、bq 指令列工具或用戶端程式庫將多個來源資料表複製到目的地資料表時，所有來源資料表都必須有相同的結構定義，包括任何分區或分群。
+* 資料表副本須遵守 BigQuery 複製工作的[限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#copy_jobs)。
+* Google Cloud 控制台一次只能複製一個資料表。您無法覆寫目的地資料集中的現有資料表。資料表在目的地資料集中的名稱不得重複。
+* Google Cloud 控制台不支援將多個來源資料表複製到目的地資料表。
+* 使用 API、bq 指令列工具或用戶端程式庫，將多個來源資料表複製到目的地資料表時，所有來源資料表都必須具有相同的結構定義，包括任何分區或叢集。
 
-  某些資料表結構定義更新 (例如捨棄或重新命名資料欄) 可能會導致資料表具有明顯相同的結構定義，但內部表示法不同。這可能會導致資料表複製工作失敗，並顯示 `Maximum limit on diverging physical schemas reached` 錯誤。在這種情況下，您可以使用 [`CREATE TABLE LIKE` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#create_table_like)，確保來源資料表的結構定義與目的地資料表的結構定義完全相符。
-* BigQuery 複製資料表所需的時間可能會因基礎儲存空間是動態管理，而有顯著差異。
+  某些資料表結構定義更新 (例如捨棄或重新命名資料欄)，可能會導致資料表具有明顯相同的結構定義，但內部表示法不同。這可能會導致資料表複製工作失敗，並顯示 `Maximum limit on diverging physical schemas reached` 錯誤。在這種情況下，您可以使用 [`CREATE TABLE LIKE` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#create_table_like)，確保來源資料表的結構定義與目的地資料表的結構定義完全相符。
+* 由於基礎儲存空間是動態管理，BigQuery 複製資料表所需的時間可能會因執行作業而有顯著差異。
 * 如果目的地資料表的資料欄數量多於來源資料表，且額外資料欄有[預設值](https://docs.cloud.google.com/bigquery/docs/default-values?hl=zh-tw)，則無法將來源資料表複製並附加至目的地資料表。您可以改為執行 `INSERT destination_table SELECT * FROM source_table` 來複製資料。
-* 如果複製作業會覆寫現有資料表，則會保留現有資料表的資料表層級存取權。來源資料表的[標記](https://docs.cloud.google.com/bigquery/docs/tags?hl=zh-tw)不會複製到覆寫的資料表，現有資料表的標記則會保留。不過，跨區域複製資料表時，現有資料表上的標記會遭到移除。
-* 如果複製作業會建立新資料表，則新資料表的資料表層級存取權，取決於建立新資料表的資料集存取權政策。此外，[標記](https://docs.cloud.google.com/bigquery/docs/tags?hl=zh-tw)也會從來源資料表複製到新資料表。
+* 如果複製作業覆寫現有資料表，則會保留現有資料表的資料表層級存取權。來源資料表的[標記](https://docs.cloud.google.com/bigquery/docs/tags?hl=zh-tw)不會複製到覆寫的資料表，但現有資料表的標記會保留。不過，跨區域複製資料表時，現有資料表的標記會遭到移除。
+* 如果複製作業會建立新資料表，則新資料表的資料表層級存取權，取決於建立新資料表的資料集存取政策。此外，[標記](https://docs.cloud.google.com/bigquery/docs/tags?hl=zh-tw)也會從來源資料表複製到新資料表。
 * 將多個來源資料表複製到目的地資料表時，所有來源資料表都必須具有相同的標記。
 
 ### 必要的角色
@@ -702,7 +699,7 @@ RENAME TO mynewtable;
 
 如要取得複製資料表和分區所需的權限，請要求管理員授予您來源和目的地資料集的[資料編輯者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataEditor)  (`roles/bigquery.dataEditor`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
-這個預先定義的角色具備複製資料表和分割區所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
+這個預先定義的角色具備複製資料表和分區所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
 #### 所需權限
 
@@ -721,7 +718,7 @@ RENAME TO mynewtable;
 
 #### 執行複製工作的權限
 
-如要取得執行複製工作所需的權限，請要求管理員授予您來源和目的地資料集的「[工作使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.jobUser) 」(`roles/bigquery.jobUser`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得執行複製工作所需的權限，請要求管理員授予您來源和目的地資料集的[工作使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.jobUser)  (`roles/bigquery.jobUser`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
 這個預先定義的角色具備 `bigquery.jobs.create` 權限，可執行複製工作。
 
@@ -737,16 +734,16 @@ RENAME TO mynewtable;
 * 呼叫 [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert?hl=zh-tw) API 方法、設定 `copy` 工作，以及指定 `sourceTable` 屬性。
 * 使用用戶端程式庫。
 
-Google Cloud 控制台和 `CREATE TABLE COPY` 陳述式在複製工作中，僅支援一個來源資料表和一個目的地資料表。如要[將多個來源檔案複製](#copying_multiple_source_tables)到目的地資料表，請使用 bq 指令列工具或 API。
+Google Cloud 控制台和 `CREATE TABLE COPY` 陳述式在複製工作中，僅支援一個來源資料表和一個目的地資料表。如要將[多個來源檔案複製](#copying_multiple_source_tables)到目的地資料表，您必須使用 bq 指令列工具或 API。
 
 如要複製單一來源資料表：
 
 ### 控制台
 
 1. 點選左側窗格中的 explore「Explorer」。
-2. 在「Explorer」窗格中展開專案，按一下「Datasets」(資料集)，然後選取資料集。
-3. 依序點選**「總覽」 >「資料表」**，然後選取資料表。
-4. 在詳細資料窗格中，按一下「複製」。
+2. 在「Explorer」窗格中展開專案，點選「Datasets」(資料集)，然後選取資料集。
+3. 依序點選**「總覽」>「資料表」**，然後選取資料表。
+4. 在詳細資料窗格中，依序點選**「更多」>「建立資料表副本」**。
 5. 在「Copy table」(複製資料表) 對話方塊中的「Destination」(目的地) 下方：
 
    * 在「Project」(專案) 部分，選擇要儲存複製資料表的專案。
@@ -767,13 +764,13 @@ Google Cloud 控制台和 `CREATE TABLE COPY` 陳述式在複製工作中，僅�
    CREATE TABLE myproject.mydataset.table1copy
    COPY myproject.mydataset.table1;
    ```
-3. 按一下「執行」play\_circle。
+3. 按一下「play\_circle 執行」。
 
 如要進一步瞭解如何執行查詢，請參閱「[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)」。
 
 ### bq
 
-1. 在 Google Cloud 控制台中啟用 Cloud Shell。
+1. 在 Google Cloud 控制台啟用 Cloud Shell。
 
    [啟用 Cloud Shell](https://console.cloud.google.com/?cloudshell=true&hl=zh-tw)
 
@@ -783,7 +780,7 @@ Google Cloud 控制台和 `CREATE TABLE COPY` 陳述式在複製工作中，僅�
    * `-a` 或 `--append_table`：把來源資料表的資料附加到目的地資料集中現有的資料表上。
    * `-f` 或 `--force`：覆寫目的地資料集中的現有資料表，此作業不會有確認提示。
    * 如果目的地資料集裡已有資料表，`-n` 或 `--no_clobber` 會傳回下列錯誤訊息：`Table 'project_id:dataset.table' already exists, skipping.`。如未指定 `-n`，預設行為是提示您選擇是否要取代目的地資料表。
-   * `--destination_kms_key` 是用於加密目的地資料表的客戶自行管理 Cloud KMS 金鑰。
+   * `--destination_kms_key` 是客戶自行管理的 Cloud KMS 金鑰，用於加密目的地資料表。
 
    本文不示範 `--destination_kms_key`。詳情請參閱「[使用 Cloud Key Management Service 金鑰保護資料](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw)」。
 
@@ -800,11 +797,11 @@ Google Cloud 控制台和 `CREATE TABLE COPY` 陳述式在複製工作中，僅�
 
    更改下列內容：
 
-   * `location`：位置名稱。`--location` 是選用旗標。舉例來說，如果您在東京區域使用 BigQuery，可以將旗標值設為 `asia-northeast1`。您可以使用 [`.bigqueryrc` 檔案](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#set_default_values_for_command-line_flags)設定位置的預設值。
+   * `location`：位置名稱。`--location` 是選用旗標。舉例來說，如果您在東京地區使用 BigQuery，就可以將旗標的值設為 `asia-northeast1`。您可以使用 [`.bigqueryrc` 檔案](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#set_default_values_for_command-line_flags)設定位置的預設值。
    * `project_id`：您的專案 ID。
    * `dataset`：來源或目的地資料集的名稱。
-   * `source_table`：要複製的表格。
-   * `destination_table`：
+   * `source_table`：要複製的資料表。
+   * `destination_table`：：
      目的地資料集中的資料表名稱。
 
    範例：
@@ -815,7 +812,7 @@ Google Cloud 控制台和 `CREATE TABLE COPY` 陳述式在複製工作中，僅�
    bq cp mydataset.mytable mydataset2.mytable2
    ```
 
-   如要複製 `mydataset.mytable` 資料表，並覆寫同名的目的地資料表，請輸入下列指令。來源資料集位於預設專案中。目的地資料集位於 `myotherproject` 專案中。`-f` 快速鍵可用於覆寫目的地資料表，且不會顯示提示。
+   如要複製 `mydataset.mytable` 資料表，並覆寫同名的目的地資料表，請輸入下列指令。來源資料集位於預設專案中。目的地資料集位於 `myotherproject` 專案中。`-f` 捷徑可用來在無提示的情況下覆寫目的地資料表。
 
    ```
    bq cp -f \
@@ -823,7 +820,7 @@ Google Cloud 控制台和 `CREATE TABLE COPY` 陳述式在複製工作中，僅�
    myotherproject:myotherdataset.mytable
    ```
 
-   如要複製 `mydataset.mytable` 資料表，並在目的地資料集含有同名資料表時傳回錯誤，請輸入下列指令。來源資料集位於預設專案中。目的地資料集位於 `myotherproject` 專案中。`-n` 捷徑可用來避免覆寫同名資料表。
+   如要複製 `mydataset.mytable` 資料表，並在目的地資料集包含同名資料表時傳回錯誤，請輸入下列指令。來源資料集位於預設專案中。目的地資料集位於 `myotherproject` 專案中。`-n` 捷徑可用來避免覆寫同名資料表。
 
    ```
    bq cp -n \
@@ -831,7 +828,7 @@ Google Cloud 控制台和 `CREATE TABLE COPY` 陳述式在複製工作中，僅�
    myotherproject:myotherdataset.mytable
    ```
 
-   如要複製 `mydataset.mytable` 資料表，並將資料附加至同名的目的地資料表，請輸入下列指令。來源資料集位於預設專案中。目的地資料集位於 `myotherproject` 專案中。`- a` 捷徑用於附加至目的地資料表。
+   如要複製 `mydataset.mytable` 資料表，並將資料附加至同名的目的地資料表，請輸入下列指令。來源資料集位於預設專案中。目的地資料集位於 `myotherproject` 專案中。`- a` 快速鍵用於附加至目的地資料表。
 
    ```
    bq cp -a mydataset.mytable myotherproject:myotherdataset.mytable
@@ -907,7 +904,7 @@ public class BigQueryCopyTable
 
 ### Go
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Go 設定說明操作。詳情請參閱 [BigQuery Go API 參考文件](https://godoc.org/cloud.google.com/go/bigquery)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Go 設定操作說明進行操作。詳情請參閱 [BigQuery Go API 參考文件](https://godoc.org/cloud.google.com/go/bigquery)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -1020,6 +1017,4 @@ public class CopyTable {
 
 ### Node.js
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
-
-如要向 BigQuery 進行驗證，請
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定操作說明進行操作。詳情請參閱

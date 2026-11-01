@@ -235,4 +235,4 @@ LIMIT 10;
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["
+[[[

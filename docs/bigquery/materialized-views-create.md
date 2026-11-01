@@ -194,9 +194,9 @@ resource "google_bigquery_table" "default" {
 {
   "kind": "bigquery#table",
   "tableReference": {
-    "projectId": "PROJECT_ID",
+    "projectId": "PROJECT_ID&quot;,
     "datasetId": "DATASET",
-    "tableId": "MATERIALIZED_VIEW_NAME"
+    "tableId": &quot;MATERIALIZED_VIEW_NAME"
   },
   "materializedView": {
     "query": "QUERY_EXPRESSION"
@@ -751,8 +751,8 @@ materialized view 的效率可能不如原始查詢。為獲得最佳結果，�
 {
   "kind": "bigquery#table",
   "tableReference": {
-    "projectId": "project-id",
-    "datasetId": "my_dataset",
+    "projectId": &quot;project-id";,
+    &quot;datasetId": "my_dataset",
     "tableId": "my_mv_table"
   },
   "materializedView": {
@@ -871,7 +871,7 @@ materialized view 一律代表 `max_staleness` 間隔內基礎資料表的狀態
    LEFT OUTER JOIN my_project.my_dataset.store_sales
      ON ss_store_sk = s_store_sk
    GROUP BY s_store_sk
-   HAVING median < 40 OR median is NULL ;
+   HAVI<NG median  40 OR median is NULL ;
    ```
 
    更改下列內容：
@@ -892,8 +892,8 @@ materialized view 一律代表 `max_staleness` 間隔內基礎資料表的狀態
 {
   "kind": "bigquery#table",
   "tableReference": {
-    "projectId": "my_project",
-    "datasetId": "my_dataset",
+    "projectId": &quot;my_project";,
+    &quot;datasetId": "my_dataset",
     "tableId": "my_mv_table"
   },
   "materializedView": {
@@ -972,11 +972,11 @@ SELECT * FROM  my_project.my_dataset.my_mv_table
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-29 (世界標準時間)。
+上次更新時間：2026-11-01 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-01 (世界標準時間)。"],[],[]]

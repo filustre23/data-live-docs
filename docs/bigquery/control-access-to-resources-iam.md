@@ -98,7 +98,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 5. 按一下「person\_add 新增主體」。
 6. 在「New principals」(新增主體) 欄位中輸入主體。
 7. 在「Select a role」(選取角色) 清單中，選取預先定義的角色或自訂角色。
-8. 按一下 [儲存]。
+8. 按一下「儲存」。
 9. 如要返回資料集資訊，請點選「關閉」。
 
 ### SQL
@@ -302,7 +302,7 @@ resource "google_bigquery_dataset_iam_member" "dataset_iam_member" {
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
 2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
 
-   每個專案只需執行這個指令一次，而且可以在任何目錄中執行。
+   這項指令在每個專案中只需執行一次，且可在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID

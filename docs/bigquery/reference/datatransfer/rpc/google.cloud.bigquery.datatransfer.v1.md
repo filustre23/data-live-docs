@@ -133,5 +133,3 @@ This API allows users to manage their data transfers into BigQuery.
 
 | ListTransferRuns |
 | --- |
-|
-|  |

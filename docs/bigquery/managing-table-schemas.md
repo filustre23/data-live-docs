@@ -18,29 +18,29 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 本文說明如何修改現有 BigQuery 資料表的結構定義。
 
-您可以使用 SQL [資料定義語言 (DDL) 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw)，進行本文所述的大部分結構定義修改作業。這些對帳單不會產生費用。
+您可以使用 SQL [資料定義語言 (DDL) 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw)，進行本文所述的大多數結構定義修改。這些對帳單不會產生費用。
 
-如要以本頁所述的所有方式修改資料表結構，請先將資料表資料[匯出](https://docs.cloud.google.com/bigquery/docs/exporting-data?hl=zh-tw)至 Cloud Storage，再將資料[載入](https://docs.cloud.google.com/bigquery/docs/loading-data?hl=zh-tw)至結構定義經過修改的新資料表。BigQuery 載入和擷取工作免費，但您必須付費才能將匯出的資料儲存在 Cloud Storage 中。以下各節說明如何以其他方式執行各種結構定義修改。
+您可以將資料表資料[匯出](https://docs.cloud.google.com/bigquery/docs/exporting-data?hl=zh-tw)至 Cloud Storage，然後將資料[載入](https://docs.cloud.google.com/bigquery/docs/loading-data?hl=zh-tw)至具有修改後結構定義定義的新資料表，以本頁所述的所有方式修改資料表結構定義。BigQuery 載入和擷取工作不收費，但將匯出的資料儲存在 Cloud Storage 會產生費用。以下各節說明執行各種結構定義修改作業的其他方式。
 
-BigQuery 中的結構定義更新不會導致資料遺失。
+在 BigQuery 更新結構定義不會導致資料遺失。
 
-**注意：** 更新結構定義後，變更內容可能不會立即反映在 [`INFORMATION_SCHEMA.TABLES`](https://docs.cloud.google.com/bigquery/docs/information-schema-tables?hl=zh-tw) 和 [`INFORMATION_SCHEMA.COLUMNS`](https://docs.cloud.google.com/bigquery/docs/information-schema-columns?hl=zh-tw) 檢視畫面中。如要查看立即結構定義異動，請呼叫 [`tables.get` 方法](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get?hl=zh-tw)。
+**注意：** 更新結構定義時，[`INFORMATION_SCHEMA.TABLES`](https://docs.cloud.google.com/bigquery/docs/information-schema-tables?hl=zh-tw) 和 [`INFORMATION_SCHEMA.COLUMNS`](https://docs.cloud.google.com/bigquery/docs/information-schema-columns?hl=zh-tw) 檢視畫面可能不會立即反映變更。如要查看即時結構定義變更，請呼叫 [`tables.get` 方法](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get?hl=zh-tw)。
 
 ## 新增資料欄
 
-您可以透過下列任一方式，將資料欄新增至現有資料表的結構定義：
+您可以使用下列任一選項，在現有資料表的結構定義中新增資料欄：
 
 * 新增空白資料欄。
 * 使用載入或查詢工作覆寫資料表。
-* 使用載入或查詢工作將資料附加至資料表。
+* 透過載入或查詢工作，將資料附加至資料表。
 
 您新增的任何資料欄都必須遵守 BigQuery 的[資料欄名稱](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#column_names)規則。如要進一步瞭解如何建立結構定義元件，請參閱「[指定結構定義](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw)」。
 
-您無法在資料表結構定義中間新增資料欄。系統一律會在表格或欄位的結尾處新增資料欄和巢狀欄位。如要在表格結構定義中間建立新資料欄，唯一方法是建立具有所選結構定義的新表格，然後從原始表格複製資料。
+您無法在資料表結構定義的中間新增資料欄。新的資料欄和巢狀欄位一律會新增至資料表或欄位的結尾。如要在資料表結構定義中間建立新資料欄，唯一的方法是使用所選結構定義建立新資料表，並從原始資料表複製資料。
 
 ### 新增空白資料欄
 
-新增資料欄至現有的資料表結構定義時，資料欄必須為 `NULLABLE` 或 `REPEATED`。您無法將 `REQUIRED` 資料欄新增至現有的資料表結構定義。在 API 或 bq 指令列工具中，將 `REQUIRED` 資料欄新增至現有的資料表結構定義會導致錯誤。不過，您可以建立巢狀 `REQUIRED` 欄，做為新 `RECORD` 欄位的一部分。只有在載入資料時建立資料表，或者使用結構定義建立空白資料表時，您才能新增 `REQUIRED` 資料欄。
+新增資料欄至現有的資料表結構定義時，資料欄必須為 `NULLABLE` 或 `REPEATED`。您無法將 `REQUIRED` 資料欄新增至現有的資料表結構定義。在 API 或 bq 指令列工具中，將 `REQUIRED` 資料欄新增至現有資料表結構定義會導致錯誤。不過，您可以建立巢狀 `REQUIRED` 欄，做為新 `RECORD` 欄位的一部分。只有在載入資料時建立資料表，或使用結構定義定義建立空白資料表時，才能新增 `REQUIRED` 資料欄。
 
 如何將空白資料欄新增至資料表的結構定義：
 
@@ -52,16 +52,15 @@ BigQuery 中的結構定義更新不會導致資料遺失。
 2. 點選左側窗格中的 explore「Explorer」。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
-3. 在「Explorer」窗格中展開專案，按一下「Datasets」(資料集)，然後選取資料集。
-4. 依序點選「總覽」**>「表格」**，然後選取所需表格。
-5. 在詳細資料窗格中，按一下「結構定義」分頁標籤。
-6. 點選「編輯結構定義」。你可能需要捲動畫面才能看到這個按鈕。
-7. 在「目前的結構定義」頁面中，按一下「新欄位」下方的「新增欄位」。
+3. 在「Explorer」窗格中展開專案，點選「Datasets」(資料集)，然後選取資料集。
+4. 依序點選**「總覽」 > 「資料表」**，然後選取資料表。
+5. 在詳細資料窗格中，依序點選**「編輯」>「編輯結構定義」**。
+6. 在「Current schema」(目前結構定義) 頁面的「New fields」(新欄位) 下方，按一下「Add field」(新增欄位)。
 
    * 在「Name」(名稱) 部分，輸入資料欄名稱。
    * 針對「Type」(類型)，請選擇[資料類型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw)。
    * 針對[「Mode」(模式)](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables?hl=zh-tw#TableFieldSchema.FIELDS.mode)，請選擇 `NULLABLE` 或 `REPEATED`。
-8. 資料欄新增完畢後，按一下 [Save] (儲存)。
+7. 資料欄新增完畢後，按一下 [Save] (儲存)。
 
 **注意：** 您無法使用 Google Cloud 控制台，在[外部資料表](https://docs.cloud.google.com/bigquery/docs/external-tables?hl=zh-tw)中新增資料欄。
 
@@ -78,15 +77,15 @@ BigQuery 中的結構定義更新不會導致資料遺失。
    ALTER TABLE mydataset.mytable
    ADD COLUMN new_column STRING;
    ```
-3. 按一下「執行」play\_circle。
+3. 按一下「play\_circle 執行」。
 
 如要進一步瞭解如何執行查詢，請參閱「[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)」。
 
-**注意：** 您無法使用 `ALTER TABLE ADD COLUMN` 陳述式，在[外部資料表](https://docs.cloud.google.com/bigquery/docs/external-tables?hl=zh-tw)中新增資料欄。
+**注意：** 您無法使用 `ALTER TABLE ADD COLUMN` 陳述式在[外部資料表](https://docs.cloud.google.com/bigquery/docs/external-tables?hl=zh-tw)中新增資料欄。
 
 ### bq
 
-發出 `bq update` 指令並提供 JSON 結構定義檔。如果您要更新的資料表位於非預設專案中，請依照下列格式將該專案的專案 ID 加到資料集名稱中：`PROJECT_ID:DATASET`。
+發出 `bq update` 指令並提供 JSON 結構定義檔。如果要更新的資料表位於預設專案以外的專案，請按照下列格式，將專案 ID 新增至資料集名稱：`PROJECT_ID:DATASET`。
 
 ```
 bq update PROJECT_ID:DATASET.TABLE SCHEMA
@@ -95,22 +94,22 @@ bq update PROJECT_ID:DATASET.TABLE SCHEMA
 更改下列內容：
 
 * `PROJECT_ID`：您的專案 ID。
-* `DATASET`：含有您要更新之資料表的資料集名稱。
+* `DATASET`：資料集名稱，其中包含要更新的資料表。
 * `TABLE`：要更新的資料表名稱。
-* `SCHEMA`：您本機上的 JSON 結構定義檔路徑。
+* `SCHEMA`：本機電腦上的 JSON 結構定義檔案路徑。
 
-指定內嵌結構定義時，無法指定資料欄說明、模式和 `RECORD` ([`STRUCT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#struct_type)) 類型。所有資料欄模式都會預設為 `NULLABLE`。因此如要新增巢狀資料欄至 `RECORD`，就必須[提供 JSON 結構定義檔](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#specifying_a_json_schema_file)。
+指定內嵌結構定義時，無法指定資料欄說明、模式和 `RECORD` ([`STRUCT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#struct_type)) 類型。所有資料欄模式預設為 `NULLABLE`。因此如要新增巢狀資料欄至 `RECORD`，就必須[提供 JSON 結構定義檔](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#specifying_a_json_schema_file)。
 
-如果您嘗試使用內嵌結構定義新增資料欄，則必須提供包括新資料欄在內的整個結構定義。由於您無法使用內嵌結構定義指定資料欄模式，因此更新作業會將任何現有的 `REPEATED` 資料欄變更為 `NULLABLE`，這會產生下列錯誤：`BigQuery error in update
+如果您嘗試使用內嵌結構定義新增資料欄，則必須提供包括新資料欄在內的整個結構定義。由於您無法使用內嵌結構定義定義指定資料欄模式，因此更新會將任何現有的 `REPEATED` 資料欄變更為 `NULLABLE`，進而產生下列錯誤：`BigQuery error in update
 operation: Provided Schema does not match Table
 PROJECT_ID:dataset.table. Field field has changed mode
 from REPEATED to NULLABLE.`
 
-使用 bq 指令列工具將資料欄新增至現有資料表的建議方法是[提供 JSON 結構定義檔](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#specifying_a_json_schema_file)。
+如要使用 bq 指令列工具在現有資料表中新增資料欄，建議[提供 JSON 結構定義檔案](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#specifying_a_json_schema_file)。
 
 如何使用 JSON 結構定義檔案將空白資料欄新增至資料表的結構定義：
 
-1. 首先，請發出 `bq show` 指令並加上 `--schema` 旗標，並將現有的資料表結構定義寫入檔案。如果您要更新的資料表位於非預設專案中，請依照下列格式將該專案的 ID 加到資料集名稱中：`PROJECT_ID:DATASET`。
+1. 首先，請發出 `bq show` 指令並加上 `--schema` 旗標，並將現有的資料表結構定義寫入檔案。如果更新的資料表不在預設專案中，請將專案 ID 新增至資料集名稱，格式如下：`PROJECT_ID:DATASET`。
 
    ```
    bq show \
@@ -122,9 +121,9 @@ from REPEATED to NULLABLE.`
    更改下列內容：
 
    * `PROJECT_ID`：您的專案 ID。
-   * `DATASET`：含有您要更新之資料表的資料集名稱。
+   * `DATASET`：資料集名稱，其中包含要更新的資料表。
    * `TABLE`：要更新的資料表名稱。
-   * `SCHEMA`：寫入本機的結構定義檔。
+   * `SCHEMA`：寫入本機電腦的結構定義定義檔。
 
    舉例來說，如要將 `mydataset.mytable` 的結構定義寫入檔案，請輸入下列指令。`mydataset.mytable` 位於您的預設專案中。
 
@@ -155,8 +154,8 @@ from REPEATED to NULLABLE.`
      }
    ]
    ```
-3. 將資料欄新增至結構定義的結尾處。如果您嘗試在陣列的其他地方新增資料欄，系統將會傳回下列錯誤訊息：`BigQuery error in update operation: Precondition
-   Failed`。資料表建立完成後，修改結構定義順序不會影響資料欄或巢狀欄位順序。
+3. 將資料欄新增至結構定義的結尾處。如果嘗試在陣列的其他位置新增資料欄，系統會傳回下列錯誤：`BigQuery error in update operation: Precondition
+   Failed`。在資料表建立後修改結構定義順序，不會影響資料欄或巢狀欄位的順序。
 
    您可以使用 JSON 檔案為新資料欄指定說明、`NULLABLE` 或 `REPEATED` 模式以及 `RECORD` 類型。例如，如果使用上一個步驟中的結構定義，新的 JSON 陣列會如下所示。此範例中會新增名為 `column4` 的 `NULLABLE` 資料欄，且 `column4` 包含說明。
 
@@ -187,7 +186,7 @@ from REPEATED to NULLABLE.`
    ```
 
    如要進一步瞭解如何使用 JSON 結構定義檔，請參閱[指定 JSON 結構定義檔](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#specifying_a_json_schema_file)一節。
-4. 更新結構定義檔後，請發出下列指令來更新資料表的結構定義。如果您要更新的資料表位於預設專案以外的專案中，請依照下列格式將該專案的 ID 加到資料集名稱中：`PROJECT_ID:DATASET`。
+4. 更新結構定義檔後，請發出下列指令來更新資料表的結構定義。如果更新的資料表不在預設專案中，請在資料集名稱中加入專案 ID，格式如下：`PROJECT_ID:DATASET`。
 
    ```
    bq update PROJECT_ID:DATASET.TABLE SCHEMA
@@ -196,9 +195,9 @@ from REPEATED to NULLABLE.`
    更改下列內容：
 
    * `PROJECT_ID`：您的專案 ID。
-   * `DATASET`：含有您要更新之資料表的資料集名稱。
+   * `DATASET`：資料集名稱，其中包含要更新的資料表。
    * `TABLE`：要更新的資料表名稱。
-   * `SCHEMA`：寫入本機的結構定義檔。
+   * `SCHEMA`：寫入本機電腦的結構定義定義檔。
 
    例如，輸入以下指令來更新預設專案中 `mydataset.mytable` 的結構定義。您本機機器上的 JSON 結構定義檔路徑為 `/tmp/myschema.json`。
 
@@ -212,9 +211,9 @@ from REPEATED to NULLABLE.`
 
 ### Go
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Go 設定說明操作。詳情請參閱 [BigQuery Go API 參考說明文件](https://godoc.org/cloud.google.com/go/bigquery)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Go 設定操作說明進行操作。詳情請參閱 [BigQuery Go API 參考文件](https://godoc.org/cloud.google.com/go/bigquery)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 import (
@@ -256,9 +255,9 @@ func updateTableAddColumn(projectID, datasetID, tableID string) error {
 
 ### Java
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定說明操作。詳情請參閱 [BigQuery Java API 參考說明文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定操作說明進行操作。詳情請參閱 [BigQuery Java API 參考文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 import com.google.cloud.bigquery.BigQuery;
@@ -316,9 +315,9 @@ public class AddEmptyColumn {
 
 ### Node.js
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定操作說明進行操作。詳情請參閱 [BigQuery Node.js API 參考文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 // Import the Google Cloud client library and create a client
@@ -352,11 +351,11 @@ async function addEmptyColumn() {
 
 ### Python
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定操作說明進行操作。詳情請參閱 [BigQuery Python API 參考文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
-將新的 [SchemaField](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.schema.SchemaField?hl=zh-tw) 物件附加至 [Table.schema](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.table.Table?hl=zh-tw#google_cloud_bigquery_table_Table_schema) 的副本，然後用已更新的結構定義取代 [Table.schema](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.table.Table?hl=zh-tw#google_cloud_bigquery_table_Table_schema) 屬性的值。
+將新的 [SchemaField](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.schema.SchemaField?hl=zh-tw) 物件附加至 [Table.schema](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.table.Table?hl=zh-tw#google_cloud_bigquery_table_Table_schema) 的副本，然後將 [Table.schema](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.table.Table?hl=zh-tw#google_cloud_bigquery_table_Table_schema) 屬性的值替換為更新後的結構定義。
 
 ```
 from google.cloud import bigquery
@@ -383,21 +382,21 @@ else:
     print("The column has not been added.")
 ```
 
-### 將巢狀資料欄新增至 `RECORD` 資料欄
+### 在 `RECORD` 欄中新增巢狀欄
 
-除了新增資料欄至資料表的結構定義外，您也可以將巢狀資料欄新增至 `RECORD` 資料欄。新增巢狀資料欄的程序與新增資料欄的程序類似。
+除了在資料表的結構定義中新增資料欄，您也可以在 `RECORD` 資料欄中新增巢狀資料欄。新增巢狀資料欄的程序與新增資料欄類似。
 
 ### 控制台
 
-Google Cloud 主控台不支援在現有的 `RECORD` 資料欄新增巢狀欄位。
+Google Cloud 控制台不支援在現有`RECORD`資料欄中新增巢狀欄位。
 
 ### SQL
 
-系統不支援使用 SQL DDL 陳述式，在現有的 `RECORD` 資料欄新增巢狀欄位。
+不支援使用 SQL DDL 陳述式，在現有 `RECORD` 資料欄中新增巢狀欄位。
 
 ### bq
 
-發出 `bq update` 指令並提供 JSON 結構定義檔，該檔案會將巢狀欄位新增至現有 `RECORD` 資料欄的結構定義。如果您要更新的資料表位於非預設專案中，請依照下列格式將該專案的專案 ID 加到資料集名稱中：`PROJECT_ID:DATASET`。
+發出 `bq update` 指令並提供 JSON 結構定義檔，該檔案會將巢狀欄位新增至現有 `RECORD` 資料欄的結構定義。如果您要更新的資料表位於預設專案以外的專案，請按照下列格式將專案 ID 新增至資料集名稱：`PROJECT_ID:DATASET`。
 
 ```
 bq update PROJECT_ID:DATASET.TABLE SCHEMA
@@ -406,15 +405,15 @@ bq update PROJECT_ID:DATASET.TABLE SCHEMA
 更改下列內容：
 
 * `PROJECT_ID`：您的專案 ID。
-* `DATASET`：含有您要更新之資料表的資料集名稱。
+* `DATASET`：資料集名稱，其中包含要更新的資料表。
 * `TABLE`：要更新的資料表名稱。
-* `SCHEMA`：您本機上的 JSON 結構定義檔路徑。
+* `SCHEMA`：本機電腦上的 JSON 結構定義檔案路徑。
 
-指定內嵌結構定義時，無法指定資料欄說明、模式和 `RECORD` ([`STRUCT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#struct_type)) 類型。所有資料欄模式都會預設為 `NULLABLE`。因此如要新增巢狀資料欄至 `RECORD`，就必須[提供 JSON 結構定義檔](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#specifying_a_json_schema_file)。
+指定內嵌結構定義時，無法指定資料欄說明、模式和 `RECORD` ([`STRUCT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#struct_type)) 類型。所有資料欄模式預設為 `NULLABLE`。因此如要新增巢狀資料欄至 `RECORD`，就必須[提供 JSON 結構定義檔](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#specifying_a_json_schema_file)。
 
 若要使用 JSON 結構檔案將巢狀欄位新增至 `RECORD`，請進行以下操作：
 
-1. 首先，請發出 `bq show` 指令並加上 `--schema` 旗標，並將現有的資料表結構定義寫入檔案。如果您要更新的資料表位於非預設專案中，請依照下列格式將該專案的專案 ID 加到資料集名稱中：`PROJECT_ID:DATASET.TABLE`。
+1. 首先，請發出 `bq show` 指令並加上 `--schema` 旗標，並將現有的資料表結構定義寫入檔案。如果要更新的資料表位於預設專案以外的專案，請按照下列格式，將專案 ID 新增至資料集名稱：`PROJECT_ID:DATASET.TABLE`。
 
    ```
    bq show \
@@ -426,9 +425,9 @@ bq update PROJECT_ID:DATASET.TABLE SCHEMA
    更改下列內容：
 
    * `PROJECT_ID`：您的專案 ID。
-   * `DATASET`：含有您要更新之資料表的資料集名稱。
+   * `DATASET`：資料集名稱，其中包含要更新的資料表。
    * `TABLE`：要更新的資料表名稱。
-   * `SCHEMA`：寫入本機的結構定義檔。
+   * `SCHEMA`：寫入本機電腦的結構定義定義檔。
 
    舉例來說，如要將 `mydataset.mytable` 的結構定義寫入檔案，請輸入下列指令。`mydataset.mytable` 位於您的預設專案中。
 
@@ -471,7 +470,7 @@ bq update PROJECT_ID:DATASET.TABLE SCHEMA
      }
    ]
    ```
-3. 在 `fields` 陣列的結尾處新增巢狀資料欄。巢狀欄位一律會加在欄位結尾。在此範例中，`nested3` 是新的巢狀資料欄。
+3. 在 `fields` 陣列的結尾處新增巢狀資料欄。巢狀欄位一律會新增至欄位結尾。在這個範例中，`nested3` 是新的巢狀資料欄。
 
    ```
      [
@@ -511,7 +510,7 @@ bq update PROJECT_ID:DATASET.TABLE SCHEMA
    ```
 
    如要進一步瞭解如何使用 JSON 結構定義檔，請參閱[指定 JSON 結構定義檔](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#specifying_a_json_schema_file)一節。
-4. 更新結構定義檔後，請發出下列指令來更新資料表的結構定義。如果您要更新的資料表位於預設專案以外的專案中，請依照下列格式將該專案的專案 ID 加到資料集名稱中：`PROJECT_ID:DATASET`。
+4. 更新結構定義檔後，請發出下列指令來更新資料表的結構定義。如果更新的資料表不在預設專案中，請將專案 ID 新增至資料集名稱，格式如下：`PROJECT_ID:DATASET`。
 
    ```
    bq update PROJECT_ID:DATASET.TABLE SCHEMA
@@ -520,9 +519,9 @@ bq update PROJECT_ID:DATASET.TABLE SCHEMA
    更改下列內容：
 
    * `PROJECT_ID`：您的專案 ID。
-   * `DATASET`：含有您要更新之資料表的資料集名稱。
+   * `DATASET`：資料集名稱，其中包含要更新的資料表。
    * `TABLE`：要更新的資料表名稱。
-   * `SCHEMA`：您本機上的 JSON 結構定義檔路徑。
+   * `SCHEMA`：本機電腦上的 JSON 結構定義檔案路徑。
 
    例如，輸入以下指令來更新預設專案中 `mydataset.mytable` 的結構定義。您本機機器上的 JSON 結構定義檔路徑為 `/tmp/myschema.json`。
 
@@ -534,9 +533,9 @@ bq update PROJECT_ID:DATASET.TABLE SCHEMA
 
 呼叫 [`tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch?hl=zh-tw) 方法，並使用 `schema` 屬性將巢狀資料欄新增至結構定義。由於 `tables.update` 方法會取代整個資料表資源，因此建議使用 `tables.patch` 方法。
 
-### 在覆寫或附加資料時新增資料欄
+### 覆寫或附加資料時新增資料欄
 
-將資料載入現有資料表並選擇覆寫現有資料表時，可以新增資料欄至現有資料表。覆寫現有的資料表時，系統會使用所載入資料的結構定義來覆寫現有資料表的結構定義。如要瞭解如何使用載入工作覆寫資料表，請參閱資料格式的說明文件：
+將資料載入現有資料表並選擇覆寫現有資料表時，可以新增資料欄至現有資料表。覆寫現有的資料表時，系統會使用所載入資料的結構定義來覆寫現有資料表的結構定義。如要瞭解如何使用載入工作覆寫資料表，請參閱資料格式對應的文件：
 
 * [Avro](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-avro?hl=zh-tw#appending_to_or_overwriting_a_table_with_avro_data)
 * [Parquet](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet?hl=zh-tw#appending_to_or_overwriting_a_table_with_parquet_data)
@@ -546,17 +545,17 @@ bq update PROJECT_ID:DATASET.TABLE SCHEMA
 
 #### 在載入附加工作中新增資料欄
 
-您可以在載入工作期間將資料附加至資料表時一併新增資料欄。新結構定義取決於下列其中一項：
+在載入工作中將資料附加至資料表時，您可以將資料欄新增至資料表。新結構定義由下列其中一項決定：
 
 * 自動偵測 (適用於 CSV 和 JSON 檔案)
-* 可在 JSON 結構定義檔中指定 (適用於 CSV 和 JSON 檔)
+* JSON 結構定義檔案中指定的結構定義 (適用於 CSV 和 JSON 檔案)
 * Avro、ORC、Parquet 和 Datastore 匯出檔案的自述式來源資料
 
-若您在 JSON 檔中指定結構，則必須在其中定義新的資料欄。如果缺少新資料欄的定義，則嘗試附加資料時，系統將會傳回錯誤訊息。
+若您在 JSON 檔中指定結構，則必須在其中定義新的資料欄。如果缺少新的資料欄定義，當您嘗試附加資料時，系統會傳回錯誤。
 
 當您在附加作業期間新增資料欄時，系統將會針對現有資料列將新資料欄中的值設為 `NULL`。
 
-如要在載入工作期間，在將資料附加到資料表時一併新增資料欄，請使用下列任一選項：
+如要在載入工作期間將資料附加至資料表時新增資料欄，請使用下列其中一個選項：
 
 ### bq
 
@@ -566,7 +565,7 @@ bq update PROJECT_ID:DATASET.TABLE SCHEMA
 
 將 `--schema_update_option` 旗標設為 `ALLOW_FIELD_ADDITION`，以指出要附加的資料中包含新的資料欄。
 
-如果您要附加的資料表位於非預設專案中的資料集裡，請依照下列格式將該專案的 ID 加到資料集名稱中：`PROJECT_ID:DATASET`。
+如果您要附加的資料表位於預設專案以外的資料集，請按照下列格式，將專案 ID 新增至資料集名稱：`PROJECT_ID:DATASET`。
 
 (選用) 提供 `--location` 旗標，並將值設為您的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
 
@@ -585,17 +584,17 @@ SCHEMA
 
 更改下列內容：
 
-* `LOCATION`：位置名稱。`--location` 是選用旗標。舉例來說，如果您在東京區域使用 BigQuery，就可將該旗標的值設為 `asia-northeast1`。您可以使用 [.bigqueryrc 檔](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#set_default_values_for_command-line_flags)來設定位置的預設值。
+* `LOCATION`：位置名稱。`--location` 是選用旗標。舉例來說，如果您在東京地區使用 BigQuery，就可將該旗標的值設為 `asia-northeast1`。您可以使用 [.bigqueryrc 檔](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#set_default_values_for_command-line_flags)來設定位置的預設值。
 * `FORMAT`：結構定義的格式。`NEWLINE_DELIMITED_JSON`、`CSV`、`AVRO`、`PARQUET`、`ORC` 或 `DATASTORE_BACKUP`。
 * `PROJECT_ID`：您的專案 ID。
-* `DATASET`：含有您要更新之資料表的資料集名稱。
+* `DATASET`：資料集名稱，其中包含要更新的資料表。
 * `TABLE`：要附加的資料表名稱。
-* `PATH_TO_SOURCE`：完整的 [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#gcs-uri)、以逗號分隔的清單 URI，或您本機上的資料檔案路徑。
-* `SCHEMA`：本機 JSON 結構定義檔的路徑。不指定 `--autodetect` 時，只有 CSV 和 JSON 檔案需要結構定義檔。系統會從來源資料推斷 Avro 和 Datastore 的結構定義。
+* `PATH_TO_SOURCE`：完整的 [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#gcs-uri)、以半形逗號分隔的 URI 清單，或本機電腦上的資料檔案路徑。
+* `SCHEMA`：本機 JSON 結構定義檔案的路徑。不指定 `--autodetect` 時，只有 CSV 和 JSON 檔案需要結構定義檔。系統會從來源資料推斷 Avro 和 Datastore 的結構定義。
 
 範例：
 
-輸入下列指令，使用載入工作將本機 Avro 資料檔案 (`/tmp/mydata.avro`) 附加至 `mydataset.mytable`。由於結構定義可從 Avro 資料中自動推斷出來，因此您不需要使用 `--autodetect` 旗標。`mydataset` 位於您的預設專案中。
+輸入下列指令，使用載入工作將本機 Avro 資料檔案 (`/tmp/mydata.avro`) 附加至 `mydataset.mytable`。由於系統會自動從 Avro 資料推論結構定義，因此您不需要使用 `--autodetect` 旗標。`mydataset` 位於您的預設專案中。
 
 ```
 bq load \
@@ -642,9 +641,9 @@ gs://mybucket/mydata.json \
 
 ### Go
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Go 設定說明操作。詳情請參閱 [BigQuery Go API 參考說明文件](https://godoc.org/cloud.google.com/go/bigquery)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Go 設定操作說明進行操作。詳情請參閱 [BigQuery Go API 參考文件](https://godoc.org/cloud.google.com/go/bigquery)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 import (
@@ -707,9 +706,9 @@ func createTableAndWidenLoad(projectID, datasetID, tableID, filename string) err
 
 ### Java
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定說明操作。詳情請參閱 [BigQuery Java API 參考說明文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定操作說明進行操作。詳情請參閱 [BigQuery Java API 參考文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 import com.google.cloud.bigquery.BigQuery;
@@ -797,9 +796,9 @@ public class AddColumnLoadAppend {
 
 ### Node.js
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定操作說明進行操作。詳情請參閱 [BigQuery Node.js API 參考文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 // Import the Google Cloud client libraries
@@ -858,9 +857,9 @@ async function addColumnLoadAppend() {
 
 ### Python
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定操作說明進行操作。詳情請參閱 [BigQuery Python API 參考文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 # from google.cloud import bigquery
@@ -914,11 +913,11 @@ print("Table {} now contains {} columns.".format(table_id, len(table.schema)))
 
 #### 在查詢附加工作中新增資料欄
 
-將查詢結果附加至資料表時，可以新增資料欄至資料表。
+將查詢結果附加至資料表時，可以新增資料欄。
 
 在查詢工作中使用附加作業新增資料欄時，系統會使用查詢結果的結構定義來更新目的地資料表的結構定義。請注意，您無法在一個位置查詢資料表後，將結果寫入不同位置的資料表。
 
-如要在查詢工作期間，於將資料附加至資料表時一併新增資料欄，請選取下列其中一個選項：
+如要在查詢工作期間將資料附加至資料表時新增資料欄，請選取下列其中一個選項：
 
 ### bq
 
@@ -928,9 +927,9 @@ print("Table {} now contains {} columns.".format(table_id, len(table.schema)))
 
 將 `--schema_update_option` 旗標設定為 `ALLOW_FIELD_ADDITION`，以指出要附加的查詢結果中包含新的資料欄。
 
-指定 `use_legacy_sql=false` 旗標，以在查詢中使用 GoogleSQL 語法。
+指定 `use_legacy_sql=false` 旗標，以便在查詢中使用 GoogleSQL 語法。
 
-如果您要附加的資料表位於非預設專案中的資料集裡，請依照下列格式將該專案的專案 ID 加到資料集名稱中：`PROJECT_ID:DATASET`。請注意，您要查詢的資料表和目的地資料表必須位於同一位置。
+如果您要附加的資料表位於預設專案以外的資料集，請按照下列格式將專案 ID 新增至資料集名稱：`PROJECT_ID:DATASET`。請注意，您查詢的資料表和目的地資料表必須位於相同位置。
 
 (選用) 提供 `--location` 旗標，並將值設為您的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
 
@@ -945,11 +944,11 @@ bq --location=LOCATION query \
 
 更改下列內容：
 
-* `LOCATION`：位置名稱。`--location` 是選用旗標。舉例來說，如果您在東京區域使用 BigQuery，就可將該旗標的值設為 `asia-northeast1`。您可以使用 [.bigqueryrc 檔](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#set_default_values_for_command-line_flags)來設定位置的預設值。請注意，您無法將查詢結果附加至不同位置的資料表。
+* `LOCATION`：位置名稱。`--location` 是選用旗標。舉例來說，如果您在東京地區使用 BigQuery，就可將該旗標的值設為 `asia-northeast1`。您可以使用 [.bigqueryrc 檔](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#set_default_values_for_command-line_flags)來設定位置的預設值。請注意，您無法將查詢結果附加至不同位置的資料表。
 * `PROJECT_ID`：您的專案 ID。
-* `dataset`：含有您要附加之資料表的資料集名稱。
+* `dataset`：包含要附加資料表的資料集名稱。
 * `TABLE`：要附加的資料表名稱。
-* `QUERY`：採用 GoogleSQL 語法的查詢。
+* `QUERY`：GoogleSQL 語法的查詢。
 
 範例：
 
@@ -992,9 +991,9 @@ bq query \
 
 ### Go
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Go 設定說明操作。詳情請參閱 [BigQuery Go API 參考說明文件](https://godoc.org/cloud.google.com/go/bigquery)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Go 設定操作說明進行操作。詳情請參閱 [BigQuery Go API 參考文件](https://godoc.org/cloud.google.com/go/bigquery)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 import (
@@ -1030,5 +1029,5 @@ func createTableAndWidenQuery(projectID, datasetID, tableID string) error {
 		return err
 	}
 	// Our table has two columns.  We'll introduce a new favorite_color column via
-	
+	// a s
 ```

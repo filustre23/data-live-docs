@@ -180,5 +180,5 @@ public class BigQueryQuery
             parameters: null,
             options: new QueryOptions { UseQueryCache = false });
         // Wait for the job to complete.
-        job = job.
+        job = job.PollUntilCompleted</
 ```

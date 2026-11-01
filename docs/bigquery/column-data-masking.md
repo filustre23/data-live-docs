@@ -23,12 +23,12 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 1. 建立分類，並加入至少一個政策標記。
 2. 選用：針對您建立的一或多個政策標記，將 Data Catalog 精細讀取者角色授予一或多個主體。
 3. 為政策標記建立最多三項資料政策，將遮蓋規則和主體 (代表使用者或群組) 對應至該標記。
-4. 在資料欄上設定政策標記。這會將與政策標記相關聯的資料政策對應至所選資料欄。
-5. 將 BigQuery Masked Reader 角色指派給應有遮蓋資料存取權的使用者。最佳做法是在資料政策層級指派 BigQuery 遮蓋讀取者角色。在專案層級或更高層級指派角色，會授予使用者專案下所有資料政策的權限，這可能會導致權限過多而引發問題。
+4. 在資料欄上設定政策標記。這樣一來，與政策標記相關聯的資料政策就會對應至所選資料欄。
+5. 將應有遮蓋資料存取權的使用者指派給 BigQuery 遮蓋讀取者角色。最佳做法是在資料政策層級指派 BigQuery 遮蓋資料讀取者角色。在專案層級或更高層級指派角色，會授予使用者專案下所有資料政策的使用者授權，這可能會導致權限過多而引發問題。
 
 您可以使用 Google Cloud 控制台或 BigQuery Data Policy API 處理資料政策。
 
-完成這些步驟後，使用者對資料欄執行查詢時，會根據所屬群組和獲派角色，取得未遮蓋資料、遮蓋資料，或收到存取遭拒錯誤。詳情請參閱「[遮蓋讀取者和精細讀取者角色的互動方式](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro?hl=zh-tw#role-interaction)」。
+完成這些步驟後，使用者對資料欄執行查詢時，會根據所屬群組和獲派角色，取得未遮蓋資料、遮蓋資料，或收到存取遭拒錯誤。詳情請參閱「[遮罩讀取者和精細讀取者角色的互動方式](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro?hl=zh-tw#role-interaction)」。
 
 或者，您也可以直接對資料欄套用資料政策。詳情請參閱「[直接在資料欄上使用資料政策遮蓋資料](#data-policies-on-column)」。
 
@@ -107,7 +107,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
    **啟用 API 所需的角色**
 
-   您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「Service Usage 管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過擁有者角色 (`roles/owner`) 取得這項權限。否則，您可以透過 Service Usage 管理員角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
    [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery.googleapis.com&%3Bredirect=https%3A%2F%2Fconsole.cloud.google.com&hl=zh-tw)
 2. 如果您建立的資料政策參照[自訂遮蓋常式](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro?hl=zh-tw#custom_mask)，請建立相關聯的遮蓋 UDF，以便在後續步驟中使用。
@@ -132,7 +132,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
    4. 如有需要，請變更「位置」下方列出的位置。
    5. 在「政策標記」下方，輸入政策標記名稱和說明。
    6. 如要為政策標記新增子政策標記，請按一下「Add subtag」(新增子標記)。
-   7. 如要新增與其他政策標記同層級的新政策標記，請按一下「+ Add policy tag」(+ 新增政策標記)。
+   7. 如要新增與其他政策標記同層級的政策標記，請按一下「+ Add policy tag」(+ 新增政策標記)。
    8. 視分類需要，繼續新增政策標記和子政策標記。
    9. 為階層建立政策標記後，按一下「Create」(建立)。
 
@@ -398,7 +398,7 @@ public class CreateDataPolicy {
 
 設定政策標記的使用者或服務帳戶必須具備 `datacatalog.taxonomies.get` 和 `bigquery.tables.setCategory` 權限。Data Catalog 政策標記管理員和專案檢視者角色具備 `datacatalog.taxonomies.get`。BigQuery 管理員 (`roles/bigquery.admin`) 和 BigQuery 資料擁有者 (`roles/bigquery.dataOwner`) 角色包含 `bigquery.tables.setCategory`。
 
-如要在Google Cloud 控制台中查看組織內所有專案的分類和政策標記，使用者必須具備 `resourcemanager.organizations.get` 權限，該權限包含在組織檢視者角色中。使用 API 或 `bq` 指令列工具時，則「不」需要這項權限。
+如要在Google Cloud 控制台中查看組織內所有專案的分類和政策標記，使用者必須具備 `resourcemanager.organizations.get` 權限，該權限包含在組織檢視者角色中。使用 API 或 `bq` 指令列工具時，**不**需要這項權限。
 
 **注意：** 每個資料欄只能指派一個政策標記。
 
@@ -409,12 +409,12 @@ public class CreateDataPolicy {
 1. 在 Google Cloud 控制台開啟「BigQuery」頁面。
 
    [前往「BigQuery」頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在 BigQuery Explorer 中，找出並選取要更新的資料表。系統會開啟該資料表的結構定義。
-3. 點選「編輯結構定義」。
+2. 在 BigQuery 的「Explorer」窗格中，找出並選取要更新的資料表。
+3. 在詳細資料窗格中，依序點選**「編輯」>「編輯結構定義」**。
 4. 在「Current schema」(目前結構定義) 畫面中，選取目標資料欄，然後按一下「Add policy tag」(新增政策標記)。
 5. 在「Add a policy tag」(新增政策標記) 畫面中，找出並選取要套用至資料欄的政策標記。
 6. 按一下「選取」。畫面應會出現如下所示的內容：
-7. 按一下 [儲存]。
+7. 按一下「儲存」。
 
 ### bq
 
@@ -430,7 +430,7 @@ public class CreateDataPolicy {
    * project-id 是您的專案 ID。
    * dataset 是資料集的名稱，其中包含您要更新的資料表。
    * table 是您要更新之資料表的名稱。
-2. 修改 schema.json，在資料欄上設定政策標記。針對 `policyTags` 的 `names` 欄位值，請使用[政策標記資源名稱](#retrieve_policy_tag_name)。
+2. 修改 schema.json，為資料欄設定政策標記。針對 `policyTags` 的 `names` 欄位值，請使用[政策標記資源名稱](#retrieve_policy_tag_name)。
 
    ```
    [
@@ -461,7 +461,7 @@ public class CreateDataPolicy {
 
 ### 強制執行存取控管
 
-為政策標記建立資料政策時，系統會自動強制執行存取控管。如果使用者具備「遮蓋讀取者」角色，則套用該政策標記的所有資料欄都會傳回遮蓋資料，以回應使用者的查詢。
+為政策標記建立資料政策時，系統會自動強制執行存取控管。如果使用者具備「遮蓋讀取者」角色，則套用該政策標記的所有資料欄都會在查詢結果中傳回遮蓋資料。
 
 如要停止強制執行存取控管，您必須先刪除與分類中政策標記相關聯的所有資料政策。詳情請參閱「[強制執行存取控管](https://docs.cloud.google.com/bigquery/docs/column-level-security?hl=zh-tw#enforce_access_control)」。
 
@@ -654,7 +654,7 @@ public class GetDataPolicy {
   }
 ```
 
-### 檢查資料政策的身分與存取權管理權限
+### 檢查資料政策的 IAM 權限
 
 如要取得資料政策的 IAM 政策，請按照下列步驟操作：
 

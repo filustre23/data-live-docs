@@ -26,7 +26,7 @@ BigQuery 標籤可讓您將鍵/值中繼資料附加至資源。這類中繼資�
 
 ## 為資料集新增標籤
 
-使用 bq 指令列工具的 `bq mk` 指令，或呼叫 [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert?hl=zh-tw) API 方法，即可在建立 BigQuery 資料集時新增標籤。使用 Google Cloud 控制台建立資料集時，無法為資料集新增標籤。不過，您可以在建立資料集後新增標籤。如要進一步瞭解如何建立資料集，請參閱「[建立資料集](https://docs.cloud.google.com/bigquery/docs/datasets?hl=zh-tw)」。
+使用 bq 指令列工具的 `bq mk` 指令或呼叫 [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert?hl=zh-tw) API 方法，即可在建立 BigQuery 資料集時新增標籤。使用 Google Cloud 控制台建立資料集時，無法為資料集新增標籤。不過，您可以在建立資料集後新增標籤。如要進一步瞭解如何建立資料集，請參閱「[建立資料集](https://docs.cloud.google.com/bigquery/docs/datasets?hl=zh-tw)」。
 
 將標籤新增至資料集時，標籤不會傳播至資料集內的資源。資料表或檢視表不會沿用資料集標籤。此外，當您將標籤新增至資料集時，該標籤會包含在儲存空間帳單資料中，但不會包含在工作相關帳單資料中。
 
@@ -48,18 +48,14 @@ BigQuery 標籤可讓您將鍵/值中繼資料附加至資源。這類中繼資�
 
 ### 控制台
 
-1. 在 Google Cloud 控制台中選取資料集。
-2. 在資料集詳細資料頁面的「Labels」(標籤) 部分，按一下 edit「Edit」(編輯)。
-3. 在「Edit labels」(編輯標籤) 對話方塊中：
-
-   * 按一下 [Add label] (新增標籤)。
-   * 在適當欄位中輸入鍵和值。如要套用其他標籤，請按一下 [Add Label] (新增標籤)。每個鍵在每個資料集中只能使用一次，但您可以在相同專案的不同資料集裡使用同一個鍵。
-   * 如要更新標籤，請修改現有的鍵或值。
-   * 點按「更新」以儲存變更。
+1. 在 Google Cloud 控制台選取資料集。
+2. 按一下「Details」(詳細資料) 分頁標籤，然後點選 mode\_edit「Edit details」(編輯詳細資料)。
+3. 在「Labels」(標籤) 區段中，按一下「Add labels」(新增標籤)，然後在「Key」(鍵) 和「Value」(值) 欄位中輸入鍵和值。如要套用其他標籤，請按一下「Add labels」(新增標籤)。每個鍵在每個資料集中只能使用一次，但您可以在相同專案的不同資料集裡使用同一個鍵。
+4. 按一下「儲存」。
 
 ### SQL
 
-使用 [`ALTER SCHEMA SET OPTIONS` DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_schema_set_options_statement)，為現有資料集設定標籤。這項操作會覆寫資料集上的任何現有標籤。以下範例會為 `mydataset` 資料集設定標籤：
+使用 [`ALTER SCHEMA SET OPTIONS` DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_schema_set_options_statement)，為現有資料集設定標籤。這項操作會覆寫資料集上的任何現有標籤。以下範例會在 `mydataset` 資料集上設定標籤：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -79,7 +75,7 @@ BigQuery 標籤可讓您將鍵/值中繼資料附加至資源。這類中繼資�
 
 如要為現有資料集新增標籤，請使用 `bq update` 指令並加上 `set_label` 旗標。如要新增多個標籤，請重複使用這個旗標。
 
-如果資料集位於預設專案以外的專案，請使用下列格式指定專案 ID：`PROJECT_ID:DATASET`。
+如果資料集位於預設專案以外的專案，請以下列格式指定專案 ID：`PROJECT_ID:DATASET`。
 
 ```
 bq update --set_label KEY:VALUE PROJECT_ID:DATASET
@@ -93,13 +89,13 @@ bq update --set_label KEY:VALUE PROJECT_ID:DATASET
 
 範例：
 
-如要新增標籤來追蹤部門，請使用 `bq update` 指令，並指定 `department` 做為標籤鍵。舉例來說，如要將 `department:shipping` 標籤新增至預設專案中的 `mydataset`，請使用：
+如要新增標籤來追蹤部門，請使用 `bq update` 指令，並指定 `department` 做為標籤索引鍵。舉例來說，如要將 `department:shipping` 標籤新增至預設專案中的 `mydataset`，請使用：
 
 ```
     bq update --set_label department:shipping mydataset
 ```
 
-如要為資料集新增多個標籤，請重複 `set_label` 旗標，並為每個標籤指定專屬鍵。舉例來說，如要將 `department:shipping` 標籤和 `cost_center:logistics` 標籤新增至預設專案中的 `mydataset`，請使用：
+如要為資料集新增多個標籤，請重複使用 `set_label` 旗標，並為每個標籤指定專屬索引鍵。舉例來說，如要將 `department:shipping` 標籤和 `cost_center:logistics` 標籤新增至預設專案中的 `mydataset`，請使用：
 
 ```
     bq update \
@@ -286,18 +282,13 @@ print("Labels added to {}".format(dataset_id))
 ### 控制台
 
 1. 在 Google Cloud 控制台中，選取資料表或檢視表。
-2. 點按「Details」(詳細資料) 分頁標籤。
-3. 在「Labels」(標籤) 區段中，按一下 edit「Edit」(編輯)。
-4. 在「Edit labels」(編輯標籤) 對話方塊中：
-
-   * 按一下 [Add label] (新增標籤)。
-   * 在適當欄位中輸入鍵和值。如要套用其他標籤，請按一下 [Add Label] (新增標籤)。每個鍵在每個資料集中只能使用一次，但您可以在相同專案的不同資料集裡使用同一個鍵。
-   * 修改現有的鍵/值以更新標籤。
-   * 按一下 [Update] (更新)，儲存您所做的變更。
+2. 在詳細資料窗格中，依序點選**「編輯」>「編輯詳細資料」**。
+3. 在「Labels」(標籤) 區段中，按一下「Add labels」(新增標籤)，然後在「Key」(鍵) 和「Value」(值) 欄位中輸入鍵和值。如要套用其他標籤，請按一下「Add labels」(新增標籤)。每個鍵在每個資料表或檢視表中只能使用一次，但您可以在不同資料表或檢視表中使用同一個鍵。
+4. 按一下「儲存」。
 
 ### SQL
 
-使用 [`ALTER TABLE SET OPTIONS` DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_table_set_options_statement)設定現有資料表的標籤，或使用 [`ALTER VIEW SET OPTIONS` DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_view_set_options_statement)設定現有檢視表的標籤。這項操作會覆寫資料表或檢視表上的任何現有標籤。以下範例會在 `mytable` 資料表上設定兩個標籤：
+使用 [`ALTER TABLE SET OPTIONS` DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_table_set_options_statement)設定現有資料表的標籤，或使用 [`ALTER VIEW SET OPTIONS` DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_view_set_options_statement)設定現有檢視表的標籤。這項操作會覆寫資料表或檢視表中的任何現有標籤。以下範例會在 `mytable` 資料表上設定兩個標籤：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -329,13 +320,12 @@ PROJECT_ID:DATASET.TABLE_OR_VIEW
 
 * `KEY:VALUE`：要新增的標籤鍵/值組合。鍵不得重複。鍵和值只能使用小寫字母、數字字元、底線和連字號。所有字元都必須使用 UTF-8 編碼，且可使用國際字元。
 * `PROJECT_ID`：您的專案 ID。
-* `DATASET`：包含要加上標籤的資料表或
-  檢視表的資料集。
+* `DATASET`：包含要加上標籤的資料表或檢視表的資料集。
 * `TABLE_OR_VIEW`：要加上標籤的資料表或檢視表名稱。
 
 範例：
 
-如要新增追蹤部門的資料表標籤，請使用 `bq update` 指令，並將 `department` 指定為標籤鍵。舉例來說，如要將 `department:shipping` 標籤新增至預設專案中的 `mytable`，請使用：
+如要新增追蹤部門的資料表標籤，請使用 `bq update` 指令，並指定 `department` 做為標籤鍵。舉例來說，如要將 `department:shipping` 標籤新增至預設專案中的 `mytable`，請使用：
 
 ```
     bq update --set_label department:shipping mydataset.mytable
@@ -538,7 +528,7 @@ print(f"Added {table.labels} to {table_id}.")
 
 ### bq
 
-如要為查詢工作新增標籤，請使用 `bq query` 指令並搭配 `--label` 旗標。如要新增多個標籤，請重複使用這個旗標。這個旗標表示查詢使用 GoogleSQL 語法。
+如要為查詢工作新增標籤，請使用 `bq query` 指令並加上 `--label` 旗標。如要新增多個標籤，請重複使用這個旗標。這個旗標表示查詢使用 GoogleSQL 語法。
 
 ```
 bq query --label KEY:VALUE  'QUERY'
@@ -607,7 +597,7 @@ job_id = job.job_id
 print(f"Added {job.labels} to {job_id}.")
 ```
 
-### 為工作階段中的工作加上標籤
+### 將工作階段中的工作與標籤建立關聯
 
 如果您在[工作階段](https://docs.cloud.google.com/bigquery/docs/sessions-intro?hl=zh-tw)中執行查詢，可以使用 BigQuery 多陳述式查詢，為該工作階段中所有日後的查詢工作指派標籤。
 
@@ -636,9 +626,9 @@ print(f"Added {job.labels} to {job_id}.")
 
 ## 為預留項目新增標籤
 
-為預留項目新增標籤後，該標籤就會納入帳單資料。您可以使用標籤，篩選 Cloud Billing 資料中的 Analysis Slots Attribution SKU。
+為預留項目新增標籤後，該標籤就會納入帳單資料。您可以使用標籤，篩選 Cloud Billing 資料中的 Analysis Slots 歸因 SKU。
 
-「數據分析運算單元歸因」SKU 只會記錄運算單元用量。不會記錄 BigQuery Reservation API SKU 的費用。BigQuery Reservation API SKU 不支援預留項目標籤做為篩選條件。
+Analysis Slots Attribution SKU 只會記錄運算單元用量。不會記錄 BigQuery Reservation API SKU 的費用。預留項目標籤不支援做為 BigQuery Reservation API SKU 的篩選器。
 
 如要進一步瞭解如何在帳單資料中使用標籤，請參閱「[使用**篩選器**精細調整資料](https://docs.cloud.google.com/billing/docs/how-to/reports?hl=zh-tw#filter-by-labels)」。
 
@@ -667,11 +657,11 @@ print(f"Added {job.labels} to {job_id}.")
 7. 如要展開「Advanced settings」(進階設定) 部分，請按一下expand\_more「expander arrow」(展開箭頭)。
 8. 按一下「新增標籤」。
 9. 在適當欄位中輸入鍵/值組合。如要套用其他標籤，請按一下「Add label」(新增標籤)。
-10. 按一下 [儲存]。
+10. 按一下「儲存」。
 
 ### SQL
 
-如要為預留項目新增標籤，請使用 [`ALTER RESERVATION SET OPTIONS` DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_reservation_set_options_statement)。這項操作會覆寫預留項目中的所有現有標籤。以下範例會為 `myreservation` 預留項目設定標籤：
+如要為預留項目新增標籤，請使用 [`ALTER RESERVATION SET OPTIONS` DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_reservation_set_options_statement)。這項操作會覆寫預留項目現有的標籤。以下範例會為 `myreservation` 預留項目設定標籤：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -711,14 +701,15 @@ bq update --set_label KEY:VALUE --location LOCATION --reservation RESERVATION_NA
 
 ### 控制台
 
-1. 在 Google Cloud 控制台中，選取適當的資源 (資料集、資料表或檢視表)。
-2. 如果是資料集，系統會自動開啟資料集詳細資料頁面。如果是資料表和資料檢視，請按一下 [Details] (詳細資料) 以開啟詳細資料頁面。
-3. 在詳細資料頁面的「Labels」(標籤) 部分，按一下 edit「Edit」(編輯)。
-4. 在「Edit labels」(編輯標籤) 對話方塊中：
+1. 在 Google Cloud 控制台中，選取資料集、資料表或檢視表。
+2. 開啟「編輯詳細資料」窗格：
 
-   * 按一下「新增標籤」。
-   * 在適當欄位中輸入新鍵，並將值欄位留空。如要套用其他標籤，請按一下「Add label」(新增標籤)，然後重複上述步驟。
-   * 點按「更新」以儲存變更。
+   * 如果是資料集，請按一下「Details」(詳細資料) 分頁標籤，然後按一下 mode\_edit「Edit details」(編輯詳細資料)。
+   * 如為資料表或檢視表，請在詳細資料窗格中，依序點選
+     **「Edit」>「Edit details」**。
+3. 在「Labels」(標籤) 區段中，按一下「Add labels」(新增標籤)。
+4. 在「Key」(鍵) 欄位中輸入鍵，並將「Value」(值) 欄位留空。如要套用其他標籤，請按一下「Add labels」(新增標籤)，然後重複上述步驟。
+5. 按一下「儲存」。
 
 ### SQL
 
@@ -781,11 +772,11 @@ bq update --set_label test_data: mydataset
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-29 (世界標準時間)。
+上次更新時間：2026-11-01 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-01 (世界標準時間)。"],[],[]]

@@ -20,7 +20,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ## 事前準備
 
-授予身分與存取權管理 (IAM) 角色，讓使用者擁有執行本文件各項工作所需的權限。如要執行工作，必須具備的權限會列在工作「必要權限」部分。
+授予 Identity and Access Management (IAM) 角色，讓使用者具備執行本文件各項工作所需的權限。執行工作所需的權限 (如有) 會列在工作的「必要權限」部分。
 
 ## 更新資料集標籤
 
@@ -34,34 +34,31 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ### 所需權限
 
-如要更新資料集標籤，必須具備 `bigquery.datasets.update` IAM 權限。
+如要更新資料集標籤，您必須具備 `bigquery.datasets.update` IAM 權限。
 
-下列預先定義的 IAM 角色都包含更新資料集標籤所需的權限：
+下列各項預先定義的 IAM 角色，都包含更新資料集標籤所需的權限：
 
 * `roles/bigquery.dataOwner`
 * `roles/bigquery.admin`
 
-此外，如果您具備 `bigquery.datasets.create` 權限，可以更新所建立資料集的標籤。
+此外，如果您具備 `bigquery.datasets.create` 權限，則可更新自己建立的資料集標籤。
 
 如要進一步瞭解 BigQuery 中的 IAM 角色和權限，請參閱[預先定義的角色與權限](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)一文。
 
 ### 更新資料集標籤
 
-如要在資料集中更新標籤，請選取下列其中一個選項：
+如要更新資料集的標籤，請選取下列其中一個選項：
 
 ### 控制台
 
-1. 在 Google Cloud 控制台中選取資料集。
-2. 在「Dataset Details」(資料集詳細資料) 頁面中，按一下「Labels」(標籤) 右側的鉛筆圖示。
-3. 在「Edit labels」(編輯標籤) 對話方塊中：
-
-   * 如要套用其他標籤，請按一下 [Add Label] (新增標籤)。每個資料集中的每個鍵都只能使用一次，但您可以在同一項專案的不同資料集中使用同一個鍵。
-   * 修改現有的鍵或值以更新標籤。
-   * 按一下 [Update] (更新)，儲存您所做的變更。
+1. 在 Google Cloud 控制台選取資料集。
+2. 按一下「Details」(詳細資料) 分頁標籤，然後點選 mode\_edit「Edit details」(編輯詳細資料)。
+3. 在「Labels」(標籤) 區段中，修改現有的「Key」(鍵) 或「Value」(值) 欄位，即可更新標籤。如要套用其他標籤，請按一下「Add labels」(新增標籤)。每個鍵在每個資料集中只能使用一次，但您可以在相同專案的不同資料集裡使用同一個鍵。
+4. 按一下「儲存」。
 
 ### SQL
 
-使用 [`ALTER SCHEMA SET OPTIONS` DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_schema_set_options_statement)，在現有資料集上設定標籤。設定標籤會覆寫資料集上的所有現有標籤。以下範例是在資料集 `mydataset` 上設定單一標籤：
+使用 [`ALTER SCHEMA SET OPTIONS` DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_schema_set_options_statement)，為現有資料集設定標籤。設定標籤會覆寫資料集現有的標籤。以下範例會在資料集 `mydataset` 上設定單一標籤：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -72,7 +69,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
    ALTER SCHEMA mydataset
    SET OPTIONS (labels = [('sensitivity', 'high')]);
    ```
-3. 按一下「執行」play\_circle。
+3. 按一下「play\_circle 執行」。
 
 如要進一步瞭解如何執行查詢，請參閱「[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)」。
 
@@ -90,7 +87,7 @@ project_id:dataset
 
 其中：
 
-* key:value 是您要加入或更新的標籤的鍵/值組合，如果您指定與現有標籤相同的鍵，系統就會更新現有標籤的值。鍵不得重複。
+* key:value 對應至要新增或更新的標籤鍵/值組合。如果您指定與現有標籤相同的鍵，系統就會更新現有標籤的值。鍵不得重複。
 * project\_id 是您的專案 ID。
 * dataset 是您要更新的資料集。
 
@@ -118,9 +115,9 @@ Dataset 'myotherproject:mydataset' successfully updated.
 
 ### Go
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Go 設定說明操作。詳情請參閱 [BigQuery Go API 參考說明文件](https://godoc.org/cloud.google.com/go/bigquery)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Go 設定操作說明進行操作。詳情請參閱 [BigQuery Go API 參考文件](https://godoc.org/cloud.google.com/go/bigquery)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 import (
@@ -160,9 +157,9 @@ func addDatasetLabel(projectID, datasetID string) error {
 
 這個範例使用 [Java 專用 Google HTTP 用戶端程式庫](https://developers.google.com/api-client-library/java/google-http-java-client/?hl=zh-tw)，將要求傳送至 BigQuery API。
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定說明操作。詳情請參閱 [BigQuery Java API 參考說明文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定操作說明進行操作。詳情請參閱 [BigQuery Java API 參考文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 import com.google.cloud.bigquery.BigQuery;
@@ -204,9 +201,9 @@ public class LabelDataset {
 
 ### Node.js
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定操作說明進行操作。詳情請參閱 [BigQuery Node.js API 參考文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 // Import the Google Cloud client library
@@ -236,9 +233,9 @@ async function labelDataset() {
 
 ### Python
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定操作說明進行操作。詳情請參閱 [BigQuery Python API 參考文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 from google.cloud import bigquery
@@ -268,17 +265,17 @@ print("Labels added to {}".format(dataset_id))
 
 ### 所需權限
 
-如要更新資料表或檢視表標籤，您需要 `bigquery.tables.update` IAM 權限。
+如要更新資料表或檢視表標籤，您必須具備 `bigquery.tables.update` IAM 權限。
 
-下列預先定義的 IAM 角色都包含更新資料表或檢視標籤所需的權限：
+下列各項預先定義的 IAM 角色，都包含更新資料表或檢視表標籤所需的權限：
 
 * `roles/bigquery.dataEditor`
 * `roles/bigquery.dataOwner`
 * `roles/bigquery.admin`
 
-此外，如果您具備 `bigquery.datasets.create` 權限，可以更新所建立資料集中的資料表和檢視表標籤。
+此外，如果您具備 `bigquery.datasets.create` 權限，則可更新所建立資料集中資料表和檢視表的標籤。
 
-如要進一步瞭解 BigQuery 中的 IAM 角色和權限，請參閱[預先定義的角色與權限](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)一文。
+如要進一步瞭解 BigQuery 的 IAM 角色和權限，請參閱「[預先定義的角色和權限](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)」。
 
 ### 更新資料表或檢視表標籤
 
@@ -286,17 +283,14 @@ print("Labels added to {}".format(dataset_id))
 
 ### 控制台
 
-1. 在 Google Cloud 控制台中選取資料表或檢視表。
-2. 按一下 [Details] (詳細資料) 分頁標籤，然後按一下「Labels」(標籤) 右側的鉛筆圖示。
-3. 在「Edit labels」(編輯標籤) 對話方塊中：
-
-   * 如要套用其他標籤，請按一下 [Add Label] (新增標籤)。每個鍵只能在每個資料表或檢視表使用一次，但在不同資料集的資料表或檢視表中可使用同一個鍵。
-   * 修改現有的鍵或值以更新標籤。
-   * 按一下 [Update] (更新)，儲存您所做的變更。
+1. 在 Google Cloud 控制台中，選取資料表或檢視表。
+2. 在詳細資料窗格中，依序點選**「編輯」>「編輯詳細資料」**。
+3. 在「Labels」(標籤) 區段中，修改現有的「Key」(鍵) 或「Value」(值) 欄位，即可更新標籤。如要套用其他標籤，請按一下「Add labels」(新增標籤)。每個鍵在每個資料表或檢視表中只能使用一次，但您可以在不同資料集的資料表或檢視表中使用同一個鍵。
+4. 按一下「儲存」。
 
 ### SQL
 
-使用 [`ALTER TABLE SET OPTIONS` DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_table_set_options_statement)在現有資料表上設定標籤，或使用 [`ALTER VIEW SET OPTIONS` DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_view_set_options_statement)在現有檢視區塊上設定標籤。設定標籤會覆寫資料表或檢視表上的所有現有標籤。以下範例會在 `mytable` 資料表上設定兩個標籤：
+使用 [`ALTER TABLE SET OPTIONS` DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_table_set_options_statement)設定現有資料表的標籤，或使用 [`ALTER VIEW SET OPTIONS` DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_view_set_options_statement)設定現有檢視表的標籤。設定標籤會覆寫資料表或檢視表中的任何現有標籤。以下範例會在資料表 `mytable` 上設定兩個標籤：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -308,7 +302,7 @@ print("Labels added to {}".format(dataset_id))
    SET OPTIONS (
      labels = [('department', 'shipping'), ('cost_center', 'logistics')]);
    ```
-3. 按一下「執行」play\_circle。
+3. 按一下「play\_circle 執行」。
 
 如要進一步瞭解如何執行查詢，請參閱「[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)」。
 
@@ -327,9 +321,9 @@ project_id:dataset.table_or_view
 
 其中：
 
-* key:value 是您要加入或更新的標籤的鍵/值組合，如果您指定與現有標籤相同的鍵，系統就會更新現有標籤的值。鍵不得重複。
+* key:value 對應至要新增或更新的標籤鍵/值組合。如果您指定與現有標籤相同的鍵，系統就會更新現有標籤的值。鍵不得重複。
 * project\_id 是您的專案 ID。
-* dataset 是包含您要更新的資料表/檢視表所屬的資料集。
+* dataset 是包含要更新的資料表或檢視表的資料集。
 * table\_or\_view 是您要更新之資料表或視圖的名稱。
 
 範例：
@@ -350,7 +344,7 @@ Table 'myotherproject:mydataset.mytable' successfully updated.
 
 ### API
 
-如要為現有資料表或檢視表加入標籤或更新標籤，請呼叫 [`tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch?hl=zh-tw) 方法，然後加入或更新[資料表資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables?hl=zh-tw)的 `labels` 屬性。
+如要為現有資料表或檢視表新增或更新標籤，請呼叫 [`tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch?hl=zh-tw) 方法，並新增或更新[資料表資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables?hl=zh-tw)的 `labels` 屬性。
 
 由於系統會將檢視表當做資料表資源處理，因此可以使用 `tables.patch` 方法來修改檢視表和資料表。
 
@@ -358,9 +352,9 @@ Table 'myotherproject:mydataset.mytable' successfully updated.
 
 ### Go
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Go 設定說明操作。詳情請參閱 [BigQuery Go API 參考說明文件](https://godoc.org/cloud.google.com/go/bigquery)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Go 設定操作說明進行操作。詳情請參閱 [BigQuery Go API 參考文件](https://godoc.org/cloud.google.com/go/bigquery)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 import (
@@ -401,9 +395,9 @@ func addTableLabel(projectID, datasetID, tableID string) error {
 
 這個範例使用 [Java 專用 Google HTTP 用戶端程式庫](https://developers.google.com/api-client-library/java/google-http-java-client/?hl=zh-tw)，將要求傳送至 BigQuery API。
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定說明操作。詳情請參閱 [BigQuery Java API 參考說明文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定操作說明進行操作。詳情請參閱 [BigQuery Java API 參考文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 import com.google.cloud.bigquery.BigQuery;
@@ -447,9 +441,9 @@ public class LabelTable {
 
 ### Node.js
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定操作說明進行操作。詳情請參閱 [BigQuery Node.js API 參考文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 // Import the Google Cloud client library
@@ -482,9 +476,9 @@ async function labelTable() {
 
 ### Python
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定操作說明進行操作。詳情請參閱 [BigQuery Python API 參考文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 # from google.cloud import bigquery
@@ -505,41 +499,41 @@ assert table.labels == labels
 
 ## 更新工作標籤
 
-目前尚不支援更新工作標籤。如要更新工作標籤，請指定新的標籤並重新提交工作。
+不支援更新工作標籤。如要更新工作標籤，請指定新的標籤並重新提交工作。
 
-## 更新預訂標籤
+## 更新預留項目標籤
 
-您可以更新預訂項目的標籤。使用 SQL 更新標籤會覆寫預留項目上的所有現有標籤。
+您可以更新預留項目的標籤。使用 SQL 更新標籤時，會覆寫預留項目現有的任何標籤。
 
 ### 必要的 IAM 角色
 
-如要取得更新預訂標籤所需的權限，請要求管理員授予管理專案的 [BigQuery 資源編輯者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.resourceEditor)  (`roles/bigquery.resourceEditor`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得更新預留項目標籤所需的權限，請要求管理員授予您管理專案的 [BigQuery 資源編輯者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.resourceEditor)  (`roles/bigquery.resourceEditor`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
-這個預先定義的角色具備 `bigquery.reservations.update` 權限，可更新預訂項目的標籤。
+這個預先定義的角色具備 `bigquery.reservations.update` 權限，可更新預留項目的標籤。
 
 您或許還可透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)取得這項權限。
 
 ### 更新預留項目的標籤
 
-如要更新預訂項目的標籤：
+如要更新預留項目的標籤，請按照下列步驟操作：
 
 ### 控制台
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 按一下導覽選單中的「工作負載管理」。
-3. 按一下「運算單元預留項目」分頁標籤。
+2. 在導覽選單中，按一下「Workload management」(工作負載管理)。
+3. 點選「Slot reservations」(運算單元預留項目) 分頁標籤。
 4. 找出要更新的預訂。
-5. 展開「動作」more\_vert選項。
+5. 展開 more\_vert「Actions」(動作) 選項。
 6. 按一下 [編輯]。
-7. 如要展開「進階設定」部分，請按一下expand\_more展開箭頭。
+7. 如要展開「Advanced settings」(進階設定) 部分，請按一下 expand\_more 展開箭頭。
 8. 更新鍵/值組合的名稱。
-9. 按一下 [儲存]。
+9. 按一下「儲存」。
 
 ### bq
 
-如要更新保留項目的標籤，請發出 `bq update` 指令並搭配使用 `set_label` 旗標和 `--reservation` 旗標。如要更新多個標籤，請重複使用這個旗標。
+如要更新預留項目的標籤，請執行 `bq update` 指令，並加上 `set_label` 旗標和 `--reservation` 旗標。如要更新多個標籤，請重複使用這個旗標。
 
 ```
 bq update --set_label KEY:VALUE  --reservation RESERVATION_NAME
@@ -547,12 +541,12 @@ bq update --set_label KEY:VALUE  --reservation RESERVATION_NAME
 
 更改下列內容：
 
-* `KEY:VALUE`：您要更新預訂項目的標籤鍵/值組合。鍵不得重複。鍵和值只能使用小寫字母、數字字元、底線和連字號。所有字元都必須使用 UTF-8 編碼，且可使用國際字元。如要更新預訂中的多個標籤，請重複使用 `--set_label` 旗標，並為每個標籤指定專屬鍵。
-* `RESERVATION_NAME`：預訂名稱。
+* `KEY:VALUE`：要更新的預留項目標籤鍵/值組合。鍵不得重複。鍵和值只能使用小寫字母、數字字元、底線和連字號。所有字元都必須使用 UTF-8 編碼，且可使用國際字元。如要更新預留項目的多個標籤，請重複使用 `--set_label` 旗標，並為每個標籤指定專屬鍵。
+* `RESERVATION_NAME`：預留項目名稱。
 
 ### SQL
 
-如要更新預留項目的標籤，請使用 [`ALTER RESERVATION SET OPTIONS` DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_reservation_set_options_statement)，在現有預留項目中設定標籤。設定標籤會覆寫預留項目上的所有現有標籤。以下範例會在預訂 `myreservation` 上設定標籤：
+如要更新預留項目的標籤，請使用 [`ALTER RESERVATION SET OPTIONS` DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_reservation_set_options_statement)，設定現有預留項目的標籤。設定標籤會覆寫預留項目現有的標籤。以下範例會為預留項目 `myreservation` 設定標籤：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -564,7 +558,7 @@ bq update --set_label KEY:VALUE  --reservation RESERVATION_NAME
    SET OPTIONS (
      labels = [('sensitivity', 'high')]);
    ```
-3. 按一下「執行」play\_circle。
+3. 按一下「play\_circle 執行」。
 
 如要進一步瞭解如何執行查詢，請參閱「[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)」。
 
@@ -572,7 +566,7 @@ bq update --set_label KEY:VALUE  --reservation RESERVATION_NAME
 
 包含具有空白值的鍵的標籤可做為標記。您可以建立不含任何值的新標籤，或是將資料集內的現有標籤轉換成標記。您無法將工作標籤轉換為標記。
 
-如果想幫資源加上標籤，標記是很實用的做法，但您不一定要使用 `key:value` 格式。例如，如果您的資料表包含由多個群組 (支援和開發等) 使用的測試資料，您可以在該資料表中加入 `test_data` 標記以供識別。
+標記適用於標示資源，但不需要 `key:value` 格式的情況。舉例來說，如果資料表包含多個群組 (支援、開發等) 使用的測試資料，您可以在資料表中加入 `test_data` 標記來識別。
 
 ### 所需權限
 
@@ -581,20 +575,20 @@ bq update --set_label KEY:VALUE  --reservation RESERVATION_NAME
 * `bigquery.datasets.update` (可轉換資料集標籤)
 * `bigquery.tables.update` (可轉換資料表或檢視表標籤)
 
-下列每個預先定義的 IAM 角色都包含轉換資料集標籤所需的權限：
+下列各項預先定義的 IAM 角色，都包含轉換資料集標籤所需的權限：
 
 * `roles/bigquery.dataOwner`
 * `roles/bigquery.admin`
 
-下列預先定義的 IAM 角色都包含轉換表格或檢視標籤所需的權限：
+下列各項預先定義的 IAM 角色，都包含轉換資料表或檢視表標籤所需的權限：
 
 * `roles/bigquery.dataEditor`
 * `roles/bigquery.dataOwner`
 * `roles/bigquery.admin`
 
-此外，如果您擁有 `bigquery.datasets.create` 權限，可以更新您建立的資料集標籤，以及這些資料集中的資料表和檢視表。
+此外，如果您具備 `bigquery.datasets.create` 權限，則可更新您建立的資料集標籤，以及這些資料集中的資料表和檢視表。
 
-如要進一步瞭解 BigQuery 中的 IAM 角色和權限，請參閱[預先定義的角色與權限](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)一文。
+如要進一步瞭解 BigQuery 的 IAM 角色和權限，請參閱「[預先定義的角色和權限](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)」。
 
 ### 將標籤轉換為標記
 
@@ -603,12 +597,13 @@ bq update --set_label KEY:VALUE  --reservation RESERVATION_NAME
 ### 控制台
 
 1. 在 Google Cloud 控制台中，選取資料集、資料表或檢視表。
-2. 如果是資料集，「Dataset Details」(資料集詳細資料) 頁面會自動開啟；如果是資料表和檢視表，請按一下 [Details] (詳細資料) 以開啟詳細資料頁面。
-3. 在「Details」(詳細資料) 頁面中，按一下「Labels」(標籤) 右側的鉛筆圖示。
-4. 在「Edit labels」(編輯標籤) 對話方塊中：
+2. 開啟「編輯詳細資料」窗格：
 
-   * 刪除現有標籤的值。
-   * 按一下「Update」。
+   * 如果是資料集，請按一下「Details」(詳細資料) 分頁標籤，然後按一下 mode\_edit「Edit details」(編輯詳細資料)。
+   * 如為資料表或檢視表，請在詳細資料窗格中，依序點選
+     **「Edit」>「Edit details」**。
+3. 在「Labels」(標籤) 區段中，刪除要更新的標籤「Value」(值) 欄位中的值。
+4. 按一下「儲存」。
 
 ### bq
 
@@ -651,7 +646,7 @@ Dataset 'myotherproject:mydataset' successfully updated.
 * 瞭解如何在 BigQuery 資源中[查看標籤](https://docs.cloud.google.com/bigquery/docs/viewing-labels?hl=zh-tw)。
 * 瞭解如何[使用標籤篩選資源](https://docs.cloud.google.com/bigquery/docs/filtering-labels?hl=zh-tw)。
 * 瞭解如何在 BigQuery 資源中[刪除標籤](https://docs.cloud.google.com/bigquery/docs/deleting-labels?hl=zh-tw)。
-* 請參閱 Resource Manager 說明文件中的[使用標籤](https://docs.cloud.google.com/resource-manager/docs/using-labels?hl=zh-tw)。
+* 請參閱 Resource Manager 說明文件，瞭解如何[使用標籤](https://docs.cloud.google.com/resource-manager/docs/using-labels?hl=zh-tw)。
 
 
 
@@ -660,11 +655,11 @@ Dataset 'myotherproject:mydataset' successfully updated.
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-29 (世界標準時間)。
+上次更新時間：2026-11-01 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-01 (世界標準時間)。"],[],[]]

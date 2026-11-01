@@ -87,11 +87,10 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 1. 點選左側窗格中的 explore「Explorer」。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
-2. 在「Explorer」窗格中展開專案，依序點選「Datasets」(資料集) 和資料集。
+2. 在「Explorer」窗格中展開專案，依序點選「Datasets」(資料集) 和所需資料集。
 3. 依序點選**「總覽」>「表格」**，然後選取檢視畫面。
-4. 點按「Details」(詳細資料) 分頁標籤。
-5. 按一下「查詢」方塊上方的「編輯查詢」。查詢會在查詢編輯器中開啟。
-6. 編輯 SQL 查詢，然後依序點選**「儲存 view」 > 「儲存 view」**：
+4. 在詳細資料窗格中，依序點選**「編輯」>「編輯查詢」**。查詢會在查詢編輯器中開啟。
+5. 編輯 SQL 查詢，然後依序點選**「儲存 view」 > 「儲存 view」**：
 
 ### bq
 
@@ -344,10 +343,10 @@ print(f"Updated {view.table_type}: {str(view.reference)}")
 ### 控制台
 
 1. 點選左側窗格中的 explore「Explorer」。
-2. 在「Explorer」窗格中展開專案，依序點選「Datasets」(資料集) 和資料集。
+2. 在「Explorer」窗格中展開專案，依序點選「Datasets」(資料集) 和所需資料集。
 3. 依序點選**「總覽」 > 「資料表」**，然後選取檢視表。
-4. 按一下「詳細資料」分頁標籤，然後點選「編輯詳細資料」。
-5. 在「Edit detail」(編輯詳細資料) 對話方塊的「Expiration time」(到期時間) 選單中，選取「Specify date」(指定日期)。
+4. 在詳細資料窗格中，依序點選**「編輯」>「編輯詳細資料」**。
+5. 在「Edit details」(編輯詳細資料) 窗格的「Expiration time」(到期時間) 選單中，選取「Specify date」(指定日期)。
 6. 在「Expiration time」(到期時間) 欄位中，使用日期挑選器工具選取日期和時間。
 7. 按一下 [儲存]。更新後的到期時間會顯示在「View info」(查看資訊) 專區的「View expiration」(查看到期時間) 列中。
 
@@ -552,12 +551,11 @@ print(f"Updated {table_id}, expires {table.expires}.")
 使用 Google Cloud 控制台建立檢視表時，無法新增說明。建立檢視表後，您可以在「Details」(詳細資料) 頁面新增說明。
 
 1. 點選左側窗格中的 explore「Explorer」。
-2. 在「Explorer」窗格中展開專案，依序點選「Datasets」(資料集) 和資料集。
+2. 在「Explorer」窗格中展開專案，依序點選「Datasets」(資料集) 和所需資料集。
 3. 依序點選**「總覽」 > 「資料表」**，然後選取檢視表。
-4. 點按「Details」(詳細資料) 分頁標籤。
-5. 按一下「查看資訊」部分的「編輯詳細資訊」。
-6. 在「Edit detail」(編輯詳細資料) 對話方塊的「Description」(說明) 欄位中，輸入新說明或編輯現有說明。
-7. 如要儲存新的說明，請按一下「儲存」。
+4. 在詳細資料窗格中，依序點選**「編輯」>「編輯詳細資料」**。
+5. 在「Edit details」(編輯詳細資料) 窗格的「Description」(說明) 欄位中，輸入新說明或編輯現有說明。
+6. 如要儲存新的說明，請按一下「儲存」。
 
 ### SQL
 
@@ -770,9 +768,9 @@ assert table.description == "Updated description."
 如要複製檢視畫面，請按照下列步驟操作：
 
 1. 點選左側窗格中的 explore「Explorer」。
-2. 在「Explorer」窗格中展開專案，依序點選「Datasets」(資料集) 和資料集。
-3. 依序點選**「總覽」>「資料表」**，然後選取檢視表。
-4. 在詳細資料窗格中，按一下「複製」。
+2. 在「Explorer」窗格中展開專案，依序點選「Datasets」(資料集) 和所需資料集。
+3. 依序點選**「總覽」 > 「資料表」**，然後選取檢視表。
+4. 在詳細資料窗格中，依序按一下**「更多」>「建立檢視畫面副本」**。
 5. 在「Copy view」(複製檢視表) 對話方塊中，執行下列操作：
 
    1. 在「Source」(來源) 區段中，確認專案名稱、資料集名稱和資料表名稱正確無誤。
@@ -840,9 +838,9 @@ assert table.description == "Updated description."
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
-3. 在「Explorer」窗格中展開專案，依序點選「Datasets」(資料集) 和資料集。
+3. 在「Explorer」窗格中展開專案，依序點選「Datasets」(資料集) 和所需資料集。
 4. 依序點選**「總覽」 > 「資料表」**，然後點選檢視表。
-5. 在詳細資料窗格中，按一下「Delete」(刪除)。
+5. 在詳細資料窗格中，依序按一下**「更多」>「刪除」**。
 6. 在對話方塊中輸入 `"delete"`，然後點選「刪除」確認。
 
 ### SQL
@@ -1111,11 +1109,11 @@ end
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-30 (世界標準時間)。
+上次更新時間：2026-11-01 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-30 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-01 (世界標準時間)。"],[],[]]

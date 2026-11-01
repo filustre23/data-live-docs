@@ -266,4 +266,4 @@ gcs:
 * 对于 `user_rules`，请使用变量 `user`
 * 对于 `group_rules`，请使用变量 `group`
 * 对于 `other_rules`，请使用变量 `other`
-* 对于 `role_rules`，请使用变量
+* 对于 `role_rules`

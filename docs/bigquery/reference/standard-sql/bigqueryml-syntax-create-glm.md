@@ -555,5 +555,11 @@ A `FLOAT64` value. The default value is `0.01`.
 **Syntax**
 
 ```
-DATA_SPLIT_METHOD = { 'AUTO_SPLIT' | 'RANDOM' | 'CUSTOM'<
+DATA_SPLIT_METHOD = { 'AUTO_SPLIT' | 'RANDOM' | 'CUSTOM' | 'SEQ' | 'NO_SPLIT' }
 ```
+
+**Description**
+
+The method used to split input data into training, evaluation, and, if you are
+running hyperparameter tuning, test data sets. Training data is used to train
+the

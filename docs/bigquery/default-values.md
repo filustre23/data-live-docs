@@ -18,7 +18,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 如果新資料列不含某個資料欄的資料，BigQuery 會根據預設資料欄值，將該值寫入該資料欄。這種設計可讓資料欄持續填入資料，不必每次寫入都提供值。
 
-本文說明如何設定、變更及移除預設值，以及預設值如何與 data manipulation language (DML) 陳述式、載入工作和串流 API 搭配使用。
+本文說明如何設定、變更及移除預設值，以及預設值如何與 data manipulation language (DML) 陳述式、載入工作和串流 API 搭配運作。
 
 ## 預設值運算式
 
@@ -90,11 +90,10 @@ CREATE TABLE mydataset.complex_table (
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Explorer」窗格中展開專案，點選「Datasets」(資料集)，然後選取資料集。
 4. 依序點選**「總覽」>「資料表」**，然後點選所需資料表。
-5. 按一下「結構定義」分頁標籤。
-6. 點選「編輯結構定義」。你可能需要捲動畫面才能看到這個按鈕。
-7. 在「Current schema」(目前結構定義) 頁面中，找出要變更的頂層欄位。
-8. 輸入該欄位的預設值。
-9. 按一下 [儲存]。
+5. 在詳細資料窗格中，依序點選**「編輯」>「編輯結構定義」**。
+6. 在「Current schema」(目前結構定義) 頁面中，找出要變更的頂層欄位。
+7. 輸入該欄位的預設值。
+8. 按一下「儲存」。
 
 ### SQL
 
@@ -151,11 +150,10 @@ INSERT mydataset.simple_table (b) VALUES ('goodbye');
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Explorer」窗格中展開專案，點選「Datasets」(資料集)，然後選取資料集。
 4. 依序點選**「總覽」 > 「資料表」**，然後選取資料表。
-5. 在詳細資料窗格中，點選「結構定義」分頁標籤。
-6. 點選「編輯結構定義」。你可能需要捲動畫面才能看到這個按鈕。
-7. 在「Current schema」(目前結構定義) 頁面中，找出要變更的頂層欄位。
-8. 輸入 `NULL` 做為預設值。
-9. 按一下 [儲存]。
+5. 在詳細資料窗格中，依序點選**「編輯」>「編輯結構定義」**。
+6. 在「Current schema」(目前結構定義) 頁面中，找出要變更的頂層欄位。
+7. 輸入 `NULL` 做為預設值。
+8. 按一下「儲存」。
 
 ### SQL
 
@@ -177,7 +175,7 @@ INSERT mydataset.simple_table (b) VALUES ('goodbye');
 
 ## 使用 DML 陳述式搭配預設值
 
-您可以使用 [`INSERT` DML 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax?hl=zh-tw#insert_statement)，將含有預設值的資料列新增至資料表。如果未指定資料欄的值，或使用關鍵字 `DEFAULT` 取代值運算式，系統就會使用預設值。以下範例會建立資料表，並插入每個值都是預設值的資料列：
+您可以使用 [`INSERT` DML 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax?hl=zh-tw#insert_statement)，將含有預設值的資料列新增至資料表。如果未指定資料欄的值，或使用關鍵字 `DEFAULT` 取代值運算式，系統就會使用預設值。下列範例會建立資料表，並插入每個值都是預設值的資料列：
 
 ```
 CREATE TABLE mydataset.mytable (
@@ -520,11 +518,11 @@ WHERE
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-29 (世界標準時間)。
+上次更新時間：2026-11-01 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-01 (世界標準時間)。"],[],[]]
