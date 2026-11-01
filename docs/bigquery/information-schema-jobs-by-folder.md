@@ -131,6 +131,5 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 ```
 SELECT
   job_id,
-  creation_time,
-  </
+  creation_time
 ```

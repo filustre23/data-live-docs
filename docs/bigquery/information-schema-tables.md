@@ -186,5 +186,5 @@ WHERE
 |                        |   geo_id STRING OPTIONS(description="Geo code"),                                                                                                                                                                           |
 |                        |   zipcode STRING NOT NULL OPTIONS(description="Five digit ZIP Code Tabulation Area Census Code"),                                                                                                                          |
 |                        |   population INT64 OPTIONS(description="The total count of the population for this segment."),                                                                                                                             |
-|                        |   minimum_age INT64 OPTIONS(description="The minimum ag
+|                        |   minimum_age INT64 OPTIONS(description="The minimum age in the age range. If null, this indicates the
 ```
