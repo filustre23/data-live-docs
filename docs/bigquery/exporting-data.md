@@ -977,5 +977,5 @@ WHERE date(creation_time)= CURRENT_DATE()
 ```
 resource.type="bigquery_resource"
 protoPayload.methodName="jobservice.insert"
-(protoPayload.serviceData.jobInsertRequest.resource.jobConfiguration.query.query=~&#3
+(protoPayload.serviceData.jobInsertRequest.resource.jobConfiguration.query.query=~"E
 ```

@@ -267,5 +267,5 @@ FROM UNNEST([STRUCT(1.0 AS y, NULL AS x),(9.0, 3.0)])
 ```
 
 ```
-SELECT</
+SELECT
 ```

@@ -571,5 +571,5 @@ This option accepts the following values:
 **Syntax**
 
 ```
-CLEAN_SPIKES_AND_DIPS = { TRUE |
+CLEAN_SPIKES_AND_DIPS = { TRUE
 ```

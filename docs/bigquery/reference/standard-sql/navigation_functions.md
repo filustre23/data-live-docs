@@ -187,5 +187,4 @@ SELECT name,
 FROM finishers;
 
 /*-----------------+-------------+----------+------------------+
- | name            | finish_time | division |
 ```

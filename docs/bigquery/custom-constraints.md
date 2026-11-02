@@ -198,23 +198,23 @@ Google Cloud 組織政策服務可讓您透過程式輔助，集中控管組織�
 
    [前往「Organization policies」(組織政策)](https://console.cloud.google.com/iam-admin/orgpolicies?hl=zh-tw)
 2. 在專案挑選器中，選取要設定組織政策的專案。
-3. 按一下「add Custom constraint」(自訂限制)。
-4. 在「Display name」(顯示名稱) 方塊中，輸入人類可讀的限制名稱。這個名稱會用於錯誤訊息，可用於識別和偵錯。請勿在顯示名稱中使用個人識別資訊 (PII) 或機密資料，因為這類名稱可能會在錯誤訊息中曝光。這個欄位最多可包含 200 個字元。
+3. 按一下「add 自訂限制」。
+4. 在「Display name」(顯示名稱) 方塊中，輸入人類可讀的限制名稱。這個名稱會用於錯誤訊息，可用於識別和偵錯。請勿在顯示名稱中使用個人識別資訊 (PII) 或機密資料，因為這類名稱可能會在錯誤訊息中曝光。這個欄位最多可輸入 200 個字元。
 5. 在「Constraint ID」(限制 ID) 方塊中，輸入新自訂限制的 ID。自訂限制只能包含英文字母 (包括大小寫) 或數字，例如 `custom.enforceDatasetId`。這個欄位最多可包含 70 個字元，不含前置字元 (`custom.`)，例如 `organizations/123456789/customConstraints/custom`。請勿在限制 ID 中輸入 PII 或機密資料，因為錯誤訊息可能會顯示上述資訊。
 6. 在「Description」(說明) 方塊中，輸入人類可讀的限制說明。違反政策時，系統會將這段說明做為錯誤訊息顯示。請詳細說明違反政策的原因，以及如何解決違規問題。請勿在說明中輸入 PII 或機密資料，因為錯誤訊息可能會顯示上述資訊。這個欄位最多可輸入 2000 個字元。
-7. 在「Resource type」(資源類型) 方塊中，選取包含要限制的物件和欄位的 Google Cloud REST 資源名稱，例如 `container.googleapis.com/Cluster`。大多數資源類型最多支援 20 項自訂限制。如果嘗試建立更多自訂限制，作業會失敗。
+7. 在「Resource type」(資源類型) 方塊中，選取包含要限制的物件和欄位的 Google Cloud REST 資源名稱，例如 `container.googleapis.com/Cluster`。大多數資源類型最多支援 20 項自訂限制。如果嘗試建立更多自訂限制，作業就會失敗。
 8. 在「Enforcement method」(強制執行方法) 下方，選取要對 REST `CREATE` 方法強制執行限制，還是同時對 `CREATE` 和 `UPDATE` 方法強制執行限制。如果使用 `UPDATE` 方法對違反限制的資源強制執行限制，組織政策會禁止對該資源進行變更，除非變更可解決違規問題。
 
 如要查看各項服務支援的方法，請在「[支援自訂限制的服務](https://docs.cloud.google.com/organization-policy/reference/custom-constraint-supported-services?hl=zh-tw)」中找到該服務。
 
-9. 如要定義條件，請按一下「編輯條件」圖示 edit。
+9. 如要定義條件，請按一下 edit「Edit condition」(編輯條件)。
 
-1. 在「Add condition」(新增條件) 面板中，建立參照支援服務資源的 CEL 條件，例如 `resource.management.autoUpgrade == false`。這個欄位最多可輸入 1000 個字元。如要進一步瞭解 CEL 的用法，請參閱[一般運算語言](https://docs.cloud.google.com/resource-manager/docs/organization-policy/creating-managing-custom-constraints?hl=zh-tw#common_expression_language)。如要進一步瞭解可在自訂限制中使用的服務資源，請參閱「[支援自訂限制的服務](https://docs.cloud.google.com/resource-manager/docs/organization-policy/custom-constraint-supported-services?hl=zh-tw)」。
+1. 在「Add condition」(新增條件) 面板中，建立參照支援服務資源的 CEL 條件，例如 `resource.management.autoUpgrade == false`。這個欄位最多可包含 1000 個字元。如要進一步瞭解 CEL 的用法，請參閱[一般運算語言](https://docs.cloud.google.com/resource-manager/docs/organization-policy/creating-managing-custom-constraints?hl=zh-tw#common_expression_language)。如要進一步瞭解可在自訂限制中使用的服務資源，請參閱「[支援自訂限制的服務](https://docs.cloud.google.com/resource-manager/docs/organization-policy/custom-constraint-supported-services?hl=zh-tw)」。
 2. 按一下 [儲存]。
 
 10. 在「Action」下方，選取是否要在符合條件時允許或拒絕評估的方法。
 
-「拒絕」動作表示如果條件評估為 true，系統會禁止建立或更新資源。
+「拒絕」動作是指如果條件評估為 true，系統就會禁止建立或更新資源。
 
 「允許」動作表示只有在條件評估為 true 時，才允許建立或更新資源。除了條件中明確列出的情況外，其他所有情況都會遭到封鎖。
 
@@ -251,14 +251,15 @@ description: DESCRIPTION
 
 如要進一步瞭解可編寫條件的資源，請參閱「[支援的資源](#supported_resources)」。
 
-* `ACTION`：符合 `condition` 時採取動作。可能的值為 `ALLOW` 和 `DENY`。
+* `ACTION`：符合 `condition` 時採取動作。
+  可能的值為 `ALLOW` 和 `DENY`。
 
-「允許」動作表示如果條件評估為 true，則允許建立或更新資源。這也表示除了條件中明確列出的情況外，其他所有情況都會遭到封鎖。
+「允許」動作代表如果條件評估為 true，則允許建立或更新資源。這也表示除了條件中明確列出的情況外，其他所有情況都會遭到封鎖。
 
 「拒絕」動作是指如果條件評估結果為 true，系統就會禁止建立或更新資源。
 
-* `DISPLAY_NAME`：人類可讀的限制名稱。這個名稱會用於錯誤訊息，可用於識別和偵錯。請勿在顯示名稱中使用 PII 或機密資料，因為這類名稱可能會在錯誤訊息中顯示。這個欄位最多可包含 200 個字元。
-* `DESCRIPTION`：違反政策時，會以錯誤訊息形式顯示且易於理解的限制說明。這個欄位最多可包含 2000 個字元。
+* `DISPLAY_NAME`：人類可讀的限制名稱。這個名稱會用於錯誤訊息，可用於識別和偵錯。請勿在顯示名稱中使用 PII 或機密資料，因為這類名稱可能會在錯誤訊息中顯示。這個欄位最多可輸入 200 個字元。
+* `DESCRIPTION`：違反政策時，會以錯誤訊息形式顯示且易於理解的限制說明。這個欄位最多可輸入 2000 個字元。
 
 2. 為新的自訂限制建立 YAML 檔案後，您必須加以設定，才能用於組織的組織政策。如要設定自訂限制，請使用 [`gcloud org-policies set-custom-constraint`](https://docs.cloud.google.com/sdk/gcloud/reference/org-policies/set-custom-constraint?hl=zh-tw) 指令：
 
@@ -365,7 +366,7 @@ gcloud org-policies set-policy POLICY_PATH --update-mask=spec
 
    請將 `ORGANIZATION_ID` 替換成組織 ID。
 
-   這會定義一項限制，如果資料集名稱開頭為「test」，則禁止建立新的資料集。
+   這項限制會禁止建立名稱開頭為「test」的新資料集。
 2. 套用限制：
 
    ```
@@ -444,7 +445,7 @@ Operation denied by custom org policies: ["customConstraints/custom.enforceDatas
 | --- | --- |
 | 拒絕名稱開頭為「test」的新資料表。 | ```     name: organizations/ORGANIZATION_ID/customConstraints/custom.enforceTableId     resourceTypes:     - bigquery.googleapis.com/Table     methodTypes:     - CREATE     condition: "resource.tableReference.tableId.startsWith('test')"     actionType: DENY     displayName: Reject test tables.     description: Deny new table names that begin with 'test'. ``` |
 | 拒絕名稱開頭為「test」的新資料列存取政策。 | ```     name: organizations/ORGANIZATION_ID/customConstraints/custom.enforceRowAccessPolicyId     resourceTypes:     - bigquery.googleapis.com/RowAccessPolicies     methodTypes:     - CREATE     condition: "resource.rowAccessPolicyReference.policyId.startsWith('test')"     actionType: DENY     displayName: Reject 'test' row access policies.     description: Deny new row access policies with names that begin with 'test'. ``` |
-| 拒絕新的資料存取政策，並使用以「SHA256」(安全雜湊演算法 256 位元) 開頭的預先定義運算式。 | ```     name: organizations/ORGANIZATION_ID/customConstraints/custom.enforcePredefinedExpression     resourceTypes:     - bigquerydatapolicy.googleapis.com/DataPolicy     methodTypes:     - CREATE     condition: "resource.dataMaskingPolicy.predefinedExpression.startsWith('SHA256')"     actionType: DENY     displayName: Reject SHA256 data policies.     description: Deny new data access policies with predefined expressions that     begin with 'SHA256'.     expression. ``` |
+| 拒絕使用以「SHA256」(安全雜湊演算法 256 位元) 開頭的預先定義運算式，建立新的資料存取政策。 | ```     name: organizations/ORGANIZATION_ID/customConstraints/custom.enforcePredefinedExpression     resourceTypes:     - bigquerydatapolicy.googleapis.com/DataPolicy     methodTypes:     - CREATE     condition: "resource.dataMaskingPolicy.predefinedExpression.startsWith('SHA256')"     actionType: DENY     displayName: Reject SHA256 data policies.     description: Deny new data access policies with predefined expressions that     begin with 'SHA256'.     expression. ``` |
 | 拒絕名稱開頭為「test」的新常式。 | ```     name: organizations/ORGANIZATION_ID/customConstraints/custom.enforceRoutineId     resourceTypes:     - bigquery.googleapis.com/Routine     methodTypes:     - CREATE     condition: "resource.routineReference.routineId.startsWith('test')"     actionType: DENY     displayName: Reject test routines.     description: Deny new routines with names that begin with 'test'. ``` |
 | 拒絕超過 200 個運算單元的 BigQuery 預留項目 | ```     name: organizations/ORGANIZATION_ID/customConstraints/custom.bqReservationLimitSlots     resourceTypes:     - bigquery.googleapis.com/Reservation     methodTypes:     - CREATE     - UPDATE     condition: "resource.slotCapacity > 200"     actionType: DENY     displayName: Deny BigQuery reservations with more than 200     slots.     description: Deny BigQuery reservations with more than 200     slots. ``` |
 | 不允許管道工作使用預留項目 | ```     name: organizations/ORGANIZATION_ID/customConstraints/custom.bqAssignmentDenyPipelineJobs     resourceTypes:     - bigquery.googleapis.com/ReservationAssignment     methodTypes:     - CREATE     condition: "resource.jobType == 'PIPELINE'"     actionType: DENY     displayName: Deny jobs of type PIPELINE from using BigQuery     reservations.     description: Deny the creation of BigQuery reservation     assignments for jobs that are of type PIPELINE. ``` |
@@ -464,11 +465,11 @@ Operation denied by custom org policies: ["customConstraints/custom.enforceDatas
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-01 (世界標準時間)。
+上次更新時間：2026-11-02 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-01 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-02 (世界標準時間)。"],[],[]]

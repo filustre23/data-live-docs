@@ -239,5 +239,5 @@ WHERE
 GROUP BY
   project_id, dataset_id, table_id, error_code, day
 ORDER BY
-  day, project_id, dataset_id
+  day, project_id, dataset_id DESC
 ```

@@ -54,7 +54,7 @@ public class UpdateDatasetPartitionExpiration {
       System.out.println(
           "Dataset default partition expiration updated successfully to " + newExpiration);
     } catch (BigQueryException e) {
-      System.out.println("Dataset partition expiration was not updated \n" + e.toString());
+      System.out.println("Dataset partition expiration was not updated \n"; + e.toString());
     }
   }
 }
