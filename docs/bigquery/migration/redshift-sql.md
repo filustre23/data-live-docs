@@ -177,4 +177,4 @@ Amazon Redshift [`ORDER BY`](https://docs.amazonaws.cn/en_us/redshift/latest/dg/
 | Amazon Redshift | BigQuery |
 | --- | --- |
 | `APPROXIMATE COUNT(DISTINCT expression)` | `APPROX_COUNT_DISTINCT(expression)` |
-| `APPROXIMATE PERCENTILE_DISC(   percentile   ) WITHIN GROUP (ORDER BY expression)` | `APPROX_QUANTILES(expression, 100)  [OFFSET(CAST(TRUNC(percentile * 10` |
+| `APPROXIMATE PERCENTILE_DISC(   percentile   ) WITHIN GROUP (ORDER BY expression)` | `APPROX_QUANTILES(expressio` |

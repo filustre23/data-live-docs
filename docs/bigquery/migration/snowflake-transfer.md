@@ -269,5 +269,4 @@ bq mk \
     --data_source=DATA_SOURCE \
     --target_dataset=DATASET \
     --display_name=NAME \
-    --service_account_name
 ```

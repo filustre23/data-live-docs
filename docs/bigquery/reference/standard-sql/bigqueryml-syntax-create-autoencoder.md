@@ -539,4 +539,5 @@ Autoencoder models support
 [hyperparameter tuning](/bigquery/docs/hp-tuning-overview), which you can use
 to improve model performance for your data. To use
 hyperparameter tuning, set the [`NUM_TRIALs` option](#num_trials) to the
-number of trials that you want to run. BigQuery ML then tr
+number of trials that you want to run. BigQuery ML then trains the
+model the number of times that you spec

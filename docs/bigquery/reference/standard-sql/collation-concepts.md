@@ -356,6 +356,5 @@ FROM table_a;
 
 -- This runs. Even though column 'a' and 'b' have different
 -- collation specifications, column 'b' is considered the default collation
--- because it's assigned to an empty collation specification.
-SELEC
+-- because it's assigned to an empty collation specificat
 ```

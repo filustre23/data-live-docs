@@ -554,7 +554,3 @@ no default range, and the scale type is `LINEAR`.
 The minimum loss reduction required to make a further partition on a leaf node of
 the tree. The larger the `MIN_SPLIT_LOSS` value is, the more conservative the
 algorithm is.
-
-**Arguments**
-
-If you aren'

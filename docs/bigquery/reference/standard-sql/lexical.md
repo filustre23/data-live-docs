@@ -460,4 +460,4 @@ Syntax:
 DATE 'date_canonical_format'
 ```
 
-Date literals contain the `DATE</`
+Date literals contain the `DATE` keyword followed by

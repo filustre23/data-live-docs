@@ -354,4 +354,4 @@ ML.GENERATE_EMBEDDING(
   second in the video at which to end the embedding. The `END_SECOND` value
   can't be higher than `120`. The default value is `120`. If you specify
   this argument, you must also specify the `START_SECOND` argument. This
-  value must be pos
+  value must be positive and greater than the
