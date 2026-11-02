@@ -609,3 +609,4 @@ To find supported Hugging Face models, do the following:
 1. On Hugging Face, open the list of
    [Text Embeddings Inference](https://huggingface.co/models?other=text-embeddings-inference)
    or
+   [Text Generation Inferenc](https://huggingface.co/models?other=text-generation-inference)

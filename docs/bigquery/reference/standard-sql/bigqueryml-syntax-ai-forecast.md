@@ -444,5 +444,5 @@ WITH
 SELECT *
 FROM
   AI.FORECAST(
-    TABLE
+    TABLE citibike_trips
 ```

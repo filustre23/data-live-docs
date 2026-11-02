@@ -88,7 +88,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 如果您使用 VPC Service Controls 保護管道，請注意，管道執行作業是由 Dataform 提供。為排定執行作業設定 VPC Service Controls 時，請務必符合下列規定：
 
 * 您必須設定 [`dataform.restrictGitRemotes` 組織政策服務](https://docs.cloud.google.com/dataform/docs/restrict-git-remotes?hl=zh-tw)。
-* Dataform 和 BigQuery 必須受相同的 VPC Service Controls service perimeter 限制。
+* Dataform 和 BigQuery 必須受同一個 VPC Service Controls 服務範圍限制。
 * 如要允許使用者在排定或手動觸發執行作業時，使用 Google 帳戶的使用者憑證進行驗證，您必須將他們的使用者身分新增至輸入規則。詳情請參閱「[更新 service perimeter 的輸入和輸出政策](https://docs.cloud.google.com/vpc-service-controls/docs/configuring-ingress-egress-policies?hl=zh-tw#updating)」和「[輸入規則參考資料](https://docs.cloud.google.com/vpc-service-controls/docs/ingress-egress-rules?hl=zh-tw#ingress-rules-reference)」。
 
 如需詳細設定步驟和安全性考量，請參閱「[設定 Dataform 的 VPC Service Controls](https://docs.cloud.google.com/dataform/docs/vpc-service-controls?hl=zh-tw)」。
@@ -102,7 +102,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 * 如要在使用者資料夾中建立管道，請按照下列步驟操作：
   + 專案的[程式碼建立者](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform?hl=zh-tw#dataform.codeCreator)  (`roles/dataform.codeCreator`)
   + 資料夾的[程式碼擁有者](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform?hl=zh-tw#dataform.codeOwner)  (`roles/dataform.codeOwner`)
-  + 資料夾上的「Code Editor」(程式碼編輯器) (`roles/dataform.codeEditor`)
+  + 資料夾上的「程式碼編輯器」 (`roles/dataform.codeEditor`)
 * 如要在團隊資料夾中建立管道，請按照下列步驟操作：
   + 團隊資料夾的[團隊資料夾協作者](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform?hl=zh-tw#dataform.teamFolderContributor)  (`roles/dataform.teamFolderContributor`)
   + 團隊資料夾的[團隊資料夾擁有者](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform?hl=zh-tw#dataform.teamFolderOwner)  (`roles/dataform.teamFolderOwner`)
@@ -130,7 +130,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ### 管道的安全性考量
 
-BigQuery 中的程式碼資產是由 Dataform 提供，因此請考量下列安全性影響，再授予使用者這些資產的存取權：
+BigQuery 中的程式碼資產是由 Dataform 提供，因此請考量下列安全性影響，再決定是否授予使用者這些資產的存取權：
 
 * 程式碼資產的瀏覽權限由專案層級的 Dataform 權限控管。使用者只要具備 `dataform.repositories.list` 權限 (包含在標準 BigQuery 角色中，例如 [BigQuery 工作使用者](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.jobUser)、[BigQuery Studio 使用者](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.studioUser)和 [BigQuery 使用者](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.user))，就能在 Google Cloud 專案的「Explorer」面板中查看所有程式碼資產，無論這些資產是否由他們建立或與他們共用。如要限制瀏覽權限，可以建立不含 `dataform.repositories.list` 權限的[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)。
 * 凡是與 Dataform 服務代理共用的 Secret，都有可能遭到可編輯這些資產的使用者存取。為確保憑證安全，請限制只有信任的使用者才能建立及編輯權限，並限制 Dataform 服務代理可存取的密鑰。詳情請參閱「[在套件安裝期間存取 Secret](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#secret-access-risk)」。
@@ -151,7 +151,7 @@ Google Cloud 專案中的所有新程式碼資產都會使用預設區域。資�
 2. 在左側窗格中，按一下「folder Files」(檔案)，開啟檔案瀏覽器：
 3. 按一下專案名稱旁的 more\_vert「View files panel actions」(查看檔案面板動作) >「Switch code region」(切換程式碼區域)。
 4. 選取要設為預設值的程式碼區域。
-5. 按一下 [儲存]。
+5. 按一下「儲存」。
 
 如要查看支援的地區清單，請參閱「[BigQuery Studio 位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#bqstudio-loc)」。
 
@@ -173,7 +173,7 @@ Google Cloud 專案中的所有新程式碼資產都會使用預設區域。資�
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在左側窗格中，按一下 folder「Files」(檔案)，開啟檔案瀏覽器。
+2. 按一下左側窗格中的 folder「Files」(檔案)，開啟檔案瀏覽器。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 請執行下列任一操作來建立管道：
@@ -202,7 +202,7 @@ Google Cloud 專案中的所有新程式碼資產都會使用預設區域。資�
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 如果您尚未連結 Git 存放區，請[建立並連結 BigQuery Studio Git 存放區](https://docs.cloud.google.com/bigquery/docs/git-repositories?hl=zh-tw#create-git-repository)。
-3. 在左側窗格中，按一下 folder「Files」(檔案)，開啟檔案瀏覽器。
+3. 按一下左側窗格中的 folder「Files」(檔案)，開啟檔案瀏覽器。
 4. 在檔案樹狀結構中，找出已連結的 Git 存放區資料夾，或其中的巢狀目錄。
 5. 按一下資料夾名稱旁的 more\_vert「View actions」(查看動作)，然後依序選取「Create」(建立) >「Pipeline」(管道)。
 6. 在對話方塊中輸入管道名稱，然後按一下「儲存」。
@@ -278,7 +278,8 @@ Google Cloud 專案中的所有新程式碼資產都會使用預設區域。資�
 1. 在「Runtime template」(執行階段範本) 欄位中，接受預設的筆記本執行階段，或搜尋並選取現有的執行階段。
 
    * 如要查看預設執行階段的規格，請按一下旁邊的箭頭。
-   * 如要建立新的執行階段，請參閱「[建立執行階段範本](https://docs.cloud.google.com/colab/docs/create-runtime-template?hl=zh-tw)」。**注意：**筆記本執行階段範本必須與指定該範本的管道位於相同區域。**注意：**在 BigQuery 管道中加入筆記本後，就無法變更 Gemini Enterprise Agent Platform 執行階段執行個體的網路。執行階段僅限用於預設網路，不支援選取其他網路。
+   * 如要建立新的執行階段，請參閱「[建立執行階段範本](https://docs.cloud.google.com/colab/docs/create-runtime-template?hl=zh-tw)」。**注意：**Notebook 執行階段範本必須與指定該範本的管道位於相同區域。**注意：**如果您在 BigQuery 管道中使用 Notebook 的預設執行階段，就無法變更 Gemini Enterprise Agent Platform 執行階段執行個體的網路。
+   執行階段僅限使用預設網路，無法選取其他網路。如果使用自訂執行階段範本，執行階段會採用範本中設定的網路和子網路。如果專案強制執行 `compute.requireShieldedVm` 組織政策，請務必為自訂執行階段範本啟用安全啟動功能，以免 VM 建立失敗。
 2. 在「Cloud Storage bucket」欄位中，按一下「Browse」(瀏覽)，然後選取或建立 Cloud Storage bucket，用於儲存管道中 Notebook 的輸出內容。
 3. 按照「[將主體新增至 bucket 層級政策](https://docs.cloud.google.com/storage/docs/access-control/using-iam-permissions?hl=zh-tw#bucket-add)」中的步驟，將自訂 Dataform 服務帳戶新增為主體，並加入您要用來儲存排定 pipeline 執行作業輸出的 Cloud Storage bucket，然後將 [Storage 管理員角色](https://docs.cloud.google.com/iam/docs/roles-permissions/storage?hl=zh-tw#storage.admin) (`roles/storage.admin`) 授予這個主體。
 
@@ -335,7 +336,7 @@ Google Cloud 專案中的所有新程式碼資產都會使用預設區域。資�
 1. 按一下「Edit Query」(編輯查詢) 旁邊的 arrow\_drop\_down 箭頭選單，然後選取「In context」(在情境中) 或「In new tab」(在新分頁中)。
 2. 搜尋現有查詢。
 3. 選取查詢名稱，然後按下 **Enter** 鍵。
-4. 按一下 [儲存]。
+4. 按一下「儲存」。
 5. 選用：如要重新命名查詢，請在管道窗格中按一下查詢名稱，然後依序點選「Edit Query」(編輯查詢) 和畫面頂端的現有查詢名稱，接著輸入新名稱。
 
 **匯入現有查詢**
@@ -343,7 +344,7 @@ Google Cloud 專案中的所有新程式碼資產都會使用預設區域。資�
 1. 按一下「編輯查詢」旁的arrow\_drop\_down箭頭選單，然後點選「匯入副本」。
 2. 搜尋要匯入的現有查詢，或從搜尋窗格中選取現有查詢。匯入查詢時，查詢的來源檔案會複製到管道中，因此原始檔案不會變更。
 3. 按一下「編輯」，開啟匯入的查詢。
-4. 按一下 [儲存]。
+4. 按一下「儲存」。
 
 ### 筆記本
 
@@ -361,7 +362,7 @@ Google Cloud 專案中的所有新程式碼資產都會使用預設區域。資�
 2. 按一下「Edit Notebook」(編輯筆記本) 旁邊的 arrow\_drop\_down 箭頭選單，然後選取「In context」(在情境中) 或「In new tab」(在新分頁中)。
 3. 搜尋現有筆記本。
 4. 選取筆記本名稱，然後按下 **Enter** 鍵。
-5. 按一下 [儲存]。
+5. 按一下「儲存」。
 6. 選用：如要重新命名筆記本，請在管道窗格中按一下筆記本名稱，然後依序點選「Edit Notebook」(編輯筆記本) 和畫面頂端的現有筆記本名稱，接著輸入新名稱。
 
 **匯入現有筆記本**
@@ -369,7 +370,7 @@ Google Cloud 專案中的所有新程式碼資產都會使用預設區域。資�
 1. 按一下「Edit Notebook」(編輯筆記本) 旁的 arrow\_drop\_down 箭頭選單，然後點選「Import a copy」(匯入副本)。
 2. 搜尋要匯入的現有筆記本，或從搜尋窗格選取現有筆記本。匯入筆記本時，筆記本的來源檔案會複製到管道中，因此原始檔案不會變更。
 3. 如要開啟匯入的筆記本，請按一下「編輯」。
-4. 按一下 [儲存]。
+4. 按一下「儲存」。
 
 ### 準備資料
 
@@ -387,7 +388,7 @@ Google Cloud 專案中的所有新程式碼資產都會使用預設區域。資�
 1. 按一下「Edit Data preparation」(編輯資料準備) 旁的arrow\_drop\_down箭頭選單，然後選取「In context」(在內容中) 或「In new tab」(在新分頁中)。
 2. 搜尋現有的資料準備作業。
 3. 選取資料準備作業名稱，然後按下 **Enter** 鍵。
-4. 按一下 [儲存]。
+4. 按一下「儲存」。
 5. 選用：如要重新命名資料準備作業，請在管道窗格中按一下資料準備作業名稱，然後依序點選「Edit Data preparation」(編輯資料準備作業) 和畫面頂端的名稱，再輸入新名稱。
 
 **匯入現有的資料準備**
@@ -395,7 +396,7 @@ Google Cloud 專案中的所有新程式碼資產都會使用預設區域。資�
 1. 按一下「Edit Data preparation」(編輯資料準備) 旁的 arrow\_drop\_down 箭頭下拉式選單，然後點選「Import a copy」(匯入副本)。
 2. 搜尋要匯入的現有資料準備，或從搜尋窗格中選取現有資料準備。匯入資料準備作業時，原始作業不會變更，因為資料準備作業的來源檔案會複製到管道中。
 3. 如要開啟匯入的資料準備，請按一下「編輯」。
-4. 按一下 [儲存]。
+4. 按一下「儲存」。
 
 ### 資料表
 
@@ -481,7 +482,7 @@ Google Cloud 專案中的所有新程式碼資產都會使用預設區域。資�
    **「Details」>「Configuration」**中的設定，或在檢視畫面的
    程式碼編輯器 `config` 區塊中設定。
 
-如要變更中繼資料，請使用「設定」分頁。在這個分頁中，您可以編輯程式碼編輯器中 `config` 區塊內的特定值，例如格式類似 JavaScript 物件的字串或陣列。使用這個分頁可避免語法錯誤，並確認設定正確無誤。
+如要變更中繼資料，請使用「設定」分頁。這個分頁可讓您在程式碼編輯器中編輯 `config` 區塊中的特定值，例如格式類似 JavaScript 物件的字串或陣列。使用這個分頁可避免語法錯誤，並確認設定正確無誤。
 
 選用：在「Run after」(執行後) 選單中，選取要在檢視表之前執行的工作。
 
@@ -612,7 +613,7 @@ Google Cloud 專案中的所有新程式碼資產都會使用預設區域。資�
 5. 按一下「新增使用者/群組」。
 6. 在「New principals」(新增主體) 欄位中，輸入至少一位使用者或群組的名稱。
 7. 在「指派角色」部分選取角色。
-8. 按一下 [儲存]。
+8. 按一下「儲存」。
 
 ## 分享管道連結
 
@@ -829,7 +830,7 @@ Google Cloud 專案中的所有新程式碼資產都會使用預設區域。資�
 
 ### 授權給您的 Google 帳戶
 
-如要使用 [Google 帳戶](https://docs.cloud.google.com/iam/docs/principals-overview?hl=zh-tw#google-account)使用者憑證驗證資源，您必須手動授予權限，讓 BigQuery 管道取得 Google 帳戶的存取權杖，並代表您存取來源資料。您可以使用 OAuth 對話方塊介面手動授予核准。如果選取任何「Extended access options」，就必須授予這些服務的存取權，例如 Google 雲端硬碟或 Knowledge Catalog。
+如要使用 [Google 帳戶](https://docs.cloud.google.com/iam/docs/principals-overview?hl=zh-tw#google-account)使用者憑證驗證資源，您必須手動授予權限，讓 BigQuery 管道取得 Google 帳戶的存取權杖，並代表您存取來源資料。您可以透過 OAuth 對話方塊介面手動核准。如果選取任何「Extended access options」，就必須授予這些服務的存取權，例如 Google 雲端硬碟或 Knowledge Catalog。
 
 **注意：** 使用 Google 帳戶的使用者憑證執行或排定 BigQuery 管道時，不支援情境感知存取權 (CAA) 政策，包括 IP、地理位置和裝置法規遵循政策，因為權杖要求來自 Google 基礎架構。除非 Dataform OAuth 用戶端 ID [不受政策限制](https://docs.cloud.google.com/dataform/docs/troubleshooting?hl=zh-tw#euc-permission-denied)，否則 CAA 政策會封鎖這些執行作業。
 
@@ -841,9 +842,9 @@ Google Cloud 專案中的所有新程式碼資產都會使用預設區域。資�
 2. 按一下「BigQuery Pipelines」。
 3. 按一下 [移除存取權]。
 
-**警告：** 撤銷存取權限後，這個 Google 帳戶擁有者在所有區域擁有的管道，日後都無法執行。
+**警告：** 撤銷存取權限後，這個 Google 帳戶的帳戶擁有者在所有區域擁有的管道將無法再執行。
 
-如果管道含有筆記本，您也必須手動授予權限，Colab Enterprise 才能取得 Google 帳戶的存取權杖，並代表您存取來源資料。只需授予權限一次。您可以在 [Google 帳戶頁面](https://myaccount.google.com/?hl=zh-tw)撤銷這項權限。
+如果管道包含筆記本，您也必須手動授予權限，Colab Enterprise 才能取得 Google 帳戶的存取權杖，並代表您存取來源資料。只需授予權限一次。您可以在 [Google 帳戶頁面](https://myaccount.google.com/?hl=zh-tw)撤銷這項權限。
 
 ## 後續步驟
 
@@ -861,11 +862,11 @@ Google Cloud 專案中的所有新程式碼資產都會使用預設區域。資�
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-28 (世界標準時間)。
+上次更新時間：2026-11-02 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-28 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-02 (世界標準時間)。"],[],[]]

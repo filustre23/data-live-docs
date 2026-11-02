@@ -149,5 +149,5 @@ ORDER BY
 SELECT
   _PARTITIONDATE AS date,
   applicable_country,
-  COUNT(DISTINCT CONCAT(CAST(merchant_id AS STRING), ':', product_id))
+  COUNT(DISTINCT CONCAT(CAST(merchant_id AS STRING), ':', product_id
 ```

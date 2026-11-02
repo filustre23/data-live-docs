@@ -295,4 +295,7 @@ The `expression` parameter can represent an expression for these data types:
 * `BOOL`
 * `STRING`
 
-**Conversion rules<**
+**Conversion rules**
+
+| From |
+| --- |
