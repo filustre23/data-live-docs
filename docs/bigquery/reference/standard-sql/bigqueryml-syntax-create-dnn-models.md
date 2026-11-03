@@ -500,16 +500,3 @@ An `INT64` value. The default value is `20`.
 ```
 WARM_START = { TRUE | FALSE }
 ```
-
-**Description**
-
-Determines whether to train a model with new training data, new model options,
-or both. Unless you explicitly override them, the initial options used to train
-the model are used for the warm start run.
-
-In a warm start run, the iteration numbers are reset to start from zero. Use
-the training run or iteration information returned by the
-[`ML.TRAINING_INFO` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-train)
-to distinguish the warm start run from the original run.
-
-In a warm start, the values of the

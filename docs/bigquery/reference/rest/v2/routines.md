@@ -148,7 +148,3 @@ The input/output mode of the argument.
 ## StandardSqlTableType
 
 A table type
-
-| JSON representation |
-| --- |
-| ``` {   "columns": [     {       object ( ``` |

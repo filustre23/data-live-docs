@@ -364,7 +364,5 @@ The result is similar to the following:
 
 ```
 +--------------+-----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| complaint_id | complaint_type  |                                                                                      grievance_subject                                                                                       |
-+--------------+-----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| 4767874      | Reporting Error | ["Inaccurate debt reporting on credit report","Enhanced Recovery Company reporting debt they no longer own","Failure to delete debt from credit report after recall"]
+| complaint_id | complaint_type  |
 ```

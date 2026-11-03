@@ -507,11 +507,4 @@ possible to the model.
   is an empty array.
 
 * `MODEL_PARAMS`: a JSON-formatted string literal
-  that provides parameters to the model. The value must conform
-  to the
-  [`generateContent` request body](/vertex-ai/generative-ai/docs/reference/rest/v1/projects.locations.endpoints/generateContent)
-  format. You can provide a value for any field in the request body except
-  for the `contents[]` field. If you set this field, then you can't also
-  specify any model parameters in the top-level struct argument to the
-  `ML.GENERATE_TEXT` function. You must either specify every model parameter
-  in the `MODEL_PARAMS` field, or omit
+  that provides par

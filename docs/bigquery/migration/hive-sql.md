@@ -198,6 +198,4 @@ BigQuery 也會對下列常值執行隱含轉換：
 | `CUME_DIST` | `CUME_DIST` |
 | `DENSE_RANK` | `DENSE_RANK` |
 | `FIRST_VALUE` | `FIRST_VALUE` |
-| `LAST_VALUE` | `LAST_VALUE` |
-| `LAG` | `LAG` |
-| `LEAD` |  |
+| `LAST_VALUE` |  |

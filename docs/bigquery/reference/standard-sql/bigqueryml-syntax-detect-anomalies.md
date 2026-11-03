@@ -388,16 +388,5 @@ SELECT
 FROM
   ML.DETECT_ANOMALIES(MODEL `mydataset.my_autoencoder_model`,
     STRUCT(0.1 AS contamination),
-    TABLE `mydataset.mytable`)
-```
-
-If the feature column names are `f1` and `f2`, then this query returns results
-similar to the following:
-
-```
-+------------+--------------------+---------+--------+
-| is_anomaly | mean_squared_error |    f1   |   f2   |
-+------------+--------------------+---------+--------+
-|   FALSE    |     0.63456        |   120   |  "a"   |
-|   TRUE     |
+    TABLE `mydataset.mytable
 ```

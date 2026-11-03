@@ -1168,4 +1168,7 @@ func revokeAccessToDataset(w io.Writer, projectID, datasetID, entity string) err
 		if entry.Entity != entity {
 			newAccessList = append(newAccessList, entry)
 		}
+	}
+
+	// Only proceed with upda
 ```

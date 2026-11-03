@@ -209,6 +209,4 @@ bq mk \
 * NAME：移轉設定的顯示名稱。資料移轉作業名稱可以是任意值，日後需要修改移轉作業時，能夠據此識別即可。
 * DATA\_SOURCE：資料來源 - `search_ads`。
 * SERVICE\_ACCOUNT\_NAME (選用)：用於驗證資料移轉的服務帳戶名稱。服務帳戶應由用於建立轉移作業的 `project_id` 擁有，且應具備所有[必要權限](#required_permissions)。
-* PARAMETERS：已建立移轉設定的 JSON 格式參數。例如：`--params='{"param":"param_value"}'`。您必須提供 `customer_id` 參數。
-
-  + `table_filter`：指定要納入資料轉移作業的資料表。如果未指定旗標，系統會納入所有資料表。如要只納入特定資料表，請使用以半形逗號分隔的值清單 (例如 `Ad, Campaign, AdGroup`)。如要排除特定資料表，請在排除的值前面加上連字號 (`-`) (例如使用 `-Ad, Campaign, AdGroup` 會排除所有
+* PARAMETERS：已建立移轉設定的 JSON 格式參數。例如：`--params='{"param":"param_value"}`

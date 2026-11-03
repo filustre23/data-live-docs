@@ -292,9 +292,4 @@ The option list specifies options for the export operation.
 
 #### Export data to Spanner
 
-The following example exports data to a Spanner table:
-
-```
-EXPORT DATA OPTIONS (
-  uri="https://spanner.googleapis.co
-```
+The following example

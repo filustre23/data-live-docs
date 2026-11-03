@@ -166,6 +166,4 @@ IBM Netezza 資料倉儲技術專為搭配 Netezza 專屬 SQL 語法而設計。
 | `COVAR_SAMP` | [`COVAR_SAMP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions?hl=zh-tw#covar_samp) |
 | `CUME_DIST` | [`CUME_DIST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/numbering_functions?hl=zh-tw#cume_dist) |
 | `DENSE_RANK` | [`DENSE_RANK`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/numbering_functions?hl=zh-tw#dense_rank) |
-| `FIRST_VALUE` | [`FIRST_VALUE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions?hl=zh-tw#first_value) |
-| `LAG` | [`LAG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions?hl=zh-tw#lag) |
-| `LAST_VALUE` |  |
+|  |

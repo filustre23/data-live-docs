@@ -251,10 +251,3 @@ The list of valid permission types for which logging can be configured. Admin wr
 | `ADMIN_READ` | Admin reads. Example: CloudIAM getIamPolicy |
 | `DATA_WRITE` | Data writes. Example: CloudSQL Users create |
 | `DATA_READ` | Data reads. Example: CloudSQL Users list |
-
-
-
-
-Send feedback
-
-Except as otherwise noted, the content of this page is licensed under the

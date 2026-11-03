@@ -225,6 +225,5 @@ AS (
       THEN 0
     WHEN EXTRACT(DAY FROM DATE_ADD(date_1, INTERVAL 1 DAY)) = 1
       AND EXTRACT(DAY FROM DATE_ADD(date_2, INTERVAL 1 DAY)) = 1
-      THEN date_diff(date_1,date_2, MONTH)
-    WHEN EXTRACT(DAY
+      THEN date_diff
 ```

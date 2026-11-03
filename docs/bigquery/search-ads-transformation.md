@@ -478,8 +478,4 @@ Search Ads 360 API 資源：[ad\_group\_ad](https://developers.google.com/search
 | Search Ads 360 欄位名稱 | 說明 |
 | --- | --- |
 | ad\_group\_ad\_ad\_display\_url | 部分廣告格式的廣告說明中顯示的網址。 |
-| ad\_group\_ad\_ad\_expanded\_dynamic\_search\_ad\_description1 | 廣告內容描述的第一行。 |
-| ad\_group\_ad\_ad\_expanded\_dynamic\_search\_ad\_description2 | 廣告說明的第二行。 |
-| ad\_group\_ad\_ad\_expanded\_text\_ad\_description1 | 廣告內容描述的第一行。 |
-| ad\_group\_ad\_ad\_expanded\_text\_ad\_description2 | 廣告說明的第二行。 |
-| ad\_group\_ad\_ad\_expa |
+| ad\_gr |

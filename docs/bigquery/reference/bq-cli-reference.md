@@ -315,6 +315,3 @@ gcloud config unset auth/impersonate_service_account
     ```
 
     **注意：** 這個旗標不支援多層級偵錯，因此您可以將 `DEBUG_LEVEL` 設為任何正數。
-
-**`--job_id=JOB_ID`**
-:   指定新工作的 ID。這個旗標僅適用於建立工作的指令：`cp`、`extract`、`load` 和 `query`。如果不使用 `--job_id` 旗標，指令會產生專屬工作 ID。詳情請參閱「[透過程式輔助方式執行工作](https://docs.cloud.google.com/bigquery/docs/running-jobs?hl=zh-tw)」。

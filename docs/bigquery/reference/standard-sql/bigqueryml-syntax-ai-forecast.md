@@ -439,10 +439,5 @@ WITH
   citibike_trips AS (
     SELECT EXTRACT(DATE FROM starttime) AS date, usertype, COUNT(*) AS num_trips
     FROM `bigquery-public-data.new_york.citibike_trips`
-    GROUP BY date, usertype
-  )
-SELECT *
-FROM
-  AI.FORECAST(
-    TABLE citibike_trips
+    GROUP BY date,
 ```

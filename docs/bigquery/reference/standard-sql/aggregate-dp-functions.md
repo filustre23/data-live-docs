@@ -323,10 +323,3 @@ If you need them, cast them as the
 The following differentially private query gets the percentile of items
 requested. Smaller aggregations might not be included. This query references a
 view called [`professors`](/bigquery/docs/reference/standard-sql/query-syntax#dp_example_tables).
-
-```
--- With noise, using the epsilon parameter.
-SELECT
-  WITH DIFFERENTIAL_PRIVACY
-    OPTIONS(epsilon=10,<
-```

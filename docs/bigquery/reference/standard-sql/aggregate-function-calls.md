@@ -264,7 +264,4 @@ SELECT
   MAX(fruit) AS max
 FROM
   (
-    SELECT NULL AS fruit
-    UNION ALL
-    SELECT 'apple'
 ```

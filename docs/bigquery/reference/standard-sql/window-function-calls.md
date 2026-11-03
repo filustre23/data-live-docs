@@ -389,14 +389,3 @@ These queries compute values with a partially or fully unbound window:
 * [Compute rank](#compute_rank)
 
 These queries compute values with numeric boundaries:
-
-* [Compute a cumulative sum](#compute_a_cumulative_sum)
-* [Compute a moving average](#compute_a_moving_average)
-* [Compute the number of items within a range](#compute_the_number_of_items_within_a_range)
-* [Get the last value in a range](#get_the_last_value_in_a_range)
-* [Use a named window in a window frame clause](#def_use_named_window)
-
-These queries compute values with the current row as a boundary:
-
-* [Compute a grand total](#compute_a_grand_total)
-* [Compu](#compute_a_subtotal)

@@ -27,6 +27,115 @@ To get the latest product updates delivered to you, add the URL of this page to 
 reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators), or add the
 [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## November 02, 2026
+
+Feature
+
+*Lakehouse* [caching](/lakehouse/docs/about-cross-cloud-data-access#intelligent-caching)
+for cross-cloud data access is
+[generally available](https://cloud.google.com/products/#product-launch-stages)
+(GA). Cross-cloud caching is disabled by default. You can opt in to caching on
+a Lakehouse federated catalog or a BigQuery cross-cloud connection to
+cache remote files in your Google Cloud region. This helps reduce
+cross-cloud egress costs and accelerate subsequent queries.
+
+For more information, see [About cross-cloud data
+access](/lakehouse/docs/about-cross-cloud-data-access#intelligent-caching) and
+[Query remote data](/lakehouse/docs/query-remote-data).
+
+Feature
+
+*Lakehouse* supports the following remote catalog providers for cross-cloud
+data access. This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+
+* [Databricks Unity
+  Catalog](/lakehouse/docs/set-up-cross-cloud-connection-databricks) on
+  Amazon Web Services (AWS), Microsoft Azure, or Google Cloud
+* [AWS Glue Data
+  Catalog](/lakehouse/docs/set-up-cross-cloud-connection-aws-glue) on AWS
+* [Snowflake Horizon
+  Catalog](/lakehouse/docs/set-up-cross-cloud-connection-snowflake) on AWS,
+  Microsoft Azure, or Google Cloud
+* [Workday Data Lake](/lakehouse/docs/set-up-cross-cloud-connection-workday)
+  on AWS or Google Cloud
+
+This feature lets you configure federated catalog endpoints to synchronize
+catalog metadata and query Apache Iceberg tables in remote catalogs directly
+from Google Cloud using BigQuery, Managed Service for Apache Spark, and Apache
+Spark without migrating data or building complex ETL pipelines. You can route
+metadata synchronization and queries over the public internet or privately over
+Cross-Cloud Interconnect, and protect cross-cloud data access with VPC Service
+Controls service perimeters. For Databricks Unity Catalog, you can also use
+[user identity
+federation](/lakehouse/docs/set-up-cross-cloud-connection-databricks#configure-user-identity-federation)
+to propagate end-user identities on queries for permission enforcement and audit
+logging.
+
+For more information, see [About cross-cloud data
+access](/lakehouse/docs/about-cross-cloud-data-access), [Query remote
+data](/lakehouse/docs/query-remote-data), and [Use VPC Service Controls with
+federated catalog endpoints](/lakehouse/docs/vpc-sc-federated-catalogs).
+
+Feature
+
+You can now
+[monitor](/bigquery/docs/create-data-agents#monitor_agents_and_conversations)
+the performance, adoption, latency, and costs of your data agents and their
+conversations by using Google Cloud Observability in BigQuery. This feature is
+[generally available](https://cloud.google.com/products#product-launch-stages)
+(GA).
+
+Feature
+
+You can use the
+[`AI.PARSE_DOCUMENT` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-parse-document)
+to extract layout elements such as titles, headings, paragraphs, lists, tables,
+and images by using the Document AI layout parser to convert unstructured
+documents into structured `JSON` data.
+
+This function is
+[generally available](https://cloud.google.com/products#product-launch-stages)
+(GA).
+
+Feature
+
+You can now use BigQuery change history and continuous queries for
+[Apache Iceberg managed tables](/bigquery/docs/biglake-iceberg-tables-in-bigquery)
+in Lakehouse.
+
+You can use the `APPENDS` table-valued function (TVF) to track rows appended to
+Apache Iceberg managed tables over a specified time range, and use
+[BigQuery continuous queries](/bigquery/docs/continuous-queries)
+to read incoming data from and write output rows to Apache Iceberg managed
+tables.
+
+This feature is [generally available](https://cloud.google.com/products#product-launch-stages)
+(GA).
+
+For more information, see [Work with change
+history](/lakehouse/docs/change-history) and [Introduction to continuous
+queries](/bigquery/docs/continuous-queries-introduction).
+
+Feature
+
+The [`SECURE_CONTEXT` function](/bigquery/docs/reference/standard-sql/security_functions#secure_context)
+is now available in [Preview](https://cloud.google.com/products#product-launch-stages).
+`SECURE_CONTEXT` returns the value of a request-scoped secure context parameter
+provided at query runtime, allowing logical views to dynamically filter and
+evaluate data based on context variables such as user attributes, department
+IDs, or tenant identifiers.
+
+Feature
+
+The Data Engineering Agent now
+supports [BigQuery AI, ML, and object functions and
+statements in generated Dataform SQLX
+pipelines and agent instruction files](/bigquery/docs/data-engineering-agent-pipelines#bigquery-ai-ml-support).
+
+This feature is
+[generally available](https://cloud.google.com/products#product-launch-stages)
+(GA).
+
 ## October 30, 2026
 
 Feature
@@ -4790,59 +4899,4 @@ In the BigQuery console, in the **Welcome** tab, you can now try the [Apache Spa
 
 Feature
 
-The [`CREATE EXTERNAL TABLE`](/bigquery/docs/reference/standard-sql/data-definition-language#create_external_table_statement) and [`LOAD DATA`](/bigquery/docs/reference/standard-sql/load-statements) statements now support the following options in [preview](https://cloud.google.com/products#product-launch-stages):
-
-* `time_zone`: specify a time zone to use when loading data
-* `date_format`, `datetime_format`, `time_format`, and `timestamp_format`: define how date and time values are formatted in your source files
-
-## May 29, 2025
-
-Feature
-
-You can now create [event-driven transfers](/bigquery/docs/event-driven-transfer) when transferring data from Cloud Storage to BigQuery. Event-driven transfers can automatically trigger transfer runs when data in your Cloud Storage bucket has been modified or added. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
-
-Feature
-
-You can now use the `dbt-bigquery` adapter to run Python code that's defined in BigQuery DataFrames. For more information, see [Use BigQuery DataFrames in dbt](/bigquery/docs/dataframes-dbt). This feature is in [preview](https://cloud.google.com/products#product-launch-stages).
-
-Feature
-
-You can now use your Google Account user credentials to authorize the creation, scheduling, and running of pipelines as well as the scheduling of notebooks and data preparations. For more information, see [Create a pipeline schedule](/bigquery/docs/schedule-pipelines#create-schedule). This feature is in [preview](https://cloud.google.com/products#product-launch-stages).
-
-## May 28, 2025
-
-Feature
-
-You can now create a [serverless Spark session and run PySpark code in a BigQuery notebook](/bigquery/docs/use-spark). This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
-
-Feature
-
-Column metadata indexing is now available for both [BigQuery tables](/bigquery/docs/metadata-indexing-managed-tables) and [external tables](/bigquery/docs/metadata-caching-external-tables). This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
-
-## May 27, 2025
-
-Feature
-
-BigQuery offers [optional job creation mode](/bigquery/docs/running-queries#optional-job-creation) to speed up small queries that you use in your dashboards, data exploration, and other workflows. This mode automatically optimizes eligible queries and uses a cache to improve latency. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
-
-Feature
-
-You can now [share Pub/Sub streaming data through BigQuery sharing](/bigquery/docs/analytics-hub-stream-sharing) with additional [client libraries](/bigquery/docs/reference/analytics-hub) support and provider usage metrics. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
-
-## May 26, 2025
-
-Libraries
-
-### Python
-
-#### [3.33.0](https://github.com/googleapis/python-bigquery/compare/v3.32.0...v3.33.0) (2025-05-19)
-
-##### Features
-
-* Add ability to set autodetect\_schema query param in update\_table ([#2171](https://github.com/googleapis/python-bigquery/issues/2171)) ([57f940d](https://github.com/googleapis/python-bigquery/commit/57f940d957613b4d80fb81ea40a1177b73856189))
-* Add dtype parameters to to\_geodataframe functions ([#2176](https://github.com/googleapis/python-bigquery/issues/2176)) ([ebfd0a8](https://github.com/googleapis/python-bigquery/commit/ebfd0a83d43bcb96f65f5669437220aa6138b766))
-* Support job reservation ([#2186](https://github.com/googleapis/python-bigquery/issues/2186)) ([cb646ce](https://github.com/googleapis/python-bigquery/commit/cb646ceea172bf199f366ae0592546dff2d3bcb2))
-
-##### Bug Fixes
-
-* Ensure AccessEntry equality and repr uses the correct `entity_type` (
+The

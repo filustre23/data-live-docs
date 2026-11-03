@@ -239,7 +239,5 @@ SELECT
 FROM
   `region-us`.INFORMATION_SCHEMA.WRITE_API_TIMELINE_BY_PROJECT
 WHERE
-  table_id LIKE 'my_table'
-GROUP BY
-  project_id, dataset_id, table_id
+  table_id
 ```

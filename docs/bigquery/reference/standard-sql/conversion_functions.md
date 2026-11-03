@@ -282,20 +282,3 @@ The `expression` parameter can represent an expression for these data types:
 ```
 CAST(expression AS INT64)
 ```
-
-**Description**
-
-GoogleSQL supports [casting](#cast) to integer types.
-The `expression` parameter can represent an expression for these data types:
-
-* `INT64`
-* `FLOAT64`
-* `NUMERIC`
-* `BIGNUMERIC`
-* `BOOL`
-* `STRING`
-
-**Conversion rules**
-
-| From |
-| --- |

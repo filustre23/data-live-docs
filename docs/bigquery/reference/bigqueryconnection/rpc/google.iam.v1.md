@@ -224,4 +224,3 @@ Request message for `TestIamPermissions` method.
 
 | Fields | |
 | --- | --- |
-| `resource` | `string`  REQUIRED: The resource for which the policy detail is being requested. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field. |

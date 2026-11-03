@@ -256,30 +256,5 @@ bq query --udf_resource=<file_path_or_URI> <sql_query>
 
 ```
 // UDF definition
-function urlDecode(row, emit) {
-  emit({title: decodeHelper(row.title),
-        requests: row.num_requests});
-}
-
-// Helper function with error handling
-function decodeHelper(s) {
-  try {
-    return decodeURI(s);
-  } catch (ex) {
-    return s;
-  }
-}
-
-// UDF registration
-bigquery.defineFunction(
-  'urlDecode',  // Name used to call the function from SQL
-
-  ['title', 'num_requests'],  // Input column names
-
-  // JSON representation of the output schema
-  [{name: 'title', type: 'string'},
-   {name: 'requests', type: 'integer'}],
-
-  urlDecode  // The function reference
-);
+function urlDecode(row,
 ```

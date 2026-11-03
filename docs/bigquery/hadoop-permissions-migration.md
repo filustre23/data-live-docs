@@ -261,9 +261,4 @@ gcs:
 * 使用 `email_address` 指定 Google Cloud 主账号的邮箱。
 * 使用 `type` 指定 Google Cloud中主账号的性质。`type` 的值可以是 `user`、`group` 或 `serviceAccount`。
 
-规则中使用的任何 CEL 表达式都可以访问表示所处理对象的变量。变量中的字段基于 HDFS 或 Apache Ranger 元数据文件的内容。可用变量取决于规则集部分：
-
-* 对于 `user_rules`，请使用变量 `user`
-* 对于 `group_rules`，请使用变量 `group`
-* 对于 `other_rules`，请使用变量 `other`
-* 对于 `role_rules`
+规则中使用的任何 CEL 表

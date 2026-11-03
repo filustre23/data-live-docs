@@ -290,14 +290,5 @@ doesn't return an error, `SAFE.` has no effect on the output.
   division operation, use [SAFE\_DIVIDE](/bigquery/docs/reference/standard-sql/mathematical_functions#safe_divide).
 * Some operators, such as `IN`, `ARRAY`, and `UNNEST`, resemble functions but
   don't support the `SAFE.` prefix.
-* The `CAST` and `EXTRACT` functions don't support the `SAFE.`
+* The `CAST`, `EXTRACT`, and `SECURE_CONTEXT` functions don't support the `SAFE.`
   prefix. To prevent errors from casting, use
-  [SAFE\_CAST](/bigquery/docs/reference/standard-sql/conversion_functions#safe_casting).
-
-**Example**
-
-In the following example, the first use of the `SUBSTR` function would normally
-return an error, because the function doesn't support length arguments with
-negative values. However, the `SAFE.` prefix causes the function to return
-`NULL` instead. The second use of the `SUBSTR` function provides the expected
-output: the `SAFE.` prefix has no effect.

@@ -234,13 +234,3 @@ bq mk
 以下列出 Facebook 廣告資料轉移作業支援的動作集合：
 
 * `ActionValues`
-* `Actions`
-* `AdClickActions`
-* `AdImpressionActions`
-* `CatalogSegmentActions`
-* `CatalogSegmentValue`
-* `CatalogSegmentValueMobilePurchaseRoas`
-* `CatalogSegmentValueOmniPurchaseRoas`
-* `CatalogSegmentValueWebsitePurchaseRoas`
-* `ConversionValues`
-<

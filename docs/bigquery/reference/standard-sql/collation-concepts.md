@@ -351,10 +351,5 @@ SELECT STARTS_WITH(col_b_expression, col_c_expression)
 FROM table_a;
 
 -- This runs. Column 'a' and 'd' have the same collation specification.
-SELECT STARTS_WITH(col_a_expression, col_d_expression)
-FROM table_a;
-
--- This runs. Even though column 'a' and 'b' have different
--- collation specifications, column 'b' is considered the default collation
--- because it's assigned to an empty collation specificat
+SELECT STARTS_WITH(col_a_expression
 ```

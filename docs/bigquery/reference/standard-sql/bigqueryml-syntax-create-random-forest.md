@@ -546,8 +546,4 @@ An `ARRAY` of `STRUCT` values. Each `STRUCT` contains a
 specifies the weight for that class label. A weight must be present for every
 class label. The weights are not required to add up to 1.
 
-A `CLASS_WEIGHTS` value might look like the following example:
-
-```
-CLASS_WEIGHTS = [STRUCT('example_label'
-```
+A `CLASS_WEIGHTS` valu

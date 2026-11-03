@@ -293,7 +293,4 @@ into this function, see
 SELECT APPROX_TOP_SUM(x, weight, 2) AS approx_top_sum FROM
 UNNEST([
   STRUCT("apple" AS x, 3 AS weight),
-  ("pear", 2),
-  ("apple", 0),
-  (
 ```

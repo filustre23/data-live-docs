@@ -185,9 +185,5 @@ import com.google.cloud.bigquery.datatransfer.v1.TransferConfig;
 import com.google.protobuf.Struct;
 import com.google.protobuf.Value;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
-// Sample to create youtube channel transfer config.
-public class CreateYoutubeChannelTransfer {
+import java.util.HashMa
 ```

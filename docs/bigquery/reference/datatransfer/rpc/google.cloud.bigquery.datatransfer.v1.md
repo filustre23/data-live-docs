@@ -129,9 +129,4 @@ This API allows users to manage their data transfers into BigQuery.
 
 | ListTransferResources |
 | --- |
-| `rpc ListTransferResources(ListTransferResourcesRequest) returns (ListTransferResourcesResponse)`  Returns information about transfer resources.  Authorization scopes  Requires the following OAuth scope:   * `https://www.googleapis.com/auth/cloud-platform`   For more information, see the [Authentication Overview](/docs/authentication#authorization-gcp). |
-
-| ListTransferRuns |
-| --- |
-|
-|  |
+| `rpc ListTransferResources(ListTransferResourcesRequest) returns (ListTransferResourcesResponse)`  Returns information about transfer resources.  Authorization scopes  Requires the following OAuth scope:   * `https://www.googleapis.com/auth/cloud-platform`   For more inf |

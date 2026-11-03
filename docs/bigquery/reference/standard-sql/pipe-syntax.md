@@ -298,7 +298,5 @@ Propagates the existing table and adds computed columns, similar to
 
 ```
 (
-  SELECT 'apples' AS item, 2 AS sales
-  UNION ALL
-  SELECT 'bananas'
+  SELECT 'apples' AS item
 ```

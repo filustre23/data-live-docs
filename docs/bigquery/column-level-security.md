@@ -860,5 +860,5 @@ public class ListDataPolicies {
     ListDataPoliciesRequest request =
         ListDataPoliciesRequest.newBuilder().setParent(parent.toString()).build();
 
-    try (DataPolicyServiceClient client
+    try (DataPolicyServiceClient client =
 ```

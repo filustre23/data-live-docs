@@ -541,20 +541,4 @@ If you are running hyperparameter tuning, use one of the following options:
   `COLSAMPLE_BYNODE = HPARAM_CANDIDATES([0, 0.1, 0.3, 0.5])`.
 
 When running hyperparameter tuning, the valid range is `[0, 1.0]`, there is
-no default range, and the scale type is `LINEAR`.
-
-### `MIN_SPLIT_LOSS`
-
-**Syntax**
-
-`MIN_SPLIT_LOSS = { float64_value | HPARAM_RANGE(range) | HPARAM_CANDIDATES([candidates]) }`
-
-**Description**
-
-The minimum loss reduction required to make a further partition on a leaf node of
-the tree. The larger the `MIN_SPLIT_LOSS` value is, the more conservative the
-algorithm is.
-
-**Arguments**
-
-If you aren'
+no default range, and the scale type is `LINEAR`

@@ -326,7 +326,5 @@ block, ending the scope of variable `y`; finally, it returns the value of `x`.
 ```
 DECLARE x INT64 DEFAULT 10;
 BEGIN
-  DECLARE y INT64;
-  SET y = x;
-  SELECT
+  DECLARE y</
 ```

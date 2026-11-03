@@ -336,13 +336,3 @@ SELECT
  | 0         | 1                 | 1            |
  +-----------+-------------------+--------------*/
 ```
-
-## `DATE_FROM_UNIX_DATE`
-
-```
-DATE_FROM_UNIX_DATE(int64_expression)
-```
-
-**Description**
-
-Interprets `int64_expressio`

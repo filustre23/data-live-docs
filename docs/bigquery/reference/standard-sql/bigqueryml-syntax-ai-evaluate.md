@@ -354,7 +354,5 @@ SELECT
 FROM
  AI.EVALUATE(
   # Training data
-  (SELECT * EXCEPT(training) FROM prepared_data WHERE training),
-  # Prediction data
-  (SELECT
+  (SELECT * EXCEPT(training)
 ```

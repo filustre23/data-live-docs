@@ -225,8 +225,4 @@ WITH
     IFNULL(SUM(period_slot_ms), 0) AS period_slot_ms,
     DIV(UNIX_MILLIS(period_start), 3600000 * 1) * 3600000 * 1 AS time_ms
   FROM (
-    SELECT
-      *
-    FROM
-      `PROJECT_ID.region-US`.INFORMATION_SCHEMA.JOBS_TIMELINE_BY_PROJECT
 ```

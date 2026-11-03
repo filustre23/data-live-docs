@@ -553,7 +553,3 @@ A `FLOAT64` value. The default value is `0.01`.
 ### `DATA_SPLIT_METHOD`
 
 **Syntax**
-
-```
-DATA_SPLIT_METHOD = { 'AUTO_SPLIT' | 'RANDOM' | 'CUSTOM'<
-```

@@ -426,7 +426,4 @@ field of `feature`:
 
 ```
 SELECT * FROM
-  ML.PREDICT(
-    MODEL `my_dataset.vision_model`,
-    (SELECT uri
 ```

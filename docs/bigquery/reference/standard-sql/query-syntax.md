@@ -290,13 +290,4 @@ FROM PlayerStats;
  +--------------------------+
  | {                        |
  |   last_name: "Adams",    |
- |   first_name: "Noam",    |
- |   age: 20                |
- |  }                       |
- +--------------------------+
- | {                        |
- |   last_name: "Buchanan", |
- |   first_name: "Jie",     |
- |   age: 19                |
- |  }                       |
 ```

@@ -471,14 +471,4 @@ The following audit logs are associated with methods belonging to
   + `bigquery.tables.getData - DATA_READ`
 * **Method is a long-running or streaming operation**:
   No.
-* **Filter for this method**: `protoPayload.methodName="jobservice.query"`
-
-### `tabledataservice`
-
-The following audit logs are associated with methods belonging to
-`tabledataservice`.
-
-#### `list`
-
-* **Method**: `tabledataservice.list`
-* **Audit log type**: [Data access](/logging/docs/audit#data-access)
+* **Filter for this method**: `protoPayloa`

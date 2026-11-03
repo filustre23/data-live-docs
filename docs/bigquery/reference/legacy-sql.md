@@ -263,6 +263,4 @@ FROM
 WHERE
   first IN (SELECT
               second
-            FROM
-              [bigquery-public-data:samples.trigrams]
 ```

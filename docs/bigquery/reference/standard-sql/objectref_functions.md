@@ -381,14 +381,4 @@ For more information, see [Work with `ObjectRef` values](/bigquery/docs/work-wit
   uris that contain consecutive slashes. For example, uris such as
   `gs://mybucket/flowers/` and `gs://mybucket/flowers//12345.jpg` return an
   error.
-* `authorizer`: a `STRING` value that contains the
-  [Cloud Resource connection](/bigquery/docs/create-cloud-resource-connection)
-  used for [delegated access](/bigquery/docs/work-with-objectref#delegated-access)
-  to the Cloud Storage object. Your data administrator needs to set up the
-  permissions to use this connection. If omitted, the returned ObjectRef uses
-  [direct access](/bigquery/docs/work-with-objectref#direct-access).
-
-**Output**
-
-A table with metadata that represents the objects found in
-Cloud Storage. The table includes the following columns:
+* `authorizer`: a `STRING` value that contains

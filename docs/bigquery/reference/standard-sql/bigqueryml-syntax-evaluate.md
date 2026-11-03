@@ -509,13 +509,4 @@ ML.EVALUATE(
 
   The default value is `TEXT_GENERATION`.
 
-* `MAX_OUTPUT_TOKENS`: an `INT64` value that sets
-  the maximum number of tokens output by the model. Specify a lower value
-  for shorter responses and a higher value for longer responses.
-  A token might be smaller than a word and is approximately four characters.
-  100 tokens correspond to approximately 60-80 words.
-
-  The default value is `1024`.
-
-  The `MAX_OUTPUT_TOKENS` value must be in the range
-  `[1,4096]`.
+* `MAX_OUTPUT_TO`

@@ -192,7 +192,5 @@ ANY_VALUE(
 over_clause:
   { named_window | ( [ window_specification ] ) }
 
-window_specification:
-  [ named_window ]
-  [ PARTITION BY
+window_s
 ```

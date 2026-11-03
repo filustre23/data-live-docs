@@ -195,12 +195,5 @@ over_clause:
 window_specification:
   [ named_window ]
   [ PARTITION BY partition_expression [, ...] ]
-  ORDER BY expression [ { ASC | DESC }  ] [, ...]
+  ORDER BY expression [ { ASC | DESC }
 ```
-
-**Description**
-
-This function divides the rows into `constant_integer_expression`
-buckets based on row ordering and returns the 1-based bucket number that is
-assigned to each row. The number of rows in the buckets can differ by at most 1.
-The remainder values (the remain

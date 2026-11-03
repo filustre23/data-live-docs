@@ -183,8 +183,5 @@ SELECT name,
   finish_time,
   division,
   LAG(name)
-    OVER (PARTITION BY division ORDER BY finish_time ASC) AS preceding_runner
-FROM finishers;
-
-/*-----------------+-------------+----------+------------------+
+    OVER (PARTITION BY division ORDER BY
 ```

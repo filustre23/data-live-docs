@@ -255,7 +255,5 @@ JSON 檔案中的 `condition` 欄位支援下列值，每個值都有特定的 `
 如要排定 Hive Metastore 移轉作業，請輸入 `bq mk` 指令，並提供移轉作業建立旗標 `--transfer_config`：
 
 ```
-  bq mk --transfer_config
-  --data_source=hadoop display_name='TRANSFER_NAME'
-  --service_account_name='SERVICE_ACCOUNT'
+  bq
 ```

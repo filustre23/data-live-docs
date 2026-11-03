@@ -367,10 +367,3 @@ isn't always the same.
 
 In this example, a random number of usernames are returned from the
 [`Players`](#example_tables) table.
-
-```
-SELECT
-  results.username
-FROM
-  (SELECT *
-```

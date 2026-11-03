@@ -244,10 +244,5 @@ bq mk
         --target_dataset=mydataset
         --data_source=servicenow
         --display_name='My Transfer'
-        --params='{"assets": ["incident", "change_request"],
-            "connector.authentication.oauth.clientId": "1234567890",
-            "connector.authentication.oauth.clientSecret":"ABC12345",
-            "connector.authentication.username":"user1",
-            "connector.authentication.password":"abcdef1234",
-            "connector.instanceId":"dev-instance",
+        --params=
   ```

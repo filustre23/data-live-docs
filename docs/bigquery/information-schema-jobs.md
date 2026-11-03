@@ -130,9 +130,4 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 | 檢視表名稱 | 資源範圍 | 區域範圍 |
 | --- | --- | --- |
-| `` [PROJECT_ID.]`region-REGION`.INFORMATION_SCHEMA.JOBS[_BY_PROJECT] `` | 專案層級 | `REGION` |
-
-請替換下列項目：
-
-* 選用：`PROJECT_ID`： Google Cloud 專案的 ID。如未指定，則會使用預設專案。
-* `REGION`：任何[資料集區域名稱](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。例如：`` `region-us` ``。**注意：**您必須使用
+| `` [PROJECT_ID.]`region-REGION`.INFORMATION_SCHEMA.JOBS[_BY_PROJECT] `` | 專案層級 |  |

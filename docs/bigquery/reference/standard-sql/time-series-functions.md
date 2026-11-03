@@ -46,7 +46,8 @@ The following operations add rows to the `APPENDS` change history:
 **Definitions**
 
 * `table`: the BigQuery table name. This must be a regular
-  BigQuery table. This argument must be preceded by the word `TABLE`.
+  BigQuery table or an [Apache Iceberg managed table](/bigquery/docs/biglake-iceberg-tables-in-bigquery).
+  This argument must be preceded by the word `TABLE`.
 * `start_timestamp`: a [`TIMESTAMP`](/bigquery/docs/reference/standard-sql/data-types#timestamp_type)
   value indicating the earliest time at which a
   change is included in the output. If the value is `NULL`, all changes since the
@@ -104,8 +105,9 @@ The `APPENDS` function returns a table with the following columns:
   transaction if some appended rows are updated or deleted within the same
   transaction.
 * You can only use the `APPENDS` function with regular BigQuery
-  tables. Clones, snapshots, views, materialized views, external tables, and
-  wildcard tables aren't supported.
+  tables and [Apache Iceberg managed tables](/bigquery/docs/biglake-iceberg-tables-in-bigquery). Clones,
+  snapshots, views, materialized views, external tables, and wildcard tables
+  aren't supported.
 * Partition pseudo-columns for ingestion-time partitioned tables, such as
   `_PARTITIONTIME` and `_PARTITIONDATE`, aren't included in the function's
   output.
@@ -378,10 +380,3 @@ OPTIONS(enable_change_history=true);
 ```
 
 Insert two rows into the table:
-
-```
-INSERT INTO mydataset.Produce
-VALUES
-  ('bananas', 20),
-  ('carrots'<
-```

@@ -974,5 +974,5 @@ import (
 
 // copyTableWithCMEK demonstrates creating a copy of a table and ensuring the copied data is
 // protected with a customer managed encryption key.
-func copyTableWithCMEK(projectID, datasetID, tableID string
+func copyTableWithCMEK(projectID, datasetID, tableID string) error
 ```

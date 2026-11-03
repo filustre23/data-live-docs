@@ -135,7 +135,3 @@ The size of a single AppendRowsRequest must be less than 20 MB in size. Requests
 ## MissingValueInterpretation
 
 An enum to indicate how to interpret missing values of fields that are present in user schema but missing in rows. A missing value can represent a NULL or a column default value defined in BigQuery table schema.
-
-| Enums | |
-| --- | --- |
-|  |

@@ -1029,5 +1029,6 @@ func createTableAndWidenQuery(projectID, datasetID, tableID string) error {
 		return err
 	}
 	// Our table has two columns.  We'll introduce a new favorite_color column via
-	// a s
+	// a subsequent query that appends to the table.
+	q
 ```

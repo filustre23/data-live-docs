@@ -200,8 +200,3 @@ Before trying this sample, follow the Node.js setup instructions in the
 [BigQuery quickstart using
 client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries).
 For more information, see the
-[BigQuery Node.js API
-reference documentation](https://googleapis.dev/nodejs/bigquery/latest/index.html).
-
-To authenticate to BigQuery, set up Application Default Credentials.
-For more information, see

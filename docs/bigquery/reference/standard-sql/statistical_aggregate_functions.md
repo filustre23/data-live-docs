@@ -257,15 +257,5 @@ FROM
 
 ```
 SELECT COVAR_POP(y, x) AS results
-FROM UNNEST([STRUCT(1.0 AS y, NULL AS x),(9.0, 3.0)])
-
-/*---------+
- | results |
- +---------+
- | 0       |
- +---------*/
-```
-
-```
-SELECT</
+FROM UNNEST([STRUCT(1.0 AS y, NULL AS x),(9.0,
 ```

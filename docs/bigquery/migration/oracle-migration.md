@@ -172,5 +172,3 @@ Oracle 提供不同層級和種類的[資料庫稽核](https://docs.oracle.com/c
 BigQuery 的資料存取記錄和稽核記錄均使用 [Cloud 稽核記錄](https://docs.cloud.google.com/logging/docs/audit?hl=zh-tw)，且預設為啟用。資料存取記錄會保留 30 天，其他系統事件和管理員活動記錄則會保留 400 天。如需更長的保留期限，可以按照「 [Google Cloud中的安全性記錄檔分析](https://docs.cloud.google.com/solutions/design-patterns-for-exporting-stackdriver-logging?hl=zh-tw)」一文所述，將記錄[匯出](https://docs.cloud.google.com/solutions/design-patterns-for-exporting-stackdriver-logging?hl=zh-tw)至 BigQuery、Cloud Storage 或 Pub/Sub。如需與現有事件監控工具整合，可以使用 Pub/Sub 匯出，並在現有工具上進行自訂開發，以便從 Pub/Sub 讀取記錄。
 
 稽核記錄包含所有 API 呼叫、查詢陳述式和工作狀態。您可以使用 [Cloud Monitoring](https://docs.cloud.google.com/bigquery/docs/monitoring?hl=zh-tw) 監控運算單元分配情形、查詢和儲存的掃描位元組數，以及其他 BigQuery [指標](https://docs.cloud.google.com/bigquery/docs/monitoring?hl=zh-tw#metrics)。BigQuery [查詢計畫和時間軸](https://docs.cloud.google.com/bigquery/query-plan-explanation?hl=zh-tw)可用於分析查詢階段和效能。
-
-您可以使用[錯誤訊息表格](https://docs.cloud.google.com/bigquery/troubleshooting-errors?hl=zh-tw)，排解查詢工作和 API 錯誤。如要區分每項查詢或工作的運算單元分配，可以使用這項[公用程式](https://github.com/GoogleCloudPlatform/professional-services/tree/master/examples/bigquery-cross-project-slot-monitoring)，這對採用用量計價模式，且有多個專案分散在多個團隊的客戶來說非常實用。

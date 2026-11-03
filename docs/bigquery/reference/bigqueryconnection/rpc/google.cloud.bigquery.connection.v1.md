@@ -132,7 +132,3 @@ Connection properties specific to Cloud Spanner.
 ## CloudSqlCredential
 
 Credential info for the Cloud SQL.
-
-| Fields | |
-| --- | --- |
-| `username` | `string`  The username |

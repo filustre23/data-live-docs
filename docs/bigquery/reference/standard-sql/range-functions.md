@@ -397,14 +397,5 @@ Returns `NULL` if `range_to_check` is `NULL`.
 In the following query, the upper bound of the range is retrieved:
 
 ```
-SELECT RANGE_END(RANGE<DATE> '[2022-12-01, 2022-12-31)') AS results;
-
-/*------------+
- | results    |
- +------------+
- | 2022-12-31 |
- +------------*/
+SELECT RANGE_END(RANGE<DATE> '[2022-12-01, 2022-12-31)') AS
 ```
-
-In the following query, the upper bound of the range is unbounded, so
-`NULL` is returned:

@@ -200,15 +200,4 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 在資料移轉過程中，BigQuery 資料移轉服務會將 Amazon Redshift 中的資料寫入 Cloud Storage，並儲存為 CSV 檔案。如果這些檔案包含 ASCII 0 字元，就無法載入至 BigQuery。建議您評估資料，判斷這是否會造成問題。如果是，您可以將資料匯出至 Amazon S3 做為 Parquet 檔案，然後使用 BigQuery 資料移轉服務匯入這些檔案，藉此解決問題。詳情請參閱 [Amazon S3 資料移轉簡介](https://docs.cloud.google.com/bigquery/docs/s3-transfer-intro?hl=zh-tw)。
 
-## 設定 Amazon Redshift 移轉作業
-
-選取下列選項之一：
-
-### 控制台
-
-1. 前往 Google Cloud 控制台的「BigQuery」頁面。
-
-   [前往 BigQuery](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 按一下「資料移轉」。
-3. 按一下「建立轉移作業」。
-4. 在「Source type」(來源類型)
+## 設定

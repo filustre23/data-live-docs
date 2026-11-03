@@ -317,13 +317,4 @@ DATETIME_SUB(datetime_expression, INTERVAL step_size step_unit)
 
 **Description**
 
-Subtracts `step_size` units of `step_unit` from the `DATETIME` object.
-
-`DATETIME_SUB` supports the following values for `step_unit`:
-
-* `MICROSECOND`
-* `MILLISECOND`
-* `SECOND`
-* `MINUTE`
-* `HOUR`
-* `DAY`
+Subtracts `step_size` unit

@@ -263,7 +263,7 @@ format='FILE_FORMAT');
 更改下列內容：
 
 * MANAGED\_TABLE\_NAME：現有 Iceberg 代管資料表的名稱。
-* STORAGE\_URI：完整 [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#gcs-uri)，或以半形逗號分隔的 URI 清單。也支援[萬用字元](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#load-wildcards)。例如：`gs://mybucket/table`。
+* STORAGE\_URI：完整的 [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#gcs-uri)，或以半形逗號分隔的 URI 清單。也支援[萬用字元](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#load-wildcards)。例如：`gs://mybucket/table`。
 * FILE\_FORMAT：來源資料表格式。如要瞭解支援的格式，請參閱 [`load_option_list`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements?hl=zh-tw#load_option_list) 的 `format` 列。
 
 ### bq
@@ -400,7 +400,7 @@ Iceberg 代管資料表也支援[分群](https://docs.cloud.google.com/bigquery/
 * [`--time_partitioning_field` 和 `--time_partitioning_type` 旗標](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#mk-table)
 * [`timePartitioning` 屬性](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables?hl=zh-tw#timepartitioning)
 
-您可以按照與標準 BigQuery 資料表相同的方式，設定及更新[分區到期時間](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#partition-expiration)。過期的分區會在時間回溯期結束後，由垃圾收集機制處理。如果將資料新增至已過期的分區，資料會立即過期。
+您可以按照與標準 BigQuery 資料表相同的方式，設定及更新[分區到期時間](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#partition-expiration)。過期的分區會在時間旅行期間結束後，由垃圾收集機制處理。如果將資料新增至已過期的分區，資料會立即過期。
 
 #### 修改及查詢分區 Iceberg 代管資料表
 
@@ -443,7 +443,7 @@ Iceberg 代管資料表有下列限制：
 
 * Iceberg 代管資料表不支援[重新命名作業](https://docs.cloud.google.com/bigquery/docs/managing-tables?hl=zh-tw#renaming-table)或 [`ALTER TABLE RENAME TO` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_table_rename_to_statement)。
 * Iceberg 代管資料表不支援[資料表複製](https://docs.cloud.google.com/bigquery/docs/managing-tables?hl=zh-tw#copy-table)或 [`CREATE TABLE COPY` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#create_table_copy)。
-* Iceberg 代管資料表不支援[資料表複製](https://docs.cloud.google.com/bigquery/docs/table-clones-intro?hl=zh-tw)或 [`CREATE TABLE CLONE` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#create_table_clone_statement)。
+* Iceberg 代管資料表不支援[資料表副本](https://docs.cloud.google.com/bigquery/docs/table-clones-intro?hl=zh-tw)或 [`CREATE TABLE CLONE` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#create_table_clone_statement)。
 * Iceberg 代管資料表不支援[資料表快照](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro?hl=zh-tw)或 [`CREATE SNAPSHOT TABLE` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#create_snapshot_table_statement)。
 * Iceberg 代管資料表不支援下列資料表結構定義：
   + 結構定義空白
@@ -470,8 +470,8 @@ Iceberg 代管資料表有下列限制：
 * `TRUNCATE TABLE`不支援 Iceberg 代管資料表。有兩種替代方案：
   + [`CREATE OR REPLACE
     TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#create_table_statement)，並使用相同的資料表建立選項。
-  + `DELETE FROM` table `WHERE` true
-* [`APPENDS` 資料表值函式 (TVF)](https://docs.cloud.google.com/bigquery/docs/change-history?hl=zh-tw) 不支援 Iceberg 代管資料表。
+  + `DELETE FROM` 資料表 `WHERE` true
+* [`APPENDS` 資料表值函式 (TVF)](https://docs.cloud.google.com/bigquery/docs/change-history?hl=zh-tw) 支援 Iceberg 代管資料表，但 `CHANGES` TVF 不支援。
 * Iceberg 中繼資料可能不含過去 90 分鐘內，由 Storage Write API 串流至 BigQuery 的資料。
 * 使用 BigQuery Storage Write API (gRPC) 將資料串流至 Iceberg 代管資料表時，資料表的 `lastModifiedTime` 可能不會立即更新，且可能過時。BigLake 狀態中的中繼資料匯出時間戳記，反映的是產生 Iceberg 中繼資料時使用的讀取快照時間，而非資料表的 `lastModifiedTime`。
 * 使用 `tabledata.list` 的記錄式分頁存取不支援 Iceberg 代管資料表。
@@ -484,11 +484,11 @@ Iceberg 代管資料表有下列限制：
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-29 (世界標準時間)。
+上次更新時間：2026-11-02 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-02 (世界標準時間)。"],[],[]]

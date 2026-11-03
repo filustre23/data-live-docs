@@ -1148,3 +1148,7 @@ print(
 ### bq
 
 1. 在 Google Cloud 控制台啟用 Cloud Shell。
+
+   [啟用 Cloud Shell](https://console.cloud.google.com/?cloudshell=true&hl=zh-tw)
+
+   Google Cloud 控制台底部會開啟

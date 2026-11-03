@@ -133,4 +133,4 @@ Service to handle EDW migrations.
 
 | StartMigrationWorkflow |
 | --- |
-| `rpc StartMigrationWorkflow(StartMigrationWorkflowRequest) returns (Empty)`  Starts a previously created migration workflow. I.e., the state transitions from DRAFT to RUNNING. This is a no-op if the state is already RUNNING. An error will be signaled if the state is anything other than DRAFT or RUNNING.  Authorization scopes  Requires the following OAuth scope:   * `https://www.googleapis.com/auth/cloud-platform`   For more information, see the |
+| `rpc StartMigrationWorkflow(StartMigrationWorkflowRequest) returns (` |

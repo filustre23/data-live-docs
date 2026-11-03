@@ -183,8 +183,5 @@ WHERE
 +------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | population_by_zip_2010 | CREATE TABLE `bigquery-public-data.census_bureau_usa.population_by_zip_2010`                                                                                                                                               |
 |                        | (                                                                                                                                                                                                                          |
-|                        |   geo_id STRING OPTIONS(description="Geo code"),                                                                                                                                                                           |
-|                        |   zipcode STRING NOT NULL OPTIONS(description="Five digit ZIP Code Tabulation Area Census Code"),                                                                                                                          |
-|                        |   population INT64 OPTIONS(description="The total count of the population for this segment."),                                                                                                                             |
-|                        |   minimum_age INT64 OPTIONS(description="The minimum ag
+|                        |   geo_id STRING OPTIONS(description="Geo code"),
 ```

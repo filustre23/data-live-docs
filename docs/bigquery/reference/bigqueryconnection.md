@@ -225,6 +225,5 @@ func reportConnections(ctx context.Context, client *connection.Client, projectID
 	totalConnections := 0
 	it := client.ListConnections(ctx, req)
 	for {
-		conn, err := it.Next()
-		if
+		conn, err := it.
 ```

@@ -135,8 +135,3 @@ Represents the state of a replica of a shared dataset. It includes the geographi
 ## ReplicaState
 
 Replica state of the shared dataset.
-
-| Enums | |
-| --- | --- |
-| `REPLICA_STATE_UNSPECIFIED` | Default value. This value is unused. |
-| `READY_TO_USE` | The replica is |

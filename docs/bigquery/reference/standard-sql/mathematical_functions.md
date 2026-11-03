@@ -279,13 +279,5 @@ that [coerces to `FLOAT64`](/bigquery/docs/reference/standard-sql/conversion_rul
 **Example**
 
 ```
-SELECT CBRT(27) AS cube_root;
-
-/*--------------------+
- | cube_root          |
- +--------------------+
- | 3.0000000000000004 |
- +--------------------*/
+SELECT CBRT(27)
 ```
-
-## `CEIL`

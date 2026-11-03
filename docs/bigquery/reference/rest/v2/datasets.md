@@ -83,4 +83,3 @@ Identifier for a dataset.
 
 | JSON representation |
 | --- |
-| ``` {   "datasetId": string,   "projectId": string } ``` |

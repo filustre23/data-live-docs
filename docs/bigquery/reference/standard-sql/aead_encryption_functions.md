@@ -268,6 +268,4 @@ column of favorite animals.
 ```
 CREATE TABLE deterministic.CustomerKeysets AS
 SELECT
-  1 AS customer_id,
-  KEYS.NEW_KEYSET('DETERMINISTIC_AEAD_AES_SIV_CMAC_256') AS
 ```

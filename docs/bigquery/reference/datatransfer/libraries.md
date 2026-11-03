@@ -221,10 +221,4 @@ import (
 
 func main() {
 	ctx := context.Background()
-
-	// Sets your Google Cloud Platform project ID.
-	projectID := "YOUR_PROJECT_ID"
-
-	// Creates a client.
-	client,
 ```

@@ -164,7 +164,5 @@ ORDER BY
 
 ```
 SELECT
-  jobs.period_start,
-  res.reservation_id,
-  SUM(jobs.period_slot_ms) /
+  jobs.period_start
 ```

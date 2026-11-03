@@ -166,7 +166,4 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 |  | 國家/地區 | *字串* | 這個資料列中指標的國家/地區。 |
 |  | 區域 | *字串* | 使用者觀看廣告的區域。 |
 |  | FrequencyValue | *字串* | 觸及和頻率廣告活動中的廣告向每位使用者放送的次數。 |
-|  | HStatsByAdvertiserTZ | *字串* | 廣告主取得統計資料的時間範圍。 |
-|  | HStatsByAudienceTZ | *字串* | 目標對象的統計資料時間範圍。 |
-|  | ImpressionDevice | *字串* | 用來觀看廣告的裝置。 |
-|  | PlatformPosition | *字串*< |
+|  | HStatsByAdver |

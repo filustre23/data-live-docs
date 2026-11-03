@@ -271,12 +271,5 @@ IF(ARRAY_LENGTH(anomalies) > 0)
       ML.PREDICT(
         MODEL mydataset.model_linear_reg,
         TABLE mydataset.serving);
-END IF;
+END
 ```
-
-## Limitations
-
-* `ML.VALIDATE_DATA_SKEW` doesn't support the following types of models:
-
-  + [AutoML](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-automl)
-  + [Matrix factorization](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization)

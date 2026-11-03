@@ -389,5 +389,3 @@ bytes 43-1999999
 * [.NET](https://developers.google.com/api-client-library/dotnet/guide/media_upload?hl=zh-tw)
 * [Java](https://developers.google.com/api-client-library/java/google-api-java-client/media-upload?hl=zh-tw)
 * [PHP](https://github.com/googleapis/google-api-php-client/blob/master/docs/media.md)
-* [Python](https://github.com/googleapis/google-api-python-client/blob/master/docs/media.md)
-* [Ruby](https://github.com/googleapis/google-api-ruby-client/blob/master/docs/usage-guide.md#media)

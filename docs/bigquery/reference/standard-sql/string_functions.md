@@ -272,14 +272,4 @@ The following is a basic example using `CODE_POINTS_TO_BYTES`.
 
 ```
 SELECT CODE_POINTS_TO_BYTES([65, 98, 67, 100]) AS bytes;
-
--- Note that the result of CODE_POINTS_TO_BYTES is of type BYTES, displayed as a base64-encoded string.
--- In BYTES format, b'AbCd' is the result.
-/*----------+
- | bytes    |
- +----------+
- | QWJDZA== |
- +----------*/
 ```
-
-The following example uses a rotate-by-13 places (ROT13)

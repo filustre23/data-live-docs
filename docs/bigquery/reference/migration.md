@@ -212,7 +212,5 @@ func executeTranslationWorkflow(ctx context.Context, client *migration.Client, p
 		Parent: fmt.Sprintf("projects/%s/locations/%s", projectID, location),
 		MigrationWorkflow: &migrationpb.MigrationWorkflow{
 			DisplayName: "example SQL conversion",
-			Tasks: map[string]*migrationpb.MigrationTask{
-				"example_conversion": {
-					
+			Tasks: map
 ```

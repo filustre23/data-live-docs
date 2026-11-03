@@ -236,7 +236,5 @@ func main() {
 	// print information about it.
 	exchange, err := createOrGetDataExchange(ctx, ahubClient, *projectID, *location, *exchangeID)
 	if err != nil {
-		log.Fatalf("failed to get information about the exchange: %v", err)
-	}
-	fmt.Printf
+		log
 ```
