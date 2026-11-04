@@ -15,9 +15,9 @@ info
 
 ## Core capabilities[​](#core-capabilities "Direct link to Core capabilities")
 
-### Generative Apps (beta)[​](#generative-apps-beta "Direct link to Generative Apps (beta)")
+### Generative apps[​](#generative-apps "Direct link to Generative apps")
 
-Use Generative Apps to create fully customizable data apps by describing you want to the Hex agent. Build anything - like powerful dashboards or interactive presentations, all while maintaining governance and observability, leveraging the trusted context of your workspace, and harnessing the infinite flexibility of code-generation.
+Use Generative apps to create fully customizable data apps by describing what you want to the Hex agent. Build anything - like powerful dashboards or interactive presentations, all while maintaining governance and observability, leveraging the trusted context of your workspace, and harnessing the infinite flexibility of code-generation.
 
 [Learn more about Generative apps](/docs/share-insights/apps/generative-apps), or [copy a sample prompt](/tutorials/ai-best-practices/generative-app-examples) to start building.
 
@@ -62,7 +62,7 @@ Use the Context Studio to monitor AI usage across your workspace and manage the 
 #### On this page
 
 * [Core capabilities](#core-capabilities)
-  + [Generative Apps (beta)](#generative-apps-beta)
+  + [Generative apps](#generative-apps)
   + [Notebook Agent](#notebook-agent)
   + [Threads](#threads)
   + [Chat With App Agent](#chat-with-app-agent)

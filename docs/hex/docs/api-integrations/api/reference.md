@@ -228,6 +228,13 @@ Copy
     - "title": "string",
     - "description": "string",
     - "type": "PROJECT",
+    - "computeProfile": {
+      * "PUBLISHED": {
+        + "kernelImage": "string",
+        + "kernelSize": "string"},
+      * "LOGIC": {
+        + "kernelImage": "string",
+        + "kernelSize": "string"}},
     - "creator": {
       * "email": "string"},
     - "owner": {
@@ -381,6 +388,13 @@ Copy
 * "title": "string",
 * "description": "string",
 * "type": "PROJECT",
+* "computeProfile": {
+  + "LOGIC": {
+    - "kernelImage": "string",
+    - "kernelSize": "string"},
+  + "PUBLISHED": {
+    - "kernelImage": "string",
+    - "kernelSize": "string"}},
 * "creator": {
   + "email": "string"},
 * "owner": {
@@ -614,6 +628,13 @@ Copy
   + "title": "string",
   + "description": "string",
   + "type": "PROJECT",
+  + "computeProfile": {
+    - "PUBLISHED": {
+      * "kernelImage": "string",
+      * "kernelSize": "string"},
+    - "LOGIC": {
+      * "kernelImage": "string",
+      * "kernelSize": "string"}},
   + "creator": {
     - "email": "string"},
   + "owner": {
@@ -1361,7 +1382,7 @@ Copy
 | connectViaSsh | boolean |
 | description | string |
 | connectionDetails required | object or object or object or object or object or object or object (CreateConnectionDetails) |
-| type required | string (DataConnectionApiType)  Enum: "athena" "bigquery" "clickhouse" "databricks" "postgres" "redshift" "snowflake" "trino" |
+| type required | string (DataConnectionApiType)  Enum: "alloydb" "athena" "bigquery" "clickhouse" "cloudsql\_\_mysql" "cloudsql\_\_postgres" "cloudsql\_\_sqlserver" "databricks" "dremio" "mariadb" "materialize" "motherduck" "mysql" "postgres" "prestodb" "rds\_\_mysql" "rds\_\_postgres" "redshift" "snowflake" "sqlserver" "starburst" "transform" "trino" |
 | name required | string (Name)   non-empty |
 
 ### Responses
@@ -1470,7 +1491,7 @@ Copy
     - "s3OutputPath": "string",
     - "port": 0.1,
     - "hostname": "string"}},
-* "type": "athena",
+* "type": "alloydb",
 * "name": "string"
 
 }`
@@ -1496,7 +1517,7 @@ Copy
 
 * "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
 * "name": "string",
-* "type": "athena",
+* "type": "alloydb",
 * "description": "string",
 * "sensitivity": {
   + "configured": true,
@@ -1653,7 +1674,7 @@ Copy
   + {
     - "id": "string",
     - "name": "string",
-    - "type": "athena",
+    - "type": "alloydb",
     - "description": "string",
     - "sensitivity": {
       * "configured": true,
@@ -1896,7 +1917,7 @@ Copy
 
 * "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
 * "name": "string",
-* "type": "athena",
+* "type": "alloydb",
 * "description": "string",
 * "sensitivity": {
   + "configured": true,
@@ -2047,7 +2068,7 @@ Copy
 
 * "id": "string",
 * "name": "string",
-* "type": "athena",
+* "type": "alloydb",
 * "description": "string",
 * "sensitivity": {
   + "configured": true,
@@ -2541,46 +2562,4 @@ application/json
 
 Copy
 
- Expand all  Collapse all
-
-`{
-
-* "sharing": {
-  + "upsert": {
-    - "users": [
-      * {
-        + "access": "string",
-        + "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08"}],
-    - "groups": [
-      * {
-        + "access": "string",
-        + "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08"}],
-    - "workspace": {
-      * "members": "string"}}},
-* "description": "string",
-* "name": "string"
-
-}`
-
-### Response samples
-
-* 200
-* 400
-* 403
-* 500
-
-Content type
-
-application/json
-
-Copy
-
- Expand all  Collapse all
-
-`{
-
-* "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
-* "name": "string",
-* "description": "string",
-* "creator": {
-  + "email":`
+ E

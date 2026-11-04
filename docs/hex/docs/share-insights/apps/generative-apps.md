@@ -6,7 +6,7 @@ Generative apps are a new app type in Hex - you describe what you want, and the 
 
 info
 
-* Generative apps are available in **Beta** on all [plans](https://hex.tech/pricing/). Paid plans include monthly per-seat [credit grants](/docs/administration/credits) that can be used towards Hex AI features.
+* Generative apps are available on all [plans](https://hex.tech/pricing/). Paid plans include monthly per-seat [credit grants](/docs/administration/credits) that can be used towards Hex AI features.
 * Users need [Can Edit](/docs/collaborate/sharing-and-permissions/project-sharing#project-permissions) or higher permissions on a project to create a Generative app.
 * Generative apps don't yet support every Classic app feature. If your project needs [saved views](/docs/share-insights/apps/saved-views), [PDF export](/docs/share-insights/apps/export-as-pdf), or another capability listed under [Limitations](#limitations), use a [Classic app](/docs/share-insights/apps/apps-introduction) instead.
 
@@ -188,7 +188,7 @@ The iframe has no independent way to fetch data. It receives data exclusively fr
 
 ### Feature Limitations[​](#feature-limitations "Direct link to Feature Limitations")
 
-While Generative apps are in Beta, some Hex features are not yet supported. These include:
+Some Hex features are not yet supported in Generative apps. These include:
 
 * [App notifications with screenshots](/docs/share-insights/app-notifications#attaching-screenshots)
 * [Saved views](/docs/share-insights/apps/saved-views)

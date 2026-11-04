@@ -66,7 +66,8 @@ Match the message you see to a section below.
 | `This organization has been disabled` | [Authentication](#this-organization-has-been-disabled) |
 | `Your organization has disabled API key authentication` | [Authentication](#your-organization-has-disabled-api-key-authentication) |
 | `Your organization has disabled Claude subscription access` | [Authentication](#your-organization-has-disabled-claude-subscription-access) |
-| `Routines are disabled by your organization's policy` | [Authentication](#routines-are-disabled-by-your-organizations-policy) |
+| `Scheduled tasks are off for your organization` | [Authentication](#routines-are-disabled-by-your-organizations-policy) |
+| `Routines are off for your organization` | [Authentication](#routines-are-disabled-by-your-organizations-policy) |
 | `Remote Control is only available when using Claude via api.anthropic.com` | [Authentication](#remote-control-requires-the-anthropic-api) |
 | `OAuth token refresh failed — run /login to re-authenticate` | [Authentication](#remote-control-couldnt-refresh-your-login) |
 | `JWT refresh failed: no OAuth token — run /login` | [Authentication](#remote-control-couldnt-refresh-your-login) |
@@ -755,6 +756,8 @@ After ten responses in a row with no verdict, auto mode stops the turn:
 Auto mode is unavailable — the server returned no safety verdict for the last 10 responses, so Claude stopped. Send a message to try again, or switch out of auto mode.
 ```
 
+Some denials don't count toward the ten, including [a denial from a hook or mod's change](#hook-changed-input-after-review).
+
 The stop message appears in a different place in each kind of session:
 
 * In an interactive session, the message appears as a warning in the transcript and the turn ends
@@ -773,6 +776,21 @@ The stop message appears in a different place in each kind of session:
 Before v2.1.280, Claude Code denied each action from a response without a verdict immediately and never stopped the turn.
 
 Before v2.1.302, on a direct connection to the Anthropic API, Claude Code didn't compact a conversation that had grown too long for the server's check.
+
+#### `a hook changed this call's input after auto mode reviewed it`
+
+This denial means a hook or mod [changed the call's input](https://code.claude.com/docs/en/hooks.md#pretooluse-updatedinput-in-auto-mode) after the server reviewed it, so the review doesn't cover what would run. It isn't a judgment that the action is unsafe.
+
+Later calls in the same Claude response can be denied with this reason:
+
+```text theme={null}
+another call in this response was changed by a hook after auto mode reviewed it, or could not be confirmed unchanged
+```
+
+Claude can then issue each denied call again so the server reviews it. If a permission prompt opens, answer it. You don't need to do anything else unless Claude says in its reply that auto mode couldn't check the call. Then stop the change or approve the call yourself, and ask Claude to try the call again:
+
+* **Stop the change**: turn off the [hook](https://code.claude.com/docs/en/hooks.md#disable-or-remove-hooks) or [mod](https://code.claude.com/docs/en/plugins/mods/overview.md#turn-mods-on-or-off) that changed the call or an earlier call in the same Claude response, or ask your administrator to turn it off. To look for a hook, run [`/hooks`](https://code.claude.com/docs/en/hooks#the-%2Fhooks-menu) at the Claude Code prompt. In a terminal session, run `/plugin` to see the active mods.
+* **Approve the call yourself**: [switch to Manual mode](https://code.claude.com/docs/en/permission-modes.md#switch-permission-modes)
 
 ### Was not reviewed and did not run
 
@@ -1188,19 +1206,20 @@ The Agent SDK and `-p` non-interactive mode surface this as the `oauth_org_not_a
 * Authenticate with a Console API key instead of your subscription. See [Claude Console authentication](https://code.claude.com/docs/en/authentication.md#claude-console-authentication) for setup.
 * If you are the admin and do not see an option to enable access, contact [Anthropic support](https://support.claude.com)
 
-### Routines are disabled by your organization's policy
+### Scheduled tasks are off for your organization
 
-An Owner in your Team or Enterprise organization has turned off [cloud scheduled tasks](https://code.claude.com/docs/en/routines.md), formerly routines, at the organization level. The error appears when you try to create or run one, for example at [claude.ai/code/routines](https://claude.ai/code/routines). On Claude Code v2.1.227 or later, the same setting also [hides `/schedule`](https://code.claude.com/docs/en/routines#troubleshooting) in the CLI.
+[Cloud scheduled tasks](https://code.claude.com/docs/en/routines.md) are off for your organization, so you can't create or run them. The message from claude.ai calls them scheduled tasks or routines, and a sentence about your admin follows:
 
 ```text theme={null}
-Routines are disabled by your organization's policy.
+Scheduled tasks are off for your organization. …
+Routines are off for your organization. …
 ```
 
-This is a server-side setting, so it can't be overridden from local settings, environment variables, or CLI flags.
+You can't turn them on with local settings, environment variables, or CLI flags.
 
 **What to do:**
 
-* Ask an Owner in your organization to turn on the **Scheduled tasks (Was Routines)** toggle at [**Organization settings > Capabilities > Remote sessions**](https://claude.ai/admin-settings/capabilities)
+* Ask your Team or Enterprise Owner whether they can turn on the toggle labeled **Scheduled tasks (Was Routines)** or **Routines** at [**Organization settings > Capabilities > Remote sessions**](https://claude.ai/admin-settings/capabilities)
 
 ### Remote Control requires the Anthropic API
 

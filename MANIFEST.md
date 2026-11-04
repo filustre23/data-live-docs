@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-11-03T19:25+00:00_
+_Generated 2026-11-04T04:21+00:00_
 
-**9 sources, 4781 topics total**
+**9 sources, 4783 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_846 topics_
+_847 topics_
 
 - `anthropic-sdk/about-claude/additional-resources`
 - `anthropic-sdk/about-claude/api-credits-for-subscribers`
@@ -677,6 +677,7 @@ _846 topics_
 - `anthropic-sdk/build-with-claude/streaming`
 - `anthropic-sdk/build-with-claude/structured-outputs`
 - `anthropic-sdk/build-with-claude/task-budgets`
+- `anthropic-sdk/build-with-claude/text-watermark`
 - `anthropic-sdk/build-with-claude/thinking`
 - `anthropic-sdk/build-with-claude/thinking-steering-and-cost`
 - `anthropic-sdk/build-with-claude/thinking-tool-workflows`
@@ -3947,7 +3948,7 @@ _156 topics_
 
 Upstream: <https://learn.hex.tech/>
 
-_395 topics_
+_396 topics_
 
 - `hex/changelog`
 - `hex/changelog/2020-12-17`
@@ -4331,6 +4332,7 @@ _395 topics_
 - `hex/tutorials/quickstart/hex-basics`
 - `hex/tutorials/quickstart/working-with-hex-from-anywhere`
 - `hex/tutorials/video-library`
+- `hex/tutorials/video-library/hex-foundations/adding-context`
 - `hex/tutorials/video-library/hex-foundations/apps-publishing`
 - `hex/tutorials/video-library/hex-foundations/course-overview`
 - `hex/tutorials/video-library/hex-foundations/geospatial-data`

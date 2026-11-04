@@ -158,7 +158,7 @@ Claude Code checks the model it selects for a teammate against your organization
 * **Family alias such as `opus`**: On the Anthropic API and Claude Platform on AWS, Claude Code runs the teammate on the newest version of that family the allowlist permits. On providers with provider-specific model IDs, where the [substitution doesn't operate](https://code.claude.com/docs/en/model-config.md#restrict-model-selection), a blocked alias falls back like any other blocked value per the next bullet
 * **Any other blocked value, including a family alias on providers where the substitution doesn't operate, or one whose family has no permitted version**: Claude Code runs the teammate on the lead's model instead. If you set `CLAUDE_CODE_SUBAGENT_MODEL`, Claude Code tries that model first, under these same rules
 
-By default, teammates inherit the lead's [effort level](https://code.claude.com/docs/en/model-config.md#adjust-effort-level). In split-pane mode this applies from v2.1.186; earlier versions did not pass the lead's session effort to split-pane teammates.
+By default, a teammate on the lead's model inherits the lead's [effort level](https://code.claude.com/docs/en/model-config.md#adjust-effort-level). In split-pane mode this applies from v2.1.186; earlier versions did not pass the lead's session effort to split-pane teammates. For a teammate on another model, see [Effort level of subagents and teammates](https://code.claude.com/docs/en/model-config.md#effort-level-of-subagents-and-teammates).
 
 ### Have teammates plan before implementing
 
