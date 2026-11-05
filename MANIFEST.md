@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-11-05T04:39+00:00_
+_Generated 2026-11-05T19:50+00:00_
 
-**9 sources, 4783 topics total**
+**9 sources, 4821 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_847 topics_
+_885 topics_
 
 - `anthropic-sdk/about-claude/additional-resources`
 - `anthropic-sdk/about-claude/api-credits-for-subscribers`
@@ -439,8 +439,6 @@ _847 topics_
 - `anthropic-sdk/api/claude-code/routines-fire`
 - `anthropic-sdk/api/claude-models-on-google-cloud-anthropic-managed-iam-permissions`
 - `anthropic-sdk/api/claude-platform-on-aws-iam-actions`
-- `anthropic-sdk/api/completions`
-- `anthropic-sdk/api/completions/create`
 - `anthropic-sdk/api/compliance`
 - `anthropic-sdk/api/compliance/activities`
 - `anthropic-sdk/api/compliance/activities/list`
@@ -530,6 +528,23 @@ _847 topics_
 - `anthropic-sdk/api/models/retrieve`
 - `anthropic-sdk/api/opentelemetry/spans`
 - `anthropic-sdk/api/organization`
+- `anthropic-sdk/api/organization/analytics`
+- `anthropic-sdk/api/organization/analytics/apps`
+- `anthropic-sdk/api/organization/analytics/apps/chat`
+- `anthropic-sdk/api/organization/analytics/apps/chat/projects`
+- `anthropic-sdk/api/organization/analytics/apps/chat/projects/list`
+- `anthropic-sdk/api/organization/analytics/artifacts`
+- `anthropic-sdk/api/organization/analytics/artifacts/list`
+- `anthropic-sdk/api/organization/analytics/connectors`
+- `anthropic-sdk/api/organization/analytics/connectors/list`
+- `anthropic-sdk/api/organization/analytics/plugins`
+- `anthropic-sdk/api/organization/analytics/plugins/list`
+- `anthropic-sdk/api/organization/analytics/skills`
+- `anthropic-sdk/api/organization/analytics/skills/list`
+- `anthropic-sdk/api/organization/analytics/summaries`
+- `anthropic-sdk/api/organization/analytics/summaries/list`
+- `anthropic-sdk/api/organization/analytics/users`
+- `anthropic-sdk/api/organization/analytics/users/list`
 - `anthropic-sdk/api/organization/api_keys`
 - `anthropic-sdk/api/organization/api_keys/list`
 - `anthropic-sdk/api/organization/api_keys/retrieve`
@@ -568,6 +583,21 @@ _847 topics_
 - `anthropic-sdk/api/organization/invites/retrieve`
 - `anthropic-sdk/api/organization/rate_limits`
 - `anthropic-sdk/api/organization/rate_limits/list`
+- `anthropic-sdk/api/organization/rbac_groups`
+- `anthropic-sdk/api/organization/rbac_groups/create`
+- `anthropic-sdk/api/organization/rbac_groups/delete`
+- `anthropic-sdk/api/organization/rbac_groups/list`
+- `anthropic-sdk/api/organization/rbac_groups/members`
+- `anthropic-sdk/api/organization/rbac_groups/members/add`
+- `anthropic-sdk/api/organization/rbac_groups/members/list`
+- `anthropic-sdk/api/organization/rbac_groups/members/remove`
+- `anthropic-sdk/api/organization/rbac_groups/retrieve`
+- `anthropic-sdk/api/organization/rbac_groups/update`
+- `anthropic-sdk/api/organization/rbac_roles`
+- `anthropic-sdk/api/organization/rbac_roles/list`
+- `anthropic-sdk/api/organization/rbac_roles/permissions`
+- `anthropic-sdk/api/organization/rbac_roles/permissions/list`
+- `anthropic-sdk/api/organization/rbac_roles/retrieve`
 - `anthropic-sdk/api/organization/retrieve`
 - `anthropic-sdk/api/organization/service_accounts`
 - `anthropic-sdk/api/organization/service_accounts/archive`
@@ -579,6 +609,14 @@ _847 topics_
 - `anthropic-sdk/api/organization/service_accounts/workspaces/add`
 - `anthropic-sdk/api/organization/service_accounts/workspaces/list`
 - `anthropic-sdk/api/organization/service_accounts/workspaces/remove`
+- `anthropic-sdk/api/organization/spend_limits`
+- `anthropic-sdk/api/organization/spend_limits/effective`
+- `anthropic-sdk/api/organization/spend_limits/effective/list`
+- `anthropic-sdk/api/organization/spend_limits/increase_requests`
+- `anthropic-sdk/api/organization/spend_limits/increase_requests/approve`
+- `anthropic-sdk/api/organization/spend_limits/increase_requests/deny`
+- `anthropic-sdk/api/organization/spend_limits/increase_requests/list`
+- `anthropic-sdk/api/organization/spend_limits/increase_requests/retrieve`
 - `anthropic-sdk/api/organization/users`
 - `anthropic-sdk/api/organization/users/list`
 - `anthropic-sdk/api/organization/users/remove`
