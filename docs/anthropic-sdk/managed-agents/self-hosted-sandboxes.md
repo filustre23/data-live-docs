@@ -205,7 +205,7 @@ This quickstart runs one always-on worker with the `ant` CLI, sends it a session
   <Step title="Install the ant CLI">
     Run this on the worker host.
 
-    <Tabs>
+    <Tabs noDeepLinks>
       <Tab title="Homebrew (macOS)">
         ```bash
         brew install anthropics/tap/ant
@@ -216,7 +216,7 @@ This quickstart runs one always-on worker with the `ant` CLI, sends it a session
         For Linux environments, download the release binary directly.
 
         ```bash
-        VERSION=2.5.0
+        VERSION=2.6.0
         OS=$(uname -s | tr '[:upper:]' '[:lower:]')
         case $(uname -m) in
           x86_64) ARCH=amd64 ;;
@@ -229,7 +229,7 @@ This quickstart runs one always-on worker with the `ant` CLI, sends it a session
         You can find all releases on the [GitHub releases page](https://github.com/anthropics/anthropic-cli/releases).
       </Tab>
 
-      <Tab title="Go">
+      <Tab title="go install">
         You can also install the CLI from source using `go install`. Requires Go 1.25 or later.
 
         ```bash

@@ -24,7 +24,7 @@ To effectively leverage your Ossie models within Hex, check how key concepts tra
 
 ## Prepare the Ossie file for conversion[​](#prepare-the-ossie-file-for-conversion "Direct link to Prepare the Ossie file for conversion")
 
-To get started, you need an Ossie semantic model document, such as `my-semantic-model.ossie.yaml`. If your semantic layer uses another format, such as dbt or Cube, convert it to Ossie first. The Ossie project maintains [reference converters](https://github.com/apache/ossie-converters) between Ossie and other semantic formats. Hex doesn't provide conversion from other formats into Ossie.
+To get started, you need an Ossie semantic model document, such as `my-semantic-model.ossie.yaml`. For dbt projects, the Hex CLI can convert a semantic manifest to Hex through Ossie in one command; see [dbt conversion](#dbt). For other formats, the Ossie project maintains [reference converters](https://github.com/apache/ossie-converters) that you can use to create an Ossie document first.
 
 The converter expects a single Ossie document that follows the [`0.2.0.dev0` specification](https://github.com/apache/ossie/blob/main/core-spec/spec.md).
 
@@ -510,6 +510,339 @@ comment_on_pr: true
 
 For GitLab and other CI providers, install the Hex CLI and run the same conversion command before `hex context preview`. See [Sync from other CI providers](/docs/agent-management/context-management/context-sync#sync-from-other-ci-providers) for the preview and publish steps.
 
+## Vendor-specific conversion[​](#vendor-specific-conversion "Direct link to Vendor-specific conversion")
+
+Hex also provides support for some vendor-specific conversion paths.
+
+### dbt[​](#dbt "Direct link to dbt")
+
+Use the Hex CLI to convert a dbt semantic manifest to Hex through Ossie. Your project can use either the legacy or latest dbt Semantic Layer YAML specification. The example below uses the [dbt 1.12+ syntax](https://docs.getdbt.com/docs/build/semantic-models).
+
+#### Prepare the dbt project[​](#prepare-the-dbt-project "Direct link to Prepare the dbt project")
+
+Add datatype annotations to your dbt models to preserve the types of the underlying values during conversion.
+
+* In the latest specification (dbt 1.12+ syntax), set `entity.config.meta.ossie.datatype` or `dimension.config.meta.ossie.datatype` inside each column, and `config.meta.ossie.datatype` on each metric.
+* In the legacy specification, set `config.meta.ossie.datatype` on each entity, dimension, measure, and metric.
+
+Valid datatype values are `String`, `Integer`, `Decimal`, `Float`, `Boolean`, `Date`, `Time`, `DateTime`, `DateTimeTz`, and `Opaque`, as defined in the [Ossie specification](https://github.com/apache/ossie/blob/main/core-spec/spec.md#data-types).
+
+Your project must also have a [configured time spine](https://docs.getdbt.com/docs/build/metricflow-time-spine). The example below assumes an existing SQL model named `opportunities` that exposes `opportunity_id`, `created_date`, and `arr`.
+
+my\_dbt\_project/models/opportunities.yaml
+
+```
+version: 2
+
+
+
+models:
+
+
+
+- name: opportunities
+
+
+
+description: Sales opportunities
+
+
+
+config:
+
+
+
+alias: DIM_OPPORTUNITIES
+
+
+
+semantic_model:
+
+
+
+enabled: true
+
+
+
+agg_time_dimension: created_date
+
+
+
+columns:
+
+
+
+- name: opportunity_id
+
+
+
+description: A uuid for the opportunity
+
+
+
+entity:
+
+
+
+name: opportunity_id
+
+
+
+type: primary
+
+
+
+description: A uuid for the opportunity
+
+
+
+config:
+
+
+
+meta:
+
+
+
+ossie:
+
+
+
+datatype: String
+
+
+
+- name: created_date
+
+
+
+description: Date the opportunity was created
+
+
+
+dimension:
+
+
+
+type: time
+
+
+
+config:
+
+
+
+meta:
+
+
+
+ossie:
+
+
+
+datatype: Date
+
+
+
+granularity: day
+
+
+
+- name: arr
+
+
+
+description: Annual recurring revenue attributed to the opportunity
+
+
+
+dimension:
+
+
+
+type: categorical
+
+
+
+config:
+
+
+
+meta:
+
+
+
+ossie:
+
+
+
+datatype: Float
+
+
+
+metrics:
+
+
+
+- name: opportunity_count
+
+
+
+description: Count of unique opportunities
+
+
+
+label: Opportunity count
+
+
+
+type: simple
+
+
+
+config:
+
+
+
+meta:
+
+
+
+ossie:
+
+
+
+datatype: Integer
+
+
+
+agg: count_distinct
+
+
+
+expr: opportunity_id
+
+
+
+- name: opportunity_arr_average
+
+
+
+description: The average opportunity ARR
+
+
+
+label: Opportunity ARR average
+
+
+
+type: simple
+
+
+
+config:
+
+
+
+meta:
+
+
+
+ossie:
+
+
+
+datatype: Float
+
+
+
+agg: average
+
+
+
+expr: arr
+```
+
+#### Convert the dbt project[​](#convert-the-dbt-project "Direct link to Convert the dbt project")
+
+The dbt to Ossie converter expects a dbt semantic manifest as the input. From the directory containing `my_dbt_project`, run `dbt parse` to generate the manifest. Then run `hex context semantic-project convert`, declaring the manifest as the input and a local folder as the output:
+
+```
+dbt parse --project-dir ./my_dbt_project
+
+
+
+hex context semantic-project convert \
+
+
+
+--from dbt \
+
+
+
+--to hex \
+
+
+
+--input ./my_dbt_project/target/semantic_manifest.json \
+
+
+
+--output ./tmp
+```
+
+The converter writes the Hex model files to `./tmp/semantic_model` by default. Continue with [Step 2: Point Context Sync at the converted output](#step-2-point-context-sync-at-the-converted-output), using `./tmp/semantic_model` as the `semanticProjects` path, then [preview and publish](#step-3-preview-and-publish).
+
+#### Convert during Context Sync[​](#convert-during-context-sync "Direct link to Convert during Context Sync")
+
+You can also configure Context Sync to convert the dbt semantic manifest when you run `hex context preview`. [Create a Hex semantic project](#step-2-point-context-sync-at-the-converted-output), then add an entry to `semanticProjects` in `hex_context.config.yaml`. Set `path` to the manifest file and `convert.from` to `dbt`:
+
+hex\_context.config.yaml
+
+```
+semanticProjects:
+
+
+
+- id: <semantic-project-uuid>
+
+
+
+path: ./semantic-manifests/semantic_manifest.json
+
+
+
+convert:
+
+
+
+from: dbt
+```
+
+In a Git repository, the manifest must be inside the repository and must not be ignored by Git. dbt's `target/` directory is typically ignored, so this example copies the generated manifest into a `semantic-manifests/` directory that is included by Git. Place the context configuration file at the repository root and run:
+
+```
+dbt parse --project-dir ./my_dbt_project
+
+
+
+mkdir -p ./semantic-manifests
+
+
+
+cp ./my_dbt_project/target/semantic_manifest.json ./semantic-manifests/semantic_manifest.json
+
+
+
+hex auth login
+
+
+
+hex context preview --title "Sync dbt semantic model"
+```
+
+The CLI converts the manifest locally to temporary Hex model files and uploads the converted project to the preview. Context Sync doesn't run `dbt parse`; regenerate and copy the manifest before each preview, including in CI. When you're ready, [publish the preview](#step-3-preview-and-publish).
+
 #### On this page
 
 * [Concepts](#concepts)
@@ -521,3 +854,5 @@ For GitLab and other CI providers, install the Hex CLI and run the same conversi
 * [Sync automatically in CI](#sync-automatically-in-ci)
   + [Sync from GitHub](#sync-from-github)
   + [Sync from other CI providers](#sync-from-other-ci-providers)
+* [Vendor-specific conversion](#vendor-specific-conversion)
+  + [dbt](#dbt)
