@@ -43,6 +43,7 @@
 * postRunProject
 * getGetSuggestion
 * postUpdateSuggestion
+* getGetSuggestion v2
 * getListSuggestions
 * postUpdateSuggestionChange
 * postTriggerSuggestionReview
@@ -2555,11 +2556,3 @@ https://app.hex.tech/api/v1/collections/{collectionId}
 ### Request samples
 
 * Payload
-
-Content type
-
-application/json
-
-Copy
-
- E

@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-11-05T19:50+00:00_
+_Generated 2026-11-06T04:38+00:00_
 
-**9 sources, 4821 topics total**
+**9 sources, 4823 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_885 topics_
+_886 topics_
 
 - `anthropic-sdk/about-claude/additional-resources`
 - `anthropic-sdk/about-claude/api-credits-for-subscribers`
@@ -782,6 +782,7 @@ _885 topics_
 - `anthropic-sdk/manage-claude/inference-hooks`
 - `anthropic-sdk/manage-claude/inference-hooks-configuration`
 - `anthropic-sdk/manage-claude/inference-hooks-endpoint`
+- `anthropic-sdk/manage-claude/ip-allowlist`
 - `anthropic-sdk/manage-claude/opentelemetry`
 - `anthropic-sdk/manage-claude/opentelemetry/api`
 - `anthropic-sdk/manage-claude/opentelemetry/sdk`
@@ -2646,7 +2647,7 @@ _227 topics_
 
 Upstream: <https://docs.getdbt.com/docs/>
 
-_1170 topics_
+_1171 topics_
 
 - `dbt-core/best-practices/best-practice-workflows`
 - `dbt-core/best-practices/clone-incremental-models`
@@ -2810,6 +2811,7 @@ _1170 topics_
 - `dbt-core/docs/dbt-ai/dbt-ai-faqs`
 - `dbt-core/docs/dbt-ai/integrate-mcp-claude`
 - `dbt-core/docs/dbt-ai/integrate-mcp-cursor`
+- `dbt-core/docs/dbt-ai/integrate-mcp-databricks`
 - `dbt-core/docs/dbt-ai/integrate-mcp-snowflake-cortex`
 - `dbt-core/docs/dbt-ai/integrate-mcp-vscode`
 - `dbt-core/docs/dbt-ai/mcp-available-tools`
