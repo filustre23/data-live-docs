@@ -2549,4 +2549,4 @@ Copy
 
 **500**
 
-patch/v1/collections/{collectionId}
+patch/v1/collections/{collectionId}<
