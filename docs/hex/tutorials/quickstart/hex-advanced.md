@@ -73,7 +73,7 @@ tip
 
 Favorite projects and tables via the ⭐ icon for easy access on the left pane of your Home screen.
 
-You made it. You’re on the way to being a first-class Hexpert! If you’re still hungry for more, check out the [SQL Learning Path](https://app.hex.tech/hex-public/app/7388ee87-3d19-4dc0-8902-4810e89aef8e/latest) or [SQL + Python Learning Path](https://app.hex.tech/hex-public/app/9f75bf22-e512-4b86-865d-a1fc2050111e/latest), as well as the [Hex Foundations Video library](/tutorials/category/hex-foundations).
+You made it. You’re on the way to being a first-class Hexpert! If you ’re still hungry for more, check out the [SQL Learning Path](https://app.hex.tech/hex-public/app/7388ee87-3d19-4dc0-8902-4810e89aef8e/latest) or [SQL + Python Learning Path](https://app.hex.tech/hex-public/app/9f75bf22-e512-4b86-865d-a1fc2050111e/latest), as well as the [Hex Foundations Video library](/tutorials/category/hex-foundations).
 
 #### On this page
 

@@ -2550,9 +2550,3 @@ Copy
 **500**
 
 patch/v1/collections/{collectionId}
-
-https://app.hex.tech/api/v1/collections/{collectionId}
-
-### Request samples
-
-* Payload

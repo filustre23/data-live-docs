@@ -37,12 +37,23 @@ Each data connection can be individually configured to integrate with dbt. From 
 
 For **dbt version 1.6+**, the Environment ID is required.
 
-The service token must have both the "Metadata Only" and "Job Admin" permissions. To generate a service token:
+For the metadata integration, use a service token with the following permissions, scoped to the dbt project you want to connect:
+
+| Version selected in Hex | Service token permissions |
+| --- | --- |
+| **1.6+** | **Metadata Only** |
+| **1.5 and below** | **Metadata Only** and **Job Viewer**, or **Metadata Only** and **Read-only** if Job Viewer is unavailable on your plan |
+
+Hex reads dbt metadata and, for **1.5 and below**, lists jobs to find that metadata. Available permission sets depend on your dbt Cloud plan; see dbt's [service token permissions](https://docs.getdbt.com/docs/dbt-apis/service-tokens#permissions-for-service-account-tokens).
+
+For **1.6+** connections with **Use dbt Semantic layer** enabled, also grant **Semantic Layer Only** and map the token to the appropriate Semantic Layer credentials. Follow the [Semantic layer setup instructions](#configuring-the-dbt-semantic-layer).
+
+To generate a service token:
 
 1. Head to the Account Settings view in dbt Cloud.
 2. Click the Service Account tokens page and select "New Token".
-3. Name the token ("Hex dbt integration" is a good starting point), and add the "Metadata Only" and "Job Admin" permissions.
-4. Add the the token to the Hex connection.
+3. Name the token ("Hex dbt integration" is a good starting point), and add the permissions listed above for your configuration. Scope the permissions to the dbt project you want to connect.
+4. Add the token to the Hex connection.
 
 Note: After a token is generated, it won't be able to be viewed again so either add it to Hex immediately, or store it somewhere very safe!
 

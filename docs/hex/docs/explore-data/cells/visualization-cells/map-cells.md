@@ -174,7 +174,7 @@ These options are accessible from the upper right hand part of the map itself.
 
 A user with "Can Edit" permissions can choose the default viewport for the map. Published app users can always pan and zoom the map, but whatever the publishing user sets as the "default start position" will always be displayed on app load.
 
-### Pan to data[​](#pan-to-data "Direct link to Pan to data")
+### Pan to data[ ​](#pan-to-data "Direct link to Pan to data")
 
 This option lets any map user zoom and pan to a map view that displays all rendered data points. It does not necessarily return to the "default start position", rather zooms out as far as necessary to display every data point.
 
