@@ -50,7 +50,7 @@ BigQuery 持續查詢是持續執行的 SQL 陳述式，可讓您即時分析傳
 * **個人化客戶互動服務**：使用生成式 AI，為每次客戶互動建立量身打造的訊息。
 * **異常偵測**：建構解決方案，即時偵測複雜資料中的異常狀況和威脅，以便更快因應問題。
 * **可自訂的事件導向管道**：將持續查詢與 Pub/Sub 整合，根據傳入的資料觸發下游應用程式。
-* **資料充實和實體擷取**：使用 SQL 函式和機器學習模型，透過持續查詢執行即時資料充實和轉換。
+* **資料充實和實體擷取**：使用持續查詢，透過 SQL 函式、SQL user-defined function (UDF) 和機器學習模型，即時充實及轉換資料。
 * **反向擷取、轉換和載入 (ETL)**：執行即時反向 ETL，將資料載入其他更適合低延遲應用程式服務的儲存系統。例如，分析或強化寫入 BigQuery 的事件資料，然後串流至 Bigtable、Spanner 或 Apache Iceberg 代管資料表，供應用程式使用。
 * **自動觸發代理**：根據即時資料串流中偵測到的複雜事件，即時觸發代理資料管道。如需範例，請參閱「[使用 BigQuery 和 Agent Development Kit (ADK) 建構事件導向的資料代理](https://codelabs.developers.google.com/bigquery-adk-event-driven-agents?hl=zh-tw)」程式碼實驗室。
 * **自主代理監控**：使用 [BigQuery 代理數據分析外掛程式](https://adk.dev/integrations/bigquery-agent-analytics/)，開發即時自動監控和警示功能，用於即時代理互動。此外掛程式會將所有代理追蹤資料、工具使用情形和作業記錄直接串流至 BigQuery，深入觀測 AI 員工。
@@ -82,6 +82,7 @@ BigQuery 持續查詢是持續執行的 SQL 陳述式，可讓您即時分析傳
 * 使用 [`ML.NORMALIZER` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-normalizer?hl=zh-tw)正規化數值型資料。
 * 分析及處理 `JSON` 資料，包括支援 [JSON 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions?hl=zh-tw)和 [JSON 取消巢狀結構](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw#unnest_operator)。
 * 使用無狀態 GoogleSQL 函式，例如[轉換函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_functions?hl=zh-tw)。在無狀態函式中，每個資料列的處理方式都與資料表中的其他資料列無關。
+* 呼叫永久或暫時 [SQL UDF](https://docs.cloud.google.com/bigquery/docs/user-defined-functions?hl=zh-tw#sql-udf-structure)，前提是 UDF 的基礎 SQL 運算式在持續查詢中有效。
 * 使用[有狀態作業](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction?hl=zh-tw#supported_stateful_operations)，例如 [`JOIN`、匯總和視窗匯總](https://docs.cloud.google.com/bigquery/docs/continuous-queries?hl=zh-tw#join-agg-window-example)。在有狀態作業中，系統會保留多個資料列或時間間隔內擷取資料的狀態，以便計算準確的結果。
 * 使用 [`APPENDS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions?hl=zh-tw#appends) 變更記錄函式，從標準 BigQuery 資料表或 [Apache Iceberg 代管資料表](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery?hl=zh-tw)的特定時間點處理附加資料。
 * [將資料匯出至 Pub/Sub](https://docs.cloud.google.com/bigquery/docs/export-to-pubsub?hl=zh-tw) 時，使用 [`CHANGES`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions?hl=zh-tw#changes) 變更記錄函式，處理特定時間點後的變更資料，包括附加和變動。不過，使用[有狀態作業](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction?hl=zh-tw#supported_stateful_operations)或查詢 [Iceberg 代管資料表](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery?hl=zh-tw)時，不支援 `CHANGES`。
@@ -128,10 +129,10 @@ BigQuery 持續查詢是持續執行的 SQL 陳述式，可讓您即時分析傳
   + [`SELECT DISTINCT` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw#select_distinct)
   + [`EXISTS` 或 `NOT EXISTS` 子查詢](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries?hl=zh-tw#exists_subquery_concepts)
   + [遞迴 CTE](https://docs.cloud.google.com/bigquery/docs/recursive-ctes?hl=zh-tw)
-  + [user-defined function](https://docs.cloud.google.com/bigquery/docs/user-defined-functions?hl=zh-tw)
+  + 非 SQL [user-defined function (UDF)](https://docs.cloud.google.com/bigquery/docs/user-defined-functions?hl=zh-tw)，例如 [JavaScript UDF](https://docs.cloud.google.com/bigquery/docs/user-defined-functions?hl=zh-tw#javascript-udf-structure)、[Python UDF](https://docs.cloud.google.com/bigquery/docs/user-defined-functions-python?hl=zh-tw)、[遠端函式](https://docs.cloud.google.com/bigquery/docs/remote-functions?hl=zh-tw)和[使用者定義的匯總函式](https://docs.cloud.google.com/bigquery/docs/user-defined-aggregates?hl=zh-tw)。僅支援 [SQL UDF](https://docs.cloud.google.com/bigquery/docs/user-defined-functions?hl=zh-tw#sql-udf-structure)，且 UDF 的 SQL 運算式受限於所有持續查詢限制。
   + [視窗函式呼叫](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls?hl=zh-tw)
   + 「[支援的功能](#supported_functionality)」一節未列出的 BigQuery ML 函式
-  + [資料定義語言 (DDL) 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw)
+  + [資料定義語言 (DDL) 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw)，但定義暫時 SQL UDF 時的 `CREATE TEMP FUNCTION` 除外。
   + [data manipulation language (DML) 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax?hl=zh-tw)，但 `INSERT` 除外。
   + [資料控制語言 (DCL) 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language?hl=zh-tw)
   + 不指定 Bigtable、Pub/Sub 或 Spanner 的 `EXPORT DATA` 陳述式。
@@ -144,12 +145,13 @@ BigQuery 持續查詢是持續執行的 SQL 陳述式，可讓您即時分析傳
   + [Wildcard 資料表](https://docs.cloud.google.com/bigquery/docs/querying-wildcard-tables?hl=zh-tw)。
   + [變更資料擷取 (CDC) upsert](https://docs.cloud.google.com/bigquery/docs/change-data-capture?hl=zh-tw) 資料。
   + [materialized view](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro?hl=zh-tw)。
-  + 基礎 SQL 查詢使用不支援功能的[檢視表](https://docs.cloud.google.com/bigquery/docs/views?hl=zh-tw)，例如使用者定義函式、外部資料表或啟用 CDC 的資料表。
+  + 底層 SQL 查詢使用不支援功能的[檢視表](https://docs.cloud.google.com/bigquery/docs/views?hl=zh-tw)，例如非 SQL user-defined function、外部資料表或已啟用 CDC 的資料表。
 * 持續查詢不支援[column-](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro?hl=zh-tw)和[資料列層級](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro?hl=zh-tw)安全防護功能。
 * 持續查詢的輸出內容受限於輸出內容匯出目標服務的固有配額和限制。
 * 將資料匯出至 Bigtable、Spanner 或 [Pub/Sub 位置端點](https://docs.cloud.google.com/pubsub/docs/reference/service_apis_overview?hl=zh-tw#pubsub_endpoints)時，只能指定與 BigQuery 資料集位於相同 Google Cloud區域邊界的 Bigtable、Spanner 或 Pub/Sub 資源，該資料集包含您查詢的資料表。將資料匯出至 Pub/Sub 全域端點時，則不受這項限制。如要進一步瞭解如何匯出至 [Bigtable 應用程式設定檔](https://docs.cloud.google.com/bigtable/docs/app-profiles?hl=zh-tw)路由政策，請參閱「[位置考量事項](https://docs.cloud.google.com/bigquery/docs/export-to-bigtable?hl=zh-tw#data-locations)」。
 * 您無法從[資料畫布](https://docs.cloud.google.com/bigquery/docs/data-canvas?hl=zh-tw)執行持續查詢。
 * 持續查詢工作執行期間，您無法修改持續查詢使用的 SQL。詳情請參閱「[修改持續查詢的 SQL](https://docs.cloud.google.com/bigquery/docs/continuous-queries?hl=zh-tw#modify_the_sql_of_a_continuous_query)」。
+* 如果在參照永久 [SQL UDF](https://docs.cloud.google.com/bigquery/docs/user-defined-functions?hl=zh-tw#sql-udf-structure) 的持續查詢執行期間，更新或刪除該 UDF，BigQuery 會終止持續查詢工作。如要套用更新後的 UDF 定義，請從上一個工作停止的時間點開始新的持續查詢。詳情請參閱「[使用 SQL UDF](https://docs.cloud.google.com/bigquery/docs/continuous-queries?hl=zh-tw#use-sql-udfs)」。
 * 如果持續查詢工作處理傳入資料的速度落後，且[輸出浮水印延遲時間](https://docs.cloud.google.com/bigquery/docs/monitoring-dashboard?hl=zh-tw#metrics)超過 48 小時，就會失敗。您可以再次執行查詢，並使用 [`APPENDS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions?hl=zh-tw#appends) 或 [`CHANGES`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions?hl=zh-tw#changes) 變更記錄函式，從上次停止持續查詢工作的時間點繼續處理。詳情請參閱「[從特定時間點開始持續查詢](https://docs.cloud.google.com/bigquery/docs/continuous-queries?hl=zh-tw#start_a_continuous_query_from_a_particular_point_in_time)」。
 * 使用使用者帳戶設定的持續查詢，最多可執行兩天。設定服務帳戶後，持續查詢最多可執行 150 天。達到查詢執行時間上限時，查詢就會失敗，並停止處理傳入的資料。
 * 雖然持續查詢是使用 [BigQuery 可靠性功能](https://docs.cloud.google.com/bigquery/docs/reliability-intro?hl=zh-tw)建構，但有時仍可能發生暫時性問題。問題可能會導致持續查詢自動重新處理，進而造成持續查詢輸出內容中出現重複資料。設計下游系統時，請考量這類情況。
@@ -220,11 +222,11 @@ BigQuery 持續查詢是持續執行的 SQL 陳述式，可讓您即時分析傳
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-04 (世界標準時間)。
+上次更新時間：2026-11-08 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-04 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-08 (世界標準時間)。"],[],[]]

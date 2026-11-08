@@ -101,11 +101,11 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
    **啟用 API 所需的角色**
 
-   您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過擁有者角色 (`roles/owner`) 取得這項權限。否則，您可以透過 Service Usage 管理員角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   如要啟用 API，您必須具備 `serviceusage.services.enable` 權限。如果您建立了專案，可能已透過擁有者角色 (`roles/owner`) 取得這項權限。否則，您可以透過 Service Usage 管理員角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
    [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery.googleapis.com&%3Bredirect=https%3A%2F%2Fconsole.cloud.google.com&hl=zh-tw)
 
-**注意：** 您必須保持啟用 `datacatalog.googleapis.com` API，才能建立及管理用於資料遮蓋和資料欄層級安全性的 Data Catalog 政策標記和分類。雖然 Data Catalog 的中繼資料搜尋和目錄功能已淘汰，並轉換至 Knowledge Catalog，但政策標記專用的 Data Catalog API 功能並未淘汰。
+**注意：**您必須保持啟用 `datacatalog.googleapis.com` API，才能建立及管理用於資料遮蓋和資料欄層級安全性的 Data Catalog 政策標記和分類。雖然 Data Catalog 中繼資料搜尋和目錄功能已淘汰，並轉換至 Knowledge Catalog，但 Policy Tag Manager 服務 (分類和政策標記)、其 `datacatalog.googleapis.com` API 方法和稽核記錄，以及 `roles/datacatalog` Identity and Access Management (IAM) 角色並未淘汰。
 
 ## 角色和權限
 
@@ -129,9 +129,9 @@ Data Catalog 政策標記管理員角色可以建立及管理資料政策標記�
    [前往「IAM」頁面](https://console.cloud.google.com/iam-admin/iam?hl=zh-tw)
 2. 如果清單中列有要授予角色的使用者電子郵件地址，請選取該電子郵件地址，然後按一下「edit 編輯」。「Edit access」(編輯權限) 窗格隨即開啟。按一下「Add another role」(新增其他角色)。
 
-   如果清單中沒有使用者電子郵件地址，請按一下 person\_add「Add」(新增)，然後在「New principals」(新增主體) 方塊中輸入電子郵件地址。
+   如果清單中沒有使用者的電子郵件地址，請按一下 person\_add「Add」(新增)，然後在「New principals」(新增主體) 方塊中輸入電子郵件地址。
 3. 按一下「Select a role」(選取角色) 下拉式選單。
-4. 在「依產品或服務」中，按一下「Data Catalog」。在「Roles」(角色) 中，按一下「Policy Tag Admin」(政策標記管理員)。
+4. 在「依產品或服務」中，點選「Data Catalog」。在「Roles」(角色) 中，按一下「Policy Tag Admin」(政策標記管理員)。
 5. 按一下「儲存」。
 
 ### BigQuery 資料政策管理員、BigQuery 管理員和 BigQuery 資料擁有者角色
@@ -143,9 +143,9 @@ BigQuery 資料政策管理員、BigQuery 管理員和 BigQuery 資料擁有者�
 1. 前往 Google Cloud 控制台的「IAM」頁面。
 
    [前往「IAM」頁面](https://console.cloud.google.com/iam-admin/iam?hl=zh-tw)
-2. 如果清單中列出要授予角色的使用者電子郵件地址，請選取該電子郵件地址，然後按一下 edit「Edit」(編輯)。然後點選「新增其他角色」。
+2. 如果清單中列有要授予角色的使用者電子郵件地址，請選取該電子郵件地址，然後按一下「edit 編輯」。然後點選「新增其他角色」。
 
-   如果清單中沒有使用者電子郵件地址，請按一下 person\_add「Add」(新增)，然後在「New principals」(新增主體) 方塊中輸入電子郵件地址。
+   如果清單中沒有使用者的電子郵件地址，請按一下 person\_add「Add」(新增)，然後在「New principals」(新增主體) 方塊中輸入電子郵件地址。
 3. 按一下「Select a role」(選取角色) 下拉式選單。
 4. 依序點選「BigQuery」>「BigQuery 資料政策管理員」或「BigQuery 管理員」或「BigQuery 資料擁有者」。
 5. 按一下「儲存」。
@@ -158,13 +158,13 @@ BigQuery 資料政策管理員、BigQuery 管理員和 BigQuery 資料擁有者�
 
 如要存取受資料欄層級存取控管機制保護的資料，使用者必須具備 Data Catalog 精細讀取者角色，或任何其他已授予 [`datacatalog.categories.fineGrainedGet` 權限](https://docs.cloud.google.com/iam/docs/roles-permissions/datacatalog?hl=zh-tw#datacatalog.categories.fineGrainedGet)的角色。設定政策標記時，系統會將這個角色指派給主體。
 
-如要為使用者授予政策標記的「精細讀取者」角色，您必須具備專案的 `datacatalog.taxonomies.setIamPolicy` 權限，且該專案含有政策標記的分類。如果您沒有 `datacatalog.taxonomies.setIamPolicy` 權限，請要求專案擁有者授予權限，或代為執行操作。
+如要為使用者授予政策標記的「精細讀取者」角色，您必須具備該政策標記分類所在專案的 `datacatalog.taxonomies.setIamPolicy` 權限。如果您沒有 `datacatalog.taxonomies.setIamPolicy` 權限，請要求專案擁有者授予權限，或代您執行操作。
 
 如需操作說明，請參閱「[設定政策標記的權限](https://docs.cloud.google.com/bigquery/docs/column-level-security?hl=zh-tw#set_permissions_on_policy_tags)」。
 
 ## 設定資料欄層級存取控管
 
-完成下列工作，設定資料欄層級存取控管機制：
+完成下列工作，設定資料欄層級存取控管：
 
 * 建立政策標記分類。
 * 將主體與政策標記建立關聯，並授予主體 Data Catalog 精細讀取者角色。
@@ -221,9 +221,9 @@ BigQuery 資料政策管理員、BigQuery 管理員和 BigQuery 資料擁有者�
 
 ### 在資料欄上設定政策標記
 
-設定政策標記的使用者或服務帳戶必須具備 `datacatalog.taxonomies.get` 和 `bigquery.tables.setCategory` 權限。Data Catalog 政策標記管理員和專案檢視者角色具備 `datacatalog.taxonomies.get`。BigQuery 管理員 (`roles/bigquery.admin`) 和 BigQuery 資料擁有者 (`roles/bigquery.dataOwner`) 角色包含 `bigquery.tables.setCategory`。
+設定政策標記的使用者或服務帳戶，必須具備 `datacatalog.taxonomies.get` 和 `bigquery.tables.setCategory` 權限。Data Catalog 政策標記管理員和專案檢視者角色具備 `datacatalog.taxonomies.get`。BigQuery 管理員 (`roles/bigquery.admin`) 和 BigQuery 資料擁有者 (`roles/bigquery.dataOwner`) 角色包含 `bigquery.tables.setCategory`。
 
-如要在Google Cloud 控制台中查看組織內所有專案的分類和政策標記，使用者必須具備 `resourcemanager.organizations.get` 權限，該權限包含在組織檢視者角色中。使用 API 或 `bq` 指令列工具時，**不**需要這項權限。
+如要在Google Cloud 控制台中查看組織內所有專案的分類和政策標記，使用者需要 `resourcemanager.organizations.get` 權限，該權限包含在組織檢視者角色中。使用 API 或 `bq` 指令列工具時，**不**需要這項權限。
 
 **注意：** 每個資料欄只能指派一個政策標記。
 
@@ -295,7 +295,7 @@ BigQuery 資料政策管理員、BigQuery 管理員和 BigQuery 資料擁有者�
 
 ### 強制執行存取控管
 
-請按照下列操作說明，開啟或關閉存取控管強制執行功能。
+請按照下列操作說明，啟用或停用存取控管措施。
 
 如要強制執行存取控管，必須建立資料政策。如果您使用Google Cloud 控制台強制執行存取控管，系統會為您執行這項操作。如要使用 BigQuery Data Policy API 強制執行存取控管，則必須明確建立資料政策。
 
@@ -321,7 +321,7 @@ BigQuery 資料政策管理員、BigQuery 管理員和 BigQuery 資料擁有者�
 
 ### API
 
-使用 [`create` 方法](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies/create?hl=zh-tw)，並傳入 `dataPolicyType` 欄位設為 `COLUMN_LEVEL_SECURITY_POLICY` 的 [`DataPolicy` 資源](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies?hl=zh-tw#resource:-datapolicy)。
+請使用 [`create` 方法](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies/create?hl=zh-tw)，並傳入 `dataPolicyType` 欄位設為 `COLUMN_LEVEL_SECURITY_POLICY` 的 [`DataPolicy` 資源](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies?hl=zh-tw#resource:-datapolicy)。
 
 #### 取得資料政策
 
@@ -512,7 +512,7 @@ public class GetDataPolicy {
   }
 ```
 
-#### 取得資料政策的身分與存取權管理 (IAM) 政策
+#### 取得資料政策的身分與存取權管理政策
 
 如要取得資料政策的 IAM 政策，請按照下列步驟操作：
 

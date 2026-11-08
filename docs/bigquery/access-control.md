@@ -168,4 +168,4 @@ Service agent roles should only be granted to [service agents](https://docs.clou
 
 | Role | Permissions |
 | --- | --- |
-| BigQuery Omni Service Agen |
+|  |

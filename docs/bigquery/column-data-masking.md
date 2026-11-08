@@ -107,12 +107,12 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
    **啟用 API 所需的角色**
 
-   您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過擁有者角色 (`roles/owner`) 取得這項權限。否則，您可以透過 Service Usage 管理員角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   如要啟用 API，您必須具備 `serviceusage.services.enable` 權限。如果您建立了專案，可能已透過擁有者角色 (`roles/owner`) 取得這項權限。否則，您可以透過 Service Usage 管理員角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
    [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery.googleapis.com&%3Bredirect=https%3A%2F%2Fconsole.cloud.google.com&hl=zh-tw)
 2. 如果您建立的資料政策參照[自訂遮蓋常式](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro?hl=zh-tw#custom_mask)，請建立相關聯的遮蓋 UDF，以便在後續步驟中使用。
 
-**注意：**您必須保持啟用 `datacatalog.googleapis.com` API，才能建立及管理用於資料遮蓋和資料欄層級安全性的 Data Catalog 政策標記和分類。雖然 Data Catalog 的中繼資料搜尋和目錄功能已淘汰，並轉換至 Knowledge Catalog，但政策標記專用的 Data Catalog API 功能並未淘汰。
+**注意：**您必須保持啟用 `datacatalog.googleapis.com` API，才能建立及管理用於資料遮蓋和資料欄層級安全性的 Data Catalog 政策標記和分類。雖然 Data Catalog 中繼資料搜尋和目錄功能已淘汰，並轉換至 Knowledge Catalog，但 Policy Tag Manager 服務 (分類和政策標記)、其 `datacatalog.googleapis.com` API 方法和稽核記錄，以及 `roles/datacatalog` Identity and Access Management (IAM) 角色並未淘汰。
 
 ### 可建立分類
 
@@ -803,5 +803,5 @@ public class GetIamPolicy {
     DataPolicyName resourceName = DataPolicyName.of(projectId, location, dataPolicyId);
 
     GetIamPolicyRequest request =
-        GetIamPolicyRequest.newBuilder().setResource(resourceName.toString
+        GetIamPolicyRequest.newBuilder().setResource(resourceName.
 ```

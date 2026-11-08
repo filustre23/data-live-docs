@@ -511,4 +511,4 @@ ML.EVALUATE(
 
 * `MAX_OUTPUT_TOKENS`: an `INT64` value that sets
   the maximum number of tokens output by the model. Specify a lower value
-  for shorter res
+  for shorter responses and a higher value for longer responses.
