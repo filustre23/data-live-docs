@@ -149,5 +149,5 @@ ORDER BY
 SELECT
   _PARTITIONDATE AS date,
   applicable_country,
-  COUNT(DISTINCT CON
+  COUNT(DISTINCT CONCAT(CAST(mercha
 ```

@@ -24,7 +24,7 @@ BigQuery 資料移轉服務中的 Apache Hive Metastore 遷移連接器，可讓
 * Amazon Simple Storage Service (Amazon S3)
 * Azure Blob 儲存體或 Azure Data Lake Storage Gen2
 
-您可以使用 Hive Metastore 遷移連接器，將 Cloud Storage 做為檔案儲存空間，並向下列其中一個 metastore 註冊 Hive Metastore 資料表：
+有了 Hive Metastore 遷移連接器，您可以使用 Cloud Storage 做為檔案儲存空間，並向下列其中一個 metastore 註冊 Hive Metastore 資料表：
 
 * [Lakehouse 執行階段目錄 Iceberg REST 目錄](https://docs.cloud.google.com/bigquery/docs/blms-rest-catalog?hl=zh-tw)
 
@@ -35,9 +35,9 @@ BigQuery 資料移轉服務中的 Apache Hive Metastore 遷移連接器，可讓
 
   建議您使用 Lakehouse 執行階段目錄 Hive Catalog，管理所有 Hive 資料表。
 
-  Lakehouse 執行階段目錄 Hive 目錄可讓您使用 Hive 目錄，將遷移的 Hive 資料表註冊至 [Lakehouse 執行階段目錄](https://docs.cloud.google.com/lakehouse/docs/about-spark-hive-metastore?hl=zh-tw)。這項服務為 Apache Hive 資料表提供無伺服器 metastore。除了 Apache Spark 和其他 OSS 引擎，您也可以使用 BigQuery 查詢資料 (受格式限制)。
+  Lakehouse 執行階段目錄 Hive 目錄可讓您使用 Hive 目錄，向 [Lakehouse 執行階段目錄](https://docs.cloud.google.com/lakehouse/docs/about-spark-hive-metastore?hl=zh-tw)註冊遷移的 Hive 資料表。這項服務提供 Apache Hive 資料表適用的無伺服器 metastore。除了 Apache Spark 和其他 OSS 引擎，您也可以使用 BigQuery 查詢資料 (受格式限制)。
 
-這個連接器支援完整轉移和僅轉移中繼資料。完整移轉會將資料和中繼資料從來源資料表移轉至目標 metastore。如果資料已在 Cloud Storage 中，且您只想將資料註冊至目的地 metastore，則可建立僅限中繼資料的移轉作業。
+這個連接器支援完整轉移和僅限中繼資料轉移。完整移轉會將資料和中繼資料從來源資料表移轉至目標 metastore。如果資料已在 Cloud Storage 中，且您只想將資料註冊至目的地 metastore，則可建立僅限中繼資料的移轉作業。
 
 下圖概略說明遷移程序。
 
@@ -57,8 +57,8 @@ Hive Metastore 資料表移轉作業有下列限制：
 * Lakehouse 執行階段目錄 Hive 目錄 ID 只能使用小寫英文字母、數字和底線 (`_`)，不得使用破折號 (`-`) 或大寫英文字母。
 * 您無法在 Google Cloud 控制台查看或管理 Lakehouse 執行階段目錄 Hive 目錄。不過，您可以在目標 BigQuery 資料集查看及查詢遷移的資料表。
 * Lakehouse 執行階段目錄 Hive 目錄的所有限制，都適用於開放原始碼中繼資料格式和資料類型。
-  + 如要瞭解 CSV 和 JSON 等格式的相容性，請參閱「[支援的儲存空間格式](https://docs.cloud.google.com/lakehouse/docs/spark-hive-formats-types?hl=zh-tw)」。
-  + 如要瞭解不支援的資料類型 (例如 `UNION` 或巢狀陣列) 和資料欄統計資料，請參閱 [metastore 限制](https://docs.cloud.google.com/lakehouse/docs/spark-hive-limitations?hl=zh-tw#bigquery-limitations)和[分區限制](https://docs.cloud.google.com/lakehouse/docs/spark-hive-limitations?hl=zh-tw#partition-limitations)。
+  + 如要瞭解與 CSV 和 JSON 等格式的相容性，請參閱「[支援的儲存空間格式](https://docs.cloud.google.com/lakehouse/docs/spark-hive-formats-types?hl=zh-tw)」。
+  + 如要瞭解不支援的資料類型 (例如 `UNION` 或巢狀陣列) 和資料欄統計資料，請參閱「[metastore 限制](https://docs.cloud.google.com/lakehouse/docs/spark-hive-limitations?hl=zh-tw#bigquery-limitations)」和「[分區限制](https://docs.cloud.google.com/lakehouse/docs/spark-hive-limitations?hl=zh-tw#partition-limitations)」。
 
 ## 資料擷取選項
 
@@ -66,13 +66,13 @@ Hive Metastore 資料表移轉作業有下列限制：
 
 ### 增量移轉作業
 
-如果移轉設定設有週期性排程，後續每次移轉都會根據來源資料表的最新更新，更新 Google Cloud 上的資料表。舉例來說，所有資料更新，以及所有插入、刪除或更新作業 (包含結構定義變更)，都會在每次移轉時反映在 Google Cloud 中。
+如果移轉設定設有週期性排程，後續每次移轉都會根據來源資料表的最新更新，更新 Google Cloud 中的資料表。舉例來說，所有資料更新，以及所有涉及結構定義變更的插入、刪除或更新作業，都會在每次移轉時反映在 Google Cloud 中。
 
-**注意：** 每次執行前，請確認中繼資料檔案反映最新狀態。建議[設定 `cron` 指令，自動定期上傳中繼資料](#automate-dumper)。
+**注意：**每次執行前，請確認中繼資料檔案反映最新狀態。建議您[設定 `cron` 指令，自動定期上傳中繼資料](#automate-dumper)。
 
 ### 篩選分區
 
-**注意：** 分區篩選器只能套用至 Hive 資料表。
+**注意：**分區篩選器只能套用至 Hive 資料表。
 
 您可以提供儲存在 Cloud Storage 的自訂篩選器 JSON 檔案，從 Hive 資料表移轉部分分區。排定移轉作業時，請使用 `partition_filter_gcs_path` 參數提供這個 JSON 檔案的完整 Cloud Storage 路徑。
 
@@ -105,15 +105,15 @@ Hive Metastore 資料表移轉作業有下列限制：
 
 JSON 檔案中的 `condition` 欄位支援下列值，每個值都有特定的 `partitions` 陣列格式：
 
-* **`IN`**：指定要納入的確切分區路徑。`partitions` 陣列包含的字串，代表相對於資料表基本路徑的分區確切目錄結構 (例如 `["partition_key1=value1/partition_key2=value2"]`)。您可以在陣列中指定多個路徑。
-* **`LESS_THAN`**：包含主要分區索引鍵值小於或等於指定值的分區。`partitions` 陣列必須包含單一字串，格式為 `["<partition_key>;<value>"]`。
+* **`IN`**：指定要納入的確切分區路徑。`partitions` 陣列包含的字串，代表分區相對於資料表基本路徑的確切目錄結構 (例如 `["partition_key1=value1/partition_key2=value2"]`)。您可以在陣列中指定多個路徑。
+* **`LESS_THAN`**：包含主分區鍵值小於或等於指定值的分區。`partitions` 陣列必須包含單一字串，格式為 `["<partition_key>;<value>"]`。
 * **`GREATER_THAN`**：包含主要分區鍵值大於或等於指定值的分區。`partitions` 陣列必須包含單一字串，格式為 `["<partition_key>;<value>"]`。
-* **`RANGE`**：包含主要分區索引鍵值落在指定範圍內 (含) 的分區。`partitions` 陣列必須包含單一字串，格式為 `["<partition_key>;<start_value>;<end_value>"]`。
+* **`RANGE`**：包含主分區鍵值落在指定範圍內 (含) 的分區。`partitions` 陣列必須包含單一字串，格式為 `["<partition_key>;<start_value>;<end_value>"]`。
 
 篩選條件須遵守下列規則和限制：
 
-* **包含值：**`GREATER_THAN`、`LESS_THAN` 和 `RANGE` 的篩選條件包含提供的值。例如，值為
-  的 `LESS_THAN` 篩選器會包含 `2023` 之前的分區 (含 `2023`)。
+* **包含值：**`GREATER_THAN`、`LESS_THAN` 和 `RANGE` 的篩選條件包含提供的值。舉例來說，如果 `LESS_THAN`
+  篩選器的值為 `2023`，則會包含 `2023` 之前的分區 (含 )。
 * **刪除分區：**如果現有的目的地分區符合分區篩選條件，且來源中不再存在，則會從目的地 metastore 中捨棄。不過，該分區的基礎資料檔案不會從 Cloud Storage 目的地 bucket 中刪除。
 * **單一資料表限制：**
   + 同一個表格中不得包含多個篩選器。
@@ -123,7 +123,7 @@ JSON 檔案中的 `condition` 欄位支援下列值，每個值都有特定的 `
 
 ## 事前準備
 
-安排 Hive Metastore 移轉作業前，請先執行本節中的步驟。
+排定 Hive Metastore 移轉作業前，請先執行本節中的步驟。
 
 ### 啟用 API
 
@@ -133,7 +133,7 @@ JSON 檔案中的 `condition` 欄位支援下列值，每個值都有特定的 `
 * Storage Transfer API
 * BigLake API
 
-**注意：** 您必須啟用 BigLake API，才能使用 Lakehouse 執行階段目錄 Iceberg REST 目錄或 Lakehouse 執行階段目錄 Hive 目錄做為目的地 metastore。
+**注意：**您必須啟用 BigLake API，才能使用 Lakehouse 執行階段目錄 Iceberg REST 目錄，或 Lakehouse 執行階段目錄 Hive 目錄做為目的地 metastore。
 
 啟用 Data Transfer API 時，系統會建立[服務代理](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service?hl=zh-tw#service_agent)。
 
@@ -141,16 +141,16 @@ JSON 檔案中的 `condition` 欄位支援下列值，每個值都有特定的 `
 
 如要設定 Hive Metastore 移轉作業的權限，請按照下列各節的步驟操作。
 
-1. 建立移轉作業的使用者或服務帳戶應具備 BigQuery 管理員角色 (`roles/bigquery.admin`)。如果使用服務帳戶，該帳戶僅用於建立移轉作業。
+1. 建立移轉作業的使用者或服務帳戶，應具備 BigQuery 管理員角色 (`roles/bigquery.admin`)。如果使用服務帳戶，該帳戶僅用於建立移轉作業。
 2. 啟用 Data Transfer API 後，系統會建立[服務代理](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service?hl=zh-tw#service_agent) (P4SA)。
 
    為確保服務代理具備執行 Hive Metastore 移轉作業所需的權限，請要求管理員在專案中，為服務代理授予下列 IAM 角色：
 
    **重要事項：**請務必將這些角色授予服務代理，*而非*您的使用者帳戶。如果未將角色授予正確的主體，可能會發生權限錯誤。
-   * [Storage 移轉作業管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/storagetransfer?hl=zh-tw#storagetransfer.admin)  (`roles/storagetransfer.admin`)
-   * [服務使用情形消費者](https://docs.cloud.google.com/iam/docs/roles-permissions/serviceusage?hl=zh-tw#serviceusage.serviceUsageConsumer)  (`roles/serviceusage.serviceUsageConsumer`)
+   * [Storage 移轉作業管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/storagetransfer?hl=zh-tw#storagetransfer.admin) (`roles/storagetransfer.admin`)
+   * [服務使用情形消費者](https://docs.cloud.google.com/iam/docs/roles-permissions/serviceusage?hl=zh-tw#serviceusage.serviceUsageConsumer) (`roles/serviceusage.serviceUsageConsumer`)
    * [儲存空間管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/storage?hl=zh-tw#storage.admin)  (`roles/storage.admin`)
-   * 如要將中繼資料遷移至 Lakehouse 執行階段目錄 (Iceberg REST 目錄或 Hive 目錄)：[BigLake 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake?hl=zh-tw#biglake.admin)  (`roles/biglake.admin`)
+   * 如要將中繼資料遷移至 Lakehouse 執行階段目錄 (Iceberg REST 目錄或 Hive 目錄)：[BigLake 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake?hl=zh-tw#biglake.admin) (`roles/biglake.admin`)
 
    如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
@@ -175,7 +175,7 @@ JSON 檔案中的 `condition` 欄位支援下列值，每個值都有特定的 `
 
 ### 產生 Apache Hive 的中繼資料檔案
 
-執行 `dwh-migration-dumper` 工具，[擷取 Apache Hive 的中繼資料](https://docs.cloud.google.com/bigquery/docs/hadoop-metadata?hl=zh-tw#apache-hive)。這項工具會產生名為 `hive-dumper-output.zip` 的檔案，可上傳至 Cloud Storage bucket。在本文件中，這個 Cloud Storage bucket 稱為 `DUMPER_BUCKET`。
+執行 `dwh-migration-dumper` 工具，[擷取 Apache Hive 的中繼資料](https://docs.cloud.google.com/bigquery/docs/hadoop-metadata?hl=zh-tw#extracting_metadata_for_migration)。這項工具會產生名為 `hive-dumper-output.zip` 的檔案，可上傳至 Cloud Storage bucket。在本文件中，這個 Cloud Storage bucket 稱為 `DUMPER_BUCKET`。
 
 您也可以使用指令碼，排定定期上傳作業。詳情請參閱「[使用 `cron` 工作自動執行轉儲工具](#automate-dumper)」。
 
@@ -185,7 +185,7 @@ JSON 檔案中的 `condition` 欄位支援下列值，每個值都有特定的 `
 
 ### HDFS
 
-如要轉移地端部署或 HDFS 資料，必須使用 Storage 移轉代理程式。
+如要轉移地端部署或 HDFS 資料，必須使用儲存空間移轉代理程式。
 
 如要設定代理，請按照下列步驟操作：
 
@@ -195,13 +195,13 @@ JSON 檔案中的 `condition` 欄位支援下列值，每個值都有特定的 `
 
 ### Amazon S3
 
-從 Amazon S3 轉移資料時，不需使用代理程式。
+從 Amazon S3 移轉資料時，不需使用代理程式。
 
-如要設定 Storage 移轉服務，以便移轉 Amazon S3 資料，請按照下列步驟操作：
+如要設定 Storage 移轉服務，以便執行 Amazon S3 移轉作業，請按照下列步驟操作：
 
 1. [設定 AWS Amazon S3 的存取憑證](https://docs.cloud.google.com/storage-transfer/docs/source-amazon-s3?hl=zh-tw#access_credentials)。
 2. 設定存取憑證後，請記下存取金鑰 ID 和私密存取金鑰。
-3. 如果 AWS 專案設有 IP 限制，請將 Storage 移轉服務 worker 使用的 [IP 範圍新增](https://docs.cloud.google.com/storage-transfer/docs/source-amazon-s3?hl=zh-tw#ip_restrictions)至 IP 許可清單。
+3. 如果 AWS 專案設有 IP 限制，請將 Storage 移轉服務 worker 使用的 [IP 範圍](https://docs.cloud.google.com/storage-transfer/docs/source-amazon-s3?hl=zh-tw#ip_restrictions)，新增至 IP 許可清單。
 
 ### Microsoft Azure
 
@@ -219,9 +219,9 @@ JSON 檔案中的 `condition` 欄位支援下列值，每個值都有特定的 `
 
 ### 控制台
 
-1. 前往 Google Cloud 控制台的「Data transfers」(資料移轉) 頁面。
+1. 前往 Google Cloud 控制台的「資料移轉」頁面。
 
-   [前往「資料移轉」頁面](https://console.cloud.google.com/bigquery/transfers?hl=zh-tw)
+   [前往「資料移轉」](https://console.cloud.google.com/bigquery/transfers?hl=zh-tw)
 2. 按一下「add 建立移轉作業」。
 3. 在「Source type」(來源類型) 部分，從「Source」(來源) 清單中選取「Hive Metastore」。
 4. 在「位置」部分，選取位置類型，然後選取區域。
@@ -232,28 +232,29 @@ JSON 檔案中的 `condition` 欄位支援下列值，每個值都有特定的 `
    * 視情況選取「Start now」(立即開始) 或「Start at set time」(在所設時間開始執行)，並提供開始日期和執行時間。
 7. 在「Data source details」(資料來源詳細資料) 部分執行下列操作：
 
-   1. 在「Transfer strategy」(移轉策略) 部分，選取下列其中一個選項：
+   1. 在「Transfer strategy」(移轉策略)，選取下列其中一個選項：
       * `FULL_TRANSFER`：移轉所有資料，並向目標 metastore 註冊中繼資料。這是預設選項。
       * `METADATA_ONLY`：僅註冊中繼資料。中繼資料參照的 Cloud Storage 位置必須已有資料。
    2. 在「Table name patterns」(資料表名稱模式)，提供資料表名稱或與 HDFS 資料庫中資料表相符的模式，指定要移轉的 HDFS 資料湖泊資料表。您必須使用 Java 規則運算式語法指定資料表模式。例如：
       * `db1..*` 會比對 db1 中的所有資料表。
       * `db1.table1;db2.table2` 與 db1 中的 table1 和 db2 中的 table2 相符。
-   3. 在「BQMS discovery dump gcs path」(BQMS 探索轉儲 GCS 路徑)，輸入[建立 Apache Hive 中繼資料檔案](#generate-metadata-dump-for-apache-hive)時產生的 `hive-dumper-output.zip` 檔案路徑。如果您[搭配使用轉儲器輸出自動化功能和 `cron`](#automate-dumper)，請提供在 `--gcs-base-path` 中設定的 Cloud Storage 資料夾路徑，其中包含轉儲器輸出 ZIP 檔案。
-      1. 在「Storage type」(儲存空間類型) 部分，選取下列其中一個選項。只有在「Transfer strategy」(移轉策略) 設為 `FULL_TRANSFER` 時，才能使用這個欄位：
+   3. 在「BQMS discovery dump gcs path」(BQMS 探索轉儲 GCS 路徑)，輸入[為 Apache Hive 建立中繼資料檔案](#generate-metadata-dump-for-apache-hive)時產生的 `hive-dumper-output.zip` 檔案路徑。如果您使用 [dumper 輸出自動化功能搭配 `cron`](#automate-dumper)，請提供在 `--gcs-base-path` 中設定的 Cloud Storage 資料夾路徑，其中包含 dumper 輸出 ZIP 檔案。
+      1. 在「儲存空間類型」部分，選取下列其中一個選項。只有在「Transfer strategy」(轉移策略) 設為 `FULL_TRANSFER` 時，才能使用這個欄位：
       2. `HDFS`：如果檔案儲存空間為 `HDFS`，請選取這個選項。在「STS agent pool name」(STS 代理集區名稱) 欄位中，您必須提供[設定 Storage Transfer 代理](#configure-sts)時建立的代理集區名稱。
       3. `S3`：如果檔案儲存空間為 `Amazon S3`，請選取這個選項。在「Access key ID」(存取金鑰 ID) 和「Secret access key」(私密存取金鑰) 欄位中，您必須提供[設定存取憑證](#configure-sts)時建立的存取金鑰 ID 和私密存取金鑰。
       4. `AZURE`：如果檔案儲存空間為 `Azure Blob Storage`，請選取這個選項。在「SAS token」(SAS 權杖) 欄位中，您必須提供[設定存取憑證](#configure-sts)時建立的 SAS 權杖。
    4. 選用：在「Partition Filter gcs path」(分區篩選器 GCS 路徑) 部分，輸入自訂篩選器 JSON 檔案的完整 Cloud Storage 路徑，以便[篩選來源資料表的分區](#filter-partitions)。
    5. 在「Destination gcs path」(目的地 GCS 路徑) 中，輸入 Cloud Storage bucket 的路徑，用於儲存遷移的資料。
-   6. 從下拉式選單中選擇目的地 metastore 類型：
+   6. 從下拉式清單中選擇目的地中繼存放區類型：
       * `BIGLAKE_REST_CATALOG`：選取這個選項，即可將中繼資料儲存在 Lakehouse 執行階段目錄 Iceberg REST 目錄中。目錄是根據目的地 Cloud Storage bucket 建立。
       * `BIGLAKE_HIVE_CATALOG` ([預先發布版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))：選取這個選項，即可將中繼資料儲存在 Lakehouse 執行階段目錄 Hive 目錄中。您必須在「BigLake Metastore Hive Catalog ID」中提供目錄名稱。如果目錄不存在，系統會自動建立。
-   7. 選用：在「Service account」(服務帳戶) 部分，輸入要用於這項資料移轉作業的服務帳戶。服務帳戶應與建立移轉設定和目的地資料集的Google Cloud 專案相同。
+   7. 選用：在「Service account」(服務帳戶) 部分，輸入要與這項資料移轉作業搭配使用的服務帳戶。服務帳戶應與建立移轉設定和目的地資料集的Google Cloud 專案相同。
 
 ### bq
 
 如要排定 Hive Metastore 移轉作業，請輸入 `bq mk` 指令，並提供移轉作業建立旗標 `--transfer_config`：
 
 ```
-  bq
+  bq mk --transfer_config
+  --data_source
 ```

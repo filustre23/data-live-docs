@@ -292,4 +292,4 @@ The option list specifies options for the export operation.
 
 #### Export data to Spanner
 
-The following example
+The following example exports data to a Spanner table:

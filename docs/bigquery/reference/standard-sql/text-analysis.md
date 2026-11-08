@@ -523,5 +523,8 @@ SELECT TEXT_ANALYZE(
     ]
   }
   '''
-) AS
+) AS results
+
+/*----------------------------------+
+ | results
 ```

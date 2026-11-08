@@ -128,4 +128,5 @@ label assignments, such as CampaignLabel, AdGroupLabel, and AdGroupBidModifier.
 | AdGroupBidModifier | [Ad Group Bid Modifier](https://developers.google.com/google-ads/api/fields/v25/ad_group_bid_modifier) |
 | AdGroupAdLabel | [Ad Group Ad Label](https://developers.google.com/google-ads/api/fields/v25/ad_group_ad_label) |
 | CampaignLabel | [Campaign Label](https://developers.google.com/google-ads/api/fields/v25/campaign_label) |
-| CampaignCriterion |  |
+| CampaignCriterion | [Campaign Criterion](https://developers.google.com/google-ads/api/fields/v25/campaign_criterion) |
+| AdGroupLabel |<

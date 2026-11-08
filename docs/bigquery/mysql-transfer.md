@@ -25,7 +25,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 MySQL 資料移轉作業有下列限制：
 
 * MySQL 資料庫的同時連線數量上限，取決於 MySQL 設定參數 `max_connections`。預設值為 151 個連線，但可視需要調高上限。因此，同時對單一 MySQL 資料庫執行的移轉作業數量，不得超過這個上限。這項限制也代表並行移轉工作的數量應小於 MySQL 資料庫支援的並行連線數量上限。
-* 單一移轉設定在特定時間只能支援一項資料移轉作業。如果第二項資料移轉作業排定在第一項移轉作業完成前執行，則只有第一項資料移轉作業會完成，而與第一項移轉作業重疊的其他資料移轉作業則會略過。
+* 單一移轉設定在特定時間只能支援一項資料移轉作業。如果第二項資料移轉作業排定在第一項移轉作業完成前執行，則只有第一項資料移轉作業會完成，與第一項移轉作業重疊的其他資料移轉作業都會略過。
   + 為避免單一移轉設定略過移轉作業，建議您設定「Repeat frequency」(重複頻率) 選項，增加大型資料移轉作業之間的時間長度。
 * 在資料移轉期間，MySQL 連接器會找出已建立索引和分區的鍵資料欄，以平行批次方式移轉資料。因此，建議您指定主鍵資料欄，或使用資料表中的索引資料欄，以提升效能並降低資料移轉的錯誤率。
   + 如果您有索引或主鍵限制，則只有下列資料欄類型支援建立平行批次：
@@ -67,7 +67,7 @@ MySQL 增量移轉作業有下列限制：
 
 ### 必要的角色
 
-如要取得建立 BigQuery 資料移轉服務資料移轉作業所需的權限，請要求管理員授予您專案的 [BigQuery 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.admin)  (`roles/bigquery.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得建立 BigQuery 資料移轉服務資料移轉作業所需的權限，請要求管理員授予您專案的 [BigQuery 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.admin) (`roles/bigquery.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
 這個預先定義的角色具備建立 BigQuery 資料移轉服務資料移轉作業所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
@@ -140,8 +140,8 @@ MySQL 增量移轉作業有下列限制：
 8. 選用：在「Notification options」(通知選項) 專區，執行下列操作：
 
    * 如要啟用電子郵件通知，請將「Email notifications」(電子郵件通知) 切換鈕撥到開啟位置。啟用這個選項之後，若移轉失敗，移轉作業管理員就會收到電子郵件通知。
-   * 如要設定移轉作業的 Pub/Sub 執行[通知](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications?hl=zh-tw)，請將「Pub/Sub notifications」(Pub/Sub 通知) 切換鈕撥到開啟位置。您可以選取[主題](https://docs.cloud.google.com/pubsub/docs/admin?hl=zh-tw)名稱，或點選「Create a topic」(建立主題) 來建立主題。
-9. 按一下 [儲存]。
+   * 如要設定移轉作業的 Pub/Sub 執行[通知](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications?hl=zh-tw)，請將「Pub/Sub notifications」(Pub/Sub 通知) 切換鈕撥到開啟位置。您可以選取[主題](https://docs.cloud.google.com/pubsub/docs/create-topic?hl=zh-tw)名稱，或點選「Create a topic」(建立主題) 來建立主題。
+9. 按一下「儲存」。
 
 ### bq
 
@@ -159,8 +159,7 @@ bq mk
 
 更改下列內容：
 
-* PROJECT\_ID (選用)：您的 Google Cloud 專案 ID。
-  如未提供 `--project_id` 旗標來指定特定專案，系統會使用預設專案。
+* PROJECT\_ID (選用)：您的 Google Cloud 專案 ID。如未提供 `--project_id` 旗標來指定特定專案，系統會使用預設專案。
 * DATA\_SOURCE：資料來源，即 `mysql`。
 * DISPLAY\_NAME：資料移轉設定的顯示名稱。移轉作業名稱可以是任意值，日後需要修改移轉作業時，能夠據此識別即可。
 * DATASET：資料移轉設定的目標資料集。
@@ -171,15 +170,14 @@ bq mk
   + `connector.endpoint.host`：資料庫的主機名稱或 IP 位址。
   + `connector.endpoint.port`：資料庫的通訊埠編號。
   + `connector.authentication.username`：資料庫使用者的使用者名稱。
-  + `connector.authentication.password`：資料庫使用者的密碼。connector.connectionType
-  + `connector.connectionType` (選用)：用於決定連線網址的連線類型。可以是 `SERVICE`、`SID` 或 `TNS`。如未提供，則預設為 `SERVICE`。
+  + `connector.authentication.password`：資料庫使用者的密碼。
   + `connector.legacyMapping`：設為 `true` (預設)，即可使用[舊版資料類型對應](https://docs.cloud.google.com/bigquery/docs/mysql-transfer-intro?hl=zh-tw#data-type-mapping)。設為 `false` 即可使用更新版資料類型對應。如要進行增量移轉，這個值必須是 `false`。如要進一步瞭解資料類型對應更新，請參閱「[2027 年 3 月 16 日](https://docs.cloud.google.com/bigquery/docs/transfer-changes?hl=zh-tw#Mar16-mysql)」。
   + `connector.tls.mode`：指定要與這項轉移作業搭配使用的 [TLS 設定](https://docs.cloud.google.com/bigquery/docs/mysql-transfer-intro?hl=zh-tw#tls-configuration)：
     - `ENCRYPT_VERIFY_CA_AND_HOST`：加密資料，並驗證憑證授權單位和主機名稱
     - `ENCRYPT_VERIFY_CA`：加密資料，且僅驗證憑證授權單位
     - `ENCRYPT_VERIFY_NONE` (僅用於資料加密)
     - `DISABLE`：不加密或驗證
-  + `connector.tls.trustedServerCertificate`：(選用) 提供一或多個 [PEM 編碼憑證](https://docs.cloud.google.com/bigquery/docs/mysql-transfer-intro?hl=zh-tw#trusted_server_certificate_pem)。只有在 `connector.tls.mode` 為 `ENCRYPT_VERIFY_CA_AND_HOST` 或 `ENCRYPT_VERIFY_CA` 時才需要。
+  + `connector.tls.trustedPemCertificate`：(選用) 提供一或多個 [PEM 編碼憑證](https://docs.cloud.google.com/bigquery/docs/mysql-transfer-intro?hl=zh-tw#trusted_server_certificate_pem)。只有在 `connector.tls.mode` 為 `ENCRYPT_VERIFY_CA_AND_HOST` 或 `ENCRYPT_VERIFY_CA` 時才需要。
   + `ingestionType`：指定 `full` 或 `incremental`。[預先發布版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages)支援增量移轉。詳情請參閱「[完整或增量移轉](https://docs.cloud.google.com/bigquery/docs/mysql-transfer-intro?hl=zh-tw#full-incremental-transfers)」。
   + `writeMode`：指定 `WRITE_MODE_APPEND` 或 `WRITE_MODE_UPSERT`。
   + `watermarkColumns`：將資料表中的資料欄指定為浮水印資料欄。如要進行增量移轉，則必須填寫這個欄位。
@@ -197,23 +195,23 @@ bq mk
     --params='{"assets":["DB1/DEPARTMENT","DB1/EMPLOYEES"],
         "connector.authentication.username": "User1",
         "connector.authentication.password":"ABC12345",
-        "connector.encryptionMode":"FULL",
         "connector.database":"DB1",
         "connector.endpoint.host":"54.74.220.23",
-        "connector.endpoint.port":3306
+        "connector.endpoint.port":3306,
+        "connector.legacyMapping":false,
         "ingestionType":"incremental",
         "writeMode":"WRITE_MODE_APPEND",
         "watermarkColumns":["createdAt","createdAt"],
-        "primaryKeys":[['dep_id'], ['report_by','report_title']],
+        "primaryKeys":[["dep_id"], ["report_by","report_title"]],
         "connector.tls.mode": "ENCRYPT_VERIFY_CA_AND_HOST",
-        "connector.tls.trustedServerCertificate": "PEM-encoded certificate"}'
+        "connector.tls.trustedPemCertificate": "PEM-encoded certificate"}'
 ```
 
-在遞增移轉作業中指定多項資產時，`watermarkColumns` 和 `primaryKeys` 欄位的值會對應至 `assets` 欄位中的值位置。在以下範例中，`dep_id` 對應至資料表 `DB1/USER1/DEPARTMENT`，而 `report_by` 和 `report_title` 則對應至資料表 `DB1/USER1/EMPLOYEES`。
+在遞增移轉作業中指定多項資產時，`watermarkColumns` 和 `primaryKeys` 欄位的值會對應至 `assets` 欄位中的值位置。在以下範例中，`dep_id` 對應至資料表 `DB1/DEPARTMENT`，而 `report_by` 和 `report_title` 則對應至資料表 `DB1/EMPLOYEES`。
 
 ```
-      "primaryKeys":[['dep_id'], ['report_by','report_title']],
-      "assets":["DB1/USER1/DEPARTMENT","DB1/USER1/EMPLOYEES"],
+      "primaryKeys":[["dep_id"], ["report_by","report_title"]],
+      "assets":["DB1/DEPARTMENT","DB1/EMPLOYEES"],
 ```
 
 ### API
@@ -222,7 +220,7 @@ bq mk
 
 儲存移轉設定時，MySQL 連接器會根據您的排程選項，自動觸發移轉作業。每次執行移轉作業時，MySQL 連接器都會將 MySQL 中的所有可用資料移轉至 BigQuery。
 
-如要在排定的時間以外手動執行資料移轉作業，可以啟動[補充執行作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)。
+如要在排程時間以外手動執行資料移轉作業，可以啟動[補充執行作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)。
 
 ## 疑難排解
 
@@ -243,4 +241,6 @@ bq mk
 
 提供意見
 
-除非另有註明，否則本頁面中的內容是採用
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+
+上次更新時間：2026-11-04 (世界標準時間)。

@@ -568,3 +568,6 @@ This option accepts the following values:
 * `NO`: Norway
 * `NZ`: New Zealand
 * `PE`: Peru
+* `PH`: Philippines
+* `PK`: Pakistan
+* `PL`: Poland

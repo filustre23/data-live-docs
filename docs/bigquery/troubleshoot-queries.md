@@ -16,7 +16,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 排解查詢相關問題
 
-本文旨在協助您排解執行查詢時的常見問題，例如找出查詢速度緩慢的原因，或提供解決步驟，處理失敗查詢傳回的常見錯誤。
+在 BigQuery 執行查詢時，可能會遇到執行速度緩慢、資源配額錯誤或查詢工作失敗等問題。您可以檢查查詢執行詳細資料、使用自動診斷工具，以及套用指定修正，診斷並解決這些常見的查詢問題。
 
 ## 排解查詢執行速度緩慢的問題
 
@@ -280,7 +280,7 @@ gcpdiag runbook bigquery/failed-query \
 
 如要解決這個問題，請按照下列其中一種做法進行：
 
-* 請錯開共用 `session_id` 的查詢，並在前一個工作 (`JOB_ID`) 完成後再啟動下一個查詢，或在不同的工作階段中執行並行查詢。
+* 請錯開共用 `session_id` 的查詢，並在前一個工作 (`JOB_ID`) 完成後再開始下一個查詢，或在不同的工作階段中執行並行查詢。
 * 如果工作階段已過期或終止，請建立新的工作階段 (並更新 `.bigqueryrc` 或 `connectionProperties` 中的 `--session_id`，如有設定)。請參閱「[建立工作階段](https://docs.cloud.google.com/bigquery/docs/sessions?hl=zh-tw#create-session)」。
 
 ## 衝突的 DML 陳述式
@@ -404,13 +404,13 @@ supported unless they can be de-correlated`
 
 錯誤字串：`Destination deleted/expired during operation: DETAILS`
 
-如果查詢、載入或複製工作嘗試寫入目的地資料表，但資料表在工作執行完畢前遭到移除，就會發生這個 HTTP `400 Bad Request` 錯誤 (`reason: invalid`)。
+如果查詢、載入或複製工作嘗試寫入的目的地資料表，在工作完成執行前遭到移除，就會發生這個 HTTP `400 Bad Request` 錯誤 (`reason: invalid`)。
 
 ### 診斷
 
 這項錯誤通常是以下兩個原因之一所致：
 
-1. **資料表或資料集已達存留時間 (TTL)。**目的地資料表 (或資料集的預設資料表到期時間) 已設定到期時間戳記。如果長時間執行的工作在資料表到期時間戳記過後仍繼續執行，BigQuery 會在工作仍在執行時刪除過期的資料表。
+1. **資料表或資料集已達存留時間 (TTL)。**目的地資料表 (或資料集的預設資料表到期時間) 已設定到期時間戳記。如果長時間執行的工作在資料表到期時間戳記過後仍繼續執行，BigQuery 會在工作仍在執行時刪除到期資料表。
 2. **並行明確刪除。**在工作執行期間，另一個使用者、服務帳戶或自動化工作流程 (例如自動化調度管理 DAG 或清除指令碼) 對目的地資料表執行 `DROP TABLE` 陳述式或 `tables.delete` API 呼叫。
 
 如要判斷目的地資料表遭到刪除的原因，請查詢 [`INFORMATION_SCHEMA.TABLE_STORAGE`](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage?hl=zh-tw) 檢視表：
@@ -431,9 +431,8 @@ WHERE
 更改下列內容：
 
 * `PROJECT_ID`：您的專案 ID。
-* `REGION`：
-  資料表所在資料集的區域。
-* `DATASET_ID`：資料表所在資料集的 ID。
+* `REGION`：資料表所在資料集的區域。
+* `DATASET_ID`：包含資料表的資料集 ID。
 * `TABLE_ID`：目的地資料表的 ID。
 
 如果資料表已過期，`table_deletion_reason` 欄會包含 `TABLE_EXPIRATION`；如果使用者刪除了資料表，則會包含 `USER_DELETED`；如果使用者刪除了包含資料表的資料集，則會包含 `DATASET_DELETION`。詳情請參閱「[找出資料表刪除原因](https://docs.cloud.google.com/bigquery/docs/restore-deleted-tables?hl=zh-tw#identify-cause)」。
@@ -456,8 +455,8 @@ protoPayload.resourceName:"YOUR_TABLE_NAME"
 
 如要解決這項錯誤，請執行下列操作：
 
-* **延長資料表和資料集的到期時間。**檢查目的地資料表的到期時間，以及資料集的預設資料表到期時間設定。請確保設定的存留時間夠長，足以超過寫入該資料表的工作預期執行時間上限 (包括佇列時間和重試次數)。如需操作說明，請參閱「[更新資料表的到期時間](https://docs.cloud.google.com/bigquery/docs/managing-tables?hl=zh-tw#updating_a_tables_expiration_time)」。
-* **序列化管道工作。**如果自動化 ETL 管道 (例如 Managed Service for Apache Airflow、Apache Airflow 或 Dataform) 會重新建立或清理暫存資料表，請設定嚴格的工作依附關係，確保 `DROP TABLE` 或清理工作不會與針對相同資料表的有效寫入工作同時執行。
+* **延長資料表和資料集的到期時間。**檢查目的地資料表的到期時間，以及資料集的預設資料表到期時間設定。請確保設定的存留時間夠長，足以超過寫入該資料表的工作預期執行時間上限 (包括排入佇列時間和重試時間)。如需操作說明，請參閱「[更新資料表的到期時間](https://docs.cloud.google.com/bigquery/docs/managing-tables?hl=zh-tw#updating_a_tables_expiration_time)」。
+* **序列化管道工作。**如果自動化 ETL 管道 (例如 Managed Service for Apache Airflow、Apache Airflow 或 Dataform) 會重新建立或清理暫存資料表，請設定嚴格的工作依附元件，確保 `DROP TABLE` 或清理工作不會與指定相同資料表的有效寫入工作同時執行。
 * **使用不重複的中繼資料表名稱。**執行平行管道執行個體時，請將中繼結果寫入名稱不重複的臨時或暫存資料表 (例如在多陳述式查詢中使用 `CREATE TEMP TABLE`，或附加不重複的執行 ID)，而非在並行執行作業中共用單一可變動的暫存資料表。
 
 ## 對含有串流緩衝區的資料表執行 DML 陳述式
@@ -529,6 +528,9 @@ rows in the streaming buffer, which is not supported`
 * `UPDATE/MERGE must match at most one source row for each target row`
 * `Invalid snapshot time`
 * `Too many nested views/persistent user-defined functions...`
+* `Too many partitions produced by query, allowed LIMIT,
+  query produces at least COUNT partitions`
+* `Resource exhausted. The model might be too large.`
 
 如要解決功能、DDL 和查詢限制錯誤，請執行下列操作：
 
@@ -536,6 +538,10 @@ rows in the streaming buffer, which is not supported`
 * **查看 materialized view SQL 限制。**materialized view 支援受限的 SQL 匯總子集，且無法參照非確定性函式，例如 `CURRENT_DATE()`、`RAND()` 或 `SESSION_USER()`。請參閱「[支援的 materialized view](https://docs.cloud.google.com/bigquery/docs/materialized-views-create?hl=zh-tw#supported-mvs)」。
 * **加入必要的分區篩選器。**如果目標資料表強制執行 `require_partition_filter = true`，請在可剪除分區的分區資料欄中加入 `WHERE` 述詞。請參閱「[查詢分區資料表](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables?hl=zh-tw)」。
 * **簡化 `UPDATE` 或 `MERGE` 來源資料列。**如果 `UPDATE` 或 `MERGE` 陳述式因多個來源資料列與單一目標資料列相符而失敗，請匯總或簡化 `FROM` 或 `USING` 來源 (例如使用 `GROUP BY` 或 `QUALIFY ROW_NUMBER() OVER (...) = 1`)。請參閱「[DML 限制](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language?hl=zh-tw#dml-limitations)」。
+* **遵守分區和 BigQuery ML 模型限制。**如果查詢失敗並顯示 `Too many partitions produced by query, allowed
+  LIMIT, query produces at least COUNT
+  partitions` 錯誤，請將查詢分割成較小的批次，每項工作修改的分區不超過 4,000 個。您也可以使用較粗略的分區，例如按月而非按日分區，並搭配[分群](https://docs.cloud.google.com/bigquery/docs/clustered-tables?hl=zh-tw)，讓每項工作修改較少的分區，並將資料表保持在 [10,000 個分區限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#partitioned_tables)內。如果 `CREATE MODEL` 陳述式失敗並顯示 `Resource exhausted. The model
+  might be too large` 錯誤，請減少輸入特徵、分組或篩除高基數類別值，或在[建立 BigQuery ML 模型](https://docs.cloud.google.com/bigquery/docs/create-machine-learning-model?hl=zh-tw)時簡化模型架構。例如，減少樹狀結構深度、樹狀結構數量或隱藏單元。
 * **查看時間旅行、檢視巢狀結構和子查詢限制。**請根據錯誤訊息，參閱下列其中一節：
   + **`FOR SYSTEM_TIME AS OF` 超出保留期。**請參閱「[快照時間無效](#invalid_snapshot_time)」。
   + **檢視表或常式超過 16 層巢狀深度限制。**請參閱「[巢狀檢視或 persistent user-defined function 數量過多](#ts-nested-views-udfs)」。
@@ -560,7 +566,7 @@ rows in the streaming buffer, which is not supported`
 
 嘗試查詢資料集[時光旅行時間範圍](https://docs.cloud.google.com/bigquery/docs/time-travel?hl=zh-tw)以外的歷來資料時，可能會發生這項錯誤。如要解決這項錯誤，請變更查詢，在資料集的時間旅行期間內存取歷來資料。
 
-如果查詢開始後，查詢中使用的其中一個資料表遭到捨棄並重新建立，也可能出現這項錯誤。請檢查是否有排定的查詢或應用程式執行這項作業，且與失敗的查詢同時執行。如果有，請嘗試將執行捨棄和重新建立作業的程序，移至不會與讀取該資料表的查詢衝突的時間執行。
+如果查詢開始後，查詢中使用的其中一個資料表遭到捨棄並重新建立，也可能出現這項錯誤。請檢查是否有排定的查詢或應用程式執行這項作業，且與失敗的查詢同時執行。如有，請嘗試將執行捨棄和重新建立作業的程序，移至不會與讀取該資料表的查詢衝突的時間執行。
 
 ## 工作已存在
 
@@ -669,10 +675,9 @@ AND query = "my query string";
 如果查詢中的資料表不在您指定的資料集或區域中，就會發生這項錯誤。如要解決這項錯誤，請執行下列任一操作：
 
 * 請檢查查詢是否包含正確的專案、資料集和資料表名稱，並確認 ID 的大小寫完全正確 (請參閱「[區分大小寫](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#case_sensitivity)」)。如果查詢省略專案 ID，BigQuery 預設會使用執行工作的計費專案。查詢其他專案中的資料表時，請指定完整 `PROJECT_ID.DATASET_ID.TABLE_NAME`。
-* 請確認資料表存在於查詢執行位置。根據預設，查詢讀取或寫入的每個資料集，都必須與查詢工作位於相同位置。如果您自行設定工作位置 (例如使用 `--location` 旗標或工作參照中的 `location` 屬性)，請務必確保該位置與資料集的位置相符。單一區域 (例如 `us-central1`) 與多區域 (例如 `US`) 不相符。詳情請參閱「[指定位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#specify_locations)」。
-* 如要在單一查詢中查詢不同位置的資料表，請使用[全域查詢](https://docs.cloud.google.com/bigquery/docs/global-queries?hl=zh-tw)
-  [(預先發布版)](https://docs.cloud.google.com/products?hl=zh-tw#product-launch-stages)。執行查詢的專案和包含資料的專案都必須啟用全域查詢，且沙箱模式不支援全域查詢。
-* 請查詢 [`INFORMATION_SCHEMA.TABLE_STORAGE`](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage?hl=zh-tw)，或檢查 Cloud 稽核記錄中的 `DeleteTable` 或 `InternalTableExpired` 事件，確認資料表或資料集是否已過期或刪除。如果資料表是在[時間旅行期間](https://docs.cloud.google.com/bigquery/docs/time-travel?hl=zh-tw) (最多 7 天) 內刪除，您可以[還原刪除的資料表](https://docs.cloud.google.com/bigquery/docs/restore-deleted-tables?hl=zh-tw)。如果父項資料集也已刪除，請先重新建立名稱和位置完全相同的空白資料集，再複製歷來快照。
+* 請確認資料表位於查詢執行位置。根據預設，查詢讀取或寫入的每個資料集，都必須與查詢工作位於相同位置。如果您自行設定工作位置 (例如使用 `--location` 旗標或工作參照中的 `location` 屬性)，請務必確保該位置與資料集的位置相符。單一區域 (例如 `us-central1`) 與多區域 (例如 `US`) 不相符。詳情請參閱「[指定位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#specify_locations)」。
+* 如要在單一查詢中查詢不同位置的資料表，請使用[全域查詢](https://docs.cloud.google.com/bigquery/docs/global-queries?hl=zh-tw)[(預先發布版)](https://docs.cloud.google.com/products?hl=zh-tw#product-launch-stages)。執行查詢的專案和包含資料的專案都必須啟用全域查詢，且沙箱模式不支援全域查詢。
+* 查詢 [`INFORMATION_SCHEMA.TABLE_STORAGE`](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage?hl=zh-tw) 或檢查 Cloud 稽核記錄中的 `DeleteTable` 或 `InternalTableExpired` 事件，確認資料表或資料集是否已過期或刪除。如果資料表是在[時間旅行期間](https://docs.cloud.google.com/bigquery/docs/time-travel?hl=zh-tw) (最多 7 天) 內刪除，您可以[還原刪除的資料表](https://docs.cloud.google.com/bigquery/docs/restore-deleted-tables?hl=zh-tw)。如果父項資料集也已刪除，請先重新建立名稱和位置完全相同的空白資料集，再複製歷來快照。
 * 如果您在以底線 (`_`) 開頭的隱藏資料集中，查詢匿名快取結果資料表，請注意，快取結果資料表會在約 24 小時後過期。請重新執行原始查詢，或將輸出內容寫入永久目的地資料表。
 * 如果您查詢的是由 Cloud Storage 或 Google 雲端硬碟支援的外部資料表，請確認基礎來源檔案仍存在於設定的 URI 路徑 (`Not found: URI`、`Not found: Uris` 或 `Not found: Files`)。
 * 請確認資料表在工作執行期間未遭到捨棄及重新建立。否則，中繼資料傳播不完整可能會導致這項錯誤。
@@ -702,7 +707,7 @@ ORDER BY
   creation_time DESC;
 ```
 
-**注意：** `limit is 20` 佇列長度僅適用於變動 DML (`UPDATE`、`DELETE` 和 `MERGE`) 和 `TRUNCATE TABLE` 陳述式。`INSERT`
+**注意：**`limit is 20` 佇列長度僅適用於變動 DML (`UPDATE`、`DELETE` 和 `MERGE`) 和 `TRUNCATE TABLE` 陳述式。`INSERT`
 陳述式會維護獨立佇列，上限為 100。
 
 其中一個可能的解決方案，是將多項較小的 DML 作業分組，整合成較大但數量較少的工作，例如批次更新和插入。將較小的工作分組為較大的工作時，執行較大工作的成本會分攤，且執行速度會更快。合併會影響相同資料的 DML 陳述式，通常可以提高 DML 工作的效率，且較不容易超出佇列大小配額限制。如要進一步瞭解如何最佳化 DML 作業，請參閱「[避免使用更新或插入單一資料列的 DML 陳述式](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-compute?hl=zh-tw#avoid-dml-update-single-rows)」。
@@ -727,22 +732,15 @@ exceeded` 錯誤則適用於同時寫入資料表的所有 DML 工作 (`INSERT` 
 
 錯誤字串：`Too many nested views/persistent user-defined functions or possible circular reference of views/persistent user-defined functions referenced in query. Only 16 levels of nested views/persistent user-defined functions are allowed.`
 
-如果查詢
-或檢視表建立作業參照的檢視表鏈結或永久使用者定義
-函式 (UDF) 超過支援的巢狀深度上限 (16 層)
-，或查詢參照的檢視表或 UDF 在循環
-相依迴圈中相互參照 (例如 `view_a` 查詢 `view_b`，而 查詢
-`view_a`)，就會發生這個 HTTP `400 Bad Request` 錯誤 (`reason: invalidQuery`)。如要進一步瞭解檢視表和常式限制，請參閱
-「[檢視表限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#view_limits)」和
-「[UDF 限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#udf_limits)」。如果錯誤是因為 `STRUCT` (`RECORD`) 欄、載入檔案或巢狀常式引數和傳回類型超過 15 層巢狀結構限制所造成，請參閱「[排解結構定義、檔案和常式巢狀結構限制錯誤](https://docs.cloud.google.com/bigquery/docs/troubleshoot-schemas?hl=zh-tw#ts-schema-nested-too-deeply)」。
+如果查詢或檢視表建立作業參照的檢視表或永久使用者定義函式 (UDF) 鏈結超過支援的巢狀深度上限 (16 層)，或查詢參照的檢視表或 UDF 在循環相依迴圈中相互參照 (例如 `view_a` 查詢 `view_b`，而 `view_b` 查詢 `view_a`)，就會發生這個 HTTP `400 Bad Request` 錯誤 (`reason: invalidQuery`)。如要進一步瞭解檢視表和常式限制，請參閱「[檢視表限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#view_limits)」和「[UDF 限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#udf_limits)」。如果錯誤是因為 `STRUCT` (`RECORD`) 資料欄、載入檔案或巢狀常式引數和傳回類型超過 15 層巢狀結構限制所致，請參閱「[排解結構定義、檔案和常式巢狀結構限制錯誤](https://docs.cloud.google.com/bigquery/docs/troubleshoot-schemas?hl=zh-tw#ts-schema-nested-too-deeply)」。
 
-您最多可以建立 16 層巢狀結構的檢視表，但查詢只能參照最多 15 層巢狀結構的檢視表。
+您最多可以建立 16 層巢狀結構的檢視表，但查詢最多只能參照 15 層巢狀結構的檢視表。
 
 此上限無法提高。如要解決這項錯誤，請執行下列操作：
 
 * **檢查是否有循環參照。**檢查查詢鏈結中的檢視表和 persistent UDF 定義，確認沒有任何檢視表或函式直接或間接參照自身。
-* **整合巢狀檢視畫面。**將中繼邏輯合併到單一檢視表或查詢中的通用資料表運算式 (`WITH` 子句)，藉此重構巢狀檢視表鏈結。
-* **具體化中繼層。**將深層檢視區塊階層中的中繼層，替換為寫入實體資料表的排定查詢，或使用支援的 [materialized view](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro?hl=zh-tw)。
+* **整合巢狀檢視畫面。**將中繼邏輯合併至單一檢視表或查詢中的一般資料表運算式 (`WITH` 子句)，藉此重構巢狀檢視表鏈結。
+* **具體化中繼層。**將深層檢視區塊階層中的中繼層，替換為寫入實體資料表的排定查詢，或在支援的情況下使用 [materialized view](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro?hl=zh-tw)。
 
 ## 並行更新導致交易中止
 
@@ -804,12 +802,12 @@ do not belong to a permitted customer.`
 解決這些錯誤時，請考量下列事項：
 
 * *服務帳戶*：服務帳戶必須具備執行專案的 `bigquery.jobs.create` 權限，以及查詢參照的所有資料表和檢視表的 `bigquery.tables.getData` 權限。
-* *自訂角色*：自訂 IAM 角色必須在相關角色中明確包含 `bigquery.jobs.create` 權限，且必須具備查詢參照的所有資料表和檢視表的 `bigquery.tables.getData` 權限。
+* *自訂角色*：自訂 IAM 角色必須在相關角色中明確包含 `bigquery.jobs.create` 權限，且必須對查詢參照的所有資料表和檢視表具備 `bigquery.tables.getData` 權限。
 * *共用資料集*：在獨立專案中使用共用資料集時，您可能仍需要專案中的 `bigquery.jobs.create` 權限，才能在該資料集中執行查詢或工作。
 
 如要授予資料表或檢視表的存取權限，請參閱「[授予資料表或檢視表的存取權](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam?hl=zh-tw#grant_access_to_a_table_or_view)」。
 
-**注意：** 如果使用者帳戶或服務帳戶受到拒絕政策影響，即使帳戶具備正確權限，您仍可能收到 `Access denied` 錯誤。詳情請參閱「[拒絕政策](https://docs.cloud.google.com/iam/docs/deny-overview?hl=zh-tw)」。
+**注意：**如果使用者帳戶或服務帳戶受到拒絕政策影響，即使帳戶具備正確權限，您仍可能收到 `Access denied` 錯誤。詳情請參閱「[拒絕政策](https://docs.cloud.google.com/iam/docs/deny-overview?hl=zh-tw)」。
 
 ### 預留項目的「`bigquery.reservations.use`」權限遭拒
 
@@ -868,7 +866,7 @@ JOIN` 作業、不精確的彙整條件、複雜的規則運算式、未分區�
 
 * **最佳化查詢。**重構 SQL，減少與掃描資料相關的運算負擔，例如移除非預期的笛卡兒乘積 (未篩選的 `CROSS
   JOIN` 作業)、取代不精確的 join 述詞、簡化複雜的規則運算式、在大型未分區視窗的 window 函式中加入 `PARTITION BY` 子句，或最佳化 JavaScript UDF。詳情請參閱「[避免反 SQL 模式](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-compute?hl=zh-tw#avoid-anti-sql-patterns)」、「[最佳化查詢效能簡介](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-overview?hl=zh-tw)」和「[排解資源超出問題](#ts-resources-exceeded)」。
-* **改用以運算資源為準的定價模式。**使用[以運算資源 (運算單元) 為基礎的定價模式](https://docs.cloud.google.com/bigquery/docs/reservations-intro?hl=zh-tw)執行工作負載。在以運算資源計價的模式中，查詢不受隨選 CPU 與位元組比率限制。
+* **改用依運算資源計價模式。**使用[以運算資源 (運算單元) 為基礎的定價模式](https://docs.cloud.google.com/bigquery/docs/reservations-intro?hl=zh-tw)執行工作負載。在以運算資源計價的模式中，查詢不受隨選 CPU 與位元組比率限制。
 
 ### 查詢超過記憶體資源
 
@@ -903,7 +901,7 @@ WHERE rn > @start_index AND rn <= @page_size + @start_index  -- note that row_nu
 
 ### TensorFlow worker 記憶體不足
 
-錯誤字串：`Resources exceeded during query execution: TensorFlow worker out
+錯誤字串：`Resources exceeded during query execution: TENSORFLOW worker out
 of memory`。
 
 如果模型超出記憶體限制 (通常為 250 MB)，特別是使用 `ML.EXPLAIN_PREDICT` 等需要大量資源的函式時，就可能觸發這項錯誤。
@@ -984,14 +982,14 @@ LIMIT
 * 請嘗試移除 `ORDER BY` 子句 (特別是子查詢或 `WITH` 子句中的子句)、新增 `LIMIT` 子句，或在回報 `Top memory consumer(s): ORDER BY
   operations` 時使用 `ROW_NUMBER() OVER (ORDER BY
   ...)` 而非大型 `OFFSET` 進行分頁。請參閱「[查詢超出記憶體資源](#query_not_executed)」。
-* 如果查詢失敗，並顯示 `Top memory consumer(s): sort operations used for
+* 如果查詢失敗並顯示 `Top memory consumer(s): sort operations used for
   analytic OVER() clauses` 或 `analytic OVER() clauses`，請重寫查詢，減少每個視窗分區中的資料量 (新增或精簡 `PARTITION BY` 鍵)，或在適用情況下，將 `RANGE BETWEEN` 替換為有界限的 `ROWS BETWEEN` 視窗框架。
 * 如果查詢使用 `JOIN` (或因 `Top memory consumer(s): JOIN
-  operations` 失敗)，請確認較大的資料表位於子句左側，且資料不含重複的 join 鍵。如果 `CROSS JOIN` 後面接著 `GROUP BY` 超過記憶體，請先將 `CROSS JOIN` 的中繼結果儲存至暫存資料表，再執行 `GROUP BY`。
+  operations` 而失敗)，請確保較大的資料表位於子句左側，且資料不含重複的 join 鍵。如果 `CROSS JOIN` 後面接著 `GROUP BY` 超過記憶體，請先將 `CROSS JOIN` 的中繼結果儲存至暫存資料表，再執行 `GROUP BY`。
 * 如果變動 DML 陳述式失敗並顯示 `Top memory consumer(s): sort operation
   used for table update (UPDATE/DELETE/MERGE)`，請分割 `UPDATE` 或 `MERGE` 陳述式，一次更新較少資料列或資料欄 (或將使用 `ON FALSE` 的 `MERGE` 替換為[多陳述式交易](https://docs.cloud.google.com/bigquery/docs/transactions?hl=zh-tw)中的 `INSERT` 和 `DELETE`)。
 * 如果查詢失敗並顯示 `Top memory consumer(s): query parsing and
-  optimization`，請將大型硬式編碼常值清單儲存在臨時資料表，而非內嵌在查詢文字中，或將查詢拆分為較小的查詢。
+  optimization`，請將大型硬式編碼文字清單儲存在暫存資料表，而非內嵌在查詢文字中，或將查詢拆分為較小的查詢。
 * 如果查詢失敗並顯示 `UDF out of memory` 或 `Top memory consumer(s):
   non-SQL user-defined functions`，請避免在 JavaScript UDF 中累積過多本機狀態、以較小的區塊處理輸入資料，或使用 [SQL UDF](https://docs.cloud.google.com/bigquery/docs/user-defined-functions?hl=zh-tw#sql-udf-structure) 或內建 GoogleSQL 函式重寫 UDF。請參閱「[JavaScript UDF 最佳做法](https://docs.cloud.google.com/bigquery/docs/user-defined-functions?hl=zh-tw#best-practices-for-javascript-udfs)」。
 * 如果查詢使用 `FLATTEN`，請判斷是否需要用於您的用途。詳情請參閱[巢狀與重複的資料](https://docs.cloud.google.com/bigquery/docs/data?hl=zh-tw#nested)。
@@ -1004,14 +1002,27 @@ LIMIT
 * 避免使用 `UNION ALL` 查詢。
 * 如果查詢使用 `MATCH_RECOGNIZE`，請修改 [`PARTITION BY` 子句](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw#match_recognize_partition_by)來縮減分區大小，或新增 `PARTITION BY` 子句 (如果沒有的話)。
 * 如果工作失敗並顯示 `Table TABLE_NAME will have
-  N partitions when the job finishes, exceeding limit 10000`，請在 [`INFORMATION_SCHEMA.PARTITIONS`](https://docs.cloud.google.com/bigquery/docs/information-schema-partitions?hl=zh-tw) 中檢查資料表的分區數量、設定[分區到期時間](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#partition-expiration)，或明確刪除不必要的分區 (因為最近到期的分區可能需要一段時間才會反映，除非明確刪除)。請參閱[分區資料表配額](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#partitioned_tables)。
+  N partitions when the job finishes, exceeding limit 10000` 錯誤，代表完成工作會超過目的地資料表的 [10,000 個分區限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#partitioned_tables)。如果有多個來源資料表的複製工作因 `COUNT partitions
+  will be copied to the table TABLE_NAME, which exceeds the limit
+  10000 for number of partitions in the table` 錯誤而失敗，則來源資料表包含超過 10,000 個不同的分區。請在 [`INFORMATION_SCHEMA.PARTITIONS`](https://docs.cloud.google.com/bigquery/docs/information-schema-partitions?hl=zh-tw) 中查看資料表的分區數量、設定[分區到期時間](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#partition-expiration)、明確刪除不必要的分區，或使用較粗略的分區 (例如按月而非按日)，並搭配[叢集](https://docs.cloud.google.com/bigquery/docs/clustered-tables?hl=zh-tw)。除非您明確刪除，否則最近過期的分區可能需要一段時間才會反映在分區數量中。如果查詢失敗並顯示 `Too many partitions produced
+  by query, allowed LIMIT, query produces at least COUNT
+  partitions` 錯誤，請參閱「[功能和架構限制](#ts-invalid-query-restrictions)」。
+* 如果工作失敗並顯示 `Too many output columns` 錯誤，請只選取必要資料欄，不要使用 `SELECT *`，或減少結果中的輸出資料欄和巢狀欄位數量。即使在 [10,000 欄限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#max_columns_per_table)內，寬度或深度巢狀結果仍可能超過寫入輸出的記憶體預算。
+* 如果工作在存取受[客戶自行管理的加密金鑰 (CMEK)](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw) 保護的資料表時，因 `Cloud KMS Error: Project
+  'PROJECT_NUMBER' exceeded limit for metric
+  METRIC_NAME` 錯誤 (例如 `cloudkms.googleapis.com/hsm_symmetric_requests`) 而失敗，代表工作超出 Cloud Key Management Service (Cloud KMS) 頻率限制。請錯開或減少對 CMEK 加密資料表執行的並行查詢，或針對錯誤訊息中指出的指標，[要求提高 Cloud KMS 配額](https://docs.cloud.google.com/kms/quotas?hl=zh-tw#error)。
+* 如果工作失敗並顯示 `Streaming read system resources exceeded,
+  table: TABLE_NAME` 錯誤，請使用[截斷指數輪詢](https://docs.cloud.google.com/monitoring/api/troubleshooting?hl=zh-tw#exponential-retry)重試查詢。
+* 如果[全域查詢](https://docs.cloud.google.com/bigquery/docs/global-queries?hl=zh-tw)失敗並顯示 `Global query response is too large. Query returned more than
+  BYTES bytes. Consider editing your query to return smaller
+  results.` 錯誤，表示遠端跨區域子查詢超過跨區域資料移轉限制。新增 `WHERE` 篩選器，並僅選取遠端資料表中的必要資料欄，以減少跨區域轉移的子查詢結果大小。您也可以在遠端區域建立檢視表，封裝複雜的運算式，或將所需的 `STRUCT` 欄位傳回為不含 `STRUCT` 類型的個別資料欄，以便下推篩選器。或者，您也可以將查詢拆分為較小的查詢，並縮小篩選範圍。
 * 如果工作失敗並顯示 `Too many DML statements outstanding against table
   TABLE_NAME, limit is 20`，請將多個較小的 `UPDATE`、`DELETE` 或 `MERGE` 陳述式分組為較少、較大的工作，或對目標資料表進行分區和分群。請參閱「[DML 陳述式過多](#too_many_DML)」和「[資料表有過多待處理的 DML 陳述式](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas?hl=zh-tw#ts-too-many-dml-statements-against-table-quota)」。
 * 如果工作失敗並顯示 `All our servers are busy processing data transferred
-  between regions. Please try again shortly.`，請重試查詢，或降低跨雲端 (`BigQuery Omni`) join、`CREATE TABLE AS SELECT`、`INSERT INTO SELECT` 或 `LOAD DATA` 查詢的並行率 (或[與支援團隊聯絡](https://docs.cloud.google.com/bigquery/docs/getting-support?hl=zh-tw)，要求提高跨區域移轉查詢頻率限制)。請參閱「[BigQuery Omni join 限制](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw#cross-cloud_join_limitations)」和「[使用跨雲端移轉功能載入資料](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer?hl=zh-tw)」。
+  between regions. Please try again shortly.`，請重試查詢，或降低跨雲端 (`BigQuery Omni`) join、`CREATE TABLE AS SELECT`、`INSERT INTO SELECT` 或 `LOAD DATA` 查詢的並行率 (或[與支援團隊聯絡](https://docs.cloud.google.com/bigquery/docs/getting-support?hl=zh-tw)，要求提高跨區域移轉查詢頻率限制)。請參閱「[BigQuery Omni 彙整限制](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw#cross-cloud_join_limitations)」和「[使用跨雲端移轉功能載入資料](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer?hl=zh-tw)」。
 * 如果工作失敗並顯示 `Google Sheets service overloaded for spreadsheet
   id: SPREADSHEET_ID`，請重試暫時性的 Google 試算表超載，或將試算表資料複製到永久 [BigQuery 資料表](https://docs.cloud.google.com/bigquery/docs/writing-results?hl=zh-tw#permanent-table) (並重構檢視表或錯開[排定的查詢](https://docs.cloud.google.com/bigquery/docs/scheduling-queries?hl=zh-tw)，減少對同一試算表的並行讀取)。
-* 如果 BigQuery Omni 查詢失敗並顯示 `Response too large. Query returned ACTUAL_MBMB, and limit is
+* 如果 BigQuery Omni 查詢失敗，並顯示 `Response too large. Query returned ACTUAL_MBMB, and limit is
   LIMIT_MBMB.`，表示查詢輸出內容超出 [BigQuery Omni 查詢結果大小上限](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#max_result_size_query_omni)或[跨雲端移轉限制](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer?hl=zh-tw#filter-data)。篩選或匯總查詢，傳回較小的結果，或使用 [`EXPORT DATA` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements?hl=zh-tw)，將大型結果直接匯出至外部儲存空間，而非目的地資料表。
 
 詳情請參閱下列資源：
@@ -1085,11 +1096,11 @@ tcpdump -s 0 -w debug.pcap -K -n host bigquery.googleapis.com
 
 在某些情況下，GFE 負載平衡器可能會捨棄來自用戶端 IP 的連線，例如偵測到 DDoS 流量模式，或負載平衡器執行個體縮減，導致端點 IP 遭到回收。如果 GFE 負載平衡器中斷連線，用戶端必須擷取逾時要求，並重新向 DNS 端點傳送要求。在要求成功前，請勿使用相同的 IP 位址，因為 IP 位址可能已變更。
 
-如果您發現 Google 端持續逾時，且重試也無法解決問題，請[與 Cloud Customer Care 團隊聯絡](https://docs.cloud.google.com/support?hl=zh-tw)，並務必附上執行 [tcpdump](https://www.tcpdump.org/) 等封包擷取工具後產生的最新 PCAP 檔案。
+如果您發現 Google 端持續逾時，且重試也無法解決問題，請[與 Cloud Customer Care 團隊聯絡](https://docs.cloud.google.com/support?hl=zh-tw)，並務必附上新的 PCAP 檔案，該檔案應由 [tcpdump](https://www.tcpdump.org/) 等封包擷取工具產生。
 
 ## 後續步驟
 
-* [取得查詢成效深入分析](https://docs.cloud.google.com/bigquery/docs/query-insights?hl=zh-tw)。
+* [取得查詢成效洞察](https://docs.cloud.google.com/bigquery/docs/query-insights?hl=zh-tw)。
 * 進一步瞭解如何[盡可能提高查詢效能](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-overview?hl=zh-tw)。
 * 查看查詢的[配額與限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#query_jobs)。
 * 進一步瞭解其他 [BigQuery 錯誤訊息](https://docs.cloud.google.com/bigquery/docs/error-messages?hl=zh-tw)。
@@ -1101,11 +1112,11 @@ tcpdump -s 0 -w debug.pcap -K -n host bigquery.googleapis.com
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-29 (世界標準時間)。
+上次更新時間：2026-11-05 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-05 (世界標準時間)。"],[],[]]

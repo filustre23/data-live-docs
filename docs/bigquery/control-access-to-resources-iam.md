@@ -30,7 +30,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 * 外部或連結資料集內的常式不支援存取控管。
 * 外部或連結資料集內的資料表不支援存取控管。
 * 無法使用 Terraform 設定常式存取控管。
-* 無法使用 Google Cloud SDK 設定日常安排存取控管。
+* 無法使用 Google Cloud CLI 設定常式存取控管機制。
 * 無法使用 [BigQuery 資料控管語言 (DCL)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language?hl=zh-tw) 設定常式存取控管。
 * [`INFORMATION_SCHEMA.OBJECT_PRIVILEGES` 檢視畫面](https://docs.cloud.google.com/bigquery/docs/information-schema-object-privileges?hl=zh-tw)不會顯示日常安排的存取控管。
 
@@ -48,7 +48,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 必須具備下列權限，才能修改資源的 IAM 政策：
 
-* 如要取得資料集的存取權政策，請執行下列指令：
+* 如要取得資料集的存取權政策，請執行下列操作：
   `bigquery.datasets.get`
 * 如要設定資料集的存取權政策，請按照下列步驟操作：
   `bigquery.datasets.update`
@@ -62,7 +62,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
   `bigquery.tables.setIamPolicy`
 * 如要取得常式的存取權政策，請執行下列操作：
   `bigquery.routines.getIamPolicy`
-* 如要設定常式的存取權政策，請按照下列步驟操作：
+* 如要設定常式的存取權政策，請執行下列操作：
   `bigquery.routines.setIamPolicy`
 * 如要建立 bq 工具或 [SQL BigQuery 工作](https://docs.cloud.google.com/bigquery/docs/managing-jobs?hl=zh-tw) (選用)：
   `bigquery.jobs.create`
@@ -81,7 +81,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 您可以授予 IAM 角色權限，或使用 IAM 條件，有條件地授予資料集存取權。如要進一步瞭解如何授予條件式存取權，請參閱「[使用 IAM 條件控管存取權](https://docs.cloud.google.com/bigquery/docs/conditions?hl=zh-tw#add-conditions-to-datasets)」。
 
-**注意：** 授予資料集存取權後，系統不會自動將資料集列在「Explorer」(探索工具) 窗格中。
+**注意：**授予資料集存取權後，系統不會自動將資料集列在「Explorer」(探索工具) 窗格中。
 
 如要將資料集的 IAM 角色存取權授予使用者，但不使用條件，請選取下列其中一個選項：
 
@@ -219,7 +219,7 @@ TO "user:user@example.com", "user:user2@example.com"
 
 **設定資料集的存取權政策**
 
-以下範例說明如何使用 [`google_bigquery_dataset_iam_policy` 資源](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset_iam#google_bigquery_dataset_iam_policy)，設定 `mydataset` 資料集的 IAM 政策。這會取代資料集現有的任何政策：
+以下範例說明如何使用 [`google_bigquery_dataset_iam_policy` 資源](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset_iam#google_bigquery_dataset_iam_policy)，設定 `mydataset` 資料集的 IAM 政策。這會取代資料集現有的政策：
 
 ```
 # This file sets the IAM policy for the dataset created by
@@ -279,7 +279,7 @@ resource "google_bigquery_dataset_iam_binding" "dataset_iam_binding" {
 
 **為單一主體設定角色成員資格**
 
-以下範例說明如何使用 [`google_bigquery_dataset_iam_member` 資源](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset_iam#google_bigquery_dataset_iam_member)更新 `mydataset` 資料集的 IAM 政策，將角色授予一個主體。更新這項 IAM 政策，不會影響其他已獲派該資料集角色的主體存取權。
+以下範例說明如何使用 [`google_bigquery_dataset_iam_member` 資源](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset_iam#google_bigquery_dataset_iam_member)更新 `mydataset` 資料集的 IAM 政策，將角色授予一個主體。更新這項 IAM 政策，不會影響已獲派該資料集角色的其他主體存取權。
 
 ```
 # This file adds a member to an IAM role for the dataset created by
@@ -912,7 +912,7 @@ public class GetDatasetAccessPolicy {
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 使用 [`Dataset#getMetadata()` 函式](https://googleapis.dev/nodejs/bigquery/latest/Dataset.html#getMetadata)擷取資料集中繼資料。
-您可以在產生的中繼資料物件的存取屬性中，找到存取政策。
+您可以在產生的中繼資料物件的存取權屬性中，找到存取權政策。
 
 ```
 /**
@@ -1170,5 +1170,5 @@ func revokeAccessToDataset(w io.Writer, projectID, datasetID, entity string) err
 		}
 	}
 
-	// Only proceed with upda
+	// Only proceed with update if something in the access list was removed.
 ```

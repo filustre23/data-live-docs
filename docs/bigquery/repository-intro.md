@@ -29,7 +29,7 @@ BigQuery 存放區的功能與 Git 存放區相同。您可以使用 BigQuery �
 
 如要使用資料夾版本管控功能，建議使用 [BigQuery Studio Git 存放區](https://docs.cloud.google.com/bigquery/docs/git-repositories?hl=zh-tw)。這項整合功能可讓您直接在 BigQuery Studio 檔案瀏覽器中使用 Git 分支，並一次複製多個存放區，不必管理個別工作區。
 
-如要查看存放區，請在 BigQuery 頁面的左側窗格中，依序點選「explore Explorer」和「Repositories」(存放區)。存放區會依字母順序顯示在「Details」(詳細資料) 窗格的新分頁中。
+如要查看存放區，請在 BigQuery 頁面的左側窗格中，按一下 fork\_right「Source control」(原始碼控管)。您可以在「Source control」(原始碼控制) 窗格的下拉式選單中選取存放區。
 
 **重要事項：** 如果您在 BigQuery 存放區中建立資產 (例如查詢、筆記本 (包括含有 Apache Spark 工作的筆記本)、BigQuery 管道或 Dataform 工作流程)，就無法在 BigQuery 存放區中排定執行時間。如要排定及執行 Dataform 工作流程，則須使用 Dataform 存放區。如要排定查詢和筆記本，請使用 BigQuery Studio。詳情請參閱「[排定查詢](https://docs.cloud.google.com/bigquery/docs/scheduling-queries?hl=zh-tw)」、「[排定筆記本](https://docs.cloud.google.com/bigquery/docs/orchestrate-notebooks?hl=zh-tw)」和「[排定管道](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines?hl=zh-tw)」。
 
@@ -85,11 +85,11 @@ service-YOUR_PROJECT_NUMBER@gcp-sa-dataform.iam.gserviceaccount.com
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-02 (世界標準時間)。
+上次更新時間：2026-11-03 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-03 (世界標準時間)。"],[],[]]

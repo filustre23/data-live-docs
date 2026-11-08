@@ -41,7 +41,7 @@ BigQuery 中的 Amazon Simple Storage Service (Amazon S3) [連線](https://docs.
 * 設定 AWS 政策，禁止透過 HTTP 存取 Amazon S3 bucket。
 * 設定 AWS 政策，禁止公開存取 Amazon S3 儲存貯體。
 * 使用 Amazon S3 伺服器端加密。
-* 只授予 Google 帳戶最低必要權限。
+* 僅授予 Google 帳戶最低必要權限。
 * 設定 CloudTrail 並啟用 Amazon S3 資料事件。
 
 如要建立 AWS IAM 政策，請使用 AWS 控制台或 Terraform：
@@ -90,7 +90,7 @@ BigQuery 中的 Amazon Simple Storage Service (Amazon S3) [連線](https://docs.
 4. 在「Name」(名稱) 欄位中輸入政策名稱，例如 `bq_omni_read_only`。
 5. 點選「建立政策」。
 
-建立政策時，會使用下列格式的 Amazon Resource Name (ARN)：
+建立政策時，系統會產生 Amazon Resource Name (ARN)，格式如下：
 
 ```
 arn:aws:iam::AWS_ACCOUNT_ID:policy/POLICY_NAME
@@ -304,7 +304,7 @@ arn:aws:iam::AWS_ACCOUNT_ID:policy/POLICY_NAME
 1. 前往「BigQuery」頁面
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在「Explorer」窗格中，點選「add 新增資料」。
+2. 在「資料」窗格中，點選「新增資料」圖示 add。
 
    「新增資料」對話方塊隨即開啟。
 3. 在「篩選依據」窗格的「資料來源類型」部分，選取「儲存空間/資料湖泊」。
@@ -315,7 +315,7 @@ arn:aws:iam::AWS_ACCOUNT_ID:policy/POLICY_NAME
 6. 在「外部資料來源」窗格，輸入下列資訊：
 
    * 「連線類型」請選取「AWS 中的 BigLake (透過 BigQuery Omni)」。
-   * 在「Connection ID」(連線 ID) 專區中輸入連線資源的 ID。您可以使用英文字母、數字、連字號和底線。
+   * 在「Connection ID」(連線 ID) 專區中輸入連線資源的 ID。可以使用英文字母、數字、連字號和底線。
    * 在「Region」(區域) 部分，選取要建立連線的位置。
    * (選用) 在「Friendly name」(好記名稱) 部分，輸入使用者容易記得的連線名稱，例如 `My connection resource`。這可以是任何值，只要日後需修改時能輕鬆識別即可。
    * 選用：在「Description」(說明) 部分，輸入這項連線資源的說明。
@@ -385,7 +385,7 @@ CONNECTION_ID
 * `IDENTITY_ID`：Google 主體， Google Cloud
   控管每個連線。
 
-記下 `IDENTITY_ID` 值。
+請記下 `IDENTITY_ID` 值。
 
 **注意：** 如要覆寫預設專案，請使用 `--project_id=PROJECT_ID` 參數。將 `PROJECT_ID` 替換為Google Cloud 專案 ID。
 
@@ -595,7 +595,7 @@ BigQuery Omni 提供兩種方法，可安全存取 Amazon S3 的資料。您可�
 
 您可以授予下列角色，讓使用者查詢資料及管理連結：
 
-* `roles/bigquery.connectionUser`：可讓使用者透過連線，連至外部資料來源並執行查詢。
+* `roles/bigquery.connectionUser`：可讓使用者透過連線連結外部資料來源，並對這些來源執行查詢。
 * `roles/bigquery.connectionAdmin`：可讓使用者管理連線。
 
 如要進一步瞭解 BigQuery 的 IAM 角色和權限，請參閱「[預先定義的角色和權限](https://docs.cloud.google.com/bigquery/access-control?hl=zh-tw)」。
@@ -608,7 +608,7 @@ BigQuery Omni 提供兩種方法，可安全存取 Amazon S3 的資料。您可�
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 
-   連線會列在專案的「連線」群組中。
+   連線會列在專案中名為「連線」的群組。
 2. 點選左側窗格中的 explore「Explorer」。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
@@ -616,7 +616,7 @@ BigQuery Omni 提供兩種方法，可安全存取 Amazon S3 的資料。您可�
 4. 在「詳細資料」窗格中，按一下「共用」即可共用連線。接著，按照下列步驟操作：
 
    1. 在「Connection permissions」(連線權限) 對話方塊中，新增或編輯主體，與其他主體共用連線。
-   2. 按一下 [儲存]。
+   2. 按一下「儲存」。
 
 ### bq
 
@@ -691,11 +691,11 @@ public class ShareConnection {
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-29 (世界標準時間)。
+上次更新時間：2026-11-03 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-03 (世界標準時間)。"],[],[]]

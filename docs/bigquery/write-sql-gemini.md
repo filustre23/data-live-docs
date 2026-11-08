@@ -586,7 +586,7 @@ Python 補全功能會嘗試根據查詢編輯器中的內容，提供符合情�
 ### 使用 Gemini Code Assist 生成程式碼的提示
 
 * 為了讓 Gemini Code Assist 擷取相關的資料表和結構定義，請為 Dataproc Metastore 執行個體啟用 [Data Catalog 同步處理功能](https://docs.cloud.google.com/dataproc-metastore/docs/data-catalog-sync?hl=zh-tw)。
-* 為能順利查詢資料表，請確保使用者帳戶可以存取 Data Catalog，做法是指派 [`DataCatalog.Viewer` 角色](https://docs.cloud.google.com/iam/docs/roles-permissions/datacatalog?hl=zh-tw#datacatalog.viewer)。
+* 為能順利查詢資料表，請確保使用者帳戶可以存取 Knowledge Catalog，如要這麼做，請授予 [Dataplex Catalog 檢視者角色](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex?hl=zh-tw#dataplex.catalogViewer) (`roles/dataplex.catalogViewer`)。
 
 ## 關閉 Gemini 查詢輔助功能
 
@@ -654,11 +654,11 @@ Python 補全功能會嘗試根據查詢編輯器中的內容，提供符合情�
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-29 (世界標準時間)。
+上次更新時間：2026-11-04 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-04 (世界標準時間)。"],[],[]]

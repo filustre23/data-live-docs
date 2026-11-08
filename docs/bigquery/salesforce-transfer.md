@@ -269,4 +269,4 @@ bq mk
   + `primaryKeys`：將資料表中的資料欄指定為主鍵。如要進行增量移轉，則必須填寫這個欄位。
   + `assets`：要移轉至 BigQuery 的 Salesforce 物件路徑。
 
-在
+在遞增移轉作業中指定多項資產時，`watermarkColumns` 和 `primaryKeys` 欄位的值

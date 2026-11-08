@@ -135,4 +135,4 @@ Represents how the data source supports data auto refresh.
 
 Send feedback
 
-Except as
+Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and

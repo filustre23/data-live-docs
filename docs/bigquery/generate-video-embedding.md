@@ -24,10 +24,10 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 * 建立及使用 BigQuery 資料集、資料表和模型：專案的 BigQuery 資料編輯者 (`roles/bigquery.dataEditor`)。
 * 建立、委派及使用 BigQuery 連線：專案的 BigQuery 連線管理員 (`roles/bigquery.connectionsAdmin`)。
 
-  如果您未設定[預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw)，可以在執行 `CREATE MODEL` 陳述式時建立並設定。如要執行這項操作，您必須具備專案的 BigQuery 管理員 (`roles/bigquery.admin`) 角色。詳情請參閱「[設定預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw#configure_the_default_connection)」。
-* 將權限授予連線的服務帳戶：在含有 Gemini Enterprise Agent Platform 端點的專案中，具備專案 IAM 管理員 (`roles/resourcemanager.projectIamAdmin`) 角色。這是您將模型名稱指定為端點，所建立遠端模型的目前專案。如果您指定網址做為端點，並建立遠端模型，這個專案就是網址中指定的專案。
+  如果尚未設定[預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw)，可以在執行 `CREATE MODEL` 陳述式時建立並設定。如要執行這項操作，您必須具備專案的 BigQuery 管理員 (`roles/bigquery.admin`) 角色。詳情請參閱「[設定預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw#configure_the_default_connection)」。
+* 將權限授予連線的服務帳戶：在包含 Gemini Enterprise Agent Platform 端點的專案中，授予「專案 IAM 管理員」(`roles/resourcemanager.projectIamAdmin`) 角色。這是遠端模型的目前專案，您可將模型名稱指定為端點來建立遠端模型。如果您指定網址做為端點，並建立遠端模型，這個專案就是網址中指定的專案。
 
-  如果您使用遠端模型分析物件資料表中的非結構化資料，且物件資料表使用的 Cloud Storage bucket 與 Agent Platform 端點位於不同專案，則您也必須具備物件資料表所用 Cloud Storage bucket 的 Storage 管理員 (`roles/storage.admin`) 角色。
+  如果您使用遠端模型分析物件資料表中的非結構化資料，且物件資料表使用的 Cloud Storage bucket 與 Agent Platform 端點位於不同專案，則您也必須具備物件資料表所用 Cloud Storage bucket 的 Storage 管理員 (`roles/storage.admin`) 權限。
 * 建立 BigQuery 工作：專案的 BigQuery 工作使用者 (`roles/bigquery.jobUser`)。
 
 這些預先定義的角色具備執行本文件所述工作所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
@@ -54,9 +54,9 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
    **選取或建立專案所需的角色**
 
-   * **選取專案**：選取專案時不需要特定 IAM 角色，只要您獲派某個專案的角色，即可選取該專案。
+   * **選取專案**：選取專案時，不需具備特定 IAM 角色，只要您已獲派某個專案的角色，即可選取該專案。
    * **建立專案**：如要建立專案，您必須具備專案建立者角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
-   **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，不要選取現有專案。如果採用這種做法，當您完成這些步驟後，就可以直接刪除該專案，並移除相關聯的所有資源。
+   **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，而不要選取現有專案。如果採用這種做法，當您完成這些步驟後，就可以直接刪除該專案，並移除相關聯的所有資源。
 
    [前往專案選取器](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
 2. [確認 Google Cloud 專案已啟用計費功能](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project)。
@@ -64,7 +64,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
    **啟用 API 所需的角色**
 
-   您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「Service Usage 管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過擁有者角色 (`roles/owner`) 取得這項權限。否則，您可以透過 Service Usage 管理員角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
    [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery.googleapis.com%2Cbigqueryconnection.googleapis.com%2Cstorage.googleapis.com%2Caiplatform.googleapis.com&hl=zh-tw)
 
@@ -81,7 +81,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Explorer」窗格中，點選專案名稱。
-4. 依序點選 more\_vert「View actions」(查看動作)**>「Create dataset」(建立資料集)**。
+4. 依序點選 more\_vert**「查看動作」>「建立資料集」**。
 5. 在「Create dataset」(建立資料集) 頁面執行下列操作：
 
    1. 在「資料集 ID」部分，輸入資料集名稱。
@@ -111,7 +111,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ## 建立連線
 
-建立 [Cloud 資源連結](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection?hl=zh-tw)，並取得連結的服務帳戶。建立連線時，請選擇與上一步建立的資料集相同的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
+建立 [Cloud 資源連線](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection?hl=zh-tw)，並取得連線的服務帳戶。建立連線時，請選擇與上一步建立的資料集相同的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
 
 如果您已設定預設連線，或具備 BigQuery 管理員角色，則可略過這個步驟。
 
@@ -125,10 +125,10 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 2. 點選左側窗格中的 explore「Explorer」。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
-3. 在「Explorer」窗格中展開專案名稱，然後點選「Connections」(連線)。
+3. 在「Explorer」窗格中展開專案名稱，然後按一下「Connections」(連線)。
 4. 在「Connections」(連線) 頁面，按一下「Create connection」(建立連線)。
 5. 在「連線類型」部分，選擇「Vertex AI 遠端模型、遠端函式、BigLake 和 Spanner (Cloud 資源)」。
-6. 在「連線 ID」欄位輸入連線名稱。
+6. 在「連線 ID」欄位中，輸入連線名稱。
 7. 在「位置類型」部分，選取連線位置。連線應與資料集等其他資源位於相同位置。
 8. 點選「建立連線」。
 9. 點選「前往連線」。
@@ -180,7 +180,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
    建立連線資源時，BigQuery 會建立專屬的系統服務帳戶，並與連線建立關聯。
 
-   **疑難排解**：如果收到下列連線錯誤，請[更新 Google Cloud SDK](https://docs.cloud.google.com/sdk/docs/quickstart?hl=zh-tw)：
+   **疑難排解**：如果收到下列連線錯誤訊息，請[更新 Google Cloud SDK](https://docs.cloud.google.com/sdk/docs/quickstart?hl=zh-tw)：
 
    ```
    Flags parsing error: flag --connection_type=CLOUD_RESOURCE: value should be one of...
@@ -382,7 +382,7 @@ public class CreateConnection {
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
-下列範例會在 `US` 區域建立名為 `my_cloud_resource_connection` 的 Cloud 資源連結：
+下列範例會在 `US` 區域中，建立名為 `my_cloud_resource_connection` 的 Cloud 資源連結：
 
 ```
 # This queries the provider for project information.
@@ -405,7 +405,7 @@ resource "google_bigquery_connection" "default" {
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
 2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
 
-   每個專案只需執行這個指令一次，而且可以在任何目錄中執行。
+   這項指令在每個專案中只需執行一次，且可在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
@@ -415,7 +415,7 @@ resource "google_bigquery_connection" "default" {
 
 ## 準備目錄
 
-每個 Terraform 設定檔都必須有自己的目錄 (也稱為*根模組*)。
+每個 Terraform 設定檔都必須有自己的目錄 (也稱為「根模組」)。
 
 1. 在 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw) 中建立目錄，並在該目錄中建立新檔案。檔案名稱必須有 `.tf` 副檔名，例如 `main.tf`。在本教學課程中，這個檔案稱為 `main.tf`。
 
@@ -465,9 +465,9 @@ resource "google_bigquery_connection" "default" {
 
 將 Agent Platform 使用者和 Storage 物件檢視者角色授予連線的服務帳戶。
 
-如果您打算在建立遠端模型時，將端點指定為網址 (例如 `endpoint = 'https://us-central1-aiplatform.googleapis.com/v1/projects/myproject/locations/us-central1/publishers/google/models/gemini-2.0-flash'`)，請在網址指定的專案中授予這個角色。
+如果您打算在建立遠端模型時，將端點指定為網址 (例如 `endpoint = 'https://us-central1-aiplatform.googleapis.com/v1/projects/myproject/locations/us-central1/publishers/google/models/gemini-3.5-flash'`)，請在網址指定的專案中授予這個角色。
 
-如果您打算在建立遠端模型時，使用模型名稱 (例如 `endpoint = 'gemini-2.0-flash'`) 指定端點，請在要建立遠端模型的專案中授予這個角色。
+如果您打算在建立遠端模型時，使用模型名稱 (例如 `endpoint = 'gemini-3.5-flash'`) 指定端點，請在要建立遠端模型的專案中授予這個角色。
 
 在其他專案中授予角色會導致錯誤 `bqcx-1234567890-wxyz@gcp-sa-bigquery-condel.iam.gserviceaccount.com does not have the permission to access resource`。
 
@@ -485,7 +485,7 @@ resource "google_bigquery_connection" "default" {
 4. 在「選取角色」欄位中，搜尋「Agent Platform 使用者」。
 5. 按一下 [Add another role] (新增其他角色)。
 6. 在「Select a role」(請選擇角色) 欄位中，依序選取「Cloud Storage」和「Storage Object Viewer」(Storage 物件檢視者)。
-7. 按一下 [儲存]。
+7. 按一下「儲存」。
 
 ### gcloud
 
@@ -503,7 +503,7 @@ gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount
 
 ## 建立物件資料表
 
-如要分析影片，而不從 Cloud Storage 移動影片，請建立物件資料表。
+如要分析影片，但不想從 Cloud Storage 移出，請建立物件資料表。
 
 如要建立物件資料表，請按照下列步驟操作：
 
@@ -539,15 +539,15 @@ gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount
      如要使用[預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw)，請指定 `DEFAULT`，而非包含 `PROJECT_ID.REGION.CONNECTION_ID` 的連線字串。
    * `BUCKET_PATH`：影片所在 Cloud Storage bucket 的路徑，格式為 `['gs://bucket_name/[folder_name/]*']`。
 
-     您使用的 Cloud Storage bucket 應位於您打算建立模型及呼叫 `AI.GENERATE_EMBEDDING` 函式的專案中。如要呼叫 `AI.GENERATE_EMBEDDING` 函式，且該函式所在的專案與物件資料表使用的 Cloud Storage bucket 所在專案不同，您必須[在 bucket 層級將 Storage 管理員角色授予](https://docs.cloud.google.com/storage/docs/access-control/using-iam-permissions?hl=zh-tw#bucket-add) `service-A@gcp-sa-aiplatform.iam.gserviceaccount.com` 服務帳戶。
-   * `STALENESS_INTERVAL`：指定針對物件資料表執行的作業是否使用快取中繼資料，以及快取中繼資料必須有多新，作業才能使用。如要進一步瞭解中繼資料快取注意事項，請參閱「[中繼資料快取效能](https://docs.cloud.google.com/bigquery/docs/object-table-introduction?hl=zh-tw#metadata_caching_for_performance)」。
+     您使用的 Cloud Storage bucket 應位於您打算建立模型及呼叫 `AI.GENERATE_EMBEDDING` 函式的同一個專案中。如要呼叫 `AI.GENERATE_EMBEDDING` 函式，且該函式所在的專案與物件資料表使用的 Cloud Storage bucket 所在專案不同，您必須[在 bucket 層級將 Storage 管理員角色授予](https://docs.cloud.google.com/storage/docs/access-control/using-iam-permissions?hl=zh-tw#bucket-add) `service-A@gcp-sa-aiplatform.iam.gserviceaccount.com` 服務帳戶。
+   * `STALENESS_INTERVAL`：指定對物件資料表執行的作業是否使用快取中繼資料，以及快取中繼資料必須有多新，作業才能使用。如要進一步瞭解中繼資料快取注意事項，請參閱「[中繼資料快取效能](https://docs.cloud.google.com/bigquery/docs/object-table-introduction?hl=zh-tw#metadata_caching_for_performance)」。
 
      如要停用中繼資料快取功能，請指定 0。這是目前的預設做法。
 
-     如要啟用中繼資料快取功能，請指定介於 30 分鐘至 7 天之間的[間隔常值](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#interval_literals)。舉例來說，如要指定 4 小時的過時時間間隔，請指定 `INTERVAL 4 HOUR`。如果中繼資料在過去 4 小時內重新整理過，系統會使用快取的中繼資料，對資料表執行作業。如果快取的中繼資料超過這個時間，作業就會改為從 Cloud Storage 擷取中繼資料。
-   * `CACHE_MODE`：指定中繼資料快取要自動或手動重新整理。如要進一步瞭解中繼資料快取注意事項，請參閱「[中繼資料快取效能](https://docs.cloud.google.com/bigquery/docs/object-table-introduction?hl=zh-tw#metadata_caching_for_performance)」。
+     如要啟用中繼資料快取功能，請指定介於 30 分鐘至 7 天之間的[間隔常值](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#interval_literals)。舉例來說，如要指定 4 小時的過時時間間隔，請指定 `INTERVAL 4 HOUR`。如果設定這個值，只要快取中繼資料在過去 4 小時內重新整理過，針對資料表執行的作業就會使用快取中繼資料。如果快取的中繼資料超過這個時間，作業會改為從 Cloud Storage 擷取中繼資料。
+   * `CACHE_MODE`：指定中繼資料快取要自動或手動重新整理。如要進一步瞭解中繼資料快取的注意事項，請參閱「[中繼資料快取對效能的影響](https://docs.cloud.google.com/bigquery/docs/object-table-introduction?hl=zh-tw#metadata_caching_for_performance)」。
 
-     設為 `AUTOMATIC`，中繼資料快取就會按照系統定義的間隔重新整理，通常介於 30 到 60 分鐘之間。
+     設為 `AUTOMATIC`，中繼資料快取就會按照系統定義的間隔重新整理，通常是 30 到 60 分鐘。
 
      如要按照指定時間表重新整理中繼資料快取，請設為 `MANUAL`。在這種情況下，您可以呼叫 [`BQ.REFRESH_EXTERNAL_METADATA_CACHE` 系統程序](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures?hl=zh-tw#bqrefresh_external_metadata_cache)來重新整理快取。
 
@@ -573,19 +573,19 @@ PROJECT_ID:DATASET_ID.TABLE_NAME
 
 * `BUCKET_PATH`：影片所在 Cloud Storage bucket 的路徑，格式為 `['gs://bucket_name/[folder_name/]*']`。
 
-  您使用的 Cloud Storage bucket 應位於您打算建立模型及呼叫 `AI.GENERATE_EMBEDDING` 函式的專案中。如要呼叫 `AI.GENERATE_EMBEDDING` 函式，且該函式所在的專案與物件資料表使用的 Cloud Storage bucket 所在專案不同，您必須[在 bucket 層級將 Storage 管理員角色授予](https://docs.cloud.google.com/storage/docs/access-control/using-iam-permissions?hl=zh-tw#bucket-add) `service-A@gcp-sa-aiplatform.iam.gserviceaccount.com` 服務帳戶。
+  您使用的 Cloud Storage bucket 應位於您打算建立模型及呼叫 `AI.GENERATE_EMBEDDING` 函式的同一個專案中。如要呼叫 `AI.GENERATE_EMBEDDING` 函式，且該函式所在的專案與物件資料表使用的 Cloud Storage bucket 所在專案不同，您必須[在 bucket 層級將 Storage 管理員角色授予](https://docs.cloud.google.com/storage/docs/access-control/using-iam-permissions?hl=zh-tw#bucket-add) `service-A@gcp-sa-aiplatform.iam.gserviceaccount.com` 服務帳戶。
 * `REGION`：連線所在的[區域或多區域](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#supported_locations)。
 * `CONNECTION_ID`：[您建立的連線](#create_a_connection) ID。
 
   在 Google Cloud 控制台中[查看連線詳細資料](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw#view-connections)時，這個值會顯示在「Connection ID」(連線 ID) 中完整連線 ID 的最後一個部分，例如 `projects/myproject/locations/connection_location/connections/myconnection`。
-* `STALENESS_INTERVAL`：指定針對物件資料表執行的作業是否使用快取中繼資料，以及快取中繼資料必須有多新，作業才能使用。如要進一步瞭解中繼資料快取注意事項，請參閱「[中繼資料快取效能](https://docs.cloud.google.com/bigquery/docs/object-table-introduction?hl=zh-tw#metadata_caching_for_performance)」。
+* `STALENESS_INTERVAL`：指定對物件資料表執行的作業是否使用快取中繼資料，以及快取中繼資料必須有多新，作業才能使用。如要進一步瞭解中繼資料快取注意事項，請參閱「[中繼資料快取效能](https://docs.cloud.google.com/bigquery/docs/object-table-introduction?hl=zh-tw#metadata_caching_for_performance)」。
 
   如要停用中繼資料快取功能，請指定 0。這是目前的預設做法。
 
-  如要啟用中繼資料快取功能，請指定介於 30 分鐘至 7 天之間的[間隔常值](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#interval_literals)。舉例來說，如要指定 4 小時的過時時間間隔，請指定 `INTERVAL 4 HOUR`。如果中繼資料在過去 4 小時內重新整理過，系統會使用快取的中繼資料，對資料表執行作業。如果快取的中繼資料超過這個時間，作業就會改為從 Cloud Storage 擷取中繼資料。
-* `CACHE_MODE`：指定中繼資料快取要自動或手動重新整理。如要進一步瞭解中繼資料快取注意事項，請參閱「[中繼資料快取效能](https://docs.cloud.google.com/bigquery/docs/object-table-introduction?hl=zh-tw#metadata_caching_for_performance)」。
+  如要啟用中繼資料快取功能，請指定介於 30 分鐘至 7 天之間的[間隔常值](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#interval_literals)。舉例來說，如要指定 4 小時的過時時間間隔，請指定 `INTERVAL 4 HOUR`。如果設定這個值，只要快取中繼資料在過去 4 小時內重新整理過，針對資料表執行的作業就會使用快取中繼資料。如果快取的中繼資料超過這個時間，作業會改為從 Cloud Storage 擷取中繼資料。
+* `CACHE_MODE`：指定中繼資料快取要自動或手動重新整理。如要進一步瞭解中繼資料快取的注意事項，請參閱「[中繼資料快取對效能的影響](https://docs.cloud.google.com/bigquery/docs/object-table-introduction?hl=zh-tw#metadata_caching_for_performance)」。
 
-  設為 `AUTOMATIC`，中繼資料快取就會按照系統定義的間隔重新整理，通常介於 30 到 60 分鐘之間。
+  設為 `AUTOMATIC`，中繼資料快取就會按照系統定義的間隔重新整理，通常是 30 到 60 分鐘。
 
   如要按照指定時間表重新整理中繼資料快取，請設為 `MANUAL`。在這種情況下，您可以呼叫 [`BQ.REFRESH_EXTERNAL_METADATA_CACHE` 系統程序](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures?hl=zh-tw#bqrefresh_external_metadata_cache)來重新整理快取。
 
@@ -618,7 +618,7 @@ PROJECT_ID:DATASET_ID.TABLE_NAME
      在 Google Cloud 控制台中[查看連線詳細資料](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw#view-connections)時，這個值會顯示在「Connection ID」(連線 ID) 中完整連線 ID 的最後一個部分，例如 `projects/myproject/locations/connection_location/connections/myconnection`。
    * `ENDPOINT`：要使用的[嵌入模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw#endpoint)，在本例中為 `multimodalembedding@001`。
 
-     建立遠端模型時，如果指定網址做為端點 (例如 `endpoint = 'https://us-central1-aiplatform.googleapis.com/v1/projects/myproject/locations/us-central1/publishers/google/models/multimodalembedding@001'`)，請務必確認您在網址中指定的專案，就是您已將 Agent Platform 使用者角色授予連線服務帳戶的專案。
+     如果您在建立遠端模型時指定網址做為端點，例如 `endpoint = 'https://us-central1-aiplatform.googleapis.com/v1/projects/myproject/locations/us-central1/publishers/google/models/multimodalembedding@001'`，請務必確認您在網址中指定的專案，是您已將 Agent Platform 使用者角色授予連線服務帳戶的專案。
 
      `multimodalembedding@001` 模型必須位於您建立遠端模型的位置。詳情請參閱「[位置](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw#locations)」。
 
@@ -642,10 +642,11 @@ FROM AI.GENERATE_EMBEDDING(
 
 * `PROJECT_ID`：您的專案 ID。
 * `DATASET_ID`：模型所在資料集的 ID。
-* `MODEL_NAME`：`multimodalembedding@001` 模型上的遠端模型名稱。
+* `MODEL_NAME`：遠端模型的名稱，位於 `multimodalembedding@001` 模型上。
 * `TABLE_NAME`：物件資料表的名稱，其中包含要嵌入的影片。
 * `START_SECOND`：`FLOAT64` 值，指定影片中要開始嵌入的秒數。預設值為 `0`。這個值必須是正數，且小於 `end_second` 值。
-* `END_SECOND`：`FLOAT64` 值，指定影片中要結束嵌入的秒數。預設值為 `120`。這個值必須是正數，且大於 `start_second` 值。
+* `END_SECOND`：`FLOAT64` 值，指定影片中要結束嵌入的秒數。預設值為 `120`。
+  這個值必須是正數，且大於`start_second`值。
 * `INTERVAL_SECONDS`：`FLOAT64` 值，指定建立嵌入時要使用的間隔。舉例來說，如果您設定 `start_second = 0`、`end_second = 120` 和 `interval_seconds = 10`，影片就會分割成十二個 10 秒片段 (`[0, 10), [10, 20), [20, 30)...`)，並為每個片段生成嵌入。這個值必須大於 `4`，且小於 `120`。預設值為 `16`。
 
 ## 範例
@@ -668,7 +669,7 @@ FROM
 ## 後續步驟
 
 * 瞭解如何[使用文字和圖片嵌入執行文字轉圖像語意搜尋](https://docs.cloud.google.com/bigquery/docs/generate-multimodal-embeddings?hl=zh-tw)。
-* 瞭解如何[使用文字嵌入進行語意搜尋和檢索增強生成 (RAG)](https://docs.cloud.google.com/bigquery/docs/vector-index-text-search-tutorial?hl=zh-tw)。
+* 瞭解如何[使用文字嵌入執行語意搜尋和檢索增強生成 (RAG)](https://docs.cloud.google.com/bigquery/docs/vector-index-text-search-tutorial?hl=zh-tw)。
 
 
 
@@ -677,11 +678,11 @@ FROM
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-29 (世界標準時間)。
+上次更新時間：2026-11-04 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-04 (世界標準時間)。"],[],[]]

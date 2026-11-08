@@ -500,3 +500,8 @@ An `INT64` value. The default value is `20`.
 ```
 WARM_START = { TRUE | FALSE }
 ```
+
+**Description**
+
+Determines whether to train a model with new training data, new model options,
+or both. Unless you explicitly override them, the initial op

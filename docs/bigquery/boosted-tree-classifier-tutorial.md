@@ -10,32 +10,32 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 使用增強型樹狀模型執行分類 透過集合功能整理內容 你可以依據偏好儲存及分類內容。
 
-本教學課程說明如何使用[提升樹狀結構分類器模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree?hl=zh-tw)，根據個人的人口統計資料預測收入範圍。模型會預測值是否屬於其中一個類別，在本例中，即個人年收入是否高於或低於 $50,000 美元。
+本教學課程說明如何使用[增強樹狀結構分類器模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree?hl=zh-tw)，根據人口統計資料預測個人的收入範圍。模型會預測某個值是否屬於兩個類別之一，在本例中，就是預測個人的年收入是否高於或低於 $50,000 美元。
 
-本教學課程使用 [`bigquery-public-data.ml_datasets.census_adult_income`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&%3Bd=ml_datasets&%3Bt=census_adult_income&%3Bpage=table&hl=zh-tw) 資料集。這個資料集包含 2000 年和 2010 年美國居民的客層和收入資訊。
+本教學課程使用 [`bigquery-public-data.ml_datasets.census_adult_income`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&%3Bd=ml_datasets&%3Bt=census_adult_income&%3Bpage=table&hl=zh-tw) 資料集。這個資料集包含 2000 年和 2010 年美國居民的人口統計和收入資訊。
 
 ## 目標
 
 本教學課程會逐步引導您完成下列工作：
 
-* 使用 [`CREATE MODEL` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree?hl=zh-tw)建立提升樹模型，預測人口普查受訪者的收入級距。
-* 使用 [`ML.EVALUATE` 函式評估模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate?hl=zh-tw)。
-* 使用 [`ML.PREDICT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict?hl=zh-tw)從模型取得預測結果。
+* 使用 [`CREATE MODEL` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree?hl=zh-tw)建立梯度提升決策樹模型，預測人口普查受訪者的收入級距。
+* 使用 [`ML.EVALUATE` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate?hl=zh-tw)評估模型。
+* 使用 [`ML.PREDICT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict?hl=zh-tw)取得模型的預測結果。
 
 ## 費用
 
-本教學課程使用的 Google Cloud計費元件包括：
+本教學課程使用 Google Cloud的計費元件，包括：
 
 * BigQuery
 * BigQuery ML
 
-如要進一步瞭解 BigQuery 費用，請參閱 [BigQuery 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw)頁面。
+如要進一步瞭解 BigQuery 費用，請參閱「[BigQuery 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw)」頁面。
 
-如要進一步瞭解 BigQuery ML 費用，請參閱「[BigQuery ML 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#bqml)」一文。
+如要進一步瞭解 BigQuery ML 費用，請參閱「[BigQuery ML 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#bqml)」。
 
 ## 事前準備
 
-- 登入 Google Cloud 帳戶。如果您是 Google Cloud新手，歡迎[建立帳戶](https://console.cloud.google.com/freetrial?hl=zh-tw)，親自評估產品在實際工作環境中的成效。新客戶還能獲得價值 $300 美元的免費抵免額，可用於執行、測試及部署工作負載。
+- 登入 Google Cloud 帳戶。如果您未曾使用過 Google Cloud，歡迎[建立帳戶](https://console.cloud.google.com/freetrial?hl=zh-tw)，親自體驗實際使用我們產品的成效。新客戶還能獲得價值 $300 美元的免費抵免額，用於執行、測試及部署工作負載。
 - In the Google Cloud console, on the project selector page,
   select or create a Google Cloud project.
 
@@ -76,35 +76,35 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
   [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
 - [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project).
 
-1. 新專案會自動啟用 BigQuery。如要在現有的專案中啟用 BigQuery，請前往
+1. 新專案會自動啟用 BigQuery。如要在現有專案中啟用 BigQuery，請前往
 
-   如果尚未啟用 BigQuery API，請啟用。
+   啟用 BigQuery API (如果尚未啟用)。
 
-   **啟用 API 時所需的角色**
+   **啟用 API 所需的角色**
 
-   如要啟用 API，您必須具備 `serviceusage.services.enable` 權限。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用情形管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過擁有者角色 (`roles/owner`) 取得這項權限。否則，您可以透過 Service Usage 管理員角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
    [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery&hl=zh-tw)
 
 ## 所需權限
 
-* 如要建立資料集，您需要 `bigquery.datasets.create` IAM 權限。
+* 如要建立資料集，您必須具備 `bigquery.datasets.create` IAM 權限。
 * 如要建立模型，您必須具備下列權限：
 
   + `bigquery.jobs.create`
   + `bigquery.models.create`
   + `bigquery.models.getData`
   + `bigquery.models.updateData`
-* 如要執行推論，您需要下列權限：
+* 如要執行推論，您必須具備下列權限：
 
   + `bigquery.models.getData`
   + `bigquery.jobs.create`
 
-如要進一步瞭解 BigQuery 中的 IAM 角色和權限，請參閱「[IAM 簡介](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)」。
+如要進一步瞭解 BigQuery 的 IAM 角色和權限，請參閱「[IAM 簡介](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)」。
 
 ## 建立資料集
 
-如要建立 BigQuery 資料集，請選取下列任一選項：
+如要建立 BigQuery 資料集，請選取下列其中一個選項：
 
 ### 控制台
 
@@ -114,14 +114,14 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 2. 點選左側窗格中的 explore「Explorer」。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
-3. 在「Explorer」中展開專案，然後按一下「Datasets」。
-4. 在「資料集」頁面，按一下 add「建立資料集」。
+3. 在「Explorer」中展開專案，然後按一下「資料集」。
+4. 在「Datasets」(資料集) 頁面，按一下add「Create dataset」(建立資料集)。
 5. 在「建立資料集」窗格中，執行下列操作：
 
    * 在「Dataset ID」(資料集 ID) 中輸入 `bqml_tutorial`。
-   * 選取「資料位置」的「美國」。
+   * 在「資料位置」部分，選取「US」。
 
-   其餘預設設定均保留原樣。
+   其餘預設設定則保持不變。
 6. 點選「建立資料集」。
 
 ### bq
@@ -136,7 +136,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
      --description "BigQuery ML tutorial dataset." \
      bqml_tutorial
    ```
-2. 確認資料集已建立完成：
+2. 確認資料集已建立：
 
    ```
    bq ls
@@ -144,7 +144,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ### API
 
-使用已定義的[資料集資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets?hl=zh-tw)呼叫 [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert?hl=zh-tw) 方法：
+使用定義的[資料集資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets?hl=zh-tw)呼叫 [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert?hl=zh-tw) 方法：
 
 ```
 {
@@ -156,7 +156,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ### BigQuery DataFrames
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+試用這個範例前，請先按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定操作說明操作。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -170,7 +170,7 @@ bqclient.create_dataset("bqml_tutorial", exists_ok=True)
 
 ## 準備範例資料
 
-在本教學課程中建立的模型會根據下列特徵，預測人口普查受訪者的收入級距：
+您在本教學課程中建立的模型會根據下列特徵，預測人口普查受訪者的收入級距：
 
 * 年齡
 * 從事的工作類型
@@ -181,13 +181,13 @@ bqclient.create_dataset("bqml_tutorial", exists_ok=True)
 
 訓練資料不包含 `education` 欄，因為 `education` 和 `education_num` 欄都以不同格式表示受訪者的教育程度。
 
-您可建立衍生自 `functional_weight` 欄的新 `dataframe` 欄，將資料分成訓練、評估和預測集。80% 的資料用於訓練模型，其餘 20% 的資料則用於評估和預測。
+您需要建立衍生自 `functional_weight` 欄的新 `dataframe` 欄，將資料分成訓練、評估和預測集。其中 80% 的資料用於訓練模型，其餘 20% 的資料則用於評估和預測。
 
 ### SQL
 
-如要準備範例資料，請建立包含訓練資料的[檢視區塊](https://docs.cloud.google.com/bigquery/docs/views-intro?hl=zh-tw)。本教學課程稍後會使用 `CREATE MODEL` 陳述式。
+如要準備範例資料，請建立[檢視表](https://docs.cloud.google.com/bigquery/docs/views-intro?hl=zh-tw)來存放訓練資料。本教學課程稍後會使用 `CREATE MODEL` 陳述式，
 
-執行查詢，準備範例資料：
+執行查詢來準備範例資料：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -217,14 +217,14 @@ bqclient.create_dataset("bqml_tutorial", exists_ok=True)
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 4. 在「Explorer」窗格，搜尋 `bqml_tutorial` 資料集。
-5. 按一下資料集，然後依序點選「總覽」**>「資料表」**。
-6. 按一下「`input_data`」檢視畫面，開啟資訊窗格。「結構定義」分頁會顯示檢視區塊結構定義。
+5. 依序點選資料集和**「總覽」>「資料表」**。
+6. 按一下「`input_data`」檢視畫面，開啟資訊窗格。檢視表結構定義會顯示在「Schema」(結構定義) 分頁中。
 
 ### BigQuery DataFrames
 
-建立名為 `input_data` 的 DataFrame。在本教學課程中，您稍後會使用 `input_data` 訓練模型、評估模型及進行預測。
+建立名為 `input_data` 的 DataFrame。在本教學課程的後續步驟中，您將使用 `input_data` 訓練模型、評估模型及進行預測。
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+試用這個範例前，請先按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定操作說明操作。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -260,9 +260,9 @@ input_data["dataframe"] = input_data["functional_weight"].case_when(
 del input_data["functional_weight"]
 ```
 
-## 建立提升樹模型
+## 建立梯度提升決策樹模型
 
-建立提升樹模型，預測人口普查受訪者的收入級距，並根據人口普查資料訓練模型。查詢作業約需 30 分鐘才能完成。
+建立梯度提升決策樹模型，預測人口普查受訪者的收入級距，並使用人口普查資料訓練模型。查詢作業約需 30 分鐘才能完成。
 
 ### SQL
 
@@ -271,7 +271,7 @@ del input_data["functional_weight"]
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在查詢編輯器中貼入下列查詢，然後點選「執行」：
+2. 在查詢編輯器中貼上以下查詢，然後點選「執行」：
 
    ```
    CREATE MODEL `bqml_tutorial.tree_model`
@@ -288,11 +288,11 @@ del input_data["functional_weight"]
    WHERE dataframe = 'training';
    ```
 
-   查詢完成後，即可透過「Explorer」(探索工具) 窗格存取 `tree_model` 模型。由於查詢使用 `CREATE MODEL` 陳述式建立模型，因此您不會看到查詢結果。
+   查詢完成後，即可透過「Explorer」窗格存取 `tree_model` 模型。由於查詢使用 `CREATE MODEL` 陳述式建立模型，因此不會顯示查詢結果。
 
 ### BigQuery DataFrames
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+試用這個範例前，請先按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定操作說明操作。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -334,12 +334,12 @@ ml.create_model(
 
 ### SQL
 
-如要評估模型，請按照下列步驟操作：
+請按照下列步驟評估模型：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在查詢編輯器中貼入下列查詢，然後點選「執行」：
+2. 在查詢編輯器中貼上以下查詢，然後點選「執行」：
 
    ```
      SELECT
@@ -357,7 +357,7 @@ ml.create_model(
        );
    ```
 
-   結果應如下所示：
+   結果應大致如下：
 
    ```
    +---------------------+---------------------+---------------------+-------------------+---------------------+---------------------+
@@ -369,7 +369,7 @@ ml.create_model(
 
 ### BigQuery DataFrames
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+試用這個範例前，請先按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定操作說明操作。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -397,7 +397,7 @@ ml.evaluate(
 # 0   0.671924  0.578804  0.839429  0.621897  0.344054  0.887335
 ```
 
-評估指標顯示模型效能良好，尤其是[`roc_auc` 分數](https://developers.google.com/machine-learning/crash-course/classification/roc-and-auc?hl=zh-tw)大於 `0.8`。
+評估指標顯示模型效能良好，尤其是 [`roc_auc` 分數](https://developers.google.com/machine-learning/crash-course/classification/roc-and-auc?hl=zh-tw)大於 `0.8`。
 
 如要進一步瞭解評估指標，請參閱「[輸出](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate?hl=zh-tw#output)」。
 
@@ -405,12 +405,12 @@ ml.evaluate(
 
 ### SQL
 
-如要使用模型預測資料，請按照下列步驟操作：
+請按照下列步驟，使用模型預測資料：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在查詢編輯器中貼入下列查詢，然後點選「執行」：
+2. 在查詢編輯器中貼上以下查詢，然後點選「執行」：
 
    ```
      SELECT
@@ -450,7 +450,7 @@ ml.evaluate(
 
 ### BigQuery DataFrames
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+試用這個範例前，請先按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定操作說明操作。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -483,8 +483,7 @@ ml.predict(
 #                                                           <50K                   0.96222406625747681
 ```
 
-`predicted_income_bracket` 包含模型預測值。
-`predicted_income_bracket_probs.label` 會顯示模型必須從中選擇的兩個標籤，而 `predicted_income_bracket_probs.prob` 欄則會顯示指定標籤是正確標籤的機率。
+`predicted_income_bracket` 包含模型預測的值。`predicted_income_bracket_probs.label` 顯示模型必須選擇的兩個標籤，`predicted_income_bracket_probs.prob` 欄則顯示指定標籤正確的機率。
 
 如要進一步瞭解輸出資料欄，請參閱「[分類模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict?hl=zh-tw#classification_models)」。
 
@@ -499,19 +498,18 @@ ml.predict(
 
 刪除專案將移除專案中所有的資料集與資料表。若您希望重新使用專案，您可以刪除本教學課程中所建立的資料集。
 
-1. 如有需要，請在Google Cloud 控制台中開啟 BigQuery 頁面。
+1. 如有需要，請在Google Cloud 控制台開啟 BigQuery 頁面。
 
-   [前往 BigQuery 頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
+   [前往「BigQuery」頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 在導覽窗格中，按一下您建立的 **bqml\_tutorial** 資料集。
-3. 按一下視窗右側的「刪除資料集」。
-   這個動作將會刪除資料集、資料表，以及所有資料。
-4. 在「Delete dataset」(刪除資料集) 對話方塊中，輸入資料集的名稱 (`bqml_tutorial`)，然後按一下「Delete」(刪除) 來確認刪除指令。
+3. 按一下視窗右側的「刪除資料集」。這個動作將會刪除資料集、資料表，以及所有資料。
+4. 在「Delete dataset」(刪除資料集) 對話方塊中，輸入資料集名稱 (`bqml_tutorial`) 來確認刪除指令，然後點選「Delete」(刪除)。
 
 ### 刪除專案
 
 如要刪除專案，請進行以下操作：
 
-**注意**：刪除專案會造成以下結果：
+**警告**：刪除專案會出現以下結果：
 
 * **專案中的所有內容都會遭到刪除。**如果使用現有專案來進行本文中的任務，刪除專案將一併移除當中已完成的其他任務'。
 * **自訂專案 ID 會消失。**當您之前建立這個專案時，可能建立了想要在日後使用的自訂專案 ID。如要保留使用該專案 ID 的網址 (例如 `appspot.com` 網址)，請刪除在該專案中選取的資源，而不是刪除整個專案。
@@ -527,7 +525,7 @@ ml.predict(
 ## 後續步驟
 
 * 瞭解如何[建立邏輯迴歸分類模型](https://docs.cloud.google.com/bigquery/docs/logistic-regression-prediction?hl=zh-tw)。
-* 如需 BigQuery ML 的總覽，請參閱「[BigQuery 中的 AI 和 ML 簡介](https://docs.cloud.google.com/bigquery/docs/bqml-introduction?hl=zh-tw)」。
+* 如要瞭解 BigQuery ML，請參閱「[BigQuery AI 和機器學習簡介](https://docs.cloud.google.com/bigquery/docs/bqml-introduction?hl=zh-tw)」。
 
 
 
@@ -536,11 +534,11 @@ ml.predict(
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-29 (世界標準時間)。
+上次更新時間：2026-11-03 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-03 (世界標準時間)。"],[],[]]

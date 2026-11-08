@@ -14,7 +14,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ## 費用
 
-在本文件中，您會使用下列 Google Cloud計費元件：
+在本文件中，您將使用下列 Google Cloud計費元件：
 
 * [BigQuery ML](https://cloud.google.com/bigquery/pricing?hl=zh-tw#bigquery-ml-pricing). You incur costs for the data that you
   process in BigQuery.
@@ -103,7 +103,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
       [前往「IAM」頁面](https://console.cloud.google.com/projectselector/iam-admin/iam?supportedpurview=project&hl=zh-tw)
    2. 選取專案。
    3. 在「Principal」(主體) 欄中，找出所有代表您或您所屬群組的資料列。如要瞭解您所屬的群組，請與管理員聯絡。
-   4. 在指定或包含您的所有資料列中，查看「Role」(角色) 欄，確認角色清單是否包含必要角色。
+   4. 針對指定或包含您的所有資料列，請查看「Role」(角色) 欄，確認角色清單是否包含必要角色。
 
 
    #### 授予角色
@@ -113,7 +113,8 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
       [前往「IAM」頁面](https://console.cloud.google.com/projectselector/iam-admin/iam?supportedpurview=project&hl=zh-tw)
    2. 選取專案。
    3. 按一下person\_add「Grant access」(授予存取權)。
-   4. 在「New principals」(新增主體) 欄位中，輸入您的使用者 ID。 這通常是指 Google 帳戶的電子郵件地址。
+   4. 在「New principals」(新增主體) 欄位中，輸入您的使用者 ID。
+      這通常是指 Google 帳戶的電子郵件地址。
    5. 按一下「Select a role」(選取角色)，然後搜尋角色。
    6. 如要授予其他角色，請按一下add「Add another role」(新增其他角色)，然後新增其他角色。
    7. 按一下「Save」(儲存)。
@@ -132,9 +133,9 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
   **選取或建立專案所需的角色**
 
-  * **選取專案**：選取專案時不需要特定 IAM 角色，只要您獲派某個專案的角色，即可選取該專案。
+  * **選取專案**：選取專案時，不需具備特定 IAM 角色，只要您已獲派某個專案的角色，即可選取該專案。
   * **建立專案**：如要建立專案，您必須具備專案建立者角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
-  **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，不要選取現有專案。如果採用這種做法，當您完成這些步驟後，就可以直接刪除該專案，並移除相關聯的所有資源。
+  **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，而不要選取現有專案。如果採用這種做法，當您完成這些步驟後，就可以直接刪除該專案，並移除相關聯的所有資源。
   * 建立 Google Cloud 專案：
 
     ```
@@ -171,9 +172,9 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
   **選取或建立專案所需的角色**
 
-  * **選取專案**：選取專案時不需要特定 IAM 角色，只要您獲派某個專案的角色，即可選取該專案。
+  * **選取專案**：選取專案時，不需具備特定 IAM 角色，只要您已獲派某個專案的角色，即可選取該專案。
   * **建立專案**：如要建立專案，您必須具備專案建立者角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
-  **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，不要選取現有專案。如果採用這種做法，當您完成這些步驟後，就可以直接刪除該專案，並移除相關聯的所有資源。
+  **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，而不要選取現有專案。如果採用這種做法，當您完成這些步驟後，就可以直接刪除該專案，並移除相關聯的所有資源。
   * 建立 Google Cloud 專案：
 
     ```
@@ -209,7 +210,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
    更改下列內容：
 
    * `PROJECT_ID`：專案 ID。
-   * `USER_IDENTIFIER`：使用者帳戶 ID。 例如：`myemail@example.com`。
+   * `USER_IDENTIFIER`：使用者帳戶的 ID。 例如：`myemail@example.com`。
    * `ROLE`：授予使用者帳戶的 IAM 角色。
 
 ## 建立資料集
@@ -225,13 +226,13 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Explorer」中展開專案，然後按一下「資料集」。
-4. 在「Datasets」(資料集) 頁面，按一下「Create dataset」(建立資料集)add。
+4. 在「Datasets」(資料集) 頁面，按一下add「Create dataset」(建立資料集)。
 5. 在「建立資料集」窗格中，執行下列操作：
 
    * 在「Dataset ID」(資料集 ID) 中輸入 `bqml_tutorial`。
    * 在「資料位置」部分，選取「US」。
 
-   其餘設定均保留預設值。
+   其餘預設設定則保持不變。
 6. 點選「建立資料集」。
 
 ### bq
@@ -278,10 +279,10 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 2. 點選左側窗格中的 explore「Explorer」。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
-3. 在「Explorer」窗格中展開專案名稱，然後點選「Connections」(連線)。
+3. 在「Explorer」窗格中展開專案名稱，然後按一下「Connections」(連線)。
 4. 在「Connections」(連線) 頁面，按一下「Create connection」(建立連線)。
 5. 在「連線類型」部分，選擇「Vertex AI 遠端模型、遠端函式、BigLake 和 Spanner (Cloud 資源)」。
-6. 在「連線 ID」欄位輸入連線名稱。
+6. 在「連線 ID」欄位中，輸入連線名稱。
 7. 在「位置類型」部分，選取連線位置。連線應與資料集等其他資源位於相同位置。
 8. 點選「建立連線」。
 9. 點選「前往連線」。
@@ -333,7 +334,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
    建立連線資源時，BigQuery 會建立專屬的系統服務帳戶，並與連線建立關聯。
 
-   **疑難排解**：如果收到下列連線錯誤，請[更新 Google Cloud SDK](https://docs.cloud.google.com/sdk/docs/quickstart?hl=zh-tw)：
+   **疑難排解**：如果收到下列連線錯誤訊息，請[更新 Google Cloud SDK](https://docs.cloud.google.com/sdk/docs/quickstart?hl=zh-tw)：
 
    ```
    Flags parsing error: flag --connection_type=CLOUD_RESOURCE: value should be one of...
@@ -535,7 +536,7 @@ public class CreateConnection {
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
-下列範例會在 `US` 區域建立名為 `my_cloud_resource_connection` 的 Cloud 資源連結：
+下列範例會在 `US` 區域中，建立名為 `my_cloud_resource_connection` 的 Cloud 資源連結：
 
 ```
 # This queries the provider for project information.
@@ -558,7 +559,7 @@ resource "google_bigquery_connection" "default" {
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
 2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
 
-   每個專案只需執行這個指令一次，而且可以在任何目錄中執行。
+   這項指令在每個專案中只需執行一次，且可在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
@@ -568,7 +569,7 @@ resource "google_bigquery_connection" "default" {
 
 ## 準備目錄
 
-每個 Terraform 設定檔都必須有自己的目錄 (也稱為*根模組*)。
+每個 Terraform 設定檔都必須有自己的目錄 (也稱為「根模組」)。
 
 1. 在 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw) 中建立目錄，並在該目錄中建立新檔案。檔案名稱必須有 `.tf` 副檔名，例如 `main.tf`。在本教學課程中，這個檔案稱為 `main.tf`。
 
@@ -623,10 +624,10 @@ resource "google_bigquery_connection" "default" {
 1. 前往「IAM & Admin」(IAM 與管理) 頁面。
 
    [前往「IAM & Admin」(IAM 與管理) 頁面](https://console.cloud.google.com/project/_/iam-admin?hl=zh-tw)
-2. 按一下 person\_add「Grant Access」(授予存取權)。
+2. 點選 person\_add「授予存取權」。
 3. 在「新增主體」欄位，輸入先前複製的服務帳戶 ID。
 4. 在「選取角色」欄位中，搜尋「Agent Platform 使用者」角色。
-5. 按一下 [儲存]。
+5. 按一下「儲存」。
 
 ## 建立遠端模型
 
@@ -749,7 +750,7 @@ CREATE OR REPLACE MODEL `bqml_tutorial.gemini_model`
 
 ### 刪除專案
 
-**注意**：刪除專案會造成以下影響：
+**警告**：刪除專案會出現以下結果：
 
 * **專案中的所有內容都會遭到刪除。**如果使用現有專案來進行本文中的任務，刪除專案將一併移除當中已完成的其他任務'。
 * **自訂專案 ID 會消失。**當您之前建立這個專案時，可能建立了想要在日後使用的自訂專案 ID。如要保留使用該專案 ID 的網址 (例如 `appspot.com` 網址)，請刪除在該專案中選取的資源，而不是刪除整個專案。
@@ -776,7 +777,7 @@ gcloud projects delete PROJECT_ID
    1. 在「Explorer」窗格中展開專案，然後點選「資料集」。
    2. 在「Datasets」(資料集) 清單中，按一下資料集。
    3. 在詳細資料窗格中，按一下「delete 刪除」。
-   4. 在「Delete dataset」(刪除資料集) 對話方塊中，點選「Delete」(刪除)。
+   4. 在「Delete dataset」(刪除資料集) 對話方塊中，按一下「Delete」(刪除)。
 3. 刪除連結。
 
    1. 在「Explorer」窗格中展開專案，然後點選「連線」。
@@ -816,11 +817,11 @@ gcloud projects delete PROJECT_ID
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-29 (世界標準時間)。
+上次更新時間：2026-11-03 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-03 (世界標準時間)。"],[],[]]

@@ -18,7 +18,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 BigQuery Reservation API 可讓您購買專用運算單元 (稱為「[承諾使用合約](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#slot_commitments)」)、建立運算單元集區 (稱為「[預留項目](https://docs.cloud.google.com/bigquery/docs/reservations-intro?hl=zh-tw#reservations)」)，以及將專案、資料夾和組織指派給這些預留項目。
 
-您可以透過預留項目，為工作負載指派專屬的運算單元數量。舉例來說，您可能不希望正式環境工作負載與測試工作負載競爭運算單元。您可以建立名為 `prod` 的預留項目，並將正式環境工作負載指派給這個預留項目。詳情請參閱「[瞭解預留項目](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw)」。
+本文說明如何建立、更新及刪除專屬和可預測的預留項目。此外，您也會瞭解如何啟用預留項目公平性和 BigQuery 流暢擴充功能、使用預留項目群組設定閒置的運算單元並排定優先順序，以及控管預留項目存取權。如需概念詳情，請參閱「[瞭解預留項目](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw)」。
 
 ## 建立預留項目
 
@@ -63,7 +63,7 @@ BigQuery Reservation API 可讓您購買專用運算單元 (稱為「[承諾使�
     1. 如要限制指派給預留項目的各項專案可同時執行的查詢數量，請將「Override project concurrency」(覆寫專案並行數量) 切換鈕設為開啟位置，然後在「Project Concurrency」(專案並行數量) 欄位中輸入值。
     2. 如要限制指派給預留項目的各項專案運算單元用量，請將「Override project max slots」(覆寫專案運算單元數量上限) 切換鈕設為開啟，然後在「Project Max Slots」(專案運算單元數量上限) 欄位中輸入值。**注意：** 這些設定會做為指派給預留項目的所有專案的預設值。您可以使用[指派規則](https://docs.cloud.google.com/bigquery/docs/reservations-assignments?hl=zh-tw#scheduling-policy-assignments)，覆寫特定專案的限制。
 13. 查看「Cost estimate」(費用預估) 表格中顯示的運算單元明細，以及「Capacity summary」(容量摘要) 表格中的預留項目摘要。
-14. 按一下 [儲存]。
+14. 按一下「儲存」。
 
 新的預留項目會顯示在「Slot reservations」(運算單元預留項目) 分頁中。
 
@@ -94,7 +94,8 @@ BigQuery Reservation API 可讓您購買專用運算單元 (稱為「[承諾使�
    * `RESERVATION_NAME`：預留項目名稱
 
      名稱只能使用小寫英數字元或破折號，開頭須為英文字母，結尾不得為破折號，長度上限為 64 個字元。
-   * `NUMBER_OF_BASELINE_SLOTS`：要分配給預留項目的基準運算單元數量。您無法在同一預訂中同時設定 `slot_capacity` 選項和 `standard` 版本選項。
+   * `NUMBER_OF_BASELINE_SLOTS`：要
+     分配給預留項目的基準運算單元數量。您無法在同一預訂中同時設定 `slot_capacity` 選項和 `standard` 版本選項。
    * `EDITION`：預留項目的版本。支援的值為 `STANDARD`、`ENTERPRISE` 和 `ENTERPRISE_PLUS`。將預留項目指派給版本後，功能和定價會有所變動。詳情請參閱「[BigQuery 版本簡介](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)」。
    * `NUMBER_OF_AUTOSCALING_SLOTS`：指派給預留項目的自動調度資源運算單元數量。這個值等於預留項目大小上限減去基準運算單元數量。
    * `MAX_SLOTS_PER_PROJECT`：指派給預留項目的各項專案執行查詢時，運算單元用量的預設上限。
@@ -165,7 +166,7 @@ resource "google_bigquery_reservation" "default" {
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
 2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
 
-   每個專案只需執行這個指令一次，而且可以在任何目錄中執行。
+   這項指令在每個專案中只需執行一次，且可在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
@@ -318,9 +319,9 @@ ALTER PROJECT `PROJECT_NAME` SET OPTIONS (
 
     * **最容易預測：**先使用基準運算單元，再使用閒置運算單元，最後使用自動調度資源運算單元，直到達到指定的運算單元數量上限。
     * **較難預測：**只會使用基準和閒置運算單元，最多不超過運算單元數量上限。不會使用自動調度資源運算單元。
-    * **變化最大：**使用所有可用的閒置運算單元，擴充至基準數量以上，接著，系統會使用自動調度資源運算單元，直到達到最大值和基準值之間的差額。這可能會導致預留項目超過指定的運算單元數量上限。
+    * **變化最大：**使用所有可用的閒置運算單元，擴充至基準數量以上，接著，系統會使用自動調度資源運算單元，最多不超過大小上限和基準值之間的差額。這可能會導致預留項目超過指定的運算單元數量上限。
 12. 「Cost estimate」(費用預估) 表格會顯示運算單元明細。「Capacity summary」(運算能力摘要) 表格會顯示預留項目摘要。
-13. 按一下 [儲存]。
+13. 按一下「儲存」。
 
 新的預留項目會顯示在「Slot reservations」(運算單元預留項目) 分頁中。
 
@@ -379,7 +380,7 @@ bq mk \
 
    * `ADMIN_PROJECT_ID`：擁有預留資源的[管理專案](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#admin-project) ID。
    * `LOCATION`：預留項目的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。如果選取 [BigQuery Omni 位置](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw#locations)，則只能選擇 Enterprise 版本。
-   * `RESERVATION_NAME`：預留項目名稱。名稱只能包含小寫英數字元或破折號，開頭須為英文字母，結尾不得為破折號，長度上限為 64 個字元。
+   * `RESERVATION_NAME`：預留項目的名稱。名稱只能包含小寫英數字元或破折號，開頭必須是英文字母，結尾不得是破折號，長度上限為 64 個字元。
    * `NUMBER_OF_BASELINE_SLOTS`：要分配給預留項目的基準運算單元數量。您無法在同一預訂中同時設定 `slot_capacity` 選項和 `standard` 版本選項。
    * `EDITION`：預留項目的版本。將預留項目指派給版本後，功能和定價會有所變動。詳情請參閱「[BigQuery 版本簡介](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)」。
    * `IGNORE_IDLE_SLOTS`：預留項目是否使用[閒置運算單元](https://docs.cloud.google.com/bigquery/docs/slots?hl=zh-tw#idle_slots)。預設值為 `false`。
@@ -422,7 +423,7 @@ resource "google_bigquery_reservation" "default" {
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
 2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
 
-   每個專案只需執行這個指令一次，而且可以在任何目錄中執行。
+   這項指令在每個專案中只需執行一次，且可在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
@@ -509,7 +510,7 @@ resource "google_bigquery_reservation" "default" {
 
 如要啟用以秒計費功能，且不設預留項目的最短時間，請在管理專案層級啟用，方法是在 `preflight_fluid_autoscaling_reservations` 選項中列出預留項目。啟用或停用 BigQuery 流暢擴充功能，不會導致停機或中斷執行中的查詢。這項設定只會套用至指定的預留項目，不會影響其他預留項目或專案。BigQuery 流暢擴充設定的變更可能需要幾分鐘才會生效。
 
-如果預留項目使用[代管災難復原](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery?hl=zh-tw)，則必須在主要和次要區域啟用 BigQuery 流暢擴充功能，確保在容錯移轉後按秒計費。
+如果預留項目使用[代管災難復原](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery?hl=zh-tw)功能，您必須在主要和次要區域啟用 BigQuery 流暢擴充功能，確保在容錯移轉後按秒計費。
 
 如要更新採用 BigQuery 流暢擴充功能的預留項目清單，請修改 `preflight_fluid_autoscaling_reservations` 選項中的清單。如要停用某個區域中所有預留項目的這項功能，請將 `preflight_fluid_autoscaling_reservations` 選項設為 NULL。
 
@@ -558,7 +559,7 @@ resource "google_bigquery_reservation" "default" {
 8. 在「Baseline slots」(基準運算單元) 欄位中，輸入基準運算單元數量。
 9. 如要展開「Advanced settings」(進階設定) 部分，請按一下 expand\_more 展開箭頭。
 10. 選用：如要設定目標工作並行，請將「Override automatic target job concurrency」(覆寫自動目標工作並行設定) 切換鈕設為開啟，然後輸入「Target Job Concurrency」(目標工作並行)。
-11. 按一下 [儲存]。
+11. 按一下「儲存」。
 
 ### SQL
 
@@ -662,7 +663,7 @@ print(f"Updated reservation: {reservation.name}")
 print(f"\tslot_capacity: {reservation.slot_capacity}")
 ```
 
-### 設定查詢是否使用閒置運算單元
+### 設定查詢是否使用閒置的運算單元
 
 `--ignore_idle_slots` 旗標可控管在預留項目中執行的查詢，是否能使用其他預留項目的閒置運算單元。詳情請參閱「[閒置運算單元](https://docs.cloud.google.com/bigquery/docs/slots?hl=zh-tw#idle_slots)」。您可以更新現有預留項目的這項設定。
 
@@ -726,7 +727,7 @@ bq ls --reservation \
 * `ADMIN_PROJECT_ID`：擁有預留資源的[管理專案](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#admin-project) ID
 * `LOCATION`：預留項目的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)
 
-`ignoreIdleSlots` 欄位包含設定。
+`ignoreIdleSlots` 欄位包含配置設定。
 
 ## 刪除預留項目
 
@@ -874,10 +875,10 @@ set-iam-policy`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-re
    3. 在「Assign roles」(指派角色) 頁面中，按一下 add「Add roles」(新增角色)。
    4. 在「Search for roles」(搜尋角色) 欄位中輸入 `bigquery.resourceEditor`。
    5. 在搜尋結果中勾選「BigQuery Resource Editor」(BigQuery 資源編輯者) 選項，然後按一下「Apply」(套用)。
-   6. 按一下 [儲存]。
+   6. 按一下「儲存」。
 4. 或者，如要將 `bigquery.resourceEditor` 角色授予在預留項目資源中沒有角色的主體，請按照下列步驟操作：
 
-   1. 按一下 person\_add「Grant Access」(授予存取權)。
+   1. 點選 person\_add「授予存取權」。
    2. 在「Add principals」(新增主體) 頁面的「New principals」(新增主體) 欄位中，輸入主體的 ID，例如 `my-user@example.com`。
    3. 按一下「add 新增角色」。
    4. 在「Search for roles」(搜尋角色) 欄位中輸入 `bigquery.resourceEditor`。
@@ -887,8 +888,8 @@ set-iam-policy`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-re
 
       1. 在「Title」(標題) 和「Description」(說明) 欄位中輸入值。
       2. 在「條件建構工具」中新增條件。舉例來說，如要新增條件，將角色授予結尾為 `/reservation1` 的所有預留項目名稱，請在「Condition type」(條件類型) 部分選擇「Name」(名稱)，在「Operator」(運算子) 部分選擇「Ends with」(結尾為)，並在「Value」(值) 部分輸入 `/reservation1`。
-      3. 按一下 [儲存]。
-5. 按一下 [儲存]。
+      3. 按一下「儲存」。
+5. 按一下「儲存」。
 
 ### bq
 
@@ -923,7 +924,7 @@ bq set-iam-policy --reservation RESOURCE FILE_NAME
 
 如要進一步瞭解 IAM，請參閱「[管理其他資源的存取權](https://docs.cloud.google.com/iam/docs/manage-access-other-resources?hl=zh-tw)」。
 
-## 使用預留項目群組，優先處理閒置運算單元
+## 使用預留項目群組，優先處理閒置的運算單元
 
 您可以建立預留項目群組，控管哪些預留項目可優先存取閒置運算單元。預留項目群組中的預留項目會先共用閒置運算單元，然後才提供給專案中的其他預留項目。
 
@@ -947,7 +948,7 @@ bq set-iam-policy --reservation RESOURCE FILE_NAME
 2. 在導覽選單中，按一下「Workload management」(工作負載管理)。
 3. 找出要加入群組的預留項目，然後勾選旁邊的核取方塊。
 4. 按一下表格標題中的「Create reservation group」(建立預留項目群組) 按鈕。
-5. 在「Create reservation group」(建立預留項目群組) 窗格的「Group name」(群組名稱) 欄位中，輸入群組名稱。
+5. 在「建立預留項目群組」窗格的「群組名稱」欄位中，輸入群組名稱。
 6. 選用：在「預留項目」欄位中，選取要新增至群組的其他預留項目。然後按一下「確定」。
 7. 點選「建立」。
 
@@ -995,7 +996,7 @@ resource "google_bigquery_reservation_group" "default" {
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
 2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
 
-   每個專案只需執行這個指令一次，而且可以在任何目錄中執行。
+   這項指令在每個專案中只需執行一次，且可在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
@@ -1064,7 +1065,7 @@ resource "google_bigquery_reservation_group" "default" {
 3. 展開 more\_vert「Actions」(動作) 選項。
 4. 按一下 [編輯]。
 5. 在「Edit reservation group」(編輯預留項目群組) 窗格中，選取要新增至「Reservations」(預留項目) 欄位的預留項目。然後點選「OK」。
-6. 按一下 [儲存]。
+6. 按一下「儲存」。
 
 預留項目群組已更新，納入最新的成員預留項目。
 
@@ -1129,7 +1130,7 @@ bq ls \
 3. 展開 more\_vert「Actions」(動作) 選項。
 4. 按一下 [編輯]。
 5. 在「Edit reservation group」(編輯預留項目群組) 窗格中，選取要從「Reservations」(預留項目) 欄位中移除的預留項目。然後點選「OK」。
-6. 按一下 [儲存]。
+6. 按一下「儲存」。
 
 預留項目群組已更新，納入最新的成員預留項目。
 
@@ -1213,9 +1214,9 @@ bq rm \
 
 **原因**
 
-運算單元一律會自動調度資源至 50 的倍數。BigQuery 會根據實際用量增加運算單元，並以 50 個運算單元為單位遞增。如果沒有承諾使用合約，或合約無法涵蓋增加的數量，則只能以 50 的倍數增加基準和自動調度資源運算單元。
+運算單元一律會自動調度資源，並以 50 的倍數為單位。BigQuery 會根據實際用量增加運算單元，並以 50 個運算單元為單位遞增。如果沒有承諾使用合約，或合約無法涵蓋增加的數量，則只能以 50 的倍數增加基準和自動調度資源運算單元。
 
-如果 `baseline slots` 或 `max reservation size - baseline slots` 不是 50 的倍數 (且未涵蓋在超額運算資源承諾使用合約中)，預留項目就無法擴充至大小上限，並會發生這項錯誤。
+如果 `baseline slots` 或 `max reservation size - baseline slots` 不是 50 的倍數 (且未涵蓋在超額容量承諾使用合約中)，預留項目就無法擴充至大小上限，並會發生這項錯誤。
 
 **解析度**
 
@@ -1245,11 +1246,11 @@ bq rm \
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-29 (世界標準時間)。
+上次更新時間：2026-11-04 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-04 (世界標準時間)。"],[],[]]

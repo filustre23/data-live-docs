@@ -20,9 +20,9 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ## ResNet 50 模型
 
-ResNet 50 模型會分析圖片檔案，並輸出一批向量，代表圖片屬於對應類別 (logits) 的可能性。詳情請參閱[模型 TensorFlow Hub 頁面](https://tfhub.dev/tensorflow/resnet_50/classification/1)的「**Usage**」部分。
+ResNet 50 模型會分析圖片檔，並輸出一批向量，代表圖片屬於對應類別 (logits) 的可能性。詳情請參閱[模型 TensorFlow Hub 頁面](https://tfhub.dev/tensorflow/resnet_50/classification/1)的「**Usage**」部分。
 
-ResNet 50 模型輸入會採用 [`DType`](https://www.tensorflow.org/api_docs/python/tf/dtypes/DType?hl=zh-tw) = `float32` 的張量，形狀為 `[-1, 224, 224, 3]`。輸出內容是形狀為 `[-1, 1024]` 的 `tf.float32` 張量陣列。
+ResNet 50 模型的輸入內容會採用 [`DType`](https://www.tensorflow.org/api_docs/python/tf/dtypes/DType?hl=zh-tw) = `float32` 的張量，形狀為 `[-1, 224, 224, 3]`。輸出內容是形狀為 `[-1, 1024]` 的 `tf.float32` 張量陣列。
 
 ## 所需權限
 
@@ -41,7 +41,7 @@ ResNet 50 模型輸入會採用 [`DType`](https://www.tensorflow.org/api_docs/py
   + `bigquery.connections.delegate`
 * 如要建立 bucket，您必須具備 `storage.buckets.create` 權限。
 * 如要將模型上傳至 Cloud Storage，您需要 `storage.objects.create` 和 `storage.objects.get` 權限。
-* 如要將模型載入 BigQuery ML，您需要下列權限：
+* 如要將模型載入 BigQuery ML，您必須具備下列權限：
 
   + `bigquery.jobs.create`
   + `bigquery.models.create`
@@ -50,12 +50,12 @@ ResNet 50 模型輸入會採用 [`DType`](https://www.tensorflow.org/api_docs/py
 * 如要執行推論，您必須具備下列權限：
 
   + 物件資料表中的 `bigquery.tables.getData`
-  + `bigquery.models.getData`模型
+  + 模型上的`bigquery.models.getData`
   + `bigquery.jobs.create`
 
 ## 費用
 
-在本文件中，您會使用下列 Google Cloud計費元件：
+在本文件中，您將使用下列 Google Cloud計費元件：
 
 * **BigQuery**: You incur storage costs for the object table
   you create in BigQuery.
@@ -152,7 +152,7 @@ ResNet 50 模型輸入會採用 [`DType`](https://www.tensorflow.org/api_docs/py
 1. 前往「BigQuery」頁面
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在「Editor」(編輯器) 窗格中執行下列 SQL 陳述式：
+2. 在「編輯器」窗格中，執行下列 SQL 陳述式：
 
    ```
    CREATE SCHEMA `PROJECT_ID.resnet_inference_test`;
@@ -182,10 +182,10 @@ ResNet 50 模型輸入會採用 [`DType`](https://www.tensorflow.org/api_docs/py
 1. 前往「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 點選左側窗格中的 explore「Explorer」。
+2. 在左側窗格中，點選「資料庫」「資料探索工具」：
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
-3. 在「Explorer」窗格中，點選「add 新增資料」。
+3. 在「資料」窗格中，點選「新增資料」圖示 add。
 
    「新增資料」對話方塊隨即開啟。
 4. 在「篩選依據」窗格的「資料來源類型」部分，選取「資料庫」。
@@ -193,10 +193,10 @@ ResNet 50 模型輸入會採用 [`DType`](https://www.tensorflow.org/api_docs/py
    或者，您也可以在「Search for data sources」(搜尋資料來源) 欄位中輸入 `Vertex AI`。
 5. 在「精選資料來源」部分，點選「Vertex AI」。
 6. 點選「Vertex AI Models: BigQuery Federation」解決方案資訊卡。
-7. 在「Connection type」(連線類型) 清單中，選取「Vertex AI remote models, remote functions, BigLake and Spanner (Cloud Resource)」(Vertex AI 遠端模型、遠端函式、BigLake 和 Spanner (Cloud 資源))。
+7. 在「連線類型」清單中，選取「Vertex AI 遠端模型、遠端函式、BigLake 和 Spanner (Cloud 資源)」。
 8. 在「連線 ID」欄位輸入 `lake-connection`。
 9. 點選「建立連線」。
-10. 在「連線資訊」窗格中，複製「服務帳戶 ID」欄位的值，並儲存到任意位置。您需要這項資訊，才能將[權限授予](#grant-permissions)連線的服務帳戶。
+10. 在「連線資訊」窗格中，複製「服務帳戶 ID」欄位的值，並儲存到任意位置。您需要這項資訊，才能[將權限授予](#grant-permissions)連線的服務帳戶。
 
 ### bq
 
@@ -211,7 +211,7 @@ ResNet 50 模型輸入會採用 [`DType`](https://www.tensorflow.org/api_docs/py
    ```
    bq show --connection us.lake-connection
    ```
-3. 從 `properties` 欄複製 `serviceAccountId` 屬性的值，並儲存在某個位置。您需要這項資訊，才能[授予權限](#grant-permissions)給連線的服務帳戶。
+3. 從 `properties` 欄複製 `serviceAccountId` 屬性的值，並儲存在某個位置。您需要這項資訊，才能將[權限授予](#grant-permissions)連線的服務帳戶。
 
 ## 建立 Cloud Storage bucket
 
@@ -229,7 +229,7 @@ ResNet 50 模型輸入會採用 [`DType`](https://www.tensorflow.org/api_docs/py
    「Add principals」(新增主體) 對話方塊隨即開啟。
 3. 在「新增主體」欄位，輸入先前複製的服務帳戶 ID。
 4. 在「Select a role」(請選擇角色) 欄位中，依序選取「Cloud Storage」和「Storage Object Viewer」(Storage 物件檢視者)。
-5. 按一下 [儲存]。
+5. 按一下「儲存」。
 
 ### gcloud
 
@@ -241,11 +241,11 @@ gcloud storage buckets add-iam-policy-binding gs://BUCKET_NAME \
 --role=roles/storage.objectViewer
 ```
 
-將 `MEMBER` 替換成先前複製的服務帳戶 ID。將 `BUCKET_NAME` 替換為先前建立的值區名稱。
+將 `MEMBER` 替換成您先前複製的服務帳戶 ID。將 `BUCKET_NAME` 替換為先前建立的值區名稱。
 
 詳情請參閱「[將主體新增至 bucket 層級政策](https://docs.cloud.google.com/storage/docs/access-control/using-iam-permissions?hl=zh-tw#bucket-add)」。
 
-**注意：** 新權限最多可能需要一分鐘才會生效。
+**注意：**新權限最多可能需要一分鐘才會生效。
 
 ## 建立物件資料表
 
@@ -256,7 +256,7 @@ gcloud storage buckets add-iam-policy-binding gs://BUCKET_NAME \
 1. 前往「BigQuery」頁面
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在「Editor」(編輯器) 窗格中執行下列 SQL 陳述式：
+2. 在「編輯器」窗格中，執行下列 SQL 陳述式：
 
    ```
    CREATE EXTERNAL TABLE resnet_inference_test.vision_images
@@ -283,14 +283,14 @@ resnet_inference_test.vision_images
 取得模型檔案，並將其儲存在 Cloud Storage：
 
 1. [下載](https://tfhub.dev/tensorflow/resnet_50/classification/1?tf-hub-format=compressed) ResNet 50 模型至本機電腦。這樣一來，您就會取得模型的 `saved_model.pb` 檔案和 `variables` 資料夾。
-2. 將 `saved_model.pb` 檔案和 `variables` 資料夾[上傳](https://docs.cloud.google.com/storage/docs/uploading-objects?hl=zh-tw)至先前建立的值區。
+2. 將 `saved_model.pb` 檔案和 `variables` 資料夾[上傳](https://docs.cloud.google.com/storage/docs/uploading-objects?hl=zh-tw)至先前建立的 bucket。
 
 ## 將模型載入 BigQuery ML
 
 1. 前往「BigQuery」頁面
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在「Editor」(編輯器) 窗格中，執行下列 SQL 陳述式：
+2. 在「編輯器」窗格中，執行下列 SQL 陳述式：
 
    ```
    CREATE MODEL `resnet_inference_test.resnet`
@@ -311,7 +311,7 @@ resnet_inference_test.vision_images
 2. 點選左側窗格中的 explore「Explorer」。
 3. 在「Explorer」窗格中展開專案，依序點選「Datasets」(資料集) 和「`resnet_inference_test`」資料集。
 4. 前往「模型」分頁。
-5. 按一下「`resnet`」模型。
+5. 按一下 `resnet` 模型。
 6. 在開啟的模型窗格中，按一下「結構定義」分頁標籤。
 7. 查看「標籤」部分。這會識別模型輸出的欄位。在本例中，欄位名稱值為 `activation_49`。
 8. 查看「功能」部分。這會指出必須輸入模型的欄位。您可以在 `ML.DECODE_IMAGE` 函式的 `SELECT` 陳述式中參照這些引數。在本例中，欄位名稱值為 `input_1`。
@@ -323,7 +323,7 @@ resnet_inference_test.vision_images
 1. 前往「BigQuery」頁面
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在「Editor」(編輯器) 窗格中執行下列 SQL 陳述式：
+2. 在「編輯器」窗格中，執行下列 SQL 陳述式：
 
    ```
    SELECT *
@@ -352,7 +352,7 @@ resnet_inference_test.vision_images
 
 ## 清除所用資源
 
-**注意**：刪除專案會造成以下影響：
+**警告**：刪除專案會出現以下結果：
 
 * **專案中的所有內容都會遭到刪除。**如果使用現有專案來進行本文中的任務，刪除專案將一併移除當中已完成的其他任務'。
 * **自訂專案 ID 會消失。**當您之前建立這個專案時，可能建立了想要在日後使用的自訂專案 ID。如要保留使用該專案 ID 的網址 (例如 `appspot.com` 網址)，請刪除在該專案中選取的資源，而不是刪除整個專案。
@@ -372,11 +372,11 @@ resnet_inference_test.vision_images
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-29 (世界標準時間)。
+上次更新時間：2026-11-03 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-03 (世界標準時間)。"],[],[]]

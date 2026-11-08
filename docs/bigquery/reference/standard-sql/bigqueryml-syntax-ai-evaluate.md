@@ -278,14 +278,14 @@ The following columns are returned for TabFM classification predictions:
   across all classes.
 * `accuracy`: a `FLOAT64` value that contains the accuracy of the prediction.
 * `f1_score`: a `FLOAT64` value that contains the macro-average
-  [`F1`score](https://en.wikipedia.org/wiki/F-score)
+  [`F1` score](https://en.wikipedia.org/wiki/F-score)
   across all classes.
 
 ## Examples
 
 The following examples show how to use the `AI.EVALUATE` function.
 
-### Evaluate a single times series
+### Evaluate a single time series
 
 The following example evaluates historical bike trips against actual bike trips
 for a single time series:
@@ -354,5 +354,5 @@ SELECT
 FROM
  AI.EVALUATE(
   # Training data
-  (SELECT * EXCEPT(training)
+  (SELECT * EXCEPT(training) FROM prepared_data
 ```

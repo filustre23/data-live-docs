@@ -16,58 +16,62 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 將 YouTube 頻道資料載入 BigQuery
 
-你可以使用 YouTube 頻道連接器的 [BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)，將 YouTube 頻道資料載入 BigQuery。您可以使用 BigQuery 資料移轉服務，安排週期性移轉工作，將 YouTube 頻道的最新資料新增至 BigQuery。
+您可以使用 YouTube 頻道連接器的 [BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)，將 YouTube 頻道資料載入 BigQuery。您可以使用 BigQuery 資料移轉服務，安排週期性移轉工作，將 YouTube 頻道的最新資料新增至 BigQuery。
 
 ## 連接器總覽
 
-YouTube 頻道連結器的 BigQuery 資料移轉服務支援下列資料移轉選項。
+YouTube 頻道連接器的 BigQuery 資料移轉服務支援下列資料移轉選項。
 
-| 資料轉移方式 | 支援 |
+| 資料移轉選項 | 支援 |
 | --- | --- |
-| 受支援的報表 | YouTube 頻道連接器支援從[頻道報表](https://developers.google.com/youtube/reporting/v1/reports/channel_reports?hl=zh-tw)移轉資料。 YouTube 頻道連接器支援 [2018 年 6 月 18 日](https://developers.google.com/youtube/reporting/revision_history?hl=zh-tw#june-18,-2018)的 API 版本。  如要瞭解 YouTube 頻道報表如何轉換成 BigQuery 資料表和檢視表，請參閱「[YouTube 頻道報表轉換](https://docs.cloud.google.com/bigquery/docs/youtube-channel-transformation?hl=zh-tw)」一文。 |
-| 重複頻率 | YouTube 頻道連結器支援每日資料移轉。    根據預設，資料移轉作業會在建立時排定時間。[設定資料移轉](#set_up_a_youtube_channel_transfer)時，可以指定資料移轉時間。 |
-| 重新整理時間範圍 | YouTube 頻道連接器會在執行資料轉移時，擷取最多 1 天的 YouTube 頻道資料。    詳情請參閱「[重新整理時間範圍](#refresh)」。 |
-| 資料補充作業 | [執行資料補充作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)，擷取排定資料移轉時間以外的資料。您可以擷取資料來源資料保留政策允許的資料。    包含歷來資料的 YouTube 報表在產生後可保留 30 天 (不含歷來資料的報表可保留 60 天)。詳情請參閱「[歷史資料](https://developers.google.com/youtube/reporting/v1/reports/?hl=zh-tw#historical-data)」。 |
+| 受支援的報表 | YouTube 頻道連接器支援從[頻道報表](https://developers.google.com/youtube/reporting/v1/reports/channel_reports?hl=zh-tw)轉移資料。 YouTube 頻道連接器支援 [2018 年 6 月 18 日](https://developers.google.com/youtube/reporting/revision_history?hl=zh-tw#june-18,-2018)的 API 版本。  如要瞭解 YouTube 頻道報表如何轉換為 BigQuery 資料表和檢視表，請參閱「[YouTube 頻道報表轉換](https://docs.cloud.google.com/bigquery/docs/youtube-channel-transformation?hl=zh-tw)」。 |
+| 重複頻率 | YouTube 頻道連接器支援每日資料移轉。    根據預設，資料移轉作業會排定在建立資料移轉作業時執行。您可以在[設定資料移轉作業](#set_up_a_youtube_channel_transfer)時，設定資料移轉時間。 |
+| 重新整理時間範圍 | YouTube 頻道連接器會在執行資料移轉作業時，擷取最多 1 天的 YouTube 頻道資料。    詳情請參閱「[重新整理時間範圍](#refresh)」。 |
+| 補充資料可用性 | 在每次排定的移轉作業執行期間，YouTube 頻道連接器會自動回填新產生或更新的報表，最多可回溯至移轉作業執行日期前 60 天。詳情請參閱「[自動補播](#automatic-backfills)」。    您也可以[執行資料補充作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)，手動擷取排定資料移轉作業以外的資料。您可以擷取資料來源資料保留政策允許範圍內的資料。    含有歷來資料的 YouTube 報表自產生當日起有 30 天的效期。(不含歷來資料的報表可保留 60 天)。詳情請參閱「[歷來資料](https://developers.google.com/youtube/reporting/v1/reports/?hl=zh-tw#historical-data)」。 |
 
 ## 從 YouTube 頻道移轉作業擷取資料
 
-從 YouTube 頻道將資料移轉至 BigQuery 時，資料會載入以日期為分區的 BigQuery 資料表。資料載入的資料表分區會對應資料來源的日期。如果為同一天排定多項移轉作業，BigQuery 資料移轉服務會以最新資料覆寫該特定日期的資料分割。同一天內多次轉移資料或執行回填作業，不會導致資料重複，也不會影響其他日期的分區。
+將 YouTube 頻道資料移轉至 BigQuery 時，資料會載入依日期分區的 BigQuery 資料表。資料載入的資料表分區會對應至資料來源的日期。如果您在同一天安排多項移轉作業，BigQuery 資料移轉服務會以最新資料覆寫該日期的分區。在同一天進行多次移轉或執行補充作業，不會產生重複資料，其他日期的分區也不會受到影響。
 
-### 重新整理視窗
+### 重新整理時間範圍
 
-*更新期*是指資料移轉作業在執行時，擷取資料的天數。舉例來說，如果重新整理時間範圍為三天，且每天都會進行移轉，BigQuery 資料移轉服務就會從來源資料表擷取過去三天的所有資料。在本例中，每天進行移轉時，BigQuery 資料移轉服務會建立新的 BigQuery 目的地資料表分割區，並複製當天的來源資料表資料，然後自動觸發回填執行作業，以更新過去兩天的來源資料表資料。系統自動觸發的回填作業會覆寫或增量更新 BigQuery 目的地資料表，具體做法取決於 BigQuery 資料移轉服務連接器是否支援增量更新。
+「更新回溯期」是指資料移轉時，資料移轉作業擷取資料的天數。舉例來說，如果更新時間範圍為三天，且每天都會進行移轉，BigQuery 資料移轉服務會從來源資料表擷取過去三天的所有資料。在本例中，每日移轉作業執行時，BigQuery 資料移轉服務會建立新的 BigQuery 目的地資料表分區，並複製當天的來源資料表資料，然後自動觸發補充執行作業，使用過去兩天的來源資料表資料更新 BigQuery 目的地資料表分區。自動觸發的回填執行作業會覆寫或增量更新 BigQuery 目的地資料表，具體取決於 BigQuery 資料移轉服務連接器是否支援增量更新。
 
-首次執行資料移轉時，資料移轉作業會擷取重新整理視窗內的所有可用來源資料。舉例來說，如果重新整理時間範圍為三天，而您是第一次執行資料移轉作業，BigQuery 資料移轉服務會擷取三天內的所有來源資料。
+首次執行資料移轉作業時，系統會擷取重新整理期間內的所有可用來源資料。舉例來說，如果更新時間範圍為三天，且您首次執行資料移轉作業，BigQuery 資料移轉服務會擷取三天內的所有來源資料。
 
-如要擷取重新整理時間範圍外的資料 (例如歷來資料)，或從任何轉移中斷或缺漏中復原資料，可以啟動或排定[資料補充作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)。
+這個連接器會[自動回填](#automatic-backfills)過去 60 天內延遲或更新的報表。如要擷取更新時間範圍以外的其他資料 (例如歷來資料)，或復原任何因移轉中斷或缺漏而遺失的資料，您可以手動啟動或排定[補充執行作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)。
+
+### 自動候補
+
+如果 YouTube 頻道報表延遲或重新產生先前日期的報表，BigQuery 資料移轉服務會自動回填報表。在每次排定的移轉作業執行期間，BigQuery 資料移轉服務會檢查過去 60 天內產生的報表，以及上次排定的移轉作業執行後產生的報表。只要有新報表，BigQuery 資料移轉服務就會自動安排回填移轉作業，將更新後的資料載入對應的資料表分區。如果 YouTube 報表在這 60 天內延遲或更新，您不需要手動觸發回填。
 
 ## 限制
 
-* 資料轉移的最低排程頻率為每 24 小時一次。根據預設，資料移轉作業會在您建立移轉作業時啟動。不過，您可以在[設定轉移作業](https://docs.cloud.google.com/bigquery/docs/youtube-channel-transfer?hl=zh-tw#set_up_a_youtube_channel_transfer)時，設定資料轉移開始時間。
-* 在 YouTube 內容擁有者移轉期間，BigQuery 資料移轉服務不支援增量資料移轉。指定資料移轉日期後，系統會移轉該日期可用的所有資料。
-* 如果使用聯合身分登入，就無法建立 YouTube 頻道資料移轉作業。你必須使用 Google 帳戶登入，才能轉移 YouTube 頻道。
-* 您只能從與建立資料移轉的 Google 帳戶相關聯的 YouTube 頻道移轉資料。詳情請參閱「[YouTube 頻道轉移的授權注意事項](https://docs.cloud.google.com/bigquery/docs/dts-authentication-authorization?hl=zh-tw#youtube_channel_transfers)」。
+* 資料移轉作業的排程頻率下限為每 24 小時一次。根據預設，資料移轉作業會在您建立移轉作業時開始。不過，您可以在[設定移轉作業](https://docs.cloud.google.com/bigquery/docs/youtube-channel-transfer?hl=zh-tw#set_up_a_youtube_channel_transfer)時，指定資料移轉開始時間。
+* BigQuery 資料移轉服務不支援在 YouTube 內容擁有者移轉期間，進行增量資料移轉。指定資料移轉日期後，系統會移轉該日期可用的所有資料。
+* 如果以聯合身分登入，則無法建立 YouTube 頻道資料移轉作業。您必須使用 Google 帳戶登入，才能建立 YouTube 頻道轉移作業。
+* 您只能從與建立資料移轉作業的 Google 帳戶相關聯的 YouTube 頻道移轉資料。詳情請參閱「[YouTube 頻道移轉作業的授權考量](https://docs.cloud.google.com/bigquery/docs/dts-authentication-authorization?hl=zh-tw#youtube_channel_transfers)」。
 
 ## 事前準備
 
 建立 YouTube 頻道資料移轉作業前，請先完成下列事項：
 
-* 確認您已完成[啟用 BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service?hl=zh-tw)的一切必要動作。
+* 確認您已完成[啟用 BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service?hl=zh-tw)的所有必要動作。
 * [建立 BigQuery 資料集](https://docs.cloud.google.com/bigquery/docs/datasets?hl=zh-tw)來儲存 YouTube 資料。
 
 ## 所需權限
 
-確認您已授予下列權限。
+請確認您已授予下列權限。
 
 ### 必要的 BigQuery 角色
 
-如要取得建立 BigQuery 資料移轉服務資料移轉作業所需的權限，請要求管理員在專案中授予您 [BigQuery 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.admin)  (`roles/bigquery.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得建立 BigQuery 資料移轉服務資料移轉作業所需的權限，請要求管理員授予您專案的 [BigQuery 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.admin) (`roles/bigquery.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
 這個預先定義的角色具備建立 BigQuery 資料移轉服務資料移轉作業所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
 #### 所需權限
 
-如要建立 BigQuery 資料移轉服務資料移轉作業，您必須具備下列權限：
+您必須具備下列權限，才能建立 BigQuery 資料移轉服務資料移轉作業：
 
 * BigQuery 資料移轉服務權限：
   + `bigquery.transfers.update`
@@ -85,15 +89,15 @@ YouTube 頻道連結器的 BigQuery 資料移轉服務支援下列資料移轉�
 
 ### 必要的 YouTube 頻道角色
 
-你必須是 YouTube 頻道的擁有者。
+你必須擁有 YouTube 頻道。
 
 ## 設定 YouTube 頻道轉移作業
 
-如要設定 YouTube 頻道資料移轉作業，您需要下列項目：
+如要設定 YouTube 頻道資料移轉作業，必須具備：
 
-* **資料表後置字串**：您在設定資料移轉作業時為頻道提供的易記名稱。後置字串會附加在工作 ID 後方，形成資料表名稱，例如 reportTypeId\_suffix。後置字串可用於防止不同的移轉作業寫入同一個資料表。所有將資料載入同個資料集的移轉工作，其資料表後置字串都不能重複，且後置字串應盡量簡短，避免產生過於冗長的資料表名稱。
+* **表格後置字串**：您在設定資料移轉作業時，為管道提供的容易使用名稱。這個尾碼會附加至工作 ID，以便建立表格名稱，例如 reportTypeId\_suffix。後置字串可用於防止不同的移轉作業寫入同一個資料表。所有將資料載入同個資料集的移轉工作，其資料表後置字串都不能重複，且後置字串應盡量簡短，避免產生過於冗長的資料表名稱。
 
-如果您使用 [YouTube Reporting API](https://developers.google.com/youtube/reporting/v1/reference/rest/?hl=zh-tw)，並且已經有一些報表工作，BigQuery 資料移轉服務會載入您的報表資料。如果沒有現有的報表工作，設定移轉作業時，系統會自動啟用 YouTube 報表工作。
+如果您使用 [YouTube Reporting API](https://developers.google.com/youtube/reporting/v1/reference/rest/?hl=zh-tw)，且已有報表工作，BigQuery 資料移轉服務會載入報表資料。如果沒有現有的報表工作，設定移轉作業時，系統會自動啟用 YouTube 報表工作。
 
 如要建立 YouTube 頻道資料移轉作業，請按照下列步驟操作：
 
@@ -101,8 +105,8 @@ YouTube 頻道連結器的 BigQuery 資料移轉服務支援下列資料移轉�
 
 1. 前往 Google Cloud 控制台的「資料移轉」頁面。
 
-   [前往「資料轉移」頁面](https://console.cloud.google.com/bigquery/transfers?hl=zh-tw)
-2. 按一下「建立轉移作業」add。
+   [前往「資料移轉」](https://console.cloud.google.com/bigquery/transfers?hl=zh-tw)
+2. 按一下「add 建立移轉作業」。
 3. 在「Create Transfer」(建立轉移作業) 頁面：
 
    * 在「Source type」(來源類型) 區段，針對「Source」(來源) 選取 [YouTube Channel] (YouTube 頻道)。
@@ -120,7 +124,7 @@ YouTube 頻道連結器的 BigQuery 資料移轉服務支援下列資料移轉�
 
      + 按一下啟用電子郵件通知的切換開關。當您啟用此選項時，移轉管理員會在移轉作業失敗時收到電子郵件通知。
      + 在「Select a Pub/Sub topic」(選取 Pub/Sub 主題) 選取[主題](https://docs.cloud.google.com/pubsub/docs/overview?hl=zh-tw#types)名稱，或是點選「Create a topic」(建立主題)。這個選項會針對資料移轉作業設定 Pub/Sub 執行[通知](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications?hl=zh-tw)。
-4. 按一下 [儲存]。
+4. 按一下「儲存」。
 
 ### bq
 
@@ -145,8 +149,8 @@ bq mk \
 
 * project\_id 是您的專案 ID。
 * dataset 是移轉設定的目標資料集。
-* name 是移轉設定的顯示名稱。資料移轉作業名稱可以是任意值，日後需要修改移轉作業時，能夠據此識別即可。
-* parameters 含有已建立移轉設定的 JSON 格式參數，例如：`--params='{"param":"param_value"}'`。進行 YouTube 頻道資料移轉作業時，您必須提供 `table_suffix` 參數。您可以選擇將 `configure_jobs` 參數設為 `true`，讓 BigQuery 資料移轉服務為您管理 YouTube 報表工作。如果你的頻道沒有任何 YouTube 報表，系統會建立新的報表工作來啟用這些報表。
+* name 是移轉設定的顯示名稱。資料移轉作業名稱可以是任何值，能讓您辨識移轉作業，方便您日後在必要時進行修改。
+* parameters 包含所建立移轉設定的參數，格式為 JSON。例如：`--params='{"param":"param_value"}'`。如果是 YouTube 頻道資料移轉作業，則必須提供 `table_suffix` 參數。您可以選擇將 `configure_jobs` 參數設為 `true`，允許 BigQuery 資料移轉服務代您管理 YouTube 報表工作。如果您的頻道還沒有特定 YouTube 報表，必須建立新的報表工作才能移轉。
 * data\_source 是資料來源：`youtube_channel`。
 
 **注意：** 您無法使用指令列工具設定通知。
@@ -164,7 +168,7 @@ bq mk \
 --data_source=youtube_channel
 ```
 
-**注意：** 當您使用指令列工具建立 YouTube 頻道轉移作業時，系統會採用「Schedule」(排程) 的[預設值](https://docs.cloud.google.com/bigquery/docs/youtube-channel-transfer?hl=zh-tw#connector_overview)進行移轉設定。
+**注意：**使用指令列工具建立 YouTube 頻道移轉作業時，系統會使用**排程**的[預設值](https://docs.cloud.google.com/bigquery/docs/youtube-channel-transfer?hl=zh-tw#connector_overview)設定移轉設定。
 
 ### API
 
@@ -172,9 +176,9 @@ bq mk \
 
 ### Java
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定說明操作。詳情請參閱 [BigQuery Java API 參考說明文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定操作說明進行操作。詳情請參閱 [BigQuery Java API 參考文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 import com.google.api.gax.rpc.ApiException;
@@ -183,7 +187,5 @@ import com.google.cloud.bigquery.datatransfer.v1.DataTransferServiceClient;
 import com.google.cloud.bigquery.datatransfer.v1.ProjectName;
 import com.google.cloud.bigquery.datatransfer.v1.TransferConfig;
 import com.google.protobuf.Struct;
-import com.google.protobuf.Value;
-import java.io.IOException;
-import java.util.HashMa
+import com.google.protobuf.
 ```

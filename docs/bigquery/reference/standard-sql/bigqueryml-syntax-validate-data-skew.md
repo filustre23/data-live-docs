@@ -271,5 +271,5 @@ IF(ARRAY_LENGTH(anomalies) > 0)
       ML.PREDICT(
         MODEL mydataset.model_linear_reg,
         TABLE mydataset.serving);
-END
+END IF;
 ```

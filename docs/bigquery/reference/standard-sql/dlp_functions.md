@@ -207,5 +207,5 @@ without including `plaintext` keys in a query. To use DLP functions, you need a
   this:
 
   ```
-  gcp-kms://projects/my-project/locations
+  gcp-kms://projects/my-project/locations/us/keyRings
   ```

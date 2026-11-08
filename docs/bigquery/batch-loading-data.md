@@ -271,7 +271,7 @@ SCHEMA
     qtr:STRING,sales:FLOAT,year:STRING
 ```
 
-**注意：** 在指令列中指定結構定義時，不得包含 `RECORD` ([`STRUCT`](#struct-type)) 類型、欄位說明，也無法指定欄位模式。所有欄位模式預設為 `NULLABLE`。如要加入欄位說明、模式和 `RECORD` 類型，請改為提供 [JSON 結構定義檔案](#specifying_a_schema_file)。
+**注意：** 在指令列中指定結構定義時，不得包含 `RECORD` ([`STRUCT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#struct_type)) 類型、欄位說明，也無法指定欄位模式。所有欄位模式預設為 `NULLABLE`。如要加入欄位說明、模式和 `RECORD` 類型，請改為提供 [JSON 結構定義檔案](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#specifying_a_json_schema_file)。
 
 下列指令會將本機 CSV 檔案 (`mydata.csv`) 載入預設專案中 `mydataset` 內名為 `mytable` 的資料表。結構定義是使用[結構定義自動偵測功能](https://docs.cloud.google.com/bigquery/docs/schema-detect?hl=zh-tw)定義。
 
@@ -646,11 +646,11 @@ BigQuery 載入工作的結果是不可分割的，也就是說，系統會插�
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-02 (世界標準時間)。
+上次更新時間：2026-11-06 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-06 (世界標準時間)。"],[],[]]

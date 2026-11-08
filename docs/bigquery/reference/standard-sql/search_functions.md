@@ -355,5 +355,5 @@ SELECT
 ```
 SELECT
   -- FALSE: No single array entry matches all search terms.
-  SEARCH(['foobar'
+  SEARCH(['foobar', 'example']
 ```

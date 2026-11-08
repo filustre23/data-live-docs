@@ -391,5 +391,5 @@ To use a [default connection](/bigquery/docs/default-connections), specify
 **Syntax**
 
 ```
-MODEL_TYPE
+MODEL_TYPE = {
 ```

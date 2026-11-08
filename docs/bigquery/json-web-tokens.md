@@ -14,35 +14,35 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 你可以依據偏好儲存及分類內容。
 
-# 使用 JWT 進行驗證
+# 使用 JWT 驗證
 
-BigQuery API 會接受 [JSON Web Token (JWT)](https://datatracker.ietf.org/doc/rfc7519/) 來驗證要求。
+BigQuery API 接受 [JSON Web Token (JWT)](https://datatracker.ietf.org/doc/rfc7519/) 驗證要求。
 
-最佳做法是使用[應用程式預設憑證 (ADC) 驗證 BigQuery](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw)。如果您無法使用 ADC，且使用服務帳戶進行驗證，則可以改用[已簽署的 JWT](https://developers.google.com/identity/protocols/oauth2/service-account?hl=zh-tw#jwt-auth)。有了 JWT，您就能向 Google 授權伺服器發出網路要求，不必呼叫 API。
+最佳做法是使用[應用程式預設憑證 (ADC) 向 BigQuery 進行驗證](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw)。如果無法使用 ADC，且您使用服務帳戶進行驗證，則可改用[已簽署的 JWT](https://developers.google.com/identity/protocols/oauth2/service-account?hl=zh-tw#jwt-auth)。JWT 可讓您發出 API 呼叫，而不必向 Google 的授權伺服器傳送網路要求。
 
 您可以透過下列方式使用 JWT 進行驗證：
 
-* 如果是在 Google Cloud 控制台或使用 gcloud CLI 建立的服務帳戶金鑰，請[使用提供 JWT 簽署功能的用戶端程式庫](#client-libraries)。
+* 如果是透過 Google Cloud 控制台或使用 gcloud CLI 建立的服務帳戶金鑰，請[使用提供 JWT 簽署功能的用戶端程式庫](#client-libraries)。
 * 如果是系統管理的服務帳戶，請[使用 REST API 或 gcloud CLI](#rest-gcloud)。
 
 ### 範圍和目標對象
 
-盡可能使用服務帳戶的[範圍](https://developers.google.com/identity/protocols/oauth2/scopes?hl=zh-tw)。如果無法使用，您可以使用[目標對象聲明](https://datatracker.ietf.org/doc/html/rfc7519#section-4.1.3)。針對 BigQuery API，請將目標對象值設為 `https://bigquery.googleapis.com/`。
+請盡可能搭配服務帳戶使用[範圍](https://developers.google.com/identity/protocols/oauth2/scopes?hl=zh-tw)。如果無法這麼做，可以使用[目標對象宣告](https://datatracker.ietf.org/doc/html/rfc7519#section-4.1.3)。如果是 BigQuery API，請將目標對象值設為 `https://bigquery.googleapis.com/`。
 
 ### 使用用戶端程式庫建立 JWT
 
-如果是在 Google Cloud 控制台或使用 gcloud CLI 建立的服務帳戶金鑰，請使用提供 JWT 簽署功能的用戶端程式庫。以下清單列出適合常見程式設計語言的選項：
+如果服務帳戶金鑰是在 Google Cloud 控制台建立，或使用 gcloud CLI 建立，請使用提供 JWT 簽署功能的用戶端程式庫。以下列出一些適用於熱門程式設計語言的選項：
 
 * Go：[func JWTAccessTokenSourceFromJSON](https://pkg.go.dev/golang.org/x/oauth2/google#JWTAccessTokenSourceFromJSON)
-* Java：[類別 ServiceAccountCredentials](https://docs.cloud.google.com/java/docs/reference/google-auth-library/latest/com.google.auth.oauth2.ServiceAccountCredentials?hl=zh-tw)
-* Node.js：[類別 JWTAccess](https://docs.cloud.google.com/nodejs/docs/reference/google-auth-library/latest/google-auth-library/jwtaccess?hl=zh-tw)
+* Java：[Class ServiceAccountCredentials](https://docs.cloud.google.com/java/docs/reference/google-auth-library/latest/com.google.auth.oauth2.ServiceAccountCredentials?hl=zh-tw)
+* Node.js：[JWTAccess 類別](https://docs.cloud.google.com/nodejs/docs/reference/google-auth-library/latest/google-auth-library/jwtaccess?hl=zh-tw)
 * PHP：[ServiceAccountJwtAccessCredentials](https://docs.cloud.google.com/php/docs/reference/cloud-bigquery/latest?hl=zh-tw#authentication)
 * Python：[google.auth.jwt 模組](https://googleapis.dev/python/google-auth/latest/reference/google.auth.jwt.html)
 * Ruby：[類別：Google::Auth::ServiceAccountJwtHeaderCredentials](https://www.rubydoc.info/gems/googleauth/Google/Auth/ServiceAccountJwtHeaderCredentials)
 
 #### Java 範例
 
-以下範例使用 [Java 專用 BigQuery 用戶端程式庫](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)建立並簽署 JWT。在用戶端程式庫中，BigQuery API 的預設範圍設為 `https://www.googleapis.com/auth/bigquery`。
+下列範例使用 [Java 適用的 BigQuery 用戶端程式庫](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)建立及簽署 JWT。在用戶端程式庫中，BigQuery API 的預設範圍設為 `https://www.googleapis.com/auth/bigquery`。
 
 ```
 import com.google.auth.oauth2.ServiceAccountCredentials;
@@ -83,11 +83,11 @@ public class Example {
 
 ### 使用 REST 或 gcloud CLI 建立 JWT
 
-對於系統管理的服務帳戶，您必須手動組合 JWT，然後使用 REST 方法 [`projects.serviceAccounts.signJwt`](https://docs.cloud.google.com/iam/docs/reference/credentials/rest/v1/projects.serviceAccounts/signJwt?hl=zh-tw) 或 Google Cloud CLI 指令 [`gcloud beta iam service-accounts sign-jwt`](https://cloud.google.com/sdk/gcloud/reference/beta/iam/service-accounts/sign-jwt?hl=zh-tw) 簽署 JWT。如要使用這兩種方法，您必須是「服務帳戶符記建立者」身分的 Cloud Identity and Access Management 角色成員。
+如果是系統管理的服務帳戶，您必須手動組合 JWT，然後使用 REST 方法 [`projects.serviceAccounts.signJwt`](https://docs.cloud.google.com/iam/docs/reference/credentials/rest/v1/projects.serviceAccounts/signJwt?hl=zh-tw) 或 Google Cloud CLI 指令 [`gcloud iam service-accounts sign-jwt`](https://docs.cloud.google.com/sdk/gcloud/reference/iam/service-accounts/sign-jwt?hl=zh-tw) 簽署 JWT。如要使用上述任一方法，您必須具備 [Service Account Token Creator](https://docs.cloud.google.com/iam/docs/roles-permissions/iam?hl=zh-tw#iam.serviceAccountTokenCreator) Identity and Access Management 角色。
 
 #### gcloud CLI 範例
 
-以下範例顯示 Bash 指令碼，該指令碼會組合 JWT，然後使用 `gcloud beta iam service-accounts sign-jwt` 指令簽署 JWT。
+以下範例顯示的 Bash 指令碼會組合 JWT，然後使用 `gcloud iam service-accounts sign-jwt` 指令簽署。
 
 ```
 #!/bin/bash
@@ -112,7 +112,7 @@ cat <<EOF > $JWT_FILE
 }
 EOF
 
-gcloud beta iam service-accounts sign-jwt --iam-account $SA_EMAIL_ADDRESS $JWT_FILE $SIGNED_JWT_FILE
+gcloud iam service-accounts sign-jwt --iam-account $SA_EMAIL_ADDRESS $JWT_FILE $SIGNED_JWT_FILE
 
 echo "Datasets:"
 curl -L -H "Authorization: Bearer $(cat $SIGNED_JWT_FILE)" \
@@ -132,11 +132,11 @@ curl -L -H "Authorization: Bearer $(cat $SIGNED_JWT_FILE)" \
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-29 (世界標準時間)。
+上次更新時間：2026-11-04 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-04 (世界標準時間)。"],[],[]]

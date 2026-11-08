@@ -16,11 +16,11 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 剖析資料
 
-資料剖析掃描會分析資料的統計特徵 (例如平均值、不重複值和最大值)，協助您進一步瞭解資料。使用這些由 Knowledge Catalog 支援的掃描功能，您可以深入瞭解資料集，並快速建立[資料品質檢查建議規則](https://docs.cloud.google.com/knowledge-catalog/docs/auto-data-quality-overview?hl=zh-tw)。
+資料剖析掃描作業會分析資料的統計特徵 (例如平均值、不重複值和最大值)，協助您進一步瞭解資料。使用這些由 Knowledge Catalog 支援的掃描功能，即可深入瞭解資料集，並快速建立[資料品質檢查建議規則](https://docs.cloud.google.com/knowledge-catalog/docs/auto-data-quality-overview?hl=zh-tw)。
 
 如要進一步瞭解資料剖析，請參閱「[關於資料剖析](https://docs.cloud.google.com/knowledge-catalog/docs/data-profiling-overview?hl=zh-tw)」。
 
-**提示：** 本文說明如何管理專案中的資料剖析掃描作業。您也可以在處理特定資料表時，建立及管理資料剖析掃描。詳情請參閱「[管理特定資料表的資料剖析掃描作業](#start-from-table)」。
+**提示：**本文說明在 BigQuery 中使用特定資料表時，如何建立及管理資料剖析掃描作業。如要管理專案中的資料剖析掃描作業，請使用 Knowledge Catalog (請參閱「[建立及使用資料剖析掃描作業](https://docs.cloud.google.com/knowledge-catalog/docs/use-data-profiling?hl=zh-tw)」)。
 
 ## 事前準備
 
@@ -28,7 +28,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 **啟用 API 所需的角色**
 
-您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「Service Usage 管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過擁有者角色 (`roles/owner`) 取得這項權限。否則，您可以透過 Service Usage 管理員角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
 [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=dataplex.googleapis.com&hl=zh-tw)
 
@@ -40,20 +40,20 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 如要取得建立及管理資料剖析掃描作業所需的權限，請要求管理員授予您下列 IAM 角色：
 
-* 建立、執行、更新及刪除資料剖析掃描：在包含資料掃描作業的專案中，具備 [Dataplex DataScan 編輯者](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex?hl=zh-tw#dataplex.dataScanEditor)  (`roles/dataplex.dataScanEditor`) 角色
-* 查看資料剖析掃描結果、工作和記錄：在包含資料掃描作業的專案中，具備 [Dataplex DataScan 檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex?hl=zh-tw#dataplex.dataScanViewer)  (`roles/dataplex.dataScanViewer`) 角色
-* 將資料剖析掃描結果發布至 Knowledge Catalog：`@bigquery` 項目群組的 [Dataplex Catalog 編輯者](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex?hl=zh-tw#dataplex.catalogEditor)  (`roles/dataplex.catalogEditor`)
-* 在「資料剖析」分頁中，查看 BigQuery 內已發布的資料剖析掃描結果：
-  資料表的 [BigQuery 資料檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataViewer)  (`roles/bigquery.dataViewer`)
+* 建立、執行、更新及刪除資料剖析掃描：在包含資料掃描作業的專案中，具備 [Dataplex DataScan 編輯者](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex?hl=zh-tw#dataplex.dataScanEditor) (`roles/dataplex.dataScanEditor`) 角色
+* 查看資料剖析掃描結果、工作和記錄：在包含資料掃描作業的專案中，具備 [Dataplex DataScan 檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex?hl=zh-tw#dataplex.dataScanViewer) (`roles/dataplex.dataScanViewer`) 角色
+* 將資料剖析掃描結果發布至 Knowledge Catalog：`@bigquery` 項目群組的 [Dataplex Catalog 編輯者](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex?hl=zh-tw#dataplex.catalogEditor) (`roles/dataplex.catalogEditor`)
+* 在「資料剖析檔」分頁中，查看 BigQuery 內已發布的資料剖析掃描結果：資料表的 [BigQuery 資料檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataViewer) (`roles/bigquery.dataViewer`)
 * 執行資料剖析掃描：
-  + 在執行掃描作業的專案 (所有資料表類型) 具備 [BigQuery 工作使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.jobUser)  (`roles/bigquery.jobUser`) 角色
-  + 對要掃描的 BigQuery 資料表，具備 [BigQuery 資料檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataViewer)  (`roles/bigquery.dataViewer`) 角色
+  + 在執行掃描作業的專案中，具備 [BigQuery 工作使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.jobUser) (`roles/bigquery.jobUser`) 角色 (所有資料表類型)
+  + 對要掃描的 BigQuery 資料表，具備 [BigQuery 資料檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataViewer) (`roles/bigquery.dataViewer`) 角色
 * 對使用 Cloud Storage 資料的 BigQuery 外部資料表執行資料剖析掃描：
-  + Cloud Storage bucket (Cloud Storage、Apache Hive 目錄端點和 Apache Iceberg REST 目錄端點) 的 [Storage 物件檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/storage?hl=zh-tw#storage.objectViewer)  (`roles/storage.objectViewer`)
-  + Cloud Storage bucket 的 [Storage 舊版 bucket 讀取者](https://docs.cloud.google.com/iam/docs/roles-permissions/storage?hl=zh-tw#storage.legacyBucketReader)  (`roles/storage.legacyBucketReader`)
-* 對 Google Cloud Lakehouse 管理的 Apache Iceberg、Apache Hive 和 SAP BDC Delta Lake 資料表執行資料剖析掃描：
-  對要掃描的資料表具備 [BigLake 檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake?hl=zh-tw#biglake.viewer)  (`roles/biglake.viewer`) 角色
-* 將資料剖析掃描結果匯出至 BigQuery 資料表：資料表的 [BigQuery 資料編輯者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataEditor)  (`roles/bigquery.dataEditor`)
+  + Cloud Storage bucket (Cloud Storage、Apache Hive 目錄端點和 Apache Iceberg REST 目錄端點) 的 [Storage 物件檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/storage?hl=zh-tw#storage.objectViewer) (`roles/storage.objectViewer`)
+  + Cloud Storage bucket 的[儲存空間舊版 bucket 讀取者](https://docs.cloud.google.com/iam/docs/roles-permissions/storage?hl=zh-tw#storage.legacyBucketReader) (`roles/storage.legacyBucketReader`)
+* 對 Google Cloud Lakehouse 代管的 Apache Iceberg、Apache Hive 和 SAP BDC Delta Lake 資料表執行資料剖析掃描：
+  [BigLake 檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake?hl=zh-tw#biglake.viewer) (`roles/biglake.viewer`)
+  (針對要掃描的資料表)
+* 將資料剖析掃描結果匯出至 BigQuery 資料表：資料表的 [BigQuery 資料編輯者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataEditor) (`roles/bigquery.dataEditor`)
 
 如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
@@ -89,14 +89,13 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 * 將資料剖析掃描結果發布至 Knowledge Catalog：
   + 項目群組上的 `dataplex.entryGroups.useDataProfileAspect`
   + `bigquery.tables.update`
-    在資料表
-  + `dataplex.entries.update`
-    (進入時)
-* 在 BigQuery 或 Knowledge Catalog 查看資料表的已發布資料剖析結果：
+    (在表格中)
+  + `dataplex.entries.update` (進入時)
+* 在 BigQuery 或 Knowledge Catalog 中，查看資料表的已發布資料剖析結果：
   + `bigquery.tables.get`
-    在資料表
+    (在表格中)
   + `bigquery.tables.getData`
-    在資料表
+    (在表格中)
 
 您或許還可透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)取得這些權限。
 
@@ -104,25 +103,26 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 無論您選取哪種[執行身分](https://docs.cloud.google.com/knowledge-catalog/docs/data-profiling-overview?hl=zh-tw#execution_identity) (預設 Knowledge Catalog 服務代理、自訂服務帳戶或使用者憑證)，該身分都必須具備下列角色和權限，才能在後端執行資料剖析掃描工作及匯出結果。
 
-**注意：** 如要掃描以 CMEK 加密的 BigQuery 資源，您也必須將 `roles/cloudkms.cryptoKeyEncrypterDecrypter` 角色授予相關服務代理。詳情請參閱「[DataScans CMEK 權限](https://docs.cloud.google.com/knowledge-catalog/docs/cmek?hl=zh-tw#datascans-cmek-permissions)」。
+**注意：**如要掃描以 CMEK 加密的 BigQuery 資源，您也必須將 `roles/cloudkms.cryptoKeyEncrypterDecrypter` 角色授予相關服務代理。詳情請參閱「[DataScans CMEK 權限](https://docs.cloud.google.com/knowledge-catalog/docs/cmek?hl=zh-tw#datascans-cmek-permissions)」。
 
 為確保執行身分具備必要權限，可執行資料剖析掃描作業及匯出結果，請要求管理員將下列 IAM 角色授予執行身分：
 
 **重要事項：**請務必將這些角色授予執行身分，*而非*您的使用者帳戶。如果未將角色授予正確的主體，可能會發生權限錯誤。
 
 * 執行資料剖析掃描：
-  + 在執行掃描作業的專案 (所有資料表類型) 具備 [BigQuery 工作使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.jobUser)  (`roles/bigquery.jobUser`) 角色
-  + 對要掃描的 BigQuery 資料表，具備 [BigQuery 資料檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataViewer)  (`roles/bigquery.dataViewer`) 角色
+  + 在執行掃描作業的專案中，具備 [BigQuery 工作使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.jobUser) (`roles/bigquery.jobUser`) 角色 (所有資料表類型)
+  + 對要掃描的 BigQuery 資料表，具備 [BigQuery 資料檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataViewer) (`roles/bigquery.dataViewer`) 角色
 * 對使用 Cloud Storage 資料的 BigQuery 外部資料表執行資料剖析掃描：
-  + Cloud Storage bucket 的 [Storage 物件檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/storage?hl=zh-tw#storage.objectViewer)  (`roles/storage.objectViewer`)
-  + Cloud Storage bucket 的[儲存空間舊版 bucket 讀取者](https://docs.cloud.google.com/iam/docs/roles-permissions/storage?hl=zh-tw#storage.legacyBucketReader)  (`roles/storage.legacyBucketReader`)
-* 對 Google Cloud Lakehouse 管理的 Apache Iceberg、Apache Hive 和 SAP BDC Delta Lake 資料表執行資料剖析掃描：
-  對要掃描的資料表具備 [BigLake 檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake?hl=zh-tw#biglake.viewer)  (`roles/biglake.viewer`) 角色
-* 將資料剖析掃描結果匯出至 BigQuery 資料表：資料表的 [BigQuery 資料編輯者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataEditor)  (`roles/bigquery.dataEditor`)
+  + Cloud Storage bucket 的 [Storage 物件檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/storage?hl=zh-tw#storage.objectViewer) (`roles/storage.objectViewer`)
+  + Cloud Storage bucket 的[儲存空間舊版 bucket 讀取者](https://docs.cloud.google.com/iam/docs/roles-permissions/storage?hl=zh-tw#storage.legacyBucketReader) (`roles/storage.legacyBucketReader`)
+* 對 Google Cloud Lakehouse 代管的 Apache Iceberg、Apache Hive 和 SAP BDC Delta Lake 資料表執行資料剖析掃描：
+  [BigLake 檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake?hl=zh-tw#biglake.viewer) (`roles/biglake.viewer`)
+  (針對要掃描的資料表)
+* 將資料剖析掃描結果匯出至 BigQuery 資料表：資料表的 [BigQuery 資料編輯者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataEditor) (`roles/bigquery.dataEditor`)
 
 如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
-這些預先定義的角色具備執行資料剖析掃描作業和匯出結果所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
+這些預先定義的角色具備執行資料剖析掃描作業及匯出結果所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
 #### 所需權限
 
@@ -131,29 +131,29 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 * 對 BigQuery 資料執行資料剖析掃描：
   + 專案的 `bigquery.jobs.create`
   + `bigquery.tables.get`
-    在資料表
+    (在表格中)
   + `bigquery.tables.getData`
-    在資料表
+    (在表格中)
 * 對使用 Cloud Storage 資料的 BigQuery 外部資料表執行資料剖析掃描：
   + `storage.buckets.get`
     (位於值區)
   + `storage.objects.get`
-    (物件)
+    物件
 * 將資料剖析掃描結果匯出至 BigQuery 資料表：
   + `bigquery.tables.create`
     資料集
   + `bigquery.tables.updateData`
-    在資料表
+    (在表格中)
 
 管理員或許也能透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)，將這些權限授予執行身分。
 
 如果資料表使用 BigQuery [資料列層級安全性](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro?hl=zh-tw)，Knowledge Catalog 只能掃描 Knowledge Catalog 服務帳戶可查看的資料列。如要讓 Knowledge Catalog 掃描所有資料列，請將其服務帳戶新增至述詞為 `TRUE` 的資料列篩選器。
 
-如果資料表使用 BigQuery [資料欄層級安全防護機制](https://docs.cloud.google.com/bigquery/docs/column-level-security?hl=zh-tw)，Knowledge Catalog 必須具備存取權，才能掃描受保護的資料欄。如要授予存取權，請將資料表使用的所有政策標記，授予 Knowledge Catalog 服務帳戶「Data Catalog 精細讀取者」 (`roles/datacatalog.fineGrainedReader`) 角色。建立或更新資料掃描作業的使用者，也需要受保護資料欄的權限。
+如果資料表使用 BigQuery [資料欄層級安全防護機制](https://docs.cloud.google.com/bigquery/docs/column-level-security?hl=zh-tw)，Knowledge Catalog 必須具備存取權，才能掃描受保護的資料欄。如要授予存取權，請將資料表使用的所有政策標記，授予 Knowledge Catalog 服務帳戶「Data Catalog 精細讀取者」(`roles/datacatalog.fineGrainedReader`) 角色。建立或更新資料掃描作業的使用者，也需要受保護資料欄的權限。
 
 ### 將角色授予 Knowledge Catalog 服務帳戶
 
-為執行資料剖析掃描，Knowledge Catalog 會使用服務帳戶，該帳戶必須具備執行 BigQuery 工作和讀取 BigQuery 資料表資料的權限。如要授予必要角色，請按照下列步驟操作：
+Knowledge Catalog 會使用服務帳戶執行資料剖析掃描作業，該帳戶必須具備執行 BigQuery 工作和讀取 BigQuery 資料表資料的權限。如要授予必要角色，請按照下列步驟操作：
 
 1. 取得 Knowledge Catalog 服務帳戶的電子郵件地址。如果您先前未在這項專案中建立資料剖析或資料品質掃描，請執行下列 `gcloud` 指令，產生服務身分：
 
@@ -161,11 +161,9 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
    gcloud beta services identity create --service=dataplex.googleapis.com
    ```
 
-   這個指令會傳回服務帳戶電子郵件地址，格式如下：service-PROJECT\_ID@gcp-sa-dataplex.iam.gserviceaccount.com。
+   指令會傳回服務帳戶電子郵件，格式如下：service-PROJECT\_ID@gcp-sa-dataplex.iam.gserviceaccount.com。
 
-   如果服務帳戶已存在，您可以在
-   Google Cloud 控制台的「[**IAM**
-   」頁面上](https://console.cloud.google.com/iam-admin/iam?hl=zh-tw)，查看名稱為「**Dataplex**」的主體，找出該帳戶的電子郵件地址。
+   如果服務帳戶已存在，請在Google Cloud 控制台的「[IAM](https://console.cloud.google.com/iam-admin/iam?hl=zh-tw)」頁面中，查看名稱為「Dataplex」的主體，即可找到該帳戶的電子郵件地址。
 2. 將專案的 **BigQuery 工作使用者** (`roles/bigquery.jobUser`) 角色授予服務帳戶。這個角色可讓服務帳戶執行掃描的 BigQuery 工作。
 
    ```
@@ -188,7 +186,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
    更改下列內容：
 
-   * `DATASET_ID`：資料表所在資料集的 ID。
+   * `DATASET_ID`：資料表的資料集 ID。
    * `TABLE_ID`：要剖析的資料表 ID。
    * `service-PROJECT_NUMBER@gcp-sa-dataplex.iam.gserviceaccount.com`：Knowledge Catalog 服務帳戶的電子郵件地址。
 
@@ -196,11 +194,11 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ### 控制台
 
-1. 在 Google Cloud 控制台的 BigQuery「Metadata curation」(中繼資料管理) 頁面，前往「Data profiling & quality」(資料剖析與品質) 分頁。
+1. 在 Google Cloud 控制台，前往「Knowledge Catalog」的「Data profiling & quality」(資料剖析與品質) 頁面。
 
-   [前往「Data profiling & quality」(資料剖析與品質) 頁面](https://console.cloud.google.com/bigquery/governance/metadata-curation/data-profiling-and-quality?hl=zh-tw)
-2. 點按「建立資料剖析掃描」。
-3. (選用) 輸入**顯示名稱**。
+   [前往「Data profiling & quality」(資料剖析與品質) 頁面](https://console.cloud.google.com/dataplex/govern/data-profiling-and-quality?hl=zh-tw)
+2. 點按「Create data profile scan」(建立資料剖析掃描)。
+3. 選用：輸入**顯示名稱**。
 4. 輸入 ID。請參閱[資源命名慣例](https://docs.cloud.google.com/compute/docs/naming-resources?hl=zh-tw#resource-name-format)。
 5. 選用：輸入**說明**。
 6. 在「Table」(資料表) 欄位中，按一下「Browse」(瀏覽)。選擇要掃描的資料表，然後按一下「Select」(選取)。僅支援標準 BigQuery 資料表，以及由Google Cloud Lakehouse 管理的 Apache Iceberg、Apache Hive 和 SAP BDC Delta Lake 資料表。
@@ -212,7 +210,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
    * **標準**：使用可自訂的掃描設定剖析資料。此為預設模式。
    * **輕量**：透過低延遲、低精確度的掃描，快速提供洞察資訊。
-8. 如果選擇「Standard」模式，請設定下列選項。如果選取「Lightweight」模式，就不會顯示這些選項。
+8. 如果選擇「Standard」(標準) 模式，請設定下列選項。如果選取「Lightweight」模式，就不會顯示這些選項。
 
    1. 在「Scope」(範圍) 欄位中，選擇「Incremental」(增量) 或「Entire data」(完整資料)。
 
@@ -224,38 +222,38 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
         篩選器可以是多個資料欄的 SQL 條件組合。例如：`col1 >= 0 AND col2 < 10`。
       * 如要依資料欄篩選，請勾選「篩選資料欄」核取方塊。
       * 如要在設定檔掃描中納入資料欄，請在「Include columns」(納入資料欄) 欄位中，按一下「Browse」(瀏覽)。選取要納入的資料欄，然後按一下「Select」(選取)。
-      * 如要從設定檔掃描中排除資料欄，請在「Exclude columns」(排除資料欄) 欄位中，按一下「Browse」(瀏覽)。選取要排除的資料欄，然後按一下「Select」(選取)。**注意：** 您可以使用「包含資料欄」、「排除資料欄」，或兩者皆用。如果同時使用這兩個欄位，資料剖析掃描作業會先根據您在「Include columns」(納入資料欄) 欄位中輸入的內容選取資料欄，然後根據您在「Exclude columns」(排除資料欄) 欄位中輸入的內容排除資料欄。
+      * 如要從設定檔掃描作業中排除資料欄，請在「Exclude columns」(排除資料欄) 欄位中，按一下「Browse」(瀏覽)。選取要排除的資料欄，然後按一下「Select」(選取)。**注意：**您可以使用「包含資料欄」、「排除資料欄」，或兩者皆用。如果同時使用這兩個欄位，資料剖析掃描作業會先根據您在「Include columns」(納入資料欄) 欄位中輸入的內容選取資料欄，然後根據您在「Exclude columns」(排除資料欄) 欄位中輸入的內容排除資料欄。
    3. 如要對資料剖析掃描套用取樣，請在「Sampling size」(取樣大小) 清單中選取取樣百分比。請選擇介於 0.0% 至 100.0% 之間的百分比值，最多可到小數點後 3 位。
 
-      * 如果資料集較大，請選擇較低的取樣百分比。舉例來說，如果資料表大小為 1 PB，您輸入的值介於 0.1% 至 1.0% 之間，資料剖析作業會取樣 1 至 10 TB 的資料。
+      * 如果資料集較大，請選擇較低的取樣百分比。舉例來說，如果資料表大小為 1 PB，您輸入的值介於 0.1% 至 1.0% 之間，資料剖析作業就會取樣 1 至 10 TB 的資料。
       * 樣本資料中至少要有 100 筆記錄，才能傳回結果。
-      * 如果是遞增資料掃描，資料剖析掃描會對最新增量套用取樣。
+      * 如果是增量資料掃描，資料剖析掃描會對最新增量資料進行取樣。
 9. 選用：在Google Cloud 控制台的 BigQuery 和 Knowledge Catalog 頁面中，發布來源資料表的資料剖析掃描結果。勾選「Publish results to Knowledge Catalog」(將結果發布至 Knowledge Catalog) 核取方塊。
 
-   您可以在來源資料表的 BigQuery 和 Knowledge Catalog 頁面中，透過「Data profile」(資料剖析) 分頁查看最新的掃描結果。如要讓使用者存取已發布的掃描結果，請參閱本文的「[授予資料剖析掃描結果的存取權](#share-results)」一節。
+   您可以在來源資料表的 BigQuery 和 Knowledge Catalog 頁面中，透過「資料剖析」分頁查看最新的掃描結果。如要讓使用者存取已發布的掃描結果，請參閱本文的「[授予資料剖析掃描結果的存取權](#share-results)」一節。
 
    在下列情況下，可能無法使用發布選項：
 
    * 您沒有資料表的必要權限。
    * 已將另一項資料剖析掃描設為發布結果。
-10. 在「Schedule」(時間表) 部分，選擇下列其中一個選項：
+10. 在「Schedule」(排程) 部分，選擇下列其中一個選項：
 
     * **重複**：按照排程執行資料剖析掃描，頻率可設為每小時、每天、每週、每月或自訂。指定掃描作業的執行頻率和時間。如果選擇自訂，請使用 [cron](https://en.wikipedia.org/wiki/Cron) 格式指定排程。
     * **依需求**：依需求執行資料剖析掃描。
-    * **單次執行**：立即執行資料剖析掃描作業一次，並在自動刪除時間過後移除掃描作業。這項功能為[預先發布版](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
+    * **一次性執行**：立即執行資料剖析掃描作業一次，並在自動刪除時間過後移除掃描作業。這項功能為[預先發布版](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
 
       + **設定掃描後結果自動刪除**：自動刪除時間定義資料剖析掃描執行後，保持有效的時間長度。如果未指定自動刪除時間，資料剖析掃描作業會在 24 小時後自動移除。自動刪除時間可介於 0 秒 (立即刪除) 到 365 天之間。
 11. 按一下「繼續」。
-12. 選用：將掃描結果匯出至 BigQuery 標準資料表。在「Export scan results to BigQuery table」(將掃描結果匯出至 BigQuery 資料表) 區段中，執行下列操作：
+12. 選用：將掃描結果匯出至 BigQuery 標準資料表。在「Export scan results to BigQuery table」(將掃描結果匯出至 BigQuery 資料表) 專區中，執行下列操作：
 
-    1. 在「選取 BigQuery 資料集」欄位中，按一下「瀏覽」。選取要儲存資料剖析掃描結果的 BigQuery 資料集。
+    1. 在「選取 BigQuery 資料集」欄位中，點選「瀏覽」。選取要儲存資料剖析掃描結果的 BigQuery 資料集。
     2. 在「BigQuery table」(BigQuery 資料表) 欄位中，指定要儲存資料剖析掃描結果的資料表。如果使用現有資料表，請確認該資料表與[匯出資料表結構定義](https://docs.cloud.google.com/knowledge-catalog/docs/use-data-profiling?hl=zh-tw#table-schema)相容。如果指定的資料表不存在，Knowledge Catalog 會為您建立。
 
-       **注意：** 您可以將多項資料剖析掃描作業的結果，儲存至同一個結果資料表。
+       **注意：**您可以將同一個結果資料表用於多項資料剖析掃描作業。
 13. 選用：新增標籤。標籤是鍵/值組合，可用來將相關物件分組，或與其他 Google Cloud 資源組合。
 14. 如要建立掃描作業，請按一下「Create」(建立)。
 
-    如果將排程設為「依需求」，也可以點選「執行掃描」，立即執行掃描。
+    如果將排程設為「隨選」，也可以點選「執行掃描」，立即執行掃描。
 
 ### gcloud
 
@@ -269,7 +267,7 @@ gcloud dataplex datascans create data-profile DATASCAN \
 --data-source-entity=DATA_SOURCE_ENTITY
 ```
 
-如果來源資料並非在 Knowledge Catalog 湖泊內管理，請加入 `--data-source-resource` 旗標：
+如果來源資料並非在 Knowledge Catalog 湖泊中管理，請加入 `--data-source-resource` 旗標：
 
 ```
 gcloud dataplex datascans create data-profile DATASCAN \
@@ -279,18 +277,18 @@ gcloud dataplex datascans create data-profile DATASCAN \
 
 請替換下列變數：
 
-* `DATASCAN`：資料剖析掃描作業的名稱。
+* `DATASCAN`：資料剖析掃描作業的 ID。
 * `LOCATION`：要建立資料剖析掃描作業的 Google Cloud 區域。
 * `DATA_SOURCE_ENTITY`：Knowledge Catalog 實體，包含資料剖析掃描作業的資料。例如：`projects/test-project/locations/test-location/lakes/test-lake/zones/test-zone/entities/test-entity`。
-* `DATA_SOURCE_RESOURCE`：資源名稱，內含資料剖析掃描作業的資料。例如：`//bigquery.googleapis.com/projects/test-project/datasets/test-dataset/tables/test-table`。
+* `DATA_SOURCE_RESOURCE`：資源名稱，包含資料剖析掃描的資料。例如：`//bigquery.googleapis.com/projects/test-project/datasets/test-dataset/tables/test-table`。
 
 ### C#
 
 ### C#
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/knowledge-catalog/docs/reference/libraries?hl=zh-tw)」中的 C# 設定操作說明進行操作。詳情請參閱 [BigQuery C# API 參考文件](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.Dataplex.V1/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 Knowledge Catalog 快速入門導覽課程](https://docs.cloud.google.com/knowledge-catalog/docs/reference/libraries?hl=zh-tw)」中的 C# 設定說明操作。詳情請參閱 [Knowledge Catalog C# API 參考文件](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.Dataplex.V1/latest?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[為本機開發環境設定驗證機制](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
+如要向 Knowledge Catalog 進行驗證，請設定應用程式預設憑證。詳情請參閱「[為本機開發環境設定驗證機制](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
 
 ```
 using Google.Api.Gax.ResourceNames;
@@ -345,9 +343,9 @@ public sealed partial class GeneratedDataScanServiceClientSnippets
 
 ### Go
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/knowledge-catalog/docs/reference/libraries?hl=zh-tw)」中的 Go 設定操作說明進行操作。詳情請參閱 [BigQuery Go API 參考文件](https://pkg.go.dev/cloud.google.com/go/dataplex)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 Knowledge Catalog 快速入門導覽課程](https://docs.cloud.google.com/knowledge-catalog/docs/reference/libraries?hl=zh-tw)」中的 Go 設定說明操作。詳情請參閱 [Knowledge Catalog Go API 參考文件](https://pkg.go.dev/cloud.google.com/go/dataplex)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[為本機開發環境設定驗證機制](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
+如要向 Knowledge Catalog 進行驗證，請設定應用程式預設憑證。詳情請參閱「[為本機開發環境設定驗證機制](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
 
 ```
 //go:build examples
@@ -396,9 +394,9 @@ func main() {
 
 ### Java
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/knowledge-catalog/docs/reference/libraries?hl=zh-tw)」中的 Java 設定操作說明進行操作。詳情請參閱 [BigQuery Java API 參考文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-dataplex/latest/overview?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 Knowledge Catalog 快速入門導覽課程](https://docs.cloud.google.com/knowledge-catalog/docs/reference/libraries?hl=zh-tw)」中的 Java 設定說明操作。詳情請參閱 [Knowledge Catalog Java API 參考文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-dataplex/latest/overview?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[為本機開發環境設定驗證機制](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
+如要向 Knowledge Catalog 進行驗證，請設定應用程式預設憑證。詳情請參閱「[為本機開發環境設定驗證機制](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
 
 ```
 import com.google.cloud.dataplex.v1.CreateDataScanRequest;
@@ -436,9 +434,9 @@ public class SyncCreateDataScan {
 
 ### Python
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/knowledge-catalog/docs/reference/libraries?hl=zh-tw)」中的 Python 設定操作說明進行操作。詳情請參閱 [BigQuery Python API 參考文件](https://docs.cloud.google.com/python/docs/reference/dataplex/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 Knowledge Catalog 快速入門導覽課程](https://docs.cloud.google.com/knowledge-catalog/docs/reference/libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [Knowledge Catalog Python API 參考文件](https://docs.cloud.google.com/python/docs/reference/dataplex/latest?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[為本機開發環境設定驗證機制](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
+如要向 Knowledge Catalog 進行驗證，請設定應用程式預設憑證。詳情請參閱「[為本機開發環境設定驗證機制](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
 
 ```
 # Copyright 2026 Google LLC
@@ -512,9 +510,9 @@ def create_data_profile_scan_global(
 
 ### Ruby
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/knowledge-catalog/docs/reference/libraries?hl=zh-tw)」中的 Ruby 設定操作說明進行操作。詳情請參閱 [BigQuery Ruby API 參考文件](https://docs.cloud.google.com/ruby/docs/reference/google-cloud-dataplex/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 Knowledge Catalog 快速入門導覽課程](https://docs.cloud.google.com/knowledge-catalog/docs/reference/libraries?hl=zh-tw)」中的 Ruby 設定說明操作。詳情請參閱 [Knowledge Catalog Ruby API 參考文件](https://docs.cloud.google.com/ruby/docs/reference/google-cloud-dataplex/latest?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[為本機開發環境設定驗證機制](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
+如要向 Knowledge Catalog 進行驗證，請設定應用程式預設憑證。詳情請參閱「[為本機開發環境設定驗證機制](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
 
 ```
 require "google/cloud/dataplex/v1"
@@ -557,69 +555,69 @@ end
 
 如要建立資料剖析掃描，請使用 [`dataScans.create` 方法](https://docs.cloud.google.com/knowledge-catalog/docs/reference/rest/v1/projects.locations.dataScans/create?hl=zh-tw)。
 
-**注意：** 如果 BigQuery 資料表的 `Require
+**注意：**如果 BigQuery 資料表的 `Require
 partition filter` 設定設為 `true`，請使用資料表的分區欄，做為資料剖析掃描作業的資料列篩選器或時間戳記欄。
 
 ## 建立多項資料剖析掃描作業
 
 您可以使用 Google Cloud 控制台，同時為 BigQuery 資料集中的多個資料表設定資料剖析掃描。
 
-1. 在 Google Cloud 控制台的 BigQuery「Metadata curation」(中繼資料管理) 頁面，前往「Data profiling & quality」(資料剖析與品質) 分頁。
+1. 在 Google Cloud 控制台，前往「Knowledge Catalog」的「Data profiling & quality」(資料剖析與品質) 頁面。
 
-   [前往「Data profiling & quality」(資料剖析與品質) 頁面](https://console.cloud.google.com/bigquery/governance/metadata-curation/data-profiling-and-quality?hl=zh-tw)
-2. 點按「建立資料剖析掃描」。
-3. 選取「Multiple data profile scans」(多項資料剖析掃描作業) 選項。
-4. 輸入**ID 前置字串**。Knowledge Catalog 會使用提供的前置字串和不重複的後置字串，自動產生掃描 ID。
+   [前往「Data profiling & quality」(資料剖析與品質) 頁面](https://console.cloud.google.com/dataplex/govern/data-profiling-and-quality?hl=zh-tw)
+2. 點按「Create data profile scan」(建立資料剖析掃描)。
+3. 選取「多項資料剖析掃描作業」選項。
+4. 輸入 **ID 前置字串**。Knowledge Catalog 會使用提供的前置字串和不重複的後置字串，自動產生掃描 ID。
 5. 輸入所有資料剖析掃描作業的**說明**。
 6. 在「Dataset」(資料集) 欄位中，按一下「Browse」(瀏覽)。選取要從中挑選資料表的資料集。按一下「選取」。
 7. 如果資料集為多區域，請選取要建立資料剖析掃描作業的「Region」(區域)。
 8. 在「模式」部分，選擇下列任一選項：
 
    * **標準**：使用可自訂的掃描設定剖析資料。此為預設模式。
-   * **輕量**：透過低延遲、低精確度的掃描，快速提供洞察資料。這項功能為[預先發布版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages)。
-9. 如果選擇「Standard」(標準) 模式，請為掃描作業進行下列設定。如果選取「輕量」模式，就不會顯示這些設定。
+   * **輕量**：以低延遲、低精確度的掃描，快速提供洞察資料。這項功能為[預先發布版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages)。
+9. 如果選擇「Standard」(標準) 模式，請為掃描作業進行下列設定。如果選取「精簡」模式，系統就不會顯示這些設定。
 
    1. 在「Scope」(範圍) 欄位中，選擇「Incremental」(增量) 或「Entire data」(完整資料)。
 
-      如果選擇「Incremental」(增量) 資料，則只能選取依 `DATE` 或 `TIMESTAMP` 類型資料欄分區的資料表。
+      如果選擇「Incremental」(漸進式) 資料，則只能選取依 `DATE` 或 `TIMESTAMP` 類型資料欄分區的資料表。
    2. 如要對資料剖析掃描套用取樣，請在「Sampling size」(取樣大小) 清單中選取取樣百分比。
 
       請選擇介於 0.0% 至 100.0% 之間的百分比值，最多可到小數點後 3 位。
 10. 選用：在Google Cloud 控制台的 BigQuery 和 Knowledge Catalog 頁面中，發布來源資料表的資料剖析掃描結果。勾選「Publish results to Knowledge Catalog」(將結果發布至 Knowledge Catalog) 核取方塊。
 
-    您可以在來源資料表的 BigQuery 和 Knowledge Catalog 頁面中，透過「Data profile」(資料剖析) 分頁查看最新的掃描結果。如要允許使用者存取已發布的掃描結果，請參閱本文的「[授予資料剖析掃描結果的存取權](#share-results)」一節。
+    您可以在來源資料表的 BigQuery 和 Knowledge Catalog 頁面中，透過「資料剖析」分頁查看最新的掃描結果。如要允許使用者存取已發布的掃描結果，請參閱本文的「[授予資料剖析掃描結果的存取權](#share-results)」一節。
 
-    **注意：** 您必須選擇沒有任何現有掃描作業發布結果的資料表。
-11. 在「Schedule」(時間表) 部分，選擇下列其中一個選項：
+    **注意：**您必須選擇尚未發布掃描結果的資料表。
+11. 在「Schedule」(排程) 部分，選擇下列其中一個選項：
 
-    * **重複**：按照排程執行資料剖析掃描，頻率可設為每小時、每天、每週、每月或自訂。指定掃描作業的執行頻率和時間。如果選擇自訂，請使用 [cron](https://en.wikipedia.org/wiki/Cron) 格式指定排程。
+    * **重複**：排定資料剖析掃描作業的執行頻率，包括每小時、每天、每週、每月或自訂。指定掃描作業的執行頻率和時間。如果選擇自訂，請使用 [cron](https://en.wikipedia.org/wiki/Cron) 格式指定排程。
     * **依需求**：依需求執行資料剖析掃描。
 
-      + **執行一次**：立即執行資料剖析掃描作業一次，並在自動刪除時間後移除掃描作業。這項功能為[預先發布版](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
+      + **單次執行**：立即執行資料剖析掃描作業一次，並在自動刪除時間後移除掃描作業。這項功能為[預先發布版](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
 
         - **設定掃描後結果自動刪除**：自動刪除時間定義資料剖析掃描執行後，保持有效的時間長度。如果未指定自動刪除時間，資料剖析掃描作業會在 24 小時後自動移除。自動刪除時間可介於 0 秒 (立即刪除) 到 365 天。
 12. 按一下「繼續」。
 13. 在「Choose tables」(選擇資料表) 欄位中，按一下「Browse」(瀏覽)。選擇一或多個要掃描的資料表，然後按一下「Select」(選取)。
 14. 按一下「繼續」。
-15. 選用：將掃描結果匯出至 BigQuery 標準資料表。在「Export scan results to BigQuery table」(將掃描結果匯出至 BigQuery 資料表) 區段中，執行下列操作：
+15. 選用：將掃描結果匯出至 BigQuery 標準資料表。在「Export scan results to BigQuery table」(將掃描結果匯出至 BigQuery 資料表) 專區中，執行下列操作：
 
-    1. 在「選取 BigQuery 資料集」欄位中，按一下「瀏覽」。選取要儲存資料剖析掃描結果的 BigQuery 資料集。
+    1. 在「選取 BigQuery 資料集」欄位中，點選「瀏覽」。選取要儲存資料剖析掃描結果的 BigQuery 資料集。
     2. 在「BigQuery table」(BigQuery 資料表) 欄位中，指定要儲存資料剖析掃描結果的資料表。如果使用現有資料表，請確認該資料表與[匯出資料表結構定義](https://docs.cloud.google.com/knowledge-catalog/docs/use-data-profiling?hl=zh-tw#table-schema)相容。如果指定的資料表不存在，Knowledge Catalog 會為您建立。
 
-       Knowledge Catalog 會針對所有資料剖析掃描作業使用相同的結果資料表。
+       Knowledge Catalog 會對所有資料剖析掃描作業使用相同的結果資料表。
 16. 選用：新增標籤。標籤是鍵/值組合，可用來將相關物件分組，或與其他 Google Cloud 資源組合。
 17. 如要建立掃描作業，請按一下「Create」(建立)。
 
-    如果將排程設為「隨選」，也可以立即執行掃描，只要按一下「執行掃描」即可。
+    如果將排程設為「隨選」，也可以立即點選「執行掃描」來執行掃描。
 
 ## 執行資料剖析掃描
 
 ### 控制台
 
-1. 在 Google Cloud 控制台的 BigQuery「Metadata curation」(中繼資料管理) 頁面，前往「Data profiling & quality」(資料剖析與品質) 分頁。
+1. 在 Google Cloud 控制台，前往「Knowledge Catalog」的「Data profiling & quality」(資料剖析與品質) 頁面。
 
-   [前往「Data profiling & quality」(資料剖析與品質) 頁面](https://console.cloud.google.com/bigquery/governance/metadata-curation/data-profiling-and-quality?hl=zh-tw)
-2. 點選要執行的資料剖析掃描作業。
+   [前往「Data profiling & quality」(資料剖析與品質) 頁面](https://console.cloud.google.com/dataplex/govern/data-profiling-and-quality?hl=zh-tw)
+2. 按一下要執行的資料剖析掃描。
 3. 點選「立即執行」。
 
 ### gcloud
@@ -633,16 +631,16 @@ gcloud dataplex datascans run DATASCAN \
 
 請替換下列變數：
 
-* `DATASCAN`：資料剖析掃描作業的名稱。
+* `DATASCAN`：資料剖析掃描作業的 ID。
 * `LOCATION`：建立資料剖析掃描作業的 Google Cloud 區域。
 
 ### C#
 
 ### C#
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/knowledge-catalog/docs/reference/libraries?hl=zh-tw)」中的 C# 設定操作說明進行操作。詳情請參閱 [BigQuery C# API 參考文件](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.Dataplex.V1/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 Knowledge Catalog 快速入門導覽課程](https://docs.cloud.google.com/knowledge-catalog/docs/reference/libraries?hl=zh-tw)」中的 C# 設定說明操作。詳情請參閱 [Knowledge Catalog C# API 參考文件](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.Dataplex.V1/latest?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[為本機開發環境設定驗證機制](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
+如要向 Knowledge Catalog 進行驗證，請設定應用程式預設憑證。詳情請參閱「[為本機開發環境設定驗證機制](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
 
 ```
 using Google.Cloud.Dataplex.V1;
@@ -676,9 +674,9 @@ public sealed partial class GeneratedDataScanServiceClientSnippets
 
 ### Go
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/knowledge-catalog/docs/reference/libraries?hl=zh-tw)」中的 Go 設定操作說明進行操作。詳情請參閱 [BigQuery Go API 參考文件](https://pkg.go.dev/cloud.google.com/go/dataplex)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 Knowledge Catalog 快速入門導覽課程](https://docs.cloud.google.com/knowledge-catalog/docs/reference/libraries?hl=zh-tw)」中的 Go 設定說明操作。詳情請參閱 [Knowledge Catalog Go API 參考文件](https://pkg.go.dev/cloud.google.com/go/dataplex)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[為本機開發環境設定驗證機制](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
+如要向 Knowledge Catalog 進行驗證，請設定應用程式預設憑證。詳情請參閱「[為本機開發環境設定驗證機制](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
 
 ```
 //go:build examples
@@ -722,9 +720,9 @@ func main() {
 
 ### Java
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/knowledge-catalog/docs/reference/libraries?hl=zh-tw)」中的 Java 設定操作說明進行操作。詳情請參閱 [BigQuery Java API 參考文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-dataplex/latest/overview?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 Knowledge Catalog 快速入門導覽課程](https://docs.cloud.google.com/knowledge-catalog/docs/reference/libraries?hl=zh-tw)」中的 Java 設定說明操作。詳情請參閱 [Knowledge Catalog Java API 參考文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-dataplex/latest/overview?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[為本機開發環境設定驗證機制](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
+如要向 Knowledge Catalog 進行驗證，請設定應用程式預設憑證。詳情請參閱「[為本機開發環境設定驗證機制](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
 
 ```
 import com.google.cloud.dataplex.v1.DataScanName;
@@ -759,9 +757,9 @@ public class SyncRunDataScan {
 
 ### Python
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/knowledge-catalog/docs/reference/libraries?hl=zh-tw)」中的 Python 設定操作說明進行操作。詳情請參閱 [BigQuery Python API 參考文件](https://docs.cloud.google.com/python/docs/reference/dataplex/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 Knowledge Catalog 快速入門導覽課程](https://docs.cloud.google.com/knowledge-catalog/docs/reference/libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [Knowledge Catalog Python API 參考文件](https://docs.cloud.google.com/python/docs/reference/dataplex/latest?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[為本機開發環境設定驗證機制](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
+如要向 Knowledge Catalog 進行驗證，請設定應用程式預設憑證。詳情請參閱「[為本機開發環境設定驗證機制](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
 
 ```
 # This snippet has been automatically generated and should be regarded as a
@@ -794,9 +792,9 @@ def sample_run_data_scan():
 
 ### Ruby
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/knowledge-catalog/docs/reference/libraries?hl=zh-tw)」中的 Ruby 設定操作說明進行操作。詳情請參閱 [BigQuery Ruby API 參考文件](https://docs.cloud.google.com/ruby/docs/reference/google-cloud-dataplex/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 Knowledge Catalog 快速入門導覽課程](https://docs.cloud.google.com/knowledge-catalog/docs/reference/libraries?hl=zh-tw)」中的 Ruby 設定說明操作。詳情請參閱 [Knowledge Catalog Ruby API 參考文件](https://docs.cloud.google.com/ruby/docs/reference/google-cloud-dataplex/latest?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[為本機開發環境設定驗證機制](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
+如要向 Knowledge Catalog 進行驗證，請設定應用程式預設憑證。詳情請參閱「[為本機開發環境設定驗證機制](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
 
 ```
 require "google/cloud/dataplex/v1"
@@ -862,22 +860,22 @@ with DAG(
 * `REGION`：建立資料剖析掃描作業的 Google Cloud 區域。
 * `DATASCAN_ID`：資料剖析掃描作業的 ID。
 
-**注意：** 如果資料剖析掃描作業只執行一次，就無法執行。
+**注意：**如果資料剖析掃描作業只執行一次，就無法執行。
 
 ## 查看資料剖析掃描結果
 
 ### 控制台
 
-1. 在 Google Cloud 控制台的 BigQuery「Metadata curation」(中繼資料管理) 頁面，前往「Data profiling & quality」(資料剖析與品質) 分頁。
+1. 在 Google Cloud 控制台，前往「Knowledge Catalog」的「Data profiling & quality」(資料剖析與品質) 頁面。
 
-   [前往「Data profiling & quality」(資料剖析與品質) 頁面](https://console.cloud.google.com/bigquery/governance/metadata-curation/data-profiling-and-quality?hl=zh-tw)
+   [前往「Data profiling & quality」(資料剖析與品質) 頁面](https://console.cloud.google.com/dataplex/govern/data-profiling-and-quality?hl=zh-tw)
 2. 按一下資料剖析掃描作業的名稱。
 
-   * 「Overview」(總覽) 專區會顯示最近工作的相關資訊，包括掃描執行時間、掃描的資料表記錄數量，以及工作狀態。
+   * 「Overview」(總覽) 區段會顯示最近工作的相關資訊，包括掃描執行時間、掃描的資料表記錄數量，以及工作狀態。
    * 「Data profile scan configuration」(資料剖析掃描設定) 專區會顯示掃描作業的詳細資料。
 3. 如要查看工作的詳細資訊，例如掃描的資料表欄、掃描中找到的欄統計資料，以及工作記錄，請按一下「Jobs history」(工作記錄) 分頁標籤。然後點選工作 ID。
 
-**注意：** 如果您將掃描結果匯出至 BigQuery 資料表，也可以從資料表存取掃描結果。
+**注意：**如果您將掃描結果匯出至 BigQuery 資料表，也可以從資料表存取掃描結果。
 
 ### gcloud
 
@@ -894,16 +892,17 @@ gcloud dataplex datascans jobs describe JOB \
 
 * `JOB`：資料剖析掃描工作的工作 ID。
 * `LOCATION`：建立資料剖析掃描作業的 Google Cloud 區域。
-* `DATASCAN`：工作所屬資料剖析掃描作業的名稱。
+* `DATASCAN`：
+  工作所屬資料剖析掃描作業的 ID。
 * `--view=FULL`：如要查看掃描工作結果，請指定 `FULL`。
 
 ### C#
 
 ### C#
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/knowledge-catalog/docs/reference/libraries?hl=zh-tw)」中的 C# 設定操作說明進行操作。詳情請參閱 [BigQuery C# API 參考文件](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.Dataplex.V1/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 Knowledge Catalog 快速入門導覽課程](https://docs.cloud.google.com/knowledge-catalog/docs/reference/libraries?hl=zh-tw)」中的 C# 設定說明操作。詳情請參閱 [Knowledge Catalog C# API 參考文件](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.Dataplex.V1/latest?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[為本機開發環境設定驗證機制](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
+如要向 Knowledge Catalog 進行驗證，請設定應用程式預設憑證。詳情請參閱「[為本機開發環境設定驗證機制](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
 
 ```
 using Google.Cloud.Dataplex.V1;
@@ -938,9 +937,9 @@ public sealed partial class GeneratedDataScanServiceClientSnippets
 
 ### Go
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/knowledge-catalog/docs/reference/libraries?hl=zh-tw)」中的 Go 設定操作說明進行操作。詳情請參閱 [BigQuery Go API 參考文件](https://pkg.go.dev/cloud.google.com/go/dataplex)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 Knowledge Catalog 快速入門導覽課程](https://docs.cloud.google.com/knowledge-catalog/docs/reference/libraries?hl=zh-tw)」中的 Go 設定說明操作。詳情請參閱 [Knowledge Catalog Go API 參考文件](https://pkg.go.dev/cloud.google.com/go/dataplex)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[為本機開發環境設定驗證機制](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
+如要向 Knowledge Catalog 進行驗證，請設定應用程式預設憑證。詳情請參閱「[為本機開發環境設定驗證機制](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
 
 ```
 //go:build examples
@@ -984,11 +983,12 @@ func main() {
 
 ### Java
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/knowledge-catalog/docs/reference/libraries?hl=zh-tw)」中的 Java 設定操作說明進行操作。詳情請參閱 [BigQuery Java API 參考文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-dataplex/latest/overview?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 Knowledge Catalog 快速入門導覽課程](https://docs.cloud.google.com/knowledge-catalog/docs/reference/libraries?hl=zh-tw)」中的 Java 設定說明操作。詳情請參閱 [Knowledge Catalog Java API 參考文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-dataplex/latest/overview?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[為本機開發環境設定驗證機制](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
+如要向 Knowledge Catalog 進行驗證，請設定應用程式預設憑證。詳情請參閱「[為本機開發環境設定驗證機制](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
 
 ```
 import com.google.cloud.dataplex.v1.DataScan;
-import com.google.cloud.dataplex.v1.
+import com.google.cloud.dataplex.v1.DataScanName;
+import
 ```

@@ -29,7 +29,7 @@ BigQuery 會在 Google Cloud中探索整個組織的資料，無論資料位於 
 BigQuery 提供下列資料探索功能：
 
 * **搜尋。**搜尋專案和組織中的資料和 AI 資源。在 Google Cloud 控制台的 BigQuery 中，使用[語意搜尋](https://docs.cloud.google.com/bigquery/docs/search-resources?hl=zh-tw) ([預先發布版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages)) 功能，以日常用語搜尋資源。您也可以在 Knowledge Catalog 使用[關鍵字搜尋](https://docs.cloud.google.com/knowledge-catalog/docs/search-assets?hl=zh-tw)功能尋找資源。
-* **[自動探索 Cloud Storage 資料](https://docs.cloud.google.com/bigquery/docs/automatic-discovery?hl=zh-tw)。**掃描 Cloud Storage bucket 中的資料，擷取中繼資料並編入目錄。自動探索功能會為結構化和非結構化資料建立資料表。
+* **[自動探索 Cloud Storage 資料](https://docs.cloud.google.com/knowledge-catalog/docs/cloud-storage-discovery?hl=zh-tw)。**掃描 Cloud Storage bucket 中的資料，擷取中繼資料並編入目錄。自動探索功能會為結構化和非結構化資料建立資料表。
 * **[中繼資料匯入](https://docs.cloud.google.com/knowledge-catalog/docs/managed-connectivity-overview?hl=zh-tw)。**從第三方系統大量匯入中繼資料至 Knowledge Catalog。您可以建構自訂連接器，從資料來源擷取資料，然後執行代管連線能力管道，自動調度中繼資料匯入工作流程。
 * **[中繼資料匯出](https://docs.cloud.google.com/knowledge-catalog/docs/export-metadata?hl=zh-tw)。**從 Knowledge Catalog 大規模匯出中繼資料。您可以使用 BigQuery 分析匯出的中繼資料，或將中繼資料整合至自訂應用程式或程式輔助處理工作流程。
 
@@ -118,11 +118,11 @@ BigQuery 提供下列共用功能：
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-29 (世界標準時間)。
+上次更新時間：2026-11-05 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-05 (世界標準時間)。"],[],[]]

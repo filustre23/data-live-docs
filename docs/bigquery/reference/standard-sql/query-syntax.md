@@ -290,4 +290,7 @@ FROM PlayerStats;
  +--------------------------+
  | {                        |
  |   last_name: "Adams",    |
+ |   first_name: "Noam",    |
+ |   age: 20                |
+ |  }
 ```

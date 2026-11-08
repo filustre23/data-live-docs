@@ -507,4 +507,5 @@ possible to the model.
   is an empty array.
 
 * `MODEL_PARAMS`: a JSON-formatted string literal
-  that provides par
+  that provides parameters to the model. The value must conform
+  to the

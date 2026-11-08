@@ -14,64 +14,57 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 你可以依據偏好儲存及分類內容。
 
-# 在工作階段中撰寫查詢
+# 在工作階段中編寫查詢
 
-本文說明如何在 BigQuery 工作階段中編寫查詢。
-本文適用於已大致瞭解 BigQuery [工作階段](https://docs.cloud.google.com/bigquery/docs/sessions-intro?hl=zh-tw)，且知道如何[在工作階段中執行查詢](https://docs.cloud.google.com/bigquery/docs/sessions?hl=zh-tw#run-queries)的使用者。
+在 BigQuery [工作階段](https://docs.cloud.google.com/bigquery/docs/sessions-intro?hl=zh-tw)中編寫查詢，即可在多個查詢項目中儲存及重複使用狀態。舉例來說，如果您在某個查詢項目中建立臨時資料表或變數，則可在工作階段其餘部分的後續查詢中參照該資料表或變數。
 
-工作階段會儲存狀態。工作階段中建立的狀態會保留下來，並可在整個工作階段中使用。因此，如果您在一個查詢項目中建立臨時資料表，就能在工作階段的其餘時間，於其他查詢項目中使用該臨時資料表。
-
-工作階段支援[工作階段變數](#session_variables)、[工作階段系統變數](#session_system_variables)、[多陳述式查詢](#session_scripting)和[多陳述式交易](#multi_transactions)。
-
-完成這些步驟之前，請確認您具備在工作階段中作業的必要[權限](https://docs.cloud.google.com/bigquery/docs/sessions-intro?hl=zh-tw#roles_and_permissions)。
+工作階段支援[工作階段變數](#session_variables)、[工作階段系統變數](#session_system_variables)、[多陳述式查詢](#session_scripting)和[多陳述式交易](#multi_transactions)。完成這些步驟前，請確認您瞭解如何[在工作階段中執行查詢](https://docs.cloud.google.com/bigquery/docs/sessions?hl=zh-tw#run-queries)，並具備必要的[權限](https://docs.cloud.google.com/bigquery/docs/sessions-intro?hl=zh-tw#roles_and_permissions)。
 
 ## 在工作階段中使用系統變數
 
 您可以使用下列[系統變數](https://docs.cloud.google.com/bigquery/docs/reference/system-variables?hl=zh-tw)設定或擷取工作階段層級資料：
 
-* `@@dataset_id`：目前專案中預設資料集的 ID。系統變數 `@@dataset_project_id` 和 `@@dataset_id` 可以一併設定及使用。
-* `@@dataset_project_id`：查詢中使用的資料集預設專案 ID。如果未設定這個系統變數，或將其設為 `NULL`，系統會使用查詢執行專案。系統變數 `@@dataset_project_id` 和 `@@dataset_id` 可以一併設定及使用。
-* `@@query_label`：要指派給工作階段的[工作標籤](https://docs.cloud.google.com/bigquery/docs/adding-labels?hl=zh-tw#job-label)。標籤可用於整個工作階段，而不只是工作階段中的特定查詢。
+* `@@dataset_id`：目前專案中預設資料集的 ID。系統變數 `@@dataset_project_id` 和 `@@dataset_id` 可以一起設定及使用。
+* `@@dataset_project_id`：查詢所用資料集的預設專案 ID。如果未設定這個系統變數，或設為 `NULL`，系統會使用執行查詢的專案。系統變數 `@@dataset_project_id` 和 `@@dataset_id` 可以一起設定和使用。
+* `@@query_label`：要指派給工作階段的[工作標籤](https://docs.cloud.google.com/bigquery/docs/adding-labels?hl=zh-tw#job-label)。標籤可用於整個工作階段，不限於工作階段中的特定查詢。
 * `@@session_id`：目前工作階段的 ID。
 * `@@time_zone`：受時區影響的 SQL 函式中，如未指定時區做為引數，就會使用這個預設時區。
 
-這些系統變數可在工作階段期間隨時使用，且適用於工作階段的其餘時間。您不會定義這些變數，但可以使用 [`SET`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language?hl=zh-tw#set) 陳述式指派新值。
+這些系統變數可在工作階段期間隨時使用，且在工作階段剩餘時間內都有效。您不必定義這些變數，但可以使用 [`SET`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language?hl=zh-tw#set) 陳述式為其指派新值。
 
-工作階段中[變數](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries?hl=zh-tw#variables)的大小上限為 1 MB，而工作階段中所有變數的總和上限為 10 MB。
+工作階段中[變數](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries?hl=zh-tw#variables)的大小上限為 1 MB，所有變數的大小上限為 10 MB。
 
 ## 為工作階段指派標籤
 
-您可以[將工作標籤指派給工作階段](https://docs.cloud.google.com/bigquery/docs/adding-labels?hl=zh-tw#adding-label-to-session)。
-這樣做之後，工作階段中所有後續查詢都會指派給該標籤。標籤可在工作階段期間隨時使用，且適用於剩餘工作階段。您指派的工作標籤會顯示在[稽核記錄](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs?hl=zh-tw)中。
+您可以[為工作階段指派工作標籤](https://docs.cloud.google.com/bigquery/docs/adding-labels?hl=zh-tw#adding-label-to-session)。這樣一來，工作階段中日後的所有查詢都會指派給該標籤。標籤可在工作階段期間隨時使用，且適用於工作階段的其餘部分。您指派的工作標籤會顯示在[稽核記錄](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs?hl=zh-tw)中。
 
 ## 在工作階段中使用變數
 
-您可以使用[變數](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries?hl=zh-tw#variables)建立、設定及擷取工作階段層級資料。您可以在工作階段期間隨時使用變數，且變數適用於工作階段的其餘時間。
+您可以使用[變數](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries?hl=zh-tw#variables)建立、設定及擷取工作階段層級資料。變數可在工作階段期間隨時使用，且在工作階段剩餘時間內有效。
 
 * 如要建立以工作階段為範圍的變數，請在 [`BEGIN...END`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language?hl=zh-tw#begin) 區塊外使用 [`DECLARE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language?hl=zh-tw#declare) 陳述式。
-* 如要在建立工作階段範圍變數後進行設定，請使用 [`SET`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language?hl=zh-tw#set) 陳述式。
-* 在 `BEGIN...END` 區塊中宣告的變數並非以工作階段為範圍的變數。
+* 如要在建立以工作階段為範圍的變數後設定該變數，請使用 [`SET`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language?hl=zh-tw#set) 陳述式。
+* 在 `BEGIN...END` 區塊內宣告的變數不是以工作階段為範圍的變數。
 * 以工作階段為範圍的變數可在 `BEGIN...END` 區塊內參照。
-* 您可以在 `BEGIN...END` 區塊內設定以工作階段為範圍的變數。
+* 以工作階段為範圍的變數可以在 `BEGIN...END` 區塊內設定。
 
-工作階段中變數的大小上限為 1 MB，而工作階段中所有變數的總和上限為 10 MB。
+工作階段中單一變數的大小上限為 1 MB，所有變數的大小上限為 10 MB。
 
 ## 在工作階段中使用臨時資料表
 
-您可以將中繼結果儲存至暫存資料表，臨時表會在工作階段層級顯示，因此您不需要在資料集中儲存或維護臨時表。工作階段終止後，系統會自動刪除。工作階段有效期間，系統會針對臨時資料表的儲存空間向您收費。詳情請參閱「[在多重陳述式查詢中使用暫時性資料表](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries?hl=zh-tw#temporary_tables)」。
+暫存資料表可讓您將中繼結果儲存至資料表。臨時資料表會在工作階段層級顯示，因此您不需要在資料集中儲存或維護。工作階段終止後，系統會自動刪除該磁碟。工作階段進行期間，系統會針對臨時資料表的儲存空間收費。詳情請參閱「[在多重陳述式查詢中使用臨時資料表](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries?hl=zh-tw#temporary_tables)」。
 
-## 在工作階段中使用暫時性函式
+## 在工作階段中使用臨時函式
 
-[暫時函式](https://docs.cloud.google.com/bigquery/docs/user-defined-functions?hl=zh-tw)或[暫時匯總函式](https://docs.cloud.google.com/bigquery/docs/user-defined-aggregates?hl=zh-tw#create-temp-sql-udaf)會在工作階段層級顯示，因此您不需要在資料集中儲存或維護。工作階段終止後，系統會自動刪除。
+「暫時函式」或「暫時匯總函式」在工作階段層級可見，因此您不需要在資料集中儲存或維護。工作階段終止後，系統會自動刪除該磁碟。
 
-## 在工作階段中使用多重陳述式查詢
+## 在工作階段中使用多陳述式查詢
 
-您可以在工作階段中使用 [GoogleSQL 多重陳述式查詢](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries?hl=zh-tw#write_a_multi_statement_query)。每個指令碼都可以包含臨時資料表和系統變數。指令碼可存取工作階段變數和臨時資料表。指令碼中宣告的所有頂層變數也都是工作階段變數。
+您可以在工作階段中使用 [GoogleSQL 多陳述式查詢](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries?hl=zh-tw#write_a_multi_statement_query)。指令碼可以包含臨時資料表和系統變數。工作階段變數和臨時資料表會顯示在指令碼中。指令碼中宣告的所有頂層變數也都是工作階段變數。
 
-## 在工作階段中執行多查詢多陳述式交易
+## 在工作階段中執行多查詢、多陳述式交易
 
-您可以在工作階段中，透過多個查詢執行多陳述式交易。
-例如：
+您可以在工作階段中，對多個查詢執行多陳述式交易。例如：
 
 下列查詢會啟動交易。
 
@@ -79,7 +72,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 BEGIN TRANSACTION
 ```
 
-在交易中，下列查詢會建立名為 `Flights` 的臨時資料表，然後傳回該資料表中的資料。查詢中包含兩個陳述式。
+在交易中，下列查詢會建立名為 `Flights` 的暫存資料表，然後傳回這個資料表中的資料。查詢中包含兩個陳述式
 
 ```
 CREATE TEMP TABLE Flights(total INT64)  AS SELECT * FROM UNNEST([10,23,3,14,55]) AS a;
@@ -93,7 +86,7 @@ SELECT * FROM Flights;
 COMMIT
 ```
 
-如要找出影響 `Flights` 資料表的有效交易，請按照下列步驟操作：
+您可以找出影響 `Flights` 資料表的有效交易：
 
 ```
 WITH running_transactions AS (
@@ -121,14 +114,14 @@ FROM `region-us`.INFORMATION_SCHEMA.JOBS_BY_PROJECT AS jobs, running_transaction
   AND jobs.transaction_id = running_transactions.transaction_id;
 ```
 
-如要取消進行中的交易，且您具備 `bigquery.admin` 角色，可以[發出復原陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language?hl=zh-tw#rollback_transaction)，方法是在 Cloud Shell 中使用與交易相關聯的會期 ID，或是透過 API 呼叫。[執行查詢](https://docs.cloud.google.com/bigquery/docs/sessions?hl=zh-tw#run-queries)時，如果使用與交易相關聯的工作階段 ID，結果中就會顯示該工作階段 ID。
+如要取消進行中的交易，且您具備 `bigquery.admin` 角色，則可使用 Cloud Shell 中與交易相關聯的工作階段 ID，或透過 API 呼叫[發出復原陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language?hl=zh-tw#rollback_transaction)。[執行查詢](https://docs.cloud.google.com/bigquery/docs/sessions?hl=zh-tw#run-queries)時，請使用與交易相關聯的工作階段 ID，結果中就會顯示工作階段 ID。
 
 ## 範例工作階段
 
 以下是 Google Cloud 控制台中的工作階段工作流程範例：
 
-1. 在 Google Cloud 控制台，開啟新的編輯器分頁，然後[建立工作階段](https://docs.cloud.google.com/bigquery/docs/sessions?hl=zh-tw#create-session)。
-2. 在編輯器分頁中，加入下列查詢：
+1. 在 Google Cloud 控制台開啟新的編輯器分頁，然後[建立工作階段](https://docs.cloud.google.com/bigquery/docs/sessions?hl=zh-tw#create-session)。
+2. 在編輯器分頁中，新增下列查詢：
 
    ```
    CREATE TEMP TABLE Flights(total INT64)  AS SELECT * FROM UNNEST([10,23,3,14,55]) AS a;
@@ -147,12 +140,12 @@ FROM `region-us`.INFORMATION_SCHEMA.JOBS_BY_PROJECT AS jobs, running_transaction
    |    10 |
    +-------+
    ```
-4. 刪除編輯器分頁中的內容，然後新增下列查詢：
+4. 刪除編輯器分頁中的內容，並新增下列查詢：
 
    ```
    SELECT * FROM Flights LIMIT 2;
    ```
-5. 執行查詢。系統會傳回兩筆記錄的結果。即使您刪除了先前的查詢，查詢資訊仍會儲存在目前的工作階段中。
+5. 執行查詢。系統會傳回兩筆記錄的結果。即使您刪除了先前的查詢，該查詢的資訊仍會儲存在目前的工作階段中。
 
    ```
    +-------+
@@ -162,7 +155,7 @@ FROM `region-us`.INFORMATION_SCHEMA.JOBS_BY_PROJECT AS jobs, running_transaction
    |    23 |
    +-------+
    ```
-6. 刪除編輯器分頁中的內容，然後新增下列查詢：
+6. 刪除編輯器分頁中的內容，並新增下列查詢：
 
    ```
    DECLARE x INT64 DEFAULT 10;
@@ -176,7 +169,7 @@ FROM `region-us`.INFORMATION_SCHEMA.JOBS_BY_PROJECT AS jobs, running_transaction
 
    SELECT total * x AS total_c FROM Flights LIMIT 2;
    ```
-7. 執行查詢。工作階段範圍變數 `x` 用於限制 `Flights` 資料表傳回的結果數。請仔細觀察，當這個變數在 `BEGIN...END` 陳述式外宣告、在 `BEGIN...END` 陳述式內設定，然後再次在 `BEGIN...END` 陳述式外參照時，範圍會如何影響這個變數。
+7. 執行查詢。以工作階段為範圍的變數 `x` 用於限制 `Flights` 資料表傳回的結果數量。請仔細觀察，當變數在 `BEGIN...END` 陳述式外宣告、在 `BEGIN...END` 陳述式內設定，然後再次在 `BEGIN...END` 陳述式外參照時，範圍如何影響這個變數。
 
    ```
    +---------+
@@ -200,7 +193,7 @@ FROM `region-us`.INFORMATION_SCHEMA.JOBS_BY_PROJECT AS jobs, running_transaction
    |    2300 |
    +---------+
    ```
-8. 刪除編輯器分頁中的內容，然後新增下列查詢：
+8. 刪除編輯器分頁中的內容，並新增下列查詢：
 
    ```
    SELECT STRING(TIMESTAMP "2008-12-20 15:30:00+00", @@time_zone) AS default_time_zone;
@@ -209,7 +202,7 @@ FROM `region-us`.INFORMATION_SCHEMA.JOBS_BY_PROJECT AS jobs, running_transaction
 
    SELECT STRING(TIMESTAMP "2008-12-20 15:30:00+00", @@time_zone) AS new_time_zone;
    ```
-9. 執行查詢。以工作階段為範圍的系統變數 `@@time_zone` 用於將時區指派給時間戳記。第一個陳述式會傳回預設時區 (在本例中為 `UTC`) 的時間戳記。下一個陳述式會將 `@@time_zone` 指派給新值。第三個陳述式會傳回具有新時區的時間戳記。
+9. 執行查詢。以工作階段為範圍的系統變數 `@@time_zone` 可用來為時間戳記指派時區。第一個陳述式會傳回預設時區的時間戳記 (在本範例中為 `UTC`)。下一個陳述式會將 `@@time_zone` 指派給新值。第三個陳述式會傳回具有新時區的時間戳記。
 
    ```
    +-------------------------------+
@@ -227,9 +220,9 @@ FROM `region-us`.INFORMATION_SCHEMA.JOBS_BY_PROJECT AS jobs, running_transaction
 
 ## 後續步驟
 
-* 進一步瞭解如何[處理工作階段](https://docs.cloud.google.com/bigquery/docs/sessions?hl=zh-tw)，包括如何建立、使用、終止及列出工作階段。
+* 進一步瞭解如何[使用工作階段](https://docs.cloud.google.com/bigquery/docs/sessions?hl=zh-tw)，包括如何建立、使用、終止及列出工作階段。
 * 進一步瞭解 GoogleSQL 中的[多重陳述式查詢](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries?hl=zh-tw)。
-* 進一步瞭解 GoogleSQL 中的[多重陳述式交易](https://docs.cloud.google.com/bigquery/docs/transactions?hl=zh-tw)。
+* 進一步瞭解 GoogleSQL 中的[多陳述式交易](https://docs.cloud.google.com/bigquery/docs/transactions?hl=zh-tw)。
 
 
 
@@ -238,11 +231,11 @@ FROM `region-us`.INFORMATION_SCHEMA.JOBS_BY_PROJECT AS jobs, running_transaction
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-29 (世界標準時間)。
+上次更新時間：2026-11-04 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-04 (世界標準時間)。"],[],[]]

@@ -10,19 +10,19 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 使用矩陣分解模型，根據明確意見回饋建立建議 透過集合功能整理內容 你可以依據偏好儲存及分類內容。
 
-本教學課程說明如何建立[矩陣因式分解模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization?hl=zh-tw)，並在 [`movielens1m`](https://grouplens.org/datasets/movielens/1m/) 資料集中訓練模型，瞭解顧客的電影評分。然後使用矩陣分解模型，為使用者產生電影推薦。
+本教學課程說明如何建立[矩陣分解模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization?hl=zh-tw)，並使用 [`movielens1m`](https://grouplens.org/datasets/movielens/1m/) 資料集中的客戶電影評分訓練模型。接著，您可以使用矩陣分解模型，為使用者產生電影推薦。
 
-使用顧客提供的評分訓練模型，稱為使用*明確意見回饋*訓練。使用明確意見回饋做為訓練資料時，系統會使用[交替最小平方法演算法](https://en.wikipedia.org/wiki/Matrix_completion#Alternating_least_squares_minimization)訓練矩陣分解模型。
+使用顧客提供的評分訓練模型，稱為使用「明確回饋」訓練。當您使用明確回饋做為訓練資料時，系統會使用[交替最小平方法演算法](https://en.wikipedia.org/wiki/Matrix_completion#Alternating_least_squares_minimization)訓練矩陣分解模型。
 
-**重要事項：** 您必須預訂才能使用矩陣分解模型。詳情請參閱[這篇文章](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization?hl=zh-tw#pricing)，瞭解定價相關資訊。
+**重要事項：**您必須具備預留項目，才能使用矩陣分解模型。詳情請參閱「[定價](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization?hl=zh-tw#pricing)」。
 
 ## 目標
 
 本教學課程會逐步引導您完成下列工作：
 
-* 使用 `CREATE MODEL` 陳述式建立矩陣因式分解模型。
-* 使用 [`ML.EVALUATE` 函式評估模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate?hl=zh-tw)。
-* 使用 [`ML.RECOMMEND` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-recommend?hl=zh-tw)，透過模型為使用者產生電影推薦。
+* 使用 `CREATE MODEL` 陳述式建立矩陣分解模型。
+* 使用 [`ML.EVALUATE` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate?hl=zh-tw)評估模型。
+* 使用模型搭配 [`ML.RECOMMEND` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-recommend?hl=zh-tw)，為使用者產生電影推薦。
 
 ## 費用
 
@@ -33,11 +33,11 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 如要進一步瞭解 BigQuery 費用，請參閱 [BigQuery 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw)頁面。
 
-如要進一步瞭解 BigQuery ML 費用，請參閱「[BigQuery ML 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#bqml)」一文。
+如要進一步瞭解 BigQuery ML 費用，請參閱「[BigQuery ML 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#bqml)」。
 
 ## 事前準備
 
-- 登入 Google Cloud 帳戶。如果您是 Google Cloud新手，歡迎[建立帳戶](https://console.cloud.google.com/freetrial?hl=zh-tw)，親自評估產品在實際工作環境中的成效。新客戶還能獲得價值 $300 美元的免費抵免額，可用於執行、測試及部署工作負載。
+- 登入 Google Cloud 帳戶。如果您未曾使用過 Google Cloud，歡迎[建立帳戶](https://console.cloud.google.com/freetrial?hl=zh-tw)，親自體驗實際使用我們產品的成效。新客戶還能獲得價值 $300 美元的免費抵免額，用於執行、測試及部署工作負載。
 - In the Google Cloud console, on the project selector page,
   select or create a Google Cloud project.
 
@@ -78,35 +78,35 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
   [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
 - [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project).
 
-1. 新專案會自動啟用 BigQuery。如要在現有的專案中啟用 BigQuery，請前往
+1. 新專案會自動啟用 BigQuery。如要在現有專案中啟用 BigQuery，請前往
 
-   如果尚未啟用 BigQuery API，請啟用。
+   啟用 BigQuery API (如果尚未啟用)。
 
-   **啟用 API 時所需的角色**
+   **啟用 API 所需的角色**
 
-   如要啟用 API，您必須具備 `serviceusage.services.enable` 權限。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用情形管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過擁有者角色 (`roles/owner`) 取得這項權限。否則，您可以透過 Service Usage 管理員角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
    [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery&hl=zh-tw)
 
 ## 所需權限
 
-* 如要建立資料集，您需要 `bigquery.datasets.create` IAM 權限。
+* 如要建立資料集，您必須具備 `bigquery.datasets.create` IAM 權限。
 * 如要建立模型，您必須具備下列權限：
 
   + `bigquery.jobs.create`
   + `bigquery.models.create`
   + `bigquery.models.getData`
   + `bigquery.models.updateData`
-* 如要執行推論，您需要下列權限：
+* 如要執行推論，您必須具備下列權限：
 
   + `bigquery.models.getData`
   + `bigquery.jobs.create`
 
-如要進一步瞭解 BigQuery 中的 IAM 角色和權限，請參閱「[IAM 簡介](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)」。
+如要進一步瞭解 BigQuery 的 IAM 角色和權限，請參閱「[IAM 簡介](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)」。
 
 ## 建立資料集
 
-如要建立 BigQuery 資料集，請選取下列任一選項：
+如要建立 BigQuery 資料集，請選取下列其中一個選項：
 
 ### 控制台
 
@@ -116,14 +116,14 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 2. 點選左側窗格中的 explore「Explorer」。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
-3. 在「Explorer」中展開專案，然後按一下「Datasets」。
-4. 在「資料集」頁面，按一下 add「建立資料集」。
+3. 在「Explorer」中展開專案，然後按一下「資料集」。
+4. 在「Datasets」(資料集) 頁面，按一下add「Create dataset」(建立資料集)。
 5. 在「建立資料集」窗格中，執行下列操作：
 
    * 在「Dataset ID」(資料集 ID) 中輸入 `bqml_tutorial`。
-   * 選取「資料位置」的「美國」。
+   * 在「資料位置」部分，選取「US」。
 
-   其餘預設設定均保留原樣。
+   其餘預設設定則保持不變。
 6. 點選「建立資料集」。
 
 ### bq
@@ -138,7 +138,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
      --description "BigQuery ML tutorial dataset." \
      bqml_tutorial
    ```
-2. 確認資料集已建立完成：
+2. 確認資料集已建立：
 
    ```
    bq ls
@@ -146,7 +146,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ### API
 
-使用已定義的[資料集資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets?hl=zh-tw)呼叫 [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert?hl=zh-tw) 方法：
+使用定義的[資料集資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets?hl=zh-tw)呼叫 [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert?hl=zh-tw) 方法：
 
 ```
 {
@@ -158,7 +158,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ### BigQuery DataFrames
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+試用這個範例前，請先按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定操作說明操作。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -181,7 +181,7 @@ bqclient.create_dataset("bqml_tutorial", exists_ok=True)
 1. 開啟 Cloud Shell：
 
    [啟用 Cloud Shell](https://console.cloud.google.com/bigquery?cloudshell=true&hl=zh-tw)
-2. 將評分資料上傳至 `ratings` 資料表。在指令列中，貼上下列查詢並按下 `Enter`：
+2. 將評分資料上傳至 `ratings` 資料表。在指令列中貼上下列查詢，然後按下 `Enter`：
 
    ```
    curl -O 'http://files.grouplens.org/datasets/movielens/ml-1m.zip'
@@ -190,7 +190,7 @@ bqclient.create_dataset("bqml_tutorial", exists_ok=True)
    bq load --source_format=CSV bqml_tutorial.ratings ratings.csv \
      user_id:INT64,item_id:INT64,rating:FLOAT64,timestamp:TIMESTAMP
    ```
-3. 將電影資料上傳至 `movies` 資料表。在指令列中，貼上下列查詢並按下 `Enter`：
+3. 將電影資料上傳至 `movies` 資料表。在指令列中貼上以下查詢，然後按下 `Enter`：
 
    ```
    sed 's/::/@/g' ml-1m/movies.dat > movie_titles.csv
@@ -201,12 +201,12 @@ bqclient.create_dataset("bqml_tutorial", exists_ok=True)
 
 ### BigQuery DataFrames
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+試用這個範例前，請先按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定操作說明操作。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
 
-首先，請使用 `bqclient = google.cloud.bigquery.Client()` 建立 `Client` 物件，然後將 `movielens1m` 資料載入您在上一步建立的資料集。
+首先，使用 `bqclient = google.cloud.bigquery.Client()` 建立 `Client` 物件，然後將 `movielens1m` 資料載入上一步建立的資料集。
 
 ```
 import io
@@ -265,7 +265,7 @@ except google.api_core.exceptions.NotFound:
 
 ## 建立模型
 
-建立矩陣分解模型，並根據`ratings`表格中的資料訓練模型。模型會根據顧客提供的電影評分進行訓練，預測每個使用者與項目配對的評分。
+建立矩陣分解模型，並使用 `ratings` 資料表中的資料訓練模型。模型會根據客戶提供的電影評分，預測每組使用者與項目的評分。
 
 ### SQL
 
@@ -273,14 +273,14 @@ except google.api_core.exceptions.NotFound:
 
 * `user_id`：使用者 ID。
 * `item_id`：電影 ID。
-* `rating`：使用者給予項目的明確評分，範圍為 1 到 5。
+* `rating`：使用者給予項目的明確評分 (1 到 5)。
 
 請按照下列步驟建立模型：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在查詢編輯器中貼入下列查詢，然後點選「執行」：
+2. 在查詢編輯器中貼上以下查詢，然後點選「執行」：
 
    ```
    CREATE OR REPLACE MODEL `bqml_tutorial.mf_explicit`
@@ -299,11 +299,11 @@ except google.api_core.exceptions.NotFound:
    FROM `bqml_tutorial.ratings`;
    ```
 
-   查詢約需 10 分鐘才能完成，完成後「`mf_explicit`」模型會顯示在「Explorer」(探索) 窗格中。由於查詢使用 `CREATE MODEL` 陳述式建立模型，因此您不會看到查詢結果。
+   查詢約需 10 分鐘才能完成，完成後，`mf_explicit` 模型會顯示在「Explorer」窗格中。由於查詢使用 `CREATE MODEL` 陳述式建立模型，因此不會顯示查詢結果。
 
 ### BigQuery DataFrames
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+試用這個範例前，請先按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定操作說明操作。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -332,15 +332,15 @@ model.to_gbq(
 )
 ```
 
-程式碼約需 10 分鐘才能完成，完成後 `mf_explicit` 模型會顯示在「Explorer」窗格中。
+程式碼約需 10 分鐘才能完成，完成後，`mf_explicit` 模型會顯示在「Explorer」窗格中。
 
 ## 取得訓練統計資料
 
-您也可以在Google Cloud 控制台中查看模型的訓練統計資料。
+您也可以在Google Cloud 控制台查看模型的訓練統計資料。
 
-機器學習演算法會使用不同參數建立多個模型疊代版本，然後選取可將[損失](https://en.wikipedia.org/wiki/Loss_function)降到最低的模型版本。這項程序稱為經驗風險最小化。模型的訓練統計資料會顯示與模型每次疊代相關聯的損失。
+機器學習演算法會使用不同參數，建立多個模型疊代，然後選取[損失](https://en.wikipedia.org/wiki/Loss_function)最低的模型版本。這項程序稱為經驗風險最小化。模型的訓練統計資料會顯示與模型各疊代相關聯的損失。
 
-如要查看模型的訓練統計資料，請按照下列步驟操作：
+請按照下列步驟查看模型的訓練統計資料：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -348,10 +348,10 @@ model.to_gbq(
 2. 點選左側窗格中的 explore「Explorer」。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
-3. 在「Explorer」窗格中展開專案，按一下「Datasets」，然後按一下 `bqml_tutorial` 資料集。
-4. 按一下「模型」分頁標籤。
-5. 按一下 `mf_explicit` 模型，然後按一下「訓練」分頁標籤。
-6. 在「查看方式」部分中，按一下「表格」。結果應如下所示：
+3. 在「Explorer」窗格中展開專案，依序點選「Datasets」(資料集) 和「`bqml_tutorial`」資料集。
+4. 點按「模型」分頁標籤。
+5. 依序點選「`mf_explicit`」模型和「訓練」分頁標籤
+6. 在「檢視方式」部分，按一下「表格」。結果應大致如下：
 
    ```
    +-----------+--------------------+--------------------+
@@ -367,13 +367,13 @@ model.to_gbq(
    +-----------+--------------------+--------------------+
    ```
 
-   「訓練資料損失」欄代表模型訓練後計算出的損失指標。由於這是矩陣分解模型，因此這個資料欄會顯示[均方差](https://developers.google.com/machine-learning/glossary/?hl=zh-tw#MSE)。
+   「Training Data Loss」(訓練資料損失) 欄代表模型訓練後計算出的損失指標。由於這是矩陣分解模型，因此這個資料欄會顯示[均方誤差](https://developers.google.com/machine-learning/glossary/?hl=zh-tw#MSE)。
 
 您也可以使用 [`ML.TRAINING_INFO` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-train?hl=zh-tw)查看模型訓練統計資料。
 
 ## 評估模型
 
-比較模型傳回的預測電影評分與訓練資料中的實際使用者電影評分，評估模型效能。
+比較模型傳回的預測電影評分，以及訓練資料中的實際使用者電影評分，評估模型效能。
 
 ### SQL
 
@@ -382,7 +382,7 @@ model.to_gbq(
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在查詢編輯器中貼入下列查詢，然後點選「執行」：
+2. 在查詢編輯器中貼上以下查詢，然後點選「執行」：
 
    ```
    SELECT
@@ -400,7 +400,7 @@ model.to_gbq(
      ));
    ```
 
-   結果應如下所示：
+   結果應大致如下：
 
    ```
    +---------------------+---------------------+------------------------+-----------------------+--------------------+--------------------+
@@ -410,7 +410,7 @@ model.to_gbq(
    +---------------------+---------------------+------------------------+-----------------------+--------------------+--------------------+
    ```
 
-   評估結果中有個重要的指標，就是 [R2 分數](https://en.wikipedia.org/wiki/Coefficient_of_determination)。R2 分數是統計測量值，可判斷線性迴歸預測值是否與實際資料相近。`0` 值表示模型無法說明回應資料在平均值附近的變異性。`1` 值表示模型會說明回應資料在平均值附近的所有變異性。
+   評估結果中的重要指標是 [R2 分數](https://en.wikipedia.org/wiki/Coefficient_of_determination)。R2 分數是統計測量數，可判斷線性迴歸預測是否接近實際資料。如果值為 `0`，表示模型無法解釋回應資料在平均值附近的變異性。如果值為 `1`，表示模型可解釋平均值附近的所有回應資料變異。
 
    如要進一步瞭解 `ML.EVALUATE` 函式輸出內容，請參閱「[輸出內容](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate?hl=zh-tw#output)」。
 
@@ -418,12 +418,12 @@ model.to_gbq(
 
 ### BigQuery DataFrames
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+試用這個範例前，請先按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定操作說明操作。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
 
-呼叫 [`model.score()`](https://dataframes.bigquery.dev/reference/api/bigframes.ml.decomposition.MatrixFactorization#bigframes.ml.decomposition.MatrixFactorization.score) 評估模型。
+呼叫 [`model.score()`](https://dataframes.bigquery.dev/reference/api/bigframes.ml.decomposition.MatrixFactorization#bigframes.ml.decomposition.MatrixFactorization.score) 來評估模型。
 
 ```
 # Evaluate the model using the score() function
@@ -433,7 +433,7 @@ model.score(bq_df)
 # 0.485403	                0.395052	        0.025515	            0.390573	        0.68343	        0.68343
 ```
 
-## 取得部分使用者項目組合的預測評分
+## 取得部分使用者與項目組合的預測評分
 
 取得五位使用者對每部電影的預測評分。
 
@@ -444,7 +444,7 @@ model.score(bq_df)
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在查詢編輯器中貼入下列查詢，然後點選「執行」：
+2. 在查詢編輯器中貼上以下查詢，然後點選「執行」：
 
    ```
    SELECT
@@ -461,7 +461,7 @@ model.score(bq_df)
      ));
    ```
 
-   結果應如下所示：
+   結果應大致如下：
 
    ```
    +--------------------+---------+---------+
@@ -479,7 +479,7 @@ model.score(bq_df)
 
 ### BigQuery DataFrames
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+試用這個範例前，請先按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定操作說明操作。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -502,16 +502,16 @@ print(predicted)
 
 ## 生成建議
 
-根據預測評分，為每位使用者產生前五名推薦電影。
+使用預測評分，為每位使用者產生前五名推薦電影。
 
 ### SQL
 
-如要產生建議，請按照下列步驟操作：
+請按照下列步驟產生建議：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 將預測評分寫入資料表。在查詢編輯器中貼上下列查詢，然後點選「執行」：
+2. 將預測評分寫入資料表。在查詢編輯器中，貼上以下查詢，然後點選「Run」(執行)：
 
    ```
    CREATE OR REPLACE TABLE `bqml_tutorial.recommend`
@@ -521,7 +521,7 @@ print(predicted)
    FROM
    ML.RECOMMEND(MODEL `bqml_tutorial.mf_explicit`);
    ```
-3. 將預測評分與電影資訊合併，然後選取每位使用者前五名的結果。在查詢編輯器中貼上下列查詢，然後點選「執行」：
+3. 將預測評分與電影資訊結合，並選取每位使用者前五名的結果。在查詢編輯器中，貼上以下查詢，然後點選「Run」(執行)：
 
 ```
   SELECT
@@ -546,7 +546,7 @@ print(predicted)
     user_id;
 ```
 
-結果應如下所示：
+結果應大致如下：
 
 ```
   +---------+-------------------------------------+------------------------+--------------------+
@@ -570,7 +570,7 @@ print(predicted)
 
 ### BigQuery DataFrames
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+試用這個範例前，請先按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定操作說明操作。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -628,19 +628,18 @@ print(merged_user)
 
 刪除專案將移除專案中所有的資料集與資料表。若您希望重新使用專案，您可以刪除本教學課程中所建立的資料集。
 
-1. 如有需要，請在 Google Cloud 控制台中開啟 BigQuery 頁面。
+1. 如有需要，請在 Google Cloud 控制台開啟 BigQuery 頁面。
 
-   [前往 BigQuery 頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
+   [前往「BigQuery」頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 在導覽窗格中，按一下您建立的 **bqml\_tutorial** 資料集。
-3. 按一下視窗右側的「刪除資料集」。
-   這個動作將會刪除資料集、資料表，以及所有資料。
-4. 在「Delete dataset」(刪除資料集) 對話方塊中，輸入資料集的名稱 (`bqml_tutorial`)，然後按一下「Delete」(刪除) 來確認刪除指令。
+3. 按一下視窗右側的「刪除資料集」。這個動作將會刪除資料集、資料表，以及所有資料。
+4. 在「Delete dataset」(刪除資料集) 對話方塊中，輸入資料集名稱 (`bqml_tutorial`) 來確認刪除指令，然後點選「Delete」(刪除)。
 
 ### 刪除專案
 
 如要刪除專案，請進行以下操作：
 
-**注意**：刪除專案會造成以下結果：
+**警告**：刪除專案會出現以下結果：
 
 * **專案中的所有內容都會遭到刪除。**如果使用現有專案來進行本文中的任務，刪除專案將一併移除當中已完成的其他任務'。
 * **自訂專案 ID 會消失。**當您之前建立這個專案時，可能建立了想要在日後使用的自訂專案 ID。如要保留使用該專案 ID 的網址 (例如 `appspot.com` 網址)，請刪除在該專案中選取的資源，而不是刪除整個專案。
@@ -655,7 +654,7 @@ print(merged_user)
 
 ## 後續步驟
 
-* 嘗試[根據隱性意見回饋建立矩陣分解模型](https://docs.cloud.google.com/bigquery/docs/bigqueryml-mf-implicit-tutorial?hl=zh-tw)。
+* 嘗試[根據隱含回饋建立矩陣分解模型](https://docs.cloud.google.com/bigquery/docs/bigqueryml-mf-implicit-tutorial?hl=zh-tw)。
 * 如需 BigQuery ML 的總覽，請參閱 [BigQuery ML 簡介](https://docs.cloud.google.com/bigquery/docs/bqml-introduction?hl=zh-tw)。
 * 如要進一步瞭解機器學習，請參閱[機器學習密集課程](https://developers.google.com/machine-learning/crash-course/?hl=zh-tw)。
 
@@ -666,11 +665,11 @@ print(merged_user)
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-29 (世界標準時間)。
+上次更新時間：2026-11-03 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-03 (世界標準時間)。"],[],[]]

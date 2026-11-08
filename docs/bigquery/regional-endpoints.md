@@ -16,13 +16,13 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # BigQuery 區域端點
 
-本頁面說明如何使用 [Private Service Connect 區域端點](https://docs.cloud.google.com/vpc/docs/about-accessing-regional-google-apis-endpoints?hl=zh-tw)存取 BigQuery 中的資源。區域端點可讓您以符合[資料落地](https://docs.cloud.google.com/assured-workloads/docs/data-residency?hl=zh-tw)和資料主權規定的方式執行工作負載，要求流量會直接轉送至端點中指定的區域。
+本頁面說明如何使用 [Private Service Connect 區域端點](https://docs.cloud.google.com/vpc/docs/about-accessing-regional-google-apis-endpoints?hl=zh-tw)存取 BigQuery 中的資源。區域端點可讓您以符合[資料落地](https://docs.cloud.google.com/assured-workloads/docs/data-residency?hl=zh-tw)和資料主權規定的方式執行工作負載，將要求流量直接轉送至端點指定的區域。
 
 ## 總覽
 
-區域端點是要求端點，可協助限制要求，只有在受影響的資源位於端點指定的位置時，才能繼續執行。舉例來說，如果您在刪除資料集要求中使用端點 `https://bigquery.us-central1.rep.googleapis.com`，則只有在資料集位於 `US-CENTRAL1` 時，要求才會繼續執行。
+區域端點是要求端點，可限制只有在受影響的資源存在於端點指定的位置時，才能繼續處理要求。舉例來說，如果您在刪除資料集要求中使用端點 `https://bigquery.us-central1.rep.googleapis.com`，則只有在資料集位於 `US-CENTRAL1` 時，要求才會繼續執行。
 
-全域端點可將要求轉送至資源所在位置以外的地方，區域端點則可將要求限制在資源所在端點指定的位置。區域端點會針對從網際網路、其他Google Cloud 資源 (例如 Compute Engine 虛擬機器)、使用 VPN 或互連網路的地端部署服務，以及虛擬私有雲 (VPC) 收到的要求，在端點指定的位置終止 TLS 工作階段。
+全域端點的要求可以透過與資源所在位置不同的位置轉送，而區域端點則可將要求限制在資源所在端點指定的位置。區域端點會針對從網際網路、其他Google Cloud 資源 (例如 Compute Engine 虛擬機器)、使用 VPN 或互連網路的地端部署服務，以及虛擬私有雲 (VPC) 收到的要求，在端點指定的位置終止 TLS 工作階段。
 
 區域端點會將靜態和傳輸中的資料表資料，保存在端點指定的位置，確保資料落地。這不包括資源中繼資料，例如資料集名稱和 IAM 政策。詳情請參閱「[服務資料注意事項](https://docs.cloud.google.com/assured-workloads/docs/data-residency?hl=zh-tw#service-data)」。
 
@@ -32,7 +32,7 @@ BigQuery 包含多個 API。下列 API 可與區域端點搭配使用：
 | --- | --- | --- |
 | BigQuery API | `bigquery.LOCATION.rep.googleapis.com` | [REST](https://docs.cloud.google.com/bigquery/docs/reference/rest?hl=zh-tw) |
 | BigQuery Storage API | `bigquerystorage.LOCATION.rep.googleapis.com` | [RPC](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc?hl=zh-tw) |
-| BigQuery Reservations API | `bigqueryreservation.LOCATION.rep.googleapis.com` | [RPC](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc?hl=zh-tw) 和 [REST](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest?hl=zh-tw) |
+| BigQuery Reservation API | `bigqueryreservation.LOCATION.rep.googleapis.com` | [RPC](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc?hl=zh-tw) 和 [REST](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest?hl=zh-tw) |
 | BigQuery Migration API | `bigquerymigration.LOCATION.rep.googleapis.com` | [REST](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest?hl=zh-tw) |
 | BigQuery 資料移轉服務 API | `bigquerydatatransfer.LOCATION.rep.googleapis.com` | [RPC](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rpc?hl=zh-tw) 和 [REST](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest?hl=zh-tw) |
 
@@ -51,7 +51,7 @@ BigQuery 包含多個 API。下列 API 可與區域端點搭配使用：
   + 法蘭克福 `europe-west3`
   + 倫敦 `europe-west2`
   + 米蘭 `europe-west8`
-  + 荷蘭 `europe-west4`
+  + 荷蘭`europe-west4`
   + 巴黎 `europe-west9`
   + 蘇黎世 `europe-west6`
 * 中東
@@ -109,7 +109,7 @@ BigQuery 包含多個 API。下列 API 可與區域端點搭配使用：
 * 如果資源位於沙烏地阿拉伯王國，則為 `sa`
 * 如果資源位於美國，則為 `us`
 
-**注意：** 您無法使用管轄區 Google Cloud 控制台，在`eu`、`sa`或`us`上傳檔案。
+**注意：**您無法使用管轄區 Google Cloud 控制台在`eu`、`sa`或`us`上傳檔案。
 
 ### 指令列
 
@@ -143,11 +143,11 @@ BigQuery 包含多個 API。下列 API 可與區域端點搭配使用：
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-29 (世界標準時間)。
+上次更新時間：2026-11-04 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-04 (世界標準時間)。"],[],[]]

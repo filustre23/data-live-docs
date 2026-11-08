@@ -16,7 +16,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 管理訂閱項目
 
-您可以在 BigQuery sharing (舊稱 Analytics Hub) 管理訂閱項目，控管資料存取和共用權限。訂閱者可以訂閱、查看及刪除清單。發布者可以監控誰有權存取自己的產品資訊，並視需要撤銷訂閱。BigQuery sharing 訂閱項目是區域性資源，位於訂閱者的專案中。訂閱項目會儲存訂閱者的資訊，並代表發布者與訂閱者之間的合約。
+您可以在 BigQuery sharing (舊稱 Analytics Hub) 管理訂閱項目，控管資料存取和共用權限。訂閱者可以訂閱、查看及刪除清單。發布者可以監控誰有權存取自己的產品資訊，並視需要撤銷訂閱。BigQuery sharing 訂閱項目是區域化資源，位於訂閱者的專案中。訂閱項目會儲存訂閱者的相關資訊，並代表發布者與訂閱者之間的合約。
 
 ## 事前準備
 
@@ -28,7 +28,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 * `serviceUsage.services.list`
 * `serviceUsage.services.enable`
 
-下列預先定義的 IAM 角色包含啟用 Analytics Hub API 所需的權限：
+下列預先定義的身分與存取權管理角色，包含啟用 Analytics Hub API 所需的權限：
 
 * [服務使用情形管理員](https://docs.cloud.google.com/service-usage/docs/access-control?hl=zh-tw#serviceusage.serviceUsageAdmin) (`roles/serviceusage.serviceUsageAdmin`)
 
@@ -50,7 +50,7 @@ gcloud services enable analyticshub.googleapis.com
 
 ### 必要的角色
 
-如要取得管理訂閱項目所需的權限，請要求管理員授予您專案的 [Analytics Hub 訂閱項目擁有者](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub?hl=zh-tw#analyticshub.subscriptionOwner)  (`roles/analyticshub.subscriptionOwner`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得管理訂閱項目所需的權限，請要求管理員授予您專案的 [Analytics Hub 訂閱項目擁有者](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub?hl=zh-tw#analyticshub.subscriptionOwner) (`roles/analyticshub.subscriptionOwner`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
 您或許也能透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)，取得必要權限。
 
@@ -58,7 +58,7 @@ gcloud services enable analyticshub.googleapis.com
 
 訂閱項目有下列限制：
 
-* 您只能使用 Analytics Hub API 管理 2023 年 7 月 25 日之後建立的訂閱項目。在此日期之前建立的連結資料集不支援，因為缺少必要的訂閱資源。
+* 您只能使用 Analytics Hub API 管理 2023 年 7 月 25 日後建立的訂閱項目。在此日期之前建立的連結資料集不支援，因為缺少必要的訂閱資源。
 
 ## 以訂閱者身分管理訂閱項目
 
@@ -81,7 +81,7 @@ GET https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATIO
 * `PROJECT_ID`： Google Cloud 專案 ID，用於存放您要列出的訂閱項目。
 * `LOCATION`：要列出的訂閱項目位置。如要進一步瞭解支援共用的位置，請參閱「[支援的區域](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction?hl=zh-tw#supported-regions)」。
 
-### 重新整理訂閱
+### 重新整理訂閱項目
 
 當發布商或資料提供者新增或移除資料時，資料交換或資料無塵室可能會過時。發生這種情況時，現有的連結資料集不會自動更新，您必須重新整理訂閱項目，才能存取新資源。
 
@@ -92,11 +92,14 @@ GET https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATIO
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在「Explorer」窗格中，點選「add\_box 新增資料」。
-3. 選取「Sharing (Analytics Hub)」。探索頁面隨即開啟。
-4. 找出並點選您訂閱的資料無塵室或資料交換。
-5. 點選「訂閱」。由於您已有使用中的訂閱項目，控制台會顯示「Refresh」(重新整理) 選項。
-6. 按一下「重新整理」，即可使用最新資源更新連結的資料集。
+2. 在左側窗格中，按一下「資料庫」圖示 「資料探索工具」：
+
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
+3. 在「資料」窗格中，點選 add「新增資料」。
+4. 選取「Sharing (Analytics Hub)」。系統隨即會開啟探索頁面。
+5. 找出並點選您訂閱的資料無塵室或資料交換。
+6. 點選「訂閱」。由於您已有使用中的訂閱項目，控制台會顯示「Refresh」(重新整理) 選項。
+7. 按一下「重新整理」，即可使用最新資源更新連結的資料集。
 
 ### API
 
@@ -132,7 +135,7 @@ DELETE https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/locations/LOCA
 
 刪除訂閱項目時，連結的資料集也會從專案中刪除。
 
-從多區域產品資訊中刪除訂閱項目時，所有主要和次要連結資料集副本也會從專案中刪除。
+從多區域清單中刪除訂閱項目時，所有主要和次要連結資料集副本也會從專案中刪除。
 
 如要進一步瞭解如何使用 Analytics Hub API 管理訂閱項目，請參閱 [`projects.locations.subscriptions` 方法](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.subscriptions?hl=zh-tw#methods)。
 
@@ -151,7 +154,7 @@ DELETE https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/locations/LOCA
    [前往「共用 (Analytics Hub)」](https://console.cloud.google.com/bigquery/analytics-hub?hl=zh-tw)
 
    頁面會列出您可存取的所有[資料交換](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction?hl=zh-tw#data_exchanges)。
-2. 在資料交換清單中，按一下資料交換名稱，其中包含要列出的訂閱項目。
+2. 在資料交換清單中，按一下要列出訂閱項目的資料交換名稱。
 3. 按一下「Subscriptions」(訂閱項目) 分頁標籤。
 
 ### API
@@ -168,15 +171,15 @@ GET https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATIO
 * `LOCATION`：資料交換的位置，其中包含要列出的訂閱項目。
 * `DATAEXCHANGE_ID`：要列出訂閱項目的資料交換 ID。
 
-### 撤銷訂閱項目
+### 撤銷訂閱
 
-如果您以 BigQuery sharing 發布端的身分撤銷訂閱，訂閱端就無法再查詢連結的資料集。由於您是在訂閱者擁有的資源上啟動這項動作，因此連結的資料集會保留在訂閱者的專案中。訂閱者可以刪除資料集。
+如果您以 BigQuery 共用發布者的身分撤銷訂閱，訂閱者就無法再查詢連結的資料集。由於您是在訂閱者擁有的資源上啟動這項動作，因此連結的資料集會保留在訂閱者的專案中。訂閱者可以刪除資料集，將其移除。
 
-撤銷多區域產品資訊的訂閱項目後，訂閱者就無法再查詢任何主要或次要連結資料集副本。
+撤銷多區域清單的訂閱項目後，訂閱者就無法再查詢任何主要或次要連結資料集副本。
 
-**注意：** 撤銷[與 Google Cloud Marketplace 整合的商業訂閱項目](https://docs.cloud.google.com/bigquery/docs/analytics-hub-cloud-marketplace?hl=zh-tw)，可能會影響客戶並違反《[Cloud Marketplace 服務條款](https://cloud.google.com/terms/marketplace/launcher?hl=zh-tw)》。
+**注意：**撤銷[與 Google Cloud Marketplace 整合的商業訂閱項目](https://docs.cloud.google.com/bigquery/docs/analytics-hub-cloud-marketplace?hl=zh-tw)，可能會影響客戶並違反《[Cloud Marketplace 服務條款](https://cloud.google.com/terms/marketplace/launcher?hl=zh-tw)》。
 
-如要撤銷訂閱，請選取下列其中一個選項：
+如要撤銷訂閱項目，請選取下列其中一個選項：
 
 ### 控制台
 
@@ -185,7 +188,7 @@ GET https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATIO
    [前往「共用 (Analytics Hub)」](https://console.cloud.google.com/bigquery/analytics-hub?hl=zh-tw)
 
    頁面會列出您可存取的所有[資料交換](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction?hl=zh-tw#data_exchanges)。
-2. 在資料交換清單中，按一下資料交換名稱，找出要撤銷的訂閱項目。
+2. 在資料交換清單中，按一下資料交換名稱，其中包含您要撤銷的訂閱項目。
 3. 按一下「Subscriptions」(訂閱項目) 分頁標籤。
 4. 找出要撤銷的訂閱項目，逐一勾選旁邊的核取方塊。
 5. 按一下「撤銷訂閱項目」。
@@ -201,7 +204,8 @@ POST https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATI
 更改下列內容：
 
 * `PROJECT_ID`： Google Cloud 專案 ID，用於存放您要撤銷的訂閱項目。
-* `LOCATION`：要撤銷的訂閱項目位置。
+* `LOCATION`：：要
+  撤銷的訂閱項目位置。
 * `SUBSCRIPTION_ID`：要撤銷的訂閱項目 ID。
 
 ## 後續步驟
@@ -219,11 +223,11 @@ POST https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATI
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-29 (世界標準時間)。
+上次更新時間：2026-11-03 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-03 (世界標準時間)。"],[],[]]

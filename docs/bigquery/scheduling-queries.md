@@ -21,12 +21,12 @@ BigQuery 排定查詢可讓您自動執行週期性 [GoogleSQL](https://docs.clo
 ## 事前準備
 
 * 排定的查詢會使用 [BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)的功能。確認您已完成「[啟用 BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service?hl=zh-tw)」中的所有必要動作。
-* 授予 Identity and Access Management (IAM) 角色，讓使用者具備執行本文件中各項工作所需的權限。
-* 如果您打算指定客戶自行管理的加密金鑰 (CMEK)，請確認[服務帳戶具備加密和解密權限](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw#grant_permission)，且您擁有使用 CMEK 所需的 [Cloud KMS 金鑰資源 ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw#key_resource_id)。如要瞭解 CMEK 如何與 BigQuery 資料移轉服務搭配運作，請參閱「[指定排定查詢的加密金鑰](#CMEK)」。
+* 授予 Identity and Access Management (IAM) 角色，讓使用者具備執行本文件各項工作所需的權限。
+* 如要指定客戶自行管理的加密金鑰 (CMEK)，請確認[服務帳戶具備加密和解密權限](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw#grant_permission)，且您有使用 CMEK 所需的 [Cloud KMS 金鑰資源 ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw#key_resource_id)。如要瞭解 CMEK 如何與 BigQuery 資料移轉服務搭配運作，請參閱「[指定排定查詢的加密金鑰](#CMEK)」。
 
 ## 限制
 
-* 如果排定的查詢在整點 (例如 09:00) 執行，可能會觸發多次，導致非預期的結果，例如 `INSERT` 作業造成資料重複。為避免這類非預期結果，請使用非整點的時間表 (例如 08:58 或 09:03)。
+* 如果排定的查詢在整點 (例如 09:00) 執行，可能會觸發多次，導致 `INSERT` 作業重複資料等非預期結果。為避免這類非預期結果，請使用非整點的時間表 (例如 08:58 或 09:03)。
 
 ### 所需權限
 
@@ -40,7 +40,7 @@ BigQuery 排定查詢可讓您自動執行週期性 [GoogleSQL](https://docs.clo
   + 目標資料集的 `bigquery.datasets.get` 權限。
   + 專案的 `bigquery.jobs.create` 權限。
 
-如要修改或刪除排定的查詢，您必須具備下列其中一項權限：
+如要修改或刪除排定的查詢，您必須具備下列其中一項：
 
 * 專案的 `bigquery.transfers.update` 和 `bigquery.transfers.get` 權限。
 * 如要使用使用者憑證執行排定的查詢，該使用者必須擁有排定的查詢，且您必須具備專案的 `bigquery.jobs.create` 權限。
@@ -55,7 +55,7 @@ BigQuery 排定查詢可讓您自動執行週期性 [GoogleSQL](https://docs.clo
 * `iam.serviceAccounts.list`：列出服務帳戶。
 * `iam.serviceAccountUser`，將服務帳戶指派給排定的查詢。
 
-**注意：** 如果您使用的是 bq 指令列工具，請使用 `--service_account_name` 旗標，而非以服務帳戶身分進行驗證。
+**注意：**如果您使用的是 bq 指令列工具，請使用 `--service_account_name` 旗標，而非以服務帳戶身分進行驗證。
 
 ## 設定選項
 
@@ -129,7 +129,7 @@ LIMIT
 如要在Google Cloud 控制台中使用排定查詢建立分區資料表，請使用下列選項：
 
 * 如要使用整數範圍分區，請將「Destination table partitioning field」(目的地資料表分區欄位) 留空。
-* 如要使用時間單位資料欄分區，請在[設定排定的查詢](#set_up_scheduled_queries)時，在「Destination table partitioning」(目的地資料表分區) 欄位中指定資料欄名稱。
+* 如要使用時間單位資料欄分區，請在[設定排定的查詢](#set_up_scheduled_queries)時，在「Destination table partitioning field」(目的地資料表分區欄位) 中指定資料欄名稱。
 * 如要使用擷取時間分區，請將「Destination table partitioning field」(目的地資料表分區欄位) 留空，並在目的地資料表的名稱中指明日期分區。例如：`mytable${run_date}`。詳情請參閱「[參數範本語法](#param-templating-syntax)」。
 
 #### 可用的參數
@@ -189,11 +189,11 @@ LIMIT
 
 ### 使用排定的查詢指定加密金鑰
 
-您可以指定[客戶自行管理的加密金鑰 (CMEK)](https://docs.cloud.google.com/kms/docs/cmek?hl=zh-tw)，為移轉作業執行作業加密資料。您可以使用 CMEK 支援[排定查詢](https://docs.cloud.google.com/bigquery/docs/scheduling-queries?hl=zh-tw)的移轉作業。
+您可以指定[客戶自行管理的加密金鑰 (CMEK)](https://docs.cloud.google.com/kms/docs/cmek?hl=zh-tw)，為移轉作業執行的資料加密。您可以使用 CMEK 支援[排定查詢](https://docs.cloud.google.com/bigquery/docs/scheduling-queries?hl=zh-tw)的移轉作業。
 
 指定移轉作業的 CMEK 時，BigQuery 資料移轉服務會將 CMEK 套用至任何擷取資料的中繼磁碟快取，確保整個資料移轉工作流程符合 CMEK 規範。
 
-如果現有移轉作業原本並非使用 CMEK 建立，則無法更新現有移轉作業來新增 CMEK。舉例來說，您無法將原本預設加密的目的地資料表，變更為使用 CMEK 加密。反之，您也無法將 CMEK 加密的目的地資料表變更為其他加密類型。
+如果移轉作業原本並非使用 CMEK 建立，則無法更新現有移轉作業來新增 CMEK。舉例來說，您無法將原本預設加密的目的地資料表，變更為以 CMEK 加密。反之，您也無法將 CMEK 加密的目的地資料表變更為其他加密類型。
 
 如果移轉設定最初是以 CMEK 加密建立，則可更新移轉作業的 CMEK。更新移轉設定的 CMEK 時，BigQuery 資料移轉服務會在下次執行移轉作業時，將 CMEK 傳播至目的地資料表，並在移轉作業執行期間，以新的 CMEK 取代任何過時的 CMEK。詳情請參閱「[更新移轉作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#update_a_transfer)」。
 
@@ -217,9 +217,9 @@ LIMIT
    * 針對「Name for the scheduled query」(已排定查詢的名稱)，請輸入名稱，例如 `My scheduled query`。排定查詢名稱可以是任何值，只要日後需要修改查詢時能輕鬆識別即可。
    * 選用：根據預設，查詢會排定為「每日」執行。如要變更預設排程，請從「Repeats」(重複) 下拉式選單中選取所需選項：
 
-     + 如要指定自訂頻率，請選取「Custom」(自訂)，然後在「Custom schedule」(自訂排程) 欄位中輸入類似 Cron 的時間規格，例如 `every mon 23:30`、`every 6 hours` 或 `every hour on mon,tue,wed,thu,fri`。如要進一步瞭解有效排程 (包括自訂間隔)，請參閱「[資源：`TransferConfig`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs?hl=zh-tw#TransferConfig)」下的 `schedule` 欄位。
+     + 如要指定自訂頻率，請選取「Custom」(自訂)，然後在「Custom schedule」(自訂排程) 欄位中輸入類似 Cron 的時間規格，例如 `every mon 23:30`、`every 6 hours` 或 `every hour on mon,tue,wed,thu,fri`。如要進一步瞭解有效排程 (包括自訂間隔)，請參閱「[資源：`TransferConfig`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs?hl=zh-tw#TransferConfig)」下方的 `schedule` 欄位。
 
-       **注意：** 排定的查詢之間至少須間隔 5 分鐘。
+       **注意：**排定的查詢之間至少須間隔 5 分鐘。
      + 如要變更開始時間，請選取「Start at set time」(在所設時間開始執行) 選項，然後輸入所選的開始日期和時間。
 
        **注意：** 如果指定的開始時間晚於排程時間，則查詢會在下一個週期首次執行。舉例來說，如果查詢是在 `2022-06-05 23:50` 建立，排程為 `daily 00:00`，開始時間為 `2022-06-06 10:00`，則要到 `2022-06-07 00:00` 才會執行。
@@ -239,16 +239,16 @@ LIMIT
    * 選用：CMEK
      如果您使用[客戶自行管理的加密金鑰](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw)，可以在「Advanced options」(進階選項) 下方選取「Customer-managed key」(客戶自行管理的金鑰)。畫面隨即會列出可用的 CMEK 供您選擇。如要瞭解客戶自行管理的加密金鑰 (CMEK) 如何與 BigQuery 資料移轉服務搭配運作，請參閱「[指定排定查詢的加密金鑰](#CMEK)」。
    * 以服務帳戶身分驗證
-     如果有一或多個服務帳戶與 Google Cloud 專案相關聯，您可以將服務帳戶與排定的查詢建立關聯，而非使用使用者憑證。在「Scheduled query credential」(排定的查詢憑證) 下方，按一下選單即可查看可用的服務帳戶清單。如果您以聯合身分登入，則必須使用服務帳戶。
+     如果有一或多個服務帳戶與 Google Cloud 專案相關聯，您可以將服務帳戶與排定的查詢建立關聯，這樣就不需要使用者憑證。在「Scheduled query credential」(排定的查詢憑證) 下方，按一下選單即可查看可用的服務帳戶清單。如果您以聯合身分登入，則必須使用服務帳戶。
 8. 其他設定：
 
    * 選用：勾選[「Send email notifications」(傳送電子郵件通知)](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications?hl=zh-tw)，允許系統在移轉作業執行失敗時傳送電子郵件通知。
    * 選用：在「Pub/Sub topic」(Pub/Sub 主題) 中，輸入 Pub/Sub [主題](https://docs.cloud.google.com/pubsub/docs/overview?hl=zh-tw#types)名稱，例如 `projects/myproject/topics/mytopic`。
-9. 按一下 [儲存]。
+9. 按一下「儲存」。
 
 ### bq
 
-使用 bq 指令列工具排定查詢有兩種方式。**方法 2** 則可讓您使用更多選項排定查詢。
+使用 bq 指令列工具排定查詢有兩種方式。**方法 2**：使用更多選項排定查詢。
 
 **方法 1：**使用 **`bq query`** 指令。
 
@@ -300,7 +300,7 @@ bq query \
 
 **方法 2：**使用 **`bq mk`** 指令。
 
-排程查詢是一種移轉作業。如要排定查詢，您可以使用 bq 指令列工具建立移轉設定。
+排程查詢是一種移轉作業。如要排定查詢，可以使用 bq 指令列工具建立移轉設定。
 
 查詢必須使用 StandardSQL 方言才能進行排程。
 
@@ -332,24 +332,19 @@ bq mk \
 更改下列內容：
 
 * `dataset`：移轉設定的目標資料集。
-  + DDL 和 DML 查詢可視需要使用這個參數。是其他所有查詢的必要參數。
+  + 這個參數對於 DDL 和 DML 查詢為選用。是其他所有查詢的必要參數。
 * `name`：移轉設定的顯示名稱。顯示名稱可以是任何值，方便您日後需要修改查詢時識別。
 * `parameters`：包含所建立移轉設定的參數，格式為 JSON。例如：`--params='{"param":"param_value"}'`。
   + 針對排程查詢，您必須提供 `query` 參數。
   + `destination_table_name_template` 參數是目的地資料表的名稱。
-    - DDL 和 DML 查詢可視需要使用這個參數。是其他所有查詢的必要參數。
+    - 這個參數對於 DDL 和 DML 查詢為選用。是其他所有查詢的必要參數。
   + 針對 `write_disposition` 參數，您可以選擇 `WRITE_TRUNCATE` 來截斷 (覆寫) 目的地資料表，或選擇 `WRITE_APPEND` 將查詢結果附加到目的地資料表。
-    - DDL 和 DML 查詢可選用這個參數。是其他所有查詢的必要參數。
+    - DDL 和 DML 查詢可視需要使用這個參數。是其他所有查詢的必要參數。
 * `data_source`。資料來源：`scheduled_query`。
 * 選用：`--service_account_name` 旗標用於透過服務帳戶 (而非個別使用者帳戶) 進行驗證。
 * 選用：`--destination_kms_key` 指定 Cloud KMS 金鑰的[金鑰資源 ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw#key_resource_id)，例如 `projects/project_name/locations/us/keyRings/key_ring_name/cryptoKeys/key_name`。
 
-**注意：**如要將結果寫入擷取時間分區資料表，請參閱[目的地資料表](#destination_table)一節的操作說明。如果您建立移轉設定時，將
-`destination_table_name_template` 參數設為擷取時間
-分區資料表，排定的查詢
-就會失敗，並顯示
-錯誤訊息`partitioning_field`。**注意：** 您無法使用指令列
-工具設定通知。
+**注意：**如要將結果寫入擷取時間分區資料表，請參閱[目的地資料表](#destination_table)一節的操作說明。如果您建立移轉設定時，將 `destination_table_name_template` 參數設為擷取時間分區資料表，排定的查詢就會失敗，並顯示錯誤訊息。**注意：** 您無法使用指令列工具設定通知。`partitioning_field`
 
 舉例來說，下列指令會使用查詢 `SELECT 1
 from mydataset.test` 建立名為 `My Scheduled Query` 的排定查詢移轉設定。目的地資料表 `mytable` 每次寫入時皆會截斷，而目標資料集為 `mydataset`。排定的查詢會在預設專案中建立，並以服務帳戶身分進行驗證：
@@ -642,9 +637,7 @@ bq ls \
 --transfer_location=us
 ```
 
-如要顯示單一排定查詢的詳細資料，請輸入 `bq show`
-指令，並提供該
-排定查詢或移轉設定的 `transfer_path`。
+如要顯示單一排定查詢的詳細資料，請輸入 `bq show` 指令，並提供該排定查詢或移轉設定的 `transfer_path`。
 
 例如：
 
@@ -750,13 +743,14 @@ def list_transfer_configs(project_id: str, location: str) -> None:
 
 如要更新排定的查詢，請按照下列步驟操作：
 
-1. 在導覽選單中，按一下「Scheduled queries」(排定的查詢) 或「Scheduling」(排程)。
+1. 在導覽選單中，按一下「Pipelines & Connections」(管道和連線)，然後選取「Pipelines」(管道) 分頁標籤。如果導覽選單中沒有這個選項，請按一下「Scheduled queries」(排定的查詢)。
 2. 在排定查詢清單中，按一下要變更的查詢名稱。
 3. 在開啟的「Scheduled query details」(排定查詢詳細資料) 頁面中，按一下「Edit」(編輯)。
 4. 選用：在查詢編輯器窗格中變更查詢文字。
-5. 按一下「Schedule query」(排定查詢)，然後選取「Update scheduled query」(更新排定的查詢)。
+5. 依序點選**「File」(檔案)>「Schedule」(排程)>
+   「Update scheduled query」(更新排定的查詢)**。
 6. 選用：變更查詢的其他排程選項。
-7. 按一下「Update」。
+7. 按一下「儲存」。
 
 ### bq
 
@@ -789,8 +783,8 @@ RESOURCE_NAME
 * `name`：移轉設定的顯示名稱。顯示名稱可以是任何值，方便您日後需要修改查詢時識別。
 * `parameters`：包含所建立移轉設定的參數，格式為 JSON。例如：`--params='{"param":"param_value"}'`。
   + 針對排程查詢，您必須提供 `query` 參數。
-  + `destination_table_name_template` 參數是目的地資料表的名稱。DDL 和 DML 查詢可視需要使用這個參數。所有其他查詢都必須提供這項資訊。
-  + 針對 `write_disposition` 參數，您可以選擇 `WRITE_TRUNCATE` 來截斷 (覆寫) 目的地資料表，或選擇 `WRITE_APPEND` 將查詢結果附加至目的地資料表。如果是 DDL 和 DML 查詢，則可選擇是否要使用這項參數。所有其他查詢都必須提供這項資訊。
+  + `destination_table_name_template` 參數是目的地資料表的名稱。這個參數對於 DDL 和 DML 查詢為選用。所有其他查詢都必須提供這個參數。
+  + 針對 `write_disposition` 參數，您可以選擇 `WRITE_TRUNCATE` 來截斷 (覆寫) 目的地資料表，或選擇 `WRITE_APPEND` 將查詢結果附加至目的地資料表。如果是 DDL 和 DML 查詢，則可視需要使用這項參數。所有其他查詢都必須提供這個參數。
 * 選用：`--destination_kms_key` 指定 Cloud KMS 金鑰的[金鑰資源 ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw#key_resource_id)，例如 `projects/project_name/locations/us/keyRings/key_ring_name/cryptoKeys/key_name`。
 * `RESOURCE_NAME`：移轉作業的資源名稱 (也稱為移轉設定)。如果不知道移轉作業的資源名稱，請使用 [`bq ls --transfer_config --transfer_location=location`](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#list_transfer_configurations) 找出資源名稱。
 
@@ -810,7 +804,7 @@ projects/myproject/locations/us/transferConfigs/1234a123-1234-1a23-1be9-12ab3c45
 
 ### API
 
-請使用 [`projects.transferConfigs.patch`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.transferConfigs/patch?hl=zh-tw) 方法，並透過 `transferConfig.name` 參數提供移轉作業的資源名稱。如果您不知道轉移作業的資源名稱，請使用 [`bq ls --transfer_config --transfer_location=location`](#viewing_a_scheduled_query) 指令列出所有轉移作業，或呼叫 [`projects.locations.transferConfigs.list`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/list?hl=zh-tw) 方法，並使用 `parent` 參數提供專案 ID。
+請使用 [`projects.transferConfigs.patch`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.transferConfigs/patch?hl=zh-tw) 方法，並透過 `transferConfig.name` 參數提供移轉作業的資源名稱。如果您不知道移轉作業的資源名稱，請使用 [`bq ls --transfer_config --transfer_location=location`](#viewing_a_scheduled_query) 指令列出所有移轉作業，或呼叫 [`projects.locations.transferConfigs.list`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/list?hl=zh-tw) 方法，並使用 `parent` 參數提供專案 ID。
 
 ### Java
 
@@ -906,5 +900,5 @@ def update_transfer_config(
             update_mask=update_mask,
         )
 
-        print(f"Updated transfer config: {response.name}
+        print(f"Updated transfer config: {response
 ```

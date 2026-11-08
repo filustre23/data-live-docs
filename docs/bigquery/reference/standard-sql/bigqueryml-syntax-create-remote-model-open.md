@@ -596,4 +596,8 @@ BigQuery ML supports Hugging Face models that use the
 [Text Embeddings Inference API](https://huggingface.github.io/text-embeddings-inference/)
 or the
 [Text Generation Inference API](https://huggingface.github.io/text-generation-inference/)
-and can be deployed to Agent Pl
+and can be deployed to Agent Platform.
+
+If you use the Vertex AI API to
+[deploy the open model](/vertex-ai/generative-ai/docs/model-garden/use-models#deploy_an_open_model)
+as an Age

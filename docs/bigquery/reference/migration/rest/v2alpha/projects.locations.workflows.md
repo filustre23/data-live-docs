@@ -185,4 +185,4 @@ Assessment task config.
 | `inputPath` | `string`  Required. The Cloud Storage path for assessment input files. |
 | `outputDataset` | `string`  Required. The BigQuery dataset for output. |
 | `querylogsPath` | `string`  Optional. An optional Cloud Storage path to write the query logs (which is then used as an input path on the translation task) |
-|
+| `dataSource` | `string` |

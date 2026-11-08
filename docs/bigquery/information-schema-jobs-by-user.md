@@ -138,3 +138,7 @@ FROM
 WHERE
   state != 'DONE';
 ```
+
+**注意：** `INFORMATION_SCHEMA` 檢視表名稱會區分大小寫。
+
+結

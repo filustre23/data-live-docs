@@ -10,23 +10,23 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 使用 ARIMA\_PLUS 單變數模型預測多個時間序列 透過集合功能整理內容 你可以依據偏好儲存及分類內容。
 
-本教學課程說明如何使用[`ARIMA_PLUS`單變數時間序列模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series?hl=zh-tw)，根據特定資料欄的歷史值，預測該資料欄的未來值。
+本教學課程說明如何使用[`ARIMA_PLUS`單變數時間序列模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series?hl=zh-tw)，根據特定資料欄的歷來值，預測該資料欄的未來值。
 
-本教學課程會預測多個時間序列。系統會針對一或多個指定資料欄中的每個值，計算每個時間點的預測值。舉例來說，如果您想預測天氣，並指定包含城市資料的資料欄，預測資料就會包含城市 A 所有時間點的預測值，然後是城市 B 所有時間點的預測值，依此類推。
+本教學課程會預測多個時間序列。系統會針對每個時間點，計算一或多個指定資料欄中每個值的預測值。舉例來說，如果您想預測天氣，並指定包含城市資料的資料欄，預測資料就會包含城市 A 所有時間點的預測值，接著是城市 B 所有時間點的預測值，依此類推。
 
-本教學課程會使用公開資料表中的資料。[`bigquery-public-data.new_york.citibike_trips`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&%3Bd=new_york&%3Bt=citibike_trips&%3Bpage=table&hl=zh-tw)這個資料表包含紐約市 Citi Bike 行程的相關資訊。
+本教學課程使用公開 [`bigquery-public-data.new_york.citibike_trips`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&%3Bd=new_york&%3Bt=citibike_trips&%3Bpage=table&hl=zh-tw) 資料表中的資料。這個資料表包含紐約市 Citi Bike 行程的相關資訊。
 
-建議您先閱讀「[使用單變數模型預測單一時間序列](https://docs.cloud.google.com/bigquery/docs/arima-single-time-series-forecasting-tutorial?hl=zh-tw)」，再開始閱讀本教學課程。
+閱讀本教學課程前，強烈建議您先參閱「[使用單變量模型預測單一時間序列](https://docs.cloud.google.com/bigquery/docs/arima-single-time-series-forecasting-tutorial?hl=zh-tw)」。
 
 ## 目標
 
 本教學課程會逐步引導您完成下列工作：
 
-* 使用 [`CREATE MODEL` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series?hl=zh-tw)建立時間序列模型，預測自行車行程數量。
-* 使用 [`ML.ARIMA_EVALUATE` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-arima-evaluate?hl=zh-tw)評估模型中的自迴歸整合移動平均 (ARIMA) 資訊。
-* 使用 [`ML.ARIMA_COEFFICIENTS` 函式檢查模型係數](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-arima-coefficients?hl=zh-tw)。
-* 使用 [`ML.FORECAST` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-forecast?hl=zh-tw)從模型中擷取預測的自行車騎乘資訊。
-* 使用 [`ML.EXPLAIN_FORECAST` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast?hl=zh-tw)擷取時間序列的成分，例如季節性和趨勢。您可以檢查這些時間序列元件，藉此說明預測值。
+* 使用 [`CREATE MODEL` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series?hl=zh-tw)建立時間序列模型，預測單車行程數量。
+* 使用 [`ML.ARIMA_EVALUATE` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-arima-evaluate?hl=zh-tw)評估模型中的自動迴歸整合移動平均 (ARIMA) 資訊。
+* 使用 [`ML.ARIMA_COEFFICIENTS` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-arima-coefficients?hl=zh-tw)檢查模型係數。
+* 使用 [`ML.FORECAST` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-forecast?hl=zh-tw)從模型擷取預測的單車騎乘資訊。
+* 使用 [`ML.EXPLAIN_FORECAST` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast?hl=zh-tw)擷取時間序列的元件，例如季節性和趨勢。您可以檢查這些時間序列元件，以說明預測值。
 
 ## 費用
 
@@ -35,13 +35,13 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 * BigQuery
 * BigQuery ML
 
-如要進一步瞭解 BigQuery 費用，請參閱 [BigQuery 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw)頁面。
+如要進一步瞭解 BigQuery 費用，請參閱「[BigQuery 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw)」頁面。
 
-如要進一步瞭解 BigQuery ML 費用，請參閱 [BigQuery ML 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#bqml)。
+如要進一步瞭解 BigQuery ML 費用，請參閱「[BigQuery ML 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#bqml)」。
 
 ## 事前準備
 
-- 登入 Google Cloud 帳戶。如果您是 Google Cloud新手，歡迎[建立帳戶](https://console.cloud.google.com/freetrial?hl=zh-tw)，親自評估產品在實際工作環境中的成效。新客戶還能獲得價值 $300 美元的免費抵免額，可用於執行、測試及部署工作負載。
+- 登入 Google Cloud 帳戶。如果您未曾使用過 Google Cloud，歡迎[建立帳戶](https://console.cloud.google.com/freetrial?hl=zh-tw)，親自體驗實際使用我們產品的成效。新客戶還能獲得價值 $300 美元的免費抵免額，用於執行、測試及部署工作負載。
 - In the Google Cloud console, on the project selector page,
   select or create a Google Cloud project.
 
@@ -82,35 +82,35 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
   [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
 - [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project).
 
-1. 新專案會自動啟用 BigQuery。如要在現有的專案中啟用 BigQuery，請前往
+1. 新專案會自動啟用 BigQuery。如要在現有專案中啟用 BigQuery，請前往
 
-   如果尚未啟用 BigQuery API，請啟用。
+   啟用 BigQuery API (如果尚未啟用)。
 
-   **啟用 API 時所需的角色**
+   **啟用 API 所需的角色**
 
-   如要啟用 API，您必須具備 `serviceusage.services.enable` 權限。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用情形管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過擁有者角色 (`roles/owner`) 取得這項權限。否則，您可以透過 Service Usage 管理員角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
    [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery&hl=zh-tw)
 
 ## 所需權限
 
-* 如要建立資料集，您需要 `bigquery.datasets.create` IAM 權限。
+* 如要建立資料集，您必須具備 `bigquery.datasets.create` IAM 權限。
 * 如要建立模型，您必須具備下列權限：
 
   + `bigquery.jobs.create`
   + `bigquery.models.create`
   + `bigquery.models.getData`
   + `bigquery.models.updateData`
-* 如要執行推論，您需要下列權限：
+* 如要執行推論，您必須具備下列權限：
 
   + `bigquery.models.getData`
   + `bigquery.jobs.create`
 
-如要進一步瞭解 BigQuery 中的 IAM 角色和權限，請參閱「[IAM 簡介](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)」。
+如要進一步瞭解 BigQuery 的 IAM 角色和權限，請參閱「[IAM 簡介](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)」。
 
 ## 建立資料集
 
-如要建立 BigQuery 資料集，請選取下列任一選項：
+如要建立 BigQuery 資料集，請選取下列其中一個選項：
 
 ### 控制台
 
@@ -120,14 +120,14 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 2. 點選左側窗格中的 explore「Explorer」。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
-3. 在「Explorer」中展開專案，然後按一下「Datasets」。
-4. 在「資料集」頁面，按一下 add「建立資料集」。
+3. 在「Explorer」中展開專案，然後按一下「資料集」。
+4. 在「Datasets」(資料集) 頁面，按一下add「Create dataset」(建立資料集)。
 5. 在「建立資料集」窗格中，執行下列操作：
 
    * 在「Dataset ID」(資料集 ID) 中輸入 `bqml_tutorial`。
-   * 選取「資料位置」的「美國」。
+   * 在「資料位置」部分，選取「US」。
 
-   其餘預設設定均保留原樣。
+   其餘預設設定則保持不變。
 6. 點選「建立資料集」。
 
 ### bq
@@ -142,7 +142,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
      --description "BigQuery ML tutorial dataset." \
      bqml_tutorial
    ```
-2. 確認資料集已建立完成：
+2. 確認資料集已建立：
 
    ```
    bq ls
@@ -150,7 +150,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ### API
 
-使用已定義的[資料集資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets?hl=zh-tw)呼叫 [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert?hl=zh-tw) 方法：
+使用定義的[資料集資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets?hl=zh-tw)呼叫 [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert?hl=zh-tw) 方法：
 
 ```
 {
@@ -162,7 +162,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ### BigQuery DataFrames
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+試用這個範例前，請先按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定操作說明操作。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -176,18 +176,18 @@ bqclient.create_dataset("bqml_tutorial", exists_ok=True)
 
 ## 以圖表呈現輸入資料
 
-建立模型前，您可以選擇將輸入的時間序列資料視覺化，瞭解資料分布情形。您可以使用 Data Studio 達成這個目標。
+建立模型前，您可以選擇以視覺化方式呈現輸入時間序列資料，瞭解分布情形。您可以使用數據分析來執行這項操作。
 
 ### SQL
 
-下列查詢的 `SELECT` 陳述式會使用 [`EXTRACT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions?hl=zh-tw#extract)，從 `starttime` 欄位擷取日期資訊。這項查詢會使用 `COUNT(*)` 子句，取得每日的 Citi Bike 行程總數。
+下列查詢的 `SELECT` 陳述式會使用 [`EXTRACT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions?hl=zh-tw#extract)，從 `starttime` 欄擷取日期資訊。查詢會使用 `COUNT(*)` 子句，取得每日 Citi Bike 行程總數。
 
-請按照下列步驟將時間序列資料視覺化：
+請按照下列步驟，以圖表呈現時間序列資料：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在查詢編輯器中貼入下列查詢，然後點選「執行」：
+2. 在查詢編輯器中貼上以下查詢，然後點選「執行」：
 
    ```
    SELECT
@@ -197,15 +197,14 @@ bqclient.create_dataset("bqml_tutorial", exists_ok=True)
    `bigquery-public-data.new_york.citibike_trips`
    GROUP BY date;
    ```
-3. 查詢完成後，依序點選「開啟方式」>「數據分析」。系統會在新的分頁中開啟 Data Studio。在新分頁中完成下列步驟。
-4. 在數據分析中，依序點選 **插入** >
-   **時間序列圖表**。
-5. 在「圖表」窗格中，選擇「設定」分頁。
-6. 在「指標」專區中，新增「num\_trips」欄位，並移除預設的「記錄計數」指標。產生的圖表如下所示：
+3. 查詢完成後，依序點選「開啟方式」>「數據分析」。數據分析會在新的分頁中開啟。請在新分頁中完成下列步驟。
+4. 在數據分析中，依序點選「插入」>「時序圖表」。
+5. 在「圖表」窗格中，選擇「設定」分頁標籤。
+6. 在「指標」部分，新增「num\_trips」欄位，並移除預設的「記錄計數」指標。產生的圖表大致如下：
 
 ### BigQuery DataFrames
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+試用這個範例前，請先按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定操作說明操作。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -263,19 +262,18 @@ num_trips.plot.line(
 
 ## 建立時間序列模型
 
-您想預測每個 Citi Bike 站點的單車行程數量，這需要許多時間序列模型，每個模型對應輸入資料中包含的每個 Citi Bike 站點。您可以建立多個模型來執行這項操作，但這可能相當繁瑣且耗時，尤其是有大量時間序列時。您可以使用單一查詢建立及調整一組時間序列模型，一次預測多個時間序列。
+您想預測每個 Citi Bike 站點的單車行程數量，這需要多個時間序列模型，每個模型分別對應輸入資料中的各個 Citi Bike 站點。您可以建立多個模型來執行這項操作，但這項程序可能相當繁瑣且耗時，尤其是時間序列數量龐大時。您可以使用單一查詢建立及擬合一組時間序列模型，一次預測多個時間序列。
 
 ### SQL
 
-在下列查詢中，`OPTIONS(model_type='ARIMA_PLUS', time_series_timestamp_col='date', ...)`
-子句表示您要建立以 [ARIMA](https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average) 為基礎的時間序列模型。您可以使用 `CREATE MODEL` 陳述式的 [`time_series_id_col` 選項](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series?hl=zh-tw#time_series_id_col)，指定要取得預測結果的輸入資料欄 (在本例中為 Citi Bike 車站，以 `start_station_name` 資料欄表示)。您可以使用 `WHERE` 子句，將起點站限制為名稱中含有 `Central Park` 的車站。`CREATE MODEL` 陳述式的 [`auto_arima_max_order` 選項](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series?hl=zh-tw#auto_arima_max_order)可控制 `auto.ARIMA` 演算法中超參數調整的搜尋空間。[`decompose_time_series` 選項](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series?hl=zh-tw#decompose_time_series)的 `CREATE MODEL` 陳述式預設為 `TRUE`，因此在下一個步驟中評估模型時，系統會傳回時間序列資料的相關資訊。
+在下列查詢中，`OPTIONS(model_type='ARIMA_PLUS', time_series_timestamp_col='date', ...)` 子句表示您正在建立以 [ARIMA](https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average) 為基礎的時間序列模型。您可以使用 `CREATE MODEL` 陳述式的 [`time_series_id_col` 選項](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series?hl=zh-tw#time_series_id_col)，指定要取得預測結果的一或多個輸入資料欄，在本例中為 Citi Bike 車站，由 `start_station_name` 欄表示。您可以使用 `WHERE` 子句，將起始站限制為名稱中含有 `Central Park` 的站點。`CREATE MODEL` 陳述式的 [`auto_arima_max_order` 選項](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series?hl=zh-tw#auto_arima_max_order)，可控制 `auto.ARIMA` 演算法中超參數調整的搜尋空間。`CREATE MODEL` 陳述式的 [`decompose_time_series` 選項](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series?hl=zh-tw#decompose_time_series)預設為 `TRUE`，因此在下一個步驟評估模型時，系統會傳回時間序列資料的相關資訊。
 
 請按照下列步驟建立模型：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在查詢編輯器中貼入下列查詢，然後點選「執行」：
+2. 在查詢編輯器中貼上以下查詢，然後點選「執行」：
 
    ```
    CREATE OR REPLACE MODEL `bqml_tutorial.nyc_citibike_arima_model_group`
@@ -296,15 +294,15 @@ num_trips.plot.line(
    GROUP BY start_station_name, date;
    ```
 
-   查詢約需 24 秒才能完成，完成後即可存取 `nyc_citibike_arima_model_group` 模型。由於查詢使用 `CREATE MODEL` 陳述式，因此您不會看到查詢結果。
+   查詢約需 24 秒才能完成，完成後即可存取 `nyc_citibike_arima_model_group` 模型。由於查詢使用 `CREATE MODEL` 陳述式，因此不會顯示查詢結果。
 
-這項查詢會建立十二個時間序列模型，輸入資料中十二個 Citi Bike 起始站點各對應一個模型。由於平行處理，建立單一時間序列模型的時間成本約為 24 秒，僅比建立單一時間序列模型多 1.4 倍。不過，如果移除 `WHERE ... LIKE ...` 子句，則會有 600 多個時間序列需要預測，而且由於時段容量限制，這些序列不會完全平行預測。在這種情況下，查詢大約需要 15 分鐘才能完成。如要縮短查詢執行時間，但可接受模型品質略微下降，可以降低 `auto_arima_max_order` 的值。這會縮小 `auto.ARIMA` 演算法中的超參數調整搜尋空間。詳情請參閱 [`Large-scale time series forecasting best practices`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series?hl=zh-tw#large-scale-time-series-forecasting-best-practices)。
+這項查詢會建立十二個時間序列模型，每個模型分別對應輸入資料中的十二個 Citi Bike 起始站。由於採用平行處理，時間成本約為 24 秒，僅為建立單一時間序列模型的 1.4 倍。不過，如果移除 `WHERE ... LIKE ...` 子句，則會有 600 多個時間序列需要預測，而且由於運算單元容量限制，這些時間序列不會完全平行預測。在這種情況下，查詢大約需要 15 分鐘才能完成。如要縮短查詢執行時間，但願意承擔模型品質可能略微下降的風險，可以降低 `auto_arima_max_order` 的值。這會縮小 `auto.ARIMA` 演算法中超參數調整的搜尋空間。詳情請參閱 [`Large-scale time series forecasting best practices`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series?hl=zh-tw#large-scale-time-series-forecasting-best-practices)。
 
 ### BigQuery DataFrames
 
-在下列程式碼片段中，您要建立以 [ARIMA](https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average) 為基礎的時間序列模型。
+在下列程式碼片段中，您將建立以 [ARIMA](https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average) 為基礎的時間序列模型。
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+試用這個範例前，請先按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定操作說明操作。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -360,20 +358,20 @@ model.to_gbq(
 )
 ```
 
-這會建立十二個時間序列模型，每個模型分別對應輸入資料中的十二個 Citi Bike 起點站。由於採用平行處理，時間成本約為 24 秒，只比建立單一時間序列模型多 1.4 倍。
+系統會建立十二個時間序列模型，每個模型分別對應輸入資料中十二個 Citi Bike 起始站點。由於採用平行處理，時間成本約為 24 秒，僅為建立單一時間序列模型的 1.4 倍。
 
 ## 評估模型
 
 ### SQL
 
-使用 `ML.ARIMA_EVALUATE` 函式評估時間序列模型。`ML.ARIMA_EVALUATE` 函式會顯示自動超參數調整程序期間，為模型產生的評估指標。
+使用 `ML.ARIMA_EVALUATE` 函式評估時間序列模型。`ML.ARIMA_EVALUATE` 函式會顯示自動調整超參數期間，為模型產生的評估指標。
 
-如要評估模型，請按照下列步驟操作：
+請按照下列步驟評估模型：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在查詢編輯器中貼入下列查詢，然後點選「執行」：
+2. 在查詢編輯器中貼上以下查詢，然後點選「執行」：
 
    ```
    SELECT
@@ -384,11 +382,11 @@ model.to_gbq(
 
    結果應如下所示：
 
-   `auto.ARIMA` 會評估每個時間序列的數十個候選 ARIMA 模型，但根據預設，`ML.ARIMA_EVALUATE` 只會輸出最佳模型的資訊，讓輸出表格更精簡。如要查看所有候選模型，請將 `ML.ARIMA_EVALUATE` 函式的 [`show_all_candidate_model` 引數](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-arima-evaluate?hl=zh-tw#arguments)設為 `TRUE`。
+   雖然 `auto.ARIMA` 會為每個時間序列評估數十個候選 ARIMA 模型，但 `ML.ARIMA_EVALUATE` 預設只會輸出最佳模型的資訊，讓輸出表格保持精簡。如要查看所有候選模型，請將 `ML.ARIMA_EVALUATE` 函式的[`show_all_candidate_model` 引數](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-arima-evaluate?hl=zh-tw#arguments)設為 `TRUE`。
 
 ### BigQuery DataFrames
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+試用這個範例前，請先按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定操作說明操作。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -411,13 +409,13 @@ print(summary.peek())
 
 `start_station_name` 欄會指出建立時間序列的輸入資料欄。這是您在建立模型時，使用 `time_series_id_col` 選項指定的資料欄。
 
-`non_seasonal_p`、`non_seasonal_d`、`non_seasonal_q` 和 `has_drift` 輸出資料欄會在訓練管道中定義 ARIMA 模型。`log_likelihood`、`AIC` 和 `variance` 輸出資料欄與 ARIMA 模型校正程序相關。校正程序會使用 `auto.ARIMA` 演算法，為每個時間序列決定各自最佳的 ARIMA 模型。
+`non_seasonal_p`、`non_seasonal_d`、`non_seasonal_q` 和 `has_drift` 輸出欄定義訓練管道中的 ARIMA 模型。`log_likelihood`、`AIC` 和 `variance` 輸出資料欄與 ARIMA 模型擬合程序相關。校正程序會使用 `auto.ARIMA` 演算法，為每個時間序列決定各自最佳的 ARIMA 模型。
 
-`auto.ARIMA` 演算法會使用 [KPSS 檢定](https://en.wikipedia.org/wiki/KPSS_test)，判斷 `non_seasonal_d` 的最佳值，也就是本例中的 `1`。當 `non_seasonal_d` 為 `1` 時，auto.ARIMA 演算法會平行訓練 42 個不同的候選 ARIMA 模型。在本例中，所有 42 個候選模型都有效，因此輸出內容包含 42 列，每列對應一個候選 ARIMA 模型；如果部分模型無效，則會從輸出內容中排除。這些候選模型會依 AIC 遞增順序傳回。第一列中的模型 AIC 最低，因此視為最佳模型。這個最佳模型會儲存為最終模型，並用於預測資料、評估模型，以及檢查模型的係數，如下列步驟所示。
+`auto.ARIMA` 演算法會使用 [KPSS 檢定](https://en.wikipedia.org/wiki/KPSS_test)，判斷 `non_seasonal_d` 的最佳值，在本例中為 `1`。當 `non_seasonal_d` 為 `1` 時，auto.ARIMA 演算法會同時訓練 42 個不同的候選 ARIMA 模型。在這個範例中，所有 42 個候選模型都有效，因此輸出內容包含 42 列，每個候選 ARIMA 模型各一列；如果部分模型無效，則會從輸出內容中排除。這些候選模型會依 AIC 遞增排序。第一列的模型 AIC 最低，因此視為最佳模型。這個最佳模型會儲存為最終模型，並在您預測資料、評估模型及檢查模型係數時使用，如下列步驟所示。
 
-「`seasonal_periods`」欄包含時間序列資料中識別出的季節性模式相關資訊。每個時間序列可能會有不同的季節性模式。舉例來說，從圖中可以看出，其中一個時間序列具有年度模式，其他則沒有。
+`seasonal_periods` 欄包含時間序列資料中識別出的季節性模式資訊。每個時間序列可以有不同的季節性模式。舉例來說，從圖中可以看到，其中一個時間序列有年度模式，其他則沒有。
 
-只有在 `decompose_time_series=TRUE` 時，系統才會填入 `has_holiday_effect`、`has_spikes_and_dips` 和 `has_step_changes` 欄。這些資料欄也會反映輸入時間序列資料的相關資訊，與 ARIMA 模型無關。所有輸出資料列的這些資料欄值也相同。
+只有在 `decompose_time_series=TRUE` 時，系統才會填入 `has_holiday_effect`、`has_spikes_and_dips` 和 `has_step_changes` 欄。這些資料欄也會反映輸入時間序列資料的相關資訊，與 ARIMA 建模無關。這些資料欄在所有輸出資料列中也具有相同的值。
 
 ## 檢查模型的係數
 
@@ -430,7 +428,7 @@ print(summary.peek())
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在查詢編輯器中貼入下列查詢，然後點選「執行」：
+2. 在查詢編輯器中貼上以下查詢，然後點選「執行」：
 
    ```
    SELECT
@@ -439,15 +437,15 @@ print(summary.peek())
    ML.ARIMA_COEFFICIENTS(MODEL `bqml_tutorial.nyc_citibike_arima_model_group`);
    ```
 
-   查詢會在不到一秒內完成。結果應如下所示：
+   查詢會在 1 秒內完成。結果應大致如下：
 
-   如要進一步瞭解輸出資料欄，請參閱 [`ML.ARIMA_COEFFICIENTS` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-arima-coefficients?hl=zh-tw)。
+   如要進一步瞭解輸出資料欄，請參閱「[`ML.ARIMA_COEFFICIENTS` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-arima-coefficients?hl=zh-tw)」。
 
 ### BigQuery DataFrames
 
 使用 `coef_` 函式檢查時間序列模型的係數。
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+試用這個範例前，請先按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定操作說明操作。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -467,7 +465,7 @@ print(coef.peek())
 
 `start_station_name` 欄會指出建立時間序列的輸入資料欄。這是您在建立模型時，於 `time_series_id_col` 選項中指定的資料欄。
 
-`ar_coefficients` 輸出資料欄會顯示 ARIMA 模型自迴歸 (AR) 部分的模型係數。同樣地，`ma_coefficients` 輸出資料欄會顯示 ARIMA 模型移動平均 (MA) 部分的模型係數。這兩欄都包含陣列值，長度分別等於 `non_seasonal_p` 和 `non_seasonal_q`。`intercept_or_drift` 值是 ARIMA 模型中的常數項。
+`ar_coefficients` 輸出資料欄會顯示 ARIMA 模型自迴歸 (AR) 部分的模型係數。同樣地，`ma_coefficients` 輸出欄會顯示 ARIMA 模型移動平均 (MA) 部分的模型係數。這兩欄都包含陣列值，長度分別等於 `non_seasonal_p` 和 `non_seasonal_q`。`intercept_or_drift` 值是 ARIMA 模型中的常數項。
 
 ## 使用模型預測資料
 
@@ -475,14 +473,14 @@ print(coef.peek())
 
 使用 `ML.FORECAST` 函式預測未來時間序列值。
 
-在下列 GoogleSQL 查詢中，`STRUCT(3 AS horizon, 0.9 AS confidence_level)` 子句表示查詢會預測未來 3 個時間點，並以 90% 的信賴水準產生預測間隔。
+在下列 GoogleSQL 查詢中，`STRUCT(3 AS horizon, 0.9 AS confidence_level)` 子句表示查詢會預測 3 個未來時間點，並產生信賴水準為 90% 的預測區間。
 
-如要使用模型預測資料，請按照下列步驟操作：
+請按照下列步驟，使用模型預測資料：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在查詢編輯器中貼入下列查詢，然後點選「執行」：
+2. 在查詢編輯器中貼上以下查詢，然後點選「執行」：
 
    ```
    SELECT
@@ -493,15 +491,15 @@ print(coef.peek())
    ```
 3. 按一下「執行」。
 
-   查詢會在不到一秒的時間內完成。結果應如下所示：
+   查詢會在 1 秒內完成。結果應大致如下：
 
-如要進一步瞭解輸出資料欄，請參閱 [`ML.FORECAST` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-forecast?hl=zh-tw)。
+如要進一步瞭解輸出資料欄，請參閱「[`ML.FORECAST` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-forecast?hl=zh-tw)」。
 
 ### BigQuery DataFrames
 
 使用 `predict` 函式預測未來時間序列值。
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+試用這個範例前，請先按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定操作說明操作。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -519,24 +517,24 @@ print(prediction.peek())
 # 12  2016-10-01 00:00:00+00:00                   W 106 St & Central Park West        63.88163       18.088868               0.9 ...
 ```
 
-第一個資料欄 `start_station_name` 會註解每個時間序列模型所配適的時間序列。每個 `start_station_name` 都有三列預測結果，如 `horizon` 值所指定。
+第一欄 `start_station_name` 會註解每個時間序列模型擬合的時間序列。每個 `start_station_name` 都有三列預測結果，如 `horizon` 值所指定。
 
-對於每個 `start_station_name`，輸出資料列會依 `forecast_timestamp` 資料欄值的時間順序排列。在時間序列預測中，預測間隔 (以 `prediction_interval_lower_bound` 和 `prediction_interval_upper_bound` 資料欄值表示) 與 `forecast_value` 資料欄值同樣重要。`forecast_value` 值是預測間隔的中間點，預測間隔取決於 `standard_error` 和 `confidence_level` 資料欄值。
+針對每個 `start_station_name`，輸出資料列會依 `forecast_timestamp` 欄值按時間順序排列。在時間序列預測中，`prediction_interval_lower_bound` 和 `prediction_interval_upper_bound` 欄值代表的預測間隔，與 `forecast_value` 欄值一樣重要。`forecast_value` 值是預測區間的中間點。預測間隔取決於 `standard_error` 和 `confidence_level` 欄的值。
 
 ## 說明預測結果
 
 ### SQL
 
-除了預測資料，您也可以使用 `ML.EXPLAIN_FORECAST` 函式取得可解釋性指標。`ML.EXPLAIN_FORECAST` 函式會預測未來時間序列值，並傳回時間序列的所有個別元件。如要只傳回預測資料，請改用 `ML.FORECAST` 函式，如「[使用模型預測資料](https://docs.cloud.google.com/bigquery/docs/arima-multiple-time-series-forecasting-tutorial?hl=zh-tw#use_the_model_to_forecast_data)」所示。
+除了預測資料外，您也可以使用 `ML.EXPLAIN_FORECAST` 函式取得可解釋性指標。`ML.EXPLAIN_FORECAST` 函式會預測未來時間序列值，並傳回時間序列的所有個別元件。如果只想傳回預測資料，請改用 `ML.FORECAST` 函式，如「[使用模型預測資料](https://docs.cloud.google.com/bigquery/docs/arima-multiple-time-series-forecasting-tutorial?hl=zh-tw#use_the_model_to_forecast_data)」一節所示。
 
-`ML.EXPLAIN_FORECAST` 函式中使用的 `STRUCT(3 AS horizon, 0.9 AS confidence_level)` 子句表示查詢會預測未來 3 個時間點，並產生信賴度為 90% 的預測間隔。
+`ML.EXPLAIN_FORECAST` 函式中使用的 `STRUCT(3 AS horizon, 0.9 AS confidence_level)` 子句，表示查詢會預測未來 3 個時間點，並產生信賴水準為 90% 的預測區間。
 
-如要說明模型的結果，請按照下列步驟操作：
+請按照下列步驟說明模型結果：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在查詢編輯器中貼入下列查詢，然後點選「執行」：
+2. 在查詢編輯器中貼上以下查詢，然後點選「執行」：
 
    ```
    SELECT
@@ -546,21 +544,21 @@ print(prediction.peek())
     STRUCT(3 AS horizon, 0.9 AS confidence_level));
    ```
 
-   查詢會在不到一秒內完成。結果應如下所示：
+   查詢會在 1 秒內完成。結果應大致如下：
 
-   傳回的前一千列都是歷史資料。您必須捲動瀏覽結果，才能查看預測資料。
+   傳回的前一千列都是歷來資料。您必須捲動瀏覽結果，才能查看預測資料。
 
-   輸出資料列會先依 `start_station_name` 排序，然後依 `time_series_timestamp` 資料欄值依時間順序排序。在時間序列預測中，預測間隔 (以 `prediction_interval_lower_bound` 和 `prediction_interval_upper_bound` 欄值表示) 與 `forecast_value` 欄值同樣重要。`forecast_value` 值是預測間隔的中間點，預測間隔取決於 `standard_error` 和 `confidence_level` 欄的值。
+   輸出資料列會先依 `start_station_name` 排序，然後依 `time_series_timestamp` 資料欄值按時間順序排序。在時間序列預測中，由 `prediction_interval_lower_bound` 和 `prediction_interval_upper_bound` 資料欄值表示的預測間隔，與 `forecast_value` 資料欄值一樣重要。`forecast_value` 值是預測區間的中間點。預測間隔取決於 `standard_error` 和 `confidence_level` 欄的值。
 
    如要進一步瞭解輸出資料欄，請參閱 [`ML.EXPLAIN_FORECAST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast?hl=zh-tw)。
 
 ### BigQuery DataFrames
 
-除了預測資料，您也可以使用 `predict_explain` 函式取得可解釋性指標。`predict_explain` 函式會預測未來時間序列值，並傳回時間序列的所有個別元件。如果只想傳回預測資料，請改用 `predict` 函式，如「[使用模型預測資料](https://docs.cloud.google.com/bigquery/docs/arima-multiple-time-series-forecasting-tutorial?hl=zh-tw#use_the_model_to_forecast_data)」所示。
+除了預測資料外，您也可以使用 `predict_explain` 函式取得可解釋性指標。`predict_explain` 函式會預測未來時間序列值，並傳回時間序列的所有個別元件。如果只想傳回預測資料，請改用 `predict` 函式，如「[使用模型預測資料](https://docs.cloud.google.com/bigquery/docs/arima-multiple-time-series-forecasting-tutorial?hl=zh-tw#use_the_model_to_forecast_data)」一節所示。
 
-`predict_explain` 函式中使用的 `horizon=3, confidence_level=0.9` 子句表示查詢會預測未來 3 個時間點，並產生信賴度為 90% 的預測間隔。
+`predict_explain` 函式中使用的 `horizon=3, confidence_level=0.9` 子句，表示查詢會預測未來 3 個時間點，並產生信賴水準為 90% 的預測區間。
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+試用這個範例前，請先按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定操作說明操作。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -578,7 +576,7 @@ print(explain.peek(5))
 # 4	2013-07-03 00:00:00+00:00	Central Park S & 6 Ave	                history	                  115.0	                   205.968236	              32.572948	             <NA>	                        <NA>	                            <NA>	               191.32754	      59.220766	                       <NA>	                        <NA>	                  -44.580071	                 <NA>	                <NA>	               0.0	         -85.168527	        -5.799709
 ```
 
-輸出資料列會先依 `time_series_timestamp` 排序，然後依 `start_station_name` 資料欄值依時間順序排序。在時間序列預測中，預測間隔 (以 `prediction_interval_lower_bound` 和 `prediction_interval_upper_bound` 欄值表示) 與 `forecast_value` 欄值同樣重要。`forecast_value` 值是預測間隔的中間點，預測間隔取決於 `standard_error` 和 `confidence_level` 資料欄值。
+輸出資料列會先依 `time_series_timestamp` 排序，然後依 `start_station_name` 資料欄值按時間順序排序。在時間序列預測中，由 `prediction_interval_lower_bound` 和 `prediction_interval_upper_bound` 資料欄值表示的預測間隔，與 `forecast_value` 資料欄值一樣重要。`forecast_value` 值是預測區間的中間點。預測間隔取決於 `standard_error` 和 `confidence_level` 欄的值。
 
 ## 清除所用資源
 
@@ -591,18 +589,18 @@ print(explain.peek(5))
 
 刪除專案將移除專案中所有的資料集與資料表。若您希望重新使用專案，您可以刪除本教學課程中所建立的資料集。
 
-1. 如有需要，請在Google Cloud 控制台中開啟 BigQuery 頁面。
+1. 如有需要，請在Google Cloud 控制台開啟 BigQuery 頁面。
 
-   [前往 BigQuery 頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
+   [前往「BigQuery」頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 在導覽窗格中，按一下您建立的 **bqml\_tutorial** 資料集。
-3. 按一下「刪除資料集」，即可刪除資料集、資料表和所有資料。
-4. 在「Delete dataset」(刪除資料集) 對話方塊中，輸入資料集的名稱 (`bqml_tutorial`)，然後按一下「Delete」(刪除) 來確認刪除指令。
+3. 按一下「Delete dataset」(刪除資料集)，即可刪除資料集、資料表和所有資料。
+4. 在「Delete dataset」(刪除資料集) 對話方塊中，輸入資料集名稱 (`bqml_tutorial`) 來確認刪除指令，然後點選「Delete」(刪除)。
 
 ### 刪除專案
 
 如要刪除專案，請進行以下操作：
 
-**注意**：刪除專案會造成以下結果：
+**警告**：刪除專案會出現以下結果：
 
 * **專案中的所有內容都會遭到刪除。**如果使用現有專案來進行本文中的任務，刪除專案將一併移除當中已完成的其他任務'。
 * **自訂專案 ID 會消失。**當您之前建立這個專案時，可能建立了想要在日後使用的自訂專案 ID。如要保留使用該專案 ID 的網址 (例如 `appspot.com` 網址)，請刪除在該專案中選取的資源，而不是刪除整個專案。
@@ -619,9 +617,9 @@ print(explain.peek(5))
 
 * 瞭解如何[使用單變數模型預測單一時間序列](https://docs.cloud.google.com/bigquery/docs/arima-single-time-series-forecasting-tutorial?hl=zh-tw)
 * 瞭解如何[使用多變數模型預測單一時間序列](https://docs.cloud.google.com/bigquery/docs/arima-plus-xreg-single-time-series-forecasting-tutorial?hl=zh-tw)
-* 瞭解如何[在預測多個資料列的時間序列時，擴充單變數模型](https://docs.cloud.google.com/bigquery/docs/arima-speed-up-tutorial?hl=zh-tw)。
+* 瞭解如何[在預測多個資料列的多個時間序列時，擴充單變數模型](https://docs.cloud.google.com/bigquery/docs/arima-speed-up-tutorial?hl=zh-tw)。
 * 瞭解如何[使用單變數模型，以階層方式預測多個時間序列](https://docs.cloud.google.com/bigquery/docs/arima-time-series-forecasting-with-hierarchical-time-series?hl=zh-tw)
-* 如需 BigQuery ML 的總覽，請參閱「[BigQuery 中的 AI 和 ML 簡介](https://docs.cloud.google.com/bigquery/docs/bqml-introduction?hl=zh-tw)」。
+* 如要瞭解 BigQuery ML，請參閱「[BigQuery AI 和機器學習簡介](https://docs.cloud.google.com/bigquery/docs/bqml-introduction?hl=zh-tw)」。
 
 
 
@@ -630,11 +628,11 @@ print(explain.peek(5))
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-29 (世界標準時間)。
+上次更新時間：2026-11-03 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-03 (世界標準時間)。"],[],[]]

@@ -183,5 +183,5 @@ SELECT name,
   finish_time,
   division,
   LAG(name)
-    OVER (PARTITION BY division ORDER BY
+    OVER (PARTITION BY division ORDER BY finish_time ASC)
 ```

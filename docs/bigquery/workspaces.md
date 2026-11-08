@@ -46,16 +46,15 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 點選左側窗格中的 explore「Explorer」。
+2. 在左側窗格中，按一下 fork\_right「Source control」(原始碼控制)。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
-3. 在「Explorer」窗格中展開專案，然後點選「Repositories」(存放區)，在詳細資料窗格中開啟「Repositories」(存放區) 分頁。
-4. 選取要建立工作區的存放區。
-5. 在編輯器中，按一下「Add Workspace」(新增工作區)。
-6. 在「Create development workspace」(建立開發工作區) 窗格的「Workspace ID」(工作區 ID) 欄位中，輸入工作區的專屬 ID。
+3. 選取要建立工作區的存放區。
+4. 在編輯器中，按一下「Add Workspace」(新增工作區)。
+5. 在「Create development workspace」(建立開發工作區) 窗格的「Workspace ID」(工作區 ID) 欄位中，輸入工作區的專屬 ID。
 
    ID 只能使用數字、英文字母、連字號和底線。
-7. 點選「建立」。
+6. 點選「建立」。
 
 ### 在第三方存放區建立工作區
 
@@ -64,18 +63,19 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 點選左側窗格中的 explore「Explorer」。
-3. 在「Explorer」窗格中展開專案，然後點選「Repositories」(存放區)，在詳細資料窗格中開啟「Repositories」(存放區) 分頁。
-4. 選取要建立工作區的存放區。
-5. 在編輯器中，按一下「新增工作區」。系統會開啟「Create development workspace」(建立開發工作區) 窗格。
-6. 根據您要為工作區使用現有分支版本或新分支版本，選擇「Existing remote branch」(現有遠端分支版本) 或「New branch」(新分支版本) 圓形按鈕。
-7. 指定要使用的分支版本：
+2. 在左側窗格中，按一下 fork\_right「Source control」(原始碼控制)。
+
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
+3. 選取要建立工作區的存放區。
+4. 在編輯器中，按一下「新增工作區」。系統會開啟「Create development workspace」(建立開發工作區) 窗格。
+5. 根據您要為工作區使用現有分支版本或新分支版本，選擇「Existing remote branch」(現有遠端分支版本) 或「New branch」(新分支版本) 圓形按鈕。
+6. 指定要使用的分支版本：
 
    1. 如果選擇「Existing remote branch」圓形按鈕，請在「Remote branch」欄位中選擇現有分支版本。
    2. 如果選擇「New branch」(新分支版本) 圓形按鈕，請在「Workspace ID」(工作區 ID) 欄位中輸入分支版本名稱。在第三方存放區中建立的分支版本名稱與 BigQuery 工作區 ID 相同。
 
       ID 只能使用數字、英文字母、連字號和底線。
-8. 點選「建立」。
+7. 點選「建立」。
 
 ## 在工作區中建立目錄
 
@@ -84,16 +84,17 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 點選左側窗格中的 explore「Explorer」。
-3. 在「Explorer」窗格中展開專案，然後點選「Repositories」(存放區)，在詳細資料窗格中開啟「Repositories」(存放區) 分頁。
-4. 選取要使用的存放區，其中包含您要使用的 workspace。
-5. 找出工作區，然後按一下「開啟」。
+2. 在左側窗格中，按一下 fork\_right「Source control」(原始碼控制)。
 
-   工作區隨即會在「folder\_data」folder\_data**Git 存放區**窗格中開啟。
-6. 按一下「add 開啟建立選單」。
-7. 依序點選**「Create in repository」>「Directory」**。
-8. 在「Add a directory path」欄位中，輸入目錄路徑。
-9. 按一下「Create directory」。
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
+3. 選取要使用的存放區，其中包含您要使用的 workspace。
+4. 找出工作區，然後按一下「開啟」。
+
+   工作區會在 fork\_right 的「Source control」(原始碼控制) 窗格中開啟。
+5. 按一下「add 開啟建立選單」。
+6. 依序點選**「Create in repository」>「Directory」**。
+7. 在「Add a directory path」欄位中，輸入目錄路徑。
+8. 按一下「Create directory」。
 
 ## 在工作區中處理檔案
 
@@ -114,17 +115,18 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 點選左側窗格中的 explore「Explorer」。
-3. 在「Explorer」窗格中展開專案，然後點選「Repositories」(存放區)，在詳細資料窗格中開啟「Repositories」(存放區) 分頁。
-4. 選取要使用的存放區，其中包含您要使用的 workspace。
-5. 找出工作區，然後按一下「開啟」。
+2. 在左側窗格中，按一下 fork\_right「Source control」(原始碼控制)。
 
-   工作區隨即會在「folder\_data」folder\_data**Git 存放區**窗格中開啟。
-6. 按一下「add 開啟建立選單」。
-7. 按一下「Create in repository」(在存放區中建立)，然後點選要建立的檔案類型。
-8. 在「Name」欄位中輸入檔案名稱。
-9. 選用：在「Parent directory」(上層目錄) 欄位中，輸入要建立檔案的目錄路徑。
-10. 按一下「儲存」。
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
+3. 選取要使用的存放區，其中包含您要使用的 workspace。
+4. 找出工作區，然後按一下「開啟」。
+
+   工作區會在 fork\_right 的「Source control」(原始碼控制) 窗格中開啟。
+5. 按一下「add 開啟建立選單」。
+6. 按一下「Create in repository」(在存放區中建立)，然後點選要建立的檔案類型。
+7. 在「Name」欄位中輸入檔案名稱。
+8. 選用：在「Parent directory」(上層目錄) 欄位中，輸入要建立檔案的目錄路徑。
+9. 按一下「儲存」。
 
 ### 上傳檔案
 
@@ -133,20 +135,21 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 點選左側窗格中的 explore「Explorer」。
-3. 在「Explorer」窗格中展開專案，然後點選「Repositories」(存放區)，在詳細資料窗格中開啟「Repositories」(存放區) 分頁。
-4. 選取要使用的存放區，其中包含您要使用的 workspace。
-5. 找出工作區，然後按一下「開啟」。
+2. 在左側窗格中，按一下 fork\_right「Source control」(原始碼控制)。
 
-   工作區隨即會在「folder\_data」folder\_data**Git 存放區**窗格中開啟。
-6. 按一下「add 開啟建立選單」。
-7. 按一下「Upload to repository」(上傳至存放區)，然後點選要上傳的檔案類型。
-8. 在「上傳」窗格中，執行下列任一操作：
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
+3. 選取要使用的存放區，其中包含您要使用的 workspace。
+4. 找出工作區，然後按一下「開啟」。
+
+   工作區會在 fork\_right 的「Source control」(原始碼控制) 窗格中開啟。
+5. 按一下「add 開啟建立選單」。
+6. 按一下「Upload to repository」(上傳至存放區)，然後點選要上傳的檔案類型。
+7. 在「上傳」窗格中，執行下列任一操作：
 
    * 在「File upload」(檔案上傳) 欄位中，按一下「Browse」(瀏覽)，選取檔案，然後按一下「Open」(開啟)。
    * 在「URL」欄位中輸入檔案網址。
-9. 選用：在「Parent directory」(上層目錄) 欄位中，輸入要建立檔案的目錄路徑。
-10. 按一下「上傳」。
+8. 選用：在「Parent directory」(上層目錄) 欄位中，輸入要建立檔案的目錄路徑。
+9. 按一下「上傳」。
 
 ### 刪除檔案
 
@@ -155,14 +158,15 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 點選左側窗格中的 explore「Explorer」。
-3. 在「Explorer」窗格中展開專案，然後點選「Repositories」(存放區)，在詳細資料窗格中開啟「Repositories」(存放區) 分頁。
-4. 選取要使用的存放區，其中包含您要使用的 workspace。
-5. 找出工作區，然後按一下「開啟」。
+2. 在左側窗格中，按一下 fork\_right「Source control」(原始碼控制)。
 
-   工作區隨即會在「folder\_data」folder\_data**Git 存放區**窗格中開啟。
-6. 選取要刪除的檔案，依序點選 more\_vert「View actions」(查看動作) 和「Delete」(刪除)。
-7. 按一下 [刪除] 加以確認。
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
+3. 選取要使用的存放區，其中包含您要使用的 workspace。
+4. 找出工作區，然後按一下「開啟」。
+
+   工作區會在 fork\_right 的「Source control」(原始碼控制) 窗格中開啟。
+5. 選取要刪除的檔案，依序點選 more\_vert「View actions」(查看動作) 和「Delete」(刪除)。
+6. 按一下 [刪除] 加以確認。
 
 ## 對檔案使用版本管控
 
@@ -203,13 +207,14 @@ BigQuery 會顯示下列版本管控選項：
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 點選左側窗格中的 explore「Explorer」。
-3. 在「Explorer」窗格中展開專案，然後點選「Repositories」(存放區)，在詳細資料窗格中開啟「Repositories」(存放區) 分頁。
-4. 選取要使用的存放區，其中包含您要使用的 workspace。
-5. 找出工作區，然後按一下「開啟」。
+2. 在左側窗格中，按一下 fork\_right「Source control」(原始碼控制)。
 
-   工作區隨即會在「folder\_data」folder\_data**Git 存放區**窗格中開啟。
-6. 在工作區窗格中，執行下列操作：
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
+3. 選取要使用的存放區，其中包含您要使用的 workspace。
+4. 找出工作區，然後按一下「開啟」。
+
+   工作區會在 fork\_right 的「Source control」(原始碼控制) 窗格中開啟。
+5. 在工作區窗格中，執行下列操作：
 
    1. 如果您位於 BigQuery 存放區，請按一下「Pull from default branch」(從預設分支版本提取)。
    2. 如果存放區[已連結至第三方 Git 存放區](https://docs.cloud.google.com/bigquery/docs/repositories?hl=zh-tw#connect-third-party)，請執行下列任一操作：
@@ -229,14 +234,15 @@ BigQuery 會顯示下列版本管控選項：
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 點選左側窗格中的 explore「Explorer」。
-3. 在「Explorer」窗格中展開專案，然後點選「Repositories」(存放區)，在詳細資料窗格中開啟「Repositories」(存放區) 分頁。
-4. 選取要使用的存放區，其中包含您要使用的 workspace。
-5. 找出工作區，然後按一下「開啟」。
+2. 在左側窗格中，按一下 fork\_right「Source control」(原始碼控制)。
 
-   工作區隨即會在「folder\_data」folder\_data**Git 存放區**窗格中開啟。
-6. 在工作區窗格中，按一下「**Commit X changes**」。
-7. 在「Commit changes」(修訂變更) 窗格中，執行下列操作：
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
+3. 選取要使用的存放區，其中包含您要使用的 workspace。
+4. 找出工作區，然後按一下「開啟」。
+
+   工作區會在 fork\_right 的「Source control」(原始碼控制) 窗格中開啟。
+5. 在工作區窗格中，按一下「**Commit X changes**」。
+6. 在「Commit changes」(修訂變更) 窗格中，執行下列操作：
 
    1. 選取要修訂的已變更檔案。
 
@@ -255,13 +261,14 @@ BigQuery 會顯示下列版本管控選項：
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 點選左側窗格中的 explore「Explorer」。
-3. 在「Explorer」窗格中展開專案，然後點選「Repositories」(存放區)，在詳細資料窗格中開啟「Repositories」(存放區) 分頁。
-4. 選取要使用的存放區，其中包含您要使用的 workspace。
-5. 找出工作區，然後按一下「開啟」。
+2. 在左側窗格中，按一下 fork\_right「Source control」(原始碼控制)。
 
-   工作區隨即會在「folder\_data」folder\_data**Git 存放區**窗格中開啟。
-6. 在工作區窗格中，執行下列操作：
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
+3. 選取要使用的存放區，其中包含您要使用的 workspace。
+4. 找出工作區，然後按一下「開啟」。
+
+   工作區會在 fork\_right 的「Source control」(原始碼控制) 窗格中開啟。
+5. 在工作區窗格中，執行下列操作：
 
    1. 如果您位於 BigQuery 存放區，請按一下「Push to default branch」(推送至預設分支版本)。
    2. 如果存放區[已連結至第三方 Git 存放區](https://docs.cloud.google.com/bigquery/docs/repositories?hl=zh-tw#connect-third-party)，請執行下列任一操作：
@@ -277,13 +284,14 @@ BigQuery 會顯示下列版本管控選項：
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 點選左側窗格中的 explore「Explorer」。
-3. 在「Explorer」窗格中展開專案，然後點選「Repositories」(存放區)，在詳細資料窗格中開啟「Repositories」(存放區) 分頁。
-4. 選取要使用的存放區，其中包含您要使用的 workspace。
-5. 找出工作區，然後按一下「開啟」。
+2. 在左側窗格中，按一下 fork\_right「Source control」(原始碼控制)。
 
-   工作區隨即會在「folder\_data」folder\_data**Git 存放區**窗格中開啟。
-6. 在工作區窗格中，按一下版本管控按鈕上的 arrow\_drop\_down 箭頭下拉式選單，然後點選「Revert to last commit」(還原至上次修訂版本)。
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
+3. 選取要使用的存放區，其中包含您要使用的 workspace。
+4. 找出工作區，然後按一下「開啟」。
+
+   工作區會在 fork\_right 的「Source control」(原始碼控制) 窗格中開啟。
+5. 在工作區窗格中，按一下版本管控按鈕上的 arrow\_drop\_down 箭頭下拉式選單，然後點選「Revert to last commit」(還原至上次修訂版本)。
 
 ### 解決合併衝突
 
@@ -306,15 +314,16 @@ BigQuery 會顯示下列版本管控選項：
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 點選左側窗格中的 explore「Explorer」。
-3. 在「Explorer」窗格中展開專案，然後點選「Repositories」(存放區)，在詳細資料窗格中開啟「Repositories」(存放區) 分頁。
-4. 選取要使用的存放區，其中包含您要使用的 workspace。
-5. 找出工作區，然後按一下「開啟」。
+2. 在左側窗格中，按一下 fork\_right「Source control」(原始碼控制)。
 
-   工作區隨即會在「folder\_data」folder\_data**Git 存放區**窗格中開啟。
-6. 選取受影響的檔案，並依據所選變更進行編輯。
-7. [提交變更](#commit)。
-8. 選用：[推送變更](#push)。
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
+3. 選取要使用的存放區，其中包含您要使用的 workspace。
+4. 找出工作區，然後按一下「開啟」。
+
+   工作區會在 fork\_right 的「Source control」(原始碼控制) 窗格中開啟。
+5. 選取受影響的檔案，並依據所選變更進行編輯。
+6. [提交變更](#commit)。
+7. 選用：[推送變更](#push)。
 
 ### 查看修訂記錄
 
@@ -323,13 +332,14 @@ BigQuery 會顯示下列版本管控選項：
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 點選左側窗格中的 explore「Explorer」。
-3. 在「Explorer」窗格中展開專案，然後點選「Repositories」(存放區)，在詳細資料窗格中開啟「Repositories」(存放區) 分頁。
-4. 選取要使用的存放區，其中包含您要使用的 workspace。
-5. 找出工作區，然後按一下「開啟」。
+2. 在左側窗格中，按一下 fork\_right「Source control」(原始碼控制)。
 
-   工作區隨即會在「folder\_data」folder\_data**Git 存放區**窗格中開啟。
-6. 在工作區窗格中，按一下版本管控按鈕上的 arrow\_drop\_down 箭頭下拉式選單，然後點選「View commit history」(查看修訂版本記錄)。
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
+3. 選取要使用的存放區，其中包含您要使用的 workspace。
+4. 找出工作區，然後按一下「開啟」。
+
+   工作區會在 fork\_right 的「Source control」(原始碼控制) 窗格中開啟。
+5. 在工作區窗格中，按一下版本管控按鈕上的 arrow\_drop\_down 箭頭下拉式選單，然後點選「View commit history」(查看修訂版本記錄)。
 
 ## 刪除工作區
 
@@ -338,11 +348,12 @@ BigQuery 會顯示下列版本管控選項：
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 點選左側窗格中的 explore「Explorer」。
-3. 在「Explorer」窗格中展開專案，然後點選「Repositories」(存放區)，在詳細資料窗格中開啟「Repositories」(存放區) 分頁。
-4. 選取要刪除的工作區所在的存放區。
-5. 找出工作區，然後依序點選 more\_vert「Open actions」(開啟動作)**>「Delete」(刪除)**。
-6. 點選「刪除」。
+2. 在左側窗格中，按一下 fork\_right「Source control」(原始碼控制)。
+
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
+3. 選取要刪除的工作區所在的存放區。
+4. 找出工作區，然後依序點選 more\_vert「Open actions」(開啟動作)**>「Delete」(刪除)**。
+5. 點選「刪除」。
 
 ## 後續步驟
 
@@ -356,11 +367,11 @@ BigQuery 會顯示下列版本管控選項：
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-02 (世界標準時間)。
+上次更新時間：2026-11-03 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-03 (世界標準時間)。"],[],[]]

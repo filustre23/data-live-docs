@@ -140,4 +140,4 @@ Response message for `AppendRows`.
 | `updated_schema` | `TableSchema`  If backend detects a schema update, pass it to user so that user can use it to input new type of message. It will be empty when no schema updates have occurred. |
 | `row_errors[]` | `RowError`  If a request failed due to corrupted rows, no rows in the batch will be appended. The API will return row level error info, so that the caller can remove the bad rows and retry the request. |
 | Union field `response`.  `response` can be only one of the following: | |
-| `append_result` |  |
+| `append_result` | `AppendResult`  Result if the append is successful. |

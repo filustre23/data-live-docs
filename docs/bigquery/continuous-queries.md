@@ -16,15 +16,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 建立持續查詢
 
-本文說明如何在 BigQuery 執行[持續查詢](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction?hl=zh-tw)。
-
-BigQuery 持續查詢是持續執行的 SQL 陳述式，能近乎即時地處理資料。您可以使用持續查詢，從標準 BigQuery 資料表或 [Apache Iceberg 代管資料表](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery?hl=zh-tw)讀取傳入的資料，並將持續查詢產生的輸出資料列寫入或匯出至下列目的地：
-
-* BigQuery 資料表
-* [Apache Iceberg 代管資料表](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery?hl=zh-tw)
-* Pub/Sub 主題
-* Bigtable 資料表
-* Spanner 資料表
+BigQuery 的[持續查詢](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction?hl=zh-tw)是會持續執行的 SQL 陳述式，可讓您近乎即時地處理傳入的資料。您可以建立並執行持續查詢，將輸出資料列寫入或匯出至 BigQuery 資料表、[Apache Iceberg 代管資料表](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery?hl=zh-tw)、Pub/Sub 主題、Bigtable 資料表或 Spanner 資料表。
 
 ## 選擇帳戶類型
 
@@ -55,6 +47,14 @@ BigQuery 持續查詢是持續執行的 SQL 陳述式，能近乎即時地處理
 
 如要將資料寫入 BigQuery 資料表，使用者帳戶必須具備 `bigquery.tables.updateData` IAM 權限。下列各項 IAM 角色都會授予 `bigquery.tables.updateData` 權限：
 
+* [BigQuery 資料編輯者 (`roles/bigquery.dataEditor`)](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.dataEditor)
+* [BigQuery 資料擁有者 (`roles/bigquery.dataOwner`)](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.dataOwner)
+* [BigQuery 管理員 (`roles/bigquery.admin`)](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.admin)
+
+如要呼叫其他使用者建立的永久 [SQL user-defined function (UDF)](https://docs.cloud.google.com/bigquery/docs/user-defined-functions?hl=zh-tw#sql-udf-structure)，使用者帳戶必須具備常式或資料集的 `bigquery.routines.get` IAM 權限。下列各項 IAM 角色都會授予 `bigquery.routines.get` 權限：
+
+* [BigQuery 中繼資料檢視者 (`roles/bigquery.metadataViewer`)](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.metadataViewer)
+* [BigQuery 資料檢視者 (`roles/bigquery.dataViewer`)](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.dataViewer)
 * [BigQuery 資料編輯者 (`roles/bigquery.dataEditor`)](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.dataEditor)
 * [BigQuery 資料擁有者 (`roles/bigquery.dataOwner`)](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.dataOwner)
 * [BigQuery 管理員 (`roles/bigquery.admin`)](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.admin)
@@ -90,6 +90,14 @@ BigQuery 持續查詢是持續執行的 SQL 陳述式，能近乎即時地處理
 
 如要將資料寫入 BigQuery 資料表，服務帳戶必須具備 `bigquery.tables.updateData` IAM 權限。下列各項 IAM 角色都會授予 `bigquery.tables.updateData` 權限：
 
+* [BigQuery 資料編輯者 (`roles/bigquery.dataEditor`)](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.dataEditor)
+* [BigQuery 資料擁有者 (`roles/bigquery.dataOwner`)](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.dataOwner)
+* [BigQuery 管理員 (`roles/bigquery.admin`)](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.admin)
+
+如要呼叫永久性 [SQL user-defined function (UDF)](https://docs.cloud.google.com/bigquery/docs/user-defined-functions?hl=zh-tw#sql-udf-structure)，服務帳戶必須具備常式或資料集的 `bigquery.routines.get` IAM 權限。下列各項 IAM 角色都會授予 `bigquery.routines.get` 權限：
+
+* [BigQuery 中繼資料檢視者 (`roles/bigquery.metadataViewer`)](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.metadataViewer)
+* [BigQuery 資料檢視者 (`roles/bigquery.dataViewer`)](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.dataViewer)
 * [BigQuery 資料編輯者 (`roles/bigquery.dataEditor`)](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.dataEditor)
 * [BigQuery 資料擁有者 (`roles/bigquery.dataOwner`)](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.dataOwner)
 * [BigQuery 管理員 (`roles/bigquery.admin`)](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.admin)
@@ -173,6 +181,18 @@ BigQuery 持續查詢是持續執行的 SQL 陳述式，能近乎即時地處理
 * [使用 `ML.TRANSLATE` 函式翻譯文字](https://docs.cloud.google.com/bigquery/docs/translate-text?hl=zh-tw)
 
 在持續查詢中使用 AI 函式時，請考量查詢輸出內容是否會超出函式的[配額](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#cloud_ai_service_functions)。如果超出配額，您可能需要另外處理未處理的記錄。
+
+## 使用 SQL UDF
+
+您可以呼叫永久或暫時的 [SQL UDF](https://docs.cloud.google.com/bigquery/docs/user-defined-functions?hl=zh-tw#sql-udf-structure)，在持續查詢中封裝自訂轉換邏輯。持續查詢僅支援 SQL UDF。不支援 JavaScript UDF、Python UDF、遠端函式和使用者定義的匯總函式。
+
+在持續查詢中使用 SQL UDF 時，請注意下列事項：
+
+* SQL UDF 中的 SQL 運算式只能使用[持續查詢支援](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction?hl=zh-tw#supported_functionality)的 SQL 語法、函式和資料來源。舉例來說，由持續查詢呼叫的 SQL UDF 無法查詢外部資料表，也無法執行掃描其他資料表的純量子查詢。
+* 如要呼叫永久 SQL UDF，執行持續查詢的帳戶必須具備常式或資料集的 `bigquery.routines.get` 權限，以及 UDF 參照的任何資源存取權，除非 UDF 已設為[授權常式](https://docs.cloud.google.com/bigquery/docs/authorized-routines?hl=zh-tw)。詳情請參閱「[必要權限](#required_permissions)」。
+* 如果參照永久 SQL UDF 的持續查詢正在執行，而您更新 (包括中繼資料或標籤變更) 或刪除該 UDF，BigQuery 會終止持續查詢工作。如果您更新或刪除外部 SQL UDF 參照的巢狀 SQL UDF，也適用這項規定。如要套用更新後的 UDF 定義，同時不遺失資料，請更新 UDF，然後使用 `APPENDS` 或 `CHANGES` 函式，從上一個工作停止的時間點開始新的持續查詢。如需類似的工作流程，請參閱「[修改持續查詢的 SQL](#modify_the_sql_of_a_continuous_query)」。
+
+如需範例，請參閱「[使用 SQL UDF 轉換資料](#sql-udf-example)」。
 
 ## 指定持續查詢的開始時間
 
@@ -639,6 +659,69 @@ GROUP BY
  geohash;
 ```
 
+### 使用 SQL UDF 轉換資料
+
+下列範例說明如何使用永久或暫時 [SQL UDF](https://docs.cloud.google.com/bigquery/docs/user-defined-functions?hl=zh-tw#sql-udf-structure)，在持續查詢中封裝自訂轉換邏輯。
+
+如要使用永久 SQL UDF，請先在標準 BigQuery 查詢中建立函式：
+
+```
+CREATE FUNCTION `myproject.real_time_taxi_streaming.calculate_fare_per_passenger`(
+  meter_reading FLOAT64,
+  passenger_count INT64)
+RETURNS FLOAT64
+AS (
+  ROUND(SAFE_DIVIDE(meter_reading, passenger_count), 2)
+);
+```
+
+建立永久 SQL UDF 後，請在持續查詢中呼叫該 UDF：
+
+```
+INSERT INTO `myproject.real_time_taxi_streaming.transformed_taxirides`
+SELECT
+  timestamp,
+  meter_reading,
+  ride_status,
+  passenger_count,
+  `myproject.real_time_taxi_streaming.calculate_fare_per_passenger`(
+    meter_reading, passenger_count) AS cost_per_passenger
+FROM
+  APPENDS(TABLE `myproject.real_time_taxi_streaming.taxirides`,
+    -- Configure the APPENDS TVF start_timestamp to specify when you want to
+    -- start processing data using your continuous query.
+    -- This example starts processing at 10 minutes before the current time.
+    CURRENT_TIMESTAMP() - INTERVAL 10 MINUTE)
+WHERE
+  ride_status = 'dropoff';
+```
+
+或者，您也可以直接在持續查詢工作中，定義及呼叫暫時 SQL UDF：
+
+```
+CREATE TEMP FUNCTION calculate_fare_per_passenger(
+  meter_reading FLOAT64,
+  passenger_count INT64)
+RETURNS FLOAT64
+AS (
+  ROUND(SAFE_DIVIDE(meter_reading, passenger_count), 2)
+);
+
+INSERT INTO `myproject.real_time_taxi_streaming.transformed_taxirides`
+SELECT
+  timestamp,
+  meter_reading,
+  ride_status,
+  passenger_count,
+  calculate_fare_per_passenger(
+    meter_reading, passenger_count) AS cost_per_passenger
+FROM
+  APPENDS(TABLE `myproject.real_time_taxi_streaming.taxirides`,
+    CURRENT_TIMESTAMP() - INTERVAL 10 MINUTE)
+WHERE
+  ride_status = 'dropoff';
+```
+
 ## 修改持續查詢的 SQL
 
 持續查詢工作執行期間，您無法更新持續查詢使用的 SQL。您必須取消持續查詢工作、修改 SQL，然後從停止原始持續查詢工作的位置，啟動新的持續查詢工作。
@@ -693,11 +776,11 @@ GROUP BY
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-02 (世界標準時間)。
+上次更新時間：2026-11-04 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-04 (世界標準時間)。"],[],[]]

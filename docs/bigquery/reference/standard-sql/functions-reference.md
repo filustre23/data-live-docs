@@ -292,3 +292,8 @@ doesn't return an error, `SAFE.` has no effect on the output.
   don't support the `SAFE.` prefix.
 * The `CAST`, `EXTRACT`, and `SECURE_CONTEXT` functions don't support the `SAFE.`
   prefix. To prevent errors from casting, use
+  [SAFE\_CAST](/bigquery/docs/reference/standard-sql/conversion_functions#safe_casting).
+
+**Example**
+
+In the following example, the first use of the

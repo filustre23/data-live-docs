@@ -541,4 +541,8 @@ If you are running hyperparameter tuning, use one of the following options:
   `COLSAMPLE_BYNODE = HPARAM_CANDIDATES([0, 0.1, 0.3, 0.5])`.
 
 When running hyperparameter tuning, the valid range is `[0, 1.0]`, there is
-no default range, and the scale type is `LINEAR`
+no default range, and the scale type is `LINEAR`.
+
+### `MIN_SPLIT_LOSS`
+
+**Syntax**

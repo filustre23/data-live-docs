@@ -64,7 +64,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ## 共用已儲存的查詢
 
-如要與使用者共用已儲存的查詢，請先授予該使用者已儲存查詢的存取權，並將其新增至適當的 IAM 角色。接著，您會產生已儲存的查詢的連結，並與使用者共用該連結。
+如要與使用者共用已儲存的查詢，請先授予該使用者已儲存查詢的存取權，並將其新增至適當的 IAM 角色。接著，您產生已儲存的查詢的連結，並與使用者共用該連結。
 
 與您共用查詢的使用者只能看到最新版本的查詢。自動儲存但未明確儲存的變更不會顯示在共用查詢中。
 
@@ -155,7 +155,7 @@ Google Cloud 專案中的所有新程式碼資產都會使用預設區域。資�
 
 ## 查看所有已儲存的查詢
 
-如要查看專案中所有已儲存的查詢，請按照下列步驟操作：
+如要查看專案中各區域的所有已儲存的查詢清單，請按照下列步驟操作：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -165,7 +165,7 @@ Google Cloud 專案中的所有新程式碼資產都會使用預設區域。資�
 
 * 如要在目前的分頁中開啟清單，請按一下「顯示全部」。
 * 如要在新分頁中開啟清單，請依序點選「全部顯示」 >「新分頁」。
-* 如要在分割分頁中開啟清單，請依序按一下「全部顯示」 >「分割分頁」。
+* 如要在分割分頁中開啟清單，請依序按一下「全部顯示」>「分割分頁」。
 
 ## 查看已儲存的查詢中繼資料
 
@@ -286,11 +286,6 @@ Google Cloud 專案中的所有新程式碼資產都會使用預設區域。資�
 詳情請參閱「[淘汰傳統版已儲存的查詢](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction?hl=zh-tw#classic_saved_queries_deprecated)」。如要瞭解如何遷移至已儲存的查詢，請參閱「[遷移傳統版已儲存的查詢](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries?hl=zh-tw#migrate_classic_saved_queries)」。
 
 請參閱下列各節，瞭解如何管理[傳統已儲存的查詢](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction?hl=zh-tw#classic_saved_queries_deprecated)。
-
-**注意：** 如果您尚未啟用 BigQuery Studio，傳統版
-已儲存的查詢會顯示在「**Classic Explorer**」窗格
-的「**Saved queries (NUMBER)**」資料夾中，而非
-「**(Classic) Queries**」資料夾。
 
 ### 共用傳統版已儲存的查詢
 
@@ -464,11 +459,11 @@ Knowledge Catalog 會將已儲存的查詢記錄為[項目](https://docs.cloud.g
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-30 (世界標準時間)。
+上次更新時間：2026-11-03 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-30 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-03 (世界標準時間)。"],[],[]]

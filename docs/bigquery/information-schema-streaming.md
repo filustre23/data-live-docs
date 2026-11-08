@@ -237,5 +237,6 @@ FROM
 WHERE
   table_id LIKE 'my_table'
 GROUP BY
-  project_id, dataset_id, table_id, error_code
+  project_id, dataset_id, table_id, error_code, day
+ORDER
 ```

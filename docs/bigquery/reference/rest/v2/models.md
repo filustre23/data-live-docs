@@ -194,4 +194,4 @@ Indicates the type of the Model.
 | `ARIMA_PLUS_XREG` | ARIMA with external regressors. |
 | `RANDOM_FOREST_REGRESSOR` | Random forest regressor model. |
 | `RANDOM_FOREST_CLASSIFIER` | Random forest classifier model. |
-<
+| `TENSORFLOW_LITE` | An imp |

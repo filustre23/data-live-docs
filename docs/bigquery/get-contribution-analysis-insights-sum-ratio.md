@@ -16,36 +16,36 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 使用可相加的比率指標，從貢獻分析模型取得資料洞察
 
-在本教學課程中，您將使用[貢獻分析](https://docs.cloud.google.com/bigquery/docs/contribution-analysis?hl=zh-tw)模型，分析愛荷華州酒類銷售資料集中銷售成本比率的貢獻度。本教學課程會逐步引導您完成下列工作：
+在本教學課程中，您將使用[貢獻分析](https://docs.cloud.google.com/bigquery/docs/contribution-analysis?hl=zh-tw)模型，分析愛荷華州酒類銷售資料集中，銷貨成本比率的貢獻。本教學課程會逐步引導您完成下列工作：
 
-* 根據愛荷華州公開酒類資料建立輸入資料表。
-* 建立使用[可相加比例指標](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis?hl=zh-tw#use_a_summable_ratio_metric)的[貢獻度分析模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis?hl=zh-tw)。這類模型會彙整兩個數值資料欄的值，並判斷每個資料區隔的控制組和測試資料集之間的比例差異。
+* 根據公開的愛荷華州酒類資料建立輸入資料表。
+* 建立[貢獻分析模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis?hl=zh-tw)，並使用[可相加的比率指標](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis?hl=zh-tw#use_a_summable_ratio_metric)。這類模型會彙整兩個數值欄的值，並判斷控制組和測試資料集在各資料區隔的比率差異。
 * 使用 [`ML.GET_INSIGHTS` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-get-insights?hl=zh-tw)，從模型取得指標洞察。
 
-開始本教學課程前，請先熟悉[貢獻分析](https://docs.cloud.google.com/bigquery/docs/contribution-analysis?hl=zh-tw)應用情境。
+開始本教學課程之前，請先熟悉[貢獻分析](https://docs.cloud.google.com/bigquery/docs/contribution-analysis?hl=zh-tw)用途。
 
 ## 所需權限
 
-* 如要建立資料集，您需要 `bigquery.datasets.create` Identity and Access Management (IAM) 權限。
+* 如要建立資料集，您必須具備 `bigquery.datasets.create` Identity and Access Management (IAM) 權限。
 * 如要建立模型，您必須具備下列權限：
 
   + `bigquery.jobs.create`
   + `bigquery.models.create`
   + `bigquery.models.getData`
   + `bigquery.models.updateData`
-* 如要執行推論，您需要下列權限：
+* 如要執行推論，您必須具備下列權限：
 
   + `bigquery.models.getData`
   + `bigquery.jobs.create`
 
 ## 費用
 
-在本文件中，您會使用下列 Google Cloud的計費元件：
+在本文件中，您將使用下列 Google Cloud計費元件：
 
 * **BigQuery ML**: You incur costs for the data that you
   process in BigQuery.
 
-如要根據預測用量估算費用，請使用 [Pricing Calculator](https://docs.cloud.google.com/products/calculator?hl=zh-tw)。
+您可以使用 [Pricing Calculator](https://docs.cloud.google.com/products/calculator?hl=zh-tw)，根據預測用量估算費用。
 
 初次使用 Google Cloud 的使用者可能符合[免費試用期](https://docs.cloud.google.com/free?hl=zh-tw)資格。
 
@@ -53,27 +53,27 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ## 事前準備
 
-1. 在 Google Cloud 控制台的專案選擇器頁面中，選取或建立 Google Cloud 專案。
+1. 在 Google Cloud 控制台的專案選取器頁面中，選取或建立 Google Cloud 專案。
 
    **選取或建立專案所需的角色**
 
-   * **選取專案**：選取專案時，不需要具備特定 IAM 角色，只要您在專案中獲派角色，即可選取該專案。
-   * **建立專案**：如要建立專案，您需要「專案建立者」角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
-   **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，而不要選取現有專案。完成這些步驟後，您就可以刪除專案，並移除與該專案相關聯的所有資源。
+   * **選取專案**：選取專案時，不需具備特定 IAM 角色，只要您已獲派某個專案的角色，即可選取該專案。
+   * **建立專案**：如要建立專案，您必須具備專案建立者角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，而不要選取現有專案。如果採用這種做法，當您完成這些步驟後，就可以直接刪除該專案，並移除相關聯的所有資源。
 
    [前往專案選取器](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
-2. [確認專案已啟用計費功能 Google Cloud](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project) 。
-3. 如果尚未啟用 BigQuery API，請啟用。
+2. [確認 Google Cloud 專案已啟用計費功能](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project)。
+3. 啟用 BigQuery API (如果尚未啟用)。
 
-   **啟用 API 時所需的角色**
+   **啟用 API 所需的角色**
 
-   如要啟用 API，您必須具備 `serviceusage.services.enable` 權限。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用情形管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過擁有者角色 (`roles/owner`) 取得這項權限。否則，您可以透過 Service Usage 管理員角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
    [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery.googleapis.com&hl=zh-tw)
 
 ## 建立資料集
 
-如要建立 BigQuery 資料集，請選取下列任一選項：
+如要建立 BigQuery 資料集，請選取下列其中一個選項：
 
 ### 控制台
 
@@ -83,14 +83,14 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 2. 點選左側窗格中的 explore「Explorer」。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
-3. 在「Explorer」中展開專案，然後按一下「Datasets」。
-4. 在「資料集」頁面，按一下 add「建立資料集」。
+3. 在「Explorer」中展開專案，然後按一下「資料集」。
+4. 在「Datasets」(資料集) 頁面，按一下add「Create dataset」(建立資料集)。
 5. 在「建立資料集」窗格中，執行下列操作：
 
    * 在「Dataset ID」(資料集 ID) 中輸入 `bqml_tutorial`。
-   * 選取「資料位置」的「美國」。
+   * 在「資料位置」部分，選取「US」。
 
-   其餘預設設定均保留原樣。
+   其餘預設設定則保持不變。
 6. 點選「建立資料集」。
 
 ### bq
@@ -105,7 +105,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
      --description "BigQuery ML tutorial dataset." \
      bqml_tutorial
    ```
-2. 確認資料集已建立完成：
+2. 確認資料集已建立：
 
    ```
    bq ls
@@ -113,7 +113,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ### API
 
-使用已定義的[資料集資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets?hl=zh-tw)呼叫 [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert?hl=zh-tw) 方法：
+使用定義的[資料集資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets?hl=zh-tw)呼叫 [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert?hl=zh-tw) 方法：
 
 ```
 {
@@ -125,12 +125,12 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ## 建立輸入資料表
 
-建立包含測試和控制項資料的資料表，以供分析。下列查詢會建立兩個中繼資料表 (2021 年的酒類資料測試表，以及 2020 年的酒類資料控制表)，然後合併中繼資料表，建立同時包含測試和控制列的資料表，以及相同的資料欄集。
+建立包含測試和控制組資料的資料表，以便進行分析。下列查詢會建立兩個中繼資料表：2021 年酒類資料的測試資料表，以及 2020 年酒類資料的控制資料表，然後執行中繼資料表的聯集，建立含有測試和控制資料列，以及相同資料欄集的資料表。
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在查詢編輯器執行下列陳述式：
+2. 在查詢編輯器中執行下列陳述式：
 
    ```
    CREATE OR REPLACE TABLE bqml_tutorial.iowa_liquor_sales_data AS
@@ -168,7 +168,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在查詢編輯器執行下列陳述式：
+2. 在查詢編輯器中執行下列陳述式：
 
    ```
    CREATE OR REPLACE MODEL bqml_tutorial.liquor_sales_model
@@ -184,14 +184,14 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 查詢大約需要 35 秒才能完成，完成後，模型 `liquor_sales_model` 會顯示在 `bqml_tutorial` 資料集中。由於查詢使用 `CREATE MODEL` 陳述式建立模型，因此不會有查詢結果。
 
-## 從模型取得洞察資訊
+## 從模型中取得洞察資料
 
-使用 `ML.GET_INSIGHTS` 函式，取得貢獻分析模型產生的深入分析資料。
+使用 `ML.GET_INSIGHTS` 函式，取得貢獻分析模型產生的洞察資料。
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在查詢編輯器中，執行下列陳述式，從[可加總比率指標貢獻分析模型輸出內容](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-get-insights?hl=zh-tw#output_for_summable_ratio_metric_contribution_analysis_models)中選取資料欄：
+2. 在查詢編輯器中執行下列陳述式，從[可加總比率指標貢獻分析模型的輸出內容](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-get-insights?hl=zh-tw#output_for_summable_ratio_metric_contribution_analysis_models)中選取資料欄：
 
    ```
    SELECT
@@ -210,7 +210,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
    ORDER BY aumann_shapley_attribution DESC;
    ```
 
-輸出內容的前幾列應如下所示：為提升可讀性，系統會截斷值。
+輸出內容的前幾列應如下所示。系統會截斷值，以提高可讀性。
 
 | 貢獻者 | metric\_test | metric\_control | metric\_test\_over\_metric\_control | metric\_test\_over\_complement | metric\_control\_over\_complement | aumann\_shapley\_attribution | apriori\_support | 貢獻 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -220,13 +220,11 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 | vendor\_name=BACARDI USA INC | 0.071 | 0.082 | 0.857 | 1.025 | 1.167 | -0.00054 | 0.057 | 0.00054 |
 | vendor\_name=PERNOD RICARD USA | 0.068 | 0.077 | 0.89 | 0.988 | 1.082 | -0.0005 | 0.061 | 0.0005 |
 
-在輸出內容中，您可以看到資料區隔`city=DES MOINES`
-對銷售比率變化的貢獻度最高
-。您也可以在 `metric_test` 和 `metric_control` 欄中查看這項差異，這兩欄顯示測試資料的比例低於控制組資料。其他指標 (例如 `metric_test_over_metric_control`、`metric_test_over_complement` 和 `metric_control_over_complement`) 會計算額外的統計資料，說明控制組和測試組比率之間的關係，以及這些比率與整體母體的關聯。詳情請參閱「[可加總比率指標貢獻分析模型的輸出內容](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-get-insights?hl=zh-tw#output_for_summable_ratio_metric_contribution_analysis_models)」。
+在輸出內容中，您可以看到資料區隔 `city=DES MOINES` 對銷售比率變化的貢獻最高。您也可以在 `metric_test` 和 `metric_control` 欄中看到這項差異，顯示測試資料中的比率低於控制組資料。其他指標 (例如 `metric_test_over_metric_control`、`metric_test_over_complement` 和 `metric_control_over_complement`) 則會計算其他統計資料，說明控制組和測試組比率之間的關係，以及這些比率與整體母體的關係。詳情請參閱「[可相加比率指標貢獻分析模型的輸出內容](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-get-insights?hl=zh-tw#output_for_summable_ratio_metric_contribution_analysis_models)」。
 
 ## 清除所用資源
 
-**注意**：刪除專案會造成以下結果：
+**警告**：刪除專案會出現以下結果：
 
 * **專案中的所有內容都會遭到刪除。**如果使用現有專案來進行本文中的任務，刪除專案將一併移除當中已完成的其他任務'。
 * **自訂專案 ID 會消失。**當您之前建立這個專案時，可能建立了想要在日後使用的自訂專案 ID。如要保留使用該專案 ID 的網址 (例如 `appspot.com` 網址)，請刪除在該專案中選取的資源，而不是刪除整個專案。
@@ -246,11 +244,11 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-29 (世界標準時間)。
+上次更新時間：2026-11-03 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-03 (世界標準時間)。"],[],[]]

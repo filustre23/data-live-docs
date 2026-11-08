@@ -16,7 +16,11 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 排解存取控管問題
 
-本文說明如何排解 BigQuery 中 Identity and Access Management (IAM) 權限、資料欄層級存取控管和客戶自行管理的加密金鑰 (CMEK) 的安全性問題。IAM 權限問題通常會導致 `Access Denied` 錯誤，如下所示：
+本文說明如何排解 BigQuery 安全性和權限問題，包括 Identity and Access Management (IAM) 權限、資料欄層級存取控管、客戶自行管理的加密金鑰 (CMEK) 和違反政策。當主體執行工作或存取資源時，存取控管失敗通常會產生 `Access Denied` 或 `403 Forbidden` 錯誤。
+
+## 常見的「存取遭拒」錯誤
+
+以下是常見的存取遭拒錯誤範例：
 
 * `Access Denied: Project PROJECT_ID:
   User does not have bigquery.jobs.create permission in project
@@ -147,11 +151,16 @@ RESOURCE_TYPE RESOURCE_ID: DETAILS`)，除了上述一般 IAM 步驟外，請檢
 
 * **資源不存在或位置不符 (`or perhaps it does not
   exist`)。**如果錯誤訊息結尾為 `or perhaps it does not exist`，BigQuery 會遮蓋資料表、檢視表或常式是否存在，因為主體缺少資料集或專案中繼資料權限 (`bigquery.tables.get` 或 `bigquery.datasets.get`)。請確認專案 ID、資料集 ID 和資料表名稱拼寫正確，並確認查詢在資料集所在位置執行。
-* **授權檢視表和常式**：使用者查詢[授權檢視表](https://docs.cloud.google.com/bigquery/docs/authorized-views?hl=zh-tw)或[授權常式](https://docs.cloud.google.com/bigquery/docs/authorized-routines?hl=zh-tw)時，必須具備查詢檢視表或常式的權限，且檢視表或常式本身必須在來源資料集的存取控制清單 (ACL) 中獲得授權。如果查詢因基礎資料表上的 `Access Denied` 而失敗，請將檢視表或常式 (或其整個資料集做為[授權資料集](https://docs.cloud.google.com/bigquery/docs/authorized-datasets?hl=zh-tw)) 新增至來源資料集的授權存取清單。如果某個檢視表查詢另一個檢視表，則鏈結中的每個檢視表都必須獲得授權，才能讀取資料集。如果授權檢視表遭到刪除，然後以相同名稱重新建立，則刪除的檢視表最多可在來源資料集的授權存取清單中保留 24 小時，且授權新檢視表會失敗，並顯示 `Duplicate authorized views`。請從清單中移除舊項目，然後授權新檢視表，或[更新檢視表的 SQL 查詢](https://docs.cloud.google.com/bigquery/docs/managing-views?hl=zh-tw#update-sql)，而非刪除並重新建立檢視表。如果您使用 `CREATE OR REPLACE` 陳述式或 `routines.update` 方法修改已授權的常式，則必須重新授權該常式。
+* **授權檢視表和常式**：使用者查詢[授權檢視表](https://docs.cloud.google.com/bigquery/docs/authorized-views?hl=zh-tw)或[授權常式](https://docs.cloud.google.com/bigquery/docs/authorized-routines?hl=zh-tw)時，必須具備查詢檢視表或常式的權限，且檢視表或常式本身必須在來源資料集的存取控制清單 (ACL) 中獲得授權。如果查詢因基礎資料表上的 `Access Denied` 而失敗，請將檢視表或常式 (或其整個資料集做為[授權資料集](https://docs.cloud.google.com/bigquery/docs/authorized-datasets?hl=zh-tw)) 新增至來源資料集的授權存取清單。如果某個檢視表查詢另一個檢視表，則鏈結中的每個檢視表都必須獲得授權，才能讀取資料集。
+
+  如果刪除授權檢視表或授權資料集，並建立另一個同名的檢視表或資料集，查詢可能會失敗，並顯示 `Access Denied`。即使名稱仍顯示在來源資料集的授權存取清單中，也可能發生這項錯誤，因為已刪除的項目最多可保留 24 小時。請查看 Cloud 稽核記錄，確認鏈結中的授權檢視表或授權資料集，是否在上次查詢成功後遭到刪除及替換。如要還原存取權，請先從來源資料集的授權存取清單中移除現有項目，然後重新新增檢視表或資料集。如果先新增檢視畫面再移除舊項目，可能會發生 `Duplicate authorized views` 錯誤。
+
+  如要修改檢視表而不中斷授權，請[更新檢視表的 SQL 查詢](https://docs.cloud.google.com/bigquery/docs/managing-views?hl=zh-tw#update-sql)，而非刪除並重新建立檢視表。不過，如果您使用 `CREATE OR REPLACE` 陳述式或 `routines.update` 方法修改授權常式，就必須重新授權常式。
 * **VPC Service Controls**。如果貴組織使用 [VPC Service Controls](https://docs.cloud.google.com/bigquery/docs/vpc-sc?hl=zh-tw)，跨越 service perimeter 邊界的要求會失敗，並顯示 `403 accessDenied` 或 `policyViolation`。在失敗時間點前後搜尋 Cloud 稽核記錄，找出錯誤訊息中的 `vpcServiceControlsUniqueIdentifier` 值，並使用[違規分析工具](https://docs.cloud.google.com/vpc-service-controls/docs/violation-analyzer?hl=zh-tw)檢查輸入和輸出規則。如要瞭解要使用的 Logs Explorer 查詢，請參閱「[依據機構政策的規定，您無法提出要求](#ts-policy-violation-vpc-sc)」。
 * **基本角色 (`roles/owner`、`roles/editor`、`roles/viewer`)。**基本專案角色不含 `INFORMATION_SCHEMA.TABLE_STORAGE_USAGE_TIMELINE_BY_ORGANIZATION` 等檢視表所需的組織層級權限，也不含 `bigquery.rowAccessPolicies.overrideTimeTravelRestrictions` 等特殊權限。如要存取目前或過去設有資料列層級存取權政策的資料表歷來資料，就必須具備這類特殊權限 (請參閱「[時光旅行和資料列層級存取權](https://docs.cloud.google.com/bigquery/docs/time-travel?hl=zh-tw#time_travel_and_row-level_access)」)。請授予預先定義的 [BigQuery IAM 角色](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)，而非依賴基本角色。
 * **暫時性 IAM 政策覆寫 (`SetIamPolicy`)。**如果權限時好時壞，請在管理員活動稽核記錄中搜尋 `protoPayload.methodName=~"SetIamPolicy"`，檢查自動化指令碼或基礎架構即程式碼管道是否覆寫現有政策繫結，而非合併。
 * **外部資料來源 (Google 雲端硬碟、Cloud Storage、BigLake)：**
+
   + **Google 雲端硬碟 (`Permission denied while getting Drive credentials`)。**
     請將 Google 雲端硬碟檔案或 Google 試算表的檢視權限授予使用者或服務帳戶，並確保呼叫端提供 `https://www.googleapis.com/auth/drive` OAuth 範圍，或更新[排定查詢憑證](https://docs.cloud.google.com/bigquery/docs/troubleshoot-queries?hl=zh-tw#error_code_invalid_userid)。
   + **Cloud Storage 和 BigLake 資料表。**將 Cloud Storage bucket 的 `roles/storage.objectViewer` 授予使用者 (適用於標準外部資料表) 或 [BigLake 連線服務帳戶](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw) (適用於 BigLake 資料表)。
@@ -161,7 +170,7 @@ RESOURCE_TYPE RESOURCE_ID: DETAILS`)，除了上述一般 IAM 步驟外，請檢
   denied`，請將目標服務帳戶的 `roles/iam.serviceAccountTokenCreator` 授予呼叫主體。
 * **資料欄層級安全性 (政策標記) 和資料列層級安全性。**如果查詢或 DML 陳述式失敗，並顯示 `Requires fineGrainedGet permission on the read
   columns` 或 `User does not have permission to access data protected by
-  policy tag`，請向主體授予政策標記的 Data Catalog [精細讀取者](https://docs.cloud.google.com/bigquery/docs/column-level-security?hl=zh-tw#fine_grained_reader) (`roles/datacatalog.categoryFineGrainedReader`) 角色，或從 `SELECT` 清單中排除受保護的資料欄。請參閱「[資料欄層級存取控管權限不足](https://docs.cloud.google.com/bigquery/docs/troubleshoot-queries?hl=zh-tw#column-dml)」。如果資料表使用[資料列層級安全性](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro?hl=zh-tw)，請在 Google Cloud 控制台中查看其有效的資料列層級存取權政策，或執行 `bq ls --row_access_policies`。請參閱「[列出資料表資料列層級存取權政策](https://docs.cloud.google.com/bigquery/docs/managing-row-level-security?hl=zh-tw#list_table_row-level_access_policies)」。
+  policy tag`，請向主體授予政策標記的 Data Catalog [精細讀取者](https://docs.cloud.google.com/bigquery/docs/column-level-security?hl=zh-tw#fine_grained_reader) (`roles/datacatalog.categoryFineGrainedReader`) 角色，或從 `SELECT` 清單中排除受保護的資料欄。請參閱「[資料欄層級存取控管權限不足](https://docs.cloud.google.com/bigquery/docs/troubleshoot-queries?hl=zh-tw#column-dml)」。如果資料表使用[資料列層級安全性](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro?hl=zh-tw)，請在 Google Cloud 控制台中查看其有效的資料列層級存取權政策，或執行 `bq ls --row_access_policies`。請參閱「[列出資料表資料列層級存取權政策](https://docs.cloud.google.com/bigquery/docs/managing-row-level-security?hl=zh-tw#list-policy)」。
 * **IAM 和中繼資料傳播延遲。**新授予的 IAM 角色和資料集 ACL 更新最終會保持一致，通常需要幾分鐘才能在快取中傳播。如果才剛授予權限，請稍候幾分鐘，再重新提出要求。
 
 ## 未接受 BigQuery 服務條款
@@ -373,9 +382,21 @@ Cloud 管理員已設定[組織政策限制](https://docs.cloud.google.com/organ
 
 如要解決這個問題， Google Cloud 支援團隊必須手動介入，將分類重新與新組織建立關聯。如果您遷移了含有政策標記的專案，並遇到這些問題，請[與 Cloud Customer Care 聯絡](https://docs.cloud.google.com/support?hl=zh-tw)。
 
+## 排解資料治理標記問題
+
+下列各節說明如何排解使用[資料治理標記](https://docs.cloud.google.com/bigquery/docs/tags?hl=zh-tw#data-governance-tags)控管資料欄存取權時的常見問題。
+
+### 標記名稱格式不正確
+
+建立標記時，您會定義簡稱 (例如 `ssn`)。不過，將標記附加至結構定義中的資料欄或在條件中使用標記時，標記索引鍵必須使用命名空間格式 (`PROJECT_ID/TAG_KEY` 或 `ORGANIZATION_ID/TAG_KEY`)，而標記值仍使用簡稱。如果只提供標記鍵的簡稱，會產生 `Invalid tagKey` 或 `Invalid tagValue` 錯誤。
+
+### 跨專案政策套用
+
+根據預設，系統只會評估資料表專案的資料政策。除非在組織層級設定預設資料政策專案，否則其他專案的政策不會套用。如要進一步瞭解如何設定及評估跨專案政策，請參閱「[設定預設資料政策專案](https://docs.cloud.google.com/bigquery/docs/tags?hl=zh-tw#configure-default-data-policy-project)」。
+
 ## 排解客戶自行管理的加密金鑰問題
 
-下列清單說明將客戶自行管理的加密金鑰 (CMEK) 與 Cloud Key Management Service 搭配使用時，常見的錯誤和建議解決方法：
+下列清單說明搭配使用 Cloud Key Management Service 和客戶自行管理的加密金鑰 (CMEK) 時，常見的錯誤和建議解決方法：
 
 錯誤：`Please grant Cloud KMS CryptoKey Encrypter/Decrypter role`
 :   **解決方法：**與專案相關聯的 BigQuery 服務帳戶沒有足夠的 IAM 權限，無法對指定的 Cloud KMS 金鑰執行操作。如要授予必要的 IAM 權限，請按照錯誤訊息或「[授予加密和解密權限](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw#grant_permission)」中的指示操作。
@@ -408,11 +429,11 @@ Cloud 管理員已設定[組織政策限制](https://docs.cloud.google.com/organ
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-29 (世界標準時間)。
+上次更新時間：2026-11-06 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-06 (世界標準時間)。"],[],[]]

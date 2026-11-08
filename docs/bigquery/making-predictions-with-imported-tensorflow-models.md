@@ -10,7 +10,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 使用匯入的 TensorFlow 模型進行預測 透過集合功能整理內容 你可以依據偏好儲存及分類內容。
 
-在本教學課程中，您會將 TensorFlow 模型匯入 BigQuery ML 資料集。接著，您可以使用 SQL 查詢，從匯入的模型進行預測。
+在本教學課程中，您會將 TensorFlow 模型匯入 BigQuery ML 資料集。接著，您會使用 SQL 查詢，根據匯入的模型進行預測。
 
 ## 目標
 
@@ -19,12 +19,12 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ## 費用
 
-在本文件中，您會使用下列 Google Cloud的計費元件：
+在本文件中，您將使用下列 Google Cloud計費元件：
 
 * [BigQuery](https://cloud.google.com/bigquery/pricing?hl=zh-tw)
 * [BigQuery ML](https://cloud.google.com/bigquery/pricing?hl=zh-tw#bqml)
 
-如要根據預測用量估算費用，請使用 [Pricing Calculator](https://docs.cloud.google.com/products/calculator?hl=zh-tw)。
+您可以使用 [Pricing Calculator](https://docs.cloud.google.com/products/calculator?hl=zh-tw)，根據預測用量估算費用。
 
 初次使用 Google Cloud 的使用者可能符合[免費試用期](https://docs.cloud.google.com/free?hl=zh-tw)資格。
 
@@ -32,7 +32,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ## 事前準備
 
-- 登入 Google Cloud 帳戶。如果您是 Google Cloud新手，歡迎[建立帳戶](https://console.cloud.google.com/freetrial?hl=zh-tw)，親自評估產品在實際工作環境中的成效。新客戶還能獲得價值 $300 美元的免費抵免額，可用於執行、測試及部署工作負載。
+- 登入 Google Cloud 帳戶。如果您未曾使用過 Google Cloud，歡迎[建立帳戶](https://console.cloud.google.com/freetrial?hl=zh-tw)，親自體驗實際使用我們產品的成效。新客戶還能獲得價值 $300 美元的免費抵免額，用於執行、測試及部署工作負載。
 - In the Google Cloud console, on the project selector page,
   select or create a Google Cloud project.
 
@@ -71,7 +71,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
   [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
 
-1. [確認專案已啟用計費功能 Google Cloud](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project) 。
+1. [確認 Google Cloud 專案已啟用計費功能](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project)。
 2. 確認已啟用 BigQuery API。
 
    [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery&hl=zh-tw)
@@ -79,40 +79,40 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ### 必要的角色
 
-如果您建立新專案，您就是專案擁有者，並已獲得完成本教學課程所需的所有 Identity and Access Management (IAM) 權限。
+如果您建立新專案，您就是專案擁有者，並會獲得完成本教學課程所需的所有必要 Identity and Access Management (IAM) 權限。
 
-如果您使用現有專案，[BigQuery Studio 管理員](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.studioAdmin) (`roles/bigquery.studioAdmin`) 角色會授予完成本教學課程所需的所有權限。
+如果您使用的是現有專案，[BigQuery Studio 管理員](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.studioAdmin) (`roles/bigquery.studioAdmin`) 角色會授予完成本教學課程所需的所有權限。
 
-請確認您在專案中擁有下列一或多個角色：
-[BigQuery Studio 管理員](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.studioAdmin) (`roles/bigquery.studioAdmin`)。
+確認您具備下列專案角色：[BigQuery Studio 管理員](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.studioAdmin) (`roles/bigquery.studioAdmin`)。
 
 #### 檢查角色
 
 1. 前往 Google Cloud 控制台的「IAM」頁面。
 
-   [前往 IAM](https://console.cloud.google.com/projectselector/iam-admin/iam?supportedpurview=project&hl=zh-tw)
+   [前往「IAM」頁面](https://console.cloud.google.com/projectselector/iam-admin/iam?supportedpurview=project&hl=zh-tw)
 2. 選取專案。
-3. 在「主體」欄中，找出所有識別您或您所屬群組的資料列。如要瞭解自己所屬的群組，請與管理員聯絡。
-4. 針對指定或包含您的所有列，請檢查「角色」欄，確認角色清單是否包含必要角色。
+3. 在「Principal」(主體) 欄中，找出所有代表您或您所屬群組的資料列。如要瞭解您所屬的群組，請與管理員聯絡。
+4. 針對指定或包含您的所有資料列，請查看「Role」(角色) 欄，確認角色清單是否包含必要角色。
 
 
 #### 授予角色
 
 1. 前往 Google Cloud 控制台的「IAM」頁面。
 
-   [前往 IAM](https://console.cloud.google.com/projectselector/iam-admin/iam?supportedpurview=project&hl=zh-tw)
+   [前往「IAM」頁面](https://console.cloud.google.com/projectselector/iam-admin/iam?supportedpurview=project&hl=zh-tw)
 2. 選取專案。
 3. 按一下person\_add「Grant access」(授予存取權)。
-4. 在「New principals」(新增主體) 欄位中，輸入您的使用者 ID。 這通常是指 Google 帳戶的電子郵件地址。
+4. 在「New principals」(新增主體) 欄位中，輸入您的使用者 ID。
+   這通常是指 Google 帳戶的電子郵件地址。
 5. 按一下「Select a role」(選取角色)，然後搜尋角色。
 6. 如要授予其他角色，請按一下add「Add another role」(新增其他角色)，然後新增其他角色。
 7. 按一下「Save」(儲存)。
 
-如要進一步瞭解 BigQuery 中的 IAM 權限，請參閱 [BigQuery 權限](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bq-permissions)。
+如要進一步瞭解 BigQuery 中的 IAM 權限，請參閱「[BigQuery 權限](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bq-permissions)」。
 
 ## 建立資料集
 
-如要建立 BigQuery 資料集，請選取下列任一選項：
+如要建立 BigQuery 資料集，請選取下列其中一個選項：
 
 ### 控制台
 
@@ -122,14 +122,14 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 2. 點選左側窗格中的 explore「Explorer」。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
-3. 在「Explorer」中展開專案，然後按一下「Datasets」。
-4. 在「資料集」頁面，按一下 add「建立資料集」。
+3. 在「Explorer」中展開專案，然後按一下「資料集」。
+4. 在「Datasets」(資料集) 頁面，按一下add「Create dataset」(建立資料集)。
 5. 在「建立資料集」窗格中，執行下列操作：
 
    * 在「Dataset ID」(資料集 ID) 中輸入 `bqml_tutorial`。
-   * 選取「資料位置」的「美國」。
+   * 在「資料位置」部分，選取「US」。
 
-   其餘預設設定均保留原樣。
+   其餘預設設定則保持不變。
 6. 點選「建立資料集」。
 
 ### bq
@@ -144,7 +144,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
      --description "BigQuery ML tutorial dataset." \
      bqml_tutorial
    ```
-2. 確認資料集已建立完成：
+2. 確認資料集已建立：
 
    ```
    bq ls
@@ -152,7 +152,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ### API
 
-使用已定義的[資料集資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets?hl=zh-tw)呼叫 [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert?hl=zh-tw) 方法：
+使用定義的[資料集資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets?hl=zh-tw)呼叫 [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert?hl=zh-tw) 方法：
 
 ```
 {
@@ -164,11 +164,11 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ## 匯入 TensorFlow 模型
 
-下列步驟說明如何從 Cloud Storage 匯入模型。模型路徑為 `gs://cloud-training-demos/txtclass/export/exporter/1549825580/*`。匯入的模型名稱為 `imported_tf_model`。
+下列步驟說明如何從 Cloud Storage 匯入模型。模型的路徑為 `gs://cloud-training-demos/txtclass/export/exporter/1549825580/*`。匯入的模型名稱為 `imported_tf_model`。
 
-請注意，Cloud Storage URI 的結尾是萬用字元 (`*`)。這個字元表示 BigQuery ML 應匯入與模型相關聯的所有資產。
+請注意，Cloud Storage URI 結尾是萬用字元 (`*`)。這個字元表示 BigQuery ML 應匯入與模型相關聯的所有資產。
 
-匯入的模型為 TensorFlow 文字分類程式模型，可預測發布特定文章標題的網站。
+匯入的模型是 TensorFlow 文字分類器模型，可預測哪個網站發布了特定文章標題。
 
 如要將 TensorFlow 模型匯入資料集，請按照下列步驟操作。
 
@@ -176,9 +176,9 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
-   [前往 BigQuery 頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 如要**建立新項目**，請點選「SQL 查詢」。
-3. 在查詢編輯器中輸入這項 `CREATE MODEL` 陳述式，然後按一下「執行」。
+   [前往「BigQuery」頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
+2. 在「新建」部分，點選「SQL 查詢」。
+3. 在查詢編輯器中輸入這個 `CREATE MODEL` 陳述式，然後按一下「Run」(執行)。
 
    ```
      CREATE OR REPLACE MODEL `bqml_tutorial.imported_tf_model`
@@ -187,8 +187,8 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
    ```
 
    作業完成後，您應該會看到類似 `Successfully created model named imported_tf_model` 的訊息。
-4. 新模型會顯示在「資源」面板中。模型會以模型圖示 來表示。
-5. 在「Resources」(資源)  面板中選取新模型，「Query editor」(查詢編輯器) 下方就會顯示該模型的相關資訊。
+4. 新模型會顯示在「Resources」(資源) 面板中。模型會標有模型圖示：。
+5. 在「Resources」(資源) 面板中選取新模型後，模型相關資訊會顯示在「Query editor」(查詢編輯器) 下方。
 
 ### bq
 
@@ -202,7 +202,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
      (MODEL_TYPE='TENSORFLOW',
        MODEL_PATH='gs://cloud-training-demos/txtclass/export/exporter/1549825580/*')"
    ```
-2. 匯入模型後，請確認模型是否顯示在資料集中。
+2. 匯入模型後，請確認模型顯示在資料集中。
 
    ```
    bq ls -m bqml_tutorial
@@ -222,15 +222,15 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ```
 {
-  "query": ";CREATE MODEL `PROJECT_ID:bqml_tutorial.imported_tf_model` OPTIONS(MODEL_TYPE='TENSORFLOW' MODEL_PATH='gs://cloud-training-demos/txtclass/export/exporter/1549825580/*')"
+  "query": "CREATE MODEL `PROJECT_ID:bqml_tutorial.imported_tf_model` OPTIONS(MODEL_TYPE='TENSORFLOW' MODEL_PATH='gs://cloud-training-demos/txtclass/export/exporter/1549825580/*')"
 }
 ```
 
-將 `PROJECT_ID` 替換為您的專案和資料集名稱。
+將 `PROJECT_ID` 替換為專案和資料集的名稱。
 
 ### BigQuery DataFrames
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+試用這個範例前，請先按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定操作說明操作。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -265,15 +265,13 @@ ml.create_model(
 )
 ```
 
-如要進一步瞭解如何將 TensorFlow 模型匯入 BigQuery ML，包括格式和儲存空間需求，請參閱[`CREATE MODEL` 陳述式，瞭解如何匯入 TensorFlow 模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow?hl=zh-tw)。
+如要進一步瞭解如何將 TensorFlow 模型匯入 BigQuery ML，包括格式和儲存空間需求，請參閱[用於匯入 TensorFlow 模型的 `CREATE MODEL` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow?hl=zh-tw)。
 
 ## 使用匯入的 TensorFlow 模型進行預測
 
 匯入 TensorFlow 模型後，您可以使用 [`ML.PREDICT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict?hl=zh-tw)，透過模型進行預測。
 
-以下查詢會使用 `imported_tf_model`，根據公開資料集 `hacker_news` 中 `full` 資料表的輸入資料進行預測。在查詢中，
-TensorFlow 模型的 `serving_input_fn` 函式會指定
-模型預期一個名為「input`input`」的輸入字串，子查詢會將別名 `input` 指派給子查詢 `SELECT` 陳述式中的 `title` 資料欄。
+下列查詢會使用 `imported_tf_model`，根據公開資料集 `hacker_news` 中 `full` 資料表的輸入資料進行預測。在查詢中，TensorFlow 模型的 `serving_input_fn` 函式會指定模型預期有名為 `input` 的單一輸入字串。子查詢會將別名 `input` 指派給子查詢 `SELECT` 陳述式中的 `title` 欄。
 
 如要使用匯入的 TensorFlow 模型進行預測，請按照下列步驟操作。
 
@@ -281,8 +279,8 @@ TensorFlow 模型的 `serving_input_fn` 函式會指定
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
-   [前往 BigQuery 頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在「建立新項目」下方，按一下「SQL 查詢」。
+   [前往「BigQuery」頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
+2. 在「新建」下方，點選「SQL 查詢」。
 3. 在查詢編輯器中，輸入使用 `ML.PREDICT` 函式的查詢。
 
    ```
@@ -325,7 +323,7 @@ FROM ML.PREDICT(
 
 ### API
 
-[插入新工作](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert?hl=zh-tw)並填入 [jobs#configuration.query](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query?hl=zh-tw) 屬性，如下列要求主體所示：將 `project_id` 替換成您的專案名稱。
+[插入新工作](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert?hl=zh-tw)，並填入 [jobs#configuration.query](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query?hl=zh-tw) 屬性，如要求主體所示。將 `project_id` 替換為專案名稱。
 
 ```
 {
@@ -335,7 +333,7 @@ FROM ML.PREDICT(
 
 ### BigQuery DataFrames
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+試用這個範例前，請先按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定操作說明操作。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -366,7 +364,7 @@ predictions.peek(5)
 
 結果應如下所示：
 
-在查詢結果中，`dense_1` 資料欄包含機率值陣列，`input` 資料欄則包含輸入資料表中對應的字串值。每個陣列元素值表示相應輸入字串是某出版內容中的文章標題的機率。
+在查詢結果中，`dense_1` 欄包含機率值陣列，`input` 欄則包含輸入資料表中對應的字串值。每個陣列元素值代表對應的輸入字串是特定出版品文章標題的機率。
 
 ## 清除所用資源
 
@@ -376,7 +374,7 @@ predictions.peek(5)
 
 ### 控制台
 
-**注意**：刪除專案會造成以下結果：
+**警告**：刪除專案會出現以下結果：
 
 * **專案中的所有內容都會遭到刪除。**如果使用現有專案來進行本文中的任務，刪除專案將一併移除當中已完成的其他任務'。
 * **自訂專案 ID 會消失。**當您之前建立這個專案時，可能建立了想要在日後使用的自訂專案 ID。如要保留使用該專案 ID 的網址 (例如 `appspot.com` 網址)，請刪除在該專案中選取的資源，而不是刪除整個專案。
@@ -391,7 +389,7 @@ predictions.peek(5)
 
 ### gcloud
 
-**注意**：刪除專案會造成以下結果：
+**警告**：刪除專案會出現以下結果：
 
 * **專案中的所有內容都會遭到刪除。**如果使用現有專案來進行本文中的任務，刪除專案將一併移除當中已完成的其他任務'。
 * **自訂專案 ID 會消失。**當您之前建立這個專案時，可能建立了想要在日後使用的自訂專案 ID。如要保留使用該專案 ID 的網址 (例如 `appspot.com` 網址)，請刪除在該專案中選取的資源，而不是刪除整個專案。
@@ -406,16 +404,16 @@ gcloud projects delete PROJECT_ID
 
 ### 刪除個別資源
 
-或者，移除本教學課程中使用的個別資源：
+或者，您也可以移除本教學課程中使用的個別資源：
 
 1. [刪除匯入的模型](https://docs.cloud.google.com/bigquery/docs/deleting-models?hl=zh-tw)。
 2. 選用：[刪除資料集](https://docs.cloud.google.com/bigquery/docs/managing-datasets?hl=zh-tw#delete-datasets)。
 
 ## 後續步驟
 
-* 如需 BigQuery ML 的總覽，請參閱 [BigQuery ML 簡介](https://docs.cloud.google.com/bigquery/docs/bqml-introduction?hl=zh-tw)。
-* 如要開始使用 BigQuery ML，請參閱[在 BigQuery ML 中建立機器學習模型](https://docs.cloud.google.com/bigquery/docs/create-machine-learning-model?hl=zh-tw)。
-* 如要進一步瞭解如何匯入 TensorFlow 模型，請參閱[匯入 TensorFlow 模型的 `CREATE MODEL` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow?hl=zh-tw)。
+* 如需 BigQuery ML 總覽，請參閱「[BigQuery ML 簡介](https://docs.cloud.google.com/bigquery/docs/bqml-introduction?hl=zh-tw)」。
+* 如要開始使用 BigQuery ML，請參閱「[在 BigQuery ML 中建立機器學習模型](https://docs.cloud.google.com/bigquery/docs/create-machine-learning-model?hl=zh-tw)」。
+* 如要進一步瞭解如何匯入 TensorFlow 模型，請參閱「[用於匯入 TensorFlow 模型的 `CREATE MODEL` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow?hl=zh-tw)」。
 * 如要進一步瞭解如何使用模型，請參閱下列資源：
   + [取得模型中繼資料](https://docs.cloud.google.com/bigquery/docs/getting-model-metadata?hl=zh-tw)
   + [更新模型中繼資料](https://docs.cloud.google.com/bigquery/docs/updating-model-metadata?hl=zh-tw)
@@ -431,11 +429,11 @@ gcloud projects delete PROJECT_ID
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-02 (世界標準時間)。
+上次更新時間：2026-11-03 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-03 (世界標準時間)。"],[],[]]

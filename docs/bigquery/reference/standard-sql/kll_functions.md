@@ -291,5 +291,6 @@ FROM
 
 ```
 WITH points AS (
-  SELECT 1 AS x, 1 AS y
+  SELECT 1 AS x, 1 AS y UNION ALL
+  SE
 ```

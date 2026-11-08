@@ -389,3 +389,6 @@ These queries compute values with a partially or fully unbound window:
 * [Compute rank](#compute_rank)
 
 These queries compute values with numeric boundaries:
+
+* [Compute a cumulative sum](#compute_a_cumulative_sum)
+* [Compute a moving average](#compute_a_moving_average)

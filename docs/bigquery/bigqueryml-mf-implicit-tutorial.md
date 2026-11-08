@@ -10,19 +10,19 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 使用矩陣分解模型，根據隱性意見回饋建立建議 透過集合功能整理內容 你可以依據偏好儲存及分類內容。
 
-本教學課程說明如何建立[矩陣分解模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization?hl=zh-tw)，並在公開的 [`GA360_test.ga_sessions_sample` 表格](https://console.cloud.google.com/bigquery?p=cloud-training-demos&%3Bd=GA360_test&%3Bt=ga_sessions_sample&%3Bpage=table&hl=zh-tw)中，使用 Google Analytics 360 使用者工作階段資料訓練模型。然後使用矩陣分解模型，為網站使用者生成內容建議。
+本教學課程說明如何建立[矩陣分解模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization?hl=zh-tw)，並使用公開[`GA360_test.ga_sessions_sample`資料表](https://console.cloud.google.com/bigquery?p=cloud-training-demos&%3Bd=GA360_test&%3Bt=ga_sessions_sample&%3Bpage=table&hl=zh-tw)中的 Google Analytics 360 使用者工作階段資料訓練模型。接著，您可以使用矩陣分解模型，為網站使用者產生內容推薦。
 
-使用使用者工作階段持續時間等間接顧客偏好資訊訓練模型，稱為使用*隱性意見回饋*訓練模型。使用隱性意見回饋做為訓練資料時，系統會使用[加權交替最小平方法演算法](http://yifanhu.net/PUB/cf.pdf)訓練矩陣因式分解模型。
+使用間接顧客偏好資訊 (例如使用者工作階段持續時間) 訓練模型，稱為使用「隱含回饋」訓練。使用隱含回饋做為訓練資料時，系統會使用[加權交替最小平方法演算法](http://yifanhu.net/PUB/cf.pdf)訓練矩陣分解模型。
 
-**重要事項：** 您必須預訂才能使用矩陣分解模型。詳情請參閱[這篇文章](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization?hl=zh-tw#pricing)，瞭解定價相關資訊。
+**重要事項：**您必須具備預留項目，才能使用矩陣分解模型。詳情請參閱「[定價](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization?hl=zh-tw#pricing)」。
 
 ## 目標
 
 本教學課程會逐步引導您完成下列工作：
 
-* 使用 `CREATE MODEL` 陳述式建立矩陣因式分解模型。
-* 使用 [`ML.EVALUATE` 函式評估模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate?hl=zh-tw)。
-* 使用 [`ML.RECOMMEND` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-recommend?hl=zh-tw)，透過模型為使用者產生內容建議。
+* 使用 `CREATE MODEL` 陳述式建立矩陣分解模型。
+* 使用 [`ML.EVALUATE` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate?hl=zh-tw)評估模型。
+* 使用模型搭配 [`ML.RECOMMEND` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-recommend?hl=zh-tw)，為使用者產生內容推薦。
 
 ## 費用
 
@@ -31,13 +31,13 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 * BigQuery
 * BigQuery ML
 
-如要進一步瞭解 BigQuery 費用，請參閱 [BigQuery 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw)頁面。
+如要進一步瞭解 BigQuery 費用，請參閱「[BigQuery 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw)」頁面。
 
-如要進一步瞭解 BigQuery ML 費用，請參閱 [BigQuery ML 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#bqml)。
+如要進一步瞭解 BigQuery ML 費用，請參閱「[BigQuery ML 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#bqml)」。
 
 ## 事前準備
 
-- 登入 Google Cloud 帳戶。如果您是 Google Cloud新手，歡迎[建立帳戶](https://console.cloud.google.com/freetrial?hl=zh-tw)，親自評估產品在實際工作環境中的成效。新客戶還能獲得價值 $300 美元的免費抵免額，可用於執行、測試及部署工作負載。
+- 登入 Google Cloud 帳戶。如果您未曾使用過 Google Cloud，歡迎[建立帳戶](https://console.cloud.google.com/freetrial?hl=zh-tw)，親自體驗實際使用我們產品的成效。新客戶還能獲得價值 $300 美元的免費抵免額，用於執行、測試及部署工作負載。
 - In the Google Cloud console, on the project selector page,
   select or create a Google Cloud project.
 
@@ -78,35 +78,35 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
   [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
 - [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project).
 
-1. 新專案會自動啟用 BigQuery。如要在現有的專案中啟用 BigQuery，請前往
+1. 新專案會自動啟用 BigQuery。如要在現有專案中啟用 BigQuery，請前往
 
-   如果尚未啟用 BigQuery API，請啟用。
+   啟用 BigQuery API (如果尚未啟用)。
 
-   **啟用 API 時所需的角色**
+   **啟用 API 所需的角色**
 
-   如要啟用 API，您必須具備 `serviceusage.services.enable` 權限。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用情形管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過擁有者角色 (`roles/owner`) 取得這項權限。否則，您可以透過 Service Usage 管理員角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
    [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery&hl=zh-tw)
 
 ## 所需權限
 
-* 如要建立資料集，您需要 `bigquery.datasets.create` IAM 權限。
+* 如要建立資料集，您必須具備 `bigquery.datasets.create` IAM 權限。
 * 如要建立模型，您必須具備下列權限：
 
   + `bigquery.jobs.create`
   + `bigquery.models.create`
   + `bigquery.models.getData`
   + `bigquery.models.updateData`
-* 如要執行推論，您需要下列權限：
+* 如要執行推論，您必須具備下列權限：
 
   + `bigquery.models.getData`
   + `bigquery.jobs.create`
 
-如要進一步瞭解 BigQuery 中的 IAM 角色和權限，請參閱「[IAM 簡介](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)」。
+如要進一步瞭解 BigQuery 的 IAM 角色和權限，請參閱「[IAM 簡介](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)」。
 
 ## 建立資料集
 
-如要建立 BigQuery 資料集，請選取下列任一選項：
+如要建立 BigQuery 資料集，請選取下列其中一個選項：
 
 ### 控制台
 
@@ -116,14 +116,14 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 2. 點選左側窗格中的 explore「Explorer」。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
-3. 在「Explorer」中展開專案，然後按一下「Datasets」。
-4. 在「資料集」頁面，按一下 add「建立資料集」。
+3. 在「Explorer」中展開專案，然後按一下「資料集」。
+4. 在「Datasets」(資料集) 頁面，按一下add「Create dataset」(建立資料集)。
 5. 在「建立資料集」窗格中，執行下列操作：
 
    * 在「Dataset ID」(資料集 ID) 中輸入 `bqml_tutorial`。
-   * 選取「資料位置」的「美國」。
+   * 在「資料位置」部分，選取「US」。
 
-   其餘預設設定均保留原樣。
+   其餘預設設定則保持不變。
 6. 點選「建立資料集」。
 
 ### bq
@@ -138,7 +138,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
      --description "BigQuery ML tutorial dataset." \
      bqml_tutorial
    ```
-2. 確認資料集已建立完成：
+2. 確認資料集已建立：
 
    ```
    bq ls
@@ -146,7 +146,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ### API
 
-使用已定義的[資料集資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets?hl=zh-tw)呼叫 [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert?hl=zh-tw) 方法：
+使用定義的[資料集資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets?hl=zh-tw)呼叫 [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert?hl=zh-tw) 方法：
 
 ```
 {
@@ -158,14 +158,14 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ## 準備範例資料
 
-將 `GA360_test.ga_sessions_sample` 資料表中的資料轉換為更適合模型訓練的結構，然後將資料寫入 BigQuery 資料表。下列查詢會計算每位使用者在每項內容的停留時間，您可將這項資料做為隱性意見回饋，推斷使用者對該內容的偏好。
+將 `GA360_test.ga_sessions_sample` 資料表中的資料轉換為更適合模型訓練的結構，然後將這些資料寫入 BigQuery 資料表。下列查詢會計算每位使用者在每項內容的工作階段持續時間，您可以將其做為隱含回饋，推論使用者對該內容的偏好。
 
 請按照下列步驟建立訓練資料表：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 建立訓練資料表。在查詢編輯器中貼上下列查詢，然後點選「執行」：
+2. 建立訓練資料表。在查詢編輯器中貼上以下查詢，然後點選「Run」(執行)：
 
    ```
    CREATE OR REPLACE TABLE `bqml_tutorial.analytics_session_data`
@@ -214,13 +214,13 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
    ORDER BY
      latestContentId;
    ```
-3. 查看部分訓練資料。在查詢編輯器中貼上下列查詢，然後點選「執行」：
+3. 查看部分訓練資料。在查詢編輯器中貼上以下查詢，然後點選「Run」(執行)：
 
    ```
    SELECT * FROM `bqml_tutorial.analytics_session_data` LIMIT 5;
    ```
 
-   結果應如下所示：
+   結果應大致如下：
 
    ```
    +---------------------+-----------+------------------+
@@ -240,18 +240,18 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ## 建立模型
 
-建立矩陣分解模型，並根據 `analytics_session_data` 資料表中的資料訓練模型。模型經過訓練後，可預測每個 `visitorId`-`contentId` 配對的可信度評分。信心評分是根據工作階段持續時間中位數，透過置中和縮放建立而成。如果工作階段持續時間長度超過中位數的 3.33 倍，系統會將這類記錄視為離群值並篩除。
+建立矩陣分解模型，並使用 `analytics_session_data` 資料表中的資料訓練模型。模型經過訓練，可預測每個 `visitorId`-`contentId` 配對的可信度評分。可信度評分是根據工作階段持續時間中位數，進行置中和縮放後產生。如果工作階段持續時間超過中位數的 3.33 倍，系統會將該記錄視為離群值並篩除。
 
 下列 `CREATE MODEL` 陳述式會使用這些資料欄產生建議：
 
 * `visitorId`：訪客 ID。
-* `contentId`—內容 ID。
-* `rating`：針對每位訪客與內容配對計算出的隱含評分 (0 到 1)，並經過置中和縮放處理。
+* `contentId`：Content ID。
+* `rating`：為每組訪客內容計算的隱含評分，範圍介於 0 到 1 之間，並經過置中和縮放。
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在查詢編輯器中貼入下列查詢，然後點選「執行」：
+2. 在查詢編輯器中貼上以下查詢，然後點選「執行」：
 
    ```
    CREATE OR REPLACE MODEL `bqml_tutorial.mf_implicit`
@@ -272,15 +272,15 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
    WHERE 0.3 * (1 + (session_duration - 57937) / 57937) < 1;
    ```
 
-   查詢約需 10 分鐘才能完成，完成後「`mf_implicit`」模型會顯示在「Explorer」(探索) 窗格中。由於查詢使用 `CREATE MODEL` 陳述式建立模型，因此您不會看到查詢結果。
+   查詢約需 10 分鐘才能完成，完成後，`mf_implicit` 模型會顯示在「Explorer」窗格中。由於查詢使用 `CREATE MODEL` 陳述式建立模型，因此不會顯示查詢結果。
 
 ## 取得訓練統計資料
 
-您也可以在Google Cloud 控制台中查看模型的訓練統計資料。
+您也可以在Google Cloud 控制台查看模型的訓練統計資料。
 
-機器學習演算法會使用不同參數建立多個模型疊代版本，然後選取可將[損失](https://en.wikipedia.org/wiki/Loss_function)降到最低的模型版本。這項程序稱為經驗風險最小化。模型的訓練統計資料會顯示與模型每次疊代相關聯的損失。
+機器學習演算法會使用不同參數，建立多個模型疊代，然後選取[損失](https://en.wikipedia.org/wiki/Loss_function)最低的模型版本。這項程序稱為經驗風險最小化。模型的訓練統計資料會顯示與模型各疊代相關聯的損失。
 
-如要查看模型的訓練統計資料，請按照下列步驟操作：
+請按照下列步驟查看模型的訓練統計資料：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -288,11 +288,11 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 2. 點選左側窗格中的 explore「Explorer」。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
-3. 在「Explorer」窗格中展開專案，然後按一下「Datasets」(資料集)。
+3. 在「Explorer」窗格中展開專案，然後點選「資料集」。
 4. 點選「`bqml_tutorial`」資料集。您也可以使用搜尋功能或篩選器尋找資料集。
-5. 按一下「模型」分頁標籤。
-6. 按一下 `mf_implicit` 模型，然後按一下「訓練」分頁標籤。
-7. 在「查看方式」部分中，按一下「表格」。結果應如下所示：
+5. 點按「模型」分頁標籤。
+6. 依序點選「`mf_implicit`」模型和「訓練」分頁標籤
+7. 在「檢視方式」部分，按一下「表格」。結果應大致如下：
 
    ```
    +-----------+--------------------+--------------------+
@@ -308,19 +308,18 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
    +-----------+--------------------+--------------------+
    ```
 
-   「訓練資料損失」欄代表模型訓練後計算出的損失指標。由於這是矩陣分解模型，因此這個資料欄會顯示[均方差](https://developers.google.com/machine-learning/glossary/?hl=zh-tw#MSE)。
+   「Training Data Loss」(訓練資料損失) 欄代表模型訓練後計算出的損失指標。由於這是矩陣分解模型，因此這個資料欄會顯示[均方誤差](https://developers.google.com/machine-learning/glossary/?hl=zh-tw#MSE)。
 
 ## 評估模型
 
-使用 `ML.EVALUATE` 函式評估模型效能。
-`ML.EVALUATE` 函式會根據訓練期間計算的評估指標，評估模型傳回的預測內容分級。
+使用 `ML.EVALUATE` 函式評估模型效能。`ML.EVALUATE` 函式會根據訓練期間計算的評估指標，評估模型傳回的預測內容分級。
 
-如要評估模型，請按照下列步驟操作：
+請按照下列步驟評估模型：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在查詢編輯器中貼入下列查詢，然後點選「執行」：
+2. 在查詢編輯器中貼上以下查詢，然後點選「執行」：
 
    ```
    SELECT
@@ -329,7 +328,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
      ML.EVALUATE(MODEL `bqml_tutorial.mf_implicit`);
    ```
 
-   結果應如下所示：
+   結果應大致如下：
 
    ```
    +------------------------+-----------------------+---------------------------------------+---------------------+
@@ -341,16 +340,16 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
    如要進一步瞭解 `ML.EVALUATE` 函式輸出內容，請參閱「[輸出內容](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate?hl=zh-tw#output)」。
 
-## 取得部分訪客與內容配對的預測評分
+## 取得訪客與內容組合子集的預測評分
 
 使用 `ML.RECOMMEND` 取得五位網站訪客對每項內容的預測評分。
 
-如要取得預測評分，請按照下列步驟操作：
+請按照下列步驟取得預測評分：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在查詢編輯器中貼入下列查詢，然後點選「執行」：
+2. 在查詢編輯器中貼上以下查詢，然後點選「執行」：
 
    ```
    SELECT
@@ -367,7 +366,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
        ));
    ```
 
-   結果應如下所示：
+   結果應大致如下：
 
    ```
    +-------------------------------+---------------------+-----------+
@@ -385,14 +384,14 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ## 生成建議
 
-使用預測評分，為每個訪客 ID 生成前五個建議內容 ID。
+使用預測評分，為每個訪客 ID 產生前五個推薦 Content ID。
 
-如要產生建議，請按照下列步驟操作：
+請按照下列步驟產生建議：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 將預測評分寫入資料表。在查詢編輯器中貼上下列查詢，然後點選「執行」：
+2. 將預測評分寫入資料表。在查詢編輯器中，貼上以下查詢，然後點選「Run」(執行)：
 
    ```
    CREATE OR REPLACE TABLE `bqml_tutorial.recommend_content`
@@ -402,7 +401,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
    FROM
      ML.RECOMMEND(MODEL `bqml_tutorial.mf_implicit`);
    ```
-3. 為每位訪客選取前五個結果。在查詢編輯器中貼上下列查詢，然後點選「執行」：
+3. 選取每位訪客的前五項結果。在查詢編輯器中，貼上以下查詢，然後點選「Run」(執行)：
 
    ```
    SELECT
@@ -417,7 +416,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
      visitorId;
    ```
 
-   結果應如下所示：
+   結果應大致如下：
 
    ```
    +---------------------+-----------------+---------------------------------+
@@ -450,19 +449,18 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 刪除專案將移除專案中所有的資料集與資料表。若您希望重新使用專案，您可以刪除本教學課程中所建立的資料集。
 
-1. 如有需要，請在Google Cloud 控制台中開啟 BigQuery 頁面。
+1. 如有需要，請在Google Cloud 控制台開啟 BigQuery 頁面。
 
-   [前往 BigQuery 頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
+   [前往「BigQuery」頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 在導覽窗格中，按一下您建立的 **bqml\_tutorial** 資料集。
-3. 按一下視窗右側的「刪除資料集」。
-   這個動作將會刪除資料集、資料表，以及所有資料。
-4. 在「Delete dataset」(刪除資料集) 對話方塊中，輸入資料集的名稱 (`bqml_tutorial`)，然後按一下「Delete」(刪除) 來確認刪除指令。
+3. 按一下視窗右側的「刪除資料集」。這個動作將會刪除資料集、資料表，以及所有資料。
+4. 在「Delete dataset」(刪除資料集) 對話方塊中，輸入資料集名稱 (`bqml_tutorial`) 來確認刪除指令，然後點選「Delete」(刪除)。
 
 ### 刪除專案
 
 如要刪除專案，請進行以下操作：
 
-**注意**：刪除專案會造成以下結果：
+**警告**：刪除專案會出現以下結果：
 
 * **專案中的所有內容都會遭到刪除。**如果使用現有專案來進行本文中的任務，刪除專案將一併移除當中已完成的其他任務'。
 * **自訂專案 ID 會消失。**當您之前建立這個專案時，可能建立了想要在日後使用的自訂專案 ID。如要保留使用該專案 ID 的網址 (例如 `appspot.com` 網址)，請刪除在該專案中選取的資源，而不是刪除整個專案。
@@ -477,7 +475,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ## 後續步驟
 
-* 嘗試[根據明確意見回饋建立矩陣分解模型](https://docs.cloud.google.com/bigquery/docs/bigqueryml-mf-explicit-tutorial?hl=zh-tw)。
+* 嘗試[根據明確回饋建立矩陣分解模型](https://docs.cloud.google.com/bigquery/docs/bigqueryml-mf-explicit-tutorial?hl=zh-tw)。
 * 如需 BigQuery ML 的總覽，請參閱 [BigQuery ML 簡介](https://docs.cloud.google.com/bigquery/docs/bqml-introduction?hl=zh-tw)。
 * 如要進一步瞭解機器學習，請參閱[機器學習密集課程](https://developers.google.com/machine-learning/crash-course/?hl=zh-tw)。
 
@@ -488,11 +486,11 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-29 (世界標準時間)。
+上次更新時間：2026-11-03 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-03 (世界標準時間)。"],[],[]]

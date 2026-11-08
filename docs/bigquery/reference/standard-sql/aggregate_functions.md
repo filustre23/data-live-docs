@@ -192,5 +192,6 @@ ANY_VALUE(
 over_clause:
   { named_window | ( [ window_specification ] ) }
 
-window_s
+window_specification:
+  [
 ```

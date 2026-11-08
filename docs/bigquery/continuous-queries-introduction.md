@@ -16,9 +16,11 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 持續查詢簡介
 
-本文說明 BigQuery 持續查詢。
+BigQuery 持續查詢是持續執行的 SQL 陳述式，可讓您即時分析傳入 BigQuery 的資料。您可以使用持續查詢執行具時效性的工作，例如生成即時洞察、套用即時機器學習 (ML) 推論，以及將資料複製到其他平台。這項功能可讓您將 BigQuery 做為事件導向的資料處理引擎，用於應用程式中的決策邏輯。
 
-BigQuery 持續查詢是會不斷執行的 SQL 陳述式，持續查詢功能可即時分析傳入 BigQuery 的資料。您可以將持續查詢產生的輸出資料列，寫入或匯出至下列目的地：
+## 支援的目的地和資料來源
+
+您可以將持續查詢產生的輸出資料列，寫入或匯出至下列目的地：
 
 * BigQuery 資料表
 * [Apache Iceberg 代管資料表](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery?hl=zh-tw)
@@ -38,8 +40,6 @@ BigQuery 持續查詢是會不斷執行的 SQL 陳述式，持續查詢功能可
 * [Pub/Sub BigQuery 訂閱項目](https://docs.cloud.google.com/pubsub/docs/bigquery?hl=zh-tw)
 * 從 [Dataflow 寫入 BigQuery](https://docs.cloud.google.com/dataflow/docs/guides/write-to-bigquery?hl=zh-tw)
 * 使用[僅限附加寫入模式](https://docs.cloud.google.com/datastream/docs/destination-bigquery?hl=zh-tw#append-only_write_mode)，從 Datastream 寫入 BigQuery
-
-您可以使用持續查詢執行具時效性的工作，例如建立並立即根據洞察資料採取行動、套用即時機器學習 (ML) 推論，以及將資料複製到其他平台。這樣一來，您就能將 BigQuery 做為事件導向的資料處理引擎，用於應用程式的決策邏輯。
 
 下圖顯示常見的持續查詢工作流程：
 
@@ -220,11 +220,11 @@ BigQuery 持續查詢是會不斷執行的 SQL 陳述式，持續查詢功能可
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-02 (世界標準時間)。
+上次更新時間：2026-11-04 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-04 (世界標準時間)。"],[],[]]

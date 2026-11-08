@@ -226,5 +226,5 @@ WITH TitlesAndScores AS (
     ARRAY_AGG(STRUCT(title, score)) AS titles,
     EXTRACT(DATE FROM time_ts) AS date
   FROM `bigquery-public-data.hacker_news.stories`
-  WHERE score
+  WHERE score IS NOT
 ```

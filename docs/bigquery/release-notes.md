@@ -27,6 +27,83 @@ To get the latest product updates delivered to you, add the URL of this page to 
 reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators), or add the
 [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## November 06, 2026
+
+Announcement
+
+You can now use [BigQuery Graph](/bigquery/docs/graph-overview) and run
+Graph Query Language (GQL) queries when you use on-demand pricing.
+
+Breaking
+
+Starting January 31, 2027, the [BigQuery Data Transfer Service for Shopify
+connector](/bigquery/docs/shopify-transfer) will no longer support the following fields:
+
+* The `legacyMode` field from the `DeliveryProfile` dataset schema
+* The `permitSkuSharing` field from the `FulfillmentService` dataset schema
+
+For more information, see [January 31, 2027](/bigquery/docs/transfer-changes#Jan31-shopify).
+
+Feature
+
+You can now use a [custom organization policy](/bigquery/docs/custom-constraints)
+to allow or deny specific operations on models in BigQuery. This
+feature is in [preview](https://cloud.google.com/products/#product-launch-stages).
+
+## November 05, 2026
+
+Feature
+
+In the query execution graph's [query text
+heatmap](/bigquery/docs/query-plan-explanation#query_text_heatmap), you can now
+view and navigate through a hierarchical list of context references, such as
+nested function calls or view references, for stage steps. This feature is
+[generally available](https://cloud.google.com/products#product-launch-stages)
+(GA).
+
+Feature
+
+In the query execution graph, the [query text
+heatmap](/bigquery/docs/query-plan-explanation#query_text_heatmap) now supports
+displaying the SQL text for persistent and temporary user-defined functions
+(UDFs). This feature is
+[generally available](https://cloud.google.com/products#product-launch-stages)
+(GA).
+
+Change
+
+The BigQuery **Metadata curation** console page has been removed. You can now
+use Knowledge Catalog to schedule [Cloud Storage discovery scans](https://docs.cloud.google.com/knowledge-catalog/docs/cloud-storage-discovery),
+manage [data profiling](https://docs.cloud.google.com/knowledge-catalog/docs/data-profiling-overview)
+and [data quality](https://docs.cloud.google.com/knowledge-catalog/docs/use-auto-data-quality#console),
+and perform related data governance tasks.
+
+Feature
+
+[Conversational analytics in BigQuery](/bigquery/docs/conversational-analytics)
+is now available in the `asia-northeast1` (Tokyo) location. For more
+information, see [Locations](/bigquery/docs/conversational-analytics#locations).
+
+## November 03, 2026
+
+Feature
+
+You can now use persistent and temporary
+[SQL user-defined functions (UDFs)](/bigquery/docs/user-defined-functions#continuous-queries)
+in [BigQuery continuous queries](/bigquery/docs/continuous-queries#use-sql-udfs)
+to encapsulate and reuse custom real-time transformation logic. Only SQL UDFs
+are supported in continuous queries.
+
+Change
+
+In [BigQuery Studio](/bigquery/docs/bigquery-web-ui#studio-overview),
+the left pane has been updated with new tab names. The **Classic Explorer** tab
+has been renamed to the **Data** tab, and the **Repository** tab has been
+renamed to the **Source control** tab. The **Data** tab now includes the
+**Add data** button and focuses on data hierarchies. These changes are
+[generally available](https://cloud.google.com/products#product-launch-stages)
+(GA).
+
 ## November 02, 2026
 
 Feature
@@ -63,9 +140,10 @@ This feature lets you configure federated catalog endpoints to synchronize
 catalog metadata and query Apache Iceberg tables in remote catalogs directly
 from Google Cloud using BigQuery, Managed Service for Apache Spark, and Apache
 Spark without migrating data or building complex ETL pipelines. You can route
-metadata synchronization and queries over the public internet or privately over
-Cross-Cloud Interconnect, and protect cross-cloud data access with VPC Service
-Controls service perimeters. For Databricks Unity Catalog, you can also use
+background metadata refresh and queries over the public internet or privately
+over Cross-Cloud Interconnect, and protect cross-cloud data access with VPC
+Service Controls service perimeters. For Databricks Unity Catalog, you can also
+use
 [user identity
 federation](/lakehouse/docs/set-up-cross-cloud-connection-databricks#configure-user-identity-federation)
 to propagate end-user identities on queries for permission enforcement and audit
@@ -147,15 +225,6 @@ is in
 [Preview](https://cloud.google.com/products#product-launch-stages).
 
 ## October 27, 2026
-
-Feature
-
-You can manage and version control SQL scripts and notebooks with
-[BigQuery Studio Git repositories](/bigquery/docs/git-repositories),
-which provide a streamlined, folder-based integration with remote Git
-repositories. This feature is
-[generally available](https://cloud.google.com/products#product-launch-stages)
-(GA).
 
 Feature
 
@@ -4784,7 +4853,7 @@ The following GoogleSQL functions are now available in [preview](https://cloud.g
 
 Feature
 
-For [supported Gemini models](/vertex-ai/generative-ai/docs/provisioned-throughput/supported-models), you can now use [Vertex AI Provisioned Throughput](/vertex-ai/generative-ai/docs/provisioned-throughput/overview) with the [`ML.GENERATE_TEXT`](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-text#provisioned-throughput)and [`AI.GENERATE`](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate#provisioned-throughput) functions to provide consistent high throughput for requests.
+For [supported Gemini models](/vertex-ai/generative-ai/docs/provisioned-throughput/supported-models), you can now use [Vertex AI Provisioned Throughput](/vertex-ai/generative-ai/docs/provisioned-throughput/overview) with the [`ML.GENERATE_TEXT`](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-text#provisioned-throughput) and [`AI.GENERATE`](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate#provisioned-throughput) functions to provide consistent high throughput for requests.
 
 This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
@@ -4868,35 +4937,4 @@ Libraries
 * **bigquery/analyticshub:** Add support for Analytics Hub & Marketplace Integration ([2aaada3](https://github.com/googleapis/google-cloud-go/commit/2aaada3fb7a9d3eaacec3351019e225c4038646b))
 * **bigquery/analyticshub:** Adding allow\_only\_metadata\_sharing to Listing resource ([2aaada3](https://github.com/googleapis/google-cloud-go/commit/2aaada3fb7a9d3eaacec3351019e225c4038646b))
 * **bigquery/analyticshub:** Adding CommercialInfo message to the Listing and Subscription resources ([2aaada3](https://github.com/googleapis/google-cloud-go/commit/2aaada3fb7a9d3eaacec3351019e225c4038646b))
-* **bigquery/analyticshub:** Adding delete\_commercial and revoke\_commercial to DeleteListingRequest and RevokeSubscriptionRequest ([2aaada3](https://github.com/googleapis/google-cloud-go/commit/2aaada3fb7a9d3eaacec3351019e225c4038646b))
-* **bigquery/analyticshub:** Adding DestinationDataset to the Subscription resource ([2aaada3](https://github.com/googleapis/google-cloud-go/commit/2aaada3fb7a9d3eaacec3351019e225c4038646b))
-* **bigquery/analyticshub:** Adding routine field to the SharedResource message ([2aaada3](https://github.com/googleapis/google-cloud-go/commit/2aaada3fb7a9d3eaacec3351019e225c4038646b))
-* **bigquery:** Add support for dataset view and update modes ([#12290](https://github.com/googleapis/google-cloud-go/issues/12290)) ([7c1f961](https://github.com/googleapis/google-cloud-go/commit/7c1f9616b7ea95436582eb3c40c94e6bd9b48610))
-* **bigquery:** Job creation mode GA ([#12225](https://github.com/googleapis/google-cloud-go/issues/12225)) ([1d8990d](https://github.com/googleapis/google-cloud-go/commit/1d8990dbf2563a5fbc96769ac9c6ea4ed06b239e))
-
-Libraries
-
-### Node.js
-
-#### [8.1.0](https://github.com/googleapis/nodejs-bigquery/compare/v8.0.0...v8.1.0) (2025-05-29)
-
-##### Features
-
-* Job creation mode GA ([#1480](https://github.com/googleapis/nodejs-bigquery/issues/1480)) ([b51359a](https://github.com/googleapis/nodejs-bigquery/commit/b51359a61d93a5d9cff729221f457a50a5c7a52f))
-* Support per-job reservation assignment ([#1477](https://github.com/googleapis/nodejs-bigquery/issues/1477)) ([8151e72](https://github.com/googleapis/nodejs-bigquery/commit/8151e72bb1e149f6f36f7acdba25629d208b1074))
-
-Feature
-
-BigQuery now supports using [Spanner external datasets](/bigquery/docs/spanner-external-datasets) with [authorized views](/bigquery/docs/authorized-views), [authorized routines](/bigquery/docs/authorized-routines), and [Cloud resource connections](/bigquery/docs/create-cloud-resource-connection). This feature is [generally available](https://cloud.google.com/products?e=48754805&hl=en#product-launch-stages) (GA).
-
-Feature
-
-In the navigation menu, you can now go to **Settings** and select **Configuration settings** to [customize the BigQuery Studio experience](/bigquery/docs/bigquery-web-ui#navigation_menu) for users within the selected project or organization. This is achieved by showing or hiding user interface elements. This feature is in [preview](https://cloud.google.com/products#product-launch-stages).
-
-Feature
-
-In the BigQuery console, in the **Welcome** tab, you can now try the [Apache Spark demo notebook](/bigquery/docs/bigquery-web-ui#run_spark_notebook_demo_guide) that walks you through the basics of Spark notebook and showcases [serverless Spark in BigQuery](/bigquery/docs/use-spark). This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
-
-Feature
-
-The
+* **bigquery/analyticshub:** Adding delete\_commercial and revoke\_comme

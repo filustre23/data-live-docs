@@ -165,7 +165,7 @@ Google Cloud 組織政策服務可讓您透過程式輔助，集中控管組織�
 5. 在「Constraint ID」(限制 ID) 方塊中，輸入新自訂限制的 ID。自訂限制只能包含英文字母 (包括大小寫) 或數字，例如 `custom.dtsEnableEmailNotification`。這個欄位最多可包含 70 個字元，不含前置字元 (`custom.`)，例如 `organizations/123456789/customConstraints/custom`。請勿在限制 ID 中輸入 PII 或機密資料，因為錯誤訊息可能會顯示上述資訊。
 6. 在「Description」(說明) 方塊中，輸入人類可讀的限制說明。違反政策時，系統會將這段說明做為錯誤訊息顯示。請詳細說明違反政策的原因，以及如何解決違規問題。請勿在說明中輸入 PII 或機密資料，因為錯誤訊息可能會顯示上述資訊。這個欄位最多可輸入 2000 個字元。
 7. 在「Resource type」(資源類型) 方塊中，選取包含要限制的物件和欄位的 Google Cloud REST 資源名稱，例如 `container.googleapis.com/Cluster`。大多數資源類型最多支援 20 項自訂限制。如果嘗試建立更多自訂限制，作業就會失敗。
-8. 在「Enforcement method」(強制執行方法) 下方，選取要對 REST `CREATE` 方法強制執行限制，還是同時對 `CREATE` 和 `UPDATE` 方法強制執行限制。如果使用 `UPDATE` 方法對違反限制的資源強制執行限制，組織政策會禁止對該資源進行變更，除非變更可解決違規問題。
+8. 在「Enforcement method」(強制執行方法) 下方，選取要對 REST `CREATE` 方法強制執行限制，還是對 `CREATE` 和 `UPDATE` 方法強制執行限制。如果您對違反限制的資源使用 `UPDATE` 方法強制執行限制，組織政策會封鎖對該資源的變更，除非變更可解決違規問題。
 
 如要查看各項服務支援的方法，請在「[支援自訂限制的服務](https://docs.cloud.google.com/organization-policy/reference/custom-constraint-supported-services?hl=zh-tw)」中找到該服務。
 
@@ -178,7 +178,7 @@ Google Cloud 組織政策服務可讓您透過程式輔助，集中控管組織�
 
 「拒絕」動作是指如果條件評估為 true，系統就會禁止建立或更新資源。
 
-「允許」動作表示只有在條件評估為 true 時，才允許建立或更新資源。除了條件中明確列出的情況外，其他所有情況都會遭到封鎖。
+「允許」動作代表只有在條件評估為 true 時，才允許建立或更新資源。除了條件中明確列出的情況外，其他所有情況都會遭到封鎖。
 
 11. 按一下「Create constraint」(建立限制)。
 
@@ -218,7 +218,7 @@ description: DESCRIPTION
 
 「允許」動作代表如果條件評估為 true，則允許建立或更新資源。這也表示除了條件中明確列出的情況外，其他所有情況都會遭到封鎖。
 
-「拒絕」動作是指如果條件評估結果為 true，系統就會禁止建立或更新資源。
+「拒絕」動作代表如果條件評估結果為 true，系統會禁止建立或更新資源。
 
 * `DISPLAY_NAME`：人類可讀的限制名稱。這個名稱會用於錯誤訊息，可用於識別和偵錯。請勿在顯示名稱中使用 PII 或機密資料，因為這類名稱可能會在錯誤訊息中顯示。這個欄位最多可輸入 200 個字元。
 * `DESCRIPTION`：違反政策時，會以錯誤訊息形式顯示且易於理解的限制說明。這個欄位最多可輸入 2000 個字元。
@@ -261,7 +261,7 @@ gcloud org-policies list-custom-constraints --organization=ORGANIZATION_ID
 8. 選用：如要根據標記設定組織政策的條件，請按一下「Add condition」(新增條件)。請注意，如果為組織政策新增條件式規則，您必須至少新增一項無條件規則，否則無法儲存政策。詳情請參閱「[使用標記設定組織政策範圍](https://docs.cloud.google.com/organization-policy/scope-policies?hl=zh-tw)」。
 9. 按一下「Test changes」(測試變更)，模擬組織政策的影響。詳情請參閱「[使用 Policy Simulator 測試組織政策變更](https://docs.cloud.google.com/policy-intelligence/docs/test-organization-policies?hl=zh-tw)」。
 10. 如要在模擬測試模式下強制執行組織政策，請按一下「Set dry run policy」(設定模擬測試政策)。詳情請參閱「[測試組織政策](https://docs.cloud.google.com/organization-policy/test-policies?hl=zh-tw)」。
-11. 確認組織政策在模擬測試模式下運作正常後，請按一下「Set policy」(設定政策)，設定正式政策。
+11. 確認空跑模式中的組織政策運作正常後，請按一下「Set policy」(設定政策)，設定正式政策。
 
 ### gcloud
 
@@ -411,11 +411,11 @@ Operation denied by custom org policy: ["customConstraints/custom.dtsEnableEmail
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-02 (世界標準時間)。
+上次更新時間：2026-11-05 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-05 (世界標準時間)。"],[],[]]

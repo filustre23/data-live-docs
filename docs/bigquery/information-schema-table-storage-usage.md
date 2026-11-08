@@ -249,3 +249,8 @@ SELECT * FROM region-REGION.INFORMATION_SCHEMA.TABLE_OPTIONS
     WHERE option_name='tags'
     AND CONTAINS_SUBSTR(option_value, '(\"tag_namespaced_key\", \"tag_namespaced_value\")')
 ```
+
+
+
+
+发送反馈

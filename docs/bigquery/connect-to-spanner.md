@@ -36,7 +36,7 @@ BigQuery 中的 Spanner [連線](https://docs.cloud.google.com/bigquery/docs/con
 1. 前往「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在「Explorer」窗格中，點選「add 新增資料」。
+2. 在「資料」窗格中，點選「新增資料」圖示 add。
 
    「新增資料」對話方塊隨即開啟。
 3. 在「篩選依據」窗格的「資料來源類型」部分，選取「資料庫」。
@@ -53,7 +53,7 @@ BigQuery 中的 Spanner [連線](https://docs.cloud.google.com/bigquery/docs/con
    * 選用：在「Description」(說明) 部分，輸入這項連線資源的說明。
    * 在「Database name」(資料庫名稱) 部分，按照下列格式輸入 Spanner 資料庫的名稱：`"projects/PROJECT_ID/instances/INSTANCE/databases/DATABASE"`
    * 選用：如要執行並行讀取，請選取「Read data in parallel」(並行讀取資料)。Spanner 可將特定查詢分割成較小的部分或分區，並平行擷取分區。詳情請參閱 Spanner 說明文件的「[平行讀取資料](https://docs.cloud.google.com/spanner/docs/reads?hl=zh-tw#read_data_in_parallel)」一節。這個選項僅適用於執行計畫中第一個運算子為[分散式聯集](https://docs.cloud.google.com/spanner/docs/query-execution-operators?hl=zh-tw#distributed-union)運算子的查詢。其他查詢則會傳回錯誤。如要查看 Spanner 查詢的查詢執行計畫，請參閱「[瞭解 Spanner 如何執行查詢](https://docs.cloud.google.com/spanner/docs/sql-best-practices?hl=zh-tw#how-execute-queries)」。
-   * 選用：在「Database role」(資料庫角色) 中，輸入 Spanner 資料庫角色的名稱。如果不是空白，這項連線預設會使用這個資料庫角色查詢 Spanner。透過這個連線提交查詢的 Spanner 精細的存取控管使用者，必須由系統管理員授予這個角色的存取權，且資料庫角色必須具備外部查詢中指定的所有結構定義物件的 `SELECT` 權限。如要瞭解精細的存取控管機制，請參閱「[關於精細的存取控管機制](https://docs.cloud.google.com/spanner/docs/fgac-about?hl=zh-tw)」。
+   * 選用：在「Database role」(資料庫角色) 中，輸入 Spanner 資料庫角色的名稱。如果不是空白，這項連線預設會使用這個資料庫角色查詢 Spanner。透過這個連線提交查詢的 Spanner 精細的存取控管使用者，必須由系統管理員授予這個角色的存取權，且資料庫角色必須具備外部查詢中指定的所有結構定義物件的 `SELECT` 權限。如要瞭解精細的存取控管，請參閱「[關於精細的存取控管](https://docs.cloud.google.com/spanner/docs/fgac-about?hl=zh-tw)」。
    * 選用：如要啟用 Data Boost，請選取「使用 Spanner Data Boost」。[Data Boost](https://docs.cloud.google.com/bigquery/docs/spanner-federated-queries?hl=zh-tw#data_boost) 可讓您執行數據分析查詢和資料匯出作業，幾乎不會影響佈建的 BigQuery 執行個體上現有的工作負載。如要啟用 Data Boost，請選取「Data Boost」和「平行讀取資料」。
 7. 點選「建立連線」。
 
@@ -113,7 +113,7 @@ bq mk --connection \
 
 您可以授予下列角色，讓使用者查詢資料及管理連結：
 
-* `roles/bigquery.connectionUser`：可讓使用者透過連線，連至外部資料來源並執行查詢。
+* `roles/bigquery.connectionUser`：可讓使用者透過連線連結外部資料來源，並對這些來源執行查詢。
 * `roles/bigquery.connectionAdmin`：可讓使用者管理連線。
 
 如要進一步瞭解 BigQuery 的 IAM 角色和權限，請參閱「[預先定義的角色和權限](https://docs.cloud.google.com/bigquery/access-control?hl=zh-tw)」。
@@ -126,7 +126,7 @@ bq mk --connection \
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 
-   連線會列在專案的「連線」群組中。
+   連線會列在專案中名為「連線」的群組。
 2. 點選左側窗格中的 explore「Explorer」。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
@@ -134,7 +134,7 @@ bq mk --connection \
 4. 在「詳細資料」窗格中，按一下「共用」即可共用連線。接著，按照下列步驟操作：
 
    1. 在「Connection permissions」(連線權限) 對話方塊中，新增或編輯主體，與其他主體共用連線。
-   2. 按一下 [儲存]。
+   2. 按一下「儲存」。
 
 ### bq
 
@@ -206,11 +206,11 @@ public class ShareConnection {
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-29 (世界標準時間)。
+上次更新時間：2026-11-03 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-03 (世界標準時間)。"],[],[]]

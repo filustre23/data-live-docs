@@ -16,36 +16,36 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 使用 BigQuery 的 Simba ODBC 和 JDBC 驅動程式
 
-**注意：** 除了 Simba 驅動程式，您也可以考慮使用 Google 開發的 [BigQuery JDBC 驅動程式](https://docs.cloud.google.com/bigquery/docs/jdbc-for-bigquery?hl=zh-tw)和 [BigQuery ODBC 驅動程式](https://docs.cloud.google.com/bigquery/docs/odbc-for-bigquery?hl=zh-tw)。
+**注意：**除了 Simba 驅動程式，您也可以考慮使用 Google 開發的 [BigQuery 專用 JDBC 驅動程式](https://docs.cloud.google.com/bigquery/docs/jdbc-for-bigquery?hl=zh-tw)和 [BigQuery 專用 ODBC 驅動程式](https://docs.cloud.google.com/bigquery/docs/odbc-for-bigquery?hl=zh-tw)。
 
-BigQuery 的 Simba 開放式資料庫連線 (ODBC) 和 Java 資料庫連線 (JDBC) 驅動程式可將應用程式連線至 BigQuery，讓您使用偏好的工具和基礎架構，運用 BigQuery 功能。一般來說，JDBC 驅動程式用於 Java 應用程式，ODBC 驅動程式則用於其他應用程式。
+BigQuery 的 Simba Open Database Connectivity (ODBC) 和 Java Database Connectivity (JDBC) 驅動程式可將應用程式連結至 BigQuery，讓您使用偏好的工具和基礎架構，運用 BigQuery 功能。一般來說，JDBC 驅動程式會與 Java 應用程式搭配使用，其他情況則使用 ODBC 驅動程式。
 
-Simba ODBC 和 JDBC 驅動程式是由 [insightsoftware](https://insightsoftware.com/simba/) 開發，這家公司是 [Google Cloud Ready - BigQuery 合作夥伴](https://docs.cloud.google.com/bigquery/docs/bigquery-ready-overview?hl=zh-tw)。
+Simba ODBC 和 JDBC 驅動程式是由 [insightsoftware](https://insightsoftware.com/simba/) 開發，該公司是 [Google Cloud Ready - BigQuery 合作夥伴](https://docs.cloud.google.com/bigquery/docs/bigquery-ready-overview?hl=zh-tw)。
 
 ## 限制
 
 BigQuery 的 Simba ODBC 和 JDBC 驅動程式有下列限制：
 
 * 不支援 [BigQuery 載入功能](https://docs.cloud.google.com/bigquery/docs/loading-data?hl=zh-tw)。
-* 不支援 [BigQuery Export 功能](https://docs.cloud.google.com/bigquery/docs/export-intro?hl=zh-tw)。
+* 不支援 [BigQuery 匯出功能](https://docs.cloud.google.com/bigquery/docs/export-intro?hl=zh-tw)。
 * 不支援[查詢前置字元](https://docs.cloud.google.com/bigquery/docs/introduction-sql?hl=zh-tw#sql)。
-* 所有[資料操縱語言 (DML) 限制](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language?hl=zh-tw#dml-limitations)均適用。
-* [參數化查詢](https://docs.cloud.google.com/bigquery/docs/parameterized-queries?hl=zh-tw)只會提供查詢驗證。查詢效能不受影響。
+* 所有[資料操縱語言 (DML) 限制](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language?hl=zh-tw#dml-limitations)皆適用。
+* [參數化查詢](https://docs.cloud.google.com/bigquery/docs/parameterized-queries?hl=zh-tw)僅提供查詢驗證。查詢效能不會受到影響。
 * 這些驅動程式專為 BigQuery 設計，無法用於其他產品或服務。
 
 ## 事前準備
 
-使用 BigQuery 的 Simba ODBC 和 JDBC 驅動程式時，您可以選擇使用 BigQuery Storage Read API 讀取資料，而非標準的 BigQuery API。在 insightsoftware 說明文件中，這項功能稱為「高輸送量 API」。如要使用這項選用功能，請確認您具備[必要角色](#high-throughput-roles)。
+使用 BigQuery 的 Simba ODBC 和 JDBC 驅動程式時，您可以選擇使用 BigQuery Storage Read API 讀取資料，而非標準 BigQuery API。在 insightsoftware 說明文件中，這項功能稱為*高處理量 API*。如要使用這項選用功能，請確認您具備[必要角色](#high-throughput-roles)。
 
-### 高輸送量 API 的必要角色
+### High-Throughput API 的必要角色
 
-如要取得使用高處理量 API 的必要權限，請要求管理員授予您 BigQuery 專案的「BigQuery Read Session User」 (`roles/bigquery.readSessionUser`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得使用 High-Throughput API 的必要權限，請要求管理員為您授予 BigQuery 專案的 [BigQuery 讀取工作階段使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.readSessionUser) (`roles/bigquery.readSessionUser`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
-這個預先定義的角色具備使用高輸送量 API 所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
+這個預先定義的角色具備使用 High-Throughput API 所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
 #### 所需權限
 
-如要使用高輸送量 API，必須具備下列權限：
+必須具備下列權限，才能使用 High-Throughput API：
 
 * `resourcemanager.projects.get`
 * `resourcemanager.projects.list`
@@ -55,25 +55,32 @@ BigQuery 的 Simba ODBC 和 JDBC 驅動程式有下列限制：
 
 您或許還可透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)取得這些權限。
 
-## 安裝及設定 BigQuery 的 Simba ODBC 驅動程式
+## 安裝及設定 BigQuery 專用 Simba ODBC 驅動程式
 
-**注意：** 除了 Simba ODBC 驅動程式，您也可以考慮使用[Google 開發的 BigQuery ODBC 驅動程式](https://docs.cloud.google.com/bigquery/docs/odbc-for-bigquery?hl=zh-tw)。
+**注意：**除了 Simba ODBC 驅動程式，您也可以考慮使用 [Google 開發的 BigQuery ODBC 驅動程式](https://docs.cloud.google.com/bigquery/docs/odbc-for-bigquery?hl=zh-tw)。
 
-1. 請根據作業系統下載 3.4.1.3004 版的驅動程式：
+1. 根據作業系統下載 3.4.4.1008 版驅動程式：
 
-   * [Windows 32 位元](https://storage.googleapis.com/simba-bq-release/odbc/SimbaODBCDriverforGoogleBigQuery32_3.4.1.3004.msi) (`.msi` 檔案)
-   * [Windows 64 位元](https://storage.googleapis.com/simba-bq-release/odbc/SimbaODBCDriverforGoogleBigQuery64_3.4.1.3004.msi) (`.msi` 檔案)
-   * [Linux 32 位元和 64 位元](https://storage.googleapis.com/simba-bq-release/odbc/SimbaODBCDriverforGoogleBigQuery_3.4.1.3004-Linux.tar.gz) (`.tar.gz` 檔案)
-   * [macOS](https://storage.googleapis.com/simba-bq-release/odbc/SimbaODBCDriverforGoogleBigQuery-3.4.1.3004.dmg) (`.dmg` 檔案)
+   * [Windows 32 位元](https://storage.googleapis.com/simba-bq-release/odbc/SimbaODBCDriverforGoogleBigQuery32_3.4.4.1008.msi) (`.msi` 檔案)
+   * [Windows 64 位元](https://storage.googleapis.com/simba-bq-release/odbc/SimbaODBCDriverforGoogleBigQuery64_3.4.4.1008.msi) (`.msi` 檔案)
+   * [Linux 32 位元和 64 位元](https://storage.googleapis.com/simba-bq-release/odbc/SimbaODBCDriverforGoogleBigQuery_3.4.4.1008-Linux.tar.gz) (`.tar.gz` 檔案)
+   * [macOS](https://storage.googleapis.com/simba-bq-release/odbc/SimbaODBCDriverforGoogleBigQuery-3.4.4.1008.dmg) (`.dmg` 檔案)
 
-   下載 BigQuery 適用的 Simba ODBC 驅動程式，即表示您同意適用的《[Google 服務條款](https://cloud.google.com/terms?hl=zh-tw)》。如要再授權或 OEM 重新發布，可能需要另外取得授權。
-2. 請按照 [insightsoftware 安裝與設定指南](https://storage.googleapis.com/simba-bq-release/odbc/Simba%20Google%20BigQuery%20ODBC%20Connector%20Install%20and%20Configuration%20Guide-3.4.1.3004.pdf)中的操作說明操作。
+   下載 BigQuery 專用 Simba ODBC 驅動程式，即表示您同意適用的《[Google 服務條款](https://cloud.google.com/terms?hl=zh-tw)》。轉授權或 OEM 重新發布可能需要另外取得授權。
+2. 請按照 [insightsoftware 安裝和設定指南](https://storage.googleapis.com/simba-bq-release/odbc/Simba%20Google%20BigQuery%20ODBC%20Connector%20Install%20and%20Configuration%20Guide-3.4.4.1008.pdf)中的操作說明進行。
 
-如要瞭解功能異動和工作流程更新，請參閱「[Simba Google BigQuery ODBC 資料連接器版本資訊](https://storage.googleapis.com/simba-bq-release/odbc/release-notes-3.4.1.3004.txt)」。
+如要瞭解功能異動和工作流程更新，請參閱「[Simba Google BigQuery ODBC 資料連接器版本資訊](https://storage.googleapis.com/simba-bq-release/odbc/release-notes-3.4.4.1008.txt)」。
 
 如要查看先前的驅動程式版本清單，請展開下列部分：
 
 ### 舊版 Simba ODBC 驅動程式
+
+#### 3.4.1.3004
+
+* [Windows 32 位元](https://storage.googleapis.com/simba-bq-release/odbc/SimbaODBCDriverforGoogleBigQuery32_3.4.1.3004.msi)
+* [Windows 64 位元](https://storage.googleapis.com/simba-bq-release/odbc/SimbaODBCDriverforGoogleBigQuery64_3.4.1.3004.msi)
+* [Linux 32 位元和 64 位元](https://storage.googleapis.com/simba-bq-release/odbc/SimbaODBCDriverforGoogleBigQuery_3.4.1.3004-Linux.tar.gz)
+* [macOS](https://storage.googleapis.com/simba-bq-release/odbc/SimbaODBCDriverforGoogleBigQuery-3.4.1.3004.dmg)
 
 #### 3.3.1.3003
 
@@ -257,21 +264,22 @@ BigQuery 的 Simba ODBC 和 JDBC 驅動程式有下列限制：
 * [Linux 32 位元和 64 位元](https://storage.googleapis.com/simba-bq-release/odbc/SimbaODBCDriverforGoogleBigQuery_2.3.2.1003-Linux.tar.gz)
 * [macOS](https://storage.googleapis.com/simba-bq-release/odbc/SimbaODBCDriverforGoogleBigQuery-2.3.2.1003.dmg)
 
-## 安裝及設定 BigQuery 的 Simba JDBC 驅動程式
+## 安裝及設定 BigQuery 專用的 Simba JDBC 驅動程式
 
-**注意：** 除了 Simba JDBC 驅動程式，您也可以考慮使用[Google 開發的 BigQuery JDBC 驅動程式](https://docs.cloud.google.com/bigquery/docs/jdbc-for-bigquery?hl=zh-tw)。
+**注意：**除了 Simba JDBC 驅動程式，您也可以考慮使用 [Google 開發的 BigQuery JDBC 驅動程式](https://docs.cloud.google.com/bigquery/docs/jdbc-for-bigquery?hl=zh-tw)。
 
-1. 下載[驅動程式 1.8.1.1003 版](https://storage.googleapis.com/simba-bq-release/jdbc/SimbaJDBCDriverforGoogleBigQuery42_1.8.1.1003.zip)。
+1. 下載 [1.8.3.1002 版驅動程式](https://storage.googleapis.com/simba-bq-release/jdbc/SimbaJDBCDriverforGoogleBigQuery42_1.8.3.1002.zip)。
 
-   下載 BigQuery 適用的 Simba JDBC 驅動程式，即表示您同意適用的《[Google 服務條款](https://cloud.google.com/terms?hl=zh-tw)》。如要再授權或 OEM 重新發布，可能需要另外取得授權。
-2. 請按照 [insightsoftware 安裝與設定指南](https://storage.googleapis.com/simba-bq-release/jdbc/Simba%20Google%20BigQuery%20JDBC%20Connector%20Install%20and%20Configuration%20Guide_1.8.1.1003.pdf)中的操作說明操作。
+   下載 BigQuery 專用 Simba JDBC 驅動程式，即表示您同意適用的《[Google 服務條款](https://cloud.google.com/terms?hl=zh-tw)》。轉授權或 OEM 重新發布可能需要另外取得授權。
+2. 請按照 [insightsoftware 安裝和設定指南](https://storage.googleapis.com/simba-bq-release/jdbc/Simba%20Google%20BigQuery%20JDBC%20Connector%20Install%20and%20Configuration%20Guide_1.8.3.1002.pdf)中的操作說明進行。
 
-如要瞭解功能異動和工作流程更新，請參閱「[Simba Google BigQuery JDBC Data Connector Release Notes](https://storage.googleapis.com/simba-bq-release/jdbc/release-notes_1.8.1.1003.txt)」。
+如要瞭解功能異動和工作流程更新，請參閱「[Simba Google BigQuery JDBC 資料連接器版本資訊](https://storage.googleapis.com/simba-bq-release/jdbc/release-notes_1.8.3.1002.txt)」。
 
 如要查看先前的驅動程式版本清單，請展開下列部分：
 
 ### 舊版 Simba JDBC 驅動程式
 
+* [1.8.1.1003](https://storage.googleapis.com/simba-bq-release/jdbc/SimbaJDBCDriverforGoogleBigQuery42_1.8.1.1003.zip)
 * [1.8.0.1001](https://storage.googleapis.com/simba-bq-release/jdbc/SimbaJDBCDriverforGoogleBigQuery42_1.8.0.1001.zip)
 * [1.7.0.1001](https://storage.googleapis.com/simba-bq-release/jdbc/SimbaJDBCDriverforGoogleBigQuery42_1.7.0.1001.zip)
 * [1.6.5.1002](https://storage.googleapis.com/simba-bq-release/jdbc/SimbaJDBCDriverforGoogleBigQuery42_1.6.5.1002.zip)
@@ -292,24 +300,24 @@ BigQuery 的 Simba ODBC 和 JDBC 驅動程式有下列限制：
 * [1.2.18.1022](https://storage.googleapis.com/simba-bq-release/jdbc/SimbaJDBCDriverforGoogleBigQuery42_1.2.18.1022.zip)
 * [1.2.16.1020](https://storage.googleapis.com/simba-bq-release/jdbc/SimbaJDBCDriverforGoogleBigQuery42_1.2.16.1020.zip)
 * [1.2.14.1017](https://storage.googleapis.com/simba-bq-release/jdbc/SimbaJDBCDriverforGoogleBigQuery42_1.2.14.1017.zip)
-* [1.2.1.1001 (相容於 JDBC 4.2)](https://storage.googleapis.com/simba-bq-release/jdbc/SimbaJDBCDriverforGoogleBigQuery42_1.2.1.1001.zip)
-* [1.2.1.1001 (相容於 JDBC 4.1)](https://storage.googleapis.com/simba-bq-release/jdbc/SimbaJDBCDriverforGoogleBigQuery41_1.2.1.1001.zip)
+* [1.2.1.1001 (與 JDBC 4.2 相容)](https://storage.googleapis.com/simba-bq-release/jdbc/SimbaJDBCDriverforGoogleBigQuery42_1.2.1.1001.zip)
+* [1.2.1.1001 (與 JDBC 4.1 相容)](https://storage.googleapis.com/simba-bq-release/jdbc/SimbaJDBCDriverforGoogleBigQuery41_1.2.1.1001.zip)
 
 ## 支援
 
-如需 BigQuery 的 Simba ODBC 和 JDBC 驅動程式支援，請透過標準 [Cloud Customer Care](https://docs.cloud.google.com/bigquery/support?hl=zh-tw)管道取得協助。
+您可以透過標準 [Cloud Customer Care](https://docs.cloud.google.com/bigquery/support?hl=zh-tw) 管道，取得 BigQuery 的 Simba ODBC 和 JDBC 驅動程式支援。
 
 ## 定價
 
-您可以免費下載 BigQuery 的 Simba ODBC 和 JDBC 驅動程式。不過，轉授權或 OEM 發行可能需要另外申請授權。
+您可以免費下載 BigQuery 的 Simba ODBC 和 JDBC 驅動程式。不過，轉授權或原始設備製造商 (OEM) 發布可能需要另外取得授權。
 
-如要進一步瞭解有關重新發布或 OEM 授權的授權事宜，請直接前往 [insightsoftware.com](https://insightsoftware.com) 聯絡 insightsoftware (前身為 Simba)。
+如需進一步瞭解重新發布或 OEM 授權，請直接前往 [insightsoftware.com](https://insightsoftware.com) 洽詢 insightsoftware (前稱 Simba)。
 
 使用驅動程式時，適用下列 BigQuery 定價：
 
-* 執行查詢的[運算定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#compute-pricing-models)。
-* [儲存空間價格](https://cloud.google.com/bigquery/pricing?hl=zh-tw#storage-pricing)，前提是驅動程式已設定為將大型結果集寫入目標資料表。
-* 如果驅動程式使用高處理量 API 功能，則讀取大型結果集資料時，會套用 [BigQuery Storage Read API 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#data-extraction-pricing)。
+* 您執行的查詢[運算定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#compute-pricing-models)。
+* [儲存空間定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#storage-pricing)：如果驅動程式設定為將大型結果集寫入目的地資料表，則適用此定價。
+* 如果驅動程式使用高處理量 API 功能，則會依 [BigQuery Storage Read API 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#data-extraction-pricing)收取大型結果集的資料讀取費用。
 
 ## 後續步驟
 
@@ -323,11 +331,11 @@ BigQuery 的 Simba ODBC 和 JDBC 驅動程式有下列限制：
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-29 (世界標準時間)。
+上次更新時間：2026-11-05 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-05 (世界標準時間)。"],[],[]]

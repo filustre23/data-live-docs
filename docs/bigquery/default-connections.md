@@ -24,7 +24,7 @@ BigQuery 支援下列資源的預設連線：
 
 * [Cloud Storage BigLake 資料表](https://docs.cloud.google.com/bigquery/docs/create-cloud-storage-table-biglake?hl=zh-tw)
 * [物件資料表](https://docs.cloud.google.com/bigquery/docs/object-tables?hl=zh-tw)
-* [Apache Iceberg 代管資料表](https://docs.cloud.google.com/bigquery/docs/iceberg-tables?hl=zh-tw#create-iceberg-tables)
+* [Apache Iceberg 代管資料表](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery?hl=zh-tw#create-iceberg-tables)
 * [遠端模型](https://docs.cloud.google.com/bigquery/docs/bqml-introduction?hl=zh-tw#remote_models)
 
 如要使用預設連線，請在下列 SQL 子句中指定 `DEFAULT` 關鍵字：
@@ -127,7 +127,7 @@ BigQuery 支援下列資源的預設連線：
 | --- | --- | --- |
 | [Cloud Storage BigLake 資料表](https://docs.cloud.google.com/bigquery/docs/create-cloud-storage-table-biglake?hl=zh-tw) | Cloud Storage | `roles/storage.legacyBucketReader`  `roles/storage.legacyObjectReader` |
 | [物件資料表](https://docs.cloud.google.com/bigquery/docs/object-tables?hl=zh-tw) | Cloud Storage | `roles/storage.legacyBucketReader`  `roles/storage.legacyObjectReader` |
-| [Iceberg 代管資料表](https://docs.cloud.google.com/bigquery/docs/iceberg-tables?hl=zh-tw#create-iceberg-tables) | Cloud Storage | `roles/storage.legacyBucketWriter`  `roles/storage.legacyObjectOwner` |
+| [Iceberg 代管資料表](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery?hl=zh-tw#create-iceberg-tables) | Cloud Storage | `roles/storage.legacyBucketWriter`  `roles/storage.legacyObjectOwner` |
 | [Gemini Enterprise Agent Platform 模型上的 BigQuery ML 遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https?hl=zh-tw) | Google 自有模型 | `roles/aiplatform.user` |
 | 可從 Model Garden 部署至端點 |
 | 使用者模型 |
@@ -168,7 +168,7 @@ OPTIONS (
 
 ### 範例：使用預設連線建立 Iceberg 代管資料表
 
-下列 SQL 運算式會使用預設連線建立 [Iceberg 代管資料表](https://docs.cloud.google.com/bigquery/docs/iceberg-tables?hl=zh-tw#create-iceberg-tables)：
+下列 SQL 運算式會使用預設連線建立 [Iceberg 代管資料表](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery?hl=zh-tw#create-iceberg-tables)：
 
 ```
 CREATE TABLE `myproject.tpch_clustered.nation` (
@@ -195,7 +195,7 @@ OPTIONS (
 ```
 CREATE OR REPLACE MODEL `mydataset.flash_model`
   REMOTE WITH CONNECTION DEFAULT
-  OPTIONS(ENDPOINT = 'gemini-2.0-flash');
+  OPTIONS(ENDPOINT = 'gemini-3.5-flash');
 ```
 
 ### 範例：透過 Cloud AI 服務建立遠端模型
@@ -231,11 +231,11 @@ CREATE MODEL `project_id.mydataset.mymodel`
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-29 (世界標準時間)。
+上次更新時間：2026-11-04 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-04 (世界標準時間)。"],[],[]]

@@ -16,61 +16,61 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 將 Search Ads 360 資料載入 BigQuery
 
-您可以使用 Search Ads 360 連接器的 [BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)，將資料從 Search Ads 360 載入至 BigQuery。透過 BigQuery 資料移轉服務，您可以安排週期性移轉工作，將 Search Ads 360 的最新資料新增至 BigQuery。
+您可以使用 Search Ads 360 連接器的 [BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)，將資料從 Search Ads 360 載入 BigQuery。您可以使用 BigQuery 資料移轉服務，安排週期性移轉工作，將 Search Ads 360 的最新資料新增至 BigQuery。
 
 ## 連接器總覽
 
 Search Ads 360 連接器的 BigQuery 資料移轉服務支援下列資料移轉選項。
 
-| 資料轉移方式 | 支援 |
+| 資料移轉選項 | 支援 |
 | --- | --- |
-| 受支援的報表 | Search Ads 360 連接器支援從 [Search Ads 360 v0 報表](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/overview?hl=zh-tw)傳輸資料。 如要瞭解 Search Ads 360 報表如何轉換成 BigQuery 表格和檢視畫面，請參閱「[Search Ads 360 報表轉換](https://docs.cloud.google.com/bigquery/docs/search-ads-transformation?hl=zh-tw)」一文。 |
-| 重複頻率 | Search Ads 360 連接器支援每日資料轉移。    根據預設，資料移轉作業會在建立時排定時間。[設定資料移轉作業](#setup-data-transfer)時，你可以設定資料移轉時間。 |
-| 重新整理時間範圍 | 您可以排定資料轉移時間，在資料轉移作業執行時，擷取最多 30 天的 Search Ads 360 資料。[設定資料移轉時，您可以設定重新整理視窗的持續時間。](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer?hl=zh-tw#setup-data-transfer)    根據預設，Search Ads 360 連接器的更新期為 7 天。    詳情請參閱「[重新整理時間範圍](#refresh)」。 系統每天會為[比對資料表](https://docs.cloud.google.com/bigquery/docs/search-ads-transformation?hl=zh-tw#search_ads_match_tables)建立快照，並儲存在上次執行日期的分區中。系統不會更新回填或使用重新整理視窗載入的日期，因此相符資料表快照不會更新。 |
-| 資料補充作業的可用性 | [執行資料補充作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)，擷取排定資料移轉時間以外的資料。您可以擷取資料來源資料保留政策允許的最早資料。    如要瞭解 Search Ads 360 的資料保留政策，請參閱「[報表資料保留政策](https://support.google.com/sa360/answer/13292701?hl=zh-tw)」。 |
-| 每個管理員帳戶的客戶 ID 數 | BigQuery 資料移轉服務對每個 Search Ads 360 [管理員帳戶](https://support.google.com/sa360/answer/9158072?hl=zh-tw)最多支援 **8000 個客戶 ID**。 |
+| 受支援的報表 | Search Ads 360 連接器支援從 [Search Ads 360 第 0 版報表](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/overview?hl=zh-tw)中的報表移轉資料。 如要瞭解 Search Ads 360 報表如何轉換為 BigQuery 資料表和檢視表，請參閱「[Search Ads 360 報表轉換](https://docs.cloud.google.com/bigquery/docs/search-ads-transformation?hl=zh-tw)」。 |
+| 重複頻率 | Search Ads 360 連接器支援每日資料移轉。    根據預設，資料移轉作業會排定在建立資料移轉作業時執行。您可以在[設定資料移轉作業](#setup-data-transfer)時，設定資料移轉時間。 |
+| 重新整理時間範圍 | 您可以排定資料移轉作業，在執行時擷取最多 30 天前的 Search Ads 360 資料。[設定資料移轉作業](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer?hl=zh-tw#setup-data-transfer)時，您可以設定重新整理回溯期的時間長度。    根據預設，Search Ads 360 連接器的重新整理回溯期為 7 天。    詳情請參閱「[重新整理時間範圍](#refresh)」。 系統每天會擷取一次[比對表格](https://docs.cloud.google.com/bigquery/docs/search-ads-transformation?hl=zh-tw#search_ads_match_tables)的快照，並儲存在上次執行日期的分區中。 比對表快照不會因回填或使用重新整理時間範圍載入的天數而更新。 |
+| 補充資料可用性 | [執行資料補充作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)，擷取排定資料移轉作業以外的資料。只要在資料來源的資料保留政策允許範圍內，即可擷取歷來資料。    如要瞭解 Search Ads 360 的資料保留政策，請參閱「[報表資料保留政策](https://support.google.com/sa360/answer/13292701?hl=zh-tw)」一文。 |
+| 每個管理員帳戶的客戶 ID 數 | BigQuery 資料移轉服務最多支援每個 Search Ads 360 [管理員帳戶](https://support.google.com/sa360/answer/9158072?hl=zh-tw)有 **8,000 個客戶 ID**。 |
 
 如要查看使用舊版 Search Ads 360 Reporting API 的 Search Ads 360 移轉指南，請參閱「[Search Ads 360 移轉作業 (已淘汰)](https://docs.cloud.google.com/bigquery/docs/sa360-transfer?hl=zh-tw)」。
 
-## 從 Search Ads 360 轉移作業擷取資料
+## 從 Search Ads 360 移轉作業擷取資料
 
-將資料從 Search Ads 360 移轉至 BigQuery 時，系統會將資料載入至按日期分區的 BigQuery 資料表。資料載入的資料表分區會對應至資料來源的日期。如果為同一天排定多項移轉作業，BigQuery 資料移轉服務會以最新資料覆寫該特定日期的資料分割。同一天內進行多次轉移或執行回填作業，不會導致資料重複，也不會影響其他日期的分區。
+將資料從 Search Ads 360 移轉至 BigQuery 時，資料會載入依日期分區的 BigQuery 資料表。資料載入的資料表分區會對應至資料來源的日期。如果您在同一天安排多項移轉作業，BigQuery 資料移轉服務會以最新資料覆寫該日期的分區。在同一天進行多次移轉或執行補充作業，不會產生重複資料，其他日期的分區也不會受到影響。
 
-### 重新整理視窗
+### 重新整理時間範圍
 
-*更新期*是指資料移轉作業在進行時，擷取資料的天數。舉例來說，如果重新整理時間範圍為三天，且每天都會進行移轉，BigQuery 資料移轉服務就會從來源資料表擷取過去三天的所有資料。在這個範例中，每天進行移轉時，BigQuery 資料移轉服務會建立新的 BigQuery 目的地資料表分割區，並複製當天的來源資料表資料，然後自動觸發補充作業執行作業，以更新過去兩天的來源資料表資料。系統自動觸發的回填作業會覆寫或增量更新 BigQuery 目的地資料表，具體做法取決於 BigQuery 資料移轉服務連接器是否支援增量更新。
+「更新回溯期」是指資料移轉時，資料移轉作業擷取資料的天數。舉例來說，如果更新時間範圍為三天，且每天都會進行移轉，BigQuery 資料移轉服務會從來源資料表擷取過去三天的所有資料。在本例中，每日移轉作業執行時，BigQuery 資料移轉服務會建立新的 BigQuery 目的地資料表分區，並複製當天的來源資料表資料，然後自動觸發補充執行作業，使用過去兩天的來源資料表資料更新 BigQuery 目的地資料表分區。自動觸發的回填執行作業會覆寫或增量更新 BigQuery 目的地資料表，具體取決於 BigQuery 資料移轉服務連接器是否支援增量更新。
 
-首次執行資料移轉時，資料移轉作業會擷取重新整理視窗內的所有可用來源資料。舉例來說，如果重新整理時間範圍為三天，而您是第一次執行資料移轉作業，BigQuery 資料移轉服務會擷取三天內的所有來源資料。
+首次執行資料移轉作業時，系統會擷取重新整理期間內的所有可用來源資料。舉例來說，如果更新時間範圍為三天，且您首次執行資料移轉作業，BigQuery 資料移轉服務會擷取三天內的所有來源資料。
 
-如要擷取重新整理時間範圍外的資料 (例如歷來資料)，或從任何轉移中斷或缺漏中復原資料，可以啟動或排定[補充作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)。
+如要擷取更新時間範圍以外的資料 (例如歷來資料)，或從任何移轉中斷或缺漏中復原資料，您可以啟動或排定[補充執行作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)。
 
 ## 限制
 
-* 您最多可以每 24 小時設定一次 Search Ads 360 資料轉移作業。預設情況下，移轉作業會在您建立移轉作業時啟動。不過，您可以在[建立移轉作業](https://docs.cloud.google.com/bigquery/docs/search-ads-transfer?hl=zh-tw#setup-data-transfer)時設定資料移轉開始時間。
-* 在 Search Ads 360 移轉期間，BigQuery 資料移轉服務不支援增量資料移轉。指定資料移轉日期後，系統會移轉該日期可用的所有資料。
+* Search Ads 360 資料移轉作業的頻率上限為每 24 小時一次。根據預設，移轉作業會在您建立移轉作業時開始。不過，您可以在[建立移轉作業](https://docs.cloud.google.com/bigquery/docs/search-ads-transfer?hl=zh-tw#setup-data-transfer)時，設定資料移轉開始時間。
+* BigQuery 資料移轉服務不支援在 Search Ads 360 移轉期間進行增量資料移轉。指定資料移轉日期後，系統會移轉該日期可用的所有資料。
 
 ## 事前準備
 
-建立 Search Ads 360 資料移轉作業前的準備事項如下：
+建立 Search Ads 360 資料移轉作業前，請先完成下列事項：
 
-* 確認您已完成[啟用 BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service?hl=zh-tw)的一切必要動作。
-* [建立 BigQuery 資料移轉服務資料集](https://docs.cloud.google.com/bigquery/docs/datasets?hl=zh-tw)，儲存 Search Ads 360 報表資料。
-* 如要為 Pub/Sub 設定移轉作業執行通知，您必須擁有 `pubsub.topics.setIamPolicy` 權限。如果您只想設定電子郵件通知，則不需要擁有 Pub/Sub 權限。詳情請參閱「[BigQuery 資料移轉服務執行通知](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications?hl=zh-tw)」一文。
-* 在專案中[啟用 Search Ads 360 報表 API 的存取權](https://console.developers.google.com/apis/api/searchads360.googleapis.com/?hl=zh-tw)。
+* 確認您已完成[啟用 BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service?hl=zh-tw)所需的所有動作。
+* [建立 BigQuery 資料移轉服務資料集](https://docs.cloud.google.com/bigquery/docs/datasets?hl=zh-tw)，用於儲存 Search Ads 360 報表資料。
+* 如要設定 Pub/Sub 的移轉作業執行通知，您必須具備 `pubsub.topics.setIamPolicy` 權限。如果您只想設定電子郵件通知，則不需要擁有 Pub/Sub 權限。詳情請參閱「[BigQuery 資料移轉服務執行通知](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications?hl=zh-tw)」。
+* 在專案中[啟用 Search Ads 360 Reporting API 存取權](https://console.developers.google.com/apis/api/searchads360.googleapis.com/?hl=zh-tw)。
 
 ## 所需權限
 
-確認您已授予下列權限。
+請確認您已授予下列權限。
 
 ### 必要的 BigQuery 角色
 
-如要取得建立 BigQuery 資料移轉服務資料移轉作業所需的權限，請要求系統管理員在專案中授予您 [BigQuery 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.admin)  (`roles/bigquery.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得建立 BigQuery 資料移轉服務資料移轉作業所需的權限，請要求管理員授予您專案的 [BigQuery 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.admin) (`roles/bigquery.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
 這個預先定義的角色具備建立 BigQuery 資料移轉服務資料移轉作業所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
 #### 所需權限
 
-如要建立 BigQuery 資料移轉服務資料移轉作業，您必須具備下列權限：
+您必須具備下列權限，才能建立 BigQuery 資料移轉服務資料移轉作業：
 
 * BigQuery 資料移轉服務權限：
   + `bigquery.transfers.update`
@@ -88,23 +88,23 @@ Search Ads 360 連接器的 BigQuery 資料移轉服務支援下列資料移轉�
 
 ### 必要 Google Cloud 角色
 
-如要從 Search Ads 360 下載資料，您必須具備 `serviceusage.services.use` 權限。[服務使用情形消費者](https://docs.cloud.google.com/iam/docs/roles-permissions/serviceusage?hl=zh-tw#serviceusage.serviceUsageConsumer) (`roles/serviceusage.serviceUsageConsumer`) 預先定義的 IAM 角色包含這項權限。
+您必須具備 `serviceusage.services.use` 權限，才能從 Search Ads 360 下載資料。預先定義的 IAM 角色「[服務使用情形消費者](https://docs.cloud.google.com/iam/docs/roles-permissions/serviceusage?hl=zh-tw#serviceusage.serviceUsageConsumer)」(`roles/serviceusage.serviceUsageConsumer`) 包含這項權限。
 
-### 必要 Search Ads 360 角色
+### 必要的 Search Ads 360 角色
 
-授予移轉設定所用 Search Ads 360 客戶 ID 或[管理員帳戶](https://support.google.com/sa360/answer/9158072?hl=zh-tw)的讀取權限。如要為服務帳戶設定讀取權限，請[與 Search Ads 360 支援團隊聯絡](https://support.google.com/sa360/gethelp?hl=zh-tw)，尋求協助。
+授予讀取權限給移轉設定中使用的 Search Ads 360 客戶 ID 或[管理員帳戶](https://support.google.com/sa360/answer/9158072?hl=zh-tw)。如要設定服務帳戶的讀取權限，請[聯絡 Search Ads 360 支援團隊](https://support.google.com/sa360/gethelp?hl=zh-tw)尋求協助。
 
-## 建立 Search Ads 360 資料轉移作業
+## 建立 Search Ads 360 資料移轉作業
 
-如要建立 Search Ads 360 報表資料轉移作業，您需要 Search Ads 360 客戶 ID 或[管理員帳戶](https://support.google.com/sa360/answer/9158072?hl=zh-tw)。選取下列選項之一：
+如要建立 Search Ads 360 報表的資料移轉作業，您需要 Search Ads 360 客戶 ID 或[管理員帳戶](https://support.google.com/sa360/answer/9158072?hl=zh-tw)。選取下列選項之一：
 
 ### 控制台
 
 1. 前往 Google Cloud 控制台的「資料移轉」頁面。
 
-   [前往「資料轉移」頁面](https://console.cloud.google.com/bigquery/transfers?hl=zh-tw)
-2. 按一下 add「建立轉移作業」。
-3. 在「來源類型」部分，針對「來源」，選擇「Search Ads 360」。
+   [前往「資料移轉」](https://console.cloud.google.com/bigquery/transfers?hl=zh-tw)
+2. 按一下「add 建立移轉作業」。
+3. 在「Source type」(來源類型) 部分，「Source」(來源) 請選取「Search Ads 360」。
 4. 在「Transfer config name」(轉移設定名稱) 部分，「Display name」(顯示名稱) 請輸入資料移轉作業的名稱，例如 `My Transfer`。移轉作業名稱可以是任意值，日後需要修改移轉作業時能夠據此識別。
 5. 在「Schedule options」(排程選項) 專區：
 
@@ -115,7 +115,7 @@ Search Ads 360 連接器的 BigQuery 資料移轉服務支援下列資料移轉�
 
    1. 在「Customer ID」(客戶 ID)，輸入 Search Ads 360 客戶 ID。
    2. 選用步驟：輸入**代理商 ID** 和**廣告主 ID**，即可擷取 [ID 對應表格](https://docs.cloud.google.com/bigquery/docs/search-ads-transfer?hl=zh-tw#id-mapping)。
-   3. 選用步驟：在「Custom Floodlight Variables」(自訂 Floodlight 變數) 部分，輸入要加進移轉資料的[自訂 Floodlight 變數](https://support.google.com/sa360/answer/13567857?hl=zh-tw)。自訂 Floodlight 變數的擁有者須為 Search Ads 360 帳戶 (由移轉作業設定中的客戶 ID 指定)。這項參數會以 JSON 陣列格式接收輸入字串，並支援多項自訂 Floodlight 變數。在 JSON 陣列的個別項目，您必須提供下列參數：
+   3. 選用步驟：在「Custom Floodlight Variables」(自訂 Floodlight 變數) 部分，輸入要加進資料移轉的[自訂 Floodlight 變數](https://support.google.com/sa360/answer/13567857?hl=zh-tw)。自訂 Floodlight 變數的擁有者須為 Search Ads 360 帳戶 (由移轉作業設定中的客戶 ID 指定)。這個參數會以 JSON 陣列格式接收輸入字串，並支援多個自訂 Floodlight 變數。在 JSON 陣列的個別項目，您必須提供下列參數：
 
       * `id`：自訂 Floodlight 變數的數值 ID。您[在 Search Ads 360 建立自訂 Floodlight 變數](https://support.google.com/sa360/answer/14316155?hl=zh-tw)時，系統會指派這組 ID。
         如果已指定 `id`，就不需要指定 `name`。
@@ -144,7 +144,7 @@ Search Ads 360 連接器的 BigQuery 資料移轉服務支援下列資料移轉�
       "bigquery_column_name_suffix": "suffix2"
       }]
       ```
-   4. 選用步驟：在「Custom Columns」(自訂資料欄) 欄位，輸入要移轉資料的[自訂資料欄](https://developers.google.com/search-ads/reporting/concepts/custom-columns?hl=zh-tw)。自訂資料欄的擁有者須為 Search Ads 360 帳戶 (由移轉作業設定中的客戶 ID 指定)。這個欄位會以 JSON 陣列格式接收輸入字串，並支援多個資料欄。在 JSON 陣列的個別項目，您必須提供下列參數：
+   4. 選用步驟：在「Custom Columns」(自訂欄) 欄位，輸入要包含在資料移轉中的[自訂欄](https://developers.google.com/search-ads/reporting/concepts/custom-columns?hl=zh-tw)。自訂資料欄的擁有者須為 Search Ads 360 帳戶 (由移轉作業設定中的客戶 ID 指定)。這個欄位會以 JSON 陣列格式接收輸入字串，並支援多個資料欄。在 JSON 陣列的個別項目，您必須提供下列參數：
 
       * `id`：自訂資料欄的數值 ID。[建立自訂資料欄](https://support.google.com/sa360/answer/9633916?amp%3Bref_topic=14138984&%3Bsjid=5858325799664893372-NC&hl=zh-tw)時，系統會指派這組 ID。如果已指定 `id`，就不需要指定 `name`。
       * `name`：使用者在 Search Ads 360 定義的自訂資料欄名稱。如果已指定 `name`，就不需要指定 `id`。
@@ -164,18 +164,18 @@ Search Ads 360 連接器的 BigQuery 資料移轉服務支援下列資料移轉�
         "bigquery_column_name": "column2"
       }]
       ```
-   5. 選用步驟：在「Table Filter」(資料表篩選器) 欄位，輸入要涵蓋的資料表清單 (以逗號分隔)，例如 `Campaign, AdGroup`。您可以在這份清單加上 `-` 前置字元，藉此排除特定資料表，例如 `-Campaign, AdGroup`。預設會加入所有資料表。
+   5. 選用：在「Table Filter」(資料表篩選器) 欄位，輸入要納入的資料表清單 (以半形逗號分隔)，例如 `Campaign, AdGroup`。您可以為這份清單加上 `-` 前置字元，藉此排除特定資料表，例如 `-Campaign, AdGroup`。預設會加入所有資料表。
    6. 選用步驟：選取「Include PMax Campaign Data」(納入最高成效廣告活動資料)，藉此加入最高成效廣告活動資料，並從特定資料表中排除 `ad_group` 欄位。詳情請參閱[最高成效廣告活動](https://docs.cloud.google.com/bigquery/docs/search-ads-transfer?hl=zh-tw#pmax-support)
    7. 選用步驟：選取「Use Client Account Currency」(使用客戶帳戶幣別)，以客戶帳戶的幣別載入費用資料，而非這次資料移轉作業所用帳戶的幣別。
    8. 選用步驟：在「Refresh window」(重新整理時間範圍) 部分，輸入介於 1 至 30 之間的值。如未設定，重新整理時間範圍預設為 7 天。詳情請參閱「[重新整理時間範圍](https://docs.cloud.google.com/bigquery/docs/search-ads-transfer?hl=zh-tw#refresh)」
-8. 在「Service Account」(服務帳戶) 選單，選取與貴組織 Google Cloud 專案相關聯的[服務帳戶](https://docs.cloud.google.com/iam/docs/service-account-overview?hl=zh-tw)。您可以將服務帳戶與移轉作業建立關聯，而非使用使用者憑證。如要進一步瞭解如何搭配使用服務帳戶與資料移轉作業，請參閱[使用服務帳戶](https://docs.cloud.google.com/bigquery/docs/use-service-accounts?hl=zh-tw)的相關說明。
+8. 在「Service Account」(服務帳戶) 選單，選取與貴組織 Google Cloud 專案相關聯的[服務帳戶](https://docs.cloud.google.com/iam/docs/service-account-overview?hl=zh-tw)。您可以將服務帳戶與移轉作業建立關聯，這樣就不需要使用者憑證。如要進一步瞭解如何搭配使用服務帳戶與資料移轉作業，請參閱[使用服務帳戶](https://docs.cloud.google.com/bigquery/docs/use-service-accounts?hl=zh-tw)的相關說明。
 
-   如果使用[聯合身分](https://docs.cloud.google.com/iam/docs/workforce-identity-federation?hl=zh-tw)登入，您必須擁有服務帳戶才能建立移轉作業。如果以 [Google 帳戶](https://docs.cloud.google.com/iam/docs/principals-overview?hl=zh-tw#google-account)登入，則不一定要透過服務帳戶建立移轉作業。服務帳戶必須具備[必要權限](https://docs.cloud.google.com/bigquery/docs/search-ads-transfer?hl=zh-tw#required_permissions)。
+   如果使用[聯合身分](https://docs.cloud.google.com/iam/docs/workforce-identity-federation?hl=zh-tw)登入，您必須擁有服務帳戶才能建立移轉作業。如果是以 [Google 帳戶](https://docs.cloud.google.com/iam/docs/principals-overview?hl=zh-tw#google-account)登入，則不一定要透過服務帳戶建立移轉作業。服務帳戶必須具備[必要權限](https://docs.cloud.google.com/bigquery/docs/search-ads-transfer?hl=zh-tw#required_permissions)。
 9. (選用) 在「Notification options」(通知選項) 區段中：
 
    * 點選切換按鈕，啟用電子郵件通知。啟用這個選項之後，若移轉失敗，移轉作業管理員就會收到電子郵件通知。
    * 點選切換按鈕，啟用 Pub/Sub 通知。在「Select a Cloud Pub/Sub topic」(選取 Cloud Pub/Sub 主題) 選取[主題](https://docs.cloud.google.com/pubsub/docs/overview?hl=zh-tw#types)名稱，或是點選「Create a topic」(建立主題)。這個選項會針對移轉作業設定 Pub/Sub 執行[通知](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications?hl=zh-tw)。
-10. 按一下 [儲存]。
+10. 按一下「儲存」。
 
 ### bq
 
@@ -186,10 +186,10 @@ Search Ads 360 連接器的 BigQuery 資料移轉服務支援下列資料移轉�
 * `--display_name`
 * `--params`
 
-以下旗標為選用項目：
+以下為選用旗標：
 
-* `--project_id`：指定要使用的專案。如果未指定旗標，系統會使用預設專案。
-* `--service_account_name`：指定要用於 Search Ads 360 轉移驗證的服務帳戶，而非使用者帳戶。
+* `--project_id`：指定要使用的專案。如未指定旗標，則會使用預設專案。
+* `--service_account_name`：指定要用於 Search Ads 360 移轉驗證的服務帳戶，而非使用者帳戶。
 
 ```
 bq mk \
@@ -204,9 +204,9 @@ bq mk \
 
 其中：
 
-* PROJECT\_ID (選用)：指定要使用的專案。如果未指定旗標，系統會使用預設專案。
+* PROJECT\_ID (選用)：指定要使用的專案。如未指定旗標，則會使用預設專案。
 * DATASET：移轉設定的目標資料集。
 * NAME：移轉設定的顯示名稱。資料移轉作業名稱可以是任意值，日後需要修改移轉作業時，能夠據此識別即可。
 * DATA\_SOURCE：資料來源 - `search_ads`。
-* SERVICE\_ACCOUNT\_NAME (選用)：用於驗證資料移轉的服務帳戶名稱。服務帳戶應由用於建立轉移作業的 `project_id` 擁有，且應具備所有[必要權限](#required_permissions)。
-* PARAMETERS：已建立移轉設定的 JSON 格式參數。例如：`--params='{"param":"param_value"}`
+* SERVICE\_ACCOUNT\_NAME (選用)：用於驗證資料移轉作業的服務帳戶名稱。服務帳戶應由用於建立移轉作業的 `project_id` 擁有，且應具備所有[必要權限](#required_permissions)。
+* PARAMETERS：JSON 格式的已建立移轉設定參數。例如：`--params='{"param":"param_value"}'`。您必須提供 `customer_id` 參數。

@@ -348,4 +348,6 @@ ML.GENERATE_EMBEDDING(
   at which to start the embedding. The default value is `0`.
   If you specify this argument, you must
   also specify the `END_SECOND` argument. This value must be positive and
-  less than the `E`
+  less than the `END_SECOND` value. This argument only applies to video
+  content.
+* `END_SECOND`: a

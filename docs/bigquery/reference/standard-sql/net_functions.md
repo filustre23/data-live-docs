@@ -240,5 +240,5 @@ SELECT
 FROM UNNEST([
   STRUCT(b"\xAA\xBB\xCC\xDD" as x, 0 as prefix_length),
   (b"\xAA\xBB\xCC\xDD", 11), (b"\xAA\xBB\xCC\xDD", 12),
-  (b"\xAA\xBB\xCC
+  (b"\xAA\xBB\xCC\xDD",
 ```

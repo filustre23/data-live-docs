@@ -340,3 +340,8 @@ SELECT
     model_params => JSON '{"generation_config":{"thinking_config": {"thinking_budget": 0}}}')
 FROM mydataset.cities;
 ```
+
+## Manage inference costs
+
+Inference using the Vertex AI Gemini model can be a
+relatively expensiv

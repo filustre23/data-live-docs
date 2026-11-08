@@ -15,17 +15,17 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 使用 BigLake metastore (傳統版) 管理開放原始碼中繼資料
 
-**警告：** 我們不再建議使用 BigLake metastore (傳統版) 進行 Google Cloud。請改用 [Lakehouse 執行階段目錄](https://docs.cloud.google.com/bigquery/docs/about-blms?hl=zh-tw)。
+**警告：** 我們不再建議使用 BigLake metastore (傳統版) 進行 Google Cloud。請改用 [Lakehouse 執行階段目錄](https://docs.cloud.google.com/lakehouse/docs/about-lakehouse-catalogs?hl=zh-tw)。
 
 BigLake metastore (傳統版) 是統一的實體中繼資料服務，適用於 Google Cloud上的資料分析產品。BigLake 中繼存放區 (傳統版) 提供單一中繼資料來源，方便您管理及存取多個來源的資料。資料分析師和工程師可透過 BigQuery 和 Managed Service for Apache Spark 上的各種開放資料處理引擎存取 BigLake metastore (傳統版)，因此這項服務是實用的工具。
 
-如要管理商務中繼資料，請參閱「[Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog?hl=zh-tw)」。
+如要管理商務中繼資料，請參閱「[Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs?hl=zh-tw)」。
 
 ## BigLake metastore (傳統版) 的運作方式
 
 BigLake metastore (傳統版) 是無伺服器服務，您不必先佈建資源，即可使用這項服務。在 Managed Service for Apache Spark 叢集中，您可以將其做為 [Hive Metastore](https://cwiki.apache.org/confluence/display/Hive/Design#Design-Metastore) 的無伺服器替代方案。BigLake metastore (傳統版) 的運作方式與 Hive Metastore 相同，都是透過 Hive 相容的 API 運作，因此您可以在 BigQuery 中立即查詢開放格式資料表，不必執行任何其他步驟。BigLake metastore (傳統版) 僅支援 [Apache Iceberg 資料表](https://iceberg.apache.org/docs/latest/)。
 
-BigLake metastore (傳統版) 提供 [API](https://docs.cloud.google.com/bigquery/docs/reference/biglake/rest?hl=zh-tw)、用戶端程式庫和資料引擎整合 (例如 [Apache Spark](https://spark.apache.org/))，可管理目錄、資料庫和資料表。
+BigLake metastore (傳統版) 提供 [API](https://docs.cloud.google.com/lakehouse/docs/reference/rest?hl=zh-tw)、用戶端程式庫和資料引擎整合 (例如 [Apache Spark](https://spark.apache.org/))，可管理目錄、資料庫和資料表。
 
 ## 限制
 
@@ -52,7 +52,7 @@ BigLake Metastore (傳統版) 有下列限制：
 
 ## 必要的角色
 
-* 如要完全控管 BigLake Metastore (傳統版) 資源，您需要 BigLake 管理員角色 (`roles/biglake.admin`)。如果您使用 [BigQuery Spark 連接器](https://docs.cloud.google.com/dataproc/docs/tutorials/bigquery-connector-spark-example?hl=zh-tw)服務帳戶、[Managed Service for Apache Spark 服務帳戶](https://docs.cloud.google.com/dataproc-serverless/docs/concepts/service-account?hl=zh-tw)或 [Managed Service for Apache Spark VM 服務帳戶](https://docs.cloud.google.com/dataproc/docs/concepts/iam/dataproc-principals?hl=zh-tw#vm_service_account_data_plane_identity)，請將 BigLake 管理員角色授予該帳戶。
+* 如要完全控管 BigLake Metastore (傳統版) 資源，您需要 BigLake 管理員角色 (`roles/biglake.admin`)。如果您使用 [BigQuery Spark 連接器](https://docs.cloud.google.com/managed-spark/docs/tutorials/bigquery-connector-spark-example?hl=zh-tw)服務帳戶、[Managed Service for Apache Spark 服務帳戶](https://docs.cloud.google.com/managed-spark/docs/concepts/service-accounts-serverless?hl=zh-tw)或 [Managed Service for Apache Spark VM 服務帳戶](https://docs.cloud.google.com/dataproc/docs/concepts/iam/dataproc-principals?hl=zh-tw#vm_service_account_data_plane_identity)，請將 BigLake 管理員角色授予該帳戶。
 * 如要取得 BigLake Metastore (傳統版) 資源的唯讀存取權，您需要 BigLake 檢視者角色 (`roles/biglake.viewer`)。舉例來說，在 BigQuery 中查詢 BigLake Metastore (傳統版) 資料表時，使用者或 BigQuery 連線服務帳戶必須具備 BigLake 檢視者角色。
 * 如要透過連線建立 BigQuery 資料表，您需要 BigQuery 連線使用者角色 (`roles/bigquery.connectionUser`)。如要進一步瞭解如何共用連線，請參閱「[與使用者共用連線](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection?hl=zh-tw#share_connections)」。
 
@@ -61,7 +61,7 @@ BigLake Metastore (傳統版) 有下列限制：
 * **使用者：**直接呼叫 BigLake API 時，或從 BigQuery 查詢 Apache Iceberg 代管資料表，但沒有連線時。在這種情況下，BigQuery 會使用使用者的憑證。
 * **[BigQuery Cloud 資源連結](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection?hl=zh-tw)：**從 BigQuery 透過連線查詢 Iceberg 代管資料表時，BigQuery 會使用連線服務帳戶憑證存取 BigLake 中繼存放區 (傳統版)。
 * **[BigQuery Spark 連接器](https://docs.cloud.google.com/bigquery/docs/connect-to-spark?hl=zh-tw)：**在 BigQuery [Spark 預存程序](https://docs.cloud.google.com/bigquery/docs/spark-procedures?hl=zh-tw)中，搭配使用 Spark 和 BigLake 中繼存放區 (傳統版)。Spark 會使用 Spark 連接器的服務帳戶憑證，存取 BigLake 中繼存放區 (傳統版) 並建立 BigQuery 資料表。
-* **[Managed Service for Apache Spark 服務帳戶](https://docs.cloud.google.com/dataproc-serverless/docs/concepts/service-account?hl=zh-tw)：**
+* **[Managed Service for Apache Spark 服務帳戶](https://docs.cloud.google.com/managed-spark/docs/concepts/service-accounts-serverless?hl=zh-tw)：**
   在 Managed Service for Apache Spark 中使用 Spark 和 BigLake 時，Spark 會使用服務帳戶憑證。
 * **[Managed Service for Apache Spark VM 服務帳戶](https://docs.cloud.google.com/dataproc/docs/concepts/iam/dataproc-principals?hl=zh-tw#vm_service_account_data_plane_identity)：**
   使用 Managed Service for Apache Spark (而非 Managed Service for Apache Spark) 時。Apache Spark 會使用 VM 服務帳戶憑證。
@@ -85,7 +85,7 @@ BigLake Metastore (傳統版) 有下列限制：
 
 如要透過 Managed Service for Apache Spark VM 連線至 BigLake metastore (傳統版)，請按照下列步驟操作：
 
-1. [使用 SSH 連線至 Managed Service for Apache Spark。](https://docs.cloud.google.com/dataproc/docs/concepts/accessing/ssh?hl=zh-tw)
+1. [使用 SSH 連線至 Managed Service for Apache Spark。](https://docs.cloud.google.com/managed-spark/docs/concepts/accessing/ssh?hl=zh-tw)
 2. 在 [Spark SQL CLI](https://spark.apache.org/docs/latest/sql-distributed-sql-engine-spark-sql-cli.html) 中，使用下列陳述式安裝及設定 Apache Iceberg 自訂目錄，以便使用 BigLake 中繼存放區 (傳統版)：
 
    ```
@@ -105,7 +105,7 @@ BigLake Metastore (傳統版) 有下列限制：
 
 更改下列內容：
 
-* `ICEBERG_SPARK_PACKAGE`：要搭配 Spark 使用的 Apache Iceberg 版本。建議您使用與 [Managed Service for Apache Spark](https://docs.cloud.google.com/dataproc/docs/concepts/versioning/dataproc-version-clusters?hl=zh-tw) 或 [Managed Service for Apache Spark](https://docs.cloud.google.com/dataproc-serverless/docs/concepts/versions/spark-runtime-versions?hl=zh-tw) 執行個體中 Spark 版本相符的 Spark 版本。如要查看可用的 Apache Iceberg 版本清單，請參閱「[Apache Iceberg 下載項目](https://iceberg.apache.org/releases/)」。舉例來說，Apache Spark 3.3 的標記為：  
+* `ICEBERG_SPARK_PACKAGE`：要搭配 Spark 使用的 Apache Iceberg 版本。建議您使用與 [Managed Service for Apache Spark](https://docs.cloud.google.com/managed-spark/docs/concepts/versioning/image-version-lists?hl=zh-tw) 或 [Managed Service for Apache Spark](https://docs.cloud.google.com/managed-spark/docs/concepts/versions/serverless-versions?hl=zh-tw) 執行個體中 Spark 版本相符的 Spark 版本。如要查看可用的 Apache Iceberg 版本清單，請參閱「[Apache Iceberg 下載項目](https://iceberg.apache.org/releases/)」。舉例來說，Apache Spark 3.3 的標記為：  
   `--packages org.apache.iceberg:iceberg-spark-runtime-3.3_2.13:1.2.1`
 * `BIGLAKE_ICEBERG_CATALOG_JAR`：要安裝的 Iceberg 自訂目錄外掛程式 Cloud Storage URI。根據您的環境，選取下列其中一個選項：
   + `Iceberg 1.9.1`：gs://spark-lib/biglake/biglake-catalog-iceberg1.9.1-0.1.3-with-dependencies.jar
@@ -127,7 +127,7 @@ BigLake Metastore (傳統版) 有下列限制：
 或者，您也可以將 Managed Service for Apache Spark 工作提交至叢集。
 下列範例會安裝適當的 [Iceberg 自訂目錄](https://iceberg.apache.org/docs/latest/custom-catalog/)。
 
-如要連線至 Managed Service for Apache Spark 叢集，請[提交工作](https://docs.cloud.google.com/dataproc/docs/guides/submit-job?hl=zh-tw)，並符合下列規格：
+如要連線至 Managed Service for Apache Spark 叢集，請[提交工作](https://docs.cloud.google.com/managed-spark/docs/guides/submit-job?hl=zh-tw)，並符合下列規格：
 
 ```
 CONFS="spark.sql.catalog.SPARK_CATALOG=org.apache.iceberg.spark.SparkCatalog,"
@@ -155,7 +155,7 @@ gcloud dataproc jobs submit spark-sql --cluster=MANAGED_SERVICE_FOR_APACHE_SPARK
 
 ### 連結至 Managed Service for Apache Spark
 
-同樣地，您可以將批次工作負載提交至 Managed Service for Apache Spark。如要這麼做，請按照[批次工作負載操作說明](https://docs.cloud.google.com/dataproc-serverless/docs/quickstarts/spark-batch?hl=zh-tw#submit_a_spark_batch_workload)，新增下列額外旗標：
+同樣地，您可以將批次工作負載提交至 Managed Service for Apache Spark。如要這麼做，請按照[批次工作負載操作說明](https://docs.cloud.google.com/managed-spark/docs/quickstarts/spark-batch?hl=zh-tw#submit_a_spark_batch_workload)，新增下列額外旗標：
 
 * `--properties="${CONFS}"`
 * `--jars=BIGLAKE_ICEBERG_CATALOG_JAR`
@@ -174,7 +174,7 @@ gcloud dataproc jobs submit spark-sql --cluster=MANAGED_SERVICE_FOR_APACHE_SPARK
 
 ### API
 
-使用 [`projects.locations.catalogs.create`](https://docs.cloud.google.com/bigquery/docs/reference/biglake/rest/v1/projects.locations.catalogs/create?hl=zh-tw) 方法，並指定目錄名稱。
+使用 [`projects.locations.catalogs.create`](https://docs.cloud.google.com/lakehouse/docs/reference/rest/v1/projects.locations.catalogs/create?hl=zh-tw) 方法，並指定目錄名稱。
 
 ### Spark SQL
 
@@ -199,7 +199,7 @@ location = "US"
 
 ### API
 
-使用 [`projects.locations.catalogs.databases.create`](https://docs.cloud.google.com/bigquery/docs/reference/biglake/rest/v1/projects.locations.catalogs.databases/create?hl=zh-tw) 方法，並指定資料庫名稱。
+使用 [`projects.locations.catalogs.databases.create`](https://docs.cloud.google.com/lakehouse/docs/reference/rest/v1/projects.locations.catalogs.databases/create?hl=zh-tw) 方法，並指定資料庫名稱。
 
 ### Spark SQL
 
@@ -235,7 +235,7 @@ hive_options {
 
 ### API
 
-使用 [`projects.locations.catalogs.databases.tables.create`](https://docs.cloud.google.com/bigquery/docs/reference/biglake/rest/v1/projects.locations.catalogs.databases.tables/create?hl=zh-tw) 方法，並指定資料表名稱。
+使用 [`projects.locations.catalogs.databases.tables.create`](https://docs.cloud.google.com/lakehouse/docs/reference/rest/v1/projects.locations.catalogs.databases.tables/create?hl=zh-tw) 方法，並指定資料表名稱。
 
 ### Spark SQL
 
@@ -355,9 +355,9 @@ CREATE EXTERNAL TABLE 'BQ_TABLE_PATH'
 
 ### 查看目錄
 
-如要查看目錄中的所有資料庫，請使用 [`projects.locations.catalogs.list`](https://docs.cloud.google.com/bigquery/docs/reference/biglake/rest/v1/projects.locations.catalogs/list?hl=zh-tw) 方法並指定目錄名稱。
+如要查看目錄中的所有資料庫，請使用 [`projects.locations.catalogs.list`](https://docs.cloud.google.com/lakehouse/docs/reference/rest/v1/projects.locations.catalogs/list?hl=zh-tw) 方法並指定目錄名稱。
 
-如要查看目錄資訊，請使用 [`projects.locations.catalogs.get`](https://docs.cloud.google.com/bigquery/docs/reference/biglake/rest/v1/projects.locations.catalogs/get?hl=zh-tw) 方法並指定目錄名稱。
+如要查看目錄資訊，請使用 [`projects.locations.catalogs.get`](https://docs.cloud.google.com/lakehouse/docs/reference/rest/v1/projects.locations.catalogs/get?hl=zh-tw) 方法並指定目錄名稱。
 
 ### 查看資料庫
 
@@ -376,9 +376,9 @@ CREATE EXTERNAL TABLE 'BQ_TABLE_PATH'
 
 ### API
 
-如要查看資料庫中的所有資料表，請使用 [`projects.locations.catalogs.databases.list`](https://docs.cloud.google.com/bigquery/docs/reference/biglake/rest/v1/projects.locations.catalogs.databases/list?hl=zh-tw) 方法並指定資料庫名稱。
+如要查看資料庫中的所有資料表，請使用 [`projects.locations.catalogs.databases.list`](https://docs.cloud.google.com/lakehouse/docs/reference/rest/v1/projects.locations.catalogs.databases/list?hl=zh-tw) 方法並指定資料庫名稱。
 
-如要查看資料庫的相關資訊，請使用 [`projects.locations.catalogs.databases.get`](https://docs.cloud.google.com/bigquery/docs/reference/biglake/rest/v1/projects.locations.catalogs.databases/get?hl=zh-tw) 方法，並指定資料庫名稱。
+如要查看資料庫的相關資訊，請使用 [`projects.locations.catalogs.databases.get`](https://docs.cloud.google.com/lakehouse/docs/reference/rest/v1/projects.locations.catalogs.databases/get?hl=zh-tw) 方法，並指定資料庫名稱。
 
 ### Spark SQL
 
@@ -430,7 +430,7 @@ DESCRIBE TABLE [EXTENDED] SPARK_CATALOG.BLMS_DB.BLMS_TABLE;
 
 ### API
 
-使用 [`projects.locations.catalogs.databases.tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/biglake/rest/v1/projects.locations.catalogs.databases.tables/patch?hl=zh-tw) 方法，並指定資料表名稱。
+使用 [`projects.locations.catalogs.databases.tables.patch`](https://docs.cloud.google.com/lakehouse/docs/reference/rest/v1/projects.locations.catalogs.databases.tables/patch?hl=zh-tw) 方法，並指定資料表名稱。
 
 ### Spark SQL
 
@@ -442,7 +442,7 @@ DESCRIBE TABLE [EXTENDED] SPARK_CATALOG.BLMS_DB.BLMS_TABLE;
 
 ### API
 
-使用 [`projects.locations.catalogs.databases.tables.rename`](https://docs.cloud.google.com/bigquery/docs/reference/biglake/rest/v1/projects.locations.catalogs.databases.tables/rename?hl=zh-tw) 方法，並指定資料表名稱和 `newName` 值。
+使用 [`projects.locations.catalogs.databases.tables.rename`](https://docs.cloud.google.com/lakehouse/docs/reference/rest/v1/projects.locations.catalogs.databases.tables/rename?hl=zh-tw) 方法，並指定資料表名稱和 `newName` 值。
 
 ### Spark SQL
 
@@ -464,7 +464,7 @@ ALTER TABLE BLMS_TABLE RENAME TO NEW_BLMS_TABLE;
 
 ### API
 
-使用 [`projects.locations.catalogs.delete`](https://docs.cloud.google.com/bigquery/docs/reference/biglake/rest/v1/projects.locations.catalogs/delete?hl=zh-tw) 方法，並指定目錄名稱。這個方法不會刪除 Google Cloud上的相關聯檔案。
+使用 [`projects.locations.catalogs.delete`](https://docs.cloud.google.com/lakehouse/docs/reference/rest/v1/projects.locations.catalogs/delete?hl=zh-tw) 方法，並指定目錄名稱。這個方法不會刪除 Google Cloud上的相關聯檔案。
 
 ### Spark SQL
 
@@ -478,7 +478,7 @@ DROP NAMESPACE SPARK_CATALOG;
 
 ### API
 
-使用 [`projects.locations.catalogs.databases.delete`](https://docs.cloud.google.com/bigquery/docs/reference/biglake/rest/v1/projects.locations.catalogs.databases/delete?hl=zh-tw) 方法，並指定資料庫名稱。這個方法不會刪除 Google Cloud上的相關聯檔案。
+使用 [`projects.locations.catalogs.databases.delete`](https://docs.cloud.google.com/lakehouse/docs/reference/rest/v1/projects.locations.catalogs.databases/delete?hl=zh-tw) 方法，並指定資料庫名稱。這個方法不會刪除 Google Cloud上的相關聯檔案。
 
 ### Spark SQL
 
@@ -492,7 +492,7 @@ DROP NAMESPACE SPARK_CATALOG.BLMS_DB;
 
 ### API
 
-使用 [`projects.locations.catalogs.databases.tables.delete`](https://docs.cloud.google.com/bigquery/docs/reference/biglake/rest/v1/projects.locations.catalogs.databases.tables/delete?hl=zh-tw) 方法，並指定資料表名稱。這個方法不會刪除 Google Cloud上的相關聯檔案。
+使用 [`projects.locations.catalogs.databases.tables.delete`](https://docs.cloud.google.com/lakehouse/docs/reference/rest/v1/projects.locations.catalogs.databases.tables/delete?hl=zh-tw) 方法，並指定資料表名稱。這個方法不會刪除 Google Cloud上的相關聯檔案。
 
 ### Spark SQL
 
@@ -515,11 +515,11 @@ DROP TABLE SPARK_CATALOG.BLMS_DB.BLMS_TABLE PURGE;
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-29 (世界標準時間)。
+上次更新時間：2026-11-04 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-04 (世界標準時間)。"],[],[]]

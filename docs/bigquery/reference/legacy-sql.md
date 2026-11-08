@@ -263,4 +263,6 @@ FROM
 WHERE
   first IN (SELECT
               second
+            FROM
+              [bigquery
 ```

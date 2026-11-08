@@ -518,7 +518,7 @@ Google Cloud 控制台不支援設定或更新資料集的預設分區到期時�
 
 如果您在建立分區資料表時即設定了分區到期時間，該值會覆寫資料集層級的預設分區到期時間 (如有)。
 
-如果您未設定資料集層級的預設分區到期時間，也未在建立資料表時設定分區到期時間，則分區永遠不會過期，直到您手動[刪除](#deleting_a_table)分區為止。
+如果您未設定資料集層級的預設分區到期時間，也未在建立資料表時設定分區到期時間，則分區永遠不會過期，直到您手動[刪除](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#delete_a_partition)分區為止。
 
 當您設定資料集的預設分區到期時間時，到期時間會套用至在資料集中建立之所有分區資料表中的所有分區。當您設定資料表的分區到期時間時，到期時間會套用至在指定資料表中建立的所有分區。您無法對同一資料表中不同的分區套用不同的到期時間。
 
@@ -773,11 +773,11 @@ curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Ty
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-29 (世界標準時間)。
+上次更新時間：2026-11-04 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-04 (世界標準時間)。"],[],[]]

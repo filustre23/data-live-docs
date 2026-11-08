@@ -547,4 +547,5 @@ OPTIONS
 SELECT
   *
 FROM
+  `mydataset.mytable
 ```

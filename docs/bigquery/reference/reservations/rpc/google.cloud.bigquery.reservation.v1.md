@@ -117,4 +117,4 @@ A capacity commitment is a way to purchase compute capacity for BigQuery jobs (i
 
 | GetIamPolicy |
 | --- |
-| `rpc GetIamPolicy(GetIamPolicyRequest) returns (Policy)` |
+| `rpc GetIamPolicy(GetIamPolicyRequest) returns (Policy)`  Gets the access control policy for a resource. May return:   * A`NOT_FOUND` |

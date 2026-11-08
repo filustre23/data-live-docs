@@ -130,4 +130,8 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 | 檢視表名稱 | 資源範圍 | 區域範圍 |
 | --- | --- | --- |
-| `` [PROJECT_ID.]`region-REGION`.INFORMATION_SCHEMA.JOBS[_BY_PROJECT] `` | 專案層級 |  |
+| `` [PROJECT_ID.]`region-REGION`.INFORMATION_SCHEMA.JOBS[_BY_PROJECT] `` | 專案層級 | `REGION` |
+
+請替換下列項目：
+
+* 選用：`PROJECT_`

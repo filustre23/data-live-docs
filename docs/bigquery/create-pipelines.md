@@ -133,7 +133,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 BigQuery 中的程式碼資產是由 Dataform 提供，因此請考量下列安全性影響，再決定是否授予使用者這些資產的存取權：
 
 * 程式碼資產的瀏覽權限由專案層級的 Dataform 權限控管。使用者只要具備 `dataform.repositories.list` 權限 (包含在標準 BigQuery 角色中，例如 [BigQuery 工作使用者](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.jobUser)、[BigQuery Studio 使用者](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.studioUser)和 [BigQuery 使用者](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.user))，就能在 Google Cloud 專案的「Explorer」面板中查看所有程式碼資產，無論這些資產是否由他們建立或與他們共用。如要限制瀏覽權限，可以建立不含 `dataform.repositories.list` 權限的[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)。
-* 凡是與 Dataform 服務代理共用的 Secret，都有可能遭到可編輯這些資產的使用者存取。為確保憑證安全，請限制只有信任的使用者才能建立及編輯權限，並限制 Dataform 服務代理可存取的密鑰。詳情請參閱「[在套件安裝期間存取 Secret](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#secret-access-risk)」。
+* 凡是與 Dataform 服務代理共用的密鑰，可編輯這些資產的使用者都有可能存取。為確保憑證安全，請限制只有信任的使用者才能建立及編輯權限，並限制 Dataform 服務代理可存取的密鑰。詳情請參閱「[在套件安裝期間存取 Secret](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#secret-access-risk)」。
 
 詳情請參閱「[Dataform 權限的安全性考量](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#security-considerations-permissions)」。
 
@@ -141,7 +141,7 @@ BigQuery 中的程式碼資產是由 Dataform 提供，因此請考量下列安�
 
 Google Cloud 專案中的所有新程式碼資產都會使用預設區域。資產建立後，就無法變更區域。
 
-**重要事項：** 如果在建立程式碼資產時變更區域，該區域會成為後續所有程式碼資產的預設區域。現有程式碼資產不受影響。
+**重要事項：**如果在建立程式碼資產時變更區域，該區域會成為後續所有程式碼資產的預設區域。現有程式碼資產不受影響。
 
 如要設定新程式碼資產的預設區域，請按照下列步驟操作：
 
@@ -400,13 +400,6 @@ Google Cloud 專案中的所有新程式碼資產都會使用預設區域。資�
 
 ### 資料表
 
-**預覽**
-
-這項產品或功能適用《[服務專屬條款](https://docs.cloud.google.com/terms/service-terms?hl=zh-tw#1)》中「一般服務條款」一節的《正式發布前產品條款》。正式發布前的產品和功能是按照「原樣」提供，支援範圍可能有限。
-詳情請參閱[推出階段說明](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
-
-**注意：** 如要提供意見回饋或申請支援，請傳送電子郵件至 [dataform-preview-support@google.com](mailto:dataform-preview-support@google.com)。
-
 1. 執行下列其中一個步驟：
 
 * 按一下「新增工作」，然後選取「表格」。
@@ -436,7 +429,7 @@ Google Cloud 專案中的所有新程式碼資產都會使用預設區域。資�
 * 總覽：項目的說明文件和摘要文字。
 * 一般切面：語意詳細資料，例如資料表系統和類型資訊。
 
-下列設定範例說明如何將總覽和一般中繼資料切面，新增至 Knowledge Catalog 的資料表設定：
+以下設定範例說明如何將總覽和一般中繼資料切面，新增至 Knowledge Catalog 的資料表設定：
 
 ```
        ```javascript
@@ -460,13 +453,6 @@ Google Cloud 專案中的所有新程式碼資產都會使用預設區域。資�
 3. 在「查詢結果」中，檢查資料預覽。
 
 ### 查看
-
-**預覽**
-
-這項產品或功能適用《[服務專屬條款](https://docs.cloud.google.com/terms/service-terms?hl=zh-tw#1)》中「一般服務條款」一節的《正式發布前產品條款》。正式發布前的產品和功能是按照「原樣」提供，支援範圍可能有限。
-詳情請參閱[推出階段說明](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
-
-**注意：** 如要提供意見回饋或申請支援，請傳送電子郵件至 [dataform-preview-support@google.com](mailto:dataform-preview-support@google.com)。
 
 1. 執行下列其中一個步驟：
 
@@ -497,7 +483,7 @@ Google Cloud 專案中的所有新程式碼資產都會使用預設區域。資�
 * 總覽：項目的說明文件和摘要文字。
 * 一般切面：語意詳細資料，例如資料表系統和類型資訊。
 
-下列設定範例說明如何將總覽和一般中繼資料切面，新增至 Knowledge Catalog 的資料表設定：
+以下設定範例說明如何將總覽和一般中繼資料切面，新增至 Knowledge Catalog 的資料表設定：
 
 ```
        ```javascript
@@ -862,11 +848,11 @@ Google Cloud 專案中的所有新程式碼資產都會使用預設區域。資�
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-02 (世界標準時間)。
+上次更新時間：2026-11-04 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-02 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-04 (世界標準時間)。"],[],[]]

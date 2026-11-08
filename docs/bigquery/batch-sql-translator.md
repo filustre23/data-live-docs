@@ -87,7 +87,7 @@ BigQuery 的批次 SQL 翻譯器可將其他 SQL 方言編寫的指令碼，大�
 這項產品或功能適用《[服務專屬條款](https://docs.cloud.google.com/terms/service-terms?hl=zh-tw#1)》中「一般服務條款」一節的《正式發布前產品條款》。正式發布前的產品和功能是按照「原樣」提供，支援範圍可能有限。
 詳情請參閱[推出階段說明](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
 
-[`gcloud alpha bq translation translate-batch` 指令](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/translation/translate-batch?hl=zh-tw)搭配使用的旗標，取決於設定 YAML 檔案的儲存位置：
+[`gcloud alpha bq migration translate-batch` 指令](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/migration/translate-batch?hl=zh-tw)搭配使用的旗標，取決於設定 YAML 檔案的儲存位置：
 
 * 如果設定 YAML 檔案與來源檔案位於相同目錄，則不需要任何額外旗標。在 `--source-gcs-uris` 或 `--source-local-dirs` 旗標中設定該目錄時，工作會自動納入設定 YAML 檔案。
 * 如果設定 YAML 檔案是單獨儲存在本機電腦上，請使用 `--source-local-files` 旗標上傳檔案，並將檔案新增至工作。
@@ -96,7 +96,7 @@ BigQuery 的批次 SQL 翻譯器可將其他 SQL 方言編寫的指令碼，大�
 舉例來說，下列指令會從本機電腦上傳來源檔案和個別儲存的設定 YAML 檔案，然後執行翻譯工作：
 
 ```
-gcloud alpha bq translation translate-batch \
+gcloud alpha bq migration translate-batch \
   --source-dialect=SOURCE_DIALECT \
   --target-dialect=TARGET_DIALECT \
   --location=LOCATION \
@@ -165,14 +165,14 @@ gcloud alpha bq translation translate-batch \
 這項產品或功能適用《[服務專屬條款](https://docs.cloud.google.com/terms/service-terms?hl=zh-tw#1)》中「一般服務條款」一節的《正式發布前產品條款》。正式發布前的產品和功能是按照「原樣」提供，支援範圍可能有限。
 詳情請參閱[推出階段說明](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
 
-如要提交批次翻譯工作，請使用 [`gcloud alpha bq translation translate-batch` 指令](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/translation/translate-batch?hl=zh-tw)。用於識別來源檔案的旗標，取決於檔案位於 Cloud Storage 還是本機電腦。
+如要提交批次翻譯工作，請使用 [`gcloud alpha bq migration translate-batch` 指令](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/migration/translate-batch?hl=zh-tw)。用於識別來源檔案的旗標，取決於檔案位於 Cloud Storage 還是本機電腦。
 
 #### 翻譯 Cloud Storage 中的 SQL 檔案
 
 如要翻譯已[上傳至 Cloud Storage](#upload-files) 的 SQL 檔案，請使用 `--source-gcs-uris` 旗標識別來源目錄。如要納入不在 `--source-gcs-uris` 中的檔案，可以使用 `--source-gcs-files` 旗標：
 
 ```
-gcloud alpha bq translation translate-batch \
+gcloud alpha bq migration translate-batch \
     --source-dialect=SOURCE_DIALECT \
     --target-dialect=TARGET_DIALECT \
     --location=LOCATION \
@@ -193,7 +193,7 @@ gcloud alpha bq translation translate-batch \
 如要翻譯本機電腦上的檔案，請使用 `--source-local-dirs` 旗標，將每個本機目錄對應至 Cloud Storage URI。這個指令會將目錄上傳至該 URI，然後將 URI 納入翻譯工作，因此您不必自行上傳檔案：
 
 ```
-gcloud alpha bq translation translate-batch \
+gcloud alpha bq migration translate-batch \
     --source-dialect=SOURCE_DIALECT \
     --target-dialect=TARGET_DIALECT \
     --location=LOCATION \
@@ -209,10 +209,10 @@ gcloud alpha bq translation translate-batch \
 
 如要在翻譯後的 SQL 旁生成 Gemini 建議，請新增 `--enable-ai-suggestion` 旗標。
 
-根據預設，指令會等待翻譯工作完成。如要提交工作並立即返回，請新增 `--async` 旗標。接著，指令會輸出翻譯 ID，您可以將該 ID 傳遞至 [`gcloud alpha bq translation describe` 指令](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/translation/describe?hl=zh-tw)，以檢查工作狀態：
+根據預設，指令會等待翻譯工作完成。如要提交工作並立即返回，請新增 `--async` 旗標。接著，指令會輸出翻譯 ID，您可以將該 ID 傳遞至 [`gcloud alpha bq migration translation describe` 指令](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/migration/translation/describe?hl=zh-tw)，以檢查工作狀態：
 
 ```
-gcloud alpha bq translation describe TRANSLATION_ID \
+gcloud alpha bq migration translation describe TRANSLATION_ID \
     --location=LOCATION
 ```
 
@@ -262,10 +262,10 @@ gcloud storage cp --recursive TARGET_URI LOCAL_DIRECTORY
 
 **單獨翻譯中繼資料**
 
-如果輸入內容是中繼資料 ZIP 檔案，且沒有要翻譯的 SQL，請使用 [`gcloud alpha bq translation translate-metadata` 指令](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/translation/translate-metadata?hl=zh-tw)：
+如果輸入內容是中繼資料 ZIP 檔案，且沒有要翻譯的 SQL，請使用 [`gcloud alpha bq migration translate-metadata` 指令](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/migration/translate-metadata?hl=zh-tw)：
 
 ```
-gcloud alpha bq translation translate-metadata \
+gcloud alpha bq migration translate-metadata \
   --source-dialect=SOURCE_DIALECT \
   --target-dialect=TARGET_DIALECT \
   --location=LOCATION \
@@ -290,7 +290,7 @@ gcloud alpha bq translation translate-metadata \
 如果批次翻譯輸入內容已包含中繼資料 ZIP 檔案，就不需要執行第二項工作。使用 `--target-types` 旗標，將 `metadata` 新增至批次工作的翻譯輸出內容，工作就會在單次執行中寫入翻譯後的 SQL 和 DDL 陳述式：
 
 ```
-gcloud alpha bq translation translate-batch \
+gcloud alpha bq migration translate-batch \
   --source-dialect=SOURCE_DIALECT \
   --target-dialect=TARGET_DIALECT \
   --location=LOCATION \
@@ -328,10 +328,10 @@ Gemini 會在一般翻譯工作中生成來源 DDL 建議：
 
 ### gcloud
 
-[`gcloud alpha bq translation generate-source-ddl` 指令](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/translation/generate-source-ddl?hl=zh-tw)會讀取來源 SQL，並傳回建議的來源 DDL 陳述式：
+[`gcloud alpha bq migration translation generate-source-ddl` 指令](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/migration/translation/generate-source-ddl?hl=zh-tw)會讀取來源 SQL，並傳回建議的來源 DDL 陳述式：
 
 ```
-gcloud alpha bq translation generate-source-ddl \
+gcloud alpha bq migration translation generate-source-ddl \
   --source-dialect=SOURCE_DIALECT \
   --target-dialect=TARGET_DIALECT \
   --location=LOCATION \
@@ -515,10 +515,10 @@ gcloud alpha bq translation generate-source-ddl \
 這項產品或功能適用《[服務專屬條款](https://docs.cloud.google.com/terms/service-terms?hl=zh-tw#1)》中「一般服務條款」一節的《正式發布前產品條款》。正式發布前的產品和功能是按照「原樣」提供，支援範圍可能有限。
 詳情請參閱[推出階段說明](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
 
-如要重新翻譯及檢查單一查詢，而不開啟Google Cloud 控制台，請使用 [`gcloud alpha bq translation translate` 指令](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/translation/translate?hl=zh-tw)。當您將批次翻譯問題縮小到單一查詢，並想在本機反覆測試時，這項功能就非常實用。
+如要重新翻譯及檢查單一查詢，而不開啟Google Cloud 控制台，請使用 [`gcloud alpha bq migration translate` 指令](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/migration/translate?hl=zh-tw)。當您將批次翻譯問題縮小到單一查詢，並想在本機反覆測試時，這項功能就非常實用。
 
 ```
-gcloud alpha bq translation translate \
+gcloud alpha bq migration translate \
   --source-dialect=SOURCE_DIALECT \
   --target-dialect=TARGET_DIALECT \
   --location=LOCATION \
@@ -747,11 +747,11 @@ bq rm --migration_workflow projects/PROJECT_ID/locations/LOCATION/workflows/WORK
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-01 (世界標準時間)。
+上次更新時間：2026-11-04 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-01 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-04 (世界標準時間)。"],[],[]]

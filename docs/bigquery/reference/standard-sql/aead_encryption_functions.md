@@ -268,4 +268,5 @@ column of favorite animals.
 ```
 CREATE TABLE deterministic.CustomerKeysets AS
 SELECT
+  1 AS
 ```

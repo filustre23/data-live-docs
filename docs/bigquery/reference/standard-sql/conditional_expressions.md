@@ -339,3 +339,7 @@ SELECT IFNULL(NULL, 0) as result
  | 0      |
  +--------*/
 ```
+
+```
+SELECT IFNULL(
+```

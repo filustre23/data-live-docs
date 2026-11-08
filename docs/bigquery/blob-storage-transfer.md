@@ -16,7 +16,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 將 Blob 儲存體資料載入 BigQuery
 
-您可以使用 Blob Storage 連接器的 [BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)，將資料從 Blob Storage 載入 BigQuery。您可以使用 BigQuery 資料移轉服務，安排週期性移轉工作，將 Blob 儲存體中的最新資料新增至 BigQuery。
+您可以使用 Blob Storage 連接器的 [BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)，將資料從 Blob Storage 載入 BigQuery。透過 BigQuery 資料移轉服務，您可以安排週期性移轉工作，將 Blob Storage 的最新資料新增至 BigQuery。
 
 如要瞭解 Blob 儲存體移轉作業的運作方式，請參閱「[Blob 儲存體資料移轉簡介](https://docs.cloud.google.com/bigquery/docs/blob-storage-transfer-intro?hl=zh-tw)」。
 
@@ -37,10 +37,10 @@ Blob 儲存體資料移轉作業有下列限制：
 
 * 確認您已完成[啟用 BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service?hl=zh-tw)的所有必要動作。
 * 選擇現有的 BigQuery 資料集，或[建立新的資料集](https://docs.cloud.google.com/bigquery/docs/datasets?hl=zh-tw)來儲存資料。
-* 選擇現有的 BigQuery 資料表，或[建立新的目的地資料表](https://docs.cloud.google.com/bigquery/docs/tables?hl=zh-tw#create_an_empty_table_with_a_schema_definition)，用於資料移轉，並指定結構定義定義。目的地資料表的名稱必須符合[資料表命名規則](https://docs.cloud.google.com/bigquery/docs/tables?hl=zh-tw#table_naming)，目的地資料表名稱也支援[參數](https://docs.cloud.google.com/bigquery/docs/blob-storage-transfer-parameters?hl=zh-tw)。您可以建立 BigQuery 資料表或[建立 Iceberg 代管資料表](https://docs.cloud.google.com/bigquery/docs/iceberg-tables?hl=zh-tw#create-iceberg-tables)。
-* 擷取 Blob 儲存體帳戶名稱、容器名稱、資料路徑 (選用) 和 SAS 權杖。如要瞭解如何使用共用存取簽章 (SAS) 授予 Blob 儲存體的存取權，請參閱「[共用存取簽章 (SAS)](https://docs.cloud.google.com/bigquery/docs/blob-storage-transfer-intro?hl=zh-tw#shared-access-signature)」。
+* 選擇現有的 BigQuery 資料表，或[建立新的目的地資料表](https://docs.cloud.google.com/bigquery/docs/tables?hl=zh-tw#create_an_empty_table_with_a_schema_definition)，用於資料移轉，並指定結構定義。目的地資料表的名稱必須符合[資料表命名規則](https://docs.cloud.google.com/bigquery/docs/tables?hl=zh-tw#table_naming)，目的地資料表名稱也支援[參數](https://docs.cloud.google.com/bigquery/docs/blob-storage-transfer-parameters?hl=zh-tw)。您可以建立 BigQuery 資料表或[建立 Iceberg 代管資料表](https://docs.cloud.google.com/bigquery/docs/iceberg-tables?hl=zh-tw#create-iceberg-tables)。
+* 擷取 Blob 儲存體帳戶名稱、容器名稱、資料路徑 (選用) 和 SAS 權杖。如要瞭解如何使用共用存取簽章 (SAS) 授予 Blob Storage 存取權，請參閱「[共用存取簽章 (SAS)](https://docs.cloud.google.com/bigquery/docs/blob-storage-transfer-intro?hl=zh-tw#shared-access-signature)」。
 * 如果您使用 Azure 儲存體防火牆限制 Azure 資源的存取權，請[將 BigQuery 資料移轉服務 worker 新增至允許的 IP 清單](https://docs.cloud.google.com/bigquery/docs/blob-storage-transfer-intro?hl=zh-tw#ip_restrictions)。
-* 如果您打算指定客戶自行管理的加密金鑰 (CMEK)，請確認[服務帳戶具備加密和解密權限](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw#grant_permission)，且您擁有使用 CMEK 所需的 [Cloud KMS 金鑰資源 ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw#key_resource_id)。如要瞭解 CMEK 如何與 BigQuery 資料移轉服務搭配運作，請參閱[指定移轉作業加密金鑰](#CMEK)。
+* 如要指定客戶自行管理的加密金鑰 (CMEK)，請確認[服務帳戶具備加密和解密權限](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw#grant_permission)，且您有使用 CMEK 所需的 [Cloud KMS 金鑰資源 ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw#key_resource_id)。如要瞭解 CMEK 如何與 BigQuery 資料移轉服務搭配運作，請參閱「[指定移轉作業加密金鑰](#CMEK)」一文。
 
 ## 所需權限
 
@@ -48,13 +48,13 @@ Blob 儲存體資料移轉作業有下列限制：
 
 ### 必要的 BigQuery 角色
 
-如要取得建立 BigQuery 資料移轉服務資料移轉作業所需的權限，請要求管理員在專案中授予您 [BigQuery 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.admin)  (`roles/bigquery.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得建立 BigQuery 資料移轉服務資料移轉作業所需的權限，請要求管理員授予您專案的 [BigQuery 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.admin) (`roles/bigquery.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
 這個預先定義的角色具備建立 BigQuery 資料移轉服務資料移轉作業所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
 #### 所需權限
 
-如要建立 BigQuery 資料移轉服務資料移轉作業，您必須具備下列權限：
+您必須具備下列權限，才能建立 BigQuery 資料移轉服務資料移轉作業：
 
 * BigQuery 資料移轉服務權限：
   + `bigquery.transfers.update`
@@ -72,7 +72,7 @@ Blob 儲存體資料移轉作業有下列限制：
 
 ### 必要的 Blob 儲存體角色
 
-如要瞭解在 Blob 儲存體中啟用資料移轉作業所需的權限，請參閱「[共用存取簽章 (SAS)](https://docs.cloud.google.com/bigquery/docs/blob-storage-transfer-intro?hl=zh-tw#shared-access-signature)」。
+如要瞭解在 Blob Storage 中啟用資料移轉所需的權限，請參閱「[共用存取簽章 (SAS)](https://docs.cloud.google.com/bigquery/docs/blob-storage-transfer-intro?hl=zh-tw#shared-access-signature)」。
 
 ## 設定 Blob 儲存體資料移轉作業
 
@@ -82,8 +82,8 @@ Blob 儲存體資料移轉作業有下列限制：
 
 1. 前往 Google Cloud 控制台的「資料移轉」頁面。
 
-   [前往「資料轉移」頁面](https://console.cloud.google.com/bigquery/transfers?hl=zh-tw)
-2. 按一下「建立轉移作業」add。
+   [前往「資料移轉」](https://console.cloud.google.com/bigquery/transfers?hl=zh-tw)
+2. 按一下「add 建立移轉作業」。
 3. 在「Create transfer」(建立轉移作業)頁面執行下列操作：
 
    * 在「Source type」(來源類型) 部分，「Source」(來源) 請選取「Azure Blob Storage & ADLS」(Azure Blob 儲存體和 ADLS)：
@@ -126,7 +126,7 @@ Blob 儲存體資料移轉作業有下列限制：
      + 啟用電子郵件通知之後，若移轉失敗，移轉作業管理員就會收到電子郵件通知。
      + 啟用 [Pub/Sub 通知](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications?hl=zh-tw#notifications)時，請選取要發布的[主題](https://docs.cloud.google.com/pubsub/docs/admin?hl=zh-tw)名稱，或是點選「Create a topic」(建立主題) 來建立主題。
    * 如果使用 [CMEK](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw)，請在「Advanced options」(進階選項) 部分選取「Customer-managed key」(客戶管理的金鑰)。畫面隨即會列出可用的 CMEK 供您選擇。如要瞭解 CMEK 如何與 BigQuery 資料移轉服務搭配運作，請參閱[指定移轉作業加密金鑰](https://docs.cloud.google.com/bigquery/docs/blob-storage-transfer?hl=zh-tw#CMEK)的相關說明。
-4. 按一下 [儲存]。
+4. 按一下「儲存」。
 
 ### bq
 
@@ -145,7 +145,8 @@ bq mk \
 
 更改下列內容：
 
-* `PROJECT_ID`：(選用) 包含目標資料集的專案 ID。如未指定，系統會使用預設專案。
+* `PROJECT_ID`：(選用) 包含
+  目標資料集的專案 ID。如未指定，系統會使用預設專案。
 * `DATA_SOURCE`: `azure_blob_storage`.
 * `DISPLAY_NAME`：資料移轉設定的顯示名稱。移轉作業名稱可以是任意值，日後需要修改移轉作業時，能夠據此識別即可。
 * `DATASET`：資料移轉設定的目標資料集。
@@ -154,17 +155,17 @@ bq mk \
   + `destination_table_name_template`：必填，目的地資料表的名稱。
   + `storage_account`：必填，Blob 儲存體帳戶名稱。
   + `container`：必填，Blob 儲存體容器名稱。
-  + `data_path`：選用。篩選要移轉檔案的路徑。請參閱[範例](https://docs.cloud.google.com/bigquery/docs/blob-storage-transfer-intro?hl=zh-tw#azure_blob_storage_data_path_examples)。
+  + `data_path`：選用。篩選要移轉檔案的路徑。查看[範例](https://docs.cloud.google.com/bigquery/docs/blob-storage-transfer-intro?hl=zh-tw#azure_blob_storage_data_path_examples)。
   + `sas_token`：必填，Azure SAS 權杖。
   + `file_format`：選用。要轉移的檔案類型：`CSV`、`JSON`、`AVRO`、`PARQUET` 或 `ORC`。預設值為 `CSV`。
   + `write_disposition`：選用。選取「`WRITE_APPEND`」可將資料附加至目的地資料表，選取「`WRITE_TRUNCATE`」則可覆寫目的地資料表中的資料。預設值為 `WRITE_APPEND`。
   + `max_bad_records`：選用。允許的損壞記錄數量。預設值為 0。
   + `decimal_target_types`：選用。以半形逗號分隔的清單，內含來源資料內小數值可能轉換成的 SQL 資料類型。如果未提供這個欄位，ORC 的資料類型預設為 `NUMERIC,STRING`，其他檔案格式則為 `NUMERIC`。
-  + `ignore_unknown_values`：選用屬性，如果 `file_format` 不是 `JSON` 或 `CSV`，系統會忽略這個屬性。設為 `true` 即可接受含有與結構定義不符的值的資料列。
+  + `ignore_unknown_values`：選用。如果 `file_format` 不是 `JSON` 或 `CSV`，系統會忽略這個屬性。設為 `true` 即可接受含有與結構定義不符的值的資料列。
   + `field_delimiter`：選用，僅在 `file_format` 為 `CSV` 時適用。分隔欄位的字元。預設值為 `,`。
   + `skip_leading_rows`：選用，僅在 `file_format` 為 `CSV` 時適用。指出您不想匯入的標題列數。預設值為 0。
-  + `allow_quoted_newlines`：選用，僅在 `file_format` 為 `CSV` 時適用。指出是否允許在引用的欄位中使用換行符號。
-  + `allow_jagged_rows`：選用，僅適用於 `file_format` 為 `CSV` 的情況。指出是否接受缺少結尾選用欄的資料列。系統會以 `NULL` 填入遺漏值。
+  + `allow_quoted_newlines`：選用，且僅在 `file_format` 為 `CSV` 時適用。指出是否允許在引用的欄位中使用換行符號。
+  + `allow_jagged_rows`：選用，僅在 `file_format` 為 `CSV` 時適用。指出是否接受缺少結尾選用欄的資料列。系統會以 `NULL` 填入遺漏值。
 
 舉例來說，下列指令會建立名為 `mytransfer` 的 Blob 儲存體資料移轉作業：
 

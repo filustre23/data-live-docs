@@ -104,6 +104,31 @@ FROM
 ```
 
 ```
+SELECT
+  y,
+  x,
+  CORR(y, x)
+    OVER (
+      ORDER BY y
+      ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+    ) AS results
+FROM
+  UNNEST(
+    [
+      STRUCT(1.0 AS y, 5.0 AS x),
+      (3.0, 9.0),
+      (4.0, 7.0)]);
+
+/*-----+-----+--------------------+
+ | y   | x   | results            |
+ +-----+-----+--------------------+
+ | 1.0 | 5.0 | NULL               |
+ | 3.0 | 9.0 | 1                  |
+ | 4.0 | 7.0 | 0.6546536707079772 |
+ +-----+-----+--------------------*/
+```
+
+```
 SELECT CORR(y, x) AS results
 FROM
   UNNEST(
@@ -241,21 +266,4 @@ To learn more about the `OVER` clause and how to use it, see
 SELECT COVAR_POP(y, x) AS results
 FROM
   UNNEST(
-    [
-      STRUCT(1.0 AS y, 1.0 AS x),
-      (2.0, 6.0),
-      (9.0, 3.0),
-      (2.0, 6.0),
-      (9.0, 3.0)])
-
-/*---------------------+
- | results             |
- +---------------------+
- | -1.6800000000000002 |
- +---------------------*/
-```
-
-```
-SELECT COVAR_POP(y, x) AS results
-FROM UNNEST([STRUCT(1.0 AS y, NULL AS x),(9.0,
 ```

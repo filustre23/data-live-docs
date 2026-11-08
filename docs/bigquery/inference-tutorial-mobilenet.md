@@ -20,19 +20,18 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ## MobileNet V3 模型
 
-MobileNet V3 模型會分析圖片檔案，並傳回特徵向量陣列。特徵向量陣列是描述所分析圖片特徵的數字元素清單。每個特徵向量都會說明多維度特徵空間，並提供圖片在這個空間中的座標。您可以運用圖片的向量資訊進一步分類圖片，例如使用餘弦相似度將類似圖片分組。
+MobileNet V3 模型會分析圖片檔，並傳回特徵向量陣列。特徵向量陣列是一份數值元素清單，用於描述分析圖片的特徵。每個特徵向量都會描述多維特徵空間，並提供圖片在這個空間中的座標。您可以使用圖片的特徵向量資訊進一步分類圖片，例如使用餘弦相似度將相似圖片分組。
 
-MobileNet V3 模型輸入內容會採用 [`DType`](https://www.tensorflow.org/api_docs/python/tf/dtypes/DType?hl=zh-tw)
-`tf.float32` 形狀的 `[-1, 224, 224, 3]` 張量。輸出內容是形狀為 `[-1, 1024]` 的 `tf.float32` 張量陣列。
+MobileNet V3 模型輸入會採用 `[-1, 224, 224, 3]` 形狀的 [`DType`](https://www.tensorflow.org/api_docs/python/tf/dtypes/DType?hl=zh-tw) `tf.float32` 張量。輸出內容是形狀為 `[-1, 1024]` 的 `tf.float32` 張量陣列。
 
 ## 所需權限
 
-* 如要建立資料集，您需要 `bigquery.datasets.create` 權限。
+* 如要建立資料集，您必須具備 `bigquery.datasets.create` 權限。
 * 如要建立連線資源，您必須具備下列權限：
 
   + `bigquery.connections.create`
   + `bigquery.connections.get`
-* 如要將權限授予連線的服務帳戶，您需要下列權限：
+* 如要將權限授予連線的服務帳戶，您必須具備下列權限：
 
   + `resourcemanager.projects.setIamPolicy`
 * 如要建立物件資料表，您必須具備下列權限：
@@ -42,21 +41,21 @@ MobileNet V3 模型輸入內容會採用 [`DType`](https://www.tensorflow.org/ap
   + `bigquery.connections.delegate`
 * 如要建立 bucket，您必須具備 `storage.buckets.create` 權限。
 * 如要將資料集和模型上傳至 Cloud Storage，您需要 `storage.objects.create` 和 `storage.objects.get` 權限。
-* 如要將模型載入 BigQuery ML，您需要下列權限：
+* 如要將模型載入 BigQuery ML，您必須具備下列權限：
 
   + `bigquery.jobs.create`
   + `bigquery.models.create`
   + `bigquery.models.getData`
   + `bigquery.models.updateData`
-* 如要執行推論，您需要下列權限：
+* 如要執行推論，您必須具備下列權限：
 
-  + `bigquery.tables.getData` 物件表格
-  + 模型上的 `bigquery.models.getData`
+  + 物件資料表中的 `bigquery.tables.getData`
+  + 模型上的`bigquery.models.getData`
   + `bigquery.jobs.create`
 
 ## 費用
 
-在本文件中，您會使用下列 Google Cloud的計費元件：
+在本文件中，您將使用下列 Google Cloud計費元件：
 
 * **BigQuery**: You incur storage costs for the object table
   you create in BigQuery.
@@ -65,19 +64,19 @@ MobileNet V3 模型輸入內容會採用 [`DType`](https://www.tensorflow.org/ap
 * **Cloud Storage**: You incur costs for the objects you
   store in Cloud Storage.
 
-如要根據預測用量估算費用，請使用 [Pricing Calculator](https://docs.cloud.google.com/products/calculator?hl=zh-tw)。
+您可以使用 [Pricing Calculator](https://docs.cloud.google.com/products/calculator?hl=zh-tw)，根據預測用量估算費用。
 
 初次使用 Google Cloud 的使用者可能符合[免費試用期](https://docs.cloud.google.com/free?hl=zh-tw)資格。
 
 如要進一步瞭解 BigQuery 儲存空間定價，請參閱 BigQuery 說明文件中的「[儲存空間定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#storage)」。
 
-如要進一步瞭解 BigQuery ML 定價，請參閱 BigQuery 說明文件中的「[BigQuery ML 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#bqml)」一文。
+如要進一步瞭解 BigQuery ML 定價，請參閱 BigQuery 說明文件中的「[BigQuery ML 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#bqml)」。
 
-如要進一步瞭解 Cloud Storage 定價，請參閱 [Cloud Storage 定價](https://cloud.google.com/storage/pricing?hl=zh-tw)頁面。
+如要進一步瞭解 Cloud Storage 定價，請參閱「[Cloud Storage 定價](https://cloud.google.com/storage/pricing?hl=zh-tw)」頁面。
 
 ## 事前準備
 
-- 登入 Google Cloud 帳戶。如果您是 Google Cloud新手，歡迎[建立帳戶](https://console.cloud.google.com/freetrial?hl=zh-tw)，親自評估產品在實際工作環境中的成效。新客戶還能獲得價值 $300 美元的免費抵免額，可用於執行、測試及部署工作負載。
+- 登入 Google Cloud 帳戶。如果您未曾使用過 Google Cloud，歡迎[建立帳戶](https://console.cloud.google.com/freetrial?hl=zh-tw)，親自體驗實際使用我們產品的成效。新客戶還能獲得價值 $300 美元的免費抵免額，用於執行、測試及部署工作負載。
 - In the Google Cloud console, on the project selector page,
   select or create a Google Cloud project.
 
@@ -142,7 +141,7 @@ MobileNet V3 模型輸入內容會採用 [`DType`](https://www.tensorflow.org/ap
 
 ### 建立預留項目
 
-如要搭配物件資料表使用[匯入的模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/inference-overview?hl=zh-tw#inference_using_imported_models)，您必須[建立保留項目](https://docs.cloud.google.com/bigquery/docs/reservations-tasks?hl=zh-tw#create_reservations)，並使用 BigQuery [Enterprise 或 Enterprise Plus 版](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)，然後[建立保留項目指派作業](https://docs.cloud.google.com/bigquery/docs/reservations-assignments?hl=zh-tw#create_reservation_assignments)，並使用 `QUERY` 工作類型。
+如要搭配物件資料表使用[匯入的模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/inference-overview?hl=zh-tw#inference_using_imported_models)，您必須[建立預留項目](https://docs.cloud.google.com/bigquery/docs/reservations-tasks?hl=zh-tw#create_reservations)，並使用 BigQuery [Enterprise 或 Enterprise Plus 版本](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)，然後[建立預留項目指派作業](https://docs.cloud.google.com/bigquery/docs/reservations-assignments?hl=zh-tw#create_reservation_assignments)，並使用 `QUERY` 工作類型。
 
 ## 建立資料集
 
@@ -163,10 +162,10 @@ MobileNet V3 模型輸入內容會採用 [`DType`](https://www.tensorflow.org/ap
 
 ### bq
 
-1. 在 Google Cloud 控制台中啟用 Cloud Shell。
+1. 在 Google Cloud 控制台啟用 Cloud Shell。
 
    [啟用 Cloud Shell](https://console.cloud.google.com/?cloudshell=true&hl=zh-tw)
-2. 執行 [`bq mk` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#mk-dataset)來建立資料集：
+2. 執行 [`bq mk` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#mk-dataset)建立資料集：
 
    ```
    bq mk --dataset --location=us PROJECT_ID:resnet_inference_test
@@ -183,28 +182,26 @@ MobileNet V3 模型輸入內容會採用 [`DType`](https://www.tensorflow.org/ap
 1. 前往「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 點選左側窗格中的 explore「Explorer」。
+2. 在左側窗格中，點選「資料庫」「資料探索工具」：
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
-3. 在「Explorer」窗格中，點選「新增資料」add。
+3. 在「資料」窗格中，點選「新增資料」圖示 add。
 
    「新增資料」對話方塊隨即開啟。
-4. 在「Filter By」(依據篩選) 窗格的「Data Source Type」(資料來源類型) 專區中，選取「Databases」(資料庫)。
+4. 在「篩選依據」窗格的「資料來源類型」部分，選取「資料庫」。
 
    或者，您也可以在「Search for data sources」(搜尋資料來源) 欄位中輸入 `Vertex AI`。
 5. 在「精選資料來源」部分，點選「Vertex AI」。
-6. 按一下「Vertex AI Models: BigQuery Federation」解決方案資訊卡。
+6. 點選「Vertex AI Models: BigQuery Federation」解決方案資訊卡。
 7. 在「連線類型」清單中，選取「Vertex AI 遠端模型、遠端函式、BigLake 和 Spanner (Cloud 資源)」。
-8. 在「連線 ID」欄位中輸入 `lake-connection`。
+8. 在「連線 ID」欄位輸入 `lake-connection`。
 9. 點選「建立連線」。
-10. 在「Explorer」窗格中展開專案，按一下「Connections」，然後選取 `us.lake-connection` 連線。
-11. 在「連線資訊」窗格中，複製「服務帳戶 ID」欄位的值。您需要這項資訊，才能在下一個步驟中，[授予權限](#grant-permissions)給您建立的 Cloud Storage bucket 上的連線服務帳戶。
+10. 在「Explorer」窗格中展開專案，按一下「Connections」(連結)，然後選取 `us.lake-connection` 連結。
+11. 在「連線資訊」窗格中，複製「服務帳戶 ID」欄位的值。您需要這項資訊，才能在下一個步驟中，為您建立的 Cloud Storage bucket [授予權限](#grant-permissions)給連線的服務帳戶。
 
 ### bq
 
-1. 在 Cloud Shell 中執行
-   [`bq mk` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#mk-connection)
-   ，建立連線：
+1. 在 Cloud Shell 中執行 [`bq mk` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#mk-connection)，建立連線：
 
    ```
    bq mk --connection --location=us --connection_type=CLOUD_RESOURCE \
@@ -215,12 +212,12 @@ MobileNet V3 模型輸入內容會採用 [`DType`](https://www.tensorflow.org/ap
    ```
    bq show --connection us.lake-connection
    ```
-3. 從 `properties` 欄複製 `serviceAccountId` 屬性的值，並儲存在某處。您需要這項資訊，才能將權限[授予](#grant-permissions)連線的服務帳戶。
+3. 從 `properties` 欄複製 `serviceAccountId` 屬性的值，並儲存在某個位置。您需要這項資訊，才能將[權限授予](#grant-permissions)連線的服務帳戶。
 
 ## 建立 Cloud Storage bucket
 
 1. [建立 Cloud Storage bucket](https://docs.cloud.google.com/storage/docs/creating-buckets?hl=zh-tw)。
-2. 在儲存區中[建立兩個資料夾](https://docs.cloud.google.com/storage/docs/objects?hl=zh-tw#namespace)，一個命名為 `mobilenet` (用於存放模型檔案)，另一個命名為 `flowers` (用於存放資料集)。
+2. 在 bucket 中[建立兩個資料夾](https://docs.cloud.google.com/storage/docs/objects?hl=zh-tw#namespace)，一個命名為 `mobilenet`，用於存放模型檔案，另一個命名為 `flowers`，用於存放資料集。
 
 ## 將權限授予連線的服務帳戶
 
@@ -228,13 +225,13 @@ MobileNet V3 模型輸入內容會採用 [`DType`](https://www.tensorflow.org/ap
 
 1. 前往「IAM & Admin」(IAM 與管理) 頁面。
 
-   [前往「IAM & Admin」(IAM 與管理)](https://console.cloud.google.com/project/_/iam-admin?hl=zh-tw)
+   [前往「IAM & Admin」(IAM 與管理) 頁面](https://console.cloud.google.com/project/_/iam-admin?hl=zh-tw)
 2. 點選「授予存取權」。
 
-   「新增主體」對話方塊隨即開啟。
+   「Add principals」(新增主體) 對話方塊隨即開啟。
 3. 在「新增主體」欄位，輸入先前複製的服務帳戶 ID。
 4. 在「Select a role」(請選擇角色) 欄位中，依序選取「Cloud Storage」和「Storage Object Viewer」(Storage 物件檢視者)。
-5. 按一下 [儲存]。
+5. 按一下「儲存」。
 
 ### gcloud
 
@@ -246,24 +243,24 @@ gcloud storage buckets add-iam-policy-binding gs://BUCKET_NAME \
 --role=roles/storage.objectViewer
 ```
 
-將 `MEMBER` 換成您先前複製的服務帳戶 ID。將 `BUCKET_NAME` 改成您先前建立的值區名稱。
+將 `MEMBER` 替換成您先前複製的服務帳戶 ID。將 `BUCKET_NAME` 替換為先前建立的值區名稱。
 
-詳情請參閱「[將主體新增至值區層級政策](https://docs.cloud.google.com/storage/docs/access-control/using-iam-permissions?hl=zh-tw#bucket-add)」。
+詳情請參閱「[將主體新增至 bucket 層級政策](https://docs.cloud.google.com/storage/docs/access-control/using-iam-permissions?hl=zh-tw#bucket-add)」。
 
-**注意：** 新權限最多可能需要一分鐘才會生效。
+**注意：**新權限最多可能需要一分鐘才會生效。
 
 ## 將資料集上傳至 Cloud Storage
 
-取得資料集檔案，並在 Cloud Storage 中提供：
+取得資料集檔案，並將其儲存在 Cloud Storage：
 
-1. [下載](https://storage.googleapis.com/download.tensorflow.org/example_images/flower_photos.tgz)花朵資料集至本機電腦。
+1. 將花卉資料集[下載](https://storage.googleapis.com/download.tensorflow.org/example_images/flower_photos.tgz)到本機電腦。
 2. 解壓縮 `flower_photos.tgz` 檔案。
-3. [上傳](https://docs.cloud.google.com/storage/docs/uploading-objects?hl=zh-tw) `flower_photos` 資料夾至先前建立值區的 `flowers` 資料夾。
+3. 將 `flower_photos` 資料夾[上傳](https://docs.cloud.google.com/storage/docs/uploading-objects?hl=zh-tw)至先前建立的值區中的 `flowers` 資料夾。
 4. 上傳完成後，請刪除 `flower_photos` 資料夾中的 `LICENSE.txt` 檔案。
 
 ## 建立物件資料表
 
-根據您上傳的 flowers 資料集，建立名為 `sample_images` 的物件資料表：
+根據上傳的花卉資料集，建立名為 `sample_images` 的物件資料表：
 
 ### SQL
 
@@ -280,13 +277,11 @@ gcloud storage buckets add-iam-policy-binding gs://BUCKET_NAME \
      uris = ['gs://BUCKET_NAME/flowers/*']);
    ```
 
-   請將 `BUCKET_NAME` 替換為您先前建立的值區名稱。
+   將 `BUCKET_NAME` 替換成先前建立的值區名稱。
 
 ### bq
 
-在 Cloud Shell 中執行
-[`bq mk` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#mk-table)
-，建立連線：
+在 Cloud Shell 中執行 [`bq mk` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#mk-table)，建立連線：
 
 ```
 bq mk --table \
@@ -295,15 +290,14 @@ bq mk --table \
 mobilenet_inference_test.sample_images
 ```
 
-請將 `BUCKET_NAME` 替換為您先前建立的值區名稱。
+將 `BUCKET_NAME` 替換成先前建立的值區名稱。
 
 ## 將模型上傳至 Cloud Storage
 
-取得模型檔案，並在 Cloud Storage 中提供：
+取得模型檔案，並將其儲存在 Cloud Storage：
 
-1. [下載](https://tfhub.dev/google/imagenet/mobilenet_v3_small_075_224/feature_vector/5?tf-hub-format=compressed)
-   MobileNet V3 模型到本機電腦。這會提供模型的 `saved_model.pb` 檔案和 `variables` 資料夾。
-2. [上傳](https://docs.cloud.google.com/storage/docs/uploading-objects?hl=zh-tw) `saved_model.pb` 檔案和 `variables` 資料夾至先前建立的值區中的 `mobilenet` 資料夾。
+1. [下載](https://tfhub.dev/google/imagenet/mobilenet_v3_small_075_224/feature_vector/5?tf-hub-format=compressed) MobileNet V3 模型至本機電腦。這樣一來，您就會取得模型的 `saved_model.pb` 檔案和 `variables` 資料夾。
+2. 將 `saved_model.pb` 檔案和 `variables` 資料夾[上傳](https://docs.cloud.google.com/storage/docs/uploading-objects?hl=zh-tw)至先前建立的 bucket 中的 `mobilenet` 資料夾。
 
 ## 將模型載入 BigQuery ML
 
@@ -319,26 +313,26 @@ mobilenet_inference_test.sample_images
      model_path = 'gs://BUCKET_NAME/mobilenet/*');
    ```
 
-   將 `BUCKET_NAME` 替換為您先前建立的值區名稱。
+   將 `BUCKET_NAME` 替換為先前建立的值區名稱。
 
 ## 檢查模型
 
-檢查上傳的模型，查看輸入和輸出欄位：
+檢查上傳的模型，查看其輸入和輸出欄位：
 
 1. 前往「BigQuery」頁面
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
-3. 在「Explorer」窗格中展開專案，按一下「Datasets」，然後按一下 `mobilenet_inference_test` 資料集。
+3. 在「Explorer」窗格中展開專案，依序點選「Datasets」(資料集) 和「`mobilenet_inference_test`」資料集。
 4. 前往「模型」分頁。
 5. 按一下 `mobilenet` 模型。
-6. 在隨即開啟的模型窗格中，按一下「結構定義」分頁標籤。
+6. 在開啟的模型窗格中，按一下「結構定義」分頁標籤。
 7. 查看「標籤」部分。這會識別模型輸出的欄位。在本例中，欄位名稱值為 `feature_vector`。
-8. 查看「功能」部分。這會指出必須輸入模型中的欄位。您可以在 `SELECT` 陳述式中參照這些函式，以供 `ML.DECODE_IMAGE` 函式使用。在本例中，欄位名稱值為 `inputs`。
+8. 查看「功能」部分。這會指出必須輸入模型的欄位。您可以在 `ML.DECODE_IMAGE` 函式的 `SELECT` 陳述式中參照這些引數。在本例中，欄位名稱值為 `inputs`。
 
 ## 執行推論
 
-使用 `mobilenet` 模型對 `sample_images` 物件資料表執行推論：
+使用 `mobilenet` 模型，對 `sample_images` 物件資料表執行推論：
 
 1. 前往「BigQuery」頁面
 
@@ -354,7 +348,7 @@ mobilenet_inference_test.sample_images
    );
    ```
 
-   結果應如下所示：
+   結果應大致如下：
 
    ```
    --------------------------------------------------------------------------------------------------------------
@@ -372,7 +366,7 @@ mobilenet_inference_test.sample_images
 
 ## 清除所用資源
 
-**注意**：刪除專案會造成以下結果：
+**警告**：刪除專案會出現以下結果：
 
 * **專案中的所有內容都會遭到刪除。**如果使用現有專案來進行本文中的任務，刪除專案將一併移除當中已完成的其他任務'。
 * **自訂專案 ID 會消失。**當您之前建立這個專案時，可能建立了想要在日後使用的自訂專案 ID。如要保留使用該專案 ID 的網址 (例如 `appspot.com` 網址)，請刪除在該專案中選取的資源，而不是刪除整個專案。
@@ -392,11 +386,11 @@ mobilenet_inference_test.sample_images
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-29 (世界標準時間)。
+上次更新時間：2026-11-03 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-03 (世界標準時間)。"],[],[]]

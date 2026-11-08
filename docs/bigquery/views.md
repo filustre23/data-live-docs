@@ -98,11 +98,11 @@ BigQuery 資料檢視有下列幾項限制：
 5. 在「Save view」(儲存檢視表) 對話方塊中：
 
    * 在「Project」(專案) 選單中，選取要儲存檢視表的專案。
-   * 在「Dataset」(資料集) 選單中，選取資料集或建立新的資料集，用來儲存檢視表。已儲存檢視表的目的地資料集必須與來源位於相同[區域](https://docs.cloud.google.com/bigquery/docs/dataset-locations?hl=zh-tw)。
+   * 在「Dataset」(資料集) 選單中，選取資料集或建立新的資料集，用來儲存檢視表。已儲存檢視表的目的地資料集必須與來源位於相同[區域](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
    * 在「Table」(資料表) 欄位中，輸入檢視表名稱。
    * 按一下 [儲存]。
 
-**注意：** 使用 Google Cloud 控制台建立檢視表時，無法新增標籤、說明或到期時間。使用 API 或 bq 指令列工具建立檢視表時，可以新增這些選用屬性。使用 Google Cloud 控制台建立檢視表後，您可以新增到期時間、說明和標籤。詳情請參閱「[更新檢視表](https://docs.cloud.google.com/bigquery/docs/updating-views?hl=zh-tw)」。
+**注意：** 使用 Google Cloud 控制台建立檢視表時，無法新增標籤、說明或到期時間。使用 API 或 bq 指令列工具建立檢視表時，可以新增這些選用屬性。使用 Google Cloud 控制台建立檢視表後，您可以新增到期時間、說明和標籤。詳情請參閱「[更新檢視表](https://docs.cloud.google.com/bigquery/docs/managing-views?hl=zh-tw)」。
 
 ### SQL
 
@@ -138,7 +138,7 @@ BigQuery 資料檢視有下列幾項限制：
 
 如果要在預設專案以外的專案中建立檢視表，請使用 `--project_id` 旗標來指定專案 ID。
 
-**注意：**包含檢視表的資料集，以及包含檢視表參照之資料表的資料集，必須位於同一個[位置](https://docs.cloud.google.com/bigquery/docs/dataset-locations?hl=zh-tw)。
+**注意：**包含檢視表的資料集，以及包含檢視表參照之資料表的資料集，必須位於同一個[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
 
 ```
 bq mk \
@@ -158,7 +158,7 @@ DATASET.VIEW
 * `PATH_TO_FILE` 是程式碼檔案的 URI 或本機檔案系統路徑，該檔案會立即載入並評估為檢視表使用的 UDF 資源。請重複該標記以指定多個檔案。
 * `INTEGER` 會設定檢視畫面的生命週期 (以秒為單位)。如果 `INTEGER` 為 `0`，則檢視表不會過期。如果不加入 `--expiration` 旗標，BigQuery 會使用資料集的預設資料表生命週期建立檢視表。
 * `DESCRIPTION` 是資料檢視的說明，會用引號括住。
-* `KEY_1:VALUE_1` 是代表[標籤](https://docs.cloud.google.com/bigquery/docs/labels?hl=zh-tw)的鍵/值組合。重複使用 `--label` 旗標，即可指定多個標籤。
+* `KEY_1:VALUE_1` 是代表[標籤](https://docs.cloud.google.com/bigquery/docs/adding-labels?hl=zh-tw)的鍵/值組合。重複使用 `--label` 旗標，即可指定多個標籤。
 * `KEY_2:VALUE_2` 是代表[標記](https://docs.cloud.google.com/bigquery/docs/labels?hl=zh-tw)的鍵/值組合。在同一個旗標下新增多個標記，並在鍵/值組合之間加上半形逗號。
 * `QUERY` 是有效查詢。
 * `PROJECT_ID` 是您的專案 ID (如果未設定預設專案)。
@@ -209,7 +209,7 @@ ORDER BY
 mydataset.myview
 ```
 
-建立檢視表後，您可以更新檢視表的到期時間、說明和標籤。詳情請參閱[更新檢視表](https://docs.cloud.google.com/bigquery/docs/updating-views?hl=zh-tw)的相關說明。
+建立檢視表後，您可以更新檢視表的到期時間、說明和標籤。詳情請參閱[更新檢視表](https://docs.cloud.google.com/bigquery/docs/managing-views?hl=zh-tw)的相關說明。
 
 ### Terraform
 
@@ -313,7 +313,7 @@ resource "google_bigquery_table" "default" {
 
 ### API
 
-使用含有 `view` 屬性的[資料表資源](https://docs.cloud.google.com/bigquery/docs/reference/v2/tables?hl=zh-tw)呼叫 [`tables.insert`](https://docs.cloud.google.com/bigquery/docs/reference/v2/tables/insert?hl=zh-tw) 方法。
+使用含有 `view` 屬性的[資料表資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables?hl=zh-tw)呼叫 [`tables.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/insert?hl=zh-tw) 方法。
 
 ### Go
 
@@ -487,11 +487,11 @@ print(f"Created {view.table_type}: {str(view.reference)}")
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-29 (世界標準時間)。
+上次更新時間：2026-11-04 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-04 (世界標準時間)。"],[],[]]

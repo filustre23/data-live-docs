@@ -474,4 +474,8 @@ to continue.
 
 A `FLOAT64` value. The default value is `0.01`.
 
-###
+### `INPUT_LABEL_COLS`
+
+**Syntax**
+
+`INPUT_LABEL_COLS = string_array`

@@ -382,5 +382,11 @@ SELECT
 ## `TIME_SUB`
 
 ```
-TIME_SUB(time_expression,
+TIME_SUB(time_expression, INTERVAL step_size step_unit)
 ```
+
+**Description**
+
+Subtracts `step_size` units of `step_unit` from the `TIME` object.
+
+`TIME_SUB` supports the following values for `step_unit`:

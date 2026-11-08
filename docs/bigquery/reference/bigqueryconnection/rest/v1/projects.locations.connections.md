@@ -172,3 +172,4 @@ Connection properties specific to Cloud Spanner.
 
 | JSON representation |
 | --- |
+|  |

@@ -38,7 +38,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 1. 前往「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在「Explorer」窗格中，點選「add 新增」。
+2. 在「資料」窗格中，點選「新增資料」圖示 add。
 
    「新增資料」對話方塊隨即開啟。
 3. 在「篩選依據」窗格的「資料來源類型」部分，選取「資料庫」。
@@ -132,12 +132,12 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 1. 前往「IAM & Admin」(IAM 與管理) 頁面。
 
    [前往「IAM & Admin」(IAM 與管理) 頁面](https://console.cloud.google.com/project/_/iam-admin?hl=zh-tw)
-2. 按一下 person\_add「Grant Access」(授予存取權)。
+2. 點選 person\_add「授予存取權」。
 
    「Add principals」(新增主體) 對話方塊隨即開啟。
 3. 在「New principals」(新增主體) 欄位中，輸入從[連線資訊](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw#view-connections)取得的服務帳戶 ID。
 4. 在「指派角色」部分，選取「AlloyDB 用戶端」(`roles/alloydb.client`)。
-5. 按一下 [儲存]。
+5. 按一下「儲存」。
 
 ### gcloud
 
@@ -158,7 +158,7 @@ gcloud projects add-iam-policy-binding PROJECT_ID --member=serviceAccount:SERVIC
 
 您可以授予下列角色，讓使用者查詢資料及管理連結：
 
-* `roles/bigquery.connectionUser`：可讓使用者透過連線，連至外部資料來源並執行查詢。
+* `roles/bigquery.connectionUser`：可讓使用者透過連線連結外部資料來源，並對這些來源執行查詢。
 * `roles/bigquery.connectionAdmin`：可讓使用者管理連線。
 
 如要進一步瞭解 BigQuery 的 IAM 角色和權限，請參閱「[預先定義的角色和權限](https://docs.cloud.google.com/bigquery/access-control?hl=zh-tw)」。
@@ -171,7 +171,7 @@ gcloud projects add-iam-policy-binding PROJECT_ID --member=serviceAccount:SERVIC
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 
-   連線會列在專案中名為「Connections」(連線)  的群組。
+   連線會列在專案中名為「Connections」(連線) 的群組。
 2. 點選左側窗格中的 explore「Explorer」。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
@@ -180,7 +180,7 @@ gcloud projects add-iam-policy-binding PROJECT_ID --member=serviceAccount:SERVIC
 5. 在「詳細資料」窗格中，按一下「共用」即可共用連線。接著，按照下列步驟操作：
 
    1. 在「Connection permissions」(連線權限) 對話方塊中，新增或編輯主體，與其他主體共用連線。
-   2. 按一下 [儲存]。
+   2. 按一下「儲存」。
 
 ### bq
 
@@ -215,11 +215,11 @@ gcloud projects add-iam-policy-binding PROJECT_ID --member=serviceAccount:SERVIC
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-29 (世界標準時間)。
+上次更新時間：2026-11-03 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-03 (世界標準時間)。"],[],[]]

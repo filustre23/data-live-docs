@@ -338,3 +338,8 @@ This query shows the history of a project's reservation assignments.
     AND JSON_QUERY(protopayload_auditlog.requestJson , "$.assignment.assignee") like "%OTHERPROJECTID%"
   ORDER by request_time
 ```
+
+
+
+
+Send feedback

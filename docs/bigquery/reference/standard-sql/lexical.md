@@ -449,4 +449,5 @@ single field, use typeless struct syntax or typed struct syntax.
 | `STRUCT(1)` | `STRUCT<INT64>` |
 | `STRUCT<INT64>(1)` | `STRUCT<INT64>` |
 
-A struct literal rep
+A struct literal represents a constant value of the
+[struct data type](/bigquery/docs/reference/standard-sql/data-types#struct_type).

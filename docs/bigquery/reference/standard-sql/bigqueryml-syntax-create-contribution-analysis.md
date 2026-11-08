@@ -459,5 +459,7 @@ CREATE (OR REPLACE) MODEL `myproject.mydataset.ca_model`
 ) AS
 SELECT concessions_sold, attendee_count, venue_ID,
   event_date, concession_type, test_col
-FROM
+FROM mydataset.regional_sales;
 ```
+
+**Example 3**

@@ -264,4 +264,5 @@ SELECT
   MAX(fruit) AS max
 FROM
   (
+    SELECT NULL
 ```

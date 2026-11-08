@@ -321,5 +321,6 @@ partition_column=2019-01-01
 
 ```
 hive> SHOW PARTITIONS corp.employees
-partition_column=
+partition_column=2018-10-01
+partition_column=2
 ```

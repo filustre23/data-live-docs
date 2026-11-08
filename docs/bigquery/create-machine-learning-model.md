@@ -14,11 +14,11 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 你可以依據偏好儲存及分類內容。
 
-# 使用 SQL 在 BigQuery ML 中建立機器學習模型
+# 使用 SQL 在 BigQuery ML 建立機器學習模型
 
 本教學課程說明如何使用 BigQuery ML SQL 查詢建立邏輯迴歸模型。
 
-BigQuery ML 可讓您使用 SQL 查詢，在 BigQuery 中建立及訓練機器學習模型。這樣一來，您就能使用 BigQuery SQL 編輯器等熟悉工具，更輕鬆地運用機器學習技術，並省去將資料移至獨立機器學習環境的麻煩，進而加快開發速度。
+BigQuery ML 可讓您使用 SQL 查詢，在 BigQuery 中建立及訓練機器學習模型。這樣一來，您就能使用熟悉的工具 (例如 BigQuery SQL 編輯器)，讓機器學習技術更易於使用，並省去將資料移至獨立機器學習環境的麻煩，加快開發速度。
 
 在本教學課程中，不論網站訪客是否確實完成交易，都可以使用 [BigQuery 專用的 Google Analytics 樣本資料集](https://support.google.com/analytics/answer/7586738?ref_topic=3416089&hl=zh-tw)來建立一個預測模型。如要瞭解 Analytics 資料集的結構定義，請參閱 Analytics 說明中心的「[BigQuery Export 結構定義](https://support.google.com/analytics/answer/3437719?hl=zh-tw)」一文。
 
@@ -26,7 +26,7 @@ BigQuery ML 可讓您使用 SQL 查詢，在 BigQuery 中建立及訓練機器�
 
 ## 目標
 
-本教學課程將說明如何執行下列工作：
+本教學課程說明如何執行下列工作：
 
 * 使用 [`CREATE MODEL` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create?hl=zh-tw)建立二元邏輯迴歸模型。
 * 使用 [`ML.EVALUATE` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate?hl=zh-tw)評估模型。
@@ -41,18 +41,18 @@ BigQuery ML 可讓您使用 SQL 查詢，在 BigQuery 中建立及訓練機器�
 
 如要進一步瞭解 BigQuery 費用，請參閱 [BigQuery 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw)頁面。
 
-如要進一步瞭解 BigQuery ML 費用，請參閱「[BigQuery ML 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#bigquery-ml-pricing)」一文。
+如要進一步瞭解 BigQuery ML 費用，請參閱「[BigQuery ML 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#bigquery-ml-pricing)」。
 
 ## 必要的角色
 
-* 如要建立模型及執行推論，您必須獲得下列角色：
+* 如要建立模型並執行推論，您必須具備下列角色：
 
   + BigQuery 資料編輯者 (`roles/bigquery.dataEditor`)
   + BigQuery 使用者 (`roles/bigquery.user`)
 
 ## 事前準備
 
-- 登入 Google Cloud 帳戶。如果您是 Google Cloud新手，歡迎[建立帳戶](https://console.cloud.google.com/freetrial?hl=zh-tw)，親自評估產品在實際工作環境中的成效。新客戶還能獲得價值 $300 美元的免費抵免額，可用於執行、測試及部署工作負載。
+- 登入 Google Cloud 帳戶。如果您未曾使用過 Google Cloud，歡迎[建立帳戶](https://console.cloud.google.com/freetrial?hl=zh-tw)，親自體驗實際使用我們產品的成效。新客戶還能獲得價值 $300 美元的免費抵免額，用於執行、測試及部署工作負載。
 - In the Google Cloud console, on the project selector page,
   select or create a Google Cloud project.
 
@@ -149,19 +149,19 @@ BigQuery ML 可讓您使用 SQL 查詢，在 BigQuery 中建立及訓練機器�
        another role** and add each additional role.
      - Click **Save**.
 
-1. 新專案會自動啟用 BigQuery。如要在現有的專案中啟用 BigQuery，請前往
+1. 新專案會自動啟用 BigQuery。如要在現有專案中啟用 BigQuery，請前往
 
-   如果尚未啟用 BigQuery API，請啟用。
+   啟用 BigQuery API (如果尚未啟用)。
 
-   **啟用 API 時所需的角色**
+   **啟用 API 所需的角色**
 
-   如要啟用 API，您必須具備 `serviceusage.services.enable` 權限。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用情形管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過擁有者角色 (`roles/owner`) 取得這項權限。否則，您可以透過 Service Usage 管理員角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
    [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery&hl=zh-tw)
 
 ## 建立資料集
 
-如要建立 BigQuery 資料集，請選取下列任一選項：
+如要建立 BigQuery 資料集，請選取下列其中一個選項：
 
 ### 控制台
 
@@ -171,14 +171,14 @@ BigQuery ML 可讓您使用 SQL 查詢，在 BigQuery 中建立及訓練機器�
 2. 點選左側窗格中的 explore「Explorer」。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
-3. 在「Explorer」中展開專案，然後按一下「Datasets」。
-4. 在「資料集」頁面，按一下 add「建立資料集」。
+3. 在「Explorer」中展開專案，然後按一下「資料集」。
+4. 在「Datasets」(資料集) 頁面，按一下add「Create dataset」(建立資料集)。
 5. 在「建立資料集」窗格中，執行下列操作：
 
    * 在「Dataset ID」(資料集 ID) 中輸入 `bqml_tutorial`。
-   * 選取「資料位置」的「美國」。
+   * 在「資料位置」部分，選取「US」。
 
-   其餘預設設定均保留原樣。
+   其餘預設設定則保持不變。
 6. 點選「建立資料集」。
 
 ### bq
@@ -193,7 +193,7 @@ BigQuery ML 可讓您使用 SQL 查詢，在 BigQuery 中建立及訓練機器�
      --description "BigQuery ML tutorial dataset." \
      bqml_tutorial
    ```
-2. 確認資料集已建立完成：
+2. 確認資料集已建立：
 
    ```
    bq ls
@@ -201,7 +201,7 @@ BigQuery ML 可讓您使用 SQL 查詢，在 BigQuery 中建立及訓練機器�
 
 ### API
 
-使用已定義的[資料集資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets?hl=zh-tw)呼叫 [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert?hl=zh-tw) 方法：
+使用定義的[資料集資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets?hl=zh-tw)呼叫 [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert?hl=zh-tw) 方法：
 
 ```
 {
@@ -213,7 +213,7 @@ BigQuery ML 可讓您使用 SQL 查詢，在 BigQuery 中建立及訓練機器�
 
 ### BigQuery DataFrames
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+試用這個範例前，請先按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定操作說明操作。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -227,14 +227,14 @@ bqclient.create_dataset("bqml_tutorial", exists_ok=True)
 
 ## 建立邏輯迴歸模型
 
-使用 BigQuery 的 Analytics 範例資料集建立邏輯迴歸模型。
+使用 BigQuery 的 Analytics 範例資料集，建立邏輯迴歸模型。
 
 ### SQL
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在查詢編輯器執行下列陳述式：
+2. 在查詢編輯器中執行下列陳述式：
 
    ```
    CREATE OR REPLACE MODEL `bqml_tutorial.sample_model`
@@ -251,29 +251,29 @@ bqclient.create_dataset("bqml_tutorial", exists_ok=True)
    _TABLE_SUFFIX BETWEEN '20160801' AND '20170630'
    ```
 
-   查詢需要幾分鐘才會完成。第一次疊代完成後，模型 (`sample_model`) 會顯示在導覽面板中。由於查詢使用 `CREATE MODEL` 陳述式建立模型，因此您不會看到查詢結果。
+   查詢需要幾分鐘才會完成。第一次疊代完成後，模型 (`sample_model`) 會顯示在導覽面板中。由於查詢使用 `CREATE MODEL` 陳述式建立模型，因此不會顯示查詢結果。
 
 **查詢詳細資料**
 
 `CREATE MODEL` 陳述式會建立模型，然後使用查詢的 `SELECT` 陳述式擷取的資料訓練模型。
 
-`OPTIONS(model_type='logistic_reg')` 子句會建立[邏輯迴歸](https://en.wikipedia.org/wiki/Logistic_regression)模型。邏輯迴歸模型會將輸入資料分成兩類，然後估算資料屬於其中一類的機率。您要偵測的內容 (例如電子郵件是否為垃圾郵件) 以 1 表示，其他值則以 0 表示。介於 0 和 1 之間的值，表示指定值屬於您要偵測的類別的可能性。舉例來說，如果電子郵件的機率估計值為 0.9，則該郵件有 90% 的機率是垃圾郵件。
+`OPTIONS(model_type='logistic_reg')` 子句會建立[邏輯迴歸](https://en.wikipedia.org/wiki/Logistic_regression)模型。邏輯迴歸模型會將輸入資料分成兩個類別，然後估算資料屬於其中一個類別的機率。您要偵測的項目 (例如電子郵件是否為垃圾郵件) 會以 1 表示，其他值則以 0 表示。特定值屬於您要偵測的類別的可能性，會以 0 到 1 之間的值表示。舉例來說，如果電子郵件的機率預估值為 0.9，則該電子郵件有 90% 的機率是垃圾郵件。
 
-這個查詢的 `SELECT` 陳述式會擷取下列欄位，而這些欄位可被模型用來預測顧客完成交易的機率：
+這項查詢的 `SELECT` 陳述式會擷取下列資料欄，模型會使用這些資料欄預測顧客完成交易的可能性：
 
-* `totals.transactions`：工作階段內發生的電子商務交易總數。如果交易次數為 `NULL`，則 `label` 欄中的值會設為 `0`。否則會設為 `1`。這些值皆可用來表示可能的結果。若要在 `CREATE MODEL` 陳述式中設定 `input_label_cols=` 選項，那麼建立一個名為 `label` 的別名是可行的替代方案。
+* `totals.transactions`：工作階段中的電子商務交易總數。如果交易數量為 `NULL`，`label` 欄中的值會設為 `0`。否則，系統會將其設為 `1`。這些值皆可用來表示可能的結果。建立名為 `label` 的別名，可做為在 `CREATE MODEL` 陳述式中設定 `input_label_cols=` 選項的替代方案。
 * `device.operatingSystem`：訪客裝置的作業系統。
 * `device.isMobile`：指出訪客的裝置是否為行動裝置。
-* `geoNetwork.country`：工作階段來源國家/地區 (以 IP 位址為依據)。
+* `geoNetwork.country`：工作階段來源國家/地區 (根據 IP 位址)。
 * `totals.pageviews`：工作階段內的網頁瀏覽總數。
 
-`FROM` 子句：導致查詢使用 `bigquery-public-data.google_analytics_sample.ga_sessions` 範例資料表訓練模型。這些資料表會依日期分片，因此您可以在資料表名稱中使用萬用字元來匯總資料表：`google_analytics_sample.ga_sessions_*`。
+`FROM` 子句：讓查詢使用 `bigquery-public-data.google_analytics_sample.ga_sessions` 範例資料表訓練模型。這些資料表會依日期進行資料分割，因此您可以使用資料表名稱中的萬用字元 `google_analytics_sample.ga_sessions_*` 匯總資料表。
 
-`WHERE` 子句 (`_TABLE_SUFFIX BETWEEN '20160801' AND '20170630'`) 會限制查詢掃描的資料表數量。而所掃描的日期區間則是從 2016 年 8 月 1 日到 2017 年 6 月 30 日。
+`WHERE` 子句 `_TABLE_SUFFIX BETWEEN '20160801' AND '20170630'` 會限制查詢掃描的資料表數量。而所掃描的日期區間則是從 2016 年 8 月 1 日到 2017 年 6 月 30 日。
 
 ### BigQuery DataFrames
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+試用這個範例前，請先按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定操作說明操作。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -361,11 +361,11 @@ ml.create_model(
 
 機器學習是指建立一個可透過資料進行預測的模型，此模型是一個可接收資料輸入的功能，並且能夠針對輸入資料進行運算，進而產生輸出，也就是預測。
 
-機器學習演算法會採用多個已知預測結果的範例 (例如使用者購物記錄)，並反覆調整模型中的各種權重，使模型的預測結果與實際值相符。能達到這個目標，是因為機器學習演算法透過「遺失」指標降低模型的錯誤預測。
+機器學習演算法的運作方式是，採用多個已知預測結果的範例 (例如使用者購買行為的歷來資料)，並反覆調整模型中的各種權重，使模型的預測結果與實際值相符。能達到這個目標，是因為機器學習演算法透過「遺失」指標降低模型的錯誤預測。
 
-預期每次疊代時，損失都會減少，最好是降至零。遺失值 0，代表模型具有 100% 的正確率。
+預期每次疊代時，損失都會減少，理想情況下會降至零。遺失值 0，代表模型具有 100% 的正確率。
 
-訓練模型時，BigQuery ML 會自動將輸入資料分割為[訓練和評估集](https://en.wikipedia.org/wiki/Training,_validation,_and_test_data_sets)，避免模型[過度配適](https://en.wikipedia.org/wiki/Overfitting)。這是必要步驟，因為訓練演算法不能過度配合訓練資料，否則就無法歸納新樣本。
+訓練模型時，BigQuery ML 會自動將輸入資料分割為[訓練和評估集](https://en.wikipedia.org/wiki/Training,_validation,_and_test_data_sets)，避免模型[過度配適](https://en.wikipedia.org/wiki/Overfitting)。這是為了避免訓練演算法過度貼合訓練資料，導致無法歸納出新樣本。
 
 使用 Google Cloud 控制台，查看模型在訓練疊代期間的損失變化：
 
@@ -375,24 +375,24 @@ ml.create_model(
 2. 點選左側窗格中的 explore「Explorer」。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
-3. 在「Explorer」窗格中展開專案，按一下「Datasets」，然後點選 `bqml_tutorial` 資料集。
-4. 按一下「模型」分頁標籤，然後點選 `sample_model` 模型。
-5. 按一下「訓練」分頁標籤，然後查看「損失」圖表。「損失」圖表會顯示訓練資料集疊代期間損失指標的變化。將游標懸停在圖表上，您會看到「訓練損失」和「評估損失」的線條。由於您執行了邏輯迴歸，因此訓練損失值是使用訓練資料計算而來的[對數損失](https://en.wikipedia.org/wiki/Cross-entropy#Cross-entropy_loss_function_and_logistic_regression)。評估損失是根據評估資料計算出的對數損失。這兩種損失類型都代表平均損失值，是針對每次疊代中各資料集的全部範例計算平均值。
+3. 在「Explorer」窗格中展開專案，依序點選「Datasets」(資料集) 和「`bqml_tutorial`」資料集。
+4. 按一下「Models」(模型) 分頁標籤，然後點選 `sample_model` 模型。
+5. 按一下「Training」(訓練) 分頁標籤，然後查看「Loss」(損失) 圖表。「Loss」(損失) 圖表顯示訓練資料集疊代期間，損失指標的變化。將游標懸停在圖表上，會看到「訓練損失」和「評估損失」的線條。由於您執行了邏輯迴歸，因此訓練損失值會使用訓練資料計算為[對數損失](https://en.wikipedia.org/wiki/Cross-entropy#Cross-entropy_loss_function_and_logistic_regression)。評估損失是根據評估資料計算出的對數損失。這兩種損失類型都代表平均損失值，也就是每次疊代時，各資料集中所有樣本的平均值。
 
 您也可以使用 [`ML.TRAINING_INFO` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-train?hl=zh-tw)查看模型訓練結果。
 
 ## 評估模型
 
-使用 [`ML.EVALUATE` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate?hl=zh-tw)或 [`bigframes.bigquery.ml.evaluate` BigQuery DataFrames 函式](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.evaluate.html#bigframes.bigquery.ml.evaluate)評估模型效能。`ML.EVALUATE` 和 `bigframes.bigquery.ml.evaluate` 函式會根據實際資料，評估模型產生的預測值。如要計算邏輯迴歸專用指標，可以使用 [`ML.ROC_CURVE` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-roc?hl=zh-tw)。
+使用 [`ML.EVALUATE` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate?hl=zh-tw)或 [`bigframes.bigquery.ml.evaluate` BigQuery DataFrames 函式](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.evaluate.html#bigframes.bigquery.ml.evaluate)評估模型效能。`ML.EVALUATE` 和 `bigframes.bigquery.ml.evaluate` 函式會根據實際資料評估模型產生的預測值。如要計算邏輯迴歸專用指標，可以使用 [`ML.ROC_CURVE` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-roc?hl=zh-tw)。
 
-在本教學課程中，您會使用偵測交易的二元分類模型。`label` 欄中的值是模型產生的兩個類別：`0` (無交易) 和 `1` (已完成交易)。
+在本教學課程中，您將使用二元分類模型偵測交易。`label` 欄中的值是模型產生的兩個類別：`0` (無交易) 和 `1` (已交易)。
 
 ### SQL
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在查詢編輯器執行下列陳述式：
+2. 在查詢編輯器中執行下列陳述式：
 
    ```
    SELECT
@@ -425,26 +425,24 @@ ml.create_model(
 
    * [`precision`](https://developers.google.com/machine-learning/glossary/?hl=zh-tw#precision)：分類模型的指標，該指標可確認當模型預測到正向類別時的正確發生頻率。
    * [`recall`](https://developers.google.com/machine-learning/glossary/?hl=zh-tw#recall)：分類模型的指標，可用來回答下列問題：在所有可能的正向標籤中，模型可以正確辨識出多少個標籤？
-   * [`accuracy`](https://developers.google.com/machine-learning/glossary/?hl=zh-tw#accuracy)：
-     準確率為分類模型預測成功的比例。
-   * [`f1_score`](https://en.wikipedia.org/wiki/F1_score)：
-     衡量模型準確率的指標，F1 分數是精確度與召回率的調和平均數，f1 分數的最佳值為 1，最差值為 0。
+   * [`accuracy`](https://developers.google.com/machine-learning/glossary/?hl=zh-tw#accuracy)：準確率是指分類模型預測正確的比例。
+   * [`f1_score`](https://en.wikipedia.org/wiki/F1_score)：衡量模型準確率的指標，F1 分數是精確度與召回率的調和平均數，f1 分數的最佳值為 1，最差值為 0。
    * [`log_loss`](https://en.wikipedia.org/wiki/Cross_entropy#Cross-entropy_error_function_and_logistic_regression)：用於邏輯迴歸中的損失函式，可衡量模型預測結果與正確標籤之間的差距。
-   * [`roc_auc`](https://developers.google.com/machine-learning/glossary/?hl=zh-tw#AUC)：[ROC](https://developers.google.com/machine-learning/glossary/?hl=zh-tw#ROC) 曲線下方的面積。也就是分類器對於隨機挑選的正向樣本確實是正向的信心，高於隨機挑選的負向樣本其實是正向的情況發生機率。詳情請參閱機器學習密集課程的「[分類](https://developers.google.com/machine-learning/crash-course/classification/video-lecture?hl=zh-tw)」。
+   * [`roc_auc`](https://developers.google.com/machine-learning/glossary/?hl=zh-tw#AUC)：[ROC](https://developers.google.com/machine-learning/glossary/?hl=zh-tw#ROC) 曲線下面積。也就是分類器對於隨機挑選的正向樣本確實是正向的信心，高於隨機挑選的負向樣本其實是正向的情況發生機率。詳情請參閱機器學習密集課程中的「[分類](https://developers.google.com/machine-learning/crash-course/classification/video-lecture?hl=zh-tw)」一節。
 
 **查詢詳細資料**
 
-初始 `SELECT` 陳述式會擷取模型中的資料欄。
+初始 `SELECT` 陳述式會從模型擷取資料欄。
 
-`FROM` 子句會針對模型使用 `ML.EVALUATE` 函式。
+`FROM` 子句會對模型使用 `ML.EVALUATE` 函式。
 
-巢狀 `SELECT` 陳述式和 `FROM` 子句與 `CREATE MODEL` 查詢中的相同。
+巢狀 `SELECT` 陳述式和 `FROM` 子句與 `CREATE MODEL` 查詢中的陳述式和子句相同。
 
-`WHERE` 子句 (`_TABLE_SUFFIX BETWEEN '20170701' AND '20170801'`) 會限制查詢掃描的資料表數量。而所掃描的日期區間則是從 2017 年 7 月 1 日到 2017 年 8 月 1 日，這正是您用來評估模型預測效能的資料。上述資料收集的時間點是在訓練資料所橫跨的時間區段之後、緊接著的隔月。
+`WHERE` 子句 `_TABLE_SUFFIX BETWEEN '20170701' AND '20170801'` 會限制查詢掃描的資料表數量。而所掃描的日期區間則是從 2017 年 7 月 1 日到 2017 年 8 月 1 日，這正是您用來評估模型預測效能的資料。上述資料收集的時間點是在訓練資料所橫跨的時間區段之後、緊接著的隔月。
 
 ### BigQuery DataFrames
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+試用這個範例前，請先按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定操作說明操作。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -525,14 +523,14 @@ ml.evaluate(
 
 ## 使用模型預測結果
 
-使用模型預測各國家/地區的網站訪客交易量。
+使用模型預測各國家/地區網站訪客的交易量。
 
 ### SQL
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在查詢編輯器執行下列陳述式：
+2. 在查詢編輯器中執行下列陳述式：
 
    ```
    SELECT
@@ -575,21 +573,21 @@ ml.evaluate(
 
 **查詢詳細資料**
 
-初始 `SELECT` 陳述式會擷取 `country` 欄，並加總 `predicted_label` 欄。`predicted_label` 欄是由 `ML.PREDICT` 函式產生。使用 `ML.PREDICT` 函式時，模型的輸出資料欄名稱為 `predicted_<label_column_name>`。針對線性迴歸模型，`predicted_label` 是 `label` 的預估值。如果是邏輯迴歸模型，`predicted_label` 是最能描述指定輸入資料值的標籤，可以是 `0` 或 `1`。
+初始 `SELECT` 陳述式會擷取 `country` 欄，並加總 `predicted_label` 欄。`predicted_label` 資料欄是由 `ML.PREDICT` 函式產生。使用 `ML.PREDICT` 函式時，模型的輸出資料欄名稱為 `predicted_<label_column_name>`。如果是線性迴歸模型，`predicted_label` 是 `label` 的估計值。如果是邏輯迴歸模型，`predicted_label` 是最能描述指定輸入資料值的標籤，可以是 `0` 或 `1`。
 
-`ML.PREDICT` 函式用於透過模型預測結果。
+`ML.PREDICT` 函式可用來透過模型預測結果。
 
-巢狀 `SELECT` 陳述式和 `FROM` 子句與 `CREATE MODEL` 查詢中的相同。
+巢狀 `SELECT` 陳述式和 `FROM` 子句與 `CREATE MODEL` 查詢中的陳述式和子句相同。
 
-`WHERE` 子句 (`_TABLE_SUFFIX BETWEEN '20170701' AND '20170801'`) 會限制查詢掃描的資料表數量。而所掃描的日期區間則是從 2017 年 7 月 1 日到 2017 年 8 月 1 日，這正是您執行預測所使用的資料。每當時間區段橫跨訓練資料之後，就會立刻收集月份資料。
+`WHERE` 子句 `_TABLE_SUFFIX BETWEEN '20170701' AND '20170801'` 會限制查詢掃描的資料表數量。而所掃描的日期區間則是從 2017 年 7 月 1 日到 2017 年 8 月 1 日，這正是您執行預測所使用的資料。每當時間區段橫跨訓練資料之後，就會立刻收集月份資料。
 
-`GROUP BY` 和 `ORDER BY` 子句會依國家/地區將結果分組，並依預測購買量總和遞減排序。
+`GROUP BY` 和 `ORDER BY` 子句會依國家/地區將結果分組，並依預測購買量的總和遞減排序。
 
 `LIMIT` 子句在此處的用途是僅顯示前 10 筆查詢結果。
 
 ### BigQuery DataFrames
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+試用這個範例前，請先按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定操作說明操作。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -666,17 +664,16 @@ total_predicted_purchases.sort_values(ascending=False).head(10)
 
 ## 預測各使用者的購買量
 
-預測每位網站訪客的交易量。
+預測每位網站訪客的交易次數。
 
 ### SQL
 
-這項查詢與上一節的查詢相同，只有 `GROUP BY` 子句不同。這裡的 `GROUP BY` 子句 (`GROUP BY fullVisitorId`
-) 用於依訪客 ID 分組結果。
+這項查詢與上一節的查詢相同，但 `GROUP BY` 子句除外。這裡使用 `GROUP BY` 子句 `GROUP BY fullVisitorId`，依訪客 ID 將結果分組。
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在查詢編輯器執行下列陳述式：
+2. 在查詢編輯器中執行下列陳述式：
 
    ```
    SELECT
@@ -720,7 +717,7 @@ total_predicted_purchases.sort_values(ascending=False).head(10)
 
 ### BigQuery DataFrames
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+試用這個範例前，請先按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定操作說明操作。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -802,7 +799,7 @@ total_predicted_purchases.sort_values(ascending=False).head(10)
 
 為了避免系統向您的 Google Cloud 帳戶收取本頁面所用資源的費用，請按照下列步驟操作。
 
-您可以刪除自己建立的專案，或保留專案並刪除資料集。
+您可以刪除建立的專案，或保留專案並刪除資料集。
 
 ### 刪除資料集
 
@@ -812,7 +809,7 @@ total_predicted_purchases.sort_values(ascending=False).head(10)
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
-3. 在「Explorer」窗格中展開專案，按一下「Datasets」(資料集)，然後點選您建立的 `bqml_tutorial` 資料集。
+3. 在「Explorer」窗格中展開專案，依序點選「Datasets」(資料集) 和您建立的 `bqml_tutorial` 資料集。
 4. 點選「刪除」。
 5. 在「Delete dataset」(刪除資料集) 對話方塊中，輸入 `delete` 來確認刪除指令。
 6. 點選「刪除」。
@@ -821,7 +818,7 @@ total_predicted_purchases.sort_values(ascending=False).head(10)
 
 如要刪除專案，請進行以下操作：
 
-**注意**：刪除專案會造成以下結果：
+**警告**：刪除專案會出現以下結果：
 
 * **專案中的所有內容都會遭到刪除。**如果使用現有專案來進行本文中的任務，刪除專案將一併移除當中已完成的其他任務'。
 * **自訂專案 ID 會消失。**當您之前建立這個專案時，可能建立了想要在日後使用的自訂專案 ID。如要保留使用該專案 ID 的網址 (例如 `appspot.com` 網址)，請刪除在該專案中選取的資源，而不是刪除整個專案。
@@ -838,7 +835,7 @@ total_predicted_purchases.sort_values(ascending=False).head(10)
 
 * 如要進一步瞭解機器學習，請參閱[機器學習速成課程](https://developers.google.com/machine-learning/crash-course/?hl=zh-tw)。
 * 如需 BigQuery ML 的總覽，請參閱 [BigQuery ML 簡介](https://docs.cloud.google.com/bigquery/docs/bqml-introduction?hl=zh-tw)。
-* 如要進一步瞭解 Google Cloud 控制台，請參閱「[使用 Google Cloud 控制台](https://docs.cloud.google.com/bigquery/bigquery-web-ui?hl=zh-tw)」。
+* 如要進一步瞭解 Google Cloud 控制台，請參閱「[使用 Google Cloud 控制台](https://docs.cloud.google.com/bigquery/bigquery-web-ui?hl=zh-tw)」一文。
 
 
 
@@ -847,11 +844,11 @@ total_predicted_purchases.sort_values(ascending=False).head(10)
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-29 (世界標準時間)。
+上次更新時間：2026-11-03 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-03 (世界標準時間)。"],[],[]]

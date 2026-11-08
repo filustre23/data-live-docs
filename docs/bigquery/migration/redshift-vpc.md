@@ -249,3 +249,5 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 
 想進一步說明嗎？
+
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],

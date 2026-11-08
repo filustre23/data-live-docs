@@ -381,4 +381,6 @@ For more information, see [Work with `ObjectRef` values](/bigquery/docs/work-wit
   uris that contain consecutive slashes. For example, uris such as
   `gs://mybucket/flowers/` and `gs://mybucket/flowers//12345.jpg` return an
   error.
-* `authorizer`: a `STRING` value that contains
+* `authorizer`: a `STRING` value that contains the
+  [Cloud Resource connection](/bigquery/docs/create-cloud-resource-connection)
+  used for [deleg](/bigquery/docs/work-with-objectref#delegated-access)

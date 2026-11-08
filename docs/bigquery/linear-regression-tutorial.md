@@ -10,13 +10,13 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 使用 BigQuery ML 預測企鵝重量 透過集合功能整理內容 你可以依據偏好儲存及分類內容。
 
-在本教學課程中，您將使用 BigQuery ML 中的[線性迴歸模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm?hl=zh-tw)，根據企鵝的人口統計資訊預測企鵝的體重。線性迴歸是一種迴歸模型，可根據輸入特徵的線性組合產生連續值。
+在本教學課程中，您將使用 BigQuery ML 中的[線性迴歸模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm?hl=zh-tw)，根據企鵝的人口統計資訊預測企鵝的體重。線性迴歸是一種迴歸模型，可從輸入特徵的線性組合產生連續值。
 
 本教學課程使用 [`bigquery-public-data.ml_datasets.penguins`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&%3Bd=ml_datasets&%3Bt=penguins&%3Bpage=table&hl=zh-tw) 資料集。
 
 ## 目標
 
-在本教學課程中，您將執行下列工作：
+在本教學課程中，您會執行下列工作：
 
 * 建立線性迴歸模型。
 * 評估模型。
@@ -31,25 +31,25 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 如要進一步瞭解 BigQuery 費用，請參閱 [BigQuery 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw)頁面。
 
-如要進一步瞭解 BigQuery ML 費用，請參閱「[BigQuery ML 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#bqml)」一文。
+如要進一步瞭解 BigQuery ML 費用，請參閱「[BigQuery ML 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#bqml)」。
 
 ## 事前準備
 
-1. 在 Google Cloud 控制台的專案選擇器頁面中，選取或建立 Google Cloud 專案。
+1. 在 Google Cloud 控制台的專案選取器頁面中，選取或建立 Google Cloud 專案。
 
    **選取或建立專案所需的角色**
 
-   * **選取專案**：選取專案時，不需要具備特定 IAM 角色，只要您在專案中獲派角色，即可選取該專案。
-   * **建立專案**：如要建立專案，您需要「專案建立者」角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
-   **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，而不要選取現有專案。完成這些步驟後，您就可以刪除專案，並移除與該專案相關聯的所有資源。
+   * **選取專案**：選取專案時，不需具備特定 IAM 角色，只要您已獲派某個專案的角色，即可選取該專案。
+   * **建立專案**：如要建立專案，您必須具備專案建立者角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，而不要選取現有專案。如果採用這種做法，當您完成這些步驟後，就可以直接刪除該專案，並移除相關聯的所有資源。
 
    [前往專案選取器](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
-2. [確認專案已啟用計費功能 Google Cloud](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project) 。
-3. 如果尚未啟用 BigQuery API，請啟用。
+2. [確認 Google Cloud 專案已啟用計費功能](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project)。
+3. 啟用 BigQuery API (如果尚未啟用)。
 
-   **啟用 API 時所需的角色**
+   **啟用 API 所需的角色**
 
-   如要啟用 API，您必須具備 `serviceusage.services.enable` 權限。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用情形管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過擁有者角色 (`roles/owner`) 取得這項權限。否則，您可以透過 Service Usage 管理員角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
    [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery.googleapis.com&hl=zh-tw)
 
@@ -63,14 +63,14 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 * `bigquery.models.updateData`
 * `bigquery.models.updateMetadata`
 
-如要執行推論，您需要下列權限：
+如要執行推論，您必須具備下列權限：
 
-* 模型上的 `bigquery.models.getData`
+* 模型上的`bigquery.models.getData`
 * `bigquery.jobs.create`
 
 ## 建立資料集
 
-如要建立 BigQuery 資料集，請選取下列任一選項：
+如要建立 BigQuery 資料集，請選取下列其中一個選項：
 
 ### 控制台
 
@@ -80,14 +80,14 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 2. 點選左側窗格中的 explore「Explorer」。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
-3. 在「Explorer」中展開專案，然後按一下「Datasets」。
-4. 在「資料集」頁面，按一下 add「建立資料集」。
+3. 在「Explorer」中展開專案，然後按一下「資料集」。
+4. 在「Datasets」(資料集) 頁面，按一下add「Create dataset」(建立資料集)。
 5. 在「建立資料集」窗格中，執行下列操作：
 
    * 在「Dataset ID」(資料集 ID) 中輸入 `bqml_tutorial`。
-   * 選取「資料位置」的「美國」。
+   * 在「資料位置」部分，選取「US」。
 
-   其餘預設設定均保留原樣。
+   其餘預設設定則保持不變。
 6. 點選「建立資料集」。
 
 ### bq
@@ -102,7 +102,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
      --description "BigQuery ML tutorial dataset." \
      bqml_tutorial
    ```
-2. 確認資料集已建立完成：
+2. 確認資料集已建立：
 
    ```
    bq ls
@@ -110,7 +110,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ### API
 
-使用已定義的[資料集資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets?hl=zh-tw)呼叫 [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert?hl=zh-tw) 方法：
+使用定義的[資料集資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets?hl=zh-tw)呼叫 [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert?hl=zh-tw) 方法：
 
 ```
 {
@@ -122,7 +122,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ### BigQuery DataFrames
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+試用這個範例前，請先按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定操作說明操作。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -136,27 +136,27 @@ bqclient.create_dataset("bqml_tutorial", exists_ok=True)
 
 ## 建立模型
 
-使用 BigQuery 的 Analytics 範例資料集建立線性迴歸模型。
+使用 BigQuery 的 Analytics 範例資料集，建立線性迴歸模型。
 
 ### SQL
 
-您可以使用 [`CREATE MODEL` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm?hl=zh-tw)建立線性迴歸模型，並指定模型類型為 `LINEAR_REG`。建立模型包括訓練模型。
+您可以使用 [`CREATE MODEL` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm?hl=zh-tw)建立線性迴歸模型，並將模型類型指定為 `LINEAR_REG`。建立模型時，也需要訓練模型。
 
 以下是 `CREATE MODEL` 陳述式的實用資訊：
 
-* [`input_label_cols`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm?hl=zh-tw#input_label_cols) 選項會指定 `SELECT` 陳述式中的哪個資料欄做為標籤資料欄。這裡的標籤資料欄是 `body_mass_g`。針對線性迴歸模型，標籤資料欄必須是實值，也就是說，資料欄值必須是實數。
+* [`input_label_cols`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm?hl=zh-tw#input_label_cols) 選項會指定 `SELECT` 陳述式中的哪個資料欄要做為標籤欄。這裡的標籤欄是 `body_mass_g`。如果是線性迴歸模型，標籤欄必須是實數值，也就是說，資料欄值必須是實數。
 * 這項查詢的 `SELECT` 陳述式會使用 `bigquery-public-data.ml_datasets.penguins` 資料表中的下列資料欄，預測企鵝的體重：
 
   + `species`：企鵝的物種。
-  + `island`：企鵝所在的島嶼。
-  + `culmen_length_mm`：企鵝的喙長，單位為毫米。
-  + `culmen_depth_mm`：企鵝喙的深度 (以毫米為單位)。
-  + `flipper_length_mm`：企鵝翅膀的長度 (以毫米為單位)。
+  + `island`：：企鵝居住的島嶼。
+  + `culmen_length_mm`：企鵝嘴峰長度，以公釐為單位。
+  + `culmen_depth_mm`：企鵝嘴峰深度，以公釐為單位。
+  + `flipper_length_mm`：企鵝腳蹼長度，以公釐為單位。
   + `sex`：企鵝的性別。
-* 這項查詢的 `SELECT` 陳述式中的 `WHERE` 子句 (`WHERE body_mass_g IS
-  NOT NULL`) 會排除 `body_mass_g` 欄為 `NULL` 的資料列。
+* 這項查詢的 `SELECT` 陳述式中，`WHERE body_mass_g IS
+  NOT NULL` 的 `WHERE` 子句會排除 `body_mass_g` 欄為 `NULL` 的資料列。
 
-執行查詢來建立線性迴歸模型：
+執行查詢，建立線性迴歸模型：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -175,20 +175,20 @@ bqclient.create_dataset("bqml_tutorial", exists_ok=True)
    WHERE
      body_mass_g IS NOT NULL;
    ```
-3. 建立 `penguins_model` 模型大約需要 30 秒。
+3. 建立 `penguins_model` 模型約需 30 秒。
 
    如要查看模型，請按照下列步驟操作：
 
    1. 點選左側窗格中的 explore「Explorer」。
 
       如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
-   2. 在「Explorer」窗格中展開專案，然後按一下「Datasets」(資料集)。
+   2. 在「Explorer」窗格中展開專案，然後點選「資料集」。
    3. 按一下「`bqml_tutorial`」資料集。
-   4. 按一下「模型」分頁標籤。
+   4. 點按「模型」分頁標籤。
 
 ### BigQuery DataFrames
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+試用這個範例前，請先按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定操作說明操作。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -225,39 +225,39 @@ ml.create_model(
 )
 ```
 
-建立模型大約需要 30 秒。如要查看模型，請按照下列步驟操作：
+建立模型約需 30 秒。如要查看模型，請按照下列步驟操作：
 
 1. 點選左側窗格中的 explore「Explorer」。
-2. 在「Explorer」窗格中展開專案，然後按一下「Datasets」(資料集)。
+2. 在「Explorer」窗格中展開專案，然後點選「資料集」。
 3. 按一下「`bqml_tutorial`」資料集。
-4. 按一下「模型」分頁標籤。
+4. 點按「模型」分頁標籤。
 
 ## 取得訓練統計資料
 
-如要查看模型訓練結果，可以使用 [`ML.TRAINING_INFO` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-train?hl=zh-tw)，也可以在 Google Cloud 控制台中查看統計資料。在本教學課程中，您將使用 Google Cloud 控制台。
+如要查看模型訓練結果，可以使用 [`ML.TRAINING_INFO` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-train?hl=zh-tw)，或在 Google Cloud 控制台查看統計資料。在本教學課程中，您將使用 Google Cloud 控制台。
 
 機器學習演算法建構模型時，會檢視大量的例子，藉此找出能將損失降到最低的模型。這個過程稱為經驗風險最小化。
 
-損失是預測錯誤的懲罰。這個數字代表模型對單一範例的預測有多不準確。如果這個模型的預測是完美的，則損失為 0，否則損失會大於 0。訓練模型的目的是從所有例子中找到平均損失分數低的一組權重和偏誤。
+損失是指對不良預測的懲罰。這個數字代表模型對單一樣本的預測結果有多不準確。如果這個模型的預測是完美的，則損失為 0，否則損失會大於 0。訓練模型的目的是從所有例子中找到平均損失分數低的一組權重和偏誤。
 
 查看執行 `CREATE MODEL` 查詢時產生的模型訓練統計資料：
 
 1. 點選左側窗格中的 explore「Explorer」。
-2. 在「Explorer」窗格中展開專案，然後按一下「Datasets」(資料集)。
+2. 在「Explorer」窗格中展開專案，然後點選「資料集」。
 3. 按一下「`bqml_tutorial`」資料集。
-4. 按一下「模型」分頁標籤。
+4. 點按「模型」分頁標籤。
 5. 如要開啟模型資訊窗格，請按一下「penguins\_model」**penguins\_model**。
-6. 點選「訓練」分頁標籤，然後點選「表格」。結果應如下所示：
+6. 依序點選「Training」(訓練) 分頁標籤和「Table」(資料表)。結果應大致如下：
 
-   「Training Data Loss」資料欄代表在訓練資料集上訓練模型後計算出來的損失指標。由於您執行的是線性迴歸，這個資料欄會顯示[均方誤差](https://developers.google.com/machine-learning/glossary/?hl=zh-tw#MSE)值。這項訓練會自動使用[normal\_equation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm?hl=zh-tw#optimize_strategy)最佳化策略，因此只需一次疊代，即可收斂至最終模型。如要進一步瞭解如何設定模型最佳化策略，請參閱 [`optimize_strategy`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm?hl=zh-tw#optimize_strategy)。
+   「Training Data Loss」資料欄代表在訓練資料集上訓練模型後計算出來的損失指標。由於您執行的是線性迴歸，因此這個資料欄會顯示[均方誤差](https://developers.google.com/machine-learning/glossary/?hl=zh-tw#MSE)值。這項訓練會自動使用 [normal\_equation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm?hl=zh-tw#optimize_strategy) 最佳化策略，因此只需要一次疊代，就能收斂至最終模型。如要進一步瞭解如何設定模型最佳化策略，請參閱 [`optimize_strategy`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm?hl=zh-tw#optimize_strategy)。
 
 ## 評估模型
 
-建立模型後，請使用 [`ML.EVALUATE` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate?hl=zh-tw)或 [`bigframes.bigquery.ml.evaluate` BigQuery DataFrames 函式](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.evaluate.html#bigframes.bigquery.ml.evaluate)，根據實際資料評估模型產生的預測值，藉此評估模型成效。
+建立模型後，請使用 [`ML.EVALUATE` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate?hl=zh-tw)或 [`bigframes.bigquery.ml.evaluate` BigQuery DataFrames 函式](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.evaluate.html#bigframes.bigquery.ml.evaluate)評估模型效能，根據實際資料評估模型產生的預測值。
 
 ### SQL
 
-`ML.EVALUATE` 函式會將訓練好的模型和資料集做為輸入內容，而資料集必須符合您用來訓練模型的資料結構定義。在正式環境中，您應使用與模型訓練資料不同的資料評估模型。如果您在執行 `ML.EVALUATE` 時未提供輸入資料，函式會擷取訓練期間計算的評估指標。系統會使用自動保留的評估資料集計算這些指標：
+`ML.EVALUATE` 函式會採用訓練好的模型和資料集做為輸入內容，該資料集的結構定義必須與您用來訓練模型的資料相同。在正式環境中，您應使用與訓練模型不同的資料來評估模型。如果您執行 `ML.EVALUATE` 時未提供輸入資料，函式會擷取訓練期間計算的評估指標。這些指標是使用自動保留的評估資料集計算得出：
 
 ```
     SELECT
@@ -289,7 +289,7 @@ ml.create_model(
 
 ### BigQuery DataFrames
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+試用這個範例前，請先按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定操作說明操作。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -308,7 +308,7 @@ ml.evaluate(
 #   1 rows x 6 columns
 ```
 
-結果應如下所示：
+結果應大致如下：
 
 由於您執行了線性迴歸，因此結果包含以下資料欄：
 
@@ -319,18 +319,17 @@ ml.evaluate(
 * `r2_score`
 * `explained_variance`
 
-評估結果中的重要指標是 [R2 分數](https://en.wikipedia.org/wiki/Coefficient_of_determination)。R2 分數是統計測量值，可判斷線性迴歸預測值是否與實際資料相近。`0` 值表示模型無法說明回應資料在平均值附近的變異性。`1` 值表示模型會說明回應資料在平均值附近的所有變異性。
+評估結果中的重要指標是 [R2 分數](https://en.wikipedia.org/wiki/Coefficient_of_determination)。R2 分數是統計測量數，可判斷線性迴歸預測是否接近實際資料。如果值為 `0`，表示模型無法解釋回應資料在平均值附近的變異。如果值為 `1`，表示模型可解釋平均值附近回應資料的所有變異。
 
-您也可以在 Google Cloud 控制台
-查看模型的資訊窗格，瞭解評估指標：
+您也可以在 Google Cloud 控制台的模型資訊窗格中查看評估指標：
 
 ## 使用模型預測結果
 
-現在您已評估了模型，下一步將要用此模型來預測結果，您可以在模型上執行 [`ML.PREDICT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict?hl=zh-tw)或 [`bigframes.bigquery.ml.predict` BigQuery DataFrames 函式](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.predict.html#bigframes.bigquery.ml.predict)，預測居住在比斯科群島的所有企鵝體重 (以公克為單位)。
+現在您已評估了模型，下一步將要用此模型來預測結果，您可以對模型執行 [`ML.PREDICT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict?hl=zh-tw)或 [`bigframes.bigquery.ml.predict` BigQuery DataFrames 函式](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.predict.html#bigframes.bigquery.ml.predict)，預測 Biscoe Islands 所有企鵝的體重 (以公克為單位)。
 
 ### SQL
 
-就輸入內容而言，`ML.PREDICT` 函式會採用訓練好的模型和資料集，該資料集符合您用來訓練模型的資料結構定義，但不包括標籤欄。
+`ML.PREDICT` 函式會採用訓練好的模型和資料集做為輸入內容，該資料集的結構定義與您用來訓練模型的資料相同，但不包含標籤欄。
 
 執行 `ML.PREDICT` 查詢：
 
@@ -354,7 +353,7 @@ ml.evaluate(
 
 ### BigQuery DataFrames
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+試用這個範例前，請先按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定操作說明操作。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -382,16 +381,15 @@ ml.predict(
 # 160	  4731.310452	   Gentoo penguin (Pygoscelis papua)	Biscoe	      44.5	            14.3	        216.0	          4100.0	    <NA>
 ```
 
-結果應如下所示：
+結果應大致如下：
 
 ## 說明預測結果
 
 ### SQL
 
-如要瞭解模型產生這些預測結果的原因，可以使用 [`ML.EXPLAIN_PREDICT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-predict?hl=zh-tw)。
+如要瞭解模型為何會產生這些預測結果，可以使用 [`ML.EXPLAIN_PREDICT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-predict?hl=zh-tw)。
 
-`ML.EXPLAIN_PREDICT` 是 `ML.PREDICT` 函式的擴充版本。
-`ML.EXPLAIN_PREDICT` 不僅會輸出預測結果，還會輸出額外資料欄來解釋預測結果。實務上，您可以執行 `ML.EXPLAIN_PREDICT`，而不是 `ML.PREDICT`。詳情請參閱 [BigQuery ML 可解釋 AI 總覽](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-xai-overview?hl=zh-tw#explainable_ai_offerings_in_bigquery_ml)。
+`ML.EXPLAIN_PREDICT` 是 `ML.PREDICT` 函式的擴充版本。`ML.EXPLAIN_PREDICT` 不僅會輸出預測結果，還會輸出其他資料欄來解釋預測結果。在實際操作中，您可以執行 `ML.EXPLAIN_PREDICT`，而非 `ML.PREDICT`。詳情請參閱「[BigQuery ML 可解釋 AI 總覽](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-xai-overview?hl=zh-tw#explainable_ai_offerings_in_bigquery_ml)」。
 
 執行 `ML.EXPLAIN_PREDICT` 查詢：
 
@@ -415,13 +413,13 @@ FROM
     STRUCT(3 as top_k_features));
 ```
 
-1. 結果應如下所示：
+1. 結果應大致如下：
 
-**注意：** `ML.EXPLAIN_PREDICT` 查詢會輸出所有輸入特徵資料欄，與 `ML.PREDICT` 的做法類似。為方便閱讀，上圖只顯示一個特徵資料欄 `species`。
+**注意：**`ML.EXPLAIN_PREDICT` 查詢會輸出所有輸入特徵欄，與 `ML.PREDICT` 類似。為方便閱讀，上圖僅顯示一個特徵欄 `species`。
 
 ### BigQuery DataFrames
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+試用這個範例前，請先按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定操作說明操作。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -449,15 +447,15 @@ ml.explain_predict(
 # 4	 4637.165037	        [{'feature': 'island', 'attribution': 7348.877...	-5320.222128	          4637.165037	            0.0	         Gentoo penguin (Pygoscelis papua)	Biscoe	    46.1	              13.2	        211.0	           4500.0	   FEMALE
 ```
 
-對於線性迴歸模型，系統會使用夏普利值，為模型中的每個特徵產生特徵歸因值。輸出內容會包含 `penguins` 表格中每列的前三項特徵歸因，因為 `top_k_features` 已設為 `3`。這些歸因會依歸因的絕對值遞減排序。在所有範例中，特徵 `sex` 對整體預測的影響最大。
+對於線性迴歸模型，Shapley 值會用於為模型中的每個特徵產生特徵歸因值。輸出內容包含 `penguins` 資料表每列的前三大特徵歸因，因為 `top_k_features` 已設為 `3`。這些歸因會依歸因的絕對值遞減排序。在所有範例中，特徵 `sex` 對整體預測的貢獻最大。
 
-## 從全域角度說明模型
+## 全域解釋模型
 
 ### SQL
 
-如要瞭解哪些特徵通常最重要，可決定企鵝權重，請使用 [`ML.GLOBAL_EXPLAIN` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-global-explain?hl=zh-tw)。如要使用 `ML.GLOBAL_EXPLAIN`，請務必將 `ENABLE_GLOBAL_EXPLAIN` 選項設為 `TRUE`，然後重新訓練模型。
+如要瞭解哪些特徵通常最能決定企鵝體重，可以使用 [`ML.GLOBAL_EXPLAIN` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-global-explain?hl=zh-tw)。如要使用 `ML.GLOBAL_EXPLAIN`，您必須重新訓練模型，並將 `ENABLE_GLOBAL_EXPLAIN` 選項設為 `TRUE`。
 
-重新訓練模型並取得全域說明：
+重新訓練模型並取得全域解釋：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -480,7 +478,7 @@ ml.explain_predict(
    WHERE
    body_mass_g IS NOT NULL;
    ```
-2. 在查詢編輯器中執行下列查詢，取得全域說明：
+2. 在查詢編輯器中執行下列查詢，取得全域解釋：
 
    ```
    SELECT
@@ -488,11 +486,11 @@ ml.explain_predict(
    FROM
    ML.GLOBAL_EXPLAIN(MODEL `bqml_tutorial.penguins_model`)
    ```
-3. 結果應如下所示：
+3. 結果應大致如下：
 
 ### BigQuery DataFrames
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+試用這個範例前，請先按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定操作說明操作。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -546,19 +544,18 @@ ml.global_explain(
 
 刪除專案將移除專案中所有的資料集與資料表。若您希望重新使用專案，您可以刪除本教學課程中所建立的資料集。
 
-1. 如有需要，請在Google Cloud 控制台中開啟 BigQuery 頁面。
+1. 如有需要，請在Google Cloud 控制台開啟 BigQuery 頁面。
 
-   [前往 BigQuery 頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
+   [前往「BigQuery」頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 在導覽窗格中，按一下您建立的 **bqml\_tutorial** 資料集。
-3. 按一下視窗右側的「刪除資料集」。
-   這個動作將會刪除資料集、資料表，以及所有資料。
+3. 按一下視窗右側的「刪除資料集」。這個動作將會刪除資料集、資料表，以及所有資料。
 4. 在「Delete dataset」(刪除資料集) 對話方塊中，輸入資料集的名稱 (`bqml_tutorial`)，然後按一下 [Delete] (刪除) 來確認刪除指令。
 
 ### 刪除專案
 
 如要刪除專案，請進行以下操作：
 
-**注意**：刪除專案會造成以下結果：
+**警告**：刪除專案會出現以下結果：
 
 * **專案中的所有內容都會遭到刪除。**如果使用現有專案來進行本文中的任務，刪除專案將一併移除當中已完成的其他任務'。
 * **自訂專案 ID 會消失。**當您之前建立這個專案時，可能建立了想要在日後使用的自訂專案 ID。如要保留使用該專案 ID 的網址 (例如 `appspot.com` 網址)，請刪除在該專案中選取的資源，而不是刪除整個專案。
@@ -574,7 +571,7 @@ ml.global_explain(
 ## 後續步驟
 
 * 如需 BigQuery ML 的總覽，請參閱 [BigQuery ML 簡介](https://docs.cloud.google.com/bigquery/docs/bqml-introduction?hl=zh-tw)。
-* 如要瞭解如何建立模型，請參閱[`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create?hl=zh-tw)語法頁面。
+* 如要瞭解如何建立模型，請參閱 [`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create?hl=zh-tw) 語法頁面。
 
 
 
@@ -583,11 +580,11 @@ ml.global_explain(
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-29 (世界標準時間)。
+上次更新時間：2026-11-03 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-03 (世界標準時間)。"],[],[]]

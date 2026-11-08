@@ -7,6 +7,23 @@ hide:
 
 ## Latest Changes
 
+### Docs
+
+* 🎨 Use the Zensical modern theme for docs. PR [#16701](https://github.com/fastapi/fastapi/pull/16701) by [@tiangolo](https://github.com/tiangolo).
+* 🐛 Fix AI coding agent notice links in previews. PR [#16700](https://github.com/fastapi/fastapi/pull/16700) by [@tiangolo](https://github.com/tiangolo).
+* 📝 Add an AI coding agent notice to the docs. PR [#16699](https://github.com/fastapi/fastapi/pull/16699) by [@tiangolo](https://github.com/tiangolo).
+
+## 0.162.2 (2026-11-07)
+
+### Docs
+
+* 📝 Add FastAPI Cloud guidance to the FastAPI skill. PR [#16697](https://github.com/fastapi/fastapi/pull/16697) by [@tiangolo](https://github.com/tiangolo).
+* 📝 Add guidance for developing FastAPI apps with AI. PR [#16695](https://github.com/fastapi/fastapi/pull/16695) by [@tiangolo](https://github.com/tiangolo).
+
+### Internal
+
+* 🔧 Add an agent skills note to GitHub releases. PR [#16696](https://github.com/fastapi/fastapi/pull/16696) by [@tiangolo](https://github.com/tiangolo).
+
 ## 0.162.1 (2026-11-07)
 
 ### Docs

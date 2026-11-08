@@ -1151,4 +1151,4 @@ print(
 
    [啟用 Cloud Shell](https://console.cloud.google.com/?cloudshell=true&hl=zh-tw)
 
-   Google Cloud 控制台底部會開啟
+   Google Cloud 控制台底部會開啟 [Cloud Shel](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works?hl=zh-tw)

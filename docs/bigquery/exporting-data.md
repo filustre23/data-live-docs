@@ -926,7 +926,7 @@ extract_job.result()  # Waits for job to complete.
 
 如要瞭解擷取工作配額，請參閱「配額與限制」頁面的「[擷取工作](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#export_jobs)」一節。
 
-`INFORMATION_SCHEMA`會顯示擷取工作的用量。擷取工作的 `JOBS_BY_*` 系統資料表中的工作項目包含 `total_bytes_processed` 值，可用於監控匯總用量，確保用量維持在每天 50 TiB 以下。如要瞭解如何查詢 `INFORMATION_SCHEMA.JOBS` 檢視表以取得 `total_bytes_processed` 值，請參閱「[`INFORMATION_SCHEMA.JOBS` 結構定義](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw#schema)」
+`INFORMATION_SCHEMA`會顯示擷取工作的使用情形。擷取工作的 `JOBS_BY_*` 系統資料表中的工作項目包含 `total_bytes_processed` 值，可用於監控匯總用量，確保用量維持在每天 50 TiB 以下。如要瞭解如何查詢 `INFORMATION_SCHEMA.JOBS` 檢視表以取得 `total_bytes_processed` 值，請參閱「[`INFORMATION_SCHEMA.JOBS` 結構定義](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw#schema)」
 
 ### 查看目前的配額用量
 

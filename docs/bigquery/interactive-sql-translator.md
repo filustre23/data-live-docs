@@ -117,10 +117,10 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 這項產品或功能適用《[服務專屬條款](https://docs.cloud.google.com/terms/service-terms?hl=zh-tw#1)》中「一般服務條款」一節的《正式發布前產品條款》。正式發布前的產品和功能是按照「原樣」提供，支援範圍可能有限。
 詳情請參閱[推出階段說明](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
 
-如要透過 Google Cloud CLI 翻譯查詢，請使用 [`gcloud alpha bq translation translate` 指令](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/translation/translate?hl=zh-tw)：
+如要透過 Google Cloud CLI 翻譯查詢，請使用 [`gcloud alpha bq migration translate` 指令](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/migration/translate?hl=zh-tw)：
 
 ```
-gcloud alpha bq translation translate \
+gcloud alpha bq migration translate \
   --source-dialect=SOURCE_DIALECT \
   --target-dialect=TARGET_DIALECT \
   --location=LOCATION \
@@ -139,7 +139,7 @@ gcloud alpha bq translation translate \
 如要翻譯查詢而不建立檔案，請透過標準輸入內容傳送查詢，並省略 `--input-file` 旗標：
 
 ```
-echo 'SELECT 1;' | gcloud alpha bq translation translate \
+echo 'SELECT 1;' | gcloud alpha bq migration translate \
   --source-dialect=teradata \
   --target-dialect=bigquery \
   --location=us
@@ -253,7 +253,7 @@ echo 'SELECT 1;' | gcloud alpha bq translation translate \
 1. 在查詢編輯器中，依序點選「工具」>「翻譯設定」。
 2. 在「Translation Configuration Source Location」(轉譯設定來源位置) 欄位中，指定 Cloud Storage 資料夾中儲存的轉譯設定檔路徑。
 
-   BigQuery 互動式 SQL 翻譯器支援中繼資料 ZIP 檔案，其中包含[翻譯中繼資料](https://docs.cloud.google.com/bigquery/docs/generate-metadata?hl=zh-tw)和[物件名稱對應](https://docs.cloud.google.com/bigquery/docs/output-name-mapping?hl=zh-tw#json_file_format)。如要瞭解如何將檔案上傳至 Cloud Storage，請參閱「[從檔案系統上傳物件](https://docs.cloud.google.com/storage/docs/uploading-objects?hl=zh-tw)」。
+   BigQuery 互動式 SQL 翻譯器支援中繼資料 ZIP 檔案，其中包含[翻譯中繼資料](https://docs.cloud.google.com/bigquery/docs/generate-metadata?hl=zh-tw)和[物件名稱對應](https://docs.cloud.google.com/bigquery/docs/output-name-mapping?hl=zh-tw)。如要瞭解如何將檔案上傳至 Cloud Storage，請參閱「[從檔案系統上傳物件](https://docs.cloud.google.com/storage/docs/uploading-objects?hl=zh-tw)」。
 3. 按一下「儲存」。
 
 ### 設定檔大小限制
@@ -326,11 +326,11 @@ where table1.id = table2.id;
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-01 (世界標準時間)。
+上次更新時間：2026-11-04 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-01 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-04 (世界標準時間)。"],[],[]]

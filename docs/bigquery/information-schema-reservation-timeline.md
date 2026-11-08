@@ -14,15 +14,15 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 你可以依據偏好儲存及分類內容。
 
-# RESERVATIONS\_TIMELINE 檢視畫面
+# RESERVATIONS\_TIMELINE 檢視表
 
-`INFORMATION_SCHEMA.RESERVATIONS_TIMELINE` 檢視畫面會即時顯示每個預留項目管理專案的預留項目中繼資料時間切片，此外，`per_second_details` 陣列會顯示每秒的自動調整規模詳細資料。
+`INFORMATION_SCHEMA.RESERVATIONS_TIMELINE` 檢視畫面會即時顯示每個預留項目管理專案每分鐘的預留項目中繼資料時間段。此外，`per_second_details` 陣列會顯示每秒的自動調度資源詳細資料。
 
-**注意：** 檢視區塊名稱 `INFORMATION_SCHEMA.RESERVATIONS_TIMELINE` 和 `INFORMATION_SCHEMA.RESERVATIONS_TIMELINE_BY_PROJECT` 是同義詞，可以互換使用。
+**注意：**檢視區塊名稱 `INFORMATION_SCHEMA.RESERVATIONS_TIMELINE`、`INFORMATION_SCHEMA.RESERVATIONS_TIMELINE_BY_PROJECT`、`INFORMATION_SCHEMA.RESERVATION_TIMELINE` 和 `INFORMATION_SCHEMA.RESERVATION_TIMELINE_BY_PROJECT` 是同義詞，可以交替使用。
 
 ## 必要權限
 
-如要查詢 `INFORMATION_SCHEMA.RESERVATIONS_TIMELINE` 檢視畫面，您需要專案的 `bigquery.reservations.list` Identity and Access Management (IAM) 權限。下列預先定義的 IAM 角色都包含必要權限：
+如要查詢 `INFORMATION_SCHEMA.RESERVATIONS_TIMELINE` 檢視表，您必須具備專案的 `bigquery.reservations.list` Identity and Access Management (IAM) 權限。下列每個預先定義的 IAM 角色都包含必要權限：
 
 * BigQuery 資源管理員 (`roles/bigquery.resourceAdmin`)
 * BigQuery 資源編輯者 (`roles/bigquery.resourceEditor`)
@@ -30,56 +30,55 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 * BigQuery 使用者 (`roles/bigquery.user`)
 * BigQuery 管理員 (`roles/bigquery.admin`)
 
-如要進一步瞭解 BigQuery 權限，請參閱 [BigQuery IAM 角色和權限](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)。
+如要進一步瞭解 BigQuery 權限，請參閱「[BigQuery IAM 角色和權限](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)」。
 
 ## 結構定義
 
-查詢 `INFORMATION_SCHEMA.RESERVATIONS_TIMELINE` 檢視表時，查詢結果會包含過去 180 天內，每分鐘的每個 BigQuery 預留項目各有一列，以及超過 180 天的任何預留項目變更，每分鐘各有一列。每個週期都從整分鐘間隔開始，且持續時間正好是一分鐘。
+查詢 `INFORMATION_SCHEMA.RESERVATIONS_TIMELINE` 檢視表時，查詢結果會包含過去 180 天內每項 BigQuery 預留項目每分鐘的一列資料，以及 180 天前發生預留項目變更的每分鐘一列資料。每個時段都從整分鐘間隔開始，持續時間剛好一分鐘。
 
 `INFORMATION_SCHEMA.RESERVATIONS_TIMELINE` 檢視表具有下列結構定義：
 
 | 資料欄名稱 | 資料類型 | 值 |
 | --- | --- | --- |
-| `autoscale` | `STRUCT` | 內含保留項目的自動調度容量相關資訊。欄位包括：   * `current_slots`：預訂可用的自動調度資源配額數量。   由於 `current_slots` 可能在一分鐘內更新多次，   請改用 `per_second_details.autoscale_current_slots`。   反映每秒的準確狀態。 此外，使用者減少 `max_slots` 後，可能需要一段時間才能傳播，因此 `current_slots` 可能會維持原始值，且在短時間內 (不到一分鐘) 可能會大於 `max_slots`。 * `max_slots`：自動調度資源可為預留項目新增的運算單元數量上限。 **附註：**如果經常變更 `max_slots`，建議改用 `per_second_details.autoscale_max_slots`。 |
-| `edition` | `STRING` | 與這項預訂相關聯的版本。如要進一步瞭解版本，請參閱「[BigQuery 版本簡介](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)」。 |
+| `autoscale` | `STRUCT` | 包含預留項目的自動調度資源容量資訊。欄位包括：   * `current_slots`：預留項目可用的自動調度資源運算單元數量。   由於 `current_slots` 可能會在一分鐘內更新多次，因此請改用 `per_second_details.autoscale_current_slots`。   反映每秒的準確狀態。 此外，使用者減少 `max_slots` 後，可能需要一段時間才能傳播，因此 `current_slots` 可能會維持原始值，並在短時間內 (不到一分鐘) 大於 `max_slots`。 * `max_slots`：自動調度資源功能可新增至預留項目的運算單元數量上限。 **注意：**如果您經常變更 `max_slots`，建議改用 `per_second_details.autoscale_max_slots`。 |
+| `edition` | `STRING` | 與這項預留項目相關聯的版本。如要進一步瞭解版本，請參閱「[BigQuery 版本簡介](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)」。 |
 | `ignore_idle_slots` | `BOOL` | 如果已啟用運算單元共用功能，則為 False，否則為 True。 |
-| `labels` | `RECORD` | 與預訂項目相關聯的標籤陣列。 |
-| `reservation_group_path` | `ARRAY<STRING>` | 預留項目連結的預留項目群組。 舉例來說，如果預訂項目連結至群組 `my-group`，`reservation_group_path` 欄位會包含類似 `[my-group]` 的清單。 |
-| `period_start` | `TIMESTAMP` | 這個一分鐘期間的開始時間。 |
-| `per_second_details` | `STRUCT` | 包含每秒的預訂容量和使用量資訊。欄位包括：   * `start_time`：秒的確切時間戳記。 * `autoscale_current_slots`：此秒保留項目可用的自動調度運算單元數量。   這個數字不含基準運算單元。   **注意：**減少 `max_slots` 時，變更可能不會立即生效。在這段短暫期間 (不到一分鐘)，`current_slots` 可能會維持原始值，高於 `max_slots` 的值。 * `autoscale_max_slots`：自動調度資源功能在這個時間點可為預留項目新增的運算單元數量上限。   這個數字不含基準運算單元。 * `slots_assigned`：在這個時間點指派給這項預留項目的運算單元數量。這等於預留項目的基準運算單元容量。 * `slots_max_assigned`：這個預留項目的運算單元數量上限，包括運算單元共用。如果 `ignore_idle_slots` 為 true，這個欄位與 `slots_assigned` 相同。否則，這個欄位會是管理專案中所有容量使用承諾或所有基準的總配額，以較大者為準。 * `borrowed_slots`：從閒置時段分享功能使用的時段數量。只有在 `ignore_idle_slots` 為 false，且這段時間內使用了閒置運算單元時，才會填入這個欄位。 * `lent_slots`：其他預留項目從這個預留項目的基準運算單元集區使用的運算單元數量。只有在 `ignore_idle_slots` 為 false，且其他預留項目在這段時間內使用了閒置運算單元時，才會填入這個欄位。   如果在這 1 分鐘內有任何自動調度資源或預訂異動，陣列會填入 60 列。不過，如果非自動調整規模的預訂項目在這 1 分鐘內維持不變，陣列就會是空白，否則會重複相同數字 60 次。 |
-| `project_id` | `STRING` | 預訂管理專案的 ID。 |
+| `labels` | `RECORD` | 與預留項目相關聯的標籤陣列。 |
+| `reservation_group_path` | `ARRAY<STRING>` | 預留項目連結的預留項目群組。舉例來說，如果預留項目連結至群組 `my-group`，`reservation_group_path` 欄位會包含類似 `[my-group]` 的清單。 |
+| `period_start` | `TIMESTAMP` | 這段一分鐘期間的開始時間。 |
+| `per_second_details` | `STRUCT` | 包含每秒預留容量和用量的相關資訊。欄位包括：   * `start_time`：秒的確切時間戳記。 * `autoscale_current_slots`：預留項目目前可用的自動調度資源運算單元數量。這個數字不含基準運算單元。   **注意：**減少 `max_slots` 後，變更可能不會立即生效。在這段短暫期間 (不到一分鐘)，`current_slots` 可能會維持原始值，而這個值可能高於 `max_slots` 的值。 * `autoscale_max_slots`：此時自動調度資源功能可新增至預留項目的運算單元數量上限。   這個數字不含基準運算單元。 * `slots_assigned`：目前指派給這項預留項目的運算單元數量。等於預留項目的基準運算單元數量。 * `slots_max_assigned`：這項預留項目的運算單元數量上限，包括運算單元共用。如果 `ignore_idle_slots` 為 true，這個欄位會與 `slots_assigned` 相同。否則，這個欄位會是管理專案中所有容量承諾或所有基準的運算單元總數，以較大者為準。 * `borrowed_slots`：透過閒置運算單元共用功能使用的運算單元數量。只有在 `ignore_idle_slots` 為 false，且在這一秒內使用閒置的運算單元時，系統才會填入這個欄位。 * `lent_slots`：其他預留項目從這個預留項目的基準運算單元集區中，使用的運算單元數量。只有在 `ignore_idle_slots` 為 false，且其他預留項目在這秒內使用閒置的運算單元時，才會填入這個欄位。   如果在這分鐘內有任何自動調度資源或預留項目變更，陣列就會填入 60 列。不過，如果非自動調度資源預留項目在這分鐘內保持不變，陣列就會是空白，否則會重複相同數字 60 次。 |
+| `project_id` | `STRING` | 預留管理專案的 ID。 |
 | `project_number` | `INTEGER` | 專案編號。 |
-| `reservation_id` | `STRING` | 用於與 jobs\_timeline 表格聯結。格式為 *project\_id*:*location*.*reservation\_name*。 |
-| `reservation_name` | `STRING` | 預訂名稱。 |
+| `reservation_id` | `STRING` | 用於與 jobs\_timeline 資料表彙整。格式為 *project\_id*:*location*.*reservation\_name*。 |
+| `reservation_name` | `STRING` | 預留項目名稱。 |
 | `slot_capacity` | `INTEGER` | 預留項目的基準運算單元數量。 |
 | `slots_assigned` | `INTEGER` | 指派給這個預留項目的運算單元數量。 |
-| `slots_max_assigned` | `INTEGER` | 這個預留項目的運算單元容量上限，包括運算單元共用。如為 true，這與 `slots_assigned` 相同，否則這是管理專案中所有容量使用承諾的運算單元總數。`ignore_idle_slots` |
-| `max_slots` | `INTEGER` | 這個預留項目可使用的運算單元數量上限，包括基準運算單元 (`slot_capacity`)、閒置運算單元 (如果 `ignore_idle_slots` 為 false)，以及自動調度運算單元。使用者會指定這個欄位，以使用[預訂預測功能](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#predictable)。 |
-| `scaling_mode` | `STRING` | 預留項目的縮放模式，決定預留項目如何從基準縮放至 `max_slots`。使用者會指定這個欄位，以使用[預訂預測功能](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#predictable)。 |
-| `period_autoscale_slot_seconds` | `INTEGER` | 自動調整功能在特定分鐘內收取的總時段秒數 (每個資料列對應一分鐘)。 |
-| `is_creation_region` | `BOOLEAN` | 指定目前區域是否為建立預訂的所在地。這個位置用於決定基準預留運算單元的價格。如果是容錯移轉[災難復原 (DR)](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery?hl=zh-tw) 預訂，`TRUE` 值表示原始主要位置；如果是非 DR 預訂，`TRUE` 值表示預訂位置。  如果不是容錯移轉預訂，這個值一律為 `TRUE`。容錯移轉預留項目：值取決於區域，原始主要區域為 `TRUE`，原始次要區域為 `FALSE`。 |
+| `slots_max_assigned` | `INTEGER` | 這項預留項目的運算單元數量上限，包括運算單元共用。如果 `ignore_idle_slots` 為 true，則這與 `slots_assigned` 相同，否則這是管理專案中所有容量承諾中的運算單元總數。 |
+| `max_slots` | `INTEGER` | 這項預留項目可使用的運算單元數量上限，包括基準運算單元 (`slot_capacity`)、閒置的運算單元 (如果 `ignore_idle_slots` 為 false) 和自動調度資源運算單元。使用者指定這個欄位，即可使用[預留項目可預測性功能](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#predictable)。 |
+| `scaling_mode` | `STRING` | 預留項目的擴充模式，決定預留項目如何從基準擴充至 `max_slots`。使用者指定這個欄位，即可使用[預留項目可預測性功能](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#predictable)。 |
+| `period_autoscale_slot_seconds` | `INTEGER` | 自動調度資源在特定分鐘內收費的運算單元秒數總計 (每個資料列對應一分鐘)。 |
+| `is_creation_region` | `BOOLEAN` | 指定目前區域是否為預留項目的建立位置。這個位置會用來決定基準預留項目運算單元的價格。如果是容錯移轉[災難復原 (DR)](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery?hl=zh-tw) 預留項目，`TRUE` 值代表原始主要位置；如果是非 DR 預留項目，`TRUE` 值則代表預留項目的位置。  如果是非容錯移轉預留項目，這個值一律為 `TRUE`。如果是容錯移轉預留項目，值會因區域而異：原始主要區域為 `TRUE`，原始次要區域為 `FALSE`。 |
 
-為確保穩定性，建議您在資訊結構定義查詢中明確列出資料欄，而非使用萬用字元 (`SELECT *`)。明確列出資料欄可避免基礎結構定義變更時，查詢中斷。
+為確保穩定性，建議您在資訊結構定義查詢中明確列出資料欄，而非使用萬用字元 (`SELECT *`)。明確列出資料欄可避免查詢在基礎結構定義變更時中斷。
 
 ## 範圍和語法
 
-對這個檢視表執行的查詢必須包含[區域限定詞](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw#syntax)。如未指定區域限定符，系統會從所有區域擷取中繼資料。下表說明這個檢視畫面的區域和資源範圍：
+對這個檢視表執行的查詢必須包含[區域限定詞](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw#syntax)。如未指定區域限定詞，系統會從所有區域擷取中繼資料。下表說明這個檢視畫面的區域和資源範圍：
 
 | 檢視表名稱 | 資源範圍 | 區域範圍 |
 | --- | --- | --- |
 | `` [PROJECT_ID.]`region-REGION`.INFORMATION_SCHEMA.RESERVATIONS_TIMELINE[_BY_PROJECT] `` | 專案層級 | `REGION` |
 
-取代下列項目：
+請替換下列項目：
 
-* 選用：`PROJECT_ID`：專案 ID。 Google Cloud 如未指定，系統會使用預設專案。
-* `REGION`：任何[資料集區域名稱](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
-  例如：`` `region-us` ``。**注意：**您必須使用[區域限定詞](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw#region_qualifier)查詢 `INFORMATION_SCHEMA` 檢視畫面。查詢執行位置必須與`INFORMATION_SCHEMA`檢視區塊的區域相符。
+* 選用：`PROJECT_ID`： Google Cloud 專案的 ID。如未指定，則會使用預設專案。
+* `REGION`：任何[資料集區域名稱](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。例如：`` `region-us` ``。**注意：**您必須使用[區域限定詞](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw#region_qualifier)，才能查詢 `INFORMATION_SCHEMA` 檢視表。查詢執行位置必須與 `INFORMATION_SCHEMA` 檢視表的區域相符。
 
 ## 範例
 
-#### 範例：查看每秒自動調度資源的次數
+#### 範例：查看每秒自動調度資源
 
-以下範例顯示所有工作每秒的 `YOUR_RESERVATION_ID` 自動調整規模：
+以下範例顯示所有工作的 `YOUR_RESERVATION_ID` 每秒自動調度資源：
 
 ```
 SELECT s.start_time, s.autoscale_current_slots
@@ -105,19 +104,19 @@ ORDER BY period_start, s.start_time
 ```
 
 
-**注意：**`period_start` 資料欄是分割區索引鍵，因此請務必依 `period_start` 篩選，提高查詢效率。
+**注意：**`period_start` 欄是分區鍵，因此請務必依 `period_start` 篩選，提高查詢效率。
 
 #### 範例：查看每秒的運算單元總用量
 
-如要對預設專案以外的專案執行查詢，請使用以下格式新增專案 ID：
+如要對預設專案以外的專案執行查詢，請按照下列格式新增專案 ID：
 
 ```
 `PROJECT_ID`.`region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_TIMELINE_BY_ORGANIZATION
 ```
 
-例如 `` `myproject`.`region-us`.INFORMATION_SCHEMA.JOBS_TIMELINE_BY_ORGANIZATION ``。
+例如：`` `myproject`.`region-us`.INFORMATION_SCHEMA.JOBS_TIMELINE_BY_ORGANIZATION ``。
 
-以下範例顯示指派給 `YOUR_RESERVATION_ID` 的專案在所有工作中的每秒時段用量：
+以下範例顯示指派給 `YOUR_RESERVATION_ID` 的專案在所有工作中每秒使用的運算單元：
 
 ```
 SELECT
@@ -160,9 +159,9 @@ ORDER BY
 
 #### 範例：各預留項目的運算單元用量
 
-以下範例顯示過去 1 天內每個預訂項目每秒的運算單元用量：
+以下範例顯示過去 1 天內，每個預留項目每秒的運算單元用量：
 
 ```
 SELECT
-  jobs.period_start
+  jobs
 ```

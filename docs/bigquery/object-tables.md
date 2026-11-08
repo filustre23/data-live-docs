@@ -119,12 +119,13 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 您或許還可透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)取得這些權限。
 
-**注意：**如果使用者只需查詢資料，則「不應」具備下列權限：
+**注意：**如果使用者只需要查詢資料，則**不應**具備下列權限：
 
-* Storage 物件檢視者角色授予的權限，可直接從 Cloud Storage 讀取物件。
+* 可直接從 Cloud Storage 讀取物件，由 Storage 物件檢視者角色授予。
 * 將資料表繫結至連線的能力，由 BigQuery 連線管理員角色授予。
+* 物件資料表連線的 [`bigquery.objectRefs.read`](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.objectRefs.read) 權限，由 BigQuery ObjectRef 讀取者和 BigQuery ObjectRef 管理員等角色授予。
 
-否則，使用者可以建立沒有任何存取控管機制的新物件資料表，藉此規避資料倉儲管理員設定的控管機制。
+否則，使用者可以不受限制地讀取基礎 Cloud Storage 物件或建立新的物件資料表，規避資料倉儲管理員設定的資料表層級和資料列層級存取控管機制。
 
 ## 建立資料集
 
@@ -156,17 +157,17 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 1. 前往「BigQuery」頁面
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 點選左側窗格中的 explore「Explorer」。
-3. 在「Explorer」窗格中，點選「add 新增資料」。
+2. 在左側窗格中，點選「資料庫」「資料探索工具」：
+3. 在「資料」窗格中，點選「新增資料」圖示 add。
 
-   「新增資料」對話方塊隨即開啟。
+   「Add data」(新增資料) 對話方塊隨即開啟。
 4. 在「篩選依據」窗格的「資料來源類型」部分，選取「業務應用程式」。
 
    或者，您也可以在「Search for data sources」(搜尋資料來源) 欄位中輸入 `Vertex AI`。
 5. 在「精選資料來源」部分，點選「Vertex AI」。
 6. 點選「Vertex AI Models: BigQuery Federation」解決方案資訊卡。
-7. 在「Connection type」(連線類型) 清單中，選取「Vertex AI remote models, remote functions, BigLake and Spanner (Cloud Resource)」(Vertex AI 遠端模型、遠端函式、BigLake 和 Spanner (Cloud 資源))。
-8. 在「Connection ID」(連線 ID) 欄位中，輸入連線名稱。
+7. 在「連線類型」清單中，選取「Vertex AI 遠端模型、遠端函式、BigLake 和 Spanner (Cloud 資源)」。
+8. 在「連線 ID」欄位中，輸入連線名稱。
 9. 在「位置類型」部分，選取「區域」或「多區域」。
 
    * 如果選取「Region」(區域)，請從「Region」(區域) 清單中選取位置。
@@ -189,7 +190,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
    「Add principals」(新增主體) 對話方塊隨即開啟。
 3. 在「新增主體」欄位，輸入先前複製的服務帳戶 ID。
 4. 在「Select a role」(請選擇角色) 欄位中，依序選取「Cloud Storage」和「Storage Object Viewer」(Storage 物件檢視者)。
-5. 按一下 [儲存]。
+5. 按一下「儲存」。
 
 ### gcloud
 
@@ -245,14 +246,14 @@ gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount
      您可以提供多個路徑，為 `uris` 選項指定多個 bucket，例如 `['gs://mybucket1/*', 'gs://mybucket2/folder5/*']`。為達到最佳效能，每個物件資料表最多只能指定 10 個 URI。如果提供超過 10 個 bucket URI，物件資料表可支援的檔案總數會減少。
 
      如要進一步瞭解如何在 BigQuery 中使用 Cloud Storage URI，請參閱「[Cloud Storage 資源路徑](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage?hl=zh-tw#google-cloud-storage-uri)」。
-   * `STALENESS_INTERVAL`：指定針對物件資料表執行的作業是否使用快取中繼資料，以及快取中繼資料必須有多新，作業才能使用。如要進一步瞭解中繼資料快取注意事項，請參閱「[中繼資料快取效能](https://docs.cloud.google.com/bigquery/docs/object-table-introduction?hl=zh-tw#metadata_caching_for_performance)」。
+   * `STALENESS_INTERVAL`：指定對物件資料表執行的作業是否使用快取中繼資料，以及快取中繼資料必須有多新，作業才能使用。如要進一步瞭解中繼資料快取注意事項，請參閱「[中繼資料快取效能](https://docs.cloud.google.com/bigquery/docs/object-table-introduction?hl=zh-tw#metadata_caching_for_performance)」。
 
      如要停用中繼資料快取功能，請指定 0。這是目前的預設做法。
 
-     如要啟用中繼資料快取功能，請指定介於 30 分鐘至 7 天之間的[間隔常值](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#interval_literals)。舉例來說，如要指定 4 小時的過時時間間隔，請指定 `INTERVAL 4 HOUR`。如果中繼資料在過去 4 小時內重新整理過，系統會使用快取的中繼資料，對資料表執行作業。如果快取的中繼資料超過這個時間，作業就會改為從 Cloud Storage 擷取中繼資料。
-   * `CACHE_MODE`：指定中繼資料快取要自動或手動重新整理。如要進一步瞭解中繼資料快取注意事項，請參閱「[中繼資料快取效能](https://docs.cloud.google.com/bigquery/docs/object-table-introduction?hl=zh-tw#metadata_caching_for_performance)」。
+     如要啟用中繼資料快取功能，請指定介於 30 分鐘至 7 天之間的[間隔常值](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#interval_literals)。舉例來說，如要指定 4 小時的過時時間間隔，請指定 `INTERVAL 4 HOUR`。如果中繼資料在過去 4 小時內重新整理過，系統會使用快取的中繼資料，對資料表執行作業。如果快取的中繼資料超過這個時間，作業會改為從 Cloud Storage 擷取中繼資料。
+   * `CACHE_MODE`：指定中繼資料快取要自動或手動重新整理。如要進一步瞭解中繼資料快取的注意事項，請參閱「[中繼資料快取對效能的影響](https://docs.cloud.google.com/bigquery/docs/object-table-introduction?hl=zh-tw#metadata_caching_for_performance)」。
 
-     設為 `AUTOMATIC`，中繼資料快取就會按照系統定義的間隔重新整理，通常介於 30 到 60 分鐘之間。
+     設為 `AUTOMATIC`，中繼資料快取就會按照系統定義的間隔重新整理，通常是 30 到 60 分鐘。
 
      如要按照指定時間表重新整理中繼資料快取，請設為 `MANUAL`。在這種情況下，您可以呼叫 [`BQ.REFRESH_EXTERNAL_METADATA_CACHE` 系統程序](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures?hl=zh-tw#bqrefresh_external_metadata_cache)來重新整理快取。
 
@@ -319,7 +320,7 @@ PROJECT_ID:DATASET_ID.TABLE_NAME
 * `REGION`：連線所在的[區域或多區域](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#supported_locations)。
 * `CONNECTION_ID`：要與這個外部資料表搭配使用的 [Cloud 資源連結](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw) ID。連線會決定要使用哪個服務帳戶從 Cloud Storage 讀取資料。
 
-  在 Google Cloud 控制台[查看連線詳細資料](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw#view-connections)時，連線 ID 是「Connection ID」(連線 ID) 中顯示的完整連線 ID 最後一個部分的值，例如 `projects/myproject/locations/connection_location/connections/myconnection`。
+  在 Google Cloud 控制台中[查看連線詳細資料](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw#view-connections)時，連線 ID 是「Connection ID」(連線 ID) 中顯示的完整連線 ID 最後一個部分的值，例如 `projects/myproject/locations/connection_location/connections/myconnection`。
 * `BUCKET_PATH`：Cloud Storage bucket 的路徑，其中包含物件資料表代表的物件，格式為 `gs://bucket_name/[folder_name/]*`。
 
   您可以在每個路徑中使用一個星號 (`*`) 萬用字元，限制物件資料表包含的物件。舉例來說，如果 bucket 包含多種非結構化資料，您可以指定 `gs://bucket_name/*.pdf`，只針對 PDF 物件建立物件資料表。詳情請參閱「[Cloud Storage URI 的萬用字元支援](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage?hl=zh-tw#wildcard-support)」。
@@ -327,14 +328,14 @@ PROJECT_ID:DATASET_ID.TABLE_NAME
   您可以提供多個路徑，為 `uris` 選項指定多個 bucket，例如 `gs://mybucket1/*,gs://mybucket2/folder5/*`。
 
   如要進一步瞭解如何在 BigQuery 中使用 Cloud Storage URI，請參閱「[Cloud Storage 資源路徑](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage?hl=zh-tw#google-cloud-storage-uri)」。
-* `STALENESS_INTERVAL`：指定針對物件資料表執行的作業是否使用快取中繼資料，以及快取中繼資料必須有多新，作業才能使用。如要進一步瞭解中繼資料快取注意事項，請參閱「[中繼資料快取效能](https://docs.cloud.google.com/bigquery/docs/object-table-introduction?hl=zh-tw#metadata_caching_for_performance)」。
+* `STALENESS_INTERVAL`：指定對物件資料表執行的作業是否使用快取中繼資料，以及快取中繼資料必須有多新，作業才能使用。如要進一步瞭解中繼資料快取注意事項，請參閱「[中繼資料快取效能](https://docs.cloud.google.com/bigquery/docs/object-table-introduction?hl=zh-tw#metadata_caching_for_performance)」。
 
   如要停用中繼資料快取功能，請指定 0。這是目前的預設做法。
 
-  如要啟用中繼資料快取功能，請指定 30 分鐘到 7 天之間的間隔值，並使用[`INTERVAL` 資料類型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#interval_type)說明文件中所述的 `Y-M D H:M:S` 格式。舉例來說，如要指定 4 小時的過時時間間隔，請指定 `0-0 0 4:0:0`。如果中繼資料在過去 4 小時內重新整理過，系統會使用快取的中繼資料，對資料表執行作業。如果快取的中繼資料超過這個時間，作業就會改為從 Cloud Storage 擷取中繼資料。
-* `CACHE_MODE`：指定中繼資料快取要自動或手動重新整理。如要進一步瞭解中繼資料快取注意事項，請參閱「[中繼資料快取效能](https://docs.cloud.google.com/bigquery/docs/object-table-introduction?hl=zh-tw#metadata_caching_for_performance)」。
+  如要啟用中繼資料快取功能，請指定 30 分鐘到 7 天之間的間隔值，並使用 [`INTERVAL` 資料類型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#interval_type)說明文件中所述的 `Y-M D H:M:S` 格式。舉例來說，如要指定 4 小時的過時時間間隔，請指定 `0-0 0 4:0:0`。如果中繼資料在過去 4 小時內重新整理過，則對資料表執行的作業會使用快取的中繼資料。如果快取的中繼資料超過這個時間，作業就會改為從 Cloud Storage 擷取中繼資料。
+* `CACHE_MODE`：指定中繼資料快取要自動或手動重新整理。如要進一步瞭解中繼資料快取的注意事項，請參閱「[中繼資料快取對效能的影響](https://docs.cloud.google.com/bigquery/docs/object-table-introduction?hl=zh-tw#metadata_caching_for_performance)」。
 
-  設為 `AUTOMATIC`，中繼資料快取就會按照系統定義的間隔重新整理，通常介於 30 到 60 分鐘之間。
+  設為 `AUTOMATIC`，中繼資料快取就會按照系統定義的間隔重新整理，通常是 30 到 60 分鐘。
 
   如要按照指定時間表重新整理中繼資料快取，請設為 `MANUAL`。在這種情況下，您可以呼叫 [`BQ.REFRESH_EXTERNAL_METADATA_CACHE` 系統程序](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures?hl=zh-tw#bqrefresh_external_metadata_cache)來重新整理快取。
 
@@ -392,7 +393,7 @@ https://www.googleapis.com/bigquery/v2/projects/my_project/datasets/my_dataset/t
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
-物件資料表要指定的索引鍵欄位為 [`google_bigquery_table.external_data_configuration.object_metadata`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_table.html#object_metadata)、[`google_bigquery_table.external_data_configuration.metadata_cache_mode`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_table.html#metadata_cache_mode) 和 [`google_bigquery_table.max_staleness`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_table.html#max_staleness)。如要進一步瞭解各項資源，請參閱 [Terraform BigQuery 說明文件](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_table.html)。
+物件資料表需要指定的索引鍵欄位為 [`google_bigquery_table.external_data_configuration.object_metadata`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_table.html#object_metadata)、[`google_bigquery_table.external_data_configuration.metadata_cache_mode`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_table.html#metadata_cache_mode) 和 [`google_bigquery_table.max_staleness`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_table.html#max_staleness)。如要進一步瞭解各項資源，請參閱 [Terraform BigQuery 說明文件](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_table.html)。
 
 ```
 # This queries the provider for project information.
@@ -462,7 +463,7 @@ resource "google_bigquery_table" "default" {
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
 2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
 
-   每個專案只需執行這個指令一次，而且可以在任何目錄中執行。
+   這項指令在每個專案中只需執行一次，且可在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
@@ -472,14 +473,14 @@ resource "google_bigquery_table" "default" {
 
 ## 準備目錄
 
-每個 Terraform 設定檔都必須有自己的目錄 (也稱為*根模組*)。
+每個 Terraform 設定檔都必須有自己的目錄 (也稱為「根模組」)。
 
 1. 在 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw) 中建立目錄，並在該目錄中建立新檔案。檔案名稱必須有 `.tf` 副檔名，例如 `main.tf`。在本教學課程中，這個檔案稱為 `main.tf`。
 
    ```
    mkdir DIRECTORY && cd DIRECTORY && touch main.tf
    ```
-2. 如果您正在進行教學課程，可以複製每個章節或步驟中的程式碼範例。
+2. 如果您正在按照教學課程操作，可以複製每個章節或步驟中的程式碼範例。
 
    將程式碼範例複製到新建立的 `main.tf`。
 
@@ -541,11 +542,11 @@ FROM mydataset.myobjecttable;
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-29 (世界標準時間)。
+上次更新時間：2026-11-06 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-06 (世界標準時間)。"],[],[]]

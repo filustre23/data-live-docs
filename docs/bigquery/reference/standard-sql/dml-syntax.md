@@ -317,5 +317,5 @@ the fields are
 ```
 INSERT dataset.DetailedInventory
 VALUES('top load washer', 10, FALSE, [(CURRENT_DATE, "comment1")], ("white","1 year",(30,40,28))),
-      ('front load washer', 20, FALSE, [(CURRENT_DATE, "comment1"
+      ('front load washer', 20, FALSE, [(CURRENT_DATE, "comment1")], ("beige"
 ```

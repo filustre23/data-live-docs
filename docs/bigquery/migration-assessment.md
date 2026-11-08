@@ -1198,9 +1198,9 @@ BigQuery 遷移評估會將評估結果寫入 BigQuery 中的資料表。開始�
 
 ### API
 
-使用定義的[工作流程](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/projects.locations.workflows?hl=zh-tw)呼叫 [`create`](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/projects.locations.workflows/create?hl=zh-tw) 方法。
+使用定義的[工作流程](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows?hl=zh-tw)呼叫 [`create`](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows/create?hl=zh-tw) 方法。
 
-接著，呼叫 [`start`](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/projects.locations.workflows/start?hl=zh-tw) 方法，啟動評估工作流程。
+接著，呼叫 [`start`](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows/start?hl=zh-tw) 方法，啟動評估工作流程。
 
 評估作業會在您先前建立的 BigQuery 資料集中建立資料表。您可以查詢這些資料表，取得現有資料倉儲中使用的資料表和查詢相關資訊。如要瞭解翻譯的輸出檔案，請參閱「[批次 SQL 翻譯器](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator?hl=zh-tw#explore_the_translation_output)」。
 
@@ -1215,7 +1215,7 @@ BigQuery 遷移評估會將評估結果寫入 BigQuery 中的資料表。開始�
 
 如要尋找、檢查資料集，並安全地與其他使用者共用，請參閱「[查詢遷移評估輸出表格](#query_assessment_output)」。
 
-這項功能預設為開啟，但您可以透過[公開 API](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/projects.locations.workflows/create?hl=zh-tw) 選擇不使用。
+這項功能預設為開啟，但您可以透過[公開 API](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows/create?hl=zh-tw) 選擇不使用。
 
 ### 評估作業詳細資料
 
@@ -1913,7 +1913,7 @@ Writer queue is full. Ignoring event
 
 您也可以進一步瞭解資料倉儲遷移作業的下列步驟：
 
-* [遷移作業總覽](https://docs.cloud.google.com/bigquery/docs/migration/migration-overview?hl=zh-tw)
+* [遷移作業總覽](https://docs.cloud.google.com/bigquery/docs/migration-intro?hl=zh-tw)
 * [結構定義與資料移轉總覽](https://docs.cloud.google.com/bigquery/docs/migration/schema-data-overview?hl=zh-tw)
 * [資料管道](https://docs.cloud.google.com/bigquery/docs/migration/pipelines?hl=zh-tw)
 * [批次 SQL 翻譯](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator?hl=zh-tw)
@@ -1928,11 +1928,11 @@ Writer queue is full. Ignoring event
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-30 (世界標準時間)。
+上次更新時間：2026-11-04 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-30 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-04 (世界標準時間)。"],[],[]]

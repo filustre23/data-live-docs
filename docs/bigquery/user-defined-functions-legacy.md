@@ -256,5 +256,12 @@ bq query --udf_resource=<file_path_or_URI> <sql_query>
 
 ```
 // UDF definition
-function urlDecode(row,
+function urlDecode(row, emit) {
+  emit({title: decodeHelper(row.title),
+        requests: row.num_requests});
+}
+
+// Helper function with error handling
+function decodeHelper(s) {
+  try {
 ```

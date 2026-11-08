@@ -588,4 +588,6 @@ BigQuery 資料表：
 BigQuery 檢視畫面：
 :   content\_owner\_claim\_ad\_revenue\_summary\_a1\_suffix
 
-#### 每週著
+#### 每週著作權聲明廣告收益摘要
+
+YouTube 報表：

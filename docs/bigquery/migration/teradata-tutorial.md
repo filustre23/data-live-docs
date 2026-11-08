@@ -350,5 +350,5 @@ SELECT
  AVG(l_discount) AS avg_disc,
  COUNT(*) AS count_order
 FROM tpch.lineitem
-WHERE l_shipdate BETWEEN <
+WHERE l_shipdate BETWEEN '1996-01-01' AND
 ```

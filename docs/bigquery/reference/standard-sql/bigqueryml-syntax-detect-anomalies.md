@@ -30,7 +30,7 @@ on the type of input data you want to analyze:
   + [Principal component analysis (PCA) models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-pca)
   + [Autoencoder models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder)
 
-If you don't want to manage your own times series anomaly detection model, you can
+If you don't want to manage your own time series anomaly detection model, you can
 use the
 [`AI.DETECT_ANOMALIES` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-detect-anomalies)
 with BigQuery ML's built-in
@@ -388,5 +388,7 @@ SELECT
 FROM
   ML.DETECT_ANOMALIES(MODEL `mydataset.my_autoencoder_model`,
     STRUCT(0.1 AS contamination),
-    TABLE `mydataset.mytable
+    TABLE `mydataset.mytable`)
 ```
+
+If the feature column names are `f1` and

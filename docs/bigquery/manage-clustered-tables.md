@@ -52,9 +52,9 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 在 [Google Cloud資源階層](https://docs.cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy?hl=zh-tw)中較高層級 (例如專案、資料夾或組織層級) 授予 IAM 角色，可讓實體存取廣泛的資源。舉例來說，在專案層級將角色授予實體，該實體就會獲得適用於整個專案中所有資料集的權限。
 
-在資料集層級授予角色，可指定實體在該特定資料集的資料表和檢視表上可執行的作業，即使實體沒有較高層級的存取權也一樣。如要瞭解如何設定資料集層級存取控管機制，請參閱「[控管資料集的存取權](https://docs.cloud.google.com/bigquery/docs/dataset-access-controls?hl=zh-tw)」。
+在資料集層級授予角色，可指定實體在該特定資料集的資料表和檢視表上可執行的作業，即使實體沒有較高層級的存取權也一樣。如要瞭解如何設定資料集層級存取控管機制，請參閱「[控管資料集的存取權](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam?hl=zh-tw)」。
 
-在資料表或檢視表層級授予角色，可指定實體在特定資料表和檢視表上可執行的作業，即使實體沒有較高層級的存取權也一樣。如要瞭解如何設定資料表層級存取控管機制，請參閱「[控管資料表和檢視表的存取權](https://docs.cloud.google.com/bigquery/docs/table-access-controls?hl=zh-tw)」。
+在資料表或檢視表層級授予角色，可指定實體在特定資料表和檢視表上可執行的作業，即使實體沒有較高層級的存取權也一樣。如要瞭解如何設定資料表層級存取控管機制，請參閱「[控管資料表和檢視表的存取權](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam?hl=zh-tw)」。
 
 您也可以建立 [IAM 自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)。建立自訂角色之後，您就能依據要讓實體執行的特定作業授予權限。
 
@@ -185,11 +185,11 @@ bq show --format=prettyjson mydataset.myclusteredtable
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-01 (世界標準時間)。
+上次更新時間：2026-11-04 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-01 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-04 (世界標準時間)。"],[],[]]

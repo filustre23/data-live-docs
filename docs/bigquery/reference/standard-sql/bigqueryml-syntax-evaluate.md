@@ -31,7 +31,7 @@ following:
 The `ML.EVALUATE` function syntax differs depending on the type of model that
 you use the function with. Choose the option appropriate for your use case.
 
-### Times series
+### Time series
 
 ```
 ML.EVALUATE(
@@ -509,4 +509,6 @@ ML.EVALUATE(
 
   The default value is `TEXT_GENERATION`.
 
-* `MAX_OUTPUT_TO`
+* `MAX_OUTPUT_TOKENS`: an `INT64` value that sets
+  the maximum number of tokens output by the model. Specify a lower value
+  for shorter res

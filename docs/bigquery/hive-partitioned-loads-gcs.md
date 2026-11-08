@@ -16,9 +16,9 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 載入外部分區資料
 
-BigQuery 可讓您從使用 Apache Hive 分區版面配置的 Cloud Storage 載入資料，並將分區鍵納入資料表的資料欄。*Hive 分區*是指將外部資料整理成多個檔案，並採用命名慣例，將檔案分成不同分區。
+BigQuery 可讓您從 Cloud Storage 載入使用 Apache Hive 分區版面配置的資料，並將分區鍵納入資料表的資料欄。*Hive 分區*是指將外部資料整理成多個檔案，並採用命名慣例，將檔案分成不同分區。
 
-根據預設，除非您明確建立[分區資料表](https://docs.cloud.google.com/bigquery/docs/partitioned-tables?hl=zh-tw)，否則資料載入 BigQuery 後不會分區。詳情請參閱「[支援的資料版面配置](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs?hl=zh-tw#supported_data_layouts)」。
+根據預設，除非您明確建立[分區資料表](https://docs.cloud.google.com/bigquery/docs/partitioned-tables?hl=zh-tw)，否則資料載入後不會在 BigQuery 中分區。詳情請參閱「[支援的資料版面配置](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs?hl=zh-tw#supported_data_layouts)」。
 
 ## 載入 Hive 分區資料
 
@@ -31,16 +31,16 @@ BigQuery 可讓您從使用 Apache Hive 分區版面配置的 Cloud Storage 載�
    [前往 BigQuery](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
 3. 在「Explorer」窗格中展開專案，點選「資料集」，然後選取資料集。
-4. 按一下 more\_vert「Actions」(動作)，然後點選「Create table」(建立資料表)。「建立資料表」窗格隨即開啟。
+4. 依序點選「動作」圖示 more\_vert 和「建立資料表」。「建立資料表」窗格隨即開啟。
 5. 在「Source」(來源) 部分，指定下列詳細資料：
 
-1. 在「建立資料表來源」部分，選取「Google Cloud Storage」。
-2. 在「Select file from Cloud Storage bucket」(從 Cloud Storage bucket 選取檔案) 部分，使用[萬用字元](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#load-wildcards)輸入 Cloud Storage 資料夾的路徑。例如：`my_bucket/my_files*`。Cloud Storage bucket 必須與資料集位於相同位置，而該資料集包含您要建立、附加或覆寫的資料表。
+1. 在「Create table from」部分，選取「Google Cloud Storage」。
+2. 在「Select file from Cloud Storage bucket」(從 Cloud Storage bucket 選取檔案) 部分，使用[萬用字元](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#load-wildcards)輸入 Cloud Storage 資料夾的路徑。例如：`my_bucket/my_files*`。Cloud Storage bucket 必須與資料集位於相同位置，且該資料集包含您要建立、附加或覆寫的資料表。
 3. 從「File format」(檔案格式) 清單中選取檔案類型。
 4. 勾選「Source data partitioning」(來源資料分區) 核取方塊，然後在「Select Source URI Prefix」(選取來源 URI 前置字元) 中輸入 Cloud Storage URI 前置字元。例如：`gs://my_bucket/my_files`。
 5. 在「Partition inference mode」(分區推論模式) 部分，選取下列其中一個選項：
    * **自動推論類型**：將分區結構定義偵測模式設為 `AUTO`。
-   * **將所有資料欄視為字串**：將分區架構偵測模式設為 `STRINGS`。
+   * **將所有資料欄視為字串**：將分區結構定義偵測模式設為 `STRINGS`。
    * 「Provide my own」(自行提供)：將分區結構定義偵測模式設為 `CUSTOM`，並手動輸入分區索引鍵的結構定義資訊。詳情請參閱「[提供自訂分區索引鍵結構定義](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs?hl=zh-tw#custom_partition_key_schema)」。
 6. 選用：如要對這個資料表的所有查詢要求分區篩選器，請勾選「Require partition filter」(必須使用分區篩選器) 核取方塊。規定必須使用分區篩選器，或許可以降低費用及提高成效。詳情請參閱「[在查詢中要求對分區索引鍵使用述詞篩選器](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-queries-gcs?hl=zh-tw#requiring_predicate_filters_on_partition_keys_in_queries)」。
 
@@ -62,7 +62,7 @@ BigQuery 可讓您從使用 Apache Hive 分區版面配置的 Cloud Storage 載�
 
 ### bq
 
-使用自動偵測分區索引鍵類型功能，載入 Hive 分區資料：
+使用自動分區索引鍵類型偵測功能，載入 Hive 分區資料：
 
 ```
 bq load --source_format=ORC --hive_partitioning_mode=AUTO \
@@ -95,9 +95,9 @@ dataset.table gcs_uris file_schema
 
 ### API
 
-只要在 [`JobConfigurationLoad`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#jobconfigurationload) 上設定 [`HivePartitioningOptions`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables?hl=zh-tw#hivepartitioningoptions)，即可支援 Hive 分區。
+如要支援 Hive 分區，請在 [`JobConfigurationLoad`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#jobconfigurationload) 上設定 [`HivePartitioningOptions`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables?hl=zh-tw#hivepartitioningoptions)。
 
-**注意：** 如果 `hivePartitioningOptions.mode` 設為 `CUSTOM`，您必須在 `hivePartitioningOptions.sourceUriPrefix` 欄位中編碼分區索引鍵結構定義，如下所示：
+**注意：**如果 `hivePartitioningOptions.mode` 設為 `CUSTOM`，您必須在 `hivePartitioningOptions.sourceUriPrefix` 欄位中編碼分區索引鍵結構定義，如下所示：
 `gs://BUCKET/PATH_TO_TABLE/{KEY1:TYPE1}/{KEY2:TYPE2}/...`
 
 ## 執行增量載入
@@ -114,31 +114,31 @@ gs://my_bucket/my_table/dt=2016-10-31/val=4/file4
 如要僅載入 2019-10-31 的資料，請按照下列步驟操作：
 
 * 將「Hive partitioning mode」(Hive 分區模式) 設為 `AUTO`、`STRINGS` 或 `CUSTOM`。
-* 將 `AUTO` 或 `STRINGS` Hive 分區模式的來源 URI 前置字串設為 `gs://my_bucket/my_table/`。如果是 CUSTOM，請提供 `gs://my_bucket/my_table/{dt:DATE}/{val:INTEGER}`。
+* 將來源 URI 前置字串設為 `gs://my_bucket/my_table/`，用於 `AUTO` 或 `STRINGS` Hive 分區模式。如果是 CUSTOM，請提供 `gs://my_bucket/my_table/{dt:DATE}/{val:INTEGER}`。
 * 使用 URI `gs://my_bucket/my_table/dt=2019-10-31/*`。
 * 資料載入時會包含 `dt` 和 `val` 資料欄，分別具有 `2019-10-31` 和 `1` 值。
 
 如要僅載入特定檔案中的資料，請按照下列步驟操作：
 
 * 將「Hive partitioning mode」(Hive 分區模式) 設為 `AUTO`、`STRINGS` 或 `CUSTOM`。
-* 將 `AUTO` 或 `STRINGS` Hive 分區模式的來源 URI 前置字串設為 `gs://my_bucket/my_table/`。如果是 `CUSTOM`，請提供 `gs://my_bucket/my_table/{dt:DATE}/{val:INTEGER}`。
+* 將來源 URI 前置字串設為 `gs://my_bucket/my_table/`，用於 `AUTO` 或 `STRINGS` Hive 分區模式。如果是 `CUSTOM`，請提供 `gs://my_bucket/my_table/{dt:DATE}/{val:INTEGER}`。
 * 使用 URI `gs://my_bucket/my_table/dt=2017-10-31/val=3/file3,gs://my_bucket/my_table/dt=2016-10-31/val=4/file4`。
 * 資料已從兩個檔案載入，且 `dt` 和 `val` 資料欄已填入。
 
 ## 分區結構定義
 
-以下各節將說明 BigQuery 支援的[預設 Hive 分區版面配置](#supported_data_layouts)和[結構定義偵測模式](#detection_modes)。
+以下各節說明 BigQuery 支援的[預設 Hive 分區版面配置](#supported_data_layouts)和[結構定義偵測模式](#detection_modes)。
 
 ### 支援的資料配置
 
-從 Cloud Storage 查詢資料時，Hive 分區索引鍵會顯示為一般資料欄。資料必須採用預設的 Hive 分區版面配置。舉例來說，下列檔案採用預設版面配置，鍵/值組合設為目錄，並以等號 (=) 做為分隔符號，且分區鍵一律按照相同順序排列：
+從 Cloud Storage 查詢資料時，Hive 分區索引鍵會顯示為一般資料欄。資料必須採用預設的 Hive 分區版面配置。舉例來說，下列檔案遵循預設版面配置，鍵/值組合會設為目錄，並以等號 (=) 做為分隔符，且分區鍵一律按照相同順序排列：
 
 ```
 gs://my_bucket/my_table/dt=2019-10-31/lang=en/my_filename
 gs://my_bucket/my_table/dt=2018-10-31/lang=fr/my_filename
 ```
 
-在本範例中，共同來源 URI 前置字串為 `gs://my_bucket/my_table`。
+本範例中的通用來源 URI 前置字串為 `gs://my_bucket/my_table`。
 
 ### 不支援的資料配置
 
@@ -174,13 +174,13 @@ BigQuery 支援三種 Hive 分區結構定義偵測模式：
 
 #### 自訂分區索引鍵結構定義
 
-如要使用 `CUSTOM` 結構定義，您必須在來源 URI 前置字串欄位中指定結構定義。使用 `CUSTOM` 結構定義，即可指定每個分區索引鍵的類型。這些值必須能有效剖析為指定類型，否則查詢會失敗。
+如要使用 `CUSTOM` 結構定義，您必須在來源 URI 前置字元欄位中指定結構定義。使用 `CUSTOM` 結構定義，即可指定每個分區索引鍵的類型。這些值必須能有效剖析為指定類型，否則查詢會失敗。
 
-舉例來說，如果將 `source_uri_prefix` 旗標設為 `gs://my_bucket/my_table/{dt:DATE}/{val:STRING}`，BigQuery 會將 `val` 視為 STRING，將 `dt` 視為 DATE，並使用 `gs://my_bucket/my_table` 做為相符檔案的來源 URI 前置字串。
+舉例來說，如果將 `source_uri_prefix` 旗標設為 `gs://my_bucket/my_table/{dt:DATE}/{val:STRING}`，BigQuery 會將 `val` 視為 STRING、`dt` 視為 DATE，並使用 `gs://my_bucket/my_table` 做為相符檔案的來源 URI 前置字串。
 
 ## 限制
 
-* Hive 分區支援功能假設所有 URI 都有共同的來源 URI 前置字串，且該前置字串會在分區編碼之前結束，如下所示：`gs://BUCKET/PATH_TO_TABLE/`。
+* Hive 分區支援功能假設所有 URI 都有共同的來源 URI 前置字串，且該前置字串會在分區編碼前立即結束，如下所示：`gs://BUCKET/PATH_TO_TABLE/`。
 * Hive 分區資料表的目錄結構應具有相同的分區鍵，且分區鍵的順序相同，每個資料表最多可有十個分區鍵。
 * 資料必須採用[預設 Hive 分區版面配置](#supported_data_layouts)。
 * Hive 分區鍵和基礎檔案中的資料欄不得重疊。
@@ -199,11 +199,11 @@ BigQuery 支援三種 Hive 分區結構定義偵測模式：
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-29 (世界標準時間)。
+上次更新時間：2026-11-04 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-04 (世界標準時間)。"],[],[]]

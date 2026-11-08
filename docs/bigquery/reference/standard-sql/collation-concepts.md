@@ -351,5 +351,5 @@ SELECT STARTS_WITH(col_b_expression, col_c_expression)
 FROM table_a;
 
 -- This runs. Column 'a' and 'd' have the same collation specification.
-SELECT STARTS_WITH(col_a_expression
+SELECT STARTS_WITH(col_a_expression, col_d_expression)
 ```

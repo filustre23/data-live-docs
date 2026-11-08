@@ -27,21 +27,21 @@ Campaign Manager 連接器適用的 BigQuery 資料移轉服務，支援下列�
 | 資料移轉選項 | 支援 |
 | --- | --- |
 | 受支援的報表 | Campaign Manager 連接器支援從下列報表移轉資料：   * [資料移轉 2.0 版 (Campaign Manager DTv2) 檔案](https://developers.google.com/doubleclick-advertisers/dtv2/reference/file-format?hl=zh-tw) * [資料移轉 2.0 版 (Campaign Manager DTv2) 對照表](https://developers.google.com/doubleclick-advertisers/dtv2/reference/match-tables?hl=zh-tw) |
-| 重複頻率 | Campaign Manager 連接器支援每 8 小時移轉一次資料。    根據預設，Campaign Manager 資料移轉作業會排定在建立資料移轉作業時執行。 |
+| 重複頻率 | Campaign Manager 連接器支援每 8 小時移轉一次資料。    根據預設，Campaign Manager 資料移轉作業會安排在建立資料移轉作業時執行。 |
 | 重新整理時間範圍 | Campaign Manager 連接器會在執行資料移轉時，擷取最多 2 天前的 Campaign Manager 資料。您無法設定這個連接器的重新整理時間範圍。    詳情請參閱「[重新整理時間範圍](#refresh)」。 |
 | 補充資料可用性 | [執行資料補充作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)，擷取排定資料移轉作業以外的資料。只要在資料來源的資料保留政策允許範圍內，即可擷取歷來資料。    如要瞭解 Display & Video 360 的資料保留政策，請參閱「[資料刪除和保留控制項](https://support.google.com/campaignmanager/answer/10769131?hl=zh-tw)」。 |
 
 ## 從 Campaign Manager 移轉作業擷取資料
 
-將資料從 Campaign Manager 移轉至 BigQuery 時，系統會將資料載入依日期分區的 BigQuery 資料表。資料載入的資料表分區會對應至資料來源的日期。如果您在同一天安排多項移轉作業，BigQuery 資料移轉服務會以最新資料覆寫該日期的分區。在同一天進行多次移轉或執行補充作業，不會產生重複資料，其他日期的分區也不會受到影響。
+將資料從 Campaign Manager 移轉至 BigQuery 時，資料會載入依日期分區的 BigQuery 資料表。資料載入的資料表分區會對應至資料來源的日期。如果您在同一天安排多項移轉作業，BigQuery 資料移轉服務會以最新資料覆寫該日期的分區。在同一天進行多次移轉或執行補充作業，不會產生重複資料，其他日期的分區也不會受到影響。
 
 ### 重新整理時間範圍
 
-「更新回溯期」是指資料移轉作業發生時，資料移轉作業擷取資料的天數。舉例來說，如果更新時間範圍為三天，且每天都會進行移轉，BigQuery 資料移轉服務會從來源資料表擷取過去三天的所有資料。在本例中，每日移轉作業執行時，BigQuery 資料移轉服務會建立新的 BigQuery 目的地資料表分區，並複製當天的來源資料表資料，然後自動觸發補充執行作業，使用過去兩天的來源資料表資料更新 BigQuery 目的地資料表分區。自動觸發的回填執行作業會覆寫或增量更新 BigQuery 目的地資料表，具體取決於 BigQuery 資料移轉服務連接器是否支援增量更新。
+「更新回溯期」是指資料移轉時，資料移轉作業擷取資料的天數。舉例來說，如果更新時間範圍為三天，且每天都會進行移轉，BigQuery 資料移轉服務會從來源資料表擷取過去三天的所有資料。在本例中，每日移轉作業執行時，BigQuery 資料移轉服務會建立新的 BigQuery 目的地資料表分區，並複製當天的來源資料表資料，然後自動觸發補充執行作業，使用過去兩天的來源資料表資料更新 BigQuery 目的地資料表分區。自動觸發的回填執行作業會覆寫或增量更新 BigQuery 目的地資料表，具體取決於 BigQuery 資料移轉服務連接器是否支援增量更新。
 
 首次執行資料移轉作業時，系統會擷取重新整理期間內的所有可用來源資料。舉例來說，如果更新時間範圍為三天，且您首次執行資料移轉作業，BigQuery 資料移轉服務會擷取三天內的所有來源資料。
 
-如要擷取重新整理時間範圍以外的資料 (例如歷來資料)，或從任何移轉中斷或缺漏中復原資料，您可以啟動或排定[補充執行作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)。
+如要擷取更新時間範圍以外的資料 (例如歷來資料)，或從任何移轉中斷或缺漏中復原資料，您可以啟動或排定[補充執行作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)。
 
 ## 事前準備
 
@@ -50,7 +50,7 @@ Campaign Manager 連接器適用的 BigQuery 資料移轉服務，支援下列�
 * 確認您已完成[啟用 BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service?hl=zh-tw)的所有必要動作。
 * [建立 BigQuery 資料集](https://docs.cloud.google.com/bigquery/docs/datasets?hl=zh-tw)，用於儲存 Campaign Manager 資料。
 * **確認貴機構有權存取 Campaign Manager 資料移轉**
-  **第 2 版 (Campaign Manager DTv2) 檔案。**這些檔案會由 Campaign Manager 團隊傳送至 Cloud Storage bucket。如要存取 Campaign Manager DTv2 檔案，請根據您是否與 Campaign Manager 直接簽訂合約，採取相應的後續步驟。無論是哪一種情況，都可能需要支付額外費用。
+  **第 2 版 (Campaign Manager DTv2) 檔案。**Campaign Manager 團隊會將這些檔案傳送至 Cloud Storage bucket。如要存取 Campaign Manager DTv2 檔案，請根據您是否與 Campaign Manager 直接簽訂合約，採取相應的後續步驟。無論是哪一種情況，都可能需要支付額外費用。
 
   + 如果您與 Campaign Manager 簽訂合約，請與 [Campaign Manager 支援團隊](https://support.google.com/campaignmanager/answer/9026876?amp%3Bref_topic=2834087&%3Bvisit_id=1-636444821343154346-869320595&%3Brd=2&hl=zh-tw)聯絡，設定 Campaign Manager DTv2 檔案。
   + 如果您**未**與 Campaign Manager 簽訂合約，您的代理商或 Campaign Manager 經銷商可能可以存取 Campaign Manager DTv2 檔案。請與您的代理商或經銷商聯絡，以便取得這些檔案的存取權。
@@ -59,10 +59,7 @@ Campaign Manager 連接器適用的 BigQuery 資料移轉服務，支援下列�
 
   `dcdt_-dcm_account123456`
 
-   Google Cloud 團隊無法代您產生或授予 Campaign Manager DTv2 檔案的存取權。請與
-  Campaign Manager [支援團隊](https://support.google.com/campaignmanager/answer/9026876?ref_topic=2834087&visit_id=1-636444821343154346-869320595&rd=2&hl=zh-tw)、
-  代理商或 Campaign Manager 經銷商聯絡，取得 Campaign
-  Manager DTv2 檔案的存取權。
+   Google Cloud 團隊無法代您產生或授予 Campaign Manager DTv2 檔案的存取權。請與 Campaign Manager [支援團隊](https://support.google.com/campaignmanager/answer/9026876?ref_topic=2834087&visit_id=1-636444821343154346-869320595&rd=2&hl=zh-tw)、代理商或 Campaign Manager 經銷商聯絡，取得 Campaign Manager DTv2 檔案的存取權。
 * 如果您想要為 Pub/Sub 設定移轉作業執行通知，您必須擁有`pubsub.topics.setIamPolicy` 權限。詳情請參閱「[BigQuery 資料移轉服務執行通知](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications?hl=zh-tw)」。
 
 ## 所需權限
@@ -71,7 +68,7 @@ Campaign Manager 連接器適用的 BigQuery 資料移轉服務，支援下列�
 
 ### 必要的 BigQuery 角色
 
-如要取得建立 BigQuery 資料移轉服務資料移轉作業所需的權限，請要求管理員授予您專案的 [BigQuery 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.admin)  (`roles/bigquery.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得建立 BigQuery 資料移轉服務資料移轉作業所需的權限，請要求管理員授予您專案的 [BigQuery 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.admin) (`roles/bigquery.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
 這個預先定義的角色具備建立 BigQuery 資料移轉服務資料移轉作業所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
@@ -145,14 +142,14 @@ Campaign Manager 連接器適用的 BigQuery 資料移轉服務，支援下列�
    * 在「Destination settings」(目的地設定) 部分，「Destination dataset」(目的地資料集) 請選取您為了儲存資料而建立的資料集。
    * 在「Data source details」(資料來源詳細資料) 區段：
 
-     + 在「Cloud Storage bucket」輸入或瀏覽用來儲存 Data Transfer V2.0 檔案的 Cloud Storage bucket 名稱。輸入 bucket 名稱時，請勿加入 `gs://`。
+     + 在「Cloud Storage bucket」輸入或瀏覽用來儲存 Data Transfer 2.0 檔案的 Cloud Storage bucket 名稱。輸入 bucket 名稱時，請勿加入 `gs://`。
      + 在「DoubleClick ID」輸入合適的 Campaign Manager ID。
      + (選用步驟) 如果檔案內含[類似這些範例的標準名稱](https://docs.cloud.google.com/bigquery/docs/doubleclick-campaign-transfer?hl=zh-tw#find-id)，請將 「File name prefix」(檔案名稱前置字串) 欄位留空。如果 Cloud Storage bucket 中的檔案有自訂檔案名稱，請指定[檔案名稱前置字串](https://docs.cloud.google.com/bigquery/docs/doubleclick-campaign-transfer?hl=zh-tw#filename-prefix)。
    * (選用) 在「Notification options」(通知選項) 區段中：
 
      + 按一下啟用電子郵件通知的切換開關。啟用這個選項之後，若移轉失敗，移轉作業管理員就會收到電子郵件通知。
      + 在「Select a Pub/Sub topic」(選取 Pub/Sub 主題) 選取[主題](https://docs.cloud.google.com/pubsub/docs/overview?hl=zh-tw)名稱，或是點選「Create a topic」(建立主題)。這個選項會針對移轉作業設定 Pub/Sub 執行[通知](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications?hl=zh-tw)。
-4. 按一下 [儲存]。
+4. 按一下「儲存」。
 
 ### bq
 
@@ -184,7 +181,7 @@ bq mk --transfer_config \
 
 您還可以提供 `--project_id` 標記來指定特定專案。如果未指定 `--project_id`，系統會採用預設專案。
 
-舉例來說，下列指令會使用 Campaign Manager ID `123456`、Cloud Storage bucket `dcdt_-dcm_account123456` 和目標資料集 `mydataset`，建立名為 `My Transfer` 的 Campaign Manager 資料移轉作業。`file_name_prefix` 參數為選用，僅用於少見的自訂檔案名稱。
+舉例來說，下列指令會使用 Campaign Manager ID `123456`、Cloud Storage bucket `dcdt_-dcm_account123456` 和目標資料集 `mydataset`，建立名為 `My Transfer` 的 Campaign Manager 資料移轉作業。`file_name_prefix` 參數為選用，僅用於不常見的自訂檔案名稱。
 
 資料移轉作業會在預設專案中建立：
 
@@ -203,7 +200,7 @@ follow the instructions to retrieve an authentication code.`
 
 請按照指示進行操作，並在指令列中貼上驗證碼。
 
-**注意：** 使用指令列工具建立 Campaign Manager 資料移轉作業時，系統會使用「Schedule」(排程) 的預設值 (每 8 小時) 設定移轉設定。
+**注意：**使用指令列工具建立 Campaign Manager 資料移轉作業時，系統會使用「Schedule」(排程) 的預設值 (每 8 小時) 設定移轉設定。
 
 ### API
 
@@ -218,5 +215,5 @@ follow the instructions to retrieve an authentication code.`
 ```
 import com.google.api.gax.rpc.ApiException;
 import com.google.cloud.bigquery.datatransfer.v1.CreateTransferConfigRequest;
-import com.google.cloud.bigquery.datatransfer.v1.
+import com.google.cloud.bigquery.datatransfer.v1.DataTransfe
 ```

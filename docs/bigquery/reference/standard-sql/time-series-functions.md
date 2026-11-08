@@ -380,3 +380,7 @@ OPTIONS(enable_change_history=true);
 ```
 
 Insert two rows into the table:
+
+```
+INSERT
+```

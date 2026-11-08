@@ -28,7 +28,7 @@ BigQuery 中的 Cloud SQL [連線](https://docs.cloud.google.com/bigquery/docs/c
    [啟用 API](https://console.cloud.google.com/apis/library/bigqueryconnection.googleapis.com?hl=zh-tw)
 3. 確認 Cloud SQL 執行個體具有[公開 IP 連線](https://docs.cloud.google.com/sql/docs/mysql/configure-ip?hl=zh-tw)或[私人連線](https://docs.cloud.google.com/sql/docs/mysql/configure-private-ip?hl=zh-tw)：  
    * 如要保護 Cloud SQL 執行個體，您可以新增公開 IP 連線，而不指定授權位址。這樣一來，執行個體就無法透過公開網際網路存取，但可供 BigQuery 查詢。
-   * 如要讓 BigQuery 透過私人連線存取 Cloud SQL 資料，請為[新](https://docs.cloud.google.com/sql/docs/mysql/configure-private-ip?hl=zh-tw#new-private-instance)或[現有](https://docs.cloud.google.com/sql/docs/mysql/configure-private-ip?hl=zh-tw#existing-private-instance) Cloud SQL 執行個體設定私人 IP 連線，然後勾選「啟用私人路徑」核取方塊。這項服務使用內部直接路徑，而非虛擬私有雲中的私人 IP 位址。
+   * 如要讓 BigQuery 透過私人連線存取 Cloud SQL 資料，請為[新](https://docs.cloud.google.com/sql/docs/mysql/configure-private-ip?hl=zh-tw#new-private-instance)或[現有](https://docs.cloud.google.com/sql/docs/mysql/configure-private-ip?hl=zh-tw#existing-private-instance) Cloud SQL 執行個體設定私人 IP 連線，然後勾選「啟用私人路徑」核取方塊。這項服務使用內部直接路徑，而非虛擬私有雲內的私人 IP 位址。
 4. 如要取得建立 Cloud SQL 連線所需的權限，請要求管理員授予您專案的 [BigQuery 連線管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.connectionAdmin)  (`roles/bigquery.connectionAdmin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
    您或許也能透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)，取得必要權限。
@@ -44,7 +44,7 @@ BigQuery 中的 Cloud SQL [連線](https://docs.cloud.google.com/bigquery/docs/c
 1. 前往「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在「Explorer」窗格中，點選「add 新增」。
+2. 在「資料」窗格中，點選「新增資料」圖示 add。
 
    「新增資料」對話方塊隨即開啟。
 3. 在「篩選依據」窗格的「資料來源類型」部分，選取「資料庫」。
@@ -180,7 +180,7 @@ public class CreateConnection {
 
 ## 將存取權授予服務代理
 
-在專案中首次建立 Cloud SQL 連線時，系統會自動建立[服務代理](https://docs.cloud.google.com/iam/docs/service-agents?hl=zh-tw)。服務代理的名稱為「BigQuery Connection Service Agent」。如要取得服務代理程式 ID，請[查看連線詳細資料](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw#view-connections)。服務代理 ID 的格式如下：
+在專案中首次建立 Cloud SQL 連線時，系統會自動建立[服務代理](https://docs.cloud.google.com/iam/docs/service-agents?hl=zh-tw)。服務代理的名稱為「BigQuery Connection Service Agent」(BigQuery 連線服務代理)。如要取得服務代理程式 ID，請[查看連線詳細資料](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw#view-connections)。服務代理 ID 的格式如下：
 
 `service-PROJECT_NUMBER@gcp-sa-bigqueryconnection.iam.gserviceaccount.com`。
 
@@ -196,12 +196,12 @@ public class CreateConnection {
 1. 前往「IAM & Admin」(IAM 與管理) 頁面。
 
    [前往「IAM & Admin」(IAM 與管理) 頁面](https://console.cloud.google.com/project/_/iam-admin?hl=zh-tw)
-2. 按一下 person\_add「Grant Access」(授予存取權)。
+2. 點選 person\_add「授予存取權」。
 
    「Add principals」(新增主體) 對話方塊隨即開啟。
 3. 在「New principals」(新增主體) 欄位中，輸入服務代理名稱「BigQuery Connection Service Agent」(BigQuery 連線服務代理)，或從[連線資訊](https://docs.cloud.google.com/bigquery/docs/working-with-connections?hl=zh-tw#view-connections)取得的服務代理 ID。
 4. 在「Select a role」(選取角色) 欄位中，依序選取「Cloud SQL」和「Cloud SQL Client」(Cloud SQL 用戶端)。
-5. 按一下 [儲存]。
+5. 按一下「儲存」。
 
 ### gcloud
 
@@ -222,7 +222,7 @@ gcloud projects add-iam-policy-binding PROJECT_ID --member=serviceAccount:SERVIC
 
 您可以授予下列角色，讓使用者查詢資料及管理連結：
 
-* `roles/bigquery.connectionUser`：可讓使用者透過連線，連至外部資料來源並執行查詢。
+* `roles/bigquery.connectionUser`：可讓使用者透過連線連結外部資料來源，並對這些來源執行查詢。
 * `roles/bigquery.connectionAdmin`：可讓使用者管理連線。
 
 如要進一步瞭解 BigQuery 的 IAM 角色和權限，請參閱「[預先定義的角色和權限](https://docs.cloud.google.com/bigquery/access-control?hl=zh-tw)」。
@@ -235,7 +235,7 @@ gcloud projects add-iam-policy-binding PROJECT_ID --member=serviceAccount:SERVIC
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 
-   連線會列在專案的「連線」群組中。
+   連線會列在專案中名為「連線」的群組。
 2. 點選左側窗格中的 explore「Explorer」。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
@@ -243,7 +243,7 @@ gcloud projects add-iam-policy-binding PROJECT_ID --member=serviceAccount:SERVIC
 4. 在「詳細資料」窗格中，按一下「共用」即可共用連線。接著，按照下列步驟操作：
 
    1. 在「Connection permissions」(連線權限) 對話方塊中，新增或編輯主體，與其他主體共用連線。
-   2. 按一下 [儲存]。
+   2. 按一下「儲存」。
 
 ### bq
 
@@ -315,11 +315,11 @@ public class ShareConnection {
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-29 (世界標準時間)。
+上次更新時間：2026-11-03 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-03 (世界標準時間)。"],[],[]]

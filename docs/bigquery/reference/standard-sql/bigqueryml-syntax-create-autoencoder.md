@@ -530,3 +530,5 @@ batch_norm = False
 
 The `AS query_statement` clause specifies the
 GoogleSQL query used to generate the training data. See the
+[GoogleSQL query syntax](/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax)
+page for the supported SQL syntax of the `query_statement` clause.
