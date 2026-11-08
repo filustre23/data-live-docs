@@ -24,7 +24,7 @@ BigQuery 的 user-defined function (UDF) 可讓您使用 SQL 運算式或 JavaSc
 
 ## SQL UDF
 
-以下範例會建立名為 `AddFourAndDivide` 的臨時 SQL UDF，並從 `SELECT` 陳述式中呼叫 UDF：
+下列範例會建立名為 `AddFourAndDivide` 的臨時 SQL UDF，並從 `SELECT` 陳述式中呼叫 UDF：
 
 ```
 CREATE TEMP FUNCTION AddFourAndDivide(x INT64, y INT64)
@@ -76,7 +76,7 @@ FROM
 如果參數的類型等於 `ANY TYPE`，則在呼叫函式時，可以比對多個引數類型。
 
 * 如果有多個參數的類型為 `ANY TYPE`，BigQuery 不會強制執行這些引數之間的任何類型關係。
-* 函式傳回類型不得為 `ANY TYPE`。您必須省略這個屬性 (也就是根據 `sql_expression` 自動決定)，或明確指定類型。
+* 函式傳回類型不得為 `ANY TYPE`。您必須省略這個屬性 (系統會根據 `sql_expression` 自動判斷)，或明確指定類型。
 * 如果傳遞的函式引數類型與函式定義不相容，呼叫時就會發生錯誤。
 
 以下範例顯示使用範本參數的 SQL UDF。
@@ -201,8 +201,13 @@ AS (
 
 ### 搭配使用系統變數與 SQL UDF
 
-SQL UDF 支援 `@@session_id` 和 `@@location`
-[系統變數](https://docs.cloud.google.com/bigquery/docs/reference/system-variables?hl=zh-tw)。您可以在函式建立陳述式的任何位置加入這些系統變數，傳回目前查詢的工作階段 ID 或位置。不支援其他系統變數。
+SQL UDF 支援 `@@session_id` 和 `@@location` [系統變數](https://docs.cloud.google.com/bigquery/docs/reference/system-variables?hl=zh-tw)。您可以在函式建立陳述式的任何位置加入這些系統變數，傳回目前查詢的工作階段 ID 或位置。不支援其他所有系統變數。
+
+### 在持續查詢中使用 SQL UDF
+
+您可以在 [BigQuery 持續查詢](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction?hl=zh-tw)中呼叫永久或暫時 SQL UDF，封裝及重複使用自訂即時轉換邏輯。持續查詢僅支援 SQL UDF。不支援 JavaScript UDF、[Python UDF](https://docs.cloud.google.com/bigquery/docs/user-defined-functions-python?hl=zh-tw)、[遠端函式](https://docs.cloud.google.com/bigquery/docs/remote-functions?hl=zh-tw)和[使用者定義的匯總函式](https://docs.cloud.google.com/bigquery/docs/user-defined-aggregates?hl=zh-tw)。
+
+在持續查詢中使用 SQL UDF 時，UDF 的 SQL 運算式必須遵守所有[持續查詢限制](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction?hl=zh-tw#limitations)。此外，如果在參照永久 SQL UDF 的持續查詢執行期間，更新或刪除該 UDF，BigQuery 會終止持續查詢工作。如需更多資訊和範例，請參閱「[使用 SQL UDF](https://docs.cloud.google.com/bigquery/docs/continuous-queries?hl=zh-tw#use-sql-udfs)」。
 
 ## JavaScript UDF
 
@@ -310,7 +315,7 @@ FROM Input AS t;
 | STRUCT | OBJECT，其中每個 STRUCT 欄位都是已命名欄位 |
 | TIMESTAMP | DATE，其微秒欄位包含時間戳記的 `microsecond` 部分 |
 | DATE | DATE |
-| JSON | JSON 物件、陣列和值會轉換為對等的 JavaScript 物件、陣列和值。  JavaScript 不支援 INT64 值。只有 [-253, 253] 範圍內的 JSON 數字會完全轉換。否則，數值會四捨五入，可能導致精確度降低。 |
+| JSON | JSON 物件、陣列和值會轉換為對等的 JavaScript 物件、陣列和值。  JavaScript 不支援 INT64 值。只有範圍 [-253, 253] 內的 JSON 數字會精確轉換。否則，數值會四捨五入，可能導致精確度降低。 |
 
 因為 JavaScript 不支援 64 位元整數類型，因此 JavaScript UDF 也不支援使用 `INT64` 的輸入類型。請改用 `FLOAT64` 將整數值以數字表示，或用 `STRING` 將整數值以字串表示。
 
@@ -320,7 +325,7 @@ BigQuery 不支援 `INT64` 做為 JavaScript UDF 中的傳回類型。在這種�
 
 ### 報價規則
 
-您必須使用引號包覆 JavaScript 程式碼。如果是單行程式碼片段，可以使用標準引號字串：
+您必須使用引號包覆 JavaScript 程式碼。如果程式碼片段只有一行，可以使用標準引號字串：
 
 ```
 CREATE TEMP FUNCTION plusOne(x FLOAT64)
@@ -377,7 +382,7 @@ FROM UNNEST(['Hannah', 'Max', 'Jakob']) AS names;
 +-----------------------+
 ```
 
-### 加入 JavaScript 程式庫
+### 包含 JavaScript 程式庫
 
 您可以使用 `OPTIONS` 區段來擴充 JavaScript UDF，您可以在這個部分指定 UDF 的外部程式碼庫。
 
@@ -401,7 +406,7 @@ SELECT myFunc(3.14, 'foo');
 
 **預先篩選輸入內容**
 
-如果輸入內容在傳遞至 JavaScript UDF 之前可以先篩選，查詢速度可能會更快，成本也更低。
+如果輸入內容在傳遞至 JavaScript UDF 之前可以先篩選，查詢速度可能會更快，費用也更低。
 
 **避免永久的可變動狀態**
 
@@ -471,7 +476,7 @@ JavaScript 處理環境限制了每個查詢可用的記憶體。
 
 ## 建立自訂遮蓋常式
 
-**注意：** 如果預留項目是以特定 BigQuery 版本建立，可能無法使用這項功能。如要進一步瞭解各版本啟用的功能，請參閱「[BigQuery 版本簡介](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)」。
+**注意：**如果預留項目是以特定 BigQuery 版本建立，可能無法使用這項功能。如要進一步瞭解各版本啟用的功能，請參閱「[BigQuery 版本簡介](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)」。
 
 您可以建立 UDF，與[自訂遮蓋常式](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro?hl=zh-tw#custom_mask)搭配使用。您應建立專屬資料集，並設定適當的 IAM 權限，以便管理遮蓋 UDF。自訂遮蓋常式必須符合下列規定：
 
@@ -553,7 +558,7 @@ JavaScript 處理環境限制了每個查詢可用的記憶體。
 * 遮蓋常式建立後，就無法變更為標準函式。也就是說，如果 `data_governance_type` 選項設為 `DATA_MASKING`，您就無法使用 DDL 陳述式或 API 呼叫變更 `data_governance_type`。
 * 自訂遮蓋常式支援 [CASE](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conditional_expressions?hl=zh-tw#case) 和 [CASE expr](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conditional_expressions?hl=zh-tw#case_expr) 陳述式。下列運算子可與 `CASE` 和 `CASE expr` 陳述式搭配使用：
   + [`Comparison Operators`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators?hl=zh-tw#comparison_operators) - `<`、`<=`、`>`、`>=`、`=`、`!=`、`IN`
-  + [`Logical Operators`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators?hl=zh-tw#logical_operators) - `AND`、`OR`、`NOT`
+  + [`Logical Operators`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators?hl=zh-tw#logical_operators) - `AND`，`OR`，`NOT`
   + [`IS Operator`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators?hl=zh-tw#is_operators)
 
 舉例來說，將使用者身分證字號替換為 `XXX-XX-XXXX` 的遮蓋常式可能如下所示：
@@ -589,11 +594,11 @@ AS (
 
 **建議您盡可能使用 [`SAFE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/functions-reference?hl=zh-tw#safe_prefix) 前置字元，避免透過錯誤訊息公開原始資料。**
 
-建立自訂遮蓋常式後，即可在「Create data policies」(建立資料政策) 中做為遮蓋規則使用。
+建立自訂遮蓋常式後，即可在「[建立資料政策](https://docs.cloud.google.com/bigquery/docs/column-data-masking?hl=zh-tw#create_data_policies)」中做為遮蓋規則使用。
 
 ## 社群貢獻的函式
 
-社群貢獻的 UDF 位於 `bigquery-public-data.persistent_udfs` 公開資料集和開放原始碼 [`bigquery-utils` GitHub 存放區](https://github.com/GoogleCloudPlatform/bigquery-utils)。如要查看 Google Cloud 控制台中的所有[社群 UDF](https://github.com/GoogleCloudPlatform/bigquery-utils/tree/master/udfs/community)，請在「Explorer」窗格中，為 `bigquery-public-data` 專案[加上星號](https://docs.cloud.google.com/bigquery/docs/quickstarts/query-public-dataset-console?hl=zh-tw#open_a_public_dataset)，然後展開該專案中的巢狀 `persistent_udfs` 資料集。
+社群貢獻的 UDF 可在 `bigquery-public-data.persistent_udfs` 公開資料集和開放原始碼 [`bigquery-utils` GitHub 存放區](https://github.com/GoogleCloudPlatform/bigquery-utils)中取得。如要查看 Google Cloud 控制台中的所有[社群 UDF](https://github.com/GoogleCloudPlatform/bigquery-utils/tree/master/udfs/community)，請在「Explorer」窗格中，為 `bigquery-public-data` 專案[加上星號](https://docs.cloud.google.com/bigquery/docs/quickstarts/query-public-dataset-console?hl=zh-tw#open_a_public_dataset)，然後展開該專案中的巢狀 `persistent_udfs` 資料集。
 
 ### 允許存取 VPC Service Controls 範圍內社群貢獻的函式
 
@@ -621,7 +626,7 @@ AS (
 
 如要為這個存放區中的 UDF 做出貢獻，請參閱「[貢獻 UDF](https://github.com/GoogleCloudPlatform/bigquery-utils/blob/master/udfs/CONTRIBUTING.md)」的操作說明。
 
-## 統一存取多個區域的常式
+## 在多個區域統一存取常式
 
 如要在多個區域的查詢中使用 UDF，則必須在執行含有 UDF 的查詢的每個區域中提供 UDF。因此，您應在可能使用 UDF 執行查詢的任何區域建立及維護 UDF。即使資料表完全相同，您也必須維護兩個版本的函式。舉例來說，如果您將銷售資料儲存在 `EU` 和 `US` 多區域，則應在每個區域維護一個函式版本。例如：
 
@@ -650,8 +655,8 @@ AS (
 如要讓 UDF 不受區域限制，可以使用[跨區域資料集複製功能](https://docs.cloud.google.com/bigquery/docs/data-replication?hl=zh-tw)：
 
 1. [建立新的專用資料集](https://docs.cloud.google.com/bigquery/docs/datasets?hl=zh-tw) (例如 `my_utils`)，儲存所有必要的 UDF。請注意，新增至這個資料集的任何資料表都會複製，因此費用會增加。不過，複製 UDF 和程序不會產生任何額外費用。
-2. 將所有 UDF 新增至新資料集。這也可能包含社群 UDF，例如從 [GitHub](https://github.com/GoogleCloudPlatform/bigquery-utils/tree/master/udfs) 複製的 `bqutil`。
-3. [啟用資料集複製功能](https://docs.cloud.google.com/bigquery/docs/data-replication?hl=zh-tw#replicate_a_dataset)。請設定這個資料集，將其複製到您需要執行查詢來呼叫這些 UDF 的所有區域。這會將函式複製到這些區域，並保持同步。
+2. 將所有 UDF 新增至新資料集。這也包括從 [GitHub](https://github.com/GoogleCloudPlatform/bigquery-utils/tree/master/udfs) 複製的社群 UDF，例如 `bqutil`。
+3. [啟用資料集複製功能](https://docs.cloud.google.com/bigquery/docs/data-replication?hl=zh-tw#replicate_a_dataset)。請設定這個資料集，將其複製到需要執行查詢來呼叫這些 UDF 的所有區域。這會將函式複製到這些區域，並保持同步。
 
 執行查詢時，BigQuery 會自動使用本機資料集副本中的本機 UDF 版本，您不必指定定義函式的區域，因此查詢可在不同位置之間轉移。例如：
 
@@ -672,6 +677,7 @@ AS (
 * JavaScript UDF 可能會逾時，導致查詢無法完成。逾時時間最短可設為 5 分鐘，但可能因多項因素而異，包括函式耗用的使用者 CPU 作業時間，以及 JavaScript 函式的輸入和輸出大小。
 * JavaScript 中的位元作業僅處理最重要的 32 位元。
 * UDF 設有特定頻率限制和配額限制。詳情請參閱「[UDF 限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#udf_limits)」。
+* [持續查詢](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction?hl=zh-tw)僅支援 SQL UDF。持續查詢不支援 JavaScript UDF。詳情請參閱「[使用 SQL UDF](https://docs.cloud.google.com/bigquery/docs/continuous-queries?hl=zh-tw#use-sql-udfs)」。
 
 persistent user-defined function 有下列限制：
 
@@ -683,7 +689,7 @@ persistent user-defined function 有下列限制：
 
 temporary user-defined function 有下列限制。
 
-* 建立暫時 UDF 時，`function_name` 不得包含半形句號。
+* 建立 temporary UDF 時，`function_name` 不得包含半形句號。
 * 檢視表和 persistent UDF 無法參照 temporary UDF。
 
 
@@ -693,11 +699,11 @@ temporary user-defined function 有下列限制。
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-10-30 (世界標準時間)。
+上次更新時間：2026-11-08 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-30 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-08 (世界標準時間)。"],[],[]]

@@ -135,4 +135,4 @@ The special token data type.
 | `STRING` | Token type as string. |
 | `INT64` | Token type as integer. |
 | `NUMERIC` | Token type as numeric. |
-| `BOOL` |
+|  |

@@ -127,4 +127,4 @@ The request for `ConnectionService.CreateConnection`.
 | --- | --- |
 | `parent` | `string`  Required. Parent resource name. Must be in the format `projects/{project_id}/locations/{location_id}`  Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `parent`:   * `bigquery.connections.create` |
 | `connection_id` | `string`  Optional. Connection id that should be assigned to the created connection. |
-| `connection` | `Connection`< |
+| `connection` |  |

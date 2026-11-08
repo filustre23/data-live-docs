@@ -317,4 +317,4 @@ gcloud config unset auth/impersonate_service_account
     **注意：** 這個旗標不支援多層級偵錯，因此您可以將 `DEBUG_LEVEL` 設為任何正數。
 
 **`--job_id=JOB_ID`**
-:   指定新工作的 ID。這個旗標僅適用於建立工作的
+:   指定新工作的 ID。這個旗標僅適用於建立工作的指令：`cp`

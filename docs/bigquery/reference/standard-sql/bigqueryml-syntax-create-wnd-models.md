@@ -479,3 +479,15 @@ A `FLOAT64` value. The default value is `0.01`.
 **Syntax**
 
 `INPUT_LABEL_COLS = string_array`
+
+**Description**
+
+The name of the label column in the training data. The label column contains the
+expected machine learning result for the given record. For example, in a spam
+detection dataset, the label column value would probably be either `spam` or
+`not spam`. In a rainfall dataset, the label column value might be the amount
+of rain that fell during a certain period.
+
+**Arguments**
+
+A one-element `ARRAY` of string values. Defaults to

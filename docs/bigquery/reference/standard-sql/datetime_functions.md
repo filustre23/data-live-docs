@@ -319,4 +319,4 @@ DATETIME_SUB(datetime_expression, INTERVAL step_size step_unit)
 
 Subtracts `step_size` units of `step_unit` from the `DATETIME` object.
 
-`DATETIME_SUB` supports the following values for
+`DATETIME_SUB`
