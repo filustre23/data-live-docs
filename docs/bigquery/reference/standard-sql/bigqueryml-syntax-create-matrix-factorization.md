@@ -582,4 +582,4 @@ for this option, you must also specify a value for
 
 **Arguments**
 
-An `INT64` value between `1` and `5`, inclusive. The default value is
+An `INT64` value between `1` and `5`, inclusive. The default value is `1`.

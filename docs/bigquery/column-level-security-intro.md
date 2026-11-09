@@ -240,6 +240,9 @@ TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-s
 * BigQuery 僅支援 [BigLake 資料表](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw)、[BigQuery 資料表](https://docs.cloud.google.com/bigquery/docs/tables-intro?hl=zh-tw)和 [BigQuery Omni 資料表](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw)的資料欄層級存取控管。
 * 一個資料欄只能有一個政策標記。
 * 一個資料表最多可有 1,000 個不重複的政策標記。
+* 每個專案在各位置最多只能有 40 個分類。
+* 一個分類最多可以有 100 個政策標記。
+* 分類名稱或政策標記名稱以 UTF-8 編碼時，長度不得超過 200 個位元組。
 * 如果啟用資料欄層級存取控管，就無法使用舊版 SQL。如果目標資料表有任何政策標記，系統會拒絕任何舊版 SQL 查詢。
 * 政策標記階層從根節點到最低層級子標記，最多只能有五個層級，如以下螢幕截圖所示：
 * 機構內所有專案的分類名稱不得重複。
@@ -275,11 +278,11 @@ TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-s
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-08 (世界標準時間)。
+上次更新時間：2026-11-09 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-08 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-09 (世界標準時間)。"],[],[]]

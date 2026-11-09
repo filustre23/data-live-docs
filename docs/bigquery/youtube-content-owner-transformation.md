@@ -591,3 +591,4 @@ BigQuery 檢視畫面：
 #### 每週著作權聲明廣告收益摘要
 
 YouTube 報表：
+[每週著作權聲明廣告收](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#weekly-claim-ad-revenue-summary)

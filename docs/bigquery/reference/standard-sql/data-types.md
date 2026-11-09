@@ -385,4 +385,6 @@ You can build an array literal in GoogleSQL using brackets (`[` and
 SELECT [1, 2, 3] AS numbers;
 
 SELECT ["apple", "pear", "orange"] AS fruit;
+
+SELECT
 ```

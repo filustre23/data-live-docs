@@ -273,3 +273,5 @@ SELECT INT64(JSON '10.0') AS score;
  | 10    |
  +-------*/
 ```
+
+The following examples show how invalid

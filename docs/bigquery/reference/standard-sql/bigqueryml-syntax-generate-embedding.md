@@ -350,4 +350,4 @@ ML.GENERATE_EMBEDDING(
   also specify the `END_SECOND` argument. This value must be positive and
   less than the `END_SECOND` value. This argument only applies to video
   content.
-* `END_SECOND`: a
+* `END_SECOND`: a `FLOAT64` value t
