@@ -227,4 +227,5 @@ WITH
   FROM (
     SELECT
       *
+    FROM
 ```

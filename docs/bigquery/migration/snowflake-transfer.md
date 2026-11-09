@@ -266,4 +266,5 @@ ALTER ACCOUNT SET PREVENT_UNLOAD_TO_INLINE_URL = false;
 bq mk \
     --transfer_config \
     --project_id=PROJECT_ID \
+    --d
 ```

@@ -154,5 +154,5 @@ WITH data AS (
   SELECT 2 AS id, ST_GEOGFROMTEXT('POINT EMPTY') AS geo
   UNION ALL
   -- only points are supported
-  SELECT 3 AS id
+  SELECT 3 AS
 ```

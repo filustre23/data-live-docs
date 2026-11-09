@@ -256,5 +256,5 @@ JSON 檔案中的 `condition` 欄位支援下列值，每個值都有特定的 `
 
 ```
   bq mk --transfer_config
-  --data_source
+  --data_source=hadoop
 ```

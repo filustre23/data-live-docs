@@ -208,4 +208,4 @@ bq mk \
   + `max_bad_records`：對於任何 `file_format` 值，可忽略的不良記錄數量上限。預設值為 `0`。
   + `decimal_target_types`：針對任何 `file_format` 值，以半形逗號分隔的清單，列出來源小數值可能轉換成的 SQL 資料類型。如未提供這個欄位，`ORC` 的資料類型預設為 `"NUMERIC,STRING"`，其他檔案格式則為 `"NUMERIC"`。
   + `ignore_unknown_values`：對於任何 `file_format` 值，設為 `TRUE` 即可接受包含與結構定義不符的值的資料列。詳情請參閱[`JobConfigurationLoad` 參考資料表](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#JobConfigurationLoad.FIELDS.ignore_unknown_values)中的 `ignoreUnknownvalues` 欄位詳細資料。
-  + `use_avro_logical_types`：如果是 `AVRO`
+  + `use_avro_logical_types`：如果是 `AVRO` `file_format`
