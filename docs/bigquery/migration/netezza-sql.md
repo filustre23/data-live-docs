@@ -160,10 +160,4 @@ IBM Netezza 資料倉儲技術專為搭配 Netezza 專屬 SQL 語法而設計。
 | `intNshl` |  |
 | `intNshr` |  |
 | `CORR` | [`CORR`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions?hl=zh-tw#corr) |
-| `COUNT` | [`COUNT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions?hl=zh-tw#count) |
-|  | [`COUNTIF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions?hl=zh-tw#countif) |
-| `COVAR_POP` | [`COVAR_POP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions?hl=zh-tw#covar_pop) |
-| `COVAR_SAMP` | [`COVAR_SAMP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions?hl=zh-tw#covar_samp) |
-| `CUME_DIST` | [`CUME_DIST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/numbering_functions?hl=zh-tw#cume_dist) |
-| `DENSE_RANK` | [`DENSE_RANK`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/numbering_functions?hl=zh-tw#dense_rank) |
-| `FIRST_VALUE` |  |
+| `COUNT` |  |

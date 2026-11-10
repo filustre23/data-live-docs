@@ -231,12 +231,5 @@ SELECT
   error_code,
   SUM(total_rows) AS num_rows,
   SUM(total_input_bytes) AS num_bytes,
-  SUM(total_requests) AS num_requests
-FROM
-  `region-us`.INFORMATION_SCHEMA.STREAMING_TIMELINE_BY_PROJECT
-WHERE
-  table_id LIKE 'my_table'
-GROUP BY
-  project_id, dataset_id, table_id, error_code, day
-ORDER
+  SUM(total_requests) AS
 ```

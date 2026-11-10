@@ -130,8 +130,3 @@ The size of a single AppendRowsRequest must be less than 20 MB in size. Requests
 | `missing_value_interpretations` | `map<string, MissingValueInterpretation>`  A map to indicate how to interpret missing value for some fields. Missing values are fields present in user schema but missing in rows. The key is the field name. The value is the interpretation of missing values for the field.  For example, a map {'foo': NULL\_VALUE, 'bar': DEFAULT\_VALUE} means all missing values in field foo are interpreted as NULL, all missing values in field bar are interpreted as the default value of field bar in table schema.  If a field is not in this map and has missing values, the missing values in this field are interpreted as NULL.  This field only applies to the current request, it won't affect other requests on the connection.  Currently, field name can only be top-level column name, can't be a struct field path like 'foo.bar'. |
 | `client_stats` | `ClientStats`  Optional. Stats and telemetry data gathered on the client side. |
 | Union field `rows`. Input rows. The `writer_schema` field must be specified at the initial request and currently, it will be ignored if specified in following requests. Following requests must have data in the same format as the initial request. `rows` can be only one of the following: | |
-| `proto_rows` | `ProtoData`  Rows in proto format. |
-
-## MissingValueInterpretation
-
-An enum to indicate how to interpret missing values of fields that are present in user schema but missing in rows. A missing value can represent a NULL or a column default value defined in BigQuery table schema.

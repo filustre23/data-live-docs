@@ -335,13 +335,5 @@ model's thinking budget to `0` for the request:
 
 ```
 SELECT
-  city,
-  AI.GENERATE_BOOL(('Is ', city, ' a US city?'),
-    model_params => JSON '{"generation_config":{"thinking_config": {"thinking_budget": 0}}}')
-FROM mydataset.cities;
+  city
 ```
-
-## Manage inference costs
-
-Inference using the Vertex AI Gemini model can be a
-relatively expensiv

@@ -86,7 +86,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
    **啟用 API 所需的角色**
 
-   您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過擁有者角色 (`roles/owner`) 取得這項權限。否則，您可以透過 Service Usage 管理員角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   如要啟用 API，您必須具備 `serviceusage.services.enable` 權限。如果您建立了專案，可能已透過擁有者角色 (`roles/owner`) 取得這項權限。否則，您可以透過 Service Usage 管理員角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
    [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery&hl=zh-tw)
 
@@ -215,6 +215,11 @@ bqclient.create_dataset("bqml_tutorial", exists_ok=True)
 ```
 import bigframes.pandas as bpd
 
+# Set partial ordering mode for BigQuery DataFrames.
+# For more information, see the BigQuery DataFrames performance documentation:
+# https://cloud.google.com/bigquery/docs/dataframes-performance#partial-ordering-mode
+bpd.options.bigquery.ordering_mode = "partial"
+
 # Start by loading the historical data from BigQuerythat you want to analyze and forecast.
 # This clause indicates that you are querying the ga_sessions_* tables in the google_analytics_sample dataset.
 # Read and visualize the time series you want to forecast.
@@ -284,8 +289,16 @@ total_visits.plot.line()
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
 
 ```
-from bigframes.ml import forecasting
 import bigframes.pandas as bpd
+from bigframes.bigquery import ml
+
+# Set partial ordering mode for BigQuery DataFrames.
+# For more information, see the BigQuery DataFrames performance documentation:
+# https://cloud.google.com/bigquery/docs/dataframes-performance#partial-ordering-mode
+bpd.options.bigquery.ordering_mode = "partial"
+
+# Use the data loaded in the previous step to fit the model
+training_data = total_visits.to_frame().reset_index(drop=False)
 
 # Create a time series model to forecast total site visits:
 # The auto_arima option defaults to True, so the auto.ARIMA algorithm automatically
@@ -294,18 +307,21 @@ import bigframes.pandas as bpd
 # process automatically infers the data frequency of the input time series.
 # The decompose_time_series option defaults to True, so that information about
 # the time series data is returned when you evaluate the model in the next step.
-model = forecasting.ARIMAPlus()
-model.auto_arima = True
-model.data_frequency = "auto_frequency"
-model.decompose_time_series = True
-
-# Use the data loaded in the previous step to fit the model
-training_data = total_visits.to_frame().reset_index(drop=False)
-
-X = training_data[["parsed_date"]]
-y = training_data[["total_visits"]]
-
-model.fit(X, y)
+# For more information, see the BigQuery DataFrames API reference documentation:
+# https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.create_model.html#bigframes.bigquery.ml.create_model
+ml.create_model(
+    your_model_id,  # For example: "bqml_tutorial.ga_arima_model"
+    options={
+        "model_type": "ARIMA_PLUS",
+        "time_series_timestamp_col": "parsed_date",
+        "time_series_data_col": "total_visits",
+        "auto_arima": True,
+        "data_frequency": "AUTO_FREQUENCY",
+        "decompose_time_series": True,
+    },
+    training_data=training_data,
+    replace=True,
+)
 ```
 
 ## 評估候選模型
@@ -338,13 +354,20 @@ model.fit(X, y)
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
 
 ```
-# Evaluate the time series models by using the summary() function. The summary()
-# function shows you the evaluation metrics of all the candidate models evaluated
-# during the process of automatic hyperparameter tuning.
-summary = model.summary(
+import bigframes.pandas as bpd
+from bigframes.bigquery import ml
+
+# Set partial ordering mode for BigQuery DataFrames.
+# For more information, see the BigQuery DataFrames performance documentation:
+# https://cloud.google.com/bigquery/docs/dataframes-performance#partial-ordering-mode
+bpd.options.bigquery.ordering_mode = "partial"
+
+# For more information, see the BigQuery DataFrames API reference documentation:
+# https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.arima_evaluate.html#bigframes.bigquery.ml.arima_evaluate
+ml.arima_evaluate(
+    your_model_id,  # For example: "bqml_tutorial.ga_arima_model"
     show_all_candidate_models=True,
 )
-print(summary.peek())
 
 # Expected output:
 # row   non_seasonal_p	non_seasonal_d	non_seasonal_q	has_drift	log_likelihood	AIC	variance	seasonal_periods	has_holiday_effect	has_spikes_and_dips	has_step_changes	error_message
@@ -363,7 +386,7 @@ print(summary.peek())
 
 只有在 `decompose_time_series=TRUE` 時，系統才會填入 `has_holiday_effect`、`has_spikes_and_dips` 和 `has_step_changes` 欄。這些資料欄也會反映輸入時間序列資料的相關資訊，與 ARIMA 建模無關。這些資料欄在所有輸出資料列中也具有相同的值。
 
-`error_message` 欄會顯示 `auto.ARIMA` 擬合程序期間發生的任何錯誤。發生錯誤的可能原因之一，是所選的 `non_seasonal_p`、`non_seasonal_d`、`non_seasonal_q` 和 `has_drift` 欄無法穩定時間序列。如要擷取所有候選模型的錯誤訊息，請在建立模型時將 `show_all_candidate_models` 選項設為 `TRUE`。
+`error_message` 欄會顯示 `auto.ARIMA` 擬合程序期間發生的任何錯誤。發生錯誤的可能原因之一，是所選的 `non_seasonal_p`、`non_seasonal_d`、`non_seasonal_q` 和 `has_drift` 欄無法穩定時間序列。如要擷取所有候選模型的錯誤訊息，請將 `ML.ARIMA_EVALUATE` 函式的 `show_all_candidate_models` 引數設為 `TRUE`。如果是單一時間序列模型，預設值為 `TRUE`。
 
 如要進一步瞭解輸出資料欄，請參閱 [`ML.ARIMA_EVALUATE` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-arima-evaluate?hl=zh-tw)。
 
@@ -393,7 +416,7 @@ print(summary.peek())
 
 ### BigQuery DataFrames
 
-使用 `coef_` 函式檢查時間序列模型的係數。
+使用 [`bigframes.bigquery.ml.arima_coefficients` 函式](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.arima_coefficients.html#bigframes.bigquery.ml.arima_coefficients)檢查時間序列模型的係數。
 
 試用這個範例前，請先按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定操作說明操作。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
@@ -401,8 +424,19 @@ print(summary.peek())
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
 
 ```
-coef = model.coef_
-print(coef.peek())
+import bigframes.pandas as bpd
+from bigframes.bigquery import ml
+
+# Set partial ordering mode for BigQuery DataFrames.
+# For more information, see the BigQuery DataFrames performance documentation:
+# https://cloud.google.com/bigquery/docs/dataframes-performance#partial-ordering-mode
+bpd.options.bigquery.ordering_mode = "partial"
+
+# For more information, see the BigQuery DataFrames API reference documentation:
+# https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.arima_coefficients.html#bigframes.bigquery.ml.arima_coefficients
+ml.arima_coefficients(
+    your_model_id,  # For example: "bqml_tutorial.ga_arima_model"
+)
 
 # Expected output:
 #       ar_coefficients   ma_coefficients   intercept_or_drift
@@ -438,7 +472,7 @@ print(coef.peek())
 
 ### BigQuery DataFrames
 
-使用 `predict` 函式預測未來時間序列值。
+使用 [`bigframes.bigquery.ml.forecast` 函式](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.forecast.html#bigframes.bigquery.ml.forecast)預測未來時間序列值。
 
 試用這個範例前，請先按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定操作說明操作。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
@@ -446,9 +480,21 @@ print(coef.peek())
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
 
 ```
-prediction = model.predict(horizon=30, confidence_level=0.8)
+import bigframes.pandas as bpd
+from bigframes.bigquery import ml
 
-print(prediction.peek())
+# Set partial ordering mode for BigQuery DataFrames.
+# For more information, see the BigQuery DataFrames performance documentation:
+# https://cloud.google.com/bigquery/docs/dataframes-performance#partial-ordering-mode
+bpd.options.bigquery.ordering_mode = "partial"
+
+# For more information, see the BigQuery DataFrames API reference documentation:
+# https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.forecast.html#bigframes.bigquery.ml.forecast
+ml.forecast(
+    your_model_id,  # For example: "bqml_tutorial.ga_arima_model"
+    horizon=30,
+    confidence_level=0.8,
+)
 # Expected output:
 #           forecast_timestamp	   forecast_value	standard_error	confidence_level	prediction_interval_lower_bound	    prediction_interval_upper_bound	    confidence_interval_lower_bound	    confidence_interval_upper_bound
 # 11	2017-08-13 00:00:00+00:00	1845.439732	      328.060405	      0.8	                 1424.772257	                      2266.107208	                     1424.772257	                     2266.107208
@@ -493,9 +539,9 @@ print(prediction.peek())
 
 ### BigQuery DataFrames
 
-除了預測資料外，您也可以使用 `predict_explain` 函式取得可解釋性指標。`predict_explain` 函式會預測未來時間序列值，並傳回時間序列的所有個別元件。
+除了預測資料外，您也可以使用 [`bigframes.bigquery.ml.explain_forecast` 函式](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.explain_forecast.html#bigframes.bigquery.ml.explain_forecast)取得可解釋性指標。`bigframes.bigquery.ml.explain_forecast` 函式會預測未來時間序列值，並傳回時間序列的所有個別元件。
 
-與 `predict` 函式類似，`predict_explain` 函式中使用的 `horizon=30, confidence_level=0.8` 子句表示查詢會預測 30 個未來時間點，並產生信賴區間為 80% 的預測區間。
+與 `bigframes.bigquery.ml.forecast` 函式類似，`bigframes.bigquery.ml.explain_forecast` 函式中使用的 `horizon=30, confidence_level=0.8` 引數表示查詢會預測 30 個未來時間點，並產生信賴度為 80% 的預測區間。
 
 試用這個範例前，請先按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定操作說明操作。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
@@ -503,9 +549,21 @@ print(prediction.peek())
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
 
 ```
-ex_pred = model.predict_explain(horizon=30, confidence_level=0.8)
+import bigframes.pandas as bpd
+from bigframes.bigquery import ml
 
-print(ex_pred.head(4))
+# Set partial ordering mode for BigQuery DataFrames.
+# For more information, see the BigQuery DataFrames performance documentation:
+# https://cloud.google.com/bigquery/docs/dataframes-performance#partial-ordering-mode
+bpd.options.bigquery.ordering_mode = "partial"
+
+# For more information, see the BigQuery DataFrames API reference documentation:
+# https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.explain_forecast.html#bigframes.bigquery.ml.explain_forecast
+ml.explain_forecast(
+    your_model_id,  # For example: "bqml_tutorial.ga_arima_model"
+    horizon=30,
+    confidence_level=0.8,
+)
 # Expected output:
 #       time_series_timestamp	  time_series_type	    time_series_data	time_series_adjusted_data	 standard_error	   confidence_level	   prediction_interval_lower_bound	   prediction_interval_upper_bound	  trend	   seasonal_period_yearly	  seasonal_period_quarterly	    seasonal_period_monthly	   seasonal_period_weekly	  seasonal_period_daily	    holiday_effect	   spikes_and_dips	   step_changes	   residual
 # 0	  2016-08-01 00:00:00+00:00	      history	             1711.0	               505.716474	           206.939556	         <NA>	                    <NA>	                            <NA>	               0.0	           <NA>	                        <NA>	                     <NA>	                 169.611938	                  <NA>	                <NA>	            <NA>	       1205.283526	   336.104536
@@ -547,7 +605,7 @@ print(ex_pred.head(4))
 
 如要刪除專案，請進行以下操作：
 
-**警告**：刪除專案會出現以下結果：
+**注意**：刪除專案會造成以下影響：
 
 * **專案中的所有內容都會遭到刪除。**如果使用現有專案來進行本文中的任務，刪除專案將一併移除當中已完成的其他任務'。
 * **自訂專案 ID 會消失。**當您之前建立這個專案時，可能建立了想要在日後使用的自訂專案 ID。如要保留使用該專案 ID 的網址 (例如 `appspot.com` 網址)，請刪除在該專案中選取的資源，而不是刪除整個專案。
@@ -575,11 +633,11 @@ print(ex_pred.head(4))
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-08 (世界標準時間)。
+上次更新時間：2026-11-09 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-08 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-09 (世界標準時間)。"],[],[]]

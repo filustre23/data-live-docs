@@ -237,31 +237,3 @@ bigquery.defineFunction(
 ## 使用 UDF 執行查詢
 
 您可以使用 [bq 指令列工具](#command-line)或 [BigQuery API](#api)，在舊版 SQL 中使用 UDF。[Google Cloud 控制台](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui?hl=zh-tw)不支援舊版 SQL 中的 UDF。
-
-### 使用 bq 指令列工具
-
-如要執行含有一或多個 UDF 的查詢，請在 Google Cloud CLI 的 bq 指令列工具中指定 `--udf_resource` 標記。該旗標的值可以是 Cloud Storage (`gs://...`) URI，或是本機檔案的路徑。如要指定多個 UDF 資源檔，請重複使用這個旗標。
-
-使用以下語法來利用 UDF 執行查詢：
-
-```
-bq query --udf_resource=<file_path_or_URI> <sql_query>
-```
-
-以下範例執行的查詢會使用儲存在本機檔案的 UDF，以及同樣也是儲存在本機檔案中的 SQL 查詢。
-
-#### 建立 UDF
-
-您可以把 UDF 儲存在 Cloud Storage，或是儲存為本機文字檔。舉例來說，如要儲存下列 `urlDecode` UDF，請建立名為 `urldecode.js` 的檔案，並把下列 JavaScript 程式碼貼到該檔案中，然後儲存檔案。
-
-```
-// UDF definition
-function urlDecode(row, emit) {
-  emit({title: decodeHelper(row.title),
-        requests: row.num_requests});
-}
-
-// Helper function with error handling
-function decodeHelper(s) {
-  try {
-```

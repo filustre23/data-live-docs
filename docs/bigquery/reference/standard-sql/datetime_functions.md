@@ -302,21 +302,5 @@ SELECT
   DATETIME_DIFF('2017-12-18', '2017-12-17', WEEK(MONDAY)) AS week_weekday_diff,
   DATETIME_DIFF('2017-12-18', '2017-12-17', ISOWEEK) AS isoweek_diff;
 
-/*-----------+-------------------+--------------+
- | week_diff | week_weekday_diff | isoweek_diff |
- +-----------+-------------------+--------------+
- | 0         | 1                 | 1            |
- +-----------+-------------------+--------------*/
+/*-----------+-------------
 ```
-
-## `DATETIME_SUB`
-
-```
-DATETIME_SUB(datetime_expression, INTERVAL step_size step_unit)
-```
-
-**Description**
-
-Subtracts `step_size` units of `step_unit` from the `DATETIME` object.
-
-`DATETIME_SUB`

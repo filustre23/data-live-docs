@@ -335,19 +335,3 @@ ML.GENERATE_EMBEDDING(
       constructing an `ObjectRef` value.
 
       `ObjectRefRuntime` values must have the `access_url.read_url` and
-      `details.gcs_metadata.content_type` elements of the JSON value
-      populated.
-  + If you are creating embeddings from an object table, the query doesn't
-    have to return a `content` column. You can only specify `WHERE`,
-    `ORDER BY`, and `LIMIT` clauses in the query.
-* `FLATTEN_JSON_OUTPUT`: a `BOOL` value that
-  determines whether the `JSON` content returned by the function is parsed
-  into separate columns. The default is `TRUE`.
-* `START_SECOND`: a `FLOAT64` value that specifies the
-  second in the video
-  at which to start the embedding. The default value is `0`.
-  If you specify this argument, you must
-  also specify the `END_SECOND` argument. This value must be positive and
-  less than the `END_SECOND` value. This argument only applies to video
-  content.
-* `END_SECOND`: a `FLOAT64` value t

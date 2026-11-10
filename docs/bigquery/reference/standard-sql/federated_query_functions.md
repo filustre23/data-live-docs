@@ -364,11 +364,4 @@ types.
 | LargeString | Variable length string of up to 2GB. | STRING |
 | String (n) | Variable-length Unicode string of up to 5000 characters. | STRING |
 | **Binary** |  |  |
-| Binary (n) | Variable length byte string of up to 4000 bytes. | BYTES |
-| LargeBinary | Variable length byte string of up to 2GB. | BYTES |
-| hana.BINARY (n) | Byte string of fixed length (n). | STRING |
-| **Other** |  |  |
-| Boolean | TRUE, FALSE and UNKNOWN, where UNKNOWN is a synonym of NULL. | BOOL |
-| UUID | Universally unique identifier encoded as a 128-bit integer. | STRING |
-| hana.ST\_GEOMETRY | Spatial data in any form, including 0-dimensional points, lines, multi-lines, and polygons. | NOT SUPPORTED |
-| hana.ST\_POINT | Spatial data in the form of 0-dimensional points that represents a single location in coordinate space. | NOT SUPPORTED |
+| Binary (n) | Variable len |

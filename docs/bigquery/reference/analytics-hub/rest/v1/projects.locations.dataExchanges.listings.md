@@ -129,12 +129,4 @@ Represents the state of a replica of a shared dataset. It includes the geographi
 | Fields | |
 | --- | --- |
 | `location` | `string`  Output only. The geographic location where the replica resides. See [BigQuery locations](https://cloud.google.com/bigquery/docs/locations) for supported locations. Eg. "us-central1". |
-| `replicaState` | `enum (ReplicaState)`  Output only. Assigned by Analytics Hub based on real BigQuery replication state. |
-| `primaryState` | `enum (PrimaryState)`  Output only. Indicates that this replica is the primary replica. |
-
-## ReplicaState
-
-Replica state of the shared dataset.
-
-| Enums | |
-| --- | --- |
+| `replicaState` | `enum (` |

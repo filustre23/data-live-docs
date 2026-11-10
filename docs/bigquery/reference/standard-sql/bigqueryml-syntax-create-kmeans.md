@@ -539,13 +539,4 @@ cluster initialization method.
 
 ```
 CREATE MODEL
-  `mydataset.mymodel`
-OPTIONS
-  ( MODEL_TYPE='KMEANS',
-    NUM_CLUSTERS=3,
-    KMEANS_INIT_METHOD='RANDOM') AS
-SELECT
-  *
-FROM
-  `mydataset.mytable
 ```

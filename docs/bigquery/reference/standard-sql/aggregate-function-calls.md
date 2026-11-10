@@ -259,10 +259,4 @@ A simple aggregate function call for `COUNT`, `MIN`, and `MAX` looks like this:
 ```
 SELECT
   COUNT(*) AS total_count,
-  COUNT(fruit) AS non_null_count,
-  MIN(fruit) AS min,
-  MAX(fruit) AS max
-FROM
-  (
-    SELECT NULL
 ```

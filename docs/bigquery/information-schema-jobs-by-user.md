@@ -126,19 +126,4 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ### 查看待處理或執行中的工作
 
-下列查詢會顯示目前使用者在指定專案中提交的所有待處理或執行中工作，包括工作 ID、建立時間和查詢：
-
-```
-SELECT
-  job_id,
-  creation_time,
-  query
-FROM
-  `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_USER
-WHERE
-  state != 'DONE';
-```
-
-**注意：** `INFORMATION_SCHEMA` 檢視表名稱會區分大小寫。
-
-結
+下列查詢會顯示目前使用者在指定專案中提交的所有待處理或執行中

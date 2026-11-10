@@ -278,22 +278,4 @@ If you begin a function with
 the `SAFE.` prefix, it will return `NULL` instead of an error.
 The `SAFE.` prefix only prevents errors from the prefixed function
 itself: it doesn't prevent errors that occur while evaluating argument
-expressions. The `SAFE.` prefix only prevents errors that occur because of the
-value of the function inputs, such as "value out of range" errors; other
-errors, such as internal or system errors, may still occur. If the function
-doesn't return an error, `SAFE.` has no effect on the output.
-
-**Exclusions**
-
-* [Operators](/bigquery/docs/reference/standard-sql/operators), such as `+` and `=`, don't support the
-  `SAFE.` prefix. To prevent errors from a
-  division operation, use [SAFE\_DIVIDE](/bigquery/docs/reference/standard-sql/mathematical_functions#safe_divide).
-* Some operators, such as `IN`, `ARRAY`, and `UNNEST`, resemble functions but
-  don't support the `SAFE.` prefix.
-* The `CAST`, `EXTRACT`, and `SECURE_CONTEXT` functions don't support the `SAFE.`
-  prefix. To prevent errors from casting, use
-  [SAFE\_CAST](/bigquery/docs/reference/standard-sql/conversion_functions#safe_casting).
-
-**Example**
-
-In the following example, the first use of the
+expressions. The `SAFE.` prefix only prevents errors that o

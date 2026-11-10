@@ -253,16 +253,3 @@ BigQuery 支援 `INNER`、`[FULL|RIGHT|LEFT] OUTER` 和 `CROSS JOIN` 作業。�
 ###### 範例
 
 下列查詢使用半聯結來尋找 ngram，其中 ngram 的第一個字詞也是另一個 ngram 的第二個字詞，而該 ngram 的第三個字詞為「AND」。
-
-```
-#legacySQL
-SELECT
-  ngram
-FROM
-  [bigquery-public-data:samples.trigrams]
-WHERE
-  first IN (SELECT
-              second
-            FROM
-              [bigquery
-```

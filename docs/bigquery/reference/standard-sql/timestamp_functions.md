@@ -247,10 +247,3 @@ SELECT
  | 2017    | 1       | 2017 | 1    |
  +---------+---------+------+------*/
 ```
-
-```
-SELECT
-  TIMESTAMP("2017-05-26 12:00:00+00") AS timestamp_value,
-  EXTRACT(ISOYEAR FROM TIMESTAMP("2017-05-26 12:00:00+00")) AS isoyear,
-  EXTRACT(ISOWEEK FROM
-```

@@ -164,17 +164,4 @@ Amazon Redshift [`ORDER BY`](https://docs.amazonaws.cn/en_us/redshift/latest/dg/
 | `a IS UNKNOWN`  `expression ILIKE pattern` | `a IS NULL`  `LOWER(expression) LIKE LOWER(pattern)` |
 | `expression LIKE pattern ESCAPE 'escape_char'` | `expression LIKE pattern`   注意：BigQuery 不支援自訂逸出字元。您必須使用兩個反斜線 \\ 做為 BigQuery 的逸出字元。 |
 | `expression [NOT] SIMILAR TO pattern` | `IF(   LENGTH(   REGEXP_REPLACE(   expression,   pattern,   ''   ) = 0,   True,   False   )`   注意：如果指定 `NOT`，請將上述 `IF` 運算式包裝在 `NOT` 運算式中，如下所示：    `NOT(   IF(   LENGTH(...   )` |
-| `expression [!] ~ pattern` | `[NOT] REGEXP_CONTAINS(   expression,   regex   )` |
-
-## 函式
-
-以下各節列出 Amazon Redshift 函式和對應的 BigQuery 函式。
-
-### 匯總函式
-
-下表列出常見的 Amazon Redshift 匯總、匯總分析和近似匯總函式，以及對應的 BigQuery 函式。
-
-| Amazon Redshift | BigQuery |
-| --- | --- |
-| `APPROXIMATE COUNT(DISTINCT expression)` | `APPROX_COUNT_DISTINCT(expression)` |
-|  |
+| `expression` |

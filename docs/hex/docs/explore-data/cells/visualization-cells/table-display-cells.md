@@ -143,7 +143,7 @@ tip
 
 Filters added to a Table display cell from the Notebook view *are* applied to the returned dataframe. Filters added by someone viewing the published [App](/docs/share-insights/apps/apps-introduction) *are not* applied to the returned dataframe.
 
-### Add a filter[ ​](#add-a-filter "Direct link to Add a filter")
+### Add a filter[​](#add-a-filter "Direct link to Add a filter")
 
 From the **Filters** menu at the top of your Table display cell, select a column, comparison operator, and value to add a new filter.
 

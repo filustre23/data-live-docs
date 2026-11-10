@@ -28,7 +28,7 @@ Knowledge Catalog 的自動資料品質功能可讓您定義及衡量 BigQuery �
 
    **啟用 API 所需的角色**
 
-   您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過擁有者角色 (`roles/owner`) 取得這項權限。否則，您可以透過 Service Usage 管理員角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   如要啟用 API，您必須具備 `serviceusage.services.enable` 權限。如果您建立了專案，可能已透過擁有者角色 (`roles/owner`) 取得這項權限。否則，您可以透過 Service Usage 管理員角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
    [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=dataplex.googleapis.com&hl=zh-tw)
 2. 選用：如要讓 Knowledge Catalog 根據資料剖析掃描結果，產生資料品質規則建議，請[建立並執行資料剖析掃描](https://docs.cloud.google.com/bigquery/docs/data-profile-scan?hl=zh-tw)。
@@ -248,9 +248,9 @@ Knowledge Catalog 的自動資料品質功能可讓您定義及衡量 BigQuery �
    * **品質分數 (<=)**：如果工作成功，但資料品質分數低於指定目標分數，系統就會傳送報表。請輸入 0 到 100 之間的目標品質分數。
    * **工作失敗**：無論資料品質結果為何，只要工作本身失敗，就會傳送報表。
    * **工作完成 (成功或失敗)**：無論資料品質結果為何，都會在工作結束時傳送報表。
-8. 點選「建立」。
+8. 如要建立掃描作業，請按一下「Create」(建立)。
 
-   掃描作業建立後，您隨時可以按一下「Run now」(立即執行) 執行掃描。
+   如果將時間表設為 radio\_button\_checked「On-demand」(依需求)，也可以點選「Run scan」(執行掃描)，立即執行掃描。
 
 ### gcloud
 

@@ -60,7 +60,7 @@ Tables have detail columns, which do not impact your visualization but do allow 
 
 ### Exploring with semantic models[​](#exploring-with-semantic-models "Direct link to Exploring with semantic models")
 
-In addition to exploring from database tables and dataframes, you can explore [semantic models](/docs/connect-to-data/semantic-models/viewing-and-using-semantic-models) configured by an Admin in your workspace. When selecting data in a new exploration, navigate to the **Data models** tab at the top. From there, search and explore your semantic projects and models, and view the measures and dimensions of your models. Once you've identified the model you'd like to work with, select **Explore**.
+In addition to exploring from database tables and dataframes, you can explore [semantic models](/docs/connect-to-data/semantic-models/viewing-and-using-semantic-models) configured by an Admin in your workspace. When selecting data in a new exploration, navigate to the **Semantic models** tab at the top. From there, search and explore your semantic projects and models, and view the measures and dimensions of your models. Once you've identified the model you'd like to work with, select **Explore**.
 
 [](/assets/medias/explore-from-scratch-sm-ab46e69142482932f98288240425202c.mp4)
 

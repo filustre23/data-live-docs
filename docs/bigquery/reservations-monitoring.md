@@ -16,84 +16,145 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 監控 BigQuery 預留項目
 
-BigQuery 管理員可以查看專案和預留項目的運算單元用量，以及容量計費帳單，監控專案中的預留項目。
+BigQuery 管理員可以查看專案和預留項目運算單元用量，監控專案中的預留項目，以及查看依據容量計算的帳單。
 
 ## 查看專案和預留項目運算單元用量
 
 您可以透過下列方式查看專案和預留項目運算單元用量：
 
-* **`INFORMATION_SCHEMA` 觀看次數。**如要擷取專案和預留項目用量資訊，請查詢 [`INFORMATION_SCHEMA.JOBS*` 檢視區塊](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw#examples)。
+* **`INFORMATION_SCHEMA` 次觀看。**如要擷取專案和預留項目用量資訊，請查詢 [`INFORMATION_SCHEMA.JOBS*` 檢視表](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw#examples)。
 
-  `INFORMATION_SCHEMA.JOBS*` 檢視區塊中的 [`reservation_id`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw#schema) 欄位包含預留項目名稱。
-* **Google Cloud console.** Google Cloud 控制台會顯示圖表，說明時段使用情形。詳情請參閱「[使用管理資源圖表](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts?hl=zh-tw)」。
-* **工作探索工具**。您可以使用[工作探索器](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer?hl=zh-tw#group-jobs)，依機構預訂項目將工作分組，並查看摘要統計資料，包括時段、有效工作和已加入佇列的工作。
-* **稽核記錄**。使用[稽核記錄](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs?hl=zh-tw)查看有關時段使用情況的指標。
-* **`Jobs` 方法。**使用 [`Jobs` API 方法](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs?hl=zh-tw)，查看工作使用的時段指標。
-* **Cloud Monitoring**。您可以使用 [Cloud Monitoring](https://docs.cloud.google.com/bigquery/docs/monitoring-dashboard?hl=zh-tw) 建立資訊主頁，監控已分配的時段。透過 Cloud Monitoring 資訊主頁，您可以查看各預留項目和各工作類型的運算單元用量，以及預留項目中的所有專案。如要查看從預留項目取用容量的所有專案的時段用量指標，您必須明確將這些取用容量的專案新增至指標監控專案的[指標範圍](https://docs.cloud.google.com/monitoring/settings?hl=zh-tw)。如要進一步瞭解 Cloud Monitoring 資訊主頁可用的指標，請參閱「[可供視覺化的指標](https://docs.cloud.google.com/bigquery/docs/monitoring-dashboard?hl=zh-tw#metrics)」。
+  `INFORMATION_SCHEMA.JOBS*` 檢視表中的 [`reservation_id`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw#schema) 欄位包含預留項目名稱。
+* **Google Cloud 控制台。** Google Cloud 控制台包含顯示運算單元用量的圖表。詳情請參閱「[使用管理資源圖表](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts?hl=zh-tw)」。
+* **工作探索工具**。您可以使用[工作探索工具](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer?hl=zh-tw#group-jobs)，依預留項目將整個組織的工作分組，並查看摘要統計資料，包括運算單元時間、進行中的工作和排入佇列的工作。
+* **稽核記錄。**使用[稽核記錄](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs?hl=zh-tw)查看運算單元用量指標。
+* **`Jobs` 方法。**使用 [`Jobs` API 方法](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs?hl=zh-tw)，查看工作的運算單元用量指標。
+* **Cloud Monitoring**：您可以使用 [Cloud Monitoring](https://docs.cloud.google.com/bigquery/docs/monitoring-dashboard?hl=zh-tw) 建立資訊主頁，監控分配到的運算單元。透過 Cloud Monitoring 資訊主頁，您可以查看預留項目中所有專案的各項預留項目和工作類型的運算單元用量。如要查看所有使用預留項目的專案運算單元用量指標，您必須明確將這些使用專案新增至監控指標的專案[指標範圍](https://docs.cloud.google.com/monitoring/settings?hl=zh-tw)。如要進一步瞭解 Cloud Monitoring 資訊主頁提供的指標，請參閱「[可視化的指標](https://docs.cloud.google.com/bigquery/docs/monitoring-dashboard?hl=zh-tw#metrics)」。
 
-**注意：** 由於 BigQuery 為預留項目佈建資源的方式，因此使用的運算單元數量可能會高於預留運算單元數量。系統不會針對超出預留運算單元數量的運算單元收費。
+**注意：**由於 BigQuery 為預留項目佈建資源的方式，使用中的運算單元數量可能會高於預留項目運算單元數量。如果運算單元數量超過預留項目，您不需支付費用。
 
 ## 瞭解運算單元指標
 
-如要有效監控及管理 BigQuery 運算容量，請務必區分*已分配的運算單元*和*已使用的運算單元*：
+如要有效監控及管理 BigQuery 運算資源，請務必區分「分配到的運算單元」和「已使用的運算單元」：
 
-分配的槽位
-:   透過基準運算單元和有效容量承諾使用合約，專門為專案提供的容量。*已分配的時段會影響配額和帳單*。
+分配到的運算單元
+:   透過基準運算單元和有效運算資源承諾使用合約，專門提供給專案的運算資源。*分配到的運算單元會影響配額和帳單*。
 
 已使用的運算單元
-:   查詢執行期間，執行作業主動耗用的容量。
-    已使用的時段會顯示在「資源使用率圖表」中。
+:   執行查詢時，執行中工作實際耗用的運算資源。已使用的運算單元會顯示在[資源使用率圖表](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts?hl=zh-tw#view-resource-utilization)中。
 
-由於基準配額是專屬資源，即使沒有查詢正在執行，配額系統仍會將其回報為「已使用」。因此，「配額和系統限制」頁面顯示的配額用量，可能會高於「監控」頁面顯示的實際時段用量。
+基準運算單元是專用資源，因此即使沒有主動執行的查詢，配額系統也會回報為「已使用」。因此，「配額與系統限制」頁面回報的配額用量，可能會高於「監控」頁面顯示的實際運算單元用量。
 
-### 比較運算單元指標
+### 運算單元指標比較
 
-下表比較 Google Cloud 控制台中顯示的廣告空間指標計算方式：
+下表比較 Google Cloud 控制台計算及顯示運算單元指標的方式：
 
-| Google Cloud 控制台頁面 | 顯示的指標 | 計入標準 | 差異來源 |
+| Google Cloud 控制台頁面 | 顯示的指標 | 計算內容 | 差異來源 |
 | --- | --- | --- | --- |
-| [配額與系統限制](https://console.cloud.google.com/iam-admin/quotas?service=bigqueryreservation.googleapis.com&hl=zh-tw) | 已使用的配額 (**運算單元總數**；請參閱[配額用量圖表](https://docs.cloud.google.com/docs/quotas/view-manage?hl=zh-tw#charts)) | 已分配的運算單元：預留項目的基準運算單元和有效承諾。 | 包括次要區域的閒置基準運算單元和非作用中容錯移轉預留項目。不計入自動調度資源運算單元。 |
-| [監控](https://console.cloud.google.com/bigquery/admin/monitoring?hl=zh-tw) | 運算單元用量 ([資源使用率圖表](https://console.cloud.google.com/bigquery/admin/monitoring/resource-utilization?hl=zh-tw)) | 已用配額：執行工作主動耗用的運算單元。 | 包括主動處理工作的自動調度資源爆量。不含閒置的基準運算單元和閒置的容錯移轉預留項目。 |
+| [配額與系統限制](https://console.cloud.google.com/iam-admin/quotas?service=bigqueryreservation.googleapis.com&hl=zh-tw) | 已使用的配額 (**運算單元總數**；請參閱[配額用量圖表](https://docs.cloud.google.com/docs/quotas/view-manage?hl=zh-tw#charts)) | 分配到的運算單元：預留項目基準運算單元和有效承諾使用合約。 | 包括閒置的基準運算單元，以及次要區域中未啟用的容錯移轉預留項目。不計入自動調度資源運算單元。 |
+| [監控](https://console.cloud.google.com/bigquery/admin/monitoring?hl=zh-tw) | 運算單元用量 ([資源使用率圖表](https://console.cloud.google.com/bigquery/admin/monitoring/resource-utilization?hl=zh-tw)) | 已使用的運算單元：執行中的工作主動耗用的運算單元。 | 包括主動處理工作的自動調度資源。不含閒置的基準運算單元和未啟用的容錯移轉預留項目。 |
 
-### 導致使用配額差異的常見原因
+### 運算單元用量不一致的常見原因
 
-在「配額與系統限制」頁面和「監控」頁面之間，比對時段指標時，請考量以下常見的差異原因：
+在「**配額與系統限制**」頁面和「**Monitoring**」頁面之間核對運算單元指標時，請考量下列常見的差異原因：
 
-* **閒置基準運算單元**：您已預留基準運算單元，但目前沒有任何查詢正在執行。由於基準配額是專屬容量，配額系統會將其視為已使用，但使用率圖表只會顯示主動執行工作負載的配額。
-* **容錯移轉預留項目**：如果您設定代管災難復原，系統會在次要區域中，為容錯移轉預留項目分配基準運算單元。即使預留項目處於閒置狀態，且未發生容錯移轉，這些配額也會在次要區域顯示為已用配額。詳情請參閱「[容錯移轉預留項目的配額注意事項](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery?hl=zh-tw#quota_considerations_for_failover_reservations)」。
-* **自動調度資源爆量**：資源使用率圖表會顯示正在處理工作的自動調度運算單元。相較之下，「配額與系統限制」頁面只會顯示靜態分配的容量 (基準和承諾)，不會計入自動調度資源的運算單元。
+* **閒置基準運算單元**：您已預留基準運算單元，但未主動執行任何查詢。由於基準運算單元是專屬運算資源，配額系統會將其視為已使用，但使用率圖表只會顯示正在執行工作負載的運算單元。
+* **容錯移轉預留項目**：如果您設定代管災難復原，系統會在次要區域分配容錯移轉預留項目的基準運算單元。即使預留項目處於閒置狀態且未發生容錯移轉，這些運算單元仍會顯示為次要區域中的已用配額。詳情請參閱「[容錯移轉預留項目的配額注意事項](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery?hl=zh-tw#quota_considerations_for_failover_reservations)」。
+* **自動調度資源高載**：資源使用率圖表包含正在處理工作的自動調度資源運算單元。相較之下，「**配額與系統限制**」頁面只會反映靜態分配的容量 (基準和承諾使用合約)，不會計入自動調度資源運算單元。
 
-## 查看以容量為準的帳單
+## 查看依容量計費的帳單
 
-如要即時查看以容量為準的帳單，請按照下列步驟操作：
+如要即時查看依用量計費的帳單，請按照下列步驟操作：
 
-1. 前往 Google Cloud 控制台的「帳單」頁面。
+1. 前往 Google Cloud 控制台的「Billing」(帳單) 頁面。
 
    [前往「**帳單**」](https://console.cloud.google.com/billing?hl=zh-tw)。
 2. 選取要查看帳單的帳單帳戶專案。
-3. 前往「報表」部分，然後在「篩選器」部分中執行下列操作：
+3. 前往「Reports」(報表) 部分，然後在「Filters」(篩選器) 部分執行下列操作：
 
-   1. 從「服務」清單中選取「BigQuery」，然後選取所有適用的項目。
-   2. 從「SKU」清單中選取「所有 SKU」。
+   1. 從「Services」(服務) 清單中選取「BigQuery」，然後選取所有適用項目。
+   2. 從「SKU」清單中選取「All SKUs」。
 
-**注意：** BigQuery 年約和三年約的價格是以月為單位計算。每月帳單費用不會因月長度不同而有所變動。
-如果您的席位用量維持不變，每月費率也會維持不變。
+**注意：**BigQuery 一年期和三年期承諾使用合約是以月計價。帳單費用不會因每月天數不同而有所變動。如果運算單元用量不變，每月費率也會維持不變。
 
-## 預留項目費用歸因
+## 將運算費用歸因於個別專案
 
-這項功能可讓您將預留費用歸因於使用預留項目的任何專案，並追溯至特定查詢用量。這樣一來，每個專案的淨成本就會更準確。
+根據預設，在 BigQuery 版本的運算資源計價模式中，所有運算費用都會計入管理預留項目和運算資源承諾使用合約的中央管理專案。
 
-所有 [BigQuery Reservations API](https://docs.cloud.google.com/bigquery/docs/reservations-commitments?hl=zh-tw#enabling-reservations-api) 客戶的 Cloud Billing 資料中，都會有「Analysis Slots Attribution」行項目。這項明細會顯示在「帳單」頁面和 Cloud Billing 匯出資料中。
+為協助您預估專案層級預算及執行內部交易退單，BigQuery 提供兩種方法，可追蹤使用預留項目的個別查詢專案資源消耗量：
 
-這個委刊項會顯示每個專案使用的時段時數。這不會產生任何費用，也不會影響應付憑據總額。
+* **資訊版位歸因 (預設)：**帳單報表中的資訊委刊項，顯示每項專案使用的版位時數。實際運算費用仍會向管理專案收取。
+* **已計費用歸屬 (預先發布版)：**這項功能可選擇加入，啟用後，系統會根據運算單元用量，將實際計費的運算費用從管理專案直接轉移至個別查詢專案。
+
+### 資訊版位歸因
+
+根據預設，執行 SQL 工作的查詢專案會顯示 `$0` 的運算支出。不過，所有 [BigQuery Reservations API](https://docs.cloud.google.com/bigquery/docs/reservations-commitments?hl=zh-tw#enabling-reservations-api) 客戶的 Cloud Billing 資料中，都有「Analysis Slots Attribution」(分析運算單元歸因) 委刊項。這個明細項目會顯示在「Billing」(帳單) 頁面和 Cloud Billing 匯出資料中。
+
+這個明細項目會顯示每項專案使用的運算單元時數。這項服務不會產生費用，也不會影響月結單總額。
+
+### 已計費用歸因
+
+**預覽**
+
+這項功能適用《[服務專屬條款](https://docs.cloud.google.com/terms/service-terms?hl=zh-tw#1)》中「一般服務條款」一節的《正式發布前產品條款》。正式發布前功能是依「原樣」提供，支援服務可能受限。
+詳情請參閱[推出階段說明](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
+
+**注意：**如需預先發布版支援，請傳送電子郵件至 [bigquery-wlm-feedback@google.com](mailto:bigquery-wlm-feedback@google.com?subject=Cost%20Attribution%20Preview)。
+
+計費運算費用歸因會根據查詢消耗的運算單元時數，將實際運算費用從管理專案直接轉移至個別查詢專案 (也稱為*消耗專案*)。您可以使用計費運算成本歸因功能執行下列操作：
+
+* **追蹤專案層級費用：**直接在 Cloud Billing 帳單報表和資料匯出作業中，查看專案層級的用量 (`BigQuery` 服務 > `All SKUs`)。
+* **執行內部交易退單：**在各部門和團隊之間處理內部交易退單，不必建構自訂資料工程管道。
+* **屬性自動配置器用量：**根據自動配置器運算單元消耗量，按比例將自動配置器費用歸屬至特定專案。
+
+#### 必要的 IAM 角色
+
+如要取得啟用運算費用歸因所需的權限，請要求管理員授予您管理專案的 [BigQuery 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.admin) (`roles/bigquery.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+
+這個預先定義的角色具備 `bigquery.reservations.update` 權限，可啟用運算費用歸因功能。
+
+您或許還可透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)取得這項權限。
+
+#### 啟用運算費用歸因
+
+如要啟用查詢專案的運算費用歸因功能，請執行 [`ALTER PROJECT SET OPTIONS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_project_set_options) 資料定義語言 (DDL) 陳述式，並加上 `reservation_attribution_mode` 選項。
+
+1. 前往 Google Cloud 控制台的「BigQuery」頁面。
+
+   [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
+2. 在查詢編輯器中輸入下列陳述式：
+
+   ```
+   ALTER PROJECT `ADMIN_PROJECT_ID`
+   SET OPTIONS (
+     `region-LOCATION.reservation_attribution_mode` = 'RESERVATION_ATTRIBUTION_MODE_PROJECT_LEVEL'
+   );
+   ```
+
+   更改下列內容：
+
+   * `ADMIN_PROJECT_ID`：管理專案的專案 ID。
+   * `LOCATION`：預留項目的位置。
+3. 按一下「play\_circle 執行」。
+
+啟用運算費用歸因功能後，費用分配的變化會在下一個帳單日開始顯示在個別查詢專案中 (帳單日從 `America/Los_Angeles` 時區的 00:00 開始)。這些變更也會在約一天內反映在每日 Cloud Billing 帳單報表中。
+
+#### 歸因規則和行為
+
+啟用運算成本歸因功能後，成本分配會遵循下列規則：
+
+* **自動配置器分配：**自動配置器運算單元費用會嚴格歸因於在該時間範圍內觸發並耗用自動調度資源容量的查詢專案。如果專案執行的查詢只會耗用閒置的運算單元或基準承諾使用合約運算單元，則會產生 `$0` 的自動配置器費用。
+* **管理專案保留：**未使用的基準運算單元、未指派的運算單元承諾使用合約，以及未使用的自動調度資源運算單元 (來自 50 個運算單元的擴充增量和一分鐘的冷卻時間)，這些費用仍會歸入管理專案。
+* **單一帳單帳戶規定：**運算費用歸因功能要求管理專案和查詢專案必須屬於同一個 Cloud Billing 帳戶。如果查詢專案連結至其他帳單帳戶，其運算費用不會跨帳單帳戶轉移，而是會保留在管理專案中。
+* **儲存費用：**儲存費用會繼續直接向資料集所在的個別專案收取。
 
 ## 稽核記錄
 
-建立、刪除及更新與 [BigQuery 預留項目](https://docs.cloud.google.com/bigquery/docs/reservations-concepts?hl=zh-tw)相關的資源時，系統會將這些操作記錄在專案擁有者的稽核記錄中。詳情請參閱「[稽核記錄](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs?hl=zh-tw#auditlog_format)」。
+建立、刪除及更新與 [BigQuery 預留項目](https://docs.cloud.google.com/bigquery/docs/reservations-concepts?hl=zh-tw)相關的資源時，系統會將這些動作記錄在專案擁有者的稽核記錄中。詳情請參閱「[稽核記錄](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs?hl=zh-tw#auditlog_format)」。
 
-## 使用資訊結構定義監控自動調度資源功能
+## 使用資訊結構定義監控自動調度資源
 
-您可以使用下列 SQL 指令碼，查看特定版本的計費時段秒數。您必須在建立預訂的專案中執行這些指令碼。第一個指令碼顯示 `commitment_plan` 涵蓋的計費時段秒數，第二個指令碼則顯示承諾方案未涵蓋的計費時段秒數。
+您可以使用下列 SQL 指令碼，查看特定版本的計費運算單元秒數。您必須在建立預留項目的專案中執行這些指令碼。第一個指令碼會顯示 `commitment_plan` 涵蓋的計費運算單元秒數，第二個指令碼則會顯示未涵蓋在承諾使用合約中的計費運算單元秒數。
 
 您只需要設定三個變數的值，即可執行這些指令碼：
 
@@ -101,14 +162,14 @@ BigQuery 管理員可以查看專案和預留項目的運算單元用量，以�
 * `end_time`
 * `edition_to_check`
 
-這些指令碼須符合下列注意事項：
+這些指令碼有下列注意事項：
 
-* 資料保留期限結束時，系統會從資訊結構定義檢視畫面中移除已刪除的預留項目和運算資源承諾。指定最近的時間範圍，其中不含已刪除的預訂和承諾，以確保結果正確。
-* 由於四捨五入的誤差，指令碼結果可能與帳單不完全一致。
+* 資料保留期限結束後，已刪除的預留項目和運算資源承諾使用合約會從資訊結構定義檢視表中移除。請指定不含已刪除預留項目和承諾使用合約的近期時間範圍，以取得正確結果。
+* 由於四捨五入誤差，指令碼的結果可能與帳單不完全相符。
 
-下列指令碼會依版本匯總自動調度資源配額。
+下列指令碼會依版本匯總自動擴充運算單元。
 
-#### 展開即可查看計算各版本自動調度資源時段秒數的指令碼。
+#### 展開即可查看指令碼，用於計算各版本自動擴充運算單元秒數。
 
 ```
 SELECT
@@ -127,9 +188,9 @@ ORDER BY
   edition
 ```
 
-下列指令碼會彙整每個預留項目的自動調度運算單元。
+下列指令碼會匯總每個預留項目的自動調度資源運算單元。
 
-#### 展開即可查看計算每個預訂項目自動調度資源時數的指令碼。
+#### 展開即可查看指令碼，計算每個預留項目的自動調度資源運算單元秒數。
 
 ```
 select reservation_id, sum(s.autoscale_current_slots) as autoscale_slot_seconds
@@ -140,9 +201,9 @@ group by reservation_id
 order by reservation_id
 ```
 
-下列指令碼會檢查特定版本的承諾使用合約涵蓋的時段用量。
+下列指令碼會檢查特定版本承諾使用合約涵蓋的運算單元用量。
 
-#### 展開即可查看從承諾計算運算單元秒數的指令碼。
+#### 展開即可查看指令碼，計算承諾使用合約的運算單元秒數。
 
 ```
 DECLARE start_time,end_time TIMESTAMP;
@@ -170,7 +231,7 @@ two capacity changes. For example, if there are 100 slots between (2023-06-01
 10:00:00, 2023-06-01 11:00:00), then during that window the total slot seconds
 will be 100 * 3600.
 
-This script calculates a specific window (based on the variables defined above),
+This script calculates a specific window (based on the preceding variables),
 which is why the following script includes script_start_timestamp_unix_millis
 and script_end_timestamp_unix_millis. */
 
@@ -409,16 +470,16 @@ GROUP BY
   commitment_plan
 ```
 
-下列指令碼會檢查特定版本的承諾未涵蓋的空位用量。這項用量包含兩種運算單元：已調度運算單元和未納入承諾的基準運算單元。
+下列指令碼會檢查特定版本未涵蓋在承諾使用合約中的運算單元用量。這項用量包含兩種運算單元：擴充運算單元和未涵蓋在承諾使用合約中的基準運算單元。
 
-#### 展開即可查看計算承諾未涵蓋的廣告空間秒數的指令碼
+#### 展開即可查看指令碼，計算未涵蓋在承諾使用合約中的運算單元秒數
 
 ```
 /*
 This script has several parts:
 1. Calculate the baseline and scaled slots for reservations
 2. Calculate the committed slots
-3. Join the two results above to calculate the baseline not covered by committed
+3. Join the two preceding results to calculate the baseline not covered by committed
    slots
 4. Aggregate the number
 */
@@ -450,7 +511,7 @@ two capacity changes. For example, if there are 100 slots between (2023-06-01
 10:00:00, 2023-06-01 11:00:00), then during that window the total slot seconds
 will be 100 * 3600.
 
-This script calculates a specific window (based on the variables defined above),
+This script calculates a specific window (based on the preceding variables),
 which is why the following script includes script_start_timestamp_unix_millis
 and script_end_timestamp_unix_millis. */
 
@@ -579,7 +640,7 @@ WITH
       AND change_timestamp <= end_time
   ),
 
-  -- Convert the above to running total
+  -- Convert the preceding data to a running total
   /*
   +---------------------+-------------------------+----------------+
   |  change_timestamp   | autoscale_current_slots | baseline_slots |
@@ -752,7 +813,7 @@ WITH
   ),
 
   /*
-  Join the preceding tables, so that we will know the number for baseline not covered by commitments.
+  Join the preceding data to determine the baseline not covered by commitments.
   +---------------------+-----------------------+-------------------------+------------------------------------+
   |  change_timestamp   | next_change_timestamp | autoscale_current_slots | baseline_not_covered_by_commitment |
   +---------------------+-----------------------+-------------------------+------------------------------------+
@@ -828,40 +889,39 @@ FROM
   slot_seconds_data
 ```
 
-## 排解預訂監控問題
+## 預留項目監控疑難排解
 
-以下章節說明如何解決監控 BigQuery 預留位置和配額用量時的常見問題。
+以下各節說明如何解決監控 BigQuery 預留項目和運算單元用量時的常見問題。
 
-### 廣告空間用量指標不相符 `INFORMATION_SCHEMA`
+### 運算單元用量指標與 `INFORMATION_SCHEMA` 不符
 
-如果資源圖表中的時段使用指標與 `INFORMATION_SCHEMA` 資料不一致，請嘗試下列做法：
+如果資源圖表中的運算單元用量指標與 `INFORMATION_SCHEMA` 資料不一致，請嘗試下列做法：
 
 * **降低精細程度。**將圖表精細程度變更為 1 秒間隔，而非 1 小時間隔。
-* **調整匯總。**請務必使用與資源圖表和 `INFORMATION_SCHEMA` 資料一致的匯總方法。舉例來說，如要更準確地反映資源圖表中的尖峰用量，請將指標彙整方式一律改為 p99 或 p90。
+* **調整匯總。**請務必使用資源圖表和 `INFORMATION_SCHEMA` 資料一致的匯總方法。舉例來說，如要更準確地反映資源圖表中的用量高峰，請將指標匯總方式一律變更為 p99 或 p90。
 
-### 停用閒置時段後，系統會顯示借用的時段
+### 停用閒置的運算單元時，會顯示借用的運算單元
 
-即使已為一或多筆預訂設定 `ignore_idle_slots=true`，監控圖表仍可能顯示 `borrowed_slots` 的非零值。這項設定可防止預留項目*借用*閒置運算單元，但不會阻止預留項目將未使用的運算單元*借給*其他預留項目。
+即使一或多個預留項目已設定 `ignore_idle_slots=true`，監控圖表仍可能顯示非零的 `borrowed_slots` 值。這項設定會禁止預留項目「借用」閒置的運算單元，但不會禁止預留項目將未使用的運算單元「借給」其他預留項目。
 
-在下列情況下，系統會顯示借用的時段：
+這些借用的運算單元會顯示在下列情況：
 
-* **借給其他預留項目。**如果預留項目設為 `ignore_idle_slots=true`，即可將未使用的基準運算單元借給相同管理員專案、區域和版本中，*允許*借用閒置運算單元的其他預留項目 (`ignore_idle_slots=false`)。如果管理員專案、區域和版本中的所有預留項目都設為 `ignore_idle_slots=true`，則這些預留項目不會共用閒置運算單元。
+* **借給其他預留項目。**如果預留項目設為 `ignore_idle_slots=true`，則可將未使用的基準運算單元，借給相同管理專案、區域和版本中*允許*借用閒置的運算單元 (`ignore_idle_slots=false`) 的其他預留項目。如果管理專案、區域和版本中的所有預留項目都設為 `ignore_idle_slots=true`，則不會共用閒置的運算單元。
 
-  舉例來說，假設預留項目 A 有 100 個運算單元，用量為 0，且已設定 `ignore_idle_slots=true`。保留項目 B 位於相同管理專案、區域和版本，有 100 個時段，工作負載需要 150 個時段，且已設定 `ignore_idle_slots=false`。預留項目 B 可以向預留項目 A 借用 50 個閒置運算單元，以滿足自身需求。發生這種情況時，監控圖表會回報預留項目 A 為 50 `lent_slots`，預留項目 B 為 50 `borrowed_slots`。
-* **用量超出容量。**如果預留項目的運算單元用量暫時超過容量 (基準值 + 自動調度運算單元)，監控圖表會將這項差異顯示為 `borrowed_slots`。即使是使用 `ignore_idle_slots=true` 預訂的行程，也可能發生這種情況。
+  舉例來說，假設預留項目 A 有 100 個運算單元，用量為 0，並設有 `ignore_idle_slots=true`。預留項目 B 位於相同的管理專案、區域和版本，有 100 個運算單元，工作負載需要 150 個運算單元，並設定為 `ignore_idle_slots=false`。預留項目 B 可從預留項目 A 借用 50 個閒置的運算單元，以滿足需求。發生這種情況時，監控圖表會回報預留項目 A 的 50 `lent_slots` 和預留項目 B 的 50 `borrowed_slots`。
+* **用量超過容量。**如果預留項目的運算單元用量暫時超過容量 (基準 + 自動調度運算單元)，監控圖表會將這項差異顯示為 `borrowed_slots`。即使預留項目含有 `ignore_idle_slots=true`，也可能發生這種情況。
 
-運算單元用量有時可能會超過基準運算單元加上調度運算單元的總和。
-如果運算單元用量超過基準運算單元加上擴充運算單元，系統不會向您收費。
+運算單元用量有時可能會超過基準和擴充運算單元的總和。如果運算單元用量超過基準加上擴充運算單元，您不需支付費用。
 
-### 預留項目用盡前，會顯示借用的運算單元
+### 預留項目用盡前，會先顯示借用的運算單元
 
-監控資訊主頁會使用樣本資料，因此可能無法準確反映取樣間隔內運算單元使用情況的確切時間。
+監控資訊主頁會使用樣本資料，可能無法準確反映取樣間隔內運算單元用量的精確時間。
 
-如要更準確地分析運算單元用量，請查詢與閒置運算單元相關的資料欄，例如 [`INFORMATION_SCHEMA.RESERVATIONS_TIMELINE` 檢視中的 `borrowed_slots` 和 `lent_slots` 資料欄](https://docs.cloud.google.com/bigquery/docs/information-schema-reservation-timeline?hl=zh-tw#schema)。
+如要更準確地分析運算單元用量，請查詢與閒置運算單元相關的資料欄，例如 [`INFORMATION_SCHEMA.RESERVATIONS_TIMELINE` 檢視表](https://docs.cloud.google.com/bigquery/docs/information-schema-reservation-timeline?hl=zh-tw#schema)中的 `borrowed_slots` 和 `lent_slots` 資料欄。
 
 ## 後續步驟
 
-* 瞭解[容量承諾方案](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#slot_commitments)。
+* 瞭解[容量承諾使用方案](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#slot_commitments)。
 * 瞭解如何[使用管理資源圖表](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts?hl=zh-tw)。
 * 瞭解 [BigQuery 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw)。
 
@@ -872,11 +932,11 @@ FROM
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-08 (世界標準時間)。
+上次更新時間：2026-11-09 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-08 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-09 (世界標準時間)。"],[],[]]

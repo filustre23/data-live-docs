@@ -355,15 +355,5 @@ SELECT
 FROM
   `bigquery-public-data.cfpb_complaints.complaint_database`
 WHERE
-  consumer_complaint_narrative IS NOT NULL
-  AND LENGTH(consumer_complaint_narrative) > 100 -- Ensure there's a narrative to analyze
-LIMIT 3;
-```
-
-The result is similar to the following:
-
-```
-+--------------+-----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| complaint_id | complaint_type  |                                                                                      grievance_subject                                                                                       |
-+--------------+---------------
+  consumer_complaint_narrative
 ```

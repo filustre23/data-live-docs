@@ -455,9 +455,4 @@ CREATE (OR REPLACE) MODEL `myproject.mydataset.ca_model`
     CONTRIBUTION_METRIC = 'SUM(concessions_sold)/SUM(attendee_count)',
     DIMENSION_ID_COLS = ['venue_ID','event_date','concession_type'],
     IS_TEST_COL = 'test_col',
-    MIN_APRIORI_SUPPORT = .08
-) AS
-SELECT concessions_sold, attendee_count, venue_ID,
-  event_date, concession_type, test_col
-FROM mydataset.regional_sales;
 ```

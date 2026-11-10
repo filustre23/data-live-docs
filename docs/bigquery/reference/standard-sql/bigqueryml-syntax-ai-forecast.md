@@ -437,9 +437,5 @@ number of bike trips for each different user type for the next 30 days:
 ```
 WITH
   citibike_trips AS (
-    SELECT EXTRACT(DATE FROM starttime) AS date, usertype, COUNT(*) AS num_trips
-    FROM `bigquery-public-data.new_york.citibike_trips`
-    GROUP BY date, usertype
-  )
-SELECT
+    SELECT EXTRACT(DATE FROM starttime
 ```

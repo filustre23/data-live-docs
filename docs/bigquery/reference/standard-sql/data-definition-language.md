@@ -190,13 +190,4 @@ public class DDLCreateView {
     } catch (BigQueryException | InterruptedException e) {
       System.out.println("View was not created. \n" + e.toString());
     }
-  }
-}
 ```
-
-### Node.js
-
-Before trying this sample, follow the Node.js setup instructions in the
-[BigQuery quickstart using
-client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries).
-For more information, see the

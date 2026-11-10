@@ -262,11 +262,4 @@ bq mk
 
   + `connector.authentication.oauth.clientId`：與 Salesforce 連結的應用程式用戶端金鑰。
   + `connector.authentication.oauth.clientSecret`：Salesforce 連結應用程式的 OAuth 用戶端密鑰或消費者密鑰。
-  + `connector.authentication.oauth.myDomain`：[Salesforce My Domain](https://help.salesforce.com/s/articleView?id=sf.domain_name_overview.htm)。舉例來說，如果網域網址是 `example.my.salesforce.com`，則值為 `example`。
-  + `ingestionType`：指定 `full` 或 `incremental`。詳情請參閱「[完整或增量移轉](https://docs.cloud.google.com/bigquery/docs/salesforce-transfer-intro?hl=zh-tw#full-incremental-transfers)」。
-  + `writeMode`：指定 `WRITE_MODE_APPEND` 或 `WRITE_MODE_UPSERT`。
-  + `watermarkColumns`：將資料表中的資料欄指定為浮水印資料欄。如要進行增量移轉，則必須填寫這個欄位。
-  + `primaryKeys`：將資料表中的資料欄指定為主鍵。如要進行增量移轉，則必須填寫這個欄位。
-  + `assets`：要移轉至 BigQuery 的 Salesforce 物件路徑。
-
-在遞增移轉作業中指定多項資產時，`watermarkColumns` 和 `primaryKeys` 欄位的值
+  + `connector.authentication.oauth.myDomain<`

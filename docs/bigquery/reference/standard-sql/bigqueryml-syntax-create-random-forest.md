@@ -521,29 +521,5 @@ To balance every class, set this option to `TRUE`. Balance is
 accomplished using the following formula:
 
 ```
-total_input_rows / (input_rows_for_class_n * number_of_unique_classes)
+total_input_rows / (input_rows_for_class_n *
 ```
-
-**Arguments**
-
-A `BOOL` value. The default value is `FALSE`.
-
-### `CLASS_WEIGHTS`
-
-**Syntax**
-
-`CLASS_WEIGHTS = struct_array`
-
-**Description**
-
-The weights to use for each class label. You can't specify this option if
-[`AUTO_CLASS_WEIGHTS`](#auto_class_weights) is `TRUE`.
-
-**Arguments**
-
-An `ARRAY` of `STRUCT` values. Each `STRUCT` contains a
-`STRING` value that specifies the class label and a `FLOAT64` value that
-specifies the weight for that class label. A weight must be present for every
-class label. The weights are not required to add up to 1.
-
-A `CLASS_WEIGHTS` value might look like the following example:

@@ -218,22 +218,3 @@ bq mk
 如要手動執行資料轉移 (不在排程內)，可以啟動[回填作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)。
 
 如要瞭解轉移的資料如何對應至 Meta API 欄位，請參閱「[Facebook 廣告報表轉換](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transformation?hl=zh-tw)」。
-
-## 動作集合
-
-動作集合是物件，可指定使用者對廣告採取的不同動作類型。[設定移轉設定](#fb_ads_transfer_setup)時，您可以指定動作集合。
-
-動作集合代表
-[`Ad Account, Insights` 端點回應中存在的 [`list<AdsActionStats>` 類型](https://developers.facebook.com/docs/marketing-api/reference/ads-action-stats/)欄位](https://developers.facebook.com/docs/marketing-api/reference/ad-account/insights/)
-。
-
-轉移完成後，這些動作集合會填入[`AdInsightsActions`表格](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transformation?hl=zh-tw#adinsightsactions_report)。
-
-**注意：** 為移轉作業指定的動作集合越多，就越有可能[達到 Facebook Ads 設下的頻率限制](https://developers.facebook.com/docs/marketing-api/overview/rate-limiting)。
-
-以下列出 Facebook 廣告資料轉移作業支援的動作集合：
-
-* `ActionValues`
-* `Actions`
-* `AdClickActions`
-* `AdImpressionActions`

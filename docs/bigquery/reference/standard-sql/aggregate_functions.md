@@ -185,13 +185,5 @@ GROUP BY S_location_id;
 ANY_VALUE(
   expression
   [ WHERE where_expression ]
-  [ HAVING { MAX | MIN } having_expression ]
-)
-[ OVER over_clause ]
-
-over_clause:
-  { named_window | ( [ window_specification ] ) }
-
-window_specification:
-  [
+  [ HAVING { MAX | MIN } having_expression
 ```

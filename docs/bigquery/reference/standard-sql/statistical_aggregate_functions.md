@@ -247,23 +247,3 @@ into this function, see
 [Aggregate function calls](/bigquery/docs/reference/standard-sql/aggregate-function-calls).
 
 This function can be used with the
-[`AGGREGATION_THRESHOLD` clause](/bigquery/docs/reference/standard-sql/query-syntax#agg_threshold_clause).
-
-
-
-To learn more about the `OVER` clause and how to use it, see
-[Window function calls](/bigquery/docs/reference/standard-sql/window-function-calls).
-
-
-
-**Return Data Type**
-
-`FLOAT64`
-
-**Examples**
-
-```
-SELECT COVAR_POP(y, x) AS results
-FROM
-  UNNEST(
-```

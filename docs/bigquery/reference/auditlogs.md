@@ -451,26 +451,4 @@ The following audit logs are associated with methods belonging to
   + `bigquery.tables.updateData - DATA_WRITE`
 * **Method is a long-running or streaming operation**:
   No.
-* **Filter for this method**: `protoPayload.methodName="jobservice.insert"`
-
-#### `jobcompleted`
-
-* **Method**: `jobservice.jobcompleted`
-* **Audit log type**: [Data access](/logging/docs/audit#data-access)
-* **Permissions**:
-* **Method is a long-running or streaming operation**:
-  No.
-* **Filter for this method**: `protoPayload.methodName="jobservice.jobcompleted"`
-
-#### `query`
-
-* **Method**: `jobservice.query`
-* **Audit log type**: [Data access](/logging/docs/audit#data-access)
-* **Permissions**:
-  + `bigquery.jobs.create - ADMIN_WRITE`
-  + `bigquery.tables.getData - DATA_READ`
-* **Method is a long-running or streaming operation**:
-  No.
-* **Filter for this method**: `protoPayload.methodName="jobservice.query"`
-
-### `tabledata`
+* **Filter for this method**: `protoPayload.methodNa`

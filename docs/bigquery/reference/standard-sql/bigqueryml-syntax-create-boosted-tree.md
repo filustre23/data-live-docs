@@ -523,26 +523,4 @@ no default range, and the scale type is `LINEAR`.
 **Description**
 
 The subsample ratio of columns for each node (split). Subsampling occurs once
-for every time a new split is evaluated. Columns are subsampled from the set of
-columns chosen for the current level.
-
-**Arguments**
-
-If you aren't running hyperparameter tuning, then you can specify a `FLOAT64`
-value between `0` and `1.0`. The default value is `1.0`.
-
-If you are running hyperparameter tuning, use one of the following options:
-
-* The `HPARAM_RANGE` keyword and two `FLOAT64` values that define
-  the range of the hyperparameter. For example,
-  `COLSAMPLE_BYNODE = HPARAM_RANGE(0, 0.3)`.
-* The `HPARAM_CANDIDATES` keyword and an array of `FLOAT64` values
-  that provide discrete values to use for the hyperparameter. For example,
-  `COLSAMPLE_BYNODE = HPARAM_CANDIDATES([0, 0.1, 0.3, 0.5])`.
-
-When running hyperparameter tuning, the valid range is `[0, 1.0]`, there is
-no default range, and the scale type is `LINEAR`.
-
-### `MIN_SPLIT_LOSS`
-
-**Syntax**
+for every time a new split is evaluated.

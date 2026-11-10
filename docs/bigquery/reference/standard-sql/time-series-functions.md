@@ -371,16 +371,3 @@ The `CHANGES` function returns a table with the following columns:
 
 This example shows the change history returned by the `CHANGES` function as
 various changes are made to a table called `Produce`. First, create the table:
-
-```
-CREATE TABLE mydataset.Produce (
-  product STRING,
-  inventory INT64)
-OPTIONS(enable_change_history=true);
-```
-
-Insert two rows into the table:
-
-```
-INSERT
-```

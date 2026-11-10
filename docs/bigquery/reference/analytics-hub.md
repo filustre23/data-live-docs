@@ -77,7 +77,7 @@ If you are using [sbt](https://www.scala-sbt.org/), add
 the following to your dependencies:
 
 ```
-libraryDependencies += "com.google.cloud" % "google-cloud-analyticshub" % "0.98.0"
+libraryDependencies += "com.google.cloud" % "google-cloud-analyticshub" % "0.99.0"
 ```
 
 If you're using Visual Studio Code or IntelliJ, you can add client libraries to your
@@ -234,7 +234,5 @@ func main() {
 
 	// Then, create the data exchange (or return information about one already bearing the example name), and
 	// print information about it.
-	exchange, err := createOrGetDataExchange(ctx, ahubClient, *projectID, *location, *exchangeID)
-	if err != nil {
-		log.Fatalf("failed to get information about the exchange
+	exchange, err :=
 ```

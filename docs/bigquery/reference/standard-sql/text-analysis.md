@@ -504,27 +504,5 @@ the following query, `stop_words` is used twice:
 SELECT TEXT_ANALYZE(
   'I like ❶ ② pies, you like Ño PIEs',
   analyzer=>'LOG_ANALYZER',
-  analyzer_options=>'''
-  {
-    "token_filters": [
-      {
-        "stop_words": ["like", "you"]
-      },
-      {
-        "normalizer": {
-          "mode": "ICU_NORMALIZE",
-          "icu_normalize_mode": "NFKC",
-          "icu_case_folding": true
-        }
-      },
-      {
-        "stop_words": ["ño"]
-      }
-    ]
-  }
-  '''
-) AS results
-
-/*----------------------------------+
- | results
+  analyzer_options=>'<
 ```

@@ -113,8 +113,4 @@ A capacity commitment is a way to purchase compute capacity for BigQuery jobs (i
 
 | GetCapacityCommitment |
 | --- |
-| `rpc GetCapacityCommitment(GetCapacityCommitmentRequest) returns (CapacityCommitment)`  Returns information about the capacity commitment.  Authorization scopes  Requires one of the following OAuth scopes:   * `https://www.googleapis.com/auth/bigquery` * `https://www.googleapis.com/auth/cloud-platform`   For more information, see the [Authentication Overview](/docs/authentication#authorization-gcp). |
-
-| GetIamPolicy |
-| --- |
-| `rpc GetIamPolicy(GetIamPolicyRequest) returns (Policy)`  Gets the access control policy for a resource. May return:   * A`NOT_FOUND` |
+| `rpc GetCapacityCommitment(GetCapacityCommitmentRequest) returns (CapacityCommitment)`  Returns information about the capacity commitment.  Authorization scopes  Requires one of th |

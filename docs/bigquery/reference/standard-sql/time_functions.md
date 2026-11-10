@@ -370,17 +370,5 @@ SELECT
   TIME_DIFF(TIME '04:54:00', TIME '01:00:00', HOUR) AS diff_3_9,
   TIME_DIFF(TIME '04:06:00', TIME '01:00:00', HOUR) AS diff_3_1,
   TIME_DIFF(TIME '01:00:00', TIME '04:54:00', HOUR) AS diff_negative_3_9,
-  TIME_DIFF(TIME '01:00:00', TIME '04:06:00', HOUR) AS diff_negative_3_1;
-
-/*----------+----------+-------------------+-------------------+
- | diff_3_9 | diff_3_1 | diff_negative_3_9 | diff_negative_3_1 |
- +----------+----------+-------------------+-------------------+
- | 3        | 3        | -3                | -3                |
- +----------+----------+-------------------+-------------------*/
-```
-
-## `TIME_SUB`
-
-```
-TIME_SUB(time_expression, INTERVAL step_size
+  TIME_DIFF(TIME '01:00:00', TIME '04:06:00',
 ```

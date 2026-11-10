@@ -280,17 +280,5 @@ WITH
       3 AS PointsScored UNION ALL
     SELECT ('Buchanan', 'Jie', 19), 0 UNION ALL
     SELECT ('Adams', 'Noam', 20), 4 UNION ALL
-    SELECT ('Buchanan', 'Jie', 19), 13
-  )
-SELECT DISTINCT Player
-FROM PlayerStats;
-
-/*--------------------------+
- | player                   |
- +--------------------------+
- | {                        |
- |   last_name: "Adams",    |
- |   first_name: "Noam",    |
- |   age: 20                |
- |  }
+    SELECT <
 ```

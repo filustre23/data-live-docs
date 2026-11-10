@@ -514,21 +514,3 @@ A `STRING` value containing the fully-qualified name of the CMEK. For example,
 ```
 'projects/my_project/locations/my_location/keyRings/my_ring/cryptoKeys/my_key'
 ```
-
-### Internal parameter defaults
-
-BigQuery ML uses the following default values when building
-models:
-
-```
-loss_reduction = losses_utils.ReductionV2.SUM_OVER_BATCH_SIZE
-
-batch_norm = False
-```
-
-### `query_statement`
-
-The `AS query_statement` clause specifies the
-GoogleSQL query used to generate the training data. See the
-[GoogleSQL query syntax](/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax)
-page for the supported SQL syntax of the `query_statement` clause.

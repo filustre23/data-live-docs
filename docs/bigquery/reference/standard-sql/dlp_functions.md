@@ -195,17 +195,4 @@ You can use this function instead of the `key` argument for
 DLP deterministic encryption functions. This function lets
 you use the [AES-SIV encryption functions](https://cloud.google.com/dlp/docs/pseudonymization#aes-siv)
 without including `plaintext` keys in a query. To use DLP functions, you need a
-[new cryptographic key and then use that key to get a wrapped key](/bigquery/docs/column-key-encrypt#wrapped-key-dlp-functions).
-
-**Definitions**
-
-* `kms_resource_name`: A `STRING` literal that contains the resource path to the
-  Cloud KMS key. `kms_resource_name` can't be `NULL` and must reside
-  in the same Cloud region where this function is executed. This argument is
-  used to derive the data encryption key in the `DLP_DETERMINISTIC_DECRYPT` and
-  `DLP_DETERMINISTIC_ENCRYPT` functions. A Cloud KMS key looks like
-  this:
-
-  ```
-  gcp-kms://projects/my-project/locations/us/keyRings
-  ```
+[new cryptographic key and then use](/bigquery/docs/column-key-encrypt#wrapped-key-dlp-functions)

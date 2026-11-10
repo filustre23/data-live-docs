@@ -343,17 +343,5 @@ SELECT
   SEARCH('foobar@example.com', '`example.com`') AS f,
 
   -- TRUE: An exact match is found between the space delimiters.
-  SEARCH('a foobar-example b', '`foobar-example`') AS g;
-
-/*-------+-------+-------+-------+-------+-------+-------+
- | a     | b     | c     | d     | e     | f     | g     |
- +-------+-------+-------+-------+-------+-------+-------+
- | true  | true  | true  | false | false | true  | true  |
- +-------+-------+-------+-------+-------+-------+-------*/
-```
-
-```
-SELECT
-  -- FALSE: No single array entry matches all search terms.
-  SEARCH(['foobar', 'example']
+  SEARCH('a foobar-example b', '`foobar-example`'
 ```

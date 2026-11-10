@@ -50,6 +50,13 @@ BigQuery 的運算定價有些微差異，會影響資源容量規劃和費用�
 
 您可以將預留基準設為 0，並將上限設為符合工作負載需求的設定，完全視需求使用版本。BigQuery 會自動擴充至工作負載所需的運算單元數量，但不會超過您設定的上限。詳情請參閱「[使用預留項目管理工作負載](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw)」。
 
+### 將運算資源費用歸因至用量專案
+
+如果貴組織採用 BigQuery 版本依用量計費的定價模式，並將工作負載分散到多個查詢專案 (`consumption
+projects`)，建議在管理專案中啟用[運算費用歸因](https://docs.cloud.google.com/bigquery/docs/reservations-monitoring?hl=zh-tw#reservation_cost_attribution)功能。
+
+直接將運算資源費用歸因於執行查詢的專案，即可在 Cloud Billing 中查看專案層級的運算費用，並更有效地執行 FinOps 內部交易退單。
+
 ## 控管查詢費用
 
 如要控管個別查詢的費用，建議您先按照最佳做法[最佳化查詢運算](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-compute?hl=zh-tw)和[最佳化儲存空間](https://docs.cloud.google.com/bigquery/docs/best-practices-storage?hl=zh-tw)。
@@ -126,7 +133,7 @@ Query successfully validated. Assuming the tables are not modified,
 running this query will process 10918 bytes of data.
 ```
 
-**注意：** 如果查詢處理的資料量較小，您可能需要將處理的位元組從 KB 轉換為 MB。MB 是 Pricing Calculator 使用的最小單位。
+**注意：**如果查詢處理的資料量較小，您可能需要將處理的位元組從 KB 轉換為 MB。MB 是 Pricing Calculator 使用的最小單位。
 
 ### API
 
@@ -705,11 +712,11 @@ Your project exceeded quota for free query bytes scanned
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-08 (世界標準時間)。
+上次更新時間：2026-11-09 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-08 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-09 (世界標準時間)。"],[],[]]

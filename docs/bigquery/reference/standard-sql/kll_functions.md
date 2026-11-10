@@ -283,14 +283,5 @@ FROM
   );
 
 /*---------+
- | halves  |
- +---------+
- | [1,3,5] |
- +---------*/
-```
-
-```
-WITH points AS (
-  SELECT 1 AS x, 1 AS y UNION ALL
-  SE
+ |
 ```

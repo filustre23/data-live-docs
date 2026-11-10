@@ -237,17 +237,4 @@ BigQuery 從一開始就將運算、記憶體和儲存空間分開處理，而�
 
 BigQuery 運算資源是以[運算單元](https://docs.cloud.google.com/bigquery/docs/slots?hl=zh-tw)為單位，這是執行查詢所需的運算能力單位。Google 會管理封裝插槽的整個基礎架構，因此您只需要為 BigQuery 工作負載選擇適當的插槽數量。請參閱[容量規劃](#capacity_planning)，協助決定資料倉儲要購買多少個時段。BigQuery 記憶體是由[遠端分散式服務](https://cloud.google.com/blog/products/gcp/in-memory-query-execution-in-google-bigquery?hl=zh-tw)提供，並透過 Google 的 Petabit 網路連線至運算單元，所有作業都由 Google 管理。
 
-BigQuery 和 Amazon Redshift 都使用欄式儲存空間，但 BigQuery 使用的欄式儲存空間[變化和進展](https://cloud.google.com/blog/products/gcp/inside-capacitor-bigquerys-next-generation-columnar-storage-format?hl=zh-tw)。在編碼資料欄時，系統會保存各種資料統計資料，並在稍後查詢執行期間使用這些資料，編譯最佳計畫及選擇最有效率的執行階段演算法。BigQuery 會將資料儲存在 [Google 的分散式檔案系統](https://cloud.google.com/files/storage_architecture_and_challenges.pdf?hl=zh-tw)中，並自動壓縮、加密、複製及散布資料。而且完全不會影響查詢可用的運算能力。將儲存空間與運算資源分開，可讓您順暢擴充儲存空間，最多可達數十 PB，且不需要額外的高價運算資源。此外，運算與儲存空間分離還有許多其他[優點](https://cloud.google.com/blog/products/gcp/separation-of-compute-and-state-in-google-bigquery-and-cloud-dataflow-and-why-it-matters?hl=zh-tw)。
-
-#### 向上或向下擴充
-
-儲存空間或運算資源受限時，您必須修改叢集中的節點數量或類型，才能調整 Amazon Redshift 叢集的大小。
-
-[調整 Amazon Redshift 叢集大小](https://docs.aws.amazon.com/redshift/latest/mgmt/managing-cluster-operations.html)時，有兩種做法：
-
-* **傳統調整大小**：Amazon Redshift 會建立叢集並複製資料，如果資料量很大，這個程序可能需要幾小時，甚至兩天以上的時間。
-* **彈性調整大小**：如果只變更節點數量，系統會暫時停止查詢，並盡可能保持連線開啟。在調整大小作業期間，叢集處於唯讀狀態。彈性調整大小通常需要 10 到 15 分鐘，但可能不適用於所有設定。
-
-由於 BigQuery 是平台即服務 (PaaS)，您只需考慮要為貴機構預留多少 BigQuery 運算單元。您可以在保留項目中預留 BigQuery 運算單元，然後將專案指派給這些保留項目。如要瞭解如何設定這些預留項目，請參閱「[容量規劃](#capacity_planning)」。
-
-#### 查詢執
+BigQuery 和 Amazon Redshift 都使用欄式儲存空間，但 BigQuery 使用的欄式儲存空間[變化和進展](https://cloud.google.com/blog/products/gcp/inside-capacitor-bigquerys-next-generation-columnar-storage-format?hl=zh-tw)。在編碼資料欄時，系統會保存各種資料統計資料，並在稍後查詢執行期間使用這些資料，編譯最佳計畫及選擇最有效率的執行階段演算法。BigQuery 會將資料儲存在 [Google 的分散式檔案系統](https://cloud.google.com/files/storage_architecture_and_challenges.pdf?hl=zh-tw)中，並自動壓縮、加密、複製及散布資料。而且完全不會影響查詢可用的運算能力。將儲存空間與運算資源分開，可讓您順暢擴充儲存空間，最多可達數十 PB，且不需要額外的高價運算資源。此外，運算與儲存空間分離還有許多其他

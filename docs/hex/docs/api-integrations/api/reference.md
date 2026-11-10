@@ -2548,5 +2548,3 @@ Copy
 **403**
 
 **500**
-
-patch/v1/collections/{collectionId}<

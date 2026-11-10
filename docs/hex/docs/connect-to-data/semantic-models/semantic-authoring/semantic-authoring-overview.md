@@ -7,7 +7,7 @@ info
 * Semantic authoring is in **public beta** and available for [Team and Enterprise plans](https://hex.tech/pricing/).
 * You need the **Admin** or **Manager** workspace role to create and edit semantic projects.
 
-Semantic authoring lets you create and manage semantic resources directly in Hex — no third-party tool required. Semantic projects define a set of data models containing measures, dimensions, and relationships to provide a consistent, governed source of truth for self-serve analytics and AI across your workspace.
+Semantic authoring lets you create and manage semantic resources directly in Hex — no third-party tool required. Semantic projects define a set of semantic models containing measures, dimensions, and relationships to provide a consistent, governed source of truth for self-serve analytics and AI across your workspace.
 
 ## Create a semantic project[​](#create-a-semantic-project "Direct link to Create a semantic project")
 
@@ -18,7 +18,7 @@ Semantic authoring lets you create and manage semantic resources directly in Hex
 
 ## Use the Modeling Workbench[​](#use-the-modeling-workbench "Direct link to Use the Modeling Workbench")
 
-The Modeling Workbench is where you define all the data models and views in your semantic project, as well as their relationships. You can create data models based on existing tables and their columns, use inline validation and autocomplete to help build your YAML file, and use the publish preview to review changes and understand their impact before deploying.
+The Modeling Workbench is where you define all the semantic models and semantic views in your semantic project, as well as their relationships. You can create semantic models based on existing tables and their columns, use inline validation and autocomplete to help build your YAML file, and use the publish preview to review changes and understand their impact before deploying.
 
 ### Create a model[​](#create-a-model "Direct link to Create a model")
 
@@ -43,7 +43,7 @@ See [YAML specification](/docs/connect-to-data/semantic-models/semantic-authorin
 
 ### Semantic Views[​](#semantic-views "Direct link to Semantic Views")
 
-Semantic views provide curated entry points into your semantic project, making complex data models more accessible. While models define all of your measures, dimensions, and relationships, semantic views let you select and organize a subset of those fields into a focused, user-friendly interface.
+Semantic views provide curated entry points into your semantic project, making complex semantic models more accessible. While models define all of your measures, dimensions, and relationships, semantic views let you select and organize a subset of those fields into a focused, user-friendly interface.
 
 Views are optional, but helpful when you want to:
 

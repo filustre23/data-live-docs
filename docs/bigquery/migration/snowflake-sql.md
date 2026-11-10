@@ -146,12 +146,3 @@ statements.
 In Snowflake, a stored procedure is executed with a
 [CALL](https://docs.snowflake.net/manuals/sql-reference/sql/call.html) command
 while in BigQuery, stored procedures are
-[executed](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#create_procedure)
-like any other BigQuery function.
-
-The following table addresses differences in stored procedure creation syntax
-between Snowflake and BigQuery.
-
-| **Snowflake** | BigQuery |
-| --- | --- |
-| `CREATE [OR REPLACE] PROCEDURE`  `procedure_name`  `([arg_name arg_data_type[,..]])`  `RETURNS data_type`  `AS procedure_definition;`   Note: Snowflake requires that stored procedures return a single value. Hence, return data type is a required option. | `CREATE [OR REPLACE] PROCEDURE`  `procedure_name`  `([arg_mode arg_name arg_data_type[,..]])`  `BEGIN`  `proc` |

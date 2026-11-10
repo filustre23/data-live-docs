@@ -248,22 +248,4 @@ ALTER ACCOUNT SET PREVENT_UNLOAD_TO_INLINE_URL = false;
 
     1. 按一下啟用電子郵件通知的切換開關。啟用這個選項之後，若移轉失敗，移轉作業管理員就會收到電子郵件通知。
     2. 在「Select a Pub/Sub topic」(選取 Pub/Sub 主題) 選取[主題](https://docs.cloud.google.com/pubsub/docs/overview?hl=zh-tw#types)名稱，或是點選「Create a topic」(建立主題)。這個選項會設定移轉作業的 Pub/Sub 執行[通知](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications?hl=zh-tw)。
-12. 如果使用 [CMEK](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw)，請在「Advanced options」(進階選項) 部分選取「Customer-managed key」(客戶管理的金鑰)。畫面隨即會列出可用的 CMEK 供您選擇。如要瞭解 CMEK 如何與 BigQuery 資料移轉服務搭配運作，請參閱[指定移轉作業加密金鑰](#CMEK)的相關說明。
-13. 按一下「儲存」。
-14. Google Cloud 控制台會顯示所有移轉設定詳細資料，包括這項移轉作業的「Resource name」(資源名稱)。
-
-### bq
-
-輸入 `bq mk` 指令並加上移轉建立作業旗標 `--transfer_config`。還需加上以下旗標：
-
-* `--project_id`
-* `--data_source`
-* `--target_dataset`
-* `--display_name`
-* `--params`
-
-```
-bq mk \
-    --transfer_config \
-    --project_id=PROJECT_ID \
-```
+12. 如果使用 [CMEK](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw)，請在「Advanced options」(進階選項) 部分選取「Customer-managed key」(客戶管理的金鑰)。畫面隨即會列出可用的 CMEK 供您選擇。如要瞭解 CMEK 如何與 BigQuery 資料移轉服務搭配運作，請參

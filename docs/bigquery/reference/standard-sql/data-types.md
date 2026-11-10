@@ -380,11 +380,3 @@ You can construct an array using array literals or array functions.
 
 You can build an array literal in GoogleSQL using brackets (`[` and
 `]`). Each element in an array is separated by a comma.
-
-```
-SELECT [1, 2, 3] AS numbers;
-
-SELECT ["apple", "pear", "orange"] AS fruit;
-
-SELECT
-```

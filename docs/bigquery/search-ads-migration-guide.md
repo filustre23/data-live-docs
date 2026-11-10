@@ -131,7 +131,5 @@ FROM
 LEFT JOIN
   `new_dataset.sa_CampaignStats_customer_id` cs
 ON
-  (c.campaign_id = cs.campaign_id
-  AND cs._DATA_DATE BETWEEN
-  DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY) AND DATE_ADD(CURRENT_DATE(), IN
+  (c.campaign_id
 ```

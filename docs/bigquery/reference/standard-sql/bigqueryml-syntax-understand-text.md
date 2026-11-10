@@ -241,12 +241,3 @@ SELECT * FROM `mydataset.classfied_result_next`;
 * For more information about supported SQL statements and functions for
   generative AI models, see
   [End-to-end user journeys for generative AI models](/bigquery/docs/e2e-journey-genai).
-
-
-
-
-Send feedback
-
-Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
-
-Last updated 2026-11-07 UTC.

@@ -286,17 +286,4 @@ FROM Produce
    [WINDOW name AS window_spec, ...]
 ```
 
-**Description**
-
-Propagates the existing table and adds computed columns, similar to
-[`SELECT *, new_column`](/bigquery/docs/reference/standard-sql/query-syntax#select_star) in standard syntax. The `EXTEND` operator supports
-[window functions](/bigquery/docs/reference/standard-sql/window-function-calls)
-, including [named windows](/bigquery/docs/reference/standard-sql/window-function-calls#def_use_named_window). Named windows are defined using the
-`WINDOW` keyword and are only visible to the current `EXTEND` operator.
-
-**Examples**
-
-```
-(
-  SELECT 'apples' AS item, 2 AS
-```
+**De**

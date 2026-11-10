@@ -264,12 +264,5 @@ IF(ARRAY_LENGTH(anomalies) > 0)
         CONCAT(
           "Found data skew in features: ",
           ARRAY_TO_STRING(anomalies, ", "),
-          ". Model is retrained with the latest data."));
-  ELSE
-    SELECT *
-    FROM
-      ML.PREDICT(
-        MODEL mydataset.model_linear_reg,
-        TABLE mydataset.serving);
-END IF;
+          ". Model is retrained with the la
 ```

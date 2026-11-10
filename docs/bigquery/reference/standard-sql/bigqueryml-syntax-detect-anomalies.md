@@ -386,9 +386,4 @@ The following example detects anomalies using an autoencoder model and a
 SELECT
   *
 FROM
-  ML.DETECT_ANOMALIES(MODEL `mydataset.my_autoencoder_model`,
-    STRUCT(0.1 AS contamination),
-    TABLE `mydataset.mytable`)
 ```
-
-If the feature column names are `f1` and

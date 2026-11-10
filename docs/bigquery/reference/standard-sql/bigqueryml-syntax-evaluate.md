@@ -487,28 +487,4 @@ ML.EVALUATE(
   GoogleSQL, see
   [Query syntax](/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax).
 
-  If you don't specify a table or query to provide input data, the
-  evaluation metrics that are generated for the model during training
-  are returned.
-
-  The following column naming requirements apply:
-
-  + The query must have a column named `input_text` that contains the
-    prompt text to use when evaluating the model.
-  + The query must have a column named `output_text` that contains the
-    generated text that you would expect to be returned by the model.
-
-* `TASK_TYPE`: a `STRING` value that specifies the
-  type of task for which you want to evaluate the model's performance. The
-  valid options are the following:
-
-  + `TEXT_GENERATION`
-  + `CLASSIFICATION`
-  + `SUMMARIZATION`
-  + `QUESTION_ANSWERING`
-
-  The default value is `TEXT_GENERATION`.
-
-* `MAX_OUTPUT_TOKENS`: an `INT64` value that sets
-  the maximum number of tokens output by the model. Specify a lower value
-  for shorter res
+  If you don't specify a tabl

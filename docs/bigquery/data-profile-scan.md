@@ -28,7 +28,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 **啟用 API 所需的角色**
 
-您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過擁有者角色 (`roles/owner`) 取得這項權限。否則，您可以透過 Service Usage 管理員角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+如要啟用 API，您必須具備 `serviceusage.services.enable` 權限。如果您建立了專案，可能已透過擁有者角色 (`roles/owner`) 取得這項權限。否則，您可以透過 Service Usage 管理員角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
 [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=dataplex.googleapis.com&hl=zh-tw)
 
@@ -253,7 +253,7 @@ Knowledge Catalog 會使用服務帳戶執行資料剖析掃描作業，該帳�
 13. 選用：新增標籤。標籤是鍵/值組合，可用來將相關物件分組，或與其他 Google Cloud 資源組合。
 14. 如要建立掃描作業，請按一下「Create」(建立)。
 
-    如果將排程設為「隨選」，也可以點選「執行掃描」，立即執行掃描。
+    如果將時間表設為 radio\_button\_checked「On-demand」(依需求)，也可以點選「Run scan」(執行掃描)，立即執行掃描。
 
 ### gcloud
 
@@ -608,7 +608,7 @@ partition filter` 設定設為 `true`，請使用資料表的分區欄，做為�
 16. 選用：新增標籤。標籤是鍵/值組合，可用來將相關物件分組，或與其他 Google Cloud 資源組合。
 17. 如要建立掃描作業，請按一下「Create」(建立)。
 
-    如果將排程設為「隨選」，也可以立即點選「執行掃描」來執行掃描。
+    如果將時間表設為 radio\_button\_checked「On-demand」(依需求)，也可以點選「Run scan」(執行掃描)，立即執行掃描。
 
 ## 執行資料剖析掃描
 
@@ -989,6 +989,5 @@ func main() {
 
 ```
 import com.google.cloud.dataplex.v1.DataScan;
-import com.google.cloud.dataplex.v1.DataScanName;
-import
+import com.google.cloud.dataplex.v1.
 ```

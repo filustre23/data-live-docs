@@ -128,11 +128,4 @@ Represents how the data source supports data auto refresh.
 | --- | --- |
 | `checkValidCreds` | Returns true if valid credentials exist for the given data source and requesting user. |
 | `get` | Retrieves a supported data source and returns its settings. |
-| `list` | Lists supported data sources and returns their settings. |
-
-
-
-
-Send feedback
-
-Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and
+| `list` | Lists supported data sources and returns their settings.</ |

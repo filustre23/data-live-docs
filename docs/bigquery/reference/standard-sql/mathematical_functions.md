@@ -266,18 +266,3 @@ that [coerces to `FLOAT64`](/bigquery/docs/reference/standard-sql/conversion_rul
 
 | X | CBRT(X) |
 | --- | --- |
-| `+inf` | `inf` |
-| `-inf` | `-inf` |
-| `NaN` | `NaN` |
-| `0` | `0` |
-| `NULL` | `NULL` |
-
-**Return Data Type**
-
-`FLOAT64`
-
-**Example**
-
-```
-SELECT CBRT(27) AS cube_root;
-```

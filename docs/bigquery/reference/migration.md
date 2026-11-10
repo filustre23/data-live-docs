@@ -69,7 +69,7 @@ If you are using [sbt](https://www.scala-sbt.org/), add
 the following to your dependencies:
 
 ```
-libraryDependencies += "com.google.cloud" % "google-cloud-bigquerymigration" % "0.104.0"
+libraryDependencies += "com.google.cloud" % "google-cloud-bigquerymigration" % "0.105.0"
 ```
 
 If you're using Visual Studio Code or IntelliJ, you can add client libraries to your
@@ -209,8 +209,5 @@ func executeTranslationWorkflow(ctx context.Context, client *migration.Client, p
 
 	// Construct the workflow creation request.  In this workflow, we have only a single translation task present.
 	req := &migrationpb.CreateMigrationWorkflowRequest{
-		Parent: fmt.Sprintf("projects/%s/locations/%s", projectID, location),
-		MigrationWorkflow: &migrationpb.MigrationWorkflow{
-			DisplayName: "example SQL conversion",
-			Tasks: map[string]*
+		Parent: fmt.</
 ```

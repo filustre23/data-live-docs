@@ -239,6 +239,5 @@ SELECT
   FORMAT("%T", NET.IP_TRUNC(x, prefix_length)) AS ip_trunc
 FROM UNNEST([
   STRUCT(b"\xAA\xBB\xCC\xDD" as x, 0 as prefix_length),
-  (b"\xAA\xBB\xCC\xDD", 11), (b"\xAA\xBB\xCC\xDD", 12),
-  (b"\xAA\xBB\xCC\xDD",
+  (b"\xAA\xBB\xCC
 ```

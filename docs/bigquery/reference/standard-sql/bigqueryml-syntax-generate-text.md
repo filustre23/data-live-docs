@@ -492,20 +492,4 @@ possible to the model.
 * `TEMPERATURE`:
   a `FLOAT64` value in the range `[0.0,1.0]`
   that controls the degree of randomness in token selection.
-  Lower `TEMPERATURE` values are good for prompts that require a
-  more deterministic and less open-ended or creative response, while higher
-  `TEMPERATURE` values can lead to more diverse or creative results. A
-  `TEMPERATURE` value of `0` is deterministic, meaning that the highest
-  probability response is always selected.
-  The default is `0`.
-* `FLATTEN_JSON_OUTPUT`: a `BOOL` value that
-  determines whether the JSON content returned by the function is parsed
-  into separate columns. The default is `FALSE`.
-* `STOP_SEQUENCES`: an `ARRAY<STRING>` value that
-  removes the specified strings if they are included in responses from the
-  model. Strings are matched exactly, including capitalization. The default
-  is an empty array.
-
-* `MODEL_PARAMS`: a JSON-formatted string literal
-  that provides parameters to the model. The value must conform
-  to the
+  Lower

@@ -230,20 +230,5 @@ bq mk
       --display_name='My Transfer'
       --params='{"connector.authentication.oauth.clientId": "1234567890",
           "connector.authentication.oauth.clientSecret":"ABC12345",
-          "connector.authentication.username":"user1",
-          "connector.authentication.password":"abcdef1234",
-          "connector.instanceId":"dev-instance",
-          "connector.networkAttachment": "projects/dev-project1/regions/us-central1/networkattachments/na1"}'
-  ```
-
-  下列指令會在預設專案中建立遞增 ServiceNow 資料移轉作業，並使用 `UPSERT` 寫入模式。
-
-  ```
-    bq mk
-        --transfer_config
-        --target_dataset=mydataset
-        --data_source=servicenow
-        --display_name='My Transfer'
-        --params='{"assets": ["incident", "change_request"],
-            "connector.authentication.oauth.client
+          "connector.authenticati
   ```

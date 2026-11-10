@@ -178,7 +178,5 @@ public class BigQueryQuery
         BigQueryJob job = client.CreateQueryJob(
             sql: query,
             parameters: null,
-            options: new QueryOptions { UseQueryCache = false });
-        // Wait for the job to complete.
-        job = job.
+            options: new
 ```

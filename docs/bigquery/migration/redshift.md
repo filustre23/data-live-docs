@@ -192,14 +192,4 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 * 請按照[這些操作說明](https://docs.aws.amazon.com/redshift/latest/mgmt/configure-jdbc-connection.html#obtain-jdbc-url) 取得 JDBC 網址。
 * 取得具備適當權限的 Amazon Redshift 資料庫使用者名稱和密碼。
-* 按照「[授予 Amazon S3 值區的存取權](#grant_access_to_your_S3_bucket)」一文中的操作說明，取得 AWS 存取金鑰組。
-* 取得要用於移轉作業的 Amazon S3 值區 URI。
-  建議您為這個 bucket 設定[生命週期](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-lifecycle.html)政策，避免產生不必要的費用。建議的到期時間為 24 小時，以便有足夠的時間將所有資料移轉到 BigQuery。
-
-### 評估資料
-
-在資料移轉過程中，BigQuery 資料移轉服務會將 Amazon Redshift 中的資料寫入 Cloud Storage，並儲存為 CSV 檔案。如果這些檔案包含 ASCII 0 字元，就無法載入至 BigQuery。建議您評估資料，判斷這是否會造成問題。如果是，您可以將資料匯出至 Amazon S3 做為 Parquet 檔案，然後使用 BigQuery 資料移轉服務匯入這些檔案，藉此解決問題。詳情請參閱 [Amazon S3 資料移轉簡介](https://docs.cloud.google.com/bigquery/docs/s3-transfer-intro?hl=zh-tw)。
-
-## 設定 Amazon Redshift 移轉作業
-
-選取下列選項之一：
+* 按照「[授予 Amazon](#grant_access_to_your_S3_bucket)

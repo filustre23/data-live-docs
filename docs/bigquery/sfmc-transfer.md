@@ -272,17 +272,3 @@ bq mk
 * 確認驗證器應用程式已在「Scope」下設定所有[必要權限](https://developer.salesforce.com/docs/marketing/marketing-cloud/guide/data-access-permissions.html)，包括 `Data Extensions: Read`。
 * 為避免逾時和間歇性失敗，請將每項移轉設定限制為不超過 **10 個資產**。
 * 確認您未移轉含有二進位或大型 blob 欄位的資料擴充。
-
-### 錯誤訊息
-
-錯誤：`invalid_grant. The client's IP address is unauthorized for this account. Allowlist the client's IP address in Marketing Cloud Administration.`
-:   **解決方法：**請嘗試下列任一步驟：
-
-    * 啟用 [Google Cloud 資源的所有可用 IP 位址](https://www.gstatic.com/ipranges/goog.json)。
-    * 設定 Google Cloud 環境和 Salesforce Marketing Cloud 帳戶，將靜態 IP 位址新增至許可清單。詳情請參閱「[為 Salesforce Marketing Cloud 移轉作業設定 IP 許可清單](#sfmc-allowlist)」一文。
-
-錯誤：`INVALID_ARGUMENT. Table tableName does not exist in asset TableName`
-:   **解決方法：**請確認素材資源名稱與 Salesforce Marketing Cloud 帳戶中的名稱完全一致 (區分大小寫)，且已授予 `Data Extensions: Read` 範圍。移轉資料擴充功能的資料列資料時，名稱必須完全符合以下模式：`DataExtensionObject_DATA_EXTENSION_NAME`。詳情請參閱「[Salesforce Marketing Cloud 必要條件](#sfmc-prereqs)」。
-
-問題：移轉作業成功，但未載入任何記錄
-:   **解決**

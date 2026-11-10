@@ -212,16 +212,5 @@ import (
 	"log"
 
 	"golang.org/x/net/context"
-	"google.golang.org/api/iterator"
-
-	// Imports the BigQuery Data Transfer client package.
-	datatransfer "cloud.google.com/go/bigquery/datatransfer/apiv1"
-	datatransferpb "google.golang.org/genproto/googleapis/cloud/bigquery/datatransfer/v1"
-)
-
-func main() {
-	ctx := context.Background()
-
-	// Sets your Google Cloud Platform project ID.
 	
 ```

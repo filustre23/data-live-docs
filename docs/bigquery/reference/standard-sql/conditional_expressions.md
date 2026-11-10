@@ -325,21 +325,3 @@ a common [supertype](/bigquery/docs/reference/standard-sql/conversion_rules#supe
 `COALESCE(expr, null_result)`.
 
 **Return Data Type**
-
-[Supertype](/bigquery/docs/reference/standard-sql/conversion_rules#supertypes) of `expr` or `null_result`.
-
-**Examples**
-
-```
-SELECT IFNULL(NULL, 0) as result
-
-/*--------+
- | result |
- +--------+
- | 0      |
- +--------*/
-```
-
-```
-SELECT IFNULL(
-```

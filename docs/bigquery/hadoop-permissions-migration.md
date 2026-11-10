@@ -250,15 +250,4 @@ gcs:
 * `skip`：指定不应映射输入对象
   + 可以是 `true` 或 `false`
 * `log`：有助于调试或开发规则的谓词子句
-  + 一个字符串，表示一个布尔值 CEL 表达式。值可以是 `true` 或 `false`
-  + 默认值为 `false`
-  + 如果设置为 `true`，输出将包含一个执行日志，可用于监控或诊断执行中的问题
-
-### 创建主账号规则集 YAML 文件
-
-通过为 `email_address` 和 `type` 提供值，可以使用主账号映射文件生成[主账号标识符](https://docs.cloud.google.com/iam/docs/principal-identifiers?hl=zh-cn)。
-
-* 使用 `email_address` 指定 Google Cloud 主账号的邮箱。
-* 使用 `type` 指定 Google Cloud中主账号的性质。`type` 的值可以是 `user`、`group` 或 `serviceAccount`。
-
-规则中使用的任何 CEL 表达式都可以访问表示所处理对象的变量。变量中的字段基于 HDFS 或 Apache Ranger 元数据文件的内容。可用变量取决于规则集部分：
+  + 一个字

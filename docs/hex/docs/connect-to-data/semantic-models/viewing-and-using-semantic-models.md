@@ -8,7 +8,7 @@ First, add a semantic project to Hex. Build it directly in Hex with [Semantic au
 
 ## Viewing your models and views[​](#viewing-your-models-and-views "Direct link to Viewing your models and views")
 
-Once your semantic project is in Hex, use the [Data browser](/docs/explore-data/data-browser) to view models and views, along with their dimensions and measures. Browse content in the **Data models** tab. Click **Explore** to start an [exploration](/docs/share-insights/explore) for ad hoc analysis and visualization.
+Once your semantic project is in Hex, use the [Data browser](/docs/explore-data/data-browser) to view models and views, along with their dimensions and measures. Browse content in the **Semantic models** tab. Click **Explore** to start an [exploration](/docs/share-insights/explore) for ad hoc analysis and visualization.
 
 ## Using semantic models and views in a notebook[​](#using-semantic-models-and-views-in-a-notebook "Direct link to Using semantic models and views in a notebook")
 

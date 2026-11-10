@@ -4,7 +4,7 @@ On this page
 
 info
 
-* Hex 4.0 is in private beta, and some features from classic projects aren't yet supported. See [Limitations](#limitations) below.
+* Hex 4.0 is in private beta, and some features from classic projects aren't yet supported. See [Limitations](#limitations) below, and the [beta roadmap](/docs/hex-4-0/beta-roadmap) for what's coming next.
 * Workspace **Admins** can email [beta@hex.tech](mailto:beta@hex.tech) to request access to the private beta.
 * Users need an [**Editor** role](/docs/collaborate/sharing-and-permissions/roles) or higher to create 4.0 projects during the beta period.
 
@@ -113,7 +113,7 @@ During the beta, you may need to explicitly prompt your external agent to use â€
 
 ## Limitations[â€‹](#limitations "Direct link to Limitations")
 
-4.0 projects are currently in a beta stage, and some features are not yet supported (although we're working on supporting them as quickly as we can!). Some current limitations are below:
+4.0 projects are currently in a beta stage, and some features are not yet supported (although we're working on supporting them as quickly as we can!). Some current limitations are below. For what we're working on, what's next, and what's recently shipped, see the [beta roadmap](/docs/hex-4-0/beta-roadmap).
 
 * [Scheduled runs](/docs/share-insights/scheduled-runs) and [app notifications](/docs/share-insights/app-notifications)
 * [Writeback cells](/docs/explore-data/cells/data-cells/writeback-cells)

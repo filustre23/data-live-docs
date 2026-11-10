@@ -106,5 +106,4 @@ Options customizing the time based transfer schedule. Options are migrated from 
 
 | Fields | |
 | --- | --- |
-| `schedule` | `string`  Data transfer schedule. If the data source does not support a custom schedule, this should be empty. If it is empty, the default value for the data source will be used. The specified times are in UTC. Examples of valid format: `1st,3rd monday of month 15:30`, `every wed,fri of jan,jun 13:15`, and `first sunday of quarter 00:00`. See more explanation about the format here: <https://cloud.google.com/appengine/docs/flexible/python/scheduling-jobs-with-cron-yaml#the_schedule_format>  NOTE: The minimum interval time between recurring transfers depends on the data source; refer to the documentation for your data source. |
-| `startTime` | `string (Timestamp format)`  Specifies time to start scheduling transfer runs. The first run will be scheduled at or after the start time according to a recurrence pattern defined in the schedule string. The start time can be changed at any moment. |
+| `schedule` | `string`  Data transfer schedule. If the data source does not support a custom schedule, this should be empty. If it is empty, the default value for the data source will be used. T |

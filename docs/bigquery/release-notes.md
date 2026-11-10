@@ -27,6 +27,50 @@ To get the latest product updates delivered to you, add the URL of this page to 
 reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators), or add the
 [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## November 09, 2026
+
+Feature
+
+To support your FinOps practices, you can now opt in to
+[compute cost attribution](/bigquery/docs/reservations-monitoring#reservation_cost_attribution)
+in BigQuery editions. This feature attributes billed compute charges directly to
+the query projects that use your administration project's reservation capacity.
+Allocating costs based on actual commitment and autoscaling slot usage lets you
+accurately track project-level costs and manage internal chargebacks. This
+feature is available in
+[Preview](https://cloud.google.com/products#product-launch-stages).
+
+Feature
+
+Query performance troubleshooting and job and system performance comparison in
+the BigQuery jobs explorer are [generally available](https://cloud.google.com/products#product-launch-stages)
+(GA). For more information, see [Troubleshoot job performance](/bigquery/docs/admin-jobs-explorer#get-job-details)
+and [Diagnose performance regressions by comparing jobs and systems](/bigquery/docs/admin-jobs-explorer#compare-jobs).
+
+Feature
+
+When you [create](/bigquery/docs/create-pipelines) or
+[schedule](/bigquery/docs/schedule-pipelines)
+a pipeline, you can specify the maximum number of
+concurrently executed pipeline tasks. This feature is
+[generally available](https://cloud.google.com/products#product-launch-stages)
+(GA).
+
+Feature
+
+You can use
+[compression functions](/bigquery/docs/reference/standard-sql/compression-functions)
+in GoogleSQL to compress or decompress
+bytes or string values by using the Zstandard (Zstd) lossless data compression
+algorithm. The following functions are supported:
+
+* [`ZSTD_COMPRESS`](/bigquery/docs/reference/standard-sql/compression-functions#zstd_compress)
+* [`ZSTD_DECOMPRESS_TO_BYTES`](/bigquery/docs/reference/standard-sql/compression-functions#zstd_decompress_to_bytes)
+* [`ZSTD_DECOMPRESS_TO_STRING`](/bigquery/docs/reference/standard-sql/compression-functions#zstd_decompress_to_string)
+
+These functions are in
+[Preview](https://cloud.google.com/products/#product-launch-stages).
+
 ## November 06, 2026
 
 Announcement
@@ -4911,30 +4955,4 @@ Libraries
 
 ### Python
 
-#### [3.34.0](https://github.com/googleapis/python-bigquery/compare/v3.33.0...v3.34.0) (2025-05-27)
-
-##### Features
-
-* Job creation mode GA ([#2190](https://github.com/googleapis/python-bigquery/issues/2190)) ([64cd39f](https://github.com/googleapis/python-bigquery/commit/64cd39fb395c4a03ef6d2ec8261e1709477b2186))
-
-##### Bug Fixes
-
-* **deps:** Update all dependencies ([#2184](https://github.com/googleapis/python-bigquery/issues/2184)) ([12490f2](https://github.com/googleapis/python-bigquery/commit/12490f2f03681516465fc34217dcdf57000f6fdd))
-
-##### Documentation
-
-* Update query.py ([#2192](https://github.com/googleapis/python-bigquery/issues/2192)) ([9b5ee78](https://github.com/googleapis/python-bigquery/commit/9b5ee78f046d9ca3f758eeca6244b8485fe35875))
-* Use query\_and\_wait in the array parameters sample ([#2202](https://github.com/googleapis/python-bigquery/issues/2202)) ([28a9994](https://github.com/googleapis/python-bigquery/commit/28a9994792ec90a6a4d16835faf2137c09c0fb02))
-
-Libraries
-
-### Go
-
-#### [1.69.0](https://github.com/googleapis/google-cloud-go/compare/bigquery/v1.68.0...bigquery/v1.69.0) (2025-05-27)
-
-##### Features
-
-* **bigquery/analyticshub:** Add support for Analytics Hub & Marketplace Integration ([2aaada3](https://github.com/googleapis/google-cloud-go/commit/2aaada3fb7a9d3eaacec3351019e225c4038646b))
-* **bigquery/analyticshub:** Adding allow\_only\_metadata\_sharing to Listing resource ([2aaada3](https://github.com/googleapis/google-cloud-go/commit/2aaada3fb7a9d3eaacec3351019e225c4038646b))
-* **bigquery/analyticshub:** Adding CommercialInfo message to the Listing and Subscription resources ([2aaada3](https://github.com/googleapis/google-cloud-go/commit/2aaada3fb7a9d3eaacec3351019e225c4038646b))
-* **bigquery/analyticshub:** Adding delete\_commercial and revoke\_comme
+####

@@ -380,24 +380,4 @@ Gets the upper bound of a range.
 
 **Definitions**
 
-* `range_to_check`: The `RANGE<T>` value.
-
-**Details**
-
-Returns `NULL` if the upper bound in `range_value` is `UNBOUNDED`.
-
-Returns `NULL` if `range_to_check` is `NULL`.
-
-**Return type**
-
-`T` in `range_value`
-
-**Examples**
-
-In the following query, the upper bound of the range is retrieved:
-
-```
-SELECT RANGE_END(RANGE<DATE> '[2022-12-01, 2022-12-31)') AS results;
-
-/*------------+
-```
+* `range_to_check`: The

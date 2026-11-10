@@ -149,10 +149,5 @@ This is advanced functionality for interoperability with systems utilizing the
 ```
 WITH data AS (
   SELECT 1 AS id, ST_GEOGPOINT(-122, 47) AS geo
-  UNION ALL
-  -- empty geography isn't supported
-  SELECT 2 AS id, ST_GEOGFROMTEXT('POINT EMPTY') AS geo
-  UNION ALL
-  -- only points are supported
-  SELECT 3 AS
+  UNION
 ```

@@ -544,28 +544,4 @@ This option accepts the following values:
 * `NL`: Netherlands
 * `NO`: Norway
 * `NZ`: New Zealand
-* `PE`: Peru
-* `PH`: Philippines
-* `PK`: Pakistan
-* `PL`: Poland
-* `PT`: Portugal
-* `RO`: Romania
-* `RS`: Serbia
-* `RU`: Russia
-* `SA`: Saudi Arabia
-* `SE`: Sweden
-* `SG`: Singapore
-* `SI`: Slovenia
-* `SK`: Slovakia
-* `TH`: Thailand
-* `TR`: Turkey
-* `TW`: Taiwan
-* `UA`: Ukraine
-* `US`: United States
-* `VE`: Venezuela
-* `VN`: Vietnam
-* `ZA`: South Africa
-
-### `CLEAN_SPIKES_AND_DIPS`
-
-**Syntax**
+* `PE`

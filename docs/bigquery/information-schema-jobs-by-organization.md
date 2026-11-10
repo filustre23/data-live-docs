@@ -129,16 +129,3 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 例如 `` `myproject`.`region-us`.INFORMATION_SCHEMA.JOBS_BY_ORGANIZATION ``。
 
 ### 找出今天掃描最多位元組的前五項工作
-
-以下範例說明如何找出組織當天掃描最多位元組的五項工作。您可以進一步篩選 `statement_type`，查詢其他資訊，例如載入、匯出和查詢。
-
-```
-SELECT
-  job_id,
-  user_email,
-  total_bytes_billed
-FROM
-  `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_ORGANIZATION
-WHERE
-  EXTRACT(DATE FROM
-```

@@ -152,7 +152,5 @@ SELECT
   ANY_VALUE(COALESCE(s.slots_assigned, res.slots_assigned)) AS estimated_slots_assigned,
   ANY_VALUE(COALESCE(s.slots_max_assigned, res.slots_max_assigned)) AS estimated_slots_max_assigned
 FROM `region-us`.INFORMATION_SCHEMA.JOBS_TIMELINE_BY_ORGANIZATION jobs
-JOIN `region-us`.INFORMATION_SCHEMA.RESERVATIONS_TIMELINE res
-  ON jobs.reservation_id = res.reservation_id
-  AND TIMESTAMP_TRUNC(jobs.period_start, MINUTE) =
+JOIN
 ```

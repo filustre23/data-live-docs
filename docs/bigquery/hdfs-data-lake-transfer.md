@@ -246,15 +246,3 @@ JSON 檔案中的 `condition` 欄位支援下列值，每個值都有特定的 `
    4. 選用：在「Partition Filter gcs path」(分區篩選器 GCS 路徑) 部分，輸入自訂篩選器 JSON 檔案的完整 Cloud Storage 路徑，以便[篩選來源資料表的分區](#filter-partitions)。
    5. 在「Destination gcs path」(目的地 GCS 路徑) 中，輸入 Cloud Storage bucket 的路徑，用於儲存遷移的資料。
    6. 從下拉式清單中選擇目的地中繼存放區類型：
-      * `BIGLAKE_REST_CATALOG`：選取這個選項，即可將中繼資料儲存在 Lakehouse 執行階段目錄 Iceberg REST 目錄中。目錄是根據目的地 Cloud Storage bucket 建立。
-      * `BIGLAKE_HIVE_CATALOG` ([預先發布版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))：選取這個選項，即可將中繼資料儲存在 Lakehouse 執行階段目錄 Hive 目錄中。您必須在「BigLake Metastore Hive Catalog ID」中提供目錄名稱。如果目錄不存在，系統會自動建立。
-   7. 選用：在「Service account」(服務帳戶) 部分，輸入要與這項資料移轉作業搭配使用的服務帳戶。服務帳戶應與建立移轉設定和目的地資料集的Google Cloud 專案相同。
-
-### bq
-
-如要排定 Hive Metastore 移轉作業，請輸入 `bq mk` 指令，並提供移轉作業建立旗標 `--transfer_config`：
-
-```
-  bq mk --transfer_config
-  --data_source
-```

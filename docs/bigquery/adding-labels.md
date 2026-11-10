@@ -34,7 +34,7 @@ BigQuery 標籤可讓您將鍵/值中繼資料附加至資源。這類中繼資�
 
 ### 必要的 IAM 角色
 
-如要取得為現有資料集新增標籤所需的權限，請要求管理員授予您 [BigQuery 資料擁有者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataOwner)  (`roles/bigquery.dataOwner`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得為現有資料集新增標籤所需的權限，請要求管理員授予您 [BigQuery 資料擁有者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataOwner) (`roles/bigquery.dataOwner`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
 這個預先定義的角色具備 `bigquery.datasets.update` 權限，可為現有資料集新增標籤。
 
@@ -260,7 +260,7 @@ print("Labels added to {}".format(dataset_id))
 
 ### 必要的 IAM 角色
 
-如要取得為現有資料表或檢視表新增標籤所需的權限，請要求管理員授予您 [BigQuery 資料編輯者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataEditor)  (`roles/bigquery.dataEditor`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得為現有資料表或檢視表新增標籤所需的權限，請要求管理員授予您 [BigQuery 資料編輯者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataEditor) (`roles/bigquery.dataEditor`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
 這個預先定義的角色具備為現有資料表或檢視表新增標籤所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
@@ -325,7 +325,7 @@ PROJECT_ID:DATASET.TABLE_OR_VIEW
 
 範例：
 
-如要新增追蹤部門的資料表標籤，請使用 `bq update` 指令，並指定 `department` 做為標籤鍵。舉例來說，如要將 `department:shipping` 標籤新增至預設專案中的 `mytable`，請使用：
+如要新增追蹤部門的資料表標籤，請使用 `bq update` 指令，並將 `department` 指定為標籤鍵。舉例來說，如要將 `department:shipping` 標籤新增至預設專案中的 `mytable`，請使用：
 
 ```
     bq update --set_label department:shipping mydataset.mytable
@@ -619,16 +619,15 @@ print(f"Added {job.labels} to {job_id}.")
 
 ### API
 
-如要在[使用 API 呼叫執行查詢](https://docs.cloud.google.com/bigquery/docs/sessions?hl=zh-tw#run-queries)時，為工作階段中的查詢工作新增標籤，請呼叫 [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert?hl=zh-tw) 方法，並填入[`connectionProperties`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/ConnectionProperty?hl=zh-tw)
-[工作設定](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#jobconfiguration)的 `query_label` 屬性。
+如要在[使用 API 呼叫執行查詢](https://docs.cloud.google.com/bigquery/docs/sessions?hl=zh-tw#run-queries)時，為工作階段中的查詢工作新增標籤，請呼叫 [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert?hl=zh-tw) 方法，並填入[`connectionProperties`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/ConnectionProperty?hl=zh-tw)[工作設定](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#jobconfiguration)的 `query_label` 屬性。
 
 將查詢標籤與工作階段建立關聯，並在該工作階段中執行查詢後，即可收集這些查詢的稽核記錄。詳情請參閱「[BigQuery 稽核記錄參考資料](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs?hl=zh-tw)」。
 
 ## 為預留項目新增標籤
 
-為預留項目新增標籤後，該標籤就會納入帳單資料。您可以使用標籤，篩選 Cloud Billing 資料中的 Analysis Slots 歸因 SKU。
+為預留項目新增標籤後，該標籤就會納入帳單資料。您可以使用標籤，篩選 Cloud Billing 資料中的 Analysis Slots Attribution SKU。
 
-Analysis Slots Attribution SKU 只會記錄運算單元用量。不會記錄 BigQuery Reservation API SKU 的費用。預留項目標籤不支援做為 BigQuery Reservation API SKU 的篩選器。
+Analysis Slots Attribution SKU 只會記錄運算單元用量。不會記錄 BigQuery Reservation API SKU 的費用。即使啟用[運算費用歸因](https://docs.cloud.google.com/bigquery/docs/reservations-monitoring?hl=zh-tw#reservation_cost_attribution)，預留項目標籤也只適用於 Analysis Slots Attribution SKU，不支援做為 BigQuery Reservation API SKU 的篩選器。
 
 如要進一步瞭解如何在帳單資料中使用標籤，請參閱「[使用**篩選器**精細調整資料](https://docs.cloud.google.com/billing/docs/how-to/reports?hl=zh-tw#filter-by-labels)」。
 
@@ -652,7 +651,7 @@ Analysis Slots Attribution SKU 只會記錄運算單元用量。不會記錄 Big
 2. 在導覽選單中，按一下「Workload management」(工作負載管理)。
 3. 點選「Slot reservations」(運算單元預留項目) 分頁標籤。
 4. 找出要更新的預訂。
-5. 展開 more\_vert「Actions」(動作) 選項。
+5. 展開more\_vert「Actions」(動作) 選項。
 6. 按一下 [編輯]。
 7. 如要展開「Advanced settings」(進階設定) 部分，請按一下expand\_more「expander arrow」(展開箭頭)。
 8. 按一下「新增標籤」。
@@ -704,7 +703,7 @@ bq update --set_label KEY:VALUE --location LOCATION --reservation RESERVATION_NA
 1. 在 Google Cloud 控制台中，選取資料集、資料表或檢視表。
 2. 開啟「編輯詳細資料」窗格：
 
-   * 如果是資料集，請按一下「Details」(詳細資料) 分頁標籤，然後按一下 mode\_edit「Edit details」(編輯詳細資料)。
+   * 在資料集頁面中，依序點選「Details」(詳細資料) 分頁標籤和 mode\_edit「Edit details」(編輯詳細資料)。
    * 如為資料表或檢視表，請在詳細資料窗格中，依序點選
      **「Edit」>「Edit details」**。
 3. 在「Labels」(標籤) 區段中，按一下「Add labels」(新增標籤)。
@@ -772,11 +771,11 @@ bq update --set_label test_data: mydataset
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-08 (世界標準時間)。
+上次更新時間：2026-11-09 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-08 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-09 (世界標準時間)。"],[],[]]

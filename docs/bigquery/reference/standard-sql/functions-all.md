@@ -145,9 +145,4 @@ This topic contains all functions supported by GoogleSQL for BigQuery.
 | [`HLL_COUNT.EXTRACT`](/bigquery/docs/reference/standard-sql/hll_functions#hll_countextract) | Extracts a cardinality estimate of an HLL++ sketch. |
 | [`HLL_COUNT.INIT`](/bigquery/docs/reference/standard-sql/hll_functions#hll_countinit) | Aggregates values of the same underlying type into a new HLL++ sketch. |
 | [`HLL_COUNT.MERGE`](/bigquery/docs/reference/standard-sql/hll_functions#hll_countmerge) | Merges HLL++ sketches of the same underlying type into a new sketch, and then gets the cardinality of the new sketch. |
-| [`HLL_COUNT.MERGE_PARTIAL`](/bigquery/docs/reference/standard-sql/hll_functions#hll_countmerge_partial) | Merges HLL++ sketches of the same underlying type into a new sketch. |
-| [`IEEE_DIVIDE`](/bigquery/docs/reference/standard-sql/mathematical_functions#ieee_divide) | Divides `X` by `Y`, but doesn't generate errors for division by zero or overflow. |
-| [`INITCAP`](/bigquery/docs/reference/standard-sql/string_functions#initcap) | Formats a `STRING` as proper case, which means that the first character in each word is uppercase and all other characters are lowercase. |
-| [`INSTR`](/bigquery/docs/reference/standard-sql/string_functions#instr) | Finds the position of a subvalue inside another value, optionally starting the search at a given offset or occurrence. |
-| [`INT64`](/bigquery/docs/reference/standard-sql/json_functions#int64_for_json) | Converts a JSON number to a SQL `INT64` value. |
 |  |

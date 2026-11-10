@@ -381,12 +381,3 @@ bytes 43-1999999
 在以上流程中，random\_number\_milliseconds 是小於或等於 1000 的隨機毫秒數。這是必要的，因為使用較小的隨機延遲有助於更平均地分散負載，並避免對伺服器產生衝擊的可能性。必須在每次等待之後重新定義 random\_number\_milliseconds 的值。
 
 **注意：**等待時間一律是 (2 ^ n) + random\_number\_milliseconds，其中 n 是一開始定義為 0 的單調遞增整數。對於每個疊代 (每次要求)，整數 n 會遞增 1。
-
-演算法已設定為會在 n 等於 5 時終止。這個上限可以防止用戶端一直重試下去，導致要求在總延遲時間達到約 32 秒之後，才會被視為「無法復原的錯誤」。您可以把重試次數的上限設高一點，尤其是在大型上傳作業執行的過程中；但請確保要把重試延遲時間的上限設定在合理的地方，例如短於一分鐘。
-
-### API 用戶端程式庫指南
-
-* [.NET](https://developers.google.com/api-client-library/dotnet/guide/media_upload?hl=zh-tw)
-* [Java](https://developers.google.com/api-client-library/java/google-api-java-client/media-upload?hl=zh-tw)
-* [PHP](https://github.com/googleapis/google-api-php-client/blob/master/docs/media.md)
-* [Python](https://github.com/googleapis/google-api-python-client/blob/master/docs/media.md)

@@ -137,17 +137,5 @@ WHERE
   _PARTITIONDATE >= 'YYYY-MM-DD'
 GROUP BY
   date, disapproved_country
-ORDER BY
-  date DESC
-```
-
-### 有遭拒登問題的產品
-
-下列 SQL 查詢範例會擷取有遭拒登問題的產品數量，並依國家/地區分開。
-
-```
-SELECT
-  _PARTITIONDATE AS date,
-  applicable_country,
-  COUNT(DISTINCT CONCAT(CAST(mercha
+ORDER
 ```

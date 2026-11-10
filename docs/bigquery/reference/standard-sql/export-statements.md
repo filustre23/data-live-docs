@@ -284,12 +284,4 @@ The option list specifies options for the export operation.
 
 | Options | |
 | --- | --- |
-| `format` | `STRING`  Required. To export data from BigQuery to Spanner, the value must always be `CLOUD_SPANNER`. |
-| `uri` | `STRING`  Required. The destination URI for the export. For Spanner, the URI must be provided in the following format: `https://spanner.googleapis.com/projects/PROJECT_ID/instances/INSTANCE_ID/databases/DATABASE_ID` |
-| `spanner_options` | `STRING`  Required. A JSON string containing configurations related to mapping exported fields to Spanner column families and columns. For more information, see [Configure exports with `spanner_options` option.](/bigquery/docs/export-to-spanner#spanner_options) |
-
-### Examples
-
-#### Export data to Spanner
-
-The following example exports data to a Spanner table:
+| `format` | `STRING`  Required. To export data from BigQuery to Spanner, the value must always be `CLOUD_SPANNER` |

@@ -159,12 +159,4 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 | `ACTION_COLLECTION.7d_view` | Action7dView | *字串* | 廣告觀看後 7 天的歸因回溯期指標值。 |
 | `ACTION_COLLECTION.28d_click` | Action28dClick | *字串* | 廣告獲得點擊後 28 天的歸因期指標值。 |
 | `ACTION_COLLECTION.28d_view` | Action28dView | *字串* | 歸因期為觀看廣告後 28 天的指標值。 |
-| `ACTION_COLLECTION.dda` | ActionDDA | *字串* | 歸因期間的指標值，由以數據為準歸因模式提供。 |
-| **一般細目** | | | |
-|  | 年齡 | *字串* | 這列指標的年齡範圍。 |
-|  | 性別 | *字串* | 這列指標的性別。 |
-|  | 國家/地區 | *字串* | 這個資料列中指標的國家/地區。 |
-|  | 區域 | *字串* | 使用者觀看廣告的區域。 |
-|  | FrequencyValue | *字串* | 觸及和頻率廣告活動中的廣告向每位使用者放送的次數。 |
-|  | HStatsByAdvertiserTZ | *字串* | 廣告主取得統計資料的時間範圍。 |
-| `</` |
+|  |

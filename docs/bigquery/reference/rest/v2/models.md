@@ -188,10 +188,4 @@ Indicates the type of the Model.
 | `AUTOML_CLASSIFIER` | AutoML Tables classification model. |
 | `PCA` | Prinpical Component Analysis model. |
 | `DNN_LINEAR_COMBINED_CLASSIFIER` | Wide-and-deep classifier model. |
-| `DNN_LINEAR_COMBINED_REGRESSOR` | Wide-and-deep regressor model. |
-| `AUTOENCODER` | Autoencoder model. |
-| `ARIMA_PLUS` | New name for the ARIMA model. |
-| `ARIMA_PLUS_XREG` | ARIMA with external regressors. |
-| `RANDOM_FOREST_REGRESSOR` | Random forest regressor model. |
-| `RANDOM_FOREST_CLASSIFIER` | Random forest classifier model. |
-| `TENSORFLOW_LITE` | An imp |
+| `DNN_LINEAR_COMBINED_REGRESSOR` |

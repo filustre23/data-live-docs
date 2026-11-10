@@ -302,29 +302,4 @@ This function must be used with the [`DIFFERENTIAL_PRIVACY` clause](/bigquery/do
 and can support these arguments:
 
 * `expression`: The input expression. This can be most numeric input types,
-  such as `INT64`. `NULL` values are always ignored.
-* `percentile`: The percentile to compute. The percentile must be a literal in
-  the range `[0, 1]`.
-* `contribution_bounds_per_row`: A named argument with a
-  [contribution bounds](#dp_clamped_named).
-  Performs clamping for each row separately before performing intermediate
-  grouping on the privacy unit column.
-
-`NUMERIC` and `BIGNUMERIC` arguments aren't allowed.
-If you need them, cast them as the
-`FLOAT64` data type first.
-
-**Return type**
-
-`FLOAT64`
-
-**Examples**
-
-The following differentially private query gets the percentile of items
-requested. Smaller aggregations might not be included. This query references a
-view called [`professors`](/bigquery/docs/reference/standard-sql/query-syntax#dp_example_tables).
-
-```
--- With noise, using the epsilon parameter.
-SELECT
-```
+  such as `INT64`.

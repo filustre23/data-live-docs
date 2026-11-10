@@ -481,27 +481,3 @@ A one-element `ARRAY` of string values. Defaults to `label`.
 ### `MAX_ITERATIONS`
 
 **Syntax**
-
-`MAX_ITERATIONS = int64_value`
-
-**Description**
-
-The maximum number of training iterations, where one iteration represents
-a single pass of the entire training data.
-
-**Arguments**
-
-An `INT64` value. The default value is `20`.
-
-### `WARM_START`
-
-**Syntax**
-
-```
-WARM_START = { TRUE | FALSE }
-```
-
-**Description**
-
-Determines whether to train a model with new training data, new model options,
-or both. Unless you explicitly override them, the initial op

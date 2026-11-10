@@ -107,25 +107,4 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 * 選用：`PROJECT_ID`： Google Cloud 專案的 ID。如未指定，則會使用預設專案。
 * `REGION`：任何[資料集區域名稱](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。例如：`` `region-us` ``。**注意：**您必須使用[區域限定詞](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw#region_qualifier)，才能查詢 `INFORMATION_SCHEMA` 檢視表。查詢執行位置必須與 `INFORMATION_SCHEMA` 檢視表的區域相符。
 
-**注意：** 查詢 `INFORMATION_SCHEMA.JOBS_BY_FOLDER` 以找出查詢工作的摘要費用時，應排除 `SCRIPT` 陳述式類型，否則部分值可能會重複計算。`SCRIPT` 列包含這項工作執行的所有子項工作摘要值。
-
-## 範例
-
-如要對預設專案以外的專案執行查詢，請按照下列格式新增專案 ID：
-
-```
-`PROJECT_ID`.`region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_FOLDER
-```
-
-更改下列內容：
-
-* `PROJECT_ID`：專案 ID
-* `REGION_NAME`：專案的區域
-
-例如 `` `myproject`.`region-us`.INFORMATION_SCHEMA.JOBS_BY_FOLDER ``。
-
-### 查看互動式工作
-
-下列查詢會顯示指定專案資料夾中所有互動式工作的 工作 ID、建立時間和狀態 (`PENDING`、`RUNNING` 或 `DONE`)：
-
-<
+**注意：** 查詢

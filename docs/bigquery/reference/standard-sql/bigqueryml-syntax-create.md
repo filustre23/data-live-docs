@@ -374,22 +374,4 @@ for the `OUTPUT` field type.
 
 ### `connection_name`
 
-BigQuery uses a `CLOUD_RESOURCE` [connection](/bigquery/docs/create-cloud-resource-connection)
-to interact with your Gemini Enterprise Agent Platform endpoint. You need to grant [Vertex AI User role](/vertex-ai/docs/general/access-control#aiplatform.user) to connection's service account on your Gemini Enterprise Agent Platform endpoint project.
-
-See examples in [remote model `CONNECTION` statement](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model#connection).
-
-To use a [default connection](/bigquery/docs/default-connections), specify
-`DEFAULT` instead of the connection name.
-
-### `model_option_list`
-
-`CREATE MODEL` supports the following options:
-
-#### `MODEL_TYPE`
-
-**Syntax**
-
-```
-MODEL_TYPE = {
-```
+BigQuery uses a `CLOUD_R`

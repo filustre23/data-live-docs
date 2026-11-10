@@ -433,21 +433,4 @@ An array literal represents a constant value of the
 
 A struct literal is a struct whose fields are all literals. Struct literals can
 be written using any of the syntaxes for [constructing a
-struct](/bigquery/docs/reference/standard-sql/data-types#constructing_a_struct) (tuple syntax, typeless struct syntax, or typed
-struct syntax).
-
-Note that tuple syntax requires at least two fields, in order to distinguish it
-from an ordinary parenthesized expression. To write a struct literal with a
-single field, use typeless struct syntax or typed struct syntax.
-
-| Example | Output Type |
-| --- | --- |
-| `(1, 2, 3)` | `STRUCT<INT64, INT64, INT64>` |
-| `(1, 'abc')` | `STRUCT<INT64, STRING>` |
-| `STRUCT(1 AS foo, 'abc' AS bar)` | `STRUCT<foo INT64, bar STRING>` |
-| `STRUCT<INT64, STRING>(1, 'abc')` | `STRUCT<INT64, STRING>` |
-| `STRUCT(1)` | `STRUCT<INT64>` |
-| `STRUCT<INT64>(1)` | `STRUCT<INT64>` |
-
-A struct literal represents a constant value of the
-[struct data type](/bigquery/docs/reference/standard-sql/data-types#struct_type).
+struct](/bigquery/docs/reference/standard-sql/data-types#constructing_a_struct) (tuple syntax, typeless struct syntax, or type

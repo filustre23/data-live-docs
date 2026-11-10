@@ -366,29 +366,4 @@ You can't use a window frame clause with some
 [numbering functions](/bigquery/docs/reference/standard-sql/numbering_functions),
 such as `RANK()`.
 
-**Examples using the window frame clause**
-
-These queries compute values with `ROWS`:
-
-* [Compute a cumulative sum](#compute_a_cumulative_sum)
-* [Compute a moving average](#compute_a_moving_average)
-* [Get the most popular item in each category](#get_the_most_popular_item_in_each_category)
-* [Get the last value in a range](#get_the_last_value_in_a_range)
-* [Use a named window in a window frame clause](#def_use_named_window)
-
-These queries compute values with `RANGE`:
-
-* [Compute the number of items within a range](#compute_the_number_of_items_within_a_range)
-
-These queries compute values with a partially or fully unbound window:
-
-* [Compute a grand total](#compute_a_grand_total)
-* [Compute a subtotal](#compute_a_subtotal)
-* [Compute a cumulative sum](#compute_a_cumulative_sum)
-* [Get the most popular item in each category](#get_the_most_popular_item_in_each_category)
-* [Compute rank](#compute_rank)
-
-These queries compute values with numeric boundaries:
-
-* [Compute a cumulative sum](#compute_a_cumulative_sum)
-* [Compute a moving average](#compute_a_moving_average)
+**Examples using the window**

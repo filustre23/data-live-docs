@@ -118,20 +118,4 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 多重陳述式查詢工作的每個子工作都有 `parent_job_id`，指向多重陳述式查詢工作本身。包括這項工作執行時，所有子工作的摘要值。
 
-如果您查詢 `INFORMATION_SCHEMA.JOBS` 來找出查詢工作的摘要費用，則應排除 `SCRIPT` 陳述式類型。否則，某些值 (例如 `total_slot_ms`) 可能會重複計算。
-
-## 資料保留
-
-這個檢視畫面會顯示執行中的工作，以及過去 180 天的工作記錄。如果專案遷移至某個組織 (無論是從無組織狀態或從其他組織遷移)，則遷移日期之前的作業資訊無法透過 `INFORMATION_SCHEMA.JOBS` 檢視畫面存取，因為該檢視畫面只會保留遷移日期之後的資料。
-
-## 範圍和語法
-
-對這個檢視表執行的查詢必須包含[區域限定詞](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw#syntax)。下表說明這個檢視畫面的區域範圍：
-
-| 檢視表名稱 | 資源範圍 | 區域範圍 |
-| --- | --- | --- |
-| `` [PROJECT_ID.]`region-REGION`.INFORMATION_SCHEMA.JOBS[_BY_PROJECT] `` | 專案層級 | `REGION` |
-
-請替換下列項目：
-
-* 選用：`PROJECT_`
+如果您查詢 `INFORMATION_SCHEMA.JOBS` 來找出查詢工作的摘要費用，則應排除

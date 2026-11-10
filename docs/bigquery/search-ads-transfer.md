@@ -199,14 +199,5 @@ bq mk \
 --display_name=NAME \
 --data_source=DATA_SOURCE \
 --service_account_name=SERVICE_ACCOUNT_NAME \
---params='{PARAMETERS,"custom_columns":"[{\"id\": \"CC_ID\",\"destination_table_name\": [\"CC_DESTINATION_TABLE\"],\"bigquery_column_name\": \"CC_COLUMN\"}]","custom_floodlight_variables":"[{\"id\": \"CFV_ID\",\"cfv_field_name\": [\"CFV_FIELD_NAME\"],\"destination_table_name\": [\"CFV_DESTINATION_TABLE\"],\"bigquery_column_name_suffix\": \"CFV_COLUMN_SUFFIX\"}]"}'
+--params='{PARAMETERS,"custom_columns":"[{\"id\": \"CC_ID\",\"destination_table_name\": [\"CC_DESTINATION_TABLE\"],\"bigquery_column_name\": \"CC_COLUMN\"}]","custom_floodlight_variab
 ```
-
-其中：
-
-* PROJECT\_ID (選用)：指定要使用的專案。如未指定旗標，則會使用預設專案。
-* DATASET：移轉設定的目標資料集。
-* NAME：移轉設定的顯示名稱。資料移轉作業名稱可以是任意值，日後需要修改移轉作業時，能夠據此識別即可。
-* DATA\_SOURCE：資料來源 - `search_ads`。
-* SERVICE\_ACCOUNT\_NAME (選用)：用於驗證資料移轉作業的服務帳戶名稱。服務帳戶應由用於建立移轉作業的 `project_id` 擁有，且應具備所有[必要權限](#required_permissions)。
-* PARAMETERS：JSON 格式的已建立移轉設定參數。例如：`--params='{"param":"param_value"}'`。您必須提供 `customer_id` 參數。

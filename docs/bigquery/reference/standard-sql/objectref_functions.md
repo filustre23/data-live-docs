@@ -367,20 +367,4 @@ For more information, see [Work with `ObjectRef` values](/bigquery/docs/work-wit
 
 **Definitions**
 
-* `uri`: a `STRING` value that contains the URI for the Cloud Storage
-  object, for example, `gs://mybucket/flowers/12345.jpg`. Scalar subqueries
-  and string manipulation functions such as `CONCAT` aren't supported.
-
-  You can use one asterisk (`*`) wildcard character in each path to limit the
-  objects included in the results. For example, if the bucket contains
-  several types of unstructured data, you could list only PDF objects by
-  specifying `gs://bucket_name/*.pdf`. For more information, see
-  [Wildcard support for URIs](/bigquery/docs/external-data-cloud-storage#wildcard-support).
-
-  **Note:** The `OBJ.LIST` function doesn't support uris that end in a slash or
-  uris that contain consecutive slashes. For example, uris such as
-  `gs://mybucket/flowers/` and `gs://mybucket/flowers//12345.jpg` return an
-  error.
-* `authorizer`: a `STRING` value that contains the
-  [Cloud Resource connection](/bigquery/docs/create-cloud-resource-connection)
-  used for [deleg](/bigquery/docs/work-with-objectref#delegated-access)
+* `uri`: a

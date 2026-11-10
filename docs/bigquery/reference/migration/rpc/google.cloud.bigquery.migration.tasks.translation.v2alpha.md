@@ -131,8 +131,4 @@ The special token data type.
 
 | Enums | |
 | --- | --- |
-| `TOKEN_TYPE_UNSPECIFIED` | Token type is not specified. |
-| `STRING` | Token type as string. |
-| `INT64` | Token type as integer. |
-| `NUMERIC` | Token type as numeric. |
-|  |
+| `TOKEN_TYPE_UNSPECIFIED`</ |

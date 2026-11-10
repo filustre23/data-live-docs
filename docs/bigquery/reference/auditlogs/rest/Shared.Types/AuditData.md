@@ -153,6 +153,4 @@ Describes a BigQuery table. See the [Table](/bigquery/docs/reference/v2/tables) 
 | `tableName` | `object (TableName)`  The name of the table. |
 | `info` | `object (TableInfo)`  User-provided metadata for the table. |
 | `schemaJson` | `string`  A JSON representation of the table's schema. |
-| `view` | `object (TableViewDefinition)`  If present, this is a virtual table defined by a SQL query. |
-| `expireTime` | `string (Timestamp format)`  The expiration date for the table, after which the table is deleted and the storage reclaimed. If not present, the table persists indefinitely.  Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"`, `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"`. |
-| `createTime` | `string (Timestamp format)`  The time the table was created |
+| `view` | `object (TableViewDefinition)`  If present, this is a virtual table de |

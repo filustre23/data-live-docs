@@ -225,9 +225,5 @@ int main(int argc, char* argv[]) try {
   read_session.set_table(table_name);
   auto session =
       client.CreateReadSession(project_name, read_session, kMaxReadStreams);
-  if (!session) throw std::move(session).status();
-
-  // Read rows from the ReadSession.
-  constexpr int kRowOffset = 0;
-  auto read_rows = client.ReadRows(session->
+  if (!session) throw
 ```

@@ -274,16 +274,4 @@ The `expression` parameter can represent an expression for these data types:
 | --- | --- | --- |
 | INT64 | FLOAT64 | Returns a close but potentially not exact floating point value. |
 | `NUMERIC` | FLOAT64 | `NUMERIC` will convert to the closest floating point number with a possible loss of precision. |
-| `BIGNUMERIC` | FLOAT64 | `BIGNUMERIC` will convert to the closest floating point number with a possible loss of precision. |
-| `STRING` | FLOAT64 | Returns `x` as a floating point value, interpreting it as having the same form as a valid floating point literal. Also supports casts from `"[+,-]inf"` to `[,-]Infinity`, `"[+,-]infinity"` to `[,-]Infinity`, and `"[+,-]nan"` to `NaN`. Conversions are case-insensitive. |
-
-### CAST AS INT64
-
-```
-CAST(expression AS INT64)
-```
-
-**Description**
-
-GoogleSQL supports [casting](#cast) to integer types.
-The `exp`
+| `BIGNUMERIC` | FLOAT64 | `BIGNUMERIC` will convert to the closest floating point number with a possib |

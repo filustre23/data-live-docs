@@ -202,15 +202,3 @@ result is `NULL`. Format elements are case-insensitive.
 | BASEX | Converts a sequence of bytes into a [BASEX](#about_basex_encoding) encoded string. X represents one of these numbers: 2, 8, 16, 32, 64. | Input as BASE8: b'\x02\x11\x3B'  Output: 00410473 |
 | BASE64M | Converts a sequence of bytes into a [base64](#about_basex_encoding)-encoded string based on [rfc 2045](https://tools.ietf.org/html/rfc2045#section-6.8) for MIME. Generates a newline character ("\n") every 76 characters. | Input: b'\xde\xad\xbe\xef'  Output: 3q2+7w== |
 | ASCII | Converts a sequence of bytes that are ASCII values to a string. If the input contains bytes that aren't a valid ASCII encoding, an error is returned. | Input: b'\x48\x65\x6c\x6c\x6f'  Output: Hello |
-| UTF-8 | Converts a sequence of bytes that are UTF-8 values to a string. If the input contains bytes that aren't a valid UTF-8 encoding, an error is returned. | Input: b'\x24'  Output: $ |
-| UTF8 | Same behavior as UTF-8. |  |
-
-**Return type**
-
-`STRING`
-
-**Example**
-
-```
-SELECT CAST(b'\x48\x65\x6c\x6c\x6f' AS
-```

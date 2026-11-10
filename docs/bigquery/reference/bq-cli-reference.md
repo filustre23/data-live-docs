@@ -303,18 +303,4 @@ gcloud config unset auth/impersonate_service_account
     `pretty`、`sparse` 和 `prettyjson` 應為人類可讀。`json` 和 `csv` 應由其他程式使用。如果指定 `none`，指令不會產生任何輸出內容。如果沒有 `--format` 旗標，系統會根據指令選擇適當的輸出格式。
 
 **`--headless={true|false}`**
-:   如要在沒有使用者互動的情況下執行 `bq` 工作階段，請設為 `true`。例如，`debug_mode` 不會中斷偵錯工具，且資訊列印的頻率會降低。預設值為 `false`。
-
-**`--httplib2_debuglevel=DEBUG_LEVEL`**
-:   指定是否顯示 HTTP 偵錯資訊。如果 `DEBUG_LEVEL` 大於 `0`，指令除了記錄錯誤訊息，也會將 HTTP 伺服器要求和回應記錄到 stderr。如果 `DEBUG_LEVEL` 不大於 0，或未使用 `--httplib2_debuglevel` 旗標，則只會提供錯誤訊息。
-
-    例如：
-
-    ```
-    --httplib2_debuglevel=1
-    ```
-
-    **注意：** 這個旗標不支援多層級偵錯，因此您可以將 `DEBUG_LEVEL` 設為任何正數。
-
-**`--job_id=JOB_ID`**
-:   指定新工作的 ID。這個旗標僅適用於建立工作的指令：`cp`
+:   如要在沒有使用者互動的情況下執行

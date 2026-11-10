@@ -346,13 +346,5 @@ penguin's mass:
 ```
 WITH prepared_data AS (
   SELECT *, RAND() <= 0.8 AS training
-  FROM `bigquery-public-data.ml_datasets.penguins`
-  WHERE body_mass_g > 0
-)
-SELECT
- *
-FROM
- AI.EVALUATE(
-  # Training data
-  (SELECT * EXCEPT(training) FROM prepared_data
+  FROM
 ```

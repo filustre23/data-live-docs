@@ -409,22 +409,5 @@ SELECT * FROM
 ML.PREDICT(
   MODEL `my_dataset.vision_model`,
   (SELECT uri, ML.RESIZE_IMAGE(ML.DECODE_IMAGE(data), 480, 480, FALSE) AS input
-  FROM `my_dataset.object_table`)
-);
-```
-
-**Example 2**
-
-The following example uses the `ML.DECODE_IMAGE` function directly in the
-`ML.PREDICT` function, and uses the `ML.CONVERT_COLOR_SPACE` function in the
-`ML.PREDICT` function to convert
-the image color space from `RBG` to `YIQ`. It also shows how to
-use object table fields to filter the objects included in inference.
-It returns the inference results for all JPG images in the
-object table, for a model with an input field of `input` and an output
-field of `feature`:
-
-```
-SELECT * FROM
-  ML.PREDICT(
+  FROM `my_dataset.object_ta
 ```

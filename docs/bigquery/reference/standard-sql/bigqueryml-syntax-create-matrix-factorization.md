@@ -555,31 +555,4 @@ A `STRING` value.
 
 **Description**
 
-The maximum number of submodels to train. The tuning stops when `NUM_TRIALS`
-submodels are trained, or when the hyperparameter search space is exhausted.
-You must specify this option in order to use hyperparameter tuning.
-For matrix factorization models, increasing `NUM_TRIALS` is the
-recommended way to reduce model output variance.
-
-**Arguments**
-
-An `INT64` value between `1` and `100`, inclusive.
-
-**Note:** We recommend using at least
-`(number_of_hyperparameters * 10)` trials to tune a model.
-
-### `MAX_PARALLEL_TRIALS`
-
-**Syntax**
-
-`MAX_PARALLEL_TRIALS = int64_value`
-
-**Description**
-
-The maximum number of trials to run at the same time. If you specify a value
-for this option, you must also specify a value for
-[`NUM_TRIALS`](#num_trials).
-
-**Arguments**
-
-An `INT64` value between `1` and `5`, inclusive. The default value is `1`.
+The maximum number of submodels to train. The tuning stops when `NUM_TRIALS</`

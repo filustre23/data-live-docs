@@ -169,8 +169,4 @@ BigQuery 資料集、資料表和檢視表可使用鍵/值組合[加上標籤](h
 
 Oracle 提供不同層級和種類的[資料庫稽核](https://docs.oracle.com/cd/E11882_01/server.112/e10575/tdpsg_auditing.htm#TDPSG50000)選項、[稽核資料庫](https://www.oracle.com/database/technologies/security/audit-vault-firewall.html)和[資料庫防火牆功能](https://www.oracle.com/database/technologies/security/audit-vault-firewall.html)，這些功能需另外授權。Oracle 提供 [Enterprise Manager](https://www.oracle.com/technetwork/oem/enterprise-manager/overview/index.html)，可用於監控資料庫。
 
-BigQuery 的資料存取記錄和稽核記錄都使用 [Cloud 稽核記錄](https://docs.cloud.google.com/logging/docs/audit?hl=zh-tw)，且預設為啟用。資料存取記錄會保留 30 天，其他系統事件和管理員活動記錄則會保留 400 天。如需更長的保留期限，可以按照「 [Google Cloud中的安全性記錄分析](https://docs.cloud.google.com/architecture/security-log-analytics?hl=zh-tw)」一文所述，將記錄[匯出](https://docs.cloud.google.com/architecture/security-log-analytics?hl=zh-tw)至 BigQuery、Cloud Storage 或 Pub/Sub。如需與現有事件監控工具整合，可以使用 Pub/Sub 匯出，並在現有工具上進行自訂開發，以便從 Pub/Sub 讀取記錄。
-
-稽核記錄包含所有 API 呼叫、查詢陳述式和工作狀態。您可以使用 [Cloud Monitoring](https://docs.cloud.google.com/bigquery/docs/monitoring?hl=zh-tw) 監控運算單元分配情形、查詢和儲存時掃描的位元組，以及其他 BigQuery [指標](https://docs.cloud.google.com/bigquery/docs/monitoring?hl=zh-tw#metrics)。BigQuery [查詢計畫和時間軸](https://docs.cloud.google.com/bigquery/docs/query-plan-explanation?hl=zh-tw)可用於分析查詢階段和效能。
-
-您可以參考[錯誤訊息表格](https://docs.cloud.google.com/bigquery/docs/error-messages?hl=zh-tw)，排解查詢工作和 API 錯誤
+BigQuery 的資料存取記錄和稽核記錄都使用 [Cloud 稽核記錄](https://docs.cloud.google.com/logging/docs/audit?hl=zh-tw)，且預

@@ -26,7 +26,7 @@ It is also possible to access the Data browser for a particular connection by ho
 
 ### Semantic projects in the data browser[​](#semantic-projects-in-the-data-browser "Direct link to Semantic projects in the data browser")
 
-Any semantic projects that have been configured on a data connection are available via the Data browser. Expand the data browser from the left sidebar, and open the **Data models** tab at the top. From here, you can search your projects and models, and view the measures and dimensions of your models. To explore, select **+ Add to project** which will add a [chart cell](/docs/explore-data/cells/visualization-cells/chart-cells) referencing this model in your Hex project.
+Any semantic projects that have been configured on a data connection are available via the Data browser. Expand the data browser from the left sidebar, and open the **Semantic models** tab at the top. From here, you can search your projects and models, and view the measures and dimensions of your models. To explore, select **+ Add to project** which will add a [chart cell](/docs/explore-data/cells/visualization-cells/chart-cells) referencing this model in your Hex project.
 
 [](/assets/medias/data-browser-semantic-models-9320a49132880096a3fd5009d2c59361.mp4)
 

@@ -18,7 +18,7 @@ Each YAML document represents a single semantic resource.
 
 ## Model specification[​](#model-specification "Direct link to Model specification")
 
-Models declare a reusable definition for a data table alongside its measures, dimensions, and relationships. Models act as the core building blocks for all analytical logic within the semantic project. Data models typically correspond closely to tables in your database.
+Models declare a reusable definition for a data table alongside its measures, dimensions, and relationships. Models act as the core building blocks for all analytical logic within the semantic project. Models typically correspond closely to tables in your database.
 
 ```
 id: users
@@ -84,7 +84,7 @@ This identifier is used as its reference across all models and must be unique ac
 
 type:"model"
 
-The string **"model"** to discern this resource as a data model.
+The string **"model"** to discern this resource as a semantic model.
 
 One of **base\_sql\_table** or **base\_sql\_query** is required to specify the data for this model:
 
@@ -505,7 +505,7 @@ Views are declared on top of models and provide fit-for-purpose entrypoints for 
 
 Views can rename and reorganize the dimensions, measures, and relations of models for clarity and readability. Using this feature can help simplify complex join trees or flatten relations to simpler concepts for your users.
 
-> Views are an optional feature. Models and views share all analytical capabilities in Hex. Views can be incrementally introduced to build a cleaner facade over your data models as it becomes more complex.
+> Views are an optional feature. Models and views share all analytical capabilities in Hex. Views can be incrementally introduced to build a cleaner facade over your models as they become more complex.
 
 ```
 id: revenue
@@ -563,7 +563,7 @@ The string **"view"** to discern this resource as a view.
 
 \*base:string
 
-The data model to use as the grain for this view.
+The model to use as the grain for this view.
 
 \*contents:[Group[]](#groups)
 

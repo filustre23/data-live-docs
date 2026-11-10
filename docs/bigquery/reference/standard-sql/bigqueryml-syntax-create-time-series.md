@@ -546,28 +546,3 @@ This option accepts the following values:
 * `EG`: Egypt
 * `ES`: Spain
 * `FI`: Finland
-* `FR`: France
-* `GB`: United Kingdom
-* `GR`: Greece
-* `HK`: Hong Kong
-* `HU`: Hungary
-* `ID`: Indonesia
-* `IE`: Ireland
-* `IL`: Israel
-* `IN`: India
-* `IR`: Iran
-* `IT`: Italy
-* `JP`: Japan
-* `KR`: South Korea
-* `LV`: Latvia
-* `MA`: Morocco
-* `MX`: Mexico
-* `MY`: Malaysia
-* `NG`: Nigeria
-* `NL`: Netherlands
-* `NO`: Norway
-* `NZ`: New Zealand
-* `PE`: Peru
-* `PH`: Philippines
-* `PK`: Pakistan
-* `PL`: Poland

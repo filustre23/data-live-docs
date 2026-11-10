@@ -314,18 +314,4 @@ such as `BEGIN`/`END`, `IF`/`ELSE`/`END IF`, and `WHILE`/`END WHILE`.
 
 `BEGIN`/`END` is restricted from being executed dynamically as a nested element.
 
-You can use a label with this statement. To learn more, see [Labels](#labels).
-
-**Examples**
-
-The following example declares a variable `x` with the default value 10; then,
-it initiates a block, in which a variable `y` is assigned the value of `x`,
-which is 10, and returns this value; next, the `END` statement ends the
-block, ending the scope of variable `y`; finally, it returns the value of `x`.
-
-```
-DECLARE x INT64 DEFAULT 10;
-BEGIN
-  DECLARE y INT64;
-  <
-```
+You can use a label with this statement. To learn more, see [Labels<](#labels)

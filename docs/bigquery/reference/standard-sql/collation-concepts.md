@@ -342,14 +342,5 @@ CREATE TABLE table_a
     col_a STRING COLLATE 'und:ci',
     col_b STRING COLLATE '',
     col_c STRING,
-    col_d STRING COLLATE 'und:ci'
-);
-
--- This runs. Column 'b' has a collation specification and the
--- column 'c' doesn't.
-SELECT STARTS_WITH(col_b_expression, col_c_expression)
-FROM table_a;
-
--- This runs. Column 'a' and 'd' have the same collation specification.
-SELECT STARTS_WITH(col_a_expression, col_d_expression)
+    col_d STRING
 ```

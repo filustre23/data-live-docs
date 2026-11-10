@@ -129,8 +129,4 @@ Service to handle EDW migrations.
 
 | ListMigrationWorkflows |
 | --- |
-| `rpc ListMigrationWorkflows(ListMigrationWorkflowsRequest) returns (ListMigrationWorkflowsResponse)`  Lists previously created migration workflow.  Authorization scopes  Requires the following OAuth scope:   * `https://www.googleapis.com/auth/cloud-platform`   For more information, see the [Authentication Overview](/docs/authentication#authorization-gcp).  IAM Permissions  Requires the following [IAM](https://cloud.google.com/iam/docs) permission on the `parent` resource:   * `bigquerymigration.workflows.list`   For more information, see the [IAM documentation](https://cloud.google.com/iam/docs). |
-
-| StartMigrationWorkflow |
-| --- |
-| `rpc StartMigrationWorkflow(StartMigrationWorkflowRequest) returns (Empty)`  Starts a previously created migration workflow. I.e., the state transitions from DRAFT to RUNNING. This is a no-op if the state is already R |
+| `rpc ListMigrationWorkflows(ListMigrationWorkflowsRequest) returns (ListMigrationWorkflowsResponse)`  Lists previously created migration workflow.  Authorization scopes  Requires the following OAuth scope:   * `https://www.googleapis.com/auth/cloud-platform`   For more information, see the [Authentication Overview](/docs/authentication#authorization-gcp).  IAM Permissions  Requires the following |

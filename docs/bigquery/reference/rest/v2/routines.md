@@ -140,14 +140,3 @@ The input/output mode of the argument.
 
 | Enums | |
 | --- | --- |
-| `MODE_UNSPECIFIED` | Default value. |
-| `IN` | The argument is input-only. |
-| `OUT` | The argument is output-only. |
-| `INOUT` | The argument is both an input and an output. |
-
-## StandardSqlTableType
-
-A table type
-
-| JSON representation |
-| --- |

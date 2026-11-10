@@ -255,23 +255,5 @@ SELECT INT64(JSON '2005') AS flight_number;
 ```
 
 ```
-SELECT INT64(JSON_QUERY(JSON '{"gate": "A4", "flight_number": 2005}', "$.flight_number")) AS flight_number;
-
-/*---------------+
- | flight_number |
- +---------------+
- | 2005          |
- +---------------*/
+SELECT INT64(JSON_QUERY(JSON '{"gate": "A4", "flight_number": 2005}', "$.flight_number"))
 ```
-
-```
-SELECT INT64(JSON '10.0') AS score;
-
-/*-------+
- | score |
- +-------+
- | 10    |
- +-------*/
-```
-
-The following examples show how invalid

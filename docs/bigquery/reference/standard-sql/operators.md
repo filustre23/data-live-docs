@@ -295,16 +295,4 @@ Gets the value of a field at a selected position in a struct.
   zero and produces an error if the index is out of range.
 
 **Note:** The struct subscript operator doesn't support `SAFE` positional keywords
-at this time.
-
-**Examples**
-
-In following query, the struct subscript operator is used to return values at
-specific locations in `item_struct` using position keywords. This query also
-shows what happens when you reference an index (`6`) in an struct that's out of
-range.
-
-```
-SELECT
-  STRUCT<INT64, STRING, BOOL>(23, "tea", FALSE)[0]
-```
+at this

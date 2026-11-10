@@ -77,7 +77,7 @@ If you are using [sbt](https://www.scala-sbt.org/), add
 the following to your dependencies:
 
 ```
-libraryDependencies += "com.google.cloud" % "google-cloud-bigqueryreservation" % "2.102.0"
+libraryDependencies += "com.google.cloud" % "google-cloud-bigqueryreservation" % "2.103.0"
 ```
 
 If you're using Visual Studio Code or IntelliJ, you can add client libraries to your
@@ -224,9 +224,5 @@ func main() {
 	if err != nil {
 		log.Fatalf("printReservations: %v", err)
 	}
-	fmt.Println(s)
-}
-
-// printCapacityCommitments iterates through the capacity commitments and returns a byte buffer with details.
-func reportCapacityCommitments(ctx context.Context, client *reservation.
+	
 ```

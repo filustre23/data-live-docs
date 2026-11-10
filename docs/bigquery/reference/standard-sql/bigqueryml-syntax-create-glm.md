@@ -529,31 +529,4 @@ Determines whether training should stop after the first iteration in which the
 relative loss improvement is less than the value specified for
 [`MIN_REL_PROGRESS`](#min_rel_progress).
 
-**Arguments**
-
-A `BOOL` value. The default value is `TRUE`.
-
-### `MIN_REL_PROGRESS`
-
-**Syntax**
-
-`MIN_REL_PROGRESS = float64_value`
-
-**Description**
-
-The minimum relative loss improvement that is necessary to continue training
-when [`EARLY_STOP`](#early_stop) is set to `TRUE`. For example, a value of
-`0.01` specifies that each iteration must reduce the loss by 1% for training
-to continue.
-
-**Arguments**
-
-A `FLOAT64` value. The default value is `0.01`.
-
-### `DATA_SPLIT_METHOD`
-
-**Syntax**
-
-```
-DATA_SPLIT_METHOD =
-```
+**Arguments**<

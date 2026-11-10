@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-11-09T20:52+00:00_
+_Generated 2026-11-10T07:02+00:00_
 
-**9 sources, 4825 topics total**
+**9 sources, 4832 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_886 topics_
+_892 topics_
 
 - `anthropic-sdk/about-claude/additional-resources`
 - `anthropic-sdk/about-claude/api-credits-for-subscribers`
@@ -703,6 +703,7 @@ _886 topics_
 - `anthropic-sdk/build-with-claude/prompt-engineering/overview`
 - `anthropic-sdk/build-with-claude/prompt-engineering/prompting-claude-fable-5`
 - `anthropic-sdk/build-with-claude/prompt-engineering/prompting-claude-fable-5-1`
+- `anthropic-sdk/build-with-claude/prompt-engineering/prompting-claude-fable-5-2`
 - `anthropic-sdk/build-with-claude/prompt-engineering/prompting-claude-haiku-5-5`
 - `anthropic-sdk/build-with-claude/prompt-engineering/prompting-claude-opus-4-8`
 - `anthropic-sdk/build-with-claude/prompt-engineering/prompting-claude-opus-5`
@@ -850,12 +851,16 @@ _886 topics_
 - `anthropic-sdk/models/fable-5-1/migration-guide`
 - `anthropic-sdk/models/fable-5-1/overview`
 - `anthropic-sdk/models/fable-5-1/whats-new-fable-5-1`
+- `anthropic-sdk/models/fable-5-2/migration-guide`
+- `anthropic-sdk/models/fable-5-2/overview`
+- `anthropic-sdk/models/fable-5-2/whats-new-fable-5-2`
 - `anthropic-sdk/models/fable-5/overview`
 - `anthropic-sdk/models/haiku-4-5/overview`
 - `anthropic-sdk/models/haiku-5-5/migration-guide`
 - `anthropic-sdk/models/haiku-5-5/overview`
 - `anthropic-sdk/models/haiku-5-5/whats-new-haiku-5-5`
 - `anthropic-sdk/models/mythos-5-1/overview`
+- `anthropic-sdk/models/mythos-5-2/overview`
 - `anthropic-sdk/models/mythos-5/overview`
 - `anthropic-sdk/models/opus-4-5/overview`
 - `anthropic-sdk/models/opus-4-6/overview`
@@ -875,6 +880,7 @@ _886 topics_
 - `anthropic-sdk/release-notes/overview`
 - `anthropic-sdk/release-notes/system-prompts/claude-fable-5`
 - `anthropic-sdk/release-notes/system-prompts/claude-fable-5-1`
+- `anthropic-sdk/release-notes/system-prompts/claude-fable-5-2`
 - `anthropic-sdk/release-notes/system-prompts/claude-haiku-3`
 - `anthropic-sdk/release-notes/system-prompts/claude-haiku-3-5`
 - `anthropic-sdk/release-notes/system-prompts/claude-haiku-4-5`
@@ -3990,7 +3996,7 @@ _158 topics_
 
 Upstream: <https://learn.hex.tech/>
 
-_396 topics_
+_397 topics_
 
 - `hex/changelog`
 - `hex/changelog/2020-12-17`
@@ -4282,6 +4288,7 @@ _396 topics_
 - `hex/docs/getting-started/develop-your-notebook`
 - `hex/docs/getting-started/share-your-work`
 - `hex/docs/hex-4-0`
+- `hex/docs/hex-4-0/beta-roadmap`
 - `hex/docs/hex-4-0/what-is-hex-4-0`
 - `hex/docs/legal`
 - `hex/docs/legal/aup`

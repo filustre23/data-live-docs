@@ -584,32 +584,3 @@ AdWords report (deprecated):
 
 BigQuery AdWords table (deprecated):
 :   p\_ClickStats\_customer\_id
-
-#### Geo performance report
-
-Google Ads API resource (v25.0.0):
-:   [Geographic View](https://developers.google.com/google-ads/api/fields/v25/geographic_view)
-
-Google Ads tables:
-:   p\_ads\_GeoConversionStats\_customer\_id  
-    p\_ads\_GeoStats\_customer\_id
-
-BigQuery views:
-:   GeoConversionStats\_customer\_id  
-    GeoStats\_customer\_id
-
-AdWords report (deprecated):
-:   [Geo Performance Report](https://developers.google.com/adwords/api/docs/appendix/reports/geo-performance-report)
-
-BigQuery AdWords tables (deprecated):
-:   p\_GeoConversionStats\_customer\_id  
-    p\_GeoStats\_customer\_id
-
-### Attribute and label tables
-
-The following tables provide mapping information for attribute settings and
-label assignments, such as CampaignLabel, AdGroupLabel, and AdGroupBidModifier.
-
-#### Ad group bid modifier
-
-Google Ads API resource (v25.0.0):

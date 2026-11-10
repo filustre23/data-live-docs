@@ -223,8 +223,5 @@ for each day in the HackerNews dataset:
 #GoogleSQL
 WITH TitlesAndScores AS (
   SELECT
-    ARRAY_AGG(STRUCT(title, score)) AS titles,
-    EXTRACT(DATE FROM time_ts) AS date
-  FROM `bigquery-public-data.hacker_news.stories`
-  WHERE score IS NOT
+    ARRAY_AGG(STRUCT(title,
 ```

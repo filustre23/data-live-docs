@@ -344,26 +344,5 @@ tables:
 ```
 SELECT
   username,
-  (SELECT mascot FROM Mascots WHERE Players.team = Mascots.team) AS player_mascot
-FROM Players;
-
-/*---------------------------+
- | username  | player_mascot |
- +---------------------------+
- | gorbie    | cardinal      |
- | junelyn   | finch         |
- | corba     | parrot        |
- +---------------------------*/
+  (SELECT mascot FROM Mascots WHERE Players.team = Mascots.team) AS
 ```
-
-## Volatile subqueries
-
-A volatile subquery is a subquery that doesn't always produce the same result
-over the same inputs. For example, if a subquery includes a function
-that returns a random number, the subquery is volatile because the result
-isn't always the same.
-
-**Examples**
-
-In this example, a random number of usernames are returned from the
-[`Players`](#example_tables) table.

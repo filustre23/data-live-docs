@@ -578,26 +578,3 @@ Model Garden are supported:
 * [Phi-4](https://console.cloud.google.com/vertex-ai/publishers/microsoft/model-garden/phi4)
 * [Phi-3](https://console.cloud.google.com/vertex-ai/publishers/microsoft/model-garden/phi3)
 * [QwQ](https://console.cloud.google.com/vertex-ai/publishers/qwen/model-garden/qwq)
-* [Qwen3.5](https://console.cloud.google.com/vertex-ai/publishers/qwen/model-garden/qwen3-5)
-* [Qwen3-Next](https://console.cloud.google.com/vertex-ai/publishers/qwen/model-garden/qwen3-next)
-* [Qwen2](https://console.cloud.google.com/vertex-ai/publishers/qwen/model-garden/qwen2)
-* [Vicuna](https://console.cloud.google.com/vertex-ai/publishers/lmsys/model-garden/lmsys-vicuna-7b)
-
-The following open embedding generation models in the Agent Platform
-Model Garden are supported:
-
-* [E5 Text Embedding](https://console.cloud.google.com/vertex-ai/publishers/intfloat/model-garden/e5)
-* [Qwen3 Embedding](https://console.cloud.google.com/vertex-ai/publishers/qwen/model-garden/qwen3-embedding)
-* [EmbeddingGemma](https://console.cloud.google.com/vertex-ai/publishers/google/model-garden/embeddinggemma)
-
-### Supported Hugging Face models
-
-BigQuery ML supports Hugging Face models that use the
-[Text Embeddings Inference API](https://huggingface.github.io/text-embeddings-inference/)
-or the
-[Text Generation Inference API](https://huggingface.github.io/text-generation-inference/)
-and can be deployed to Agent Platform.
-
-If you use the Vertex AI API to
-[deploy the open model](/vertex-ai/generative-ai/docs/model-garden/use-models#deploy_an_open_model)
-as an Age

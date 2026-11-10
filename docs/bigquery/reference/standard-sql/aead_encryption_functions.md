@@ -253,20 +253,3 @@ encrypt `ciphertext`, ignoring its type, or else the function returns an error.
 **Return Data Type**
 
 `BYTES`
-
-**Example**
-
-This example creates a table of unique IDs with associated plaintext values and
-keysets. Then it uses these keysets to encrypt the plaintext values as `BYTES`
-and store them in a new table. Finally, it uses `DETERMINISTIC_DECRYPT_BYTES` to
-decrypt the encrypted values and display them as plaintext.
-
-The following statement creates a table `CustomerKeysets` containing a column of
-unique IDs, a column of `DETERMINISTIC_AEAD_AES_SIV_CMAC_256` keysets, and a
-column of favorite animals.
-
-```
-CREATE TABLE deterministic.CustomerKeysets AS
-SELECT
-  1 AS
-```
