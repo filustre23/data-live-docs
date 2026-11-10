@@ -367,4 +367,4 @@ For more information, see [Work with `ObjectRef` values](/bigquery/docs/work-wit
 
 **Definitions**
 
-* `uri`: a
+* `uri`: a `STRING` value

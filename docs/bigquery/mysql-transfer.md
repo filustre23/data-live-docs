@@ -24,10 +24,10 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 MySQL 資料移轉作業有下列限制：
 
-* MySQL 資料庫的同時連線數量上限，取決於 MySQL 設定參數 `max_connections`。預設值為 151 個連線，但可視需要調高上限。因此，同時對單一 MySQL 資料庫執行的移轉作業數量，不得超過這個上限。這項限制也代表並行移轉工作的數量應小於 MySQL 資料庫支援的並行連線數量上限。
+* MySQL 資料庫的同時連線數量上限，取決於 MySQL 設定參數 `max_connections`。預設值為 151 個連線，但可視需要調高上限。因此，同時對單一 MySQL 資料庫執行的移轉作業數量，不得超過這個上限。這項限制也代表並行移轉工作的數量應限制在 MySQL 資料庫支援的並行連線數量上限以下。
 * 單一移轉設定在特定時間只能支援一項資料移轉作業。如果第二項資料移轉作業排定在第一項移轉作業完成前執行，則只有第一項資料移轉作業會完成，與第一項移轉作業重疊的其他資料移轉作業都會略過。
   + 為避免單一移轉設定略過移轉作業，建議您設定「Repeat frequency」(重複頻率) 選項，增加大型資料移轉作業之間的時間長度。
-* 在資料移轉期間，MySQL 連接器會找出已建立索引和分區的鍵資料欄，以平行批次方式移轉資料。因此，建議您指定主鍵資料欄，或使用資料表中的索引資料欄，以提升效能並降低資料移轉的錯誤率。
+* 在資料移轉期間，MySQL 連接器會識別已建立索引和分區的鍵資料欄，以平行批次方式移轉資料。因此，建議您指定主鍵資料欄，或使用資料表中的索引資料欄，以提升效能並降低資料移轉的錯誤率。
   + 如果您有索引或主鍵限制，則只有下列資料欄類型支援建立平行批次：
     - `INTEGER`
     - `TINYINT`
@@ -40,6 +40,7 @@ MySQL 資料移轉作業有下列限制：
     - `DECIMAL`
     - `DATE`
   + 如果 MySQL 資料移轉作業未使用主鍵或索引資料欄，則每份資料表最多只能有 2,000,000 筆記錄。
+* 如果網路連結是在與 Google Cloud 資料移轉專案不同的 Google Cloud 專案中建立，您必須將 `compute.networkAttachments.get` 和 `compute.networkAttachments.update` 權限授予 Google Cloud 資料移轉專案所屬的[服務代理](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service?hl=zh-tw#service_agent)。
 
 ### 增量移轉作業限制
 
@@ -52,11 +53,11 @@ MySQL 增量移轉作業有下列限制：
 * 單一移轉設定只能支援增量或完整擷取。
 * 首次執行增量擷取後，您就無法更新 `asset` 清單中的物件。
 * 首次執行增量擷取後，您就無法變更移轉設定中的寫入模式。
-* 首次執行增量擷取後，就無法變更基準值資料欄或主鍵。
+* 首次執行增量擷取後，就無法變更基準欄或主鍵。
 * 目的地 BigQuery 資料表會使用提供的主鍵進行分群，並受[分群資料表限制](https://docs.cloud.google.com/bigquery/docs/clustered-tables?hl=zh-tw#limitations)規範。
-* 首次將現有移轉設定更新為增量擷取模式時，更新後的第一次資料移轉會從資料來源移轉所有可用資料。後續的任何增量資料移轉作業，都只會從資料來源移轉新的和更新的資料列。
-* 建議您在基準欄建立索引。這個連接器會使用浮水印資料欄，在遞增移轉作業中篩選資料，因此為這些資料欄建立索引可提升效能。
-* 執行增量移轉時，必須使用更新後的資料類型對應。
+* 首次將現有移轉設定更新為遞增擷取模式時，更新後的第一次資料移轉會從資料來源移轉所有可用資料。後續的任何增量資料移轉作業，都只會從資料來源移轉新的和更新的資料列。
+* 建議您在基準欄建立索引。這個連接器會使用浮水印資料欄篩選遞增移轉作業，因此為這些資料欄建立索引可提升效能。
+* 執行增量移轉作業時，必須使用更新後的資料類型對應。
 
 ## 事前準備
 
@@ -93,11 +94,11 @@ MySQL 增量移轉作業有下列限制：
 
 ### 網路連線數
 
-如果 MySQL 資料庫連線沒有可用的公開 IP 位址，您必須[設定網路連結](https://docs.cloud.google.com/vpc/docs/create-manage-network-attachments?hl=zh-tw)。
+如果 MySQL 資料庫連線沒有公開 IP 位址，您必須[設定網路連結](https://docs.cloud.google.com/vpc/docs/create-manage-network-attachments?hl=zh-tw)。
 
 如需必要網路設定的詳細操作說明，請參閱下列文件：
 
-* 如要從 Cloud SQL 移轉，請參閱「[設定 Cloud SQL 執行個體存取權](https://docs.cloud.google.com/bigquery/docs/cloud-sql-instance-access?hl=zh-tw)」。
+* 如果您是從 Cloud SQL 轉移，請參閱「[設定 Cloud SQL 執行個體存取權](https://docs.cloud.google.com/bigquery/docs/cloud-sql-instance-access?hl=zh-tw)」。
 * 如果您是從 AWS 轉移，請參閱「[設定 AWS-Google Cloud VPN 和網路連結](https://docs.cloud.google.com/bigquery/docs/aws-vpn-network-attachment?hl=zh-tw)」。
 * 如要從 Azure 轉移，請參閱「[設定 Azure-Google Cloud VPN 和網路連結](https://docs.cloud.google.com/bigquery/docs/azure-vpn-network-attachment?hl=zh-tw)」。
 
@@ -139,7 +140,7 @@ MySQL 增量移轉作業有下列限制：
 7. 在「Destination settings」(目的地設定) 部分，「Dataset」(資料集) 請選取您為了儲存資料而建立的資料集，或點選「Create new dataset」(建立新的資料集)，建立要當做目的地資料集的資料集。
 8. 選用：在「Notification options」(通知選項) 專區，執行下列操作：
 
-   * 如要啟用電子郵件通知，請將「Email notifications」(電子郵件通知) 切換鈕撥到開啟位置。啟用這個選項之後，若移轉失敗，移轉作業管理員就會收到電子郵件通知。
+   * 如要啟用電子郵件通知，請將「Email notifications」(電子郵件通知) 切換按鈕設為開啟。啟用這個選項之後，若移轉失敗，移轉作業管理員就會收到電子郵件通知。
    * 如要設定移轉作業的 Pub/Sub 執行[通知](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications?hl=zh-tw)，請將「Pub/Sub notifications」(Pub/Sub 通知) 切換鈕撥到開啟位置。您可以選取[主題](https://docs.cloud.google.com/pubsub/docs/create-topic?hl=zh-tw)名稱，或點選「Create a topic」(建立主題) 來建立主題。
 9. 按一下「儲存」。
 
@@ -165,7 +166,7 @@ bq mk
 * DATASET：資料移轉設定的目標資料集。
 * PARAMETERS：JSON 格式的已建立移轉設定參數。例如：`--params='{"param":"param_value"}'`。MySQL 移轉作業的參數如下：
 
-  + `connector.networkAttachment` (選用)：用於連線至 MySQL 資料庫的網路連結名稱。
+  + `connector.networkAttachment` (選用)：網路連結名稱，用於連線至 MySQL 資料庫。
   + `connector.database`：MySQL 資料庫的名稱。
   + `connector.endpoint.host`：資料庫的主機名稱或 IP 位址。
   + `connector.endpoint.port`：資料庫的通訊埠編號。
@@ -174,13 +175,13 @@ bq mk
   + `connector.legacyMapping`：設為 `true` (預設)，即可使用[舊版資料類型對應](https://docs.cloud.google.com/bigquery/docs/mysql-transfer-intro?hl=zh-tw#data-type-mapping)。設為 `false` 即可使用更新版資料類型對應。如要進行增量移轉，這個值必須是 `false`。如要進一步瞭解資料類型對應更新，請參閱「[2027 年 3 月 16 日](https://docs.cloud.google.com/bigquery/docs/transfer-changes?hl=zh-tw#Mar16-mysql)」。
   + `connector.tls.mode`：指定要與這項轉移作業搭配使用的 [TLS 設定](https://docs.cloud.google.com/bigquery/docs/mysql-transfer-intro?hl=zh-tw#tls-configuration)：
     - `ENCRYPT_VERIFY_CA_AND_HOST`：加密資料，並驗證憑證授權單位和主機名稱
-    - `ENCRYPT_VERIFY_CA`：加密資料，且僅驗證憑證授權單位
-    - `ENCRYPT_VERIFY_NONE` (僅用於資料加密)
+    - `ENCRYPT_VERIFY_CA`：加密資料，僅驗證憑證授權單位
+    - `ENCRYPT_VERIFY_NONE` 僅用於資料加密
     - `DISABLE`：不加密或驗證
   + `connector.tls.trustedPemCertificate`：(選用) 提供一或多個 [PEM 編碼憑證](https://docs.cloud.google.com/bigquery/docs/mysql-transfer-intro?hl=zh-tw#trusted_server_certificate_pem)。只有在 `connector.tls.mode` 為 `ENCRYPT_VERIFY_CA_AND_HOST` 或 `ENCRYPT_VERIFY_CA` 時才需要。
   + `ingestionType`：指定 `full` 或 `incremental`。[預先發布版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages)支援增量移轉。詳情請參閱「[完整或增量移轉](https://docs.cloud.google.com/bigquery/docs/mysql-transfer-intro?hl=zh-tw#full-incremental-transfers)」。
   + `writeMode`：指定 `WRITE_MODE_APPEND` 或 `WRITE_MODE_UPSERT`。
-  + `watermarkColumns`：將資料表中的資料欄指定為浮水印資料欄。如要進行增量移轉，則必須填寫這個欄位。
+  + `watermarkColumns`：將資料表中的資料欄指定為浮水印欄。如要進行增量移轉，則必須填寫這個欄位。
   + `primaryKeys`：將資料表中的資料欄指定為主鍵。如要進行增量移轉，則必須填寫這個欄位。
   + `assets`：MySQL 資料表名稱清單，列出要從 MySQL 資料庫轉移的資料表。
 
@@ -207,7 +208,7 @@ bq mk
         "connector.tls.trustedPemCertificate": "PEM-encoded certificate"}'
 ```
 
-在遞增移轉作業中指定多項資產時，`watermarkColumns` 和 `primaryKeys` 欄位的值會對應至 `assets` 欄位中的值位置。在以下範例中，`dep_id` 對應至資料表 `DB1/DEPARTMENT`，而 `report_by` 和 `report_title` 則對應至資料表 `DB1/EMPLOYEES`。
+在增量移轉期間指定多項資產時，`watermarkColumns` 和 `primaryKeys` 欄位的值會對應至 `assets` 欄位中的值位置。在以下範例中，`dep_id` 對應至資料表 `DB1/DEPARTMENT`，而 `report_by` 和 `report_title` 則對應至資料表 `DB1/EMPLOYEES`。
 
 ```
       "primaryKeys":[["dep_id"], ["report_by","report_title"]],
@@ -224,7 +225,7 @@ bq mk
 
 ## 疑難排解
 
-如果無法順利設定資料移轉作業，請參閱「[MySQL 移轉問題](https://docs.cloud.google.com/bigquery/docs/transfer-troubleshooting?hl=zh-tw#mysql-issues)」一文。
+如果無法順利設定資料移轉作業，請參閱「[MySQL 移轉問題](https://docs.cloud.google.com/bigquery/docs/transfer-troubleshooting?hl=zh-tw#mysql-issues)」。
 
 ## 轉移中繼資料
 

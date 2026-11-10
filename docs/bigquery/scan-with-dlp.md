@@ -16,18 +16,18 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 使用 Sensitive Data Protection 掃描 BigQuery 資料
 
-瞭解自己的機密資料位於何處，通常是確認能夠妥善保護和管理這些資料的第一步。知道這點有助於降低信用卡號碼、醫療資訊、身分證字號、駕照號碼、地址、全名以及公司特定機密等敏感詳細資訊的暴露風險。此外，定期掃描資料也有助符合法規遵循要求，並確保您可以在資料隨著使用而增加或改變時，採行最佳做法。為符合法規遵循要求，請使用 Sensitive Data Protection 檢查 BigQuery 資料表，並保護機密資料。
+Sensitive Data Protection 可讓您檢查 BigQuery 資料表，在資料集成長和變更時，識別、管理及保護機密資料。定期掃描有助於符合法規遵循要求，並降低信用卡號碼、醫療資訊、身分證字號、駕照號碼、地址、全名和公司專屬機密等詳細資料外洩的風險。
+
+本文說明如何從 Google Cloud 控制台的「BigQuery」**BigQuery**頁面執行隨選檢查。如要進一步瞭解 Sensitive Data Protection，請參閱 [Sensitive Data Protection 說明文件](https://docs.cloud.google.com/sensitive-data-protection/docs?hl=zh-tw)。
+
+## 掃描 BigQuery 資料的方法
+
+Sensitive Data Protection 是一項全代管服務，可讓您大規模識別及保護機密資料。Sensitive Data Protection 使用超過 150 個預先定義的偵測工具，來識別模式、格式和總和檢查碼。Sensitive Data Protection 也提供一組工具，可對資料進行去識別化處理，包括遮蓋、代碼化、假名化和日期移位，且不會複製客戶資料。
 
 掃描 BigQuery 資料的方式有兩種：
 
 * **機密資料剖析。**Sensitive Data Protection 可針對組織、資料夾或專案中的 BigQuery 資料產生設定檔。*資料剖析檔*包含資料表的指標和中繼資料，可協助您判斷[機密和高風險資料](https://docs.cloud.google.com/sensitive-data-protection/docs/sensitivity-risk-calculation?hl=zh-tw)的存放位置。Sensitive Data Protection 會在專案、資料表和資料欄層級回報這些指標。詳情請參閱「[BigQuery 資料剖析](https://docs.cloud.google.com/sensitive-data-protection/docs/data-profiles?hl=zh-tw)」。
-* **隨選檢查：**Sensitive Data Protection 可對單一資料表或部分資料欄執行深度檢查，並回報儲存格層級的發現項目。這類檢查可協助您找出特定資料[類型](https://docs.cloud.google.com/sensitive-data-protection/docs/infotypes-reference?hl=zh-tw)的個別例項，例如表格儲存格中信用卡號碼的精確位置。您可以透過Google Cloud 控制台的 Sensitive Data Protection 頁面、 Google Cloud 控制台的「BigQuery」**BigQuery**頁面，或透過 DLP API 以程式輔助方式，執行隨選檢查。
-
-本頁面說明如何透過 Google Cloud 控制台的「BigQuery」**BigQuery**頁面執行隨選檢查。
-
-Sensitive Data Protection 是一項全代管服務，可讓 Google Cloud 客戶大規模識別及保護機密資料。Sensitive Data Protection 使用超過 150 個預先定義的偵測工具，識別模式、格式和總和檢查碼。Sensitive Data Protection 也提供一組工具，可對資料進行去識別化，包括遮蓋、代碼化、假名化、日期移位等，完全不需複製客戶資料。
-
-如要進一步瞭解 Sensitive Data Protection，請參閱 [Sensitive Data Protection](https://docs.cloud.google.com/sensitive-data-protection/docs?hl=zh-tw) 說明文件。
+* **隨選檢查：**Sensitive Data Protection 可對單一資料表或部分資料欄執行深度檢查，並回報儲存格層級的發現項目。這類檢查可協助您找出特定資料[類型](https://docs.cloud.google.com/sensitive-data-protection/docs/infotypes-reference?hl=zh-tw)的個別例項，例如表格儲存格中信用卡號碼的精確位置。您可以透過Google Cloud 控制台中的 Sensitive Data Protection 頁面、 Google Cloud 控制台中的「BigQuery」**BigQuery**頁面，或透過 DLP API 以程式輔助方式，執行隨選檢查。
 
 ## 事前準備
 
@@ -35,9 +35,13 @@ Sensitive Data Protection 是一項全代管服務，可讓 Google Cloud 客戶�
 2. [啟用 DLP API](https://docs.cloud.google.com/apis/docs/enable-disable-apis?hl=zh-tw)。
 
    [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=dlp.googleapis.com&hl=zh-tw)
-3. 確認建立 Sensitive Data Protection 工作的成員，已獲派適當的預先定義 Sensitive Data Protection [IAM 角色](https://docs.cloud.google.com/sensitive-data-protection/docs/iam-roles?hl=zh-tw)，或具備足夠的[權限](https://docs.cloud.google.com/sensitive-data-protection/docs/iam-permissions?hl=zh-tw)，可執行 Sensitive Data Protection 工作。
+3. 確認建立 Sensitive Data Protection 工作的
+   使用者具備適當的預先定義 Sensitive Data Protection
+   [Identity and Access Management (IAM) 角色](https://docs.cloud.google.com/sensitive-data-protection/docs/iam-roles?hl=zh-tw)，
+   或有足夠的[權限](https://docs.cloud.google.com/sensitive-data-protection/docs/iam-permissions?hl=zh-tw)
+   可執行 Sensitive Data Protection 工作。
 
-**注意：** 啟用 DLP API 時，系統會建立服務帳戶，名稱類似於 `service-project_number@dlp-api.iam.gserviceaccount.com`。這個服務帳戶已取得 DLP API 服務代理角色，可向 BigQuery API 進行驗證。詳情請參閱 Sensitive Data Protection IAM 權限頁面的「[服務帳戶](https://docs.cloud.google.com/sensitive-data-protection/docs/iam-permissions?hl=zh-tw#service_account)」一節。
+**注意：** 啟用 DLP API 時，系統會建立服務帳戶，名稱類似於 `service-project_number@dlp-api.iam.gserviceaccount.com`。這個服務帳戶已取得 DLP API 服務代理角色，可使用 BigQuery API 進行驗證。詳情請參閱 Sensitive Data Protection IAM 權限頁面的「[服務帳戶](https://docs.cloud.google.com/sensitive-data-protection/docs/iam-permissions?hl=zh-tw#service_account)」一節。
 
 ## 使用 Google Cloud 控制台掃描 BigQuery 資料
 
@@ -56,9 +60,9 @@ Sensitive Data Protection 是一項全代管服務，可讓 Google Cloud 客戶�
 5. 在詳細資料窗格中，依序點選
    **「More」(更多) >「Scan with Sensitive Data Protection」(使用 Sensitive Data Protection 掃描)**。
    Sensitive Data Protection 工作建立頁面會在新分頁中開啟。
-6. 在「步驟 1：選擇輸入資料」部分，輸入工作 ID。「Location」(位置) 區段中的值會自動產生。此外，「Sampling」(取樣) 區段會自動設定為對資料執行取樣掃描，但您可以視需要調整設定。
+6. 在「步驟 1：選擇輸入資料」部分，輸入工作 ID。系統會自動產生「Location」(位置) 區段中的值。此外，「Sampling」(取樣) 區段會自動設定為對資料執行取樣掃描，但您可以視需要調整設定。
 7. 按一下「繼續」。
-8. 選用步驟：在「步驟 2：設定偵測作業」部分，您可以設定要尋找的資料類型，稱為 `infoTypes`。
+8. 選用步驟：在「Step 2: Configure detection」(步驟 2：設定偵測作業)，您可以設定要尋找的資料類型，稱為 `infoTypes`。
 
    執行下列其中一個步驟：
 
@@ -103,11 +107,11 @@ Sensitive Data Protection 是一項全代管服務，可讓 Google Cloud 客戶�
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-08 (世界標準時間)。
+上次更新時間：2026-11-10 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-08 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-10 (世界標準時間)。"],[],[]]

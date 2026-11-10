@@ -546,3 +546,4 @@ This option accepts the following values:
 * `EG`: Egypt
 * `ES`: Spain
 * `FI`: Finland
+* `FR`: France

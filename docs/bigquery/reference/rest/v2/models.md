@@ -188,4 +188,4 @@ Indicates the type of the Model.
 | `AUTOML_CLASSIFIER` | AutoML Tables classification model. |
 | `PCA` | Prinpical Component Analysis model. |
 | `DNN_LINEAR_COMBINED_CLASSIFIER` | Wide-and-deep classifier model. |
-| `DNN_LINEAR_COMBINED_REGRESSOR` |
+| `DNN_LINE` |

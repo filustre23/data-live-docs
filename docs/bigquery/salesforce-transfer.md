@@ -24,11 +24,11 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 Salesforce 資料移轉作業有下列限制：
 
-* Salesforce 連接器僅支援從 Salesforce Sales Cloud 移轉資料。
+* Salesforce 連接器僅支援從 Salesforce Sales Cloud 移轉。
 * Salesforce 連接器僅支援 Salesforce Bulk API V1 64.0 版中的欄位。系統可能不支援 Salesforce Bulk API 舊版中的某些欄位。如要進一步瞭解 Salesforce 連接器的這些異動，請參閱「[Salesforce Bulk API](https://docs.cloud.google.com/bigquery/docs/transfer-changes?hl=zh-tw#salesforce)」。
 * Salesforce 連接器會使用 Salesforce Bulk API V1 連線至 Salesforce Sales Cloud 端點，以擷取資料。
 
-  + Salesforce 連接器僅支援 Salesforce Bulk API V1，用於連線至 Salesforce 執行個體，且僅支援傳輸 Salesforce Bulk API 支援的實體。如要進一步瞭解支援的實體，請參閱「[大量 API 不支援實體](https://help.salesforce.com/s/articleView?id=000383508&type=1)」。
+  + Salesforce 連接器僅支援 Salesforce Bulk API V1，用於連線至 Salesforce 執行個體，且僅支援轉移 Salesforce Bulk API 支援的實體。如要進一步瞭解支援的實體，請參閱「[大量 API 不支援實體](https://help.salesforce.com/s/articleView?id=000383508&type=1)」。
 * Salesforce 連接器不支援轉移下列含有二進位欄位的物件。
 
   + `Attachment`
@@ -39,7 +39,7 @@ Salesforce 資料移轉作業有下列限制：
   + `EmailCapture`
   + `MailMergeTemplate`
 * 週期性資料移轉作業之間的最短間隔時間為 15 分鐘。週期性移轉作業的預設間隔為 24 小時。
-* 由於 Salesforce 的處理限制，一次排定太多資料移轉作業可能會導致延遲或失敗。建議您將 Salesforce 資料移轉作業限制在下列範圍：
+* 由於 Salesforce 處理限制，一次排定太多資料移轉作業可能會導致延遲或失敗。建議您將 Salesforce 資料移轉作業限制在下列範圍：
 
   + 每項移轉設定最多只能有 10 項資產。
   + 在不同的移轉設定中，一次最多只能同時執行 10 項移轉作業。
@@ -47,11 +47,12 @@ Salesforce 資料移轉作業有下列限制：
 
   + 為避免單一移轉設定略過移轉作業，建議您設定「重複頻率」，增加大型資料移轉作業之間的時間長度。
 * 如要透過網路連結移轉資料，請務必[設定公開網路位址轉譯 (NAT)](https://docs.cloud.google.com/nat/docs/set-up-manage-network-address-translation?hl=zh-tw)，並指定靜態 IP 位址。詳情請參閱「[為 Salesforce 移轉作業設定 IP 許可清單](https://docs.cloud.google.com/bigquery/docs/salesforce-transfer?hl=zh-tw#salesforce-allowlist)」一文。
+* 如果網路連結是在與 Google Cloud 資料移轉專案不同的 Google Cloud 專案中建立，您必須將 `compute.networkAttachments.get` 和 `compute.networkAttachments.update` 權限授予 Google Cloud 資料移轉專案的[服務代理](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service?hl=zh-tw#service_agent)。
 * 如果設定的網路連結和虛擬機器 (VM) 執行個體位於不同區域，從 Salesforce 移轉資料時，可能會發生跨區域資料移動。
 
 ### 增量移轉作業限制
 
-Salesforce 遞增移轉作業有下列限制：
+Salesforce 增量移轉作業有下列限制：
 
 * 最多只能選擇 `TIMESTAMP` 個資料欄做為浮水印欄。
 * 只有具備有效浮水印資料欄的資產，才支援增量擷取。
@@ -60,9 +61,9 @@ Salesforce 遞增移轉作業有下列限制：
 * 單一移轉設定只能支援增量或完整擷取。
 * 首次執行增量擷取後，您就無法更新 `asset` 清單中的物件。
 * 首次執行增量擷取後，您就無法變更移轉設定中的寫入模式。
-* 首次執行增量擷取後，就無法變更基準值資料欄或主鍵。
+* 首次執行增量擷取後，就無法變更基準欄或主鍵。
 * 目的地 BigQuery 資料表會使用提供的主鍵進行分群，並受[分群資料表限制](https://docs.cloud.google.com/bigquery/docs/clustered-tables?hl=zh-tw#limitations)規範。
-* 首次將現有移轉設定更新為增量擷取模式時，更新後的第一次資料移轉會從資料來源移轉所有可用資料。後續的任何增量資料移轉作業，都只會從資料來源移轉新的和更新的資料列。
+* 首次將現有移轉設定更新為遞增擷取模式時，更新後的第一次資料移轉會從資料來源移轉所有可用資料。後續的任何增量資料移轉作業，都只會從資料來源移轉新的和更新的資料列。
 
 如要瞭解增量移轉作業的運作方式，請參閱「[完整或增量移轉作業](https://docs.cloud.google.com/bigquery/docs/salesforce-transfer-intro?hl=zh-tw#full-incremental-transfers)」。
 
@@ -70,7 +71,7 @@ Salesforce 遞增移轉作業有下列限制：
 
 以下各節說明建立 Salesforce 資料移轉作業前，必須採取的步驟。
 
-### 建立 Salesforce 連結應用程式
+### 建立 Salesforce 連結的應用程式
 
 您必須[建立 Salesforce 連結應用程式](https://help.salesforce.com/s/articleView?id=sf.connected_app_create.htm&type=5)，並完成下列必要設定：
 
@@ -80,11 +81,11 @@ Salesforce 遞增移轉作業有下列限制：
   + 在「Callback URL」(回呼網址) 欄位中，輸入下列內容：
     - 如果是正式環境，請輸入 `https://login.salesforce.com/services/oauth2/token`。
     - 如果是沙箱環境，請輸入 `https://test.salesforce.com/services/oauth2/token`。
-  + 確認未勾選「Issue JSON Web Token (JWT)-based access tokens for named users」(為指定使用者核發以 JSON Web Token (JWT) 為基礎的存取權杖) 核取方塊。
+  + 確認未勾選「Issue JSON Web Token (JWT)-based access tokens for named users」核取方塊。
 * 在「Selected OAuth Scopes」(選取的 OAuth 範圍) 部分，選取「Manage user data via APIs (api)」(透過 API 管理使用者資料 (api))。
 * 選取「Enable Client Credentials Flow」，然後在顯示的通知中按一下「OK」。
 
-完成必要設定後，按一下「Save」(儲存)。系統會將您重新導向至新建立的連結應用程式詳細資料頁面。
+完成必要設定後，按一下「Save」。系統會將您重新導向至新建立的連結應用程式詳細資料頁面。
 
 建立連結的應用程式後，您也必須按照下列步驟設定用戶端憑證流程：
 
@@ -97,12 +98,12 @@ Salesforce 遞增移轉作業有下列限制：
 
 ### 必要的 Salesforce 資訊
 
-建立 Salesforce 資料移轉作業時，必須提供下列 Salesforce 資訊：
+建立 Salesforce 資料移轉作業時，您必須提供下列 Salesforce 資訊：
 
 | 參數名稱 | 說明 |
 | --- | --- |
-| `myDomain` | Salesforce 的[我的網域](https://help.salesforce.com/s/articleView?id=sf.domain_name_overview.htm)。 |
-| `clientId` | Salesforce 連結應用程式的用戶端金鑰。 |
+| `myDomain` | Salesforce 中的「My Domain」。 |
+| `clientId` | 與 Salesforce 連結的應用程式用戶端金鑰。 |
 | `clientSecret` | Salesforce 連結應用程式的 OAuth 用戶端密鑰或消費者密鑰。 |
 
 如要取得 `myDomain`、`clientID` 和 `clientSecret` 值，請選取下列其中一個選項：
@@ -127,8 +128,8 @@ Salesforce 遞增移轉作業有下列限制：
 1. 登入 Salesforce 平台。
 2. 點選 [設定]。
 3. 在搜尋列中搜尋「應用程式」。
-4. 在搜尋結果的「建構」部分，依序點選「建立」>「應用程式」。
-5. 按一下「連結的應用程式名稱」。
+4. 在搜尋結果的「Build」部分，依序點選「Create」>「Apps」。
+5. 按一下「Connected App Name」。
 6. 在「連結的應用程式」詳細資料頁面，點選「管理取用者詳細資料」。
 7. 使用其中一種註冊方法驗證身分。您最多可以查看消費者詳細資料頁面五分鐘，之後系統會提示您再次驗證身分。
 8. 在「Consumer Details」(消費者詳細資料) 頁面中，「Consumer Key」(用戶端金鑰) 是您的 `ClientId` 值。「Customer Secret」是您的 `ClientSecret` 值。
@@ -153,7 +154,7 @@ Salesforce 遞增移轉作業有下列限制：
 3. 在搜尋列中搜尋「應用程式」。
 4. 在搜尋結果中，依序點選「應用程式」>「應用程式管理員」。
 5. 找出連結的應用程式，然後按一下「查看」。
-6. 按一下「管理取用者詳細資料」。
+6. 按一下「Manage Consumer Details」。
 7. 使用其中一種註冊方法驗證身分。您最多可以查看消費者詳細資料頁面五分鐘，之後系統會提示您再次驗證身分。
 8. 在「Consumer Details」(消費者詳細資料) 頁面中，「Consumer Key」(用戶端金鑰) 是您的 `ClientId` 值。「Customer Secret」是您的 `ClientSecret` 值。
 
@@ -161,16 +162,16 @@ Salesforce 遞增移轉作業有下列限制：
 
 您必須設定 Google Cloud 環境和 Salesforce 帳戶，將特定 IP 位址加入資料移轉許可清單。這可確保 Salesforce 只接受來自可信任靜態 IP 位址的連線。如果您在移轉資料時使用網路連結，就必須執行這個步驟。
 
-如要這麼做，您必須先設定 Google Cloud 網路，使用靜態 IP 位址：
+如要這麼做，您必須先設定 Google Cloud 網路，才能使用靜態 IP 位址：
 
-1. 在虛擬私有雲網路中，[設定公開網路位址轉譯 (NAT)](https://docs.cloud.google.com/nat/docs/set-up-manage-network-address-translation?hl=zh-tw)，並指定靜態 IP 位址。Cloud NAT 必須與這項資料移轉作業的目的地資料集位於相同區域。
+1. 在虛擬私有雲網路中，[設定公用網路位址轉譯 (NAT)](https://docs.cloud.google.com/nat/docs/set-up-manage-network-address-translation?hl=zh-tw)，並指定靜態 IP 位址。CloudNAT 必須與這項資料移轉作業的目的地資料集位於相同區域。
 2. 在同一個虛擬私有雲網路中[設定網路連結](https://docs.cloud.google.com/vpc/docs/create-manage-network-attachments?hl=zh-tw)。BigQuery 資料移轉服務會使用這項資源存取私人服務。
 
 接下來，您必須[在 Salesforce 中設定信任的 IP 範圍](https://help.salesforce.com/s/articleView?id=xcloud.security_networkaccess.htm&type=5)。新增 IP 位址範圍時，請使用Google Cloud Public NAT 的靜態 IP 位址，做為 IP 範圍的起始和結束 IP 位址。
 
-**注意：** 如要更精細地控管，可以在設定檔層級或每個 API 呼叫套用 IP 限制。詳情請參閱「[限制設定檔中的登入 IP 位址](https://help.salesforce.com/s/articleView?id=platform.login_ip_ranges.htm&type=5)」。
+**注意：**如要更精細地控管，可以在設定檔層級或每個 API 呼叫套用 IP 限制。詳情請參閱「[限制設定檔中的登入 IP 位址](https://help.salesforce.com/s/articleView?id=platform.login_ip_ranges.htm&type=5)」。
 
-設定 IP 範圍後，您可以在[設定移轉設定](https://docs.cloud.google.com/bigquery/docs/salesforce-transfer?hl=zh-tw#sf-transfer-setup)時，於「Network attachment」(網路連結) 欄位中選取網路連結，藉此指定靜態 IP。
+設定 IP 範圍後，您可以在[設定移轉設定](https://docs.cloud.google.com/bigquery/docs/salesforce-transfer?hl=zh-tw#sf-transfer-setup)時，在「Network attachment」(網路連結) 欄位中選取網路連結，指定靜態 IP。
 
 ### BigQuery 事前準備
 
@@ -180,7 +181,7 @@ Salesforce 遞增移轉作業有下列限制：
 
 ### 必要的 BigQuery 角色
 
-如要取得建立 BigQuery 資料移轉服務資料移轉作業所需的權限，請要求管理員授予您專案的 [BigQuery 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.admin)  (`roles/bigquery.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得建立 BigQuery 資料移轉服務資料移轉作業所需的權限，請要求管理員授予您專案的 [BigQuery 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.admin) (`roles/bigquery.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
 這個預先定義的角色具備建立 BigQuery 資料移轉服務資料移轉作業所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
@@ -253,13 +254,10 @@ bq mk
 
 其中：
 
-* PROJECT\_ID (選用)：您的 Google Cloud 專案 ID。
-  如未提供 `--project_id` 來指定特定專案，系統會使用預設專案。
+* PROJECT\_ID (選用)：您的 Google Cloud 專案 ID。如未提供 `--project_id` 來指定特定專案，系統會使用預設專案。
 * DATA\_SOURCE：資料來源 - `salesforce`。
 * NAME：資料移轉設定的顯示名稱。移轉作業名稱可以是任意值，日後需要修改移轉作業時，能夠據此識別即可。
 * DATASET：移轉設定的目標資料集。
 * PARAMETERS：JSON 格式的已建立移轉設定參數。例如：`--params='{"param":"param_value"}'`。以下是 Salesforce 資料移轉作業的參數：
 
-  + `connector.authentication.oauth.clientId`：與 Salesforce 連結的應用程式用戶端金鑰。
-  + `connector.authentication.oauth.clientSecret`：Salesforce 連結應用程式的 OAuth 用戶端密鑰或消費者密鑰。
-  + `connector.authentication.oauth.myDomain<`
+  + `connector.authentication.oauth.clientId`：與 Salesforce 連結的

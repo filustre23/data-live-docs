@@ -16,9 +16,9 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # YouTube 內容擁有者報表轉換
 
-當您的 YouTube 內容擁有者或系統管理報表移轉至 BigQuery 時，報表會轉換成下列 BigQuery 資料表和檢視表。
+YouTube 內容擁有者或系統管理的報表移轉至 BigQuery 時，會轉換為下列 BigQuery 資料表和檢視表。
 
-當您在 BigQuery 中查看資料表和檢視表時，suffix 的值是您在建立移轉時設定的資料表尾碼。
+在 BigQuery 中查看資料表和檢視表時，suffix 的值是您在建立移轉作業時設定的資料表後置字串。
 
 ## YouTube 內容擁有者報告
 
@@ -36,18 +36,18 @@ YouTube 報表：
 BigQuery 資料表：
 :   p\_content\_owner\_basic\_a4\_suffix
 
-BigQuery 檢視畫面：
+BigQuery view：
 :   content\_owner\_basic\_a4\_suffix
 
 #### 使用者活動 (依省分組)
 
 YouTube 報表：
-[依省份劃分的使用者活動](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#video-province)
+[各省使用者活動](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#video-province)
 
 BigQuery 資料表：
 :   p\_content\_owner\_province\_a3\_suffix
 
-BigQuery 檢視畫面：
+BigQuery view：
 :   content\_owner\_province\_3\_suffix
 
 #### 播放位置
@@ -58,7 +58,7 @@ YouTube 報表：
 BigQuery 資料表：
 :   p\_content\_owner\_playback\_location\_a3\_suffix
 
-BigQuery 檢視畫面：
+BigQuery view：
 :   content\_owner\_playback\_location\_a3\_suffix
 
 #### 流量來源
@@ -69,7 +69,7 @@ YouTube 報表：
 BigQuery 資料表：
 :   p\_content\_owner\_traffic\_source\_a3\_suffix
 
-BigQuery 檢視畫面：
+BigQuery view：
 :   content\_owner\_traffic\_source\_a3\_suffix
 
 #### 裝置類型和作業系統
@@ -80,7 +80,7 @@ YouTube 報表：
 BigQuery 資料表：
 :   p\_content\_owner\_device\_os\_a3\_suffix
 
-BigQuery 檢視畫面：
+BigQuery view：
 :   content\_owner\_device\_os\_a3\_suffix
 
 #### 觀眾客層
@@ -91,18 +91,17 @@ YouTube 報表：
 BigQuery 資料表：
 :   p\_content\_owner\_demographics\_a1\_suffix
 
-BigQuery 檢視畫面：
+BigQuery view：
 :   content\_owner\_demographics\_a1\_suffix
 
 #### 內容共享 (依平台分組)
 
-YouTube 報表：
-[依平台分享內容](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#video-content-sharing)
+YouTube 報表：[依平台劃分的內容分享情形](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#video-content-sharing)
 
 BigQuery 資料表：
 :   p\_content\_owner\_sharing\_service\_a1\_suffix
 
-BigQuery 檢視畫面：
+BigQuery view：
 :   content\_owner\_sharing\_service\_a1\_suffix
 
 #### 註解
@@ -113,7 +112,7 @@ YouTube 報表：
 BigQuery 資料表：
 :   p\_content\_owner\_annotations\_a1\_suffix
 
-BigQuery 檢視畫面：
+BigQuery view：
 :   content\_owner\_annotations\_a1\_suffix
 
 #### 資訊卡
@@ -124,40 +123,37 @@ YouTube 報表：
 BigQuery 資料表：
 :   p\_content\_owner\_cards\_a1\_suffix
 
-BigQuery 檢視畫面：
+BigQuery view：
 :   content\_owner\_cards\_a1\_suffix
 
 #### 結束畫面
 
-YouTube 報表：
-[結束畫面](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#video-end-screens)
+YouTube 報表：[片尾](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#video-end-screens)
 
 BigQuery 資料表：
 :   p\_content\_owner\_end\_screens\_a1\_suffix
 
-BigQuery 檢視畫面：
+BigQuery view：
 :   content\_owner\_end\_screens\_a1\_suffix
 
 #### 字幕
 
-YouTube 報表：
-[字幕](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#video-subtitles)
+YouTube 報表：[字幕](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#video-subtitles)
 
 BigQuery 資料表：
 :   p\_content\_owner\_subtitles\_a3\_suffix
 
-BigQuery 檢視畫面：
+BigQuery view：
 :   content\_owner\_subtitles\_a3\_suffix
 
 #### 合併
 
-YouTube 報表：
-[合併](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#video-combined)
+YouTube 報表：[合併](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#video-combined)
 
 BigQuery 資料表：
 :   p\_content\_owner\_combined\_a3\_suffix
 
-BigQuery 檢視畫面：
+BigQuery view：
 :   content\_owner\_combined\_a3\_suffix
 
 ### 播放清單報表
@@ -172,18 +168,18 @@ YouTube 報表：
 BigQuery 資料表：
 :   p\_content\_owner\_playlist\_basic\_a2\_suffix
 
-BigQuery 檢視畫面：
+BigQuery view：
 :   content\_owner\_playlist\_basic\_a2\_suffix
 
 #### 使用者活動 (依省分組)
 
 YouTube 報表：
-[依省份劃分的使用者活動](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#playlist-province)
+[各省使用者活動](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#playlist-province)
 
 BigQuery 資料表：
 :   p\_content\_owner\_playlist\_province\_a2\_suffix
 
-BigQuery 檢視畫面：
+BigQuery view：
 :   content\_owner\_playlist\_province\_a2\_suffix
 
 #### 播放位置
@@ -194,7 +190,7 @@ YouTube 報表：
 BigQuery 資料表：
 :   p\_content\_owner\_playlist\_playback\_location\_a2\_suffix
 
-BigQuery 檢視畫面：
+BigQuery view：
 :   content\_owner\_playlist\_playback\_location\_a2
 
 #### 流量來源
@@ -205,7 +201,7 @@ YouTube 報表：
 BigQuery 資料表：
 :   p\_content\_owner\_playlist\_traffic\_source\_a2
 
-BigQuery 檢視畫面：
+BigQuery view：
 :   content\_owner\_playlist\_traffic\_source\_a2\_suffix
 
 #### 裝置類型和作業系統
@@ -216,23 +212,22 @@ YouTube 報表：
 BigQuery 資料表：
 :   p\_content\_owner\_playlist\_device\_os\_a2\_suffix
 
-BigQuery 檢視畫面：
+BigQuery view：
 :   content\_owner\_playlist\_device\_os\_a2\_suffix
 
 #### 合併
 
-YouTube 報表：
-[合併](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#playlist-combined)
+YouTube 報表：[合併](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#playlist-combined)
 
 BigQuery 資料表：
 :   p\_content\_owner\_playlist\_combined\_a2\_suffix
 
-BigQuery 檢視畫面：
+BigQuery view：
 :   content\_owner\_playlist\_combined\_a2\_suffix
 
 ### 廣告費率報表
 
-下列報表會顯示主要廣告指標和交易率。
+下列報表會顯示重要廣告指標和交易率。
 
 #### 廣告費率報表
 
@@ -242,38 +237,37 @@ YouTube 報表：
 BigQuery 資料表：
 :   p\_content\_owner\_ad\_rates\_a1\_suffix
 
-BigQuery 檢視畫面：
+BigQuery view：
 :   content\_owner\_ad\_rates\_a1\_suffix
 
 ### 預估收益報表
 
-下列報表會預估影片和資產層級的收益。
+下列報表會預估影片和資產層級產生的收益。
 
 #### 估算的影片收益
 
 YouTube 報表：
-[影片預估收益](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#estimated-revenue-videos)
+[預估影片收益](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#estimated-revenue-videos)
 
 BigQuery 資料表：
 :   p\_content\_owner\_estimated\_revenue\_a1\_suffix
 
-BigQuery 檢視畫面：
+BigQuery view：
 :   content\_owner\_estimated\_revenue\_a1\_suffix
 
 #### 估算的資產收益
 
-YouTube 報表：
-[預估資產收益](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#estimated-revenue-assets)
+YouTube 報表：[預估資產收益](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#estimated-revenue-assets)
 
 BigQuery 資料表：
 :   p\_content\_owner\_asset\_estimated\_revenue\_a1\_suffix
 
-BigQuery 檢視畫面：
+BigQuery view：
 :   content\_owner\_asset\_estimated\_revenue\_a1\_suffix
 
 ### 資產報表
 
-下列報表著重於素材資源成效、使用者參與度和中繼資料。
+下列報表著重於資產成效、使用者參與度和中繼資料。
 
 #### 使用者活動
 
@@ -283,18 +277,18 @@ YouTube 報表：
 BigQuery 資料表：
 :   p\_content\_owner\_asset\_basic\_a3\_suffix
 
-BigQuery 檢視畫面：
+BigQuery view：
 :   content\_owner\_asset\_basic\_a3\_suffix
 
 #### 使用者活動 (依省分組)
 
 YouTube 報表：
-[依省份劃分的使用者活動](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#asset-province)
+[各省使用者活動](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#asset-province)
 
 BigQuery 資料表：
 :   p\_content\_owner\_asset\_province\_a3\_suffix
 
-BigQuery 檢視畫面：
+BigQuery view：
 :   content\_owner\_asset\_province\_a3\_suffix
 
 #### 影片播放位置
@@ -305,7 +299,7 @@ YouTube 報表：
 BigQuery 資料表：
 :   p\_content\_owner\_asset\_playback\_location\_a3\_suffix
 
-BigQuery 檢視畫面：
+BigQuery view：
 :   content\_owner\_asset\_playback\_location\_a3\_suffix
 
 #### 流量來源
@@ -316,7 +310,7 @@ YouTube 報表：
 BigQuery 資料表：
 :   p\_content\_owner\_asset\_traffic\_source\_a3\_suffix
 
-BigQuery 檢視畫面：
+BigQuery view：
 :   content\_owner\_asset\_traffic\_source\_a3\_suffix
 
 #### 裝置類型和作業系統
@@ -327,7 +321,7 @@ YouTube 報表：
 BigQuery 資料表：
 :   p\_content\_owner\_asset\_device\_os\_a3\_suffix
 
-BigQuery 檢視畫面：
+BigQuery view：
 :   content\_owner\_asset\_device\_os\_a3\_suffix
 
 #### 觀眾客層
@@ -338,18 +332,18 @@ YouTube 報表：
 BigQuery 資料表：
 :   p\_content\_owner\_asset\_demographics\_a1\_suffix
 
-BigQuery 檢視畫面：
+BigQuery view：
 :   content\_owner\_asset\_demographics\_a1\_suffix
 
 #### 內容共享 (依平台分組)
 
 YouTube 報表：
-[依平台分享內容](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#asset-content-sharing)
+[依平台劃分的內容分享情形](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#asset-content-sharing)
 
 BigQuery 資料表：
 :   p\_content\_owner\_asset\_sharing\_service\_a1\_suffix
 
-BigQuery 檢視畫面：
+BigQuery view：
 :   content\_owner\_asset\_sharing\_service\_a1\_suffix
 
 #### 註解
@@ -360,7 +354,7 @@ YouTube 報表：
 BigQuery 資料表：
 :   p\_content\_owner\_asset\_annotations\_a1\_suffix
 
-BigQuery 檢視畫面：
+BigQuery view：
 :   content\_owner\_asset\_annotations\_a1\_suffix
 
 #### 資訊卡
@@ -371,36 +365,34 @@ YouTube 報表：
 BigQuery 資料表：
 :   p\_content\_owner\_asset\_cards\_a1\_suffix
 
-BigQuery 檢視畫面：
+BigQuery view：
 :   content\_owner\_asset\_cards\_a1\_suffix
 
 #### 結束畫面
 
-YouTube 報表：
-[結束畫面](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#asset-end-screens)
+YouTube 報表：[片尾](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#asset-end-screens)
 
 BigQuery 資料表：
 :   p\_content\_owner\_asset\_end\_screens\_a1\_suffix
 
-BigQuery 檢視畫面：
+BigQuery view：
 :   content\_owner\_asset\_end\_screens\_a1\_suffix
 
 #### 合併
 
-YouTube 報表：
-[合併](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#asset-combined)
+YouTube 報表：[合併](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#asset-combined)
 
 BigQuery 資料表：
 :   p\_content\_owner\_asset\_combined\_a3\_suffix
 
-BigQuery 檢視畫面：
+BigQuery view：
 :   content\_owner\_asset\_combined\_a3\_suffix
 
 ### 觸及報表
 
-下列報表涵蓋頻道內容的觀眾觸及率指標。
+下列報表涵蓋頻道內容的目標對象觸及指標。
 
-#### 觸及基本版
+#### 觸及基本
 
 YouTube 報表：
 [觸及基本](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#reach-reports)
@@ -408,10 +400,10 @@ YouTube 報表：
 BigQuery 資料表：
 :   p\_content\_owner\_reach\_basic\_a1\_suffix
 
-BigQuery 檢視畫面：
+BigQuery view：
 :   content\_owner\_reach\_basic\_a1\_suffix
 
-#### 綜合觸及
+#### 合併觸及
 
 YouTube 報表：
 [合併觸及](https://developers.google.com/youtube/reporting/v1/reports/content_owner_reports?hl=zh-tw#reach-reports)
@@ -419,16 +411,16 @@ YouTube 報表：
 BigQuery 資料表：
 :   p\_content\_owner\_reach\_combined\_a1\_suffix
 
-BigQuery 檢視畫面：
+BigQuery view：
 :   content\_owner\_reach\_combined\_a1\_suffix
 
-## YouTube 系統代管報表
+## YouTube 系統管理的報表
 
 以下各節說明 YouTube 系統管理的報表轉換。
 
 ### 財務摘要報表
 
-下列報表會彙整聯播網的付款和帳單資料。
+下列報表會匯總聯播網的付款和帳單資料。
 
 #### 每月付款摘要
 
@@ -438,12 +430,12 @@ YouTube 報表：
 BigQuery 資料表：
 :   p\_content\_owner\_payments\_summary\_a1\_suffix
 
-BigQuery 檢視畫面：
+BigQuery view：
 :   content\_owner\_payments\_summary\_a1\_suffix
 
 ### 廣告收益報表
 
-下列報表提供不同維度的廣告收益摘要，例如國家/地區、影片和資產。
+下列報表提供不同維度 (例如國家/地區、影片和資產) 的廣告收益摘要。
 
 #### 每月全球廣告收益摘要
 
@@ -453,7 +445,7 @@ YouTube 報表：
 BigQuery 資料表：
 :   p\_content\_owner\_global\_ad\_revenue\_summary\_a1\_suffix
 
-BigQuery 檢視畫面：
+BigQuery view：
 :   content\_owner\_global\_ad\_revenue\_summary\_a1\_suffix
 
 #### 每月國家/地區廣告收益摘要
@@ -464,10 +456,10 @@ YouTube 報表：
 BigQuery 資料表：
 :   p\_content\_owner\_country\_ad\_revenue\_summary\_a1\_suffix
 
-BigQuery 檢視畫面：
+BigQuery view：
 :   content\_owner\_country\_ad\_revenue\_summary\_a1\_suffix
 
-#### 每月每日廣告收益摘要
+#### 每月廣告收益摘要
 
 YouTube 報表：
 [每月每日廣告收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#monthly-day-ad-revenue-summary)
@@ -475,7 +467,7 @@ YouTube 報表：
 BigQuery 資料表：
 :   p\_content\_owner\_day\_ad\_revenue\_summary\_a1\_suffix
 
-BigQuery 檢視畫面：
+BigQuery view：
 :   content\_owner\_day\_ad\_revenue\_summary\_a1\_suffix
 
 #### 每週全球廣告收益摘要
@@ -486,7 +478,7 @@ YouTube 報表：
 BigQuery 資料表：
 :   p\_content\_owner\_global\_ad\_revenue\_summary\_weekly\_a1\_suffix
 
-BigQuery 檢視畫面：
+BigQuery view：
 :   content\_owner\_global\_ad\_revenue\_summary\_weekly\_a1\_suffix
 
 #### 每週國家/地區廣告收益摘要
@@ -497,18 +489,18 @@ YouTube 報表：
 BigQuery 資料表：
 :   p\_content\_owner\_country\_ad\_revenue\_summary\_weekly\_a1\_suffix
 
-BigQuery 檢視畫面：
+BigQuery view：
 :   content\_owner\_country\_ad\_revenue\_summary\_weekly\_a1\_suffix
 
-#### 每週每日廣告收益摘要
+#### 每週廣告收益摘要
 
 YouTube 報表：
-[每週每日廣告收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#weekly-day-ad-revenue-summary)
+[每週廣告收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#weekly-day-ad-revenue-summary)
 
 BigQuery 資料表：
 :   p\_content\_owner\_day\_ad\_revenue\_summary\_weekly\_a1\_suffix
 
-BigQuery 檢視畫面：
+BigQuery view：
 :   content\_owner\_day\_ad\_revenue\_summary\_weekly\_a1\_suffix
 
 #### 每部影片的匯總廣告收益
@@ -519,18 +511,18 @@ YouTube 報表：
 BigQuery 資料表：
 :   p\_content\_owner\_ad\_revenue\_summary\_a1\_suffix
 
-BigQuery 檢視畫面：
+BigQuery view：
 :   content\_owner\_ad\_revenue\_summary\_a1\_suffix
 
 #### 每週影片廣告收益摘要
 
 YouTube 報表：
-[每週影片廣告收益摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#weekly-video-ad-revenue-summary)
+[影片廣告收益每週摘要](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#weekly-video-ad-revenue-summary)
 
 BigQuery 資料表：
 :   p\_content\_owner\_ad\_revenue\_summary\_weekly\_a1\_suffix
 
-BigQuery 檢視畫面：
+BigQuery view：
 :   content\_owner\_ad\_revenue\_summary\_weekly\_a1\_suffix
 
 #### 每週影片廣告收益
@@ -541,27 +533,35 @@ YouTube 報表：
 BigQuery 資料表：
 :   p\_content\_owner\_ad\_revenue\_raw\_weekly\_a1\_suffix
 
-BigQuery 檢視畫面：
+BigQuery view：
 :   content\_owner\_ad\_revenue\_raw\_weekly\_a1\_suffix
 
 #### 每部影片的每日廣告收益
 
-YouTube 報表：
-[每部影片的每日廣告收益](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#daily-ad-revenue-per-video)
+YouTube 報表：[每部影片的每日廣告收益](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#daily-ad-revenue-per-video)
 
 BigQuery 資料表：
 :   p\_content\_owner\_ad\_revenue\_raw\_a1\_suffix
 
-BigQuery 檢視畫面：
+BigQuery view：
 :   content\_owner\_ad\_revenue\_raw\_a1\_suffix
 
 #### 每項資產的匯總廣告收益
 
 YouTube 報表：
-[每項資產的廣告收益總計](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#aggregate-ad-revenue-per-asset)
+[每項資產的匯總廣告收益](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#aggregate-ad-revenue-per-asset)
 
 BigQuery 資料表：
 :   p\_content\_owner\_asset\_ad\_revenue\_summary\_a1\_suffix
 
-BigQuery 檢視畫面：
+BigQuery view：
 :   content\_owner\_asset\_ad\_revenue\_summary\_a1\_suffix
+
+#### 每項資產的每日廣告收益
+
+YouTube 報表：[每項資產的每日廣告收益](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#daily-ad-revenue-per-asset)
+
+BigQuery 資料表：
+:   p\_content\_owner\_asset\_ad\_revenue\_raw\_a1\_suffix
+
+BigQuery view：

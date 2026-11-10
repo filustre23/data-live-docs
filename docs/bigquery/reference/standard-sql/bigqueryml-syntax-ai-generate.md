@@ -154,6 +154,7 @@ AI.GENERATE(
   control or know the region where your processing requests are handled.
 
   BigQuery supports the following models:
+  + `gemini-4-carbon`
   + `gemini-4-argon`
   + `gemini-3.8-flash`
   + `gemini-3.7-flash`
@@ -355,5 +356,5 @@ SELECT
 FROM
   `bigquery-public-data.cfpb_complaints.complaint_database`
 WHERE
-  consumer_complaint_narrative
+  consumer_complaint_
 ```

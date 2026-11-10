@@ -204,7 +204,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
    roles/resourcemanager.projectIamAdmin`
 
    ```
-   gcloud projects add-iam-policy-binding PROJECT_ID --member="user:USER_IDENTIFIER" --role=ROLE
+   gcloud projects add-iam-policy-binding PROJECT_ID --member="user:USER_IDENTIFIER&quot; --role=ROLE
    ```
 
    更改下列內容：
@@ -301,7 +301,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
    CREATE CONNECTION [IF NOT EXISTS] `CONNECTION_NAME`
    OPTIONS (
      connection_type = "CLOUD_RESOURCE",
-     friendly_name = "FRIENDLY_NAME",
+     friendly_name = &quot;FRIENDLY_NAME";,
      description = "DESCRIPTION"
      );
    ```
@@ -379,7 +379,7 @@ def create_connection(
         project_id: The Google Cloud project ID.
         location: The location of the connection (for example, "us-central1").
         connection_id: The ID of the connection to create.
-    """
+    """span>
 
     parent = client.common_location_path(project_id, location)
 
@@ -414,7 +414,7 @@ def create_connection(
 
 ```
 const {ConnectionServiceClient} =
-  require('@google-cloud/bigquery-connection').v1;
+  require(&#39;@google-cloud/bigquery-connection').v1;
 const {status} = require('@grpc/grpc-js');
 
 const client = new ConnectionServiceClient();
@@ -497,7 +497,7 @@ public class CreateConnection {
     CloudResourceProperties cloudResourceProperties = CloudResourceProperties.newBuilder().build();
     Connection connection =
         Connection.newBuilder()
-            .setFriendlyName("Example Connection")
+            .setFriendlyName(";Example Connection")
             .setDescription("Cloud Resource connection for federated queries.")
             .setCloudResource(cloudResourceProperties)
             .build();
@@ -518,11 +518,11 @@ public class CreateConnection {
           "Service Account: %s%n", response.getCloudResource().getServiceAccountId());
     } catch (AlreadyExistsException err) {
       System.err.printf(
-          "error: connection '%s' already exists in location '%s' for project '%s': %s%n",
+          "error: connection '%s' already exists in location '%s' for project &#39;%s': %s%n",
           connectionId, location, projectId, err.getMessage());
     } catch (ApiException | IOException err) {
       System.err.printf(
-          "error: failed to create connection '%s' in location '%s' for project '%s': %s%n",
+          "error: failed to create connection &#39;%s' in location '%s' for project '%s': %s%n",
           connectionId, location, projectId, err.getMessage());
     }
   }
@@ -817,11 +817,11 @@ gcloud projects delete PROJECT_ID
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-08 (世界標準時間)。
+上次更新時間：2026-11-10 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-08 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-10 (世界標準時間)。"],[],[]]

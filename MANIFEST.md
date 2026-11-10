@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-11-10T07:02+00:00_
+_Generated 2026-11-10T20:02+00:00_
 
-**9 sources, 4832 topics total**
+**9 sources, 4837 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_892 topics_
+_895 topics_
 
 - `anthropic-sdk/about-claude/additional-resources`
 - `anthropic-sdk/about-claude/api-credits-for-subscribers`
@@ -335,6 +335,7 @@ _892 topics_
 - `anthropic-sdk/api/beta/organization/users/list`
 - `anthropic-sdk/api/beta/organization/users/remove`
 - `anthropic-sdk/api/beta/organization/users/retrieve`
+- `anthropic-sdk/api/beta/organization/users/sign_out`
 - `anthropic-sdk/api/beta/organization/users/update`
 - `anthropic-sdk/api/beta/organization/webhooks`
 - `anthropic-sdk/api/beta/organization/webhooks/create`
@@ -498,6 +499,8 @@ _892 topics_
 - `anthropic-sdk/api/compliance/organizations/roles/permissions`
 - `anthropic-sdk/api/compliance/organizations/roles/permissions/list`
 - `anthropic-sdk/api/compliance/organizations/roles/retrieve`
+- `anthropic-sdk/api/compliance/organizations/security_posture`
+- `anthropic-sdk/api/compliance/organizations/security_posture/retrieve`
 - `anthropic-sdk/api/compliance/organizations/settings`
 - `anthropic-sdk/api/compliance/organizations/settings/retrieve`
 - `anthropic-sdk/api/compliance/organizations/user_preferences`
@@ -4400,7 +4403,7 @@ _397 topics_
 
 Upstream: <https://openai.github.io/openai-agents-python/>
 
-_398 topics_
+_400 topics_
 
 - `openai-agents/agents`
 - `openai-agents/config`
@@ -4666,10 +4669,12 @@ _398 topics_
 - `openai-agents/ref/sandbox/runtime_session_manager`
 - `openai-agents/ref/sandbox/sandbox_agent`
 - `openai-agents/ref/sandbox/sandboxes/docker`
+- `openai-agents/ref/sandbox/sandboxes/docker_removal`
 - `openai-agents/ref/sandbox/sandboxes/unix_local`
 - `openai-agents/ref/sandbox/session/archive_extraction`
 - `openai-agents/ref/sandbox/session/archive_ops`
 - `openai-agents/ref/sandbox/session/base_sandbox_session`
+- `openai-agents/ref/sandbox/session/bounded_read`
 - `openai-agents/ref/sandbox/session/dependencies`
 - `openai-agents/ref/sandbox/session/events`
 - `openai-agents/ref/sandbox/session/manager`

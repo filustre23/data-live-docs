@@ -264,5 +264,4 @@ IF(ARRAY_LENGTH(anomalies) > 0)
         CONCAT(
           "Found data skew in features: ",
           ARRAY_TO_STRING(anomalies, ", "),
-          ". Model is retrained with the la
 ```

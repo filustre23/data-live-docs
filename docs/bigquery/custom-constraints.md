@@ -188,17 +188,17 @@ Google Cloud 組織政策服務可讓您透過程式輔助，集中控管組織�
    [前往「Organization policies」(組織政策)](https://console.cloud.google.com/iam-admin/orgpolicies?hl=zh-tw)
 2. 在專案挑選器中，選取要設定組織政策的專案。
 3. 按一下「add 自訂限制」。
-4. 在「Display name」(顯示名稱) 方塊中，輸入人類可讀的限制名稱。這個名稱會用於錯誤訊息，可用於識別和偵錯。請勿在顯示名稱中使用個人識別資訊 (PII) 或機密資料，因為這類名稱可能會在錯誤訊息中曝光。這個欄位最多可輸入 200 個字元。
+4. 在「Display name」(顯示名稱) 方塊中，輸入人類可讀的限制名稱。這個名稱會用於錯誤訊息，可用於識別和偵錯。請勿在顯示名稱中使用個人識別資訊 (PII) 或機密資料，因為這類名稱可能會在錯誤訊息中顯示。這個欄位最多可輸入 200 個字元。
 5. 在「Constraint ID」(限制 ID) 方塊中，輸入新自訂限制的 ID。自訂限制只能包含英文字母 (包括大小寫) 或數字，例如 `custom.enforceDatasetId`。這個欄位最多可包含 70 個字元，不含前置字元 (`custom.`)，例如 `organizations/123456789/customConstraints/custom`。請勿在限制 ID 中輸入 PII 或機密資料，因為錯誤訊息可能會顯示上述資訊。
 6. 在「Description」(說明) 方塊中，輸入人類可讀的限制說明。違反政策時，系統會將這段說明做為錯誤訊息顯示。請詳細說明違反政策的原因，以及如何解決違規問題。請勿在說明中輸入 PII 或機密資料，因為錯誤訊息可能會顯示上述資訊。這個欄位最多可輸入 2000 個字元。
-7. 在「Resource type」(資源類型) 方塊中，選取包含要限制的物件和欄位的 Google Cloud REST 資源名稱，例如 `container.googleapis.com/Cluster`。大多數資源類型最多支援 20 項自訂限制。如果嘗試建立更多自訂限制，作業就會失敗。
+7. 在「Resource type」(資源類型) 方塊中，選取包含要限制的物件和欄位的 Google Cloud REST 資源名稱，例如 `container.googleapis.com/Cluster`。大多數資源類型最多支援 20 項自訂限制。如果嘗試建立更多自訂限制，作業會失敗。
 8. 在「Enforcement method」(強制執行方法) 下方，選取要對 REST `CREATE` 方法強制執行限制，還是對 `CREATE` 和 `UPDATE` 方法強制執行限制。如果您對違反限制的資源使用 `UPDATE` 方法強制執行限制，組織政策會封鎖對該資源的變更，除非變更可解決違規問題。
 
 如要查看各項服務支援的方法，請在「[支援自訂限制的服務](https://docs.cloud.google.com/organization-policy/reference/custom-constraint-supported-services?hl=zh-tw)」中找到該服務。
 
 9. 如要定義條件，請按一下「編輯條件」圖示 edit。
 
-1. 在「Add condition」(新增條件) 面板中，建立參照支援服務資源的 CEL 條件，例如 `resource.management.autoUpgrade == false`。這個欄位最多可包含 1000 個字元。如要進一步瞭解 CEL 的用法，請參閱[一般運算語言](https://docs.cloud.google.com/resource-manager/docs/organization-policy/creating-managing-custom-constraints?hl=zh-tw#common_expression_language)。如要進一步瞭解可在自訂限制中使用的服務資源，請參閱「[支援自訂限制的服務](https://docs.cloud.google.com/resource-manager/docs/organization-policy/custom-constraint-supported-services?hl=zh-tw)」。
+1. 在「Add condition」(新增條件) 面板中，建立參照支援服務資源的 CEL 條件，例如 `resource.autopilot.enabled == false`。這個欄位最多可輸入 1,500 個字元。如要進一步瞭解 CEL 的用法，請參閱[一般運算語言](https://docs.cloud.google.com/resource-manager/docs/organization-policy/creating-managing-custom-constraints?hl=zh-tw#common_expression_language)。如要進一步瞭解可在自訂限制中使用的服務資源，請參閱「[支援自訂限制的服務](https://docs.cloud.google.com/resource-manager/docs/organization-policy/custom-constraint-supported-services?hl=zh-tw)」。
 2. 按一下 [儲存]。
 
 10. 在「Action」下方，選取是否要在符合條件時允許或拒絕評估的方法。
@@ -236,7 +236,7 @@ description: DESCRIPTION
 
 如要查看各項服務支援的方法，請在「[支援自訂限制的服務](https://docs.cloud.google.com/organization-policy/reference/custom-constraint-supported-services?hl=zh-tw)」中找到該服務。
 
-* `CONDITION`：針對支援服務資源表示法所撰寫的 [CEL 條件](https://docs.cloud.google.com/resource-manager/docs/organization-policy/creating-managing-custom-constraints?hl=zh-tw#common_expression_language)。這個欄位最多可輸入 1000 個字元。例如：`"datasetReference.datasetId.startsWith('test')"`。
+* `CONDITION`：針對支援服務資源表示法所撰寫的 [CEL 條件](https://docs.cloud.google.com/resource-manager/docs/organization-policy/creating-managing-custom-constraints?hl=zh-tw#common_expression_language)。這個欄位最多可輸入 1,500 個字元。例如：`"datasetReference.datasetId.startsWith('test')"`。
 
 如要進一步瞭解可編寫條件的資源，請參閱「[支援的資源](#supported_resources)」。
 
@@ -266,7 +266,7 @@ gcloud org-policies set-custom-constraint CONSTRAINT_PATH
 gcloud org-policies list-custom-constraints --organization=ORGANIZATION_ID
 ```
 
-將 `ORGANIZATION_ID` 替換為組織資源的 ID。
+請將 `ORGANIZATION_ID` 替換成組織資源的 ID。
 
 詳情請參閱「[查看組織政策](https://docs.cloud.google.com/resource-manager/docs/organization-policy/creating-managing-policies?hl=zh-tw#viewing_organization_policies)」。
 
@@ -455,11 +455,11 @@ Operation denied by custom org policies: ["customConstraints/custom.enforceDatas
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-08 (世界標準時間)。
+上次更新時間：2026-11-10 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-08 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-10 (世界標準時間)。"],[],[]]

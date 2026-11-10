@@ -16,17 +16,17 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 安排查詢
 
-BigQuery 排定查詢可讓您自動執行週期性 [GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw) 工作負載，包括[資料定義語言 (DDL)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw) 和[data manipulation language (DML)](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language?hl=zh-tw) 陳述式。如要依日期和時間整理結果，您可以將查詢字串和目的地資料表參數化。建立或更新排程時，BigQuery 會將排定時間從當地時間轉換為世界標準時間，不受日光節約時間影響。
+BigQuery 排定查詢可讓您自動執行週期性 [GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw) 工作負載，包括[資料定義語言 (DDL)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw) 和[data manipulation language (DML)](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language?hl=zh-tw) 陳述式。如要依日期和時間整理結果，您可以將查詢字串和目的地資料表參數化。建立或更新排程時，BigQuery 會將排定時間從當地時間轉換為世界標準時間 (UTC)，不受日光節約時間影響。
 
 ## 事前準備
 
-* 排定的查詢會使用 [BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)的功能。確認您已完成「[啟用 BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service?hl=zh-tw)」中的所有必要動作。
+* 排定的查詢會使用 [BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)的功能。確認您已完成[啟用 BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service?hl=zh-tw)的所有必要操作。
 * 授予 Identity and Access Management (IAM) 角色，讓使用者具備執行本文件各項工作所需的權限。
 * 如要指定客戶自行管理的加密金鑰 (CMEK)，請確認[服務帳戶具備加密和解密權限](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw#grant_permission)，且您有使用 CMEK 所需的 [Cloud KMS 金鑰資源 ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw#key_resource_id)。如要瞭解 CMEK 如何與 BigQuery 資料移轉服務搭配運作，請參閱「[指定排定查詢的加密金鑰](#CMEK)」。
 
 ## 限制
 
-* 如果排定的查詢在整點 (例如 09:00) 執行，可能會觸發多次，導致 `INSERT` 作業重複資料等非預期結果。為避免這類非預期結果，請使用非整點的時間表 (例如 08:58 或 09:03)。
+* 如果排定的查詢在整點 (例如 09:00) 執行，可能會觸發多次，導致 `INSERT` 作業重複資料等非預期結果。為避免這類非預期結果，請使用非整點排程 (例如 08:58 或 09:03)。
 
 ### 所需權限
 
@@ -34,17 +34,17 @@ BigQuery 排定查詢可讓您自動執行週期性 [GoogleSQL](https://docs.clo
 
 * 如要建立移轉作業，您必須具備 `bigquery.transfers.update` 和 `bigquery.datasets.get` 權限，或 `bigquery.jobs.create`、`bigquery.transfers.get` 和 `bigquery.datasets.get` 權限。
 
-  **注意：** 如果您使用 Google Cloud 控制台或 bq 指令列工具排定查詢，則必須具備 `bigquery.transfers.get` 權限。
-* 如要執行排定的查詢，您必須具備下列權限：
+  **注意：**如果您使用 Google Cloud 控制台或 bq 指令列工具排定查詢，則必須具備 `bigquery.transfers.get` 權限。
+* 如要執行排定的查詢，您必須具備下列條件：
 
   + 目標資料集的 `bigquery.datasets.get` 權限。
   + 專案的 `bigquery.jobs.create` 權限。
 
 如要修改或刪除排定的查詢，您必須具備下列其中一項：
 
-* 專案的 `bigquery.transfers.update` 和 `bigquery.transfers.get` 權限。
+* 專案的 `bigquery.transfers.update` 權限。
 * 如要使用使用者憑證執行排定的查詢，該使用者必須擁有排定的查詢，且您必須具備專案的 `bigquery.jobs.create` 權限。
-* 如果您以服務帳戶的身分執行排定的查詢，呼叫排定查詢的使用者必須具備專案的 `bigquery.transfers.update` 和 `bigquery.transfers.get` 權限。授予 [IAM 服務帳戶使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/iam?hl=zh-tw#iam.serviceAccountUser) (`iam.serviceAccountUser`) 角色後，使用者就能以服務帳戶的身分執行工作，但不會獲得排程查詢設定的管理權限。
+* 如果您以服務帳戶的身分執行排定的查詢，呼叫排定查詢的使用者必須具備專案的 `bigquery.transfers.update` 權限。授予「IAM 服務帳戶使用者」(`iam.serviceAccountUser`) 角色後，使用者就能以服務帳戶的身分執行工作，但不會獲得排定查詢設定的管理權限。
 
 預先定義的 [BigQuery 管理員 (`roles/bigquery.admin`)](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.admin) IAM 角色包含排定或修改查詢所需的權限。
 
@@ -94,8 +94,7 @@ LIMIT
 
 如果您使用的是 DDL 或 DML 查詢，請在 Google Cloud 控制台中選擇「Processing location」(處理位置) 或區域。建立目的地資料表的 DDL 或 DML 查詢必須指定處理位置。
 
-如果目的地資料表確實存在，且您使用 `WRITE_APPEND`
-[寫入偏好設定](#write_preference)，BigQuery 會將資料附加至目的地資料表，並嘗試對應結構定義。BigQuery 會自動允許新增及重新排序欄位，並容許缺少選用欄位。如果資料表結構定義在兩次執行之間變更過多，導致 BigQuery 無法自動處理變更，排定的查詢就會失敗。
+如果目的地資料表確實存在，且您使用 `WRITE_APPEND` [寫入偏好設定](#write_preference)，BigQuery 會將資料附加至目的地資料表，並嘗試對應結構定義。BigQuery 會自動允許新增欄位和重新排序，並容許缺少選用欄位。如果資料表結構定義在兩次執行之間變更過多，導致 BigQuery 無法自動處理變更，排定的查詢就會失敗。
 
 查詢可參照來自不同專案和不同資料集的資料表。設定排程查詢時，資料表名稱不需要包含目的地資料集。目的地資料集會另外指定。
 
@@ -130,7 +129,7 @@ LIMIT
 
 * 如要使用整數範圍分區，請將「Destination table partitioning field」(目的地資料表分區欄位) 留空。
 * 如要使用時間單位資料欄分區，請在[設定排定的查詢](#set_up_scheduled_queries)時，在「Destination table partitioning field」(目的地資料表分區欄位) 中指定資料欄名稱。
-* 如要使用擷取時間分區，請將「Destination table partitioning field」(目的地資料表分區欄位) 留空，並在目的地資料表的名稱中指明日期分區。例如：`mytable${run_date}`。詳情請參閱「[參數範本語法](#param-templating-syntax)」。
+* 如要使用擷取時間分區，請將「Destination table partitioning field」(目的地資料表分區欄位) 留空，並在目的地資料表的名稱中指明日期的分區。例如：`mytable${run_date}`。詳情請參閱「[參數範本語法](#param-templating-syntax)」。
 
 #### 可用的參數
 
@@ -138,7 +137,7 @@ LIMIT
 
 | 參數 | 範本類型 | 值 |
 | --- | --- | --- |
-| `run_time` | 格式化的時間戳記 | 採用世界標準時間，依排程而定。對於具有定期執行排程的查詢，`run_time` 用以表示預定的執行時間。舉例來說，如果排定的查詢設為「每 24 小時」，則兩次連續查詢之間的`run_time`差異正好是 24 小時，即使實際執行時間可能略有不同。  請參閱「[`TransferRun.runTime`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.runs?hl=zh-tw)」。 |
+| `run_time` | 格式化的時間戳記 | 採用世界標準時間，依排程而定。對於具有定期執行排程的查詢，`run_time` 用以表示預定的執行時間。舉例來說，如果排定的查詢設為「每 24 小時」，則兩次連續查詢之間的 `run_time` 差異正好是 24 小時，即使實際執行時間可能略有不同。  請參閱 [`TransferRun.runTime`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.runs?hl=zh-tw)。 |
 | `run_date` | 日期字串 | `run_time` 參數的日期，採用以下格式：`%Y-%m-%d`；例如 `2018-01-01`。這個格式與擷取時間分區資料表相容。 |
 
 #### 範本系統
@@ -180,7 +179,7 @@ LIMIT
 
 ### 使用服務帳戶
 
-您可以設定排定的查詢，以服務帳戶的身分進行驗證。服務帳戶是與 Google Cloud 專案相關聯的特殊帳戶。服務帳戶可以使用自己的服務憑證 (而非使用者的憑證) 執行工作，例如排定的查詢或批次處理管道。
+您可以設定排定的查詢，以服務帳戶的身分進行驗證。服務帳戶是與 Google Cloud 專案相關聯的特殊帳戶。服務帳戶可以執行工作，例如排定的查詢或批次處理管道，並使用自己的服務憑證，而非使用者的憑證。
 
 如要進一步瞭解如何透過服務帳戶進行驗證，請參閱[驗證功能簡介](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#sa-impersonation)一文。
 
@@ -197,13 +196,13 @@ LIMIT
 
 如果移轉設定最初是以 CMEK 加密建立，則可更新移轉作業的 CMEK。更新移轉設定的 CMEK 時，BigQuery 資料移轉服務會在下次執行移轉作業時，將 CMEK 傳播至目的地資料表，並在移轉作業執行期間，以新的 CMEK 取代任何過時的 CMEK。詳情請參閱「[更新移轉作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#update_a_transfer)」。
 
-您也可以使用[專案預設金鑰](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw#project_default_key)。指定移轉作業的專案預設金鑰時，BigQuery 資料移轉服務會將專案預設金鑰，設為任何新移轉設定的預設金鑰。
+您也可以使用[專案預設金鑰](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw#project_default_key)。如果您在移轉作業中指定專案預設金鑰，BigQuery 資料移轉服務會將專案預設金鑰，設為任何新移轉設定的預設金鑰。
 
 ## 設定排定的查詢
 
-**提示：** 您也可以使用[「Pipelines & Connections」(管道與連線) 頁面](https://docs.cloud.google.com/bigquery/docs/pipeline-connection-page?hl=zh-tw)設定排定的查詢。這項功能為[預先發布版](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
+**提示：**您也可以使用[「Pipelines & Connections」(管道與連線) 頁面](https://docs.cloud.google.com/bigquery/docs/pipeline-connection-page?hl=zh-tw)設定排定的查詢。這項功能為[預先發布版](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
 
-如要排定查詢，請選取下列任一選項。如需排程語法的說明，請參閱「[設定排程格式](https://docs.cloud.google.com/appengine/docs/flexible/python/scheduling-jobs-with-cron-yaml?hl=zh-tw#formatting_the_schedule)」。如要進一步瞭解排程語法，請參閱「[資源：`TransferConfig`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs?hl=zh-tw#TransferConfig)」。或者，您也可以[使用 Gemini Cloud Assist 安排查詢](https://docs.cloud.google.com/bigquery/docs/use-cloud-assist?hl=zh-tw#schedule_a_query)，只要在提示中提供排程詳細資料即可。
+如要排定查詢，請選取下列其中一個選項。如需排程語法的說明，請參閱「[設定排程格式](https://docs.cloud.google.com/appengine/docs/flexible/python/scheduling-jobs-with-cron-yaml?hl=zh-tw#formatting_the_schedule)」。如要進一步瞭解排程語法，請參閱「[資源：`TransferConfig`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs?hl=zh-tw#TransferConfig)」。或者，您也可以[使用 Gemini Cloud Assist 安排查詢](https://docs.cloud.google.com/bigquery/docs/use-cloud-assist?hl=zh-tw#schedule_a_query)，只要在提示中提供排程詳細資料即可。
 
 ### 控制台
 
@@ -222,18 +221,18 @@ LIMIT
        **注意：**排定的查詢之間至少須間隔 5 分鐘。
      + 如要變更開始時間，請選取「Start at set time」(在所設時間開始執行) 選項，然後輸入所選的開始日期和時間。
 
-       **注意：** 如果指定的開始時間晚於排程時間，則查詢會在下一個週期首次執行。舉例來說，如果查詢是在 `2022-06-05 23:50` 建立，排程為 `daily 00:00`，開始時間為 `2022-06-06 10:00`，則要到 `2022-06-07 00:00` 才會執行。
+       **注意：**如果指定的開始時間晚於排程中的時間，則查詢會在下一個週期首次執行。舉例來說，如果查詢是在 `2022-06-05 23:50` 建立，排程為 `daily 00:00`，開始時間為 `2022-06-06 10:00`，則要到 `2022-06-07 00:00` 才會執行。
      + 如要指定結束時間，請選取「Schedule end time」(排定結束時間) 選項，然後輸入所選的結束日期和時間。
      + 如要儲存查詢但不設定排程，以便日後隨選執行，請在「Repeats」(重複) 選單中選取「On-demand」(隨選)。
 5. 如果是 GoogleSQL `SELECT` 查詢，請選取「Set a destination table for query results」(為查詢結果設定目的地資料表) 選項，並提供下列目的地資料集相關資訊。
 
    * 在「Dataset name」(資料集名稱) 部分選擇適當的目的地資料集。
    * 在「Table name」(資料表名稱) 部分，輸入目的地資料表的名稱。
-   * 在「Destination table write preference」(目的地資料表寫入偏好設定) 部分，選擇「Append to table」(附加至資料表) 將資料附加至資料表，或選擇「Overwrite table」(覆寫資料表) 覆寫目的地資料表。
+   * 在「Destination table write preference」(目的地資料表寫入偏好設定) 部分，選擇「Append to table」(附加至資料表)，將資料附加至資料表，或選擇「Overwrite table」(覆寫資料表)，覆寫目的地資料表。
 6. 選擇「位置類型」。
 
    * 如果已啟用查詢結果的目的地資料表，可以選取「Automatic location selection」(自動選取位置)，自動選取目的地資料表所在的位置。
-   * 否則，請選擇要查詢的資料所在位置。
+   * 否則，請選擇查詢資料所在的位置。
 7. **進階選項**：
 
    * 選用：CMEK
@@ -242,8 +241,8 @@ LIMIT
      如果有一或多個服務帳戶與 Google Cloud 專案相關聯，您可以將服務帳戶與排定的查詢建立關聯，這樣就不需要使用者憑證。在「Scheduled query credential」(排定的查詢憑證) 下方，按一下選單即可查看可用的服務帳戶清單。如果您以聯合身分登入，則必須使用服務帳戶。
 8. 其他設定：
 
-   * 選用：勾選[「Send email notifications」(傳送電子郵件通知)](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications?hl=zh-tw)，允許系統在移轉作業執行失敗時傳送電子郵件通知。
-   * 選用：在「Pub/Sub topic」(Pub/Sub 主題) 中，輸入 Pub/Sub [主題](https://docs.cloud.google.com/pubsub/docs/overview?hl=zh-tw#types)名稱，例如 `projects/myproject/topics/mytopic`。
+   * 選用：勾選[「Send email notifications」(傳送電子郵件通知)](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications?hl=zh-tw)，允許在移轉作業執行失敗時傳送電子郵件通知。
+   * 選用：在「Pub/Sub topic」(Pub/Sub 主題) 中，輸入 Pub/Sub [主題](https://docs.cloud.google.com/pubsub/docs/overview?hl=zh-tw#types)名稱，例如：`projects/myproject/topics/mytopic`。
 9. 按一下「儲存」。
 
 ### bq
@@ -265,7 +264,7 @@ bq query \
 
 * `name`：排定查詢的顯示名稱。顯示名稱可以是任何值，只要日後需要修改查詢時能輕鬆識別即可。
 * `table`：查詢結果的目的地資料表。
-  + 與 DDL 和 DML 查詢搭配使用時，`--target_dataset` 是為查詢結果指定目標資料集的另一種方式。
+  + 與 DDL 和 DML 查詢搭配使用時，`--target_dataset` 是命名查詢結果目標資料集的另一種方式。
   + `--destination_table` 或 `--target_dataset` 請擇一使用，不能兩者同時使用。
 * `interval`。與 `bq query` 搭配使用時，可將查詢設為週期性排定查詢。必須設定查詢的執行頻率。如要進一步瞭解有效排程 (包括自訂間隔)，請參閱「[資源：`TransferConfig`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs?hl=zh-tw#TransferConfig)」下的 `schedule` 欄位。範例：
   + `--schedule='every 24 hours'`
@@ -318,7 +317,7 @@ bq query \
 * `--schedule` 是您希望查詢執行的頻率。如未指定 `--schedule`，預設設定為依建立時間計算「every 24 hours」(每 24 小時)。
 * 如果是 DDL 和 DML 查詢，您也可以提供 `--location` 旗標，指定要處理的特定區域。如未指定 `--location`，系統會使用最近的 Google Cloud 位置。
 * `--service_account_name` 是用於透過服務帳戶 (而非個別使用者帳戶) 來驗證排程查詢。
-* 如果您在這項移轉作業使用客戶自行管理的加密金鑰 (CMEK)，`--destination_kms_key` 會指定金鑰的[金鑰資源 ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw#key_resource_id)。如要瞭解 CMEK 如何與 BigQuery 資料移轉服務搭配運作，請參閱「[指定排定查詢的加密金鑰](#CMEK)」。
+* 如果您使用客戶自行管理的加密金鑰 (CMEK) 進行這項移轉作業，`--destination_kms_key` 會指定金鑰的[金鑰資源 ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw#key_resource_id)。如要瞭解 CMEK 如何與 BigQuery 資料移轉服務搭配運作，請參閱「[指定排定查詢的加密金鑰](#CMEK)」。
 
 ```
 bq mk \
@@ -332,22 +331,22 @@ bq mk \
 更改下列內容：
 
 * `dataset`：移轉設定的目標資料集。
-  + 這個參數對於 DDL 和 DML 查詢為選用。是其他所有查詢的必要參數。
+  + DDL 和 DML 查詢可視需要使用這個參數。是其他所有查詢的必要參數。
 * `name`：移轉設定的顯示名稱。顯示名稱可以是任何值，方便您日後需要修改查詢時識別。
 * `parameters`：包含所建立移轉設定的參數，格式為 JSON。例如：`--params='{"param":"param_value"}'`。
   + 針對排程查詢，您必須提供 `query` 參數。
   + `destination_table_name_template` 參數是目的地資料表的名稱。
-    - 這個參數對於 DDL 和 DML 查詢為選用。是其他所有查詢的必要參數。
+    - DDL 和 DML 查詢可視需要使用這個參數。是其他所有查詢的必要參數。
   + 針對 `write_disposition` 參數，您可以選擇 `WRITE_TRUNCATE` 來截斷 (覆寫) 目的地資料表，或選擇 `WRITE_APPEND` 將查詢結果附加到目的地資料表。
     - DDL 和 DML 查詢可視需要使用這個參數。是其他所有查詢的必要參數。
 * `data_source`。資料來源：`scheduled_query`。
 * 選用：`--service_account_name` 旗標用於透過服務帳戶 (而非個別使用者帳戶) 進行驗證。
 * 選用：`--destination_kms_key` 指定 Cloud KMS 金鑰的[金鑰資源 ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw#key_resource_id)，例如 `projects/project_name/locations/us/keyRings/key_ring_name/cryptoKeys/key_name`。
 
-**注意：**如要將結果寫入擷取時間分區資料表，請參閱[目的地資料表](#destination_table)一節的操作說明。如果您建立移轉設定時，將 `destination_table_name_template` 參數設為擷取時間分區資料表，排定的查詢就會失敗，並顯示錯誤訊息。**注意：** 您無法使用指令列工具設定通知。`partitioning_field`
+**注意：**如要將結果寫入擷取時間分區資料表，請參閱[目的地資料表](#destination_table)一節的操作說明。如果您建立移轉設定時，將 `destination_table_name_template` 參數設為擷取時間分區資料表，排定的查詢就會失敗，同時也會在將 `partitioning_field` 參數設為擷取時間分區資料表時提供錯誤。**注意：**您無法使用指令列工具設定通知。
 
 舉例來說，下列指令會使用查詢 `SELECT 1
-from mydataset.test` 建立名為 `My Scheduled Query` 的排定查詢移轉設定。目的地資料表 `mytable` 每次寫入時皆會截斷，而目標資料集為 `mydataset`。排定的查詢會在預設專案中建立，並以服務帳戶身分進行驗證：
+from mydataset.test` 建立名為 `My Scheduled Query` 的排定查詢移轉設定。目的地資料表 `mytable` 每次寫入時皆會截斷，而目標資料集為 `mydataset`。排定的查詢會在預設專案中建立，並以服務帳戶的身分進行驗證：
 
 ```
 bq mk \
@@ -623,7 +622,7 @@ print("Created scheduled query '{}'".format(transfer_config.name))
 
 ### bq
 
-排程查詢是一種移轉作業。如要顯示排定查詢的詳細資料，可以先使用 bq 指令列工具列出移轉設定。
+排程查詢是一種移轉作業。如要查看排定查詢的詳細資料，可以先使用 bq 指令列工具列出移轉設定。
 
 輸入 `bq ls` 指令並加上移轉旗標 `--transfer_config`。還需加上以下旗標：
 
@@ -779,16 +778,16 @@ RESOURCE_NAME
 
 更改下列內容：
 
-* `dataset`：移轉設定的目標資料集。這個參數對於 DDL 和 DML 查詢為選用。其他所有查詢都必須提供。
+* `dataset`：移轉設定的目標資料集。DDL 和 DML 查詢可視需要使用這個參數。所有其他查詢都必須提供。
 * `name`：移轉設定的顯示名稱。顯示名稱可以是任何值，方便您日後需要修改查詢時識別。
 * `parameters`：包含所建立移轉設定的參數，格式為 JSON。例如：`--params='{"param":"param_value"}'`。
   + 針對排程查詢，您必須提供 `query` 參數。
   + `destination_table_name_template` 參數是目的地資料表的名稱。這個參數對於 DDL 和 DML 查詢為選用。所有其他查詢都必須提供這個參數。
   + 針對 `write_disposition` 參數，您可以選擇 `WRITE_TRUNCATE` 來截斷 (覆寫) 目的地資料表，或選擇 `WRITE_APPEND` 將查詢結果附加至目的地資料表。如果是 DDL 和 DML 查詢，則可視需要使用這項參數。所有其他查詢都必須提供這個參數。
-* 選用：`--destination_kms_key` 指定 Cloud KMS 金鑰的[金鑰資源 ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw#key_resource_id)，例如 `projects/project_name/locations/us/keyRings/key_ring_name/cryptoKeys/key_name`。
+* 選用：`--destination_kms_key` 會指定 Cloud KMS 金鑰的[金鑰資源 ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw#key_resource_id)，例如 `projects/project_name/locations/us/keyRings/key_ring_name/cryptoKeys/key_name`。
 * `RESOURCE_NAME`：移轉作業的資源名稱 (也稱為移轉設定)。如果不知道移轉作業的資源名稱，請使用 [`bq ls --transfer_config --transfer_location=location`](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#list_transfer_configurations) 找出資源名稱。
 
-**注意：**如要將結果寫入擷取時間分區資料表，請參閱[目的地資料表](#destination_table)一節的操作說明。如果您建立移轉設定時，將 `destination_table_name_template` 參數設為擷取時間分區資料表，排定的查詢就會失敗，並顯示錯誤訊息。**注意：** 您無法使用指令列工具設定通知。`partitioning_field`
+**注意：**如要將結果寫入擷取時間分區資料表，請參閱[目的地資料表](#destination_table)一節的操作說明。如果您建立移轉設定時，將 `destination_table_name_template` 參數設為擷取時間分區資料表，排定的查詢就會失敗，同時也會在將 `partitioning_field` 參數設為擷取時間分區資料表時提供錯誤。**注意：**您無法使用指令列工具設定通知。
 
 舉例來說，下列指令會使用查詢 `SELECT 1
 from mydataset.test` 更新名為 `My Scheduled Query` 的排定查詢移轉設定。每次寫入時，目的地資料表 `mytable` 都會遭到截斷，目標資料集為 `mydataset`：
@@ -804,7 +803,7 @@ projects/myproject/locations/us/transferConfigs/1234a123-1234-1a23-1be9-12ab3c45
 
 ### API
 
-請使用 [`projects.transferConfigs.patch`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.transferConfigs/patch?hl=zh-tw) 方法，並透過 `transferConfig.name` 參數提供移轉作業的資源名稱。如果您不知道移轉作業的資源名稱，請使用 [`bq ls --transfer_config --transfer_location=location`](#viewing_a_scheduled_query) 指令列出所有移轉作業，或呼叫 [`projects.locations.transferConfigs.list`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/list?hl=zh-tw) 方法，並使用 `parent` 參數提供專案 ID。
+請使用 [`projects.transferConfigs.patch`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.transferConfigs/patch?hl=zh-tw) 方法，並透過 `transferConfig.name` 參數提供轉移作業的資源名稱。如果您不知道移轉作業的資源名稱，請使用 [`bq ls --transfer_config --transfer_location=location`](#viewing_a_scheduled_query) 指令列出所有移轉作業，或呼叫 [`projects.locations.transferConfigs.list`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/list?hl=zh-tw) 方法，並使用 `parent` 參數提供專案 ID。
 
 ### Java
 
@@ -900,5 +899,5 @@ def update_transfer_config(
             update_mask=update_mask,
         )
 
-        print(f"Updated transfer config: {response
+        print(f"Updated transfer config: {response.
 ```

@@ -26,6 +26,7 @@ Salesforce Marketing Cloud 資料移轉作業有下列限制：
   + 為避免單一移轉設定略過移轉作業，建議您設定「重複頻率」，增加大型資料移轉作業之間的時間長度。
 * 如要透過網路連結進行資料移轉，請務必先[定義靜態 IP 位址，再建立網路連結](https://docs.cloud.google.com/bigquery/docs/connections-with-network-attachment?hl=zh-tw)。
 * 您必須每 180 天設定用戶端密鑰輪替，以免驗證失敗。詳情請參閱「[輪替用戶端密鑰](#rotate_client_secrets)」。
+* 如果網路連結是在與 Google Cloud 資料移轉專案不同的 Google Cloud 專案中建立，您必須將 `compute.networkAttachments.get` 和 `compute.networkAttachments.update` 權限授予 Google Cloud 資料移轉專案的[服務代理](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service?hl=zh-tw#service_agent)。
 * Salesforce Marketing Cloud 移轉作業不支援含有二進位或大型 blob 欄位的資料擴充。
 * 如果設定的網路連結和虛擬機器 (VM) 執行個體位於不同區域，從 Salesforce Marketing Cloud 移轉資料時，可能會發生跨區域資料移動。
 
@@ -269,6 +270,4 @@ bq mk
 如果您在設定或執行 Salesforce Marketing Cloud 資料移轉作業時遇到問題，請嘗試下列疑難排解步驟：
 
 * 確認 Salesforce Marketing Cloud 中的 API 整合套件已[專門設定](#sfmc-package)為**伺服器對伺服器**驗證。
-* 確認驗證器應用程式已在「Scope」下設定所有[必要權限](https://developer.salesforce.com/docs/marketing/marketing-cloud/guide/data-access-permissions.html)，包括 `Data Extensions: Read`。
-* 為避免逾時和間歇性失敗，請將每項移轉設定限制為不超過 **10 個資產**。
-* 確認您未移轉含有二進位或大型 blob 欄位的資料擴充。
+* 確認驗證器應用程式已在「Scope」下設定所有
