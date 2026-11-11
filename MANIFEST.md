@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-11-10T20:02+00:00_
+_Generated 2026-11-11T04:04+00:00_
 
-**9 sources, 4837 topics total**
+**9 sources, 4824 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_895 topics_
+_902 topics_
 
 - `anthropic-sdk/about-claude/additional-resources`
 - `anthropic-sdk/about-claude/api-credits-for-subscribers`
@@ -781,6 +781,13 @@ _895 topics_
 - `anthropic-sdk/manage-claude/compliance-faq`
 - `anthropic-sdk/manage-claude/compliance-integration-patterns`
 - `anthropic-sdk/manage-claude/compliance-org-data`
+- `anthropic-sdk/manage-claude/compliance-security-posture/check-events-against-results`
+- `anthropic-sdk/manage-claude/compliance-security-posture/detect-changes`
+- `anthropic-sdk/manage-claude/compliance-security-posture/events-reference`
+- `anthropic-sdk/manage-claude/compliance-security-posture/ocsf-mapping`
+- `anthropic-sdk/manage-claude/compliance-security-posture/overview`
+- `anthropic-sdk/manage-claude/compliance-security-posture/results-reference`
+- `anthropic-sdk/manage-claude/compliance-security-posture/send-events`
 - `anthropic-sdk/manage-claude/compliance-sessions`
 - `anthropic-sdk/manage-claude/data-residency`
 - `anthropic-sdk/manage-claude/inference-hooks`
@@ -2422,7 +2429,7 @@ _1497 topics_
 
 Upstream: <https://code.claude.com/docs/en/>
 
-_227 topics_
+_202 topics_
 
 - `claude-code/accessibility`
 - `claude-code/admin-setup`
@@ -2623,31 +2630,6 @@ _227 topics_
 - `claude-code/voice-dictation`
 - `claude-code/vs-code`
 - `claude-code/web-quickstart`
-- `claude-code/whats-new`
-- `claude-code/whats-new/2026-w13`
-- `claude-code/whats-new/2026-w14`
-- `claude-code/whats-new/2026-w15`
-- `claude-code/whats-new/2026-w16`
-- `claude-code/whats-new/2026-w17`
-- `claude-code/whats-new/2026-w18`
-- `claude-code/whats-new/2026-w19`
-- `claude-code/whats-new/2026-w20`
-- `claude-code/whats-new/2026-w21`
-- `claude-code/whats-new/2026-w22`
-- `claude-code/whats-new/2026-w23`
-- `claude-code/whats-new/2026-w24`
-- `claude-code/whats-new/2026-w25`
-- `claude-code/whats-new/2026-w26`
-- `claude-code/whats-new/2026-w27`
-- `claude-code/whats-new/2026-w28`
-- `claude-code/whats-new/2026-w29`
-- `claude-code/whats-new/2026-w30`
-- `claude-code/whats-new/2026-w32`
-- `claude-code/whats-new/2026-w33`
-- `claude-code/whats-new/2026-w34`
-- `claude-code/whats-new/2026-w35`
-- `claude-code/whats-new/2026-w36`
-- `claude-code/whats-new/2026-w37`
 - `claude-code/workflows`
 - `claude-code/worktrees`
 - `claude-code/zero-data-retention`
@@ -2656,7 +2638,7 @@ _227 topics_
 
 Upstream: <https://docs.getdbt.com/docs/>
 
-_1171 topics_
+_1173 topics_
 
 - `dbt-core/best-practices/best-practice-workflows`
 - `dbt-core/best-practices/clone-incremental-models`
@@ -3024,6 +3006,7 @@ _1171 topics_
 - `dbt-core/docs/local/connect-data-platform/mysql-setup`
 - `dbt-core/docs/local/connect-data-platform/oracle-setup`
 - `dbt-core/docs/local/connect-data-platform/postgres-setup`
+- `dbt-core/docs/local/connect-data-platform/redis-setup`
 - `dbt-core/docs/local/connect-data-platform/redshift-setup`
 - `dbt-core/docs/local/connect-data-platform/risingwave-setup`
 - `dbt-core/docs/local/connect-data-platform/rockset-setup`
@@ -3710,6 +3693,7 @@ _1171 topics_
 - `dbt-core/reference/resource-configs/python-model-configs`
 - `dbt-core/reference/resource-configs/quote_args`
 - `dbt-core/reference/resource-configs/quote_columns`
+- `dbt-core/reference/resource-configs/redis-configs`
 - `dbt-core/reference/resource-configs/redshift-configs`
 - `dbt-core/reference/resource-configs/require-fresh-data-from`
 - `dbt-core/reference/resource-configs/resource-path`
@@ -3999,7 +3983,7 @@ _158 topics_
 
 Upstream: <https://learn.hex.tech/>
 
-_397 topics_
+_400 topics_
 
 - `hex/changelog`
 - `hex/changelog/2020-12-17`
@@ -4122,6 +4106,7 @@ _397 topics_
 - `hex/changelog/2026-09-29`
 - `hex/changelog/2026-10-22`
 - `hex/changelog/2026-10-30`
+- `hex/changelog/2026-11-10`
 - `hex/changelog/archive`
 - `hex/changelog/page/10`
 - `hex/changelog/page/11`
@@ -4135,6 +4120,7 @@ _397 topics_
 - `hex/changelog/page/19`
 - `hex/changelog/page/2`
 - `hex/changelog/page/20`
+- `hex/changelog/page/21`
 - `hex/changelog/page/3`
 - `hex/changelog/page/4`
 - `hex/changelog/page/5`
@@ -4292,6 +4278,7 @@ _397 topics_
 - `hex/docs/getting-started/share-your-work`
 - `hex/docs/hex-4-0`
 - `hex/docs/hex-4-0/beta-roadmap`
+- `hex/docs/hex-4-0/semantic-models-in-hex-4-0`
 - `hex/docs/hex-4-0/what-is-hex-4-0`
 - `hex/docs/legal`
 - `hex/docs/legal/aup`

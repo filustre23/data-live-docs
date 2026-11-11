@@ -33,6 +33,7 @@
 * [September 29 - See how your team uses the agent](/changelog/2026-09-29)
 * [October 22 - Pull agent usage data and import Ossie models](/changelog/2026-10-22)
 * [October 30 - Governed mode for the Hex Agent](/changelog/2026-10-30)
+* [November 10 - Introducing Hex 4.0](/changelog/2026-11-10)
 
 ### 2025[​](#2025 "Direct link to 2025")
 

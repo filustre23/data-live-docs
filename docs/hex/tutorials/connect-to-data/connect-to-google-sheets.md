@@ -160,6 +160,10 @@ Now we’ve covered the basics when it comes to how you can work with Google She
 
 As a reminder, if you’d like to see what this looks like in Hex, you can check out this tutorial’s [companion project](https://app.hex.tech/hex-public/app/c2d24cea-6ab9-4e24-a8d7-d118d30af246/latest).
 
+## Alternative: Google Drive integration[​](#alternative-google-drive-integration "Direct link to Alternative: Google Drive integration")
+
+Alternatively, you can import Google Sheets into a project via a [Google Drive external file integration](/docs/connect-to-data/cloud-storage-integrations#import-files-from-your-cloud-storage-integration). You can also [export a dataframe back](/docs/connect-to-data/cloud-storage-integrations#export-files-to-your-cloud-storage-integration) to that connected Google Drive location as a CSV, where it can then be opened via Google Sheets.
+
 #### On this page
 
 * [Set up Google API credentials](#set-up-google-api-credentials)
@@ -169,3 +173,4 @@ As a reminder, if you’d like to see what this looks like in Hex, you can check
 * [Read data from a spreadsheet into a dataframe](#read-data-from-a-spreadsheet-into-a-dataframe)
 * [Create and write to a new worksheet](#create-and-write-to-a-new-worksheet)
 * [Delete a worksheet](#delete-a-worksheet)
+* [Alternative: Google Drive integration](#alternative-google-drive-integration)

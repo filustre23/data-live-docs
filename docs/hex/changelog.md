@@ -1,7 +1,17 @@
-October 30, 2026
+November 10, 2026
 
-### Governed mode for the Hex Agent
+### Introducing Hex 4.0
 
-Choose exactly which warehouse tables, semantic models, and projects the Hex Agent can use, and apply it to Explorers or your whole workspace.
+We’ve reimagined our platform to be the best place for humans and agents to collaborate with data.
 
-🔒 Governed mode
+🧱 Hex projects are fully code-defined
+
+🔌 Build from anywhere
+
+🔎 Observability across your agents
+
+🕵️ A new UI, built for reviewing and understanding
+
+⚡ Ridiculously fast execution engine
+
+🚀 What to expect in the public beta

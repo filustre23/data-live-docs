@@ -518,6 +518,8 @@ Hex also provides support for some vendor-specific conversion paths.
 
 Use the Hex CLI to convert a dbt semantic manifest to Hex through Ossie. Your project can use either the legacy or latest dbt Semantic Layer YAML specification. The example below uses the [dbt 1.12+ syntax](https://docs.getdbt.com/docs/build/semantic-models).
 
+The examples below assume you run commands from your dbt project root (the directory containing `dbt_project.yml`) and use the default `target/` output directory. If your dbt project is elsewhere, pass `--project-dir <path>` to `dbt parse`. If you use a different output directory, set `--target-path <path>` as needed. Adjust the converter's `--input` path and the Context Sync `path` to match the generated manifest's location; Context Sync paths are relative to `hex_context.config.yaml`.
+
 #### Prepare the dbt project[​](#prepare-the-dbt-project "Direct link to Prepare the dbt project")
 
 Add datatype annotations to your dbt models to preserve the types of the underlying values during conversion.
@@ -529,7 +531,7 @@ Valid datatype values are `String`, `Integer`, `Decimal`, `Float`, `Boolean`, `D
 
 Your project must also have a [configured time spine](https://docs.getdbt.com/docs/build/metricflow-time-spine). The example below assumes an existing SQL model named `opportunities` that exposes `opportunity_id`, `created_date`, and `arr`.
 
-my\_dbt\_project/models/opportunities.yaml
+models/opportunities.yaml
 
 ```
 version: 2
@@ -765,10 +767,10 @@ expr: arr
 
 #### Convert the dbt project[​](#convert-the-dbt-project "Direct link to Convert the dbt project")
 
-The dbt to Ossie converter expects a dbt semantic manifest as the input. From the directory containing `my_dbt_project`, run `dbt parse` to generate the manifest. Then run `hex context semantic-project convert`, declaring the manifest as the input and a local folder as the output:
+The dbt to Ossie converter expects a dbt semantic manifest as the input. Run `dbt parse` to generate the manifest. Then run `hex context semantic-project convert`, declaring the manifest as the input and a local folder as the output:
 
 ```
-dbt parse --project-dir ./my_dbt_project
+dbt parse
 
 
 
@@ -784,7 +786,7 @@ hex context semantic-project convert \
 
 
 
---input ./my_dbt_project/target/semantic_manifest.json \
+--input ./target/semantic_manifest.json \
 
 
 
@@ -808,7 +810,7 @@ semanticProjects:
 
 
 
-path: ./semantic-manifests/semantic_manifest.json
+path: ./target/semantic_manifest.json
 
 
 
@@ -819,18 +821,10 @@ convert:
 from: dbt
 ```
 
-In a Git repository, the manifest must be inside the repository and must not be ignored by Git. dbt's `target/` directory is typically ignored, so this example copies the generated manifest into a `semantic-manifests/` directory that is included by Git. Place the context configuration file at the repository root and run:
+An explicitly configured dbt conversion input can be ignored by Git, so you can point directly at the generated manifest in dbt's `target/` directory. The manifest must still be inside the configuration file's Git repository. For this example, place the context configuration file at your dbt project root and run:
 
 ```
-dbt parse --project-dir ./my_dbt_project
-
-
-
-mkdir -p ./semantic-manifests
-
-
-
-cp ./my_dbt_project/target/semantic_manifest.json ./semantic-manifests/semantic_manifest.json
+dbt parse
 
 
 
@@ -841,7 +835,7 @@ hex auth login
 hex context preview --title "Sync dbt semantic model"
 ```
 
-The CLI converts the manifest locally to temporary Hex model files and uploads the converted project to the preview. Context Sync doesn't run `dbt parse`; regenerate and copy the manifest before each preview, including in CI. When you're ready, [publish the preview](#step-3-preview-and-publish).
+The CLI converts the manifest locally to temporary Hex model files and uploads the converted project to the preview. Context Sync doesn't run `dbt parse`; regenerate the manifest before each preview, including in CI. When you're ready, [publish the preview](#step-3-preview-and-publish).
 
 #### On this page
 
