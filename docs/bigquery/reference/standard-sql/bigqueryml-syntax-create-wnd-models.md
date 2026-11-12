@@ -444,9 +444,5 @@ CLASS_WEIGHTS = [STRUCT('example_label', .2)]
 **Syntax**
 
 ```
-EARLY_STOP = { TRUE | FALSE }
+EARLY_STOP = { TRUE |
 ```
-
-**Description**
-
-Determines whether training shou

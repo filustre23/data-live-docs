@@ -258,6 +258,4 @@ bq mk
 * DATA\_SOURCE：資料來源 - `salesforce`。
 * NAME：資料移轉設定的顯示名稱。移轉作業名稱可以是任意值，日後需要修改移轉作業時，能夠據此識別即可。
 * DATASET：移轉設定的目標資料集。
-* PARAMETERS：JSON 格式的已建立移轉設定參數。例如：`--params='{"param":"param_value"}'`。以下是 Salesforce 資料移轉作業的參數：
-
-  + `connector.authentication.oauth.clientId`：與 Salesforce 連結的
+* PARAMETERS：JSON 格式的已建立移轉設定參數。例如：`--params='{"param&quo`

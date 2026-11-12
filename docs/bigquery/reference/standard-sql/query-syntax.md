@@ -279,6 +279,5 @@ WITH
         'Adams', 'Noam', 20) AS Player,
       3 AS PointsScored UNION ALL
     SELECT ('Buchanan', 'Jie', 19), 0 UNION ALL
-    SELECT ('Adams', 'Noam', 20), 4 UNION ALL
-    SELECT <
+    SELECT ('Adams', 'Noam', 20), 4 UNION
 ```

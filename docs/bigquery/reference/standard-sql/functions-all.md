@@ -144,5 +144,4 @@ This topic contains all functions supported by GoogleSQL for BigQuery.
 | [`GROUPING`](/bigquery/docs/reference/standard-sql/aggregate_functions#grouping) | Checks if a groupable value in the `GROUP BY` clause is aggregated. |
 | [`HLL_COUNT.EXTRACT`](/bigquery/docs/reference/standard-sql/hll_functions#hll_countextract) | Extracts a cardinality estimate of an HLL++ sketch. |
 | [`HLL_COUNT.INIT`](/bigquery/docs/reference/standard-sql/hll_functions#hll_countinit) | Aggregates values of the same underlying type into a new HLL++ sketch. |
-| [`HLL_COUNT.MERGE`](/bigquery/docs/reference/standard-sql/hll_functions#hll_countmerge) | Merges HLL++ sketches of the same underlying type into a new sketch, and then gets the cardinality of the new sketch. |
-|  |
+| [`HLL_COUNT.MERGE`](/bigquery/docs/reference/standard-sql/hll_functions#hll_countmerge) | Merges HLL |

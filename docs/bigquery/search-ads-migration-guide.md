@@ -131,5 +131,5 @@ FROM
 LEFT JOIN
   `new_dataset.sa_CampaignStats_customer_id` cs
 ON
-  (c.campaign_id
+  (
 ```

@@ -370,4 +370,3 @@ The `CHANGES` function returns a table with the following columns:
 **Example**
 
 This example shows the change history returned by the `CHANGES` function as
-various changes are made to a table called `Produce`. First, create the table:

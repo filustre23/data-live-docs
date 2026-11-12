@@ -582,5 +582,4 @@ BigQuery view:
 AdWords report (deprecated):
 :   [Click Performance Report](https://developers.google.com/adwords/api/docs/appendix/reports/click-performance-report)
 
-BigQuery AdWords table (deprecated):
-:   p\_ClickStats\_customer\_id
+B

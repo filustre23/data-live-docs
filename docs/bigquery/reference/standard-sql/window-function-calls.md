@@ -363,7 +363,3 @@ the window frame will only include rows from within that partition.
 
 You can't use a window frame clause with some
 [navigation functions](/bigquery/docs/reference/standard-sql/navigation_functions) and
-[numbering functions](/bigquery/docs/reference/standard-sql/numbering_functions),
-such as `RANK()`.
-
-**Examples using the window**

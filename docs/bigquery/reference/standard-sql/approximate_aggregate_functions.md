@@ -290,5 +290,5 @@ into this function, see
 **Examples**
 
 ```
-SELECT APPROX_TOP_SUM(x,<
+SELECT
 ```

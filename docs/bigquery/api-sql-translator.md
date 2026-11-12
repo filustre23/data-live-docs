@@ -16,9 +16,9 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 使用 Translation API 翻譯 SQL 查詢
 
-BigQuery 的 BigQuery Migration API 可讓您透過程式輔助方式，將其他 SQL 方言編寫的指令碼翻譯成 GoogleSQL 查詢。建構自訂軟體整合、自動化 CI/CD 管道或其他程式輔助遷移工作流程時，可以使用 BigQuery Migration API。
+您可以使用 BigQuery 的 BigQuery Migration API，以程式輔助方式將其他 SQL 方言編寫的指令碼，翻譯成 GoogleSQL 查詢。建構自訂軟體整合、自動化 CI/CD 管道或其他程式輔助遷移工作流程時，可以使用 BigQuery Migration API。
 
-如要改為透過 Google Cloud 控制台或指令列執行翻譯工作，請參閱「[使用批次 SQL 翻譯器翻譯 SQL 查詢](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator?hl=zh-tw)」。如要瞭解支援的方言和處理位置，請參閱「[支援的 SQL 方言](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations?hl=zh-tw#supported_sql_dialects)」和「[位置](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations?hl=zh-tw#locations)」。
+如要改為透過 Google Cloud 控制台、指令列或 MCP 用戶端執行翻譯工作，請參閱「[使用批次 SQL 翻譯工具翻譯 SQL 查詢](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator?hl=zh-tw)」或「[使用 BigQuery Migration Service MCP 伺服器](https://docs.cloud.google.com/bigquery/docs/use-bigquery-migration-mcp?hl=zh-tw)」。如要瞭解支援的方言和處理位置，請參閱「[支援的 SQL 方言](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations?hl=zh-tw#supported_sql_dialects)」和「[位置](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations?hl=zh-tw#locations)」。
 
 ## 事前準備
 
@@ -26,7 +26,7 @@ BigQuery 的 BigQuery Migration API 可讓您透過程式輔助方式，將其�
 
 ### 選擇翻譯模式
 
-BigQuery Migration API 支援兩種翻譯模式。這兩種模式都使用相同的 API 方法，並以非同步工作的形式執行。不同模式提供來源 SQL 和接收翻譯 SQL 的方式也不同：
+BigQuery Migration API 支援兩種翻譯模式。這兩種模式使用相同的 API 方法，並以非同步工作的形式執行。不同模式提供來源 SQL 和接收翻譯 SQL 的方式也不同：
 
 * **批次翻譯**：API 會從 Cloud Storage 讀取來源檔案，並將翻譯後的檔案和報告寫入 Cloud Storage。如要一次翻譯多個檔案 (例如遷移整個程式碼集)，請使用批次翻譯。
 * **互動式翻譯**：在要求主體中以字串常值形式傳遞 SQL，並從工作流程回應中讀取翻譯後的 SQL。您不必將 SQL 或翻譯輸出內容儲存在 Cloud Storage。使用互動式翻譯，視需要翻譯個別查詢，例如翻譯應用程式或開發人員工具的查詢。
@@ -39,13 +39,13 @@ BigQuery Migration API 支援兩種翻譯模式。這兩種模式都使用相同
 
 如要取得使用互動式翻譯工具、Translation API 或批次 SQL 翻譯工具建立翻譯工作所需的權限，請要求管理員授予您 `parent` 資源的下列 IAM 角色：
 
-* 查看及監控遷移工作：[MigrationWorkflow 檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquerymigration?hl=zh-tw#bigquerymigration.viewer)  (`roles/bigquerymigration.viewer`)
-* 提交遷移工作：[MigrationWorkflow 編輯者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquerymigration?hl=zh-tw#bigquerymigration.editor)  (`roles/bigquerymigration.editor`)
+* 查看及監控遷移工作：[MigrationWorkflow 檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquerymigration?hl=zh-tw#bigquerymigration.viewer) (`roles/bigquerymigration.viewer`)
+* 提交遷移工作：[MigrationWorkflow 編輯者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquerymigration?hl=zh-tw#bigquerymigration.editor) (`roles/bigquerymigration.editor`)
 * 存取 Cloud Storage bucket 以取得輸入內容和檔案：Storage 物件管理員 (`roles/storage.objectAdmin`) - 位於來源和目的地 Cloud Storage bucket。
 
 如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
-這些預先定義的角色具備所需權限，可透過互動式翻譯工具、翻譯 API 或批次 SQL 翻譯工具建立翻譯工作。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
+這些預先定義的角色具備所需權限，可透過互動式翻譯器、翻譯 API 或批次 SQL 翻譯器建立翻譯工作。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
 #### 所需權限
 
@@ -63,7 +63,7 @@ BigQuery Migration API 支援兩種翻譯模式。這兩種模式都使用相同
 
 您或許還可透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)取得這些權限。
 
-如要限制組織中的特定翻譯工作流程設定，例如不允許 Gemini AI 建議或限制翻譯輸出類型，請[設定 BigQuery Migration Service 的自訂組織政策](https://docs.cloud.google.com/bigquery/docs/migration-custom-org-policies?hl=zh-tw#example_constraints)。
+如要限制組織中的特定翻譯工作流程設定，例如不允許 Gemini AI 建議或限制翻譯輸出類型，請設定 [BigQuery Migration Service 的自訂組織政策](https://docs.cloud.google.com/bigquery/docs/migration-custom-org-policies?hl=zh-tw#example_constraints)。
 
 ### 將輸入檔案上傳至 Cloud Storage
 
@@ -117,7 +117,7 @@ curl -d "{
   + `suggestion`：AI 生成的建議。
 
   輸出內容會儲存在輸出目錄的子資料夾中。子資料夾的名稱會根據 `TARGET_TYPES` 中的值命名。
-* `TOKEN`：驗證權杖。如要產生權杖，請使用 `gcloud auth print-access-token` 指令或 [OAuth 2.0 Playground](https://developers.google.com/oauthplayground/?hl=zh-tw) (使用範圍 `https://www.googleapis.com/auth/cloud-platform`)。
+* `TOKEN`：驗證權杖。如要產生權杖，請使用 `gcloud auth print-access-token` 指令或 [OAuth 2.0 Playground](https://developers.google.com/oauthplayground/?hl=zh-tw) (使用 `https://www.googleapis.com/auth/cloud-platform` 範圍)。
 * `PROJECT_ID`：處理翻譯的專案。
 * `LOCATION`：處理工作的[位置](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations?hl=zh-tw#locations)。
 
@@ -168,7 +168,7 @@ curl -d "{
 這項產品或功能適用《[服務專屬條款](https://docs.cloud.google.com/terms/service-terms?hl=zh-tw#1)》中「一般服務條款」一節的《正式發布前產品條款》。正式發布前的產品和功能是按照「原樣」提供，支援範圍可能有限。
 詳情請參閱[推出階段說明](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
 
-**注意：** 翻譯 API 可透過 BigQuery Agent Platform 整合功能呼叫 Gemini，根據 AI 設定 YAML 檔案，為翻譯後的 SQL 查詢生成建議。
+**注意：**翻譯 API 可透過 BigQuery Agent Platform 整合功能呼叫 Gemini，根據 AI 設定 YAML 檔案，為翻譯後的 SQL 查詢生成建議。
 
 以下範例會翻譯位於 `gs://my_data_bucket/teradata/input/` Cloud Storage 目錄中的 Teradata SQL 指令碼，並將結果儲存在 Cloud Storage 目錄 `gs://my_data_bucket/teradata/output/` 中，並提供額外的 AI 建議：
 
@@ -195,7 +195,7 @@ curl -d "{
 
 工作順利執行後，您可以在 `gs://my_data_bucket/teradata/output/suggestion` Cloud Storage 目錄中找到 AI 建議。
 
-### 建立互動式翻譯
+### 建立互動式轉譯
 
 下列 `curl` 指令會建立互動式翻譯工作，並以字串常值輸入和輸出。`source_target_mapping` 欄位包含一份清單，可將來源 `literal` 項目對應至目標輸出的選用相對路徑。
 
@@ -228,7 +228,7 @@ curl -d "{
 * `PATH`：常值項目的 ID，類似於檔案名稱或路徑。
 * `STRING`：要翻譯的常值輸入資料字串 (例如 SQL)。
 * `TARGETS`：使用者希望直接在回覆中傳回的預期目標，格式為 `literal`。這些項目應採用目標 URI 格式 (例如 GENERATED\_DIR + `target_spec.relative_path` + `source_spec.literal.relative_path`)。不在這份清單中的項目不會在回應中傳回。一般 SQL 翻譯產生的目錄 GENERATED\_DIR 為 `sql/`。
-* `TOKEN`：驗證權杖。如要產生權杖，請使用 `gcloud auth print-access-token` 指令或 [OAuth 2.0 Playground](https://developers.google.com/oauthplayground/?hl=zh-tw) (使用範圍 `https://www.googleapis.com/auth/cloud-platform`)。
+* `TOKEN`：驗證權杖。如要產生權杖，請使用 `gcloud auth print-access-token` 指令或 [OAuth 2.0 Playground](https://developers.google.com/oauthplayground/?hl=zh-tw) (使用 `https://www.googleapis.com/auth/cloud-platform` 範圍)。
 * `PROJECT_ID`：處理翻譯的專案。
 * `LOCATION`：處理工作的[位置](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations?hl=zh-tw#locations)。
 
@@ -320,14 +320,14 @@ curl \
 
 更改下列內容：
 
-* `TOKEN`：驗證權杖。如要產生權杖，請使用 `gcloud auth print-access-token` 指令或 [OAuth 2.0 Playground](https://developers.google.com/oauthplayground/?hl=zh-tw) (使用範圍 `https://www.googleapis.com/auth/cloud-platform`)。
+* `TOKEN`：驗證權杖。如要產生權杖，請使用 `gcloud auth print-access-token` 指令或 [OAuth 2.0 Playground](https://developers.google.com/oauthplayground/?hl=zh-tw) (使用 `https://www.googleapis.com/auth/cloud-platform` 範圍)。
 * `PROJECT_ID`：執行翻譯工作的專案。
 * `LOCATION`：處理工作的[位置](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations?hl=zh-tw#locations)。
 * `WORKFLOW_ID`：建立翻譯工作流程時傳回的工作流程 ID。
 
 ### 工作流程狀態
 
-回應包含 `state` 欄位，指出工作流程的目前狀態：
+回應包含 `state` 欄位，指出工作流程目前的狀態：
 
 * `STATE_UNSPECIFIED`：未指定工作流程狀態。
 * `RUNNING`：工作流程正在執行中。定期輪詢端點，直到狀態變更為止。
@@ -339,7 +339,7 @@ curl \
 
 ## 擷取結果
 
-擷取結果的方式取決於您提交的是[批次翻譯或互動式翻譯](#translation-modes)：
+擷取結果的方式取決於您提交的是[批次翻譯還是互動式翻譯](#translation-modes)：
 
 * **批次翻譯**：翻譯檔案、摘要報告和任何 AI 建議，都會寫入您在 `target_base_uri` 指定的 Cloud Storage 目的地目錄。您可以使用 gcloud CLI 儲存空間指令、Cloud Storage 用戶端程式庫或 REST API，直接從 Cloud Storage 讀取這些檔案：
 
@@ -368,7 +368,7 @@ curl \
   }
   ```
 
-  擷取 `translatedLiterals` 中每個項目的 `literalString` 欄位，即可取得翻譯後的查詢。
+  擷取 `translatedLiterals` 中每個項目的 `literalString` 欄位，取得翻譯後的查詢。
 
 
 
@@ -377,11 +377,11 @@ curl \
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-08 (世界標準時間)。
+上次更新時間：2026-11-11 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-08 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-11 (世界標準時間)。"],[],[]]

@@ -28,10 +28,10 @@ BigQuery Reservation API 可讓您購買專用運算單元 (稱為「[承諾使�
 
 ### 指派邏輯和條件
 
-專案會使用資源階層中最具體的單一預留項目。BigQuery 會使用下列評估邏輯來選取正確的預留項目：
+專案會使用資源階層中最明確的單一預留項目。BigQuery 會使用下列評估邏輯來選取正確的預留項目：
 
 1. **資源階層優先順序：**BigQuery 會根據被指派者資源上層結構 (專案 > 資料夾 > 組織) 評估指派項目。資料夾和組織指派作業不適用於[標準版](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)預留項目。
-2. **使用 `principal` 屬性指派使用者專屬作業 ([預先發布版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))：**BigQuery 預留項目指派作業支援選用的 `principal` 屬性，管理員可根據執行工作的服務帳戶或使用者身分，將查詢轉送至特定預留項目。在特定被指派者資源中，主體相符的指派作業優先順序高於未設定主體的一般指派作業。
+2. **使用 `principal` 屬性指派使用者專屬項目：**BigQuery 預留項目指派支援選用的 `principal` 屬性，管理員可根據執行工作的身分或服務帳戶，將查詢轉送至特定預留項目。在特定被指派者資源中，主體相符的指派作業優先順序高於未設定主體的一般指派作業。
 
    每個專案的使用者專屬指派項目數量預設上限為 100 個。如需變更預設限制的協助，請與 [bigquery-wlm-feedback@google.com](mailto:bigquery-wlm-feedback@google.com) 聯絡。
 
@@ -71,7 +71,7 @@ BigQuery Reservation API 可讓您購買專用運算單元 (稱為「[承諾使�
 2. 在導覽選單中，按一下「Workload management」(工作負載管理)。
 3. 按一下「Reservations」(預留項目) 分頁標籤。
 4. 在預留項目表格中找出預留項目。
-5. 展開 more\_vert「Actions」(動作) 選項。
+5. 展開more\_vert「Actions」(動作) 選項。
 6. 按一下「建立作業」。
 7. 在「Create an assignment」(建立指派作業) 部分，按一下「Browse」(瀏覽)。
 8. 瀏覽或搜尋機構，並選取所需項目。
@@ -164,13 +164,6 @@ bq mk \
 建立預留項目指派作業後，請至少等待 5 分鐘再執行查詢。否則，系統可能會依據隨選定價模式收取查詢費用。
 
 ### 設定專案上限和排程政策覆寫
-
-**預覽**
-
-這項功能適用《[服務專屬條款](https://docs.cloud.google.com/terms/service-terms?hl=zh-tw#1)》中「一般服務條款」一節的《正式發布前產品條款》。正式發布前功能是依「原樣」提供，支援服務可能受限。
-詳情請參閱[推出階段說明](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
-
-如要尋求支援或針對這項功能提供意見回饋，請傳送電子郵件至 [bigquery-wlm-feedback@google.com](mailto:bigquery-wlm-feedback@google.com)。
 
 您可以建立專案上限 (一種指派規則)，為預留項目的預設[排程政策](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#scheduling-policies)設定專案專屬覆寫值。舉例來說，您可以限制專案的運算單元用量和並行查詢數量。
 
@@ -285,7 +278,7 @@ SET OPTIONS (
 2. 在導覽選單中，按一下「Workload management」(工作負載管理)。
 3. 按一下「Reservations」(預留項目) 分頁標籤。
 4. 在預留項目表格中找出預留項目。
-5. 展開 more\_vert「Actions」(動作) 選項。
+5. 展開more\_vert「Actions」(動作) 選項。
 6. 按一下「建立作業」。
 7. 在「Create an assignment」(建立指派作業) 部分，按一下「Browse」(瀏覽)。
 8. 瀏覽或搜尋專案或資料夾，然後選取所需項目。
@@ -377,7 +370,7 @@ bq mk \
 
 使用 [`google_bigquery_reservation_assignment`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_reservation_assignment) 資源。
 
-**注意：** 如要使用 Terraform 建立 BigQuery 物件，必須啟用 [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest?hl=zh-tw)。
+**注意：**如要使用 Terraform 建立 BigQuery 物件，必須啟用 [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -429,7 +422,7 @@ resource "google_bigquery_reservation_assignment" "default" {
    ```
    mkdir DIRECTORY && cd DIRECTORY && touch main.tf
    ```
-2. 如果您正在進行教學課程，可以複製每個章節或步驟中的程式碼範例。
+2. 如果您正在按照教學課程操作，可以複製每個章節或步驟中的程式碼範例。
 
    將程式碼範例複製到新建立的 `main.tf`。
 
@@ -475,11 +468,6 @@ resource "google_bigquery_reservation_assignment" "default" {
 **注意：**在單一區域中，一項專案最多只能指派給一個預留項目。
 
 ### 使用者專屬作業
-
-**預覽**
-
-這項功能適用《[服務專屬條款](https://docs.cloud.google.com/terms/service-terms?hl=zh-tw#1)》中「一般服務條款」一節的《正式發布前產品條款》。正式發布前功能是依「原樣」提供，支援服務可能受限。
-詳情請參閱[推出階段說明](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
 
 您可以將預留項目指派給特定主體，例如專案、資料夾或組織中的使用者或服務帳戶。這項功能很實用，可將特定使用者的工作負載轉送至專屬預留項目。
 
@@ -615,7 +603,7 @@ bq mk \
 
 使用 [`google_bigquery_reservation_assignment`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_reservation_assignment) 資源。
 
-**注意：** 如要使用 Terraform 建立 BigQuery 物件，必須啟用 [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest?hl=zh-tw)。
+**注意：**如要使用 Terraform 建立 BigQuery 物件，必須啟用 [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -659,7 +647,7 @@ resource "google_bigquery_reservation_assignment" "default" {
    ```
    mkdir DIRECTORY && cd DIRECTORY && touch main.tf
    ```
-2. 如果您正在進行教學課程，可以複製每個章節或步驟中的程式碼範例。
+2. 如果您正在按照教學課程操作，可以複製每個章節或步驟中的程式碼範例。
 
    將程式碼範例複製到新建立的 `main.tf`。
 
@@ -979,7 +967,7 @@ bq update \
 2. 在導覽選單中，按一下「Workload management」(工作負載管理)。
 3. 按一下「Reservations」(預留項目) 分頁標籤。
 4. 在預留項目表格中，展開預留項目即可找到專案。
-5. 展開 more\_vert「Actions」(動作) 選項。
+5. 展開more\_vert「Actions」(動作) 選項。
 6. 點選「刪除」。
 
 ### SQL
@@ -1035,11 +1023,11 @@ bq rm \
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-08 (世界標準時間)。
+上次更新時間：2026-11-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-08 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-12 (世界標準時間)。"],[],[]]

@@ -490,6 +490,4 @@ possible to the model.
   B as the next token by using the `TEMPERATURE` value and doesn't
   consider C.
 * `TEMPERATURE`:
-  a `FLOAT64` value in the range `[0.0,1.0]`
-  that controls the degree of randomness in token selection.
-  Lower
+  a

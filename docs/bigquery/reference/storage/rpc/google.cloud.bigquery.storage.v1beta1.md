@@ -147,5 +147,3 @@ Request information for invoking `FinalizeStream`.
 | `stream` | `Stream`  Required. Stream to finalize. |
 
 ## Progress
-
-<

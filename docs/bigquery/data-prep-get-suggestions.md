@@ -16,7 +16,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 運用 Gemini 準備資料
 
-Gemini in BigQuery 可生成內容感知 SQL 程式碼建議，讓您在 BigQuery 資料準備中清理及轉換資料。使用這些建議，您就能建立資料準備步驟，並將資料表資料標準化，以便進行分析，而不必手動編寫複雜的 SQL 運算式。
+Gemini in BigQuery 可生成內容感知 SQL 程式碼建議，讓您在 BigQuery 資料準備作業中清理及轉換資料。使用這些建議，您就能建立資料準備步驟，並將資料表資料標準化以進行分析，不必手動編寫複雜的 SQL 運算式。
 
 詳情請參閱「[BigQuery 資料準備總覽](https://docs.cloud.google.com/bigquery/docs/data-prep-introduction?hl=zh-tw)」。
 
@@ -37,41 +37,41 @@ Gemini in BigQuery 可生成內容感知 SQL 程式碼建議，讓您在 BigQuer
 
 1. 前往 Google Cloud 控制台的「BigQuery」**BigQuery**頁面。  
    [前往 BigQuery](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 前往「新建」清單，然後點選「資料準備」。
+2. 前往「Create new」(新建) 清單，然後點選「Data preparation」(資料準備)。
    資料準備編輯器會顯示在新的未命名資料準備分頁中。
 3. 在編輯器的搜尋列中，輸入資料表名稱或關鍵字，然後選取資料表。資料表的資料準備編輯器隨即開啟，在「Data」(資料) 分頁中顯示資料預覽畫面，以及 Gemini 提供的初始資料準備建議。
 4. 選用：如要簡化檢視畫面，請按一下「全螢幕」，開啟全螢幕模式。
 5. 選用：如要查看資料準備詳細資料、版本記錄、新增註解或回覆現有註解，請使用工具列。
 
-   工具列的「Comments」(註解) 功能目前為[預先發布版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages)。如要針對這項功能提供意見或尋求支援，請傳送電子郵件至 [bqui-workspace-pod@google.com](mailto:bqui-workspace-pod@google.com)。
+   「Comments」工具列功能目前為[預先發布版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages)。如要針對這項功能提供意見回饋或尋求支援，請傳送電子郵件至 [bqui-workspace-pod@google.com](mailto:bqui-workspace-pod@google.com)。
 
-### 從資料表建立
+### 從表格建立
 
 如要從現有資料表建立新的資料準備作業，請按照下列步驟操作：
 
 1. 前往 Google Cloud 控制台的「BigQuery」**BigQuery**頁面。  
    [前往 BigQuery](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
-3. 在「Explorer」窗格中展開專案，點選「資料集」，然後選取資料集。
-4. 在資料表名稱中，依序點選「more\_vert」more\_vert**「Actions」(動作)>「Open in」(開啟位置)>「Data preparation」(資料準備)**。資料表的資料準備編輯器隨即開啟，「Data」(資料) 分頁會顯示資料預覽畫面，以及 Gemini 提供的初始資料準備建議。
+3. 在「Explorer」窗格中展開專案，點選「Datasets」(資料集)，然後選取資料集。
+4. 在資料表名稱中，依序點選「more\_vert」more\_vert**「動作」>「開啟方式」>「資料準備」**。資料表的資料準備編輯器隨即開啟，「Data」(資料) 分頁會顯示資料預覽畫面，以及 Gemini 提供的初始資料準備建議。
 5. 選用：如要簡化檢視畫面，請按一下「全螢幕」，開啟全螢幕模式。
 6. 選用：如要查看資料準備詳細資料、版本記錄、新增註解或回覆現有註解，請使用工具列。
 
-   工具列的「Comments」(註解) 功能目前為[預先發布版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages)。如要針對這項功能提供意見或尋求支援，請傳送電子郵件至 [bqui-workspace-pod@google.com](mailto:bqui-workspace-pod@google.com)。
+   「Comments」工具列功能目前為[預先發布版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages)。如要針對這項功能提供意見回饋或尋求支援，請傳送電子郵件至 [bqui-workspace-pod@google.com](mailto:bqui-workspace-pod@google.com)。
 
 ### 根據檔案建立
 
-如要從 Cloud Storage 或 Google 雲端硬碟中的檔案建立新的資料準備作業，請按照下列步驟操作：
+如要從 Cloud Storage 或 Google 雲端硬碟中的檔案建立新的資料準備，請按照下列步驟操作：
 
 #### 載入檔案
 
 1. 前往 Google Cloud 控制台的「BigQuery」**BigQuery**頁面。  
    [前往 BigQuery](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在「Create new」(新建) 清單中，按一下「Data preparation」(資料準備)。資料準備編輯器會顯示在未命名的資料準備新分頁中。
+2. 在「Create new」(新建) 清單中，按一下「Data preparation」(資料準備)。資料準備編輯器會顯示在新的未命名資料準備分頁中。
 3. 在資料來源清單中，按一下「Google Cloud Storage」或「Google 雲端硬碟」。「準備資料」對話方塊隨即開啟。
-4. 在「來源」部分選取檔案：
+4. 在「來源」部分，選取檔案：
    * **Cloud Storage**：從 Cloud Storage bucket 選取檔案，或輸入來源路徑。例如，輸入 CSV 檔案的路徑：`STORAGE_BUCKET_NAME/FILE_NAME.csv`。支援萬用字元搜尋，例如 `*.csv`。
-   * **Google 雲端硬碟**：輸入 URI，從 Google 雲端硬碟選取檔案。如要載入該資料的子集，可以輸入特定工作表名稱和範圍。**注意：**如果使用 Google 雲端硬碟做為資料來源，則必須使用服務帳戶[執行或排定資料準備作業](https://docs.cloud.google.com/bigquery/docs/orchestrate-data-preparations?hl=zh-tw)。這項作業不支援使用者憑證。您也必須與服務帳戶共用 Google 雲端硬碟檔案。
+   * **Google 雲端硬碟**：輸入 URI，從 Google 雲端硬碟選取檔案。如要載入該資料的子集，您可以輸入特定工作表名稱和範圍。**注意：**如果使用 Google 雲端硬碟做為資料來源，則必須使用服務帳戶[執行或排定資料準備作業](https://docs.cloud.google.com/bigquery/docs/orchestrate-data-preparations?hl=zh-tw)。這項作業不支援 Google 帳戶使用者憑證。您也必須與服務帳戶共用 Google 雲端硬碟檔案。
 
    系統會自動偵測檔案格式。支援的格式包括 Avro、CSV、JSONL、ORC 和 Parquet。其他相容的檔案類型 (例如 DAT、TSV 和 TXT) 會以 CSV 格式讀取。Google 雲端硬碟選項也支援 Google 試算表格式。
 5. 定義要上傳檔案的外部暫存資料表。在「Staging table」(暫存資料表) 部分，輸入新資料表的專案、資料集和資料表名稱。
@@ -95,7 +95,7 @@ Gemini in BigQuery 可生成內容感知 SQL 程式碼建議，讓您在 BigQuer
 3. [新增目的地資料表](#add-or-change-destination)。
 4. 如要將資料載入目的地資料表，請[執行資料準備作業](#run-data-prep)。
 5. 選用：[排定資料準備作業執行時間](https://docs.cloud.google.com/bigquery/docs/orchestrate-data-preparations?hl=zh-tw)。
-6. 選用：[以漸進方式處理資料，最佳化資料準備作業](https://docs.cloud.google.com/bigquery/docs/manage-data-preparations?hl=zh-tw#optimize)。
+6. 選用：[以遞增方式處理資料，盡可能提高資料準備效率](https://docs.cloud.google.com/bigquery/docs/manage-data-preparations?hl=zh-tw#optimize)。
 
 ### 開啟現有檔案
 
@@ -105,12 +105,12 @@ Gemini in BigQuery 可生成內容感知 SQL 程式碼建議，讓您在 BigQuer
    [前往 BigQuery](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
 3. 在「Explorer」窗格中，依序點選專案名稱和「Data preparations」(資料準備)。
-4. 選取現有的資料準備工作。資料準備管道的圖表檢視畫面隨即顯示。
+4. 選取現有的資料準備。資料準備管道的圖表檢視畫面隨即顯示。
 5. 選取圖表中的其中一個節點。資料表的資料準備編輯器隨即開啟，在「Data」(資料) 分頁中顯示資料預覽畫面，以及 Gemini 提供的初始資料準備建議。
 6. 選用：如要簡化檢視畫面，請按一下「全螢幕」，開啟全螢幕模式。
 7. 選用：如要查看資料準備詳細資料、版本記錄、新增註解或回覆現有註解，請使用工具列。
 
-   工具列的「Comments」(註解) 功能目前為[預先發布版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages)。如要針對這項功能提供意見或尋求支援，請傳送電子郵件至 [bqui-workspace-pod@google.com](mailto:bqui-workspace-pod@google.com)。
+   「Comments」工具列功能目前為[預先發布版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages)。如要針對這項功能提供意見回饋或尋求支援，請傳送電子郵件至 [bqui-workspace-pod@google.com](mailto:bqui-workspace-pod@google.com)。
 
 ## 新增資料準備步驟
 
@@ -120,19 +120,19 @@ Gemini in BigQuery 可生成內容感知 SQL 程式碼建議，讓您在 BigQuer
 
 開啟資料表的資料準備編輯器時，Gemini 會檢查載入資料表的資料和結構定義，並生成篩選器和轉換建議。建議會顯示在「Steps」(步驟) 清單的資訊卡中。
 
-下圖顯示如何套用及改善 Gemini 建議的步驟：
+下圖顯示 Gemini 建議步驟的套用和改善位置：
 
 如要將 Gemini 的建議做為資料準備步驟，請按照下列步驟操作：
 
 1. 在資料檢視中，按一下資料欄名稱或特定儲存格。Gemini 會生成篩選及轉換資料的建議。
-2. 選用：如要改善建議，請編輯表格中一到三個儲存格的值，示範資料欄中的值應呈現的樣貌。例如，輸入您希望所有日期採用的格式。Gemini 會根據你的變更生成新建議。
+2. 選用：如要改善建議，請編輯表格中一到三個儲存格的值，示範資料欄中的值應呈現的樣貌。例如，輸入日期時，請採用您希望所有日期呈現的格式。Gemini 會根據您的變更生成新建議。
 
-   **注意：** 系統不會儲存您對資料所做的範例變更。
+   **注意：**系統不會儲存您對資料所做的範例變更。
 
    下圖顯示如何編輯值，改善 Gemini 建議的步驟：
 3. 選取建議卡片。
 
-   1. 選用：如要預覽建議資訊卡的效果，請按一下「Preview」(預覽)。
+   1. 選用：如要預覽建議資訊卡的結果，請按一下「Preview」(預覽)。
    2. 選用：如要使用自然語言修改建議資訊卡，請按一下「Edit」(編輯)。
 4. 按一下「套用」。
 
@@ -142,16 +142,16 @@ Gemini in BigQuery 可生成內容感知 SQL 程式碼建議，讓您在 BigQuer
 
 ### 新增轉換
 
-1. 在資料或結構定義檢視畫面中，選擇「轉換」選項。您也可以選擇資料欄或新增範例，協助 Gemini 瞭解資料轉換。
+1. 在資料或結構定義檢視畫面中，選擇「轉換」選項。您也可以選擇資料欄或新增範例，協助 Gemini 瞭解資料轉換作業。
 2. 在「Description」(說明) 欄位輸入提示詞，例如 `Convert the state
    column to uppercase`。
 3. 按一下「傳送」圖示 。
 
    Gemini 會根據提示詞生成 SQL 運算式和新說明。
 
-   **注意：** SQL 運算式在生成轉換時，會使用新的自然語言運算式體驗。
+   **注意：**SQL 運算式在生成轉換時，會使用新的自然語言運算式體驗。
 4. 在「Target column」(目標欄) 清單中，選取或輸入資料欄名稱。
-5. 選用：如要更新 SQL 運算式，請修改提示，然後按一下「傳送」圖示 send，或手動輸入 SQL 運算式。
+5. 選用：如要更新 SQL 運算式，請修改提示，然後按一下「send」「Send」(傳送)，或手動輸入 SQL 運算式。
 6. (選用) 按一下「預覽」，查看步驟。
 7. 按一下「套用」。
 
@@ -162,7 +162,7 @@ Gemini in BigQuery 可生成內容感知 SQL 程式碼建議，讓您在 BigQuer
 Gemini for BigQuery 建議的操作，只會從 JSON 的頂層擷取欄位。如果這些擷取的欄位包含更多 JSON 物件，您可以透過其他步驟將其扁平化，以便存取其內容。
 
 1. 在 JSON 來源資料表的資料檢視中，選擇資料欄或儲存格。
-2. 按一下「壓平」即可生成建議。
+2. 按一下「Flatten」即可生成建議。
 3. 選用：如要更新 SQL 運算式，可以手動輸入 SQL 運算式。
 4. (選用) 按一下「預覽」，查看步驟。
 5. 按一下「套用」。
@@ -170,35 +170,35 @@ Gemini for BigQuery 建議的操作，只會從 JSON 的頂層擷取欄位。如
 扁平化作業的行為如下：
 
 * 選取含有 JSON 的儲存格或資料欄後，資料檢視中會顯示「Flatten」(展開) 選項。點選「Add step」(新增步驟) 時，預設不會顯示。
-* 如果所選資料列中沒有 JSON 鍵，生成的建議就不會包含該鍵。這項問題可能會導致系統在簡化資料時，遺漏部分資料欄。
+* 如果所選資料列中沒有 JSON 鍵，生成的建議就不會包含該鍵。這項問題可能會導致資料扁平化時遺漏部分資料欄。
 * 如果資料欄名稱在扁平化期間發生衝突，重複的資料欄名稱會以 `_<i>` 格式結尾。舉例來說，如果已有 `address` 欄，新的扁平化欄名稱會是 `address_1`。
 * 扁平化資料欄名稱遵循 BigQuery [資料欄命名慣例](https://docs.cloud.google.com/bigquery/docs/schemas?hl=zh-tw#column_names)。
 * 如果將 JSON 鍵欄位留空，預設資料欄名稱格式為 `f<i>_`。
 
 ### 扁平化 `RECORD` 或 `STRUCT` 欄
 
-如要更輕鬆地存取及分析巢狀欄位，請將資料類型為 `RECORD` 或 `STRUCT` 的資料欄扁平化。舉例來說，如果 `event_log` 記錄包含 `timestamp` 和 `action` 欄位，扁平化這項記錄會將 `timestamp` 和 `action` 擷取至各自的頂層資料欄，以便直接轉換。
+如要更輕鬆地存取及分析巢狀欄位，請將資料類型為 `RECORD` 或 `STRUCT` 的資料欄扁平化。舉例來說，如果您有一個 `event_log` 記錄，其中包含 `timestamp` 和 `action` 欄位，則扁平化這項記錄會將 `timestamp` 和 `action` 擷取至各自的頂層資料欄，以便您直接轉換。
 
-這項程序會從記錄中擷取所有巢狀資料欄 (最多 10 層)，並為每個資料欄建立新資料欄。新資料欄名稱是由父項資料欄名稱和巢狀欄位名稱組合而成，並以底線分隔 (例如 `PARENT-COLUMN-NAME_FIELD-NAME`)。原始資料欄會遭到捨棄。如要保留原始資料欄，可以從「Applied steps」(已套用步驟) 清單中[刪除](#delete-applied-step)「Drop column」(捨棄資料欄) 步驟。
+這項程序會從記錄中擷取所有巢狀資料欄 (最多 10 層)，並為每個資料欄建立新資料欄。新資料欄名稱是由父項資料欄名稱與巢狀欄位名稱組合而成，並以底線分隔 (例如 `PARENT-COLUMN-NAME_FIELD-NAME`)。原始資料欄會遭到捨棄。如要保留原始資料欄，可以從「Applied steps」(已套用步驟) 清單中[刪除](#delete-applied-step)「Drop column」(捨棄資料欄) 步驟。
 
 如要簡化記錄，請按照下列步驟操作：
 
 1. 在來源資料表的資料檢視中，選擇記錄欄。
-2. 按一下「壓平」即可生成建議。
+2. 按一下「Flatten」即可生成建議。
 3. 選用：如要更新 SQL 運算式，可以手動輸入 SQL 運算式。
 4. (選用) 按一下「預覽」，查看步驟。
 5. 按一下「套用」。
 
-**注意：** 簡化記錄不會展開記錄中的巢狀 JSON 物件或重複欄位 (陣列)。如要存取這些欄位的內容，您必須在不同的步驟中將這些欄位扁平化。
+**注意：**將記錄扁平化不會展開記錄中的巢狀 JSON 物件或重複欄位 (陣列)。如要存取其內容，您必須在不同步驟中將這些欄位扁平化。
 
 ### 解除巢狀陣列
 
-取消巢狀結構會將陣列中的每個元素展開為獨立資料列，並將其他原始資料欄值複製到每個新資料列。這項操作適合用於分析包含陣列的資料欄，且陣列中的元素數量不固定，例如 API 回應清單。
+取消巢狀結構會將陣列中的每個元素展開為獨立資料列，並將其他原始資料欄值複製到每個新資料列。這項操作適用於分析含有陣列的資料欄，且陣列中的元素數量不固定，例如 API 回應清單。
 
 您可以取消巢狀結構的資料欄類型如下：
 
 * **`ARRAY` 資料類型：**取消巢狀結構，改為陣列基本類型的元素。例如，`ARRAY<STRUCT<...>>` 取消巢狀結構會產生 `STRUCT` 類型的元素。
-* **`JSON` 欄：**將欄中的 JSON 陣列取消巢狀結構，轉換為 `JSON` 類型的元素。
+* **`JSON` 欄：**將資料欄中的 JSON 陣列取消巢狀結構，轉換為 `JSON` 類型的元素。
 
 取消巢狀結構時，系統會建立新資料欄，其中包含取消巢狀結構的元素。根據預設，系統會捨棄原始陣列資料欄。如要保留原始資料欄，請從「Applied steps」(已套用步驟) 清單中[刪除](#delete-applied-step)「Drop column」(捨棄資料欄) 步驟。
 
@@ -210,7 +210,7 @@ Gemini for BigQuery 建議的操作，只會從 JSON 的頂層擷取欄位。如
 4. (選用) 按一下「預覽」，查看步驟。
 5. 按一下「套用」。
 
-**注意：** 取消巢狀結構時，如果原始資料表中的資料欄與取消巢狀結構的陣列中的資料欄同名，可能會發生錯誤。如要解決這個問題，請先重新命名原始資料表中發生衝突的資料欄，再執行取消巢狀結構作業。
+**注意：**取消巢狀結構陣列欄時，如果原始資料表中的資料欄與取消巢狀結構陣列中的資料欄名稱相同，可能會發生錯誤。如要解決這個問題，請先重新命名原始資料表中發生衝突的資料欄，再執行取消巢狀結構作業。
 
 ### 篩選表格列
 
@@ -219,11 +219,10 @@ Gemini for BigQuery 建議的操作，只會從 JSON 的頂層擷取欄位。如
 1. 在資料或結構定義檢視畫面中，選擇「Filter」(篩選器) 選項。您也可以選擇資料欄，協助 Gemini 瞭解資料篩選條件。
 2. 在「Description」(說明) 欄位輸入提示詞，例如 `Column ID should not
    be NULL`。
-3. 按一下「生成」。
-   Gemini 會根據提示詞生成 SQL 運算式和新說明。
+3. 按一下「生成」。Gemini 會根據提示詞生成 SQL 運算式和新說明。
 
-   **注意：** SQL 運算式在生成轉換時，會使用新的自然語言運算式體驗。
-4. 選用：如要更新 SQL 運算式，請修改提示，然後按一下「傳送」圖示 ，或手動輸入 SQL 運算式。
+   **注意：**SQL 運算式在生成轉換時，會使用新的自然語言運算式體驗。
+4. 選用：如要更新 SQL 運算式，請修改提示，然後按一下「傳送」send，或手動輸入 SQL 運算式。
 5. (選用) 按一下「預覽」，查看步驟。
 6. 按一下「套用」。
 
@@ -240,15 +239,15 @@ Gemini for BigQuery 建議的操作，只會從 JSON 的頂層擷取欄位。如
 如要從資料中移除重複的資料列，請按照下列步驟操作：
 
 1. 在資料或結構定義檢視畫面中，選擇「簡化」選項。Gemini 會提供初步的簡化建議。
-2. 選用：如要調整建議，請輸入新的說明，然後按一下「傳送」。
+2. 選用：如要調整建議，請輸入新的說明，然後按一下「傳送」圖示 。
 3. 選用：如要手動設定簡化步驟，請使用下列選項：
    * 在「Record choosing」(記錄選擇) 清單中，選取下列其中一項策略：
      + **First**：對於具有相同簡化鍵值的每組資料列，這項策略會根據 `ORDER BY` 運算式選擇第一個資料列，並移除其餘資料列。
      + **Last**：對於具有相同簡化鍵值的每組資料列，這項策略會根據 `ORDER BY` 運算式選擇最後一個資料列，並移除其餘資料列。
-     + **任意**：針對具有相同簡化鍵值的每組資料列，這項策略會從該組中選擇任意資料列，並移除其餘資料列。
+     + **Any**：針對簡化鍵值相同的每組資料列，這項策略會從該組中選擇任一列，並移除其餘資料列。
      + **Distinct**：移除資料表中所有資料欄的所有重複資料列。
-   * 在「Deduplication keys」(簡化鍵) 欄位中，選擇一或多個資料欄或運算式，以識別重複的資料列。如果記錄選擇策略是「First」(第一個)、「Last」(最後一個)或「Any」(任何)，則適用這個欄位。
-   * 在「Order by expression」(排序依據運算式) 欄位中，輸入定義資料列順序的運算式。例如，如要選擇最近的資料列，請輸入 `datetime DESC`。如要依名稱字母順序選擇第一列，請輸入 `last_name` 等資料欄名稱。運算式遵循與 BigQuery 中標準 [`ORDER BY` 子句](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw#order_by_clause)相同的規則。只有在記錄選擇策略為「First」(第一個) 或「Last」(最後一個) 時，這個欄位才適用。
+   * 在「Deduplication keys」(簡化鍵) 欄位中，選擇一或多個資料欄或運算式，以識別重複的資料列。如果記錄選擇策略是「First」(第一個)、「Last」(最後一個) 或「Any」(任何)，則適用這個欄位。
+   * 在「Order by expression」(排序依據運算式) 欄位中，輸入定義資料列順序的運算式。例如，如要選擇最近的資料列，請輸入 `datetime DESC`。如要依名稱字母順序選擇第一列，請輸入資料欄名稱，例如 `last_name`。運算式遵循與 BigQuery 中標準 [`ORDER BY` 子句](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw#order_by_clause)相同的規則。只有在記錄選擇策略為「First」(第一個) 或「Last」(最後一個) 時，這個欄位才適用。
 4. (選用) 按一下「預覽」，查看步驟。
 5. 按一下「套用」。
 
@@ -261,22 +260,22 @@ Gemini for BigQuery 建議的操作，只會從 JSON 的頂層擷取欄位。如
 
 ### 使用 Gemini 新增彙整作業
 
-如要在資料準備作業中，於兩個來源之間新增彙整作業步驟，請按照下列步驟操作：
+如要在資料準備作業中，為兩個來源新增彙整作業步驟，請按照下列步驟操作：
 
 1. 在資料準備作業中，前往節點的資料檢視畫面，然後在「Suggestions」(建議) 清單中點選「Join」(彙整) 選項。
-2. 在「Add join」(新增彙整) 對話方塊中，按一下「Browse」(瀏覽)，然後選取彙整作業涉及的其他資料表 (稱為彙整的右側)。
+2. 在「Add join」(新增彙整) 對話方塊中，按一下「Browse」(瀏覽)，然後選取要彙整的其他資料表 (稱為彙整的右側)。
 3. 選用：選取要執行的[彙整作業](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw#join_types)類型，例如「Inner join」(內部彙整)。
-4. 在下列欄位中，查看 Gemini 生成的彙整鍵資訊：
+4. 在下列欄位中，查看 Gemini 生成的彙整索引鍵資訊：
 
-   * **Join description**：以自然語言描述彙整作業的 SQL 運算式。編輯這段說明並按一下「傳送」圖示後，Gemini 會建議新的 SQL join 條件。
-   * **join 條件**：join 作業 `ON` 子句中的 SQL 運算式。您可以使用 `L` 和 `R` 限定詞，分別參照左側和右側來源資料表。舉例來說，如要將左側資料表的 `customer_id` 欄與右側資料表的 `customer_id` 欄彙整，請輸入 `L.customerId = R.customerId`。這些限定詞不區分大小寫。
+   * **Join description**：以自然語言描述彙整作業的 SQL 運算式。編輯這段說明並點選「傳送」圖示後，Gemini 會建議新的 SQL join 條件。
+   * **彙整條件**：彙整作業的 `ON` 子句中的 SQL 運算式。您可以使用 `L` 和 `R` 限定詞，分別參照左側和右側來源資料表。舉例來說，如要將左側資料表的 `customer_id` 欄與右側資料表的 `customer_id` 欄彙整，請輸入 `L.customerId = R.customerId`。這些限定詞不區分大小寫。
 
-     **注意：** 如果「Join conditions」(彙整條件) 欄位留空，彙整作業類型會自動設為「Cross join」(交叉彙整)，即使您在上一個步驟中選取其他彙整類型也一樣。
-5. 選用：如要調整 Gemini 的建議，請編輯「Join description」(彙整說明) 欄位，然後按一下「傳送」。
+     **注意：**如果「Join conditions」(彙整條件) 欄位留空，即使您在上一個步驟中選取其他彙整類型，彙整作業類型也會自動設為「Cross join」(交叉彙整)。
+5. 選用：如要調整 Gemini 的建議，請編輯「Join description」(彙整說明) 欄位，然後按一下「傳送」圖示 。
 6. 選用：如要預覽資料準備的彙整作業設定，請按一下「Preview」(預覽)。
 7. 按一下「套用」。
 
-   系統會建立彙整作業步驟。您選取的來源資料表 (彙整作業右側) 和彙整作業，會反映在已套用步驟清單，以及資料準備作業圖表檢視畫面的節點中。
+   系統會建立彙整作業步驟。您選取的來源資料表 (join 的右側) 和 join 作業，會反映在已套用步驟清單，以及資料準備圖表檢視畫面的節點中。
 
 ### 匯總資料
 
@@ -289,7 +288,7 @@ Gemini for BigQuery 建議的操作，只會從 JSON 的頂層擷取欄位。如
 4. 選用：視需要編輯產生的分組鍵或匯總運算式。
 5. 選用：您可以手動新增分組鍵和匯總運算式。
 
-   * 在「Grouping keys」(分組鍵) 欄位中，輸入資料欄名稱或運算式。如果留空，產生的資料表會有一列。如果輸入運算式，則必須有別名 (`AS` 子句)，例如 `EXTRACT(YEAR FROM order_date) AS order_year`。不得重複。
+   * 在「Grouping keys」(分組鍵) 欄位中，輸入資料欄名稱或運算式。如果留空，結果資料表會有一列。如果輸入運算式，則必須有別名 (`AS` 子句)，例如 `EXTRACT(YEAR FROM order_date) AS order_year`。不得重複。
    * 在「Aggregation expressions」(匯總運算式) 欄位中，輸入具有別名 (`AS` 子句) 的匯總運算式，例如 `SUM(quantity) AS total_quantity`。您可以輸入多個運算式，並以半形逗號分隔。不得重複。如需支援的匯總運算式清單，請參閱「[匯總函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions?hl=zh-tw)」。
 6. (選用) 按一下「預覽」，查看步驟。
 7. 按一下「套用」。
@@ -303,11 +302,11 @@ Gemini for BigQuery 建議的操作，只會從 JSON 的頂層擷取欄位。如
 如要設定錯誤資料表，請按照下列步驟操作：
 
 1. 在資料準備編輯器中，前往工具列，然後依序點選**「More」(更多)
-   >「Error table」(錯誤資料表)**。
+   >「Error table」(錯誤表格)**。
 2. 按一下「啟用錯誤表格」。
 3. 定義資料表位置。
 4. 選用：定義錯誤保留時長上限。
-5. 按一下 [儲存]。
+5. 按一下「儲存」。
 
 #### 新增驗證規則
 
@@ -315,9 +314,9 @@ Gemini for BigQuery 建議的操作，只會從 JSON 的頂層擷取欄位。如
 
 1. 在資料或結構定義檢視畫面中，按一下「篩選器」選項。您也可以選擇資料欄，協助 Gemini 瞭解資料篩選條件。
 2. 輸入步驟說明。
-3. 請以 `WHERE` 子句的形式輸入 SQL 運算式。
-4. 選用：如要將 SQL 運算式做為驗證規則，請勾選「Failed validation rows go to error table」(驗證失敗的資料列移至錯誤表格) 核取方塊。您也可以在資料準備工具列中，
-   依序按一下
+3. 以 `WHERE` 子句的形式輸入 SQL 運算式。
+4. 選用：如要將 SQL 運算式做為驗證規則，請勾選「Failed validation rows go to error table」(驗證失敗的資料列移至錯誤表格) 核取方塊。您也可以
+   在資料準備工具列中，依序按一下
    **「More」(更多) >「Error table」(錯誤表格)**，將篩選器變更為驗證。
 5. (選用) 按一下「預覽」，查看步驟。
 6. 按一下「套用」。
@@ -331,14 +330,14 @@ Gemini for BigQuery 建議的操作，只會從 JSON 的頂層擷取欄位。如
 3. 選取其中一個資料集，或載入新的資料集。
 4. 輸入目的地資料表。如果資料表不存在，資料準備作業會在首次執行時建立新資料表。詳情請參閱「[寫入模式](https://docs.cloud.google.com/bigquery/docs/data-prep-introduction?hl=zh-tw#write-mode)」。
 5. 選取資料集做為目的地資料集。
-6. 按一下 [儲存]。
+6. 按一下「儲存」。
 
-## 查看已套用步驟的資料取樣和結構定義
+## 查看套用步驟的資料樣本和結構定義
 
 如要查看資料準備作業中特定步驟的樣本和結構定義詳細資料，請按照下列步驟操作：
 
 1. 在資料準備編輯器中，前往「Steps」(步驟) 清單，然後按一下「Applied steps」(已套用的步驟)。
-2. 選取步驟。「Data」(資料) 和「Schema」(結構定義) 分頁隨即顯示，呈現這個特定步驟的資料樣本和結構定義。
+2. 選取步驟。「Data」(資料) 和「Schema」(結構定義) 分頁隨即顯示，並顯示這個特定步驟的資料樣本和結構定義。
 
 ## 編輯套用的步驟
 
@@ -348,10 +347,10 @@ Gemini for BigQuery 建議的操作，只會從 JSON 的頂層擷取欄位。如
 2. 選取步驟。
 3. 依序按一下步驟旁的
    more\_vert
-   **「選單」 >「編輯」**。
+   **「Menu」(選單) >「Edit」(編輯)**。
 4. 在「Edit Applied Step」(編輯套用的步驟) 對話方塊中，您可以執行下列操作：
    * 編輯步驟說明。
-   * 編輯說明並點選「傳送」，即可取得 Gemini 的建議。
+   * 如要取得 Gemini 的建議，請編輯說明，然後按一下「傳送」。
    * 編輯 SQL 運算式。
 5. 在「Target column」(目標資料欄) 欄位中，選取資料欄。
 6. (選用) 按一下「預覽」，查看步驟。
@@ -363,7 +362,7 @@ Gemini for BigQuery 建議的操作，只會從 JSON 的頂層擷取欄位。如
 
 1. 在資料準備編輯器中，前往「Steps」(步驟) 清單，然後按一下「Applied steps」(已套用的步驟)。
 2. 選取步驟。
-3. 依序點選「more\_vert」more\_vert**選單>「刪除」**。
+3. 依序點選「more\_vert」more\_vert**選單 > 刪除**。
 
 ## 執行資料準備作業
 
@@ -371,7 +370,7 @@ Gemini for BigQuery 建議的操作，只會從 JSON 的頂層擷取欄位。如
 
 ## 重新整理資料準備範例
 
-範例中的資料不會自動重新整理。如果資料準備作業的來源資料表中的資料已變更，但變更未反映在準備作業的資料樣本中，請依序點選**「More」(更多) >「Refresh sample」(重新整理樣本)**。
+範例中的資料不會自動重新整理。如果資料準備作業的來源資料表資料已變更，但變更未反映在準備作業的資料取樣中，請依序點選 **「More」(更多) >「Refresh sample」(重新整理樣本)**。
 
 ## 後續步驟
 
@@ -386,11 +385,11 @@ Gemini for BigQuery 建議的操作，只會從 JSON 的頂層擷取欄位。如
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-08 (世界標準時間)。
+上次更新時間：2026-11-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-08 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-12 (世界標準時間)。"],[],[]]

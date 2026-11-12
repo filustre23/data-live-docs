@@ -16,15 +16,15 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 跨區域資料集複製
 
-您可以使用 BigQuery 資料集複製功能，設定在兩個不同區域或多區域之間自動複製資料集。
+透過 BigQuery 資料集複製功能，您可以設定在兩個不同區域或多區域之間自動複製資料集。
 
 ## 總覽
 
 在 BigQuery 建立資料集時，您會選取資料儲存的區域或多區域。「區域」是指地理區域內的一組資料中心，「多區域」則是指包含兩個以上地理區域的大型地理區域。您的資料會儲存在其中一個區域，不會在多區域內複製。如要進一步瞭解單一區域和多區域，請參閱「[BigQuery 位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)」。
 
-BigQuery 一律會將資料副本儲存在資料集位置內的兩個不同Google Cloud 可用區。「可用區」是區域內 Google Cloud 資源的部署範圍。在所有區域中，可用區之間的複製作業都會使用同步雙重寫入。選取多區域位置不會提供跨區域複製或區域備援功能，因此在區域服務中斷時，資料集可用性不會提高。資料會儲存在地理位置內的單一區域。
+BigQuery 一律會將資料副本儲存在資料集位置內的兩個不同Google Cloud 可用區。「可用區」是區域內 Google Cloud 資源的部署範圍。在所有區域中，可用區之間的複製作業都會使用同步雙重寫入。選取多區域位置不會提供跨區域複製或區域備援，因此如果發生區域服務中斷，資料集可用性不會增加。資料會儲存在地理位置內的單一區域。
 
-如需額外的異地備援，可以複製任何資料集。BigQuery 會在您指定的另一個區域，建立資料集的次要副本。接著，這個副本會以非同步方式，在另一個區域的兩個可用區之間複製，總共會有四個可用區副本。
+如需額外的異地備援，您可以複製任何資料集。BigQuery 會在您指定的另一個區域，建立資料集的次要副本。接著，這個副本會以非同步方式，在另一個區域的兩個可用區之間複製，總共會有四個可用區副本。
 
 ### 資料集複製
 
@@ -39,19 +39,19 @@ BigQuery 一律會將資料副本儲存在資料集位置內的兩個不同Googl
 
 下圖顯示複製資料集時發生的複製作業：
 
-如果主要區域處於線上狀態，您可以手動切換至次要副本。詳情請參閱「[升級次要副本](#promote_the_secondary_replica)」。
+如果主要區域在線上，您可以手動切換至次要副本。詳情請參閱「[升級次要副本](#promote_the_secondary_replica)」。
 
 #### 複製和 DML
 
 BigQuery 會將資料儲存在不可變動的區塊中。資料操縱語言 (DML) 作業 (例如 `UPDATE`、`DELETE` 或 `MERGE` 陳述式) 會將受影響檔案中已修改和未修改的資料，重新寫入新的基礎儲存區塊。由於跨區域複製是在檔案層級進行，因此執行 DML 作業後，BigQuery 必須將整個新檔案複製到次要區域。
 
-舉例來說，如要更新 1 GB 儲存檔案中的 100 MB 資料，BigQuery 必須複製整個新重建的 1 GB 檔案，而不只是更新的 100 MB。如果頻繁對大型或未分區的資料表執行 DML 作業，可能會大幅增加資料移轉總量。
+舉例來說，如要更新 1 GB 儲存檔案中的 100 MB 資料，BigQuery 必須複製整個重新建構的 1 GB 檔案，而非僅複製更新的 100 MB。如果頻繁對大型或未分區的資料表執行 DML 作業，可能會大幅增加資料移轉總量。
 
 因此，如果頻繁對複製的資料執行 DML 作業，資料移轉費用可能會大幅增加。請改為將 DML 密集資料表移至不複製的獨立資料集。
 
 ### 定價
 
-複製資料集時，系統會針對下列項目收費：
+複製資料集的計費項目如下：
 
 * **儲存空間。**次要區域中的儲存空間位元組會以次要區域中的獨立副本計費。[長期儲存空間](https://cloud.google.com/bigquery/pricing?hl=zh-tw#storage)中的資料表和分區不會重設為次要副本中的使用中儲存空間。
 * **資料複製。**如要進一步瞭解資料複製的計費方式，請參閱「[資料複製定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#data_replication)」。
@@ -64,15 +64,15 @@ BigQuery 會將資料儲存在不可變動的區塊中。資料操縱語言 (DML
 
 您可以使用運算單元，從次要副本執行唯讀查詢。如果將次要副本升級為主要副本，也可以使用這些運算單元寫入副本。
 
-您可以購買與主要區域相同或不同的運算單元數量。如果購買的運算單元較少，可能會影響查詢效能。
+您可以購買與主要區域相同或不同數量的運算單元。如果購買的運算單元較少，可能會影響查詢效能。
 
 ## 位置注意事項
 
 新增資料集副本前，您必須先在 BigQuery 建立要複製的初始資料集 (如果尚未建立)。新增副本的位置會設為您在新增副本時指定的位置。新增副本的位置必須與初始資料集的位置不同。這表示資料集中的資料會持續在資料集的建立位置和副本位置之間複製。如果副本需要共置 (例如檢視表、materialized view 或非 BigLake 外部資料表)，在與來源資料位置不同或不相容的位置新增副本，可能會導致工作錯誤。
 
-客戶跨區域複製資料集時，BigQuery 會確保資料只會存放在建立副本的位置。
+當客戶跨區域複製資料集時，BigQuery 會確保資料只位於建立副本的位置。
 
-### 主機代管需求
+### 主機代管需求條件
 
 使用資料集複製功能時，必須符合下列共置要求。
 
@@ -86,36 +86,35 @@ BigQuery 資料集複製作業有下列限制：
 
 * 從 [BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api?hl=zh-tw) 或 [BigQuery Storage Write API (REST)](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery?hl=zh-tw) 寫入主要副本的串流資料，會以盡力而為的方式複製到次要副本，因此可能會出現較長的複製延遲時間。
 * 從 [Datastream](https://cloud.google.com/datastream-for-bigquery?hl=zh-tw) 或 [BigQuery 變更資料擷取擷取作業](https://docs.cloud.google.com/bigquery/docs/change-data-capture?hl=zh-tw)寫入主要副本的串流 upsert，會盡可能複製到次要副本，但可能會有較長的複製延遲時間。複製完成後，次要副本中的 upsert 會根據資料表設定的 [`max_staleness`](https://docs.cloud.google.com/bigquery/docs/change-data-capture?hl=zh-tw#manage_table_staleness) 值，合併至次要副本的資料表基準。
-* 如果資料表已啟用[精細 DML](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language?hl=zh-tw#fine-grained_dml)，則不支援跨區域複製。雖然系統會禁止建立已包含這類資料表的複製資料集，但不會禁止在現有複製資料集內的資料表上啟用精細 DML。不過，這麼做可能會導致次要執行個體中，已啟用精細 DML 的資料表查詢結果不正確。
+* 如果資料表已啟用[精細 DML](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language?hl=zh-tw#fine-grained_dml)，則不支援跨區域複製。雖然系統會禁止建立已包含這類資料表的複製資料集，但不會禁止在現有複製資料集的資料表上啟用精細 DML。不過，這麼做可能會導致次要執行個體中，啟用精細 DML 的資料表查詢結果不正確。
 * 您可以透過 Google Cloud 控制台或 SQL [資料定義語言 (DDL) 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw)管理複製和切換作業。
-* 每個區域或多區域中，每個資料集只能有一個副本。您無法在同一個目的地區域中，為同一個資料集建立兩個次要副本。
-* 副本中的資源受[資源行為](#resource-behavior)所述的限制。
-* [政策標記](https://docs.cloud.google.com/bigquery/docs/managing-policy-tags-across-locations?hl=zh-tw)和相關聯的資料政策不會複製到次要副本。如果查詢參照的資料欄含有政策標記，除非使用者在專案、資料夾或組織層級具備 `roles/datacatalog.categoryFineGrainedReader` 角色，否則在主要區域以外執行的查詢都會失敗。提升副本並不會自動修正這些繫結，您必須更新繫結，指向新主要區域中的有效分類。
-* [時間旅行](https://docs.cloud.google.com/bigquery/docs/time-travel?hl=zh-tw)功能僅適用於已建立完成的次要副本。
-* 根據預設，如要為資料集啟用跨區域複製功能，目的地區域的大小限制 (以邏輯位元組為單位) 為 `us` 和 `eu`
-  [多區域](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#multi-regions) 10 PB，其他[區域](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#regions) 500 TB。這些限制可以設定。如需詳細資訊，請與[Google Cloud 支援團隊](https://cloud.google.com/support-hub?hl=zh-tw)聯絡。
+* 每個區域或多區域，只能有一個資料集副本。您無法在同一個目的地區域中，為同一個資料集建立兩個次要副本。
+* 副本中的資源受「[資源行為](#resource-behavior)」中所述的限制。
+* [政策標記](https://docs.cloud.google.com/bigquery/docs/managing-policy-tags-across-locations?hl=zh-tw)和相關聯的資料政策不會複製到次要副本。如果查詢參照的資料欄含有政策標記，則在主要區域以外執行的任何查詢都會失敗，除非使用者在專案、資料夾或組織層級具備 `roles/datacatalog.categoryFineGrainedReader` 角色。提升副本並不會自動修正這些繫結，您必須更新繫結，指向新主要區域中的有效分類。
+* [時間旅行](https://docs.cloud.google.com/bigquery/docs/time-travel?hl=zh-tw)功能僅適用於建立完成的次要副本。
+* 根據預設，如要為資料集啟用跨區域複製功能，目的地區域的大小限制 (以邏輯位元組為單位) 為 `us` 和 `eu` [多區域](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#multi-regions) 10 PB，其他[區域](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#regions) 500 TB。這些限制可以設定。如需詳細資訊，請與[Google Cloud 支援團隊](https://cloud.google.com/support-hub?hl=zh-tw)聯絡。
 * 配額適用於邏輯資源。
 * 您只能複製資料表數量少於 100,000 個的資料集。
 * 每個資料集每天最多只能在同一區域新增 (然後捨棄) 4 個副本。
-* [頻寬](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#bandwidth_limits)有限。
+* 您受到[頻寬](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#bandwidth_limits)限制。
 * 如果未設定 `replica_kms_key` 值，則無法在次要區域查詢套用[客戶自行管理加密金鑰](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw) (CMEK) 的資料表。
 * 不支援 BigLake 資料表。
 * 您無法複製外部或聯合資料集。
 * 不支援 [BigQuery Omni 位置](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw#locations)。
-* 如果設定[災難復原](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery?hl=zh-tw)的資料複製功能，則無法設定下列區域組合：
+* 如果設定資料複製功能是為了[災難復原](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery?hl=zh-tw)，則無法設定下列區域組合：
   + `us-central1` - `us` 多區域
   + `us-west1` - `us` 多區域
   + `eu-west1` - `eu` 多區域
   + `eu-west4` - `eu` 多區域
-* 常式層級存取控管無法複製，但您可以複製常式的資料集層級存取控管。
-* 搜尋索引的行為如下：
+* 常式層級的存取控管無法複製，但您可以複製常式的資料集層級存取控管。
+* 搜尋索引的運作方式如下：
   + 只有搜尋索引中繼資料會複製到次要區域，索引資料本身不會。
   + 如果切換至副本，索引會從先前的主要區域刪除，並在升級後的區域重新產生。
   + 如果您在 8 小時內來回切換，索引產生作業就會延遲 8 小時。
-* 如果您升級次要副本，[排定的查詢](https://docs.cloud.google.com/bigquery/docs/scheduling-queries?hl=zh-tw)不會自動重新導向至新的主要位置。這些資源仍會繫結至建立時指定的區域。
+* 如果您升級次要副本，[排定查詢](https://docs.cloud.google.com/bigquery/docs/scheduling-queries?hl=zh-tw)不會自動重新導向至新的主要位置。這些資源仍會繫結至建立時指定的區域。
   + 如果原始主要副本在升級後變成唯讀次要副本，嘗試將資料寫入資料集的排定查詢就會失敗。
   + 如果原始主要區域無法使用，排定的查詢就會失敗，即使只執行讀取作業也一樣。
-  + 為確保排定的查詢能繼續對升級的主要副本執行，您必須在新主要位置手動重新建立查詢。
+  + 為確保排定的查詢能繼續對升級的主要副本執行，您必須在新的主要位置手動重新建立查詢。
 * 您無法複製隱藏的資料集。
 * 如果資料集包含[條件式 IAM 政策](https://docs.cloud.google.com/bigquery/docs/conditions?hl=zh-tw)，則不支援跨區域複製。如要確認這項錯誤是否干擾複製作業，請查看 [`INFORMATION_SCHEMA.SCHEMATA_REPLICAS` 檢視畫面](https://docs.cloud.google.com/bigquery/docs/information-schema-schemata-replicas?hl=zh-tw)中的 `sync_status` 欄。
 
@@ -132,37 +131,37 @@ BigQuery 資料集複製作業有下列限制：
 
 | 區域 1 主要副本 | 區域 2 次要副本 | 附註 |
 | --- | --- | --- |
-| 已授權的資料集 | 已授權的資料集 | 您無法在次要副本中建立授權資料集。您必須在主要副本中建立檢視表，然後才能從次要區域查詢。 |
-| 獲得授權的常式 | 獲得授權的常式 | 您無法在次要副本中建立授權常式。您必須在主要副本中建立檢視表，然後才能從次要區域查詢。 |
-| 授權 view | 授權 view | 您無法在次要副本中建立授權檢視表。您必須在主要副本中建立檢視表，然後才能從次要區域查詢。 |
+| 已授權的資料集 | 已授權的資料集 | 您無法在次要副本中建立授權資料集。您必須在主要副本中建立檢視表，才能從次要區域查詢。 |
+| 獲得授權的常式 | 獲得授權的常式 | 您無法在次要副本中建立授權常式。您必須在主要副本中建立檢視表，才能從次要區域查詢。 |
+| 授權 view | 授權 view | 您無法在次要副本中建立授權檢視表。您必須在主要副本中建立檢視表，才能從次要區域查詢。 |
 | BigLake 資料表 | BigLake 資料表 | 不支援。 |
 | BigLake Apache Iceberg 資料表 | BigLake Apache Iceberg 資料表 | 請參閱「[Lakehouse 執行階段目錄跨區域複製和災難復原](https://docs.cloud.google.com/biglake/docs/about-managed-disaster-recovery?hl=zh-tw)」。 |
-| 外部資料表 | 外部資料表 | 系統只會複製外部資料表定義。如果 Cloud Storage bucket 與副本不在相同位置，查詢就會失敗。 |
+| 外部資料表 | 外部資料表 | 系統只會複製外部資料表定義。如果 Cloud Storage bucket 未與副本位於相同位置，查詢就會失敗。 |
 | 邏輯檢視表 | 邏輯檢視表 | 如果邏輯檢視表參照的資料集或資源與邏輯檢視表不在相同位置，查詢時就會失敗。 |
-| 代管資料表 | 代管資料表 | 兩者沒有差別。 |
-| materialized view | materialized view | 如果參照的資料表與 materialized view 不在相同區域，查詢就會失敗。複製的 materialized view 可能會超過檢視表的[過時程度上限](https://docs.cloud.google.com/bigquery/docs/materialized-views-create?hl=zh-tw#max_staleness)。 |
+| 代管資料表 | 代管資料表 | 沒有差別。 |
+| materialized view | materialized view | 如果參照的資料表與 materialized view 不在同一個區域，查詢就會失敗。複製的 materialized view 過時程度可能會超過 view 的[過時程度上限](https://docs.cloud.google.com/bigquery/docs/materialized-views-create?hl=zh-tw#max_staleness)。 |
 | 模型 | 模型 | 儲存為代管資料表。 |
-| 遠端函式 | 遠端函式 | 連線屬於區域性資源。如果遠端函式參照的資料集或資源 (連線) 與遠端函式不在相同位置，則執行時會失敗。 |
-| 處理常式 | user-defined function (UDF) 或預存程序 | 如果日常安排參照的資料集或資源與日常安排不在相同位置，執行時就會失敗。任何參照連線的常式 (例如遠端函式) 都無法在來源區域以外運作。 |
-| 資料列存取政策 | 資料列存取政策 | 兩者沒有差別。 |
+| 遠端函式 | 遠端函式 | 連線屬於區域資源。如果遠端函式參照的資料集或資源 (連線) 與遠端函式不在相同位置，則執行時會失敗。 |
+| 處理常式 | user-defined function (UDF) 或預存程序 | 如果常式參照的資料集或資源與常式不在相同位置，執行時就會失敗。任何參照連線的常式 (例如遠端函式) 都無法在來源區域以外運作。 |
+| 資料列存取政策 | 資料列存取政策 | 沒有差別。 |
 | 搜尋索引 | 搜尋索引 | 只會複製索引中繼資料。索引資料只會存在於主要區域。 |
-| 預存程序 | 預存程序 | 如果預存程序參照的資料集或資源與預存程序不在相同位置，則執行時會失敗。 |
-| 資料表本機副本 | 代管資料表 | 次要副本中的深層複製會計費。 |
-| 資料表快照 | 資料表快照 | 次要副本中的深層複製會計費。 |
+| 預存程序 | 預存程序 | 如果預存程序參照的資料集或資源與預存程序不在相同位置，則預存程序在執行時會失敗。 |
+| 資料表副本 | 代管資料表 | 次要副本中的深層複製會產生費用。 |
+| 資料表快照 | 資料表快照 | 次要副本中的深層複製會產生費用。 |
 | 資料表值函式 (TVF) | TVF | 如果 TVF 參照的資料集或資源與 TVF 位於不同位置，則 TVF 執行時會失敗。 |
 | UDF | UDF | 如果 UDF 參照的資料集或資源與 UDF 位於不同位置，執行時就會失敗。 |
 | 資料欄的資料政策 | 資料欄的資料政策 | 如果自訂資料政策參照的 UDF 與政策不在相同位置，則查詢政策附加的資料表時會失敗。 |
 
 ## 服務中斷情境
 
-跨區域複製功能不適合做為整個區域服務中斷時的災難復原計畫。如果主要副本的區域完全中斷，您就無法升級次要副本。由於次要副本為唯讀，因此您無法在次要副本上執行任何寫入工作，也無法在主要副本的區域還原前，升級次要區域。如要進一步瞭解如何準備災難復原，請參閱「[代管災難復原](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery?hl=zh-tw)」。
+跨區域複製功能不適合做為整個區域服務中斷時的災難復原計畫。如果主要副本的區域發生全面服務中斷，您就無法升級次要副本。由於次要副本為唯讀，因此您無法在次要副本上執行任何寫入工作，也無法在主要副本的區域還原前，升級次要區域。如要進一步瞭解如何準備災難復原，請參閱「[代管災難復原](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery?hl=zh-tw)」。
 
 下表說明整個區域服務中斷對複製資料的影響：
 
 | 區域 1 | 區域 2 | 服務中斷區域 | 影響 |
 | --- | --- | --- | --- |
 | 主要副本 | 次要副本 | 區域 2 | 在區域 2 針對次要副本執行的唯讀工作失敗。 |
-| 主要副本 | 次要副本 | 區域 1 | 在區域 1 執行的所有工作都會失敗。唯讀工作會繼續在次要副本所在的區域 2 執行。在與區域 1 成功同步之前，區域 2 的內容都會是過時內容。 |
+| 主要副本 | 次要副本 | 區域 1 | 區域 1 中執行的所有工作都會失敗。唯讀工作會繼續在次要副本所在的區域 2 執行。區域 2 的內容會保持過時狀態，直到與區域 1 成功同步為止。 |
 
 ## 使用資料集複製功能
 
@@ -170,7 +169,7 @@ BigQuery 資料集複製作業有下列限制：
 
 ### 所需權限
 
-如要取得管理副本所需的權限，請要求管理員授予 `bigquery.datasets.update` 權限。
+如要取得管理副本所需的權限，請要求管理員授予您 `bigquery.datasets.update` 權限。
 
 ### 複製資料集
 
@@ -181,21 +180,22 @@ BigQuery 資料集複製作業有下列限制：
 1. 前往「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在「Explorer」窗格中，點選要複製的資料集。
-3. 點按「Details」(詳細資料) 分頁標籤。
-4. 在「副本」部分，按一下「建立副本」。
-5. 在「Create dataset replica」(建立資料集副本) 窗格中，執行下列操作：
+2. 在「Explorer」窗格中展開專案，然後按一下「Datasets」(資料集)。
+3. 在「Datasets」(資料集) 頁面，點選要複製的資料集。您也可以使用搜尋和篩選器選項，找出資料集。
+4. 點按「Details」(詳細資料) 分頁標籤。
+5. 在「副本」部分，按一下「建立副本」。
+6. 在「Create dataset replica」(建立資料集副本) 窗格中，執行下列操作：
 
    1. 在「Location type」(位置類型) 區段中，選取副本的位置類型。
    2. 在「Region」(區域) 清單中，選取副本的區域。
-   3. 選用步驟：如要使用客戶自行管理的加密金鑰 (CMEK)，請展開「Advanced options」(進階選項) 專區，然後選取「Customer-managed encryption key (CMEK)」(客戶自行管理的加密金鑰 (CMEK)) 選項。
-6. 按一下「建立副本」。
+   3. 選用：如要使用客戶自行管理的加密金鑰 (CMEK)，請展開「Advanced options」(進階選項) 區段，然後選取「Customer-managed encryption key (CMEK)」(客戶自行管理的加密金鑰 (CMEK)) 選項。
+7. 按一下「建立副本」。
 
 ### SQL
 
 如要複製資料集，請使用 [`ALTER SCHEMA ADD REPLICA` DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_schema_add_replica_statement)。
 
-您可以將副本新增至任何位於某個區域或多區域的資料集，前提是該區域或多區域尚未複製該資料集。新增副本後，初始複製作業需要一些時間才能完成。在資料複製期間，您仍可執行參照主要副本的查詢，且查詢處理能力不會降低。您無法在多區域內的地理位置之間複製資料。
+您可以將副本新增至任何位於區域或多區域的資料集，前提是該區域或多區域尚未複製該資料集。新增副本後，初始複製作業需要一些時間才能完成。在資料複製期間，您仍可執行參照主要副本的查詢，且查詢處理能力不會降低。您無法在多區域內的地理位置中複製資料。
 
 下列範例會在 `us-central1` 區域建立名為 `my_dataset` 的資料集，然後在 `us-east4` 區域新增副本：
 
@@ -229,10 +229,11 @@ OPTIONS(location='us-east4');
 1. 前往「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在「Explorer」窗格中，點選要升級的資料集。
-3. 點按「Details」(詳細資料) 分頁標籤。
-4. 在「Replicas」(副本) 區段中，找出要升級的副本，然後按一下「Make primary」(設為主要)。
-5. 在「Promote replica」(提升副本) 對話方塊的文字欄位中輸入 `confirm`，然後按一下「Confirm」(確認)。
+2. 在「Explorer」窗格中展開專案，然後按一下「Datasets」(資料集)。
+3. 在「Datasets」(資料集) 頁面，點選要升級的資料集。您也可以使用搜尋和篩選器選項，找出資料集。
+4. 點按「Details」(詳細資料) 分頁標籤。
+5. 在「Replicas」(副本) 區段中，找出要升級的副本，然後按一下「Make primary」(設為主要)。
+6. 在「Promote replica」(提升副本) 對話方塊的文字欄位中輸入 `confirm`，然後按一下「Confirm」(確認)。
 
 ### SQL
 
@@ -260,10 +261,11 @@ ALTER SCHEMA my_dataset SET OPTIONS(primary_replica = 'us-east4');
 1. 前往「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在「Explorer」窗格中，按一下要移除副本的資料集。
-3. 點按「Details」(詳細資料) 分頁標籤。
-4. 在「Replicas」(副本) 區段中，找到要移除的副本，依序點選 more\_vert「More actions」(更多動作) 和「Delete」(刪除)。
-5. 在「Delete dataset replica?」(要刪除資料集副本嗎？) 對話方塊中，在文字欄位輸入 `delete`，然後按一下「Delete」(刪除)。
+2. 在「Explorer」窗格中展開專案，然後按一下「Datasets」(資料集)。
+3. 在「Datasets」(資料集) 頁面，按一下要移除副本的資料集。您也可以使用搜尋和篩選選項來尋找資料集。
+4. 點按「Details」(詳細資料) 分頁標籤。
+5. 在「Replicas」(副本) 區段中，找到要移除的副本，依序點選 more\_vert「More actions」(更多動作) 和「Delete」(刪除)。
+6. 在「Delete dataset replica?」(要刪除資料集副本嗎？) 對話方塊中，在文字欄位輸入 `delete`，然後按一下「Delete」(刪除)。
 
 ### SQL
 
@@ -276,8 +278,7 @@ ALTER SCHEMA my_dataset
 DROP REPLICA IF EXISTS `us`;
 ```
 
-您必須先捨棄所有次要副本，才能刪除整個資料集。如果您刪除整個資料集 (例如使用 [`DROP
-SCHEMA` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#drop_schema_statement))，但未捨棄所有次要副本，就會收到下列錯誤：
+您必須先捨棄所有次要副本，才能刪除整個資料集。如果您刪除整個資料集 (例如使用 [`DROP SCHEMA` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#drop_schema_statement))，但未捨棄所有次要副本，就會收到下列錯誤：
 
 ```
 The dataset replica of the cross region dataset 'project_id:dataset_id' in region 'REGION' is not yet writable because the primary assignment is not yet complete.
@@ -285,11 +286,11 @@ The dataset replica of the cross region dataset 'project_id:dataset_id' in regio
 
 詳情請參閱「[升級次要副本](https://docs.cloud.google.com/bigquery/docs/data-replication?hl=zh-tw#promote_the_secondary_replica)」。
 
-## 監控備用資源
+## 監控複製作業
 
 您可以透過 BigQuery、Cloud Monitoring 或 `INFORMATION_SCHEMA` 檢視畫面，監控資料集副本的狀態。
 
-如要瞭解如何依據這些指標建立警告，請參閱「[建立資訊主頁、圖表和警告](https://docs.cloud.google.com/bigquery/docs/monitoring-dashboard?hl=zh-tw)」。
+如要瞭解如何為這些指標建立警告，請參閱「[建立資訊主頁、圖表和警告](https://docs.cloud.google.com/bigquery/docs/monitoring-dashboard?hl=zh-tw)」。
 
 ### 使用 BigQuery 查看複製狀態
 
@@ -299,9 +300,10 @@ The dataset replica of the cross region dataset 'project_id:dataset_id' in regio
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 在「Explorer」窗格中展開專案。
-3. 按一下要監控的資料集。
-4. 在資料集詳細資料窗格中，按一下「Details」(詳細資料) 分頁標籤。
-5. 在「副本」部分，查看「複製延遲時間」和「狀態」。如要查看更多詳細資料 (包括複製延遲時間圖表)，請按一下「View details」(查看詳細資料)。
+3. 點選「資料集」。
+4. 按一下要監控的資料集。您也可以使用搜尋和篩選選項，找出資料集。
+5. 在資料集頁面中，按一下「Details」(詳細資料) 分頁標籤。
+6. 在「副本」部分，查看「複製延遲時間」和「狀態」。如要查看更多詳細資料 (包括複製延遲時間圖表)，請按一下「View details」(查看詳細資料)。
 
 ### 使用 Cloud Monitoring 查看複製狀態
 
@@ -319,7 +321,7 @@ BigQuery 在 Monitoring 中提供下列指標，協助您監控複製狀態：
 3. 在「選取指標」欄位中，搜尋並選取「BigQuery 資料集」。
 4. 選取「Replication latency」(複製延遲時間) (`bigquery.googleapis.com/storage/replication/dataset_staleness`) 或「Network egress bytes」(網路輸出位元組) (`bigquery.googleapis.com/storage/replication/network_egress_bytes_count`)。
 5. 按一下「套用」。
-6. 在「Aggregation」(匯總) 部分，選取匯總方法。針對複製延遲時間指標，建議選取「99th percentile」(第 99 個百分位數)。與平均值或其他匯總值相比，這項匯總值更能呈現最差的成效。
+6. 在「Aggregation」(匯總) 部分，選取匯總方法。針對複製延遲時間指標，建議選取「99th percentile」(第 99 個百分位數)。與平均值或其他匯總值相比，這項匯總值更能反映最差的成效。
 7. 選用：如要查看特定資料集或次要區域的指標，請按一下「Add filter」(新增篩選器)，選取「dataset\_id」或「location」選項，然後輸入值。如果將資料複製到多個次要區域，可以依位置分組，查看各區域的指標。
 
 ### 使用 `INFORMATION_SCHEMA` 查看複製狀態
@@ -335,7 +337,7 @@ BigQuery 在 Monitoring 中提供下列指標，協助您監控複製狀態：
 如要開始遷移程序，請先在要遷移資料的區域中複製資料集。在這個情境中，您要將 `my_migration` 資料集遷移至 `EU` 多區域。
 
 ```
--- Create a replica in the secondary region.
+-- Create a replica in the secondary region. 
 ALTER SCHEMA my_migration
 ADD REPLICA `eu`
 OPTIONS(location='eu');
@@ -355,7 +357,7 @@ ALTER SCHEMA my_migration SET OPTIONS(primary_replica = 'eu')
 
 ### 完成遷移作業
 
-如要完成從 `US` 多區域遷移至 `EU` 多區域的作業，請刪除 `us` 副本。這個步驟並非必要，但如果您不需要遷移作業以外的資料集副本，則建議執行。
+如要完成從 `US` 多區域遷移至 `EU` 多區域的作業，請刪除 `us` 副本。這個步驟並非必要，但如果您不需要遷移需求以外的資料集副本，這個步驟就很有用。
 
 ```
 ALTER SCHEMA my_migration
@@ -366,24 +368,24 @@ DROP REPLICA IF EXISTS us;
 
 ## 客戶自行管理的加密金鑰 (CMEK)
 
-建立次要副本時，系統不會自動複製[客戶自行管理的 Cloud Key Management Service 金鑰](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw)。為維持複製資料集的加密狀態，您必須為新增副本的位置設定 `replica_kms_key`。您可以使用 [`ALTER SCHEMA ADD REPLICA` DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_schema_add_replica_statement)設定 `replica_kms_key`。
+建立次要副本時，系統不會自動複製[客戶自行管理的 Cloud Key Management Service 金鑰](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw)。為維持已複製資料集的加密狀態，您必須為新增副本的位置設定 `replica_kms_key`。您可以使用 [`ALTER SCHEMA ADD REPLICA` DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_schema_add_replica_statement)設定 `replica_kms_key`。
 
 使用 CMEK 複製資料集的行為如下：
 
 * 如果來源資料集有 `default_kms_key`，則使用 `ALTER SCHEMA ADD REPLICA` DDL 陳述式時，必須提供在副本資料集區域中建立的 `replica_kms_key`。
 * 如果來源資料集未設定 `default_kms_key` 的值，您就無法設定 `replica_kms_key`。
-* 如果您在 `default_kms_key` 或 `replica_kms_key` (或兩者) 使用 [Cloud KMS 金鑰輪替](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw#key_rotation)，則在金鑰輪替後，複製的資料集仍可查詢。
+* 如果您在 `default_kms_key` 或 `replica_kms_key` (或兩者) 上使用 [Cloud KMS 金鑰輪替](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw#key_rotation)，則在金鑰輪替後，複製的資料集仍可查詢。
 
-  + 在主要區域中輪替金鑰時，只有在輪替後建立的資料表會更新金鑰版本，輪替前就存在的資料表仍會使用輪替前設定的金鑰版本。
+  + 在主要區域中輪替金鑰，只會更新輪替後建立的資料表金鑰版本。在金鑰輪替前就存在的資料表，仍會使用輪替前設定的金鑰版本。
   + 在次要區域中輪替金鑰，會將次要副本中的所有資料表更新為新的金鑰版本。
   + 將主要副本切換為次要副本後，次要副本 (原為主要副本) 中的所有資料表都會更新為新的金鑰版本。
-  + 如果在金鑰輪替前，刪除主要副本中資料表設定的金鑰版本，則在更新金鑰版本前，無法查詢仍使用金鑰輪替前設定的金鑰版本的資料表。如要更新金鑰版本，舊金鑰版本必須處於啟用狀態 (未停用或刪除)。
+  + 如果在金鑰輪替前，刪除主要副本中資料表設定的金鑰版本，則在更新金鑰版本前，無法查詢仍使用金鑰輪替前設定的金鑰版本的資料表。如要更新金鑰版本，舊金鑰版本必須處於有效狀態 (未停用或刪除)。
 * 如果來源資料集未設定 `default_kms_key` 的值，但來源資料集中的個別資料表已套用 CMEK，則無法在複製的資料集中查詢這些資料表。如要查詢資料表，請按照下列步驟操作：
 
   + 為來源資料集新增 `default_kms_key` 值。
-  + 使用 `ALTER SCHEMA ADD REPLICA` DDL 陳述式建立新副本時，請為 `replica_kms_key` 選項設定值。您可以在目的地區域查詢 CMEK 資料表。
+  + 使用 `ALTER SCHEMA ADD REPLICA` DDL 陳述式建立新副本時，請設定 `replica_kms_key` 選項的值。您可以在目的地區域查詢 CMEK 資料表。
 
-  無論來源區域使用何種金鑰，目的地區域中的所有 CMEK 資料表都會使用相同的 `replica_kms_key`。
+  目的地區域中的所有 CMEK 資料表都會使用相同的 `replica_kms_key`，無論來源區域使用的金鑰為何。
 
 ### 使用 CMEK 建立副本
 
@@ -401,14 +403,13 @@ OPTIONS(location='us-west1',
 
 複製已套用 CMEK 的資料集時，須遵守下列限制：
 
-* 建立副本後，您就無法更新複製的 Cloud KMS 金鑰。
+* 建立副本後，您無法更新複製的 Cloud KMS 金鑰。
 * 建立資料集副本後，您就無法更新來源資料集的 `default_kms_key` 值。
 * 如果提供的 `replica_kms_key` 在目的地區域無效，系統就不會複製資料集。
 
 ## 指派給資料欄或資料治理標記的資料政策
 
-以下各節說明[直接指派給資料欄的資料政策](https://docs.cloud.google.com/bigquery/docs/column-data-masking?hl=zh-tw#data-policies-on-column)，以及[指派給資料治理標記的資料政策](https://docs.cloud.google.com/bigquery/docs/tags?hl=zh-tw#manage-data-policies)
-[(預先發布版)](https://cloud.google.com/products?hl=zh-tw#product-launch-stages)，如何與跨區域複製功能互動。
+以下各節說明[直接指派給資料欄的資料政策](https://docs.cloud.google.com/bigquery/docs/column-data-masking?hl=zh-tw#data-policies-on-column)，以及[指派給資料治理標記的資料政策](https://docs.cloud.google.com/bigquery/docs/tags?hl=zh-tw#manage-data-policies)[(預先發布版)](https://cloud.google.com/products?hl=zh-tw#product-launch-stages)，如何與跨區域複製功能互動。
 
 指派給資料欄或資料治理標記的資料政策屬於區域性資源。也就是說，資料政策和附加的資料表必須位於相同區域。建立次要副本時，系統會自動複製資料政策。如果資料政策附加至複製資料集內的任何資料表，或指派給該資料表的資料治理標記，BigQuery 會在次要區域建立或更新資料政策及其對應的 IAM 政策。
 
@@ -418,17 +419,17 @@ OPTIONS(location='us-west1',
 
 ### 命名衝突
 
-除了位置以外，主要和次要區域的資料政策資源都相同。對於資料政策及其在次要區域中的副本，`projects/PROJECT_NUMBER/locations/LOCATION_ID/dataPolicies/DATA_POLICY_ID` 格式的 ID 相同，但 `LOCATION_ID` 的值不同。如果次要區域已有 ID 衝突的資料政策，複製作業就會失敗。您必須先解決主要或次要區域中的命名衝突，才能繼續複製。
+除了位置之外，主要和次要區域的資料政策資源都相同。對於資料政策及其在次要區域中的副本，`projects/PROJECT_NUMBER/locations/LOCATION_ID/dataPolicies/DATA_POLICY_ID` 格式的 ID 相同，但 `LOCATION_ID` 的值不同。如果次要區域已有 ID 衝突的資料政策，複製作業就會失敗。您必須先解決主要或次要區域中的命名衝突，才能繼續複製。
 
 ### 自訂遮蓋政策
 
-如果您使用[自訂遮蓋常式](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro?hl=zh-tw#masking_options)，請務必複製自訂 UDF。您可以將這些 UDF 納入要複製的資料集。
+如果您使用[自訂遮罩常式](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro?hl=zh-tw#masking_options)，請務必複製自訂 UDF。您可以將這些 UDF 納入要複製的資料集。
 
 ### 將資料政策附加至資料表資料欄、從資料表資料欄卸載資料政策，或刪除資料政策
 
-在主要區域中，將資料政策附加至資料欄、從資料欄卸載或刪除資料政策，都屬於資料表結構定義變更。所有次要區域的資料表結構定義都會更新，反映這項變更。不過，如果將資料政策與主要區域中的所有資料表資料欄取消連結，資料政策就會在次要區域中孤立，您必須手動清除。不建議在次要區域手動附加複製的資料政策，因為這可能會導致複雜的情況，例如無法新增或移除 FGAC 授權。
+在主要區域中，將資料政策附加至資料欄、從資料欄卸載資料政策，或刪除資料政策，都屬於資料表結構定義變更。所有次要區域中的資料表結構定義都會更新，以反映這項變更。不過，如果將資料政策與主要區域中的所有資料表欄分離，資料政策在次要區域中就會變成孤立狀態，您必須手動清除。不建議在次要區域手動附加複製的資料政策，因為這可能會導致複雜的情況，例如無法新增或移除 FGAC 授權。
 
-如果刪除已取消連結的資料政策，背景工作會將其從資料表架構中移除。發生這種情況時，資料表結構定義變更會傳播至目的地區域。與卸載政策一樣，您必須手動刪除次要區域中的資料政策。
+如果刪除已取消連結的資料政策，背景工作會將其從資料表結構定義中移除。發生這種情況時，資料表結構定義變更會傳播至目的地區域。與卸載政策一樣，您必須手動刪除次要區域中的資料政策。
 
 ### 捨棄副本
 
@@ -446,11 +447,11 @@ OPTIONS(location='us-west1',
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-08 (世界標準時間)。
+上次更新時間：2026-11-11 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-08 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-11 (世界標準時間)。"],[],[]]

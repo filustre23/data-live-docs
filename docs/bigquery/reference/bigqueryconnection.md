@@ -222,6 +222,5 @@ func reportConnections(ctx context.Context, client *connection.Client, projectID
 	req := &connectionpb.ListConnectionsRequest{
 		Parent: fmt.Sprintf("projects/%s/locations/%s", projectID, location),
 	}
-	totalConnections := 0
-	i
+	totalConnections
 ```

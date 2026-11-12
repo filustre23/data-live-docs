@@ -248,4 +248,3 @@ The list of valid permission types for which logging can be configured. Admin wr
 | Enums | |
 | --- | --- |
 | `LOG_TYPE_UNSPECIFIED` | Default case. Should never be this. |
-| `ADMIN_READ` | Admin reads. Example: CloudI |

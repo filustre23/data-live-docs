@@ -312,6 +312,4 @@ with the same name as a variable declared in the same block or an outer block.
 There is a maximum nesting level of 50 for blocks and conditional statements
 such as `BEGIN`/`END`, `IF`/`ELSE`/`END IF`, and `WHILE`/`END WHILE`.
 
-`BEGIN`/`END` is restricted from being executed dynamically as a nested element.
-
-You can use a label with this statement. To learn more, see [Labels<](#labels)
+`BEGIN`/

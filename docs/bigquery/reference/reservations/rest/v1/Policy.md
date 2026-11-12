@@ -247,4 +247,3 @@ The list of valid permission types for which logging can be configured. Admin wr
 
 | Enums | |
 | --- | --- |
-| `LOG_TYPE_UNSPECIFIED` |

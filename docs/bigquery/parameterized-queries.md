@@ -26,9 +26,9 @@ BigQuery 的參數化查詢可讓您直接將任意運算式替換為 GoogleSQL 
 
 ## 在查詢中傳遞參數
 
-如要指定具名參數，請使用 `@` 字元，後接[ID](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#identifiers)，例如 `@param_name`。或者，您也可以使用預留位置值 `?` 指定位置參數。查詢可以使用位置參數或具名參數，但不能同時使用。
+如要指定具名參數，請使用 `@` 字元，後接 [ID](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical?hl=zh-tw#identifiers)，例如 `@param_name`。或者，您也可以使用預留位置值 `?` 指定位置參數。查詢可以使用位置參數或具名參數，但不能同時使用。
 
-**注意：** 為保護可能屬於機密資訊的資訊，當您執行含有參數的查詢時，參數值不會記錄在 BigQuery [記錄](https://docs.cloud.google.com/bigquery/docs/monitoring?hl=zh-tw#logs)中。
+**注意：**為保護可能有機密資訊，當您執行含有參數的查詢時，參數值不會記錄在 BigQuery [記錄](https://docs.cloud.google.com/bigquery/docs/monitoring?hl=zh-tw#logs)中。
 
 您可以在 BigQuery 中透過下列方式執行參數化查詢：
 
@@ -41,9 +41,9 @@ BigQuery 的參數化查詢可讓您直接將任意運算式替換為 GoogleSQL 
 
 ### 控制台
 
-如要在 Google Cloud 控制台執行參數化查詢，請在「Query settings」(查詢設定) 中設定參數，然後在 SQL 查詢中參照這些參數，方法是在每個參數名稱前加上 `@` 字元。
+如要在 Google Cloud 控制台執行參數化查詢，請在「Query settings」(查詢設定) 中設定參數，然後在 SQL 查詢中參照這些參數，並在每個參數名稱前加上 `@` 字元。
 
-**支援的資料類型**： Google Cloud 控制台僅支援原始資料類型的參數化查詢，例如 `BIGNUMERIC`、`BOOL`、`BYTES`、`DATE`、`DATETIME`、`FLOAT64`、`GEOGRAPHY`、`INT64`、`INTERVAL`、`NUMERIC`、`STRING`、`TIME` 或 `TIMESTAMP`。 Google Cloud 控制台不支援複雜的資料類型，例如`ARRAY`和`STRUCT`。
+**支援的資料類型**： Google Cloud 控制台僅支援原始資料類型的參數化查詢，例如 `BIGNUMERIC`、`BOOL`、`BYTES`、`DATE`、`DATETIME`、`FLOAT64`、`GEOGRAPHY`、`INT64`、`INTERVAL`、`NUMERIC`、`STRING`、`TIME` 或 `TIMESTAMP`。 Google Cloud 控制台不支援 `ARRAY` 和 `STRUCT` 等複雜資料類型。
 
 ## 在 Google Cloud 控制台中新增參數
 
@@ -57,7 +57,7 @@ BigQuery 的參數化查詢可讓您直接將任意運算式替換為 GoogleSQL 
    * **名稱**：輸入參數名稱 (請勿加入 `@` 字元)。
    * **類型**：選取參數的資料類型。
    * **值**：輸入要用於這項執行的值。
-5. 按一下 [儲存]。
+5. 按一下「儲存」。
 
 ## 在 Google Cloud 控制台中將參數值傳遞至查詢
 
@@ -91,7 +91,7 @@ BigQuery 的參數化查詢可讓您直接將任意運算式替換為 GoogleSQL 
    [啟用 Cloud Shell](https://console.cloud.google.com/?cloudshell=true&hl=zh-tw)
 
    Google Cloud 控制台底部會開啟 [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works?hl=zh-tw) 工作階段，並顯示指令列提示。Cloud Shell 是已安裝 Google Cloud CLI 的殼層環境，並已設定適用於您目前專案的值。工作階段可能要幾秒鐘的時間才能初始化。
-2. 請使用 `--parameter`，以 `name:type:value` 的格式來提供參數的值。如果名稱留空，則會產生位置參數。您可以省略類型，系統會假設為 `STRING`。
+2. 請使用 `--parameter`，以 `name:type:value` 的格式來提供參數的值。如果名稱留空，則會產生位置參數。如果省略類型，系統會假設為 `STRING`。
 
    `--parameter` 旗標必須與 `--use_legacy_sql=false` 旗標搭配使用，才能指定 GoogleSQL 語法。
 
@@ -652,7 +652,7 @@ Google Cloud 控制台不支援參數化查詢中的陣列。
    [啟用 Cloud Shell](https://console.cloud.google.com/?cloudshell=true&hl=zh-tw)
 
    Google Cloud 控制台底部會開啟 [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works?hl=zh-tw) 工作階段，並顯示指令列提示。Cloud Shell 是已安裝 Google Cloud CLI 的殼層環境，並已設定適用於您目前專案的值。工作階段可能要幾秒鐘的時間才能初始化。
-2. 這項查詢會選取美國各州最常見的男嬰名字，開頭為字母 W：
+2. 這項查詢會選取美國各州最熱門的男嬰名字，開頭為字母 W：
 
    **注意：**這個範例查詢的是以美國為基礎的公開資料集。由於該公開資料集儲存在美國的多地區位置，因此您目的地資料表所屬的資料集也必須位於美國。您無法查詢位於某個位置的資料集，然後將結果寫入位於另一個位置的目的地資料表。 
 
@@ -681,11 +681,11 @@ Google Cloud 控制台不支援參數化查詢中的陣列。
 
 ### API
 
-如要使用陣列值參數，請在 `query` 工作設定中，將 [`parameterType`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/QueryParameter?hl=zh-tw) 設為 `ARRAY`。
+如要使用陣列值參數，請在 `query` 工作設定中將 [`parameterType`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/QueryParameter?hl=zh-tw) 設為 `ARRAY`。
 
 如果陣列值是純量，請將 [`parameterType`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/QueryParameter?hl=zh-tw) 設定為值的類型，例如 `STRING`。如果陣列值是結構，請將參數類型設定為 `STRUCT`，並將所需的欄位定義新增至 `structTypes`。
 
-舉例來說，這項查詢會選取美國各州 (名稱開頭為字母 W) 最常見的男嬰名字。
+舉例來說，這項查詢會選取美國各州最受歡迎的男嬰名字，且州名開頭為字母 W。
 
 ```
 {
@@ -846,5 +846,5 @@ func queryWithArrayParams(w io.Writer, projectID string) error {
 	if err := status.Err(); err != nil {
 		return err
 	}
-	it, err := job.Read
+	it, err :=
 ```

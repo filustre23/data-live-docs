@@ -476,8 +476,4 @@ of rain that fell during a certain period.
 
 **Arguments**
 
-A one-element `ARRAY` of string values. Defaults to `label`.
-
-### `MAX_ITERATIONS`
-
-**Syntax**
+A one-element `ARRAY` of string values. Defaults to

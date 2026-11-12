@@ -293,6 +293,3 @@ Gets the value of a field at a selected position in a struct.
 * `index`: An integer literal or constant that represents a specific position in
   the struct. If used by itself without a position keyword, the index starts at
   zero and produces an error if the index is out of range.
-
-**Note:** The struct subscript operator doesn't support `SAFE` positional keywords
-at this

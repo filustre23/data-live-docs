@@ -27,6 +27,97 @@ To get the latest product updates delivered to you, add the URL of this page to 
 reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators), or add the
 [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## November 12, 2026
+
+Feature
+
+You can track table-level data lineage in Knowledge Catalog for BigQuery
+pipelines. For more information, see
+[Track data lineage](/bigquery/docs/manage-pipelines#data-lineage).
+This feature is
+[generally available](https://cloud.google.com/products#product-launch-stages)
+(GA).
+
+## November 11, 2026
+
+Feature
+
+[Project caps (also known as scheduling policies)](/bigquery/docs/reservations-workload-management#scheduling-policies)
+let you limit maximum slots and concurrency per project within a BigQuery
+reservation. This feature is only supported in the
+[BigQuery Enterprise and Enterprise Plus editions](/bigquery/docs/editions-intro)
+and is
+[generally available](https://cloud.google.com/products#product-launch-stages)
+(GA).
+
+Feature
+
+You can specify an optional `principal` property on
+[BigQuery reservation assignments](/bigquery/docs/reservations-assignments) to
+route queries to specific reservations based on the identity of the user,
+service account, or third-party identity executing the job. This feature is only
+supported in the
+[BigQuery Enterprise and Enterprise Plus editions](/bigquery/docs/editions-intro)
+and is
+[generally available](https://cloud.google.com/products#product-launch-stages)
+(GA).
+
+Feature
+
+You can use the
+[`JSON_FLATTEN` function](/bigquery/docs/reference/standard-sql/json_functions#json_flatten)
+to extract all non-array values that are either directly in the input `JSON`
+value or children of one or more consecutively nested arrays in the input
+`JSON` value. This function is
+[generally available](https://cloud.google.com/products#product-launch-stages).
+(GA).
+
+## November 10, 2026
+
+Feature
+
+You can use [graph measures](/bigquery/docs/graph-measures)
+to lock an aggregation to a key in order to perform
+complex aggregations without overcounting.
+[Measure expressions](/bigquery/docs/reference/standard-sql/data-types#measure_type)
+can include the following:
+
+* Aggregate function calls
+* Expressions within aggregate functions
+* Conditional logic within aggregate functions
+* Conditional distinct counting
+* Scalar operations and expressions outside of aggregate functions
+* Combinations of measures wrapped in the `AGG` function
+
+To query measures, you transform
+your graph into a flattened table by using the
+[`GRAPH_EXPAND` TVF](/bigquery/docs/reference/standard-sql/graph-sql-queries#graph_expand),
+and then query measures in that table with the
+[`AGG` function](/bigquery/docs/reference/standard-sql/aggregate_functions#agg).
+The `GRAPH_EXPAND` function now supports multiple fact tables. To view the
+output schema of the `GRAPH_EXPAND` function, use the
+[`BQ.SHOW_GRAPH_EXPAND_SCHEMA` system procedure](/bigquery/docs/reference/system-procedures#bqshow_graph_expand_schema).
+
+You can define
+[extensions](/bigquery/docs/graph-schema-overview#specify_options)
+in the `OPTIONS` clause of the labels and properties in your graphs, which are
+string pairs that represent custom metadata for natural language querying.
+
+Measures and graphs are supported in Data Studio through the
+[BigQuery connector](/data-studio/connect-to-google-bigquery).
+Measures and graphs are also automatically cataloged in Knowledge Catalog, which
+makes them searchable by natural language or domain synonyms.
+
+These features are
+[generally available](https://cloud.google.com/products#product-launch-stages)
+(GA).
+
+Feature
+
+BigQuery [generative AI functions](/bigquery/docs/generative-ai-overview#locations)
+now support the `gemini-4-carbon` model. This model is
+[generally available](https://cloud.google.com/products#product-launch-stages).
+
 ## November 09, 2026
 
 Feature
@@ -266,66 +357,6 @@ You can now retrieve query results
 [directly in the Apache Arrow format](/bigquery/docs/running-queries#arrow-format)
 for faster retrieval speed and improved serialization efficiency. This feature
 is in
-[Preview](https://cloud.google.com/products#product-launch-stages).
-
-## October 27, 2026
-
-Feature
-
-The [Data Engineering Agent now integrates with Google
-Drive](/gemini/data-agents/data-engineering-agent/agent-overview#google-drive-integration),
-letting you provide Google Sheets files, CSV, or JSONL files as input for
-your data engineering pipelines.
-
-This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
-
-Feature
-
-You can now use [conversational analytics in Connected Sheets](/bigquery/docs/connected-sheets#use-ca-in-connected-sheets)
-to ask questions and analyze your BigQuery data using natural
-language. The Gemini side panel can help you translate your questions into
-optimized SQL queries and execute them, summarize key trends, and
-insert live, refreshable database objects directly into your workbook.
-
-This feature is [generally available](https://cloud.google.com/products#product-launch-stages)
-(GA).
-
-Feature
-
-The
-[`AI.COUNT_TOKENS` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-count-tokens),
-which estimates the token count of a text string, is
-[generally available](https://cloud.google.com/products#product-launch-stages)
-(GA).
-
-## October 26, 2026
-
-Feature
-
-Conversation logging for [Conversational analytics in
-BigQuery](/bigquery/docs/conversational-analytics) is now
-[generally available](https://cloud.google.com/products#product-launch-stages)
-(GA). You can log data agent conversations to a BigQuery table in
-the agent's project. For more information, see [Conversation logging
-overview](/bigquery/docs/conversation-logging-overview) and [Configure
-settings](/bigquery/docs/create-data-agents#configure_settings).
-
-Feature
-
-Python user-defined functions now support
-[volume mounts](/bigquery/docs/user-defined-functions-python#volume-mounts),
-which let you access dependency files from Cloud Storage directly from your
-Python UDF code. This feature is in
-[Preview](https://cloud.google.com/products/#product-launch-stages).
-
-Feature
-
-The
-[`REGEXP_EXTRACT_GROUPS` function](/bigquery/docs/reference/standard-sql/string_functions#regexp_extract_groups)
-produces substrings that match multiple capturing groups in a regular
-expression.
-
-This function is in
 [Preview](https://cloud.google.com/products#product-launch-stages).
 
 ## October 22, 2026
@@ -4933,26 +4964,4 @@ You can reference [Iceberg external tables in materialized views](/bigquery/docs
 
 Change
 
-The organization-level [configuration settings](/bigquery/docs/default-configuration) for `default_sql_dialect_option` and `query_runtime` are unsupported.
-
-## June 03, 2025
-
-Feature
-
-BigQuery metastore has been renamed [BigLake metastore](/bigquery/docs/about-blms) and is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA). The feature formerly known as BigLake metastore has been renamed BigLake metastore (classic).
-
-Feature
-
-You can now use the [BigQuery advanced runtime](/bigquery/docs/advanced-runtime) to improve query execution time and slot usage. This feature is in [Preview](https://cloud.google.com/products#product-launch-stages).
-
-Feature
-
-BigQuery tables for Apache Iceberg have been renamed [BigLake tables for Apache Iceberg in BigQuery](/bigquery/docs/iceberg-tables). This feature is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
-
-## June 02, 2025
-
-Libraries
-
-### Python
-
-####
+The organization-level [configuration settings](/bigquery/docs/default-configuration) for

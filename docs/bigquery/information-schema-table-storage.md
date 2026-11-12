@@ -182,5 +182,5 @@ SELECT
   SUM(active_physical_bytes) / power(1024, 3) AS active_physical_gib,
   SUM(active_physical_bytes - time_travel_physical_bytes) / power(1024, 3) AS active_no_tt_physical_gib,
   SUM(long_term_physical_bytes) / power(1024, 3) AS long_term_physical_gib,
-  SUM(time_travel_physical_bytes)
+  SUM
 ```

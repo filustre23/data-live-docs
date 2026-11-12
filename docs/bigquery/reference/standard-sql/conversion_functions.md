@@ -274,4 +274,4 @@ The `expression` parameter can represent an expression for these data types:
 | --- | --- | --- |
 | INT64 | FLOAT64 | Returns a close but potentially not exact floating point value. |
 | `NUMERIC` | FLOAT64 | `NUMERIC` will convert to the closest floating point number with a possible loss of precision. |
-| `BIGNUMERIC` | FLOAT64 | `BIGNUMERIC` will convert to the closest floating point number with a possib |
+|  |

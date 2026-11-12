@@ -263,5 +263,5 @@ IF(ARRAY_LENGTH(anomalies) > 0)
       ERROR(
         CONCAT(
           "Found data skew in features: ",
-          ARRAY_TO_STRING(anomalies, ", "),
+          ARRAY_TO_STRING(anomalies
 ```

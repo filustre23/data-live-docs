@@ -206,6 +206,10 @@ The following resource types appear as target resources in audit log events:
 | Agent chat message | A message sent to the Notebook agent |
 | API client | An API token, either a personal token or a workspace token |
 | Cell | A [cell](/docs/explore-data/cells/sql-cells/sql-cells-introduction) in a Hex project |
+| Code project | A 4.0 project |
+| Code project grant | A role (viewer, editor, etc.) given to a user or group for access to a 4.0 project |
+| Code project ref | A branch of a 4.0 project |
+| Code project view | An object that represents an instance of a user viewing a 4.0 project |
 | Collection | A [collection](/docs/organize-content/collections) of Hex projects and components |
 | Data connection | A [connection](/docs/connect-to-data/data-connections/data-connections-introduction) to an external data warehouse |
 | Data source database | A database in a data connection's schema browser |
@@ -223,9 +227,11 @@ The following resource types appear as target resources in audit log events:
 | MCP server configuration | An MCP server enabled for the workspace |
 | Project | A Hex [project](/docs/explore-data/projects/projects-introduction), [component](/docs/explore-data/components), or [explore](/docs/share-insights/explore) object |
 | Project grant | A role (viewer, editor, etc.) given to a user or group for [access to a Hex project](/docs/collaborate/sharing-and-permissions/project-sharing) |
-| Project ref | A branch of a project |
 | Project version | A specific [version](/docs/explore-data/projects/history-and-versions) of a Hex project |
 | Project view | An object that represents an instance of a user viewing a project |
+| Review | A reviewer's determination (approved, denied, or commented) on a publish review request |
+| Review request | A request to [review](/docs/collaborate/reviews) a project before it is published |
+| Review request reviewer | A user or group assigned to review a publish review request |
 | Scheduled run | A cron-like [schedule](/docs/share-insights/scheduled-runs) on which a project is run periodically |
 | Scheduled run notification | A [notification](/docs/share-insights/scheduled-runs#send-notifications) configured on a scheduled run, to send emails and/or Slack messages when a scheduled run completes or fails |
 | Secret | A [secret value](/docs/explore-data/projects/environment-configuration/environment-views#secrets) containing sensitive information that can be referenced in Hex projects |
@@ -366,20 +372,20 @@ Changing a token's description or expiration always regenerates it, so the `UPDA
 
 | Event type | Description | Target resource types |
 | --- | --- | --- |
-| `CREATE_PROJECT` | A user creates a project, component, or 4.0 project | Project |
+| `CREATE_PROJECT` | A user creates a project or component | Project |
 | `CREATE_PROJECT_FROM_TEMPLATE` | A user creates a project from a [template](https://hex.tech/use-cases/) | Project, Template |
-| `DUPLICATE_PROJECT` | A user duplicates a project or 4.0 project. Both the original and the copy are targets | Project |
+| `DUPLICATE_PROJECT` | A user duplicates a project. Both the original and the copy are targets | Project |
 | `COPY_PROJECT_FROM_EXTERNAL_WORKSPACE` | A user copies a project from another workspace into this one | Project |
 | `IMPORT_PROJECT` | A user [imports a project](/docs/explore-data/projects/import-export#import-projects) from a YAML file, a Jupyter notebook, or a Claude dashboard | Project |
 | `VIEW_PROJECT` | A user opens a project's notebook or app (4.0 projects log `VIEW_CODE_PROJECT`), including through Notion previews, snapshots, and signed embeds | Project, Project version, Project view |
 | `RUN_PROJECT` | A project runs top to bottom, whether started by a user, a scheduled run, or the agent | Project, Project version |
 | `RUN_CELL` | A user runs a single cell in a project | Project, Project version, Cell |
 | `PUBLISH_PROJECT` | A user publishes a project's app, directly or by approving a publish review request | Project |
-| `RENAME_PROJECT` | A user renames a project or 4.0 project from its folder | Project |
-| `SET_PROJECT_OWNER` | A user transfers ownership of a project or 4.0 project to another user | Project, User |
-| `DELETE_PROJECT` | A user moves a project or 4.0 project to the trash | Project |
-| `RESTORE_PROJECT` | A user restores a project or 4.0 project from the trash | Project |
-| `PERMANENTLY_DELETE_PROJECT` | A user permanently deletes a project, including when its folder is permanently deleted | Project |
+| `RENAME_PROJECT` | A user renames a project from its folder | Project |
+| `SET_PROJECT_OWNER` | A user transfers ownership of a project to another user | Project, User |
+| `DELETE_PROJECT` | A user moves a project to the trash | Project |
+| `RESTORE_PROJECT` | A user restores a project from the trash | Project |
+| `PERMANENTLY_DELETE_PROJECT` | A user permanently deletes a project, individually or in bulk, including when its folder is permanently deleted | Project |
 | `UPDATE_COMPONENT_IN_HEXES` | An admin updates projects that use a component to its latest published version. The component is the target | Project |
 | `UPLOAD_FILE_TO_PROJECT` | A user uploads a file to a project (4.0 projects log `UPLOAD_CODE_PROJECT_FILE`) | Project, File |
 | `DOWNLOAD_FILE_FROM_PROJECT` | A user downloads a file uploaded to a project | Project, File |
@@ -401,12 +407,20 @@ Changing a token's description or expiration always regenerates it, so the `UPDA
 | `GRANT_GROUPS_PROJECT_ACCESS` | A user gives one or more groups a role on a project | Project, Group, Project grant |
 | `GRANT_ADMIN_PROJECT_ACCESS` | An admin grants themselves a role on a project | Project, User, Project grant |
 | `UPDATE_PROJECT_ACCESS` | A user changes a user's or group's role on a project | Project, Principal, Project grant |
-| `REMOVE_PROJECT_ACCESS` | A user removes a user's or group's access to a project | Project, Principal |
+| `REMOVE_PROJECT_ACCESS` | A user removes one or more users' or groups' access to a project | Project, Principal |
 | `SHARE_PROJECT_WITH_SUPPORT` | A user shares a project with Hex support | Project |
 | `SHARE_PROJECT_WITH_ORG` | A user changes or removes a project's workspace-wide access role | Project |
 | `SHARE_PROJECT_WITH_PUBLIC` | A user changes or removes a project's public web access role | Project |
 | `UPDATE_PROJECT_PUBLIC_DUPLICATION_ALLOWED` | A user changes whether people in other workspaces can duplicate a project | Project |
 | `UPDATE_ALLOW_EMBEDDING` | A user turns signed embedding on or off for a project | Project |
+
+### Reviews[​](#reviews "Direct link to Reviews")
+
+| Event type | Description | Target resource types |
+| --- | --- | --- |
+| `CREATE_REVIEW_REQUEST` | A user opens a review request to publish a project | Project, Review request |
+| `ADD_REVIEW_REQUEST_REVIEWER` | A user or group is assigned as a reviewer on a review request | Project, Review request, Review request reviewer |
+| `CREATE_REVIEW` | A reviewer submits a determination (approved, denied, or commented) on a review request | Project, Review request, Review |
 
 ### Folders[​](#folders "Direct link to Folders")
 
@@ -414,6 +428,7 @@ Changing a token's description or expiration always regenerates it, so the `UPDA
 | --- | --- | --- |
 | `CREATE_FOLDER` | A user creates a folder | Folder item |
 | `RENAME_FOLDER` | A user renames a folder | Folder item |
+| `SET_FOLDER_OWNER` | A user transfers ownership of a folder to another user | Folder item, User |
 | `MOVE_FOLDER` | A user moves a folder into another folder | Folder item |
 | `DELETE_FOLDER` | A user moves a folder to the trash | Folder item |
 | `RESTORE_FOLDER` | A user restores a folder from the trash | Folder item |
@@ -421,8 +436,8 @@ Changing a token's description or expiration always regenerates it, so the `UPDA
 | `GRANT_FOLDER_ENTRY_ACCESS` | A user gives a user or group access to a folder or project | Folder item, Folder item grant |
 | `UPDATE_FOLDER_ENTRY_ACCESS` | A user changes an existing user's or group's access level on a folder or project | Folder item, Folder item grant |
 | `REVOKE_FOLDER_ENTRY_ACCESS` | A user removes someone's access to a folder or project in a folder | Folder item, Folder item grant |
-| `MOVE_PROJECT_TO_FOLDER` | A user moves a project or 4.0 project into a folder | Project, Folder item |
-| `MOVE_PROJECT_TO_DRAFTS` | A user moves a project or 4.0 project to their drafts | Project, Folder item |
+| `MOVE_PROJECT_TO_FOLDER` | A user moves a project into a folder | Project, Folder item |
+| `MOVE_PROJECT_TO_DRAFTS` | A user moves a project to their drafts | Project, Folder item |
 
 ### Collections[​](#collections "Direct link to Collections")
 
@@ -460,6 +475,7 @@ Changing a token's description or expiration always regenerates it, so the `UPDA
 | `SET_WORKSPACE_DEFAULT_DATA_CONNECTION` | An admin sets or clears the workspace's default data connection | Data connection |
 | `APPLY_DATA_ASSET_STATUS` | A user applies a status, such as an endorsement, to a data asset | One of: Data connection, Data source database, Data source schema, Data source table, Semantic dataset, Semantic view |
 | `REMOVE_DATA_ASSET_STATUS` | A user removes the status from a data asset | One of: Data connection, Data source database, Data source schema, Data source table, Semantic dataset, Semantic view |
+| `RUN_ONE_OFF_SQL` | A user or agent runs a one-off SQL query against a data connection outside any cell, for example from a 4.0 project or the agent. The SQL text and results are never recorded | Data connection |
 
 ### Semantic models[​](#semantic-models "Direct link to Semantic models")
 
@@ -521,7 +537,7 @@ Changing a token's description or expiration always regenerates it, so the `UPDA
 
 | Event type | Description | Target resource types |
 | --- | --- | --- |
-| `CREATE_THREAD` | A user starts a new Thread | Project |
+| `CREATE_THREAD` | A user starts a new Thread; the created resource is the project that backs it | Project |
 | `CREATE_PROJECT_FROM_THREAD` | A user turns a Thread into a project | Project |
 | `DUPLICATE_THREAD` | A user duplicates a Thread shared with them | Project |
 | `DELETE_THREAD` | A user deletes a Thread | Thread |
@@ -531,6 +547,9 @@ Changing a token's description or expiration always regenerates it, so the `UPDA
 | Event type | Description | Target resource types |
 | --- | --- | --- |
 | `CREATE_LOGIC_VIEW_AGENT_CHAT_MESSAGE` | A user sends a message to the Notebook agent | Agent chat message |
+| `QUEUE_LOGIC_VIEW_AGENT_CHAT_MESSAGE` | A user sends a message to the Notebook agent while it is still working, so it waits in the thread's queue | Thread |
+| `CREATE_CODE_PROJECT_AGENT_CHAT_MESSAGE` | A user sends a message to the agent in a Hex 4 project | Agent chat message |
+| `QUEUE_CODE_PROJECT_AGENT_CHAT_MESSAGE` | A user sends a message to the agent in a Hex 4 project while it is still working, so it waits in the thread's queue | Thread |
 | `SEND_LLM_REQUEST` | Hex sends a request to an LLM provider while handling an agent query | Workspace |
 | `MAGIC_DESCRIBE_PROJECT` | A user has AI write a project's description | Project version |
 | `MAGIC_NAME_PROJECT` | A user has AI name a project | Project version |
@@ -555,23 +574,54 @@ Changing a token's description or expiration always regenerates it, so the `UPDA
 
 | Event type | Description | Target resource types |
 | --- | --- | --- |
-| `VIEW_CODE_PROJECT` | A user opens a 4.0 project's editor or published app | Project, Project view |
-| `UPLOAD_CODE_PROJECT_FILE` | A user uploads a file to a 4.0 project | Project ref |
-| `WRITE_CODE_PROJECT_FILE` | A user or agent writes a file in a 4.0 project | Project ref |
-| `EDIT_CODE_PROJECT_FILE` | A user or agent edits a file in a 4.0 project | Project ref |
-| `TRASH_CODE_PROJECT_FILE` | A user or agent deletes a file in a 4.0 project | Project ref |
-| `RELOAD_CODE_PROJECT` | A user or agent reloads a 4.0 project's saved source files | Project ref |
-| `SCAFFOLD_CODE_PROJECT_APP` | A user or agent scaffolds an app layout in a 4.0 project | Project ref |
-| `ADD_CODE_PROJECT_COMPONENT` | A user or agent adds a catalog component to a 4.0 project app | Project ref |
-| `CREATE_CODE_PROJECT_CHART` | A user or agent adds a chart to a 4.0 project | Project ref |
-| `CREATE_CODE_PROJECT_DISPLAY_TABLE` | A user or agent adds a display table to a 4.0 project | Project ref |
-| `CREATE_CODE_PROJECT_INPUT` | A user or agent adds an input to a 4.0 project | Project ref |
-| `CREATE_CODE_PROJECT_KPI_CARD` | A user or agent adds a KPI card to a 4.0 project | Project ref |
-| `LINK_CODE_PROJECT_DATA_CONNECTION` | A user or agent links a data connection to a 4.0 project | Project ref, Data connection |
-| `BUILD_CODE_PROJECT_APP` | A user or agent builds a preview of a 4.0 project app | Project ref |
-| `PUBLISH_CODE_PROJECT` | A user or agent publishes a 4.0 project app | Project ref |
-| `DOWNLOAD_CODE_PROJECT_SCREENSHOT` | A user or agent takes a screenshot of a 4.0 project's draft preview | Project ref |
-| `DOWNLOAD_CODE_APP_SCREENSHOT` | A user or agent takes a screenshot of a published 4.0 project app | Project |
+| `REJECT_CODE_PROJECT_ACCESS_CHANGE` | An attempt to change who can access a 4.0 project was rejected or did not complete; the principals and reason are recorded | Code project |
+| `RUN_CODE_PROJECT` | A user or agent runs cells in a 4.0 project from the editor, a published app, the API, or the agent. For API and agent runs, failure means the run did not complete or a requested cell errored (only counts are recorded). Editor and published-app runs record the authorized rerun request; the cells then execute as the browser fetches them | Code project ref |
+| `CREATE_CODE_PROJECT` | A user creates a 4.0 project | Code project |
+| `DUPLICATE_CODE_PROJECT` | A user duplicates a 4.0 project. Both the original and the copy are targets | Code project |
+| `RENAME_CODE_PROJECT` | A user renames a 4.0 project, directly or from its folder | Code project |
+| `SET_CODE_PROJECT_OWNER` | A user transfers ownership of a 4.0 project to another user | Code project, User |
+| `DELETE_CODE_PROJECT` | A user moves a 4.0 project to the trash | Code project |
+| `RESTORE_CODE_PROJECT` | A user restores a 4.0 project from the trash | Code project |
+| `PERMANENTLY_DELETE_CODE_PROJECT` | A user permanently deletes a 4.0 project, individually or in bulk, including when its folder is permanently deleted | Code project |
+| `GRANT_USERS_CODE_PROJECT_ACCESS` | A user gives one or more users a role on a 4.0 project | Code project, User, Code project grant |
+| `GRANT_GROUPS_CODE_PROJECT_ACCESS` | A user gives one or more groups a role on a 4.0 project | Code project, Group, Code project grant |
+| `GRANT_ADMIN_CODE_PROJECT_ACCESS` | An admin grants themselves a role on a 4.0 project | Code project, User, Code project grant |
+| `REMOVE_CODE_PROJECT_ACCESS` | A user removes one or more users' or groups' access to a 4.0 project | Code project, Principal |
+| `SHARE_CODE_PROJECT_WITH_SUPPORT` | A user shares a 4.0 project with Hex support | Code project |
+| `SHARE_CODE_PROJECT_WITH_ORG` | A user changes or removes a 4.0 project's workspace-wide access role | Code project |
+| `MOVE_CODE_PROJECT_TO_FOLDER` | A user moves a 4.0 project into a folder | Code project, Folder item |
+| `MOVE_CODE_PROJECT_TO_DRAFTS` | A user moves a 4.0 project to their drafts | Code project, Folder item |
+| `CREATE_CODE_PROJECT_THREAD` | A user starts a new Thread backed by a 4.0 project; the created resource is that project | Code project |
+| `CREATE_CODE_PROJECT_FROM_THREAD` | A user turns a Thread into a 4.0 project | Code project |
+| `VIEW_CODE_PROJECT` | A user opens a 4.0 project's editor or published app | Code project, Code project view |
+| `CREATE_CODE_PROJECT_BRANCH` | A user creates a branch in a 4.0 project | Code project, Code project ref |
+| `DUPLICATE_CODE_PROJECT_BRANCH` | A user duplicates a branch in a 4.0 project. Both the original and the copy are targets | Code project, Code project ref |
+| `RENAME_CODE_PROJECT_BRANCH` | A user renames a branch in a 4.0 project | Code project, Code project ref |
+| `DELETE_CODE_PROJECT_BRANCH` | A user deletes a branch from a 4.0 project | Code project, Code project ref |
+| `UPLOAD_CODE_PROJECT_FILE` | A user uploads a file to a 4.0 project | Code project ref |
+| `DOWNLOAD_CODE_PROJECT_FILE` | A user downloads a file from a 4.0 project | Code project ref |
+| `DOWNLOAD_CODE_PROJECT_ARTIFACT_CSV` | A user downloads a table artifact as a CSV | Code project, Code project ref |
+| `COPY_CODE_PROJECT_ARTIFACT_TO_CLIPBOARD` | A user copies a table artifact's rows to the clipboard | Code project, Code project ref |
+| `EXPORT_CODE_PROJECT_AS_PDF` | A user exports a 4.0 project's app as a PDF | Code project |
+| `WRITE_CODE_PROJECT_FILE` | A user or agent writes a file in a 4.0 project | Code project ref |
+| `EDIT_CODE_PROJECT_FILE` | A user or agent edits a file in a 4.0 project | Code project ref |
+| `TRASH_CODE_PROJECT_FILE` | A user or agent deletes a file in a 4.0 project | Code project ref |
+| `RELOAD_CODE_PROJECT` | A user or agent reloads a 4.0 project's saved source files | Code project ref |
+| `SCAFFOLD_CODE_PROJECT_APP` | A user or agent scaffolds an app layout in a 4.0 project | Code project ref |
+| `ADD_CODE_PROJECT_COMPONENT` | A user or agent adds a catalog component to a 4.0 project app | Code project ref |
+| `CREATE_CODE_PROJECT_CELL` | A user or agent adds a cell to a 4.0 project; cellType says whether it is a CHART, DISPLAY\_TABLE, KPI\_CARD or INPUT. Like RUN\_CELL, the kind of cell is metadata rather than a separate event | Code project ref |
+| `LINK_CODE_PROJECT_DATA_CONNECTION` | A user or agent links a data connection to a 4.0 project | Code project ref, Data connection |
+| `UNLINK_CODE_PROJECT_DATA_CONNECTION` | A user or agent unlinks a data connection from a 4.0 project | Code project ref, Data connection |
+| `BUILD_CODE_PROJECT_APP` | A user or agent builds a preview of a 4.0 project app | Code project ref |
+| `PUBLISH_CODE_PROJECT` | A user or agent publishes a 4.0 project app | Code project ref |
+| `DOWNLOAD_CODE_PROJECT_SCREENSHOT` | A user or agent takes a screenshot of a 4.0 project's draft preview | Code project ref |
+| `DOWNLOAD_CODE_APP_SCREENSHOT` | A user or agent takes a screenshot of a published 4.0 project app | Code project |
+| `ARCHIVE_CODE_PROJECT` | A user archives one or more 4.0 projects | Code project |
+| `UNARCHIVE_CODE_PROJECT` | A user unarchives one or more 4.0 projects | Code project |
+| `APPLY_CODE_PROJECT_STATUS` | A user sets or changes the status of one or more 4.0 projects. Target snapshots include previous status IDs; event metadata includes the requested status | Code project |
+| `REMOVE_CODE_PROJECT_STATUS` | A user clears the status of one or more 4.0 projects. Target snapshots include previous status IDs | Code project |
+| `ADD_CODE_PROJECT_CATEGORY` | A user adds categories to one or more 4.0 projects. One event contains all requested projects and category names | Code project |
+| `REMOVE_CODE_PROJECT_CATEGORY` | A user removes categories from one or more 4.0 projects. One event contains all requested projects and category names | Code project |
 
 ### Tasks[​](#tasks "Direct link to Tasks")
 
@@ -599,6 +649,7 @@ Changing a token's description or expiration always regenerates it, so the `UPDA
   + [Projects](#projects)
   + [Explores](#explores)
   + [Sharing and access](#sharing-and-access)
+  + [Reviews](#reviews)
   + [Folders](#folders)
   + [Collections](#collections)
   + [Scheduled runs](#scheduled-runs)

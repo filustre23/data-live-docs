@@ -541,7 +541,3 @@ This option accepts the following values:
 * `MX`: Mexico
 * `MY`: Malaysia
 * `NG`: Nigeria
-* `NL`: Netherlands
-* `NO`: Norway
-* `NZ`: New Zealand
-* `PE`

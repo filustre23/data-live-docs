@@ -234,5 +234,5 @@ func main() {
 
 	// Then, create the data exchange (or return information about one already bearing the example name), and
 	// print information about it.
-	exchange, err :=
+	exchange,
 ```

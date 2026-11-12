@@ -47,14 +47,14 @@ public class CreateTeradataTransfer {
     String bucket = "cloud-sample-data";
     String databaseName = "MY_DATABASE_NAME";
     String tableNamePatterns = "*";
-    String serviceAccount = "MY_SERVICE_A<CCOUNT";>
-    String schemaFil<>ePath = "/your-schema-path";;
-    MapString, Value params = new HashMap();
-    params.put("database_type&quot;, Value.newBuilder().setStringValue(databaseType).build());
-    params.put(&quot;bucket", Value.newBuilder().setStringValue(bucket).build());
+    String serviceAccount = "MY_SERVICE_ACCOUNT";
+    String schemaFilePath = "/your-schema-path";
+    Map<String, Value> params = new HashMap<>();
+    params.put("database_type", Value.newBuilder().setStringValue(databaseType).build());
+    params.put("bucket", Value.newBuilder().setStringValue(bucket).build());
     params.put("database_name", Value.newBuilder().setStringValue(databaseName).build());
     params.put("table_name_patterns", Value.newBuilder().setStringValue(tableNamePatterns).build());
-    params.put(";agent_service_account", Value.newBuilder().setStringValue(serviceAccount).build());
+    params.put("agent_service_account", Value.newBuilder().setStringValue(serviceAccount).build());
     params.put("schema_file_path", Value.newBuilder().setStringValue(schemaFilePath).build());
     TransferConfig transferConfig =
         TransferConfig.newBuilder()
@@ -62,7 +62,7 @@ public class CreateTeradataTransfer {
             .setDisplayName("Your Teradata Config Name")
             .setDataSourceId("on_premises")
             .setParams(Struct.newBuilder().putAllFields(params).build())
-            .setSchedule(&quot;every 24 hours")
+            .setSchedule("every 24 hours")
             .build();
     createTeradataTransfer(projectId, transferConfig);
   }

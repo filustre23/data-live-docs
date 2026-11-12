@@ -525,8 +525,4 @@ EARLY_STOP = { TRUE | FALSE }
 
 **Description**
 
-Determines whether training should stop after the first iteration in which the
-relative loss improvement is less than the value specified for
-[`MIN_REL_PROGRESS`](#min_rel_progress).
-
-**Arguments**<
+Determines whether training should stop after the first iteration in

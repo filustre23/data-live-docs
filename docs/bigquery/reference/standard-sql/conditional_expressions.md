@@ -321,7 +321,4 @@ For more information, see
 [Evaluation order and short-circuiting](#short_circuiting).
 
 `expr` and `null_result` can be any type and must be implicitly coercible to
-a common [supertype](/bigquery/docs/reference/standard-sql/conversion_rules#supertypes). Synonym for
-`COALESCE(expr, null_result)`.
-
-**Return Data Type**
+a common

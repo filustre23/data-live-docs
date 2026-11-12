@@ -345,6 +345,5 @@ penguin's mass:
 
 ```
 WITH prepared_data AS (
-  SELECT *, RAND() <= 0.8 AS training
-  FROM
+  SELECT *, RAND() <= 0.8 AS
 ```

@@ -38,7 +38,7 @@ Search Ads 360 連接器的 BigQuery 資料移轉服務支援下列資料移轉�
 
 ### 重新整理時間範圍
 
-「更新回溯期」是指資料移轉時，資料移轉作業擷取資料的天數。舉例來說，如果更新時間範圍為三天，且每天都會進行移轉，BigQuery 資料移轉服務會從來源資料表擷取過去三天的所有資料。在本例中，每日移轉作業執行時，BigQuery 資料移轉服務會建立新的 BigQuery 目的地資料表分區，並複製當天的來源資料表資料，然後自動觸發補充執行作業，使用過去兩天的來源資料表資料更新 BigQuery 目的地資料表分區。自動觸發的回填執行作業會覆寫或增量更新 BigQuery 目的地資料表，具體取決於 BigQuery 資料移轉服務連接器是否支援增量更新。
+「更新回溯期」是指資料移轉時，資料移轉作業擷取資料的天數。舉例來說，如果重新整理時間範圍為三天，且每天執行移轉作業，BigQuery 資料移轉服務會從來源資料表擷取過去三天的所有資料。在本例中，每日移轉作業執行時，BigQuery 資料移轉服務會建立新的 BigQuery 目的地資料表分區，並複製當天的來源資料表資料，然後自動觸發補充執行作業，使用過去兩天的來源資料表資料更新 BigQuery 目的地資料表分區。自動觸發的回填執行作業會覆寫或增量更新 BigQuery 目的地資料表，具體取決於 BigQuery 資料移轉服務連接器是否支援增量更新。
 
 首次執行資料移轉作業時，系統會擷取重新整理期間內的所有可用來源資料。舉例來說，如果更新時間範圍為三天，且您首次執行資料移轉作業，BigQuery 資料移轉服務會擷取三天內的所有來源資料。
 
@@ -55,7 +55,7 @@ Search Ads 360 連接器的 BigQuery 資料移轉服務支援下列資料移轉�
 
 * 確認您已完成[啟用 BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service?hl=zh-tw)所需的所有動作。
 * [建立 BigQuery 資料移轉服務資料集](https://docs.cloud.google.com/bigquery/docs/datasets?hl=zh-tw)，用於儲存 Search Ads 360 報表資料。
-* 如要設定 Pub/Sub 的移轉作業執行通知，您必須具備 `pubsub.topics.setIamPolicy` 權限。如果您只想設定電子郵件通知，則不需要擁有 Pub/Sub 權限。詳情請參閱「[BigQuery 資料移轉服務執行通知](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications?hl=zh-tw)」。
+* 如果您想要為 Pub/Sub 設定移轉作業執行通知，您必須擁有`pubsub.topics.setIamPolicy` 權限。如果您只想設定電子郵件通知，則不需要擁有 Pub/Sub 權限。詳情請參閱「[BigQuery 資料移轉服務執行通知](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications?hl=zh-tw)」。
 * 在專案中[啟用 Search Ads 360 Reporting API 存取權](https://console.developers.google.com/apis/api/searchads360.googleapis.com/?hl=zh-tw)。
 
 ## 所需權限
@@ -199,5 +199,5 @@ bq mk \
 --display_name=NAME \
 --data_source=DATA_SOURCE \
 --service_account_name=SERVICE_ACCOUNT_NAME \
---params='{PARAMETERS,"custom_columns":"[{\"id\": \"CC_ID\",\"destination_table_name\": [\"CC_DESTINATION_TABLE\"],\"bigquery_column_name\": \"CC_COLUMN\"}]","custom_floodlight_variab
+--params='{PARAMETERS,"custom_columns":"[{\"id\": \"CC_ID
 ```

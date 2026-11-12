@@ -215,7 +215,7 @@ BigQuery 資料表位於[資料集](https://docs.cloud.google.com/bigquery/docs/
 
 移除 Databricks 前，請務必備份資料和筆記本。如要清理並完全移除 Databricks，請在Google Cloud 控制台中取消 Databricks 訂閱，並從Google Cloud 控制台移除您建立的所有相關資源。
 
-刪除 Databricks 工作區時，如果 [Databricks 建立](https://docs.gcp.databricks.com/administration-guide/account-settings-gcp/workspaces.html#secure-the-workspaces-gcs-buckets-in-your-project)的兩個 Cloud Storage bucket (名稱為 `databricks-WORKSPACE_ID` 和 `databricks-WORKSPACE_ID-system`) 不是空的，可能不會遭到刪除。刪除工作區後，您可以在專案的Google Cloud 控制台中手動刪除這些物件。
+如果刪除 Databricks 工作區，[Databricks 建立](https://docs.gcp.databricks.com/administration-guide/account-settings-gcp/workspaces.html#secure-the-workspaces-gcs-buckets-in-your-project)的兩個 Cloud Storage bucket (名稱為 `databricks-WORKSPACE_ID` 和 `databricks-WORKSPACE_ID-system`) 可能不會刪除 (如果 Cloud Storage bucket 不是空白)。刪除工作區後，您可以在專案的Google Cloud 控制台中手動刪除這些物件。
 
 ## 後續步驟
 
@@ -236,11 +236,11 @@ BigQuery 資料表位於[資料集](https://docs.cloud.google.com/bigquery/docs/
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-08 (世界標準時間)。
+上次更新時間：2026-11-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-08 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-12 (世界標準時間)。"],[],[]]

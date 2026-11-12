@@ -231,5 +231,5 @@ SELECT
   error_code,
   SUM(total_rows) AS num_rows,
   SUM(total_input_bytes) AS num_bytes,
-  SUM(total_requests) AS
+  SUM(total_requests
 ```

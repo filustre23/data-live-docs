@@ -141,6 +141,5 @@ WHERE
   AND (jobs.statement_type != "SCRIPT" OR jobs.statement_type IS NULL)  -- Avoid duplicate byte counting in parent and children jobs.
 GROUP BY
   period_start
-ORDER BY
-  period_start
+ORDER
 ```

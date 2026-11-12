@@ -137,7 +137,7 @@ BigQuery 針對執行查詢的運算單元，提供兩種計費模式：
 * 如要瞭解依據運算能力計費的不同選項 (按月或按年承諾使用合約)，請參閱「[管理工作負載承諾使用合約](https://docs.cloud.google.com/bigquery/docs/reservations-commitments?hl=zh-tw)」。
 * 如要建立以容量為基礎的運算單元集區 (稱為「運算單元預留項目」)，請參閱「[使用運算單元預留項目](https://docs.cloud.google.com/bigquery/docs/reservations-tasks?hl=zh-tw)」。
 * 如要將運算單元預留項目分配給特定專案，請參閱「[使用預留項目指派作業](https://docs.cloud.google.com/bigquery/docs/reservations-assignments?hl=zh-tw)」。
-* 如要將管理專案的運算容量費用直接歸因於查詢消耗專案，請參閱「[運算費用歸因](https://docs.cloud.google.com/bigquery/docs/reservations-monitoring?hl=zh-tw#reservation_cost_attribution)」(預先發布版)。
+* 如要將管理專案的運算容量費用直接歸因於查詢消耗專案，請參閱「[運算費用歸因](https://docs.cloud.google.com/bigquery/docs/reservations-monitoring?hl=zh-tw#reservation_cost_attribution)」([預先發布版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))。
 * 如要預估應分配給工作負載的運算單元數量，請參閱「[預估運算單元容量需求](https://docs.cloud.google.com/bigquery/docs/slot-estimator?hl=zh-tw)」。
 
 ## 監控資源
@@ -164,7 +164,7 @@ Cloud Monitoring 提供監控 BigQuery 的資訊主頁。這個資訊主頁會�
 
 ### 監控保留項目
 
-您可以在Google Cloud 控制台的「Workload management」(工作負載管理) 頁面監控運算單元用量。您可以查看運算資源承諾使用合約，以及運算單元預留項目的指派位置。您也可以使用**運算單元估算工具** ([預先發布版](https://cloud.google.com/products?hl=zh-tw#section-22))，根據歷來成效指標，預估組織的容量需求。
+您可以在Google Cloud 控制台的「Workload management」(工作負載管理) 頁面監控運算單元用量。您可以查看運算資源承諾使用合約，以及運算單元預留項目的指派位置。您也可以使用**運算單元估算工具** ([預先發布版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))，根據歷來成效指標，預估組織的容量需求。
 
 詳情請參閱「[監控 BigQuery 預留項目](https://docs.cloud.google.com/bigquery/docs/reservations-monitoring?hl=zh-tw)」。
 
@@ -205,7 +205,11 @@ Cloud 稽核記錄會維護 Google Cloud 事件記錄，包括 BigQuery 事件�
 
 ## 後續步驟
 
-* 查看 [BigQuery 管理員參考指南：重點回顧](https://cloud.google.com/blog/topics/developers-practitioners/bigquery-admin-reference-guide-recap?hl=zh-tw)
+* 瞭解如何[將資源整理成階層結構](https://docs.cloud.google.com/bigquery/docs/resource-hierarchy?hl=zh-tw)。
+* 瞭解如何[使用預留項目管理工作負載及分配運算能力](https://docs.cloud.google.com/bigquery/docs/reservations-intro?hl=zh-tw)。
+* 瞭解如何[保護及控管資料資源](https://docs.cloud.google.com/bigquery/docs/data-governance?hl=zh-tw)。
+* 瞭解如何[監控 BigQuery 健康狀態和資源使用率](https://docs.cloud.google.com/bigquery/docs/monitoring?hl=zh-tw)。
+* 瞭解如何[控管及最佳化查詢和儲存空間費用](https://docs.cloud.google.com/bigquery/docs/best-practices-costs?hl=zh-tw)。
 
 
 
@@ -214,11 +218,11 @@ Cloud 稽核記錄會維護 Google Cloud 事件記錄，包括 BigQuery 事件�
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-09 (世界標準時間)。
+上次更新時間：2026-11-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-12 (世界標準時間)。"],[],[]]

@@ -191,7 +191,7 @@ AI.GENERATE_BOOL(
   For example, `myproject.us.myconnection`.
 
   If you don't specify a connection, then the query uses your
-  [end-user credentials](/bigquery/docs/permissions-for-ai-functions#run_generative_ai_queries_with_end-user_credentials).
+  [Google Account user credentials](/bigquery/docs/permissions-for-ai-functions#run_generative_ai_queries_with_end-user_credentials).
 
   For information about configuring permissions, see [Set
   permissions for BigQuery ML generative AI functions that call Vertex AI models](/bigquery/docs/permissions-for-ai-functions).
@@ -235,7 +235,7 @@ contains the following fields:
 ## Examples
 
 The following examples assume that you have granted the [Agent Platform User role](/vertex-ai/docs/general/access-control#aiplatform.user) to your personal account.
-For more information, see [Run generative AI queries with end-user credentials](/bigquery/docs/permissions-for-ai-functions#run_generative_ai_queries_with_end-user_credentials).
+For more information, see [Run generative AI queries with Google Account user credentials](/bigquery/docs/permissions-for-ai-functions#run_generative_ai_queries_with_end-user_credentials).
 
 ### Use string input
 
@@ -332,9 +332,4 @@ additional "thinking" tokens. For more information, see
 [Thinking budgets](https://ai.google.dev/gemini-api/docs/thinking#set-budget).
 
 The following query shows how to set the `model_params` argument to set the
-model's thinking budget to `0` for the request:
-
-```
-SELECT
-  city
-```
+model's thinking budget to `0`

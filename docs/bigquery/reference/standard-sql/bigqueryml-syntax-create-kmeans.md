@@ -536,8 +536,3 @@ centroids in the final model.
 
 This example creates a k-means model with three clusters using the random
 cluster initialization method.
-
-```
-CREATE MODEL
-  `
-```

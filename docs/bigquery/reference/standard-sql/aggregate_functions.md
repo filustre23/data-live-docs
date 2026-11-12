@@ -185,5 +185,5 @@ GROUP BY S_location_id;
 ANY_VALUE(
   expression
   [ WHERE where_expression ]
-  [ HAVING { MAX | MIN } having_expression
+  [ HAVING { MAX |
 ```

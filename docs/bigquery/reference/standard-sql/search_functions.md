@@ -343,5 +343,5 @@ SELECT
   SEARCH('foobar@example.com', '`example.com`') AS f,
 
   -- TRUE: An exact match is found between the space delimiters.
-  SEARCH('a foobar-example b', '`foobar-example`'
+  SEARCH(
 ```

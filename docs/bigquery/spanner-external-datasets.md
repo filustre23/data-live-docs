@@ -22,7 +22,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ## 所需權限
 
-如要取得建立外部資料集所需的權限，請要求管理員授予您 [BigQuery 使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.user)  (`roles/bigquery.user`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得建立外部資料集所需的權限，請要求管理員授予您 [BigQuery 使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.user) (`roles/bigquery.user`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
 這個預先定義的角色具備 `bigquery.datasets.create` 權限，可建立外部資料集。
 
@@ -32,7 +32,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ## 使用 `CLOUD_RESOURCE` 連線
 
-Spanner 外部資料集可視需要使用 `CLOUD_RESOURCE` 連線與 Spanner 資料庫互動，因此您可以透過 BigQuery 為使用者提供 Spanner 資料存取權，而不必直接授予 Spanner 資料庫存取權。由於 `CLOUD_RESOURCE` 連線的服務帳戶會處理從 Spanner 擷取資料的作業，因此您只需授予使用者 Spanner 外部資料集的存取權。
+Spanner 外部資料集可視需要使用 `CLOUD_RESOURCE` 連線與 Spanner 資料庫互動，讓您透過 BigQuery 為使用者提供 Spanner 資料存取權，而不必直接授予 Spanner 資料庫存取權。由於 `CLOUD_RESOURCE` 連線的服務帳戶會處理從 Spanner 擷取資料的作業，因此您只需授予使用者 Spanner 外部資料集的存取權。
 
 使用 `CLOUD_RESOURCE` 連線建立 Spanner 外部資料集前，請先完成下列操作：
 
@@ -53,8 +53,8 @@ Spanner 外部資料集可視需要使用 `CLOUD_RESOURCE` 連線與 Spanner 資
 3. 在「Explorer」窗格中展開專案名稱，然後點選「Connections」(連線)。
 4. 在「Connections」(連線) 頁面，按一下「Create connection」(建立連線)。
 5. 在「連線類型」部分，選擇「Vertex AI 遠端模型、遠端函式、BigLake 和 Spanner (Cloud 資源)」。
-6. 在「連線 ID」欄位輸入連線名稱。
-7. 在「位置類型」部分，選取連線位置。連線應與資料集等其他資源位於相同位置。
+6. 在「連線 ID」欄位中，輸入連線名稱。
+7. 在「位置類型」部分，選取連線位置。連線應與其他資源 (例如資料集) 位於相同位置。
 8. 點選「建立連線」。
 9. 點選「前往連線」。
 10. 在「連線資訊」窗格中，複製服務帳戶 ID，以便在後續步驟中使用。
@@ -105,7 +105,7 @@ Spanner 外部資料集可視需要使用 `CLOUD_RESOURCE` 連線與 Spanner 資
 
    建立連線資源時，BigQuery 會建立專屬的系統服務帳戶，並與連線建立關聯。
 
-   **疑難排解**：如果收到下列連線錯誤，請[更新 Google Cloud SDK](https://docs.cloud.google.com/sdk/docs/quickstart?hl=zh-tw)：
+   **疑難排解**：如果收到下列連線錯誤訊息，請[更新 Google Cloud SDK](https://docs.cloud.google.com/sdk/docs/quickstart?hl=zh-tw)：
 
    ```
    Flags parsing error: flag --connection_type=CLOUD_RESOURCE: value should be one of...
@@ -303,11 +303,11 @@ public class CreateConnection {
 
 使用 [`google_bigquery_connection`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_connection) 資源。
 
-**注意：** 如要使用 Terraform 建立 BigQuery 物件，必須啟用 [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest?hl=zh-tw)。
+**注意：**如要使用 Terraform 建立 BigQuery 物件，必須啟用 [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
-下列範例會在 `US` 區域建立名為 `my_cloud_resource_connection` 的 Cloud 資源連結：
+下列範例會在 `US` 區域中建立名為 `my_cloud_resource_connection` 的 Cloud 資源連結：
 
 ```
 # This queries the provider for project information.
@@ -330,7 +330,7 @@ resource "google_bigquery_connection" "default" {
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
 2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
 
-   每個專案只需執行這個指令一次，而且可以在任何目錄中執行。
+   這項指令在每個專案中只需執行一次，且可在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
@@ -340,14 +340,14 @@ resource "google_bigquery_connection" "default" {
 
 ## 準備目錄
 
-每個 Terraform 設定檔都必須有自己的目錄 (也稱為*根模組*)。
+每個 Terraform 設定檔都必須有自己的目錄 (也稱為「根模組」)。
 
 1. 在 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw) 中建立目錄，並在該目錄中建立新檔案。檔案名稱必須有 `.tf` 副檔名，例如 `main.tf`。在本教學課程中，這個檔案稱為 `main.tf`。
 
    ```
    mkdir DIRECTORY && cd DIRECTORY && touch main.tf
    ```
-2. 如果您正在進行教學課程，可以複製每個章節或步驟中的程式碼範例。
+2. 如果您正在按照教學課程操作，可以複製每個章節或步驟中的程式碼範例。
 
    將程式碼範例複製到新建立的 `main.tf`。
 
@@ -382,7 +382,7 @@ resource "google_bigquery_connection" "default" {
    ```
 
    等待 Terraform 顯示「Apply complete!」訊息。
-3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)即可查看結果。在 Google Cloud 控制台的使用者介面中，前往資源頁面，確認 Terraform 已建立或更新資源。
+3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)即可查看結果。在 Google Cloud 控制台的 UI 中前往資源，確認 Terraform 已建立或更新資源。
 
 **注意：**Terraform 範例通常會假設 Google Cloud 專案已啟用必要的 API。
 
@@ -392,18 +392,18 @@ resource "google_bigquery_connection" "default" {
 
 您必須為與新連線相關聯的服務帳戶，授予 Spanner 執行個體或資料庫的讀取權限。建議使用 Cloud Spanner 資料庫讀取者 (使用 Data Boost) (`roles/spanner.databaseReaderWithDataBoost`) 預先定義的 IAM 角色。
 
-請按照下列步驟，將資料庫層級角色的存取權，授予先前從連線複製的服務帳戶：
+請按照下列步驟，將資料庫層級角色的存取權授予先前從連線複製的服務帳戶：
 
 1. 前往 Spanner 的「Instances」(執行個體) 頁面。
 
-   [前往「執行個體」頁面](https://console.cloud.google.com/spanner/instances?hl=zh-tw)
+   [前往執行個體頁面](https://console.cloud.google.com/spanner/instances?hl=zh-tw)
 2. 點選包含您的資料庫的執行個體名稱，前往「執行個體詳細資料」頁面。
 3. 在「Overview」(總覽) 分頁中，勾選資料庫的核取方塊。  
    「Info panel」(資訊面板) 隨即顯示。
 4. 按一下「Add principal」(新增主體)。
 5. 在「新增主體」面板的「新增主體」部分，輸入先前複製的服務帳戶 ID。
-6. 在「請選擇角色」欄位，選取「Cloud Spanner 資料庫讀取者 (使用 Data Boost)」角色。
-7. 按一下 [儲存]。
+6. 在「請選擇角色」欄位中，選取「Cloud Spanner 資料庫讀取者 (使用 Data Boost)」角色。
+7. 按一下「儲存」。
 
 ## 建立外部資料集
 
@@ -423,12 +423,12 @@ resource "google_bigquery_connection" "default" {
 
    * 針對「Dataset ID」(資料集 ID)，輸入唯一的資料集名稱。
    * 在「Location type」(位置類型) 部分，選擇資料集的位置，例如 `us-central1` 或多區域 `us`。資料集建立後即無法變更位置。
-   * 針對「External Dataset」(外部資料集)，執行下列操作：
+   * 在「External Dataset」(外部資料集) 部分，執行下列操作：
 
-     + 勾選「連結至外部資料集」旁的方塊。
+     + 勾選「外部資料集的連結」旁的方塊。
      + 在「External dataset type」(外部資料集類型) 部分，選取「`Spanner`」。
-     + 在「外部來源」部分，按照下列格式輸入 Spanner 資料庫的完整 ID：`projects/PROJECT_ID/instances/INSTANCE/databases/DATABASE`。例如：`projects/my_project/instances/my_instance/databases/my_database`。
-     + 您也可以在「Database role」(資料庫角色) 輸入 Spanner 資料庫角色名稱。如要進一步瞭解用於[建立 Spanner 連線](https://docs.cloud.google.com/bigquery/docs/connect-to-spanner?hl=zh-tw#create-spanner-connection)的資料庫角色，請參閱相關說明
+     + 在「External source」(外部來源) 中，輸入 Spanner 資料庫的完整 ID，格式如下：`projects/PROJECT_ID/instances/INSTANCE/databases/DATABASE`。例如：`projects/my_project/instances/my_instance/databases/my_database`。
+     + (選用) 在「Database role」(資料庫角色) 部分，輸入 Spanner 資料庫角色的名稱。如要進一步瞭解用於[建立 Spanner 連線](https://docs.cloud.google.com/bigquery/docs/connect-to-spanner?hl=zh-tw#create-spanner-connection)的資料庫角色，請參閱相關說明
      + (選用) 勾選「使用 Cloud 資源連結」旁的方塊，即可使用連結建立外部資料集。
    * 其他設定均保留預設值。
 6. 點選「建立資料集」。
@@ -462,7 +462,7 @@ resource "google_bigquery_connection" "default" {
    * `DATASET_NAME`：BigQuery 中新資料集的名稱。
    * `SPANNER_EXTERNAL_SOURCE`：Spanner 資料庫的完整名稱，前置字串用於識別來源，格式如下：`google-cloudspanner://[DATABASE_ROLE@]/projects/PROJECT_ID/instances/INSTANCE/databases/DATABASE`。例如：`google-cloudspanner://admin@/projects/my_project/instances/my_instance/databases/my_database` 或 `google-cloudspanner:/projects/my_project/instances/my_instance/databases/my_database`。
    * `LOCATION`：新資料集在 BigQuery 中的位置，例如 `us-central1`。資料集建立後即無法變更位置。
-   * (選用)`CONNECTION_NAME`：Cloud 資源連結的名稱。
+   * (選用) `CONNECTION_NAME`：Cloud 資源連結的名稱。
 3. 按一下「play\_circle 執行」。
 
 如要進一步瞭解如何執行查詢，請參閱「[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)」。
@@ -491,13 +491,13 @@ bq --location=LOCATION mk --dataset \
 * `LOCATION`：新資料集在 BigQuery 中的位置，例如 `us-central1`。資料集建立後即無法變更位置。您可以使用 [`.bigqueryrc` 檔案](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool?hl=zh-tw#setting_default_values_for_command-line_flags)設定預設位置值。
 * `SPANNER_EXTERNAL_SOURCE`：Spanner 資料庫的完整名稱，前置字串用於識別來源，格式如下：`google-cloudspanner://[DATABASE_ROLE@]/projects/PROJECT_ID/instances/INSTANCE/databases/DATABASE`。例如：`google-cloudspanner://admin@/projects/my_project/instances/my_instance/databases/my_database` 或 `google-cloudspanner:/projects/my_project/instances/my_instance/databases/my_database`。
 * `DATASET_NAME`：BigQuery 中新資料集的名稱。如要在預設專案以外的專案中建立資料集，請按照下列格式，將專案 ID 新增至資料集名稱：`PROJECT_ID`:`DATASET_NAME`。
-* (選用)`CONNECTION_NAME`：Cloud 資源連結的名稱。
+* (選用) `CONNECTION_NAME`：Cloud 資源連結的名稱。
 
 ### Terraform
 
 使用 [`google_bigquery_dataset` 資源](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset#example-usage---bigquery-dataset-external-reference-aws-docs)。
 
-**注意：** 如要使用 Terraform 建立 BigQuery 物件，必須啟用 [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest?hl=zh-tw)。
+**注意：**如要使用 Terraform 建立 BigQuery 物件，必須啟用 [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -525,7 +525,7 @@ resource "google_bigquery_dataset" "default" {
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
 2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
 
-   每個專案只需執行這個指令一次，而且可以在任何目錄中執行。
+   這項指令在每個專案中只需執行一次，且可在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
@@ -535,14 +535,14 @@ resource "google_bigquery_dataset" "default" {
 
 ## 準備目錄
 
-每個 Terraform 設定檔都必須有自己的目錄 (也稱為*根模組*)。
+每個 Terraform 設定檔都必須有自己的目錄 (也稱為「根模組」)。
 
 1. 在 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw) 中建立目錄，並在該目錄中建立新檔案。檔案名稱必須有 `.tf` 副檔名，例如 `main.tf`。在本教學課程中，這個檔案稱為 `main.tf`。
 
    ```
    mkdir DIRECTORY && cd DIRECTORY && touch main.tf
    ```
-2. 如果您正在進行教學課程，可以複製每個章節或步驟中的程式碼範例。
+2. 如果您正在按照教學課程操作，可以複製每個章節或步驟中的程式碼範例。
 
    將程式碼範例複製到新建立的 `main.tf`。
 
@@ -577,7 +577,7 @@ resource "google_bigquery_dataset" "default" {
    ```
 
    等待 Terraform 顯示「Apply complete!」訊息。
-3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)即可查看結果。在 Google Cloud 控制台的使用者介面中，前往資源頁面，確認 Terraform 已建立或更新資源。
+3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)即可查看結果。在 Google Cloud 控制台的 UI 中前往資源，確認 Terraform 已建立或更新資源。
 
 **注意：**Terraform 範例通常會假設 Google Cloud 專案已啟用必要的 API。
 
@@ -591,9 +591,9 @@ resource "google_bigquery_dataset" "default" {
 
 ## 控管資料表的存取權
 
-Spanner 外部資料集支援使用者憑證 (EUC)。也就是說，從外部資料集存取 Spanner 資料表的權限是由 Spanner 控管。使用者必須在 Spanner 取得存取權，才能查詢這些資料表。
+Spanner 外部資料集支援 Google 帳戶使用者憑證。也就是說，從外部資料集存取 Spanner 資料表的權限是由 Spanner 控管。使用者必須在 Spanner 中獲得存取權，才能查詢這些資料表。
 
-Spanner 外部資料集也支援存取權委派。存取權委派功能可將 Spanner 資料表的存取權，與外部資料集和基礎 Spanner 資料表的直接存取權分開。與服務帳戶相關聯的 Cloud 資源連結，用於連線至 Spanner。即使使用者未獲授予 Spanner 存取權，仍可從外部資料集查詢這些 Spanner 資料表。
+Spanner 外部資料集也支援存取權委派。存取權委派功能可將 Spanner 資料表的存取權，與外部資料集和直接存取基礎 Spanner 資料表的功能分開。與服務帳戶相關聯的 Cloud 資源連結，用於連線至 Spanner。即使使用者未在 Spanner 獲得存取權，也能從外部資料集查詢這些 Spanner 資料表。
 
 ## 列出外部資料集內的資料表
 
@@ -609,15 +609,15 @@ Spanner 外部資料集也支援存取權委派。存取權委派功能可將 Sp
 
 根據預設，針對 Spanner 外部資料集中的資料表執行查詢時，會使用 [Data Boost](https://docs.cloud.google.com/bigquery/docs/spanner-federated-queries?hl=zh-tw#data_boost)，且無法變更。因此，您需要[額外權限](https://docs.cloud.google.com/bigquery/docs/spanner-federated-queries?hl=zh-tw#before_you_begin_2)才能執行這類查詢。
 
-查詢結果會[儲存在 BigQuery](https://docs.cloud.google.com/bigquery/docs/writing-results?hl=zh-tw#temporary_and_permanent_tables)。查詢 Spanner 時，查詢結果預設會儲存在臨時資料表中。您也可以選擇將結果儲存為新的 BigQuery 資料表、與其他資料表彙整，或使用 [DML](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax?hl=zh-tw) 與現有資料表合併。
+查詢結果會[儲存在 BigQuery](https://docs.cloud.google.com/bigquery/docs/writing-results?hl=zh-tw#temporary_and_permanent_tables)。查詢 Spanner 時，查詢結果預設會儲存在暫存資料表中。您也可以選擇將結果儲存為新的 BigQuery 資料表、與其他資料表彙整，或使用 [DML](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax?hl=zh-tw) 與現有資料表合併。
 
-## 在外部資料集建立檢視表
+## 在外部資料集中建立檢視表
 
-您無法在外部資料集建立檢視表。不過，您可以在標準資料集中，根據外部資料集內的資料表建立檢視表。詳情請參閱「[建立檢視表](https://docs.cloud.google.com/bigquery/docs/views?hl=zh-tw)」。
+您無法在外部資料集中建立檢視表。不過，您可以在標準資料集中，根據外部資料集內的資料表建立檢視表。詳情請參閱「[建立檢視表](https://docs.cloud.google.com/bigquery/docs/views?hl=zh-tw)」。
 
 ## 刪除外部資料集
 
-刪除外部資料集的方式與刪除其他 BigQuery 資料集相同。刪除外部資料集不會影響 Spanner 資料庫中的資料表。詳情請參閱「[刪除資料集](https://docs.cloud.google.com/bigquery/docs/managing-datasets?hl=zh-tw#delete-datasets)」。
+刪除外部資料集的方式與刪除任何其他 BigQuery 資料集相同。刪除外部資料集不會影響 Spanner 資料庫中的資料表。詳情請參閱「[刪除資料集](https://docs.cloud.google.com/bigquery/docs/managing-datasets?hl=zh-tw#delete-datasets)」。
 
 ## 根據外部資料集的資料表，建立非漸進式 materialized view
 
@@ -642,7 +642,7 @@ AS
 
 * BigQuery 聯合查詢[限制](https://docs.cloud.google.com/bigquery/docs/federated-queries-intro?hl=zh-tw#limitations)適用。
 * BigQuery 只能存取預設 Spanner 結構定義中的資料表。不支援[具名結構定義](https://docs.cloud.google.com/spanner/docs/schema-and-data-model?hl=zh-tw#named-schemas)中的資料表。
-* BigQuery 不會顯示 Spanner 資料庫中定義的主鍵和外鍵。
+* 在 Spanner 資料庫中定義的主鍵和外鍵不會顯示在 BigQuery 中。
 * 如果 Spanner 資料庫中的資料表含有 BigQuery 不支援的資料欄類型，則無法在 BigQuery 端存取該資料欄。
 * 您無法在 Spanner 外部資料集的資料表中新增、刪除或更新資料或中繼資料。
 * 您無法在 Spanner 外部資料集中建立新的資料表、檢視表或 materialized view。
@@ -651,13 +651,13 @@ AS
 * 與資料表建立預設值相關的資料集層級設定不會影響外部資料集，因為您無法手動建立資料表。
 * 不支援 Write API 和 Read API。
 * 不支援資料列層級安全性、資料欄層級安全性和資料遮罩。
-* 不支援以 Spanner 外部資料集資料表為基礎的漸進式 materialized view，但預先發布版支援非漸進式 materialized view。
+* 不支援以 Spanner 外部資料集資料表為基礎的增量 materialized view，但預先發布版支援非增量 materialized view。
 * 不支援與 Knowledge Catalog 整合。舉例來說，系統不支援資料剖析和資料品質掃描。
 * 不支援資料表層級的標記。
 * 編寫查詢時，SQL 自動完成功能不適用於 Spanner 外部資料表。
 * 外部資料集不支援「透過 Sensitive Data Protection 掃描」。
 * 外部資料集不支援透過 BigQuery sharing (舊稱 Analytics Hub) 共用。
-* 如果 Spanner 外部資料集使用使用者憑證 (EUC)，您可以建立參照外部資料集的授權檢視表。不過，查詢這個檢視表時，執行查詢的使用者 EUC 會傳送至 Spanner。
+* 如果 Spanner 外部資料集使用 Google 帳戶使用者憑證，您可以建立參照外部資料集的授權檢視表。不過，查詢這個檢視表時，執行查詢者的 Google 帳戶使用者憑證會傳送至 Spanner。
 * 如果 Spanner 外部資料集使用 Cloud 資源連結委派存取權，您可以建立參照外部資料集的授權檢視表或授權常式。
 
 ## 後續步驟
@@ -672,11 +672,11 @@ AS
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-08 (世界標準時間)。
+上次更新時間：2026-11-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-08 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-12 (世界標準時間)。"],[],[]]

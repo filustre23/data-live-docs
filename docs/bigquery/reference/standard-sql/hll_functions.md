@@ -294,5 +294,3 @@ FROM
 
 
 Send feedback
-
-Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribut](https://creativecommons.org/licenses/by/4.0/)

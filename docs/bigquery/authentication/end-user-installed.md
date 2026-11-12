@@ -14,15 +14,15 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 你可以依據偏好儲存及分類內容。
 
-# 透過使用者帳戶驗證已安裝的應用程式
+# 使用使用者帳戶驗證安裝版應用程式
 
 本指南說明當您的應用程式已安裝在使用者電腦上時，如何透過使用者帳戶進行驗證，取得 BigQuery API 存取權。
 
-為確保應用程式只能存取使用者可用的 BigQuery 資料表，請藉由使用者憑證進行驗證。使用者憑證只能對使用者的 Google Cloud 專案執行查詢，而無法對應用程式的專案執行查詢。因此，系統僅會向使用者收取查詢費用，而非應用程式費用。
+為確保應用程式只能存取使用者可用的 BigQuery 資料表，請藉由使用者憑證進行驗證。使用者憑證只能對使用者 Google Cloud 專案執行查詢，無法對應用程式專案執行查詢。因此，系統僅會向使用者收取查詢費用，而非應用程式費用。
 
 ## 事前準備
 
-1. [建立 Google Cloud 一個代表已安裝應用程式的](https://console.cloud.google.com/projectcreate?hl=zh-tw)專案。
+1. [建立代表已安裝應用程式的 Google Cloud 專案](https://console.cloud.google.com/projectcreate?hl=zh-tw)。
 2. 安裝 [BigQuery 用戶端程式庫](https://docs.cloud.google.com/bigquery/docs/reference/libraries?hl=zh-tw)。
 3. 安裝驗證程式庫。
 
@@ -45,7 +45,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
    ### Python
 
-   安裝[適用於 Google Auth 的 oauthlib 整合項目](https://github.com/googleapis/google-cloud-python/tree/main/packages/google-auth-oauthlib)。
+   安裝 [Google Auth 的 oauthlib 整合](https://github.com/googleapis/google-cloud-python/tree/main/packages/google-auth-oauthlib)。
 
    ```
    pip install --upgrade google-auth-oauthlib
@@ -53,7 +53,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
    ### Node.js
 
-   安裝[適用於 Google Auth 的 oauthlib 整合項目](https://github.com/googleapis/google-auth-library-nodejs)。
+   安裝 [Google Auth 的 oauthlib 整合](https://github.com/googleapis/google-auth-library-nodejs)。
 
    ```
    npm install google-auth-library  
@@ -68,17 +68,17 @@ Get Credentials (取得憑證)
 
 ### 手動建立憑證
 
-1. 前往 Google Cloud 控制台的「憑證」[頁面](https://console.cloud.google.com/apis/credentials?hl=zh-tw)。
+1. 前往 Google Cloud 控制台的[「Credentials」(憑證) 頁面](https://console.cloud.google.com/apis/credentials?hl=zh-tw)。
 2. 填寫 [OAuth 同意畫面](https://console.cloud.google.com/apis/credentials/consent?hl=zh-tw)中的必填欄位。
 3. 在[「Credentials」(憑證) 頁面](https://console.cloud.google.com/apis/credentials?hl=zh-tw)中，按一下 [Create credentials] (建立憑證) 按鈕。
 
    選擇 [OAuth client ID] (OAuth 用戶端 ID)。
-4. 將應用程式類型設為「Desktop」(桌面)，然後按一下「Create」(建立)。
+4. 選取「Desktop」做為應用程式類型，然後按一下「Create」。
 5. 點選 [Download JSON] (下載 JSON) 按鈕下載憑證。
 
    將憑證檔案儲存至 `client_secrets.json`。這個檔案必須與您的應用程式一同發布。
 
-## 驗證及呼叫 API
+## 驗證並呼叫 API
 
 1. 使用用戶端憑證執行 [OAuth 2.0 流程](https://developers.google.com/identity/protocols/OAuth2?hl=zh-tw)。
 
@@ -300,7 +300,7 @@ Get Credentials (取得憑證)
      };
    }
    ```
-2. 使用驗證過的憑證連結至 BigQuery API。
+2. 使用已驗證的憑證連線至 BigQuery API。
 
    ### Java
 
@@ -492,12 +492,12 @@ Get Credentials (取得憑證)
    }
    ```
 
-在您執行程式碼範例時，程式碼會開啟瀏覽器，並要求存取與用戶端密碼相關聯的專案。您可以使用系統產生的憑證存取使用者的 BigQuery 資源，因為這個範例要求的是 [BigQuery 範圍](https://developers.google.com/identity/protocols/googlescopes?hl=zh-tw#bigqueryv2)。
+執行程式碼範例時，系統會啟動瀏覽器，要求存取與用戶端密鑰相關聯的專案。您可以使用系統產生的憑證存取使用者的 BigQuery 資源，因為這個範例要求的是 [BigQuery 範圍](https://developers.google.com/identity/protocols/googlescopes?hl=zh-tw#bigqueryv2)。
 
 ## 後續步驟
 
 1. 瞭解[其他驗證應用程式以存取 BigQuery API 的方式](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw)。
-2. 瞭解[所有 Cloud API 的使用者憑證驗證作業](https://docs.cloud.google.com/docs/authentication/use-cases?hl=zh-tw#app-users)。
+2. 瞭解[所有 Cloud API 的 Google 帳戶使用者憑證驗證](https://docs.cloud.google.com/docs/authentication/use-cases?hl=zh-tw#app-users)。
 
 
 
@@ -506,11 +506,11 @@ Get Credentials (取得憑證)
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-08 (世界標準時間)。
+上次更新時間：2026-11-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-08 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-12 (世界標準時間)。"],[],[]]

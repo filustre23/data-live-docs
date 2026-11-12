@@ -193,5 +193,4 @@ BigQuery 也會對下列常值執行隱含轉換：
 | --- | --- |
 | `AVG` | `AVG` |
 | `COUNT` | `COUNT` |
-| `COVAR_POP` | `COVAR_POP` |
-| `COVAR_SAMP` |
+| `COVAR_POP` |  |

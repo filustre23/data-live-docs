@@ -834,5 +834,5 @@ print(f"Table schema: {schema_contents}")
   {
     "name": "qtr",
     "type": "STRING",
-    "mode"
+    "mode":
 ```

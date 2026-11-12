@@ -1169,6 +1169,4 @@ func revokeAccessToDataset(w io.Writer, projectID, datasetID, entity string) err
 			newAccessList = append(newAccessList, entry)
 		}
 	}
-
-	// Only proceed with update if something in the access list was removed.
 ```

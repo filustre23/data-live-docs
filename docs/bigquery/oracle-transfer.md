@@ -244,5 +244,4 @@ bq mk
 ## 後續步驟
 
 * 如要進一步瞭解 BigQuery 資料移轉服務，請參閱「[什麼是 BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)」。
-* 如要瞭解如何使用移轉作業，包括取得移轉設定資訊、列出移轉設定，以及查看移轉作業的執行記錄，請參閱「[管理移轉作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw)」。
-* 如要瞭解如何透過 BigQuery Omni 作
+* 如要瞭解如何使用移轉作業，包括取得移轉設定資訊、列出移轉設定，以及查看移轉作業的執行記錄，請參閱「

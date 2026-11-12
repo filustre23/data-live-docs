@@ -550,9 +550,3 @@ A `STRING` value.
 ### `NUM_TRIALS`
 
 **Syntax**
-
-`NUM_TRIALS = int64_value`
-
-**Description**
-
-The maximum number of submodels to train. The tuning stops when `NUM_TRIALS</`

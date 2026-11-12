@@ -521,5 +521,5 @@ To balance every class, set this option to `TRUE`. Balance is
 accomplished using the following formula:
 
 ```
-total_input_rows / (input_rows_for_class_n *
+total_input_rows /
 ```

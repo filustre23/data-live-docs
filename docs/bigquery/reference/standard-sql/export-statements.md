@@ -284,4 +284,4 @@ The option list specifies options for the export operation.
 
 | Options | |
 | --- | --- |
-| `format` | `STRING`  Required. To export data from BigQuery to Spanner, the value must always be `CLOUD_SPANNER` |
+| `format` |  |

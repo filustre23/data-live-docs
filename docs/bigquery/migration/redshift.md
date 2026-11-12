@@ -18,15 +18,15 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 本文說明如何使用公開 IP 位址，將資料從 Amazon Redshift 遷移至 BigQuery。
 
-您可以使用 BigQuery 資料移轉服務，將 Amazon Redshift 資料倉儲中的資料複製到 BigQuery。這項服務會運用 GKE 中的遷移代理程式，並觸發從 Amazon Redshift 到 Amazon S3 值區中暫存區的上傳作業。接著，BigQuery 資料移轉服務就會將資料從 Amazon S3 值區移轉到 BigQuery。
+您可以使用 BigQuery 資料移轉服務，將資料從 Amazon Redshift 資料倉儲複製到 BigQuery。這項服務會與 GKE 中的遷移代理程式互動，並觸發卸載作業，將資料從 Amazon Redshift 移至 Amazon S3 bucket 中的暫存區。接著，BigQuery 資料移轉服務會將資料從 Amazon S3 bucket 移轉至 BigQuery。
 
 下圖顯示遷移期間 Amazon Redshift 資料倉儲與 BigQuery 之間的整體資料流動情況。
 
-如要透過虛擬私有雲 (VPC) 使用私有 IP 位址，從 Amazon Redshift 執行個體移轉資料，請參閱「[使用虛擬私有雲 (VPC) 遷移 Amazon Redshift 資料](https://docs.cloud.google.com/bigquery/docs/migration/redshift-vpc?hl=zh-tw)」。
+如要使用私人 IP 位址，透過虛擬私有雲 (VPC) 從 Amazon Redshift 執行個體移轉資料，請參閱「[使用虛擬私有雲移轉 Amazon Redshift 資料](https://docs.cloud.google.com/bigquery/docs/migration/redshift-vpc?hl=zh-tw)」。
 
 ## 事前準備
 
-- 登入 Google Cloud 帳戶。如果您是 Google Cloud新手，歡迎[建立帳戶](https://console.cloud.google.com/freetrial?hl=zh-tw)，親自評估產品在實際工作環境中的成效。新客戶還能獲得價值 $300 美元的免費抵免額，可用於執行、測試及部署工作負載。
+- 登入 Google Cloud 帳戶。如果您未曾使用過 Google Cloud，歡迎[建立帳戶](https://console.cloud.google.com/freetrial?hl=zh-tw)，親自體驗實際使用我們產品的成效。新客戶還能獲得價值 $300 美元的免費抵免額，用於執行、測試及部署工作負載。
 - In the Google Cloud console, on the project selector page,
   select or create a Google Cloud project.
 
@@ -91,31 +91,31 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ### 設定必要權限
 
-建立 Amazon Redshift 移轉作業之前：
+建立 Amazon Redshift 移轉作業前，請先完成下列事項：
 
-1. 請確認建立移轉作業的主體在包含移轉工作的專案中，具有下列權限：
+1. 請確認建立移轉作業的主體，在包含移轉工作的專案中具備下列權限：
 
    * 用於建立移轉作業的 `bigquery.transfers.update` 權限
    * 目標資料集的 `bigquery.datasets.get` 和 `bigquery.datasets.update` 權限
 
-   `roles/bigquery.admin` 這個預先定義的 Identity and Access Management (IAM) 角色具備 `bigquery.transfers.update`、`bigquery.datasets.update` 和 `bigquery.datasets.get` 權限。如要進一步瞭解 BigQuery 資料移轉服務中的身分與存取權管理角色，請參閱[存取權控管](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)。
+   `roles/bigquery.admin` 預先定義的 Identity and Access Management (IAM) 角色包含 `bigquery.transfers.update`、`bigquery.datasets.update` 和 `bigquery.datasets.get` 權限。如要進一步瞭解 BigQuery 資料移轉服務中的 IAM 角色，請參閱「[存取控管](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)」。
 2. 參閱 Amazon S3 的說明文件，以確保您已設定啟用移轉所需的任何權限。Amazon S3 來源資料至少必須套用 AWS 代管政策 [`AmazonS3ReadOnlyAccess`](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage.html#attach-managed-policy-console)。
 
 ### 建立資料集
 
-[建立 BigQuery 資料集](https://docs.cloud.google.com/bigquery/docs/datasets?hl=zh-tw)來儲存您的資料。您無須建立任何資料表。
+[建立 BigQuery 資料集](https://docs.cloud.google.com/bigquery/docs/datasets?hl=zh-tw)來儲存您的資料。您不需要建立任何資料表。
 
 ### 授予 Amazon Redshift 叢集的存取權
 
-如要允許來自 Amazon Redshift 叢集的連線，請設定輸入安全群組規則，允許透過叢集使用的通訊埠，在 TCP 上建立連線。根據預設，Amazon Redshift 會使用通訊埠 `5439`。如要檢查或驗證叢集的連接埠，請在 Amazon Redshift 主控台中查看叢集屬性的「端點」欄位。
+如要允許來自 Amazon Redshift 叢集的連線，請設定傳入安全性群組規則，允許透過 TCP 在叢集使用的通訊埠上傳入連線。根據預設，Amazon Redshift 會使用通訊埠 `5439`。如要查看或驗證叢集的通訊埠，請在 Amazon Redshift 控制台中查看叢集屬性的「Endpoint」(端點) 欄位。
 
-請[設定安全群組規則](https://docs.aws.amazon.com/vpc/latest/userguide/working-with-security-group-rules.html)，將下列 Google 擁有的 IP 範圍新增至叢集安全群組的連入規則。您可以新增與資料集位置相對應的 IP 位址，也可以新增下表中的所有 IP 位址。這些 Google 擁有的 IP 位址會保留給 Amazon Redshift 資料遷移作業使用。
+[設定安全性群組規則](https://docs.aws.amazon.com/vpc/latest/userguide/working-with-security-group-rules.html)，將下列 Google 擁有的 IP 範圍新增至叢集安全性群組的輸入規則。您可以新增與資料集位置對應的 IP 位址，也可以新增下表中的所有 IP 位址。這些 Google 擁有的 IP 位址會保留給 Amazon Redshift 資料遷移作業使用。
 
-**注意：** BigQuery 與 Amazon Redshift 之間的通訊會透過下列 Google 擁有的 IP 位址進行。不過，從 Amazon S3 移至 BigQuery 的資料會透過公用網際網路傳輸。
+**注意：**BigQuery 和 Amazon Redshift 之間的通訊是透過下列 Google 擁有的 IP 位址進行。不過，從 Amazon S3 到 BigQuery 的資料移動作業是透過公開網際網路進行。
 
 #### 地區位置
 
-|  | 區域說明 | 區域名稱 | IP 位址 |
+|  | 地區說明 | 區域名稱 | IP 位址 |
 | --- | --- | --- | --- |
 | **美洲** | | | |
 |  | 俄亥俄州哥倫布 | `us-east5` | 34.162.72.184  34.162.173.185  34.162.205.205  34.162.81.45  34.162.182.149  34.162.59.92  34.162.157.190  34.162.191.145 |
@@ -170,26 +170,25 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 | 多地區說明 | 多地區名稱 | IP 位址 |
 | --- | --- | --- |
-| 歐盟1[成員國](https://europa.eu/european-union/about-eu/countries_en)境內的資料中心 | `EU` | 34.76.156.158  34.76.156.172  34.76.136.146  34.76.1.29  34.76.156.232  34.76.156.81  34.76.156.246  34.76.102.206  34.76.129.246  34.76.121.168 |
+| 歐盟[成員國](https://europa.eu/european-union/about-eu/countries_en)境內的資料中心1 | `EU` | 34.76.156.158  34.76.156.172  34.76.136.146  34.76.1.29  34.76.156.232  34.76.156.81  34.76.156.246  34.76.102.206  34.76.129.246  34.76.121.168 |
 | 美國資料中心 | `US` | 35.185.196.212  35.197.102.120   35.185.224.10  35.185.228.170  35.197.5.235  35.185.206.139  35.197.67.234  35.197.38.65  35.185.202.229  35.185.200.120 |
 
-1 位於 `EU` 多區域的資料，不會存放在 `europe-west2` (倫敦) 或 `europe-west6` (蘇黎世) 資料中心。
+1 位於 `EU` 多區域的資料不會儲存在 `europe-west2` (倫敦) 或 `europe-west6` (蘇黎世) 資料中心。
 
 ### 授予 Amazon S3 值區的存取權
 
-您必須具備 Amazon S3 值區，做為將 Amazon Redshift 資料移轉至 BigQuery 的暫存區域。如需詳細操作說明，請參閱 [Amazon 說明文件](https://aws.amazon.com/premiumsupport/knowledge-center/create-access-key/)。
+您必須擁有 Amazon S3 bucket，才能做為暫存區，將 Amazon Redshift 資料移轉至 BigQuery。如需詳細操作說明，請參閱 [Amazon 說明文件](https://aws.amazon.com/premiumsupport/knowledge-center/create-access-key/)。
 
-1. 建議您建立專用的 AWS IAM 使用者，並授予該使用者 Amazon Redshift 的唯讀權限，以及 Amazon S3 的讀取與寫入權限。如要完成這個步驟，可以套用下列政策：
+1. 建議您建立專屬的 AWS IAM 使用者，並僅授予該使用者 Amazon Redshift 的讀取權限，以及 Amazon S3 的讀取和寫入權限。如要完成這個步驟，您可以套用下列政策：
 2. 建立 AWS [IAM 使用者存取金鑰組](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html)。
 
 ### 使用獨立遷移佇列設定工作負載控制
 
-您可以視需要[定義用於遷移目的的 Amazon Redshift 佇列](https://docs.aws.amazon.com/redshift/latest/dg/cm-c-modifying-wlm-configuration.html)，以限制及分離用於遷移作業的資源。您可以使用最大並行查詢次數來設定這個遷移佇列。然後，您可以在某個[遷移使用者群組](https://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_GROUP.html)與佇列之間建立關聯，並在設定遷移作業以移轉資料到 BigQuery 時使用這些憑證。移轉服務只具備遷移佇列的存取權。
+您也可以[定義用於遷移的 Amazon Redshift 佇列](https://docs.aws.amazon.com/redshift/latest/dg/cm-c-modifying-wlm-configuration.html)，限制及分隔用於遷移的資源。您可以設定這個遷移佇列的並行查詢數量上限。接著，您可以將特定[遷移使用者群組](https://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_GROUP.html)與佇列建立關聯，並在設定遷移作業時使用這些憑證，將資料移轉至 BigQuery。Transfer Service 只能存取遷移佇列。
 
 ### 收集轉移資訊
 
-收集所需資訊，以便使用 BigQuery 資料移轉服務設定遷移作業：
+收集使用 BigQuery 資料移轉服務設定遷移作業所需的資訊：
 
-* 請按照[這些操作說明](https://docs.aws.amazon.com/redshift/latest/mgmt/configure-jdbc-connection.html#obtain-jdbc-url) 取得 JDBC 網址。
-* 取得具備適當權限的 Amazon Redshift 資料庫使用者名稱和密碼。
-* 按照「[授予 Amazon](#grant_access_to_your_S3_bucket)
+* 請按照[這些操作說明](https://docs.aws.amazon.com/redshift/latest/mgmt/configure-jdbc-connection.html#obtain-jdbc-url)取得 JDBC 網址。
+* 取得

@@ -143,6 +143,4 @@ statements.
 
 ### `CREATE PROCEDURE` syntax
 
-In Snowflake, a stored procedure is executed with a
-[CALL](https://docs.snowflake.net/manuals/sql-reference/sql/call.html) command
-while in BigQuery, stored procedures are
+In Snowflake, a stored procedure is e

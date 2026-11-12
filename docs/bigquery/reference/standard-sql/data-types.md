@@ -378,5 +378,4 @@ You can construct an array using array literals or array functions.
 
 #### Using array literals
 
-You can build an array literal in GoogleSQL using brackets (`[` and
-`]`). Each element in an array is separated by a comma.
+You can build an array literal in Go

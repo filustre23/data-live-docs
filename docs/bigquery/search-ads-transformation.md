@@ -466,5 +466,4 @@ Search Ads 360 API 資源：[客戶](https://developers.google.com/search-ads/re
 | metrics\_content\_impression\_share | 將您在多媒體廣告聯播網上獲得的曝光次數，除以預估可獲得的曝光次數後所得出的百分比。注意：內容曝光比重的回報範圍為 0.1 至 1。低於 0.1 的值會回報為 0.0999。 |
 | metrics\_content\_rank\_lost\_impression\_share | 廣告因廣告評級偏低，而未在多媒體廣告聯播網上獲得的曝光次數預估百分比。注意：內容排名錯失的曝光比重會以 0 到 0.9 的範圍表示。任何高於 0.9 的值都會回報為 0.9001。 |
 | metrics\_historical\_quality\_score | 歷來品質分數。 |
-| metrics\_search\_budget\_lost\_impression\_share | 廣告符合在搜尋聯播網上顯示的資格，但因預算過低而未顯示的預估次數百分比。注意：搜尋聯播網因預算而錯失的曝光比重，會以 0 到 0.9 的範圍表示。任何高於 0.9 的值都會回報為 0.9001。 |
-|  |
+| metrics\_search\_budget\_lost\_impression\_share | 廣告符合在搜尋聯播網上顯示的資格，但因預算過低而未顯示的預估次數百分比。注意 |

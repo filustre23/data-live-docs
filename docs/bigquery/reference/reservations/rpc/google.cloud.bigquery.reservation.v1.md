@@ -113,4 +113,4 @@ A capacity commitment is a way to purchase compute capacity for BigQuery jobs (i
 
 | GetCapacityCommitment |
 | --- |
-| `rpc GetCapacityCommitment(GetCapacityCommitmentRequest) returns (CapacityCommitment)`  Returns information about the capacity commitment.  Authorization scopes  Requires one of th |
+| `rpc GetCapacityCommitment(GetCapacityCommitmentRequest) returns (CapacityCommitment)` |

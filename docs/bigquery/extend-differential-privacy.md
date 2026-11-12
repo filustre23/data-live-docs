@@ -14,19 +14,15 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 你可以依據偏好儲存及分類內容。
 
-# 擴大差異化隱私
+# 擴充差異化隱私
 
-本文提供 BigQuery 差異化隱私功能的差異化隱私擴充方式範例。
+BigQuery 可讓您將[差異化隱私](https://docs.cloud.google.com/bigquery/docs/differential-privacy?hl=zh-tw)擴充至多雲端資料來源和外部隱私權程式庫，協助保護不同環境中的機密資料。您可以使用 BigQuery Omni，將差異化隱私套用至 Amazon Web Services (AWS) S3 等多雲端資料來源、使用遠端函式呼叫外部程式庫，或在 Apache Spark 和 Apache Beam 上使用 [PipelineDP](https://pipelinedp.io/) 執行 Python 匯總。
 
-BigQuery 可讓您將[差異隱私權](https://docs.cloud.google.com/bigquery/docs/differential-privacy?hl=zh-tw)擴充至多雲資料來源和外部差異隱私權程式庫。本文提供範例，說明如何針對 AWS S3 等多雲資料來源，透過 BigQuery Omni 套用差異隱私權、如何使用遠端函式呼叫外部差異隱私權程式庫，以及如何使用 [PipelineDP](https://pipelinedp.io/) 是可搭配 Apache Spark 和 Apache Beam 執行的 Python 程式庫。
+本文範例中的隱私參數並非建議值，請與隱私或資安人員合作，決定最適合貴機構和資料集的參數。如要進一步瞭解核心概念和語法，請參閱「[使用差異化隱私](https://docs.cloud.google.com/bigquery/docs/differential-privacy?hl=zh-tw)」。
 
-**注意：** 在本文件中，範例中的隱私權參數並非建議值。您應與隱私權或安全性人員合作，決定資料集和機構最適合的隱私權參數。
+## 使用 BigQuery Omni 實踐差異化隱私
 
-如要進一步瞭解差異化隱私，請參閱「[使用差異化隱私](https://docs.cloud.google.com/bigquery/docs/differential-privacy?hl=zh-tw)」。
-
-## 透過 BigQuery Omni 實現差異化隱私權
-
-BigQuery 差異化隱私權功能支援對 AWS S3 等多雲端資料來源的呼叫。以下範例會查詢外部資料來源 `foo.wikidata`，並套用差異化隱私技術。如要進一步瞭解差異化隱私權條款的語法，請參閱「[差異化隱私權條款](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw#dp_clause)」。
+BigQuery 差異化隱私功能支援呼叫 AWS S3 等多雲端資料來源。下列範例會查詢外部資料來源 `foo.wikidata`，並套用差異化隱私。如要進一步瞭解差異化隱私子句的語法，請參閱「[差異化隱私子句](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw#dp_clause)」。
 
 ```
 SELECT
@@ -40,7 +36,7 @@ SELECT
 FROM foo.wikidata;
 ```
 
-這個範例會傳回類似以下的結果：
+這個範例會傳回類似下列的結果：
 
 ```
 -- These results will change each time you run the query.
@@ -51,32 +47,32 @@ FROM foo.wikidata;
 +----------+
 ```
 
-如要進一步瞭解 BigQuery Omni 的限制，請參閱「[限制](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw#limitations)」一節。
+如要進一步瞭解 BigQuery Omni 限制，請參閱「[限制](https://docs.cloud.google.com/bigquery/docs/omni-introduction?hl=zh-tw#limitations)」一節。
 
 ## 使用遠端函式呼叫外部差異化隱私程式庫
 
-您可以使用[遠端函式](https://docs.cloud.google.com/bigquery/docs/remote-functions?hl=zh-tw)呼叫外部差異化隱私權程式庫。下列連結會使用遠端函式呼叫由 [Tumult Analytics](https://www.tmlt.dev) 代管的外部程式庫，針對零售銷售資料集使用零集中差別隱私權。
+您可以使用[遠端函式](https://docs.cloud.google.com/bigquery/docs/remote-functions?hl=zh-tw)呼叫外部差異化隱私程式庫。下列連結使用遠端函式呼叫 [Tumult Analytics](https://www.tmlt.dev) 代管的外部程式庫，對零售銷售資料集使用零集中差異化隱私。
 
-如要瞭解如何使用 Tumult Analytics，請參閱 [Tumult Analytics 推出文章](https://www.tmlt.io/resources/gcp-launch-post) {: .external}。
+如要瞭解如何使用 Tumult Analytics，請參閱 [Tumult Analytics 發布文章](https://www.tmlt.io/resources/gcp-launch-post)。
 
 ## 使用 PipelineDP 進行差異化隱私匯總
 
-PipelineDP 是執行差異化隱私匯總作業的 Python 程式庫，可搭配 Apache Spark 和 Apache Beam 執行。BigQuery 可執行以 Python 編寫的 Apache Spark 預存程序。如要進一步瞭解如何執行 Apache Spark 預存程序，請參閱「[使用 Apache Spark 預存程序](https://docs.cloud.google.com/bigquery/docs/spark-procedures?hl=zh-tw)」。
+PipelineDP 是 Python 程式庫，可執行差異化隱私匯總，並可與 Apache Spark 和 Apache Beam 搭配執行。BigQuery 可以執行以 Python 編寫的 Apache Spark 預存程序。如要進一步瞭解如何執行 Apache Spark 預存程序，請參閱「[使用 Apache Spark 預存程序](https://docs.cloud.google.com/bigquery/docs/spark-procedures?hl=zh-tw)」。
 
-以下範例會使用 PipelineDP 程式庫執行差異化隱私權匯總作業。這項模型會使用 [芝加哥計程車車程公開資料集](https://docs.cloud.google.com/bigquery/public-data?hl=zh-tw)，並為每輛計程車計算行程數量，以及這些行程的小費總和和平均值。
+下列範例使用 PipelineDP 程式庫執行差異化隱私匯總。這個範例使用[芝加哥計程車行程公開資料集](https://docs.cloud.google.com/bigquery/public-data?hl=zh-tw)，並計算每輛計程車的行程數，以及這些行程的小費總和與平均值。
 
 ### 事前準備
 
-標準 Apache Spark 映像檔不包含 PipelineDP。您必須先建立包含所有必要依附元件的 [Docker](https://www.docker.com/) 映像檔，才能執行 PipelineDP 儲存程序。本節說明如何建立 Docker 映像檔，並將其推送至 Google Cloud。
+標準 Apache Spark 映像檔不含 PipelineDP。您必須先建立包含所有必要依附元件的 [Docker](https://www.docker.com/) 映像檔，才能執行 PipelineDP 儲存程序。本節說明如何建立 Docker 映像檔，並推送至 Google Cloud。
 
-在開始之前，請確認您已在本機電腦上安裝 Docker，並設定驗證機制，以便將 Docker 映像檔推送至 [gcr.io](https://docs.cloud.google.com/artifact-registry?hl=zh-tw)。如要進一步瞭解如何推送 Docker 映像檔，請參閱「[推送及提取映像檔](https://docs.cloud.google.com/artifact-registry/docs/pushing-and-pulling?hl=zh-tw)」。
+開始之前，請確認您已在本機電腦上安裝 Docker，並設定驗證機制，以便將 Docker 映像檔推送至 [gcr.io](https://docs.cloud.google.com/artifact-registry?hl=zh-tw)。如要進一步瞭解如何推送 Docker 映像檔，請參閱「[推送及提取映像檔](https://docs.cloud.google.com/artifact-registry/docs/pushing-and-pulling?hl=zh-tw)」。
 
 #### 建立及推送 Docker 映像檔
 
-如要建立並推送含有必要依附元件的 Docker 映像檔，請按照下列步驟操作：
+如要建立及推送含有必要依附元件的 Docker 映像檔，請按照下列步驟操作：
 
-1. 建立本機資料夾 `DIR`。
-2. 下載 [Miniconda 安裝程式](https://docs.conda.io/en/latest/miniconda.html#linux-installers) (含 Python 3.9 版本) 至 `DIR`。
+1. 在本機建立 `DIR` 資料夾。
+2. 下載 [Miniconda 安裝程式](https://docs.conda.io/en/latest/miniconda.html#linux-installers) (Python 3.9 版) 至 `DIR`。
 3. 將下列文字儲存至 [Dockerfile](https://docs.docker.com/engine/reference/builder/#:%7E:text=A%20Dockerfile%20is%20a%20text,can%20use%20in%20a%20Dockerfile%20)。
 
    ```
@@ -170,14 +166,14 @@ PipelineDP 是執行差異化隱私匯總作業的 Python 程式庫，可搭配 
 
    更改下列內容：
 
-   * `PROJECT_ID`：您要建立 Docker 映像檔的專案。
+   * `PROJECT_ID`：要在其中建立 Docker 映像檔的專案。
    * `DOCKER_IMAGE`：Docker 映像檔名稱。
 
    圖片已上傳。
 
 ### 執行 PipelineDP 預存程序
 
-1. 如要建立已儲存的程序，請使用 [CREATE PROCEDURE](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#create_procedure) 陳述式。
+1. 如要建立預存程序，請使用 [CREATE PROCEDURE](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#create_procedure) 陳述式。
 
    ```
    CREATE OR REPLACE
@@ -239,9 +235,9 @@ PipelineDP 是執行差異化隱私匯總作業的 Python 程式庫，可搭配 
 
    更改下列內容：
 
-   * `PROJECT_ID`：您要建立已儲存程序的專案。
-   * `DATASET_ID`：您要建立預存程序的資料集。
-   * `REGION`：專案所在的區域。
+   * `PROJECT_ID`：要在其中建立預存程序的專案。
+   * `DATASET_ID`：要在其中建立預存程序的資料集。
+   * `REGION`：專案所在區域。
    * `DOCKER_IMAGE`：Docker 映像檔名稱。
    * `CONNECTION_ID`：連線名稱。
    * `TABLE_NAME`：資料表名稱。
@@ -253,14 +249,14 @@ PipelineDP 是執行差異化隱私匯總作業的 Python 程式庫，可搭配 
 
    更改下列內容：
 
-   * `PROJECT_ID`：您要建立已儲存程序的專案。
-   * `DATASET_ID`：您要建立預存程序的資料集。
+   * `PROJECT_ID`：要在其中建立預存程序的專案。
+   * `DATASET_ID`：要在其中建立預存程序的資料集。
 
 ## 後續步驟
 
 * 瞭解如何[使用差異化隱私](https://docs.cloud.google.com/bigquery/docs/differential-privacy?hl=zh-tw)。
-* 瞭解[差異隱私權條款](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw#dp_clause)。
-* 瞭解如何使用[差異性私密匯總函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions?hl=zh-tw)。
+* 瞭解[差異化隱私子句](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?hl=zh-tw#dp_clause)。
+* 瞭解如何使用[差異化隱私匯總函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions?hl=zh-tw)。
 
 
 
@@ -269,11 +265,11 @@ PipelineDP 是執行差異化隱私匯總作業的 Python 程式庫，可搭配 
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-08 (世界標準時間)。
+上次更新時間：2026-11-11 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-08 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-11 (世界標準時間)。"],[],[]]

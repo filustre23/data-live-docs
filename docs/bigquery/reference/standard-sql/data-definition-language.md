@@ -188,6 +188,5 @@ public class DDLCreateView {
         System.out.println("View was not created");
       }
     } catch (BigQueryException | InterruptedException e) {
-      System.out.println("View was not created. \n" + e.toString());
-    }
+      System.out.println("View was not created. \n" + e.
 ```

@@ -323,5 +323,5 @@ Additional details:
 **Examples**
 
 ```
-SELECT ARRAY_SLICE(['a', 'b', 'c', 'd', 'e'],
+SELECT ARRAY_SLICE(['a', 'b', 'c', 'd',
 ```

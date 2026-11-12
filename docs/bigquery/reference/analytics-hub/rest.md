@@ -128,8 +128,3 @@ A [service endpoint](https://cloud.google.com/apis/design/glossary#api_service_e
 | `refresh` | `POST /v1/{name=projects/*/locations/*/subscriptions/*}:refresh`   Refreshes a Subscription to a Data Exchange. |
 | `revoke` | `POST /v1/{name=projects/*/locations/*/subscriptions/*}:revoke`   Revokes a given subscription. |
 | `setIamPolicy` | `POST /v1/{resource=projects/*/locations/*/subscriptions/*}:setIamPolicy`   Sets the IAM policy. |
-
-
-
-
-Send fe

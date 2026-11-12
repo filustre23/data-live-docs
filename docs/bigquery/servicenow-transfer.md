@@ -227,6 +227,4 @@ bq mk
     bq mk
       --transfer_config
       --target_dataset=mydataset
-      --data_source=servicenow
-      --display_name
   ```

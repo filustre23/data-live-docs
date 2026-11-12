@@ -84,11 +84,11 @@ BigQuery 管理員可以查看專案和預留項目運算單元用量，監控�
 為協助您預估專案層級預算及執行內部交易退單，BigQuery 提供兩種方法，可追蹤使用預留項目的個別查詢專案資源消耗量：
 
 * **資訊版位歸因 (預設)：**帳單報表中的資訊委刊項，顯示每項專案使用的版位時數。實際運算費用仍會向管理專案收取。
-* **已計費用歸屬 (預先發布版)：**這項功能可選擇加入，啟用後，系統會根據運算單元用量，將實際計費的運算費用從管理專案直接轉移至個別查詢專案。
+* **已計費用歸因 ([預先發布版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))：**這項功能可選擇加入，啟用後，系統會根據運算單元用量，將實際計費的運算費用從管理專案直接轉移至個別查詢專案。
 
 ### 資訊版位歸因
 
-根據預設，執行 SQL 工作的查詢專案會顯示 `$0` 的運算支出。不過，所有 [BigQuery Reservations API](https://docs.cloud.google.com/bigquery/docs/reservations-commitments?hl=zh-tw#enabling-reservations-api) 客戶的 Cloud Billing 資料中，都有「Analysis Slots Attribution」(分析運算單元歸因) 委刊項。這個明細項目會顯示在「Billing」(帳單) 頁面和 Cloud Billing 匯出資料中。
+根據預設，執行 SQL 工作的查詢專案會顯示 `$0` 的運算支出。不過，所有 [BigQuery Reservations API](https://docs.cloud.google.com/bigquery/docs/reservations-commitments?hl=zh-tw#enabling-reservations-api) 客戶的 Cloud Billing 資料中，都有「Analysis Slots Attribution」(分析運算單元歸因) 委刊項。這項明細項目會顯示在 Google Cloud 控制台的「帳單」頁面和 Cloud Billing 匯出內容中。
 
 這個明細項目會顯示每項專案使用的運算單元時數。這項服務不會產生費用，也不會影響月結單總額。
 
@@ -135,7 +135,7 @@ BigQuery 管理員可以查看專案和預留項目運算單元用量，監控�
 
    * `ADMIN_PROJECT_ID`：管理專案的專案 ID。
    * `LOCATION`：預留項目的位置。
-3. 按一下「play\_circle 執行」。
+3. 按一下「play\_circle\_filled 執行」。
 
 啟用運算費用歸因功能後，費用分配的變化會在下一個帳單日開始顯示在個別查詢專案中 (帳單日從 `America/Los_Angeles` 時區的 00:00 開始)。這些變更也會在約一天內反映在每日 Cloud Billing 帳單報表中。
 
@@ -932,11 +932,11 @@ FROM
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-09 (世界標準時間)。
+上次更新時間：2026-11-11 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-09 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-11 (世界標準時間)。"],[],[]]

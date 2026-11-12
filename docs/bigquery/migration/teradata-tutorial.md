@@ -346,5 +346,5 @@ SELECT
  SUM(l_extendedprice*(1-l_discount)) AS sum_disc_price,
  SUM(l_extendedprice*(1-l_discount)*(1+l_tax)) AS sum_charge,
  AVG(l_quantity) AS avg_qty,
- AVG(l_extendedprice) AS avg_pric
+ AVG(l_extendedprice
 ```

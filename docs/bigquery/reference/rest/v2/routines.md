@@ -137,6 +137,3 @@ Represents the kind of a given argument.
 ## Mode
 
 The input/output mode of the argument.
-
-| Enums | |
-| --- | --- |

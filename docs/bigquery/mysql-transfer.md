@@ -236,3 +236,4 @@ bq mk
 * 閱讀 [BigQuery 資料移轉服務總覽](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)。
 * 瞭解如何[管理移轉作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw)，包括取得移轉設定相關資訊、列出移轉設定，以及查看移轉作業的執行記錄。
 * 瞭解如何[透過 BigQuery Omni 作業載入資料](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer?hl=zh-tw)。
+<

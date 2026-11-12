@@ -22,7 +22,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ## 事前準備
 
-您可以在[遷移](#migrate_classic_saved_queries)期間，選擇性地為已遷移的公開或專案傳統版已儲存的查詢設定 IAM 權限，[建立](https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries?hl=zh-tw#create_saved_queries)或選取 BigQuery Studio 已儲存的查詢，並為該已儲存的查詢[授予所選 Identity and Access Management (IAM) 權限](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries?hl=zh-tw#share-saved-query)。
+您可以在[遷移](#migrate_classic_saved_queries)期間，選擇性地為已遷移的公開或專案傳統版已儲存的查詢設定 IAM 權限、[建立](https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries?hl=zh-tw#create_saved_queries)或選取 BigQuery Studio 已儲存的查詢，並為該已儲存的查詢[授予所選 Identity and Access Management (IAM) 權限](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries?hl=zh-tw#share-saved-query)。
 
 將公開或專案傳統版已儲存的查詢遷移至 BigQuery Studio 已儲存的查詢時，請選取 BigQuery Studio 已儲存的查詢，將授予的權限複製到遷移的已儲存的查詢。
 
@@ -31,13 +31,12 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 如要取得管理已儲存的查詢所需的權限，請要求系統管理員在您要管理已儲存的查詢的專案中，授予您下列 IAM 角色：
 
 * 如要在 Google Cloud 控制台管理 BigQuery Studio 已儲存的查詢，請按照下列步驟操作：
-  + [BigQuery 工作使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.jobUser)  (`roles/bigquery.jobUser`)
-  + [BigQuery 讀取工作階段使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.readSessionUser)  (`roles/bigquery.readSessionUser`)
-  + [程式碼擁有者](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform?hl=zh-tw#dataform.codeOwner)  (`roles/dataform.codeOwner`)
-* 如要使用 BigQuery API 管理 BigQuery Studio 已儲存的查詢：
-  [程式碼擁有者](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform?hl=zh-tw#dataform.codeOwner)  (`roles/dataform.codeOwner`)
-* 如要將專案傳統版已儲存的查詢遷移至 BigQuery Studio 已儲存的查詢：[BigQuery Studio 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.studioAdmin)  (`roles/bigquery.studioAdmin`)
-* 如要允許[已驗證的使用者](https://docs.cloud.google.com/iam/docs/principals-overview?hl=zh-tw#all-authenticated-users)查看[公開存取查詢](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries?hl=zh-tw#grant-public-access)：[程式碼檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform?hl=zh-tw#dataform.codeViewer)  (`roles/dataform.codeViewer`)
+  + [BigQuery 工作使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.jobUser) (`roles/bigquery.jobUser`)
+  + [BigQuery 讀取工作階段使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.readSessionUser) (`roles/bigquery.readSessionUser`)
+  + [程式碼擁有者](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform?hl=zh-tw#dataform.codeOwner) (`roles/dataform.codeOwner`)
+* 如要使用 BigQuery API 管理 BigQuery Studio 已儲存的查詢：[程式碼擁有者](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform?hl=zh-tw#dataform.codeOwner) (`roles/dataform.codeOwner`)
+* 如要將專案傳統版已儲存的查詢遷移至 BigQuery Studio 已儲存的查詢：[BigQuery Studio 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.studioAdmin) (`roles/bigquery.studioAdmin`)
+* 如要允許[已驗證的使用者](https://docs.cloud.google.com/iam/docs/principals-overview?hl=zh-tw#all-authenticated-users)查看[公開存取查詢](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries?hl=zh-tw#grant-public-access)：[程式碼檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform?hl=zh-tw#dataform.codeViewer) (`roles/dataform.codeViewer`)
 
 如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
@@ -73,7 +72,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 1. 前往 Google Cloud 控制台的「BigQuery」**BigQuery**頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 按一下左側窗格中的 folder「Files」(檔案)，開啟檔案瀏覽器。
+2. 在左側窗格中，按一下「folder Files」(檔案)，開啟檔案瀏覽器。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Files」(檔案) 窗格中，展開專案和子資料夾，找出要共用的已儲存的查詢。
@@ -84,48 +83,47 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
    * [**程式碼擁有者**](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#dataform.codeOwner)：可對已儲存的查詢執行任何操作，包括刪除或共用。
    * [**程式碼編輯器**](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#dataform.codeEditor)：可以編輯查詢。
-   * [**程式碼檢視者**](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#dataform.codeViewer)：可以查看查詢。**注意：** 主體也必須具備 [BigQuery 使用者 (`roles/bigquery.user`)](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.user) 角色，才能執行已儲存的查詢。
+   * [**程式碼檢視者**](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#dataform.codeViewer)：可以查看查詢。**注意：**主體也必須具備 [BigQuery 使用者 (`roles/bigquery.user`)](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.user) 角色，才能執行已儲存的查詢。
 8. 選用：如要查看完整的角色清單和進階共用設定，請按一下「Advanced sharing」(進階共用)。
 9. 按一下「儲存」。
 10. 如要返回已儲存的查詢詳細資料，請按一下「Close」(關閉)。
-11. 如要產生已儲存的查詢的連結，請依序按一下 more\_vert「View actions」(查看動作) >「Share」(共用) >「Copy link」(複製連結)。
+11. 如要產生已儲存的查詢的連結，請依序點選 more\_vert「View actions」(查看動作) >「Share」(共用) >「Copy link」(複製連結)。
 
     連結會複製到剪貼簿。
 
 ## 授予已儲存的查詢的公開存取權
 
-如要公開 BigQuery Studio 已儲存的查詢，請將該查詢的程式碼檢視者 ([roles/dataform.codeViewer](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#dataform.codeViewer)) 角色授予 `allAuthenticatedUsers` 主體。
+如要公開 BigQuery Studio 已儲存的查詢，請將已儲存查詢的程式碼檢視者 ([roles/dataform.codeViewer](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#dataform.codeViewer)) 角色授予 `allAuthenticatedUsers` 主體。
 
 將 IAM 角色指派給 `allAuthenticatedUsers` 主體時，服務帳戶和網際網路上所有已透過 Google 帳戶驗證的使用者，都會獲得該角色。包括未連結至 Google Workspace 帳戶或 Cloud Identity 網域的帳戶，例如個人 Gmail 帳戶。未經驗證的使用者 (例如匿名訪客) 則不計入。詳情請參閱「[所有已驗證的使用者](https://docs.cloud.google.com/iam/docs/principals-overview?hl=zh-tw#all-authenticated-users)」。
 
 舉例來說，當您將程式碼檢視者角色授予 `allAuthenticatedUsers`，並套用至 `sales` 已儲存的查詢時，所有服務帳戶和已透過 Google 帳戶驗證的網際網路使用者，都具有 `sales` 已儲存的查詢的唯讀存取權。
 
-**注意：** 如果將管理員、編輯或執行層級權限授予 `allAuthenticatedUsers`，惡意人士可能會存取您的資料。只授予最低必要權限。
+**注意：**如果將管理員、編輯或執行層級權限授予 `allAuthenticatedUsers`，惡意人士可能會存取您的資料。只授予最低必要權限。
 
 如要授予 BigQuery Studio 已儲存的查詢的公開存取權，請按照下列步驟操作：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 按一下左側窗格中的 folder「Files」(檔案)，開啟檔案瀏覽器。
+2. 在左側窗格中，按一下「folder Files」(檔案)，開啟檔案瀏覽器。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Files」(檔案) 窗格中，展開專案和子資料夾，找出要授予公開存取權的已儲存的查詢。
 4. 按一下已儲存的查詢旁的 more\_vert「View actions」(查看動作)，然後依序點選「Share」(共用) >「Manage permissions」(管理權限)。
 5. 在「管理權限」窗格中，按一下「新增使用者/群組」。
 6. 在「New principals」(新增主體) 欄位中輸入 `allAuthenticatedUsers`。
-7. 在「**Role**」(角色) 清單中，選取
-   「[**Code Viewer**](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#dataform.codeViewer)」(程式碼檢視者) 角色。
+7. 在「Role」(角色) 清單中，選取[「Code Viewer」(程式碼檢視者)](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#dataform.codeViewer) 角色。
 8. 按一下「儲存」。
 9. 如要返回已儲存的查詢詳細資料，請按一下「Close」(關閉)。
 
 ## 禁止公開存取已儲存的查詢
 
-為確保任何 BigQuery Studio 已儲存的查詢都不會授予公開存取權，請限制專案中的 `allAuthenticatedUsers` 主體。
+為確保任何 BigQuery Studio 已儲存的查詢都不會公開，請限制專案中的 `allAuthenticatedUsers` 主體。
 
 如要限制專案中的 `allAuthenticatedUsers`，您可以[設定 `iam.allowedPolicyMemberDomains` 政策](https://docs.cloud.google.com/resource-manager/docs/organization-policy/restricting-domains?hl=zh-tw#setting_the_organization_policy)，並從 `allowed_values` 清單中移除 `allAuthenticatedUsers`。
 
-在 `iam.allowedPolicyMemberDomains` 政策中限制 `allAuthenticatedUsers` 後，專案中的任何 IAM 政策都無法使用 `allAuthenticatedUsers` 主體，因此所有資源 (包括 BigQuery Studio 已儲存的查詢) 都無法公開存取。
+在 `iam.allowedPolicyMemberDomains` 政策中限制 `allAuthenticatedUsers` 後，專案中的任何 IAM 政策都無法使用 `allAuthenticatedUsers` 主體，因此無法向所有資源 (包括 BigQuery Studio 已儲存的查詢) 授予公開存取權。
 
 如要進一步瞭解 `iam.allowedPolicyMemberDomains` 政策和設定操作說明，請參閱「[依照網域設定身分限制](https://docs.cloud.google.com/resource-manager/docs/organization-policy/restricting-domains?hl=zh-tw)」。
 
@@ -133,7 +131,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 Google Cloud 專案中的所有新程式碼資產都會使用預設區域。資產建立後，就無法變更區域。
 
-**重要事項：** 如果在建立程式碼資產時變更區域，該區域會成為後續所有程式碼資產的預設區域。現有程式碼資產不受影響。
+**重要事項：**如果在建立程式碼資產時變更區域，該區域會成為後續所有程式碼資產的預設區域。現有程式碼資產不受影響。
 
 如要設定新程式碼資產的預設區域，請按照下列步驟操作：
 
@@ -145,7 +143,7 @@ Google Cloud 專案中的所有新程式碼資產都會使用預設區域。資�
 4. 選取要設為預設值的程式碼區域。
 5. 按一下「儲存」。
 
-如要查看支援的地區清單，請參閱「[BigQuery Studio 位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#bqstudio-loc)」。
+如需支援的地區清單，請參閱「[BigQuery Studio 位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#bqstudio-loc)」。
 
 ## 使用 CMEK 加密
 
@@ -164,7 +162,7 @@ Google Cloud 專案中的所有新程式碼資產都會使用預設區域。資�
 3. 在「Explorer」窗格中，按一下「Queries」(查詢) 旁邊的 more\_vert「View actions」(查看動作)，然後執行下列任一操作：
 
 * 如要在目前的分頁中開啟清單，請按一下「顯示全部」。
-* 如要在新分頁中開啟清單，請依序點選「全部顯示」 >「新分頁」。
+* 如要在新分頁中開啟清單，請依序點選「全部顯示於」>「新分頁」。
 * 如要在分割分頁中開啟清單，請依序按一下「全部顯示」>「分割分頁」。
 
 ## 查看已儲存的查詢中繼資料
@@ -174,7 +172,7 @@ Google Cloud 專案中的所有新程式碼資產都會使用預設區域。資�
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 按一下左側窗格中的 folder「Files」(檔案)，開啟檔案瀏覽器。
+2. 在左側窗格中，按一下「folder Files」(檔案)，開啟檔案瀏覽器。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Files」(檔案) 窗格中，展開專案和子資料夾，找出要查看中繼資料的已儲存的查詢。
@@ -199,10 +197,10 @@ Google Cloud 專案中的所有新程式碼資產都會使用預設區域。資�
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 按一下左側窗格中的 folder「Files」(檔案)，開啟檔案瀏覽器。
+2. 在左側窗格中，按一下「folder Files」(檔案)，開啟檔案瀏覽器。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
-3. 在「Files」(檔案) 窗格中，展開專案和子資料夾，找出要查看版本記錄的已儲存的查詢。
+3. 在「Files」(檔案) 窗格中，展開專案和子資料夾，找出要查看版本記錄的已儲存查詢。
 4. 按一下已儲存的查詢，然後點選 history「Version history」(版本記錄)，即可查看已儲存查詢版本的清單，依日期遞減排序。
 
 #### 比較已儲存的查詢版本
@@ -212,14 +210,14 @@ Google Cloud 專案中的所有新程式碼資產都會使用預設區域。資�
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 按一下左側窗格中的 folder「Files」(檔案)，開啟檔案瀏覽器。
+2. 在左側窗格中，按一下「folder Files」(檔案)，開啟檔案瀏覽器。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Files」(檔案) 窗格中，展開專案和子資料夾，找出要比較版本記錄的已儲存的查詢。
 4. 按一下已儲存的查詢，然後點選 history「Version history」(版本記錄)。
 5. 按一下已儲存的查詢版本旁的 more\_vert「View actions」(查看動作)，然後點選「Compare」(比較)。比較窗格隨即開啟，比較您選取的已儲存的查詢版本與目前查詢。
 6. 選用：目前的查詢也會顯示自動儲存的變更。如要明確儲存這些變更，請按一下「Overwrite」(覆寫)。
-7. 選用：如要直接在同一頁面比較版本，而非在不同窗格中比較，請依序按一下「Compare」(比較) 和「Inline」(內嵌)。
+7. 選用：如要並排比較版本，而非在不同窗格中比較，請依序按一下「Compare」(比較) 和「Inline」(並排)。
 
 #### 還原已儲存的查詢版本
 
@@ -228,12 +226,12 @@ Google Cloud 專案中的所有新程式碼資產都會使用預設區域。資�
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 按一下左側窗格中的 folder「Files」(檔案)，開啟檔案瀏覽器。
+2. 在左側窗格中，按一下「folder Files」(檔案)，開啟檔案瀏覽器。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Files」(檔案) 窗格中，展開專案和子資料夾，找出要還原先前版本的已儲存查詢。
 4. 按一下已儲存的查詢，然後點選 history「Version history」(版本記錄)。
-5. 按一下要還原的已儲存查詢版本旁的 more\_vert「View actions」(查看動作)，然後點選「Compare」(比較)。比較窗格隨即開啟，比較您選取的已儲存的查詢版本與最新查詢版本，包括任何自動儲存的變更。
+5. 按一下要還原的已儲存的查詢版本旁的 more\_vert「View actions」(查看動作)，然後點選「Compare」(比較)。比較窗格隨即開啟，比較您選取的已儲存的查詢版本與最新查詢版本，包括任何自動儲存的變更。
 6. 如要在比較後還原先前儲存的查詢版本，請按一下「Restore」(還原)。
 7. 按一下「確認」。
 
@@ -244,12 +242,12 @@ Google Cloud 專案中的所有新程式碼資產都會使用預設區域。資�
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 按一下左側窗格中的 folder「Files」(檔案)，開啟檔案瀏覽器。
+2. 在左側窗格中，按一下「folder Files」(檔案)，開啟檔案瀏覽器。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Files」(檔案) 窗格中，展開專案和子資料夾，找出要在連結試算表中開啟的已儲存的查詢。
-4. 按一下已儲存的查詢旁的 more\_vert **「Open actions」(開啟動作)**
-   ，然後依序點選
+4. 按一下
+   已儲存的查詢旁的 more\_vert**「Open actions」(開啟動作)**，然後依序點選
    **「Open in」(開啟方式) >「連結試算表)**。
 
 ## 下載已儲存的查詢
@@ -259,10 +257,10 @@ Google Cloud 專案中的所有新程式碼資產都會使用預設區域。資�
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 按一下左側窗格中的 folder「Files」(檔案)，開啟檔案瀏覽器。
+2. 在左側窗格中，按一下「folder Files」(檔案)，開啟檔案瀏覽器。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
-3. 在「Files」(檔案) 窗格中，展開專案和子資料夾，找出要下載的已儲存查詢。
+3. 在「Files」(檔案) 窗格中，展開專案和子資料夾，找出要下載的已儲存的查詢。
 4. 按一下已儲存的查詢名稱，然後點選「下載」。
 
 ## 刪除已儲存的查詢
@@ -272,7 +270,7 @@ Google Cloud 專案中的所有新程式碼資產都會使用預設區域。資�
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 按一下左側窗格中的 folder「Files」(檔案)，開啟檔案瀏覽器。
+2. 在左側窗格中，按一下「folder Files」(檔案)，開啟檔案瀏覽器。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Files」(檔案) 窗格中，展開專案和子資料夾，找出要刪除的已儲存的查詢。
@@ -282,14 +280,14 @@ Google Cloud 專案中的所有新程式碼資產都會使用預設區域。資�
 
 ## 傳統版已儲存的查詢
 
-**已淘汰：** [BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/enable-assets?hl=zh-tw) 中的已儲存的查詢，日後將全面取代傳統已儲存查詢。我們正在審查淘汰時程。
+**已淘汰：**[BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/enable-assets?hl=zh-tw) 中的已儲存查詢，日後將全面取代傳統已儲存查詢。淘汰時程正在審查中。
 詳情請參閱「[淘汰傳統版已儲存的查詢](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction?hl=zh-tw#classic_saved_queries_deprecated)」。如要瞭解如何遷移至已儲存的查詢，請參閱「[遷移傳統版已儲存的查詢](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries?hl=zh-tw#migrate_classic_saved_queries)」。
 
 請參閱下列各節，瞭解如何管理[傳統已儲存的查詢](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction?hl=zh-tw#classic_saved_queries_deprecated)。
 
 ### 共用傳統版已儲存的查詢
 
-您可以共用已設為專案或公開瀏覽權限的傳統版已儲存的查詢。具備[必要權限](https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries?hl=zh-tw#required_permissions_for_classic_saved_queries)的主體可查看、更新或刪除查詢。如果瀏覽權限設為「公開」，任何取得查詢連結的使用者都能查看查詢，但無法更新或刪除。
+您可以共用已設為專案或公開瀏覽權限的傳統版已儲存的查詢。專案瀏覽權限可讓具備[必要權限](https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries?hl=zh-tw#required_permissions_for_classic_saved_queries)的主體查看、更新或刪除查詢。公開瀏覽權限可讓任何擁有查詢連結的使用者查看查詢，但無法更新或刪除。
 
 如要與其他使用者共用傳統版已儲存的查詢，請產生並分享傳統版已儲存查詢的連結。
 
@@ -303,7 +301,7 @@ Google Cloud 專案中的所有新程式碼資產都會使用預設區域。資�
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 2. 在「Explorer」窗格中展開專案，然後按一下「(傳統版) 查詢」。
-3. 找到並點選要授予存取權的傳統版已儲存的查詢。您可以使用搜尋功能或篩選器找出查詢。
+3. 找出並點選要授予存取權的傳統版已儲存的查詢。您可以使用搜尋功能或篩選器找出查詢。
 4. 按一下查詢旁的 more\_vert「View actions」(查看動作)，然後點選「Copy link」(複製連結)。
 5. 將連結分享給要授予查詢存取權的使用者。
 
@@ -328,32 +326,32 @@ Google Cloud 專案中的所有新程式碼資產都會使用預設區域。資�
 您可以批次遷移下列傳統版已儲存的查詢：
 
 個人傳統版已儲存的查詢
-:   個人傳統版已儲存的查詢僅供建立者查看。這類項目會標示 person 圖示。個人傳統版已儲存查詢只能由擁有者遷移。
+:   個人傳統版已儲存查詢僅供建立者查看。這些項目會標示 person 圖示。個人傳統版已儲存查詢只能由擁有者遷移。
 
-公開的傳統版已儲存的查詢
-:   公開的傳統版已儲存的查詢，可供任何知道查詢連結的使用者查看。這類項目會標示 share 圖示。只有擁有者可以遷移公開的傳統版已儲存的查詢。
+公開的傳統版已儲存查詢
+:   只要有查詢連結，任何人都能查看公開的傳統版已儲存查詢。這些項目會標示 share 圖示。公開的傳統版已儲存的查詢只能由擁有者遷移。
 
     公開傳統已儲存的查詢的 IAM 權限，不會對應至 BigQuery Studio 已儲存的查詢的權限。也就是說，從公開傳統版已儲存的查詢遷移的 BigQuery Studio 已儲存的查詢，預設不會公開。您必須在遷移期間或之後，為遷移的 BigQuery Studio 已儲存的查詢設定 IAM 權限。
 
-    如要在遷移期間，為遷移的 BigQuery Studio 已儲存的查詢設定 IAM 權限，您可以選取現有的 BigQuery Studio 已儲存的查詢，並將其權限套用至遷移的已儲存的查詢。BigQuery 會複製所選 BigQuery Studio 已儲存的查詢的權限，並套用至遷移後的已儲存的查詢。您也可以手動新增使用者或群組，與他們共用遷移後的已儲存的查詢。
+    如要在遷移期間，為遷移的 BigQuery Studio 已儲存的查詢設定 IAM 權限，您可以選取現有的 BigQuery Studio 已儲存的查詢，並將其權限套用至遷移的已儲存的查詢。BigQuery 會複製所選 BigQuery Studio 已儲存查詢的權限，並套用至遷移後的已儲存查詢。您也可以手動新增使用者或群組，與他們共用遷移的已儲存查詢。
 
-    如未在遷移期間設定 IAM 權限，只有您能存取遷移後的 BigQuery Studio 已儲存的查詢。
+    如未在遷移期間設定 IAM 權限，則只有您能存取遷移後的 BigQuery Studio 已儲存的查詢。
 
 專案傳統版已儲存的查詢
-:   具備[必要權限](https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries?hl=zh-tw#required_permissions_for_classic_saved_queries)的主體可以查看專案層級的已儲存的查詢。這類應用程式會標有 people 圖示。您可以批次遷移專案中所有已儲存的傳統版專案查詢。
+:   具備[必要權限](https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries?hl=zh-tw#required_permissions_for_classic_saved_queries)的主體可以查看專案層級的已儲存的查詢。這類應用程式會標示 people 圖示。您可以批次遷移專案中所有已儲存的傳統版專案查詢。
 
     專案傳統版已儲存的查詢的 IAM 權限，不會直接對應至 BigQuery Studio 已儲存的查詢的權限。您必須在遷移期間或之後，為已遷移的 BigQuery Studio 已儲存的查詢設定 IAM 權限。
 
-    如要在遷移期間，為遷移的 BigQuery Studio 已儲存的查詢設定 IAM 權限，您可以選取現有的 BigQuery Studio 已儲存的查詢，並將其權限套用至遷移的已儲存的查詢。BigQuery 會複製所選 BigQuery Studio 已儲存的查詢的權限，並套用至遷移後的已儲存的查詢。您也可以手動新增使用者或群組，與他們共用遷移後的已儲存的查詢。
+    如要在遷移期間，為遷移的 BigQuery Studio 已儲存的查詢設定 IAM 權限，您可以選取現有的 BigQuery Studio 已儲存的查詢，並將其權限套用至遷移的已儲存的查詢。BigQuery 會複製所選 BigQuery Studio 已儲存的查詢的權限，並套用至遷移後的已儲存的查詢。您也可以手動新增使用者或群組，與他們共用遷移的已儲存的查詢。
 
-    如未在遷移期間設定 IAM 權限，只有您能存取遷移後的 BigQuery Studio 已儲存的查詢。
+    如未在遷移期間設定 IAM 權限，則只有您能存取遷移後的 BigQuery Studio 已儲存的查詢。
 
 在批次遷移傳統版已儲存的查詢時，BigQuery 會執行下列操作：
 
 * 將所有遷移的傳統版已儲存的查詢，儲存為 BigQuery Studio 已儲存的查詢，並儲存在所選區域。
-* 將所有遷移中的傳統版已儲存的查詢，轉換為唯讀的傳統版已儲存的查詢。
+* 將所有遷移中的傳統版已儲存查詢，轉換為唯讀的傳統版已儲存查詢。
 
-遷移後，您可以存取個人、公開和專案傳統版已儲存的查詢，這些查詢會同時顯示為 BigQuery Studio 已儲存的查詢和唯讀傳統版已儲存的查詢。
+遷移後，您可以存取個人、公開和專案傳統版已儲存的查詢，這些查詢會同時以 BigQuery Studio 已儲存的查詢和唯讀傳統版已儲存的查詢的形式呈現。
 
 #### 遷移風險
 
@@ -361,7 +359,7 @@ Google Cloud 專案中的所有新程式碼資產都會使用預設區域。資�
 
 BigQuery 會使用 Dataform API，將遷移的 BigQuery Studio 已儲存的查詢新增至 Google Cloud 專案。如要還原變更，必須手動清理。
 
-**警告：** 遷移作業一旦開始，便無法停止或取消。
+**警告：**遷移作業一旦開始，便無法停止或取消。
 
 #### 批次遷移傳統版已儲存的查詢
 
@@ -377,27 +375,27 @@ BigQuery 會使用 Dataform API，將遷移的 BigQuery Studio 已儲存的查�
 4. 在「Classic saved queries migration」(傳統版已儲存的查詢遷移作業) 窗格的「Check migration readiness」(檢查遷移準備情況) 部分，點選「Next」(下一步)，確認您具備[必要角色](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries?hl=zh-tw#required_roles)。
 
    您的 IAM 權限會決定您可以遷移哪些類型的傳統版已儲存的查詢，以及您可以看到「Classic saved queries migration」(傳統版已儲存的查詢遷移) 窗格的哪些部分。
-5. 在「Region」(區域) 區段的「Region」(區域) 下拉式選單中，選取 BigQuery 儲存遷移後已儲存的查詢的區域。
+5. 在「Region」(區域) 專區的「Region」(區域) 下拉式選單中，選取 BigQuery 要儲存遷移後已儲存查詢的區域。
 
    建議您選取 BigQuery Studio 程式碼資產的預設區域。詳情請參閱「[設定預設區域](#set-default-region)」。
-6. 如要遷移所有個人傳統版已儲存的查詢，請在「Migrate personal queries」(遷移個人查詢) 區段中，勾選「Migrate all personal queries」(遷移所有個人查詢) 核取方塊，然後點選「Next」(下一步)。
+6. 如要遷移所有個人傳統版已儲存的查詢，請在「Migrate personal queries」(遷移個人查詢) 區段中，勾選「Migrate all personal queries」(遷移所有個人查詢) 核取方塊，然後按一下「Next」(下一步)。
 7. 如要遷移專案中所有公開的傳統版已儲存的查詢，請在「Migrate public queries」(遷移公開查詢) 區段中執行下列操作：
 
-   1. 勾選「Migrate all public queries」(遷移所有公開查詢) 核取方塊。
-   2. 在「SQL」下拉式選單中，選取 BigQuery Studio 已儲存的查詢，其中包含您要套用至已遷移查詢的 IAM 政策。
-   3. 選用：如要新增使用者或群組，與對方共用遷移的已儲存的查詢，請按一下「Add User/Group」(新增使用者/群組)。
+   1. 勾選「Migrate all public queries」核取方塊。
+   2. 在「SQL」下拉式選單中，選取 BigQuery Studio 已儲存的查詢，其中包含要套用至已遷移查詢的 IAM 政策。
+   3. 選用：如要新增使用者或群組，以便與其共用已遷移的已儲存查詢，請按一下「Add User/Group」(新增使用者/群組)。
 
-      如要公開共用遷移後的已儲存的查詢，請將 `allAuthenticatedUsers` 設為主體，並授予程式碼檢視者角色。詳情請參閱「[授予公開存取權](#grant-public-access)」。
+      如要公開共用遷移的已儲存查詢，請將 `allAuthenticatedUsers` 設為主體，並授予程式碼檢視者角色。詳情請參閱「[授予公開存取權](#grant-public-access)」。
    4. 點選「下一步」。
-8. 如要遷移專案層級的傳統版已儲存的查詢，請在「Migrate project queries」(遷移專案查詢) 區段執行下列操作：
+8. 如要遷移專案層級的傳統版已儲存的查詢，請在「Migrate project queries」(遷移專案查詢) 專區執行下列操作：
 
    1. 勾選「Migrate all project queries」核取方塊。
    2. 在「SQL」下拉式選單中，選取 BigQuery Studio 已儲存的查詢，其中包含要套用至已遷移查詢的 IAM 政策。
-   3. 選用：如要新增使用者或群組，與對方共用遷移的已儲存的查詢，請按一下「Add User/Group」(新增使用者/群組)。
+   3. 選用：如要新增使用者或群組，以便與其共用已遷移的已儲存的查詢，請按一下「Add User/Group」(新增使用者/群組)。
    4. 點選「下一步」。
-9. 確認您瞭解[遷移風險](#migration-risks)，並想批次遷移傳統版已儲存的查詢，請在「Confirm」(確認) 區段的「Confirm」(確認) 欄位中輸入 `confirm`，然後點選「Next」(下一步)。
+9. 如要確認您瞭解[遷移風險](#migration-risks)，並想批次遷移傳統版已儲存的查詢，請在「Confirm」(確認) 區段的「Confirm」(確認) 欄位中輸入 `confirm`，然後點選「Next」(下一步)。
 
-   **警告：** 遷移作業一旦開始，便無法停止或取消。
+   **警告：**遷移作業一旦開始，便無法停止或取消。
 10. 按一下「提交」。
 
 視遷移的查詢數量而定，遷移作業可能需要超過 15 分鐘。
@@ -437,19 +435,19 @@ Knowledge Catalog 會將已儲存的查詢記錄為[項目](https://docs.cloud.g
 :   已儲存的查詢的[系統項目群組](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources?hl=zh-tw#entry-groups)為 `@dataform`。如要在 Knowledge Catalog 中查看已儲存的查詢項目的詳細資料，您必須查看 `dataform` 系統項目群組。如要瞭解如何查看項目群組中所有項目的清單，請參閱 Knowledge Catalog 說明文件中的「[查看項目群組的詳細資料](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources?hl=zh-tw#entry-group-details)」。
 
 系統項目類型
-:   已儲存的查詢的[系統項目類型](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources?hl=zh-tw#entry-types)為 `dataform-code-asset`。如要查看已儲存的查詢的詳細資料，您必須查看 `dataform-code-asset` 項目類型，使用切面篩選器篩選結果，並[將 `dataform-code-asset` 切面中的 `type` 欄位設為 `SQL_QUERY`](https://docs.cloud.google.com/knowledge-catalog/docs/search-syntax?hl=zh-tw#aspect-search)。接著，選取所選已儲存查詢的項目。如要瞭解如何查看所選項目類型的詳細資料，請參閱 Knowledge Catalog 說明文件中的「[查看項目類型的詳細資料](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources?hl=zh-tw#entry-type-details)」。如要瞭解如何查看所選項目的詳細資料，請參閱 Knowledge Catalog 說明文件中的「[查看項目詳細資料](https://docs.cloud.google.com/knowledge-catalog/docs/search-assets?hl=zh-tw#view-entry-details)」一節。
+:   已儲存的查詢的[系統項目類型](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources?hl=zh-tw#entry-types)為 `dataform-code-asset`。如要查看已儲存的查詢的詳細資料，您必須查看 `dataform-code-asset` 系統項目類型、使用切面篩選器篩選結果，並[將 `dataform-code-asset` 切面中的 `type` 欄位設為 `SQL_QUERY`](https://docs.cloud.google.com/knowledge-catalog/docs/search-syntax?hl=zh-tw#aspect-search)。然後選取所選已儲存查詢的項目。如要瞭解如何查看所選項目類型的詳細資料，請參閱 Knowledge Catalog 說明文件中的「[查看項目類型的詳細資料](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources?hl=zh-tw#entry-type-details)」。如要瞭解如何查看所選項目的詳細資料，請參閱 Knowledge Catalog 說明文件中的「[查看項目詳細資料](https://docs.cloud.google.com/knowledge-catalog/docs/search-assets?hl=zh-tw#view-entry-details)」一節。
 
 系統切面類型
 :   已儲存的查詢的[系統切面類型](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata?hl=zh-tw#aspect-types)為 `dataform-code-asset`。如要使用[切面](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata?hl=zh-tw#aspects)為已儲存的查詢項目加上註解，為 Knowledge Catalog 中已儲存的查詢提供額外背景資訊，請查看 `dataform-code-asset` 切面類型，使用切面篩選器篩選結果，並[將 `dataform-code-asset` 切面中的 `type` 欄位設為 `SQL_QUERY`](https://docs.cloud.google.com/knowledge-catalog/docs/search-syntax?hl=zh-tw#aspect-search)。如要瞭解如何使用切面為項目加上註解，請參閱 Knowledge Catalog 說明文件中的「[管理切面並充實中繼資料](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata?hl=zh-tw)」。
 
 類型
-:   已儲存的查詢類型為 `SQL_QUERY`。這個類型可讓您在`dataform-code-asset`系統項目類型和`dataform-code-asset`切面類型中，使用[切面篩選器](https://docs.cloud.google.com/knowledge-catalog/docs/search-syntax?hl=zh-tw#aspect-search)中的`aspect:dataplex-types.global.dataform-code-asset.type=SQL_QUERY`查詢篩選已儲存的查詢。
+:   已儲存的查詢類型為 `SQL_QUERY`。這種類型可讓您在[切面篩選器](https://docs.cloud.google.com/knowledge-catalog/docs/search-syntax?hl=zh-tw#aspect-search)中使用 `aspect:dataplex-types.global.dataform-code-asset.type=SQL_QUERY` 查詢，篩選 `dataform-code-asset` 系統項目類型和 `dataform-code-asset` 切面類型中已儲存的查詢。
 
-如要瞭解如何在 Knowledge Catalog 搜尋資產，請參閱 Knowledge Catalog 說明文件中的「[在 Knowledge Catalog 搜尋資料資產](https://docs.cloud.google.com/knowledge-catalog/docs/search-assets?hl=zh-tw)」。
+如要瞭解如何在 Knowledge Catalog 搜尋資產，請參閱 Knowledge Catalog 說明文件的「[在 Knowledge Catalog 搜尋資料資產](https://docs.cloud.google.com/knowledge-catalog/docs/search-assets?hl=zh-tw)」一文。
 
 ## 後續步驟
 
-* 如要進一步瞭解 BigQuery Studio 已儲存的查詢，請參閱「[已儲存的查詢簡介](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction?hl=zh-tw) 」。
+* 如要進一步瞭解 BigQuery Studio 已儲存的查詢，請參閱「[已儲存的查詢簡介](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction?hl=zh-tw)」。
 * 如要瞭解如何建立已儲存的查詢，請參閱「[建立已儲存的查詢](https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries?hl=zh-tw)」。
 
 
@@ -459,11 +457,11 @@ Knowledge Catalog 會將已儲存的查詢記錄為[項目](https://docs.cloud.g
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-08 (世界標準時間)。
+上次更新時間：2026-11-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-08 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-12 (世界標準時間)。"],[],[]]

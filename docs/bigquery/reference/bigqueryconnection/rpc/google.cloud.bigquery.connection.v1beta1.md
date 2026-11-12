@@ -125,4 +125,4 @@ The request for `ConnectionService.CreateConnection`.
 
 | Fields | |
 | --- | --- |
-| `parent` | `string`  Required. Parent resource name. Must be in the format |
+| `parent` |

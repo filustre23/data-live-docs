@@ -257,6 +257,4 @@ CODE_POINTS_TO_BYTES(ascii_code_points)
 
 Takes an array of extended ASCII
 [code points](https://en.wikipedia.org/wiki/Code_point)
-as `ARRAY<INT64>` and returns `BYTES`.
-
-To convert from `BYTES` to an array of code points, see
+as

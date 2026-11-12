@@ -300,6 +300,3 @@ You can't use a `PERCENTILE_CONT` (`DIFFERENTIAL_PRIVACY`) function with
 
 This function must be used with the [`DIFFERENTIAL_PRIVACY` clause](/bigquery/docs/reference/standard-sql/query-syntax#dp_clause)
 and can support these arguments:
-
-* `expression`: The input expression. This can be most numeric input types,
-  such as `INT64`.

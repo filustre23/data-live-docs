@@ -518,9 +518,4 @@ no default range, and the scale type is `LINEAR`.
 
 **Syntax**
 
-`COLSAMPLE_BYNODE = { float64_value | HPARAM_RANGE(range) | HPARAM_CANDIDATES([candidates]) }`
-
-**Description**
-
-The subsample ratio of columns for each node (split). Subsampling occurs once
-for every time a new split is evaluated.
+`COLSAMPLE_BYNODE = { float64_value | HPARAM_RANGE(range) | HPARAM_CANDIDATES(`

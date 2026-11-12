@@ -512,5 +512,5 @@ use to encrypt the model.
 A `STRING` value containing the fully-qualified name of the CMEK. For example,
 
 ```
-'projects/my_project/locations/my_location/keyRings/my_ring/cryptoKeys/my_key'
+'projects/my_project/locations/
 ```

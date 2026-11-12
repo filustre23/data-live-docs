@@ -73,9 +73,9 @@ BigQuery 也會對下列常值執行隱含轉換：
 
 ### 明確轉換類型
 
-您可以使用 BigQuery 的 [`CAST(expression AS type)`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_functions?hl=zh-tw#cast)  函式，或任何 [`DATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions?hl=zh-tw) 和 [`TIMESTAMP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions?hl=zh-tw) 轉換函式，轉換 BigQuery 不會隱含轉換的 Amazon Redshift 資料類型。
+您可以使用 BigQuery 的 [`CAST(expression AS type)`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_functions?hl=zh-tw#cast) 函式，或任何 [`DATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions?hl=zh-tw) 和 [`TIMESTAMP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions?hl=zh-tw) 轉換函式，轉換 BigQuery 不會隱含轉換的 Amazon Redshift 資料類型。
 
-遷移查詢時，請將所有 Amazon Redshift [`CONVERT(type, expression)`](https://docs.aws.amazon.com/redshift/latest/dg/r_CAST_function.html#convert-function) 函式 (或 :: 語法) 變更為 BigQuery 的 [`CAST(expression AS type)`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_functions?hl=zh-tw#cast) 函式，如「[資料類型格式設定函式](#data_type_formatting_functions)」一節的表格所示。
+遷移查詢時，請將所有出現的 Amazon Redshift [`CONVERT(type, expression)`](https://docs.aws.amazon.com/redshift/latest/dg/r_CAST_function.html#convert-function) 函式 (或 :: 語法) 變更為 BigQuery 的 [`CAST(expression AS type)`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_functions?hl=zh-tw#cast) 函式，如「[資料類型格式設定函式](#data_type_formatting_functions)」一節的表格所示。
 
 ## 查詢語法
 
@@ -163,5 +163,4 @@ Amazon Redshift [`ORDER BY`](https://docs.amazonaws.cn/en_us/redshift/latest/dg/
 | `a <> ALL (subquery)`  `a != ALL (subquery)` | `a NOT IN subquery` |
 | `a IS UNKNOWN`  `expression ILIKE pattern` | `a IS NULL`  `LOWER(expression) LIKE LOWER(pattern)` |
 | `expression LIKE pattern ESCAPE 'escape_char'` | `expression LIKE pattern`   注意：BigQuery 不支援自訂逸出字元。您必須使用兩個反斜線 \\ 做為 BigQuery 的逸出字元。 |
-| `expression [NOT] SIMILAR TO pattern` | `IF(   LENGTH(   REGEXP_REPLACE(   expression,   pattern,   ''   ) = 0,   True,   False   )`   注意：如果指定 `NOT`，請將上述 `IF` 運算式包裝在 `NOT` 運算式中，如下所示：    `NOT(   IF(   LENGTH(...   )` |
-| `expression` |
+| `expression [NOT] SIMILAR TO pattern` | `IF(   LENGTH(   REGEXP_REPLACE(   expression,   pattern,   ''   ) = 0,   True,   False   )`   注意：如果指定 `NOT`，請將上述 `IF` 運算式包裝在 `NOT` 運算式中，如下所示：    `NOT(` |

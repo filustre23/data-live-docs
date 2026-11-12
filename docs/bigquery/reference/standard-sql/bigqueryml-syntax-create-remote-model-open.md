@@ -576,5 +576,3 @@ Model Garden are supported:
 * [Mixtral](https://console.cloud.google.com/vertex-ai/publishers/mistral-ai/model-garden/mixtral)
 * [Falcon-instruct (PEFT)](https://console.cloud.google.com/vertex-ai/publishers/tiiuae/model-garden/falcon-instruct-7b-peft)
 * [Phi-4](https://console.cloud.google.com/vertex-ai/publishers/microsoft/model-garden/phi4)
-* [Phi-3](https://console.cloud.google.com/vertex-ai/publishers/microsoft/model-garden/phi3)
-* [QwQ](https://console.cloud.google.com/vertex-ai/publishers/qwen/model-garden/qwq)

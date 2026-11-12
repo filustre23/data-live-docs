@@ -449,6 +449,3 @@ The following audit logs are associated with methods belonging to
   + `bigquery.tables.getData - DATA_READ`
   + `bigquery.tables.update - ADMIN_WRITE`
   + `bigquery.tables.updateData - DATA_WRITE`
-* **Method is a long-running or streaming operation**:
-  No.
-* **Filter for this method**: `protoPayload.methodNa`

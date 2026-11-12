@@ -374,10 +374,4 @@ SELECT RANGE_CONTAINS(
 RANGE_END(range_to_check)
 ```
 
-**Description**
-
-Gets the upper bound of a range.
-
-**Definitions**
-
-* `range_to_check`: The
+<

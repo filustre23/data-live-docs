@@ -129,4 +129,4 @@ Service to handle EDW migrations.
 
 | ListMigrationWorkflows |
 | --- |
-| `rpc ListMigrationWorkflows(ListMigrationWorkflowsRequest) returns (ListMigrationWorkflowsResponse)`  Lists previously created migration workflow.  Authorization scopes  Requires the following OAuth scope:   * `https://www.googleapis.com/auth/cloud-platform`   For more information, see the [Authentication Overview](/docs/authentication#authorization-gcp).  IAM Permissions  Requires the following |
+| `rpc ListMigrationWorkflows(ListMigrationWorkflowsRequest) returns (ListMigrationWorkflowsResponse)`  Lists previously created migration workflow.  Authorization scopes  Requires the following OAuth scope:   * `https://www.googleapis.com/auth/cloud-platform`   For more information, see the [Authentication Overview](/docs/authentication#authorization-gcp).</ |

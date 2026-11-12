@@ -148,6 +148,5 @@ This is advanced functionality for interoperability with systems utilizing the
 
 ```
 WITH data AS (
-  SELECT 1 AS id, ST_GEOGPOINT(-122, 47) AS geo
-  UNION
+  SELECT 1 AS id, ST_GEOGPOINT(-122, 47) AS
 ```

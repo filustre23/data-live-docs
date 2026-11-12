@@ -194,5 +194,4 @@ DLP_KEY_CHAIN(kms_resource_name, wrapped_key)
 You can use this function instead of the `key` argument for
 DLP deterministic encryption functions. This function lets
 you use the [AES-SIV encryption functions](https://cloud.google.com/dlp/docs/pseudonymization#aes-siv)
-without including `plaintext` keys in a query. To use DLP functions, you need a
-[new cryptographic key and then use](/bigquery/docs/column-key-encrypt#wrapped-key-dlp-functions)
+without including

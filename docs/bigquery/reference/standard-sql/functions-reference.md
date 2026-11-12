@@ -276,6 +276,4 @@ SAFE.function_name()
 
 If you begin a function with
 the `SAFE.` prefix, it will return `NULL` instead of an error.
-The `SAFE.` prefix only prevents errors from the prefixed function
-itself: it doesn't prevent errors that occur while evaluating argument
-expressions. The `SAFE.` prefix only prevents errors that o
+The `SAFE.` prefix only prevents errors from the

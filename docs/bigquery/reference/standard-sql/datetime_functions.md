@@ -300,7 +300,5 @@ part uses weeks that begin on Sunday. `DATETIME_DIFF` with the date part
 SELECT
   DATETIME_DIFF('2017-12-18', '2017-12-17', WEEK) AS week_diff,
   DATETIME_DIFF('2017-12-18', '2017-12-17', WEEK(MONDAY)) AS week_weekday_diff,
-  DATETIME_DIFF('2017-12-18', '2017-12-17', ISOWEEK) AS isoweek_diff;
-
-/*-----------+-------------
+  DATETIME_DIFF('2017-12-18', '2017-12-17', ISOWEEK) AS
 ```

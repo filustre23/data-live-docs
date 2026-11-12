@@ -362,6 +362,4 @@ types.
 | Timestamp | Default format YYYY-MM-DD HH24:MI:SS. | TIMESTAMP |
 | **Character and strings** |  |  |
 | LargeString | Variable length string of up to 2GB. | STRING |
-| String (n) | Variable-length Unicode string of up to 5000 characters. | STRING |
-| **Binary** |  |  |
-| Binary (n) | Variable len |
+| String (n) | Variable-length Unicode string of up to 5000 ch |

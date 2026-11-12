@@ -504,5 +504,4 @@ the following query, `stop_words` is used twice:
 SELECT TEXT_ANALYZE(
   'I like ❶ ② pies, you like Ño PIEs',
   analyzer=>'LOG_ANALYZER',
-  analyzer_options=>'<
 ```

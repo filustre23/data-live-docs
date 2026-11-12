@@ -409,5 +409,4 @@ SELECT * FROM
 ML.PREDICT(
   MODEL `my_dataset.vision_model`,
   (SELECT uri, ML.RESIZE_IMAGE(ML.DECODE_IMAGE(data), 480, 480, FALSE) AS input
-  FROM `my_dataset.object_ta
 ```

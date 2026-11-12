@@ -283,7 +283,5 @@ FROM Produce
 
 ```
 |> EXTEND expression [[AS] alias] [, ...]
-   [WINDOW name AS window_spec, ...]
+   [WINDOW name AS
 ```
-
-**De**

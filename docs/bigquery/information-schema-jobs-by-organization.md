@@ -127,5 +127,3 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 * `REGION_NAME`：專案的區域
 
 例如 `` `myproject`.`region-us`.INFORMATION_SCHEMA.JOBS_BY_ORGANIZATION ``。
-
-### 找出今天掃描最多位元組的前五項工作

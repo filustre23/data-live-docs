@@ -542,8 +542,4 @@ This option accepts the following values:
 * `DK`: Denmark
 * `DZ`: Algeria
 * `EC`: Ecuador
-* `EE`: Estonia
-* `EG`: Egypt
-* `ES`: Spain
-* `FI`: Finland
-* `FR`: France
+* `EE`: E

@@ -363,8 +363,4 @@ that arrive in a bucket over time, you should create a standard
 [BigQuery object table](/bigquery/docs/object-table-introduction)
 instead.
 
-For more information, see [Work with `ObjectRef` values](/bigquery/docs/work-with-objectref).
-
-**Definitions**
-
-* `uri`: a `STRING` value
+For more information, see [Work with](/bigquery/docs/work-with-objectref)

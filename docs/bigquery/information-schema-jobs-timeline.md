@@ -222,5 +222,5 @@ WITH
   snapshot_data AS (
   SELECT
     UNIX_MILLIS(period_start) AS period_start,
-    IFNULL(SUM(period_slot_ms), 0) AS period_slot_ms,
+    IFNULL(SUM(period_slot_ms), 0)
 ```

@@ -316,5 +316,5 @@ the fields are
 
 ```
 INSERT dataset.DetailedInventory
-VALUES('top load washer', 10, FALSE, [(CURRENT_DATE,
+VALUES('top load washer', 10, FALSE,
 ```

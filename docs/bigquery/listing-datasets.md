@@ -16,21 +16,21 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 列出資料集
 
-列出 BigQuery 中的資料集，即可探索及瀏覽 Google Cloud 專案中的資料集。如要驗證資源及管理權限，您可以檢查資料集詳細資料，例如位置、標籤和存取權控管。
+在 BigQuery 中列出資料集，即可探索及瀏覽 Google Cloud 專案中的資料集。如要驗證資源及管理權限，您可以檢查資料集詳細資料，例如位置、標籤和存取控管。
 
 ## 事前準備
 
-授予身分與存取權管理 (IAM) 角色，讓使用者擁有執行本文件各項工作所需的權限。
+授予 Identity and Access Management (IAM) 角色，讓使用者具備必要權限，可執行本文件中的各項工作。
 
 ### 必要角色
 
-如要取得列出資料集或取得資料集資訊所需的權限，請要求管理員授予您專案的「[BigQuery 中繼資料檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.metadataViewer) 」(`roles/bigquery.metadataViewer`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得列出資料集或取得資料集資訊所需的權限，請要求管理員授予您專案的 [BigQuery 中繼資料檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.metadataViewer) (`roles/bigquery.metadataViewer`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
-這個預先定義的角色具備 `bigquery.datasets.get` 權限，可列出資料集或取得資料集資訊。
+這個預先定義的角色具備 `bigquery.datasets.get` 權限，可列出資料集或取得資料集相關資訊。
 
 您或許還可透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)取得這項權限。
 
-在專案或機構層級套用 `roles/bigquery.metadataViewer` 角色時，您可以列出專案中的所有資料集。在資料集層級套用 `roles/bigquery.metadataViewer` 角色時，您可以列出已獲授該角色的所有資料集。
+在專案或組織層級套用 `roles/bigquery.metadataViewer` 角色時，您可以列出專案中的所有資料集。在資料集層級套用 `roles/bigquery.metadataViewer` 角色後，您可以列出所有已授予該角色的資料集。
 
 ## 列出資料集
 
@@ -40,11 +40,11 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 1. 在導覽選單中，按一下「Studio」。
 2. 點選左側窗格中的 explore「Explorer」。
-3. 在「Explorer」窗格中展開專案，然後按一下「Datasets」(資料集)，即可查看該專案中的資料集，接著點選資料集名稱。你也可以使用搜尋欄位或篩選器尋找資料集。
+3. 在「Explorer」窗格中展開專案，點選「Datasets」(資料集) 即可查看該專案中的資料集，然後點選資料集名稱。您也可以使用搜尋欄位或篩選器尋找資料集。
 
 ### SQL
 
-查詢 [`INFORMATION_SCHEMA.SCHEMATA` 檢視區塊](https://docs.cloud.google.com/bigquery/docs/information-schema-datasets-schemata?hl=zh-tw)：
+查詢 [`INFORMATION_SCHEMA.SCHEMATA` 檢視表](https://docs.cloud.google.com/bigquery/docs/information-schema-datasets-schemata?hl=zh-tw)：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -60,25 +60,23 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
    更改下列內容：
 
-   * `PROJECT_ID`：
-     Google Cloud 專案的 ID。如未指定，系統會使用預設專案。
+   * `PROJECT_ID`： Google Cloud 專案的 ID。如未指定，則會使用預設專案。
    * `REGION`：任何[資料集區域名稱](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。例如：`us`。
-3. 按一下「執行」play\_circle。
+3. 按一下「play\_circle 執行」。
 
 如要進一步瞭解如何執行查詢，請參閱「[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)」。
 
 ### bq
 
-發出 `bq ls` 指令，依資料集 ID 列出資料集。`--format` 標記可用來控管輸出。如要列出預設專案以外的專案資料集，請將 `--project_id` 標記新增至該指令。
+發出 `bq ls` 指令，依資料集 ID 列出資料集。`--format` 標記可用來控管輸出。如要列出預設專案以外的資料集，請在指令中加入 `--project_id` 旗標。
 
-如要列出專案中的所有資料集，包括[隱藏資料集](https://docs.cloud.google.com/bigquery/docs/datasets?hl=zh-tw#hidden_datasets)，請使用 `--all` 標記或 `-a` 捷徑。
+如要列出專案中的所有資料集 (包括[隱藏的資料集](https://docs.cloud.google.com/bigquery/docs/datasets?hl=zh-tw#hidden_datasets))，請使用 `--all` 旗標或 `-a` 快速鍵。
 
-如要列出專案中除了隱藏資料集以外的所有資料集，請使用 `--datasets` 標記或 `-d` 捷徑。這個標記是選用的，隱藏資料集預設為不列出。
+如要列出專案中的所有資料集 (不含隱藏的資料集)，請使用 `--datasets` 旗標或 `-d` 快速指令。這個標記是選用的，根據預設，系統不會列出隱藏的資料集。
 
 其他標記包括：
 
-* `--filter`：列出符合篩選器運算式的資料集。以空格分隔的方式列出標籤鍵和值，格式為 `labels.key:value`。如要進一步瞭解如何使用標籤篩選資料集，請參閱[新增及使用標籤](https://docs.cloud.google.com/bigquery/docs/filtering-labels?hl=zh-tw#filtering_datasets_using_labels)。
-  使用 `status:live` 關鍵字，根據狀態篩選資料集。`status` 的有效值為 `live`(預設值)、`deleted` 和 `any`。
+* `--filter`：列出符合篩選器運算式的資料集。以空格分隔的方式列出標籤鍵和值，格式為 `labels.key:value`。如要進一步瞭解如何使用標籤篩選資料集，請參閱「[新增及使用標籤](https://docs.cloud.google.com/bigquery/docs/filtering-labels?hl=zh-tw#filtering_datasets_using_labels)」。使用 `status:live` 關鍵字，根據狀態篩選資料集。`status` 的有效值為 `live` (預設)、`deleted` 和 `any`。
 * `--max_results` 或 `-n`：用來表示結果數量上限的整數。預設值為 `50`。
 
 ```
@@ -91,7 +89,7 @@ bq ls --filter labels.key:value \
 更改下列內容：
 
 * key:value：標籤鍵和值
-* integer：代表要列出資料集數量的整數
+* integer：代表要列出的資料集數量的整數
 * project\_id：換成您的專案名稱
 
 範例：
@@ -109,7 +107,7 @@ bq ls --format=pretty
 bq ls --format=prettyjson --project_id myotherproject
 ```
 
-輸入下列指令，列出預設專案中的所有資料集 (包括隱藏資料集)。在輸出內容中，隱藏資料集的名稱會以底線開頭。
+輸入下列指令，列出預設專案中的所有資料集，包括隱藏的資料集。在輸出內容中，隱藏的資料集會以底線開頭。
 
 ```
 bq ls -a
@@ -133,9 +131,9 @@ bq ls --filter labels.org:dev
 
 ### C#
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 C# 設定說明操作。詳情請參閱 [BigQuery C# API 參考說明文件](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 C# 設定操作說明進行操作。詳情請參閱 [BigQuery C# API 參考文件](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 using Google.Cloud.BigQuery.V2;
@@ -171,9 +169,9 @@ public class BigQueryListDatasets
 
 ### Go
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Go 設定說明操作。詳情請參閱 [BigQuery Go API 參考說明文件](https://godoc.org/cloud.google.com/go/bigquery)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Go 設定操作說明進行操作。詳情請參閱 [BigQuery Go API 參考文件](https://godoc.org/cloud.google.com/go/bigquery)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 import (
@@ -212,9 +210,9 @@ func listDatasets(projectID string, w io.Writer) error {
 
 ### Java
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定說明操作。詳情請參閱 [BigQuery Java API 參考說明文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定操作說明進行操作。詳情請參閱 [BigQuery Java API 參考文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 import com.google.api.gax.paging.Page;
@@ -256,9 +254,9 @@ public class ListDatasets {
 
 ### Node.js
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定操作說明進行操作。詳情請參閱 [BigQuery Node.js API 參考文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 // Import the Google Cloud client library
@@ -282,9 +280,9 @@ async function listDatasets() {
 
 ### PHP
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 PHP 設定說明操作。詳情請參閱 [BigQuery PHP API 參考說明文件](https://docs.cloud.google.com/php/docs/reference/cloud-bigquery/latest/BigQueryClient?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 PHP 設定操作說明進行操作。詳情請參閱 [BigQuery PHP API 參考文件](https://docs.cloud.google.com/php/docs/reference/cloud-bigquery/latest/BigQueryClient?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 use Google\Cloud\BigQuery\BigQueryClient;
@@ -303,9 +301,9 @@ foreach ($datasets as $dataset) {
 
 ### Python
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定操作說明進行操作。詳情請參閱 [BigQuery Python API 參考文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 from google.cloud import bigquery
@@ -326,9 +324,9 @@ else:
 
 ### Ruby
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Ruby 設定說明操作。詳情請參閱 [BigQuery Ruby API 參考說明文件](https://googleapis.dev/ruby/google-cloud-bigquery/latest/Google/Cloud/Bigquery.html)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Ruby 設定操作說明進行操作。詳情請參閱 [BigQuery Ruby API 參考文件](https://googleapis.dev/ruby/google-cloud-bigquery/latest/Google/Cloud/Bigquery.html)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 require "google/cloud/bigquery"
@@ -350,7 +348,7 @@ end
 ### 控制台
 
 1. 點選左側窗格中的 explore「Explorer」。
-2. 在「Explorer」窗格中展開專案，然後按一下「Datasets」(資料集)，即可查看該專案中的資料集，接著點選資料集名稱。你也可以使用搜尋欄位或篩選器尋找資料集。
+2. 在「Explorer」窗格中展開專案，點選「Datasets」(資料集) 即可查看該專案中的資料集，然後點選資料集名稱。您也可以使用搜尋欄位或篩選器尋找資料集。
 
    說明和詳細資料會顯示在「詳細資料」分頁中。
 3. 選用：您可以前往其他分頁，查看資料集中的資料表、常式和模型清單。
@@ -359,7 +357,7 @@ end
 
 ### SQL
 
-查詢 [`INFORMATION_SCHEMA.SCHEMATA` 檢視區塊](https://docs.cloud.google.com/bigquery/docs/information-schema-datasets-schemata?hl=zh-tw)：
+查詢 [`INFORMATION_SCHEMA.SCHEMATA` 檢視表](https://docs.cloud.google.com/bigquery/docs/information-schema-datasets-schemata?hl=zh-tw)：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -375,14 +373,13 @@ end
 
    更改下列內容：
 
-   * `PROJECT_ID`：
-     Google Cloud 專案的 ID。如未指定，系統會使用預設專案。
+   * `PROJECT_ID`： Google Cloud 專案的 ID。如未指定，則會使用預設專案。
    * `REGION`：任何[資料集區域名稱](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。例如：`us`。
-3. 按一下「執行」play\_circle。
+3. 按一下「play\_circle 執行」。
 
 如要進一步瞭解如何執行查詢，請參閱「[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)」。
 
-您也可以查詢 [`INFORMATION_SCHEMA.SCHEMATA_OPTIONS` 檢視畫面](https://docs.cloud.google.com/bigquery/docs/information-schema-datasets-schemata-options?hl=zh-tw)。
+您也可以查詢 [`INFORMATION_SCHEMA.SCHEMATA_OPTIONS` 檢視表](https://docs.cloud.google.com/bigquery/docs/information-schema-datasets-schemata-options?hl=zh-tw)。
 
 ```
 SELECT
@@ -393,10 +390,9 @@ FROM
 
 ### bq
 
-請發出 `bq show` 指令。`--format` 旗標可用來控制輸出內容。如要取得預設專案以外的資料集相關資訊，請使用下列格式將專案 ID 新增至資料集名稱：`project_id:dataset`。
-輸出內容會顯示資料集的資訊，例如存取權控管、標籤和位置。這項指令不會顯示資料集的沿用權限，但您可以在 Google Cloud 控制台中查看。
+請發出 `bq show` 指令。`--format` 旗標可用來控制輸出內容。如要取得預設專案以外的專案資料集資訊，請按照下列格式將專案 ID 新增至資料集名稱：`project_id:dataset`。輸出內容會顯示資料集的資訊，例如存取控管、標籤和位置。這個指令不會顯示資料集的繼承權限，但您可以在 Google Cloud 控制台中查看。
 
-如要顯示[隱藏資料集](https://docs.cloud.google.com/bigquery/docs/datasets?hl=zh-tw#hidden_datasets)的相關資訊，請使用 [`bq ls --all`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_ls) 指令列出所有資料集，然後在 `bq show` 指令中使用隱藏資料集的名稱。
+如要顯示[隱藏資料集](https://docs.cloud.google.com/bigquery/docs/datasets?hl=zh-tw#hidden_datasets)的資訊，請使用 [`bq ls --all`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_ls) 指令列出所有資料集，然後在 `bq show` 指令中使用隱藏資料集的名稱。
 
 ```
 bq show --format=prettyjson project_id:dataset
@@ -433,9 +429,9 @@ bq show --format=prettyjson _1234abcd56efgh78ijkl1234
 
 ### Go
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Go 設定說明操作。詳情請參閱 [BigQuery Go API 參考說明文件](https://godoc.org/cloud.google.com/go/bigquery)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Go 設定操作說明進行操作。詳情請參閱 [BigQuery Go API 參考文件](https://godoc.org/cloud.google.com/go/bigquery)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 import (
@@ -490,9 +486,9 @@ func printDatasetInfo(w io.Writer, projectID, datasetID string) error {
 
 ### Java
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定說明操作。詳情請參閱 [BigQuery Java API 參考說明文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定操作說明進行操作。詳情請參閱 [BigQuery Java API 參考文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 import com.google.api.gax.paging.Page;
@@ -542,9 +538,9 @@ public class GetDatasetInfo {
 
 ### Node.js
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定操作說明進行操作。詳情請參閱 [BigQuery Node.js API 參考文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 // Import the Google Cloud client library
@@ -570,9 +566,9 @@ getDataset();
 
 ### Python
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定操作說明進行操作。詳情請參閱 [BigQuery Python API 參考文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 from google.cloud import bigquery
@@ -613,15 +609,15 @@ else:
     print("\tThis dataset does not contain any tables.")
 ```
 
-## 確認資料集名稱
+## 驗證資料集名稱
 
 下列範例說明如何檢查資料集是否存在：
 
 ### Java
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定說明操作。詳情請參閱 [BigQuery Java API 參考說明文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定操作說明進行操作。詳情請參閱 [BigQuery Java API 參考文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 import com.google.cloud.bigquery.BigQuery;
@@ -660,9 +656,9 @@ public class DatasetExists {
 
 ### Python
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定操作說明進行操作。詳情請參閱 [BigQuery Python API 參考文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 from google.cloud import bigquery
@@ -684,7 +680,7 @@ except NotFound:
 
 * 參閱[建立資料集](https://docs.cloud.google.com/bigquery/docs/datasets?hl=zh-tw)一文，進一步瞭解如何建立資料集。
 * 如要進一步瞭解如何指派存取權控管權限給資料集，請參閱[控管資料集存取權](https://docs.cloud.google.com/bigquery/docs/dataset-access-controls?hl=zh-tw)。
-* 如要進一步瞭解如何變更資料集屬性，請參閱[更新資料集屬性](https://docs.cloud.google.com/bigquery/docs/updating-datasets?hl=zh-tw)。
+* 如要進一步瞭解如何變更資料集屬性，請參閱「[更新資料集屬性](https://docs.cloud.google.com/bigquery/docs/updating-datasets?hl=zh-tw)」。
 * 要進一步瞭解如何建立及管理標籤，請參閱[建立及管理標籤](https://docs.cloud.google.com/bigquery/docs/labels?hl=zh-tw)相關頁面。
 * 如要查看 `INFORMATION_SCHEMA` 的總覽，請前往 [BigQuery `INFORMATION_SCHEMA` 簡介](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw)頁面。
 
@@ -695,11 +691,11 @@ except NotFound:
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-10 (世界標準時間)。
+上次更新時間：2026-11-11 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-10 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-11 (世界標準時間)。"],[],[]]

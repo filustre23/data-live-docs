@@ -242,8 +242,4 @@ If there is exactly one input pair without `NULL` values, this function returns
 * Any input value is `NaN`
 * Any input value is positive infinity or negative infinity.
 
-To learn more about the optional aggregate clauses that you can pass
-into this function, see
-[Aggregate function calls](/bigquery/docs/reference/standard-sql/aggregate-function-calls).
-
-This function can be used with the
+To learn more about the optional aggregate c

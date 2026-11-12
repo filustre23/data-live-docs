@@ -279,9 +279,5 @@ SELECT KLL_QUANTILES.EXTRACT_INT64(kll_sketch, 2) AS halves
 FROM
   (
     SELECT KLL_QUANTILES.INIT_INT64(x, 1000,  weight=>y) AS kll_sketch
-    FROM points
-  );
-
-/*---------+
- |
+    FROM p
 ```

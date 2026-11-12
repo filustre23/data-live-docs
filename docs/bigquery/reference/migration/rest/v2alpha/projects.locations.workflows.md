@@ -179,6 +179,3 @@ Assessment task config.
 | JSON representation |
 | --- |
 | ``` {   "inputPath": string,   "outputDataset": string,   "querylogsPath": string,   "dataSource": string,   "featureHandle": {     object (AssessmentFeatureHandle)   } } ``` |
-
-| Fields | |
-| --- | --- |

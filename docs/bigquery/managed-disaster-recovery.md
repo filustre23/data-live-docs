@@ -77,6 +77,12 @@ BigQuery 災難復原功能有以下限制：
 |  | `EUROPE-WEST4` | 荷蘭 |
 |  | `EUROPE-WEST8` | 米蘭 |
 |  | `EUROPE-WEST9` | 巴黎 |
+| `EUR5` |  |  |
+|  | `EUROPE-WEST1` | 比利時 |
+|  | `EUROPE-WEST2` | 倫敦 |
+| `EUR7` |  |  |
+|  | `EUROPE-WEST2` | 倫敦 |
+|  | `EUROPE-WEST3` | 法蘭克福 |
 | `IN` |  |  |
 |  | `ASIA-SOUTH1` | 孟買 |
 |  | `ASIA-SOUTH2` | 德里 |
@@ -92,7 +98,7 @@ BigQuery 災難復原功能有以下限制：
 |  | `US-WEST3` | 鹽湖城 |
 |  | `US-WEST4` | 拉斯維加斯 |
 
-必須在`AU`、`CA`、`DE`、`EU`、`IN`或`US`內選取區域配對。舉例來說，`US` 內的區域無法與 `EU` 內的區域配對。
+選取的區域配對必須位於`AU`、`CA`、`DE`、`EU`、`EUR5`、`EUR7`、`IN`或`US`。例如，`US` 內的區域無法與 `EU` 內的區域配對。
 
 如果 BigQuery 資料集位於多區域位置，則無法使用下列區域組合。這項限制是為了確保容錯移轉預留項目和資料在複製後，會位於不同的地理位置。如要進一步瞭解多區域中的區域，請參閱「[多區域](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#multi-regions)」。
 
@@ -164,12 +170,12 @@ BigQuery 災難復原功能有以下限制：
 4. 在「Reservation name」(預留項目名稱) 欄位中，輸入預留項目名稱。
 5. 在「Location」(位置) 清單中選取位置。
 6. 在「Edition」清單中，選取 Enterprise Plus 版本。
-7. 在「Max reservation size selector」(預留項目大小上限選取器) 清單中，選取預留項目大小上限。
+7. 在「Max reservation size selector」(預留項目大小選取器) 清單中，選取預留項目大小上限。
 8. 選用：在「Baseline slots」(基準運算單元) 欄位中，輸入預留項目的基準運算單元數量。
 
    可用的自動調度資源運算單元數量，是從「Max reservation size」(預留項目大小上限) 值減去「Baseline slots」(基準運算單元) 值而得。舉例來說，如果您建立的預留項目有 100 個基準運算單元，且預留項目大小上限為 400，則預留項目會有 300 個自動調度資源運算單元。如要進一步瞭解基準運算單元，請參閱「[使用預留項目搭配基準和自動調度資源運算單元](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro?hl=zh-tw#using_reservations_with_baseline_and_autoscaling_slots)」。
 9. 在「Secondary location」(次要位置) 清單中，選取次要位置。
-10. 如要停用[閒置運算單元共用](https://docs.cloud.google.com/bigquery/docs/slots?hl=zh-tw#idle_slots)功能，並僅使用指定的運算單元容量，請按一下「Ignore idle slots」(忽略閒置運算單元) 切換鈕。
+10. 如要停用[閒置的運算單元共用](https://docs.cloud.google.com/bigquery/docs/slots?hl=zh-tw#idle_slots)功能，並僅使用指定的運算單元容量，請按一下「Ignore idle slots」(忽略閒置運算單元) 切換鈕。
 11. 如要展開「Advanced settings」(進階設定) 部分，請按一下 expand\_more 展開箭頭。
 12. 選用：如要設定目標工作並行，請將「Override automatic target job concurrency」(覆寫自動目標工作並行) 切換鈕設為開啟，然後在「Target Job Concurrency」(目標工作並行) 中輸入值。「Cost estimate」(費用預估) 表格會顯示運算單元的細目。「Capacity summary」(容量摘要) 表格會顯示預留項目的摘要。
 13. 按一下「儲存」。
@@ -372,7 +378,7 @@ BigQuery 災難復原功能有以下限制：
 
 如要進一步瞭解如何執行查詢，請參閱「[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)」。
 
-## 監控備用資源
+## 監控複製作業
 
 您可以透過 BigQuery、Cloud Monitoring 或 `INFORMATION_SCHEMA` 檢視畫面，監控資料集副本的狀態。
 
@@ -386,9 +392,10 @@ BigQuery 災難復原功能有以下限制：
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 在「Explorer」窗格中展開專案。
-3. 按一下要監控的資料集。
-4. 在資料集詳細資料窗格中，按一下「Details」(詳細資料) 分頁標籤。
-5. 在「副本」部分，查看「複製延遲時間」和「狀態」。如要查看更多詳細資料 (包括複製延遲時間圖表)，請按一下「View details」(查看詳細資料)。
+3. 點選「資料集」。
+4. 按一下要監控的資料集。您也可以使用搜尋和篩選選項，找出資料集。
+5. 在資料集頁面中，按一下「Details」(詳細資料) 分頁標籤。
+6. 在「副本」部分，查看「複製延遲時間」和「狀態」。如要查看更多詳細資料 (包括複製延遲時間圖表)，請按一下「View details」(查看詳細資料)。
 
 ### 使用 Cloud Monitoring 查看複製狀態
 
@@ -471,11 +478,11 @@ WHERE
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-08 (世界標準時間)。
+上次更新時間：2026-11-11 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-08 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-11 (世界標準時間)。"],[],[]]

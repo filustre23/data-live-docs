@@ -118,4 +118,4 @@ BigQuery 和 Oracle 的資料表運算子相同。
 
 | Oracle | BigQuery |
 | --- | --- |
-| `CASE` |  |
+|  |

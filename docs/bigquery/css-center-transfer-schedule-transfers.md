@@ -14,30 +14,30 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 你可以依據偏好儲存及分類內容。
 
-# 安排 Comparison Shopping Service Center 轉移作業
+# 安排 Comparison Shopping Service Center 移轉作業
 
 **預覽**
 
 這項產品適用《[服務專屬條款](https://docs.cloud.google.com/terms/service-terms?hl=zh-tw#1)》中「一般服務條款」一節的《正式發布前產品條款》。正式發布前的產品是按照「原樣」提供，支援範圍可能有限。
 詳情請參閱[推出階段說明](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
 
-**注意：** 如要取得支援，或針對透過 BigQuery 資料移轉服務進行的購物比較服務 (CSS) 中心轉移作業提供意見回饋，請傳送電子郵件至 [gmc-transfer-preview@google.com](mailto:gmc-transfer-preview@google.com)。
+**注意：**如要取得支援，或針對使用 BigQuery 資料移轉服務轉移購物比較服務 (CSS) 中心資料提供意見，請傳送電子郵件至 [gmc-transfer-preview@google.com](mailto:gmc-transfer-preview@google.com)。
 
-本文說明如何使用 [BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)，排定及管理 CSS Center 報表資料的週期性載入工作。
+本文說明如何使用 [BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)，安排及管理 CSS Center 報表資料的週期性載入工作。
 
 ## 限制
 
-部分報表可能有自己的限制，例如支援歷來回填資料的不同時間範圍。產品和產品問題報表不支援回填。
+部分報表可能有自己的限制，例如歷來資料回填的支援時間範圍不同。產品和產品問題報表不支援補充。
 
-BigQuery 中的產品和產品問題資料，並非與 CSS Center 帳戶相關聯的 Google Merchant Center 帳戶即時資料。BigQuery 中的產品和產品問題資料最多可能有一小時的延遲。
+BigQuery 中的產品和產品問題資料，並非與 CSS Center 帳戶相關聯的 Google Merchant Center 帳戶即時資料。BigQuery 中的產品和產品問題資料，延遲時間最長可達一小時。
 
-CSS Center 帳戶匯出的資料只會包含同意與相關 CSS 分享資訊的商家資訊。詳情請參閱「[CSS 如何存取 Merchant Center 帳戶](https://support.google.com/merchants/answer/13438603?hl=zh-tw)」一文。
+CSS Center 帳戶匯出的資料只會包含已同意與相關 CSS 分享資訊的商家資訊。詳情請參閱「[CSS 如何存取 Merchant Center 帳戶](https://support.google.com/merchants/answer/13438603?hl=zh-tw)」。
 
 ### CSS Center 資料存取權和授權
 
-CSS Center 使用者只能根據 Merchant Center 帳戶提供給該使用者的存取層級，存取 Merchant Center 帳戶的資訊。因此，CSS 中心轉移作業只會納入 CSS 中心使用者有權存取的商家資料。詳情請參閱「[CSS 如何存取你的 Merchant Center 帳戶](https://support.google.com/merchants/answer/13438603?hl=zh-tw)」。
+CSS Center 使用者只能根據 Merchant Center 帳戶提供的存取層級，存取 Merchant Center 帳戶的資訊。因此，CSS Center 移轉作業只會包含 CSS Center 使用者有權存取的商家資料。詳情請參閱「[CSS 如何存取 Merchant Center 帳戶](https://support.google.com/merchants/answer/13438603?hl=zh-tw)」。
 
-如要設定 CSS 使用者的存取權，請[以 CSS 管理員身分在 CSS Center 中設定使用者存取權](https://support.google.com/css-center/answer/9773473?hl=zh-tw)。
+如要設定 CSS 使用者的存取權，請[以 CSS 管理員身分在 CSS Center 中設定使用者的存取權](https://support.google.com/css-center/answer/9773473?hl=zh-tw)。
 
 ## 事前準備
 
@@ -45,7 +45,7 @@ CSS Center 使用者只能根據 Merchant Center 帳戶提供給該使用者的�
 
 * [啟用 BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service?hl=zh-tw)。
 * [建立 BigQuery 資料集](https://docs.cloud.google.com/bigquery/docs/datasets?hl=zh-tw)，用於儲存 CSS Center 資料。
-  + 資料集區域方面，我們支援在美國或歐盟使用預設選項「多區域」。
+  + 資料集區域方面，我們支援使用預設選項，即美國或歐盟的多區域。
   + 如要在特定區域建立資料集，請注意，CSS Center 資料移轉作業僅支援下列區域：
   + `us-east4 (Northern Virginia)`、
   + `asia-northeast1 (Tokyo)`、
@@ -55,15 +55,15 @@ CSS Center 使用者只能根據 Merchant Center 帳戶提供給該使用者的�
   + `europe-west2 (London)`、
   + `europe-west6 (Zurich)`。
 * 您必須擁有 CSS 網域 ID，才能建立 CSS Center 資料移轉作業。
-* 如要設定 Pub/Sub 的移轉作業執行通知，您必須具備 `pubsub.topics.setIamPolicy` 權限。如果只設定電子郵件通知，則不需要 Pub/Sub 權限。詳情請參閱「[BigQuery 資料移轉服務執行通知](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications?hl=zh-tw)」。
+* 如果您想要為 Pub/Sub 設定移轉作業執行通知，您必須擁有`pubsub.topics.setIamPolicy` 權限。如果只設定電子郵件通知，則不需要 Pub/Sub 權限。詳情請參閱「[BigQuery 資料移轉服務執行通知](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications?hl=zh-tw)」。
 
 ## 所需權限
 
 請確認您已授予下列權限。
 
-### 須具備的 BigQuery 角色
+### 必要的 BigQuery 角色
 
-如要取得建立 BigQuery 資料移轉服務資料移轉作業所需的權限，請要求管理員授予您專案的 [BigQuery 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.admin)  (`roles/bigquery.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得建立 BigQuery 資料移轉服務資料移轉作業所需的權限，請要求管理員授予您專案的 [BigQuery 管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.admin) (`roles/bigquery.admin`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
 這個預先定義的角色具備建立 BigQuery 資料移轉服務資料移轉作業所需的權限。如要查看確切的必要權限，請展開「Required permissions」(必要權限) 部分：
 
@@ -95,10 +95,10 @@ CSS Center 使用者只能根據 Merchant Center 帳戶提供給該使用者的�
 
 ### 控制台
 
-1. 前往 Google Cloud 控制台的「Data transfers」(資料移轉) 頁面。
+1. 前往 Google Cloud 控制台的「資料移轉」頁面。
 
-   [前往「資料轉移」頁面](https://console.cloud.google.com/bigquery/transfers?hl=zh-tw)
-2. 按一下「建立轉移作業」add。
+   [前往「資料移轉」](https://console.cloud.google.com/bigquery/transfers?hl=zh-tw)
+2. 按一下「add 建立移轉作業」。
 3. 在「Create Transfer」(建立轉移作業) 頁面：
 
    * 在「Source type」(來源類型) 部分，「Source」(來源) 請選取「Google CSS Center」。
@@ -111,7 +111,7 @@ CSS Center 使用者只能根據 Merchant Center 帳戶提供給該使用者的�
 
      + 按一下啟用電子郵件通知的切換開關。當您啟用此選項時，移轉管理員會在移轉作業失敗時收到電子郵件通知。
      + 在「Select a Pub/Sub topic」(選取 Pub/Sub 主題) 選取[主題](https://docs.cloud.google.com/pubsub/docs/overview?hl=zh-tw#types)名稱，或是點選「Create a topic」(建立主題)。這個選項會針對資料移轉作業設定 Pub/Sub 執行[通知](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications?hl=zh-tw)。
-4. 按一下 [儲存]。
+4. 按一下「儲存」。
 
 ### bq
 
@@ -139,14 +139,14 @@ bq mk \
 * project\_id 是您的專案 ID。
 * dataset 是資料移轉設定的目標資料集。
 * name 是資料移轉設定的顯示名稱。移轉作業名稱可以是任意值，日後需要修改移轉作業時，能夠據此識別即可。
-* parameters 包含所建立資料移轉設定的參數，格式為 JSON。例如：`--params='{"param":"param_value"}'`。
+* parameters 包含已建立資料移轉設定的參數，格式為 JSON。例如：`--params='{"param":"param_value"}'`。
   + `css_id`：CSS 網域 ID。
   + `export_products`：是否要轉移產品和產品問題資料。即使您未指定 `export_products` 參數，系統也會預設加入這個參數。建議您明確加入這個參數，並將其設為 `true`。
 * data\_source 是資料來源：`css_center`。
 
-**注意：** 您無法使用指令列工具設定通知。
+**注意：**您無法使用指令列工具設定通知。
 
-舉例來說，下列指令會使用 CSS 網域 ID `1234` 和目標資料集 `mydataset`，建立名為 `My Transfer` 的 CSS Center 資料移轉。資料移轉會在預設專案中建立。
+舉例來說，下列指令會使用 CSS 網域 ID `1234` 和目標資料集 `mydataset`，建立名為 `My Transfer` 的 CSS Center 資料移轉作業。資料移轉作業會在預設專案中建立。
 
 ```
 bq mk \
@@ -175,11 +175,11 @@ follow the instructions to retrieve an authentication code.`
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-08 (世界標準時間)。
+上次更新時間：2026-11-12 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-08 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-12 (世界標準時間)。"],[],[]]

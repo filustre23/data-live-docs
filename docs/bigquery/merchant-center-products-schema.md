@@ -136,6 +136,5 @@ FROM
 WHERE
   _PARTITIONDATE >= 'YYYY-MM-DD'
 GROUP BY
-  date, disapproved_country
-ORDER
+  date,
 ```

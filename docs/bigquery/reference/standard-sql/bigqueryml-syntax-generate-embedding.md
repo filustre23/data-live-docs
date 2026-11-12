@@ -332,6 +332,4 @@ ML.GENERATE_EMBEDDING(
       [`ObjectRef`](/bigquery/docs/analyze-multimodal-data#objectref_values)
       value as input, which you can provide by either specifying
       the name of a column that contains `ObjectRef` values, or by
-      constructing an `ObjectRef` value.
-
-      `ObjectRefRuntime` values must have the `access_url.read_url` and
+      constructing an

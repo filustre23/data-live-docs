@@ -262,7 +262,4 @@ CBRT(X)
 **Description**
 
 Computes the cube root of `X`. `X` can be any data type
-that [coerces to `FLOAT64`](/bigquery/docs/reference/standard-sql/conversion_rules).
-
-| X | CBRT(X) |
-| --- | --- |
+that

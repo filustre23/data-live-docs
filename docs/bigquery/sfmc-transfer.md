@@ -269,5 +269,4 @@ bq mk
 
 如果您在設定或執行 Salesforce Marketing Cloud 資料移轉作業時遇到問題，請嘗試下列疑難排解步驟：
 
-* 確認 Salesforce Marketing Cloud 中的 API 整合套件已[專門設定](#sfmc-package)為**伺服器對伺服器**驗證。
-* 確認驗證器應用程式已在「Scope」下設定所有
+* 確認 Salesforce Marketing Cloud 中的 API 整合套件已

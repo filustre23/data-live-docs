@@ -483,8 +483,4 @@ ML.EVALUATE(
     generated text that you would expect to be returned by the model.
 * `QUERY_STATEMENT`: a GoogleSQL query that
   is used to generate the evaluation data. For the supported SQL syntax of
-  the `QUERY_STATEMENT` clause in
-  GoogleSQL, see
-  [Query syntax](/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax).
-
-  If you don't specify a tabl
+  the

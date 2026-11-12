@@ -153,4 +153,4 @@ Describes a BigQuery table. See the [Table](/bigquery/docs/reference/v2/tables) 
 | `tableName` | `object (TableName)`  The name of the table. |
 | `info` | `object (TableInfo)`  User-provided metadata for the table. |
 | `schemaJson` | `string`  A JSON representation of the table's schema. |
-| `view` | `object (TableViewDefinition)`  If present, this is a virtual table de |
+| `view` | `object (` |

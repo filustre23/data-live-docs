@@ -432,5 +432,4 @@ An array literal represents a constant value of the
 ### Struct literals
 
 A struct literal is a struct whose fields are all literals. Struct literals can
-be written using any of the syntaxes for [constructing a
-struct](/bigquery/docs/reference/standard-sql/data-types#constructing_a_struct) (tuple syntax, typeless struct syntax, or type
+be written using a

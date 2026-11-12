@@ -132,4 +132,3 @@ Assessment task config.
 | Fields | |
 | --- | --- |
 | `input_path` | `string`  Required. The Cloud Storage path for assessment input files. |
-| `output_data` |

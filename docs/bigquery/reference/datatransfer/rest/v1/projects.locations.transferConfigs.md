@@ -106,4 +106,4 @@ Options customizing the time based transfer schedule. Options are migrated from 
 
 | Fields | |
 | --- | --- |
-| `schedule` | `string`  Data transfer schedule. If the data source does not support a custom schedule, this should be empty. If it is empty, the default value for the data source will be used. T |
+| `schedule` |  |
