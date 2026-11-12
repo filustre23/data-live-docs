@@ -1,6 +1,6 @@
 # data-live-docs — index
 
-_Generated 2026-11-11T19:22+00:00_
+_Generated 2026-11-12T05:16+00:00_
 
 **9 sources, 4824 topics total**
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_902 topics_
+_901 topics_
 
 - `anthropic-sdk/about-claude/additional-resources`
 - `anthropic-sdk/about-claude/api-credits-for-subscribers`
@@ -688,6 +688,7 @@ _902 topics_
 - `anthropic-sdk/build-with-claude/context-editing`
 - `anthropic-sdk/build-with-claude/context-windows`
 - `anthropic-sdk/build-with-claude/effort`
+- `anthropic-sdk/build-with-claude/effort-per-message`
 - `anthropic-sdk/build-with-claude/embeddings`
 - `anthropic-sdk/build-with-claude/extended-thinking`
 - `anthropic-sdk/build-with-claude/fallback-credit`
@@ -858,9 +859,7 @@ _902 topics_
 - `anthropic-sdk/managed-agents/vaults`
 - `anthropic-sdk/managed-agents/webhooks`
 - `anthropic-sdk/managed-agents/workflow-runs`
-- `anthropic-sdk/models/fable-5-1/migration-guide`
 - `anthropic-sdk/models/fable-5-1/overview`
-- `anthropic-sdk/models/fable-5-1/whats-new-fable-5-1`
 - `anthropic-sdk/models/fable-5-2/migration-guide`
 - `anthropic-sdk/models/fable-5-2/overview`
 - `anthropic-sdk/models/fable-5-2/whats-new-fable-5-2`
@@ -2638,7 +2637,7 @@ _202 topics_
 
 Upstream: <https://docs.getdbt.com/docs/>
 
-_1173 topics_
+_1174 topics_
 
 - `dbt-core/best-practices/best-practice-workflows`
 - `dbt-core/best-practices/clone-incremental-models`
@@ -2803,6 +2802,7 @@ _1173 topics_
 - `dbt-core/docs/dbt-ai/integrate-mcp-claude`
 - `dbt-core/docs/dbt-ai/integrate-mcp-cursor`
 - `dbt-core/docs/dbt-ai/integrate-mcp-databricks`
+- `dbt-core/docs/dbt-ai/integrate-mcp-gemini-enterprise`
 - `dbt-core/docs/dbt-ai/integrate-mcp-snowflake-cortex`
 - `dbt-core/docs/dbt-ai/integrate-mcp-vscode`
 - `dbt-core/docs/dbt-ai/mcp-available-tools`

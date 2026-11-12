@@ -136,6 +136,10 @@ Because Codex bundles their plugins as static snapshots of MCP tools, the best w
 
 While 4.0 is in beta, some features from classic projects aren't available yet (although we're working on supporting them as quickly as we can!). To see what's in progress, on deck, and shipped, check out the [beta roadmap](https://learn.hex.tech/docs/hex-4-0/beta-roadmap).
 
+info
+
+4.0 projects do not yet support [**App only**](/docs/collaborate/sharing-and-permissions/project-sharing#can-view-app) access. Only share projects with viewers who are permitted to access the underlying code and data, including intermediate results not shown in the app.
+
 #### On this page
 
 * [Projects in Hex 4.0](#projects-in-hex-40)

@@ -8,7 +8,7 @@ info
 
 * Available on the Team and Enterprise [plans](https://hex.tech/pricing/).
 * Requires the [Hex CLI](/docs/api-integrations/cli#installation) and a [workspace token](/docs/api-integrations/api/overview#workspace-tokens) to sync.
-* **Ossie support is in Alpha.** Syncing an Ossie file currently requires a conversion step: use the [Hex CLI](/docs/api-integrations/cli) to convert the file to the Hex semantic model format, then sync it with [Context Sync](/docs/agent-management/context-management/context-sync). Direct import of Ossie files is in active development. Conversion commands, flags, and supported Ossie features are subject to change.
+* **Ossie support is in Alpha.** Use the [Hex CLI](/docs/api-integrations/cli), locally or in CI, to convert and sync Ossie files with [Context Sync](/docs/agent-management/context-management/context-sync). Conversion commands, flags, and supported Ossie features are subject to change.
 
 ## Concepts[​](#concepts "Direct link to Concepts")
 
@@ -276,9 +276,9 @@ Before converting, check that:
 * **Every field and metric has a `datatype`.** Supported values are `String`, `Integer`, `Decimal`, `Float`, `Boolean`, `Date`, `Time`, `DateTime`, `DateTimeTz`, and `Opaque`. Without datatype annotations, the conversion succeeds with warnings and falls back to default types.
 * **Metric expressions reference fields defined on a dataset, not raw warehouse columns.** References to undefined fields are reported as errors and the affected measures are skipped.
 
-## Step 1: Convert the Ossie file[​](#step-1-convert-the-ossie-file "Direct link to Step 1: Convert the Ossie file")
+## Convert and review locally[​](#convert-and-review-locally "Direct link to Convert and review locally")
 
-Run `hex context semantic-project convert` with the Ossie file as the input and a local folder as the output:
+Conversion runs locally and doesn't require a workspace token. To inspect the converted files before syncing to Hex, run `hex context semantic-project convert` with the Ossie file as the input and a local folder as the output:
 
 ```
 hex context semantic-project convert \
@@ -330,135 +330,9 @@ The first time you run the command, the CLI downloads the conversion tooling and
 
 ### Review conversion problems[​](#review-conversion-problems "Direct link to Review conversion problems")
 
-When the conversion finishes, the CLI prints a count of errors and warnings. Files are still written when there are errors, but anything that failed to convert is left out of the output. Add `-v` to print a grouped summary of every problem:
+When the conversion finishes, the CLI prints a count of errors and warnings. Files are still written when there are errors, but anything that failed to convert is left out of the output. Add `-v` to print a grouped summary of every problem. Add `-vv` to print every problem individually:
 
 ```
-hex -v context semantic-project convert \
-
-
-
---from ossie \
-
-
-
---to hex \
-
-
-
---input ./my-semantic-model.ossie.yaml \
-
-
-
---output ./tmp
-```
-
-Common problems include:
-
-| Message | How to resolve |
-| --- | --- |
-| `A datatype is required in Hex; a default was used.` | Add a `datatype` to the field or metric. Until you do, a default type is applied. |
-| `Metric expression references field not in semantic model` | Define the referenced column as a field on the dataset, or update the expression to use an existing field. |
-| `Temporal role markers are not supported in Hex and were dropped.` | Add a temporal `datatype`, such as `Date` or `DateTime`, to the field that sets `is_time`. |
-
-Re-run the conversion after you update the Ossie file. Converting into the same output folder overwrites existing model files, but doesn't delete files for datasets you've removed. Delete the output folder before converting to avoid syncing stale models.
-
-## Step 2: Point Context Sync at the converted output[​](#step-2-point-context-sync-at-the-converted-output "Direct link to Step 2: Point Context Sync at the converted output")
-
-Context Sync needs a semantic project in Hex to sync the converted files into. [Create a semantic project](/docs/connect-to-data/semantic-models/semantic-authoring/semantic-authoring-overview#create-a-semantic-project) with the **Hex** type, or use an existing one.
-
-In your `hex_context.config.yaml`, add an entry to `semanticProjects`. Set `path` to the converted model folder, which is the subfolder inside your `--output` folder, not the Ossie file:
-
-hex\_context.config.yaml
-
-```
-semanticProjects:
-
-
-
-- id: <semantic-project-uuid>
-
-
-
-path: ./tmp/my_semantic_model
-```
-
-To find the semantic project `id`, go to **Context Studio** > **Semantic models**. In the **Semantic projects** table, open the semantic project's **⋯** menu and select **Copy ID**. See [Create a configuration file](/docs/agent-management/context-management/context-sync#create-a-configuration-file) for all configuration options.
-
-## Step 3: Preview and publish[​](#step-3-preview-and-publish "Direct link to Step 3: Preview and publish")
-
-Authenticate with your workspace, then stage the converted files as a preview:
-
-```
-hex auth login
-
-
-
-hex context preview --title "Import Ossie semantic model"
-```
-
-The command returns a preview link you can use to test the semantic project in threads before it's live. When you're ready, publish the most recent preview:
-
-```
-hex context publish -
-```
-
-If your config file isn't in the repository root, pass `--config-path <path>` to `hex context preview`.
-
-## Sync automatically in CI[​](#sync-automatically-in-ci "Direct link to Sync automatically in CI")
-
-To keep Hex in sync with an Ossie file stored in a repository, run the conversion in your CI workflow before syncing. The conversion runs locally and doesn't need a workspace token. See [Sync automatically in CI](/docs/agent-management/context-management/context-sync#sync-automatically-in-ci) for how to set up the workspace token used to sync.
-
-### Sync from GitHub[​](#sync-from-github "Direct link to Sync from GitHub")
-
-For GitHub repositories, add the Hex CLI install and conversion steps before the upload step in your [Hex Context Toolkit GitHub Action](/docs/agent-management/context-management/context-sync#sync-from-github) workflow:
-
-.github/workflows/hex\_context\_toolkit.yml
-
-```
-# ...
-
-
-
-jobs:
-
-
-
-publish_hex_context:
-
-
-
-runs-on: ubuntu-latest
-
-
-
-steps:
-
-
-
-- name: Checkout
-
-
-
-uses: actions/checkout@v6
-
-
-
-- name: Install Hex CLI
-
-
-
-run: curl -fsSL https://hex.tech/install.sh | bash
-
-
-
-- name: Convert semantic model
-
-
-
-run: |
-
-
-
 hex context semantic-project convert \
 
 
@@ -475,40 +349,68 @@ hex context semantic-project convert \
 
 
 
---output ./tmp
+--output ./tmp \
 
 
 
-- name: Upload context resources
-
-
-
-uses: hex-inc/action-context-toolkit@v2
-
-
-
-env:
-
-
-
-GITHUB_TOKEN: ${{ github.token }}
-
-
-
-with:
-
-
-
-token: ${{ secrets.HEX_API_TOKEN }}
-
-
-
-comment_on_pr: true
+-v
 ```
+
+Common problems include:
+
+| Message | How to resolve |
+| --- | --- |
+| `A datatype is required in Hex; a default was used.` | Add a `datatype` to the field or metric. Until you do, a default type is applied. |
+| `Metric expression references field not in semantic model` | Define the referenced column as a field on the dataset, or update the expression to use an existing field. |
+| `Temporal role markers are not supported in Hex and were dropped.` | Add a temporal `datatype`, such as `Date` or `DateTime`, to the field that sets `is_time`. |
+
+Re-run the conversion after you update the Ossie file. Converting into the same output folder overwrites existing model files, but doesn't delete files for datasets you've removed. Delete the output folder before converting to avoid syncing stale models.
+
+## Configure Context Sync[​](#configure-context-sync "Direct link to Configure Context Sync")
+
+After reviewing a local conversion, follow the [Context Sync](/docs/agent-management/context-management/context-sync) instructions to create a configuration file. You'll need a semantic project in Hex to sync into: [create a semantic project](/docs/connect-to-data/semantic-models/semantic-authoring/semantic-authoring-overview#create-a-semantic-project) with the **Hex** type, or use an existing one. Add an entry to `semanticProjects` with the input (`path`) set to the original Ossie file and the source format to Ossie (`convert.from: ossie`):
+
+hex\_context.config.yaml
+
+```
+semanticProjects:
+
+
+
+- id: <semantic-project-uuid>
+
+
+
+path: ./my-semantic-model.ossie.yaml
+
+
+
+convert:
+
+
+
+from: ossie
+```
+
+The CLI converts the source locally to temporary Hex model files during `hex context preview`, so the configuration can point directly at the source file.
+
+Follow the [semantic project configuration instructions](/docs/agent-management/context-management/context-sync#semantic-projects) to find the project `id`.
+
+## Preview and publish[​](#preview-and-publish "Direct link to Preview and publish")
+
+Follow the [Context Sync CLI instructions](/docs/agent-management/context-management/context-sync#sync-resources-with-the-cli) to authenticate, preview, and publish using the configuration above. Conversion happens during preview.
+
+## Sync automatically in CI[​](#sync-automatically-in-ci "Direct link to Sync automatically in CI")
+
+Follow the [Sync automatically in CI instructions](/docs/agent-management/context-management/context-sync#sync-automatically-in-ci) to set up authentication and your workflow. Use the configuration above with `convert.from: ossie` so Context Sync handles conversion during preview.
+
+### Sync from GitHub[​](#sync-from-github "Direct link to Sync from GitHub")
+
+Follow the [Sync from GitHub instructions](/docs/agent-management/context-management/context-sync#sync-from-github). The action reads the configuration above and handles conversion; no separate conversion step is needed.
 
 ### Sync from other CI providers[​](#sync-from-other-ci-providers "Direct link to Sync from other CI providers")
 
-For GitLab and other CI providers, install the Hex CLI and run the same conversion command before `hex context preview`. See [Sync from other CI providers](/docs/agent-management/context-management/context-sync#sync-from-other-ci-providers) for the preview and publish steps.
+Follow the [Sync from other CI providers instructions](/docs/agent-management/context-management/context-sync#sync-from-other-ci-providers) using the configuration above. The CLI handles conversion during preview.
 
 ## Vendor-specific conversion[​](#vendor-specific-conversion "Direct link to Vendor-specific conversion")
 
@@ -793,11 +695,9 @@ hex context semantic-project convert \
 --output ./tmp
 ```
 
-The converter writes the Hex model files to `./tmp/semantic_model` by default. Continue with [Step 2: Point Context Sync at the converted output](#step-2-point-context-sync-at-the-converted-output), using `./tmp/semantic_model` as the `semanticProjects` path, then [preview and publish](#step-3-preview-and-publish).
-
 #### Convert during Context Sync[​](#convert-during-context-sync "Direct link to Convert during Context Sync")
 
-You can also configure Context Sync to convert the dbt semantic manifest when you run `hex context preview`. [Create a Hex semantic project](#step-2-point-context-sync-at-the-converted-output), then add an entry to `semanticProjects` in `hex_context.config.yaml`. Set `path` to the manifest file and `convert.from` to `dbt`:
+After reviewing a local conversion, configure [Context Sync](/docs/agent-management/context-management/context-sync) to convert the dbt semantic manifest during preview. [Create a Hex semantic project](/docs/connect-to-data/semantic-models/semantic-authoring/semantic-authoring-overview#create-a-semantic-project), then add an entry to `semanticProjects` in `hex_context.config.yaml`. Set `path` to the manifest file and `convert.from` to `dbt`:
 
 hex\_context.config.yaml
 
@@ -821,30 +721,18 @@ convert:
 from: dbt
 ```
 
-An explicitly configured dbt conversion input can be ignored by Git, so you can point directly at the generated manifest in dbt's `target/` directory. The manifest must still be inside the configuration file's Git repository. For this example, place the context configuration file at your dbt project root and run:
+An explicitly configured dbt conversion input can be ignored by Git, so you can point directly at the generated manifest in dbt's `target/` directory. The manifest must still be inside the configuration file's Git repository. For this example, place the context configuration file at your dbt project root.
 
-```
-dbt parse
-
-
-
-hex auth login
-
-
-
-hex context preview --title "Sync dbt semantic model"
-```
-
-The CLI converts the manifest locally to temporary Hex model files and uploads the converted project to the preview. Context Sync doesn't run `dbt parse`; regenerate the manifest before each preview, including in CI. When you're ready, [publish the preview](#step-3-preview-and-publish).
+Context Sync doesn't run `dbt parse`; run it to regenerate the manifest before each preview, including in CI. Follow the [preview and publish instructions](#preview-and-publish) or the [CI setup instructions](#sync-automatically-in-ci) using this configuration.
 
 #### On this page
 
 * [Concepts](#concepts)
 * [Prepare the Ossie file for conversion](#prepare-the-ossie-file-for-conversion)
-* [Step 1: Convert the Ossie file](#step-1-convert-the-ossie-file)
+* [Convert and review locally](#convert-and-review-locally)
   + [Review conversion problems](#review-conversion-problems)
-* [Step 2: Point Context Sync at the converted output](#step-2-point-context-sync-at-the-converted-output)
-* [Step 3: Preview and publish](#step-3-preview-and-publish)
+* [Configure Context Sync](#configure-context-sync)
+* [Preview and publish](#preview-and-publish)
 * [Sync automatically in CI](#sync-automatically-in-ci)
   + [Sync from GitHub](#sync-from-github)
   + [Sync from other CI providers](#sync-from-other-ci-providers)

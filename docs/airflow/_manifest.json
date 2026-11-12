@@ -1,985 +1,985 @@
 {
-  "duration_s": 1.65,
+  "duration_s": 1.98,
   "failed_count": 0,
   "failed_pages": [],
-  "fetched_at": "2026-11-11T13:21:53.239414+00:00",
+  "fetched_at": "2026-11-11T23:55:11.004052+00:00",
   "file_count": 163,
   "files": {
     "administration-and-deployment/cluster-policies.rst": {
       "bytes": 11994,
-      "fetched_at": "2026-11-11T13:21:53.232665+00:00",
+      "fetched_at": "2026-11-11T23:55:11.001506+00:00",
       "sha256": "cbafb977e2a4ad7fba62a44e1cd4ef72377fb07bdcb765c25217c902e76e0f63",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/administration-and-deployment/cluster-policies.rst"
     },
     "administration-and-deployment/dag-bundles.rst": {
       "bytes": 27172,
-      "fetched_at": "2026-11-11T13:21:53.233460+00:00",
+      "fetched_at": "2026-11-11T23:55:11.001770+00:00",
       "sha256": "182bdd9fa9aed7d658b2fbfe47da919d74a72af75326a92b32199604be6eb369",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/administration-and-deployment/dag-bundles.rst"
     },
     "administration-and-deployment/dag-importers.rst": {
       "bytes": 9031,
-      "fetched_at": "2026-11-11T13:21:53.233169+00:00",
+      "fetched_at": "2026-11-11T23:55:11.001672+00:00",
       "sha256": "8aa1cbe4ee610f7083c0c65be056d7cac0ca1459bfe9e9aa688e0ec09d8c43b0",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/administration-and-deployment/dag-importers.rst"
     },
     "administration-and-deployment/dag-serialization.rst": {
       "bytes": 11126,
-      "fetched_at": "2026-11-11T13:21:53.231642+00:00",
+      "fetched_at": "2026-11-11T23:55:11.001121+00:00",
       "sha256": "07f5c3c994f40de544ece474615b921a384981f1e9bd243f841f66806f25e91b",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/administration-and-deployment/dag-serialization.rst"
     },
     "administration-and-deployment/dagfile-processing.rst": {
       "bytes": 13938,
-      "fetched_at": "2026-11-11T13:21:53.231516+00:00",
+      "fetched_at": "2026-11-11T23:55:11.001075+00:00",
       "sha256": "11eb4eea181b269badf052d1bede2b17f28113e0fa638622b0d207f8eaeca74f",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/administration-and-deployment/dagfile-processing.rst"
     },
     "administration-and-deployment/index.rst": {
       "bytes": 1390,
-      "fetched_at": "2026-11-11T13:21:53.233573+00:00",
+      "fetched_at": "2026-11-11T23:55:11.001805+00:00",
       "sha256": "deb77b5b93f3baa33cd4cdb20205c26d59010e0cc05602acfcf3a45fc487c8c7",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/administration-and-deployment/index.rst"
     },
     "administration-and-deployment/kubernetes.rst": {
       "bytes": 2607,
-      "fetched_at": "2026-11-11T13:21:53.232418+00:00",
+      "fetched_at": "2026-11-11T23:55:11.001417+00:00",
       "sha256": "b38e2336aa60047a8bae9f2ca71c1963769a0b739b3533e65ba0f38818090a5a",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/administration-and-deployment/kubernetes.rst"
     },
     "administration-and-deployment/lineage.rst": {
       "bytes": 3227,
-      "fetched_at": "2026-11-11T13:21:53.232163+00:00",
+      "fetched_at": "2026-11-11T23:55:11.001319+00:00",
       "sha256": "afb54e3ae5870aa413afc16437977e84199ff79de88bbee7ee0b69143855a0f9",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/administration-and-deployment/lineage.rst"
     },
     "administration-and-deployment/listeners.rst": {
       "bytes": 11638,
-      "fetched_at": "2026-11-11T13:21:53.232791+00:00",
+      "fetched_at": "2026-11-11T23:55:11.001549+00:00",
       "sha256": "7898507c20b8a3e2c45c3659ce6284f394d0dac9a86f0e1f54b50e636c1e9b9b",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/administration-and-deployment/listeners.rst"
     },
     "administration-and-deployment/logging-monitoring/advanced-logging-configuration.rst": {
       "bytes": 8854,
-      "fetched_at": "2026-11-11T13:21:53.234276+00:00",
+      "fetched_at": "2026-11-11T23:55:11.002044+00:00",
       "sha256": "ba8c185713844db50e734a2cfc227df332059d68c5228132626ebb064eebab94",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/administration-and-deployment/logging-monitoring/advanced-logging-configuration.rst"
     },
     "administration-and-deployment/logging-monitoring/callbacks.rst": {
       "bytes": 8582,
-      "fetched_at": "2026-11-11T13:21:53.234660+00:00",
+      "fetched_at": "2026-11-11T23:55:11.002167+00:00",
       "sha256": "136b683bce7499a2a3d627e9a87bc26ef2f195d45d6c2cef1067c65146b535f5",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/administration-and-deployment/logging-monitoring/callbacks.rst"
     },
     "administration-and-deployment/logging-monitoring/check-health.rst": {
       "bytes": 12144,
-      "fetched_at": "2026-11-11T13:21:53.234800+00:00",
+      "fetched_at": "2026-11-11T23:55:11.002219+00:00",
       "sha256": "fb1e0271b03e654da90046d16508168bf22281a0b4d36cee338a5cc11f25fa2f",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/administration-and-deployment/logging-monitoring/check-health.rst"
     },
     "administration-and-deployment/logging-monitoring/errors.rst": {
       "bytes": 5564,
-      "fetched_at": "2026-11-11T13:21:53.234412+00:00",
+      "fetched_at": "2026-11-11T23:55:11.002082+00:00",
       "sha256": "b2757610a41c14eeb858813bfb6c03a20c20d38068503d4fffe9dc774b83b3a0",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/administration-and-deployment/logging-monitoring/errors.rst"
     },
     "administration-and-deployment/logging-monitoring/index.rst": {
       "bytes": 1776,
-      "fetched_at": "2026-11-11T13:21:53.234915+00:00",
+      "fetched_at": "2026-11-11T23:55:11.002257+00:00",
       "sha256": "bfedbbe887c454be9c776adeda726bca74c72ea7336bb692932787d5366eecb0",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/administration-and-deployment/logging-monitoring/index.rst"
     },
     "administration-and-deployment/logging-monitoring/logging-architecture.rst": {
       "bytes": 3880,
-      "fetched_at": "2026-11-11T13:21:53.235027+00:00",
+      "fetched_at": "2026-11-11T23:55:11.002291+00:00",
       "sha256": "ea6612647a727f90baaebbb98b2d5ffcde35180068c7f9f6349320ef2263a0df",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/administration-and-deployment/logging-monitoring/logging-architecture.rst"
     },
     "administration-and-deployment/logging-monitoring/logging-tasks.rst": {
       "bytes": 12184,
-      "fetched_at": "2026-11-11T13:21:53.234007+00:00",
+      "fetched_at": "2026-11-11T23:55:11.001955+00:00",
       "sha256": "2c3fb4d93ff4f8ab227f526751e0285d56f5086906302a2c38628bb419aee30f",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/administration-and-deployment/logging-monitoring/logging-tasks.rst"
     },
     "administration-and-deployment/logging-monitoring/metrics.rst": {
       "bytes": 12982,
-      "fetched_at": "2026-11-11T13:21:53.234141+00:00",
+      "fetched_at": "2026-11-11T23:55:11.002001+00:00",
       "sha256": "f5ad8b8808006e6c03e31e758ea5910903dda81e2b4697a5d84cbd4aaf6116d9",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/administration-and-deployment/logging-monitoring/metrics.rst"
     },
     "administration-and-deployment/logging-monitoring/traces.rst": {
       "bytes": 5228,
-      "fetched_at": "2026-11-11T13:21:53.233881+00:00",
+      "fetched_at": "2026-11-11T23:55:11.001908+00:00",
       "sha256": "23512e0d0199a36af0aeb8a4ddca3928097b993f24b815684d49b63996cca77c",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/administration-and-deployment/logging-monitoring/traces.rst"
     },
     "administration-and-deployment/logging-monitoring/triggers.rst": {
       "bytes": 6024,
-      "fetched_at": "2026-11-11T13:21:53.234535+00:00",
+      "fetched_at": "2026-11-11T23:55:11.002126+00:00",
       "sha256": "517d1a4bc8ef39e5f44c62f6924160fff0d1641d2f3a3a3fddc88249552d57c0",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/administration-and-deployment/logging-monitoring/triggers.rst"
     },
     "administration-and-deployment/modules_management.rst": {
       "bytes": 19300,
-      "fetched_at": "2026-11-11T13:21:53.231927+00:00",
+      "fetched_at": "2026-11-11T23:55:11.001239+00:00",
       "sha256": "2b305946fdf964aeec3c256ab3d001096c1a46427231ee0718d4b4a1a061ccc6",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/administration-and-deployment/modules_management.rst"
     },
     "administration-and-deployment/plugins.rst": {
       "bytes": 44079,
-      "fetched_at": "2026-11-11T13:21:53.231797+00:00",
+      "fetched_at": "2026-11-11T23:55:11.001194+00:00",
       "sha256": "2c5d96809fe8eea01d10b47377020e2c4bed99ab536014561d00f7ea65d00e34",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/administration-and-deployment/plugins.rst"
     },
     "administration-and-deployment/pools.rst": {
       "bytes": 3922,
-      "fetched_at": "2026-11-11T13:21:53.232917+00:00",
+      "fetched_at": "2026-11-11T23:55:11.001588+00:00",
       "sha256": "18b034bc8eacda6abd58cfbdb095ffd78e82d068473c85fff85f167419a44b52",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/administration-and-deployment/pools.rst"
     },
     "administration-and-deployment/priority-weight.rst": {
       "bytes": 4081,
-      "fetched_at": "2026-11-11T13:21:53.233685+00:00",
+      "fetched_at": "2026-11-11T23:55:11.001839+00:00",
       "sha256": "6a9b9369695c58c3fa44fbb629641f8328b306c4e9762c3bd3b68432eba0fe8e",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/administration-and-deployment/priority-weight.rst"
     },
     "administration-and-deployment/production-deployment.rst": {
       "bytes": 15581,
-      "fetched_at": "2026-11-11T13:21:53.233299+00:00",
+      "fetched_at": "2026-11-11T23:55:11.001716+00:00",
       "sha256": "dc398e1ae7fa633fd19a5290bf4e84de0eabf26e22f2021cf9bb09bc578d8126",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/administration-and-deployment/production-deployment.rst"
     },
     "administration-and-deployment/scheduler.rst": {
       "bytes": 15140,
-      "fetched_at": "2026-11-11T13:21:53.233048+00:00",
+      "fetched_at": "2026-11-11T23:55:11.001632+00:00",
       "sha256": "48551ae9dba444e6671467a4c0c55f8d2e9178698e111a197b6c880596a831a9",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/administration-and-deployment/scheduler.rst"
     },
     "administration-and-deployment/task-and-asset-state-store-cleanup.rst": {
       "bytes": 4036,
-      "fetched_at": "2026-11-11T13:21:53.232535+00:00",
+      "fetched_at": "2026-11-11T23:55:11.001459+00:00",
       "sha256": "352f8aa271d91716280127329547194bb9d9819b17a464c2387229a3f190e17c",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/administration-and-deployment/task-and-asset-state-store-cleanup.rst"
     },
     "administration-and-deployment/task-and-asset-state-store.rst": {
       "bytes": 12782,
-      "fetched_at": "2026-11-11T13:21:53.232052+00:00",
+      "fetched_at": "2026-11-11T23:55:11.001282+00:00",
       "sha256": "9368b6b6c1ec2030fe59e349c4359d9af72f2fc1f6165b9b53c35de76ffc2fb6",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/administration-and-deployment/task-and-asset-state-store.rst"
     },
     "administration-and-deployment/web-stack.rst": {
       "bytes": 8122,
-      "fetched_at": "2026-11-11T13:21:53.232282+00:00",
+      "fetched_at": "2026-11-11T23:55:11.001357+00:00",
       "sha256": "156a4725b474c64b059de1cd135f2efd921a3e0e1181ea4acdb213b72c5b3265",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/administration-and-deployment/web-stack.rst"
     },
     "authoring-and-scheduling/asset-scheduling.rst": {
       "bytes": 20904,
-      "fetched_at": "2026-11-11T13:21:53.237016+00:00",
+      "fetched_at": "2026-11-11T23:55:11.002977+00:00",
       "sha256": "cf12516fb4b7bdeb315889f3a119a25ed6f46f7e69f834ab5fb6882fa2f61375",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/authoring-and-scheduling/asset-scheduling.rst"
     },
     "authoring-and-scheduling/assets.rst": {
       "bytes": 52858,
-      "fetched_at": "2026-11-11T13:21:53.238534+00:00",
+      "fetched_at": "2026-11-11T23:55:11.003514+00:00",
       "sha256": "18d024ef23a4fa7757d6f06614d8cb4c812b9cb9c64bfd4692eb5584a0cc19c7",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/authoring-and-scheduling/assets.rst"
     },
     "authoring-and-scheduling/connections.rst": {
       "bytes": 2838,
-      "fetched_at": "2026-11-11T13:21:53.238360+00:00",
+      "fetched_at": "2026-11-11T23:55:11.003437+00:00",
       "sha256": "a9c3528c877d29572529a645a838b9e7b7d7734251ae26dc549db46dc30c7085",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/authoring-and-scheduling/connections.rst"
     },
     "authoring-and-scheduling/cron.rst": {
       "bytes": 4390,
-      "fetched_at": "2026-11-11T13:21:53.236884+00:00",
+      "fetched_at": "2026-11-11T23:55:11.002929+00:00",
       "sha256": "3d13d360a73b827177a027be2296691525c44f9c3c01153e6995ca8320de456f",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/authoring-and-scheduling/cron.rst"
     },
     "authoring-and-scheduling/dag-result.rst": {
       "bytes": 4534,
-      "fetched_at": "2026-11-11T13:21:53.237135+00:00",
+      "fetched_at": "2026-11-11T23:55:11.003012+00:00",
       "sha256": "18534da315642247146fcf07c943b6c24491fa4ab156189dc718023c458c0629",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/authoring-and-scheduling/dag-result.rst"
     },
     "authoring-and-scheduling/deferring.rst": {
       "bytes": 41010,
-      "fetched_at": "2026-11-11T13:21:53.237600+00:00",
+      "fetched_at": "2026-11-11T23:55:11.003173+00:00",
       "sha256": "786839a2fa08aa66028ba5cddb63fce934b756d666632df19ddcbd2d35fd3bec",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/authoring-and-scheduling/deferring.rst"
     },
     "authoring-and-scheduling/dynamic-task-mapping.rst": {
       "bytes": 29973,
-      "fetched_at": "2026-11-11T13:21:53.237442+00:00",
+      "fetched_at": "2026-11-11T23:55:11.003107+00:00",
       "sha256": "730fbdaa4b9f8dbe9a8ab73c4d862ffb04634e8b8a7f81bee61ebf30c190a3e7",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/authoring-and-scheduling/dynamic-task-mapping.rst"
     },
     "authoring-and-scheduling/event-scheduling.rst": {
       "bytes": 29254,
-      "fetched_at": "2026-11-11T13:21:53.238228+00:00",
+      "fetched_at": "2026-11-11T23:55:11.003380+00:00",
       "sha256": "5c5182f7c5a3d17130ff1458fb326455c0837adc01ef06a5a90c65c1a0bcd064",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/authoring-and-scheduling/event-scheduling.rst"
     },
     "authoring-and-scheduling/index.rst": {
       "bytes": 1546,
-      "fetched_at": "2026-11-11T13:21:53.238077+00:00",
+      "fetched_at": "2026-11-11T23:55:11.003326+00:00",
       "sha256": "30c346908413e266b680c971fe0fb39811a24369e05deeb13a4ecef15167897c",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/authoring-and-scheduling/index.rst"
     },
     "authoring-and-scheduling/language-sdks/go.rst": {
       "bytes": 31672,
-      "fetched_at": "2026-11-11T13:21:53.239066+00:00",
+      "fetched_at": "2026-11-11T23:55:11.003736+00:00",
       "sha256": "46756b646532e7e37844b22cceb9288ee7752f39120df39e83db3f313033d27d",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/authoring-and-scheduling/language-sdks/go.rst"
     },
     "authoring-and-scheduling/language-sdks/index.rst": {
       "bytes": 15027,
-      "fetched_at": "2026-11-11T13:21:53.239196+00:00",
+      "fetched_at": "2026-11-11T23:55:11.003781+00:00",
       "sha256": "19335d8b40ba96d04bb5f9de205b2239e424ad2eafa3e09964326878df886957",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/authoring-and-scheduling/language-sdks/index.rst"
     },
     "authoring-and-scheduling/language-sdks/java.rst": {
       "bytes": 43488,
-      "fetched_at": "2026-11-11T13:21:53.238918+00:00",
+      "fetched_at": "2026-11-11T23:55:11.003676+00:00",
       "sha256": "eaf047d1e0f51164ca4f780ee16b51f548c4264ea29bf6bdafd57185cf1f2327",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/authoring-and-scheduling/language-sdks/java.rst"
     },
     "authoring-and-scheduling/language-sdks/typescript.rst": {
       "bytes": 36049,
-      "fetched_at": "2026-11-11T13:21:53.238753+00:00",
+      "fetched_at": "2026-11-11T23:55:11.003606+00:00",
       "sha256": "376522f0c741b03687b918ad170796abca1d749ec2462aed0ab102fcf00bac58",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/authoring-and-scheduling/language-sdks/typescript.rst"
     },
     "authoring-and-scheduling/loops-and-mapped-tasks.rst": {
       "bytes": 2679,
-      "fetched_at": "2026-11-11T13:21:53.237845+00:00",
+      "fetched_at": "2026-11-11T23:55:11.003258+00:00",
       "sha256": "9f035fe1d14699f024891aad27ddef83957356190cee4b0db9b7ade03f399d50",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/authoring-and-scheduling/loops-and-mapped-tasks.rst"
     },
     "authoring-and-scheduling/loops.rst": {
       "bytes": 27333,
-      "fetched_at": "2026-11-11T13:21:53.236634+00:00",
+      "fetched_at": "2026-11-11T23:55:11.002847+00:00",
       "sha256": "51af67724b604243f0bfac42fd0a82c38f543a9c49d8f848a68eb1acfddb857d",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/authoring-and-scheduling/loops.rst"
     },
     "authoring-and-scheduling/serializers.rst": {
       "bytes": 5922,
-      "fetched_at": "2026-11-11T13:21:53.237256+00:00",
+      "fetched_at": "2026-11-11T23:55:11.003047+00:00",
       "sha256": "3762923be14d99e90c0deb9696542ed30276b75ff8a129e0459e220585f28d54",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/authoring-and-scheduling/serializers.rst"
     },
     "authoring-and-scheduling/timetable.rst": {
       "bytes": 21310,
-      "fetched_at": "2026-11-11T13:21:53.237735+00:00",
+      "fetched_at": "2026-11-11T23:55:11.003225+00:00",
       "sha256": "962f8adf3dd023c93909f651dcc071f70557fb05da3a8951a06d88deca9cac86",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/authoring-and-scheduling/timetable.rst"
     },
     "authoring-and-scheduling/timezone.rst": {
       "bytes": 8805,
-      "fetched_at": "2026-11-11T13:21:53.237964+00:00",
+      "fetched_at": "2026-11-11T23:55:11.003295+00:00",
       "sha256": "d2f7ad9ecd55cd244246d81feccc99e3e3c161a7be781a3c1d22eaebeacb6db5",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/authoring-and-scheduling/timezone.rst"
     },
     "authoring-and-scheduling/yaml-dags.rst": {
       "bytes": 18354,
-      "fetched_at": "2026-11-11T13:21:53.236769+00:00",
+      "fetched_at": "2026-11-11T23:55:11.002893+00:00",
       "sha256": "63071369026ebe90d11719429c9555bce887487c29ab233e84a69a6a5a3b8137",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/authoring-and-scheduling/yaml-dags.rst"
     },
     "best-practices.rst": {
       "bytes": 60201,
-      "fetched_at": "2026-11-11T13:21:53.214128+00:00",
+      "fetched_at": "2026-11-11T23:55:10.994245+00:00",
       "sha256": "00e8f68680abe343abf05c11814cf4619a30393fe0eafc0580ecf4eb64544312",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/best-practices.rst"
     },
     "cli-and-env-variables-ref.rst": {
       "bytes": 4850,
-      "fetched_at": "2026-11-11T13:21:53.214737+00:00",
+      "fetched_at": "2026-11-11T23:55:10.994490+00:00",
       "sha256": "6871d8058876b32363849cbbec96ce4a975b6f7d467ca4d1c6e503e67a4c28bd",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/cli-and-env-variables-ref.rst"
     },
     "configurations-ref.rst": {
       "bytes": 2736,
-      "fetched_at": "2026-11-11T13:21:53.213928+00:00",
+      "fetched_at": "2026-11-11T23:55:10.994150+00:00",
       "sha256": "e5d79a8aa5a29902b34aa100fc1b7df07f6786c4f7b15e96b263b3f8f14689cd",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/configurations-ref.rst"
     },
     "core-concepts/asset-state-store.rst": {
       "bytes": 12990,
-      "fetched_at": "2026-11-11T13:21:53.220158+00:00",
+      "fetched_at": "2026-11-11T23:55:10.996435+00:00",
       "sha256": "310874f598fa25b2243b83bedd18f4826ee02e5d569dfa32c1761c666547734f",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/core-concepts/asset-state-store.rst"
     },
     "core-concepts/auth-manager/index.rst": {
       "bytes": 23769,
-      "fetched_at": "2026-11-11T13:21:53.223120+00:00",
+      "fetched_at": "2026-11-11T23:55:10.997586+00:00",
       "sha256": "1bdb49dde740ef8bbb14926dd43c387ab0bbee511dd8ca53b133adfc3fa8d190",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/core-concepts/auth-manager/index.rst"
     },
     "core-concepts/auth-manager/simple/index.rst": {
       "bytes": 4819,
-      "fetched_at": "2026-11-11T13:21:53.223565+00:00",
+      "fetched_at": "2026-11-11T23:55:10.997710+00:00",
       "sha256": "86fd4eb0ec39d99a06b89514df38a6fe8d677f6b669f55a9ea6d88b05d58b6ab",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/core-concepts/auth-manager/simple/index.rst"
     },
     "core-concepts/auth-manager/simple/sam-token-api-ref.rst": {
       "bytes": 1154,
-      "fetched_at": "2026-11-11T13:21:53.223437+00:00",
+      "fetched_at": "2026-11-11T23:55:10.997674+00:00",
       "sha256": "59483433ec69852ab47d09b90fc734acff52563356e0cb7c8afc9d74daacf144",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/core-concepts/auth-manager/simple/sam-token-api-ref.rst"
     },
     "core-concepts/auth-manager/simple/token.rst": {
       "bytes": 1853,
-      "fetched_at": "2026-11-11T13:21:53.223291+00:00",
+      "fetched_at": "2026-11-11T23:55:10.997637+00:00",
       "sha256": "a892a9135a336c946945a2c57d17eaa707afaa0e0b50eed20d20a5c9d3afdc01",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/core-concepts/auth-manager/simple/token.rst"
     },
     "core-concepts/backfill.rst": {
       "bytes": 5196,
-      "fetched_at": "2026-11-11T13:21:53.220698+00:00",
+      "fetched_at": "2026-11-11T23:55:10.996604+00:00",
       "sha256": "0eab81e1e9e9cce3d1e569fd6be80ed755a5ee6596eb38c851679b5648095596",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/core-concepts/backfill.rst"
     },
     "core-concepts/dag-run.rst": {
       "bytes": 18032,
-      "fetched_at": "2026-11-11T13:21:53.221211+00:00",
+      "fetched_at": "2026-11-11T23:55:10.996794+00:00",
       "sha256": "7be3d64cb1489c255b9f4eeb45d8918b683890b0e8cebcc87bf289576d9ffa87",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/core-concepts/dag-run.rst"
     },
     "core-concepts/dags.rst": {
       "bytes": 45998,
-      "fetched_at": "2026-11-11T13:21:53.221511+00:00",
+      "fetched_at": "2026-11-11T23:55:10.996928+00:00",
       "sha256": "212fbe0469c64c27023d608162776e7ff21d578c70cf8341c23547b6902a4af1",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/core-concepts/dags.rst"
     },
     "core-concepts/debug.rst": {
       "bytes": 5276,
-      "fetched_at": "2026-11-11T13:21:53.221932+00:00",
+      "fetched_at": "2026-11-11T23:55:10.997098+00:00",
       "sha256": "edcf8f082a6d92ebb1c149faa413307fbecf0bc58960c15c74d63653f3eb54dc",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/core-concepts/debug.rst"
     },
     "core-concepts/executor/index.rst": {
       "bytes": 24508,
-      "fetched_at": "2026-11-11T13:21:53.222910+00:00",
+      "fetched_at": "2026-11-11T23:55:10.997503+00:00",
       "sha256": "46673b59721d2ed9a1e769c14bf1b099a6d093288a4c8091f9c4224531aa4b65",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/core-concepts/executor/index.rst"
     },
     "core-concepts/executor/local.rst": {
       "bytes": 3421,
-      "fetched_at": "2026-11-11T13:21:53.222767+00:00",
+      "fetched_at": "2026-11-11T23:55:10.997446+00:00",
       "sha256": "c0dd4e20d07aa31c4b281d7e2247c8e853025d93bdba1d1833872318698d5d93",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/core-concepts/executor/local.rst"
     },
     "core-concepts/index.rst": {
       "bytes": 1630,
-      "fetched_at": "2026-11-11T13:21:53.222455+00:00",
+      "fetched_at": "2026-11-11T23:55:10.997296+00:00",
       "sha256": "e6f577a76690a7bffb506d79d04617c8114a13f8f4b970372a15d3037f92c633",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/core-concepts/index.rst"
     },
     "core-concepts/message-queues.rst": {
       "bytes": 2518,
-      "fetched_at": "2026-11-11T13:21:53.221329+00:00",
+      "fetched_at": "2026-11-11T23:55:10.996849+00:00",
       "sha256": "291f090cd0f7bf807cc95434e2a35b12be77ff465e35aea63c3e582ec67f333a",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/core-concepts/message-queues.rst"
     },
     "core-concepts/multi-team.rst": {
       "bytes": 48164,
-      "fetched_at": "2026-11-11T13:21:53.221676+00:00",
+      "fetched_at": "2026-11-11T23:55:10.997004+00:00",
       "sha256": "809865bc26e37e07ae364995c7a881cc6246fe9266264b6fd02dbe38a04cc7a9",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/core-concepts/multi-team.rst"
     },
     "core-concepts/objectstorage.rst": {
       "bytes": 10886,
-      "fetched_at": "2026-11-11T13:21:53.220028+00:00",
+      "fetched_at": "2026-11-11T23:55:10.996369+00:00",
       "sha256": "7a2c09b534fe6a2f233207a6e742119b0152b9d9ca4cdfc55a76f5bd7f6ef1a1",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/core-concepts/objectstorage.rst"
     },
     "core-concepts/operators.rst": {
       "bytes": 16690,
-      "fetched_at": "2026-11-11T13:21:53.220579+00:00",
+      "fetched_at": "2026-11-11T23:55:10.996565+00:00",
       "sha256": "a80a1cbc81abdf02835dfa45b4318622bc9d69e807e3df5f66c2ed693baaaa6b",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/core-concepts/operators.rst"
     },
     "core-concepts/overview.rst": {
       "bytes": 15939,
-      "fetched_at": "2026-11-11T13:21:53.222584+00:00",
+      "fetched_at": "2026-11-11T23:55:10.997344+00:00",
       "sha256": "9940c6267a2be7764a473b2336d523a48874784635cc85e91be1439f7aae77f1",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/core-concepts/overview.rst"
     },
     "core-concepts/params.rst": {
       "bytes": 20499,
-      "fetched_at": "2026-11-11T13:21:53.221082+00:00",
+      "fetched_at": "2026-11-11T23:55:10.996746+00:00",
       "sha256": "2aae70d4594c50ffb7d530b668d4012bebbb593697c0b2c670b812f506874baf",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/core-concepts/params.rst"
     },
     "core-concepts/resumable-tasks.rst": {
       "bytes": 14115,
-      "fetched_at": "2026-11-11T13:21:53.221815+00:00",
+      "fetched_at": "2026-11-11T23:55:10.997057+00:00",
       "sha256": "a29bf42c467c6cb55d772ce14c955cc6bdfc022304260548f11898f3e1cc792a",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/core-concepts/resumable-tasks.rst"
     },
     "core-concepts/sensors.rst": {
       "bytes": 5542,
-      "fetched_at": "2026-11-11T13:21:53.220423+00:00",
+      "fetched_at": "2026-11-11T23:55:10.996513+00:00",
       "sha256": "4e656733476e96dfa815b3f103c2f21c33932b7e036ce9143b71f6d32459cf5f",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/core-concepts/sensors.rst"
     },
     "core-concepts/task-and-asset-state-store.rst": {
       "bytes": 4354,
-      "fetched_at": "2026-11-11T13:21:53.220825+00:00",
+      "fetched_at": "2026-11-11T23:55:10.996644+00:00",
       "sha256": "45bbcd8195d7f3e78158fa794b1dda7be87c5f58e5d121da20b3d6448cb65e5f",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/core-concepts/task-and-asset-state-store.rst"
     },
     "core-concepts/task-state-store.rst": {
       "bytes": 15236,
-      "fetched_at": "2026-11-11T13:21:53.222200+00:00",
+      "fetched_at": "2026-11-11T23:55:10.997194+00:00",
       "sha256": "62b8368aad702286f22341e41cc18f3ffee42599f73ce6ed9c0cbf5b669a5429",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/core-concepts/task-state-store.rst"
     },
     "core-concepts/taskflow.rst": {
       "bytes": 8140,
-      "fetched_at": "2026-11-11T13:21:53.222323+00:00",
+      "fetched_at": "2026-11-11T23:55:10.997249+00:00",
       "sha256": "f5eda7aaa23be5df6cd75d0727cb6dc5294399592466f3e4f81e892d77bd0a3a",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/core-concepts/taskflow.rst"
     },
     "core-concepts/tasks.rst": {
       "bytes": 26718,
-      "fetched_at": "2026-11-11T13:21:53.222073+00:00",
+      "fetched_at": "2026-11-11T23:55:10.997151+00:00",
       "sha256": "e9f454fbdfd156a7206a8ac76a1740ad0accb585270558cd26d9a4b56f938e96",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/core-concepts/tasks.rst"
     },
     "core-concepts/variables.rst": {
       "bytes": 2984,
-      "fetched_at": "2026-11-11T13:21:53.220271+00:00",
+      "fetched_at": "2026-11-11T23:55:10.996474+00:00",
       "sha256": "ceea816bc52f01e26cc42765d3689fb96059672bccb702a3ae531ac68d2df272",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/core-concepts/variables.rst"
     },
     "core-concepts/xcoms.rst": {
       "bytes": 7764,
-      "fetched_at": "2026-11-11T13:21:53.220947+00:00",
+      "fetched_at": "2026-11-11T23:55:10.996683+00:00",
       "sha256": "95060d714d2e243b0862eed01dcfffa3f16a666a94cca422acba8a51f631f61d",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/core-concepts/xcoms.rst"
     },
     "database-erd-ref.rst": {
       "bytes": 1905,
-      "fetched_at": "2026-11-11T13:21:53.215134+00:00",
+      "fetched_at": "2026-11-11T23:55:10.994640+00:00",
       "sha256": "5ea3f299463e3e4dc2b8747467a77fd3ec8cf8c3f0a454cadbf532957a4c9bbb",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/database-erd-ref.rst"
     },
     "empty_plugin/README.md": {
       "bytes": 1118,
-      "fetched_at": "2026-11-11T13:21:53.226712+00:00",
+      "fetched_at": "2026-11-11T23:55:10.999374+00:00",
       "sha256": "4f1fa31d5678183eb5ad9e9c7dc475c96e11a05b1aaa0fafb7d2c4cafc28a650",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/empty_plugin/README.md"
     },
     "extra-packages-ref.rst": {
       "bytes": 55679,
-      "fetched_at": "2026-11-11T13:21:53.215574+00:00",
+      "fetched_at": "2026-11-11T23:55:10.994798+00:00",
       "sha256": "6ab15589ca121e0b92dad2d82509532bbd55491c6aac39cc516162d3fcd11330",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/extra-packages-ref.rst"
     },
     "faq.rst": {
       "bytes": 37397,
-      "fetched_at": "2026-11-11T13:21:53.216120+00:00",
+      "fetched_at": "2026-11-11T23:55:10.995001+00:00",
       "sha256": "071a0330f72f7f7f5a430d2242d66510a4e9699694f6979b48e990ac84c49580",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/faq.rst"
     },
     "howto/add-dag-tags.rst": {
       "bytes": 1538,
-      "fetched_at": "2026-11-11T13:21:53.227987+00:00",
+      "fetched_at": "2026-11-11T23:55:10.999878+00:00",
       "sha256": "1367287086e8bb7f181ec69dd0c7c2fec2525f4f945645d417e5384c26b46133",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/howto/add-dag-tags.rst"
     },
     "howto/add-owner-links.rst": {
       "bytes": 1952,
-      "fetched_at": "2026-11-11T13:21:53.228643+00:00",
+      "fetched_at": "2026-11-11T23:55:11.000101+00:00",
       "sha256": "ef89b7dfee6ca7afbd18fb604b19fc946bd6edb7536ab9e3cc5db904f8d04fac",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/howto/add-owner-links.rst"
     },
     "howto/connection.rst": {
       "bytes": 25478,
-      "fetched_at": "2026-11-11T13:21:53.227641+00:00",
+      "fetched_at": "2026-11-11T23:55:10.999772+00:00",
       "sha256": "940479aead9368b55e59349507927282a026773fd82ec7687fd4252f364d89ae",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/howto/connection.rst"
     },
     "howto/create-custom-decorator.rst": {
       "bytes": 6012,
-      "fetched_at": "2026-11-11T13:21:53.228760+00:00",
+      "fetched_at": "2026-11-11T23:55:11.000143+00:00",
       "sha256": "a082d7dd6cacdcabe401c6a4fbf0b684876f86cb193f4ef1d7724aad05b4f7f1",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/howto/create-custom-decorator.rst"
     },
     "howto/custom-action-plugin.rst": {
       "bytes": 14858,
-      "fetched_at": "2026-11-11T13:21:53.229760+00:00",
+      "fetched_at": "2026-11-11T23:55:11.000493+00:00",
       "sha256": "b9f04f487839b45ce6f9fe3068f6bf07df6108d2f9f179d79c8d72a1fbb51fc8",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/howto/custom-action-plugin.rst"
     },
     "howto/custom-operator.rst": {
       "bytes": 21019,
-      "fetched_at": "2026-11-11T13:21:53.228249+00:00",
+      "fetched_at": "2026-11-11T23:55:10.999975+00:00",
       "sha256": "200ec8f32e80cd9ec20d7391226555f9657bb039b384c4a27971c855da2f3efb",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/howto/custom-operator.rst"
     },
     "howto/custom-view-plugin.rst": {
       "bytes": 10266,
-      "fetched_at": "2026-11-11T13:21:53.229630+00:00",
+      "fetched_at": "2026-11-11T23:55:11.000446+00:00",
       "sha256": "a28dac5e9bcbc1798741026d1b77b9b65d5bc8f6b2b6e6a829f32336027df89f",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/howto/custom-view-plugin.rst"
     },
     "howto/customize-ui.rst": {
       "bytes": 13587,
-      "fetched_at": "2026-11-11T13:21:53.228115+00:00",
+      "fetched_at": "2026-11-11T23:55:10.999925+00:00",
       "sha256": "9795ec73108d3531d4eac26fc95977e9b27885fb6098313914e901c3762f01d3",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/howto/customize-ui.rst"
     },
     "howto/dag-level-retry-via-callback.rst": {
       "bytes": 10271,
-      "fetched_at": "2026-11-11T13:21:53.229015+00:00",
+      "fetched_at": "2026-11-11T23:55:11.000240+00:00",
       "sha256": "95e437c35eaf3a05e1ec64d1ce56301659912a00099968ae1f9b006fedcb0830",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/howto/dag-level-retry-via-callback.rst"
     },
     "howto/deadline-alerts.rst": {
       "bytes": 23118,
-      "fetched_at": "2026-11-11T13:21:53.228528+00:00",
+      "fetched_at": "2026-11-11T23:55:11.000069+00:00",
       "sha256": "8927029ecd04c38603f8b36925ff0c10f1338360d68209448be33cc469cb9b9c",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/howto/deadline-alerts.rst"
     },
     "howto/define-extra-link.rst": {
       "bytes": 6689,
-      "fetched_at": "2026-11-11T13:21:53.229503+00:00",
+      "fetched_at": "2026-11-11T23:55:11.000379+00:00",
       "sha256": "5583f45ca1ef400557a212b7b5e9ea23f4d46b5c439e54cac2a4ebc9995f2623",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/howto/define-extra-link.rst"
     },
     "howto/docker-compose/docker-compose.yaml": {
       "bytes": 13073,
-      "fetched_at": "2026-11-11T13:21:53.231116+00:00",
+      "fetched_at": "2026-11-11T23:55:11.000943+00:00",
       "sha256": "649dc6f2d89e0c7b1f62ed465f2346b47b23825f9250454cfe5c5e73d91ec91d",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/howto/docker-compose/docker-compose.yaml"
     },
     "howto/docker-compose/index.rst": {
       "bytes": 26836,
-      "fetched_at": "2026-11-11T13:21:53.230986+00:00",
+      "fetched_at": "2026-11-11T23:55:11.000899+00:00",
       "sha256": "f26ce5b350630c62f1c688097dd862eccab3b831d432ce77650c4756cec80748",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/howto/docker-compose/index.rst"
     },
     "howto/dynamic-dag-generation.rst": {
       "bytes": 10095,
-      "fetched_at": "2026-11-11T13:21:53.227227+00:00",
+      "fetched_at": "2026-11-11T23:55:10.999630+00:00",
       "sha256": "6fc9f7d9042377c86425bb1e24478bb85c2da445af1b71b9306998dcdd5470a3",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/howto/dynamic-dag-generation.rst"
     },
     "howto/email-config.rst": {
       "bytes": 2387,
-      "fetched_at": "2026-11-11T13:21:53.229377+00:00",
+      "fetched_at": "2026-11-11T23:55:11.000342+00:00",
       "sha256": "fc54a1e930c3658468e4c0656d3aae64c74513298e828ab0965fdf636c75534b",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/howto/email-config.rst"
     },
     "howto/export-more-env-vars.rst": {
       "bytes": 1798,
-      "fetched_at": "2026-11-11T13:21:53.230374+00:00",
+      "fetched_at": "2026-11-11T23:55:11.000686+00:00",
       "sha256": "56fdfef8e9300835f293d5902443b834f8242ce672024b12b319b0a3a3ebd1a2",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/howto/export-more-env-vars.rst"
     },
     "howto/index.rst": {
       "bytes": 1817,
-      "fetched_at": "2026-11-11T13:21:53.230490+00:00",
+      "fetched_at": "2026-11-11T23:55:11.000719+00:00",
       "sha256": "93d57ca997a810ccf8edc710f52e74bb2084273a92e1350802345f1a91171b6f",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/howto/index.rst"
     },
     "howto/listener-plugin.rst": {
       "bytes": 3942,
-      "fetched_at": "2026-11-11T13:21:53.230243+00:00",
+      "fetched_at": "2026-11-11T23:55:11.000652+00:00",
       "sha256": "cfb17fba0b1ff3aa15cca357cb83c556311de83382d31d0bac2b7e1f361d2676",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/howto/listener-plugin.rst"
     },
     "howto/memory-profiling.rst": {
       "bytes": 9245,
-      "fetched_at": "2026-11-11T13:21:53.228389+00:00",
+      "fetched_at": "2026-11-11T23:55:11.000017+00:00",
       "sha256": "b9b295132528737fbe649c018d3344035b9a1310e97497d4017560cc0d4b15a8",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/howto/memory-profiling.rst"
     },
     "howto/notifications.rst": {
       "bytes": 2704,
-      "fetched_at": "2026-11-11T13:21:53.229126+00:00",
+      "fetched_at": "2026-11-11T23:55:11.000273+00:00",
       "sha256": "f2cbfb6cb1f444d4245e9be1377fdcd15571b3f2515dc557e3a327b1a32b3fe0",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/howto/notifications.rst"
     },
     "howto/operator/index.rst": {
       "bytes": 1091,
-      "fetched_at": "2026-11-11T13:21:53.231290+00:00",
+      "fetched_at": "2026-11-11T23:55:11.000997+00:00",
       "sha256": "a13c4ea98dd3fbfb19d92e82414d6d4a6abd2661238d1c7d114f7494e5e89c91",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/howto/operator/index.rst"
     },
     "howto/performance.rst": {
       "bytes": 3636,
-      "fetched_at": "2026-11-11T13:21:53.230124+00:00",
+      "fetched_at": "2026-11-11T23:55:11.000615+00:00",
       "sha256": "2d11cd9af0dc70764b24bcdb38256eae3523279b9050352559d3f2e37a7263a1",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/howto/performance.rst"
     },
     "howto/run-behind-proxy.rst": {
       "bytes": 6661,
-      "fetched_at": "2026-11-11T13:21:53.230743+00:00",
+      "fetched_at": "2026-11-11T23:55:11.000793+00:00",
       "sha256": "16dba6d6441a1a042002b985354a1531de25f1af2fc8160388211d6eeb8ce294",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/howto/run-behind-proxy.rst"
     },
     "howto/run-with-self-signed-certificate.rst": {
       "bytes": 2854,
-      "fetched_at": "2026-11-11T13:21:53.227758+00:00",
+      "fetched_at": "2026-11-11T23:55:10.999806+00:00",
       "sha256": "dc9129fabc2e4294709addbd30178754e67c32d55971ca7a06575f93715043f5",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/howto/run-with-self-signed-certificate.rst"
     },
     "howto/run-with-systemd.rst": {
       "bytes": 3731,
-      "fetched_at": "2026-11-11T13:21:53.227368+00:00",
+      "fetched_at": "2026-11-11T23:55:10.999675+00:00",
       "sha256": "769e7cbc6c25f073d4a2a429dccafacb5bb3a66830418ef4db156dfff7ae916e",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/howto/run-with-systemd.rst"
     },
     "howto/set-config.rst": {
       "bytes": 8587,
-      "fetched_at": "2026-11-11T13:21:53.227501+00:00",
+      "fetched_at": "2026-11-11T23:55:10.999718+00:00",
       "sha256": "49b633c79a625173102f0a6fa14145727e40dc20bd1d891aac565d1678ce6fd0",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/howto/set-config.rst"
     },
     "howto/set-up-database.rst": {
       "bytes": 27353,
-      "fetched_at": "2026-11-11T13:21:53.227099+00:00",
+      "fetched_at": "2026-11-11T23:55:10.999580+00:00",
       "sha256": "446183b43a3b8a3acbec3954c5ebe4e6cbde40092f7db6961e0687907772bf41",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/howto/set-up-database.rst"
     },
     "howto/setup-and-teardown.rst": {
       "bytes": 9908,
-      "fetched_at": "2026-11-11T13:21:53.227879+00:00",
+      "fetched_at": "2026-11-11T23:55:10.999845+00:00",
       "sha256": "121087f2377a97f5149e9ede9490ebdd6dca3c85ea6727a9c735fe3c28a067af",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/howto/setup-and-teardown.rst"
     },
     "howto/sla-to-deadlines.rst": {
       "bytes": 3248,
-      "fetched_at": "2026-11-11T13:21:53.230007+00:00",
+      "fetched_at": "2026-11-11T23:55:11.000573+00:00",
       "sha256": "283696bb5faa1de5dfe296add0b86b4f106e6301ebbb95ac09888b08823b4daf",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/howto/sla-to-deadlines.rst"
     },
     "howto/static-type-checking.rst": {
       "bytes": 1223,
-      "fetched_at": "2026-11-11T13:21:53.229244+00:00",
+      "fetched_at": "2026-11-11T23:55:11.000309+00:00",
       "sha256": "17133ba33df2b78aa77f74b022de30790a16e3840eebbca64ff14c96b793853f",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/howto/static-type-checking.rst"
     },
     "howto/timetable.rst": {
       "bytes": 14185,
-      "fetched_at": "2026-11-11T13:21:53.229896+00:00",
+      "fetched_at": "2026-11-11T23:55:11.000539+00:00",
       "sha256": "a1d66690cd8ee5230e883004b12ac51df20fd70937bd8c68682b2c18a1c5752f",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/howto/timetable.rst"
     },
     "howto/usage-cli.rst": {
       "bytes": 20935,
-      "fetched_at": "2026-11-11T13:21:53.228893+00:00",
+      "fetched_at": "2026-11-11T23:55:11.000198+00:00",
       "sha256": "acc17861731f1411f9a15e0f4e01d88de934b6d92e1eddc08b296c6c0fbc8ff6",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/howto/usage-cli.rst"
     },
     "howto/variable.rst": {
       "bytes": 4158,
-      "fetched_at": "2026-11-11T13:21:53.230611+00:00",
+      "fetched_at": "2026-11-11T23:55:11.000754+00:00",
       "sha256": "9311a4185d336795adfcc3e8c05832b22d0268fa7cf95d9e00b8ae60ceccc30d",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/howto/variable.rst"
     },
     "index.rst": {
       "bytes": 8010,
-      "fetched_at": "2026-11-11T13:21:53.215969+00:00",
+      "fetched_at": "2026-11-11T23:55:10.994937+00:00",
       "sha256": "1af123f19b9e9a5fda6b9f6289c369913c3eeb92607c6ca3c786b38046436104",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/index.rst"
     },
     "installation/dependencies.rst": {
       "bytes": 4661,
-      "fetched_at": "2026-11-11T13:21:53.235579+00:00",
+      "fetched_at": "2026-11-11T23:55:11.002484+00:00",
       "sha256": "46a11a7794cecf6d3247b7df9f1173e5d71d287acf9315b8e7ccc31857859fef",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/installation/dependencies.rst"
     },
     "installation/index.rst": {
       "bytes": 23901,
-      "fetched_at": "2026-11-11T13:21:53.236205+00:00",
+      "fetched_at": "2026-11-11T23:55:11.002705+00:00",
       "sha256": "4bff5cc6983859a507048016df38398b864cf46540f90d85b14bcfe65d259dac",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/installation/index.rst"
     },
     "installation/installing-from-pypi.rst": {
       "bytes": 20106,
-      "fetched_at": "2026-11-11T13:21:53.235258+00:00",
+      "fetched_at": "2026-11-11T23:55:11.002371+00:00",
       "sha256": "98a53e8c3fc6f9069840fb85974e3c6c5caa63b2decd4974e8b8d2e29cd3c502",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/installation/installing-from-pypi.rst"
     },
     "installation/installing-from-sources.rst": {
       "bytes": 8147,
-      "fetched_at": "2026-11-11T13:21:53.236323+00:00",
+      "fetched_at": "2026-11-11T23:55:11.002743+00:00",
       "sha256": "17a18d2a7139398fba71a1dcef481f4e18032253790e609edb08d819c91e219a",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/installation/installing-from-sources.rst"
     },
     "installation/prerequisites.rst": {
       "bytes": 2918,
-      "fetched_at": "2026-11-11T13:21:53.235446+00:00",
+      "fetched_at": "2026-11-11T23:55:11.002442+00:00",
       "sha256": "23851581899ef53535b2bdbe992366ee194714bc432e637094512b509dd7cd94",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/installation/prerequisites.rst"
     },
     "installation/setting-up-the-database.rst": {
       "bytes": 1900,
-      "fetched_at": "2026-11-11T13:21:53.235817+00:00",
+      "fetched_at": "2026-11-11T23:55:11.002567+00:00",
       "sha256": "7a98a8cfa4df71bd78ac8248c2a628aecb6b015484bb8263543cf08145bc2267",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/installation/setting-up-the-database.rst"
     },
     "installation/supported-versions.rst": {
       "bytes": 4031,
-      "fetched_at": "2026-11-11T13:21:53.235928+00:00",
+      "fetched_at": "2026-11-11T23:55:11.002600+00:00",
       "sha256": "4e35ac1d02fe9a343927637513b5565971d6e605440b88c2335332e292fb214c",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/installation/supported-versions.rst"
     },
     "installation/upgrading.rst": {
       "bytes": 12816,
-      "fetched_at": "2026-11-11T13:21:53.235706+00:00",
+      "fetched_at": "2026-11-11T23:55:11.002530+00:00",
       "sha256": "a94cfdc87c9c58737c7b15b60ee5a54e309920aa9b0b61b6c5800c8b22fa326a",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/installation/upgrading.rst"
     },
     "installation/upgrading_to_airflow3.rst": {
       "bytes": 24730,
-      "fetched_at": "2026-11-11T13:21:53.236066+00:00",
+      "fetched_at": "2026-11-11T23:55:11.002654+00:00",
       "sha256": "cf051805174dc98ce7b85a5058d8e18510faf4b7258db527cb94de3684373ed1",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/installation/upgrading_to_airflow3.rst"
     },
     "integration.rst": {
       "bytes": 1878,
-      "fetched_at": "2026-11-11T13:21:53.215244+00:00",
+      "fetched_at": "2026-11-11T23:55:10.994674+00:00",
       "sha256": "97b5d651c98d03d7496d3ca2d93a38fac8718125a6fa5505baa3792c467453d1",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/integration.rst"
     },
     "license.rst": {
       "bytes": 11214,
-      "fetched_at": "2026-11-11T13:21:53.213157+00:00",
+      "fetched_at": "2026-11-11T23:55:10.993866+00:00",
       "sha256": "40a221a670c0f421ab4244254df69a94883894951ee7e0a6e4dd9a052f23ab41",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/license.rst"
     },
     "migrations-ref.rst": {
       "bytes": 47392,
-      "fetched_at": "2026-11-11T13:21:53.215020+00:00",
+      "fetched_at": "2026-11-11T23:55:10.994605+00:00",
       "sha256": "b155e9ddd9733dcb83b9bcf34aeaa116b8f18762af965d39c2695899a4e749b6",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/migrations-ref.rst"
     },
     "operators-and-hooks-ref.rst": {
       "bytes": 3553,
-      "fetched_at": "2026-11-11T13:21:53.212981+00:00",
+      "fetched_at": "2026-11-11T23:55:10.993777+00:00",
       "sha256": "cda5b611f8e25ee8af7eb5f6ff56fdc0b54ab6268041e1f40fd9a565cc87da65",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/operators-and-hooks-ref.rst"
     },
     "privacy_notice.rst": {
       "bytes": 987,
-      "fetched_at": "2026-11-11T13:21:53.214453+00:00",
+      "fetched_at": "2026-11-11T23:55:10.994352+00:00",
       "sha256": "d8e1d8462d53923f24b50bba9c01764b62fa2c877660999277d7ac110293eeb3",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/privacy_notice.rst"
     },
     "project.rst": {
       "bytes": 4273,
-      "fetched_at": "2026-11-11T13:21:53.213320+00:00",
+      "fetched_at": "2026-11-11T23:55:10.993936+00:00",
       "sha256": "4c07450f7198ad08d5beb45a149171769d744ba212b40084035f6a6b5ff2cb16",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/project.rst"
     },
     "public-airflow-interface.rst": {
       "bytes": 25824,
-      "fetched_at": "2026-11-11T13:21:53.214284+00:00",
+      "fetched_at": "2026-11-11T23:55:10.994309+00:00",
       "sha256": "792386fbdedbe39cbefff0de743f471d3a01115cbcedcde57e41dbc90d7bba6f",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/public-airflow-interface.rst"
     },
     "redirects.txt": {
       "bytes": 11629,
-      "fetched_at": "2026-11-11T13:21:53.214614+00:00",
+      "fetched_at": "2026-11-11T23:55:10.994443+00:00",
       "sha256": "a9a3f13c943a9d12358e88f93cb3afe00a65f08a26694483ee2deeb3ddb5d88a",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/redirects.txt"
     },
     "release-process.rst": {
       "bytes": 5810,
-      "fetched_at": "2026-11-11T13:21:53.213653+00:00",
+      "fetched_at": "2026-11-11T23:55:10.994043+00:00",
       "sha256": "0c628dbed2817590563141edc0ee0f9e61f7ed5cab678b884ab668633d1e3743",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/release-process.rst"
     },
     "release_notes.rst": {
       "bytes": 880,
-      "fetched_at": "2026-11-11T13:21:53.213522+00:00",
+      "fetched_at": "2026-11-11T23:55:10.993996+00:00",
       "sha256": "5fd13900fcb836621255e26f1a3242b13fdf5203a3e54ec380b5d92033396716",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/release_notes.rst"
     },
     "security/api.rst": {
       "bytes": 5302,
-      "fetched_at": "2026-11-11T13:21:53.218211+00:00",
+      "fetched_at": "2026-11-11T23:55:10.995773+00:00",
       "sha256": "3381895fa07f3fb74f918e1e89d9f19f86e23250faff8e7b00d6c50c76fff54a",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/security/api.rst"
     },
     "security/api_permissions_ref.rst": {
       "bytes": 17794,
-      "fetched_at": "2026-11-11T13:21:53.217275+00:00",
+      "fetched_at": "2026-11-11T23:55:10.995447+00:00",
       "sha256": "032c3d1b16afdefa5d95bae307758d289761f22754249171247f5c8854cb2a28",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/security/api_permissions_ref.rst"
     },
     "security/audit_logs.rst": {
       "bytes": 22970,
-      "fetched_at": "2026-11-11T13:21:53.217733+00:00",
+      "fetched_at": "2026-11-11T23:55:10.995611+00:00",
       "sha256": "ee8f76e89d9941d89be1b96f546ed101a0080fbf72326074862dffc9f3beaac8",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/security/audit_logs.rst"
     },
     "security/deprecated_permissions.rst": {
       "bytes": 5124,
-      "fetched_at": "2026-11-11T13:21:53.218672+00:00",
+      "fetched_at": "2026-11-11T23:55:10.995941+00:00",
       "sha256": "bf2463cf3fb95fff161944321788ef7c7ed3f79d86e3668c9a411db224a9bd8f",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/security/deprecated_permissions.rst"
     },
     "security/flower.rst": {
       "bytes": 1982,
-      "fetched_at": "2026-11-11T13:21:53.218080+00:00",
+      "fetched_at": "2026-11-11T23:55:10.995729+00:00",
       "sha256": "25e69944d91742246a02df2fb7e5a613c2a501a149321ef5bc84d1e1655b3c7f",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/security/flower.rst"
     },
     "security/index.rst": {
       "bytes": 1944,
-      "fetched_at": "2026-11-11T13:21:53.218553+00:00",
+      "fetched_at": "2026-11-11T23:55:10.995904+00:00",
       "sha256": "cce16919d7cba83b7012b56bf8b6ce246f9a78f2d4599fa023d18247546b82b8",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/security/index.rst"
     },
     "security/jwt_token_authentication.rst": {
       "bytes": 29007,
-      "fetched_at": "2026-11-11T13:21:53.217595+00:00",
+      "fetched_at": "2026-11-11T23:55:10.995559+00:00",
       "sha256": "1176487daf4600f6ed33fada780128a23d5c43721016911fcc9d8aa7d49e4233",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/security/jwt_token_authentication.rst"
     },
     "security/kerberos.rst": {
       "bytes": 6665,
-      "fetched_at": "2026-11-11T13:21:53.217964+00:00",
+      "fetched_at": "2026-11-11T23:55:10.995693+00:00",
       "sha256": "ba2b191e04661a54b02c8ac8cb35edd51673215f1ac5b845f6b9c31874da34bd",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/security/kerberos.rst"
     },
     "security/releasing_security_patches.rst": {
       "bytes": 2987,
-      "fetched_at": "2026-11-11T13:21:53.217846+00:00",
+      "fetched_at": "2026-11-11T23:55:10.995652+00:00",
       "sha256": "d5d59f0d8fa66ddcbce75a1819b506b8fc9c2b0fb026e992a21db91255b6b8d9",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/security/releasing_security_patches.rst"
     },
     "security/sbom.rst": {
       "bytes": 1651,
-      "fetched_at": "2026-11-11T13:21:53.218782+00:00",
+      "fetched_at": "2026-11-11T23:55:10.995975+00:00",
       "sha256": "9e23bcb6912cfc388f6fdc12e204fb3c1af6577148c860fb8d39d0a42ba52201",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/security/sbom.rst"
     },
     "security/secrets/fernet.rst": {
       "bytes": 2567,
-      "fetched_at": "2026-11-11T13:21:53.219214+00:00",
+      "fetched_at": "2026-11-11T23:55:10.996110+00:00",
       "sha256": "54b2def9e1468db7a5405a1ffd2ab8ae4ded6f11c645d07c0a3a68368555f603",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/security/secrets/fernet.rst"
     },
     "security/secrets/index.rst": {
       "bytes": 1460,
-      "fetched_at": "2026-11-11T13:21:53.219510+00:00",
+      "fetched_at": "2026-11-11T23:55:10.996193+00:00",
       "sha256": "9c7d25b9963d1fc3f4aa9fd6701e02ea897ecb1f9206d69ed5cc27ce0ddd4caf",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/security/secrets/index.rst"
     },
     "security/secrets/mask-sensitive-values.rst": {
       "bytes": 4568,
-      "fetched_at": "2026-11-11T13:21:53.219382+00:00",
+      "fetched_at": "2026-11-11T23:55:10.996161+00:00",
       "sha256": "e2d7fa853dd93cae3b8cd8f061b9ae2c0ebb760ea11d2304167b8e5775ef516b",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/security/secrets/mask-sensitive-values.rst"
     },
     "security/secrets/secrets-backend/index.rst": {
       "bytes": 7894,
-      "fetched_at": "2026-11-11T13:21:53.219827+00:00",
+      "fetched_at": "2026-11-11T23:55:10.996298+00:00",
       "sha256": "c831281cc53844a2039aaba09a3ebeaf994c0527bd188d10f1666fa63e7204ae",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/security/secrets/secrets-backend/index.rst"
     },
     "security/secrets/secrets-backend/local-filesystem-secrets-backend.rst": {
       "bytes": 7634,
-      "fetched_at": "2026-11-11T13:21:53.219705+00:00",
+      "fetched_at": "2026-11-11T23:55:10.996256+00:00",
       "sha256": "67b5afd2cc0410e608c93878dede4983e2c26995fc1a23a741a7bd59f3afb70f",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/security/secrets/secrets-backend/local-filesystem-secrets-backend.rst"
     },
     "security/security_model.rst": {
       "bytes": 76236,
-      "fetched_at": "2026-11-11T13:21:53.218430+00:00",
+      "fetched_at": "2026-11-11T23:55:10.995870+00:00",
       "sha256": "4f963991cd967641d3168911339282047835076d2853d722d80c0726a2926e4f",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/security/security_model.rst"
     },
     "security/sql.rst": {
       "bytes": 1675,
-      "fetched_at": "2026-11-11T13:21:53.219015+00:00",
+      "fetched_at": "2026-11-11T23:55:10.996043+00:00",
       "sha256": "3b4d6e11d107e917011925699cad68f495502516fca5022ea14a0f53411eb696",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/security/sql.rst"
     },
     "security/vulnerabilities-in-3rd-party-dependencies.rst": {
       "bytes": 11945,
-      "fetched_at": "2026-11-11T13:21:53.217439+00:00",
+      "fetched_at": "2026-11-11T23:55:10.995499+00:00",
       "sha256": "7d48a2a1db561a5ce80afa75f3e85c8053e0d53ba291b3a5a934560f3b1f15d1",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/security/vulnerabilities-in-3rd-party-dependencies.rst"
     },
     "security/workload.rst": {
       "bytes": 8047,
-      "fetched_at": "2026-11-11T13:21:53.218900+00:00",
+      "fetched_at": "2026-11-11T23:55:10.996012+00:00",
       "sha256": "f4d0b3f86e05377868d297aaf91108bdabad58424c8f1680e4b0498fd6fba486",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/security/workload.rst"
     },
     "stable-rest-api-ref.rst": {
       "bytes": 1124,
-      "fetched_at": "2026-11-11T13:21:53.214857+00:00",
+      "fetched_at": "2026-11-11T23:55:10.994530+00:00",
       "sha256": "a5b49b1a20a14d65e1067d4bf3816283de0411e2e5b2cf35e2e380eb7625cf65",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/stable-rest-api-ref.rst"
     },
     "start.rst": {
       "bytes": 7183,
-      "fetched_at": "2026-11-11T13:21:53.215844+00:00",
+      "fetched_at": "2026-11-11T23:55:10.994897+00:00",
       "sha256": "dfbec2118e901ac4888d2822549826210380e7e6a3c0b0e2042fc0ab46f186c9",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/start.rst"
     },
     "templates-ref.rst": {
       "bytes": 16574,
-      "fetched_at": "2026-11-11T13:21:53.215706+00:00",
+      "fetched_at": "2026-11-11T23:55:10.994849+00:00",
       "sha256": "0c5cf562953e88a5d7aad28632422a482a286e8637dbc7cb230f4bf2d760a4bc",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/templates-ref.rst"
     },
     "troubleshooting.rst": {
       "bytes": 14064,
-      "fetched_at": "2026-11-11T13:21:53.215395+00:00",
+      "fetched_at": "2026-11-11T23:55:10.994720+00:00",
       "sha256": "e66b57bc11f3234633710ebd243aeca795c8013804266b6f60805924b55a2a99",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/troubleshooting.rst"
     },
     "tutorial/fundamentals.rst": {
       "bytes": 12961,
-      "fetched_at": "2026-11-11T13:21:53.216684+00:00",
+      "fetched_at": "2026-11-11T23:55:10.995206+00:00",
       "sha256": "9b5c5a0c93ccaf83fdca378dac76dff392d55d2f4e6142a50e70fbe966faf981",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/tutorial/fundamentals.rst"
     },
     "tutorial/hitl.rst": {
       "bytes": 11749,
-      "fetched_at": "2026-11-11T13:21:53.216553+00:00",
+      "fetched_at": "2026-11-11T23:55:10.995159+00:00",
       "sha256": "59e8d432609bcc3a58bb1f8571aa3341f567e2fcde4d6cf025292f9c49cf5fbd",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/tutorial/hitl.rst"
     },
     "tutorial/index.rst": {
       "bytes": 1066,
-      "fetched_at": "2026-11-11T13:21:53.217048+00:00",
+      "fetched_at": "2026-11-11T23:55:10.995330+00:00",
       "sha256": "6f96f29733400cb784093c28a520cd58e269505f336245a526f37c22ffcd0ac6",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/tutorial/index.rst"
     },
     "tutorial/objectstorage.rst": {
       "bytes": 7033,
-      "fetched_at": "2026-11-11T13:21:53.216418+00:00",
+      "fetched_at": "2026-11-11T23:55:10.995113+00:00",
       "sha256": "7e014a716d90b17cd755cceadb287dcdeef7ce9561014c25b0e4d5647161c33f",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/tutorial/objectstorage.rst"
     },
     "tutorial/pipeline.rst": {
       "bytes": 12778,
-      "fetched_at": "2026-11-11T13:21:53.216809+00:00",
+      "fetched_at": "2026-11-11T23:55:10.995251+00:00",
       "sha256": "13879c9e19fa74f6ec395ff958ec072f1ba1c6ec75aecede9937bcc9f01cfd72",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/tutorial/pipeline.rst"
     },
     "tutorial/taskflow.rst": {
       "bytes": 15191,
-      "fetched_at": "2026-11-11T13:21:53.216938+00:00",
+      "fetched_at": "2026-11-11T23:55:10.995297+00:00",
       "sha256": "8dfdc5caab6c28d9a2ff1b6c68f890ffd046257f4f057b1c6c34b52a278bb0c1",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/tutorial/taskflow.rst"
     },
     "ui.rst": {
       "bytes": 24432,
-      "fetched_at": "2026-11-11T13:21:53.213808+00:00",
+      "fetched_at": "2026-11-11T23:55:10.994111+00:00",
       "sha256": "9b4564171a8dd82e76e52573a10349f2ef53f23ca7257b3283a542b56c11fa78",
       "source_url": "https://github.com/apache/airflow/blob/main/airflow-core/docs/ui.rst"
     }

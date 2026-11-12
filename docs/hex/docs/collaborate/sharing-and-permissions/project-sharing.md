@@ -74,6 +74,10 @@ Users with **Can Explore** permission who are workspace Editors or Admins *can* 
 
 Grants permissions to view and comment on only the published App. Users with **Can View App** permissions cannot access the Notebook view or App builder. **Can View App** permissions also restrict the ability to duplicate, modify, or share the project.
 
+info
+
+4.0 projects do not yet support **Can View App** (app-only) access. Only share projects with viewers who are permitted to access the underlying code and data, including intermediate results not shown in the app. See [Hex 4.0 limitations](/docs/hex-4-0/what-is-hex-4-0#limitations).
+
 ### Workspace roles and project permissions[​](#workspace-roles-and-project-permissions "Direct link to Workspace roles and project permissions")
 
 As mentioned above, each project permission is restricted to particular workspace roles. These are summarized below:
