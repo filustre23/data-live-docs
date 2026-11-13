@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-11-12T20:26+00:00_
+_Generated 2026-11-13T04:31+00:00_
 
-**9 sources, 4824 topics total**
+**9 sources, 4839 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_901 topics_
+_916 topics_
 
 - `anthropic-sdk/about-claude/additional-resources`
 - `anthropic-sdk/about-claude/api-credits-for-subscribers`
@@ -702,6 +702,9 @@ _901 topics_
 - `anthropic-sdk/build-with-claude/overview`
 - `anthropic-sdk/build-with-claude/pdf-support`
 - `anthropic-sdk/build-with-claude/preserved-thinking`
+- `anthropic-sdk/build-with-claude/preserved-thinking/change-tools-or-instructions`
+- `anthropic-sdk/build-with-claude/preserved-thinking/fix-bound-to-a-different-conversation`
+- `anthropic-sdk/build-with-claude/preserved-thinking/prefix-checks`
 - `anthropic-sdk/build-with-claude/prompt-caching`
 - `anthropic-sdk/build-with-claude/prompt-engineering/claude-prompting-best-practices`
 - `anthropic-sdk/build-with-claude/prompt-engineering/overview`
@@ -842,6 +845,8 @@ _901 topics_
 - `anthropic-sdk/managed-agents/secure-deployment`
 - `anthropic-sdk/managed-agents/secure-deployment-monitoring`
 - `anthropic-sdk/managed-agents/secure-deployment-risks`
+- `anthropic-sdk/managed-agents/self-hosted`
+- `anthropic-sdk/managed-agents/self-hosted-data-and-access`
 - `anthropic-sdk/managed-agents/self-hosted-sandboxes`
 - `anthropic-sdk/managed-agents/self-hosted-sandboxes-custom-tools`
 - `anthropic-sdk/managed-agents/self-hosted-sandboxes-memory`
@@ -849,6 +854,16 @@ _901 topics_
 - `anthropic-sdk/managed-agents/self-hosted-sandboxes-reference`
 - `anthropic-sdk/managed-agents/self-hosted-sandboxes-security`
 - `anthropic-sdk/managed-agents/self-hosted-sandboxes-workers`
+- `anthropic-sdk/managed-agents/self-hosted/agent-identity`
+- `anthropic-sdk/managed-agents/self-hosted/call-the-api`
+- `anthropic-sdk/managed-agents/self-hosted/configuration-reference`
+- `anthropic-sdk/managed-agents/self-hosted/configure`
+- `anthropic-sdk/managed-agents/self-hosted/console`
+- `anthropic-sdk/managed-agents/self-hosted/differences`
+- `anthropic-sdk/managed-agents/self-hosted/inference-provider`
+- `anthropic-sdk/managed-agents/self-hosted/kubernetes`
+- `anthropic-sdk/managed-agents/self-hosted/quickstart`
+- `anthropic-sdk/managed-agents/self-hosted/upgrade`
 - `anthropic-sdk/managed-agents/session-observability`
 - `anthropic-sdk/managed-agents/session-operations`
 - `anthropic-sdk/managed-agents/session-threads`
@@ -2823,13 +2838,13 @@ _1174 topics_
 - `dbt-core/docs/dbt-ai/wizard-cli-reference`
 - `dbt-core/docs/dbt-ai/wizard-config`
 - `dbt-core/docs/dbt-ai/wizard-desktop`
+- `dbt-core/docs/dbt-ai/wizard-desktop-byok`
 - `dbt-core/docs/dbt-ai/wizard-desktop-settings`
 - `dbt-core/docs/dbt-ai/wizard-desktop-use`
 - `dbt-core/docs/dbt-ai/wizard-headless`
 - `dbt-core/docs/dbt-ai/wizard-how-it-works`
 - `dbt-core/docs/dbt-ai/wizard-ide`
 - `dbt-core/docs/dbt-ai/wizard-mcp`
-- `dbt-core/docs/dbt-ai/wizard-migrate`
 - `dbt-core/docs/dbt-ai/wizard-platform-mcp`
 - `dbt-core/docs/dbt-ai/wizard-platform-skills`
 - `dbt-core/docs/dbt-ai/wizard-platform-subagents`

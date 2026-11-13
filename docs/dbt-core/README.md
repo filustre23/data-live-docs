@@ -188,13 +188,13 @@ Mirrored from <https://docs.getdbt.com/docs/>. Do not edit by hand — regenerat
 - docs/dbt-ai/wizard-cli-reference
 - docs/dbt-ai/wizard-config
 - docs/dbt-ai/wizard-desktop
+- docs/dbt-ai/wizard-desktop-byok
 - docs/dbt-ai/wizard-desktop-settings
 - docs/dbt-ai/wizard-desktop-use
 - docs/dbt-ai/wizard-headless
 - docs/dbt-ai/wizard-how-it-works
 - docs/dbt-ai/wizard-ide
 - docs/dbt-ai/wizard-mcp
-- docs/dbt-ai/wizard-migrate
 - docs/dbt-ai/wizard-platform-mcp
 - docs/dbt-ai/wizard-platform-skills
 - docs/dbt-ai/wizard-platform-subagents
