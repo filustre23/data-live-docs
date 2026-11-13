@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-11-13T04:31+00:00_
+_Generated 2026-11-13T19:44+00:00_
 
-**9 sources, 4839 topics total**
+**9 sources, 4841 topics total**
 
 ## airflow
 
@@ -2652,7 +2652,7 @@ _202 topics_
 
 Upstream: <https://docs.getdbt.com/docs/>
 
-_1174 topics_
+_1175 topics_
 
 - `dbt-core/best-practices/best-practice-workflows`
 - `dbt-core/best-practices/clone-incremental-models`
@@ -2980,6 +2980,7 @@ _1174 topics_
 - `dbt-core/docs/lake-compute/compute-faq`
 - `dbt-core/docs/lake-compute/compute-onboarding`
 - `dbt-core/docs/lake-compute/lake-compute`
+- `dbt-core/docs/lake-compute/lake-compute-migration`
 - `dbt-core/docs/local/about-local`
 - `dbt-core/docs/local/configure-environment-variables`
 - `dbt-core/docs/local/connect-data-platform/about-dbt-connections`
@@ -3998,7 +3999,7 @@ _158 topics_
 
 Upstream: <https://learn.hex.tech/>
 
-_400 topics_
+_401 topics_
 
 - `hex/changelog`
 - `hex/changelog/2020-12-17`
@@ -4290,6 +4291,7 @@ _400 topics_
 - `hex/docs/getting-started/connect-your-data`
 - `hex/docs/getting-started/create-your-first-project`
 - `hex/docs/getting-started/develop-your-notebook`
+- `hex/docs/getting-started/get-help-from-hex-support`
 - `hex/docs/getting-started/share-your-work`
 - `hex/docs/hex-4-0`
 - `hex/docs/hex-4-0/beta-roadmap`

@@ -134,7 +134,7 @@ Because Codex bundles their plugins as static snapshots of MCP tools, the best w
 
 ## Limitations[​](#limitations "Direct link to Limitations")
 
-While 4.0 is in beta, some features from classic projects aren't available yet (although we're working on supporting them as quickly as we can!). To see what's in progress, on deck, and shipped, check out the [beta roadmap](https://learn.hex.tech/docs/hex-4-0/beta-roadmap).
+While 4.0 is in beta, some features from classic projects aren't available yet (although we're working on supporting them as quickly as we can!). The [beta roadmap](https://learn.hex.tech/docs/hex-4-0/beta-roadmap) is a preview of that parity work, not the full product roadmap.
 
 info
 

@@ -23,3 +23,7 @@ Learn how to share and collaborate on data notebooks and data apps, dashboards a
 [## 📄️AI in Hex
 
 A one-page overview of Hex's AI features, how they work, and links to security and privacy.](/docs/getting-started/ai-overview)
+
+[## 📄️Get help from Hex Support
+
+How to reach Hex Support, what response times to expect, and how to get a faster answer.](/docs/getting-started/get-help-from-hex-support)

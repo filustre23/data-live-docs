@@ -1,6 +1,10 @@
 # Beta roadmap
 
-[Hex 4.0](/docs/hex-4-0/what-is-hex-4-0) is in beta, and some Hex features you may be familiar with aren't available yet. Here's what we're working on, what's next, and what's recently landed.
+info
+
+This list is a preview of parity features we're bringing from classic projects into 4.0. It's not Hex's full product roadmap.
+
+[Hex 4.0](/docs/hex-4-0/what-is-hex-4-0) is in beta, and some Hex features you may be familiar with aren't available yet. Here's what's in progress, up next, and recently landed for that parity work.
 
 You can also open this list in Hex from the **Help** menu in any 4.0 project. *Last updated November 10, 2026.*
 

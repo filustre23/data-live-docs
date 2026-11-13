@@ -306,7 +306,8 @@ Copy
       * "publicWeb": {
         + "access": "NONE"},
       * "support": {
-        + "access": "NONE"}}}],
+        + "access": "NONE"}},
+    - "folderEntryId": "string"}],
 * "pagination": {
   + "after": "string",
   + "before": "string"}
@@ -466,7 +467,8 @@ Copy
   + "publicWeb": {
     - "access": "NONE"},
   + "support": {
-    - "access": "NONE"}}
+    - "access": "NONE"}},
+* "folderEntryId": "string"
 
 }`
 
@@ -706,7 +708,8 @@ Copy
     - "publicWeb": {
       * "access": "NONE"},
     - "support": {
-      * "access": "NONE"}}},
+      * "access": "NONE"}},
+  + "folderEntryId": "string"},
 * "errors": [
   + {
     - "collectionIds": [
@@ -2542,7 +2545,3 @@ Copy
 ### Responses
 
 **200**
-
-**400**
-
-**403**

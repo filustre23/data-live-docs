@@ -6,4 +6,4 @@
 
 [## 📄️Beta roadmap
 
-What we're working on, what's next, and what's recently landed in the Hex 4.0 beta.](/docs/hex-4-0/beta-roadmap)
+A preview of classic Hex features we're bringing to 4.0. This is not the full product roadmap.](/docs/hex-4-0/beta-roadmap)
