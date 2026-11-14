@@ -4,7 +4,7 @@ On this page
 
 info
 
-* Semantic authoring is in **public beta** and available for [Team and Enterprise plans](https://hex.tech/pricing/).
+* Semantic authoring is available on [Team and Enterprise plans](https://hex.tech/pricing/).
 * You need the **Admin** or **Manager** workspace role to create and edit semantic projects.
 
 Semantic authoring lets you create and manage semantic resources directly in Hex — no third-party tool required. Semantic projects define a set of semantic models containing measures, dimensions, and relationships to provide a consistent, governed source of truth for self-serve analytics and AI across your workspace.

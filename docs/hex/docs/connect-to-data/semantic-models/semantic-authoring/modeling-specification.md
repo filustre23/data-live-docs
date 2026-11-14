@@ -4,11 +4,6 @@ On this page
 
 Reference documentation for writing semantic resources in Hex.
 
-info
-
-Authoring semantic models within Hex is in **beta**.  
-Minor changes may be made to the following formats during the beta period.
-
 ## Resources[​](#resources "Direct link to Resources")
 
 Each YAML document represents a single semantic resource.

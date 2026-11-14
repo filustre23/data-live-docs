@@ -16,7 +16,7 @@ Evals let you programmatically run [threads](/docs/explore-data/threads) with th
 * Test changes to guides and semantic models before you publish them
 * Catch regressions in agent behavior
 * Measure consistency, run time, and credit usage
-* Compare performance across context or model configurations
+* Compare performance across context, model, or Governed mode configurations
 
 Because eval suites are defined in YAML files, you can keep them in version control alongside your context files and include them in your development workflows.
 
@@ -332,6 +332,14 @@ id: march-mau-checks
 
 
 
+threadOptions:
+
+
+
+governedMode: true
+
+
+
 cases:
 
 
@@ -373,14 +381,6 @@ projectIds:
 
 
 - "prj_123"
-
-
-
-threadOptions:
-
-
-
-endorsedMode: true
 
 
 
@@ -499,6 +499,7 @@ timeoutSeconds: 30      # optional, max 120
 | `cases` | Yes | array | The suite's cases. At least one is required. |
 | `id` | No | string | Stable identifier used to group runs of the same suite. Derived from `name` when omitted. |
 | `modelSelection` | No | object | Pins the agent `model` and `effortLevel` for the suite. |
+| `threadOptions` | No | object | Default thread settings for cases that omit `threadOptions`. See [Test Governed mode settings](#test-governed-mode-settings). |
 | `caseRunSelection` | No | object | Runs only certain cases or excludes them. Set either `only` or `except` to a non-empty array of case IDs, not both. |
 
 Eval suite limits:
@@ -525,7 +526,7 @@ Use `hex eval suite ids --search <string>` to find existing suite IDs in your wo
 | `attempts` | Yes | number | How many times to run the case, 1-5. No default. See [Multiple attempts](#multiple-attempts). |
 | `rubrics` | Yes | array | One or more rubrics to grade the case. See [Rubric types](#rubric-types). |
 | `attachments` | No | object | Resources to expose to the agent up front. See [Attach context to a case](#attach-context-to-a-case). |
-| `threadOptions` | No | object | Per-case thread settings, such as `endorsedMode`. |
+| `threadOptions` | No | object | Thread settings for this case. Replaces the suite's `threadOptions` for this case only. See [Test Governed mode settings](#test-governed-mode-settings). |
 
 ### Rubric types[​](#rubric-types "Direct link to Rubric types")
 
@@ -660,7 +661,118 @@ You must have access to whatever you reference, or the run errors with UNAUTHORI
 | `semanticViewIds` | string[] | Semantic views |
 | `projectIds` | string[] | Hex projects |
 
-To restrict the agent to endorsed resources for a case, set `threadOptions: { endorsedMode: true }`.
+To choose which data sources the agent should use, configure [Governed mode](#test-governed-mode-settings).
+
+## Test Governed mode settings[​](#test-governed-mode-settings "Direct link to Test Governed mode settings")
+
+To use your workspace's current [Governed mode](/docs/agent-management/governed-mode) configuration, set `threadOptions: { governedMode: true }`. Changes to workspace settings during a run can affect its results.
+
+### Test a potential Governed mode configuration[​](#test-a-potential-governed-mode-configuration "Direct link to Test a potential Governed mode configuration")
+
+Use `governedModeAccess` to test a potential Governed mode configuration without changing workspace settings. You can also ask your coding agent to write this configuration using the access types below.
+
+info
+
+Only Admins can run cases with a `governedModeAccess` configuration.
+
+In **Settings > Governed mode**, select **Test with evals**. The dialog shows **Current workspace settings**, or **Your unsaved changes** if you have adjusted your selections. Copy the YAML snippet, which includes the UUIDs of any selected statuses.
+
+You do not need to save changes to test them with evals. Saving applies the settings immediately to new agent responses for everyone using Governed mode in your workspace.
+
+Place `threadOptions` above `cases` in your YAML file to set a suite-level default. For example, this configuration uses semantic models only:
+
+```
+threadOptions:
+
+
+
+governedModeAccess:
+
+
+
+WAREHOUSE_DATA:
+
+
+
+type: NONE
+
+
+
+SEMANTIC_MODEL:
+
+
+
+type: ALL
+
+
+
+PROJECT:
+
+
+
+type: NONE
+```
+
+All three asset types are required. Each accepts one of these access types:
+
+| Type | Sources included |
+| --- | --- |
+| `ALL` | All sources of that type. |
+| `ENDORSED` | Sources with an endorsed status. |
+| `STATUSES` | Sources with one of the statuses listed in `statusIds`. |
+| `NONE` | No sources of that type. |
+
+For `STATUSES`, include a non-empty `statusIds` list of workspace status UUIDs.
+
+Providing `governedModeAccess` enables Governed mode, so `governedMode: true` is optional. Combining it with `governedMode: false` is rejected.
+
+You can also place `threadOptions` inside a case to override the suite's settings for that case only. The case's options replace the suite's options without merging fields.
+
+For example, this case runs without Governed mode. Cases that omit `threadOptions` still use the suite-level default:
+
+```
+cases:
+
+
+
+- id: mau-without-governed-mode
+
+
+
+prompt: "How many monthly active users did we have in March 2024?"
+
+
+
+attempts: 1
+
+
+
+threadOptions:
+
+
+
+governedMode: false
+
+
+
+rubrics:
+
+
+
+- id: states-the-number
+
+
+
+type: judge_final_answer
+
+
+
+criterion: "Does the answer give a monthly active user count?"
+```
+
+The configuration is saved with the run and used for every attempt, even if workspace settings change. It does not freeze data, permissions, endorsements, or status assignments.
+
+The deprecated `endorsedMode` option remains supported as an alias for `governedMode`. If both are set, `governedMode` takes precedence.
 
 ## Compare models[​](#compare-models "Direct link to Compare models")
 
@@ -762,6 +874,8 @@ You can also configure scheduled evals via the CLI using the following commands:
   + [Rubric types](#rubric-types)
   + [Measures](#measures)
   + [Attach context to a case](#attach-context-to-a-case)
+* [Test Governed mode settings](#test-governed-mode-settings)
+  + [Test a potential Governed mode configuration](#test-a-potential-governed-mode-configuration)
 * [Compare models](#compare-models)
 * [Publishing your eval suites](#publishing-your-eval-suites)
   + [Setting up a schedule](#setting-up-a-schedule)
