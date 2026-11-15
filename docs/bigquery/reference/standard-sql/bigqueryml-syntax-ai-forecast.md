@@ -437,5 +437,4 @@ number of bike trips for each different user type for the next 30 days:
 ```
 WITH
   citibike_trips AS (
-    SELECT EXTRACT(
 ```

@@ -125,4 +125,3 @@ The request for `ConnectionService.CreateConnection`.
 
 | Fields | |
 | --- | --- |
-| `parent` |

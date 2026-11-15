@@ -532,7 +532,4 @@ FROM
 **Note:** Changing the order of columns in the `SELECT` statement can affect the
 centroids in the final model.
 
-### Train a k-means model with random cluster initialization method.
-
-This example creates a k-means model with three clusters using the random
-cluster initialization method.
+### Train a k-means model with random cluster initializa

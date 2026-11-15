@@ -519,7 +519,3 @@ you might not want.
 
 To balance every class, set this option to `TRUE`. Balance is
 accomplished using the following formula:
-
-```
-total_input_rows /
-```

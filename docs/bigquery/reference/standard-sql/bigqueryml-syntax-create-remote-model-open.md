@@ -574,5 +574,4 @@ Model Garden are supported:
 * [MiniMax-M2.5](https://console.cloud.google.com/vertex-ai/publishers/minimaxai/model-garden/minimax-m2)
 * [Mistral Self-host (7B & Nemo)](https://console.cloud.google.com/vertex-ai/publishers/mistral-ai/model-garden/mistral)
 * [Mixtral](https://console.cloud.google.com/vertex-ai/publishers/mistral-ai/model-garden/mixtral)
-* [Falcon-instruct (PEFT)](https://console.cloud.google.com/vertex-ai/publishers/tiiuae/model-garden/falcon-instruct-7b-peft)
-* [Phi-4](https://console.cloud.google.com/vertex-ai/publishers/microsoft/model-garden/phi4)
+* [Falcon-instru](https://console.cloud.google.com/vertex-ai/publishers/tiiuae/model-garden/falcon-instruct-7b-peft)

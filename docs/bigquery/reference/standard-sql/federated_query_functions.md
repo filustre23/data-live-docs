@@ -361,5 +361,4 @@ types.
 | Time | Default format HH24:MI:SS. | TIME |
 | Timestamp | Default format YYYY-MM-DD HH24:MI:SS. | TIMESTAMP |
 | **Character and strings** |  |  |
-| LargeString | Variable length string of up to 2GB. | STRING |
-| String (n) | Variable-length Unicode string of up to 5000 ch |
+| LargeString | Variab |

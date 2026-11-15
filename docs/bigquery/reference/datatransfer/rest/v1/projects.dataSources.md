@@ -127,5 +127,4 @@ Represents how the data source supports data auto refresh.
 | Methods | |
 | --- | --- |
 | `checkValidCreds` | Returns true if valid credentials exist for the given data source and requesting user. |
-| `get` | Retrieves a supported data source and returns its settings. |
-|  |
+| `get` | Retriev |

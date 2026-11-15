@@ -327,5 +327,5 @@ ISO weeks begin on Monday.
 ```
 SELECT
   DATE_DIFF('2017-12-18', '2017-12-17', WEEK) AS week_diff,
-  DATE_DIFF('2017-12-18', '2017-12-17', WEEK
+  DATE_DIFF('2017-12-18',
 ```

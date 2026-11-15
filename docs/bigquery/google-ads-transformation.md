@@ -36,8 +36,8 @@ strategies, and budget management.
 
 #### Account performance report
 
-Google Ads API resource (v25.0.0):
-:   [Customer](https://developers.google.com/google-ads/api/fields/v25/customer)
+Google Ads API resource (v26.0.0):
+:   [Customer](https://developers.google.com/google-ads/api/fields/v26/customer)
 
 Google Ads tables:
 :   p\_ads\_Customer\_customer\_id  
@@ -71,8 +71,8 @@ BigQuery AdWords tables (deprecated):
 
 #### Bid goal performance report
 
-Google Ads API resource (v25.0.0):
-:   [Bidding Strategy](https://developers.google.com/google-ads/api/fields/v25/bidding_strategy)
+Google Ads API resource (v26.0.0):
+:   [Bidding Strategy](https://developers.google.com/google-ads/api/fields/v26/bidding_strategy)
 
 Google Ads tables:
 :   p\_ads\_BidGoal\_customer\_id  
@@ -97,8 +97,8 @@ BigQuery AdWords tables (deprecated):
 
 #### Budget performance report
 
-Google Ads API resource (v25.0.0):
-:   [Campaign Budget](https://developers.google.com/google-ads/api/fields/v25/campaign_budget)
+Google Ads API resource (v26.0.0):
+:   [Campaign Budget](https://developers.google.com/google-ads/api/fields/v26/campaign_budget)
 
 Google Ads tables:
 :   p\_ads\_Budget\_customer\_id  
@@ -122,8 +122,8 @@ location-based targeting.
 
 #### Campaign location target report
 
-Google Ads API resource (v25.0.0):
-:   [Location View](https://developers.google.com/google-ads/api/fields/v25/location_view)
+Google Ads API resource (v26.0.0):
+:   [Location View](https://developers.google.com/google-ads/api/fields/v26/location_view)
 
 Google Ads tables:
 :   p\_ads\_CampaignLocationTargetStats\_customer\_id  
@@ -142,8 +142,8 @@ BigQuery AdWords tables (deprecated):
 
 #### Campaign performance report
 
-Google Ads API resource (v25.0.0):
-:   [Campaign](https://developers.google.com/google-ads/api/fields/v25/campaign)
+Google Ads API resource (v26.0.0):
+:   [Campaign](https://developers.google.com/google-ads/api/fields/v26/campaign)
 
 Google Ads tables:
 :   p\_ads\_Campaign\_customer\_id  
@@ -187,8 +187,8 @@ The following reports focus on metrics at the ad group level.
 
 #### Ad group performance report
 
-Google Ads API resource (v25.0.0):
-:   [Ad Group](https://developers.google.com/google-ads/api/fields/v25/ad_group)
+Google Ads API resource (v26.0.0):
+:   [Ad Group](https://developers.google.com/google-ads/api/fields/v26/ad_group)
 
 Google Ads tables:
 :   p\_ads\_AdGroupStats\_customer\_id  
@@ -229,8 +229,8 @@ The following reports are for individual ad performance.
 
 #### Ad performance report
 
-Google Ads API resource (v25.0.0):
-:   [Ad Group Ad](https://developers.google.com/google-ads/api/fields/v25/ad_group_ad)
+Google Ads API resource (v26.0.0):
+:   [Ad Group Ad](https://developers.google.com/google-ads/api/fields/v26/ad_group_ad)
 
 Google Ads tables:
 :   p\_ads\_AdBasicStats\_customer\_id  
@@ -266,8 +266,8 @@ characteristics.
 
 #### Age range performance report
 
-Google Ads API resource (v25.0.0):
-:   [Age Range View](https://developers.google.com/google-ads/api/fields/v25/age_range_view)
+Google Ads API resource (v26.0.0):
+:   [Age Range View](https://developers.google.com/google-ads/api/fields/v26/age_range_view)
 
 Google Ads tables:
 :   p\_ads\_AgeRange\_customer\_id  
@@ -295,8 +295,8 @@ BigQuery AdWords tables (deprecated):
 
 #### Gender performance report
 
-Google Ads API resource (v25.0.0):
-:   [Gender View](https://developers.google.com/google-ads/api/fields/v25/gender_view)
+Google Ads API resource (v26.0.0):
+:   [Gender View](https://developers.google.com/google-ads/api/fields/v26/gender_view)
 
 Google Ads tables:
 :   p\_ads\_Gender\_customer\_id  
@@ -324,8 +324,8 @@ BigQuery AdWords tables (deprecated):
 
 #### Parental status performance report
 
-Google Ads API resource (v25.0.0):
-:   [Parental Status View](https://developers.google.com/google-ads/api/fields/v25/parental_status_view)
+Google Ads API resource (v26.0.0):
+:   [Parental Status View](https://developers.google.com/google-ads/api/fields/v26/parental_status_view)
 
 Google Ads tables:
 :   p\_ads\_ParentalStatus\_customer\_id  
@@ -358,8 +358,8 @@ paid and organic query data.
 
 #### Keywords performance report
 
-Google Ads API resource (v25.0.0):
-:   [Keyword View](https://developers.google.com/google-ads/api/fields/v25/keyword_view)
+Google Ads API resource (v26.0.0):
+:   [Keyword View](https://developers.google.com/google-ads/api/fields/v26/keyword_view)
 
 Google Ads tables:
 :   p\_ads\_Keyword\_customer\_id  
@@ -390,8 +390,8 @@ BigQuery AdWords tables (deprecated):
 
 #### Paid organic query report
 
-Google Ads API resource (v25.0.0):
-:   [Paid Organic Search Term View](https://developers.google.com/google-ads/api/fields/v25/paid_organic_search_term_view)
+Google Ads API resource (v26.0.0):
+:   [Paid Organic Search Term View](https://developers.google.com/google-ads/api/fields/v26/paid_organic_search_term_view)
 
 Google Ads table:
 :   p\_ads\_PaidOrganicStats\_customer\_id
@@ -407,8 +407,8 @@ BigQuery AdWords table (deprecated):
 
 #### Search query performance report
 
-Google Ads API resource (v25.0.0):
-:   [Search Term View](https://developers.google.com/google-ads/api/fields/v25/search_term_view)
+Google Ads API resource (v26.0.0):
+:   [Search Term View](https://developers.google.com/google-ads/api/fields/v26/search_term_view)
 
 Google Ads tables:
 :   p\_ads\_SearchQueryStats\_customer\_id  
@@ -432,9 +432,9 @@ placements.
 
 #### Audience performance report
 
-Google Ads API resources (v25.0.0):
-:   [Ad Group Audience View](https://developers.google.com/google-ads/api/fields/v25/ad_group_audience_view)  
-    [Campaign Audience View](https://developers.google.com/google-ads/api/fields/v25/campaign_audience_view)
+Google Ads API resources (v26.0.0):
+:   [Ad Group Audience View](https://developers.google.com/google-ads/api/fields/v26/ad_group_audience_view)  
+    [Campaign Audience View](https://developers.google.com/google-ads/api/fields/v26/campaign_audience_view)
 
 Google Ads tables:
 :   `NULL`
@@ -458,7 +458,7 @@ BigQuery AdWords tables (deprecated):
 
 #### Criteria performance report
 
-Google Ads API resource (v25.0.0):
+Google Ads API resource (v26.0.0):
 :   None
 
 Google Ads tables:
@@ -483,8 +483,8 @@ BigQuery AdWords tables (deprecated):
 
 #### Placement performance report
 
-Google Ads API resource (v25.0.0):
-:   [Managed Placement View](https://developers.google.com/google-ads/api/fields/v25/managed_placement_view)
+Google Ads API resource (v26.0.0):
+:   [Managed Placement View](https://developers.google.com/google-ads/api/fields/v26/managed_placement_view)
 
 Google Ads tables:
 :   p\_ads\_PlacementBasicStats\_customer\_id  
@@ -516,8 +516,8 @@ The following reports focus on specialized campaign channels.
 
 #### Shopping performance report
 
-Google Ads API resource (v25.0.0):
-:   [Shopping Performance View](https://developers.google.com/google-ads/api/fields/v25/shopping_performance_view)
+Google Ads API resource (v26.0.0):
+:   [Shopping Performance View](https://developers.google.com/google-ads/api/fields/v26/shopping_performance_view)
 
 Google Ads tables:
 :   p\_ads\_ShoppingProductConversionStats\_customer\_id  
@@ -536,8 +536,8 @@ BigQuery AdWords tables (deprecated):
 
 #### Video performance report
 
-Google Ads API resource (v25.0.0):
-:   [Video](https://developers.google.com/google-ads/api/fields/v25/video)
+Google Ads API resource (v26.0.0):
+:   [Video](https://developers.google.com/google-ads/api/fields/v26/video)
 
 Google Ads tables:
 :   p\_ads\_VideoBasicStats\_customer\_id  
@@ -570,16 +570,11 @@ click-level data.
 
 #### Click performance report
 
-Google Ads API resource (v25.0.0):
-:   [Click View](https://developers.google.com/google-ads/api/fields/v25/click_view)
+Google Ads API resource (v26.0.0):
+:   [Click View](https://developers.google.com/google-ads/api/fields/v26/click_view)
 
 Google Ads table:
 :   p\_ads\_ClickStats\_customer\_id
 
 BigQuery view:
-:   ClickStats\_customer\_id
-
-AdWords report (deprecated):
-:   [Click Performance Report](https://developers.google.com/adwords/api/docs/appendix/reports/click-performance-report)
-
-B
+:   ClickStats\_cust

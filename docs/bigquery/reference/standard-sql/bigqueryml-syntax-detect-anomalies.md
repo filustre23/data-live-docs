@@ -379,5 +379,4 @@ this query returns results similar to the following:
 
 ### Autoencoder model
 
-The following example detects anomalies using an autoencoder model and a
-`contamination` value of `0.1`.
+The following example detects anomalies using an autoencoder model

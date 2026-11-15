@@ -246,6 +246,4 @@ tag commonly require 16 bytes, but may vary in size.
 
 `additional_data` is a `STRING` or `BYTES` value that binds the ciphertext to
 its context. This forces the ciphertext to be decrypted in the same context in
-which it was encrypted. This function casts any `STRING` value to `BYTES`. This
-must be the same as the `additional_data` provided to `DETERMINISTIC_ENCRYPT` to
-encrypt
+which it was encrypted. This function casts any `STRING` value to

@@ -239,7 +239,4 @@ If there is exactly one input pair without `NULL` values, this function returns
 
 `NaN` is produced if:
 
-* Any input value is `NaN`
-* Any input value is positive infinity or negative infinity.
-
-To learn more about the optional aggregate c
+* Any input value is

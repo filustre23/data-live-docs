@@ -1028,6 +1028,5 @@ func createTableAndWidenQuery(projectID, datasetID, tableID string) error {
 	if err := tableRef.Create(ctx, original); err != nil {
 		return err
 	}
-	// Our table has two columns.  We'll introduce a new favorite_color column via
-	// a subsequent query that appends to the table.
+	<
 ```

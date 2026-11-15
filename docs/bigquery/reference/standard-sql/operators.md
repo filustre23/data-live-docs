@@ -290,6 +290,4 @@ Gets the value of a field at a selected position in a struct.
     result as `index` by itself.
   + `ORDINAL(index)`: The index starts at one. Produces an error if the index
     is out of range.
-* `index`: An integer literal or constant that represents a specific position in
-  the struct. If used by itself without a position keyword, the index starts at
-  zero and produces an error if the index is out of range.
+* `index`:

@@ -359,8 +359,4 @@ Using `OBJ.LIST` replaces the need to manually construct `ObjectRef` values.
 You can quickly add Cloud Storage objects into AI functions to build ETL
 pipelines that handle converting unstructured data to structured data. If you
 require a persistent, self-updating table that continuously tracks new objects
-that arrive in a bucket over time, you should create a standard
-[BigQuery object table](/bigquery/docs/object-table-introduction)
-instead.
-
-For more information, see [Work with](/bigquery/docs/work-with-objectref)
+that

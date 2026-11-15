@@ -258,8 +258,3 @@ of the range (-1, 1).
 ```
 CBRT(X)
 ```
-
-**Description**
-
-Computes the cube root of `X`. `X` can be any data type
-that

@@ -975,9 +975,5 @@ WHERE date(creation_time)= CURRENT_DATE()
 如要診斷擷取工作的問題，您可以使用 [Logs Explorer](https://docs.cloud.google.com/logging/docs/view/logs-explorer-interface?hl=zh-tw) 查看特定擷取工作的記錄，並找出可能發生的錯誤。下列 Logs Explorer 篩選器會傳回擷取工作的相關資訊：
 
 ```
-resource.type="bigquery_resource"
-protoPayload.methodName="jobservice.insert"
-(protoPayload.serviceData.jobInsertRequest.resource.jobConfiguration.query.query=~"EXPORT" OR
-protoPayload.serviceData.jobCompletedEvent.eventName="extract_job_completed" OR
-protoPay
+resource.type="bigquery_reso
 ```

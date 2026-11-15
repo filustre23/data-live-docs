@@ -14,23 +14,21 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 你可以依據偏好儲存及分類內容。
 
-# 使用 BigQuery API 進行分頁
+# 搭配使用分頁功能和 BigQuery API
 
-本文說明如何使用 BigQuery API 搭配分頁功能，讀取大型資料集中的資料表資料和查詢結果。
+您可以搭配使用分頁功能和 BigQuery API，有效率地讀取大型資料集的資料表資料和查詢結果。將大型資料集拆分為較小的可管理頁面，有助於最佳化網路用量、將資料放入記憶體，以及手動控制結果流程。對大多數使用者來說，Cloud 用戶端程式庫會自動處理這項程序，但您也可以手動控制特定用途的分頁，例如網頁應用程式。
 
-BigQuery 會使用*分頁*功能，將大型資料集分成較小的區塊，稱為「頁面」。對大多數使用者而言，Cloud 用戶端程式庫會自動處理這項程序，但您也可以手動控制分頁，適用於網頁應用程式等特定用途。
+## 使用自動分頁
 
-## 使用自動分頁功能
+Cloud 用戶端程式庫會處理 API 分頁的低階詳細資料，並提供類似疊代器的體驗。當您疊代結果時，程式庫會在需要時自動擷取下一頁資料。
 
-Cloud 用戶端程式庫會處理 API 分頁的低階詳細資料，並提供類似迭代器的體驗。當您逐一查看結果時，程式庫會在需要時自動擷取下一頁資料。
-
-下列範例示範如何自動逐一查看 BigQuery 資料表資料。
+下列範例示範如何自動疊代 BigQuery 資料表資料。
 
 ### C#
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 C# 設定說明操作。詳情請參閱 [BigQuery C# API 參考說明文件](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 C# 設定操作說明進行操作。詳情請參閱 [BigQuery C# API 參考文件](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 using Google.Api.Gax;
@@ -68,9 +66,9 @@ public class BigQueryBrowseTable
 
 ### Go
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Go 設定說明操作。詳情請參閱 [BigQuery Go API 參考說明文件](https://godoc.org/cloud.google.com/go/bigquery)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Go 設定操作說明進行操作。詳情請參閱 [BigQuery Go API 參考文件](https://godoc.org/cloud.google.com/go/bigquery)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 import (
@@ -114,9 +112,9 @@ func browseTable(w io.Writer, projectID, datasetID, tableID string) error {
 
 ### Java
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定說明操作。詳情請參閱 [BigQuery Java API 參考說明文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定操作說明進行操作。詳情請參閱 [BigQuery Java API 參考文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 import com.google.cloud.bigquery.BigQuery;
@@ -167,9 +165,9 @@ public class BrowseTable {
 
 ### Node.js
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定操作說明進行操作。詳情請參閱 [BigQuery Node.js API 參考文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 // Import the Google Cloud client library using default credentials
@@ -238,9 +236,9 @@ browseTable();
 
 ### PHP
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 PHP 設定說明操作。詳情請參閱 [BigQuery PHP API 參考說明文件](https://docs.cloud.google.com/php/docs/reference/cloud-bigquery/latest/BigQueryClient?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 PHP 設定操作說明進行操作。詳情請參閱 [BigQuery PHP API 參考文件](https://docs.cloud.google.com/php/docs/reference/cloud-bigquery/latest/BigQueryClient?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 use Google\Cloud\BigQuery\BigQueryClient;
@@ -275,9 +273,9 @@ foreach ($table->rows($options) as $row) {
 
 ### Python
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定操作說明進行操作。詳情請參閱 [BigQuery Python API 參考文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 from google.cloud import bigquery
@@ -317,11 +315,11 @@ for row in rows:
     print(format_string.format(*row))  # Prints row data.
 ```
 
-### Ruby
+### 小茹
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Ruby 設定說明操作。詳情請參閱 [BigQuery Ruby API 參考說明文件](https://googleapis.dev/ruby/google-cloud-bigquery/latest/Google/Cloud/Bigquery.html)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Ruby 設定操作說明進行操作。詳情請參閱 [BigQuery Ruby API 參考文件](https://googleapis.dev/ruby/google-cloud-bigquery/latest/Google/Cloud/Bigquery.html)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 require "google/cloud/bigquery"
@@ -344,20 +342,20 @@ end
 
 ## 控制頁面大小
 
-您可以設定網頁大小，指定每個網路要求傳回的資料列數量上限。設定頁面大小有助於最佳化網路用量，或將資料放入記憶體。
+您可以設定頁面大小，指定每個網路要求傳回的資料列數量上限。設定頁面大小有助於最佳化網路用量，或將資料放入記憶體。
 
 在大多數用戶端程式庫中，呼叫 `list_rows` 或 `query` 等方法時，可以使用 `max_results` 或 `page_size` 參數。
 
 ## 使用網頁權杖手動分頁
 
-手動分頁功能適用於*無狀態*應用程式，例如使用者點選「下一步」即可查看下一組結果的網路服務。在這個情境中，伺服器不會在要求之間維護有效的疊代器。
+手動分頁適用於*無狀態*應用程式，例如使用者點選「Next」(下一步) 即可查看下一組結果的網路服務。在這種情況下，伺服器不會在要求之間維護有效的疊代器。
 
-請改用*網頁權杖*，如下所示：
+請改用*頁面權杖*，如下所示：
 
-1. **要求網頁。**呼叫 API 並接收 `pageToken` 參數和資料列。
-2. **繼續。**在下一個要求中，將相同的 `pageToken` 參數傳回 BigQuery，即可擷取下一個資料區塊。
+1. **要求網頁。**呼叫 API，並接收 `pageToken` 參數和資料列。
+2. **繼續。**在下一個要求中，將相同的 `pageToken` 參數傳回 BigQuery，以擷取下一組資料。
 
-下列範例說明如何擷取分頁符記，並用來擷取下一頁的查詢結果。
+下列範例說明如何擷取頁面權杖，並使用該權杖擷取下一頁的查詢結果。
 
 ### API
 
@@ -365,9 +363,9 @@ end
 
 ### Java
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定說明操作。詳情請參閱 [BigQuery Java API 參考說明文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定操作說明進行操作。詳情請參閱 [BigQuery Java API 參考文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 import com.google.cloud.bigquery.BigQuery;
@@ -431,7 +429,7 @@ public class QueryPagination {
 }
 ```
 
-如要設定每頁傳回的資料列數量，請使用 [`GetQueryResults` 工作](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/com.google.cloud.bigquery.Job?hl=zh-tw#com_google_cloud_bigquery_Job_getQueryResults_com_google_cloud_bigquery_BigQuery_QueryResultsOption____)，並設定您傳入的 [`QueryResultsOption` 物件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/com.google.cloud.bigquery.BigQuery.QueryResultsOption?hl=zh-tw)的 [`pageSize` 選項](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/com.google.cloud.bigquery.BigQuery.QueryResultsOption?hl=zh-tw#com_google_cloud_bigquery_BigQuery_QueryResultsOption_pageSize_long_)，如下列範例所示：
+如要設定每頁傳回的資料列數量，請使用 [`GetQueryResults` 工作](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/com.google.cloud.bigquery.Job?hl=zh-tw#com_google_cloud_bigquery_Job_getQueryResults_com_google_cloud_bigquery_BigQuery_QueryResultsOption____)，並設定傳入的 [`QueryResultsOption` 物件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/com.google.cloud.bigquery.BigQuery.QueryResultsOption?hl=zh-tw)的 [`pageSize` 選項](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/com.google.cloud.bigquery.BigQuery.QueryResultsOption?hl=zh-tw#com_google_cloud_bigquery_BigQuery_QueryResultsOption_pageSize_long_)，如以下範例所示：
 
 ```
 TableResult result = job.getQueryResults();
@@ -442,9 +440,9 @@ TableResult result = job.getQueryResults(queryResultsOption);
 
 ### Node.js
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定操作說明進行操作。詳情請參閱 [BigQuery Node.js API 參考文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 // Import the Google Cloud client library using default credentials
@@ -476,15 +474,15 @@ queryPagination();
 
 ### Python
 
-[`QueryJob.result`](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.QueryJob?hl=zh-tw#google_cloud_bigquery_job_QueryJob_result) 方法會傳回查詢結果的可疊代項目。或者
+[`QueryJob.result`](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.QueryJob?hl=zh-tw#google_cloud_bigquery_job_QueryJob_result) 方法會傳回查詢結果的可疊代項目。或者，
 
-1. 請參閱 [`QueryJob.destination`](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.QueryJob?hl=zh-tw#google_cloud_bigquery_job_QueryJob_destination) 屬性。如果未設定這項屬性，API 會將其設為[臨時匿名資料表](https://docs.cloud.google.com/bigquery/docs/writing-results?hl=zh-tw#temporary_and_permanent_tables)的參照。
+1. 讀取 [`QueryJob.destination`](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.QueryJob?hl=zh-tw#google_cloud_bigquery_job_QueryJob_destination) 屬性。如未設定這項屬性，API 會將其設為[臨時匿名資料表](https://docs.cloud.google.com/bigquery/docs/writing-results?hl=zh-tw#temporary_and_permanent_tables)的參照。
 2. 使用 [`Client.get_table`](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.client.Client?hl=zh-tw#google_cloud_bigquery_client_Client_get_table) 方法取得資料表結構定義。
-3. 使用 [`Client.list_rows`](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.client.Client?hl=zh-tw#google_cloud_bigquery_client_Client_list_rows) 方法，在目的地資料表中的所有資料列上建立可疊代物件。
+3. 使用 [`Client.list_rows`](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.client.Client?hl=zh-tw#google_cloud_bigquery_client_Client_list_rows) 方法，在目的地資料表的所有資料列中建立可疊代項目。
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定操作說明進行操作。詳情請參閱 [BigQuery Python API 參考文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 from google.cloud import bigquery
@@ -524,29 +522,29 @@ for row in rows:
 
 ## 使用 ETag 進行最佳化
 
-當您使用快取的 `pageToken` 值往前翻頁或跳到任意頁面時，頁面內的資料就有可能會因為最近瀏覽過而變更，為避免發生這種情況，您可以使用 `etag` 屬性。
+使用快取的 `pageToken` 值向後翻頁或跳轉至任意頁面時，頁面中的資料可能自上次查看後有所變更。如要避免這種情況，可以使用 `etag` 屬性。
 
-每個 `collection.list` 方法 (`Tabledata` 除外) 都會在結果中傳回 `etag` 屬性。這個屬性是頁面結果的雜湊值，可用來驗證網頁在上次要求過後是否有變更。當您使用 ETag 值對 BigQuery 提出要求時，BigQuery 會將這個 ETag 值和 API 傳回的 ETag 值進行比較，並依這兩個 ETag 值是否相符來進行回應。您可以透過下列方式使用 ETag，避免進行多餘的清單呼叫：
+每個 `collection.list` 方法 (`Tabledata` 除外) 都會在結果中傳回 `etag` 屬性。這個屬性是頁面結果的雜湊，可用於確認頁面自上一次要求以來是否變更。當您使用 ETag 值向 BigQuery 提出要求時，BigQuery 會比較 ETag 值與 API 傳回的 ETag 值，並根據 ETag 值是否相符做出回應。您可以使用 ETag 避免重複呼叫清單，方法如下：
 
-* 如要只在值有變更時傳回值，請使用 [HTTP `If-None-Match` 標頭](https://www.rfc-editor.org/rfc/rfc9110.html#name-if-none-match)，藉由先前儲存的 ETag 進行清單呼叫。如果 ETag 相符，BigQuery 會傳回 `HTTP 304 Not Modified` 狀態碼，且不會傳回任何資料，藉此節省頻寬。
-* 如要只在值**未**變更時傳回值，請使用 [HTTP `If-Match` 標頭](https://www.rfc-editor.org/rfc/rfc9110.html#name-if-match)。如果頁面已變更，BigQuery 會傳回 `412 Precondition Failed`。
+* 如要僅傳回已變更的值，請使用 [HTTP `If-None-Match` 標頭](https://www.rfc-editor.org/rfc/rfc9110.html#name-if-none-match)，透過先前儲存的 ETag 呼叫清單。如果 ETag 相符，BigQuery 會傳回 `HTTP 304 Not Modified` 狀態碼，且不傳回任何資料，藉此節省頻寬。
+* 如要僅在值「未」變更時傳回值，請使用 [HTTP `If-Match` 標頭](https://www.rfc-editor.org/rfc/rfc9110.html#name-if-match)。如果網頁有所變更，BigQuery 會傳回 `412 Precondition Failed`。
 
-**備註：**雖然 ETag 是避免進行多餘清單呼叫的好方法，不過您可以採用同樣方式來確定是否有任何已變更的物件。例如，您可以針對特定資料表執行 `GET` 要求，並使用 ETag 判斷資料表在傳回完整回應前是否變更過。
+**備註：**雖然 ETag 是避免進行多餘清單呼叫的好方法，不過您可以採用同樣方式來確定是否有任何已變更的物件。舉例來說，您可以對特定資料表執行「GET」要求，並使用 ETag 判斷資料表是否已變更，然後再傳回完整回應。
 
 ## 參考資料：API 限制和條件
 
-在某些情況下，所有 `*collection*.list` 方法都會傳回分頁結果。`maxResults` 屬性會限制每頁的結果數。
+在某些情況下，所有 `*collection*.list` 方法都會傳回分頁結果。`maxResults` 屬性會限制每頁的結果數量。
 
-| 方法 | 分頁條件 | 預設 `maxResults` 限制 | 最多只能有 `maxResults` 個捷徑 | 最多只能有 `maxFieldValues` 個捷徑 |
+| 方法 | 分頁條件 | 預設`maxResults`限制 | `maxResults`上限 | `maxFieldValues`上限 |
 | --- | --- | --- | --- | --- |
-| `tabledata.list` | 如果回應大小超過 10 MB1 的資料或超過 `maxResults` 個資料列，就會傳回分成數頁的結果。 | 無限制 | 無限制 | 無限制 |
-| 所有其他 `*collection*.list` 方法 | 如果回應超過 `maxResults` 個資料列，但未達上限，就會傳回分成數頁的結果。 | 10,000 | 無限制 | 300,000 |
+| `tabledata.list` | 如果回應大小超過 10 MB1 的資料或超過 `maxResults` 列，則會傳回分頁結果。 | 無限制 | 無限制 | 無限制 |
+| 所有其他 `*collection*.list` 方法 | 如果回應超過 `maxResults` 列，且少於上限，則會傳回分頁結果。 | 10,000 | 無限制 | 300,000 |
 
-如果結果大於位元組或欄位限制，系統會將結果修剪至符合限制。如果某個資料列超過位元組或欄位限制，`tabledata.list` 方法最多可傳回 100 MB 的資料1，這與查詢結果的資料列大小上限一致。每頁的大小沒有下限，有些頁面可能會傳回的資料列比其他頁面多。
+如果結果超過位元組或欄位限制，系統會修剪結果以符合限制。如果單一資料列超過位元組或欄位限制，`tabledata.list` 方法最多可傳回 100 MB 的資料1，這與查詢結果的資料列大小上限一致。每頁沒有大小下限，部分頁面傳回的資料列可能比其他頁面多。
 
-除非您透過支援服務明確要求更多資料，否則 `jobs.getQueryResults` REST API 方法最多只會傳回 20 MB 的資料。
+`jobs.getQueryResults` REST API 方法可傳回 20 MB 的資料，除非您透過支援服務明確要求更多資料。
 
-1資料列大小為約略值，因為此大小是根據資料列資料的內部呈現方式而定。系統會在查詢工作執行作業的某些階段對資料列大小設定上限。
+1資料列大小是根據資料列資料的內部表示法計算，因此只是約略值。系統會在查詢工作執行作業的某些階段對資料列大小設定上限。
 
 
 
@@ -555,11 +553,11 @@ for row in rows:
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-11 (世界標準時間)。
+上次更新時間：2026-11-13 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-11 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-13 (世界標準時間)。"],[],[]]

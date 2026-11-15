@@ -298,5 +298,4 @@ aggregation across privacy unit columns.
 You can't use a `PERCENTILE_CONT` (`DIFFERENTIAL_PRIVACY`) function with
 [multi-level aggregation](/bigquery/docs/reference/standard-sql/aggregate-function-calls#multi_level_aggregation).
 
-This function must be used with the [`DIFFERENTIAL_PRIVACY` clause](/bigquery/docs/reference/standard-sql/query-syntax#dp_clause)
-and can support these arguments:
+This

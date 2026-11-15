@@ -280,8 +280,4 @@ statement.
 
 ### Spanner export option list
 
-The option list specifies options for the export operation.
-
-| Options | |
-| --- | --- |
-| `format` |  |
+The option list specifies options for the export ope

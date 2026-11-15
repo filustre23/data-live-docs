@@ -142,6 +142,7 @@ AI.GENERATE_BOOL(
   control or know the region where your processing requests are handled.
 
   BigQuery supports the following models:
+  + `gemini-4-hydrogen`
   + `gemini-4-carbon`
   + `gemini-4-argon`
   + `gemini-3.8-flash`
@@ -328,8 +329,4 @@ The result is similar to the following:
 Disabling the thinking budget is useful for tasks that don't require
 complex reasoning. By setting the `thinking_budget` to `0`, you can reduce the
 model's response latency and lower the cost of the request by avoiding
-additional "thinking" tokens. For more information, see
-[Thinking budgets](https://ai.google.dev/gemini-api/docs/thinking#set-budget).
-
-The following query shows how to set the `model_params` argument to set the
-model's thinking budget to `0`
+additional "thinking" tokens. For more information,

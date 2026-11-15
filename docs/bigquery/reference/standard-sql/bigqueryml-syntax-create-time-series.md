@@ -539,7 +539,3 @@ This option accepts the following values:
 * `CO`: Colombia
 * `CZ`: Czechia
 * `DE`: Germany
-* `DK`: Denmark
-* `DZ`: Algeria
-* `EC`: Ecuador
-* `EE`: E

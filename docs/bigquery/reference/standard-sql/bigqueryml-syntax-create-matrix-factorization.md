@@ -546,7 +546,3 @@ label, and is excluded from features automatically.
 **Arguments**
 
 A `STRING` value.
-
-### `NUM_TRIALS`
-
-**Syntax**

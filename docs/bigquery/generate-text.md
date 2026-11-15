@@ -1343,6 +1343,3 @@ STRUCT(
   + `HARM_CATEGORY_SEXUALLY_EXPLICIT`
 
   支援的門檻如下：
-
-  + `BLOCK_NONE`
-    ([受限](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/multimodal/configure-safety-attributes?hl=zh-tw#how_to_remove_automated_response_blocking_for_select_safety_attributes)

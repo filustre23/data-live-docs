@@ -481,6 +481,3 @@ ML.EVALUATE(
     prompt text to use when evaluating the model.
   + The table must have a column named `output_text` that contains the
     generated text that you would expect to be returned by the model.
-* `QUERY_STATEMENT`: a GoogleSQL query that
-  is used to generate the evaluation data. For the supported SQL syntax of
-  the

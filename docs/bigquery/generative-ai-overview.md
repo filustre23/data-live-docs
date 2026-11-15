@@ -141,6 +141,7 @@ AI 函式分為以下類別，可協助您完成這些工作：
 
 BigQuery 支援下列模型：
 
+* `gemini-4-hydrogen`
 * `gemini-4-carbon`
 * `gemini-4-argon`
 * `gemini-3.8-flash`

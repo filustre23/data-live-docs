@@ -310,6 +310,4 @@ within that block and in any nested blocks. It's an error to declare a variable
 with the same name as a variable declared in the same block or an outer block.
 
 There is a maximum nesting level of 50 for blocks and conditional statements
-such as `BEGIN`/`END`, `IF`/`ELSE`/`END IF`, and `WHILE`/`END WHILE`.
-
-`BEGIN`/
+such as `BEGIN`/`END`, `IF`/`ELSE`/<

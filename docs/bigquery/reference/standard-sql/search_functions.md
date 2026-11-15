@@ -342,6 +342,5 @@ SELECT
   -- TRUE: An exact match is found after the delimiter in search_data.
   SEARCH('foobar@example.com', '`example.com`') AS f,
 
-  -- TRUE: An exact match is found between the space delimiters.
-  SEARCH(
+  -- TRUE: An e
 ```

@@ -113,9 +113,3 @@ Oracle 和 BigQuery 比較運算子符合 ANSI SQL:2011 規範。下表中的比
 | `EXISTS` | [如果子查詢傳回至少一列，則符合條件](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators?hl=zh-tw#comparison_operators) |
 
 BigQuery 和 Oracle 的資料表運算子相同。
-
-### 邏輯運算式和函式
-
-| Oracle | BigQuery |
-| --- | --- |
-|  |

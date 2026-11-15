@@ -221,5 +221,5 @@ gcloud resource-manager org-policies allow \
 2. 授予自訂角色必要權限：
 
    ```
-   GRANT USAGE ON WAREHOUSE WAREHOUSE_NAME
+   GRANT USAGE ON <
    ```

@@ -198,6 +198,5 @@ bq mk \
 --target_dataset=DATASET \
 --display_name=NAME \
 --data_source=DATA_SOURCE \
---service_account_name=SERVICE_ACCOUNT_NAME \
---params='{PARAMETERS,"custom_columns":"[{\"id\": \"CC_ID
+--service_account_name=SERVICE_ACCOUNT_NAME
 ```

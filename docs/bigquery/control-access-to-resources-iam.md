@@ -1166,7 +1166,5 @@ func revokeAccessToDataset(w io.Writer, projectID, datasetID, entity string) err
 	var newAccessList []*bigquery.AccessEntry
 	for _, entry := range meta.Access {
 		if entry.Entity != entity {
-			newAccessList = append(newAccessList, entry)
-		}
-	}
+			newAccessList = append(newAccessList,
 ```

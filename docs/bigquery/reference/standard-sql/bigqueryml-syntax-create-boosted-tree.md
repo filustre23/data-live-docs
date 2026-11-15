@@ -514,8 +514,4 @@ If you are running hyperparameter tuning, use one of the following options:
 When running hyperparameter tuning, the valid range is `[0, 1.0]`, there is
 no default range, and the scale type is `LINEAR`.
 
-### `COLSAMPLE_BYNODE`
-
-**Syntax**
-
-`COLSAMPLE_BYNODE = { float64_value | HPARAM_RANGE(range) | HPARAM_CANDIDATES(`
+###

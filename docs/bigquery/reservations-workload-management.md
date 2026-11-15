@@ -278,6 +278,7 @@ BigQuery 的預留項目可讓您進一步控管預留項目的使用方式，�
 
 預留項目群組有下列限制：
 
+* 根據預設，每個位置的管理專案最多可建立 10 個預留項目群組。如要申請提高上限，請[聯絡 Cloud Customer Care](https://docs.cloud.google.com/bigquery/docs/getting-support?hl=zh-tw)。
 * 共用預留項目群組的預留項目必須屬於相同專案和區域。
 * 專案必須啟用[以預留項目為基礎的公平性機制](https://docs.cloud.google.com/bigquery/docs/slots?hl=zh-tw#fairness)。
 * 群組中的預留項目必須使用相同的[版本](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)。
@@ -370,11 +371,11 @@ BigQuery 擁有預留項目，代表 BigQuery 中特定作業的免費共用運�
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-12 (世界標準時間)。
+上次更新時間：2026-11-13 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-12 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-13 (世界標準時間)。"],[],[]]

@@ -137,4 +137,4 @@ Response message for `AppendRows`.
 
 | Fields | |
 | --- | --- |
-| `updated_schema` | `TableSchema`  If backend detects a schema update, pass it to user so that user can use it to input new type of message. It will be empty when no schema updates have occurred. |
+| `updated_schema` | `TableSchema`  If backend detects a schema update, pass it to user so that user can use it to input new type of message. It will be empty when no schema updates have occurr |

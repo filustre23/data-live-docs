@@ -319,6 +319,3 @@ input expressions might still be evaluated. If `expr` evaluates to `NULL` and
 `null_result` produces an evaluation error, the query fails with that error.
 For more information, see
 [Evaluation order and short-circuiting](#short_circuiting).
-
-`expr` and `null_result` can be any type and must be implicitly coercible to
-a common

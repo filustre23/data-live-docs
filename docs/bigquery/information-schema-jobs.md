@@ -114,6 +114,4 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 * `statement_type` = `SCRIPT`
 * `reservation_id` = `NULL`
 
-### 子項工作
-
-多重陳述式查詢工作的每個子工作都有 `parent_job_id`，指向多重陳述式查詢工作本身。包括這項工作執行時，所有子工作
+### 子項工

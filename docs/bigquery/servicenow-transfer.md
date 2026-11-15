@@ -224,7 +224,5 @@ bq mk
   舉例來說，下列指令會在預設專案中建立 ServiceNow 資料移轉作業，並提供所有必要參數：
 
   ```
-    bq mk
-      --transfer_config
-      --target_dataset=mydataset
+    bq
   ```

@@ -178,5 +178,4 @@ public class BigQueryQuery
         BigQueryJob job = client.CreateQueryJob(
             sql: query,
             parameters: null,
-            options: new
 ```

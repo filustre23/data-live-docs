@@ -234,5 +234,4 @@ bq mk
 
 ## 後續步驟
 
-* 閱讀 [BigQuery 資料移轉服務總覽](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)。
-* 瞭解如何[管理移轉作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw)，包括取得移轉設定相關資訊、列出
+* 閱讀 [BigQuery](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)

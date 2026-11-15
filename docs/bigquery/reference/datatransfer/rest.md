@@ -157,5 +157,3 @@ Last updated 2026-10-21 UTC.
 
 
 Need to tell us more?
-
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb

@@ -359,7 +359,4 @@ Only aggregate analytic functions can use a window frame clause.
 **Notes**
 
 If a boundary extends beyond the beginning or end of a partition,
-the window frame will only include rows from within that partition.
-
-You can't use a window frame clause with some
-[navigation functions](/bigquery/docs/reference/standard-sql/navigation_functions) and
+the window fram

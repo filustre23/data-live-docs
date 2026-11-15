@@ -221,7 +221,5 @@ for each day in the HackerNews dataset:
 
 ```
 #GoogleSQL
-WITH TitlesAndScores AS (
-  SELECT
-    ARRAY_AGG
+WITH TitlesAndScores AS
 ```

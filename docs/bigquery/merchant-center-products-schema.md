@@ -135,6 +135,5 @@ FROM
   UNNEST(disapproved_countries) AS disapproved_country
 WHERE
   _PARTITIONDATE >= 'YYYY-MM-DD'
-GROUP BY
-  date,
+GROUP
 ```

@@ -241,7 +241,5 @@ SELECT
 
 -- Display of results may differ, depending upon the environment and time zone
 -- where this query was executed.
-/*---------+---------+------+------+
- | isoyear | isoweek | year | week |
- +---------+---------+------+------+
+/*---------+----
 ```

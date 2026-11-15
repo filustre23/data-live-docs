@@ -427,9 +427,4 @@ ARRAY<INT64>[]
 ```
 
 An array literal represents a constant value of the
-[array data type](/bigquery/docs/reference/standard-sql/data-types#array_type).
-
-### Struct literals
-
-A struct literal is a struct whose fields are all literals. Struct literals can
-be written using a
+[array da](/bigquery/docs/reference/standard-sql/data-types#array_type)

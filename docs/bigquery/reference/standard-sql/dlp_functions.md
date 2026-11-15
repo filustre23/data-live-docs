@@ -192,6 +192,4 @@ DLP_KEY_CHAIN(kms_resource_name, wrapped_key)
 **Description**
 
 You can use this function instead of the `key` argument for
-DLP deterministic encryption functions. This function lets
-you use the [AES-SIV encryption functions](https://cloud.google.com/dlp/docs/pseudonymization#aes-siv)
-without including
+DLP deterministic encryption functions. This functi

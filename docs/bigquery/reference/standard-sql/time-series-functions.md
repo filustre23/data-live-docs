@@ -365,8 +365,4 @@ The `CHANGES` function returns a table with the following columns:
   expiration.
 * Performing
   [data manipulation language (DML) statements over recently streamed data](/bigquery/docs/write-api#use_data_manipulation_language_dml_with_recently_streamed_data)
-  fails on tables that have the `enable_change_history` option set to `TRUE`.
-
-**Example**
-
-This example shows the change history returned by the `CHANGES` function as
+  fails on tables that have the `enable_change_history` option set

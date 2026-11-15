@@ -193,5 +193,4 @@ over_clause:
   { named_window | ( [ window_specification ] ) }
 
 window_specification:
-  [ named_window
 ```

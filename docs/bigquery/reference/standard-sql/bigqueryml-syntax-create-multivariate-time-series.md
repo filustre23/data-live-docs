@@ -537,7 +537,3 @@ This option accepts the following values:
 * `JP`: Japan
 * `KR`: South Korea
 * `LV`: Latvia
-* `MA`: Morocco
-* `MX`: Mexico
-* `MY`: Malaysia
-* `NG`: Nigeria

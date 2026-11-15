@@ -288,7 +288,3 @@ into this function, see
 `ARRAY<STRUCT>`
 
 **Examples**
-
-```
-SELECT
-```

@@ -192,5 +192,4 @@ BigQuery 也會對下列常值執行隱含轉換：
 | **Hive** | **BigQuery** |
 | --- | --- |
 | `AVG` | `AVG` |
-| `COUNT` | `COUNT` |
-| `COVAR_POP` |  |
+| `COUNT` | `COUNT</` |

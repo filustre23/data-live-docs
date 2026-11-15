@@ -233,5 +233,4 @@ SELECT
   dataset_id,
   table_id,
   error_code,
-  SUM(total_rows)
 ```

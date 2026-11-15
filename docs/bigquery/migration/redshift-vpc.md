@@ -238,5 +238,3 @@ BigQuery 的載入配額為每個資料表的每個載入工作 15 TB。Amazon R
 
 
 提供意見
-
-除非另有註明，否則本頁面中的內容是採用[創用 CC](https://creativecommons.org/licenses/by/4.0/)

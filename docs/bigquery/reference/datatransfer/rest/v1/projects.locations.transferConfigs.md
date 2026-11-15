@@ -106,4 +106,3 @@ Options customizing the time based transfer schedule. Options are migrated from 
 
 | Fields | |
 | --- | --- |
-| `schedule` |  |

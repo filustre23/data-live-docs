@@ -26,9 +26,9 @@ Google Ads 連接器的 BigQuery 資料移轉服務支援下列資料移轉選�
 
 | 資料移轉選項 | 支援 |
 | --- | --- |
-| 受支援的報表 | Google Ads 連接器支援從 [Google Ads API v25](https://developers.google.com/google-ads/api/fields/v25/overview?hl=zh-tw) 的報表轉移資料。 如要瞭解 Google Ads 報表如何轉換為 BigQuery 資料表和檢視表，請參閱「[Google Ads 報表轉換](https://docs.cloud.google.com/bigquery/docs/google-ads-transformation?hl=zh-tw)」。 |
+| 受支援的報表 | Google Ads 連接器支援從 [Google Ads API v26](https://developers.google.com/google-ads/api/fields/v26/overview?hl=zh-tw) 的報表轉移資料。 如要瞭解 Google Ads 報表如何轉換為 BigQuery 資料表和檢視表，請參閱「[Google Ads 報表轉換](https://docs.cloud.google.com/bigquery/docs/google-ads-transformation?hl=zh-tw)」。 |
 | 重複頻率 | Google Ads 連接器支援每日資料移轉。    根據預設，資料移轉作業會排定在建立資料移轉作業時執行。您可以在[設定資料移轉作業](#setup-data-transfer)時，設定資料移轉時間。 |
-| 重新整理時間範圍 | 您可以排定資料移轉作業，在執行資料移轉作業時擷取最多 30 天的 Google Ads 廣告資料。您可以在[設定資料移轉](#setup-data-transfer)時，設定重新整理回溯期的時間長度。    根據預設，Google Ads 連接器的重新整理時間範圍為 7 天。    詳情請參閱「[重新整理時間範圍](#refresh)」。 系統每天會擷取一次[比對表格](https://docs.cloud.google.com/bigquery/docs/google-ads-transformation?hl=zh-tw#google_ads_match_tables)的快照，並儲存在上次執行日期的分區中。 比對表快照不會因回填或使用重新整理時間範圍載入的天數而更新。 |
+| 重新整理時間範圍 | 您可以排定資料移轉作業，在執行資料移轉作業時擷取最多 30 天的 Google Ads 廣告資料。[設定資料移轉作業](#setup-data-transfer)時，您可以設定重新整理回溯期的時間長度。    根據預設，Google Ads 連接器的重新整理時間範圍為 7 天。    詳情請參閱「[重新整理時間範圍](#refresh)」。 系統每天會擷取一次[比對表格](https://docs.cloud.google.com/bigquery/docs/google-ads-transformation?hl=zh-tw#google_ads_match_tables)的快照，並儲存在上次執行日期的分區中。 比對表快照不會因回填或使用重新整理回溯期載入的天數而更新。 |
 | 補充資料可用性 | [執行資料補充作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)，擷取排定資料移轉作業以外的資料。只要在資料來源的資料保留政策允許範圍內，即可擷取歷來資料。    如要瞭解 Google Ads 的資料保留政策，請參閱「[Google Ads 資料保留政策](https://support.google.com/google-ads/answer/15188209?hl=zh-tw)」。 |
 | 每個管理員帳戶的客戶 ID 數 | 8,000  BigQuery 資料移轉服務最多支援每個 Google Ads [管理員帳戶](https://support.google.com/adwords/answer/6139186?hl=zh-tw) (MCC) 有 **8,000 個客戶 ID**。 |
 
@@ -40,7 +40,7 @@ Google Ads 連接器的 BigQuery 資料移轉服務支援下列資料移轉選�
 
 ### 重新整理時間範圍
 
-「更新回溯期」是指資料移轉時，資料移轉作業擷取資料的天數。舉例來說，如果更新時間範圍為三天，且每天都會進行移轉，BigQuery 資料移轉服務會從來源資料表擷取過去三天的所有資料。在本例中，每日移轉作業執行時，BigQuery 資料移轉服務會建立新的 BigQuery 目的地資料表分區，並複製當天的來源資料表資料，然後自動觸發補充執行作業，使用過去兩天的來源資料表資料更新 BigQuery 目的地資料表分區。自動觸發的回填執行作業會覆寫或增量更新 BigQuery 目的地資料表，具體取決於 BigQuery 資料移轉服務連接器是否支援增量更新。
+「更新回溯期」是指資料移轉時，資料移轉作業擷取資料的天數。舉例來說，如果重新整理時間範圍為三天，且每天執行移轉作業，BigQuery 資料移轉服務會從來源資料表擷取過去三天的所有資料。在本例中，每日移轉作業執行時，BigQuery 資料移轉服務會建立新的 BigQuery 目的地資料表分區，並複製當天的來源資料表資料，然後自動觸發補充執行作業，使用過去兩天的來源資料表資料更新 BigQuery 目的地資料表分區。自動觸發的回填執行作業會覆寫或增量更新 BigQuery 目的地資料表，具體取決於 BigQuery 資料移轉服務連接器是否支援增量更新。
 
 首次執行資料移轉作業時，系統會擷取重新整理期間內的所有可用來源資料。舉例來說，如果更新時間範圍為三天，且您首次執行資料移轉作業，BigQuery 資料移轉服務會擷取三天內的所有來源資料。
 
@@ -48,8 +48,8 @@ Google Ads 連接器的 BigQuery 資料移轉服務支援下列資料移轉選�
 
 ## 限制
 
-* Google Ads 資料移轉作業的頻率上限為每 24 小時一次。根據預設，移轉作業會在您建立移轉作業時開始。不過，您可以在[建立移轉作業](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer?hl=zh-tw#setup-data-transfer)時，設定移轉作業的開始時間。
-* BigQuery 資料移轉服務不支援在 Google Ads 移轉期間，進行增量資料移轉。指定資料移轉日期後，系統會移轉該日期可用的所有資料。
+* Google Ads 資料移轉作業的設定頻率上限為每 24 小時一次。根據預設，移轉作業會在您建立移轉作業時開始。不過，您可以在[建立移轉作業](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer?hl=zh-tw#setup-data-transfer)時設定移轉作業開始時間。
+* BigQuery 資料移轉服務不支援在 Google Ads 移轉期間進行增量資料移轉。指定資料移轉日期後，系統會移轉該日期可用的所有資料。
 
 ## 事前準備
 
@@ -89,7 +89,7 @@ Google Ads 連接器的 BigQuery 資料移轉服務支援下列資料移轉選�
 
 ### 必要的 Google Ads 角色
 
-您必須為移轉設定中使用的 Google Ads 客戶 ID 或[管理員帳戶](https://support.google.com/google-ads/answer/6139186?hl=zh-tw) (MCC) 授予讀取權限。建立新的移轉設定時，如果使用個別使用者憑證授權，則必須[啟用兩步驟驗證](https://support.google.com/accounts/answer/185839?hl=zh-tw)。
+您必須將讀取權限授予移轉設定中使用的 Google Ads 客戶 ID 或[管理員帳戶](https://support.google.com/google-ads/answer/6139186?hl=zh-tw) (MCC)。建立新的移轉設定時，如果使用個別使用者憑證授權，則必須[啟用兩步驟驗證](https://support.google.com/accounts/answer/185839?hl=zh-tw)。
 
 如要授權服務帳戶進行 Google Ads 資料移轉作業，建議您授予服務帳戶 Google Ads 的直接帳戶存取權。詳情請參閱「[直接存取帳戶的授權](https://developers.google.com/google-ads/api/docs/oauth/service-accounts?hl=zh-tw#direct)」。如果移轉設定是透過服務帳戶授權，則不須符合多重驗證 (MFA) 規定，例如兩步驟驗證。
 
@@ -97,7 +97,7 @@ Google Ads 連接器的 BigQuery 資料移轉服務支援下列資料移轉選�
 
 如要建立 Google Ads 報表的資料移轉作業，您需要 Google Ads 客戶 ID 或管理員帳戶 (我的客戶中心)。如要瞭解如何擷取 Google Ads 客戶 ID，請參閱「[查看客戶 ID](https://support.google.com/google-ads/answer/1704344?hl=zh-tw)」。
 
-如要建立 Google Ads 報表的資料移轉作業，請選取下列其中一個選項：
+如要為 Google Ads 報表建立資料移轉作業，請選取下列其中一個選項：
 
 ### 控制台
 
@@ -150,10 +150,10 @@ Google Ads 連接器的 BigQuery 資料移轉服務支援下列資料移轉選�
 
 * `--project_id`：指定要使用的專案。如未指定旗標，則會使用預設專案。
 * `--table_filter`：指定要納入資料移轉作業的資料表。如未指定旗標，則會納入所有資料表。如要僅納入特定資料表，請使用以逗號分隔的清單 (例如 `Ad`、`Campaign`、`AdGroup`)。如要排除特定資料表，請在值前面加上連字號 (`-`) (例如 `-Ad`、`Campaign`、`AdGroup`)。
-* `--schedule`：指定查詢執行頻率。如未指定 `--schedule`，預設值會設為 `every 24 hours`。如要瞭解排程語法，請參閱「[設定排程格式](https://docs.cloud.google.com/appengine/docs/flexible/scheduling-jobs-with-cron-yaml?hl=zh-tw#formatting_the_schedule)」。
+* `--schedule`：指定查詢的執行頻率。如未指定 `--schedule`，預設值會設為 `every 24 hours`。如要瞭解排程語法，請參閱「[設定排程格式](https://docs.cloud.google.com/appengine/docs/flexible/scheduling-jobs-with-cron-yaml?hl=zh-tw#formatting_the_schedule)」。
 * `--refresh_window_days`：指定移轉設定的重新整理時間範圍 (以天為單位)。預設值為 `7`。
 * `--service_account_name`：指定要用於 Google Ads 移轉驗證的服務帳戶，而非使用者帳戶。
-* `--include_pmax`：指定 `true`，加入最高成效廣告報表專屬的資料表。預設值為 `false`。如要進一步瞭解最高成效廣告活動的支援情形，請參閱[最高成效廣告活動支援情形](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer?hl=zh-tw#pmax-support)。
+* `--include_pmax`：指定 `true`，納入最高成效廣告活動報表專屬的資料表。預設值為 `false`。如要進一步瞭解最高成效廣告活動的支援情形，請參閱[最高成效廣告活動支援情形](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer?hl=zh-tw#pmax-support)。
 
 ```
 bq mk \
@@ -185,7 +185,7 @@ bq mk \
 * SCHEDULE 是您希望查詢執行的頻率。如未指定 `--schedule`，預設值為每 24 小時一次，從移轉作業建立時間開始計算。
 * REFRESH\_DAYS 是整數，用於指定移轉設定的重新整理時間範圍 (以天為單位)。預設值為 `7`。
 * SERVICE\_ACCOUNT\_NAME 是用於驗證移轉作業的服務帳戶名稱。服務帳戶必須由用於建立移轉作業的 `project_id` 擁有，且必須具備所有[必要權限](#required_permissions)。
-* PMAX\_ENABLE：指定 `true`，加入最高成效廣告報表專屬的資料表。預設值為 `false`。如要進一步瞭解最高成效廣告活動的支援情形，請參閱[最高成效廣告活動支援情形](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer?hl=zh-tw#pmax-support)。
+* PMAX\_ENABLE：指定 `true`，納入最高成效廣告活動報表專屬的資料表。預設值為 `false`。如要進一步瞭解最高成效廣告活動的支援情形，請參閱[最高成效廣告活動支援情形](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer?hl=zh-tw#pmax-support)。
 
 **注意：**您無法使用指令列工具設定通知。
 

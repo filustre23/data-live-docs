@@ -457,7 +457,7 @@ resource "google_bigquery_reservation_assignment" "default" {
    ```
 
    等待 Terraform 顯示「Apply complete!」訊息。
-3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)即可查看結果。在 Google Cloud 控制台的使用者介面中，前往資源頁面，確認 Terraform 已建立或更新資源。
+3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)即可查看結果。在 Google Cloud 控制台的 UI 中前往資源，確認 Terraform 已建立或更新資源。
 
 **注意：**Terraform 範例通常會假設 Google Cloud 專案已啟用必要的 API。
 
@@ -682,7 +682,7 @@ resource "google_bigquery_reservation_assignment" "default" {
    ```
 
    等待 Terraform 顯示「Apply complete!」訊息。
-3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)即可查看結果。在 Google Cloud 控制台的使用者介面中，前往資源頁面，確認 Terraform 已建立或更新資源。
+3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)即可查看結果。在 Google Cloud 控制台的 UI 中前往資源，確認 Terraform 已建立或更新資源。
 
 **注意：**Terraform 範例通常會假設 Google Cloud 專案已啟用必要的 API。
 
@@ -762,6 +762,36 @@ SELECT 42;
    ```
    bq query --reservation_id=project1.US:test-reservation 'SELECT 42;'
    ```
+
+### Python
+
+在 [`QueryJobConfig`](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.QueryJobConfig?hl=zh-tw#google_cloud_bigquery_job_QueryJobConfig_reservation) 物件上設定 `reservation` 屬性：
+
+```
+from google.cloud import bigquery
+
+# Construct a BigQuery client object.
+client = bigquery.Client()
+
+reservation = "projects/PROJECT_ID/locations/LOCATION/reservations/RESERVATION_NAME"
+
+# Set the job configuration.
+job_config = bigquery.QueryJobConfig(reservation=reservation)
+
+# Submit the query.
+query_job = client.query("SELECT 42;", job_config=job_config)
+
+# Wait for the query to finish.
+query_job.result()
+
+print(f"Job {query_job.job_id} executed in reservation {query_job.reservation_id}.")
+```
+
+更改下列內容：
+
+* `PROJECT_ID`：擁有預留項目的[管理專案](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#admin-project) ID。
+* `LOCATION`：預留項目的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
+* `RESERVATION_NAME`：預留項目名稱。
 
 ### API
 

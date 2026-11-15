@@ -267,6 +267,4 @@ bq mk
 
 ## 排解轉移設定問題
 
-如果您在設定或執行 Salesforce Marketing Cloud 資料移轉作業時遇到問題，請嘗試下列疑難排解步驟：
-
-* 確認 Salesforce Marketing Cloud 中的 API 整合套件已
+如果您在設定

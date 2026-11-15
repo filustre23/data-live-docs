@@ -300,4 +300,4 @@ gcloud config unset auth/impersonate_service_account
     * `json`：盡可能壓縮到最小的 JSON
     * `csv`：包含標頭的 csv 格式
 
-    `pretty`、`sparse` 和 `prettyjson` 應為人類可讀。`json` 和 `csv` 應由其他程式使用。如果指定 `none`，指令不會產生任何輸出內容。如果沒有 `--format` 旗標，系統會根據指令選擇適
+    `pretty`、`sparse` 和 `prettyjson` 應為人類可讀。`json` 和 `csv` 應由其他程

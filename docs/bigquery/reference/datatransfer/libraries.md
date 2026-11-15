@@ -207,7 +207,5 @@ namespace GoogleCloudSamples
 // Sample bigquery-quickstart creates a Google BigQuery dataset.
 package main
 
-import (
-	"fmt"
-	"log"
+import </
 ```

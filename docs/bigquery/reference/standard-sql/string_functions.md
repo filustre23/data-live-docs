@@ -250,11 +250,5 @@ SELECT CHR(97) AS A, CHR(0xF9B5) AS B, CHR(0) AS C, CHR(NULL) AS D;
 ## `CODE_POINTS_TO_BYTES`
 
 ```
-CODE_POINTS_TO_BYTES(ascii_code_points)
+CODE_POINTS_TO_BYTES(ascii_code_points)<
 ```
-
-**Description**
-
-Takes an array of extended ASCII
-[code points](https://en.wikipedia.org/wiki/Code_point)
-as

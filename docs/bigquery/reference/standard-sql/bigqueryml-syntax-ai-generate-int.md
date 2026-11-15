@@ -145,6 +145,7 @@ AI.GENERATE_INT(
   control or know the region where your processing requests are handled.
 
   BigQuery supports the following models:
+  + `gemini-4-hydrogen`
   + `gemini-4-carbon`
   + `gemini-4-argon`
   + `gemini-3.8-flash`
@@ -375,5 +376,3 @@ Last updated 2026-11-12 UTC.
 
 
 Need to tell us more?
-
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","inco

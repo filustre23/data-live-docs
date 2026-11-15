@@ -139,7 +139,5 @@ WHERE
         AND CURRENT_TIMESTAMP()
   AND res.reservation_id = 'YOUR_RESERVATION_ID'
   AND (jobs.statement_type != "SCRIPT" OR jobs.statement_type IS NULL)  -- Avoid duplicate byte counting in parent and children jobs.
-GROUP BY
-  period_start
-ORDER
+GROUP
 ```

@@ -371,7 +371,5 @@ SELECT RANGE_CONTAINS(
 ## `RANGE_END`
 
 ```
-RANGE_END(range_to_check)
-```
-
 <
+```

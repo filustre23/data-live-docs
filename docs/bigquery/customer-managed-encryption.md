@@ -16,21 +16,20 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 客戶自行管理的 Cloud KMS 金鑰
 
-**注意：** 如果預留項目是以特定 BigQuery 版本建立，可能無法使用這項功能。如要進一步瞭解各版本啟用的功能，請參閱「[BigQuery 版本簡介](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)」。
+**注意：**如果預留項目是以特定 BigQuery 版本建立，可能無法使用這項功能。如要進一步瞭解各版本啟用的功能，請參閱「[BigQuery 版本簡介](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)」。
 
-根據預設，BigQuery 會[加密靜態儲存的內容](https://docs.cloud.google.com/docs/security/encryption/default-encryption?hl=zh-tw)。BigQuery 會為您處理並管理這個預設加密作業，您不必採取任何其他動作。首先，系統會使用「資料加密金鑰」對 BigQuery 資料表中的資料進行加密，然後使用「金鑰加密金鑰」為資料加密金鑰進行加密，這個方法稱為[信封式加密](https://docs.cloud.google.com/kms/docs/envelope-encryption?hl=zh-tw)。
-金鑰加密金鑰不會直接加密資料，而是用來加密 Google 用於加密資料的資料加密金鑰。
+[Cloud Key Management Service (Cloud KMS)](https://docs.cloud.google.com/kms/docs?hl=zh-tw) 中的客戶自行管理的加密金鑰 (CMEK)，可讓您控管及管理金鑰加密金鑰，保護 BigQuery 靜態資料。您可以在 Cloud KMS 中建立及管理金鑰加密金鑰，協助保護資料，而不必由 Google 擁有及管理。
 
-如果您想自行控管加密作業，可以針對 BigQuery 使用客戶代管的加密金鑰 (CMEK)。您可以在 [Cloud KMS](https://docs.cloud.google.com/kms/docs?hl=zh-tw) 中控管及管理金鑰加密金鑰，而非由 Google 擁有及管理保護資料的金鑰加密金鑰。本文將詳細說明如何手動建立 BigQuery 適用的 Cloud KMS 金鑰。
+根據預設，BigQuery 會[加密靜態儲存的內容](https://docs.cloud.google.com/docs/security/encryption/default-encryption?hl=zh-tw)，您不需採取任何其他動作。BigQuery 採用[信封式加密](https://docs.cloud.google.com/kms/docs/envelope-encryption?hl=zh-tw)，使用*資料加密金鑰*加密資料表資料，再以*金鑰加密金鑰*加密資料加密金鑰。
 
-進一步瞭解 [Google Cloud的加密選項](https://docs.cloud.google.com/docs/security/encryption/default-encryption?hl=zh-tw)。如要瞭解 CMEK 的具體資訊，包括優點和限制，請參閱「[客戶自行管理的加密金鑰](https://docs.cloud.google.com/kms/docs/cmek?hl=zh-tw)」。
+如要進一步瞭解Google Cloud的加密選項，包括 CMEK 的優點和限制，請參閱「[客戶自行管理的加密金鑰](https://docs.cloud.google.com/kms/docs/cmek?hl=zh-tw)」。
 
 ## 事前準備
 
-* 所有位於 BigQuery 代管儲存空間的資料資產都支援 CMEK。不過，如果您也查詢儲存在[外部資料儲存庫](https://docs.cloud.google.com/bigquery/docs/external-data-sources?hl=zh-tw) (例如 Cloud Storage) 的資料，且該資料已使用 CMEK 加密，則資料加密會由 [Cloud Storage](https://docs.cloud.google.com/storage/docs/encryption/customer-managed-keys?hl=zh-tw) 管理。舉例來說，BigLake 資料表支援 Cloud Storage 中以 CMEK 加密的資料。
+* 所有位於 BigQuery 代管儲存空間的資料資產都支援 CMEK。不過，如果您也查詢儲存在[外部資料來源](https://docs.cloud.google.com/bigquery/docs/external-data-sources?hl=zh-tw) (例如 Cloud Storage) 的資料，且該資料已使用 CMEK 加密，則資料加密會由 [Cloud Storage](https://docs.cloud.google.com/storage/docs/encryption/customer-managed-keys?hl=zh-tw) 管理。舉例來說，BigLake 資料表支援 Cloud Storage 中以 CMEK 加密的資料。
 
   BigQuery 和 [BigLake 資料表](https://docs.cloud.google.com/bigquery/docs/biglake-intro?hl=zh-tw)不支援客戶提供的加密金鑰 (CSEK)。
-* 決定要在同一個 Google Cloud 專案中執行 BigQuery 和 Cloud KMS，還是在不同專案中執行。為了方便說明，本文的範例將採用下列慣例：
+* 決定要在同一個 Google Cloud 專案中執行 BigQuery 和 Cloud KMS，還是要在不同專案中執行。為了方便說明，本文的範例將採用下列慣例：
 
   + `PROJECT_ID`：執行 BigQuery 的專案 ID
   + `PROJECT_NUMBER`：執行 BigQuery 的專案編號
@@ -38,7 +37,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 * 新專案會自動啟用 BigQuery。如果您是使用現有專案來執行 BigQuery，請[啟用 BigQuery API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery&hl=zh-tw)。
 * 針對執行 Cloud KMS 的 Google Cloud 專案，[啟用 Cloud Key Management Service API](https://console.cloud.google.com/apis/enableflow?apiid=cloudkms.googleapis.com&hl=zh-tw)。
 
-每次查詢 CMEK 加密資料表時，系統都會使用 Cloud KMS 執行解密呼叫。詳情請參閱 [Cloud KMS 定價](https://cloud.google.com/kms/pricing?hl=zh-tw)。
+每次查詢 CMEK 加密資料表時，系統都會使用 Cloud KMS 執行一次解密呼叫。詳情請參閱 [Cloud KMS 定價](https://cloud.google.com/kms/pricing?hl=zh-tw)。
 
 ## 加密規格
 
@@ -46,14 +45,14 @@ BigQuery 中用來保護您資料的 Cloud KMS 金鑰是 AES-256 金鑰。這類
 
 ## 手動或自動建立金鑰
 
-您可以手動建立 CMEK 金鑰，也可以使用 Cloud KMS Autokey。Autokey 會自動佈建及指派 CMEK 金鑰，簡化金鑰的建立和管理作業。有了 Autokey，您就不必預先佈建金鑰環、金鑰和服務帳戶。而是在建立 BigQuery 資源時，視需要產生。詳情請參閱「[Autokey 總覽](https://docs.cloud.google.com/kms/docs/autokey-overview?hl=zh-tw)」。
+您可以手動建立 CMEK 金鑰，也可以使用 Cloud KMS Autokey。Autokey 會自動佈建及指派 CMEK 金鑰，簡化金鑰的建立和管理作業。使用 Autokey 時，您不必預先佈建金鑰環、金鑰和服務帳戶。而是在建立 BigQuery 資源時，視需要產生。詳情請參閱「[Autokey 總覽](https://docs.cloud.google.com/kms/docs/autokey-overview?hl=zh-tw)」。
 
 ### 手動建立金鑰環和金鑰
 
 針對執行 Cloud KMS 的 Google Cloud 專案，請按照「[建立金鑰環和金鑰](https://docs.cloud.google.com/kms/docs/creating-keys?hl=zh-tw)」一文所述，建立金鑰環和金鑰。在與 BigQuery 資料集相同的位置建立金鑰環：
 
 * 任何多區域資料集都應使用相符位置的多區域金鑰環。舉例來說，`US` 區域中的資料集應使用 `us` 區域的金鑰環保護，而 `EU` 區域中的資料集應使用 `europe` 區域的金鑰環保護。
-* 區域資料集應使用相符的區域索引鍵。舉例來說，`asia-northeast1` 區域中的資料集應使用 `asia-northeast1` 區域的金鑰環保護。
+* 區域資料集應使用相符的區域索引鍵。舉例來說，`asia-northeast1` 區域中的資料集應使用 `asia-northeast1` 區域中的金鑰環保護。
 * 在 Google Cloud 控制台為 BigQuery 設定 CMEK 時，無法使用`global`區域。不過，使用 bq 指令列工具或 GoogleSQL 為 BigQuery 設定 CMEK 時，可以使用 `global` 區域。
 
 如要進一步瞭解 BigQuery 和 Cloud KMS 支援的位置，請參閱「[Cloud 位置](https://cloud.google.com/about/locations/?hl=zh-tw)」。
@@ -80,12 +79,12 @@ BigQuery 服務帳戶 ID 的格式如下：
 bq-PROJECT_NUMBER@bigquery-encryption.iam.gserviceaccount.com
 ```
 
-以下技巧說明如何判斷專案的 BigQuery 服務帳戶 ID。
+以下技術說明如何判斷專案的 BigQuery 服務帳戶 ID。
 
 ### 控制台
 
 1. 前往
-   控制台的 Google Cloud 「[**Dashboard**」](https://console.cloud.google.com/home?hl=zh-tw)(資訊主頁) 頁面。
+   Google Cloud 控制台的「[**Dashboard**」(資訊主頁) 頁面](https://console.cloud.google.com/home?hl=zh-tw)。
 
    [前往「Dashboard」(資訊主頁) 頁面](https://console.cloud.google.com/住家?hl=zh-tw)
 2. 點選頁面頂端的「Select from」下拉式選單，在隨即顯示的「Select From」(選取來源) 視窗中，選取所需專案。
@@ -130,8 +129,8 @@ bq-PROJECT_NUMBER@bigquery-encryption.iam.gserviceaccount.com
 4. 按一下「新增成員」。
 5. 輸入服務帳戶的電子郵件地址：`bq-PROJECT_NUMBER@bigquery-encryption.iam.gserviceaccount.com`。
 
-   * 如果服務帳戶已在成員清單中，表示已獲指派角色。按一下 `bq-PROJECT_NUMBER@bigquery-encryption.iam.gserviceaccount.com` 服務帳戶的目前角色下拉式選單。
-6. 按一下「Select a role」(選取角色) 下拉式選單，依序點選「Cloud KMS」和「Cloud KMS CryptoKey Encrypter/Decrypter」角色。
+   * 如果服務帳戶已在成員清單中，表示已獲指派角色。按一下 `bq-PROJECT_NUMBER@bigquery-encryption.iam.gserviceaccount.com` 服務帳戶目前的角色下拉式選單。
+6. 按一下「Select a role」(選取角色) 的下拉式選單，依序點選「Cloud KMS」和「Cloud KMS CryptoKey Encrypter/Decrypter」角色。
 7. 按一下「Save」(儲存)，將角色套用至 `bq-PROJECT_NUMBER@bigquery-encryption.iam.gserviceaccount.com` 服務帳戶。
 
 ### gcloud
@@ -158,13 +157,13 @@ KMS_KEY
 
 ## 金鑰資源 ID
 
-如要使用 CMEK，必須提供 Cloud KMS 金鑰的資源 ID，如範例所示。這個金鑰區分大小寫，格式如下：
+如要使用 CMEK，必須提供 Cloud KMS 金鑰的資源 ID，如範例所示。這個鍵區分大小寫，格式如下：
 
 ```
 projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY
 ```
 
-**注意：** 您無法指定包含 `/cryptoKeyVersions/` 權杖的金鑰資源 ID。BigQuery 一律會使用標示為 `primary` 的金鑰版本，在建立資料表時保護資料表。
+**注意：**您無法指定包含 `/cryptoKeyVersions/` 權杖的金鑰資源 ID。BigQuery 一律會使用標示為 `primary` 的金鑰版本，在建立資料表時保護資料表。
 
 ### 擷取金鑰資源 ID
 
@@ -193,7 +192,7 @@ projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY
 
    1. 點選「進階選項」。
    2. 按一下「客戶自行管理的金鑰」。
-   3. 選取金鑰。如果清單中未列出您要使用的金鑰，請輸入金鑰的[資源 ID](#key_resource_id)。
+   3. 選取車鑰。如果清單中未列出您要使用的金鑰，請輸入金鑰的[資源 ID](#key_resource_id)。
 6. 點選「建立資料表」。
 
 ### SQL
@@ -322,7 +321,7 @@ resource "google_project_iam_member" "service_account_access" {
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
 2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
 
-   每個專案只需執行這個指令一次，而且可以在任何目錄中執行。
+   這項指令在每個專案中只需執行一次，且可在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
@@ -332,14 +331,14 @@ resource "google_project_iam_member" "service_account_access" {
 
 ## 準備目錄
 
-每個 Terraform 設定檔都必須有自己的目錄 (也稱為*根模組*)。
+每個 Terraform 設定檔都必須有自己的目錄 (也稱為「根模組」)。
 
 1. 在 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw) 中建立目錄，並在該目錄中建立新檔案。檔案名稱必須有 `.tf` 副檔名，例如 `main.tf`。在本教學課程中，這個檔案稱為 `main.tf`。
 
    ```
    mkdir DIRECTORY && cd DIRECTORY && touch main.tf
    ```
-2. 如果您正在進行教學課程，可以複製每個章節或步驟中的程式碼範例。
+2. 如果您正在按照教學課程操作，可以複製每個章節或步驟中的程式碼範例。
 
    將程式碼範例複製到新建立的 `main.tf`。
 
@@ -374,7 +373,7 @@ resource "google_project_iam_member" "service_account_access" {
    ```
 
    等待 Terraform 顯示「Apply complete!」訊息。
-3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)即可查看結果。在 Google Cloud 控制台的使用者介面中，前往資源頁面，確認 Terraform 已建立或更新資源。
+3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)即可查看結果。在 Google Cloud 控制台的 UI 中前往資源，確認 Terraform 已建立或更新資源。
 
 **注意：**Terraform 範例通常會假設 Google Cloud 專案已啟用必要的 API。
 
@@ -511,13 +510,13 @@ print(f"Key: {table.encryption_configuration.kms_key_name}.")
 
 ### 查詢受 Cloud KMS 金鑰保護的資料表
 
-查詢受 Cloud KMS 保護的資料表時，不需要進行特殊安排。BigQuery 會儲存用於加密資料表內容的金鑰名稱，並在查詢受 Cloud KMS 保護的資料表時使用該金鑰。
+查詢受 Cloud KMS 保護的資料表時，不需要特別設定。BigQuery 會儲存用於加密資料表內容的金鑰名稱，並在查詢受 Cloud KMS 保護的資料表時使用該金鑰。
 
 只要 BigQuery 有權存取用於加密資料表內容的 Cloud KMS 金鑰，所有現有工具、BigQuery 控制台和 bq 指令列工具的運作方式，都與預設加密資料表相同。
 
 ### 使用 Cloud KMS 金鑰保護查詢結果
 
-根據預設，查詢結果會儲存在以Google-owned and Google-managed encryption key加密的臨時資料表中。如果專案已有[預設金鑰](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw#project_default_key)，系統會將該金鑰套用至暫時 (預設) 查詢結果資料表。如要改用 Cloud KMS 金鑰加密查詢結果，請選取下列其中一個選項：
+根據預設，查詢結果會儲存在以Google-owned and Google-managed encryption key加密的臨時資料表中。如果專案已有[預設金鑰](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw#project_default_key)，系統會將該金鑰套用至臨時 (預設) 查詢結果資料表。如要改用 Cloud KMS 金鑰加密查詢結果，請選取下列其中一個選項：
 
 ### 控制台
 
@@ -528,8 +527,8 @@ print(f"Key: {table.encryption_configuration.kms_key_name}.")
 3. 在查詢文字區域輸入有效的 GoogleSQL 查詢。
 4. 依序點選「Edit」(編輯) >「Query settings」(查詢設定)，然後按一下「Advanced options」(進階選項)。
 5. 選取「客戶自行管理的加密金鑰」。
-6. 選取金鑰。如果清單中未列出您要使用的金鑰，請輸入金鑰的[資源 ID](#key_resource_id)。
-7. 按一下 [儲存]。
+6. 選取車鑰。如果清單中未列出您要使用的金鑰，請輸入金鑰的[資源 ID](#key_resource_id)。
+7. 按一下「儲存」。
 8. 按一下「執行」。
 
 ### bq
@@ -728,7 +727,7 @@ if table.encryption_configuration.kms_key_name == kms_key_name:
 4. 在詳細資料窗格，點選「建立資料表」。
 5. 輸入載入資料表時要使用的選項，但請先按一下 [Advanced options] (進階選項)，再點選 [Create table] (建立資料表)。
 6. 在「Encryption」(加密) 底下，選取 [Customer-managed key] (客戶管理的金鑰)。
-7. 按一下「Select a customer-managed key」(選取客戶自行管理的金鑰) 下拉式清單，然後選取要使用的金鑰。如果找不到任何可用的金鑰，請輸入[金鑰資源 ID](#key_resource_id)。
+7. 按一下「Select a customer-managed key」(選取客戶自行管理的金鑰) 下拉式選單，然後選取要使用的金鑰。如果找不到任何可用的金鑰，請輸入[金鑰資源 ID](#key_resource_id)。
 8. 點選「建立資料表」。
 
 ### bq
@@ -946,7 +945,7 @@ bq cp \
 SOURCE_DATASET_ID.SOURCE_TABLE_ID DESTINATION_DATASET_ID.DESTINATION_TABLE_ID
 ```
 
-如要將預設加密的資料表複製到受 Cloud KMS 保護的相同資料表，請按照下列步驟操作：
+如要將採用預設加密機制的資料表，複製到受 Cloud KMS 保護的相同資料表，請按照下列步驟操作：
 
 ```
 bq cp -f \
@@ -974,5 +973,5 @@ import (
 
 // copyTableWithCMEK demonstrates creating a copy of a table and ensuring the copied data is
 // protected with a customer managed encryption key.
-func copyTableWithCMEK(projectID, datasetID, tableID string)
+func copyTableWithCMEK(projectID, datasetID, tableID string) error
 ```

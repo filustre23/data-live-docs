@@ -231,9 +231,3 @@ bigquery.defineFunction(
   urlDecode  // The function reference
 );
 ```
-
-
-
-## 使用 UDF 執行查詢
-
-您可以使用 [bq 指令列工具](#command-line)或 [BigQuery API](#api)，在舊版 SQL 中使用 UDF。

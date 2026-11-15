@@ -283,5 +283,5 @@ FROM Produce
 
 ```
 |> EXTEND expression [[AS] alias] [, ...]
-   [WINDOW name AS
+   [WINDOW
 ```

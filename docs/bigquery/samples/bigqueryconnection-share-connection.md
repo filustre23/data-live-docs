@@ -8,16 +8,19 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 分享連線 透過集合功能整理內容 你可以依據偏好儲存及分類內容。
 
-設定連線的身分與存取權管理政策，與使用者或群組共用連線。
+設定連線的 IAM 政策，與使用者或群組共用連線。
 
 ## 深入探索
 
 如需包含這個程式碼範例的詳細說明文件，請參閱下列文章：
 
-* [連線至 Amazon S3](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-connection?hl=zh-tw)
+* [連結至 Amazon S3](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-connection?hl=zh-tw)
 * [連線至 Apache Spark](https://docs.cloud.google.com/bigquery/docs/connect-to-spark?hl=zh-tw)
 * [連結至 Blob 儲存體](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-connection?hl=zh-tw)
 * [連線至 Cloud SQL](https://docs.cloud.google.com/bigquery/docs/connect-to-sql?hl=zh-tw)
+* [連線至 MySQL](https://docs.cloud.google.com/bigquery/docs/connect-to-mysql?hl=zh-tw)
+* [連線至 Oracle](https://docs.cloud.google.com/bigquery/docs/connect-to-oracle?hl=zh-tw)
+* [連線至 PostgreSQL](https://docs.cloud.google.com/bigquery/docs/connect-to-postgresql?hl=zh-tw)
 * [連線至 SAP Datasphere](https://docs.cloud.google.com/bigquery/docs/connect-to-sap-datasphere?hl=zh-tw)
 * [連線至 Spanner](https://docs.cloud.google.com/bigquery/docs/connect-to-spanner?hl=zh-tw)
 * [建立及設定 Cloud 資源連結](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection?hl=zh-tw)
@@ -27,9 +30,9 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ### Java
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定說明操作。詳情請參閱 [BigQuery Java API 參考說明文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定操作說明進行操作。詳情請參閱 [BigQuery Java API 參考文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 import com.google.api.resourcenames.ResourceName;

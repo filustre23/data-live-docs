@@ -27,6 +27,18 @@ To get the latest product updates delivered to you, add the URL of this page to 
 reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators), or add the
 [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## November 13, 2026
+
+Feature
+
+BigQuery connections to [MySQL](/bigquery/docs/connect-to-mysql),
+[Oracle](/bigquery/docs/connect-to-oracle), and
+[PostgreSQL](/bigquery/docs/connect-to-postgresql) are now available and can be
+used to run [MySQL federated queries](/bigquery/docs/mysql-federated-queries),
+[Oracle federated queries](/bigquery/docs/oracle-federated-queries), and
+[PostgreSQL federated queries](/bigquery/docs/postgresql-federated-queries).
+These features are in [Preview](https://cloud.google.com/products#product-launch-stages).
+
 ## November 12, 2026
 
 Feature
@@ -37,6 +49,12 @@ pipelines. For more information, see
 This feature is
 [generally available](https://cloud.google.com/products#product-launch-stages)
 (GA).
+
+Feature
+
+BigQuery [generative AI functions](/bigquery/docs/generative-ai-overview#locations)
+now support the `gemini-4-hydrogen` model. This model is
+[generally available](https://cloud.google.com/products#product-launch-stages).
 
 ## November 11, 2026
 
@@ -4953,15 +4971,4 @@ Libraries
 
 * Rollback netty.version to v4.1.119.Final ([#3827](https://github.com/googleapis/java-bigquery/issues/3827)) ([94c71a0](https://github.com/googleapis/java-bigquery/commit/94c71a090eab745c81dd9530bcdd3c8c1e734788))
 * Update dependency com.google.api.grpc:proto-google-cloud-bigqueryconnection-v1 to v2.65.0 ([#3787](https://github.com/googleapis/java-bigquery/issues/3787)) ([0574ecc](https://github.com/googleapis/java-bigquery/commit/0574eccec2975738804be7d0ccb4c973459c82c9))
-* Update dependency com.google.apis:google-api-services-bigquery to v2-rev20250511-2.0.0 ([#3794](https://github.com/googleapis/java-bigquery/issues/3794)) ([d3bf724](https://github.com/googleapis/java-bigquery/commit/d3bf724feef91469b44e1e5068738604d2b3cead))
-* Update dependency com.google.cloud:sdk-platform-java-config to v3.49.0 ([#3811](https://github.com/googleapis/java-bigquery/issues/3811)) ([2c5ede4](https://github.com/googleapis/java-bigquery/commit/2c5ede4b115cf7cdd078d54d29ce93636c1cedf5))
-
-Feature
-
-You can reference [Iceberg external tables in materialized views](/bigquery/docs/materialized-views-create#iceberg) instead of migrating that data to BigQuery-managed storage. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
-
-## June 04, 2025
-
-Change
-
-The organization-level [configuration settings](/bigquery/docs/default-configuration) for
+* Update dependency com.google.apis:google-api-services-bigquery to v2-rev20250511-2.0.0 ([#3794](https://github.com/googleapis/java-bigquery/issues/3794)) (

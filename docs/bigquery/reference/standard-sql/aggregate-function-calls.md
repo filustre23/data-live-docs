@@ -258,5 +258,4 @@ A simple aggregate function call for `COUNT`, `MIN`, and `MAX` looks like this:
 
 ```
 SELECT
-  COUNT(*)
 ```

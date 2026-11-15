@@ -189,6 +189,3 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 ### 收集轉移資訊
 
 收集使用 BigQuery 資料移轉服務設定遷移作業所需的資訊：
-
-* 請按照[這些操作說明](https://docs.aws.amazon.com/redshift/latest/mgmt/configure-jdbc-connection.html#obtain-jdbc-url)取得 JDBC 網址。
-* 取得

@@ -154,6 +154,7 @@ AI.GENERATE(
   control or know the region where your processing requests are handled.
 
   BigQuery supports the following models:
+  + `gemini-4-hydrogen`
   + `gemini-4-carbon`
   + `gemini-4-argon`
   + `gemini-3.8-flash`
@@ -352,6 +353,5 @@ SELECT
     grievance_subject ARRAY<STRING> OPTIONS(description = 'a list of grievance subjects'),
     complaint_type STRING OPTIONS(description = 'classify the complaint type as Billing Dispute, Service Issue, or Reporting Error')
     """
-  ).* EXCEPT (full_response, status)
-FROM
+  ).* EXCEPT (full_response
 ```

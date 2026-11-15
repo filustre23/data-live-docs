@@ -17,6 +17,11 @@ Save and categorize content based on your preferences.
 This document describes the `ML.TRANSLATE` function, which lets you translate
 text stored in BigQuery tables by using the Cloud Translation API.
 
+**Note:** For new translation queries, use the scalar
+[`AI.TRANSLATE` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-translate),
+which uses your Google Account user credentials and doesn't require a remote
+model.
+
 ## Syntax
 
 ```
@@ -201,9 +206,11 @@ SELECT * FROM `mydataset.translate_result_next`;
 
 ## What's next
 
+* Learn more about the scalar
+  [`AI.TRANSLATE` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-translate).
 * Get step-by-step instructions on how to
-  [translate text in a BigQuery table](/bigquery/docs/translate-text)
-  using the `ML.TRANSLATE` function.
+  [translate text in BigQuery](/bigquery/docs/translate-text)
+  by using the `AI.TRANSLATE` function.
 * Learn more about
   [other functions you can use](/bigquery/docs/reference/standard-sql/inference-overview#pretrained-models)
   to analyze BigQuery data.
@@ -220,4 +227,4 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-11-10 UTC.
+Last updated 2026-11-13 UTC.</

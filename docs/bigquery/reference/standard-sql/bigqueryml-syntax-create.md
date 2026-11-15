@@ -368,6 +368,4 @@ following BigQuery data types for `INPUT` and `OUTPUT` clauses:
 
 [XGBoost models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-xgboost) only support
 [numeric types](/bigquery/docs/reference/standard-sql/data-types#numeric_types)
-for the `INPUT` field type and
-[`FLOAT64`](/bigquery/docs/reference/standard-sql/data-types#floating_point_types)
-for the `OUTPUT` field ty
+for the `INPUT`

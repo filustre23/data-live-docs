@@ -172,4 +172,4 @@ The translation config to capture necessary settings for a translation task and 
 
 | JSON representation |
 | --- |
-| ``` {   "sourceDialect": {     object (Dialect)   },   "targetDialect": {     obj ``` |
+| ``` {   "sourceDialect": {     object ( ``` |

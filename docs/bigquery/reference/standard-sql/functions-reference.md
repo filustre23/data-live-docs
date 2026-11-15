@@ -275,5 +275,4 @@ SAFE.function_name()
 **Description**
 
 If you begin a function with
-the `SAFE.` prefix, it will return `NULL` instead of an error.
-The `SAFE.` prefix only prevents errors from the
+the

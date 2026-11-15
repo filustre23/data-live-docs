@@ -487,7 +487,4 @@ possible to the model.
   probable until the sum of their probabilities equals the `TOP_P` value.
   For example, if tokens A, B, and C have a probability of `0.3`, `0.2`, and
   `0.1`, and the `TOP_P` value is `0.5`, then the model selects either A or
-  B as the next token by using the `TEMPERATURE` value and doesn't
-  consider C.
-* `TEMPERATURE`:
-  a
+  B as the n
