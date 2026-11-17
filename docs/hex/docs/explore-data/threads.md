@@ -178,6 +178,8 @@ Saving a project won't create a copy of your Thread's work — it's the same pro
 
 Sensitive threads allow users to ask sensitive questions while reducing their visibility to workspace admins. When a thread is marked as sensitive, its contents are hidden in Context Studio - admins can see that the thread exists, along with the creator and timestamp, but not the messages themselves. Sensitive threads otherwise behave like regular threads. Workspace admins can still access the full contents if they have a direct link to the thread, so sensitive mode does not guarantee absolute privacy.
 
+To mark a thread as sensitive, click the `+` button in the message box and turn on the **Sensitive mode** toggle.
+
 We recommend that users only use sensitive threads when necessary, because it makes it more difficult for your admins to monitor and improve agent behavior for your workspace.
 
 ## OAuth and Threads[​](#oauth-and-threads "Direct link to OAuth and Threads")

@@ -237,6 +237,4 @@ there is no input pair without `NULL` values, this function returns `NULL`.
 If there is exactly one input pair without `NULL` values, this function returns
 `0`.
 
-`NaN` is produced if:
-
-* Any input value is
+`NaN` is produce

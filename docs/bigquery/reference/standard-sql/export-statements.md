@@ -25,7 +25,7 @@ storage location. You can export to the following services:
 * Spanner
 * Bigtable
 * Pub/Sub
-* AlloyDB ([Preview](https://cloud.google.com/products#product-launch-stages))
+* AlloyDB
 
 ### Syntax
 
@@ -280,4 +280,7 @@ statement.
 
 ### Spanner export option list
 
-The option list specifies options for the export ope
+The option list specifies options for the export operation.
+
+| O | |
+| --- | --- |

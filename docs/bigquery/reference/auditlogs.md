@@ -446,4 +446,4 @@ The following audit logs are associated with methods belonging to
 * **Permissions**:
   + `bigquery.jobs.create - ADMIN_WRITE`
   + `bigquery.tables.create - ADMIN_WRITE`
-  + `bigquery.tables.getData - DATA_READ`
+  + `bigquery.tables.getData`

@@ -1343,3 +1343,6 @@ STRUCT(
   + `HARM_CATEGORY_SEXUALLY_EXPLICIT`
 
   支援的門檻如下：
+
+  + `BLOCK_NONE`
+    (

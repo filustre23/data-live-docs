@@ -292,5 +292,5 @@ least once in a set of tokenized documents:
 
 ```
 WITH ExampleTable AS (
-  SELECT 1 AS id, ['I', 'like'
+  SELECT 1 AS id, ['I',
 ```

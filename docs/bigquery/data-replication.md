@@ -16,7 +16,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 跨區域資料集複製
 
-透過 BigQuery 資料集複製功能，您可以設定在兩個不同區域或多區域之間自動複製資料集。
+您可以使用 BigQuery 的跨區域資料集複製功能，在兩個不同的區域或多區域之間自動複製資料集。建立這些次要副本，有助於提高資料可用性、確保異地備援，並保護資料倉儲免受區域性服務中斷的影響。
 
 ## 總覽
 
@@ -137,7 +137,7 @@ BigQuery 資料集複製作業有下列限制：
 | BigLake 資料表 | BigLake 資料表 | 不支援。 |
 | BigLake Apache Iceberg 資料表 | BigLake Apache Iceberg 資料表 | 請參閱「[Lakehouse 執行階段目錄跨區域複製和災難復原](https://docs.cloud.google.com/biglake/docs/about-managed-disaster-recovery?hl=zh-tw)」。 |
 | 外部資料表 | 外部資料表 | 系統只會複製外部資料表定義。如果 Cloud Storage bucket 未與副本位於相同位置，查詢就會失敗。 |
-| 邏輯檢視表 | 邏輯檢視表 | 如果邏輯檢視表參照的資料集或資源與邏輯檢視表不在相同位置，查詢時就會失敗。 |
+| 邏輯 view | 邏輯 view | 如果邏輯檢視表參照的資料集或資源與邏輯檢視表不在相同位置，查詢時就會失敗。 |
 | 代管資料表 | 代管資料表 | 沒有差別。 |
 | materialized view | materialized view | 如果參照的資料表與 materialized view 不在同一個區域，查詢就會失敗。複製的 materialized view 過時程度可能會超過 view 的[過時程度上限](https://docs.cloud.google.com/bigquery/docs/materialized-views-create?hl=zh-tw#max_staleness)。 |
 | 模型 | 模型 | 儲存為代管資料表。 |
@@ -303,7 +303,7 @@ The dataset replica of the cross region dataset 'project_id:dataset_id' in regio
 3. 點選「資料集」。
 4. 按一下要監控的資料集。您也可以使用搜尋和篩選選項，找出資料集。
 5. 在資料集頁面中，按一下「Details」(詳細資料) 分頁標籤。
-6. 在「副本」部分，查看「複製延遲時間」和「狀態」。如要查看更多詳細資料 (包括複製延遲時間圖表)，請按一下「View details」(查看詳細資料)。
+6. 在「副本」部分，查看「複製延遲時間」和「狀態」。如要查看更多詳細資料 (包括複製延遲圖表)，請按一下「View details」(查看詳細資料)。
 
 ### 使用 Cloud Monitoring 查看複製狀態
 
@@ -447,11 +447,11 @@ OPTIONS(location='us-west1',
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-11 (世界標準時間)。
+上次更新時間：2026-11-16 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-11 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-16 (世界標準時間)。"],[],[]]

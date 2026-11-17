@@ -577,4 +577,6 @@ Google Ads table:
 :   p\_ads\_ClickStats\_customer\_id
 
 BigQuery view:
-:   ClickStats\_cust
+:   ClickStats\_customer\_id
+
+AdWords report (

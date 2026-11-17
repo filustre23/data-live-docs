@@ -243,4 +243,4 @@ bq mk
 
 ## 後續步驟
 
-* 如要進一步瞭解 BigQuery 資料移轉服務，請參閱「
+* 如要進一步瞭解 BigQuery 資料移轉服務，請參閱「[什麼是 BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)」。

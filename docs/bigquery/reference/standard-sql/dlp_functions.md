@@ -192,4 +192,4 @@ DLP_KEY_CHAIN(kms_resource_name, wrapped_key)
 **Description**
 
 You can use this function instead of the `key` argument for
-DLP deterministic encryption functions. This functi
+DLP

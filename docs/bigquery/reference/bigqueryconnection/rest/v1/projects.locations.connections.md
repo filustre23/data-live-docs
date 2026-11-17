@@ -162,4 +162,4 @@ Container for connection properties specific to Azure.
 | `clientId` | `string`  Output only. The client id of the Azure Active Directory Application. |
 | `objectId` | `string`  Output only. The object id of the Azure Active Directory Application. |
 | `customerTenantId` | `string`  The id of customer's directory that host the data. |
-| `redirectUri` | `string` |
+| `redirectUri` |  |

@@ -999,4 +999,6 @@ gcloud dataplex datascans jobs describe JOB \
 
 ### C#
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 Knowledge Catalog 快速入門導覽課程](https://docs.cloud.google.com/knowledge-catalog/docs/reference/libraries?hl=zh-tw)」中的 C# 設定說明操作。詳情請參閱 [Knowledge Catalog C# API](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.Dataplex.V1/latest?hl=zh-tw)
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 Knowledge Catalog 快速入門導覽課程](https://docs.cloud.google.com/knowledge-catalog/docs/reference/libraries?hl=zh-tw)」中的 C# 設定說明操作。詳情請參閱 [Knowledge Catalog C# API 參考文件](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.Dataplex.V1/latest?hl=zh-tw)。
+
+如要向 Knowledge Catalog 進行驗證，請設定應用程式預設憑證。詳情請參閱「

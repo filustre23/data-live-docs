@@ -545,4 +545,4 @@ label, and is excluded from features automatically.
 
 **Arguments**
 
-A `STRING` value.
+A

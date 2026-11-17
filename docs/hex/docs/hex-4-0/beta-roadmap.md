@@ -6,7 +6,7 @@ This list is a preview of parity features we're bringing from classic projects i
 
 [Hex 4.0](/docs/hex-4-0/what-is-hex-4-0) is in beta, and some Hex features you may be familiar with aren't available yet. Here's what's in progress, up next, and recently landed for that parity work.
 
-You can also open this list in Hex from the **Help** menu in any 4.0 project. *Last updated November 10, 2026.*
+You can also open this list in Hex from the **Help** menu in any 4.0 project. *Last updated November 13, 2026.*
 
 * In progress
 
@@ -44,6 +44,9 @@ You can also open this list in Hex from the **Help** menu in any 4.0 project. *L
 * Up next
 
   Manual chart creationBuild and configure charts yourself, without prompting the agent.
+* Up next
+
+  WritebackWrite the results of your analysis back to your data warehouse.
 
 ---
 

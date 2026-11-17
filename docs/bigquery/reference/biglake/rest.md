@@ -21,6 +21,7 @@ The Lakehouse API (formerly BigLake API) provides access to a serverless, fully 
 * [REST Resource: iceberg.v1.restcatalog.v1](#iceberg.v1.restcatalog.v1)
 * [REST Resource: iceberg.v1.restcatalog.v1.projects.catalogs.namespaces](#iceberg.v1.restcatalog.v1.projects.catalogs.namespaces)
 * [REST Resource: iceberg.v1.restcatalog.v1.projects.catalogs.namespaces.tables](#iceberg.v1.restcatalog.v1.projects.catalogs.namespaces.tables)
+* [REST Resource: iceberg.v1.restcatalog.v1.projects.catalogs.namespaces.views](#iceberg.v1.restcatalog.v1.projects.catalogs.namespaces.views)
 * [REST Resource: v1.projects.catalogs](#v1.projects.catalogs)
 * [REST Resource: v1.projects.catalogs.namespaces](#v1.projects.catalogs.namespaces)
 * [REST Resource: v1.projects.catalogs.namespaces.tables](#v1.projects.catalogs.namespaces.tables)
@@ -57,6 +58,7 @@ global asia-south1 asia-south2 europe-west1 europe-west2 europe-west3 europe-wes
 
 | Methods | |
 | --- | --- |
+| `listPublishedShares` | `GET /dataproductsharing/v1/{connectionCatalog=projects/*/catalogs/*}:listPublishedShares`   Lists shares published from BigLake to SAP BDC for the specified connection catalog. |
 | `publishDataProduct` | `POST /dataproductsharing/v1/{connectionCatalog=projects/*/catalogs/*}:publishDataProduct`   Publishes a Knowledge Catalog Data Product or an Iceberg catalog to SAP BDC. |
 | `unpublishDataProduct` | `POST /dataproductsharing/v1/{connectionCatalog=projects/*/catalogs/*}:unpublishDataProduct`   Unpublishes a Knowledge Catalog Data Product or Iceberg catalog share from SAP BDC. |
 
@@ -171,6 +173,17 @@ global asia-south1 asia-south2 europe-west1 europe-west2 europe-west3 europe-wes
 | `metrics` | `POST /iceberg/v1/restcatalog/v1/{name=projects/*/catalogs/*/namespaces/*/tables/*}/metrics`   Reports a metrics report for a table. |
 | `updateIcebergTable` | `POST /iceberg/v1/restcatalog/v1/{name=projects/*/catalogs/*/namespaces/*/tables/*}`   This is CommitTable Iceberg API, which maps to `UpdateIcebergTable` in the Google API nomenclature. |
 
+## REST Resource: [iceberg.v1.restcatalog.v1.projects.catalogs.namespaces.views](/lakehouse/docs/reference/rest/v1/iceberg.v1.restcatalog.v1.projects.catalogs.namespaces.views)
+
+| Methods | |
+| --- | --- |
+| `create` | `POST /iceberg/v1/restcatalog/v1/{parent=projects/*/catalogs/*/namespaces/*}/views`   Creates an Iceberg view in the namespace. |
+| `delete` | `DELETE /iceberg/v1/restcatalog/v1/{name=projects/*/catalogs/*/namespaces/*/views/*}`   Deletes a view in the namespace. |
+| `get` | `GET /iceberg/v1/restcatalog/v1/{name=projects/*/catalogs/*/namespaces/*/views/*}`   Gets a view in the namespace. |
+| `head` | `NONE /iceberg/v1/restcatalog/v1/{name=projects/*/catalogs/*/namespaces/*/views/*}`   Returns 204 if the view exists, 404 otherwise. |
+| `list` | `GET /iceberg/v1/restcatalog/v1/{parent=projects/*/catalogs/*/namespaces/*}/views`   Lists view identifiers (not *views*) in the namespace. |
+| `updateIcebergView` | `POST /iceberg/v1/restcatalog/v1/{name=projects/*/catalogs/*/namespaces/*/views/*}`   Updates a view in the namespace. |
+
 ## REST Resource: [v1.projects.catalogs](/lakehouse/docs/reference/rest/v1/projects.catalogs)
 
 | Methods | |
@@ -235,9 +248,9 @@ global asia-south1 asia-south2 europe-west1 europe-west2 europe-west3 europe-wes
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-10-07 UTC.
+Last updated 2026-11-16 UTC.
 
 
 
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-10-07 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-11-16 UTC."],[],[]]

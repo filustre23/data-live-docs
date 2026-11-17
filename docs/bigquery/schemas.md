@@ -832,5 +832,6 @@ print(f"Table schema: {schema_contents}")
 ```
 [
   {
-    "name": "qtr"
+    "name": "qtr",
+    "type":
 ```

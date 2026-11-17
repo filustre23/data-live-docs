@@ -27,6 +27,19 @@ To get the latest product updates delivered to you, add the URL of this page to 
 reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators), or add the
 [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## November 16, 2026
+
+Feature
+
+You can create, manage, and query
+[Apache Iceberg views](/lakehouse/docs/manage-views) in the Lakehouse runtime
+catalog from Iceberg-compatible open source engines such as Apache Spark and
+Trino through the Apache Iceberg REST catalog endpoint
+([Preview](https://cloud.google.com/products#product-launch-stages)). Iceberg
+views are open, non-materialized logical tables defined by SQL that you can use
+to build modular SQL pipelines and expose curated projections over Apache
+Iceberg tables.
+
 ## November 13, 2026
 
 Feature
@@ -4969,6 +4982,4 @@ Libraries
 
 ##### Dependencies
 
-* Rollback netty.version to v4.1.119.Final ([#3827](https://github.com/googleapis/java-bigquery/issues/3827)) ([94c71a0](https://github.com/googleapis/java-bigquery/commit/94c71a090eab745c81dd9530bcdd3c8c1e734788))
-* Update dependency com.google.api.grpc:proto-google-cloud-bigqueryconnection-v1 to v2.65.0 ([#3787](https://github.com/googleapis/java-bigquery/issues/3787)) ([0574ecc](https://github.com/googleapis/java-bigquery/commit/0574eccec2975738804be7d0ccb4c973459c82c9))
-* Update dependency com.google.apis:google-api-services-bigquery to v2-rev20250511-2.0.0 ([#3794](https://github.com/googleapis/java-bigquery/issues/3794)) (
+* Rollback netty.version to v4.1.119.Final (
