@@ -240,7 +240,3 @@ bq mk
 ## 排解轉移設定問題
 
 如果無法順利設定資料移轉作業，請參閱「[Oracle 移轉作業問題](https://docs.cloud.google.com/bigquery/docs/transfer-troubleshooting?hl=zh-tw#oracle-issues)」。
-
-## 後續步驟
-
-* 如要進一步瞭解 BigQuery 資料移轉服務，請參閱「[什麼是 BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)」。

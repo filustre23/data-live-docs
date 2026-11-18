@@ -156,7 +156,4 @@ IBM Netezza 資料倉儲技術專為搭配 Netezza 專屬 SQL 語法而設計。
 | `intNand` | [`BIT_AND`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions?hl=zh-tw#bit_and) |
 | `intNnot` | 位元 not 運算子：[`~`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators?hl=zh-tw#bitwise_operators) |
 | `intNor` | [`BIT_OR`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions?hl=zh-tw#bit_or) |
-| `intNxor` | [`BIT_XOR`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions?hl=zh-tw#bit_xor) |
-| `intNshl` |  |
-| `intNshr` |  |
-| `CORR` |
+| `intNxor` | [`BIT_XOR`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions?hl=zh-tw#bit_xor) |</

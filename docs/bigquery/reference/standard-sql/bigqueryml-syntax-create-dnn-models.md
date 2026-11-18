@@ -469,6 +469,4 @@ A `FLOAT64` value. The default value is `0.01`.
 **Description**
 
 The name of the label column in the training data. The label column contains the
-expected machine learning result for the given record. For example, in a spam
-detection dataset, the label column value would probably be either `spam` or
-`not spam`. In a rainfall dataset, the label c
+expected machine learning result for the given record. For example,

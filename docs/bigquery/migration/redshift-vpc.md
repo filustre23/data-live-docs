@@ -233,8 +233,3 @@ BigQuery 的載入配額為每個資料表的每個載入工作 15 TB。Amazon R
 * 瞭解標準 [Amazon Redshift 遷移作業](https://docs.cloud.google.com/bigquery/docs/migration/redshift?hl=zh-tw)。
 * 進一步瞭解 [BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)。
 * 使用[批次 SQL 轉譯](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator?hl=zh-tw)功能遷移 SQL 程式碼。
-
-
-
-
-提供意見

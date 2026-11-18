@@ -203,4 +203,4 @@ bq mk \
 * PARAMETERS 包含所建立移轉設定的參數，格式為 JSON。例如：`--params='{"param":"param_value"}'`。
   + `destination_table_name_template`：目的地 BigQuery 資料表的名稱。
   + `data_path_template`：包含要移轉檔案的 Cloud Storage URI。可以使用[萬用字元](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer-overview?hl=zh-tw#wildcard-support)和[參數](https://docs.cloud.google.com/bigquery/docs/gcs-transfer-parameters?hl=zh-tw)。
-  + `write_disposition`：決定相符檔案是要附加至目的地資料表，還是完全鏡像。支援的值為 `APPEND` 或 `MIRROR`。如要瞭解 BigQuery 資料移轉服務如何在 Cloud Storage 移轉作業中附加或鏡像資料，請參閱「[Cloud St](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer-overview?hl=zh-tw#data-ingestion)
+  + `write_disposition`：決定相符檔案是要附加至目的地資料表，還是完全鏡像。支援的值為 `APPEND` 或 `MIRROR`。如要瞭解 BigQuery 資

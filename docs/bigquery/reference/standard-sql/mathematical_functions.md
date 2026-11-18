@@ -254,7 +254,3 @@ of the range (-1, 1).
 | X > 1 | Error |
 
 ## `CBRT`
-
-```
-CBRT(X)
-```

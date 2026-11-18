@@ -94,41 +94,41 @@ global asia-south1 asia-south2 europe-west1 europe-west2 europe-west3 europe-wes
 
 | Methods | |
 | --- | --- |
-| `create` | `POST /hive/v1/{parent=projects/*}/catalogs`   Creates a new hive catalog. |
-| `delete` | `DELETE /hive/v1/{name=projects/*/catalogs/*}`   Deletes an existing catalog specified by the catalog ID. |
-| `failover` | `POST /hive/v1/{name=projects/*/catalogs/*}:failover`   Failover the catalog to a new primary replica region. |
-| `get` | `GET /hive/v1/{name=projects/*/catalogs/*}`   Gets the catalog specified by the resource name. |
-| `list` | `GET /hive/v1/{parent=projects/*}/catalogs`   List all catalogs in a specified project. |
-| `patch` | `PATCH /hive/v1/{hiveCatalog.name=projects/*/catalogs/*}`   Updates an existing catalog. |
+| `create` | `POST /hive/v1/{parent=projects/*}/catalogs`   Creates a new Hive catalog in a specified project. |
+| `delete` | `DELETE /hive/v1/{name=projects/*/catalogs/*}`   Deletes a specified Hive catalog. |
+| `failover` | `POST /hive/v1/{name=projects/*/catalogs/*}:failover`   Fails over a specified Hive catalog to a new primary replica region. |
+| `get` | `GET /hive/v1/{name=projects/*/catalogs/*}`   Gets details of a specified Hive catalog. |
+| `list` | `GET /hive/v1/{parent=projects/*}/catalogs`   Lists all Hive catalogs in a specified project. |
+| `patch` | `PATCH /hive/v1/{hiveCatalog.name=projects/*/catalogs/*}`   Updates an existing Hive catalog in a specified project. |
 
 ## REST Resource: [hive.v1.projects.catalogs.databases](/lakehouse/docs/reference/rest/v1/hive.v1.projects.catalogs.databases)
 
 | Methods | |
 | --- | --- |
-| `create` | `POST /hive/v1/{parent=projects/*/catalogs/*}/databases`   Creates a new database. |
-| `delete` | `DELETE /hive/v1/{name=projects/*/catalogs/*/databases/*}`   Deletes an existing database specified by the database name. |
-| `get` | `GET /hive/v1/{name=projects/*/catalogs/*/databases/*}`   Gets the database specified by the resource name. |
-| `list` | `GET /hive/v1/{parent=projects/*/catalogs/*}/databases`   List all databases in a specified catalog. |
-| `patch` | `PATCH /hive/v1/{hiveDatabase.name=projects/*/catalogs/*/databases/*}`   Updates an existing database specified by the database name. |
+| `create` | `POST /hive/v1/{parent=projects/*/catalogs/*}/databases`   Creates a new Hive database in a specified catalog. |
+| `delete` | `DELETE /hive/v1/{name=projects/*/catalogs/*/databases/*}`   Deletes a specified Hive database. |
+| `get` | `GET /hive/v1/{name=projects/*/catalogs/*/databases/*}`   Gets details of a specified Hive database. |
+| `list` | `GET /hive/v1/{parent=projects/*/catalogs/*}/databases`   Lists all Hive databases in a specified catalog. |
+| `patch` | `PATCH /hive/v1/{hiveDatabase.name=projects/*/catalogs/*/databases/*}`   Updates an existing Hive database in a specified catalog. |
 
 ## REST Resource: [hive.v1.projects.catalogs.databases.tables](/lakehouse/docs/reference/rest/v1/hive.v1.projects.catalogs.databases.tables)
 
 | Methods | |
 | --- | --- |
-| `create` | `POST /hive/v1/{parent=projects/*/catalogs/*/databases/*}/tables`   Creates a new hive table. |
-| `delete` | `DELETE /hive/v1/{name=projects/*/catalogs/*/databases/*/tables/*}`   Deletes an existing table specified by the table name. |
-| `get` | `GET /hive/v1/{name=projects/*/catalogs/*/databases/*/tables/*}`   Gets the table specified by the resource name. |
-| `list` | `GET /hive/v1/{parent=projects/*/catalogs/*/databases/*}/tables`   List all hive tables in a specified project under the hive catalog and database. |
-| `patch` | `PATCH /hive/v1/{hiveTable.name=projects/*/catalogs/*/databases/*/tables/*}`   Updates an existing table specified by the table name. |
+| `create` | `POST /hive/v1/{parent=projects/*/catalogs/*/databases/*}/tables`   Creates a new Hive table in a specified database. |
+| `delete` | `DELETE /hive/v1/{name=projects/*/catalogs/*/databases/*/tables/*}`   Deletes a specified Hive table. |
+| `get` | `GET /hive/v1/{name=projects/*/catalogs/*/databases/*/tables/*}`   Gets details of a specified Hive table. |
+| `list` | `GET /hive/v1/{parent=projects/*/catalogs/*/databases/*}/tables`   Lists all Hive tables in a specified database. |
+| `patch` | `PATCH /hive/v1/{hiveTable.name=projects/*/catalogs/*/databases/*/tables/*}`   Updates an existing Hive table in a specified database. |
 
 ## REST Resource: [hive.v1.projects.catalogs.databases.tables.partitions](/lakehouse/docs/reference/rest/v1/hive.v1.projects.catalogs.databases.tables.partitions)
 
 | Methods | |
 | --- | --- |
-| `batchCreate` | `POST /hive/v1/{parent=projects/*/catalogs/*/databases/*/tables/*}/partitions:batchCreate`   Adds partitions to a table. |
-| `batchDelete` | `POST /hive/v1/{parent=projects/*/catalogs/*/databases/*/tables/*}/partitions:batchDelete`   Deletes partitions from a table. |
-| `batchUpdate` | `POST /hive/v1/{parent=projects/*/catalogs/*/databases/*/tables/*}/partitions:batchUpdate`   Updates partitions in a table. |
-| `list` | `GET /hive/v1/{parent=projects/*/catalogs/*/databases/*/tables/*}/partitions:list`   Streams list of partitions from a table. |
+| `batchCreate` | `POST /hive/v1/{parent=projects/*/catalogs/*/databases/*/tables/*}/partitions:batchCreate`   Creates multiple partitions in a specified Hive table. |
+| `batchDelete` | `POST /hive/v1/{parent=projects/*/catalogs/*/databases/*/tables/*}/partitions:batchDelete`   Deletes multiple partitions from a specified Hive table. |
+| `batchUpdate` | `POST /hive/v1/{parent=projects/*/catalogs/*/databases/*/tables/*}/partitions:batchUpdate`   Updates multiple partitions in a specified Hive table. |
+| `list` | `GET /hive/v1/{parent=projects/*/catalogs/*/databases/*/tables/*}/partitions:list`   Streams a list of partitions from a specified Hive table. |
 
 ## REST Resource: [iceberg.v1.restcatalog.extensions.projects.catalogs](/lakehouse/docs/reference/rest/v1/iceberg.v1.restcatalog.extensions.projects.catalogs)
 
@@ -248,9 +248,9 @@ global asia-south1 asia-south2 europe-west1 europe-west2 europe-west3 europe-wes
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-11-16 UTC.
+Last updated 2026-11-18 UTC.
 
 
 
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-11-16 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to understand","hardToUnderstand","thumb-down"],["Incorrect information or sample code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-11-18 UTC."],[],[]]

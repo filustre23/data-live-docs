@@ -442,7 +442,3 @@ CLASS_WEIGHTS = [STRUCT('example_label', .2)]
 ### `EARLY_STOP`
 
 **Syntax**
-
-```
-EARLY_STOP = {
-```

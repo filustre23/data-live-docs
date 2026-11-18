@@ -989,5 +989,6 @@ func main() {
 
 ```
 import com.google.cloud.dataplex.v1.DataScan;
-import com.google.cloud.dataplex.v1.
+import com.google.cloud.dataplex.v1.DataScanName;
+import
 ```

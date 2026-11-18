@@ -501,6 +501,5 @@ You can use the same token filter as many times as you'd like in a query. In
 the following query, `stop_words` is used twice:
 
 ```
-SELECT TEXT_ANALYZE(
-  'I like ❶ ② pies, you like Ño PIEs',
+SELECT TEXT_ANALYZE
 ```

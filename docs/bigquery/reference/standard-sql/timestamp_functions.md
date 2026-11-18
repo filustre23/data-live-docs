@@ -239,7 +239,5 @@ SELECT
   EXTRACT(YEAR FROM TIMESTAMP("2017-01-02 12:00:00+00")) AS year,
   EXTRACT(WEEK FROM TIMESTAMP("2017-01-02 12:00:00+00")) AS week
 
--- Display of results may differ, depending upon the environment and time zone
--- where this query was executed.
-/*---------+----
+-
 ```

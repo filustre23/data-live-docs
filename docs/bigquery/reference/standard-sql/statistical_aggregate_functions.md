@@ -234,7 +234,4 @@ before aggregation, resulting in a potentially unstable result.
 
 This function ignores any input pairs that contain one or more `NULL` values. If
 there is no input pair without `NULL` values, this function returns `NULL`.
-If there is exactly one input pair without `NULL` values, this function returns
-`0`.
-
-`NaN` is produce
+If there is

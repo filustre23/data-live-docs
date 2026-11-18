@@ -344,5 +344,5 @@ tables:
 ```
 SELECT
   username,
-  (SELECT mascot FROM Mascots WHERE Players.team
+  (SELECT mascot FROM Mascots
 ```

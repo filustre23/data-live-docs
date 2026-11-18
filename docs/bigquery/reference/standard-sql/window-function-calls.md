@@ -353,10 +353,4 @@ Only aggregate analytic functions can use a window frame clause.
     current row.
   + `current_row`: The window frame starts at the current row.
 * `numeric_expression`: An expression that represents a numeric type.
-  The numeric expression must be a constant, non-negative integer
-  or parameter.
-
-**Notes**
-
-If a boundary extends beyond the beginning or end of a partition,
-the window fram
+  The numeric expression must be a constant, non-nega

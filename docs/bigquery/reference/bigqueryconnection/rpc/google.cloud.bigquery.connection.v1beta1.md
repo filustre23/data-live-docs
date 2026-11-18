@@ -122,6 +122,3 @@ Credential to use with a connection.
 ## CreateConnectionRequest
 
 The request for `ConnectionService.CreateConnection`.
-
-| Fields | |
-| --- | --- |

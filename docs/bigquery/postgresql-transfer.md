@@ -230,8 +230,4 @@ bq mk
 
 ## 轉移中繼資料
 
-您也可以使用 PostgreSQL 連接器，[將中繼資料轉移至 Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/connectors?hl=zh-tw)。詳情請參閱「[將 PostgreSQL 中繼資料載入 Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/postgresql-transfer?hl=zh-tw)」。
-
-## 後續步驟
-
-* 閱讀 [BigQuery](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)
+您也可以使用 PostgreSQL 連接器，[將中繼資料轉移至 Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/connectors?hl=zh-tw)。詳情請參閱「[將 PostgreSQL 中繼資料載入 Knowledge Cata](https://docs.cloud.google.com/knowledge-catalog/docs/postgresql-transfer?hl=zh-tw)

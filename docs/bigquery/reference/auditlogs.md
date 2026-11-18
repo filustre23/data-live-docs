@@ -444,6 +444,3 @@ The following audit logs are associated with methods belonging to
 * **Method**: `jobservice.insert`
 * **Audit log type**: [Data access](/logging/docs/audit#data-access)
 * **Permissions**:
-  + `bigquery.jobs.create - ADMIN_WRITE`
-  + `bigquery.tables.create - ADMIN_WRITE`
-  + `bigquery.tables.getData`

@@ -36,10 +36,10 @@ BigQuery 預留項目可讓您將[運算單元](https://docs.cloud.google.com/bi
 
 資源可以指派給 `None`，代表沒有指派項目。指派給 `None` 的專案一律採用隨選計價。`None` 指派作業的常見用途是將組織指派給預留項目，然後使用 `None` 將特定專案或資料夾從該預留項目中排除。詳情請參閱「[將專案指派給 `None`](https://docs.cloud.google.com/bigquery/docs/reservations-assignments?hl=zh-tw#assign-project-to-none)」。
 
-建立指派作業時，您必須指定該作業的工作類型：
+建立指派作業時，您必須指定該指派作業的工作類型：
 
 * `QUERY`：將這項預留項目用於非持續查詢工作，包括 SQL、DDL、DML 和 BigQuery ML (內建模型) 查詢。
-* `AUTOMATIC_MATERIALIZED_VIEW_REFRESH`：將這個預留項目用於[自動 materialized view 重新整理](https://docs.cloud.google.com/bigquery/docs/materialized-views-manage?hl=zh-tw#automatic-refresh)工作。
+* `AUTOMATIC_MATERIALIZED_VIEW_REFRESH`：將這個預留項目用於[自動重新整理 materialized view](https://docs.cloud.google.com/bigquery/docs/materialized-views-manage?hl=zh-tw#automatic-refresh) 工作。
 * `BACKGROUND_CHANGE_DATA_CAPTURE`：選擇[使用自己的預留項目](https://docs.cloud.google.com/bigquery/docs/search-index?hl=zh-tw#use_your_own_reservation)執行 [BigQuery CDC 擷取](https://docs.cloud.google.com/bigquery/docs/change-data-capture?hl=zh-tw)背景工作時，請使用這個預留項目。Standard 版本不提供`BACKGROUND_CHANGE_DATA_CAPTURE`預留項目。
 * `BACKGROUND_COLUMN_METADATA_INDEX`：選擇[使用自己的預留項目](https://docs.cloud.google.com/bigquery/docs/search-index?hl=zh-tw#use_your_own_reservation)執行 [BigLake 中繼資料快取](https://docs.cloud.google.com/bigquery/docs/metadata-caching-external-tables?hl=zh-tw)背景工作時，請使用這個預留項目。使用 Datastream 的背景套用作業，將來源資料庫複製到 BigQuery 時，也請使用這個預留項目。Standard 版本不提供`BACKGROUND_COLUMN_METADATA_INDEX`預留項目。
 * `BACKGROUND_SEARCH_INDEX_REFRESH`：選擇[使用自己的預留項目](https://docs.cloud.google.com/bigquery/docs/search-index?hl=zh-tw#use_your_own_reservation)，執行 [BigQuery 搜尋](https://docs.cloud.google.com/bigquery/docs/search-intro?hl=zh-tw)索引管理背景工作時，請使用這個預留項目。Standard 版本不提供`BACKGROUND_SEARCH_INDEX_REFRESH`預留項目。
@@ -48,7 +48,7 @@ BigQuery 預留項目可讓您將[運算單元](https://docs.cloud.google.com/bi
 * `ML_EXTERNAL`：將這項預留項目用於 BigQuery ML [`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create?hl=zh-tw) 查詢，這些查詢會使用 BigQuery 外部的服務。詳情請參閱「[將運算單元指派給 BigQuery ML 工作負載](https://docs.cloud.google.com/bigquery/docs/reservations-assignments?hl=zh-tw#assign-ml-workload)」。Standard 版本不提供 `ML_EXTERNAL` 預留項目。
 * `PIPELINE`：：將這項預留項目用於載入和擷取工作。
 
-  根據預設，載入和擷取工作[免費](https://cloud.google.com/bigquery/pricing?hl=zh-tw#free)，並使用共用的運算單元集區。BigQuery 不保證這個共用集區的容量可用性，也不保證您看到的處理量。如果您要載入大量資料，工作可能會等待運算單元釋出。
+  根據預設，載入和擷取工作[免費](https://cloud.google.com/bigquery/pricing?hl=zh-tw#free)，並使用共用的運算單元集區。BigQuery 不保證這個共用集區的容量可用性，也不保證您看到的處理量。如果您載入大量資料，工作可能會等待運算單元釋出。
 
   將載入和擷取工作指派給預留項目後，這些工作就無法再存取免費集區。請[監控資源使用率和工作](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts?hl=zh-tw)，確保預留項目有足夠的容量，可在所需的工作時間內完成工作。
 
@@ -60,7 +60,7 @@ BigQuery 可讓您指定查詢在執行階段應使用的預留項目。這可�
 
 您必須[具備預留項目的存取權](#securable)，才能在執行查詢時使用預留項目。
 
-如果預設指派的預留項目版本為 Enterprise Plus，則只能由 Enterprise Plus 預留項目覆寫。
+如果預設指派的預留項目版本為 Enterprise Plus，則只能以 Enterprise Plus 預留項目覆寫。
 
 如要彈性指派預留項目，請[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)並指定預留項目。
 
@@ -68,7 +68,7 @@ BigQuery 可讓您指定查詢在執行階段應使用的預留項目。這可�
 
 您可以在某個區域使用依運算能力計費，在另一個區域使用隨選計費。根據預設，所有專案都採用隨選計費模式。在區域內，您可以將專案、資料夾或組織指派給預留項目，選擇採用依用量計費模式。舉例來說，如果您在美國多區域購買運算單元承諾使用合約，並將組織指派給預設預留項目，則組織在美國多區域會採用依運算資源計費模式，但在所有其他區域仍會採用隨選計費模式。
 
-在區域內，您可以明確將專案指派給預留項目，結合依容量計費和隨選計費模式。未指派預留項目的專案會繼續採用隨選計費模式。您也可以指派預留項目 ID `none`，明確指派專案使用隨選計費。如果您將資料夾或組織指派給預留項目，但希望該資料夾或組織中的某些專案使用隨選計費模式，這項功能就非常實用。詳情請參閱「[將專案指派給『無』](https://docs.cloud.google.com/bigquery/docs/reservations-assignments?hl=zh-tw#assign-project-to-none)」。
+在區域內，您可以明確將專案指派給預留項目，結合依容量計費和隨選計費模式。未指派預留項目的專案，則會繼續採用隨選計價模式。您也可以指派預留項目 ID `none`，明確指派專案使用隨選計費。如果您將資料夾或組織指派給預留項目，但希望該資料夾或組織中的某些專案使用隨選計費模式，這項功能就非常實用。詳情請參閱「[將專案指派給『無』](https://docs.cloud.google.com/bigquery/docs/reservations-assignments?hl=zh-tw#assign-project-to-none)」。
 
 採用隨選計費模式的專案，其容量與承諾使用容量分開計算。這些專案不會影響承諾使用資源的可用性。如果您查詢串流緩衝區中的資料，系統不會針對從串流緩衝區處理的位元組向您收取隨選工作的費用，但預留項目中執行的工作會使用運算單元來處理這些位元組。
 
@@ -155,7 +155,7 @@ BigQuery 的架構會隨著資源量增加而呈線性成長。視工作負載�
 
 預留項目是組織範圍的資源。建立預留項目時，您可以將運算資源指派給同一個 Google Cloud組織中的任何專案。大多數 BigQuery 使用者會使用單一管理專案，處理預留項目和承諾使用合約。這個管理專案與 Cloud Billing 帳戶相關聯，該帳戶會依容量計費。
 
-不過，如果您的組織較為複雜，有多個部門自行管理帳單，則建議使用多個管理專案。請注意，[閒置運算單元](https://docs.cloud.google.com/bigquery/docs/slots?hl=zh-tw#idle_slots)只能在同一個管理專案中建立的預留項目之間共用。請務必瞭解預留項目和管理專案的[配額與限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#reservations)。
+不過，如果您的組織較為複雜，有多個部門自行管理帳單，則建議使用多個管理專案。請注意，[閒置的運算單元](https://docs.cloud.google.com/bigquery/docs/slots?hl=zh-tw#idle_slots)只能在相同管理專案中建立的預留項目之間共用。請務必瞭解預留項目和管理專案的[配額與限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#reservations)。
 
 如果您使用多個 Google Cloud 組織，則必須為每個組織建立至少一個管理專案，然後在相關的管理專案中管理每個組織的預留項目和承諾使用合約。無法跨組織共用容量。
 
@@ -180,7 +180,7 @@ BigQuery 的預留項目可讓您進一步控管預留項目的使用方式，�
 
 承諾期結束後，系統會根據[所選續約方案](#renew-commitments)續約。
 
-年約或三年約方案是按月計費，但財務承諾涵蓋整個承諾期，無法按月取消。帳單報表中的用量資料每天都會更新，您隨時可以查看。
+年約或三年約方案是按月計費，但財務承諾期為整個合約期，無法按月取消。帳單報表中的用量資料每天都會更新，您隨時可以查看。
 
 運算單元承諾使用合約會受可用容量影響。嘗試購買運算單元承諾使用合約時，不保證一定能成功。不過，一旦成功購買承諾使用合約，即可使用該容量，直到合約到期為止。
 
@@ -194,7 +194,7 @@ BigQuery 的預留項目可讓您進一步控管預留項目的使用方式，�
 
 * **無。**承諾期結束後，承諾使用合約就會移除。預留項目不受影響。
 * **每年：**承諾期結束後，承諾會再續約一年。
-* **三年。**承諾期結束後，承諾使用合約會自動續約三年。
+* **三年。**承諾期結束後，承諾使用合約會再續約三年。
 
 **警告：**取消或允許運算單元承諾使用合約到期，並不會刪除或取消佈建相關聯的預留項目或指派作業。如果預留項目設有基準運算單元，則會繼續按照[即付即用費率](https://cloud.google.com/bigquery/pricing?hl=zh-tw#on_demand_pricing)產生基準運算單元時數費用。如要停止基準運算單元時數費用，並改回隨選計費，您必須在Google Cloud 控制台手動[刪除所有預留項目](https://docs.cloud.google.com/bigquery/docs/reservations-tasks?hl=zh-tw#delete_reservations)，並[刪除所有預留項目指派作業](https://docs.cloud.google.com/bigquery/docs/reservations-assignments?hl=zh-tw)。
 
@@ -209,7 +209,7 @@ BigQuery 的預留項目可讓您進一步控管預留項目的使用方式，�
 
 ### 承諾使用合約到期
 
-承諾使用合約一經建立即無法刪除。如要刪除年約或三年約，請將續約方案設為 `NONE`。使用承諾到期後，系統會自動刪除。如要進一步瞭解承諾使用合約到期，請參閱「[承諾使用合約到期](https://docs.cloud.google.com/bigquery/docs/reservations-commitments?hl=zh-tw#commitment_expiration)」。
+承諾使用合約一經建立即無法刪除。如要刪除年約或三年約方案，請將續約方案設為 `NONE`。使用承諾到期後，系統會自動刪除。如要進一步瞭解承諾使用合約到期，請參閱「[承諾使用合約到期](https://docs.cloud.google.com/bigquery/docs/reservations-commitments?hl=zh-tw#commitment_expiration)」。
 
 如果您不小心購買承諾使用合約，或是在設定承諾使用合約時發生錯誤，請向 [Cloud Customer Care](https://cloud.google.com/support-hub?hl=zh-tw) 尋求協助。
 
@@ -231,7 +231,7 @@ BigQuery 的預留項目可讓您進一步控管預留項目的使用方式，�
 
 如要使用預留項目可預測性，請先啟用[預留項目公平性](https://docs.cloud.google.com/bigquery/docs/slots?hl=zh-tw#fairness)。
 
-預留項目可預測性可讓您設定預留項目使用的絕對運算單元數量上限。BigQuery 提供基準運算單元、閒置運算單元和自動調度資源運算單元，做為潛在容量資源。建立預留項目並設定大小上限時，請根據過去的工作負載，確認基準運算單元數量，以及自動調度資源和閒置運算單元的適當設定。
+預留項目可預測性可讓您設定預留項目消耗的運算單元絕對數量上限。BigQuery 提供基準運算單元、閒置運算單元和自動調度資源運算單元，做為潛在容量資源。建立預留項目並設定大小上限時，請根據過去的工作負載，確認基準運算單元數量，以及自動調度資源和閒置運算單元的適當設定。
 
 如要啟用預留項目可預測性，您必須設定預留項目的運算單元數量上限和擴充模式。運算單元數量上限必須為正數，且大於指派給預留項目的基準運算單元數量。如要進一步瞭解如何使用預留項目可預測性，請參閱「[建立具有專屬運算單元的預留項目](https://docs.cloud.google.com/bigquery/docs/reservations-tasks?hl=zh-tw#create_a_reservation_with_dedicated_slots)」。設定預留項目的運算單元數量上限時，無法設定 `autoscale_max_slots` 的值。
 
@@ -242,8 +242,8 @@ BigQuery 的預留項目可讓您進一步控管預留項目的使用方式，�
 * **基準運算單元 + 閒置運算單元**：預留項目運算單元容量大於零，且資源調度模式為 `IDLE_SLOTS_ONLY`。預留項目會使用設定的基準數量和可用的閒置運算單元，最多可達運算單元數量上限。如果沒有足夠的閒置運算單元，預留項目可能無法達到上限。
 * **基準運算單元 + 閒置運算單元 + 自動調度資源運算單元**：預留項目運算單元容量大於零，且調度資源模式為 `ALL_SLOTS`。預留項目會先使用設定的基準運算單元數量，接著使用所有可用的閒置運算單元，最後使用自動調度資源運算單元。
 * **基準運算單元 + 自動調度資源運算單元**：預留項目運算單元容量大於零，且調度資源模式為 `AUTOSCALE_ONLY`。預留項目會先使用設定的基準運算單元，再使用自動調度資源運算單元。
-* **閒置的運算單元 + 自動調度資源運算單元**：預留項目運算單元容量為零，且調度模式為 `ALL_SLOTS`。預留項目會先使用所有可用的閒置運算單元，接著才會使用自動調度資源運算單元。
-* **閒置的運算單元**：預留項目運算單元數量為零，且資源調度模式為 `IDLE_SLOTS_ONLY`。預留項目會使用所有可用的閒置運算單元，但不會超過設定的上限。如果沒有足夠的閒置運算單元，預留項目可能無法達到上限。
+* **閒置的運算單元 + 自動調度資源運算單元**：預留項目運算單元容量為零，且調度模式為 `ALL_SLOTS`。預留項目會先使用所有可用的閒置的運算單元，接著才會使用自動調度資源運算單元。
+* **閒置的運算單元**：預留項目運算單元容量為零，且資源調度模式為 `IDLE_SLOTS_ONLY`。預留項目會使用所有可用的閒置運算單元，但不會超過設定的上限。如果閒置的運算單元不足，預留項目可能無法達到上限。
 
 下圖顯示可用的不同設定選項：
 
@@ -266,13 +266,40 @@ BigQuery 的預留項目可讓您進一步控管預留項目的使用方式，�
 
 預留項目群組可讓您管理多個預留項目的屬性，就像資料集整理資料表一樣。
 
-預留項目若屬於同一個預留項目群組，會先彼此共用閒置的運算單元，再提供給組織：
+下圖顯示同一預留項目群組中的預留項目如何先共用閒置運算單元，再提供給管理專案中的其他預留項目：
 
 ### 與預留項目群組共用閒置的運算單元
 
-閒置的運算單元會先平均分配給未分組的預留項目和預留項目群組，再平均分配給預留項目群組。
+只有未使用的基準運算單元和未分配的承諾使用運算單元，才會列為閒置的運算單元並開放共用。自動調度資源的運算單元一律不會共用，即使是相同預留項目群組中的預留項目也一樣。如果預留項目群組中的所有預留項目都有 `0` 個基準運算單元，則該群組沒有內部閒置的運算單元可供成員共用。不過，其成員仍可從[管理專案](#admin-project)中的其他預留項目借用閒置的運算單元。
 
-在以下範例中，有三個預留項目和 1,200 個閒置的運算單元。如果沒有預留項目群組，每個預留項目會平均分配到 400 個閒置的運算單元。將預留項目 1 和 2 分組後，閒置的運算單元的分配方式會改變。閒置的運算單元會先平均分配給預留項目群組和預留項目 3 (各 600 個閒置的運算單元)。接著，預留項目群組的 600 個閒置運算單元會平均分配給預留項目 1 和 2。
+當預留項目群組中的預留項目需要運算單元時，BigQuery 會按照下列順序分配容量：
+
+1. **自有基準運算單元**：預留項目會先使用自行設定的基準運算單元。
+2. **群組內閒置的運算單元**：如果預留項目需要更多運算單元，會從相同預留項目群組中的其他預留項目，借用未使用的基準運算單元。這些閒置的運算單元會平均分配給該群組中需要額外運算單元的有效預留項目。
+3. **專案層級閒置的運算單元**：預留項目群組中未使用的閒置基準運算單元，以及相同管理專案、位置和版本中未分組預留項目和未分配承諾使用合約的閒置基準運算單元，會形成專案層級閒置的運算單元集區。這個集區會平均分配給每個未分組的預留項目，以及需要額外運算單元的每個預留項目群組。預留項目群組的配額會平均分配給有效的成員預留項目。
+4. **自動調度資源運算單元**：所有可用的基準和閒置運算單元都用完後，預留項目會擴充自己的自動調度資源運算單元。
+
+如果將預留項目群組中某個預留項目的 `ignore_idle_slots` 設為 `true`，該預留項目就無法從任何預留項目 (包括同群組中的其他預留項目) 借用閒置的運算單元。不過，該預留項目本身未使用的基準運算單元，仍會先借給同群組的其他預留項目，再借給管理專案中的其他預留項目。
+
+#### 範例：在預留項目群組內共用閒置的運算單元
+
+在本範例中，管理專案包含下列預留項目：
+
+* `Reservation 1`：`Group A` 中有 600 個基準運算單元，目前閒置
+* `Reservation 2`：`Group A` 中有 200 個基準運算單元，有效
+* `Reservation 3`：未分組的有效預留項目
+
+如果 `Reservation 2` 需要 800 個運算單元，則會使用自己的 200 個基準運算單元，並從 `Reservation 1` 借用所有 600 個閒置基準運算單元，因為兩者屬於同一個預留項目群組。`Reservation 3` 從 `Group A` 收到 0 個閒置的運算單元。
+
+如果 `Reservation 2` 只需要 400 個運算單元，則會使用 200 個基準運算單元，並向 `Reservation 1` 借用 200 個閒置基準運算單元。`Group A` 剩餘的 400 個未使用基準運算單元，則會與 `Reservation 3` 共用。
+
+#### 範例：專案層級閒置運算單元在群組和未分組預留項目之間的分配情形
+
+在本範例中，管理專案有 1,200 個專案層級閒置的運算單元。目前有 3 個使用中的預留項目：`Reservation 1`、`Reservation 2` 和 `Reservation 3`，這些預留項目都需要從未分配的承諾使用合約或其他閒置預留項目中，取得額外運算單元。
+
+如果沒有預留項目群組，每個預留項目會平均分配 400 個閒置的運算單元。
+
+`Reservation 1` 和 `Reservation 2` 分組在一起時，閒置運算單元的分配方式會改變。專案層級的閒置運算單元會先平均分配給預留項目群組和 `Reservation 3`。預留項目群組和 `Reservation 3` 各獲得 600 個閒置的運算單元。接著，預留項目群組中的 600 個閒置的運算單元會平均分配給 `Reservation 1` 和 `Reservation 2`。`Reservation 1` 和 `Reservation 2` 各獲得 300 個閒置的運算單元。
 
 ### 限制
 
@@ -318,7 +345,7 @@ request`，代表要求超出專案設定的配額限制。
 
 #### 查詢和預留項目位於不同區域
 
-預留項目是區域性資源。查詢的執行位置與查詢中參照的資料表相同。
+預留項目是區域性資源。查詢的執行位置與查詢中參照的任何資料表相同。
 
 如果資料表的位置與預留項目不符，查詢就不會使用預留項目，而是按照隨選定價模式執行 (或針對符合資格的批次載入和匯出工作，使用免費的共用運算單元集區)。
 
@@ -348,7 +375,7 @@ request`，代表要求超出專案設定的配額限制。
 
 #### 變更資料擷取資料列修改作業
 
-如果您有[變更資料擷取 (CDC) 資料表](https://docs.cloud.google.com/bigquery/docs/change-data-capture?hl=zh-tw)，BigQuery 會在 `max_staleness` 間隔內，以使用 `BACKGROUND` 指派類型的背景工作，套用待處理的資料列修改。如果沒有 `BACKGROUND` 指派作業，這些工作會採用隨選計價模式。建議您為專案建立`BACKGROUND`指派作業，以免產生非預期的隨選費用。您可以透過工作 ID 中的 `queueworker_cdc_background_merge_coalesce` 子字串，識別這些工作。
+如果您有[變更資料擷取 (CDC) 資料表](https://docs.cloud.google.com/bigquery/docs/change-data-capture?hl=zh-tw)，BigQuery 會在 `max_staleness` 間隔內，以使用 `BACKGROUND` 指派類型的背景工作，套用待處理的資料列修改。如果沒有 `BACKGROUND` 指派項目，這些工作會採用隨選定價。建議您為專案建立`BACKGROUND`指派作業，以免產生非預期的隨選費用。您可以透過工作 ID 中的 `queueworker_cdc_background_merge_coalesce` 子字串，識別這些工作。
 
 #### 使用外部服務的 BigQuery ML 模型類型
 
@@ -371,11 +398,11 @@ BigQuery 擁有預留項目，代表 BigQuery 中特定作業的免費共用運�
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-13 (世界標準時間)。
+上次更新時間：2026-11-18 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-13 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-18 (世界標準時間)。"],[],[]]

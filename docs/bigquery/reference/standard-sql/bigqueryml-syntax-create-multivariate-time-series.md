@@ -534,6 +534,3 @@ This option accepts the following values:
 * `IN`: India
 * `IR`: Iran
 * `IT`: Italy
-* `JP`: Japan
-* `KR`: South Korea
-* `LV`: Latvia

@@ -359,5 +359,4 @@ types.
 | Date | Default format YYYY-MM-DD. | DATE |
 | Datetime | Default format YYYY-MM-DD HH24:MI:SS. | TIMESTAMP |
 | Time | Default format HH24:MI:SS. | TIME |
-| Timestamp | Default format YYYY-MM-DD HH24:MI:SS. | TIMESTAMP |
-| **Character and strings** |  |  |
+| Timest |

@@ -364,5 +364,3 @@ The `CHANGES` function returns a table with the following columns:
 * Change history isn't captured for table deletions made due to table partition
   expiration.
 * Performing
-  [data manipulation language (DML) statements over recently streamed data](/bigquery/docs/write-api#use_data_manipulation_language_dml_with_recently_streamed_data)
-  fails on tables that have the `enable_change_history` option set

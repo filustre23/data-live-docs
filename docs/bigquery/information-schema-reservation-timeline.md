@@ -138,6 +138,5 @@ WHERE
     BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 DAY)
         AND CURRENT_TIMESTAMP()
   AND res.reservation_id = 'YOUR_RESERVATION_ID'
-  AND (jobs.statement_type != "SCRIPT" OR jobs.statement_type IS NULL)  -- Avoid duplicate byte counting in parent and children jobs.
-GROUP
+  AND (jobs.statement_type != "SCRIPT" OR jobs.statement_type IS NULL)  <
 ```

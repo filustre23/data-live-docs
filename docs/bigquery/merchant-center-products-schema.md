@@ -132,6 +132,5 @@ FROM
   UNNEST(destinations) AS destination,
   UNNEST(disapproved_countries) AS disapproved_country
 WHERE
-  _PARTITIONDATE >= 'YYYY-MM-DD'
-GROUP
+  _PARTITIONDATE
 ```

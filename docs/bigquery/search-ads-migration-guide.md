@@ -128,6 +128,5 @@ SELECT
   (SUM(cs.metrics_cost_micros) / 1000000) AS Cost
 FROM
   `new_dataset.sa_Campaign_customer_id` c
-LEFT JOIN
-  `new_dataset.sa_CampaignStats_custome
+LEFT
 ```

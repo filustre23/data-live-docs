@@ -25,7 +25,9 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 BigQuery 存放區可讓您控管程式碼檔案的版本，並與團隊協作。您可以建立、共用及刪除 BigQuery 存放區，或將其連結至第三方 Git 存放區。
 
-如要使用資料夾版本管控功能，建議您使用 [BigQuery Studio Git 存放區](https://docs.cloud.google.com/bigquery/docs/git-repositories?hl=zh-tw)[(預先發布版)](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。這項整合功能可讓您直接在 BigQuery Studio 檔案瀏覽器中使用 Git 分支版本，並一次複製多個存放區，不必管理個別工作區。
+如要使用資料夾版本管控功能，建議您使用 [BigQuery Studio Git 存放區](https://docs.cloud.google.com/bigquery/docs/git-repositories?hl=zh-tw)。這項整合功能可讓您直接在 BigQuery Studio 檔案瀏覽器中使用 Git 分支版本，並一次複製多個存放區，不必管理個別工作區。
+
+**重要事項：**如果您在 BigQuery 存放區中建立資產 (例如查詢、筆記本 (包括含有 Apache Spark 工作的筆記本)、BigQuery 管道或 Dataform 工作流程)，則無法在 BigQuery 存放區中排定執行時間。如要排定及執行 Dataform 工作流程，則須使用 Dataform 存放區。如要排定查詢和筆記本，請使用 BigQuery Studio。詳情請參閱「[排定查詢](https://docs.cloud.google.com/bigquery/docs/scheduling-queries?hl=zh-tw)」、「[排定筆記本](https://docs.cloud.google.com/bigquery/docs/orchestrate-notebooks?hl=zh-tw)」和「[排定管道](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines?hl=zh-tw)」。
 
 ## 事前準備
 
@@ -118,6 +120,18 @@ BigQuery 中的程式碼資產是由 Dataform 提供，因此請考量下列安�
 * 凡是與 Dataform 服務代理共用的 Secret，都有可能遭到可編輯這些資產的使用者存取。為確保憑證安全，請限制建立和編輯權限，僅授予信任的使用者，並限制 Dataform 服務代理可存取的 Secret。詳情請參閱「[在套件安裝期間存取 Secret](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#secret-access-risk)」。
 
 詳情請參閱「[Dataform 權限的安全性考量](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#security-considerations-permissions)」。
+
+### 服務帳戶
+
+所有 BigQuery 存放區都會連結至預設的 Dataform 服務代理。這個服務帳戶衍生自您的專案編號，格式如下：
+
+```
+service-PROJECT_NUMBER@gcp-sa-dataform.iam.gserviceaccount.com
+```
+
+將 `<var>PROJECT_NUMBER</var>` 替換為 Google Cloud 專案編號。
+
+系統會強制執行[嚴格的「以…身分執行」模式](https://docs.cloud.google.com/dataform/docs/strict-act-as-mode?hl=zh-tw)，要求所有存放區使用自訂服務帳戶或 Google 帳戶的使用者憑證，排定管道和 Notebook 的執行時間。
 
 ## 建立存放區
 
@@ -415,11 +429,11 @@ BigQuery 接著會使用存取權杖登入 Git 供應商，代表使用者提交
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-16 (世界標準時間)。
+上次更新時間：2026-11-18 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-16 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-18 (世界標準時間)。"],[],[]]

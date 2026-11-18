@@ -287,7 +287,4 @@ Gets the value of a field at a selected position in a struct.
   integer literal or constant that represents a specific position in the struct.
   + `OFFSET(index)`: The index starts at zero. Produces an error if the index is
     out of range. Produces the same
-    result as `index` by itself.
-  + `ORDINAL(index)`: The index starts at one. Produces an error if the index
-    is out of range.
-* `index`:
+    result as `index` by it

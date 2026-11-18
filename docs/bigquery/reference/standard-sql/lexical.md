@@ -423,8 +423,5 @@ Examples:
 ['x', 'y', 'xy']
 ARRAY[1, 2, 3]
 ARRAY<STRING>['x', 'y', 'xy']
-ARRAY<INT64>[]
+ARRAY<INT64>
 ```
-
-An array literal represents a constant value of the
-[array da](/bigquery/docs/reference/standard-sql/data-types#array_type)

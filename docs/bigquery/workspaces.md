@@ -21,11 +21,11 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 這項產品或功能適用《[服務專屬條款](https://docs.cloud.google.com/terms/service-terms?hl=zh-tw#1)》中「一般服務條款」一節的《正式發布前產品條款》。正式發布前的產品和功能是按照「原樣」提供，支援範圍可能有限。
 詳情請參閱[推出階段說明](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
 
-**注意：** 如要提供意見回饋或提出與這項預先發布版功能相關的問題，請傳送電子郵件至 [bigquery-repositories-feedback@google.com](mailto:%20bigquery-repositories-feedback@google.com)。
+**注意：**如要提供意見回饋或提出與這項預先發布版功能相關的問題，請傳送電子郵件至 [bigquery-repositories-feedback@google.com](mailto:bigquery-repositories-feedback@google.com)。
 
-使用 BigQuery [存放區](https://docs.cloud.google.com/bigquery/docs/repository-intro?hl=zh-tw)版本管控檔案時，您可以使用[工作區](https://docs.cloud.google.com/bigquery/docs/workspaces-intro?hl=zh-tw)編輯這些存放區中的程式碼。本文說明如何在工作區中建立、刪除及管理檔案。
+使用 BigQuery [存放區](https://docs.cloud.google.com/bigquery/docs/use-repositories-workspaces-intro?hl=zh-tw#repositories)控管檔案版本時，您可以使用[工作區](https://docs.cloud.google.com/bigquery/docs/use-repositories-workspaces-intro?hl=zh-tw#workspaces)編輯這些存放區中的程式碼。本文說明如何在工作區中建立、刪除及管理檔案。
 
-如要使用資料夾版本管控功能，建議使用 [BigQuery Studio Git 存放區](https://docs.cloud.google.com/bigquery/docs/git-repositories?hl=zh-tw)。這項整合功能可讓您直接在 BigQuery Studio 檔案瀏覽器中使用 Git 分支，並一次複製多個存放區，不必管理個別工作區。
+如要使用資料夾版本管控功能，建議您使用 [BigQuery Studio Git 存放區](https://docs.cloud.google.com/bigquery/docs/git-repositories?hl=zh-tw)。這項整合功能可讓您直接在 BigQuery Studio 檔案瀏覽器中使用 Git 分支版本，並一次複製多個存放區，不必管理個別工作區。
 
 ## 事前準備
 
@@ -68,11 +68,11 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 選取要建立工作區的存放區。
 4. 在編輯器中，按一下「新增工作區」。系統會開啟「Create development workspace」(建立開發工作區) 窗格。
-5. 根據您要為工作區使用現有分支版本或新分支版本，選擇「Existing remote branch」(現有遠端分支版本) 或「New branch」(新分支版本) 圓形按鈕。
+5. 根據您要為工作區使用現有分支版本還是新分支版本，選擇「Existing remote branch」(現有遠端分支版本) 或「New branch」(新分支版本) 圓形按鈕。
 6. 指定要使用的分支版本：
 
    1. 如果選擇「Existing remote branch」圓形按鈕，請在「Remote branch」欄位中選擇現有分支版本。
-   2. 如果選擇「New branch」(新分支版本) 圓形按鈕，請在「Workspace ID」(工作區 ID) 欄位中輸入分支版本名稱。在第三方存放區中建立的分支版本名稱與 BigQuery 工作區 ID 相同。
+   2. 如果選擇「New branch」圓形按鈕，請在「Workspace ID」欄位中輸入分支版本名稱。在第三方存放區中建立的分支版本名稱與 BigQuery 工作區 ID 相同。
 
       ID 只能使用數字、英文字母、連字號和底線。
 7. 點選「建立」。
@@ -87,7 +87,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 2. 在左側窗格中，按一下 fork\_right「Source control」(原始碼控制)。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
-3. 選取要使用的存放區，其中包含您要使用的 workspace。
+3. 選取要使用的存放區，其中包含所需工作區。
 4. 找出工作區，然後按一下「開啟」。
 
    工作區會在 fork\_right 的「Source control」(原始碼控制) 窗格中開啟。
@@ -95,6 +95,17 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 6. 依序點選**「Create in repository」>「Directory」**。
 7. 在「Add a directory path」欄位中，輸入目錄路徑。
 8. 按一下「Create directory」。
+
+## 查看工作區
+
+在 BigQuery 頁面中，工作區會依字母順序顯示在相關聯的存放區下方。如要查看工作區，請按照下列步驟操作：
+
+1. 前往 Google Cloud 控制台的「BigQuery」頁面。
+
+   [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
+2. 在左側窗格中，按一下 fork\_right「Source control」(原始碼控制)。
+
+   如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 
 ## 在工作區中處理檔案
 
@@ -118,7 +129,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 2. 在左側窗格中，按一下 fork\_right「Source control」(原始碼控制)。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
-3. 選取要使用的存放區，其中包含您要使用的 workspace。
+3. 選取要使用的存放區，其中包含所需工作區。
 4. 找出工作區，然後按一下「開啟」。
 
    工作區會在 fork\_right 的「Source control」(原始碼控制) 窗格中開啟。
@@ -138,7 +149,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 2. 在左側窗格中，按一下 fork\_right「Source control」(原始碼控制)。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
-3. 選取要使用的存放區，其中包含您要使用的 workspace。
+3. 選取要使用的存放區，其中包含所需工作區。
 4. 找出工作區，然後按一下「開啟」。
 
    工作區會在 fork\_right 的「Source control」(原始碼控制) 窗格中開啟。
@@ -147,7 +158,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 7. 在「上傳」窗格中，執行下列任一操作：
 
    * 在「File upload」(檔案上傳) 欄位中，按一下「Browse」(瀏覽)，選取檔案，然後按一下「Open」(開啟)。
-   * 在「URL」欄位中輸入檔案網址。
+   * 在「URL」(網址) 欄位中，輸入檔案網址。
 8. 選用：在「Parent directory」(上層目錄) 欄位中，輸入要建立檔案的目錄路徑。
 9. 按一下「上傳」。
 
@@ -161,7 +172,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 2. 在左側窗格中，按一下 fork\_right「Source control」(原始碼控制)。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
-3. 選取要使用的存放區，其中包含您要使用的 workspace。
+3. 選取要使用的存放區，其中包含所需工作區。
 4. 找出工作區，然後按一下「開啟」。
 
    工作區會在 fork\_right 的「Source control」(原始碼控制) 窗格中開啟。
@@ -172,7 +183,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 本節說明如何在 BigQuery 中使用版本管控功能，追蹤工作區中的檔案。
 
-BigQuery 會使用 Git 追蹤存放區中檔案的每項變更。在 BigQuery 存放區中，您可以直接與 Git 存放區互動。在已連結的存放區中，您會與[連結存放區](https://docs.cloud.google.com/bigquery/docs/repositories?hl=zh-tw#connect-third-party)時設定的遠端存放區預設分支版本互動。
+BigQuery 會使用 Git 追蹤存放區中檔案的每項變更。在 BigQuery 存放區中，您可以直接與 Git 存放區互動。在連結的存放區中，您會與[連結存放區](https://docs.cloud.google.com/bigquery/docs/repositories?hl=zh-tw#connect-third-party)時設定的遠端存放區預設分支版本互動。
 
 BigQuery 會根據工作區中的變更狀態，顯示版本管控選項。舉例來說，只有在工作區中有未提交的本機變更時，BigQuery 才會顯示提交選項。如果工作區中的檔案與預設或預設分支版本完全相同，BigQuery 會顯示「Up to date」(最新) 狀態。
 
@@ -185,14 +196,15 @@ BigQuery 會顯示下列版本管控選項：
 :   將已修訂的變更推送至預設分支版本。如果工作區中沒有未提交的變更，且有未推送的修訂版本，存放區就會提供這個選項。
 
 推送至「`your-branch-name`」
-:   將已修訂的變更推送至 `your-branch-name`。如果工作區中沒有未提交的變更，則[連結至第三方 Git 存放區](https://docs.cloud.google.com/bigquery/docs/repositories?hl=zh-tw#connect-third-party)的存放區會提供這個選項。第三方存放區中的遠端分支版本名稱與 BigQuery 工作區 ID 相同。
+:   將已修訂的變更推送至 `your-branch-name`。
+    如果工作區中沒有未提交的變更，則[連結至第三方 Git 存放區](https://docs.cloud.google.com/bigquery/docs/repositories?hl=zh-tw#connect-third-party)的存放區會提供這個選項。第三方存放區中的遠端分支版本名稱與 BigQuery 工作區 ID 相同。
 
 從預設分支版本提取
 :   使用預設分支版本的最新變更更新工作區。
     如果工作區中沒有未提交的變更，存放區就會提供這個選項。
 
 從「`your-branch-name`」提取
-:   使用「`your-branch-name`」的最新變更更新工作區。
+:   使用 `your-branch-name` 的最新變更更新工作區。
     如果工作區中沒有未提交的變更，則[連結至第三方 Git 存放區](https://docs.cloud.google.com/bigquery/docs/repositories?hl=zh-tw#connect-third-party)的存放區會提供這個選項。第三方存放區中的遠端分支版本名稱與 BigQuery 工作區 ID 相同。
 
 還原為上次修訂版本
@@ -210,7 +222,7 @@ BigQuery 會顯示下列版本管控選項：
 2. 在左側窗格中，按一下 fork\_right「Source control」(原始碼控制)。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
-3. 選取要使用的存放區，其中包含您要使用的 workspace。
+3. 選取要使用的存放區，其中包含所需工作區。
 4. 找出工作區，然後按一下「開啟」。
 
    工作區會在 fork\_right 的「Source control」(原始碼控制) 窗格中開啟。
@@ -220,14 +232,14 @@ BigQuery 會顯示下列版本管控選項：
    2. 如果存放區[已連結至第三方 Git 存放區](https://docs.cloud.google.com/bigquery/docs/repositories?hl=zh-tw#connect-third-party)，請執行下列任一操作：
 
       1. 按一下「Pull from default branch」(從預設分支版本提取)，從第三方存放區的預設分支版本提取。
-      2. 按一下「**Pull from `your-branch-name`**(從 提取)，從與目前工作區對應的第三方存放區
+      2. 按一下**「Pull from」(從 `your-branch-name` 提取)**，從與目前工作區對應的第三方存放區
          分支版本提取。
 
 ### 修訂變更
 
-在工作區中進行變更後，BigQuery 會顯示「Commit」(提交) 選項。您可以提交所有本機變更或所選檔案。在工作區窗格中，您新增或修改的檔案旁邊會顯示藍色圓點。
+在工作區中進行變更後，BigQuery 會顯示「Commit」(提交) 選項。您可以修訂所有本機變更或所選檔案。在工作區窗格中，您新增或修改的檔案旁邊會顯示藍色圓點。
 
-**注意：** BigQuery 預設會使用已驗證 Google Cloud 使用者的電子郵件地址做為修訂版本作者，但 Dataform API 允許為修訂版本作者設定自訂電子郵件地址。這項行為與 [`git commit --author` 指令](https://git-scm.com/docs/git-commit#Documentation/git-commit.txt---authorauthor)類似，只會影響 Git 修訂版本記錄。提交作者的身分未經過加密編譯驗證。
+**注意：**BigQuery 預設會使用已驗證 Google Cloud 使用者的電子郵件地址做為修訂版本作者，但 Dataform API 允許為修訂版本作者設定自訂電子郵件地址。這項行為與 [`git commit --author` 指令](https://git-scm.com/docs/git-commit#Documentation/git-commit.txt---authorauthor)類似，只會影響 Git 修訂版本記錄。提交作者身分未經加密編譯驗證。
 
 如要將工作區的變更提交至存放區，請按照下列步驟操作：
 
@@ -237,7 +249,7 @@ BigQuery 會顯示下列版本管控選項：
 2. 在左側窗格中，按一下 fork\_right「Source control」(原始碼控制)。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
-3. 選取要使用的存放區，其中包含您要使用的 workspace。
+3. 選取要使用的存放區，其中包含所需工作區。
 4. 找出工作區，然後按一下「開啟」。
 
    工作區會在 fork\_right 的「Source control」(原始碼控制) 窗格中開啟。
@@ -247,14 +259,14 @@ BigQuery 會顯示下列版本管控選項：
    1. 選取要修訂的已變更檔案。
 
       如未選取任何檔案，BigQuery 會修訂所有本機變更。您可以依檔案狀態、檔案名稱和路徑篩選變更的檔案。
-   2. 在「Add a commit message」(新增修訂訊息) 欄位中，輸入修訂說明。
+   2. 在「Add a commit message」(新增修訂訊息) 欄位中，輸入修訂版本的說明。
    3. 按一下「**Commit All changes**」或「**Commit X changes**」。
 
       按鈕名稱取決於您選取要修訂的檔案。
 
 ### 推送變更
 
-提交變更後，BigQuery 會顯示「推送」選項。
+提交變更後，BigQuery 會顯示「Push」(推送) 選項。
 
 如要將工作區的變更推送至存放區，請按照下列步驟操作：
 
@@ -264,7 +276,7 @@ BigQuery 會顯示下列版本管控選項：
 2. 在左側窗格中，按一下 fork\_right「Source control」(原始碼控制)。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
-3. 選取要使用的存放區，其中包含您要使用的 workspace。
+3. 選取要使用的存放區，其中包含所需工作區。
 4. 找出工作區，然後按一下「開啟」。
 
    工作區會在 fork\_right 的「Source control」(原始碼控制) 窗格中開啟。
@@ -287,7 +299,7 @@ BigQuery 會顯示下列版本管控選項：
 2. 在左側窗格中，按一下 fork\_right「Source control」(原始碼控制)。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
-3. 選取要使用的存放區，其中包含您要使用的 workspace。
+3. 選取要使用的存放區，其中包含所需工作區。
 4. 找出工作區，然後按一下「開啟」。
 
    工作區會在 fork\_right 的「Source control」(原始碼控制) 窗格中開啟。
@@ -297,9 +309,9 @@ BigQuery 會顯示下列版本管控選項：
 
 如果工作區中的本機變更與存放區預設分支版本的變更不相容，就會發生合併衝突。合併衝突通常發生在多位使用者同時編輯同一個檔案時。
 
-當您從分支提取內容，而另一位使用者已將衝突的變更推送至相同分支時，通常會發生合併衝突。您必須編輯受影響的檔案，手動解決合併衝突。
+當您從分支提取內容時，如果其他使用者已將不一致的變更推送至相同分支，通常會發生合併衝突。您必須編輯受影響的檔案，手動解決合併衝突。
 
-以下程式碼範例顯示 SQL 檔案中的合併衝突：
+下列程式碼範例顯示 SQL 檔案中的合併衝突：
 
 ```
     <<<<<<< HEAD
@@ -317,7 +329,7 @@ BigQuery 會顯示下列版本管控選項：
 2. 在左側窗格中，按一下 fork\_right「Source control」(原始碼控制)。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
-3. 選取要使用的存放區，其中包含您要使用的 workspace。
+3. 選取要使用的存放區，其中包含所需工作區。
 4. 找出工作區，然後按一下「開啟」。
 
    工作區會在 fork\_right 的「Source control」(原始碼控制) 窗格中開啟。
@@ -335,7 +347,7 @@ BigQuery 會顯示下列版本管控選項：
 2. 在左側窗格中，按一下 fork\_right「Source control」(原始碼控制)。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
-3. 選取要使用的存放區，其中包含您要使用的 workspace。
+3. 選取要使用的存放區，其中包含所需工作區。
 4. 找出工作區，然後按一下「開啟」。
 
    工作區會在 fork\_right 的「Source control」(原始碼控制) 窗格中開啟。
@@ -352,7 +364,7 @@ BigQuery 會顯示下列版本管控選項：
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 選取要刪除的工作區所在的存放區。
-4. 找出工作區，然後依序點選 more\_vert「Open actions」(開啟動作)**>「Delete」(刪除)**。
+4. 找出工作區，然後依序點選 more\_vert「Open actions」(開啟動作)**「Delete」(刪除)**。
 5. 點選「刪除」。
 
 ## 後續步驟
@@ -367,11 +379,11 @@ BigQuery 會顯示下列版本管控選項：
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-11 (世界標準時間)。
+上次更新時間：2026-11-18 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-11 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-18 (世界標準時間)。"],[],[]]

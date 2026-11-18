@@ -117,7 +117,4 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 `PROJECT_ID`.`region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_USER
 ```
 
-更改下列內容：
-
-* `PROJECT_ID`：專案 ID
-* `REGION_NAME`：專案
+更改下列

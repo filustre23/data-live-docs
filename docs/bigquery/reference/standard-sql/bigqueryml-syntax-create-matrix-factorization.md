@@ -540,9 +540,4 @@ value for the [`DATA_SPLIT_METHOD` option](#data_split_method):
   with a value of `EVAL` are used as evaluation data, and rows with a value of
   `TEST` are used as test data.
 
-The column you specify for `DATA_SPLIT_COL` can't be used as a feature or
-label, and is excluded from features automatically.
-
-**Arguments**
-
-A
+The column you specify for <

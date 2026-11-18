@@ -263,8 +263,4 @@ bq mk
    3. 按一下「編輯」，更新移轉設定。
    4. 在「Client ID」和「staged Client Secret」欄位中，將值更新為新的用戶端密鑰。
    5. 按一下「儲存」。
-3. 在 Salesforce Marketing Cloud 中[啟用新的暫存密鑰](https://developer.salesforce.com/docs/marketing/marketing-cloud/guide/rotate-oauth2-secret.html#activate-a-staged-secret)，停用目前的密鑰，並以暫存密鑰取代。
-
-## 排解轉移設定問題
-
-如果您在設定
+3. 在 Salesforce Marketing Cloud 中[啟用新的暫存密鑰](https://developer.salesforce.com/docs/marketing/marketing-cloud/guide/rotate-oauth2-secret.html#activate-a-staged-secret)，停

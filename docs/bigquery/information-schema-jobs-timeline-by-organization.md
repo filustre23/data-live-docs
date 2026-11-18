@@ -150,6 +150,5 @@ SELECT
   res.reservation_id,
   SUM(jobs.period_slot_ms) / 1000 AS period_slot_seconds,
   ANY_VALUE(COALESCE(s.slots_assigned, res.slots_assigned)) AS estimated_slots_assigned,
-  ANY_VALUE(COALESCE(s.slots_max_assigned, res.slots_max_assigned)) AS estimated_slots_max_assigned
-FROM
+  ANY_VALUE(COALESCE(s.slots_max_assigned, res.slots_max_assigned)) AS
 ```

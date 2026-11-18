@@ -975,4 +975,7 @@ import (
 // protected with a customer managed encryption key.
 func copyTableWithCMEK(projectID, datasetID, tableID string) error {
 	// projectID := "my-project-id"
+	// datasetID := "mydataset"
+	// tableID := "mytable"
+	ctx := context.
 ```

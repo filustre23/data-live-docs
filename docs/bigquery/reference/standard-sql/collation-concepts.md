@@ -340,5 +340,5 @@ For example:
 CREATE TABLE table_a
 (
     col_a STRING COLLATE 'und:ci',
-    col_b STRING COLLATE '',</
+    col_b STRIN
 ```

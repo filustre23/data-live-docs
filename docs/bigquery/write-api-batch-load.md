@@ -600,5 +600,9 @@ public class WritePendingStream {
       }
 
       public void onSuccess(AppendRowsResponse response) {
-        System.out.format("Append %d success\n", response.getAppendResult().
+        System.out.format("Append %d success\n", response.getAppendResult().getOffset().getValue());
+        done();
+      }
+
+      public
 ```

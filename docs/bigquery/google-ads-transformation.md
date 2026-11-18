@@ -572,11 +572,3 @@ click-level data.
 
 Google Ads API resource (v26.0.0):
 :   [Click View](https://developers.google.com/google-ads/api/fields/v26/click_view)
-
-Google Ads table:
-:   p\_ads\_ClickStats\_customer\_id
-
-BigQuery view:
-:   ClickStats\_customer\_id
-
-AdWords report (

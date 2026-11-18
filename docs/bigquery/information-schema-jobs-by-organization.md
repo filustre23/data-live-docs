@@ -118,9 +118,5 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 如要對預設專案以外的專案執行查詢，請按照下列格式新增專案 ID：
 
 ```
-`PROJECT_ID`.`region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_ORGANIZATION
+`PROJECT_ID`.`region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_ORGANIZ
 ```
-
-更改下列內容：
-
-* `PROJECT_ID`：專案 ID

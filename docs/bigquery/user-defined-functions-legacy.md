@@ -228,6 +228,5 @@ bigquery.defineFunction(
   [{name: 'title', type: 'string'},
    {name: 'requests', type: 'integer'}],
 
-  urlDecode  // The function reference
-);
+  urlDecode  // The function
 ```

@@ -33,7 +33,7 @@ BigQuery 可讓您根據用途，立即 (互動式)、批次或持續執行查�
 * 透過程式輔助方式呼叫 BigQuery [REST API](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2?hl=zh-tw) 中的 [`jobs.query`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query?hl=zh-tw) 或 [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert?hl=zh-tw) 方法。
 * 使用 BigQuery [用戶端程式庫](https://docs.cloud.google.com/bigquery/docs/reference/libraries?hl=zh-tw)。
 
-BigQuery 會將查詢結果儲存至[臨時資料表 (預設) 或永久資料表](https://docs.cloud.google.com/bigquery/docs/writing-results?hl=zh-tw#temporary_and_permanent_tables)。將永久資料表指定為結果的目的地資料表時，您可以選擇要附加或覆寫現有資料表，或建立名稱不重複的新資料表。
+BigQuery 會將查詢結果儲存至[臨時資料表 (預設) 或永久資料表](https://docs.cloud.google.com/bigquery/docs/writing-results?hl=zh-tw)。將永久資料表指定為結果的目的地資料表時，您可以選擇要附加或覆寫現有資料表，或建立名稱不重複的新資料表。
 
 **注意：** 如果您從某項專案查詢儲存在其他專案的資料，系統會向執行查詢的專案收取查詢工作費用，並向儲存資料的專案收取 BigQuery 資料儲存量費用。
 

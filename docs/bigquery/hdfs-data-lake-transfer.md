@@ -242,5 +242,4 @@ JSON 檔案中的 `condition` 欄位支援下列值，每個值都有特定的 `
       1. 在「儲存空間類型」部分，選取下列其中一個選項。只有在「Transfer strategy」(轉移策略) 設為 `FULL_TRANSFER` 時，才能使用這個欄位：
       2. `HDFS`：如果檔案儲存空間為 `HDFS`，請選取這個選項。在「STS agent pool name」(STS 代理集區名稱) 欄位中，您必須提供[設定 Storage Transfer 代理](#configure-sts)時建立的代理集區名稱。
       3. `S3`：如果檔案儲存空間為 `Amazon S3`，請選取這個選項。在「Access key ID」(存取金鑰 ID) 和「Secret access key」(私密存取金鑰) 欄位中，您必須提供[設定存取憑證](#configure-sts)時建立的存取金鑰 ID 和私密存取金鑰。
-      4. `AZURE`：如果檔案儲存空間為 `Azure Blob Storage`，請選取這個選項。在「SAS token」(SAS 權杖) 欄位中，您必須提供[設定存取憑證](#configure-sts)時建立的 SAS 權杖。
-   4. 選用：在「Partition Filter gcs path」(分區篩選器 GCS 路徑) 部分，輸入自訂篩選器
+      4. `AZURE`：如果檔案儲存空間為 `Azure Blob Storage`，請選取這個選項。在「SAS token」(SAS 權杖) 欄位中，您必須提供

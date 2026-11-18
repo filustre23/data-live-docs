@@ -12,6 +12,11 @@ Send feedback
   + [JSON representation](#Dataset.SCHEMA_REPRESENTATION)
 * [DatasetReference](#DatasetReference)
   + [JSON representation](#DatasetReference.SCHEMA_REPRESENTATION)
+* [Replica](#Replica)
+  + [JSON representation](#Replica.SCHEMA_REPRESENTATION)
+* [ReplicaState](#ReplicaState)
+* [ReplicaOptions](#ReplicaOptions)
+  + [JSON representation](#ReplicaOptions.SCHEMA_REPRESENTATION)
 * [LinkedDatasetSource](#LinkedDatasetSource)
   + [JSON representation](#LinkedDatasetSource.SCHEMA_REPRESENTATION)
 * [LinkedDatasetMetadata](#LinkedDatasetMetadata)
@@ -32,7 +37,7 @@ Represents a BigQuery dataset.
 
 | JSON representation |
 | --- |
-| ``` {   "kind": string,   "etag": string,   "id": string,   "selfLink": string,   "datasetReference": {     object (DatasetReference)   },   "friendlyName": string,   "description": string,   "defaultTableExpirationMs": string,   "defaultPartitionExpirationMs": string,   "labels": {     string: string,     ...   },   "access": [     {       "role": string,       "userByEmail": string,       "groupByEmail": string,       "domain": string,       "specialGroup": string,       "iamMember": string,       "view": {         object (TableReference)       },       "routine": {         object (RoutineReference)       },       "dataset": {         object (DatasetAccessEntry)       },       "condition": {         object (Expr)       }     }   ],   "creationTime": string,   "lastModifiedTime": string,   "location": string,   "defaultEncryptionConfiguration": {     object (EncryptionConfiguration)   },   "satisfiesPzs": boolean,   "satisfiesPzi": boolean,   "type": string,   "linkedDatasetSource": {     object (LinkedDatasetSource)   },   "linkedDatasetMetadata": {     object (LinkedDatasetMetadata)   },   "externalDatasetReference": {     object (ExternalDatasetReference)   },   "externalCatalogDatasetOptions": {     object (ExternalCatalogDatasetOptions)   },   "isCaseInsensitive": boolean,   "defaultCollation": string,   "defaultRoundingMode": enum (RoundingMode),   "maxTimeTravelHours": string,   "tags": [     {       object (GcpTag)     }   ],   "storageBillingModel": enum (StorageBillingModel),   "resourceTags": {     string: string,     ...   },   "catalogSource": string } ``` |
+| ``` {   "kind": string,   "etag": string,   "id": string,   "selfLink": string,   "datasetReference": {     object (DatasetReference)   },   "friendlyName": string,   "description": string,   "defaultTableExpirationMs": string,   "defaultPartitionExpirationMs": string,   "labels": {     string: string,     ...   },   "access": [     {       "role": string,       "userByEmail": string,       "groupByEmail": string,       "domain": string,       "specialGroup": string,       "iamMember": string,       "view": {         object (TableReference)       },       "routine": {         object (RoutineReference)       },       "dataset": {         object (DatasetAccessEntry)       },       "condition": {         object (Expr)       }     }   ],   "creationTime": string,   "lastModifiedTime": string,   "location": string,   "defaultEncryptionConfiguration": {     object (EncryptionConfiguration)   },   "replicas": [     {       object (Replica)     }   ],   "satisfiesPzs": boolean,   "satisfiesPzi": boolean,   "type": string,   "linkedDatasetSource": {     object (LinkedDatasetSource)   },   "linkedDatasetMetadata": {     object (LinkedDatasetMetadata)   },   "externalDatasetReference": {     object (ExternalDatasetReference)   },   "externalCatalogDatasetOptions": {     object (ExternalCatalogDatasetOptions)   },   "isCaseInsensitive": boolean,   "defaultCollation": string,   "defaultRoundingMode": enum (RoundingMode),   "maxTimeTravelHours": string,   "tags": [     {       object (GcpTag)     }   ],   "storageBillingModel": enum (StorageBillingModel),   "resourceTags": {     string: string,     ...   },   "failoverReservationId": string,   "catalogSource": string } ``` |
 
 | Fields | |
 | --- | --- |
@@ -61,6 +66,7 @@ Represents a BigQuery dataset.
 | `lastModifiedTime` | `string (int64 format)`  Output only. The date when this dataset was last modified, in milliseconds since the epoch. |
 | `location` | `string`  The geographic location where the dataset should reside. See <https://cloud.google.com/bigquery/docs/locations> for supported locations. |
 | `defaultEncryptionConfiguration` | `object (EncryptionConfiguration)`  The default encryption key for all tables in the dataset. After this property is set, the encryption key of all newly-created tables in the dataset is set to this value unless the table creation request or query explicitly overrides the key. |
+| `replicas[]` | `object (Replica)`  Optional. The list of replicas in a cross region replicated or disaster recovery dataset. |
 | `satisfiesPzs` | `boolean`  Output only. Reserved for future use. |
 | `satisfiesPzi` | `boolean`  Output only. Reserved for future use. |
 | `type` | `string`  Output only. Same as `type` in `ListFormatDataset`. The type of the dataset, one of:   * DEFAULT - only accessible by owner and authorized accounts, * PUBLIC - accessible by everyone, * LINKED - linked dataset, * EXTERNAL - dataset with definition in external metadata catalog, * BIGLAKE\_ICEBERG - a Biglake dataset accessible through the Iceberg API, * BIGLAKE\_HIVE - a Biglake dataset accessible through the Hive API. |
@@ -71,7 +77,4 @@ Represents a BigQuery dataset.
 | `isCaseInsensitive` | `boolean`  Optional. TRUE if the dataset and its table names are case-insensitive, otherwise FALSE. By default, this is FALSE, which means the dataset and its table names are case-sensitive. This field does not affect routine references. |
 | `defaultCollation` | `string`  Optional. Defines the default collation specification of future tables created in the dataset. If a table is created in this dataset without table-level default collation, then the table inherits the dataset default collation, which is applied to the string fields that do not have explicit collation specified. A change to this field affects only tables created afterwards, and does not alter the existing tables. The following values are supported:   * 'und:ci': undetermined locale, case insensitive. * '': empty string. Default to case-sensitive behavior. |
 | `defaultRoundingMode` | `enum (RoundingMode)`  Optional. Defines the default rounding mode specification of new tables created within this dataset. During table creation, if this field is specified, the table within this dataset will inherit the default rounding mode of the dataset. Setting the default rounding mode on a table overrides this option. Existing tables in the dataset are unaffected. If columns are defined during that table creation, they will immediately inherit the table's default rounding mode, unless otherwise specified. |
-| `maxTimeTravelHours` | `string (Int64Value format)`  Optional. Defines the time travel window in hours. The value can be from 48 to 168 hours (2 to 7 days). The default value is 168 hours if this is not set. |
-| `tags[] (deprecated)` | `object (GcpTag)`  This item is deprecated!  Output only. Tags for the dataset. To provide tags as inputs, use the `resourceTags` field. |
-| `storageBillingModel` | `enum (StorageBillingModel)`  Optional. Updates storageBillingModel for the dataset. |
-| `resourceTags` | `map (key: string, value: string)` |
+| `maxTimeTravelHours` | `string (Int64Value format)` |

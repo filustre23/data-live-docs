@@ -1168,4 +1168,9 @@ func revokeAccessToDataset(w io.Writer, projectID, datasetID, entity string) err
 		if entry.Entity != entity {
 			newAccessList = append(newAccessList, entry)
 		}
+	}
+
+	// Only proceed with update if something in the access list was removed.
+	// Additionally, we use the ETag from the initial metadata to ensure no
+	// other changes were made to the access list in the interim.</
 ```

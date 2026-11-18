@@ -316,6 +316,4 @@ If `expr` evaluates to `NULL`, returns `null_result`. Otherwise, returns
 If `expr` is non-`NULL`, the expression behaves as if `null_result` isn't
 evaluated: evaluation errors in `null_result` are ignored, even though both
 input expressions might still be evaluated. If `expr` evaluates to `NULL` and
-`null_result` produces an evaluation error, the query fails with that error.
-For more information, see
-[Evaluation order and short-circuiting](#short_circuiting).
+`null_re`

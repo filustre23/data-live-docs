@@ -245,5 +245,4 @@ should be the last bytes of `ciphertext`. If the IV and authentic tag are one
 tag commonly require 16 bytes, but may vary in size.
 
 `additional_data` is a `STRING` or `BYTES` value that binds the ciphertext to
-its context. This forces the ciphertext to be decrypted in the same context in
-which it was encrypted. This function casts any `STRING` value to
+its context. This forces the ciphertext

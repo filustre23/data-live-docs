@@ -240,4 +240,4 @@ SELECT * FROM `mydataset.classfied_result_next`;
   [Model inference overview](/bigquery/docs/inference-overview).
 * For more information about supported SQL statements and functions for
   generative AI models, see
-  [End-to-end user journeys for generative AI models](/bigquery/docs/e2e-journey-genai).
+  [End-to-end user journeys for generati](/bigquery/docs/e2e-journey-genai)

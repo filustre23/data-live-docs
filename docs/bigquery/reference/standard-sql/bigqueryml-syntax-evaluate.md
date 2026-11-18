@@ -479,5 +479,4 @@ ML.EVALUATE(
 
   + The table must have a column named `input_text` that contains the
     prompt text to use when evaluating the model.
-  + The table must have a column named `output_text` that contains the
-    generated text that you would expect to be returned by the model.
+  + The

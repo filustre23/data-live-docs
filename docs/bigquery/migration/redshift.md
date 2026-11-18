@@ -184,8 +184,4 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ### 使用獨立遷移佇列設定工作負載控制
 
-您也可以[定義用於遷移的 Amazon Redshift 佇列](https://docs.aws.amazon.com/redshift/latest/dg/cm-c-modifying-wlm-configuration.html)，限制及分隔用於遷移的資源。您可以設定這個遷移佇列的並行查詢數量上限。接著，您可以將特定[遷移使用者群組](https://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_GROUP.html)與佇列建立關聯，並在設定遷移作業時使用這些憑證，將資料移轉至 BigQuery。Transfer Service 只能存取遷移佇列。
-
-### 收集轉移資訊
-
-收集使用 BigQuery 資料移轉服務設定遷移作業所需的資訊：
+您也可以[定義用於遷移的 Amazon Redshift 佇列](https://docs.aws.amazon.com/redshift/latest/dg/cm-c-modifying-wlm-configuration.html)，限制及分隔用於遷移的資源。您可以設定這個遷移佇列的並行查詢數量上限。接著，您可以將特定[遷移使用者群組](https://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_GROUP.html)與佇列建立關聯，並在設定遷移作業時使用這些憑證，將資料移轉至 BigQuery。Transfer Service 只能存取

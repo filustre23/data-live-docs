@@ -517,5 +517,4 @@ is unweighted. If the labels in the training data are imbalanced, the model
 might learn to predict the most popular class of labels more heavily, which
 you might not want.
 
-To balance every class, set this option to `TRUE`. Balance is
-accomplished using the following formula:
+To balance every class, set this option to `TR`

@@ -304,6 +304,5 @@ partition_column=2018-11-01
 在後續的遷移作業中，再次執行 `SHOW PARTITIONS` 指令，列出所有分區，並與追蹤資料表中的分區資訊進行比較，檢查是否有任何尚未遷移的新分區。
 
 ```
-hive> SHOW PARTITIONS corp.employees
-partition_column=2018-10-01
+hive> SHOW PARTITIONS
 ```

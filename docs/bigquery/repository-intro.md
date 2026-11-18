@@ -14,69 +14,50 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 你可以依據偏好儲存及分類內容。
 
-# 存放區簡介
+# 存放區和工作區簡介
 
 **預覽**
 
 這項產品或功能適用《[服務專屬條款](https://docs.cloud.google.com/terms/service-terms?hl=zh-tw#1)》中「一般服務條款」一節的《正式發布前產品條款》。正式發布前的產品和功能是按照「原樣」提供，支援範圍可能有限。
 詳情請參閱[推出階段說明](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
 
-**注意：** 如要提供意見回饋或提出與這項預先發布版功能相關的問題，請傳送電子郵件至 [bigquery-repositories-feedback@google.com](mailto:bigquery-repositories-feedback@google.com)。
+**注意：**如要提供意見回饋或提出與這項預先發布版功能相關的問題，請傳送電子郵件至 [bigquery-repositories-feedback@google.com](mailto:bigquery-repositories-feedback@google.com)。
 
-本文說明 BigQuery 存放區，可為您在 BigQuery 中使用的檔案提供版本管控功能。這些存放區可協助您追蹤 BigQuery 資產 (例如查詢和筆記本) 的變更、與團隊協作，以及還原至先前的版本。
+BigQuery 存放區和工作區可讓您對程式碼資產 (例如 SQL 查詢、Python 筆記本、資料畫布和資料準備) 套用 Git 版本管控。版本管控功能可協助您追蹤檔案變更、與團隊協作而不覆寫共用工作，並在需要時還原至先前的修訂版本。共用程式碼集會儲存在內建或連結的第三方 Git 存放區。接著，您可以使用個別工作區編輯檔案、修訂變更，以及推送或提取分支版本之間的更新。
 
-BigQuery 存放區的功能與 Git 存放區相同。您可以使用 BigQuery 內建的 Git 功能，或連結至現有的第三方 Git 存放區。在每個存放區中，您可以建立[工作區](https://docs.cloud.google.com/bigquery/docs/workspaces-intro?hl=zh-tw)，編輯儲存在該處的程式碼。
+如要使用資料夾版本管控功能，建議您使用 [BigQuery Studio Git 存放區](https://docs.cloud.google.com/bigquery/docs/git-repositories?hl=zh-tw)。這項整合功能可讓您直接在 BigQuery Studio 檔案瀏覽器中使用 Git 分支版本，並一次複製多個存放區，不必管理個別工作區。
 
-如要使用資料夾版本管控功能，建議使用 [BigQuery Studio Git 存放區](https://docs.cloud.google.com/bigquery/docs/git-repositories?hl=zh-tw)。這項整合功能可讓您直接在 BigQuery Studio 檔案瀏覽器中使用 Git 分支，並一次複製多個存放區，不必管理個別工作區。
+## 存放區
 
-如要查看存放區，請在 BigQuery 頁面的左側窗格中，按一下 fork\_right「Source control」(原始碼控管)。您可以在「Source control」(原始碼控制) 窗格的下拉式選單中選取存放區。
+BigQuery 存放區的功能與 Git 存放區相同，可為您在 BigQuery 中使用的檔案提供版本管控。您可以使用 BigQuery 內建的 Git 功能，或連結至現有的第三方 Git 存放區。您可以在每個存放區建立[工作區](#workspaces)，編輯儲存在其中的程式碼。
 
-**重要事項：** 如果您在 BigQuery 存放區中建立資產 (例如查詢、筆記本 (包括含有 Apache Spark 工作的筆記本)、BigQuery 管道或 Dataform 工作流程)，就無法在 BigQuery 存放區中排定執行時間。如要排定及執行 Dataform 工作流程，則須使用 Dataform 存放區。如要排定查詢和筆記本，請使用 BigQuery Studio。詳情請參閱「[排定查詢](https://docs.cloud.google.com/bigquery/docs/scheduling-queries?hl=zh-tw)」、「[排定筆記本](https://docs.cloud.google.com/bigquery/docs/orchestrate-notebooks?hl=zh-tw)」和「[排定管道](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines?hl=zh-tw)」。
+如要進一步瞭解如何建立及管理存放區，請參閱「[建立及管理存放區](https://docs.cloud.google.com/bigquery/docs/repositories?hl=zh-tw)」。
 
-## 第三方存放區
+## 工作區
 
-您可以視需要將 BigQuery 存放區連結至第三方 Git 存放區。在這種情況下，第三方存放區會儲存存放區程式碼，而非 BigQuery。BigQuery 會與第三方存放區互動，讓您在 BigQuery 工作區中編輯及執行內容。視您選擇的存放區類型而定，您可以使用 SSH 或 HTTPS 連線至第三方存放區。
+您可以在 BigQuery 的工作區編輯及管理儲存在[存放區](#repositories)中的程式碼。您可以在工作區建立及修改檔案，而上層存放區會使用 Git 記錄變更及管理檔案版本。
 
-下表列出支援的 Git 供應商，以及其存放區可用的連線方法：
-
-| Git 供應商 | 連線方法 |
-| --- | --- |
-| Microsoft Azure DevOps Services | SSH |
-| Bitbucket | SSH |
-| GitHub | SSH 或 HTTPS |
-| GitLab | SSH 或 HTTPS |
-
-詳情請參閱「[連線至第三方存放區](https://docs.cloud.google.com/bigquery/docs/repositories?hl=zh-tw#connect-third-party)」和「[使用 BigQuery Studio Git 存放區管理程式碼](https://docs.cloud.google.com/bigquery/docs/git-repositories?hl=zh-tw)」。
-
-## 服務帳戶
-
-所有 BigQuery 存放區都會連結至預設的 Dataform 服務代理。這個服務帳戶衍生自您的專案編號，格式如下：
-
-```
-service-YOUR_PROJECT_NUMBER@gcp-sa-dataform.iam.gserviceaccount.com
-```
-
-系統會強制執行[嚴格的「以…身分執行」模式](https://docs.cloud.google.com/dataform/docs/strict-act-as-mode?hl=zh-tw)，要求所有存放區使用自訂服務帳戶或 Google 帳戶的使用者憑證，才能排定管道和筆記本。
+如要進一步瞭解如何建立及管理工作區，請參閱「[建立及管理工作區](https://docs.cloud.google.com/bigquery/docs/workspaces?hl=zh-tw)」。
 
 ## 位置
 
-您可以在所有 [BigQuery Studio 位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#bqstudio-loc)建立存放區。
+您可以在所有 [BigQuery Studio 位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#bqstudio-loc)建立存放區。存放區中的每個工作區都使用與存放區相同的位置。
 
 ## 配額
 
-使用 BigQuery 存放區時，須遵守 [Dataform 配額](https://docs.cloud.google.com/dataform/docs/quotas?hl=zh-tw#quotas)。
+使用 BigQuery 工作區和存放區時，須遵守 [Dataform 配額](https://docs.cloud.google.com/dataform/docs/quotas?hl=zh-tw#quotas)。
 
 ## 定價
 
-建立、更新或刪除存放區不會產生費用。
+建立、更新或刪除存放區或工作區，或儲存工作區中的檔案，都不會產生費用。
 
-若要深入瞭解 BigQuery 價格，請參閱[價格](https://cloud.google.com/bigquery/pricing?hl=zh-tw)。
+如要進一步瞭解 BigQuery 定價，請參閱「[定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw)」一文。
 
 ## 後續步驟
 
-* 瞭解如何[建立存放區](https://docs.cloud.google.com/bigquery/docs/repositories?hl=zh-tw)。
-* 瞭解如何[建立工作區](https://docs.cloud.google.com/bigquery/docs/workspaces?hl=zh-tw)。
-* 瞭解如何[使用 BigQuery Studio Git 存放區管理程式碼](https://docs.cloud.google.com/bigquery/docs/git-repositories?hl=zh-tw)。
+* 如要瞭解如何使用 BigQuery Studio Git 存放區管理程式碼，請參閱「[使用 BigQuery Studio Git 存放區管理程式碼](https://docs.cloud.google.com/bigquery/docs/git-repositories?hl=zh-tw)」。
+* 如要瞭解如何建立及使用存放區，請參閱「[建立及管理存放區](https://docs.cloud.google.com/bigquery/docs/repositories?hl=zh-tw)」。
+* 如要瞭解如何建立及使用工作區，請參閱「[建立及管理工作區](https://docs.cloud.google.com/bigquery/docs/workspaces?hl=zh-tw)」。
 
 
 
@@ -85,11 +66,11 @@ service-YOUR_PROJECT_NUMBER@gcp-sa-dataform.iam.gserviceaccount.com
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-11 (世界標準時間)。
+上次更新時間：2026-11-18 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-11 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-18 (世界標準時間)。"],[],[]]

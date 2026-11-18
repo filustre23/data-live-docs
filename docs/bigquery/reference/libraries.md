@@ -177,5 +177,5 @@ public class BigQueryQuery
             LIMIT 100";
         BigQueryJob job = client.CreateQueryJob(
             sql: query,
-            parameters: null,
+            paramete
 ```

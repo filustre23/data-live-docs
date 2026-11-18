@@ -345,5 +345,5 @@ penguin's mass:
 
 ```
 WITH prepared_data AS (
-  SELECT *, RAND() <
+  SELECT *
 ```

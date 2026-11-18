@@ -365,7 +365,3 @@ following BigQuery data types for `INPUT` and `OUTPUT` clauses:
 
 * Simple type: [BOOL](/bigquery/docs/reference/standard-sql/data-types#boolean_type), [INT64](/bigquery/docs/reference/standard-sql/data-types#integer_types), [FLOAT64](/bigquery/docs/reference/standard-sql/data-types#floating_point_types), [NUMERIC](/bigquery/docs/reference/standard-sql/data-types#decimal_types), [BIGNUMERIC](/bigquery/docs/reference/standard-sql/data-types#decimal_types), [STRING](/bigquery/docs/reference/standard-sql/data-types#string_type)
 * [ARRAY](/bigquery/docs/reference/standard-sql/data-types#array_type)<Simple type>
-
-[XGBoost models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-xgboost) only support
-[numeric types](/bigquery/docs/reference/standard-sql/data-types#numeric_types)
-for the `INPUT`

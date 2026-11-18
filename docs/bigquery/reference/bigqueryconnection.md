@@ -220,5 +220,5 @@ func reportConnections(ctx context.Context, client *connection.Client, projectID
 	fmt.Fprintf(&buf, "Current connections defined in project %s in location %s:\n", projectID, location)
 
 	req := &connectionpb.ListConnectionsRequest{
-		Parent: fmt.Sprintf("projects/%s/locations/%s", projectID, location),
+		Parent: fmt.Sprintf("projects/%s/locations/%s",
 ```

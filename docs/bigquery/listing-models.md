@@ -16,15 +16,11 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 列出模型
 
-本頁說明如何列出資料集中的 BigQuery ML 模型。您可透過以下方式來列出 BigQuery ML 模型：
-
-* 使用 Google Cloud 控制台。
-* 在 bq 指令列工具中使用 `bq ls` 指令。
-* 直接呼叫 [`models.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models/list?hl=zh-tw) API 方法，或是使用用戶端程式庫。
+列出 BigQuery ML 模型，有助於探索及管理儲存在資料集中的機器學習資產。您可以擷取這項資訊，在執行評估或推論工作前，稽核可用的模型。
 
 ## 所需權限
 
-如要列出資料集中的模型，您必須取得資料集的 [`READER`](https://docs.cloud.google.com/bigquery/docs/access-control-basic-roles?hl=zh-tw#dataset-basic-roles) 角色，或取得包含 `bigquery.models.list` 權限的專案層級身分與存取權管理 (IAM) 角色。如您已獲指派專案層級的 `bigquery.models.list` 權限，則可列出專案內任何資料集中的模型。下列預先定義的專案層級身分與存取權管理角色包含 `bigquery.models.list` 權限：
+如要列出資料集中的模型，您必須具備資料集的 [`READER`](https://docs.cloud.google.com/bigquery/docs/access-control-basic-roles?hl=zh-tw#dataset-basic-roles) 角色，或具備包含 `bigquery.models.list` 權限的專案層級 Identity and Access Management (IAM) 角色。如果您在專案層級獲得 `bigquery.models.list` 權限，則可列出專案中任何資料集的模型。下列預先定義的專案層級 IAM 角色包含 `bigquery.models.list` 權限：
 
 * `bigquery.dataViewer`
 * `bigquery.dataEditor`
@@ -33,7 +29,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 * `bigquery.user`
 * `bigquery.admin`
 
-如要進一步瞭解 BigQuery ML 中的身分與存取權管理角色和權限，請參閱[存取權控管](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)。如要進一步瞭解資料集層級角色，請參閱[資料集的基本角色](https://docs.cloud.google.com/bigquery/docs/access-control-basic-roles?hl=zh-tw#dataset-basic-roles)。
+如要進一步瞭解 BigQuery ML 的 IAM 角色和權限，請參閱「[存取控管](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)」。如要進一步瞭解資料集層級角色，請參閱「[資料集的基本角色](https://docs.cloud.google.com/bigquery/docs/access-control-basic-roles?hl=zh-tw#dataset-basic-roles)」。
 
 ## 列出模型
 
@@ -43,17 +39,17 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
-   [前往 BigQuery 頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
+   [前往「BigQuery」頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
-3. 在「Explorer」窗格中展開專案，然後按一下「Datasets」(資料集)。
+3. 在「Explorer」窗格中展開專案，然後點選「資料集」。
 4. 按一下包含模型的資料集。
-5. 按一下「模型」分頁標籤。
+5. 按一下「Models」分頁標籤。
 
 ### bq
 
-發出含有 `--models` 或 `-m` 旗標的 `bq ls` 指令。[`--format`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#global_flags) 標記可用來控管輸出。如您正在列出非預設專案中的模型，請以下列格式將專案 ID 新增至資料集：`[PROJECT_ID]:[DATASET]`。
+執行 `bq ls` 指令，並加上 `--models` 或 `-m` 旗標。[`--format`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#global_flags) 旗標可用於控制輸出內容。如要列出預設專案以外的模型，請按照下列格式將專案 ID 新增至資料集：`[PROJECT_ID]:[DATASET]`。
 
 ```
 bq ls -m --format=pretty PROJECT_ID:DATASET
@@ -64,7 +60,7 @@ bq ls -m --format=pretty PROJECT_ID:DATASET
 * `PROJECT_ID` 是您的專案 ID。
 * `DATASET` 是資料集名稱。
 
-使用 `--format=pretty` 標記時，指令輸出內容如下所示。`--format=pretty` 會產生格式設定完成的表格輸出內容。`Model Type` 欄會顯示模型類型，例如 `KMEANS`。
+使用 `--format=pretty` 旗標時，指令輸出內容如下所示。`--format=pretty` 會產生格式化表格輸出內容。`Model Type` 欄會顯示模型類型，例如 `KMEANS`。
 
 ```
 +-------------------------+------------+--------+-----------------+
@@ -76,13 +72,13 @@ bq ls -m --format=pretty PROJECT_ID:DATASET
 
 範例：
 
-輸入下列指令，列出預設專案中資料集 `mydataset` 內的模型。
+輸入下列指令，列出預設專案中資料集 `mydataset` 的模型。
 
 ```
 bq ls --models --format=pretty mydataset
 ```
 
-輸入下列指令，列出 `myotherproject` 中資料集 `mydataset` 內的模型。這個指令使用 `-m` 捷徑來列出模型。
+輸入下列指令，列出 `myotherproject` 中資料集 `mydataset` 的模型。這個指令會使用 `-m` 捷徑列出模型。
 
 ```
 bq ls -m --format=pretty myotherproject:mydataset
@@ -94,9 +90,9 @@ bq ls -m --format=pretty myotherproject:mydataset
 
 ### Go
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Go 設定說明操作。詳情請參閱 [BigQuery Go API 參考說明文件](https://godoc.org/cloud.google.com/go/bigquery)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Go 設定操作說明進行操作。詳情請參閱 [BigQuery Go API 參考文件](https://godoc.org/cloud.google.com/go/bigquery)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 import (
@@ -139,9 +135,9 @@ func listModels(w io.Writer, projectID, datasetID string) error {
 
 ### Java
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定說明操作。詳情請參閱 [BigQuery Java API 參考說明文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Java 設定操作說明進行操作。詳情請參閱 [BigQuery Java API 參考文件](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 import com.google.api.gax.paging.Page;
@@ -182,9 +178,9 @@ public class ListModels {
 
 ### Node.js
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定說明操作。詳情請參閱 [BigQuery Node.js API 參考說明文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定操作說明進行操作。詳情請參閱 [BigQuery Node.js API 參考文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 // Import the Google Cloud client library
@@ -211,9 +207,9 @@ async function listModels() {
 
 ### Python
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定說明操作。詳情請參閱 [BigQuery Python API 參考說明文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Python 設定操作說明進行操作。詳情請參閱 [BigQuery Python API 參考文件](https://docs.cloud.google.com/python/docs/reference/bigquery/latest?hl=zh-tw)。
 
-如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證作業](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
 ```
 from google.cloud import bigquery
@@ -239,8 +235,8 @@ for model in models:
 ## 後續步驟
 
 * 如需 BigQuery ML 的總覽，請參閱 [BigQuery ML 簡介](https://docs.cloud.google.com/bigquery/docs/bqml-introduction?hl=zh-tw)。
-* 如要開始使用 BigQuery ML，請參閱[在 BigQuery ML 中建立機器學習模型](https://docs.cloud.google.com/bigquery/docs/create-machine-learning-model?hl=zh-tw)。
-* 如要進一步瞭解模型的使用方式，請參閱以下說明：
+* 如要開始使用 BigQuery ML，請參閱「[在 BigQuery ML 中建立機器學習模型](https://docs.cloud.google.com/bigquery/docs/create-machine-learning-model?hl=zh-tw)」。
+* 如要進一步瞭解如何使用模型，請參閱：
   + [取得模型中繼資料](https://docs.cloud.google.com/bigquery/docs/getting-model-metadata?hl=zh-tw)
   + [更新模型中繼資料](https://docs.cloud.google.com/bigquery/docs/updating-model-metadata?hl=zh-tw)
   + [管理模型](https://docs.cloud.google.com/bigquery/docs/managing-models?hl=zh-tw)
@@ -253,11 +249,11 @@ for model in models:
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-11 (世界標準時間)。
+上次更新時間：2026-11-17 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-11 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-17 (世界標準時間)。"],[],[]]

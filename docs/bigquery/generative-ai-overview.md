@@ -45,7 +45,7 @@ AI 函式分為以下類別，可協助您完成這些工作：
 
     - `AI.EMBED`：從文字或圖片資料建立嵌入。
     - `AI.GENERATE_EMBEDDING`：資料表值函式，可將內嵌文字、圖片、音訊、影片或文件資料的資料欄，新增至資料表。
-* **[代管 AI 函式](#managed_ai_functions)：**這類函式的語法簡潔，且經過最佳化，可兼顧成本和品質。在[最佳化模式](https://docs.cloud.google.com/bigquery/docs/optimize-ai-functions?hl=zh-tw) (預先發布版) 下，這些函式可擴充至數百萬或數十億列。
+* **[代管 AI 函式](#managed_ai_functions)：**這類函式的語法簡潔，且經過最佳化，可兼顧成本和品質。在[最佳化模式](https://docs.cloud.google.com/bigquery/docs/optimize-ai-functions?hl=zh-tw)下，這些函式可擴充至數百萬或數十億個資料列。
 
   + `AI.IF`：使用自然語言條件篩選資料。
   + `AI.SCORE`：依品質或情緒等條件，為輸入內容評分。
@@ -117,7 +117,7 @@ AI 函式分為以下類別，可協助您完成這些工作：
 * [`AI.CLASSIFY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-classify?hl=zh-tw)：將文字分類至使用者定義的類別。您可以在 `GROUP BY` 子句中使用這個函式，根據定義的類別將輸入內容分組。舉例來說，您可以根據支援單是否與帳單、運送、產品品質或其他事項相關，將支援單分類。
 * [`AI.AGG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-agg?hl=zh-tw)：根據自然語言指示匯總輸入內容，以便摘要或分析資料。例如，您可以掃描使用者應用程式工作階段的記錄，判斷客戶遇到困難的地方，或總結大量圖片的內容。
 
-**注意：**如要更有效率地處理大型資料集，可以對 `AI.IF` 和 `AI.CLASSIFY` 函式使用*最佳化模式* (預先發布版)。這個模式會使用資料樣本訓練輕量精簡模型，然後使用該模型對大部分資料列進行推論。這種方法可避免為每個資料列呼叫 LLM，在處理數千甚至數十億個資料列時，[減少詞元消耗量和延遲時間](https://docs.cloud.google.com/bigquery/docs/optimize-ai-functions?hl=zh-tw)。
+**注意：**如要更有效率地處理大型資料集，可以對 `AI.IF` 和 `AI.CLASSIFY` 函式使用*最佳化模式*。這個模式會使用資料樣本訓練輕量精簡模型，然後使用該模型對大部分資料列進行推論。這種方法可避免為每個資料列呼叫 LLM，在處理數千甚至數十億個資料列時，[減少詞元消耗量和延遲時間](https://docs.cloud.google.com/bigquery/docs/optimize-ai-functions?hl=zh-tw)。
 
 如需教學課程，瞭解如何使用這些函式，請參閱「[使用代管 AI 函式執行語意分析](https://docs.cloud.google.com/bigquery/docs/semantic-analysis?hl=zh-tw)」。
 
@@ -250,11 +250,11 @@ BigQuery 的生成式 AI 函式會向 Gemini Enterprise Agent Platform 傳送要
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-12 (世界標準時間)。
+上次更新時間：2026-11-17 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-12 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-17 (世界標準時間)。"],[],[]]

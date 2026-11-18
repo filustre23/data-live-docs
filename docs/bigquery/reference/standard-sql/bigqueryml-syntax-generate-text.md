@@ -485,6 +485,4 @@ possible to the model.
 
   Tokens are selected from the most to least
   probable until the sum of their probabilities equals the `TOP_P` value.
-  For example, if tokens A, B, and C have a probability of `0.3`, `0.2`, and
-  `0.1`, and the `TOP_P` value is `0.5`, then the model selects either A or
-  B as the n
+  For example, if tokens A, B, and C have a probability of `0.3`, `0.`

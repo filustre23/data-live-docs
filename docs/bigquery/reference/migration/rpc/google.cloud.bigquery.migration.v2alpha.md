@@ -129,4 +129,4 @@ Service to handle EDW migrations.
 
 | ListMigrationWorkflows |
 | --- |
-| `rpc ListMigrationWorkflows(ListMigrationWorkflowsRequest) returns (ListMigrationWorkflowsResponse)`  Lists previously created migration workflow.  Authorization scopes  Requires the following OAuth scope: |
+| `rpc ListMigrationWorkflows(ListMigrationWorkflowsRequest) returns (ListMigrationWorkflowsResponse)`  Lists previously |

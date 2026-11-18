@@ -131,4 +131,3 @@ Assessment task config.
 
 | Fields | |
 | --- | --- |
-| `input_path` |  |

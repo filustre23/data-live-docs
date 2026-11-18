@@ -316,5 +316,4 @@ the fields are
 
 ```
 INSERT dataset.DetailedInventory
-VALUES('top load washer',
 ```

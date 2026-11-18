@@ -899,5 +899,6 @@ def update_transfer_config(
             update_mask=update_mask,
         )
 
+        print(f"Updated transfer config: {response.name}")
         print(f
 ```

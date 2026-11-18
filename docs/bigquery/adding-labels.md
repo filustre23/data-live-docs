@@ -16,7 +16,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 為資源新增標籤
 
-BigQuery 標籤可讓您將鍵/值中繼資料附加至資源。這類中繼資料可協助您整理工作負載、篩選資產，以及追蹤各項專案的已計費用。
+BigQuery 標籤可讓您將鍵/值中繼資料附加至資源。這類中繼資料可協助您整理工作負載、篩選資產，以及追蹤各項專案的帳單費用。
 
 您可以為[資料集](#adding_dataset_labels)、[資料表和檢視表](#adding_table_and_view_labels)、[工作](#job-label)、[工作工作階段](#adding-label-to-session)和[預留項目](#reservation)新增標籤。如要進一步瞭解 BigQuery 中的標籤，請參閱「[標籤簡介](https://docs.cloud.google.com/bigquery/docs/labels-intro?hl=zh-tw)」。
 
@@ -26,9 +26,9 @@ BigQuery 標籤可讓您將鍵/值中繼資料附加至資源。這類中繼資�
 
 ## 為資料集新增標籤
 
-使用 bq 指令列工具的 `bq mk` 指令或呼叫 [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert?hl=zh-tw) API 方法，即可在建立 BigQuery 資料集時新增標籤。使用 Google Cloud 控制台建立資料集時，無法為資料集新增標籤。不過，您可以在建立資料集後新增標籤。如要進一步瞭解如何建立資料集，請參閱「[建立資料集](https://docs.cloud.google.com/bigquery/docs/datasets?hl=zh-tw)」。
+使用 bq 指令列工具的 `bq mk` 指令，或呼叫 [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert?hl=zh-tw) API 方法，即可在建立 BigQuery 資料集時新增標籤。使用 Google Cloud 控制台建立資料集時，無法為資料集新增標籤。不過，您可以在建立資料集後新增標籤。如要進一步瞭解如何建立資料集，請參閱「[建立資料集](https://docs.cloud.google.com/bigquery/docs/datasets?hl=zh-tw)」。
 
-將標籤新增至資料集時，標籤不會傳播至資料集內的資源。資料表或檢視表不會沿用資料集標籤。此外，當您將標籤新增至資料集時，該標籤會包含在儲存空間帳單資料中，但不會包含在工作相關帳單資料中。
+將標籤新增至資料集時，標籤不會傳播至資料集內的資源。資料表或檢視表不會沿用資料集標籤。此外，當您在資料集新增標籤時，該標籤會包含在儲存空間帳單資料中，但不會包含在工作相關帳單資料中。
 
 如要進一步瞭解標籤格式，請參閱[標籤規定](https://docs.cloud.google.com/bigquery/docs/labels-intro?hl=zh-tw#requirements)。
 
@@ -55,7 +55,7 @@ BigQuery 標籤可讓您將鍵/值中繼資料附加至資源。這類中繼資�
 
 ### SQL
 
-使用 [`ALTER SCHEMA SET OPTIONS` DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_schema_set_options_statement)，為現有資料集設定標籤。這項操作會覆寫資料集上的任何現有標籤。以下範例會在 `mydataset` 資料集上設定標籤：
+使用 [`ALTER SCHEMA SET OPTIONS` DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_schema_set_options_statement)，為現有資料集設定標籤。這項操作會覆寫資料集上的任何現有標籤。以下範例會為 `mydataset` 資料集設定標籤：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -75,7 +75,7 @@ BigQuery 標籤可讓您將鍵/值中繼資料附加至資源。這類中繼資�
 
 如要為現有資料集新增標籤，請使用 `bq update` 指令並加上 `set_label` 旗標。如要新增多個標籤，請重複使用這個旗標。
 
-如果資料集位於預設專案以外的專案，請以下列格式指定專案 ID：`PROJECT_ID:DATASET`。
+如果資料集位於預設專案以外的專案，請使用下列格式指定專案 ID：`PROJECT_ID:DATASET`。
 
 ```
 bq update --set_label KEY:VALUE PROJECT_ID:DATASET
@@ -89,13 +89,13 @@ bq update --set_label KEY:VALUE PROJECT_ID:DATASET
 
 範例：
 
-如要新增標籤來追蹤部門，請使用 `bq update` 指令，並指定 `department` 做為標籤索引鍵。舉例來說，如要將 `department:shipping` 標籤新增至預設專案中的 `mydataset`，請使用：
+如要新增標籤來追蹤部門，請使用 `bq update` 指令，並指定 `department` 做為標籤鍵。舉例來說，如要將 `department:shipping` 標籤新增至預設專案中的 `mydataset`，請使用：
 
 ```
     bq update --set_label department:shipping mydataset
 ```
 
-如要為資料集新增多個標籤，請重複使用 `set_label` 旗標，並為每個標籤指定專屬索引鍵。舉例來說，如要將 `department:shipping` 標籤和 `cost_center:logistics` 標籤新增至預設專案中的 `mydataset`，請使用：
+如要為資料集新增多個標籤，請重複 `set_label` 旗標，並為每個標籤指定不重複的鍵。舉例來說，如要將 `department:shipping` 標籤和 `cost_center:logistics` 標籤新增至預設專案中的 `mydataset`，請使用：
 
 ```
     bq update \
@@ -288,7 +288,7 @@ print("Labels added to {}".format(dataset_id))
 
 ### SQL
 
-使用 [`ALTER TABLE SET OPTIONS` DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_table_set_options_statement)設定現有資料表的標籤，或使用 [`ALTER VIEW SET OPTIONS` DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_view_set_options_statement)設定現有檢視表的標籤。這項操作會覆寫資料表或檢視表中的任何現有標籤。以下範例會在 `mytable` 資料表上設定兩個標籤：
+使用 [`ALTER TABLE SET OPTIONS` DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_table_set_options_statement)設定現有資料表的標籤，或使用 [`ALTER VIEW SET OPTIONS` DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_view_set_options_statement)設定現有檢視表的標籤。這項操作會覆寫資料表或檢視表上的任何現有標籤。以下範例會在 `mytable` 資料表上設定兩個標籤：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -320,7 +320,7 @@ PROJECT_ID:DATASET.TABLE_OR_VIEW
 
 * `KEY:VALUE`：要新增的標籤鍵/值組合。鍵不得重複。鍵和值只能使用小寫字母、數字字元、底線和連字號。所有字元都必須使用 UTF-8 編碼，且可使用國際字元。
 * `PROJECT_ID`：您的專案 ID。
-* `DATASET`：包含要加上標籤的資料表或檢視表的資料集。
+* `DATASET`：資料集，其中包含您要加上標籤的資料表或檢視表。
 * `TABLE_OR_VIEW`：要加上標籤的資料表或檢視表名稱。
 
 範例：
@@ -352,7 +352,7 @@ PROJECT_ID:DATASET.TABLE_OR_VIEW
 
 由於系統會將檢視表當做資料表資源處理，因此可以使用 `tables.patch` 方法來修改檢視表和資料表。
 
-`tables.update` 方法會取代整個資料集資源，因此請改用 `tables.patch` 方法。
+由於 `tables.update` 方法會取代整個資料集資源，因此請改用 `tables.patch` 方法。
 
 ### Go
 
@@ -512,9 +512,11 @@ print(f"Added {table.labels} to {table_id}.")
 
 在工作中加入標籤後，標籤就會納入您的帳單資料中。
 
+**注意：**如果採用以運算能力為準的定價模式，您無法在 Cloud Billing 報表中使用工作標籤歸因工作費用，因為這些費用是在預留項目層級歸因。
+
 ### 必要的 IAM 角色
 
-如要取得為工作新增標籤所需的權限，請要求管理員授予您「[BigQuery 使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.user) 」(`roles/bigquery.user`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得為工作新增標籤所需的權限，請要求管理員授予您 [BigQuery 使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.user) (`roles/bigquery.user`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
 這個預先定義的角色具備 `bigquery.jobs.create` 權限，可為工作新增標籤。
 
@@ -599,7 +601,7 @@ print(f"Added {job.labels} to {job_id}.")
 
 ### 將工作階段中的工作與標籤建立關聯
 
-如果您在[工作階段](https://docs.cloud.google.com/bigquery/docs/sessions-intro?hl=zh-tw)中執行查詢，可以使用 BigQuery 多陳述式查詢，為該工作階段中所有日後的查詢工作指派標籤。
+如果您在[工作階段](https://docs.cloud.google.com/bigquery/docs/sessions-intro?hl=zh-tw)中執行查詢，可以使用 BigQuery 多陳述式查詢，為該工作階段中日後的所有查詢工作指派標籤。
 
 ### SQL
 
@@ -627,13 +629,13 @@ print(f"Added {job.labels} to {job_id}.")
 
 為預留項目新增標籤後，該標籤就會納入帳單資料。您可以使用標籤，篩選 Cloud Billing 資料中的 Analysis Slots Attribution SKU。
 
-Analysis Slots Attribution SKU 只會記錄運算單元用量。不會記錄 BigQuery Reservation API SKU 的費用。即使啟用[運算費用歸因](https://docs.cloud.google.com/bigquery/docs/reservations-monitoring?hl=zh-tw#reservation_cost_attribution)，預留項目標籤也只適用於 Analysis Slots Attribution SKU，不支援做為 BigQuery Reservation API SKU 的篩選器。
+「分析運算單元歸因」SKU 只會記錄運算單元用量。不會記錄 BigQuery Reservation API SKU 的費用。即使啟用[運算費用歸因](https://docs.cloud.google.com/bigquery/docs/reservations-monitoring?hl=zh-tw#reservation_cost_attribution)，預留項目標籤也只適用於 Analysis Slots Attribution SKU，不支援做為 BigQuery Reservation API SKU 的篩選器。
 
 如要進一步瞭解如何在帳單資料中使用標籤，請參閱「[使用**篩選器**精細調整資料](https://docs.cloud.google.com/billing/docs/how-to/reports?hl=zh-tw#filter-by-labels)」。
 
 ### 必要的 IAM 角色
 
-如要取得為預留項目新增標籤所需的權限，請要求管理員授予管理專案的 [BigQuery 資源編輯者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.resourceEditor)  (`roles/bigquery.resourceEditor`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得為預留項目新增標籤所需的權限，請要求管理員授予您管理專案的 [BigQuery 資源編輯者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.resourceEditor) (`roles/bigquery.resourceEditor`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
 這個預先定義的角色具備 `bigquery.reservations.update` 權限，可為預留項目新增標籤。
 
@@ -660,7 +662,7 @@ Analysis Slots Attribution SKU 只會記錄運算單元用量。不會記錄 Big
 
 ### SQL
 
-如要為預留項目新增標籤，請使用 [`ALTER RESERVATION SET OPTIONS` DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_reservation_set_options_statement)。這項操作會覆寫預留項目現有的標籤。以下範例會為 `myreservation` 預留項目設定標籤：
+如要為預留項目新增標籤，請使用 [`ALTER RESERVATION SET OPTIONS` DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_reservation_set_options_statement)。這項操作會覆寫預留項目中的所有現有標籤。以下範例會為 `myreservation` 預留項目設定標籤：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -705,9 +707,9 @@ bq update --set_label KEY:VALUE --location LOCATION --reservation RESERVATION_NA
 
    * 在資料集頁面中，依序點選「Details」(詳細資料) 分頁標籤和 mode\_edit「Edit details」(編輯詳細資料)。
    * 如為資料表或檢視表，請在詳細資料窗格中，依序點選
-     **「Edit」>「Edit details」**。
-3. 在「Labels」(標籤) 區段中，按一下「Add labels」(新增標籤)。
-4. 在「Key」(鍵) 欄位中輸入鍵，並將「Value」(值) 欄位留空。如要套用其他標籤，請按一下「Add labels」(新增標籤)，然後重複上述步驟。
+     **「Edit」(編輯) >「Edit details」(編輯詳細資料)**。
+3. 在「標籤」部分，按一下「新增標籤」。
+4. 在「Key」欄位中輸入鍵，並將「Value」欄位留空。如要套用其他標籤，請按一下「Add labels」(新增標籤)，然後重複上述步驟。
 5. 按一下「儲存」。
 
 ### SQL
@@ -771,11 +773,11 @@ bq update --set_label test_data: mydataset
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-11 (世界標準時間)。
+上次更新時間：2026-11-17 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-11 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-17 (世界標準時間)。"],[],[]]

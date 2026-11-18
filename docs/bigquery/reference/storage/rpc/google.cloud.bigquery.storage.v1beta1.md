@@ -145,8 +145,3 @@ Request information for invoking `FinalizeStream`.
 | Fields | |
 | --- | --- |
 | `stream` | `Stream`  Required. Stream to finalize. |
-
-## Progress
-
-| Fields | |
-| --- | --- |

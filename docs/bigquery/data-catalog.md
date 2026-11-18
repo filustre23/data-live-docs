@@ -44,7 +44,7 @@ Knowledge Catalog 會自動探索 BigQuery 資產的技術中繼資料，並建�
 
   中繼資料同步後，您可以在 Knowledge Catalog 搜尋及查看項目。詳情請參閱「[搜尋資源](https://docs.cloud.google.com/knowledge-catalog/docs/search-assets?hl=zh-tw#search-data-assets)」。
 * **資料欄層級中繼資料**：個別資料欄或欄位會以*[路徑](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata?hl=zh-tw)*表示，可讓您將特定中繼資料 (例如 PII 標記或資料品質分數) 附加至 BigQuery 資料表中的個別欄位，而非僅限於資料表本身。
-* **切面**：技術中繼資料會以[*切面*](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata?hl=zh-tw#aspects)充實，為資料新增業務情境，例如擁有權、資料品質和說明文件。
+* **切面**：技術中繼資料會以[*切面*](https://docs.cloud.google.com/knowledge-catalog/docs/about-aspects?hl=zh-tw#aspects)充實，為資料新增業務情境，例如擁有權、資料品質和說明文件。
 * **資料產品**：您可以將相關的 BigQuery 資產封裝成[資料產品](https://docs.cloud.google.com/knowledge-catalog/docs/data-products-overview?hl=zh-tw) (例如電子商務業務資料)，並設定共用存取權和控管限制。
 
 ### 資料探索與搜尋
@@ -77,11 +77,11 @@ Knowledge Catalog 會自動探索 BigQuery 資產的技術中繼資料，並建�
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-11 (世界標準時間)。
+上次更新時間：2026-11-18 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-11 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-18 (世界標準時間)。"],[],[]]

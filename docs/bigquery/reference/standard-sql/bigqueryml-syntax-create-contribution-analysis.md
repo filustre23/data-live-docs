@@ -453,5 +453,5 @@ CREATE (OR REPLACE) MODEL `myproject.mydataset.ca_model`
   OPTIONS(
     MODEL_TYPE = 'CONTRIBUTION_ANALYSIS',
     CONTRIBUTION_METRIC = 'SUM(concessions_sold)/SUM(attendee_count)',
-    DIMENSION_ID_COLS = ['venue_ID','event_date'
+    DIMENSION_ID_COLS =
 ```

@@ -149,8 +149,3 @@ Restricted export config, used to configure restricted export on linked dataset.
 | `setIamPolicy` | Sets the IAM policy. |
 | `subscribe` | Subscribes to a listing. |
 | `testIamPermissions` | Returns the permissions that a caller has. |
-
-
-
-
-Send feedback

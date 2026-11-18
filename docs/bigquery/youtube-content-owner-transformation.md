@@ -555,6 +555,4 @@ BigQuery 資料表：
 :   p\_content\_owner\_asset\_ad\_revenue\_summary\_a1\_suffix
 
 BigQuery view：
-:   content\_owner\_asset\_ad\_revenue\_summary\_a1\_suffix
-
-#### 每項資產的每日廣告收
+:   content\_owner\_asset\_ad\_revenue\_summary\_a1\_su

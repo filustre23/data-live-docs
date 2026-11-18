@@ -167,4 +167,4 @@ BigQuery 資料集、資料表和檢視表可使用鍵/值組合[加上標籤](h
 
 #### 監控和稽核記錄
 
-Oracle 提供不同層級和種類的[資料庫稽核](https://docs.oracle.com/cd/E11882_01/server.112/e10575/tdpsg_auditing.htm#TDPSG50000)選項、[稽核資料庫](https://www.oracle.com/database/technologies/security/audit-vault-firewall.html)和
+Oracle 提供不同層級和種類的[資料庫稽核](https://docs.oracle.com/cd/E11882_01/server.112/e10575/tdpsg_auditing.htm#TDPSG50000)選

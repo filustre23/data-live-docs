@@ -281,10 +281,4 @@ into this function, see
   + `NUMERIC`
   + `BIGNUMERIC`
   + `FLOAT64`
-* `number`: `INT64` literal or query parameter.
-
-**Returned Data Types**
-
-`ARRAY<STRUCT>`
-
-**Examples**
+* `number`:

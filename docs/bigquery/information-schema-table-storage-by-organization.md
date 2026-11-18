@@ -30,7 +30,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 * 在[工作階段](https://docs.cloud.google.com/bigquery/docs/sessions-write-queries?hl=zh-tw#use_temporary_tables_in_sessions)中建立的暫時資料表。這些資料表會放入名稱類似「\_c018003e063d09570001ef33ae401fad6ab92a6a」的資料集。
 * 在[多重陳述式查詢](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries?hl=zh-tw#temporary_tables) (「指令碼」) 中建立的臨時資料表。這些資料表會放入名稱類似「\_\_script72280c173c88442c3a7200183a50eeeaa4073719」的資料集。
 
-系統不會向您收取[查詢結果快取](https://docs.cloud.google.com/bigquery/docs/writing-results?hl=zh-tw#temporary_and_permanent_tables)中儲存的資料費用，因此不會將這類資料納入 `*_BYTES` 欄值。
+系統不會向您收取[查詢結果快取](https://docs.cloud.google.com/bigquery/docs/writing-results?hl=zh-tw#temporary-table)中儲存的資料費用，因此不會將這類資料納入 `*_BYTES` 欄值。
 
 複製和快照會顯示 `*_BYTES` 資料欄值，就像是完整的資料表，而不是顯示與基本資料表所用儲存空間的差異，因此會高估。帳單會正確計算儲存空間用量差異。如要進一步瞭解複製和快照儲存及計費的差異位元組，請參閱[`TABLE_STORAGE_USAGE_TIMELINE`
 檢視畫面](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage-usage?hl=zh-tw)。
@@ -171,11 +171,11 @@ ORDER BY
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-11 (世界標準時間)。
+上次更新時間：2026-11-17 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-11 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-17 (世界標準時間)。"],[],[]]

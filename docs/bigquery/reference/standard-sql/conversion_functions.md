@@ -272,5 +272,4 @@ The `expression` parameter can represent an expression for these data types:
 
 | From | To | Rule(s) when casting `x` |
 | --- | --- | --- |
-| INT64 | FLOAT64 | Returns a close but potentially not exact floating point value. |
-| `NUMERIC` | FLOAT64 |
+| INT64 |

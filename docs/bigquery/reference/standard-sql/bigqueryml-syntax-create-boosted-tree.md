@@ -511,7 +511,4 @@ If you are running hyperparameter tuning, use one of the following options:
   that provide discrete values to use for the hyperparameter. For example,
   `COLSAMPLE_BYLEVEL = HPARAM_CANDIDATES([0, 0.1, 0.3, 0.5])`.
 
-When running hyperparameter tuning, the valid range is `[0, 1.0]`, there is
-no default range, and the scale type is `LINEAR`.
-
-###
+When running hyperparameter tuning, the valid range is `[0, 1.0]</`

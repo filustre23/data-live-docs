@@ -243,4 +243,4 @@ This enables 'DATA\_READ' and 'DATA\_WRITE' logging, while exempting [jose@examp
 
 ## LogType
 
-The list of valid permission types for which logging can be configured. Admin writes are always logged, and are not configurable.
+The list of valid permission types for which logging can be configured. Admin writes are always

@@ -222,5 +222,4 @@ func main() {
 
 	s, err = reportReservations(ctx, bqResClient, *projectID, *location)
 	if err != nil {
-		log.Fatalf(
 ```

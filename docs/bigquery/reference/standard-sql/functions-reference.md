@@ -269,10 +269,5 @@ GROUPING(x)
 **Syntax:**
 
 ```
-SAFE.function_name()
+SAFE.
 ```
-
-**Description**
-
-If you begin a function with
-the `SAFE.` prefix, it w

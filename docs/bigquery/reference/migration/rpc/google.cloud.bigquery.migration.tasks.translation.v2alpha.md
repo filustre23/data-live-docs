@@ -128,6 +128,3 @@ The file encoding types.
 ## TokenType
 
 The special token data type.
-
-|
-|  |

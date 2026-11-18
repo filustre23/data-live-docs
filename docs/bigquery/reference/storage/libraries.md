@@ -224,5 +224,5 @@ int main(int argc, char* argv[]) try {
       google::cloud::bigquery::storage::v1::DataFormat::AVRO);
   read_session.set_table(table_name);
   auto session =
-      client.CreateReadSession(project_name, read_session, kMaxReadStreams);
+      client.CreateReadSession(project_name,
 ```

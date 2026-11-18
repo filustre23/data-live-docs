@@ -219,7 +219,3 @@ gcloud resource-manager org-policies allow \
 
    將 `MIGRATION_ROLE` 替換為您要建立的自訂角色名稱。
 2. 授予自訂角色必要權限：
-
-   ```
-   GRANT USAGE ON <
-   ```

@@ -110,6 +110,4 @@ Oracle 和 BigQuery 比較運算子符合 ANSI SQL:2011 規範。下表中的比
 | `IS NULL` | [`NULL` 值](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators?hl=zh-tw#comparison_operators) |
 | `IS NOT NULL` | [Not `NULL` value](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators?hl=zh-tw#comparison_operators) |
 | `LIKE` | [使用 % 進行模式比對](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators?hl=zh-tw#comparison_operators) |
-| `EXISTS` | [如果子查詢傳回至少一列，則符合條件](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators?hl=zh-tw#comparison_operators) |
-
-BigQuery 和 Oracle 的資料表運算子相同。
+| `EXISTS` | [如果子查詢傳回至少一列](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators?hl=zh-tw#comparison_operators) |

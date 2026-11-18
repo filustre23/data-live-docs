@@ -833,5 +833,7 @@ print(f"Table schema: {schema_contents}")
 [
   {
     "name": "qtr",
-    "type":
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description"
 ```

@@ -136,6 +136,4 @@ via INFORMATION SCHEMA will be available soon as part of the product roadmap.
 
 Snowflake
 [stored procedures](https://docs.snowflake.net/manuals/sql-reference/stored-procedures-usage.html)
-are written in JavaScript, which can execute SQL statements by calling a
-JavaScript API. In BigQuery, stored procedures are defined using a
-[block](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language?hl=zh-tw#begin) of SQL
+are written in JavaScript, which can execute SQL statements by

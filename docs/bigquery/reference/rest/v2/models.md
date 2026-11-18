@@ -186,4 +186,3 @@ Indicates the type of the Model.
 | `ARIMA` | ARIMA model. |
 | `AUTOML_REGRESSOR` | AutoML Tables regression model. |
 | `AUTOML_CLASSIFIER` | AutoML Tables classification model. |
-| `PCA` | Prinpical Component Analysis model. |

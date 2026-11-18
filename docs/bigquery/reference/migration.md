@@ -208,5 +208,5 @@ func main() {
 func executeTranslationWorkflow(ctx context.Context, client *migration.Client, projectID, location, outPath string) (*migrationpb.MigrationWorkflow, error) {
 
 	// Construct the workflow creation request.  In this workflow, we have only a single translation task present.
-	req := &migrationpb.
+	
 ```

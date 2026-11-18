@@ -197,6 +197,5 @@ bq mk \
 --project_id=PROJECT_ID \
 --target_dataset=DATASET \
 --display_name=NAME \
---data_source=DATA_SOURCE \
---service_account_name=SERVICE_ACCOUNT_NAME
+--data_source=DATA_SOURCE
 ```

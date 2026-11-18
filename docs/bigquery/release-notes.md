@@ -27,6 +27,71 @@ To get the latest product updates delivered to you, add the URL of this page to 
 reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators), or add the
 [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## November 18, 2026
+
+Feature
+
+You can manage and version control SQL scripts and notebooks with
+[BigQuery Studio Git repositories](/bigquery/docs/git-repositories),
+which provide a streamlined, folder-based integration with remote Git
+repositories. This feature is
+[generally available](https://cloud.google.com/products#product-launch-stages)
+(GA).
+
+## November 17, 2026
+
+Feature
+
+To reduce LLM token consumption and query latency when processing large
+datasets, enable [optimized mode](/bigquery/docs/optimize-ai-functions)
+using the following [managed AI functions](/bigquery/docs/generative-ai-overview#managed_ai_functions):
+
+* [`AI.IF`](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-if)
+* [`AI.CLASSIFY`](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-classify)
+
+Optimized mode supports the following:
+
+* More types of queries are in scope for optimized mode.
+* Optimized mode supports multi-label classification with `AI.CLASSIFY`.
+* The **Job information** tab in the **Query results** pane shows information
+  about the relative quality of the optimized query results.
+
+This feature is
+[generally available](https://cloud.google.com/products#product-launch-stages)
+(GA).
+
+Feature
+
+You can now use the BigQuery REST API
+([`datasets.insert`](/bigquery/docs/reference/rest/v2/datasets/insert),
+[`datasets.patch`](/bigquery/docs/reference/rest/v2/datasets/patch),
+[`datasets.update`](/bigquery/docs/reference/rest/v2/datasets/update), and
+[`datasets.get`](/bigquery/docs/reference/rest/v2/datasets/get)) to configure
+and monitor [cross-region dataset replication](/bigquery/docs/data-replication)
+and to attach or detach failover reservations for
+[managed disaster recovery](/bigquery/docs/managed-disaster-recovery). This
+feature is
+[generally available](https://cloud.google.com/products#product-launch-stages)
+(GA).
+
+Feature
+
+You can now use the `rerank` option in the
+[`AI.SEARCH` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-search)
+to reorder the results of your search by how
+well the text in the column to search answers the search query. This feature is
+[generally available](https://cloud.google.com/products#product-launch-stages)
+(GA).
+
+Feature
+
+You can now use the
+[`AI.RANK` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-rank)
+to reorder the rows of a table by how
+well the text in a specified column answers a search query. This function is
+[generally available](https://cloud.google.com/products#product-launch-stages)
+(GA).
+
 ## November 16, 2026
 
 Feature
@@ -4943,43 +5008,4 @@ You can now manage [IAM tags](/bigquery/docs/tags) on BigQuery datasets and tabl
 
 Feature
 
-Dark theme is now available for BigQuery in [Preview](https://cloud.google.com/products#product-launch-stages). To enable the dark theme, in the Google Cloud console, click **Settings and utilities > Preferences**. In the navigation menu, click **Appearance**, and then select your color theme and click **Save**.
-
-## June 11, 2025
-
-Feature
-
-The following GoogleSQL functions are now available in [preview](https://cloud.google.com/products#product-launch-stages):
-
-* The [`ARRAY_FIRST` function](/bigquery/docs/reference/standard-sql/array_functions#array_first) returns the first element of the input array.
-* The [`ARRAY_LAST` function](/bigquery/docs/reference/standard-sql/array_functions#array_last) returns the last element of the input array.
-* The [`ARRAY_SLICE` function](/bigquery/docs/reference/standard-sql/array_functions#array_slice) returns an array that contains consecutive elements from the input array.
-
-## June 10, 2025
-
-Feature
-
-For [supported Gemini models](/vertex-ai/generative-ai/docs/provisioned-throughput/supported-models), you can now use [Vertex AI Provisioned Throughput](/vertex-ai/generative-ai/docs/provisioned-throughput/overview) with the [`ML.GENERATE_TEXT`](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-text#provisioned-throughput) and [`AI.GENERATE`](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate#provisioned-throughput) functions to provide consistent high throughput for requests.
-
-This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
-
-Change
-
-An updated version of the [ODBC driver for BigQuery](/bigquery/docs/reference/odbc-jdbc-drivers#odbc_release_3121009) is now available.
-
-## June 09, 2025
-
-Libraries
-
-### Java
-
-#### [2.51.0](https://github.com/googleapis/java-bigquery/compare/v2.50.1...v2.51.0) (2025-06-06)
-
-##### Features
-
-* **bigquery:** Job creation mode GA ([#3804](https://github.com/googleapis/java-bigquery/issues/3804)) ([a21cde8](https://github.com/googleapis/java-bigquery/commit/a21cde8994e93337326cc4a2deb4bafd1596b77f))
-* **bigquery:** Support Fine Grained ACLs for Datasets ([#3803](https://github.com/googleapis/java-bigquery/issues/3803)) ([bebf1c6](https://github.com/googleapis/java-bigquery/commit/bebf1c610e6d050c49fc05f30d3fa0247b7dfdcb))
-
-##### Dependencies
-
-* Rollback netty.version to v4.1.119.Final (
+Dark theme is now available for BigQuery in

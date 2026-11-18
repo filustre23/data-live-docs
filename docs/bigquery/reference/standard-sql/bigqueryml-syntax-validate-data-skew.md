@@ -261,7 +261,5 @@ IF(ARRAY_LENGTH(anomalies) > 0)
 
     SELECT
       ERROR(
-        CONCAT(
-          "Found data skew in features: ",
-<
+        CONCAT
 ```

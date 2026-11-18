@@ -30,7 +30,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 * 在[工作階段](https://docs.cloud.google.com/bigquery/docs/sessions-write-queries?hl=zh-tw#use_temporary_tables_in_sessions)中建立的暫存資料表。這些資料表會放入資料集，並產生類似「\_c018003e063d09570001ef33ae401fad6ab92a6a」的名稱。
 * 在[多重陳述式查詢](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries?hl=zh-tw#temporary_tables) (「指令碼」) 中建立的臨時資料表。這些資料表會放入資料集，並產生「\_script72280c173c88442c3a7200183a50eeeaa4073719」等名稱。
 
-儲存在[查詢結果快取](https://docs.cloud.google.com/bigquery/docs/writing-results?hl=zh-tw#temporary_and_permanent_tables)中的資料不會向您收費，因此不會計入 `*_BYTES` 欄值。
+儲存在[查詢結果快取](https://docs.cloud.google.com/bigquery/docs/writing-results?hl=zh-tw#temporary-table)中的資料不會向您收費，因此不會計入 `*_BYTES` 欄值。
 
 複製項目和快照會將 `*_BYTES` 資料欄值顯示為完整資料表，而非基礎資料表所用儲存空間的差異，因此會高估。帳單會正確反映這項儲存空間用量差異。如要進一步瞭解複製和快照儲存及計費的差異位元組，請參閱 [`TABLE_STORAGE_USAGE_TIMELINE` 檢視畫面](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage-usage?hl=zh-tw)。
 
@@ -181,5 +181,5 @@ SELECT
   SUM(total_physical_bytes) / power(1024, 3) AS total_physical_gib,
   SUM(active_physical_bytes) / power(1024, 3) AS active_physical_gib,
   SUM(active_physical_bytes - time_travel_physical_bytes) / power(1024, 3) AS active_no_tt_physical_gib,
-  SUM(long_term_physical_bytes) / power(1024, 3)
+  SUM(long_term_physical_bytes) / power(1024
 ```

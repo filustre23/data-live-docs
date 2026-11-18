@@ -356,7 +356,4 @@ images, and audio. The `OBJ.LIST` function can discover objects across all
 [Cloud Storage classes](/storage/docs/storage-classes).
 
 Using `OBJ.LIST` replaces the need to manually construct `ObjectRef` values.
-You can quickly add Cloud Storage objects into AI functions to build ETL
-pipelines that handle converting unstructured data to structured data. If you
-require a persistent, self-updating table that continuously tracks new objects
-that
+You can quickly add Cloud Sto

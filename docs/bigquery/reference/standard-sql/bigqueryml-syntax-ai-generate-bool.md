@@ -327,6 +327,4 @@ The result is similar to the following:
 ### Disable the thinking budget
 
 Disabling the thinking budget is useful for tasks that don't require
-complex reasoning. By setting the `thinking_budget` to `0`, you can reduce the
-model's response latency and lower the cost of the request by avoiding
-additional "thinking" tokens. For more information,
+complex reasoning. By setting the `thinking_budget</`

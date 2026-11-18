@@ -16,17 +16,17 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 透過程式執行工作
 
-您可以使用 BigQuery REST API 和用戶端程式庫，建立及管理非同步工作，自動執行應用程式的載入、查詢、擷取和複製作業。呼叫 [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert?hl=zh-tw) 方法啟動工作後，您可以輪詢工作資源的狀態屬性，追蹤執行作業何時完成，並確認作業是否成功。
+您可以使用 BigQuery REST API 和用戶端程式庫建立及管理非同步工作，自動執行應用程式的載入、查詢、擷取和複製作業。呼叫 [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert?hl=zh-tw) 方法啟動工作後，您可以輪詢工作資源的狀態屬性，追蹤執行作業何時完成，並確認作業是否成功。
 
 ## 事前準備
 
-授予 Identity and Access Management (IAM) 角色，讓使用者具備必要權限，可執行本文件中的各項工作。
+授予 Identity and Access Management (IAM) 角色，讓使用者具備執行本文件各項工作所需的權限。
 
 ### 所需權限
 
 如要執行 BigQuery 工作，您必須具備 `bigquery.jobs.create` IAM 權限。
 
-下列各項預先定義的 IAM 角色，都包含執行工作所需的權限：
+下列各項預先定義的 IAM 角色包含執行工作所需的權限：
 
 * `roles/bigquery.user`
 * `roles/bigquery.jobUser`
@@ -45,10 +45,10 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 1. 呼叫 `jobs.insert` 方法來啟動工作。呼叫 `jobs.insert` 方法時，請加入[工作資源](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs?hl=zh-tw)表示法。
 2. 在工作資源的 [`configuration`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#JobConfiguration) 區段中，加入指定工作類型的子項屬性：`load`、`query`、`extract` 或 `copy`。
-3. 呼叫 `jobs.insert` 方法後，請使用工作 ID 和位置呼叫 `jobs.get`，並檢查 `status.state` 值，確認工作狀態。當 `status.state` 為 `DONE` 時，表示工作已停止執行。不過，`DONE` 狀態不代表工作已成功完成，僅表示工作已不再執行。
+3. 呼叫 `jobs.insert` 方法後，請使用工作 ID 和位置呼叫 `jobs.get`，並檢查 `status.state` 值，以瞭解工作狀態。如果 `status.state` 為 `DONE`，表示工作已停止執行。不過，`DONE` 狀態不代表工作已成功完成，僅表示工作已不再執行。
 
-   **注意：** 部分包裝函式會為您管理工作狀態要求。舉例來說，執行 `jobs.query` 會建立工作，並在指定時間內定期輪詢 `DONE` 狀態。
-4. 確認工作是否成功。如果工作具有 `errorResult` 屬性，則表示工作失敗。`status.errorResult` 屬性會保留說明失敗工作發生錯誤的資訊。如果沒有 `status.errorResult`，代表工作已成功完成，但可能發生一些非嚴重錯誤，例如在載入工作中匯入幾列時發生問題。非嚴重錯誤會傳回至工作的 `status.errors` 清單。
+   **注意：**部分包裝函式會為您管理工作狀態要求。舉例來說，執行 `jobs.query` 會建立工作，並在指定時間內定期輪詢 `DONE` 狀態。
+4. 確認工作是否成功。如果工作具有 `errorResult` 屬性，代表工作失敗。`status.errorResult` 屬性會保留資訊，說明失敗工作的錯誤原因。如果沒有 `status.errorResult`，代表工作已順利完成，但可能發生一些非致命錯誤，例如在載入工作中匯入幾列時發生問題。非致命錯誤會傳回至工作的 `status.errors` 清單。
 
 ## 使用用戶端程式庫執行工作
 
@@ -196,6 +196,8 @@ print("Started job: {}".format(query_job.job_id))
 
 在工作中加入標籤後，標籤就會納入您的帳單資料中。
 
+**注意：**如果採用以運算能力為準的定價模式，您無法在 Cloud Billing 報表中使用工作標籤歸因工作費用，因為這些費用是在預留項目層級歸因。
+
 詳情請參閱「[新增工作標籤](https://docs.cloud.google.com/bigquery/docs/adding-labels?hl=zh-tw#job-label)」。
 
 ## 後續步驟
@@ -210,11 +212,11 @@ print("Started job: {}".format(query_job.job_id))
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-11 (世界標準時間)。
+上次更新時間：2026-11-17 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-11 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-17 (世界標準時間)。"],[],[]]

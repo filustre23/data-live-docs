@@ -148,5 +148,5 @@ This is advanced functionality for interoperability with systems utilizing the
 
 ```
 WITH data AS (
-  SELECT 1 AS id, ST_GEOGPOINT(-122,
+  SELECT 1 AS id,
 ```

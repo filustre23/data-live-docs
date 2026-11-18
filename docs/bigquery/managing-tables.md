@@ -657,7 +657,7 @@ RENAME TO mynewtable;
 * 雖然資料表通常可以在上次串流作業後 5 小時重新命名，但可能需要更長時間。在某些情況下，等待時間可能長達 8 天。
 * 現有的資料表 ACL 和資料列存取政策會保留，但在重新命名資料表期間，對資料表 ACL 和資料列存取政策所做的更新則不會保留。
 * 您無法同時重新命名資料表，並對該資料表執行 DML 陳述式。
-* 重新命名資料表會移除資料表的所有 [Knowledge Catalog 方面](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata?hl=zh-tw#aspects)。
+* 重新命名資料表會移除資料表的所有 [Knowledge Catalog 方面](https://docs.cloud.google.com/knowledge-catalog/docs/about-aspects?hl=zh-tw#aspects)。
 * 重新命名資料表時，系統會捨棄在資料表上建立的所有搜尋索引或向量索引。
 * 無法重新命名外部資料表。
 
@@ -1017,4 +1017,6 @@ public class CopyTable {
 
 ### Node.js
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定操作說明進行操作。詳情請參閱
+在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)」中的 Node.js 設定操作說明進行操作。詳情請參閱 [BigQuery Node.js API 參考文件](https://googleapis.dev/nodejs/bigquery/latest/index.html)。
+
+如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「

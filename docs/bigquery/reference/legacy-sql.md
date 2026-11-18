@@ -248,4 +248,4 @@ BigQuery 支援 `INNER`、`[FULL|RIGHT|LEFT] OUTER` 和 `CROSS JOIN` 作業。�
 
 ##### 半聯結和反聯結
 
-除了在 `FROM` 子句中支援 `JOIN` 之外，BigQuery 也支援 `WHERE` 子句中的兩種 join 類型：半 join 和反半 join。半聯結是使用 `IN` 關鍵字和子查詢指定，反聯結則是使
+除了在 `FROM` 子句中支援 `JOIN` 之外，BigQuery 也支援

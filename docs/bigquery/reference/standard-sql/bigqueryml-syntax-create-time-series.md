@@ -535,7 +535,4 @@ This option accepts the following values:
 * `CA`: Canada
 * `CH`: Switzerland
 * `CL`: Chile
-* `CN`: China
-* `CO`: Colombia
-* `CZ`: Czechia
-* `DE`: Germany
+* `CN`:

@@ -277,10 +277,3 @@ AS (
 You can export data from a BigQuery table to a
 [Spanner](/spanner/docs/overview) table by using the `EXPORT DATA`
 statement.
-
-### Spanner export option list
-
-The option list specifies options for the export operation.
-
-| O | |
-| --- | --- |

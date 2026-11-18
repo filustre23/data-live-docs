@@ -93,4 +93,4 @@ Disaster Recovery(DR) replication status of the reservation.
 | `list` | Lists all the reservations for the project in the specified location. |
 | `patch` | Updates an existing reservation resource. |
 | `setIamPolicy` | Sets an access control policy for a resource. |
-|  |
+|

@@ -128,4 +128,4 @@ Represents the state of a replica of a shared dataset. It includes the geographi
 
 | Fields | |
 | --- | --- |
-| `location` | `string`  Output only. The geographic location where the replica resides. See [BigQuery l](https://cloud.google.com/bigquery/docs/locations) |
+| `location` |  |

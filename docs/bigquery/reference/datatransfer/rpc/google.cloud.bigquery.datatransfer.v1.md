@@ -125,4 +125,4 @@ This API allows users to manage their data transfers into BigQuery.
 
 | ListTransferLogs |
 | --- |
-| `rpc ListTransferLogs(ListTransferLogsRequest) returns (ListTransferLogsResponse)`  Returns log messages for the transfer run.  Authorization scopes  Requires the following OAuth scope: |
+| `rpc ListTransferLogs(ListTransferLogsRequest) returns (ListTransferLogsResponse)`  Returns log |

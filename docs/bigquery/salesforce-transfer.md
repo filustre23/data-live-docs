@@ -256,5 +256,3 @@ bq mk
 
 * PROJECT\_ID (選用)：您的 Google Cloud 專案 ID。如未提供 `--project_id` 來指定特定專案，系統會使用預設專案。
 * DATA\_SOURCE：資料來源 - `salesforce`。
-* NAME：資料移轉設定的顯示名稱。移轉作業名稱可以是任意值，日後需要修改移轉作業時，能夠據此識別即可。
-* DATASET

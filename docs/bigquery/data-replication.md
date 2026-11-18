@@ -117,6 +117,8 @@ BigQuery 資料集複製作業有下列限制：
   + 為確保排定的查詢能繼續對升級的主要副本執行，您必須在新的主要位置手動重新建立查詢。
 * 您無法複製隱藏的資料集。
 * 如果資料集包含[條件式 IAM 政策](https://docs.cloud.google.com/bigquery/docs/conditions?hl=zh-tw)，則不支援跨區域複製。如要確認這項錯誤是否干擾複製作業，請查看 [`INFORMATION_SCHEMA.SCHEMATA_REPLICAS` 檢視畫面](https://docs.cloud.google.com/bigquery/docs/information-schema-schemata-replicas?hl=zh-tw)中的 `sync_status` 欄。
+* 您無法使用 BigQuery API 觸發主要切換。主要切換只能使用 [`ALTER SCHEMA SET OPTIONS` DDL 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_schema_set_options_statement)觸發。
+* 如果資料集正在切換主要資料集，[`datasets.get` 方法](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/get?hl=zh-tw)呼叫仍會轉送至舊的主要資料集，直到切換完成。這可能會導致 `replicas` 欄位中的資料過時。
 
 ### 資源行為
 
@@ -209,6 +211,67 @@ ADD REPLICA `my_replica`
 OPTIONS(location='us-east4');
 ```
 
+### API
+
+如要在建立資料集時複製資料集，請呼叫 [`datasets.insert` 方法](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert?hl=zh-tw)。建立含有副本的資料集時，必須在 `replicas` 欄位中加入主要副本。
+
+下列範例會在 `us` 多區域建立資料集，並在單一作業中，於 `eu` 多區域新增副本：
+
+```
+POST https://bigquery.googleapis.com/bigquery/v2/projects/PROJECT_ID/datasets
+
+{
+  "datasetReference": {
+    "datasetId": "DATASET_ID",
+    "projectId": "PROJECT_ID"
+  },
+  "location": "us",
+  "replicas": [
+    {
+      "id": "us-replica",
+      "location": "us"
+    },
+    {
+      "id": "eu-replica",
+      "location": "eu"
+    }
+  ]
+}
+```
+
+如要將副本新增至現有資料集，請呼叫 [`datasets.patch` 方法](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch?hl=zh-tw)或 [`datasets.update` 方法](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/update?hl=zh-tw)。新增或捨棄副本時，您必須在 `replicas` 欄位中加入主要副本。
+
+以下範例會在 `us` 多區域的現有資料集中，新增 `eu` 多區域的副本：
+
+```
+PATCH https://bigquery.googleapis.com/bigquery/v2/projects/PROJECT_ID/datasets/DATASET_ID
+
+{
+  "replicas": [
+    {
+      "id": "us-replica",
+      "location": "us"
+    },
+    {
+      "id": "eu-replica",
+      "location": "eu"
+    }
+  ]
+}
+```
+
+如要將資料集設為災難復原 (DR) 資料集，您可以設定 `failover_reservation_id` 欄位，建立容錯移轉預留項目。您必須先回填次要副本，才能設定這個欄位。
+
+以下範例會更新資料集，加入容錯移轉預留項目：
+
+```
+PATCH https://bigquery.googleapis.com/bigquery/v2/projects/PROJECT_ID/datasets/DATASET_ID
+
+{
+  "failover_reservation_id": "ADMIN_PROJECT.FAILOVER_RESERVATION"
+}
+```
+
 如要確認次要副本是否已成功建立，可以查詢 [`INFORMATION_SCHEMA.SCHEMATA_REPLICAS`](https://docs.cloud.google.com/bigquery/docs/information-schema-schemata-replicas?hl=zh-tw) 檢視表中的 `creation_complete` 欄。
 
 建立次要副本後，您可以明確[將查詢位置設為](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#specify_locations)次要區域，藉此查詢該副本。如未明確設定位置，BigQuery 會使用資料集主要副本的區域。
@@ -278,6 +341,26 @@ ALTER SCHEMA my_dataset
 DROP REPLICA IF EXISTS `us`;
 ```
 
+### API
+
+如要移除副本並停止複製資料集，請呼叫 [`datasets.patch` 方法](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch?hl=zh-tw)或 [`datasets.update` 方法](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/update?hl=zh-tw)。捨棄副本時，您必須在 `replicas` 欄位中加入主要副本。
+
+以下範例會傳送僅包含主要 `us` 副本的要求
+，從資料集捨棄 `eu` 副本：
+
+```
+PATCH https://bigquery.googleapis.com/bigquery/v2/projects/PROJECT_ID/datasets/DATASET_ID
+
+{
+  "replicas": [
+    {
+      "id": "us-replica",
+      "location": "us"
+    }
+  ]
+}
+```
+
 您必須先捨棄所有次要副本，才能刪除整個資料集。如果您刪除整個資料集 (例如使用 [`DROP SCHEMA` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#drop_schema_statement))，但未捨棄所有次要副本，就會收到下列錯誤：
 
 ```
@@ -328,13 +411,29 @@ BigQuery 在 Monitoring 中提供下列指標，協助您監控複製狀態：
 
 如要列出專案中的資料集副本，請查詢 [`INFORMATION_SCHEMA.SCHEMATA_REPLICAS`](https://docs.cloud.google.com/bigquery/docs/information-schema-schemata-replicas?hl=zh-tw) 檢視表。
 
+### 使用 BigQuery API 查看複製狀態
+
+如要查看資料集的複製資訊，請呼叫 [`datasets.get` 方法](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/get?hl=zh-tw)並設定 `datasetView` 查詢參數。
+
+`datasetView` 參數支援下列值：
+
+* `BASIC`：預設。傳回基本資料集資訊，但不包含 `replicas` 欄位。
+* `BASIC_REPLICA_METADATA_VIEW`：傳回基本資料集資訊和 `replicas` 欄位，但不包括需要跨區域要求的欄位，例如 `sync_status`。
+* `FULL`：傳回基本資料集資訊和 `replicas` 欄位，但不含需要跨區域要求的欄位，例如 `sync_status`。`FULL` 資料集檢視表的功能與 `BASIC_REPLICA_METADATA_VIEW` 相同，但 `FULL` 日後可能會有變動。
+
+以下範例會擷取資料集資訊，包括副本中繼資料：
+
+```
+GET https://bigquery.googleapis.com/bigquery/v2/projects/PROJECT_ID/datasets/DATASET_ID?datasetView=BASIC_REPLICA_METADATA_VIEW
+```
+
 ## 遷移資料集
 
-您可以使用跨區域資料集複製功能，將資料集從一個區域遷移至另一個區域。以下範例說明如何使用跨區域複製功能，將現有的 `my_migration` 資料集從 `US` 多區域遷移至 `EU` 多區域。
+您可以使用跨區域資料集複製功能，將資料集從一個區域遷移至另一個區域。您也可以使用跨區域資料集複製功能，從多區域位置遷移至區域，或從區域遷移至多區域位置。詳情請參閱「[遷移資料集](https://docs.cloud.google.com/bigquery/docs/migrate-datasets?hl=zh-tw)」。
 
 ### 複製資料集
 
-如要開始遷移程序，請先在要遷移資料的區域中複製資料集。在這個情境中，您要將 `my_migration` 資料集遷移至 `EU` 多區域。
+如要開始遷移程序，請先在要遷移資料的區域中複製資料集。在這個情境中，您會使用跨區域複製功能，將 `my_migration` 資料集從 `US` 多區域遷移至 `EU` 多區域。
 
 ```
 -- Create a replica in the secondary region. 
@@ -447,11 +546,11 @@ OPTIONS(location='us-west1',
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-16 (世界標準時間)。
+上次更新時間：2026-11-17 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-16 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-17 (世界標準時間)。"],[],[]]
