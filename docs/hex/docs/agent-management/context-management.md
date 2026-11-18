@@ -25,3 +25,7 @@ Programmatically sync guides and semantic projects into Hex from an external sou
 [## 📄️External Apps
 
 Connect Hex's agent via MCP to external apps like Notion, Linear, or your own custom MCP-compatible tools.](/docs/api-integrations/external-apps)
+
+[## 📄️Context consultant agent skill
+
+Install the context consultant agent skill and brief a coding agent that already knows Hex's context practices.](/docs/agent-management/context-consultant)

@@ -1,6 +1,4 @@
 * postCreatePresignedUrl
-* getListProjects
-* postCreateProject
 * getGetQueriedTables
 * patchEditProjectSharingCollections
 * postIngestSemanticProject
@@ -32,6 +30,8 @@
 * getListCells
 * getGetChartImageFromLogic
 * postBatchUpdateComputeProfile
+* postCreateProject
+* getListProjects
 * patchEditProjectSharingGroups
 * patchEditProjectSharingUsers
 * patchEditProjectSharingOrgAndPublic
@@ -164,311 +164,6 @@ Copy
 `{
 
 * "url": "string"
-
-}`
-
-## ListProjects
-
-List all viewable projects, sorted by most recently created first.
-
-##### Authorizations:
-
-*bearerAuth*
-
-##### query Parameters
-
-|  |  |
-| --- | --- |
-| includeArchived | boolean  Default:  false |
-| includeComponents | boolean  Default:  false |
-| includeTrashed | boolean  Default:  false |
-| includeUnlisted | boolean  Default:  false |
-| includeSharing | boolean  Default:  false |
-| statuses | Array of strings  Default:  "" |
-| categories | Array of strings  Default:  "" |
-| creatorEmail | string  Default:  null |
-| ownerEmail | string  Default:  null |
-| collectionId | string  Default:  null |
-| limit | integer <int32>  (PageSize)   [ 1 .. 100 ]  Default:  "25"  Number of results to fetch per page for paginated requests |
-| after | any  Default:  null |
-| before | any  Default:  null |
-| sortBy | string (SortByEnum)  Enum: "CREATED\_AT" "LAST\_EDITED\_AT" "LAST\_PUBLISHED\_AT" |
-| sortDirection | string (SortDirectionEnum)  Enum: "DESC" "ASC" |
-
-### Responses
-
-**200**
-
-**400**
-
-**403**
-
-get/v1/projects
-
-https://app.hex.tech/api/v1/projects
-
-### Response samples
-
-* 200
-* 400
-* 403
-
-Content type
-
-application/json
-
-Copy
-
- Expand all  Collapse all
-
-`{
-
-* "values": [
-  + {
-    - "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
-    - "title": "string",
-    - "description": "string",
-    - "type": "PROJECT",
-    - "computeProfile": {
-      * "PUBLISHED": {
-        + "kernelImage": "string",
-        + "kernelSize": "string"},
-      * "LOGIC": {
-        + "kernelImage": "string",
-        + "kernelSize": "string"}},
-    - "creator": {
-      * "email": "string"},
-    - "owner": {
-      * "email": "string"},
-    - "status": {
-      * "name": "string"},
-    - "categories": [
-      * {
-        + "description": "string",
-        + "name": "string"}],
-    - "reviews": {
-      * "required": true},
-    - "analytics": {
-      * "publishedResultsUpdatedAt": "string",
-      * "lastViewedAt": "string",
-      * "appViews": {
-        + "lastThirtyDays": 0,
-        + "lastFourteenDays": 0,
-        + "lastSevenDays": 0,
-        + "allTime": 0}},
-    - "lastEditedAt": "string",
-    - "lastPublishedAt": "string",
-    - "createdAt": "string",
-    - "archivedAt": "string",
-    - "trashedAt": "string",
-    - "schedules": [
-      * {
-        + "cadence": "HOURLY",
-        + "enabled": true,
-        + "hourly": {
-          - "timezone": "string",
-          - "minute": 59},
-        + "daily": {
-          - "timezone": "string",
-          - "minute": 59,
-          - "hour": 23},
-        + "weekly": {
-          - "timezone": "string",
-          - "minute": 59,
-          - "hour": 23,
-          - "dayOfWeek": "SUNDAY"},
-        + "monthly": {
-          - "timezone": "string",
-          - "minute": 59,
-          - "hour": 23,
-          - "day": 1},
-        + "custom": {
-          - "timezone": "string",
-          - "cron": "string"}}],
-    - "sharing": {
-      * "users": [
-        + {
-          - "access": "NONE",
-          - "user": {
-            * "email": "string"}}],
-      * "collections": [
-        + {
-          - "access": "NONE",
-          - "collection": {
-            * "name": "string"}}],
-      * "groups": [
-        + {
-          - "access": "NONE",
-          - "group": {
-            * "name": "string"}}],
-      * "workspace": {
-        + "access": "NONE"},
-      * "publicWeb": {
-        + "access": "NONE"},
-      * "support": {
-        + "access": "NONE"}},
-    - "folderEntryId": "string"}],
-* "pagination": {
-  + "after": "string",
-  + "before": "string"}
-
-}`
-
-## CreateProject
-
-Create a new project in the workspace with the specified title, and optionally a description.
-
-This endpoint is subject to the following rate limits:
-
-* `hex-api`: Default rate limit group for the Hex API
-  + Max requests per minute may vary (default: 30)
-  + Max requests per hour may vary (default: 1800)
-
-##### Authorizations:
-
-*bearerAuth*
-
-##### Request Body schema: application/json required
-
-|  |  |
-| --- | --- |
-| title required | string  The title of the new project. |
-| description | string  An optional description for the new project. |
-
-### Responses
-
-**201** 
-
-Successful response
-
-**400** 
-
-Invalid input data
-
-**403** 
-
-Insufficient access
-
-post/v1/projects
-
-https://app.hex.tech/api/v1/projects
-
-### Request samples
-
-* Payload
-
-Content type
-
-application/json
-
-Copy
-
-`{
-
-* "title": "string",
-* "description": "string"
-
-}`
-
-### Response samples
-
-* 201
-* 400
-* 403
-
-Content type
-
-application/json
-
-Copy
-
- Expand all  Collapse all
-
-`{
-
-* "id": "string",
-* "title": "string",
-* "description": "string",
-* "type": "PROJECT",
-* "computeProfile": {
-  + "LOGIC": {
-    - "kernelImage": "string",
-    - "kernelSize": "string"},
-  + "PUBLISHED": {
-    - "kernelImage": "string",
-    - "kernelSize": "string"}},
-* "creator": {
-  + "email": "string"},
-* "owner": {
-  + "email": "string"},
-* "status": {
-  + "name": "string"},
-* "categories": [
-  + {
-    - "name": "string",
-    - "description": "string"}],
-* "reviews": {
-  + "required": true},
-* "analytics": {
-  + "appViews": {
-    - "allTime": 0,
-    - "lastSevenDays": 0,
-    - "lastFourteenDays": 0,
-    - "lastThirtyDays": 0},
-  + "lastViewedAt": "string",
-  + "publishedResultsUpdatedAt": "string"},
-* "lastEditedAt": "string",
-* "lastPublishedAt": "string",
-* "createdAt": "string",
-* "archivedAt": "string",
-* "trashedAt": "string",
-* "schedules": [
-  + {
-    - "cadence": "HOURLY",
-    - "enabled": true,
-    - "hourly": {
-      * "minute": 0,
-      * "timezone": "string"},
-    - "daily": {
-      * "hour": 0,
-      * "minute": 0,
-      * "timezone": "string"},
-    - "weekly": {
-      * "dayOfWeek": "SUNDAY",
-      * "hour": 0,
-      * "minute": 0,
-      * "timezone": "string"},
-    - "monthly": {
-      * "day": 0,
-      * "hour": 0,
-      * "minute": 0,
-      * "timezone": "string"},
-    - "custom": {
-      * "cron": "string",
-      * "timezone": "string"}}],
-* "sharing": {
-  + "users": [
-    - {
-      * "user": {
-        + "email": "string"},
-      * "access": "NONE"}],
-  + "collections": [
-    - {
-      * "collection": {
-        + "name": "string"},
-      * "access": "NONE"}],
-  + "groups": [
-    - {
-      * "group": {
-        + "name": "string"},
-      * "access": "NONE"}],
-  + "workspace": {
-    - "access": "NONE"},
-  + "publicWeb": {
-    - "access": "NONE"},
-  + "support": {
-    - "access": "NONE"}},
-* "folderEntryId": "string"
 
 }`
 
@@ -1245,7 +940,7 @@ Copy
 | after | any  Default:  null |
 | before | any  Default:  null |
 | limit | integer <int32>  (LargerPageSize)   [ 1 .. 500 ]  Default:  "25"  Number of results to fetch per page for paginated requests |
-| sortBy | string (ListGroupsSortByEnum)  Enum: "CREATED\_AT" "NAME" |
+| sortBy | string (ListGroupsSortByEnum)  Enum: "NAME" "CREATED\_AT" |
 | sortDirection | string (SortDirectionEnum)  Enum: "DESC" "ASC" |
 | userId | string  Default:  null  When set, return only groups this user belongs to. |
 
@@ -2545,3 +2240,407 @@ Copy
 ### Responses
 
 **200**
+
+**400**
+
+**403**
+
+**500**
+
+patch/v1/collections/{collectionId}
+
+https://app.hex.tech/api/v1/collections/{collectionId}
+
+### Request samples
+
+* Payload
+
+Content type
+
+application/json
+
+Copy
+
+ Expand all  Collapse all
+
+`{
+
+* "sharing": {
+  + "upsert": {
+    - "users": [
+      * {
+        + "access": "string",
+        + "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08"}],
+    - "groups": [
+      * {
+        + "access": "string",
+        + "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08"}],
+    - "workspace": {
+      * "members": "string"}}},
+* "description": "string",
+* "name": "string"
+
+}`
+
+### Response samples
+
+* 200
+* 400
+* 403
+* 500
+
+Content type
+
+application/json
+
+Copy
+
+ Expand all  Collapse all
+
+`{
+
+* "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+* "name": "string",
+* "description": "string",
+* "creator": {
+  + "email": "string",
+  + "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08"},
+* "sharing": {
+  + "users": [
+    - {
+      * "access": "string",
+      * "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08"}],
+  + "groups": [
+    - {
+      * "access": "string",
+      * "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08"}],
+  + "workspace": {
+    - "members": "string"}}
+
+}`
+
+## ListCollections
+
+##### Authorizations:
+
+*bearerAuth*
+
+##### query Parameters
+
+|  |  |
+| --- | --- |
+| after | any  Default:  null |
+| before | any  Default:  null |
+| limit | integer <int32>  (PageSize)   [ 1 .. 100 ]  Default:  "25"  Number of results to fetch per page for paginated requests |
+| sortBy | string (ListCollectionsSortByEnum)  Value: "NAME" |
+
+### Responses
+
+**200**
+
+**400**
+
+**403**
+
+**500**
+
+get/v1/collections
+
+https://app.hex.tech/api/v1/collections
+
+### Response samples
+
+* 200
+* 400
+* 403
+* 500
+
+Content type
+
+application/json
+
+Copy
+
+ Expand all  Collapse all
+
+`{
+
+* "values": [
+  + {
+    - "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+    - "name": "string",
+    - "description": "string",
+    - "creator": {
+      * "email": "string",
+      * "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08"},
+    - "sharing": {
+      * "users": [
+        + {
+          - "access": "string",
+          - "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08"}],
+      * "groups": [
+        + {
+          - "access": "string",
+          - "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08"}],
+      * "workspace": {
+        + "members": "string"}}}],
+* "pagination": {
+  + "after": "string",
+  + "before": "string"}
+
+}`
+
+## CreateCollection
+
+##### Authorizations:
+
+*bearerAuth*
+
+##### Request Body schema: application/json required
+
+|  |  |
+| --- | --- |
+| sharing | object (CollectionApiResourceSharing) |
+| description | string |
+| name required | string |
+
+### Responses
+
+**201**
+
+**400**
+
+**403**
+
+**500**
+
+post/v1/collections
+
+https://app.hex.tech/api/v1/collections
+
+### Request samples
+
+* Payload
+
+Content type
+
+application/json
+
+Copy
+
+ Expand all  Collapse all
+
+`{
+
+* "sharing": {
+  + "users": [
+    - {
+      * "access": "string",
+      * "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08"}],
+  + "groups": [
+    - {
+      * "access": "string",
+      * "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08"}],
+  + "workspace": {
+    - "members": "string"}},
+* "description": "string",
+* "name": "string"
+
+}`
+
+### Response samples
+
+* 201
+* 400
+* 403
+* 500
+
+Content type
+
+application/json
+
+Copy
+
+ Expand all  Collapse all
+
+`{
+
+* "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+* "name": "string",
+* "description": "string",
+* "creator": {
+  + "email": "string",
+  + "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08"},
+* "sharing": {
+  + "users": [
+    - {
+      * "access": "string",
+      * "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08"}],
+  + "groups": [
+    - {
+      * "access": "string",
+      * "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08"}],
+  + "workspace": {
+    - "members": "string"}}
+
+}`
+
+## GetCell
+
+Get a single cell by ID
+
+This endpoint is subject to the following rate limits:
+
+* `hex-api-30rpm`: Rate limit group for the Hex API at 30 requests per minute
+  + Max 30 requests per minute
+
+##### Authorizations:
+
+*bearerAuth*
+
+##### path Parameters
+
+|  |  |
+| --- | --- |
+| cellId required | string |
+
+### Responses
+
+**200** 
+
+Successful response
+
+**400** 
+
+Invalid input data
+
+**401** 
+
+Authorization not provided
+
+**403** 
+
+Insufficient access
+
+**404** 
+
+Not found
+
+**500** 
+
+Internal server error
+
+get/v1/cells/{cellId}
+
+https://app.hex.tech/api/v1/cells/{cellId}
+
+### Response samples
+
+* 200
+* 400
+* 401
+* 403
+* 404
+* 500
+
+Content type
+
+application/json
+
+Copy
+
+ Expand all  Collapse all
+
+`{
+
+* "id": "string",
+* "staticId": "string",
+* "cellType": "CODE",
+* "label": "string",
+* "dataConnectionId": "string",
+* "contents": {
+  + "codeCell": {
+    - "source": "string"},
+  + "sqlCell": {
+    - "source": "string",
+    - "outputDataframe": "string"},
+  + "markdownCell": {
+    - "source": "string"}},
+* "projectId": "string"
+
+}`
+
+## UpdateCell
+
+Update a cell's source and/or data connection. For SQL cells, can update the SQL source, output dataframe, and data connection. For code and markdown cells, can update the source. Returns the updated cell.
+
+This endpoint is subject to the following rate limits:
+
+* `hex-api-30rpm`: Rate limit group for the Hex API at 30 requests per minute
+  + Max 30 requests per minute
+
+##### Authorizations:
+
+*bearerAuth*
+
+##### path Parameters
+
+|  |  |
+| --- | --- |
+| cellId required | string |
+
+##### Request Body schema: application/json required
+
+|  |  |
+| --- | --- |
+| dataConnectionId | string or null  Data connection to attach to a SQL cell. Pass null to detach the existing data connection. |
+| contents | object |
+
+### Responses
+
+**200** 
+
+Successful response
+
+**400** 
+
+Invalid input data
+
+**401** 
+
+Authorization not provided
+
+**403** 
+
+Insufficient access
+
+**404** 
+
+Not found
+
+**500** 
+
+Internal server error
+
+patch/v1/cells/{cellId}
+
+https://app.hex.tech/api/v1/cells/{cellId}
+
+### Request samples
+
+* Payload
+
+Content type
+
+application/json
+
+Copy
+
+ Expand all  Collapse all
+
+`{
+
+* "dataConnectionId": "string",
+* "contents": {
+  + "codeCell": {
+    - "source": "stri`

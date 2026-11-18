@@ -22,7 +22,7 @@ Choose which warehouse data, semantic models, and projects Hex agents use, inclu
 
 [## 🗃Context Management
 
-6 items](/docs/agent-management/context-management)
+7 items](/docs/agent-management/context-management)
 
 [## 📄️Agent personalization
 

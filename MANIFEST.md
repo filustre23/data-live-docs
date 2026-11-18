@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-11-17T21:19+00:00_
+_Generated 2026-11-18T06:20+00:00_
 
-**9 sources, 4843 topics total**
+**9 sources, 4851 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_916 topics_
+_922 topics_
 
 - `anthropic-sdk/about-claude/additional-resources`
 - `anthropic-sdk/about-claude/api-credits-for-subscribers`
@@ -199,6 +199,7 @@ _916 topics_
 - `anthropic-sdk/api/beta/organization/claude_tag/bundles/targets/delete`
 - `anthropic-sdk/api/beta/organization/claude_tag/bundles/targets/list`
 - `anthropic-sdk/api/beta/organization/claude_tag/bundles/targets/retrieve`
+- `anthropic-sdk/api/beta/organization/claude_tag/bundles/update`
 - `anthropic-sdk/api/beta/organization/claude_tag/slack_channels`
 - `anthropic-sdk/api/beta/organization/claude_tag/slack_channels/create`
 - `anthropic-sdk/api/beta/organization/claude_tag/slack_channels/delete`
@@ -798,6 +799,11 @@ _916 topics_
 - `anthropic-sdk/manage-claude/inference-hooks-configuration`
 - `anthropic-sdk/manage-claude/inference-hooks-endpoint`
 - `anthropic-sdk/manage-claude/ip-allowlist`
+- `anthropic-sdk/manage-claude/oauth-apps/app-review`
+- `anthropic-sdk/manage-claude/oauth-apps/branding-samples`
+- `anthropic-sdk/manage-claude/oauth-apps/oauth-reference`
+- `anthropic-sdk/manage-claude/oauth-apps/organization-billing-connections`
+- `anthropic-sdk/manage-claude/oauth-apps/overview`
 - `anthropic-sdk/manage-claude/opentelemetry`
 - `anthropic-sdk/manage-claude/opentelemetry/api`
 - `anthropic-sdk/manage-claude/opentelemetry/sdk`
@@ -2654,7 +2660,7 @@ _204 topics_
 
 Upstream: <https://docs.getdbt.com/docs/>
 
-_1175 topics_
+_1176 topics_
 
 - `dbt-core/best-practices/best-practice-workflows`
 - `dbt-core/best-practices/clone-incremental-models`
@@ -3082,6 +3088,7 @@ _1175 topics_
 - `dbt-core/docs/platform/about-profiles`
 - `dbt-core/docs/platform/account-integrations`
 - `dbt-core/docs/platform/account-settings`
+- `dbt-core/docs/platform/account-structure`
 - `dbt-core/docs/platform/billing`
 - `dbt-core/docs/platform/billing-faqs`
 - `dbt-core/docs/platform/billing/dbt-ai-usage`
@@ -4001,7 +4008,7 @@ _158 topics_
 
 Upstream: <https://learn.hex.tech/>
 
-_401 topics_
+_402 topics_
 
 - `hex/changelog`
 - `hex/changelog/2020-12-17`
@@ -4165,6 +4172,7 @@ _401 topics_
 - `hex/docs/administration/workspace_settings/workspace-security`
 - `hex/docs/agent-management`
 - `hex/docs/agent-management/agent-personalization`
+- `hex/docs/agent-management/context-consultant`
 - `hex/docs/agent-management/context-management`
 - `hex/docs/agent-management/context-management/context-sync`
 - `hex/docs/agent-management/context-management/endorsements-in-context-studio`
