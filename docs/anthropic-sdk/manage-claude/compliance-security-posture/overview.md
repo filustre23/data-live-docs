@@ -113,7 +113,7 @@ These values are personal data; your copies outlive the person’s membership. B
 
 ## What Anthropic stores when someone attests
 
-Anthropic stores one attestation per control, including the value, when it was made, any end date, and the account of the person who attested. Attesting again replaces it.
+Anthropic stores one attestation per control, including the value, when it was made, any end date, and the account of the person who attested. Attesting again replaces it, unless the save is refused, as in the case described later in this section.
 
 Anthropic keeps storing an attestation after its end date arrives or it [ends automatically](https://platform.claude.com/docs/en/manage-claude/compliance-security-posture/overview#what-ends-an-attestation), until someone clears it or Anthropic deletes it with the organization. If the account of the person who attested is deleted, Anthropic keeps storing the attestation, which no longer says who attested. Any Activity Feed activities that this person caused still name them. Clearing or replacing the attestation removes nothing from the Activity Feed (see [Who can see who attested](https://platform.claude.com/docs/en/manage-claude/compliance-security-posture/overview#who-can-see-who-attested)).
 
@@ -123,9 +123,11 @@ An attestation’s comment is the answer to the question that the Security postu
 
 Some organizations cannot save a comment with an attestation because of their data-handling settings, such as CMEK or ZDR. For those organizations, the Security posture page shows no comment box and asks for no answer when someone attests.
 
-If an organization saved a comment before those settings applied to it, the comment stays stored with its attestation. The Security posture page does not show that comment, and two actions can delete it:
+If an organization saved a comment before those settings applied to it, the comment stays stored with its attestation. The Security posture page does not show that comment. The control whose attestation has that comment works as follows:
 
-* Clearing the attestation deletes the comment.
-* Attesting again can delete the comment without showing it first.
+* The page refuses to save the attestation again, whether with another value or with the same value for renewal, except as the last item describes. The Activity Feed records no activity for the refused save.
+* A refused save leaves the attestation as it was. If the attestation has an end date, a refused renewal does not move that date, so the attestation ends when that date arrives. After the end date arrives, the page still refuses to save the attestation again until someone clears the attestation. See [What ends an attestation](https://platform.claude.com/docs/en/manage-claude/compliance-security-posture/overview#what-ends-an-attestation).
+* Clearing the attestation deletes the comment. This cannot be undone. After that, this refusal no longer applies.
+* In some cases, the page does not refuse the save. Then, attesting again can delete the comment without showing it first.
 
 While Security posture is not available to an organization, Anthropic keeps storing its attestations and comments. In that time, nobody can see or clear them on the Security posture page.
