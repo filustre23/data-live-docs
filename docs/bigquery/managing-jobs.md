@@ -20,11 +20,11 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 本文說明如何[查看工作詳細資料](#view-job)、[列出專案中的工作](#list_jobs_in_a_project)、[取消執行中的工作](#cancel_jobs)、[刪除工作中繼資料](#delete_job_metadata)，以及[重複執行已完成的工作](#repeat_jobs)。
 
-如要監控、匯總及排解整個組織的工作問題，請參閱「[監控工作](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer?hl=zh-tw)」。
+如要監控、匯總及排解整個組織的工作，請參閱「[監控工作](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer?hl=zh-tw)」。
 
 ## 關於 BigQuery 工作
 
-每當您[載入](https://docs.cloud.google.com/bigquery/docs/loading-data?hl=zh-tw)、[匯出](https://docs.cloud.google.com/bigquery/exporting-data-from-bigquery?hl=zh-tw)、[查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw)或[複製資料](https://docs.cloud.google.com/bigquery/docs/managing-tables?hl=zh-tw#copy-table)時，BigQuery 都會自動建立、排定及執行工作，追蹤任務進度。
+每當您[載入](https://docs.cloud.google.com/bigquery/docs/loading-data?hl=zh-tw)、[匯出](https://docs.cloud.google.com/bigquery/exporting-data-from-bigquery?hl=zh-tw)、[查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw)或[複製資料](https://docs.cloud.google.com/bigquery/docs/managing-tables?hl=zh-tw#copy-table)時，BigQuery 都會自動建立、排定及執行工作，追蹤工作進度。
 
 由於工作可能需要很長時間才能完成，因此會以非同步方式執行，並可輪詢其狀態。較短的動作 (例如列出資源或取得中繼資料) 不會以工作形式管理。
 
@@ -45,7 +45,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ### 定價
 
-每個工作都與您指定的特定專案相關聯。因工作而產生的任何使用量，均會向連接相關專案的帳單帳戶收取費用。如果您與他人共用專案存取權，在專案中執行的任何工作也會計入帳單帳戶。
+每個工作都與您指定的特定專案相關聯。因工作而產生的任何使用量，均會向連接相關專案的帳單帳戶收取費用。如果您與他人共用專案存取權，專案中執行的任何工作也會計入帳單帳戶。
 
 舉例來說，執行查詢工作時，費用會計入執行該工作的專案。因此，若看到格式為 `<project_id>:<region>.<job_id>` 的查詢工作 ID，`project_id` 就是負責支付該查詢費用的專案 ID。
 
@@ -61,7 +61,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 * BigQuery 工作使用者 (`roles/bigquery.jobUser`)：執行或重複執行工作、列出工作、查看工作詳細資料，以及取消工作。
 * BigQuery 使用者 (`roles/bigquery.user`)：執行或重複執行工作、列出工作、查看工作詳細資料，以及取消工作 (這個角色的權限比 BigQuery 工作使用者更寬鬆)。
-* BigQuery 資源管理員 (`roles/bigquery.resourceAdmin`)：列出所有工作，並擷取任何工作的相關中繼資料。
+* BigQuery 資源管理員 (`roles/bigquery.resourceAdmin`)：列出所有工作，並擷取任何工作的中繼資料。
 * BigQuery 管理員 (`roles/bigquery.admin`)：列出所有工作、擷取任何工作的中繼資料，以及取消任何工作。
 
 如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
@@ -73,17 +73,17 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 必須具備下列權限，才能執行及管理工作：
 
 * `bigquery.jobs.create`
-  ，以便執行或重複工作，以及列出工作。
+  ，以便執行或重複執行工作，以及列出工作。
 * `bigquery.jobs.get`
-  ，即可查看任何工作的。
+  ，即可查看任何工作的中繼資料。
 * `bigquery.jobs.update`
   ，即可取消任何工作。
 * `bigquery.jobs.listAll`
-  ：可列出所有工作，並擷取任何使用者提交的工作中繼資料。如要查看所有工作的詳細資料，也必須具備 `bigquery.jobs.list` 權限。
+  ，即可列出所有工作，並擷取任何使用者提交的工作中繼資料。如要查看所有工作的詳細資料，也必須具備 `bigquery.jobs.list` 權限。
 * `bigquery.jobs.list`
-  ，即可列出所有工作，並擷取任何使用者提交的任何工作的中繼資料。如果是其他使用者提交的工作，詳細資料和中繼資料會經過遮蓋。
+  ，即可列出所有工作，並擷取任何使用者提交的工作中繼資料。如果是其他使用者提交的工作，詳細資料和中繼資料會經過遮蓋。
 * `bigquery.jobs.listExecutionMetadata`
-  ，即可列出任何使用者提交的所有工作執行中繼資料 (不含機密資訊)。
+  ，即可在管理監控圖表中查看工作執行中繼資料，以及任何使用者提交工作的運算單元估算值 (包括工作執行指標、專案 ID、資料夾編號、工作 ID、預留項目 ID、標籤和 `user_email`，但不含 SQL 查詢文字、查詢執行計畫和階段，以及參照或目的地資料表、檢視表和常式)。
 * `bigquery.jobs.update`
   ，即可取消任何工作。
 * `bigquery.jobs.delete`
@@ -95,9 +95,9 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ## 查看工作詳細資料
 
-您可以使用 Google Cloud 控制台、bq 指令列工具、API 或用戶端程式庫查看工作詳細資料。詳細資料包括資料和中繼資料，例如工作類型、工作狀態，以及建立工作的使用者。
+您可以使用 Google Cloud 控制台、bq 指令列工具、API 或用戶端程式庫查看工作詳細資料。詳細資料包括資料和中繼資料，例如工作類型、工作狀態和建立工作的使用者。
 
-**注意：**本節說明的工作詳細資料，提供專案層級的所有工作活動永久記錄。或者，您也可以在 BigQuery Studio 查詢編輯器的「Query results」(查詢結果) 窗格中，查看最近特定工作階段的記錄。
+**注意：**本節說明的工作詳細資料，會提供專案層級的所有工作活動永久記錄。或者，您也可以在 BigQuery Studio 查詢編輯器的「Query results」(查詢結果) 窗格中，查看特定工作階段的近期記錄。
 
 如要查看工作詳細資料，請按照下列步驟操作：
 
@@ -120,7 +120,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ### bq
 
-發出 [`bq show`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_show) 指令，並加上 `--job=true` 旗標和工作 ID。
+發出 [`bq show`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_show) 指令，並搭配 `--job=true` 旗標和工作 ID。
 
 提供工作 ID 時，您可以使用完整 ID 或簡短形式。舉例來說， Google Cloud 控制台中列出的工作 ID 是完整限定名稱，也就是包含專案和位置：
 
@@ -130,7 +130,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 `bquijob_123x456_123y123z123c`
 
-如要指定工作位置，請提供 `--location` 標記，並將值設為您的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。如果使用完整工作 ID，則可不指定這個旗標。如果您加入 `--location` 旗標，且使用的是完整工作 ID，系統會忽略 `--location` 旗標。
+如要指定工作位置，請提供 `--location` 標記，並將值設為您的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。如果使用完整工作 ID，則可不指定這個旗標。如果您加入 `--location` 旗標，且使用完整工作 ID，系統會忽略 `--location` 旗標。
 
 以下指令要求工作的相關資訊：
 
@@ -401,7 +401,7 @@ bq ls --jobs=true --all=true \
 * `MIN_TIME`：代表 [Unix 紀元](https://wikipedia.org/wiki/Unix_time)時間戳記的整數，以毫秒為單位。
 * `MAX_TIME`：代表 [Unix 紀元](https://wikipedia.org/wiki/Unix_time)時間戳記的整數，以毫秒為單位。
 * `MAX_RESULTS`：整數，表示傳回的工作數量。
-* `PROJECT_ID`：專案 ID，用於存放您要列出的工作。如果您[設定預設專案](https://docs.cloud.google.com/sdk/gcloud/reference/config/set?hl=zh-tw)，就不需要提供 `PROJECT_ID` 參數。
+* `PROJECT_ID`：專案 ID，用於存放您要列出的工作。如果您[設定了預設專案](https://docs.cloud.google.com/sdk/gcloud/reference/config/set?hl=zh-tw)，就不需要提供 `PROJECT_ID` 參數。
 
 **範例**
 
@@ -628,13 +628,13 @@ for job in client.list_jobs(max_results=10, state_filter="DONE"):
 * `PROJECT_ID`：要取消的工作所在專案 ID
 * `JOB_ID`：要取消的工作 ID
 
-程序會立即傳回，BigQuery 隨後會取消工作。如果工作已成功或失敗，程序就不會有任何作用。
+程序會立即傳回，BigQuery 隨後會取消工作。如果工作已成功或失敗，則程序不會有任何作用。
 
 ### bq
 
-使用 `JOB_ID` 引數發出 [`bq cancel`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_cancel) 指令。您可以使用 `--nosync=true` 旗標，要求立即取消並傳回。根據預設，取消要求會等待完成。
+使用 `JOB_ID` 引數發出 [`bq cancel`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_cancel) 指令。您可以使用 `--nosync=true` 旗標，要求立即取消並返回。根據預設，取消要求會等待完成。
 
-提供 `JOB_ID` 引數時，您可以使用完整 ID 或簡短形式。舉例來說， Google Cloud 控制台中列出的工作 ID 是完整名稱，也就是包含專案和位置：
+提供 `JOB_ID` 引數時，您可以使用完整 ID 或簡短形式。舉例來說， Google Cloud 控制台中列出的工作 ID 完整限定，也就是包含專案和位置：
 
 `my-project-1234:US.bquijob_123x456_123y123z123c`
 
@@ -642,7 +642,7 @@ bq 指令列工具中的工作 ID 會以簡短形式列出。不含專案 ID 和
 
 `bquijob_123x456_123y123z123c`
 
-如要指定工作位置，請提供 `--location` 標記，並將值設為您的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。如果使用完整工作 ID，則可不指定這個旗標。如果您加入 `--location` 旗標，且使用的是完整工作 ID，系統會忽略 `--location` 旗標。
+如要指定工作位置，請提供 `--location` 標記，並將值設為您的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。如果使用完整工作 ID，則可不指定這個旗標。如果您加入 `--location` 旗標，且使用完整工作 ID，系統會忽略 `--location` 旗標。
 
 以下指令會要求取消工作並等待完成。如果提供完整的工作 ID，系統會忽略 `--location` 旗標：
 
@@ -658,12 +658,12 @@ bq --location=LOCATION --nosync cancel JOB_ID
 
 更改下列內容：
 
-* `LOCATION` (選用)：執行工作的地點名稱。舉例來說，如果您在東京區域使用 BigQuery，請將旗標值設為 `asia-northeast1`。您可以使用 [`.bigqueryrc` 檔案](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool?hl=zh-tw#setting_default_values_for_command-line_flags)設定位置的預設值。
+* `LOCATION` (選用)：工作執行位置的名稱。舉例來說，如果您在東京區域使用 BigQuery，請將旗標值設為 `asia-northeast1`。您可以使用 [`.bigqueryrc` 檔案](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool?hl=zh-tw#setting_default_values_for_command-line_flags)設定位置的預設值。
 * `JOB_ID`：要取消的工作 ID。如果您從 Google Cloud 控制台複製工作 ID，工作 ID 會包含專案 ID 和位置。例如：`my-project-1234:US.bquijob_123x456_123y123z123c`。
 
 **範例**
 
-下列指令會取消在 `my-project-1234` 專案的 `US` 多區域位置中執行的 `my-project-1234:US.bquijob_123x456_123y123z123c` 工作，並等待完成。由於使用的是完整工作 ID，因此不提供位置標記。
+下列指令會取消在 `my-project-1234` 專案的 `US` 多區域位置中執行的 `my-project-1234:US.bquijob_123x456_123y123z123c` 工作，並等待完成。由於使用的是完整工作 ID，因此不提供位置旗標。
 
 ```
 bq cancel my-project-1234:US.bquijob_123x456_123y123z123c
@@ -675,7 +675,7 @@ bq cancel my-project-1234:US.bquijob_123x456_123y123z123c
 bq --location=US cancel bquijob_123x456_123y123z123c
 ```
 
-下列指令會取消在 `my-project-1234` 專案的 `US` 多區域位置中執行的工作 `bquijob_123x456_123y123z123c`，並立即傳回。由於使用的是完整工作 ID，因此不提供 `--location` 旗標。
+下列指令會取消在 `my-project-1234` 專案中 `US` 多區域位置執行的 `bquijob_123x456_123y123z123c` 工作，並立即傳回。由於使用的是完整工作 ID，因此不提供 `--location` 旗標。
 
 ```
 bq --nosync cancel my-project-1234:US.bquijob_123x456_123y123z123c
@@ -826,7 +826,7 @@ def cancel_job(
 
 ## 刪除工作的中繼資料
 
-您可以使用 bq 指令列工具和 Python 用戶端程式庫，刪除特定工作的詮釋資料。BigQuery 會保留過去 6 個月內執行的工作記錄。您可以使用這個方法，移除查詢陳述式中可能存在的機密資訊。工作完成後，才能刪除工作中繼資料。如果工作已建立子項工作，子項工作也會一併刪除。不允許刪除子項工作。只能刪除父項或頂層工作。
+您可以使用 bq 指令列工具和 Python 用戶端程式庫，刪除特定工作的中繼資料。BigQuery 會保留過去 6 個月內執行的工作記錄。您可以使用這個方法，移除查詢陳述式中可能存在的機密資訊。工作完成後，才能刪除工作中繼資料。如果工作已建立子項工作，子項工作也會一併刪除。不允許刪除子項工作。只能刪除父項或頂層工作。
 
 如要刪除工作中繼資料，請按照下列步驟操作：
 
@@ -842,7 +842,7 @@ bq 指令列工具中的工作 ID 會以簡短形式列出。不含專案 ID 和
 
 `bquijob_123x456_123y123z123c`
 
-如要指定工作位置，請提供 `--location` 標記，並將值設為您的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。如果使用完整工作 ID，則可不指定這個旗標。如果您加入 `--location` 旗標，且使用的是完整工作 ID，系統會忽略 `--location` 旗標。
+如要指定工作位置，請提供 `--location` 標記，並將值設為您的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。如果使用完整工作 ID，則可不指定這個旗標。如果您加入 `--location` 旗標，且使用完整工作 ID，系統會忽略 `--location` 旗標。
 
 下列指令會刪除工作：
 
@@ -882,13 +882,13 @@ except exceptions.NotFound:
 
 ## 重複工作
 
-您無法使用相同的工作 ID 重複執行工作。而是使用相同設定建立新工作。在Google Cloud 控制台或 bq 指令列工具中提交新工作時，系統會指派新的工作 ID。使用 API 或用戶端程式庫提交工作時，必須產生新的工作 ID。
+您無法使用相同的工作 ID 重複執行工作。而是建立設定相同的新工作。在Google Cloud 控制台或 bq 指令列工具中提交新工作時，系統會指派新的工作 ID。使用 API 或用戶端程式庫提交工作時，必須產生新的工作 ID。
 
 如要重複執行工作，請按照下列步驟操作：
 
 ### 控制台
 
-如要重複執行查詢工作，請按照下列步驟操作：
+如要重複查詢工作，請按照下列步驟操作：
 
 1. 前往「BigQuery」頁面
 
@@ -896,7 +896,7 @@ except exceptions.NotFound:
 2. 點選左側窗格中的 explore「Explorer」。
 3. 在「Explorer」窗格中，點選「工作記錄」。
 4. 如要列出所有工作，請按一下「個人記錄」。如要列出專案中的所有工作，請按一下「Project history」(專案記錄)。
-5. 按一下查詢工作，開啟工作詳細資料。
+5. 點選查詢工作，開啟工作詳細資料。
 6. 如要重複查詢，請按一下「開啟為新的查詢」。
 7. 按一下「執行」。
 
@@ -938,11 +938,11 @@ except exceptions.NotFound:
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-11 (世界標準時間)。
+上次更新時間：2026-11-19 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-11 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-19 (世界標準時間)。"],[],[]]

@@ -128,6 +128,3 @@ User-definable feature flags for assessment tasks.
 ## AssessmentTaskDetails
 
 Assessment task config.
-
-| Fields | |
-| --- | --- |

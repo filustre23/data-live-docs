@@ -128,4 +128,3 @@ Represents the state of a replica of a shared dataset. It includes the geographi
 
 | Fields | |
 | --- | --- |
-| `location` |  |

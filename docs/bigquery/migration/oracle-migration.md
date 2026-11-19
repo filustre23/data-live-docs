@@ -164,7 +164,3 @@ BigQuery 也會自動將儲存超過 90 天未修改資料的儲存費用[減半
 #### 加上標籤中
 
 BigQuery 資料集、資料表和檢視表可使用鍵/值組合[加上標籤](https://docs.cloud.google.com/bigquery/docs/adding-labels?hl=zh-tw)。標籤可用來區分儲存空間費用和內部交易退單。
-
-#### 監控和稽核記錄
-
-Oracle 提供不同層級和種類的[資料庫稽核](https://docs.oracle.com/cd/E11882_01/server.112/e10575/tdpsg_auditing.htm#TDPSG50000)選

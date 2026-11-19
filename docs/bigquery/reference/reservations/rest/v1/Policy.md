@@ -240,7 +240,3 @@ This enables 'DATA\_READ' and 'DATA\_WRITE' logging, while exempting [jose@examp
 | --- | --- |
 | `logType` | `enum (LogType)`  The log type that this config enables. |
 | `exemptedMembers[]` | `string`  Specifies the identities that do not cause logging for this type of permission. Follows the same format of `Binding.members`. |
-
-## LogType
-
-The list of valid permission types for which logging can be configured. Admin writes are always

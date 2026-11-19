@@ -500,9 +500,4 @@ used.
 
 **Syntax**
 
-`KMS_KEY_NAME = string_value`
-
-**Description**
-
-The Cloud Key Management Service [customer-managed encryption key (CMEK)](/kms/docs/cmek) to
-use to encr
+`KMS_KEY_NA`

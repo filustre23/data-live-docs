@@ -125,4 +125,4 @@ This API allows users to manage their data transfers into BigQuery.
 
 | ListTransferLogs |
 | --- |
-| `rpc ListTransferLogs(ListTransferLogsRequest) returns (ListTransferLogsResponse)`  Returns log |
+| `rpc ListTransferLogs(ListTransferLogsRequest) returns (` |

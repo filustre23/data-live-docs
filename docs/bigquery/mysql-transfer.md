@@ -229,8 +229,4 @@ bq mk
 
 ## 轉移中繼資料
 
-您也可以使用 MySQL 連接器，[將中繼資料轉移至 Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/connectors?hl=zh-tw)。詳情請參閱「[將 MySQL 中繼資料載入 Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/mysql-transfer?hl=zh-tw)」。
-
-## 後續步驟
-
-* 閱讀 [BigQuery 資料移轉服務總覽](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)
+您也可以使用 MySQL 連接器，[將中繼資料轉移至 Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/connectors?hl=zh-tw)。詳情請參閱「[將 MySQL 中繼資料載入 Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/mysql-transfer?hl=zh-tw)」。<

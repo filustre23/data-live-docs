@@ -532,7 +532,3 @@ This option accepts the following values:
 * `AU`: Australia
 * `BE`: Belgium
 * `BR`: Brazil
-* `CA`: Canada
-* `CH`: Switzerland
-* `CL`: Chile
-* `CN`:

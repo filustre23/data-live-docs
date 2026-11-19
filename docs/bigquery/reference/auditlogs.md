@@ -441,6 +441,4 @@ The following audit logs are associated with methods belonging to
 
 #### `insert`
 
-* **Method**: `jobservice.insert`
-* **Audit log type**: [Data access](/logging/docs/audit#data-access)
-* **Permissions**:
+* **Method**: `jobservice.`

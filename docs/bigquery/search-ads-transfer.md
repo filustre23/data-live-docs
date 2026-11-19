@@ -196,6 +196,5 @@ bq mk \
 --transfer_config \
 --project_id=PROJECT_ID \
 --target_dataset=DATASET \
---display_name=NAME \
---data_source=DATA_SOURCE
+--display_name=
 ```

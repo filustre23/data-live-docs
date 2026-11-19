@@ -229,6 +229,5 @@ SELECT
   dataset_id,
   table_id,
   error_code,
-  SUM(total_rows) AS num_rows,
-  SUM(total_input_bytes
+  SUM(total_rows) AS num_rows
 ```

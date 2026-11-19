@@ -291,8 +291,3 @@ WITH DIFFERENTIAL_PRIVACY ...
 ```
 
 **Description**
-
-Takes an expression and computes a percentile for it. The final result is an
-aggregation across privacy unit columns.
-
-You can't use a `PERCENTILE_CONT` (`DIFFERENTIAL_PRIVACY`

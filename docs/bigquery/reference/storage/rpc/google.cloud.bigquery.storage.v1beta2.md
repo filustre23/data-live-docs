@@ -137,4 +137,4 @@ Response message for `AppendRows`.
 
 | Fields | |
 | --- | --- |
-| `updated_schema` |  |
+| `updated_schema` |

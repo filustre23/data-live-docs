@@ -254,4 +254,4 @@ FROM UNNEST([1, 2, 3, 4, 5, NULL]) AS x;
 
 ## Aggregate function examples
 
-A simple aggregate function call for `COUNT`, `MIN`, and `MAX` looks like this:
+A simple aggregate functi

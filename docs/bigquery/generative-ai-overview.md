@@ -16,41 +16,12 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 生成式 AI 資訊摘要
 
-本文說明 BigQuery 支援的生成式人工智慧 (AI) 函式。這些函式接受自然語言輸入，並使用預先訓練的 [Gemini Enterprise Agent Platform 模型](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models?hl=zh-tw)和內建 BigQuery 模型。
+您可以使用生成式 AI 函式，直接在 BigQuery 中分析自然語言和非結構化資料。套用這些預先訓練的 [Gemini Enterprise Agent Platform 模型](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models?hl=zh-tw)，即可擷取結構化資料、生成嵌入，以及分類文字或圖片，不必編寫複雜的管道。
 
-BigQuery 提供多種 AI 函式，可協助您執行下列工作：
-
-* 生成創意內容。
-* 分析文字或非結構化資料 (例如圖片)、偵測情緒，以及回答相關問題。
-* 總結內容傳達的主要想法或印象。
-* 擷取文字中的結構化資料。
-* 將文字或非結構化資料分類至使用者定義的類別。
-* 生成嵌入，搜尋相似的文字、圖片和影片。
-* 為輸入內容評分，以便依品質、相似度或其他條件排序。
-
-AI 函式分為以下類別，可協助您完成這些工作：
+BigQuery 提供下列類別的 AI 函式：
 
 * **[通用 AI 函式](#general_purpose_ai)：**這類函式可讓您完全掌控及瞭解要使用的模型、提示和參數。
-
-  + [執行 LLM 推論](#inference)，例如回答資料相關問題
-
-    - `AI.GENERATE` 是最靈活的推論函式，可讓您分析任何結構化或非結構化資料。
-    - `AI.GENERATE_TEXT` 是 `AI.GENERATE` 的資料表值版本，也支援合作夥伴模型和開放式模型。
-  + [生成結構化輸出內容](#generate_structured_data)，例如從文字、文件或圖片中擷取名稱、地址或物件說明。
-
-    - `AI.GENERATE`，指定輸出內容結構定義時。
-    - `AI.GENERATE_TABLE` 是 `AI.GENERATE` 的資料表值版本，可呼叫遠端模型，並讓您指定自訂輸出結構定義。
-    - 如果輸出結構定義只有一個欄位，您可以使用下列其中一個專用函式：`AI.GENERATE_BOOL`、`AI.GENERATE_DOUBLE` 或 `AI.GENERATE_INT`。
-  + [生成嵌入](#text_embedding)，用於語意搜尋和分群
-
-    - `AI.EMBED`：從文字或圖片資料建立嵌入。
-    - `AI.GENERATE_EMBEDDING`：資料表值函式，可將內嵌文字、圖片、音訊、影片或文件資料的資料欄，新增至資料表。
 * **[代管 AI 函式](#managed_ai_functions)：**這類函式的語法簡潔，且經過最佳化，可兼顧成本和品質。在[最佳化模式](https://docs.cloud.google.com/bigquery/docs/optimize-ai-functions?hl=zh-tw)下，這些函式可擴充至數百萬或數十億個資料列。
-
-  + `AI.IF`：使用自然語言條件篩選資料。
-  + `AI.SCORE`：依品質或情緒等條件，為輸入內容評分。
-  + `AI.CLASSIFY`：將輸入內容分類至使用者定義的類別。
-  + `AI.AGG`：匯總輸入內容，總結或分析資料。
 * **公用函式：**執行查詢前，請使用 [`AI.COUNT_TOKENS` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-count-tokens?hl=zh-tw)估算輸入提示中的詞元數量。
 * **[工作專屬函式](#task-specific_functions)：**這些函式使用 Cloud AI API，協助您執行自然語言處理、機器翻譯、文件處理、音訊轉錄和電腦視覺等工作。
 
@@ -86,7 +57,7 @@ AI 函式分為以下類別，可協助您完成這些工作：
 * [`AI.GENERATE` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate?hl=zh-tw)會呼叫 Agent Platform 端點，並可使用自訂結構定義生成 `STRUCT` 值。
 
   如要試用，請參閱如何在呼叫 `AI.GENERATE` 函式時[使用結構化輸出內容](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate?hl=zh-tw#use_structured_output)。
-* [`AI.GENERATE_TABLE` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-table?hl=zh-tw)會呼叫遠端模型，並以資料表值函式產生含有自訂結構定義的資料表。
+* [`AI.GENERATE_TABLE` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-table?hl=zh-tw)會呼叫遠端模型，並產生含有自訂結構定義的資料表。
 
   如要嘗試建立結構化資料，請參閱「[使用 `AI.GENERATE_TABLE` 函式生成結構化資料](https://docs.cloud.google.com/bigquery/docs/generate-table?hl=zh-tw)」。
 * 如果是單一輸出欄位，您可以使用下列其中一種專門推論函式：
@@ -113,9 +84,9 @@ AI 函式分為以下類別，可協助您完成這些工作：
 代管 AI 函式可簡化篩選、分類或匯總等例行工作。這些函式可以分析文字、圖片、音訊、影片或 PDF 資料。這些函式會使用 Gemini，不需要自訂。BigQuery 會使用提示工程，並選取適當的模型和參數，用於特定工作，以最佳化結果的品質和一致性。每個函式都會傳回純量值，例如 `BOOL`、`FLOAT64` 或 `STRING`，且不含模型的其他狀態資訊。可用的代管 AI 函式如下：
 
 * [`AI.IF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-if?hl=zh-tw)：根據提示篩選文字或多模態資料，例如在 `WHERE` 或 `JOIN` 子句中。舉例來說，你可以篩選出適合做為禮物的產品說明。
-* [`AI.SCORE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-score?hl=zh-tw)：根據提示為輸入內容評分，以便依品質、相似度或其他條件為資料列排名。您可以在 `ORDER BY` 子句中使用這個函式，根據分數擷取前 K 個項目。舉例來說，您可以找出某項產品最正面或最負面的前 10 則使用者評論。
+* [`AI.SCORE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-score?hl=zh-tw)：根據提示為輸入內容評分，以便依品質、相似度或其他條件為資料列排名。您可以在 `ORDER BY` 子句中使用這個函式，根據分數擷取前 K 個項目。舉例來說，您可以找出產品最正面或最負面的前 10 則使用者評論。
 * [`AI.CLASSIFY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-classify?hl=zh-tw)：將文字分類至使用者定義的類別。您可以在 `GROUP BY` 子句中使用這個函式，根據定義的類別將輸入內容分組。舉例來說，您可以根據支援單是否與帳單、運送、產品品質或其他事項相關，將支援單分類。
-* [`AI.AGG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-agg?hl=zh-tw)：根據自然語言指示匯總輸入內容，以便摘要或分析資料。例如，您可以掃描使用者應用程式工作階段的記錄，判斷客戶遇到困難的地方，或總結大量圖片的內容。
+* [`AI.AGG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-agg?hl=zh-tw)：根據自然語言指令匯總輸入內容，以便摘要或分析資料。例如，您可以掃描使用者應用程式工作階段的記錄，判斷客戶遇到困難的地方，或總結大量圖片的內容。
 
 **注意：**如要更有效率地處理大型資料集，可以對 `AI.IF` 和 `AI.CLASSIFY` 函式使用*最佳化模式*。這個模式會使用資料樣本訓練輕量精簡模型，然後使用該模型對大部分資料列進行推論。這種方法可避免為每個資料列呼叫 LLM，在處理數千甚至數十億個資料列時，[減少詞元消耗量和延遲時間](https://docs.cloud.google.com/bigquery/docs/optimize-ai-functions?hl=zh-tw)。
 
@@ -186,7 +157,7 @@ Agent Platform 僅支援這些模型的多區域端點。不支援區域端點�
 
 * **輸入詞元數：**查詢中呼叫的所有生成式 AI 函式，其輸入詞元總數。
 * **輸出詞元數**：查詢生成的所有候選回覆中，詞元總數。
-* **思考詞元數。**模型生成思考過程中的詞元總數 (如適用)。
+* **思考詞元數**。模型生成思考過程中的詞元總數 (如適用)。
 * **快取詞元數。**查詢[隱含快取](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/context-cache/context-cache-overview?hl=zh-tw#implicit-caching)的輸入詞元總數。
 
 ## 追蹤費用
@@ -250,11 +221,11 @@ BigQuery 的生成式 AI 函式會向 Gemini Enterprise Agent Platform 傳送要
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-17 (世界標準時間)。
+上次更新時間：2026-11-18 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-17 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-18 (世界標準時間)。"],[],[]]

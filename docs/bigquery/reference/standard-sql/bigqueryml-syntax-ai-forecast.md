@@ -433,7 +433,3 @@ forecasting.
 
 The following example performs univariate forecasting to predict the daily
 number of bike trips for each different user type for the next 30 days:
-
-```
-WITH
-```

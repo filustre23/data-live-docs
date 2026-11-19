@@ -176,6 +176,5 @@ public class BigQueryQuery
             WHERE state = 'TX'
             LIMIT 100";
         BigQueryJob job = client.CreateQueryJob(
-            sql: query,
-            paramete
+            sql:
 ```

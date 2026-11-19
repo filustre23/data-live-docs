@@ -285,6 +285,3 @@ Gets the value of a field at a selected position in a struct.
 * `position_keyword(index)`: Determines where the index for the struct should
   start and how out-of-range indexes are handled. The index is an
   integer literal or constant that represents a specific position in the struct.
-  + `OFFSET(index)`: The index starts at zero. Produces an error if the index is
-    out of range. Produces the same
-    result as `index` by it

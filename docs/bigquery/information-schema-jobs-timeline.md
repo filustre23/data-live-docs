@@ -221,5 +221,5 @@ DECLARE
 WITH
   snapshot_data AS (
   SELECT
-    UNIX_MILLIS(period_start) AS period_start,
+    UNIX_MILLIS(period_start)
 ```

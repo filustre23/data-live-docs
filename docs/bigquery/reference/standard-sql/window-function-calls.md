@@ -351,6 +351,3 @@ Only aggregate analytic functions can use a window frame clause.
     partition.
   + `numeric_preceding`: The start of the window frame is relative to the
     current row.
-  + `current_row`: The window frame starts at the current row.
-* `numeric_expression`: An expression that represents a numeric type.
-  The numeric expression must be a constant, non-nega

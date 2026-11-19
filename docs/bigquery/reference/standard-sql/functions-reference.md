@@ -267,7 +267,3 @@ GROUPING(x)
 ## SAFE. prefix
 
 **Syntax:**
-
-```
-SAFE.
-```

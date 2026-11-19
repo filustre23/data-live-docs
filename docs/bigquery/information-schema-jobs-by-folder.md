@@ -104,5 +104,4 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 請替換下列項目：
 
-* 選用：`PROJECT_ID`： Google Cloud 專案的 ID。如未指定，則會使用預設專案。
-* `REGION`：任何
+* 選用：`PROJECT_ID`： Google Cloud

@@ -242,7 +242,4 @@ hint. If `ciphertext` includes an initialization vector (IV), it should be the
 next bytes of `ciphertext`. If `ciphertext` includes an authentication tag, it
 should be the last bytes of `ciphertext`. If the IV and authentic tag are one
 (SIV), it should be the first bytes of `ciphertext`. The IV and authentication
-tag commonly require 16 bytes, but may vary in size.
-
-`additional_data` is a `STRING` or `BYTES` value that binds the ciphertext to
-its context. This forces the ciphertext
+tag commonly require 16 b

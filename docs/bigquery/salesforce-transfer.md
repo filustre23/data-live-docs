@@ -254,5 +254,4 @@ bq mk
 
 其中：
 
-* PROJECT\_ID (選用)：您的 Google Cloud 專案 ID。如未提供 `--project_id` 來指定特定專案，系統會使用預設專案。
-* DATA\_SOURCE：資料來源 - `salesforce`。
+* PROJECT\_ID (選用)：您的 Google Cloud 專案 ID。如未提供

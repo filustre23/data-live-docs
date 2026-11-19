@@ -499,7 +499,3 @@ SELECT TEXT_ANALYZE(
 
 You can use the same token filter as many times as you'd like in a query. In
 the following query, `stop_words` is used twice:
-
-```
-SELECT TEXT_ANALYZE
-```

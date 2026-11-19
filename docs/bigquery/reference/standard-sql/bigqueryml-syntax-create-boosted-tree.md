@@ -508,7 +508,4 @@ If you are running hyperparameter tuning, use one of the following options:
   the range of the hyperparameter. For example,
   `COLSAMPLE_BYLEVEL = HPARAM_RANGE(0, 0.3)`.
 * The `HPARAM_CANDIDATES` keyword and an array of `FLOAT64` values
-  that provide discrete values to use for the hyperparameter. For example,
-  `COLSAMPLE_BYLEVEL = HPARAM_CANDIDATES([0, 0.1, 0.3, 0.5])`.
-
-When running hyperparameter tuning, the valid range is `[0, 1.0]</`
+  that provide discrete values to use for the hyperparameter. For exam

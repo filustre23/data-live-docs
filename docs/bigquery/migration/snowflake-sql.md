@@ -131,9 +131,3 @@ In Snowflake,
 syntax can be used to list all UDFs for which users have access privileges. This
 is not supported in BigQuery. However, querying UDF metadata
 via INFORMATION SCHEMA will be available soon as part of the product roadmap.
-
-## Stored procedures
-
-Snowflake
-[stored procedures](https://docs.snowflake.net/manuals/sql-reference/stored-procedures-usage.html)
-are written in JavaScript, which can execute SQL statements by

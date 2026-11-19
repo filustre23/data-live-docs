@@ -230,6 +230,4 @@ LIMIT 10;
 SELECT
   TIMESTAMP_TRUNC(start_timestamp, DAY) as day,
   project_id,
-  dataset_id,
-  table_id
 ```

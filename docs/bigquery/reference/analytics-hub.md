@@ -230,7 +230,5 @@ func main() {
 	if err != nil {
 		log.Fatalf("NewClient: %v", err)
 	}
-	defer ahubClient.Close()
-
-	
+	defer ahubClient.
 ```

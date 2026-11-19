@@ -571,5 +571,3 @@ Model Garden are supported:
 * [Llama 2](https://console.cloud.google.com/vertex-ai/publishers/meta/model-garden/llama2)
 * [Llama 2 (Quantized)](https://console.cloud.google.com/vertex-ai/publishers/meta/model-garden/llama-2-quantized)
 * [Code Llama](https://console.cloud.google.com/vertex-ai/publishers/meta/model-garden/codellama-7b-hf)
-* [MiniMax-M2.5](https://console.cloud.google.com/vertex-ai/publishers/minimaxai/model-garden/minimax-m2)
-* [Mistral Self-host (7B & Nemo)](https://console.cloud.google.com/vertex-ai/publishers/mistral-ai/model-garden/mistral)

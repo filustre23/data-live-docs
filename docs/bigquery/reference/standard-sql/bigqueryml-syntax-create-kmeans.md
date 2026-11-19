@@ -528,6 +528,3 @@ SELECT
 FROM
   `mydataset.mytable`
 ```
-
-**Note:** Changing the order of columns in the `SELECT` statement can affect the
-centroids in the final model.

@@ -156,4 +156,4 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 | `ACTION_COLLECTION.1d_click` | Action1dClick | *字串* | 廣告獲得點擊後 1 天的歸因期指標值。 |
 | `ACTION_COLLECTION.1d_view` | Action1dView | *字串* | 廣告觀看後 1 天的歸因回溯期指標值。 |
 | `ACTION_COLLECTION.7d_click` | Action7dClick | *字串* | 歸因期為點擊廣告後 7 天的指標值。 |
-| `ACTION_COLLECTION.7d_view` | Action7dView | *字串* | 廣告觀看後 7 天的歸因回溯期指標值 |
+|

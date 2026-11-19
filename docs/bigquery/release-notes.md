@@ -31,10 +31,32 @@ reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators), or add the
 
 Feature
 
+Lakehouse supports BigQuery [row-level security and column-level security with
+dynamic data masking](/lakehouse/docs/fine-grained-access-control) on Apache
+Iceberg tables in the Lakehouse runtime catalog
+([GA](https://cloud.google.com/products#product-launch-stages)). You can
+restrict which rows principals can see and mask sensitive column values by
+managing these policies with GoogleSQL DDL statements in BigQuery. On catalogs that use
+credential vending mode, the Apache Iceberg REST catalog endpoint vends storage
+credentials only to principals that have unmasked access to every protected
+column and, if the table has row-level access policies, unfiltered row access.
+
+Feature
+
 You can manage and version control SQL scripts and notebooks with
 [BigQuery Studio Git repositories](/bigquery/docs/git-repositories),
 which provide a streamlined, folder-based integration with remote Git
 repositories. This feature is
+[generally available](https://cloud.google.com/products#product-launch-stages)
+(GA).
+
+Feature
+
+You can query the
+[`INFORMATION_SCHEMA.ROW_ACCESS_POLICIES` view](/bigquery/docs/information-schema-row-access-policies)
+to retrieve metadata about active
+[row-level access policies](/bigquery/docs/row-level-security-intro) and inspect
+filter predicates across a dataset or region. This feature is
 [generally available](https://cloud.google.com/products#product-launch-stages)
 (GA).
 
@@ -4995,17 +5017,3 @@ BigQuery now offers the following Gemini-enhanced SQL translation features:
 * Create [Gemini-based configuration YAML files](/bigquery/docs/config-yaml-translation#ai_yaml_guidelines) to generate AI suggestions for batch or interactive SQL translations. This feature is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 * After making a batch SQL translation, review your translation output, including Gemini-based suggestions, using the [code tab](/bigquery/docs/batch-sql-translator#code-tab) and [configuration tab](/bigquery/docs/batch-sql-translator#configuration_tab). This feature is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 * When making an interactive SQL translation, [create and apply Gemini-enhanced translation rules](/bigquery/docs/interactive-sql-translator#create-apply-rules) to customize your SQL inputs. This feature is in [Preview](https://cloud.google.com/products#product-launch-stages).
-
-Feature
-
-In BigQuery ML, you can now forecast multiple time series at once by using the [`TIME_SERIES_ID_COL` option](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series#time_series_id_col) that is available in `ARIMA_PLUS_XREG` multivariate time series models. Try this feature with the [Forecast multiple time series with a multivariate model](/bigquery/docs/arima-plus-xreg-multiple-time-series-forecasting-tutorial) tutorial. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
-
-Feature
-
-You can now manage [IAM tags](/bigquery/docs/tags) on BigQuery datasets and tables using SQL. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
-
-## June 12, 2025
-
-Feature
-
-Dark theme is now available for BigQuery in

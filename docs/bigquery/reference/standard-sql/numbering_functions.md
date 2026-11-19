@@ -190,5 +190,5 @@ NTILE(constant_integer_expression)
 OVER over_clause
 
 over_clause:
-  { named_window | ( [ window_specification ] )
+  { named_window | ( [ <
 ```

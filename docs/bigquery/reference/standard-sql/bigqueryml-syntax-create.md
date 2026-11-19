@@ -363,5 +363,4 @@ For XGBoost models, `INPUT` field names must be identical to the names in the `f
 [Remote models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https) support the
 following BigQuery data types for `INPUT` and `OUTPUT` clauses:
 
-* Simple type: [BOOL](/bigquery/docs/reference/standard-sql/data-types#boolean_type), [INT64](/bigquery/docs/reference/standard-sql/data-types#integer_types), [FLOAT64](/bigquery/docs/reference/standard-sql/data-types#floating_point_types), [NUMERIC](/bigquery/docs/reference/standard-sql/data-types#decimal_types), [BIGNUMERIC](/bigquery/docs/reference/standard-sql/data-types#decimal_types), [STRING](/bigquery/docs/reference/standard-sql/data-types#string_type)
-* [ARRAY](/bigquery/docs/reference/standard-sql/data-types#array_type)<Simple type>
+* Simple type: [BOOL](/bigquery/docs/reference/standard-sql/data-types#boolean_type), [INT64](/bigquery/docs/reference/standard-sql/data-types#integer_types), [FLOAT64](/bigquery/docs/reference/standard-sql/data-types#floating_point_types), [NUMERIC](/bigquery/docs/reference/standard-sql/data-types#decimal_types), [BIGNUMERIC](/bigquery/docs/reference/standard-sql/data-types#decimal_types),

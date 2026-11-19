@@ -41,7 +41,7 @@ BigQuery 災難復原功能有以下限制：
 * 如果現有預留項目有超過 1,000 個[預留項目指派作業](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management?hl=zh-tw#assignments)，則無法轉換為容錯移轉預留項目。
 * 如果查詢參照的資料集附加至同一管理專案中的多個容錯移轉預留項目，則所有預留項目都必須使用相同的次要位置。
 * 資料集附加至容錯移轉預留項目後，只有 Enterprise Plus 預留項目可以寫入該資料集。您可以使用任何容量模式，從附加的資料集讀取資料。
-* 如果資料集使用災難復原功能，載入和擷取工作就無法使用免費的共用運算單元集區。您必須建立 `PIPELINE` 類型的預留項目指派作業，因為只有 Enterprise Plus 版本支援寫入已設定災難復原的資料集。
+* 如果資料集使用災難復原功能，載入工作就無法使用免費的共用運算單元集區。您必須建立 `PIPELINE` 類型的預留項目指派作業，因為只有 Enterprise Plus 版本支援寫入已設定災難復原的資料集。
 * 容錯移轉後，自動調度資源功能會依據次要區域的運算容量可用性運作。次要區域僅提供預留基準。
 * 如果在初始建立資源期間複製失敗，系統就不會在次要區域建立預留項目，也無法進行硬式或軟式容錯移轉。
 * 如要執行軟容錯移轉，主要和次要區域都必須可用。
@@ -503,11 +503,11 @@ WHERE
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-17 (世界標準時間)。
+上次更新時間：2026-11-18 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-17 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-18 (世界標準時間)。"],[],[]]

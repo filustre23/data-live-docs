@@ -246,5 +246,3 @@ SELECT CHR(97) AS A, CHR(0xF9B5) AS B, CHR(0) AS C, CHR(NULL) AS D;
  | a     | 例    |       | NULL  |
  +-------+-------+-------+-------*/
 ```
-
-## `CODE_POINTS_TO_BYTES`

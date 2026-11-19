@@ -237,7 +237,4 @@ SELECT * FROM `mydataset.classfied_result_next`;
   [other functions you can use](/bigquery/docs/reference/standard-sql/inference-overview#pretrained-models)
   to analyze BigQuery data.
 * For information about model inference, see
-  [Model inference overview](/bigquery/docs/inference-overview).
-* For more information about supported SQL statements and functions for
-  generative AI models, see
-  [End-to-end user journeys for generati](/bigquery/docs/e2e-journey-genai)
+  [Mo](/bigquery/docs/inference-overview)

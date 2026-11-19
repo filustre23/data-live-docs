@@ -313,7 +313,3 @@ This is the `Warehouse` table after you run the query:
 The following example shows how to insert a row into a table, where some of
 the fields are
 [`STRUCT` types](/bigquery/docs/reference/standard-sql/data-types#struct_type).
-
-```
-INSERT dataset.DetailedInventory
-```

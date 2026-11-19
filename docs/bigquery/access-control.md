@@ -25,7 +25,7 @@ Identity and Access Management (IAM) 可讓您使用預先定義的角色和精�
 * Apache Flink 適用的 BigQuery 引擎
 * BigQuery 遷移服務
 * BigQuery Omni
-* BigQuery sharing
+* BigQuery 共用
 
 ## BigQuery 預先定義的 IAM 角色
 
@@ -37,7 +37,7 @@ Identity and Access Management (IAM) 可讓您使用預先定義的角色和精�
 
 下表列出 BigQuery 預先定義的 IAM 角色和權限。如要搜尋所有角色和權限，請參閱[角色和權限索引](https://docs.cloud.google.com/iam/docs/roles-permissions?hl=zh-tw)。
 
-如要瞭解如何授予 BigQuery 資源 (例如資料集、資料表和常式) 的預先定義角色，請參閱「[使用 IAM 控管資源存取權](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam?hl=zh-tw)」。
+如要瞭解如何為 BigQuery 資源 (例如資料集、資料表和常式) 授予預先定義的角色，請參閱「[使用 IAM 控管資源存取權](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam?hl=zh-tw)」。
 
 | Role | Permissions |
 | --- | --- |
@@ -136,7 +136,7 @@ Service agent roles should only be granted to [service agents](https://docs.clou
 | --- | --- |
 | Managed Flink Service Agent (`roles/managedflink.serviceAgent`)  Gives Managed Flink Service Agent access to Cloud Platform resources.   **Warning:** Do not grant service agent roles to any principals except [service agents](https://docs.cloud.google.com/iam/docs/service-agents?hl=zh-tw). | `compute.networkAttachments.create`  `compute.networkAttachments.delete`  `compute.networkAttachments.get`  `compute.networkAttachments.list`  `compute.networkAttachments.update`  `compute.networks.get`  `compute.networks.list`  `compute.regionOperations.get`  `compute.subnetworks.get`  `compute.subnetworks.list`  `compute.subnetworks.use`  `dns.networks.targetWithPeeringZone`  `managedkafka.clusters.get`  `managedkafka.clusters.list`  `managedkafka.clusters.update`  `monitoring.metricDescriptors.create`  `monitoring.metricDescriptors.get`  `monitoring.metricDescriptors.list`  `monitoring.monitoredResourceDescriptors.*`   * `monitoring.monitoredResourceDescriptors.get` * `monitoring.monitoredResourceDescriptors.list`  `monitoring.timeSeries.create`  `serviceusage.services.use`  `storage.objects.get` |
 
-### BigQuery 遷移服務角色
+### BigQuery Migration Service 角色
 
 下表列出 BigQuery Migration Service 的預先定義 IAM 角色和權限。如要搜尋所有角色和權限，請參閱[角色和權限索引](https://docs.cloud.google.com/iam/docs/roles-permissions?hl=zh-tw)。
 

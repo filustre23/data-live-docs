@@ -278,7 +278,4 @@ into this function, see
 * `weight`: One of the following:
 
   + `INT64`
-  + `NUMERIC`
-  + `BIGNUMERIC`
-  + `FLOAT64`
-* `number`:
+  + `NUM`

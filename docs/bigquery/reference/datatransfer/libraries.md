@@ -202,7 +202,3 @@ namespace GoogleCloudSamples
 ```
 
 ### Go
-
-```
-// Sample bigquery-quickstart creates a Google BigQuery dataset.
-```

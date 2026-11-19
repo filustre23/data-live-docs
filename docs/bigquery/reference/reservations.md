@@ -221,5 +221,5 @@ func main() {
 	fmt.Println(s)
 
 	s, err = reportReservations(ctx, bqResClient, *projectID, *location)
-	if err != nil {
+	if err
 ```

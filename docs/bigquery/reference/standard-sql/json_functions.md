@@ -251,5 +251,5 @@ SELECT INT64(JSON '2005') AS flight_number;
  | flight_number |
  +---------------+
  | 2005          |
- +---------------*/
+ +
 ```

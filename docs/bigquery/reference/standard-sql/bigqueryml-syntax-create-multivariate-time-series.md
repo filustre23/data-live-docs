@@ -530,7 +530,3 @@ This option accepts the following values:
 * `HU`: Hungary
 * `ID`: Indonesia
 * `IE`: Ireland
-* `IL`: Israel
-* `IN`: India
-* `IR`: Iran
-* `IT`: Italy

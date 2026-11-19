@@ -357,6 +357,4 @@ types.
 | hana.REAL | 32-bit binary floating-point number. | FLOAT64 |
 | **Date and time** |  |  |
 | Date | Default format YYYY-MM-DD. | DATE |
-| Datetime | Default format YYYY-MM-DD HH24:MI:SS. | TIMESTAMP |
-| Time | Default format HH24:MI:SS. | TIME |
-| Timest |
+| Datetime |

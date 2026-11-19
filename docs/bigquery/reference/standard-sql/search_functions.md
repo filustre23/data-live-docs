@@ -340,5 +340,5 @@ SELECT
   SEARCH('`foobar-example`', '`foobar-example`') AS e,
 
   -- TRUE: An exact match is found after the delimiter in search_data.
-  SEARCH('foobar@example.com', '`example.com`') AS
+  SEARCH('foobar@example.com',
 ```

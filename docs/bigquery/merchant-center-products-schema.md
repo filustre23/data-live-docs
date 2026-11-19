@@ -130,7 +130,5 @@ SELECT
 FROM
   dataset.Products_merchant_id,
   UNNEST(destinations) AS destination,
-  UNNEST(disapproved_countries) AS disapproved_country
-WHERE
-  _PARTITIONDATE
+  UNNEST(disapproved_countries) AS
 ```

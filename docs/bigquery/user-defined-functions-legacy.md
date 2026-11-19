@@ -227,6 +227,4 @@ bigquery.defineFunction(
   // JSON representation of the output schema
   [{name: 'title', type: 'string'},
    {name: 'requests', type: 'integer'}],
-
-  urlDecode  // The function
 ```

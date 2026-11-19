@@ -370,4 +370,3 @@ an array can't directly contain another array.
 | `ARRAY<BYTES(5)>` | Simple array of parameterized bytes. |
 | `ARRAY<STRUCT<INT64, INT64>>` | An array of structs, each of which contains two 64-bit integers. |
 | `ARRAY<ARRAY<INT64>>`  (not supported) | This is an **invalid** type declaration which is included here just in case you came looking for how to create a multi-level array. Arrays can't contain arrays directly. Instead see the next example. |
-| `ARRAY<STRUCT<ARRAY<INT64>>>` | An array of arrays of 64-bit integers. Notice that there is a struct between the tw |

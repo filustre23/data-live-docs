@@ -334,6 +334,5 @@ This query shows the history of a project's reservation assignments.
   FROM
     `my-project-id.auditlog_dataset.cloudaudit_googleapis_com_activity`
   WHERE
-    protopayload_auditlog.methodName like "%Assignment%"
-    AND
+    protopayload_auditlog.methodName
 ```

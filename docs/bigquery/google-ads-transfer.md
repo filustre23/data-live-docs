@@ -213,4 +213,4 @@ follow the instructions to retrieve an authentication code.`
 
 ### Java
 
-在試用這個範例之前，請先按照「[使用用戶端程式庫的 BigQuery 快速](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries?hl=zh-tw)
+在試用這個範例之前，請先按照「

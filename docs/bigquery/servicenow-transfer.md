@@ -219,6 +219,4 @@ bq mk
   | `valueType` | 選用 | 控管 ServiceNow 的特定資料類型如何對應至 BigQuery 資料類型。 |
   | `connector.legacyMapping` | 必填 | 設為 `true` (預設)，即可使用[舊版資料類型對應](#data_type_mapping)。設為 `false` 即可使用更新版資料類型對應。如要進行增量移轉，這個值必須是 `false`。如要進一步瞭解資料類型對應更新，請參閱「[2027 年 3 月 16 日](https://docs.cloud.google.com/bigquery/docs/transfer-changes?hl=zh-tw#Mar16-servicenow)」。 |
 
-  在增量移轉期間指定多項資產時，`watermarkColumns` 和 `primaryKeys` 欄位的值會對應至 `assets` 欄位中的值位置。請確保所有相關設定清單中的資料表和對應資料欄順序保持一致。
-
-  舉例來說，下列指令會在預設專案中建立 ServiceNow 資料移轉作業，並提供所有必要參數：
+  在增量移轉期間指定多項資產時，`watermarkColumns` 和 `primaryKeys` 欄位的值會對應至 `assets` 欄位中的值位置。請

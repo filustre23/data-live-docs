@@ -282,5 +282,5 @@ FROM Produce
 ### `EXTEND` pipe operator
 
 ```
-|> EXTEND expression [[AS] alias] [,
+|> EXTEND expression [[AS]
 ```

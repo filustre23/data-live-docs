@@ -218,8 +218,3 @@ from the outer scope, namely `FROM WashingtonStations AS washington_stations`.
 `ARRAY` and `STRUCT` are powerful concepts in GoogleSQL. As an example that
 uses both, consider the following query, which computes the top two articles
 for each day in the HackerNews dataset:
-
-```
-#GoogleSQL
-WITH
-```

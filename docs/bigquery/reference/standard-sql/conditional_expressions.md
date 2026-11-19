@@ -314,6 +314,4 @@ If `expr` evaluates to `NULL`, returns `null_result`. Otherwise, returns
 `expr`.
 
 If `expr` is non-`NULL`, the expression behaves as if `null_result` isn't
-evaluated: evaluation errors in `null_result` are ignored, even though both
-input expressions might still be evaluated. If `expr` evaluates to `NULL` and
-`null_re`
+evaluated: evaluation errors in `null_result` are i

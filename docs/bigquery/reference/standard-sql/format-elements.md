@@ -199,5 +199,4 @@ result is `NULL`. Format elements are case-insensitive.
 | Format element | Returns | Example |
 | --- | --- | --- |
 | HEX | Converts a sequence of bytes into a hexadecimal string. | Input: b'\x00\x01\xEF\xFF'  Output: 0001efff |
-| BASEX | Converts a sequence of bytes into a [BASEX](#about_basex_encoding) encoded string. X represents one of these numbers: 2, 8, 16, 32, 64. | Input as BASE8: b'\x02\x11\x3B'  Output: 00410473 |
-| BASE64M | Converts a sequence of bytes into a [base64](#about_basex_encoding)-encoded string bas |
+| BASEX | Converts a sequence of bytes into a [BASEX](#about_basex_encoding) encoded string. X represents one of these numbers: 2, 8, 16, 32, 64. | Input as BASE8: b'\x02\x11\x |

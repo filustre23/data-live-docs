@@ -274,6 +274,4 @@ AS (
 
 ## Export to Spanner
 
-You can export data from a BigQuery table to a
-[Spanner](/spanner/docs/overview) table by using the `EXPORT DATA`
-statement.
+You can ex

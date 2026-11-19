@@ -422,6 +422,5 @@ Examples:
 [1, 2, 3]
 ['x', 'y', 'xy']
 ARRAY[1, 2, 3]
-ARRAY<STRING>['x', 'y', 'xy']
-ARRAY<INT64>
+ARRAY<STRING>['x', 'y'
 ```

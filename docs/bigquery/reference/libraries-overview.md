@@ -381,8 +381,3 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 * [API 參考文件](https://docs.cloud.google.com/ruby/docs/reference/google-cloud-bigquery-data_transfer/latest?hl=zh-tw)
 * [原始碼](https://github.com/googleapis/google-cloud-ruby/tree/main/google-cloud-bigquery-data_transfer)
-
-
-
-
-提供意見

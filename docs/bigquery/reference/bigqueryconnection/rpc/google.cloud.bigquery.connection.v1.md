@@ -126,4 +126,3 @@ Connection properties specific to Cloud Spanner.
 | `database` | `string`  Cloud Spanner database in the form `project/instance/database' |
 | `use_parallelism` | `bool`  If parallelism should be used when reading from Cloud Spanner |
 | `max_parallelism` | `int32`  Allows setting max parallelism per query when executing on Spanner independent compute resources. If unspecified, default values of parallelism are chosen that are dependent on the Cloud Spanner instance configuration.  REQUIRES: `use_parallelism` must be set.  REQUIRES: `use_data_boost` must be set. |
-| `use_data_boost` |  |

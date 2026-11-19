@@ -16,11 +16,11 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 遷移至代管災難復原
 
-本頁面說明如何從 BigQuery 跨區域複製功能，遷移至 BigQuery 代管災難復原。
+將 BigQuery 資料集從[跨區域複製](https://docs.cloud.google.com/bigquery/docs/data-replication?hl=zh-tw) (CRR) 遷移至[代管災難復原](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery?hl=zh-tw) (DR)，可提高資料可用性，並防範區域性服務中斷。改用代管災難復原功能後，您就能複製儲存空間和運算資源，即使主要區域無法使用，也能容錯移轉至次要副本。
 
 ## 總覽
 
-BigQuery [跨區域複製](https://docs.cloud.google.com/bigquery/docs/data-replication?hl=zh-tw) (CRR) 和[代管災難復原](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery?hl=zh-tw) (DR) 功能，旨在提升資料可用性和災難復原能力。不過，兩者處理區域性服務中斷的方式不同。如果主要區域無法使用，CRR 不允許升級次要副本。相較之下，DR 則提供更全面的保護，即使主要區域無法使用，也能容錯移轉至次要副本。CRR 只會複製儲存空間，而 DR 則會複製儲存空間和運算能力。
+CRR 和 DR 旨在強化資料可用性和災難復原能力。不過，兩者處理區域服務中斷的方式不同。如果主要區域無法使用，CRR 不允許升級次要副本。相較之下，DR 則提供更全面的保護，即使主要區域無法使用，也能容錯移轉至次要副本。CRR 只會複製儲存空間，DR 則會複製儲存空間和運算能力。
 
 下表說明 CRR 和 DR 的功能：
 
@@ -246,11 +246,11 @@ WHERE
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-16 (世界標準時間)。
+上次更新時間：2026-11-18 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-16 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-18 (世界標準時間)。"],[],[]]

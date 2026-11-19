@@ -267,9 +267,3 @@ The `expression` parameter can represent an expression for these data types:
 * `NUMERIC`
 * `BIGNUMERIC`
 * `STRING`
-
-**Conversion rules**
-
-| From | To | Rule(s) when casting `x` |
-| --- | --- | --- |
-| INT64 |

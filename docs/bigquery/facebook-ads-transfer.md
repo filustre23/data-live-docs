@@ -207,7 +207,3 @@ bq mk
     "connector.genericBreakdowns":["PublisherPlatform", "PlatformPosition"],
     "connector.actionBreakdowns":["ActionDevice", "ActionType"]}'
 ```
-
-### API
-
-請使用

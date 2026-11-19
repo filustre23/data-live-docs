@@ -16,14 +16,14 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 遮蓋資料欄資料
 
-本文說明如何實作資料遮罩，選擇性遮蓋機密資料。只要實作資料遮罩，就能為不同使用者群組提供不同層級的瀏覽權限。如需一般資訊，請參閱「[資料遮蓋簡介](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro?hl=zh-tw)」。
+本文說明如何實作資料遮蓋，選擇性遮蓋機密資料。只要實作資料遮蓋，就能為不同使用者群組提供不同層級的瀏覽權限。如需一般資訊，請參閱「[資料遮蓋簡介](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro?hl=zh-tw)」。
 
-如要實作資料遮蓋，請在資料欄中新增資料政策。如要為資料欄新增資料遮蓋政策，請完成下列步驟：
+如要實作資料遮蓋，請在資料欄中新增資料政策。如要為資料欄新增資料遮罩政策，請完成下列步驟：
 
-1. 建立分類，並加入至少一個政策標記。
-2. 選用：針對您建立的一或多個政策標記，將 Data Catalog 精細讀取者角色授予一或多個主體。
+1. 建立至少含一個政策標記的分類。
+2. 選用：在您建立的一或多個政策標記上，將 Data Catalog 精細讀取者角色授予一或多個主體。
 3. 為政策標記建立最多八項資料政策，將遮蓋規則和主體 (代表使用者或群組) 對應至該標記。
-4. 在資料欄上設定政策標記。這樣一來，與政策標記相關聯的資料政策就會對應至所選資料欄。
+4. 在資料欄上設定政策標記。這會將與政策標記相關聯的資料政策對應至所選資料欄。
 5. 將應有遮蓋資料存取權的使用者指派給 BigQuery 遮蓋讀取者角色。最佳做法是在資料政策層級指派 BigQuery 遮蓋資料讀取者角色。在專案層級或更高層級指派角色，會授予使用者專案下所有資料政策的使用者授權，這可能會導致權限過多而引發問題。
 
 您可以使用 Google Cloud 控制台或 BigQuery Data Policy API 處理資料政策。
@@ -127,13 +127,13 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 3. 在「New taxonomy」(新增分類) 頁面中：
 
    1. 在「Taxonomy name」(分類名稱) 中，輸入要建立的分類名稱。
-   2. 在「Description」(說明) 部分輸入說明。
-   3. 如有需要，請變更「Project」(專案) 下方列出的專案。
+   2. 在「說明」部分輸入說明。
+   3. 如有需要，請變更「Project」下方列出的專案。
    4. 如有需要，請變更「位置」下方列出的位置。
    5. 在「政策標記」下方，輸入政策標記名稱和說明。
    6. 如要為政策標記新增子政策標記，請按一下「Add subtag」(新增子標記)。
-   7. 如要新增與其他政策標記同層級的政策標記，請按一下「+ Add policy tag」(+ 新增政策標記)。
-   8. 視分類需要，繼續新增政策標記和子政策標記。
+   7. 如要新增與其他政策標記同層級的新政策標記，請按一下「+ Add policy tag」(+ 新增政策標記)。
+   8. 視分類需求，繼續新增政策標記和子政策標記。
    9. 為階層建立政策標記後，按一下「Create」(建立)。
 
 ### API
@@ -155,20 +155,20 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 如果您建立的資料政策參照[自訂遮蓋常式](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro?hl=zh-tw#custom_mask)，則也需要[常式權限](https://docs.cloud.google.com/bigquery/docs/routines?hl=zh-tw#permissions)。
 
-如要自訂遮蓋，請授予使用者 BigQuery 管理員或 BigQuery 資料擁有者角色，確保他們具備常式和資料政策的必要權限。
+如果是自訂遮蓋，請授予使用者 BigQuery 管理員或 BigQuery 資料擁有者角色，確保他們具備常式和資料政策的必要權限。
 
-一項政策標記最多可建立九項資料政策。其中一項政策會保留給[資料欄層級存取控管設定](https://docs.cloud.google.com/bigquery/docs/column-level-security?hl=zh-tw#set_up_column-level_access_control)。
+一個政策標記最多可建立九項資料政策。其中一項政策會保留給[資料欄層級存取控管設定](https://docs.cloud.google.com/bigquery/docs/column-level-security?hl=zh-tw#set_up_column-level_access_control)。
 
 ### 控制台
 
 1. 前往 Google Cloud 控制台的「Policy tag taxonomies」(政策標記分類) 頁面。
 
    [前往「Policy tag taxonomies」(政策標記分類)](https://console.cloud.google.com/bigquery/security/secure/policy-tags?hl=zh-tw)
-2. 按一下要開啟的分類名稱。
+2. 按一下分類名稱即可開啟。
 3. 選取政策標記。
-4. 按一下「管理資料政策」。
-5. 在「Data Policy Name」(資料政策名稱) 中，輸入資料政策的名稱。資料政策名稱在所屬專案中不得重複。
-6. 在「Masking Rule」(遮蓋規則) 部分，選擇預先定義的遮蓋規則或自訂遮蓋常式。如果選取自訂遮蓋常式，請確認您在專案層級同時具備 `bigquery.routines.get` 和 `bigquery.routines.list` 權限。
+4. 點選「Manage Data Policies」(管理資料政策)。
+5. 在「Data Policy Name」(資料政策名稱) 中，輸入資料政策的名稱。資料政策名稱在資料政策所在的專案中不得重複。
+6. 在「Masking Rule」(遮蓋規則) 部分，選擇預先定義的遮蓋規則或自訂遮蓋常式。如要選取自訂遮蓋常式，請確認您在專案層級具備 `bigquery.routines.get` 和 `bigquery.routines.list` 權限。
 7. 在「Principal」(主體) 部分，輸入一或多個使用者或群組的名稱，您要授予這些使用者或群組對資料欄的遮罩存取權。請注意，您在此輸入的所有使用者和群組都會獲得 BigQuery 遮蓋讀取者角色。
 8. 按一下「提交」。
 
@@ -179,7 +179,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
    * `dataPolicyType` 欄位設為 `DATA_MASKING_POLICY`。
    * `dataMaskingPolicy` 欄位會識別要使用的資料遮蓋規則或常式。
    * `dataPolicyId` 欄位會提供資料政策的名稱，該名稱在資料政策所在的專案中不得重複。
-2. 呼叫 [`setIamPolicy`](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies/setIamPolicy?hl=zh-tw) 方法，並傳入 [`Policy`](https://docs.cloud.google.com/iam/docs/reference/rest/v1/Policy?hl=zh-tw)。`Policy` 必須識別有權存取遮蓋資料的主體，並為 `role` 欄位指定 `roles/bigquerydatapolicy.maskedReader`。
+2. 呼叫 [`setIamPolicy`](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies/setIamPolicy?hl=zh-tw) 方法，並傳入 [`Policy`](https://docs.cloud.google.com/iam/docs/reference/rest/v1/Policy?hl=zh-tw)。`Policy` 必須識別獲授予遮蓋資料存取權的主體，並為 `role` 欄位指定 `roles/bigquerydatapolicy.maskedReader`。
 
 ### Node.js
 
@@ -398,9 +398,9 @@ public class CreateDataPolicy {
 
 設定政策標記的使用者或服務帳戶，必須具備 `datacatalog.taxonomies.get` 和 `bigquery.tables.setCategory` 權限。Data Catalog 政策標記管理員和專案檢視者角色具備 `datacatalog.taxonomies.get`。BigQuery 管理員 (`roles/bigquery.admin`) 和 BigQuery 資料擁有者 (`roles/bigquery.dataOwner`) 角色包含 `bigquery.tables.setCategory`。
 
-如要在Google Cloud 控制台中查看組織內所有專案的分類和政策標記，使用者需要 `resourcemanager.organizations.get` 權限，該權限包含在組織檢視者角色中。使用 API 或 `bq` 指令列工具時，**不**需要這項權限。
+如要在Google Cloud 控制台中查看組織內所有專案的分類和政策標記，使用者必須具備`resourcemanager.organizations.get`權限，該權限包含在組織檢視者角色中。使用 API 或 `bq` 指令列工具時，則**不**需要這項權限。
 
-**注意：** 每個資料欄只能指派一個政策標記。
+**注意：**每個資料欄只能指派一個政策標記。
 
 ### 控制台
 
@@ -410,7 +410,7 @@ public class CreateDataPolicy {
 
    [前往「BigQuery」頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 在 BigQuery 的「Explorer」窗格中，找出並選取要更新的資料表。
-3. 在詳細資料窗格中，依序點選**「編輯」>「編輯結構定義」**。
+3. 在詳細資料窗格中，依序點選**「Edit」(編輯) >「Edit schema」(編輯結構定義)**。
 4. 在「Current schema」(目前結構定義) 畫面中，選取目標資料欄，然後按一下「Add policy tag」(新增政策標記)。
 5. 在「Add a policy tag」(新增政策標記) 畫面中，找出並選取要套用至資料欄的政策標記。
 6. 按一下「選取」。畫面應會出現如下所示的內容：
@@ -430,7 +430,7 @@ public class CreateDataPolicy {
    * project-id 是您的專案 ID。
    * dataset 是資料集的名稱，其中包含您要更新的資料表。
    * table 是您要更新之資料表的名稱。
-2. 修改 schema.json，為資料欄設定政策標記。針對 `policyTags` 的 `names` 欄位值，請使用[政策標記資源名稱](#retrieve_policy_tag_name)。
+2. 修改 schema.json，在資料欄上設定政策標記。針對 `policyTags` 的 `names` 欄位值，請使用[政策標記資源名稱](#retrieve_policy_tag_name)。
 
    ```
    [
@@ -457,7 +457,7 @@ public class CreateDataPolicy {
 
 如果是現有資料表，請呼叫 [`tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch?hl=zh-tw)；如果是新資料表，請呼叫 [`tables.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/insert?hl=zh-tw)。使用傳入的 `Table` 物件 `schema` 屬性，在結構定義定義中設定政策標記。請參閱指令列範例結構定義，瞭解如何設定政策標記。
 
-使用現有資料表時，建議使用 `tables.patch` 方法，因為 `tables.update` 方法會取代整個資料表資源。
+處理現有資料表時，建議使用 `tables.patch` 方法，因為 `tables.update` 方法會取代整個資料表資源。
 
 ### 強制執行存取控管
 

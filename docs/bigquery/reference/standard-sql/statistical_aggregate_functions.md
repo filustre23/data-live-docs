@@ -232,6 +232,4 @@ stable with the final output converted to a `FLOAT64`.
 Otherwise the input is converted to a `FLOAT64`
 before aggregation, resulting in a potentially unstable result.
 
-This function ignores any input pairs that contain one or more `NULL` values. If
-there is no input pair without `NULL` values, this function returns `NULL`.
-If there is
+This function ignores any input pairs that contain one or more

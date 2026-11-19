@@ -378,4 +378,4 @@ bytes 43-1999999
 11. 等待 16 秒鐘 + random\_number\_milliseconds 毫秒，然後重試要求。
 12. 停止。報告或記錄錯誤。
 
-在以上流程中，random\_number\_milliseconds 是小於或等於 1000 的隨機毫秒數。這是必要的，因為使用較小的隨機延遲有助於更平均地分散負載，並避免對伺服器產生衝擊的可能性。必須在每次等待之後重新定義 random\_number\_milliseconds 的值。
+在以上流程中，random\_number\_milliseconds 是小於或等於

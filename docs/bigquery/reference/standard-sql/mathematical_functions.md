@@ -252,5 +252,3 @@ of the range (-1, 1).
 | `NaN` | `NaN` |
 | X < -1 | Error |
 | X > 1 | Error |
-
-## `CBRT`

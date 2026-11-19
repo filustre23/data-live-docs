@@ -464,9 +464,4 @@ A `FLOAT64` value. The default value is `0.01`.
 
 **Syntax**
 
-`INPUT_LABEL_COLS = string_array`
-
-**Description**
-
-The name of the label column in the training data. The label column contains the
-expected machine learning result for the given record. For example,
+`INPUT_LABEL_COLS = string_`

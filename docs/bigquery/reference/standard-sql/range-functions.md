@@ -363,7 +363,4 @@ SELECT RANGE_CONTAINS(
 
 /*---------+
  | results |
- +---------+
- | FALSE   |
- +---------*/
 ```

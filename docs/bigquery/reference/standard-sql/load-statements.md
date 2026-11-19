@@ -340,4 +340,4 @@ Specify a table option list in the following format:
 | `NAME` | `VALUE` | Details |
 | --- | --- | --- |
 | `expiration_timestamp` | `TIMESTAMP` | Example: `expiration_timestamp=TIMESTAMP "2025-01-01 00:00:00 UTC"`  This property is equivalent to the [expirationTime](/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.expiration_time) table resource property. |
-| `partition_expiration_days` | `FLOAT64` | Example: `partition_expiration_days=7`  Sets the partition expiration in days. For more information, see [Set the partition expiration](/bigquery/docs/managing-partitioned-tables#partition-expiration). By default, partitions don't expire.  This property is equi |
+| `partition_expiration_days` | `FLOAT64` | Example: `partition_expiration_days=7`  Sets the partition expiration in days. For more informa |

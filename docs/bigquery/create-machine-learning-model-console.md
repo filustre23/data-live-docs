@@ -16,7 +16,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 使用 Google Cloud 控制台在 BigQuery ML 中建立機器學習模型
 
-本文說明如何使用 Google Cloud 控制台建立 BigQuery ML 模型。
+使用 Google Cloud 控制台建立 BigQuery ML 模型，即可透過視覺化方式訓練及部署機器學習 (ML) 資產，不必編寫複雜的 SQL 陳述式。您可以使用 Google Cloud 控制台選取訓練資料、調整超參數，並直接從 BigQuery 連結至遠端 Cloud AI 服務。
 
 ## 必要的角色
 
@@ -31,9 +31,9 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
    **選取或建立專案所需的角色**
 
-   * **選取專案**：選取專案時，不需具備特定 IAM 角色，只要您已獲派某個專案的角色，即可選取該專案。
+   * **選取專案**：選取專案時，不需具備特定 IAM 角色，只要您在專案中獲派角色，即可選取該專案。
    * **建立專案**：如要建立專案，您必須具備專案建立者角色 (`roles/resourcemanager.projectCreator`)，其中包含 `resourcemanager.projects.create` 權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
-   **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，而不要選取現有專案。如果採用這種做法，當您完成這些步驟後，就可以直接刪除該專案，並移除相關聯的所有資源。
+   **注意**：如果您不打算保留在這項程序中建立的資源，請建立新專案，不要選取現有專案。如果採用這種做法，當您完成這些步驟後，就可以直接刪除該專案，並移除相關聯的所有資源。
 
    [前往專案選取器](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
 2. [確認 Google Cloud 專案已啟用計費功能](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project)。
@@ -41,11 +41,11 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
    **啟用 API 所需的角色**
 
-   您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過擁有者角色 (`roles/owner`) 取得這項權限。否則，您可以透過 Service Usage 管理員角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   如要啟用 API，您必須具備 `serviceusage.services.enable` 權限。如果您建立了專案，可能已透過擁有者角色 (`roles/owner`) 取得這項權限。否則，您可以透過 Service Usage 管理員角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
    [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery.googleapis.com%2Cbigqueryconnection.googleapis.com&hl=zh-tw)
 
-## 特定模型的前置作業
+## 特定模型的必要條件
 
 建立模型前，請務必先完成所建模型類型的必要條件：
 
@@ -74,7 +74,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Explorer」窗格中，點選專案名稱。
-4. 依序點選 more\_vert**「查看動作」>「建立資料集」**。
+4. 依序點選 more\_vert「View actions」(查看動作) **>「Create dataset」(建立資料集)**。
 5. 在「Create dataset」(建立資料集) 頁面執行下列操作：
 
    1. 在「資料集 ID」部分，輸入資料集名稱。
@@ -122,12 +122,12 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 * 迴歸：
 
   + [線性迴歸](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm?hl=zh-tw)
-  + [提升樹迴歸](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree?hl=zh-tw)
+  + [Boosted tree 迴歸](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree?hl=zh-tw)
   + [隨機森林迴歸](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree?hl=zh-tw)
   + [深層類神經網路 (DNN) 迴歸](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree?hl=zh-tw)
   + [寬深迴歸](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree?hl=zh-tw)
   + [AutoML 迴歸](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree?hl=zh-tw)
-* 分群法：[K-means](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans?hl=zh-tw)
+* 分群：[K-means](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans?hl=zh-tw)
 * 建議：[矩陣分解](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization?hl=zh-tw)
 * 降低維度：
 
@@ -148,7 +148,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 4. 按一下資料集旁的 more\_vert「View actions」(查看動作)，然後點選「Create BQML Model」(建立 BQML 模型)。
 
    「Create new model」(建立新模型) 窗格隨即開啟。
-5. 在「Model name」(模型名稱) 中輸入模型名稱。
+5. 在「Model name」(模型名稱) 部分，輸入模型名稱。
 6. 如要建立包含模型 `CREATE MODEL` 陳述式的已儲存的查詢，請選取「Save Query」(儲存查詢)。
 
    1. 在「查詢名稱」中，輸入已儲存的查詢名稱。
@@ -176,7 +176,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
       + 在「TIME\_SERIES\_TIMESTAMP\_COL」**TIME\_SERIES\_TIMESTAMP\_COL**部分，選取含有訓練模型時要使用的時間點資料欄。
       + 在「TIME\_SERIES\_DATA\_COL」**TIME\_SERIES\_DATA\_COL**部分，選取含有要預測資料的資料欄。
 15. 選用：在「Optional」(選用) 部分，指定其他模型調整引數的值。可用的引數會因建立的模型類型而異。
-16. 選用：如果畫面上顯示「Hyperparameter tuning」(超參數調整) 專區，您可以指定 **NUM\_TRIALS** 選項，為模型啟用 [超參數調整](/bigquery/docs/hyperparameter-tuning-tutorial)。可用於超參數調整的引數，會因您建立的模型類型而異。
+16. 選用：如果有「超參數調整」部分，您可以指定 **NUM\_TRIALS** 選項，為模型啟用 [超參數調整](/bigquery/docs/hyperparameter-tuning-tutorial)。可用於超參數調整的引數，會因您建立的模型類型而異。
 17. 按一下「建立模型」。
 18. 模型建立完成後，按一下「Go to model」(前往模型) 即可查看模型詳細資料。
 
@@ -197,7 +197,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 4. 按一下資料集旁的 more\_vert「View actions」(查看動作)，然後點選「Create BQML Model」(建立 BQML 模型)。
 
    「Create new model」(建立新模型) 窗格隨即開啟。
-5. 在「Model name」(模型名稱) 中輸入模型名稱。
+5. 在「Model name」(模型名稱) 部分，輸入模型名稱。
 6. 如要建立包含模型 `CREATE MODEL` 陳述式的已儲存的查詢，請選取「Save Query」(儲存查詢)。
 
    1. 在「查詢名稱」中，輸入已儲存的查詢名稱。
@@ -208,13 +208,13 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 10. 在「Remote connection」(遠端連線) 部分，執行下列任一操作：
 
     * 如果您已設定[預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw)，或同時具備 BigQuery 管理員和專案 IAM 管理員角色，請選取「Default connection」(預設連線)。
-    * 如果未設定預設連線，或缺少適當角色，請選取「Cloud 資源連結」。
+    * 如果未設定預設連線，或缺少適當角色，請選取「Cloud resource connection」(Cloud 資源連結)。
 
-      1. 在「Project」(專案)，選取要使用的連線所在的專案。
+      1. 在「Project」(專案)，選取要使用的連線所在專案。
       2. 在「Location」(位置) 部分，選取連線使用的位置。
       3. 在「Connection」(連線) 部分，選取要用於遠端模型的連線，或選取「Create new connection」(建立新連線) 建立新連線。
 
-         **重要事項：**如果建立新的連線，請務必先為連線的服務帳戶授予適當角色，再繼續操作。如要進一步瞭解應授予哪些角色，請參閱您要建立的遠端模型類型參考文件。
+         **重要事項：**建立新連線後，您必須先為連線的服務帳戶授予適當角色，才能繼續操作。如要進一步瞭解應授予哪些角色，請參閱您要建立的遠端模型類型參考文件。
 11. 在「Required options」(必要選項) 部分，執行下列任一操作：
 
     * 如果是 Google 模型和合作夥伴模型上的遠端模型，請指定要使用的端點。這是模型的名稱，例如 `gemini-3.5-flash`。如要進一步瞭解支援的模型，請參閱 [`ENDPOINT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw#endpoint)。
@@ -222,7 +222,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 12. 按一下「建立模型」。
 13. 模型建立完成後，按一下「Go to model」(前往模型) 即可查看模型詳細資料。
 
-## 在自訂模型上建立遠端模型
+## 建立自訂模型的遠端模型
 
 請按照下列程序，透過[部署至 Gemini Enterprise Agent Platform 的自訂模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https?hl=zh-tw)建立遠端模型。
 
@@ -236,7 +236,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 4. 按一下資料集旁的 more\_vert「View actions」(查看動作)，然後點選「Create BQML Model」(建立 BQML 模型)。
 
    「Create new model」(建立新模型) 窗格隨即開啟。
-5. 在「Model name」(模型名稱) 中輸入模型名稱。
+5. 在「Model name」(模型名稱) 部分，輸入模型名稱。
 6. 如要建立包含模型 `CREATE MODEL` 陳述式的已儲存的查詢，請選取「Save Query」(儲存查詢)。
 
    1. 在「查詢名稱」中，輸入已儲存的查詢名稱。
@@ -246,13 +246,13 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 9. 在「Model options」(模型選項) 頁面的「Remote connection」(遠端連線) 部分，執行下列任一操作：
 
    * 如果您已設定[預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw)，或同時具備 BigQuery 管理員和專案 IAM 管理員角色，請選取「Default connection」(預設連線)。
-   * 如果未設定預設連線，或缺少適當角色，請選取「Cloud 資源連結」。
+   * 如果未設定預設連線，或缺少適當角色，請選取「Cloud resource connection」(Cloud 資源連結)。
 
-     1. 在「Project」(專案)，選取要使用的連線所在的專案。
+     1. 在「Project」(專案)，選取要使用的連線所在專案。
      2. 在「Location」(位置) 部分，選取連線使用的位置。
      3. 在「Connection」(連線) 部分，選取要用於遠端模型的連線，或選取「Create new connection」(建立新連線) 建立新連線。
 
-        **重要事項：**如果建立新的連線，請務必先為連線的服務帳戶授予適當角色，再繼續操作。如要進一步瞭解應授予哪些角色，請參閱您要建立的遠端模型類型參考文件。
+        **重要事項：**建立新連線後，您必須先為連線的服務帳戶授予適當角色，才能繼續操作。如要進一步瞭解應授予哪些角色，請參閱您要建立的遠端模型類型參考文件。
 10. 在「Required options」(必要選項) 部分，指定要使用的端點。這是部署至 Agent Platform 的模型共用公開端點，格式為 `https://location-aiplatform.googleapis.com/v1/projects/project/locations/location/endpoints/endpoint_id`。詳情請參閱 [`ENDPOINT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https?hl=zh-tw#endpoint)。
 11. 按一下「建立模型」。
 12. 模型建立完成後，按一下「Go to model」(前往模型) 即可查看模型詳細資料。
@@ -271,7 +271,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 4. 按一下資料集旁的 more\_vert「View actions」(查看動作)，然後點選「Create BQML Model」(建立 BQML 模型)。
 
    「Create new model」(建立新模型) 窗格隨即開啟。
-5. 在「Model name」(模型名稱) 中輸入模型名稱。
+5. 在「Model name」(模型名稱) 部分，輸入模型名稱。
 6. 如要建立包含模型 `CREATE MODEL` 陳述式的已儲存的查詢，請選取「Save Query」(儲存查詢)。
 
    1. 在「查詢名稱」中，輸入已儲存的查詢名稱。
@@ -282,13 +282,13 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 10. 在「Remote connection」(遠端連線) 部分，執行下列任一操作：
 
     * 如果您已設定[預設連線](https://docs.cloud.google.com/bigquery/docs/default-connections?hl=zh-tw)，或同時具備 BigQuery 管理員和專案 IAM 管理員角色，請選取「Default connection」(預設連線)。
-    * 如果未設定預設連線，或缺少適當角色，請選取「Cloud 資源連結」。
+    * 如果未設定預設連線，或缺少適當角色，請選取「Cloud resource connection」(Cloud 資源連結)。
 
-      1. 在「Project」(專案)，選取要使用的連線所在的專案。
+      1. 在「Project」(專案)，選取要使用的連線所在專案。
       2. 在「Location」(位置) 部分，選取連線使用的位置。
       3. 在「Connection」(連線) 部分，選取要用於遠端模型的連線，或選取「Create new connection」(建立新連線) 建立新連線。
 
-         **重要事項：**如果建立新的連線，請務必先為連線的服務帳戶授予適當角色，再繼續操作。如要進一步瞭解應授予哪些角色，請參閱您要建立的遠端模型類型參考文件。
+         **重要事項：**建立新連線後，您必須先為連線的服務帳戶授予適當角色，才能繼續操作。如要進一步瞭解應授予哪些角色，請參閱您要建立的遠端模型類型參考文件。
 11. 在「Required options」(必要選項) 部分，選取要使用的 Cloud AI 服務類型。
 12. 如果您使用`CLOUD_AI_DOCUMENT_V1`服務，請在「Optional」(選用) 區段中指定[文件處理器](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service?hl=zh-tw#document_processor)資訊。如果您使用 `CLOUD_AI_SPEECH_TO_TEXT_V2` 服務，可以視需要指定[語音辨識工具](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service?hl=zh-tw#speech_recognizer)資訊。
 13. 按一下「建立模型」。
@@ -313,7 +313,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 4. 按一下資料集旁的 more\_vert「View actions」(查看動作)，然後點選「Create BQML Model」(建立 BQML 模型)。
 
    「Create new model」(建立新模型) 窗格隨即開啟。
-5. 在「Model name」(模型名稱) 中輸入模型名稱。
+5. 在「Model name」(模型名稱) 部分，輸入模型名稱。
 6. 如要建立包含模型 `CREATE MODEL` 陳述式的已儲存的查詢，請選取「Save Query」(儲存查詢)。
 
    1. 在「查詢名稱」中，輸入已儲存的查詢名稱。
@@ -332,11 +332,11 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-11 (世界標準時間)。
+上次更新時間：2026-11-18 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-11 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-18 (世界標準時間)。"],[],[]]

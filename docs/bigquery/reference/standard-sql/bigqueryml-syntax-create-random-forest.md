@@ -513,8 +513,4 @@ inverse proportion to the frequency of that class.
 Only use this option with classifier models.
 
 By default, the training data used to create the model
-is unweighted. If the labels in the training data are imbalanced, the model
-might learn to predict the most popular class of labels more heavily, which
-you might not want.
-
-To balance every class, set this option to `TR`
+is unweighted. If the labels in the trainin

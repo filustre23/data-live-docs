@@ -353,7 +353,3 @@ The `OBJ.LIST` function returns a table of metadata and `ObjectRef` values for
 files stored in Cloud Storage. `OBJ.LIST` lets you perform ad hoc discovery
 and analysis of unstructured data. The Cloud Storage data can include documents,
 images, and audio. The `OBJ.LIST` function can discover objects across all
-[Cloud Storage classes](/storage/docs/storage-classes).
-
-Using `OBJ.LIST` replaces the need to manually construct `ObjectRef` values.
-You can quickly add Cloud Sto

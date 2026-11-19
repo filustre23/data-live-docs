@@ -297,7 +297,3 @@ gcloud config unset auth/impersonate_service_account
     * `pretty`：格式化的資料表輸出內容
     * `sparse`：簡化的資料表輸出內容
     * `prettyjson`：容易理解的 JSON 格式
-    * `json`：盡可能壓縮到最小的 JSON
-    * `csv`：包含標頭的 csv 格式
-
-    `pretty`、

@@ -109,6 +109,4 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ## 多陳述式查詢工作
 
-多陳述式查詢工作是指使用[程序語言](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language?hl=zh-tw)的查詢工作。多重陳述式查詢工作通常會使用 `DECLARE` 定義變數，或使用 `IF` 或 `WHILE` 等控制流程陳述式。查詢 `INFORMATION_SCHEMA.JOBS` 時，您可能需要辨別多陳述式查詢工作與其他工作之間的差異。多陳述式查詢工作具有下列特性：
-
-* `statement_type` =
+多陳述式查詢工作是指使用[程序語言](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language?hl=zh-tw)的查詢工作。多重陳述式查詢工作通常會使用 `DECLARE` 定義變數，或使用 `IF` 或 `WHILE` 等控制流程陳述式。查詢 `INFORMATION_SCHEMA.JOBS` 時，

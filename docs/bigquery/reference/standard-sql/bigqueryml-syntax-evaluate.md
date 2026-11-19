@@ -475,8 +475,4 @@ ML.EVALUATE(
   evaluation metrics that are generated for the model during training are
   returned.
 
-  The following column naming requirements apply:
-
-  + The table must have a column named `input_text` that contains the
-    prompt text to use when evaluating the model.
-  + The
+  The follow

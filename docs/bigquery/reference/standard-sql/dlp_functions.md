@@ -186,5 +186,5 @@ SELECT
 ## `DLP_KEY_CHAIN`
 
 ```
-DLP_KEY_CHAIN(kms_resource_name, wrapped_key
+DLP_KEY_CHAIN
 ```

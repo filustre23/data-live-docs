@@ -352,6 +352,4 @@ SELECT
     output_schema => """
     grievance_subject ARRAY<STRING> OPTIONS(description = 'a list of grievance subjects'),
     complaint_type STRING OPTIONS(description = 'classify the complaint type as Billing Dispute, Service Issue, or Reporting Error')
-    """
-  ).*
 ```

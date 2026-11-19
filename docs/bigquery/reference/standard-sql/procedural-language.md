@@ -306,7 +306,4 @@ SQL statements ending with semicolons.
 
 Variable declarations must appear at the start of the block, prior to other
 types of statements. Variables declared inside a block may only be referenced
-within that block and in any nested blocks. It's an error to declare a variable
-with the same name as a variable declared in the same block or an outer block.
-
-There is a maximum nesting level of 50 for blocks a
+within th

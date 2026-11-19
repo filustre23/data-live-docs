@@ -223,5 +223,4 @@ AS (
   CASE
     WHEN date_1 = date_2
       THEN 0
-    WHEN EXTRACT(DAY <
 ```

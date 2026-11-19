@@ -344,6 +344,5 @@ The following query evaluates the performance of TabFM regression to predict a
 penguin's mass:
 
 ```
-WITH prepared_data AS (
-  SELECT *
+WITH prepared_data AS
 ```

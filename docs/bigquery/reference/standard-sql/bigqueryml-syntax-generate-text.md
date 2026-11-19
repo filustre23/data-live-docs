@@ -484,5 +484,4 @@ possible to the model.
   If you don't specify a value, the model determines an appropriate value.
 
   Tokens are selected from the most to least
-  probable until the sum of their probabilities equals the `TOP_P` value.
-  For example, if tokens A, B, and C have a probability of `0.3`, `0.`
+  probable until the sum of th

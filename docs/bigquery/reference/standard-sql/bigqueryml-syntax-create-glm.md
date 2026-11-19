@@ -520,5 +520,5 @@ A `BOOL` value. The default value is `FALSE`.
 **Syntax**
 
 ```
-EARLY_STOP = {
+EARLY_STOP
 ```

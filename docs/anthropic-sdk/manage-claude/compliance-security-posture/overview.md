@@ -48,7 +48,9 @@ An attestation is a person’s recorded statement of how the organization stands
 * Accepted risk (`accepted_risk`): the control is not in place, and the organization accepts the risk.
 * Failed (`control_failed`): the control is not in place.
 
-Someone who can attest does so on the page. The API reads attestations and cannot make them. The page can ask a question when someone attests, sometimes requiring an answer, and stores the answer with the attestation as its [comment](https://platform.claude.com/docs/en/manage-claude/compliance-security-posture/overview#what-anthropic-stores-when-someone-attests), up to 2,000 characters. An Activity Feed activity never includes the comment or shows that one exists. The endpoint returns no comments either.
+Someone who can attest does so on the page. The API reads attestations and cannot make them. The page can ask a question when someone attests and sometimes requires an answer. It stores the answer with the attestation as its comment, up to 2,000 characters (see [What Anthropic stores when someone attests](https://platform.claude.com/docs/en/manage-claude/compliance-security-posture/overview#what-anthropic-stores-when-someone-attests)). An Activity Feed activity never includes the comment or shows that one exists. The endpoint returns no comments either.
+
+When someone saves an attestation, Security posture gives the attestation an end date that falls 90 days after the save. If that person chooses to save the attestation without an end date, the attestation gets none.
 
 ### Results
 
@@ -68,7 +70,7 @@ An accepted risk in effect counts as Passed on an automatic or manual control, t
 An attestation stays in effect until one of three things happens:
 
 * Someone clears or changes it.
-* Its end date (`review_date`) arrives. The person who attests picks 90 days or none.
+* Its end date (`review_date`) arrives.
 * On an automatic or information-only control, the current value changes, or, for an accepted risk on some automatic controls, the check passes.
 
 Without an attestation in effect, an automatic control’s result follows its check, and a manual control is Not attested.
@@ -119,6 +121,11 @@ Anthropic keeps storing an attestation after its end date arrives or it [ends au
 
 An attestation’s comment is the answer to the question that the Security posture page can ask when someone attests. Anthropic stores an attestation’s comment until someone clears the attestation or Anthropic deletes the comment with the organization. Attesting again can replace or remove the comment. A custom conversation retention period does not shorten how long Anthropic stores the attestation or the comment. Activity Feed activities never include the comment (see [What the feed does not record](https://platform.claude.com/docs/en/manage-claude/compliance-security-posture/events-reference#what-the-feed-does-not-record)).
 
-Some organizations cannot save a comment with an attestation because of their data-handling settings, such as CMEK or ZDR. For those organizations, the Security posture page shows no comment box and asks for no answer when someone attests. If an organization saved a comment before those settings applied to it, the comment stays stored with its attestation. The Security posture page does not show that comment. Clearing the attestation deletes that comment.
+Some organizations cannot save a comment with an attestation because of their data-handling settings, such as CMEK or ZDR. For those organizations, the Security posture page shows no comment box and asks for no answer when someone attests.
+
+If an organization saved a comment before those settings applied to it, the comment stays stored with its attestation. The Security posture page does not show that comment, and two actions can delete it:
+
+* Clearing the attestation deletes the comment.
+* Attesting again can delete the comment without showing it first.
 
 While Security posture is not available to an organization, Anthropic keeps storing its attestations and comments. In that time, nobody can see or clear them on the Security posture page.

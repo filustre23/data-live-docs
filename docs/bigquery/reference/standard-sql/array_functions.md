@@ -321,7 +321,3 @@ Additional details:
 `ARRAY`
 
 **Examples**
-
-```
-SELECT ARRAY_SLICE([
-```

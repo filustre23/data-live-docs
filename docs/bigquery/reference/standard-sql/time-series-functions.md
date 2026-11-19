@@ -360,7 +360,4 @@ The `CHANGES` function returns a table with the following columns:
   or the
   [Storage Write API (gRPC) committed stream](/bigquery/docs/write-api#committed_type).
   If you require repeatable reads for batch ingestion workloads, use
-  [BigQuery load jobs](/bigquery/docs/loading-data) instead.
-* Change history isn't captured for table deletions made due to table partition
-  expiration.
-* Performing
+  [BigQuery l](/bigquery/docs/loading-data)

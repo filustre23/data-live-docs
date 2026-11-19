@@ -129,4 +129,4 @@ Service to handle EDW migrations.
 
 | ListMigrationWorkflows |
 | --- |
-| `rpc ListMigrationWorkflows(ListMigrationWorkflowsRequest) returns (ListMigrationWorkflowsResponse)`  Lists previously |
+| `rpc ListMigrationWorkflows(ListMigrationWorkflowsRequest) returns (` |

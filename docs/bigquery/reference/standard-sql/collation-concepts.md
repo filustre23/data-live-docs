@@ -339,6 +339,5 @@ For example:
 -- Assume there's a table with this column declaration:
 CREATE TABLE table_a
 (
-    col_a STRING COLLATE 'und:ci',
-    col_b STRIN
+    col_a STRING COLLATE 'un
 ```

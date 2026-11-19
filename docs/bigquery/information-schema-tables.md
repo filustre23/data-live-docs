@@ -170,6 +170,5 @@ FROM
 SELECT
   table_name, ddl
 FROM
-  `bigquery-public-data`.census_bureau_usa.INFORMATION_SCHEMA.TABLES
-WHERE
+  `bigquery-public-data`.census_bureau_usa.
 ```
