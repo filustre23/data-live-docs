@@ -7,3 +7,7 @@
 [## 📄️Beta roadmap
 
 A preview of classic Hex features we're bringing to 4.0. This is not the full product roadmap.](/docs/hex-4-0/beta-roadmap)
+
+[## 📄️Knowledge Engine
+
+A self-learning, graph-based context system for the Hex agent.](/docs/hex-4-0/knowledge-engine)

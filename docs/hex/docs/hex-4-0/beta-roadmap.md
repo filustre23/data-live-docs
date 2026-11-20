@@ -6,7 +6,7 @@ This list is a preview of parity features we're bringing from classic projects i
 
 [Hex 4.0](/docs/hex-4-0/what-is-hex-4-0) is in beta, and some Hex features you may be familiar with aren't available yet. Here's what's in progress, up next, and recently landed for that parity work.
 
-You can also open this list in Hex from the **Help** menu in any 4.0 project. *Last updated November 13, 2026.*
+You can also open this list in Hex from the **Help** menu in any 4.0 project. *Last updated November 16, 2026.*
 
 * In progress
 
@@ -20,6 +20,9 @@ You can also open this list in Hex from the **Help** menu in any 4.0 project. *L
 * In progress
 
   Improved Inspect workflowsTrace any result back to its data, logic, and code in fewer clicks.
+* In progress
+
+  Saving and restoring versionsSave a version of a project and restore an earlier one.
 * Up next
 
   App caching settingsSet how long a published app keeps cached results.
@@ -37,7 +40,10 @@ You can also open this list in Hex from the **Help** menu in any 4.0 project. *L
   CommentsLeave comments on cells and app components.
 * Up next
 
-  File exports in other formatsExport files in formats such as PPTX and XLSX.
+  App downloadsDownload a chart or table from a published app as a CSV.
+* Up next
+
+  File exports in appsExport files in formats such as PPTX and XLSX.
 * Up next
 
   Saved viewsSave a combination of app inputs as a view to share or quickly return to.
@@ -57,7 +63,7 @@ You can also open this list in Hex from the **Help** menu in any 4.0 project. *L
   Nov 5
 * Shipped
 
-  CSV downloadsDownload a table output as a CSV, or copy it to your clipboard.
+  CSV downloads in notebookDownload a table in the notebook as a CSV, or copy it to your clipboard.
 
   Nov 3
 * Shipped

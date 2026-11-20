@@ -2642,5 +2642,4 @@ Copy
 
 * "dataConnectionId": "string",
 * "contents": {
-  + "codeCell": {
-    - "source": "stri`
+  + "codeCell":`

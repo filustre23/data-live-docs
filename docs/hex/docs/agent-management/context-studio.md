@@ -33,8 +33,9 @@ Update the guidance and data definitions agents rely on, including unstructured 
 | Observability dashboard | ✔ | ✔ | — | — | — |
 | Individual conversations | ✔ | — | — | — | — |
 | Suggestions | ✔ | ✔ \* | — | — | — |
-| Evals | ✔ | ✔ | ✔ \* | Read only | — |
+| Evals | ✔ | ✔ | ✔ \* | — | — |
 | Context Management (Guides, Endorsements, Models) | ✔ | ✔ | Read only | Read only | — |
+| Knowledge (beta) | ✔ | ✔ | — | — | — |
 
 \* Managers can accept or reject suggestions but can't see evidence from individual conversations.
 

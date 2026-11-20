@@ -1,17 +1,13 @@
-November 10, 2026
+November 19, 2026
 
-### Introducing Hex 4.0
+### The Knowledge Engine: A new self-learning, graph-based context system for Hex 4.0
 
-We’ve reimagined our platform to be the best place for humans and agents to collaborate with data.
+Hex now learns and documents defined and learned knowledge for the agent to use repeatable and efficient paths to answers.
 
-🧱 Hex projects are fully code-defined
+🌐 Introducing: The Knowledge Engine
 
-🔌 Build from anywhere
+How it works
 
-🔎 Observability across your agents
+🔭 Observing the facts agents know
 
-🕵️ A new UI, built for reviewing and understanding
-
-⚡ Ridiculously fast execution engine
-
-🚀 What to expect in the public beta
+👩‍💻 Getting started
