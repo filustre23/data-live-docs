@@ -285,9 +285,4 @@ noise, see [Remove noise](/bigquery/docs/reference/standard-sql/query-syntax#eli
 WITH DIFFERENTIAL_PRIVACY ...
   PERCENTILE_CONT(
     expression,
-    percentile,
-    contribution_bounds_per_row => (lower_bound, upper_bound)
-  )
 ```
-
-**Description**

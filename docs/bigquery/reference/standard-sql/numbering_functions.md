@@ -186,9 +186,5 @@ FROM finishers;
 ## `NTILE`
 
 ```
-NTILE(constant_integer_expression)
-OVER over_clause
-
-over_clause:
-  { named_window | ( [ <
+NTILE(
 ```

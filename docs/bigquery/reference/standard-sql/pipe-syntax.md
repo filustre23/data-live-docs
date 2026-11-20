@@ -276,11 +276,5 @@ FROM Produce
  | apples  | 7     | fruit     | 14             |
  | bananas | 5     | fruit     | 14             |
  | carrots | 8     | vegetable | 8              |
- +---------+-------+-----------+----------------*/
-```
-
-### `EXTEND` pipe operator
-
-```
-|> EXTEND expression [[AS]
+ +---------+-------+---
 ```

@@ -262,20 +262,4 @@ The elements are returned as an array of `STRUCT`s.
 Each `STRUCT` contains two fields: `value` and `sum`.
 The `value` field contains the value of the input expression. The `sum` field is
 the same type as `weight`, and is the approximate sum of the input weight
-associated with the `value` field.
-
-Returns `NULL` if there are zero input rows.
-
-To learn more about the optional aggregate clauses that you can pass
-into this function, see
-[Aggregate function calls](/bigquery/docs/reference/standard-sql/aggregate-function-calls).
-
-
-
-**Supported Argument Types**
-
-* `expression`: Any data type that the `GROUP BY` clause supports.
-* `weight`: One of the following:
-
-  + `INT64`
-  + `NUM`
+associated with the `value` fi

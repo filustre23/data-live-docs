@@ -419,17 +419,4 @@ support multiple targets:
   same across all rows.
 * `ai_forecast_status`: a `STRING` value that contains the forecast status.
   This value is empty if the operation was successful. If the operation failed,
-  the value is the error string. A common error is
-  `The time series data is too short.` This error indicates that there wasn't
-  enough historical data in the time series to generate a forecast.
-  A minimum of 3 data points is required.
-
-## Examples
-
-The following examples show how to perform univariate and multivariate
-forecasting.
-
-### Univariate forecasting
-
-The following example performs univariate forecasting to predict the daily
-number of bike trips for each different user type for the next 30 days:
+  the value is the error string. A common

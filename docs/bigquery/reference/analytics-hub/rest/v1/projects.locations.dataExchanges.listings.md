@@ -124,7 +124,4 @@ Represents the state of a replica of a shared dataset. It includes the geographi
 
 | JSON representation |
 | --- |
-| ``` {   "location": string,   "replicaState": enum (ReplicaState),   "primaryState": enum (PrimaryState) } ``` |
-
-| Fields | |
-| --- | --- |
+| ``` {   "location": string,   "replicaState": enum (ReplicaState) ``` |

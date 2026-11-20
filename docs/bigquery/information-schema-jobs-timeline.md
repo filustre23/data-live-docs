@@ -216,10 +216,5 @@ WHERE
 DECLARE
   start_time timestamp DEFAULT TIMESTAMP(START_TIME);
 DECLARE
-  end_time timestamp DEFAULT TIMESTAMP(END_TIME);
-
-WITH
-  snapshot_data AS (
-  SELECT
-    UNIX_MILLIS(period_start)
+  end_time timestamp DEFAULT TIMESTAMP
 ```

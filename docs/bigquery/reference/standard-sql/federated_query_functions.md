@@ -351,10 +351,4 @@ types.
 | **Exact numeric** |  |  |
 | Decimal (p, s) | Precision (p) defines the number of total digits and can be between 1 and 38.    Scale (s) defines the number of digits after the decimal point and can be between 0 and p. | BIGNUMERIC |
 | DecimalFloat | Decimal floating-point number with 34 mantissa digits. | BIGNUMERIC |
-| hana.SMALLDECIMAL | 64-bit decimal floating-point number, where (p) can be between 1 and 16 and s can be between -369 and 368. | BIGNUMERIC |
-| **Approximate numeric** |  |  |
-| Double | Double-precision, 64-bit floating-point number. | FLOAT64 |
-| hana.REAL | 32-bit binary floating-point number. | FLOAT64 |
-| **Date and time** |  |  |
-| Date | Default format YYYY-MM-DD. | DATE |
-| Datetime |
+| hana.SMALLDECIMAL |

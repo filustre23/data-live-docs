@@ -209,12 +209,4 @@ ORDER BY warm_days DESC;
 
 This query computes the names of weather stations in Washington state and the
 number of days in 2015 that the temperature reached 70 degrees Fahrenheit, or
-approximately 21 degrees Celsius. Notice that there is a subquery in the
-`SELECT` list, and that the subquery references `washington_stations.station_id`
-from the outer scope, namely `FROM WashingtonStations AS washington_stations`.
-
-### Arrays and structs
-
-`ARRAY` and `STRUCT` are powerful concepts in GoogleSQL. As an example that
-uses both, consider the following query, which computes the top two articles
-for each day in the HackerNews dataset:
+approximately 21 degree

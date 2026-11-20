@@ -89,7 +89,7 @@ BigQuery 資料畫布可讓您執行下列操作：
 BigQuery 中的程式碼資產是由 Dataform 提供，因此請考量下列安全性影響，再決定是否讓使用者存取這些資產：
 
 * 程式碼資產的瀏覽權限由專案層級的 Dataform 權限控管。使用者只要具備 `dataform.repositories.list` 權限 (包含在 [BigQuery 工作使用者](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.jobUser)、[BigQuery Studio 使用者](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.studioUser)和 [BigQuery 使用者](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.user)等標準 BigQuery 角色中)，就能在 Google Cloud 專案的「Explorer」面板中查看所有程式碼資產，無論這些資產是否由他們建立或與他們共用。如要限制瀏覽權限，可以建立不含 `dataform.repositories.list` 權限的[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)。
-* 凡是與 Dataform 服務代理共用的 Secret，都有可能遭到可編輯這些資產的使用者存取。為確保憑證安全，請限制建立和編輯權限，僅授予信任的使用者，並限制 Dataform 服務代理可存取的 Secret。詳情請參閱「[在套件安裝期間存取 Secret](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#secret-access-risk)」。
+* BigQuery 工作使用者、BigQuery Studio 使用者和 BigQuery 使用者等標準 BigQuery 角色也包含 `dataform.repositories.create` 權限，可讓使用者在 Google Cloud 專案中建立 Dataform 存放區。使用者只要能建立、更新、編輯或編譯 Dataform 存放區，就能在 Google Cloud 專案中，參照或存取與 Dataform 服務代理共用的資源。這項存取權不需要共用資源的直接 IAM 權限，例如 Secret Manager 密鑰、Developer Connect Git 存放區連結，以及用於存放區快照的 Cloud Storage bucket。為保護憑證和儲存空間 bucket，請僅將 Dataform 存放區建立、編輯和編譯權限授予信任的使用者。強制執行 [`constraints/dataform.restrictGitRemotes` 組織政策限制](https://docs.cloud.google.com/dataform/docs/restrict-git-remotes?hl=zh-tw)，並將 Dataform 服務代理的權限範圍限制在必要資源。詳情請參閱「[透過 Dataform 服務代理共用資源存取權](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#service-agent-shared-access)」和「[安裝套件期間的 Secret 存取權](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#secret-access-risk)」。
 
 詳情請參閱「[Dataform 權限的安全性考量](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#security-considerations-permissions)」。
 
@@ -369,7 +369,7 @@ Gemini for Google Cloud產品仍處於早期技術階段，因此可能會生成
    Get me the 100 longest trips where the payment type is cash
    ```
 
-   BigQuery 資料畫布會生成類似下列內容的 SQL 查詢：
+   BigQuery 資料畫布會生成類似下列的 SQL 查詢：
 
    ```
    SELECT
@@ -781,7 +781,7 @@ Knowledge Catalog 會將資料畫布記錄為[項目](https://docs.cloud.google.
 :   資料畫布的[系統項目群組](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources?hl=zh-tw#entry-groups)為 `@dataform`。如要在 Knowledge Catalog 中查看資料畫布項目的詳細資料，您必須查看 `dataform` 系統項目群組。如要瞭解如何查看項目群組中所有項目的清單，請參閱 Knowledge Catalog 說明文件中的「[查看項目群組的詳細資料](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources?hl=zh-tw#entry-group-details)」。
 
 系統項目類型
-:   資料畫布的[系統項目類型](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources?hl=zh-tw#entry-types)為 `dataform-code-asset`。如要查看資料畫布的詳細資料，您需要查看 `dataform-code-asset` 系統項目類型、使用切面篩選器篩選結果，並[將 `dataform-code-asset` 切面中的 `type` 欄位設為 `DATA_CANVAS`](https://docs.cloud.google.com/knowledge-catalog/docs/search-syntax?hl=zh-tw#aspect-search)。然後選取所選資料畫布的項目。如要瞭解如何查看所選項目類型的詳細資料，請參閱 Knowledge Catalog 說明文件中的「[查看項目類型的詳細資料](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources?hl=zh-tw#entry-type-details)」。如要瞭解如何查看所選項目的詳細資料，請參閱 Knowledge Catalog 說明文件中的「[查看項目詳細資料](https://docs.cloud.google.com/knowledge-catalog/docs/search-assets?hl=zh-tw#view-entry-details)」一節。
+:   資料畫布的[系統項目類型](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources?hl=zh-tw#entry-types)為 `dataform-code-asset`。如要查看資料畫布的詳細資料，您需要查看 `dataform-code-asset` 系統項目類型、使用切面篩選器篩選結果，並[將 `dataform-code-asset` 切面中的 `type` 欄位設為 `DATA_CANVAS`](https://docs.cloud.google.com/knowledge-catalog/docs/search-syntax?hl=zh-tw#aspect-search)。然後選取所選資料畫布的項目。如需查看所選項目類型詳細資料的操作說明，請參閱 Knowledge Catalog 說明文件中的「[查看項目類型的詳細資料](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources?hl=zh-tw#entry-type-details)」一節。如要瞭解如何查看所選項目的詳細資料，請參閱 Knowledge Catalog 說明文件中的「[查看項目詳細資料](https://docs.cloud.google.com/knowledge-catalog/docs/search-assets?hl=zh-tw#view-entry-details)」一節。
 
 系統切面類型
 :   資料畫布的[系統切面類型](https://docs.cloud.google.com/knowledge-catalog/docs/about-aspects?hl=zh-tw#aspect-types)為 `dataform-code-asset`。如要使用[切面](https://docs.cloud.google.com/knowledge-catalog/docs/about-aspects?hl=zh-tw#aspects)為資料畫布項目加上註解，為 Knowledge Catalog 中的資料畫布提供額外背景資訊，請查看 `dataform-code-asset` 切面類型，使用切面篩選器篩選結果，並[將 `dataform-code-asset` 切面中的 `type` 欄位設為 `DATA_CANVAS`](https://docs.cloud.google.com/knowledge-catalog/docs/search-syntax?hl=zh-tw#aspect-search)。如要瞭解如何使用切面為項目加上註解，請參閱 Knowledge Catalog 說明文件中的「[管理切面並充實中繼資料](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata?hl=zh-tw)」。
@@ -827,11 +827,11 @@ Knowledge Catalog 會將資料畫布記錄為[項目](https://docs.cloud.google.
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-18 (世界標準時間)。
+上次更新時間：2026-11-20 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-18 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-20 (世界標準時間)。"],[],[]]

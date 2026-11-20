@@ -538,15 +538,4 @@ BigQuery view：
 
 #### 每部影片的每日廣告收益
 
-YouTube 報表：[每部影片的每日廣告收益](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#daily-ad-revenue-per-video)
-
-BigQuery 資料表：
-:   p\_content\_owner\_ad\_revenue\_raw\_a1\_suffix
-
-BigQuery view：
-:   content\_owner\_ad\_revenue\_raw\_a1\_suffix
-
-#### 每項資產的匯總廣告收益
-
 YouTube 報表：
-[每項資產的匯總廣告收益](https://developers.google.com/youtube/reporting/v1/reports/system_managed/ads?hl=zh-tw#aggregate-ad-revenue-per-asset)

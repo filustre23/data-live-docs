@@ -827,13 +827,4 @@ print(f"Table schema: {schema_contents}")
 
 您可以使用輸出檔案做為 JSON 結構定義檔的起點。假如您使用此方法，請確定該檔案僅包含代表資料表結構定義的 JSON 陣列。
 
-舉例來說，下列 JSON 陣列代表基本的資料表結構定義。這個結構定義有三個資料欄：`qtr` (`REQUIRED` `STRING`)、`rep` (`NULLABLE` `STRING`) 和 `sales` (`NULLABLE` `FLOAT`)。
-
-```
-[
-  {
-    "name": "qtr",
-    "type": "STRING",
-    "mode": "REQUIRED",
-    "description"
-```
+舉例來說，下

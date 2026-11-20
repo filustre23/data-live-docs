@@ -136,5 +136,4 @@ Send feedback
 | `biglakeConfiguration` | `object (BigLakeConfiguration)`  Optional. Specifies the configuration of a BigQuery table for Apache Iceberg. |
 | `location` | `string`  Output only. The geographic location where the table resides. This value is inherited from the dataset. |
 | `streamingBuffer` | `object (Streamingbuffer)`  Output only. Contains information regarding this table's streaming buffer, if one is present. This field will be absent if the table is not being streamed to or if there is no data in the streaming buffer. |
-| `encryptionConfiguration` | `object (EncryptionConfiguration)`  Custom encryption configuration (e.g., Cloud KMS keys). |
-| `snapshotDefinition` | `object (SnapshotDefinition)`  Output only. Contains information about the snapshot. This value is set via snapshot creation. |
+| `encryptionConfiguration` | `object (` |

@@ -242,13 +242,4 @@ ATANH(X)
 
 **Description**
 
-Computes the inverse hyperbolic tangent of X. Generates an error if X is outside
-of the range (-1, 1).
-
-| X | ATANH(X) |
-| --- | --- |
-| `+inf` | `NaN` |
-| `-inf` | `NaN` |
-| `NaN` | `NaN` |
-| X < -1 | Error |
-| X > 1 | Error |
+C

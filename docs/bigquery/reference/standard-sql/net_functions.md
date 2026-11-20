@@ -237,6 +237,5 @@ BYTES
 SELECT
   FORMAT("%T", x) as addr_bin, prefix_length,
   FORMAT("%T", NET.IP_TRUNC(x, prefix_length)) AS ip_trunc
-FROM UNNEST([
-  STRUCT(b"\xAA\xBB\xCC\xDD" as
+FROM
 ```

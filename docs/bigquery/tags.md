@@ -18,15 +18,15 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 將標記附加至 BigQuery 資源，即可有條件地管理資料表、檢視表和資料集的權限。透過 [Identity and Access Management (IAM)](https://docs.cloud.google.com/iam/docs/tags-access-control?hl=zh-tw)，您可以使用標記 (鍵/值組合)，透過[拒絕政策](https://docs.cloud.google.com/iam/docs/deny-overview?hl=zh-tw)授予角色或[拒絕存取](https://docs.cloud.google.com/iam/docs/deny-access?hl=zh-tw) ([預先發布版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))。您也可以將[資料治理標記](https://docs.cloud.google.com/bigquery/docs/tags?hl=zh-tw#data-governance-tags) ([預先發布版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages)) 附加至資料表資料欄，並使用資料政策限制資料欄資料存取權。
 
-標記可以直接附加至資源，也可以從 Google Cloud 階層中的上層資源繼承。如要瞭解組織層級的標記管理，請參閱「[標記總覽](https://docs.cloud.google.com/resource-manager/docs/tags/tags-overview?hl=zh-tw)」。如要同時授予多項相關資源 (包括未來資產) 的權限，建議使用 [IAM 條件](https://docs.cloud.google.com/bigquery/docs/conditions?hl=zh-tw)。
+標記可以直接附加至資源，也可以從 Google Cloud 階層中的父項資源繼承。如要瞭解組織層級的標記管理，請參閱「[標記總覽](https://docs.cloud.google.com/resource-manager/docs/tags/tags-overview?hl=zh-tw)」。如要同時授予多項相關資源 (包括未來資產) 的權限，建議使用 [IAM 條件](https://docs.cloud.google.com/bigquery/docs/conditions?hl=zh-tw)。
 
 ## 限制
 
 * BigQuery Omni 資料表、隱藏資料集中的資料表或臨時資料表不支援資料表標記。BigQuery Omni 資料集不支援資料集標記。此外，在檢查其他區域資料表的存取控管時，BigQuery Omni 中的跨區域查詢不會使用標記。
 * 一個資料表或資料集最多可附加 50 個標記。
 * 萬用字元查詢中參照的所有資料表，都必須具有完全相同的標記鍵和值組合。
-* 如果使用者具備資料集或資料表的條件式存取權，則無法透過 Google Cloud 控制台修改該資源的權限。權限修改作業僅支援透過 bq 工具和 BigQuery API 執行。
-* BigQuery 以外的部分服務無法正確驗證 IAM 標記條件。如果標記條件為正向，也就是只有在資源具有特定標記時，使用者才會獲得資源的角色，則無論資源附加了哪些標記，系統都會拒絕存取資源。如果標記條件為負值，也就是說，只有在資源「沒有」特定標記時，使用者才會獲得資源的角色，則系統不會檢查標記條件。
+* 如果使用者對資料集或資料表具有條件式存取權，則無法透過 Google Cloud 控制台修改該資源的權限。只能透過 bq 工具和 BigQuery API 修改權限。
+* BigQuery 以外的部分服務無法正確驗證 IAM 標記條件。如果標記條件為正向，也就是只有在資源具有特定標記時，使用者才會獲得資源的角色，則無論資源附加了哪些標記，系統都會拒絕存取資源。如果標記條件為負值，也就是只有在資源「沒有」特定標記時，使用者才會獲得資源的角色，則系統不會檢查標記條件。
 
   **最佳做法：**使用正向 IAM 標記條件，而非負向條件，以免不小心授予角色。
 
@@ -39,7 +39,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 * BigQuery 資料擁有者 (`roles/bigquery.dataOwner`)
 * BigQuery 管理員 (`roles/bigquery.admin`)
 
-[標記使用者角色](https://docs.cloud.google.com/resource-manager/docs/tags/tags-creating-and-managing?hl=zh-tw#required-permissions-attach) (`roles/resourcemanager.tagUser`) 包含新增及移除標記的 Resource Manager 權限。
+[標記使用者角色](https://docs.cloud.google.com/resource-manager/docs/tags/tags-creating-and-managing?hl=zh-tw#required-permissions-attach) (`roles/resourcemanager.tagUser`) 包含新增和移除標記的 Resource Manager 權限。
 
 ### 所需權限
 
@@ -48,14 +48,14 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 | 作業 | BigQuery 介面 (API、CLI、控制台) 和 Terraform | Cloud Resource Manager API 或 gcloud |
 | --- | --- | --- |
 | 將標記附加至資料表或檢視表 | * 資料表或檢視表的 `bigquery.tables.createTagBinding` 權限 * 標記值的 `resourcemanager.tagValueBindings.create` 權限 * `bigquery.tables.create` 權限，以便在建立資料表或檢視表時附加標記 * 更新資料表或檢視表時，需要 `bigquery.tables.update` 權限才能附加標記 | * 資料表或檢視表的 `bigquery.tables.createTagBinding` 權限 * 標記值的 `resourcemanager.tagValueBindings.create` 權限 |
-| 從資料表或檢視表移除標記 | * 資料表或檢視表的 `bigquery.tables.deleteTagBinding` 權限 * 標記值的 `resourcemanager.tagValueBindings.delete` 權限 * 更新資料表或檢視表時，必須具備 `bigquery.tables.update` 權限才能移除標記 | * 資料表或檢視表的 `bigquery.tables.deleteTagBinding` 權限 * 標記值的 `resourcemanager.tagValueBindings.delete` 權限 |
+| 從資料表或檢視表移除標記 | * 資料表或檢視表的 `bigquery.tables.deleteTagBinding` 權限 * 標記值的 `resourcemanager.tagValueBindings.delete` 權限 * `bigquery.tables.update` 權限，才能在更新資料表或檢視表時移除標記 | * 資料表或檢視表的 `bigquery.tables.deleteTagBinding` 權限 * 標記值的 `resourcemanager.tagValueBindings.delete` 權限 |
 | 將標記附加至資料集 | * 資料集的 `bigquery.datasets.createTagBinding` 權限 * 標記值的 `resourcemanager.tagValueBindings.create` 權限 * 建立資料集時附加標記的 `bigquery.datasets.create` 權限 * 更新資料集時，需要 `bigquery.datasets.update` 權限才能附加標記 | * 資料集的 `bigquery.datasets.createTagBinding` 權限 * 標記值的 `resourcemanager.tagValueBindings.create` 權限 |
 | 移除資料集的標記 | * 資料集的 `bigquery.datasets.deleteTagBinding` 權限 * 標記值的 `resourcemanager.tagValueBindings.delete` 權限 * 更新資料集時，需要 `bigquery.datasets.update` 權限才能移除標記 | * 資料集的 `bigquery.datasets.deleteTagBinding` 權限 * 標記值的 `resourcemanager.tagValueBindings.delete` 權限 |
 
 如要在 Google Cloud 控制台列出標記鍵和鍵值，您需要下列權限：
 
-* 如要列出與上層組織或專案相關聯的標記鍵，您必須具備標記鍵上層層級的 `resourcemanager.tagKeys.list` 權限，以及各個標記鍵的 `resourcemanager.tagKeys.get` 權限。如要在 BigQuery 控制台中查看標記鍵清單，請按一下資料集名稱，然後按一下 mode\_edit「Edit details」(編輯詳細資料)，或按一下資料表或檢視表名稱，然後依序按一下「Edit」(編輯)**「Edit details」(編輯詳細資料)**。
-* 如要列出與上層組織或專案相關聯的鍵標記值，您必須具備標記值上層層級的 `resourcemanager.tagValues.list` 權限，以及各個標記值的 `resourcemanager.tagValues.get` 權限。如要在
+* 如要列出與上層組織或專案相關聯的標記鍵，您必須具備標記鍵上層層級的 `resourcemanager.tagKeys.list` 權限，以及各個標記鍵的 `resourcemanager.tagKeys.get` 權限。如要在 BigQuery 控制台中查看標記鍵清單，請按一下資料集名稱，然後按一下 mode\_edit「Edit details」(編輯詳細資料)，或按一下資料表或檢視表名稱，然後依序按一下「Edit」(編輯)**>「Edit details」(編輯詳細資料)**。
+* 如要列出與上層組織或專案相關聯的索引鍵標記值，您必須具備標記值上層層級的 `resourcemanager.tagValues.list` 權限，以及各個標記值的 `resourcemanager.tagValues.get` 權限。如要在
   BigQuery 控制台中查看標記鍵值清單，請按一下資料集名稱，然後按一下
   mode\_edit
   **「Edit details」(編輯詳細資料)**，或按一下資料表或檢視表名稱，然後依序按一下
@@ -65,7 +65,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 * 如要使用 Cloud Resource Manager API 或 gcloud CLI 列出附加至資料表或檢視表的標記，您必須具備 `bigquery.tables.listTagBindings` IAM 權限。
 * 如要列出資料表或檢視表的有效標記，您必須具備 `bigquery.tables.listEffectiveTags` IAM 權限。
-* 如要使用 Cloud Resource Manager API 或 gcloud CLI 列出附加至資料集的標記，您需要 `bigquery.datasets.listTagBindings` IAM 權限。
+* 如要使用 Cloud Resource Manager API 或 gcloud CLI 列出附加至資料集的標記，您必須具備 `bigquery.datasets.listTagBindings` IAM 權限。
 * 如要列出資料集的有效標記，您必須具備 `bigquery.datasets.listEffectiveTags` IAM 權限。
 
 ## 建立標記鍵和值
@@ -93,7 +93,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 3. 在「Explorer」窗格中，選取要建立資料集的專案。
 4. 依序點選 more\_vert「View actions」(查看動作) >「Create dataset」(建立資料集)。
 5. 輸入新資料集的資訊。詳情請參閱「[建立資料集](https://docs.cloud.google.com/bigquery/docs/datasets?hl=zh-tw)」。
-6. 展開「Tags」(標記) 專區。
+6. 展開「標記」部分。
 
    1. 如要套用現有標記，請按照下列步驟操作：
 
@@ -103,7 +103,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
       2. 在「Key 1」(鍵 1) 和「Value 1」(值 1) 中，從清單中選擇適當的值。
    2. 如要手動輸入新標記，請按照下列步驟操作：
 
-      1. 按一下「Select a scope」(選取範圍) 旁的下拉式箭頭，然後選擇「Manually enter IDs」(手動輸入 ID) >「Organization」(組織)、「Project」(專案) 或「Tags」(標記)。
+      1. 按一下「Select a scope」(選取範圍) 旁的下拉式箭頭，然後依序選擇「Manually enter IDs」(手動輸入 ID) >「Organization」(組織)、「Project」(專案) 或「Tags」(標記)。
       2. 如要為專案或組織建立標記，請在對話方塊中輸入 `PROJECT_ID` 或 `ORGANIZATION_ID`，然後按一下「Save」(儲存)。
       3. 在「Key 1」(鍵 1) 和「Value 1」(值 1) 中，從清單中選擇適當的值。
    3. 選用：如要為資料表新增其他標記，請按一下「Add tag」(新增標記)，然後按照上述步驟操作。
@@ -128,7 +128,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
    * `PROJECT_ID`：您的專案 ID。
    * `DATASET_ID`：您要建立的資料集 ID。
-   * `TAG_KEY_1`：要設為資料集第一個標記的[命名空間鍵名稱](https://docs.cloud.google.com/iam/docs/tags-access-control?hl=zh-tw#definitions)，例如 `'my-project/env'` 或 `'556741164180/department'`。
+   * `TAG_KEY_1`：要設為資料集第一個標記的[命名空間金鑰名稱](https://docs.cloud.google.com/iam/docs/tags-access-control?hl=zh-tw#definitions)，例如 `'my-project/env'` 或 `'556741164180/department'`。
    * `TAG_VALUE_1`：標記值的[簡稱](https://docs.cloud.google.com/iam/docs/tags-access-control?hl=zh-tw#definitions)，例如 `'prod'` 或 `'sales'`。
    * `TAG_KEY_2`：第二個標記的命名空間索引鍵名稱。
    * `TAG_VALUE_2`：第二個標記值的簡稱。
@@ -156,7 +156,7 @@ bq mk --dataset \
 
 使用 [`google_bigquery_dataset`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset) 資源。
 
-**注意：** 如要使用 Terraform 建立 BigQuery 物件，必須啟用 [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest?hl=zh-tw)。
+**注意：**如要使用 Terraform 建立 BigQuery 物件，必須啟用 [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -240,7 +240,7 @@ resource "google_bigquery_dataset" "default" {
    terraform init
    ```
 
-   如要使用最新版 Google 供應商，請視需要加入 `-upgrade` 選項：
+   如要使用最新版 Google 供應商，可以視需要加入 `-upgrade` 選項：
 
    ```
    terraform init -upgrade
@@ -262,7 +262,7 @@ resource "google_bigquery_dataset" "default" {
    ```
 
    等待 Terraform 顯示「Apply complete!」訊息。
-3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)即可查看結果。在 Google Cloud 控制台的使用者介面中，前往資源頁面，確認 Terraform 已建立或更新資源。
+3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)即可查看結果。在 Google Cloud 控制台的 UI 中前往資源，確認 Terraform 已建立或更新資源。
 
 **注意：**Terraform 範例通常會假設 Google Cloud 專案已啟用必要的 API。
 
@@ -280,9 +280,9 @@ resource "google_bigquery_dataset" "default" {
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
-3. 在「Explorer」窗格中展開專案，點選「資料集」，然後選取資料集。
+3. 在「Explorer」窗格中展開專案，點選「Datasets」(資料集)，然後選取資料集。
 4. 在「Dataset info」(資料集資訊) 部分，按一下mode\_edit「Edit details」(編輯詳細資料)。
-5. 展開「Tags」(標記) 區段。
+5. 展開「標記」部分。
 
    1. 如要套用現有標記，請按照下列步驟操作：
 
@@ -292,7 +292,7 @@ resource "google_bigquery_dataset" "default" {
       2. 在「Key 1」(鍵 1) 和「Value 1」(值 1) 中，從清單中選擇適當的值。
    2. 如要手動輸入新標記，請按照下列步驟操作：
 
-      1. 按一下「Select a scope」(選取範圍) 旁的下拉式箭頭，然後選擇「Manually enter IDs」(手動輸入 ID) >「Organization」(組織)、「Project」(專案) 或「Tags」(標記)。
+      1. 按一下「Select a scope」(選取範圍) 旁的下拉式箭頭，然後依序選擇「Manually enter IDs」(手動輸入 ID) >「Organization」(組織)、「Project」(專案) 或「Tags」(標記)。
       2. 如要為專案或組織建立標記，請在對話方塊中輸入 `PROJECT_ID` 或 `ORGANIZATION_ID`，然後按一下「Save」(儲存)。
       3. 在「Key 1」(鍵 1) 和「Value 1」(值 1) 中，從清單中選擇適當的值。
    3. 選用：如要為資料表新增其他標記，請按一下「Add tag」(新增標記)，然後按照上述步驟操作。
@@ -318,9 +318,8 @@ resource "google_bigquery_dataset" "default" {
    替換下列內容：
 
    * `PROJECT_ID`：您的專案 ID。
-   * `DATASET_ID`：
-     資料表的資料集 ID。
-   * `TABLE_ID`：要標記的資料表名稱。
+   * `DATASET_ID`：資料表的資料集 ID。
+   * `TABLE_ID`：要加上標記的資料表名稱。
    * `TAG_KEY_1`：要設為資料表第一個標記的[命名空間索引鍵名稱](https://docs.cloud.google.com/iam/docs/tags-access-control?hl=zh-tw#definitions)，例如 `'my-project/env'` 或 `'556741164180/department'`。
    * `TAG_VALUE_1`：標記值的[簡稱](https://docs.cloud.google.com/iam/docs/tags-access-control?hl=zh-tw#definitions)，例如 `'prod'` 或 `'sales'`。
    * `TAG_KEY_2`：第二個標記的命名空間索引鍵名稱。
@@ -345,9 +344,8 @@ resource "google_bigquery_dataset" "default" {
    替換下列內容：
 
    * `PROJECT_ID`：您的專案 ID。
-   * `DATASET_ID`：
-     資料表的資料集 ID。
-   * `TABLE_ID`：要標記的資料表名稱。
+   * `DATASET_ID`：資料表的資料集 ID。
+   * `TABLE_ID`：要加上標記的資料表名稱。
    * `TAG_KEY_1`：要設為資料表第一個標記的[命名空間索引鍵名稱](https://docs.cloud.google.com/iam/docs/tags-access-control?hl=zh-tw#definitions)，例如 `'my-project/env'` 或 `'556741164180/department'`。
    * `TAG_VALUE_1`：標記值的[簡稱](https://docs.cloud.google.com/iam/docs/tags-access-control?hl=zh-tw#definitions)，例如 `'prod'` 或 `'sales'`。
    * `TAG_KEY_2`：第二個標記的命名空間索引鍵名稱。
@@ -369,7 +367,7 @@ bq update \
 更改下列內容：
 
 * `TAG`：要附加至資料集的標記。多個標記之間以半形逗號分隔。例如：`556741164180/env:prod,myProject/department:sales`。每個標記都必須有[命名空間限定鍵名稱和值簡稱](https://docs.cloud.google.com/iam/docs/tags-access-control?hl=zh-tw#definitions)。
-* `PROJECT_ID`：現有資料集所在專案的 ID。
+* `PROJECT_ID`：現有資料集所在的專案 ID。
 * `DATASET_ID`：現有資料集的 ID。
 
 ### gcloud
@@ -385,7 +383,7 @@ gcloud resource-manager tags bindings create \
 
 更改下列內容：
 
-* `TAG_VALUE_NAME`：要附加的標記值永久 ID 或命名空間限定名稱，例如 `tagValues/4567890123` 或 `1234567/my_tag_key/my_tag_value`。
+* `TAG_VALUE_NAME`：要附加的標記值永久 ID 或命名空間名稱，例如 `tagValues/4567890123` 或 `1234567/my_tag_key/my_tag_value`。
 * `RESOURCE_ID`：資料集的完整 ID，包括 API 網域名稱 (`//bigquery.googleapis.com/`)，用於識別資源類型。例如：`//bigquery.googleapis.com/projects/my_project/datasets/my_dataset`。
 * `LOCATION`：資料集的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
 
@@ -395,7 +393,7 @@ gcloud resource-manager tags bindings create \
 
 ### API
 
-呼叫 [`datasets.get` 方法](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/get?hl=zh-tw)，取得資料集資源，包括 `resource_tags` 欄位。將投稿跟拍新增至 `resource_tags` 欄位，然後使用 [`datasets.update` 方法](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/update?hl=zh-tw)傳回更新後的資料集資源。
+呼叫 [`datasets.get` 方法](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/get?hl=zh-tw)，取得資料集資源，包括 `resource_tags` 欄位。將投稿跟拍新增至 `resource_tags` 欄位，並使用 [`datasets.update` 方法](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/update?hl=zh-tw)傳回更新後的資料集資源。
 
 ### 列出附加至資料集的標記
 
@@ -407,7 +405,7 @@ gcloud resource-manager tags bindings create \
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
-3. 在「Explorer」窗格中展開專案，點選「資料集」，然後選取資料集。
+3. 在「Explorer」窗格中展開專案，點選「Datasets」(資料集)，然後選取資料集。
 
    標記會顯示在「Dataset info」(資料集資訊) 部分。
 
@@ -421,7 +419,7 @@ bq show PROJECT_ID:DATASET_ID
 
 更改下列內容：
 
-* `PROJECT_ID`：包含資料集的專案 ID。
+* `PROJECT_ID`：資料集所在專案的 ID。
 * `DATASET_ID`：要列出標記的資料集 ID。
 
 ### gcloud
@@ -476,13 +474,13 @@ terraform state show google_bigquery_dataset.default
 
 ### API
 
-呼叫 [`datasets.get` 方法](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/get?hl=zh-tw)，取得資料集資源。資料集資源包含 `resource_tags` 欄位中附加至資料集的標記。
+呼叫 [`datasets.get` 方法](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/get?hl=zh-tw)，取得資料集資源。資料集資源包含附加至 `resource_tags` 欄位中資料集的標記。
 
 ### 檢視表
 
 使用 [`INFORMATION_SCHEMA.SCHEMATA_OPTIONS` 檢視畫面](https://docs.cloud.google.com/bigquery/docs/information-schema-datasets-schemata-options?hl=zh-tw)。
 
-舉例來說，下列查詢會顯示某個區域中所有資料集附加的所有標記。這項查詢會傳回一個資料表，其中包含 `schema_name` (資料集名稱)、`option_name` (一律為 `'tags'`)、`object_type` (一律為 `ARRAY<STRUCT<STRING, STRING>>`) 和 `option_value` 等資料欄，其中包含 `STRUCT` 物件陣列，代表與各資料集相關聯的標記。如果資料集未指派標記，`option_value` 資料欄會傳回空白陣列。
+舉例來說，下列查詢會顯示區域中所有資料集附加的所有標記。這項查詢會傳回一個資料表，其中包含 `schema_name` (資料集名稱)、`option_name` (一律為 `'tags'`)、`object_type` (一律為 `ARRAY<STRUCT<STRING, STRING>>`) 和 `option_value` 等資料欄，其中包含 `STRUCT` 物件陣列，代表與各資料集相關聯的標記。如果資料集未指派標記，`option_value` 欄會傳回空白陣列。
 
 ```
 SELECT * from region-REGION.INFORMATION_SCHEMA.SCHEMATA_OPTIONS
@@ -493,11 +491,11 @@ WHERE option_name='tags'
 
 * `REGION`：資料集所在的[區域](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
 
-**注意：** 您可以使用 [`gcloud resource-manager tags bindings list`](https://docs.cloud.google.com/bigquery/docs/tags?hl=zh-tw#gcloud_1) 指令，依 BigQuery 資料集和資料表列出繼承的標記。
+**注意：**您可以使用 [`gcloud resource-manager tags bindings list`](https://docs.cloud.google.com/bigquery/docs/tags?hl=zh-tw#gcloud_1) 指令，依 BigQuery 資料集和資料表列出繼承的標記。
 
 ### 從資料集卸離標記
 
-您可以刪除標記繫結資源，藉此將標記與資源解除連結。如要刪除標記，請先將標記從資料集卸載，再刪除標記。詳情請參閱「[刪除標記](https://docs.cloud.google.com/resource-manager/docs/tags/tags-creating-and-managing?hl=zh-tw#deleting)」。
+如要將標記與資源解除繫結，請刪除標記繫結資源。如要刪除標記，請先將標記與資料集分離，再刪除標記。詳情請參閱「[刪除標記](https://docs.cloud.google.com/resource-manager/docs/tags/tags-creating-and-managing?hl=zh-tw#deleting)」。
 
 ### 控制台
 
@@ -505,9 +503,9 @@ WHERE option_name='tags'
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
-3. 在「Explorer」窗格中展開專案，點選「資料集」，然後選取資料集。
+3. 在「Explorer」窗格中展開專案，點選「Datasets」(資料集)，然後選取資料集。
 4. 在「Dataset info」(資料集資訊) 部分，按一下mode\_edit「Edit details」(編輯詳細資料)。
-5. 在「Tags」(標記) 區段中，按一下要刪除的標記旁邊的「delete Delete item」(刪除項目)。
+5. 在「Tags」(標記) 區段中，按一下要刪除的標記旁邊的 delete「Delete item」(刪除項目)。
 6. 按一下「儲存」。
 
 ### SQL
@@ -530,13 +528,13 @@ WHERE option_name='tags'
    替換下列內容：
 
    * `PROJECT_ID`：您的專案 ID。
-   * `DATASET_ID`：
-     資料表的資料集 ID。
-   * `TABLE_ID`：要卸除標記的資料表名稱。
+   * `DATASET_ID`：資料表的資料集 ID。
+   * `TABLE_ID`：：要
+     卸除標記的資料表名稱。
    * `TAG_KEY_1`：要卸載的第一個標記[命名空間索引鍵名稱](https://docs.cloud.google.com/iam/docs/tags-access-control?hl=zh-tw#definitions)，例如 `'my-project/env'` 或 `'556741164180/department'`。
    * `TAG_VALUE_1`：要卸載的標記值的[簡稱](https://docs.cloud.google.com/iam/docs/tags-access-control?hl=zh-tw#definitions)，例如 `'prod'` 或 `'sales'`。
    * `TAG_KEY_2`：要卸載的第二個標記命名空間鍵名稱。
-   * `TAG_VALUE_2`：要卸載的第二個標記值簡稱。
+   * `TAG_VALUE_2`：要卸載的第二個標記值的簡稱。
 3. 按一下「play\_circle 執行」。
 
 如要進一步瞭解如何執行查詢，請參閱「[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)」。
@@ -555,7 +553,7 @@ bq update \
 
 * `REMOVED_TAG`：要從資料集移除的標記。多個標記之間以半形逗號分隔。僅接受不含值組合的鍵。例如：`556741164180/env,myProject/department`。每個標記都必須有[命名空間鍵名稱](https://docs.cloud.google.com/iam/docs/tags-access-control?hl=zh-tw#definitions)。
 * `PROJECT_ID`：資料集所在專案的 ID。
-* `DATASET_ID`：要卸載標記的資料集 ID。
+* `DATASET_ID`：要卸離標記的資料集 ID。
 
 或者，如要從資料集移除「所有」標記，請使用 [`bq update` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_update)和 `--clear_all_tags` 旗標：
 
@@ -596,7 +594,7 @@ gcloud resource-manager tags bindings delete \
 
 ### 建立新資料表時附加標記
 
-建立標記後，可以附加至新資料表。對於任何指定的標記鍵，您只能將一個標記值附加至資料表。一個資料表最多可附加 50 個標記。
+建立標記後，您可以將其附加至新資料表。對於任何指定的標記鍵，您只能將一個標記值附加至資料表。一個資料表最多可附加 50 個標記。
 
 ### 控制台
 
@@ -607,7 +605,7 @@ gcloud resource-manager tags bindings delete \
 3. 在「Explorer」窗格中展開專案，點選「Datasets」(資料集)，然後選取資料集。
 4. 在「Dataset info」(資料集資訊) 部分，按一下 add\_box「Create table」(建立資料表)。
 5. 輸入新資料表的資訊。詳情請參閱「[建立及使用資料表](https://docs.cloud.google.com/bigquery/docs/tables?hl=zh-tw)」。
-6. 展開「Tags」(標記) 專區。
+6. 展開「標記」部分。
 
    1. 如要套用現有標記，請按照下列步驟操作：
 
@@ -617,7 +615,7 @@ gcloud resource-manager tags bindings delete \
       2. 在「Key 1」(鍵 1) 和「Value 1」(值 1) 中，從清單中選擇適當的值。
    2. 如要手動輸入新標記，請按照下列步驟操作：
 
-      1. 按一下「Select a scope」(選取範圍) 旁的下拉式箭頭，然後選擇「Manually enter IDs」(手動輸入 ID) >「Organization」(組織)、「Project」(專案) 或「Tags」(標記)。
+      1. 按一下「Select a scope」(選取範圍) 旁的下拉式箭頭，然後依序選擇「Manually enter IDs」(手動輸入 ID) >「Organization」(組織)、「Project」(專案) 或「Tags」(標記)。
       2. 如要為專案或組織建立標記，請在對話方塊中輸入 `PROJECT_ID` 或 `ORGANIZATION_ID`，然後按一下「Save」(儲存)。
       3. 在「Key 1」(鍵 1) 和「Value 1」(值 1) 中，從清單中選擇適當的值。
    3. 選用：如要為資料表新增其他標記，請按一下「Add tag」(新增標記)，然後按照上述步驟操作。
@@ -674,7 +672,7 @@ bq mk --table \
 
 使用 [`google_bigquery_table`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_table) 資源。
 
-**注意：** 如要使用 Terraform 建立 BigQuery 物件，必須啟用 [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest?hl=zh-tw)。
+**注意：**如要使用 Terraform 建立 BigQuery 物件，必須啟用 [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
@@ -765,7 +763,7 @@ resource "google_bigquery_table" "default" {
    terraform init
    ```
 
-   如要使用最新版 Google 供應商，請視需要加入 `-upgrade` 選項：
+   如要使用最新版 Google 供應商，可以視需要加入 `-upgrade` 選項：
 
    ```
    terraform init -upgrade
@@ -787,7 +785,7 @@ resource "google_bigquery_table" "default" {
    ```
 
    等待 Terraform 顯示「Apply complete!」訊息。
-3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)即可查看結果。在 Google Cloud 控制台的使用者介面中，前往資源頁面，確認 Terraform 已建立或更新資源。
+3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)即可查看結果。在 Google Cloud 控制台的 UI 中前往資源，確認 Terraform 已建立或更新資源。
 
 **注意：**Terraform 範例通常會假設 Google Cloud 專案已啟用必要的 API。
 
@@ -808,7 +806,7 @@ resource "google_bigquery_table" "default" {
 3. 在「Explorer」窗格中展開專案，然後按一下「資料集」。
 4. 依序點選**「總覽」>「資料表」**，然後選取資料表。
 5. 在詳細資料窗格中，依序點選**「編輯」>「編輯詳細資料」**。
-6. 展開「Tags」(標記) 專區。
+6. 展開「標記」部分。
 
    1. 如要套用現有標記，請按照下列步驟操作：
 
@@ -818,7 +816,7 @@ resource "google_bigquery_table" "default" {
       2. 在「Key 1」(鍵 1) 和「Value 1」(值 1) 中，從清單中選擇適當的值。
    2. 如要手動輸入新標記，請按照下列步驟操作：
 
-      1. 按一下「Select a scope」(選取範圍) 旁的下拉式箭頭，然後選擇「Manually enter IDs」(手動輸入 ID) >「Organization」(組織)、「Project」(專案) 或「Tags」(標記)。
+      1. 按一下「Select a scope」(選取範圍) 旁的下拉式箭頭，然後依序選擇「Manually enter IDs」(手動輸入 ID) >「Organization」(組織)、「Project」(專案) 或「Tags」(標記)。
       2. 如要為專案或組織建立標記，請在對話方塊中輸入 `PROJECT_ID` 或 `ORGANIZATION_ID`，然後按一下「Save」(儲存)。
       3. 在「Key 1」(鍵 1) 和「Value 1」(值 1) 中，從清單中選擇適當的值。
    3. 選用：如要為資料表新增其他標記，請按一下「Add tag」(新增標記)，然後按照上述步驟操作。
@@ -844,9 +842,8 @@ resource "google_bigquery_table" "default" {
    替換下列內容：
 
    * `PROJECT_ID`：您的專案 ID。
-   * `DATASET_ID`：
-     資料表的資料集 ID。
-   * `TABLE_ID`：要標記的資料表名稱。
+   * `DATASET_ID`：資料表的資料集 ID。
+   * `TABLE_ID`：要加上標記的資料表名稱。
    * `TAG_KEY_1`：要設為資料表第一個標記的[命名空間索引鍵名稱](https://docs.cloud.google.com/iam/docs/tags-access-control?hl=zh-tw#definitions)，例如 `'my-project/env'` 或 `'556741164180/department'`。
    * `TAG_VALUE_1`：標記值的[簡稱](https://docs.cloud.google.com/iam/docs/tags-access-control?hl=zh-tw#definitions)，例如 `'prod'` 或 `'sales'`。
    * `TAG_KEY_2`：第二個標記的命名空間索引鍵名稱。
@@ -871,9 +868,8 @@ resource "google_bigquery_table" "default" {
    替換下列內容：
 
    * `PROJECT_ID`：您的專案 ID。
-   * `DATASET_ID`：
-     資料表的資料集 ID。
-   * `TABLE_ID`：要標記的資料表名稱。
+   * `DATASET_ID`：資料表的資料集 ID。
+   * `TABLE_ID`：要加上標記的資料表名稱。
    * `TAG_KEY_1`：要設為資料表第一個標記的[命名空間索引鍵名稱](https://docs.cloud.google.com/iam/docs/tags-access-control?hl=zh-tw#definitions)，例如 `'my-project/env'` 或 `'556741164180/department'`。
    * `TAG_VALUE_1`：標記值的[簡稱](https://docs.cloud.google.com/iam/docs/tags-access-control?hl=zh-tw#definitions)，例如 `'prod'` 或 `'sales'`。
    * `TAG_KEY_2`：第二個標記的命名空間索引鍵名稱。
@@ -912,8 +908,8 @@ gcloud resource-manager tags bindings create \
 
 更改下列內容：
 
-* `TAG_VALUE_NAME`：要附加的標記值永久 ID 或命名空間限定名稱，例如 `tagValues/4567890123` 或 `1234567/my_tag_key/my_tag_value`。
-* `RESOURCE_ID`：資料表的完整 ID，包括用於識別資源類型的 API 網域名稱 (`//bigquery.googleapis.com/`)。例如：
+* `TAG_VALUE_NAME`：要附加的標記值永久 ID 或命名空間名稱，例如 `tagValues/4567890123` 或 `1234567/my_tag_key/my_tag_value`。
+* `RESOURCE_ID`：資料表的完整 ID，包括 API 網域名稱 (`//bigquery.googleapis.com/`)，用於識別資源類型。例如：
   `//bigquery.googleapis.com/projects/my_project/datasets/my_dataset/tables/my_table`
 * `LOCATION`：資料表的[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
 
@@ -942,7 +938,7 @@ gcloud resource-manager tags bindings create \
 
 ### bq
 
-使用 [`bq show` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_show)，並查看 `tags` 欄。如果表格中沒有標記，就不會顯示 `tags` 欄。
+使用 [`bq show` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_show)，並查看 `tags` 欄。如果表格中沒有標記，系統就不會顯示 `tags` 欄。
 
 ```
 bq show \
@@ -978,7 +974,7 @@ parent: //bigquery.googleapis.com/projects/my_project/datasets/my_dataset
 tagValue: tagValues/4567890123
 ```
 
-您可以使用 `gcloud resource-manager tags bindings list`，列出 BigQuery 資料表繼承的標記。您也可以使用 `namespacedTagValue` 屬性的 [`--filter`](https://docs.cloud.google.com/sdk/gcloud/reference/topic/filters?hl=zh-tw) 選項，根據專案 ID、標記值或標記鍵篩選標記。
+您可以使用 `gcloud resource-manager tags bindings list` 列出 BigQuery 資料表繼承的標記。您也可以使用 `namespacedTagValue` 屬性的 [`--filter`](https://docs.cloud.google.com/sdk/gcloud/reference/topic/filters?hl=zh-tw) 選項，根據專案 ID、標記值或標記鍵篩選標記。
 
 ```
 gcloud resource-manager tags bindings list \
@@ -999,7 +995,7 @@ gcloud resource-manager tags bindings list \
 
 ### Terraform
 
-使用 `terraform state show` 指令列出資料表的屬性，包括 `resource_tags` 欄位。請在資料表 Terraform 設定檔的執行目錄中執行這個指令。
+使用 `terraform state show` 指令列出資料表的屬性，包括 `resource_tags` 欄位。請在資料表的 Terraform 設定檔執行目錄中執行這個指令。
 
 ```
 terraform state show google_bigquery_table.default
@@ -1013,20 +1009,20 @@ terraform state show google_bigquery_table.default
 
 使用 [`INFORMATION_SCHEMA.TABLE_OPTIONS` 檢視畫面](https://docs.cloud.google.com/bigquery/docs/information-schema-table-options?hl=zh-tw)。
 
-舉例來說，下列查詢會顯示附加至資料集中所有資料表的所有標記。這項查詢會傳回一個資料表，其中包含 `schema_name` (資料集名稱)、`option_name` (一律為 `'tags'`)、`object_type` (一律為 `ARRAY<STRUCT<STRING, STRING>>`) 和 `option_value` 等資料欄，其中包含 `STRUCT` 物件陣列，代表與各資料集相關聯的標記。如果資料表未指派標記，`option_value` 欄會傳回空白陣列。
+舉例來說，下列查詢會顯示附加至資料集中所有資料表的所有標記。這項查詢會傳回一個資料表，其中包含 `schema_name` (資料集名稱)、`option_name` (一律為 `'tags'`)、`object_type` (一律為 `ARRAY<STRUCT<STRING, STRING>>`) 和 `option_value` 等資料欄，其中包含 `STRUCT` 物件陣列，代表與各資料集相關聯的標記。如果資料表未指派標記，`option_value` 資料欄會傳回空白陣列。
 
 ```
 SELECT * from DATASET_ID.INFORMATION_SCHEMA.TABLE_OPTIONS
 WHERE option_name='tags'
 ```
 
-將 `DATASET_ID` 替換為資料表的資料集 ID。
+將 `DATASET_ID` 替換為資料表所在資料集的 ID。
 
-**注意：** 您可以使用 [`gcloud resource-manager tags bindings list`](https://docs.cloud.google.com/bigquery/docs/tags?hl=zh-tw#gcloud_4) 指令，依 BigQuery 資料集和資料表列出繼承的標記。
+**注意：**您可以使用 [`gcloud resource-manager tags bindings list`](https://docs.cloud.google.com/bigquery/docs/tags?hl=zh-tw#gcloud_4) 指令，依 BigQuery 資料集和資料表列出繼承的標記。
 
-### 卸離資料表的標記
+### 從資料表卸離標記
 
-刪除標記繫結，即可移除資料表的標記關聯。如要刪除標記，請先將標記與資料表分離，再刪除標記。詳情請參閱「[刪除標記](https://docs.cloud.google.com/resource-manager/docs/tags/tags-creating-and-managing?hl=zh-tw#deleting)」。
+如要移除資料表的標記關聯，請刪除標記繫結。如要刪除標記，請先將標記與資料表分離，再刪除標記。詳情請參閱「[刪除標記](https://docs.cloud.google.com/resource-manager/docs/tags/tags-creating-and-managing?hl=zh-tw#deleting)」。
 
 ### 控制台
 
@@ -1060,13 +1056,13 @@ WHERE option_name='tags'
    替換下列內容：
 
    * `PROJECT_ID`：您的專案 ID。
-   * `DATASET_ID`：
-     資料表的資料集 ID。
-   * `TABLE_ID`：要卸除標記的資料表名稱。
+   * `DATASET_ID`：資料表的資料集 ID。
+   * `TABLE_ID`：：要
+     卸除標記的資料表名稱。
    * `TAG_KEY_1`：要卸載的第一個標記[命名空間索引鍵名稱](https://docs.cloud.google.com/iam/docs/tags-access-control?hl=zh-tw#definitions)，例如 `'my-project/env'` 或 `'556741164180/department'`。
-   * `TAG_VALUE_1`：要卸載的標記值[簡稱](https://docs.cloud.google.com/iam/docs/tags-access-control?hl=zh-tw#definitions)，例如 `'prod'` 或 `'sales'`。
+   * `TAG_VALUE_1`：要卸載的標記值的[簡稱](https://docs.cloud.google.com/iam/docs/tags-access-control?hl=zh-tw#definitions)，例如 `'prod'` 或 `'sales'`。
    * `TAG_KEY_2`：要卸載的第二個標記命名空間鍵名稱。
-   * `TAG_VALUE_2`：要卸載的第二個標記值簡稱。
+   * `TAG_VALUE_2`：要卸載的第二個標記值的簡稱。
 3. 按一下「play\_circle 執行」。
 
 如要進一步瞭解如何執行查詢，請參閱「[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)」。
@@ -1115,7 +1111,7 @@ gcloud resource-manager tags bindings delete \
 
 ### Terraform
 
-從資料表的 `resource_tags` 欄位中移除標記，然後使用 `google_bigquery_table` 資源套用更新後的設定。
+從資料表的 `resource_tags` 欄位移除標記，然後使用 `google_bigquery_table` 資源套用更新後的設定。
 
 ### API
 
@@ -1123,7 +1119,7 @@ gcloud resource-manager tags bindings delete \
 
 ## 標記其他類似表格的資源
 
-您也可以用類似方式標記 BigQuery 檢視表、materialized view、複製項目和快照。
+您也可以用類似的方式，為 BigQuery 檢視表、materialized view、複製項目和快照加上標記。
 
 ## 標記資料欄
 
@@ -1131,13 +1127,13 @@ gcloud resource-manager tags bindings delete \
 
 ## 刪除標記
 
-如果標記由資料表、檢視表或資料集參照，則無法刪除。刪除標記鍵或值本身之前，應先卸離所有現有的標記繫結資源。如要刪除標記鍵和標記值，請參閱「[刪除標記](https://docs.cloud.google.com/resource-manager/docs/tags/tags-creating-and-managing?hl=zh-tw#deleting)」。
+如果標記由資料表、檢視表或資料集參照，則無法刪除。刪除標記鍵或值本身之前，請先卸離所有現有的標記繫結資源。如要刪除標記鍵和標記值，請參閱「[刪除標記](https://docs.cloud.google.com/resource-manager/docs/tags/tags-creating-and-managing?hl=zh-tw#deleting)」。
 
 ## 範例
 
 假設您是組織的管理員，資料分析師都是 analysts@example.com 群組的成員，該群組在專案 `userData` 中具備 BigQuery 資料檢視者 IAM 角色。公司聘用了一位資料分析師實習生，根據公司政策，該實習生只能查看 `userData` 專案中的 `anonymousData` 資料集。您可以使用標記控管他們的存取權。
 
-1. [建立標記](https://docs.cloud.google.com/resource-manager/docs/tags/tags-creating-and-managing?hl=zh-tw#creating_tag)，鍵為 `employee_type`，值為 `intern`：
+1. 使用鍵 `employee_type` 和值 `intern` [建立標記](https://docs.cloud.google.com/resource-manager/docs/tags/tags-creating-and-managing?hl=zh-tw#creating_tag)：
 2. 前往 Google Cloud 控制台的「IAM」(身分與存取權管理) 頁面。
 
    [前往「IAM」(身分與存取權管理) 頁面](https://console.cloud.google.com/iam-admin/iam?hl=zh-tw)
@@ -1169,9 +1165,9 @@ gcloud resource-manager tags bindings delete \
 這項功能適用《[服務專屬條款](https://docs.cloud.google.com/terms/service-terms?hl=zh-tw#1)》中「一般服務條款」一節的《正式發布前產品條款》。正式發布前功能是依「原樣」提供，支援服務可能受限。
 詳情請參閱[推出階段說明](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
 
-**注意：** 如要提供意見回饋或尋求這項功能的支援，請傳送電子郵件至 [bigquery-security-feedback@google.com](mailto:bigquery-security-feedback@google.com)。
+**注意：**如要提供意見回饋或尋求這項功能的支援，請傳送電子郵件至 [bigquery-security-feedback@google.com](mailto:bigquery-security-feedback@google.com)。
 
-您可以使用資料治理標記，在 BigQuery 中強制執行資料欄層級安全防護機制和資料遮蓋。資料治理標記是一種 Resource Manager 標記，可附加至機密資料欄，並用於 BigQuery 資料政策，向使用者授予條件式存取權。
+您可以使用資料治理標記，在 BigQuery 強制執行資料欄層級安全防護機制和資料遮蓋。資料治理標記是一種 Resource Manager 標記，可附加至機密資料欄，並用於 BigQuery 資料政策，向使用者授予條件式存取權。
 
 建立資料治理標記並附加至 BigQuery 資料欄，即可設定資料欄層級安全性。接著，建立參照這些標記的 BigQuery 資料政策。這些政策會套用資料遮蓋規則，或將原始資料存取權授予特定使用者，確保只有授權主體能查看機密資料。
 
@@ -1179,7 +1175,7 @@ gcloud resource-manager tags bindings delete \
 
 如要在 Google Cloud 控制台建立及管理資料治理標記，可以使用 [BigQuery 安全中心](https://docs.cloud.google.com/bigquery/docs/security-center-overview?hl=zh-tw#manage-tags-taxonomies)。
 
-### 開始使用控管標記前的準備工作
+### 開始使用管理標記前的準備工作
 
 1. [安裝](https://docs.cloud.google.com/sdk/docs/install?hl=zh-tw) Google Cloud CLI。
 
@@ -1190,19 +1186,19 @@ gcloud resource-manager tags bindings delete \
    ```
    gcloud init
    ```
-4. 如要建立及管理資料治理標記，您必須使用[隨選定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#on_demand_pricing)，或 [BigQuery Enterprise 或 Enterprise Plus 版](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)。
+4. 如要建立及管理資料治理標記，您必須使用[隨選計價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#on_demand_pricing)模式，或 [BigQuery Enterprise 或 Enterprise Plus 版](https://docs.cloud.google.com/bigquery/docs/editions-intro?hl=zh-tw)。
 
 #### 資料治理標記的必要角色
 
 如要取得使用資料治理標記控管資料欄存取權所需的權限，請要求管理員授予您下列 IAM 角色：
 
 * 建立資料治理標記：
-  + 專案或組織的[標記管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/resourcemanager?hl=zh-tw#resourcemanager.tagAdmin)  (`roles/resourcemanager.tagAdmin`)
-  + 組織的[組織檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/resourcemanager?hl=zh-tw#resourcemanager.organizationViewer)  (`roles/resourcemanager.organizationViewer`)
-* 在資料欄中附加或移除標記：
+  + 專案或組織的[標記管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/resourcemanager?hl=zh-tw#resourcemanager.tagAdmin) (`roles/resourcemanager.tagAdmin`)
+  + 組織的[組織檢視者](https://docs.cloud.google.com/iam/docs/roles-permissions/resourcemanager?hl=zh-tw#resourcemanager.organizationViewer) (`roles/resourcemanager.organizationViewer`)
+* 將標記附加至資料欄或從資料欄移除標記：
   + 資料表的 [BigQuery 資料擁有者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataOwner) (`roles/bigquery.dataOwner`)
-  + 組織、專案或標記值的[標記使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/resourcemanager?hl=zh-tw#resourcemanager.tagUser)  (`roles/resourcemanager.tagUser`)
-* 建立及管理資料政策：專案的 [BigQuery 資料政策管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquerydatapolicy?hl=zh-tw#bigquerydatapolicy.admin)  (`roles/bigquerydatapolicy.admin`)
+  + 組織、專案或標記值的[標記使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/resourcemanager?hl=zh-tw#resourcemanager.tagUser) (`roles/resourcemanager.tagUser`)
+* 建立及管理資料政策：專案的 [BigQuery 資料政策管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquerydatapolicy?hl=zh-tw#bigquerydatapolicy.admin) (`roles/bigquerydatapolicy.admin`)
 
 如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
@@ -1227,11 +1223,11 @@ gcloud resource-manager tags bindings delete \
 5. 在「Create tag key」(建立標記鍵) 窗格中，指定標記鍵詳細資料：
 
    * 在「Data governance tags name」(資料治理標記名稱) 欄位中，輸入標記鍵的名稱。
-   * 選用：在「Description」(說明) 欄位中，輸入標記鍵的說明。
+   * 選用：在「Description」(說明) 欄位中輸入標記鍵的說明。
 6. 點選「建立」。
 
 **注意：**在 BigQuery 安全中心建立的資料治理標記，範圍僅限於使用中的專案。
-如要建立組織層級的標記鍵，請使用 gcloud CLI 或 Resource Manager 控制台。
+如要建立組織範圍的標記鍵，請使用 gcloud CLI 或 Resource Manager 控制台。
 
 ### gcloud
 
@@ -1303,7 +1299,7 @@ resource "google_tags_tag_key" "dg_key" {
    terraform init
    ```
 
-   如要使用最新版 Google 供應商，請視需要加入 `-upgrade` 選項：
+   如要使用最新版 Google 供應商，可以視需要加入 `-upgrade` 選項：
 
    ```
    terraform init -upgrade
@@ -1325,7 +1321,7 @@ resource "google_tags_tag_key" "dg_key" {
    ```
 
    等待 Terraform 顯示「Apply complete!」訊息。
-3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)即可查看結果。在 Google Cloud 控制台的使用者介面中，前往資源頁面，確認 Terraform 已建立或更新資源。
+3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)即可查看結果。在 Google Cloud 控制台的 UI 中前往資源，確認 Terraform 已建立或更新資源。
 
 **注意：**Terraform 範例通常會假設 Google Cloud 專案已啟用必要的 API。
 
@@ -1436,7 +1432,7 @@ resource "google_tags_tag_value" "dg_value" {
    terraform init
    ```
 
-   如要使用最新版 Google 供應商，請視需要加入 `-upgrade` 選項：
+   如要使用最新版 Google 供應商，可以視需要加入 `-upgrade` 選項：
 
    ```
    terraform init -upgrade
@@ -1458,7 +1454,7 @@ resource "google_tags_tag_value" "dg_value" {
    ```
 
    等待 Terraform 顯示「Apply complete!」訊息。
-3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)即可查看結果。在 Google Cloud 控制台的使用者介面中，前往資源頁面，確認 Terraform 已建立或更新資源。
+3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)即可查看結果。在 Google Cloud 控制台的 UI 中前往資源，確認 Terraform 已建立或更新資源。
 
 **注意：**Terraform 範例通常會假設 Google Cloud 專案已啟用必要的 API。
 
@@ -1494,7 +1490,7 @@ resource "google_tags_tag_value" "dg_value" {
 
 #### 建立階層式標記值
 
-您也可以視需要建立子項標記值，並以標記值做為父項，建立資料治理標記值的階層樹狀結構。階層最多可達 5 層，如下圖所示：
+您也可以建立子項標記值，並以標記值做為父項，建立資料治理標記值的階層樹狀結構。階層最多可達 5 層，如下圖所示：
 
 ### gcloud
 
@@ -1507,7 +1503,7 @@ gcloud resource-manager tags values create CHILD_TAG_VALUE \
 
 更改下列內容：
 
-* `CHILD_TAG_VALUE`：您要建立的子項標記值簡稱。
+* `CHILD_TAG_VALUE`：您要建立的子標記值簡稱。
 * `PROJECT_ID`： Google Cloud 專案的 ID。如要提供組織而非專案，請改用 `ORGANIZATION_ID`。
 * `TAG_KEY`：標記值的父項標記鍵簡稱。
 * `PARENT_TAG_VALUE`：父項標記值的簡稱。
@@ -1528,7 +1524,7 @@ curl --request POST \
 
 更改下列內容：
 
-* `CHILD_TAG_VALUE`：您要建立的子項標記值簡稱。
+* `CHILD_TAG_VALUE`：您要建立的子標記值簡稱。
 * `PARENT_TAG_VALUE_ID`：父項標記值的數值 ID。
 
 ### 將資料治理標記附加到 BigQuery 資料欄
@@ -1549,14 +1545,14 @@ CREATE TABLE PROJECT_ID.DATASET_ID.TABLE_ID (
 
 更改下列內容：
 
-* `PROJECT_ID`： Google Cloud 專案的 ID。如要提供組織 (而非專案) 做為標記的父項，請改用 `ORGANIZATION_ID` 做為標記鍵格式 (`ORGANIZATION_ID/TAG_KEY`)。
+* `PROJECT_ID`： Google Cloud 專案的 ID。如要提供組織 (而非專案) 做為標記的父項，請改用 `ORGANIZATION_ID` 做為標記索引鍵格式 (`ORGANIZATION_ID/TAG_KEY`)。
 * `DATASET_ID`：資料表所在的資料集 ID。
 * `TABLE_ID`：要建立的資料表 ID。
 * `COLUMN_NAME`：要標記的資料欄名稱。
 * `TAG_KEY`：要套用的標記鍵。
 * `TAG_VALUE`：要套用的標記值。
 
-#### 為現有資料表新增標記
+#### 在現有資料表新增標記
 
 如要將資料治理標記附加至現有資料表的資料欄，請使用 [`ALTER TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#alter_table_set_options_statement) 陳述式，在資料欄上設定 `data_governance_tags` 選項。
 
@@ -1586,7 +1582,7 @@ ALTER COLUMN COLUMN_NAME SET OPTIONS (data_governance_tags=[("PROJECT_ID/TAG_KEY
    * `DATASET_ID`：資料表所在的資料集 ID。
    * `TABLE_ID`：要建立的資料表 ID。
 
-#### 為現有資料表新增標記
+#### 在現有資料表新增標記
 
 1. 如要為現有資料表新增標記，請先將其結構定義匯出至本機檔案：
 
@@ -1635,7 +1631,7 @@ ALTER COLUMN COLUMN_NAME SET OPTIONS (data_governance_tags=[("PROJECT_ID/TAG_KEY
 
 #### 建立含有標記資料欄的新資料表
 
-如要在建立資料表時，將資料治理標記附加至資料欄，請使用 `google-beta` 供應商中的 [`google_bigquery_table`](https://registry.terraform.io/providers/hashicorp/google-beta/latest/docs/resources/bigquery_table) 資源。在資料欄的結構定義定義中設定 `dataGovernanceTagsInfo` 物件。
+如要在建立資料表時將資料治理標記附加至資料欄，請使用 `google-beta` 供應商中的 [`google_bigquery_table`](https://registry.terraform.io/providers/hashicorp/google-beta/latest/docs/resources/bigquery_table) 資源。在資料欄的結構定義定義中設定 `dataGovernanceTagsInfo` 物件。
 
 下列範例會建立資料表，並將資料治理標記附加至資料欄：
 
@@ -1667,15 +1663,15 @@ EOF
 * `DATASET_ID`：資料表所在的資料集 ID。
 * `TABLE_ID`：要建立的資料表 ID。
 * `COLUMN_NAME`：要標記的資料欄名稱。
-* `PROJECT_ID`： Google Cloud 專案的 ID。如要提供組織 (而非專案) 做為標記的上層，請改用 `ORGANIZATION_ID` 做為標記索引鍵格式 (`ORGANIZATION_ID/TAG_KEY`)。
+* `PROJECT_ID`： Google Cloud 專案的 ID。如要提供組織 (而非專案) 做為標記的父項，請改用 `ORGANIZATION_ID` 做為標記索引鍵格式 (`ORGANIZATION_ID/TAG_KEY`)。
 * `TAG_KEY`：標記鍵的簡稱。
 * `TAG_VALUE`：要附加的標記值簡稱。
 
-#### 為現有資料表新增標記
+#### 在現有資料表新增標記
 
-如要為現有資料表中的資料欄附加或更新資料治理標記，請更新 `google_bigquery_table` 資源中的資料欄結構定義，以納入或修改 `dataGovernanceTagsInfo` 物件，然後套用更新後的設定。
+如要附加或更新現有資料表中資料欄的資料治理標記，請更新 `google_bigquery_table` 資源中的資料欄結構定義，以納入或修改 `dataGovernanceTagsInfo` 物件，然後套用更新後的設定。
 
-**注意：**在資料表資料欄結構定義中新增、修改或清除 `dataGovernanceTagsInfo`，會就地執行，不會重新建立資料表。
+**注意：**在資料表資料欄結構定義中新增、修改或清除 `dataGovernanceTagsInfo` 時，系統會就地執行，不會重新建立資料表。
 
 如要在 Google Cloud 專案中套用 Terraform 設定，請完成下列各節的步驟。
 
@@ -1714,7 +1710,7 @@ EOF
    terraform init
    ```
 
-   如要使用最新版 Google 供應商，請視需要加入 `-upgrade` 選項：
+   如要使用最新版 Google 供應商，可以視需要加入 `-upgrade` 選項：
 
    ```
    terraform init -upgrade
@@ -1736,7 +1732,7 @@ EOF
    ```
 
    等待 Terraform 顯示「Apply complete!」訊息。
-3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)即可查看結果。在 Google Cloud 控制台的使用者介面中，前往資源頁面，確認 Terraform 已建立或更新資源。
+3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)即可查看結果。在 Google Cloud 控制台的 UI 中前往資源，確認 Terraform 已建立或更新資源。
 
 **注意：**Terraform 範例通常會假設 Google Cloud 專案已啟用必要的 API。
 
@@ -1767,7 +1763,7 @@ EOF
 ```
 ```
 
-#### 為現有資料表新增標記
+#### 在現有資料表新增標記
 
 1. 使用 [`tables.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get?hl=zh-tw) 方法擷取目前的資料表資源。
 2. 修改資料表資源，加入目標資料欄的 `dataGovernanceTagsInfo` 欄位。
@@ -1876,7 +1872,7 @@ resource "google_bigquery_datapolicyv2_data_policy" "raw_policy" {
    terraform init
    ```
 
-   如要使用最新版 Google 供應商，請視需要加入 `-upgrade` 選項：
+   如要使用最新版 Google 供應商，可以視需要加入 `-upgrade` 選項：
 
    ```
    terraform init -upgrade
@@ -1898,7 +1894,7 @@ resource "google_bigquery_datapolicyv2_data_policy" "raw_policy" {
    ```
 
    等待 Terraform 顯示「Apply complete!」訊息。
-3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)即可查看結果。在 Google Cloud 控制台的使用者介面中，前往資源頁面，確認 Terraform 已建立或更新資源。
+3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)即可查看結果。在 Google Cloud 控制台的 UI 中前往資源，確認 Terraform 已建立或更新資源。
 
 **注意：**Terraform 範例通常會假設 Google Cloud 專案已啟用必要的 API。
 
@@ -1974,7 +1970,7 @@ curl --request POST \
 
    將 `ETAG` 替換為上一步中 `GET` 要求傳回的 `etag` 值。
 
-   或者，您也可以使用 `addGrantees` 方法，將使用者新增至政策：
+   或者，您也可以使用 `addGrantees` 方法將使用者新增至政策：
 
    ```
    curl -X POST \
@@ -2027,31 +2023,100 @@ curl --request GET \
 --compressed
 ```
 
+### 查看附加至資料欄的資料治理標記
+
+您可以使用 SQL (`INFORMATION_SCHEMA` 檢視表)、 Google Cloud 控制台、bq 工具或 BigQuery API，查看附加至頂層資料欄和巢狀 `STRUCT` (或 `RECORD`) 葉欄位的資料治理標記。
+
+### SQL
+
+如要查看附加至頂層資料欄的資料治理標記，請查詢 [`INFORMATION_SCHEMA.COLUMNS` 檢視表](https://docs.cloud.google.com/bigquery/docs/information-schema-columns?hl=zh-tw)。如要查看附加至 `STRUCT` (或 `RECORD`) 欄中巢狀葉欄位的資料治理標記，請查詢 [`INFORMATION_SCHEMA.COLUMN_FIELD_PATHS` 檢視表](https://docs.cloud.google.com/bigquery/docs/information-schema-column-field-paths?hl=zh-tw)。
+
+下列查詢會傳回附加至資料表中頂層資料欄的資料治理標記：
+
+```
+SELECT
+  table_name,
+  column_name,
+  tag.key AS tag_key,
+  tag.value AS tag_value
+FROM
+  `PROJECT_ID.DATASET_ID.INFORMATION_SCHEMA.COLUMNS`,
+  UNNEST(data_governance_tags) AS tag
+WHERE
+  table_name = 'TABLE_ID';
+```
+
+下列查詢會傳回附加至資料表中 `STRUCT` (或 `RECORD`) 資料欄內頂層資料欄和巢狀欄位的資料治理標記：
+
+```
+SELECT
+  table_name,
+  column_name,
+  field_path,
+  tag.key AS tag_key,
+  tag.value AS tag_value
+FROM
+  `PROJECT_ID.DATASET_ID.INFORMATION_SCHEMA.COLUMN_FIELD_PATHS`,
+  UNNEST(data_governance_tags) AS tag
+WHERE
+  table_name = 'TABLE_ID';
+```
+
+更改下列內容：
+
+* `PROJECT_ID`：包含資料集的專案 ID。
+* `DATASET_ID`：資料表所在資料集的 ID。
+* `TABLE_ID`：資料表名稱。
+
+### 控制台
+
+1. 前往 Google Cloud 控制台的「BigQuery」頁面。
+
+   [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
+2. 在「Explorer」窗格中，展開專案和資料集，然後選取資料表。
+3. 按一下「Schema」(結構定義) 分頁標籤，查看附加至各資料欄或巢狀欄位的資料治理標記。
+
+### bq CLI
+
+執行 [`bq show` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_show)並加上 `--schema` 旗標，檢查資料欄和巢狀 `fields` 上的 `dataGovernanceTagsInfo` 物件：
+
+```
+bq show \
+    --project_id=PROJECT_ID \
+    --schema \
+    --format=prettyjson \
+    DATASET_ID.TABLE_ID
+```
+
+### API
+
+呼叫 [`tables.get` 方法](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get?hl=zh-tw)，並檢查 `schema.fields` 中每個資料欄或巢狀欄位的 `dataGovernanceTagsInfo` 欄位。
+
 ### 與其他功能的互動
 
 本節說明資料治理標記如何與其他 BigQuery 功能互動。
 
 | 功能 | 互動 |
 | --- | --- |
-| 資訊結構定義 | 附加至資料欄的資料治理標記會包含在 `INFORMATION_SCHEMA.COLUMNS` 和 `INFORMATION_SCHEMA.COLUMN_FIELD_PATHS` 檢視表中。 |
+| 資訊結構定義 | 附加至頂層資料欄的資料治理標記會包含在 [`INFORMATION_SCHEMA.COLUMNS`](https://docs.cloud.google.com/bigquery/docs/information-schema-columns?hl=zh-tw) 檢視畫面中，而附加至頂層資料欄或 `STRUCT` (或 `RECORD`) 資料欄內巢狀欄位的標記則會包含在 [`INFORMATION_SCHEMA.COLUMN_FIELD_PATHS`](https://docs.cloud.google.com/bigquery/docs/information-schema-column-field-paths?hl=zh-tw) 檢視畫面中。 |
 | 資料表複製 | 如果資料表具備資料欄層級安全防護功能 (包括含有資料治理標記的資料表)，則無法跨區域複製資料表。 |
-| 時間回溯 | 歷史資料表資料的存取權，取決於附加至資料表的存取權政策和標記。 |
+| 時間回溯 | 歷來資料表資料的存取權，取決於附加至資料表的存取權政策和標記。 |
 
 ### 設定預設資料政策專案
 
-存取受資料治理標記保護的資料欄時，BigQuery 預設只會評估資料表所在專案的資料政策。除非管理員在組織層級設定預設資料政策專案，否則在其他專案定義的資料政策不會套用。
+存取受資料治理標記保護的資料欄時，BigQuery 預設只會評估資料表所在專案的資料政策。除非管理員在組織層級設定預設資料政策專案，否則在其他專案中定義的資料政策不會套用。
 
-如果貴組織已設定預設資料政策專案，BigQuery 會在判斷資料欄存取權時，評估資料表專案和預設資料政策專案的資料政策。
+如果貴組織已設定預設資料政策專案，BigQuery 會同時評估資料表專案和預設資料政策專案的資料政策，判斷資料欄存取權。
 
 如果使用者在資料表專案和預設資料政策專案中，受到衝突的資料政策影響，系統會優先採用資料表專案中的資料政策。
 
-如要使用 DDL 或 `INFORMATION_SCHEMA` 檢視畫面，在組織層級設定或查看 `default_data_policy_projects` 選項，請參閱預設設定說明文件中的「[資料管理設定](https://docs.cloud.google.com/bigquery/docs/default-configuration?hl=zh-tw#data-management-settings)」。
+如要使用 DDL 或 `INFORMATION_SCHEMA` 檢視表，在組織層級設定或查看 `default_data_policy_projects` 選項，請參閱預設設定說明文件中的「[資料管理設定](https://docs.cloud.google.com/bigquery/docs/default-configuration?hl=zh-tw#data-management-settings)」一節。
 
 ### 資料治理標記的限制
 
 * BigQuery Omni 資料表不支援資料欄的資料治理標記。
 * 您可以使用 Google Cloud 控制台查看資料欄的資料治理標記，但無法繫結或解除繫結。
-* 每個資料欄可繫結一個標記，每個資料表最多可繫結 1,000 個不重複標記。
+* 每個資料欄可繫結一個標記，每個資料表最多可繫結 1000 個不重複標記。
 * 如果您使用 BigQuery Storage Read API、`tabledata.list` 呼叫或 Wildcard 資料表查詢已加上標記的資料欄，除非資料政策授予您存取權，否則會收到存取遭拒錯誤。
 * 如果是 `STRUCT` 欄位，您只能將資料治理標記套用至葉欄位。
 * 您可以刪除附加至資料欄的標記值。如果刪除標記值，標記繫結仍會保留在資料欄上，但由於標記值已不存在，您可能無法存取該資料欄。
@@ -2072,11 +2137,11 @@ curl --request GET \
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-11 (世界標準時間)。
+上次更新時間：2026-11-20 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-11 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-20 (世界標準時間)。"],[],[]]

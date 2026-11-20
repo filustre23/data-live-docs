@@ -165,10 +165,3 @@ User-definable feature flags for assessment tasks.
 | --- | --- |
 | `addShareableDataset` | `boolean`  Optional. Whether to create a dataset containing non-PII data in addition to the output dataset. |
 | `generateTcoReport` | `boolean`  Optional. Whether the TCO report Google Doc generation is allowlisted for the project. |
-
-## TranslationConfigDetails
-
-The translation config to capture necessary settings for a translation task and subtask.
-
-| JSON representation |
-| --- |

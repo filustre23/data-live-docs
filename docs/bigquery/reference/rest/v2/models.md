@@ -182,7 +182,3 @@ Indicates the type of the Model.
 | `DNN_REGRESSOR` | DNN regressor model. |
 | `XGBOOST` | An imported XGBoost model. |
 | `BOOSTED_TREE_REGRESSOR` | Boosted tree regressor model. |
-| `BOOSTED_TREE_CLASSIFIER` | Boosted tree classifier model. |
-| `ARIMA` | ARIMA model. |
-| `AUTOML_REGRESSOR` | AutoML Tables regression model. |
-|

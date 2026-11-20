@@ -803,5 +803,4 @@ public class GetIamPolicy {
     DataPolicyName resourceName = DataPolicyName.of(projectId, location, dataPolicyId);
 
     GetIamPolicyRequest request =
-        GetIamPolicyRequest.newBuilder().setResource(resourceName.toString()).build
 ```

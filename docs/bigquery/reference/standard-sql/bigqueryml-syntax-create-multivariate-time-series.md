@@ -517,16 +517,4 @@ This option accepts the following values:
 * `CZ`: Czechia
 * `DE`: Germany
 * `DK`: Denmark
-* `DZ`: Algeria
-* `EC`: Ecuador
-* `EE`: Estonia
-* `EG`: Egypt
-* `ES`: Spain
-* `FI`: Finland
-* `FR`: France
-* `GB`: United Kingdom
-* `GR`: Greece
-* `HK`: Hong Kong
-* `HU`: Hungary
-* `ID`: Indonesia
-* `IE`: Ireland
+* `DZ`: Al

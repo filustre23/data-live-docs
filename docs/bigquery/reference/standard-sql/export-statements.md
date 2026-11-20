@@ -267,11 +267,5 @@ AS (
         timestamp,
         latitude,
         longitude)) AS message
-  FROM `myproject.real_time_taxi_streaming.taxi_rides`
-  WHERE ride_status = 'enroute'
-);
+  FROM `myproje
 ```
-
-## Export to Spanner
-
-You can ex

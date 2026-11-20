@@ -118,7 +118,3 @@ Credential to use with a connection.
 | --- | --- |
 | Union field `credential`. Credential specific to the underlying data source. `credential` can be only one of the following: | |
 | `cloud_sql` | `CloudSqlCredential`  Credential for Cloud SQL database. |
-
-## CreateConnectionRequest
-
-The request for `ConnectionService.CreateConnection`.

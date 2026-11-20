@@ -369,13 +369,4 @@ bytes 43-1999999
 2. 收到指出您應該要重試要求的 `HTTP 503` 回應。
 3. 等待 1 秒鐘 + random\_number\_milliseconds 毫秒，然後重試要求。
 4. 收到指出您應該要重試要求的 `HTTP 503` 回應。
-5. 等待 2 秒鐘 + random\_number\_milliseconds 毫秒，然後重試要求。
-6. 收到指出您應該要重試要求的 `HTTP 503` 回應。
-7. 等待 4 秒鐘 + random\_number\_milliseconds 毫秒，然後重試要求。
-8. 收到指出您應該要重試要求的 `HTTP 503` 回應。
-9. 等待 8 秒鐘 + random\_number\_milliseconds 毫秒，然後重試要求。
-10. 收到指出您應該要重試要求的 `HTTP 503` 回應。
-11. 等待 16 秒鐘 + random\_number\_milliseconds 毫秒，然後重試要求。
-12. 停止。報告或記錄錯誤。
-
-在以上流程中，random\_number\_milliseconds 是小於或等於
+5. 等待 2 秒鐘 + random\_number\_mi

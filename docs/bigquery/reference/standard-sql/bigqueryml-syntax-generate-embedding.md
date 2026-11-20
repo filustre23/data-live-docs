@@ -315,14 +315,3 @@ ML.GENERATE_EMBEDDING(
     you can also specify a `STRUCT` column that contains a
     combination of `STRING`, `ARRAY<STRING>`, `ObjectRef`,
     and `ARRAY<ObjectRef>` values.
-* `QUERY_STATEMENT`: the GoogleSQL query
-  that generates the input data for the function.
-
-  + If you are creating embeddings from a standard table, the query must
-    produce a column named `content`, which you can generate as follows:
-
-    - For text embeddings, you can pull the value from a `STRING`
-      column, or you can specify a string literal in the query.
-    - For visual content embeddings, you can provide an
-      [`ObjectRefRuntime`](/bigquery/docs/reference/standard-sql/objectref_functions#objectrefruntime)
-      value for the `content` column. You

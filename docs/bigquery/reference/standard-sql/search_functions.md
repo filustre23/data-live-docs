@@ -337,8 +337,5 @@ SELECT
 
   -- FALSE: Backticks don't have special meaning for search_data and are
   -- not delimiters in the default LOG_ANALYZER.
-  SEARCH('`foobar-example`', '`foobar-example`') AS e,
-
-  -- TRUE: An exact match is found after the delimiter in search_data.
-  SEARCH('foobar@example.com',
+  SEARCH('`foobar-example`
 ```

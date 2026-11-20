@@ -858,7 +858,5 @@ public class ListDataPolicies {
     LocationName parent = LocationName.of(projectId, location);
 
     ListDataPoliciesRequest request =
-        ListDataPoliciesRequest.newBuilder().setParent(parent.toString()).build();
-
-    try (DataPolicyServiceClient client =
+        ListDataPoliciesRequest.newBuilder().setParent(parent.
 ```

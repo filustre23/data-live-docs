@@ -359,8 +359,3 @@ field names of the Gemini Enterprise Agent Platform endpoint request and respons
 For XGBoost models, `INPUT` field names must be identical to the names in the `feature_names` field if `feature_names` field is populated in the XGBoost model file. See [XGBoost INPUT OUTPUT clause](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-xgboost#input_output_clause) for more details.
 
 #### `field_type`
-
-[Remote models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https) support the
-following BigQuery data types for `INPUT` and `OUTPUT` clauses:
-
-* Simple type: [BOOL](/bigquery/docs/reference/standard-sql/data-types#boolean_type), [INT64](/bigquery/docs/reference/standard-sql/data-types#integer_types), [FLOAT64](/bigquery/docs/reference/standard-sql/data-types#floating_point_types), [NUMERIC](/bigquery/docs/reference/standard-sql/data-types#decimal_types), [BIGNUMERIC](/bigquery/docs/reference/standard-sql/data-types#decimal_types),

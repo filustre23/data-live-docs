@@ -217,6 +217,4 @@ bq mk
   | `watermarkColumns` | 選用 | 如果使用遞增擷取，來源資料表欄位 (通常是日期時間) 會用於追蹤上次成功同步處理的時間點，讓連接器能有效率地查詢及轉移自該特定時間以來建立或修改的記錄。如要進行增量移轉，則必須填寫這個欄位。 |
   | `primaryKeys` | 選用 | 如果使用增量擷取，則為不重複資料欄或資料欄組合，用於不重複識別來源資料表中的每個資料列。如要進行增量移轉，則必須填寫這個欄位。 |
   | `valueType` | 選用 | 控管 ServiceNow 的特定資料類型如何對應至 BigQuery 資料類型。 |
-  | `connector.legacyMapping` | 必填 | 設為 `true` (預設)，即可使用[舊版資料類型對應](#data_type_mapping)。設為 `false` 即可使用更新版資料類型對應。如要進行增量移轉，這個值必須是 `false`。如要進一步瞭解資料類型對應更新，請參閱「[2027 年 3 月 16 日](https://docs.cloud.google.com/bigquery/docs/transfer-changes?hl=zh-tw#Mar16-servicenow)」。 |
-
-  在增量移轉期間指定多項資產時，`watermarkColumns` 和 `primaryKeys` 欄位的值會對應至 `assets` 欄位中的值位置。請
+  | `connector.legacyMapping` | 必填 | 設為 `t` |

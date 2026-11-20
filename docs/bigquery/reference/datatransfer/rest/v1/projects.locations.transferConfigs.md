@@ -102,4 +102,3 @@ Options customizing the time based transfer schedule. Options are migrated from 
 
 | JSON representation |
 | --- |
-| ``` {   "schedule": string,   "startTime": string,   "endTime": string } ``` |

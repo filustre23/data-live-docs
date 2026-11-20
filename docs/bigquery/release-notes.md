@@ -27,6 +27,51 @@ To get the latest product updates delivered to you, add the URL of this page to 
 reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators), or add the
 [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## November 19, 2026
+
+Feature
+
+You can now [enable agent observability with the Data Engineering Agent](/bigquery/docs/data-engineering-agent-pipelines#monitor-agent)
+to monitor the agent's token consumption, request volume, and model latency in
+Cloud Monitoring and inspect execution traces and tool calls in Cloud Trace.
+This feature is
+[generally available](https://cloud.google.com/products#product-launch-stages)
+(GA).
+
+Feature
+
+You can now create [AI indexes](/bigquery/docs/ai-index-overview) using the
+[`CREATE AI INDEX` statement](/bigquery/docs/reference/standard-sql/data-definition-language#create_ai_index)
+to perform natural language searches across table columns with the
+[`AI.SEARCH` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-search)
+without manually generating embeddings or managing models. To learn how to
+create, monitor, and delete AI indexes, see
+[Use AI indexes](/bigquery/docs/ai-index). This feature is in
+[Preview](https://cloud.google.com/products#product-launch-stages).
+
+Feature
+
+You can use the
+[validation service](/bigquery/docs/migration/migration-validation) in the
+BigQuery Migration Service to verify that tables migrated from your source data
+warehouse match your target tables in BigQuery across schemas, aggregate
+metrics, and row-level data. This feature is available in
+[Preview](https://cloud.google.com/products#product-launch-stages).
+
+Security
+
+A path traversal vulnerability in workspace directory handling and Git
+integration was discovered in Dataform, BigQuery Studio, and Colab Enterprise.
+For more information, see the
+[GCP-2026-084](/bigquery/docs/security-bulletins#gcp-2026-084)
+security bulletin.
+
+Feature
+
+BigQuery [generative AI functions](/bigquery/docs/generative-ai-overview#locations)
+now support the `gemini-4-neon` model. This model is
+[generally available](https://cloud.google.com/products#product-launch-stages).
+
 ## November 18, 2026
 
 Feature
@@ -157,6 +202,16 @@ now support the `gemini-4-hydrogen` model. This model is
 [generally available](https://cloud.google.com/products#product-launch-stages).
 
 ## November 11, 2026
+
+Feature
+
+The LangGraph and LangChain BigQuery callback handler for
+[BigQuery agent analytics](/bigquery/docs/bigquery-agent-analytics)
+is
+[generally available](https://cloud.google.com/products#product-launch-stages)
+(GA). This callback handler lets you stream agent execution events from
+LangGraph or LangChain agents directly into BigQuery to analyze
+and evaluate agent interactions.
 
 Feature
 
@@ -4994,26 +5049,4 @@ Colab Enterprise notebooks in BigQuery let you do the following in [Preview](htt
 
 Feature
 
-You can now [publish the results of a data quality scan as Dataplex Universal Catalog metadata](/bigquery/docs/data-quality-scan). Previously, data quality scan results were published only to the Google Cloud console. The latest results are saved to the entry that represents the source table. You can view the results in the Google Cloud console. If you want to enable catalog publishing for an existing data quality scan, you must edit the scan and re-enable the publishing option. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
-
-Feature
-
-You can now use data insights to have Gemini [generate table and column descriptions from table metadata](/bigquery/docs/data-insights). This feature is in [Preview](https://cloud.google.com/products#product-launch-stages).
-
-## June 16, 2025
-
-Feature
-
-The BigQuery migration assessment is now available for workflows that use [Cloudera and Apache Hadoop](/bigquery/docs/migration-assessment#hadoop-cloudera). This feature is in [Preview](https://cloud.google.com/products#product-launch-stages).
-
-Feature
-
-The [Merchant Center best sellers report](/bigquery/docs/merchant-center-best-sellers-schema) supports multi-client accounts (MCAs). If you have an MCA, you can use the `aggregator_id` to query the tables. The `BestSellersEntityProductMapping` table maps the best-selling entities to the products in the sub-accounts' inventory. This provides a consolidated view of best-selling products, which you can then join with product data for more detailed insights. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
-
-Feature
-
-BigQuery now offers the following Gemini-enhanced SQL translation features:
-
-* Create [Gemini-based configuration YAML files](/bigquery/docs/config-yaml-translation#ai_yaml_guidelines) to generate AI suggestions for batch or interactive SQL translations. This feature is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
-* After making a batch SQL translation, review your translation output, including Gemini-based suggestions, using the [code tab](/bigquery/docs/batch-sql-translator#code-tab) and [configuration tab](/bigquery/docs/batch-sql-translator#configuration_tab). This feature is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
-* When making an interactive SQL translation, [create and apply Gemini-enhanced translation rules](/bigquery/docs/interactive-sql-translator#create-apply-rules) to customize your SQL inputs. This feature is in [Preview](https://cloud.google.com/products#product-launch-stages).
+You can now [publish the results of a data quality scan as Dataplex Universal Catalog met](/bigquery/docs/data-quality-scan)

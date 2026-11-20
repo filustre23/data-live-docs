@@ -199,11 +199,5 @@ bq mk
 --target_dataset=mydataset
 --data_source=facebook_ads
 --display_name='My Transfer'
---params='{"connector.authentication.oauth.clientId": "1650000000",
-    "connector.authentication.oauth.clientSecret":"TBA99550",
-    "connector.authentication.oauth.refreshToken":"abcdef",
-    "connector.authorizedAdAccountsOnly":true,
-    "connector.actionCollections":["Actions", "Conversions"],
-    "connector.genericBreakdowns":["PublisherPlatform", "PlatformPosition"],
-    "connector.actionBreakdowns":["ActionDevice", "ActionType"]}'
+--params
 ```

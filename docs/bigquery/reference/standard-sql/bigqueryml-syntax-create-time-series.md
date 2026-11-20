@@ -519,16 +519,4 @@ This option accepts the following values:
 
 **Continental regions**
 
-* `NA`: North America
-* `JAPAC`: Japan and Asia Pacific
-* `EMEA`: Europe, the Middle East and Africa
-* `LAC`: Latin America and the Caribbean
-
-**Countries**
-
-* `AE`: United Arab Emirates
-* `AR`: Argentina
-* `AT`: Austria
-* `AU`: Australia
-* `BE`: Belgium
-* `BR`: Brazil
+<

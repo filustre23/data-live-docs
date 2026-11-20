@@ -499,13 +499,4 @@ columns chosen for the current tree.
 
 **Arguments**
 
-If you aren't running hyperparameter tuning, then you can specify a `FLOAT64`
-value between `0` and `1.0`. The default value is `1.0`.
-
-If you are running hyperparameter tuning, use one of the following options:
-
-* The `HPARAM_RANGE` keyword and two `FLOAT64` values that define
-  the range of the hyperparameter. For example,
-  `COLSAMPLE_BYLEVEL = HPARAM_RANGE(0, 0.3)`.
-* The `HPARAM_CANDIDATES` keyword and an array of `FLOAT64` values
-  that provide discrete values to use for the hyperparameter. For exam
+If you aren't running hyperparameter tuning, then you can specify a `FLOAT64</`

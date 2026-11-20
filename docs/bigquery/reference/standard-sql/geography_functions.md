@@ -140,13 +140,4 @@ This is advanced functionality for interoperability with systems utilizing the
 * To compute the covering of a complex `GEOGRAPHY`, use
   [S2\_COVERINGCELLIDS](#s2_coveringcellids).
 
-**Return type**
-
-`INT64`
-
-**Example**
-
-```
-WITH data AS (
-  SELECT 1 </
-```
+<

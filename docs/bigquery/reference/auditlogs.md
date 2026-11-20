@@ -429,16 +429,3 @@ The following audit logs are associated with methods belonging to
 * **Filter for this method**: `protoPayload.methodName="jobservice.cancel"`
 
 #### `getqueryresults`
-
-* **Method**: `jobservice.getqueryresults`
-* **Audit log type**: [Data access](/logging/docs/audit#data-access)
-* **Permissions**:
-  + `bigquery.jobs.create - ADMIN_WRITE`
-  + `bigquery.tables.getData - DATA_READ`
-* **Method is a long-running or streaming operation**:
-  No.
-* **Filter for this method**: `protoPayload.methodName="jobservice.getqueryresults"`
-
-#### `insert`
-
-* **Method**: `jobservice.`

@@ -205,7 +205,5 @@ func main() {
 }
 
 // executeTranslationWorkflow constructs a migration workflow that performs batch SQL translation.
-func executeTranslationWorkflow(ctx context.Context, client *migration.Client, projectID, location, outPath string) (*migrationpb.MigrationWorkflow, error) {
-
-	
+func executeTranslationWorkflow(ctx context.Context, client *migration.Client, projectID, location,
 ```

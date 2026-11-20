@@ -175,16 +175,4 @@ SELECT
     'your_surrogate(36):AWDeSznl9C7+NzTaCgiqiEAZ8Y55fZSuvCQ=',
     'your_surrogate',
     'aad') AS results;
-
-/*--------------------------------------+
- | results                              |
- +--------------------------------------+
- | Plaintext                            |
- +--------------------------------------*/
-```
-
-## `DLP_KEY_CHAIN`
-
-```
-DLP_KEY_CHAIN
 ```

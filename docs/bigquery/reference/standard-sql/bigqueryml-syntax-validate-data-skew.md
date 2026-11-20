@@ -254,10 +254,4 @@ IF(ARRAY_LENGTH(anomalies) > 0)
         fare,
         pickup_longitude,
         company,
-        payment_type,
-        2 AS label
-      FROM mydataset.new_training_data
-    );
-
-    SELECT
 ```

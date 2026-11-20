@@ -751,8 +751,5 @@ bq update --connection --connection_type='CLOUD_SQL'
 
 ```
 import google.api_core.exceptions
-from google.cloud import bigquery_connection_v1
-from google.protobuf import field_mask_pb2
-
-client = bigquery_connection_v1.
+from google.cloud import
 ```

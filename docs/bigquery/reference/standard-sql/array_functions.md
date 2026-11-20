@@ -310,14 +310,4 @@ Additional details:
 
 * The input array can contain `NULL` elements. `NULL` elements are included
   in the resulting array.
-* Returns `NULL` if `array_to_slice`, `start_offset`, or `end_offset` is
-  `NULL`.
-* Returns an empty array if `array_to_slice` is empty.
-* Returns an empty array if the position of the `start_offset` in the array is
-  after the position of the `end_offset`.
-
-**Return type**
-
-`ARRAY`
-
-**Examples**
+* Returns `NULL` if `array_to_slice`,

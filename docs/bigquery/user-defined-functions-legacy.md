@@ -224,7 +224,5 @@ bigquery.defineFunction(
 
   ['title', 'num_requests'],  // Input column names
 
-  // JSON representation of the output schema
-  [{name: 'title', type: 'string'},
-   {name: 'requests', type: 'integer'}],
+  // JSON representation of the
 ```

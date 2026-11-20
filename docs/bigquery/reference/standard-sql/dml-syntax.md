@@ -300,16 +300,5 @@ This is the `Warehouse` table after you run the query:
 +--------------+-------+
 |  warehouse   | state |
 +--------------+-------+
-| warehouse #1 | WA    |
-| warehouse #2 | CA    |
-| warehouse #3 | WA    |
-| warehouse #4 | WA    |
-| warehouse #5 | NY    |
-+--------------+-------+
+| warehouse #1
 ```
-
-#### `INSERT` with `STRUCT` types
-
-The following example shows how to insert a row into a table, where some of
-the fields are
-[`STRUCT` types](/bigquery/docs/reference/standard-sql/data-types#struct_type).

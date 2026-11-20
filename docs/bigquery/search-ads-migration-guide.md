@@ -125,6 +125,4 @@ SELECT
   C.campaign_status,
   SUM(cs.metrics_impressions) AS Impressions,
   SUM(cs.metrics_clicks) AS Clicks,
-  (SUM(cs.metrics_cost_micros) / 1000000) AS Cost
-FROM
 ```

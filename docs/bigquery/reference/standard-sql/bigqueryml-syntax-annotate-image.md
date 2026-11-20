@@ -212,10 +212,3 @@ SELECT * FROM `mydataset.label_score_next`;
 * For more information about supported SQL statements and functions for
   generative AI models, see
   [End-to-end user journeys for generative AI models](/bigquery/docs/e2e-journey-genai).
-
-
-
-
-Send feedback
-
-Except as otherwise noted, the content of this page is licensed under the

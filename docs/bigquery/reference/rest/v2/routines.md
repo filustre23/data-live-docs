@@ -129,6 +129,4 @@ Represents the kind of a given argument.
 | Enums | |
 | --- | --- |
 | `ARGUMENT_KIND_UNSPECIFIED` | Default value. |
-| `FIXED_TYPE` | The argument is a variable with fully specified type, which can be a struct or an array, but not a table. |
-| `ANY_TYPE` | The argument is any type, including struct or array, but not a table. |
-| `FIXED_TABLE` | The argument is a table with fully specified column names and types. |
+|  |

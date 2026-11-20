@@ -176,13 +176,4 @@ GROUP BY S_location_id;
  | S_location_id | true_total_population | overcounted_population |
  +---------------+-----------------------+------------------------+
  | 101           | 1000                  | 2000                   |
- +---------------+-----------------------+------------------------*/
-```
-
-## `ANY_VALUE`
-
-```
-ANY_VALUE(
-  expression
-  [ WHERE
 ```

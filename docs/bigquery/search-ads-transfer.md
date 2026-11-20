@@ -189,12 +189,4 @@ Search Ads 360 連接器的 BigQuery 資料移轉服務支援下列資料移轉�
 以下為選用旗標：
 
 * `--project_id`：指定要使用的專案。如未指定旗標，則會使用預設專案。
-* `--service_account_name`：指定要用於 Search Ads 360 移轉驗證的服務帳戶，而非使用者帳戶。
-
-```
-bq mk \
---transfer_config \
---project_id=PROJECT_ID \
---target_dataset=DATASET \
---display_name=
-```
+* `--service_account_name`：指定要用於 Search Ads 360 移轉驗證的服務帳戶，而非使

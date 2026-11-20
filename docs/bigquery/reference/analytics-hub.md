@@ -229,6 +229,4 @@ func main() {
 	ahubClient, err := analyticshub.NewClient(ctx)
 	if err != nil {
 		log.Fatalf("NewClient: %v", err)
-	}
-	defer ahubClient.
 ```

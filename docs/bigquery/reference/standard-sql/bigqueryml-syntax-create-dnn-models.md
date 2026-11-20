@@ -451,17 +451,4 @@ A `BOOL` value. The default value is `TRUE`.
 
 **Description**
 
-The minimum relative loss improvement that is necessary to continue training
-when [`EARLY_STOP`](#early_stop) is set to `TRUE`. For example, a value of
-`0.01` specifies that each iteration must reduce the loss by 1% for training
-to continue.
-
-**Arguments**
-
-A `FLOAT64` value. The default value is `0.01`.
-
-### `INPUT_LABEL_COLS`
-
-**Syntax**
-
-`INPUT_LABEL_COLS = string_`
+The minimum relative loss i

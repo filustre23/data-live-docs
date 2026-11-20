@@ -339,15 +339,4 @@ Only aggregate analytic functions can use a window frame clause.
     - `current_row`: The window frame starts at the current row.
   + Define the end of the window frame with `numeric_preceding`,
     `numeric_following`, `current_row`, or `unbounded_following`.
-    - `numeric_preceding` or `numeric_following`: The end of the window
-      frame is relative to the current row.
-    - `current_row`: The window frame ends at the current row.
-    - `unbounded_following`: The window frame ends at the end of the
-      partition.
-* `frame_start`: Creates a window frame with a lower boundary.
-  The window frame ends at the current row.
-
-  + `unbounded_preceding`: The window frame starts at the beginning of the
-    partition.
-  + `numeric_preceding`: The start of the window frame is relative to the
-    current row.
+    - `numeric_preceding` or `numeric_followin`

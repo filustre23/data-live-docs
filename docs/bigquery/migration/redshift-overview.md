@@ -235,6 +235,4 @@ BigQuery 和 Amazon Redshift 都是以大規模平行處理 (MPP) 架構為基�
 
 BigQuery 從一開始就將運算、記憶體和儲存空間分開處理，而非綁在一起。
 
-BigQuery 運算資源是以[運算單元](https://docs.cloud.google.com/bigquery/docs/slots?hl=zh-tw)為單位，這是執行查詢所需的運算能力單位。Google 會管理封裝插槽的整個基礎架構，因此您只需要為 BigQuery 工作負載選擇適當的插槽數量。請參閱[容量規劃](#capacity_planning)，協助決定資料倉儲要購買多少個時段。BigQuery 記憶體是由[遠端分散式服務](https://cloud.google.com/blog/products/gcp/in-memory-query-execution-in-google-bigquery?hl=zh-tw)提供，並透過 Google 的 Petabit 網路連線至運算單元，所有作業都由 Google 管理。
-
-BigQuery 和 Amazon Redshift 都使用欄式儲存空間，但 BigQuery 使用的欄式儲存空間
+BigQuery 運算資源是以

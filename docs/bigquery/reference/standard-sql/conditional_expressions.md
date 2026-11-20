@@ -305,13 +305,5 @@ SELECT
 ### `IFNULL`
 
 ```
-IFNULL(expr, null_result)
+IFNULL(expr
 ```
-
-**Description**
-
-If `expr` evaluates to `NULL`, returns `null_result`. Otherwise, returns
-`expr`.
-
-If `expr` is non-`NULL`, the expression behaves as if `null_result` isn't
-evaluated: evaluation errors in `null_result` are i

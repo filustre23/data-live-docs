@@ -200,7 +200,3 @@ bq mk \
 * NAME 是資料移轉設定的顯示名稱。移轉作業名稱可以是任意值，日後需要修改移轉作業時，能夠據此識別即可。
 * DATASET 是移轉設定的目標資料集。
 * DESTINATION\_KEY：[Cloud KMS 金鑰資源 ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw#key_resource_id)，例如 `projects/project_name/locations/us/keyRings/key_ring_name/cryptoKeys/key_name`。
-* PARAMETERS 包含所建立移轉設定的參數，格式為 JSON。例如：`--params='{"param":"param_value"}'`。
-  + `destination_table_name_template`：目的地 BigQuery 資料表的名稱。
-  + `data_path_template`：包含要移轉檔案的 Cloud Storage URI。可以使用[萬用字元](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer-overview?hl=zh-tw#wildcard-support)和[參數](https://docs.cloud.google.com/bigquery/docs/gcs-transfer-parameters?hl=zh-tw)。
-  + `write_disposition`

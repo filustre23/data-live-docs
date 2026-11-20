@@ -258,12 +258,5 @@ FUNC(named_argument=>x).  # Some function
 (x).FUNC()  # Error: The first argument can't be a named argument.
 
 CAST(x AS INT64)
-(x).CAST(AS INT64)  # Error: CAST syntax isn't supported in chained function calls.
-
-GROUPING(x)
-(x).GROUPING()  # Error: The argument isn't an expression.
+(x).CAST(AS INT64)
 ```
-
-## SAFE. prefix
-
-**Syntax:**

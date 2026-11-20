@@ -87,17 +87,17 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 設定適當權限，以便建立、編輯或查看筆記本。
 
-凡是具備 [Dataform 管理員角色](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#dataform.admin) (`roles/dataform.admin`) 的使用者，都擁有專案中所有筆記本的擁有者存取權。
+凡是具備 [Dataform 管理員角色](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#dataform.admin) (`roles/dataform.admin`) 的使用者，都擁有專案中所有 Notebook 的擁有者存取權。
 
 如要進一步瞭解 BigQuery Identity and Access Management (IAM)，請參閱「[使用 IAM 控管存取權](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)」。
 
 #### 建立 Notebook 的權限
 
-如要取得建立及執行筆記本所需的權限，請要求管理員授予您專案的 [BigQuery Studio 使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.studioUser)  (`roles/bigquery.studioUser`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
+如要取得建立及執行 Notebook 所需的權限，請要求管理員授予您專案的 [BigQuery Studio 使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.studioUser) (`roles/bigquery.studioUser`) IAM 角色。如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
 您或許也能透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)，取得必要權限。
 
-**注意：** 在專案中獲派程式碼建立者角色的使用者，可以使用 Dataform API 或 Dataform 指令列介面 (CLI)，列出該專案中的程式碼資產名稱。
+**注意：**在專案中獲派程式碼建立者角色的使用者，可以使用 Dataform API 或 Dataform 指令列介面 (CLI)，列出該專案中的程式碼資產名稱。
 
 您或許也能透過[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)或其他[預先定義的角色](https://docs.cloud.google.com/iam/docs/roles-overview?hl=zh-tw#predefined)，取得必要權限。如要查看建立及執行 Notebook 的確切必要權限，請展開「Required permissions」(必要權限) 部分：
 
@@ -125,32 +125,32 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 * `aiplatform.notebookRuntimes.list`
 * `aiplatform.operations.list`
 
-**注意：** 建立筆記本時，BigQuery 會授予您該筆記本的 [Dataform 管理員角色](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform?hl=zh-tw#dataform.admin) (`roles/dataform.admin`)。凡是具備 Google Cloud 專案 Dataform 管理員角色的使用者，都擁有該專案中所有 Notebook 的擁有者權限。如要覆寫這項行為，請參閱「[在建立資源時授予特定角色](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#grant-specific-role)」。
+**注意：**建立筆記本時，BigQuery 會授予您該筆記本的 [Dataform 管理員角色](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform?hl=zh-tw#dataform.admin) (`roles/dataform.admin`)。凡是具備 Google Cloud 專案 Dataform 管理員角色的使用者，都擁有該專案中所有 Notebook 的擁有者存取權。如要覆寫這項行為，請參閱「[在建立資源時授予特定角色](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#grant-specific-role)」。
 
-#### 編輯 Notebook 的角色
+#### 編輯筆記本的角色
 
 如要編輯及執行 Notebook，您必須具備下列 IAM 角色：
 
 * [BigQuery 工作使用者](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.jobUser) (`roles/bigquery.jobUser`)
 * [BigQuery 讀取工作階段使用者](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.readSessionUser) (`roles/bigquery.readSessionUser`)
-* [Notebook 執行階段使用者](https://docs.cloud.google.com/vertex-ai/docs/general/access-control?hl=zh-tw#aiplatform.notebookRuntimeUser) (`roles/aiplatform.notebookRuntimeUser`)
+* [筆記本執行階段使用者](https://docs.cloud.google.com/vertex-ai/docs/general/access-control?hl=zh-tw#aiplatform.notebookRuntimeUser) (`roles/aiplatform.notebookRuntimeUser`)
 * [程式碼編輯器](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#dataform.codeEditor) (`roles/dataform.codeEditor`)
 
 #### 查看 Notebook 的角色
 
-如要查看及執行筆記本，您必須具備下列 IAM 角色：
+如要查看及執行 Notebook，您必須具備下列 IAM 角色：
 
 * [BigQuery 工作使用者](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.jobUser) (`roles/bigquery.jobUser`)
 * [BigQuery 讀取工作階段使用者](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.readSessionUser) (`roles/bigquery.readSessionUser`)
-* [Notebook 執行階段使用者](https://docs.cloud.google.com/vertex-ai/docs/general/access-control?hl=zh-tw#aiplatform.notebookRuntimeUser) (`roles/aiplatform.notebookRuntimeUser`)
+* [筆記本執行階段使用者](https://docs.cloud.google.com/vertex-ai/docs/general/access-control?hl=zh-tw#aiplatform.notebookRuntimeUser) (`roles/aiplatform.notebookRuntimeUser`)
 * [程式碼檢視者](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#dataform.codeViewer) (`roles/dataform.codeViewer`)
 
-#### Notebook 的安全性考量
+#### 筆記本的安全性考量
 
-BigQuery 中的程式碼資產是由 Dataform 提供，因此請考量下列安全性影響，再授予使用者這些資產的存取權：
+BigQuery 中的程式碼資產是由 Dataform 提供，因此請考量下列安全性影響，再決定是否讓使用者存取這些資產：
 
-* 程式碼資產的瀏覽權限由專案層級的 Dataform 權限控管。使用者只要具備 `dataform.repositories.list` 權限 (包含在標準 BigQuery 角色中，例如 [BigQuery 工作使用者](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.jobUser)、[BigQuery Studio 使用者](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.studioUser)和 [BigQuery 使用者](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.user))，就能在 Google Cloud 專案的「Explorer」面板中查看所有程式碼資產，無論這些資產是否由他們建立或與他們共用。如要限制瀏覽權限，可以建立不含 `dataform.repositories.list` 權限的[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)。
-* 凡是與 Dataform 服務代理共用的 Secret，可編輯這些資產的使用者都有可能存取。為確保憑證安全，請限制只有信任的使用者才能建立及編輯權限，並限制 Dataform 服務代理可存取的密鑰。詳情請參閱「[在套件安裝期間存取 Secret](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#secret-access-risk)」。
+* 程式碼資產的瀏覽權限由專案層級的 Dataform 權限控管。使用者只要具備 `dataform.repositories.list` 權限 (包含在 [BigQuery 工作使用者](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.jobUser)、[BigQuery Studio 使用者](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.studioUser)和 [BigQuery 使用者](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.user)等標準 BigQuery 角色中)，就能在 Google Cloud 專案的「Explorer」面板中查看所有程式碼資產，無論這些資產是否由他們建立或與他們共用。如要限制瀏覽權限，可以建立不含 `dataform.repositories.list` 權限的[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)。
+* BigQuery 工作使用者、BigQuery Studio 使用者和 BigQuery 使用者等標準 BigQuery 角色也包含 `dataform.repositories.create` 權限，可讓使用者在 Google Cloud 專案中建立 Dataform 存放區。使用者只要能建立、更新、編輯或編譯 Dataform 存放區，就能在 Google Cloud 專案中，參照或存取與 Dataform 服務代理共用的資源。這項存取權不需要共用資源的直接 IAM 權限，例如 Secret Manager 密鑰、Developer Connect Git 存放區連結，以及用於存放區快照的 Cloud Storage bucket。為保護憑證和儲存空間 bucket，請僅將 Dataform 存放區建立、編輯和編譯權限授予信任的使用者。強制執行 [`constraints/dataform.restrictGitRemotes` 組織政策限制](https://docs.cloud.google.com/dataform/docs/restrict-git-remotes?hl=zh-tw)，並將 Dataform 服務代理的權限範圍限制在必要資源。詳情請參閱「[透過 Dataform 服務代理共用資源存取權](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#service-agent-shared-access)」和「[安裝套件期間的 Secret 存取權](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#secret-access-risk)」。
 
 詳情請參閱「[Dataform 權限的安全性考量](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#security-considerations-permissions)」。
 
@@ -162,7 +162,7 @@ BigQuery 中的程式碼資產是由 Dataform 提供，因此請考量下列安�
 
 Google Cloud 專案中的所有新程式碼資產都會使用預設區域。資產建立後，就無法變更區域。
 
-**重要事項：** 如果在建立程式碼資產時變更區域，該區域會成為後續所有程式碼資產的預設區域。現有程式碼資產不受影響。
+**重要事項：**如果在建立程式碼資產時變更區域，該區域會成為後續所有程式碼資產的預設區域。現有程式碼資產不受影響。
 
 如要設定新程式碼資產的預設區域，請按照下列步驟操作：
 
@@ -172,39 +172,43 @@ Google Cloud 專案中的所有新程式碼資產都會使用預設區域。資�
 2. 在左側窗格中，按一下「folder Files」(檔案)，開啟檔案瀏覽器：
 3. 按一下專案名稱旁的 more\_vert「View files panel actions」(查看檔案面板動作) >「Switch code region」(切換程式碼區域)。
 4. 選取要設為預設值的程式碼區域。
-5. 按一下 [儲存]。
+5. 按一下「儲存」。
 
-如要查看支援的地區清單，請參閱「[BigQuery Studio 位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#bqstudio-loc)」。
+如需支援的地區清單，請參閱「[BigQuery Studio 位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#bqstudio-loc)」。
 
 ### 使用筆記本庫建立筆記本
 
-BigQuery Google Cloud 控制台中的筆記本庫是探索及使用預先建構筆記本範本的中心。
+Google Cloud 控制台中的 BigQuery 筆記本庫是探索及使用預先建構筆記本範本的中心。
 
 如要使用筆記本庫中的範本建立筆記本，請按照下列步驟操作：
 
 1. 前往 Google Cloud 控制台的「BigQuery Studio」。
 
    [前往 BigQuery Studio](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 如要開啟筆記本庫，請在編輯器窗格的分頁列中，按一下「SQL 查詢」 旁的
+2. 如要開啟筆記本庫，請在編輯器窗格的分頁列中，按一下
+   add\_box
+   「SQL 查詢」 旁的
    arrow\_drop\_down
-   箭頭，然後依序點選「筆記本」>「所有範本」。add\_box
+   箭頭，然後依序點選「筆記本」>「所有範本」。
 3. 在筆記本庫中選取範本。例如，您可以選取「**開始使用 BigQuery DataFrames**」。
 
    新的筆記本隨即開啟，其中包含的儲存格會顯示針對 `bigquery-public-data.ml_datasets.penguins` 公開資料集的範例查詢。
-4. 或者，您也可以點選「SQL 查詢」 旁邊的
+4. 或者，您也可以點選
+   add\_box
+   **「SQL 查詢」** 旁邊的
    arrow\_drop\_down
-   箭頭，然後依序點選 **「Notebook」>「空白筆記本」**、
-   **「Notebook」>「BigQuery 範本」**或
-   **「Notebook」>「Spark 範本」**，開啟這些特定範本。add\_box
+   箭頭，然後依序點選**「筆記本」>「空白筆記本」**、
+   **「筆記本」>「BigQuery 範本」**或
+   **「筆記本」>「Spark 範本」**，開啟這些特定範本。
 5. 如要從範本建立可執行的筆記本，請按一下「Use this template」(使用這個範本)。
 6. 選用：如要查看筆記本詳細資料或[版本記錄](#create_a_notebook_from_an_existing_notebook)、新增註解、回覆或取得現有註解的連結，請使用下列工具列：
 
-   「Comments」(註解) 工具列功能目前為[預先發布版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages)。如要提供意見或尋求支援，請傳送電子郵件至 [bqui-workspace-pod@google.com](mailto:bqui-workspace-pod@google.com)。
-7. 選用：在「Comments」(註解) 工具列中，您可以使用「Reference」(參考資料) 面板預覽資料表、快照、檢視表或 materialized view 的結構定義詳細資料，或在新分頁中開啟。面板也會列出最近和已加星號的資源。
+   「Comments」(註解) 工具列功能目前為[預先發布版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages)。如要提供意見回饋或尋求支援，請傳送電子郵件至 [bqui-workspace-pod@google.com](mailto:bqui-workspace-pod@google.com)。
+7. 選用：在「註解」工具列中，您可以使用「參考資料」面板預覽資料表、快照、檢視表或 materialized view 的結構定義詳細資料，或是在新分頁中開啟這些項目。面板也會列出近期和已加星號的資源。
 
 ### 從資料表建立筆記本
 
-如要建立含有特定資料表預設查詢的筆記本，請按照下列步驟操作：
+如要建立包含特定資料表預設查詢的筆記本，請按照下列步驟操作：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
@@ -213,11 +217,11 @@ BigQuery Google Cloud 控制台中的筆記本庫是探索及使用預先建構�
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
 3. 在「Explorer」窗格中展開專案，依序點選「Datasets」(資料集) 和資料集。
-4. 依序點選**「總覽」 > 「資料表」**，然後找出要查詢的資料表。
-5. 依序點選資料表旁的 more\_vert **「Actions」(動作)**
+4. 依序點選**「總覽」>「資料表」**，然後找出要查詢的資料表。
+5. 依序點選資料表旁的 more\_vert**「Actions」(動作)**
    和**「Open in」(開啟方式) >「Python notebook」(Python 筆記本)**。
 
-   新的筆記本隨即開啟，其中包含顯示所選資料表範例查詢的儲存格。
+   新的筆記本會開啟，其中包含顯示所選資料表範例查詢的儲存格。
 
 ### 建立筆記本，探索查詢結果集
 
@@ -227,7 +231,7 @@ BigQuery Google Cloud 控制台中的筆記本庫是探索及使用預先建構�
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 在編輯器窗格中執行查詢，產生查詢結果。
-3. 在「**查詢結果**」窗格中，依序點選**「開啟方式」>「Notebook」**。
+3. 在**「查詢結果」**窗格中，依序點選**「開啟方式」>「Notebook」**。
 
    新的筆記本會開啟，其中包含程式碼儲存格，可傳回查詢 SQL 和查詢結果。
 
@@ -239,9 +243,9 @@ BigQuery Google Cloud 控制台中的筆記本庫是探索及使用預先建構�
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
-3. 在「Explorer」窗格中展開專案，然後點選「Notebooks」。
+3. 在「Explorer」窗格中展開專案，然後按一下「Notebooks」。
 4. 選取筆記本。
-5. 按一下 schedule「版本記錄」。
+5. 按一下「schedule 版本記錄」。
 6. 按一下筆記本版本旁的 more\_vert「View actions」(查看動作)，然後點選「Open as new Python notebook」(開啟為新的 Python 筆記本)。
 
    系統會開啟筆記本副本，做為新的筆記本。
@@ -259,10 +263,10 @@ BigQuery Google Cloud 控制台中的筆記本庫是探索及使用預先建構�
 3. 在「Explorer」窗格中展開專案，然後執行下列任一操作：
 
    * 按一下「筆記本」旁的 more\_vert「查看動作」>「上傳筆記本」。
-   * 按一下 Google Cloud 專案名稱旁的more\_vert「查看動作」「上傳至專案」「Notebook」。
+   * 按一下 Google Cloud 專案名稱旁的more\_vert「View actions」(查看動作) >「Upload to project」(上傳至專案) >「Notebook」。
 4. 在「Upload Notebook」(上傳筆記本) 對話方塊的「Notebook」(筆記本) 欄位中，按一下「Browse」(瀏覽)，然後選取要上傳的筆記本。
 5. 選用：在「Notebook name」(筆記本名稱) 欄位中，編輯筆記本名稱。
-6. 在「Region」(區域) 欄位，選取要上傳筆記本的區域。
+6. 在「Region」(區域) 欄位中，選取要上傳筆記本的區域。
 7. 按一下「上傳」。
 
 您可以透過「Explorer」窗格存取筆記本。
@@ -273,7 +277,7 @@ BigQuery Google Cloud 控制台中的筆記本庫是探索及使用預先建構�
 
 如要進一步瞭解執行階段，請參閱「[執行階段和執行階段範本](https://docs.cloud.google.com/colab/docs/runtimes?hl=zh-tw)」。
 
-**注意：** 如果您使用 [VPC Service Controls](https://docs.cloud.google.com/vpc-service-controls/docs/overview?hl=zh-tw)，請務必先[設定 Private Google Access 搭配 VPC Service Controls](https://docs.cloud.google.com/vpc-service-controls/docs/private-connectivity?hl=zh-tw)，再連線至執行階段。否則，服務會傳回錯誤 `Failed to connect to Runtime Network
+**注意：**如果您使用 [VPC Service Controls](https://docs.cloud.google.com/vpc-service-controls/docs/overview?hl=zh-tw)，請務必先[設定 Private Google Access 搭配 VPC Service Controls](https://docs.cloud.google.com/vpc-service-controls/docs/private-connectivity?hl=zh-tw)，再連線至執行階段。否則，服務會傳回錯誤 `Failed to connect to Runtime Network
 projects/projectid/global/networks/default' was not found.`
 
 ### 連線至預設執行階段
@@ -286,9 +290,9 @@ projects/projectid/global/networks/default' was not found.`
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
-3. 在「Explorer」窗格中展開專案，然後點選「Notebooks」。
+3. 在「Explorer」窗格中展開專案，然後按一下「Notebooks」。
 4. 按一下筆記本名稱即可開啟。
-5. 在筆記本中，點選「Connect」，或執行筆記本中的任何儲存格。
+5. 在筆記本中，點選「連線」，或執行筆記本中的任何儲存格。
 
    如果沒有啟用的執行階段，可能需要幾分鐘才能連線至預設執行階段。
 
@@ -302,11 +306,11 @@ projects/projectid/global/networks/default' was not found.`
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
-3. 在「Explorer」窗格中展開專案，然後點選「Notebooks」。
+3. 在「Explorer」窗格中展開專案，然後按一下「Notebooks」。
 4. 按一下筆記本名稱即可開啟。
 5. 在筆記本中，按一下「Connect」(連線) 旁邊的 arrow\_drop\_down 下拉式選單，然後點選「Connect to a runtime」(連線至執行階段)。
 6. 按一下「連線至現有的執行階段」。
-7. 在「Runtimes」(執行階段) 中，選取要使用的執行階段。執行階段必須與 Notebook 位於相同位置。
+7. 在「Runtimes」(執行階段) 中，選取要使用的執行階段。執行階段必須與筆記本位於相同位置。
 8. 點選「連線」。
 
 ### 連線至新的執行階段
@@ -317,7 +321,7 @@ projects/projectid/global/networks/default' was not found.`
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
-3. 在「Explorer」窗格中展開專案，然後點選「Notebooks」。
+3. 在「Explorer」窗格中展開專案，然後按一下「Notebooks」。
 4. 按一下筆記本名稱即可開啟。
 5. 在筆記本中，按一下「Connect」(連線) 旁邊的 arrow\_drop\_down 下拉式選單，然後點選「Connect to a runtime」(連線至執行階段)。
 6. 按一下「建立新的執行階段」。
@@ -332,7 +336,7 @@ projects/projectid/global/networks/default' was not found.`
 ## 後續步驟
 
 * 瞭解如何[管理筆記本](https://docs.cloud.google.com/bigquery/docs/manage-notebooks?hl=zh-tw)。
-* 瞭解如何[排定筆記本執行作業](https://docs.cloud.google.com/bigquery/docs/orchestrate-notebooks?hl=zh-tw)。
+* 瞭解如何[排定筆記本執行時間](https://docs.cloud.google.com/bigquery/docs/orchestrate-notebooks?hl=zh-tw)。
 * 瞭解如何[存取 BigQuery Studio Git 存放區掛接中的筆記本檔案](https://docs.cloud.google.com/bigquery/docs/git-repositories?hl=zh-tw#notebook-mount)。
 
 
@@ -342,11 +346,11 @@ projects/projectid/global/networks/default' was not found.`
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-11 (世界標準時間)。
+上次更新時間：2026-11-20 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-11 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-20 (世界標準時間)。"],[],[]]

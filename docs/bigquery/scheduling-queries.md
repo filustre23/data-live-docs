@@ -894,11 +894,5 @@ def update_transfer_config(
     update_mask = field_mask_pb2.FieldMask(paths=["display_name"])
 
     try:
-        response = client.update_transfer_config(
-            transfer_config=transfer_config,
-            update_mask=update_mask,
-        )
-
-        print(f"Updated transfer config: {response.name}")
-        print(f
+        response = client.
 ```

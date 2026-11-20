@@ -208,13 +208,3 @@ gcloud resource-manager org-policies allow \
 |  | `USAGE` | Snowflake 資料庫和結構定義 | 存取包含來源資料表的資料庫和結構定義。 |
 |  | `SELECT` | 來源資料表 | 讀取資料表中繼資料，並擷取要移轉的資料。 |
 |  | `USAGE` | 儲存空間整合 | 授權將資料卸載至外部 Cloud Storage 暫存 bucket。 |
-
-如要建立及設定自訂角色和遷移使用者，請在 Snowflake 帳戶中執行下列 SQL 指令：
-
-1. 建立自訂角色 `MIGRATION_ROLE`：
-
-   ```
-   CREATE ROLE MIGRATION_ROLE;
-   ```
-
-   將 `MIGRATION_ROLE` 替換為您要建立的

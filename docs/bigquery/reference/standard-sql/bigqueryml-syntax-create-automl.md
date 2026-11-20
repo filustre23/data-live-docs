@@ -351,10 +351,3 @@ Run predictions:
 SELECT * FROM ML.PREDICT(MODEL `project_id.mydataset.mymodel`, (
     SELECT * FROM `nyc-tlc.yellow.trips` LIMIT 100))
 ```
-
-
-
-
-Send feedback
-
-Except as otherwise noted, the content of this page is licensed under the

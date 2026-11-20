@@ -122,7 +122,3 @@ This API allows users to manage their data transfers into BigQuery.
 | ListTransferConfigs |
 | --- |
 | `rpc ListTransferConfigs(ListTransferConfigsRequest) returns (ListTransferConfigsResponse)`  Returns information about all transfer configs owned by a project in the specified location.  Authorization scopes  Requires the following OAuth scope:   * `https://www.googleapis.com/auth/cloud-platform`   For more information, see the [Authentication Overview](/docs/authentication#authorization-gcp). |
-
-| ListTransferLogs |
-| --- |
-| `rpc ListTransferLogs(ListTransferLogsRequest) returns (` |

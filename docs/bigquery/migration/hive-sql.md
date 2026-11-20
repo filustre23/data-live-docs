@@ -181,13 +181,4 @@ BigQuery 也會對下列常值執行隱含轉換：
 | `STDDEV_SAMP` | `STDDEV_SAMP, STDDEV` |
 | `SUM` | `SUM` |
 | `VAR_POP` | `VAR_POP` |
-| `VAR_SAMP` | `VAR_SAMP, VARIANCE` |
-| `CONCAT_WS` | `STRING_AGG` |
-
-### 分析函式
-
-下表列出常見 Hive 數據分析函式與對應 BigQuery 函式的對照關係：
-
-| **Hive** | **BigQuery** |
-| --- | --- |
-| `AVG` |  |
+| `VAR_SAMP` |

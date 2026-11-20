@@ -162,10 +162,3 @@ Service agent roles should only be granted to [service agents](https://docs.clou
 ### BigQuery Omni 角色
 
 下表列出 BigQuery Omni 的預先定義 IAM 角色和權限。如要搜尋所有角色和權限，請參閱[角色和權限索引](https://docs.cloud.google.com/iam/docs/roles-permissions?hl=zh-tw)。
-
-BigQuery Omni offers the following service agent roles.
-Service agent roles should only be granted to [service agents](https://docs.cloud.google.com/iam/docs/service-agents?hl=zh-tw).
-
-| Role | Permissions |
-| --- | --- |
-| BigQuery Omni Service Agent (`roles/bigqueryomni.serviceAgent`)  Gives BigQuery Omni access to tables in user projects. |

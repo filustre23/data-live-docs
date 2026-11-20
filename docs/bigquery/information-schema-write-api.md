@@ -225,9 +225,3 @@ LIMIT 10;
 ##### 範例 4：資料表的 BigQuery Storage Write API (gRPC) 擷取錯誤率
 
 以下範例會計算特定資料表的每日錯誤細目，並依錯誤代碼分類：
-
-```
-SELECT
-  TIMESTAMP_TRUNC(start_timestamp, DAY) as day,
-  project_id,
-```

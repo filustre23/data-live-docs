@@ -522,9 +522,4 @@ CREATE MODEL
   `mydataset.mymodel`
 OPTIONS
   ( MODEL_TYPE='KMEANS',
-    NUM_CLUSTERS=4 ) AS
-SELECT
-  *
-FROM
-  `mydataset.mytable`
 ```

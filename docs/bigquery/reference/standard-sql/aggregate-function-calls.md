@@ -243,15 +243,5 @@ SELECT
   COUNT(*) AS total_rows,
   COUNT(* WHERE x IS NOT NULL) AS filtered_rows,
   AVG(x) AS avg_x
-FROM UNNEST([1, 2, 3, 4, 5, NULL]) AS x;
-
-/*------------+---------------+-------+
- | total_rows | filtered_rows | avg_x |
- +------------+---------------+-------+
- | 6          | 5             | 3     |
- +------------+---------------+-------*/
+FROM UNNEST([1, 2, 3, 4, 5, NULL])
 ```
-
-## Aggregate function examples
-
-A simple aggregate functi

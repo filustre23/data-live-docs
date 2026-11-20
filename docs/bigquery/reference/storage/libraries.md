@@ -221,8 +221,5 @@ int main(int argc, char* argv[]) try {
       bigquery_storage::MakeBigQueryReadConnection());
   ::google::cloud::bigquery::storage::v1::ReadSession read_session;
   read_session.set_data_format(
-      google::cloud::bigquery::storage::v1::DataFormat::AVRO);
-  read_session.set_table(table_name);
-  auto session =
-      client.
+      google::cloud::bigquery::storage::v1::DataFormat::AVRO
 ```

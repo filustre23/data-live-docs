@@ -142,6 +142,7 @@ AI.GENERATE_BOOL(
   control or know the region where your processing requests are handled.
 
   BigQuery supports the following models:
+  + `gemini-4-neon`
   + `gemini-4-hydrogen`
   + `gemini-4-carbon`
   + `gemini-4-argon`
@@ -150,9 +151,10 @@ AI.GENERATE_BOOL(
   + `gemini-3.6-flash`
   + `gemini-3.5-flash-lite`
   + `gemini-3.5-flash`
-  + `gemini-3.1-flash-lite`Agent Platform only supports multi-regional endpoints for
-  these models. Regional endpoints aren't supported.
-  If you specify a short endpoint name that omits the region, such as `gemini-3.5-flash`,
+  + `gemini-3.1-flash-lite`For most models, Agent Platform only supports multi-regional
+  endpoints. For a complete list of which models have support
+  in which regions, see [Google model endpoint locations](/gemini-enterprise-agent-platform/resources/locations#google-models).
+  If you specify a short endpoint name that omits the region, such as `gemini-4-argon`,
   then BigQuery selects an endpoint according to the following rules:
   + If your query is run in the `us` region, or any single region in the US, then
     BigQuery uses the `us` endpoint.
@@ -160,7 +162,7 @@ AI.GENERATE_BOOL(
     `europe-west2` or `europe-west6`, then BigQuery
     uses the `eu` endpoint.
   + For all other locations, including `europe-west2` and
-    `europe-west6`, BigQuery uses the `global` endpoint.To specify a specific endpoint, use a fully qualified multi-regional endpoint name in one of the
+    `europe-west6`, BigQuery uses the `global` endpoint.To specify a specific multi-regional endpoint, use a fully qualified endpoint name in one of the
   following formats:
   + `https://aiplatform.us.rep.googleapis.com/v1/projects/PROJECT_ID/locations/us/publishers/google/models/MODEL_ID`
   + `https://aiplatform.eu.rep.googleapis.com/v1/projects/PROJECT_ID/locations/eu/publishers/google/models/MODEL_ID`
@@ -317,9 +319,5 @@ and select the `result` field in the output by running the following query:
 SELECT
   uri,
   OBJ.GET_READ_URL(ref).url AS signed_url,
-  AI.GENERATE_BOOL(("Is this cat food?", ref)).result
-FROM bqml_tutorial.product_images
-WHERE uri LIKE '%cat%';
+  AI.GENERATE_BOOL(("Is this cat food?",
 ```
-
-The result is similar to the following:

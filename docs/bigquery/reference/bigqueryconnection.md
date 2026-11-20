@@ -217,8 +217,5 @@ func main() {
 // reportConnections gathers basic information about existing connections in a given project and location.
 func reportConnections(ctx context.Context, client *connection.Client, projectID, location string) (string, error) {
 	var buf bytes.Buffer
-	fmt.Fprintf(&buf, "Current connections defined in project %s in location %s:\n", projectID, location)
-
-	req := &connectionpb.ListConnectionsRequest{
-		Parent: fmt.Sprintf
+	fmt.Fprintf(&buf, "Current connections defined in project %s in location %s:\n", projectID,
 ```

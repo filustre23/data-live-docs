@@ -105,8 +105,4 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 查詢 `INFORMATION_SCHEMA.JOBS` 以找出查詢工作的摘要費用時，請排除 `SCRIPT` 陳述式類型，否則某些值可能會重複計算。`SCRIPT` 列包含這項工作執行時，所有子工作的摘要值。
 
-為確保穩定性，建議您在資訊結構定義查詢中明確列出資料欄，而非使用萬用字元 (`SELECT *`)。明確列出資料欄可避免查詢在基礎結構定義變更時中斷。
-
-## 多陳述式查詢工作
-
-多陳述式查詢工作是指使用[程序語言](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language?hl=zh-tw)的查詢工作。多重陳述式查詢工作通常會使用 `DECLARE` 定義變數，或使用 `IF` 或 `WHILE` 等控制流程陳述式。查詢 `INFORMATION_SCHEMA.JOBS` 時，
+為確保穩定性，建議您在資訊結構定義查詢中明確列出資料欄，而非

@@ -238,11 +238,5 @@ SELECT CHR(65) AS A, CHR(255) AS B, CHR(513) AS C, CHR(1024)  AS D;
 ```
 
 ```
-SELECT CHR(97) AS A, CHR(0xF9B5) AS B, CHR(0) AS C, CHR(NULL) AS D;
-
-/*-------+-------+-------+-------+
- | A     | B     | C     | D     |
- +-------+-------+-------+-------+
- | a     | 例    |       | NULL  |
- +-------+-------+-------+-------*/
+SELECT CHR(97) AS A, CHR(0xF9B5) AS B, CHR(0) AS C, CHR
 ```

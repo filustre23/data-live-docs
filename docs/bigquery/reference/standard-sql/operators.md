@@ -272,16 +272,5 @@ struct_subscript_specifier:
   { index | position_keyword(index) }
 
 position_keyword:
-  { OFFSET | ORDINAL }
+  { OFFSET
 ```
-
-**Description**
-
-Gets the value of a field at a selected position in a struct.
-
-**Input types**
-
-* `struct_expression`: The input struct.
-* `position_keyword(index)`: Determines where the index for the struct should
-  start and how out-of-range indexes are handled. The index is an
-  integer literal or constant that represents a specific position in the struct.

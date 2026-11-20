@@ -20,17 +20,17 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ## 檢視類型
 
-邏輯檢視表是 BigQuery 的預設檢視表類型，而 materialized view 是預先運算的檢視表，會定期快取查詢結果，以提高效能和效率。
+邏輯檢視表是 BigQuery 的預設檢視表類型，而 materialized view 則是預先運算的檢視表，會定期快取查詢結果，以提高效能和效率。
 
-邏輯檢視表的授權檢視表稱為授權檢視表，但 materialized view 的授權檢視表稱為「授權 materialized view」。
+邏輯檢視表的授權檢視表稱為授權檢視表，但 materialized view 的授權檢視表稱為*授權 materialized view*。
 
-如果邏輯檢視表仰賴[大型或運算成本高昂的查詢](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro?hl=zh-tw#use_cases)，您可以改為建立 materialized view。如要瞭解邏輯檢視表和 materialized view 的用途，請參閱「[邏輯檢視表和 materialized view 總覽](https://docs.cloud.google.com/bigquery/docs/logical-materialized-view-overview?hl=zh-tw)」。
+如果邏輯檢視表仰賴[大型或運算成本高昂的查詢](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro?hl=zh-tw#use_cases)，則可改為建立 materialized view。如要瞭解邏輯檢視表和 materialized view 的用途，請參閱「[邏輯檢視表和 materialized view 總覽](https://docs.cloud.google.com/bigquery/docs/logical-materialized-view-overview?hl=zh-tw)」。
 
 ## 建立授權檢視表的大致步驟
 
-如要建立及共用 view，請參閱下列概略步驟。授權邏輯 view 和授權 materialized view 的步驟相同。
+如要建立及共用 view，請參閱下列概略步驟，授權邏輯 view 和授權 materialized view 的步驟相同。
 
-**注意：** 您也可以[共用資料集中的所有檢視表](#share-all-views)。
+**注意：**您也可以[共用資料集中的所有檢視表](#share-all-views)。
 
 * 建立資料集，以便加入來源資料。
 * 執行查詢，將資料載入來源資料集的目的地資料表。
@@ -38,24 +38,24 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 * 透過 SQL 查詢建立授權檢視表，限制資料分析師可在查詢結果中查看的資料欄。
 * 授予資料分析師執行查詢工作的權限。
 * 向資料分析師授予包含授權檢視表的資料集存取權。
-* 將來源資料集的檢視權限授予授權檢視表。
+* 將來源資料集的存取權授予授權檢視表。
 
 ## 替代方案
 
 雖然授權檢視表具有彈性和擴充性，但下列其中一種方法可能更適合您的用途：
 
-* 為資料表設定資料列層級政策。
+* 設定資料表的資料列層級政策。
 * 在資料表設定資料欄層級政策。
 * 將資料儲存在獨立資料表中。
 * 共用資料集中的所有檢視表 (授權資料集)。
 
 ### 使用資料列層級或資料欄層級安全性，或分隔資料表
 
-資料管理員可以對資料表設定資料列層級存取權政策，或建立獨立資料表來存放機密資料，藉此限制使用者查看該資料。將資料儲存在獨立資料表中，可隔離資料，並移除查看資料表中有多少資料列的功能。
+資料管理員可以對資料表設定資料列層級存取權政策，或建立獨立資料表來存放機密資料，藉此限制使用者查看該資料的能力。將資料儲存在獨立資料表中，可隔離資料，並移除查看資料表中有多少資料列的功能。
 
 此外，資料管理員可以建立及套用政策標記，限制使用者查看資料表資料欄的能力。
 
-將資料儲存在獨立資料表是最安全，但彈性最低的方法。設定資料列層級政策既靈活又安全，而共用授權檢視表則可提供彈性和最佳效能。
+將資料儲存在獨立資料表是最安全，但彈性最低的方法。設定資料列層級政策既彈性又安全，而共用授權檢視表則可提供彈性和最佳效能。
 
 如要詳細比較這些方法，請參閱下列資源：
 
@@ -66,12 +66,11 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ### 共用資料集中的所有檢視表
 
-如要授予一組檢視表資料集的檢視權限，而不必個別授權，可以將檢視表分組到資料集，然後授予包含檢視表的資料集存取權，讓其存取包含資料的資料集。
+如要授予一組檢視表對資料集的存取權，而不必個別授權，可以將檢視表分組到資料集，然後授予包含檢視表的資料集對包含資料的資料集的存取權。
 
-接著，您可以視需要將包含檢視表群組的資料集，或資料集中的個別檢視表存取權授予主體。可存取其他資料集的資料集稱為「授權資料集」。授權其他資料集存取其資料的資料集，稱為「共用資料集」。
+接著，您可以視需要將包含檢視表群組的資料集，或資料集中的個別檢視表存取權授予主體。有權存取其他資料集的資料集稱為「授權資料集」。授權其他資料集存取其資料的資料集，稱為「共用資料集」。
 
-資料集的存取控制清單最多可有 2,500 項授權資源，包括[授權檢視表](https://docs.cloud.google.com/bigquery/docs/authorized-views?hl=zh-tw)、[授權資料集](https://docs.cloud.google.com/bigquery/docs/authorized-datasets?hl=zh-tw)和[授權函式](https://docs.cloud.google.com/bigquery/docs/authorized-functions?hl=zh-tw)。
-如果授權檢視表數量過多而超過這項限制，建議您將檢視表分組為授權資料集。
+資料集的存取控制清單最多可有 2,500 項授權資源，包括[授權檢視表](https://docs.cloud.google.com/bigquery/docs/authorized-views?hl=zh-tw)、[授權資料集](https://docs.cloud.google.com/bigquery/docs/authorized-datasets?hl=zh-tw)和[授權函式](https://docs.cloud.google.com/bigquery/docs/authorized-functions?hl=zh-tw)。如果授權檢視表數量過多而超過這項限制，建議您將檢視表分組為授權資料集。
 最佳做法是在設計新的 BigQuery 架構 (尤其是多租戶架構) 時，將相關檢視表分組到授權資料集。
 
 詳情請參閱「[授權資料集](https://docs.cloud.google.com/bigquery/docs/authorized-datasets?hl=zh-tw)」和「[授權資料集](https://docs.cloud.google.com/bigquery/docs/authorized-datasets?hl=zh-tw#authorize_a_dataset)」。
@@ -79,7 +78,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 ## 限制
 
 * 在其他資料集中建立授權檢視表或授權 materialized view 時，來源資料集和授權檢視表資料集必須位於相同的區域[位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
-* 刪除授權檢視表後，最多可能需要 24 小時，系統才會將授權檢視表從檢視表清單中移除。在這段期間，您無法存取已刪除的授權檢視表，但該檢視表可能會顯示在檢視表清單中，並計入[授權檢視表數量限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#dataset_limits)。如果新的授權檢視表會超出上限，這項限制可防止建立額外的授權檢視表。
+* 刪除授權檢視表後，系統最多可能需要 24 小時，才會將該檢視表從清單中移除。在這段期間，您無法存取已刪除的授權檢視表，但該檢視表可能會顯示在檢視表清單中，並計入[授權檢視表限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#dataset_limits)。如果新的授權檢視表會超過這項限制，就無法建立其他授權檢視表。
 * 您無法在次要副本中建立授權檢視表。詳情請參閱「[資料集複製中的資源行為](https://docs.cloud.google.com/bigquery/docs/data-replication?hl=zh-tw#resource-behavior)」。
 
 ## 事前準備
@@ -88,15 +87,15 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ### 授權檢視表和 VPC Service Controls
 
-在 VPC Service Controls perimeter 使用授權 view 時，輸入和輸出規則必須允許主體存取含有該 view 的專案，以及含有 view 存取來源資料的其他專案。
+在 VPC Service Controls perimeter 使用授權檢視表時，輸入和輸出規則必須允許主體存取檢視表所在的專案，以及檢視表存取來源資料所在的任何其他專案。
 
 舉例來說，在下圖中，專案 R 中的呼叫端存取專案 A 中的授權檢視表，其來源資料表位於專案 B。在這種情況下，VPC Service Controls 輸入和輸出規則必須允許專案 R 中的呼叫端使用 BigQuery 服務存取專案 A 和專案 B。
 
 #### 存取 VPC Service Controls 的必要權限
 
-主體不需要來源資料專案的 Identity and Access Management 權限，但輸入規則必須允許存取包含來源資料表的來源專案中的 BigQuery 服務，以及允許存取包含檢視表的專案。
+主體不需要來源資料專案的 Identity and Access Management 權限，但輸入規則必須允許存取包含來源資料表的來源專案中的 BigQuery 服務，以及包含檢視表的專案。
 
-如要瞭解必要角色和權限，請參閱「[專案和資料集的使用者授權](https://docs.cloud.google.com/bigquery/docs/authorized-views?hl=zh-tw#user_permissions_on_the_project_and_dataset_for_the_view)」。
+如要瞭解必要角色和權限，請參閱「[專案和資料集的使用者權限](https://docs.cloud.google.com/bigquery/docs/authorized-views?hl=zh-tw#user_permissions_on_the_project_and_dataset_for_the_view)」。
 
 #### 輸入和輸出規則
 
@@ -143,11 +142,11 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ### 必要的角色
 
-如要建立或更新授權檢視表，您必須具備包含該檢視表的資料集權限，以及提供檢視表存取權的資料集權限。
+如要建立或更新授權檢視表，您必須具備包含該檢視表的資料集權限，以及提供該檢視表存取權的資料集權限。
 
-您也需要將包含檢視表的專案和資料集存取權授予使用者或群組。
+您也需要將專案和資料集的存取權授予使用者或群組，其中包含檢視表。
 
-**注意：** 只有資料擁有者才能變更授權檢視表的 SQL 查詢。
+**注意：**只有資料擁有者才能變更授權檢視表的 SQL 查詢。
 
 #### 檢視表所在資料集的權限
 
@@ -165,7 +164,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 如要執行這項授權，您必須對包含來源資料的資料集具備下列權限：
 
-**注意：** 如要在已授權資料集中建立或更新授權檢視表，您不需要 `bigquery.datasets.update` 權限。
+**注意：**如要在已授權資料集中建立或更新授權檢視表，您不需要 `bigquery.datasets.update` 權限。
 
 * `bigquery.datasets.update`
 * `datasets.getIamPolicy`
@@ -175,7 +174,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 #### 檢視表所在專案和資料集的使用者授權
 
-如要與使用者或群組共用授權檢視表，您必須授予使用者或群組下列 IAM 權限：
+如要與使用者或群組共用授權檢視表，您必須將下列 IAM 權限授予使用者或群組：
 
 * 查詢工作執行所在專案 (計費或執行專案) 的 `roles/bigquery.jobUser` (或 `roles/bigquery.user`) IAM 角色。這個角色會授予 `bigquery.jobs.create` 權限，可對檢視表執行查詢工作。
 
@@ -197,25 +196,25 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 1. 前往「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在查詢編輯器中，輸入要用於授權檢視表的查詢。
+2. 在查詢編輯器中，輸入要用來建立授權檢視表的查詢。
 3. 依序點選「檔案」>「儲存」>「儲存檢視畫面」。
 4. 在「Save view」(儲存檢視畫面) 對話方塊中，執行下列操作：
 
    1. 在「專案」部分，輸入要儲存檢視表的專案。
-   2. 在「Dataset」(資料集) 部分，輸入要儲存檢視表的資料集。這個資料集必須與來源查詢中使用的資料集不同。
-   3. 在「Table」(資料表) 中，輸入檢視表名稱。
-   4. 按一下 [儲存]。
-5. 將[必要權限](#user_permissions_on_the_project_and_dataset_for_the_view)授予可使用授權檢視表的使用者。
+   2. 在「資料集」部分，輸入要儲存檢視表的資料集。這個資料集必須與來源查詢中使用的資料集不同。
+   3. 在「Table」(資料表) 中輸入檢視表名稱。
+   4. 按一下「儲存」。
+5. 將[必要權限](#user_permissions_on_the_project_and_dataset_for_the_view)授予可使用授權 view 的使用者。
 6. 在「Explorer」窗格中，選取來源查詢使用的資料集。
 7. 在「Details」(詳細資料) 窗格中，依序點選「Sharing」(共用) >「Authorize views」(授權檢視表)。
-8. 在「Authorized views」(授權檢視表) 窗格中，在「Authorized view」(授權檢視表) 中輸入檢視表的完整名稱，格式為 PROJECT\_ID.DATASET\_ID.VIEW\_NAME。
+8. 在「Authorized views」(授權檢視表) 窗格中，在「Authorized view」(授權檢視表) 部分，輸入檢視表的完整名稱，格式為 PROJECT\_ID.DATASET\_ID.VIEW\_NAME。
 9. 按一下「新增授權」。
 
 ### Terraform
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
-**注意：** 如要使用 Terraform 建立 BigQuery 物件，必須啟用 [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest?hl=zh-tw)。
+**注意：**如要使用 Terraform 建立 BigQuery 物件，必須啟用 [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest?hl=zh-tw)。
 
 ```
 # Creates an authorized view.
@@ -282,7 +281,7 @@ resource "google_bigquery_table_iam_policy" "authorized_view_policy" {
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
 2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
 
-   每個專案只需執行這個指令一次，而且可以在任何目錄中執行。
+   這項指令在每個專案中只需執行一次，且可在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
@@ -312,7 +311,7 @@ resource "google_bigquery_table_iam_policy" "authorized_view_policy" {
    terraform init
    ```
 
-   如要使用最新版 Google 供應商，請視需要加入 `-upgrade` 選項：
+   如要使用最新版 Google 供應商，可以視需要加入 `-upgrade` 選項：
 
    ```
    terraform init -upgrade
@@ -334,7 +333,7 @@ resource "google_bigquery_table_iam_policy" "authorized_view_policy" {
    ```
 
    等待 Terraform 顯示「Apply complete!」訊息。
-3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)即可查看結果。在 Google Cloud 控制台的使用者介面中，前往資源頁面，確認 Terraform 已建立或更新資源。
+3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)即可查看結果。在 Google Cloud 控制台的 UI 中前往資源，確認 Terraform 已建立或更新資源。
 
 **注意：**Terraform 範例通常會假設 Google Cloud 專案已啟用必要的 API。
 
@@ -351,7 +350,7 @@ resource "google_bigquery_table_iam_policy" "authorized_view_policy" {
 
 ### 移除檢視表的授權
 
-**注意：** 如果您移除 VPC Service Controls 範圍內檢視表的授權，查詢可能會開始失敗，並顯示 VPC Service Controls 錯誤。詳情請參閱「[撤銷授權和 VPC Service Controls](#revoked-authorization-vpcsc)」。如果移除檢視表，請等待 24 小時再重複使用檢視表名稱，或使用不重複的名稱。如要進一步瞭解如何移除檢視表，請參閱「[配額與限制](#quotas_and_limits)」。
+**注意：**如果移除 VPC Service Controls 範圍內檢視表的授權，查詢可能會開始失敗，並顯示 VPC Service Controls 錯誤。詳情請參閱「[撤銷授權和 VPC Service Controls](#revoked-authorization-vpcsc)」。如果移除檢視表，請等待 24 小時再重複使用檢視表名稱，或使用不重複的名稱。如要進一步瞭解如何移除檢視表，請參閱「[配額與限制](#quotas_and_limits)」。
 
 如要移除檢視畫面的授權，請選取下列其中一個選項：
 
@@ -384,7 +383,7 @@ resource "google_bigquery_table_iam_policy" "authorized_view_policy" {
 
 ### 撤銷授權和 VPC Service Controls
 
-如果授權檢視表跨 VPC Service Controls 邊界存取來源資料集中的資料，查詢檢視表時會略過對基礎資料表的標準 VPC Service Controls 檢查。
+當授權檢視表跨 VPC Service Controls 邊界存取來源資料集中的資料時，查詢檢視表會略過對基礎資料表的標準 VPC Service Controls 檢查。
 
 如果您撤銷或移除來源資料集的檢視表授權，BigQuery 會改用標準授權檢查，並直接查詢來源專案中的基礎資料表。如果這些基礎資料表跨越 VPC Service Controls perimeter 邊界，且沒有明確的輸出規則允許直接存取資料表，VPC Service Controls 就會封鎖查詢，並傳回輸入或輸出違規錯誤。
 
@@ -393,7 +392,7 @@ resource "google_bigquery_table_iam_policy" "authorized_view_policy" {
 ## 配額與限制
 
 * 授權檢視表受資料集限制。詳情請參閱「[資料集限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#dataset_limits)」。
-* 如果移除授權檢視表，系統最多可能需要 24 小時，才會移除所有參照該檢視表的項目。為避免發生錯誤，請在 24 小時後再重複使用已移除資料檢視的名稱，或為資料檢視建立不重複的名稱。
+* 移除授權檢視表後，系統最多可能需要 24 小時，才會移除所有參照該檢視表的項目。為避免發生錯誤，請在 24 小時後再重複使用已移除檢視表的名稱，或為檢視表建立不重複的名稱。
 
 ## 進階主題
 
@@ -411,15 +410,27 @@ resource "google_bigquery_table_iam_policy" "authorized_view_policy" {
 
 如要進一步瞭解權限的套用方式，請參閱「[查詢檢視表](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro?hl=zh-tw#views)」一文，瞭解資料欄層級安全性。
 
-### 使用 BigQuery sharing 搭配授權檢視表
+### 使用 SECURE\_CONTEXT 動態篩選資料列
+
+在多租戶架構中，如果無法為每位使用者或租戶建立獨立的授權檢視表，可信任的後端應用程式或中介層服務 (例如使用共用服務帳戶驗證使用者並查詢 BigQuery 的應用程式伺服器)，可以在 [`jobs.query`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query?hl=zh-tw) 要求的 `secureContext.secureParameterEntries` 欄位，或 [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert?hl=zh-tw) 要求的 `configuration.query.secureContext.secureParameterEntries` 中，傳遞經過驗證的個別要求屬性。接著，授權邏輯檢視表可以呼叫 [`SECURE_CONTEXT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/security_functions?hl=zh-tw#secure_context) ([預先發布版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))，動態篩選資料列。
+
+只允許受信任的後端應用程式或中介層服務在驗證呼叫端後設定 `secureContext` 參數。請勿讓不受信任的用戶端或 AI 代理直接設定 `secureContext`。查詢可存取的任何邏輯檢視表，都能呼叫 `SECURE_CONTEXT` 並傳回參數值，包括後端服務帳戶可讀取的其他專案檢視表。如果後端執行不受信任或 AI 生成的 SQL，請套用下列控制項：
+
+* 在中介軟體中，強制執行管理員編寫的檢視表許可清單，而非僅依賴 AI 提示指令。請使用查詢範本或語意層，或在執行查詢前，透過[模擬測試](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#dry-run)檢查 `statistics.query.referencedLogicalViews` (以及基礎資料表的 `statistics.query.referencedTables`)，或剖析 SQL 抽象語法樹 (AST)。
+* 使用 VPC Service Controls perimeter 和 IAM [主體存取權邊界 (PAB) 政策](https://docs.cloud.google.com/iam/docs/principal-access-boundary-policies?hl=zh-tw)，防止後端服務帳戶讀取不受信任外部專案中的檢視表。
+* 請勿將 `bigquery.tables.create` 或 `bigquery.tables.update` 權限授予不受信任的主體，以免他們存取後端服務帳戶可讀取的任何資料集。請勿透過自訂角色或使用預先定義的角色 (例如 BigQuery 資料編輯者 (`roles/bigquery.dataEditor`)) 授予這些權限。
+
+如要瞭解參數限制、工作中繼資料遮蓋、稽核記錄和安全性最佳做法，請參閱「[`SECURE_CONTEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/security_functions?hl=zh-tw#secure_context)」。
+
+### 使用 BigQuery sharing 和授權檢視表
 
 BigQuery sharing (舊稱 Analytics Hub) 是資料交換平台，具備下列功能：
 
-* 可讓您跨組織界限大規模分享資料和洞察資訊。
-* 採用強大的安全性和隱私權架構。
+* 可讓您跨組織大規模分享資料和洞察資訊。
+* 採用完善的安全性和隱私權架構。
 * 支援將 BigQuery 資料集 (稱為*共用資料集*) 及其相關聯的授權檢視表和授權資料集，發布給一組訂閱者。
 
-*連結資料集*是唯讀 BigQuery 資料集，做為共用資料集的指標或參照。訂閱共用*資訊*會在專案中建立連結的資料集，但不會建立資料集的副本，因此訂閱者可以讀取資料，但無法新增或更新其中的物件。
+*連結資料集*是唯讀 BigQuery 資料集，可做為共用資料集的指標或參照。訂閱共用*資訊*後，系統會在您的專案中建立連結的資料集，但不會建立資料集的副本，因此訂閱者可以讀取資料，但無法新增或更新其中的物件。
 
 [不支援](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction?hl=zh-tw#limitations)參照連結資料集中資料表的 materialized view。
 
@@ -440,11 +451,11 @@ BigQuery sharing (舊稱 Analytics Hub) 是資料交換平台，具備下列功�
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-11 (世界標準時間)。
+上次更新時間：2026-11-20 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-11 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-20 (世界標準時間)。"],[],[]]

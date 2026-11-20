@@ -119,15 +119,4 @@ different name.
 ### `DESCRIBE FUNCTION` syntax
 
 Snowflake supports describing a UDF using
-[DESC[RIBE] FUNCTION](https://docs.snowflake.net/manuals/sql-reference/sql/desc-function.html)
-syntax. This is not supported in BigQuery. However, querying
-UDF metadata via INFORMATION SCHEMA will be available soon as part of the
-product roadmap.
-
-### `SHOW USER FUNCTIONS` syntax
-
-In Snowflake,
-[SHOW USER FUNCTIONS](https://docs.snowflake.net/manuals/sql-reference/sql/show-user-functions.html)
-syntax can be used to list all UDFs for which users have access privileges. This
-is not supported in BigQuery. However, querying UDF metadata
-via INFORMATION SCHEMA will be available soon as part of the product roadmap.
+[DESC[](https://docs.snowflake.net/manuals/sql-reference/sql/desc-function.html)

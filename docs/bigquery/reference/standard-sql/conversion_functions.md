@@ -254,16 +254,5 @@ the cast. You can use the format clause in this section if `expression` is a
 ### CAST AS FLOAT64
 
 ```
-CAST(expression AS FLOAT64)
+CAST(expression<
 ```
-
-**Description**
-
-GoogleSQL supports [casting](#cast) to floating point types.
-The `expression` parameter can represent an expression for these data types:
-
-* `INT64`
-* `FLOAT64`
-* `NUMERIC`
-* `BIGNUMERIC`
-* `STRING`

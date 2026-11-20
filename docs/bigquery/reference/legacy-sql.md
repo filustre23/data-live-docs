@@ -242,6 +242,4 @@ BigQuery 支援 `INNER`、`[FULL|RIGHT|LEFT] OUTER` 和 `CROSS JOIN` 作業。�
 
 ##### EACH 修飾符
 
-`EACH` 修飾符是提示，指示 BigQuery 使用多個分區執行 `JOIN`。如果您知道 `JOIN` 的兩側都很大，這項功能就特別實用。`EACH` 修飾符無法用於 `CROSS JOIN` 子句。
-
-過去，我們會鼓勵使用者在許多情況下使用 `EACH`，如今則不建議這樣做。請盡可能使用不含 `EACH` 修飾符的 `JOIN`，以提升效能。如果查詢失敗，並顯示資源超出上限的錯誤訊息，請使用 `JOIN EACH`。
+`EACH` 修飾符是提示，指示 BigQuery

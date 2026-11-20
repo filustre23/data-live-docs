@@ -485,19 +485,4 @@ HPARAM_TUNING_OBJECTIVES = { 'MEAN_ABSOLUTE_ERROR' | 'MEAN_SQUARED_ERROR' | 'MEA
 **Description**
 
 The hyperparameter tuning objective for the model; only one objective is
-supported. If you specify a value for this option, you must also specify a
-value for [`NUM_TRIALS`](#num_trials).
-
-**Arguments**
-
-The possible objectives are a subset of the
-[model evaluation metrics](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate#output)
-for the model type. If you aren't running hyperparameter tuning, or if you are
-and you don't specify an objective, the `MEAN_SQUARED_ERROR` objective is
-used.
-
-### `KMS_KEY_NAME`
-
-**Syntax**
-
-`KMS_KEY_NA`
+supported. If you

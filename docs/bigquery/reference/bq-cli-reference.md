@@ -288,12 +288,4 @@ gcloud config unset auth/impersonate_service_account
 **`--enable_resumable_uploads={true|false}`**
 :   針對從本機檔案載入資料的工作，啟用透過 HTTP 支援續傳的上傳作業。預設值為 `true`。
 
-**`--fingerprint_job_id={true|false}`**
-:   如要使用衍生自工作設定指紋的工作 ID，請設為 `true`。這可避免不小心多次執行相同工作。預設值為 `false`。
-
-**`--format=FORMAT`**
-:   指定指令輸出內容的格式，請使用下列其中一個值：
-
-    * `pretty`：格式化的資料表輸出內容
-    * `sparse`：簡化的資料表輸出內容
-    * `prettyjson`：容易理解的 JSON 格式
+**`--fingerprint_job_`**

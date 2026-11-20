@@ -187,5 +187,5 @@ public class DDLCreateView {
       } else {
         System.out.println("View was not created");
       }
-    } catch (BigQueryException | InterruptedException e)
+    } catch (
 ```

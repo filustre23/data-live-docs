@@ -141,7 +141,3 @@ Data format for input or output data.
 ## FinalizeStreamRequest
 
 Request information for invoking `FinalizeStream`.
-
-| Fields | |
-| --- | --- |
-| `stream` |  |

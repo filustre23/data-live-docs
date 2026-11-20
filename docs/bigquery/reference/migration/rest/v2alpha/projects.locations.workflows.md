@@ -176,6 +176,5 @@ A single task for a migration which has details about the configuration of the t
 
 Assessment task config.
 
-| JSON representation |
+| JSON representat |
 | --- |
-| ``` {   "inputPath": string,   "outputDataset": string,   "querylogsPath": string,   "dataSource": string ``` |

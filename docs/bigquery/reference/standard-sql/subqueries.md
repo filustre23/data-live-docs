@@ -337,12 +337,4 @@ WHERE
  +----------*/
 ```
 
-In this example, a correlated scalar subquery returns the mascots for a list of
-players, using the [`Players`](#example_tables) and [`Mascots`](#example_tables)
-tables:
-
-```
-SELECT
-  username,
-  (SELECT mascot
-```
+In this example, a correlated scalar subquery returns the m

@@ -20,7 +20,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ## 常見的「存取遭拒」錯誤
 
-以下是常見的存取遭拒錯誤範例：
+以下是常見的「存取遭拒」錯誤範例：
 
 * `Access Denied: Project PROJECT_ID:
   User does not have bigquery.jobs.create permission in project
@@ -155,9 +155,9 @@ RESOURCE_TYPE RESOURCE_ID: DETAILS`)，除了上述一般 IAM 步驟外，請檢
   exist`).**：如果錯誤訊息結尾為 `or perhaps it does not exist`，BigQuery 會遮蓋資料表、檢視表或常式是否存在，因為主體缺少資料集或專案中繼資料權限 (`bigquery.tables.get` 或 `bigquery.datasets.get`)。請確認專案 ID、資料集 ID 和資料表名稱拼寫正確，並確認查詢在資料集所在位置執行。
 * **授權檢視表和常式**。使用者查詢[授權檢視表](https://docs.cloud.google.com/bigquery/docs/authorized-views?hl=zh-tw)或[授權常式](https://docs.cloud.google.com/bigquery/docs/authorized-routines?hl=zh-tw)時，必須具備查詢檢視表或常式的權限，且檢視表或常式本身必須在來源資料集的存取控制清單 (ACL) 中獲得授權。如果查詢因基礎資料表發生 `Access Denied` 而失敗，請將檢視表或常式 (或其整個資料集做為[授權資料集](https://docs.cloud.google.com/bigquery/docs/authorized-datasets?hl=zh-tw)) 新增至來源資料集的授權存取清單。如果某個檢視表查詢另一個檢視表，則鏈結中的每個檢視表都必須獲得授權，才能讀取資料集。
 
-  如果刪除授權檢視表或授權資料集，並建立另一個同名的檢視表或資料集，查詢可能會失敗，並顯示 `Access Denied`。即使名稱仍顯示在來源資料集的授權存取清單中，也可能發生這項錯誤，因為已刪除的項目最多可保留 24 小時。請查看 Cloud 稽核記錄，確認鏈結中的授權檢視表或授權資料集，是否在上次查詢成功後遭到刪除及替換。如要還原存取權，請先從來源資料集的授權存取清單中移除現有項目，然後重新新增檢視表或資料集。如果先新增檢視畫面再移除舊項目，可能會發生 `Duplicate authorized views` 錯誤。
+  如果刪除授權 view 或授權資料集，並建立另一個同名的 view 或資料集，查詢可能會失敗，並顯示 `Access Denied`。即使名稱仍顯示在來源資料集的授權存取清單中，也可能發生這項錯誤，因為已刪除的項目最多可保留 24 小時。請查看 Cloud 稽核記錄，確認自上次查詢成功後，鏈結中的授權檢視表或授權資料集是否遭到刪除及替換。如要還原存取權，請先從來源資料集的授權存取清單中移除現有項目，然後重新新增檢視表或資料集。如果先新增檢視畫面再移除舊項目，可能會發生 `Duplicate authorized views` 錯誤。
 
-  如要修改檢視表而不中斷授權，請[更新檢視表的 SQL 查詢](https://docs.cloud.google.com/bigquery/docs/managing-views?hl=zh-tw#update-sql)，而非刪除並重新建立檢視表。不過，如果您使用 `CREATE OR REPLACE` 陳述式或 `routines.update` 方法修改授權常式，就必須重新授權常式。
+  如要修改檢視表而不破壞授權，請[更新檢視表的 SQL 查詢](https://docs.cloud.google.com/bigquery/docs/managing-views?hl=zh-tw#update-sql)，而非刪除並重新建立檢視表。不過，如果您使用 `CREATE OR REPLACE` 陳述式或 `routines.update` 方法修改已授權的常式，就必須重新授權。
 * **VPC Service Controls**。如果貴組織使用 [VPC Service Controls](https://docs.cloud.google.com/bigquery/docs/vpc-sc?hl=zh-tw)，跨越 service perimeter 邊界的要求會失敗，並傳回 `403 accessDenied` 或 `policyViolation`。在 Cloud 稽核記錄中，搜尋失敗時間點前後的錯誤訊息，找出 `vpcServiceControlsUniqueIdentifier` 值，並使用[違規分析工具](https://docs.cloud.google.com/vpc-service-controls/docs/violation-analyzer?hl=zh-tw)檢查輸入和輸出規則。如要瞭解要使用的 Logs Explorer 查詢，請參閱「[依據機構政策的規定，您無法提出要求](#ts-policy-violation-vpc-sc)」。
 * **基本角色 (`roles/owner`、`roles/editor`、`roles/viewer`)。**基本專案角色不含檢視表所需的組織層級權限 (例如 `INFORMATION_SCHEMA.TABLE_STORAGE_USAGE_TIMELINE_BY_ORGANIZATION`)，也不含特殊權限 (例如 `bigquery.rowAccessPolicies.overrideTimeTravelRestrictions`)，後者是存取資料表歷來資料的必要權限，適用於具有或曾有資料列層級存取權政策的資料表 (請參閱「[時間旅行和資料列層級存取權](https://docs.cloud.google.com/bigquery/docs/time-travel?hl=zh-tw#time_travel_and_row-level_access)」)。請授予預先定義的 [BigQuery IAM 角色](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)，而非依賴基本角色。
 * **暫時性 IAM 政策覆寫 (`SetIamPolicy`)。**如果權限時好時壞，請在管理員活動稽核記錄中搜尋 `protoPayload.methodName=~"SetIamPolicy"`，檢查自動化指令碼或基礎架構即程式碼管道是否覆寫現有政策繫結，而非合併。
@@ -218,7 +218,7 @@ VPC_SERVICE_CONTROLS_UNIQUE_IDENTIFIER`
 
    在 `protoPayload.metadata.violationReason` 下方尋找 `violationReason` 值。找出問題後，請研究記錄項目中的其他詳細資料，並按照現有的 [VPC Service Controls 疑難排解指南](https://docs.cloud.google.com/vpc-service-controls/docs/troubleshooting?hl=zh-tw#debugging)操作。此外，建議您使用[違規分析工具](https://docs.cloud.google.com/vpc-service-controls/docs/violation-analyzer?hl=zh-tw)。
 2. **修正跨專案計費問題。**如果是跨專案查詢，請確保執行查詢的計費專案與查詢的資料位於 perimeter 內的相同 perimeter。如有需要，請使用 Google Cloud 控制台專案挑選器、bq 指令列工具中的 [`--project_id` 旗標](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#project_id_flag)，或 [API 或用戶端程式庫要求](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)，手動指定符合規範的計費專案。
-3. **驗證存取層級。**請使用 [Access Context Manager](https://docs.cloud.google.com/access-context-manager/docs/overview?hl=zh-tw)，確認您的用戶端網路、IP 或使用者帳戶已獲准使用。Google Cloud 控制台需要特別設定輸入規則，允許使用者存取受保護的環境。
+3. **驗證存取層級。**請使用 [Access Context Manager](https://docs.cloud.google.com/access-context-manager/docs/overview?hl=zh-tw)，確認用戶端網路、IP 或使用者帳戶已獲准。Google Cloud 控制台需要特別設定輸入規則，允許使用者存取受保護的環境。
 
 ### 如果專案已啟用 VPC Service Controls，就無法匯出至 Google 雲端硬碟
 
@@ -341,6 +341,30 @@ Cloud 管理員已設定[組織政策限制](https://docs.cloud.google.com/organ
 
 請與 Google Workspace 或 Cloud Identity 管理員聯絡，在 Google 管理控制台中查看帳戶狀態，並還原或取消停權使用者帳戶，或更新工作負載，以便使用有效的服務帳戶進行驗證。
 
+## 專案未啟用計費功能
+
+錯誤字串：
+`Billing has not been enabled for this project. Enable billing at https://console.cloud.google.com/billing. DETAILS`
+
+如果專案未啟用計費功能，或專案在 [BigQuery 沙箱](https://docs.cloud.google.com/bigquery/docs/sandbox?hl=zh-tw#limitations)中執行，且嘗試執行的作業超出沙箱限制，就會發生這個 HTTP `403 Forbidden` 錯誤 (`reason: billingNotEnabled`)。
+
+如何解決這項錯誤：
+
+* **啟用專案的計費功能。**在 Google Cloud 控制台中，將有效的 Cloud Billing 帳戶連結至專案。如需逐步說明，請參閱「[啟用專案的帳單功能](https://docs.cloud.google.com/billing/docs/how-to/modify-project?hl=zh-tw#enable_billing_for_a_project)」。
+
+  [前往「帳單」頁面](https://console.cloud.google.com/billing?hl=zh-tw)
+* **從 BigQuery 沙箱 (`expiration time must be less than 60 days`) 升級。**
+  在 [BigQuery 沙箱](https://docs.cloud.google.com/bigquery/docs/sandbox?hl=zh-tw#limitations)中，資料表、檢視表和分區會在 60 天後自動到期。啟用計費功能，[從 BigQuery 沙箱升級](https://docs.cloud.google.com/bigquery/docs/sandbox?hl=zh-tw#upgrade)，然後更新資料集、資料表、檢視表和分區的預設到期時間。
+
+## 為保護系統運作，要求已遭封鎖
+
+錯誤字串：
+`Request was blocked to protect the system's operation. Please contact support at https://cloud.google.com/support.`
+
+當 BigQuery 暫時將作業加入拒絕清單時，就會發生這個 HTTP `403 Forbidden` 錯誤 (`reason: blocked`)，通常是為了避免更廣泛的服務中斷。
+
+如要解決這項錯誤，請[與 Cloud Customer Care 團隊聯絡](https://cloud.google.com/support?hl=zh-tw)，並提供確切的時間戳記、專案 ID 和 BigQuery 工作 ID，以便 Cloud Customer Care 團隊調查管理緩解規則。
+
 ## 疑難排解資料欄層級存取控管問題
 
 以下各節說明如何排解[資料欄層級存取控管](https://docs.cloud.google.com/bigquery/docs/column-level-security?hl=zh-tw)和 Data Catalog 政策標記的問題。
@@ -355,7 +379,7 @@ Cloud 管理員已設定[組織政策限制](https://docs.cloud.google.com/organ
 
 ### 我已強制執行政策標記，但似乎沒有作用
 
-如果帳戶不應具有存取權，但仍收到查詢結果，可能是因為帳戶收到快取結果。具體來說，如果您先前成功執行查詢，然後強制執行政策標記，則可能會從[查詢結果快取](https://docs.cloud.google.com/bigquery/docs/cached-results?hl=zh-tw)取得結果。根據預設，查詢結果會快取 24 小時。如果[停用結果快取](https://docs.cloud.google.com/bigquery/docs/cached-results?hl=zh-tw#disabling_retrieval_of_cached_results)，查詢會立即失敗。如要進一步瞭解快取，請參閱「[資料欄層級存取控管的影響](https://docs.cloud.google.com/bigquery/docs/cached-results?hl=zh-tw#security)」。
+如果仍收到不應存取帳戶的查詢結果，可能是帳戶收到快取結果。具體來說，如果您先前成功執行查詢，然後強制執行政策標記，則可能會從[查詢結果快取](https://docs.cloud.google.com/bigquery/docs/cached-results?hl=zh-tw)取得結果。根據預設，查詢結果會快取 24 小時。如果[停用結果快取](https://docs.cloud.google.com/bigquery/docs/cached-results?hl=zh-tw#disabling_retrieval_of_cached_results)，查詢會立即失敗。如要進一步瞭解快取，請參閱「[資料欄層級存取控管的影響](https://docs.cloud.google.com/bigquery/docs/cached-results?hl=zh-tw#security)」。
 
 一般來說，IAM 更新作業約需 30 秒才會生效。政策標記階層的變更最多可能需要 30 分鐘才會生效。
 
@@ -382,7 +406,7 @@ Cloud 管理員已設定[組織政策限制](https://docs.cloud.google.com/organ
 * 您無法將這些政策標記套用至已遷移專案中的新資料欄。
 * 現有的資料欄層級存取控管機制可能仍會顯示，但基於管理目的，原始組織中來源分類的連結已中斷。
 
-如要解決這個問題，請聯絡 Google Cloud 支援團隊，由專人手動將分類與新組織重新建立關聯。如果您遷移了含有政策標記的專案，並遇到這些問題，請[與 Cloud Customer Care 聯絡](https://docs.cloud.google.com/support?hl=zh-tw)。
+如要解決這個問題，必須由 Google Cloud 支援團隊手動介入，將分類重新與新組織建立關聯。如果您遷移了含有政策標記的專案，並遇到這些問題，請[與 Cloud Customer Care 聯絡](https://docs.cloud.google.com/support?hl=zh-tw)。
 
 ## 排解資料治理標記問題
 
@@ -390,21 +414,21 @@ Cloud 管理員已設定[組織政策限制](https://docs.cloud.google.com/organ
 
 ### 標記名稱格式不正確
 
-建立標記時，您會定義簡稱 (例如 `ssn`)。不過，將標記附加至結構定義中的資料欄或在條件中使用標記時，標記索引鍵必須使用命名空間格式 (`PROJECT_ID/TAG_KEY` 或 `ORGANIZATION_ID/TAG_KEY`)，而標記值仍使用簡稱。如果只提供標記鍵的簡稱，會產生 `Invalid tagKey` 或 `Invalid tagValue` 錯誤。
+建立標記時，您會定義簡稱 (例如 `ssn`)。不過，將標記附加至結構定義中的資料欄，或在條件中使用標記時，標記索引鍵必須使用命名空間格式 (`PROJECT_ID/TAG_KEY` 或 `ORGANIZATION_ID/TAG_KEY`)，而標記值仍使用簡稱。如果只提供標記鍵的簡稱，會產生 `Invalid tagKey` 或 `Invalid tagValue` 錯誤。
 
-### 跨專案政策套用
+### 跨專案政策應用
 
 根據預設，系統只會評估資料表專案的資料政策。除非在組織層級設定預設資料政策專案，否則其他專案的政策不會套用。如要進一步瞭解如何設定及評估跨專案政策，請參閱「[設定預設資料政策專案](https://docs.cloud.google.com/bigquery/docs/tags?hl=zh-tw#configure-default-data-policy-project)」。
 
 ## 排解客戶自行管理的加密金鑰問題
 
-下列清單說明搭配使用 Cloud Key Management Service 和客戶自行管理的加密金鑰 (CMEK) 時，常見的錯誤和建議解決方法：
+下列清單說明搭配使用客戶自行管理的加密金鑰 (CMEK) 與 Cloud Key Management Service 時，常見的錯誤和建議解決方法：
 
 錯誤：`Please grant Cloud KMS CryptoKey Encrypter/Decrypter role`
 :   **解決方法：**與專案相關聯的 BigQuery 服務帳戶沒有足夠的 IAM 權限，無法對指定的 Cloud KMS 金鑰執行操作。如要授予必要的 IAM 權限，請按照錯誤訊息或「[授予加密和解密權限](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw#grant_permission)」中的指示操作。
 
 錯誤：`Existing table encryption settings don't match encryption settings specified in the request`
-:   **解決方法：**如果目的地資料表的加密設定與要求中的加密設定不符，就可能發生這個錯誤。如要解決這個問題，請使用 `TRUNCATE` 寫入配置來取代資料表，或指定其他目的地資料表。
+:   **解決方法：**如果目的地資料表的加密設定與要求中的加密設定不符，就可能發生這項錯誤。如要解決這個問題，請使用 `TRUNCATE` 寫入配置來取代資料表，或指定其他目的地資料表。
 
 錯誤：`This region is not supported`
 :   **解決方法：**Cloud KMS 金鑰的區域與目的地資料表的 BigQuery 資料集區域不符。如要解決這個問題，請選取與資料集相符的區域金鑰，或將資料載入與金鑰區域相符的資料集。
@@ -423,6 +447,7 @@ Cloud 管理員已設定[組織政策限制](https://docs.cloud.google.com/organ
 * 如要進一步瞭解如何排解 IAM 允許和拒絕政策的問題，請參閱「[排解政策問題](https://docs.cloud.google.com/iam/docs/troubleshoot-policies?hl=zh-tw)」。
 * 如要進一步瞭解 Policy Intelligence 政策分析工具，請參閱「[允許政策的政策分析工具](https://docs.cloud.google.com/policy-intelligence/docs/policy-analyzer-overview?hl=zh-tw)」。
 * 如要進一步瞭解政策疑難排解工具，請參閱「[使用政策疑難排解工具](https://docs.cloud.google.com/iam/docs/troubleshoot-policies?hl=zh-tw#troubleshooter)」。
+* 如需 BigQuery API HTTP 狀態碼和錯誤原因，請參閱「[BigQuery API 的 HTTP 狀態和錯誤代碼](https://docs.cloud.google.com/bigquery/docs/errors?hl=zh-tw)」。
 
 
 
@@ -431,11 +456,11 @@ Cloud 管理員已設定[組織政策限制](https://docs.cloud.google.com/organ
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-12 (世界標準時間)。
+上次更新時間：2026-11-20 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-12 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-20 (世界標準時間)。"],[],[]]

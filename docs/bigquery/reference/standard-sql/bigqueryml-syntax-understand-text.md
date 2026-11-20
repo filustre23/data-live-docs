@@ -225,16 +225,5 @@ CREATE TABLE
       STRUCT('classify_text' AS nlu_option))
   );
 
-SELECT * FROM `mydataset.classfied_result_next`;
+SELECT * FROM `mydataset<
 ```
-
-## What's next
-
-* Get step-by-step instructions on how to
-  [analyze text in a BigQuery table](/bigquery/docs/understand-text)
-  using the `ML.UNDERSTAND_TEXT` function.
-* Learn more about
-  [other functions you can use](/bigquery/docs/reference/standard-sql/inference-overview#pretrained-models)
-  to analyze BigQuery data.
-* For information about model inference, see
-  [Mo](/bigquery/docs/inference-overview)

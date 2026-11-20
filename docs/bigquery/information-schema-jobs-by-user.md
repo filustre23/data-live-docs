@@ -105,10 +105,4 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 請替換下列項目：
 
 * 選用：`PROJECT_ID`： Google Cloud 專案的 ID。如未指定，則會使用預設專案。
-* `REGION`：任何[資料集區域名稱](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。例如：`` `region-us` ``。**注意：**您必須使用[區域限定詞](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw#region_qualifier)，才能查詢 `INFORMATION_SCHEMA` 檢視表。查詢執行位置必須與 `INFORMATION_SCHEMA` 檢視表的區域相符。
-
-**注意：** 查詢 `INFORMATION_SCHEMA.JOBS_BY_USER` 以找出查詢工作的費用摘要時，請排除 `SCRIPT` 陳述式類型，否則部分值可能會重複計算。`SCRIPT` 列包含這項工作執行的所有子項工作摘要值。
-
-## 範例
-
-如要對預設專案以外的專案執行查詢，請按照下列格式新增專案 ID：
+* `REGION`：任何[資料集區域名稱](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。例如：`` `region-us` ``。**注意：**您必須使用[區域限定詞](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw#region_qualifier)，才能查詢 `INFORMATION_SCHEMA` 檢視表。查詢執行位

@@ -153,7 +153,4 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 | `ad_id` | AdId | *字串* | 與報表列相關聯的廣告 ID。 |
 | `ad_name` | AdName | *字串* | 與報表列相關聯的廣告名稱。 |
 | `ACTION_COLLECTION.value` | ActionValue | *整數* | 預設歸因期間的指標值。  Facebook 廣告計畫更新這個資料類型對應。詳情請參閱 [2026 年 7 月 25 日](https://docs.cloud.google.com/bigquery/docs/transfer-changes?hl=zh-tw#Jul25-fb-ads)。 |
-| `ACTION_COLLECTION.1d_click` | Action1dClick | *字串* | 廣告獲得點擊後 1 天的歸因期指標值。 |
-| `ACTION_COLLECTION.1d_view` | Action1dView | *字串* | 廣告觀看後 1 天的歸因回溯期指標值。 |
-| `ACTION_COLLECTION.7d_click` | Action7dClick | *字串* | 歸因期為點擊廣告後 7 天的指標值。 |
 |

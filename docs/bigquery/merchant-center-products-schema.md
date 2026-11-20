@@ -129,6 +129,4 @@ SELECT
   COUNT(*) AS num_products
 FROM
   dataset.Products_merchant_id,
-  UNNEST(destinations) AS destination,
-  UNNEST(disapproved_countries) AS
 ```

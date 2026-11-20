@@ -284,13 +284,5 @@ ORDER BY id;
  | 4  | [{"index":null,"value":"0.4694520369095594"},   |
  |    |  {"index":"like","value":"0.1694595720774407"}, |
  |    |  {"index":"pie","value":"0.11755733298042381"}] |
- +----+-------------------------------------------------*/
-```
-
-The following query computes the relevance of up to three terms that appear at
-least once in a set of tokenized documents:
-
-```
-WITH ExampleTable AS (
-  SELECT
+ +----+----------------------------------------------
 ```

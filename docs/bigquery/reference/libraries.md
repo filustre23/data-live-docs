@@ -175,6 +175,5 @@ public class BigQueryQuery
             SELECT name FROM `bigquery-public-data.usa_names.usa_1910_2013`
             WHERE state = 'TX'
             LIMIT 100";
-        BigQueryJob job = client.CreateQueryJob(
-            sql:
+        BigQueryJob job = client.
 ```

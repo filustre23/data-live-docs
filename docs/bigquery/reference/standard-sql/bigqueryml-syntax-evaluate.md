@@ -463,16 +463,3 @@ ML.EVALUATE(
 ```
 
 ### Arguments
-
-`ML.EVALUATE` takes the following arguments:
-
-* `PROJECT_ID`: the project that contains the resource.
-* `DATASET`: the project that contains the resource.
-* `MODEL`: the name of the model.
-* `TABLE`: the name of the input table that contains the evaluation data.
-
-  If you don't specify a table or query to provide input data, the
-  evaluation metrics that are generated for the model during training are
-  returned.
-
-  The follow

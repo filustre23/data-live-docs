@@ -245,13 +245,5 @@ Salesforce 增量移轉作業有下列限制：
 ```
 bq mk
     --transfer_config
-    --project_id=PROJECT_ID
-    --data_source=DATA_SOURCE
-    --display_name=NAME
-    --target_dataset=DATASET
-    --params='PARAMETERS'
+    --project_id=
 ```
-
-其中：
-
-* PROJECT\_ID (選用)：您的 Google Cloud 專案 ID。如未提供

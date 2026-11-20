@@ -25,6 +25,7 @@ BigQuery `INFORMATION_SCHEMA` 檢視表可讓您擷取 BigQuery 物件的中繼�
 | 資源類型 | INFORMATION\_SCHEMA 檢視表 |
 | --- | --- |
 | 存取控管 | `OBJECT_PRIVILEGESscience`  `ROW_ACCESS_POLICIES` |
+| AI 索引 ([預先發布版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages)) | `AI_INDEXES`  `AI_INDEX_COLUMNS` |
 | BI Engine | `BI_CAPACITIES`  `BI_CAPACITY_CHANGES` |
 | 設定 | `EFFECTIVE_PROJECT_OPTIONS`  `ORGANIZATION_OPTIONS`  `ORGANIZATION_OPTIONS_CHANGES`  `PROJECT_OPTIONS`  `PROJECT_OPTIONS_CHANGES` |
 | 資料集 | `SCHEMATA  SCHEMATA_LINKS  SCHEMATA_OPTIONS  SHARED_DATASET_USAGE  SCHEMATA_REPLICAS  SCHEMATA_REPLICAS_BY_FAILOVER_RESERVATION` |
@@ -146,9 +147,3 @@ SELECT * FROM myProject.myDataset.INFORMATION_SCHEMA.TABLES;
 * [查看 Iceberg 代管資料表中繼資料](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery?hl=zh-tw#view-iceberg-table-metadata-snapshot)。
 * [查看圖表結構定義](https://docs.cloud.google.com/bigquery/docs/graph-schema-overview?hl=zh-tw#view_graph_schemas)。
 * [監控工作](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer?hl=zh-tw)。
-* [使用資訊結構定義排解問題](https://docs.cloud.google.com/bigquery/docs/info-schema-troubleshoot?hl=zh-tw)。
-
-
-
-
-提供意見

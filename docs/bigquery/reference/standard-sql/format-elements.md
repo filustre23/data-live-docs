@@ -194,9 +194,4 @@ CAST(bytes_expression AS STRING FORMAT format_string_expression)
 You can cast a sequence of bytes to a string with a format element in the
 format string. If the bytes can't be formatted with a
 format element, an error is returned. If the sequence of bytes is `NULL`, the
-result is `NULL`. Format elements are case-insensitive.
-
-| Format element | Returns | Example |
-| --- | --- | --- |
-| HEX | Converts a sequence of bytes into a hexadecimal string. | Input: b'\x00\x01\xEF\xFF'  Output: 0001efff |
-| BASEX | Converts a sequence of bytes into a [BASEX](#about_basex_encoding) encoded string. X represents one of these numbers: 2, 8, 16, 32, 64. | Input as BASE8: b'\x02\x11\x |
+result is

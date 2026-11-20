@@ -123,8 +123,3 @@ The file encoding types.
 | `US_ASCII` | File encoding is US\_ASCII. |
 | `UTF_16` | File encoding is UTF\_16. |
 | `UTF_16LE` | File encoding is UTF\_16LE. |
-| `UTF_16BE` | File encoding is UTF\_16BE. |
-
-## TokenType
-
-The special token data type.

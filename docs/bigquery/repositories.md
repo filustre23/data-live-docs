@@ -117,7 +117,7 @@ BigQuery 存放區可讓您控管程式碼檔案的版本，並與團隊協作�
 BigQuery 中的程式碼資產是由 Dataform 提供，因此請考量下列安全性影響，再決定是否讓使用者存取這些資產：
 
 * 程式碼資產的瀏覽權限由專案層級的 Dataform 權限控管。使用者只要具備 `dataform.repositories.list` 權限 (包含在 [BigQuery 工作使用者](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.jobUser)、[BigQuery Studio 使用者](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.studioUser)和 [BigQuery 使用者](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw#bigquery.user)等標準 BigQuery 角色中)，就能在 Google Cloud 專案的「Explorer」面板中查看所有程式碼資產，無論這些資產是否由他們建立或與他們共用。如要限制瀏覽權限，可以建立不含 `dataform.repositories.list` 權限的[自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw)。
-* 凡是與 Dataform 服務代理共用的 Secret，都有可能遭到可編輯這些資產的使用者存取。為確保憑證安全，請限制建立和編輯權限，僅授予信任的使用者，並限制 Dataform 服務代理可存取的 Secret。詳情請參閱「[在套件安裝期間存取 Secret](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#secret-access-risk)」。
+* BigQuery 工作使用者、BigQuery Studio 使用者和 BigQuery 使用者等標準 BigQuery 角色也包含 `dataform.repositories.create` 權限，可讓使用者在 Google Cloud 專案中建立 Dataform 存放區。使用者只要能建立、更新、編輯或編譯 Dataform 存放區，就能在 Google Cloud 專案中，參照或存取與 Dataform 服務代理共用的資源。這項存取權不需要共用資源的直接 IAM 權限，例如 Secret Manager 密鑰、Developer Connect Git 存放區連結，以及用於存放區快照的 Cloud Storage bucket。為保護憑證和儲存空間 bucket，請僅將 Dataform 存放區建立、編輯和編譯權限授予信任的使用者。強制執行 [`constraints/dataform.restrictGitRemotes` 組織政策限制](https://docs.cloud.google.com/dataform/docs/restrict-git-remotes?hl=zh-tw)，並將 Dataform 服務代理的權限範圍限制在必要資源。詳情請參閱「[透過 Dataform 服務代理共用資源存取權](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#service-agent-shared-access)」和「[安裝套件期間的 Secret 存取權](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#secret-access-risk)」。
 
 詳情請參閱「[Dataform 權限的安全性考量](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#security-considerations-permissions)」。
 
@@ -175,7 +175,7 @@ service-PROJECT_NUMBER@gcp-sa-dataform.iam.gserviceaccount.com
 
 BigQuery 會使用含有私人安全殼層金鑰的密鑰登入 Git 供應商，代表使用者修訂變更。BigQuery 會使用使用者的 Google Cloud 電子郵件地址進行這些修訂，因此您可以知道是誰進行了每次修訂。
 
-**警告：**如果 BigQuery 使用者對自訂服務帳戶具備[扮演權限](https://docs.cloud.google.com/dataform/docs/strict-act-as-mode?hl=zh-tw)，則會共用私密安全殼層金鑰。建議您透過 Git 供應商建立機器使用者，並限制其存取權，僅能存取您打算與 BigQuery 搭配使用的遠端 Git 存放區。只有 Google Cloud 專案擁有者和具備[程式碼擁有者角色](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#dataform.codeOwner) (`roles/dataform.codeOwner`) 的 BigQuery 使用者，才能使用安全殼層金鑰連結存放區。BigQuery 使用者無法查看安全殼層金鑰本身。
+**警告：**BigQuery 會使用 Dataform 服務代理，而非呼叫使用者的憑證，存取含有安全殼層金鑰的 Secret Manager 密鑰。在Google Cloud 專案中，具備`dataform.repositories.create`或`dataform.repositories.update`權限的使用者可以附加 Dataform 服務代理可存取的任何密鑰，如果未強制執行[`constraints/dataform.restrictGitRemotes`](https://docs.cloud.google.com/dataform/docs/restrict-git-remotes?hl=zh-tw)組織政策，則可公開附加的密鑰。在已連結的存放區中，有權擷取遠端分支、建立/讀取/提取工作區，或編譯程式碼/發布設定的使用者，可以讀取遠端存放區，而具備 `dataform.workspaces.push` 權限的使用者則可推送變更。在 Git 供應商中建立專用機器使用者，範圍僅限必要的遠端存放區，強制執行 `constraints/dataform.restrictGitRemotes`，並限制 Dataform 服務代理可存取的 Secret。詳情請參閱「[透過 Dataform 服務代理共用資源存取權](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#service-agent-shared-access)」。
 
 如要透過 SSH 將遠端存放區連結至 BigQuery 存放區，請按照下列步驟操作：
 
@@ -315,7 +315,7 @@ BigQuery 會使用含有私人安全殼層金鑰的密鑰登入 Git 供應商，
 
 BigQuery 接著會使用存取權杖登入 Git 供應商，代表使用者提交變更。BigQuery 會使用使用者的 Google Cloud 電子郵件地址進行這些修訂，因此您可以知道是誰進行了每次修訂。
 
-**警告：**私人 HTTPS 權杖會與所有具備自訂服務帳戶[扮演權限](https://docs.cloud.google.com/dataform/docs/strict-act-as-mode?hl=zh-tw)的 BigQuery 使用者共用。建議您透過 Git 供應商建立機器使用者，並限制其存取權，僅能存取您打算與 BigQuery 搭配使用的遠端 Git 存放區。只有 Google Cloud 專案擁有者和具備[程式碼擁有者角色](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#dataform.codeOwner) (`roles/dataform.codeOwner`) 的 BigQuery 使用者，才能使用 HTTPS 權杖連結存放區。BigQuery 使用者無法查看 HTTPS 權杖本身。
+**警告：**BigQuery 會使用 Dataform 服務代理，而非呼叫使用者的憑證，存取含有 HTTPS 權杖的 Secret Manager 密鑰。在Google Cloud 專案中，具備`dataform.repositories.create`或`dataform.repositories.update`權限的使用者可以附加 Dataform 服務代理可存取的任何密鑰，如果未強制執行[`constraints/dataform.restrictGitRemotes`](https://docs.cloud.google.com/dataform/docs/restrict-git-remotes?hl=zh-tw)組織政策，則可公開附加的密鑰。在已連結的存放區中，有權擷取遠端分支、建立/讀取/提取工作區，或編譯程式碼/發布設定的使用者，可以讀取遠端存放區，而具備 `dataform.workspaces.push` 權限的使用者則可推送變更。在 Git 供應商中建立專用機器使用者，範圍僅限必要的遠端存放區，強制執行 `constraints/dataform.restrictGitRemotes`，並限制 Dataform 服務代理可存取的 Secret。詳情請參閱「[透過 Dataform 服務代理共用資源存取權](https://docs.cloud.google.com/dataform/docs/access-control?hl=zh-tw#service-agent-shared-access)」。
 
 如要透過 HTTPS 將遠端存放區連結至 BigQuery 存放區，請按照下列步驟操作：
 
@@ -429,11 +429,11 @@ BigQuery 接著會使用存取權杖登入 Git 供應商，代表使用者提交
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-18 (世界標準時間)。
+上次更新時間：2026-11-20 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-18 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-20 (世界標準時間)。"],[],[]]

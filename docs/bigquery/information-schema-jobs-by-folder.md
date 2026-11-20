@@ -96,12 +96,4 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ## 範圍和語法
 
-對這個檢視表執行的查詢必須包含[區域限定詞](https://docs.cloud.google.com/bigquery/docs/information-schema-intro?hl=zh-tw#syntax)。下表說明這個檢視畫面的區域範圍：
-
-| 檢視表名稱 | 資源範圍 | 區域範圍 |
-| --- | --- | --- |
-| `` [PROJECT_ID.]`region-REGION`.INFORMATION_SCHEMA.JOBS_BY_FOLDER `` | 包含指定專案的資料夾 | `REGION` |
-
-請替換下列項目：
-
-* 選用：`PROJECT_ID`： Google Cloud
+對這個檢視表執行的查詢必須包含

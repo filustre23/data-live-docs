@@ -16,7 +16,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 建立邏輯檢視表
 
-邏輯檢視表可讓您將 SQL 查詢儲存為虛擬資料表，以便重複使用查詢邏輯，並簡化資料存取作業。本文說明如何建立邏輯檢視表，包括檢視表命名規則和限制。
+邏輯檢視表可讓您將 SQL 查詢儲存為虛擬資料表，有助於重複使用查詢邏輯，並簡化資料存取作業。本文說明如何建立邏輯檢視表，包括檢視表命名規則和限制。
 
 ## 資料檢視限制
 
@@ -27,22 +27,22 @@ BigQuery 資料檢視有下列幾項限制：
 * 檢視表內的參照必須符合資料集。預設資料集不會影響檢視表主體。
 * 您無法使用 `TableDataList` JSON API 方法從檢視表擷取資料。詳情請參閱 [Tabledata：list](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list?hl=zh-tw) 的相關說明。
 * 使用檢視表時，您無法混合使用 GoogleSQL 和舊版 SQL 查詢。GoogleSQL 查詢無法參照使用舊版 SQL 語法定義的檢視表。
-* 您無法在檢視表中參照[查詢參數](https://docs.cloud.google.com/bigquery/docs/parameterized-queries?hl=zh-tw)。
-* 建立檢視表時，系統會將基礎資料表的結構定義和檢視表一併儲存。如果在建立檢視表後新增、刪除或修改資料欄，檢視表不會自動更新，且回報的結構定義會維持不準確狀態，直到檢視表 SQL 定義變更或重新建立檢視表為止。雖然回報的結構定義可能不準確，但所有提交的查詢都會產生準確的結果。
+* 您無法在檢視表中參照[查詢參數](https://docs.cloud.google.com/bigquery/docs/parameterized-queries?hl=zh-tw)。如要使用來自受信任後端應用程式的個別要求參數，動態篩選邏輯檢視表，可以使用 [`SECURE_CONTEXT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/security_functions?hl=zh-tw#secure_context) ([預先發布版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))。
+* 建立檢視表時，系統會將基礎資料表的結構定義和檢視表一併儲存。如果在建立檢視表後新增、刪除或修改資料欄，檢視表不會自動更新，且回報的結構定義會維持不準確的狀態，直到檢視表 SQL 定義變更或重新建立檢視表為止。雖然回報的結構定義可能不準確，但所有提交的查詢都會產生準確的結果。
 * 您無法自動將舊版 SQL 檢視表更新為 GoogleSQL 語法。如要修改用於定義檢視表的查詢，可以使用下列指令：
   + Google Cloud 控制台中的「Edit query」(編輯查詢) 選項
   + bq 指令列工具中的 [`bq update --view`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_update) 指令
   + [BigQuery 用戶端程式庫](https://docs.cloud.google.com/bigquery/docs/reference/libraries?hl=zh-tw)
   + [update](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/update?hl=zh-tw) 或 [patch](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch?hl=zh-tw) API 方法。
 * 在定義檢視表的 SQL 查詢中，不得包含 temporary user-defined function 或臨時資料表。
-* 您無法在[萬用字元資料表](https://docs.cloud.google.com/bigquery/docs/querying-wildcard-tables?hl=zh-tw)查詢中參照檢視表。
-* 邏輯檢視表無法繼承或明確定義[參數化資料類型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#parameterized_data_types) (例如 `STRING(n)`)，因為參數化資料類型僅適用於基礎資料表資料欄和指令碼變數。
+* 您無法在 [Wildcard 資料表](https://docs.cloud.google.com/bigquery/docs/querying-wildcard-tables?hl=zh-tw)查詢中參照檢視表。
+* 邏輯檢視表無法繼承或明確定義[參數化資料類型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#parameterized_data_types) (例如 `STRING(n)`)，因為只有基礎資料表資料欄和指令碼變數支援參數化資料類型。
 
-如要瞭解檢視表的配額和限制，請參閱「[檢視表限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#view_limits)」。
+如要瞭解檢視表適用的配額和限制，請參閱「[檢視表限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#view_limits)」。
 
 ## 事前準備
 
-授予 Identity and Access Management (IAM) 角色，讓使用者具備必要權限，可執行本文件中的各項工作。
+授予 Identity and Access Management (IAM) 角色，讓使用者具備執行本文件各項工作所需的權限。
 
 ### 所需權限
 
@@ -50,17 +50,17 @@ BigQuery 資料檢視有下列幾項限制：
 
 * 如要建立資料集，您必須具備專案的 `bigquery.datasets.create` IAM 權限。
 * 如要建立檢視表，您必須具備資料集的 `bigquery.tables.create` IAM 權限。`roles/bigquery.dataEditor` 預先定義的 IAM 角色包含建立檢視表所需的權限。
-* 如要建立檢視表來查詢您無權存取的資料表，您必須具備檢視表查詢資料表的 `bigquery.tables.getData` 權限。
+* 如要建立檢視表來查詢您無權存取的資料表，您必須具備該資料表的 `bigquery.tables.getData` 權限。
 
 如要進一步瞭解 BigQuery 的 IAM 角色和權限，請參閱「[預先定義的角色和權限](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)」。
 
-**注意：** 如要建立或更新[授權檢視表](https://docs.cloud.google.com/bigquery/docs/authorized-views?hl=zh-tw)，或[授權資料集](https://docs.cloud.google.com/bigquery/docs/authorized-datasets?hl=zh-tw#create_or_update_view)中的檢視表，您需要額外權限。詳情請參閱「[授權檢視表的必要權限](https://docs.cloud.google.com/bigquery/docs/authorized-views?hl=zh-tw#required_permissions)」和「[授權資料集內檢視表的必要權限](https://docs.cloud.google.com/bigquery/docs/authorized-datasets?hl=zh-tw#permissions_datasets)」。
+**注意：**如要建立或更新[授權檢視表](https://docs.cloud.google.com/bigquery/docs/authorized-views?hl=zh-tw)，或[授權資料集](https://docs.cloud.google.com/bigquery/docs/authorized-datasets?hl=zh-tw#create_or_update_view)中的檢視表，您需要額外權限。詳情請參閱「[授權檢視表的必要權限](https://docs.cloud.google.com/bigquery/docs/authorized-views?hl=zh-tw#required_permissions)」和「[授權資料集內檢視表的必要權限](https://docs.cloud.google.com/bigquery/docs/authorized-datasets?hl=zh-tw#permissions_datasets)」。
 
 ## 檢視表命名
 
 在 BigQuery 中建立檢視表時，檢視表名稱在同一資料集中不得重複。以下是檢視表的命名規則：
 
-* 包含總計最多 1,024 個 UTF-8 位元組的字元。
+* 包含最多 1,024 個 UTF-8 位元組的字元。
 * 包含 L (字母)、M (標記)、N (數字)、Pc (連接符號，包括底線)、Pd (破折號)、Zs (空格) 類別的 Unicode 字元。詳情請參閱「[一般類別](https://wikipedia.org/wiki/Unicode_character_property#General_Category)」。
 
 以下是有效的檢視表名稱範例：`view 01`、`ग्राहक`、`00_お客様`、`étudiant-01`。
@@ -69,18 +69,17 @@ BigQuery 資料檢視有下列幾項限制：
 
 * 根據預設，資料表名稱會區分大小寫。`mytable` 和 `MyTable` 可以共存於同一個資料集，除非它們是[不區分大小寫的資料集](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#creating_a_case-insensitive_dataset)的一部分。
 * 部分檢視表名稱和檢視表名稱前置字元為保留字，如果收到錯誤訊息，指出檢視表名稱或前置字串已保留，請選取其他名稱，然後再試一次。
-* 如果您在序列中加入多個點運算子 (`.`)，系統會隱含移除重複的運算子。
+* 如果您在序列中加入多個點運算子 (`.`)，系統會自動移除重複的運算子。
 
   例如：
   `project_name....dataset_name..table_name`
 
-  變成：
+  會變成：
   `project_name.dataset_name.table_name`
 
 ## 建立檢視表
 
-您可以編寫 SQL 查詢，定義檢視表可存取的資料，藉此建立檢視表。SQL 查詢必須包含 `SELECT` 陳述式。檢視表查詢不允許其他陳述式類型 (例如 DML 陳述式) 和[多陳述式查詢](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries?hl=zh-tw)，但 `@@session_id`
-[系統變數](https://docs.cloud.google.com/bigquery/docs/reference/system-variables?hl=zh-tw)除外。
+您可以編寫 SQL 查詢來建立檢視表，定義檢視表可存取的資料。SQL 查詢必須包含 `SELECT` 陳述式。檢視表查詢不允許其他陳述式類型 (例如 DML 陳述式) 和[多陳述式查詢](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries?hl=zh-tw)，但 `@@session_id` [系統變數](https://docs.cloud.google.com/bigquery/docs/reference/system-variables?hl=zh-tw)除外。
 
 如何建立資料檢視：
 
@@ -89,20 +88,20 @@ BigQuery 資料檢視有下列幾項限制：
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 按一下「add\_box SQL 查詢」。
+2. 按一下 add\_box「SQL query」(SQL 查詢)。
 3. 在查詢編輯器中，輸入有效的 SQL 查詢。
 
    或者，您也可以[開啟已儲存的查詢](https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries?hl=zh-tw#open_a_saved_query_version_as_a_new_query)。
 4. 依序點選
-   **「儲存」 >「儲存 view」**。
+   **「儲存」>「儲存 view」**。
 5. 在「Save view」(儲存檢視表) 對話方塊中：
 
    * 在「Project」(專案) 選單中，選取要儲存檢視表的專案。
    * 在「Dataset」(資料集) 選單中，選取資料集或建立新的資料集，用來儲存檢視表。已儲存檢視表的目的地資料集必須與來源位於相同[區域](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)。
    * 在「Table」(資料表) 欄位中，輸入檢視表名稱。
-   * 按一下 [儲存]。
+   * 按一下「儲存」。
 
-**注意：** 使用 Google Cloud 控制台建立檢視表時，無法新增標籤、說明或到期時間。使用 API 或 bq 指令列工具建立檢視表時，可以新增這些選用屬性。使用 Google Cloud 控制台建立檢視表後，您可以新增到期時間、說明和標籤。詳情請參閱「[更新檢視表](https://docs.cloud.google.com/bigquery/docs/managing-views?hl=zh-tw)」。
+**注意：**使用 Google Cloud 控制台建立檢視表時，無法新增標籤、說明或到期時間。使用 API 或 bq 指令列工具建立檢視表時，可以新增這些選用屬性。使用 Google Cloud 控制台建立檢視表後，您可以新增到期時間、說明和標籤。詳情請參閱「[更新檢視表](https://docs.cloud.google.com/bigquery/docs/managing-views?hl=zh-tw)」。
 
 ### SQL
 
@@ -132,7 +131,7 @@ BigQuery 資料檢視有下列幾項限制：
 
 ### bq
 
-使用 [`bq mk` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_mk)，並加上 `--view` 旗標。如果是 GoogleSQL 查詢，請新增 `--use_legacy_sql` 旗標，並將其設為 `false`。部分選用參數包括 `--add_tags`、`--expiration`、`--description` 和 `--label`。如需完整的參數清單，請參閱 [`bq mk` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_mk)參考資料。
+使用 [`bq mk` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_mk)，並加上 `--view` 旗標。如果是 GoogleSQL 查詢，請新增 `--use_legacy_sql` 旗標並設為 `false`。部分選用參數包括 `--add_tags`、`--expiration`、`--description` 和 `--label`。如需完整的參數清單，請參閱 [`bq mk` 指令](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#bq_mk)參考資料。
 
 如果查詢參照儲存在 Cloud Storage 或本機檔案中的外部 user-defined function (UDF) 資源，請使用 `--view_udf_resource` 旗標指定這些資源。本文不示範 `--view_udf_resource` 旗標。如要進一步瞭解如何使用 UDF，請參閱「[UDF](https://docs.cloud.google.com/bigquery/docs/user-defined-functions?hl=zh-tw)」。
 
@@ -156,10 +155,10 @@ DATASET.VIEW
 更改下列內容：
 
 * `PATH_TO_FILE` 是程式碼檔案的 URI 或本機檔案系統路徑，該檔案會立即載入並評估為檢視表使用的 UDF 資源。請重複該標記以指定多個檔案。
-* `INTEGER` 會設定檢視畫面的生命週期 (以秒為單位)。如果 `INTEGER` 為 `0`，則檢視表不會過期。如果不加入 `--expiration` 旗標，BigQuery 會使用資料集的預設資料表生命週期建立檢視表。
+* `INTEGER` 會設定檢視畫面的生命週期 (以秒為單位)。如果 `INTEGER` 為 `0`，檢視表就不會過期。如果不加入 `--expiration` 旗標，BigQuery 會使用資料集的預設資料表生命週期建立檢視表。
 * `DESCRIPTION` 是資料檢視的說明，會用引號括住。
 * `KEY_1:VALUE_1` 是代表[標籤](https://docs.cloud.google.com/bigquery/docs/adding-labels?hl=zh-tw)的鍵/值組合。重複使用 `--label` 旗標，即可指定多個標籤。
-* `KEY_2:VALUE_2` 是代表[標記](https://docs.cloud.google.com/bigquery/docs/labels?hl=zh-tw)的鍵/值組合。在同一個旗標下新增多個標記，並在鍵/值組合之間加上半形逗號。
+* `KEY_2:VALUE_2` 是代表[標記](https://docs.cloud.google.com/bigquery/docs/labels?hl=zh-tw)的鍵/值組合。在同一個旗標下新增多個標記，並以半形逗號分隔鍵/值組合。
 * `QUERY` 是有效查詢。
 * `PROJECT_ID` 是您的專案 ID (如果未設定預設專案)。
 * `DATASET` 是專案中的資料集。
@@ -215,11 +214,11 @@ mydataset.myview
 
 使用 [`google_bigquery_table`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_table) 資源。
 
-**注意：** 如要使用 Terraform 建立 BigQuery 物件，必須啟用 [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest?hl=zh-tw)。
+**注意：**如要使用 Terraform 建立 BigQuery 物件，必須啟用 [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。詳情請參閱「[設定用戶端程式庫的驗證機制](https://docs.cloud.google.com/bigquery/docs/authentication?hl=zh-tw#client-libs)」。
 
-以下範例說明如何建立名為 `myview` 的檢視表：
+以下範例會建立名為 `myview` 的檢視表：
 
 ```
 resource "google_bigquery_dataset" "default" {
@@ -255,7 +254,7 @@ resource "google_bigquery_table" "default" {
 1. 啟動 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw)。
 2. 設定要套用 Terraform 設定的預設 Google Cloud 專案。
 
-   每個專案只需執行這個指令一次，而且可以在任何目錄中執行。
+   這項指令在每個專案中只需執行一次，且可在任何目錄中執行。
 
    ```
    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
@@ -265,7 +264,7 @@ resource "google_bigquery_table" "default" {
 
 ## 準備目錄
 
-每個 Terraform 設定檔都必須有自己的目錄 (也稱為*根模組*)。
+每個 Terraform 設定檔都必須有自己的目錄 (也稱為「根模組」)。
 
 1. 在 [Cloud Shell](https://shell.cloud.google.com/?hl=zh-tw) 中建立目錄，並在該目錄中建立新檔案。檔案名稱必須有 `.tf` 副檔名，例如 `main.tf`。在本教學課程中，這個檔案稱為 `main.tf`。
 
@@ -285,7 +284,7 @@ resource "google_bigquery_table" "default" {
    terraform init
    ```
 
-   如要使用最新版 Google 供應商，請視需要加入 `-upgrade` 選項：
+   如要使用最新版 Google 供應商，可以視需要加入 `-upgrade` 選項：
 
    ```
    terraform init -upgrade
@@ -307,7 +306,7 @@ resource "google_bigquery_table" "default" {
    ```
 
    等待 Terraform 顯示「Apply complete!」訊息。
-3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)即可查看結果。在 Google Cloud 控制台的使用者介面中，前往資源頁面，確認 Terraform 已建立或更新資源。
+3. [開啟 Google Cloud 專案](https://console.cloud.google.com/?hl=zh-tw)即可查看結果。在 Google Cloud 控制台的 UI 中前往資源，確認 Terraform 已建立或更新資源。
 
 **注意：**Terraform 範例通常會假設 Google Cloud 專案已啟用必要的 API。
 
@@ -468,7 +467,7 @@ view = client.create_table(view)
 print(f"Created {view.table_type}: {str(view.reference)}")
 ```
 
-建立檢視表後，您可以像查詢資料表一樣[查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw)檢視表。
+建立檢視表後，您可像查詢資料表一樣[查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw)檢視表。
 
 ## 查看安全性
 
@@ -478,7 +477,7 @@ print(f"Created {view.table_type}: {str(view.reference)}")
 
 * 如要瞭解如何建立授權檢視表，請參閱「[建立授權檢視表](https://docs.cloud.google.com/bigquery/docs/authorized-views?hl=zh-tw)」。
 * 如要瞭解如何取得檢視表中繼資料，請參閱「[取得檢視表相關資訊](https://docs.cloud.google.com/bigquery/docs/view-metadata?hl=zh-tw)」。
-* 如要進一步瞭解如何管理檢視表，請參閱「[管理檢視表](https://docs.cloud.google.com/bigquery/docs/managing-views?hl=zh-tw)」。
+* 如要進一步瞭解如何管理檢視畫面，請參閱「[管理檢視畫面](https://docs.cloud.google.com/bigquery/docs/managing-views?hl=zh-tw)」。
 
 
 
@@ -487,11 +486,11 @@ print(f"Created {view.table_type}: {str(view.reference)}")
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-11 (世界標準時間)。
+上次更新時間：2026-11-20 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-11 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-20 (世界標準時間)。"],[],[]]

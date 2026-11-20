@@ -36,7 +36,7 @@ BigQuery 提供下列類別的 AI 函式：
 您可以使用 BigQuery ML 中的遠端模型，參照部署或託管於 Agent Platform 的模型，並搭配 [`AI.GENERATE_TEXT` 資料表值函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text?hl=zh-tw)，執行生成式 AI 任務。您可以使用下列類型的[遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw)：
 
 * 透過任何[正式發布](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models?hl=zh-tw#generally_available_models)或[預先發布版](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models?hl=zh-tw#preview_models)的 Gemini 模型，使用遠端模型分析標準資料表或物件資料表中的文字、圖片、音訊、影片或 PDF 內容，並以函式引數的形式提供提示。
-* 透過 [Anthropic Claude](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/partner-models/use-claude?hl=zh-tw)、[Mistral AI](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/partner-models/mistral?hl=zh-tw) 或 [Llama](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/partner-models/llama?hl=zh-tw) 合作夥伴模型，或[支援的開放式模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open?hl=zh-tw#supported_open_models)，使用遠端模型分析您在查詢中或[標準資料表](https://docs.cloud.google.com/bigquery/docs/tables-intro?hl=zh-tw#standard-tables)資料欄中提供的提示。
+* [Anthropic Claude](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/partner-models/use-claude?hl=zh-tw)、[Mistral AI](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/partner-models/mistral?hl=zh-tw) 或 [Llama](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/partner-models/llama?hl=zh-tw) 合作夥伴模型，或[支援的開放式模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open?hl=zh-tw#supported_open_models)的遠端模型，用於分析您在查詢中或[標準資料表](https://docs.cloud.google.com/bigquery/docs/tables-intro?hl=zh-tw#standard-tables)資料欄中提供的提示。
 
 請參閱下列主題，嘗試在 BigQuery ML 中生成文字：
 
@@ -112,6 +112,7 @@ BigQuery 提供下列類別的 AI 函式：
 
 BigQuery 支援下列模型：
 
+* `gemini-4-neon`
 * `gemini-4-hydrogen`
 * `gemini-4-carbon`
 * `gemini-4-argon`
@@ -198,7 +199,7 @@ BigQuery 的生成式 AI 函式會向 Gemini Enterprise Agent Platform 傳送要
 
 所有 AI 函式都可能發生這些錯誤。不過，代管 AI 函式 (`AI.IF`、`AI.CLASSIFY` 和 `AI.SCORE`) 支援 `max_error_ratio` 引數，可協助您管理函式。使用這個引數設定失敗門檻，即使發生資料列層級失敗，查詢仍可成功。
 
-`max_error_ratio` 的預設值為 `1.0`。如要降低錯誤容忍度，請將其設為較小的值 (例如 `0.2`)，這樣查詢就會失敗，而不是部分失敗。如需語法詳細資料，請參閱 [`AI.IF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-if?hl=zh-tw#arguments)、[`AI.CLASSIFY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-classify?hl=zh-tw#arguments) 或 [`AI.SCORE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-score?hl=zh-tw#arguments) 的參考文件。
+`max_error_ratio` 的預設值為 `1.0`。如要降低容錯率，請將容錯率設為較小的值 (例如 `0.2`)，這樣查詢就會失敗，而不是部分失敗但仍成功。如需語法詳細資料，請參閱 [`AI.IF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-if?hl=zh-tw#arguments)、[`AI.CLASSIFY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-classify?hl=zh-tw#arguments) 或 [`AI.SCORE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-score?hl=zh-tw#arguments) 的參考文件。
 
 如果查詢成功，但有部分失敗，BigQuery 會傳回警告。如要進一步瞭解函式錯誤，請前往 Google Cloud 控制台，在查詢結果的「Job information」(工作資訊) 分頁中，查看「Gen AI function errors」(生成式 AI 函式錯誤) 欄位。
 
@@ -221,11 +222,11 @@ BigQuery 的生成式 AI 函式會向 Gemini Enterprise Agent Platform 傳送要
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-18 (世界標準時間)。
+上次更新時間：2026-11-19 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-18 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-19 (世界標準時間)。"],[],[]]

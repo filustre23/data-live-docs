@@ -334,10 +334,3 @@ collation-supported types. In a collation-supported operation:
   explicitly defined collation is used for both.
 
 For example:
-
-```
--- Assume there's a table with this column declaration:
-CREATE TABLE table_a
-(
-    col_a STRING COLLATE 'un
-```

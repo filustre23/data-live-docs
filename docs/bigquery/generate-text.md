@@ -1331,24 +1331,4 @@ STRUCT(
   模型會按照機率最高到最低的順序選取詞元，直到所選詞元的機率總和等於 `TOP_P` 值。舉例來說，假設詞元 A、B 和 C 的可能性分別為 `0.3`、`0.2` 和 `0.1`，而 `TOP_P` 值為 `0.5`，模型會依據 `TEMPERATURE` 值選擇 A 或 B 做為下一個詞元，並排除 C。
 * `TEMPERATURE`：`FLOAT64` 值，範圍為 `[0.0,1.0]`，可控制選取詞元的隨機程度。如果想藉由提示生成更具確定性、較不具開放性和創意性的回覆，建議調低 `TEMPERATURE` 值。另一方面，如果 `TEMPERATURE` 值較高，則可能產生較多元或有創意的結果。`TEMPERATURE` 值為 `0` 代表具有確定性，即模型一律會選取可能性最高的回覆。預設為 `0`。
 * `STOP_SEQUENCES`：`ARRAY` 值，如果模型的回覆中包含指定字串，則會移除這些字串。字串必須完全相符，包括大小寫。預設值為空陣列。
-* `SAFETY_SETTINGS`：`ARRAY>` 值，用於設定內容安全門檻來篩選回覆。struct 中的第一個元素指定有害內容類別，第二個元素則指定對應的封鎖門檻。模型會篩除違反這些設定的內容。每個類別只能指定一次。舉例來說，您無法同時指定 `STRUCT('HARM_CATEGORY_DANGEROUS_CONTENT' AS category,
-  'BLOCK_MEDIUM_AND_ABOVE' AS threshold)` 和 `STRUCT('HARM_CATEGORY_DANGEROUS_CONTENT' AS category,
-  'BLOCK_ONLY_HIGH' AS threshold)`。如果特定類別沒有安全設定，系統會使用 `BLOCK_MEDIUM_AND_ABOVE` 安全設定。
-
-  支援的類別如下：
-
-  + `HARM_CATEGORY_HATE_SPEECH`
-  + `HARM_CATEGORY_DANGEROUS_CONTENT`
-  + `HARM_CATEGORY_HARASSMENT`
-  + `HARM_CATEGORY_SEXUALLY_EXPLICIT`
-
-  支援的門檻如下：
-
-  + `BLOCK_NONE`
-    ([受限](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/multimodal/configure-safety-attributes?hl=zh-tw#how_to_remove_automated_response_blocking_for_select_safety_attributes))
-  + `BLOCK_LOW_AND_ABOVE`
-  + `BLOCK_MEDIUM_AND_ABOVE` (預設)
-  + `BLOCK_ONLY_HIGH`
-  + `HARM_BLOCK_THRESHOLD_UNSPECIFIED`
-
-  詳情請參閱
+* `SAFETY_SETTINGS`：`ARRAY>` 值，用於設定內容安全門檻來篩選回覆。struct 中的第一個元素指定有害內容類別，第二個元素則指定對應的封鎖門檻。模型

@@ -919,7 +919,5 @@ public class DisableTransferConfig {
     disableTransferConfig(transferConfig, updateMask);
   }
 
-  public static void disableTransferConfig(TransferConfig transferConfig, FieldMask updateMask)
-      throws IOException {
-    try (DataTransferServiceClient
+  public static void disableTransferConfig(TransferConfig transferConfig,
 ```

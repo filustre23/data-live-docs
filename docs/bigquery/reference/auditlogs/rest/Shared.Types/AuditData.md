@@ -150,5 +150,4 @@ Describes a BigQuery table. See the [Table](/bigquery/docs/reference/v2/tables) 
 
 | Fields | |
 | --- | --- |
-| `tableName` | `object (TableName)`  The name of the table. |
-| `info` | `object (TableInfo)`  User-provided metadata for the table.</ |
+| `tableName` |

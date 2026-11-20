@@ -1137,19 +1137,4 @@ print(
        transaction_id, transaction_date
      FROM
        mydataset.mytable
-   );
    ```
-
-   使用 [`OPTIONS` 子句](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#table_option_list)設定資料表選項，例如[分區篩選器需求條件](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#require-filter)。
-3. 按一下「play\_circle 執行」。
-
-如要進一步瞭解如何執行查詢，請參閱「[執行互動式查詢](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)」。
-
-### bq
-
-1. 在 Google Cloud 控制台啟用 Cloud Shell。
-
-   [啟用 Cloud Shell](https://console.cloud.google.com/?cloudshell=true&hl=zh-tw)
-
-   Google Cloud 控制台底部會開啟 [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works?hl=zh-tw) 工作階段，並顯示指令列提示。Cloud Shell 是已安裝 Google Cloud CLI 的殼層環境，並已設定適用於您目前專案的值。工作階段可能要幾秒鐘的時間才能初始化。
-2. 如要透過查詢建立

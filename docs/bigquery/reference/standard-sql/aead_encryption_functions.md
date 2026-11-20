@@ -236,10 +236,4 @@ encrypted in `ciphertext`.
 `ciphertext` is a `BYTES` value that's the result of a call to
 `DETERMINISTIC_ENCRYPT` where the input `plaintext` was of type `BYTES`.
 
-The ciphertext must follow Tink's [wire format](https://developers.google.com/tink/wire-format#deterministic_aead). The first
-byte of `ciphertext` should contain a Tink key version followed by a 4 byte key
-hint. If `ciphertext` includes an initialization vector (IV), it should be the
-next bytes of `ciphertext`. If `ciphertext` includes an authentication tag, it
-should be the last bytes of `ciphertext`. If the IV and authentic tag are one
-(SIV), it should be the first bytes of `ciphertext`. The IV and authentication
-tag commonly require 16 b
+The ciphertext must follow Tink&

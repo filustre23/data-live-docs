@@ -365,13 +365,4 @@ ORDER BY
 ```
 
 If the time series input column names are `date` and `temperature`, then
-this query returns results similar to the following:
-
-```
-+-------------------------+-------------+------------+---------------------+---------------------+----------------------+
-|      date               | temperature | is_anomaly | lower_bound         | upper_bound         | anomaly_probability  |
-+-------------------------+-------------+------------+---------------------+---------------------+----------------------+
-| 2009-08-11 00:00:00 UTC |  70.1       |    false   |  67.65879917809896  |  72.541200821901029 |  0.0                 |
-| 2009-08-12 00:00:00 UTC |  73.4       |    false   |  71.714971312549849 |  76.597372956351919 |  0.20573021642489953 |
-| 2009-08-13
-```
+this query returns results similar to the

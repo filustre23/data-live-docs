@@ -253,13 +253,4 @@ bq mk
 
 如要輪替用戶端密鑰，請按照下列步驟操作：
 
-1. 在已安裝的套件設定中，[產生並暫存用戶端密鑰](https://developer.salesforce.com/docs/marketing/marketing-cloud/guide/rotate-oauth2-secret.html)。
-2. 請按照下列步驟更新 BigQuery 資料移轉服務設定，以使用新的用戶端密鑰：
-
-   1. 前往 Google Cloud 控制台的「資料移轉」頁面。
-
-      [前往「資料移轉」](https://console.cloud.google.com/bigquery/transfers?hl=zh-tw)
-   2. 在資料移轉清單中，按一下 Salesforce Marketing Cloud 移轉作業。
-   3. 按一下「編輯」，更新移轉設定。
-   4. 在「Client ID」和「staged Client Secret」欄位中，將值更新為新的用戶端密鑰。
-   5. 按一下「儲存」。
+1. 在已安裝的套件設定中，[產生並暫存用](https://developer.salesforce.com/docs/marketing/marketing-cloud/guide/rotate-oauth2-secret.html)

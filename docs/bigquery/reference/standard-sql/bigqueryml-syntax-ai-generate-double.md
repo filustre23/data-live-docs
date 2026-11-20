@@ -145,6 +145,7 @@ AI.GENERATE_DOUBLE(
   control or know the region where your processing requests are handled.
 
   BigQuery supports the following models:
+  + `gemini-4-neon`
   + `gemini-4-hydrogen`
   + `gemini-4-carbon`
   + `gemini-4-argon`
@@ -153,9 +154,10 @@ AI.GENERATE_DOUBLE(
   + `gemini-3.6-flash`
   + `gemini-3.5-flash-lite`
   + `gemini-3.5-flash`
-  + `gemini-3.1-flash-lite`Agent Platform only supports multi-regional endpoints for
-  these models. Regional endpoints aren't supported.
-  If you specify a short endpoint name that omits the region, such as `gemini-3.5-flash`,
+  + `gemini-3.1-flash-lite`For most models, Agent Platform only supports multi-regional
+  endpoints. For a complete list of which models have support
+  in which regions, see [Google model endpoint locations](/gemini-enterprise-agent-platform/resources/locations#google-models).
+  If you specify a short endpoint name that omits the region, such as `gemini-4-argon`,
   then BigQuery selects an endpoint according to the following rules:
   + If your query is run in the `us` region, or any single region in the US, then
     BigQuery uses the `us` endpoint.
@@ -163,7 +165,7 @@ AI.GENERATE_DOUBLE(
     `europe-west2` or `europe-west6`, then BigQuery
     uses the `eu` endpoint.
   + For all other locations, including `europe-west2` and
-    `europe-west6`, BigQuery uses the `global` endpoint.To specify a specific endpoint, use a fully qualified multi-regional endpoint name in one of the
+    `europe-west6`, BigQuery uses the `global` endpoint.To specify a specific multi-regional endpoint, use a fully qualified endpoint name in one of the
   following formats:
   + `https://aiplatform.us.rep.googleapis.com/v1/projects/PROJECT_ID/locations/us/publishers/google/models/MODEL_ID`
   + `https://aiplatform.eu.rep.googleapis.com/v1/projects/PROJECT_ID/locations/eu/publishers/google/models/MODEL_ID`
@@ -362,12 +364,3 @@ For information about managing the cost of this function, see
 * For more information about supported SQL statements and functions for
   generative AI models, see
   [End-to-end user journeys for generative AI models](/bigquery/docs/e2e-journey-genai).
-
-
-
-
-Send feedback
-
-Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
-
-Last updated 2026-11-12 UTC.

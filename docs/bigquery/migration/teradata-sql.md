@@ -58,5 +58,4 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 | `INTERVAL MONTH` | `INT64` |  |
 | `INTERVAL YEAR` | `INT64` |  |
 | `PERIOD(DATE)` | `DATE`、`DATE` | `PERIOD(DATE)` 應轉換為兩個包含開始日期和結束日期的 `DATE` 欄，以便與視窗函式搭配使用。 |
-| `PERIOD(TIMESTAMP WITH TIME ZONE)` | `TIMESTAMP`、`TIMESTAMP` |  |
-| `PERIOD(TIMESTAMP)` | `TIMESTAMP`、 |
+| `PERIOD(TIMESTAMP WITH TIME ZONE)` | `TIMESTAMP`、 |

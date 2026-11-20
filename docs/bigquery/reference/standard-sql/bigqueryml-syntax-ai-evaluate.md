@@ -335,14 +335,5 @@ FROM
     (SELECT * FROM citibike_trips WHERE date >= '2016-07-01'),
     data_col => 'num_trips',
     timestamp_col => 'date',
-    id_cols => ['usertype']);
-```
-
-### Evaluate regression prediction
-
-The following query evaluates the performance of TabFM regression to predict a
-penguin's mass:
-
-```
-WITH prepared_data AS
+    id_cols => ['usertype']<
 ```

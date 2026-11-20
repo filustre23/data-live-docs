@@ -843,9 +843,5 @@ func queryWithArrayParams(w io.Writer, projectID string) error {
 	if err != nil {
 		return err
 	}
-	if err := status.Err(); err != nil {
-		return err
-	}
-	it, err := job.Read(ctx)
-	for {
+	if err := status.
 ```

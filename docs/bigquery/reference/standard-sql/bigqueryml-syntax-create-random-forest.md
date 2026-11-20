@@ -502,15 +502,5 @@ A `STRING` value.
 **Syntax**
 
 ```
-AUTO_CLASS_WEIGHTS = { TRUE | FALSE }
+AUTO_CLASS_WEIGHTS =
 ```
-
-**Description**
-
-Determines whether to balance class labels by using weights for each class in
-inverse proportion to the frequency of that class.
-
-Only use this option with classifier models.
-
-By default, the training data used to create the model
-is unweighted. If the labels in the trainin

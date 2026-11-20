@@ -489,13 +489,4 @@ SELECT TEXT_ANALYZE(
   }
   '''
 ) AS results
-
-/*-------------------------------------------------------+
- | results                                               |
- +-------------------------------------------------------+
- | ['i', 'like', '❶', '2', 'you', 'like', 'ño', 'pies' ] |
- +-------------------------------------------------------*/
 ```
-
-You can use the same token filter as many times as you'd like in a query. In
-the following query, `stop_words` is used twice:

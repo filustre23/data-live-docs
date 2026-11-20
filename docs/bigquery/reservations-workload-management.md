@@ -28,7 +28,7 @@ BigQuery 預留項目可讓您將[運算單元](https://docs.cloud.google.com/bi
 
 ## 預留項目指派作業
 
-如要使用預留項目中分配到的運算單元，您必須將其*指派*給一或多個專案、資料夾或組織。專案中的工作執行時，會使用指派預留項目的運算單元。資源可以從[Google Cloud 資源階層](https://docs.cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy?hl=zh-tw)中的父項繼承指派項目。如果專案未指派給預留項目，則會沿用上層資料夾或組織的指派項目 (如有)。
+如要使用預留項目中的運算單元執行工作負載，您必須將預留項目*指派*給一或多個專案、資料夾或組織。專案中的工作執行時，會使用指派預留項目的運算單元。資源可以從[Google Cloud 資源階層](https://docs.cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy?hl=zh-tw)中的父項繼承指派項目。如果專案未指派給預留項目，則會繼承上層資料夾或組織的指派項目 (如有)。
 
 專案會使用資源階層中最明確的單一預留項目。資料夾指派作業會覆寫組織指派作業，而專案指派作業會覆寫資料夾指派作業。
 
@@ -43,12 +43,12 @@ BigQuery 預留項目可讓您將[運算單元](https://docs.cloud.google.com/bi
 * `BACKGROUND_CHANGE_DATA_CAPTURE`：選擇[使用自己的預留項目](https://docs.cloud.google.com/bigquery/docs/search-index?hl=zh-tw#use_your_own_reservation)執行 [BigQuery CDC 擷取](https://docs.cloud.google.com/bigquery/docs/change-data-capture?hl=zh-tw)背景工作時，請使用這個預留項目。Standard 版本不提供`BACKGROUND_CHANGE_DATA_CAPTURE`預留項目。
 * `BACKGROUND_COLUMN_METADATA_INDEX`：選擇[使用自己的預留項目](https://docs.cloud.google.com/bigquery/docs/search-index?hl=zh-tw#use_your_own_reservation)執行 [BigLake 中繼資料快取](https://docs.cloud.google.com/bigquery/docs/metadata-caching-external-tables?hl=zh-tw)背景工作時，請使用這個預留項目。使用 Datastream 的背景套用作業，將來源資料庫複製到 BigQuery 時，也請使用這個預留項目。Standard 版本不提供`BACKGROUND_COLUMN_METADATA_INDEX`預留項目。
 * `BACKGROUND_SEARCH_INDEX_REFRESH`：選擇[使用自己的預留項目](https://docs.cloud.google.com/bigquery/docs/search-index?hl=zh-tw#use_your_own_reservation)，執行 [BigQuery 搜尋](https://docs.cloud.google.com/bigquery/docs/search-intro?hl=zh-tw)索引管理背景工作時，請使用這個預留項目。Standard 版本不提供`BACKGROUND_SEARCH_INDEX_REFRESH`預留項目。
-* `BACKGROUND`：選擇[使用自己的預留項目](https://docs.cloud.google.com/bigquery/docs/search-index?hl=zh-tw#use_your_own_reservation)，透過 Datastream 的背景套用作業，將來源資料庫複製到 BigQuery 時，請使用這個預留項目。如果沒有更明確的預留項目，這項預留項目也會做為備用，用於 `BACKGROUND_CHANGE_DATA_CAPTURE`、`BACKGROUND_COLUMN_METADATA_INDEX` 和 `BACKGROUND_SEARCH_INDEX_REFRESH` 描述的工作。Standard 版本不提供`BACKGROUND`預留項目。
+* `BACKGROUND`：選擇[使用自己的預留項目](https://docs.cloud.google.com/bigquery/docs/search-index?hl=zh-tw#use_your_own_reservation)，透過 Datastream 的背景套用作業，將來源資料庫複製到 BigQuery 時，請使用這個預留項目。如果沒有更明確的預留項目，這個預留項目也會做為 `BACKGROUND_CHANGE_DATA_CAPTURE`、`BACKGROUND_COLUMN_METADATA_INDEX` 和 `BACKGROUND_SEARCH_INDEX_REFRESH` 所述工作的備用項目。Standard 版本不提供`BACKGROUND`預留項目。
 * `CONTINUOUS`：將這個預留項目用於[持續查詢](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction?hl=zh-tw)工作。
 * `ML_EXTERNAL`：將這項預留項目用於 BigQuery ML [`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create?hl=zh-tw) 查詢，這些查詢會使用 BigQuery 外部的服務。詳情請參閱「[將運算單元指派給 BigQuery ML 工作負載](https://docs.cloud.google.com/bigquery/docs/reservations-assignments?hl=zh-tw#assign-ml-workload)」。Standard 版本不提供 `ML_EXTERNAL` 預留項目。
 * `PIPELINE`：：將這項預留項目用於載入和擷取工作。
 
-  根據預設，載入和擷取工作[免費](https://cloud.google.com/bigquery/pricing?hl=zh-tw#free)，並使用共用的運算單元集區。BigQuery 不保證這個共用集區的容量可用性，也不保證您看到的處理量。如果您載入大量資料，工作可能會等待運算單元釋出。
+  根據預設，載入和擷取工作[免費](https://cloud.google.com/bigquery/pricing?hl=zh-tw#free)，並使用共用的運算單元集區。BigQuery 不保證這個共用集區的容量可用性或您看到的處理量。如果您載入大量資料，工作可能會等待運算單元釋出。
 
   將載入和擷取工作指派給預留項目後，這些工作就無法再存取免費集區。請[監控資源使用率和工作](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts?hl=zh-tw)，確保預留項目有足夠的容量，可在所需的工作時間內完成工作。
 
@@ -70,11 +70,11 @@ BigQuery 可讓您指定查詢在執行階段應使用的預留項目。這可�
 
 在區域內，您可以明確將專案指派給預留項目，結合依容量計費和隨選計費模式。未指派預留項目的專案，則會繼續採用隨選計價模式。您也可以指派預留項目 ID `none`，明確指派專案使用隨選計費。如果您將資料夾或組織指派給預留項目，但希望該資料夾或組織中的某些專案使用隨選計費模式，這項功能就非常實用。詳情請參閱「[將專案指派給『無』](https://docs.cloud.google.com/bigquery/docs/reservations-assignments?hl=zh-tw#assign-project-to-none)」。
 
-採用隨選計費模式的專案，其容量與承諾使用容量分開計算。這些專案不會影響承諾使用資源的可用性。如果您查詢串流緩衝區中的資料，系統不會針對從串流緩衝區處理的位元組向您收取隨選工作的費用，但預留項目中執行的工作會使用運算單元來處理這些位元組。
+採用隨選計費模式的專案，其容量與承諾使用容量分開計算。這些專案不會影響承諾使用資源的可用性。如果您查詢串流緩衝區中的資料，系統不會針對從串流緩衝區處理的位元組向您收取計費模式工作的費用，但預留項目中執行的工作會使用運算單元來處理這些位元組。
 
 ## 指定管理專案
 
-建立承諾使用合約和預留項目時，這些項目會與 Google Cloud 專案建立關聯。這項專案會管理 BigQuery 預留項目資源，也是這些資源的主要計費來源。這個專案不一定要與存放 BigQuery 工作或資料集的專案相同。
+建立承諾使用合約和預留項目時，這些項目會與 Google Cloud 專案建立關聯。這個專案會管理 BigQuery 預留項目資源，也是這些資源的主要計費來源。這個專案不一定要與存放 BigQuery 工作或資料集的專案相同。
 
 建議您為預留資源建立專屬專案。這項專案稱為「管理」專案，因為它會集中管理承諾使用合約的計費和管理作業。為這項專案提供描述性名稱，例如 `bq-COMPANY_NAME-admin`。然後建立一或多個獨立專案，用來存放 BigQuery 工作。
 
@@ -99,7 +99,7 @@ BigQuery 可讓您指定查詢在執行階段應使用的預留項目。這可�
 
 ## 專案上限和排程政策
 
-專案上限 (也稱為排程政策) 可讓您為使用預留項目的專案設定用量和並行限制，藉此自訂預設的[公平排程](https://docs.cloud.google.com/bigquery/docs/slots?hl=zh-tw#fair_scheduling_in_bigquery)行為。這些限制可防止專案耗用過多運算單元，即使專案在公平排程下有資格獲得更多容量。
+專案上限 (也稱為排程政策) 可讓您為使用預留項目的專案設定用量和並行限制，藉此自訂預設的[公平排程](https://docs.cloud.google.com/bigquery/docs/slots?hl=zh-tw#fair_scheduling_in_bigquery)行為。這些限制可防止專案耗用過多運算單元，即使專案在公平排程下符合更多容量的資格也一樣。
 
 您可以在預留項目層級設定專案上限做為預設限制，除非遭到覆寫，否則這些限制會套用至使用該預留項目的任何專案。或者，您也可以將專案上限設為個別專案的[專案專屬覆寫設定](https://docs.cloud.google.com/bigquery/docs/reservations-assignments?hl=zh-tw#scheduling-policy-assignments)。
 
@@ -129,7 +129,7 @@ BigQuery 的架構會隨著資源量增加而呈線性成長。視工作負載�
 
 分配到的運算單元並執行工作負載至少七天後，您可以使用[運算單元估算工具](https://docs.cloud.google.com/bigquery/docs/slot-estimator?hl=zh-tw)分析效能，並模擬新增或減少運算單元的影響。
 
-您也可以查看專案目前的運算單元用量，以及您選擇支付的月費。隨選工作負載的運算單元軟上限為 2,000 個，但請務必使用 [`INFORMATION_SCHEMA.JOBS*` 檢視表](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw)、Cloud Logging、Jobs API 或 BigQuery 稽核記錄，檢查專案實際使用的運算單元數量。詳情請參閱「[監控預留項目](https://docs.cloud.google.com/bigquery/docs/reservations-monitoring?hl=zh-tw)」。
+您也可以查看專案目前的運算單元用量，以及選擇要支付的每月價格。隨選工作負載的運算單元軟上限為 2,000 個，但請務必使用 [`INFORMATION_SCHEMA.JOBS*` 檢視表](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw)、Cloud Logging、Jobs API 或 BigQuery 稽核記錄，檢查專案實際使用的運算單元數量。詳情請參閱「[監控預留項目](https://docs.cloud.google.com/bigquery/docs/reservations-monitoring?hl=zh-tw)」。
 
 ## 使用預留項目管理工作負載
 
@@ -173,7 +173,7 @@ BigQuery 的預留項目可讓您進一步控管預留項目的使用方式，�
 
 ## 運算單元承諾使用合約
 
-*運算單元承諾使用合約*是指在指定時間範圍內購買運算單元。購買運算單元時，每次可增加 50 個，最多可達[區域運算單元配額](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#reservations)。容量承諾使用合約為選用項目，但可為穩定狀態的工作負載節省成本。運算單元承諾使用合約用於涵蓋預留項目的基準運算單元。任何未使用的運算單元容量，都會做為閒置的運算單元，與其他預留項目共用。運算單元承諾使用合約不適用於自動調度資源運算單元。為確保您能以折扣費率購買承諾使用運算單元，請確認承諾使用運算單元數量足以涵蓋基準運算單元。可建立的使用承諾數量沒有限制。成功購買承諾使用合約後，系統就會開始收費。如需目前的定價資訊，請參閱「[容量承諾使用合約定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#capacity_compute_analysis_pricing)」。
+*運算單元承諾使用合約*是指在指定時間範圍內購買運算單元。購買運算單元時，每次可增加 50 個，最多可達[區域運算單元配額](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#reservations)。容量承諾使用合約為選用項目，但可為穩定狀態的工作負載節省成本。運算單元承諾使用合約用於涵蓋預留項目的基準運算單元。任何未使用的運算單元容量，都會做為閒置的運算單元，與其他預留項目共用。運算單元承諾使用合約不適用於自動調度資源運算單元。為確保您能以折扣費率使用承諾的運算單元，請確認承諾的運算單元數量足以涵蓋基準運算單元。可建立的使用承諾數量沒有限制。成功購買承諾使用合約後，系統就會開始收費。如需目前的定價資訊，請參閱「[容量承諾使用合約定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#capacity_compute_analysis_pricing)」。
 
 * **年約**。您購買了 365 天的使用承諾合約。365 天後，您可以選擇續約或轉換為其他類型的承諾使用合約方案。
 * **承諾使用三年**。您購買三年承諾使用合約。3 年 (1,095 天) 後，您可以選擇續約或轉換為其他類型的合約方案。
@@ -186,7 +186,7 @@ BigQuery 的預留項目可讓您進一步控管預留項目的使用方式，�
 
 如果您在建立預留項目之前購買運算單元承諾使用合約，系統會自動建立名為 `default` 的預留項目，方便您使用。`default` 預留項目沒有特殊行為。您可以視需要建立其他預留項目，或使用預設預留項目。
 
-建議您為預留項目指派非零基準，以獲得最可預測的效能和初始容量。雖然您可以設定基準運算單元為零的預留項目，並設定最大容量，以便使用自動調度資源功能，但這種做法的效果完全取決於自動調度資源功能是否正確啟用，以及是否主動取得運算單元。如果自動調度資源功能無法有效運作，這類基準為零的預留項目會改為僅依賴可用的閒置運算單元容量，這無法保證效能，且可能導致查詢速度不穩定或降低。
+建議您為預留項目指派非零基準，以獲得最可預測的效能和初始容量。雖然您可以設定基準運算單元為零的預留項目，並設定最大容量，以便使用自動調度資源功能，但這種做法的效果完全取決於自動調度資源功能是否正確啟用，以及是否主動取得運算單元。如果自動調整資源配置功能無法有效運作，系統會改為僅依賴可用的閒置的運算單元容量，這無法保證效能，且可能導致查詢速度不穩定或降低。
 
 ### 續約
 
@@ -205,9 +205,9 @@ BigQuery 的預留項目可讓您進一步控管預留項目的使用方式，�
 * 如果您選擇續訂年約，則在 2020 年 10 月 4 日下午 6:00，您的合約會續約一年。
 * 如果您選擇續約三年，則在 2020 年 10 月 4 日下午 6:00，您的承諾使用合約會續約三年。
 
-**注意：**續約程序可能需要約一小時才能完成。舉例來說，如果使用承諾在 2020 年 10 月 4 日下午 6:00 到期，續約記錄會在 2020 年 10 月 4 日下午 6:00 到 7:00 之間顯示在系統中。由於建立的承諾使用合約生效時間為下午 6:00，因此在這段資料更新期間不會產生任何隨選費用。
+**注意：**續約程序可能需要約一小時才能完成。舉例來說，如果承諾使用合約在 2020 年 10 月 4 日下午 6:00 到期，續約記錄會在 2020 年 10 月 4 日下午 6:00 到 7:00 之間顯示在系統中。由於建立的承諾使用合約生效時間為下午 6:00，因此在這段資料更新期間不會產生任何隨選費用。
 
-### 承諾使用合約到期
+### 使用承諾到期
 
 承諾使用合約一經建立即無法刪除。如要刪除年約或三年約方案，請將續約方案設為 `NONE`。使用承諾到期後，系統會自動刪除。如要進一步瞭解承諾使用合約到期，請參閱「[承諾使用合約到期](https://docs.cloud.google.com/bigquery/docs/reservations-commitments?hl=zh-tw#commitment_expiration)」。
 
@@ -239,7 +239,7 @@ BigQuery 的預留項目可讓您進一步控管預留項目的使用方式，�
 
 您可以設定預留項目，只使用下列運算資源組合，最多不超過定義的上限：
 
-* **基準運算單元 + 閒置運算單元**：預留項目運算單元容量大於零，且資源調度模式為 `IDLE_SLOTS_ONLY`。預留項目會使用設定的基準數量和可用的閒置運算單元，最多可達運算單元數量上限。如果沒有足夠的閒置運算單元，預留項目可能無法達到上限。
+* **基準運算單元 + 閒置的運算單元**：預留項目運算單元容量大於零，且資源調度模式為 `IDLE_SLOTS_ONLY`。預留項目會使用設定的基準數量和可用的閒置運算單元，最多可達運算單元數量上限。如果沒有足夠的閒置運算單元，預留項目可能無法達到上限。
 * **基準運算單元 + 閒置運算單元 + 自動調度資源運算單元**：預留項目運算單元容量大於零，且調度資源模式為 `ALL_SLOTS`。預留項目會先使用設定的基準運算單元數量，接著使用所有可用的閒置運算單元，最後使用自動調度資源運算單元。
 * **基準運算單元 + 自動調度資源運算單元**：預留項目運算單元容量大於零，且調度資源模式為 `AUTOSCALE_ONLY`。預留項目會先使用設定的基準運算單元，再使用自動調度資源運算單元。
 * **閒置的運算單元 + 自動調度資源運算單元**：預留項目運算單元容量為零，且調度模式為 `ALL_SLOTS`。預留項目會先使用所有可用的閒置的運算單元，接著才會使用自動調度資源運算單元。
@@ -325,7 +325,7 @@ current system state` 或 `Failed to update reservation: Failed to allocate slot
 for reservation` 等錯誤，通常是暫時性問題。如要緩解問題，請按照下列步驟操作：
 
 * 請減少運算單元數量，然後再試一次。
-* 如果嘗試使用較少的運算單元數量失敗，請等待 15 分鐘，然後重試作業。
+* 如果嘗試使用較少的運算單元失敗，請等待 15 分鐘，然後重試作業。
 
 如果重試多次並等待 30 分鐘後，仍收到相同的錯誤訊息，請[與 Cloud Customer Care 團隊聯絡](https://docs.cloud.google.com/bigquery/docs/getting-support?hl=zh-tw)。
 
@@ -398,11 +398,11 @@ BigQuery 擁有預留項目，代表 BigQuery 中特定作業的免費共用運�
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-18 (世界標準時間)。
+上次更新時間：2026-11-19 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-18 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-19 (世界標準時間)。"],[],[]]

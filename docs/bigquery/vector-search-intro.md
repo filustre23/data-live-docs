@@ -16,7 +16,9 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 嵌入和向量搜尋簡介
 
-本文概略說明 BigQuery 的嵌入和向量搜尋功能。向量搜尋是一種使用嵌入項目比較相似物件的技術，用於支援 Google 產品，包括 Google 搜尋、YouTube 和 Google Play。您可以使用向量搜尋大規模執行語意搜尋，也可以執行**混合搜尋**，結合語意搜尋和詞彙 (關鍵字) 搜尋。搭配向量搜尋使用[向量索引](https://docs.cloud.google.com/bigquery/docs/vector-index?hl=zh-tw)時，您可以運用反向檔案索引 (IVF) 和 [ScaNN 演算法](https://research.google/blog/announcing-scann-efficient-vector-similarity-search/?hl=zh-tw)等基礎技術。
+本文概略介紹 BigQuery 中的嵌入、向量搜尋和 AI 索引。向量搜尋是一種使用嵌入來比較相似物件的技術，Google 搜尋、YouTube 和 Google Play 等 Google 產品都採用這項技術。您可以使用向量搜尋大規模執行語意搜尋，也可以執行**混合搜尋**，結合語意搜尋和詞彙 (關鍵字) 搜尋。
+
+如要執行自然語言搜尋，而不手動設定模型或管理索引結構，可以使用 [AI 索引](https://docs.cloud.google.com/bigquery/docs/ai-index-overview?hl=zh-tw) ([預先發布版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))。建立 AI 索引時，BigQuery 會建構及維護 AI 索引的基礎嵌入和索引結構。或者，如要更精細地控管嵌入程序，您可以自行生成嵌入，並使用[向量索引](https://docs.cloud.google.com/bigquery/docs/vector-index?hl=zh-tw)，充分運用反向檔案索引 (IVF) 和 [ScaNN 演算法](https://research.google/blog/announcing-scann-efficient-vector-similarity-search/?hl=zh-tw)等基礎技術。
 
 向量搜尋是以嵌入為基礎。嵌入是指以高維度數值向量表示特定實體，例如文字或音訊檔案。機器學習 (ML) 模型會使用嵌入技術，將這些實體的語意編碼，方便推論及比較。舉例來說，分群、分類和推薦模型中的常見作業，是測量[嵌入空間](https://en.wikipedia.org/wiki/Latent_space)中向量之間的距離，找出語意最相似的項目。
 
@@ -37,6 +39,8 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 ## 生成嵌入項目
 
 以下各節說明 BigQuery 提供的函式，可協助您生成或使用嵌入項目。
+
+如要使用全代管解決方案進行自然語言搜尋，而不手動生成嵌入或管理索引結構，建議使用 [AI 索引](https://docs.cloud.google.com/bigquery/docs/ai-index-overview?hl=zh-tw) ([預先發布版](https://cloud.google.com/products?hl=zh-tw#product-launch-stages))。建立 AI 索引時，BigQuery 會自動建構及維護底層嵌入和索引結構。如要進一步控管嵌入程序，請使用下列函式自行生成及處理嵌入。
 
 ### 生成單一嵌入
 
@@ -68,7 +72,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 您可以使用下列搜尋函式執行語意向量搜尋，或結合語意搜尋和詞彙關鍵字搜尋的**混合搜尋**：
 
 * [`VECTOR_SEARCH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions?hl=zh-tw#vector_search)：使用 SQL 執行語意向量搜尋或混合搜尋。
-* [`AI.SEARCH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-search?hl=zh-tw)：執行語意或混合搜尋，找出與您提供的字串相近的結果。如果資料表已啟用[自主嵌入生成](#autonomous_embedding_generation)功能，就能使用這個函式。
+* [`AI.SEARCH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-search?hl=zh-tw)：執行語意或混合搜尋，找出與您提供的字串相近的結果。您可以使用這個函式，查詢具有 [AI 索引](https://docs.cloud.google.com/bigquery/docs/ai-index-overview?hl=zh-tw)或已啟用[自主嵌入生成](#autonomous_embedding_generation)功能的資料表。
 * [`AI.SIMILARITY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-similarity?hl=zh-tw)：計算兩個輸入內容嵌入之間的[餘弦相似度](https://wikipedia.org/wiki/Cosine_similarity)，比較兩者。如果您想執行少量比較，且尚未預先計算任何嵌入，這個函式就很適合。如果效能至關重要，且您要處理大量嵌入，請使用 `VECTOR_SEARCH`。[比較這些函式的功能](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-similarity?hl=zh-tw#related_functions)，選擇最適合您用途的函式。
 
 您也可以使用 [`CREATE VECTOR INDEX` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#create_vector_index_statement)建立[向量索引](https://docs.cloud.google.com/bigquery/docs/vector-index?hl=zh-tw)。使用向量索引時，`VECTOR_SEARCH` 和 `AI.SEARCH` 函式會採用[近似最鄰近](https://en.wikipedia.org/wiki/Nearest_neighbor_search#Approximation_methods)搜尋技術，提高向量搜尋效能，但代價是[喚回度](https://developers.google.com/machine-learning/crash-course/classification/precision-and-recall?hl=zh-tw#recallsearch_term_rules)降低，因此會傳回更多近似結果。如果沒有向量索引，這些函式會使用[暴力搜尋](https://en.wikipedia.org/wiki/Brute-force_search)來測量每筆記錄的距離。即使有向量索引，您也可以選擇使用暴力法取得精確結果。
@@ -123,14 +127,18 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 * [BigQuery BI Engine](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro?hl=zh-tw) 不會加速含有 `VECTOR_SEARCH` 或 `AI.SEARCH` 函式的查詢。
 * 只有在篩選[分區資料欄](https://docs.cloud.google.com/bigquery/docs/vector-index?hl=zh-tw#partitions)或[儲存的資料欄](https://docs.cloud.google.com/bigquery/docs/vector-index?hl=zh-tw#stored-columns)時，`VECTOR_SEARCH` 和 `AI.SEARCH` 查詢中的預先篩選資料剪除功能才會最佳化，篩選[叢集資料欄](https://docs.cloud.google.com/bigquery/docs/clustered-tables?hl=zh-tw)時則不會。在預先篩選子查詢中使用非儲存的叢集資料欄，會導致完整的資料表掃描。詳情請參閱「[預先篩選限制](https://docs.cloud.google.com/bigquery/docs/vector-index?hl=zh-tw#pre-filtering_limitations)」。
+* 如果資料表已啟用自主嵌入生成功能，就無法建立分區向量索引。
+* 每個資料表最多支援一個 AI 索引 (`CREATE AI INDEX`)。含有 AI 索引的資料表不得有向量索引 (`CREATE VECTOR INDEX`) 或自動生成的嵌入欄 (自主嵌入生成)。
 
 ## 後續步驟
 
 * 進一步瞭解如何[建立向量索引](https://docs.cloud.google.com/bigquery/docs/vector-index?hl=zh-tw)，以及[搭配混合型搜尋使用向量索引](https://docs.cloud.google.com/bigquery/docs/vector-index?hl=zh-tw#use_vector_indexes_with_hybrid_search)。
 * 瞭解如何使用 [`VECTOR_SEARCH` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions?hl=zh-tw#vector_search)執行語意或混合搜尋。
 * 瞭解如何使用 [`AI.SEARCH` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-search?hl=zh-tw)執行語意或混合搜尋。
+* 進一步瞭解 [AI 索引](https://docs.cloud.google.com/bigquery/docs/ai-index-overview?hl=zh-tw)。
+* 瞭解如何[建立及管理 AI 索引](https://docs.cloud.google.com/bigquery/docs/ai-index?hl=zh-tw)。
 * 進一步瞭解[自主嵌入生成功能](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation?hl=zh-tw)。
-* 請參閱「[使用向量搜尋功能搜尋嵌入](https://docs.cloud.google.com/bigquery/docs/vector-search?hl=zh-tw)」教學課程，瞭解如何建立向量索引，然後在有索引和沒有索引的情況下，對嵌入執行向量搜尋。
+* 請試用「[使用向量搜尋功能搜尋嵌入](https://docs.cloud.google.com/bigquery/docs/vector-search?hl=zh-tw)」教學課程，瞭解如何建立向量索引，然後在有和沒有索引的情況下，對嵌入執行向量搜尋。
 * 試用「[執行語意搜尋和檢索增強生成](https://docs.cloud.google.com/bigquery/docs/vector-index-text-search-tutorial?hl=zh-tw)」教學課程，瞭解如何執行下列工作：
 
   + 生成文字嵌入。
@@ -147,11 +155,11 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-17 (世界標準時間)。
+上次更新時間：2026-11-19 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-17 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-19 (世界標準時間)。"],[],[]]

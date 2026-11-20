@@ -219,8 +219,4 @@ Netezza 會將一個月的天數視為 31 天。下列自訂 UDF 會以接近準
 
 ```
 CREATE TEMP FUNCTION months_between(date_1 DATE, date_2 DATE)
-AS (
-  CASE
-    WHEN date_1 = date_2
-      THEN 0
 ```

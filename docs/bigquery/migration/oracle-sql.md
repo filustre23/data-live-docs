@@ -107,7 +107,4 @@ Oracle 和 BigQuery 比較運算子符合 ANSI SQL:2011 規範。下表中的比
 | `IN ( )` | [比對清單中的值](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators?hl=zh-tw#comparison_operators) |
 | `NOT` | [否定條件](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators?hl=zh-tw#comparison_operators) |
 | `BETWEEN` | [在範圍內 (含邊界值)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators?hl=zh-tw#comparison_operators) |
-| `IS NULL` | [`NULL` 值](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators?hl=zh-tw#comparison_operators) |
-| `IS NOT NULL` | [Not `NULL` value](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators?hl=zh-tw#comparison_operators) |
-| `LIKE` | [使用 % 進行模式比對](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators?hl=zh-tw#comparison_operators) |
-|  |
+| `IS NULL` |

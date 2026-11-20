@@ -221,12 +221,4 @@ bq mk
 
 儲存移轉設定時，MySQL 連接器會根據您的排程選項，自動觸發移轉作業。每次執行移轉作業時，MySQL 連接器都會將 MySQL 中的所有可用資料移轉至 BigQuery。
 
-如要在排程時間以外手動執行資料移轉作業，可以啟動[補充執行作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)。
-
-## 疑難排解
-
-如果無法順利設定資料移轉作業，請參閱「[MySQL 移轉問題](https://docs.cloud.google.com/bigquery/docs/transfer-troubleshooting?hl=zh-tw#mysql-issues)」。
-
-## 轉移中繼資料
-
-您也可以使用 MySQL 連接器，[將中繼資料轉移至 Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/connectors?hl=zh-tw)。詳情請參閱「[將 MySQL 中繼資料載入 Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/mysql-transfer?hl=zh-tw)」。<
+如要在排程時間以外手動執行資料移轉作業，可以啟動

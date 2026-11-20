@@ -471,17 +471,4 @@ possible to the model.
   A token might be smaller than a word and is
   approximately four characters. One hundred tokens correspond to
   approximately 60-80 words.
-  This value must be in the range `[1,4096]`.
-  Specify a lower value for shorter responses and a higher value for
-  longer responses.
-  The default is `1024`.
-
-* `TOP_P`: a `FLOAT64` value in the range `[0.0,1.0]`
-  that changes how the model selects tokens for output. Specify a lower
-  value for less random responses and a higher value for more random
-  responses.
-  The default is `0.95`.
-  If you don't specify a value, the model determines an appropriate value.
-
-  Tokens are selected from the most to least
-  probable until the sum of th
+  This value must be in the range

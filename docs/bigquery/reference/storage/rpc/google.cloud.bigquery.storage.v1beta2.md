@@ -134,7 +134,3 @@ Proto schema and data.
 ## AppendRowsResponse
 
 Response message for `AppendRows`.
-
-| Fields | |
-| --- | --- |
-| `updated_schema` |

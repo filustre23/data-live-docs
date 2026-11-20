@@ -988,7 +988,5 @@ func main() {
 如要向 Knowledge Catalog 進行驗證，請設定應用程式預設憑證。詳情請參閱「[為本機開發環境設定驗證機制](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
 
 ```
-import com.google.cloud.dataplex.v1.DataScan;
-import com.google.cloud.dataplex.v1.DataScanName;
-import
+import com.google.cloud.dataplex.v1
 ```

@@ -554,16 +554,3 @@ BigQuery views:
     VideoNonClickStats\_customer\_id
 
 AdWords report (deprecated):
-:   [Video Performance Report](https://developers.google.com/adwords/api/docs/appendix/reports/video-performance-report)
-
-BigQuery AdWords tables (deprecated):
-:   p\_VideoBasicStats\_customer\_id  
-    p\_VideoConversionStats\_customer\_id  
-    p\_VideoStats\_customer\_id  
-    p\_Video\_customer\_id  
-    p\_VideoNonClickStats\_customer\_id
-
-### Geography and click reports
-
-The following reports present detailed metrics on user geography and
-click-level data.

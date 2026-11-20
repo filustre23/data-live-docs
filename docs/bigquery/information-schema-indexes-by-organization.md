@@ -177,7 +177,4 @@ FROM
 WHERE
  -- Excludes search indexes that are permanently disabled.
  index_status != 'PERMANENTLY DISABLED'
- AND index_status_details.throttle_status IN ('ORGANIZATION_LIMIT_EXCEEDED', 'BASE_TABLE_TOO_LARGE')
 ```
-
-結果大致如下：

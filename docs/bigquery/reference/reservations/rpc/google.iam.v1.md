@@ -214,5 +214,4 @@ Request message for `SetIamPolicy` method.
 
 | Fields | |
 | --- | --- |
-| `resource` | `string`  REQUIRED: The resource for which the policy is being specified. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field. |
-| `policy` | `Policy` |
+| `resource` |  |

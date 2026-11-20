@@ -126,7 +126,3 @@ Service to handle EDW migrations.
 | ListMigrationSubtasks |
 | --- |
 | `rpc ListMigrationSubtasks(ListMigrationSubtasksRequest) returns (ListMigrationSubtasksResponse)`  Lists previously created migration subtasks.  Authorization scopes  Requires the following OAuth scope:   * `https://www.googleapis.com/auth/cloud-platform`   For more information, see the [Authentication Overview](/docs/authentication#authorization-gcp).  IAM Permissions  Requires the following [IAM](https://cloud.google.com/iam/docs) permission on the `parent` resource:   * `bigquerymigration.subtasks.list`   For more information, see the [IAM documentation](https://cloud.google.com/iam/docs). |
-
-| ListMigrationWorkflows |
-| --- |
-| `rpc ListMigrationWorkflows(ListMigrationWorkflowsRequest) returns (` |

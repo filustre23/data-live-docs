@@ -366,7 +366,4 @@ an array can't directly contain another array.
 
 | Type Declaration | Meaning |
 | --- | --- |
-| `ARRAY<INT64>` | Simple array of 64-bit integers. |
-| `ARRAY<BYTES(5)>` | Simple array of parameterized bytes. |
-| `ARRAY<STRUCT<INT64, INT64>>` | An array of structs, each of which contains two 64-bit integers. |
-| `ARRAY<ARRAY<INT64>>`  (not supported) | This is an **invalid** type declaration which is included here just in case you came looking for how to create a multi-level array. Arrays can't contain arrays directly. Instead see the next example. |
+| `ARRAY<INT64>` |  |

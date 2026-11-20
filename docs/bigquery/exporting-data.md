@@ -955,6 +955,5 @@ extract_job.result()  # Waits for job to complete.
 ```
 SELECT
   sum(case  when job_type="QUERY" then 1 else 0 end) as QRY_CNT,
-  sum(case  when job_type="LOAD" then 1 else 0 end) as LOAD_CNT,
-  sum(case  when job_type="EXTRACT" then 1 else 0 end) as EXT_CNT
+  sum(case  when job_type="LOAD"
 ```

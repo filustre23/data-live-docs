@@ -1001,11 +1001,4 @@ BigQuery 會將 Parquet 資料類型轉換為 BigQuery 資料類型，詳情請�
 
 ### 不帶正負號的邏輯類型
 
-Parquet `UINT_8`、`UINT_16`、`UINT_32` 和 `UINT_64` 類型不帶正負號。載入 BigQuery 帶正負號的 `INTEGER` 資料欄時，BigQuery 會將這些類型的值視為不帶正負號。如果是 `UINT_64`，當無正負號的值超過 `INTEGER` 的最大值 9,223,372,036,854,775,807 時，系統會傳回錯誤。
-
-### Decimal 邏輯類型
-
-`Decimal` 邏輯類型可轉換為 `NUMERIC`、`BIGNUMERIC` 或 `STRING` 類型。轉換後的類型取決於 `decimal` 邏輯類型的有效位數和小數位數參數，以及指定的小數目標類型。請按照下列方式指定十進位指定類型：
-
-* 如要使用 [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert?hl=zh-tw) API 執行[載入工作](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw)，請使用 [`JobConfigurationLoad.decimalTargetTypes`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job?hl=zh-tw#JobConfigurationLoad.FIELDS.decimal_target_types) 欄位。
-* 如要使用 bq 指令列工具中的
+Parquet `UINT_8`、`UINT_16`、`UINT_32` 和

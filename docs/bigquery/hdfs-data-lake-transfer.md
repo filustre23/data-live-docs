@@ -240,5 +240,4 @@ JSON 檔案中的 `condition` 欄位支援下列值，每個值都有特定的 `
       * `db1.table1;db2.table2` 與 db1 中的 table1 和 db2 中的 table2 相符。
    3. 在「BQMS discovery dump gcs path」(BQMS 探索轉儲 GCS 路徑)，輸入[為 Apache Hive 建立中繼資料檔案](#generate-metadata-dump-for-apache-hive)時產生的 `hive-dumper-output.zip` 檔案路徑。如果您使用 [dumper 輸出自動化功能搭配 `cron`](#automate-dumper)，請提供在 `--gcs-base-path` 中設定的 Cloud Storage 資料夾路徑，其中包含 dumper 輸出 ZIP 檔案。
       1. 在「儲存空間類型」部分，選取下列其中一個選項。只有在「Transfer strategy」(轉移策略) 設為 `FULL_TRANSFER` 時，才能使用這個欄位：
-      2. `HDFS`：如果檔案儲存空間為 `HDFS`，請選取這個選項。在「STS agent pool name」(STS 代理集區名稱) 欄位中，您必須提供[設定 Storage Transfer 代理](#configure-sts)時建立的代理集區名稱。
-      3. `S3`：如果檔案儲存空間為 `Amazon S3`，請選取這個選項。在「Access key ID」(存取金鑰 ID) 和「Secret access key」(私密存取金鑰) 欄位中，您必須提供[設定存取憑證](#configure-sts)時建立的存取金鑰 ID 和私密存取金鑰。
+      2. `HDFS`：如果檔案儲

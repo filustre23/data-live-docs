@@ -221,15 +221,4 @@ window_specification:
 
 **Description**
 
-Returns the population [covariance](https://en.wikipedia.org/wiki/Covariance) of
-a set of number pairs. The first number is the dependent variable; the second
-number is the independent variable. The return result is between `-Inf` and
-`+Inf`.
-
-All numeric types are supported. If the
-input is `NUMERIC` or `BIGNUMERIC` then the internal aggregation is
-stable with the final output converted to a `FLOAT64`.
-Otherwise the input is converted to a `FLOAT64`
-before aggregation, resulting in a potentially unstable result.
-
-This function ignores any input pairs that contain one or more
+Returns the population [covar](https://en.wikipedia.org/wiki/Covariance)

@@ -231,12 +231,4 @@ bq mk
 
 ### API
 
-請使用 [`projects.locations.transferConfigs.create`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create?hl=zh-tw) 方法，並提供 [`TransferConfig`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs?hl=zh-tw#TransferConfig) 資源的執行個體。
-
-儲存移轉設定時，Oracle 連接器會根據您的排程選項，自動觸發移轉作業。每次執行移轉作業時，Oracle 連接器都會將 Oracle 中的所有可用資料移轉至 BigQuery。
-
-如要在排程時間以外手動執行資料移轉作業，可以啟動[補充執行作業](https://docs.cloud.google.com/bigquery/docs/working-with-transfers?hl=zh-tw#manually_trigger_a_transfer)。
-
-## 排解轉移設定問題
-
-如果無
+請使用 [`projects.locations.transferConfigs.create`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create?hl=zh-tw) 方法，並提供

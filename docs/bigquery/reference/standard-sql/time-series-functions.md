@@ -347,17 +347,4 @@ The `CHANGES` function returns a table with the following columns:
   that covers all rows in a partition, the `CHANGES` function might return
   additional deleted events.
 * Partition pseudo-columns for ingestion-time partitioned tables, such as
-  `_PARTITIONTIME` and `_PARTITIONDATE`, aren't included in the function's
-  output.
-* Rows inserted through the
-  [Storage Write API (gRPC) pending stream](/bigquery/docs/write-api#pending_type)
-  or
-  [Storage Write API (gRPC) buffered stream](/bigquery/docs/write-api#buffered_type)
-  can have inconsistent timestamps, so repeatable reads aren't guaranteed. If
-  you require repeatable reads for streaming ingestion workloads, use either
-  the
-  [Storage Write API (gRPC) default stream](/bigquery/docs/write-api#default_stream)
-  or the
-  [Storage Write API (gRPC) committed stream](/bigquery/docs/write-api#committed_type).
-  If you require repeatable reads for batch ingestion workloads, use
-  [BigQuery l](/bigquery/docs/loading-data)
+  `_PARTITIONTIME` and `_PARTITIONDATE`, a

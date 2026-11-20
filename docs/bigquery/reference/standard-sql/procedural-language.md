@@ -291,19 +291,3 @@ EXECUTE IMMEDIATE "SELECT MIN(publish_date) FROM Books LIMIT 1" INTO first_date;
 ## `BEGIN...END`
 
 **Syntax**
-
-```
-BEGIN
-  sql_statement_list
-END;
-```
-
-**Description**
-
-`BEGIN` initiates a block of statements where declared variables exist only
-until the corresponding `END`. `sql_statement_list` is a list of zero or more
-SQL statements ending with semicolons.
-
-Variable declarations must appear at the start of the block, prior to other
-types of statements. Variables declared inside a block may only be referenced
-within th
