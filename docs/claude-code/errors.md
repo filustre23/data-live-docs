@@ -247,6 +247,7 @@ Match the message you see to a section below.
 | `Error: bypassPermissions not supported in restricted mode` | [Restricted mode](https://code.claude.com/docs/en/permission-modes.md#restricted-mode-refuses-bypasspermissions) |
 | `Session was started with bypass permissions, so plan mode won't ask before most edits or commands` | [Plan mode](https://code.claude.com/docs/en/permission-modes.md#analyze-before-you-edit-with-plan-mode) |
 | `Cloud sessions cannot be created from a --restricted session` | [Command-line errors](#cloud-sessions-cannot-be-created-from-a-restricted-session) |
+| `--fork-session can't fork a cloud session, so nothing was opened or sent` | [Errors when sending to a cloud session](https://code.claude.com/docs/en/claude-code-on-the-web.md#errors-when-sending-to-a-cloud-session) |
 | `Cloud sessions are disabled by your organization's policy` | [Command-line errors](#cloud-sessions-are-disabled-by-your-organizations-policy) |
 | `Cloud sessions use your claude.ai login`, at the end of a policy denial that names a credential | [Command-line errors](#cloud-sessions-use-your-claude-ai-login) |
 | `Couldn't verify your organization's policy for cloud sessions` | [Command-line errors](#couldnt-verify-your-organizations-policy-for-cloud-sessions) |
@@ -342,6 +343,8 @@ Match the message you see to a section below.
 | `Cannot add marketplace "<name>": Claude Code cannot install plugins from a marketplace with this name` | [Plugin troubleshooting](https://code.claude.com/docs/en/plugins/troubleshooting.md#cannot-install-plugins-from-a-marketplace-with-this-name) |
 | `Cannot add marketplace "<name>": Claude Code reserves this name and cannot register a marketplace under it` | [Plugin troubleshooting](https://code.claude.com/docs/en/plugins/troubleshooting.md#claude-code-reserves-this-name) |
 | `Marketplace "<name>" is added but ignored` | [Plugin troubleshooting](https://code.claude.com/docs/en/plugins/troubleshooting.md#marketplace-is-added-but-ignored) |
+| `Marketplace "<name>", which managed settings declare, stands from another source and cannot be taken back while its declared source is unreachable` | [Plugin troubleshooting](https://code.claude.com/docs/en/plugins/troubleshooting.md#marketplace-cannot-be-taken-back-while-its-declared-source-is-unreachable) |
+| `The list of installed plugins (installed_plugins.json) could not be read, so marketplace "<name>", which managed settings declare, cannot be taken back from another source` | [Plugin troubleshooting](https://code.claude.com/docs/en/plugins/troubleshooting.md#installed-plugins-could-not-be-read-so-marketplace-cannot-be-taken-back) |
 | `Marketplace "<name>" is registered but was refused (see the debug log)` | [Plugin troubleshooting](https://code.claude.com/docs/en/plugins/troubleshooting.md#marketplace-is-added-but-ignored) |
 | `references ${user_config.*} in a shell-form command` | [Plugin errors](#plugin-command-references-user-config) |
 | `Monitor "<name>" from plugin <plugin> references ${user_config.*} in its command` | [Plugin errors](#plugin-command-references-user-config) |
@@ -465,6 +468,7 @@ Match the message you see to a section below.
 | `Claude Code did not finish starting` | [Wrapper and IDE errors](#subprocess-initialization-did-not-complete-within-60000ms) |
 | `The connection to Claude Code ended before this message completed` | [Wrapper and IDE errors](#the-connection-to-claude-code-ended-before-this-message-completed) |
 | `Could not locate the Claude CLI on PATH` | [Wrapper and IDE errors](#could-not-locate-the-claude-cli-on-path) |
+| `Claude Code could not be started from <command>: it is the <system> build, and this computer needs the <build> build` | If you set [`claudeCode.claudeProcessWrapper`](https://code.claude.com/docs/en/vs-code#extension-settings), point it at a program built for `<build>`. Otherwise, install the VS Code extension package for `<build>`. |
 | `The Claude Code program for this computer, the <build> build, could not be found` | [Wrapper and IDE errors](#the-claude-code-program-for-this-computer-could-not-be-found) |
 | `Restored the code, but skipped N files` | [Rewind warnings and errors](#restored-the-code-but-skipped-files) |
 | `No files were restored: N files failed (backup missing, or the file could not be updated)` | [Rewind warnings and errors](#no-files-were-restored) |
@@ -1172,7 +1176,7 @@ When the message continues past `Fix external API key` with a description such a
 
 ### Your apiKeyHelper script is failing
 
-Claude Code ran the command in your [`apiKeyHelper`](https://code.claude.com/docs/en/settings-reference#apikeyhelper) setting and didn't get a key back. Without one, the request reaches the API with a placeholder credential, and the API rejects it with `401`. The `Authentication` panel in the terminal shows which of these happened:
+Claude Code ran the command in your [`apiKeyHelper`](https://code.claude.com/docs/en/settings-reference#apikeyhelper) setting and didn't get a key back. Without one, the request reaches the API with a placeholder credential, and the API rejects it with `401`. A panel in the terminal shows which of these happened:
 
 * The command exited with an error or timed out
 * The command printed nothing to stdout
@@ -1194,7 +1198,6 @@ Running `/login` doesn't help here: the helper's output [takes precedence](https
 * If the command reports an expired session, re-authenticate with your credential provider, for example by signing in to your SSO or secrets vault again
 * Fix the command so it prints only the key to stdout, as a single token of printable ASCII up to 16,384 characters, and exits with code 0. See [rotate credentials with apiKeyHelper](https://code.claude.com/docs/en/llm-gateway-connect.md#rotate-credentials-with-apikeyhelper) for a working setup.
 * Run `/status` to see the failure and confirm `apiKeyHelper` is the active credential source. The `apiKeyHelper` row shows `Failing` with the last failure's detail, such as the exit code and the command's error output, and disappears after the next successful run. Before v2.1.274, `/status` showed only the credential source, not the failure.
-* Each time the command fails, its exit code and error output also appear in an `Authentication` panel in the terminal. Before v2.1.212, the panel was titled `Cloud authentication`.
 
 ### Claude Code didn't send your claude.ai login
 
@@ -1585,7 +1588,7 @@ An API key may still be in `~/.claude.json` too if a Console login created one o
 
 **What to do:**
 
-* Run `claude auth logout` in your shell to try the save again. When the save goes through, the command prints `Successfully logged out from your Anthropic account.`
+* Run `claude auth logout` in your shell to try the save again
 
 ### Couldn't start the local listener that receives the browser sign-in
 
@@ -2320,8 +2323,6 @@ The cloud environments service returned an empty response (HTTP 200 with no body
 The cloud environments service returned a response in an unexpected format (HTTP 200 with a non-JSON body). This is usually temporary — try again in a moment.
 The cloud environments service returned a response in an unexpected format (HTTP 200 without a usable environments list). This is usually temporary — try again in a moment.
 ```
-
-The server accepted the request but answered with a body that isn't the environments list: empty, not JSON, or JSON without the list. This usually accompanies a service-side disruption and clears on its own. Depending on the surface that requested the list, Claude Code may add a prefix, such as `couldn't list environments:` in the `/remote-env` dialog.
 
 **What to do:**
 
@@ -3919,7 +3920,9 @@ build.sh --target�dist
 
 ### Skill, command, or hook over the 4,000,000-character limit
 
-A message with `more than 4,000,000 characters` means a skill, a command, or a [prompt or agent hook](https://code.claude.com/docs/en/hooks.md#prompt-and-agent-hook-fields) didn't run. If you pasted long text as arguments, save it to a file, run `/clear`, since the text stays in the conversation, then pass its path. Outside [Code Mode](https://code.claude.com/docs/en/code-mode.md#tool-call-refused-by-a-hook), a `PreToolUse` prompt or agent hook over the limit doesn't block the call. Use a [command hook](https://code.claude.com/docs/en/hooks.md#command-hook-fields), which has no such limit.
+A message with `more than 4,000,000 characters` means a skill, a command, or a [prompt or agent hook](https://code.claude.com/docs/en/hooks.md#prompt-and-agent-hook-fields) didn't run. If you pasted long text as arguments, save it to a file, run `/clear`, since the text stays in the conversation, then pass its path.
+
+If your `PreToolUse` prompt or agent hook is over the limit, a tool call that Claude makes directly isn't blocked. Use a [command hook](https://code.claude.com/docs/en/hooks.md#command-hook-fields), which has no such limit. For a call from code in Code Mode, see [Tool call refused by a hook](https://code.claude.com/docs/en/code-mode.md#tool-call-refused-by-a-hook).
 
 ### Input must be provided when using `--print`
 
@@ -6675,11 +6678,6 @@ For the network lock, the warning names `sandbox.network.allowedDomains` and `al
 ### Sandbox mask files left behind at write-deny paths
 
 This warning in `claude doctor` and `/status` lists mask files: 0-byte read-only placeholder files at paths the [sandbox](https://code.claude.com/docs/en/sandboxing.md) denies writes to. It appears on Linux and WSL2 when sandboxing is enabled with filesystem isolation on. Delete them from your shell once no Claude Code session is open in the project that holds them.
-
-The sandbox creates a placeholder while a sandboxed command runs and removes it when the command ends. One stays behind in cases such as these:
-
-* The session is killed before the command ends, for example by SIGKILL
-* You quit the session while a sandboxed command is still running, such as one in the background
 
 In `claude doctor`, the warning reads:
 

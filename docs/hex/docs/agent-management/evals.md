@@ -722,7 +722,7 @@ All three asset types are required. Each accepts one of these access types:
 | `STATUSES` | Sources with one of the statuses listed in `statusIds`. |
 | `NONE` | No sources of that type. |
 
-For `STATUSES`, include a non-empty `statusIds` list of workspace status UUIDs.
+For `STATUSES`, include a non-empty `statusIds` list of workspace status UUIDs. Run `hex statuses list` to find status IDs, names, and whether each status is endorsed. Use `hex statuses list --json` for JSON output.
 
 Providing `governedModeAccess` enables Governed mode, so `governedMode: true` is optional. Combining it with `governedMode: false` is rejected.
 

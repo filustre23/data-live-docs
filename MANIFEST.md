@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-11-20T20:43+00:00_
+_Generated 2026-11-21T05:05+00:00_
 
-**9 sources, 4855 topics total**
+**9 sources, 4871 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_923 topics_
+_936 topics_
 
 - `anthropic-sdk/about-claude/additional-resources`
 - `anthropic-sdk/about-claude/api-credits-for-subscribers`
@@ -190,6 +190,19 @@ _923 topics_
 - `anthropic-sdk/api/beta/organization/api_keys/list`
 - `anthropic-sdk/api/beta/organization/api_keys/retrieve`
 - `anthropic-sdk/api/beta/organization/api_keys/update`
+- `anthropic-sdk/api/beta/organization/claude_code`
+- `anthropic-sdk/api/beta/organization/claude_code/managed_settings`
+- `anthropic-sdk/api/beta/organization/claude_code/managed_settings/configuration`
+- `anthropic-sdk/api/beta/organization/claude_code/managed_settings/configuration/retrieve`
+- `anthropic-sdk/api/beta/organization/claude_code/managed_settings/configuration/update`
+- `anthropic-sdk/api/beta/organization/claude_code/managed_settings/rbac_group_default`
+- `anthropic-sdk/api/beta/organization/claude_code/managed_settings/rbac_group_default/retrieve`
+- `anthropic-sdk/api/beta/organization/claude_code/managed_settings/rbac_group_default/update`
+- `anthropic-sdk/api/beta/organization/claude_code/managed_settings/rbac_groups`
+- `anthropic-sdk/api/beta/organization/claude_code/managed_settings/rbac_groups/delete`
+- `anthropic-sdk/api/beta/organization/claude_code/managed_settings/rbac_groups/list`
+- `anthropic-sdk/api/beta/organization/claude_code/managed_settings/rbac_groups/retrieve`
+- `anthropic-sdk/api/beta/organization/claude_code/managed_settings/rbac_groups/set`
 - `anthropic-sdk/api/beta/organization/claude_tag`
 - `anthropic-sdk/api/beta/organization/claude_tag/bundles`
 - `anthropic-sdk/api/beta/organization/claude_tag/bundles/list`
@@ -2661,7 +2674,7 @@ _204 topics_
 
 Upstream: <https://docs.getdbt.com/docs/>
 
-_1176 topics_
+_1179 topics_
 
 - `dbt-core/best-practices/best-practice-workflows`
 - `dbt-core/best-practices/clone-incremental-models`
@@ -2988,6 +3001,9 @@ _1176 topics_
 - `dbt-core/docs/introduction`
 - `dbt-core/docs/lake-compute/compute-faq`
 - `dbt-core/docs/lake-compute/compute-onboarding`
+- `dbt-core/docs/lake-compute/compute-onboarding-bigquery`
+- `dbt-core/docs/lake-compute/compute-onboarding-databricks`
+- `dbt-core/docs/lake-compute/compute-onboarding-snowflake`
 - `dbt-core/docs/lake-compute/lake-compute`
 - `dbt-core/docs/lake-compute/lake-compute-migration`
 - `dbt-core/docs/local/about-local`

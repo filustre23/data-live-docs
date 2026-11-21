@@ -475,6 +475,7 @@ These errors come from running `claude` with [`--cloud <session-id>`](#send-foll
 | `Attaching to an existing cloud session is not enabled for your account.` | You ran `--cloud <session-id>` without `-p`. Send the message with `claude -p "your message" --cloud <session-id>`. |
 | `Session not found: <id>` | The ID or URL doesn't match a session you can access. Check it against the session's claude.ai/code URL. |
 | `cloud session <id> is archived and cannot accept new messages` | The session has been archived. Start a new session instead. |
+| `--fork-session can't fork a cloud session, so nothing was opened or sent.` | To message the existing cloud session, run `claude -p "your message" --cloud <session-id>` without `--fork-session`. |
 
 ### Environment expired
 
