@@ -53,6 +53,8 @@ Managed settings define organization policy. Claude Code checks the four sources
 
 Claude Code fetches server-managed settings at startup and refreshes them hourly during the session, with no endpoint infrastructure to deploy. Delivery through the claude.ai admin console requires a Claude for Teams or Enterprise plan. Deployments on Amazon Bedrock, Google Cloud's Agent Platform, or Microsoft Foundry can get the same remote delivery by running a [Claude apps gateway](https://code.claude.com/docs/en/claude-apps-gateway), or use one of the file-based or OS-level mechanisms instead.
 
+If you set your provider or gateway at claude.ai under **Organization settings > Desktop 3P**, see [which settings take priority](https://claude.com/docs/third-party/claude-desktop/admin-console-claude-code#which-settings-take-priority) in the Enterprise Admin Console guide.
+
 If your organization mixes providers, configure [server-managed settings](https://code.claude.com/docs/en/server-managed-settings.md) for claude.ai users plus a [file-based or plist/registry fallback](https://code.claude.com/docs/en/managed-settings.md#delivery-mechanisms) so other users still receive managed policy.
 
 The plist and HKLM registry locations work with any provider and resist tampering because they require admin privileges to write. The Windows user registry at HKCU is writable without elevation, so treat it as a convenience default rather than an enforcement channel.
