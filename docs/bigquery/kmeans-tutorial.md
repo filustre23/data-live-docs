@@ -10,37 +10,33 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 建立 k-means 模型，將倫敦自行車租用資料集分群 透過集合功能整理內容 你可以依據偏好儲存及分類內容。
 
-本教學課程將說明如何使用 BigQuery ML 中的 [k-means 模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans?hl=zh-tw)，找出資料集中的叢集。
+您可以使用 BigQuery ML 中的 [k-means 模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans?hl=zh-tw)，將資料分群為描述性區隔，並據此做出業務決策。本教學課程說明如何準備[倫敦單車租賃公開資料集](https://console.cloud.google.com/marketplace/details/greater-london-authority/london-bicycles?filter=solution-type%3Adataset&%3Bid=95374cac-2834-4fa2-a71f-fc033ccb5ce4&hl=zh-tw)中的資料、訓練 k-means 模型，以及使用 `ML.PREDICT` 函式執行預測。
 
-將資料分組到叢集的 [k-means](https://en.wikipedia.org/wiki/K-means_clustering) 演算法，是一種非監督式機器學習。監督式機器學習是預測分析，非監督式機器學習則是描述性分析。非監督式機器學習可協助您瞭解資料，進而做出資料導向的決策。
+[k-means](https://en.wikipedia.org/wiki/K-means_clustering) 演算法會將資料分組為叢集，這是一種非監督式機器學習。監督式機器學習著重於預測分析，非監督式機器學習則著重於敘述性分析。非監督式機器學習可協助您瞭解資料，以便做出資料導向的決策。
 
-本教學課程中的查詢會使用地理空間分析功能提供的[地理函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions?hl=zh-tw)。詳情請參閱「[地理空間分析簡介](https://docs.cloud.google.com/bigquery/docs/gis-intro?hl=zh-tw)」。
-
-本教學課程使用[倫敦自行車租用公開資料集](https://console.cloud.google.com/marketplace/details/greater-london-authority/london-bicycles?filter=solution-type%3Adataset&%3Bid=95374cac-2834-4fa2-a71f-fc033ccb5ce4&hl=zh-tw)。資料包括開始和停止時間戳記、車站名稱和騎乘時間。
+本教學課程中的查詢會使用地理空間分析提供的[地理函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions?hl=zh-tw)。詳情請參閱「[地理空間分析簡介](https://docs.cloud.google.com/bigquery/docs/gis-intro?hl=zh-tw)」。
 
 ## 目標
 
-本教學課程會逐步引導您完成下列工作：
-
-* 檢查用於訓練模型的資料。
+* 檢查用來訓練模型的資料。
 * 建立 k-means 分群模型。
 * 使用 BigQuery ML 的叢集視覺化功能，解讀產生的資料叢集。
-* 在 k-means 模型上執行 [`ML.PREDICT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict?hl=zh-tw)，預測一組自行車租借站可能屬於的叢集。
+* 對 k-means 模型執行 [`ML.PREDICT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict?hl=zh-tw)，預測一組單車租借站可能屬於哪個叢集。
 
 ## 費用
 
-本教學課程使用的 Google Cloud計費元件包括：
+本教學課程使用 Google Cloud的計費元件，包括：
 
 * BigQuery
 * BigQuery ML
 
-如要瞭解 BigQuery 費用，請參閱 [BigQuery 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw)頁面。
+如要瞭解 BigQuery 費用，請參閱「[BigQuery 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw)」頁面。
 
-如要瞭解 BigQuery ML 費用，請參閱「[BigQuery ML 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#bqml)」一文。
+如要瞭解 BigQuery ML 費用，請參閱「[BigQuery ML 定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#bqml)」。
 
 ## 事前準備
 
-- 登入 Google Cloud 帳戶。如果您是 Google Cloud新手，歡迎[建立帳戶](https://console.cloud.google.com/freetrial?hl=zh-tw)，親自評估產品在實際工作環境中的成效。新客戶還能獲得價值 $300 美元的免費抵免額，可用於執行、測試及部署工作負載。
+- 登入 Google Cloud 帳戶。如果您未曾使用過 Google Cloud，歡迎[建立帳戶](https://console.cloud.google.com/freetrial?hl=zh-tw)，親自體驗實際使用我們產品的成效。新客戶還能獲得價值 $300 美元的免費抵免額，用於執行、測試及部署工作負載。
 - In the Google Cloud console, on the project selector page,
   select or create a Google Cloud project.
 
@@ -81,56 +77,55 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
   [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard?hl=zh-tw)
 - [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled?hl=zh-tw#confirm_billing_is_enabled_on_a_project).
 
-1. 新專案會自動啟用 BigQuery。如要在現有的專案中啟用 BigQuery，請前往
+1. 新專案會自動啟用 BigQuery。如要在現有專案中啟用 BigQuery，請前往
 
-   如果尚未啟用 BigQuery API，請啟用。
+   啟用 BigQuery API (如果尚未啟用)。
 
-   **啟用 API 時所需的角色**
+   **啟用 API 所需的角色**
 
-   如要啟用 API，您必須具備 `serviceusage.services.enable` 權限。如果您建立了專案，可能已透過「擁有者」角色 (`roles/owner`) 取得這項權限。否則，您可以透過「服務使用情形管理員」角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   如要啟用 API，您必須具備 `serviceusage.services.enable` 權限。如果您建立了專案，可能已透過擁有者角色 (`roles/owner`) 取得這項權限。否則，您可以透過 Service Usage 管理員角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
    [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery&hl=zh-tw)
 
 ## 所需權限
 
-* 如要建立資料集，您需要 `bigquery.datasets.create` IAM 權限。
+* 如要建立資料集，您必須具備 `bigquery.datasets.create` IAM 權限。
 * 如要建立模型，您必須具備下列權限：
 
   + `bigquery.jobs.create`
   + `bigquery.models.create`
   + `bigquery.models.getData`
   + `bigquery.models.updateData`
-* 如要執行推論，您需要下列權限：
+* 如要執行推論，您必須具備下列權限：
 
   + `bigquery.models.getData`
   + `bigquery.jobs.create`
 
-如要進一步瞭解 BigQuery 中的 IAM 角色和權限，請參閱「[IAM 簡介](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)」。
+如要進一步瞭解 BigQuery 的 IAM 角色和權限，請參閱「[IAM 簡介](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)」。
 
 ## 建立資料集
 
-建立 BigQuery 資料集來儲存 k-means 模型：
+建立 BigQuery 資料集，用於儲存 k-means 模型：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
-   [前往 BigQuery 頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
+   [前往「BigQuery」頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
-3. 在「Explorer」窗格中，按一下專案名稱。
-4. 依序點按 more\_vert「View actions」(查看動作) >「Create dataset」(建立資料集)。
-5. 在「建立資料集」頁面中，執行下列操作：
+3. 在「Explorer」窗格中，點選專案名稱。
+4. 依序點選 more\_vert「View actions」(查看動作) >「Create dataset」(建立資料集)。
+5. 在「Create dataset」(建立資料集) 頁面執行下列操作：
 
    * 在「Dataset ID」(資料集 ID) 中輸入 `bqml_tutorial`。
-   * 針對「Location type」(位置類型) 選取「Multi-region」(多區域)，然後選取「EU (multiple regions in European Union)」(歐盟 (多個歐盟區域))。
+   * 「Location type」(位置類型) 請選取「Multi-region」(多區域)，然後選取「EU (multiple regions in European Union)」(EU (歐盟境內多個區域))。
 
-     London Bicycle Hires 公開資料集儲存在`EU`
-     [多區域](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#multi-regions)。資料集必須位於相同位置。
-   * 其餘設定請保留預設狀態，然後按一下「建立資料集」。
+     倫敦單車租借公開資料集儲存在`EU`[多區域](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#multi-regions)。資料集必須位於相同位置。
+   * 其餘設定請保留預設狀態，然後按一下「Create dataset」(建立資料集)。
 
 ## 檢查訓練資料
 
-檢查用於訓練 k-means 模型的資料。在本教學課程中，您會根據下列屬性將自行車站分群：
+檢查要用來訓練 k-means 模型的資料。在本教學課程中，您將根據下列屬性將單車站分群：
 
 * 租用時間
 * 每日租用次數
@@ -138,14 +133,14 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ### SQL
 
-這項查詢會擷取週期聘用資料，包括 `start_station_name` 和 `duration` 欄，並將這些資料與電台資訊合併。包括建立計算結果欄，內含車站與市中心的距離。接著，系統會計算 `stationstats` 欄中車站的屬性，包括平均騎乘時間和行程數量，以及計算出的 `distance_from_city_center` 欄。
+這項查詢會擷取單車租借資料 (包括 `start_station_name` 和 `duration` 資料欄)，並與車站資訊彙整。包括建立計算結果欄，其中包含車站與市中心的距離。接著，在 `stationstats` 欄中計算車站的屬性，包括平均騎乘時間和行程數量，以及計算出的 `distance_from_city_center` 欄。
 
 請按照下列步驟檢查訓練資料：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在查詢編輯器中貼入下列查詢，然後點選「執行」：
+2. 在查詢編輯器中貼上以下查詢，然後點選「執行」：
 
    ```
    WITH
@@ -190,11 +185,11 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
    distance_from_city_center ASC;
    ```
 
-結果應如下所示：
+結果應大致如下：
 
 ### BigQuery DataFrames
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)」中的 BigQuery DataFrames 設定操作說明進行操作。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -301,18 +296,18 @@ stationstats = stationstats.sort_values(
 
 ## 建立 k-means 模型
 
-使用倫敦自行車租用訓練資料建立 k-means 模型。
+使用倫敦單車租借訓練資料建立 k-means 模型。
 
 ### SQL
 
-在下列查詢中，`CREATE MODEL` 陳述式會指定要使用的叢集數量 (四個)。在 `SELECT` 陳述式中，`EXCEPT` 子句會排除 `station_name` 欄，因為這個資料欄不含特徵。這項查詢會為每個 station\_name 建立不重複的資料列，且 `SELECT` 陳述式中只會提及特徵。
+在下列查詢中，`CREATE MODEL` 陳述式指定要使用的叢集數量為四。在 `SELECT` 陳述式中，`EXCEPT` 子句會排除 `station_name` 欄，因為該欄不含特徵。查詢會為每個 station\_name 建立不重複的資料列，且只會列出 `SELECT` 陳述式中提及的特徵。
 
-如要建立 k-means 模型，請按照下列步驟操作：
+請按照下列步驟建立 k-means 模型：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在查詢編輯器中貼入下列查詢，然後點選「執行」：
+2. 在查詢編輯器中貼上以下查詢，然後點選「執行」：
 
    ```
    CREATE OR REPLACE MODEL `bqml_tutorial.london_station_clusters`
@@ -363,7 +358,7 @@ stationstats = stationstats.sort_values(
 
 ### BigQuery DataFrames
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)」中的 BigQuery DataFrames 設定操作說明進行操作。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -396,7 +391,7 @@ ml.create_model(
 
 ## 解讀資料叢集
 
-模型「評估」分頁中的資訊有助於解讀模型產生的叢集。
+模型「Evaluation」(評估) 分頁中的資訊，可協助您解讀模型產生的叢集。
 
 如要查看模型的評估資訊，請按照下列步驟操作：
 
@@ -404,37 +399,37 @@ ml.create_model(
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 點選左側窗格中的 explore「Explorer」。
-3. 在「Explorer」窗格中展開專案，然後按一下「Datasets」(資料集)。
+3. 在「Explorer」窗格中展開專案，然後點選「資料集」。
 4. 按一下「`bqml_tutorial`」資料集，然後前往「模型」分頁。
-5. 選取「`london_station_clusters`」模型。
-6. 選取「評估」分頁標籤。這個分頁會顯示 k-means 模型識別出的叢集圖表。在「數值特徵」部分，長條圖會顯示每個群集中心的最重要數值特徵值。每個群集中心代表一組資料。您可以從下拉式選單中選取要顯示的特徵。
+5. 選取 `london_station_clusters` 模型。
+6. 選取「評估」分頁標籤。這個分頁會顯示 k-means 模型識別出的叢集圖表。在「Numeric features」(數值特徵) 部分，長條圖會顯示每個群集中心最重要的數值特徵值。每個群集中心代表一個資料群集。您可以從下拉式選單中選取要以圖表呈現的特徵。
 
-   這個模型會建立下列質心：
+   這個模型會建立下列群集中心：
 
-   * Centroid 1 顯示的城市車站較不繁忙，租借時間較短。
-   * Centroid 2 顯示第二個城市車站，這個車站較不繁忙，且租借時間較長。
-   * 中心點 3 顯示靠近市中心的繁忙城市車站。
-   * 中心點 4 顯示郊區車站，行程較長。
+   * 群集中心 1 顯示較不繁忙的城市站點，租借時間較短。
+   * 群集中心 2 顯示第二個城市站點，該站點較不繁忙，且用於較長時間的租賃。
+   * 群集中心 3 顯示靠近市中心的繁忙城市車站。
+   * 群集中心 4 顯示郊區車站，行程較長。
 
-   如果您經營自行車租賃業務，可以根據這項資訊制定業務決策。例如：
+   如果您經營單車租賃業務，就可以根據這項資訊制定業務決策。例如：
 
-   * 假設您需要實驗某個新的鎖，您應該要選擇哪個車站叢集來做為實驗對象呢？重心 1、重心 2 或重心 4 的車站似乎是合理的選擇，因為這些車站並非最繁忙的車站。
-   * 假設您想要在某些車站擺放競速自行車，您應該要選擇哪些車站呢？Centroid 4 是距離市中心最遠的車站群組，行程也最長。這些人很可能就是賽車自行車的目標客群。
+   * 假設您需要實驗某個新的鎖，您應該要選擇哪個車站叢集來做為實驗對象呢？群集中心 1、群集中心 2 或群集中心 4 中的車站似乎是合理的選擇，因為這些車站並非最繁忙的車站。
+   * 假設您想要在某些車站擺放競速自行車，您應該要選擇哪些車站呢？群集中心 4 是距離市中心較遠的車站群組，行程最長。這些很可能是賽車。
 
 ## 使用 `ML.PREDICT` 函式預測車站的叢集
 
-使用 `ML.PREDICT`SQL 函式或 [`bigframes.bigquery.ml.predict`BigQuery DataFrames 函式](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.predict.html#bigframes.bigquery.ml.predict)，找出特定電台所屬的叢集。
+使用 `ML.PREDICT` SQL 函式或 [`bigframes.bigquery.ml.predict`BigQuery DataFrames 函式](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.predict.html#bigframes.bigquery.ml.predict)，找出特定車站所屬的叢集。
 
 ### SQL
 
-下列查詢會使用 [`REGEXP_CONTAINS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions?hl=zh-tw#regexp_contains) 函式，找出 `station_name` 資料欄中包含字串 `Kennington` 的所有項目。`ML.PREDICT` 函式會使用這些值，預測哪些叢集可能包含這些電台。
+下列查詢會使用 [`REGEXP_CONTAINS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions?hl=zh-tw#regexp_contains) 函式，找出 `station_name` 欄中所有包含 `Kennington` 字串的項目。`ML.PREDICT` 函式會使用這些值，預測哪些叢集可能包含這些車站。
 
-請按照下列步驟，預測名稱包含 `Kennington` 字串的每個車站所屬的叢集：
+請按照下列步驟，預測名稱中含有字串 `Kennington` 的每個車站所屬的叢集：
 
 1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在查詢編輯器中貼入下列查詢，然後點選「執行」：
+2. 在查詢編輯器中貼上以下查詢，然後點選「執行」：
 
    ```
    WITH
@@ -486,11 +481,11 @@ ml.create_model(
      ));
    ```
 
-結果應如下所示。
+結果應大致如下。
 
 ### BigQuery DataFrames
 
-在嘗試這個範例之前，請按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)，完成 BigQuery DataFrames 設定。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)」中的 BigQuery DataFrames 設定操作說明進行操作。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -529,19 +524,18 @@ ml.predict(
 
 刪除專案將移除專案中所有的資料集與資料表。若您希望重新使用專案，您可以刪除本教學課程中所建立的資料集。
 
-1. 如有需要，請在Google Cloud 控制台中開啟 BigQuery 頁面。
+1. 如有需要，請在Google Cloud 控制台開啟 BigQuery 頁面。
 
-   [前往 BigQuery 頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
+   [前往「BigQuery」頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
 2. 在導覽窗格中，按一下您建立的 **bqml\_tutorial** 資料集。
-3. 按一下視窗右側的「刪除資料集」。
-   這個動作會刪除資料集和模型。
-4. 在「Delete dataset」(刪除資料集) 對話方塊中，輸入資料集的名稱 (`bqml_tutorial`)，然後按一下「Delete」(刪除) 來確認刪除指令。
+3. 按一下視窗右側的「刪除資料集」。這項操作會刪除資料集和模型。
+4. 在「Delete dataset」(刪除資料集) 對話方塊中，輸入資料集名稱 (`bqml_tutorial`) 來確認刪除指令，然後點選「Delete」(刪除)。
 
 ### 刪除專案
 
 如要刪除專案，請進行以下操作：
 
-**注意**：刪除專案會造成以下結果：
+**注意**：刪除專案會造成以下影響：
 
 * **專案中的所有內容都會遭到刪除。**如果使用現有專案來進行本文中的任務，刪除專案將一併移除當中已完成的其他任務'。
 * **自訂專案 ID 會消失。**當您之前建立這個專案時，可能建立了想要在日後使用的自訂專案 ID。如要保留使用該專案 ID 的網址 (例如 `appspot.com` 網址)，請刪除在該專案中選取的資源，而不是刪除整個專案。
@@ -566,11 +560,11 @@ ml.predict(
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-11 (世界標準時間)。
+上次更新時間：2026-11-20 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-11 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-20 (世界標準時間)。"],[],[]]

@@ -240,4 +240,3 @@ JSON 檔案中的 `condition` 欄位支援下列值，每個值都有特定的 `
       * `db1.table1;db2.table2` 與 db1 中的 table1 和 db2 中的 table2 相符。
    3. 在「BQMS discovery dump gcs path」(BQMS 探索轉儲 GCS 路徑)，輸入[為 Apache Hive 建立中繼資料檔案](#generate-metadata-dump-for-apache-hive)時產生的 `hive-dumper-output.zip` 檔案路徑。如果您使用 [dumper 輸出自動化功能搭配 `cron`](#automate-dumper)，請提供在 `--gcs-base-path` 中設定的 Cloud Storage 資料夾路徑，其中包含 dumper 輸出 ZIP 檔案。
       1. 在「儲存空間類型」部分，選取下列其中一個選項。只有在「Transfer strategy」(轉移策略) 設為 `FULL_TRANSFER` 時，才能使用這個欄位：
-      2. `HDFS`：如果檔案儲

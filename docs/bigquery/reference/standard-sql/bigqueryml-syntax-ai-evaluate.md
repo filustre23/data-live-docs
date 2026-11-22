@@ -335,5 +335,5 @@ FROM
     (SELECT * FROM citibike_trips WHERE date >= '2016-07-01'),
     data_col => 'num_trips',
     timestamp_col => 'date',
-    id_cols => ['usertype']<
+    id_cols => ['usertype'<
 ```

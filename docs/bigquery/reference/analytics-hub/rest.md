@@ -127,4 +127,3 @@ A [service endpoint](https://cloud.google.com/apis/design/glossary#api_service_e
 | `list` | `GET /v1/{parent=projects/*/locations/*}/subscriptions`   Lists all subscriptions in a given project and location. |
 | `refresh` | `POST /v1/{name=projects/*/locations/*/subscriptions/*}:refresh`   Refreshes a Subscription to a Data Exchange. |
 | `revoke` | `POST /v1/{name=projects/*/locations/*/subscriptions/*}:revoke`   Revokes a given subscription. |
-|

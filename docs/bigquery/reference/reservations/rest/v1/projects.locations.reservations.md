@@ -90,4 +90,4 @@ Disaster Recovery(DR) replication status of the reservation.
 | `failoverReservation` | Fail over a reservation to the secondary location. |
 | `get` | Returns information about the reservation. |
 | `getIamPolicy` | Gets the access control policy for a resource. |
-| `lis` |
+|  |

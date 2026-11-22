@@ -31,11 +31,11 @@ BigQuery 提供下列類別的 AI 函式：
 
 ### 執行 LLM 推論
 
-[`AI.GENERATE` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate?hl=zh-tw)是彈性的推論函式，運作方式是將要求傳送至 Gemini Enterprise Agent Platform Gemini 模型，並傳回該模型的回覆。您可以使用這項函式分析文字、圖片、音訊、影片或 PDF 資料。舉例來說，您可以分析家具圖片，為 `design_type` 資料欄生成文字，讓家具 SKU 有相關聯的說明，例如 `mid-century modern` 或 `farmhouse`。
+[`AI.GENERATE` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate?hl=zh-tw)是彈性的推論函式，運作方式是將要求傳送至 Gemini Enterprise Agent Platform Gemini 模型，並傳回該模型的回覆。您可以使用這項函式分析文字、圖片、音訊、影片或 PDF 資料。舉例來說，您可以分析家具圖片，為 `design_type` 欄生成文字，讓家具 SKU 有相關聯的說明，例如 `mid-century modern` 或 `farmhouse`。
 
 您可以使用 BigQuery ML 中的遠端模型，參照部署或託管於 Agent Platform 的模型，並搭配 [`AI.GENERATE_TEXT` 資料表值函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text?hl=zh-tw)，執行生成式 AI 任務。您可以使用下列類型的[遠端模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model?hl=zh-tw)：
 
-* 透過任何[正式發布](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models?hl=zh-tw#generally_available_models)或[預先發布版](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models?hl=zh-tw#preview_models)的 Gemini 模型，使用遠端模型分析標準資料表或物件資料表中的文字、圖片、音訊、影片或 PDF 內容，並以函式引數的形式提供提示。
+* 透過任何[正式發布](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models?hl=zh-tw#generally_available_models)或[預先發布版](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models?hl=zh-tw#preview_models) Gemini 模型，使用遠端模型分析標準資料表或物件資料表中的文字、圖片、音訊、影片或 PDF 內容，並以函式引數的形式提供提示。
 * [Anthropic Claude](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/partner-models/use-claude?hl=zh-tw)、[Mistral AI](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/partner-models/mistral?hl=zh-tw) 或 [Llama](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/partner-models/llama?hl=zh-tw) 合作夥伴模型，或[支援的開放式模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open?hl=zh-tw#supported_open_models)的遠端模型，用於分析您在查詢中或[標準資料表](https://docs.cloud.google.com/bigquery/docs/tables-intro?hl=zh-tw#standard-tables)資料欄中提供的提示。
 
 請參閱下列主題，嘗試在 BigQuery ML 中生成文字：
@@ -123,14 +123,13 @@ BigQuery 支援下列模型：
 * `gemini-3.5-flash`
 * `gemini-3.1-flash-lite`
 
-Agent Platform 僅支援這些模型的多區域端點。不支援區域端點。
-如果指定的端點名稱簡短，且省略區域 (例如 `gemini-3.5-flash`)，BigQuery 會根據下列規則選取端點：
+對於大多數模型，Agent Platform 僅支援多區域端點。如要查看各模型在哪些區域支援的完整清單，請參閱「[Google 模型端點位置](https://docs.cloud.google.com/gemini-enterprise-agent-platform/resources/locations?hl=zh-tw#google-models)」。如果指定的端點名稱簡短，且省略區域 (例如 `gemini-4-argon`)，BigQuery 會根據下列規則選取端點：
 
 * 如果查詢是在 `us` 區域或美國境內的任何單一區域執行，BigQuery 會使用 `us` 端點。
 * 如果查詢是在 `eu` 區域或歐盟境內 `europe-west2` 或 `europe-west6` 以外的任何單一區域執行，BigQuery 會使用 `eu` 端點。
 * 對於所有其他位置 (包括 `europe-west2` 和 `europe-west6`)，BigQuery 會使用 `global` 端點。
 
-如要指定特定端點，請使用下列其中一種格式的完整多區域端點名稱：
+如要指定特定多區域端點，請使用下列其中一種格式的完整端點名稱：
 
 * `https://aiplatform.us.rep.googleapis.com/v1/projects/PROJECT_ID/locations/us/publishers/google/models/MODEL_ID`
 * `https://aiplatform.eu.rep.googleapis.com/v1/projects/PROJECT_ID/locations/eu/publishers/google/models/MODEL_ID`
@@ -158,12 +157,12 @@ Agent Platform 僅支援這些模型的多區域端點。不支援區域端點�
 
 * **輸入詞元數：**查詢中呼叫的所有生成式 AI 函式，其輸入詞元總數。
 * **輸出詞元數**：查詢生成的所有候選回覆中，詞元總數。
-* **思考詞元數**。模型生成思考過程中的詞元總數 (如適用)。
+* **思考詞元數**。模型生成的思考過程所含的詞元總數 (如適用)。
 * **快取詞元數。**查詢[隱含快取](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/context-cache/context-cache-overview?hl=zh-tw#implicit-caching)的輸入詞元總數。
 
 ## 追蹤費用
 
-BigQuery 的生成式 AI 函式會向 Gemini Enterprise Agent Platform 傳送要求，因此可能會產生費用。如要在執行查詢前估算輸入詞元數量，請使用 [`AI.COUNT_TOKENS` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-count-tokens?hl=zh-tw)。如要追蹤在 BigQuery 執行的工作所產生的 Agent Platform 費用，請按照下列步驟操作：
+BigQuery 的生成式 AI 函式會向 Gemini Enterprise Agent Platform 傳送要求，因此可能會產生費用。如要在執行查詢前估算輸入詞元數量，請使用 [`AI.COUNT_TOKENS` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-count-tokens?hl=zh-tw)。如要追蹤在 BigQuery 執行工作產生的 Agent Platform 費用，請按照下列步驟操作：
 
 1. 在 Cloud Billing 中[查看帳單報表](https://docs.cloud.google.com/billing/docs/how-to/reports?hl=zh-tw)。
 2. [套用篩選器](https://docs.cloud.google.com/billing/docs/how-to/reports?hl=zh-tw#filters)可縮小結果範圍。
@@ -207,7 +206,7 @@ BigQuery 的生成式 AI 函式會向 Gemini Enterprise Agent Platform 傳送要
 
 如果查詢包含 `LIMIT` 子句，系統會在模型處理完一批資料列*後*套用限制。因此，最終結果集中 `NULL` 值的比例可能會高於指定的 `max_error_ratio`。
 
-舉例來說，假設查詢包含 `LIMIT 10` 子句，且 `max_error_ratio` 為 `0.2`。模型可能會先處理 20 列，然後才套用限制。如果這 20 列中有 3 列失敗，錯誤率為 `0.15` (15%)，低於 20% 的門檻。不過，如果 `LIMIT` 子句選取的資料列子集剛好包含所有 3 個失敗的資料列，則可見輸出內容會包含 30% 的 `NULL` 值。
+舉例來說，假設查詢包含 `LIMIT 10` 子句，且 `max_error_ratio` 為 `0.2`。模型可能會先處理 20 列，然後才套用限制。如果這 20 列中有 3 列失敗，錯誤率為 `0.15` (15%)，在 20% 的門檻內。不過，如果 `LIMIT` 子句選取的資料列子集剛好包含所有 3 個失敗的資料列，則可見輸出內容會包含 30% 的 `NULL` 值。
 
 ## 後續步驟
 
@@ -222,11 +221,11 @@ BigQuery 的生成式 AI 函式會向 Gemini Enterprise Agent Platform 傳送要
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-19 (世界標準時間)。
+上次更新時間：2026-11-20 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-19 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-20 (世界標準時間)。"],[],[]]

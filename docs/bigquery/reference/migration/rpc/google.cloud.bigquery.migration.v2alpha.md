@@ -109,7 +109,7 @@ Service to handle EDW migrations.
 
 | CreateMigrationWorkflow |
 | --- |
-| `rpc CreateMigrationWorkflow(CreateMigrationWorkflowRequest) returns (MigrationWorkflow)`  Creates a migration workflow.  Authorization scopes  Requires one of the following OAuth scopes:   * `https://www.googleapis.com/auth/bigquerymigration` * `https://www.googleapis.com/auth/devstorage.read_only` * `https://www.googleapis.com/auth/cloud-platform`   For more information, see the [Authentication Overview](/docs/authentication#authorization-gcp).  IAM Permissions  Requires the following [IAM](https://cloud.google.com/iam/docs) permission on the `parent` resource:   * `bigquerymigration.workflows.create`   For more information, see the [IAM documentation](https://cloud.google.com/iam/docs). |
+| `rpc CreateMigrationWorkflow(CreateMigrationWorkflowRequest) returns (MigrationWorkflow)`  Creates a migration workflow.  Authorization scopes  Requires one of the following OAuth scopes:   * `https://www.googleapis.com/auth/bigquerymigration` * `https://www.googleapis.com/auth/cloud-platform`   For more information, see the [Authentication Overview](/docs/authentication#authorization-gcp).  IAM Permissions  Requires the following [IAM](https://cloud.google.com/iam/docs) permission on the `parent` resource:   * `bigquerymigration.workflows.create`   For more information, see the [IAM documentation](https://cloud.google.com/iam/docs). |
 
 | DeleteMigrationWorkflow |
 | --- |
