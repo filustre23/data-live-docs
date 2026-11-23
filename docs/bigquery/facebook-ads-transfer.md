@@ -199,5 +199,5 @@ bq mk
 --target_dataset=mydataset
 --data_source=facebook_ads
 --display_name='My Transfer'
---params
+--params=
 ```

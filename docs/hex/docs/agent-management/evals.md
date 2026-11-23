@@ -556,7 +556,7 @@ Choose a rubric type based on what you want to check.
 | --- | --- | --- | --- |
 | `id` | Yes | string | Unique identifier. |
 | `type` | Yes | `numeric_value` | — |
-| `target` | Yes | number or SQL target | Fixed number, or `{ sql, dataConnectionId }` run at grade time. Optionally add `timeoutSeconds` (max 120s). |
+| `target` | Yes | number or SQL target | Fixed number, or a query run at grade time. See [SQL target for `numeric_value`](#numeric-value-sql-target). |
 | `tolerancePercentage` | No | number | Allowed difference as a percent of `target`. Default 1. Applies even when `absoluteTolerance` is set. |
 | `absoluteTolerance` | No | number | Allowed difference as a fixed amount, in the target’s units. Checked in addition to `tolerancePercentage`, not instead of it — a value passes if it's within either. For an exact match, set both `absoluteTolerance: 0` and `tolerancePercentage: 0`. |
 | `outputFormat` | No | `int` or `float` | Default `float`. |
@@ -564,6 +564,77 @@ Choose a rubric type based on what you want to check.
 | `extractionGuidance` | No | string | Hint for which number to grade when the answer has several, e.g. "the enterprise ARR, not total ARR". |
 | `warnOnly` | No | boolean | Default `false`. Grade and report this rubric without letting it fail or error the case. See [Warn-only rubrics](#warn-only-rubrics). |
 | `measure` | No | string | Groups this rubric with others checking the same quality, so they roll up into one rate. Lowercase kebab-case or snake\_case. See [Measures](#measures). |
+
+#### SQL target for `numeric_value`[​](#numeric-value-sql-target "Direct link to numeric-value-sql-target")
+
+To compute the target from a query at grade time, set `target` to a SQL target instead of a number.
+
+| Field | Required | Type | Notes |
+| --- | --- | --- | --- |
+| `sql` | Yes | string | Query that returns the target value. Must return exactly one row. |
+| `dataConnectionId` | Yes | string | Data connection to run the query on. |
+| `timeoutSeconds` | No | number | Query timeout in seconds, 1-120. |
+| `column` | No | string | Name of the result column that holds the target value. When omitted, the query must return exactly one column. |
+
+Without `column`, the query must return exactly one row and one column. If you want to keep supporting columns in the query, such as the numerator and denominator behind a rate, set `column` to the name of the column to compare. The query must still return exactly one row, but it can return any number of columns.
+
+```
+rubrics:
+
+
+
+- id: pass_rate_matches
+
+
+
+type: numeric_value
+
+
+
+target:
+
+
+
+sql: |
+
+
+
+SELECT
+
+
+
+COUNT_IF(passed) AS passed_users,
+
+
+
+COUNT(*) AS total_users,
+
+
+
+ROUND(COUNT_IF(passed) / COUNT(*) * 100, 2) AS pass_rate_pct
+
+
+
+FROM decisions
+
+
+
+dataConnectionId: "dc_..."
+
+
+
+column: pass_rate_pct
+```
+
+Hex matches the `column` name exactly first, then case-insensitively. Snowflake returns unquoted identifiers in upper case, so `column: pass_rate_pct` matches the `PASS_RATE_PCT` column that Snowflake returns for the query above.
+
+A rubric that sets `column` errors with the reason `SQL_TARGET_NOT_SCALAR` when:
+
+* No column in the result has that name. The error message lists the columns the query returned.
+* More than one column matches the name.
+* The query returns more than one row, or no rows.
+
+`column` applies to `numeric_value` targets only. A judge rubric's `expectedSql` doesn't take `column`, because the judge sees the whole query result.
 
 #### Warn-only rubrics[​](#warn-only-rubrics "Direct link to Warn-only rubrics")
 

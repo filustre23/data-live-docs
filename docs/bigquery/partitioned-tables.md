@@ -16,7 +16,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 分區資料表簡介
 
-分區資料表會劃分為多個區段 (稱為分區)，管理和查詢資料時更加方便。將大型資料表分成許多較小分區，不但可以提高查詢效能，還能降低查詢讀取的位元組數，進一步控管費用。如要將資料表分區，請指定分區資料欄，BigQuery 會使用該資料欄來區隔資料表。
+分區資料表會劃分為多個區段 (稱為分區)，管理和查詢資料時更加方便。將大型資料表分成許多較小分區，不但可以提高查詢效能，還能降低查詢讀取的位元組數，進一步控管費用。如要將資料表分區，請指定分區資料欄，BigQuery 會根據該資料欄區隔資料表。
 
 當查詢作業對分區資料欄套用符合的篩選器時，BigQuery 就能掃描符合篩選條件的分區，並略過其餘的分區。這個程序稱為「修剪」。
 
@@ -24,15 +24,15 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 在分區資料表中，資料會儲存在實體區塊，每個區塊都包含一個資料分區。每個分區資料表都會維護各種中繼資料，記錄所有修改作業的排序屬性。中繼資料可讓 BigQuery 在執行查詢前，更準確地估算查詢費用。
 
-**注意：** 「[管理資料表資料](https://docs.cloud.google.com/bigquery/docs/managing-table-data?hl=zh-tw)」中的資訊也適用於分區資料表。
+**注意：**「[管理資料表資料](https://docs.cloud.google.com/bigquery/docs/managing-table-data?hl=zh-tw)」中的資訊也適用於分區資料表。
 
-## 分區的使用時機
+## 使用分區的時機
 
-在下列情況下，建議您將資料表分區：
+建議您在下列情況下將資料表分區：
 
 * 您想只掃描資料表的一部分，提高查詢效能。
 * 資料表作業超出[標準資料表配額](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#standard_tables)，您可以將資料表作業範圍限定在特定分區資料欄值，以提高[分區資料表配額](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#partitioned_tables)。
-* 您想在執行查詢前，先確定查詢費用。BigQuery 會在分區資料表上執行查詢前，提供查詢費用估算值。如要計算查詢費用預估值，請[剪除](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables?hl=zh-tw)分區資料表，然後執行查詢模擬測試，估算查詢費用。
+* 您想在執行查詢前，先判斷查詢費用。BigQuery 會在分區資料表上執行查詢前，提供查詢費用估算值。[剪除](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables?hl=zh-tw)分區資料表，然後執行查詢模擬測試，估算查詢費用。
 * 您需要下列任一分區層級管理功能：
   + [設定分區到期時間](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#partition-expiration)，在指定時間過後自動刪除整個分區。
   + 使用載入工作[將資料寫入特定分區](https://docs.cloud.google.com/bigquery/docs/load-data-partitioned-tables?hl=zh-tw#write-to-partition)，而不影響資料表中的其他分區。
@@ -40,10 +40,10 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 在下列情況下，建議您[分群](https://docs.cloud.google.com/bigquery/docs/clustered-tables?hl=zh-tw)資料表，而非分區資料表：
 
-* 您需要比分區更精細的控制。
+* 您需要比分區更精細的設定。
 * 查詢通常會使用篩選器或匯總多個資料欄。
 * 資料欄或資料欄群組中的值數量基數很大。
-* 執行查詢前，不需要嚴格估算費用。
+* 執行查詢前，不需要嚴格的費用估算。
 * 分區會導致每個分區的資料量較少 (約少於 10 GB)。建立許多小型分區會增加資料表的中繼資料，並可能影響查詢資料表時的中繼資料存取時間。
 * 分區會產生大量分區，超過[分區資料表的限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#partitioned_tables)。
 * DML 作業經常修改 (例如每隔幾分鐘) 資料表中的大部分分區。
@@ -80,11 +80,11 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ### 按時間單位資料欄分區
 
-您可以依據資料表中的 `DATE`、`TIMESTAMP` 或 `DATETIME` 欄，對資料表進行分區。將資料寫入資料表時，BigQuery 會根據資料欄中的值，自動將資料放入正確的分區。
+您可以根據資料表中的 `DATE`、`TIMESTAMP` 或 `DATETIME` 欄，將資料表分區。將資料寫入資料表時，BigQuery 會根據資料欄中的值，自動將資料放入正確的分區。
 
-如果是 `TIMESTAMP` 和 `DATETIME` 資料欄，分區可以按小時、日、月或年劃分。如果是 `DATE` 資料欄，分區可以採用每日、每月或每年的精細程度。分區界線以世界標準時間 (UTC) 為準。
+如果是 `TIMESTAMP` 和 `DATETIME` 資料欄，分區可以按小時、日、月或年劃分。如果是 `DATE` 欄，分區可以按日、月或年劃分。分區界線以世界標準時間 (UTC) 為準。
 
-舉例來說，假設您在 `DATETIME` 資料欄上，以每月分區的方式將資料表分區。如果將下列值插入資料表，資料列會寫入下列分區：
+舉例來說，假設您在 `DATETIME` 資料欄上，以月為單位將資料表分區。如果您在資料表中插入下列值，資料列會寫入下列分區：
 
 | 列值 | 分區 (每月) |
 | --- | --- |
@@ -103,7 +103,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 建立依擷取時間分區的資料表時，BigQuery 會根據擷取資料的時間，自動將資料列指派至分區。您可以選擇按小時、日、月或年設定分區。分區界線以世界標準時間為準。
 
-如果使用較精細的時間精細程度，資料可能會達到每個資料表的分區數量上限，請改用較粗略的精細程度。例如，您可以依月份 (而非日期) 分割，減少分區數量。您也可以[叢集](https://docs.cloud.google.com/bigquery/docs/clustered-tables?hl=zh-tw)分區資料欄，進一步提升效能。
+如果使用較精細的時間精細程度，資料可能會達到每個資料表的分區數量上限，請改用較粗略的精細程度。例如，您可以按月 (而非按日) 分割，以減少分區數量。您也可以[叢集](https://docs.cloud.google.com/bigquery/docs/clustered-tables?hl=zh-tw)分區資料欄，進一步提升效能。
 
 擷取時間分區資料表有名為 `_PARTITIONTIME` 的虛擬資料欄。這個資料欄的值是每個資料列的擷取時間，會截斷至分區邊界 (例如每小時或每日)。舉例來說，假設您建立擷取時間分區資料表，並以小時為單位分區，然後在下列時間傳送資料：
 
@@ -117,21 +117,21 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 您也可以將資料寫入特定分區。例如，您可能需要載入歷來資料或調整時區。您可以使用 0001-01-01 到 9999-12-31 之間的任何有效日期。不過，[DML 陳述式](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language?hl=zh-tw)無法參照 1970-01-01 之前或 2159-12-31 之後的日期。詳情請參閱「[將資料寫入特定分區](https://docs.cloud.google.com/bigquery/docs/load-data-partitioned-tables?hl=zh-tw#write-to-partition)」。
 
-除了使用 `_PARTITIONTIME`，您也可以使用 [`_PARTITIONDATE`](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables?hl=zh-tw#query_an_ingestion-time_partitioned_table)。`_PARTITIONDATE` 虛擬資料欄包含與 `_PARTITIONTIME` 虛擬資料欄中的值對應的世界標準時間日期。
+除了 `_PARTITIONTIME`，您也可以使用 [`_PARTITIONDATE`](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables?hl=zh-tw#query_an_ingestion-time_partitioned_table)。`_PARTITIONDATE` 虛擬資料欄包含與 `_PARTITIONTIME` 虛擬資料欄中的值對應的世界標準時間日期。
 
 ### 選取每日、每小時、每月或每年分區
 
 依時間單位資料欄或擷取時間劃分資料表時，您可以選擇分區的精細程度，例如每日、每小時、每月或每年。
 
-* **每日分區**是預設的分區類型。如果資料分散在多個日期，或資料會隨著時間持續增加，則適合採用每日分區。
-* 如果資料表含有大量資料，且資料涵蓋的日期範圍較短 (通常時間戳記值少於六個月)，請選擇「每小時分區」。如果選擇每小時分區，請確保分區數量不超過[分區限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#partitioned_tables)。
+* **每日分區**是預設的分區類型。如果資料分布在多個日期，或資料會隨著時間持續增加，則適合採用每日分區。
+* 如果資料表含有大量資料，且資料涵蓋的時間範圍較短 (通常時間戳記值少於六個月)，請選擇「每小時分區」。如果選擇每小時分區，請確保分區數量不超過[分區限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#partitioned_tables)。
 * 如果資料表每天的資料量相對較少，但日期範圍較廣，請選擇**每月或每年分區**。如果工作流程需要頻繁更新或新增涵蓋廣泛日期範圍 (例如超過 500 個日期) 的資料列，也建議使用這個選項。在這些情況下，請使用每月或每年分區，並在分區資料欄上進行分群，以達到最佳效能。詳情請參閱本文的「[合併叢集和分區資料表](#combining_clustered_and_partitioned_tables)」一節。
 
 ## 合併分群和分區資料表
 
-您可以將資料表分區與[資料表分群](https://docs.cloud.google.com/bigquery/docs/clustered-tables?hl=zh-tw)結合，進行精細排序，進一步最佳化查詢。
+您可以結合資料表分區和[資料表分群](https://docs.cloud.google.com/bigquery/docs/clustered-tables?hl=zh-tw)，進行精細排序，進一步最佳化查詢。
 
-分群資料表包含分群資料欄，可根據使用者定義的排序屬性排序資料。這些分群資料欄中的資料會分類到儲存區塊，區塊大小會根據資料表大小自動調整。執行查詢時，如果依分群資料欄篩選，BigQuery 只會根據分群資料欄掃描相關區塊，而非整個資料表或資料表分區。如果同時使用資料表分區和分群，您會先將資料表資料分割成多個分區，然後再依據分群欄將每個分區中的資料分群。
+分群資料表包含分群資料欄，可根據使用者定義的排序屬性排序資料。這些分群資料欄中的資料會分類至儲存區塊，區塊大小會根據資料表大小自動調整。執行查詢時，如果依分群資料欄篩選，BigQuery 只會根據分群資料欄掃描相關區塊，而非整個資料表或資料表分區。如果結合資料表分區和分群，您會先將資料表資料分成多個分區，然後依據分群欄將每個分區中的資料分群。
 
 建立分群和分區資料表時，您可以進行更精細的排序，如下圖所示：
 
@@ -147,7 +147,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 分區修飾符可讓您參照資料表中的分區。例如，您可以使用這些修飾符將[資料寫入](https://docs.cloud.google.com/bigquery/docs/load-data-partitioned-tables?hl=zh-tw#write-to-partition)特定分區。
 
-分區修飾符的形式為 `table_name$partition_id`，其中 `partition_id` 區隔的格式取決於分區類型：
+分區裝飾器的格式為 `table_name$partition_id`，其中 `partition_id` 區隔的格式取決於分區類型：
 
 | 分區類型 | 格式 | 範例 |
 | --- | --- | --- |
@@ -178,7 +178,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 分區資料表有下列限制：
 
 * 您無法使用舊版 SQL 查詢分區資料表或將查詢結果寫入分區資料表。
-* BigQuery 不支援依多個資料欄分區。只能使用一個資料欄來分區資料表。
+* BigQuery 不支援依多個資料欄進行分區。只能使用一個資料欄來分割資料表。
 * 您無法直接將現有的非分區資料表轉換為分區資料表。分區策略是在建立資料表時定義。請改用 [`CREATE TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?hl=zh-tw#create_table_statement) 陳述式，透過查詢現有資料表中的資料，建立新的分區資料表。
 * 時間單位資料欄分區資料表有下列限制：
 
@@ -195,7 +195,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ## 配額與限制
 
-BigQuery 對分區資料表設有[限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#partitioned_tables)。如要進一步瞭解所有配額和限制，請參閱「[配額與限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw)」。
+BigQuery 對分區資料表設有[限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#partitioned_tables)，包括系統限制[每個資料表最多 10,000 個分區](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#max_partitions_per_table)。如要瞭解如何監控分區數量，以及解決批次和串流擷取作業的分區限制錯誤，請參閱「[每個分區資料表的分區數量上限錯誤](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas?hl=zh-tw#ts-max-partitions-per-table)」。如要進一步瞭解所有配額和限制，請參閱「[配額與限制](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw)」。
 
 ### 分區資料表工作的配額和限制
 
@@ -210,7 +210,7 @@ BigQuery 對分區資料表設有[限制](https://docs.cloud.google.com/bigquery
 
 如果資料欄分區資料表達到每日允許的分區修改次數配額，BigQuery 就會傳回這項錯誤。分區修改作業包括所有[載入工作](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#load_jobs)、[複製工作](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#copy_jobs)和[查詢工作](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#query_jobs)，這些工作會附加或覆寫目的地分區。
 
-如要查看「**每個資料欄分區資料表每天的分區修改次數**」限制值，請參閱「[分區資料表](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#partitioned_tables)」。
+如要查看「每日每個資料欄分區資料表的分區修改次數」限制值，請參閱「[分區資料表](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#partitioned_tables)」。
 
 **錯誤訊息**
 
@@ -230,7 +230,7 @@ Number of partition modifications to a column partitioned table
   詳情請參閱「[批次載入資料](https://docs.cloud.google.com/bigquery/docs/batch-loading-data?hl=zh-tw#permissions-load-data-from-cloud-storage)」。
 * 舉例來說，如果您使用載入、選取或複製工作，將單一資料列附加至資料表，建議您將多項工作批次處理成一項工作。BigQuery 做為關聯式資料庫時，效能不佳。最佳做法是避免頻繁執行單列附加動作。
 * 如要快速附加資料，建議使用 [BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api?hl=zh-tw)。建議用於高效能資料擷取。BigQuery Storage Write API (gRPC) 具備強大的功能，包括「僅傳送一次」語意。如要瞭解限制和配額，請參閱「[Storage Write API](https://cloud.google.com/bigquery/quotas?hl=zh-tw#write-api-limits)」；如要瞭解使用這個 API 的費用，請參閱「[BigQuery 資料擷取定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#data_ingestion_pricing)」。
-* 如要監控資料表上修改的分區數量，請使用 [`INFORMATION_SCHEMA` 檢視表](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw#partitions-modified-by)。
+* 如要監控資料表上修改過的分區數量，請使用 [`INFORMATION_SCHEMA` 檢視畫面](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs?hl=zh-tw#partitions-modified-by)。
 * 如要瞭解如何最佳化資料表載入工作，避免達到配額限制，請參閱「[最佳化載入工作](https://docs.cloud.google.com/bigquery/docs/optimize-load-jobs?hl=zh-tw)」。
 
 ## 資料表價格
@@ -261,11 +261,11 @@ Number of partition modifications to a column partitioned table
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-11 (世界標準時間)。
+上次更新時間：2026-11-23 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-11 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-23 (世界標準時間)。"],[],[]]

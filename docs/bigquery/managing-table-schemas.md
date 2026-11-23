@@ -1025,5 +1025,5 @@ func createTableAndWidenQuery(projectID, datasetID, tableID string) error {
 		Schema: sampleSchema,
 	}
 	tableRef := client.Dataset(datasetID).Table(tableID)
-	if err :=
+	if err := tableRef
 ```

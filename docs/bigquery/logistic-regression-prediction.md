@@ -10,7 +10,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 在人口普查資料上建立及使用分類模型 透過集合功能整理內容 你可以依據偏好儲存及分類內容。
 
-在本教學課程中，您將在 BigQuery ML 中使用二元[邏輯迴歸模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm?hl=zh-tw)，根據人口統計資料預測個人的收入範圍。二元邏輯迴歸模型會預測值是否屬於兩個類別之一，在本例中，即個人年收入是否高於或低於 $50,000 美元。
+在本教學課程中，您將在 BigQuery ML 中使用二元[邏輯迴歸模型](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm?hl=zh-tw)，根據人口統計資料預測個人的收入範圍。二元邏輯迴歸模型會預測值是否屬於兩個類別之一，在本例中，是預測個人的年收入是否高於或低於 $50,000 美元。
 
 本教學課程使用 [`bigquery-public-data.ml_datasets.census_adult_income`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&%3Bd=ml_datasets&%3Bt=census_adult_income&%3Bpage=table&hl=zh-tw) 資料集。這個資料集包含 2000 年和 2010 年美國居民的人口統計和收入資訊。
 
@@ -50,7 +50,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
    **啟用 API 所需的角色**
 
-   如要啟用 API，您必須具備 `serviceusage.services.enable` 權限。如果您建立了專案，可能已透過擁有者角色 (`roles/owner`) 取得這項權限。否則，您可以透過服務使用情形管理員角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   如要啟用 API，您必須具備 `serviceusage.services.enable` 權限。如果您建立了專案，可能已透過擁有者角色 (`roles/owner`) 取得這項權限。否則，您可以透過 Service Usage 管理員角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
    [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery.googleapis.com&hl=zh-tw)
 
@@ -66,14 +66,14 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 如要執行推論，您必須具備下列權限：
 
-* `bigquery.models.getData`模型
+* 模型上的`bigquery.models.getData`
 * `bigquery.jobs.create`
 
 ## 簡介
 
-機器學習的常見工作是將資料分類為兩種標籤之一。舉例來說，零售商可能會想根據某位顧客的其他資訊，預測該顧客是否會購買新產品。在這種情況下，兩個標籤可能是 `will buy` 和 `won't buy`。零售商可以建構資料集，讓一個資料欄代表兩個標籤，並包含顧客資訊，例如顧客的位置、先前的購買記錄和回報的偏好。接著，零售商可以使用二元邏輯迴歸模型，根據這些客戶資訊預測最能代表每位顧客的標籤。
+機器學習的常見工作是將資料分類為兩種類型之一，稱為標籤。舉例來說，零售商可能會想根據某位顧客的其他資訊，預測該顧客是否會購買新產品。在這種情況下，兩個標籤可能是 `will buy` 和 `won't buy`。零售商可以建構資料集，讓一個資料欄同時代表兩個標籤，並包含客戶資訊，例如客戶的位置、先前的購買記錄和回報的偏好。接著，零售商可以使用二元邏輯迴歸模型，根據這項客戶資訊預測最能代表每位顧客的標籤。
 
-在本教學課程中，您將建立二元邏輯迴歸模型，根據美國人口普查受訪者的人口統計屬性，預測受訪者的收入是否落在兩個範圍之一。
+在本教學課程中，您將建立二元邏輯迴歸模型，根據美國人口普查受訪者的人口統計屬性，預測其收入是否落在兩個範圍之一。
 
 ## 建立資料集
 
@@ -90,14 +90,14 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 5. 在「Create dataset」(建立資料集) 頁面執行下列操作：
 
    * 在「Dataset ID」(資料集 ID) 中輸入 `census`。
-   * 「位置類型」請選取「多區域」，然後選取「美國 (多個美國區域)」。
+   * 「位置類型」請選取「多區域」，然後選取「US (多個美國區域)」。
 
-     公開資料集儲存在`US` [多區域](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#multi-regions)。為簡單起見，建議您將資料集放在同一個區域。
-   * 其餘設定請保留預設狀態，然後按一下「Create dataset」(建立資料集)。
+     公開資料集存放在 `US` [多區域](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#multi-regions)。為簡單起見，建議您將資料集放在同一個區域。
+   * 其餘設定請保留預設狀態，然後點選「Create dataset」(建立資料集)。
 
 ## 檢查資料
 
-檢查資料集，找出要用於邏輯迴歸模型的訓練資料欄。從 `census_adult_income` 資料表選取 100 個資料列：
+檢查資料集，並找出要用做邏輯迴歸模型訓練資料的資料欄。從 `census_adult_income` 資料表選取 100 個資料列：
 
 ### SQL
 
@@ -125,7 +125,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 ### BigQuery DataFrames
 
-試用這個範例前，請先按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定操作說明操作。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)」中的 BigQuery DataFrames 設定操作說明進行操作。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -166,7 +166,7 @@ df.peek()
 
 ## 準備範例資料
 
-在本教學課程中，您將根據 `census_adult_income` 資料表中下列資料欄的值，預測普查受訪者的收入：
+在本教學課程中，您將根據 `census_adult_income` 資料表中下列資料欄的值，預測人口普查受訪者的收入：
 
 * `age`：作答者的年齡。
 * `workclass`：執行的工作類別。例如地方政府、私人或自僱。
@@ -181,7 +181,7 @@ df.peek()
 
 ### SQL
 
-使用樣本資料建立[檢視表](https://docs.cloud.google.com/bigquery/docs/views-intro?hl=zh-tw)。本教學課程稍後會使用 `CREATE MODEL` 陳述式，
+使用樣本資料建立[檢視表](https://docs.cloud.google.com/bigquery/docs/views-intro?hl=zh-tw)。本教學課程稍後會使用 `CREATE MODEL` 陳述式，來運用這個檢視表。
 
 執行查詢來準備範例資料：
 
@@ -217,9 +217,9 @@ df.peek()
 
 ### BigQuery DataFrames
 
-建立名為 `input_data` 的 `DataFrame`。在本教學課程稍後的步驟中，您將使用 `input_data` 訓練模型、評估模型及進行預測。
+建立名為 `input_data` 的 `DataFrame`。在本教學課程中，您稍後會使用 `input_data` 訓練模型、評估模型及進行預測。
 
-試用這個範例前，請先按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定操作說明操作。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)」中的 BigQuery DataFrames 設定操作說明進行操作。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -265,11 +265,11 @@ del input_data["functional_weight"]
 
 以下是 `CREATE MODEL` 陳述式的實用資訊：
 
-* [`input_label_cols`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm?hl=zh-tw#input_label_cols) 選項會指定 `SELECT` 陳述式中的哪個資料欄要做為標籤欄。這裡的標籤欄是 `income_bracket`，因此模型會根據該列中的其他值，學習 `income_bracket` 的兩個值中，哪一個最有可能出現在指定列中。
-* 您不需要指定邏輯迴歸模型是二元還是多元。BigQuery ML 會根據標籤欄中的不重複值數量，決定要訓練的模型類型。
-* [`auto_class_weights`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm?hl=zh-tw#auto_class_weights) 選項設為 `TRUE`，以平衡訓練資料中的類別標籤。根據預設，訓練資料未加權。如果訓練資料中的標籤不平衡，模型可能會更傾向預測最常見的標籤類別。在這個例子中，資料集內的大多數受訪者都屬於較低收入族群。這可能導致模型過度預測低收入族群。類別權重會計算每個類別的權重，並與該類別的頻率成反比，藉此平衡類別標籤。
+* [`input_label_cols`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm?hl=zh-tw#input_label_cols) 選項會指定 `SELECT` 陳述式中的哪個資料欄要做為標籤欄。這裡的標籤欄是 `income_bracket`，因此模型會根據該列中的其他值，瞭解 `income_bracket` 的兩個值中，哪一個最有可能出現在指定列中。
+* 您不需要指定邏輯迴歸模型是二元還是多元。BigQuery ML 會根據標籤欄中的不重複值數量，決定要訓練哪種模型。
+* [`auto_class_weights`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm?hl=zh-tw#auto_class_weights) 選項設為 `TRUE`，以平衡訓練資料中的類別標籤。根據預設，訓練資料未加權。如果訓練資料中的標籤不平衡，模型可能會更傾向預測最常見的標籤類別。在這個例子中，資料集內的大多數受訪者都屬於低收入族群。這可能導致模型過度預測低收入族群。類別權重會計算每個類別的權重，並與該類別的頻率成反比，藉此平衡類別標籤。
 * [`enable_global_explain` 選項](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm?hl=zh-tw#enable_global_explain)設為 `TRUE`，以便您在教學課程稍後[對模型使用 `ML.GLOBAL_EXPLAIN` 函式](#globally_explain_the_model)。
-* [`SELECT` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm?hl=zh-tw#query_statement)會查詢包含樣本資料的 `input_data` 檢視表。`WHERE` 子句會篩選資料列，只使用標示為訓練資料的資料列訓練模型。
+* [`SELECT` 陳述式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm?hl=zh-tw#query_statement)會查詢包含樣本資料的 `input_data` 檢視表。`WHERE` 子句會篩選資料列，因此只有標示為訓練資料的資料列會用於訓練模型。
 
 執行查詢，建立邏輯迴歸模型：
 
@@ -295,9 +295,9 @@ del input_data["functional_weight"]
    dataframe = 'training'
    ```
 3. 點選左側窗格中的 explore「Explorer」。
-4. 在「Explorer」窗格中，點選「Datasets」(資料集)。
+4. 在「Explorer」窗格中，點選「資料集」。
 5. 在「Datasets」(資料集) 窗格中，按一下 `census`。
-6. 點選「Models」分頁標籤。
+6. 按一下「Models」分頁標籤。
 7. 按一下「`census_model`」。
 8. 「Details」(詳細資料) 分頁會列出 BigQuery ML 用於執行邏輯迴歸的屬性。
 
@@ -305,7 +305,7 @@ del input_data["functional_weight"]
 
 使用 [`bigframes.bigquery.ml.create_model`](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.create_model.html#bigframes.bigquery.ml.create_model) 函式訓練模型，並將模型儲存至資料集。
 
-試用這個範例前，請先按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定操作說明操作。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)」中的 BigQuery DataFrames 設定操作說明進行操作。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -354,13 +354,13 @@ ml.create_model(
 
 ## 評估模型成效
 
-建立模型後，請依據評估資料評估模型效能。
+建立模型後，請根據評估資料評估模型效能。
 
 ### SQL
 
 [`ML.EVALUATE` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate?hl=zh-tw)會根據評估資料，評估模型產生的預測值。
 
-`ML.EVALUATE` 函式會將訓練好的模型和 `input_data` 檢視表中 `dataframe` 欄值為 `evaluation` 的資料列做為輸入內容。這個函式會傳回一列模型統計資料。
+`ML.EVALUATE` 函式會將訓練好的模型和 `input_data` 檢視表中 `dataframe` 資料欄值為 `evaluation` 的資料列做為輸入內容。這個函式會傳回一列模型統計資料。
 
 執行 `ML.EVALUATE` 查詢：
 
@@ -390,7 +390,7 @@ ml.create_model(
 
 使用 [`bigframes.bigquery.ml.evaluate`](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.evaluate.html#bigframes.bigquery.ml.evaluate) 函式，根據實際資料評估模型。
 
-試用這個範例前，請先按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定操作說明操作。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)」中的 BigQuery DataFrames 設定操作說明進行操作。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -418,7 +418,7 @@ ml.evaluate(
 # 0   0.685764  0.536685   0.83819  0.602134  0.350417  0.882953
 ```
 
-您也可以在 Google Cloud 控制台查看模型的「Evaluation」(評估) 窗格，查看訓練期間計算的評估指標：
+您也可以在 Google Cloud 控制台的模型「Evaluation」(評估) 窗格中，查看訓練期間計算的評估指標：
 
 ## 預測收入級距
 
@@ -426,7 +426,7 @@ ml.evaluate(
 
 ### SQL
 
-使用 [`ML.PREDICT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict?hl=zh-tw)預測可能的收入級距。`ML.PREDICT` 函式會將訓練好的模型和 `input_data` 檢視表中 `dataframe` 欄值為 `prediction` 的資料列做為輸入內容。
+使用 [`ML.PREDICT` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict?hl=zh-tw)預測可能的收入級距。`ML.PREDICT` 函式會將訓練好的模型和 `input_data` 檢視表中 `dataframe` 資料欄值為 `prediction` 的資料列做為輸入內容。
 
 執行 `ML.PREDICT` 查詢：
 
@@ -458,7 +458,7 @@ ml.evaluate(
 
 使用 [`bigframes.bigquery.ml.predict`](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.predict.html#bigframes.bigquery.ml.predict) 函式預測可能的收入級距。
 
-試用這個範例前，請先按照[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)中的 BigQuery DataFrames 設定操作說明操作。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
+在試用這個範例之前，請先按照「[使用 BigQuery DataFrames 的 BigQuery 快速入門導覽課程](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart?hl=zh-tw)」中的 BigQuery DataFrames 設定操作說明進行操作。詳情請參閱 [BigQuery DataFrames 參考文件](https://docs.cloud.google.com/python/docs/reference/bigframes/latest?hl=zh-tw)。
 
 如要向 BigQuery 進行驗證，請設定應用程式預設憑證。
 詳情請參閱「[為本機開發環境設定 ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment?hl=zh-tw)」。
@@ -519,11 +519,11 @@ ml.predict(
    ```
 3. 結果大致如下：
 
-**注意：** `ML.EXPLAIN_PREDICT` 查詢會輸出所有輸入特徵欄，與 `ML.PREDICT` 類似。為了方便閱讀，上圖只顯示一個特徵欄 `age`。
+**注意：**`ML.EXPLAIN_PREDICT` 查詢會輸出所有輸入特徵欄，與 `ML.PREDICT` 類似。為了方便閱讀，上圖只顯示一個特徵欄 `age`。
 
-如果是邏輯迴歸模型，則會使用 [Shapley 值](https://wikipedia.org/wiki/Shapley_value)判斷模型中各項特徵的相對特徵歸因。由於查詢中的 `top_k_features` 選項設為 `3`，`ML.EXPLAIN_PREDICT` 會輸出 `input_data` 檢視表中每一列的前三大特徵歸因。這些歸因會依絕對值遞減排序。
+如果是邏輯迴歸模型，則會使用 [Shapley 值](https://wikipedia.org/wiki/Shapley_value)判斷模型中各項特徵的相對特徵歸因。由於查詢中的 `top_k_features` 選項設為 `3`，`ML.EXPLAIN_PREDICT` 會輸出 `input_data` 檢視表中每一列的前三大特徵歸因。這些歸因會依歸因的絕對值遞減排序。
 
-## 全域解釋模型
+## 全面解釋模型
 
 如要瞭解哪些特徵最能決定收入級距，請使用 [`ML.GLOBAL_EXPLAIN` 函式](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-global-explain?hl=zh-tw)。
 
@@ -548,14 +548,15 @@ ml.predict(
 
 ### 刪除資料集
 
-刪除專案將移除專案中所有的資料集與資料表。若您希望重新使用專案，您可以刪除本教學課程中所建立的資料集。
+刪除專案將移除專案中所有的資料集與資料表。如要重複使用專案，可以刪除在本教學課程中建立的資料集：
 
-1. 如有需要，請在Google Cloud 控制台中開啟 BigQuery 頁面。
+1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
-   [前往「BigQuery」頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在導覽列中，點選您建立的 **census** 資料集。
-3. 按一下視窗右側的「Delete dataset」(刪除資料集)。這項操作會刪除資料集和模型。
-4. 在「Delete dataset」(刪除資料集) 對話方塊中，輸入資料集名稱 (`census`) 來確認刪除指令，然後點選「Delete」(刪除)。
+   [前往「BigQuery」](https://console.cloud.google.com/bigquery?hl=zh-tw)
+2. 在「Explorer」窗格中展開專案，然後點選「資料集」。
+3. 在**「Datasets」(資料集)** 窗格中，點選**「`census`」**。
+4. 在資料集詳細資料窗格中，按一下「Delete」(刪除)。
+5. 在「要刪除資料集『census』嗎？」對話方塊中，點選「刪除」。這項操作會刪除資料集和模型。
 
 ### 刪除專案
 
@@ -586,11 +587,11 @@ ml.predict(
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-11 (世界標準時間)。
+上次更新時間：2026-11-23 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-11 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-23 (世界標準時間)。"],[],[]]

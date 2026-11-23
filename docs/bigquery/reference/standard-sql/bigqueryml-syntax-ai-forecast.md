@@ -419,4 +419,5 @@ support multiple targets:
   same across all rows.
 * `ai_forecast_status`: a `STRING` value that contains the forecast status.
   This value is empty if the operation was successful. If the operation failed,
-  the value is the error string. A common
+  the value is the error string. A common error is
+  `The tim`

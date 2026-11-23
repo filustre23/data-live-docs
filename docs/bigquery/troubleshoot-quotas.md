@@ -716,6 +716,68 @@ Resources exceeded: Your project or organization exceeded the maximum
 * 減少查詢並行或具體化中繼結果，降低對資源的依賴。詳情請參閱「[查詢佇列](https://docs.cloud.google.com/bigquery/docs/query-queues?hl=zh-tw)」和「[建立 materialized view](https://docs.cloud.google.com/bigquery/docs/materialized-views-create?hl=zh-tw)」。
 * [查看詳細步驟](https://docs.cloud.google.com/bigquery/docs/query-insights?hl=zh-tw#insufficient_shuffle_quota)，瞭解如何緩解重組配額不足的問題。
 
+### 每個分區資料表的分區數量上限錯誤
+
+當查詢、載入、複製或 DML 作業嘗試建立的分區數量，超過[每個分區資料表 10,000 個分區的上限](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#max_partitions_per_table)時，BigQuery 就會傳回這項錯誤。如果單一工作嘗試修改超過 [4,000 個分區](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#max_partition_mods_by_a_job)，也會收到分區限制錯誤。
+
+使用 [Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api-grpc?hl=zh-tw) 或 [Storage Write API (REST)](https://docs.cloud.google.com/bigquery/docs/write-api-rest?hl=zh-tw) 將資料串流至分區資料表時，BigQuery 會將傳入的資料列緩衝至 `__UNPARTITIONED__` 分區，並以非同步方式擷取至目標分區。為避免串流資料卡在緩衝區，當資料表達到 10,000 個分區時，背景分區擷取作業不會拒絕寫入。不過，如果資料表的分區超過 10,000 個，則會處於不支援狀態。超過 10,000 個分區會降低背景儲存空間壓縮和查詢效能。此外，後續的載入工作、查詢工作、多資料表複製工作，以及新增分區的 DML 陳述式都會失敗。
+
+**錯誤訊息**
+
+```
+Resources exceeded during query execution: Table PROJECT_ID:DATASET_ID.TABLE_NAME
+will have PARTITION_COUNT partitions when the job finishes, exceeding
+limit 10000. If partitions were recently expired, it may take some time to be
+reflected unless explicitly deleted.
+```
+
+```
+Resources exceeded during query execution: PARTITION_COUNT partitions will
+be copied to the table PROJECT_ID:DATASET_ID.TABLE_NAME,
+which exceeds the limit 10000 for number of partitions in the table.
+```
+
+```
+Resources exceeded during query execution: Too many partitions produced by
+query, allowed 4000, query produces at least PARTITION_COUNT
+partitions.
+```
+
+#### 診斷
+
+由於 10,000 個分區的限制是依資料表而非專案套用，因此不會顯示在Google Cloud 控制台的「Quotas & System Limits」(配額與系統限制) 頁面。如要監控資料集中每個資料表的分區數量，請查詢 [`INFORMATION_SCHEMA.PARTITIONS` 檢視表](https://docs.cloud.google.com/bigquery/docs/information-schema-partitions?hl=zh-tw)：
+
+```
+SELECT
+  table_name,
+  COUNT(DISTINCT partition_id) AS partition_count
+FROM
+  `PROJECT_ID.DATASET_ID.INFORMATION_SCHEMA.PARTITIONS`
+WHERE
+  partition_id NOT IN ('__NULL__', '__UNPARTITIONED__')
+GROUP BY
+  table_name
+ORDER BY
+  partition_count DESC;
+```
+
+更改下列內容：
+
+* `PROJECT_ID`： Google Cloud 專案的 ID。
+* `DATASET_ID`：包含分區資料表的資料集名稱。
+
+查詢 `INFORMATION_SCHEMA.PARTITIONS` 檢視表時，每項查詢最多只能包含 1,000 個資料表。如果資料集包含超過 1,000 個資料表，請在 `WHERE` 子句中新增 `table_name` 篩選器，例如 `AND table_name = 'TABLE_NAME'`，其中 `TABLE_NAME` 是錯誤訊息中的資料表名稱。這個篩選器可避免 `INFORMATION_SCHEMA.PARTITIONS query attempted
+to read too many tables` 錯誤。
+
+#### 解析度
+
+10,000 個分區是系統限制，無法提高。如要最佳化工作負載，避免達到這項限制，請按照下列步驟操作：
+
+* **搭配分群使用較粗略的分區精細程度。**以較粗略的時間單位 (例如每月而非每日，或每日而非每小時) 分割資料表。將分區與分區資料欄或其他經常篩選的資料欄上的[分群](https://docs.cloud.google.com/bigquery/docs/clustered-tables?hl=zh-tw)結合，以維持查詢剪枝效能。
+* **設定分區到期時間，或明確刪除舊分區。**設定[分區到期時間](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#partition-expiration)，讓 BigQuery 自動將舊分區設為到期。由於過期分區是由背景程序以非同步方式回收，因此在刪除完成前，這些分區仍會計入 10,000 個分區的限制。如要釋出分區容量，而不等待背景回收，請[明確刪除分區](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables?hl=zh-tw#delete_a_partition)。使用 `bq rm` 指令一次刪除一個分區，或使用 [DML `DELETE` 陳述式](https://docs.cloud.google.com/bigquery/docs/using-dml-with-partitioned-tables?hl=zh-tw#using_dml_delete_to_delete_partitions)，每項工作最多可刪除 4,000 個分區。只有在符合僅限中繼資料分區刪除的條件，且目標分區在 Storage Write API (REST) 串流緩衝區中不含任何資料列時，`DELETE` 陳述式才會移除整個分區。
+* **遷移分區數量超過 10,000 個的資料表。**如果使用 Storage Write API (gRPC) 或 Storage Write API (REST) 擷取的資料表已超過 10,000 個分區，請刪除不必要的分區，或以較粗略的分區精細度和叢集重新建立資料表。
+* **將大型工作拆分為較小的分區範圍。**如果錯誤訊息顯示 `allowed 4000`，請分割查詢、載入或 DML 作業，讓每項工作修改 4,000 個以下的分區。
+
 ### 資料欄分區資料表的分區修改次數配額錯誤
 
 如果資料欄分區資料表達到每日允許的分區修改次數配額，BigQuery 就會傳回這項錯誤。分區修改作業包括所有[載入工作](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#load_jobs)、[複製工作](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#copy_jobs)和[查詢工作](https://docs.cloud.google.com/bigquery/quotas?hl=zh-tw#query_jobs)，這些工作會附加或覆寫目的地分區。
@@ -1127,11 +1189,11 @@ DataHub 擷取的服務帳戶只需要讀取中繼資料，例如資料表名稱
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-20 (世界標準時間)。
+上次更新時間：2026-11-23 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-20 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-23 (世界標準時間)。"],[],[]]

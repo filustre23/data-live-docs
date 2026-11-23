@@ -186,5 +186,5 @@ FROM finishers;
 ## `NTILE`
 
 ```
-NTILE(constant_integer_expression
+NTILE(
 ```

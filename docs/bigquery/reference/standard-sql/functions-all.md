@@ -139,4 +139,4 @@ This topic contains all functions supported by GoogleSQL for BigQuery.
 | [`GENERATE_DATE_ARRAY`](/bigquery/docs/reference/standard-sql/array_functions#generate_date_array) | Generates an array of dates in a range. |
 | [`GENERATE_RANGE_ARRAY`](/bigquery/docs/reference/standard-sql/range-functions#generate_range_array) | Splits a range into an array of subranges. |
 | [`GENERATE_TIMESTAMP_ARRAY`](/bigquery/docs/reference/standard-sql/array_functions#generate_timestamp_array) | Generates an array of timestamps in a range. |
-| [`GENERATE_UUID`](/bigquery/docs/reference/standard-sql/utility-functions#generate_uuid) |
+|  |

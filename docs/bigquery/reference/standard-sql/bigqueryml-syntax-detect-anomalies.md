@@ -365,4 +365,4 @@ ORDER BY
 ```
 
 If the time series input column names are `date` and `temperature`, then
-this query returns results similar to the
+this query returns results similar to the following:

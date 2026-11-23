@@ -27,6 +27,19 @@ To get the latest product updates delivered to you, add the URL of this page to 
 reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators), or add the
 [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## November 23, 2026
+
+Feature
+
+The `reservation_override_mode` and `disable_on_demand_billing`
+[reservation and billing controls](/bigquery/docs/default-configuration#reservation-controls)
+are
+[generally available](https://cloud.google.com/products#product-launch-stages)
+(GA). You can use these regional options with the
+[`ALTER PROJECT SET OPTIONS` and `ALTER ORGANIZATION SET OPTIONS` statements](/bigquery/docs/reference/standard-sql/data-definition-language#project_set_options_list)
+to control whether queries can override assigned reservations to on-demand
+billing or require reservation slots.
+
 ## November 19, 2026
 
 Feature
@@ -5036,17 +5049,4 @@ Feature
 
 Feature
 
-You can now use the [Apache Iceberg REST catalog in BigLake metastore](/bigquery/docs/blms-rest-catalog) to create interoperability between your query engines by allowing your open source engines to access Iceberg data in Cloud Storage. This feature is in [Preview](https://cloud.google.com/products#product-launch-stages).
-
-Feature
-
-Colab Enterprise notebooks in BigQuery let you do the following in [Preview](https://cloud.google.com/products#product-launch-stages):
-
-* [Explain code with Gemini assistance](/bigquery/docs/write-sql-gemini#explain_python_code)
-* [Fix and explain errors with Gemini assistance](/bigquery/docs/write-sql-gemini#fix_and_explain_python_errors)
-
-## June 18, 2025
-
-Feature
-
-You can now [publish the results of a data quality scan as Dataplex Universal Catalog met](/bigquery/docs/data-quality-scan)
+You can now use the [Apache Iceberg REST catalog in BigLake metastore](/bigquery/docs/blms-rest-catalog) to create interoperability between your query engines by allowing your open source engines to access Iceberg data in Cloud Storage. This feature is in

@@ -113,6 +113,9 @@ If you see knowledge that looks incorrect, we recommend adding context to your r
 **How can I tell if the agent referenced knowledge in a thread?**  
 If the Hex agent retrieved knowledge, it will appear in the Hex agent’s thinking block in a thread. You can review each knowledge unit's statement, status, and connections.
 
+**How does the agent decide which side of a conflict to suggest when two definitions disagree?**  
+Contested knowledge encodes all competing beliefs or interpretations in a single unit. If the agent's analysis relies on contested knowledge, it is instructed to surface its choice and/or its alternative(s) to the user.
+
 **Why don't I see "supported" or "learned" knowledge in my workspace?**  
 Currently, the Knowledge Engine only learns from context available to everyone in your workspace. If your workspace is set to not share new threads and projects by default, that will limit the Knowledge Engine's learning opportunities.
 
