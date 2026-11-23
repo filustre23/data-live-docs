@@ -600,5 +600,5 @@ public class WritePendingStream {
       }
 
       public void onSuccess(AppendRowsResponse response) {
-        System.out.format
+        System.out.
 ```

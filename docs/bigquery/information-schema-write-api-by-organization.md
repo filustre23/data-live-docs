@@ -216,5 +216,5 @@ LIMIT 10;
 | my-project3          | dataset2   | table4                        |   25846270 |  7487917957360 |     25846270 |
 | my-project4          | dataset1   | table4                        |   18318404 |  5665113765882 |     18318404 |
 | my-project4          | dataset1   | table5                        |   42829431 |  5343969665771 |     42829431 |
-| my-project4          | dataset1   | table6                        |    8771021 |  5119004622353 |      877
+| my-project4          | dataset1   | table6
 ```

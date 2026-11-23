@@ -125,3 +125,4 @@ Connection properties specific to Cloud Spanner.
 | --- | --- |
 | `database` | `string`  Cloud Spanner database in the form `project/instance/database' |
 | `use_parallelism` | `bool`  If parallelism should be used when reading from Cloud Spanner |
+|  |

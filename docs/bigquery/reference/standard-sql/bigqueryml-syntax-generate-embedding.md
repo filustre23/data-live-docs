@@ -315,4 +315,3 @@ ML.GENERATE_EMBEDDING(
     you can also specify a `STRUCT` column that contains a
     combination of `STRING`, `ARRAY<STRING>`, `ObjectRef`,
     and `ARRAY<ObjectRef>` values.
-* `QUERY_STATEMENT`: the GoogleSQL
