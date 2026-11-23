@@ -267,5 +267,5 @@ AS (
         timestamp,
         latitude,
         longitude)) AS message
-  FROM `myproject.
+  FROM `myproje
 ```

@@ -519,4 +519,4 @@ This option accepts the following values:
 
 **Continental regions**
 
-<
+* `NA`
