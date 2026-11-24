@@ -66,14 +66,14 @@ Making your apps snappy for end users is super important for allowing them to de
 Now that you know the ins and outs of creating a project and publishing an app, we’re wrapping up with some pointers on navigating your Hex workspace.
 
 * [**Home page**](/docs/explore-data/projects/create-and-manage-projects#projects-home): Your Hex Home page displays your recent projects, apps popular in your workspace and a number of places to start a new analysis. Use [workspace search](/docs/organize-content/workspace-search) to locate existing assets, with the ability to search down to the contents of your code!
-* [**Collections**](/docs/organize-content/collections): Organize and share your projects with Collections. View existing Collections and create a new one from the “Collections” tab on the left side of your Hex Home screen. Check out [this blog post](https://hex.tech/blog/collections-at-hex/) to learn about how we use Collections internally at Hex.
+* [**Folders**](/docs/organize-content/folders): Organize and share your projects with folders. Open **Folders** from the left side of your Hex home screen.
 * [**User settings**](/docs/administration/user-settings): Configure user-level settings per your personal preference such as dark mode and word wrap on different cell types. While you’re there, pop over to the [Notifications](/docs/administration/user-settings#notifications) tab and configure how you’d like to receive updates about different content.
 
 tip
 
 Favorite projects and tables via the ⭐ icon for easy access on the left pane of your Home screen.
 
-You made it. You’re on the way to being a first-class Hexpert! If you ’re still hungry for more, check out the [SQL Learning Path](https://app.hex.tech/hex-public/app/7388ee87-3d19-4dc0-8902-4810e89aef8e/latest) or [SQL + Python Learning Path](https://app.hex.tech/hex-public/app/9f75bf22-e512-4b86-865d-a1fc2050111e/latest), as well as the [Hex Foundations Video library](/tutorials/category/hex-foundations).
+You made it. You’re on the way to being a first-class Hexpert! If you’re still hungry for more, check out the [SQL Learning Path](https://app.hex.tech/hex-public/app/7388ee87-3d19-4dc0-8902-4810e89aef8e/latest) or [SQL + Python Learning Path](https://app.hex.tech/hex-public/app/9f75bf22-e512-4b86-865d-a1fc2050111e/latest), as well as the [Hex Foundations Video library](/tutorials/category/hex-foundations).
 
 #### On this page
 

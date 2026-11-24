@@ -66,7 +66,7 @@ Component permissions are handled similarly to project permissions. See the tabl
 | Can Edit | Grants permission to edit, comment on, and import the component. Also grants ability to manage permissions (unless this has been disabled by a "Full Access" user). |
 | Can Import | Grants permission to view, comment on, and import the component. Cannot edit or manage permissions. |
 
-These permissions can be managed from the **Share** button in a Component's logic.
+These permissions can be managed from the **Share** button in a Component's logic. A component in a [folder](/docs/organize-content/folders) inherits that folder's permission. A grant on the component itself still applies, and the highest permission wins.
 
 If a user does not have access to a component, but *does* have Can Explore, Can Edit, or Full Access [permissions on a project](/docs/collaborate/sharing-and-permissions/sharing-permissions) that imports that component, the user will be able to view the component's logic *within the project that imports it*. The user will not inherit any permissions to the component, and will not have the option to navigate back to the component source.
 

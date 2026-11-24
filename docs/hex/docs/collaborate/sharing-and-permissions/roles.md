@@ -25,7 +25,7 @@ Every user in a workspace is assigned one of the following roles: **Admin**, **M
 
 | Capability | Admin | Manager | Editor | Explorer | Viewer | Guest |
 | --- | --- | --- | --- | --- | --- | --- |
-| View all Projects, Components, and Collections | ✔ |  |  |  |  |  |
+| View all projects, components, and folders | ✔ |  |  |  |  |  |
 | Access workspace settings to manage users, groups, and billing | ✔ |  |  |  |  |  |
 | Grant themselves Full Access to projects and components | ✔ |  |  |  |  |  |
 | Update metadata (status, categories, title description) of projects they can view | ✔ | ✔ |  |  |  |  |
@@ -35,7 +35,7 @@ Every user in a workspace is assigned one of the following roles: **Admin**, **M
 | Access Observability in [Context Studio](/docs/agent-management/context-studio) | ✔ | ✔ |  |  |  |  |
 | See Context Management in [Context Studio](/docs/agent-management/context-studio) | ✔ | ✔ | ✔ | ✔ |  |  |
 | See all users' individual [Threads](/docs/explore-data/threads) | ✔ |  |  |  |  |  |
-| Create and duplicate projects, components, and collections | ✔ | ✔ | ✔ |  |  |  |
+| Create and duplicate projects and components | ✔ | ✔ | ✔ |  |  |  |
 | Use the Hex [API](/docs/api-integrations/api/overview) and [CLI](/docs/api-integrations/cli) | ✔ | ✔ | ✔ |  |  |  |
 | Create and share [Threads](/docs/explore-data/threads) | ✔ | ✔ | ✔ | ✔ |  |  |
 | Schedule Threads via [Tasks](/docs/explore-data/tasks) | ✔ | ✔ | ✔ | ✔ |  |  |
@@ -67,7 +67,7 @@ Users with the Admin, Manager, or Editor workspace roles are considered "Paid Au
 
 Guests are similar to Editors in that they can be granted up to **Full Access** [permissions](/docs/collaborate/sharing-and-permissions/sharing-permissions#what-permissions-are-there) on projects and components. However, Guests also differ from Admin, Manager, Editor, and Viewer workspace roles in a few key ways:
 
-1. Guests do not receive access to resources or assets that are [shared with the workspace](/docs/collaborate/sharing-and-permissions/project-sharing#share-with-workspace). Guests can access *only* projects and components [shared with them as individuals](/docs/collaborate/sharing-and-permissions/project-sharing#share-with-individual-users-or-groups).
+1. Guests do not receive access to resources or assets that are [shared with the workspace](/docs/collaborate/sharing-and-permissions/project-sharing#share-with-workspace). Guests can access only projects, components, and [folders](/docs/organize-content/folders) shared with them directly.
 2. Guests cannot [view users or groups](/docs/administration/workspace_settings/overview#users--groups) in workspace settings.
 3. Guests cannot create new projects or components in the workspace.
 

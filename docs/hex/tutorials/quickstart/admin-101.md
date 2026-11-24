@@ -60,7 +60,7 @@ As your team grows and starts creating tons of great content, maintaining an org
 **Organize your workspace with…**
 
 * [**Statuses and categories**](/docs/organize-content/statuses-categories): Label projects, components, and data objects to indicate asset status, such as in-development projects or trusted data tables. [Endorsed statuses](/docs/organize-content/statuses-categories#endorsed-statuses) highlight data assets to prioritize for agent use and signal trusted assets to human analysts as well.
-* [**Collections**](/docs/organize-content/collections): Group projects and components to keep your workspace organized — projects can be added to multiple collections!
+* [**Folders**](/docs/organize-content/folders): Group related projects and components, and share them with one permission.
 
 **Curate [workspace context](/docs/agent-management/context-management) for agents using…**
 

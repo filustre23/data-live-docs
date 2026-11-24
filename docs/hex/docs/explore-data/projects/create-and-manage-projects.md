@@ -84,11 +84,11 @@ Users with **Full Access** [project permission](/docs/collaborate/sharing-and-pe
 
 [Learn more about project owners](/docs/organize-content/project-owners).
 
-### Add to collection[​](#add-to-collection "Direct link to Add to collection")
+### Move to a folder[​](#move-to-a-folder "Direct link to Move to a folder")
 
-Users with any [project permission](/docs/collaborate/sharing-and-permissions/sharing-permissions) can add a project to a collection that they are a manager of.
+Moving a project into a [folder](/docs/organize-content/folders) requires **Full access** to the project and **Can edit** on both its current folder and the destination. **Admins** can move any project. The project inherits the destination folder's permissions.
 
-[Learn more about adding projects to collections](/docs/organize-content/collections#add--remove-content-from-a-collection).
+[Learn more about moving items into a folder](/docs/organize-content/folders#move-an-item-to-a-folder).
 
 ### Archive[​](#archive "Direct link to Archive")
 
@@ -118,7 +118,7 @@ Clicking "Clear outputs" will clear the outputs from all cells in your project. 
   + [Export](#export)
   + [Extract project UUID](#extract-project-uuid)
   + [Transfer project owner](#transfer-project-owner)
-  + [Add to collection](#add-to-collection)
+  + [Move to a folder](#move-to-a-folder)
   + [Archive](#archive)
   + [Move to trash](#move-to-trash)
   + [Clear outputs](#clear-outputs)

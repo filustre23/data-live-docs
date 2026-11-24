@@ -38,6 +38,12 @@ Sharing your project publicly offers limited project permissions:
 
 Note: a Workspace admin may have [disabled **Share to web** functionality](/docs/administration/workspace_settings/workspace-security#share-projects-to-web) for your workspace.
 
+### Access from a folder[​](#access-from-a-folder "Direct link to Access from a folder")
+
+A project inherits the permission of every [folder](/docs/organize-content/folders) above it. Anyone with access to one of those folders receives that permission on the project. You can still grant a higher permission on the project itself. The highest permission applies.
+
+Learn more about [folder permissions](/docs/organize-content/folders#share-a-folder-and-manage-permissions).
+
 ## Project permissions[​](#project-permissions "Direct link to Project permissions")
 
 When you share a project, you grant one of several project permissions, which dictates what the invited user(s) can do on the project.
@@ -95,9 +101,9 @@ As mentioned above, each project permission is restricted to particular workspac
 
 ### What if a user is granted permissions via multiple shares?[​](#what-if-a-user-is-granted-permissions-via-multiple-shares "Direct link to What if a user is granted permissions via multiple shares?")
 
-It’s possible for a single user to receive different permissions for a project if the user belongs to a group, workspace, or collection. In general, permissions are additive, so in these cases, the highest project permission is granted to the user.
+It’s possible for a single user to receive different permissions for a project if the user belongs to a group or workspace, or if the project is in a folder. In general, permissions are additive, so the highest project permission is granted to the user.
 
-For example, say you share a project with an individual and grant **Full Access** permissions. Later, you share the same project with a collection that the individual is a member of, granting **Can Explore** permissions. The individual will retain their **Full Access** permissions.
+For example, say you share a project with an individual and grant **Full Access**. Later, you move that project into a folder where a group they belong to has **Can view**. The individual keeps **Full Access**.
 
 ### Unable to edit due to missing workspace role[​](#unable-to-edit-due-to-missing-workspace-role "Direct link to Unable to edit due to missing workspace role")
 
@@ -146,7 +152,7 @@ This means that if a user is granted **Can explore** access to a project that us
 If a user has reached out as they are unable to access a project they've been granted access to, here are some debugging tips:
 
 * **Ask them to share a screenshot**: The screenshot often includes useful information (see above for examples).
-* **Inspect the share dialog**: If the project was shared directly with the user, the share dialog will show warnings if a permission conflict has occurred. If the project was not shared directly with that user, they may be inheriting access via a Group or Collection.
+* **Inspect the share dialog**: If the project was shared directly with the user, the share dialog will show warnings if a permission conflict has occurred. If the project was not shared directly with that user, they may be inheriting access via a group or folder.
 
 * **Check imported assets**: Hex prevents access to a project based on whether a workspace asset is **imported** into a project. In some cases, a workspace asset may be imported but not used in the project, which will still restrict access. Remove the data connection from the project via the three-dot menu next to the data connection's name.
 * **Republish the project**: If you choose to switch any data connections that are preventing access, you may need to republish the project for these changes to take effect.
@@ -157,6 +163,7 @@ If a user has reached out as they are unable to access a project they've been gr
   + [Share with individual users or groups](#share-with-individual-users-or-groups)
   + [Share with workspace](#share-with-workspace)
   + [Share to web](#share-to-web)
+  + [Access from a folder](#access-from-a-folder)
 * [Project permissions](#project-permissions)
   + [Full Access](#full-access)
   + [Can Edit](#can-edit)

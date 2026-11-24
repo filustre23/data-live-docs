@@ -71,7 +71,7 @@ info
 * Available on the Team and Enterprise [plans](https://hex.tech/pricing/).
 * Only workspace Admins can create and manage groups.
 
-Groups are useful for creating sets of users who will frequently need the same access and permissions for shared data connections, secrets, projects, components, or collections. They are also useful for mentioning multiple users at once in a [text cell](/docs/explore-data/cells/text-cells) or [comment](/docs/collaborate/comments).
+Groups are useful for creating sets of users who will frequently need the same access and permissions for shared data connections, secrets, projects, components, or folders. They are also useful for mentioning multiple users at once in a [text cell](/docs/explore-data/cells/text-cells) or [comment](/docs/collaborate/comments).
 
 Admins can define subsets of users as a group in the **Settings** → **Groups** tab, under the "Access & Security" header. Add a group by clicking the **+ Group** button, naming the group, and selecting users from the search bar at the bottom of the dialog. Individual users can appear in as many groups as desired.
 

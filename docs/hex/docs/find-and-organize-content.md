@@ -8,9 +8,13 @@ Search for projects and components in your Hex workspace](/docs/organize-content
 
 Organize your workspace by updating projects individually or in bulk](/docs/organize-content/organize-projects)
 
-[## 📄️Collections
+[## 📄️Folders
 
-Create collections of Hex projects and components to share with different user groups](/docs/organize-content/collections)
+Organize projects and components into nested folders and manage access with folder permissions](/docs/organize-content/folders)
+
+[## 🗃Collections
+
+1 item](/docs/organize-content/collections)
 
 [## 📄️Statuses and Categories
 

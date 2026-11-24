@@ -132,7 +132,7 @@ Learn more about project comments [here](/docs/collaborate/comments).
 
 ### Share[​](#share "Direct link to Share")
 
-You can use the **Share** menu in the upper right of your projects to manage permissions for a project. A project can be shared with individuals, a group of users (defined in **[Users & groups](/docs/administration/workspace_settings/overview#users--groups)**), or widely with the web. For each, you can specify the permissions allowed to shared users.
+You can use the **Share** menu in the upper right of your projects to manage permissions for a project. A project can be shared with individuals, a group of users (defined in **[Users & groups](/docs/administration/workspace_settings/overview#users--groups)**), or widely with the web. For each, you can specify the permissions allowed to shared users. A project in a [folder](/docs/organize-content/folders) also inherits that folder's access.
 
 Read more about sharing and permissions [here](/docs/collaborate/sharing-and-permissions/sharing-permissions).
 

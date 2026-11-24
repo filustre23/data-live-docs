@@ -10,7 +10,7 @@ Admin APIs are available on both the **Team** and **Enterprise** [plans](https:/
 
 The Hex public API allows teams to programmatically interact with their Hex workspace — including listing projects, triggering runs of published projects, managing access controls, and configuring data connections.
 
-* Core Admin APIs, such as user, group, collection, and project run management, are available to both Team and Enterprise plans.
+* Core Admin APIs, such as user, group, and project run management, are available to both Team and Enterprise plans.
 * Observability API for advanced capabilities - such as retrieving queried tables for a given project (eg. [`GetQueriedTables`](/docs/api-integrations/api/reference#operation/GetQueriedTables)) - is available on the Enterprise plan only.
 
 If you are looking to integrate Hex project runs into orchestration tools, check our native integrations with [Airflow](https://github.com/hex-inc/airflow-provider-hex), [Dagster](https://github.com/hex-inc/dagster-hex), and [Orchestra](https://docs.getorchestra.io/docs/integrations/hex/).
@@ -49,7 +49,7 @@ To create a Workspace token, head to the [user settings](/docs/administration/us
 
 * Read projects: The token will work with any API endpoint that only gets information (e.g. [`ListProjects`](/docs/api-integrations/api/reference#operation/ListProjects)).
 * Run projects: The token will also work with the RunProjects endpoint.
-* For Users, Groups, Collections, and Data connections: The token can be specified to have read-only or write access (which includes read).
+* For Users, Groups, and Data connections: The token can be specified to have read-only or write access (which includes read).
 
 tip
 
@@ -82,7 +82,6 @@ Initially designed to run published Hex projects with specific inputs—enabling
 
 * **Users** and their roles
 * **Groups** and access controls
-* **Collections** of projects
 * **Data connections** and credentials (for [Tier 1](/docs/connect-to-data/data-connections/data-connections-introduction#tier-1) connectors)
 * **Threads** and their metadata
 
@@ -344,154 +343,6 @@ headers={"Authorization": f"Bearer {YOUR_API_TOKEN}"}
 
 
 )
-```
-
-### Create a new Collection with specific sharing permissions[​](#create-a-new-collection-with-specific-sharing-permissions "Direct link to Create a new Collection with specific sharing permissions")
-
-The [`CreateCollection`](/docs/api-integrations/api/reference#operation/CreateCollection) endpoint lets you define sharing settings for users, groups, or the workspace at creation.
-
-info
-
-You must have admin privileges to set group and workspace-level access.
-
-```
-collection_payload = {
-
-
-
-"name": "Q3 Projects",
-
-
-
-"description": "All Q3 cross-functional initiatives",
-
-
-
-"members": {
-
-
-
-"groups": [
-
-
-
-{"id": "group-analytics", "access": "MEMBER"},
-
-
-
-{"id": "group-admins", "access": "MANAGER"}
-
-
-
-],
-
-
-
-"workspace": {"members": "MEMBER"}
-
-
-
-}
-
-
-
-}
-
-
-
-resp = requests.post(
-
-
-
-url=f"{BASE_URL}/collections",
-
-
-
-json=collection_payload,
-
-
-
-headers={"Authorization": f"Bearer {YOUR_API_TOKEN}"}
-
-
-
-)
-```
-
-### Change Collection permissions[​](#change-collection-permissions "Direct link to Change Collection permissions")
-
-To update permissions on an existing Collection, use the [`EditCollection`](/docs/api-integrations/api/reference#operation/EditCollection) endpoint. You can upsert user/group/workspace access using the `sharing.upsert` field.
-
-```
-edit_payload = {
-
-
-
-"collectionId": "COLLECTION_ID",
-
-
-
-"sharing": {
-
-
-
-"upsert": {
-
-
-
-"groups": [
-
-
-
-{"id": "group-analytics", "access": "NONE"},     # Remove access
-
-
-
-{"id": "group-ops", "access": "MEMBER"}           # Add new group
-
-
-
-],
-
-
-
-"workspace": {"members": "MANAGER"}
-
-
-
-}
-
-
-
-}
-
-
-
-}
-
-
-
-resp = requests.patch(
-
-
-
-url=f"{BASE_URL}/collections/{COLLECTION_ID}",
-
-
-
-json=edit_payload,
-
-
-
-headers={"Authorization": f"Bearer {YOUR_API_TOKEN}"}
-
-
-
-)
-
-
-
-print(resp.json())
 ```
 
 ### Rotate data connection credentials[​](#rotate-data-connection-credentials "Direct link to Rotate data connection credentials")
@@ -1412,8 +1263,6 @@ A 503 status code indicates that the user has reached the maximum number of conc
   + [Run a published project with custom inputs](#run-a-published-project-with-custom-inputs)
   + [Update the cached state and query cache of a published project](#update-the-cached-state-and-query-cache-of-a-published-project)
   + [Create a new group given a list of user emails](#create-a-new-group-given-a-list-of-user-emails)
-  + [Create a new Collection with specific sharing permissions](#create-a-new-collection-with-specific-sharing-permissions)
-  + [Change Collection permissions](#change-collection-permissions)
   + [Rotate data connection credentials](#rotate-data-connection-credentials)
   + [Cancel active runs for a project](#cancel-active-runs-for-a-project)
   + [Get total credits charged per user](#get-total-credits-charged-per-user)

@@ -32,7 +32,7 @@ To configure these settings, head to **Settings**, then **Organization**.
 
 tip
 
-Projects in a [Collection](/docs/organize-content/collections), and [components](/docs/explore-data/components) are never auto-archived.
+[Components](/docs/explore-data/components) are never auto-archived.
 
 When a project is archived due to an auto-archive rule, users with **Full access** permissions will be notified via a daily summary email.
 
@@ -65,7 +65,7 @@ If a project has been manually unarchived, it will not be included in future aut
 
 ### How can I prevent projects from being auto-archived?[​](#how-can-i-prevent-projects-from-being-auto-archived "Direct link to How can I prevent projects from being auto-archived?")
 
-Projects in a Collection are never auto-archived. Further, any project that has been unarchived will not be included in future auto-archive jobs.
+Any project that has been unarchived will not be included in future auto-archive jobs.
 
 ### What happens if both rules are configured?[​](#what-happens-if-both-rules-are-configured "Direct link to What happens if both rules are configured?")
 

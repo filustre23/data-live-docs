@@ -4,7 +4,7 @@ On this page
 
 View audit logs through Hex or stream to your own SIEM provider.
 
-Audit logs are a record of the activities that occurred in the Hex platform, intended for use by security and compliance teams. They capture actions that are pre-defined in the Hex product, including activities related to projects, collections, cells, users and more. For a complete list of events captured in audit logs, please see the [Audit log event reference page](/docs/administration/workspace_settings/audit-logs/audit-logs-reference).
+Audit logs are a record of the activities that occurred in the Hex platform, intended for use by security and compliance teams. They capture actions that are pre-defined in the Hex product, including activities related to projects, cells, users, and more. For a complete list of events captured in audit logs, please see the [Audit log event reference page](/docs/administration/workspace_settings/audit-logs/audit-logs-reference).
 
 info
 

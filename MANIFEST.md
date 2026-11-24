@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-11-24T09:42+00:00_
+_Generated 2026-11-24T22:49+00:00_
 
-**9 sources, 4911 topics total**
+**9 sources, 4914 topics total**
 
 ## airflow
 
@@ -2712,7 +2712,7 @@ _220 topics_
 
 Upstream: <https://docs.getdbt.com/docs/>
 
-_1180 topics_
+_1181 topics_
 
 - `dbt-core/best-practices/best-practice-workflows`
 - `dbt-core/best-practices/clone-incremental-models`
@@ -3266,6 +3266,7 @@ _1180 topics_
 - `dbt-core/docs/use-dbt-semantic-layer/sl-architecture`
 - `dbt-core/docs/use-dbt-semantic-layer/sl-cache`
 - `dbt-core/docs/use-dbt-semantic-layer/sl-faqs`
+- `dbt-core/docs/use-dbt-semantic-layer/use-sl-intro`
 - `dbt-core/faqs/Accounts/_account-specific-features`
 - `dbt-core/faqs/Accounts/change-billing`
 - `dbt-core/faqs/Accounts/change-users-license`
@@ -4065,7 +4066,7 @@ _159 topics_
 
 Upstream: <https://learn.hex.tech/>
 
-_405 topics_
+_407 topics_
 
 - `hex/changelog`
 - `hex/changelog/2020-12-17`
@@ -4386,6 +4387,8 @@ _405 topics_
 - `hex/docs/migrate-to-hex/migrate-from-tableau`
 - `hex/docs/organize-content/archive`
 - `hex/docs/organize-content/collections`
+- `hex/docs/organize-content/collections/migrate-a-collection-to-a-folder`
+- `hex/docs/organize-content/folders`
 - `hex/docs/organize-content/organize-projects`
 - `hex/docs/organize-content/project-owners`
 - `hex/docs/organize-content/statuses-categories`

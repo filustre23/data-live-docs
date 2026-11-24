@@ -18,7 +18,7 @@ Publishing alone does not grant anyone access to your project, so don't forget t
 
 ## Share your project[​](#share-your-project "Direct link to Share your project")
 
-Hex projects are private by default. Share your project with your team or stakeholders to start collaborating. You can share with your entire workspace, specific user groups ([Team](https://hex.tech/pricing) plan and above), or specific users. Learn more about project permissions and sharing [here](/docs/collaborate/sharing-and-permissions/project-sharing#project-permissions).
+Hex projects are private by default. Share your project with your team or stakeholders to start collaborating. You can share with your entire workspace, specific user groups ([Team](https://hex.tech/pricing) plan and above), or specific users. You can also share a set of related projects at once by moving them into a [folder](/docs/organize-content/folders). People with access to the folder get that same access on every project and component inside it. Learn more about project permissions and sharing [here](/docs/collaborate/sharing-and-permissions/project-sharing#project-permissions).
 
 ### Sharing your entire project vs. Can View App[​](#sharing-your-entire-project-vs-can-view-app "Direct link to Sharing your entire project vs. Can View App")
 

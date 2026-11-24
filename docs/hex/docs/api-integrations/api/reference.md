@@ -2640,6 +2640,4 @@ Copy
 
 `{
 
-* "dataConnectionId": "string",
-* "contents": {
-  + "codeCell":`
+* "dataConnectionId"`

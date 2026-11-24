@@ -43,7 +43,7 @@ By using **Publish now** you relinquish your opportunity to review any possible 
 
 ## Share your App[​](#share-your-app "Direct link to Share your App")
 
-Publishing your project does not grant anyone access to it. To share your App with someone you must grant them [project permissions](/docs/collaborate/sharing-and-permissions/sharing-permissions) from the **Share** dialogue.
+Publishing your project does not grant anyone access to it. To share your App with someone you must grant them [project permissions](/docs/collaborate/sharing-and-permissions/sharing-permissions) from the **Share** dialogue. If the project is in a [folder](/docs/organize-content/folders), people with access to that folder already have access to the project, including the published App, at the folder's permission level.
 
 You can grant access to only the published App by granting **Can View App** project permissions. Granting **Can Explore**, **Can Edit**, or **Full Access** project permissions will also grant access to the published App.
 

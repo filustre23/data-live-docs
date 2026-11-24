@@ -4,8 +4,7 @@ On this page
 
 info
 
-* Semantic Model Sync is in **beta**.
-* Semantic Model Sync is available on the Team and Enterprise [plans](https://hex.tech/pricing).
+Semantic Model Sync is available on the Team and Enterprise [plans](https://hex.tech/pricing).
 
 Semantic projects make self-service analytics easier by allowing data teams to encode business logic into reusable, drag-and-drop elements.
 

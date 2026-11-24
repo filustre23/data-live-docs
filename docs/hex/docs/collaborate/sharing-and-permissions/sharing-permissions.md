@@ -6,18 +6,19 @@ Hex makes it easy to share your work and manage access.
 
 ## What can you share in Hex?[​](#what-can-you-share-in-hex "Direct link to What can you share in Hex?")
 
-You can share different resources or workspace assets in Hex depending on your workspace [role](/docs/collaborate/sharing-and-permissions/roles).
+You can share different resources or workspace assets in Hex depending on your workspace [role](/docs/collaborate/sharing-and-permissions/roles) and resource permissions.
 
-* Admins and Editors (as well as Guests with the necessary permissions) can share projects, components, and collections.
+* Admins and Editors (as well as Guests with the necessary permissions) can share projects and components.
 * Admins, Editors, and Explorers can share Threads.
 * Admins can also share workspace assets (data connections and secrets).
 * Viewers can copy and distribute existing links to projects, Apps, and components, but cannot grant additional access.
+* Users with **Full Access** to a folder can share it. Admins can also share folders they can view.
 
 ## Sharing inside of Hex[​](#sharing-inside-of-hex "Direct link to Sharing inside of Hex")
 
 1. Share a specific resource or asset ([learn more](/docs/collaborate/sharing-and-permissions/sharing-permissions#share-a-specific-resource-or-asset))
 2. Add users to a workspace or group ([learn more](/docs/collaborate/sharing-and-permissions/sharing-permissions#add-users-to-a-workspace-or-group))
-3. Add users to a collection ([learn more](/docs/collaborate/sharing-and-permissions/sharing-permissions#add-users-to-a-collection))
+3. Add users to a folder ([learn more](/docs/collaborate/sharing-and-permissions/sharing-permissions#add-users-to-a-folder))
 
 ### Share a specific resource or asset[​](#share-a-specific-resource-or-asset "Direct link to Share a specific resource or asset")
 
@@ -30,16 +31,16 @@ The simplest way to share your work with collaborators is to invite them directl
 
 ### Add users to a workspace or group[​](#add-users-to-a-workspace-or-group "Direct link to Add users to a workspace or group")
 
-**Admins** can add new users as workspace members, and add workspace members to a user group, which grants access to any projects, components, or collections shared with the workspace or group. This can be done manually from **Settings > Users** and **Settings > Groups**, or be configured with [directory sync](/docs/administration/workspace_settings/directory-sync).
+**Admins** can add new users as workspace members, and add workspace members to a user group, which grants access to any projects, components, or folders shared with the workspace or group. This can be done manually from **Settings > Users** and **Settings > Groups**, or be configured with [directory sync](/docs/administration/workspace_settings/directory-sync).
 
 * Add users to your [workspace](/docs/administration/workspace_settings/overview#users--groups) to give them access to everything shared with the workspace.
 * Add users to a [user group](/docs/administration/workspace_settings/overview#groups) to give them access to everything shared with that group.
 
-### Add users to a collection[​](#add-users-to-a-collection "Direct link to Add users to a collection")
+### Add users to a folder[​](#add-users-to-a-folder "Direct link to Add users to a folder")
 
-A [collection](/docs/organize-content/collections) is a way to organize and share related resources with a set of users. You can add a user as a member of a collection to grant them access to all of that collection’s projects or components.
+[Folders](/docs/organize-content/folders) let users organize related projects and components in a nested structure. Adding users to a folder grants them access to the folder and its contents based on their assigned permissions.
 
-* [Add users to a collection](/docs/organize-content/collections#collection-membership) to give them access to everything shared with the collection.
+* [Share a folder and manage permissions](/docs/organize-content/folders#share-a-folder-and-manage-permissions) to learn how to add users and manage folder access
 
 ## Sharing outside of Hex[​](#sharing-outside-of-hex "Direct link to Sharing outside of Hex")
 
@@ -75,8 +76,9 @@ To share your work outside of Hex, you can [embed](/docs/share-insights/embeddin
 
 There are different types of permissions available for different resources.
 
-* Projects can be shared with **Full Access**, **Can Edit**, **Can Explore**, or **Can View App** permissions ([Learn more](/docs/collaborate/sharing-and-permissions/project-sharing#project-permissions)).
+* Projects can be shared with **Full Access**, **Can Edit**, **Can View**, or **Can View App** permissions ([Learn more](/docs/collaborate/sharing-and-permissions/project-sharing#project-permissions)).
 * Components can be shared with **Full Access**, **Can Edit**, or **Can Import** permissions ([Learn more](/docs/explore-data/components#component-permissions)).
+* Folders can be shared **Full Access**, **Can Edit**, or **Can View** permissions ([Learn more](/docs/organize-content/folders#share-a-folder-and-manage-permissions)).
 * Threads can be shared with **Full Access**, **Can Edit**, or **Can View** permissions ([Learn more](/docs/explore-data/threads#sharing)).
 
 ## What if you have conflicting permissions?[​](#what-if-you-have-conflicting-permissions "Direct link to What if you have conflicting permissions?")
@@ -87,9 +89,9 @@ tip
 
 In general, **permissions are additive, not restrictive.**
 
-It’s possible for one user to receive different permissions for a single project or component if the user belongs to a group, workspace, or collection. In these cases, the highest permission wins.
+It’s possible for one user to receive different permissions for a single project or component if the user belongs to a group or workspace, or if the project or component is in a [folder](/docs/organize-content/folders) shared with them. In these cases, the highest permission wins.
 
-For example, say you share a project with an individual and grant **Full Access** permissions. Later, you share the same project with a collection that the individual is a member of, granting **Can Explore** permissions. The individual will retain their **Full Access** permissions.
+For example, say you share a project with an individual and grant **Full Access** permissions. Later, you share the same project with a group that the individual belongs to, granting **Can Explore** permissions. The individual will retain their **Full Access** permissions. A folder grant works the same way: access on the folder applies to everything inside it, and a higher grant on the project or component still wins.
 
 ### Workspace roles and assets can restrict project permissions[​](#workspace-roles-and-assets-can-restrict-project-permissions "Direct link to Workspace roles and assets can restrict project permissions")
 
@@ -106,7 +108,7 @@ In contrast to permissions, workspace **roles and asset access are restrictive.*
 * [Sharing inside of Hex](#sharing-inside-of-hex)
   + [Share a specific resource or asset](#share-a-specific-resource-or-asset)
   + [Add users to a workspace or group](#add-users-to-a-workspace-or-group)
-  + [Add users to a collection](#add-users-to-a-collection)
+  + [Add users to a folder](#add-users-to-a-folder)
 * [Sharing outside of Hex](#sharing-outside-of-hex)
   + [Embed an App or cell externally](#embed-an-app-or-cell-externally)
   + [Send project results via email or Slack](#send-project-results-via-email-or-slack)

@@ -42,7 +42,7 @@ The following actions are available from the **Projects** page:
 | --- | --- |
 | [Change status](/docs/organize-content/statuses-categories) | Admin or Manager role, or **Can edit** access |
 | [Change categories](/docs/organize-content/statuses-categories) | Admin or Manager role, or **Can edit** access |
-| [Add to, or remove from Collections](/docs/organize-content/collections) | Admin or Manager role, or **Can explore** access |
+| [Move to a folder](/docs/organize-content/folders) | Admin, or **Full access** to the project and **Can edit** on the source and destination folders |
 | [Move to, or restore from Archive](/docs/organize-content/archive) | Admin or Manager role, or **Full access** |
 | Trash | Admin or Manager role, or **Full access** |
 | Add to, or remove from Favorites | Any access |

@@ -4,12 +4,16 @@ On this page
 
 Curate your workspace with a flexible, powerful organization and sharing framework.
 
+caution
+
+Collections are being replaced by [folders](/docs/organize-content/folders). [Migrate from collections to folders](/docs/organize-content/collections/migrate-a-collection-to-a-folder) before collections are turned off in March 2027.
+
 info
 
 * Available on the **Team** and **Enterprise** [plans](https://hex.tech/pricing/).
 * The **Professional** plan is limited to 3 shared collections.
 
-Collections are groups of projects and components that are created and populated by users in a workspace. Collections can be shared with individual users and groups, or with the entire workspace.
+Collections are groups of projects and components that are created and populated by users in a workspace. Collections can be shared with individual users and groups, or with the entire workspace. Projects in a collection are never [auto-archived](/docs/organize-content/archive).
 
 Collections contain references to projects, rather than holding the projects themselves. This allows for projects to be in multiple collections, increasing organizational flexibility and decreasing the potential for silos.
 

@@ -26,7 +26,7 @@ Using the above, what are the natural groups of people who’ll have common data
 
 Remember, if you’re using [Directory Sync](https://learn.hex.tech/docs/administration/workspace_settings/directory-sync), you can use your IdP as your single source of truth for all user role and group membership definitions. We highly recommend this approach for managing your workspace!
 
-**Good to keep in mind:** Groups will govern access to data connections, external file integrations, git repos and packages, and workspace secrets in addition to projects, components, and collections.
+**Good to keep in mind:** Groups will govern access to data connections, external file integrations, git repos and packages, and workspace secrets in addition to projects, components, and folders.
 
 For example:
 
@@ -83,7 +83,7 @@ So you’ve set up your user Groups, defined what data they can use, and now you
 
 Individual creators need an easy way to write one-off projects and do their EDA or scratchpad work. But how do you mix that flexibility with more structure for data work that needs to be circulated more widely?
 
-At Hex we orient around [**“Teams and Themes”**](https://hex.tech/blog/collections-at-hex/) as the scaffolding to guild workspace organization.
+At Hex we orient around **Teams and Themes** as the scaffolding to guide workspace organization.
 
 **Teams** - Groups of folks within the same Team that have common mandates and goals (e.g. Data Team, Sales Team)
 
@@ -93,22 +93,22 @@ info
 
 Refer back to your chart for the most common workflows in Hex and the builders/stakeholders of those. Can you use that to zoom out and identify the Teams and Themes most relevant to your company?
 
-## [Collections](https://learn.hex.tech/docs/organize-content/collections)[​](#collections "Direct link to collections")
+## [Folders](/docs/organize-content/folders)[​](#folders "Direct link to folders")
 
-Collections are a way to have 1:many grouping of Hex projects. Think of these less like folders and more like mood boards. One Hex project can be in many collections, and many different groups can have access to a Collection with varying levels of permissions to the projects within.
+Folders group related projects and components and share them with one permission. A project lives in one folder. Everyone with access to the folder gets that folder's permission on every project and component inside it.
 
-At Hex we created our collections for both Teams and Themes:
+At Hex we use folders for both Teams and Themes:
 
-* Teams Collections: These collections have high level dashboards, reports that track key metrics, and apps that support the everyday operational needs of the team. We use Hex [groups](https://learn.hex.tech/docs/administration/workspace_settings/overview#groups) to ensure the right people have access to their team collection. Team collections act as a home in Hex for a particular team — their most frequently used projects are all in one place.
-* Theme Collections: These are collections of projects often with more cross-functional stakeholders. Access to theme collections can be open to the entire org, or restricted to specific groups depending on the sensitivity of the data.
+* Team folders: These hold high-level dashboards, reports that track key metrics, and apps that support the everyday operational needs of the team. We use Hex [groups](https://learn.hex.tech/docs/administration/workspace_settings/overview#groups) to ensure the right people have access to their team folder. A team folder acts as a home in Hex for a particular team.
+* Theme folders: These hold projects with more cross-functional stakeholders. Access can be open to the entire workspace, or restricted to specific groups depending on the sensitivity of the data.
 
-For example: When a project is ready to be shared, it gets organized into >1 collection based on its team (who it's "for") and theme (what cross-functional insights it includes).
+A project can only live in one folder. When a project belongs to both a team and a theme, put it in the team folder and use [categories](https://learn.hex.tech/docs/organize-content/statuses-categories) for the theme.
 
 ## Categories[​](#categories "Direct link to Categories")
 
 [Categories](https://learn.hex.tech/docs/organize-content/statuses-categories) are labels that can be applied at the project-level. A project can have more than one category!
 
-We see the most success when teams mirror their categories to match their Collections. This makes discovery easier with [Workspace Search](https://learn.hex.tech/docs/organize-content/workspace-search) and when navigating through projects in the bulk Project view.
+We see the most success when categories match the teams and themes you organize around. This makes discovery easier with [Workspace Search](https://learn.hex.tech/docs/organize-content/workspace-search) and when navigating through projects in the bulk Project view.
 
 Additionally, you can include categories that denote things like:
 
@@ -134,9 +134,9 @@ info
 
 What are the phases of your data projects and their circulation that you can mirror as Hex statuses? Which should be considered Endorsed? Which might you want to gate behind a required Review?
 
-Don’t forget that you can also move projects between Collections to mirror these different phases of the data lifecycle! Maybe projects are added to "Dev" collections to start and then moved into "Prod" collections once approved.
+You can also move projects between folders to mirror these different phases of the data lifecycle. Projects might start in a Dev folder and move into a Prod folder once approved.
 
-Required Reviews can be used as gates to ensure that not only is the content of the Hex project itself accurate and reliable, but also that projects are adhering to the project lifecycle practices for your team. For example, you could require that a project is also added to an appropriate Collections and without that, the review is not approved.
+Required reviews can be used as gates to ensure that the content of the Hex project is accurate and reliable, and that projects follow your team's lifecycle. For example, you could require that a project is in the appropriate folder, and without that, the review is not approved.
 
 For example...
 
@@ -164,7 +164,7 @@ If you want to build more data-driven ways to curate your projects, check out th
 * [User Groups](#user-groups)
 * [The Devil’s in the Data](#the-devils-in-the-data)
   + [Data Curation](#data-curation)
-* [Collections](#collections)
+* [Folders](#folders)
 * [Categories](#categories)
   + [Endorsed Statuses + Reviews](#endorsed-statuses--reviews)
   + [Archiving](#archiving)
