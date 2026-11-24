@@ -58,6 +58,8 @@ Generative apps in 4.0 Projects give you full control over presentation and styl
 
 As with our existing generative apps, you can prompt the main agent for sweeping style changes, use [quick edits](/docs/share-insights/apps/generative-apps#quick-edits) for targeted quick changes, use [chart controls](#edit-manually) for last-mile manual tweaks, and edit text in-place.
 
+Prompt the Hex agent to make charts, tables, and anything else visible in the published app downloadable in any file format you specify. Workspace admins can disable this capability via the [Download and copy CSVs from tables](/docs/administration/workspace_settings/workspace-security#download-and-copy-csvs-from-tables) setting.
+
 ### Inspect agent outputs[​](#inspect-agent-outputs "Direct link to Inspect agent outputs")
 
 Our new **Inspect** view gives you a way to immediately understand the work an agent did to arrive at a given result. Using **Edit** mode, select any element in a generative app and click the **Inspect** view to get a high-level text summary of the underlying logic, all underlying data sources, and a summarized view of the upstream lineage. Use one click to dig deeper and reveal the exact code used. For the highest level of detail, click through to the Notebook view for a full-screen UI with all the inputs and outputs.

@@ -58,13 +58,14 @@ Semantic queries live in `dataflow/` and use the `.query.yml` or `.query.yaml` e
 
 For example, `monthly_revenue.query.yml` produces `monthly_revenue`.
 
-Every query has three required top-level keys:
+Every query has three required top-level keys and one optional key:
 
 | Key | Description |
 | --- | --- |
 | `semantic_project` | Alias declared in `hexdag.yaml`. |
 | `base` | Starting model or view. |
 | `transforms` | Operations applied in order. |
+| `timezone` | Optional. Timezone for date logic on timezone-aware timestamps. Defaults to the workspace timezone. See [Set the timezone](#set-the-timezone). |
 
 For models, `base: orders` is shorthand for `base: { model: orders }`. Views require `base: { view: all_sales, reference_by: name }`.
 
@@ -355,6 +356,73 @@ where:
 * Referenced values must exist in the project.
 * Changes to referenced values trigger query reruns.
 
+## Set the timezone[​](#set-the-timezone "Direct link to Set the timezone")
+
+Semantic queries use a timezone setting to determine the date and time of timezone-aware timestamps ([`timestamp_tz`](/docs/connect-to-data/semantic-models/semantic-authoring/modeling-specification#datatype)). This affects:
+
+* `time_unit` buckets and date functions such as `day()`, `truncmonth()`, and `todate()`
+* Comparisons with dates or timestamps that have no timezone, such as `created_at >= d"2026-01-01"`
+
+By default, this is your [workspace timezone](/docs/administration/workspace_settings/overview#workspace-timezone). To use a different timezone, set `timezone` to an [IANA timezone name](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) such as `America/New_York`. Names are case-sensitive, and abbreviations such as `PST` or offsets such as `+05:00` aren't accepted.
+
+```
+semantic_project: commerce
+
+
+
+base: orders
+
+
+
+timezone: America/New_York
+
+
+
+transforms:
+
+
+
+- aggregate:
+
+
+
+- measure: total_revenue
+
+
+
+alias: revenue
+
+
+
+group_by:
+
+
+
+- dimension: created_at
+
+
+
+time_unit: day
+```
+
+This query totals revenue for each day in `America/New_York`. An order placed at 03:00 UTC on January 1 counts toward December 31.
+
+### What the timezone doesn't change[​](#what-the-timezone-doesnt-change "Direct link to What the timezone doesn't change")
+
+* **Fields without a timezone:** `timestamp_naive` and `date` fields are grouped and compared as stored.
+* **Returned values:** `timestamp_tz` columns, including `time_unit` buckets, are returned in UTC. For example, January 1 in `Asia/Tokyo` is returned as `2025-12-31T15:00:00Z` which downstream logic must handle correctly. To return calendar dates, group by `todate()` instead of `time_unit`.
+* **`today()`:** Always returns the warehouse's current date. Use `todate(now())` for the current date in the query's timezone.
+
+### Choose the timezone at run time[​](#choose-the-timezone-at-run-time "Direct link to Choose the timezone at run time")
+
+To choose the timezone at run time, set `timezone` to a `{{name}}` reference to a string parameter or a single value computed earlier in the project. For example, an app can set a `viewer_timezone` parameter to each viewer's timezone:
+
+```
+timezone: "{{ viewer_timezone }}"
+```
+
+The value must be an IANA timezone name. An invalid or null value fails the query instead of falling back to the workspace timezone, so give the parameter a default.
+
 ## Troubleshooting[​](#troubleshooting "Direct link to Troubleshooting")
 
 | Issue | Resolution |
@@ -369,6 +437,7 @@ where:
 | Unknown or ambiguous view field | Check display paths, capitalization, and backticks. |
 | Unsupported view options | Check the first-transform restrictions above. |
 | Unknown query input | Confirm the referenced `{{name}}` exists. |
+| Invalid or null timezone | Use an exact IANA name such as `America/New_York`. For a `{{name}}` reference, make sure the value is set. |
 | A view field stopped working | Check whether its display title changed. |
 
 ## Callouts[​](#callouts "Direct link to Callouts")
@@ -387,5 +456,8 @@ where:
   + [Top N with "Other"](#top-n-with-other)
 * [Querying views](#querying-views)
 * [Expressions and parameters](#expressions-and-parameters)
+* [Set the timezone](#set-the-timezone)
+  + [What the timezone doesn't change](#what-the-timezone-doesnt-change)
+  + [Choose the timezone at run time](#choose-the-timezone-at-run-time)
 * [Troubleshooting](#troubleshooting)
 * [Callouts](#callouts)

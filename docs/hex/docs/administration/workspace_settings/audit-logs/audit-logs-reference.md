@@ -600,8 +600,9 @@ Changing a token's description or expiration always regenerates it, so the `UPDA
 | `DELETE_CODE_PROJECT_BRANCH` | A user deletes a branch from a 4.0 project | Code project, Code project ref |
 | `UPLOAD_CODE_PROJECT_FILE` | A user uploads a file to a 4.0 project | Code project ref |
 | `DOWNLOAD_CODE_PROJECT_FILE` | A user downloads a file from a 4.0 project | Code project ref |
-| `DOWNLOAD_CODE_PROJECT_ARTIFACT_CSV` | A user downloads a table artifact as a CSV | Code project, Code project ref |
+| `DOWNLOAD_CODE_PROJECT_ARTIFACT_CSV` | A user downloads a table artifact as a CSV or Excel file | Code project, Code project ref |
 | `COPY_CODE_PROJECT_ARTIFACT_TO_CLIPBOARD` | A user copies a table artifact's rows to the clipboard | Code project, Code project ref |
+| `DOWNLOAD_CODE_PROJECT_APP_FILE` | A user downloads a file that a 4.0 app generated | Code project, Code project ref |
 | `EXPORT_CODE_PROJECT_AS_PDF` | A user exports a 4.0 project's app as a PDF | Code project |
 | `WRITE_CODE_PROJECT_FILE` | A user or agent writes a file in a 4.0 project | Code project ref |
 | `EDIT_CODE_PROJECT_FILE` | A user or agent edits a file in a 4.0 project | Code project ref |

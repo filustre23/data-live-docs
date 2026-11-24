@@ -1,13 +1,13 @@
-November 19, 2026
+November 24, 2026
 
-### The Knowledge Engine: A new self-learning, graph-based context system for Hex 4.0
+### Folders are here (and yes, you can nest them)
 
-Hex now learns and documents defined and learned knowledge for the agent to use repeatable and efficient paths to answers.
+Organize projects in nested folders. Share access once, with permissions cascading to every subfolder and project inside.
 
-🌐 Introducing: The Knowledge Engine
+📁 Folders
 
-How it works
+⚖️ Folders vs. collections
 
-🔭 Observing the facts agents know
+⚙️ Turn on folders for your workspace
 
-👩‍💻 Getting started
+🚚 Migrate from collections to folders

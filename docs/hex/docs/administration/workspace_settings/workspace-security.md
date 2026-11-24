@@ -51,6 +51,8 @@ By disabling this feature, users who are **viewing** a project will no longer be
 
 Note that users who are editing a project will continue to have access to this button.
 
+This setting also gates the ability to download files from agent generated buttons in [Hex 4.0 projects](/docs/hex-4-0/what-is-hex-4-0). When it is off, these downloads are unavailable in 4.0 projects.
+
 **Why can't I disable this functionality for users that are editing projects?**
 
 Due to the flexibility that Python cells provide, users that are editing projects are able to export data via code. Therefore, disabling the ability to download or copy data for when editing a project would not be a true safeguard against moving data outside of Hex. As such, we kept this functionality in place when editing a project.

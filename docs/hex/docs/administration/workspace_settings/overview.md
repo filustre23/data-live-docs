@@ -83,6 +83,8 @@ Admins can set a workspace timezone in the **Environment** section of Workspace 
 
 This timezone is the default target timezone used by [chart cells](/docs/explore-data/cells/visualization-cells/chart-cells) and [pivot cells](/docs/explore-data/cells/transform-cells/pivot-cells) when displaying timestamp values.
 
+In Hex 4.0, [semantic queries](/docs/hex-4-0/semantic-models-in-hex-4-0#set-the-timezone) also use the workspace timezone by default for certain date and time logic.
+
 By default, this is set to `'UTC'`. Typically, the value of an organization's head office should be chosen as the workspace timezone.
 
 The workspace timezone setting can be overridden at the project-level, or per app session for published apps.

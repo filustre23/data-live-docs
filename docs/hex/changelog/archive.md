@@ -35,6 +35,7 @@
 * [October 30 - Governed mode for the Hex Agent](/changelog/2026-10-30)
 * [November 10 - Introducing Hex 4.0](/changelog/2026-11-10)
 * [November 19 - The Knowledge Engine: A new self-learning, graph-based context system for Hex 4.0](/changelog/2026-11-19)
+* [November 24 - Folders are here (and yes, you can nest them)](/changelog/2026-11-24)
 
 ### 2025[​](#2025 "Direct link to 2025")
 

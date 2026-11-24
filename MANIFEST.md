@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-11-23T23:01+00:00_
+_Generated 2026-11-24T09:42+00:00_
 
-**9 sources, 4872 topics total**
+**9 sources, 4911 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_936 topics_
+_958 topics_
 
 - `anthropic-sdk/about-claude/additional-resources`
 - `anthropic-sdk/about-claude/api-credits-for-subscribers`
@@ -235,6 +235,13 @@ _936 topics_
 - `anthropic-sdk/api/beta/organization/external_keys/retrieve`
 - `anthropic-sdk/api/beta/organization/external_keys/update`
 - `anthropic-sdk/api/beta/organization/external_keys/validate`
+- `anthropic-sdk/api/beta/organization/external_storage`
+- `anthropic-sdk/api/beta/organization/external_storage/activate`
+- `anthropic-sdk/api/beta/organization/external_storage/create`
+- `anthropic-sdk/api/beta/organization/external_storage/delete`
+- `anthropic-sdk/api/beta/organization/external_storage/list`
+- `anthropic-sdk/api/beta/organization/external_storage/retrieve`
+- `anthropic-sdk/api/beta/organization/external_storage/update`
 - `anthropic-sdk/api/beta/organization/federation`
 - `anthropic-sdk/api/beta/organization/federation/issuers`
 - `anthropic-sdk/api/beta/organization/federation/issuers/archive`
@@ -808,6 +815,21 @@ _936 topics_
 - `anthropic-sdk/manage-claude/compliance-security-posture/send-events`
 - `anthropic-sdk/manage-claude/compliance-sessions`
 - `anthropic-sdk/manage-claude/data-residency`
+- `anthropic-sdk/manage-claude/enterprise-frontier-safeguards/customer-managed-keys`
+- `anthropic-sdk/manage-claude/enterprise-frontier-safeguards/customer-owned-storage`
+- `anthropic-sdk/manage-claude/enterprise-frontier-safeguards/external-storage`
+- `anthropic-sdk/manage-claude/enterprise-frontier-safeguards/external-storage-manage`
+- `anthropic-sdk/manage-claude/enterprise-frontier-safeguards/faq`
+- `anthropic-sdk/manage-claude/enterprise-frontier-safeguards/flagged-cases`
+- `anthropic-sdk/manage-claude/enterprise-frontier-safeguards/human-review-and-access-transparency`
+- `anthropic-sdk/manage-claude/enterprise-frontier-safeguards/overview`
+- `anthropic-sdk/manage-claude/enterprise-frontier-safeguards/safety-case-files`
+- `anthropic-sdk/manage-claude/enterprise-frontier-safeguards/safety-cases-api`
+- `anthropic-sdk/manage-claude/enterprise-frontier-safeguards/setup-amazon-bedrock`
+- `anthropic-sdk/manage-claude/enterprise-frontier-safeguards/setup-claude-models-on-google-cloud-anthropic-managed`
+- `anthropic-sdk/manage-claude/enterprise-frontier-safeguards/setup-claude-platform-on-aws`
+- `anthropic-sdk/manage-claude/enterprise-frontier-safeguards/setup-console`
+- `anthropic-sdk/manage-claude/enterprise-frontier-safeguards/setup-google-cloud-agent-platform`
 - `anthropic-sdk/manage-claude/inference-hooks`
 - `anthropic-sdk/manage-claude/inference-hooks-configuration`
 - `anthropic-sdk/manage-claude/inference-hooks-endpoint`
@@ -2463,7 +2485,7 @@ _1497 topics_
 
 Upstream: <https://code.claude.com/docs/en/>
 
-_204 topics_
+_220 topics_
 
 - `claude-code/accessibility`
 - `claude-code/admin-setup`
@@ -2505,6 +2527,13 @@ _204 topics_
 - `claude-code/agents`
 - `claude-code/amazon-bedrock`
 - `claude-code/analytics`
+- `claude-code/approvals`
+- `claude-code/approvals-classifiers`
+- `claude-code/approvals-github-rules`
+- `claude-code/approvals-policy`
+- `claude-code/approvals-pull-requests`
+- `claude-code/approvals-setup`
+- `claude-code/approvals-troubleshooting`
 - `claude-code/artifacts`
 - `claude-code/authentication`
 - `claude-code/auto-mode-classifier-billing`
@@ -2528,6 +2557,7 @@ _204 topics_
 - `claude-code/claude-platform-on-aws`
 - `claude-code/claude-projects`
 - `claude-code/claude-security`
+- `claude-code/claude-ship`
 - `claude-code/cli-reference`
 - `claude-code/cloud-environments`
 - `claude-code/code-mode`
@@ -2630,6 +2660,11 @@ _204 topics_
 - `claude-code/plugins/relevance`
 - `claude-code/plugins/security`
 - `claude-code/plugins/troubleshooting`
+- `claude-code/pr-steward`
+- `claude-code/pr-steward-pull-requests`
+- `claude-code/pr-steward-security`
+- `claude-code/pr-steward-setup`
+- `claude-code/pr-steward-troubleshooting`
 - `claude-code/prompt-caching`
 - `claude-code/prompt-library`
 - `claude-code/quickstart`
@@ -2653,6 +2688,9 @@ _204 topics_
 - `claude-code/settings-example`
 - `claude-code/settings-reference`
 - `claude-code/setup`
+- `claude-code/share-sessions`
+- `claude-code/ship-command`
+- `claude-code/ship-command-troubleshooting`
 - `claude-code/skills`
 - `claude-code/slack`
 - `claude-code/statusline`
@@ -4027,7 +4065,7 @@ _159 topics_
 
 Upstream: <https://learn.hex.tech/>
 
-_404 topics_
+_405 topics_
 
 - `hex/changelog`
 - `hex/changelog/2020-12-17`
@@ -4152,6 +4190,7 @@ _404 topics_
 - `hex/changelog/2026-10-30`
 - `hex/changelog/2026-11-10`
 - `hex/changelog/2026-11-19`
+- `hex/changelog/2026-11-24`
 - `hex/changelog/archive`
 - `hex/changelog/page/10`
 - `hex/changelog/page/11`
