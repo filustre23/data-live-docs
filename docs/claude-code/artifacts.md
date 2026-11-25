@@ -154,10 +154,10 @@ When someone shares an artifact with you, you can have Claude read it: give Clau
 
 Claude Code can save the page's full source to a local file, which Claude can open.
 
-Claude Code asks for your approval before Claude reads the artifact in these cases, in addition to any prompt your permission mode or rules call for:
+Claude Code can ask for your approval before the [Artifact tool](https://code.claude.com/docs/en/tools-reference.md) reads an artifact in these cases, in addition to any prompt your permission mode or rules call for:
 
 * **Cloud session without network access**: for a [cloud environment](https://code.claude.com/docs/en/cloud-environments.md#access-levels), that's the **None** level. In [auto mode](https://code.claude.com/docs/en/permission-modes.md#eliminate-prompts-with-auto-mode), the classifier can approve instead; in a [Cowork](https://claude.com/product/cowork) session, the approval is yours alone.
-* **Another organization's public artifact**: Claude Code asks you first, even in auto mode. Where Claude Code can't ask you, such as in `bypassPermissions` mode, Claude can't read the artifact. Claude can read these artifacts only while [feature-flag fetching](https://code.claude.com/docs/en/env-vars.md#features-that-need-feature-flag-fetching) is on.
+* **Another organization's public artifact**: the tool asks you first, even in auto mode. Where Claude Code can't ask you, such as in `bypassPermissions` mode, the tool can't read one you haven't approved in this conversation. The tool can read these artifacts only while [feature-flag fetching](https://code.claude.com/docs/en/env-vars.md#features-that-need-feature-flag-fetching) is on.
 * **Unconfirmed owner or network setting**: when Claude Code can't confirm who made the artifact, or can't confirm a cloud session's network setting, it asks, and your approval covers that one request. In [auto mode](https://code.claude.com/docs/en/permission-modes.md#eliminate-prompts-with-auto-mode), the classifier can approve or block the read instead of asking you.
 * **Plan mode**: in [plan mode](https://code.claude.com/docs/en/permission-modes.md#analyze-before-you-edit-with-plan-mode), Claude Code asks before the Artifact tool reads an artifact someone else in your organization made.
 
@@ -204,9 +204,7 @@ You can stop Claude from replying on its own in any of these ways:
 * **Stop the task in `/tasks`**: Claude stops replying on that artifact until you ask it to resume replies there. Publishing the artifact again doesn't start replies again, and the stop still applies when you resume the session later.
 * **Press `Ctrl+X Ctrl+K` twice within 3 seconds**: the chord that [stops every running background subagent](https://code.claude.com/docs/en/interactive-mode.md#general-controls) also stops Claude from replying on every artifact for the rest of the session. Asking Claude to resume replies doesn't undo this stop.
 
-A watch that Claude Code started on its own can end after the artifact goes several hours without activity. You see `Stopped watching Artifact: <name> (idle)`. If you see `(made room for a newer watch)` in place of `(idle)`, your session reached its limit of 25 watches. In either case, ask Claude to republish the artifact to restart the watch.
-
-If the service that delivers comments becomes unavailable or stops answering, Claude Code keeps trying to reconnect for a while, then stops watching each artifact your session was watching.
+If you see `Stopped watching Artifact: <name>` followed by `(idle)`, `(connection lost)`, or `(made room for a newer watch)`, ask Claude to republish the artifact to restart the watch. A watch that Claude Code started on its own can end after several hours without activity.
 
 ## Pull live data with MCP connectors
 

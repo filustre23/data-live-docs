@@ -11,9 +11,9 @@ Hex Support is here to help you get unblocked. Whether you're troubleshooting an
 | Method | Details |
 | --- | --- |
 | **Email** | Write to `support@hex.tech`. Available on all plans. |
-| **In-product chat** | Send a message from the **?** menu in the bottom left of Hex. Available on Teams plans and higher. Chat isn't real-time and we reply during [support hours](#support-hours) only. |
+| **In-product messenger** | Send a message from the **?** menu in the bottom left of Hex. Available on Team and Enterprise plans, but not offered in all cases. The messenger isn't real-time, and we reply during [support hours](#support-hours) only. |
 | **Docs chat** | Ask a question in the chat on [learn.hex.tech](https://learn.hex.tech). If it can't resolve your question, you can hand off to the Support team from there. |
-| **Shared Slack or Teams channel** | Enterprise customers can ask questions in a shared channel with the Hex team. |
+| **Shared Slack or Teams channel** | Enterprise customers can ask questions in a shared channel with the Hex team. This option isn't offered in all cases. |
 
 ## Support hours[​](#support-hours "Direct link to Support hours")
 

@@ -2377,6 +2377,8 @@ In the earlier layout, choose the environment and any project folder or reposito
 
 ### 403 or authentication errors in the Code tab
 
+For a card that says `For security, Claude Code needs a recent sign-in.`, see [Claude Code needs a recent sign-in](https://code.claude.com/docs/en/errors.md#claude-code-needs-a-recent-sign-in).
+
 If you see `Error 403: Forbidden` or other authentication failures when using the Code tab:
 
 1. Sign out and back in from the app menu. This is the most common fix.

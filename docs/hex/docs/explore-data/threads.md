@@ -186,7 +186,7 @@ We recommend that users only use sensitive threads when necessary, because it ma
 
 When using Threads with an OAuth data connection, query credentials follow the connection's [authoring queries](/docs/connect-to-data/data-connections/oauth-data-connections#notebook-view) setting.
 
-If the connection **requires personal credentials** and [**Sharing results**](/docs/connect-to-data/data-connections/oauth-data-connections#sharing-results) is **Keep private to each user**, users cannot [share](#sharing) Threads with other users in the workspace.
+If the connection **requires personal credentials** and [**Sharing results**](/docs/connect-to-data/data-connections/oauth-data-connections#sharing-results) is **Keep private to each user** or **Keep private, allow admin access**, users cannot [share](#sharing) Threads with other users in the workspace. With **Keep private, allow admin access**, workspace Admins can still view these Threads, including in Context Studio.
 
 If personal credentials are required but **Sharing results** is **Shared across users**, Threads can be shared as usual. Recipients see outputs created with the credentials that ran those queries.
 

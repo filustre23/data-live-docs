@@ -86,14 +86,17 @@ When personal credentials are required, you can set **Sharing results** to one o
 
 * **Shared across users** (default): Cell outputs, app runs, and agent responses can be shared, cached, and reused across users. Collaboration works the same as on projects that don't use an OAuth data connection.
 * **Keep private to each user**: Cell outputs, app runs, and agent responses stay private to whoever generated them. Outputs are not shared, cached, or reused across users.
+* **Keep private, allow admin access**: Results stay private to each user, as with **Keep private to each user**, but workspace Admins can view other users' private Threads and notebook outputs. See [Admin access to private results](#admin-access).
 
 This setting only applies when using personal credentials. If owner or publisher credentials are shared, results are shared across users regardless of this setting.
 
 warning
 
-Setting **Sharing results** to **Keep private to each user** impacts many of the collaboration, sharing, and performance features of Hex, as described below.
+Setting **Sharing results** to either private option impacts many of the collaboration, sharing, and performance features of Hex, as described below.
 
 #### Impacts of private results[​](#impacts-of-user-scoped-results "Direct link to Impacts of private results")
+
+The following applies to both **Keep private to each user** and **Keep private, allow admin access**.
 
 **Notebooks**
 
@@ -119,6 +122,16 @@ Setting **Sharing results** to **Keep private to each user** impacts many of the
 
 * [Query caching](/docs/explore-data/cells/sql-cells/query-caching#adjusting-cache-settings) is per user/token. One user's cached results are not reused for another user. This results in overall slower execution as there are fewer cache hits.
 
+#### Admin access to private results[​](#admin-access "Direct link to Admin access to private results")
+
+When **Sharing results** is set to **Keep private, allow admin access**, users with the **Admin** [workspace role](/docs/collaborate/sharing-and-permissions/roles) can view results that other users generated. This lets Admins audit agent conversations while results stay private between other users.
+
+* **Threads**: Admins can open another user's private Thread, and see its full content in [Context Studio](/docs/agent-management/context-studio). Managers can still open Context Studio, but they can't see the messages in another user's private Thread.
+* **Notebooks**: Admins who can open the project can see cell outputs from the active editor's session. To edit, an Admin still needs to take over the session.
+* **Published apps**: Admins can't open another user's private app runs. Those runs stay visible only to the person who ran them.
+
+Admin access only allows viewing. All other [impacts of private results](#impacts-of-user-scoped-results) still apply.
+
 ### Recommended configuration[​](#recommended-configuration "Direct link to Recommended configuration")
 
 For better visibility into who ran queries, and to ensure users do not author queries against data they don't normally have access to in the warehouse, we recommend **requiring personal credentials**.
@@ -137,6 +150,8 @@ With this setup:
 * Users will not hit errors due to missing warehouse permissions when running apps, since they have the same access as other users that can use the app.
 * Users will not hit "expired credential" error states that they can't resolve, as credentials will not be embedded.
 * Warehouse admins have full visibility into who ran queries, and users authenticate at a regular frequency.
+
+If results must stay private between users, but workspace Admins need to review Threads, set **Sharing results** to **Keep private, allow admin access**.
 
 ### Support access[​](#support-access "Direct link to Support access")
 
@@ -171,7 +186,7 @@ App viewers can open an OAuth summary from the app menu to see whose token is in
 
 ### Take over a notebook session[​](#take-over-a-notebook-session "Direct link to Take over a notebook session")
 
-When personal credentials are required and **Sharing results** is **Keep private to each user**, only one editor can be active at a time. Select **Take over session** from the banner at the top of the project to restart the kernel with your token. The previous editor's results are not accessible after a take-over.
+When personal credentials are required and **Sharing results** is set to either private option, only one editor can be active at a time. Select **Take over session** from the banner at the top of the project to restart the kernel with your token. The previous editor's results are not accessible after a take-over.
 
 ### Published apps: sign in vs embedded credentials[​](#published-apps-sign-in-vs-embedded-credentials "Direct link to Published apps: sign in vs embedded credentials")
 
@@ -181,12 +196,12 @@ When publisher credentials are embedded, viewers can run the app without signing
 
 ### Threads and AI features[​](#threads-and-ai-features "Direct link to Threads and AI features")
 
-* **Threads** — Threads follow the connection's authoring setting. Sharing is restricted when personal credentials are required and **Sharing results** is **Keep private to each user**. See [OAuth and Threads](/docs/explore-data/threads#oauth-and-threads).
+* **Threads** — Threads follow the connection's authoring setting. Sharing is restricted when personal credentials are required and **Sharing results** is set to either private option. With **Keep private, allow admin access**, workspace Admins can still view these Threads. See [OAuth and Threads](/docs/explore-data/threads#oauth-and-threads).
 * **Hex's AI features** — AI features do not filter schema suggestions to the user's permissions. They may propose a query that references a table the user cannot access; that query errors and returns no results. For highly sensitive schemas, use a private data connection instead.
 
 ### Scheduled runs[​](#scheduled-runs "Direct link to Scheduled runs")
 
-When an app uses personal credentials, and **Sharing results** is **Keep private to each user**:
+When an app uses personal credentials, and **Sharing results** is set to either private option:
 
 * The run log only shows each user's own scheduled runs.
 * Scheduled runs only update the schedule owner's cached results — not other users' caches.
@@ -197,7 +212,7 @@ When **Sharing results** is **Shared across users**, scheduled runs behave like 
 ### Query caching[​](#query-caching "Direct link to Query caching")
 
 * When users share owner or publisher credentials, or when **Sharing results** is **Shared across users**, [query caching](/docs/explore-data/cells/sql-cells/query-caching#adjusting-cache-settings) behaves like any other data connection.
-* When personal credentials are required and **Sharing results** is **Keep private to each user**, cache is per user/token.
+* When personal credentials are required and **Sharing results** is set to either private option, cache is per user/token.
 
 ## Known limitations[​](#known-limitations "Direct link to Known limitations")
 
@@ -226,7 +241,7 @@ What to do:
 3. Ask a warehouse admin to grant the missing access, or rewrite the query to use objects you can access.
 4. If this happens often on shared apps or projects, ask a Hex Admin to follow the [recommended configuration](#recommended-configuration): align warehouse access for users on the connection, and restrict the connection with [data connection permissions](/docs/connect-to-data/data-connections/data-connections-introduction#workspace-data-connection-permissions).
 
-If users should not share results when their warehouse access differs, set [Sharing results](#sharing-results) to **Keep private to each user** so outputs stay isolated. That does not remove permission denied errors for users who lack access, but it prevents one user's results from being visible to another.
+If users should not share results when their warehouse access differs, set [Sharing results](#sharing-results) to **Keep private to each user** or **Keep private, allow admin access** so outputs stay isolated. That does not remove permission denied errors for users who lack access, but it prevents one user's results from being visible to another.
 
 ### Expired app credentials[​](#expired-app-credentials "Direct link to Expired app credentials")
 
