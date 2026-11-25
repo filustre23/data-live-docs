@@ -522,14 +522,17 @@ ml.predict(
 
 ### 刪除資料集
 
-刪除專案將移除專案中所有的資料集與資料表。若您希望重新使用專案，您可以刪除本教學課程中所建立的資料集。
+刪除專案將移除專案中所有的資料集與資料表。如果想重複使用專案，可以刪除在本教學課程中建立的資料集。刪除資料集也會一併刪除模型。
 
-1. 如有需要，請在Google Cloud 控制台開啟 BigQuery 頁面。
+如要刪除資料集，請按照下列步驟操作：
+
+1. 前往 Google Cloud 控制台的「BigQuery」頁面。
 
    [前往「BigQuery」頁面](https://console.cloud.google.com/bigquery?hl=zh-tw)
-2. 在導覽窗格中，按一下您建立的 **bqml\_tutorial** 資料集。
-3. 按一下視窗右側的「刪除資料集」。這項操作會刪除資料集和模型。
-4. 在「Delete dataset」(刪除資料集) 對話方塊中，輸入資料集名稱 (`bqml_tutorial`) 來確認刪除指令，然後點選「Delete」(刪除)。
+2. 在「Explorer」窗格中展開專案，然後點選「資料集」。
+3. 在**「Datasets」(資料集)** 清單中，按一下「**`bqml_tutorial`**」資料集。
+4. 在詳細資料窗格中，按一下「delete 刪除」。
+5. 在「Delete dataset」(刪除資料集) 對話方塊中，按一下「Delete」(刪除)。
 
 ### 刪除專案
 
@@ -560,11 +563,11 @@ ml.predict(
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-20 (世界標準時間)。
+上次更新時間：2026-11-24 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-20 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-24 (世界標準時間)。"],[],[]]

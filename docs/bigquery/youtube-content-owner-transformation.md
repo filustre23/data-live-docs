@@ -535,7 +535,3 @@ BigQuery 資料表：
 
 BigQuery view：
 :   content\_owner\_ad\_revenue\_raw\_weekly\_a1\_suffix
-
-#### 每部影片的每日廣告收益
-
-YouTube 報表：

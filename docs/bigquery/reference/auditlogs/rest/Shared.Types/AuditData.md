@@ -150,4 +150,3 @@ Describes a BigQuery table. See the [Table](/bigquery/docs/reference/v2/tables) 
 
 | Fields | |
 | --- | --- |
-| `tableName` |

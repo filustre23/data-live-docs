@@ -208,5 +208,4 @@ ORDER BY warm_days DESC;
 ```
 
 This query computes the names of weather stations in Washington state and the
-number of days in 2015 that the temperature reached 70 degrees Fahrenheit, or
-approximately 21 degree
+number of days in 2

@@ -117,4 +117,4 @@ Credential to use with a connection.
 | Fields | |
 | --- | --- |
 | Union field `credential`. Credential specific to the underlying data source. `credential` can be only one of the following: | |
-| `cloud_sql` | `CloudSqlCredential`  Credential for Cloud SQL database. |
+| `cloud_sql` | `CloudSqlCredential`  Credential for Cloud SQL |

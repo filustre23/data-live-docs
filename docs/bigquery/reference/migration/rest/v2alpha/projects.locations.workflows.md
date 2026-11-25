@@ -176,5 +176,5 @@ A single task for a migration which has details about the configuration of the t
 
 Assessment task config.
 
-| JSON representat |
-| --- |
+|
+|  |

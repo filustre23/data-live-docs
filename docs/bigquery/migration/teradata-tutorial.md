@@ -344,5 +344,4 @@ SELECT
  SUM(l_quantity) AS sum_qty,
  SUM(l_extendedprice) AS sum_base_price,
  SUM(l_extendedprice*(1-l_discount)) AS sum_disc_price,
- SUM
 ```

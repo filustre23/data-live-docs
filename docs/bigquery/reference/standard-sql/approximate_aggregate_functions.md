@@ -261,5 +261,4 @@ If the `weight` input is negative or `NaN`, this function returns an error.
 The elements are returned as an array of `STRUCT`s.
 Each `STRUCT` contains two fields: `value` and `sum`.
 The `value` field contains the value of the input expression. The `sum` field is
-the same type as `weight`, and is the approximate sum of the input weight
-associated with the `value` fi
+the same type as `weight`, and is the approximate sum of t

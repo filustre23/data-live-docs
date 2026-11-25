@@ -180,5 +180,4 @@ BigQuery 也會對下列常值執行隱含轉換：
 | `STDDEV_POP` | `STDDEV_POP` |
 | `STDDEV_SAMP` | `STDDEV_SAMP, STDDEV` |
 | `SUM` | `SUM` |
-| `VAR_POP` | `VAR_POP` |
-| `VAR_SAMP` |
+| `VAR_POP` | `VAR_POP` |</

@@ -272,5 +272,5 @@ struct_subscript_specifier:
   { index | position_keyword(index) }
 
 position_keyword:
-  { OFFSET
+  {
 ```

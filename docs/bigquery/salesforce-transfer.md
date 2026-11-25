@@ -245,5 +245,4 @@ Salesforce 增量移轉作業有下列限制：
 ```
 bq mk
     --transfer_config
-    --project_id=
 ```

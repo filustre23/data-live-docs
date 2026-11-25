@@ -27,7 +27,62 @@ To get the latest product updates delivered to you, add the URL of this page to 
 reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators), or add the
 [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## November 24, 2026
+
+Feature
+
+The following table-valued functions are now
+[generally available](https://cloud.google.com/products#product-launch-stages)
+(GA) in the query editor and as part of
+[conversational analytics](/bigquery/docs/conversational-analytics#bigquery-ml-support)
+to help you analyze your data:
+
+* [`ML.TREND`](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-trend):
+  identify the directional trajectory of your data.
+* [`ML.SEASONALITY`](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-seasonality):
+  identify repeating patterns in your data.
+* [`ML.DETECT_CHANGE_POINTS`](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-change-points):
+  identify intervals where structural shifts occur in your data.
+* [`ML.CORRELATION`](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-correlation):
+  identify the statistical correlation between a target column and one or more
+  metric columns.
+
+Feature
+
+The built-in text embedding model `embeddinggemma-300m` in the
+[`AI.EMBED`](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-embed)
+and
+[`AI.SIMILARITY`](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-similarity)
+functions is
+[generally available](https://cloud.google.com/products#product-launch-stages)
+(GA).
+
+Feature
+
+BigQuery Migration Service supports translating Databricks SQL and Apache
+Spark SQL 3.x and 4.x into GoogleSQL and extracting schema metadata from
+Databricks in
+[Preview](https://cloud.google.com/products#product-launch-stages).
+For more information, see
+[Databricks and Apache Spark SQL translation reference](/bigquery/docs/migration/databricks-sql)
+and
+[Supported SQL dialects](/bigquery/docs/enable-sql-translations#supported_sql_dialects).
+
 ## November 23, 2026
+
+Feature
+
+Version 1.1 of the [TabFM](/bigquery/docs/tabfm-model) model is now available
+as the default model for the
+[`AI.PREDICT`](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-predict)
+and [`AI.EVALUATE`](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-evaluate)
+functions.
+
+Version 1.1 expands input limits to 80,000 sampled training rows (up
+from 10,000) and 128 feature columns (up from 50). This model reduces latency by
+up to 50x—interactive queries return predictions in around 1 second, and you can
+score millions of rows in a single BigQuery job. This feature is in
+[Preview](https://cloud.google.com/products#product-launch-stages).
 
 Feature
 
@@ -39,6 +94,20 @@ are
 [`ALTER PROJECT SET OPTIONS` and `ALTER ORGANIZATION SET OPTIONS` statements](/bigquery/docs/reference/standard-sql/data-definition-language#project_set_options_list)
 to control whether queries can override assigned reservations to on-demand
 billing or require reservation slots.
+
+Feature
+
+You can now use the built-in
+[`embeddinggemma-2` model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-embed#choose_a_model)
+in the
+[`AI.EMBED` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-embed).
+This model supports an 8,192-token context window and is designed for embedding
+long text and code at scale directly in BigQuery. The charges for this model are
+based on [BigQuery compute pricing](/bigquery/pricing#compute-pricing-models)
+and
+[model input tokens](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-embed#billing_and_permissions).
+This model is in
+[Preview](https://cloud.google.com/products#product-launch-stages).
 
 ## November 19, 2026
 
@@ -5021,32 +5090,4 @@ Libraries
 
 ##### Dependencies
 
-* Remove version declaration of open-telemetry-bom ([#3855](https://github.com/googleapis/java-bigquery/issues/3855)) ([6f9f77d](https://github.com/googleapis/java-bigquery/commit/6f9f77d47596b00b7317c8a0d4a10c3d849ad57b))
-* Update dependency com.google.api.grpc:proto-google-cloud-bigqueryconnection-v1 to v2.66.0 ([#3835](https://github.com/googleapis/java-bigquery/issues/3835)) ([69be5e7](https://github.com/googleapis/java-bigquery/commit/69be5e7345fb8ca69d633d9dc99cf6c15fa5227b))
-* Update dependency com.google.api.grpc:proto-google-cloud-bigqueryconnection-v1 to v2.68.0 ([#3858](https://github.com/googleapis/java-bigquery/issues/3858)) ([d4ca353](https://github.com/googleapis/java-bigquery/commit/d4ca3535f54f3282aec133337103bbfa2c9a3653))
-* Update dependency com.google.cloud:sdk-platform-java-config to v3.49.2 ([#3853](https://github.com/googleapis/java-bigquery/issues/3853)) ([cf864df](https://github.com/googleapis/java-bigquery/commit/cf864df739bbb820e99999b7c1592a3635fea4ec))
-* Update dependency com.google.cloud:sdk-platform-java-config to v3.50.0 ([#3861](https://github.com/googleapis/java-bigquery/issues/3861)) ([eb26dee](https://github.com/googleapis/java-bigquery/commit/eb26deee37119389aee3962eea5ad67d63f26c70))
-* Update dependency io.opentelemetry:opentelemetry-bom to v1.51.0 ([#3840](https://github.com/googleapis/java-bigquery/issues/3840)) ([51321c2](https://github.com/googleapis/java-bigquery/commit/51321c22778fd41134cc0cdfc70bdc47f05883f1))
-* Update ossf/scorecard-action action to v2.4.2 ([#3810](https://github.com/googleapis/java-bigquery/issues/3810)) ([414f61d](https://github.com/googleapis/java-bigquery/commit/414f61d7efcfa568c1446bd41945d7a8e2450649))
-
-Feature
-
-You can now [create and manage scheduled notebooks](/bigquery/docs/orchestrate-notebooks) using the **Schedule details** pane in BigQuery Studio. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
-
-## June 26, 2025
-
-Feature
-
-You can now use the
-use the `PARTITION BY` clause of the
-[`CREATE VECTOR INDEX` statement](/bigquery/docs/reference/standard-sql/data-definition-language#create_vector_index_statement) to [partition TreeAH vector indexes](/bigquery/docs/vector-index#partitions). Partitioning enables partition pruning and can decrease I/O costs. This feature is in [preview](https://cloud.google.com/products#product-launch-stages).
-
-Feature
-
-[BigQuery search indexes](/bigquery/docs/search-intro) provide free index management until your organization reaches the [limit](/bigquery/quotas#index_limits) in a given region. You can now use the [`INFORMATION_SCHEMA.SEARCH_INDEXES_BY_ORGANIZATION` view](/bigquery/docs/information-schema-indexes-by-organization) to understand your current consumption towards that limit, broken down by projects and tables. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
-
-## June 23, 2025
-
-Feature
-
-You can now use the [Apache Iceberg REST catalog in BigLake metastore](/bigquery/docs/blms-rest-catalog) to create interoperability between your query engines by allowing your open source engines to access Iceberg data in Cloud Storage. This feature is in
+* Remove version declaration of open-telemetry-bom ([#3855](https://github.com/googleapis/java-bigquery/issues/3855)) (

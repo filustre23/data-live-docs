@@ -350,5 +350,4 @@ types.
 | hana.TINYINT | Unsigned 8-bit integer supporting the values 0 to 255. | INT64 |
 | **Exact numeric** |  |  |
 | Decimal (p, s) | Precision (p) defines the number of total digits and can be between 1 and 38.    Scale (s) defines the number of digits after the decimal point and can be between 0 and p. | BIGNUMERIC |
-| DecimalFloat | Decimal floating-point number with 34 mantissa digits. | BIGNUMERIC |
-| hana.SMALLDECIMAL |
+| DecimalFloat | Decimal floating-point number with 34 mantissa dig |

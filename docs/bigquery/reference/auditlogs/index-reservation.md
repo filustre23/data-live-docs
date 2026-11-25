@@ -332,5 +332,4 @@ This query shows the history of a project's reservation assignments.
     JSON_QUERY(protopayload_auditlog.requestJson , "$.assignment.assignee") assignee,
     JSON_QUERY(protopayload_auditlog.requestJson , "$.assignment.jobType") job_type,
   FROM
-    `my
 ```

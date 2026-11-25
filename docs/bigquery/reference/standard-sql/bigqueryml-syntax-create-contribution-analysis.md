@@ -449,5 +449,5 @@ The following example creates a contribution analysis model that uses a
 summable ratio metric:
 
 ```
-CREATE (OR REPLACE) MODEL `myproject.mydataset.ca_model`
+CREATE (OR REPLACE) MODEL `myproject.mydataset.
 ```

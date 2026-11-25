@@ -100,5 +100,5 @@ V2 options customizing different types of data transfer schedule. This field sup
 
 Options customizing the time based transfer schedule. Options are migrated from the original ScheduleOptions message.
 
-| JSON representation |
-| --- |
+|
+|  |

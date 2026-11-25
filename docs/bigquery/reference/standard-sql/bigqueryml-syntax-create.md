@@ -357,5 +357,3 @@ For remote models, `INPUT` and `OUTPUT` field names must be identical as the
 field names of the Gemini Enterprise Agent Platform endpoint request and response. See examples in [remote model `INPUT` and `OUTPUT` clause](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https#in-out-clause).
 
 For XGBoost models, `INPUT` field names must be identical to the names in the `feature_names` field if `feature_names` field is populated in the XGBoost model file. See [XGBoost INPUT OUTPUT clause](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-xgboost#input_output_clause) for more details.
-
-#### `field_type`

@@ -216,5 +216,5 @@ WHERE
 DECLARE
   start_time timestamp DEFAULT TIMESTAMP(START_TIME);
 DECLARE
-  end_time timestamp DEFAULT TIMESTAMP
+  end_time timestamp DEFAULT
 ```

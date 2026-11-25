@@ -164,4 +164,4 @@ User-definable feature flags for assessment tasks.
 | Fields | |
 | --- | --- |
 | `addShareableDataset` | `boolean`  Optional. Whether to create a dataset containing non-PII data in addition to the output dataset. |
-| `generateTcoReport` | `boolean`  Optional. Whether the TCO report Google Doc generation is allowlisted for the project. |
+| `generateTcoReport` | `boolean`  Optional. Whether t |

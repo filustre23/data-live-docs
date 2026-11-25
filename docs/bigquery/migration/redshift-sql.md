@@ -161,4 +161,4 @@ Amazon Redshift [`ORDER BY`](https://docs.amazonaws.cn/en_us/redshift/latest/dg/
 | --- | --- |
 | `a = ANY (subquery)`  `a = SOME (subquery)` | `a IN subquery` |
 | `a <> ALL (subquery)`  `a != ALL (subquery)` | `a NOT IN subquery` |
-| `a IS UNKNOWN`  `expression ILIKE pattern` | `a IS NULL`  `LOWER(expression)` |
+| `a IS UNKNOWN`  `expression ILIKE pattern` | `a IS NULL` |

@@ -277,6 +277,5 @@ WITH
     SELECT
       STRUCT<last_name STRING, first_name STRING, age INT64>(
         'Adams', 'Noam', 20) AS Player,
-      3 AS PointsScored UNION ALL
-    <
+      3 AS PointsScored UNION
 ```

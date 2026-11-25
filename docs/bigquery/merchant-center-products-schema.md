@@ -128,5 +128,5 @@ SELECT
   disapproved_country,
   COUNT(*) AS num_products
 FROM
-  dataset.Products_merchant_id,
+  dataset.Products_merch
 ```

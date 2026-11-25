@@ -1,8 +1,8 @@
 # data-live-docs — index
 
-_Generated 2026-11-24T22:49+00:00_
+_Generated 2026-11-25T07:48+00:00_
 
-**9 sources, 4914 topics total**
+**9 sources, 4921 topics total**
 
 ## airflow
 
@@ -16,7 +16,7 @@ _1 topics_
 
 Upstream: <https://platform.claude.com/docs/en/>
 
-_958 topics_
+_964 topics_
 
 - `anthropic-sdk/about-claude/additional-resources`
 - `anthropic-sdk/about-claude/api-credits-for-subscribers`
@@ -834,10 +834,16 @@ _958 topics_
 - `anthropic-sdk/manage-claude/inference-hooks-configuration`
 - `anthropic-sdk/manage-claude/inference-hooks-endpoint`
 - `anthropic-sdk/manage-claude/ip-allowlist`
-- `anthropic-sdk/manage-claude/oauth-apps/app-review`
-- `anthropic-sdk/manage-claude/oauth-apps/branding-samples`
-- `anthropic-sdk/manage-claude/oauth-apps/oauth-reference`
-- `anthropic-sdk/manage-claude/oauth-apps/organization-billing-connections`
+- `anthropic-sdk/manage-claude/oauth-apps/endpoints-and-parameters`
+- `anthropic-sdk/manage-claude/oauth-apps/linked-billing`
+- `anthropic-sdk/manage-claude/oauth-apps/linked-billing/credential-for-each-customer`
+- `anthropic-sdk/manage-claude/oauth-apps/linked-billing/errors`
+- `anthropic-sdk/manage-claude/oauth-apps/linked-billing/link-and-bill-a-customer`
+- `anthropic-sdk/manage-claude/oauth-apps/linked-billing/link-button`
+- `anthropic-sdk/manage-claude/oauth-apps/linked-billing/manage-customers`
+- `anthropic-sdk/manage-claude/oauth-apps/linked-billing/set-up-your-app`
+- `anthropic-sdk/manage-claude/oauth-apps/linked-billing/test-and-publish`
+- `anthropic-sdk/manage-claude/oauth-apps/linked-billing/what-your-customers-see`
 - `anthropic-sdk/manage-claude/oauth-apps/overview`
 - `anthropic-sdk/manage-claude/opentelemetry`
 - `anthropic-sdk/manage-claude/opentelemetry/api`
@@ -2712,7 +2718,7 @@ _220 topics_
 
 Upstream: <https://docs.getdbt.com/docs/>
 
-_1181 topics_
+_1182 topics_
 
 - `dbt-core/best-practices/best-practice-workflows`
 - `dbt-core/best-practices/clone-incremental-models`
@@ -3007,6 +3013,7 @@ _1181 topics_
 - `dbt-core/docs/deploy/orchestrate-exposures`
 - `dbt-core/docs/deploy/retry-jobs`
 - `dbt-core/docs/deploy/run-visibility`
+- `dbt-core/docs/deploy/slack-job-notifications`
 - `dbt-core/docs/deploy/source-freshness`
 - `dbt-core/docs/deploy/state-aware-about`
 - `dbt-core/docs/deploy/state-aware-interface`

@@ -514,9 +514,3 @@ HOLIDAY_REGION = ['US', 'GB']
 This option accepts the following values:
 
 **Global**
-
-* `GLOBAL`
-
-**Continental regions**
-
-<

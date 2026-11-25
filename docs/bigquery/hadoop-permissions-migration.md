@@ -234,4 +234,4 @@ gcs:
 * 您可以使用 CEL 表达式或静态值来更改默认值。例如，在映射群组时，您可以将输出值 `type` 从默认值 `group` 替换为另一个值（例如 `serviceAccount`）。
 * 必须至少有一条规则与每个输入对象匹配。
 
-在 HDFS 或 Apache Ranger 权限迁移中，可以使用规则集 YAML 文件来定义主账号映射文件或角色映射文件。
+在 HDFS 或 Apache Ranger 权限迁

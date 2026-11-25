@@ -220,5 +220,3 @@ window_specification:
 ```
 
 **Description**
-
-Returns the population [covar](https://en.wikipedia.org/wiki/Covariance)

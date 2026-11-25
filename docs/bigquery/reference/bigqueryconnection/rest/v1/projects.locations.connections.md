@@ -159,4 +159,5 @@ Container for connection properties specific to Azure.
 | Fields | |
 | --- | --- |
 | `application` | `string`  Output only. The name of the Azure Active Directory Application. |
-| `clientId` |  |
+| `clientId` | `string`  Output only. The client id of the Azure Active Directory Application. |
+| `objectId` | `string`  Output only. The object id of the Azure Active Directory Application. |

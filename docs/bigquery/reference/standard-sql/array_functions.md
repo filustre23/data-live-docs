@@ -310,4 +310,4 @@ Additional details:
 
 * The input array can contain `NULL` elements. `NULL` elements are included
   in the resulting array.
-* Returns `NULL` if `array_to_slice`,
+* Returns

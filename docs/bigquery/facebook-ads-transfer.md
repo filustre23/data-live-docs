@@ -198,6 +198,5 @@ bq mk
 --transfer_config
 --target_dataset=mydataset
 --data_source=facebook_ads
---display_name='My Transfer'
---params=
+--display_name
 ```

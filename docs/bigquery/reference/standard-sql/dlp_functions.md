@@ -174,5 +174,5 @@ SELECT
       DLP_KEY_VALUE),
     'your_surrogate(36):AWDeSznl9C7+NzTaCgiqiEAZ8Y55fZSuvCQ=',
     'your_surrogate',
-    'aad') AS results;
+    'aad') AS
 ```

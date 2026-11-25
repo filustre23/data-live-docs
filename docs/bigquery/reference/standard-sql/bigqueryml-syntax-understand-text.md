@@ -225,5 +225,5 @@ CREATE TABLE
       STRUCT('classify_text' AS nlu_option))
   );
 
-SELECT * FROM `mydataset<
+SELECT * FROM
 ```

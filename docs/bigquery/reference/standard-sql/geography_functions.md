@@ -137,7 +137,4 @@ This is advanced functionality for interoperability with systems utilizing the
 * Valid S2 cell levels are 0 to 30.
 * `level` defaults to 30 if not explicitly specified.
 * The function only supports a single point GEOGRAPHY.
-* To compute the covering of a complex `GEOGRAPHY`, use
-  [S2\_COVERINGCELLIDS](#s2_coveringcellids).
-
-<
+* To compute the covering of a complex `GEOGRAP`

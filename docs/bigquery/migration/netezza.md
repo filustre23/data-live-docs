@@ -218,5 +218,5 @@ GoogleSQL 支援 SQL 2011 標準，並具備擴充功能，可查詢[巢狀和�
 Netezza 會將一個月的天數視為 31 天。下列自訂 UDF 會以接近準確度重新建立 Netezza 函式，您可以從查詢中呼叫該函式：
 
 ```
-CREATE TEMP FUNCTION months_between(date_1 DATE, date_2 DATE)
+CREATE TEMP FUNCTION months_between(date_1 DATE, date_2
 ```

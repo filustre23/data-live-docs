@@ -529,4 +529,4 @@ value for the [`DATA_SPLIT_METHOD` option](#data_split_method):
 * If you are running hyperparameter tuning and you are specifying `SEQ` as the
   value for `DATA_SPLIT_METHOD`, then the data is first sorted smallest to
   largest based on the specified column. The last m rows are used
-  as test data, where m is the value specified for
+  as test data, where

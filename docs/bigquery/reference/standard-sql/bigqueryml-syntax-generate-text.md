@@ -470,5 +470,4 @@ possible to the model.
   the maximum number of tokens that can be generated in the response.
   A token might be smaller than a word and is
   approximately four characters. One hundred tokens correspond to
-  approximately 60-80 words.
-  This value must be in the range
+  approxi

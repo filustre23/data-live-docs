@@ -181,4 +181,4 @@ Indicates the type of the Model.
 | `TENSORFLOW` | An imported TensorFlow model. |
 | `DNN_REGRESSOR` | DNN regressor model. |
 | `XGBOOST` | An imported XGBoost model. |
-| `BOOSTED_TREE_REGRESSOR` | Boosted tree regressor model. |
+| `BOOSTED_TREE_REGRESSOR` |

@@ -233,6 +233,4 @@ BigQuery 和 Amazon Redshift 都是以大規模平行處理 (MPP) 架構為基�
 
 在 Amazon Redshift 中，CPU、記憶體和磁碟儲存空間會透過[運算節點](https://docs.aws.amazon.com/redshift/latest/dg/c_high_level_system_architecture.html)連結在一起，如 [Amazon Redshift 說明文件中的這張圖](https://docs.aws.amazon.com/redshift/latest/dg/c_high_level_system_architecture.html)所示。叢集效能和儲存空間容量取決於運算節點的類型和數量，這兩者都必須設定。如要變更運算或儲存空間，您必須透過程序調整叢集大小 ([幾小時內，或最多兩天以上](https://docs.aws.amazon.com/redshift/latest/mgmt/managing-cluster-operations.html))，建立全新叢集並複製資料。Amazon Redshift 也提供具備代管儲存空間的 RA3 節點，可協助您分離運算和儲存空間。RA3 類別中最大的節點，每個節點的受管理儲存空間上限為 64 TB。
 
-BigQuery 從一開始就將運算、記憶體和儲存空間分開處理，而非綁在一起。
-
-BigQuery 運算資源是以
+BigQuery 從一開始就將運算、記憶體和儲

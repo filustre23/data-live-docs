@@ -448,7 +448,3 @@ A `BOOL` value. The default value is `TRUE`.
 **Syntax**
 
 `MIN_REL_PROGRESS = float64_value`
-
-**Description**
-
-The minimum relative loss i

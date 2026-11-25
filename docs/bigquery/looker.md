@@ -46,14 +46,13 @@ BI Engine 可與任何商業智慧 (BI) 工具完美整合，包括 Looker。詳
 2. 點選左側窗格中的 explore「Explorer」。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
-3. 在「Explorer」窗格中，點選專案。
-4. 在詳細資料窗格中，依序點選 more\_vert「View actions」(查看動作) 和「Create dataset」(建立資料集)。
-5. 在「Create dataset」(建立資料集) 頁面執行下列操作：
+3. 在「Explorer」窗格中，依序點選專案旁的 more\_vert「View actions」(查看動作) 和「Create dataset」(建立資料集)。
+4. 在「Create dataset」(建立資料集) 頁面執行下列操作：
 
    * 在「Dataset ID」(資料集 ID) 中輸入 `biengine_tutorial`。
    * 在「Data location」(資料位置) 中選擇「us (multiple regions in United States)」(us (多個美國區域))，也就是儲存公開資料集的[多區域位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#multi-regions)。
-   * 選用：如要設定預設資料表到期時間，請展開「Advanced options」(進階選項) 部分，然後選取「Enable table expiration」(啟用資料表到期時間)。在「Default maximum table age」(預設資料表存在時間上限) 欄位中，輸入資料表到期前的天數。
-6. 讓其他設定維持在預設狀態，然後按一下 [Create dataset] (建立資料集)。
+   * 選用：如要設定預設資料表到期時間，請展開「Advanced options」(進階選項) 區段，然後選取「Enable table expiration」(啟用資料表到期時間)。在「Default maximum table age」(預設資料表存在時間上限) 欄位中，輸入資料表到期前的天數。
+5. 讓其他設定維持在預設狀態，然後按一下 [Create dataset] (建立資料集)。
 
 ## 複製公開資料集的資料來建立資料表
 
@@ -79,9 +78,13 @@ BI Engine 可與任何商業智慧 (BI) 工具完美整合，包括 Looker。詳
    * 在「資料集」部分，選取「biengine\_tutorial」。
    * 在「Table」(資料表) 中輸入 `311_service_requests_copy`。
 8. 點選「複製」。
-9. 選用步驟：複製工作完成後，請依序展開
-   **「`PROJECT_NAME`」>「biengine\_tutorial」**，然後
-   依序點選**「311\_service\_requests\_copy」>「預覽」**，驗證資料表內容。將 **`PROJECT_NAME`** 替換為本教學課程的 Google Cloud 專案名稱。
+9. 選用：複製工作完成後，請驗證資料表內容：
+
+   1. 在「Explorer」窗格中展開專案，然後點選「資料集」。
+   2. 按一下 [`biengine_tutorial`]。
+   3. 在**「Overview」(總覽) >「Tables」(資料表)** 分頁中，按一下
+      **`311_service_requests_copy`**。
+   4. 點選「預覽」分頁標籤，
 
 ## 建立 BI Engine 預留項目
 

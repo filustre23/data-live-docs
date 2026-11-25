@@ -212,6 +212,5 @@ LIMIT 10;
 | my-project2          | dataset1   | table2                        |   26319580 | 34199853725409 |     26319580 |
 | my-project1          | dataset2   | table1                        |   38355294 | 22879180658120 |     38355294 |
 | my-project3          | dataset1   | table3                        |  270126906 | 17594235226765 |    270126906 |
-| my-project2          | dataset2   | table2                        |   95511309 | 17376036299631 |     95511309 |
-| my-project2          |
+| my-project2          | dataset2   | table2
 ```

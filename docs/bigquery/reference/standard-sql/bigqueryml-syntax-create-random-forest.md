@@ -502,5 +502,5 @@ A `STRING` value.
 **Syntax**
 
 ```
-AUTO_CLASS_WEIGHTS =
+AUTO_CLASS_WEIGHTS
 ```

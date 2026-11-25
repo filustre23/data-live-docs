@@ -234,6 +234,4 @@ matching key in `keyset` by finding the key with the key ID that matches the one
 encrypted in `ciphertext`.
 
 `ciphertext` is a `BYTES` value that's the result of a call to
-`DETERMINISTIC_ENCRYPT` where the input `plaintext` was of type `BYTES`.
-
-The ciphertext must follow Tink&
+`DETERMINISTIC_ENCRYPT` where the input `plaintext` was of type

@@ -357,5 +357,5 @@ In the following query, the value `2023-04-01` isn't found in the range
 `[2022-01-01, 2023-01-01)`:
 
 ```
-SELECT RANGE_CONTAINS(
+SELECT RANGE_CONTAINS</
 ```

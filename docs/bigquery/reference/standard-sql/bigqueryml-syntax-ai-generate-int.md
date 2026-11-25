@@ -370,4 +370,4 @@ For information about managing the cost of this function, see
 
 Send feedback
 
-Except as otherwise noted, the content of this page is licensed under the [Crea](https://creativecommons.org/licenses/by/4.0/)
+Except as otherwise noted, the content of this page

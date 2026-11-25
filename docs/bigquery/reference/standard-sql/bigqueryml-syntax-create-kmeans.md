@@ -521,5 +521,5 @@ This example creates a k-means model with four clusters using the default
 CREATE MODEL
   `mydataset.mymodel`
 OPTIONS
-  ( MODEL_TYPE='KMEANS',
+  ( MODEL_TYPE=
 ```

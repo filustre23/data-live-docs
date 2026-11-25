@@ -366,4 +366,3 @@ an array can't directly contain another array.
 
 | Type Declaration | Meaning |
 | --- | --- |
-| `ARRAY<INT64>` |  |

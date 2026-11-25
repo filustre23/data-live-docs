@@ -305,5 +305,5 @@ SELECT
 ### `IFNULL`
 
 ```
-IFNULL(expr
+IFNULL
 ```

@@ -333,4 +333,4 @@ collation-supported types. In a collation-supported operation:
   and another input contains an explicitly defined collation, the
   explicitly defined collation is used for both.
 
-For example:
+For exampl

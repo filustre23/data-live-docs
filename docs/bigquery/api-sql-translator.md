@@ -18,7 +18,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 您可以使用 BigQuery 的 BigQuery Migration API，以程式輔助方式將其他 SQL 方言編寫的指令碼，翻譯成 GoogleSQL 查詢。建構自訂軟體整合、自動化 CI/CD 管道或其他程式輔助遷移工作流程時，可以使用 BigQuery Migration API。
 
-如要改為透過 Google Cloud 控制台、指令列或 MCP 用戶端執行翻譯工作，請參閱「[使用批次 SQL 翻譯工具翻譯 SQL 查詢](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator?hl=zh-tw)」或「[使用 BigQuery Migration Service MCP 伺服器](https://docs.cloud.google.com/bigquery/docs/use-bigquery-migration-mcp?hl=zh-tw)」。如要瞭解支援的方言和處理位置，請參閱「[支援的 SQL 方言](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations?hl=zh-tw#supported_sql_dialects)」和「[位置](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations?hl=zh-tw#locations)」。
+如要改為從 Google Cloud 控制台、指令列或 MCP 用戶端執行翻譯工作，請參閱「[使用批次 SQL 翻譯工具翻譯 SQL 查詢](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator?hl=zh-tw)」或「[使用 BigQuery Migration Service MCP 伺服器](https://docs.cloud.google.com/bigquery/docs/use-bigquery-migration-mcp?hl=zh-tw)」。如要瞭解支援的方言和處理位置，請參閱「[支援的 SQL 方言](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations?hl=zh-tw#supported_sql_dialects)」和「[位置](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations?hl=zh-tw#locations)」。
 
 ## 事前準備
 
@@ -29,7 +29,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 BigQuery Migration API 支援兩種翻譯模式。這兩種模式使用相同的 API 方法，並以非同步工作的形式執行。不同模式提供來源 SQL 和接收翻譯 SQL 的方式也不同：
 
 * **批次翻譯**：API 會從 Cloud Storage 讀取來源檔案，並將翻譯後的檔案和報告寫入 Cloud Storage。如要一次翻譯多個檔案 (例如遷移整個程式碼集)，請使用批次翻譯。
-* **互動式翻譯**：在要求主體中以字串常值形式傳遞 SQL，並從工作流程回應中讀取翻譯後的 SQL。您不必將 SQL 或翻譯輸出內容儲存在 Cloud Storage。使用互動式翻譯，視需要翻譯個別查詢，例如翻譯應用程式或開發人員工具的查詢。
+* **互動式翻譯**：您在要求主體中以字串常值形式傳遞 SQL，並從工作流程回應中讀取翻譯後的 SQL。您不必將 SQL 或翻譯輸出內容儲存在 Cloud Storage。使用互動式翻譯，視需要翻譯個別查詢，例如翻譯應用程式或開發人員工具的查詢。
 
 ### 啟用翻譯
 
@@ -67,7 +67,7 @@ BigQuery Migration API 支援兩種翻譯模式。這兩種模式使用相同的
 
 ### 將輸入檔案上傳至 Cloud Storage
 
-如要執行批次翻譯工作，您必須將來源檔案上傳至 Cloud Storage，其中包含要翻譯的查詢和指令碼。您也可以將[任何中繼資料檔案](https://docs.cloud.google.com/bigquery/docs/generate-metadata?hl=zh-tw)或[設定 YAML 檔案](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation?hl=zh-tw)，上傳至含有來源檔案的同一個 Cloud Storage bucket。
+如要執行批次翻譯工作，您必須將來源檔案上傳至 Cloud Storage，其中包含要翻譯的查詢和指令碼。您也可以將[任何中繼資料檔案](https://docs.cloud.google.com/bigquery/docs/generate-metadata?hl=zh-tw)或[設定 YAML 檔案](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation?hl=zh-tw)上傳至含有來源檔案的同一個 Cloud Storage bucket，例如[設定預設資料庫或對應三部分物件名稱](https://docs.cloud.google.com/bigquery/docs/output-name-mapping?hl=zh-tw)。
 
 如要進一步瞭解如何建立 bucket 及將檔案上傳至 Cloud Storage，請參閱「[建立 bucket](https://docs.cloud.google.com/storage/docs/creating-buckets?hl=zh-tw)」和「[從檔案系統上傳物件](https://docs.cloud.google.com/storage/docs/uploading-objects?hl=zh-tw)」。
 
@@ -83,7 +83,7 @@ BigQuery Migration API 支援兩種翻譯模式。這兩種模式使用相同的
 
 ### 建立批次翻譯
 
-下列 `curl` 指令會建立批次翻譯工作，並將輸入和輸出檔案儲存在 Cloud Storage。`source_target_mapping` 欄位包含一份清單，可將來源目錄對應至目標輸出的選用相對路徑。
+下列 `curl` 指令會建立批次翻譯工作，其中輸入和輸出檔案會儲存在 Cloud Storage。`source_target_mapping` 欄位包含一份清單，可將來源目錄對應至目標輸出的選用相對路徑。
 
 ```
 curl -d "{
@@ -108,9 +108,9 @@ curl -d "{
 
 更改下列內容：
 
-* `TYPE`：翻譯的[工作類型](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations?hl=zh-tw#supported_sql_dialects)，決定原文和譯文的方言。
+* `TYPE`：翻譯的[工作類型](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations?hl=zh-tw#supported_sql_dialects)，決定來源和目標方言。Databricks SQL 是 Apache Spark SQL 的擴充功能，因此 Spark SQL 工作類型 (`SparkSQL2BigQuery_Translation`，或 `Translation_SparkSQL2BQ` 搭配 `sparksqlDialect`) 適用於 Databricks SQL 和 Spark SQL 工作負載。詳情請參閱「[翻譯介面 ID](https://docs.cloud.google.com/bigquery/docs/migration/databricks-sql?hl=zh-tw#interface-identifiers)」。
 * `TARGET_BASE`：所有翻譯輸出的基礎 URI。
-* `BASE`：所有檔案的基本 URI，做為翻譯來源。
+* `BASE`：所有檔案的基本 URI，會讀取為翻譯來源。
 * `TARGET_TYPES` (選用)：生成的輸出類型。如未指定，系統會生成 SQL。
 
   + `sql` (預設)：翻譯後的 SQL 查詢檔案。
@@ -125,7 +125,7 @@ curl -d "{
 
 #### 批次翻譯範例
 
-如要翻譯 Cloud Storage 目錄 `gs://my_data_bucket/teradata/input/` 中的 Teradata SQL 指令碼，並將結果儲存在 Cloud Storage 目錄 `gs://my_data_bucket/teradata/output/` 中，您可以使用下列查詢：
+如要轉譯 Cloud Storage 目錄 `gs://my_data_bucket/teradata/input/` 中的 Teradata SQL 指令碼，並將結果儲存在 Cloud Storage 目錄 `gs://my_data_bucket/teradata/output/` 中，您可以使用下列查詢：
 
 ```
 {
@@ -145,7 +145,7 @@ curl -d "{
 }
 ```
 
-**注意：** 本例中的字串 `"task_name"` 是翻譯工作的 ID，可設為任何值。
+**注意：**本例中的字串 `"task_name"` 是翻譯工作的 ID，可設為任何偏好的值。
 
 這項呼叫會傳回一則訊息，其中 `"name"` 欄位包含建立的工作流程 ID：
 
@@ -168,7 +168,7 @@ curl -d "{
 這項產品或功能適用《[服務專屬條款](https://docs.cloud.google.com/terms/service-terms?hl=zh-tw#1)》中「一般服務條款」一節的《正式發布前產品條款》。正式發布前的產品和功能是按照「原樣」提供，支援範圍可能有限。
 詳情請參閱[推出階段說明](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
 
-**注意：**翻譯 API 可透過 BigQuery Agent Platform 整合功能呼叫 Gemini，根據 AI 設定 YAML 檔案，為翻譯後的 SQL 查詢生成建議。
+**注意：**Translation API 可透過 BigQuery Agent Platform 整合功能呼叫 Gemini，根據 AI 設定 YAML 檔案，為翻譯後的 SQL 查詢生成建議。
 
 以下範例會翻譯位於 `gs://my_data_bucket/teradata/input/` Cloud Storage 目錄中的 Teradata SQL 指令碼，並將結果儲存在 Cloud Storage 目錄 `gs://my_data_bucket/teradata/output/` 中，並提供額外的 AI 建議：
 
@@ -191,7 +191,7 @@ curl -d "{
 }
 ```
 
-**注意：** 如要生成生成式 AI 建議，Cloud Storage 來源目錄必須包含至少一個後置字串為 `.ai_config.yaml` 的設定 YAML 檔案。如要瞭解如何編寫 AI 建議的設定 YAML 檔案，請參閱「[建立以 Gemini 為基礎的設定 YAML 檔案](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation?hl=zh-tw#ai_yaml_guidelines)」。
+**注意：**如要生成 AI 建議，Cloud Storage 來源目錄必須包含至少一個後置字串為 `.ai_config.yaml` 的設定 YAML 檔案。如要瞭解如何編寫 AI 建議的設定 YAML 檔案，請參閱「[建立以 Gemini 為基礎的設定 YAML 檔案](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation?hl=zh-tw#ai_yaml_guidelines)」。
 
 工作順利執行後，您可以在 `gs://my_data_bucket/teradata/output/suggestion` Cloud Storage 目錄中找到 AI 建議。
 
@@ -224,15 +224,15 @@ curl -d "{
 
 更改下列內容：
 
-* `TYPE`：翻譯的[工作類型](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations?hl=zh-tw#supported_sql_dialects)，決定原文和譯文的方言。
+* `TYPE`：翻譯的[工作類型](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations?hl=zh-tw#supported_sql_dialects)，決定來源和目標方言。Databricks SQL 是 Apache Spark SQL 的擴充功能，因此 Spark SQL 工作類型 (`SparkSQL2BigQuery_Translation`，或 `Translation_SparkSQL2BQ` 搭配 `sparksqlDialect`) 適用於 Databricks SQL 和 Spark SQL 工作負載。詳情請參閱「[翻譯介面 ID](https://docs.cloud.google.com/bigquery/docs/migration/databricks-sql?hl=zh-tw#interface-identifiers)」。
 * `PATH`：常值項目的 ID，類似於檔案名稱或路徑。
 * `STRING`：要翻譯的常值輸入資料字串 (例如 SQL)。
-* `TARGETS`：使用者希望直接在回覆中傳回的預期目標，格式為 `literal`。這些項目應採用目標 URI 格式 (例如 GENERATED\_DIR + `target_spec.relative_path` + `source_spec.literal.relative_path`)。不在這份清單中的項目不會在回應中傳回。一般 SQL 翻譯產生的目錄 GENERATED\_DIR 為 `sql/`。
-* `TOKEN`：驗證權杖。如要產生權杖，請使用 `gcloud auth print-access-token` 指令或 [OAuth 2.0 Playground](https://developers.google.com/oauthplayground/?hl=zh-tw) (使用 `https://www.googleapis.com/auth/cloud-platform` 範圍)。
+* `TARGETS`：使用者希望直接在回應中傳回的預期目標，格式為 `literal`。這些應採用目標 URI 格式，例如 `GENERATED_DIR` + `target_spec.relative_path` + `source_spec.literal.relative_path`。不在這份清單中的任何內容都不會出現在回應中。一般 SQL 翻譯的生成目錄 (`GENERATED_DIR`) 為 `sql/`。
+* `TOKEN`：驗證權杖。如要產生權杖，請使用 `gcloud auth print-access-token` 指令或 [OAuth 2.0 Playground](https://developers.google.com/oauthplayground/?hl=zh-tw)，並指定 `https://www.googleapis.com/auth/cloud-platform` 範圍。
 * `PROJECT_ID`：處理翻譯的專案。
 * `LOCATION`：處理工作的[位置](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations?hl=zh-tw#locations)。
 
-上述指令會傳回回應，其中包含格式為 `projects/PROJECT_ID/locations/LOCATION/workflows/WORKFLOW_ID` 的工作流程 ID。
+上述 `curl` 指令會傳回回應，其中包含格式為 `projects/PROJECT_ID/locations/LOCATION/workflows/WORKFLOW_ID` 的工作流程 ID。
 
 建立工作流程後，請[查看工作狀態](#check_job_status)來檢視結果。
 
@@ -259,7 +259,7 @@ curl -d "{
 }
 ```
 
-**注意：** 本例中的字串 `"task_name"` 是翻譯工作的 ID，可設為任何值。
+**注意：**本例中的字串 `"task_name"` 是翻譯工作的 ID，可設為任何偏好的值。
 
 您可以使用任何 `relative_path` 做為常值，但只有在 `target_return_literals` 中加入 `sql/$relative_path`，翻譯後的常值才會顯示在結果中。您也可以在單一查詢中加入多個文字，在這種情況下，每個文字的相對路徑都必須包含在 `target_return_literals` 中。
 
@@ -327,7 +327,7 @@ curl \
 
 ### 工作流程狀態
 
-回應包含 `state` 欄位，指出工作流程目前的狀態：
+回應包含 `state` 欄位，指出工作流程的目前狀態：
 
 * `STATE_UNSPECIFIED`：未指定工作流程狀態。
 * `RUNNING`：工作流程正在執行中。定期輪詢端點，直到狀態變更為止。
@@ -339,9 +339,9 @@ curl \
 
 ## 擷取結果
 
-擷取結果的方式取決於您提交的是[批次翻譯還是互動式翻譯](#translation-modes)：
+擷取結果的方式取決於您提交的是[批次翻譯或互動式翻譯](#translation-modes)：
 
-* **批次翻譯**：翻譯檔案、摘要報告和任何 AI 建議，都會寫入您在 `target_base_uri` 指定的 Cloud Storage 目的地目錄。您可以使用 gcloud CLI 儲存空間指令、Cloud Storage 用戶端程式庫或 REST API，直接從 Cloud Storage 讀取這些檔案：
+* **批次翻譯**：翻譯後的檔案、摘要報表和任何 AI 建議，都會寫入您在 `target_base_uri` 中指定的 Cloud Storage 目的地目錄。您可以使用 gcloud CLI 儲存空間指令、Cloud Storage 用戶端程式庫或 REST API，直接從 Cloud Storage 讀取這些檔案：
 
   ```
   gcloud storage cp --recursive TARGET_URI LOCAL_DIRECTORY
@@ -353,7 +353,7 @@ curl \
   + `LOCAL_DIRECTORY`：接收檔案的本機目錄。
 
   如要進一步瞭解目的地 bucket 中產生的檔案，請參閱「[探索翻譯輸出內容](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator?hl=zh-tw#explore_the_translation_output)」。
-* **互動式翻譯**：如果工作設定為字串常值輸入和 `target_return_literals`，翻譯後的查詢會直接在工作流程回應的 `translatedLiterals` 欄位中傳回：
+* **互動式翻譯**：如果工作設定為字串常值輸入和 `target_return_literals`，翻譯後的查詢會直接在工作流程回應的 `translatedLiterals` 欄位下傳回：
 
   ```
   "taskResult": {
@@ -377,11 +377,11 @@ curl \
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-11 (世界標準時間)。
+上次更新時間：2026-11-24 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-11 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-24 (世界標準時間)。"],[],[]]

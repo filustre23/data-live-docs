@@ -564,4 +564,3 @@ Model Garden are supported:
 * [Kimi-K2.5](https://console.cloud.google.com/vertex-ai/publishers/moonshotai/model-garden/kimi-k2-5)
 * [Llama 4](https://console.cloud.google.com/vertex-ai/publishers/meta/model-garden/llama4)
 * [Llama 3.3](https://console.cloud.google.com/vertex-ai/publishers/meta/model-garden/llama3-3)
-* [Llama 3.2](https://console.cloud.google.com/vertex-ai/publishers/meta/model-garden/llama3-2)

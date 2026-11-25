@@ -407,5 +407,4 @@ field of `feature`:
 ```
 SELECT * FROM
 ML.PREDICT(
-  MODEL
 ```

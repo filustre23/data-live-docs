@@ -18,7 +18,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 `dwh-migration-dumper` 指令列擷取工具可讓您從現有資料倉儲中擷取中繼資料和查詢記錄檔，以便評估工作負載並遷移至 BigQuery。中繼資料檔案會說明來源系統中的 SQL 物件。
 
-BigQuery 遷移服務會使用這項中繼資料，提高將 SQL 指令碼翻譯成 GoogleSQL 的準確度。此外，BigQuery 遷移評估功能會分析中繼資料和查詢記錄檔，協助您評估現有資料倉儲，並估算遷移至 BigQuery 的工作量。
+BigQuery 遷移服務會使用這項中繼資料，提高將 SQL 指令碼翻譯成 GoogleSQL 的準確度。此外，BigQuery 遷移評估功能會分析中繼資料和查詢記錄檔，協助您評估現有資料倉儲，並估算遷移至 BigQuery 所需的工作量。
 
 ## 總覽
 
@@ -33,6 +33,7 @@ BigQuery 遷移服務會使用這項中繼資料，提高將 SQL 指令碼翻譯
 * Apache Hive
 * Apache Impala
 * Apache Spark
+* Databricks Unity Catalog 和 Databricks 舊版 Apache Hive metastore
 * Azure Synapse
 * Greenplum
 * SQL Server
@@ -44,11 +45,11 @@ BigQuery 遷移服務會使用這項中繼資料，提高將 SQL 指令碼翻譯
 * Vertica
 * BigQuery
 
-其中多數資料庫也支援擷取查詢記錄。
+您也可以從大多數的資料庫擷取查詢記錄。
 
-`dwh-migration-dumper` 工具會查詢系統資料表，收集與使用者和系統資料庫相關的資料定義語言 (DDL) 陳述式。不會查詢使用者資料庫的內容。這項工具會將系統資料表中的中繼資料資訊儲存為 CSV 檔案，然後將這些檔案壓縮成單一套件。接著，您在上傳要翻譯或評估的來源檔案時，將這個 ZIP 檔案上傳至 Cloud Storage。
+`dwh-migration-dumper` 工具會查詢系統資料表，收集與使用者和系統資料庫相關的資料定義語言 (DDL) 陳述式。不會查詢使用者資料庫的內容。這項工具會將系統資料表中的中繼資料資訊儲存為 CSV 檔案，然後將這些檔案壓縮成單一套件。上傳要翻譯或評估的來源檔案時，請一併將這個 ZIP 檔案上傳至 Cloud Storage。
 
-使用查詢記錄選項時，`dwh-migration-dumper` 工具會查詢系統資料表，找出與使用者和系統資料庫相關的 DDL 陳述式和查詢記錄。這些檔案會以 CSV 或 yaml 格式儲存至子目錄，然後封裝成 ZIP 套件。系統絕不會查詢使用者資料庫的內容。
+使用查詢記錄選項時，`dwh-migration-dumper` 工具會查詢系統資料表，找出與使用者和系統資料庫相關的 DDL 陳述式和查詢記錄。這些檔案會以 CSV 或 YAML 格式儲存至子目錄，然後封裝成 ZIP 套件。系統絕不會查詢使用者資料庫的內容。
 
 `dwh-migration-dumper` 工具可在 Windows、macOS 和 Linux 上執行。
 
@@ -56,21 +57,21 @@ BigQuery 遷移服務會使用這項中繼資料，提高將 SQL 指令碼翻譯
 
 如果選擇不使用 `dwh-migration-dumper` 工具進行翻譯，您可以手動提供中繼資料檔案，方法是將來源系統中 SQL 物件的資料定義語言 (DDL) 陳述式，收集到個別的文字檔案中。
 
-如要使用 BigQuery 遷移評估功能進行遷移評估，您必須提供使用工具擷取的中繼資料和查詢記錄。
+如要使用 BigQuery 遷移評估工具進行遷移評估，您必須提供使用該工具擷取的中繼資料和查詢記錄。
 
 ## 法規遵循規定
 
-我們提供已編譯的 `dwh-migration-dumper` 工具二進位檔，方便您使用。如需稽核工具，確保符合法規遵循規定，您可以查看 [`dwh-migration-dumper` 工具 GitHub 存放區](https://github.com/google/dwh-migration-tools/tree/main/dumper)的原始碼，並編譯自己的二進位檔。
+我們提供已編譯的 `dwh-migration-dumper` 工具二進位檔，方便您使用。如需稽核工具，確保符合法規遵循規定，您可以查看 [`dwh-migration-dumper` 工具 GitHub 存放區](https://github.com/google/dwh-migration-tools/tree/main/dumper)中的原始碼，並編譯自己的二進位檔。
 
 ## 必要條件
 
 ### 安裝 Java
 
-您打算用來執行 `dwh-migration-dumper` 工具的伺服器必須安裝 Java 8 以上版本。如果沒有，請前往 [Java 下載頁面](https://www.java.com/download/)下載並安裝 Java。
+您打算用來執行 `dwh-migration-dumper` 工具的伺服器必須安裝 Java 8 以上版本。如果沒有，請從 [Java 下載頁面](https://www.java.com/download/)下載並安裝 Java。
 
 ### 所需權限
 
-您指定用於將 `dwh-migration-dumper` 工具連結至來源系統的使用者帳戶，必須具備從該系統讀取中繼資料的權限。確認這個帳戶具備適當的角色成員資格，可查詢平台可用的中繼資料資源。舉例來說，`INFORMATION_SCHEMA` 是多個平台通用的中繼資料資源。
+您指定用於將 `dwh-migration-dumper` 工具連結至來源系統的使用者帳戶，必須具備從該系統讀取中繼資料的權限。請確認這個帳戶具備適當的角色成員資格，可查詢平台可用的中繼資料資源。舉例來說，`INFORMATION_SCHEMA` 是多個平台通用的中繼資料資源。
 
 ## 安裝 `dwh-migration-dumper` 工具
 
@@ -97,7 +98,7 @@ BigQuery 遷移服務會使用這項中繼資料，提高將 SQL 指令碼翻譯
 
    `True` 結果確認核對和驗證成功。
 
-   `False` 結果表示驗證錯誤。請確認核對和與 ZIP 檔案是從相同發布版本下載，並放在相同目錄中。
+   `False` 結果表示驗證錯誤。請確認核對和與 ZIP 檔案是從相同發布版本下載，並放在同一個目錄中。
 3. 將 ZIP 檔案解壓縮，解壓縮 ZIP 檔案後，解壓縮工具二進位檔會位於所建立資料夾的 `/bin` 子目錄中。
 4. 更新 `PATH` 環境變數，加入解壓縮工具的安裝路徑。
 
@@ -111,44 +112,44 @@ dwh-migration-dumper [FLAGS]
 
 執行 `dwh-migration-dumper` 工具後，系統會在目前使用的目錄中建立名為 `dwh-migration-<source platform>-metadata.zip` 的輸出檔案，例如 `dwh-migration-teradata-metadata.zip`。
 
-**提示：** 使用 Windows PowerShell 時，請用雙引號括住旗標，例如 `dwh-migration-dumper "-Dteradata-logs.utility-logs-table=historicdb.ArchivedUtilityLogs"`。
+**提示：**使用 Windows PowerShell 時，請用雙引號括住旗標，例如 `dwh-migration-dumper "-Dteradata-logs.utility-logs-table=historicdb.ArchivedUtilityLogs"`。
 
 請按照下列操作說明，瞭解如何為來源平台執行 `dwh-migration-dumper` 工具。
 
 ### Teradata
 
-**注意：** 遷移評估支援 Teradata 15 以上版本，且僅支援地端部署版本的 Teradata VantageCore。不支援 Teradata VantageCloud。
+**注意：**遷移評估支援 Teradata 15 以上版本，且僅支援地端部署版本的 Teradata VantageCore。不支援 Teradata VantageCloud。
 
-如要允許 `dwh-migration-dumper` 工具連線至 Teradata，請前往 Teradata 的[下載頁面](https://downloads.teradata.com/download/connectivity/jdbc-driver)下載 JDBC 驅動程式。
+如要允許 `dwh-migration-dumper` 工具連線至 Teradata，請從 Teradata 的[下載頁面](https://downloads.teradata.com/download/connectivity/jdbc-driver)下載 JDBC 驅動程式。
 
 下表說明使用擷取工具擷取 Teradata 中繼資料和查詢記錄時，常用的旗標。如要瞭解所有支援的旗標，請參閱[全域旗標](#global_flags)。
 
 | **名稱** | **預設值** | **說明** | **必要** |
 | --- | --- | --- | --- |
-| `--assessment` |  | 產生資料庫記錄或擷取中繼資料時，開啟評估模式。`dwh-migration-dumper` 工具用於擷取中繼資料時，會產生 BigQuery 遷移評估所需的中繼資料統計資料。用於查詢記錄時，這項工具會擷取額外資料欄，以便進行 BigQuery 遷移評估。 | 執行評估時必須提供，翻譯時則不必。 |
-| `--connector` |  | 要使用的連接器名稱，在本例中，中繼資料為 **teradata**，查詢記錄則為 **teradata-logs**。 | 是 |
-| `--database` |  | 要擷取的資料庫清單，以半形逗號分隔。視 Teradata 伺服器設定而定，資料庫名稱可能區分大小寫。  如果這個旗標與 `teradata` 連接器搭配使用，`dwh-migration-dumper` 工具會依據提供的資料庫清單篩選中繼資料表和檢視表。`DatabasesV` 和 `RoleMembersV` 檢視表是例外狀況，`dwh-migration-dumper` 工具會從這些檢視表擷取資料庫和使用者，而不依資料庫名稱篩選。  這個旗標無法與 `teradata-logs` 連接器搭配使用。系統一律會擷取所有資料庫的查詢記錄。 | 否 |
+| `--assessment` |  | 在產生資料庫記錄或擷取中繼資料時，開啟評估模式。`dwh-migration-dumper` 工具用於擷取中繼資料時，會產生 BigQuery 遷移評估所需的中繼資料統計資料。用於查詢記錄時，會擷取額外資料欄，以便進行 BigQuery 遷移評估。 | 執行評估時必須提供，翻譯時則不必。 |
+| `--connector` |  | 要使用的連接器名稱，在本例中，`teradata` 代表中繼資料，`teradata-logs` 代表查詢記錄。 | 是 |
+| `--database` |  | 要擷取的資料庫清單，以半形逗號分隔。視 Teradata 伺服器設定而定，資料庫名稱可能區分大小寫。  如果這個旗標與 `teradata` 連接器搭配使用，`dwh-migration-dumper` 工具會依據提供的資料庫清單，篩選中繼資料資料表和檢視表。`DatabasesV` 和 `RoleMembersV` 檢視表是例外狀況，`dwh-migration-dumper` 工具會從這些檢視表擷取資料庫和使用者，而不依資料庫名稱篩選。  這個旗標無法與 `teradata-logs` 連接器搭配使用。系統一律會擷取所有資料庫的查詢記錄。 | 否 |
 | `--driver` |  | 這個連線要使用的驅動程式 JAR 檔案絕對或相對路徑。您可以指定多個驅動程式 JAR 檔案，並以半形逗號分隔。 | 是 |
 | `--host` | localhost | 資料庫伺服器的主機名稱或 IP 位址。 | 否 |
 | `--password` |  | 資料庫連線要使用的密碼。 | 如未指定，擷取工具會使用安全提示要求提供。 |
 | `--port` | 1025 | 資料庫伺服器的通訊埠。 | 否 |
 | `--user` |  | 資料庫連線要使用的使用者名稱。 | 是 |
-| `--query-log-alternates` |  | 僅適用於 `teradata-logs` 連接器。  如要從其他位置擷取查詢記錄，建議您改用 `-Dteradata-logs.query-logs-table` 和 `-Dteradata-logs.sql-logs-table` 旗標。  根據預設，系統會從 `dbc.DBQLogTbl` 和 `dbc.DBQLSQLTbl` 資料表擷取查詢記錄。如果使用 `--assessment` 旗標，系統會從檢視表 `dbc.QryLogV` 和資料表 `dbc.DBQLSQLTbl` 擷取查詢記錄。如需從其他位置擷取查詢記錄，可以使用 `--query-log-alternates` 旗標指定資料表或檢視表的完整名稱。第一個參數會參照 `dbc.DBQLogTbl` 資料表的替代項目，第二個參數則會參照 `dbc.DBQLSQLTbl` 資料表的替代項目。這兩個參數都是必要參數。   如果兩個資料表都有 `DATE` 類型的索引資料欄，可以使用 `-Dteradata-logs.log-date-column` 旗標來提高擷取效能。  範例： `--query-log-alternates historicdb.ArchivedQryLogV,historicdb.ArchivedDBQLSqlTbl` | 否 |
+| `--query-log-alternates` |  | 僅適用於 `teradata-logs` 連接器。  如要從其他位置擷取查詢記錄，建議您改用 `-Dteradata-logs.query-logs-table` 和 `-Dteradata-logs.sql-logs-table` 旗標。  根據預設，系統會從 `dbc.DBQLogTbl` 和 `dbc.DBQLSQLTbl` 資料表擷取查詢記錄。如果使用 `--assessment` 旗標，系統會從檢視表 `dbc.QryLogV` 和資料表 `dbc.DBQLSQLTbl` 擷取查詢記錄。如需從其他位置擷取查詢記錄，可以使用 `--query-log-alternates` 旗標指定資料表或檢視表的完整名稱。第一個參數會參照 `dbc.DBQLogTbl` 資料表的替代方案，第二個參數則會參照 `dbc.DBQLSQLTbl` 資料表的替代方案。這兩個參數都是必要參數。   如果兩個資料表都有 `DATE` 類型的索引資料欄，可以使用 `-Dteradata-logs.log-date-column` 旗標來提高擷取效能。  範例： `--query-log-alternates historicdb.ArchivedQryLogV,historicdb.ArchivedDBQLSqlTbl` | 否 |
 | `-Dteradata.tmode` |  | 連線的交易模式。支援的值如下：   * `ANSI`：ANSI 模式。這是預設模式 (如未指定旗標) * `TERA`：Teradata 交易模式 (BTET) * `DEFAULT`：使用資料庫伺服器上設定的預設交易模式 * `NONE`：未設定連線模式   範例 (Bash)：  `-Dteradata.tmode=TERA`  範例 (Windows PowerShell)：  `"-Dteradata.tmode=TERA"` | 否 |
-| `-Dteradata-logs.log-date-column` |  | 僅適用於 `teradata-logs` 連接器。  如要提升 `-Dteradata-logs.query-logs-table` 和 `-Dteradata-logs.sql-logs-table` 旗標指定資料表的彙整效能，您可以在 `JOIN` 條件中加入 `DATE` 類型的額外資料欄。這個資料欄必須在兩個資料表中定義，且必須是分區主索引的一部分。  範例 (Bash)：  `-Dteradata-logs.log-date-column=ArchiveLogDate`  範例 (Windows PowerShell)：  `"-Dteradata-logs.log-date-column=ArchiveLogDate"` | 否 |
+| `-Dteradata-logs.log-date-column` |  | 僅適用於 `teradata-logs` 連接器。  如要提高彙整 `-Dteradata-logs.query-logs-table` 和 `-Dteradata-logs.sql-logs-table` 旗標指定資料表的效能，您可以在 `JOIN` 條件中加入 `DATE` 類型的額外資料欄。這個資料欄必須在兩個資料表中定義，且必須是分區主索引的一部分。  範例 (Bash)：  `-Dteradata-logs.log-date-column=ArchiveLogDate`  範例 (Windows PowerShell)：  `"-Dteradata-logs.log-date-column=ArchiveLogDate"` | 否 |
 | `-Dteradata-logs.query-logs-table` |  | 僅適用於 `teradata-logs` 連接器。  根據預設，系統會從 `dbc.DBQLogTbl` 資料表擷取查詢記錄。如果使用 `--assessment` 旗標，系統會從 `dbc.QryLogV` 檢視表擷取查詢記錄。如需從其他位置擷取查詢記錄，可以使用這個旗標指定資料表或檢視表的完整名稱。  請參閱 `-Dteradata-logs.log-date-column` 旗標，瞭解如何提升擷取效能。  範例 (Bash)：  `-Dteradata-logs.query-logs-table=historicdb.ArchivedQryLogV`  範例 (Windows PowerShell)：  `"-Dteradata-logs.query-logs-table=historicdb.ArchivedQryLogV"` | 否 |
 | `-Dteradata-logs.sql-logs-table` |  | 僅適用於 `teradata-logs` 連接器。  根據預設，系統會從 `dbc.DBQLSqlTbl` 資料表擷取含有 SQL 文字的查詢記錄。如需從其他位置擷取，可以使用這個旗標指定資料表或檢視表的完整名稱。  請參閱 `-Dteradata-logs.log-date-column` 旗標，瞭解如何提升擷取效能。  範例 (Bash)：  `-Dteradata-logs.sql-logs-table=historicdb.ArchivedDBQLSqlTbl`  範例 (Windows PowerShell)：  `"-Dteradata-logs.sql-logs-table=historicdb.ArchivedDBQLSqlTbl"` | 否 |
-| `-Dteradata-logs.utility-logs-table` |  | 僅適用於 `teradata-logs` 連接器。  根據預設，公用程式記錄檔會從資料表 `dbc.DBQLUtilityTbl` 擷取。如需從其他位置擷取公用程式記錄，可以使用 `-Dteradata-logs.utility-logs-table` 旗標指定資料表的完整名稱。  範例 (Bash)：  `-Dteradata-logs.utility-logs-table=historicdb.ArchivedUtilityLogs`  範例 (Windows PowerShell)：  `"-Dteradata-logs.utility-logs-table=historicdb.ArchivedUtilityLogs"` | 否 |
+| `-Dteradata-logs.utility-logs-table` |  | 僅適用於 `teradata-logs` 連接器。  根據預設，公用程式記錄檔會從 `dbc.DBQLUtilityTbl` 資料表擷取。如需從其他位置擷取公用程式記錄，可以使用 `-Dteradata-logs.utility-logs-table` 旗標指定資料表的完整名稱。  範例 (Bash)：  `-Dteradata-logs.utility-logs-table=historicdb.ArchivedUtilityLogs`  範例 (Windows PowerShell)：  `"-Dteradata-logs.utility-logs-table=historicdb.ArchivedUtilityLogs"` | 否 |
 | `-Dteradata-logs.res-usage-scpu-table` |  | 僅適用於 `teradata-logs` 連接器。  根據預設，SCPU 資源用量記錄會從 `dbc.ResUsageScpu` 資料表擷取。如需從其他位置擷取這些資料，可以使用 `-Dteradata-logs.res-usage-scpu-table` 旗標指定資料表的完整名稱。  範例 (Bash)：  `-Dteradata-logs.res-usage-scpu-table=historicdb.ArchivedResUsageScpu`  範例 (Windows PowerShell)：  `"-Dteradata-logs.res-usage-scpu-table=historicdb.ArchivedResUsageScpu"` | 否 |
-| `-Dteradata-logs.res-usage-spma-table` |  | 僅適用於 `teradata-logs` 連接器。  根據預設，SPMA 資源用量記錄會從 `dbc.ResUsageSpma` 資料表擷取。如要從其他位置擷取這些記錄，可以使用 `-Dteradata-logs.res-usage-spma-table` 旗標指定資料表的完整名稱。  範例 (Bash)：  `-Dteradata-logs.res-usage-spma-table=historicdb.ArchivedResUsageSpma`  範例 (Windows PowerShell)：  `"-Dteradata-logs.res-usage-spma-table=historicdb.ArchivedResUsageSpma"` | 否 |
+| `-Dteradata-logs.res-usage-spma-table` |  | 僅適用於 `teradata-logs` 連接器。  根據預設，SPMA 資源用量記錄會從 `dbc.ResUsageSpma` 資料表擷取。如需從其他位置擷取這些記錄，可以使用 `-Dteradata-logs.res-usage-spma-table` 旗標指定資料表的完整名稱。  範例 (Bash)：  `-Dteradata-logs.res-usage-spma-table=historicdb.ArchivedResUsageSpma`  範例 (Windows PowerShell)：  `"-Dteradata-logs.res-usage-spma-table=historicdb.ArchivedResUsageSpma"` | 否 |
 | `--query-log-start` |  | 要擷取的查詢記錄開始時間 (含此時間)。會截斷小時以後的資料。這個旗標僅適用於 **teradata-logs** 連接器。  範例：`--query-log-start "2023-01-01 14:00:00"` | 否 |
 | `--query-log-end` |  | 要擷取的查詢記錄結束時間 (不含)。會截斷小時以後的資料。這個旗標僅適用於 **teradata-logs** 連接器。  範例：`--query-log-end "2023-01-15 22:00:00"` | 否 |
-| `-Dteradata.metadata.tablesizev.max-rows` |  | 僅適用於 `teradata` 連接器。  限制從檢視表 `TableSizeV` 擷取的資料列數量。資料列會依 `DatabaseName`、`AccountName` 和 `TableName` 欄分組，然後依永久空間大小 (運算式 `SUM(CurrentPerm)`) 遞減排序。接著，系統會擷取指定數量的資料列。  範例 (Bash)：  `-Dteradata.metadata.tablesizev.max-rows=100000`  範例 (Windows PowerShell)：  `"-Dteradata.metadata.tablesizev.max-rows=100000"` | 否 |
-| `-Dteradata.metadata.diskspacev.max-rows` |  | 僅適用於 `teradata` 連接器。  限制從檢視表 `DiskSpaceV` 擷取的資料列數量。系統會依永久空間大小 (`CurrentPerm` 欄) 遞減排序資料列，然後擷取指定數量的資料列。  範例 (Bash)：  `-Dteradata.metadata.diskspacev.max-rows=100000`  範例 (Windows PowerShell)：  `"-Dteradata.metadata.diskspacev.max-rows=100000"` | 否 |
+| `-Dteradata.metadata.tablesizev.max-rows` |  | 僅適用於 `teradata` 連接器。  限制從檢視表 `TableSizeV` 擷取的資料列數量。資料列會依 `DatabaseName`、`AccountName` 和 `TableName` 資料欄分組，然後依永久空間大小 (運算式 `SUM(CurrentPerm)`) 遞減排序。接著，系統會擷取指定數量的資料列。  範例 (Bash)：  `-Dteradata.metadata.tablesizev.max-rows=100000`  範例 (Windows PowerShell)：  `"-Dteradata.metadata.tablesizev.max-rows=100000"` | 否 |
+| `-Dteradata.metadata.diskspacev.max-rows` |  | 僅適用於 `teradata` 連接器。  限制從檢視表 `DiskSpaceV` 擷取的資料列數量。資料列會依永久空間大小 (`CurrentPerm` 欄) 遞減排序，然後擷取指定數量的資料列。  範例 (Bash)：  `-Dteradata.metadata.diskspacev.max-rows=100000`  範例 (Windows PowerShell)：  `"-Dteradata.metadata.diskspacev.max-rows=100000"` | 否 |
 | `-Dteradata.metadata.databasesv.users.max-rows` |  | 僅適用於 `teradata` 連接器。  限制從檢視表 `DatabasesV` 擷取代表使用者 (`DBKind='U'`) 的資料列數量。資料列會依「`PermSpace`」欄遞減排序，然後系統會擷取指定數量的資料列。  範例 (Bash)：  `-Dteradata.metadata.databasesv.users.max-rows=100000`  範例 (Windows PowerShell)：  `"-Dteradata.metadata.databasesv.users.max-rows=100000"` | 否 |
 | `-Dteradata.metadata.databasesv.dbs.max-rows` |  | 僅適用於 `teradata` 連接器。  限制從檢視表 `DatabasesV` 擷取的資料庫 (`DBKind='D'`) 資料列數量。資料列會依「`PermSpace`」欄遞減排序，然後系統會擷取指定數量的資料列。  範例 (Bash)：  `-Dteradata.metadata.databasesv.dbs.max-rows=100000`  範例 (Windows PowerShell)：  `"-Dteradata.metadata.databasesv.dbs.max-rows=100000"` | 否 |
 | `-Dteradata.metadata.max-text-length` |  | 僅適用於 `teradata` 連接器。  從 `TableTextV` 檢視表擷取資料時，文字欄的最大長度。如果文字長度超過定義的限制，就會分割成多列。允許的範圍：5000 至 32000 (含)。  範例 (Bash)：  `-Dteradata.metadata.max-text-length=10000`  範例 (Windows PowerShell)：  `"-Dteradata.metadata.max-text-length=10000"` | 否 |
-| `-Dteradata-logs.max-sql-length` |  | 僅適用於 `teradata-logs` 連接器。  `DBQLSqlTbl.SqlTextInfo` 欄的長度上限。 如果查詢文字超過定義的限制，就會分割成多個資料列。允許的範圍：5000 到 31000 (含)。  範例 (Bash)：  `-Dteradata-logs.max-sql-length=10000`  範例 (Windows PowerShell)：  `"-Dteradata-logs.max-sql-length=10000"` | 否 |
+| `-Dteradata-logs.max-sql-length` |  | 僅適用於 `teradata-logs` 連接器。  `DBQLSqlTbl.SqlTextInfo` 欄的最大長度。 如果查詢文字長度超過定義的限制，系統會將其分割成多個資料列。允許的範圍：5000 到 31000 (含)。  範例 (Bash)：  `-Dteradata-logs.max-sql-length=10000`  範例 (Windows PowerShell)：  `"-Dteradata-logs.max-sql-length=10000"` | 否 |
 
 #### 範例
 
@@ -163,7 +164,7 @@ dwh-migration-dumper \
   --driver path/terajdbc4.jar
 ```
 
-以下範例說明如何擷取本機主機上的評估查詢記錄，以便進行驗證：
+以下範例說明如何擷取本機主機上 Assessment 的查詢記錄，以便進行驗證：
 
 ```
 dwh-migration-dumper \
@@ -222,15 +223,15 @@ dwh-migration-dumper \
 
 | **名稱** | **預設值** | **說明** | **必要** |
 | --- | --- | --- | --- |
-| `--assessment` |  | 生成資料庫記錄或擷取中繼資料時，開啟評估模式。 用於擷取中繼資料時，這項工具會產生 BigQuery 遷移評估所需的中繼資料統計資料。用於擷取查詢記錄時，會產生查詢指標統計資料，供 BigQuery 遷移評估使用。 | 在評估模式下執行時為必要，翻譯時則非必要。 |
-| `--connector` |  | 要使用的連接器名稱，在本例中，中繼資料為 **redshift**，查詢記錄則為 **redshift-raw-logs**。 | 是 |
+| `--assessment` |  | 在產生資料庫記錄或擷取中繼資料時，開啟評估模式。 用於擷取中繼資料時，會產生 BigQuery 遷移評估所需的中繼資料統計資料。用於擷取查詢記錄時，這項工具會產生查詢指標統計資料，供 BigQuery 遷移評估作業使用。 | 在評估模式下執行時為必要，翻譯時則非必要。 |
+| `--connector` |  | 要使用的連接器名稱，在本例中，`redshift` 代表中繼資料，`redshift-raw-logs` 則代表查詢記錄。 | 是 |
 | `--database` | 如未指定，Amazon Redshift 會使用 `--user` 值做為預設資料庫名稱。 | 要連線的資料庫名稱。 | 否 |
 | `--driver` | 如未指定，Amazon Redshift 會使用預設的 PostgreSQL JDBC 驅動程式。 | 這個連線要使用的驅動程式 JAR 檔案絕對或相對路徑。您可以指定多個驅動程式 JAR 檔案，並以半形逗號分隔。 | 否 |
 | `--host` | localhost | 資料庫伺服器的主機名稱或 IP 位址。 | 否 |
-| `--iam-accesskeyid` |  | 用於驗證的 AWS IAM 存取金鑰 ID。存取金鑰是一串字元，例如 `AKIAIOSFODNN7EXAMPLE`。  與 `--iam-secretaccesskey` 旗標搭配使用。指定 `--iam-profile` 或 `--password` 旗標時，請勿使用這個旗標。 | 不需明確指定，但您必須透過下列其中一種方法提供驗證資訊：   * 這個旗標會與 `--iam-secretaccesskey` 旗標搭配使用。 * 使用 `--iam-profile` 旗標。 * 搭配使用 `--password` 旗標和 `--user` 旗標。 |
-| `--iam-profile` |  | 用於驗證的 AWS IAM 設定檔。您可以檢查 `$HOME/.aws/credentials` 檔案或執行 `aws configure list-profiles`，擷取要使用的設定檔值。  請勿將這個旗標與 `--iam-accesskeyid`、`--iam-secretaccesskey` 或 `--password` 旗標搭配使用。 | 不需明確指定，但您必須透過下列其中一種方法提供驗證資訊：   * 使用這個旗標。 * 搭配使用 `--iam-accesskeyid` 旗標和 `--iam-secretaccesskey` 旗標。 * 搭配使用 `--password` 旗標和 `--user` 旗標。 |
-| `--iam-secretaccesskey` |  | 用於驗證的 AWS IAM 密鑰存取金鑰。私密存取金鑰是一串字元，例如 `wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY`。  與 `--iam-accesskeyid` 旗標搭配使用。請勿搭配使用這個旗標與 `--iam-profile` 或 `--password` 旗標。 | 不需明確指定，但您必須透過下列其中一種方法提供驗證資訊：   * 這個旗標會與 `--iam-accesskeyid` 旗標搭配使用。 * 使用 `--iam-profile` 旗標。 * 搭配使用 `--password` 旗標和 `--user` 旗標。 |
-| `--password` |  | 資料庫連線要使用的密碼。 請勿將這個旗標與 `--iam-accesskeyid`、`--iam-secretaccesskey` 或 `--iam-profile` 旗標搭配使用。 | 不需明確指定，但您必須透過下列其中一種方法提供驗證資訊：   * 這個旗標會與 `--user` 旗標搭配使用。 * 搭配使用 `--iam-accesskeyid` 旗標和 `--iam-secretaccesskey` 旗標。 * 使用 `--password` 旗標。 |
+| `--iam-accesskeyid` |  | 用於驗證的 AWS IAM 存取金鑰 ID。存取金鑰是一串字元，例如 `AKIAIOSFODNN7EXAMPLE`。  與 `--iam-secretaccesskey` 旗標搭配使用。指定 `--iam-profile` 或 `--password` 旗標時，請勿使用這個旗標。 | 不一定要明確指定，但您必須透過下列其中一種方法提供驗證資訊：   * 這個旗標應與 `--iam-secretaccesskey` 旗標搭配使用。 * 使用 `--iam-profile` 旗標。 * 搭配使用 `--password` 旗標和 `--user` 旗標。 |
+| `--iam-profile` |  | 用於驗證的 AWS IAM 設定檔。您可以檢查 `$HOME/.aws/credentials` 檔案或執行 `aws configure list-profiles`，擷取要使用的設定檔值。  請勿將這個旗標與 `--iam-accesskeyid`、`--iam-secretaccesskey` 或 `--password` 旗標搭配使用。 | 不一定要明確指定，但您必須透過下列其中一種方法提供驗證資訊：   * 使用這個旗標。 * 搭配使用 `--iam-accesskeyid` 旗標和 `--iam-secretaccesskey` 旗標。 * 搭配使用 `--password` 旗標和 `--user` 旗標。 |
+| `--iam-secretaccesskey` |  | 用於驗證的 AWS IAM 密鑰存取金鑰。私密存取金鑰是一串字元，例如 `wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY`。  與 `--iam-accesskeyid` 旗標搭配使用。請勿搭配使用這個旗標與 `--iam-profile` 或 `--password` 旗標。 | 不一定要明確指定，但您必須透過下列其中一種方法提供驗證資訊：   * 這個旗標應與 `--iam-accesskeyid` 旗標搭配使用。 * 使用 `--iam-profile` 旗標。 * 搭配使用 `--password` 旗標和 `--user` 旗標。 |
+| `--password` |  | 資料庫連線要使用的密碼。 請勿將這個旗標與 `--iam-accesskeyid`、`--iam-secretaccesskey` 或 `--iam-profile` 旗標搭配使用。 | 不一定要明確指定，但您必須透過下列其中一種方法提供驗證資訊：   * 這個旗標應與 `--user` 旗標搭配使用。 * 搭配使用 `--iam-accesskeyid` 旗標和 `--iam-secretaccesskey` 旗標。 * 使用 `--password` 旗標。 |
 | `--port` | 5439 | 資料庫伺服器的通訊埠。 | 否 |
 | `--user` |  | 資料庫連線要使用的使用者名稱。 | 是 |
 | `--query-log-start` |  | 要擷取的查詢記錄開始時間 (含此時間)。會截斷小時以後的資料。這個旗標僅適用於 **redshift-raw-logs** 連接器。  範例：`--query-log-start "2023-01-01 14:00:00"` | 否 |
@@ -332,19 +333,19 @@ dwh-migration-dumper \
 * `SVL_QUERY_QUEUE_INFO`
 * `STL_WLM_QUERY`
 
-如要瞭解 Redshift 中的系統檢視表和資料表，請參閱「[Redshift 系統檢視表](https://docs.aws.amazon.com/redshift/latest/dg/c_intro_system_views.html)」和「[Redshift 系統目錄資料表](https://docs.aws.amazon.com/redshift/latest/dg/c_intro_catalog_views.html)」。
+如要瞭解 Redshift 的系統檢視表和資料表，請參閱「[Redshift 系統檢視表](https://docs.aws.amazon.com/redshift/latest/dg/c_intro_system_views.html)」和「[Redshift 系統目錄資料表](https://docs.aws.amazon.com/redshift/latest/dg/c_intro_catalog_views.html)」。
 
 ### Hive/Impala/Spark 或 Trino/PrestoSQL
 
-`dwh-migration-dumper` 工具僅支援透過 Kerberos 驗證 Apache Hive metastore。因此，請勿使用 `--user` 和 `--password` 旗標，而是使用 `--hive-kerberos-url` 旗標提供 Kerberos 驗證詳細資料。
+`dwh-migration-dumper` 工具僅支援透過 Kerberos 驗證 Apache Hive metastore。因此，請勿使用 `--user` 和 `--password` 旗標，改用 `--hive-kerberos-url` 旗標提供 Kerberos 驗證詳細資料。
 
-下表說明使用擷取工具擷取 Apache Hive、Impala、Spark、Presto 或 Trino 中繼資料時常用的旗標。如要瞭解所有支援的旗標，請參閱[全域旗標](#global_flags)。
+下表說明使用擷取工具擷取 Apache Hive、Impala、Spark、Presto 或 Trino 中繼資料時，常用的旗標。如要瞭解所有支援的旗標，請參閱[全域旗標](#global_flags)。
 
 | **名稱** | **預設值** | **說明** | **必要** |
 | --- | --- | --- | --- |
 | `--assessment` |  | 擷取中繼資料時開啟評估模式。 `dwh-migration-dumper` 工具用於擷取中繼資料時，會產生 BigQuery 遷移評估所需的中繼資料統計資料。 | 評估作業的必要項目。Not required for translation. |
-| `--connector` |  | 要使用的連接器名稱，在本例中為 **hiveql**。 | 是 |
-| `--hive-metastore-dump-partition-metadata` | true | 讓 `dwh-migration-dumper` 工具擷取分區中繼資料。如果正式版 metastore 有大量分區，建議您將這個旗標設為 `false`，因為 Thrift 用戶端效能可能會受到影響。這項設定可提升擷取工具的效能，但會導致 BigQuery 端的失聯最佳化功能部分失效。  請勿將這個旗標與 `--assessment` 旗標搭配使用，否則不會有任何效果。 | 否 |
+| `--connector` |  | 要使用的連接器名稱，在本例中為 `hiveql`。 | 是 |
+| `--hive-metastore-dump-partition-metadata` | true | 讓 `dwh-migration-dumper` 工具擷取分區中繼資料。如果正式版 metastore 有大量分區，建議您將這個旗標設為 `false`，因為 Thrift 用戶端效能可能會受到影響。這項設定可提升擷取工具的效能，但會導致 BigQuery 端的分割區最佳化功能出現一些損失。  請勿搭配使用這個旗標和 `--assessment` 旗標，否則不會有任何效果。 | 否 |
 | `--hive-metastore-version` | 2.3.6 | 執行 `dwh-migration-dumper` 工具時，系統會根據這個旗標的值，選取適當的 [Thrift](https://thrift.apache.org/) 規格，用於與 Apache Hive 伺服器通訊。如果擷取工具沒有適當的 Thrift 規格，則會使用 2.3.6 用戶端，並向 `stdout` 發出警告。如果發生這種情況，請[與支援團隊聯絡](https://cloud.google.com/support-hub?hl=zh-tw)，並提供您要求的 Apache Hive 版本號碼。 | 否 |
 | `--host` | localhost | 資料庫伺服器的主機名稱或 IP 位址。 | 否 |
 | `--port` | 9083 | 資料庫伺服器的通訊埠。 | 否 |
@@ -363,7 +364,7 @@ dwh-migration-dumper \
   --port port
 ```
 
-如要使用 Kerberos 驗證，請以具備 Hive metastore 讀取的權限的使用者身分登入，並產生 Kerberos 票證。接著，使用下列指令產生中繼資料 ZIP 檔案：
+如要使用 Kerberos 驗證，請以具備 Hive metastore 讀取權限的使用者身分登入，並產生 Kerberos 票證。接著，使用下列指令產生中繼資料 ZIP 檔案：
 
 ```
 JAVA_OPTS="-Djavax.security.auth.useSubjectCredsOnly=false" \
@@ -374,6 +375,88 @@ JAVA_OPTS="-Djavax.security.auth.useSubjectCredsOnly=false" \
   --hive-kerberos-url principal/kerberos_host
 ```
 
+### Databricks
+
+**預覽**
+
+這項產品或功能適用《[服務專屬條款](https://docs.cloud.google.com/terms/service-terms?hl=zh-tw#1)》中「一般服務條款」一節的《正式發布前產品條款》。正式發布前的產品和功能是按照「原樣」提供，支援範圍可能有限。
+詳情請參閱[推出階段說明](https://cloud.google.com/products/?hl=zh-tw#product-launch-stages)。
+
+您可以使用 `dwh-migration-dumper` 工具，從下列 Databricks 目錄來源擷取結構定義中繼資料，用於 SQL 翻譯：
+
+* **Databricks Unity Catalog**：透過 Databricks Java SDK 連線至 Databricks REST API，擷取目錄、結構定義、資料表、檢視表、資料欄、限制和分區中繼資料。
+* **Databricks 舊版 Hive metastore**：指定 `--warehouse` 旗標，從工作區本機 `hive_metastore` 目錄擷取結構定義、資料表和檢視表中繼資料時，透過 Databricks Java SDK 連線至 Databricks SQL 倉儲。`dwh-migration-dumper` 工具不會從 `hive_metastore` 目錄擷取 UDF 中繼資料。如要提供自訂 UDF 簽章進行翻譯，請參閱「[UDF 規格](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation?hl=zh-tw#udf_specification)」。
+* **自行管理或外部 Apache Hive Metastore**：使用 `hiveql` 連接器，直接連線至預設通訊埠 `9083` 上的 Hive Metastore Thrift 端點。
+
+#### 必要的 Databricks 權限
+
+`dwh-migration-dumper` 工具只會讀取目錄和資料表中繼資料，不會查詢資料表資料。對 Databricks Unity Catalog 執行 `dwh-migration-dumper` 工具之前，請先授予驗證使用者或服務主體 metastore 管理員權限，或對要擷取的每個目錄授予下列權限：
+
+* `USE CATALOG`
+* `USE SCHEMA`
+* `BROWSE`
+
+如要驗證 `dwh-migration-dumper` 工具，請傳遞 Databricks 個人存取權杖 (PAT) 或含有 `--password` 旗標的 OAuth 權杖。如果省略 `--password` 旗標，`dwh-migration-dumper` 工具會使用 Databricks SDK 預設驗證鏈結，讓您使用 `DATABRICKS_TOKEN` 等環境變數進行驗證。
+
+#### 旗標
+
+下表說明使用 `dwh-migration-dumper` 工具擷取 Databricks 中繼資料的旗標。如要瞭解所有支援的旗標，請參閱「[全域旗標](#global_flags)」。
+
+| **名稱** | **預設值** | **說明** | **必要** |
+| --- | --- | --- | --- |
+| `--connector` |  | 要使用的連接器名稱，在本例中為 `databricks`。 如果是自行管理或外部 Hive Metastore，請改用 `hiveql`。 | 是 |
+| `--database` | 所有可存取的使用者目錄 | 以半形逗號分隔的目錄清單，用於擷取中繼資料。 | 否 |
+| `--password` | Databricks SDK 預設驗證鏈 | 用於驗證 Databricks 工作區的 Databricks PAT 或 OAuth 權杖。如果省略這個旗標，`dwh-migration-dumper` 工具會改用 Databricks SDK 預設驗證鏈結，例如 `DATABRICKS_TOKEN` 環境變數。 | 否 |
+| `--url` |  | Databricks 工作區的網址，例如 `https://WORKSPACE_HOST`。 | 是 |
+| `--warehouse` |  | Databricks SQL 倉儲的 ID，用於查詢舊版 `hive_metastore` 目錄的中繼資料。如果省略這個旗標，`dwh-migration-dumper` 工具會略過 `hive_metastore` 目錄，只從 Unity Catalog 擷取中繼資料。 | 否 |
+
+#### 範例
+
+如要透過傳遞 PAT 或 OAuth 權杖，將 Databricks 工作區中的 Unity Catalog 中繼資料擷取至 `databricks-metadata.zip` 檔案，請執行下列指令：
+
+```
+dwh-migration-dumper \
+  --connector databricks \
+  --url https://WORKSPACE_HOST \
+  --password DATABRICKS_TOKEN \
+  --output databricks-metadata.zip
+```
+
+如要納入舊版 `hive_metastore` 目錄、篩選擷取作業以取得特定目錄，並使用 `DATABRICKS_TOKEN` 環境變數進行驗證，請執行下列指令：
+
+```
+DATABRICKS_TOKEN=DATABRICKS_TOKEN \
+  dwh-migration-dumper \
+  --connector databricks \
+  --url https://WORKSPACE_HOST \
+  --warehouse WAREHOUSE_ID \
+  --database CATALOG_1,CATALOG_2 \
+  --output databricks-metadata.zip
+```
+
+如果 Databricks 環境使用自行管理的外部 Hive Metastore，請使用 `hiveql` 連接器擷取中繼資料：
+
+```
+dwh-migration-dumper \
+  --connector hiveql \
+  --host METASTORE_HOST \
+  --port 9083 \
+  --output hive-metadata.zip
+```
+
+更改下列內容：
+
+* `WORKSPACE_HOST`：Databricks 工作區的主機名稱。
+* `DATABRICKS_TOKEN`：用於驗證使用者或服務主體的 Databricks PAT 或 OAuth 權杖。
+* `WAREHOUSE_ID`：Databricks SQL 倉儲的 ID，用於從 `hive_metastore` 目錄擷取中繼資料。
+* `CATALOG_1` 和 `CATALOG_2`：要擷取的目錄名稱。
+* `METASTORE_HOST`：：自行管理的
+  Hive Metastore Thrift 伺服器主機名稱或 IP 位址。
+
+#### 上傳中繼資料封存檔
+
+產生中繼資料 ZIP 封存檔後，請將其上傳至包含 SQL 翻譯輸入檔案的 Cloud Storage bucket。如需操作說明，請參閱「[將輸入檔案上傳至 Cloud Storage](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator?hl=zh-tw#upload-files)」。如要進一步瞭解翻譯工具如何使用擷取的 Databricks 中繼資料，請參閱「[擷取的 Databricks 中繼資料封存](https://docs.cloud.google.com/bigquery/docs/migration/databricks-sql?hl=zh-tw#schema-mapping-profile)」。
+
 ### Azure Synapse 或 Microsoft SQL Server
 
 如要允許 `dwh-migration-dumper` 工具連線至 Azure Synapse 或 Microsoft SQL Server，請前往 Microsoft 的[下載頁面](https://docs.microsoft.com/en-us/sql/connect/jdbc/microsoft-jdbc-driver-for-sql-server?view=sql-server-ver15)下載 JDBC 驅動程式。
@@ -382,7 +465,7 @@ JAVA_OPTS="-Djavax.security.auth.useSubjectCredsOnly=false" \
 
 | **名稱** | **預設值** | **說明** | **必要** |
 | --- | --- | --- | --- |
-| `--connector` |  | 要使用的連接器名稱，在本例中為 **sqlserver**。 | 是 |
+| `--connector` |  | 要使用的連接器名稱，在本例中為 `sqlserver`。 | 是 |
 | `--database` |  | 要連線的資料庫名稱。 | 是 |
 | `--driver` |  | 這個連線要使用的驅動程式 JAR 檔案絕對或相對路徑。您可以指定多個驅動程式 JAR 檔案，並以半形逗號分隔。 | 是 |
 | `--host` | localhost | 資料庫伺服器的主機名稱或 IP 位址。 | 否 |
@@ -412,7 +495,7 @@ dwh-migration-dumper \
 
 | **名稱** | **預設值** | **說明** | **必要** |
 | --- | --- | --- | --- |
-| `--connector` |  | 要使用的連接器名稱，在本例中為 **greenplum**。 | 是 |
+| `--connector` |  | 要使用的連接器名稱，在本例中為 `greenplum`。 | 是 |
 | `--database` |  | 要連線的資料庫名稱。 | 是 |
 | `--driver` |  | 這個連線要使用的驅動程式 JAR 檔案絕對或相對路徑。您可以指定多個驅動程式 JAR 檔案，並以半形逗號分隔。 | 是 |
 | `--host` | localhost | 資料庫伺服器的主機名稱或 IP 位址。 | 否 |
@@ -436,13 +519,13 @@ dwh-migration-dumper \
 
 ### Netezza
 
-如要允許 `dwh-migration-dumper` 工具連線至 IBM Netezza，您必須取得其 JDBC 驅動程式。您通常可以從 IBM Netezza 設備主機上的 `/nz/kit/sbin` 目錄取得驅動程式。如果找不到，請向系統管理員尋求協助，或參閱 IBM Netezza 說明文件中的「[安裝及設定 JDBC](https://www.ibm.com/docs/en/psfa/latest?topic=configuration-installing-configuring-jdbc)」一節。
+如要允許 `dwh-migration-dumper` 工具連線至 IBM Netezza，您必須取得其 JDBC 驅動程式。您通常可以從 IBM Netezza 設備主機上的 `/nz/kit/sbin` 目錄取得驅動程式。如果找不到，請向系統管理員尋求協助，或參閱 IBM Netezza 說明文件中的「[Installing and Configuring JDBC](https://www.ibm.com/docs/en/psfa/latest?topic=configuration-installing-configuring-jdbc)」(安裝及設定 JDBC)。
 
 下表說明使用擷取工具擷取 IBM Netezza 中繼資料時常用的旗標。如要瞭解所有支援的旗標，請參閱[全域旗標](#global_flags)。
 
 | **名稱** | **預設值** | **說明** | **必要** |
 | --- | --- | --- | --- |
-| `--connector` |  | 要使用的連接器名稱，在本例中為 **netezza**。 | 是 |
+| `--connector` |  | 要使用的連接器名稱，在本例中為 `netezza`。 | 是 |
 | `--database` |  | 要擷取的資料庫清單，以半形逗號分隔。 | 是 |
 | `--driver` |  | 這個連線要使用的驅動程式 JAR 檔案絕對或相對路徑。您可以指定多個驅動程式 JAR 檔案，並以半形逗號分隔。 | 是 |
 | `--host` | localhost | 資料庫伺服器的主機名稱或 IP 位址。 | 否 |
@@ -468,11 +551,11 @@ dwh-migration-dumper \
 
 如要允許 `dwh-migration-dumper` 工具連線至 PostgreSQL，請前往 PostgreSQL 的[下載頁面](https://jdbc.postgresql.org/)下載 JDBC 驅動程式。
 
-下表說明使用擷取工具擷取 PostgreSQL 中繼資料時常用的旗標。如要瞭解所有支援的旗標，請參閱[全域旗標](#global_flags)。
+下表說明使用擷取工具擷取 PostgreSQL 中繼資料時，常用的旗標。如要瞭解所有支援的旗標，請參閱[全域旗標](#global_flags)。
 
 | **名稱** | **預設值** | **說明** | **必要** |
 | --- | --- | --- | --- |
-| `--connector` |  | 要使用的連接器名稱，在本例中為 **postgresql**。 | 是 |
+| `--connector` |  | 要使用的連接器名稱，在本例中為 `postgresql`。 | 是 |
 | `--database` |  | 要連線的資料庫名稱。 | 是 |
 | `--driver` |  | 這個連線要使用的驅動程式 JAR 檔案絕對或相對路徑。您可以指定多個驅動程式 JAR 檔案，並以半形逗號分隔。 | 是 |
 | `--host` | localhost | 資料庫伺服器的主機名稱或 IP 位址。 | 否 |
@@ -504,18 +587,18 @@ dwh-migration-dumper \
 
 | **名稱** | **預設值** | **說明** | **必要** |
 | --- | --- | --- | --- |
-| `--connector` |  | 要使用的連接器名稱，在本例中為 **oracle**。 | 是 |
+| `--connector` |  | 要使用的連接器名稱，在本例中為 `oracle`。 | 是 |
 | `--driver` |  | 這個連線要使用的驅動程式 JAR 檔案絕對或相對路徑。您可以指定多個驅動程式 JAR 檔案，並以半形逗號分隔。 | 是 |
 | `--host` | localhost | 資料庫伺服器的主機名稱或 IP 位址。 | 否 |
-| `--oracle-service` |  | 連線要使用的 Oracle 服務名稱。 | 不一定要明確指定，但您必須指定這個旗標或 `--oracle-sid` 旗標。 |
-| `--oracle-sid` |  | 連線要使用的 Oracle 系統 ID (SID)。 | 不一定要明確指定，但您必須指定這個旗標或 `--oracle-service` 旗標。 |
+| `--oracle-service` |  | 連線要使用的 Oracle 服務名稱。 | 不一定要明確指定，但必須指定這個旗標或 `--oracle-sid` 旗標。 |
+| `--oracle-sid` |  | 連線要使用的 Oracle 系統 ID (SID)。 | 不一定要明確指定，但必須指定這個旗標或 `--oracle-service` 旗標。 |
 | `--password` |  | 資料庫連線要使用的密碼。 | 如未指定，擷取工具會使用安全提示要求提供。 |
 | `--port` | 1521 | 資料庫伺服器的通訊埠。 | 否 |
 | `--user` |  | 資料庫連線要使用的使用者名稱。  您指定的使用者必須具備 `SELECT_CATALOG_ROLE` 角色，才能擷取中繼資料。如要查看使用者是否具備必要角色，請對 Oracle 資料庫執行 `select granted_role from user_role_privs;` 查詢。 | 是 |
 
 #### 範例
 
-以下範例說明如何使用 Oracle 服務進行連線，從指定主機上的 Oracle 資料庫擷取中繼資料：
+下列範例說明如何使用連線的 Oracle 服務，為指定主機上的 Oracle 資料庫擷取中繼資料：
 
 ```
 dwh-migration-dumper \
@@ -534,15 +617,15 @@ dwh-migration-dumper \
 | **名稱** | **預設值** | **說明** | **必要** |
 | --- | --- | --- | --- |
 | `--assessment` |  | 在產生資料庫記錄或擷取中繼資料時，開啟評估模式。`dwh-migration-dumper` 工具用於擷取中繼資料時，會產生 BigQuery 遷移評估所需的中繼資料統計資料。用於查詢記錄時，這項工具會擷取額外資料欄，以便進行 BigQuery 遷移評估。 | 僅供評估。 |
-| `--connector` |  | 要使用的連接器名稱，在本例中為 **snowflake**。 | 是 |
-| `--database` |  | 列出要擷取的資料庫名稱，並以半形逗號分隔。  評估模式不允許使用這個標記。 | 僅供翻譯。 |
+| `--connector` |  | 要使用的連接器名稱，在本例中為 `snowflake`。 | 是 |
+| `--database` |  | 列出要擷取的資料庫名稱，並以半形逗號分隔。  評估模式不允許使用這個旗標。 | 僅用於翻譯。 |
 | `--host` | localhost | 資料庫伺服器的主機名稱或 IP 位址。 | 否 |
-| `--private-key-file` |  | 用於驗證的 RSA 私密金鑰路徑。建議使用 [`SERVICE`](https://docs.snowflake.com/en/user-guide/admin-user-management#types-of-users) 使用者，並採用金鑰組驗證機制。這樣一來，您就能以安全的方式存取 Snowflake 資料平台，不必產生多重驗證權杖。 | 否，如未提供，擷取工具會使用密碼式驗證。 |
+| `--private-key-file` |  | 用於驗證的 RSA 私密金鑰路徑。建議使用 [`SERVICE`](https://docs.snowflake.com/en/user-guide/admin-user-management#types-of-users) 使用者，並採用金鑰組驗證。這樣一來，您就能以安全的方式存取 Snowflake 資料平台，不必產生多重驗證權杖。 | 否，如未提供，擷取工具會使用密碼式驗證。 |
 | `--private-key-password` |  | 建立 RSA 私密金鑰時使用的密碼。 | 否，只有在私密金鑰經過加密時才需要。 |
 | `--password` |  | 資料庫連線要使用的密碼。 | 如未指定，擷取工具會使用安全提示要求提供。不過，建議您改用金鑰組驗證。 |
 | `--query-log-start` |  | 要擷取的查詢記錄開始時間 (含此時間)。會截斷小時以後的資料。這個旗標僅適用於 `snowflake-logs` 連接器。  範例：`--query-log-start "2023-01-01 14:00:00"` | 否 |
 | `--query-log-end` |  | 要擷取的查詢記錄結束時間 (不含)。會截斷小時以後的資料。這個旗標僅適用於 `snowflake-logs` 連接器。  範例：`--query-log-end "2023-01-15 22:00:00"` | 否 |
-| `--role` |  | 用於授權的 Snowflake 角色。如果預設角色具備足夠權限，則技術上可不指定角色，但強烈建議您指定角色 (例如 `ACCOUNTADMIN`)，確保工作階段具備存取 `SNOWFLAKE.ACCOUNT_USAGE` 結構定義所需的權限。詳情請參閱「[使用大型 Snowflake 執行個體](#large-instance)」。 | 否，但強烈建議。 |
+| `--role` |  | 用於授權的 Snowflake 角色。如果預設角色具備足夠權限，則技術上可不指定角色，但強烈建議您指定角色 (例如 `ACCOUNTADMIN`)，確保工作階段具備存取 `SNOWFLAKE.ACCOUNT_USAGE` 結構定義的必要權限。詳情請參閱「[使用大型 Snowflake 執行個體](#large-instance)」。 | 否，但強烈建議。 |
 | `--user` |  | 資料庫連線要使用的使用者名稱。 | 是 |
 | `--warehouse` |  | 用於處理中繼資料查詢的 Snowflake 倉儲。 | 是 |
 
@@ -605,7 +688,7 @@ dwh-migration-dumper \
 `dwh-migration-dumper` 工具會從 Snowflake `INFORMATION_SCHEMA` 讀取中繼資料。不過，從 `INFORMATION_SCHEMA` 擷取的資料量有限。如果執行擷取工具時收到 `SnowflakeSQLException:
 Information schema query returned too much data` 錯誤，請務必採取下列步驟，改為從 `SNOWFLAKE.ACCOUNT_USAGE` 結構定義讀取中繼資料：
 
-1. 在 Snowflake 網頁介面中開啟「Shares」選項。
+1. 在 Snowflake 網頁介面中，開啟「Shares」(共用) 選項。
 2. 從 `SNOWFLAKE.ACCOUNT_USAGE` 共用區建立資料庫：
 
    ```
@@ -635,7 +718,7 @@ Information schema query returned too much data` 錯誤，請務必採取下列�
 
 | **名稱** | **預設值** | **說明** | **必要** |
 | --- | --- | --- | --- |
-| `--connector` |  | 要使用的連接器名稱，在本例中為 **vertica**。 | 是 |
+| `--connector` |  | 要使用的連接器名稱，在本例中為 `vertica`。 | 是 |
 | `--database` |  | 要連線的資料庫名稱。 | 是 |
 | `--driver` |  | 這個連線要使用的驅動程式 JAR 檔案絕對或相對路徑。您可以指定多個驅動程式 JAR 檔案，並以半形逗號分隔。 | 是 |
 | `--host` | localhost | 資料庫伺服器的主機名稱或 IP 位址。 | 否 |
@@ -662,7 +745,7 @@ dwh-migration-dumper \
 
 | **名稱** | **預設值** | **說明** | **必要** |
 | --- | --- | --- | --- |
-| `--connector` |  | 要使用的連接器名稱，在本例中為 **bigquery**。 | 是 |
+| `--connector` |  | 要使用的連接器名稱，在本例中為 `bigquery`。 | 是 |
 | `--database` |  | 要從中擷取中繼資料和查詢記錄的專案清單，以半形逗號分隔。 | 是 |
 | `--schema` |  | 要從中擷取中繼資料和查詢記錄的資料集清單，以半形逗號分隔。 | 是 |
 
@@ -686,20 +769,20 @@ dwh-migration-dumper \
 | `--connector` | 來源系統的連接器名稱。 |
 | `--database` | 使用方式因來源系統而異。 |
 | `--driver` | 連線至來源系統時，要使用的驅動程式 JAR 檔案絕對或相對路徑。您可以指定多個驅動程式 JAR 檔案，並以半形逗號分隔。 |
-| `--dry-run`或`-n` | 顯示擷取工具會執行的動作，但不執行。 |
+| `--dry-run`或`-n` | 顯示擷取工具會執行的動作，但不執行這些動作。 |
 | `--help` | 顯示指令列說明。 |
 | `--host` | 要連線的資料庫伺服器主機名稱或 IP 位址。 |
 | `--jdbcDriverClass` | 可選擇覆寫供應商指定的 JDBC 驅動程式類別名稱。如果您有自訂 JDBC 用戶端，請使用這個選項。 |
-| `--output` | 輸出 ZIP 檔案的路徑。例如：`dir1/dir2/teradata-metadata.zip`。如未指定路徑，輸出檔案會建立在目前使用的目錄中。如果指定目錄路徑，系統會在指定目錄中建立預設 ZIP 檔案名稱。如果目錄不存在，系統會建立目錄。 如要使用 Cloud Storage，請採用下列格式：  `gs://<BUCKET>/<PATH>`。  如要使用 Google Cloud 憑證進行驗證，請參閱「[進行驗證以使用用戶端程式庫](https://docs.cloud.google.com/docs/authentication/client-libraries?hl=zh-tw)」一文。 |
+| `--output` | 輸出 ZIP 檔案的路徑。例如：`dir1/dir2/teradata-metadata.zip`。如未指定路徑，系統會在目前使用的目錄中建立輸出檔案。如果指定目錄路徑，系統會在指定目錄中建立預設 ZIP 檔案名稱。如果目錄不存在，系統會建立目錄。 如要使用 Cloud Storage，請採用下列格式： `gs://<BUCKET>/<PATH>`。  如要使用 Google Cloud 憑證進行驗證，請參閱「[進行驗證以使用用戶端程式庫](https://docs.cloud.google.com/docs/authentication/client-libraries?hl=zh-tw)」。 |
 | `--password` | 資料庫連線要使用的密碼。 |
 | `--port` | 資料庫伺服器的通訊埠。 |
 | `--save-response-file` | 將指令列旗標儲存至 JSON 檔案，方便重複使用。檔案名稱為 `dumper-response-file.json`，會在目前使用的目錄中建立。如要使用回應檔案，請在執行擷取工具時提供檔案路徑，並在路徑前加上 `@`，例如 `dwh-migration-dumper @path/to/dumper-response-file.json`。 |
 | `--schema` | 要擷取的結構定義清單，以半形逗號分隔。  Oracle 不會區分[結構定義](https://docs.oracle.com/cd/B19306_01/server.102/b14196/schema.htm#CFHHBEGH)和建立結構定義的資料庫使用者，因此您可以使用結構定義名稱或使用者名稱搭配 `--schema` 旗標。例如：`--schema schema1,user2,schema3`。 |
-| `--thread-pool-size` | 設定執行緒集區大小，這會影響連線集區大小。執行 `dwh-migration-dumper` 工具的伺服器核心數量，就是執行緒集區的預設大小。  如果擷取工具速度緩慢，或需要更多資源，可以增加使用的執行緒數量。如果伺服器上的其他程序需要更多頻寬，您可以減少使用的執行緒數量。 |
-| `--url` | 資料庫連線要使用的網址，而非 JDBC 驅動程式產生的 URI。  在多數情況下，產生的 URI 應足以滿足需求。只有在需要使用來源平台專屬的 JDBC 連線設定，且該設定尚未由本表列出的任何旗標設定時，才應覆寫產生的 URI。 |
+| `--thread-pool-size` | 設定執行緒集區大小，這會影響連線集區大小。執行 `dwh-migration-dumper` 工具的伺服器核心數量，就是執行緒集區的預設大小。  如果擷取工具速度緩慢，或需要更多資源，可以增加使用的執行緒數量。如果有跡象顯示伺服器上的其他程序需要更多頻寬，您可以減少使用的執行緒數量。 |
+| `--url` | 用於資料庫連線的網址，而非 JDBC 驅動程式產生的 URI。  在多數情況下，產生的 URI 應足以滿足需求。只有在需要使用來源平台專屬的 JDBC 連線設定，且該設定尚未由本表列出的任何旗標設定時，才應覆寫產生的 URI。 |
 | `--user` | 資料庫連線要使用的使用者名稱。 |
 | `--version` | 顯示產品版本。 |
-| `--telemetry` | 收集執行作業效能特性的深入分析資料，例如時間長度、執行次數和資源用量。這個選項預設為啟用。如要停用遙測功能，請將這個旗標設為 `false`。 |
+| `--telemetry` | 收集執行作業效能特徵的深入分析資料，例如時間長度、執行次數和資源用量。這個選項預設為啟用。如要停用遙測功能，請將這個旗標設為 `false`。 |
 
 ## 疑難排解
 
@@ -707,7 +790,7 @@ dwh-migration-dumper \
 
 ### 「記憶體不足」錯誤
 
-`dwh-migration-dumper` 工具終端機輸出內容中的 `java.lang.OutOfMemoryError` 錯誤，通常與處理擷取資料時記憶體不足有關。如要解決這個問題，請增加可用記憶體或減少處理執行緒數量。
+`dwh-migration-dumper` 工具終端機輸出中的 `java.lang.OutOfMemoryError` 錯誤，通常與處理擷取資料時記憶體不足有關。如要解決這個問題，請增加可用記憶體或減少處理執行緒數量。
 
 如要提高記憶體上限，請匯出 `JAVA_OPTS` 環境變數：
 
@@ -731,7 +814,7 @@ dwh-migration-dumper --thread-pool-size=1
 
 ### 處理 `WARN...Task failed` 錯誤
 
-有時您可能會在 `dwh-migration-dumper` 工具終端機輸出內容中看到 `WARN [main] o.c.a.d.MetadataDumper [MetadataDumper.java:107] Task failed: …` 錯誤。擷取工具會向來源系統提交多項查詢，並將每項查詢的輸出內容寫入各自的檔案。如果看到這個問題，表示其中一項查詢失敗。不過，即使其中一項查詢失敗，其他查詢仍會執行。如果看到多個 `WARN` 錯誤，請查看問題詳細資料，確認是否需要修正任何問題，才能正確執行查詢。舉例來說，如果您在執行擷取工具時指定的資料庫使用者沒有讀取所有中繼資料的權限，請改用具備正確權限的使用者再試一次。
+`dwh-migration-dumper` 工具終端機輸出內容有時可能會顯示 `WARN [main] o.c.a.d.MetadataDumper [MetadataDumper.java:107] Task failed: …` 錯誤。擷取工具會向來源系統提交多項查詢，並將每項查詢的輸出內容寫入各自的檔案。如果看到這個問題，表示其中一項查詢失敗。不過，即使其中一項查詢失敗，其他查詢仍會執行。如果看到多個 `WARN` 錯誤，請查看問題詳細資料，確認是否需要修正任何問題，才能正確執行查詢。舉例來說，如果您在執行擷取工具時指定的使用者沒有讀取所有中繼資料的權限，請改用具備正確權限的使用者再試一次。
 
 ### ZIP 檔案毀損
 
@@ -754,7 +837,7 @@ sha256sum --check SHA256SUMS.txt
 (Get-FileHash RELEASE_ZIP_FILENAME).Hash -eq ((Get-Content SHA256SUMS.txt) -Split " ")[0]
 ```
 
-將 `RELEASE_ZIP_FILENAME` 替換為下載的 `dwh-migration-dumper` 指令列解壓縮工具版本 ZIP 檔案名稱，例如 `dwh-migration-tools-v1.0.52.zip`。
+將 `RELEASE_ZIP_FILENAME` 替換為下載的 `dwh-migration-dumper` 指令列擷取工具版本 ZIP 檔案名稱，例如 `dwh-migration-tools-v1.0.52.zip`。
 
 `True` 結果確認核對和驗證成功。
 
@@ -764,7 +847,7 @@ sha256sum --check SHA256SUMS.txt
 
 如要提高彙整 `-Dteradata-logs.query-logs-table` 和 `-Dteradata-logs.sql-logs-table` 旗標指定資料表的效能，您可以在 `JOIN` 條件中加入 `DATE` 類型的額外資料欄。這個資料欄必須在兩個資料表中定義，且必須是分區主索引的一部分。如要加入這個資料欄，請使用 `-Dteradata-logs.log-date-column` 旗標。
 
-以下範例說明如何使用 `-Dteradata-logs.log-date-column` 旗標：
+下列範例說明如何使用 `-Dteradata-logs.log-date-column` 旗標：
 
 ### Bash
 
@@ -786,18 +869,18 @@ dwh-migration-dumper `
 
 ### 超過 Teradata 資料列大小限制
 
-Teradata 15 版的資料列大小上限為 64 KB。如果超過限制，擷取工具會失敗，並顯示下列訊息：
+Teradata 15 版的資料列大小上限為 64 KB。如果超過上限，擷取工具會失敗，並顯示下列訊息：
 
 ```
 [Error 9804] [SQLState HY000] Response Row size or Constant Row size overflow
 ```
 
-如要解決這項錯誤，請將資料列大小上限提高至 1 MB，或將資料列分割成多個資料列：
+如要解決這個錯誤，請將資料列大小上限提高至 1 MB，或將資料列拆分為多個資料列：
 
 * 安裝並啟用 1 MB Perm 和 Response Rows 功能，以及目前的 TTU 軟體。詳情請參閱「[Teradata 資料庫訊息 9804](https://docs.teradata.com/r/Teradata-VantageCloud-Lake-Analytics-Database-Messages/Database-Messages/9804)」。
 * 使用 `-Dteradata.metadata.max-text-length` 和 `-Dteradata-logs.max-sql-length` 旗標，將長查詢文字分割成多個資料列。
 
-下列指令說明如何使用 `-Dteradata.metadata.max-text-length` 旗標，將長查詢文字分割成多列，每列最多 10,000 個字元：
+下列指令說明如何使用 `-Dteradata.metadata.max-text-length` 旗標，將長查詢文字分割成多個資料列，每列最多 10,000 個字元：
 
 ### Bash
 
@@ -835,9 +918,9 @@ dwh-migration-dumper `
 
 ### Oracle 連線問題
 
-在密碼或主機名稱無效等常見情況下，`dwh-migration-dumper` 工具會顯示有意義的錯誤訊息，說明根本問題。不過，在某些情況下，Oracle 伺服器傳回的錯誤訊息可能是一般訊息，難以調查。
+在密碼或主機名稱無效等常見情況下，`dwh-migration-dumper` 工具會顯示有意義的錯誤訊息，說明根本問題。不過，在某些情況下，Oracle 伺服器傳回的錯誤訊息可能過於籠統，難以調查。
 
-其中一個問題是 `IO Error: Got minus one from a read call`。這項錯誤表示與 Oracle 伺服器的連線已建立，但伺服器不接受用戶端，並關閉連線。這類問題通常會在伺服器僅接受 `TCPS` 連線時發生。根據預設，`dwh-migration-dumper` 工具會使用 `TCP` 通訊協定。如要解決這個問題，您必須覆寫 Oracle JDBC 連線網址。
+其中一個問題是 `IO Error: Got minus one from a read call`。這項錯誤表示已與 Oracle 伺服器建立連線，但伺服器不接受用戶端，並關閉連線。這類問題通常會在伺服器僅接受 `TCPS` 連線時發生。根據預設，`dwh-migration-dumper` 工具會使用 `TCP` 通訊協定。如要解決這個問題，您必須覆寫 Oracle JDBC 連線網址。
 
 您可以提供 `url` 旗標，格式如下：`jdbc:oracle:thin:@tcps://HOST_NAME:PORT/ORACLE_SERVICE`，而不是提供 `oracle-service`、`host` 和 `port` 旗標。Oracle 伺服器使用的 `TCPS` 通訊埠編號通常是 `2484`。
 
@@ -859,7 +942,19 @@ dwh-migration-dumper \
 set JAVA_OPTS=-Djavax.net.ssl.trustStore="JKS_FILE_LOCATION" -Djavax.net.ssl.trustStoreType=JKS -Djavax.net.ssl.trustStorePassword="PASSWORD"
 ```
 
-視 Oracle 伺服器設定而定，您可能也需要提供 keyStore 設定。如要進一步瞭解設定選項，請參閱「[SSL With Oracle JDBC Driver](https://www.oracle.com/docs/tech/wp-oracle-jdbc-thin-ssl.pdf)」(搭配 Oracle JDBC 驅動程式使用 SSL)。
+視 Oracle 伺服器設定而定，您可能也需要提供 KeyStore 設定。如要進一步瞭解設定選項，請參閱 [Oracle Database JDBC 開發人員指南](https://docs.oracle.com/en/database/oracle/oracle-database/19/jjdbc/client-side-security.html)。
+
+### `dwh-migration-dumper` 工具從 Databricks Unity Catalog 傳回的資料表數量少於預期
+
+從 Databricks Unity Catalog 擷取中繼資料時，`dwh-migration-dumper` 工具只會傳回驗證使用者或服務主體有權瀏覽的目錄、結構定義和資料表。
+
+如要解決這個問題，請授予驗證主體 metastore 管理員權限，或針對要擷取的每個目錄授予 `USE CATALOG`、`USE SCHEMA` 和 `BROWSE` 權限，然後重新執行 `dwh-migration-dumper` 工具。如要進一步瞭解必要權限，請參閱「[必要的 Databricks 權限](https://docs.cloud.google.com/bigquery/docs/generate-metadata?hl=zh-tw#databricks-permissions)」。
+
+### Databricks 上的 `dwh-migration-dumper` 工具失敗，並顯示 HTTP 429 頻率限制錯誤
+
+從大型 Databricks Unity Catalog 或舊版 Hive metastore 擷取中繼資料時，`dwh-migration-dumper` 工具可能會遇到 Databricks REST API 的 `HTTP 429 Too Many Requests` 回應。
+
+根據預設，`dwh-migration-dumper` 工具會限制要求，並以指數輪詢方式重試受頻率限制的呼叫。如果擷取作業仍因 `HTTP 429` 錯誤而失敗，請在 API 活動較少的時段重新執行 `dwh-migration-dumper` 工具，或使用 `--database` 旗標篩選擷取作業，只擷取特定目錄。
 
 ## 後續步驟
 
@@ -872,11 +967,11 @@ set JAVA_OPTS=-Djavax.net.ssl.trustStore="JKS_FILE_LOCATION" -Djavax.net.ssl.tru
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-11 (世界標準時間)。
+上次更新時間：2026-11-24 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-11 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-24 (世界標準時間)。"],[],[]]

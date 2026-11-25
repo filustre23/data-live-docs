@@ -193,5 +193,4 @@ CAST(bytes_expression AS STRING FORMAT format_string_expression)
 
 You can cast a sequence of bytes to a string with a format element in the
 format string. If the bytes can't be formatted with a
-format element, an error is returned. If the sequence of bytes is `NULL`, the
-result is
+format element, an error is returned. If the se

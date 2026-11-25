@@ -164,4 +164,4 @@ FROM
 
 以下範例會從 [`census_bureau_usa`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&%3Bd=census_bureau_usa&%3Bpage=dataset&hl=zh-tw) 資料集中的 `population_by_zip_2010` 資料表，擷取 `INFORMATION_SCHEMA.TABLES` 檢視表的 `table_name` 和 `ddl` 資料欄。這個資料集是 BigQuery [公開資料集方案](https://docs.cloud.google.com/bigquery/public-data?hl=zh-tw)的一部分。
 
-由於您要查詢的資料表位於另一個專案中，因此您應使用下列格式將專案 ID 新增至資料集：`` `project_id`.dataset.INFORMATION_SCHEMA.view ``。在本範例中，這個值為 `` `bigquery-public-d ``
+由於您要查詢的資料表位於另一個專案中，因此您應使用下列格式將專案 ID 新增至資料集：`` `project_id`.dataset.INFORMATION_SCHEMA.view ``。

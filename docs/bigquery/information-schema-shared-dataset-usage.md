@@ -240,4 +240,4 @@ FROM `myproject`.`region-us`.INFORMATION_SCHEMA.SHARED_DATASET_USAGE
 WHERE shared_resource_type = 'TABLE_VALUED_FUNCTION'
 ```
 
-輸出結果會與下列內容相似：
+輸出結果

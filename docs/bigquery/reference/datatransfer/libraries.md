@@ -49,7 +49,7 @@ BOMs, see [The Google Cloud Platform Libraries BOM](https://cloud.google.com/jav
     <dependency>
       <groupId>com.google.cloud</groupId>
       <artifactId>libraries-bom</artifactId>
-      <version>26.72.0</version>
+      <version>26.90.0</version>
       <type>pom</type>
       <scope>import</scope>
     </dependency>
@@ -68,14 +68,16 @@ If you are using [Gradle](https://gradle.org/),
 add the following to your dependencies:
 
 ```
-implementation 'com.google.cloud:google-cloud-bigquerydatatransfer:2.80.0'
+implementation platform('com.google.cloud:libraries-bom:26.90.0')
+
+implementation 'com.google.cloud:google-cloud-bigquerydatatransfer'
 ```
 
 If you are using [sbt](https://www.scala-sbt.org/), add
 the following to your dependencies:
 
 ```
-libraryDependencies += "com.google.cloud" % "google-cloud-bigquerydatatransfer" % "2.80.0"
+libraryDependencies += "com.google.cloud" % "google-cloud-bigquerydatatransfer" % "2.102.0"
 ```
 
 If you're using Visual Studio Code or IntelliJ, you can add client libraries to your
@@ -122,6 +124,14 @@ gem install google-cloud-bigquery-data_transfer
 ```
 
 For more information, see [Setting Up a Ruby Development Environment](/ruby/docs/setup).
+
+### Rust
+
+```
+cargo add google-cloud-bigquery-datatransfer-v1
+```
+
+For more information, see [Get started with Rust](/rust/docs/quickstart).
 
 ## Set up authentication
 
@@ -190,15 +200,5 @@ namespace GoogleCloudSamples
             ProjectName project = ProjectName.FromProject(projectId);
             var sources = client.ListDataSources(project);
             Console.WriteLine("Supported Data Sources:");
-            foreach (DataSource source in sources)
-            {
-                Console.WriteLine(
-                    $"{source.DataSourceId}: " +
-                    $"{source.DisplayName} ({source.Description})");
-            }
-        }
-    }
-}
+            foreach (DataSource source in sources
 ```
-
-### Go

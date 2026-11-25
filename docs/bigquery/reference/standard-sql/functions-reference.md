@@ -258,5 +258,5 @@ FUNC(named_argument=>x).  # Some function
 (x).FUNC()  # Error: The first argument can't be a named argument.
 
 CAST(x AS INT64)
-(x).CAST(AS INT64)
+(x).CAST(AS INT64
 ```

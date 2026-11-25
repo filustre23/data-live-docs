@@ -460,5 +460,4 @@ Search Ads 360 API 資源：[客戶](https://developers.google.com/search-ads/re
 
 | Search Ads 360 欄位名稱 | 說明 |
 | --- | --- |
-| customer\_engine\_id | 外部引擎帳戶中的帳戶 ID。 |
-|  |
+| customer\_eng |

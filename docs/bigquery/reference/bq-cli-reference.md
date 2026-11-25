@@ -286,6 +286,4 @@ gcloud config unset auth/impersonate_service_account
 :   如果設為 `false`，則會要求不含 Google 雲端硬碟範圍的新 OAuth 權杖。預設值為 `true`，會要求具有雲端硬碟範圍的新 OAuth 權杖。如要在使用使用者帳戶驗證時將這個旗標設為 `false`，則必須將 `--use_google_auth` 旗標設為 `false`。
 
 **`--enable_resumable_uploads={true|false}`**
-:   針對從本機檔案載入資料的工作，啟用透過 HTTP 支援續傳的上傳作業。預設值為 `true`。
-
-**`--fingerprint_job_`**
+:   針對從本機檔案載入資料的工作，啟用透過 HTTP 支援續傳的上傳作業。預設值為 `tru`

@@ -220,4 +220,4 @@ bq mk
 
 請使用 [`projects.locations.transferConfigs.create` 方法](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create?hl=zh-tw)，並提供 [`TransferConfig` 資源](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs?hl=zh-tw#TransferConfig)的例項。
 
-儲存移轉設定時，PostgreSQL 連接器會根據您的排程選項，自動觸發移轉作業。每次執行移轉作業時，PostgreSQL 連接器都會將 PostgreSQL 中的所有可用
+儲存移轉設定時，PostgreSQL 連接器會根據您的排程選項，自動觸發移轉作業。每次

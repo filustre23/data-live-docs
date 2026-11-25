@@ -74,6 +74,9 @@ In order to successfully import dbt MetricFlow files into Hex, the following con
        ```
 
        - dtype is one of: numeric, string, boolean, date, timestamp, timestamptz
+3. **Use unique `primary` and `unique` entity names across semantic models**
+
+   In Hex, entity names declared as `primary` or `unique` must be unique across semantic models in the same semantic project. If these entity names are duplicated, dependent metrics (including derived metrics) can be skipped during import.
 
 ## Supported Features[​](#supported-features "Direct link to Supported Features")
 

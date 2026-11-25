@@ -499,4 +499,4 @@ columns chosen for the current tree.
 
 **Arguments**
 
-If you aren't running hyperparameter tuning, then you can specify a `FLOAT64</`
+If you aren't running hype

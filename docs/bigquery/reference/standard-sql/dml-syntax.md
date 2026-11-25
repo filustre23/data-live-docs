@@ -297,8 +297,5 @@ This is the `Warehouse` table before you run the query:
 This is the `Warehouse` table after you run the query:
 
 ```
-+--------------+-------+
-|  warehouse   | state |
-+--------------+-------+
-| warehouse #1
++-------
 ```

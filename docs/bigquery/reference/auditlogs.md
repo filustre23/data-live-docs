@@ -427,5 +427,3 @@ The following audit logs are associated with methods belonging to
 * **Method is a long-running or streaming operation**:
   No.
 * **Filter for this method**: `protoPayload.methodName="jobservice.cancel"`
-
-#### `getqueryresults`

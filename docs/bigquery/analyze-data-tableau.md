@@ -93,7 +93,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
    **啟用 API 所需的角色**
 
-   您必須具備 `serviceusage.services.enable` 權限，才能啟用 API。如果您建立了專案，可能已透過擁有者角色 (`roles/owner`) 取得這項權限。否則，您可以透過 Service Usage 管理員角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
+   如要啟用 API，您必須具備 `serviceusage.services.enable` 權限。如果您建立了專案，可能已透過擁有者角色 (`roles/owner`) 取得這項權限。否則，您可以透過 Service Usage 管理員角色 (`roles/serviceusage.serviceUsageAdmin`) 取得這項權限。[瞭解如何授予角色](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)。
 
    [啟用 API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery&hl=zh-tw)
 
@@ -103,9 +103,9 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 如要取得建立資料集、建立資料表、複製資料、查詢資料及建立 BI Engine 預留項目所需的權限，請要求管理員授予您專案的下列 IAM 角色：
 
-* 執行複製工作和查詢工作：[BigQuery 工作使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.jobUser)  (`roles/bigquery.jobUser`)
-* 建立資料集、建立資料表、將資料複製到資料表，以及查詢資料表：[BigQuery 資料編輯者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataEditor)  (`roles/bigquery.dataEditor`)
-* 建立 BI Engine 預留項目：[BigQuery 資源管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.resourceAdmin)  (`roles/bigquery.resourceAdmin`)
+* 執行複製工作和查詢工作：[BigQuery 工作使用者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.jobUser) (`roles/bigquery.jobUser`)
+* 建立資料集、建立資料表、將資料複製到資料表，以及查詢資料表：[BigQuery 資料編輯者](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.dataEditor) (`roles/bigquery.dataEditor`)
+* 建立 BI Engine 預留項目：[BigQuery 資源管理員](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery?hl=zh-tw#bigquery.resourceAdmin) (`roles/bigquery.resourceAdmin`)
 
 如要進一步瞭解如何授予角色，請參閱「[管理專案、資料夾和組織的存取權](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=zh-tw)」。
 
@@ -123,14 +123,13 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 2. 點選左側窗格中的 explore「Explorer」。
 
    如果沒有看到左側窗格，請按一下 last\_page「Expand left pane」(展開左側窗格)，開啟窗格。
-3. 在「Explorer」窗格中，點選專案。
-4. 在詳細資料窗格中，依序點選 more\_vert「View actions」(查看動作) 和「Create dataset」(建立資料集)。
-5. 在「Create dataset」(建立資料集) 頁面執行下列操作：
+3. 在「Explorer」窗格中，依序點選專案旁的 more\_vert「View actions」(查看動作) 和「Create dataset」(建立資料集)。
+4. 在「Create dataset」(建立資料集) 頁面執行下列操作：
 
    * 在「Dataset ID」(資料集 ID) 中輸入 `biengine_tutorial`。
    * 在「Data location」(資料位置) 中選擇「us (multiple regions in United States)」(us (多個美國區域))，也就是儲存公開資料集的[多區域位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw#multi-regions)。
-   * 在本教學課程中，您可以選取「Enable table expiration」(啟用資料表到期時間)，然後指定資料表到期前的天數。
-6. 讓其他設定維持在預設狀態，然後按一下 [Create dataset] (建立資料集)。
+   * 選用：如要設定預設資料表到期時間，請展開「Advanced options」(進階選項) 區段，然後選取「Enable table expiration」(啟用資料表到期時間)。在「Default maximum table age」(預設資料表存在時間上限) 欄位中，輸入資料表到期前的天數。
+5. 讓其他設定維持在預設狀態，然後按一下 [Create dataset] (建立資料集)。
 
 ## 複製公開資料集的資料來建立資料表
 
@@ -152,13 +151,17 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 6. 在詳細資料窗格中，依序點選**「更多」>「建立資料表副本」**。
 7. 在「Copy table」(複製資料表) 對話方塊的「Destination」(目的地) 部分，執行下列操作：
 
-   * 在「Project」(專案) 部分，點選「Browse」(瀏覽)，然後選取您的專案。
+   * 在「Project」(專案) 部分，按一下「Browse」(瀏覽)，然後選取您的專案。
    * 在「資料集」部分，選取「biengine\_tutorial」。
    * 在「Table」(資料表) 中輸入 `311_service_requests_copy`。
 8. 點選「複製」。
-9. 選用步驟：複製工作完成後，請依序展開
-   **「`PROJECT_NAME`」>「biengine\_tutorial」**，然後
-   點選**「311\_service\_requests\_copy」>「預覽」**，驗證資料表內容。將 **`PROJECT_NAME`** 替換為本教學課程的 Google Cloud 專案名稱。
+9. 選用：複製工作完成後，請驗證資料表內容：
+
+   1. 在「Explorer」窗格中展開專案，然後點選「資料集」。
+   2. 按一下 [`biengine_tutorial`]。
+   3. 在**「Overview」(總覽) >「Tables」(資料表)** 分頁中，按一下
+      **`311_service_requests_copy`**。
+   4. 點選「預覽」分頁標籤，
 
 ## 建立 BI Engine 預留項目
 
@@ -166,36 +169,36 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
    [前往「BI Engine」頁面](https://console.cloud.google.com/bigquery/admin/bi-engine?hl=zh-tw)
 
-   **注意：** 如果系統提示您啟用 **BigQuery Reservation API**，請點選「啟用」。
+   **注意：**如果系統提示您啟用 **BigQuery Reservation API**，請點選「啟用」。
 2. 按一下 add「Create reservation」(建立預留項目)。
 3. 在「Create Reservation」(建立預留項目) 頁面中，設定 BI Engine 預留項目：
 
    * 在「Project」(專案) 清單中，確認 Google Cloud 專案。
    * 在「Location」(位置) 清單中選取位置。位置應與您要查詢的[資料集位置](https://docs.cloud.google.com/bigquery/docs/locations?hl=zh-tw)相符。
-   * 將「GiB of Capacity」(容量 (GiB)) 滑桿調整至要預留的記憶體容量。以下範例將容量設為 2 GiB。上限為 250 GiB。
+   * 將「GiB of Capacity」(容量 (GiB)) 滑桿調整至要預留的記憶體容量。以下範例會將容量設為 2 GiB。上限為 250 GiB。
 4. 點選「下一步」。
 5. 在「Preferred Tables」(偏好資料表) 部分，您可以指定要使用 BI Engine 加速的資料表。如要找出資料表名稱，請按照下列步驟操作：
 
    1. 在「Table Id」(資料表 ID) 欄位中，輸入要由 BI Engine 加速的資料表名稱部分，例如 `311`。
    2. 從建議名稱清單中選取資料表名稱。
 
-      只有指定的資料表才能加速。如未指定偏好資料表，所有專案查詢都可加速。
+      只有指定的資料表符合加速條件。如未指定偏好的資料表，所有專案查詢都符合加速資格。
 6. 點選「下一步」。
 7. 在「確認並提交」部分，詳閱協議內容。
 8. 如果您接受協議條款，請按一下「建立」。
 
-確認預留項目後，詳細資料會顯示在「Reservations」(預留項目) 頁面。
+確認預留項目後，詳細資料會顯示在「Reservations」(預留項目) 頁面上。
 
 ## 透過 Tableau Desktop 連結資料集
 
-如要從 Tableau Desktop 連線至資料集，您必須在 Tableau Desktop 中執行一些步驟，然後在 BI Engine 中執行一些步驟。
+如要從 Tableau Desktop 連線至資料集，您必須先在 Tableau Desktop 中執行一些步驟，然後在 BI Engine 中執行一些步驟。
 
 ### 在 Tableau 中採取的步驟
 
 1. 啟動 [Tableau Desktop](https://www.tableau.com/products/desktop)。
-2. 在「Connect」(連結) 下方，選取「Google BigQuery」。
+2. 在「Connect」下方，選取「Google BigQuery」。
 3. 在開啟的分頁中，選取要存取的 BigQuery 資料所屬帳戶。
-4. 如果尚未登入，請輸入電子郵件地址或電話號碼，選取「下一步」，然後輸入密碼。
+4. 如果尚未登入，請輸入電子郵件地址或電話號碼，選取「Next」(下一步)，然後輸入密碼。
 5. 選取「接受」。
 
 Tableau 現在可以存取 BigQuery 資料。
@@ -211,14 +214,14 @@ Tableau 現在可以存取 BigQuery 資料。
 
 將資料來源新增至報表後，下一步是建立圖表。
 
-建立圖表，顯示各社區的主要申訴案件：
+建立圖表，顯示各社區的主要申訴類型：
 
 1. 在 Google Cloud 控制台中，按一下「New worksheet」(新增工作表)。
 2. 將「維度」設為「Complaint Type」。
-3. 根據名為 `neighborhood` 的維度進行篩選。
+3. 根據名為 `neighborhood` 的維度篩選。
 4. 在「測量指標」下方，選取「Number of Records」。
 5. 在「Neighborhood」篩選器上按一下滑鼠右鍵，然後點選「Edit Filter」。
-6. 新增篩選器來排除空值：選取「空值」**Null**。
+6. 新增篩選器來排除空值：選取「Null」**Null**。
 7. 按一下 [確定]。
 
 詳情請參閱 [Tableau 說明文件](https://help.tableau.com/current/pro/desktop/en-us/examples_googlebigquery.htm)。
@@ -227,7 +230,7 @@ Tableau 現在可以存取 BigQuery 資料。
 
 為了避免系統向您的 Google Cloud 帳戶收取本頁面所用資源的費用，請按照下列步驟操作。
 
-如要避免系統向您的 Google Cloud 帳戶收取本快速入門導覽課程所用資源的費用，您可以刪除專案、刪除 BI Engine 預留項目，或同時刪除兩者。
+如要避免系統向您的 Google Cloud 帳戶收取本快速入門導覽課程所用資源的費用，您可以刪除專案、刪除 BI Engine 預留項目，或兩者都刪除。
 
 ### 刪除專案
 
@@ -258,8 +261,8 @@ Tableau 現在可以存取 BigQuery 資料。
 
    [前往「BI Engine」頁面](https://console.cloud.google.com/bigquery/admin/bi-engine?hl=zh-tw)
 
-   **注意：** 如果系統提示您啟用 **BigQuery Reservation API**，請點選「啟用」。
-2. 在「預留項目」部分，找出您的預留項目。
+   **注意：**如果系統提示您啟用 **BigQuery Reservation API**，請點選「啟用」。
+2. 在「Reservations」(預留項目) 部分，找出您的預留項目。
 3. 在「Actions」(動作) 欄中，按一下預留項目右側的 more\_vert 圖示，然後選擇「Delete」(刪除)。
 4. 在「Delete reservation?」(要刪除預留項目嗎？) 對話方塊中，輸入「Delete」，然後按一下「DELETE」(刪除)。
 
@@ -271,11 +274,11 @@ Tableau 現在可以存取 BigQuery 資料。
 the app is blocked
 ```
 
-如要解決這項錯誤，請確認使用者獲派的角色具備將 Tableau 連結至 BigQuery 的所有[必要權限](#required_permissions)。如果問題仍未解決，請將使用者新增至 [OAuth 設定檢視者角色](https://docs.cloud.google.com/iam/docs/roles-permissions/oauthconfig?hl=zh-tw#oauthconfig.viewer) (`roles/oauthconfig.viewer`)。
+如要解決這項錯誤，請確認使用者獲派的角色具備將 Tableau 連結至 BigQuery 的所有[必要權限](#required_permissions)。如果問題持續發生，請將使用者新增至 [OAuth 設定檢視者角色](https://docs.cloud.google.com/iam/docs/roles-permissions/oauthconfig?hl=zh-tw#oauthconfig.viewer) (`roles/oauthconfig.viewer`)。
 
 ## 後續步驟
 
-* 如需 BI Engine 總覽，請參閱「[BI Engine 簡介](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro?hl=zh-tw)」。
+* 如要查看 BI Engine 總覽，請參閱「[BI Engine 簡介](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro?hl=zh-tw)」。
 
 
 
@@ -284,11 +287,11 @@ the app is blocked
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-11 (世界標準時間)。
+上次更新時間：2026-11-23 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-11 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-23 (世界標準時間)。"],[],[]]

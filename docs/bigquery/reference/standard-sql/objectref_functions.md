@@ -343,5 +343,4 @@ your query accesses object data as `ObjectRef` values.
 ```
 OBJ.LIST(
   uri
-  [,
 ```

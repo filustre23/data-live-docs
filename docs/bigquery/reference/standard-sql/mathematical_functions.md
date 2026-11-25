@@ -237,9 +237,5 @@ the two arguments to determine the quadrant. The return value is in the range
 ## `ATANH`
 
 ```
-ATANH(X)
+ATANH(X
 ```
-
-**Description**
-
-C

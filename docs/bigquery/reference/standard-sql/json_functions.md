@@ -243,7 +243,3 @@ Arguments:
 `INT64`
 
 **Examples**
-
-```
-SELECT
-```

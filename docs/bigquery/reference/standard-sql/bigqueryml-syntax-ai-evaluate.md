@@ -20,10 +20,9 @@ reference time series based on historical data, or
 [TabFM](/bigquery/docs/tabfm-model) predicted data against
 ground truth data.
 
-For example, suppose you have
-tables that contain data about car rentals each day. The following query
-returns statistics about how well the model predicts car rentals in the current
-year based on the previous year:
+For example, suppose you have tables that contain data about car rentals each
+day. The following query returns statistics about how well the model predicts
+car rentals in the current year based on the previous year:
 
 ```
 SELECT *
@@ -177,6 +176,16 @@ FROM
 
 ### TabFM
 
+**Preview**
+
+This product or feature is
+subject to the "Pre-GA Offerings Terms" in the General Service Terms section
+of the [Service Specific
+Terms](/terms/service-terms#1).
+Pre-GA products and features are available "as is" and might have limited support.
+For more information, see the
+[launch stage descriptions](https://cloud.google.com/products/#product-launch-stages).
+
 ```
 SELECT
   *
@@ -185,6 +194,7 @@ FROM
   { TABLE TRAINING_TABLE | (TRAINING_QUERY)  },
   { TABLE PREDICTION_TABLE | (PREDICTION_QUERY)  },
   label_col => 'LABEL_COL'
+  [, n_ensembles => NUM_ENSEMBLES]
   )
 ```
 
@@ -192,21 +202,27 @@ FROM
 
 `AI.EVALUATE` takes the following arguments:
 
-* `TRAINING_TABLE | TRAINING_QUERY`: the table or query
-  that contains the training data. The table or query result must contain a
-  column named `label` or the column that you specify in the `LABEL_COL`
-  argument. Every other column is considered a feature column. The feature and
-  label columns must be one of the following types: `STRING`, `BOOL`,
-  `INT64`, `FLOAT64`, `NUMERIC` or `BIGNUMERIC`.
+* `TRAINING_TABLE | TRAINING_QUERY`: the table or
+  query that contains the training data. All feature columns in
+  `TRAINING_TABLE` (except `label_col`) must be present in
+  `PREDICTION_TABLE` with the exact same data type. The table or query
+  result must contain a column named `label` or the column that you specify
+  in the `LABEL_COL` argument. Every other column is considered a feature
+  column. The feature and label columns must be one of the following types:
+  `STRING`, `BOOL`, `INT64`, `FLOAT64`, `NUMERIC` or `BIGNUMERIC`.
 * `PREDICTION_TABLE | PREDICTION_QUERY`: the table or
   query that contains the data to evaluate. The table or query result
   must contain all of the feature columns in the training data and can
   optionally contain additional columns.
 * `LABEL_COL`: a `STRING` value that specifies
   the name of the label column in the training data. You must provide this
-  argument for TabFM evaluation. If the column is of type `STRING` or `BOOL`,
-  then classification is evaluated. If the column is of type `INT64`, `FLOAT64`,
-  `NUMERIC` or `BIGNUMERIC`, then regression is evaluated.
+  argument for TabFM evaluation. If the column is of type `STRING` or
+  `BOOL`, then classification is evaluated. If the column is of type
+  `INT64`, `FLOAT64`, `NUMERIC` or `BIGNUMERIC`, then regression is
+  evaluated.
+* `NUM_ENSEMBLES`: an `INT64` value
+  between `1` and `32` that specifies the number of ensemble members to use
+  for evaluation. The default value is `4`.
 
 ## Output
 
@@ -332,8 +348,5 @@ SELECT *
 FROM
   AI.EVALUATE(
     (SELECT * FROM citibike_trips WHERE date < '2016-07-01'),
-    (SELECT * FROM citibike_trips WHERE date >= '2016-07-01'),
-    data_col => 'num_trips',
-    timestamp_col => 'date',
-    id_cols => ['usertype'<
+    (SELECT
 ```

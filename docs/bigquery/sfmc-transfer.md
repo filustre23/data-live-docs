@@ -253,4 +253,4 @@ bq mk
 
 如要輪替用戶端密鑰，請按照下列步驟操作：
 
-1. 在已安裝的套件設定中，[產生並暫存用](https://developer.salesforce.com/docs/marketing/marketing-cloud/guide/rotate-oauth2-secret.html)
+1. 在已安裝的套件設定中，

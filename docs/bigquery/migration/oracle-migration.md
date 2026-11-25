@@ -157,4 +157,4 @@ Oracle 提供[監聽器](https://docs.oracle.com/database/121/NETAG/listenercfg.
 
 Oracle 會根據資料庫版本和[資料庫選項](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/dblic/Licensing-Information.html#GUID-B6113390-9586-46D7-9008-DCC9EDA45AB4) (例如 RAC、多租戶、Active Data Guard、分區、記憶體內、Real Application Testing、GoldenGate、Spatial and Graph) 的核心數量，收取[授權](https://www.oracle.com/assets/technology-price-list-070617.pdf)和支援費用。
 
-BigQuery 提供彈性的[定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw)方案，依據儲存空間、查詢和串流資料即時插入用量計費。BigQuery 提供[依運算資源計價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#capacity_compute_analysis_pricing)的模式，適合需要預估特定區域費用和運算單元資源的客戶。用於串流資料即時插入和載入作業的運算單元，不會計入專案運算單元容量。如要決定要為資料倉儲購買多少個運算單元，
+BigQuery 提供彈性的[定價](https://cloud.google.com/bigquery/pricing?hl=zh-tw)方案，依據儲存空間、查詢和串流資料即時插入用量計費。BigQuery 提供[依運算資源計價](https://cloud.google.com/bigquery/pricing?hl=zh-tw#capacity_compute_analysis_pricing)的模式，適合需要預估特定區域費用和運算單元資源的客戶。用於串流資料即時插入和

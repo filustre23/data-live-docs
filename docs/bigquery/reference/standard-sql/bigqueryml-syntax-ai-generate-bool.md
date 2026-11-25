@@ -319,5 +319,5 @@ and select the `result` field in the output by running the following query:
 SELECT
   uri,
   OBJ.GET_READ_URL(ref).url AS signed_url,
-  AI.GENERATE_BOOL(("Is this cat food?",
+  AI.GENERATE_BOOL(("Is this cat
 ```

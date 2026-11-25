@@ -238,4 +238,4 @@ This enables 'DATA\_READ' and 'DATA\_WRITE' logging, while exempting [jose@examp
 
 | Fields | |
 | --- | --- |
-| `logType` | `enum (LogType)`  The log type that this conf |
+| `logType` | `enum (` |

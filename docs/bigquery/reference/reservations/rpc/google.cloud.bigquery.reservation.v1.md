@@ -109,4 +109,4 @@ A capacity commitment is a way to purchase compute capacity for BigQuery jobs (i
 
 | GetBiReservation |
 | --- |
-| `rpc GetBiReservation(GetBiReservationRequest) returns (BiReservation)`  Retrieves a BI reservation.  Authorization scopes  Requires one of the following OAuth scopes:   * `https://www.googlea` |
+| `rpc GetBiReservation(GetBiReservationRequest) returns (BiReservation)`  Retrieves a BI reservation.  Authorization scopes  Requires one of the followi |

@@ -228,5 +228,5 @@ func main() {
 	ctx := context.Background()
 	ahubClient, err := analyticshub.NewClient(ctx)
 	if err != nil {
-		log.Fatalf("NewClient: %v", err)
+		log.Fatalf("NewClient: %v",
 ```

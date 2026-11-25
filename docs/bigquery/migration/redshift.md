@@ -179,4 +179,4 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 您必須擁有 Amazon S3 bucket，才能做為暫存區，將 Amazon Redshift 資料移轉至 BigQuery。如需詳細操作說明，請參閱 [Amazon 說明文件](https://aws.amazon.com/premiumsupport/knowledge-center/create-access-key/)。
 
-1. 建議您建立專屬的 AWS IAM 使用者，並僅授予該使用者 Amazon Redshift 的讀取權限，以及 Amazon S3 的讀取和寫入權限。如要完成這個步驟，您可以套用下列政策：
+1. 建議您建立專屬的 AWS IAM 使用者，並僅授予該使用者 Amazon Redshift 的讀取權限，以及 Amazon S3 的讀取和寫入權限。如要完成這個步驟，您可以套用下列政策

@@ -484,5 +484,4 @@ HPARAM_TUNING_OBJECTIVES = { 'MEAN_ABSOLUTE_ERROR' | 'MEAN_SQUARED_ERROR' | 'MEA
 
 **Description**
 
-The hyperparameter tuning objective for the model; only one objective is
-supported. If you
+The hype

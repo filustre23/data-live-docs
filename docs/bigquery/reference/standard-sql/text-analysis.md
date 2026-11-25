@@ -488,5 +488,5 @@ SELECT TEXT_ANALYZE(
     ]
   }
   '''
-) AS results
+) AS
 ```

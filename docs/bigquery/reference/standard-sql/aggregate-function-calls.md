@@ -243,5 +243,5 @@ SELECT
   COUNT(*) AS total_rows,
   COUNT(* WHERE x IS NOT NULL) AS filtered_rows,
   AVG(x) AS avg_x
-FROM UNNEST([1, 2, 3, 4, 5, NULL])
+FROM UNNEST([1, 2, 3, 4, 5, NULL
 ```

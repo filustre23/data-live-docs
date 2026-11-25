@@ -137,5 +137,5 @@ WHERE
   AND res.period_start
     BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 DAY)
         AND CURRENT_TIMESTAMP()
-  AND res.reservation_id = 'YOUR_RE
+  AND res.reservation_id =
 ```

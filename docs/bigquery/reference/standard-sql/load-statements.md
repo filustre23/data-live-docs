@@ -337,6 +337,5 @@ Specify a table option list in the following format:
 
 `NAME` and `VALUE` must be one of the following combinations:
 
-| `NAME` | `VALUE` | Details |
-| --- | --- | --- |
-|  |
+| `NAME` |  |
+| --- | --- |

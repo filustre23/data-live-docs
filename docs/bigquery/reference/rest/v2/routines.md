@@ -129,4 +129,3 @@ Represents the kind of a given argument.
 | Enums | |
 | --- | --- |
 | `ARGUMENT_KIND_UNSPECIFIED` | Default value. |
-|  |

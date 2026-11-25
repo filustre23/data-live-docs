@@ -204,4 +204,4 @@ follow the instructions to retrieve an authentication code.`
 
 ### API
 
-請使用 [`projects.l`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create?hl=zh-tw)
+請使用

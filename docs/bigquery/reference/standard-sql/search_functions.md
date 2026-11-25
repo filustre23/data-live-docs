@@ -337,5 +337,5 @@ SELECT
 
   -- FALSE: Backticks don't have special meaning for search_data and are
   -- not delimiters in the default LOG_ANALYZER.
-  SEARCH('`foobar-example`
+  SEARCH
 ```

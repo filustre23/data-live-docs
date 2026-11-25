@@ -349,5 +349,5 @@ uses the `output_schema` argument to set custom fields in the output:
 ```
 SELECT
   complaint_id,
-  AI.GENERATE(
+  AI.GENERATE
 ```

@@ -119,4 +119,3 @@ different name.
 ### `DESCRIBE FUNCTION` syntax
 
 Snowflake supports describing a UDF using
-[DESC[](https://docs.snowflake.net/manuals/sql-reference/sql/desc-function.html)

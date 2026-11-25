@@ -207,4 +207,4 @@ gcloud resource-manager org-policies allow \
 | 遷移角色 | `USAGE` | Snowflake 倉儲 | 提供執行查詢所需的運算能力。 |
 |  | `USAGE` | Snowflake 資料庫和結構定義 | 存取包含來源資料表的資料庫和結構定義。 |
 |  | `SELECT` | 來源資料表 | 讀取資料表中繼資料，並擷取要移轉的資料。 |
-|  | `USAGE` | 儲存空間整合 | 授權將資料卸載至外部 Cloud Storage 暫存 bucket。 |
+|  | `USAGE` | 儲存空間整合 | 授權將資料 |

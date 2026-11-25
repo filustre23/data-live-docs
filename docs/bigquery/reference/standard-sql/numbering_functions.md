@@ -184,7 +184,3 @@ FROM finishers;
 ```
 
 ## `NTILE`
-
-```
-NTILE(
-```

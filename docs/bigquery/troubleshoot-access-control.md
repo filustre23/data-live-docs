@@ -46,7 +46,7 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 排解資源存取問題的第一步，是判斷缺少的權限、存取遭拒的 IAM 主體，以及主體嘗試存取的資源。
 
-### 從錯誤或工作記錄中取得資訊
+### 從錯誤或工作記錄取得資訊
 
 如要取得主體、資源和權限的相關資訊，請查看 bq 指令列工具的輸出內容、API 回應，或 Google Cloud 控制台中的 BigQuery。
 
@@ -66,8 +66,8 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
    [前往 Logs Explorer](https://console.cloud.google.com/logs/query?hl=zh-tw)
 
-   或者，您也可以從導覽選單中依序選擇「**Monitoring」>「
-   Logs Explorer**」。
+   或者，您也可以從導覽選單中依序選擇**「Monitoring」>
+   「Logs Explorer」**。
 2. 在 Logs Explorer 中，記錄範圍請選擇「Project logs」(專案記錄)。
 3. 在查詢視窗中輸入下列查詢，從 BigQuery 資料存取記錄取得權限相關錯誤：
 
@@ -91,30 +91,30 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
    * `resource`：主體嘗試存取的資源完整名稱。例如：`projects/myproject/datasets/mydataset/tables/mytable`。
    * `principalEmail` (如有)：`protoPayload.authenticationInfo` 中參照的主體，即嘗試執行動作的主體。
 
-**注意：**如需其他 BigQuery 稽核記錄範例查詢，
-請前往 Google Cloud Observability 的「[**範例查詢**」頁面](https://docs.cloud.google.com/logging/docs/view/query-library?hl=zh-tw#bigquery-filters)。
+**注意：**如需其他 BigQuery 稽核記錄範例查詢
+，請前往 Google Cloud Observability 的「[**範例查詢**」頁面](https://docs.cloud.google.com/logging/docs/view/query-library?hl=zh-tw#bigquery-filters)。
 
 ## 使用允許政策的政策分析工具
 
 允許政策的政策分析工具可讓您根據 [IAM 允許政策](https://docs.cloud.google.com/iam/docs/policies?hl=zh-tw)，找出哪些 [IAM 主體](https://docs.cloud.google.com/iam/docs/principals-overview?hl=zh-tw)具備哪些 BigQuery 資源的哪些存取權。
 
-**注意：**Policy Intelligence 也提供 [IAM 政策疑難排解工具](https://docs.cloud.google.com/policy-intelligence/docs/troubleshoot-access?hl=zh-tw)，可排解特定主體的存取權問題。
+**注意：**Policy Intelligence 也提供 [IAM 政策疑難排解工具](https://docs.cloud.google.com/policy-intelligence/docs/troubleshoot-access?hl=zh-tw)，可協助您排解特定主體的存取權問題。
 
-收集權限錯誤的相關資訊後，您可以使用政策分析工具，瞭解主體為何缺少必要存取權。這項工具會分析所有相關政策、Google 群組成員資格，以及從上層資源 (例如專案、資料夾和組織) 繼承的權限。
+收集權限錯誤的相關資訊後，您可以使用政策分析工具，瞭解主體為何缺少必要存取權。這項工具會分析所有相關政策、Google 群組成員資格，以及從專案、資料夾和組織等上層資源繼承的權限。
 
 如要使用政策分析工具分析允許政策，請建立分析查詢、指定分析範圍，然後執行查詢。
 
-1. 前往 Google Cloud 控制台的「政策分析工具」頁面。
+1. 前往 Google Cloud 控制台的「Policy Analyzer」頁面。
 
-   [前往政策分析工具](https://console.cloud.google.com/iam-admin/analyzer?hl=zh-tw)
+   [前往 Policy Analyzer](https://console.cloud.google.com/iam-admin/analyzer?hl=zh-tw)
 
-   或者，您也可以從導覽選單中依序選擇**「IAM & Admin」(IAM 與管理)>
+   或者，您也可以從導覽選單中，依序選擇**「IAM & Admin」(IAM 與管理)>
    「Policy Analyzer」(政策分析工具)**。
 2. 按一下「建立自訂查詢」。
 3. 在「Configure your query」(設定查詢) 頁面中，輸入先前收集的資訊：
 
    1. 在「Select the scope」(選取範圍) 區段的「Select query scope」(選取查詢範圍) 欄位中，確認目前專案是否顯示，或按一下「Browse」(瀏覽) 選擇其他資源。
-   2. 在「Set the query parameters」(設定查詢參數) 部分，針對「Parameter 1」(參數 1) 選擇「Principal」(主體)，然後在「Principal」(主體) 欄位中輸入使用者、群組或服務帳戶的電子郵件。
+   2. 在「Set the query parameters」(設定查詢參數) 專區中，針對「Parameter 1」(參數 1) 選擇「Principal」(主體)，然後在「Principal」(主體) 欄位中輸入使用者、群組或服務帳戶的電子郵件地址。
    3. 按一下 add「Add parameter」(新增參數)。
    4. 在「Parameter 2」(參數 2) 中，選擇「Permission」(權限)，然後在「Permission」(權限) 欄位中，按一下「Select」(選取)，選擇 BigQuery 權限，然後按一下「Add」(新增)。例如，選取 **`bigquery.tables.getData`**。
    5. 按一下 add「Add parameter」(新增參數)。
@@ -129,11 +129,11 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 5. 查看查詢結果。結果可能是下列其中一種：
 
    * **空白清單**。如果沒有結果，代表主體不具備必要權限。您必須[授予主體具備正確權限的角色](#find-role)。
-   * **一或多個結果**。如果分析工具找到允許政策，則表示存在某種形式的存取權。按一下每項結果的「View Binding」(查看繫結)，即可查看提供主體所屬資源存取權的角色。政策繫結會顯示存取權是透過群組成員資格或繼承關係授予，還是遭到 [IAM 條件](https://docs.cloud.google.com/bigquery/docs/conditions?hl=zh-tw)或 [IAM 拒絕政策](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam?hl=zh-tw#deny_access_to_a_resource)拒絕。
+   * **一或多個結果**。如果分析工具找到允許政策，代表存在某種形式的存取權。按一下各項結果的「View Binding」(查看繫結)，即可查看提供資源存取權的角色，而主體是該資源的成員。政策繫結會顯示存取權是透過群組成員資格或繼承授予，還是遭到 [IAM 條件](https://docs.cloud.google.com/bigquery/docs/conditions?hl=zh-tw)或 [IAM 拒絕政策](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam?hl=zh-tw#deny_access_to_a_resource)拒絕。
 
 ## 找出可授予必要權限的正確 IAM 角色
 
-確認主體沒有足夠的存取權後，下一步是找出適當的預先定義或自訂 IAM 角色，授予必要權限。選擇角色時，應遵循最小權限原則。
+確認主體沒有足夠的存取權後，下一步是找出適當的預先定義或自訂 IAM 角色，授予必要權限。選擇的角色應遵循最小權限原則。
 
 如果貴組織使用自訂角色，您可以[列出專案或組織中建立的所有自訂角色](https://docs.cloud.google.com/iam/docs/creating-custom-roles?hl=zh-tw#roles-list)，找出正確的角色。舉例來說，在 Google Cloud 控制台的「Roles」(角色) 頁面中，您可以依「Type:Custom」(類型：自訂) 篩選清單，只查看自訂角色。
 
@@ -149,18 +149,18 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 ## 排解常見的「存取遭拒」問題
 
 如果作業失敗並顯示 `403 accessDenied` (`Access Denied:
-RESOURCE_TYPE RESOURCE_ID: DETAILS`)，除了上述一般 IAM 步驟外，請檢查下列常見情況：
+RESOURCE_TYPE RESOURCE_ID: DETAILS`)，除了上述一般 IAM 步驟外，請檢查下列常見情境：
 
 * **Non-existent resource or location mismatch (`or perhaps it does not
-  exist`).**：如果錯誤訊息結尾為 `or perhaps it does not exist`，BigQuery 會遮蓋資料表、檢視表或常式是否存在，因為主體缺少資料集或專案中繼資料權限 (`bigquery.tables.get` 或 `bigquery.datasets.get`)。請確認專案 ID、資料集 ID 和資料表名稱拼寫正確，並確認查詢在資料集所在位置執行。
-* **授權檢視表和常式**。使用者查詢[授權檢視表](https://docs.cloud.google.com/bigquery/docs/authorized-views?hl=zh-tw)或[授權常式](https://docs.cloud.google.com/bigquery/docs/authorized-routines?hl=zh-tw)時，必須具備查詢檢視表或常式的權限，且檢視表或常式本身必須在來源資料集的存取控制清單 (ACL) 中獲得授權。如果查詢因基礎資料表發生 `Access Denied` 而失敗，請將檢視表或常式 (或其整個資料集做為[授權資料集](https://docs.cloud.google.com/bigquery/docs/authorized-datasets?hl=zh-tw)) 新增至來源資料集的授權存取清單。如果某個檢視表查詢另一個檢視表，則鏈結中的每個檢視表都必須獲得授權，才能讀取資料集。
+  exist`).**：如果錯誤訊息結尾是 `or perhaps it does not exist`，代表主體缺少資料集或專案中繼資料權限 (`bigquery.tables.get` 或 `bigquery.datasets.get`)，因此 BigQuery 會遮蓋資料表、檢視表或常式是否存在。請確認專案 ID、資料集 ID 和資料表名稱拼寫正確，並確認查詢是在資料集所在位置執行。
+* **授權檢視表和常式**。使用者查詢[授權檢視表](https://docs.cloud.google.com/bigquery/docs/authorized-views?hl=zh-tw)或[授權常式](https://docs.cloud.google.com/bigquery/docs/authorized-routines?hl=zh-tw)時，必須具備查詢檢視表或常式的權限，且檢視表或常式本身必須在來源資料集的存取控制清單 (ACL) 中獲得授權。如果查詢因基礎資料表上的 `Access Denied` 而失敗，請將檢視表或常式 (或其整個資料集做為[授權資料集](https://docs.cloud.google.com/bigquery/docs/authorized-datasets?hl=zh-tw)) 新增至來源資料集的授權存取清單。如果某個檢視表查詢另一個檢視表，則鏈結中的每個檢視表都必須獲得授權，才能讀取資料集。
 
   如果刪除授權 view 或授權資料集，並建立另一個同名的 view 或資料集，查詢可能會失敗，並顯示 `Access Denied`。即使名稱仍顯示在來源資料集的授權存取清單中，也可能發生這項錯誤，因為已刪除的項目最多可保留 24 小時。請查看 Cloud 稽核記錄，確認自上次查詢成功後，鏈結中的授權檢視表或授權資料集是否遭到刪除及替換。如要還原存取權，請先從來源資料集的授權存取清單中移除現有項目，然後重新新增檢視表或資料集。如果先新增檢視畫面再移除舊項目，可能會發生 `Duplicate authorized views` 錯誤。
 
   如要修改檢視表而不破壞授權，請[更新檢視表的 SQL 查詢](https://docs.cloud.google.com/bigquery/docs/managing-views?hl=zh-tw#update-sql)，而非刪除並重新建立檢視表。不過，如果您使用 `CREATE OR REPLACE` 陳述式或 `routines.update` 方法修改已授權的常式，就必須重新授權。
-* **VPC Service Controls**。如果貴組織使用 [VPC Service Controls](https://docs.cloud.google.com/bigquery/docs/vpc-sc?hl=zh-tw)，跨越 service perimeter 邊界的要求會失敗，並傳回 `403 accessDenied` 或 `policyViolation`。在 Cloud 稽核記錄中，搜尋失敗時間點前後的錯誤訊息，找出 `vpcServiceControlsUniqueIdentifier` 值，並使用[違規分析工具](https://docs.cloud.google.com/vpc-service-controls/docs/violation-analyzer?hl=zh-tw)檢查輸入和輸出規則。如要瞭解要使用的 Logs Explorer 查詢，請參閱「[依據機構政策的規定，您無法提出要求](#ts-policy-violation-vpc-sc)」。
+* **VPC Service Controls**。如果貴組織使用 [VPC Service Controls](https://docs.cloud.google.com/bigquery/docs/vpc-sc?hl=zh-tw)，跨越 service perimeter 邊界的要求會失敗，並傳回 `403 accessDenied` 或 `policyViolation`。在 Cloud 稽核記錄中，搜尋失敗時間前後的錯誤訊息 `vpcServiceControlsUniqueIdentifier` 值，並使用[違規分析工具](https://docs.cloud.google.com/vpc-service-controls/docs/violation-analyzer?hl=zh-tw)檢查輸入和輸出規則。如要瞭解要使用的 Logs Explorer 查詢，請參閱「[依據機構政策的規定，您無法提出要求](#ts-policy-violation-vpc-sc)」。
 * **基本角色 (`roles/owner`、`roles/editor`、`roles/viewer`)。**基本專案角色不含檢視表所需的組織層級權限 (例如 `INFORMATION_SCHEMA.TABLE_STORAGE_USAGE_TIMELINE_BY_ORGANIZATION`)，也不含特殊權限 (例如 `bigquery.rowAccessPolicies.overrideTimeTravelRestrictions`)，後者是存取資料表歷來資料的必要權限，適用於具有或曾有資料列層級存取權政策的資料表 (請參閱「[時間旅行和資料列層級存取權](https://docs.cloud.google.com/bigquery/docs/time-travel?hl=zh-tw#time_travel_and_row-level_access)」)。請授予預先定義的 [BigQuery IAM 角色](https://docs.cloud.google.com/bigquery/docs/access-control?hl=zh-tw)，而非依賴基本角色。
-* **暫時性 IAM 政策覆寫 (`SetIamPolicy`)。**如果權限時好時壞，請在管理員活動稽核記錄中搜尋 `protoPayload.methodName=~"SetIamPolicy"`，檢查自動化指令碼或基礎架構即程式碼管道是否覆寫現有政策繫結，而非合併。
+* **暫時性 IAM 政策覆寫 (`SetIamPolicy`)。**如果權限時好時壞，請在管理員活動稽核記錄中搜尋 `protoPayload.methodName=~"SetIamPolicy"`，確認自動化指令碼或基礎架構即程式碼管道是否覆寫現有政策繫結，而非合併。
 * **外部資料來源 (Google 雲端硬碟、Cloud Storage、BigLake)：**
 
   + **Google 雲端硬碟 (`Permission denied while getting Drive credentials`)。**
@@ -192,7 +192,7 @@ RESOURCE_TYPE RESOURCE_ID: DETAILS`)，除了上述一般 IAM 步驟外，請檢
 
 ## 排解違反政策錯誤
 
-在 BigQuery 中收到 HTTP `403 PERMISSION_DENIED` 錯誤，且錯誤原因為 `policyViolation`，表示組織政策、資料 perimeter 或 VPC Service Controls 導致失敗。
+在 BigQuery 中收到 HTTP `403 PERMISSION_DENIED` 錯誤，且錯誤原因為 `policyViolation` 時，表示組織政策、資料 perimeter 或 VPC Service Controls 導致失敗。
 
 以下各節說明與這個錯誤原因相關的最常見錯誤訊息、原因和解決方法。
 
@@ -209,7 +209,7 @@ VPC_SERVICE_CONTROLS_UNIQUE_IDENTIFIER`
 
 #### 解析度
 
-1. **找出專屬 ID。**擷取錯誤訊息中的 `vpcServiceControlsUniqueIdentifier`。使用這個 ID 篩選 Google CloudLogs Explorer，找出對應的 VPC Service Controls 記錄，其中包含原因詳細資料：
+1. **找出專屬 ID。**擷取錯誤訊息中的 `vpcServiceControlsUniqueIdentifier`。使用這個 ID 篩選 Google Cloud記錄檔探索工具，找出對應的 VPC Service Controls 記錄，其中包含原因詳細資料：
 
    ```
    protoPayload.metadata.@type="type.googleapis.com/google.cloud.audit.VpcServiceControlAuditMetadata"
@@ -217,7 +217,7 @@ VPC_SERVICE_CONTROLS_UNIQUE_IDENTIFIER`
    ```
 
    在 `protoPayload.metadata.violationReason` 下方尋找 `violationReason` 值。找出問題後，請研究記錄項目中的其他詳細資料，並按照現有的 [VPC Service Controls 疑難排解指南](https://docs.cloud.google.com/vpc-service-controls/docs/troubleshooting?hl=zh-tw#debugging)操作。此外，建議您使用[違規分析工具](https://docs.cloud.google.com/vpc-service-controls/docs/violation-analyzer?hl=zh-tw)。
-2. **修正跨專案計費問題。**如果是跨專案查詢，請確保執行查詢的計費專案與查詢的資料位於 perimeter 內的相同 perimeter。如有需要，請使用 Google Cloud 控制台專案挑選器、bq 指令列工具中的 [`--project_id` 旗標](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#project_id_flag)，或 [API 或用戶端程式庫要求](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)，手動指定符合規範的計費專案。
+2. **修正跨專案計費問題。**如果是跨專案查詢，請確保執行查詢的計費專案與查詢的資料位於 perimeter 內的相同 perimeter。如有需要，請使用 Google Cloud 控制台專案挑選器、bq 指令列工具中的 [`--project_id` 旗標](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference?hl=zh-tw#project_id_flag)，或 [API 或用戶端程式庫要求](https://docs.cloud.google.com/bigquery/docs/running-queries?hl=zh-tw#queries)，手動指定符合規定的計費專案。
 3. **驗證存取層級。**請使用 [Access Context Manager](https://docs.cloud.google.com/access-context-manager/docs/overview?hl=zh-tw)，確認用戶端網路、IP 或使用者帳戶已獲准。Google Cloud 控制台需要特別設定輸入規則，允許使用者存取受保護的環境。
 
 ### 如果專案已啟用 VPC Service Controls，就無法匯出至 Google 雲端硬碟
@@ -233,14 +233,14 @@ Google 雲端硬碟不支援 VPC Service Controls。由於 Google 雲端硬碟�
 
 請勿直接匯出至 Google 雲端硬碟，而是將查詢結果擷取至位於相同 VPC Service Controls perimeter 內的 Cloud Storage bucket，或將結果儲存為本機檔案。
 
-### 如果專案已啟用 VPC Service Controls，則無法使用 Google 雲端硬碟外部資料表
+### 如果專案啟用 VPC Service Controls，Google 雲端硬碟外部資料表會遭到封鎖
 
 錯誤字串：
 `Google Drive external tables are blocked for projects with VPC-SC enabled`
 
 #### 診斷
 
-根據預設，VPC Service Controls 不會封鎖 Google 雲端硬碟外部資料表 (例如連結試算表) 的查詢。不過，之所以會出現這項錯誤，是因為 Google Cloud 貴組織明確要求 Google Cloud對專案強制執行嚴格的封鎖設定，覆寫預設的寬鬆行為，防止任何來自 VPC Service Controls perimeter 內部的 Google 雲端硬碟資料傳入查詢。
+根據預設，VPC Service Controls 不會封鎖 Google 雲端硬碟外部資料表 (例如連結試算表) 的查詢。不過， Google Cloud 組織已明確要求 Google Cloud對專案強制執行嚴格的封鎖設定，覆寫預設的允許行為，防止從 VPC Service Controls perimeter 內對 Google 雲端硬碟資料進行任何傳入查詢，因此會出現這項錯誤。
 
 #### 解析度
 
@@ -269,7 +269,7 @@ resource projects/PROJECT_ID/datasets/DATASET_ID`
 
 #### 診斷
 
-Cloud 管理員已設定[組織政策限制](https://docs.cloud.google.com/organization-policy/reference/org-policy-constraints?hl=zh-tw)，嚴格限制可建立或分析資源的位置。這項錯誤通常會在下列情況出現：
+Cloud 管理員已設定[組織政策限制](https://docs.cloud.google.com/organization-policy/reference/org-policy-constraints?hl=zh-tw)，明確限制可建立或分析資源的位置。這項錯誤通常會在下列情況出現：
 
 * 在未經授權的地理區域建立資料集 (例如受 `constraints/gcp.resourceLocations` 限制)。
 * 嘗試在不允許的情況下，跨外部雲端使用 BigQuery Omni (例如，遭到 `constraints/bigquery.disableBQOmniAWS` 或 `constraints/bigquery.disableBQOmniAzure` 封鎖)。
@@ -318,11 +318,11 @@ Cloud 管理員已設定[組織政策限制](https://docs.cloud.google.com/organ
 
 #### 診斷
 
-工作或持續查詢設為以自訂服務帳戶的身分執行，但呼叫端沒有權限以該帳戶的身分執行，或者目標資料表或安全性政策規定需要 Google 帳戶使用者憑證，BigQuery 才能根據互動式使用者身分評估存取權。
+工作或持續查詢設為以自訂服務帳戶的身分執行，但呼叫端沒有權限以該帳戶的身分執行，或者目標資料表或安全性政策需要 Google 帳戶使用者憑證，BigQuery 才能根據互動式使用者身分評估存取權。
 
 #### 解析度
 
-* **授予服務帳戶模擬權限。**執行[持續查詢](https://docs.cloud.google.com/bigquery/docs/continuous-queries?hl=zh-tw)或設定了自訂服務帳戶的工作時，請將該服務帳戶的服務帳戶使用者角色 (`roles/iam.serviceAccountUser`，包含 `iam.serviceAccounts.actAs` 權限) 授予呼叫端。模擬服務帳戶或將聯合憑證換成短期權杖時，請將目標服務帳戶的服務帳戶權杖建立者角色 (`roles/iam.serviceAccountTokenCreator`) 授予呼叫端。
+* **授予服務帳戶模擬權限。**執行[持續查詢](https://docs.cloud.google.com/bigquery/docs/continuous-queries?hl=zh-tw)或設定了自訂服務帳戶的工作時，請將該服務帳戶的「服務帳戶使用者」角色 (`roles/iam.serviceAccountUser`，包含 `iam.serviceAccounts.actAs` 權限) 授予呼叫端。模擬服務帳戶或將聯合憑證換成短期權杖時，請將目標服務帳戶的服務帳戶權杖建立者角色 (`roles/iam.serviceAccountTokenCreator`) 授予呼叫端。
 * **使用 Google 帳戶使用者憑證進行驗證。**如果目標資源需要 Google 帳戶使用者憑證，請使用互動式使用者的 OAuth 2.0 憑證 (例如執行 `gcloud auth application-default login` 或在商業智慧工具中設定使用者 OAuth)，而非獨立服務帳戶憑證，驗證要求。
 * **驗證 VPC Service Controls 輸入和輸出規則。**如果要求跨越 VPC Service Controls 邊界，請確認 perimeter 的輸入和輸出規則允許呼叫端身分和目標資源。
 
@@ -353,8 +353,7 @@ Cloud 管理員已設定[組織政策限制](https://docs.cloud.google.com/organ
 * **啟用專案的計費功能。**在 Google Cloud 控制台中，將有效的 Cloud Billing 帳戶連結至專案。如需逐步說明，請參閱「[啟用專案的帳單功能](https://docs.cloud.google.com/billing/docs/how-to/modify-project?hl=zh-tw#enable_billing_for_a_project)」。
 
   [前往「帳單」頁面](https://console.cloud.google.com/billing?hl=zh-tw)
-* **從 BigQuery 沙箱 (`expiration time must be less than 60 days`) 升級。**
-  在 [BigQuery 沙箱](https://docs.cloud.google.com/bigquery/docs/sandbox?hl=zh-tw#limitations)中，資料表、檢視表和分區會在 60 天後自動到期。啟用計費功能，[從 BigQuery 沙箱升級](https://docs.cloud.google.com/bigquery/docs/sandbox?hl=zh-tw#upgrade)，然後更新資料集、資料表、檢視表和分區的預設到期時間。
+* **從 BigQuery 沙箱升級**。在 [BigQuery 沙箱](https://docs.cloud.google.com/bigquery/docs/sandbox?hl=zh-tw#limitations)中，資料表、檢視表和分區會在 60 天 (`expiration time must be less than 60 days`) 後自動過期，且不支援許多 BigQuery 功能，例如[資料操縱語言 (DML) 陳述式](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language?hl=zh-tw#execution-requirements)、[持續查詢](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction?hl=zh-tw)和 [BigQuery 資料移轉服務](https://docs.cloud.google.com/bigquery/docs/dts-introduction?hl=zh-tw)。在[Google Cloud 控制台](https://console.cloud.google.com/billing?hl=zh-tw)啟用計費功能，[從 BigQuery 沙箱升級](https://docs.cloud.google.com/bigquery/docs/sandbox?hl=zh-tw#upgrade)，然後視需要更新資料集、資料表、檢視表和分區的預設到期時間。連結 Cloud Billing 帳戶後，您仍可使用 [BigQuery 免費方案](https://cloud.google.com/bigquery/pricing?hl=zh-tw#free-usage-tier)。
 
 ## 為保護系統運作，要求已遭封鎖
 
@@ -371,7 +370,7 @@ Cloud 管理員已設定[組織政策限制](https://docs.cloud.google.com/organ
 
 ### 我看不到 Data Catalog 角色
 
-如果找不到「Data Catalog 精細讀取者」等角色，可能是因為您尚未在專案中啟用 Data Catalog API。如要瞭解如何啟用 Data Catalog API，請參閱「[事前準備](https://docs.cloud.google.com/bigquery/docs/column-level-security?hl=zh-tw#before_you_begin)」。啟用 Data Catalog API 後，Data Catalog 角色會在幾分鐘後顯示。
+如果找不到「Data Catalog Fine-Grained Reader」等角色，可能是因為您尚未在專案中啟用 Data Catalog API。如要瞭解如何啟用 Data Catalog API，請參閱「[事前準備](https://docs.cloud.google.com/bigquery/docs/column-level-security?hl=zh-tw#before_you_begin)」。啟用 Data Catalog API 後，Data Catalog 角色會在幾分鐘後顯示。
 
 ### 我無法查看「Taxonomies」(分類) 頁面
 
@@ -456,11 +455,11 @@ Cloud 管理員已設定[組織政策限制](https://docs.cloud.google.com/organ
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-20 (世界標準時間)。
+上次更新時間：2026-11-24 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-20 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-24 (世界標準時間)。"],[],[]]

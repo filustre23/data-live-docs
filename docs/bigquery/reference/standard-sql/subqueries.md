@@ -335,6 +335,5 @@ WHERE
  +----------+
  | sparrow  |
  +----------*/
+</
 ```
-
-In this example, a correlated scalar subquery returns the m

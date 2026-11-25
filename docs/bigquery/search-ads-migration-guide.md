@@ -124,6 +124,5 @@ SELECT
   c.campaign_name,
   C.campaign_status,
   SUM(cs.metrics_impressions) AS Impressions,
-  SUM(cs.metrics_clicks) AS Clicks,
-  (
+  SUM(cs.metrics_clicks) AS Clicks
 ```

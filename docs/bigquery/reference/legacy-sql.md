@@ -241,5 +241,3 @@ BigQuery 支援 `INNER`、`[FULL|RIGHT|LEFT] OUTER` 和 `CROSS JOIN` 作業。�
 `CROSS JOIN` 作業不允許 `ON` 子句。`CROSS JOIN` 可能會傳回大量資料，導致查詢速度緩慢、效率不彰，或超出每項查詢允許的資源上限。這類查詢會發生錯誤。建議盡可能使用不含 `CROSS JOIN` 的查詢。舉例來說，`CROSS JOIN` 通常用於[視窗函式](#windowfunctions)更有效率的地方。
 
 ##### EACH 修飾符
-
-`EACH` 修飾符是提示，指示 BigQuery

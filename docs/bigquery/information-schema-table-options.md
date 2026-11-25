@@ -103,4 +103,4 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 | `source_column_match` | `STRING`  這項設定可控管策略，以便比對載入的資料欄與結構定義。  如未指定這個值，預設值會根據結構定義的提供方式而定。如果啟用自動偵測功能，系統預設會依名稱比對資料欄。否則，系統預設會依位置比對資料欄。這是為了確保行為回溯相容。  支援的值包括：   * `POSITION`：依位置比對。這個選項會假設資料欄的順序與結構定義相同。 * `NAME`：依名稱比對。這個選項會將標題列讀取為資料欄名稱，並重新排序資料欄，以符合結構定義中的欄位名稱。系統會根據 `skip_leading_rows` 屬性，從最後略過的資料列讀取資料欄名稱。 |
 | `tags` | `<ARRAY<STRUCT<STRING, STRING>>>` 資料表的 IAM 標記陣列，以鍵/值組合表示。鍵應為[命名空間限定鍵名稱](https://docs.cloud.google.com/iam/docs/tags-access-control?hl=zh-tw#definitions)，值應為[簡稱](https://docs.cloud.google.com/iam/docs/tags-access-control?hl=zh-tw#definitions)。 |
 | `time_zone` | `STRING`  如果剖析的時間戳記值未指定時區，就會採用這個預設時區。  請查看[有效的時區名稱](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=zh-tw#time_zone_name)。  如果沒有這個值，系統會使用預設時區 UTC 剖析未指定時區的時間戳記值。  適用於 CSV 和 JSON 資料。 |
-| `date_format` | `STRING`  [格式元素](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements?hl=zh-tw#format_string_as_datetime)，可 |
+| `date_format` | `STRING` |

@@ -553,4 +553,4 @@ BigQuery views:
     Video\_customer\_id  
     VideoNonClickStats\_customer\_id
 
-AdWords report (deprecated):
+AdWords

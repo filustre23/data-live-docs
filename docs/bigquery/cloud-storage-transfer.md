@@ -199,4 +199,4 @@ bq mk \
 * DATA\_SOURCE 是資料來源，例如 `google_cloud_storage`。
 * NAME 是資料移轉設定的顯示名稱。移轉作業名稱可以是任意值，日後需要修改移轉作業時，能夠據此識別即可。
 * DATASET 是移轉設定的目標資料集。
-* DESTINATION\_KEY：[Cloud KMS 金鑰資源 ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw#key_resource_id)，例如 `projects/project_name/locations/us/keyRings/key_ring_name/cryptoKeys/key_name`。
+* DESTINATION\_KEY：[Cloud KMS 金鑰資源 ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption?hl=zh-tw#key_resource_id)，例如 `projects/`

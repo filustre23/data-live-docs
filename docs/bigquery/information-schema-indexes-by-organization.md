@@ -176,5 +176,5 @@ FROM
  `region-us`.INFORMATION_SCHEMA.SEARCH_INDEXES_BY_ORGANIZATION
 WHERE
  -- Excludes search indexes that are permanently disabled.
- index_status != 'PERMANENTLY DISABLED'
+ index_status != 'PERM
 ```
