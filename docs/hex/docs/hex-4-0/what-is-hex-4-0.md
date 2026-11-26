@@ -46,17 +46,19 @@ For example, this query uses the `pizza_bytes` semantic project to calculate tot
 
 For configuration options and supported syntax, see the [Semantic query reference](/docs/hex-4-0/semantic-models-in-hex-4-0).
 
-#### Notebook view
+### Notebook view[​](#notebook-view "Direct link to Notebook view")
 
 The project's Notebook view displays the SQL, Python, and TypeScript logic that underlies a 4.0 project. Users can [manually edit and add cells](#edit-manually) in this view.
 
 [](/assets/medias/4-0-notebook-cells-6281668db7e87df64a2be4d76a40f244.mp4)
 
-#### Generative apps
+### Generative apps[​](#generative-apps "Direct link to Generative apps")
 
 Generative apps in 4.0 Projects give you full control over presentation and styling, while also providing workflows to inspect and understand the logic behind every element.
 
 As with our existing generative apps, you can prompt the main agent for sweeping style changes, use [quick edits](/docs/share-insights/apps/generative-apps#quick-edits) for targeted quick changes, use [chart controls](#edit-manually) for last-mile manual tweaks, and edit text in-place.
+
+Use **Preview** mode to preview any interactivity you've built into your app before publishing.
 
 Prompt the Hex agent to make charts, tables, and anything else visible in the published app downloadable in any file format you specify. Workspace admins can disable this capability via the [Download and copy CSVs from tables](/docs/administration/workspace_settings/workspace-security#download-and-copy-csvs-from-tables) setting.
 
@@ -67,8 +69,6 @@ Our new **Inspect** view gives you a way to immediately understand the work an a
 [](/assets/medias/inspect-agent-outputs-aba5ba0482934552431a0ae6c6b17bd3.mp4)
 
 #### Use the Graph and Outline views
-
-Use **Preview** mode to preview any interactivity you've built into your app before publishing.
 
 The **Graph** view is accessible from the Notebook in a 4.0 Project. It shows how the cells in a project relate to one another, and offers an easy way to understand the how specific pieces of logic interact and build off of each other. Use the **Lineage** view to focus on a specific subset of related cells.
 
@@ -149,6 +149,8 @@ info
 * [Work in 4.0 projects](#work-in-40-projects)
   + [Work with the Hex agent](#work-with-the-hex-agent)
     - [Query semantic models](#query-semantic-models)
+  + [Notebook view](#notebook-view)
+  + [Generative apps](#generative-apps)
   + [Inspect agent outputs](#inspect-agent-outputs)
   + [Edit manually](#edit-manually)
 * [Work with external agents via the MCP](#work-with-external-agents-via-the-mcp)

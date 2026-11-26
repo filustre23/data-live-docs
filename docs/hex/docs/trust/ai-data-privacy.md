@@ -116,7 +116,7 @@ OpenAI
 
 
 
-- gpt-5.6
+- gpt-6.1-terra
 
 
 
@@ -132,7 +132,7 @@ OpenAI
 
 
 
-# Model list verified: October 14, 2026
+# Model list verified: November 25, 2026
 ```
 
 Ensure these models are available to your direct provider key, enabled in your cloud provider account, or exposed by your gateway under the exact IDs shown. If Hex sends requests to a model you haven't enabled, fallback requests to other models will be attempted. However, these fallback attempts will also fail if these fallback models are not enabled for your workspace or exposed via your key.
@@ -209,7 +209,7 @@ anthropic_message = anthropic_client.messages.create(
 
 
 
-model="claude-opus-4-8",
+model="claude-opus-5-5",
 
 
 
@@ -265,7 +265,7 @@ message = client.messages.create(
 
 
 
-model="us.anthropic.claude-opus-4-8",
+model="us.anthropic.claude-opus-5-5",
 
 
 
@@ -369,7 +369,7 @@ vertex_message = vertex_client.messages.create(
 
 
 
-model="claude-opus-4-8",
+model="claude-opus-5-5",
 
 
 
@@ -421,7 +421,7 @@ response = client.responses.create(
 
 
 
-model="gpt-5.6-sol",
+model="gpt-6.1-sol",
 
 
 

@@ -7,7 +7,7 @@ This list is a preview of parity features we're bringing from classic projects i
 [Hex 4.0](/docs/hex-4-0/what-is-hex-4-0) is in beta, and some Hex features you may be familiar with aren't available yet. Here's what's in progress, up next, and recently landed for that parity work.
 
 You can also open this list in Hex from the **Help** menu in any 4.0 project.  
-*Last updated November 24, 2026.*
+*Last updated November 25, 2026.*
 
 * In progress
 
@@ -27,6 +27,9 @@ You can also open this list in Hex from the **Help** menu in any 4.0 project.
 * In progress
 
   Saved viewsSave a combination of app inputs as a view to share or quickly return to.
+* In progress
+
+  App downloadsDownload a chart or table from a published app as a CSV.
 * Up next
 
   App caching settingsSet how long a published app keeps cached results.
@@ -44,12 +47,6 @@ You can also open this list in Hex from the **Help** menu in any 4.0 project.
   CommentsLeave comments on cells and app components.
 * Up next
 
-  App downloadsDownload a chart or table from a published app as a CSV.
-* Up next
-
-  File exports in appsExport files in formats such as PPTX and XLSX.
-* Up next
-
   Manual chart creationBuild and configure charts yourself, without prompting the agent.
 * Up next
 
@@ -57,6 +54,11 @@ You can also open this list in Hex from the **Help** menu in any 4.0 project.
 
 ---
 
+* Shipped
+
+  File exports in appsExport files in formats such as PPTX and XLSX.
+
+  Nov 23
 * Shipped
 
   PDF exportExport a published app as a PDF.
