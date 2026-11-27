@@ -214,4 +214,4 @@ Request message for `SetIamPolicy` method.
 
 | Fields | |
 | --- | --- |
-|  |
+| `resource` |

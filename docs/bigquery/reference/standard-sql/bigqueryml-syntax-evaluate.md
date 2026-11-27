@@ -461,5 +461,3 @@ ML.EVALUATE(
       [, TOP_P AS top_k])
 )
 ```
-
-### Ar

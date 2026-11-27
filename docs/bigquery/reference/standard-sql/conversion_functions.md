@@ -254,5 +254,5 @@ the cast. You can use the format clause in this section if `expression` is a
 ### CAST AS FLOAT64
 
 ```
-CAST
+CAST(
 ```

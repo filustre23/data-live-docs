@@ -27,6 +27,43 @@ To get the latest product updates delivered to you, add the URL of this page to 
 reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators), or add the
 [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## November 25, 2026
+
+Feature
+
+You can use [cross-cloud connections](/bigquery/docs/cross-cloud-connections) to
+query data in AWS, Azure, and Salesforce Data 360 from all BigQuery regions with
+more feature availability than standard connections that use BigQuery Omni. This
+feature is
+[generally available](https://cloud.google.com/products#product-launch-stages)
+(GA).
+
+Deprecated
+
+The BigQuery Storage API v1beta1 is deprecated and will be shut down on August 31, 2027.
+
+Key milestone dates:
+
+* **Nov 20, 2026:** Access to the BigQuery Storage API v1beta1 is restricted to projects that recorded active usage between March 1, 2026, and August 31, 2026.
+* **August 31, 2027:** The BigQuery Storage API v1beta1 will be fully shut down. After this date, calls to the v1beta1 endpoint will fail with a `NOT_FOUND` error.
+
+**What you need to do:**
+
+To prevent service disruption, migrate your workloads from `v1beta1` to the generally available [BigQuery Storage API v1](/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1). The `v1` API is backward-compatible with `v1beta1`.
+
+* **SDKs and connectors:** If you use connectors or client libraries, update them to the latest versions to ensure they default to the `v1` API:
+  + [Simba ODBC/JDBC for BigQuery](/bigquery/docs/reference/odbc-jdbc-drivers)
+  + [Google BigQuery ODBC](/bigquery/docs/odbc-for-bigquery) / [JDBC driver](/bigquery/docs/jdbc-for-bigquery)
+  + [Trino BigQuery plugin](https://trino.io/docs/current/connector/bigquery.html)
+  + [Apache Beam BigQuery connector](https://beam.apache.org/documentation/io/built-in/google-bigquery/)
+  + [Spark BigQuery connector](https://github.com/GoogleCloudDataproc/spark-bigquery-connector)
+  + [Scio BigQuery plugin](https://spotify.github.io/scio/io/BigQuery.html)
+* **Custom code:** If your applications call the `v1beta1` API directly (for example, using gRPC), update your code to target the `v1` API endpoint (`google.cloud.bigquery.storage.v1`).
+
+For more information, see the [BigQuery Storage API reference](/bigquery/docs/reference/storage).
+
+If you are using `v1beta1` and have concerns with this deprecation schedule, please contact us via a support case.
+
 ## November 24, 2026
 
 Feature
@@ -5058,36 +5095,3 @@ You can now use your Google Account user credentials to authorize the execution 
 Feature
 
 You can now [update a Cloud KMS encryption key](/bigquery/docs/customer-managed-encryption#key_rotation) by updating the table with the same key. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
-
-Feature
-
-You can use the [`@@location` system variable](/bigquery/docs/reference/system-variables) to set the location in which to run a query. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
-
-Feature
-
-BigQuery now supports the following Apache Hadoop migration features in [Preview](https://cloud.google.com/products#product-launch-stages):
-
-* [Use the `dwh-migration-dumper` tool to migrate the metadata](/bigquery/docs/hadoop-metadata) necessary for a Hadoop permissions and data migration.
-* [Migrate permissions from Apache Hadoop, Apache Hive, and Ranger HDFS](/bigquery/docs/hadoop-permissions-migration) to BigQuery.
-* [Migrate tables from a HDFS data lake](/bigquery/docs/hdfs-data-lake-transfer) to Google Cloud.
-
-## June 30, 2025
-
-Libraries
-
-### Java
-
-#### [2.52.0](https://github.com/googleapis/java-bigquery/compare/v2.51.0...v2.52.0) (2025-06-25)
-
-##### Features
-
-* **bigquery:** Integrate Otel in client lib ([#3747](https://github.com/googleapis/java-bigquery/issues/3747)) ([6e3e07a](https://github.com/googleapis/java-bigquery/commit/6e3e07a22b8397e1e9d5b567589e44abc55961f2))
-* **bigquery:** Integrate Otel into retries, jobs, and more ([#3842](https://github.com/googleapis/java-bigquery/issues/3842)) ([4b28c47](https://github.com/googleapis/java-bigquery/commit/4b28c479c1bc22326c8d2501354fb86ec2ce1744))
-
-##### Bug Fixes
-
-* **bigquery:** Add MY\_VIEW\_DATASET\_NAME*TEST* to resource clean up sample ([#3838](https://github.com/googleapis/java-bigquery/issues/3838)) ([b1962a7](https://github.com/googleapis/java-bigquery/commit/b1962a7f0084ee4c3e248266b50406cf575cd657))
-
-##### Dependencies
-
-* Remove version declaration of open-telemetry-bom ([#3855](https://github.com/googleapis/java-bigquery/issues/3855)) (

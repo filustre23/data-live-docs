@@ -175,6 +175,3 @@ A single task for a migration which has details about the configuration of the t
 ## AssessmentTaskDetails
 
 Assessment task config.
-
-|
-|  |

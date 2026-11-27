@@ -16,20 +16,22 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 # 特徵供應
 
-您可以使用多種服務選項，將[特徵](https://docs.cloud.google.com/bigquery/docs/preprocess-overview?hl=zh-tw)用於 BigQuery ML 模型訓練和推論。無論選擇哪種方式，都必須先將特徵儲存在 BigQuery 資料表中。
+從 BigQuery 資料表提供[特徵](https://docs.cloud.google.com/bigquery/docs/preprocess-overview?hl=zh-tw)，可為 BigQuery ML 模型訓練、批次推論和即時線上預測提供一致的輸入內容。直接在 BigQuery ML 中使用時間點查詢函式，可避免在訓練和批次推論期間發生資料外洩，而連結至 Gemini Enterprise Agent Platform 則可提供低延遲的特徵，用於線上預測。
+
+無論選擇哪種提供選項，都必須先將特徵儲存在 BigQuery 資料表中。
 
 ## 時間點正確性
 
-用來訓練模型的資料通常內建時間依附關係。為時效性特徵建立特徵資料表時，請加入時間戳記資料欄，代表各資料列在特定時間的特徵值。接著，您可以在查詢這些特徵資料表中的資料時，使用時間點查詢函式，確保訓練和提供服務之間不會發生[資料外洩](https://en.wikipedia.org/wiki/Leakage_(machine_learning))。這項程序可確保時間點正確性。
+用來訓練模型的資料通常具有時間依附關係。為時效性特徵建立特徵資料表時，請加入時間戳記欄，代表各資料列在特定時間的特徵值。接著，您可以從這些特徵資料表查詢資料，並使用時間點查詢函式，確保訓練和提供服務之間不會發生[資料外洩](https://en.wikipedia.org/wiki/Leakage_(machine_learning))。這項程序可確保時間點正確性。
 
 擷取時效性特徵時，請使用下列函式指定時間點截止：
 
 * [`ML.FEATURES_AT_TIME`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature-time?hl=zh-tw)
 * [`ML.ENTITY_FEATURES_AT_TIME`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-entity-feature-time?hl=zh-tw)
 
-## 在 BigQuery ML 中提供特徵
+## 在 BigQuery ML 提供特徵
 
-如要在 BigQuery ML 中訓練模型及執行批次推論，您可以使用「[時間點正確性](#point-in-time_correctness)」一節所述的時間點查詢函式，擷取特徵。您可以在 `CREATE MODEL` 陳述式的 [`query_statement` 子句](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create?hl=zh-tw#query_statement)中加入這些函式，用於訓練，或在適當資料表值函式 (例如 [`ML.PREDICT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict?hl=zh-tw)) 的 `query_statement` 子句中加入這些函式，用於提供服務。
+如要在 BigQuery ML 中訓練模型並執行批次推論，您可以使用「[時間點正確性](#point-in-time_correctness)」一節所述的時間點查詢函式，擷取特徵。您可以在 `CREATE MODEL` 陳述式的 [`query_statement` 子句](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create?hl=zh-tw#query_statement)中加入這些函式，用於訓練，或在適當資料表值函式的 `query_statement` 子句中加入這些函式，例如 [`ML.PREDICT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict?hl=zh-tw)，用於提供服務。
 
 ## 使用 Vertex AI 特徵儲存庫提供特徵
 
@@ -44,11 +46,11 @@ Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出
 
 除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-上次更新時間：2026-11-11 (世界標準時間)。
+上次更新時間：2026-11-25 (世界標準時間)。
 
 
 
 
 想進一步說明嗎？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-11 (世界標準時間)。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["難以理解","hardToUnderstand","thumb-down"],["資訊或程式碼範例有誤","incorrectInformationOrSampleCode","thumb-down"],["缺少我需要的資訊/範例","missingTheInformationSamplesINeed","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-11-25 (世界標準時間)。"],[],[]]

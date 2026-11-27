@@ -364,12 +364,4 @@ ORDER BY
   date ASC;
 ```
 
-If the time series input column names are `date` and `temperature`, then
-this query returns results similar to the following:
-
-```
-+-------------------------+-------------+------------+---------------------+---------------------+----------------------+
-|      date               | temperature | is_anomaly | lower_bound         | upper_bound         | anomaly_probability  |
-+-------------------------+-------------+------------+---------------------+---------------------+----------------------+
-| 2009-08-11 00:00:00 UTC |  70.1       |    false   |
-```
+If the time series input column names are `date` and
