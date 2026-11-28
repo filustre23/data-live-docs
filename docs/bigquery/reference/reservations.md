@@ -220,5 +220,5 @@ func main() {
 	}
 	fmt.Println(s)
 
-	s, err =
+	s, err = re
 ```

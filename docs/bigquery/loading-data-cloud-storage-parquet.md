@@ -1001,4 +1001,4 @@ BigQuery 會將 Parquet 資料類型轉換為 BigQuery 資料類型，詳情請�
 
 ### 不帶正負號的邏輯類型
 
-Parquet `UINT_8`、`UINT_16`、`UINT_32` 和 `UINT_64`
+Parquet `UINT_8`、`UINT_16`、`UINT_32` 和

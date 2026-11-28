@@ -254,4 +254,5 @@ IF(ARRAY_LENGTH(anomalies) > 0)
         fare,
         pickup_longitude,
         company,
+        <
 ```

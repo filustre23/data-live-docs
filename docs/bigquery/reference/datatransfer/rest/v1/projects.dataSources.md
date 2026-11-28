@@ -122,4 +122,4 @@ Represents how the data source supports data auto refresh.
 | --- | --- |
 | `DATA_REFRESH_TYPE_UNSPECIFIED` | The data source won't support data auto refresh, which is default value. |
 | `SLIDING_WINDOW` | The data source supports data auto refresh, and runs will be scheduled for the past few days. Does not allow custom values to be set for each transfer config. |
-| `CUSTOM_SLIDING_WINDOW` | The data source supports data auto refresh, and runs will be scheduled for the past few days. Allows custom values to be set for each transfer config. |<
+| `CUSTOM_SLIDING_WINDOW` | The data source supports data auto refresh, and runs will be scheduled for the past few days. Allows custom values to be set |

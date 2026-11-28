@@ -5095,3 +5095,5 @@ You can now use your Google Account user credentials to authorize the execution 
 Feature
 
 You can now [update a Cloud KMS encryption key](/bigquery/docs/customer-managed-encryption#key_rotation) by updating the table with the same key. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
+F

@@ -347,3 +347,4 @@ The `CHANGES` function returns a table with the following columns:
   that covers all rows in a partition, the `CHANGES` function might return
   additional deleted events.
 * Partition pseudo-columns for ingestion-time partitioned tables, such as
+  `_PARTITIONTIME` and
